@@ -1,4 +1,6 @@
 import { useState, useMemo } from "react";
+import { BD_LYRICS, BD_DISCOGRAPHY } from "./bd_data.js";
+import { TP_LYRICS, TP_DISCOGRAPHY } from "./tp_data.js";
 
 // ============================================================
 //  SHARED UTILITIES
@@ -284,6 +286,71 @@ const JW_JUICE_FORMULA = {
   formula: "The surprise in the data: Love & Connection is quieter than you'd expect but never absent. The joke is that he's writing love songs \u2014 love songs to poor people, to Arkansaw, to trees, to the dead. The rage is just love with nowhere else to go.",
 };
 
+
+// ============================================================
+//  BOB DYLAN — DATA
+// ============================================================
+const BD_SINGLES = [];
+
+const BD_THEMES = [
+  { name:"Love & Desire",         color:"#e74c3c", words:["love","loved","loving","heart","baby","girl","woman","desire","kiss","kissed","darling","honey","sweet","tender","embrace","lover","adore","romance","beloved","dear","sweetheart","hold","holding"] },
+  { name:"Death & Mortality",      color:"#7f8c8d", words:["death","die","died","dying","dead","kill","killed","blood","grave","bones","ghost","buried","funeral","coffin","corpse","murder","mourn","tombstone","skull","ashes","perish"] },
+  { name:"God & Spirituality",     color:"#f1c40f", words:["god","lord","heaven","hell","angel","angels","soul","sin","prayer","pray","praying","church","faith","cross","holy","blessed","salvation","savior","spirit","divine","sacred","bible","gospel","satan","devil","righteous","mercy","grace","temple","worship","believe","almighty","judgment","resurrection"] },
+  { name:"Road & Wandering",       color:"#e67e22", words:["road","highway","train","walking","walk","running","run","rolling","rambling","drifting","traveling","journey","wander","wandering","roam","ride","riding","traveled","path","trail","tracks","miles","travelin","ramblin","rollin","driftin"] },
+  { name:"Justice & Authority",    color:"#c0392b", words:["judge","law","jail","prison","gun","crime","guilty","innocent","trial","police","thief","steal","stealing","stolen","arrest","sentence","convict","sheriff","outlaw","robbery","pistol","rifle","hanging","execution","corrupt","jury","court","warden","chain","chains"] },
+  { name:"Night & Dreams",         color:"#2c3e50", words:["night","dark","darkness","moon","moonlight","dream","dreams","dreaming","sleep","sleeping","shadow","shadows","midnight","dawn","dusk","twilight","evening","starlight","stars","star","nightmare","slumber"] },
+  { name:"Place & Landscape",      color:"#27ae60", words:["home","town","city","street","country","river","mountain","mountains","land","water","rain","raining","wind","dust","hill","hills","valley","field","fields","ocean","sea","shore","desert","forest","meadow","bridge","garden","wilderness","sky","clouds","earth"] },
+  { name:"Time & Memory",          color:"#2980b9", words:["time","times","old","young","years","past","future","memory","remember","remembered","forgotten","forget","forever","yesterday","tomorrow","history","ancient","eternal","always","once","long","gone","age","ages","changing","change","changed"] },
+];
+
+const BD_ARC_NOTES = {
+  "Love & Desire": "Love is Dylan's most pervasive word — appearing in 189 of 447 songs. It dominates the early folk period (Freewheelin', Another Side), returns with devastating force on Blood on the Tracks and Desire, and never fully leaves. By the late career standards albums (Shadows, Fallen Angels, Triplicate), love becomes the near-exclusive subject — but worn, weary, and knowing.",
+  "Death & Mortality": "Death language appears across all eras but intensifies dramatically in the later catalog. Time Out of Mind is the first album where mortality becomes the dominant register. Tempest's title track is a 14-minute death ballad. Rough and Rowdy Ways opens with murder ballads and closes with the 17-minute meditation on JFK's assassination. The dead outnumber the living in late Dylan.",
+  "God & Spirituality": "Peaks with the gospel trilogy (Slow Train Coming, Saved, Shot of Love) where God language is at maximum density. But spiritual vocabulary never disappears — it threads through every era. 'Lord' appears in 37 songs. The relationship with God shifts from protest-era skepticism to born-again conviction to something more ambiguous and literary in late work.",
+  "Road & Wandering": "Dylan's most autobiographical theme. 'Road' appears in 59 songs, 'walking' in 45. The early albums are literally about rambling — Freewheelin', Times They Are a-Changin'. Highway 61 Revisited puts the road in the title. By the late period, the wandering becomes metaphysical rather than geographical — but it never stops.",
+  "Justice & Authority": "Strongest in the protest era (Times They Are a-Changin', Freewheelin') and the narrative albums (Desire, John Wesley Harding). Hurricane is the most famous example. 'Judge' appears in 21 songs, 'gun' in 27. Dylan's authority figures are never sympathetic — judges, sheriffs, wardens are always corrupt or blind.",
+  "Night & Dreams": "Night appears in 129 songs — his second most common noun after 'man'. Moon in 45, shadow in 35. The night is where everything in Dylan happens: romance, crime, revelation, escape. Blonde on Blonde is essentially a night album. Shadows in the Night makes it literal. Dreams thread through the entire catalog — both sleeping and aspirational.",
+  "Place & Landscape": "Home appears in 81 songs, town in 65, street in 47, river in 30. Dylan's geography is specific — Highway 61, Desolation Row, the North Country, the crossroads. The landscapes shift from the American folk geography of the early albums to increasingly biblical and mythological terrain by the later work.",
+  "Time & Memory": "Time appears in 160 songs — more than any other word except 'down' and 'know'. It's his most fundamental subject. Blood on the Tracks is the great time album — memory and loss colliding. Time Out of Mind puts it in the title. By Rough and Rowdy Ways, time itself becomes the antagonist — everything is past, everything is remembered, everything is slipping.",
+};
+
+const BD_JUICE_FORMULA = {
+  intro: "Love and time are Dylan's twin obsessions — 'love' spans 189 songs, 'time' spans 160. Night (129 songs) is where everything happens. Death language intensifies steadily across five decades. God peaks in 1979-81 but never fully leaves.",
+  formula: "The Formula: Biblical imagery + specific American geography + relentless motion. The road, the night, the rain, the judge, the gun, the girl, the ghost. Dylan doesn't write about feelings — he writes about landscapes where feelings live. That's the juice.",
+};
+
+// ============================================================
+//  TOM PETTY — DATA
+// ============================================================
+const TP_SINGLES = [];
+
+const TP_THEMES = [
+  { name:"Love & Heartbreak",      color:"#e74c3c", words:["love","loved","loving","heart","baby","girl","honey","need","want","hold","holding","feeling","alone","lonely","miss","missing","hurt","hurting","tears","cry","crying","kiss","darling","sweet","together","apart","broken","breakin"] },
+  { name:"Freedom & Defiance",     color:"#e67e22", words:["free","freedom","fight","fighting","stand","standing","wild","rebel","break","breaking","chain","chains","run","running","wont","refuse","rebel","rock","roll","rocking","rolling","shake","wanna","tough","strong","proud"] },
+  { name:"Dreams & Hope",          color:"#f1c40f", words:["dream","dreams","dreaming","hope","hoping","sky","wish","wishing","star","stars","flying","high","somewhere","believe","believing","better","bright","shine","shining","light","wonderful","beautiful","magic"] },
+  { name:"Road & Movement",        color:"#27ae60", words:["road","town","drive","driving","car","highway","running","somewhere","home","away","door","ride","riding","travel","moving","gone","going","leaving","left","train","walking","walk","turn","turning","ahead","direction"] },
+  { name:"Night & Shadow",         color:"#2c3e50", words:["night","dark","darkness","moon","moonlight","shadow","shadows","midnight","light","sun","morning","dawn","evening","sunset","stars","star","sky","twilight","sleep","sleeping"] },
+  { name:"Pain & Endurance",       color:"#8e44ad", words:["hard","hurt","pain","broken","fall","falling","cry","tears","down","lost","alone","waiting","wait","suffer","suffering","trouble","worried","wrong","sad","lonely","weary","tired","desperate","empty","scared","afraid"] },
+  { name:"The World & Time",       color:"#2980b9", words:["world","time","times","day","days","life","things","everything","change","changing","old","new","years","past","forever","long","remember","end","always","real","truth","never","nothing","something"] },
+  { name:"American Landscape",     color:"#d35400", words:["american","america","southern","town","country","land","street","city","radio","girl","boy","king","queen","money","working","people","home","house","room","wall","window","door","floor","river","rain","wind","sky","sun","field","dust"] },
+];
+
+const TP_ARC_NOTES = {
+  "Love & Heartbreak": "Love and baby are Petty's two most common words — 'baby' in 56 songs, 'love' in 54. But Petty's love isn't soft — it's stubborn, defiant, wounded. Damn the Torpedoes and Hard Promises are the heartbreak peak. Wildflowers softens it into something more tender and searching. Echo (1999) is the divorce album — love language at its most raw.",
+  "Freedom & Defiance": "The heart of Petty's identity. 'Free' appears in 12 songs but with enormous lyrical weight — 'Free Fallin'' alone made it an anthem. 'Won't Back Down' and 'I Won't Back Down' define his stance. He fights record labels, he fights heartbreak, he fights time. The defiance never wavers, even as the music mellows.",
+  "Dreams & Hope": "'Dream' appears in 18 songs. Into the Great Wide Open is the dream album — big skies, wide horizons, possibility. Full Moon Fever channels optimism through Wilbury-era joy. But Petty's dreams are always shadowed by reality — dreamers get hurt in his songs. The hope is earned, never naive.",
+  "Road & Movement": "Town appears in 23 songs, road in 17, car in 11. Petty is a road artist — 'Runnin' Down a Dream,' 'Mary Jane's Last Dance,' 'American Girl.' The small-town Florida kid who became a rock star never lost the geography. Cars, highways, leaving town — movement is how his characters process emotion.",
+  "Night & Shadow": "Night in 35 songs, moon in 11, sun in 18. Petty's nights are romantic and dangerous — cruising, heartbreak, restlessness. Full Moon Fever puts the moon in the title. Southern Accents uses southern nights as atmosphere. The later albums (Echo, Highway Companion) make night lonelier and more introspective.",
+  "Pain & Endurance": "'Hard' appears in 36 songs, 'down' in 83 — his most common word. Pain in Petty is always met with endurance. He doesn't wallow — he acknowledges and pushes through. Wildflowers captures this best: gentle acknowledgment of damage paired with quiet determination. Echo is the rawest expression of pain in the catalog.",
+  "The World & Time": "World in 33 songs, time in 61 — his third most common word. 'Time' increases in the late career: Highway Companion and Hypnotic Eye are time-haunted albums. The early work lives in the present; the late work looks backward. 'The Last DJ' (not on these albums) captures the shift — the world changed, and Petty noticed.",
+  "American Landscape": "Petty is one of rock's great American regionalists. Gainesville, the South, small-town America — it's in every album. Southern Accents makes it explicit. But his America is working-class, not political — gas stations, radios, screen doors, pickup trucks. The landscape is emotional as much as geographical.",
+};
+
+const TP_JUICE_FORMULA = {
+  intro: "Baby and love dominate the catalog — but 'down' is the single most common word (83 songs). 'Hard' appears in 36 songs, 'time' in 61. Petty writes about love that has to fight for itself and freedom that comes with a cost.",
+  formula: "The Formula: Working-class defiance + heartland geography + melodic hooks that make pain feel anthemic. The small town, the car, the girl, the night, the refusal to back down. Petty doesn't write poetry — he writes rock songs that feel like poetry. That's the juice.",
+};
+
 // ============================================================
 //  UNIFIED ARTIST DATA STRUCTURE
 // ============================================================
@@ -341,6 +408,60 @@ const ARTISTS = {
     yearRange: "2024\u20132025",
     albumLabel: "7 Albums \u00B7 2024\u20132025",
     searchHints: "poor \u00B7 war \u00B7 dead \u00B7 america \u00B7 work \u00B7 water \u00B7 love \u00B7 god \u00B7 system \u00B7 money",
+  },
+  "Bob Dylan": {
+    LYRICS: BD_LYRICS,
+    DISCOGRAPHY: BD_DISCOGRAPHY,
+    SINGLES: BD_SINGLES,
+    THEMES: BD_THEMES,
+    ARC_NOTES: BD_ARC_NOTES,
+    JUICE_FORMULA: BD_JUICE_FORMULA,
+    accent: "#4a7a4a",
+    bg: "#121a12",
+    bgPanel: "#1a221a",
+    bgPanelHeader: "#222a22",
+    bgDeep: "#151d15",
+    border: "#2a3a2a",
+    textPrimary: "#d5e2d0",
+    textSecondary: "#7a9a70",
+    textMuted: "#354535",
+    textDim: "#455545",
+    textLabel: "#a8c8a0",
+    textSubtle: "#506050",
+    textArc: "#8aa880",
+    textTimeline: "#6a8a60",
+    btnInactive: "#222a22",
+    juiceEmoji: "\uD83C\uDF43",
+    yearRange: "1962\u20132023",
+    albumLabel: "40 Studio Albums",
+    searchHints: "love \u00B7 time \u00B7 man \u00B7 night \u00B7 home \u00B7 road \u00B7 god \u00B7 dead \u00B7 rain \u00B7 dream",
+  },
+  "Tom Petty": {
+    LYRICS: TP_LYRICS,
+    DISCOGRAPHY: TP_DISCOGRAPHY,
+    SINGLES: TP_SINGLES,
+    THEMES: TP_THEMES,
+    ARC_NOTES: TP_ARC_NOTES,
+    JUICE_FORMULA: TP_JUICE_FORMULA,
+    accent: "#4a6a9a",
+    bg: "#12141a",
+    bgPanel: "#1a1c22",
+    bgPanelHeader: "#22242a",
+    bgDeep: "#15171d",
+    border: "#2a2e3a",
+    textPrimary: "#d0d8e2",
+    textSecondary: "#708aaa",
+    textMuted: "#353a45",
+    textDim: "#454a55",
+    textLabel: "#a0b0c8",
+    textSubtle: "#505a6a",
+    textArc: "#8098aa",
+    textTimeline: "#607a8a",
+    btnInactive: "#22242a",
+    juiceEmoji: "\uD83C\uDFB8",
+    yearRange: "1976\u20132014",
+    albumLabel: "15 Studio Albums",
+    searchHints: "baby \u00B7 love \u00B7 time \u00B7 down \u00B7 night \u00B7 girl \u00B7 town \u00B7 heart \u00B7 world \u00B7 dream",
   },
 };
 
@@ -564,8 +685,14 @@ export default function App(){
   const pre = PRECOMPUTED[artist];
   const theme = data;
 
-  const defaultAlbum = artist==="Hunter Root"?"Arkansas":"Hells Welles";
-  const defaultTrack = artist==="Hunter Root"?"Town Rat Heathen":"War Isn't Murder";
+  const DEFAULTS = {
+    "Hunter Root": { album: "Arkansas", track: "Town Rat Heathen" },
+    "Jesse Welles": { album: "Hells Welles", track: "War Isn't Murder" },
+    "Bob Dylan": { album: "Blood on the Tracks", track: "Tangled Up in Blue" },
+    "Tom Petty": { album: "Damn the Torpedoes", track: "Refugee" },
+  };
+  const defaultAlbum = DEFAULTS[artist]?.album || Object.keys(data.DISCOGRAPHY)[0];
+  const defaultTrack = DEFAULTS[artist]?.track || Object.values(data.DISCOGRAPHY)[0]?.tracks[0];
 
   const [selAlbum,setSelAlbum]=useState(defaultAlbum);
   const [selTrack,setSelTrack]=useState(defaultTrack);
@@ -578,8 +705,14 @@ export default function App(){
     if(name===artist) return;
     setArtist(name);
     const d=ARTISTS[name];
-    const defAlbum=name==="Hunter Root"?"Arkansas":"Hells Welles";
-    const defTrack=name==="Hunter Root"?"Town Rat Heathen":"War Isn't Murder";
+    const defs = {
+      "Hunter Root": { album: "Arkansas", track: "Town Rat Heathen" },
+      "Jesse Welles": { album: "Hells Welles", track: "War Isn't Murder" },
+      "Bob Dylan": { album: "Blood on the Tracks", track: "Tangled Up in Blue" },
+      "Tom Petty": { album: "Damn the Torpedoes", track: "Refugee" },
+    };
+    const defAlbum=defs[name]?.album || Object.keys(d.DISCOGRAPHY)[0];
+    const defTrack=defs[name]?.track || Object.values(d.DISCOGRAPHY)[0]?.tracks[0];
     setSelAlbum(defAlbum);
     setSelTrack(defTrack);
     setPanel("song");
@@ -637,19 +770,21 @@ export default function App(){
       <div style={{maxWidth:740,margin:"0 auto"}}>
 
         {/* ── ARTIST SELECTOR ── */}
-        <div style={{display:"flex",justifyContent:"center",gap:0,marginBottom:18}}>
-          {Object.keys(ARTISTS).map(name=>{
+        <div style={{display:"flex",justifyContent:"center",gap:0,marginBottom:18,flexWrap:"wrap"}}>
+          {Object.keys(ARTISTS).map((name,idx,arr)=>{
             const isActive=name===artist;
             const a=ARTISTS[name];
+            const radius = idx===0 ? "8px 0 0 8px" : idx===arr.length-1 ? "0 8px 8px 0" : "0";
             return(
               <button key={name} onClick={()=>switchArtist(name)}
                 style={{
-                  padding:"10px 28px",cursor:"pointer",fontSize:14,letterSpacing:2,
+                  padding:"10px 18px",cursor:"pointer",fontSize:13,letterSpacing:1.5,
                   textTransform:"uppercase",fontFamily:"Georgia,serif",fontWeight:isActive?"bold":"normal",
                   background:isActive?a.accent:"transparent",
                   color:isActive?"#fff":a.accent,
                   border:`2px solid ${a.accent}`,
-                  borderRadius:name==="Hunter Root"?"8px 0 0 8px":"0 8px 8px 0",
+                  borderLeft:idx>0?`1px solid ${a.accent}`:`2px solid ${a.accent}`,
+                  borderRadius:radius,
                   transition:"all 0.3s",
                   opacity:isActive?1:0.6,
                 }}>
