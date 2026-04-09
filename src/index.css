@@ -1,0 +1,4 @@
+/* Reset — all styling is inline in the component */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { margin: 0; }
+#root { min-height: 100vh; }
