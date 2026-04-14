@@ -75,7 +75,7 @@ CURRENT DEPLOYED VERSION: r25
     13 seed entries, weighted random feed, voting, compose
     Filters by era context from coverflow
 
-  hr_facts.js — spine contextual facts
+  hr_facts.js — spine contextual facts (NOTE: lives in src/routes/hr/, NOT src/data/)
     51 entries (7 artist, 44 album/track-level) — artist-002 corrected, 6 new entries April 12 2026
     BACKLOG flags added for 3 unverified claims (see file header comments)
 
@@ -88,8 +88,16 @@ CURRENT DEPLOYED VERSION: r25
     - Pills: tl-tag style, always-at-least-one-selected, tucked under image viewer
 
 KEY FILES
-  src/routes/hr/HrSpine.jsx          — Main exhibit component (coverflow, tracklist, player)
-  src/routes/hr/HrExhibitFlow.jsx    — Unified P2+P3+P4+Journal
+  src/routes/exhibit/Exhibit.jsx     — Shared exhibit component (coverflow, tracklist, player, facts)
+  src/routes/exhibit/Exhibit.css     — All exhibit styling (neutral ex- prefix classes)
+  src/data/artists/hunter-root.js    — HR artist config (spine data, facts, exhibitFlow)
+  src/data/artists/carsie-blanton.js — CB artist config (spine ref, facts, no exhibitFlow)
+  src/routes/hr/HrSpine.jsx          — Thin wrapper: imports Exhibit + hunterRoot config
+  src/routes/cb/CbSpine.jsx          — Thin wrapper: imports Exhibit + carsieBlanton config
+  src/routes/hr/HrExhibitFlow.jsx    — Unified P2+P3+P4+Journal (HR only)
+  src/routes/hr/hr_facts.js          — HR contextual facts (lives in routes/hr/, NOT src/data/)
+  src/routes/cb/cb_discography.js    — CB spine data (lives in routes/cb/)
+  src/routes/cb/cb_facts.js          — CB facts (lives in routes/cb/)
   src/routes/WbHome.jsx              — Front page
   src/data/hr_archive.js             — Panel 2 data (3 entries)
   src/data/hr_artifacts.js           — Panel 3 data (10 entries)
@@ -108,6 +116,14 @@ PHASE 2 — MUSEUM BUILD (current)
   Exhibit Flow LIVE — unified P2/P3/P4 with sticky Journal
   *** NOW: Load real content into panels ***
 
+ARCHITECTURE — Shared Exhibit Component (r27 refactor)
+  All exhibit rendering logic lives in one place: src/routes/exhibit/Exhibit.jsx
+  Each artist is a config object (src/data/artists/*.js) with: id, name, spine,
+  facts, defaultActiveIndex, splitKey, cfKey, visitPath, shopExitParam, exhibitFlow.
+  Route files (HrSpine.jsx, CbSpine.jsx) are thin wrappers: <Exhibit artist={config} />.
+  Adding a new artist = one new config file + one thin route wrapper + App.jsx route.
+  CSS uses neutral ex- prefixes (ex-root, ex-nav, ex-main, ex-left, ex-right, ex-snap).
+
 DESIGN DECISIONS
   - Each exhibit gets a single room (page). No separate landing pages.
     /hr (HrSpine) IS the Hunter Root exhibit. HrHome route preserved, not built.
@@ -123,6 +139,30 @@ BACKLOG (cosmetic, deferred)
   - Active album on coverflow should be larger
   - GoDaddy site builder still published at weirdbaby.godaddysites.com
   - Domain transfer: GoDaddy -> Cloudflare (EPP code needed)
+
+EXHIBIT REFACTOR (r27) — April 13 2026
+  Deduplicated HrSpine.jsx (~1075 lines) and CbSpine.jsx (~925 lines) into a
+  single shared <Exhibit /> component driven by per-artist config objects.
+  New files:
+    src/routes/exhibit/Exhibit.jsx       — Shared exhibit component (~760 lines)
+    src/routes/exhibit/Exhibit.css       — All exhibit styling (ex- prefix classes)
+    src/data/artists/hunter-root.js      — HR artist config + SPINE data
+    src/data/artists/carsie-blanton.js   — CB artist config (imports SPINE from cb_discography)
+  Replaced files:
+    src/routes/hr/HrSpine.jsx            — Now 5-line thin wrapper
+    src/routes/cb/CbSpine.jsx            — Now 5-line thin wrapper
+  Behavior preserved:
+    - HR still renders HrExhibitFlow below main column; CB does not
+    - localStorage keys unchanged (wb-hr-split, wb-hr-cfh, wb-cb-split, wb-cb-cfh)
+    - /api/visits POST uses per-artist visitPath (/hr or /cb)
+    - Nav routes to /shop?from=hr or /shop?from=cb respectively
+    - CB's AlbumCover fallback + vp-ao-ph audio-only placeholder preserved for all artists
+    - CB's PlayerBar art fallback (pb-art-ph) preserved for all artists
+  CSS rename: hr-root → ex-root, hr-nav → ex-nav, hr-main → ex-main,
+    hr-left → ex-left, hr-right → ex-right, hr-snap → ex-snap
+  Adding a new artist: create one config file in src/data/artists/ + one thin
+    route wrapper + add route in App.jsx. No exhibit logic to duplicate.
+  Build: `npx vite build` clean (53 modules transformed, lyricmap chunk warning expected)
 
 ADDED THIS SESSION (CB EXHIBIT) — April 13 2026
   New files:

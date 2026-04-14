@@ -31,7 +31,7 @@ export default function WbAdmin() {
         .adm { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
         .adm-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; border-bottom: 1px solid #1a1a1a; padding-bottom: 20px; }
         .adm-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: 0.15em; text-transform: uppercase; color: #b8974a; }
-        .adm-sub { font-size: 0.65rem; letter-spacing: 0.12em; color: #333; text-transform: uppercase; margin-top: 4px; }
+        .adm-sub { font-size: 0.65rem; letter-spacing: 0.12em; color: #333; text-transform: uppercase; margin-top: 4px; } .adm-build { font-size: 0.6rem; letter-spacing: 0.1em; color: #555; font-family: 'Courier Prime', monospace; margin-top: 6px; }
         .adm-refresh { background: transparent; border: 1px solid #222; color: #555; font-family: 'Courier Prime', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
         .adm-refresh:hover { border-color: #b8974a; color: #b8974a; }
         .adm-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 40px; }
@@ -59,6 +59,7 @@ export default function WbAdmin() {
           <div>
             <div className="adm-title">Weird.Baby — Admin</div>
             <div className="adm-sub">Not for public consumption</div>
+            <div className="adm-build">built {new Date(__BUILD_TIME__).toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "2-digit", minute: "2-digit" })}</div>
           </div>
           <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
             <button className="adm-refresh" onClick={load}>↺ Refresh</button>
