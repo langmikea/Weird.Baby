@@ -2,34 +2,60 @@
 Weird.Baby Museum — STATE.md
 ================================================================================
 Always read this file first. Then read C:\AI\VISION.md and docs\COMPONENT_PHILOSOPHY.md.
-Last updated: 2026-04-13 (Carsie Blanton exhibit wired — awaiting deploy)
+Last updated: 2026-04-14 (r28 — gift shop live, Exhibit refactor landed, build time on admin)
 ================================================================================
+
 WHAT THIS PROJECT IS
   The Weird.Baby Museum. An independent curatorial entity.
   Not a fan page. Not a promotional arm. A museum.
-  Current featured artists: Hunter Root (/hr) and Carsie Blanton (/cb — built, awaiting deploy).
-  Live at: https://weird.baby + https://www.weird.baby (both active April 11 2026)
+  Current featured artists: Hunter Root (/hr) and Carsie Blanton (/cb)
+  Live at: https://weird.baby + https://www.weird.baby
+  400+ visits as of April 13 2026, museum unannounced.
   GitHub: langmikea/Weird.Baby
   Cloudflare Worker: weird-baby (Langmikea@gmail.com)
-  Cost: ~50.20/yr
+  Cost: ~$50.20/yr
 
 VISION AND PHILOSOPHY
   C:\AI\VISION.md                          — north star, read this
   docs\COMPONENT_PHILOSOPHY.md             — how everything looks and behaves
 
+THE BUILDING — circulation architecture (from VISION.md, enforced in code)
+  Lobby  ──► Exhibit A  ──┐
+     │  ──► Exhibit B  ──┤
+     │  ──► Exhibit C  ──┤
+     │                   ▼
+     │           Gift Shop  ──► Artist's external store (leaves site)
+     │                   │
+     │◄──────────────────┘
+     │
+     └──► [easter egg: grass field — not yet built, lobby-only]
+
+  - Lobby → any exhibit (one per artist)
+  - Each exhibit exits through the Gift Shop (no direct lobby exit from an exhibit)
+  - Gift Shop exits back to the Lobby, OR out to the featured artist's store
+  - The Gift Shop does NOT connect to the grass field. Only the Lobby does.
+  - Direct URL arrivals at /shop are allowed; they see a random featured artist
+  - Grass field is a future easter egg, reachable only from the lobby, unannounced
+
 CURRENT ROUTE STRUCTURE
   /              -> WbHome — LIVE. Soft open. Guest book (D1). W.B. logo.
   /admin         -> WbAdmin — LIVE. Triggered by typing mmm anywhere.
-  /hr            -> HrSpine — LIVE. Full exhibit: coverflow, tracklist, panels 2-4, journal.
-  /hr/home       -> HrHome — preserved, not front door anymore
+                    Shows build time, guestbook, visits, page breakdown.
+                    Jump buttons: /hr /cb /shop Refresh Back
+  /hr            -> HrSpine — LIVE. Thin wrapper around <Exhibit artist={hunterRoot} />.
+                    Full exhibit: coverflow, tracklist, player, facts, panels 2-4, journal.
+  /hr/home       -> HrHome — preserved, not front door
   /hr/archive    -> HrArchive — LIVE. Full discography, expand/collapse
   /hr/workshop/lyric-map -> LyricMap — LIVE. 4-artist lyric analysis tool
   /hr/media      -> stub
   /hr/fan-wall   -> stub
   /hr/workshop   -> stub
-  /hr/merch      -> redirects to hunterroot.com/merch
-  /cb            -> CbSpine — BUILT LOCALLY, awaiting deploy. Carsie Blanton exhibit
-                    (coverflow, tracklist, facts, player — mirrors HrSpine architecture)
+  /hr/merch      -> HrMerch redirect (LEGACY — superseded by gift shop, safe to retire later)
+  /cb            -> CbSpine — LIVE. Thin wrapper around <Exhibit artist={carsieBlanton} />.
+                    Coverflow, tracklist, facts, player. No exhibit flow below (gap — see below).
+  /shop          -> GiftShop — LIVE. Museum gift shop.
+                    Featured artist (from ?from=<id> or random), W.B. merch (placeholder),
+                    Friends wall (full roster), LOBBY exit.
 
 INFRASTRUCTURE
   D1 Database: weird-baby-db (4db60094-122a-4618-b3c5-8664f74af222)
@@ -38,72 +64,51 @@ INFRASTRUCTURE
   Worker entry: src/worker.js — handles /api/guestbook, /api/visits, /api/admin
   DNS: managed in Cloudflare. www CNAME removed; www.weird.baby added as
        Worker custom domain directly. GoDaddy holds registrar only.
-  Deploy: npx wrangler deploy (from project root)
-  Build: npx vite build (rm -rf dist first if EPERM issues)
+  Deploy: `npx wrangler deploy` (from project root, after vite build)
+  Build: `npx vite build` — IMPORTANT: run `Remove-Item -Recurse -Force dist` first
+         on Windows to avoid EPERM issues on the dist folder.
+  Build time tracking: vite.config.js injects `__BUILD_TIME__` as ISO string at build time.
+         Displayed on /admin header. Use this to verify deploy freshness.
   Favicon: public/favicon.ico (generated from W.B. logo)
 
-CURRENT DEPLOYED VERSION: r25
-  Deployed: 2026-04-13
-  Architecture: Unified Exhibit Flow (HrExhibitFlow.jsx)
-    - Panels 2, 3, 4 merged into single component with shared Journal
-    - 60/40 CSS Grid: left column (scrolling sections), right column (sticky Journal)
-    - ExhibitScroller: auto-advancing card viewer (7.5s, hover-pause, wrapping nav)
-    - Scroll-snap: mandatory, center-aligned sections, smooth scroll
-    - overflow-x: clip on html,body (not hidden — preserves sticky + snap)
+ARCHITECTURE — Shared Exhibit Component (r27 refactor)
+  All exhibit rendering logic lives in ONE place: src/routes/exhibit/Exhibit.jsx
+  Each artist is a config object at src/data/artists/<id>.js with fields:
+    id, name, spine, facts, defaultActiveIndex, splitKey, cfKey,
+    visitPath, shopExitParam, exhibitFlow (optional)
+  Route files (HrSpine.jsx, CbSpine.jsx) are 5-line thin wrappers:
+    <Exhibit artist={config} />
+  CSS uses neutral ex- prefixes (ex-root, ex-nav, ex-main, ex-left, ex-right, ex-snap).
+  Adding a new artist =
+    1. Create src/data/artists/<artist-id>.js with the config shape
+    2. Create src/routes/<id>/<Id>Spine.jsx thin wrapper (5 lines)
+    3. Add <Route> in App.jsx
+    4. Add roster entry in src/data/wb_roster.js
 
-  Panel 2 — "As It Happened" (archive timeline)
-    Data: src/data/hr_archive.js
-    Types: historical | interview | rarity
-    20 entries (7 historical, 8 interview, 5 rarity) — loaded from KNOWLEDGE.md April 12 2026
-    Spans: June 2012 (formation) through November 2025 (Crooked Home press)
-
-  Panel 3 — "The Artifacts" (physical/ephemeral memories)
-    Data: src/data/hr_artifacts.js
-    Types: poster | setlist | photo | fan-art | handwritten | video | ticket
-    13 entries — regrounded from KNOWLEDGE.md + channel_videos.json April 12 2026
-    Videos: first show footage, Atomic 7, Summer Threestival, TRH, Reverend, QS, Zoetropolis, Cookin, A Pot Song
-    Photos: SEEDS live (2013), SEEDS CD (2013), basement after show (2014), Harrisburg show (2025)
-    Full spec: docs/PANEL3_ARTIFACTS_SPEC_v0.1.md
-
-  Panel 4 — "That's a Wrap" (exit flow)
-    Data: src/data/hr_exit_flow.js
-    Types: quick (short punchy) | deep (curatorial reads) | highlight (exhibit details)
-    24 entries (12 quick, 5 deep, 6 highlight, 1 closing) — factual fixes applied April 12 2026
-
-  Journal — single sticky instance, shared across exhibit
-    Data: src/data/hr_journal_prompts.js (10 prompts — expanded April 12 2026)
-    13 seed entries, weighted random feed, voting, compose
-    Filters by era context from coverflow
-
-  hr_facts.js — spine contextual facts (NOTE: lives in src/routes/hr/, NOT src/data/)
-    51 entries (7 artist, 44 album/track-level) — artist-002 corrected, 6 new entries April 12 2026
-    BACKLOG flags added for 3 unverified claims (see file header comments)
-
-  Player Bar — skip back/forward, play/pause, mute, volume slider, CC button
-  Nav — WEIRD.BABY (home) | Hunter Root (exhibit name) | RETURN TO LOBBY (home)
-
-  Spine / Coverflow:
-    - Tag system: era (#534AB7), type (#0F6E56), src (#993C1D)
-    - ALBUM_ERA map: all solo-era albums map to "solo"
-    - Pills: tl-tag style, always-at-least-one-selected, tucked under image viewer
-
-KEY FILES
-  src/routes/exhibit/Exhibit.jsx     — Shared exhibit component (coverflow, tracklist, player, facts)
-  src/routes/exhibit/Exhibit.css     — All exhibit styling (neutral ex- prefix classes)
-  src/data/artists/hunter-root.js    — HR artist config (spine data, facts, exhibitFlow)
-  src/data/artists/carsie-blanton.js — CB artist config (spine ref, facts, no exhibitFlow)
-  src/routes/hr/HrSpine.jsx          — Thin wrapper: imports Exhibit + hunterRoot config
-  src/routes/cb/CbSpine.jsx          — Thin wrapper: imports Exhibit + carsieBlanton config
-  src/routes/hr/HrExhibitFlow.jsx    — Unified P2+P3+P4+Journal (HR only)
-  src/routes/hr/hr_facts.js          — HR contextual facts (lives in routes/hr/, NOT src/data/)
-  src/routes/cb/cb_discography.js    — CB spine data (lives in routes/cb/)
-  src/routes/cb/cb_facts.js          — CB facts (lives in routes/cb/)
-  src/routes/WbHome.jsx              — Front page
-  src/data/hr_archive.js             — Panel 2 data (3 entries)
-  src/data/hr_artifacts.js           — Panel 3 data (10 entries)
-  src/data/hr_exit_flow.js           — Panel 4 data (20 entries)
-  src/data/hr_journal_prompts.js     — Journal prompts (4 entries)
-  public/WeirdBaby_PhotoID.png       — Front page + favicon source image
+ARCHITECTURE — Gift Shop (r28)
+  One room, one URL, serves all exhibits. Never per-artist. Changes to the
+  shop land in one place and reach everyone.
+  Files:
+    src/routes/shop/GiftShop.jsx    — the room
+    src/routes/shop/GiftShop.css    — museum dark theme, single #b8974a accent
+    src/data/wb_roster.js           — single source of truth for artist roster
+    src/data/wb_merch.js            — W.B.'s own merch config (pipeline not built yet)
+  Layout, top to bottom:
+    1. GIFT SHOP signage (serif, gold-cream)
+    2. FEATURED artist — photo or typography fallback, name, blurb, link out to store
+    3. WEIRD.BABY merch — placeholder ("Museum merch coming soon")
+    4. FRIENDS wall — all roster artists as cards linking to their stores
+    5. LOBBY → exit (right-aligned, per VISION: always exit right)
+  Featured artist selection:
+    /shop?from=<id>  -> that artist (arrived via exhibit exit)
+    /shop            -> random pick from roster (useMemo, stable per mount, reshuffles on refresh)
+    /shop?from=junk  -> random fallback (unknown id is safe)
+  Artist images: null for now. Typography fallback renders a gradient card with
+    the artist's name in DM Serif Display. When real photos exist, set
+    `image` field in wb_roster.js to the path and the photo will render.
+  All external links open in new tabs (target=_blank, rel=noopener noreferrer).
+  Walked-in bell audio: <audio> element points at /sounds/shop-bell.mp3 (file
+    not yet present). Plays on mount, silently no-ops if missing.
 
 PHASE 1 — COMPLETE
   Infrastructure, tools, databases, lyric intelligence, content archive,
@@ -112,29 +117,86 @@ PHASE 1 — COMPLETE
 PHASE 2 — MUSEUM BUILD (current)
   Spine architecture LIVE
   Guest book LIVE — D1 backed, real persistence
-  Admin LIVE — mmm key sequence, visits + guestbook data
-  Exhibit Flow LIVE — unified P2/P3/P4 with sticky Journal
-  *** NOW: Load real content into panels ***
+  Admin LIVE — mmm key sequence, visits + guestbook data, build time display, jump buttons
+  Exhibit Flow LIVE — unified P2/P3/P4 with sticky Journal (HR only)
+  Gift Shop LIVE — museum-owned room with artist doors, exit-through pattern
+  Exhibit component DEDUPLICATED — one <Exhibit /> component, per-artist configs
+  *** NOW: Content curation, CB exhibit flow, Founding Visitor easter egg ***
 
-ARCHITECTURE — Shared Exhibit Component (r27 refactor)
-  All exhibit rendering logic lives in one place: src/routes/exhibit/Exhibit.jsx
-  Each artist is a config object (src/data/artists/*.js) with: id, name, spine,
-  facts, defaultActiveIndex, splitKey, cfKey, visitPath, shopExitParam, exhibitFlow.
-  Route files (HrSpine.jsx, CbSpine.jsx) are thin wrappers: <Exhibit artist={config} />.
-  Adding a new artist = one new config file + one thin route wrapper + App.jsx route.
-  CSS uses neutral ex- prefixes (ex-root, ex-nav, ex-main, ex-left, ex-right, ex-snap).
+KEY FILES
+  src/routes/exhibit/Exhibit.jsx     — Shared exhibit component
+  src/routes/exhibit/Exhibit.css     — All exhibit styling (ex- prefix)
+  src/data/artists/hunter-root.js    — HR config + SPINE data lifted inline
+  src/data/artists/carsie-blanton.js — CB config, imports SPINE from cb_discography
+  src/routes/hr/HrSpine.jsx          — 5-line wrapper: <Exhibit artist={hunterRoot} />
+  src/routes/cb/CbSpine.jsx          — 5-line wrapper: <Exhibit artist={carsieBlanton} />
+  src/routes/hr/HrExhibitFlow.jsx    — Unified P2+P3+P4+Journal (HR only, CB has no equivalent)
+  src/routes/hr/hr_facts.js          — HR contextual facts (NOTE: lives in routes/hr/, NOT src/data/)
+  src/routes/cb/cb_discography.js    — CB spine data
+  src/routes/cb/cb_facts.js          — CB facts
+  src/routes/shop/GiftShop.jsx       — The gift shop room
+  src/routes/shop/GiftShop.css       — Gift shop styling
+  src/data/wb_roster.js              — Artist roster single source of truth
+  src/data/wb_merch.js               — W.B. merch config (placeholder, pipeline not built)
+  src/routes/WbHome.jsx              — Front page / lobby
+  src/routes/WbAdmin.jsx             — Admin dashboard (build time, jump buttons, guestbook, visits)
+  src/data/hr_archive.js             — Panel 2 data
+  src/data/hr_artifacts.js           — Panel 3 data
+  src/data/hr_exit_flow.js           — Panel 4 data
+  src/data/hr_journal_prompts.js     — Journal prompts
+  vite.config.js                     — Injects __BUILD_TIME__ for admin display
+  public/WeirdBaby_PhotoID.png       — Front page + favicon source
 
 DESIGN DECISIONS
   - Each exhibit gets a single room (page). No separate landing pages.
     /hr (HrSpine) IS the Hunter Root exhibit. HrHome route preserved, not built.
+  - All exhibits are identical except for content. One component, one CSS,
+    one color palette (#b8974a museum gold). Differentiation comes from
+    content alone, not chrome.
   - Panels are auto-advancing card scrollers, not static prose.
   - Pills filter content types within each panel, always at least one selected.
   - Journal is curatorial, not social media. Weighted feed, not chronological.
   - "Every surface is satisfying in itself."
+  - Exit through the gift shop: exhibits have no direct lobby link. Leaving
+    an exhibit = going through the gift shop. Both top-corner buttons (logo
+    top-left, "Gift Shop" top-right) route to /shop?from=<artist-id>.
+  - Gift shop never takes a cut from artists. Artist stores are linked out,
+    not embedded. Every external link opens in a new tab so the museum tab
+    survives.
 
-BACKLOG (cosmetic, deferred)
+OPEN GAPS (known, not bugs)
+  - CB exhibit has no exhibit flow below the main column. HR has
+    HrExhibitFlow (P2/P3/P4/Journal); CB has nothing there. Future work:
+    build cb_archive.js, cb_artifacts.js, cb_exit_flow.js, cb_journal_prompts.js
+    and a cb-or-shared ExhibitFlow that CB's config can opt into.
+  - Artist photos for the gift shop roster don't exist. Typography fallback
+    renders in the meantime. Drop real JPGs at
+    public/images/roster/hunter-root.jpg (etc.) and set `image` field in
+    wb_roster.js to enable them.
+  - Walked-in bell sound file /sounds/shop-bell.mp3 doesn't exist. The
+    <audio> element is wired but silently no-ops on mount.
+  - Featured blurbs in wb_roster.js are placeholder. Rewrite when ready.
+  - Museum merch pipeline (Big Cartel + Printful) is not set up. The W.B.
+    section of the gift shop shows "Museum merch coming soon" placeholder
+    until wbMerch.live is flipped to true and featured items are populated.
+  - /hr/merch route still exists as a redirect. Should be retired in a
+    cleanup pass — gift shop architecture supersedes per-exhibit merch routes.
+  - Orphaned files in routes/hr/: HrPanel2.jsx, HrPanel3.jsx, HrSpine.jsx.bak,
+    HrSpine.jsx.r23.bak. Dead code preserved through refactor. Safe to
+    delete in a cleanup commit.
+
+BACKLOG
+  - Founding Visitor easter egg (from VISION.md). Needs D1 schema change.
+    Not urgent — 400+ visits so far are all Mike's own. Build this before
+    any public mention of the museum, not before.
+  - CB exhibit flow content + shared ExhibitFlow component (see Open Gaps)
+  - Artist photos in gift shop roster
+  - Walked-in bell audio file
+  - Rewrite featured blurbs in wb_roster.js
+  - Museum merch pipeline (Big Cartel + Printful)
+  - Retire /hr/merch redirect
+  - Delete orphaned files: HrPanel2/3.jsx, HrSpine.jsx.bak, HrSpine.jsx.r23.bak
   - Center 'HUNTER ROOT' in nav bar
-  - Add revision number (r##) to lobby/home page
   - Journal alignment fine-tuning (closer on P2, slightly off on P3)
   - Active album on coverflow should be larger
   - GoDaddy site builder still published at weirdbaby.godaddysites.com
@@ -143,60 +205,57 @@ BACKLOG (cosmetic, deferred)
 EXHIBIT REFACTOR (r27) — April 13 2026
   Deduplicated HrSpine.jsx (~1075 lines) and CbSpine.jsx (~925 lines) into a
   single shared <Exhibit /> component driven by per-artist config objects.
-  New files:
-    src/routes/exhibit/Exhibit.jsx       — Shared exhibit component (~760 lines)
-    src/routes/exhibit/Exhibit.css       — All exhibit styling (ex- prefix classes)
-    src/data/artists/hunter-root.js      — HR artist config + SPINE data
-    src/data/artists/carsie-blanton.js   — CB artist config (imports SPINE from cb_discography)
-  Replaced files:
-    src/routes/hr/HrSpine.jsx            — Now 5-line thin wrapper
-    src/routes/cb/CbSpine.jsx            — Now 5-line thin wrapper
-  Behavior preserved:
-    - HR still renders HrExhibitFlow below main column; CB does not
-    - localStorage keys unchanged (wb-hr-split, wb-hr-cfh, wb-cb-split, wb-cb-cfh)
-    - /api/visits POST uses per-artist visitPath (/hr or /cb)
-    - Nav routes to /shop?from=hr or /shop?from=cb respectively
-    - CB's AlbumCover fallback + vp-ao-ph audio-only placeholder preserved for all artists
-    - CB's PlayerBar art fallback (pb-art-ph) preserved for all artists
-  CSS rename: hr-root → ex-root, hr-nav → ex-nav, hr-main → ex-main,
-    hr-left → ex-left, hr-right → ex-right, hr-snap → ex-snap
-  Adding a new artist: create one config file in src/data/artists/ + one thin
-    route wrapper + add route in App.jsx. No exhibit logic to duplicate.
-  Build: `npx vite build` clean (53 modules transformed, lyricmap chunk warning expected)
+  Net -822 lines. Artist #3 now takes minutes, not hours.
+  Commit: 70377b8
 
-ADDED THIS SESSION (CB EXHIBIT) — April 13 2026
-  New files:
-    src/routes/cb/CbSpine.jsx        — Second artist exhibit, mirror of HrSpine
-    src/routes/cb/cb_discography.js  — 11 spine entries, 60 verified ytIds
-    src/routes/cb/cb_facts.js        — 32 facts (10 artist, 1 meta, track/album)
-  App.jsx:
-    + import CbSpine and registered <Route path="/cb" element={<CbSpine />} />
-  Build: `npx vite build` clean (43 modules transformed)
-  Deploy: BLOCKED — CLOUDFLARE_API_TOKEN not available in this sandbox session.
-    Mike: run `npx wrangler deploy` locally to ship.
+GIFT SHOP + POLISH (r28) — April 13/14 2026 late-night session
+  Session landmarks (chronological):
+    1. Researched Carsie Blanton's storefront pattern (Shopify subdomain, artist-owned)
+    2. Decided on exit-through-the-gift-shop architecture
+    3. Built /shop with GiftShop.jsx, GiftShop.css, wb_roster.js, wb_merch.js
+    4. Wired exhibit exits to /shop?from=<id>
+    5. Discovered HrExhibitFlow was commented out; re-enabled
+    6. Discovered STATE.md was way out of date on file locations
+    7. Committed everything to git (first real safety net: abf628a)
+    8. Ran Exhibit refactor via Cowork (landed as 70377b8)
+    9. Added build time display to /admin
+    10. Fixed Hunter and Carsie store URLs in wb_roster
+    11. Added /hr /cb /shop jump buttons to /admin
+    12. Rewrote GiftShop.css for museum dark theme
+    13. Added typography fallback for missing artist photos
+    14. Moved LOBBY exit to right-align (VISION: always exit right)
+    15. Nulled image paths in wb_roster (stop trying to load files that don't exist)
+  Seven user-reported issues addressed:
+    ✓ HrExhibitFlow missing below tracklist
+    ✓ Hunter URL correction (→ www.hunterroot.com/)
+    ✓ Carsie URL correction (→ store.carsieblanton.com/collections/featured-merch)
+    ✓ Gift shop too bright (dark theme now)
+    ✓ Gift shop images broken (typography fallback)
+    ✓ Exit always to the right (LOBBY → right-aligned)
+    ✓ mmm page links to HR/CB/shop
 
-HR-SIDE REPAIRS (needed so build would pass)
-  src/routes/hr/HrSpine.jsx had been saved truncated (mid-<img>). Closing JSX
-  + closing brace appended. HrExhibitFlow import + usage commented out because
-  src/data/hr_archive.js and src/data/hr_artifacts.js are ALSO truncated in
-  this working copy. Restore those data files, then re-enable HrExhibitFlow
-  (two one-line changes in HrSpine.jsx, both marked with "disabled" comment).
+OPERATIONAL NOTES
+  - BUILD_LOCK protocol: C:\AI\BUILD_LOCK.txt must say UNLOCKED before file edits.
+    Take the lock before a session, release after. Check with:
+      Get-Content "C:\AI\BUILD_LOCK.txt"
+  - Windows CRLF warnings on git add are cosmetic, ignore.
+  - `npx wrangler deploy` must run from C:\AI\Projects\weird-baby-update\ — if
+    you run it from elsewhere, npx will try to install the latest wrangler
+    globally. Always `cd` first.
+  - Fingerprint hashes in the build output (e.g. `index-BbjneHrM.js`) change
+    whenever the bundle content changes. If a deploy uploads 0 new assets,
+    nothing changed. If it uploads assets with different hashes, new code shipped.
+  - Deploy freshness verification: after deploy, type `mmm` and check the
+    build time on the /admin header against the timestamp of your last `npx
+    vite build` run. If they match, you're looking at the latest.
 
-ADDED PREVIOUS SESSION — April 13 2026
-  HrSpine.jsx — Crooked Home tracklist:
-    + Cookin' in the Bathroom (official MV, live acoustic, Violet Lempke cover)
-    + A Pot Song (official clip, official audio, Cheech & Chong cover)
-  hr_artifacts.js — new entries:
-    + Covert Concert Series full session (2020, pre-viral)
-    + Line Check Audio Sessions — Can't Outshine The Truth (2022, 214K views)
-    + Violet Lempke — Cookin' in the Bathroom cover (2025)
-  hr_archive.js — new entries:
-    + Covert Concert Series (rarity, 2020)
-    + Line Check Audio Sessions — Can't Outshine The Truth (rarity, 2022)
-    + Line Check Audio Sessions — Quicksand Sinking (rarity, 2023)
-    + Medusa's Disco — Hunter Root on collaborating with Alex Aument (interview, 2023)
+GIT SAFETY POINTS
+  abf628a — r26, museum live with HR + CB + gift shop slice, before Exhibit refactor
+  70377b8 — r27, post-refactor + build time on admin
+  (latest) — r28, gift shop complete (dark theme, fallbacks, exit-right, URL fixes)
+  To roll back: `git reset --hard <hash>` then `git push -f origin main` (careful)
 
-RESEARCH CORPUS — collected April 13 2026
+RESEARCH CORPUS
   C:\AI\Projects\Hunter Root\yt_research\
     channel_videos.json   — 125 official channel videos (with view counts)
-    fan_yt.json           — 175 third-party YT vi
+    fan_yt.json           — 175 third-party YT videos (unverified, awaiting triage)
