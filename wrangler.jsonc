@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "weird-baby",
+  "compatibility_date": "2026-04-09",
+  "observability": {
+    "enabled": true
+  },
+  "main": "src/worker.js",
+  "assets": {
+    "not_found_handling": "single-page-application"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "d1_databases": [
+    {
+      "binding": "weird_baby_db",
+      "database_name": "weird-baby-db",
+      "database_id": "4db60094-122a-4618-b3c5-8664f74af222"
+    }
+  ]
+}

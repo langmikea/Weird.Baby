@@ -1,0 +1,714 @@
+import { useState, useEffect, useRef, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+
+// ─── DATA ─────────────────────────────────────────────────────────────────────
+const BASE = "https://f4.bcbits.com/img/";
+
+const SPINE = [
+  {
+    id: "cracked", title: "They Finally Cracked Me", year: 2018,
+    art: BASE + "a2891638134_10.jpg", accent: "#9a6a3a",
+    bandcamp: "https://hunterrootmusic.bandcamp.com/album/they-finally-cracked-me",
+    blurb: "The debut. Raw lo-fi confessions — cheap wine, identity, the first cracks in the foundation.",
+    tracks: [
+      { title: "Cheap Wine", videos: [] },
+      { title: "Straitlaced", videos: [{ ytId: "Olv9qIVoBgQ", label: "Live", type: "live" }] },
+      { title: "So Sick", videos: [] },
+      { title: "Identity", videos: [] },
+      { title: "Hook Or The Worm", videos: [] },
+      { title: "Television Head", videos: [] },
+      { title: "Let The Rhythm", videos: [] },
+      { title: "Silly Situation", videos: [] },
+      { title: "Moving With The Storm", videos: [] },
+      { title: "Soul Sucker", videos: [] },
+      { title: "The Shade", videos: [] },
+    ],
+  },
+  {
+    id: "wheel", title: "Life Inside A Wheel", year: 2019,
+    art: BASE + "a4132956547_10.jpg", accent: "#4a8a4a",
+    bandcamp: "https://hunterrootmusic.bandcamp.com/album/life-inside-a-wheel",
+    blurb: "Twelve songs about the trap of circular thinking. People are programs. The cage is real. The door might be open.",
+    tracks: [
+      { title: "Same Page", videos: [] },
+      { title: "Talker With A Broken Jaw", videos: [] },
+      { title: "People Are Programs", videos: [{ ytId: "Pic6JU8ZiUY", label: "Official Music Video", type: "official" }] },
+      { title: "Killer To Killer", videos: [] },
+      { title: "Brain Cell", videos: [] },
+      { title: "Fix My Head", videos: [] },
+      { title: "Free To Roam The Cage", videos: [] },
+      { title: "With Great Pleasure", videos: [] },
+      { title: "The Water", videos: [] },
+      { title: "Music On My Mind", videos: [] },
+      { title: "What I Felt", videos: [] },
+      { title: "Greek Fire", videos: [] },
+      { title: "Shapeshifter", videos: [{ ytId: "XdiGZUWlU0Y", label: "Official Audio", type: "official" }] },
+    ],
+  },
+  {
+    id: "dandelions", title: "Mimicking the Sun Like Dandelions", year: 2020,
+    art: BASE + "a3722397196_10.jpg", accent: "#3a7a9a",
+    bandcamp: "https://hunterrootmusic.bandcamp.com/album/mimicking-the-sun-like-dandelions",
+    blurb: "Family enters the catalog. Homestead. The year his brother Nick died. The light gets longer and the shadows too.",
+    tracks: [
+      { title: "Lampshade", videos: [
+        { ytId: "JA1p8WSQRQQ", label: "Official Lyric Video", type: "official" },
+        { ytId: "EjdXxigzBp8", label: "Live in Studio", type: "live" },
+      ]},
+      { title: "Favorite Friend", videos: [{ ytId: "L7-1T7F7_R0", label: "Official Music Video", type: "official" }] },
+      { title: "Little Red Riding Hood", videos: [{ ytId: "BOQHN-O4DDc", label: "Live @ MCHS", type: "live" }] },
+      { title: "Homestead", videos: [
+        { ytId: "4HIfc5MLu6k", label: "Official Music Video", type: "official" },
+        { ytId: "unkiAVuItLE", label: "Live in Studio", type: "live", credit: "Covert Concert Series" },
+      ]},
+      { title: "Undertow", videos: [] },
+      { title: "Family Tree", videos: [{ ytId: "d0TXF6iXFRQ", label: "Live in Studio", type: "live" }] },
+      { title: "Tongue In Cheek", videos: [] },
+      { title: "Norma Jean", videos: [] },
+      { title: "Impossible Itch", videos: [] },
+      { title: "Upper Hand", videos: [] },
+      { title: "Wildfire", videos: [{ ytId: "KRhiwkMfU9c", label: "Official Visualizer", type: "official" }] },
+    ],
+  },
+  {
+    id: "skipping", title: "Skipping Stones That Sink Before They're Thrown", year: 2021,
+    art: BASE + "a3350417837_10.jpg", accent: "#8a3a8a",
+    bandcamp: "https://hunterrootmusic.bandcamp.com/album/skipping-stones-that-sink-before-theyre-thrown",
+    blurb: "The grief album that does not announce itself as one. Ten songs of waiting on the mend.",
+    tracks: [
+      { title: "Don't Blame The Breeze", videos: [{ ytId: "KMJVLWr34Rc", label: "Official Art Video", type: "official" }] },
+      { title: "Nothin' Wrong", videos: [{ ytId: "Wv0_mujJUQU", label: "Official Music Video", type: "official" }] },
+      { title: "Cusp Of The Mend", videos: [{ ytId: "ZJipWxlqIvc", label: "Official Art Video", type: "official" }] },
+      { title: "Cocoon", videos: [] },
+      { title: "Patience In The Dark", videos: [] },
+      { title: "Just For Kicks", videos: [] },
+      { title: "Echo Calls Her Name", videos: [] },
+      { title: "The Shade", videos: [] },
+      { title: "Shake It Off Of Me", videos: [] },
+      { title: "Soul Sucker", videos: [] },
+    ],
+  },
+  {
+    id: "arkansas", title: "Arkansas", year: 2023,
+    art: BASE + "a0235251082_10.jpg", accent: "#ba5a2a",
+    bandcamp: "https://hunterrootmusic.bandcamp.com/album/arkansas",
+    blurb: "Town Rat Heathen went viral. A tribute to Nick and the years in Arkansas. The breakout album.",
+    tracks: [
+      { title: "Silver Lining", videos: [{ ytId: "uaFHDfuohxc", label: "Official Video", type: "official" }] },
+      { title: "Quicksand Sinking", videos: [
+        { ytId: "QFpJf0RDsXc", label: "Official Music Video", type: "official" },
+        { ytId: "13IUBFvIkls", label: "Official Lyric Video", type: "official" },
+      ]},
+      { title: "Town Rat Heathen", videos: [
+        { ytId: "n2m8sP17E-c", label: "Official Music Video", type: "official" },
+        { ytId: "omU0Xt3yB-o", label: "Live @Rok10productions", type: "live" },
+        { ytId: "T0cdoRZ5LXg", label: "Early Version", type: "live" },
+      ]},
+      { title: "Reverend", videos: [{ ytId: "7Lttb_59EYw", label: "Official Music Video", type: "official" }] },
+      { title: "Grain Of Rice", videos: [{ ytId: "_w0wz5o9dWU", label: "Live in Studio", type: "live" }] },
+      { title: "Can't Outshine The Truth", videos: [{ ytId: "z1K0HWTDrL8", label: "Live @Rok10productions", type: "live" }] },
+      { title: "California Sober", videos: [{ ytId: "04UlgUA9Uo0", label: "Live @Rok10productions", type: "live" }] },
+      { title: "Good On Paper", videos: [] },
+      { title: "Few Steps Back", videos: [{ ytId: "Fa5GKxEgf7c", label: "Live / The Couch Sessions", type: "live" }] },
+      { title: "Run From The Devil", videos: [] },
+      { title: "Silver Lining (Reprise)", videos: [] },
+    ],
+  },
+  {
+    id: "crooked", title: "Crooked Home", year: 2025,
+    art: BASE + "a3836001044_10.jpg", accent: "#3a5aaa",
+    bandcamp: "https://hunterrootmusic.bandcamp.com/album/crooked-home",
+    blurb: "The latest. Inherited damage, addict parents, a childhood viewed through a bathroom door. The past made present.",
+    tracks: [
+      { title: "'94", videos: [
+        { ytId: "vPW49GU38Ng", label: "Official Music Video", type: "official" },
+        { ytId: "zQ2o__P67kc", label: "Acoustic Clip", type: "clip" },
+      ]},
+      { title: "Low", videos: [
+        { ytId: "WRjngwtGGFk", label: "Official Visualizer", type: "official" },
+        { ytId: "OczqgjWafds", label: "Live Clip", type: "live" },
+      ]},
+      { title: "String Up a Necklace", videos: [{ ytId: "pJSOjyrRIRs", label: "Official Visualizer", type: "official" }] },
+      { title: "Hand in the Fire", videos: [{ ytId: "PPzNfNOMUHE", label: "Official Visualizer", type: "official" }] },
+      { title: "Flash in the Pan", videos: [
+        { ytId: "03NAxazLuhY", label: "Official Visualizer", type: "official" },
+        { ytId: "fRFh-W92Vn4", label: "Live Clip", type: "live" },
+      ]},
+      { title: "Friendly Fire", videos: [
+        { ytId: "YlU1CBJkJ5w", label: "Official Music Video", type: "official" },
+        { ytId: "TLtIAsdi6k8", label: "Official Lyric Video", type: "official" },
+      ]},
+      { title: "The Devil is the Culprit", videos: [{ ytId: "M9HlNdBm2gw", label: "Official Visualizer", type: "official" }] },
+      { title: "If the Body is a Temple", videos: [{ ytId: "-2aU97nuzYE", label: "Official Visualizer", type: "official" }] },
+      { title: "The Keeper", videos: [{ ytId: "bXZo69DNSrM", label: "Official Visualizer", type: "official" }] },
+      { title: "Out of my Hands", videos: [{ ytId: "QDqNREtunWE", label: "Official Visualizer", type: "official" }] },
+      { title: "Bad Sign", videos: [{ ytId: "mmR0SLtDSdo", label: "Official Visualizer", type: "official" }] },
+      { title: "My Brother's Bones", videos: [{ ytId: "wi5G_Zn74gc", label: "Official Music Video", type: "official" }] },
+    ],
+  },
+];
+
+const TYPE_COLOR = {
+  official: "#b8974a",
+  live:     "#4a8a6a",
+  clip:     "#5a5a5a",
+  hr_cover: "#8a4a8a",
+  fan_cover:"#3a7a9a",
+};
+
+// ─── YOUTUBE HOOK ────────────────────────────────────────────────────────────
+function useYT({ onProgress, onEnd }) {
+  const ref      = useRef(null);
+  const contRef  = useRef(null);
+  const tickRef  = useRef(null);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    function init() {
+      if (!contRef.current) return;
+      ref.current = new window.YT.Player(contRef.current, {
+        height: "1", width: "1",
+        playerVars: { autoplay: 0, controls: 0, modestbranding: 1, rel: 0, iv_load_policy: 3, playsinline: 1, mute: 1 },
+        events: {
+          onReady: () => setReady(true),
+          onStateChange: (e) => {
+            const S = window.YT.PlayerState;
+            if (e.data === S.ENDED)   { clearInterval(tickRef.current); onEnd?.(); }
+            if (e.data === S.PLAYING) {
+              clearInterval(tickRef.current);
+              tickRef.current = setInterval(() => {
+                const dur = ref.current?.getDuration?.();
+                const cur = ref.current?.getCurrentTime?.();
+                if (dur > 0) onProgress?.(cur / dur);
+              }, 500);
+            }
+            if (e.data === S.PAUSED)  clearInterval(tickRef.current);
+          },
+        },
+      });
+    }
+    if (window.YT?.Player) { init(); }
+    else {
+      const s = document.createElement("script");
+      s.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(s);
+      window.onYouTubeIframeAPIReady = init;
+    }
+    return () => clearInterval(tickRef.current);
+  }, []);
+
+  const load  = useCallback((ytId) => {
+    if (!ref.current || !ready) return;
+    ref.current.loadVideoById(ytId);
+  }, [ready]);
+  const play  = useCallback(() => ref.current?.playVideo?.(), []);
+  const pause = useCallback(() => ref.current?.pauseVideo?.(), []);
+  const mute  = useCallback(() => ref.current?.mute?.(), []);
+  const unmute= useCallback(() => ref.current?.unMute?.(), []);
+  const isMuted = useCallback(() => ref.current?.isMuted?.() ?? true, []);
+  const seekTo= useCallback((f) => {
+    const dur = ref.current?.getDuration?.();
+    if (dur > 0) ref.current.seekTo(f * dur, true);
+  }, []);
+  const getState = useCallback(() => ref.current?.getPlayerState?.(), []);
+
+  return { contRef, ready, load, play, pause, mute, unmute, isMuted, seekTo, getState };
+}
+
+// ─── COVERFLOW ───────────────────────────────────────────────────────────────
+function getSlot(off) {
+  const a = Math.abs(off), s = off < 0 ? -1 : 1;
+  if (a === 0) return { x: 0,       z: 0,    ry: 0,   sc: 1,    op: 1,    zi: 10 };
+  if (a === 1) return { x: s*210,   z: -80,  ry: s*-45, sc: .85, op: .85, zi: 9  };
+  if (a === 2) return { x: s*360,   z: -160, ry: s*-65, sc: .7,  op: .6,  zi: 8  };
+  return             { x: s*480,   z: -220, ry: s*-75, sc: .55, op: .35, zi: 7  };
+}
+
+function Coverflow({ active, onSelect, onSelectClick }) {
+  const [did, setDid] = useState(false);
+  const drag = useRef(null);
+  const touchStart = useRef(null);
+
+  // Mouse drag
+  function onPD(e) { drag.current = e.clientX; setDid(false); }
+  function onPU(e) {
+    if (!drag.current) return;
+    const d = e.clientX - drag.current;
+    if (Math.abs(d) > 40) {
+      d < 0 ? onSelect(Math.min(active+1, SPINE.length-1)) : onSelect(Math.max(active-1, 0));
+      setDid(true);
+    }
+    drag.current = null;
+  }
+
+  // Touch swipe
+  function onTS(e) { touchStart.current = e.touches[0].clientX; setDid(false); }
+  function onTE(e) {
+    if (touchStart.current === null) return;
+    const d = e.changedTouches[0].clientX - touchStart.current;
+    if (Math.abs(d) > 40) {
+      d < 0 ? onSelect(Math.min(active+1, SPINE.length-1)) : onSelect(Math.max(active-1, 0));
+      setDid(true);
+    }
+    touchStart.current = null;
+  }
+
+  return (
+    <div className="cf-wrap"
+      onPointerDown={onPD} onPointerUp={onPU}
+      onTouchStart={onTS} onTouchEnd={onTE}
+    >
+      <button className={`cf-arrow cf-l${active===0?" cf-dis":""}`} onClick={() => onSelect(Math.max(0,active-1))}>{"<"}</button>
+      <button className={`cf-arrow cf-r${active===SPINE.length-1?" cf-dis":""}`} onClick={() => onSelect(Math.min(SPINE.length-1,active+1))}>{">"}</button>
+      {SPINE.map((a, i) => {
+        const off = i - active;
+        if (Math.abs(off) > 3) return null;
+        const sl = getSlot(off);
+        const isActive = off === 0;
+        return (
+          <div key={a.id} className={`cf-album${isActive?" cf-active":""}`}
+            style={{
+              transform: `translateX(${sl.x}px) translateZ(${sl.z}px) rotateY(${sl.ry}deg) scale(${sl.sc})`,
+              opacity: sl.op, zIndex: sl.zi,
+              boxShadow: isActive ? "0 24px 64px rgba(0,0,0,0.8), 0 0 0 1px #b8974a44" : "none",
+            }}
+            onClick={() => {
+              if (!did) {
+                if (isActive) onSelectClick(i);
+                else onSelect(i);
+              }
+            }}
+          >
+            <img src={a.art} alt={a.title} loading="lazy" />
+            <div className="cf-overlay" />
+            <div className="cf-year">{a.year}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ─── VIDEO PANEL ─────────────────────────────────────────────────────────────
+function VideoPanel({ video, track, album, muted, onToggleMute, isPlaying, onPlayPause }) {
+  if (!video) {
+    return (
+      <div className="vp-empty">
+        <div className="vp-empty-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M7 5.5L22 14L7 22.5V5.5Z" fill="#333"/>
+          </svg>
+        </div>
+        <div className="vp-empty-label">select a track</div>
+      </div>
+    );
+  }
+
+  const typeColor = TYPE_COLOR[video.type] || TYPE_COLOR.official;
+
+  return (
+    <div className="vp-active">
+      <div className="vp-thumb">
+        <img src={`https://img.youtube.com/vi/${video.ytId}/hqdefault.jpg`} alt={track?.title} />
+        <div className="vp-controls">
+          <button className="vp-playpause" onClick={onPlayPause}>
+            {isPlaying
+              ? <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="4" y="3" width="3.5" height="12" rx="1" fill="white"/><rect x="10.5" y="3" width="3.5" height="12" rx="1" fill="white"/></svg>
+              : <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 3.5L15 9L5 14.5V3.5Z" fill="white"/></svg>
+            }
+          </button>
+          <button className={`vp-mute${muted ? " vp-muted" : ""}`} onClick={onToggleMute} title={muted ? "Unmute" : "Mute"}>
+            {muted
+              ? <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 6h2l4-3v12l-4-3H3V6z" fill="white"/><path d="M13 6l3 3-3 3M16 6l-3 3 3 3" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
+              : <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 6h2l4-3v12l-4-3H3V6z" fill="white"/><path d="M13 7a3 3 0 010 4" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
+            }
+          </button>
+        </div>
+      </div>
+      <div className="vp-info">
+        <span className="vp-type" style={{ color: typeColor }}>{video.type}</span>
+        <span className="vp-title">{track?.title}</span>
+        <span className="vp-label">{video.label}{video.credit ? ` · ${video.credit}` : ""}</span>
+      </div>
+      {track?.videos?.length > 1 && (
+        <div className="vp-versions">
+          {track.videos.map((v, vi) => (
+            <div key={vi} className="vp-ver-thumb" style={{ opacity: v.ytId === video.ytId ? 1 : 0.55 }}>
+              <img src={`https://img.youtube.com/vi/${v.ytId}/default.jpg`} alt={v.label} />
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── PERSISTENT PLAYER BAR ───────────────────────────────────────────────────
+function PlayerBar({ video, track, album, isPlaying, muted, onPlayPause, onToggleMute, progress, onSeek }) {
+  if (!video) return null;
+  return (
+    <div className="pb">
+      <img className="pb-art" src={album?.art} alt={album?.title} />
+      <div className="pb-info">
+        <div className="pb-track">{track?.title}</div>
+        <div className="pb-sub">{video.label}</div>
+      </div>
+      <button className="pb-btn" onClick={onPlayPause}>
+        {isPlaying
+          ? <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="3" height="12" rx="1" fill="currentColor"/><rect x="10" y="2" width="3" height="12" rx="1" fill="currentColor"/></svg>
+          : <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 2.5L14 8L4 13.5V2.5Z" fill="currentColor"/></svg>
+        }
+      </button>
+      <button className={`pb-btn${muted ? " pb-muted" : ""}`} onClick={onToggleMute}>
+        {muted
+          ? <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3 6h2l4-3v12l-4-3H3V6z" fill="currentColor"/><path d="M13 6l3 3-3 3M16 6l-3 3 3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+          : <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3 6h2l4-3v12l-4-3H3V6z" fill="currentColor"/><path d="M13 7a3 3 0 010 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+        }
+      </button>
+      <div className="pb-prog" onClick={onSeek}>
+        <div className="pb-fill" style={{ width: `${progress * 100}%`, background: album?.accent }} />
+      </div>
+    </div>
+  );
+}
+
+// ─── ALBUM SECTION ───────────────────────────────────────────────────────────
+function AlbumSection({ album, albumIdx, isOpen, playingTrackIdx, playingVideoIdx, onPlay }) {
+  const [activeTrack, setActiveTrack] = useState(null);
+  const [activeVideo, setActiveVideo] = useState(null);
+  const [pulse, setPulse] = useState(false);
+
+  const didMountRef = useRef(false);
+  useEffect(() => {
+    if (!didMountRef.current) { didMountRef.current = true; return; }
+    if (isOpen) {
+      setPulse(true);
+      const t = setTimeout(() => setPulse(false), 900);
+      return () => clearTimeout(t);
+    }
+  }, [isOpen]);
+
+  // AUTO-SCROLL REMOVED — no scrollIntoView anywhere
+
+  function selectTrack(ti, vi = 0) {
+    const v = album.tracks[ti].videos[vi];
+    if (!v) return;
+    setActiveTrack(ti);
+    setActiveVideo(vi);
+    onPlay(albumIdx, ti, vi);
+  }
+
+  const isThisPlaying = playingTrackIdx !== null;
+  const curVideo = activeTrack !== null ? album.tracks[activeTrack]?.videos?.[activeVideo] : null;
+  const curTrack = activeTrack !== null ? album.tracks[activeTrack] : null;
+
+  return (
+    <div className={`as-wrap${isOpen ? " as-open" : ""}${pulse ? " as-pulse" : ""}`}>
+      <div className="as-inner" style={pulse ? { borderTopColor: "#b8974a" } : {}}>
+        <div className="as-body">
+          <ol className="as-tracks">
+            <li className="as-album-label">
+              <div className="as-album-title">{album.title}</div>
+              <div className="as-album-blurb">{album.blurb}</div>
+            </li>
+            {album.tracks.map((track, ti) => {
+              const hasVids = track.videos.length > 0;
+              const isActive = activeTrack === ti;
+              const isNowPlaying = playingTrackIdx === ti;
+              return (
+                <li key={ti}
+                  className={`as-track${isActive ? " as-track-active" : ""}${!hasVids ? " as-track-empty" : ""}`}
+                  style={isActive ? { borderLeftColor: "#b8974a" } : {}}
+                  onClick={() => hasVids && selectTrack(ti, 0)}
+                >
+                  <span className="as-tnum">
+                    {isNowPlaying
+                      ? <NpBars color="#b8974a" />
+                      : String(ti + 1).padStart(2, "0")
+                    }
+                  </span>
+                  <span className="as-ttitle">{track.title}</span>
+                  {hasVids && (
+                    <span className="as-tbadge">
+                      {track.videos.length > 1 ? track.videos.length : "▶"}
+                    </span>
+                  )}
+                  {isActive && track.videos.length > 1 && (
+                    <div className="as-vid-row">
+                      {track.videos.map((v, vi) => (
+                        <button key={vi}
+                          className={`as-vid-btn${activeVideo === vi ? " as-vid-btn-active" : ""}`}
+                          style={activeVideo === vi ? { borderColor: "#b8974a", color: "#b8974a" } : {}}
+                          onClick={(e) => { e.stopPropagation(); selectTrack(ti, vi); }}
+                        >
+                          {v.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+
+          <div className="as-vp">
+            <VideoPanel
+              video={curVideo}
+              track={curTrack}
+              album={album}
+              muted={true}
+              onToggleMute={() => {}}
+              isPlaying={isThisPlaying}
+              onPlayPause={() => {}}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function NpBars({ color }) {
+  return (
+    <span style={{ display: "inline-flex", alignItems: "flex-end", gap: 2, height: 12 }}>
+      {[0.6, 1, 0.7].map((h, i) => (
+        <span key={i} style={{
+          display: "block", width: 2, height: `${h * 100}%`,
+          background: color, borderRadius: 1,
+          animation: "npb .7s ease-in-out infinite alternate",
+          animationDelay: `${i * 0.15}s`,
+        }} />
+      ))}
+    </span>
+  );
+}
+
+// ─── ROOT ────────────────────────────────────────────────────────────────────
+export default function HrSpine() {
+  const navigate = useNavigate();
+  const [active, setActive]         = useState(4);
+  const [activeDisplay, setActiveDisplay] = useState(4);
+  const [visible, setVisible]       = useState(false);
+  const clickedRef = useRef(false);
+  const debounceRef = useRef(null);
+  const [muted, setMuted]       = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [playingAlbum, setPlayingAlbum]   = useState(null);
+  const [playingTrack, setPlayingTrack]   = useState(null);
+  const [playingVideo, setPlayingVideo]   = useState(null);
+
+  useEffect(() => {
+    setTimeout(() => setVisible(true), 80);
+    fetch("/api/visits", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ page: "/hr", referrer: document.referrer }),
+    }).catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    function onKey(e) {
+      if (e.key === "ArrowLeft")  { e.preventDefault(); selectAlbum(Math.max(0, active - 1), false); }
+      if (e.key === "ArrowRight") { e.preventDefault(); selectAlbum(Math.min(SPINE.length - 1, active + 1), false); }
+      if (e.key === "Enter")      { e.preventDefault(); selectAlbum(active, true); }
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [active]);
+
+  function selectAlbum(i, clicked) {
+    setActive(i);
+    clickedRef.current = clicked;
+    clearTimeout(debounceRef.current);
+    const delay = clicked ? 0 : 1000;
+    debounceRef.current = setTimeout(() => {
+      setActiveDisplay(i);
+    }, delay);
+  }
+
+  const handleEnd = useCallback(() => {
+    setIsPlaying(false);
+  }, []);
+
+  const yt = useYT({ onProgress: setProgress, onEnd: handleEnd });
+
+  useEffect(() => {
+    if (playingAlbum === null || playingTrack === null || playingVideo === null) return;
+    const v = SPINE[playingAlbum].tracks[playingTrack].videos[playingVideo];
+    if (!v?.ytId || !yt.ready) return;
+    setProgress(0);
+    yt.load(v.ytId);
+    if (muted) yt.mute(); else yt.unmute();
+    setIsPlaying(true);
+  }, [playingAlbum, playingTrack, playingVideo, yt.ready]);
+
+  function handlePlay(albumIdx, trackIdx, videoIdx) {
+    setPlayingAlbum(albumIdx);
+    setPlayingTrack(trackIdx);
+    setPlayingVideo(videoIdx);
+  }
+
+  function handlePlayPause() {
+    const state = yt.getState?.();
+    if (state === 1) { yt.pause(); setIsPlaying(false); }
+    else             { yt.play();  setIsPlaying(true);  }
+  }
+
+  function handleToggleMute() {
+    const nowMuted = yt.isMuted();
+    nowMuted ? yt.unmute() : yt.mute();
+    setMuted(!nowMuted);
+  }
+
+  function handleSeek(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const f = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    yt.seekTo(f); setProgress(f);
+  }
+
+  const curAlbum = playingAlbum !== null ? SPINE[playingAlbum] : null;
+  const curTrack = curAlbum && playingTrack !== null ? curAlbum.tracks[playingTrack] : null;
+  const curVideo = curTrack && playingVideo !== null ? curTrack.videos[playingVideo] : null;
+
+  return (
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;800&family=Courier+Prime:wght@400&display=swap');
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{background:#080808;color:#f0ece4;overflow-y:scroll;overflow-x:hidden}body{background:#080808;color:#f0ece4;min-height:100vh}
+
+        .hr-root{opacity:0;transition:opacity .8s ease;padding-bottom:120px;min-height:100vh}
+        .hr-root.visible{opacity:1}
+
+        .hr-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 32px 0;margin-bottom:8px}
+        .hr-nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#b8974a;background:none;border:none;cursor:pointer;transition:opacity .2s}
+        .hr-nav-logo:hover{opacity:.7}
+        .hr-nav-sub{font-family:'Courier Prime',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:#555}
+        .hr-rev{font-family:'Courier Prime',monospace;font-size:.52rem;color:#2a2a2a;letter-spacing:.1em;width:80px;text-align:right}
+
+        /* COVERFLOW */
+        .cf-wrap{height:300px;display:flex;align-items:center;justify-content:center;position:relative;perspective:900px;perspective-origin:50% 50%;user-select:none;cursor:grab;overflow:hidden;touch-action:pan-y}
+        .cf-wrap:active{cursor:grabbing}
+        .cf-album{position:absolute;width:240px;height:240px;border-radius:2px;overflow:hidden;cursor:pointer;transition:transform .5s cubic-bezier(.25,.46,.45,.94),opacity .5s ease,box-shadow .5s ease;transform-style:preserve-3d}
+        .cf-album img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+        .cf-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 50%);opacity:0;transition:opacity .3s}
+        .cf-active .cf-overlay{opacity:1}
+        .cf-year{position:absolute;bottom:10px;left:12px;font-family:'Courier Prime',monospace;font-size:.65rem;letter-spacing:.12em;color:rgba(255,255,255,.8);opacity:0;transition:opacity .3s}
+        .cf-active .cf-year{opacity:1}
+        .cf-arrow{position:absolute;top:50%;transform:translateY(-50%);background:transparent;border:none;color:#555;font-size:2rem;cursor:pointer;padding:12px;transition:color .2s,opacity .2s;z-index:20;line-height:1;font-family:monospace}
+        .cf-arrow:hover{color:#b8974a}
+        .cf-l{left:8px}.cf-r{right:8px}
+        .cf-dis{opacity:.15;pointer-events:none}
+
+        /* ALBUM INFO STRIP */
+        .ai-bc{font-family:'Syne',sans-serif;font-weight:600;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:7px 16px;border:1px solid transparent;border-radius:1px;text-decoration:none;transition:all .2s;white-space:nowrap;color:#080808}
+        .ai-bc:hover{opacity:.85}
+
+        /* ALBUM SECTION */
+        .as-wrap{max-height:0;overflow:hidden;transition:max-height .6s cubic-bezier(.25,.46,.45,.94)}
+        .as-open{max-height:3000px}
+        @keyframes border-flash{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
+        .as-pulse .as-inner{border-top-width:2px;animation:border-flash .9s ease-out forwards}
+        .as-inner{border-top:1px solid #181818;padding:32px 32px 0}
+
+        /* TRACKLIST + VIDEO SPLIT */
+        .as-body{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid #181818;margin:0 -32px;padding:0 32px}
+        .as-tracks{list-style:none;display:flex;flex-direction:column;border-right:1px solid #181818;padding:8px 0}
+        .as-album-label{padding:16px 12px 12px;border-bottom:1px solid #111;margin-bottom:4px}
+        .as-album-title{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(.95rem,1.6vw,1.2rem);color:#f0ece4;line-height:1.2;margin-bottom:6px}
+        /* DIMMING FIX — blurb and inactive tracks raised from #444 / .3 */
+        .as-album-blurb{font-family:'Courier Prime',monospace;font-size:.74rem;color:#666;line-height:1.6;transition:opacity .4s}
+        .as-track{display:flex;align-items:center;flex-wrap:wrap;gap:0;padding:9px 12px;border-left:2px solid transparent;cursor:pointer;transition:background .15s,border-left-color .2s;user-select:none}
+        .as-track:hover{background:#0d0d0d}
+        .as-track-active{background:#0d0d0d}
+        .as-track-empty{cursor:default;opacity:.45}
+        .as-track-empty:hover{background:transparent}
+        .as-tnum{font-family:'Courier Prime',monospace;font-size:.65rem;color:#555;min-width:22px;display:flex;align-items:center;justify-content:center}
+        .as-ttitle{font-family:'Courier Prime',monospace;font-size:.88rem;color:#d4c49a;flex:1;padding:0 10px}
+        .as-tbadge{font-family:'Courier Prime',monospace;font-size:.65rem;letter-spacing:.05em;color:#666}
+        .as-vid-row{width:100%;display:flex;flex-wrap:wrap;gap:6px;padding:6px 12px 4px 34px}
+        .as-vid-btn{font-family:'Courier Prime',monospace;font-size:.68rem;padding:3px 8px;background:transparent;border:1px solid #2a2a2a;color:#666;cursor:pointer;border-radius:1px;transition:all .15s}
+        .as-vid-btn:hover{border-color:#666;color:#aaa}
+        .as-vid-btn-active{color:#b8974a;border-color:#b8974a}
+
+        /* VIDEO PANEL */
+        .as-vp{display:flex;flex-direction:column;background:#060606}
+        .vp-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#333;min-height:220px}
+        .vp-empty-label{font-family:'Courier Prime',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase}
+        .vp-active{display:flex;flex-direction:column}
+        .vp-thumb{position:relative;width:100%;aspect-ratio:16/9;background:#0a0a0a;overflow:hidden}
+        .vp-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+        .vp-controls{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:flex-end;justify-content:flex-start;gap:8px;padding:10px;background:linear-gradient(to top,rgba(0,0,0,.6) 0%,transparent 60%);pointer-events:none}
+        .vp-playpause,.vp-mute{width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;pointer-events:auto}
+        .vp-playpause:hover,.vp-mute:hover{background:rgba(0,0,0,.85)}
+        .vp-muted{border-color:rgba(255,80,80,.6);background:rgba(180,30,30,.3)}
+        .vp-info{padding:10px 14px;display:flex;flex-direction:column;gap:3px;border-top:1px solid #111}
+        .vp-type{font-family:'Syne',sans-serif;font-weight:600;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase}
+        .vp-title{font-family:'Courier Prime',monospace;font-size:.88rem;color:#d4c49a}
+        .vp-label{font-family:'Courier Prime',monospace;font-size:.72rem;color:#666}
+        .vp-versions{display:flex;gap:6px;padding:8px 14px;border-top:1px solid #111}
+        .vp-ver-thumb{width:48px;height:27px;border-radius:1px;overflow:hidden;cursor:pointer;transition:opacity .15s}
+        .vp-ver-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+        /* PERSISTENT PLAYER */
+        .pb{position:fixed;bottom:0;left:0;right:0;height:60px;background:#0c0c0c;border-top:1px solid #1a1a1a;display:flex;align-items:center;gap:10px;padding:0 20px;z-index:100}
+        .pb-art{width:36px;height:36px;object-fit:cover;border-radius:1px;flex-shrink:0}
+        .pb-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+        .pb-track{font-family:'Courier Prime',monospace;font-size:.8rem;color:#d4c49a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .pb-sub{font-family:'Courier Prime',monospace;font-size:.62rem;color:#555;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .pb-btn{background:none;border:none;color:#888;cursor:pointer;padding:5px;display:flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0;transition:color .15s,background .15s}
+        .pb-btn:hover{color:#f0ece4;background:#161616}
+        .pb-muted{color:#664444}
+        .pb-prog{height:2px;background:#1a1a1a;border-radius:1px;flex:1;overflow:hidden;cursor:pointer;padding:8px 0;margin:0}
+        .pb-fill{height:2px;border-radius:1px;transition:width .5s linear}
+
+        .yt-hidden{position:fixed;bottom:-10px;right:-10px;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden}
+
+        @keyframes npb{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+
+        @media(max-width:680px){
+          .hr-nav{padding:16px 16px 0}
+          .as-inner{padding:20px 16px 0}
+          .as-body{grid-template-columns:1fr;margin:0 -16px;padding:0 16px}
+          .as-tracks{border-right:none;border-bottom:1px solid #181818}
+          .pb{padding:0 12px;gap:8px}
+          .cf-wrap{height:240px}
+          .cf-album{width:180px;height:180px}
+        }
+      `}</style>
+
+      <div className={`hr-root${visible ? " visible" : ""}`}>
+        <div className="hr-nav">
+          <button className="hr-nav-logo" onClick={() => navigate("/")}>Weird.Baby</button>
+          <div className="hr-nav-sub">Hunter Root</div>
+          <div className="hr-rev">r16</div>
+        </div>
+
+        <Coverflow active={active} onSelect={(i) => selectAlbum(i, false)} onSelectClick={(i) => selectAlbum(i, true)} />
+
+        {SPINE.map((album, i) => (
+          <AlbumSection
+            key={album.id}
+            album={album}
+            albumIdx={i}
+            isOpen={i === activeDisplay}
+            playingTrackIdx={playingAlbum === i ? playingTrack : null}
+            playingVideoIdx={playingAlbum === i ? playingVideo : null}
+            onPlay={handlePlay}
+          />
+        ))}
+
+        <PlayerBar
+          video={curVideo} track={curTrack} album={curAlbum}
+          isPlaying={isPlaying} muted={muted}
+          onPlayPause={handlePlayPause}
+          onToggleMute={handleToggleMute}
+          progress={progress} onSeek={handleSeek}
+        />
+
+        <div className="yt-hidden"><div ref={yt.contRef} /></div>
+      </div>
+    </>
+  );
+}

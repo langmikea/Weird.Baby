@@ -1,0 +1,259 @@
+/* src/routes/shop/GiftShop.css
+ * Structural only. Spacing, sizing, hierarchy.
+ * No theme colors, no fonts, no shadows — layered on later against
+ * COMPONENT_PHILOSOPHY tokens.
+ */
+
+.gift-shop {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* Signage */
+.gift-shop__signage {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.gift-shop__title {
+  font-size: 2.5rem;
+  letter-spacing: 0.15em;
+  margin: 0;
+}
+
+/* Section scaffolding */
+.gift-shop__section {
+  margin: 3rem 0;
+}
+
+.gift-shop__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  opacity: 0.6;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* FEATURED ARTIST */
+.featured-artist {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 2fr;
+  gap: 1.5rem;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  border: 2px solid currentColor;
+  border-radius: 6px;
+  padding: 1.5rem;
+  transition: transform 0.15s ease;
+}
+
+.featured-artist:hover,
+.featured-artist:focus-visible {
+  transform: translateY(-2px);
+}
+
+.featured-artist__image-wrap {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: rgba(128, 128, 128, 0.1);
+  border-radius: 4px;
+}
+
+.featured-artist__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.featured-artist__image-placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+.featured-artist__name {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.featured-artist__blurb {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.featured-artist__cta {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* W.B MERCH */
+.wb-merch__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.wb-merch__item {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.15s ease;
+}
+
+.wb-merch__item:hover,
+.wb-merch__item:focus-visible {
+  transform: translateY(-2px);
+}
+
+.wb-merch__image-wrap {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: rgba(128, 128, 128, 0.1);
+}
+
+.wb-merch__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.wb-merch__image-placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+.wb-merch__title {
+  padding: 0.6rem 0.75rem 0.1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.wb-merch__price {
+  padding: 0 0.75rem 0.6rem;
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.wb-merch__placeholder {
+  text-align: center;
+  padding: 2rem 1rem;
+  border: 1px dashed currentColor;
+  border-radius: 4px;
+  opacity: 0.6;
+}
+
+.wb-merch__placeholder p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.gift-shop__cta-wrap {
+  text-align: center;
+}
+
+.gift-shop__cta {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid currentColor;
+  border-radius: 4px;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: opacity 0.15s ease;
+}
+
+.gift-shop__cta:hover,
+.gift-shop__cta:focus-visible {
+  opacity: 0.75;
+}
+
+/* FRIENDS */
+.friends__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+}
+
+.friends__card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  overflow: hidden;
+  padding-bottom: 0.85rem;
+  transition: transform 0.15s ease;
+}
+
+.friends__card:hover,
+.friends__card:focus-visible {
+  transform: translateY(-2px);
+}
+
+.friends__image-wrap {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: rgba(128, 128, 128, 0.1);
+  margin-bottom: 0.6rem;
+}
+
+.friends__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.friends__image-placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+.friends__name {
+  padding: 0 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.friends__blurb {
+  padding: 0 0.75rem;
+  font-size: 0.8rem;
+  opacity: 0.75;
+  line-height: 1.35;
+}
+
+/* EXIT */
+.gift-shop__exit {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.gift-shop__exit-link {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  border: 2px solid currentColor;
+  border-radius: 4px;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  transition: opacity 0.15s ease;
+}
+
+.gift-shop__exit-link:hover,
+.gift-shop__exit-link:focus-visible {
+  opacity: 0.75;
+}
