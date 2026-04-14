@@ -49,7 +49,7 @@ export default function WbAdmin() {
         .adm-note { font-style: italic; color: #555; font-size: 0.72rem; }
         .adm-founding { font-size: 0.58rem; color: #b8974a; border: 1px solid #2a2218; padding: 1px 5px; letter-spacing: 0.08em; }
         .adm-empty { color: #2a2a2a; font-style: italic; font-size: 0.8rem; padding: 16px 0; }
-        .adm-back { background: transparent; border: none; color: #2a2a2a; font-family: 'Courier Prime', monospace; font-size: 0.62rem; letter-spacing: 0.1em; cursor: pointer; text-transform: uppercase; transition: color 0.2s; }
+        .adm-back { background: transparent; border: none; color: #2a2a2a; font-family: 'Courier Prime', monospace; font-size: 0.62rem; letter-spacing: 0.1em; cursor: pointer; text-transform: uppercase; transition: color 0.2s; } .adm-jump { background: transparent; border: 1px solid #222; color: #555; font-family: 'Courier Prime', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; cursor: pointer; transition: border-color 0.2s, color 0.2s; text-decoration: none; display: inline-block; } .adm-jump:hover { border-color: #b8974a; color: #b8974a; }
         .adm-back:hover { color: #b8974a; }
         .adm-loading { color: #333; font-style: italic; padding: 60px; text-align: center; }
       `}</style>
@@ -62,6 +62,9 @@ export default function WbAdmin() {
             <div className="adm-build">built {new Date(__BUILD_TIME__).toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "2-digit", minute: "2-digit" })}</div>
           </div>
           <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+            <button className="adm-jump" onClick={() => navigate("/hr")}>/hr</button>
+            <button className="adm-jump" onClick={() => navigate("/cb")}>/cb</button>
+            <button className="adm-jump" onClick={() => navigate("/shop")}>/shop</button>
             <button className="adm-refresh" onClick={load}>↺ Refresh</button>
             <button className="adm-back" onClick={() => navigate("/")}>← Back</button>
           </div>

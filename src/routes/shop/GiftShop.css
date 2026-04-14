@@ -1,65 +1,76 @@
 /* src/routes/shop/GiftShop.css
- * Structural only. Spacing, sizing, hierarchy.
- * No theme colors, no fonts, no shadows — layered on later against
- * COMPONENT_PHILOSOPHY tokens.
+ * Museum dark theme. Matches HR/CB exhibit visual language.
+ * Single accent: #b8974a (museum gold).
  */
 
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;800&family=Courier+Prime:wght@400&display=swap');
+
 .gift-shop {
+  background: #080808;
+  color: #d4c49a;
+  min-height: 100vh;
   max-width: 960px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
+  padding: 3rem 1.5rem 5rem;
+  font-family: 'Courier Prime', monospace;
 }
 
-/* Signage */
+/* GIFT SHOP signage */
 .gift-shop__signage {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
 }
 
 .gift-shop__title {
-  font-size: 2.5rem;
-  letter-spacing: 0.15em;
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 2.75rem;
+  color: #f0ece4;
+  letter-spacing: 0.18em;
   margin: 0;
+  font-weight: 400;
 }
 
-/* Section scaffolding */
+/* Sections */
 .gift-shop__section {
-  margin: 3rem 0;
+  margin: 3.5rem 0;
 }
 
 .gift-shop__eyebrow {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.75rem;
-  opacity: 0.6;
+  letter-spacing: 0.22em;
+  font-size: 0.65rem;
+  color: #b8974a;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-/* FEATURED ARTIST */
+/* ─── FEATURED ARTIST ──────────────────────────────────────────────── */
 .featured-artist {
   display: grid;
-  grid-template-columns: minmax(200px, 1fr) 2fr;
-  gap: 1.5rem;
+  grid-template-columns: minmax(180px, 240px) 1fr;
+  gap: 2rem;
   align-items: center;
   text-decoration: none;
   color: inherit;
-  border: 2px solid currentColor;
-  border-radius: 6px;
-  padding: 1.5rem;
-  transition: transform 0.15s ease;
+  border: 1px solid #1a1a1a;
+  background: #0a0a0a;
+  padding: 1.75rem;
+  transition: border-color 0.2s, transform 0.2s;
 }
 
 .featured-artist:hover,
 .featured-artist:focus-visible {
+  border-color: #b8974a;
   transform: translateY(-2px);
 }
 
 .featured-artist__image-wrap {
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: rgba(128, 128, 128, 0.1);
-  border-radius: 4px;
+  background: #050505;
+  border: 1px solid #1a1a1a;
 }
 
 .featured-artist__image {
@@ -69,30 +80,52 @@
   display: block;
 }
 
-.featured-artist__image-placeholder {
+.featured-artist__image-fallback {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+  background: linear-gradient(135deg, #b8974a22 0%, #0a0a0a 65%, #050505 100%);
+}
+
+.featured-artist__image-fallback-name {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.4rem;
+  color: #f0ece4;
+  line-height: 1.2;
 }
 
 .featured-artist__name {
-  font-size: 1.75rem;
-  font-weight: 600;
-  margin-bottom: 0.4rem;
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 2rem;
+  color: #f0ece4;
+  margin-bottom: 0.6rem;
+  line-height: 1.1;
 }
 
 .featured-artist__blurb {
-  font-size: 0.95rem;
-  opacity: 0.8;
-  margin-bottom: 1rem;
-  line-height: 1.4;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.88rem;
+  color: #888;
+  margin-bottom: 1.4rem;
+  line-height: 1.55;
+  max-width: 42ch;
 }
 
 .featured-artist__cta {
-  font-size: 1rem;
+  font-family: 'Syne', sans-serif;
   font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #b8974a;
 }
 
-/* W.B MERCH */
+/* ─── WEIRD.BABY MERCH ─────────────────────────────────────────────── */
 .wb-merch__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -104,21 +137,22 @@
   display: block;
   text-decoration: none;
   color: inherit;
-  border: 1px solid currentColor;
-  border-radius: 4px;
+  border: 1px solid #1a1a1a;
+  background: #0a0a0a;
   overflow: hidden;
-  transition: transform 0.15s ease;
+  transition: border-color 0.2s, transform 0.2s;
 }
 
 .wb-merch__item:hover,
 .wb-merch__item:focus-visible {
+  border-color: #b8974a;
   transform: translateY(-2px);
 }
 
 .wb-merch__image-wrap {
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: rgba(128, 128, 128, 0.1);
+  background: #050505;
 }
 
 .wb-merch__image {
@@ -134,28 +168,33 @@
 }
 
 .wb-merch__title {
-  padding: 0.6rem 0.75rem 0.1rem;
-  font-size: 0.9rem;
-  font-weight: 500;
+  padding: 0.7rem 0.85rem 0.15rem;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.82rem;
+  color: #d4c49a;
 }
 
 .wb-merch__price {
-  padding: 0 0.75rem 0.6rem;
-  font-size: 0.85rem;
-  opacity: 0.75;
+  padding: 0 0.85rem 0.7rem;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.75rem;
+  color: #666;
 }
 
 .wb-merch__placeholder {
   text-align: center;
-  padding: 2rem 1rem;
-  border: 1px dashed currentColor;
-  border-radius: 4px;
-  opacity: 0.6;
+  padding: 2.25rem 1rem;
+  border: 1px dashed #222;
+  color: #555;
+  background: #0a0a0a;
 }
 
 .wb-merch__placeholder p {
   margin: 0;
-  font-size: 0.95rem;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.85rem;
+  font-style: italic;
+  letter-spacing: 0.04em;
 }
 
 .gift-shop__cta-wrap {
@@ -164,49 +203,54 @@
 
 .gift-shop__cta {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
-  border: 2px solid currentColor;
-  border-radius: 4px;
-  text-decoration: none;
-  color: inherit;
+  padding: 0.75rem 1.6rem;
+  border: 1px solid #b8974a;
+  background: transparent;
+  color: #b8974a;
+  font-family: 'Syne', sans-serif;
   font-weight: 600;
-  font-size: 0.95rem;
-  transition: opacity 0.15s ease;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
 }
 
 .gift-shop__cta:hover,
 .gift-shop__cta:focus-visible {
-  opacity: 0.75;
+  background: #b8974a;
+  color: #050505;
 }
 
-/* FRIENDS */
+/* ─── FRIENDS ──────────────────────────────────────────────────────── */
 .friends__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1.5rem;
 }
 
 .friends__card {
   display: block;
   text-decoration: none;
   color: inherit;
-  border: 1px solid currentColor;
-  border-radius: 4px;
-  overflow: hidden;
-  padding-bottom: 0.85rem;
-  transition: transform 0.15s ease;
+  border: 1px solid #1a1a1a;
+  background: #0a0a0a;
+  padding-bottom: 1rem;
+  transition: border-color 0.2s, transform 0.2s;
 }
 
 .friends__card:hover,
 .friends__card:focus-visible {
+  border-color: #b8974a;
   transform: translateY(-2px);
 }
 
 .friends__image-wrap {
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: rgba(128, 128, 128, 0.1);
-  margin-bottom: 0.6rem;
+  background: #050505;
+  margin-bottom: 0.85rem;
+  border-bottom: 1px solid #1a1a1a;
 }
 
 .friends__image {
@@ -216,44 +260,85 @@
   display: block;
 }
 
-.friends__image-placeholder {
+.friends__image-fallback {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  background: linear-gradient(135deg, #b8974a22 0%, #0a0a0a 65%, #050505 100%);
+}
+
+.friends__image-fallback-name {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.1rem;
+  color: #f0ece4;
+  line-height: 1.2;
 }
 
 .friends__name {
-  padding: 0 0.75rem;
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
+  padding: 0 0.95rem 0.25rem;
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.1rem;
+  color: #f0ece4;
 }
 
 .friends__blurb {
-  padding: 0 0.75rem;
-  font-size: 0.8rem;
-  opacity: 0.75;
-  line-height: 1.35;
+  padding: 0 0.95rem;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.74rem;
+  color: #777;
+  line-height: 1.45;
 }
 
-/* EXIT */
+/* ─── EXIT (right-aligned) ─────────────────────────────────────────── */
 .gift-shop__exit {
-  margin-top: 4rem;
-  text-align: center;
+  margin-top: 4.5rem;
+  text-align: right;
 }
 
 .gift-shop__exit-link {
   display: inline-block;
-  padding: 0.85rem 2rem;
-  border: 2px solid currentColor;
-  border-radius: 4px;
-  text-decoration: none;
-  color: inherit;
+  padding: 0.95rem 2.25rem;
+  border: 1px solid #b8974a;
+  background: transparent;
+  color: #b8974a;
+  font-family: 'Syne', sans-serif;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  transition: opacity 0.15s ease;
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
 }
 
 .gift-shop__exit-link:hover,
 .gift-shop__exit-link:focus-visible {
-  opacity: 0.75;
+  background: #b8974a;
+  color: #050505;
+}
+
+/* ─── MOBILE ───────────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .gift-shop {
+    padding: 2rem 1rem 4rem;
+  }
+  .gift-shop__title {
+    font-size: 2rem;
+  }
+  .featured-artist {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem;
+  }
+  .featured-artist__name {
+    font-size: 1.6rem;
+  }
+  .friends__grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
 }

@@ -10,12 +10,7 @@
 //   3. FEATURED — one artist, prominent, links out to their external store
 //   4. WEIRD.BABY — the museum's own merch (coming soon until pipeline is live)
 //   5. FRIENDS — the full roster, displayed out of love
-//   6. LOBBY exit
-//
-// Featured artist selection:
-//   - /shop?from=<id>  -> that artist (arrived via exhibit exit)
-//   - /shop            -> random pick from roster
-//   - /shop?from=junk  -> random pick (unknown id falls back gracefully)
+//   6. LOBBY exit (right-aligned)
 
 import React, { useEffect, useMemo, useRef } from "react";
 import { Link, useSearchParams } from "react-router-dom";
@@ -27,25 +22,19 @@ export default function GiftShop() {
   const [searchParams] = useSearchParams();
   const fromId = searchParams.get("from");
 
-  // Deterministic when arriving from an exhibit. Random otherwise.
-  // useMemo so the random pick is stable for the lifetime of this mount
-  // (refreshing the page is what reshuffles — that's intentional).
   const featured = useMemo(() => {
     const fromExhibit = getArtistById(fromId);
     return fromExhibit || pickRandomArtist();
   }, [fromId]);
 
-  // Walked-in bell. Plays once on mount. If the audio file is missing,
-  // the play() promise rejects silently and the page still works.
+  // Walked-in bell. Plays once on mount. Silent fail if file missing.
   const bellRef = useRef(null);
   useEffect(() => {
     const bell = bellRef.current;
     if (!bell) return;
     const playPromise = bell.play();
     if (playPromise && typeof playPromise.catch === "function") {
-      playPromise.catch(() => {
-        // No bell file, autoplay blocked, etc. — room still works, stay silent.
-      });
+      playPromise.catch(() => {});
     }
   }, []);
 
@@ -81,10 +70,11 @@ export default function GiftShop() {
                   className="featured-artist__image"
                 />
               ) : (
-                <div
-                  className="featured-artist__image-placeholder"
-                  aria-hidden="true"
-                />
+                <div className="featured-artist__image-fallback" aria-hidden="true">
+                  <div className="featured-artist__image-fallback-name">
+                    {featured.name}
+                  </div>
+                </div>
               )}
             </div>
             <div className="featured-artist__meta">
@@ -169,7 +159,11 @@ export default function GiftShop() {
                     className="friends__image"
                   />
                 ) : (
-                  <div className="friends__image-placeholder" />
+                  <div className="friends__image-fallback" aria-hidden="true">
+                    <div className="friends__image-fallback-name">
+                      {artist.name}
+                    </div>
+                  </div>
                 )}
               </div>
               <div className="friends__name">{artist.name}</div>
@@ -181,10 +175,10 @@ export default function GiftShop() {
         </div>
       </section>
 
-      {/* LOBBY EXIT */}
-      <nav className="gift-shop__exit" aria-label="Gift shop exits">
+      {/* LOBBY EXIT — right-aligned */}
+      <nav className="gift-shop__exit" aria-label="Gift shop exit">
         <Link to="/" className="gift-shop__exit-link">
-          ← LOBBY
+          LOBBY →
         </Link>
       </nav>
     </div>

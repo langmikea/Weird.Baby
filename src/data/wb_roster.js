@@ -16,18 +16,18 @@ export const wbRoster = [
     id: "hr",
     name: "Hunter Root",
     exhibitRoute: "/hr",
-    storeUrl: "https://hunterroot.com/merch",
+    storeUrl: "https://www.hunterroot.com/",
     storePlatform: "Squarespace",
-    image: "/images/roster/hunter-root.jpg", // TODO: add actual image
+    image: null, // typography fallback until photo added
     blurb: "Central PA songwriter. Six albums. Aphantasic lyric cinema.",
   },
   {
     id: "cb",
     name: "Carsie Blanton",
     exhibitRoute: "/cb",
-    storeUrl: "https://store.carsieblanton.com/",
+    storeUrl: "https://store.carsieblanton.com/collections/featured-merch",
     storePlatform: "Shopify",
-    image: "/images/roster/carsie-blanton.jpg", // TODO: add actual image
+    image: null, // typography fallback until photo added
     blurb: "Songwriter with hooks, chutzpah, and revolutionary optimism.",
   },
 ];
