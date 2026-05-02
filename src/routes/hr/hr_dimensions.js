@@ -1,4 +1,4 @@
-// ─── HR_DIMENSIONS — active filter dimensions for the HR dock ───────────────
+// ─── HR_DIMENSIONS — active filter dimensions for the HR deck ───────────────
 // Phase 1.5b. Derived from src/data/hr_archive.js, src/data/hr_artifacts.js,
 // src/data/hr_exit_flow.js, and src/data/artists/hunter-root.js.
 //

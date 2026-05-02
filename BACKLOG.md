@@ -79,15 +79,15 @@ persist. Users should own their entries.
 **Weighted Journal Selection Tied to Live Vote Data.** Currently
 random/weighted by static config. Should reflect actual votes.
 
-**ytId duplicate-tile question.** The `ytId` value `FbOoHjoSyec` appears on
+**ytId duplicate-card question.** The `ytId` value `FbOoHjoSyec` appears on
 both an `HR_ARTIFACTS` entry (`art-8-2022-09-09`) and an `HR_ARCHIVE` entry
 (`arc-20-2022-09-09`) — same video referenced twice across two source files.
 Phase 1.5d normalized the URL fallback; the deduping question (do we want
-two tiles pointing at the same video?) is still open.
+two cards pointing at the same video?) is still open.
 
-**Mobile UX polish.** Inline scroll-snap dock + artifact grid haven't been
+**Mobile UX polish.** Inline scroll-snap deck + artifact grid haven't been
 tested at narrow widths since the Phase 1.5 port. Pass through the
-viewports the gift shop covers and confirm tap targets and dock tab strip
+viewports the gift shop covers and confirm tap targets and deck tab strip
 behave.
 
 ---
@@ -139,5 +139,5 @@ platform category, unused-4 disposition, rarity/scope depth check. Cleanups
 - LyricMap workshop tool (deleted Phase 1)
 - Orphan HR files: HrPanel2, HrPanel3, HrMerch (deleted Phase 1)
 - `/hr/merch` redirect (route removed Phase 1)
-- v28 dock ported to HrExhibitFlow (Phase 1.5)
+- v28 deck ported to HrExhibitFlow (Phase 1.5)
 - video_kind Normalization Pass (already done in v31, was lingering)

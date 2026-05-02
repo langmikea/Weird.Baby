@@ -30,7 +30,7 @@ UX_CONTROLS_SPEC_v0.3.
 
 - Phase 0 — project self-contained (commit dce3bb2)
 - Phase 1 — museum HR-only (commit 12d50da)
-- Phase 1.5 — v28 dock ported to HrExhibitFlow (commit 21c62a5)
+- Phase 1.5 — v28 deck ported to HrExhibitFlow (commit 21c62a5)
 - Cleanup — quarantine removed, STATE/BACKLOG rewritten (this commit)
 
 ## Open backlog

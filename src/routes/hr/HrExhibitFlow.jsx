@@ -1,21 +1,21 @@
 // ─── HR EXHIBIT FLOW — Phase 1.5b port of prototype_a_v28.html ──────────────
 // This component renders, as an inline section below the live exhibit's main
-// row, an artifact grid above a 6-tab dock. The dock follows the v28
+// row, an artifact grid above a 6-tab deck. The deck follows the v28
 // prototype's structure (Artist | Formats | Deep Tracks | Journal | Presets |
 // ✕) but operates on HR's existing data shapes.
 //
 // Architecture notes:
-//   - O4 = (B): inline section. Exhibit.jsx is not edited. The dock sits at
+//   - O4 = (B): inline section. Exhibit.jsx is not edited. The deck sits at
 //     the section's bottom via position: sticky; bottom: 0. The grid above
 //     scrolls inside the section.
 //   - O6 = hybrid: static styles live in HrExhibitFlow.css. Parameterized
 //     S.* builders that take props remain as inline JS objects in this file.
-//   - O7: localStorage key is `wb-hr-dock-height` (HR-namespaced).
+//   - O7: localStorage key is `wb-hr-deck-height` (HR-namespaced).
 //   - O8: preset snapshots capture player state for display only — APPLY
 //     does not restore player state in v1. Comment block at makePresetSnapshot.
 //   - O9: Shuffle / Loop pills toggle local state but no-op against the
 //     player. Comment block at PresetsContent.
-//   - O11: @media(max-width: 720px) hides the dock and falls back to inline
+//   - O11: @media(max-width: 720px) hides the deck and falls back to inline
 //     stacked pill columns above the artifact grid (HrExhibitFlow.css).
 //   - O12: AuditStrip rendered only in import.meta.env.DEV.
 //   - O15: GROUP_LABELS reused verbatim from the prototype.
@@ -61,13 +61,13 @@ void [LED_OFF, LED_GREEN, LED_YELLOW, LED_RED];
 const serifDisplay = "'Fraunces', 'Playfair Display', Georgia, serif";
 const sansBody = "'Geist', 'Inter', system-ui, -apple-system, sans-serif";
 
-// ─── DOCK CONSTANTS — preserved from v28, STORAGE_KEY HR-namespaced ─────────
+// ─── DECK CONSTANTS — preserved from v28, STORAGE_KEY HR-namespaced ─────────
 const TAB_PEEK = 14;
 const TAB_STRIP_H = 42;
-const DOCK_MIN_H = 200;
-const DOCK_MAX_FRAC = 0.75;
-const DOCK_DEFAULT_H_SHARED = 480;
-const STORAGE_KEY = "wb-hr-dock-height"; // O7 — matches wb-hr-split / wb-hr-cfh
+const DECK_MIN_H = 200;
+const DECK_MAX_FRAC = 0.75;
+const DECK_DEFAULT_H_SHARED = 480;
+const STORAGE_KEY = "wb-hr-deck-height"; // O7 — matches wb-hr-split / wb-hr-cfh
 const HOVER_DELAY_OPEN = 60;
 const HOVER_DELAY_CLOSE = 450;
 
@@ -172,20 +172,20 @@ function kalIsDefault(k) {
 
 // ─── PARAMETERIZED STYLES — kept inline per O6 (hybrid CSS strategy) ────────
 // Static styles live in HrExhibitFlow.css (.hr-* classes). Parameterized
-// builders that take props (active state, widths, open state, dockPx, etc.)
+// builders that take props (active state, widths, open state, deckPx, etc.)
 // stay here as inline JS objects.
 const S = {
-  // panelPos: positions the artifact-grid pane above the dock. dockPx changes
-  // as the dock peeks / opens / resizes.
-  panelPos: (dockPx) => ({
-    position: "absolute", left: 0, right: 0, top: 0, bottom: dockPx + "px",
+  // panelPos: positions the artifact-grid pane above the deck. deckPx changes
+  // as the deck peeks / opens / resizes.
+  panelPos: (deckPx) => ({
+    position: "absolute", left: 0, right: 0, top: 0, bottom: deckPx + "px",
   }),
 
-  // dock: bottom-anchored. height swings between TAB_PEEK / TAB_STRIP_H /
+  // deck: bottom-anchored. height swings between TAB_PEEK / TAB_STRIP_H /
   // resizable open height.
-  dock: (dockPx) => ({
+  deck: (deckPx) => ({
     position: "absolute", left: 0, right: 0, bottom: 0,
-    height: dockPx + "px",
+    height: deckPx + "px",
     background: "transparent",
     zIndex: 10,
     pointerEvents: "none",
@@ -193,7 +193,7 @@ const S = {
 
   // tab: per-tab chrome. Active = bright + bold + INK_SOFT fill. Inactive =
   // GOLD_LO border + DIM text. isClose = small ✕ tab.
-  tab: (active, dockOpen, width, isClose) => {
+  tab: (active, deckOpen, width, isClose) => {
     const borderColor = active ? GOLD_HI : GOLD_LO;
     const textColor   = active ? GOLD_HI : DIM;
     return {
@@ -217,7 +217,7 @@ const S = {
     };
   },
 
-  // resizeHandle: ns-resize affordance at top of dockBody.
+  // resizeHandle: ns-resize affordance at top of deckBody.
   resizeHandle: (hovered) => ({
     position: "absolute", top: "-4px",
     left: 0, right: 0, height: "8px",
@@ -744,7 +744,7 @@ function SessionCard({ card }) {
 function ArtifactCard({ card }) {
   const isPress = card.render === "press";
   const isEssay = card.render === "essay";
-  // Phase 1.5c: voice tiles (HR_EXIT_FLOW) get a distinct visual treatment;
+  // Phase 1.5c: voice cards (HR_EXIT_FLOW) get a distinct visual treatment;
   // cards with an externalUrl become clickable and open in a new tab.
   const isVoice = card.contentClass === "voice";
   const isLink = !!card.externalUrl;
@@ -807,7 +807,7 @@ function P3Panel({ matched, totalCount }) {
     <>
       <div className="hr-page-header">
         <div className="hr-eyebrow">Weird.Baby · Hunter Root · {HR_CARDS.length} artifacts</div>
-        <h1 className="hr-page-title">the artifact dock</h1>
+        <h1 className="hr-page-title">the artifact deck</h1>
         <p className="hr-page-sub">
           Six tabs: Artist · Formats · Deep Tracks · Journal · Presets · ✕.
           Search lives inside Deep Tracks. Shuffle and Loop appear in Presets
@@ -1049,9 +1049,9 @@ function PresetsContent({
   );
 }
 
-// ─── JOURNAL — ported from quarantined HrExhibitFlow.jsx, fitted to dock body
+// ─── JOURNAL — ported from quarantined HrExhibitFlow.jsx, fitted to deck body
 // O5: Journal renders as the body of a tab between Deep Tracks and Presets.
-// Layout adapts to the dock body's flexible height (default 480px, resizable).
+// Layout adapts to the deck body's flexible height (default 480px, resizable).
 // Vertical scroll inside the tab body when entries overflow.
 const SEED_ENTRIES = [
   { id: 1, date: "2025-11-02", handle: "velvetcassette", ctx: "'Town Rat Heathen'", era: "solo",
@@ -1361,7 +1361,7 @@ function AuditStrip() {
 // ─── ROOT — HrExhibitFlow component, exported for Exhibit.jsx line 908 ──────
 export default function HrExhibitFlow({ activeAlbumId }) {
   // activeAlbumId is accepted for prop compatibility with Exhibit.jsx but
-  // is not consumed by the dock in v1. Future tabs / filters may key off
+  // is not consumed by the deck in v1. Future tabs / filters may key off
   // it (e.g., to seed era from album).
   void activeAlbumId;
   const [query, setQuery] = useState("");
@@ -1377,15 +1377,15 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   const [spinePosition] = useState(null);
   const [activeTab, setActiveTab] = useState(null);
   const [hoverPeek, setHoverPeek] = useState(false);
-  const [dockHeight, setDockHeight] = useState(() => {
+  const [deckHeight, setDeckHeight] = useState(() => {
     try {
       const raw = typeof localStorage !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
       if (raw) {
         const n = parseInt(raw, 10);
-        if (!isNaN(n) && n >= DOCK_MIN_H) return n;
+        if (!isNaN(n) && n >= DECK_MIN_H) return n;
       }
     } catch { /* ignore */ }
-    return DOCK_DEFAULT_H_SHARED;
+    return DECK_DEFAULT_H_SHARED;
   });
   const [resizing, setResizing] = useState(false);
   const [resizeHover, setResizeHover] = useState(false);
@@ -1397,10 +1397,10 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   useEffect(() => {
     try {
       if (typeof localStorage !== "undefined") {
-        localStorage.setItem(STORAGE_KEY, String(dockHeight));
+        localStorage.setItem(STORAGE_KEY, String(deckHeight));
       }
     } catch { /* ignore */ }
-  }, [dockHeight]);
+  }, [deckHeight]);
 
   // Tag filters narrow the catalog. Kaleidoscope recipe is dormant in v1.
   const tagFiltered = useMemo(
@@ -1444,7 +1444,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   useEffect(() => {
     const onResize = () => {
       const vh = window.innerHeight;
-      setDockHeight(prev => Math.max(DOCK_MIN_H, Math.min(prev, vh * DOCK_MAX_FRAC)));
+      setDeckHeight(prev => Math.max(DECK_MIN_H, Math.min(prev, vh * DECK_MAX_FRAC)));
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
@@ -1466,10 +1466,10 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   };
 
   const open = activeTab !== null && activeTab !== "close";
-  let dockPx;
-  if (open) dockPx = dockHeight;
-  else if (hoverPeek) dockPx = TAB_STRIP_H;
-  else dockPx = TAB_PEEK;
+  let deckPx;
+  if (open) deckPx = deckHeight;
+  else if (hoverPeek) deckPx = TAB_STRIP_H;
+  else deckPx = TAB_PEEK;
 
   const handleTabClick = (tabKey) => {
     if (tabKey === "close") { setActiveTab(null); setHoverPeek(false); return; }
@@ -1482,12 +1482,12 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   const startResize = useCallback((e) => {
     e.preventDefault(); e.stopPropagation();
     setResizing(true);
-    const startY = e.clientY, startH = dockHeight, vh = window.innerHeight;
+    const startY = e.clientY, startH = deckHeight, vh = window.innerHeight;
     const onMove = (me) => {
       const dy = me.clientY - startY;
       let next = startH - dy;
-      next = Math.max(DOCK_MIN_H, Math.min(next, vh * DOCK_MAX_FRAC));
-      setDockHeight(next);
+      next = Math.max(DECK_MIN_H, Math.min(next, vh * DECK_MAX_FRAC));
+      setDeckHeight(next);
     };
     const onUp = () => {
       setResizing(false);
@@ -1496,7 +1496,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
     };
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseup", onUp);
-  }, [dockHeight]);
+  }, [deckHeight]);
 
   const animClass = "animated" + (resizing ? " resizing" : (!open && hoverPeek ? " quick" : ""));
   const panelClickHandler = () => {
@@ -1508,14 +1508,14 @@ export default function HrExhibitFlow({ activeAlbumId }) {
     ? TABS.find(t => t.key === activeTab)
     : null;
 
-  // Mobile fallback flag (O11). The CSS hides the dock and re-flows pill
+  // Mobile fallback flag (O11). The CSS hides the deck and re-flows pill
   // columns inline above the grid below 720px. We render the pill columns
   // unconditionally; visibility is controlled by the .hr-mobile-pills /
-  // .hr-section-dock-host CSS rules so the React tree stays stable.
+  // .hr-section-deck-host CSS rules so the React tree stays stable.
   return (
     <section className="hr-section">
       {/* MOBILE FALLBACK — pill columns render inline above the grid on
-          narrow viewports. CSS hides this on desktop and hides the dock
+          narrow viewports. CSS hides this on desktop and hides the deck
           on mobile. */}
       <div className="hr-mobile-pills">
         {HR_DIMENSIONS.map(dim => (
@@ -1527,18 +1527,18 @@ export default function HrExhibitFlow({ activeAlbumId }) {
         ))}
       </div>
 
-      {/* DOCK HOST — sized so the dock can sit at its bottom via sticky
-          positioning. The grid scrolls inside hr-section-dock-host. */}
-      <div className="hr-section-dock-host">
+      {/* DECK HOST — sized so the deck can sit at its bottom via sticky
+          positioning. The grid scrolls inside hr-section-deck-host. */}
+      <div className="hr-section-deck-host">
         <div className={"animated " + (resizing ? "resizing " : (!open && hoverPeek ? "quick " : ""))}
-             style={{ ...S.panelPos(dockPx), position: "absolute" }}
+             style={{ ...S.panelPos(deckPx), position: "absolute" }}
              onClick={panelClickHandler}>
           <div className="wb-scroll hr-panel-scroll">
             <P3Panel matched={finalMatched} totalCount={HR_CARDS.length} />
           </div>
         </div>
 
-        <div className={animClass} style={S.dock(dockPx)} onClick={(e) => e.stopPropagation()}>
+        <div className={animClass} style={S.deck(deckPx)} onClick={(e) => e.stopPropagation()}>
           <div
             className="hr-tab-strip"
             onMouseEnter={() => { if (!open) { cancelHoverTimer(); scheduleHoverOpen(); } }}
@@ -1570,7 +1570,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
           </div>
 
           {open && currentTab && (
-            <div className="hr-dock-body">
+            <div className="hr-deck-body">
               <div
                 style={S.resizeHandle(resizeHover || resizing)}
                 onMouseDown={startResize}

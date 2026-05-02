@@ -1,10 +1,10 @@
-// ─── HR_CARDS — the artifact grid input for the HR dock ─────────────────────
+// ─── HR_CARDS — the artifact grid input for the HR deck ─────────────────────
 // Phase 1.5b. Adapts HR's existing data shapes to the prototype's card shape.
 //
 // SCOPE NOTE (deviation from a strict reading of Step 2):
 //   The merge brief says "HR's artifacts live in hr_artifacts.js." A strict
 //   reading would feed only HR_ARTIFACTS (10 items) into the grid. With the
-//   <3-distinct-values rule that limits the dock to two filter dimensions
+//   <3-distinct-values rule that limits the deck to two filter dimensions
 //   and a near-empty grid. This module instead pulls from all three HR
 //   "card-like" data files (HR_ARTIFACTS + HR_ARCHIVE + HR_EXIT_FLOW)
 //   so the grid and the filters have something to work with. See
@@ -39,7 +39,7 @@
 //                  constructed `https://www.youtube.com/watch?v=${ytId}`
 //                  URL when `ytId` is present on HR_ARTIFACTS / HR_ARCHIVE
 //                  entries and no other URL field is set. HR_EXIT_FLOW
-//                  entries remain null by design (voice tiles, non-clickable).
+//                  entries remain null by design (voice cards, non-clickable).
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { HR_ARTIFACTS } from "../../data/hr_artifacts.js";
@@ -236,7 +236,7 @@ export function hrExitFlowItemToCardShape(item, idx = 0) {
   return base;
 }
 
-// ─── HR_CARDS — the input to the dock's filter logic ────────────────────────
+// ─── HR_CARDS — the input to the deck's filter logic ────────────────────────
 export const HR_CARDS = [
   ...HR_ARTIFACTS.map((a, i) => hrArtifactToCardShape(a, i)),
   ...HR_ARCHIVE.map((a, i) => hrArchiveItemToCardShape(a, i)),

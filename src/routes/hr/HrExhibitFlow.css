@@ -1,6 +1,6 @@
 /* ─── HR EXHIBIT FLOW — static styles ────────────────────────────────────────
-   Phase 1.5b. Static styles for the inline-section dock. Parameterized
-   builders (per-pill, per-tab, dock height, etc.) stay inline as JS objects
+   Phase 1.5b. Static styles for the inline-section deck. Parameterized
+   builders (per-pill, per-tab, deck height, etc.) stay inline as JS objects
    in HrExhibitFlow.jsx (S.*). Anything that doesn't take props lives here.
 
    Naming: .hr-* prefix for HR-specific classes. .wb-scroll, .pillscroll,
@@ -40,18 +40,18 @@
   flex-direction: column;
 }
 
-/* ── Dock host ─────────────────────────────────────────────────────────── */
-/* Sized so the dock can sit at its bottom via sticky positioning. Inside
+/* ── Deck host ─────────────────────────────────────────────────────────── */
+/* Sized so the deck can sit at its bottom via sticky positioning. Inside
    this host we place an absolutely-positioned panel (the grid pane) and a
-   sticky-bottom dock. The panel scrolls; the dock is always reachable. */
-.hr-section-dock-host {
+   sticky-bottom deck. The panel scrolls; the deck is always reachable. */
+.hr-section-deck-host {
   position: relative;
   flex: 1;
   min-height: calc(100vh - 64px);
   overflow: hidden;
 }
 
-/* ── Panel (artifact grid pane above the dock) ─────────────────────────── */
+/* ── Panel (artifact grid pane above the deck) ─────────────────────────── */
 .hr-panel-scroll {
   position: absolute;
   inset: 0;
@@ -169,10 +169,10 @@
   color: var(--hr-gold-hi);
 }
 
-/* ── Phase 1.5c — voice tiles (curatorial commentary; HR_EXIT_FLOW) ────── */
+/* ── Phase 1.5c — voice cards (curatorial commentary; HR_EXIT_FLOW) ────── */
 /* Warmer background and a small "curator's note" badge in the top-right
    corner, anchored in the GOLD accent. Distinguishable at a glance from
-   the colder evidence tiles. */
+   the colder evidence cards. */
 .hr-card-voice {
   background: rgba(50, 38, 14, 0.55) !important;
   border-color: var(--hr-gold-mute) !important;
@@ -435,8 +435,8 @@
 /* tab-hoverable applies to inactive tab divs */
 .tab-hoverable:hover { border-color: var(--hr-gold) !important; color: var(--hr-gold-hi) !important; }
 
-/* ── Dock body (the panel that opens upward) ───────────────────────────── */
-.hr-dock-body {
+/* ── Deck body (the panel that opens upward) ───────────────────────────── */
+.hr-deck-body {
   position: absolute;
   top: 42px; left: 0; right: 0; bottom: 0;
   background: var(--hr-ink);
@@ -660,7 +660,7 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
 .pillscroll { scrollbar-width: thin; scrollbar-color: var(--hr-border-hi) transparent; }
 
 /* ── Journal — adapted from quarantined HrExhibitFlow.jsx ───────────────── */
-/* Layout fits inside hr-content-body (the dock body's flex content). */
+/* Layout fits inside hr-content-body (the deck body's flex content). */
 .hr-journal-body {
   display: flex;
   flex-direction: column;
@@ -1006,10 +1006,10 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
 }
 
 /* ── Mobile (O11) ──────────────────────────────────────────────────────── */
-/* Below 720px, hide the dock entirely and render the pill columns inline
+/* Below 720px, hide the deck entirely and render the pill columns inline
    above the artifact grid as a simple stack. No tab strip, no resize. */
 @media (max-width: 720px) {
-  .hr-section-dock-host { overflow: visible; min-height: auto; }
+  .hr-section-deck-host { overflow: visible; min-height: auto; }
   .hr-panel-scroll {
     position: static;
     inset: auto;
@@ -1017,14 +1017,14 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
     padding: 1rem 0.75rem;
   }
   .hr-tab-strip,
-  .hr-dock-body {
+  .hr-deck-body {
     display: none;
   }
-  /* Hide the absolute dock chrome entirely. */
+  /* Hide the absolute deck chrome entirely. */
   .hr-section .animated {
     transition: none;
   }
-  .hr-section .hr-section-dock-host > .animated:not(:first-child) {
+  .hr-section .hr-section-deck-host > .animated:not(:first-child) {
     display: none;
   }
   /* Show the inline pill stack at the top of the section. */
