@@ -315,4 +315,117 @@ Zero hits inside `src/`. Pass.
 
 ### Clarification D — `.bak` / comment guard
 
-The brief's continuation said: if `grep` returns hits, check whether they're inside `.bak` files or comments before stopping. This guard **was not exercised** because the grep ret
+The brief's continuation said: if `grep` returns hits, check whether they're inside `.bak` files or comments before stopping. This guard **was not exercised** because the grep returned zero hits. The recursive grep at `src/` already includes `.bak` files in its sweep — they're inside the directory tree being walked. So the zero-hits result already covers the `HrSpine.jsx.bak` / `HrSpine.jsx.r23.bak` files in `src/routes/hr/`.
+
+For explicit belt-and-suspenders confirmation, the same pattern was re-run constrained to `.bak` files only:
+
+```
+$ grep -rn --include="*.bak" "import.*\(carsie-blanton\|cb_\|CbSpine\|CbExhibitFlow\|LyricMap\|HrWorkshop\|bd_data\|tp_data\|HrPanel2\|HrPanel3\|HrMerch\)" src/
+(no output)
+$ echo "exit=$?"
+exit=1
+```
+
+Zero hits in `.bak` files either. No comment-or-bak edge case exists to investigate.
+
+---
+
+## Step 9 — Build verification — **NOT VERIFIED IN SANDBOX**
+
+`npx vite build` was run from the project root. It **failed before reaching any source file**, with the following error:
+
+```
+file:///…/node_modules/rolldown/dist/shared/binding-Rc5vBspi.mjs:507
+  if (loadErrors.length > 0) throw new Error("Cannot find native binding...")
+
+Error: Cannot find native binding. npm has a bug related to optional dependencies …
+
+  [cause]: Error: Cannot find module '@rolldown/binding-linux-x64-gnu'
+    code: 'MODULE_NOT_FOUND',
+    cause: Error: Cannot find module '../rolldown-binding.linux-x64-gnu.node'
+```
+
+### Diagnosis
+
+This is **not a code error.** It is an `npm` optional-dependency / cross-platform issue (npm bug [#4828](https://github.com/npm/cli/issues/4828)). Your `node_modules/` was installed on Windows, which pulled the Windows native binding for rolldown. The Cowork shell is Linux, so when vite tries to load `@rolldown/binding-linux-x64-gnu`, the package isn't present.
+
+The brief instructed: **"If it fails, report the error and stop — do not attempt fixes."** I did not run `npm install`, did not delete `node_modules` or `package-lock.json`, did not switch package managers. The build is unverified in this sandbox.
+
+### What this leaves
+
+The code-level signal we have is the Step 8 grep, which shows no live file in `src/` references any of the moved modules under their old names. `App.jsx` still imports only files that still exist. `wb_roster.js` is internally consistent. No edit touched any file outside the three listed (App.jsx, wb_roster.js, index.html). It is *plausible* the build will succeed, but Phase 1's "must succeed" gate is not formally cleared.
+
+### Recommended next action
+
+Run `npx vite build` from `C:\AI\Projects\weird-baby-update\` on Windows. If it passes, Phase 1 is complete. If it fails, capture the error and report.
+
+Per the brief I have **not** run `wrangler deploy`.
+
+---
+
+## Step 10 — Files edited and moved (consolidated)
+
+### Files edited (3)
+
+| File                              | Change                                                                                  |
+| --------------------------------- | --------------------------------------------------------------------------------------- |
+| `src/App.jsx`                     | Removed `HrWorkshop`, `LyricMap`, `CbSpine` imports and three routes (`/cb`, `/hr/workshop`, `/hr/workshop/lyric-map`). |
+| `src/data/wb_roster.js`           | Removed the `{ id: "cb", ... }` Carsie Blanton entry from the `wbRoster` array.         |
+| `index.html`                      | Replaced `<meta name="description">` with `"Weird.Baby Museum. Currently exhibiting Hunter Root."`. Title was already `Weird.Baby` and untouched. |
+
+### Files moved to `_quarantine/` (15)
+
+CB (9 files):
+```
+src/data/artists/carsie-blanton.js  →  _quarantine/cb/data/artists/carsie-blanton.js
+src/data/cb_archive.js              →  _quarantine/cb/data/cb_archive.js
+src/data/cb_artifacts.js            →  _quarantine/cb/data/cb_artifacts.js
+src/data/cb_exit_flow.js            →  _quarantine/cb/data/cb_exit_flow.js
+src/data/cb_journal_prompts.js      →  _quarantine/cb/data/cb_journal_prompts.js
+src/routes/cb/CbSpine.jsx           →  _quarantine/cb/routes/cb/CbSpine.jsx
+src/routes/cb/CbExhibitFlow.jsx     →  _quarantine/cb/routes/cb/CbExhibitFlow.jsx
+src/routes/cb/cb_discography.js     →  _quarantine/cb/routes/cb/cb_discography.js
+src/routes/cb/cb_facts.js           →  _quarantine/cb/routes/cb/cb_facts.js
+```
+
+LyricMap (4 files):
+```
+src/routes/hr/workshop/LyricMap.jsx →  _quarantine/lyricmap/routes/hr/workshop/LyricMap.jsx
+src/routes/hr/HrWorkshop.jsx        →  _quarantine/lyricmap/routes/hr/HrWorkshop.jsx
+src/bd_data.js                      →  _quarantine/lyricmap/bd_data.js
+src/tp_data.js                      →  _quarantine/lyricmap/tp_data.js
+```
+
+HR orphans (3 files):
+```
+src/routes/hr/HrPanel2.jsx          →  _quarantine/hr_orphans/HrPanel2.jsx
+src/routes/hr/HrPanel3.jsx          →  _quarantine/hr_orphans/HrPanel3.jsx
+src/routes/hr/HrMerch.jsx           →  _quarantine/hr_orphans/HrMerch.jsx
+```
+
+### Step 6 import-check failures preventing a move
+
+None. All three orphans had no live consumers; all moved.
+
+---
+
+## Anomalies / discrepancies
+
+1. **`<title>` already correct.** The brief implied both `<title>` and `<meta name="description">` would need updating; the title was already `Weird.Baby`. Only the description was edited.
+2. **Stale `.git/index.lock`.** Present at `.git/index.lock` since Apr 14 03:11. No live git process. Blocked an initial `git mv`. Worked around by using plain `mv`. Lock file left in place — recommend `rm .git/index.lock` on Windows.
+3. **Audit's "possible broken import" for `bd_data.js` / `tp_data.js`.** Both files were physically present in `src/`. They were imported by `LyricMap.jsx` (which has been quarantined). No broken-import condition surfaced; the audit's flag was not reproducible.
+4. **Build verification deferred.** `npx vite build` cannot run in the Cowork Linux sandbox because `node_modules` was installed on Windows and the rolldown Linux native binding is missing. Per brief, no fix attempted. Build must be re-run on Windows.
+5. **Backup files untouched.** `src/routes/hr/HrSpine.jsx.bak` and `src/routes/hr/HrSpine.jsx.r23.bak` remain in place per the brief's "Do not delete `.bak`-suffixed files" instruction.
+6. **Files audit listed but already accounted for.** None of the audit's expected files were missing — all 15 quarantined items were found and moved.
+7. **Files NOT on the audit's list but present.** None surfaced during this phase. The grep at Step 8 was clean.
+
+---
+
+## Constraints — all honored
+
+- **No deletions.** Quarantine only. ✓
+- **No code edits beyond Steps 2, 3, 7.** ✓
+- **No commits, no deploy.** ✓
+- **`.bak` files not touched.** ✓
+- **Out-of-scope projects in `C:\AI\` not touched.** ✓ (only `weird-baby-update\` modified)
+- **Stopped on unexpected condition (Step 9 environmental block) and reported.** ✓
