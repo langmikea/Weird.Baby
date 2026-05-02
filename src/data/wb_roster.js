@@ -21,15 +21,6 @@ export const wbRoster = [
     image: null, // typography fallback until photo added
     blurb: "Central PA songwriter. Six albums. Aphantasic lyric cinema.",
   },
-  {
-    id: "cb",
-    name: "Carsie Blanton",
-    exhibitRoute: "/cb",
-    storeUrl: "https://store.carsieblanton.com/collections/featured-merch",
-    storePlatform: "Shopify",
-    image: null, // typography fallback until photo added
-    blurb: "Songwriter with hooks, chutzpah, and revolutionary optimism.",
-  },
 ];
 
 // Helper: find an artist by id, or return null.

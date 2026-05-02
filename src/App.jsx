@@ -7,10 +7,6 @@ import HrHome     from "./routes/hr/HrHome.jsx";
 import HrMedia    from "./routes/hr/HrMedia.jsx";
 import HrArchive  from "./routes/hr/HrArchive.jsx";
 import HrFanWall  from "./routes/hr/HrFanWall.jsx";
-import HrWorkshop from "./routes/hr/HrWorkshop.jsx";
-import HrMerch    from "./routes/hr/HrMerch.jsx";
-import LyricMap   from "./routes/hr/workshop/LyricMap.jsx";
-import CbSpine    from "./routes/cb/CbSpine.jsx";
 import GiftShop   from "./routes/shop/GiftShop.jsx";
 
 function KeyWatcher() {
@@ -39,10 +35,6 @@ export default function App() {
         <Route path="/hr/media" element={<HrMedia />} />
         <Route path="/hr/archive" element={<HrArchive />} />
         <Route path="/hr/fan-wall" element={<HrFanWall />} />
-        <Route path="/hr/workshop" element={<HrWorkshop />} />
-        <Route path="/hr/workshop/lyric-map" element={<LyricMap />} />
-        <Route path="/hr/merch" element={<HrMerch />} />
-        <Route path="/cb" element={<CbSpine />} />
         <Route path="/shop" element={<GiftShop />} />
       </Routes>
     </BrowserRouter>

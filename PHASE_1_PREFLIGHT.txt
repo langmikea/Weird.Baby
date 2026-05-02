@@ -1,0 +1,107 @@
+PHASE 1 PRE-FLIGHT REPORT
+Captured: 2026-05-02
+Project root: C:\AI\Projects\weird-baby-update\
+
+================================================================
+1. GIT STATUS
+================================================================
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+        modified:   .gitignore
+        modified:   README.md
+        modified:   STATE.md
+        modified:   docs/COMPONENT_PHILOSOPHY.md
+        deleted:    docs/HOMESTEAD_INSTAGRAM_SPEC_v0.2.md
+        deleted:    docs/MUSEUM_STRUCTURE_SPEC_v0.1.md
+        modified:   docs/PANEL3_ARTIFACTS_SPEC_v0.1.md
+        deleted:    docs/SESSION_CAPTURE_PANEL2.md
+        deleted:    docs/SESSION_CAPTURE_PANEL2_INTEGRATION.md
+        modified:   eslint.config.js
+        modified:   index.html
+        modified:   package-lock.json
+        modified:   package.json
+        modified:   public/_routes.json
+        modified:   public/icons.svg
+        modified:   src/App.css
+        modified:   src/App.jsx
+        modified:   src/assets/vite.svg
+        modified:   src/data/artists/carsie-blanton.js
+        modified:   src/data/artists/hunter-root.js
+        modified:   src/data/hr_archive.js
+        modified:   src/data/hr_artifacts.js
+        modified:   src/data/wb_roster.js
+        modified:   src/main.jsx
+        modified:   src/routes/WbAdmin.jsx
+        modified:   src/routes/WbHome.jsx
+        modified:   src/routes/exhibit/Exhibit.css
+        modified:   src/routes/exhibit/Exhibit.jsx
+        modified:   src/routes/hr/HrExhibitFlow.jsx
+        modified:   src/routes/hr/HrFanWall.jsx
+        modified:   src/routes/hr/HrMedia.jsx
+        modified:   src/routes/hr/HrMerch.jsx
+        modified:   src/routes/hr/HrWorkshop.jsx
+        modified:   src/routes/hr/workshop/LyricMap.jsx
+        modified:   src/worker.js
+        modified:   vite.config.js
+        modified:   wrangler.jsonc
+
+Untracked files (selection — full list captured in repo via git):
+        BACKLOG.md
+        PHASE_0_REPORT.md
+        RESET_PROTOCOL.md
+        STATE.md.bak_pre_v47_close_20260430_220854
+        deploy.ps1
+        docs/* (many new design + session-close notes; full list in git status)
+        docs/archive/
+        docs/canonical/
+        docs/superseded/
+        facebook-post.md
+        poc/
+        prototypes/
+        src/data/cb_archive.js
+        src/data/cb_artifacts.js
+        src/data/cb_exit_flow.js
+        src/data/cb_journal_prompts.js
+        src/routes/cb/CbExhibitFlow.jsx
+        tools/
+
+NOTE: src/data/cb_archive.js, cb_artifacts.js, cb_exit_flow.js, cb_journal_prompts.js
+      and src/routes/cb/CbExhibitFlow.jsx are UNTRACKED (new files since last commit).
+      Other CB files (CbSpine.jsx, cb_discography.js, cb_facts.js inside src/routes/cb/)
+      are not flagged as untracked here, suggesting they exist in a previous commit
+      or are within an already-tracked tree.
+
+================================================================
+2. FILE-PRESENCE FINDINGS (as required by Step 1)
+================================================================
+src/bd_data.js                              PRESENT  (719,470 bytes)
+src/tp_data.js                              PRESENT  (170,234 bytes)
+src/routes/hr/workshop/LyricMap.jsx         PRESENT  (112,690 bytes)
+src/routes/hr/HrWorkshop.jsx                PRESENT  (296 bytes — small linker)
+src/routes/hr/workshop/                     EXISTS — contains ONLY LyricMap.jsx
+                                            (no other files inside)
+
+================================================================
+3. ADDITIONAL CONTEXT FOR LATER STEPS
+================================================================
+src/data/artists/                           contains carsie-blanton.js (455 B)
+                                                     hunter-root.js (8,223 B)
+src/data/cb_archive.js                      PRESENT (untracked)
+src/data/cb_artifacts.js                    PRESENT (untracked)
+src/data/cb_exit_flow.js                    PRESENT (untracked)
+src/data/cb_journal_prompts.js              PRESENT (untracked)
+src/routes/cb/                              contains:
+                                              CbExhibitFlow.jsx (33,540 B, untracked)
+                                              CbSpine.jsx (200 B)
+                                              cb_discography.js (17,415 B)
+                                              cb_facts.js (15,064 B)
+
+src/routes/hr/HrPanel2.jsx                  PRESENT (29,935 B)
+src/routes/hr/HrPanel3.jsx                  PRESENT (17,631 B)
+src/routes/hr/HrMerch.jsx                   PRESENT (258 B — small linker)
+
+Backup files in src/routes/hr/ that are NOT being touched in Phase 1:
+  HrSpine.jsx.bak          (36,517 B)
+  HrSpine.jsx.r23.bak      (47,798 B)

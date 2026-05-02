@@ -1,5 +1,6 @@
 import { FACTS } from "../../routes/cb/cb_facts.js";
 import { SPINE } from "../../routes/cb/cb_discography.js";
+import CbExhibitFlow from "../../routes/cb/CbExhibitFlow.jsx";
 
 export const carsieBlanton = {
   id: "cb",
@@ -11,5 +12,5 @@ export const carsieBlanton = {
   cfKey: "wb-cb-cfh",
   visitPath: "/cb",
   shopExitParam: "cb",
-  exhibitFlow: null,
+  exhibitFlow: CbExhibitFlow,
 };
