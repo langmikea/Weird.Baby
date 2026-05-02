@@ -1,7 +1,7 @@
 ================================================================================
 Weird.Baby Museum — STATE.md
 ================================================================================
-Always read this file first. Then read C:\AI\VISION.md and docs\COMPONENT_PHILOSOPHY.md.
+Always read this file first. Then read docs\canonical\VISION.md and docs\COMPONENT_PHILOSOPHY.md.
 Last updated: 2026-04-14 (r28 — gift shop live, Exhibit refactor landed, build time on admin)
 ================================================================================
 
@@ -16,7 +16,7 @@ WHAT THIS PROJECT IS
   Cost: ~$50.20/yr
 
 VISION AND PHILOSOPHY
-  C:\AI\VISION.md                          — north star, read this
+  docs\canonical\VISION.md                          — north star, read this
   docs\COMPONENT_PHILOSOPHY.md             — how everything looks and behaves
 
 THE BUILDING — circulation architecture (from VISION.md, enforced in code)
