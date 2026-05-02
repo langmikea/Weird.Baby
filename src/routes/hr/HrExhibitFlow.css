@@ -1,0 +1,1041 @@
+/* ─── HR EXHIBIT FLOW — static styles ────────────────────────────────────────
+   Phase 1.5b. Static styles for the inline-section dock. Parameterized
+   builders (per-pill, per-tab, dock height, etc.) stay inline as JS objects
+   in HrExhibitFlow.jsx (S.*). Anything that doesn't take props lives here.
+
+   Naming: .hr-* prefix for HR-specific classes. .wb-scroll, .pillscroll,
+   .searchbar, .animated, .knob-wrap, .card-fade-in, .tab-hoverable,
+   .preset-row-btn — these are reused from the prototype's global styles
+   and kept on those names.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* ── Token aliases (match v28) ─────────────────────────────────────────── */
+.hr-section {
+  --hr-ink: #0e0b06;
+  --hr-ink-soft: #1a140a;
+  --hr-ink-card: rgba(30, 24, 8, 0.35);
+  --hr-ink-card-hi: rgba(40, 32, 10, 0.55);
+  --hr-border: #2a2010;
+  --hr-border-hi: #4a3818;
+  --hr-gold: #c8a050;
+  --hr-gold-hi: #e8c070;
+  --hr-gold-lo: #7a6230;
+  --hr-gold-mute: #3a2e14;
+  --hr-dim: #8a7850;
+  --hr-serif: 'Fraunces', 'Playfair Display', Georgia, serif;
+  --hr-sans: 'Geist', 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ── Section root ──────────────────────────────────────────────────────── */
+.hr-section {
+  position: relative;
+  min-height: calc(100vh - 64px);
+  scroll-snap-align: center;
+  background: var(--hr-ink);
+  color: var(--hr-dim);
+  font-family: var(--hr-sans);
+  font-size: 14px;
+  line-height: 1.55;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Dock host ─────────────────────────────────────────────────────────── */
+/* Sized so the dock can sit at its bottom via sticky positioning. Inside
+   this host we place an absolutely-positioned panel (the grid pane) and a
+   sticky-bottom dock. The panel scrolls; the dock is always reachable. */
+.hr-section-dock-host {
+  position: relative;
+  flex: 1;
+  min-height: calc(100vh - 64px);
+  overflow: hidden;
+}
+
+/* ── Panel (artifact grid pane above the dock) ─────────────────────────── */
+.hr-panel-scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  padding: 1.25rem 1.5rem;
+}
+
+/* ── Page header ───────────────────────────────────────────────────────── */
+.hr-page-header {
+  padding-bottom: 0.85rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--hr-border);
+}
+.hr-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  font-weight: 500;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.hr-page-title {
+  font-family: var(--hr-serif);
+  font-weight: 400;
+  font-size: 26px;
+  color: var(--hr-gold);
+  font-style: italic;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.hr-page-sub {
+  font-size: 13px;
+  color: var(--hr-dim);
+  margin-top: 6px;
+  max-width: 820px;
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+/* ── Panel head (artifacts · count) ────────────────────────────────────── */
+.hr-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--hr-border);
+  margin-bottom: 1.25rem;
+}
+.hr-panel-head-label {
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.hr-panel-head-muted {
+  color: var(--hr-gold-mute);
+  font-style: italic;
+  font-size: 11px;
+  text-transform: none;
+  letter-spacing: 0.04em;
+  font-weight: 400;
+  font-family: var(--hr-serif);
+}
+.hr-panel-count {
+  color: var(--hr-gold-hi);
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.hr-panel-count-big { color: var(--hr-gold-hi); font-weight: 700; }
+.hr-panel-count-total { color: var(--hr-gold-lo); font-weight: 400; }
+
+/* ── Artifact grid ─────────────────────────────────────────────────────── */
+.hr-artifact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 8px;
+  gap: 14px;
+  grid-auto-flow: dense;
+}
+.hr-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative; /* Phase 1.5c: anchor for badge / link-arrow overlays */
+}
+
+/* ── Phase 1.5c — clickable cards (cards with externalUrl) ─────────────── */
+/* Renders as <a> in the JSX. Subtle border-color brighten on hover plus a
+   small ↗ chevron in the corner. Non-link cards render exactly as before. */
+.hr-card-link {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.hr-card-link:hover {
+  border-color: var(--hr-gold-lo) !important;
+  box-shadow: inset 0 0 0 1px var(--hr-gold-lo);
+}
+.hr-card-link-arrow {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--hr-gold-lo);
+  pointer-events: none;
+  transition: color 0.15s;
+  z-index: 2;
+}
+.hr-card-link:hover .hr-card-link-arrow {
+  color: var(--hr-gold-hi);
+}
+
+/* ── Phase 1.5c — voice tiles (curatorial commentary; HR_EXIT_FLOW) ────── */
+/* Warmer background and a small "curator's note" badge in the top-right
+   corner, anchored in the GOLD accent. Distinguishable at a glance from
+   the colder evidence tiles. */
+.hr-card-voice {
+  background: rgba(50, 38, 14, 0.55) !important;
+  border-color: var(--hr-gold-mute) !important;
+}
+.hr-card-voice-badge {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-family: var(--hr-sans);
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--hr-gold);
+  background: rgba(14, 11, 6, 0.7);
+  padding: 2px 6px;
+  border: 1px solid var(--hr-gold-lo);
+  pointer-events: none;
+  line-height: 1.2;
+  z-index: 2;
+}
+
+/* ── Card visuals ──────────────────────────────────────────────────────── */
+.hr-card-foot {
+  padding: 8px 11px 10px;
+}
+.hr-card-foot-dashed {
+  padding: 8px 11px 10px;
+  border-top: 1px dashed var(--hr-border-hi);
+}
+.hr-card-title {
+  font-family: var(--hr-serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--hr-gold);
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+.hr-card-title-sm {
+  font-size: 12.5px;
+}
+.hr-card-meta {
+  font-size: 9.5px;
+  color: var(--hr-gold-lo);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.hr-card-credit {
+  font-size: 10.5px;
+  color: var(--hr-gold-hi);
+  font-style: italic;
+  margin-top: 3px;
+}
+.hr-card-credit strong { font-weight: 500; color: var(--hr-gold-hi); font-style: normal; }
+
+/* PhotoCard */
+.hr-card-photo-vis {
+  flex: 1;
+  background: linear-gradient(135deg, #2d2513 0%, #1a140a 60%, #0e0b06 100%);
+  border-bottom: 1px solid var(--hr-border);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hr-card-photo-frame {
+  position: absolute;
+  inset: 12px;
+  border: 1px solid var(--hr-gold-mute);
+  opacity: 0.4;
+}
+.hr-card-photo-label {
+  color: var(--hr-gold-mute);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ArtCard */
+.hr-card-art-vis {
+  flex: 1;
+  background:
+    radial-gradient(circle at 30% 40%, #3a2e14 0%, transparent 40%),
+    radial-gradient(circle at 70% 60%, #4a3818 0%, transparent 45%),
+    #1a140a;
+  border-bottom: 1px solid var(--hr-border);
+  position: relative;
+}
+.hr-card-art-circle {
+  position: absolute;
+  left: 20%; top: 30%;
+  width: 60%; height: 40%;
+  border: 1px solid var(--hr-gold-mute);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+/* VideoCard */
+.hr-card-video-vis {
+  flex: 1;
+  background: linear-gradient(180deg, #1a140a 0%, #2d2513 100%);
+  border-bottom: 1px solid var(--hr-border);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hr-card-video-live {
+  position: absolute;
+  top: 6px; left: 6px;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+  color: var(--hr-gold-hi);
+  text-transform: uppercase;
+  background: rgba(14, 11, 6, 0.8);
+  padding: 2px 6px;
+  border: 1px solid var(--hr-gold-lo);
+}
+.hr-card-video-play {
+  width: 32px; height: 32px;
+  border: 1px solid var(--hr-gold-lo);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hr-card-video-play-tri {
+  width: 0; height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 9px solid var(--hr-gold);
+  margin-left: 2px;
+}
+.hr-card-video-dur {
+  position: absolute;
+  bottom: 6px; right: 6px;
+  font-size: 10px;
+  color: var(--hr-gold-hi);
+  background: rgba(14, 11, 6, 0.8);
+  padding: 1px 5px;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* PressCard */
+.hr-card-press {
+  padding: 12px 14px 14px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.hr-card-press-source {
+  font-size: 9.5px;
+  letter-spacing: 0.26em;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.hr-card-press-pull {
+  font-family: var(--hr-serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--hr-gold);
+  line-height: 1.38;
+  margin-bottom: 8px;
+  flex: 1;
+}
+.hr-card-press-quote { color: var(--hr-gold-lo); }
+.hr-card-press-sub {
+  font-size: 10px;
+  color: var(--hr-gold-lo);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* EssayCard */
+.hr-card-essay {
+  padding: 14px 16px 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hr-card-essay-kind {
+  font-size: 9.5px;
+  letter-spacing: 0.26em;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.hr-card-essay-title {
+  font-family: var(--hr-serif);
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--hr-gold);
+  line-height: 1.2;
+  margin: 2px 0 4px;
+}
+.hr-card-essay-lede {
+  font-size: 12px;
+  color: var(--hr-dim);
+  line-height: 1.55;
+  flex: 1;
+}
+
+/* SessionCard */
+.hr-card-session-vis {
+  flex: 1;
+  background:
+    linear-gradient(120deg, rgba(200, 160, 80, 0.08) 0%, transparent 50%),
+    var(--hr-ink-soft);
+  border-bottom: 1px solid var(--hr-border);
+  position: relative;
+}
+.hr-card-session-rect {
+  position: absolute;
+  left: 15%; right: 15%;
+  top: 25%; bottom: 25%;
+  border: 1px solid var(--hr-border-hi);
+  opacity: 0.5;
+}
+
+/* ── Tab strip ─────────────────────────────────────────────────────────── */
+.hr-tab-strip {
+  position: absolute;
+  top: 0; left: 12px; right: 12px;
+  height: 42px;
+  display: flex;
+  align-items: flex-end;
+  pointer-events: auto;
+  z-index: 12;
+  user-select: none;
+}
+.hr-strip-clear-btn {
+  margin-left: 12px;
+  align-self: center;
+  background: transparent;
+  border: 1px solid var(--hr-gold-lo);
+  color: var(--hr-gold);
+  font-family: var(--hr-sans);
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  height: 24px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.hr-strip-clear-btn:hover {
+  border-color: var(--hr-gold);
+  color: var(--hr-gold-hi);
+}
+
+/* tab-hoverable applies to inactive tab divs */
+.tab-hoverable:hover { border-color: var(--hr-gold) !important; color: var(--hr-gold-hi) !important; }
+
+/* ── Dock body (the panel that opens upward) ───────────────────────────── */
+.hr-dock-body {
+  position: absolute;
+  top: 42px; left: 0; right: 0; bottom: 0;
+  background: var(--hr-ink);
+  border-top: 1px solid var(--hr-gold-lo);
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Scroll wrapper / content body ─────────────────────────────────────── */
+.hr-scroll-fade-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+.hr-content-body {
+  flex: 1;
+  overflow: auto;
+  padding: 16px 1.25rem 1.25rem;
+}
+
+/* ── Group columns / pills ─────────────────────────────────────────────── */
+.hr-groups-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 28px;
+  align-items: flex-start;
+}
+.hr-group-column {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.hr-group-column-label {
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  font-weight: 600;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--hr-border);
+  white-space: nowrap;
+}
+.hr-pill-label {
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Deep Tracks search ────────────────────────────────────────────────── */
+.hr-deep-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.hr-search-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+.hr-search-input-holder { width: 100%; }
+.hr-corral {
+  min-height: 40px;
+  border: 1px solid var(--hr-border);
+  border-top: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+.hr-corral-empty {
+  font-size: 11px;
+  color: var(--hr-gold-mute);
+  font-style: italic;
+  padding: 0 4px;
+}
+
+/* searchbar input style — global so the prototype's searchbar matches */
+input.searchbar {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--hr-border);
+  color: var(--hr-gold);
+  font-family: var(--hr-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 8px 12px;
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+input.searchbar:focus { border-color: var(--hr-gold-lo); }
+input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
+
+/* ── Presets ───────────────────────────────────────────────────────────── */
+.hr-presets-section-label {
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  font-weight: 600;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--hr-border);
+  margin-bottom: 12px;
+}
+.hr-presets-top-row {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+.hr-presets-slots-col {
+  flex: 1 1 420px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.hr-presets-player-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--hr-border);
+  min-width: 180px;
+}
+.hr-presets-player-label {
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.hr-preset-slot-label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--hr-gold);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.preset-row-btn:hover {
+  color: var(--hr-gold-hi);
+  border-color: var(--hr-gold-lo);
+}
+.hr-factory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 1.25rem;
+}
+.hr-preset-label {
+  font-family: var(--hr-serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--hr-gold);
+  line-height: 1.2;
+}
+.hr-preset-desc {
+  font-size: 11px;
+  color: var(--hr-gold-lo);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+/* ── Animation hooks ───────────────────────────────────────────────────── */
+.animated {
+  transition: height 180ms cubic-bezier(0.3, 0.7, 0.2, 1),
+              bottom 180ms cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+.animated.quick {
+  transition: height 120ms ease-out, bottom 120ms ease-out;
+}
+.animated.resizing {
+  transition: none;
+}
+
+@keyframes cardFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.card-fade-in { animation: cardFadeIn 250ms ease-out; }
+
+/* ── Scrollbar styling ─────────────────────────────────────────────────── */
+.wb-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(138, 120, 70, 0.35) transparent;
+}
+.wb-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+.wb-scroll::-webkit-scrollbar-track { background: transparent; }
+.wb-scroll::-webkit-scrollbar-thumb {
+  background: rgba(138, 120, 70, 0.35);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.wb-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(184, 151, 74, 0.55);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+.wb-scroll::-webkit-scrollbar-corner { background: transparent; }
+
+.pillscroll::-webkit-scrollbar { width: 6px; height: 6px; }
+.pillscroll::-webkit-scrollbar-track { background: transparent; }
+.pillscroll::-webkit-scrollbar-thumb { background: var(--hr-border-hi); border-radius: 0; }
+.pillscroll { scrollbar-width: thin; scrollbar-color: var(--hr-border-hi) transparent; }
+
+/* ── Journal — adapted from quarantined HrExhibitFlow.jsx ───────────────── */
+/* Layout fits inside hr-content-body (the dock body's flex content). */
+.hr-journal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.hr-jnl-prompt {
+  font-family: var(--hr-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--hr-gold);
+  line-height: 1.6;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+.hr-jnl-compose {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.hr-jnl-handle {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: var(--hr-gold-hi);
+  background: #080808;
+  border: 1px solid var(--hr-border);
+  padding: 5px 10px;
+  border-radius: 2px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.hr-jnl-handle:focus { border-color: var(--hr-border-hi); }
+.hr-jnl-handle::placeholder { color: var(--hr-gold-mute); }
+.hr-jnl-text {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.82rem;
+  color: var(--hr-dim);
+  background: #080808;
+  border: 1px solid var(--hr-border);
+  padding: 10px 12px;
+  border-radius: 2px;
+  outline: none;
+  resize: vertical;
+  height: 96px;
+  line-height: 1.6;
+  transition: border-color 0.15s;
+}
+.hr-jnl-text:focus { border-color: var(--hr-border-hi); }
+.hr-jnl-text::placeholder { color: var(--hr-gold-mute); }
+.hr-jnl-submit {
+  align-self: flex-end;
+  background: none;
+  border: 1px solid var(--hr-border-hi);
+  color: var(--hr-gold-lo);
+  font-family: var(--hr-sans);
+  font-weight: 600;
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.hr-jnl-submit:hover {
+  color: var(--hr-gold-hi);
+  border-color: var(--hr-gold);
+}
+.hr-jnl-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+.hr-jnl-entry {
+  background: #080808;
+  border: 1px solid var(--hr-border);
+  border-radius: 2px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.hr-jnl-entry-new { border-color: #0F6E56; }
+.hr-jnl-entry-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.62rem;
+  color: var(--hr-gold-lo);
+  letter-spacing: 0.08em;
+}
+.hr-jnl-entry-who { color: var(--hr-gold-hi); }
+.hr-jnl-entry-ctx { color: var(--hr-gold-lo); font-style: italic; }
+.hr-jnl-entry-when { margin-left: auto; color: var(--hr-gold-mute); }
+.hr-jnl-entry-body {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: var(--hr-dim);
+  line-height: 1.5;
+}
+.hr-jnl-entry-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.hr-jnl-vote {
+  background: none;
+  border: none;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.65rem;
+  color: var(--hr-gold-mute);
+  cursor: pointer;
+  padding: 2px 4px;
+  transition: color 0.15s;
+}
+.hr-jnl-vote:hover { color: var(--hr-dim); }
+.hr-jnl-vote-on { color: var(--hr-gold-hi); }
+.hr-jnl-undo {
+  background: none;
+  border: 1px solid #0F6E56;
+  color: #0F6E56;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  padding: 3px 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  align-self: flex-start;
+  transition: opacity 0.15s;
+}
+.hr-jnl-undo:hover { opacity: 0.7; }
+.hr-jnl-delete {
+  background: none;
+  border: none;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.6rem;
+  color: var(--hr-border-hi);
+  cursor: pointer;
+  margin-left: auto;
+  transition: color 0.15s;
+}
+.hr-jnl-delete:hover { color: #993C1D; }
+.hr-jnl-feed-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding-top: 2px;
+}
+.hr-jnl-btn {
+  background: #0e0e0e;
+  border: 1px solid var(--hr-border);
+  color: var(--hr-gold-lo);
+  cursor: pointer;
+  font-size: 0.9rem;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  transition: color 0.15s, border-color 0.15s;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+}
+.hr-jnl-btn:hover { color: var(--hr-gold); border-color: var(--hr-gold); }
+.hr-jnl-counter {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.65rem;
+  color: var(--hr-gold-lo);
+  letter-spacing: 0.12em;
+  min-width: 36px;
+  text-align: center;
+}
+
+/* ── KALEIDOSCOPE — MOTHBALLED for v1; component classes preserved ─────── */
+/* MOTHBALLED for v1 per STATE.md; no element ever gets these classes. */
+.hr-kal-wrap {
+  padding: 0.75rem 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.hr-kal-console {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 48px;
+  align-items: center;
+  padding: 12px 24px;
+  max-width: 900px;
+  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.hr-kal-knob-row {
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+  align-items: flex-start;
+}
+.hr-kal-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 68px;
+}
+.hr-kal-block-label {
+  font-size: 10px;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 8px;
+  text-align: center;
+  font-weight: 500;
+}
+.knob-wrap { position: relative; }
+.knob-wrap:hover .hr-kal-knob-readout,
+.knob-wrap.dragging .hr-kal-knob-readout {
+  opacity: 1 !important;
+  transition: opacity 60ms ease !important;
+}
+.hr-kal-knob {
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #2a2110, #14100a);
+  border: 2px solid var(--hr-border-hi);
+  position: relative;
+  cursor: grab;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.4);
+}
+.hr-kal-knob-indicator {
+  position: absolute;
+  left: 50%; top: 4px;
+  width: 2px; height: 18px;
+  background: var(--hr-gold-hi);
+  transform-origin: 50% 25px;
+  pointer-events: none;
+}
+.hr-kal-knob-readout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--hr-gold-hi);
+  font-variant-numeric: tabular-nums;
+  background: rgba(14, 11, 6, 0.92);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 450ms ease;
+  font-weight: 500;
+}
+.hr-kal-switch {
+  width: 44px; height: 24px;
+  background: #120e07;
+  border: 1px solid var(--hr-border);
+  border-radius: 12px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.hr-kal-switch.on {
+  background: var(--hr-ink-soft);
+  border-color: var(--hr-gold-lo);
+}
+.hr-kal-switch-knob {
+  position: absolute;
+  left: 2px; top: 1px;
+  width: 20px; height: 20px;
+  background: var(--hr-gold-mute);
+  border-radius: 50%;
+  transition: all 0.15s;
+}
+.hr-kal-switch-knob.on {
+  left: 22px;
+  background: var(--hr-gold-hi);
+}
+.hr-vu-cluster {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+}
+.hr-vu-outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hr-vu-column {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 2px;
+  padding: 4px 4px;
+  background: #0a0805;
+  border: 1px solid var(--hr-border);
+  border-radius: 3px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.7);
+  position: relative;
+}
+.hr-vu-seg {
+  width: 40px;
+  height: 7px;
+  border-radius: 1px;
+  background: #1f1a0e;
+  transition: background 70ms ease, box-shadow 70ms ease;
+}
+.hr-vu-readout-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 90px;
+}
+.hr-vu-readout-number {
+  font-family: var(--hr-serif);
+  font-style: italic;
+  font-size: 28px;
+  color: var(--hr-gold-hi);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  font-weight: 500;
+}
+.hr-vu-readout-number span {
+  font-size: 16px;
+  color: var(--hr-gold-lo);
+}
+.hr-vu-readout-label {
+  font-size: 9.5px;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* ── Mobile fallback inline pills (hidden on desktop) ──────────────────── */
+.hr-mobile-pills {
+  display: none;
+}
+
+/* ── Mobile (O11) ──────────────────────────────────────────────────────── */
+/* Below 720px, hide the dock entirely and render the pill columns inline
+   above the artifact grid as a simple stack. No tab strip, no resize. */
+@media (max-width: 720px) {
+  .hr-section-dock-host { overflow: visible; min-height: auto; }
+  .hr-panel-scroll {
+    position: static;
+    inset: auto;
+    overflow-y: visible;
+    padding: 1rem 0.75rem;
+  }
+  .hr-tab-strip,
+  .hr-dock-body {
+    display: none;
+  }
+  /* Hide the absolute dock chrome entirely. */
+  .hr-section .animated {
+    transition: none;
+  }
+  .hr-section .hr-section-dock-host > .animated:not(:first-child) {
+    display: none;
+  }
+  /* Show the inline pill stack at the top of the section. */
+  .hr-mobile-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 12px 12px 4px;
+    border-bottom: 1px solid var(--hr-border);
+  }
+  .hr-artifact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,182 +1,1058 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import { HR_ARCHIVE } from "../../data/hr_archive.js";
-import { HR_ARTIFACTS } from "../../data/hr_artifacts.js";
-import { HR_JOURNAL_PROMPTS } from "../../data/hr_journal_prompts.js";
-import { HR_EXIT_FLOW, P4_TYPES } from "../../data/hr_exit_flow.js";
+// ─── HR EXHIBIT FLOW — Phase 1.5b port of prototype_a_v28.html ──────────────
+// This component renders, as an inline section below the live exhibit's main
+// row, an artifact grid above a 6-tab dock. The dock follows the v28
+// prototype's structure (Artist | Formats | Deep Tracks | Journal | Presets |
+// ✕) but operates on HR's existing data shapes.
+//
+// Architecture notes:
+//   - O4 = (B): inline section. Exhibit.jsx is not edited. The dock sits at
+//     the section's bottom via position: sticky; bottom: 0. The grid above
+//     scrolls inside the section.
+//   - O6 = hybrid: static styles live in HrExhibitFlow.css. Parameterized
+//     S.* builders that take props remain as inline JS objects in this file.
+//   - O7: localStorage key is `wb-hr-dock-height` (HR-namespaced).
+//   - O8: preset snapshots capture player state for display only — APPLY
+//     does not restore player state in v1. Comment block at makePresetSnapshot.
+//   - O9: Shuffle / Loop pills toggle local state but no-op against the
+//     player. Comment block at PresetsContent.
+//   - O11: @media(max-width: 720px) hides the dock and falls back to inline
+//     stacked pill columns above the artifact grid (HrExhibitFlow.css).
+//   - O12: AuditStrip rendered only in import.meta.env.DEV.
+//   - O15: GROUP_LABELS reused verbatim from the prototype.
+//   - Mothballed Kaleidoscope code: ported, never rendered. Comments mark
+//     each block.
+// ─────────────────────────────────────────────────────────────────────────────
 
-// ─── ALBUM → ERA MAP ─────────────────────────────────────────────────────────
-const ALBUM_ERA = {
-  cracked: "solo", wheel: "solo", dandelions: "solo",
-  skipping: "solo", arkansas: "solo", crooked: "solo",
+import {
+  useState, useMemo, useLayoutEffect, useEffect, useRef, useCallback,
+} from "react";
+import "./HrExhibitFlow.css";
+import { HR_DIMENSIONS, HR_GROUP_LABELS } from "./hr_dimensions.js";
+import { HR_CARDS } from "./hr_cards.js";
+import { HR_JOURNAL_PROMPTS } from "../../data/hr_journal_prompts.js";
+
+// ─── COLOR / FONT TOKENS — preserved from v28 ───────────────────────────────
+const INK = "#0e0b06";
+const INK_SOFT = "#1a140a";
+const INK_CARD = "rgba(30, 24, 8, 0.35)";
+const INK_CARD_HI = "rgba(40, 32, 10, 0.55)";
+const BORDER = "#2a2010";
+const BORDER_HI = "#4a3818";
+const GOLD = "#c8a050";
+const GOLD_HI = "#e8c070";
+const GOLD_LO = "#7a6230";
+const GOLD_MUTE = "#3a2e14";
+const DIM = "#8a7850";
+// MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
+// Kaleidoscope LED palette — re-tuned to v17's museum gold, not v3's neon.
+// (Used inline by the mothballed VuMeter, which is never rendered.)
+const LED_OFF = "#1f1a0e";
+const LED_GREEN = "#8a9a4a";
+const LED_YELLOW = "#c8a050";
+const LED_RED = "#c86040";
+// Reference these to silence no-unused-vars while keeping them on hand for
+// the post-launch Kaleidoscope revival.
+void [LED_OFF, LED_GREEN, LED_YELLOW, LED_RED];
+
+// MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
+// Serif display token used by the prototype's pageTitle / pageSub. The new
+// HR build moved those into HrExhibitFlow.css. Kept for parity / future use.
+// eslint-disable-next-line no-unused-vars
+const serifDisplay = "'Fraunces', 'Playfair Display', Georgia, serif";
+const sansBody = "'Geist', 'Inter', system-ui, -apple-system, sans-serif";
+
+// ─── DOCK CONSTANTS — preserved from v28, STORAGE_KEY HR-namespaced ─────────
+const TAB_PEEK = 14;
+const TAB_STRIP_H = 42;
+const DOCK_MIN_H = 200;
+const DOCK_MAX_FRAC = 0.75;
+const DOCK_DEFAULT_H_SHARED = 480;
+const STORAGE_KEY = "wb-hr-dock-height"; // O7 — matches wb-hr-split / wb-hr-cfh
+const HOVER_DELAY_OPEN = 60;
+const HOVER_DELAY_CLOSE = 450;
+
+// ─── TABS — six entries; Journal inserted between Deep Tracks and Presets ──
+// O5: sixth tab "Journal" between deep and presets.
+const TABS = [
+  { key: "artist",  label: "Artist",      kind: "tier",    tier: 1, width: 120 },
+  { key: "media",   label: "Formats",     kind: "tier",    tier: 2, width: 130 },
+  { key: "deep",    label: "Deep Tracks", kind: "tier",    tier: 3, width: 120 },
+  { key: "journal", label: "Journal",     kind: "special", special: "journal", width: 110 },
+  { key: "presets", label: "Presets",     kind: "special", special: "presets", width: 110 },
+  { key: "close",   label: "✕",           kind: "close",   width: 48 },
+];
+
+// ─── FACTORY PRESETS — adapted to HR's dimensions ───────────────────────────
+const FACTORY_PRESETS = [
+  {
+    key: "surprise", label: "Surprise me", desc: "a handful at random",
+    apply: () => {
+      const ids = HR_CARDS.map(c => c.id).sort(() => Math.random() - 0.5).slice(0, 3);
+      return { __randomIds: new Set(ids) };
+    },
+  },
+  {
+    key: "press", label: "Press clippings", desc: "what the world said",
+    apply: () => ({ src: new Set(["press"]) }),
+  },
+  {
+    key: "stage", label: "Live captures", desc: "captured on stage",
+    apply: () => ({ src: new Set(["stage"]) }),
+  },
+  {
+    key: "deephist", label: "Years past", desc: "the older catalog",
+    apply: () => ({ era: new Set(["seeds", "medusas"]) }),
+  },
+  {
+    key: "videos", label: "Video evidence", desc: "music videos & clips",
+    apply: () => ({ type: new Set(["video"]) }),
+  },
+];
+
+// Entry preset (v23): all tags OFF. Empty-group-silent rule means every
+// group is silent at rest, so the full catalog is visible.
+function makeEntrySelection() {
+  const out = {};
+  HR_DIMENSIONS.forEach(({ key }) => { out[key] = new Set(); });
+  return out;
+}
+
+// ─── KALEIDOSCOPE — MOTHBALLED for v1 per STATE.md; do not render ───────────
+// MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
+// State, recipe, and config preserved so the next Kaleidoscope session
+// can reuse the API.
+const KAL_STATE_DEFAULT = {
+  depth: 0.5, breadth: 0.5, jitter: 0,
+};
+const KAL_KNOBS = [
+  { id: "depth",   label: "Depth" },
+  { id: "breadth", label: "Breadth" },
+  { id: "jitter",  label: "Jitter" },
+];
+
+// MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
+function pseudoRandom(id, salt) {
+  let h = 2166136261;
+  const s = `${id}|${salt}`;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return ((h >>> 0) % 10000) / 10000;
+}
+
+// MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
+// eslint-disable-next-line no-unused-vars
+function runKaleidoscopeRecipe(kalState, items) {
+  const SURFACE_TYPES = ["post", "photo", "review"];
+  const DEEP_TYPES    = ["analysis", "interview", "art", "cover", "update"];
+  const dOff = (kalState.depth   - 0.5) * 2;
+  const bOff = (kalState.breadth - 0.5) * 2;
+  return items.filter(item => {
+    if (dOff < 0 && DEEP_TYPES.includes(item.type)) {
+      if (pseudoRandom(item.id, "d_deep") < Math.abs(dOff) * 0.85) return false;
+    } else if (dOff > 0 && SURFACE_TYPES.includes(item.type)) {
+      if (pseudoRandom(item.id, "d_surf") < dOff * 0.85) return false;
+    }
+    if (bOff < 0 && item.media !== "audio" && item.media !== "video") {
+      if (pseudoRandom(item.id, "b_nonmusic") < Math.abs(bOff) * 0.9) return false;
+    }
+    return true;
+  }).filter(item => {
+    if (kalState.jitter <= 0) return true;
+    return pseudoRandom(item.id, "r") > kalState.jitter * 0.7;
+  });
+}
+
+// MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
+// eslint-disable-next-line no-unused-vars
+function kalIsDefault(k) {
+  return k.depth === 0.5 && k.breadth === 0.5 && k.jitter === 0;
+}
+
+// ─── PARAMETERIZED STYLES — kept inline per O6 (hybrid CSS strategy) ────────
+// Static styles live in HrExhibitFlow.css (.hr-* classes). Parameterized
+// builders that take props (active state, widths, open state, dockPx, etc.)
+// stay here as inline JS objects.
+const S = {
+  // panelPos: positions the artifact-grid pane above the dock. dockPx changes
+  // as the dock peeks / opens / resizes.
+  panelPos: (dockPx) => ({
+    position: "absolute", left: 0, right: 0, top: 0, bottom: dockPx + "px",
+  }),
+
+  // dock: bottom-anchored. height swings between TAB_PEEK / TAB_STRIP_H /
+  // resizable open height.
+  dock: (dockPx) => ({
+    position: "absolute", left: 0, right: 0, bottom: 0,
+    height: dockPx + "px",
+    background: "transparent",
+    zIndex: 10,
+    pointerEvents: "none",
+  }),
+
+  // tab: per-tab chrome. Active = bright + bold + INK_SOFT fill. Inactive =
+  // GOLD_LO border + DIM text. isClose = small ✕ tab.
+  tab: (active, dockOpen, width, isClose) => {
+    const borderColor = active ? GOLD_HI : GOLD_LO;
+    const textColor   = active ? GOLD_HI : DIM;
+    return {
+      cursor: "pointer", fontFamily: sansBody,
+      fontSize: isClose ? "14px" : "10.5px",
+      letterSpacing: isClose ? "0" : "0.12em",
+      textTransform: isClose ? "none" : "uppercase",
+      fontWeight: active ? 700 : 500,
+      color: textColor,
+      background: active ? INK_SOFT : "transparent",
+      border: `1px solid ${borderColor}`, borderBottom: "none",
+      borderTopLeftRadius: "6px", borderTopRightRadius: "6px",
+      height: TAB_STRIP_H + "px",
+      width: width + "px", minWidth: width + "px",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      gap: "6px",
+      transition: "border-color 0.12s, color 0.12s, font-weight 0.12s, background 0.12s",
+      padding: "0 6px", boxSizing: "border-box",
+      flexShrink: 0, marginRight: "2px",
+      whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+    };
+  },
+
+  // resizeHandle: ns-resize affordance at top of dockBody.
+  resizeHandle: (hovered) => ({
+    position: "absolute", top: "-4px",
+    left: 0, right: 0, height: "8px",
+    cursor: "ns-resize", zIndex: 14,
+    background: hovered
+      ? `linear-gradient(to bottom, transparent 0%, ${GOLD_LO} 45%, ${GOLD_LO} 55%, transparent 100%)`
+      : "transparent",
+    transition: "background 0.15s",
+  }),
+
+  // pill: per-pill chrome inside group columns. active / zero / pillWidth.
+  pill: (active, zero, pillWidth) => ({
+    fontFamily: sansBody, fontSize: "11.5px", fontWeight: 500,
+    letterSpacing: "0.02em", padding: "0 10px",
+    height: "26px", lineHeight: "24px",
+    display: "flex", alignItems: "center", justifyContent: "space-between",
+    gap: "8px",
+    width: pillWidth ? `${pillWidth}px` : "auto",
+    minWidth: pillWidth ? `${pillWidth}px` : "auto",
+    boxSizing: "border-box", borderRadius: 0,
+    border: `1px solid ${active ? GOLD : (zero ? "transparent" : BORDER)}`,
+    background: active ? INK_SOFT : "transparent",
+    color: active ? GOLD_HI : (zero ? BORDER_HI : DIM),
+    opacity: zero ? 0.2 : 1,
+    pointerEvents: zero ? "none" : "auto",
+    cursor: zero ? "default" : "pointer",
+    transition: "border-color 0.12s, color 0.12s, background 0.12s, opacity 0.12s",
+    textTransform: "lowercase", userSelect: "none",
+  }),
+
+  pillCount: (active, zero) => ({
+    fontSize: "10px", fontWeight: 500,
+    color: active ? GOLD : (zero ? GOLD_MUTE : GOLD_LO),
+    fontVariantNumeric: "tabular-nums",
+  }),
+
+  // presetsPill: "shuffle" / "loop" pill switches.
+  presetsPill: (on) => ({
+    fontFamily: sansBody, fontSize: "11.5px", fontWeight: 500,
+    letterSpacing: "0.02em", padding: "0 12px",
+    height: "28px", lineHeight: "26px",
+    display: "flex", alignItems: "center", justifyContent: "space-between",
+    gap: "10px",
+    boxSizing: "border-box", borderRadius: 0,
+    border: `1px solid ${on ? GOLD : BORDER}`,
+    background: on ? INK_SOFT : "transparent",
+    color: on ? GOLD_HI : DIM,
+    cursor: "pointer", userSelect: "none",
+    textTransform: "lowercase",
+    transition: "border-color 0.12s, color 0.12s, background 0.12s",
+    minWidth: "110px",
+  }),
+  presetsPillState: (on) => ({
+    fontSize: "9.5px", letterSpacing: "0.18em", textTransform: "uppercase",
+    color: on ? GOLD : GOLD_LO, fontWeight: 500, fontVariantNumeric: "tabular-nums",
+  }),
+
+  // presetSlotRow: filled/empty grid layout for P1/P2/P3 slots.
+  presetSlotRow: (hasContent) => ({
+    display: "grid",
+    gridTemplateColumns: "56px 1fr auto auto auto",
+    gap: "10px", alignItems: "center", padding: "10px 12px",
+    border: `1px solid ${hasContent ? BORDER_HI : BORDER}`,
+    background: "transparent", transition: "border-color 0.15s",
+  }),
+  presetSummary: (empty) => ({
+    fontSize: "11.5px", color: empty ? GOLD_MUTE : DIM,
+    fontStyle: empty ? "italic" : "normal", letterSpacing: "0.02em",
+    whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", minWidth: 0,
+  }),
+  presetRowBtn: (enabled, primary) => ({
+    background: "transparent",
+    border: `1px solid ${enabled ? (primary ? GOLD_LO : BORDER_HI) : BORDER}`,
+    color: enabled ? (primary ? GOLD : DIM) : GOLD_MUTE,
+    fontFamily: sansBody, fontSize: "10px", letterSpacing: "0.2em",
+    textTransform: "uppercase", fontWeight: 500, padding: "5px 10px",
+    cursor: enabled ? "pointer" : "default",
+    transition: "color 0.15s, border-color 0.15s",
+    whiteSpace: "nowrap", flexShrink: 0,
+  }),
+  presetCard: (active) => ({
+    padding: "12px 14px",
+    border: `1px solid ${active ? GOLD : BORDER}`,
+    background: active ? INK_SOFT : "transparent",
+    cursor: "pointer", transition: "all 0.14s",
+    display: "flex", flexDirection: "column", gap: "3px",
+  }),
+  tabCount: (active) => ({
+    fontSize: "9px", color: active ? GOLD_HI : GOLD_LO,
+    fontVariantNumeric: "tabular-nums", fontWeight: 500, marginLeft: "2px",
+  }),
 };
 
-// ─── TAG LABELS ──────────────────────────────────────────────────────────────
-function tagLabel(tag) {
-  const labels = {
-    seeds: "Seeds", medusas: "Medusa's Disco", solo: "Solo",
-    // Panel 2 types
-    historical: "Historical", interview: "Interview", rarity: "Rarity",
-    // Panel 3 types
-    poster: "Poster", setlist: "Setlist", photo: "Photo",
-    "fan-art": "Fan Art", handwritten: "Handwritten", video: "Video", ticket: "Ticket",
-    // Panel 4 types
-    quick: "Quick Hit", deep: "Deep Cut", highlight: "Highlight",
-    // Sources
-    fb: "FB", insta: "Insta", press: "Press", archive: "Archive",
-    donated: "Donated", stage: "Stage",
+// spanStyle — converts span_w / span_h hints into grid placement.
+const spanStyle = (w, h) => {
+  const hMap = { sm: 22, md: 30, lg: 38, xl: 44 };
+  return { gridColumn: `span ${w}`, gridRow: `span ${hMap[h] || 30}` };
+};
+
+// ─── FILTER LOGIC — ported from v28 prototype ───────────────────────────────
+// LOCKED rule (docs/FILTER_LOGIC_DECISION.md): within-group OR, across-group
+// AND, empty-group-silent. Adapted to operate on HR_DIMENSIONS.
+function itemHasTag(item, group, tag) {
+  if (group === "year") return String(item.year) === tag;
+  const dim = HR_DIMENSIONS.find(d => d.key === group);
+  if (dim?.kind === "multi") return Array.isArray(item[group]) && item[group].includes(tag);
+  return item[group] === tag;
+}
+
+function matchFilter(item, selected) {
+  if (selected.__randomIds) return selected.__randomIds.has(item.id);
+  for (const { key, kind } of HR_DIMENSIONS) {
+    const sel = selected[key];
+    if (!sel || sel.size === 0) continue;
+    let carries = false;
+    if (key === "year") {
+      carries = sel.has(String(item.year));
+    } else if (kind === "multi") {
+      carries = Array.isArray(item[key]) && item[key].some(v => sel.has(v));
+    } else {
+      carries = item[key] != null && sel.has(item[key]);
+    }
+    if (!carries) return false;
+  }
+  return true;
+}
+
+function countForPill(items, selected, group, tag) {
+  if (selected.__randomIds) return items.filter(i => itemHasTag(i, group, tag)).length;
+  const probe = cloneSelected(selected);
+  probe[group] = new Set([tag]);
+  return items.filter(i => matchFilter(i, probe)).length;
+}
+
+function cloneSelected(sel) {
+  const out = {};
+  for (const k of Object.keys(sel)) {
+    if (k === "__randomIds") out.__randomIds = new Set(sel.__randomIds);
+    else out[k] = new Set(sel[k] ?? []);
+  }
+  return out;
+}
+
+// Helper preserved for parity with the v28 prototype API; not currently
+// consumed (anyTagSelected in HrExhibitFlow inlines an equivalent check).
+// eslint-disable-next-line no-unused-vars
+function selectedIsEmpty(sel) {
+  if (sel.__randomIds && sel.__randomIds.size > 0) return false;
+  for (const { key } of HR_DIMENSIONS) if (sel[key]?.size > 0) return false;
+  return true;
+}
+
+function presetSummaryText(p) {
+  if (!p) return "empty";
+  if (p.__randomIds) return `${p.__randomIds.size} random artifacts`;
+  const parts = [];
+  if (p.selected) {
+    for (const { key } of HR_DIMENSIONS) {
+      if (p.selected[key]?.size) {
+        parts.push(`${key}: ${[...p.selected[key]].map(prettyTag).join(", ")}`);
+      }
+    }
+  } else {
+    for (const { key } of HR_DIMENSIONS) {
+      if (p[key]?.size) parts.push(`${key}: ${[...p[key]].map(prettyTag).join(", ")}`);
+    }
+  }
+  const flags = [];
+  if (p.shuffle) flags.push("shuffle");
+  if (p.loop) flags.push("loop");
+  const body = parts.join("  /  ") || "no tags";
+  return flags.length ? `${body}  ·  ${flags.join(" + ")}` : body;
+}
+
+// O8 — preset snapshot: capture playingTrack + spinePosition for display
+// only. APPLY does not restore player state in v1; it restores selected /
+// shuffle / loop only. Deferred to a follow-up phase.
+function makePresetSnapshot({ selected, shuffle, loop, playingTrack, spinePosition }) {
+  return {
+    selected: cloneSelected(selected),
+    shuffle: !!shuffle,
+    loop: !!loop,
+    playingTrack: playingTrack ? { ...playingTrack } : null,
+    spinePosition: spinePosition ?? null,
+    savedAt: Date.now(),
   };
-  return labels[tag] || tag;
 }
 
-// ─── FILTER — era only (type handled per-section) ───────────────────────────
-function matchesEra(item, eraSet) {
-  if (eraSet.size === 0) return true;
-  return eraSet.has(item.era);
+function prettyTag(tag) { return String(tag).replace(/-/g, " "); }
+
+function measureWidestLabel(labels) {
+  if (typeof window === "undefined") return 100;
+  const span = document.createElement("span");
+  Object.assign(span.style, {
+    position: "absolute", visibility: "hidden", whiteSpace: "nowrap",
+    fontFamily: sansBody, fontSize: "11.5px", fontWeight: "500",
+    letterSpacing: "0.02em", textTransform: "lowercase",
+  });
+  document.body.appendChild(span);
+  let max = 0;
+  labels.forEach(l => {
+    span.textContent = l;
+    const w = span.getBoundingClientRect().width;
+    if (w > max) max = w;
+  });
+  document.body.removeChild(span);
+  return Math.ceil(max);
 }
-function matchesType(item, typeSet) {
-  if (typeSet.size === 0) return true;
-  return typeSet.has(item.type);
+
+function useGlobalPillWidth() {
+  const [width, setWidth] = useState(120);
+  // setState-in-effect is intentional: measureWidestLabel needs a mounted
+  // DOM (it appends a hidden span). Runs once on mount, never again.
+  useLayoutEffect(() => {
+    const maxCount = HR_CARDS.length;
+    const labels = [];
+    HR_DIMENSIONS.forEach(({ values }) =>
+      values.forEach(v => labels.push(`${prettyTag(v)}   ${maxCount}`))
+    );
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setWidth(measureWidestLabel(labels) + 20 + 8 + 6);
+  }, []);
+  return width;
 }
 
-// ─── TYPE PILLS — above nav arrows, always at least one selected ────────────
-function TypePills({ tags, activeTypes, onToggle, items, allTags }) {
-  const available = useMemo(() => {
-    const vals = new Set();
-    for (const item of items) vals.add(item.type);
-    return vals;
-  }, [items]);
-
-  // All selected = no filter active visually
-  const allSelected = activeTypes.size === allTags.length;
-
+// ─── PILL COMPONENTS — ported from v28 ──────────────────────────────────────
+function PillButton({ label, count, active, zero, pillWidth, onClick }) {
   return (
-    <div className="ef-pills">
-      {tags.map(tag => {
-        const isActive = activeTypes.has(tag);
-        const hasItems = available.has(tag);
+    <button
+      style={S.pill(active, zero, pillWidth)}
+      onClick={() => !zero && onClick()}
+      disabled={zero}
+      aria-pressed={active}
+      title={prettyTag(label)}
+    >
+      <span className="hr-pill-label">{prettyTag(label)}</span>
+      <span style={S.pillCount(active, zero)}>{count}</span>
+    </button>
+  );
+}
+
+function PillGroupColumn({ group, values, items, selected, toggle, pillWidth }) {
+  const counts = useMemo(() => {
+    const map = {};
+    values.forEach(v => { map[v] = countForPill(items, selected, group, v); });
+    return map;
+  }, [values, items, selected, group]);
+  return (
+    <div className="hr-group-column">
+      <span className="hr-group-column-label">{HR_GROUP_LABELS[group] || group}</span>
+      {values.map(v => {
+        const active = selected[group]?.has(v) ?? false;
+        const zero = !active && counts[v] === 0;
         return (
-          <button
-            key={tag}
-            className={`ef-pill${isActive ? " ef-pill-sel" : ""}${!allSelected && !isActive ? " ef-pill-dim" : ""}${!hasItems ? " ef-pill-dead" : ""}`}
-            onClick={() => hasItems && onToggle(tag)}
-            disabled={!hasItems}
-          >
-            {tagLabel(tag)}
-          </button>
+          <PillButton
+            key={v}
+            label={v}
+            count={counts[v]}
+            active={active}
+            zero={zero}
+            pillWidth={pillWidth}
+            onClick={() => toggle(group, v)}
+          />
         );
       })}
     </div>
   );
 }
 
-// ─── EXHIBIT SCROLLER — unified for all sections ───────────────────────────
-function ExhibitScroller({ items, activeAlbumId, children }) {
-  const [idx, setIdx] = useState(0);
-  const [lightbox, setLightbox] = useState(null);
-  const timerRef = useRef(null);
-  const hoverRef = useRef(false);
-  const prevAlbumRef = useRef(activeAlbumId);
-
-  const sorted = useMemo(
-    () => [...items].sort((a, b) => a.date.localeCompare(b.date)),
-    [items]
-  );
-  const count = sorted.length;
-
-  // Soft anchor: when album changes, jump to first matching era
-  useEffect(() => {
-    if (activeAlbumId && activeAlbumId !== prevAlbumRef.current) {
-      prevAlbumRef.current = activeAlbumId;
-      const era = ALBUM_ERA[activeAlbumId] || null;
-      if (era && sorted.length > 0) {
-        const anchorIdx = sorted.findIndex(a => a.era === era);
-        if (anchorIdx >= 0) setIdx(anchorIdx);
-      }
-    }
-  }, [activeAlbumId, sorted]);
-
-  const startTimer = useCallback(() => {
-    clearInterval(timerRef.current);
-    if (count <= 0) return;
-    timerRef.current = setInterval(() => {
-      if (!hoverRef.current) setIdx(prev => (prev + 1) % count);
-    }, 7500);
-  }, [count]);
-
-  useEffect(() => { startTimer(); return () => clearInterval(timerRef.current); }, [startTimer]);
-  useEffect(() => { if (idx >= count && count > 0) setIdx(0); }, [count, idx]);
-
-  if (count === 0) {
-    return <div className="ef-scroller-empty">No artifacts match these filters.</div>;
-  }
-
-  const current = sorted[idx % count];
-  const prevItem = sorted[(idx - 1 + count) % count];
-  const nextItem = sorted[(idx + 1) % count];
-
-  function goPrev() { setIdx((idx - 1 + count) % count); startTimer(); }
-  function goNext() { setIdx((idx + 1) % count); startTimer(); }
-
+// ─── KALEIDOSCOPE — MOTHBALLED for v1; never rendered ───────────────────────
+// MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
+// Knob, PillSwitch, VuMeter, KaleidoscopeContent — preserved API for revival.
+// eslint-disable-next-line no-unused-vars
+function Knob({ id, label, value, onChange }) {
+  const wrapRef = useRef(null);
+  const [dragging, setDragging] = useState(false);
+  const deg = value * 270 - 135;
+  const readoutVal = Math.round(value * 100);
+  const onMouseDown = (e) => {
+    e.preventDefault();
+    const startX = e.clientX, startY = e.clientY, startVal = value;
+    setDragging(true);
+    const onMove = (ev) => {
+      const dx = (ev.clientX - startX) / 150;
+      const dy = (startY - ev.clientY) / 150;
+      const next = Math.max(0, Math.min(1, startVal + dx + dy));
+      onChange(next);
+    };
+    const onUp = () => {
+      setDragging(false);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+  };
   return (
-    <div
-      className="ef-scroller"
-      onMouseEnter={() => { hoverRef.current = true; }}
-      onMouseLeave={() => { hoverRef.current = false; }}
-    >
-      {/* Bleed strip */}
-      <div className="ef-strip">
-        <div className="ef-bleed ef-bleed-l" onClick={goPrev}>
-          <div className="ef-bleed-card" style={{ background: prevItem.color }}>
-            <span className="ef-bleed-ico">{prevItem.icon}</span>
-          </div>
+    <div className="hr-kal-block">
+      <div ref={wrapRef} className={"knob-wrap" + (dragging ? " dragging" : "")}
+           onMouseDown={onMouseDown}
+           role="slider" aria-label={label} aria-valuenow={readoutVal}>
+        <div className="hr-kal-knob">
+          <div className="hr-kal-knob-indicator" style={{ transform: `translateX(-50%) rotate(${deg}deg)` }} />
         </div>
-        <div className="ef-center" onClick={() => setLightbox(current)}>
-          <div className="ef-card" style={{ background: current.color }}>
-            <span className="ef-card-ico">{current.icon}</span>
-          </div>
-        </div>
-        <div className="ef-bleed ef-bleed-r" onClick={goNext}>
-          <div className="ef-bleed-card" style={{ background: nextItem.color }}>
-            <span className="ef-bleed-ico">{nextItem.icon}</span>
-          </div>
-        </div>
+        <div className="hr-kal-knob-readout">{readoutVal}</div>
       </div>
-
-      {/* Slot for pills — tucked under the image */}
-      {children}
-
-      {/* Caption + meta below */}
-      <div className="ef-caption">{current.fact1}</div>
-      <div className="ef-meta">
-        <span className="ef-meta-type">{tagLabel(current.type)}</span>
-        <span className="ef-meta-date">{current.date}</span>
-        {current.credit && <span className="ef-meta-credit">via {current.credit}</span>}
-      </div>
-
-      {/* Lightbox */}
-      {lightbox && (
-        <div className="ef-lightbox" onClick={() => setLightbox(null)}>
-          <div className="ef-lightbox-inner" onClick={e => e.stopPropagation()}>
-            <div className="ef-lightbox-vis" style={{ background: lightbox.color }}>
-              <span className="ef-lightbox-ico">{lightbox.icon}</span>
-            </div>
-            <div className="ef-lightbox-meta">
-              <span className="ef-lightbox-type">{tagLabel(lightbox.type)}</span>
-              <span className="ef-lightbox-date">{lightbox.date}</span>
-              <span className="ef-lightbox-src">{tagLabel(lightbox.src)}</span>
-            </div>
-            <div className="ef-lightbox-f1">{lightbox.fact1}</div>
-            {lightbox.fact2 && <div className="ef-lightbox-f2">{lightbox.fact2}</div>}
-            {lightbox.credit && <div className="ef-lightbox-credit">Contributed by {lightbox.credit}</div>}
-            <button className="ef-lightbox-close" onClick={() => setLightbox(null)}>Close</button>
-          </div>
-        </div>
-      )}
+      <div className="hr-kal-block-label">{label}</div>
     </div>
   );
 }
 
-// ─── JOURNAL (single instance, shared across exhibit) ───────────────────────
+// MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
+// eslint-disable-next-line no-unused-vars
+function PillSwitch({ id, label, value, onChange }) {
+  return (
+    <div className="hr-kal-block">
+      <div
+        className={"hr-kal-switch" + (value ? " on" : "")}
+        onClick={() => onChange(!value)}
+        role="switch" aria-checked={value} aria-label={label}
+      >
+        <div className={"hr-kal-switch-knob" + (value ? " on" : "")} />
+      </div>
+      <div className="hr-kal-block-label">{label}</div>
+    </div>
+  );
+}
+
+// MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
+function VuMeter({ percent }) {
+  const [current, setCurrent] = useState(percent);
+  const [peak, setPeak] = useState(0);
+  /* eslint-disable react-hooks/purity -- VuMeter is MOTHBALLED for v1; never
+     rendered. The performance.now() call in the ref initializer would trip
+     react-hooks/purity if mounted. Disabled until post-launch revival. */
+  const stateRef = useRef({
+    current: percent, target: percent, peak: 0, peakHold: 0,
+    lastFrame: typeof performance !== "undefined" ? performance.now() : 0,
+  });
+  /* eslint-enable react-hooks/purity */
+
+  useEffect(() => {
+    const st = stateRef.current;
+    const jump = percent - st.target;
+    if (Math.abs(jump) > 2) {
+      const popMag = Math.min(Math.abs(jump) * 0.4, 8);
+      st.current = Math.min(100, percent + (jump > 0 ? popMag : 0));
+    } else {
+      st.current = percent;
+    }
+    st.target = percent;
+    const currentSeg = Math.round((st.current / 100) * 12);
+    if (currentSeg > st.peak) { st.peak = currentSeg; st.peakHold = 800; }
+    setCurrent(st.current);
+    setPeak(st.peak);
+  }, [percent]);
+
+  useEffect(() => {
+    let rafId;
+    const tick = (now) => {
+      const st = stateRef.current;
+      const dt = now - st.lastFrame;
+      st.lastFrame = now;
+      let changed = false;
+      if (Math.abs(st.current - st.target) > 0.1) {
+        const delta = st.target - st.current;
+        st.current += delta * Math.min(1, dt / 120);
+        changed = true;
+      }
+      if (st.peakHold > 0) {
+        st.peakHold -= dt;
+      } else if (st.peak > 0) {
+        st.peak -= dt / 400;
+        if (st.peak < 0) st.peak = 0;
+        changed = true;
+      }
+      if (changed) { setCurrent(st.current); setPeak(st.peak); }
+      rafId = requestAnimationFrame(tick);
+    };
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, []);
+
+  const litCount = Math.round((current / 100) * 12);
+  const peakSeg = Math.floor(peak);
+  const segs = [];
+  for (let i = 0; i < 12; i++) {
+    let bg = LED_OFF;
+    let shadow = "none";
+    const isLit = i < litCount;
+    const isPeak = !isLit && peakSeg > litCount && i === peakSeg - 1 && peak > 0;
+    if (isLit) {
+      if (i < 1)       { bg = LED_RED;    shadow = "0 0 5px rgba(200, 96, 64, 0.6)"; }
+      else if (i < 4)  { bg = LED_YELLOW; shadow = "0 0 4px rgba(200, 160, 80, 0.55)"; }
+      else             { bg = LED_GREEN;  shadow = "0 0 4px rgba(138, 154, 74, 0.5)"; }
+    } else if (isPeak) {
+      bg = "#d8c890"; shadow = "0 0 4px rgba(216, 200, 144, 0.6)";
+    }
+    segs.push(<div key={i} className="hr-vu-seg" style={{ background: bg, boxShadow: shadow }} />);
+  }
+  return (
+    <div className="hr-vu-outer">
+      <div className="hr-vu-column">{segs}</div>
+    </div>
+  );
+}
+
+// MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
+function KaleidoscopeContent({ kalState, setKalState, remainingPercent, remainingCount, totalCount }) {
+  const setKnob = (id) => (v) => setKalState(prev => ({ ...prev, [id]: v }));
+  return (
+    <div className="hr-content-body wb-scroll">
+      <div className="hr-kal-wrap">
+        <div className="hr-kal-console">
+          <div className="hr-kal-knob-row">
+            {KAL_KNOBS.map(cfg => (
+              <Knob key={cfg.id} id={cfg.id} label={cfg.label}
+                    value={kalState[cfg.id]} onChange={setKnob(cfg.id)} />
+            ))}
+          </div>
+          <div className="hr-vu-cluster">
+            <VuMeter percent={remainingPercent} />
+            <div className="hr-vu-readout-stack">
+              <div className="hr-vu-readout-number">{remainingCount}<span> / {totalCount}</span></div>
+              <div className="hr-vu-readout-label">artifact<br/>remaining</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── CARD COMPONENTS — ported from v28, classes wired through CSS ───────────
+function PhotoCard({ card }) {
+  return (
+    <>
+      <div className="hr-card-photo-vis">
+        <div className="hr-card-photo-frame" />
+        <span className="hr-card-photo-label">photo</span>
+      </div>
+      <div className="hr-card-foot">
+        <div className="hr-card-title">{card.title}</div>
+        <div className="hr-card-meta">{card.meta}</div>
+        {card.credit && <div className="hr-card-credit">— {card.credit}</div>}
+      </div>
+    </>
+  );
+}
+
+function ArtCard({ card }) {
+  return (
+    <>
+      <div className="hr-card-art-vis">
+        <div className="hr-card-art-circle" />
+      </div>
+      <div className="hr-card-foot hr-card-foot-dashed">
+        <div className="hr-card-title">{card.title}</div>
+        {card.credit && <div className="hr-card-credit">— <strong>{card.credit}</strong></div>}
+        {card.meta && <div className="hr-card-meta">{card.meta}</div>}
+      </div>
+    </>
+  );
+}
+
+function VideoCard({ card }) {
+  return (
+    <>
+      <div className="hr-card-video-vis">
+        {card.isLive && <div className="hr-card-video-live">live</div>}
+        <div className="hr-card-video-play">
+          <div className="hr-card-video-play-tri" />
+        </div>
+        {card.duration && <div className="hr-card-video-dur">{card.duration}</div>}
+      </div>
+      <div className="hr-card-foot">
+        <div className="hr-card-title">{card.title}</div>
+        {card.meta && <div className="hr-card-meta">{card.meta}</div>}
+        {card.isCover && card.credit && <div className="hr-card-credit">— {card.credit}</div>}
+      </div>
+    </>
+  );
+}
+
+function PressCard({ card }) {
+  return (
+    <div className="hr-card-press">
+      <div className="hr-card-press-source">{card.source}</div>
+      <div className="hr-card-press-pull">
+        <span className="hr-card-press-quote">“ </span>
+        {card.pull}
+        <span className="hr-card-press-quote"> ”</span>
+      </div>
+      <div className="hr-card-press-sub">{card.sub}</div>
+    </div>
+  );
+}
+
+function EssayCard({ card }) {
+  return (
+    <div className="hr-card-essay">
+      <div className="hr-card-essay-kind">{card.kind}</div>
+      <div className="hr-card-essay-title">{card.title}</div>
+      <div className="hr-card-essay-lede">{card.lede}</div>
+      {card.credit && <div className="hr-card-credit">— {card.credit}</div>}
+    </div>
+  );
+}
+
+function SessionCard({ card }) {
+  return (
+    <>
+      <div className="hr-card-session-vis">
+        <div className="hr-card-session-rect" />
+      </div>
+      <div className="hr-card-foot">
+        <div className="hr-card-title hr-card-title-sm">{card.title}</div>
+        <div className="hr-card-meta">{card.meta}</div>
+      </div>
+    </>
+  );
+}
+
+function ArtifactCard({ card }) {
+  const isPress = card.render === "press";
+  const isEssay = card.render === "essay";
+  // Phase 1.5c: voice tiles (HR_EXIT_FLOW) get a distinct visual treatment;
+  // cards with an externalUrl become clickable and open in a new tab.
+  const isVoice = card.contentClass === "voice";
+  const isLink = !!card.externalUrl;
+  const baseStyle = {
+    ...spanStyle(card.span_w, card.span_h),
+    ...(isPress ? { borderLeft: `2px solid ${GOLD_LO}`, background: "transparent" } : {}),
+    ...(isEssay ? { background: INK_CARD_HI } : {}),
+    border: isPress ? undefined : `1px solid ${BORDER}`,
+    background: isPress ? "transparent" : (isEssay ? INK_CARD_HI : INK_CARD),
+  };
+  const className = [
+    "hr-card",
+    "card-fade-in",
+    isVoice ? "hr-card-voice" : null,
+    isLink ? "hr-card-link" : null,
+  ].filter(Boolean).join(" ");
+  let inner;
+  switch (card.render) {
+    case "photo": inner = <PhotoCard card={card} />; break;
+    case "art": inner = <ArtCard card={card} />; break;
+    case "video": inner = <VideoCard card={card} />; break;
+    case "press": inner = <PressCard card={card} />; break;
+    case "essay": inner = <EssayCard card={card} />; break;
+    case "session": inner = <SessionCard card={card} />; break;
+    default: inner = null;
+  }
+  const badge = isVoice
+    ? <span className="hr-card-voice-badge">curator&rsquo;s note</span>
+    : null;
+  const chevron = isLink
+    ? <span className="hr-card-link-arrow" aria-hidden="true">↗</span>
+    : null;
+  if (isLink) {
+    return (
+      <a
+        className={className}
+        style={baseStyle}
+        href={card.externalUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {inner}
+        {badge}
+        {chevron}
+      </a>
+    );
+  }
+  return (
+    <div className={className} style={baseStyle}>
+      {inner}
+      {badge}
+    </div>
+  );
+}
+
+// ─── PAGE / GRID — ported from v28 ──────────────────────────────────────────
+function P3Panel({ matched, totalCount }) {
+  const filterKey = useMemo(() => matched.map(c => c.id).join(","), [matched]);
+  return (
+    <>
+      <div className="hr-page-header">
+        <div className="hr-eyebrow">Weird.Baby · Hunter Root · {HR_CARDS.length} artifacts</div>
+        <h1 className="hr-page-title">the artifact dock</h1>
+        <p className="hr-page-sub">
+          Six tabs: Artist · Formats · Deep Tracks · Journal · Presets · ✕.
+          Search lives inside Deep Tracks. Shuffle and Loop appear in Presets
+          as pill switches alongside the user slots; in v1 they capture state
+          for display only and do not act on the player. Kaleidoscope is
+          mothballed for v1.
+        </p>
+      </div>
+      <div className="hr-panel-head">
+        <span className="hr-panel-head-label">
+          artifacts <span className="hr-panel-head-muted"> · the material evidence</span>
+        </span>
+        <span className="hr-panel-count">
+          <span className="hr-panel-count-big">{matched.length}</span>
+          <span className="hr-panel-count-total"> of {totalCount}</span>
+        </span>
+      </div>
+      <div className="hr-artifact-grid">
+        {matched.map(card => <ArtifactCard key={`${filterKey}-${card.id}`} card={card} />)}
+      </div>
+    </>
+  );
+}
+
+function ScrollFadeContainer({ children }) {
+  return (
+    <div className="hr-scroll-fade-wrap">
+      <div className="wb-scroll hr-content-body">{children}</div>
+    </div>
+  );
+}
+
+// ─── TAB CONTENT COMPONENTS — ported from v28, plus JournalContent ──────────
+function TierContent({ dims, selected, toggle, pillWidth }) {
+  return (
+    <ScrollFadeContainer>
+      <div className="hr-groups-row">
+        {dims.map(dim => (
+          <PillGroupColumn
+            key={dim.key} group={dim.key} values={dim.values}
+            items={HR_CARDS} selected={selected} toggle={toggle}
+            pillWidth={pillWidth}
+          />
+        ))}
+      </div>
+    </ScrollFadeContainer>
+  );
+}
+
+function DeepTracksContent({ dims, selected, toggle, pillWidth, query, setQuery, focusSignal }) {
+  const inputRef = useRef(null);
+  useEffect(() => { if (focusSignal) inputRef.current?.focus(); }, [focusSignal]);
+
+  const q = query.trim().toLowerCase();
+  const hits = useMemo(() => {
+    if (!q) return [];
+    const out = [];
+    HR_DIMENSIONS.forEach(dim => {
+      dim.values.forEach(v => {
+        if (prettyTag(v).toLowerCase().includes(q)) out.push({ group: dim.key, tag: v });
+      });
+    });
+    return out;
+  }, [q]);
+
+  const hasQuery = q.length > 0;
+
+  return (
+    <ScrollFadeContainer>
+      <div className="hr-deep-stack">
+        <div className="hr-search-wrap">
+          <div className="hr-search-input-holder">
+            <input
+              ref={inputRef}
+              className="searchbar"
+              type="text"
+              placeholder="search for any tag across all tiers"
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+            />
+          </div>
+          {hasQuery && (
+            <div className="pillscroll hr-corral">
+              {hits.length === 0 ? (
+                <span className="hr-corral-empty">no tags match "{query}"</span>
+              ) : hits.map(({ group, tag }, i) => {
+                const active = selected[group]?.has(tag) ?? false;
+                const count = countForPill(HR_CARDS, selected, group, tag);
+                const zero = !active && count === 0;
+                return (
+                  <PillButton
+                    key={`${group}-${tag}-${i}`}
+                    label={tag} count={count} active={active} zero={zero}
+                    pillWidth={null}
+                    onClick={() => toggle(group, tag)}
+                  />
+                );
+              })}
+            </div>
+          )}
+        </div>
+        {dims.length > 0 && (
+          <div className="hr-groups-row">
+            {dims.map(dim => (
+              <PillGroupColumn
+                key={dim.key} group={dim.key} values={dim.values}
+                items={HR_CARDS} selected={selected} toggle={toggle}
+                pillWidth={pillWidth}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </ScrollFadeContainer>
+  );
+}
+
+// ─── PRESETS — ported from v28 ──────────────────────────────────────────────
+// O9: shuffle / loop pills toggle local state but no-op against the player.
+// Real player wiring is a follow-up phase. The state still flows into
+// preset snapshots so the data shape is forward-compatible.
+function PresetsContent({
+  userPresets, setUserPresets, selected, setSelected,
+  shuffle, setShuffle, loop, setLoop,
+  playingTrack, spinePosition,
+}) {
+  const [lastFactoryApplied, setLastFactoryApplied] = useState(null);
+
+  const applyFactoryPreset = (preset) => {
+    const next = preset.apply();
+    const cleared = {};
+    HR_DIMENSIONS.forEach(({ key }) => { cleared[key] = new Set(); });
+    if (next.__randomIds) {
+      setSelected({ ...cleared, __randomIds: next.__randomIds });
+    } else {
+      for (const [k, v] of Object.entries(next)) cleared[k] = v;
+      setSelected(cleared);
+    }
+    setLastFactoryApplied(preset.key);
+  };
+
+  const slotIsFilled = (slot) => !!userPresets[slot];
+  const saveHere = (slot) => {
+    const snap = makePresetSnapshot({ selected, shuffle, loop, playingTrack, spinePosition });
+    setUserPresets(prev => ({ ...prev, [slot]: snap }));
+  };
+  // O8 — APPLY restores selected / shuffle / loop only. Player state
+  // (playingTrack, spinePosition) is captured in snapshots for display
+  // but not restored; that's a follow-up phase.
+  const applySlot = (slot) => {
+    const p = userPresets[slot];
+    if (!p) return;
+    if (p.selected) {
+      setSelected(cloneSelected(p.selected));
+      setShuffle(!!p.shuffle);
+      setLoop(!!p.loop);
+    } else {
+      setSelected(cloneSelected(p));
+    }
+  };
+  const clearSlot = (slot) => {
+    setUserPresets(prev => ({ ...prev, [slot]: null }));
+  };
+
+  return (
+    <div className="wb-scroll hr-content-body">
+      <div className="hr-presets-section-label">presets</div>
+      <div className="hr-presets-top-row">
+        <div className="hr-presets-slots-col">
+          {["P1", "P2", "P3"].map(slot => {
+            const has = slotIsFilled(slot);
+            const p = userPresets[slot];
+            return (
+              <div key={slot} style={S.presetSlotRow(has)}>
+                <span className="hr-preset-slot-label">{slot}</span>
+                <span style={S.presetSummary(!has)} title={has ? presetSummaryText(p) : undefined}>
+                  {has ? presetSummaryText(p) : "empty"}
+                </span>
+                <button
+                  className="preset-row-btn"
+                  style={S.presetRowBtn(has, true)}
+                  onClick={has ? () => applySlot(slot) : undefined}
+                  aria-disabled={!has}
+                >apply</button>
+                <button
+                  className="preset-row-btn"
+                  style={S.presetRowBtn(has, false)}
+                  onClick={has ? () => clearSlot(slot) : undefined}
+                  aria-disabled={!has}
+                >clear slot</button>
+                <button
+                  className="preset-row-btn"
+                  style={S.presetRowBtn(true, true)}
+                  onClick={() => saveHere(slot)}
+                  title={has ? "overwrite this slot with current state" : "save current state to this slot"}
+                >save here</button>
+              </div>
+            );
+          })}
+        </div>
+        <div className="hr-presets-player-col">
+          <div className="hr-presets-player-label">player</div>
+          {/* O9 — shuffle / loop are state-only stubs in v1. They do not
+              affect playback. Captured into preset snapshots so the data
+              shape is forward-compatible when the real wiring lands. */}
+          <div
+            style={S.presetsPill(shuffle)}
+            onClick={() => setShuffle(s => !s)}
+            role="switch" aria-checked={shuffle}
+          >
+            <span>shuffle</span>
+            <span style={S.presetsPillState(shuffle)}>{shuffle ? "on" : "off"}</span>
+          </div>
+          <div
+            style={S.presetsPill(loop)}
+            onClick={() => setLoop(l => !l)}
+            role="switch" aria-checked={loop}
+          >
+            <span>loop</span>
+            <span style={S.presetsPillState(loop)}>{loop ? "on" : "off"}</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="hr-presets-section-label">factory</div>
+      <div className="hr-factory-grid">
+        {FACTORY_PRESETS.map(p => (
+          <div
+            key={p.key}
+            style={S.presetCard(lastFactoryApplied === p.key)}
+            onClick={() => applyFactoryPreset(p)}
+          >
+            <span className="hr-preset-label">{p.label}</span>
+            <span className="hr-preset-desc">{p.desc}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── JOURNAL — ported from quarantined HrExhibitFlow.jsx, fitted to dock body
+// O5: Journal renders as the body of a tab between Deep Tracks and Presets.
+// Layout adapts to the dock body's flexible height (default 480px, resizable).
+// Vertical scroll inside the tab body when entries overflow.
 const SEED_ENTRIES = [
   { id: 1, date: "2025-11-02", handle: "velvetcassette", ctx: "'Town Rat Heathen'", era: "solo",
     fact1: "I heard this in a coffee shop in Philly and made the barista tell me what was playing. Went home and listened to the whole catalog that night.",
@@ -219,25 +1095,28 @@ const SEED_ENTRIES = [
     up: 3, dn: 0, voted: null, mine: false, undoTimer: null },
 ];
 
-function Journal({ prompts, eraFilter }) {
-  const [entries, setEntries]       = useState(SEED_ENTRIES);
-  const [handle, setHandle]         = useState("");
-  const [text, setText]             = useState("");
-  const [promptIdx, setPromptIdx]   = useState(0);
-  const [feedIdx, setFeedIdx]       = useState(0);
+function JournalContent({ prompts, eraFilter }) {
+  const [entries, setEntries]     = useState(SEED_ENTRIES);
+  const [handle, setHandle]       = useState("");
+  const [text, setText]           = useState("");
+  const [promptIdx, setPromptIdx] = useState(0);
+  const [feedIdx, setFeedIdx]     = useState(0);
   const promptTimerRef = useRef(null);
   const feedTimerRef   = useRef(null);
   const hoverRef       = useRef(false);
   const nextIdRef      = useRef(100);
 
-  // Filter by era only
   const filtered = useMemo(
-    () => entries.filter(e => eraFilter.size === 0 || eraFilter.has(e.era)),
+    () => entries.filter(e => !eraFilter || eraFilter.size === 0 || eraFilter.has(e.era)),
     [entries, eraFilter]
   );
 
-  // Weighted random order
-  const weighted = useRef([]);
+  // setState-in-effect is intentional here: the weighted order depends on
+  // Math.random() (we shuffle), so useMemo would re-roll on every render.
+  // We compute once whenever filtered.length / eraFilter changes. The
+  // dependency on `filtered.length` (not `filtered`) is also intentional —
+  // we don't want to rebuild when an entry's vote count flips.
+  const [weighted, setWeighted] = useState([]);
   useEffect(() => {
     const pool = [];
     filtered.forEach((e, i) => {
@@ -249,15 +1128,16 @@ function Journal({ prompts, eraFilter }) {
       [pool[i], pool[j]] = [pool[j], pool[i]];
     }
     const seen = new Set();
-    weighted.current = pool.filter(idx => {
+    const next = pool.filter(idx => {
       if (seen.has(idx)) return false;
       seen.add(idx);
       return true;
     });
+    setWeighted(next);
     setFeedIdx(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtered.length, eraFilter]);
 
-  // Prompt rotation
   useEffect(() => {
     clearInterval(promptTimerRef.current);
     promptTimerRef.current = setInterval(() => {
@@ -266,16 +1146,15 @@ function Journal({ prompts, eraFilter }) {
     return () => clearInterval(promptTimerRef.current);
   }, [prompts.length]);
 
-  // Feed auto-advance
   useEffect(() => {
     clearInterval(feedTimerRef.current);
     feedTimerRef.current = setInterval(() => {
-      if (!hoverRef.current && weighted.current.length > 0) {
-        setFeedIdx(prev => (prev + 1) % weighted.current.length);
+      if (!hoverRef.current && weighted.length > 0) {
+        setFeedIdx(prev => (prev + 1) % weighted.length);
       }
     }, 8500);
     return () => clearInterval(feedTimerRef.current);
-  }, []);
+  }, [weighted]);
 
   function submitEntry() {
     if (!text.trim()) return;
@@ -298,7 +1177,7 @@ function Journal({ prompts, eraFilter }) {
 
   function undoEntry(id) { setEntries(prev => prev.filter(e => e.id !== id)); }
   function deleteEntry(id) {
-    if (!window.confirm("Delete this entry?")) return;
+    if (typeof window !== "undefined" && !window.confirm("Delete this entry?")) return;
     setEntries(prev => prev.filter(e => e.id !== id));
   }
 
@@ -306,7 +1185,8 @@ function Journal({ prompts, eraFilter }) {
     setEntries(prev => prev.map(e => {
       if (e.id !== id) return e;
       if (e.voted === dir) {
-        return { ...e, voted: null,
+        return {
+          ...e, voted: null,
           up: dir === "up" ? e.up - 1 : e.up,
           dn: dir === "dn" ? e.dn - 1 : e.dn,
         };
@@ -320,71 +1200,88 @@ function Journal({ prompts, eraFilter }) {
   }
 
   const prompt = prompts[promptIdx % prompts.length];
-  const feedOrder = weighted.current;
-  const feedEntry = feedOrder.length > 0 ? filtered[feedOrder[feedIdx % feedOrder.length]] : null;
+  const feedOrder = weighted;
+  const feedEntry = feedOrder.length > 0
+    ? filtered[feedOrder[feedIdx % feedOrder.length]]
+    : null;
 
   return (
     <div
-      className="jnl"
+      className="wb-scroll hr-content-body hr-journal-body"
       onMouseEnter={() => { hoverRef.current = true; }}
       onMouseLeave={() => { hoverRef.current = false; }}
     >
-      {/* Prompt */}
-      <div className="jnl-prompt">
+      <div className="hr-jnl-prompt">
         {prompt?.line1}<br />{prompt?.line2}
       </div>
 
-      {/* Compose */}
-      <div className="jnl-compose">
-        <input className="jnl-handle" type="text" placeholder="your handle"
-          value={handle} onChange={e => setHandle(e.target.value)} maxLength={24} />
-        <textarea className="jnl-text" placeholder="Leave your mark..."
-          value={text} onChange={e => setText(e.target.value)} maxLength={500} />
-        <button className="jnl-submit" onClick={submitEntry}>Leave it</button>
+      <div className="hr-jnl-compose">
+        <input
+          className="hr-jnl-handle"
+          type="text" placeholder="your handle"
+          value={handle}
+          onChange={e => setHandle(e.target.value)}
+          maxLength={24}
+        />
+        <textarea
+          className="hr-jnl-text"
+          placeholder="Leave your mark..."
+          value={text}
+          onChange={e => setText(e.target.value)}
+          maxLength={500}
+        />
+        <button className="hr-jnl-submit" onClick={submitEntry}>Leave it</button>
       </div>
 
-      {/* Feed */}
-      <div className="jnl-feed">
+      <div className="hr-jnl-feed">
         {entries.filter(e => e.undoTimer !== null).map(e => (
-          <div key={e.id} className="jnl-entry jnl-entry-new">
-            <div className="jnl-entry-head">
-              <span className="jnl-entry-who">{e.handle}</span>
-              <span className="jnl-entry-when">{e.date}</span>
+          <div key={e.id} className="hr-jnl-entry hr-jnl-entry-new">
+            <div className="hr-jnl-entry-head">
+              <span className="hr-jnl-entry-who">{e.handle}</span>
+              <span className="hr-jnl-entry-when">{e.date}</span>
             </div>
-            <div className="jnl-entry-body">{e.fact1}</div>
-            <button className="jnl-undo" onClick={() => undoEntry(e.id)}>Undo ({e.undoTimer}s)</button>
+            <div className="hr-jnl-entry-body">{e.fact1}</div>
+            <button className="hr-jnl-undo" onClick={() => undoEntry(e.id)}>Undo ({e.undoTimer}s)</button>
           </div>
         ))}
 
         {feedEntry && feedEntry.undoTimer === null && (
-          <div className="jnl-entry">
-            <div className="jnl-entry-head">
-              <span className="jnl-entry-who">{feedEntry.handle}</span>
-              {feedEntry.ctx && <span className="jnl-entry-ctx">{feedEntry.ctx}</span>}
-              <span className="jnl-entry-when">{feedEntry.date}</span>
+          <div className="hr-jnl-entry">
+            <div className="hr-jnl-entry-head">
+              <span className="hr-jnl-entry-who">{feedEntry.handle}</span>
+              {feedEntry.ctx && <span className="hr-jnl-entry-ctx">{feedEntry.ctx}</span>}
+              <span className="hr-jnl-entry-when">{feedEntry.date}</span>
             </div>
-            <div className="jnl-entry-body">{feedEntry.fact1}</div>
-            <div className="jnl-entry-actions">
-              <button className={`jnl-vote${feedEntry.voted === "up" ? " jnl-vote-on" : ""}`}
-                onClick={() => vote(feedEntry.id, "up")}>&#9650; {feedEntry.up}</button>
-              <button className={`jnl-vote${feedEntry.voted === "dn" ? " jnl-vote-on" : ""}`}
-                onClick={() => vote(feedEntry.id, "dn")}>&#9660; {feedEntry.dn}</button>
+            <div className="hr-jnl-entry-body">{feedEntry.fact1}</div>
+            <div className="hr-jnl-entry-actions">
+              <button
+                className={`hr-jnl-vote${feedEntry.voted === "up" ? " hr-jnl-vote-on" : ""}`}
+                onClick={() => vote(feedEntry.id, "up")}
+              >&#9650; {feedEntry.up}</button>
+              <button
+                className={`hr-jnl-vote${feedEntry.voted === "dn" ? " hr-jnl-vote-on" : ""}`}
+                onClick={() => vote(feedEntry.id, "dn")}
+              >&#9660; {feedEntry.dn}</button>
               {feedEntry.mine && (
-                <button className="jnl-delete" onClick={() => deleteEntry(feedEntry.id)}>delete</button>
+                <button className="hr-jnl-delete" onClick={() => deleteEntry(feedEntry.id)}>delete</button>
               )}
             </div>
           </div>
         )}
 
         {feedOrder.length > 1 && (
-          <div className="jnl-feed-nav">
-            <button className="ef-btn"
-              onClick={() => setFeedIdx(prev => (prev - 1 + feedOrder.length) % feedOrder.length)}>‹</button>
-            <span className="ef-counter">
+          <div className="hr-jnl-feed-nav">
+            <button
+              className="hr-jnl-btn"
+              onClick={() => setFeedIdx(prev => (prev - 1 + feedOrder.length) % feedOrder.length)}
+            >‹</button>
+            <span className="hr-jnl-counter">
               {(feedIdx % feedOrder.length) + 1} / {feedOrder.length}
             </span>
-            <button className="ef-btn"
-              onClick={() => setFeedIdx(prev => (prev + 1) % feedOrder.length)}>›</button>
+            <button
+              className="hr-jnl-btn"
+              onClick={() => setFeedIdx(prev => (prev + 1) % feedOrder.length)}
+            >›</button>
           </div>
         )}
       </div>
@@ -392,281 +1289,332 @@ function Journal({ prompts, eraFilter }) {
   );
 }
 
-// ─── EXHIBIT FLOW ROOT ──────────────────────────────────────────────────────
-const P2_TYPES = ["historical", "interview", "rarity"];
-const P3_TYPES = ["poster", "setlist", "photo", "fan-art", "handwritten", "video", "ticket"];
+// ─── AUDIT STRIP — O12: dev-only ────────────────────────────────────────────
+function _mkSel(groups) {
+  const out = {};
+  HR_DIMENSIONS.forEach(({ key }) => { out[key] = new Set(); });
+  for (const [k, vs] of Object.entries(groups)) out[k] = new Set(Array.isArray(vs) ? vs : [vs]);
+  return out;
+}
+function _runMatch(sel) { return HR_CARDS.filter(i => matchFilter(i, sel)).length; }
 
+function buildAuditResults() {
+  const N = HR_CARDS.length;
+  const tests = [];
+  // 1. all off → full catalog
+  const t1 = _runMatch(_mkSel({}));
+  tests.push({ id: 1, name: "all off → full catalog", expected: N, actual: t1, pass: t1 === N });
+  // 2. era: solo alone → carries solo
+  const expected2 = HR_CARDS.filter(i => i.era === "solo").length;
+  const t2 = _runMatch(_mkSel({ era: "solo" }));
+  tests.push({ id: 2, name: "era: solo alone", expected: expected2, actual: t2, pass: t2 === expected2 });
+  // 3. era within-group OR (medusas + solo)
+  const expected3 = HR_CARDS.filter(i => i.era === "medusas" || i.era === "solo").length;
+  const t3 = _runMatch(_mkSel({ era: ["medusas", "solo"] }));
+  tests.push({ id: 3, name: "era: medusas OR solo", expected: expected3, actual: t3, pass: t3 === expected3 });
+  // 4. across-group AND (era=medusas AND src=archive)
+  const expected4 = HR_CARDS.filter(i => i.era === "medusas" && i.src === "archive").length;
+  const t4 = _runMatch(_mkSel({ era: "medusas", src: "archive" }));
+  tests.push({ id: 4, name: "era=medusas AND src=archive", expected: expected4, actual: t4, pass: t4 === expected4 });
+  const allPass = tests.every(t => t.pass);
+  return { tests, allPass, catalogSize: N };
+}
+
+function AuditStrip() {
+  const [open, setOpen] = useState(false);
+  const result = useMemo(() => buildAuditResults(), []);
+  const { tests, allPass, catalogSize } = result;
+  const barBg = allPass ? "rgba(40, 64, 36, 0.92)" : "rgba(72, 28, 28, 0.92)";
+  const barFg = allPass ? "#b9d8a6" : "#e9b0b0";
+  return (
+    <div
+      className="hr-audit-strip"
+      style={{
+        position: "fixed", right: "12px", bottom: "12px", zIndex: 9999,
+        fontFamily: sansBody, fontSize: "11px", letterSpacing: "0.04em",
+        color: barFg, background: barBg,
+        border: "1px solid " + (allPass ? "#4a6a3e" : "#7a3a3a"),
+        borderRadius: "4px", padding: "6px 10px", maxWidth: "360px",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.4)",
+        cursor: "pointer", userSelect: "none",
+      }}
+      onClick={() => setOpen(o => !o)}
+      title="HR phase 1.5b sanity audit"
+    >
+      <div style={{ fontWeight: 600, textTransform: "uppercase" }}>
+        hr audit · {allPass ? "ALL PASS" : "FAIL"} · {tests.filter(t => t.pass).length}/{tests.length} · catalog={catalogSize} {open ? "▾" : "▸"}
+      </div>
+      {open && (
+        <div style={{ marginTop: "6px", fontSize: "10.5px", lineHeight: 1.5 }}>
+          {tests.map(t => (
+            <div key={t.id} style={{ color: t.pass ? "#cde1bd" : "#f3c2c2" }}>
+              {t.pass ? "✓" : "✗"} #{t.id} {t.name}
+              <span style={{ opacity: 0.75, marginLeft: "6px" }}>exp={t.expected} got={t.actual}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── ROOT — HrExhibitFlow component, exported for Exhibit.jsx line 908 ──────
 export default function HrExhibitFlow({ activeAlbumId }) {
-  const [eraFilter, setEraFilter] = useState(new Set());
-  // Default: all types selected (something must always be on)
-  const [p2Types, setP2Types]     = useState(new Set(P2_TYPES));
-  const [p3Types, setP3Types]     = useState(new Set(P3_TYPES));
-  const [p4Types, setP4Types]     = useState(new Set(P4_TYPES));
-  const prevAlbumRef = useRef(activeAlbumId);
-
-  // Era flows from spine
-  useEffect(() => {
-    if (activeAlbumId && activeAlbumId !== prevAlbumRef.current) {
-      prevAlbumRef.current = activeAlbumId;
-      const era = ALBUM_ERA[activeAlbumId] || null;
-      if (era) setEraFilter(new Set([era]));
-    }
-  }, [activeAlbumId]);
-
-  // Toggle with guard: never allow empty set
-  function toggleType(setter, allTags) {
-    return (tag) => setter(prev => {
-      const next = new Set(prev);
-      if (next.has(tag)) {
-        // Don't remove the last one
-        if (next.size <= 1) return prev;
-        next.delete(tag);
-      } else {
-        next.add(tag);
+  // activeAlbumId is accepted for prop compatibility with Exhibit.jsx but
+  // is not consumed by the dock in v1. Future tabs / filters may key off
+  // it (e.g., to seed era from album).
+  void activeAlbumId;
+  const [query, setQuery] = useState("");
+  const [selected, setSelected] = useState(() => makeEntrySelection());
+  // MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
+  // setKalState is wired into clear() so the dormant state stays in sync;
+  // kalState is intentionally not read in v1.
+  const [_kalState, setKalState] = useState(KAL_STATE_DEFAULT);
+  const [shuffle, setShuffle] = useState(false);
+  const [loop, setLoop] = useState(false);
+  // O8 — captured for snapshot display only; not currently sourced.
+  const [playingTrack] = useState(null);
+  const [spinePosition] = useState(null);
+  const [activeTab, setActiveTab] = useState(null);
+  const [hoverPeek, setHoverPeek] = useState(false);
+  const [dockHeight, setDockHeight] = useState(() => {
+    try {
+      const raw = typeof localStorage !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
+      if (raw) {
+        const n = parseInt(raw, 10);
+        if (!isNaN(n) && n >= DOCK_MIN_H) return n;
       }
+    } catch { /* ignore */ }
+    return DOCK_DEFAULT_H_SHARED;
+  });
+  const [resizing, setResizing] = useState(false);
+  const [resizeHover, setResizeHover] = useState(false);
+  const [userPresets, setUserPresets] = useState({ P1: null, P2: null, P3: null });
+  const [searchFocusSignal, setSearchFocusSignal] = useState(0);
+  const pillWidth = useGlobalPillWidth();
+  const hoverTimerRef = useRef(null);
+
+  useEffect(() => {
+    try {
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem(STORAGE_KEY, String(dockHeight));
+      }
+    } catch { /* ignore */ }
+  }, [dockHeight]);
+
+  // Tag filters narrow the catalog. Kaleidoscope recipe is dormant in v1.
+  const tagFiltered = useMemo(
+    () => HR_CARDS.filter(c => matchFilter(c, selected)),
+    [selected]
+  );
+  const finalMatched = tagFiltered;
+
+  const toggle = (group, tag) => {
+    setSelected(prev => {
+      const next = {};
+      for (const { key } of HR_DIMENSIONS) next[key] = new Set(prev[key] ?? []);
+      if (next[group].has(tag)) next[group].delete(tag);
+      else next[group].add(tag);
       return next;
     });
-  }
+  };
 
-  // Filter data — when all types selected, show everything
-  const p2Items = useMemo(
-    () => HR_ARCHIVE.filter(i => matchesEra(i, eraFilter) && matchesType(i, p2Types)),
-    [eraFilter, p2Types]
-  );
-  const p3Items = useMemo(
-    () => HR_ARTIFACTS.filter(i => matchesEra(i, eraFilter) && matchesType(i, p3Types)),
-    [eraFilter, p3Types]
-  );
-  const p4Items = useMemo(
-    () => HR_EXIT_FLOW.filter(i => matchesType(i, p4Types)),
-    [p4Types]
-  );
-  // Era-filtered items for pill availability
-  const p2EraItems = useMemo(
-    () => HR_ARCHIVE.filter(i => matchesEra(i, eraFilter)),
-    [eraFilter]
-  );
-  const p3EraItems = useMemo(
-    () => HR_ARTIFACTS.filter(i => matchesEra(i, eraFilter)),
-    [eraFilter]
-  );
+  const clear = () => {
+    setSelected(makeEntrySelection());
+    setKalState(KAL_STATE_DEFAULT);
+    setShuffle(false);
+    setLoop(false);
+    setQuery("");
+  };
 
+  const anyTagSelected = selected.__randomIds
+    || Object.values(selected).some(s => s instanceof Set && s.size > 0);
+  const anySelected = anyTagSelected || shuffle || loop;
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape" && (activeTab || hoverPeek)) {
+        setActiveTab(null); setHoverPeek(false);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [activeTab, hoverPeek]);
+
+  useEffect(() => {
+    const onResize = () => {
+      const vh = window.innerHeight;
+      setDockHeight(prev => Math.max(DOCK_MIN_H, Math.min(prev, vh * DOCK_MAX_FRAC)));
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const scheduleHoverOpen = () => {
+    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
+    hoverTimerRef.current = setTimeout(() => { setHoverPeek(true); }, HOVER_DELAY_OPEN);
+  };
+  const scheduleHoverClose = () => {
+    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
+    hoverTimerRef.current = setTimeout(() => { setHoverPeek(false); }, HOVER_DELAY_CLOSE);
+  };
+  const cancelHoverTimer = () => {
+    if (hoverTimerRef.current) {
+      clearTimeout(hoverTimerRef.current);
+      hoverTimerRef.current = null;
+    }
+  };
+
+  const open = activeTab !== null && activeTab !== "close";
+  let dockPx;
+  if (open) dockPx = dockHeight;
+  else if (hoverPeek) dockPx = TAB_STRIP_H;
+  else dockPx = TAB_PEEK;
+
+  const handleTabClick = (tabKey) => {
+    if (tabKey === "close") { setActiveTab(null); setHoverPeek(false); return; }
+    if (activeTab === tabKey) { setActiveTab(null); setHoverPeek(false); return; }
+    setActiveTab(tabKey);
+    setHoverPeek(false);
+    if (tabKey === "deep") setSearchFocusSignal(s => s + 1);
+  };
+
+  const startResize = useCallback((e) => {
+    e.preventDefault(); e.stopPropagation();
+    setResizing(true);
+    const startY = e.clientY, startH = dockHeight, vh = window.innerHeight;
+    const onMove = (me) => {
+      const dy = me.clientY - startY;
+      let next = startH - dy;
+      next = Math.max(DOCK_MIN_H, Math.min(next, vh * DOCK_MAX_FRAC));
+      setDockHeight(next);
+    };
+    const onUp = () => {
+      setResizing(false);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+  }, [dockHeight]);
+
+  const animClass = "animated" + (resizing ? " resizing" : (!open && hoverPeek ? " quick" : ""));
+  const panelClickHandler = () => {
+    if (open || hoverPeek) {
+      setActiveTab(null); setHoverPeek(false); cancelHoverTimer();
+    }
+  };
+  const currentTab = activeTab && activeTab !== "close"
+    ? TABS.find(t => t.key === activeTab)
+    : null;
+
+  // Mobile fallback flag (O11). The CSS hides the dock and re-flows pill
+  // columns inline above the grid below 720px. We render the pill columns
+  // unconditionally; visibility is controlled by the .hr-mobile-pills /
+  // .hr-section-dock-host CSS rules so the React tree stays stable.
   return (
-    <>
-      <style>{`
-        /* ── EXHIBIT FLOW ────────────────────────────────────────── */
-        .ef-root{border-top:1px solid #181818;padding:0 10px}
+    <section className="hr-section">
+      {/* MOBILE FALLBACK — pill columns render inline above the grid on
+          narrow viewports. CSS hides this on desktop and hides the dock
+          on mobile. */}
+      <div className="hr-mobile-pills">
+        {HR_DIMENSIONS.map(dim => (
+          <PillGroupColumn
+            key={dim.key} group={dim.key} values={dim.values}
+            items={HR_CARDS} selected={selected} toggle={toggle}
+            pillWidth={null}
+          />
+        ))}
+      </div>
 
-        /* 60/40 grid — Journal sticks in right column */
-        .ef-grid{display:grid;grid-template-columns:60% 40%}
-        .ef-left{display:flex;flex-direction:column}
-
-        /* ── STICKY JOURNAL COLUMN ─────────────────────────────── */
-        .ef-right{
-          position:-webkit-sticky;
-          position:sticky;
-          top:0;
-          align-self:start;
-          max-height:100vh;
-          overflow-y:auto;
-          border-left:1px solid #141414;
-          scrollbar-width:none;
-          padding-top:24px;
-        }
-        .ef-right::-webkit-scrollbar{display:none}
-
-        /* ── SECTIONS — scroll-snap + vertical centering ─────── */
-        .ef-section{padding:24px 0;scroll-snap-align:center;
-          min-height:calc(100vh - 64px);display:flex;flex-direction:column;justify-content:center}
-        .ef-section + .ef-section{border-top:1px solid #141414}
-        .ef-section-head{display:flex;align-items:baseline;gap:12px;padding:0 20px 8px}
-        .ef-label{font-family:'Syne',sans-serif;font-weight:700;font-size:.58rem;
-          letter-spacing:.18em;text-transform:uppercase;color:#555;white-space:nowrap}
-
-        /* ── TYPE PILLS — tucked under image, tl-tag style ─── */
-        .ef-pills{display:flex;gap:3px;flex-wrap:wrap;padding:2px 0 0}
-        .ef-pill{font-family:'Syne',sans-serif;font-weight:600;font-size:.42rem;
-          letter-spacing:.1em;padding:2px 6px;background:transparent;
-          border:1px solid transparent;cursor:pointer;border-radius:1px;
-          transition:color .15s,border-color .15s;text-align:center;
-          text-transform:uppercase;min-width:48px;white-space:nowrap;
-          color:#555}
-        .ef-pill-sel{color:#888;border-color:#333}
-        .ef-pill-dim{color:#2a2a2a !important;border-color:transparent !important}
-        .ef-pill:hover:not(:disabled){color:#999 !important;border-color:#444 !important}
-        .ef-pill-dead{color:#1a1a1a !important;cursor:default;pointer-events:none}
-
-        /* ── SCROLLER ────────────────────────────────────────── */
-        .ef-scroller{padding:0 20px;display:flex;flex-direction:column;gap:10px}
-        .ef-scroller-empty{font-family:'Courier Prime',monospace;font-size:.72rem;color:#333;
-          padding:40px 20px;text-align:center}
-
-        /* Strip: bleed | center | bleed */
-        .ef-strip{display:flex;align-items:stretch;overflow:hidden}
-        .ef-center{flex:1;min-width:0;cursor:pointer;transition:opacity .2s}
-        .ef-center:hover{opacity:.85}
-        .ef-card{width:100%;aspect-ratio:16/10;border-radius:2px;display:flex;
-          align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.04)}
-        .ef-card-ico{font-size:2.5rem;opacity:.45}
-
-        /* Bleed — always visible */
-        .ef-bleed{width:44px;flex-shrink:0;cursor:pointer;position:relative;opacity:.25;transition:opacity .2s}
-        .ef-bleed:hover{opacity:.45}
-        .ef-bleed-l{margin-right:10px}
-        .ef-bleed-r{margin-left:10px}
-        .ef-bleed-card{width:100%;height:100%;border-radius:2px;display:flex;align-items:center;justify-content:center}
-        .ef-bleed-ico{font-size:1.2rem;opacity:.45}
-        .ef-bleed-l::after{content:'';position:absolute;top:0;right:0;bottom:0;width:20px;
-          background:linear-gradient(to left,#0a0a0a,transparent);pointer-events:none}
-        .ef-bleed-r::before{content:'';position:absolute;top:0;left:0;bottom:0;width:20px;
-          background:linear-gradient(to right,#0a0a0a,transparent);pointer-events:none}
-
-        /* Caption + meta */
-        .ef-caption{font-family:'DM Serif Display',Georgia,serif;font-style:italic;
-          font-size:.82rem;color:#b8a88a;line-height:1.5}
-        .ef-meta{display:flex;gap:10px;font-family:'Courier Prime',monospace;
-          font-size:.52rem;color:#3a3a3a;letter-spacing:.08em}
-        .ef-meta-type{text-transform:uppercase}
-        .ef-meta-credit{color:#b8974a;margin-left:auto}
-
-        /* Controls — nav arrows */
-        .ef-controls{display:flex;align-items:center;justify-content:center;gap:12px}
-        .ef-btn{background:#0e0e0e;border:1px solid #1e1e1e;color:#3a3a3a;cursor:pointer;
-          font-size:.9rem;width:26px;height:26px;display:flex;align-items:center;justify-content:center;
-          border-radius:2px;transition:color .15s,border-color .15s;font-family:'Courier Prime',monospace}
-        .ef-btn:hover{color:#b8974a;border-color:#b8974a}
-        .ef-counter{font-family:'Courier Prime',monospace;font-size:.55rem;color:#333;
-          letter-spacing:.12em;min-width:36px;text-align:center}
-
-        /* Lightbox */
-        .ef-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:200;
-          display:flex;align-items:center;justify-content:center;padding:24px}
-        .ef-lightbox-inner{background:#0c0c0c;border:1px solid #1e1e1e;border-radius:3px;
-          max-width:480px;width:100%;padding:24px;display:flex;flex-direction:column;gap:12px}
-        .ef-lightbox-vis{width:100%;aspect-ratio:16/10;border-radius:2px;
-          display:flex;align-items:center;justify-content:center}
-        .ef-lightbox-ico{font-size:2.5rem;opacity:.45}
-        .ef-lightbox-meta{display:flex;gap:12px;font-family:'Courier Prime',monospace;
-          font-size:.55rem;color:#555;letter-spacing:.1em}
-        .ef-lightbox-type{text-transform:uppercase}
-        .ef-lightbox-src{text-transform:uppercase;margin-left:auto}
-        .ef-lightbox-f1{font-family:'DM Serif Display',Georgia,serif;font-style:italic;
-          font-size:.95rem;color:#c4bcb4;line-height:1.5}
-        .ef-lightbox-f2{font-family:'Courier Prime',monospace;font-size:.68rem;color:#555;line-height:1.5}
-        .ef-lightbox-credit{font-family:'Courier Prime',monospace;font-size:.58rem;color:#b8974a;letter-spacing:.08em}
-        .ef-lightbox-close{align-self:flex-end;background:none;border:1px solid #2a2a2a;color:#444;
-          font-family:'Courier Prime',monospace;font-size:.55rem;letter-spacing:.15em;
-          padding:4px 14px;cursor:pointer;border-radius:2px;transition:color .15s,border-color .15s}
-        .ef-lightbox-close:hover{color:#b8974a;border-color:#b8974a}
-
-        /* ── JOURNAL ─────────────────────────────────────────────── */
-        .jnl{padding:16px 20px;display:flex;flex-direction:column;gap:12px}
-        .jnl-label{font-family:'Syne',sans-serif;font-weight:700;font-size:.58rem;
-          letter-spacing:.18em;text-transform:uppercase;color:#555;padding:0 20px 8px}
-        .jnl-prompt{font-family:'DM Serif Display',Georgia,serif;font-style:italic;
-          font-size:.85rem;color:#8a7a6a;line-height:1.6;min-height:48px;display:flex;align-items:center}
-        .jnl-compose{display:flex;flex-direction:column;gap:5px}
-        .jnl-handle{font-family:'Courier Prime',monospace;font-size:.68rem;color:#b8974a;
-          background:#080808;border:1px solid #1a1a1a;padding:5px 10px;border-radius:2px;
-          outline:none;transition:border-color .15s}
-        .jnl-handle:focus{border-color:#2a2a2a}
-        .jnl-handle::placeholder{color:#222}
-        .jnl-text{font-family:'Courier Prime',monospace;font-size:.72rem;color:#c4bcb4;
-          background:#080808;border:1px solid #1a1a1a;padding:10px 12px;border-radius:2px;
-          outline:none;resize:vertical;height:120px;line-height:1.6;transition:border-color .15s}
-        .jnl-text:focus{border-color:#2a2a2a}
-        .jnl-text::placeholder{color:#222}
-        .jnl-submit{align-self:flex-end;background:none;border:1px solid #2a2a2a;color:#555;
-          font-family:'Syne',sans-serif;font-weight:600;font-size:.42rem;letter-spacing:.18em;
-          text-transform:uppercase;padding:5px 14px;cursor:pointer;border-radius:2px;
-          transition:color .15s,border-color .15s}
-        .jnl-submit:hover{color:#b8974a;border-color:#b8974a}
-
-        .jnl-feed{display:flex;flex-direction:column;gap:8px;margin-top:4px}
-        .jnl-entry{background:#080808;border:1px solid #161616;border-radius:2px;
-          padding:10px 12px;display:flex;flex-direction:column;gap:5px}
-        .jnl-entry-new{border-color:#0F6E56}
-        .jnl-entry-head{display:flex;align-items:center;gap:8px;
-          font-family:'Courier Prime',monospace;font-size:.52rem;color:#444;letter-spacing:.08em}
-        .jnl-entry-who{color:#b8974a}
-        .jnl-entry-ctx{color:#555;font-style:italic}
-        .jnl-entry-when{margin-left:auto;color:#2a2a2a}
-        .jnl-entry-body{font-family:'Courier Prime',monospace;font-size:.68rem;color:#b8a88a;line-height:1.5}
-        .jnl-entry-actions{display:flex;gap:8px;align-items:center}
-        .jnl-vote{background:none;border:none;font-family:'Courier Prime',monospace;font-size:.55rem;
-          color:#2a2a2a;cursor:pointer;padding:2px 4px;transition:color .15s}
-        .jnl-vote:hover{color:#777}
-        .jnl-vote-on{color:#b8974a}
-        .jnl-undo{background:none;border:1px solid #0F6E56;color:#0F6E56;
-          font-family:'Courier Prime',monospace;font-size:.5rem;letter-spacing:.1em;
-          padding:3px 10px;cursor:pointer;border-radius:2px;align-self:flex-start;transition:opacity .15s}
-        .jnl-undo:hover{opacity:.7}
-        .jnl-delete{background:none;border:none;font-family:'Courier Prime',monospace;
-          font-size:.5rem;color:#333;cursor:pointer;margin-left:auto;transition:color .15s}
-        .jnl-delete:hover{color:#993C1D}
-        .jnl-feed-nav{display:flex;align-items:center;justify-content:center;gap:12px;padding-top:2px}
-
-        /* ── MOBILE ──────────────────────────────────────────────── */
-        @media(max-width:720px){
-          .ef-grid{grid-template-columns:1fr}
-          .ef-root{padding:0 6px}
-          .ef-right{position:static;max-height:none;overflow:visible;border-left:none;border-top:1px solid #141414}
-          .ef-section-head{padding:10px 16px 0}
-          .ef-scroller{padding:8px 16px 0}
-          .ef-pills{padding:4px 16px 0}
-          .ef-bleed{width:28px}
-          .ef-caption{font-size:.75rem}
-          .jnl{padding:12px 16px}
-          .jnl-text{height:90px}
-          .jnl-prompt{font-size:.78rem}
-        }
-      `}</style>
-
-      <div className="ef-root">
-        <div className="ef-grid">
-          {/* LEFT — scrolling exhibit sections */}
-          <div className="ef-left">
-            {/* Panel 2 — As It Happened */}
-            <div className="ef-section">
-              <div className="ef-section-head">
-                <span className="ef-label">As It Happened</span>
-              </div>
-              <ExhibitScroller items={p2Items} activeAlbumId={activeAlbumId}>
-                <TypePills tags={P2_TYPES} activeTypes={p2Types} allTags={P2_TYPES}
-                  onToggle={toggleType(setP2Types, P2_TYPES)} items={p2EraItems} />
-              </ExhibitScroller>
-            </div>
-
-            {/* Panel 3 — The Artifacts */}
-            <div className="ef-section">
-              <div className="ef-section-head">
-                <span className="ef-label">The Artifacts</span>
-              </div>
-              <ExhibitScroller items={p3Items} activeAlbumId={activeAlbumId}>
-                <TypePills tags={P3_TYPES} activeTypes={p3Types} allTags={P3_TYPES}
-                  onToggle={toggleType(setP3Types, P3_TYPES)} items={p3EraItems} />
-              </ExhibitScroller>
-            </div>
-
-            {/* Panel 4 — That's a Wrap */}
-            <div className="ef-section">
-              <div className="ef-section-head">
-                <span className="ef-label">That's a Wrap</span>
-              </div>
-              <ExhibitScroller items={p4Items} activeAlbumId={activeAlbumId}>
-                <TypePills tags={P4_TYPES} activeTypes={p4Types} allTags={P4_TYPES}
-                  onToggle={toggleType(setP4Types, P4_TYPES)} items={HR_EXIT_FLOW} />
-              </ExhibitScroller>
-            </div>
-          </div>
-
-          {/* RIGHT — sticky Journal */}
-          <div className="ef-right">
-            <div className="jnl-label">The Journal</div>
-            <Journal prompts={HR_JOURNAL_PROMPTS} eraFilter={eraFilter} />
+      {/* DOCK HOST — sized so the dock can sit at its bottom via sticky
+          positioning. The grid scrolls inside hr-section-dock-host. */}
+      <div className="hr-section-dock-host">
+        <div className={"animated " + (resizing ? "resizing " : (!open && hoverPeek ? "quick " : ""))}
+             style={{ ...S.panelPos(dockPx), position: "absolute" }}
+             onClick={panelClickHandler}>
+          <div className="wb-scroll hr-panel-scroll">
+            <P3Panel matched={finalMatched} totalCount={HR_CARDS.length} />
           </div>
         </div>
+
+        <div className={animClass} style={S.dock(dockPx)} onClick={(e) => e.stopPropagation()}>
+          <div
+            className="hr-tab-strip"
+            onMouseEnter={() => { if (!open) { cancelHoverTimer(); scheduleHoverOpen(); } }}
+            onMouseLeave={() => { if (!open) scheduleHoverClose(); }}
+          >
+            {TABS.map(t => {
+              const isActive = activeTab === t.key;
+              const isClose = t.kind === "close";
+              return (
+                <div
+                  key={t.key}
+                  className={isActive ? "" : "tab-hoverable"}
+                  style={S.tab(isActive, open, t.width, isClose)}
+                  onClick={(e) => { e.stopPropagation(); handleTabClick(t.key); }}
+                  role="button"
+                  title={t.label}
+                >
+                  <span>{t.label}</span>
+                </div>
+              );
+            })}
+            {anySelected && (open || hoverPeek) && (
+              <button
+                className="hr-strip-clear-btn"
+                onClick={(e) => { e.stopPropagation(); clear(); }}
+                title="clear all tags, shuffle, and loop"
+              >clear all</button>
+            )}
+          </div>
+
+          {open && currentTab && (
+            <div className="hr-dock-body">
+              <div
+                style={S.resizeHandle(resizeHover || resizing)}
+                onMouseDown={startResize}
+                onMouseEnter={() => setResizeHover(true)}
+                onMouseLeave={() => setResizeHover(false)}
+              />
+              {currentTab.kind === "tier" && (() => {
+                const dims = HR_DIMENSIONS.filter(d => d.tier === currentTab.tier);
+                if (currentTab.key === "deep") {
+                  return (
+                    <DeepTracksContent
+                      dims={dims} selected={selected} toggle={toggle}
+                      pillWidth={pillWidth}
+                      query={query} setQuery={setQuery}
+                      focusSignal={searchFocusSignal}
+                    />
+                  );
+                }
+                return (
+                  <TierContent
+                    dims={dims} selected={selected} toggle={toggle}
+                    pillWidth={pillWidth}
+                  />
+                );
+              })()}
+              {currentTab.kind === "special" && currentTab.special === "journal" && (
+                <JournalContent prompts={HR_JOURNAL_PROMPTS} eraFilter={null} />
+              )}
+              {currentTab.kind === "special" && currentTab.special === "presets" && (
+                <PresetsContent
+                  userPresets={userPresets} setUserPresets={setUserPresets}
+                  selected={selected} setSelected={setSelected}
+                  shuffle={shuffle} setShuffle={setShuffle}
+                  loop={loop} setLoop={setLoop}
+                  playingTrack={playingTrack} spinePosition={spinePosition}
+                />
+              )}
+            </div>
+          )}
+        </div>
       </div>
-    </>
+
+      {/* O12 — AuditStrip dev-only. Vite exposes import.meta.env.DEV. */}
+      {import.meta.env.DEV && <AuditStrip />}
+    </section>
   );
 }
