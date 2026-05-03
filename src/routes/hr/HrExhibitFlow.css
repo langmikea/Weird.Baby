@@ -7,24 +7,12 @@
    .searchbar, .animated, .knob-wrap, .card-fade-in, .tab-hoverable,
    .preset-row-btn — these are reused from the prototype's global styles
    and kept on those names.
-   ──────────────────────────────────────────────────────────────────────── */
 
-/* ── Token aliases (match v28) ─────────────────────────────────────────── */
-.hr-section {
-  --hr-ink: #0e0b06;
-  --hr-ink-soft: #1a140a;
-  --hr-ink-card: rgba(30, 24, 8, 0.35);
-  --hr-ink-card-hi: rgba(40, 32, 10, 0.55);
-  --hr-border: #2a2010;
-  --hr-border-hi: #4a3818;
-  --hr-gold: #c8a050;
-  --hr-gold-hi: #e8c070;
-  --hr-gold-lo: #7a6230;
-  --hr-gold-mute: #3a2e14;
-  --hr-dim: #8a7850;
-  --hr-serif: 'Fraunces', 'Playfair Display', Georgia, serif;
-  --hr-sans: 'Geist', 'Inter', system-ui, -apple-system, sans-serif;
-}
+   Phase 4b: --hr-* tokens are no longer defined locally. They resolve from
+   :root in src/styles/museum-tokens.css (imported below), which holds the
+   canonical museum palette + typography aligned to the carousel.
+   ──────────────────────────────────────────────────────────────────────── */
+@import './../../styles/museum-tokens.css';
 
 /* ── Section root ──────────────────────────────────────────────────────── */
 .hr-section {

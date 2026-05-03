@@ -1,0 +1,43 @@
+/* Museum tokens — canonical palette + typography for Weird.Baby.
+ *
+ * Source of truth for the museum's visual language.
+ * Defined here once; consumed by route-level CSS files.
+ *
+ * Phase 4b: extracted from src/routes/exhibit/Exhibit.css to align
+ * the HR deck with the carousel/track-selector. Carousel itself is
+ * still hardcoded against the same values; future phase may refactor
+ * it to consume these tokens. Variable names keep the --hr- prefix
+ * pending a future rename pass.
+ *
+ * Font loading: the carousel's Exhibit.css already @imports DM Serif
+ * Display, Syne, and Courier Prime via Google Fonts. The deck only
+ * mounts inside Exhibit.jsx (HrSpine -> Exhibit -> HrExhibitFlow), so
+ * those fonts are loaded by the time the deck paints. No duplicate
+ * @import here.
+ */
+
+:root {
+  /* Surfaces — cool near-blacks, neutral, matching the carousel */
+  --hr-ink: #080808;
+  --hr-ink-soft: #0d0d0d;       /* active row tint */
+  --hr-ink-card: #0a0a0a;       /* default card surface — solid, not rgba */
+  --hr-ink-card-hi: #0e0e0e;    /* essay / elevated card surface */
+
+  /* Borders — neutral cool gray */
+  --hr-border: #1a1a1a;
+  --hr-border-hi: #252525;
+
+  /* Accent — single gold, with deck-only ramp variants */
+  --hr-gold: #b8974a;           /* canonical museum gold */
+  --hr-gold-hi: #d4c49a;        /* hover / brighter — uses carousel's mid-cream */
+  --hr-gold-lo: #a89770;        /* dim / labels */
+  --hr-gold-mute: #555;         /* disabled gold */
+
+  /* Body / mid text */
+  --hr-dim: #d4c49a;            /* mid-strength text — warm cream */
+
+  /* Typography — loaded webfaces (imported by src/routes/exhibit/Exhibit.css) */
+  --hr-serif: 'DM Serif Display', Georgia, serif;
+  --hr-sans: 'Syne', system-ui, -apple-system, sans-serif;
+  --hr-mono: 'Courier Prime', 'Courier New', monospace;
+}

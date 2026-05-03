@@ -31,18 +31,22 @@ import { HR_DIMENSIONS, HR_GROUP_LABELS } from "./hr_dimensions.js";
 import { HR_CARDS } from "./hr_cards.js";
 import { HR_JOURNAL_PROMPTS } from "../../data/hr_journal_prompts.js";
 
-// ─── COLOR / FONT TOKENS — preserved from v28 ───────────────────────────────
-const INK = "#0e0b06";
-const INK_SOFT = "#1a140a";
-const INK_CARD = "rgba(30, 24, 8, 0.35)";
-const INK_CARD_HI = "rgba(40, 32, 10, 0.55)";
-const BORDER = "#2a2010";
-const BORDER_HI = "#4a3818";
-const GOLD = "#c8a050";
-const GOLD_HI = "#e8c070";
-const GOLD_LO = "#7a6230";
-const GOLD_MUTE = "#3a2e14";
-const DIM = "#8a7850";
+// ─── COLOR / FONT TOKENS ────────────────────────────────────────────────────
+// Phase 4b: retargeted from the deck's v28 warm-amber palette to the
+// canonical museum palette in src/styles/museum-tokens.css. These constants
+// mirror the --hr-* CSS variables so every S.* inline-style builder picks up
+// the new look automatically.
+const INK = "#080808";
+const INK_SOFT = "#0d0d0d";
+const INK_CARD = "#0a0a0a";          // solid hex, not rgba (Q3 flattened)
+const INK_CARD_HI = "#0e0e0e";       // solid hex, not rgba
+const BORDER = "#1a1a1a";
+const BORDER_HI = "#252525";
+const GOLD = "#b8974a";
+const GOLD_HI = "#d4c49a";
+const GOLD_LO = "#a89770";
+const GOLD_MUTE = "#555";
+const DIM = "#d4c49a";
 // MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
 // Kaleidoscope LED palette — re-tuned to v17's museum gold, not v3's neon.
 // (Used inline by the mothballed VuMeter, which is never rendered.)
@@ -58,8 +62,8 @@ void [LED_OFF, LED_GREEN, LED_YELLOW, LED_RED];
 // Serif display token used by the prototype's pageTitle / pageSub. The new
 // HR build moved those into HrExhibitFlow.css. Kept for parity / future use.
 // eslint-disable-next-line no-unused-vars
-const serifDisplay = "'Fraunces', 'Playfair Display', Georgia, serif";
-const sansBody = "'Geist', 'Inter', system-ui, -apple-system, sans-serif";
+const serifDisplay = "'DM Serif Display', Georgia, serif";
+const sansBody = "'Syne', system-ui, -apple-system, sans-serif";
 
 // ─── DECK CONSTANTS — preserved from v28, STORAGE_KEY HR-namespaced ─────────
 const TAB_PEEK = 14;
