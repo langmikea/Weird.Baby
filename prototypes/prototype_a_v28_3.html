@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prototype A v28 — five-tab dock; Search in Deep Tracks; Presets redesign; Kaleidoscope mothballed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #0e0b06; overflow: hidden; height: 100vh; }
+  #root { height: 100vh; overflow: hidden; }
+
+  /* Scrollbar styling — post-v24 brightness fix.
+     Default browser scrollbars compete with the dock chrome for attention;
+     reskinning them to match keeps the scroll-fade affordance readable.
+     Firefox: scrollbar-width + scrollbar-color. Webkit: ::-webkit-scrollbar. */
+  .wb-scroll { scrollbar-width: thin; scrollbar-color: rgba(138, 120, 70, 0.35) transparent; }
+  .wb-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+  .wb-scroll::-webkit-scrollbar-track { background: transparent; }
+  .wb-scroll::-webkit-scrollbar-thumb {
+    background: rgba(138, 120, 70, 0.35);
+    border-radius: 4px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  .wb-scroll::-webkit-scrollbar-thumb:hover { background: rgba(184, 151, 74, 0.55); background-clip: padding-box; border: 2px solid transparent; }
+  .wb-scroll::-webkit-scrollbar-corner { background: transparent; }
+</style>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" data-presets="env,react" data-type="module">
+const { useState, useMemo, useLayoutEffect, useEffect, useRef, useCallback } = React;
+
+/* ============================================================
+   DATA — unchanged from v17
+   ============================================================ */
+const ERAS = ["early", "breakthrough", "mature", "recent"];
+const ALBUMS = [
+  { id: "cold-harbors", era: "early", year: 2010 }, { id: "paper-map", era: "early", year: 2012 },
+  { id: "copper-town", era: "breakthrough", year: 2014 }, { id: "winter-arms", era: "breakthrough", year: 2016 },
+  { id: "narrow-light", era: "mature", year: 2018 }, { id: "slow-company", era: "mature", year: 2020 },
+  { id: "lowland-hymnal", era: "recent", year: 2022 }, { id: "held-against", era: "recent", year: 2024 },
+];
+const SONGS = ["the-diver", "minerva", "copper-town", "the-ferry", "reverb-lullaby", "winter-arms", "narrow-light", "slow-company", "lowland-hymnal", "held-against", "between-us", "sunday-gospel", "quiet-rooms"];
+const PEOPLE = ["josephine-reyes", "henry-reyes", "carter-mills", "anna-leith", "dale-kovacs", "violet-ward", "tomasz-iwanski", "sam-orowitz", "marion-gale", "blake-ashford"];
+const FORMATS = ["studio", "live", "demo", "acoustic", "rehearsal"];
+const MEDIA = ["audio", "video", "photo", "text", "mixed"];
+const PROVENANCE = ["band", "fan", "press", "licensed"];
+const TYPES = ["cover", "art", "photo", "post", "update", "review", "interview", "analysis"];
+const VENUES = ["paradise", "the-bowery", "red-rocks", "newport", "home-studio", "radio-session", "tour-bus", "unknown"];
+const ODDS = ["hat", "bikers", "cheers", "happy-birthday", "friendly-faces", "dog", "mascot", "handwritten"];
+
+const ARTIFACT_SEED = [
+  { id: 1, render: "photo", title: "Live at Paradise", meta: "2015 · Boston", credit: "Tomasz Iwanski", era: "breakthrough", album: "copper-town", year: 2015, song: "copper-town", format: "live", media: "photo", provenance: "fan", type: "photo", people: ["tomasz-iwanski", "josephine-reyes", "blake-ashford"], venue: "paradise", span_w: 2, span_h: "md" },
+  { id: 2, render: "press", source: "Pitchfork · 2014", pull: "the harmonies have the calm authority of a town that has already decided who it is.", sub: "on Copper Town", era: "breakthrough", album: "copper-town", year: 2014, song: "copper-town", format: "studio", media: "text", provenance: "press", type: "review", people: ["sam-orowitz", "josephine-reyes"], venue: "unknown", span_w: 2, span_h: "md" },
+  { id: 3, render: "art", title: "Minerva", credit: "Marion Gale", meta: "fan illustration · 2023", era: "early", album: "paper-map", year: 2023, song: "minerva", format: "studio", media: "photo", provenance: "fan", type: "art", people: ["marion-gale"], venue: "unknown", span_w: 1, span_h: "lg" },
+  { id: 4, render: "video", title: "The Ferry — Live", meta: "Red Rocks · 2015", isLive: true, duration: "4:12", era: "breakthrough", album: "copper-town", year: 2015, song: "the-ferry", format: "live", media: "video", provenance: "band", type: "post", people: ["josephine-reyes", "carter-mills", "dale-kovacs"], venue: "red-rocks", span_w: 1, span_h: "sm" },
+  { id: 5, render: "session", title: "Recording sessions", meta: "narrow light · 2018", era: "mature", album: "narrow-light", year: 2018, song: null, format: "studio", media: "photo", provenance: "band", type: "photo", people: ["josephine-reyes", "carter-mills", "anna-leith"], venue: "home-studio", span_w: 1, span_h: "sm" },
+  { id: 6, render: "essay", kind: "essay · fan analysis", title: "The heart of \"Minerva\"", lede: "What makes the second verse land is a single held breath between the word \"tide\" and the line that follows — a decision the band has kept on every live version since. Josephine has said in two separate interviews that the silence \"belongs to Henry.\"", credit: "fan-authored · 2018", era: "early", album: "paper-map", year: 2018, song: "minerva", format: "studio", media: "text", provenance: "fan", type: "analysis", people: ["josephine-reyes", "henry-reyes"], venue: "unknown", span_w: 2, span_h: "lg" },
+  { id: 7, render: "video", title: "\"The Diver\"", meta: "acoustic cover", credit: "Violet Ward", isCover: true, duration: "3:48", era: "early", album: "cold-harbors", year: 2023, song: "the-diver", format: "acoustic", media: "video", provenance: "fan", type: "cover", people: ["violet-ward", "josephine-reyes"], venue: "unknown", span_w: 1, span_h: "md" },
+  { id: 8, render: "press", source: "NPR · 2018", pull: "she writes like a person who has watched the same river thaw every year.", sub: "on Narrow Light", era: "mature", album: "narrow-light", year: 2018, song: "narrow-light", format: "studio", media: "text", provenance: "press", type: "review", people: ["sam-orowitz", "josephine-reyes"], venue: "unknown", span_w: 1, span_h: "md" },
+  { id: 9, render: "video", title: "Slow Company", meta: "studio · 2020", duration: "3:22", era: "mature", album: "slow-company", year: 2020, song: "slow-company", format: "studio", media: "video", provenance: "band", type: "post", people: ["josephine-reyes", "anna-leith", "carter-mills"], venue: "home-studio", span_w: 1, span_h: "sm" },
+  { id: 10, render: "press", source: "Rolling Stone · 2020", pull: "restraint used as instrument. the loudest thing on the album is its patience.", sub: "on Slow Company", era: "mature", album: "slow-company", year: 2020, song: "slow-company", format: "studio", media: "text", provenance: "press", type: "review", people: ["sam-orowitz", "josephine-reyes"], venue: "unknown", span_w: 2, span_h: "sm" },
+  { id: 11, render: "video", title: "Copper Town — Live", meta: "Newport · 2015", isLive: true, duration: "5:01", era: "breakthrough", album: "copper-town", year: 2015, song: "copper-town", format: "live", media: "video", provenance: "band", type: "post", people: ["josephine-reyes", "carter-mills", "dale-kovacs"], venue: "newport", span_w: 1, span_h: "sm" },
+  { id: 12, render: "art", title: "Winter Arms", credit: "Marion Gale", era: "breakthrough", album: "winter-arms", year: 2022, song: "winter-arms", format: "studio", media: "photo", provenance: "fan", type: "art", people: ["marion-gale"], venue: "unknown", span_w: 1, span_h: "md" },
+  { id: 13, render: "video", title: "Winter Arms — Live", meta: "Paradise · 2017", isLive: true, duration: "4:33", era: "breakthrough", album: "winter-arms", year: 2017, song: "winter-arms", format: "live", media: "video", provenance: "band", type: "post", people: ["josephine-reyes", "carter-mills", "blake-ashford"], venue: "paradise", span_w: 1, span_h: "md" },
+  { id: 14, render: "press", source: "The Guardian · Interview · 2020", pull: "I wasn't trying to be slow. I just noticed I was — and I stopped apologizing for it.", sub: "Josephine Reyes · on Slow Company", era: "mature", album: "slow-company", year: 2020, song: null, format: "studio", media: "text", provenance: "press", type: "interview", people: ["josephine-reyes", "sam-orowitz"], venue: "radio-session", span_w: 2, span_h: "md" },
+];
+
+/* ============================================================
+   HYBRID CATALOG GENERATOR (v21, carried forward unchanged into v23)
+   Seeds with the 14 curated artifacts (hand-authored renders).
+   Generates 186 more to reach 200, with correlated tag fields:
+     - album → year (near album.year) → era
+     - format → media → venue (loose)
+     - media → render type
+   Independent-ish: people, odds, provenance, type, song.
+   Deterministic via seeded RNG so counts are stable across reloads.
+   ============================================================ */
+function buildCatalog() {
+  /* Mulberry32 seeded RNG. Stable output across sessions. */
+  let seed = 20260423;
+  const rng = () => {
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  const pick = (arr) => arr[Math.floor(rng() * arr.length)];
+  const pickN = (arr, n) => {
+    const copy = [...arr];
+    const out = [];
+    for (let i = 0; i < n && copy.length; i++) {
+      const idx = Math.floor(rng() * copy.length);
+      out.push(copy.splice(idx, 1)[0]);
+    }
+    return out;
+  };
+  const chance = (p) => rng() < p;
+
+  /* media-from-format correlation */
+  const MEDIA_BY_FORMAT = {
+    live:       ["video", "photo", "audio"],
+    studio:     ["audio", "text", "photo", "mixed"],
+    acoustic:   ["video", "audio", "photo"],
+    demo:       ["audio", "text"],
+    rehearsal:  ["audio", "video", "photo"],
+  };
+  /* venue correlation */
+  const VENUES_LIVE = ["paradise", "the-bowery", "red-rocks", "newport"];
+  const VENUES_STUDIO = ["home-studio", "unknown"];
+  const VENUES_BROADCAST = ["radio-session", "tour-bus"];
+  /* render dispatch from media */
+  const RENDER_BY_MEDIA = { photo: "photo", video: "video", text: "press", audio: "session", mixed: "art" };
+  /* span distribution: mostly sm, some md, rare lg */
+  const SPAN_H_WEIGHTS = [ ["sm", 0.55], ["md", 0.35], ["lg", 0.10] ];
+  const pickWeighted = (weights) => {
+    const roll = rng();
+    let acc = 0;
+    for (const [val, w] of weights) { acc += w; if (roll < acc) return val; }
+    return weights[weights.length - 1][0];
+  };
+
+  /* curated titles pools per media type, to avoid generic "Artifact #123" */
+  const TITLES_LIVE   = ["Live at", "On Stage —", "Encore —", "Sound check —", "From the Soundboard —"];
+  const TITLES_STUDIO = ["Demo take", "Rough cut", "Studio outtake", "Alternate take", "Early mix"];
+  const TITLES_PHOTO  = ["Backstage", "Before the set", "Between sets", "Tour moment", "Soundcheck"];
+  const TITLES_PRESS  = ["Album notes", "Tour review", "Interview excerpt", "Feature", "Artist profile"];
+  const TITLES_ART    = ["Portrait", "Album sketch", "Fan illustration", "Tour poster", "Setlist art"];
+
+  const out = [...ARTIFACT_SEED];
+  const START_ID = 15;
+  const TARGET = 200;
+
+  for (let i = START_ID; i <= TARGET; i++) {
+    const album = pick(ALBUMS);
+    /* year: centered on album.year, ± up to 2 for reissues/tours/retrospectives,
+       clamped so a 2024 album doesn't get 2026 artifacts. */
+    const yearJitter = Math.floor(rng() * 5) - 2;
+    const year = Math.min(2025, Math.max(2008, album.year + yearJitter));
+    const era = album.era;
+
+    const format = pick(FORMATS);
+    const media = pick(MEDIA_BY_FORMAT[format] || MEDIA);
+
+    /* venue logic */
+    let venue;
+    if (format === "live") venue = pick(VENUES_LIVE);
+    else if (format === "studio" || format === "demo") venue = pick(VENUES_STUDIO);
+    else if (chance(0.3)) venue = pick(VENUES_BROADCAST);
+    else venue = pick([...VENUES_LIVE, ...VENUES_STUDIO, ...VENUES_BROADCAST]);
+
+    /* song: usually an album-ish song, sometimes null (non-song artifacts) */
+    const song = chance(0.75) ? pick(SONGS) : null;
+
+    /* people: 1-3, biased toward josephine-reyes appearing often */
+    const peopleCount = 1 + Math.floor(rng() * 3);
+    const people = pickN(PEOPLE, peopleCount);
+    if (!people.includes("josephine-reyes") && chance(0.6)) people.unshift("josephine-reyes");
+
+    /* odds: sparse. 0-2 tags, 60% chance of having none at all. */
+    const oddsCount = chance(0.6) ? 0 : (chance(0.7) ? 1 : 2);
+    const odds = oddsCount > 0 ? pickN(ODDS, oddsCount) : [];
+
+    /* provenance: weighted */
+    const provRoll = rng();
+    const provenance = provRoll < 0.45 ? "band" : provRoll < 0.75 ? "fan" : provRoll < 0.92 ? "press" : "licensed";
+
+    /* type: loose correlation with media */
+    let type;
+    if (media === "text") type = pick(["review", "interview", "analysis"]);
+    else if (media === "photo") type = pick(["photo", "art"]);
+    else if (media === "video") type = pick(["post", "cover", "update"]);
+    else if (media === "audio") type = pick(["post", "update", "cover"]);
+    else type = pick(TYPES);
+
+    /* title + render-specific fields */
+    const render = RENDER_BY_MEDIA[media] || "photo";
+    let title, meta = null, credit = null, source = null, pull = null, sub = null;
+    const albumLabel = album.id.replace(/-/g, " ");
+
+    if (render === "video") {
+      title = `${pick(TITLES_LIVE)} ${albumLabel}`;
+      meta = `${venue.replace(/-/g, " ")} · ${year}`;
+    } else if (render === "photo") {
+      title = `${pick(TITLES_PHOTO)} — ${albumLabel}`;
+      meta = `${year} · ${venue.replace(/-/g, " ")}`;
+      credit = pick(people);
+    } else if (render === "press") {
+      const src = provenance === "press" ? pick(["Pitchfork", "NPR", "Rolling Stone", "The Guardian", "Stereogum"]) : "fan · archive";
+      source = `${src} · ${year}`;
+      pull = pick([
+        "a record that knows exactly how long to hold its breath.",
+        "the band's most patient work — and its most daring.",
+        "you can hear the room the song was made in.",
+        "songs that mean more the second time through.",
+        "a study in restraint that never feels withheld.",
+      ]);
+      sub = `on ${albumLabel}`;
+      title = `${pick(TITLES_PRESS)} — ${albumLabel}`;
+    } else if (render === "art") {
+      title = `${pick(TITLES_ART)} — ${albumLabel}`;
+      credit = pick(people);
+      meta = `${year}`;
+    } else if (render === "session") {
+      title = `${pick(TITLES_STUDIO)} — ${albumLabel}`;
+      meta = `${format} · ${year}`;
+    } else {
+      title = `Artifact ${i}`;
+    }
+
+    /* span: mostly small, rare large, matches v17 grid feel */
+    const span_w = chance(0.75) ? 1 : 2;
+    const span_h = pickWeighted(SPAN_H_WEIGHTS);
+
+    out.push({
+      id: i, render, title, meta, credit, source, pull, sub,
+      era, album: album.id, year, song,
+      format, media, provenance, type,
+      people, venue, odds,
+      span_w, span_h,
+    });
+  }
+  return out;
+}
+
+const ARTIFACT_CARDS = buildCatalog();
+
+const YEARS = Array.from(new Set(ARTIFACT_CARDS.map(i => i.year))).sort((a, b) => a - b).map(String);
+
+const DIMENSIONS = [
+  { key: "era",        kind: "single", values: ERAS,                 tier: 1 },
+  { key: "album",      kind: "single", values: ALBUMS.map(a => a.id), tier: 1 },
+  { key: "year",       kind: "single", values: YEARS,                tier: 1 },
+  { key: "song",       kind: "single", values: SONGS,                tier: 1 },
+  { key: "people",     kind: "multi",  values: PEOPLE,               tier: 1 },
+  { key: "venue",      kind: "single", values: VENUES,               tier: 1 },
+  { key: "format",     kind: "single", values: FORMATS,              tier: 2 },
+  { key: "media",      kind: "single", values: MEDIA,                tier: 2 },
+  { key: "provenance", kind: "single", values: PROVENANCE,           tier: 2 },
+  { key: "type",       kind: "single", values: TYPES,                tier: 2 },
+  { key: "odds",       kind: "multi",  values: ODDS,                 tier: 3 },
+];
+
+const TABS = [
+  { key: "artist",  label: "Artist",        kind: "tier", tier: 1, width: 120 },
+  { key: "media",   label: "Formats",       kind: "tier", tier: 2, width: 130 },
+  { key: "deep",    label: "Deep Tracks",   kind: "tier", tier: 3, width: 120 },
+  { key: "presets", label: "Presets",       kind: "special", special: "presets", width: 110 },
+  { key: "close",   label: "✕",             kind: "close",   width: 48 },
+];
+
+/* Display labels for group headers. Data keys stay stable; UI relabels the user-facing
+   names per session decisions. "format" key → "Setting" label, "media" key → "Media" label. */
+const GROUP_LABELS = {
+  era: "Era",
+  album: "Album",
+  year: "Year",
+  song: "Song",
+  people: "People",
+  venue: "Venue",
+  format: "Setting",   /* was "Format" pre-v20 — now reads "Setting" */
+  media: "Media",      /* was "Media" pre-v20, drifted to "Format", restored at v46 */
+  provenance: "Provenance",
+  type: "Type",
+  odds: "Odds",
+};
+
+/* Factory presets — migrated from v17's Kaleidoscope tab */
+const FACTORY_PRESETS = [
+  { key: "surprise", label: "Surprise me",  desc: "a handful at random",              apply: () => {
+    const ids = ARTIFACT_CARDS.map(c => c.id).sort(() => Math.random() - 0.5).slice(0, 3);
+    return { __randomIds: new Set(ids) };
+  }},
+  { key: "fanonly",  label: "Fan only",       desc: "contributions from the community", apply: () => ({ provenance: new Set(["fan"]) }) },
+  { key: "livebeats",label: "Live beats",     desc: "captured on stage",                apply: () => ({ format: new Set(["live"]) }) },
+  { key: "pressy",   label: "Press clippings", desc: "what the world said",             apply: () => ({ provenance: new Set(["press"]) }) },
+  { key: "deephist", label: "Years past",     desc: "the older catalog",                apply: () => ({ era: new Set(["early", "breakthrough"]) }) },
+];
+
+/* ENTRY PRESET (v23):
+   Entry state: all tags OFF. Under the locked filter rule
+   (within-group OR, across-group AND, empty-group-silent), every group is
+   silent at rest, no group constrains, so the full catalog is visible.
+   The "museum full on arrival" property falls out of the rule instead of
+   being brute-forced by lighting every pill. See docs/FILTER_LOGIC_DECISION.md.
+   The __randomIds escape hatch survives inside the "Surprise me" preset. */
+function makeEntrySelection() {
+  const out = {};
+  DIMENSIONS.forEach(({ key }) => { out[key] = new Set(); });
+  return out;
+}
+
+/* ============================================================
+   KALEIDOSCOPE — state, recipe, and config
+   MOTHBALLED for v1 (spec §7, v0.3). Code preserved for post-launch
+   revival — this file keeps the recipe, config, and default state so
+   the next Kaleidoscope session can reuse the API. Not rendered in v28.
+   Shuffle and Loop moved out of here in v28 (they're Presets-tab
+   player-behavior controls now per spec §9); KAL_SWITCHES retired.
+   ============================================================ */
+const KAL_STATE_DEFAULT = {
+  depth: 0.5, breadth: 0.5, jitter: 0,
+};
+
+const KAL_KNOBS = [
+  { id: "depth",   label: "Depth" },
+  { id: "breadth", label: "Breadth" },
+  { id: "jitter",  label: "Jitter" },
+];
+
+/* Stable pseudo-random — same id + salt produces same value */
+function pseudoRandom(id, salt) {
+  let h = 2166136261;
+  const s = `${id}|${salt}`;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return ((h >>> 0) % 10000) / 10000;
+}
+
+/* Kaleidoscope recipe — takes already-filtered items, narrows by mooshy dimensions.
+   NEUTRAL-CENTER SEMANTICS: each knob at 0.5 is "pass everything." Filtering only
+   fires as the knob moves away from center. Jitter is one-sided (0 = none, 1 = max scatter). */
+function runKaleidoscopeRecipe(kalState, items) {
+  const SURFACE_TYPES = ["post", "photo", "review"];
+  const DEEP_TYPES    = ["analysis", "interview", "art", "cover", "update"];
+
+  /* offset: -1..+1 signed distance from center */
+  const dOff = (kalState.depth   - 0.5) * 2;
+  const bOff = (kalState.breadth - 0.5) * 2;
+
+  return items.filter(item => {
+    /* Depth: negative offset favors surface types (cull deep), positive favors deep (cull surface) */
+    if (dOff < 0 && DEEP_TYPES.includes(item.type)) {
+      /* knob below center: cull deep with strength |dOff| */
+      if (pseudoRandom(item.id, "d_deep") < Math.abs(dOff) * 0.85) return false;
+    } else if (dOff > 0 && SURFACE_TYPES.includes(item.type)) {
+      if (pseudoRandom(item.id, "d_surf") < dOff * 0.85) return false;
+    }
+
+    /* Breadth: negative favors music-heavy (audio/video), cull others; positive is "all through" = neutral here, breadth doesn't amplify, only restricts */
+    if (bOff < 0 && item.media !== "audio" && item.media !== "video") {
+      if (pseudoRandom(item.id, "b_nonmusic") < Math.abs(bOff) * 0.9) return false;
+    }
+    /* Breadth above center is a no-op — neutral already "lets everything in." */
+
+    return true;
+  }).filter(item => {
+    /* Jitter: one-sided. At 0 = no scatter, at 1 = max random drop. */
+    if (kalState.jitter <= 0) return true;
+    return pseudoRandom(item.id, "r") > kalState.jitter * 0.7;
+  });
+}
+
+/* "Default" in the sense that determines whether the recipe runs at all.
+   With neutral-center semantics, knobs at 0.5 + jitter at 0 is pass-through,
+   and Shuffle/Loop are intentionally excluded from this check — flipping
+   them never triggers the recipe. They're honest parked switches. */
+function kalIsDefault(k) {
+  return k.depth === 0.5
+      && k.breadth === 0.5
+      && k.jitter === 0;
+}
+
+/* ============================================================
+   v17 STYLES — preserved, extended
+   ============================================================ */
+const INK = "#0e0b06", INK_SOFT = "#1a140a", INK_CARD = "rgba(30, 24, 8, 0.35)", INK_CARD_HI = "rgba(40, 32, 10, 0.55)";
+const BORDER = "#2a2010", BORDER_HI = "#4a3818";
+const GOLD = "#c8a050", GOLD_HI = "#e8c070", GOLD_LO = "#7a6230", GOLD_MUTE = "#3a2e14";
+const DIM = "#8a7850", OFF = "#2a2010";
+/* Kaleidoscope LED palette — re-tuned to v17's museum gold, not v3's neon */
+const LED_OFF = "#1f1a0e";
+const LED_GREEN = "#8a9a4a";   /* sage-gold, reads "tuned" */
+const LED_YELLOW = "#c8a050";  /* museum gold */
+const LED_RED = "#c86040";     /* warm copper, not neon red */
+const serifDisplay = "'Fraunces', 'Playfair Display', Georgia, serif";
+const sansBody = "'Geist', 'Inter', system-ui, -apple-system, sans-serif";
+
+const TAB_PEEK = 14;
+const TAB_STRIP_H = 42;
+const DOCK_MIN_H = 200;
+const DOCK_MAX_FRAC = 0.75;
+const DOCK_DEFAULT_H_SHARED = 480;
+const STORAGE_KEY = "wb_v17_dock_height";
+
+const HOVER_DELAY_OPEN = 60;
+const HOVER_DELAY_CLOSE = 450;
+
+const S = {
+  gFonts: `
+    .pillscroll::-webkit-scrollbar { width: 6px; height: 6px; }
+    .pillscroll::-webkit-scrollbar-track { background: transparent; }
+    .pillscroll::-webkit-scrollbar-thumb { background: ${BORDER_HI}; border-radius: 0; }
+    .pillscroll { scrollbar-width: thin; scrollbar-color: ${BORDER_HI} transparent; }
+    input.searchbar { width: 100%; background: transparent; border: 1px solid ${BORDER}; color: ${GOLD}; font-family: ${sansBody}; font-size: 13px; font-weight: 500; letter-spacing: 0.02em; padding: 8px 12px; outline: none; transition: border-color 0.15s; box-sizing: border-box; }
+    input.searchbar:focus { border-color: ${GOLD_LO}; }
+    input.searchbar::placeholder { color: ${GOLD_MUTE}; font-style: italic; }
+    @keyframes cardFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .card-fade-in { animation: cardFadeIn 250ms ease-out; }
+    .animated { transition: height 180ms cubic-bezier(0.3, 0.7, 0.2, 1), bottom 180ms cubic-bezier(0.3, 0.7, 0.2, 1); }
+    .animated.quick { transition: height 120ms ease-out, bottom 120ms ease-out; }
+    .animated.resizing { transition: none; }
+    .tab-hoverable:hover { border-color: ${GOLD} !important; color: ${GOLD_HI} !important; }
+    .preset-row-btn:hover { color: ${GOLD_HI}; border-color: ${GOLD_LO}; }
+    .knob-wrap:hover .knob-readout, .knob-wrap.dragging .knob-readout { opacity: 1 !important; transition: opacity 60ms ease !important; }
+  `,
+
+  app: { position: "fixed", inset: 0, background: INK, color: DIM, fontFamily: sansBody, fontSize: "14px", lineHeight: 1.55, overflow: "hidden" },
+
+  panelPos: (dockPx) => ({ position: "absolute", left: 0, right: 0, top: 0, bottom: dockPx + "px" }),
+  panelScroll: { position: "absolute", inset: 0, overflowY: "auto", padding: "1.25rem 1.5rem" },
+
+  pageHeader: { paddingBottom: "0.85rem", marginBottom: "1rem", borderBottom: `1px solid ${BORDER}` },
+  eyebrow: { fontSize: "10px", letterSpacing: "0.26em", fontWeight: 500, color: GOLD_LO, textTransform: "uppercase", marginBottom: "6px" },
+  pageTitle: { fontFamily: serifDisplay, fontWeight: 400, fontSize: "26px", color: GOLD, fontStyle: "italic", margin: 0, letterSpacing: "-0.01em" },
+  pageSub: { fontSize: "13px", color: DIM, marginTop: "6px", maxWidth: "820px", lineHeight: 1.55, fontWeight: 400 },
+
+  panelHead: { display: "flex", justifyContent: "space-between", alignItems: "baseline", paddingBottom: "0.6rem", borderBottom: `1px solid ${BORDER}`, marginBottom: "1.25rem" },
+  panelHeadLabel: { fontSize: "10.5px", letterSpacing: "0.22em", color: GOLD_LO, textTransform: "uppercase", fontWeight: 500 },
+  panelHeadMuted: { color: GOLD_MUTE, fontStyle: "italic", fontSize: "11px", textTransform: "none", letterSpacing: "0.04em", fontWeight: 400, fontFamily: serifDisplay },
+  panelCount: { color: GOLD_HI, fontVariantNumeric: "tabular-nums", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", fontFamily: sansBody },
+  panelCountBig: { color: GOLD_HI, fontWeight: 700 },
+  panelCountTotal: { color: GOLD_LO, fontWeight: 400 },
+
+  artifactGrid: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridAutoRows: "8px", gap: "14px", gridAutoFlow: "dense" },
+  card: { border: `1px solid ${BORDER}`, background: INK_CARD, overflow: "hidden", display: "flex", flexDirection: "column" },
+
+  dock: (dockPx) => ({
+    position: "absolute", left: 0, right: 0, bottom: 0,
+    height: dockPx + "px",
+    background: "transparent",
+    zIndex: 10,
+    pointerEvents: "none",
+  }),
+
+  tabStrip: {
+    position: "absolute", top: 0, left: 12, right: 12,
+    height: TAB_STRIP_H + "px",
+    display: "flex", alignItems: "flex-end",
+    pointerEvents: "auto", zIndex: 12, userSelect: "none",
+  },
+
+  tab: (active, dockOpen, width, isClose) => {
+    /* Two-level brightness, post-v24 per watch-list #7:
+       active tab   → GOLD_HI (brightest, bold, INK_SOFT fill)
+       inactive tab → GOLD_LO (resting, always, regardless of tier selection state)
+       Global "some filter is active" signal lives in the Clear All button
+       in the tab strip, not in per-tab chrome. */
+    const borderColor = active ? GOLD_HI : GOLD_LO;
+    const textColor   = active ? GOLD_HI : DIM;
+    return {
+      cursor: "pointer", fontFamily: sansBody,
+      fontSize: isClose ? "14px" : "10.5px",
+      letterSpacing: isClose ? "0" : "0.12em",
+      textTransform: isClose ? "none" : "uppercase",
+      fontWeight: active ? 700 : 500,
+      color: textColor,
+      background: active ? INK_SOFT : "transparent",
+      border: `1px solid ${borderColor}`, borderBottom: "none",
+      borderTopLeftRadius: "6px", borderTopRightRadius: "6px",
+      height: TAB_STRIP_H + "px",
+      width: width + "px", minWidth: width + "px",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      gap: "6px",
+      transition: "border-color 0.12s, color 0.12s, font-weight 0.12s, background 0.12s",
+      padding: "0 6px", boxSizing: "border-box",
+      flexShrink: 0, marginRight: "2px",
+      whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+    };
+  },
+
+  tabCount: (active) => ({ fontSize: "9px", color: active ? GOLD_HI : GOLD_LO, fontVariantNumeric: "tabular-nums", fontWeight: 500, marginLeft: "2px" }),
+
+  stripClearBtn: {
+    marginLeft: "12px", alignSelf: "center",
+    background: "transparent", border: `1px solid ${GOLD_LO}`,
+    color: GOLD, fontFamily: sansBody,
+    fontSize: "9.5px", letterSpacing: "0.22em",
+    textTransform: "uppercase", fontWeight: 500,
+    padding: "4px 10px", cursor: "pointer",
+    transition: "all 0.15s", whiteSpace: "nowrap",
+    height: "24px", boxSizing: "border-box", flexShrink: 0,
+  },
+
+  dockBody: {
+    position: "absolute", top: TAB_STRIP_H + "px",
+    left: 0, right: 0, bottom: 0,
+    background: INK, borderTop: `1px solid ${GOLD_LO}`,
+    pointerEvents: "auto",
+    display: "flex", flexDirection: "column", overflow: "hidden",
+  },
+
+  resizeHandle: (hovered) => ({
+    position: "absolute", top: "-4px",
+    left: 0, right: 0, height: "8px",
+    cursor: "ns-resize", zIndex: 14,
+    background: hovered ? `linear-gradient(to bottom, transparent 0%, ${GOLD_LO} 45%, ${GOLD_LO} 55%, transparent 100%)` : "transparent",
+    transition: "background 0.15s",
+  }),
+
+  contentBody: { flex: 1, overflow: "auto", padding: "16px 1.25rem 1.25rem" },
+
+  /* v27 — scroll wrapper. The fade/hairline overlays have been retired;
+     only the flex layout hook remains. Styled scrollbar (.wb-scroll) on
+     the inner scroller is the affordance. Kept as a named style so the
+     wrapper stays declarative and future overlays can slot back in if
+     the scroll question is reopened. */
+  scrollFadeWrap: { position: "relative", flex: 1, minHeight: 0, display: "flex" },
+
+  groupsRow: { display: "flex", flexWrap: "wrap", gap: "24px 28px", alignItems: "flex-start" },
+  groupColumn: { display: "flex", flexDirection: "column", gap: "4px", minWidth: 0 },
+  groupColumnLabel: {
+    fontSize: "10.5px", letterSpacing: "0.24em", fontWeight: 600,
+    color: GOLD_LO, textTransform: "uppercase",
+    marginBottom: "6px", paddingBottom: "6px",
+    borderBottom: `1px dashed ${BORDER}`, whiteSpace: "nowrap",
+  },
+  pill: (active, zero, pillWidth) => ({
+    fontFamily: sansBody, fontSize: "11.5px", fontWeight: 500,
+    letterSpacing: "0.02em", padding: "0 10px",
+    height: "26px", lineHeight: "24px",
+    display: "flex", alignItems: "center", justifyContent: "space-between",
+    gap: "8px",
+    width: pillWidth ? `${pillWidth}px` : "auto",
+    minWidth: pillWidth ? `${pillWidth}px` : "auto",
+    boxSizing: "border-box", borderRadius: 0,
+    border: `1px solid ${active ? GOLD : (zero ? "transparent" : BORDER)}`,
+    background: active ? INK_SOFT : "transparent",
+    color: active ? GOLD_HI : (zero ? BORDER_HI : DIM),
+    /* v27: zero pills pushed well below readable threshold. Previous
+       0.35 opacity + GOLD_MUTE text still read as "dimmed, maybe
+       clickable." 0.20 + BORDER_HI text + transparent border + no
+       pointer events reads as "present but unreachable" — which is
+       the actual state. Tag still visible so visitors know it exists
+       in the vocabulary; not selectable while zero. */
+    opacity: zero ? 0.2 : 1,
+    pointerEvents: zero ? "none" : "auto",
+    cursor: zero ? "default" : "pointer",
+    transition: "border-color 0.12s, color 0.12s, background 0.12s, opacity 0.12s",
+    textTransform: "lowercase", userSelect: "none",
+  }),
+  pillLabel: { flex: 1, textAlign: "left", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
+  pillCount: (active, zero) => ({ fontSize: "10px", fontWeight: 500, color: active ? GOLD : (zero ? GOLD_MUTE : GOLD_LO), fontVariantNumeric: "tabular-nums" }),
+
+  /* Search surface — v28: lives at top of Deep Tracks tab body, no longer a
+     peer tab. Outer padding handled by the tab body's contentBody; searchWrap
+     just lays out the input and the corral below it. Keep the 720px cap so
+     the search bar doesn't stretch to the whole tab width on wide docks. */
+  searchWrap: {
+    display: "flex", flexDirection: "column", gap: 0,
+    maxWidth: "720px", margin: "0 auto", width: "100%", boxSizing: "border-box",
+  },
+  searchInputHolder: { width: "100%" },
+  corral: {
+    minHeight: "40px", border: `1px solid ${BORDER}`, borderTop: "none",
+    background: "transparent",
+    display: "flex", alignItems: "center", gap: "6px",
+    padding: "7px 10px",
+    overflowX: "auto", overflowY: "hidden", whiteSpace: "nowrap",
+    boxSizing: "border-box",
+  },
+
+  /* PRESETS TAB — v28 layout: user slots top-left + shuffle/loop inline,
+     factory row below. "empty" lowercase; "SLOTS" renamed "PRESETS". */
+  presetsSectionLabel: {
+    fontSize: "10.5px", letterSpacing: "0.24em", fontWeight: 600,
+    color: GOLD_LO, textTransform: "uppercase",
+    paddingBottom: "6px", borderBottom: `1px dashed ${BORDER}`,
+    marginBottom: "12px",
+  },
+  factoryGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+    gap: "10px",
+    marginBottom: "1.25rem",
+  },
+  /* v28: top row of Presets tab — user slots on the left, Shuffle/Loop pill
+     switches stacked on the right. */
+  presetsTopRow: {
+    display: "flex", gap: "32px", alignItems: "flex-start",
+    marginBottom: "1.25rem", flexWrap: "wrap",
+  },
+  presetsSlotsCol: { flex: "1 1 420px", minWidth: 0, display: "flex", flexDirection: "column", gap: "8px" },
+  presetsPlayerCol: {
+    display: "flex", flexDirection: "column", gap: "10px",
+    padding: "10px 14px", border: `1px solid ${BORDER}`,
+    minWidth: "180px",
+  },
+  presetsPlayerLabel: {
+    fontSize: "9.5px", letterSpacing: "0.22em", color: GOLD_LO,
+    textTransform: "uppercase", fontWeight: 500, marginBottom: "2px",
+  },
+  /* Pill-switch: styled to match pill grammar from tag columns,
+     not the Kaleidoscope boolean toggle. On = GOLD border + fill.
+     Off = BORDER / DIM. */
+  presetsPill: (on) => ({
+    fontFamily: sansBody, fontSize: "11.5px", fontWeight: 500,
+    letterSpacing: "0.02em", padding: "0 12px",
+    height: "28px", lineHeight: "26px",
+    display: "flex", alignItems: "center", justifyContent: "space-between",
+    gap: "10px",
+    boxSizing: "border-box", borderRadius: 0,
+    border: `1px solid ${on ? GOLD : BORDER}`,
+    background: on ? INK_SOFT : "transparent",
+    color: on ? GOLD_HI : DIM,
+    cursor: "pointer", userSelect: "none",
+    textTransform: "lowercase",
+    transition: "border-color 0.12s, color 0.12s, background 0.12s",
+    minWidth: "110px",
+  }),
+  presetsPillState: (on) => ({
+    fontSize: "9.5px", letterSpacing: "0.18em", textTransform: "uppercase",
+    color: on ? GOLD : GOLD_LO, fontWeight: 500, fontVariantNumeric: "tabular-nums",
+  }),
+  /* v28 slot row: label · summary · APPLY · CLEAR SLOT · SAVE HERE inline.
+     Three actions always reserved as columns; disabled state dims them.
+     56px label, flex summary, then 3 auto-width button columns. */
+  presetSlotRow: (hasContent) => ({
+    display: "grid",
+    gridTemplateColumns: "56px 1fr auto auto auto",
+    gap: "10px", alignItems: "center", padding: "10px 12px",
+    border: `1px solid ${hasContent ? BORDER_HI : BORDER}`,
+    background: "transparent", transition: "border-color 0.15s",
+  }),
+  presetSlotLabel: { fontSize: "11px", letterSpacing: "0.2em", color: GOLD, fontWeight: 600, textTransform: "uppercase" },
+  presetSummary: (empty) => ({
+    fontSize: "11.5px", color: empty ? GOLD_MUTE : DIM,
+    fontStyle: empty ? "italic" : "normal", letterSpacing: "0.02em",
+    whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", minWidth: 0,
+  }),
+  presetRowBtn: (enabled, primary) => ({
+    background: "transparent",
+    border: `1px solid ${enabled ? (primary ? GOLD_LO : BORDER_HI) : BORDER}`,
+    color: enabled ? (primary ? GOLD : DIM) : GOLD_MUTE,
+    fontFamily: sansBody, fontSize: "10px", letterSpacing: "0.2em",
+    textTransform: "uppercase", fontWeight: 500, padding: "5px 10px",
+    cursor: enabled ? "pointer" : "default",
+    transition: "color 0.15s, border-color 0.15s",
+    whiteSpace: "nowrap", flexShrink: 0,
+  }),
+  /* Factory preset cards (unchanged grammar, used in factory section below
+     the slots row). v28 retires the separate "Save current filter" button —
+     SAVE HERE lives inline per-slot. */
+  presetCard: (active) => ({
+    padding: "12px 14px",
+    border: `1px solid ${active ? GOLD : BORDER}`,
+    background: active ? INK_SOFT : "transparent",
+    cursor: "pointer", transition: "all 0.14s",
+    display: "flex", flexDirection: "column", gap: "3px",
+  }),
+  presetLabel: { fontFamily: serifDisplay, fontStyle: "italic", fontSize: "15px", color: GOLD, lineHeight: 1.2 },
+  presetDesc: { fontSize: "11px", color: GOLD_LO, fontStyle: "italic", letterSpacing: "0.02em" },
+
+  /* KALEIDOSCOPE CONSOLE */
+  kalWrap: {
+    padding: "0.75rem 1.25rem 1rem",
+    display: "flex", flexDirection: "column", alignItems: "center",
+    gap: "14px",
+  },
+  kalConsole: {
+    display: "grid",
+    gridTemplateColumns: "auto auto auto",
+    gap: "48px",
+    alignItems: "center",
+    padding: "12px 24px",
+    maxWidth: "900px",
+    width: "100%",
+    justifyContent: "center",
+    boxSizing: "border-box",
+  },
+  /* 4x1 knob row — single horizontal strip */
+  kalKnobRow: {
+    display: "flex",
+    flexDirection: "row",
+    gap: "28px",
+    alignItems: "flex-start",
+  },
+  kalBlock: { display: "flex", flexDirection: "column", alignItems: "center", minWidth: "68px" },
+  kalBlockLabel: {
+    fontSize: "10px", color: GOLD_LO, textTransform: "uppercase",
+    letterSpacing: "0.12em", marginTop: "8px", textAlign: "center",
+    fontWeight: 500,
+  },
+  knobWrap: { position: "relative" },
+  knob: {
+    width: "58px", height: "58px", borderRadius: "50%",
+    background: `radial-gradient(circle at 35% 30%, #2a2110, #14100a)`,
+    border: `2px solid ${BORDER_HI}`,
+    position: "relative", cursor: "grab",
+    boxShadow: `inset 0 1px 3px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.4)`,
+  },
+  knobIndicator: {
+    position: "absolute", left: "50%", top: "4px",
+    width: "2px", height: "18px", background: GOLD_HI,
+    transformOrigin: "50% 25px",
+    pointerEvents: "none",
+  },
+  knobReadout: {
+    position: "absolute", inset: 0,
+    display: "flex", alignItems: "center", justifyContent: "center",
+    fontSize: "13px", color: GOLD_HI,
+    fontVariantNumeric: "tabular-nums",
+    background: "rgba(14, 11, 6, 0.92)",
+    borderRadius: "50%",
+    opacity: 0, pointerEvents: "none",
+    transition: "opacity 450ms ease",
+    fontWeight: 500,
+  },
+  /* VU cluster: meter + promoted numeric + label, laid out as a little panel */
+  vuCluster: {
+    display: "flex", flexDirection: "row", alignItems: "center",
+    gap: "14px",
+  },
+  vuOuter: {
+    display: "flex", flexDirection: "column", alignItems: "center",
+  },
+  vuColumn: {
+    display: "flex", flexDirection: "column-reverse", gap: "2px",
+    padding: "4px 4px", background: "#0a0805",
+    border: `1px solid ${BORDER}`, borderRadius: "3px",
+    boxShadow: "inset 0 1px 3px rgba(0,0,0,0.7)",
+    position: "relative",
+  },
+  vuSeg: { width: "40px", height: "7px", borderRadius: "1px", background: LED_OFF, transition: "background 70ms ease, box-shadow 70ms ease" },
+  vuReadoutStack: {
+    display: "flex", flexDirection: "column",
+    alignItems: "flex-start",
+    gap: "4px",
+    minWidth: "90px",
+  },
+  vuReadoutNumber: {
+    fontFamily: serifDisplay,
+    fontStyle: "italic",
+    fontSize: "28px",
+    color: GOLD_HI,
+    fontVariantNumeric: "tabular-nums",
+    lineHeight: 1,
+    fontWeight: 500,
+  },
+  vuReadoutLabel: {
+    fontSize: "9.5px", color: GOLD_LO,
+    textTransform: "uppercase", letterSpacing: "0.2em",
+    fontWeight: 500,
+    lineHeight: 1.3,
+  },
+  switchStack: { display: "flex", flexDirection: "column", gap: "16px", alignItems: "center" },
+  switch: (on) => ({
+    width: "44px", height: "24px",
+    background: on ? INK_SOFT : "#120e07",
+    border: `1px solid ${on ? GOLD_LO : BORDER}`,
+    borderRadius: "12px", position: "relative", cursor: "pointer",
+    transition: "all 0.15s",
+  }),
+  switchKnob: (on) => ({
+    position: "absolute",
+    left: on ? "22px" : "2px", top: "1px",
+    width: "20px", height: "20px",
+    background: on ? GOLD_HI : GOLD_MUTE,
+    borderRadius: "50%", transition: "all 0.15s",
+  }),
+};
+
+const spanStyle = (w, h) => { const hMap = { sm: 22, md: 30, lg: 38, xl: 44 }; return { gridColumn: `span ${w}`, gridRow: `span ${hMap[h] || 30}` }; };
+
+function itemHasTag(item, group, tag) {
+  if (group === "year") return String(item.year) === tag;
+  const dim = DIMENSIONS.find(d => d.key === group);
+  if (dim?.kind === "multi") return Array.isArray(item[group]) && item[group].includes(tag);
+  return item[group] === tag;
+}
+
+/* FILTER RULE (v22, LOCKED — see docs/FILTER_LOGIC_DECISION.md):
+   within-group OR, across-group AND, empty-group-silent.
+
+   An artifact is in the output if, for every group that has at least one
+   tag ON, the artifact carries at least one of that group's ON tags.
+   Groups with zero tags ON are skipped — they do not constrain and they
+   do not veto.
+
+   Stated as English: "I want early OR breakthrough, at Red Rocks, on
+   audio." Groups she hasn't touched don't enter the sentence. */
+function matchFilter(item, selected) {
+  if (selected.__randomIds) return selected.__randomIds.has(item.id);
+  for (const { key, kind } of DIMENSIONS) {
+    const sel = selected[key];
+    if (!sel || sel.size === 0) continue;  // empty group is silent
+    let carries = false;
+    if (key === "year") {
+      carries = sel.has(String(item.year));
+    } else if (kind === "multi") {
+      carries = Array.isArray(item[key]) && item[key].some(v => sel.has(v));
+    } else {
+      carries = item[key] != null && sel.has(item[key]);
+    }
+    if (!carries) return false;  // this group constrains, artifact fails it
+  }
+  return true;
+}
+
+/* Count for a pill under the locked rule: how many artifacts WOULD be in
+   the output if *only* this pill were lit in its own group, with all
+   OTHER groups left as they currently are. Per v0.1 §3 and the decision
+   record's Consequences note, the count ignores the pill's own-group
+   selections — otherwise within-group OR would scramble the signal.
+   Clicking pills teaches the catalog's shape because counts respond to
+   cross-group context without being distorted by sibling pills. */
+function countForPill(items, selected, group, tag) {
+  // If __randomIds is active, pills are inert — fall back to raw membership.
+  if (selected.__randomIds) return items.filter(i => itemHasTag(i, group, tag)).length;
+  const probe = cloneSelected(selected);
+  probe[group] = new Set([tag]);  // isolate: just this pill, not additive within group
+  return items.filter(i => matchFilter(i, probe)).length;
+}
+
+/* ============================================================
+   SANITY AUDIT (v23) — runs once at module load.
+   Verifies the locked filter rule against the generated catalog.
+   Carries v22's six tests forward unchanged. Tests are dimension-agnostic
+   (no test touches `mood`), so the mood removal does not affect them.
+   With the 200-item generator restored as base, tests #4 (era+venue AND)
+   and #5 (odds:hat sparse) are non-trivial — the catalog has shape.
+   Results are logged to console and rendered as a bottom-right strip.
+   ============================================================ */
+function _mkSel(groups) {
+  const out = {};
+  DIMENSIONS.forEach(({ key }) => { out[key] = new Set(); });
+  for (const [k, vs] of Object.entries(groups)) out[k] = new Set(Array.isArray(vs) ? vs : [vs]);
+  return out;
+}
+function _runMatch(sel) { return ARTIFACT_CARDS.filter(i => matchFilter(i, sel)).length; }
+
+const AUDIT_RESULTS = (() => {
+  const N = ARTIFACT_CARDS.length;
+  const tests = [];
+
+  // 1. All off → full catalog (empty-group-silent makes every group silent)
+  const t1 = _runMatch(_mkSel({}));
+  tests.push({ id: 1, name: "all off → full catalog", expected: N, actual: t1, pass: t1 === N });
+
+  // 2. Single tag on (era: breakthrough) → artifacts carrying breakthrough
+  const expected2 = ARTIFACT_CARDS.filter(i => i.era === "breakthrough").length;
+  const t2 = _runMatch(_mkSel({ era: "breakthrough" }));
+  tests.push({ id: 2, name: "era: breakthrough alone", expected: expected2, actual: t2, pass: t2 === expected2 && t2 > 0 });
+
+  // 3. Two tags same group (era: early + breakthrough) → within-group OR
+  const expected3 = ARTIFACT_CARDS.filter(i => i.era === "early" || i.era === "breakthrough").length;
+  const t3 = _runMatch(_mkSel({ era: ["early", "breakthrough"] }));
+  tests.push({ id: 3, name: "era: early OR breakthrough (within-group OR)", expected: expected3, actual: t3, pass: t3 === expected3 });
+
+  // 4. Two tags different groups (era: breakthrough + venue: red-rocks) → across-group AND
+  //    With the 200-item generator this is non-trivial and meaningfully small.
+  const expected4 = ARTIFACT_CARDS.filter(i => i.era === "breakthrough" && i.venue === "red-rocks").length;
+  const t4 = _runMatch(_mkSel({ era: "breakthrough", venue: "red-rocks" }));
+  tests.push({ id: 4, name: "era: breakthrough AND venue: red-rocks (across-group AND)", expected: expected4, actual: t4, pass: t4 === expected4 && t4 > 0 });
+
+  // 5. Sparse Deeper tag alone (odds: hat) → artifacts carrying hat only
+  //    With the generator's odds sparsity (40% chance of any odds, then weighted), this is
+  //    non-zero but small — exactly the "digging in the sand" case from the decision record.
+  const expected5 = ARTIFACT_CARDS.filter(i => Array.isArray(i.odds) && i.odds.includes("hat")).length;
+  const t5 = _runMatch(_mkSel({ odds: "hat" }));
+  const sparsePass = t5 === expected5;  // pass = rule-correct
+  tests.push({ id: 5, name: "odds: hat alone (sparse Deeper)", expected: expected5, actual: t5, pass: sparsePass, info: expected5 === 0 ? "no artifacts carry this tag — rule correct, zero expected" : null });
+
+  // 6. Empty Deeper group + tags on elsewhere → Deeper does not veto (v20 bug impossible)
+  //    Set era: breakthrough, leave ALL Deeper groups empty. Expect same as test 2.
+  const t6 = _runMatch(_mkSel({ era: "breakthrough" }));
+  tests.push({ id: 6, name: "empty Deeper groups do NOT veto (v20 bug gone)", expected: expected2, actual: t6, pass: t6 === expected2 && t6 > 0 });
+
+  const allPass = tests.every(t => t.pass);
+  if (typeof console !== "undefined") {
+    console.group("%cv23 SANITY AUDIT" + (allPass ? " — ALL PASS" : " — FAILURES"), "font-weight:600;color:" + (allPass ? "#9ec48a" : "#d47a7a"));
+    console.log("Catalog size:", N);
+    tests.forEach(t => {
+      const tag = t.pass ? "✓" : "✗";
+      const line = `${tag} #${t.id} ${t.name}: expected=${t.expected} actual=${t.actual}` + (t.info ? "  [" + t.info + "]" : "");
+      console.log(line);
+    });
+    console.groupEnd();
+  }
+  return { tests, allPass, catalogSize: N };
+})();
+
+function AuditStrip() {
+  const [open, setOpen] = useState(false);
+  const { tests, allPass, catalogSize } = AUDIT_RESULTS;
+  const barBg = allPass ? "rgba(40, 64, 36, 0.92)" : "rgba(72, 28, 28, 0.92)";
+  const barFg = allPass ? "#b9d8a6" : "#e9b0b0";
+  return (
+    <div style={{ position: "fixed", right: "12px", bottom: "12px", zIndex: 9999, fontFamily: sansBody, fontSize: "11px", letterSpacing: "0.04em", color: barFg, background: barBg, border: "1px solid " + (allPass ? "#4a6a3e" : "#7a3a3a"), borderRadius: "4px", padding: "6px 10px", maxWidth: "360px", boxShadow: "0 2px 8px rgba(0,0,0,0.4)", cursor: "pointer", userSelect: "none" }}
+         onClick={() => setOpen(o => !o)}
+         title="click to expand/collapse v23 sanity audit">
+      <div style={{ fontWeight: 600, textTransform: "uppercase" }}>
+        v23 audit · {allPass ? "ALL PASS" : "FAIL"} · {tests.filter(t => t.pass).length}/{tests.length} · catalog={catalogSize} {open ? "▾" : "▸"}
+      </div>
+      {open && (
+        <div style={{ marginTop: "6px", fontSize: "10.5px", lineHeight: 1.5 }}>
+          {tests.map(t => (
+            <div key={t.id} style={{ color: t.pass ? "#cde1bd" : "#f3c2c2" }}>
+              {t.pass ? "✓" : "✗"} #{t.id} {t.name}
+              <span style={{ opacity: 0.75, marginLeft: "6px" }}>exp={t.expected} got={t.actual}</span>
+              {t.info && <div style={{ opacity: 0.7, fontStyle: "italic", marginLeft: "14px" }}>{t.info}</div>}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function prettyTag(tag) { return String(tag).replace(/-/g, " "); }
+
+function measureWidestLabel(labels) {
+  if (typeof window === "undefined") return 100;
+  const span = document.createElement("span");
+  Object.assign(span.style, { position: "absolute", visibility: "hidden", whiteSpace: "nowrap", fontFamily: sansBody, fontSize: "11.5px", fontWeight: "500", letterSpacing: "0.02em", textTransform: "lowercase" });
+  document.body.appendChild(span);
+  let max = 0;
+  labels.forEach(l => { span.textContent = l; const w = span.getBoundingClientRect().width; if (w > max) max = w; });
+  document.body.removeChild(span);
+  return Math.ceil(max);
+}
+
+function useGlobalPillWidth() {
+  const [width, setWidth] = useState(120);
+  useLayoutEffect(() => {
+    const maxCount = ARTIFACT_CARDS.length;
+    const labels = [];
+    DIMENSIONS.forEach(({ values }) => values.forEach(v => labels.push(`${prettyTag(v)}   ${maxCount}`)));
+    setWidth(measureWidestLabel(labels) + 20 + 8 + 6);
+  }, []);
+  return width;
+}
+
+function cloneSelected(sel) {
+  const out = {};
+  for (const k of Object.keys(sel)) {
+    if (k === "__randomIds") out.__randomIds = new Set(sel.__randomIds);
+    else out[k] = new Set(sel[k] ?? []);
+  }
+  return out;
+}
+function selectedIsEmpty(sel) {
+  if (sel.__randomIds && sel.__randomIds.size > 0) return false;
+  for (const { key } of DIMENSIONS) if (sel[key]?.size > 0) return false;
+  return true;
+}
+function presetSummaryText(p) {
+  if (!p) return "empty";
+  if (p.__randomIds) return `${p.__randomIds.size} random artifacts`;
+  const parts = [];
+  /* v28: tag summary. Shuffle/Loop appear as trailing notes if on. */
+  if (p.selected) {
+    for (const { key } of DIMENSIONS) {
+      if (p.selected[key]?.size) {
+        parts.push(`${key}: ${[...p.selected[key]].map(prettyTag).join(", ")}`);
+      }
+    }
+  } else {
+    /* Legacy snapshot shape (pre-v28) — selection keys at top level.
+       Keep the display working if an old preset is somehow in state. */
+    for (const { key } of DIMENSIONS) {
+      if (p[key]?.size) parts.push(`${key}: ${[...p[key]].map(prettyTag).join(", ")}`);
+    }
+  }
+  const flags = [];
+  if (p.shuffle) flags.push("shuffle");
+  if (p.loop) flags.push("loop");
+  const body = parts.join("  /  ") || "no tags";
+  return flags.length ? `${body}  ·  ${flags.join(" + ")}` : body;
+}
+
+/* Preset snapshot shape per spec §9.4 (v28).
+   Capture:
+     selected       — every ON tag across every group
+     shuffle, loop  — booleans
+     playingTrack   — { id, positionSec, album } | null
+     spinePosition  — album id | null
+   APPLY semantics are deferred (§9.4) — v28 ships the data capture.
+   Prototype-level APPLY in this file restores selected/shuffle/loop only;
+   player/spine fields are captured but not acted on (no player or spine
+   in the prototype). */
+function makePresetSnapshot({ selected, shuffle, loop, playingTrack, spinePosition }) {
+  return {
+    selected: cloneSelected(selected),
+    shuffle: !!shuffle,
+    loop: !!loop,
+    playingTrack: playingTrack ? { ...playingTrack } : null,
+    spinePosition: spinePosition ?? null,
+    savedAt: Date.now(),
+  };
+}
+
+function PillButton({ label, count, active, zero, pillWidth, onClick }) {
+  return (
+    <button style={S.pill(active, zero, pillWidth)} onClick={() => !zero && onClick()} disabled={zero} aria-pressed={active} title={prettyTag(label)}>
+      <span style={S.pillLabel}>{prettyTag(label)}</span>
+      <span style={S.pillCount(active, zero)}>{count}</span>
+    </button>
+  );
+}
+
+function PillGroupColumn({ group, values, items, selected, toggle, pillWidth }) {
+  const counts = useMemo(() => {
+    const map = {}; values.forEach(v => { map[v] = countForPill(items, selected, group, v); }); return map;
+  }, [values, items, selected, group]);
+  return (
+    <div style={S.groupColumn}>
+      <span style={S.groupColumnLabel}>{GROUP_LABELS[group] || group}</span>
+      {values.map(v => {
+        const active = selected[group]?.has(v) ?? false;
+        const zero = !active && counts[v] === 0;
+        return <PillButton key={v} label={v} count={counts[v]} active={active} zero={zero} pillWidth={pillWidth} onClick={() => toggle(group, v)} />;
+      })}
+    </div>
+  );
+}
+
+/* ============================================================
+   KALEIDOSCOPE — reusable blocks (§1.5)
+   ============================================================ */
+function Knob({ id, label, value, onChange }) {
+  const wrapRef = useRef(null);
+  const [dragging, setDragging] = useState(false);
+  const deg = value * 270 - 135;
+  const readoutVal = Math.round(value * 100);
+
+  const onMouseDown = (e) => {
+    e.preventDefault();
+    const startX = e.clientX, startY = e.clientY, startVal = value;
+    setDragging(true);
+    const onMove = (ev) => {
+      const dx = (ev.clientX - startX) / 150;
+      const dy = (startY - ev.clientY) / 150;
+      const next = Math.max(0, Math.min(1, startVal + dx + dy));
+      onChange(next);
+    };
+    const onUp = () => {
+      setDragging(false);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+  };
+
+  return (
+    <div style={S.kalBlock}>
+      <div
+        ref={wrapRef}
+        className={"knob-wrap" + (dragging ? " dragging" : "")}
+        style={S.knobWrap}
+        onMouseDown={onMouseDown}
+        role="slider"
+        aria-label={label}
+        aria-valuenow={readoutVal}
+      >
+        <div style={S.knob}>
+          <div style={{ ...S.knobIndicator, transform: `translateX(-50%) rotate(${deg}deg)` }} />
+        </div>
+        <div className="knob-readout" style={S.knobReadout}>{readoutVal}</div>
+      </div>
+      <div style={S.kalBlockLabel}>{label}</div>
+    </div>
+  );
+}
+
+function PillSwitch({ id, label, value, onChange }) {
+  return (
+    <div style={S.kalBlock}>
+      <div style={S.switch(value)} onClick={() => onChange(!value)} role="switch" aria-checked={value} aria-label={label}>
+        <div style={S.switchKnob(value)} />
+      </div>
+      <div style={S.kalBlockLabel}>{label}</div>
+    </div>
+  );
+}
+
+function VuMeter({ percent }) {
+  /* Segmented gas-gauge meter with transient pop + peak marker decay.
+     Gas-gauge semantics (post-v24): full tank = all green, running low
+     = yellow, empty = lone red at bottom. 12 segments bottom-to-top:
+     1 red, 3 yellow, 8 green. Rendered via column-reverse so array
+     index 0 = bottom. */
+  const [current, setCurrent] = useState(percent);
+  const [peak, setPeak] = useState(0);
+  const stateRef = useRef({ current: percent, target: percent, peak: 0, peakHold: 0, lastFrame: performance.now() });
+
+  /* Pop on target change */
+  useEffect(() => {
+    const st = stateRef.current;
+    const jump = percent - st.target;
+    if (Math.abs(jump) > 2) {
+      const popMag = Math.min(Math.abs(jump) * 0.4, 8);
+      st.current = Math.min(100, percent + (jump > 0 ? popMag : 0));
+    } else {
+      st.current = percent;
+    }
+    st.target = percent;
+    const currentSeg = Math.round((st.current / 100) * 12);
+    if (currentSeg > st.peak) { st.peak = currentSeg; st.peakHold = 800; }
+    setCurrent(st.current);
+    setPeak(st.peak);
+  }, [percent]);
+
+  /* RAF loop — decay pop + peak */
+  useEffect(() => {
+    let rafId;
+    const tick = (now) => {
+      const st = stateRef.current;
+      const dt = now - st.lastFrame;
+      st.lastFrame = now;
+      let changed = false;
+      if (Math.abs(st.current - st.target) > 0.1) {
+        const delta = st.target - st.current;
+        st.current += delta * Math.min(1, dt / 120);
+        changed = true;
+      }
+      if (st.peakHold > 0) {
+        st.peakHold -= dt;
+      } else if (st.peak > 0) {
+        st.peak -= dt / 400;
+        if (st.peak < 0) st.peak = 0;
+        changed = true;
+      }
+      if (changed) {
+        setCurrent(st.current);
+        setPeak(st.peak);
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, []);
+
+  const litCount = Math.round((current / 100) * 12);
+  const peakSeg = Math.floor(peak);
+
+  const segs = [];
+  for (let i = 0; i < 12; i++) {
+    let bg = LED_OFF;
+    let shadow = "none";
+    const isLit = i < litCount;
+    const isPeak = !isLit && peakSeg > litCount && i === peakSeg - 1 && peak > 0;
+    if (isLit) {
+      if (i < 1)       { bg = LED_RED;    shadow = "0 0 5px rgba(200, 96, 64, 0.6)"; }
+      else if (i < 4)  { bg = LED_YELLOW; shadow = "0 0 4px rgba(200, 160, 80, 0.55)"; }
+      else             { bg = LED_GREEN;  shadow = "0 0 4px rgba(138, 154, 74, 0.5)"; }
+    } else if (isPeak) {
+      bg = "#d8c890"; shadow = "0 0 4px rgba(216, 200, 144, 0.6)";
+    }
+    segs.push(<div key={i} style={{ ...S.vuSeg, background: bg, boxShadow: shadow }} />);
+  }
+
+  return (
+    <div style={S.vuOuter}>
+      <div style={S.vuColumn}>{segs}</div>
+    </div>
+  );
+}
+
+/* ============================================================
+   v17 CARDS — unchanged
+   ============================================================ */
+function PhotoCard({ card }) { return (<><div style={{ flex: 1, background: "linear-gradient(135deg, #2d2513 0%, #1a140a 60%, #0e0b06 100%)", borderBottom: `1px solid ${BORDER}`, position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}><div style={{ position: "absolute", inset: "12px", border: `1px solid ${GOLD_MUTE}`, opacity: 0.4 }} /><span style={{ color: GOLD_MUTE, fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase" }}>photo</span></div><div style={{ padding: "8px 11px 10px" }}><div style={{ fontFamily: serifDisplay, fontStyle: "italic", fontSize: "13px", color: GOLD, lineHeight: 1.3, marginBottom: "2px" }}>{card.title}</div><div style={{ fontSize: "9.5px", color: GOLD_LO, letterSpacing: "0.14em", textTransform: "uppercase" }}>{card.meta}</div>{card.credit && <div style={{ fontSize: "10.5px", color: GOLD_HI, fontStyle: "italic", marginTop: "3px" }}>— {card.credit}</div>}</div></>); }
+function ArtCard({ card }) { return (<><div style={{ flex: 1, background: `radial-gradient(circle at 30% 40%, #3a2e14 0%, transparent 40%), radial-gradient(circle at 70% 60%, #4a3818 0%, transparent 45%), #1a140a`, borderBottom: `1px solid ${BORDER}`, position: "relative" }}><div style={{ position: "absolute", left: "20%", top: "30%", width: "60%", height: "40%", border: `1px solid ${GOLD_MUTE}`, borderRadius: "50%", opacity: 0.3 }} /></div><div style={{ padding: "8px 11px 10px", borderTop: `1px dashed ${BORDER_HI}` }}><div style={{ fontFamily: serifDisplay, fontStyle: "italic", fontSize: "13px", color: GOLD, lineHeight: 1.3 }}>{card.title}</div><div style={{ fontSize: "10.5px", color: GOLD_HI, fontStyle: "italic", marginTop: "3px" }}>— <strong style={{ fontWeight: 500, color: GOLD_HI, fontStyle: "normal" }}>{card.credit}</strong></div>{card.meta && <div style={{ fontSize: "9.5px", color: GOLD_LO, letterSpacing: "0.14em", textTransform: "uppercase", marginTop: "3px" }}>{card.meta}</div>}</div></>); }
+function VideoCard({ card }) { return (<><div style={{ flex: 1, background: "linear-gradient(180deg, #1a140a 0%, #2d2513 100%)", borderBottom: `1px solid ${BORDER}`, position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>{card.isLive && <div style={{ position: "absolute", top: "6px", left: "6px", fontSize: "9px", letterSpacing: "0.22em", fontWeight: 500, color: GOLD_HI, textTransform: "uppercase", background: "rgba(14, 11, 6, 0.8)", padding: "2px 6px", border: `1px solid ${GOLD_LO}` }}>live</div>}<div style={{ width: "32px", height: "32px", border: `1px solid ${GOLD_LO}`, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}><div style={{ width: 0, height: 0, borderTop: "6px solid transparent", borderBottom: "6px solid transparent", borderLeft: `9px solid ${GOLD}`, marginLeft: "2px" }} /></div>{card.duration && <div style={{ position: "absolute", bottom: "6px", right: "6px", fontSize: "10px", color: GOLD_HI, background: "rgba(14, 11, 6, 0.8)", padding: "1px 5px", letterSpacing: "0.05em", fontVariantNumeric: "tabular-nums" }}>{card.duration}</div>}</div><div style={{ padding: "8px 11px 10px" }}><div style={{ fontFamily: serifDisplay, fontStyle: "italic", fontSize: "13px", color: GOLD, lineHeight: 1.3, marginBottom: "2px" }}>{card.title}</div>{card.meta && <div style={{ fontSize: "9.5px", color: GOLD_LO, letterSpacing: "0.14em", textTransform: "uppercase" }}>{card.meta}</div>}{card.isCover && card.credit && <div style={{ fontSize: "10.5px", color: GOLD_HI, fontStyle: "italic", marginTop: "3px" }}>— {card.credit}</div>}</div></>); }
+function PressCard({ card }) { return (<div style={{ padding: "12px 14px 14px", flex: 1, display: "flex", flexDirection: "column" }}><div style={{ fontSize: "9.5px", letterSpacing: "0.26em", color: GOLD_LO, textTransform: "uppercase", fontWeight: 500, marginBottom: "6px" }}>{card.source}</div><div style={{ fontFamily: serifDisplay, fontStyle: "italic", fontSize: "14px", color: GOLD, lineHeight: 1.38, marginBottom: "8px", flex: 1 }}><span style={{ color: GOLD_LO }}>“ </span>{card.pull}<span style={{ color: GOLD_LO }}> ”</span></div><div style={{ fontSize: "10px", color: GOLD_LO, letterSpacing: "0.12em", textTransform: "uppercase" }}>{card.sub}</div></div>); }
+function EssayCard({ card }) { return (<div style={{ padding: "14px 16px 16px", flex: 1, display: "flex", flexDirection: "column", gap: "6px" }}><div style={{ fontSize: "9.5px", letterSpacing: "0.26em", color: GOLD_LO, textTransform: "uppercase", fontWeight: 500 }}>{card.kind}</div><div style={{ fontFamily: serifDisplay, fontWeight: 500, fontSize: "17px", color: GOLD, lineHeight: 1.2, margin: "2px 0 4px" }}>{card.title}</div><div style={{ fontSize: "12px", color: DIM, lineHeight: 1.55, flex: 1 }}>{card.lede}</div><div style={{ fontSize: "10.5px", color: GOLD_HI, fontStyle: "italic", marginTop: "4px" }}>— {card.credit}</div></div>); }
+function SessionCard({ card }) { return (<><div style={{ flex: 1, background: `linear-gradient(120deg, rgba(200, 160, 80, 0.08) 0%, transparent 50%), ${INK_SOFT}`, borderBottom: `1px solid ${BORDER}`, position: "relative" }}><div style={{ position: "absolute", left: "15%", right: "15%", top: "25%", bottom: "25%", border: `1px solid ${BORDER_HI}`, opacity: 0.5 }} /></div><div style={{ padding: "8px 11px 10px" }}><div style={{ fontFamily: serifDisplay, fontStyle: "italic", fontSize: "12.5px", color: GOLD, lineHeight: 1.3 }}>{card.title}</div><div style={{ fontSize: "9.5px", color: GOLD_LO, letterSpacing: "0.14em", textTransform: "uppercase", marginTop: "3px" }}>{card.meta}</div></div></>); }
+
+function ArtifactCard({ card }) {
+  const isPress = card.render === "press";
+  const isEssay = card.render === "essay";
+  const baseStyle = { ...S.card, ...spanStyle(card.span_w, card.span_h), ...(isPress ? { borderLeft: `2px solid ${GOLD_LO}`, background: "transparent" } : {}), ...(isEssay ? { background: INK_CARD_HI } : {}) };
+  let inner;
+  switch (card.render) {
+    case "photo": inner = <PhotoCard card={card} />; break;
+    case "art": inner = <ArtCard card={card} />; break;
+    case "video": inner = <VideoCard card={card} />; break;
+    case "press": inner = <PressCard card={card} />; break;
+    case "essay": inner = <EssayCard card={card} />; break;
+    case "session": inner = <SessionCard card={card} />; break;
+    default: inner = null;
+  }
+  return <div className="card-fade-in" style={baseStyle}>{inner}</div>;
+}
+
+function P3Panel({ matched, totalCount }) {
+  const filterKey = useMemo(() => matched.map(c => c.id).join(","), [matched]);
+  return (
+    <>
+      <div style={S.pageHeader}>
+        <div style={S.eyebrow}>Weird.Baby · Prototype A · v28 · 200 artifacts · v28 simplification pass</div>
+        <h1 style={S.pageTitle}>the five-tab dock</h1>
+        <p style={S.pageSub}>
+          Five tabs: Artist · Formats · Deep Tracks · Presets · ✕.
+          Search lives inside Deep Tracks — input at top, corral below, tag
+          columns below that. Shuffle and Loop live in Presets as pill
+          switches alongside the user slots. Kaleidoscope mothballed for
+          v1. Audit strip bottom-right.
+        </p>
+      </div>
+      <div style={S.panelHead}>
+        <span style={S.panelHeadLabel}>artifacts <span style={S.panelHeadMuted}> · the material evidence</span></span>
+        <span style={S.panelCount}>
+          <span style={S.panelCountBig}>{matched.length}</span>
+          <span style={S.panelCountTotal}> of {totalCount}</span>
+        </span>
+      </div>
+      <div style={S.artifactGrid}>
+        {matched.map(card => <ArtifactCard key={`${filterKey}-${card.id}`} card={card} />)}
+      </div>
+    </>
+  );
+}
+
+/* ============================================================
+   SCROLL CONTAINER — simplified v27
+   v24 introduced this with top/bottom gradient overlays (fade) to
+   signal scrollable state. v26 tried a 1px hairline instead. Neither
+   read well enough in practice — the fade washed out against dark
+   chrome, the hairline didn't register. Per Mike's v27 direction:
+   ship plain. Native styled scrollbar (.wb-scroll) is the only
+   affordance. Visitors scroll.
+   The wrap-probability question is on hold; docs/WRAP_PROBABILITY_ANALYSIS.md
+   remains on disk as the record. Revisit with real telemetry.
+   Component retained as a layout wrapper (not removed) so future
+   affordance work slots in here cleanly without a wider refactor.
+   ============================================================ */
+function ScrollFadeContainer({ children }) {
+  return (
+    <div style={S.scrollFadeWrap}>
+      <div className="wb-scroll" style={S.contentBody}>{children}</div>
+    </div>
+  );
+}
+
+function TierContent({ tab, dims, selected, toggle, pillWidth }) {
+  return (
+    <ScrollFadeContainer>
+      <div style={S.groupsRow}>
+        {dims.map(dim => (
+          <PillGroupColumn key={dim.key} group={dim.key} values={dim.values} items={ARTIFACT_CARDS} selected={selected} toggle={toggle} pillWidth={pillWidth} />
+        ))}
+      </div>
+    </ScrollFadeContainer>
+  );
+}
+
+/* ============================================================
+   DEEP TRACKS TAB CONTENT (v28)
+   Per spec §5.5: Deep Tracks tab body contains, top-to-bottom:
+     search input (auto-focused on first open of this tab in session)
+     search-results corral (only when input has text)
+     tag columns (the normal multi-column Deep Tracks layout)
+   Pill behavior in the corral is identical to pill behavior in the
+   columns — same toggle, same selection state.
+   ============================================================ */
+function DeepTracksContent({ dims, selected, toggle, pillWidth, query, setQuery, focusSignal }) {
+  const inputRef = useRef(null);
+  useEffect(() => { if (focusSignal) inputRef.current?.focus(); }, [focusSignal]);
+
+  const q = query.trim().toLowerCase();
+  const hits = useMemo(() => {
+    if (!q) return [];
+    const out = [];
+    DIMENSIONS.forEach(dim => {
+      dim.values.forEach(v => {
+        if (prettyTag(v).toLowerCase().includes(q)) out.push({ group: dim.key, tag: v });
+      });
+    });
+    return out;
+  }, [q]);
+
+  const hasQuery = q.length > 0;
+
+  return (
+    <ScrollFadeContainer>
+      <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        <div style={S.searchWrap}>
+          <div style={S.searchInputHolder}>
+            <input
+              ref={inputRef}
+              className="searchbar"
+              type="text"
+              placeholder="search for any tag across all tiers"
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+            />
+          </div>
+          {hasQuery && (
+            <div className="pillscroll" style={S.corral}>
+              {hits.length === 0 ? (
+                <span style={{ fontSize: "11px", color: GOLD_MUTE, fontStyle: "italic", padding: "0 4px" }}>
+                  no tags match "{query}"
+                </span>
+              ) : hits.map(({ group, tag }, i) => {
+                const active = selected[group]?.has(tag) ?? false;
+                const count = countForPill(ARTIFACT_CARDS, selected, group, tag);
+                const zero = !active && count === 0;
+                return <PillButton key={`${group}-${tag}-${i}`} label={tag} count={count} active={active} zero={zero} pillWidth={null} onClick={() => toggle(group, tag)} />;
+              })}
+            </div>
+          )}
+        </div>
+        <div style={S.groupsRow}>
+          {dims.map(dim => (
+            <PillGroupColumn key={dim.key} group={dim.key} values={dim.values} items={ARTIFACT_CARDS} selected={selected} toggle={toggle} pillWidth={pillWidth} />
+          ))}
+        </div>
+      </div>
+    </ScrollFadeContainer>
+  );
+}
+
+/* ============================================================
+   PRESETS — v28 layout
+   Spec §9.2–9.4:
+     Top row: user slots (P1/P2/P3) top-left, Shuffle/Loop pill switches
+     inline to the right. Factory presets below the slots row.
+   Slot actions inline per slot (not a separate SAVE CURRENT bar):
+     APPLY        shown when slot non-empty
+     CLEAR SLOT   shown when slot non-empty
+     SAVE HERE    shown when slot empty OR state differs from saved
+   Snapshot captures: every ON tag, shuffle, loop, playingTrack,
+   spinePosition. APPLY semantics deferred — v28 restores selected +
+   shuffle + loop (player/spine not actionable in the prototype).
+   ============================================================ */
+function PresetsContent({ userPresets, setUserPresets, selected, setSelected,
+                         shuffle, setShuffle, loop, setLoop,
+                         playingTrack, spinePosition }) {
+  const [lastFactoryApplied, setLastFactoryApplied] = useState(null);
+
+  const applyFactoryPreset = (preset) => {
+    const next = preset.apply();
+    const cleared = {};
+    DIMENSIONS.forEach(({ key }) => { cleared[key] = new Set(); });
+    if (next.__randomIds) {
+      setSelected({ ...cleared, __randomIds: next.__randomIds });
+    } else {
+      for (const [k, v] of Object.entries(next)) cleared[k] = v;
+      setSelected(cleared);
+    }
+    setLastFactoryApplied(preset.key);
+  };
+
+  const slotIsFilled = (slot) => !!userPresets[slot];
+  const saveHere = (slot) => {
+    const snap = makePresetSnapshot({ selected, shuffle, loop, playingTrack, spinePosition });
+    setUserPresets(prev => ({ ...prev, [slot]: snap }));
+  };
+  const applySlot = (slot) => {
+    const p = userPresets[slot];
+    if (!p) return;
+    /* Legacy-shape backward compatibility: if p doesn't have p.selected,
+       treat the top-level as the selection map (old save shape). */
+    if (p.selected) {
+      setSelected(cloneSelected(p.selected));
+      setShuffle(!!p.shuffle);
+      setLoop(!!p.loop);
+    } else {
+      setSelected(cloneSelected(p));
+    }
+  };
+  const clearSlot = (slot) => {
+    setUserPresets(prev => ({ ...prev, [slot]: null }));
+  };
+
+  return (
+    <div className="wb-scroll" style={S.contentBody}>
+      <div style={S.presetsSectionLabel}>presets</div>
+      <div style={S.presetsTopRow}>
+        <div style={S.presetsSlotsCol}>
+          {["P1", "P2", "P3"].map(slot => {
+            const has = slotIsFilled(slot);
+            const p = userPresets[slot];
+            return (
+              <div key={slot} style={S.presetSlotRow(has)}>
+                <span style={S.presetSlotLabel}>{slot}</span>
+                <span style={S.presetSummary(!has)} title={has ? presetSummaryText(p) : undefined}>
+                  {has ? presetSummaryText(p) : "empty"}
+                </span>
+                <button
+                  className="preset-row-btn"
+                  style={S.presetRowBtn(has, true)}
+                  onClick={has ? () => applySlot(slot) : undefined}
+                  aria-disabled={!has}
+                >apply</button>
+                <button
+                  className="preset-row-btn"
+                  style={S.presetRowBtn(has, false)}
+                  onClick={has ? () => clearSlot(slot) : undefined}
+                  aria-disabled={!has}
+                >clear slot</button>
+                <button
+                  className="preset-row-btn"
+                  style={S.presetRowBtn(true, true)}
+                  onClick={() => saveHere(slot)}
+                  title={has ? "overwrite this slot with current state" : "save current state to this slot"}
+                >save here</button>
+              </div>
+            );
+          })}
+        </div>
+        <div style={S.presetsPlayerCol}>
+          <div style={S.presetsPlayerLabel}>player</div>
+          <div style={S.presetsPill(shuffle)} onClick={() => setShuffle(s => !s)}
+               role="switch" aria-checked={shuffle}>
+            <span>shuffle</span>
+            <span style={S.presetsPillState(shuffle)}>{shuffle ? "on" : "off"}</span>
+          </div>
+          <div style={S.presetsPill(loop)} onClick={() => setLoop(l => !l)}
+               role="switch" aria-checked={loop}>
+            <span>loop</span>
+            <span style={S.presetsPillState(loop)}>{loop ? "on" : "off"}</span>
+          </div>
+        </div>
+      </div>
+
+      <div style={S.presetsSectionLabel}>factory</div>
+      <div style={S.factoryGrid}>
+        {FACTORY_PRESETS.map(p => (
+          <div key={p.key} style={S.presetCard(lastFactoryApplied === p.key)} onClick={() => applyFactoryPreset(p)}>
+            <span style={S.presetLabel}>{p.label}</span>
+            <span style={S.presetDesc}>{p.desc}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   KALEIDOSCOPE — the mixer console
+   DORMANT in v28 per spec §7 [MOTHBALLED for v1].
+   Component preserved for post-launch revival. Not mounted anywhere
+   in this prototype. Kept alongside Knob / PillSwitch / VuMeter so
+   the revival reuses the same API without a rebuild. When the post-
+   launch Kaleidoscope ships, also reinstate the `runKaleidoscopeRecipe`
+   step in the filtering pipeline (currently tagFiltered === finalMatched).
+   ============================================================ */
+function KaleidoscopeContent({ kalState, setKalState, remainingPercent, remainingCount, totalCount }) {
+  const setKnob = (id) => (v) => setKalState(prev => ({ ...prev, [id]: v }));
+
+  return (
+    <div className="wb-scroll" style={S.contentBody}>
+      <div style={S.kalWrap}>
+        <div style={S.kalConsole}>
+
+          <div style={S.kalKnobRow}>
+            {KAL_KNOBS.map(cfg => (
+              <Knob key={cfg.id} id={cfg.id} label={cfg.label}
+                    value={kalState[cfg.id]} onChange={setKnob(cfg.id)} />
+            ))}
+          </div>
+
+          <div style={S.vuCluster}>
+            <VuMeter percent={remainingPercent} />
+            <div style={S.vuReadoutStack}>
+              <div style={S.vuReadoutNumber}>{remainingCount}<span style={{ fontSize: "16px", color: GOLD_LO }}> / {totalCount}</span></div>
+              <div style={S.vuReadoutLabel}>artifact<br/>remaining</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   ROOT
+   ============================================================ */
+function Prototype() {
+  const [query, setQuery] = useState("");
+  /* Initial selection = entry preset (curated, never raw catalog). */
+  const [selected, setSelected] = useState(() => makeEntrySelection());
+  /* Kaleidoscope state preserved but dormant in v28 — knobs are not rendered,
+     the recipe is not invoked, and the VU meter does not mount. Keeping
+     kalState + the default shape intact so the post-launch revival reuses
+     the same API. Shuffle and Loop lifted OUT of kalState in v28 per
+     spec §9: they're player-behavior controls living in Presets now, not
+     Kaleidoscope knobs. */
+  const [kalState, setKalState] = useState(KAL_STATE_DEFAULT);
+  const [shuffle, setShuffle] = useState(false);
+  const [loop, setLoop] = useState(false);
+  /* Player and spine state — v28 prototype does not render a player or a
+     spine, but preset snapshot capture (spec §9.4) reserves these fields.
+     In the real exhibit these are driven from the player / coverflow.
+     Stubbed to null here so snapshot shape is stable. */
+  const [playingTrack, _setPlayingTrack] = useState(null); // { id, positionSec, album } | null
+  const [spinePosition, _setSpinePosition] = useState(null); // album id | null
+  const [activeTab, setActiveTab] = useState(null);
+  const [hoverPeek, setHoverPeek] = useState(false);
+  const [dockHeight, setDockHeight] = useState(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) { const n = parseInt(raw, 10); if (!isNaN(n) && n >= DOCK_MIN_H) return n; }
+    } catch (e) { /* ignore */ }
+    return DOCK_DEFAULT_H_SHARED;
+  });
+  const [resizing, setResizing] = useState(false);
+  const [resizeHover, setResizeHover] = useState(false);
+  const [userPresets, setUserPresets] = useState({ P1: null, P2: null, P3: null });
+  const [searchFocusSignal, setSearchFocusSignal] = useState(0);
+  const pillWidth = useGlobalPillWidth();
+  const hoverTimerRef = useRef(null);
+
+  useEffect(() => {
+    try { localStorage.setItem(STORAGE_KEY, String(dockHeight)); } catch (e) { /* ignore */ }
+  }, [dockHeight]);
+
+  /* FILTERED PIPELINE (v28 — Kaleidoscope dormant):
+     tag filters narrow the catalog. Kaleidoscope recipe is not invoked
+     in v28. finalMatched == tagFiltered. When Kaleidoscope revives
+     post-launch, reintroduce the recipe step here. */
+  const tagFiltered = useMemo(
+    () => ARTIFACT_CARDS.filter(c => matchFilter(c, selected)),
+    [selected]
+  );
+  const finalMatched = tagFiltered;
+  const remainingPercent = ARTIFACT_CARDS.length > 0
+    ? (finalMatched.length / ARTIFACT_CARDS.length) * 100
+    : 0;
+
+  const toggle = (group, tag) => {
+    setSelected(prev => {
+      const next = {};
+      for (const { key } of DIMENSIONS) next[key] = new Set(prev[key] ?? []);
+      /* Transitioning away from entry preset's __randomIds state into filter-based browsing.
+         Any tier toggle implicitly dismisses the random-entry state. */
+      if (next[group].has(tag)) next[group].delete(tag);
+      else next[group].add(tag);
+      return next;
+    });
+  };
+
+  /* Clear All (v28): clears everything. Tags off, shuffle/loop off,
+     search cleared, Kaleidoscope state reset (dormant but kept in
+     sync for clean revival). Per §6.5 "Clear All clears all." */
+  const clear = () => {
+    setSelected(makeEntrySelection());
+    setKalState(KAL_STATE_DEFAULT);
+    setShuffle(false);
+    setLoop(false);
+    setQuery("");
+  };
+
+  const anyTagSelected = selected.__randomIds || Object.values(selected).some(s => s instanceof Set && s.size > 0);
+  /* v28: shuffle and loop count as active filter state (they're part of
+     the preset snapshot per §9.4). Kaleidoscope is dormant. */
+  const anySelected = anyTagSelected || shuffle || loop;
+
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape" && (activeTab || hoverPeek)) { setActiveTab(null); setHoverPeek(false); } };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [activeTab, hoverPeek]);
+
+  useEffect(() => {
+    const onResize = () => {
+      const vh = window.innerHeight;
+      setDockHeight(prev => Math.max(DOCK_MIN_H, Math.min(prev, vh * DOCK_MAX_FRAC)));
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const scheduleHoverOpen = () => {
+    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
+    hoverTimerRef.current = setTimeout(() => { setHoverPeek(true); }, HOVER_DELAY_OPEN);
+  };
+  const scheduleHoverClose = () => {
+    if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
+    hoverTimerRef.current = setTimeout(() => { setHoverPeek(false); }, HOVER_DELAY_CLOSE);
+  };
+  const cancelHoverTimer = () => {
+    if (hoverTimerRef.current) { clearTimeout(hoverTimerRef.current); hoverTimerRef.current = null; }
+  };
+
+  const open = activeTab !== null && activeTab !== "close";
+  let dockPx;
+  if (open) dockPx = dockHeight;
+  else if (hoverPeek) dockPx = TAB_STRIP_H;
+  else dockPx = TAB_PEEK;
+
+  const handleTabClick = (tabKey) => {
+    if (tabKey === "close") { setActiveTab(null); setHoverPeek(false); return; }
+    if (activeTab === tabKey) { setActiveTab(null); setHoverPeek(false); return; }
+    setActiveTab(tabKey);
+    setHoverPeek(false);
+    /* Search input lives inside Deep Tracks (spec §5.5 v28).
+       Autofocus fires when Deep Tracks tab opens. */
+    if (tabKey === "deep") setSearchFocusSignal(s => s + 1);
+  };
+
+  const startResize = useCallback((e) => {
+    e.preventDefault(); e.stopPropagation();
+    setResizing(true);
+    const startY = e.clientY, startH = dockHeight, vh = window.innerHeight;
+    const onMove = (me) => {
+      const dy = me.clientY - startY;
+      let next = startH - dy;
+      next = Math.max(DOCK_MIN_H, Math.min(next, vh * DOCK_MAX_FRAC));
+      setDockHeight(next);
+    };
+    const onUp = () => {
+      setResizing(false);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+  }, [dockHeight]);
+
+  const animClass = "animated" + (resizing ? " resizing" : (!open && hoverPeek ? " quick" : ""));
+
+  const panelClickHandler = () => {
+    if (open || hoverPeek) {
+      setActiveTab(null); setHoverPeek(false); cancelHoverTimer();
+    }
+  };
+
+  const currentTab = activeTab && activeTab !== "close" ? TABS.find(t => t.key === activeTab) : null;
+
+  return (
+    <div style={S.app}>
+      <style>{S.gFonts}</style>
+
+      <div className={animClass} style={S.panelPos(dockPx)} onClick={panelClickHandler}>
+        <div className="wb-scroll" style={S.panelScroll}>
+          <P3Panel matched={finalMatched} totalCount={ARTIFACT_CARDS.length} />
+        </div>
+      </div>
+
+      <div className={animClass} style={S.dock(dockPx)} onClick={(e) => e.stopPropagation()}>
+
+        <div style={S.tabStrip}
+             onMouseEnter={() => { if (!open) { cancelHoverTimer(); scheduleHoverOpen(); } }}
+             onMouseLeave={() => { if (!open) scheduleHoverClose(); }}>
+          {TABS.map(t => {
+            const isActive = activeTab === t.key;
+            /* Tab signaling note (post-v24, v28):
+               Tier tabs have no per-tab signal — Clear All in the tab strip
+               is the global "something is active" cue. Kaleidoscope was
+               retired from the dock in v28 so its activity dot is gone. */
+            const isClose = t.kind === "close";
+            return (
+              <div key={t.key}
+                   className={isActive ? "" : "tab-hoverable"}
+                   style={S.tab(isActive, open, t.width, isClose)}
+                   onClick={(e) => { e.stopPropagation(); handleTabClick(t.key); }}
+                   role="button"
+                   title={t.label}>
+                <span>{t.label}</span>
+              </div>
+            );
+          })}
+
+          {anySelected && (open || hoverPeek) && (
+            <button
+              style={S.stripClearBtn}
+              onClick={(e) => { e.stopPropagation(); clear(); }}
+              title="clear all tags, shuffle, and loop"
+            >clear all</button>
+          )}
+        </div>
+
+        {open && currentTab && (
+          <div style={S.dockBody}>
+            <div style={S.resizeHandle(resizeHover || resizing)}
+                 onMouseDown={startResize}
+                 onMouseEnter={() => setResizeHover(true)}
+                 onMouseLeave={() => setResizeHover(false)} />
+
+            {currentTab.kind === "tier" && (() => {
+              const dims = DIMENSIONS.filter(d => d.tier === currentTab.tier);
+              /* Deep Tracks tab (tier 3) carries the search surface atop
+                 the tag columns per spec §5.5 v28. Other tier tabs render
+                 columns only. */
+              if (currentTab.key === "deep") {
+                return <DeepTracksContent
+                         dims={dims} selected={selected} toggle={toggle}
+                         pillWidth={pillWidth}
+                         query={query} setQuery={setQuery}
+                         focusSignal={searchFocusSignal} />;
+              }
+              return <TierContent tab={currentTab} dims={dims} selected={selected}
+                                  toggle={toggle} pillWidth={pillWidth} />;
+            })()}
+
+            {currentTab.kind === "special" && currentTab.special === "presets" && (
+              <PresetsContent userPresets={userPresets} setUserPresets={setUserPresets}
+                              selected={selected} setSelected={setSelected}
+                              shuffle={shuffle} setShuffle={setShuffle}
+                              loop={loop} setLoop={setLoop}
+                              playingTrack={playingTrack} spinePosition={spinePosition} />
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<><Prototype /><AuditStrip /></>);
+</script>
+
+</body>
+</html>
