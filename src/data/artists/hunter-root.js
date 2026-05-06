@@ -86,7 +86,7 @@ const SPINE = [
       { title: "Silver Lining", videos: [{ ytId: "uaFHDfuohxc", label: "Official Video", type: "official" }] },
       { title: "Quicksand Sinking", videos: [
         { ytId: "QFpJf0RDsXc", label: "Official Music Video", type: "official" },
-        { ytId: "13IUBFvIkls", label: "Official Lyric Video", type: "official" },
+        { ytId: "13IUBFvIkls", label: "Official Lyric Video", type: "lyrics" },
       ]},
       { title: "Town Rat Heathen", videos: [
         { ytId: "n2m8sP17E-c", label: "Official Music Video", type: "official" },
