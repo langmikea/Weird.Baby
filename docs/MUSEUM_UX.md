@@ -60,7 +60,9 @@ deck shape. It is a reference. Code is not copied verbatim.
 **Out of scope for this task.** Anything outside the HR bottom half. The top
 half stays as-is from baseline 620885b.
 
-**Status.** Open. This is the Stage 2 task.
+**Status.** Committed locally in 9c05d06 (2026-05-05). Awaiting deploy.
+On deploy, move this item out of the backlog and update Current State
+above to describe the v28_3-shape deck a visitor now walks into.
 
 ---
 
