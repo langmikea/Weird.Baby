@@ -36,11 +36,11 @@ const ALBUMS = [
     title: "Crooked Home",
     year: 2025,
     color: "#3a5aaa",
-    tracks: ["'94","Low","String Up a Necklace","Hand in the Fire","Flash in the Pan","Friendly Fire","The Devil is the Culprit","If the Body is a Temple","The Keeper","Out of my Hands","Bad Sign","My Brother's Bones"],
+    tracks: ["'94","Low","String Up a Necklace","Hand in the Fire","Flash in the Pan","Friendly Fire","The Devil is the Culprit","If the Body is a Temple","The Keeper","Out of my Hands","Bad Sign","My Brother's Bones","Cookin' in the Bathroom","A Pot Song"],
   },
 ];
 
-const SINGLES = ["Cookin' In The Bathroom", "Chase The Dragon", "A Pot Song"];
+const SINGLES = ["Chase The Dragon"];
 
 const s = {
   page: {
