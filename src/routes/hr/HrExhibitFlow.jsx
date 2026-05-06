@@ -1,10 +1,10 @@
 // ─── HR EXHIBIT FLOW — v28_3 deck shape, populated with Hunter Root content ─
 // This component renders, as an inline section below the live exhibit's main
 // row, an artifact grid above a 6-tab deck. Tab order Artist | Formats |
-// Deep Tracks | Journal | Presets | ✕. v28_3's "simplification pass"
+// Deep Tracks | Presets | Journal | ✕. v28_3's "simplification pass"
 // trimmed the prototype's deck to five tabs by retiring Journal; HR keeps
-// Journal as an artist-specific extension between Deep Tracks and Presets,
-// per the Stage 2 visitor-consequence call.
+// Journal as an artist-specific extension AFTER the v28_3 functional tabs
+// (default-to-last placement, per the Stage 3 visitor-consequence call).
 //
 // Stage 2 changes (this commit):
 //   - Era pill column carries the locked Hunter Root vocabulary in proper
@@ -91,14 +91,19 @@ const STORAGE_KEY = "wb-hr-deck-height"; // O7 — matches wb-hr-split / wb-hr-c
 const HOVER_DELAY_OPEN = 60;
 const HOVER_DELAY_CLOSE = 450;
 
-// ─── TABS — six entries; Journal inserted between Deep Tracks and Presets ──
-// O5: sixth tab "Journal" between deep and presets.
+// ─── TABS — six entries; Journal sits last among functional tabs ────────────
+// Stage 3 placement: Journal sits AFTER the v28_3 functional tabs in their
+// v28_3 order (Artist · Formats · Deep Tracks · Presets), then ✕. This is
+// the "default to last" call from the visitor-consequence brief — v28_3
+// doesn't include Journal, so there's no more-natural insertion point to
+// surface; Journal becomes the right-most non-close tab. Was position 4
+// (between Deep Tracks and Presets) in Stage 2; moved to position 5 here.
 const TABS = [
   { key: "artist",  label: "Artist",      kind: "tier",    tier: 1, width: 120 },
   { key: "media",   label: "Formats",     kind: "tier",    tier: 2, width: 130 },
   { key: "deep",    label: "Deep Tracks", kind: "tier",    tier: 3, width: 120 },
-  { key: "journal", label: "Journal",     kind: "special", special: "journal", width: 110 },
   { key: "presets", label: "Presets",     kind: "special", special: "presets", width: 110 },
+  { key: "journal", label: "Journal",     kind: "special", special: "journal", width: 110 },
   { key: "close",   label: "✕",           kind: "close",   width: 48 },
 ];
 
@@ -857,12 +862,16 @@ function P3Panel({ matched, totalCount }) {
       <div className="hr-page-header">
         <div className="hr-eyebrow">Weird.Baby · Hunter Root · {HR_CARDS.length} artifacts</div>
         <h1 className="hr-page-title">the artifact deck</h1>
-        {/* Stage 2 (v28_3 deck shape): page sub describes the deck a fan
-            actually walks into — five base tabs from v28_3 plus Journal as
-            HR's sixth tab. Era pill column carries the locked Hunter Root
-            vocabulary in proper case. */}
+        {/* Stage 3 (v28_3 deck shape, full column complement): page sub
+            describes the deck a fan actually walks into — five base tabs
+            from v28_3 plus Journal appended as HR's sixth tab. Era pill
+            column carries the locked Hunter Root vocabulary in proper
+            case. Album and Song pills mirror the spine (un-clickable
+            until artifacts get tagged); People / Venue / Format / Media /
+            Provenance / Odds render as empty columns until pre-launch
+            tagging fills them in. */}
         <p className="hr-page-sub">
-          Tabs: Artist · Formats · Deep Tracks · Journal · Presets · ✕.
+          Tabs: Artist · Formats · Deep Tracks · Presets · Journal · ✕.
           Search lives inside Deep Tracks. Shuffle and Loop appear in Presets
           as pill switches alongside the user slots; for now they capture
           state for display only and do not act on the player.

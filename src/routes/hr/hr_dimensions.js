@@ -1,9 +1,19 @@
 // ─── HR_DIMENSIONS — active filter dimensions for the HR deck ───────────────
-// Stage 2 (v28_3 deck shape adoption). Carries Phase 1.5b's HR-specific
-// dimension reduction forward and applies the locked Hunter Root era
-// vocabulary on top.
+// Stage 3 (v28_3 deck shape — full column complement, sameness rule).
 //
-// Vocabulary rule (per docs/MUSEUM_UX.md):
+// MUSEUM UX ground rule, per docs/MUSEUM_UX.md and the visitor-consequence
+// call: do not drop columns from v28_3, do not invent data. Every column
+// in the prototype's three-tier dimension set is rendered. Where HR has
+// vocab today (Era, Year, Type, Src), pills are live. Where v28_3 names a
+// dimension HR has no vocab for yet (People, Venue, Format, Media,
+// Provenance, Odds), the column renders with an empty value list — header
+// only, no pills. Album and Song values are mirrored from the spine
+// (src/data/artists/hunter-root.js) so visitors see the catalog's shape;
+// no card carries an album / song slug today, so all those pills are
+// zero-count and un-clickable per the locked sameness rule. Empty
+// dimensions fill in pre-launch as artifacts get tagged.
+//
+// Vocabulary rule:
 //   Era display strings: Run With The Hunt · SEEDS · Medusa's Disco · Hunter Root
 //   Stored as lowercase-hyphenated slugs via slugify(). Pill labels are the
 //   canonical proper-case strings; slugs are derived from the pills.
@@ -19,11 +29,9 @@
 //   src   — varies per source; 6 distinct slugs across the union
 //   date  — ISO-like strings; year is derivable via date.slice(0, 4)
 //
-// HR has NO data for the prototype's other dimensions:
-//   album, song, people, venue, format, media, provenance, odds — dropped.
-//
-// Tier 3 (Deep Tracks) has no dedicated dimension column — its tab body is
-// the search surface only, exactly as in the v28_3 prototype.
+// HR has no card-level data yet for: album, song, people, venue, format,
+// media, provenance, odds. Those columns render with the spine-derived
+// vocab (album, song) or empty (the rest) until artifacts get tagged.
 // ─────────────────────────────────────────────────────────────────────────────
 
 // ─── slugify — canonical helper ─────────────────────────────────────────────
@@ -52,11 +60,118 @@ const HR_ERA_OPTIONS = [
   { slug: "solo",              label: "Hunter Root" },     // legacy slug preserved
 ];
 
+// ─── ALBUM — mirrored from src/data/artists/hunter-root.js spine ────────────
+// Six albums in chronological release order. Slug == spine entry's `id`,
+// label == spine entry's `title`. KEEP IN SYNC with the spine: when a new
+// album is added there, mirror it here, in the same chronological position.
+// No HR card carries an album field today, so all pills render zero-count
+// and un-clickable until artifacts get tagged.
+const HR_ALBUM_OPTIONS = [
+  { slug: "cracked",    label: "They Finally Cracked Me" },
+  { slug: "wheel",      label: "Life Inside A Wheel" },
+  { slug: "dandelions", label: "Mimicking the Sun Like Dandelions" },
+  { slug: "skipping",   label: "Skipping Stones That Sink Before They're Thrown" },
+  { slug: "arkansas",   label: "Arkansas" },
+  { slug: "crooked",    label: "Crooked Home" },
+];
+
 // ─── YEAR — slugs are the numeric strings; labels match ────────────────────
 const HR_YEAR_OPTIONS = [
   "2012", "2013", "2014", "2016", "2017", "2018", "2019",
   "2020", "2022", "2023", "2024", "2025", "2026",
 ].map(y => ({ slug: y, label: y }));
+
+// ─── SONG — mirrored from src/data/artists/hunter-root.js spine ─────────────
+// 68 unique track titles across the six albums, in spine order, deduplicated
+// (some titles like "The Shade" / "Soul Sucker" appear on more than one
+// album; first-occurrence wins). Slug derived via slugify() applied to the
+// title. KEEP IN SYNC with the spine: when tracks are added there, mirror
+// them here. No HR card carries a song field today — pills are zero-count
+// and un-clickable until artifacts get tagged.
+const HR_SONG_OPTIONS = [
+  { slug: "cheap-wine",                 label: "Cheap Wine" },
+  { slug: "straitlaced",                label: "Straitlaced" },
+  { slug: "so-sick",                    label: "So Sick" },
+  { slug: "identity",                   label: "Identity" },
+  { slug: "hook-or-the-worm",           label: "Hook Or The Worm" },
+  { slug: "television-head",            label: "Television Head" },
+  { slug: "let-the-rhythm",             label: "Let The Rhythm" },
+  { slug: "silly-situation",            label: "Silly Situation" },
+  { slug: "moving-with-the-storm",      label: "Moving With The Storm" },
+  { slug: "soul-sucker",                label: "Soul Sucker" },
+  { slug: "the-shade",                  label: "The Shade" },
+  { slug: "same-page",                  label: "Same Page" },
+  { slug: "talker-with-a-broken-jaw",   label: "Talker With A Broken Jaw" },
+  { slug: "people-are-programs",        label: "People Are Programs" },
+  { slug: "killer-to-killer",           label: "Killer To Killer" },
+  { slug: "brain-cell",                 label: "Brain Cell" },
+  { slug: "fix-my-head",                label: "Fix My Head" },
+  { slug: "free-to-roam-the-cage",      label: "Free To Roam The Cage" },
+  { slug: "with-great-pleasure",        label: "With Great Pleasure" },
+  { slug: "the-water",                  label: "The Water" },
+  { slug: "music-on-my-mind",           label: "Music On My Mind" },
+  { slug: "what-i-felt",                label: "What I Felt" },
+  { slug: "greek-fire",                 label: "Greek Fire" },
+  { slug: "shapeshifter",               label: "Shapeshifter" },
+  { slug: "lampshade",                  label: "Lampshade" },
+  { slug: "favorite-friend",            label: "Favorite Friend" },
+  { slug: "little-red-riding-hood",     label: "Little Red Riding Hood" },
+  { slug: "homestead",                  label: "Homestead" },
+  { slug: "undertow",                   label: "Undertow" },
+  { slug: "family-tree",                label: "Family Tree" },
+  { slug: "tongue-in-cheek",            label: "Tongue In Cheek" },
+  { slug: "norma-jean",                 label: "Norma Jean" },
+  { slug: "impossible-itch",            label: "Impossible Itch" },
+  { slug: "upper-hand",                 label: "Upper Hand" },
+  { slug: "wildfire",                   label: "Wildfire" },
+  { slug: "dont-blame-the-breeze",      label: "Don't Blame The Breeze" },
+  { slug: "nothin-wrong",               label: "Nothin' Wrong" },
+  { slug: "cusp-of-the-mend",           label: "Cusp Of The Mend" },
+  { slug: "cocoon",                     label: "Cocoon" },
+  { slug: "patience-in-the-dark",       label: "Patience In The Dark" },
+  { slug: "just-for-kicks",             label: "Just For Kicks" },
+  { slug: "echo-calls-her-name",        label: "Echo Calls Her Name" },
+  { slug: "shake-it-off-of-me",         label: "Shake It Off Of Me" },
+  { slug: "silver-lining",              label: "Silver Lining" },
+  { slug: "quicksand-sinking",          label: "Quicksand Sinking" },
+  { slug: "town-rat-heathen",           label: "Town Rat Heathen" },
+  { slug: "reverend",                   label: "Reverend" },
+  { slug: "grain-of-rice",              label: "Grain Of Rice" },
+  { slug: "cant-outshine-the-truth",    label: "Can't Outshine The Truth" },
+  { slug: "california-sober",           label: "California Sober" },
+  { slug: "good-on-paper",              label: "Good On Paper" },
+  { slug: "few-steps-back",             label: "Few Steps Back" },
+  { slug: "run-from-the-devil",         label: "Run From The Devil" },
+  { slug: "silver-lining-reprise",      label: "Silver Lining (Reprise)" },
+  { slug: "94",                         label: "'94" },
+  { slug: "low",                        label: "Low" },
+  { slug: "string-up-a-necklace",       label: "String Up a Necklace" },
+  { slug: "hand-in-the-fire",           label: "Hand in the Fire" },
+  { slug: "flash-in-the-pan",           label: "Flash in the Pan" },
+  { slug: "friendly-fire",              label: "Friendly Fire" },
+  { slug: "the-devil-is-the-culprit",   label: "The Devil is the Culprit" },
+  { slug: "if-the-body-is-a-temple",    label: "If the Body is a Temple" },
+  { slug: "the-keeper",                 label: "The Keeper" },
+  { slug: "out-of-my-hands",            label: "Out of my Hands" },
+  { slug: "bad-sign",                   label: "Bad Sign" },
+  { slug: "my-brothers-bones",          label: "My Brother's Bones" },
+  { slug: "cookin-in-the-bathroom",     label: "Cookin' in the Bathroom" },
+  { slug: "a-pot-song",                 label: "A Pot Song" },
+];
+
+// ─── EMPTY-VOCAB DIMENSIONS — header rendered, no pills until tagged ────────
+// v28_3 names these dimensions; HR has no per-artist vocabulary for them
+// today. Per the visitor-consequence call: render the column header so the
+// shape of the museum is honest, leave the pill list empty, and let real HR
+// data fill in pre-launch. Do not carry the prototype's fictional vocab
+// forward (e.g., "josephine-reyes" is the prototype's fake band, not
+// Hunter Root's).
+const HR_PEOPLE_OPTIONS     = [];
+const HR_VENUE_OPTIONS      = [];
+const HR_FORMAT_OPTIONS     = [];
+const HR_MEDIA_OPTIONS      = [];
+const HR_PROVENANCE_OPTIONS = [];
+const HR_ODDS_OPTIONS       = [];
 
 // ─── TYPE — proper-case labels per slug; slugify(label) === slug for all ───
 // Vocab spans the union of the three card sources:
@@ -82,9 +197,12 @@ const HR_TYPE_OPTIONS = [
 ];
 
 // ─── SRC — proper-case labels per slug ──────────────────────────────────────
-// Two of the slugs are abbreviations from the original feeds — we promote
-// them to recognizable proper-case names for the pill column. Storage slugs
-// are unchanged (legacy preserved on fb / insta / youtube).
+// HR-specific column, not present in v28_3. v28_3 has a coarser
+// `provenance` (band / fan / press / licensed); HR's `src` is finer
+// (Archive / Press / Facebook / Instagram / Stage / YouTube) and HR has
+// data for it today. Appended to Tier 2 after the v28_3 columns so nothing
+// live gets dropped. Pre-launch, we may decide to fold src into provenance,
+// but that's a data-model question for later.
 const HR_SRC_OPTIONS = [
   { slug: "archive", label: "Archive" },
   { slug: "press",   label: "Press" },
@@ -95,6 +213,10 @@ const HR_SRC_OPTIONS = [
 ];
 
 // ─── HR_DIMENSIONS — same shape as the v28_3 prototype's DIMENSIONS array ──
+// Order matches v28_3 (era · album · year · song · people · venue for
+// Tier 1, format · media · provenance · type for Tier 2, odds for Tier 3),
+// with HR's `src` appended to Tier 2 after `type`.
+//
 // `values` is the ordered slug array, kept for API parity with the
 // prototype's matchFilter / countForPill / pill column iteration.
 // `options` carries the (slug, label) pairs and is used by the deck for
@@ -107,24 +229,47 @@ function dim(key, kind, tier, options) {
 }
 
 export const HR_DIMENSIONS = [
-  dim("era",  "single", 1, HR_ERA_OPTIONS),
-  dim("year", "single", 1, HR_YEAR_OPTIONS),
-  dim("type", "single", 2, HR_TYPE_OPTIONS),
-  dim("src",  "single", 2, HR_SRC_OPTIONS),
+  // Tier 1 — Artist tab
+  dim("era",        "single", 1, HR_ERA_OPTIONS),
+  dim("album",      "single", 1, HR_ALBUM_OPTIONS),
+  dim("year",       "single", 1, HR_YEAR_OPTIONS),
+  dim("song",       "single", 1, HR_SONG_OPTIONS),
+  dim("people",     "multi",  1, HR_PEOPLE_OPTIONS),
+  dim("venue",      "single", 1, HR_VENUE_OPTIONS),
+  // Tier 2 — Formats tab
+  dim("format",     "single", 2, HR_FORMAT_OPTIONS),
+  dim("media",      "single", 2, HR_MEDIA_OPTIONS),
+  dim("provenance", "single", 2, HR_PROVENANCE_OPTIONS),
+  dim("type",       "single", 2, HR_TYPE_OPTIONS),
+  dim("src",        "single", 2, HR_SRC_OPTIONS),
+  // Tier 3 — Deep Tracks tab
+  dim("odds",       "multi",  3, HR_ODDS_OPTIONS),
 ];
 
-// ─── HR_GROUP_LABELS — column headers (Era / Year / Type / Source) ──────────
+// ─── HR_GROUP_LABELS — column headers (Era / Album / Year / Song / etc.) ────
+// Display labels for group headers, used by PillGroupColumn and by preset-
+// summary text. Kept in sync with HR_DIMENSIONS keys.
 export const HR_GROUP_LABELS = {
-  era: "Era",
-  year: "Year",
-  type: "Type",
-  src: "Source",
+  era:        "Era",
+  album:      "Album",
+  year:       "Year",
+  song:       "Song",
+  people:     "People",
+  venue:      "Venue",
+  format:     "Format",
+  media:      "Media",
+  provenance: "Provenance",
+  type:       "Type",
+  src:        "Source",
+  odds:       "Odds",
 };
 
 // ─── HR_LABELS — slug → display lookup, keyed by group ──────────────────────
 // The deck's prettyTag-equivalent reads from this map. Search matches
 // against label.toLowerCase() so a fan typing "hunter root" finds the
-// Hunter Root era pill even though the legacy slug is "solo".
+// Hunter Root era pill even though the legacy slug is "solo". Empty-vocab
+// dimensions produce empty maps; displayFor falls through to the
+// hyphens-to-spaces default for any slug that isn't mapped.
 export const HR_LABELS = Object.fromEntries(
   HR_DIMENSIONS.map(d => [
     d.key,
