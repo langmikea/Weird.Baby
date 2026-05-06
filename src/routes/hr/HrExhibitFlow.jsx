@@ -1,8 +1,24 @@
-// ─── HR EXHIBIT FLOW — Phase 1.5b port of prototype_a_v28.html ──────────────
+// ─── HR EXHIBIT FLOW — v28_3 deck shape, populated with Hunter Root content ─
 // This component renders, as an inline section below the live exhibit's main
-// row, an artifact grid above a 6-tab deck. The deck follows the v28
-// prototype's structure (Artist | Formats | Deep Tracks | Journal | Presets |
-// ✕) but operates on HR's existing data shapes.
+// row, an artifact grid above a 6-tab deck. Tab order Artist | Formats |
+// Deep Tracks | Journal | Presets | ✕. v28_3's "simplification pass"
+// trimmed the prototype's deck to five tabs by retiring Journal; HR keeps
+// Journal as an artist-specific extension between Deep Tracks and Presets,
+// per the Stage 2 visitor-consequence call.
+//
+// Stage 2 changes (this commit):
+//   - Era pill column carries the locked Hunter Root vocabulary in proper
+//     case: Run With The Hunt · SEEDS · Medusa's Disco · Hunter Root.
+//   - All pill columns render in proper case; the v28 port's CSS lowercase
+//     rule has been removed from the pill style and the width-measurement
+//     helper.
+//   - Slug-to-display resolution lives in hr_dimensions.js (HR_LABELS +
+//     displayFor). Slugs are derived from pill labels via slugify(); legacy
+//     storage slugs ("medusas" → Medusa's Disco; "solo" → Hunter Root) are
+//     paired with their canonical labels so historical data continues to
+//     filter without a rewrite.
+//
+// Phase 1.5 lineage (carried forward unchanged):
 //
 // Architecture notes:
 //   - O4 = (B): inline section. Exhibit.jsx is not edited. The deck sits at
@@ -27,7 +43,7 @@ import {
   useState, useMemo, useLayoutEffect, useEffect, useRef, useCallback,
 } from "react";
 import "./HrExhibitFlow.css";
-import { HR_DIMENSIONS, HR_GROUP_LABELS } from "./hr_dimensions.js";
+import { HR_DIMENSIONS, HR_GROUP_LABELS, displayFor } from "./hr_dimensions.js";
 import { HR_CARDS } from "./hr_cards.js";
 import { HR_JOURNAL_PROMPTS } from "../../data/hr_journal_prompts.js";
 
@@ -249,7 +265,12 @@ const S = {
     pointerEvents: zero ? "none" : "auto",
     cursor: zero ? "default" : "pointer",
     transition: "border-color 0.12s, color 0.12s, background 0.12s, opacity 0.12s",
-    textTransform: "lowercase", userSelect: "none",
+    /* Stage 2 (v28_3): pill labels render in the canonical proper-case
+       strings supplied by HR_LABELS — locked Era vocabulary requires it,
+       and Mike's call extends "proper case" across every pill column for
+       typographic consistency. The CSS lowercase rule that lived here in
+       the v28 port has been removed. */
+    userSelect: "none",
   }),
 
   pillCount: (active, zero) => ({
@@ -270,7 +291,8 @@ const S = {
     background: on ? INK_SOFT : "transparent",
     color: on ? GOLD_HI : DIM,
     cursor: "pointer", userSelect: "none",
-    textTransform: "lowercase",
+    /* Stage 2 (v28_3): proper-case across every pill, including the
+       Shuffle / Loop player switches in the Presets tab. */
     transition: "border-color 0.12s, color 0.12s, background 0.12s",
     minWidth: "110px",
   }),
@@ -378,15 +400,21 @@ function presetSummaryText(p) {
   if (!p) return "empty";
   if (p.__randomIds) return `${p.__randomIds.size} random artifacts`;
   const parts = [];
+  // Stage 2: preset summaries render the canonical proper-case label per
+  // (group, slug) so what the visitor saved reads back the way they saw
+  // it onstage. Falls through displayFor to the hyphens-to-spaces default
+  // for any unknown group.
   if (p.selected) {
     for (const { key } of HR_DIMENSIONS) {
       if (p.selected[key]?.size) {
-        parts.push(`${key}: ${[...p.selected[key]].map(prettyTag).join(", ")}`);
+        parts.push(`${HR_GROUP_LABELS[key] || key}: ${[...p.selected[key]].map(s => displayFor(key, s)).join(", ")}`);
       }
     }
   } else {
     for (const { key } of HR_DIMENSIONS) {
-      if (p[key]?.size) parts.push(`${key}: ${[...p[key]].map(prettyTag).join(", ")}`);
+      if (p[key]?.size) {
+        parts.push(`${HR_GROUP_LABELS[key] || key}: ${[...p[key]].map(s => displayFor(key, s)).join(", ")}`);
+      }
     }
   }
   const flags = [];
@@ -410,7 +438,13 @@ function makePresetSnapshot({ selected, shuffle, loop, playingTrack, spinePositi
   };
 }
 
-function prettyTag(tag) { return String(tag).replace(/-/g, " "); }
+// Stage 2 (v28_3): the v28 port's local prettyTag(tag) helper has been
+// retired. All pill rendering and the Deep Tracks search now route through
+// displayFor(group, slug) imported from hr_dimensions.js, so the locked Era
+// vocabulary and the proper-case labels in HR_LABELS reach the screen
+// unaltered. displayFor falls back to a hyphens-to-spaces transform for
+// any slug that isn't in the labels table — same shape the old prettyTag
+// produced — so unmapped values still render readably.
 
 function measureWidestLabel(labels) {
   if (typeof window === "undefined") return 100;
@@ -418,7 +452,10 @@ function measureWidestLabel(labels) {
   Object.assign(span.style, {
     position: "absolute", visibility: "hidden", whiteSpace: "nowrap",
     fontFamily: sansBody, fontSize: "11.5px", fontWeight: "500",
-    letterSpacing: "0.02em", textTransform: "lowercase",
+    letterSpacing: "0.02em",
+    /* Stage 2: pill labels render proper-case; the measurement string
+       must be sized in the same casing the pill will actually display
+       so widths line up with reality. textTransform removed. */
   });
   document.body.appendChild(span);
   let max = 0;
@@ -438,8 +475,11 @@ function useGlobalPillWidth() {
   useLayoutEffect(() => {
     const maxCount = HR_CARDS.length;
     const labels = [];
-    HR_DIMENSIONS.forEach(({ values }) =>
-      values.forEach(v => labels.push(`${prettyTag(v)}   ${maxCount}`))
+    // Stage 2: measure against displayFor(group, slug) so the column's
+    // widest pill drives the shared width — "Run With The Hunt" is the
+    // current widest, and we want pillWidth to accommodate it.
+    HR_DIMENSIONS.forEach(({ key, values }) =>
+      values.forEach(v => labels.push(`${displayFor(key, v)}   ${maxCount}`))
     );
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setWidth(measureWidestLabel(labels) + 20 + 8 + 6);
@@ -447,7 +487,12 @@ function useGlobalPillWidth() {
   return width;
 }
 
-// ─── PILL COMPONENTS — ported from v28 ──────────────────────────────────────
+// ─── PILL COMPONENTS — ported from v28, label-resolution updated for v28_3 ──
+// Stage 2 (v28_3): the `label` prop is the already-resolved display string
+// (proper-case, locked vocab applied). Callers pass displayFor(group, slug)
+// rather than the raw slug. The button's title attribute and visible text
+// both use the same resolved label, so the locked vocabulary reaches the
+// screen unaltered and tooltips read the same as the pill face.
 function PillButton({ label, count, active, zero, pillWidth, onClick }) {
   return (
     <button
@@ -455,9 +500,9 @@ function PillButton({ label, count, active, zero, pillWidth, onClick }) {
       onClick={() => !zero && onClick()}
       disabled={zero}
       aria-pressed={active}
-      title={prettyTag(label)}
+      title={label}
     >
-      <span className="hr-pill-label">{prettyTag(label)}</span>
+      <span className="hr-pill-label">{label}</span>
       <span style={S.pillCount(active, zero)}>{count}</span>
     </button>
   );
@@ -478,7 +523,7 @@ function PillGroupColumn({ group, values, items, selected, toggle, pillWidth }) 
         return (
           <PillButton
             key={v}
-            label={v}
+            label={displayFor(group, v)}
             count={counts[v]}
             active={active}
             zero={zero}
@@ -812,12 +857,15 @@ function P3Panel({ matched, totalCount }) {
       <div className="hr-page-header">
         <div className="hr-eyebrow">Weird.Baby · Hunter Root · {HR_CARDS.length} artifacts</div>
         <h1 className="hr-page-title">the artifact deck</h1>
+        {/* Stage 2 (v28_3 deck shape): page sub describes the deck a fan
+            actually walks into — five base tabs from v28_3 plus Journal as
+            HR's sixth tab. Era pill column carries the locked Hunter Root
+            vocabulary in proper case. */}
         <p className="hr-page-sub">
-          Six tabs: Artist · Formats · Deep Tracks · Journal · Presets · ✕.
+          Tabs: Artist · Formats · Deep Tracks · Journal · Presets · ✕.
           Search lives inside Deep Tracks. Shuffle and Loop appear in Presets
-          as pill switches alongside the user slots; in v1 they capture state
-          for display only and do not act on the player. Kaleidoscope is
-          mothballed for v1.
+          as pill switches alongside the user slots; for now they capture
+          state for display only and do not act on the player.
         </p>
       </div>
       <div className="hr-panel-head">
@@ -866,12 +914,20 @@ function DeepTracksContent({ dims, selected, toggle, pillWidth, query, setQuery,
   useEffect(() => { if (focusSignal) inputRef.current?.focus(); }, [focusSignal]);
 
   const q = query.trim().toLowerCase();
+  // Stage 2: search matches against the canonical display label per
+  // (group, slug). Typing "hunter root" finds the Hunter Root era pill
+  // even though the legacy slug is "solo". Cross-artist thematic words
+  // ("breakthrough," "mature") that aren't in HR's locked vocab simply
+  // produce zero hits — the corral surfaces "no tags match" — which is
+  // the spec's free-text-search-not-pills routing in practice.
   const hits = useMemo(() => {
     if (!q) return [];
     const out = [];
     HR_DIMENSIONS.forEach(dim => {
       dim.values.forEach(v => {
-        if (prettyTag(v).toLowerCase().includes(q)) out.push({ group: dim.key, tag: v });
+        if (displayFor(dim.key, v).toLowerCase().includes(q)) {
+          out.push({ group: dim.key, tag: v });
+        }
       });
     });
     return out;
@@ -904,7 +960,8 @@ function DeepTracksContent({ dims, selected, toggle, pillWidth, query, setQuery,
                 return (
                   <PillButton
                     key={`${group}-${tag}-${i}`}
-                    label={tag} count={count} active={active} zero={zero}
+                    label={displayFor(group, tag)} count={count}
+                    active={active} zero={zero}
                     pillWidth={null}
                     onClick={() => toggle(group, tag)}
                   />
