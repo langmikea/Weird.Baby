@@ -24,7 +24,7 @@ const ALBUMS = [
     title: "Skipping Stones That Sink Before They're Thrown",
     year: 2021,
     color: "#8a3a8a",
-    tracks: ["Don't Blame The Breeze","Nothin' Wrong","Cusp Of The Mend","Cocoon","Patience In The Dark","Just For Kicks","Echo Calls Her Name","The Shade","Shake It Off Of Me","Run From The Devil"],
+    tracks: ["Don't Blame The Breeze","Nothin' Wrong","Cusp Of The Mend","Cocoon","Patience In The Dark","Just For Kicks","Echo Calls Her Name","The Shade","Shake It Off Of Me","Soul Sucker"],
   },
   {
     title: "Arkansas",
