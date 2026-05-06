@@ -45,8 +45,8 @@ const SPINE = [
     art: BASE + "a3722397196_10.jpg", accent: "#3a7a9a",
     tracks: [
       { title: "Lampshade", videos: [
-        { ytId: "JA1p8WSQRQQ", label: "Official Lyric Video", type: "official" },
         { ytId: "EjdXxigzBp8", label: "Live in Studio", type: "live" },
+        { ytId: "JA1p8WSQRQQ", label: "Official Lyric Video", type: "lyrics" },
       ]},
       { title: "Favorite Friend", videos: [{ ytId: "L7-1T7F7_R0", label: "Official Music Video", type: "official" }] },
       { title: "Little Red Riding Hood", videos: [{ ytId: "BOQHN-O4DDc", label: "Live @ MCHS", type: "live" }] },
