@@ -59,10 +59,10 @@ const INK_CARD_HI = "#0e0e0e";       // solid hex, not rgba
 const BORDER = "#1a1a1a";
 const BORDER_HI = "#252525";
 const GOLD = "#b8974a";
-const GOLD_HI = "#d4c49a";
-const GOLD_LO = "#a89770";
+const GOLD_HI = "#b8974a";  // iterate-1: dropped from cream #d4c49a to canonical gold per WEIRD.BABY-match call
+const GOLD_LO = "#b8974a";  // iterate-2: dropped from #a89770 to canonical gold so dim-tier borders / labels match the single-gold tone
 const GOLD_MUTE = "#555";
-const DIM = "#d4c49a";
+const DIM = "#b8974a";       // iterate-1: dropped from cream #d4c49a to canonical gold per WEIRD.BABY-match call
 // MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
 // Kaleidoscope LED palette — re-tuned to v17's museum gold, not v3's neon.
 // (Used inline by the mothballed VuMeter, which is never rendered.)
@@ -74,12 +74,16 @@ const LED_RED = "#c86040";
 // the post-launch Kaleidoscope revival.
 void [LED_OFF, LED_GREEN, LED_YELLOW, LED_RED];
 
-// MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
-// Serif display token used by the prototype's pageTitle / pageSub. The new
-// HR build moved those into HrExhibitFlow.css. Kept for parity / future use.
-// eslint-disable-next-line no-unused-vars
-const serifDisplay = "'DM Serif Display', Georgia, serif";
-const sansBody = "'Syne', system-ui, -apple-system, sans-serif";
+// Stage 3: deck typography matches v28_3 (Fraunces + Geist), scoped to the
+// .hr-section subtree via CSS variable override in HrExhibitFlow.css. These
+// JS constants drive inline-styled card text (PhotoCard / VideoCard /
+// PressCard / EssayCard / SessionCard / ArtCard titles + meta) and the
+// pill-width measurement helper, all of which paint inside .hr-section so
+// staying inside the same font pair keeps the deck visually coherent.
+// Fallback chain ends at system serif / sans so the deck remains legible
+// even if the Google Fonts request fails.
+const serifDisplay = "'Fraunces', Georgia, serif";
+const sansBody = "'Geist', system-ui, -apple-system, sans-serif";
 
 // ─── DECK CONSTANTS — preserved from v28, STORAGE_KEY HR-namespaced ─────────
 const TAB_PEEK = 14;
@@ -473,22 +477,36 @@ function measureWidestLabel(labels) {
   return Math.ceil(max);
 }
 
-function useGlobalPillWidth() {
+// Stage 3: pill width is per-column, not global. Each PillGroupColumn
+// measures its OWN widest label and sizes its pills to fit. Stage 2 used
+// a single global width across every dimension, which worked while every
+// column's longest label was short (Era's "Run With The Hunt" was the
+// outlier at ~17 chars). With the v28_3 column complement restored, the
+// Album column carries "They Finally Cracked Me" / "Mimicking the Sun
+// Like Dandelions" / "Skipping Stones That Sink Before They're Thrown"
+// — pushing the global measurement to ~400px and bloating Era / Year /
+// Type pills along with it. Per-column scoping keeps each column tight
+// to its own vocabulary; long-labeled columns get wide pills, short-
+// labeled columns stay narrow, and they don't poison each other.
+function useColumnPillWidth(group, values) {
   const [width, setWidth] = useState(120);
   // setState-in-effect is intentional: measureWidestLabel needs a mounted
-  // DOM (it appends a hidden span). Runs once on mount, never again.
+  // DOM (it appends a hidden span). Runs whenever the column's values
+  // change (rare — only on dimension restructure or HMR).
   useLayoutEffect(() => {
+    if (!values || values.length === 0) {
+      // Empty-vocab column (people / venue / format / media / provenance /
+      // odds today). No pills to size; leave the width at the floor so the
+      // empty column doesn't reserve hundreds of pixels of layout space.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setWidth(0);
+      return;
+    }
     const maxCount = HR_CARDS.length;
-    const labels = [];
-    // Stage 2: measure against displayFor(group, slug) so the column's
-    // widest pill drives the shared width — "Run With The Hunt" is the
-    // current widest, and we want pillWidth to accommodate it.
-    HR_DIMENSIONS.forEach(({ key, values }) =>
-      values.forEach(v => labels.push(`${displayFor(key, v)}   ${maxCount}`))
-    );
+    const labels = values.map(v => `${displayFor(group, v)}   ${maxCount}`);
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setWidth(measureWidestLabel(labels) + 20 + 8 + 6);
-  }, []);
+  }, [group, values]);
   return width;
 }
 
@@ -513,7 +531,11 @@ function PillButton({ label, count, active, zero, pillWidth, onClick }) {
   );
 }
 
-function PillGroupColumn({ group, values, items, selected, toggle, pillWidth }) {
+function PillGroupColumn({ group, values, items, selected, toggle }) {
+  // Stage 3: each column owns its own pill width. See useColumnPillWidth
+  // for why this isn't global anymore. Empty-vocab columns get width=0
+  // so they don't reserve layout space — only the header renders.
+  const columnPillWidth = useColumnPillWidth(group, values);
   const counts = useMemo(() => {
     const map = {};
     values.forEach(v => { map[v] = countForPill(items, selected, group, v); });
@@ -532,7 +554,7 @@ function PillGroupColumn({ group, values, items, selected, toggle, pillWidth }) 
             count={counts[v]}
             active={active}
             zero={zero}
-            pillWidth={pillWidth}
+            pillWidth={columnPillWidth}
             onClick={() => toggle(group, v)}
           />
         );
@@ -902,7 +924,9 @@ function ScrollFadeContainer({ children }) {
 }
 
 // ─── TAB CONTENT COMPONENTS — ported from v28, plus JournalContent ──────────
-function TierContent({ dims, selected, toggle, pillWidth }) {
+// Stage 3: pillWidth no longer threads through here. PillGroupColumn owns
+// its own per-column measurement via useColumnPillWidth.
+function TierContent({ dims, selected, toggle }) {
   return (
     <ScrollFadeContainer>
       <div className="hr-groups-row">
@@ -910,7 +934,6 @@ function TierContent({ dims, selected, toggle, pillWidth }) {
           <PillGroupColumn
             key={dim.key} group={dim.key} values={dim.values}
             items={HR_CARDS} selected={selected} toggle={toggle}
-            pillWidth={pillWidth}
           />
         ))}
       </div>
@@ -918,7 +941,7 @@ function TierContent({ dims, selected, toggle, pillWidth }) {
   );
 }
 
-function DeepTracksContent({ dims, selected, toggle, pillWidth, query, setQuery, focusSignal }) {
+function DeepTracksContent({ dims, selected, toggle, query, setQuery, focusSignal }) {
   const inputRef = useRef(null);
   useEffect(() => { if (focusSignal) inputRef.current?.focus(); }, [focusSignal]);
 
@@ -985,7 +1008,6 @@ function DeepTracksContent({ dims, selected, toggle, pillWidth, query, setQuery,
               <PillGroupColumn
                 key={dim.key} group={dim.key} values={dim.values}
                 items={HR_CARDS} selected={selected} toggle={toggle}
-                pillWidth={pillWidth}
               />
             ))}
           </div>
@@ -1461,7 +1483,6 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   const [resizeHover, setResizeHover] = useState(false);
   const [userPresets, setUserPresets] = useState({ P1: null, P2: null, P3: null });
   const [searchFocusSignal, setSearchFocusSignal] = useState(0);
-  const pillWidth = useGlobalPillWidth();
   const hoverTimerRef = useRef(null);
 
   useEffect(() => {
@@ -1592,7 +1613,6 @@ export default function HrExhibitFlow({ activeAlbumId }) {
           <PillGroupColumn
             key={dim.key} group={dim.key} values={dim.values}
             items={HR_CARDS} selected={selected} toggle={toggle}
-            pillWidth={null}
           />
         ))}
       </div>
@@ -1653,7 +1673,6 @@ export default function HrExhibitFlow({ activeAlbumId }) {
                   return (
                     <DeepTracksContent
                       dims={dims} selected={selected} toggle={toggle}
-                      pillWidth={pillWidth}
                       query={query} setQuery={setQuery}
                       focusSignal={searchFocusSignal}
                     />
@@ -1662,7 +1681,6 @@ export default function HrExhibitFlow({ activeAlbumId }) {
                 return (
                   <TierContent
                     dims={dims} selected={selected} toggle={toggle}
-                    pillWidth={pillWidth}
                   />
                 );
               })()}

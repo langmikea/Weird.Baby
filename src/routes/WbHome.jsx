@@ -46,7 +46,7 @@ export default function WbHome() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;800&family=Courier+Prime:ital,wght@0,400;1,400&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body { height: 100%; overflow: hidden; background: #080808; color: #f0ece4; }
+        html, body { height: 100%; overflow: hidden; background: #080808; color: #b8974a; }
         .wb-root { height: 100vh; width: 100vw; display: grid; grid-template-columns: 1fr 1fr; opacity: 0; transition: opacity 0.9s ease; overflow: hidden; }
         .wb-root.visible { opacity: 1; }
         .wb-left { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; border-right: 1px solid #1e1e1e; position: relative; background: #060606; }
@@ -60,7 +60,7 @@ export default function WbHome() {
         .wb-explore:hover { color: #b8974a; }
 
         .wb-right { display: flex; flex-direction: column; justify-content: center; padding: 48px 52px; overflow: hidden; position: relative; }
-        .wb-note { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1rem, 1.35vw, 1.25rem); line-height: 1.75; color: #d4cfc7; margin-bottom: 10px; }
+        .wb-note { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1rem, 1.35vw, 1.25rem); line-height: 1.75; color: #b8974a; margin-bottom: 10px; }
         .wb-note em { color: #b8974a; font-style: italic; }
         .wb-whisper { font-family: 'Courier Prime', monospace; font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: #888; margin-bottom: 26px; }
         .wb-rule { width: 36px; height: 1px; background: #b8974a; margin-bottom: 22px; opacity: 0.5; }
@@ -72,7 +72,7 @@ export default function WbHome() {
         .wb-entry-box:focus-within { border-color: #b8974a; }
         .wb-entry-box-label { font-family: 'Courier Prime', monospace; font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; color: #3a3a3a; margin-bottom: 8px; display: block; }
 
-        .wb-input { width: 100%; background: transparent; border: none; color: #f0ece4; font-family: 'DM Serif Display', serif; font-size: 0.95rem; padding: 0; outline: none; caret-color: #b8974a; display: block; transform: scaleY(1.15); transform-origin: left top; }
+        .wb-input { width: 100%; background: transparent; border: none; color: #b8974a; font-family: 'DM Serif Display', serif; font-size: 0.95rem; padding: 0; outline: none; caret-color: #b8974a; display: block; transform: scaleY(1.15); transform-origin: left top; }
         .wb-input::placeholder { color: #444; font-style: italic; }
         .wb-textarea { resize: none; height: 60px; border: 1px solid #181818; padding: 10px 10px; border-radius: 1px; background: #0c0c0c; font-size: 0.84rem; transition: border-color 0.25s; margin-bottom: 12px; }
         .wb-textarea:focus { border-color: #b8974a; }
@@ -83,7 +83,7 @@ export default function WbHome() {
         .wb-entries { margin-top: 14px; max-height: 120px; overflow-y: auto; scrollbar-width: none; }
         .wb-entries::-webkit-scrollbar { display: none; }
         .wb-entry { display: flex; align-items: baseline; gap: 10px; padding: 5px 0; border-bottom: 1px solid #131313; animation: rise 0.4s ease; }
-        .wb-entry-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.8rem; color: #e8e4dc; white-space: nowrap; }
+        .wb-entry-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.8rem; color: #b8974a; white-space: nowrap; }
         .wb-entry-note { font-family: 'Courier Prime', monospace; font-style: italic; font-size: 0.7rem; color: #555; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
         .wb-entry-date { font-family: 'Courier Prime', monospace; font-size: 0.6rem; color: #444; white-space: nowrap; }
 

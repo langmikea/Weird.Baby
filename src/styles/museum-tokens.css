@@ -28,13 +28,13 @@
   --hr-border-hi: #252525;
 
   /* Accent — single gold, with deck-only ramp variants */
-  --hr-gold: #b8974a;           /* canonical museum gold */
-  --hr-gold-hi: #d4c49a;        /* hover / brighter — uses carousel's mid-cream */
-  --hr-gold-lo: #a89770;        /* dim / labels */
+  --hr-gold: #b8974a;           /* canonical museum gold (WEIRD.BABY logo) */
+  --hr-gold-hi: #b8974a;        /* iterate-1: dropped from cream #d4c49a to canonical gold per "match the WEIRD.BABY logo" call. Brightest tier of the ramp now collapses to canonical gold. */
+  --hr-gold-lo: #b8974a;        /* iterate-2: dropped from #a89770 to canonical gold so border lines (tab strip / deck body top / dashed column-label rules) match the single-gold tone. */
   --hr-gold-mute: #555;         /* disabled gold */
 
   /* Body / mid text */
-  --hr-dim: #d4c49a;            /* mid-strength text — warm cream */
+  --hr-dim: #b8974a;            /* iterate-1: dropped from cream #d4c49a to canonical gold per the WEIRD.BABY-match call. Body / mid-strength text now reads at the canonical gold instead of carousel-cream. */
 
   /* Typography — loaded webfaces (imported by src/routes/exhibit/Exhibit.css) */
   --hr-serif: 'DM Serif Display', Georgia, serif;

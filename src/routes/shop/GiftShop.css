@@ -7,7 +7,7 @@
 
 .gift-shop {
   background: #080808;
-  color: #d4c49a;
+  color: #b8974a;
   min-height: 100vh;
   max-width: 960px;
   margin: 0 auto;
@@ -24,7 +24,7 @@
 .gift-shop__title {
   font-family: 'DM Serif Display', Georgia, serif;
   font-size: 2.75rem;
-  color: #f0ece4;
+  color: #b8974a;
   letter-spacing: 0.18em;
   margin: 0;
   font-weight: 400;
@@ -95,14 +95,14 @@
 .featured-artist__image-fallback-name {
   font-family: 'DM Serif Display', Georgia, serif;
   font-size: 1.4rem;
-  color: #f0ece4;
+  color: #b8974a;
   line-height: 1.2;
 }
 
 .featured-artist__name {
   font-family: 'DM Serif Display', Georgia, serif;
   font-size: 2rem;
-  color: #f0ece4;
+  color: #b8974a;
   margin-bottom: 0.6rem;
   line-height: 1.1;
 }
@@ -171,7 +171,7 @@
   padding: 0.7rem 0.85rem 0.15rem;
   font-family: 'Courier Prime', monospace;
   font-size: 0.82rem;
-  color: #d4c49a;
+  color: #b8974a;
 }
 
 .wb-merch__price {
@@ -275,7 +275,7 @@
 .friends__image-fallback-name {
   font-family: 'DM Serif Display', Georgia, serif;
   font-size: 1.1rem;
-  color: #f0ece4;
+  color: #b8974a;
   line-height: 1.2;
 }
 
@@ -283,7 +283,7 @@
   padding: 0 0.95rem 0.25rem;
   font-family: 'DM Serif Display', Georgia, serif;
   font-size: 1.1rem;
-  color: #f0ece4;
+  color: #b8974a;
 }
 
 .friends__blurb {

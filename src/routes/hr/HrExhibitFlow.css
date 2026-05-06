@@ -13,9 +13,24 @@
    canonical museum palette + typography aligned to the carousel.
    ──────────────────────────────────────────────────────────────────────── */
 @import './../../styles/museum-tokens.css';
+/* Stage 3 typography swap: deck adopts v28_3's font pairing (Fraunces +
+   Geist) by Mike's call. Scoped to .hr-section only — the museum-wide
+   tokens in museum-tokens.css stay on DM Serif Display + Syne, so the
+   carousel / track list / video player at the top half of the HR page
+   are unaffected. The deck section overrides --hr-serif and --hr-sans
+   below, which ripples through every descendant rule that consumes
+   those tokens (pill labels, page title, eyebrow, panel head, etc.). */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@400;500;600;700&display=swap');
 
 /* ── Section root ──────────────────────────────────────────────────────── */
 .hr-section {
+  /* Deck-scoped typography override (Stage 3, v28_3 match). These shadow
+     the :root values defined in museum-tokens.css for the duration of
+     the .hr-section subtree only. Outside the deck, --hr-serif and
+     --hr-sans resolve to the museum-wide values. */
+  --hr-serif: 'Fraunces', Georgia, serif;
+  --hr-sans:  'Geist', system-ui, -apple-system, sans-serif;
+
   position: relative;
   min-height: calc(100vh - 64px);
   scroll-snap-align: center;
