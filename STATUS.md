@@ -1,31 +1,25 @@
 # Weird Baby Museum — Status
 
+_Maintained by: human (UX direction) + assistant (ops)._
 _Last updated: 2026-05-06_
 
 ## Current focus
-HR exhibit flow + museum design tokens (v28_3 deck adoption).
+_To be populated by next UX directive._
 
 ## In progress
-- [ ] HrExhibitFlow.jsx — finish exhibit transition states
-- [ ] museum-tokens.css — reconcile with v28_3 deck
-- [ ] WbHome.jsx — verify entry point still routes correctly post-token changes
+- [ ] (none recorded yet)
 
 ## Next up
-- [ ] Document the deck-adoption lineage decision in MUSEUM_UX.md
-- [ ] Lint pass before next deploy
-- [ ] `npm run build` smoke test before pushing deploy
+- [ ] (none recorded yet)
 
 ## Recently done
-- Walked back a9ade8f; recorded actual v28_3 deck-adoption lineage (6809f85)
-- Pushed 7 commits to origin/main
+- 430a87b — docs: add STATUS.md scaffold
+- 6809f85 — docs: walk back a9ade8f, record actual v28_3 deck-adoption lineage
 
 ## Open questions
-- (none right now)
+- (none)
 
 ---
-
-_How this file works:_ the `Get-ProjectStatus.ps1` script reads the first
-unchecked `- [ ]` item under any heading and surfaces it as the next step.
-Keep the most-active item at the top of "In progress". Move items to
-"Recently done" when complete (don't just check them — the script ignores
-checked items, but a clean log is useful for you)._
+_How this file works: `Get-ProjectStatus.ps1` surfaces the first unchecked
+`- [ ]` item as the recommended next step. Keep the active item at the top
+of "In progress"._
