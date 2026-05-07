@@ -172,8 +172,6 @@ const s = {
     color: "#5a4820",
     letterSpacing: "0.12em",
     cursor: "pointer",
-    borderBottom: "1px solid #2a2010",
-    paddingBottom: "1px",
     fontFamily: "Georgia, serif",
     background: "none",
     border: "none",
