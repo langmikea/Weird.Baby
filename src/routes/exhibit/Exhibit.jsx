@@ -515,6 +515,13 @@ export default function Exhibit({ artist }) {
       body: JSON.stringify({ page: artist.visitPath, referrer:document.referrer }) }).catch(()=>{});
   }, []);
 
+  // ── Album selection ───────────────────────────────────────────────────────
+  function selectAlbum(i, clicked) {
+    setActive(i);
+    clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => setActiveDisplay(i), clicked ? 0 : 600);
+  }
+
   // Arrow keys
   useEffect(() => {
     function onKey(e) {
@@ -525,13 +532,6 @@ export default function Exhibit({ artist }) {
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [active]);
-
-  // ── Album selection ───────────────────────────────────────────────────────
-  function selectAlbum(i, clicked) {
-    setActive(i);
-    clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => setActiveDisplay(i), clicked ? 0 : 600);
-  }
 
   // ── Track selection ───────────────────────────────────────────────────────
   function handleTrackSelect(albumIdx, ti) {
