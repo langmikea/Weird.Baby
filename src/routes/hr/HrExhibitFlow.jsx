@@ -109,7 +109,6 @@ const TABS = [
   { key: "deep",    label: "Deep Tracks", kind: "tier",    tier: 3, width: 120 },
   { key: "presets", label: "Presets",     kind: "special", special: "presets", width: 110 },
   { key: "journal", label: "Journal",     kind: "special", special: "journal", width: 110 },
-  { key: "close",   label: "✕",           kind: "close",   width: 48 },
 ];
 
 // ─── FACTORY PRESETS — adapted to HR's dimensions ───────────────────────────
