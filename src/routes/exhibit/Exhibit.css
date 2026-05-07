@@ -60,7 +60,7 @@ html,body{background:#080808;color:#b8974a;min-height:100vh;overflow-x:clip;scro
 .tl-tracks{list-style:none;padding:0 0 24px}
 .tl-album-label{padding:20px 20px 14px;border-bottom:1px solid #111;margin-bottom:4px}
 .tl-album-title{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(.95rem,1.6vw,1.2rem);color:#b8974a;line-height:1.2}
-.tl-track{display:flex;align-items:center;padding:9px 20px;border-left:2px solid transparent;cursor:pointer;transition:background .15s,border-left-color .2s;user-select:none}
+.tl-track{display:flex;align-items:center;padding:5px 20px;border-left:2px solid transparent;cursor:pointer;transition:background .15s,border-left-color .2s;user-select:none}
 .tl-track:hover{background:#0d0d0d}
 .tl-active{background:#0d0d0d}
 .tl-novid{cursor:default;opacity:.32}
