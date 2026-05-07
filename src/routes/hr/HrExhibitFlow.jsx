@@ -82,6 +82,7 @@ void [LED_OFF, LED_GREEN, LED_YELLOW, LED_RED];
 // staying inside the same font pair keeps the deck visually coherent.
 // Fallback chain ends at system serif / sans so the deck remains legible
 // even if the Google Fonts request fails.
+// eslint-disable-next-line no-unused-vars -- preserved for future serif-display use; see comment block above
 const serifDisplay = "'Fraunces', Georgia, serif";
 const sansBody = "'Geist', system-ui, -apple-system, sans-serif";
 
