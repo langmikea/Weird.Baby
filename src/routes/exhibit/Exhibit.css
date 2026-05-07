@@ -76,7 +76,6 @@ html,body{background:#080808;color:#b8974a;min-height:100vh;overflow-x:clip;scro
 .tl-tag{font-family:'Syne',sans-serif;font-weight:600;font-size:.42rem;letter-spacing:.1em;padding:2px 0;background:transparent;border:1px solid transparent;cursor:pointer;border-radius:1px;transition:color .15s,border-color .15s;text-align:center;width:100%}
 .tl-tag-sel{opacity:1}
 .tl-tag-dim{color:#4a4a4a !important;border-color:#2a2a2a !important}
-.tl-tag:hover{color:#999 !important;border-color:#444 !important}
 .tl-tag-ghost{display:block;width:48px;height:18px;pointer-events:none}
 
 /* VIDEO PANEL — stable right column */
