@@ -237,7 +237,7 @@ const CF_MIN    = 160; const CF_MAX    = 440;
 
 function usePersist(key, def) {
   const [v, setV] = useState(() => { try { return parseFloat(localStorage.getItem(key)) || def; } catch { return def; } });
-  const set = useCallback(val => { setV(val); try { localStorage.setItem(key, val); } catch {} }, [key]);
+  const set = useCallback(val => { setV(val); try { localStorage.setItem(key, val); } catch { /* localStorage may be unavailable in private mode; ignore */ } }, [key]);
   return [v, set];
 }
 
@@ -515,6 +515,13 @@ export default function Exhibit({ artist }) {
       body: JSON.stringify({ page: artist.visitPath, referrer:document.referrer }) }).catch(()=>{});
   }, []);
 
+  // ── Album selection ───────────────────────────────────────────────────────
+  function selectAlbum(i, clicked) {
+    setActive(i);
+    clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => setActiveDisplay(i), clicked ? 0 : 600);
+  }
+
   // Arrow keys
   useEffect(() => {
     function onKey(e) {
@@ -525,13 +532,6 @@ export default function Exhibit({ artist }) {
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [active]);
-
-  // ── Album selection ───────────────────────────────────────────────────────
-  function selectAlbum(i, clicked) {
-    setActive(i);
-    clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => setActiveDisplay(i), clicked ? 0 : 600);
-  }
 
   // ── Track selection ───────────────────────────────────────────────────────
   function handleTrackSelect(albumIdx, ti) {
