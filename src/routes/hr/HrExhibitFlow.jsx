@@ -214,7 +214,7 @@ const S = {
   // deck: bottom-anchored. height swings between TAB_PEEK / TAB_STRIP_H /
   // resizable open height.
   deck: (deckPx) => ({
-    position: "absolute", left: 0, right: 0, bottom: 0,
+    position: "absolute", left: 0, right: 0, bottom: 60,
     height: deckPx + "px",
     background: "transparent",
     zIndex: 10,
