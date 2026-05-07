@@ -232,7 +232,7 @@ const S = {
       textTransform: isClose ? "none" : "uppercase",
       fontWeight: active ? 700 : 500,
       color: textColor,
-      background: active ? INK_SOFT : "transparent",
+      background: active ? INK_SOFT : INK,
       border: `1px solid ${borderColor}`, borderBottom: "none",
       borderTopLeftRadius: "6px", borderTopRightRadius: "6px",
       height: TAB_STRIP_H + "px",
