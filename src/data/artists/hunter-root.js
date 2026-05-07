@@ -45,8 +45,8 @@ const SPINE = [
     art: BASE + "a3722397196_10.jpg", accent: "#3a7a9a",
     tracks: [
       { title: "Lampshade", videos: [
-        { ytId: "JA1p8WSQRQQ", label: "Official Lyric Video", type: "official" },
         { ytId: "EjdXxigzBp8", label: "Live in Studio", type: "live" },
+        { ytId: "JA1p8WSQRQQ", label: "Official Lyric Video", type: "lyrics" },
       ]},
       { title: "Favorite Friend", videos: [{ ytId: "L7-1T7F7_R0", label: "Official Music Video", type: "official" }] },
       { title: "Little Red Riding Hood", videos: [{ ytId: "BOQHN-O4DDc", label: "Live @ MCHS", type: "live" }] },
@@ -86,7 +86,7 @@ const SPINE = [
       { title: "Silver Lining", videos: [{ ytId: "uaFHDfuohxc", label: "Official Video", type: "official" }] },
       { title: "Quicksand Sinking", videos: [
         { ytId: "QFpJf0RDsXc", label: "Official Music Video", type: "official" },
-        { ytId: "13IUBFvIkls", label: "Official Lyric Video", type: "official" },
+        { ytId: "13IUBFvIkls", label: "Official Lyric Video", type: "lyrics" },
       ]},
       { title: "Town Rat Heathen", videos: [
         { ytId: "n2m8sP17E-c", label: "Official Music Video", type: "official" },
@@ -109,21 +109,18 @@ const SPINE = [
     tracks: [
       { title: "'94", videos: [
         { ytId: "vPW49GU38Ng", label: "Official Music Video", type: "official" },
-        { ytId: "zQ2o__P67kc", label: "Acoustic Clip", type: "clip" },
       ]},
       { title: "Low", videos: [
         { ytId: "WRjngwtGGFk", label: "Official Visualizer", type: "official" },
-        { ytId: "OczqgjWafds", label: "Live Clip", type: "live" },
       ]},
       { title: "String Up a Necklace", videos: [{ ytId: "pJSOjyrRIRs", label: "Official Visualizer", type: "official" }] },
       { title: "Hand in the Fire", videos: [{ ytId: "PPzNfNOMUHE", label: "Official Visualizer", type: "official" }] },
       { title: "Flash in the Pan", videos: [
         { ytId: "03NAxazLuhY", label: "Official Visualizer", type: "official" },
-        { ytId: "fRFh-W92Vn4", label: "Live Clip", type: "live" },
       ]},
       { title: "Friendly Fire", videos: [
         { ytId: "YlU1CBJkJ5w", label: "Official Music Video", type: "official" },
-        { ytId: "TLtIAsdi6k8", label: "Official Lyric Video", type: "official" },
+        { ytId: "TLtIAsdi6k8", label: "Official Lyric Video", type: "lyrics" },
       ]},
       { title: "The Devil is the Culprit", videos: [{ ytId: "M9HlNdBm2gw", label: "Official Visualizer", type: "official" }] },
       { title: "If the Body is a Temple", videos: [{ ytId: "-2aU97nuzYE", label: "Official Visualizer", type: "official" }] },
@@ -137,7 +134,6 @@ const SPINE = [
         { ytId: "vF1D0tYjEws", label: "Cover", type: "cover", credit: "Violet Lempke" },
       ]},
       { title: "A Pot Song", videos: [
-        { ytId: "4GYQha_i8ow", label: "Official Clip", type: "official" },
         { ytId: "2Lm8noK3hQI", label: "Official Audio", type: "official" },
         { ytId: "IWKwLD-_Q4g", label: "Cover", type: "cover", credit: "Cheech & Chong" },
       ]},
