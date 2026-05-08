@@ -1533,6 +1533,39 @@ export default function HrExhibitFlow({ activeAlbumId }) {
     setQuery("");
   };
 
+  // Per-tab clear: scope the reset to just the dimensions/state that the
+  // given tab owns. Tier tabs (artist/media/deep) clear their tier's
+  // dimension keys; deep also clears the search query. Presets clears
+  // shuffle/loop. Journal has nothing to clear.
+  const clearTab = (tabKey) => {
+    const tab = TABS.find(t => t.key === tabKey);
+    if (!tab) return;
+    if (tab.kind === "tier") {
+      setSelected(prev => {
+        const next = {};
+        for (const d of HR_DIMENSIONS) next[d.key] = new Set(prev[d.key] ?? []);
+        for (const d of HR_DIMENSIONS) if (d.tier === tab.tier) next[d.key] = new Set();
+        return next;
+      });
+      if (tab.key === "deep") setQuery("");
+    } else if (tab.special === "presets") {
+      setShuffle(false);
+      setLoop(false);
+    }
+  };
+
+  // Does this tab have anything to clear right now?
+  const tabHasSelection = (tab) => {
+    if (tab.kind === "tier") {
+      const dimsInTab = HR_DIMENSIONS.filter(d => d.tier === tab.tier);
+      const anyDim = dimsInTab.some(d => (selected[d.key] instanceof Set) && selected[d.key].size > 0);
+      if (tab.key === "deep") return anyDim || query.length > 0;
+      return anyDim;
+    }
+    if (tab.special === "presets") return shuffle || loop;
+    return false;
+  };
+
   const anyTagSelected = selected.__randomIds
     || Object.values(selected).some(s => s instanceof Set && s.size > 0);
   const anySelected = anyTagSelected || shuffle || loop;
@@ -1662,16 +1695,23 @@ export default function HrExhibitFlow({ activeAlbumId }) {
                   title={t.label}
                 >
                   <span>{t.label}</span>
+                  {tabHasSelection(t) && (
+                    <span
+                      role="button"
+                      title={`clear ${t.label.toLowerCase()} selections`}
+                      onClick={(e) => { e.stopPropagation(); clearTab(t.key); }}
+                      style={{
+                        marginLeft: 6, fontSize: 12, lineHeight: 1,
+                        padding: "0 4px", cursor: "pointer",
+                        color: GOLD_HI, opacity: 0.7,
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.opacity = "1"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.opacity = "0.7"; }}
+                    >✕</span>
+                  )}
                 </div>
               );
             })}
-            {anySelected && (open || hoverPeek) && (
-              <button
-                className="hr-strip-clear-btn"
-                onClick={(e) => { e.stopPropagation(); clear(); }}
-                title="clear all tags, shuffle, and loop"
-              >clear all</button>
-            )}
           </div>
 
           {open && currentTab && (
