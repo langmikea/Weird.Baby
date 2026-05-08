@@ -557,9 +557,16 @@ export default function Exhibit({ artist }) {
     setAlbumSelectedVis(prev => {
       const albumMap = prev[albumIdx] ?? {};
       const current  = albumMap[ti] ?? new Set([0]);
-      const next     = new Set(current);
-      if (next.has(vi)) { next.delete(vi); }
-      else              { next.add(vi); if (isActive) startPlay(albumIdx, ti, vi); }
+      // Radio behavior: only one variant active per track at a time.
+      // Click already-selected -> deselect to empty. Click any other ->
+      // replace selection with that vi.
+      let next;
+      if (current.size === 1 && current.has(vi)) {
+        next = new Set();
+      } else {
+        next = new Set([vi]);
+        if (isActive) startPlay(albumIdx, ti, vi);
+      }
       return { ...prev, [albumIdx]: { ...albumMap, [ti]: next } };
     });
   }
