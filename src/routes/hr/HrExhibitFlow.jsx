@@ -213,17 +213,20 @@ const S = {
   // deck: bottom-anchored. height swings between TAB_PEEK / TAB_STRIP_H /
   // resizable open height.
   deck: (deckPx) => ({
-    position: "absolute", left: 0, right: 0, bottom: 60,
+    position: "absolute", left: 0, right: 0,
     height: deckPx + "px",
     background: "transparent",
     zIndex: 10,
     pointerEvents: "none",
-    /* Clip the tab strip's bottom-overhang at the deck's bottom edge.
+    /* `bottom` is set by .hr-deck in HrExhibitFlow.css so it can be
+       conditional on whether the player bar is in the DOM (60 when
+       playing, 0 when not).
+       Clip the tab strip's bottom-overhang at the deck's bottom edge.
        The strip is 42px tall but the closed-idle deck is only 14px
-       (TAB_PEEK), so 28px hangs below. Without an overflow clip the
-       hangover is visible in the 60px gap between deck and player bar.
-       Original layout relied on the viewport edge for this clip; the
-       60px lift moved that out of the way, so do it explicitly here. */
+       (TAB_PEEK), so 28px hangs below. Without overflow:hidden the
+       hangover is visible in any gap between deck and viewport (or
+       deck and player bar). Original layout relied on the viewport
+       edge for this clip; explicit clip is more robust. */
     overflow: "hidden",
   }),
 
@@ -1635,7 +1638,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
           </div>
         </div>
 
-        <div className={animClass} style={S.deck(deckPx)} onClick={(e) => e.stopPropagation()}>
+        <div className={"hr-deck " + animClass} style={S.deck(deckPx)} onClick={(e) => e.stopPropagation()}>
           <div
             className="hr-tab-strip"
             onMouseEnter={() => { if (!open) { cancelHoverTimer(); scheduleHoverOpen(); } }}

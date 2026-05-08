@@ -400,6 +400,15 @@
   opacity: 0.5;
 }
 
+/* ── Deck container ─────────────────────────────────────────────────────
+   Bottom offset is conditional on whether the player bar (.pb in
+   Exhibit.css) is in the DOM. PlayerBar returns null when no video is
+   playing, so .pb is absent and the deck docks at viewport bottom.
+   When a video plays, .pb is rendered and the :has() rule lifts the
+   deck by the player bar's height (60px) so the tabs sit above it. */
+.hr-deck { bottom: 0; transition: bottom 0.18s ease; }
+body:has(.pb) .hr-deck { bottom: 60px; }
+
 /* ── Tab strip ─────────────────────────────────────────────────────────── */
 .hr-tab-strip {
   position: absolute;
