@@ -1716,8 +1716,9 @@ export default function HrExhibitFlow({ activeAlbumId }) {
         </div>
       </div>
 
-      {/* O12 — AuditStrip dev-only. Vite exposes import.meta.env.DEV. */}
-      {import.meta.env.DEV && <AuditStrip />}
+      {/* O12 — AuditStrip removed: was a dev-only fixed-bottom-right pill at
+          z-index 9999 that occluded the player bar's right-side controls.
+          The AuditStrip function is kept above for easy revival. */}
     </section>
   );
 }
