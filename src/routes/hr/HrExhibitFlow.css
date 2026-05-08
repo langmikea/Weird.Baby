@@ -413,7 +413,7 @@ body:has(.pb) .hr-deck { bottom: 60px; }
 .hr-tab-strip {
   position: absolute;
   top: 0; left: 12px; right: 12px;
-  height: 42px;
+  height: 30px;
   display: flex;
   align-items: flex-end;
   pointer-events: auto;
@@ -450,7 +450,7 @@ body:has(.pb) .hr-deck { bottom: 60px; }
 /* ── Deck body (the panel that opens upward) ───────────────────────────── */
 .hr-deck-body {
   position: absolute;
-  top: 42px; left: 0; right: 0; bottom: 0;
+  top: 30px; left: 0; right: 0; bottom: 0;
   background: var(--hr-ink);
   border-top: 1px solid var(--hr-gold-lo);
   pointer-events: auto;

@@ -87,8 +87,8 @@ const serifDisplay = "'Fraunces', Georgia, serif";
 const sansBody = "'Geist', system-ui, -apple-system, sans-serif";
 
 // ─── DECK CONSTANTS — preserved from v28, STORAGE_KEY HR-namespaced ─────────
-const TAB_PEEK = 14;
-const TAB_STRIP_H = 42;
+const TAB_PEEK = 30;  // === full strip; previously 14 (1/3 peek) but labels were clipped
+const TAB_STRIP_H = 30;
 const DECK_MIN_H = 200;
 const DECK_MAX_FRAC = 0.75;
 const DECK_DEFAULT_H_SHARED = 480;
@@ -235,17 +235,19 @@ const S = {
     overflow: "hidden",
   }),
 
-  // tab: per-tab chrome. Active = bright + bold + INK_SOFT fill. Inactive =
-  // GOLD_LO border + DIM text. isClose = small ✕ tab.
+  // tab: per-tab chrome. Active = bright + bold + INK_SOFT fill, no
+  // bottom rule under tab (cover element below merges with deck-body).
+  // Inactive = GOLD_LO border + dim text. isClose = small ✕ tab.
   tab: (active, deckOpen, width, isClose) => {
     const borderColor = active ? GOLD_HI : GOLD_LO;
     const textColor   = active ? GOLD_HI : DIM;
     return {
+      position: "relative",  // anchor for the active-tab bottom-cover
       cursor: "pointer", fontFamily: sansBody,
       fontSize: isClose ? "14px" : "10.5px",
       letterSpacing: isClose ? "0" : "0.12em",
       textTransform: isClose ? "none" : "uppercase",
-      fontWeight: active ? 700 : 500,
+      fontWeight: active ? 800 : 500,
       color: textColor,
       background: active ? INK_SOFT : INK,
       border: `1px solid ${borderColor}`, borderBottom: "none",
@@ -257,7 +259,7 @@ const S = {
       transition: "border-color 0.12s, color 0.12s, font-weight 0.12s, background 0.12s",
       padding: "0 6px", boxSizing: "border-box",
       flexShrink: 0, marginRight: "2px",
-      whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+      whiteSpace: "nowrap", overflow: "visible", textOverflow: "ellipsis",
     };
   },
 
@@ -272,8 +274,11 @@ const S = {
     transition: "background 0.15s",
   }),
 
-  // pill: per-pill chrome inside group columns. active / zero / pillWidth.
-  pill: (active, zero, pillWidth) => ({
+  // pill: per-pill chrome inside group columns. active / zero / pillWidth /
+  // noneSelected (true when the pill's column has zero selections, which
+  // is functionally "all-selected" — no filter active. Display: gold text
+  // like active, but no border box.)
+  pill: (active, zero, pillWidth, noneSelected) => ({
     fontFamily: sansBody, fontSize: "11.5px", fontWeight: 500,
     letterSpacing: "0.02em", padding: "0 10px",
     height: "26px", lineHeight: "24px",
@@ -282,9 +287,9 @@ const S = {
     width: pillWidth ? `${pillWidth}px` : "auto",
     minWidth: pillWidth ? `${pillWidth}px` : "auto",
     boxSizing: "border-box", borderRadius: 0,
-    border: `1px solid ${active ? GOLD : (zero ? "transparent" : BORDER)}`,
+    border: `1px solid ${active ? GOLD : (zero ? "transparent" : (noneSelected ? "transparent" : BORDER))}`,
     background: active ? INK_SOFT : "transparent",
-    color: active ? GOLD_HI : (zero ? BORDER_HI : DIM),
+    color: active ? GOLD_HI : (zero ? BORDER_HI : (noneSelected ? GOLD_HI : "#6a5520")),
     opacity: zero ? 0.2 : 1,
     pointerEvents: zero ? "none" : "auto",
     cursor: zero ? "default" : "pointer",
@@ -297,9 +302,10 @@ const S = {
     userSelect: "none",
   }),
 
-  pillCount: (active, zero) => ({
+  pillCount: (active, zero, noneSelected) => ({
     fontSize: "10px", fontWeight: 500,
-    color: active ? GOLD : (zero ? GOLD_MUTE : GOLD_LO),
+    // Match the label color exactly so number and word read as one tone.
+    color: active ? GOLD_HI : (zero ? BORDER_HI : (noneSelected ? GOLD_HI : "#6a5520")),
     fontVariantNumeric: "tabular-nums",
   }),
 
@@ -531,17 +537,17 @@ function useColumnPillWidth(group, values) {
 // rather than the raw slug. The button's title attribute and visible text
 // both use the same resolved label, so the locked vocabulary reaches the
 // screen unaltered and tooltips read the same as the pill face.
-function PillButton({ label, count, active, zero, pillWidth, onClick }) {
+function PillButton({ label, count, active, zero, pillWidth, noneSelected, onClick }) {
   return (
     <button
-      style={S.pill(active, zero, pillWidth)}
+      style={S.pill(active, zero, pillWidth, noneSelected)}
       onClick={() => !zero && onClick()}
       disabled={zero}
       aria-pressed={active}
       title={label}
     >
       <span className="hr-pill-label">{label}</span>
-      <span style={S.pillCount(active, zero)}>{count}</span>
+      <span style={S.pillCount(active, zero, noneSelected)}>{count}</span>
     </button>
   );
 }
@@ -556,6 +562,9 @@ function PillGroupColumn({ group, values, items, selected, toggle }) {
     values.forEach(v => { map[v] = countForPill(items, selected, group, v); });
     return map;
   }, [values, items, selected, group]);
+  // No selections in this column == "all selected" (no filter applied).
+  // Pills then render in the selected color (GOLD_HI) with no border box.
+  const noneSelected = !(selected[group] instanceof Set) || selected[group].size === 0;
   return (
     <div className="hr-group-column">
       <span className="hr-group-column-label">{HR_GROUP_LABELS[group] || group}</span>
@@ -570,6 +579,7 @@ function PillGroupColumn({ group, values, items, selected, toggle }) {
             active={active}
             zero={zero}
             pillWidth={columnPillWidth}
+            noneSelected={noneSelected}
             onClick={() => toggle(group, v)}
           />
         );
@@ -1525,6 +1535,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
     });
   };
 
+  // eslint-disable-next-line no-unused-vars -- preserved for future revival of the original clear-all behavior
   const clear = () => {
     setSelected(makeEntrySelection());
     setKalState(KAL_STATE_DEFAULT);
@@ -1533,8 +1544,42 @@ export default function HrExhibitFlow({ activeAlbumId }) {
     setQuery("");
   };
 
+  // Per-tab clear: scope the reset to just the dimensions/state that the
+  // given tab owns. Tier tabs (artist/media/deep) clear their tier's
+  // dimension keys; deep also clears the search query. Presets clears
+  // shuffle/loop. Journal has nothing to clear.
+  const clearTab = (tabKey) => {
+    const tab = TABS.find(t => t.key === tabKey);
+    if (!tab) return;
+    if (tab.kind === "tier") {
+      setSelected(prev => {
+        const next = {};
+        for (const d of HR_DIMENSIONS) next[d.key] = new Set(prev[d.key] ?? []);
+        for (const d of HR_DIMENSIONS) if (d.tier === tab.tier) next[d.key] = new Set();
+        return next;
+      });
+      if (tab.key === "deep") setQuery("");
+    } else if (tab.special === "presets") {
+      setShuffle(false);
+      setLoop(false);
+    }
+  };
+
+  // Does this tab have anything to clear right now?
+  const tabHasSelection = (tab) => {
+    if (tab.kind === "tier") {
+      const dimsInTab = HR_DIMENSIONS.filter(d => d.tier === tab.tier);
+      const anyDim = dimsInTab.some(d => (selected[d.key] instanceof Set) && selected[d.key].size > 0);
+      if (tab.key === "deep") return anyDim || query.length > 0;
+      return anyDim;
+    }
+    if (tab.special === "presets") return shuffle || loop;
+    return false;
+  };
+
   const anyTagSelected = selected.__randomIds
     || Object.values(selected).some(s => s instanceof Set && s.size > 0);
+  // eslint-disable-next-line no-unused-vars -- preserved for future revival of the strip-level clear-all button
   const anySelected = anyTagSelected || shuffle || loop;
 
   useEffect(() => {
@@ -1662,16 +1707,35 @@ export default function HrExhibitFlow({ activeAlbumId }) {
                   title={t.label}
                 >
                   <span>{t.label}</span>
+                  {(() => {
+                    const has = tabHasSelection(t);
+                    return (
+                      <span
+                        role={has ? "button" : undefined}
+                        title={has ? `clear ${t.label.toLowerCase()} selections` : undefined}
+                        onClick={has ? (e) => { e.stopPropagation(); clearTab(t.key); } : undefined}
+                        style={{
+                          position: "absolute", top: 2, right: 4,
+                          fontSize: 12, lineHeight: 1, padding: "0 4px",
+                          cursor: has ? "pointer" : "default",
+                          color: GOLD_HI,
+                          opacity: has ? 0.85 : 0.18,
+                          transition: "opacity 0.12s",
+                        }}
+                        onMouseEnter={has ? (e) => { e.currentTarget.style.opacity = "1"; } : undefined}
+                        onMouseLeave={has ? (e) => { e.currentTarget.style.opacity = "0.85"; } : undefined}
+                      >✕</span>
+                    );
+                  })()}
+                  {isActive && open && (
+                    <span aria-hidden style={{
+                      position: "absolute", left: -1, right: -1, bottom: -1,
+                      height: 1, background: INK_SOFT, pointerEvents: "none",
+                    }} />
+                  )}
                 </div>
               );
             })}
-            {anySelected && (open || hoverPeek) && (
-              <button
-                className="hr-strip-clear-btn"
-                onClick={(e) => { e.stopPropagation(); clear(); }}
-                title="clear all tags, shuffle, and loop"
-              >clear all</button>
-            )}
           </div>
 
           {open && currentTab && (
