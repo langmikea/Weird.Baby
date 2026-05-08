@@ -284,7 +284,7 @@ const S = {
     boxSizing: "border-box", borderRadius: 0,
     border: `1px solid ${active ? GOLD : (zero ? "transparent" : BORDER)}`,
     background: active ? INK_SOFT : "transparent",
-    color: active ? GOLD_HI : (zero ? BORDER_HI : DIM),
+    color: active ? GOLD_HI : (zero ? BORDER_HI : "#6a5520"),
     opacity: zero ? 0.2 : 1,
     pointerEvents: zero ? "none" : "auto",
     cursor: zero ? "default" : "pointer",
