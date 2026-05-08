@@ -109,7 +109,6 @@ const TABS = [
   { key: "deep",    label: "Deep Tracks", kind: "tier",    tier: 3, width: 120 },
   { key: "presets", label: "Presets",     kind: "special", special: "presets", width: 110 },
   { key: "journal", label: "Journal",     kind: "special", special: "journal", width: 110 },
-  { key: "close",   label: "✕",           kind: "close",   width: 48 },
 ];
 
 // ─── FACTORY PRESETS — adapted to HR's dimensions ───────────────────────────
@@ -214,11 +213,26 @@ const S = {
   // deck: bottom-anchored. height swings between TAB_PEEK / TAB_STRIP_H /
   // resizable open height.
   deck: (deckPx) => ({
-    position: "absolute", left: 0, right: 0, bottom: 0,
+    /* `position: fixed` so the deck pins to the viewport bottom
+       regardless of the section's scroll-snap-align: center. With
+       `absolute` it followed the section, which is centered in the
+       viewport with a 32px gap above and below — that gap pushed the
+       tabs 32px above viewport bottom. */
+    position: "fixed", left: 0, right: 0,
     height: deckPx + "px",
     background: "transparent",
     zIndex: 10,
     pointerEvents: "none",
+    /* `bottom` is set by .hr-deck in HrExhibitFlow.css so it can be
+       conditional on whether the player bar is in the DOM (60 when
+       playing, 0 when not).
+       Clip the tab strip's bottom-overhang at the deck's bottom edge.
+       The strip is 42px tall but the closed-idle deck is only 14px
+       (TAB_PEEK), so 28px hangs below. Without overflow:hidden the
+       hangover is visible in any gap between deck and viewport (or
+       deck and player bar). Original layout relied on the viewport
+       edge for this clip; explicit clip is more robust. */
+    overflow: "hidden",
   }),
 
   // tab: per-tab chrome. Active = bright + bold + INK_SOFT fill. Inactive =
@@ -233,7 +247,7 @@ const S = {
       textTransform: isClose ? "none" : "uppercase",
       fontWeight: active ? 700 : 500,
       color: textColor,
-      background: active ? INK_SOFT : "transparent",
+      background: active ? INK_SOFT : INK,
       border: `1px solid ${borderColor}`, borderBottom: "none",
       borderTopLeftRadius: "6px", borderTopRightRadius: "6px",
       height: TAB_STRIP_H + "px",
@@ -1629,7 +1643,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
           </div>
         </div>
 
-        <div className={animClass} style={S.deck(deckPx)} onClick={(e) => e.stopPropagation()}>
+        <div className={"hr-deck " + animClass} style={S.deck(deckPx)} onClick={(e) => e.stopPropagation()}>
           <div
             className="hr-tab-strip"
             onMouseEnter={() => { if (!open) { cancelHoverTimer(); scheduleHoverOpen(); } }}
@@ -1702,8 +1716,9 @@ export default function HrExhibitFlow({ activeAlbumId }) {
         </div>
       </div>
 
-      {/* O12 — AuditStrip dev-only. Vite exposes import.meta.env.DEV. */}
-      {import.meta.env.DEV && <AuditStrip />}
+      {/* O12 — AuditStrip removed: was a dev-only fixed-bottom-right pill at
+          z-index 9999 that occluded the player bar's right-side controls.
+          The AuditStrip function is kept above for easy revival. */}
     </section>
   );
 }

@@ -286,6 +286,14 @@ function Coverflow({ spine, active, cfH, onSelect, onSelectClick }) {
     ts.current = null;
   }
 
+  // Album size scales with the panel height. 240px at the persisted
+  // default cfH=300 (240/300 = 0.8). Clamp so the carousel stays usable
+  // when the panel is dragged very small or very tall. Slot offsets in
+  // getSlot() were authored at 240px; multiply by `scale` so spacing
+  // tracks the new size.
+  const albumSize = Math.max(120, Math.min(400, cfH * 0.8));
+  const scale = albumSize / 240;
+
   return (
     <div className="cf-wrap" style={{ height: cfH }}
       onPointerDown={onPD} onPointerUp={onPU} onTouchStart={onTS} onTouchEnd={onTE}>
@@ -299,7 +307,8 @@ function Coverflow({ spine, active, cfH, onSelect, onSelectClick }) {
         return (
           <div key={a.id} className={`cf-album${isActive?" cf-active":""}`}
             style={{
-              transform:`translateX(${sl.x}px) translateZ(${sl.z}px) rotateY(${sl.ry}deg) scale(${sl.sc})`,
+              width: albumSize, height: albumSize,
+              transform:`translateX(${sl.x*scale}px) translateZ(${sl.z*scale}px) rotateY(${sl.ry}deg) scale(${sl.sc})`,
               opacity:sl.op, zIndex:sl.zi,
               boxShadow:isActive?"0 24px 64px rgba(0,0,0,0.8),0 0 0 1px #b8974a44":"none",
             }}
