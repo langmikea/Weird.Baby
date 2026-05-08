@@ -37,6 +37,9 @@ src/
 │   ├── shop/, WbAdmin.jsx, WbHome.jsx
 ├── styles/museum-tokens.css            ← --hr-* CSS variables (off-limits for population work)
 └── worker.js                           ← Cloudflare Worker entry
+
+tools/
+└── Get-ProjectStatus.ps1               ← Project status reporter — reads git state, status docs, recent activity; suggests next step.
 ```
 
 ### Data model — albums and tracks
@@ -110,6 +113,10 @@ Mike pre-approves the entire flow when he says "push" — drive end-to-end witho
 2. `npm run lint` — should be at the baseline (currently **4 errors / 6 warnings**, all pre-existing on main, all in routing files Mike has flagged for separate semantic review). If your number is higher, you've introduced an error.
 3. `npm run build` — must pass. Vite + rolldown + Cloudflare plugin.
 
+## Local tooling
+
+`tools/Get-ProjectStatus.ps1` is a PowerShell helper that reads the current repo state and prints a recommended next step — git branch/ahead/behind/uncommitted counts, the next unchecked task in `STATUS.md`/`TODO.md`/`NEXT.md` if present, detected manifests (Node, Python, etc.), and the five most recently modified files. Run it from the repo root: `.\tools\Get-ProjectStatus.ps1`. On a fresh Windows clone the script may be flagged as downloaded-from-web by SmartScreen — run `Unblock-File .\tools\Get-ProjectStatus.ps1` once to clear the zone-identifier ADS, then it executes normally.
+
 ## Cowork sandbox quirks (READ THIS)
 
 The FUSE mount has multiple defects that cost real time. Work around them:
@@ -140,6 +147,8 @@ The FUSE mount has multiple defects that cost real time. Work around them:
    Run this before `npm run build` if you're getting `Cannot find module '../rolldown-binding.linux-x64-gnu.node'`. The symlink is gitignored and harmless on Mike's Windows side.
 
 6. **Sandbox `git status` can desync after heavy activity.** If you see "No commits yet" or every file as "new", the sandbox view is broken — Mike's actual git state on disk is fine. Verify by asking Mike to run `git status` in PowerShell, or by using the `Read` tool (which reads the Windows path directly, separate from the FUSE git view).
+
+7. **CRLF false positives in `git status`.** On a freshly-mounted repo, `git status` may show every routing-file CSS/JSX as `M` due to CRLF round-tripping through FUSE. Verify with `git diff --ignore-cr-at-eol --stat`; if empty, it's noise — proceed with explicit `git add` paths to keep the noise out of your commit.
 
 ## Things that are explicitly off-limits
 
