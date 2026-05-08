@@ -419,11 +419,6 @@ body:has(.pb) .hr-deck { bottom: 60px; }
   pointer-events: auto;
   z-index: 12;
   user-select: none;
-  /* Base rule under tabs. Always present so the tabs never look like
-     they're floating: closed deck => this line is the visual base;
-     open deck => stacks 1px against .hr-deck-body's border-top, reads
-     as the same single rule. */
-  border-bottom: 1px solid var(--hr-gold-lo);
 }
 .hr-strip-clear-btn {
   margin-left: 12px;
