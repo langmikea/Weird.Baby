@@ -213,7 +213,12 @@ const S = {
   // deck: bottom-anchored. height swings between TAB_PEEK / TAB_STRIP_H /
   // resizable open height.
   deck: (deckPx) => ({
-    position: "absolute", left: 0, right: 0,
+    /* `position: fixed` so the deck pins to the viewport bottom
+       regardless of the section's scroll-snap-align: center. With
+       `absolute` it followed the section, which is centered in the
+       viewport with a 32px gap above and below — that gap pushed the
+       tabs 32px above viewport bottom. */
+    position: "fixed", left: 0, right: 0,
     height: deckPx + "px",
     background: "transparent",
     zIndex: 10,
