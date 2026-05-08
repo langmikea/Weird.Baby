@@ -218,6 +218,13 @@ const S = {
     background: "transparent",
     zIndex: 10,
     pointerEvents: "none",
+    /* Clip the tab strip's bottom-overhang at the deck's bottom edge.
+       The strip is 42px tall but the closed-idle deck is only 14px
+       (TAB_PEEK), so 28px hangs below. Without an overflow clip the
+       hangover is visible in the 60px gap between deck and player bar.
+       Original layout relied on the viewport edge for this clip; the
+       60px lift moved that out of the way, so do it explicitly here. */
+    overflow: "hidden",
   }),
 
   // tab: per-tab chrome. Active = bright + bold + INK_SOFT fill. Inactive =
