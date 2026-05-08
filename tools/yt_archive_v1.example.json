@@ -1,0 +1,99 @@
+{
+  "schema_version": "yt_archive/v1",
+  "generated_at": "2026-05-08T14:22:00Z",
+  "page_type": "youtube_video",
+  "canonical_url": "https://www.youtube.com/watch?v=EXAMPLE_VID",
+  "video_id": "EXAMPLE_VID",
+  "channel_id": "UCexamplehunterroot",
+  "channel_name": "Hunter Root",
+  "channel_url": "https://www.youtube.com/channel/UCexamplehunterroot",
+  "artifacts": [
+    {
+      "mv_id": null,
+      "type": "youtube_video_page",
+      "fact1": "Run With The Hunt — official video",
+      "fact2": "Hunter Root's 2024 single, official YouTube release. Description includes credits and lyric snippet.",
+      "weight": 1.0,
+      "era": "Run With The Hunt",
+      "src": "https://www.youtube.com/watch?v=EXAMPLE_VID",
+      "date": "2024-09-12",
+      "date_source": "youtube_api",
+      "tags": [
+        "scope:hunter_root",
+        "platform:youtube",
+        "content_kind:official",
+        "author:hunter_root"
+      ],
+      "files": {},
+      "extracted_text": "Full video description text goes here, including any lyric block, credits, social links, and timestamps...",
+      "parent_role": "parent",
+      "notes": []
+    },
+    {
+      "mv_id": null,
+      "type": "youtube_thumbnail",
+      "fact1": "Maxres thumbnail",
+      "fact2": "1280x720 JPEG, fetched from i.ytimg.com/vi/EXAMPLE_VID/maxresdefault.jpg",
+      "weight": 0.5,
+      "era": "Run With The Hunt",
+      "src": "https://i.ytimg.com/vi/EXAMPLE_VID/maxresdefault.jpg",
+      "date": "2024-09-12",
+      "date_source": "youtube_api",
+      "tags": [
+        "scope:hunter_root",
+        "platform:youtube",
+        "artifact_kind:thumbnail",
+        "author:hunter_root"
+      ],
+      "files": {
+        "image_file": "thumbs/EXAMPLE_VID_maxres.jpg"
+      },
+      "parent_role": "child",
+      "notes": []
+    },
+    {
+      "mv_id": null,
+      "type": "youtube_transcript",
+      "fact1": "Auto-generated transcript",
+      "fact2": "YouTube auto-captions, English. Operator review pending.",
+      "weight": 0.7,
+      "era": "Run With The Hunt",
+      "src": "https://www.youtube.com/watch?v=EXAMPLE_VID",
+      "date": "2024-09-12",
+      "date_source": "youtube_api",
+      "tags": [
+        "scope:hunter_root",
+        "platform:youtube",
+        "artifact_kind:transcript",
+        "author:hunter_root"
+      ],
+      "files": {},
+      "extracted_text": "Full transcript text with line breaks at natural caption boundaries. Timestamps stripped. Source: auto-captions.",
+      "parent_role": "child",
+      "notes": ["transcript_source: auto_captions", "review_status: unreviewed"]
+    },
+    {
+      "mv_id": null,
+      "type": "youtube_page_save",
+      "fact1": "Watch-page HTML snapshot",
+      "fact2": "Single-file HTML capture for archival reference.",
+      "weight": 0.3,
+      "era": "Run With The Hunt",
+      "src": "https://www.youtube.com/watch?v=EXAMPLE_VID",
+      "date": "2026-05-08",
+      "date_source": "scrape",
+      "tags": [
+        "scope:hunter_root",
+        "platform:youtube",
+        "artifact_kind:page_save",
+        "author:hunter_root"
+      ],
+      "files": {
+        "page_save_html": "snapshots/EXAMPLE_VID.html"
+      },
+      "parent_role": "child",
+      "notes": ["capture_tool: SingleFile"]
+    }
+  ],
+  "curator_review_required": []
+}
