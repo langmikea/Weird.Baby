@@ -1525,6 +1525,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
     });
   };
 
+  // eslint-disable-next-line no-unused-vars -- preserved for future revival of the original clear-all behavior
   const clear = () => {
     setSelected(makeEntrySelection());
     setKalState(KAL_STATE_DEFAULT);
@@ -1568,6 +1569,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
 
   const anyTagSelected = selected.__randomIds
     || Object.values(selected).some(s => s instanceof Set && s.size > 0);
+  // eslint-disable-next-line no-unused-vars -- preserved for future revival of the strip-level clear-all button
   const anySelected = anyTagSelected || shuffle || loop;
 
   useEffect(() => {
