@@ -88,7 +88,7 @@ const sansBody = "'Geist', system-ui, -apple-system, sans-serif";
 
 // ─── DECK CONSTANTS — preserved from v28, STORAGE_KEY HR-namespaced ─────────
 const TAB_PEEK = 14;
-const TAB_STRIP_H = 42;
+const TAB_STRIP_H = 30;
 const DECK_MIN_H = 200;
 const DECK_MAX_FRAC = 0.75;
 const DECK_DEFAULT_H_SHARED = 480;
