@@ -12,6 +12,8 @@ Weird.Baby Museum — a Vite + React + React Router site, deployed via Cloudflar
 
 The "exhibit" surface (album coverflow + tracklist + video player + filter deck) lives at `/hr` and is the most active area for UX work.
 
+MediaVault is now under local-only git at `C:\AI\Platform\MediaVault\.git` (initialized 2026-05-08). Three commits as of init, branch `master`, no remote ever planned. See MediaVault's `STATE.md` "Version control" section and `CHANGELOG.md` for current state.
+
 ## Repo layout — where things actually live
 
 ```
@@ -135,7 +137,7 @@ The FUSE mount has multiple defects that cost real time. Work around them:
    elif old_b.replace(b'\n', b'\r\n') in data: data = data.replace(...)
    ```
 
-3. **`rm` requires explicit permission**. First call `mcp__cowork__allow_cowork_file_delete(path)` once per session — Mike approves a directory and then deletes work for the rest of the session. Without it, `rm`, `git stash`, `git checkout -b` (any op that creates and removes lock files) fail with "Operation not permitted".
+3. **`rm` requires explicit permission**. First call `mcp__cowork__allow_cowork_file_delete(path)` once per session — Mike approves a directory and then deletes work for the rest of the session. Without it, `rm`, `git stash`, `git checkout -b` (any op that creates and removes lock files) fail with "Operation not permitted". Scope the request narrowly the first time. Asking for delete permission on a whole project tree (e.g. `MediaVault/`) will be rejected; asking for the specific subdirectory the work needs (e.g. `MediaVault/.git/`) will be approved. State explicitly in the request that no user files will be touched. Re-requesting after a rejection wastes a round trip.
 
 4. **Slashed branch names fail** (see above). The sandbox can't `mkdir` under `.git/refs/heads/`.
 
@@ -149,6 +151,27 @@ The FUSE mount has multiple defects that cost real time. Work around them:
 6. **Sandbox `git status` can desync after heavy activity.** If you see "No commits yet" or every file as "new", the sandbox view is broken — Mike's actual git state on disk is fine. Verify by asking Mike to run `git status` in PowerShell, or by using the `Read` tool (which reads the Windows path directly, separate from the FUSE git view).
 
 7. **CRLF false positives in `git status`.** On a freshly-mounted repo, `git status` may show every routing-file CSS/JSX as `M` due to CRLF round-tripping through FUSE. Verify with `git diff --ignore-cr-at-eol --stat`; if empty, it's noise — proceed with explicit `git add` paths to keep the noise out of your commit.
+
+8. **FUSE mangles `git init` — multiple symptoms in one operation.** Discovered 2026-05-08 during MediaVault repo initialization. `git init` from inside a FUSE-mounted directory may produce a broken `.git/` in two distinct ways simultaneously:
+   - `.git/config` is written as null bytes (54 bytes of `\x00`) from bash's view, while the host-side filesystem shows partial valid content. Same root cause as quirk #1 (FUSE Edit truncation), but applied to git's atomic `.lock`-rename pattern instead of the Edit tool.
+   - `.git/objects/` is not created at all. Without it, `git status` reports "not a git repository." Subdirectories `info/` and `pack/` are also missing.
+
+   Symptoms after a fresh `git init`: `git status` errors immediately; `cat .git/config` returns nulls; `ls .git/objects/` reports no such file or directory.
+
+   Workaround:
+   ```bash
+   # Write .git/config via the rm+write Python pattern (bash-side won't trust the host write).
+   # Use the same Python rm+write block from quirk #1.
+
+   # Then create the missing object directories manually:
+   mkdir -p .git/objects/info .git/objects/pack
+
+   # Verify:
+   git status   # should now report a clean repo
+   git fsck --full  # should be silent / no errors
+   ```
+
+   Additional constraint: the host-side `Edit` and `Write` tools refuse `.git/` paths ("resolves to a protected location"). All `.git/` writes must go through bash via FUSE — which is the layer that breaks. The rm+write Python pattern is the only reliable path.
 
 ## Things that are explicitly off-limits
 
