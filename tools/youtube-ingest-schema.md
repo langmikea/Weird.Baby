@@ -118,7 +118,7 @@ Three findings, each load-bearing for this design:
 
 **The parent-linkage mechanism that does exist is the API.** `POST /api/artifact-register` (in `core/imgserver_extensions.py:194-356`) accepts `parent_artifact_id` as an optional body field (line 210, line 329) and writes it into the artifacts table's self-FK. The endpoint validates enums, slugifies tags, and mints `MV-YYYYMMDD-NNN` via `_next_artifact_id` on each call. There is no batch endpoint and no within-manifest reference resolution.
 
-**Path of least resistance for v0.5:** drop `parent_ref` entirely; do not patch `ingest_engine.py`; do not invent a vapor CLI flag. The capture script (when written) becomes the orchestrator: it parses the manifest, calls `POST /api/artifact-register` once for the parent, captures the response's `id`, then loops the children with `parent_artifact_id` threaded in. Bytes for `vaulted` artifacts are written to disk first by the capture script and the absolute path is passed in `local_asset_path` on each register call. Zero MV-side patches are needed for parent linkage to work.
+**Path of least resistance for v0.5:** drop `parent_ref` entirely; do not patch `ingest_engine.py`; do not invent a vapor CLI flag. The capture script (when written) becomes the orchestrator: it parses the manifest, calls `POST /api/artifact-register` once for the parent, captures the response's `id`, then loops the children with `parent_artifact_id` threaded in. Bytes for `vaulted` children (thumbnails, page saves) are written to disk first by the capture script and the absolute path is passed in `local_asset_path`. `url_only` artifacts (parent video page, transcript, channel card) pass `local_asset_path: null` — MV's `/api/artifact-register` accepts null as of v0.5.1. Zero MV-side patches are needed for parent linkage to work.
 
 Alternative path (rejected for now): patch `ingest_engine.py` to add `--capture-json` + `parent_ref` resolution. Lands the documented feature, but blocks YT ingest behind a v0.5 → v0.5.x release that's not on the punchlist. Not worth it unless the punchlist grows other reasons to do this.
 
@@ -153,6 +153,8 @@ For each new video the operator: runs the capture script with the watch URL; the
 Releasing a YT-adjacent artifact (★) follows the standard MV lifecycle. Releasing the parent does not auto-release children — that's an operator decision per artifact.
 
 ## 9. Open items and v0.7 considerations
+
+**`local_asset_path` is now optional for `url_only` artifacts** (MV patch landed 2026-05-08, logged in MV `CHANGELOG.md` as v0.5.1). The capture script may pass `local_asset_path: null` for the parent video page, transcript, and channel card; MV records the row with a NULL path. Stub sidecar files are no longer needed.
 
 **Capture script is the next deliverable.** Lives in `Hunter Root\tools\yt_archive_capture.py`. Two responsibilities: write the manifest folder; orchestrate the API calls. Keep them separable so a "manifest only" mode is possible (for review-before-register).
 
