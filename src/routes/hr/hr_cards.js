@@ -46,6 +46,28 @@ import { HR_ARTIFACTS } from "../../data/hr_artifacts.js";
 import { HR_ARCHIVE } from "../../data/hr_archive.js";
 import { HR_EXIT_FLOW } from "../../data/hr_exit_flow.js";
 
+// ─── DEEP DIVE — per-card tag attachment ───────────────────────────────────
+// Phase 1 wiring per docs/deep-dive-review/SPEC_DRAFT_v3.md §3.5.
+// DEEP_VOCAB is the prebuild artifact (groupOrder drives which fields we
+// attach to every card). DEEP_TAGS holds per-card tag arrays, keyed by
+// the explicit card.id established by the c14267e migration. Phase 1
+// ships DEEP_TAGS.cards = {} — the export CLI in Phase 3 populates it
+// from MediaVault. Cards with no entry get empty arrays for every group,
+// which the deck's existing multi-column filter treats as "no tags here"
+// (a non-match for any selected pill in that column).
+import DEEP_VOCAB from "../../data/deep-dive-vocabulary.json";
+import DEEP_TAGS from "../../data/deep-tags.json";
+
+const VOCAB_GROUPS = DEEP_VOCAB.groupOrder;
+
+function attachDeepTags(base) {
+  const deepEntry = (DEEP_TAGS.cards && DEEP_TAGS.cards[base.id]) || {};
+  for (const group of VOCAB_GROUPS) {
+    base[group] = deepEntry[group] || [];
+  }
+  return base;
+}
+
 // ─── span helpers ───────────────────────────────────────────────────────────
 // HR data has no span hints. Pick a stable default that mirrors the
 // prototype's "mostly small, occasional larger" feel. Deterministic so
@@ -116,6 +138,7 @@ export function hrArtifactToCardShape(artifact) {
     externalUrl,
     ...span,
   };
+  attachDeepTags(base);
 
   // PressCard expects source / pull / sub. EssayCard expects kind / lede / title.
   if (render === "press") {
@@ -178,6 +201,7 @@ export function hrArchiveItemToCardShape(item) {
     externalUrl,
     ...span,
   };
+  attachDeepTags(base);
 
   if (render === "press") {
     return {
@@ -224,6 +248,7 @@ export function hrExitFlowItemToCardShape(item) {
     externalUrl: null,
     ...span,
   };
+  attachDeepTags(base);
 
   if (render === "essay") {
     return {

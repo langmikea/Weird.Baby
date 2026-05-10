@@ -34,6 +34,17 @@
 // vocab (album, song) or empty (the rest) until artifacts get tagged.
 // ─────────────────────────────────────────────────────────────────────────────
 
+// ─── DEEP DIVE vocabulary import ─────────────────────────────────────────
+// Source of truth lives at docs/deep-dive-vocabulary.csv (operator-edited).
+// tools/build-deep-tags-vocabulary.mjs runs at npm prebuild and writes the
+// JSON below. Adding a new group to the CSV adds a new Tier 3 pill column
+// on the next build — no further code changes required in this file.
+import DEEP_VOCAB from "../../data/deep-dive-vocabulary.json";
+
+function capitalize(s) {
+  return s ? s[0].toUpperCase() + s.slice(1) : s;
+}
+
 // ─── slugify — canonical helper ─────────────────────────────────────────────
 // Lowercase, strip apostrophes, collapse anything non-alphanumeric to single
 // hyphens, trim leading/trailing hyphens. Used to derive a stable storage
@@ -228,6 +239,24 @@ function dim(key, kind, tier, options) {
   };
 }
 
+// ─── DEEP DIVE — Tier 3 dim entries derived from the vocabulary JSON ──────
+// One column per group label in DEEP_VOCAB.groupOrder. Pills derived from
+// the tags inside each group: slug = tag, label = first-letter-capitalized
+// tag. Per-card tag arrays are attached in hr_cards.js from
+// src/data/deep-tags.json (Phase 1 ships an empty cards object — Phase 3's
+// export CLI and Phase 4's MV curation UI populate it).
+const DEEP_DIMENSIONS = DEEP_VOCAB.groupOrder.map(group =>
+  dim(
+    group,
+    "multi",
+    3,
+    (DEEP_VOCAB.groups[group] || []).map(({ tag }) => ({
+      slug: tag,
+      label: capitalize(tag),
+    })),
+  ),
+);
+
 export const HR_DIMENSIONS = [
   // Tier 1 — Artist tab
   dim("era",        "single", 1, HR_ERA_OPTIONS),
@@ -244,6 +273,8 @@ export const HR_DIMENSIONS = [
   dim("src",        "single", 2, HR_SRC_OPTIONS),
   // Tier 3 — Deep Tracks tab
   dim("odds",       "multi",  3, HR_ODDS_OPTIONS),
+  // Tier 3 — Deep Dive (one column per group in deep-dive-vocabulary.csv)
+  ...DEEP_DIMENSIONS,
 ];
 
 // ─── HR_GROUP_LABELS — column headers (Era / Album / Year / Song / etc.) ────
@@ -262,6 +293,11 @@ export const HR_GROUP_LABELS = {
   type:       "Type",
   src:        "Source",
   odds:       "Odds",
+  // Deep Dive group labels — derived from DEEP_VOCAB.groupOrder so adding
+  // a new group to the CSV automatically gets a sensible header.
+  ...Object.fromEntries(
+    DEEP_VOCAB.groupOrder.map(g => [g, capitalize(g)]),
+  ),
 };
 
 // ─── HR_LABELS — slug → display lookup, keyed by group ──────────────────────

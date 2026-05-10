@@ -1,0 +1,44 @@
+{
+  "groups": {
+    "mood": [
+      {
+        "tag": "snarky",
+        "notes": ""
+      },
+      {
+        "tag": "wistful",
+        "notes": ""
+      }
+    ],
+    "theme": [
+      {
+        "tag": "oops",
+        "notes": ""
+      },
+      {
+        "tag": "lemonade",
+        "notes": ""
+      }
+    ],
+    "motif": [
+      {
+        "tag": "pink-hats",
+        "notes": "recurring visual element"
+      }
+    ],
+    "texture": [
+      {
+        "tag": "acoustic",
+        "notes": ""
+      }
+    ]
+  },
+  "groupOrder": [
+    "mood",
+    "theme",
+    "motif",
+    "texture"
+  ],
+  "generated_at": "2026-05-10T21:02:31.134Z",
+  "source_sha": "cd40f5a75c278f95dfcc8442262824c7857f0ef9d170e04bb20d49eda12fd1ff"
+}
