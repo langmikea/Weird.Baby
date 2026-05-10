@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node tools/build-deep-tags-vocabulary.mjs",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "npm run build && wrangler dev",
