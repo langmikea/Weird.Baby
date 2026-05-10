@@ -87,8 +87,8 @@ const ARTIFACT_TYPE_TO_RENDER = {
   ticket: "press",
 };
 
-export function hrArtifactToCardShape(artifact, idx = 0) {
-  const id = `art-${idx}-${artifact.date}`;
+export function hrArtifactToCardShape(artifact) {
+  const id = artifact.id;
   const render = ARTIFACT_TYPE_TO_RENDER[artifact.type] || "session";
   const year = yearOf(artifact.date);
   const span = pickSpan(id);
@@ -149,8 +149,8 @@ const ARCHIVE_TYPE_TO_RENDER = {
   rarity: "session",
 };
 
-export function hrArchiveItemToCardShape(item, idx = 0) {
-  const id = `arc-${idx}-${item.date}`;
+export function hrArchiveItemToCardShape(item) {
+  const id = item.id;
   const render = ARCHIVE_TYPE_TO_RENDER[item.type] || "session";
   const year = yearOf(item.date);
   const span = pickSpan(id);
@@ -201,8 +201,8 @@ const EXIT_TYPE_TO_RENDER = {
   highlight: "session",
 };
 
-export function hrExitFlowItemToCardShape(item, idx = 0) {
-  const id = `exit-${idx}-${item.date}`;
+export function hrExitFlowItemToCardShape(item) {
+  const id = item.id;
   const render = EXIT_TYPE_TO_RENDER[item.type] || "session";
   const year = yearOf(item.date);
   const span = pickSpan(id);
@@ -238,7 +238,7 @@ export function hrExitFlowItemToCardShape(item, idx = 0) {
 
 // ─── HR_CARDS — the input to the deck's filter logic ────────────────────────
 export const HR_CARDS = [
-  ...HR_ARTIFACTS.map((a, i) => hrArtifactToCardShape(a, i)),
-  ...HR_ARCHIVE.map((a, i) => hrArchiveItemToCardShape(a, i)),
-  ...HR_EXIT_FLOW.map((a, i) => hrExitFlowItemToCardShape(a, i)),
+  ...HR_ARTIFACTS.map(hrArtifactToCardShape),
+  ...HR_ARCHIVE.map(hrArchiveItemToCardShape),
+  ...HR_EXIT_FLOW.map(hrExitFlowItemToCardShape),
 ];

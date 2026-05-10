@@ -22,6 +22,7 @@ export const HR_ARTIFACTS = [
   // ── MEDUSA'S DISCO ERA ────────────────────────────────────────────────────
 
   {
+    id: "art-001",
     date: "2012-10-12",
     era: "medusas",
     type: "video",
@@ -33,6 +34,7 @@ export const HR_ARTIFACTS = [
     icon: "🎬",
   },
   {
+    id: "art-002",
     date: "2013-12-09",
     era: "medusas",
     type: "photo",
@@ -44,6 +46,7 @@ export const HR_ARTIFACTS = [
     icon: "📷",
   },
   {
+    id: "art-003",
     date: "2013-12-20",
     era: "medusas",
     type: "photo",
@@ -55,6 +58,7 @@ export const HR_ARTIFACTS = [
     icon: "💿",
   },
   {
+    id: "art-004",
     date: "2014-07-09",
     era: "medusas",
     type: "photo",
@@ -66,6 +70,7 @@ export const HR_ARTIFACTS = [
     icon: "📷",
   },
   {
+    id: "art-005",
     date: "2016-01-02",
     era: "medusas",
     type: "video",
@@ -77,6 +82,7 @@ export const HR_ARTIFACTS = [
     icon: "🎬",
   },
   {
+    id: "art-006",
     date: "2018-07-28",
     era: "medusas",
     type: "video",
@@ -91,6 +97,7 @@ export const HR_ARTIFACTS = [
   // ── SOLO ERA ──────────────────────────────────────────────────────────────
 
   {
+    id: "art-007",
     date: "2023-02-03",
     era: "solo",
     type: "video",
@@ -102,6 +109,7 @@ export const HR_ARTIFACTS = [
     icon: "🔥",
   },
   {
+    id: "art-008",
     date: "2023-03-31",
     era: "solo",
     type: "video",
@@ -113,6 +121,7 @@ export const HR_ARTIFACTS = [
     icon: "🎬",
   },
   {
+    id: "art-009",
     date: "2023-10-13",
     era: "solo",
     type: "video",
@@ -124,6 +133,7 @@ export const HR_ARTIFACTS = [
     icon: "🎬",
   },
   {
+    id: "art-010",
     date: "2023-11-10",
     era: "medusas",
     type: "video",
@@ -135,6 +145,7 @@ export const HR_ARTIFACTS = [
     icon: "🎵",
   },
   {
+    id: "art-011",
     date: "2024-11-08",
     era: "solo",
     type: "video",
@@ -146,6 +157,7 @@ export const HR_ARTIFACTS = [
     icon: "🎬",
   },
   {
+    id: "art-012",
     date: "2024-12-23",
     era: "solo",
     type: "video",
@@ -157,6 +169,7 @@ export const HR_ARTIFACTS = [
     icon: "🎵",
   },
   {
+    id: "art-013",
     date: "2025-10-01",
     era: "solo",
     type: "photo",
@@ -167,11 +180,12 @@ export const HR_ARTIFACTS = [
     color: "#1c1812",
     icon: "📷",
   },
-      { title: "My Brother's Bones", videos: [{ ytId: "wi5G_Zn74gc", label: "Official Music Video", type: "official" }] }
+      { id: "art-014", title: "My Brother's Bones", videos: [{ ytId: "wi5G_Zn74gc", label: "Official Music Video", type: "official" }] }
 ,
   // ── FAN & THIRD-PARTY ─────────────────────────────────────────────────────
 
   {
+    id: "art-015",
     date: "2020-09-04",
     era: "solo",
     type: "video",
@@ -183,6 +197,7 @@ export const HR_ARTIFACTS = [
     icon: "🎬",
   },
   {
+    id: "art-016",
     date: "2022-09-09",
     era: "solo",
     type: "video",
@@ -194,6 +209,7 @@ export const HR_ARTIFACTS = [
     icon: "🎬",
   },
   {
+    id: "art-017",
     date: "2025-08-10",
     era: "solo",
     type: "video",

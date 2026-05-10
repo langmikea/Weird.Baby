@@ -22,6 +22,7 @@ export const HR_ARCHIVE = [
   // ─── MEDUSA'S DISCO ERA ───────────────────────────────────────────────────
 
   {
+    id: "arc-001",
     date: "2012-06-01",
     era: "medusas",
     src: "archive",
@@ -32,6 +33,7 @@ export const HR_ARCHIVE = [
     icon: "🎸",
   },
   {
+    id: "arc-002",
     date: "2012-10-12",
     era: "medusas",
     src: "archive",
@@ -42,6 +44,7 @@ export const HR_ARCHIVE = [
     icon: "🎤",
   },
   {
+    id: "arc-003",
     date: "2013-12-11",
     era: "medusas",
     src: "insta",
@@ -52,6 +55,7 @@ export const HR_ARCHIVE = [
     icon: "📷",
   },
   {
+    id: "arc-004",
     date: "2013-12-20",
     era: "medusas",
     src: "insta",
@@ -62,6 +66,7 @@ export const HR_ARCHIVE = [
     icon: "💿",
   },
   {
+    id: "arc-005",
     date: "2014-08-14",
     era: "medusas",
     src: "press",
@@ -72,6 +77,7 @@ export const HR_ARCHIVE = [
     icon: "📰",
   },
   {
+    id: "arc-006",
     date: "2016-01-10",
     era: "medusas",
     src: "fb",
@@ -83,6 +89,7 @@ export const HR_ARCHIVE = [
     // SCRUB: Medusa's Disco continued releasing through 2023. Verify what this event actually was.
   },
   {
+    id: "arc-007",
     date: "2016-11-04",
     era: "medusas",
     src: "archive",
@@ -96,6 +103,7 @@ export const HR_ARCHIVE = [
   // ─── SEEDS ERA (proto-solo) ───────────────────────────────────────────────
 
   {
+    id: "arc-008",
     date: "2017-06-23",
     era: "seeds",
     src: "archive",
@@ -109,6 +117,7 @@ export const HR_ARCHIVE = [
   // ─── SOLO ERA ─────────────────────────────────────────────────────────────
 
   {
+    id: "arc-009",
     date: "2018-04-25",
     era: "medusas",
     src: "press",
@@ -119,6 +128,7 @@ export const HR_ARCHIVE = [
     icon: "📰",
   },
   {
+    id: "arc-010",
     date: "2019-09-05",
     era: "medusas",
     src: "press",
@@ -129,6 +139,7 @@ export const HR_ARCHIVE = [
     icon: "📰",
   },
   {
+    id: "arc-011",
     date: "2019-10-20",
     era: "medusas",
     src: "press",
@@ -139,6 +150,7 @@ export const HR_ARCHIVE = [
     icon: "📰",
   },
   {
+    id: "arc-012",
     date: "2019-12-20",
     era: "medusas",
     src: "archive",
@@ -149,6 +161,7 @@ export const HR_ARCHIVE = [
     icon: "🎵",
   },
   {
+    id: "arc-013",
     date: "2023-02-03",
     era: "solo",
     src: "archive",
@@ -159,6 +172,7 @@ export const HR_ARCHIVE = [
     icon: "🔥",
   },
   {
+    id: "arc-014",
     date: "2023-03-31",
     era: "solo",
     src: "archive",
@@ -169,6 +183,7 @@ export const HR_ARCHIVE = [
     icon: "🎬",
   },
   {
+    id: "arc-015",
     date: "2023-09-30",
     era: "solo",
     src: "press",
@@ -179,6 +194,7 @@ export const HR_ARCHIVE = [
     icon: "🎤",
   },
   {
+    id: "arc-016",
     date: "2023-11-10",
     era: "medusas",
     src: "archive",
@@ -189,6 +205,7 @@ export const HR_ARCHIVE = [
     icon: "🎵",
   },
   {
+    id: "arc-017",
     date: "2024-01-15",
     era: "solo",
     src: "press",
@@ -199,6 +216,7 @@ export const HR_ARCHIVE = [
     icon: "📰",
   },
   {
+    id: "arc-018",
     date: "2024-02-09",
     era: "medusas",
     src: "archive",
@@ -209,6 +227,7 @@ export const HR_ARCHIVE = [
     icon: "💿",
   },
   {
+    id: "arc-019",
     date: "2025-10-21",
     era: "solo",
     src: "press",
@@ -219,6 +238,7 @@ export const HR_ARCHIVE = [
     icon: "📰",
   },
   {
+    id: "arc-020",
     date: "2025-11-24",
     era: "solo",
     src: "press",
@@ -232,6 +252,7 @@ export const HR_ARCHIVE = [
   // ── FAN & THIRD-PARTY ─────────────────────────────────────────────────────
 
   {
+    id: "arc-021",
     date: "2020-09-04",
     era: "solo",
     src: "archive",
@@ -242,6 +263,7 @@ export const HR_ARCHIVE = [
     icon: "🎬",
   },
   {
+    id: "arc-022",
     date: "2022-09-09",
     era: "solo",
     src: "archive",
@@ -252,6 +274,7 @@ export const HR_ARCHIVE = [
     icon: "🎬",
   },
   {
+    id: "arc-023",
     date: "2023-02-16",
     era: "medusas",
     src: "archive",
@@ -262,6 +285,7 @@ export const HR_ARCHIVE = [
     icon: "🎤",
   },
   {
+    id: "arc-024",
     date: "2023-07-21",
     era: "solo",
     src: "archive",
