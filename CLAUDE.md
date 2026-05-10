@@ -119,6 +119,12 @@ Mike pre-approves the entire flow when he says "push" — drive end-to-end witho
 
 `tools/Get-ProjectStatus.ps1` is a PowerShell helper that reads the current repo state and prints a recommended next step — git branch/ahead/behind/uncommitted counts, the next unchecked task in `STATUS.md`/`TODO.md`/`NEXT.md` if present, detected manifests (Node, Python, etc.), and the five most recently modified files. Run it from the repo root: `.\tools\Get-ProjectStatus.ps1`. On a fresh Windows clone the script may be flagged as downloaded-from-web by SmartScreen — run `Unblock-File .\tools\Get-ProjectStatus.ps1` once to clear the zone-identifier ADS, then it executes normally.
 
+### Deep Dive export
+
+`npm run export-deep-tags` reads released YouTube artifacts from MediaVault (`http://127.0.0.1:51822/db`), extracts Deep Dive tags (`deep:<group>:<tag>`) and their associated `card_id` from `notes`, and writes the result to `src/data/deep-tags.json`. The museum imports this file statically at build time. MV must be running on the operator's laptop; the script won't work from CI or another machine.
+
+Use `--dry-run` to see what would be exported without writing. Use `--verbose` to see the SQL query and per-card details.
+
 ## Cowork sandbox quirks (READ THIS)
 
 The FUSE mount has multiple defects that cost real time. Work around them:
