@@ -43,9 +43,27 @@ import {
   useState, useMemo, useLayoutEffect, useEffect, useRef, useCallback,
 } from "react";
 import "./HrExhibitFlow.css";
-import { HR_DIMENSIONS, HR_GROUP_LABELS, displayFor } from "./hr_dimensions.js";
-import { HR_CARDS } from "./hr_cards.js";
+import { buildDimensions } from "./hr_dimensions.js";
+import EXHIBIT from "../../data/exhibits/hunter_root.json";
 import { HR_JOURNAL_PROMPTS } from "../../data/hr_journal_prompts.js";
+
+// ─── EXHIBIT INPUT — artifacts and derived dimensions ──────────────────────
+// Phase v5-3+v5-4 (per docs/deep-dive-review/SPEC_DRAFT_v5.md §4 and
+// SPEC_DRAFT_v5_2.md §3). The exhibit's artifact records are exported from
+// MediaVault by `npm run export-artifacts` into src/data/exhibits/<name>.json
+// and imported here statically — Vite bundles the JSON at build time. No
+// build-time read from MV; the operator commits the JSON.
+//
+// ARTIFACTS replaces the pre-v5 HR_CARDS array. Every reference below that
+// used to read HR_CARDS now reads ARTIFACTS.
+//
+// HR_DIMENSIONS / HR_GROUP_LABELS / displayFor are derived dynamically from
+// the union of tag namespaces across ARTIFACTS — `exhibit:` is filtered out
+// at the dimension-discovery step (it's a routing tag, not a content tag, per
+// v5.2 §3). Adding a new namespace in MV automatically grows the pill columns
+// on the next export+build; no museum-side code change required.
+const ARTIFACTS = Array.isArray(EXHIBIT?.artifacts) ? EXHIBIT.artifacts : [];
+const { HR_DIMENSIONS, HR_GROUP_LABELS, displayFor } = buildDimensions(ARTIFACTS);
 
 // ─── COLOR / FONT TOKENS ────────────────────────────────────────────────────
 // Phase 4b: retargeted from the deck's v28 warm-amber palette to the
@@ -116,7 +134,7 @@ const FACTORY_PRESETS = [
   {
     key: "surprise", label: "Surprise me", desc: "a handful at random",
     apply: () => {
-      const ids = HR_CARDS.map(c => c.id).sort(() => Math.random() - 0.5).slice(0, 3);
+      const ids = ARTIFACTS.map(c => c.id).sort(() => Math.random() - 0.5).slice(0, 3);
       return { __randomIds: new Set(ids) };
     },
   },
@@ -373,28 +391,35 @@ const spanStyle = (w, h) => {
   return { gridColumn: `span ${w}`, gridRow: `span ${hMap[h] || 30}` };
 };
 
-// ─── FILTER LOGIC — ported from v28 prototype ───────────────────────────────
-// LOCKED rule (docs/FILTER_LOGIC_DECISION.md): within-group OR, across-group
-// AND, empty-group-silent. Adapted to operate on HR_DIMENSIONS.
+// ─── FILTER LOGIC — v5.1 Patch 3 rewrite ────────────────────────────────────
+// LOCKED rule (docs/FILTER_LOGIC_DECISION.md, unchanged): within-group OR,
+// across-group AND, empty-group-silent.
+//
+// What changed under v5: matchFilter used to read fields directly on the card
+// object (`item.era`, `item.mood`, `String(item.year)`). v5 artifact records
+// carry tags nested under `item.tags[namespace]` as string arrays —
+// `item.tags.era = ["solo"]`, `item.tags.mood = ["snarky", "wistful"]`. Every
+// dimension is functionally `kind: "multi"` now (a single tag value just
+// lives in a one-element array), so the matcher is uniform across columns.
+//
+// `year` no longer has a special path: if year-based filtering is wanted,
+// the operator emits `year:<value>` tags from MV and they discover into a
+// pill column like any other namespace.
 function itemHasTag(item, group, tag) {
-  if (group === "year") return String(item.year) === tag;
-  const dim = HR_DIMENSIONS.find(d => d.key === group);
-  if (dim?.kind === "multi") return Array.isArray(item[group]) && item[group].includes(tag);
-  return item[group] === tag;
+  const arr = item?.tags?.[group];
+  return Array.isArray(arr) && arr.includes(tag);
 }
 
 function matchFilter(item, selected) {
   if (selected.__randomIds) return selected.__randomIds.has(item.id);
-  for (const { key, kind } of HR_DIMENSIONS) {
+  for (const { key } of HR_DIMENSIONS) {
     const sel = selected[key];
-    if (!sel || sel.size === 0) continue;
+    if (!(sel instanceof Set) || sel.size === 0) continue;
+    const arr = item?.tags?.[key];
+    if (!Array.isArray(arr)) return false;
     let carries = false;
-    if (key === "year") {
-      carries = sel.has(String(item.year));
-    } else if (kind === "multi") {
-      carries = Array.isArray(item[key]) && item[key].some(v => sel.has(v));
-    } else {
-      carries = item[key] != null && sel.has(item[key]);
+    for (const v of arr) {
+      if (sel.has(v)) { carries = true; break; }
     }
     if (!carries) return false;
   }
@@ -523,7 +548,7 @@ function useColumnPillWidth(group, values) {
       setWidth(0);
       return;
     }
-    const maxCount = HR_CARDS.length;
+    const maxCount = ARTIFACTS.length;
     const labels = values.map(v => `${displayFor(group, v)}   ${maxCount}`);
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setWidth(measureWidestLabel(labels) + 20 + 8 + 6);
@@ -752,151 +777,101 @@ function KaleidoscopeContent({ kalState, setKalState, remainingPercent, remainin
   );
 }
 
-// ─── CARD COMPONENTS — ported from v28, classes wired through CSS ───────────
-function PhotoCard({ card }) {
-  return (
-    <>
-      <div className="hr-card-photo-vis">
-        <div className="hr-card-photo-frame" />
-        <span className="hr-card-photo-label">photo</span>
-      </div>
-      <div className="hr-card-foot">
-        <div className="hr-card-title">{card.title}</div>
-        <div className="hr-card-meta">{card.meta}</div>
-        {card.credit && <div className="hr-card-credit">— {card.credit}</div>}
-      </div>
-    </>
-  );
+// ─── CARD RENDERING — Q-3 dispatch on media_type ───────────────────────────
+// Phase v5-3+v5-4 (per docs/deep-dive-review/SPEC_DRAFT_v5_2.md). Replaces
+// the pre-v5 render-type fan-out (PhotoCard / ArtCard / VideoCard / PressCard
+// / EssayCard / SessionCard) which keyed off authored `render` fields like
+// "photo" / "essay" / "session". v5 artifacts carry MV's `media_type` —
+// `link | photo | video | audio | text | mixed | other` — and the deck
+// dispatches on that.
+//
+// Per Q-3 resolution: every released, badged artifact gets exported and
+// reaches this dispatch. For this phase only `media_type === 'link'` has a
+// real renderer (thumbnail + title + post_date + external open). Other
+// media types render a placeholder tile showing title and the media_type
+// label. New renderers fold in as needed without re-architecting the deck.
+
+// Deterministic span hint per artifact id so the grid layout doesn't reflow
+// between renders or between filter passes. 70% sm / 25% md / 5% lg, with
+// link cards biased slightly wider (2 columns) so thumbnails read.
+function pickSpan(seedStr, biasWide) {
+  let h = 2166136261;
+  for (let i = 0; i < seedStr.length; i++) {
+    h ^= seedStr.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  const r = ((h >>> 0) % 1000) / 1000;
+  const span_w = biasWide ? (r < 0.7 ? 2 : 1) : (r < 0.8 ? 1 : 2);
+  const span_h = r < 0.7 ? "sm" : r < 0.95 ? "md" : "lg";
+  return { span_w, span_h };
 }
 
-function ArtCard({ card }) {
+function LinkCard({ card }) {
+  const visStyle = card.thumbnail_url
+    ? {
+        backgroundImage: `url(${card.thumbnail_url})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }
+    : null;
   return (
     <>
-      <div className="hr-card-art-vis">
-        <div className="hr-card-art-circle" />
-      </div>
-      <div className="hr-card-foot hr-card-foot-dashed">
-        <div className="hr-card-title">{card.title}</div>
-        {card.credit && <div className="hr-card-credit">— <strong>{card.credit}</strong></div>}
-        {card.meta && <div className="hr-card-meta">{card.meta}</div>}
-      </div>
-    </>
-  );
-}
-
-function VideoCard({ card }) {
-  return (
-    <>
-      <div className="hr-card-video-vis">
-        {card.isLive && <div className="hr-card-video-live">live</div>}
+      <div className="hr-card-video-vis" style={visStyle ?? undefined}>
         <div className="hr-card-video-play">
           <div className="hr-card-video-play-tri" />
         </div>
-        {card.duration && <div className="hr-card-video-dur">{card.duration}</div>}
       </div>
       <div className="hr-card-foot">
-        <div className="hr-card-title">{card.title}</div>
-        {card.meta && <div className="hr-card-meta">{card.meta}</div>}
-        {card.isCover && card.credit && <div className="hr-card-credit">— {card.credit}</div>}
+        <div className="hr-card-title">{card.title || "(untitled)"}</div>
+        {card.post_date && <div className="hr-card-meta">{card.post_date}</div>}
       </div>
     </>
   );
 }
 
-function PressCard({ card }) {
-  return (
-    <div className="hr-card-press">
-      <div className="hr-card-press-source">{card.source}</div>
-      <div className="hr-card-press-pull">
-        <span className="hr-card-press-quote">“ </span>
-        {card.pull}
-        <span className="hr-card-press-quote"> ”</span>
-      </div>
-      <div className="hr-card-press-sub">{card.sub}</div>
-    </div>
-  );
-}
-
-function EssayCard({ card }) {
-  return (
-    <div className="hr-card-essay">
-      <div className="hr-card-essay-kind">{card.kind}</div>
-      <div className="hr-card-essay-title">{card.title}</div>
-      <div className="hr-card-essay-lede">{card.lede}</div>
-      {card.credit && <div className="hr-card-credit">— {card.credit}</div>}
-    </div>
-  );
-}
-
-function SessionCard({ card }) {
+function PlaceholderCard({ card }) {
+  // Non-link media types — render a minimal tile. The media_type label
+  // signals to the operator that a renderer is pending.
   return (
     <>
       <div className="hr-card-session-vis">
         <div className="hr-card-session-rect" />
       </div>
       <div className="hr-card-foot">
-        <div className="hr-card-title hr-card-title-sm">{card.title}</div>
-        <div className="hr-card-meta">{card.meta}</div>
+        <div className="hr-card-title hr-card-title-sm">{card.title || "(untitled)"}</div>
+        <div className="hr-card-meta">{card.media_type || "(unknown)"}</div>
       </div>
     </>
   );
 }
 
 function ArtifactCard({ card }) {
-  const isPress = card.render === "press";
-  const isEssay = card.render === "essay";
-  // Phase 1.5c: voice cards (HR_EXIT_FLOW) get a distinct visual treatment;
-  // cards with an externalUrl become clickable and open in a new tab.
-  const isVoice = card.contentClass === "voice";
-  const isLink = !!card.externalUrl;
+  const isLink = card.media_type === "link" && !!card.source_url;
+  const { span_w, span_h } = pickSpan(card.id || "", isLink);
   const baseStyle = {
-    ...spanStyle(card.span_w, card.span_h),
-    ...(isPress ? { borderLeft: `2px solid ${GOLD_LO}`, background: "transparent" } : {}),
-    ...(isEssay ? { background: INK_CARD_HI } : {}),
-    border: isPress ? undefined : `1px solid ${BORDER}`,
-    background: isPress ? "transparent" : (isEssay ? INK_CARD_HI : INK_CARD),
+    ...spanStyle(span_w, span_h),
+    border: `1px solid ${BORDER}`,
+    background: INK_CARD,
   };
-  const className = [
-    "hr-card",
-    "card-fade-in",
-    isVoice ? "hr-card-voice" : null,
-    isLink ? "hr-card-link" : null,
-  ].filter(Boolean).join(" ");
-  let inner;
-  switch (card.render) {
-    case "photo": inner = <PhotoCard card={card} />; break;
-    case "art": inner = <ArtCard card={card} />; break;
-    case "video": inner = <VideoCard card={card} />; break;
-    case "press": inner = <PressCard card={card} />; break;
-    case "essay": inner = <EssayCard card={card} />; break;
-    case "session": inner = <SessionCard card={card} />; break;
-    default: inner = null;
-  }
-  const badge = isVoice
-    ? <span className="hr-card-voice-badge">curator&rsquo;s note</span>
-    : null;
-  const chevron = isLink
-    ? <span className="hr-card-link-arrow" aria-hidden="true">↗</span>
-    : null;
+  const className = ["hr-card", "card-fade-in", isLink ? "hr-card-link" : null]
+    .filter(Boolean).join(" ");
   if (isLink) {
     return (
       <a
         className={className}
         style={baseStyle}
-        href={card.externalUrl}
+        href={card.source_url}
         target="_blank"
         rel="noopener noreferrer"
       >
-        {inner}
-        {badge}
-        {chevron}
+        <LinkCard card={card} />
+        <span className="hr-card-link-arrow" aria-hidden="true">↗</span>
       </a>
     );
   }
   return (
     <div className={className} style={baseStyle}>
-      {inner}
-      {badge}
+      <PlaceholderCard card={card} />
     </div>
   );
 }
@@ -907,7 +882,7 @@ function P3Panel({ matched, totalCount }) {
   return (
     <>
       <div className="hr-page-header">
-        <div className="hr-eyebrow">Weird.Baby · Hunter Root · {HR_CARDS.length} artifacts</div>
+        <div className="hr-eyebrow">Weird.Baby · Hunter Root · {ARTIFACTS.length} artifacts</div>
         <h1 className="hr-page-title">the artifact deck</h1>
         {/* Stage 3 (v28_3 deck shape, full column complement): page sub
             describes the deck a fan actually walks into — five base tabs
@@ -958,7 +933,7 @@ function TierContent({ dims, selected, toggle }) {
         {dims.map(dim => (
           <PillGroupColumn
             key={dim.key} group={dim.key} values={dim.values}
-            items={HR_CARDS} selected={selected} toggle={toggle}
+            items={ARTIFACTS} selected={selected} toggle={toggle}
           />
         ))}
       </div>
@@ -1012,7 +987,7 @@ function DeepTracksContent({ dims, selected, toggle, query, setQuery, focusSigna
                 <span className="hr-corral-empty">no tags match "{query}"</span>
               ) : hits.map(({ group, tag }, i) => {
                 const active = selected[group]?.has(tag) ?? false;
-                const count = countForPill(HR_CARDS, selected, group, tag);
+                const count = countForPill(ARTIFACTS, selected, group, tag);
                 const zero = !active && count === 0;
                 return (
                   <PillButton
@@ -1032,7 +1007,7 @@ function DeepTracksContent({ dims, selected, toggle, query, setQuery, focusSigna
             {dims.map(dim => (
               <PillGroupColumn
                 key={dim.key} group={dim.key} values={dim.values}
-                items={HR_CARDS} selected={selected} toggle={toggle}
+                items={ARTIFACTS} selected={selected} toggle={toggle}
               />
             ))}
           </div>
@@ -1413,26 +1388,39 @@ function _mkSel(groups) {
   for (const [k, vs] of Object.entries(groups)) out[k] = new Set(Array.isArray(vs) ? vs : [vs]);
   return out;
 }
-function _runMatch(sel) { return HR_CARDS.filter(i => matchFilter(i, sel)).length; }
+function _runMatch(sel) { return ARTIFACTS.filter(i => matchFilter(i, sel)).length; }
+
+// Audit assertions are written generically against the v5 tag-shape — they
+// use `tags[group]?.includes(slug)` so they're correct against any artifact
+// set without hardcoding HR-specific namespaces. AuditStrip remains dev-only
+// and is not rendered; the function is preserved for revival.
+function _itemCarries(item, group, slug) {
+  const arr = item?.tags?.[group];
+  return Array.isArray(arr) && arr.includes(slug);
+}
 
 function buildAuditResults() {
-  const N = HR_CARDS.length;
+  const N = ARTIFACTS.length;
   const tests = [];
   // 1. all off → full catalog
   const t1 = _runMatch(_mkSel({}));
   tests.push({ id: 1, name: "all off → full catalog", expected: N, actual: t1, pass: t1 === N });
-  // 2. era: solo alone → carries solo
-  const expected2 = HR_CARDS.filter(i => i.era === "solo").length;
-  const t2 = _runMatch(_mkSel({ era: "solo" }));
-  tests.push({ id: 2, name: "era: solo alone", expected: expected2, actual: t2, pass: t2 === expected2 });
-  // 3. era within-group OR (medusas + solo)
-  const expected3 = HR_CARDS.filter(i => i.era === "medusas" || i.era === "solo").length;
-  const t3 = _runMatch(_mkSel({ era: ["medusas", "solo"] }));
-  tests.push({ id: 3, name: "era: medusas OR solo", expected: expected3, actual: t3, pass: t3 === expected3 });
-  // 4. across-group AND (era=medusas AND src=archive)
-  const expected4 = HR_CARDS.filter(i => i.era === "medusas" && i.src === "archive").length;
-  const t4 = _runMatch(_mkSel({ era: "medusas", src: "archive" }));
-  tests.push({ id: 4, name: "era=medusas AND src=archive", expected: expected4, actual: t4, pass: t4 === expected4 });
+  // Tests 2-4 sample the first discovered dimension; if no dimensions exist
+  // (e.g., before the first export populates the exhibit JSON), the sample
+  // tests are reported as trivially passing.
+  const firstDim = HR_DIMENSIONS[0];
+  const sampleSlug = firstDim?.values?.[0] ?? null;
+  const sampleSlug2 = firstDim?.values?.[1] ?? null;
+  if (firstDim && sampleSlug) {
+    const expected2 = ARTIFACTS.filter(i => _itemCarries(i, firstDim.key, sampleSlug)).length;
+    const t2 = _runMatch(_mkSel({ [firstDim.key]: sampleSlug }));
+    tests.push({ id: 2, name: `${firstDim.key}: ${sampleSlug} alone`, expected: expected2, actual: t2, pass: t2 === expected2 });
+    if (sampleSlug2) {
+      const expected3 = ARTIFACTS.filter(i => _itemCarries(i, firstDim.key, sampleSlug) || _itemCarries(i, firstDim.key, sampleSlug2)).length;
+      const t3 = _runMatch(_mkSel({ [firstDim.key]: [sampleSlug, sampleSlug2] }));
+      tests.push({ id: 3, name: `${firstDim.key}: within-group OR`, expected: expected3, actual: t3, pass: t3 === expected3 });
+    }
+  }
   const allPass = tests.every(t => t.pass);
   return { tests, allPass, catalogSize: N };
 }
@@ -1520,7 +1508,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
 
   // Tag filters narrow the catalog. Kaleidoscope recipe is dormant in v1.
   const tagFiltered = useMemo(
-    () => HR_CARDS.filter(c => matchFilter(c, selected)),
+    () => ARTIFACTS.filter(c => matchFilter(c, selected)),
     [selected]
   );
   const finalMatched = tagFiltered;
@@ -1672,7 +1660,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
         {HR_DIMENSIONS.map(dim => (
           <PillGroupColumn
             key={dim.key} group={dim.key} values={dim.values}
-            items={HR_CARDS} selected={selected} toggle={toggle}
+            items={ARTIFACTS} selected={selected} toggle={toggle}
           />
         ))}
       </div>
@@ -1684,7 +1672,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
              style={{ ...S.panelPos(deckPx), position: "absolute" }}
              onClick={panelClickHandler}>
           <div className="wb-scroll hr-panel-scroll">
-            <P3Panel matched={finalMatched} totalCount={HR_CARDS.length} />
+            <P3Panel matched={finalMatched} totalCount={ARTIFACTS.length} />
           </div>
         </div>
 
