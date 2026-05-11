@@ -39,8 +39,7 @@ const VOCAB_CSV_PATH = resolve(REPO_ROOT, "docs/deep-dive-vocabulary.csv");
 
 const SQL_QUERY = `SELECT a.id, a.tags, a.notes
 FROM artifacts a
-WHERE a.status = 'released'
-  AND a.archived_at IS NULL
+WHERE a.status = 'released'
   AND a.parent_artifact_id IS NULL
   AND a.source_platform = 'youtube'
   AND EXISTS (
@@ -256,7 +255,7 @@ async function main() {
   const output = {
     metadata: {
       exported_at: new Date().toISOString(),
-      filter: "released, not archived, scope:hunter_root, youtube parents",
+      filter: "released, scope:hunter_root, youtube parents",
       vocabulary_csv_sha: vocabularyCsvSha(),
     },
     cards: result.cards,
