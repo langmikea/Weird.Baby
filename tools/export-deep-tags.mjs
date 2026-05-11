@@ -39,7 +39,7 @@ const VOCAB_CSV_PATH = resolve(REPO_ROOT, "docs/deep-dive-vocabulary.csv");
 
 const SQL_QUERY = `SELECT a.id, a.tags, a.notes
 FROM artifacts a
-WHERE a.status = 'released'
+WHERE a.status = 'released'
   AND a.parent_artifact_id IS NULL
   AND a.source_platform = 'youtube'
   AND EXISTS (

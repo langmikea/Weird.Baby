@@ -1,0 +1,17 @@
+# Force LF on all text files regardless of platform.
+# Cowork (Linux) and Mike (Windows) co-author this repo; without this,
+# files churn CRLF<->LF on every cross-platform commit.
+* text=auto eol=lf
+
+# Explicit binary handling (just to be safe; git usually detects these).
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.pdf binary
