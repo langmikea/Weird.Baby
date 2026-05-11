@@ -125,6 +125,10 @@ Mike pre-approves the entire flow when he says "push" — drive end-to-end witho
 
 Use `--dry-run` to see what would be exported without writing. Use `--verbose` to see the SQL query and per-card details.
 
+### Cross-platform native dependencies
+
+Any npm package with a native compiled component (currently `better-sqlite3`) requires `prebuild-install` in `devDependencies` so the operator's machine can fetch pre-built binaries on install without needing Visual Studio Build Tools. The cowork sandbox builds for Linux; Mike's Windows machine needs its own platform-specific binary. If a "not a valid Win32 application" error appears at runtime on Windows, `npm rebuild <package-name>` is the local fix on the operator's side.
+
 ## Cowork sandbox quirks (READ THIS)
 
 The FUSE mount has multiple defects that cost real time. Work around them:
@@ -137,6 +141,8 @@ The FUSE mount has multiple defects that cost real time. Work around them:
    with open(path, 'wb') as f: f.write(data)
    ```
 
+   Related manifestation: bash views of files in the FUSE mount may show truncated content even when the `Read` tool sees full content for the same path — the host-side (Windows) file is usually intact, the bash view is the unreliable one. When pre-flighting (`wc -c`, `tail -3`) the file looks wrong via bash, cross-check via the `Read` tool before assuming the file on disk is broken. Verified at PR #14 (Phase 3 session, 2026-05-10): `CLAUDE.md` read fine via Read but bash `tail -3` cut off mid-word; on-disk content was intact. When this hits, don't read-modify-write via Python — construct fresh content from the Read-tool view and write-only via the rm+write pattern.
+
 2. **CRLF line endings.** Files on Windows disk are CRLF; the FUSE mount preserves them. `sed` and Python regex matching needs to handle both LF and CRLF. Pattern:
    ```python
    if old_b in data: data = data.replace(old_b, new_b)
@@ -147,34 +153,43 @@ The FUSE mount has multiple defects that cost real time. Work around them:
 
 4. **Slashed branch names fail** (see above). The sandbox can't `mkdir` under `.git/refs/heads/`.
 
-5. **Build needs a manual symlink.** The rolldown native binary is nested wrong for Linux:
+5. **Build needs a manual symlink.** The rolldown native binary is nested wrong for Linux. The lookup path is `node_modules/rolldown/dist/rolldown-binding.linux-x64-gnu.node` (one directory level deeper than `node_modules/rolldown/`):
    ```bash
-   ln -sf ../@rolldown/binding-linux-x64-gnu/rolldown-binding.linux-x64-gnu.node \
-     node_modules/rolldown/rolldown-binding.linux-x64-gnu.node
+   ln -sf ../../@rolldown/binding-linux-x64-gnu/rolldown-binding.linux-x64-gnu.node \
+     node_modules/rolldown/dist/rolldown-binding.linux-x64-gnu.node
    ```
-   Run this before `npm run build` if you're getting `Cannot find module '../rolldown-binding.linux-x64-gnu.node'`. The symlink is gitignored and harmless on Mike's Windows side.
+   Run this before `npm run build` if you're getting `Cannot find module '../rolldown-binding.linux-x64-gnu.node'`. The symlink is gitignored and harmless on Mike's Windows side. Verified at PR #14 (Phase 3 session, 2026-05-10) — earlier path documentation was off by one directory level.
 
 6. **Sandbox `git status` can desync after heavy activity.** If you see "No commits yet" or every file as "new", the sandbox view is broken — Mike's actual git state on disk is fine. Verify by asking Mike to run `git status` in PowerShell, or by using the `Read` tool (which reads the Windows path directly, separate from the FUSE git view).
 
 7. **CRLF false positives in `git status`.** On a freshly-mounted repo, `git status` may show every routing-file CSS/JSX as `M` due to CRLF round-tripping through FUSE. Verify with `git diff --ignore-cr-at-eol --stat`; if empty, it's noise — proceed with explicit `git add` paths to keep the noise out of your commit.
 
-8. **FUSE mangles `git init` — multiple symptoms in one operation.** Discovered 2026-05-08 during MediaVault repo initialization. `git init` from inside a FUSE-mounted directory may produce a broken `.git/` in two distinct ways simultaneously:
-   - `.git/config` is written as null bytes (54 bytes of `\x00`) from bash's view, while the host-side filesystem shows partial valid content. Same root cause as quirk #1 (FUSE Edit truncation), but applied to git's atomic `.lock`-rename pattern instead of the Edit tool.
-   - `.git/objects/` is not created at all. Without it, `git status` reports "not a git repository." Subdirectories `info/` and `pack/` are also missing.
+8. **FUSE mangles git's internal files — multiple symptoms across multiple triggers.** Originally discovered 2026-05-08 during MediaVault `git init`; further manifestations surfaced at PR #14 (2026-05-10) during normal session work. The common root cause is the same as quirk #1 (FUSE byte-preservation / truncation), but applied to git's atomic `.lock`-rename writes rather than the Edit tool. The trigger is not only `git init` — it can fire on session mount and on any git operation that rewrites internal files atomically (`git stash`, branch ops, etc.).
 
-   Symptoms after a fresh `git init`: `git status` errors immediately; `cat .git/config` returns nulls; `ls .git/objects/` reports no such file or directory.
+   Known manifestations:
+   - **`.git/config` written as null bytes** (54 bytes of `\x00`) from bash's view on a fresh `git init`, while the host-side filesystem shows partial valid content. Fix: rewrite `.git/config` via the rm+write Python pattern from quirk #1.
+   - **`.git/objects/` missing entirely** after `git init`. Without it, `git status` reports "not a git repository." Subdirectories `info/` and `pack/` are also missing. Fix: `mkdir -p .git/objects/info .git/objects/pack`.
+   - **`.git/HEAD` arriving with trailing null bytes on session mount** (e.g. 34 bytes instead of 21, with `\x00` padding after `ref: refs/heads/main\n`). Symptom: `git rev-parse HEAD` errors with "Failed to resolve HEAD as a valid ref" / "ambiguous argument 'HEAD'"; `git status` may also error. Fix: rm+write Python pattern with a clean `ref: refs/heads/main\n` (21 bytes).
+   - **`.git/index` corrupted by `git stash` (or other atomic-rewrite ops)**. Symptom: "bad signature 0x00000000" or "index file corrupt". Fix: `rm .git/index && git read-tree HEAD` to rebuild the index from the committed tree. No working-tree changes are lost — `git read-tree HEAD` only rewrites the staging area.
 
-   Workaround:
+   Symptoms appear immediately: `git status` errors; `cat` of the file returns nulls; `git rev-parse HEAD` fails; `xxd .git/HEAD | head` shows trailing `00`s.
+
+   Workaround (general pattern):
    ```bash
-   # Write .git/config via the rm+write Python pattern (bash-side won't trust the host write).
+   # Write the broken file via the rm+write Python pattern (bash-side won't trust the host write).
    # Use the same Python rm+write block from quirk #1.
 
-   # Then create the missing object directories manually:
+   # If `.git/objects/` is missing, create it manually:
    mkdir -p .git/objects/info .git/objects/pack
 
+   # If `.git/index` is corrupt, rebuild it from HEAD:
+   rm .git/index
+   git read-tree HEAD
+
    # Verify:
-   git status   # should now report a clean repo
-   git fsck --full  # should be silent / no errors
+   git status      # should now report a clean repo
+   git rev-parse HEAD
+   git fsck --full # should be silent / no errors
    ```
 
    Additional constraint: the host-side `Edit` and `Write` tools refuse `.git/` paths ("resolves to a protected location"). All `.git/` writes must go through bash via FUSE — which is the layer that breaks. The rm+write Python pattern is the only reliable path.
