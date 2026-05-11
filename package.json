@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "npm run build && wrangler dev",
     "deploy": "npm run build && wrangler deploy",
-    "export-deep-tags": "node tools/export-deep-tags.mjs"
+    "export-artifacts": "node tools/export-artifacts.mjs"
   },
   "dependencies": {
     "react": "^19.2.4",
