@@ -2,57 +2,95 @@
 
 **Status:** Authoritative. Read this before any work that touches museum tag vocabulary, pill columns, or artifact categorization.
 
-**Provenance:** Locked over a full day of iterative UX prototyping in April 2026, ending at controls-dock prototype v17 (and carried forward through v27/v28 in `prototypes/prototype_a_v28_3.html`). Captured in `docs/canonical/UX_CONTROLS_SPEC_v0.3.md` §§2, 4.8 and Appendix A. Re-confirmed by the operator in May 2026 after the deep-dive-review spec arc (v3 through v5.2) repeatedly drifted from this structure.
+**Provenance:** Locked across multiple sessions of iterative UX prototyping in April–May 2026, culminating in the v28_3 controls-dock prototype and confirmed in the May 11 2026 canonical recovery session.
 
 ## The three tiers
 
-Pill columns in the museum's exhibit deck are organized into three tiers, each presented as a tab in the controls dock.
+The museum's exhibit deck organizes pill columns into three tabs. Each tab is a tier with a different shape and intent.
 
-### Tier 1 — Artist Info
+### Tier 1 — ARTIST (locked membership)
 
-- **era** — temporal/identity grouping
-- **album** — album name / collection
-- **song** — song title
-- **people** — people involved (artist, band members, collaborators, etc.)
+Fixed list of five groups, in this order:
 
-### Tier 2 — Media Formats
-
-- **format** — physical/digital format (vinyl, CD, mp3, etc.)
-- **media** — media type (audio, video, image, text)
-- **provenance** — source (official, fan-recorded, bootleg, etc.)
-- **type** — content type (studio recording, live show, interview, etc.)
-
-### Tier 3 — Deep Tracks
-
+- **year** — calendar year
+- **album** — release / album name
+- **song** — song / track title
 - **venue** — physical or virtual venue
-- **year** — calendar year (may be redundant with era; both kept for filter flexibility)
-- **mood** — emotional/atmospheric tag
-- **odds** — folksonomy sand slot for uncategorized tags
+- **people** — people involved (artist, band members, collaborators)
+
+### Tier 2 — MEDIA (locked membership)
+
+Fixed list of two groups:
+
+- **source** — typically the URL owner or contributor (FB, YT, website owner, etc.)
+- **type** — video, photo, mp3, social media, PDF, website, etc.
+
+### Tier 3 — DEEP DIVE (dynamic membership)
+
+**The catch-all tier.** Every tag whose namespace isn't in Tier 1 or Tier 2 lands here.
+
+- **Membership is dynamic.** Whatever tag namespaces appear in the data that aren't in Tier 1 or Tier 2 become groups in Tier 3.
+- **Group ordering within Tier 3:** by hit count (most-used first), tiebreak alphabetical.
+- **Category label displayed to visitors:** "Deep Signals"
+- **Operator can add and rename groups over time** without code changes. Renames happen via the site's display-name lookup mechanism (the same one used elsewhere for slug-to-display-name translation).
+- **Structural parity:** Tier 3's pill rendering, filter behavior, and search integration are identical to Tiers 1 and 2. Only the membership rule differs (dynamic-from-data versus locked-list).
+
+Example: if the data contains `mood:snarky`, `mood:defiant`, `motif:pink-hats`, then Tier 3's groups would be `mood` (2 hits) and `motif` (1 hit), in that order.
 
 ## Routing tag (not a pill column)
 
-- **exhibit** — routing tag identifying which exhibit(s) an artifact belongs in. Used by the museum's export to discover exhibits and populate per-exhibit JSON files. Stripped from artifact records before pill columns are computed at render time, per `docs/deep-dive-review/SPEC_DRAFT_v5_2.md` §3. NEVER rendered as a visitor-facing pill column.
+- **exhibit** — routing tag identifying which exhibit(s) an artifact belongs in. Used by the museum's export to discover exhibits and populate per-exhibit JSON files. Stripped from artifact records before pill columns are computed at render time, per `SPEC_DRAFT_v5_2.md` §3. NEVER rendered as a visitor-facing pill column.
+
+## Tab labels (visitor-facing)
+
+The three tabs render in uppercase via CSS:
+
+- **ARTIST**
+- **MEDIA**
+- **DEEP DIVE**
+
+Internal code may use lowercase or other variants; visitor-facing CSS uppercases them.
+
+## Display names
+
+All visitor-facing labels — tab labels, group labels within each tier, individual pill labels — come from a display-name lookup table. The lookup maps internal slugs to human-readable text. This means:
+
+- Renaming any group (e.g., "Mood" → "Vibes") is a lookup-table edit, not a code change.
+- Renaming any pill value (e.g., "hunter_root" → "Hunter Root") is a lookup-table edit.
+- Adding a new Tier 3 group (because new tag data appeared) requires only that the lookup table have a display name for it; the group surfaces automatically once data exists.
+
+The exact storage shape of the lookup is implementation-detail (could be a DB table, a CSV column, or inlined defaults). It is *not* the deep-dive-vocabulary CSV — that file is legacy and its role has been narrowed (see "Legacy" below).
 
 ## Authority
 
-- This document is canon.
-- The `docs/deep-dive-review/` spec arc (v3 through v5.2) describes architecture, not vocabulary. Where any spec mentions specific tag categories, they must match this document.
-- `SPEC_DRAFT_v5.md` §3.3 example output and `SPEC_DRAFT_v5_2.md` §3 example tags use `motif`, `theme`, `texture` — these were Ops-author inventions and are NOT canonical. Use the three-tier structure above.
-- MV's `tags` table currently uses different categories (`bands`, `content_kind`, `topic`, `platform`, etc. — see `MediaVault/SPEC.md` §6 and §2.1). The MV-side categories are MV's internal classification; the museum's pill columns derive from the namespaces in `artifacts.tags`, which need to match the canonical vocabulary above.
+- This document is canon. All other vocabulary descriptions in the repo are either implementation detail or historical record, not authority.
+- The `docs/deep-dive-review/` spec arc describes architecture, not vocabulary. Where any spec mentions specific tag categories, this document supersedes.
+- MV's `tags` table currently uses different categories (`bands`, `content_kind`, `topic`, `platform`, etc. — see `MediaVault/SPEC.md` §6). The MV-side categories are MV's internal classification; the museum's pill columns derive from the namespaces in `artifacts.tags`, which need to follow the structure in this document.
 
-## What this means for curation
+## Legacy
 
-When tagging a museum-bound artifact in MV:
+The following are historical and not canonical:
 
-- The artifact's `tags` array should contain `<namespace>:<value>` strings where namespace is one of: `era`, `album`, `song`, `people`, `format`, `media`, `provenance`, `type`, `venue`, `year`, `mood`, `odds`, `exhibit`.
-- Additional non-canonical namespaces (legacy: `scope`, `content_kind`, `platform`, `author`) may be present in MV for MV's own purposes; the export will surface them as pill columns under strict tag equality, but they should be considered legacy and gradually consolidated into the canonical structure.
+- **`docs/deep-dive-vocabulary.csv`** — defined `mood`, `motif`, `theme`, `texture` as the four "Deep Dive" groups during the v3-v5.2 spec arc. That arc drifted from this document; the CSV is retained for git-history continuity but no longer drives the museum's pill columns. Future cleanup may retire it.
+- **MV-side namespaces in `artifacts.tags`** including `scope`, `content_kind`, `platform`, `author` — these came from MV's classification system and predate the canonical museum vocabulary. Under strict tag equality, they currently surface as pill columns. Operator decision pending: coexist, strip-on-export, or migrate. See `SPEC_DRAFT_v5_2.md` Q-5 follow-up.
 
 ## What this means for code
 
-The museum's deck (`HrExhibitFlow.jsx` + `hr_dimensions.js`) discovers pill columns dynamically from artifact tag namespaces. This means the code does not enforce the canonical vocabulary — it renders whatever's there. Discipline is operator-side: tag artifacts only with canonical namespaces.
+The museum's deck (`HrExhibitFlow.jsx` + `hr_dimensions.js`) currently uses a heuristic `TIER_BY_NAMESPACE` to assign namespaces to tiers. **The heuristic needs to match this document.** Specifically:
 
-Future work item: a validation step (in the export or as a CI check) that warns if an artifact's tags include non-canonical namespaces.
+- Tier 1 must contain: year, album, song, venue, people
+- Tier 2 must contain: source, type
+- Tier 3 catches everything else (default)
+- `exhibit` is stripped before tier assignment
+
+The current heuristic in `b29f9fe` does not match this. A follow-up commit will fix it — separate from this documentation commit.
 
 ## Source
 
-The structure above was determined by full-day iterative UX prototyping ending at controls-dock prototype v17, locked by operator decision. The tier names and group counts are reflected in `docs/canonical/UX_CONTROLS_SPEC_v0.3.md` §§2 and 4.8; the per-tier namespace lists are reflected in the JS constants of `prototypes/prototype_a_v28_3.html` (`ERAS`, `ALBUMS`, `SONGS`, `PEOPLE`, `FORMATS`, `MEDIA`, `PROVENANCE`, `TYPES`, `VENUES`, `ODDS`). This document consolidates both into a single authoritative reference after multiple spec sessions failed to honor it.
+The structure above is the resolution of a recovery session on 2026-05-11 after the operator pointed out that the deep-dive-review spec arc had drifted from a previously-locked UX design. Sources consulted during recovery:
+
+- `prototypes/prototype_a_v28_3.html` — v28_3 controls-dock prototype constants
+- `docs/canonical/UX_CONTROLS_SPEC_v0.3.md` — tab framing
+- Chat history: the April 22-23 v17 prototyping session, the May 3 v28_3 commit session ("11 dimensions canonical"), the April 24 PowerShell retrieval-bundle session (Tier 3 extension proposal), the May 1 v49 Dog-barking session, and the May 11 recovery conversation that produced this final structure.
+
+The structure here corrects errors in the initial recovery (commit `2236e64`).
