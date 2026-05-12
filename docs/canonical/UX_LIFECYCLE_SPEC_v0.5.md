@@ -1,10 +1,10 @@
-# Museum UX Lifecycle Spec, v0.4 (reconciled)
+# Museum UX Lifecycle Spec, v0.5 (reconciled, design-reviewed)
 
 **Date:** 2026-05-12
-**Status:** Reconciled with canonical docs. Operator review pending.
-**Authority:** This spec extends and integrates `UX_SPEC_v0.3.md`, `VISION_LOCK_v0.3.md`, `UX_CONTROLS_SPEC_v0.3.md`, and `CANONICAL_VOCABULARY.md`. Where they speak, they are authority. This spec adds what they don't say.
+**Status:** Design review against `DATA_WORKFLOW_SPEC_v0.2.md` complete. Operator review pending.
+**Authority:** This spec extends and integrates `UX_SPEC_v0.3.md`, `VISION_LOCK_v0.3.md`, `UX_CONTROLS_SPEC_v0.3.md`, `CANONICAL_VOCABULARY.md`, and `DATA_WORKFLOW_SPEC_v0.2.md`. Where they speak, they are authority. This spec adds what they don't say.
 
-**Supersedes:** The draft `UX_LIFECYCLE_SPEC.md` from earlier in this session, which reinvented material already covered by the canonical docs. This v0.4 is the proper place for it.
+**Supersedes:** UX_LIFECYCLE_SPEC_v0.4 (corrected for conflicts surfaced during design review against the data workflow spec, 2026-05-12).
 
 ---
 
@@ -26,7 +26,7 @@ This principle is the through-line of the entire system. Every other section of 
 
 The system MUST support every one of these. They are not negotiable.
 
-1. **Operator-editable vocabulary at runtime.** Add, rename, reorder, retire categories and tags without code changes or redeploys.
+1. **Operator-editable vocabulary at runtime.** Add, rename, reorder, retire categories and tags without code changes or redeploys. (Here, "retire" means stop offering as a selectable tag; it does not put the vocabulary entry through the artifact-lifecycle RETIRE. See §4.3.)
 2. **Multi-exhibit membership.** A single artifact assignable to multiple exhibits simultaneously.
 3. **Reversibility of every stage transition except DELETE.** Every state change must be undoable.
 4. **Durable in-progress state.** Artifacts persist in any stage indefinitely (e.g., sit in CURATE for weeks).
@@ -43,22 +43,22 @@ The system MUST support every one of these. They are not negotiable.
 
 Every artifact moves through these stages. Stages are operator-observable but **not necessarily operator-driven**: some transitions are temporal, computed from data the operator sets.
 
-| Stage | What it means | Who/what advances it |
-|---|---|---|
-| **ACQUIRE** | An artifact source is identified | Operator |
-| **INTAKE** | The artifact enters the system with provisional identity | Operator action; system assigns stable identity |
-| **CURATE** | Tags, descriptions, exhibit assignments, born-on date | Operator |
-| **PUBLISH** | Born-on date is past; artifact becomes visitor-visible | System (temporal) |
-| **LIVE** | Artifact is being served to visitors | System |
-| **REVISE** | Operator adjusts a live artifact's tags/metadata | Operator |
-| **RETIRE** | Retirement date is reached, or operator sets retirement tag | System (temporal) or operator |
-| **DELETE** | Operator soft-deletes; artifact is relocated, retrievable later | Operator |
+| Stage | What it means | Advances by | Operator UX surface |
+|---|---|---|---|
+| **ACQUIRE** | An artifact source is identified | Operator intent | None (mental act) |
+| **INTAKE** | The artifact enters the system with stable identity. Atomic — either succeeds, or no record exists. | Operator action; system assigns identity | URL paste or file upload |
+| **CURATE** | Tags, descriptions, exhibit assignments, born-on date | Operator | Curation editor (all fields editable) |
+| **PUBLISH** | Born-on date is past or present; artifact becomes visitor-visible | System (temporal) | None — data-driven |
+| **LIVE** | Artifact is being served to visitors | System | None — data-driven |
+| **REVISE** | Operator adjusts a live artifact's tags/metadata | Operator | Same curation editor |
+| **RETIRE** | Retirement date is past or present | System (temporal); operator presses "retire" button which sets the date to now | Retire action (sets date) |
+| **DELETE** | Operator soft-deletes; artifact is relocated. Restoration is an out-of-band operator action, not part of curation | Operator | Delete action; restoration is Ops-only |
 
-**Key property:** PUBLISH and RETIRE are **data, not actions**. The operator sets a born-on date; the system honors it. No "publish" button. No "retire" event. Hands-off, end-to-end lifecycle management.
+**Key property:** PUBLISH and RETIRE are **data, not actions**. The operator sets a date (or presses a button that sets the date); the system honors the date. No standalone "publish" event. No standalone "retire" event. Hands-off, end-to-end lifecycle management.
 
-**Multi-exhibit consistency:** When an artifact appears in multiple exhibits, all exhibits read the same born-on and retirement dates. There is no per-exhibit publication state.
+**Multi-exhibit consistency:** When an artifact appears in multiple exhibits, all exhibits read the same born-on and retirement dates. There is no per-exhibit publication state. **Per-exhibit removal happens by editing the exhibit-badge tag set in CURATE/REVISE**, not by retirement (which is global).
 
-Stages are not strictly sequential beyond INTAKE. An artifact can be REVISED while LIVE, RETIRED then un-retired (back to LIVE), and so on. DELETE is the only one-way door (and even that is soft, with relocation to a separate storage location).
+Stages are not strictly sequential beyond INTAKE. An artifact can be REVISED while LIVE, RETIRED then un-retired (back to LIVE), and so on. DELETE is the only one-way door at the operator-UX level — soft-deleted artifacts leave the curation surface and require out-of-band operator action to restore. Hard-delete (truly destroying the artifact) is Ops-only, never an operator-UX action.
 
 ---
 
@@ -136,13 +136,15 @@ F=ma. Even the home page is data, not code.
 
 Every category, every tag value, every tier assignment, every display name is a **row in the system's data** — never a hardcoded string in code.
 
-The operator adds, renames, reorders, and retires vocabulary entries at runtime via the operator's curation surface (separate spec — see open questions §6).
+**Vocabulary management is a visible UX surface** (locked per `DATA_WORKFLOW_SPEC §3.3`, 2026-05-12). The operator can add, rename, reorder, and retire categories and tags through a visible operator surface — not by editing config files, not by tagging an artifact with a never-before-seen namespace and hoping it springs into existence.
 
-**Renames preserve identity:** when the operator renames a tag (e.g., "Mood" → "Vibes"), every artifact already tagged with it follows the rename. The rename changes a single row's display value; the underlying identity is stable.
+**Vocabulary entry identity is a stable internal ID.** (Locked 2026-05-12.) Every vocabulary entry — every category, every tag value — carries an internal ID separate from its slug and its display name. Both slug and display name are operator-editable. Artifacts reference the ID, not the slug. Renames are true renames: change "Mood" to "Vibes" and every artifact already tagged with it follows automatically. The slug is internal plumbing; the display name is what visitors see; the ID is what artifacts carry.
 
-**Vocabulary entries are not lifecycle objects.** Tags do not have stages, born-on dates, or retirement. The system may *choose to exclude* certain tag values from rendering (for instance, the `exhibit` namespace is a routing tag, never shown as a pill column). That exclusion is system behavior, not tag state. Tags belong to the artifacts that carry them; the artifact's tag set is sovereign and is never modified by system-level decisions about how to use those tags.
+**"Retire" a vocabulary entry** means: stop offering it as a selectable tag in the operator's curation surface and stop surfacing its pill in visitor-facing tiers going forward. Artifacts that already carry the tag keep it (sovereign tag set; see `DATA_WORKFLOW_SPEC §2.3`). Vocabulary entries do not themselves enter the eight-stage lifecycle — "retire" here is a tag-level visibility action, distinct from the artifact-lifecycle RETIRE.
 
-**Implication for current code:** the museum's deck currently uses a hardcoded `TIER_BY_NAMESPACE` heuristic in `hr_dimensions.js`. This is drift from the invariant. A future commit must replace the heuristic with a data-driven lookup.
+**Sovereign tag set:** Tags belong to the artifacts that carry them. The system may *choose to exclude* certain tag values from rendering (for instance, the `exhibit` namespace is a routing tag, never shown as a pill column). That exclusion is system behavior, not tag state. The artifact's tag set is never modified by system-level decisions about how to use those tags.
+
+**Implication for current code:** the museum's deck currently uses a hardcoded `TIER_BY_NAMESPACE` heuristic in `hr_dimensions.js`. This is drift from the invariant. Per the compare-pass backlog item B-1, a future commit replaces the heuristic with a data-driven lookup. The lookup table must carry stable IDs as the primary key.
 
 ### §4.4 — Born-on and retirement dates as data
 
@@ -164,9 +166,9 @@ A preset is a curated configuration of the museum: a filter state, a sort order,
 
 A preset is **an artifact**. It carries tags. It has identity. It can be featured, shared, scheduled, retired — through the same mechanisms as any other artifact.
 
-A preset is a **single slice** — one filter configuration. Sequencing happens by chaining presets ("next" preset).
+A preset is a **single slice** — one filter configuration. There is no chaining mechanism. To move from one preset to another, the visitor clicks another preset; the system does not sequence them. (Locked 2026-05-12.)
 
-Presets are **shareable**. A visitor can share a preset URL with another visitor. Sharing produces a visitor experience: arriving at the URL opens the museum in the preset's configured state.
+Presets are **shareable**. A visitor can share a preset URL with another visitor. The URL is a cryptic but stable short ID (e.g., `weird.baby/p/k7x9q2m`); the system resolves it to the preset's stable internal identity. Sharing produces a visitor experience: arriving at the URL opens the museum in the preset's configured state.
 
 Presets enable the "Experiential Playlist" — a curated end-to-end museum exhibit experience that includes the curator's own narrative.
 
@@ -228,21 +230,29 @@ The compare itself is a separate Cowork session. This spec is the destination; t
 
 ## §6 — Open Questions Surfaced by This Spec
 
-For the system architect (Cowork or operator) to answer:
+For the operator (and the architect, where the answer is implementation-shaped) to answer.
 
-1. **Are notes themselves artifacts?** UX treats them as attached-to-artifact contributions (VISION_LOCK §C-05 contribution shell suggests yes). Under F=ma, the answer should be yes — notes are tagged artifacts with `attaches-to:<artifact-id>` tag. Implementation must be explicit.
+### Architectural decisions
 
-2. **How does the system store and retrieve attached content** (fan-submitted photos, precious-archive captures) versus referenced content (URLs to external sources)? The data architecture must distinguish.
+*(none currently open — all surfaced architectural questions are now locked)*
 
-3. **How are visitor-shared preset URLs structured** to preserve the preset's identity without exposing internal IDs?
+### Closed decisions (logged for audit)
 
-4. **What's the migration story for the museum's currently-hardcoded vocabulary** to the data-driven model this spec requires? The current code's `TIER_BY_NAMESPACE` heuristic, slug-to-titlecase rendering, and hardcoded tab labels all need to migrate.
+- **Vocabulary management surface** → Visible UX surface. Locked in `DATA_WORKFLOW_SPEC §3.3` (2026-05-12).
+- **Vocabulary entry identity** → Stable internal ID per vocabulary entry. Slug and display name are both operator-editable; artifacts reference the ID. True renames. (§4.3, locked 2026-05-12.)
+- **Are notes themselves artifacts?** → Yes. Under F=ma, notes are tagged artifacts with an `attaches-to:<artifact-id>` tag (or similar relation tag). The schema for the relation tag is in the system architect's scope; the F=ma answer is locked. (Closed 2026-05-12 by F=ma authority.)
+- **Vocabulary migration story** → Captured in compare-pass backlog item B-1 (vocabulary-as-data refactor). No longer an open question — it's a scheduled work item. (Closed 2026-05-12.)
+- **Source preservation "permits" interpretation.** Interpreted technically (can the bytes be fetched?). Policy decisions about *whether to preserve* a fetchable source are operator decisions, applied per-source. (Closed 2026-05-12.)
+- **Curation tool design** — out of scope for this spec. Downstream design pass against the invariants. (Marked as scope clarification, not a question.)
+- **Sandbox-as-UX-surface** → Removed. Code testing happens in dev before reaching the museum. There is no parallel render target the operator visits. CLAUDE.md release discipline carries the authoritative rules. (Closed 2026-05-12.)
+- **Visitor preset URL structure** → Cryptic but stable short IDs, e.g., `weird.baby/p/k7x9q2m`. The URL is opaque to the visitor; the system resolves it to the preset's stable internal ID. (Closed 2026-05-12.)
+- **Preset chaining** → There is no chaining mechanism. A preset is a single slice. To move to another slice, the visitor clicks another preset. Presets are independent artifacts; no sequencing is baked into the system. (Closed 2026-05-12.)
 
-5. **What's the operator's curation tool design?** This spec specifies capabilities for the operator (saving partial work, durable state, runtime vocabulary editing, etc.) but does not design the UI. That's a downstream design pass against this spec's invariants.
+### Deferred items (in scope but not yet driven)
 
-6. **What's the journal lifecycle from `SESSION_CAPTURE_PANEL2.md` (archived)** — compose → 10s undo → commit → vote → delete? Does this still apply? If so, it should be promoted out of archive into a canonical doc.
+- **The journal lifecycle from `SESSION_CAPTURE_PANEL2.md` (archived)** — compose → 10s undo → commit → vote → delete? Does this still apply? If so, it should be promoted out of archive into a canonical doc. (Status: deferred, awaiting operator decision on canonical placement.)
 
-7. **What's the visitor's "preset chaining" experience?** A preset is a single slice; sequencing happens by chaining. Is chaining a property of the preset (preset A names preset B as "next")? Or a session-level construct? UX behavior is implied; mechanism is open.
+- **Notes lifecycle integration.** Notes are artifacts (closed above), but their detailed lifecycle (visitor INTAKE flow, optional curation review, attribution rules) is not yet in either UX or data spec. Needs follow-up section in both.
 
 ---
 
@@ -271,4 +281,4 @@ After reading all five, you have the complete UX specification of the museum.
 
 ---
 
-*End of UX_LIFECYCLE_SPEC_v0.4.md.*
+*End of UX_LIFECYCLE_SPEC_v0.5.md.*
