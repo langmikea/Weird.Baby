@@ -6,6 +6,12 @@ If you're starting fresh: read this top-to-bottom before touching code. Then rea
 
 ---
 
+## Canonical museum vocabulary
+
+Before any work that touches museum tag vocabulary, pill columns, or artifact categorization, read `docs/CANONICAL_VOCABULARY.md`. The canonical vocabulary is the operator's locked design from April 2026. Specs in `docs/deep-dive-review/` describe architecture; they do not define vocabulary. Vocabulary inventions in spec sessions have been a repeated Ops failure mode — the canonical doc is authority.
+
+---
+
 ## What this repo is
 
 Weird.Baby Museum — a Vite + React + React Router site, deployed via Cloudflare Workers. The frontend is a "museum" with multiple artists/sections. Hunter Root (HR) is the primary artist content currently built out.
@@ -20,9 +26,8 @@ MediaVault is now under local-only git at `C:\AI\Platform\MediaVault\.git` (init
 src/
 ├── data/
 │   ├── artists/hunter-root.js          ← SPINE: canonical album/track data
-│   ├── hr_archive.js                   ← Archive timeline cards
-│   ├── hr_artifacts.js                 ← Per-artifact entries (panel 3)
-│   ├── hr_exit_flow.js                 ← Exit/CTA cards
+│   ├── exhibits/hunter_root.json       ← Artifact source (replaces hr_archive/hr_artifacts/hr_exit_flow)
+│   ├── deep-dive-vocabulary.json       ← Deep Dive tag vocabulary (consumed by HrExhibitFlow + deep-tags export)
 │   ├── hr_journal_prompts.js           ← Journal prompts
 │   ├── wb_merch.js, wb_roster.js
 ├── routes/
@@ -35,7 +40,7 @@ src/
 │   │   ├── HrExhibitFlow.css
 │   │   ├── hr_dimensions.js            ← HR_ALBUM_OPTIONS + HR_SONG_OPTIONS (mirror of spine)
 │   │   ├── hr_facts.js                 ← Facts indexed by albumId + trackId
-│   │   ├── hr_cards.js, HrFanWall.jsx, HrHome.jsx, HrMedia.jsx, HrSpine.jsx
+│   │   ├── HrFanWall.jsx, HrHome.jsx, HrMedia.jsx, HrSpine.jsx
 │   ├── shop/, WbAdmin.jsx, WbHome.jsx
 ├── styles/museum-tokens.css            ← --hr-* CSS variables (off-limits for population work)
 └── worker.js                           ← Cloudflare Worker entry
@@ -89,6 +94,13 @@ These are the cumulative result of the May-2026 UX iterations. Reading the JSX w
 - **Tracklist variants are radio buttons** — only one variant active per track. Click an active variant to deselect to empty. (Was multi-select Set semantics pre-`f01ee88`.)
 - **Per-tab clear `✕`** — small `✕` in each tab's top-right corner. Always rendered. Dim+unclickable when `tabHasSelection(tab)` is false; brighter+pointer when true. The strip-level "clear all" button no longer exists. The original `clear()` whole-deck reset is preserved with `eslint-disable-next-line` comment for potential revival.
 - **AuditStrip is dev-only and intentionally not rendered** — was at z-index 9999 bottom-right and occluded the player bar's controls. The function is preserved in `HrExhibitFlow.jsx` for revival; the JSX render call is removed.
+
+## Release discipline
+
+1. Testing happens in a sandbox, not on the live Museum.
+2. Features reach the Museum only after sandbox validation.
+3. Releases to main happen only when Ops needs human testing.
+   Not for morale. Not for "let's see it working." Operator-confirmed only.
 
 ## Workflow
 

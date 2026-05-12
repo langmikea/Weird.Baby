@@ -7,6 +7,16 @@
 
 ---
 
+> **Canonical vocabulary lives in `docs/CANONICAL_VOCABULARY.md`.**
+> That document supersedes any specific tag categories named in this patch
+> (or anywhere else in the v3–v5.2 deep-dive-review arc). Where this document
+> uses example namespaces like `motif`, `theme`, or `texture`, treat them as
+> Ops-author inventions that drifted from the operator's April-2026 locked
+> UX structure — read the canonical doc for the authoritative tier-and-group
+> vocabulary before tagging artifacts or interpreting examples here.
+
+---
+
 ## 1. Why this patch exists
 
 v5.1 surfaced six open questions (Q-1 through Q-6). Three (Q-1, Q-5, Q-6) were resolved in chat with the operator. Three (Q-2, Q-3, Q-4) are deferred to phase prompts. This document captures the resolved three in writing so the audit trail is complete before phase prompts are written.
