@@ -2,7 +2,7 @@
 
 **Date:** 2026-05-12
 **Status:** Design review against `UX_LIFECYCLE_SPEC_v0.5.md` complete. Operator review pending.
-**Authority:** This spec describes the end-to-end data workflow of museum artifacts. It is a companion to `UX_LIFECYCLE_SPEC_v0.4.md` (the UX-side spec) and extends `MUSEUM_OPS.md` (operator workflow rules). Where the UX spec describes *what visitors and operators experience*, this spec describes *what happens to data* — from acquisition source through MV storage, through transformation, through export, into the museum's renderable form, through retirement, through soft-delete.
+**Authority:** This spec describes the end-to-end data workflow of museum artifacts. It is a companion to `UX_LIFECYCLE_SPEC_v0.5.md` (the UX-side spec) and extends `MUSEUM_OPS.md` (operator workflow rules). Where the UX spec describes *what visitors and operators experience*, this spec describes *what happens to data* — from acquisition source through MV storage, through transformation, through export, into the museum's renderable form, through retirement, through soft-delete.
 
 **Scope:** Capability-level only. No implementation, no schemas, no APIs. Describes what the system MUST be able to do with data, not how.
 
@@ -88,11 +88,11 @@ The data system MUST support every one of these.
 
 **Editable fields:** All of them. Title, description, dates (post date, born-on, retirement), attribution, source URL, tags. The operator's curation surface (separate spec) presents all artifact data as editable.
 
-**Edit semantics:** In place. The new value replaces the old. No versioning. No edit history. (See `UX_LIFECYCLE_SPEC_v0.4.md §4.4` for the rationale.)
+**Edit semantics:** In place. The new value replaces the old. No versioning. No edit history. (See `UX_LIFECYCLE_SPEC_v0.5.md §4.4` for the rationale.)
 
 **Durability:** An artifact may sit in CURATE indefinitely. Partial work persists. No auto-advance, no expiration.
 
-**Tagging:** The operator attaches tags using the runtime-editable vocabulary (per `CANONICAL_VOCABULARY.md` and `UX_LIFECYCLE_SPEC_v0.4.md §4.3`).
+**Tagging:** The operator attaches tags using the runtime-editable vocabulary (per `CANONICAL_VOCABULARY.md` and `UX_LIFECYCLE_SPEC_v0.5.md §4.3`).
 
 **Vocabulary management is a visible UX surface** (locked 2026-05-12). The operator can add, rename, reorder, and retire categories and tags through a visible operator surface — not by editing config files, not by tagging an artifact with a never-before-seen namespace and hoping it springs into existence. **The surface lives inside MV** — the same tool the operator uses for artifact curation. No separate app, no separate URL. (Locked 2026-05-12.)
 
@@ -192,7 +192,7 @@ For each discovered exhibit (each unique `exhibit:<name>` tag value across artif
 - The file contains an `artifacts` array and a `metadata` block (exhibit name, export timestamp, filter description, vocabulary CSV hash)
 - Each artifact record carries: stable ID, source URL, source platform, media type, title, description, post date, released_at, born_on, retirement_at (when set), thumbnail URL, and a `tags` object grouped by namespace.
 
-The `exhibit:` namespace is preserved in the artifact's `tags` object. The museum's render layer strips it before computing pill columns (per `UX_LIFECYCLE_SPEC_v0.4.md §4.7`).
+The `exhibit:` namespace is preserved in the artifact's `tags` object. The museum's render layer strips it before computing pill columns (per `UX_LIFECYCLE_SPEC_v0.5.md §4.7`).
 
 ### §4.4 — What the export does NOT do
 
@@ -246,7 +246,7 @@ Release discipline is locked in `CLAUDE.md`. See the **Release discipline** sect
 - It does not pick between architectural options for the open questions in §6.
 - It does not address operational concerns — backup strategy, monitoring, alerting.
 - It does not specify the operator's curation tool design — separate spec.
-- It does not redraw what `MUSEUM_OPS.md`, `UX_LIFECYCLE_SPEC_v0.4.md`, or `CANONICAL_VOCABULARY.md` cover.
+- It does not redraw what `MUSEUM_OPS.md`, `UX_LIFECYCLE_SPEC_v0.5.md`, or `CANONICAL_VOCABULARY.md` cover.
 
 ---
 
