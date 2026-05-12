@@ -1,7 +1,7 @@
 # Weird.Baby Museum — UX Specification
 
-**Version:** 0.3
-**Date:** 2026-04-22
+**Version:** 0.4
+**Date:** 2026-04-22; 2026-05-12 (v0.4 promotion pass)
 **Author:** Cowork Claude (Phase 2 of vision-lock → UX-spec sequence)
 **Ground truth:** `C:\AI\VISION_LOCK_v0.3.md` (locked). All architectural
 rules, voice conventions, and deferrals in that document are assumed as
@@ -30,6 +30,15 @@ it cites by number (e.g., "§1 #14") pointing back to the vision lock.
   principle that visitor control is load-bearing — the exhibit is
   not a digital magazine. Names the presets-and-sharing concept as
   the eventual unlock. Mechanism TBD in the preplanning session.
+
+**v0.4 changes from v0.3 (2026-05-12 compare pass):**
+- **§N — Observed behaviors promoted from code.** New section.
+  Records exhibit-room and site-shell behaviors implemented in
+  `src/routes/exhibit/Exhibit.jsx` and `src/routes/hr/HrExhibitFlow.jsx`
+  that were not previously named in §§A–M. Includes a deferral
+  subsection for the Journal panel full lifecycle, pending operator
+  decision on placement (§C panel section, or a new dedicated
+  section). Existing §§A–M are preserved unchanged.
 
 **Horizon (per vision lock §6 Q-05 (b)):** v1 is primary. v1.5
 additions (source-agnostic player, MP3 delivery via R2) are annotated
@@ -1865,6 +1874,161 @@ changes, and build steps in `weird-baby-update/`. That document
 will name things like "lift player state to a Context at
 App.jsx level" and "add `founding_visitor` column to
 contributions table" — naming this spec couldn't and shouldn't.
+
+## §N — Observed behaviors promoted from code (2026-05-12)
+
+This section records behaviors implemented in the museum's exhibit
+surfaces (plus one site-shell entry) that were not previously named
+in §§A–M. They are promoted to spec status here so future work has
+authority. Each subsection cites the implementing code file and the
+existing §-section it most relates to.
+
+### §N.1 — Player-bar lift adjusts deck position (relates to §C, §H) **[promoted]**
+
+Source: `src/routes/exhibit/Exhibit.jsx` (`PlayerBar`),
+`src/routes/hr/HrExhibitFlow.jsx` (deck base offset).
+
+The persistent player (§H) renders only when audio is playing. When
+the player bar is in the DOM, the bottom-pinned controls deck lifts
+by the player bar's height so the deck's surfaces are not occluded.
+When audio stops, the player bar leaves the DOM and the deck returns
+to its base position. The bottom-of-viewport stack collapses
+gracefully to current sound state.
+
+### §N.2 — Tracklist variant selection is mutually exclusive (relates to §C) **[promoted]**
+
+Source: `src/routes/exhibit/Exhibit.jsx` (tracklist row variant
+controls); `src/data/artists/hunter-root.js` (variant taxonomy:
+Official / Live / Lyrics / Cover).
+
+Each tracklist row may carry multiple variant videos. The tracklist
+UI exposes them as variant pills beside the track title. Selection
+grammar:
+
+- At most one variant active per track at any time. Variants are
+  mutually exclusive within the row.
+- Clicking an inactive variant makes it active and deselects any
+  previously-active variant on that row.
+- Clicking an already-active variant deselects it, returning the
+  row to the no-variant-selected state.
+
+This is radio semantics (one-of-N with the option of zero), not
+checkbox semantics. It is the canonical tracklist variant grammar
+for the museum.
+
+### §N.3 — Skip-back two-press behavior (relates to §C, §H) **[promoted]**
+
+Source: `src/routes/exhibit/Exhibit.jsx` (player controls).
+
+The persistent player's skip-back affordance has two distinct
+behaviors depending on press cadence:
+
+- First press within ~3 seconds of playback start: restart the
+  current track from position zero.
+- Second press (within ~3 seconds of the first): advance to the
+  previous track in the queue.
+
+This matches the consumer-media skip-back grammar visitors already
+know. It is the canonical skip-back behavior for the persistent
+player.
+
+### §N.4 — Exhibit room accepts an artist config (relates to §C) **[promoted]**
+
+Source: `src/routes/exhibit/Exhibit.jsx` (`artist` prop).
+
+§C describes the exhibit room as a general pattern parameterized by
+the specific artist. The implementation has been generalized: the
+exhibit-room component accepts an artist config object (canonical
+spine, tracks, variants, accent, per-artist defaults). New exhibits
+instantiate the room with a new artist config; they do not
+duplicate the room.
+
+This satisfies §C's assertion that "the infrastructure must accept
+N artists without code changes" (v0.3 reframing note). Carsie
+Blanton's deferred §E status remains consistent: when CB ships, it
+ships as a new artist config consumed by the existing room.
+
+### §N.5 — Coverflow accepts drag, swipe, and keyboard input (relates to §C) **[promoted]**
+
+Source: `src/routes/exhibit/Exhibit.jsx` (coverflow event handlers).
+
+The album coverflow (the shelf described in §C) responds to:
+
+- Mouse drag — horizontal drag moves between tiles.
+- Touch swipe — horizontal swipe moves between tiles.
+- Arrow keys (Left / Right) — move between tiles.
+- Enter — activate (select) the currently-focused tile.
+
+All three input modalities are part of the canonical shelf grammar.
+Keyboard support is not optional.
+
+### §N.6 — Per-artist UI-state persistence (relates to §C, §D) **[promoted]**
+
+Source: `src/routes/exhibit/Exhibit.jsx` (`usePersist` hook).
+
+The exhibit room persists certain per-visitor UI choices to
+localStorage, keyed by artist. Current persisted state:
+
+- Vertical split position between the coverflow and the panels
+  below it.
+- Coverflow height.
+
+Per-artist keying means a visitor's split-and-height preferences for
+Hunter Root do not propagate to Carsie Blanton or to any future
+artist. This is consistent with §D and §E being parallel
+instantiations of §C — visitor preferences should not leak across
+rooms. (Dock height persistence is specified separately in
+UX_CONTROLS_SPEC §4.8; this section concerns the room's own splits.)
+
+### §N.7 — Audio-only browse overlay (relates to §C, §H) **[promoted]**
+
+Source: `src/routes/exhibit/Exhibit.jsx` (audio-only overlay).
+
+The persistent player keeps a track playing while the visitor
+browses to a **different album** within the same exhibit. When the
+on-screen album is not the album whose track is playing, an
+audio-only overlay is rendered over the on-screen content,
+signalling that what the visitor sees is loosely coupled to what
+they hear.
+
+This is the visitor-facing surface for the §H rule that the
+persistent player crosses album-internal boundaries but does not
+cross room edges.
+
+### §N.8 — Admin shortcut: rolling-character key buffer (relates to §H) **[promoted]**
+
+Source: site-shell global key handler (consumed inside the exhibit
+surface in current code).
+
+§H mentions an admin shortcut as part of the site shell. Promoted
+specifics:
+
+- A 3-character rolling buffer is captured at the document level
+  (global key handler).
+- When the buffer matches `mmm`, the admin route is triggered.
+- The buffer rolls — any three consecutive matching keystrokes
+  qualify. No modifier required.
+
+This is the canonical admin-entry pattern for v1. It is
+intentionally low-discoverability — the operator's contract is
+that this is a private affordance, not a visitor-facing surface.
+
+### §N.9 — Behaviors deferred to operator decision **[awaiting operator]**
+
+The 2026-05-12 compare pass identified one further class of
+observed behavior that is not promoted into canonical text here:
+
+**Journal panel full lifecycle.** The Journal panel implements:
+compose → 10s undo window → commit → vote → delete-mine, with a
+weighted shuffle over the entry pool, a prompt rotation on a ~9.5s
+cadence, and a feed rotation on a ~8.5s cadence (paused on hover).
+Source: `src/routes/hr/HrExhibitFlow.jsx`, with prompt content in
+`src/data/hr_journal_prompts.js`. Candidate canonical locations:
+§C (panel mechanics — Panel 4 / Exit Flow / Journal) or a new
+dedicated section. Placement is operator's call; flagged in the
+2026-05-12 closure report.
+
+---
 
 *End of UX_SPEC_v0.1. No existing project files modified. Ground
 truth: VISION_LOCK_v0.3.md.*

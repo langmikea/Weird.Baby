@@ -1,7 +1,7 @@
 # Weird.Baby Museum — UX Controls Specification
 
-**Version:** 0.3
-**Date:** 2026-04-24 (v28 simplification pass)
+**Version:** 0.4
+**Date:** 2026-04-24 (v28 simplification pass); 2026-05-12 (v0.4 promotion pass)
 **Author:** Bit-Man (pruning session)
 **Parent:** `UX_CONTROLS_SPEC_v0.2.md` (predecessor, now superseded by this file).
 Prior predecessors: `UX_CONTROLS_SPEC_v0.1.md`. v0.3 is additive/corrective
@@ -34,6 +34,13 @@ over v0.2.
   principles stand standalone.
 - **Appendix A** segmented: v1 prototype (A v27), mothballed, and
   deferred-post-launch sections.
+
+**What changed in v0.4 (2026-05-12 compare pass):**
+- **§13 — Observed behaviors promoted from code.** New section.
+  Records behaviors implemented in `src/routes/hr/HrExhibitFlow.jsx`
+  that were not previously named in §§1–12, plus a deferral
+  subsection for behaviors that conflict with existing spec text.
+  Existing §§1–12 are preserved unchanged.
 
 **Status markers** (unchanged from v0.1):
 - **[locked]** — validated against a prototype, now spec.
@@ -764,6 +771,81 @@ after v1 ships and launch pressure clears.
 | `prototypes/kaleidoscope_v3.html` | Reference implementation for §7.1–§7.5. |
 | Future: `UX_PRESETS_SPEC.md` | Child. Extends §9. |
 | Future: `UX_KALEIDOSCOPE_SPEC.md` | Possible child if §7 grows large enough to warrant extraction. |
+
+---
+
+## §13 — Observed behaviors promoted from code (2026-05-12)
+
+This section records behaviors implemented in the museum's deck/dock
+surface that were not previously named in §§1–12. They are promoted
+to spec status here so future work has authority. Each subsection
+cites the implementing code file.
+
+Behaviors that **conflict** with existing spec text are not promoted
+into this section; they appear in §13.3 (deferred) so the existing
+spec text remains untouched pending operator resolution.
+
+### §13.1 — Empty-column visual semantics (relates to §3, §4.8) **[promoted]**
+
+Source: `src/routes/hr/HrExhibitFlow.jsx` (`PillGroupColumn`,
+`PillButton`, `noneSelected` prop threading).
+
+When a within-tier group has **zero pills selected**, the group is in
+the no-filter rest state (consistent with §3 empty-group-silent).
+The visual rendering of that rest state is:
+
+- Every pill displays at the bright-gold label-and-count color
+  (`GOLD_HI` in the implementation).
+- Every pill's border is **transparent** — no visible chrome.
+- Pill count color matches pill label color in every state.
+
+When the visitor selects any one pill in the group, the group flips
+into explicit-filter mode: the selected pill remains bright with a
+visible border, every other pill in the group dims and gains a border.
+
+This is the concrete instantiation of §3's "first click narrows
+rather than emptying" — the visitor sees the group's state shift
+from "all live, no constraint" to "this one ON, rest dim."
+
+### §13.2 — Search matches against display labels (relates to §5.5, §1.6) **[promoted]**
+
+Source: `src/routes/hr/HrExhibitFlow.jsx` (search input inside the
+Deep Tracks tab body).
+
+§5.5 places search inside Deep Tracks and specifies that tapping a
+result pill toggles the same tag as tapping the column pill, but
+does not specify what the search input matches against. Promoted:
+
+- The Deep Tracks search input matches against tags' **display
+  labels**, not their underlying slugs. A visitor typing "rare
+  audio" matches a tag with display label "Rare audio" regardless
+  of its slug (`media:rare_audio`, etc.).
+
+This is consistent with §1.6 — search is a retrieval lens onto the
+same vocabulary, so the visitor types in the vocabulary's surface
+language.
+
+### §13.3 — Behaviors deferred to operator decision **[awaiting operator]**
+
+The 2026-05-12 compare pass identified observed behaviors that
+**conflict** with §§1–12. They are not promoted to canonical spec
+text. Existing spec text in §§4.8, §5.5, §6.5 is preserved unchanged.
+Closure report flags the divergence.
+
+1. **Per-tab clear ✕ (implementation) vs. strip-level Clear All
+   (spec §4.8, §6.5).** Implementation places a small `✕` in each
+   tab's top-right corner — dim and unclickable when the tab has
+   no selection, brighter and clickable when it does. The
+   strip-level Clear All described in §4.8 and §6.5 has been removed
+   from the implementation. The spec and the code are directly
+   opposed.
+
+2. **Search auto-focus cadence (implementation) vs. spec §5.5.**
+   Implementation auto-focuses the search input on **every** open
+   of the Deep Tracks tab. §5.5 specifies auto-focus on **first
+   open of the tab in a session** only. (The query-persistence
+   half — last-typed value returns when the tab is reopened — is
+   consistent with §5.5 and is not in conflict.)
 
 ---
 
