@@ -39,20 +39,12 @@ export function slugify(str) {
     .replace(/^-+|-+$/g, "");
 }
 
-// ─── Tier heuristic ─────────────────────────────────────────────────────────
-// Tab structure (Artist / Formats / Deep Tracks) is inherited from the v28_3
-// deck shape. Under v5 the dimension list is data-driven, so each namespace
-// needs an assignment. Simple first-pass heuristic: known artist-axis
-// namespaces in Tier 1, known format/medium namespaces in Tier 2, everything
-// else in Tier 3 (Deep Tracks). Operator can add more namespaces as MV
-// curation grows; unknown ones land in Tier 3 by default.
+// Tier assignments locked by docs/CANONICAL_VOCABULARY.md. Do not add namespaces
+// here without updating canonical first — vocabulary inventions are a known
+// Ops failure mode.
 const TIER_BY_NAMESPACE = {
-  // Tier 1 — Artist axis (who / when / where)
-  author: 1, era: 1, year: 1, song: 1, venue: 1, people: 1, scope: 1,
-  // Tier 2 — Formats axis (what kind of artifact / medium)
-  platform: 2, source_platform: 2, content_kind: 2, media_type: 2,
-  format: 2, provenance: 2, type: 2, src: 2,
-  // Tier 3 — everything else (mood, motif, theme, texture, ...) falls through
+  year: 1, album: 1, song: 1, venue: 1, people: 1,
+  source: 2, type: 2,
 };
 
 function tierForNamespace(ns) {

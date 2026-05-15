@@ -72,7 +72,7 @@ The exact storage shape of the lookup is implementation-detail (could be a DB ta
 The following are historical and not canonical:
 
 - **`docs/deep-dive-vocabulary.csv`** — defined `mood`, `motif`, `theme`, `texture` as the four "Deep Dive" groups during the v3-v5.2 spec arc. That arc drifted from this document; the CSV is retained for git-history continuity but no longer drives the museum's pill columns. Future cleanup may retire it.
-- **MV-side namespaces in `artifacts.tags`** including `scope`, `content_kind`, `platform`, `author` — these came from MV's classification system and predate the canonical museum vocabulary. Under strict tag equality, they currently surface as pill columns. Operator decision pending: coexist, strip-on-export, or migrate. See `SPEC_DRAFT_v5_2.md` Q-5 follow-up.
+- **MV-side namespaces in `artifacts.tags`** (including `scope`, `content_kind`, `platform`, `author`, `provenance`) route to dynamic Tier 3 pill columns under strict tag equality. They are not pre-assigned in `TIER_BY_NAMESPACE`. If a future spec requires promoting one of these to Tier 1 or Tier 2, canonical must be updated first; the code heuristic follows canonical, never leads it.
 
 ## What this means for code
 
@@ -83,7 +83,7 @@ The museum's deck (`HrExhibitFlow.jsx` + `hr_dimensions.js`) currently uses a he
 - Tier 3 catches everything else (default)
 - `exhibit` is stripped before tier assignment
 
-The current heuristic in `b29f9fe` does not match this. A follow-up commit will fix it — separate from this documentation commit.
+The heuristic in `b29f9fe` was reconciled in `e2195b6`: the seven MV-residue namespaces are no longer pre-assigned to Tier 1/2 and fall to dynamic Tier 3.
 
 ## Source
 
