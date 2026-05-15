@@ -56,8 +56,8 @@ There are three systems, related as follows:
 - **MV → Museum**: the Museum reads released artifacts from MV's
   `/db` endpoint (`http://127.0.0.1:51822/db`). The
   `npm run export-artifacts` script is the current touchpoint —
-  it extracts Deep Dive tags from released YouTube artifacts and
-  writes `src/data/deep-tags.json`, which the bundle imports
+  it reads released artifacts from MV and writes per-exhibit JSON
+  to `src/data/exhibits/<name>.json`, which the bundle imports
   statically at build time.
 - **MV is loopback-only.** All MV interaction happens on the
   operator's laptop, never from CI. Builds that need MV data must
@@ -138,6 +138,12 @@ code yet.
 - Phase 2b deploy verification. First deploy of the post-Phase-2a
   working tree has not happened. Production at weird.baby is behind
   the working tree.
+- UX divergence between `docs/canonical/UX_CONTROLS_SPEC_v0.4.md` §13.3
+  and code. Two specifics: (1) per-tab clear `✕` (in code) vs. strip-level
+  Clear All (in spec); (2) search auto-focus on every tab open (in code)
+  vs. first open only (in spec §5.5). Each can resolve in either
+  direction — spec adjusts to match code, or code adjusts to match
+  spec. Operator to decide direction; this audit does not pick.
 
 **If nothing's queued:** No items above means there's no work
 pre-decided. Don't pick something autonomously — ask Mike what to

@@ -1,3 +1,5 @@
+> **Status:** most recent spec draft; superseded for vocabulary by `docs/CANONICAL_VOCABULARY.md`. v2 through v5_1 are in `docs/archive/`.
+
 # Tag-Based Artifact Discovery — Specification, Patch v5.2
 
 **Date:** 2026-05-11

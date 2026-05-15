@@ -133,7 +133,7 @@ Mike pre-approves the entire flow when he says "push" — drive end-to-end witho
 
 ### Deep Dive export
 
-`npm run export-artifacts` reads released YouTube artifacts from MediaVault (`http://127.0.0.1:51822/db`), extracts Deep Dive tags (`deep:<group>:<tag>`) and their associated `card_id` from `notes`, and writes the result to `src/data/deep-tags.json`. The museum imports this file statically at build time. MV must be running on the operator's laptop; the script won't work from CI or another machine.
+`npm run export-artifacts` reads released artifacts from MediaVault (`http://127.0.0.1:51822/db`) and writes per-exhibit JSON to `src/data/exhibits/<name>.json` (one file per `exhibit:` tag value). The museum imports these files statically at build time. MV must be running on the operator's laptop; the script won't work from CI or another machine.
 
 Use `--dry-run` to see what would be exported without writing. Use `--verbose` to see the SQL query and per-card details.
 

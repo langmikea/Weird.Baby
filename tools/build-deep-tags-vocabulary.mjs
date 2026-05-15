@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ─── build-deep-tags-vocabulary.mjs ─────────────────────────────────────────
-// Phase 1 prebuild step for Deep Dive (per docs/deep-dive-review/SPEC_DRAFT_v3.md
+// Phase 1 prebuild step for Deep Dive (per docs/archive/SPEC_DRAFT_v3.md
 // §3.5, Q-4: "prebuild script that converts CSV to JSON").
 //
 // Reads:  docs/deep-dive-vocabulary.csv         (operator-edited source of truth)
@@ -8,6 +8,7 @@
 //
 // Output shape:
 //   {
+//     "_legacy_notice": "...",          // first key; canonical vocab now lives in CANONICAL_VOCABULARY.md
 //     "groups":     { "<group>": [ { "tag": "<slug>", "notes": "..." }, ... ], ... },
 //     "groupOrder": [ "<group>", ... ],     // first-seen order in the CSV
 //     "generated_at": "<ISO timestamp>",
@@ -46,6 +47,8 @@ function parseCsv(text) {
   for (let i = 0; i < lines.length; i++) {
     const raw = lines[i];
     if (raw === "") continue;
+    // Lines starting with `#` are comments — skip them so the CSV can carry a legacy notice header.
+    if (raw.trimStart().startsWith("#")) continue;
     const parts = raw.split(",");
     if (parts.length < 3) {
       fail(`line ${i + 1}: expected at least 3 comma-separated columns, got ${parts.length}: ${JSON.stringify(raw)}`);
@@ -63,7 +66,7 @@ function parseCsv(text) {
   if (rows.length === 0) fail("CSV is empty");
   const header = rows.shift();
   if (header.tag !== "tag" || header.group !== "group" || header.notes !== "notes") {
-    fail(`expected header "tag,group,notes" on line 1, got ${JSON.stringify(`${header.tag},${header.group},${header.notes}`)}`);
+    fail(`expected header "tag,group,notes" at the first non-comment line (line ${header.line}), got ${JSON.stringify(`${header.tag},${header.group},${header.notes}`)}`);
   }
   return rows;
 }
@@ -81,6 +84,7 @@ function buildVocab(rows, csvBytes) {
     groups[row.group].push({ tag: row.tag, notes: row.notes });
   }
   return {
+    _legacy_notice: "LEGACY: superseded by docs/CANONICAL_VOCABULARY.md. Retained for git-history continuity. Do not use as a source of vocabulary truth.",
     groups,
     groupOrder,
     generated_at: new Date().toISOString(),

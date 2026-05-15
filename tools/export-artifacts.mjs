@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // ─── export-artifacts.mjs ───────────────────────────────────────────────────
-// Phase v5-3 + v5-4 of Deep Dive (per docs/deep-dive-review/SPEC_DRAFT_v5.md,
-// SPEC_DRAFT_v5_1.md, SPEC_DRAFT_v5_2.md). Replaces tools/export-deep-tags.mjs.
+// Phase v5-3 + v5-4 of Deep Dive (per docs/archive/SPEC_DRAFT_v5.md,
+// docs/archive/SPEC_DRAFT_v5_1.md, docs/deep-dive-review/SPEC_DRAFT_v5_2.md). Replaces tools/export-deep-tags.mjs.
 //
 // Discovers exhibits dynamically from MediaVault's `exhibit:<name>` tags
 // across released, non-archived artifacts. For each exhibit (discovered or

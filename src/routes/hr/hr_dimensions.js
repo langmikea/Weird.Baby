@@ -1,5 +1,5 @@
 // ─── hr_dimensions — pill columns derived from artifact tag namespaces ──────
-// Phase v5-3 + v5-4. Per docs/deep-dive-review/SPEC_DRAFT_v5.md §4.4 and
+// Phase v5-3 + v5-4. Per docs/archive/SPEC_DRAFT_v5.md §4.4 and
 // SPEC_DRAFT_v5_2.md §3.
 //
 // Before v5: this file declared the deck's pill columns statically — locked

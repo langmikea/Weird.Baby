@@ -48,7 +48,7 @@ import EXHIBIT from "../../data/exhibits/hunter_root.json";
 import { HR_JOURNAL_PROMPTS } from "../../data/hr_journal_prompts.js";
 
 // ─── EXHIBIT INPUT — artifacts and derived dimensions ──────────────────────
-// Phase v5-3+v5-4 (per docs/deep-dive-review/SPEC_DRAFT_v5.md §4 and
+// Phase v5-3+v5-4 (per docs/archive/SPEC_DRAFT_v5.md §4 and
 // SPEC_DRAFT_v5_2.md §3). The exhibit's artifact records are exported from
 // MediaVault by `npm run export-artifacts` into src/data/exhibits/<name>.json
 // and imported here statically — Vite bundles the JSON at build time. No
