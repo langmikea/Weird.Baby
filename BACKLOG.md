@@ -2,9 +2,10 @@
 
 **Last updated:** 2026-05-02 (post-Phase-2a Cleanup)
 
-This file holds aspirational state — work intended but not yet committed and
-deployed. `STATE.md` describes committed-and-deployed reality. When something
-in this file lands, move the line out of here.
+This file holds aspirational work. When something here lands a commit,
+remove the line. `NAVIGATION.md` describes current state — what's
+committed, what's deployed, what's in the working tree. `STATE.md` is the
+durable reference (stack, routes, mothballs).
 
 ---
 

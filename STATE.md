@@ -1,8 +1,11 @@
 # Weird.Baby Museum — STATE
 
-**As of:** 2026-05-02
-**Committed to:** main (see `git log` for the latest commit hash)
-**Deployed:** Not yet — see Phase 2b. (Update after deploy.)
+The durable reference for the Museum: stack, routes, mothballed-for-v1
+decisions, and pointers to canonical specs. **Does NOT cover current
+progress, deploy status, or what's next** — see `NAVIGATION.md` and
+`git log` for that.
+
+**Last refreshed:** 2026-05-15
 
 ## What this is
 
@@ -21,18 +24,21 @@ Weird.Baby Museum. A curatorial platform. Currently exhibiting Hunter Root.
 React 19, Vite 8, Cloudflare Workers, D1 (`weird-baby-db`).
 Build: `npx vite build`. Deploy: `npx wrangler deploy`.
 
+## Mothballed for v1
+
+The following code paths exist in source but are deliberately not
+rendered in the v1 launch. They revive post-launch. Source comments
+saying "MOTHBALLED for v1 per STATE.md" point at this section.
+
+- **Kaleidoscope** — the audio-meter control surface (knobs, switches,
+  VU meters). Code preserved in `src/routes/hr/HrExhibitFlow.jsx`
+  (lines 84, 167–214, 617–754, 1474) and `HrExhibitFlow.css:853`
+  (the `.hr-kal-*`, `.knob-wrap`, `.hr-vu-*` rules) but never mounted.
+  Decision dates to the v28 controls-dock simplification pass; revives
+  when the operator chooses to re-expose audio meters post-launch.
+
 ## Canonical docs
 
 See `docs/canonical/` — VISION, VISION_LOCK_v0.3, UX_SPEC_v0.3,
-UX_CONTROLS_SPEC_v0.3.
-
-## Recent work
-
-- Phase 0 — project self-contained (commit dce3bb2)
-- Phase 1 — museum HR-only (commit 12d50da)
-- Phase 1.5 — v28 deck ported to HrExhibitFlow (commit 21c62a5)
-- Cleanup — quarantine removed, STATE/BACKLOG rewritten (this commit)
-
-## Open backlog
-
-See `BACKLOG.md`.
+UX_CONTROLS_SPEC_v0.3. These describe the design north-star and are
+authoritative over any narrative in this file.

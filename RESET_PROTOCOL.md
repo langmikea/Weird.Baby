@@ -10,8 +10,9 @@
 This project is self-contained. It does not depend on `C:\AI\` root or
 any sibling project for orientation, build, deployment, or continued
 work. A fresh AI session opening only this project folder
-(`C:\AI\Projects\weird-baby-update\`) can read `STATE.md`, follow its
-pointers, and proceed without reading anything outside this folder. If
+(`C:\AI\Projects\weird-baby-museum\`) can read `CLAUDE.md` and
+`NAVIGATION.md`, follow their pointers, and proceed without reading
+anything outside this folder. If
 a doc inside this project ever points at `C:\AI\` root or any sibling
 project, that's a bug — fix the pointer or pull the dependency in.
 
@@ -53,12 +54,13 @@ ephemera. The historical `docs/SESSION_CLOSE_v*.md` files are
 grandfathered as frozen artifacts and are not the pattern going
 forward.
 
-**2. `STATE.md` describes what is committed and deployed.**
-Not what is in the working tree, not what is planned, not what is
-half-done. Aspirational state — work intended but not yet committed
-and deployed — goes in `BACKLOG.md`. If `STATE.md` and the working
-tree disagree, `STATE.md` is the authoritative description of
-committed-and-deployed; the working tree is just the working tree.
+**2. `STATE.md` is durable reference; `NAVIGATION.md` is current state.**
+`STATE.md` carries the stack, routes, mothballed-for-v1 decisions,
+and canonical-doc pointers — stuff that doesn't decay. `NAVIGATION.md`
+tracks what's shipped vs. what's in the working tree, and what's next.
+Aspirational work goes in `BACKLOG.md`. Working-tree vs.
+production-deploy disagreements are `NAVIGATION.md`'s concern, not
+`STATE.md`'s.
 
 **3. Nothing at `C:\AI\` root is allowed to be load-bearing.**
 A doc, file, or path at `C:\AI\` root may be referenced from this
