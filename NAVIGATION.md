@@ -55,7 +55,7 @@ There are three systems, related as follows:
   side).
 - **MV → Museum**: the Museum reads released artifacts from MV's
   `/db` endpoint (`http://127.0.0.1:51822/db`). The
-  `npm run export-deep-tags` script is the current touchpoint —
+  `npm run export-artifacts` script is the current touchpoint —
   it extracts Deep Dive tags from released YouTube artifacts and
   writes `src/data/deep-tags.json`, which the bundle imports
   statically at build time.
@@ -138,9 +138,6 @@ code yet.
 - Phase 2b deploy verification. First deploy of the post-Phase-2a
   working tree has not happened. Production at weird.baby is behind
   the working tree.
-- Refresh STATUS.md or remove it. Currently a stale placeholder
-  ("To be populated by next UX directive"). NAVIGATION no longer
-  points at it but the file itself still exists.
 
 **If nothing's queued:** No items above means there's no work
 pre-decided. Don't pick something autonomously — ask Mike what to
@@ -155,7 +152,7 @@ the bullets look stale, flag it to Mike before acting on them.*
 ## What's not here
 
 This document does not cover:
-- How the Museum works internally — see `CLAUDE.md`, `STATUS.md`,
+- How the Museum works internally — see `CLAUDE.md`,
   `docs/MUSEUM_UX.md`, `docs/CANONICAL_VOCABULARY.md`.
 - Implementation details of the YT-to-MV contract — see
   `tools/youtube-ingest-schema.md` and MV's

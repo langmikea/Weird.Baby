@@ -2,7 +2,7 @@
 
 This file is for future Claude sessions on this repo. The human (Mike) doesn't read it. Keep it terse, practical, and up-to-date with anything that bit you.
 
-If you're starting fresh: read this top-to-bottom before touching code. Then read `STATUS.md` and `docs/MUSEUM_UX.md` for current direction.
+If you're starting fresh: read this top-to-bottom before touching code. Then read `docs/MUSEUM_UX.md` for current direction.
 
 ---
 
@@ -129,11 +129,11 @@ Mike pre-approves the entire flow when he says "push" — drive end-to-end witho
 
 ## Local tooling
 
-`tools/Get-ProjectStatus.ps1` is a PowerShell helper that reads the current repo state and prints a recommended next step — git branch/ahead/behind/uncommitted counts, the next unchecked task in `STATUS.md`/`TODO.md`/`NEXT.md` if present, detected manifests (Node, Python, etc.), and the five most recently modified files. Run it from the repo root: `.\tools\Get-ProjectStatus.ps1`. On a fresh Windows clone the script may be flagged as downloaded-from-web by SmartScreen — run `Unblock-File .\tools\Get-ProjectStatus.ps1` once to clear the zone-identifier ADS, then it executes normally.
+`tools/Get-ProjectStatus.ps1` is a PowerShell helper that reads the current repo state and prints a recommended next step — git branch/ahead/behind/uncommitted counts, the next unchecked task in `TODO.md`/`NEXT.md` if present, detected manifests (Node, Python, etc.), and the five most recently modified files. Run it from the repo root: `.\tools\Get-ProjectStatus.ps1`. On a fresh Windows clone the script may be flagged as downloaded-from-web by SmartScreen — run `Unblock-File .\tools\Get-ProjectStatus.ps1` once to clear the zone-identifier ADS, then it executes normally.
 
 ### Deep Dive export
 
-`npm run export-deep-tags` reads released YouTube artifacts from MediaVault (`http://127.0.0.1:51822/db`), extracts Deep Dive tags (`deep:<group>:<tag>`) and their associated `card_id` from `notes`, and writes the result to `src/data/deep-tags.json`. The museum imports this file statically at build time. MV must be running on the operator's laptop; the script won't work from CI or another machine.
+`npm run export-artifacts` reads released YouTube artifacts from MediaVault (`http://127.0.0.1:51822/db`), extracts Deep Dive tags (`deep:<group>:<tag>`) and their associated `card_id` from `notes`, and writes the result to `src/data/deep-tags.json`. The museum imports this file statically at build time. MV must be running on the operator's laptop; the script won't work from CI or another machine.
 
 Use `--dry-run` to see what would be exported without writing. Use `--verbose` to see the SQL query and per-card details.
 
@@ -208,7 +208,6 @@ The FUSE mount has multiple defects that cost real time. Work around them:
 
 ## Things that are explicitly off-limits
 
-- **`STATUS.md`** — Mike maintains this manually. Don't touch.
 - **`src/styles/museum-tokens.css`** — design tokens. Off-limits for population/data work; only touch with explicit UX direction.
 - **Routing files** during data tasks — `Exhibit.jsx`, `HrExhibitFlow.jsx`, etc. are routing components. Population/data tasks should not modify them. UX tasks can.
 
@@ -227,7 +226,47 @@ If asked to do "lint cleanup", these are the targets. Don't pretend they're triv
 
 ## Recent session log
 
-Maintained here because STATUS.md is human-owned. Newest first.
+Maintained here. Newest first.
+
+### 2026-05-15 → tier reconciliation + navigation expansion
+- `7f9843d` fix(deep-dive): trimmed `TIER_BY_NAMESPACE` in `hr_dimensions.js` to the canonical seven (`year/album/song/venue/people` at Tier 1; `source/type` at Tier 2). MV-residue namespaces fall to dynamic Tier 3 via the `?? 3` fallback. `CANONICAL_VOCABULARY.md` line 86 follow-up resolved.
+- `386f69e` docs: NAVIGATION.md — added "Current state and what's next" section.
+
+### 2026-05-14 → navigation + architecture critique (`5a89835`)
+- Landed `NAVIGATION.md`, a Phase 2b architecture critique, and vocab migration scripts.
+
+### 2026-05-13 → B-1 plan locked (`5558fb2`)
+- B-1 implementation plan committed; seven operator decisions locked.
+
+### 2026-05-12 → architectural recovery (`b1a632c`)
+- `docs/CANONICAL_VOCABULARY.md` locked from v28_3 prototype; UX/data lifecycle specs and Q-5 follow-up note landed. Flags drift between `b29f9fe`'s `TIER_BY_NAMESPACE` heuristic and the new canonical doc (reconciled 2026-05-15 in `7f9843d`).
+
+### 2026-05-11 → MV-driven artifacts + v4/v5 spec arc (PR #16, `b29f9fe`)
+- `21cf558` docs: end-to-end workflow map (ground truth before architectural pivot).
+- `649f006` docs: `SPEC_DRAFT_v4.md` — corrected architecture, supersedes v3.
+- `669c7e7` docs: `SPEC_DRAFT_v5.md` — strict tag equality, Exhibitor's Badge, loud failures.
+- `79159e3` docs: `SPEC_DRAFT_v5_1.md` — patch addressing v5 design review findings.
+- `08299ee` docs: `SPEC_DRAFT_v5_2.md` — Q-1, Q-5, Q-6 resolved; Path B selected.
+- `b29f9fe` feat(deep-dive): phase v5-3+v5-4 — MV-driven artifacts replace authored card data. Added `TIER_BY_NAMESPACE` heuristic with seven MV-residue namespaces (reconciled to canonical 2026-05-15 in `7f9843d`).
+
+### 2026-05-10 → deep dive phases 1 + 3, export CLI, playbook updates
+- `1ca62ac` tools: yt-ingest CLI for YouTube → MediaVault pipeline (PR #9).
+- `a858a32` docs: deep dive phase 0 audit + status taxonomy research.
+- `3c16a30` docs: stage deep dive review materials (PR #10).
+- `c14267e` cards: add stable `id` field to all source entries (PR #11).
+- `5f1bdee` docs: deep dive verification reports (4, 4B, 4C).
+- `c059141` docs: deep dive spec v3 and v2 review report (PR #12).
+- `bb2c343` feat(deep-dive): phase 1 foundation — vocabulary, prebuild, columns, adapter wiring (PR #13).
+- `860ee05` feat(deep-dive): phase 3 export CLI — MV to museum bridge (PR #14). Added `tools/export-deep-tags.mjs`; later renamed to `tools/export-artifacts.mjs` with `npm run export-artifacts`.
+- `8872ec0` fix(export-deep-tags): drop `archived_at` clause; add `prebuild-install` dev dep.
+- `caf1b01` chore: add `.gitattributes` enforcing LF; renormalize existing files.
+- `53394ff` docs(claude.md): playbook updates from Phase 3 session findings (PR #15).
+
+### 2026-05-09 → FUSE git-init quirk + yt schema close (PR #8, `a208ebd`)
+- Captured FUSE git-init defect in CLAUDE.md cowork-sandbox quirks. Closed yt-ingest schema's `local_asset_path` question.
+
+### 2026-05-08 → yt-ingest design (PR #7, `5702e47`)
+- YouTube ingest design + schema landed; CLI deferred to PR #9.
 
 ### 2026-05-08 → exhibit UX round 2 (PR #5, squash `218fe96`)
 - TAB_PEEK 14 → 30 (full label visible)

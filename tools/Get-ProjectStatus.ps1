@@ -98,14 +98,14 @@ try {
     # ---------- status / TODO docs ------------------------------------------
 
     Write-Section 'Status documents'
-    $statusPatterns = @('STATUS.md','status.md','TODO.md','todo.md','NEXT.md','next.md','PLAN.md','plan.md','ROADMAP.md','roadmap.md','NOTES.md','notes.md')
+    $statusPatterns = @('TODO.md','todo.md','NEXT.md','next.md','PLAN.md','plan.md','ROADMAP.md','roadmap.md','NOTES.md','notes.md')
     $found = $statusPatterns |
         ForEach-Object { Get-ChildItem -LiteralPath $resolved -Filter $_ -File -ErrorAction SilentlyContinue } |
         Where-Object { $_ } | Select-Object -Unique
 
     if (-not $found) {
         Write-Item 'Found' '(none)' DarkGray
-        $recommendations.Add('No STATUS.md / TODO.md / NEXT.md found. Consider adding one to track progress.')
+        $recommendations.Add('No TODO.md / NEXT.md found. Consider adding one to track progress.')
     }
     else {
         foreach ($doc in $found) {

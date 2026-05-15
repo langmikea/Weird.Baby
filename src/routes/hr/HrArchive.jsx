@@ -9,7 +9,7 @@ const ALBUMS = [
     tracks: ["Cheap Wine","Straitlaced","So Sick","Identity","Hook Or The Worm","Television Head","Let The Rhythm","Silly Situation","Moving With The Storm","Soul Sucker","The Shade"],
   },
   {
-    title: "Life Inside a Wheel",
+    title: "Life Inside A Wheel",
     year: 2019,
     color: "#4a8a4a",
     tracks: ["Same Page","Talker With A Broken Jaw","People Are Programs","Killer To Killer","Brain Cell","Fix My Head","Free To Roam The Cage","With Great Pleasure","The Water","Music On My Mind","What I Felt","Greek Fire","Shapeshifter"],
