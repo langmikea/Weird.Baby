@@ -121,9 +121,47 @@ There are three systems, related as follows:
   Prototypes may exist in `prototypes/` but the build-time export
   shape has not been picked.
 
+## Current state and what's next
+
+**Updated:** 2026-05-14
+
+**Current state:** The Museum is deployed at https://weird.baby from
+a build dated 2026-04-15. The working tree has unshipped work since
+then (exhibit UX, Deep Dive scaffolding, vocabulary work). MV
+integration has not started — Stance B adapter does not exist in
+code yet.
+
+**What's next:**
+- Adapter layer for MV-to-Museum integration. Stance B is chosen
+  but no code exists yet. This is the next non-trivial build item
+  when Mike is ready.
+- Phase 2b deploy verification. First deploy of the post-Phase-2a
+  working tree has not happened. Production at weird.baby is behind
+  the working tree.
+- Refresh STATUS.md or remove it. Currently a stale placeholder
+  ("To be populated by next UX directive"). NAVIGATION no longer
+  points at it but the file itself still exists.
+
+**If nothing's queued:** No items above means there's no work
+pre-decided. Don't pick something autonomously — ask Mike what to
+work on.
+
+---
+
+*This section is updated by the AI at the end of each working
+session. If the date above is older than your current session and
+the bullets look stale, flag it to Mike before acting on them.*
+
 ## What's not here
 
 This document does not cover:
 - How the Museum works internally — see `CLAUDE.md`, `STATUS.md`,
   `docs/MUSEUM_UX.md`, `docs/CANONICAL_VOCABULARY.md`.
-- Implementation details of the YT-to-
+- Implementation details of the YT-to-MV contract — see
+  `tools/youtube-ingest-schema.md` and MV's
+  `_cowork/YT_INGEST_FROM_MUSEUM.md`.
+- Historical decisions — see `CHANGELOG.md` on the MV side and the
+  `PHASE_*_REPORT.md` files in this repo's root.
+
+If a future Claude finds itself needing something not covered by any
+document, that's a real gap. Flag it to Mike.
