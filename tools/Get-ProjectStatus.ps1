@@ -95,37 +95,6 @@ try {
         if (-not $upstream) { $recommendations.Add("No upstream set for ``$branch``. Consider ``git push -u origin $branch``.") }
     }
 
-    # ---------- status / TODO docs ------------------------------------------
-
-    Write-Section 'Status documents'
-    $statusPatterns = @('TODO.md','todo.md','NEXT.md','next.md','PLAN.md','plan.md','ROADMAP.md','roadmap.md','NOTES.md','notes.md')
-    $found = $statusPatterns |
-        ForEach-Object { Get-ChildItem -LiteralPath $resolved -Filter $_ -File -ErrorAction SilentlyContinue } |
-        Where-Object { $_ } | Select-Object -Unique
-
-    if (-not $found) {
-        Write-Item 'Found' '(none)' DarkGray
-        $recommendations.Add('No TODO.md / NEXT.md found. Consider adding one to track progress.')
-    }
-    else {
-        foreach ($doc in $found) {
-            Write-Item $doc.Name "modified $((Get-Date) - $doc.LastWriteTime | ForEach-Object { '{0:%d}d {0:%h}h ago' -f $_ })" White
-
-            # show first unchecked task, if any
-            $firstTodo = Select-String -Path $doc.FullName -Pattern '^\s*[-*]\s*\[\s\]\s*(.+)$' -List -ErrorAction SilentlyContinue
-            if ($firstTodo) {
-                Write-Host ('    → next unchecked: ' + $firstTodo.Matches[0].Groups[1].Value) -ForegroundColor Yellow
-                $recommendations.Add("Continue work on `"$($firstTodo.Matches[0].Groups[1].Value)`" from $($doc.Name).")
-            }
-
-            # show first heading (rough "current focus")
-            $firstHeading = Select-String -Path $doc.FullName -Pattern '^#{1,3}\s+(.+)$' -List -ErrorAction SilentlyContinue
-            if ($firstHeading -and -not $firstTodo) {
-                Write-Host ('    → top section: ' + $firstHeading.Matches[0].Groups[1].Value) -ForegroundColor DarkGray
-            }
-        }
-    }
-
     # ---------- project type detection --------------------------------------
 
     Write-Section 'Project type'
