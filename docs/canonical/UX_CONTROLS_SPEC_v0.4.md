@@ -213,16 +213,13 @@ the content and should not dominate it at rest.
 - **Active tab signaled by:** brighter gold border, slight INK_SOFT
   fill (the only tab with any fill), and a 1px gold hairline beneath
   it where the tab meets the body. **Only the active tab carries any
-  visual lift.** Inactive tier tabs remain at their rest color regardless
-  of whether their tier has selections. The top-strip **Clear All**
-  button (below) is the global signal that some filter is active; it
-  appears only when the selection state is non-empty. The visitor who
-  wants to know which tier holds the selection clicks in — this is
-  acceptable because the tab-click cost is cheap and the alternative
-  (per-tab indicators) adds chrome that competes with the content.
-- **Clear All** lives in the tab strip itself, right of the tabs,
-  shown only when any filter is active. Not in the dock body, because
-  it applies across tabs.
+  visual lift.** Inactive tier tabs remain at their rest color, but
+  each tab carries a small **`✕`** in its top-right corner (per §6.5)
+  whose visible/dim state signals whether that tab has selections —
+  giving the visitor an at-a-strip view of which tiers hold filters.
+- **Per-tab clear `✕`** lives in each tab's top-right corner (see
+  §6.5). Clicking it clears only that tab's selections, not the
+  global state.
 - **Close (✕)** collapses the dock to peek. It does not clear state.
   Esc key behaves the same.
 
@@ -281,22 +278,21 @@ tab.
 
 Unchanged from v0.1 with one clarification:
 
-### 6.5 — Clear-all placement **[locked in v0.2]**
+### 6.5 — Per-tab clear `✕` **[locked in v0.4, supersedes v0.2]**
 
-Clear All lives in the tab strip (§4.8), not the dock body. It is
-visually static (always the same place when present) and appears only
-when any filter is active. Per v0.1 §6.2, it can render in a disabled
-visual state when nothing is selected, or hide entirely — v17 chose
-hide-when-empty. Either is spec-compliant; hide-when-empty preferred
-for a cleaner tab strip at rest.
+Each tab carries a small `✕` in its top-right corner — dim and
+non-interactive when the tab has no selection, brighter and clickable
+when it does. Clicking it clears only that tab's selections, not the
+global state.
 
-**Clear All clears all.** Every tag ON across every tab returns to
-OFF. With within-group OR / across-group AND / empty-group-silent
-filter logic (§3), "all off" is the natural rest state — the full
-catalog visible, every group silent. One button, one semantic. A
-prior proposal (watch-list #10, retired) had suggested scoping Clear
-All to the Deep Tracks tab only; that proposal pre-dated the §3
-filter logic decision and has no remaining rationale.
+This supersedes the v0.2/v0.3 strip-level Clear All. Per-tab clear was
+adopted in implementation 2026-05-08 (commit `218fe96`, PR #5, "Exhibit
+UX tweaks 2") as a deliberate UX decision: the `✕` doubles as a
+per-tier filter indicator, removing the need for chrome elsewhere, and
+scopes the clear action to the tab the visitor is looking at. Promoted
+to canonical 2026-05-15 in the v0.4 resolution of §13.3 item 1. The
+strip-level `clear()` function is preserved in code with an
+eslint-disable marker for possible future revival.
 
 ---
 
@@ -825,28 +821,28 @@ This is consistent with §1.6 — search is a retrieval lens onto the
 same vocabulary, so the visitor types in the vocabulary's surface
 language.
 
-### §13.3 — Behaviors deferred to operator decision **[awaiting operator]**
+### §13.3 — Divergences resolved 2026-05-15 **[resolved]**
 
-The 2026-05-12 compare pass identified observed behaviors that
-**conflict** with §§1–12. They are not promoted to canonical spec
-text. Existing spec text in §§4.8, §5.5, §6.5 is preserved unchanged.
-Closure report flags the divergence.
+The 2026-05-12 compare pass identified two observed behaviors that
+**conflicted** with §§1–12. Operator decided 2026-05-15; both are now
+resolved. Resolutions ran in opposite directions:
 
-1. **Per-tab clear ✕ (implementation) vs. strip-level Clear All
-   (spec §4.8, §6.5).** Implementation places a small `✕` in each
-   tab's top-right corner — dim and unclickable when the tab has
-   no selection, brighter and clickable when it does. The
-   strip-level Clear All described in §4.8 and §6.5 has been removed
-   from the implementation. The spec and the code are directly
-   opposed.
+1. **Per-tab clear `✕` adopted; strip-level Clear All retired**
+   (resolves divergence with v0.3 §4.8, §6.5). Per-tab clear `✕`
+   (implementation since commit `218fe96`, 2026-05-08) is the
+   canonical model. §4.8 and §6.5 have been rewritten in v0.4 to
+   describe per-tab clear directly; the strip-level Clear All framing
+   is retired. The strip-level `clear()` function is preserved in
+   code with an eslint-disable marker for possible future revival.
 
-2. **Search auto-focus cadence (implementation) vs. spec §5.5.**
-   Implementation auto-focuses the search input on **every** open
-   of the Deep Tracks tab. §5.5 specifies auto-focus on **first
-   open of the tab in a session** only. (The query-persistence
-   half — last-typed value returns when the tab is reopened — is
-   consistent with §5.5 and is not in conflict.)
+2. **Search auto-focus aligned to spec §5.5 (code changed).** The
+   implementation previously auto-focused the search input on every
+   open of the Deep Tracks tab. Code now matches §5.5: auto-focus
+   fires on first open of the tab in a session only; subsequent opens
+   return to the input but do not steal focus. Query persistence
+   (last-typed value returns when the tab is reopened) was already
+   consistent with §5.5 and is unchanged.
 
 ---
 
-*End of UX_CONTROLS_SPEC_v0.2.*
+*End of UX_CONTROLS_SPEC_v0.4.*

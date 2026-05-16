@@ -2,7 +2,7 @@
 
 **Date:** 2026-05-12
 **Status:** Design review against `DATA_WORKFLOW_SPEC_v0.2.md` complete. Operator review pending.
-**Authority:** This spec extends and integrates `UX_SPEC_v0.3.md`, `VISION_LOCK_v0.3.md`, `UX_CONTROLS_SPEC_v0.3.md`, `CANONICAL_VOCABULARY.md`, and `DATA_WORKFLOW_SPEC_v0.2.md`. Where they speak, they are authority. This spec adds what they don't say.
+**Authority:** This spec extends and integrates `UX_SPEC_v0.3.md`, `VISION_LOCK_v0.3.md`, `UX_CONTROLS_SPEC_v0.4.md`, `CANONICAL_VOCABULARY.md`, and `DATA_WORKFLOW_SPEC_v0.2.md`. Where they speak, they are authority. This spec adds what they don't say.
 
 **Supersedes:** UX_LIFECYCLE_SPEC_v0.4 (corrected for conflicts surfaced during design review against the data workflow spec, 2026-05-12).
 
@@ -93,7 +93,7 @@ The following surfaces and behaviors are fully specified in the canonical docs a
 - **§G-02 — Admin surface gaps.**
 - **§G-08 — Time Capsule.**
 
-### From `UX_CONTROLS_SPEC_v0.3.md`:
+### From `UX_CONTROLS_SPEC_v0.4.md`:
 
 - **All of it.** The dock/deck control surface, tab structure, filter mechanics (within-OR / across-AND / empty-silent), pill grammar, search placement, presets, mothballed Kaleidoscope.
 
@@ -101,7 +101,7 @@ The following surfaces and behaviors are fully specified in the canonical docs a
 
 - **All of it.** Tag tier vocabulary — ARTIST / MEDIA / DEEP DIVE — locked Tier 1 + Tier 2 membership, dynamic Tier 3, display-name lookup, `exhibit` routing-tag rule, legacy-doc disposition.
 
-**Reading order for the canonical set:** VISION_LOCK_v0.3 (architectural rules) → UX_SPEC_v0.3 (room and panel surfaces) → UX_CONTROLS_SPEC_v0.3 (dock and filtering) → CANONICAL_VOCABULARY (tag structure) → this spec (capability invariants, lifecycle, additions).
+**Reading order for the canonical set:** VISION_LOCK_v0.3 (architectural rules) → UX_SPEC_v0.3 (room and panel surfaces) → UX_CONTROLS_SPEC_v0.4 (dock and filtering) → CANONICAL_VOCABULARY (tag structure) → this spec (capability invariants, lifecycle, additions).
 
 ---
 
@@ -275,7 +275,7 @@ For someone new to the museum or returning after time away:
 2. **Read CANONICAL_VOCABULARY** for the tag tier structure.
 3. **Read VISION_LOCK_v0.3** for the architectural rules.
 4. **Read UX_SPEC_v0.3** for the visitor surfaces.
-5. **Read UX_CONTROLS_SPEC_v0.3** for the dock/filter mechanics.
+5. **Read UX_CONTROLS_SPEC_v0.4** for the dock/filter mechanics.
 
 After reading all five, you have the complete UX specification of the museum.
 

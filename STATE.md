@@ -40,5 +40,5 @@ saying "MOTHBALLED for v1 per STATE.md" point at this section.
 ## Canonical docs
 
 See `docs/canonical/` — VISION, VISION_LOCK_v0.3, UX_SPEC_v0.3,
-UX_CONTROLS_SPEC_v0.3. These describe the design north-star and are
+UX_CONTROLS_SPEC_v0.4. These describe the design north-star and are
 authoritative over any narrative in this file.

@@ -1310,7 +1310,7 @@ session on 2026-05-12. The files read in order:
 3. `docs/canonical/DATA_WORKFLOW_SPEC_v0.2.md` — §2.10 stable-ID,
    §3.3 vocabulary management surface, §6 closed decisions.
 4. `docs/CANONICAL_VOCABULARY.md` — tier structure.
-5. `docs/canonical/UX_CONTROLS_SPEC_v0.3.md` — tier rendering context,
+5. `docs/canonical/UX_CONTROLS_SPEC_v0.4.md` — tier rendering context,
    §13 observed behaviors.
 6. `src/routes/hr/hr_dimensions.js` — full file.
 7. `src/routes/hr/HrExhibitFlow.jsx` — TABS array, dimension

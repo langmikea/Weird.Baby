@@ -1496,6 +1496,9 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   const [resizeHover, setResizeHover] = useState(false);
   const [userPresets, setUserPresets] = useState({ P1: null, P2: null, P3: null });
   const [searchFocusSignal, setSearchFocusSignal] = useState(0);
+  // Per UX_CONTROLS_SPEC v0.4 §5.5: auto-focus the Deep Tracks search input on
+  // first open of the tab per session only. Subsequent opens do not steal focus.
+  const searchAutoFocusedRef = useRef(false);
   const hoverTimerRef = useRef(null);
 
   useEffect(() => {
@@ -1615,7 +1618,10 @@ export default function HrExhibitFlow({ activeAlbumId }) {
     if (activeTab === tabKey) { setActiveTab(null); setHoverPeek(false); return; }
     setActiveTab(tabKey);
     setHoverPeek(false);
-    if (tabKey === "deep") setSearchFocusSignal(s => s + 1);
+    if (tabKey === "deep" && !searchAutoFocusedRef.current) {
+      setSearchFocusSignal(s => s + 1);
+      searchAutoFocusedRef.current = true;
+    }
   };
 
   const startResize = useCallback((e) => {

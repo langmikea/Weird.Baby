@@ -28,10 +28,10 @@ canonical now live in-project at `docs/canonical/`:
 | VISION | `docs/canonical/VISION.md` |
 | VISION_LOCK_v0.3 | `docs/canonical/VISION_LOCK_v0.3.md` |
 | UX_SPEC_v0.3 | `docs/canonical/UX_SPEC_v0.3.md` |
-| UX_CONTROLS_SPEC_v0.3 | `docs/canonical/UX_CONTROLS_SPEC_v0.3.md` |
+| UX_CONTROLS_SPEC_v0.4 | `docs/canonical/UX_CONTROLS_SPEC_v0.4.md` |
 
 Phase 0 copied these in from `C:\AI\` root (the first three) and from
-`docs/UX_CONTROLS_SPEC_v0.3.md` (the fourth, which already lived
+`docs/UX_CONTROLS_SPEC_v0.4.md` (the fourth, which already lived
 in-project; the canonical/ copy is a duplicate at this point and a
 later phase can resolve the duplication). The `C:\AI\` root copies
 were left in place by Phase 0 — they are no longer load-bearing for

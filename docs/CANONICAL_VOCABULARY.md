@@ -90,7 +90,7 @@ The heuristic in `b29f9fe` was reconciled in `e2195b6`: the seven MV-residue nam
 The structure above is the resolution of a recovery session on 2026-05-11 after the operator pointed out that the deep-dive-review spec arc had drifted from a previously-locked UX design. Sources consulted during recovery:
 
 - `prototypes/prototype_a_v28_3.html` — v28_3 controls-dock prototype constants
-- `docs/canonical/UX_CONTROLS_SPEC_v0.3.md` — tab framing
+- `docs/canonical/UX_CONTROLS_SPEC_v0.4.md` — tab framing
 - Chat history: the April 22-23 v17 prototyping session, the May 3 v28_3 commit session ("11 dimensions canonical"), the April 24 PowerShell retrieval-bundle session (Tier 3 extension proposal), the May 1 v49 Dog-barking session, and the May 11 recovery conversation that produced this final structure.
 
 The structure here corrects errors in the initial recovery (commit `2236e64`).
