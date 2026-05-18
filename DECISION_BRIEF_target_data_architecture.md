@@ -1,0 +1,342 @@
+# DECISION BRIEF — Target-State Data Architecture, Weird.Baby Museum
+
+**Date:** 2026-05-17
+**Author:** Project Software Ops
+**For:** Mike
+**Purpose:** This is **not** a spec. It is the set of decisions that must be
+made *before* a target-state Data A/S Spec can be written. Each section below
+is one genuine architecture fork. For each: the plain question, the realistic
+options, the trade-offs in operator/visitor terms, and an Ops recommendation.
+
+**How to use it:** read it, then answer the seven decisions (an interview will
+follow). Once the forks are decided, the target spec gets written, and every
+line of it traces to a decision you made here — not to a guess.
+
+**Ground rules for this brief:**
+- "Everything is up for grabs" — these options include replacing what exists.
+- This brief assumes the later sequence you set: decide architecture now,
+  BUILD the pipeline later, add the GUI last.
+- Where a decision is UX-impacting, that is called out — those are yours.
+  Where it is pure Ops, the recommendation is firmer.
+
+---
+
+## What we know (the inputs to these decisions)
+
+Condensed from the as-built spec (v1.1) and the §8.4 investigation:
+
+- **MV** is a local SQLite vault, 85 artifacts, loopback-only HTTP server.
+  Source of truth for artifacts. Multi-platform already: 42 ReverbNation, 16
+  Facebook, 13 local, 3 YouTube, others.
+- **The tag model is incoherent today.** Three tag ideas coexist: bare slugs
+  (what all 85 live artifacts actually have), `namespace:value` strings (what
+  the YT schema doc and capture script specify), and a relational `vocabulary`
+  table (92 rows, built and seeded once, wired to nothing).
+- **§8.4 finding:** the YT capture script *did* run, registered three
+  artifacts with namespaced tags — and the live rows no longer have those
+  tags. Something overwrites the `tags` column after registration. The current
+  system has a write-path conflict over `artifacts.tags`. *(Identifying the
+  specific overwriter is a BUILD-phase task — see "Parked items" at the end.)*
+- **The export + museum pipeline is built** but produces nothing today: no
+  artifact has an `exhibit:` badge, no artifact has a namespaced tag, so the
+  export writes empty files.
+- **Asset delivery was never decided** (flagged in the Phase 0 audit).
+- **An `archived` vs `deleted` lifecycle drift** exists between MV's code and
+  MV's own SPEC.md.
+
+---
+
+## DECISION 1 — The tag model *(UX-impacting — your call)*
+
+**The question:** How does an artifact carry its descriptive labels — the
+things that become filter pills in the museum (year, album, mood, platform,
+etc.)?
+
+This is the keystone decision. Decisions 3 and parts of 5 follow from it.
+
+**Option 1A — Flat slugs.** An artifact's tags are a plain list:
+`["2023","arkansas","snarky","youtube"]`. No structure.
+- **+** Simplest possible. It is what all 85 live artifacts already have, so
+  zero migration. Easy to hand-edit.
+- **−** The museum's whole tier system (ARTIST / MEDIA / DEEP DIVE pill
+  columns) needs to know *which group* a tag belongs to. With flat slugs there
+  is nothing that says `snarky` is a "mood" and `2023` is a "year." That
+  knowledge has to live somewhere else — a lookup table — or the tier UI
+  cannot work. So "flat" is not really flat; it just moves the structure
+  elsewhere.
+
+**Option 1B — Namespaced strings.** Tags are `namespace:value`:
+`["year:2023","album:arkansas","mood:snarky","platform:youtube"]`.
+- **+** The structure travels *with* the tag. Any consumer can see `mood:snarky`
+  is a mood without consulting another table. The museum's tier derivation
+  (§7.3 of the as-built spec) is designed for exactly this. The YT capture
+  script already produces this form.
+- **−** Every existing artifact (all 85) would need its tags migrated from flat
+  to namespaced — a real one-time data job. And free-text values containing a
+  colon need an escaping rule.
+
+**Option 1C — Relational vocabulary table.** Tags are rows in a `vocabulary`
+table (the structure already sitting dead in MV: `namespace` / `value` / `tab`
+kinds, tier, sort order), and artifacts link to them by ID.
+- **+** Most powerful: display names, sort order, retirement, tier assignment
+  all live in proper columns. Renaming a tag is one row edit. The structure
+  the dead table implies is genuinely good.
+- **−** Most complex. It is the "Spec A" model that already got a brutal
+  adversarial review (five critical defects). It requires a join for every
+  read. It is the heaviest lift to build and the easiest to get wrong.
+
+**Ops recommendation: 1B (namespaced strings).** It is the sweet spot — enough
+structure to make the museum's pill tiers work without a join, the capture
+script already emits it, and it is far simpler to build correctly than 1C. The
+migration cost (85 artifacts) is real but bounded and one-time. 1A pushes the
+problem somewhere else without solving it; 1C is more machine than this project
+needs and carries known design scars. If you ever outgrow 1B, 1C is a clean
+future upgrade — but do not start there.
+
+---
+
+## DECISION 2 — Ingest scope *(mostly Ops, with a UX edge)*
+
+**The question:** Is the target architecture formally multi-platform, or
+YouTube-first with other sources treated ad hoc?
+
+The data is *already* multi-platform (5+ source platforms). The documents
+pretend YouTube is the only pipeline. That gap is the issue.
+
+**Option 2A — Formal multi-platform.** The architecture defines a generic
+"ingest" contract; YouTube, ReverbNation, Facebook, local files are each a
+*platform adapter* feeding the same artifact shape.
+- **+** Matches reality. Every future source is a known, bounded addition. One
+  storage model, one export, one museum — they never need to care which
+  platform an artifact came from.
+- **−** More design work up front: the generic artifact shape has to be right
+  enough that every platform fits it.
+
+**Option 2B — YouTube-first, others ad hoc.** The spec covers the YouTube path
+properly; other platforms are "handled but not specified."
+- **+** Less to write now.
+- **−** This is *the current situation* and it is exactly why the system is
+  incoherent. It guarantees the next ReverbNation or Facebook batch lands with
+  no contract and drifts again.
+
+**Ops recommendation: 2A (formal multi-platform).** This is a "design for what
+the system needs" milestone, and what the system demonstrably *needs* is to
+stop pretending it is YouTube-only. 2A is more work in the spec and far less
+work forever after. 2B re-creates the mess we just documented.
+
+---
+
+## DECISION 3 — The dead `vocabulary` table *(Ops — follows Decision 1)*
+
+**The question:** The 92-row `vocabulary` table in MV — finish it, or delete it?
+
+This is largely *decided by* Decision 1:
+- If you chose **1C**, the `vocabulary` table IS the model — keep and finish it.
+- If you chose **1A or 1B**, the table is not the model.
+
+Assuming 1A/1B, the remaining question is whether the table still has a *narrow*
+job — being the registry of display names, sort order, and tier assignment for
+tag namespaces (even if artifacts don't link to it by ID).
+
+**Option 3A — Delete it.** Remove the table. Tier/display-name info lives
+elsewhere (a config file, or `CANONICAL_VOCABULARY.md` as the source).
+- **+** No dead weight. One less thing to confuse future sessions.
+- **−** Loses a structured home for display names and sort order.
+
+**Option 3B — Keep it, narrowed to a vocabulary *registry*.** Artifacts still
+carry namespaced string tags (1B), but the `vocabulary` table is the
+authoritative list of *which namespaces exist, what tier each belongs to, and
+their display names*. It describes the vocabulary; it doesn't own the tags.
+- **+** Gives the museum's tier system a real data source instead of a
+  hardcoded list. Renaming a pill group is a row edit.
+- **−** Something has to keep it in sync with the namespaces actually appearing
+  in artifact tags.
+
+**Ops recommendation: depends on Decision 1.** If 1B: **3B** — keep the table,
+re-scope it to a registry. It stops being abandoned scaffolding and becomes the
+one honest home for vocabulary metadata, replacing today's confusing CSV-vs-
+table-vs-canonical-doc split. If 1A: also 3B, for the same reason — flat slugs
+need that registry even more. If 1C: keep it as the core model. **In no case
+3A** — the table's structure is sound; the problem was that it was wired to
+nothing, and that is fixable.
+
+---
+
+## DECISION 4 — The MV → Museum interface *(Ops)*
+
+**The question:** How does the Museum get data out of MV?
+
+Today: the Museum's export downloads MV's *entire SQLite database file* as a
+blob and queries it locally. It works, but it is a blunt instrument.
+
+**Option 4A — Keep the whole-DB blob.** Export keeps pulling `/db` and querying
+the whole file.
+- **+** Already built. Zero MV work. Simple.
+- **−** Ships the entire vault (every project's artifacts, every status) to get
+  one exhibit's released rows. As MV grows this gets wasteful. No filtering at
+  the source.
+
+**Option 4B — MV exposes a real read API.** MV grows an endpoint like
+`GET /api/artifacts?exhibit=hunter_root&status=released` that returns just the
+needed rows as JSON.
+- **+** The Museum asks for exactly what it needs. Cleaner contract. Other
+  future consumers benefit.
+- **−** Real MV development. MV is "v0.5.2, punchlist deferred" — this adds to
+  MV's plate.
+
+**Ops recommendation: 4A for now, 4B noted as the future upgrade.** The blob
+approach is genuinely fine at 85 artifacts and even at several hundred. 4B is
+the right *eventual* answer but it is MV work, and MV is not the project under
+active design here. The target spec should specify 4A as the interface **and**
+explicitly name 4B as the defined upgrade path with the trigger ("when the
+vault exceeds ~N artifacts or a second consumer appears"). This keeps the
+milestone focused without pretending 4A is forever.
+
+---
+
+## DECISION 5 — Exhibit membership *(UX-impacting — your call)*
+
+**The question:** How does an artifact say "I belong in the Hunter Root
+exhibit"?
+
+Today the export looks for an `exhibit:hunter_root` tag. No artifact has one,
+which is why the export is empty.
+
+**Option 5A — An `exhibit:` namespaced tag.** Membership is just another tag.
+To put an artifact in an exhibit, the operator adds `exhibit:hunter_root`.
+- **+** Uniform with Decision 1B — no new mechanism. An artifact can be in
+  multiple exhibits (multiple `exhibit:` tags).
+- **−** Membership is mixed in with descriptive tags; the operator must
+  remember it is special (the export strips it before building pill columns).
+
+**Option 5B — A dedicated membership field/table.** Exhibit membership is its
+own column or its own small linking table, separate from descriptive tags.
+- **+** Membership is structurally distinct from description. Harder to forget,
+  harder to fat-finger.
+- **−** A second mechanism to build and maintain.
+
+**Ops recommendation: 5A (`exhibit:` tag).** Consistency wins — if Decision 1
+is 1B, then making membership "just another namespaced tag" means one mechanism
+to build, one to learn, one to query. The "operator must remember it is
+special" cost is small and is handled by the curation UI later (the GUI phase).
+5B's structural purity is not worth a parallel mechanism. *This is UX-impacting
+because it shapes how the operator badges artifacts — confirm you are fine with
+"membership is a tag."*
+
+---
+
+## DECISION 6 — Asset delivery *(UX-impacting — your call)*
+
+**The question:** How does an artifact's actual *bytes* — a photo, a thumbnail,
+an MP3 — reach the visitor's browser at weird.baby?
+
+This was never decided. It is not a tag or a database question; it is "where do
+the files physically live and how does the public site serve them."
+
+**Option 6A — Bundle assets into the site build.** Asset files are copied into
+the museum's build and shipped as part of the static site.
+- **+** Simple, fast for visitors, no external dependency at runtime.
+- **−** Big binary files bloat the repo and the build. Does not scale to a
+  large vault. Re-deploy needed for any asset change.
+
+**Option 6B — A dedicated asset store (e.g. Cloudflare R2).** Assets live in a
+cloud object store; the site references them by URL.
+- **+** Scales. Site stays light. The Phase 0 audit and `VISION_LOCK` both
+  gesture at exactly this ("R2 + D1 delivery layer").
+- **−** Another piece of infrastructure to set up and populate; the export
+  step gets a "push assets to R2" responsibility.
+
+**Option 6C — Defer it.** The target spec covers metadata fully and marks asset
+delivery as an explicit TBD for a later milestone.
+- **+** Keeps this milestone focused on data structure.
+- **−** Leaves a known hole; the pipeline can't render image/audio artifacts
+  until it is resolved.
+
+**Ops recommendation: 6C for this milestone, with 6B named as the intended
+direction.** Asset delivery is genuinely a *different* milestone — it is
+infrastructure, not data architecture. The target spec should specify the
+metadata completely (including the *fields* that will point at assets — a URL
+or key), and explicitly defer the *delivery mechanism* to a named follow-on,
+recommending 6B. This is the honest scope line: design the data now, design the
+asset plumbing when we build. *Flagging it to you because if you want asset
+delivery IN this spec, that is a legitimate call and changes the scope — your
+decision.*
+
+---
+
+## DECISION 7 — Lifecycle / status model *(Ops)*
+
+**The question:** What are the official states an artifact moves through, and
+what are they called?
+
+Today MV's code uses `inbox / vault / released / archived`. MV's own SPEC.md
+still says the fourth state should be `deleted`. The museum only ever cares
+about "released and not archived."
+
+**Option 7A — Adopt the live code's model as canonical.** Four states:
+`inbox / vault / released / archived`. Fix MV's SPEC.md to match. `archived`
+is a soft-delete (recoverable); there is no hard `deleted` state.
+- **+** Matches what runs today. Zero migration. Soft-delete-only is safer —
+  nothing is ever truly destroyed by a status change.
+- **−** Requires correcting MV's SPEC.md (a doc fix, not code).
+
+**Option 7B — Design a new lifecycle from scratch.** Decide the ideal states
+fresh (e.g. add a distinct `draft` or `review` state, or a real `deleted`).
+- **+** Could better match how the operator actually works.
+- **−** Migration of 85 artifacts; more to build; risk of designing states the
+  workflow does not need.
+
+**Ops recommendation: 7A.** The live four-state model is sound and the
+museum's needs ("released, not archived") are fully served by it. The only real
+problem is a documentation drift, which is a doc fix. Designing a new lifecycle
+is effort the system has not asked for. Adopt what runs, fix the doc, move on.
+*(If the operator workflow genuinely needs a state that does not exist — e.g. a
+"ready to release but held" state — that is worth raising now; otherwise 7A.)*
+
+---
+
+## Summary — the seven decisions
+
+| # | Decision | Ops recommendation | Type |
+|---|---|---|---|
+| 1 | Tag model | **1B** — namespaced strings | UX-impacting |
+| 2 | Ingest scope | **2A** — formal multi-platform | Ops (UX edge) |
+| 3 | `vocabulary` table | **3B** — keep as a registry | Ops (follows D1) |
+| 4 | MV→Museum interface | **4A** now, 4B as named upgrade | Ops |
+| 5 | Exhibit membership | **5A** — `exhibit:` tag | UX-impacting |
+| 6 | Asset delivery | **6C** — defer, 6B as direction | UX-impacting |
+| 7 | Lifecycle model | **7A** — adopt live 4-state | Ops |
+
+**If you accept all seven recommendations**, the target architecture is, in one
+sentence: *a multi-platform artifact vault where artifacts carry namespaced
+string tags, a vocabulary registry table describes those namespaces, exhibit
+membership is itself a tag, the museum pulls released artifacts via the
+existing whole-DB export, asset delivery is deferred to a named follow-on, and
+the lifecycle is the live four-state model.* That is a coherent, buildable
+target — and notably it is *evolution*, not demolition: it keeps what works
+(the four-state lifecycle, the export, the capture script's tag form) and fixes
+what is incoherent (the three-way tag confusion, the YouTube-only pretence, the
+unwired vocabulary table).
+
+You do not have to accept all seven. Override any of them; that is the point of
+the brief.
+
+---
+
+## Parked items (NOT decisions — explicitly out of scope, recorded so they are not lost)
+
+- **The `tags`-column write conflict (§8.4).** The current system has more than
+  one code path writing `artifacts.tags`; that is why namespaced tags
+  registered by the capture script do not survive. Identifying and resolving
+  the specific overwriter is a **BUILD-phase task**, not a target-design
+  decision. The target spec will state the rule ("exactly one authoritative
+  writer for an artifact's tags") and BUILD will enforce it.
+- **MV read API (Decision 4B)** — named future upgrade, not this milestone.
+- **Asset delivery mechanism (Decision 6B)** — named follow-on milestone.
+- **Identifying what built the bare-slug tags on the live YT rows** — archaeology
+  of the current system; irrelevant to the greenfield target.
+
+---
+
+*End of Decision Brief. Next step: Mike answers the seven decisions. Then the
+target-state Data A/S Spec is written against those answers.*

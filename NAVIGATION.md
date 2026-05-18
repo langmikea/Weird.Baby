@@ -123,31 +123,73 @@ There are three systems, related as follows:
 
 ## Current state and what's next
 
-**Updated:** 2026-05-14
+**Updated:** 2026-05-18
 
-**Current state:** The Museum is deployed at https://weird.baby from
-a build dated 2026-04-15. The working tree has unshipped work since
-then (exhibit UX, Deep Dive scaffolding, vocabulary work). MV
-integration has not started — Stance B adapter does not exist in
-code yet.
+**Current state:** Data architecture work is complete and the BUILD phase has
+begun. The three architecture documents at the repo root are unchanged
+(`DATA_ARCHITECTURE_SPEC_v1.1.md`, `DECISION_BRIEF_target_data_architecture.md`,
+`DATA_ARCHITECTURE_SPEC_v2.1-target.md`).
 
-**What's next:**
-- Adapter layer for MV-to-Museum integration. Stance B is chosen
-  but no code exists yet. This is the next non-trivial build item
-  when Mike is ready.
-- Phase 2b deploy verification. First deploy of the post-Phase-2a
-  working tree has not happened. Production at weird.baby is behind
-  the working tree.
+**BUILD phase — progress.** Governed entirely by v2.1-target §12.
 
-**If nothing's queued:** No items above means there's no work
-pre-decided. Don't pick something autonomously — ask Mike what to
-work on.
+- **§12 Criterion 0 (entry gate) — COMPLETE (2026-05-18).** The slug-to-namespace
+  map exists at `docs/SLUG_NAMESPACE_MAP.md`, covers 100% of distinct slugs in
+  live `artifacts.tags` (62/62, verified by read-only DB pull), and is
+  operator-authored and signed off. 15 slugs map to visitor-facing ARTIST/MEDIA
+  groups; 47 map to the reserved `unsorted:` namespace (§3.5). The DEEP DIVE tab
+  will launch empty and be populated later by deliberate operator curation.
+  The BUILD migration step is now unblocked.
 
----
+- **§12 Criterion 1 (tag migration) — COMPLETE (2026-05-18).** All 80 tagged
+  artifacts in live `artifacts.tags` migrated from bare slugs to namespaced
+  form per `docs/SLUG_NAMESPACE_MAP.md`. 421 tag entries, 0 bare slugs remain
+  (verified read-only). 47 values landed under `unsorted:`; full breakdown in
+  `docs/MIGRATION_RUN_REPORT_criterion1-20260518-084107.md`. Pre-write backup:
+  `core\backups\mediavault.pre-criterion1-20260518-083749.sqlite`.
 
-*This section is updated by the AI at the end of each working
-session. If the date above is older than your current session and
-the bullets look stale, flag it to Mike before acting on them.*
+**§12 Criterion 2 (adapter conformance — YouTube) — COMPLETE (2026-05-18).**
+The YouTube ingest path (`yt_archive_capture.py` + `yt-ingest.mjs`) verified
+§4.2-conformant against the live system: it emits namespaced tags only,
+correct `source_platform`/`platform:`/`scope:`/`author:` tags, parent-first
+registration, idempotent re-run. No adapter code change was required. Proven
+end-to-end: fresh capture of video `7Lttb_59EYw` → register
+(`MV-20260518-001/002/003`) → operator curation (released,
+`exhibit:hunter_root` + descriptive pills) → `export-artifacts.mjs` produced
+a real 1-artifact `hunter_root.json` → `npm run build` succeeded. Pre-write
+MV backup: `core\backups\mediavault.pre-criterion1-20260518-103104.sqlite`
+(filename says "criterion1" — it is the Criterion 2 backup; misnamed by the
+backup tool).
+Scope held: only the YouTube adapter was addressed. The ReverbNation /
+Facebook / local-file paths were NOT brought to conformance — §4.3's
+"EXISTS" claim is inaccurate for those three (no discrete adapter scripts
+exist; they ingest via MV's `core/ingest_engine.py`, a queue architecture
+that is not a §4.2 register-endpoint adapter). Building those is deferred
+per operator decision (prove YouTube first).
+
+**Two findings surfaced during Criterion 2, for later criteria — NOT actioned:**
+
+- **For Criterion 3:** the §8.4 tag-overwriter is located — the bulk
+  tag-admin handlers in `core/imgserver.py` (rename/merge/delete sweeps,
+  approx. lines 1267/1353/1433/1487). These are a §4.5 single-writer
+  violation. They are operator-triggered (Vocab Admin only), so they do not
+  corrupt ingest unless an operator runs a tag rename/merge/delete.
+- **For the Facebook adapter (future):** MV's register endpoint
+  (`imgserver_extensions.py` `_slugify`) rewrites hyphens in tag *values* to
+  underscores (e.g. `song:run-with-the-hunt` → `song:run_with_the_hunt`).
+  v2.1-target §3.1 allows hyphens in values. Harmless for YouTube (its tags
+  have no hyphens); will affect FB / song-title tags.
+
+**What is next — §12 Criterion 3** (single coordinated writer for
+`artifacts.tags`; remove the §8.4 overwriter; §4.5.1(b) grep-check passes).
+Criteria 3-8 must not be started without an explicit operator green-light for
+that step.
+
+**Not in BUILD scope:** asset delivery and the curation GUI are later, separate
+milestones — see v2.1-target §11, Category B.
+
+**Deploy gap (unchanged):** the Museum is still deployed at https://weird.baby
+from a build dated 2026-04-15; the working tree has unshipped UX work. That gap
+is separate from the data-architecture work.
 
 ## What's not here
 

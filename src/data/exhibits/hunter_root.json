@@ -1,9 +1,47 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-05-11T18:40:06.509Z",
+    "exported_at": "2026-05-18T18:07:42.498Z",
     "filter": "released, not archived, badged for this exhibit",
-    "vocabulary_csv_sha": "3166755abe8f"
+    "vocabulary_csv_sha": "09f7f1c5b57e"
   },
-  "artifacts": []
+  "artifacts": [
+    {
+      "id": "MV-20260518-001",
+      "source_url": "https://www.youtube.com/watch?v=7Lttb_59EYw",
+      "source_platform": "youtube",
+      "media_type": "link",
+      "title": "Hunter Root - Reverend (Official Music Video)",
+      "description": "Hunter Root - Reverend (official). Album: arkansas.",
+      "post_date": "2023-03-30",
+      "released_at": "2026-05-18T13:56:51",
+      "thumbnail_url": "https://i.ytimg.com/vi/7Lttb_59EYw/maxresdefault.jpg",
+      "tags": {
+        "album": [
+          "arkansas"
+        ],
+        "author": [
+          "hunter_root"
+        ],
+        "content_kind": [
+          "official"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "platform": [
+          "youtube"
+        ],
+        "scope": [
+          "hunter_root"
+        ],
+        "song": [
+          "reverend"
+        ],
+        "year": [
+          "2023"
+        ]
+      }
+    }
+  ]
 }
