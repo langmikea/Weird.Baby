@@ -179,10 +179,29 @@ per operator decision (prove YouTube first).
   v2.1-target §3.1 allows hyphens in values. Harmless for YouTube (its tags
   have no hyphens); will affect FB / song-title tags.
 
-**What is next — §12 Criterion 3** (single coordinated writer for
-`artifacts.tags`; remove the §8.4 overwriter; §4.5.1(b) grep-check passes).
-Criteria 3-8 must not be started without an explicit operator green-light for
-that step.
+**§12 Criterion 3 (single coordinated writer for `artifacts.tags`) — COMPLETE (2026-05-18).**
+A single coordinated writer landed at
+`core/artifact_tags.py::write_artifact_tags`. The four Vocab Admin sweeps
+in `core/imgserver.py` (rename/merge/delete handlers at lines
+~1267/1353/1433/1487 — the §8.4 overwriter flagged by Criterion 2) and the
+intake/release paths in `imgserver.py` and `imgserver_extensions.py` now
+route through it instead of issuing their own UPDATE/INSERT. §3.1 tag-shape
+validation runs at the writer rather than at each call site, so a malformed
+write fails in one place. The §4.5.1(b) grep check is checked in at
+`tools/check_single_tag_writer.py` and passes against the live tree
+(28 files scanned, 0 violations); a synthetic-violation test — a throwaway
+`_cowork/` file containing `UPDATE artifacts SET tags = ?` — confirmed the
+check exits non-zero on a new bypass. §4.5.1(c) (the R-rule forbid-list
+adapter) is deferred-justified per §12.3's literal wording, which gates
+Criterion 3 on §4.5.1(b) alone. Run report:
+`docs/CRITERION3_RUN_REPORT-20260518-235002.md`. Pre-write MV backup:
+`core\backups\mediavault.pre-criterion3-20260518-201040.sqlite`.
+
+**What is next — §12 Criterion 4** (regenerate the `vocabulary` table from
+`docs/CANONICAL_VOCABULARY.md` by a named build step, and confirm every
+namespace used in live `artifacts.tags` has a registry row; §5.4, §12.4).
+Criteria 4-8 must not be started without an explicit operator green-light
+for that step.
 
 **Not in BUILD scope:** asset delivery and the curation GUI are later, separate
 milestones — see v2.1-target §11, Category B.
