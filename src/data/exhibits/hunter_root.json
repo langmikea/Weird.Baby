@@ -1,11 +1,462 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-05-18T18:07:42.498Z",
+    "exported_at": "2026-05-19T19:38:01.365Z",
     "filter": "released, not archived, badged for this exhibit",
     "vocabulary_csv_sha": "09f7f1c5b57e"
   },
   "artifacts": [
+    {
+      "id": "MV-HR-20260416-014",
+      "source_url": "https://www.reverbnation.com/runwiththehunt/song/12495875-park-bench-pigeons",
+      "source_platform": "reverbnation",
+      "media_type": "mixed",
+      "title": "Park Bench Pigeons — audio recording",
+      "description": "Run With The Hunt — mp3 160 kbps — 312s",
+      "post_date": "2016-06-30",
+      "released_at": "2026-04-21T21:21:27",
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-001",
+      "source_url": "https://www.reverbnation.com/runwiththehunt/song/14767555-brain-cell",
+      "source_platform": "reverbnation",
+      "media_type": "mixed",
+      "title": "Brain Cell — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-04-21T21:21:32",
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-003",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "mixed",
+      "title": "Dead Man — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-04-21T21:21:40",
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-005",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "mixed",
+      "title": "Doors with Keys — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-04-21T21:21:43",
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-007",
+      "source_url": "https://www.reverbnation.com/runwiththehunt/song/13297881-eyes-are-oceans",
+      "source_platform": "reverbnation",
+      "media_type": "mixed",
+      "title": "Eyes are Oceans — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-04-21T21:21:46",
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-009",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "mixed",
+      "title": "Freezer Burnt — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-04-21T21:21:50",
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-011",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "mixed",
+      "title": "Northern Light Streaks — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-04-21T21:21:53",
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-013",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "mixed",
+      "title": "Playing Music with Our Bones — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-04-21T21:21:57",
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-015",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "mixed",
+      "title": "Same Page — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-04-21T21:22:01",
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-017",
+      "source_url": "https://www.reverbnation.com/runwiththehunt/song/13563739-straightlaced",
+      "source_platform": "reverbnation",
+      "media_type": "mixed",
+      "title": "Straightlaced — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-04-21T21:22:06",
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-019",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "mixed",
+      "title": "Think My Mind — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-04-21T21:22:08",
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-021",
+      "source_url": "https://www.reverbnation.com/runwiththehunt/song/14309195-time-flow-zero",
+      "source_platform": "reverbnation",
+      "media_type": "mixed",
+      "title": "Time Flow Zero — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-04-21T21:22:11",
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-023",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "mixed",
+      "title": "Trees and Everything — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-04-21T21:22:14",
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-025",
+      "source_url": "https://www.reverbnation.com/runwiththehunt/song/13447330-whiskey-to-the-sun",
+      "source_platform": "reverbnation",
+      "media_type": "mixed",
+      "title": "Whiskey to the Sun — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-04-21T21:22:18",
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-20260419-002",
+      "source_url": "https://www.facebook.com/reel/1137424761619325",
+      "source_platform": "facebook",
+      "media_type": null,
+      "title": "Facebook reel featuring puppet character created by ElmThree Productions",
+      "description": "Facebook reel posted by ElmThree Productions featuring a bearded puppet character with red bandana. The post honors @cheechandchong and references their 'Huge fan of Cheech and Chong' fandom, describing it as being about 'our #1st Hunter Root' with original audio.",
+      "post_date": "2025-09-03",
+      "released_at": "2026-04-19T14:31:24",
+      "thumbnail_url": null,
+      "tags": {
+        "exhibit": [
+          "hunter_root"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260421-001",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "mixed",
+      "title": "Song — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-04-21T21:22:22",
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
     {
       "id": "MV-20260518-001",
       "source_url": "https://www.youtube.com/watch?v=7Lttb_59EYw",
