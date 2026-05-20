@@ -24,7 +24,18 @@
 // passing artifacts here? No — buildDimensions itself skips that namespace
 // so artifact records can keep tags.exhibit in memory for any routing-layer
 // use without it leaking into pill columns.
+//
+// Source-of-truth refactor Phase 1.2 (2026-05-19): tier-by-namespace and
+// per-namespace display names are no longer hardcoded here. They are read
+// from the committed src/data/vocabulary.json registry — emitted from the MV
+// `vocabulary` table by tools/export-artifacts.mjs (Phase 1.1). The site
+// build never contacts MV (§0.5 of DATA_ARCHITECTURE_SPEC_v2.1-target.md);
+// the static import below is satisfied at build time from the committed JSON.
+// Closes Criterion 7 OPEN ITEM: tier source is now the registry, not a
+// hand-maintained const.
 // ─────────────────────────────────────────────────────────────────────────────
+
+import VOCABULARY from "../../data/vocabulary.json";
 
 // ─── slugify — preserved utility ────────────────────────────────────────────
 // Lowercase, strip apostrophes, collapse non-alphanumerics to single hyphens.
@@ -39,27 +50,48 @@ export function slugify(str) {
     .replace(/^-+|-+$/g, "");
 }
 
-// Tier assignments locked by docs/CANONICAL_VOCABULARY.md. Do not add namespaces
-// here without updating canonical first — vocabulary inventions are a known
-// Ops failure mode.
-const TIER_BY_NAMESPACE = {
-  year: 1, album: 1, song: 1, venue: 1, people: 1,
-  source: 2, type: 2,
-};
+// ─── Registry (from src/data/vocabulary.json, committed) ────────────────────
+// Shape (per Phase 1.1 export schema): { metadata, namespaces: [...] } where
+// each namespace row carries { namespace, display_name, tier, sort_order,
+// retired_at }. We collapse it into a per-namespace lookup at module load,
+// plus a Set of retired namespaces for fast filter.
+//
+// Retired-namespace handling (Criterion 4 / brief §9.3 Q3): rows where
+// retired_at IS NOT NULL are dropped from rendered pill columns. The
+// operator promotes a namespace to visible by clearing retired_at in MV
+// and re-running `npm run export-artifacts`.
+//
+// Tier fallback: per docs/CANONICAL_VOCABULARY.md §1.1 ("every other
+// namespace → Tier 3 DEEP DIVE"), a namespace not present in the registry
+// falls through to tier 3. The registry is descriptive, never gating
+// (DATA_ARCHITECTURE_SPEC_v2.1-target.md §3.4): an artifact may carry a
+// namespace that isn't in the registry — it's just rendered with the
+// catch-all tier and a prettified label.
+const REGISTRY = Object.create(null);
+const RETIRED_NAMESPACES = new Set();
+for (const row of (VOCABULARY?.namespaces ?? [])) {
+  if (!row || typeof row.namespace !== "string") continue;
+  REGISTRY[row.namespace] = {
+    tier: typeof row.tier === "number" ? row.tier : null,
+    sort_order: typeof row.sort_order === "number" ? row.sort_order : null,
+    display_name: typeof row.display_name === "string" ? row.display_name : null,
+    retired_at: row.retired_at ?? null,
+  };
+  if (row.retired_at) RETIRED_NAMESPACES.add(row.namespace);
+}
 
 function tierForNamespace(ns) {
-  return TIER_BY_NAMESPACE[ns] ?? 3;
+  const tier = REGISTRY[ns]?.tier;
+  return typeof tier === "number" ? tier : 3;
 }
 
 // ─── Display name derivation ────────────────────────────────────────────────
 // Per v5.2 §3: human-readable labels come from a lookup that maps slugs to
-// display names. v5.2 leaves the storage shape for the lookup to Phase v5-4;
-// for the first pass we derive labels by simple transformation — replace
-// underscores and hyphens with spaces, then title-case. `hunter_root` →
-// "Hunter Root"; `pink-hats` → "Pink Hats"; `content_kind` → "Content Kind".
-// A future enhancement adds a `display_name` column to the vocabulary CSV;
-// this function will then consult that table and fall through to the
-// transform for unmapped slugs.
+// display names. Group labels (pill-column headers) come from the registry
+// (`display_name`) when present, falling back to prettify(slug). Value
+// labels within a column have no registry entry today, so they always go
+// through prettify(slug): `hunter_root` → "Hunter Root"; `pink-hats` →
+// "Pink Hats"; `content_kind` → "Content Kind".
 function prettify(s) {
   return String(s)
     .replace(/[_-]+/g, " ")
@@ -69,10 +101,15 @@ function prettify(s) {
     .join(" ");
 }
 
+function displayNameForNamespace(ns) {
+  return REGISTRY[ns]?.display_name ?? prettify(ns);
+}
+
 // ─── buildDimensions — the only public surface besides slugify ──────────────
 // Walks every artifact's tags object, collects the union of namespaces (minus
-// `exhibit`), and for each namespace collects the union of values present in
-// the artifact set. Returns the structures the deck consumes:
+// `exhibit` and any namespace with retired_at set in the registry), and for
+// each namespace collects the union of values present in the artifact set.
+// Returns the structures the deck consumes:
 //
 //   HR_DIMENSIONS    — array of { key, kind, tier, options, values }.
 //                      `kind` is always "multi" under v5 because every
@@ -94,6 +131,10 @@ export function buildDimensions(artifacts) {
       // v5.2 §3: routing-only namespace. Lives on the artifact record for
       // routing-layer use but never becomes a pill column.
       if (ns === "exhibit") continue;
+      // Phase 1.2 (brief §9.3 Q3): registry rows with retired_at IS NOT
+      // NULL drop from rendered pill columns. Operator un-retires by
+      // clearing retired_at in MV and re-running the export.
+      if (RETIRED_NAMESPACES.has(ns)) continue;
       const vs = a.tags[ns];
       if (!Array.isArray(vs)) continue;
       const seen = valuesByNamespace[ns] || (valuesByNamespace[ns] = new Set());
@@ -118,7 +159,7 @@ export function buildDimensions(artifacts) {
   });
 
   const groupLabels = Object.fromEntries(
-    namespaces.map(ns => [ns, prettify(ns)])
+    namespaces.map(ns => [ns, displayNameForNamespace(ns)])
   );
 
   const labelTable = Object.fromEntries(
