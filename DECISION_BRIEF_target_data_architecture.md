@@ -336,6 +336,101 @@ the brief.
 - **Identifying what built the bare-slug tags on the live YT rows** — archaeology
   of the current system; irrelevant to the greenfield target.
 
+### Added 2026-05-19 — single-source-of-truth policy *(operator decision, BUILD-phase)*
+
+The same drift surfaced in three BUILD-phase reports, in three different
+forms:
+
+- **Criterion 5** — `STATUS_ENUM` in `core/imgserver_extensions.py` is a
+  second/third copy of the status enum (canon in `SPEC.md`, live CHECK
+  constraint, Python set).
+- **Criterion 6** — `exhibit:` badging done via scripted
+  `/api/artifact-update` calls; §4.5 / §12.6 name the "via the MV Inbox"
+  path. Same single writer, different path; correctness held, spec wording
+  too narrow.
+- **Criterion 7** — `hr_dimensions.js` reads pill tiers from a hardcoded
+  const, not the `vocabulary` registry §8.3 names. Three copies of the
+  tier definition (canon doc, MV registry, JS const). The orphan
+  `build-deep-tags-vocabulary` prebuild hook still emits a JSON nothing
+  imports.
+
+**Decision (2026-05-19, operator):** one source of truth — definitions are
+generated from canon/registry, copies are retired. Portfolio-wide policy.
+
+**Explicitly deferred:** the *implementation* of this policy is its own
+scoped work item, not part of any single criterion's close-out. Scoping
+required before any code change:
+1. Which source is canonical per definition (status enum, tier map,
+   badging path, anything else surfaced by audit).
+2. The §0.5 / §1-principle-5 constraint: the site build cannot contact
+   MV, so "from the registry" can only mean "from a committed file
+   *generated from* the registry by a build step."
+3. The plumbing — build steps that generate the committed files, and
+   the retirement of each duplicate copy.
+
+Treat the three observations above as deferred-by-policy: the *outcomes*
+are correct in every case, the *source-of-truth* is the unresolved part,
+and resolving it is a single piece of work covering all three rather
+than three separate patches.
+
+**Dependent — added 2026-05-19:** §12 Criterion 8 (legacy `tags` table
+demotion per §5.2) is also blocked by this work. A read-only audit found
+the `tags` table is load-bearing for ~30 MV call sites that read the
+registry-era columns §5.2 names for drop. Cleanly demoting the table
+requires re-pointing those readers at the `vocabulary` registry first —
+which is part of this scoping work. Recorded separately at
+`docs/CRITERION8_DEFERRAL_NOTE-20260519-211529.md`. §12 stands at 7 of 8 complete,
+Criterion 8 paused.
+
+### Addendum 2026-05-19 — STATUS_ENUM deviation, ratified *(operator decision)*
+
+During the source-of-truth refactor's Phase 0.1 (Cowork session, 2026-05-19),
+Cowork was tasked with aligning `STATUS_ENUM` in
+`core/imgserver_extensions.py` to the lifecycle. The Phase 0 brief
+specified `STATUS_ENUM = {"inbox", "vault", "released", "archived"}` —
+matching the live `artifacts.status` CHECK constraint.
+
+**Cowork made a substantive deviation, surfaced it explicitly, and the
+operator ratified it on 2026-05-19.**
+
+**What Cowork shipped:** `STATUS_ENUM = {"vault", "released", "archived"}`
+— `deleted` dropped (as briefed), but `inbox` **not** added.
+
+**Why the deviation is correct (Cowork's reasoning, ratified):**
+
+`STATUS_ENUM` is an *endpoint-scoped* input validator for
+`POST /api/artifact-register`. It is not a lifecycle-wide enum. The
+endpoint intentionally rejects `status='inbox'` per
+`COWORK_BRIEF_v05.md:533-534`: external callers ship directly to vault,
+skipping the inbox — that's the whole point of `/artifact-register`.
+Mechanically aligning `STATUS_ENUM` with the live CHECK would have
+silently broadened what the endpoint accepts, allowing external callers
+to write `status='inbox'` — a behavior change masquerading as a
+consistency fix.
+
+The brief conflated two distinct concepts:
+- **Lifecycle enum** (what the schema permits): four values, all four valid.
+- **Endpoint validator enum** (what *this* endpoint accepts as input):
+  a strict subset.
+
+Cowork recognized the conflation and acted on substance, not literal
+wording. A multi-line comment block was added above `STATUS_ENUM`
+explaining the endpoint-scoping rationale, so the next maintainer does
+not repeat the brief's mistake.
+
+**Policy implication for the source-of-truth refactor.** "One source of
+truth" means *one canonical source per concept*, not "every enum-shaped
+value mechanically aligned to one schema." Endpoint validators may
+legitimately be strict subsets of the lifecycle enum they validate
+against, *provided* the relationship is documented (here: in the
+comment block above `STATUS_ENUM`). Future phases must respect this:
+identify the *concept* before identifying the canonical source.
+
+**Paper trail.** This addendum ratifies the deviation. The comment
+block in `imgserver_extensions.py` is the in-code record. The Phase 0
+Cowork report (which surfaced the deviation explicitly) is the
+session-level record.
+
 ---
 
 *End of Decision Brief. Next step: Mike answers the seven decisions. Then the

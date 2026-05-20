@@ -44,6 +44,7 @@ const REPO_ROOT = resolve(HERE, "..");
 const DEFAULT_MV_BASE = "http://127.0.0.1:51822";
 const DEFAULT_OUTPUT_DIR = "src/data/exhibits";
 const VOCAB_CSV_PATH = resolve(REPO_ROOT, "docs/deep-dive-vocabulary.csv");
+const EXHIBITS_CONFIG_PATH = resolve(REPO_ROOT, "src/data/exhibits.config.json");
 
 // ─── Known exhibits ─────────────────────────────────────────────────────────
 // Files for these are written even if no released artifact currently carries
@@ -51,10 +52,36 @@ const VOCAB_CSV_PATH = resolve(REPO_ROOT, "docs/deep-dive-vocabulary.csv");
 // artifact has been badged for it (v5.1 Patch 10 Gap A).
 // Files for discovered-but-not-known exhibits also get written; this list
 // only governs bootstrapping.
-// Per v5.1 Patch 9: the mechanism is committed here; the storage location
-// (this constant) is Phase v5-3's call. Extend the array when a new exhibit
-// route is being introduced.
-const KNOWN_EXHIBITS = ["hunter_root"];
+// Storage: src/data/exhibits.config.json (committed). Per
+// DATA_ARCHITECTURE_SPEC_v2.1-target.md §7.3 / Appendix A G5, the bootstrap
+// list was relocated from a hardcoded array here to a committed config file
+// (Phase 0.3 of the source-of-truth refactor, 2026-05-19). Extending that
+// file is the documented way to introduce a new exhibit route.
+function loadKnownExhibits() {
+  let raw;
+  try {
+    raw = readFileSync(EXHIBITS_CONFIG_PATH, "utf8");
+  } catch (err) {
+    fail(`could not read exhibits config at ${EXHIBITS_CONFIG_PATH}: ${err.message}`);
+  }
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch (err) {
+    fail(`exhibits config is not valid JSON (${EXHIBITS_CONFIG_PATH}): ${err.message}`);
+  }
+  const list = parsed && parsed.known_exhibits;
+  if (!Array.isArray(list)) {
+    fail(`exhibits config missing "known_exhibits" array (${EXHIBITS_CONFIG_PATH})`);
+  }
+  for (const name of list) {
+    if (typeof name !== "string" || !EXHIBIT_NAME_RE.test(name)) {
+      fail(`exhibits config "known_exhibits" contains invalid entry ${JSON.stringify(name)} ` +
+           `(must match ${EXHIBIT_NAME_RE})`);
+    }
+  }
+  return list;
+}
 
 // ─── Tag-key shape for validating exhibit names ─────────────────────────────
 // MV stores tag values as plain ASCII slugs (lowercase, alnum, _, -). The
@@ -301,6 +328,11 @@ function vocabularyCsvSha() {
 async function main() {
   const opts = parseArgs(process.argv.slice(2));
   if (opts.help) { printHelp(); return 0; }
+
+  // Load committed bootstrap list before contacting MV — if the config
+  // is broken, fail early with a clear message instead of after a network
+  // round-trip.
+  const KNOWN_EXHIBITS = loadKnownExhibits();
 
   const { url, buf } = await fetchMvBlob(opts.mvBase, opts.verbose);
 

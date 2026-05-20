@@ -325,9 +325,16 @@ before. The target requires, at minimum, all three of:
 
 **`exhibit:` badging before the GUI exists.** §12.6 requires released
 artifacts to carry `exhibit:` tags, but the GUI is deferred (§11). Resolution:
-badging is done through the **existing MV Inbox curation path** (per v1.1
-§8.3), which is a legitimate writer (#2 above). The GUI is not required for
-badging; the Inbox suffices for the BUILD phase.
+badging may be done through **any §4.5 single-writer path** — today that
+includes the existing MV Inbox curation UI (writer #2 above) and any
+scripted caller that routes through `write_artifact_tags`
+(`core/artifact_tags.py`). Both inherit the §4.5 single-writer guarantee.
+The GUI is not required for badging; the Inbox suffices for the BUILD
+phase, and scripted badging via `write_artifact_tags` is equally
+legitimate when a bulk operation is more practical than per-row UI work
+(reframed 2026-05-19 — Criterion 6 ran scripted badging via
+`/api/artifact-update`, which routes through `write_artifact_tags` and
+preserves §4.5.1(b); this paragraph ratifies that method).
 
 **Finding the current overwriter** is BUILD archaeology (§11 item 3) — but
 removing it is a §12 criterion (§12.3), so it is BUILD-required work, not a
@@ -734,9 +741,9 @@ The BUILD phase has satisfied this spec when:
    tags has a registry row.
 5. MV's `SPEC.md` lifecycle section is corrected to the four-state model
    (§5.3).
-6. Released artifacts carry `exhibit:` tags (badged via the MV Inbox);
-   `npm run export-artifacts` produces per-exhibit JSON containing real
-   records.
+6. Released artifacts carry `exhibit:` tags (badged via any §4.5
+   single-writer path — see §4.5); `npm run export-artifacts` produces
+   per-exhibit JSON containing real records.
 7. The museum builds from that JSON and renders each artifact's text and
    metadata with correctly derived pill tiers (§8.3). **Asset-bearing
    artifacts render placeholder tiles pending §6.2 — this placeholder-only

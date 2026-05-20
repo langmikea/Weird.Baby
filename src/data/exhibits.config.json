@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "known_exhibits": ["hunter_root"],
+  "_doc": "Bootstrap list of exhibit names. Files for these exhibits are written by `npm run export-artifacts` even when MV has no released artifact currently carrying `exhibit:<name>`. Discovery from live MV data still happens; this list only governs which exhibit slugs get bootstrap files for a fresh route. To introduce a new exhibit route, add its slug to `known_exhibits`. Per DATA_ARCHITECTURE_SPEC_v2.1-target.md §7.3 / Appendix A G5."
+}
