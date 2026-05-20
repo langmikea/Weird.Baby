@@ -1,0 +1,108 @@
+{
+  "metadata": {
+    "source": "http://127.0.0.1:51822/db",
+    "exported_at": "2026-05-20T02:32:56.057Z",
+    "row_count": 14,
+    "schema": "vocabulary v1 — namespace, display_name, tier, sort_order, retired_at"
+  },
+  "namespaces": [
+    {
+      "namespace": "year",
+      "display_name": "Year",
+      "tier": 1,
+      "sort_order": 1,
+      "retired_at": null
+    },
+    {
+      "namespace": "album",
+      "display_name": "Album",
+      "tier": 1,
+      "sort_order": 2,
+      "retired_at": null
+    },
+    {
+      "namespace": "song",
+      "display_name": "Song",
+      "tier": 1,
+      "sort_order": 3,
+      "retired_at": null
+    },
+    {
+      "namespace": "venue",
+      "display_name": "Venue",
+      "tier": 1,
+      "sort_order": 4,
+      "retired_at": null
+    },
+    {
+      "namespace": "people",
+      "display_name": "People",
+      "tier": 1,
+      "sort_order": 5,
+      "retired_at": null
+    },
+    {
+      "namespace": "source",
+      "display_name": "Source",
+      "tier": 2,
+      "sort_order": 1,
+      "retired_at": null
+    },
+    {
+      "namespace": "type",
+      "display_name": "Type",
+      "tier": 2,
+      "sort_order": 2,
+      "retired_at": null
+    },
+    {
+      "namespace": "unsorted",
+      "display_name": "Unsorted",
+      "tier": 3,
+      "sort_order": 1,
+      "retired_at": "2026-05-19T01:06:41.000Z"
+    },
+    {
+      "namespace": "author",
+      "display_name": "Author",
+      "tier": 3,
+      "sort_order": 2,
+      "retired_at": "2026-05-19T01:06:41.000Z"
+    },
+    {
+      "namespace": "platform",
+      "display_name": "Platform",
+      "tier": 3,
+      "sort_order": 3,
+      "retired_at": "2026-05-19T01:06:41.000Z"
+    },
+    {
+      "namespace": "scope",
+      "display_name": "Scope",
+      "tier": 3,
+      "sort_order": 4,
+      "retired_at": "2026-05-19T01:06:41.000Z"
+    },
+    {
+      "namespace": "artifact_kind",
+      "display_name": "Artifact Kind",
+      "tier": 3,
+      "sort_order": 5,
+      "retired_at": "2026-05-19T01:06:41.000Z"
+    },
+    {
+      "namespace": "content_kind",
+      "display_name": "Content Kind",
+      "tier": 3,
+      "sort_order": 6,
+      "retired_at": "2026-05-19T01:06:41.000Z"
+    },
+    {
+      "namespace": "exhibit",
+      "display_name": "Exhibit",
+      "tier": null,
+      "sort_order": null,
+      "retired_at": "2026-05-19T01:06:41.000Z"
+    }
+  ]
+}

@@ -9,6 +9,13 @@
 // full artifact records the museum's deck consumes directly. No card_id
 // concept: the museum displays MV's released artifacts, not authored cards.
 //
+// As of the source-of-truth refactor Phase 1.1 (2026-05-19), this script
+// also emits src/data/vocabulary.json — a static snapshot of MV's
+// `vocabulary` registry. The site build never contacts MV (§0.5 of
+// DATA_ARCHITECTURE_SPEC_v2.1-target.md), so the JSON is the committed
+// source-of-truth for pill-tier-by-namespace rendering. Re-run this
+// command after curating retired_at flags on the MV side.
+//
 // Per Q-2: each record carries `title` (from description_short) AND
 // `description` (from description_long) as separate fields.
 // Per Q-3: every released artifact carrying the exhibit badge is exported;
@@ -127,6 +134,22 @@ WHERE a.status = 'released'
     SELECT 1 FROM json_each(a.tags)
     WHERE json_each.value LIKE 'exhibit:%'
   );`;
+
+// Vocabulary registry pull. Phase 1.1 of the source-of-truth refactor
+// (DATA_ARCHITECTURE_SPEC_v2.1-target.md §5.4; SOURCE_OF_TRUTH_REFACTOR
+// _SCOPING_BRIEF §9.2). The MV `vocabulary` table is the only artifact
+// that carries the complete registry (T1+T2 canon + dynamic T3 + retirement
+// flags). The site build and prebuild hook never contact MV (§0.5), so the
+// table has to be emitted into a committed JSON during this MV-contacting
+// operator run, alongside the per-exhibit JSONs.
+//
+// Order: tier ascending with NULL tiers last (so `exhibit` and any future
+// uncategorized rows sit at the bottom), then sort_order, then namespace.
+// Within retired-only blocks the same order applies — the consumer
+// (hr_dimensions.js) is what filters on retired_at.
+const VOCABULARY_SQL = `SELECT namespace, display_name, tier, sort_order, retired_at
+FROM vocabulary
+ORDER BY (tier IS NULL), tier, sort_order, namespace;`;
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 function fail(msg, code = 1) {
@@ -324,6 +347,31 @@ function vocabularyCsvSha() {
   return createHash("sha256").update(bytes).digest("hex").slice(0, 12);
 }
 
+// ─── Vocabulary registry → JSON payload ─────────────────────────────────────
+// Phase 1.1 of the source-of-truth refactor. Mirrors the per-exhibit JSON
+// shape ({ metadata, <body> }) so consumers parse them the same way.
+// Each row is passed through verbatim; retired_at is preserved (downstream
+// consumers — currently src/routes/hr/hr_dimensions.js — decide whether to
+// filter retired rows from the rendered output).
+function buildVocabularyPayload(rows, { sourceUrl, exportedAt }) {
+  const namespaces = rows.map(r => ({
+    namespace: r.namespace,
+    display_name: r.display_name,
+    tier: r.tier ?? null,
+    sort_order: r.sort_order ?? null,
+    retired_at: r.retired_at ?? null,
+  }));
+  return {
+    metadata: {
+      source: sourceUrl,
+      exported_at: exportedAt,
+      row_count: namespaces.length,
+      schema: "vocabulary v1 — namespace, display_name, tier, sort_order, retired_at",
+    },
+    namespaces,
+  };
+}
+
 // ─── main ──────────────────────────────────────────────────────────────────
 async function main() {
   const opts = parseArgs(process.argv.slice(2));
@@ -349,6 +397,25 @@ async function main() {
     const skippedNoBadgeRow = runSchemaSensitive(() => db.prepare(NO_BADGE_COUNT_SQL).get());
     const skippedNoBadge = skippedNoBadgeRow ? skippedNoBadgeRow.c : 0;
     logVerbose(opts.verbose, `released-but-no-badge count: ${skippedNoBadge}`);
+
+    // Phase 1.1: pull the vocabulary registry from the same DB blob.
+    // Fails loudly if the table is missing — the source-of-truth refactor
+    // requires it (created/populated by MV Criterion 4, 2026-05-19).
+    logVerbose(opts.verbose, "vocabulary SQL:", VOCABULARY_SQL.replace(/\s+/g, " "));
+    let vocabularyRows;
+    try {
+      vocabularyRows = db.prepare(VOCABULARY_SQL).all();
+    } catch (err) {
+      const m = err && err.message ? String(err.message) : "";
+      if (m.includes("no such table: vocabulary")) {
+        fail("MV is missing the `vocabulary` table. It is created and " +
+             "seeded by MV-side Criterion 4 work. Run the regeneration " +
+             "step in the MV repo and retry. " +
+             "(See SOURCE_OF_TRUTH_REFACTOR_SCOPING_BRIEF §9.1.)");
+      }
+      throw err;
+    }
+    logVerbose(opts.verbose, `vocabulary rows: ${vocabularyRows.length}`);
 
     // Union of discovered + known. Discovery is authoritative for what's
     // actually in MV; KNOWN_EXHIBITS makes sure empty bootstrap files exist
@@ -381,10 +448,21 @@ async function main() {
       });
     }
 
-    return { discovered, allExhibits, counts, filesToWrite, skippedNoBadge };
+    return { discovered, allExhibits, counts, filesToWrite, skippedNoBadge, vocabularyRows };
+  });
+
+  // Phase 1.1: build the vocabulary payload from the rows we pulled above.
+  // The committed file is the static source-of-truth for the museum's
+  // pill-tier rendering (hr_dimensions.js reads it at module load).
+  const vocabularyPayload = buildVocabularyPayload(result.vocabularyRows, {
+    sourceUrl: url,
+    exportedAt,
   });
 
   const outDir = resolve(REPO_ROOT, opts.outputDir);
+  // Committed location for the vocabulary registry JSON. Fixed path (not
+  // configurable) because static imports in src/ resolve it at build time.
+  const vocabularyOutPath = resolve(REPO_ROOT, "src/data/vocabulary.json");
 
   let totalBytes = 0;
   let filesWritten = 0;
@@ -398,6 +476,16 @@ async function main() {
       filesWritten += 1;
     }
   }
+
+  // Vocabulary registry write (Phase 1.1). One file, fixed path.
+  let vocabularyBytes = 0;
+  if (opts.dryRun) {
+    const json = JSON.stringify(vocabularyPayload, null, 2) + "\n";
+    vocabularyBytes = Buffer.byteLength(json, "utf8");
+  } else {
+    vocabularyBytes = atomicWriteJson(vocabularyOutPath, vocabularyPayload);
+  }
+  totalBytes += vocabularyBytes;
 
   // Summary
   const lines = [
@@ -413,6 +501,9 @@ async function main() {
     lines.push(`    ${name}.json: ${result.counts[name] ?? 0} artifact(s)`);
   }
   lines.push(`  Released artifacts with no exhibit badge: ${result.skippedNoBadge}`);
+  lines.push(`  Vocabulary registry: ${result.vocabularyRows.length} row(s)` +
+             ` (${vocabularyBytes} bytes)` + (opts.dryRun ? " (dry-run)" : ""));
+  lines.push(`    src/data/vocabulary.json: ${result.vocabularyRows.length} namespace(s)`);
   lines.push(`  Output dir: ${opts.outputDir}` + (opts.dryRun ? " (dry-run)" : ""));
   lines.push("");
   process.stdout.write(lines.join("\n"));
