@@ -11,3 +11,4 @@ new runs by running the tool. The wrapper creates the header on first run.
 | 2026-05-10T14:09:40.271Z | arkansas | Reverend | official | 7Lttb_59EYw | ok (5438 ms) |
 | 2026-05-18T14:31:35.254Z | arkansas | Reverend | official | 7Lttb_59EYw | ok (3429 ms) |
 | 2026-05-18T14:34:53.980Z | arkansas | Reverend | official | 7Lttb_59EYw | ok (9341 ms) |
+| 2026-05-21T15:06:18.113Z | crooked | '94 | official | vPW49GU38Ng | dry-run ok (3610 ms) |
