@@ -4,7 +4,22 @@
 **Criterion:** v2.1-target §12.8 / §5.2 — demote the legacy `tags` table to a
 per-value usage-count cache (drop `category`, `is_proposed`, `is_exclusive`,
 `description`; refresh from `artifacts.tags`).
-**Status:** **DEFERRED-BY-POLICY** — not started, blocked on the
+**Status:** **CLOSED (2026-05-20).** Resolved by Phase 2.5 of the
+source-of-truth refactor (MV commit `fa45ca8`). The §5.2 demotion landed:
+`tags` table reduced to 4 columns (`slug` PRIMARY KEY, `display_name`,
+`usage_count`, `created_at`); registry-era columns dropped; cache parity
+preserved (69 rows, SUM(usage_count)=453). §12 Criterion 8 is closed;
+§12 reads 8 of 8 complete. The historical content below documents the
+deferral period (2026-05-19 through 2026-05-20) and remains as a
+record of why the work was paused before being unblocked by the
+single-source-of-truth scoping (Decision Brief Parked-items,
+2026-05-19).
+
+---
+
+### Original deferral content (preserved as record)
+
+**Status (original):** **DEFERRED-BY-POLICY** — not started, blocked on the
 single-source-of-truth scoping work recorded in the Decision Brief's
 Parked-items section (2026-05-19).
 

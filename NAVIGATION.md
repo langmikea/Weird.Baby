@@ -260,23 +260,35 @@ recorded in the Decision Brief's Parked-items section (2026-05-19) — "one
 source of truth: generate from canon/registry, retire the copies" — is
 the policy. Implementation is its own scoped work item, not started.
 
-**§12 Criterion 8 — DEFERRED-BY-POLICY (2026-05-19).** Green-lit and
-investigated; a read-only audit found the legacy `tags` table is
-load-bearing for ~30 MV call sites reading the registry-era columns
-§5.2 names for drop. Cleanly demoting it requires re-pointing those
-readers at the `vocabulary` registry first — which is part of the
-single-source-of-truth scoping work recorded in the Decision Brief's
-Parked-items section (2026-05-19). Criterion 8 is therefore paused, not
-closed; it is one of that work item's dependents. **§12 stands at 7 of
-8 complete with Criterion 8 paused.** Deferral note:
-`docs/CRITERION8_DEFERRAL_NOTE-20260519-211529.md`.
+**§12 Criterion 8 (legacy `tags` table demoted) — CLOSED (2026-05-20).**
+Resolved by Phase 2.5 of the source-of-truth refactor (MV commit
+`fa45ca8`). The §5.2 demotion landed: `tags` table reduced to 4 columns
+(`slug` PRIMARY KEY, `display_name`, `usage_count`, `created_at`);
+four obsolete indexes dropped; registry-era columns (`category`,
+`is_proposed`, `is_exclusive`, `description`) removed; cache parity
+preserved (69 rows, SUM(usage_count)=453); slug lookups now use the
+implicit PK index per `EXPLAIN QUERY PLAN`. SPEC.md §6 schema block,
+STATE.md, NAVIGATION.md (MV-side), CHANGELOG.md, and code-comment
+docs were all swept to match. Pre-write backups recorded in the
+Phase 2.5 run report.
+
+**§12 stands at 8 of 8 complete.** The source-of-truth refactor — Phase 0
+through Phase 2.5 across both repos — is substantively done. The
+portfolio-wide drift class that surfaced in Criteria 5/6/7 OPEN ITEMs
+and Criterion 8's deferral has been resolved by the single
+architectural decision recorded in the Decision Brief's Parked-items
+section (2026-05-19) and the eleven commits that implemented it.
+
+Deferral note closed: `docs/CRITERION8_DEFERRAL_NOTE-20260519-211529.md`.
+Phase 2.5 run report: `docs/PHASE25_RUN_REPORT-20260520-234155.md` (in
+MV repo).
 
 **What is next — operator decision.** BUILD-phase §12 has no further
-green-lit criterion. Next milestones per v2.1-target §11 Category B are
-asset delivery (§6.2; recommended R2) and the curation GUI; the
-single-source-of-truth refactor is its own scoping pass per the
-Decision Brief. None of these are started; all await operator
-direction.
+queued criterion. Next milestones per v2.1-target §11 Category B are
+asset delivery (§6.2; recommended R2) and the curation GUI. A small
+Phase 3 (`media_type` cleanup, separately scoped) was named by the
+source-of-truth scoping brief and is not started. None of these are
+green-lit; all await operator direction.
 
 **Not in BUILD scope:** asset delivery and the curation GUI are later, separate
 milestones — see v2.1-target §11, Category B.
