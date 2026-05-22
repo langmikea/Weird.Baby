@@ -10,11 +10,13 @@
 // sharp, uploads thumbnail to its own content-addressed path, records both
 // URLs in tools/sync-assets-to-r2-manifest.json.
 //
-// Phase B Option A scope narrowing (per session 2026-05-21): only
-// media_type='photo' artifacts sync this phase. The 15 media_type='mixed'
-// audio artifacts are deferred to a follow-on scoping brief that addresses
-// audio storage, thumbnail strategy, and render layer together. See Phase B
-// run report §2 for the scope reversal record.
+// Phase C scope widening (2026-05-22): the 15 RWTH audio artifacts that
+// were deferred at the end of Phase B (per Phase B run report §2.2,
+// Option A scope reversal) are folded back in. Scope filter is now
+// media_type IN ('photo', 'audio') after the MV-side curation step
+// (phaseC_step1_apply_audio_curation.py) normalized those artifacts
+// from media_type='mixed' to 'audio'. See AUDIO_DELIVERY_SCOPING_BRIEF
+// for the full Phase C plan and §9 for the locked operator decisions.
 //
 // Usage:
 //   node tools/sync-assets-to-r2.mjs [flags]
@@ -33,6 +35,7 @@ import { fileURLToPath } from "node:url";
 import { readFile } from "node:fs/promises";
 import Database from "better-sqlite3";
 import sharp from "sharp";
+import { parseFile as parseAudioMetadata } from "music-metadata";
 import { S3Client, PutObjectCommand, HeadObjectCommand } from "@aws-sdk/client-s3";
 import dotenv from "dotenv";
 
@@ -54,7 +57,7 @@ const SCOPE_SQL = `
   WHERE status = 'released'
     AND local_asset_path IS NOT NULL
     AND local_asset_path <> ''
-    AND media_type = 'photo'
+    AND media_type IN ('photo', 'audio')
   ORDER BY id
 `;
 
@@ -65,7 +68,11 @@ const MIME_BY_EXT = {
   ".jpeg": "image/jpeg",
   ".webp": "image/webp",
   ".gif": "image/gif",
+  ".mp3": "audio/mpeg",   // Phase C §3.4
 };
+
+const AUDIO_EXTS = new Set([".mp3"]);
+const IMAGE_EXTS = new Set([".heic", ".png", ".jpg", ".jpeg", ".webp", ".gif"]);
 
 const CACHE_CONTROL = "public, max-age=31536000, immutable";
 
@@ -142,8 +149,12 @@ function sha256OfBuffer(buf) {
   return createHash("sha256").update(buf).digest("hex");
 }
 
-function primaryKey(hash, ext) {
-  return `assets/${hash.slice(0, 2)}/${hash}${ext.toLowerCase()}`;
+// Phase C: primary object key prefix branches on extension. Audio files
+// live under audio/<sha>/...; images keep assets/<sha>/... per brief §2.2.
+function primaryKeyForExt(hash, ext) {
+  const e = ext.toLowerCase();
+  const prefix = AUDIO_EXTS.has(e) ? "audio" : "assets";
+  return `${prefix}/${hash.slice(0, 2)}/${hash}${e}`;
 }
 
 function thumbnailKey(thumbHash) {
@@ -174,17 +185,97 @@ async function r2Put(key, body, contentType) {
   }));
 }
 
-async function generateThumbnail(sourceBuf, sourceExt, artifactId) {
-  // Per brief §3.3: 400x400 JPEG q85.
+// ─── Thumbnail generation ───────────────────────────────────────────────────
+// Per brief §3.3: 400×400 JPEG q85 for all media types.
+//
+// Phase C branches:
+//   - Image source (Phase B path): sharp(sourceBuf) -> resize -> jpeg
+//   - Audio source (Phase C §9.1): extract ID3v2 APIC frame via
+//     music-metadata. If APIC present, run those bytes through the same
+//     sharp pipeline. If absent, synthesize a museum-palette audio glyph
+//     SVG -> sharp -> JPEG. Same SHA across all glyph-fallback artifacts.
+
+// Synthesized audio glyph: minimal museum-tone SVG with a stylized
+// waveform on the canonical ink-card background. Colors mirror the
+// --hr-* tokens from src/styles/museum-tokens.css. Static (same bytes
+// every render). Per §9.1: "implementation Claude's call."
+const AUDIO_GLYPH_SVG = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <rect width="400" height="400" fill="#0a0a0a"/>
+  <rect x="0.5" y="0.5" width="399" height="399" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+  <g fill="#b8974a">
+    <rect x="80"  y="180" width="6" height="40"/>
+    <rect x="100" y="160" width="6" height="80"/>
+    <rect x="120" y="130" width="6" height="140"/>
+    <rect x="140" y="110" width="6" height="180"/>
+    <rect x="160" y="90"  width="6" height="220"/>
+    <rect x="180" y="70"  width="6" height="260"/>
+    <rect x="200" y="60"  width="6" height="280"/>
+    <rect x="220" y="70"  width="6" height="260"/>
+    <rect x="240" y="90"  width="6" height="220"/>
+    <rect x="260" y="110" width="6" height="180"/>
+    <rect x="280" y="130" width="6" height="140"/>
+    <rect x="300" y="160" width="6" height="80"/>
+    <rect x="320" y="180" width="6" height="40"/>
+  </g>
+  <text x="200" y="370" font-family="Georgia, serif" font-size="14" fill="#b8974a"
+        text-anchor="middle" letter-spacing="0.2em">AUDIO</text>
+</svg>`;
+
+async function generateImageThumbnail(sourceBuf) {
+  const out = await sharp(sourceBuf)
+    .rotate()
+    .resize(400, 400, { fit: "cover", position: "centre" })
+    .jpeg({ quality: 85 })
+    .toBuffer();
+  return out;
+}
+
+async function generateAudioThumbnail(sourcePath) {
+  // 1. Try APIC (ID3v2 embedded album art).
+  let apicBuf = null;
   try {
-    const out = await sharp(sourceBuf)
-      .rotate() // honor EXIF orientation
-      .resize(400, 400, { fit: "cover", position: "centre" })
-      .jpeg({ quality: 85 })
-      .toBuffer();
-    return { buf: out, error: null };
+    const md = await parseAudioMetadata(sourcePath, {
+      duration: false,
+      skipCovers: false,
+    });
+    const pic = md.common?.picture?.[0];
+    if (pic && pic.data && pic.data.length > 0) {
+      apicBuf = Buffer.from(pic.data);
+    }
   } catch (e) {
-    return { buf: null, error: `${e.name}: ${e.message}` };
+    if (FLAGS.verbose) {
+      console.log(`    music-metadata parse failed: ${e.name}: ${e.message}`);
+    }
+  }
+  const sourceForSharp = apicBuf ?? Buffer.from(AUDIO_GLYPH_SVG);
+  const fromApic = !!apicBuf;
+  const buf = await sharp(sourceForSharp)
+    .rotate()
+    .resize(400, 400, { fit: "cover", position: "centre" })
+    .jpeg({ quality: 85 })
+    .toBuffer();
+  return { buf, fromApic };
+}
+
+async function generateThumbnail(sourceBuf, sourceExt, artifactId, sourcePath) {
+  const ext = sourceExt.toLowerCase();
+  try {
+    if (AUDIO_EXTS.has(ext)) {
+      const { buf, fromApic } = await generateAudioThumbnail(sourcePath);
+      return { buf, error: null, source: fromApic ? "apic" : "glyph" };
+    }
+    if (IMAGE_EXTS.has(ext)) {
+      const buf = await generateImageThumbnail(sourceBuf);
+      return { buf, error: null, source: "image" };
+    }
+    return {
+      buf: null,
+      error: `unsupported extension for thumbnail: ${ext}`,
+      source: null,
+    };
+  } catch (e) {
+    return { buf: null, error: `${e.name}: ${e.message}`, source: null };
   }
 }
 
@@ -241,6 +332,9 @@ async function main() {
     thumb_uploaded: 0,
     thumb_skipped: 0,
     thumb_failed: 0,
+    thumb_apic: 0,
+    thumb_glyph: 0,
+    thumb_image: 0,
     bytes_uploaded: 0,
     errors: [],
   };
@@ -259,7 +353,7 @@ async function main() {
 
     const stat = statSync(localPath);
     const { hash, bytes } = await sha256OfFile(localPath);
-    const pKey = primaryKey(hash, ext);
+    const pKey = primaryKeyForExt(hash, ext);
     const pUrl = publicUrl(pKey);
 
     if (FLAGS.verbose) {
@@ -291,7 +385,8 @@ async function main() {
     // Thumbnail.
     let tUrl = null;
     let thumbAction = "n/a";
-    const { buf: thumbBuf, error: thumbErr } = await generateThumbnail(bytes, ext, id);
+    const { buf: thumbBuf, error: thumbErr, source: thumbSource } =
+      await generateThumbnail(bytes, ext, id, localPath);
     if (thumbErr) {
       thumbAction = `failed-generate (${thumbErr})`;
       stats.thumb_failed++;
@@ -300,21 +395,25 @@ async function main() {
       const tHash = sha256OfBuffer(thumbBuf);
       const tKey = thumbnailKey(tHash);
       tUrl = publicUrl(tKey);
+      if (thumbSource === "apic") stats.thumb_apic++;
+      else if (thumbSource === "glyph") stats.thumb_glyph++;
+      else if (thumbSource === "image") stats.thumb_image++;
       if (FLAGS.verbose) {
+        console.log(`    thumb source: ${thumbSource}`);
         console.log(`    thumb key: ${tKey}`);
         console.log(`    thumb url: ${tUrl}`);
         console.log(`    thumb size: ${thumbBuf.length}`);
       }
       if (FLAGS.dryRun) {
-        thumbAction = "dry-run";
+        thumbAction = `dry-run (${thumbSource})`;
       } else {
         const exists = await r2ObjectExists(tKey);
         if (exists) {
-          thumbAction = "skip-already-present";
+          thumbAction = `skip-already-present (${thumbSource})`;
           stats.thumb_skipped++;
         } else {
           await r2Put(tKey, thumbBuf, "image/jpeg");
-          thumbAction = "uploaded";
+          thumbAction = `uploaded (${thumbSource})`;
           stats.thumb_uploaded++;
           stats.bytes_uploaded += thumbBuf.length;
         }
@@ -328,6 +427,7 @@ async function main() {
       primary_bytes: stat.size,
       thumbnail_url: tUrl,
       thumbnail_sha256: thumbBuf ? sha256OfBuffer(thumbBuf) : null,
+      thumbnail_source: thumbSource,
       last_synced_at: new Date().toISOString(),
     };
 
@@ -352,6 +452,7 @@ async function main() {
   console.log(`  thumb uploaded:    ${stats.thumb_uploaded}`);
   console.log(`  thumb skipped:     ${stats.thumb_skipped}`);
   console.log(`  thumb failed:      ${stats.thumb_failed}`);
+  console.log(`  thumb sources:     image=${stats.thumb_image} apic=${stats.thumb_apic} glyph=${stats.thumb_glyph}`);
   console.log(`  bytes uploaded:    ${stats.bytes_uploaded}`);
   console.log(`  elapsed:           ${elapsed}s`);
 
