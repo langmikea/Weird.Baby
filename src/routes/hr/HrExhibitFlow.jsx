@@ -786,8 +786,10 @@ function KaleidoscopeContent({ kalState, setKalState, remainingPercent, remainin
 // dispatches on that.
 //
 // Per Q-3 resolution: every released, badged artifact gets exported and
-// reaches this dispatch. For this phase only `media_type === 'link'` has a
-// real renderer (thumbnail + title + post_date + external open). Other
+// reaches this dispatch. Renderers: `media_type === 'link'` (LinkCard,
+// thumbnail + external open) and `media_type === 'photo'` (PhotoCard,
+// thumbnail + full-res open; wired 2026-05-21 by Phase B of Asset Delivery).
+// Other
 // media types render a placeholder tile showing title and the media_type
 // label. New renderers fold in as needed without re-architecting the deck.
 
@@ -829,6 +831,28 @@ function LinkCard({ card }) {
   );
 }
 
+function PhotoCard({ card }) {
+  // Photo media type — wired by Phase B of Asset Delivery (2026-05-21).
+  // Renders the 400x400 thumbnail from R2 as a background image; the
+  // wrapping <a> in ArtifactCard opens the full-resolution primary_url.
+  const visStyle = card.thumbnail_url
+    ? {
+        backgroundImage: `url(${card.thumbnail_url})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }
+    : null;
+  return (
+    <>
+      <div className="hr-card-video-vis" style={visStyle ?? undefined} />
+      <div className="hr-card-foot">
+        <div className="hr-card-title">{card.title || "(untitled)"}</div>
+        {card.post_date && <div className="hr-card-meta">{card.post_date}</div>}
+      </div>
+    </>
+  );
+}
+
 function PlaceholderCard({ card }) {
   // Non-link media types — render a minimal tile. The media_type label
   // signals to the operator that a renderer is pending.
@@ -847,13 +871,16 @@ function PlaceholderCard({ card }) {
 
 function ArtifactCard({ card }) {
   const isLink = card.media_type === "link" && !!card.source_url;
-  const { span_w, span_h } = pickSpan(card.id || "", isLink);
+  const isPhoto = card.media_type === "photo" && !!card.primary_url;
+  const { span_w, span_h } = pickSpan(card.id || "", isLink || isPhoto);
   const baseStyle = {
     ...spanStyle(span_w, span_h),
     border: `1px solid ${BORDER}`,
     background: INK_CARD,
   };
-  const className = ["hr-card", "card-fade-in", isLink ? "hr-card-link" : null]
+  const className = ["hr-card", "card-fade-in",
+    isLink ? "hr-card-link" : null,
+    isPhoto ? "hr-card-photo" : null]
     .filter(Boolean).join(" ");
   if (isLink) {
     return (
@@ -866,6 +893,19 @@ function ArtifactCard({ card }) {
       >
         <LinkCard card={card} />
         <span className="hr-card-link-arrow" aria-hidden="true">↗</span>
+      </a>
+    );
+  }
+  if (isPhoto) {
+    return (
+      <a
+        className={className}
+        style={baseStyle}
+        href={card.primary_url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <PhotoCard card={card} />
       </a>
     );
   }
