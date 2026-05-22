@@ -386,9 +386,12 @@ const S = {
 };
 
 // spanStyle — converts span_w / span_h hints into grid placement.
-const spanStyle = (w, h) => {
-  const hMap = { sm: 22, md: 30, lg: 38, xl: 44 };
-  return { gridColumn: `span ${w}`, gridRow: `span ${hMap[h] || 30}` };
+// Phase C (per operator-locked aspect rule 2026-05-22): cards have
+// per-media-type aspect ratios locked in CSS. JS only controls how many
+// columns a card spans; height comes from aspect-ratio * computed width.
+// The old span_h (sm/md/lg/xl row-count mapping) is retired.
+const spanStyle = (w) => {
+  return { gridColumn: `span ${w}` };
 };
 
 // ─── FILTER LOGIC — v5.1 Patch 3 rewrite ────────────────────────────────────
@@ -796,6 +799,11 @@ function KaleidoscopeContent({ kalState, setKalState, remainingPercent, remainin
 // Deterministic span hint per artifact id so the grid layout doesn't reflow
 // between renders or between filter passes. 70% sm / 25% md / 5% lg, with
 // link cards biased slightly wider (2 columns) so thumbnails read.
+// Phase C: returns only the column-span (1 or 2). With CSS aspect-ratio
+// locked per media type, scaling to 2 cols also scales the card
+// proportionally taller. Per the operator-locked B rule (2026-05-22):
+// "A, plus a couple of switches you can set randomly" — same shape per
+// type, varying sizes via column-span.
 function pickSpan(seedStr, biasWide) {
   let h = 2166136261;
   for (let i = 0; i < seedStr.length; i++) {
@@ -804,8 +812,7 @@ function pickSpan(seedStr, biasWide) {
   }
   const r = ((h >>> 0) % 1000) / 1000;
   const span_w = biasWide ? (r < 0.7 ? 2 : 1) : (r < 0.8 ? 1 : 2);
-  const span_h = r < 0.7 ? "sm" : r < 0.95 ? "md" : "lg";
-  return { span_w, span_h };
+  return { span_w };
 }
 
 function LinkCard({ card }) {
@@ -853,6 +860,126 @@ function PhotoCard({ card }) {
   );
 }
 
+function AudioCard({ card, isPlaying, onPlayPause }) {
+  // Phase C of Audio Delivery (per docs/AUDIO_DELIVERY_SCOPING_BRIEF-20260522-013207.md §9.2):
+  //   - Custom play/pause button matching the deck's visual language
+  //     (GOLD/INK/BORDER tokens), no native <audio controls>.
+  //   - Hidden <audio> element behind a ref; preload="none" so 15 audio
+  //     primaries aren't all fetched on mount.
+  //   - Thumbnail (per §9.1: ID3 APIC per-track) as background image on
+  //     the card's visual area, identical placement to PhotoCard.
+  //   - One-card-at-a-time playback coordinated via lifted state
+  //     (playingAudioId) in HrExhibitFlow per §3.6.
+  //   - Filter changes do NOT touch playback state (operator-locked rule
+  //     2026-05-22, restating §2.5 posture).
+  //   - aria-label per state for screen readers.
+  //   - Native <button> handles Enter/Space activation and focus.
+  const audioRef = useRef(null);
+  const title = card.title || "(untitled)";
+
+  // Drive the <audio> element from the lifted isPlaying prop. The element
+  // is unmounted-safe — the cleanup pauses on tear-down (filter eviction
+  // would never happen per the locked rule, but defensive in case the
+  // card itself unmounts on route change or full grid rerender).
+  useEffect(() => {
+    const el = audioRef.current;
+    if (!el) return;
+    if (isPlaying) {
+      const p = el.play();
+      // play() returns a Promise in modern browsers; rejection happens on
+      // autoplay-policy denial or src-not-yet-loaded races. We surface a
+      // console.warn (dev only) and let the parent's isPlaying stay true.
+      if (p && typeof p.catch === "function") {
+        p.catch(err => {
+          if (import.meta.env.DEV) {
+            console.warn(`AudioCard ${card.id}: play() rejected`, err);
+          }
+        });
+      }
+    } else {
+      el.pause();
+    }
+  }, [isPlaying, card.id]);
+
+  // Auto-clear playing state when the track reaches its end. The native
+  // 'ended' event fires once; we tell the parent to deselect, which
+  // matches the v1 limitation in §9.2 (no scrubbing, no looping).
+  useEffect(() => {
+    const el = audioRef.current;
+    if (!el) return;
+    const onEnded = () => { if (isPlaying) onPlayPause(); };
+    el.addEventListener("ended", onEnded);
+    return () => el.removeEventListener("ended", onEnded);
+  }, [isPlaying, onPlayPause]);
+
+  const visStyle = card.thumbnail_url
+    ? {
+        backgroundImage: `url(${card.thumbnail_url})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }
+    : null;
+
+  // Button positioned over the thumbnail. Visual language matches the
+  // deck's pill/tab system: GOLD on near-black, 1px BORDER ring, square
+  // edges (radius 0). Pause glyph is a pair of vertical bars; play glyph
+  // is a right-pointing triangle. SVG over textual icons so font loading
+  // can't shift the affordance.
+  const btnStyle = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "56px",
+    height: "56px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: INK_SOFT,
+    border: `1px solid ${isPlaying ? GOLD : GOLD_LO}`,
+    color: GOLD,
+    cursor: "pointer",
+    borderRadius: 0,
+    padding: 0,
+    transition: "border-color 0.12s, background 0.12s",
+    fontFamily: sansBody,
+  };
+
+  const ariaLabel = isPlaying ? `Pause ${title}` : `Play ${title}`;
+
+  return (
+    <>
+      <div className="hr-card-video-vis" style={visStyle ?? undefined}>
+        <button
+          type="button"
+          style={btnStyle}
+          onClick={onPlayPause}
+          aria-label={ariaLabel}
+          aria-pressed={isPlaying}
+        >
+          {isPlaying ? (
+            // Pause glyph: two vertical bars
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
+              <rect x="4"  y="3" width="4" height="14" fill="currentColor" />
+              <rect x="12" y="3" width="4" height="14" fill="currentColor" />
+            </svg>
+          ) : (
+            // Play glyph: right-pointing triangle
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
+              <polygon points="5,3 5,17 17,10" fill="currentColor" />
+            </svg>
+          )}
+        </button>
+        <audio ref={audioRef} src={card.primary_url} preload="none" />
+      </div>
+      <div className="hr-card-foot">
+        <div className="hr-card-title">{title}</div>
+        {card.post_date && <div className="hr-card-meta">{card.post_date}</div>}
+      </div>
+    </>
+  );
+}
+
 function PlaceholderCard({ card }) {
   // Non-link media types — render a minimal tile. The media_type label
   // signals to the operator that a renderer is pending.
@@ -869,18 +996,26 @@ function PlaceholderCard({ card }) {
   );
 }
 
-function ArtifactCard({ card }) {
+function ArtifactCard({ card, playingAudioId, setPlayingAudioId }) {
   const isLink = card.media_type === "link" && !!card.source_url;
   const isPhoto = card.media_type === "photo" && !!card.primary_url;
-  const { span_w, span_h } = pickSpan(card.id || "", isLink || isPhoto);
+  // Phase C of Audio Delivery (per brief §3.5 / §9.3): media_type='audio'
+  // dispatches to AudioCard. Predicate keys on the single-token check
+  // (LinkCard / PhotoCard pattern) thanks to the MV-side normalization
+  // from 'mixed' to 'audio' executed in Phase C step 1.
+  const isAudio = card.media_type === "audio" && !!card.primary_url;
+  // pickSpan bias: audio joins link / photo in the 2-column wide bias
+  // so the thumbnail + play button read at a comfortable size.
+  const { span_w } = pickSpan(card.id || "", isLink || isPhoto || isAudio);
   const baseStyle = {
-    ...spanStyle(span_w, span_h),
+    ...spanStyle(span_w),
     border: `1px solid ${BORDER}`,
     background: INK_CARD,
   };
   const className = ["hr-card", "card-fade-in",
     isLink ? "hr-card-link" : null,
-    isPhoto ? "hr-card-photo" : null]
+    isPhoto ? "hr-card-photo" : null,
+    isAudio ? "hr-card-audio" : null]
     .filter(Boolean).join(" ");
   if (isLink) {
     return (
@@ -909,6 +1044,28 @@ function ArtifactCard({ card }) {
       </a>
     );
   }
+  if (isAudio) {
+    // AudioCard is NOT wrapped in <a> — playback happens in-place,
+    // not via navigation. One-card-at-a-time playback: the parent
+    // (P3Panel -> HrExhibitFlow root) holds playingAudioId. Tapping
+    // play on card B while card A is playing pauses card A by
+    // changing playingAudioId; A's isPlaying becomes false and its
+    // useEffect calls audioRef.pause(). Per the operator-locked
+    // rule (2026-05-22): filter changes do NOT touch player state.
+    const isPlayingThis = playingAudioId === card.id;
+    const onPlayPause = () => {
+      setPlayingAudioId(isPlayingThis ? null : card.id);
+    };
+    return (
+      <div className={className} style={baseStyle}>
+        <AudioCard
+          card={card}
+          isPlaying={isPlayingThis}
+          onPlayPause={onPlayPause}
+        />
+      </div>
+    );
+  }
   return (
     <div className={className} style={baseStyle}>
       <PlaceholderCard card={card} />
@@ -917,7 +1074,12 @@ function ArtifactCard({ card }) {
 }
 
 // ─── PAGE / GRID — ported from v28 ──────────────────────────────────────────
-function P3Panel({ matched, totalCount }) {
+function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId }) {
+  // Phase C: filterKey is intentionally NOT included in audio cards' react
+  // keys. The operator-locked rule (2026-05-22) requires that filter
+  // changes never touch playback state. Including filterKey here would
+  // remount every card on any pill toggle, killing any playing audio.
+  // The card.id alone is stable across filter reflows.
   const filterKey = useMemo(() => matched.map(c => c.id).join(","), [matched]);
   return (
     <>
@@ -949,7 +1111,22 @@ function P3Panel({ matched, totalCount }) {
         </span>
       </div>
       <div className="hr-artifact-grid">
-        {matched.map(card => <ArtifactCard key={`${filterKey}-${card.id}`} card={card} />)}
+        {matched.map(card => {
+          // Audio cards key on id ONLY (stable across filter reflows) so
+          // they don't remount and interrupt playback. Non-audio cards
+          // keep the Phase B filterKey-card.id composite key.
+          const k = card.media_type === "audio"
+            ? card.id
+            : `${filterKey}-${card.id}`;
+          return (
+            <ArtifactCard
+              key={k}
+              card={card}
+              playingAudioId={playingAudioId}
+              setPlayingAudioId={setPlayingAudioId}
+            />
+          );
+        })}
       </div>
     </>
   );
@@ -1511,6 +1688,12 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   void activeAlbumId;
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState(() => makeEntrySelection());
+  // Phase C: one-card-at-a-time audio playback. Lifted here so that
+  // tapping play on card B while card A is playing pauses card A (each
+  // AudioCard reads isPlaying = playingAudioId === card.id). Per the
+  // operator-locked rule (2026-05-22), filter changes do NOT touch this
+  // state; no useEffect resets it on selected/tagFiltered shifts.
+  const [playingAudioId, setPlayingAudioId] = useState(null);
   // MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
   // setKalState is wired into clear() so the dormant state stays in sync;
   // kalState is intentionally not read in v1.
@@ -1718,7 +1901,12 @@ export default function HrExhibitFlow({ activeAlbumId }) {
              style={{ ...S.panelPos(deckPx), position: "absolute" }}
              onClick={panelClickHandler}>
           <div className="wb-scroll hr-panel-scroll">
-            <P3Panel matched={finalMatched} totalCount={ARTIFACTS.length} />
+            <P3Panel
+              matched={finalMatched}
+              totalCount={ARTIFACTS.length}
+              playingAudioId={playingAudioId}
+              setPlayingAudioId={setPlayingAudioId}
+            />
           </div>
         </div>
 

@@ -132,8 +132,9 @@
 /* ── Artifact grid ─────────────────────────────────────────────────────── */
 .hr-artifact-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 8px;
+  grid-template-columns: repeat(4, minmax(0, 280px));
+  justify-content: start;
+  grid-auto-rows: auto;
   gap: 14px;
   grid-auto-flow: dense;
 }
@@ -143,6 +144,25 @@
   flex-direction: column;
   position: relative; /* Phase 1.5c: anchor for badge / link-arrow overlays */
 }
+
+/* ── Phase C: per-media-type aspect ratios ──────────────────────────────
+   Operator-locked rule (2026-05-22): each media type has its own card
+   shape, locked across viewport rescales. JS controls column-span only;
+   the card's height comes from aspect-ratio * computed width.
+
+   - Audio: portrait, matching square album art + footer below.
+   - Photo: portrait default (future refinement may key on source aspect).
+   - Link/video: visual area is 16:9 (the standard for video); footer
+     adds its natural height below, so the card overall is slightly
+     taller than 16:9 but the video portion is the standard shape.       */
+/* The aspect-ratio rules apply to the VIS element (image area), not the
+   card itself. Card = vis + footer (natural height); putting aspect-ratio
+   on the card would compound with the footer height and over-tall the
+   whole tile. flex: none on the vis prevents flex-grow from defeating
+   the locked aspect when grid cells happen to be taller than vis * ratio. */
+.hr-card-audio .hr-card-video-vis { aspect-ratio: 1 / 1;  flex: none; }
+.hr-card-photo .hr-card-video-vis { aspect-ratio: 4 / 5;  flex: none; }
+.hr-card-link  .hr-card-video-vis { aspect-ratio: 16 / 9; flex: none; }
 
 /* ── Phase 1.5c — clickable cards (cards with externalUrl) ─────────────── */
 /* Renders as <a> in the JSX. Subtle border-color brighten on hover plus a
