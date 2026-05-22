@@ -1,7 +1,7 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-05-21T23:52:14.293Z",
+    "exported_at": "2026-05-22T16:26:58.856Z",
     "filter": "released, not archived, badged for this exhibit",
     "vocabulary_csv_sha": null
   },
@@ -10,16 +10,19 @@
       "id": "MV-HR-20260416-014",
       "source_url": "https://www.reverbnation.com/runwiththehunt/song/12495875-park-bench-pigeons",
       "source_platform": "reverbnation",
-      "media_type": "mixed",
+      "media_type": "audio",
       "title": "Park Bench Pigeons — audio recording",
       "description": "Run With The Hunt — mp3 160 kbps — 312s",
       "post_date": "2016-06-30",
       "released_at": "2026-04-21T21:21:27",
-      "primary_url": null,
-      "thumbnail_url": null,
+      "primary_url": "https://assets.weird.baby/audio/ec/ec58d4bbede48aff0cf95e391711d895b30488ab83a54a5aee2906c34e9c677a.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "tags": {
         "album": [
           "run_with_the_hunt"
+        ],
+        "era": [
+          "rwth"
         ],
         "exhibit": [
           "hunter_root"
@@ -40,16 +43,19 @@
       "id": "MV-HR-20260417-001",
       "source_url": "https://www.reverbnation.com/runwiththehunt/song/14767555-brain-cell",
       "source_platform": "reverbnation",
-      "media_type": "mixed",
+      "media_type": "audio",
       "title": "Brain Cell — audio recording",
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:21:32",
-      "primary_url": null,
-      "thumbnail_url": null,
+      "primary_url": "https://assets.weird.baby/audio/0b/0b65aa63ffa9856c473f03ba3e361a7137a93415f2e3a34e5e959d6a3cac3459.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "tags": {
         "album": [
           "run_with_the_hunt"
+        ],
+        "era": [
+          "rwth"
         ],
         "exhibit": [
           "hunter_root"
@@ -70,16 +76,19 @@
       "id": "MV-HR-20260417-003",
       "source_url": "https://www.reverbnation.com/runwiththehunt",
       "source_platform": "reverbnation",
-      "media_type": "mixed",
+      "media_type": "audio",
       "title": "Dead Man — audio recording",
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:21:40",
-      "primary_url": null,
-      "thumbnail_url": null,
+      "primary_url": "https://assets.weird.baby/audio/78/780e1384fcc70c74eb050866adfb09d040be5516216369c491a55e4fde9c359d.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "tags": {
         "album": [
           "run_with_the_hunt"
+        ],
+        "era": [
+          "rwth"
         ],
         "exhibit": [
           "hunter_root"
@@ -100,16 +109,19 @@
       "id": "MV-HR-20260417-005",
       "source_url": "https://www.reverbnation.com/runwiththehunt",
       "source_platform": "reverbnation",
-      "media_type": "mixed",
+      "media_type": "audio",
       "title": "Doors with Keys — audio recording",
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:21:43",
-      "primary_url": null,
-      "thumbnail_url": null,
+      "primary_url": "https://assets.weird.baby/audio/58/58c53cc87bc39bbafc9f84afbb5c1ec5919738b5324dbd0cec1e3652262cb702.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "tags": {
         "album": [
           "run_with_the_hunt"
+        ],
+        "era": [
+          "rwth"
         ],
         "exhibit": [
           "hunter_root"
@@ -130,16 +142,19 @@
       "id": "MV-HR-20260417-007",
       "source_url": "https://www.reverbnation.com/runwiththehunt/song/13297881-eyes-are-oceans",
       "source_platform": "reverbnation",
-      "media_type": "mixed",
+      "media_type": "audio",
       "title": "Eyes are Oceans — audio recording",
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:21:46",
-      "primary_url": null,
-      "thumbnail_url": null,
+      "primary_url": "https://assets.weird.baby/audio/fd/fdf4283653fc49bb85654808460fd588d2653dbbe1b9c802d174bcefd2b71be2.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "tags": {
         "album": [
           "run_with_the_hunt"
+        ],
+        "era": [
+          "rwth"
         ],
         "exhibit": [
           "hunter_root"
@@ -160,16 +175,19 @@
       "id": "MV-HR-20260417-009",
       "source_url": "https://www.reverbnation.com/runwiththehunt",
       "source_platform": "reverbnation",
-      "media_type": "mixed",
+      "media_type": "audio",
       "title": "Freezer Burnt — audio recording",
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:21:50",
-      "primary_url": null,
-      "thumbnail_url": null,
+      "primary_url": "https://assets.weird.baby/audio/75/7506a7b0f0f2cc664337aebc54e0549e60396f01a33b4f687993ce0f0e8fb934.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "tags": {
         "album": [
           "run_with_the_hunt"
+        ],
+        "era": [
+          "rwth"
         ],
         "exhibit": [
           "hunter_root"
@@ -190,16 +208,19 @@
       "id": "MV-HR-20260417-011",
       "source_url": "https://www.reverbnation.com/runwiththehunt",
       "source_platform": "reverbnation",
-      "media_type": "mixed",
+      "media_type": "audio",
       "title": "Northern Light Streaks — audio recording",
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:21:53",
-      "primary_url": null,
-      "thumbnail_url": null,
+      "primary_url": "https://assets.weird.baby/audio/aa/aace4be80e879f2fad5b10f2223634cdd9a1e744bfad8334936b7f558568a70a.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "tags": {
         "album": [
           "run_with_the_hunt"
+        ],
+        "era": [
+          "rwth"
         ],
         "exhibit": [
           "hunter_root"
@@ -220,16 +241,19 @@
       "id": "MV-HR-20260417-013",
       "source_url": "https://www.reverbnation.com/runwiththehunt",
       "source_platform": "reverbnation",
-      "media_type": "mixed",
+      "media_type": "audio",
       "title": "Playing Music with Our Bones — audio recording",
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:21:57",
-      "primary_url": null,
-      "thumbnail_url": null,
+      "primary_url": "https://assets.weird.baby/audio/e0/e0ccb3524cba0d31df4c215ff6c3e3c8145085d083fbb25a6773a248a6426cd4.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "tags": {
         "album": [
           "run_with_the_hunt"
+        ],
+        "era": [
+          "rwth"
         ],
         "exhibit": [
           "hunter_root"
@@ -250,16 +274,19 @@
       "id": "MV-HR-20260417-015",
       "source_url": "https://www.reverbnation.com/runwiththehunt",
       "source_platform": "reverbnation",
-      "media_type": "mixed",
+      "media_type": "audio",
       "title": "Same Page — audio recording",
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:22:01",
-      "primary_url": null,
-      "thumbnail_url": null,
+      "primary_url": "https://assets.weird.baby/audio/3b/3b3c3569db8ded027a448a4c5bd3aeb9e9c135ad50e881ac7ff9d73333abdd8c.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "tags": {
         "album": [
           "run_with_the_hunt"
+        ],
+        "era": [
+          "rwth"
         ],
         "exhibit": [
           "hunter_root"
@@ -280,16 +307,19 @@
       "id": "MV-HR-20260417-017",
       "source_url": "https://www.reverbnation.com/runwiththehunt/song/13563739-straightlaced",
       "source_platform": "reverbnation",
-      "media_type": "mixed",
+      "media_type": "audio",
       "title": "Straightlaced — audio recording",
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:22:06",
-      "primary_url": null,
-      "thumbnail_url": null,
+      "primary_url": "https://assets.weird.baby/audio/73/73fa16ef17a9dc2622d433eaab651b9d29406a574b97dad6918f31de3366557a.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "tags": {
         "album": [
           "run_with_the_hunt"
+        ],
+        "era": [
+          "rwth"
         ],
         "exhibit": [
           "hunter_root"
@@ -310,16 +340,19 @@
       "id": "MV-HR-20260417-019",
       "source_url": "https://www.reverbnation.com/runwiththehunt",
       "source_platform": "reverbnation",
-      "media_type": "mixed",
+      "media_type": "audio",
       "title": "Think My Mind — audio recording",
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:22:08",
-      "primary_url": null,
-      "thumbnail_url": null,
+      "primary_url": "https://assets.weird.baby/audio/8c/8ccf1adda4bf1c57af77d6d97ee9cd4bf1e24c03d4048638fffd03436a22884b.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "tags": {
         "album": [
           "run_with_the_hunt"
+        ],
+        "era": [
+          "rwth"
         ],
         "exhibit": [
           "hunter_root"
@@ -340,16 +373,19 @@
       "id": "MV-HR-20260417-021",
       "source_url": "https://www.reverbnation.com/runwiththehunt/song/14309195-time-flow-zero",
       "source_platform": "reverbnation",
-      "media_type": "mixed",
+      "media_type": "audio",
       "title": "Time Flow Zero — audio recording",
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:22:11",
-      "primary_url": null,
-      "thumbnail_url": null,
+      "primary_url": "https://assets.weird.baby/audio/d6/d693ac3556bb0c2c4933d3b8d3c3e98fcaaa6211c1d27d71005e39c314652f45.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "tags": {
         "album": [
           "run_with_the_hunt"
+        ],
+        "era": [
+          "rwth"
         ],
         "exhibit": [
           "hunter_root"
@@ -370,16 +406,19 @@
       "id": "MV-HR-20260417-023",
       "source_url": "https://www.reverbnation.com/runwiththehunt",
       "source_platform": "reverbnation",
-      "media_type": "mixed",
+      "media_type": "audio",
       "title": "Trees and Everything — audio recording",
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:22:14",
-      "primary_url": null,
-      "thumbnail_url": null,
+      "primary_url": "https://assets.weird.baby/audio/6e/6e172dd61b8ed4c575244b71cfa3acc901218877d136f721b0af3cacccc52510.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "tags": {
         "album": [
           "run_with_the_hunt"
+        ],
+        "era": [
+          "rwth"
         ],
         "exhibit": [
           "hunter_root"
@@ -400,16 +439,19 @@
       "id": "MV-HR-20260417-025",
       "source_url": "https://www.reverbnation.com/runwiththehunt/song/13447330-whiskey-to-the-sun",
       "source_platform": "reverbnation",
-      "media_type": "mixed",
+      "media_type": "audio",
       "title": "Whiskey to the Sun — audio recording",
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:22:18",
-      "primary_url": null,
-      "thumbnail_url": null,
+      "primary_url": "https://assets.weird.baby/audio/48/48afb11da9af6f2f18212c20a170e14e6cedb1bf539e4878bd353611cf9e6fe3.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "tags": {
         "album": [
           "run_with_the_hunt"
+        ],
+        "era": [
+          "rwth"
         ],
         "exhibit": [
           "hunter_root"
@@ -481,16 +523,19 @@
       "id": "MV-HR-20260421-001",
       "source_url": "https://www.reverbnation.com/runwiththehunt",
       "source_platform": "reverbnation",
-      "media_type": "mixed",
+      "media_type": "audio",
       "title": "Song — audio recording",
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:22:22",
-      "primary_url": null,
-      "thumbnail_url": null,
+      "primary_url": "https://assets.weird.baby/audio/0b/0b15c358f6ca85c824448b083c14e476dc7ab3f3fac108da05ff7d4ffc85b015.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "tags": {
         "album": [
           "run_with_the_hunt"
+        ],
+        "era": [
+          "rwth"
         ],
         "exhibit": [
           "hunter_root"
