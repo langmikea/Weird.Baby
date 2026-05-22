@@ -1,9 +1,9 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-05-20T02:32:56.057Z",
+    "exported_at": "2026-05-21T23:52:14.293Z",
     "filter": "released, not archived, badged for this exhibit",
-    "vocabulary_csv_sha": "09f7f1c5b57e"
+    "vocabulary_csv_sha": null
   },
   "artifacts": [
     {
@@ -15,6 +15,7 @@
       "description": "Run With The Hunt — mp3 160 kbps — 312s",
       "post_date": "2016-06-30",
       "released_at": "2026-04-21T21:21:27",
+      "primary_url": null,
       "thumbnail_url": null,
       "tags": {
         "album": [
@@ -44,6 +45,7 @@
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:21:32",
+      "primary_url": null,
       "thumbnail_url": null,
       "tags": {
         "album": [
@@ -73,6 +75,7 @@
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:21:40",
+      "primary_url": null,
       "thumbnail_url": null,
       "tags": {
         "album": [
@@ -102,6 +105,7 @@
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:21:43",
+      "primary_url": null,
       "thumbnail_url": null,
       "tags": {
         "album": [
@@ -131,6 +135,7 @@
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:21:46",
+      "primary_url": null,
       "thumbnail_url": null,
       "tags": {
         "album": [
@@ -160,6 +165,7 @@
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:21:50",
+      "primary_url": null,
       "thumbnail_url": null,
       "tags": {
         "album": [
@@ -189,6 +195,7 @@
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:21:53",
+      "primary_url": null,
       "thumbnail_url": null,
       "tags": {
         "album": [
@@ -218,6 +225,7 @@
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:21:57",
+      "primary_url": null,
       "thumbnail_url": null,
       "tags": {
         "album": [
@@ -247,6 +255,7 @@
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:22:01",
+      "primary_url": null,
       "thumbnail_url": null,
       "tags": {
         "album": [
@@ -276,6 +285,7 @@
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:22:06",
+      "primary_url": null,
       "thumbnail_url": null,
       "tags": {
         "album": [
@@ -305,6 +315,7 @@
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:22:08",
+      "primary_url": null,
       "thumbnail_url": null,
       "tags": {
         "album": [
@@ -334,6 +345,7 @@
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:22:11",
+      "primary_url": null,
       "thumbnail_url": null,
       "tags": {
         "album": [
@@ -363,6 +375,7 @@
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:22:14",
+      "primary_url": null,
       "thumbnail_url": null,
       "tags": {
         "album": [
@@ -392,6 +405,7 @@
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:22:18",
+      "primary_url": null,
       "thumbnail_url": null,
       "tags": {
         "album": [
@@ -416,12 +430,47 @@
       "id": "MV-20260419-002",
       "source_url": "https://www.facebook.com/reel/1137424761619325",
       "source_platform": "facebook",
-      "media_type": null,
+      "media_type": "photo",
       "title": "Facebook reel featuring puppet character created by ElmThree Productions",
       "description": "Facebook reel posted by ElmThree Productions featuring a bearded puppet character with red bandana. The post honors @cheechandchong and references their 'Huge fan of Cheech and Chong' fandom, describing it as being about 'our #1st Hunter Root' with original audio.",
       "post_date": "2025-09-03",
       "released_at": "2026-04-19T14:31:24",
-      "thumbnail_url": null,
+      "primary_url": "https://assets.weird.baby/assets/a5/a53b134b79f2579f0d0419f480465f1c3ca7a1f58409f9809b933e608e7a5fc0.png",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/b3/b30c279d2773607baf8f6c5d33b8b5352725e7debb9765a7b8f91f09f4a4e896.jpg",
+      "tags": {
+        "exhibit": [
+          "hunter_root"
+        ]
+      }
+    },
+    {
+      "id": "MV-20260419-004",
+      "source_url": null,
+      "source_platform": null,
+      "media_type": "photo",
+      "title": "",
+      "description": "",
+      "post_date": null,
+      "released_at": "2026-04-19T14:35:16",
+      "primary_url": "https://assets.weird.baby/assets/fc/fc8b8945c540cc67ae9239bb97c677e3e4a86788430b76bb3fae814d8b95c1d7.jpg",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/18/18e46e02cd97cc3232565cb814b52fabb89f5b9a561b8ba49a1fcae2b0fcd737.jpg",
+      "tags": {
+        "exhibit": [
+          "hunter_root"
+        ]
+      }
+    },
+    {
+      "id": "MV-20260419-001",
+      "source_url": null,
+      "source_platform": "local",
+      "media_type": "photo",
+      "title": "Hunter Root performing acoustic solo set in Harrisburg, Pennsylvania",
+      "description": "Hunter Root sits on a stool performing an intimate acoustic guitar set in Harrisburg, Pennsylvania. The stage is bathed in blue atmospheric lighting with LED stage lights visible overhead. His pedalboard and various effects pedals are visible on the floor in front of him, with another musician partially visible on the right side of the stage.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-04-19T14:30:48",
+      "primary_url": "https://assets.weird.baby/assets/c1/c1521d32a5436f99bb6f369045228043815b018ccbe33cec00dd93049e47921a.jpg",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/0e/0e7812958fa2cf0f2b35b0a9230acf4de94987711a1932bc888b95d7ef1efe12.jpg",
       "tags": {
         "exhibit": [
           "hunter_root"
@@ -437,6 +486,7 @@
       "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
       "post_date": null,
       "released_at": "2026-04-21T21:22:22",
+      "primary_url": null,
       "thumbnail_url": null,
       "tags": {
         "album": [
@@ -466,6 +516,7 @@
       "description": "Hunter Root - Reverend (official). Album: arkansas.",
       "post_date": "2023-03-30",
       "released_at": "2026-05-18T13:56:51",
+      "primary_url": null,
       "thumbnail_url": "https://i.ytimg.com/vi/7Lttb_59EYw/maxresdefault.jpg",
       "tags": {
         "album": [

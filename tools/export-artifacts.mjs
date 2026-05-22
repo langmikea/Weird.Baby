@@ -21,9 +21,14 @@
 // Per Q-3: every released artifact carrying the exhibit badge is exported;
 // the museum's render layer dispatches on `media_type`. Non-link media types
 // render a placeholder tile in the deck for this phase.
-// Per Q-4: for media_type='link' artifacts with source_platform='youtube',
-// `thumbnail_url` is synthesized from the parsed YouTube video id; other
-// rows get `thumbnail_url: null` and the placeholder renderer handles it.
+// Per Q-4 (updated 2026-05-21 by Phase B of Asset Delivery): URL dispatch
+// per artifact:
+//   1. tools/sync-assets-to-r2-manifest.json lookup wins if the artifact is
+//      synced to R2 (provides primary_url AND thumbnail_url).
+//   2. For media_type='link' + source_platform='youtube' without a manifest
+//      entry, thumbnail_url is synthesized from the parsed YouTube video id.
+//   3. Otherwise primary_url=null and thumbnail_url=null; placeholder renderer
+//      handles it.
 //
 // Usage:
 //   node tools/export-artifacts.mjs [flags]
@@ -52,6 +57,7 @@ const DEFAULT_MV_BASE = "http://127.0.0.1:51822";
 const DEFAULT_OUTPUT_DIR = "src/data/exhibits";
 const VOCAB_CSV_PATH = resolve(REPO_ROOT, "docs/deep-dive-vocabulary.csv");
 const EXHIBITS_CONFIG_PATH = resolve(REPO_ROOT, "src/data/exhibits.config.json");
+const MANIFEST_PATH = resolve(REPO_ROOT, "tools/sync-assets-to-r2-manifest.json");
 
 // ─── Known exhibits ─────────────────────────────────────────────────────────
 // Files for these are written even if no released artifact currently carries
@@ -88,6 +94,28 @@ function loadKnownExhibits() {
     }
   }
   return list;
+}
+
+function loadAssetManifest() {
+  if (!existsSync(MANIFEST_PATH)) {
+    return { artifacts: {} };
+  }
+  let raw;
+  try {
+    raw = readFileSync(MANIFEST_PATH, "utf8");
+  } catch (err) {
+    fail(`could not read asset manifest at ${MANIFEST_PATH}: ${err.message}`);
+  }
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch (err) {
+    fail(`asset manifest is not valid JSON (${MANIFEST_PATH}): ${err.message}`);
+  }
+  if (!parsed || typeof parsed.artifacts !== "object" || parsed.artifacts === null) {
+    fail(`asset manifest missing "artifacts" object (${MANIFEST_PATH})`);
+  }
+  return parsed;
 }
 
 // ─── Tag-key shape for validating exhibit names ─────────────────────────────
@@ -277,7 +305,7 @@ function parseYoutubeId(url) {
 }
 
 // ─── Row → artifact record ──────────────────────────────────────────────────
-function buildArtifactRecord(row) {
+function buildArtifactRecord(row, manifest) {
   // Parse tags JSON array, group by namespace.
   let rawTags = [];
   if (typeof row.tags === "string" && row.tags) {
@@ -309,9 +337,18 @@ function buildArtifactRecord(row) {
     sortedTags[ns] = [...tagsByNamespace[ns]].sort();
   }
 
-  // Thumbnail (Q-4): YouTube link only.
+  // URL dispatch (Phase B of Asset Delivery, 2026-05-21):
+  //   1. Asset manifest lookup wins if present (R2-synced primary AND thumbnail).
+  //   2. YouTube thumbnail synthesis (Q-4) for media_type='link' + source_platform='youtube'.
+  //   3. Otherwise null; render layer falls back to placeholder.
+  let primary_url = null;
   let thumbnail_url = null;
-  if (row.source_platform === "youtube" && row.media_type === "link") {
+  const m = manifest && manifest.artifacts ? manifest.artifacts[row.id] : null;
+  if (m) {
+    primary_url = m.primary_url ?? null;
+    thumbnail_url = m.thumbnail_url ?? null;
+  }
+  if (!thumbnail_url && row.source_platform === "youtube" && row.media_type === "link") {
     const ytId = parseYoutubeId(row.source_url);
     if (ytId) thumbnail_url = `https://i.ytimg.com/vi/${ytId}/maxresdefault.jpg`;
   }
@@ -325,6 +362,7 @@ function buildArtifactRecord(row) {
     description: row.description_long ?? "",
     post_date: row.post_date ?? null,
     released_at: row.released_at ?? null,
+    primary_url,
     thumbnail_url,
     tags: sortedTags,
   };
@@ -381,6 +419,7 @@ async function main() {
   // is broken, fail early with a clear message instead of after a network
   // round-trip.
   const KNOWN_EXHIBITS = loadKnownExhibits();
+  const ASSET_MANIFEST = loadAssetManifest();
 
   const { url, buf } = await fetchMvBlob(opts.mvBase, opts.verbose);
 
@@ -432,7 +471,7 @@ async function main() {
       }
       const rows = runSchemaSensitive(() => perExhibit.all(`exhibit:${name}`));
       logVerbose(opts.verbose, `  ${name}: ${rows.length} row(s)`);
-      const artifacts = rows.map(buildArtifactRecord);
+      const artifacts = rows.map(row => buildArtifactRecord(row, ASSET_MANIFEST));
       counts[name] = artifacts.length;
       filesToWrite.push({
         name,
@@ -500,6 +539,8 @@ async function main() {
   for (const name of result.allExhibits) {
     lines.push(`    ${name}.json: ${result.counts[name] ?? 0} artifact(s)`);
   }
+  lines.push(`  Asset manifest: ${Object.keys(ASSET_MANIFEST.artifacts).length} artifact(s)` +
+             (existsSync(MANIFEST_PATH) ? ` (${MANIFEST_PATH})` : " (absent — no R2 URLs)"));
   lines.push(`  Released artifacts with no exhibit badge: ${result.skippedNoBadge}`);
   lines.push(`  Vocabulary registry: ${result.vocabularyRows.length} row(s)` +
              ` (${vocabularyBytes} bytes)` + (opts.dryRun ? " (dry-run)" : ""));
