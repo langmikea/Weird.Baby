@@ -1004,9 +1004,14 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId }) {
   // (LinkCard / PhotoCard pattern) thanks to the MV-side normalization
   // from 'mixed' to 'audio' executed in Phase C step 1.
   const isAudio = card.media_type === "audio" && !!card.primary_url;
-  // pickSpan bias: audio joins link / photo in the 2-column wide bias
-  // so the thumbnail + play button read at a comfortable size.
-  const { span_w } = pickSpan(card.id || "", isLink || isPhoto || isAudio);
+  // pickSpan bias: link / photo lean wide so the thumbnails read at a
+  // comfortable size. Audio is hard-forced to 1-col below per operator
+  // decision 2026-05-23 (visual review during first production deploy at
+  // https://weird.baby/hr): audio cards are uniform album-art squares;
+  // pickSpan's wide-bias variant produced 2x-tall cards that broke the
+  // "matching album art" aesthetic from the 2026-05-22 operator-lock.
+  const { span_w: rolledSpan } = pickSpan(card.id || "", isLink || isPhoto);
+  const span_w = isAudio ? 1 : rolledSpan;
   const baseStyle = {
     ...spanStyle(span_w),
     border: `1px solid ${BORDER}`,
