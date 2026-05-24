@@ -12,3 +12,42 @@ new runs by running the tool. The wrapper creates the header on first run.
 | 2026-05-18T14:31:35.254Z | arkansas | Reverend | official | 7Lttb_59EYw | ok (3429 ms) |
 | 2026-05-18T14:34:53.980Z | arkansas | Reverend | official | 7Lttb_59EYw | ok (9341 ms) |
 | 2026-05-21T15:06:18.113Z | crooked | '94 | official | vPW49GU38Ng | dry-run ok (3610 ms) |
+| 2026-05-23T19:02:58.535Z | crooked | '94 | official | vPW49GU38Ng | dry-run ok (1550 ms) |
+| 2026-05-24T00:50:23.610Z | crooked | '94 | official | vPW49GU38Ng | ok (9406 ms) |
+| 2026-05-24T00:55:15.067Z | arkansas | Town Rat Heathen | official | n2m8sP17E-c | ok (9014 ms) |
+| 2026-05-24T00:55:23.848Z | arkansas | Quicksand Sinking | official | QFpJf0RDsXc | ok (8708 ms) |
+| 2026-05-24T00:55:32.781Z | crooked | Cookin' in the Bathroom | official | HLdiK-6WTwM | ok (8884 ms) |
+| 2026-05-24T00:55:41.798Z | crooked | A Pot Song | official | 2Lm8noK3hQI | ok (8949 ms) |
+| 2026-05-24T00:55:50.588Z | dandelions | Lampshade | lyrics | JA1p8WSQRQQ | ok (8738 ms) |
+| 2026-05-24T00:58:16.944Z | arkansas | Quicksand Sinking | lyrics | 13IUBFvIkls | ok (9199 ms) |
+| 2026-05-24T00:58:26.781Z | arkansas | Silver Lining | official | uaFHDfuohxc | ok (9778 ms) |
+| 2026-05-24T00:58:35.951Z | crooked | My Brother's Bones | official | wi5G_Zn74gc | ok (9110 ms) |
+| 2026-05-24T00:58:45.114Z | arkansas | Grain Of Rice | live | _w0wz5o9dWU | ok (9111 ms) |
+| 2026-05-24T00:58:54.183Z | arkansas | Can't Outshine The Truth | live | z1K0HWTDrL8 | ok (9008 ms) |
+| 2026-05-24T00:59:03.242Z | dandelions | Homestead | official | 4HIfc5MLu6k | ok (9004 ms) |
+| 2026-05-24T00:59:12.457Z | crooked | Cookin' in the Bathroom | live | NJYYmXnAN0s | ok (9150 ms) |
+| 2026-05-24T00:59:19.175Z | skipping | Nothin' Wrong | official | Wv0_mujJUQU | ok (6658 ms) |
+| 2026-05-24T00:59:29.266Z | skipping | Don't Blame The Breeze | official | KMJVLWr34Rc | ok (10031 ms) |
+| 2026-05-24T00:59:36.152Z | dandelions | Favorite Friend | official | L7-1T7F7_R0 | ok (6834 ms) |
+| 2026-05-24T00:59:43.439Z | arkansas | Town Rat Heathen | live | omU0Xt3yB-o | ok (7221 ms) |
+| 2026-05-24T00:59:51.010Z | dandelions | Little Red Riding Hood | live | BOQHN-O4DDc | ok (7514 ms) |
+| 2026-05-24T00:59:58.349Z | crooked | The Keeper | official | bXZo69DNSrM | ok (7282 ms) |
+| 2026-05-24T01:00:05.513Z | dandelions | Family Tree | live | d0TXF6iXFRQ | ok (7104 ms) |
+| 2026-05-24T01:00:12.869Z | crooked | Friendly Fire | official | YlU1CBJkJ5w | ok (7297 ms) |
+| 2026-05-24T01:00:20.071Z | arkansas | Few Steps Back | live | Fa5GKxEgf7c | ok (7144 ms) |
+| 2026-05-24T01:00:26.808Z | dandelions | Lampshade | live | EjdXxigzBp8 | ok (6679 ms) |
+| 2026-05-24T01:00:34.231Z | arkansas | California Sober | live | 04UlgUA9Uo0 | ok (7366 ms) |
+| 2026-05-24T01:00:41.594Z | crooked | Friendly Fire | lyrics | TLtIAsdi6k8 | ok (7303 ms) |
+| 2026-05-24T01:00:48.978Z | crooked | Low | official | WRjngwtGGFk | ok (7326 ms) |
+| 2026-05-24T01:00:57.503Z | wheel | Shapeshifter | official | XdiGZUWlU0Y | ok (8466 ms) |
+| 2026-05-24T01:01:04.623Z | wheel | People Are Programs | official | Pic6JU8ZiUY | ok (7060 ms) |
+| 2026-05-24T01:01:12.074Z | skipping | Cusp Of The Mend | official | ZJipWxlqIvc | ok (7395 ms) |
+| 2026-05-24T01:01:19.496Z | crooked | Flash in the Pan | official | 03NAxazLuhY | ok (7364 ms) |
+| 2026-05-24T01:01:26.947Z | crooked | If the Body is a Temple | official | -2aU97nuzYE | ok (7392 ms) |
+| 2026-05-24T01:01:34.118Z | arkansas | Town Rat Heathen | live | T0cdoRZ5LXg | ok (7111 ms) |
+| 2026-05-24T01:01:41.455Z | crooked | The Devil is the Culprit | official | M9HlNdBm2gw | ok (7279 ms) |
+| 2026-05-24T01:01:48.690Z | crooked | Out of my Hands | official | QDqNREtunWE | ok (7177 ms) |
+| 2026-05-24T01:01:55.639Z | crooked | String Up a Necklace | official | pJSOjyrRIRs | ok (6891 ms) |
+| 2026-05-24T01:02:02.675Z | crooked | Bad Sign | official | mmR0SLtDSdo | ok (6981 ms) |
+| 2026-05-24T01:02:09.776Z | crooked | Hand in the Fire | official | PPzNfNOMUHE | ok (7038 ms) |
+| 2026-05-24T01:02:16.988Z | cracked | Straitlaced | live | Olv9qIVoBgQ | ok (7151 ms) |
