@@ -1144,6 +1144,15 @@ post-§5 resolution.
 - **T1. Validator JS-port sync** — drop `bands` half of R3 in
   `mediavault.html`; warning slug stays per §5.4 outcome. (Depends
   on §5.4.)
+
+  > **T1 SUPERSEDED (2026-05-24, V1B Tagging-S1 §2.1 → V1B Bands-Migration §4):**
+  > §9.4 reverses this T1. The existing R3 disjunct
+  > `countInCategory('people') === 0 && countInCategory('bands') === 0`
+  > in `mediavault.html:1179` is **CORRECT as-written** for the
+  > post-migration dual-category world. No code change required.
+  > Bands migration (vocab register + 173 tag rewrites) landed
+  > 2026-05-24 per MV CHANGELOG v0.5.6. Cross-references: §9.4.
+
 - **T2. Sidebar single-column layout** — CSS change:
   `.pillCategory .pills { flex-direction: column; }`. APPLIED
   strip unchanged.
