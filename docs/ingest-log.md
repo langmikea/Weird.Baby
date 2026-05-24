@@ -51,3 +51,4 @@ new runs by running the tool. The wrapper creates the header on first run.
 | 2026-05-24T01:02:02.675Z | crooked | Bad Sign | official | mmR0SLtDSdo | ok (6981 ms) |
 | 2026-05-24T01:02:09.776Z | crooked | Hand in the Fire | official | PPzNfNOMUHE | ok (7038 ms) |
 | 2026-05-24T01:02:16.988Z | cracked | Straitlaced | live | Olv9qIVoBgQ | ok (7151 ms) |
+| 2026-05-24T15:02:18.176Z | cracked | Straitlaced | live | Olv9qIVoBgQ | fail exit=120 (1611 ms) |

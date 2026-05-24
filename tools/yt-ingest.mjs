@@ -69,6 +69,7 @@ const ALLOWED_TYPES = new Set(["official", "live", "lyrics", "cover"]);
 function parseArgs(argv) {
   const args = {
     album: null,
+    albumTitle: null,
     track: null,
     type: null,
     url: null,
@@ -80,14 +81,15 @@ function parseArgs(argv) {
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     switch (a) {
-      case "--album":     args.album = argv[++i]; break;
-      case "--track":     args.track = argv[++i]; break;
-      case "--type":      args.type = argv[++i]; break;
-      case "--url":       args.url = argv[++i]; break;
-      case "--credit":    args.credit = argv[++i]; break;
-      case "--page-save": args.pageSave = true; break;
-      case "--mv-base":   args.mvBase = argv[++i]; break;
-      case "--dry-run":   args.dryRun = true; break;
+      case "--album":       args.album = argv[++i]; break;
+      case "--album-title": args.albumTitle = argv[++i]; break;
+      case "--track":       args.track = argv[++i]; break;
+      case "--type":        args.type = argv[++i]; break;
+      case "--url":         args.url = argv[++i]; break;
+      case "--credit":      args.credit = argv[++i]; break;
+      case "--page-save":   args.pageSave = true; break;
+      case "--mv-base":     args.mvBase = argv[++i]; break;
+      case "--dry-run":     args.dryRun = true; break;
       case "--help":
       case "-h":
         printUsage();
@@ -107,6 +109,9 @@ function printUsage() {
 
   --album       SPINE album id (cracked, wheel, dandelions, skipping,
                 arkansas, crooked)
+  --album-title (optional) SPINE album display title. Auto-derived from
+                SPINE when omitted. The album: tag slugifies this title
+                (album:crooked_home) instead of the id (album:crooked).
   --track       Exact track title from SPINE
   --type        official | live | lyrics | cover
   --url         YouTube watch URL (or youtu.be / embed shape)
@@ -340,6 +345,9 @@ function spawnCapture(args) {
     "--type", args.type,
     "--mv-base", args.mvBase,
   ];
+  if (args.albumTitle) {
+    pyArgs.push("--album-title", args.albumTitle);
+  }
   if (args.credit) {
     pyArgs.push("--credit", args.credit);
   }
@@ -372,10 +380,19 @@ function spawnCapture(args) {
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
-  const { videoId } = validateAgainstSpine(args);
+  const { videoId, album } = validateAgainstSpine(args);
+
+  // v1B: auto-derive the full SPINE album title when the caller didn't
+  // pass --album-title explicitly. The bulk acquirer passes it; operator
+  // direct invocations may omit it. Capture script slugifies it into
+  // album:<title_slug>.
+  if (!args.albumTitle && album && album.title) {
+    args.albumTitle = album.title;
+  }
 
   console.error(
     `yt-ingest: validated against SPINE — album=${args.album} ` +
+    `album_title=${JSON.stringify(args.albumTitle)} ` +
     `track=${JSON.stringify(args.track)} type=${args.type} ` +
     `videoId=${videoId} dry_run=${args.dryRun}`,
   );
