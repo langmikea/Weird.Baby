@@ -137,6 +137,23 @@ Mike pre-approves the entire flow when he says "push" — drive end-to-end witho
 
 Use `--dry-run` to see what would be exported without writing. Use `--verbose` to see the SQL query and per-card details.
 
+### Release flow
+
+To publish newly-released MV artifacts to weird.baby, run these in order:
+
+1. **In MV**: flip artifact status to `released` via inbox triage.
+2. **In museum repo**: `npm run export-artifacts` — regenerates `src/data/exhibits/hunter_root.json` from MV's current released set. (MV must be running; see Deep Dive export above.)
+3. **In museum repo**: commit the refreshed snapshot:
+   ```bash
+   git add src/data/exhibits/hunter_root.json src/data/vocabulary.json
+   git commit -m "data: regen hunter_root.json"
+   ```
+4. **In museum repo**: `npm run deploy` — builds and ships to weird.baby.
+
+**Step 2 is the most-missed step.** `npm run deploy` runs `vite build && wrangler deploy`; it does NOT regenerate the JSON from MV. Skipping step 2 ships a stale snapshot — visitors see yesterday's released set, not today's. The "released video didn't show up" symptom of 2026-05-25 was exactly this: 36 newly-released YT artifacts got triaged into MV but `export-artifacts` was skipped, so the SPA bundle still carried the prior export's 19-artifact JSON.
+
+Long-term: HR acquisition tooling (T8, audit §6.4) will auto-emit `exhibit:hunter_root` at capture time, removing the manual exhibit-tag step. The 4-step release flow above stays the same.
+
 ### Cross-platform native dependencies
 
 Any npm package with a native compiled component (currently `better-sqlite3`) requires `prebuild-install` in `devDependencies` so the operator's machine can fetch pre-built binaries on install without needing Visual Studio Build Tools. The cowork sandbox builds for Linux; Mike's Windows machine needs its own platform-specific binary. If a "not a valid Win32 application" error appears at runtime on Windows, `npm rebuild <package-name>` is the local fix on the operator's side.
