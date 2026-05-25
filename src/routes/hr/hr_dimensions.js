@@ -144,7 +144,21 @@ export function buildDimensions(artifacts) {
     }
   }
 
-  const namespaces = Object.keys(valuesByNamespace).sort();
+  // T3 (audit §6.1, 2026-05-25): namespace order is sourced from the
+  // vocabulary registry: (REGISTRY[ns].tier, REGISTRY[ns].sort_order, ns)
+  // ascending. Option α (operator-locked 2026-05-25): namespaces not in
+  // the registry fall to tier=99 / sort_order=99, sorting to the bottom.
+  // Pre-T3 (alphabetical fallback) is preserved as the deterministic
+  // tiebreaker for equal (tier, sort_order) pairs.
+  const namespaces = Object.keys(valuesByNamespace).sort((a, b) => {
+    const ta = (typeof REGISTRY[a]?.tier === "number") ? REGISTRY[a].tier : 99;
+    const tb = (typeof REGISTRY[b]?.tier === "number") ? REGISTRY[b].tier : 99;
+    if (ta !== tb) return ta - tb;
+    const sa = (typeof REGISTRY[a]?.sort_order === "number") ? REGISTRY[a].sort_order : 99;
+    const sb = (typeof REGISTRY[b]?.sort_order === "number") ? REGISTRY[b].sort_order : 99;
+    if (sa !== sb) return sa - sb;
+    return a.localeCompare(b);
+  });
 
   const dimensions = namespaces.map(ns => {
     const slugs = [...valuesByNamespace[ns]].sort();

@@ -1,8 +1,8 @@
 {
   "metadata": {
     "source": "http://127.0.0.1:51822/db",
-    "exported_at": "2026-05-25T11:01:02.317Z",
-    "row_count": 15,
+    "exported_at": "2026-05-25T20:05:15.784Z",
+    "row_count": 18,
     "schema": "vocabulary v1 — namespace, display_name, tier, sort_order, retired_at"
   },
   "namespaces": [
@@ -49,6 +49,13 @@
       "retired_at": null
     },
     {
+      "namespace": "era",
+      "display_name": "Era",
+      "tier": 1,
+      "sort_order": 7,
+      "retired_at": null
+    },
+    {
       "namespace": "source",
       "display_name": "Source",
       "tier": 2,
@@ -60,6 +67,20 @@
       "display_name": "Type",
       "tier": 2,
       "sort_order": 2,
+      "retired_at": null
+    },
+    {
+      "namespace": "format",
+      "display_name": "Format",
+      "tier": 2,
+      "sort_order": 3,
+      "retired_at": null
+    },
+    {
+      "namespace": "release_type",
+      "display_name": "Release Type",
+      "tier": 2,
+      "sort_order": 4,
       "retired_at": null
     },
     {
