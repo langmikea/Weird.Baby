@@ -936,6 +936,13 @@ band but the tags don't reflect it — that's a real curation gap
 detector for non-HR captures. Closing the implementation gap
 matches the spec and unblocks save without weakening the rule.
 
+> **§5.1 — partial implementation (2026-05-25, HR commit `3fc7a09`):**
+> T8's `yt_archive_capture.py` branch applies the §5.1 auto-emit-on-every-
+> capture pattern to ingest-audit C1's exhibit rule: `exhibit:hunter_root`
+> now emits automatically on all future YT captures (parent + children).
+> The `bands:hunter_root` / `people:hunter_root` half of the §9.1 decision
+> (T4 in §6.1) is separate and not yet shipped. See §6.1 T8.
+
 ### §5.2 — How do we resolve the `type` / `format` / `content_kind` / `artifact_kind` overlap?
 
 **Why this matters.** Four namespaces, four overlapping flavours
@@ -1156,6 +1163,12 @@ post-§5 resolution.
 - **T2. Sidebar single-column layout** — CSS change:
   `.pillCategory .pills { flex-direction: column; }`. APPLIED
   strip unchanged.
+
+  > **T2 DONE (2026-05-24, MV commit `609b739` — Tagging-S1):**
+  > Sidebar pill columns now render single-column;
+  > `.pillCategory .pills { flex-direction: column; }` shipped.
+  > APPLIED strip unchanged.
+
 - **T3. Tag-group order via tier + sort_order** — server-side:
   expose `tier` + `sort_order` in `/api/tags` response. Client-side:
   replace `CATEGORY_ORDER` constant with sort by `(tier, sort_order,
@@ -1167,6 +1180,11 @@ post-§5 resolution.
 - **T5. Collapse-toggle reinstatement** — re-wire `<details>/<summary>`
   for each `.pillCategory`. Add auto-collapse on `on_* applied` per
   §5.7. CSS selectors already in place.
+
+  > **T5 DONE (2026-05-24, MV commit `609b739` — Tagging-S1):**
+  > `<details>/<summary>` re-wired for each `.pillCategory`.
+  > Auto-collapse on `on_* applied` shipped per §9.7 / §5.7.
+
 - **T6. Album/song sort-order export** — extend SPINE with
   `release_date` per album (8 values, operator-fills); extend
   `tools/export-artifacts.mjs` to emit `value_order` arrays in
@@ -1175,10 +1193,24 @@ post-§5 resolution.
 - **T7. Era / format / release_type vocab registration** — one-shot
   `_cowork/mv_register_unregistered_v1.py` (insert 3 rows).
   Tiers per §5.8.
+
+  > **T7 DONE (2026-05-25, MV commit `53d40f5` — v0.5.8):**
+  > `era`, `format`, `release_type` registered in MV `vocabulary`
+  > with tiers per §9.8 / §5.8. Unblocks T3.
+
 - **T8. Era + credit + exhibit emission** — HR `yt_archive_capture.py`
   extension: SPINE-driven `era:<slug>` mapping; `--credit` flag
   emits `credit:<slug>` to tags (not just notes); path-based
   `exhibit:hunter_root` rule per ingest-audit C1. Backfill the 38.
+
+  > **T8 PARTIAL DONE (2026-05-25, HR commit `3fc7a09`):**
+  > `yt_archive_capture.py` branch shipped per ingest-audit C1:
+  > `EXHIBIT_SLUG = 'exhibit:hunter_root'` added to `COMMON_STATIC_TAGS`
+  > so every future YT capture auto-emits `exhibit:hunter_root`.
+  > Era + credit emission and the path-based exhibit rule for non-YT
+  > intake paths are still pending. Closes the manual exhibit-backfill
+  > loop opened by EXHIBIT_BACKFILL_DEPLOY (MV CHANGELOG v0.5.7) for
+  > new YT captures only. Cross-reference: §5.1.
 
 ### 6.2 — Configurable (operator sets policy once, engine applies)
 
