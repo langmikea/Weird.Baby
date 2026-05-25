@@ -223,6 +223,65 @@ The FUSE mount has multiple defects that cost real time. Work around them:
 
    Additional constraint: the host-side `Edit` and `Write` tools refuse `.git/` paths ("resolves to a protected location"). All `.git/` writes must go through bash via FUSE — which is the layer that breaks. The rm+write Python pattern is the only reliable path.
 
+
+## Cowork environment quirks (operational hygiene)
+
+The section above ("Cowork sandbox quirks") catalogues the underlying bugs. This section is the operational protocol that accumulated across the Phase C → tagging audit arc (May 2026). Hard rules; follow them before re-discovering each lesson.
+
+### 1. The 16 KB tail-truncation rule (M1 §7.3)
+
+When the `Edit` or `Write` tool produces a file larger than ~16 KB *post-edit*, the tail silently truncates. Pre-edit size doesn't matter; post-edit size does. Refines quirk #1 with the concrete boundary.
+
+**Detection**: `wc -l` + `tail -3` after every edit on a file near the boundary; compare actual line count to expected delta.
+
+**Recovery**: pull intact version from `git HEAD`, reassemble in `/tmp/`, `shutil.copy2` back to the live path, SHA-verify and re-grep anchors.
+
+**Hard rule**: files at or past the boundary use anchor-based Python patches via heredoc, never direct `Edit`/`Write` tool calls. Confirmed sites past the boundary: `mediavault.html`, `yt_archive_capture.py`, `CHANGELOG.md`, all audit briefs, all multi-section run reports.
+
+### 2. Virtiofs phantom-deletions in `git status`
+
+When sandboxed bash runs `git status` against a mounted Windows repo, it frequently reports mass deletions (`D path1 path2 ...`) and `bad signature 0x00000000` errors. These are virtiofs-side view artifacts. The real files exist on disk; host git is fine. Specialised manifestation of quirk #6 (sandbox `git status` desync) + quirk #8 (FUSE-mangled git internals).
+
+**Detection**: `ls` the "deleted" paths from sandbox — they exist. `git log` and `git show <hash>:<path>` work correctly. Host PowerShell `git status` is clean.
+
+**Hard rule**: **HR commits run on host PowerShell only.** Sandbox can write files; sandbox cannot safely stage or commit HR.
+
+**Recovery prelude** for any host-side HR commit (always-safe, idempotent):
+
+```powershell
+if (Test-Path .git\index.lock) { Remove-Item .git\index.lock }
+git reset --mixed HEAD
+# then proceed with git add / git commit as usual
+```
+
+Recovers any HR index corruption that bled through from sandbox activity. Cheap; include in every host-paste block by default.
+
+### 3. Virtiofs COMMIT failure on SQLite writes (M1 §7.2 expanded)
+
+SQLite `COMMIT` against a DB on a virtiofs-mounted path fails with "disk I/O error" / "database is locked" / silent corruption. Pattern is universal — any DB write that needs to COMMIT must run against a copy on the sandbox's native filesystem.
+
+Working pattern (v0.5.6, v0.5.7, v0.5.8 sessions):
+
+1. `shutil.copy2(live_db, '/tmp/<unique>.sqlite')`.
+2. Open the `/tmp/` copy; do all writes; COMMIT there.
+3. Independent re-verify on the `/tmp/` copy.
+4. `shutil.copy2('/tmp/<unique>.sqlite', live_db)` — **not** `os.replace`, which fails cross-device on virtiofs mounts.
+5. Final verify on the host DB from a fresh connection.
+
+Step 4 is the trap: `os.replace` looks idiomatic for atomic rename, but virtiofs is a different device than `/tmp` and the rename errors out. `shutil.copy2` is the safe variant.
+
+### 4. Cowork delete permission is per-session
+
+`mcp__cowork__allow_cowork_file_delete` for `C:\AI` does NOT persist across sessions. Budget one re-grant call at GATE 2 time per session, or earlier if file deletion is needed mid-session (e.g. `.git/index.lock` cleanup). Refines quirk #3 with the "per-session" constraint.
+
+### 5. Folder mounts are per-session too
+
+Fresh Cowork sessions start with no mounts. Audit-on-entry must call `mcp__cowork__request_cowork_directory` for each repo the session needs (typically Museum + MV + HR) before any other work. The request is reliable and idempotent.
+
+### 6. The release flow (cross-reference)
+
+The 4-step release flow lives in `### Release flow` above (the one that ships MV's released artifacts to weird.baby). Step 2 (`npm run export-artifacts`) is the most-missed step; the `EXHIBIT_BACKFILL_DEPLOY` session traced the "released video didn't show up" symptom directly to skipping it. Re-read that section before any release-related work.
+
 ## Things that are explicitly off-limits
 
 - **`src/styles/museum-tokens.css`** — design tokens. Off-limits for population/data work; only touch with explicit UX direction.
