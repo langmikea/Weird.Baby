@@ -1173,6 +1173,17 @@ post-§5 resolution.
   expose `tier` + `sort_order` in `/api/tags` response. Client-side:
   replace `CATEGORY_ORDER` constant with sort by `(tier, sort_order,
   ns)`. (Depends on §5.5.)
+
+  > **T3 DONE (2026-05-25, MV commit `691f0ff` + Museum commit `5740596`):**
+  > Server-side `/api/tags` extended with `tier`, `sort_order`,
+  > `namespace_display_name`, `namespace_retired_at` per-tag fields
+  > (option α — unregistered ns falls to `tier=99` / `sort_order=99`).
+  > Client-side `CATEGORY_ORDER` retired in favour of `NAMESPACE_META` +
+  > `nsCompare` / `orderCats` helpers driven by the new `/api/tags` fields.
+  > Museum-side sort comparator at `hr_dimensions.js:147` consults
+  > `REGISTRY[ns]?.tier` / `.sort_order` with the same fallback.
+  > Retired namespaces hidden cross-surface. Unblocks T6. Live in
+  > production via release-flow regen (Museum HEAD `d0e9f4f`, 2026-05-28).
 - **T4. People-emission fix** — add `people:hunter_root` to HR's
   `COMMON_STATIC_TAGS`; backfill the 38 in-inbox parents + children
   via one-shot reconciliation script (mirrors V1B
