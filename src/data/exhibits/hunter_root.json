@@ -1,7 +1,7 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-05-25T20:05:15.784Z",
+    "exported_at": "2026-05-28T16:25:32.571Z",
     "filter": "released, not archived, badged for this exhibit",
     "vocabulary_csv_sha": null
   },
@@ -35,6 +35,766 @@
       }
     },
     {
+      "id": "MV-HR-20260405-005",
+      "source_url": "https://www.facebook.com/watch?ref=saved&v=1768231697028127",
+      "source_platform": "facebook",
+      "media_type": "video",
+      "title": "#singersongwriter #originalmusic #fyp #countrymusic #americana #indieartist #ind…",
+      "description": "#singersongwriter #originalmusic #fyp #countrymusic #americana #indieartist #ind…",
+      "post_date": "2023-12-04",
+      "released_at": "2026-05-27T21:03:31",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "early_version",
+          "new_music",
+          "notable",
+          "personal",
+          "solo"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-006",
+      "source_url": "https://www.facebook.com/watch?ref=saved&v=755734052557156",
+      "source_platform": "facebook",
+      "media_type": "video",
+      "title": "This goes for Facebook too! I wanted to share my appreciation for everyone that has followed me since releasing \"Town Ra",
+      "description": "This goes for Facebook too! I wanted to share my appreciation for everyone that has followed me since releasing \"Town Rat Heathen\". \n Y'all are making my dreams come true. New album right around the corner y'all. Stay tuned, much love.",
+      "post_date": "2023-02-16",
+      "released_at": "2026-05-27T21:05:03",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "fan",
+          "milestone",
+          "new_music",
+          "notable",
+          "personal",
+          "pre_release",
+          "released"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-007",
+      "source_url": "https://www.facebook.com/watch?ref=saved&v=3533165300277563",
+      "source_platform": "facebook",
+      "media_type": "video",
+      "title": "This is where I recorded \"Town Rat Heathen\" and the entirety of my latest album \"Arkansas\". Just a spare bedroom and a l",
+      "description": "This is where I recorded \"Town Rat Heathen\" and the entirety of my latest album \"Arkansas\". Just a spare bedroom and a little bit of gear is all you need!",
+      "post_date": "2023-11-25",
+      "released_at": "2026-05-27T21:04:56",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "gear",
+          "new_music",
+          "notable",
+          "rehearsal",
+          "released",
+          "solo"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-008",
+      "source_url": "https://www.facebook.com/watch?ref=saved&v=368621548505423",
+      "source_platform": "facebook",
+      "media_type": "video",
+      "title": "Brief song idea from my TikTok.  I'm gonna spam y'all with my single release until it's out so go pre-save my new song ",
+      "description": "Brief song idea from my TikTok. \n I'm gonna spam y'all with my single release until it's out so go pre-save my new song right here! \n I appreciate you! \nhttps://distrokid.com/hyperf.../hunterroot/quicksand-sinking",
+      "post_date": "2022-03-29",
+      "released_at": "2026-05-27T21:05:06",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "distrokid",
+          "tiktok"
+        ],
+        "unsorted": [
+          "new_music",
+          "notable",
+          "pre_release",
+          "promotional_post",
+          "solo"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-009",
+      "source_url": "https://www.facebook.com/hunterrootmusic/posts/pfbid0eUv1dz1hrNzCbG2oW3woyYt1uQzqj1qfiVR93N8XVYbU2C7kaFN8eGF1UtBMjaTml",
+      "source_platform": "facebook",
+      "media_type": "link",
+      "title": "Apologies to Movement on the Mountain.  We wish we could be there.",
+      "description": "Apologies to Movement on the Mountain.  We wish we could be there.",
+      "post_date": "2025-06-19",
+      "released_at": "2026-05-27T21:05:15",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "fan",
+          "lyme_disease",
+          "notable",
+          "personal",
+          "tour_announcement"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-010",
+      "source_url": "https://theticketing.co/e/hunterrootlive",
+      "source_platform": "other",
+      "media_type": "link",
+      "title": "Hunter Root Live at The Abbey Bar | The Ticketing Co.",
+      "description": "Ticketing page for Hunter Root's live performance at The Abbey Bar in Harrisburg, PA on March 16, 2024. The event was presented by Moon Peak Productions with doors at 8pm, music at 8:30pm, advance tickets $15 and day of show $20. Includes promotional image and details about Hunter's background and viral success.",
+      "post_date": "2024-03-16",
+      "released_at": "2026-05-27T21:04:54",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "medusas_disco"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "advance_tickets",
+          "event_listing",
+          "lancaster_pa",
+          "live_show",
+          "notable",
+          "solo",
+          "ticketing",
+          "tour",
+          "tour_announcement"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-011",
+      "source_url": "https://www.facebook.com/watch?ref=saved&v=810914703992548",
+      "source_platform": "facebook",
+      "media_type": "video",
+      "title": "I did an impromptu live take of Little Red Riding Hood outside of the highschool I went to in Manheim Pennsylvania",
+      "description": "Brief song idea from my TikTok. \n I'm gonna spam y'all with my single release until it's out so go pre-save my new song right here! \n I appreciate you! \nhttps://distrokid.com/hyperf.../hunterroot/quicksand-sinking",
+      "post_date": "2023-06-12",
+      "released_at": "2026-05-27T21:05:33",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "distrokid",
+          "tiktok"
+        ],
+        "unsorted": [
+          "fan_cover_song",
+          "live_show",
+          "notable",
+          "personal",
+          "promotional_post",
+          "solo"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-012",
+      "source_url": "https://www.facebook.com/watch?ref=saved&v=934622031119101",
+      "source_platform": "facebook",
+      "media_type": "link",
+      "title": "\"Dreaming up ways of gettin' outta this hellhole\" — Hunter Root lyric or quote post",
+      "description": "\"Dreaming up ways of gettin' outta this hellhole, shift your perspective, turn it all to rubble\"",
+      "post_date": "2023-05-25",
+      "released_at": "2026-05-27T21:04:51",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "notable",
+          "personal"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-013",
+      "source_url": "https://www.facebook.com/hunter.root.7/posts/pfbid02Hwepahwce8rAjPpFoqxhyBcedDi55sAhvKNcpumWMkXz4sJHzWrnrvwuqKDxvEujl",
+      "source_platform": "facebook",
+      "media_type": "link",
+      "title": "Hunter Root tribute post for his brother Nick Root, who passed away at age 27",
+      "description": "\"Dreaming up ways of gettin' outta this hellhole, shift your perspective, turn it all to rubble\"",
+      "post_date": "2021-04-22",
+      "released_at": "2026-05-27T21:05:24",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "unsorted": [
+          "family",
+          "indieartist",
+          "loss",
+          "personal",
+          "rare",
+          "tribute"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-014",
+      "source_url": "https://www.facebook.com/watch?ref=saved&v=443712638554964",
+      "source_platform": "facebook",
+      "media_type": "video",
+      "title": "Happy July! Can y'all do me a solid and help me rebuild my Instagram following? Last year I got hacked and lost all of m",
+      "description": "Happy July! Can y'all do me a solid and help me rebuild my Instagram following? Last year I got hacked and lost all of my 100K followers. I'm just out here trying to share my music and catch you at an upcoming show (fall tour on sale now!) Please follow me over at my new account @hunterrootofficial and share with your friends. Can't thank you enough for all your support!",
+      "post_date": "2024-07-01",
+      "released_at": "2026-05-27T21:05:09",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "instagram"
+        ],
+        "unsorted": [
+          "fall_tour",
+          "fan",
+          "hacked_account",
+          "notable",
+          "personal",
+          "social"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-015",
+      "source_url": "https://www.facebook.com/watch?ref=saved&v=755734052557156",
+      "source_platform": "facebook",
+      "media_type": "video",
+      "title": "The early stages of a new one. Nothing helps me more mentally than putting how I feel into song. Since getting my IG h*c",
+      "description": "The early stages of a new one. Nothing helps me more mentally than putting how I feel into song. Since getting my IG h*cked last week I've been a little down in the dumps. Bless this universe for giving us music.",
+      "post_date": "2023-02-16",
+      "released_at": "2026-05-27T21:05:12",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "early_stages",
+          "instagram_hacked",
+          "mental_health",
+          "new_song",
+          "notable",
+          "songwriting",
+          "songwriting_process"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-016",
+      "source_url": null,
+      "source_platform": "other",
+      "media_type": "photo",
+      "title": "Stage setup at Harrisburg venue with instruments and gear before performance",
+      "description": "Empty stage at a Harrisburg, Pennsylvania venue on October 10, 2025, showing a complete band setup with drum kit branded 'Allman Rose', guitars, bass, keyboard, amplifiers, and monitors arranged on patterned rugs. Red curtain backdrop and stage lighting create an intimate performance atmosphere in what appears to be a small to mid-sized venue.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-27T21:03:10",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "band",
+          "gear",
+          "live_show",
+          "notable"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-017",
+      "source_url": null,
+      "source_platform": "other",
+      "media_type": "photo",
+      "title": "Hunter Root drum kit and stage setup at Harrisburg, Pennsylvania venue",
+      "description": "Full stage setup for Hunter Root at a Harrisburg, Pennsylvania venue, featuring a red drum kit with custom \"Hunter Root\" logo on the bass drum head, flanked by amplifiers and a red hollow-body electric guitar. The professional stage arrangement is set against deep red curtains, ready for performance.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-27T21:03:20",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "band",
+          "gear",
+          "live_show",
+          "notable"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-018",
+      "source_url": null,
+      "source_platform": "local",
+      "media_type": "photo",
+      "title": "Hunter Root drum kit on stage in Harrisburg, Pennsylvania with red curtain backdrop",
+      "description": "A drum kit with 'Hunter Root' branding on the bass drum head is set up on stage in Harrisburg, Pennsylvania. The kit features red/burgundy shells and is positioned against a deep red curtain backdrop, with various cables and a BOSS amplifier visible on stage.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-27T21:03:35",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "band",
+          "gear",
+          "live_show"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-019",
+      "source_url": null,
+      "source_platform": "local",
+      "media_type": "photo",
+      "title": "Hunter Root band performing live at a Harrisburg venue with full lighting",
+      "description": "Full band performance captured at a Harrisburg, Pennsylvania venue on October 10, 2025. The stage setup includes two guitarists, upright bass, drums, and keyboard, illuminated by purple and red stage lighting. Multiple guitar effects pedals are visible on the floor in front of the performers.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-27T21:03:37",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "band",
+          "gear",
+          "live_show",
+          "notable"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-020",
+      "source_url": null,
+      "source_platform": "local",
+      "media_type": "photo",
+      "title": "Live band performance at Harrisburg, PA venue with colorful stage lighting",
+      "description": "Hunter Root and band performing live in Harrisburg, Pennsylvania. Three musicians visible on stage with bass, guitar, and vocals, backed by drums and additional band members. Vibrant purple and blue stage lighting creates an intimate club atmosphere with equipment and cables visible on the venue floor.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-27T21:03:41",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "band",
+          "common",
+          "gear",
+          "live_show"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-021",
+      "source_url": null,
+      "source_platform": "other",
+      "media_type": "photo",
+      "title": "Hunter Root band performing live on stage in Harrisburg, Pennsylvania",
+      "description": "Live performance photo from Harrisburg, Pennsylvania showing Hunter Root band on stage with drum kit displaying 'Hunter Root' logo. The stage setup includes amplifiers, pedal boards, and oriental-style rugs. Blue stage lights illuminate the venue backdrop as band members perform energetically.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-27T21:03:44",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "band",
+          "common",
+          "gear",
+          "live_show"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-022",
+      "source_url": null,
+      "source_platform": "other",
+      "media_type": "photo",
+      "title": "Hunter Root band performing live on stage in Harrisburg, Pennsylvania",
+      "description": "Live performance photo showing Hunter Root band on stage in Harrisburg, Pennsylvania. Three musicians are visible with the drummer behind a kit displaying the Hunter Root logo, while two other members work with instruments and equipment. The stage features colorful floral-patterned rugs and various guitar pedals in the foreground.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-27T21:03:47",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "band",
+          "gear",
+          "live_show",
+          "notable"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-023",
+      "source_url": null,
+      "source_platform": "local",
+      "media_type": "photo",
+      "title": "Hunter Root performing live on stage in Harrisburg, Pennsylvania",
+      "description": "Hunter Root performing live on stage in Harrisburg, Pennsylvania with band members. The stage is set with drums, amplifiers, and multiple microphones, with decorative rugs on the floor and stage lighting visible in the background. Two performers are visible mid-performance in an intimate venue setting.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-27T21:03:51",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "band",
+          "common",
+          "gear",
+          "live_show"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-024",
+      "source_url": null,
+      "source_platform": "local",
+      "media_type": "photo",
+      "title": "Hunter Root performing on stage in Harrisburg, Pennsylvania with long hair",
+      "description": "Live performance photo taken in Harrisburg, Pennsylvania showing Hunter Root on stage with long wavy hair and light-colored shirt, alongside another performer. The stage setup includes multiple microphone stands, guitar pedals and rugs visible in the foreground, and blue stage lights overhead.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-27T21:04:01",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "band",
+          "gear",
+          "live_show",
+          "notable"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-025",
+      "source_url": null,
+      "source_platform": "local",
+      "media_type": "photo",
+      "title": "Hunter Root performing solo acoustic set in Harrisburg, Pennsylvania",
+      "description": "Hunter Root sits on a stool performing an intimate solo acoustic set in Harrisburg, Pennsylvania. The stage is bathed in dramatic blue lighting with yellow and red spotlights behind him, guitar pedals and equipment scattered at his feet. He wears black Converse sneakers, black pants, and a light-colored shirt while playing acoustic guitar and singing into a microphone.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-27T21:04:06",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "common",
+          "gear",
+          "live_show",
+          "solo"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-026",
+      "source_url": null,
+      "source_platform": "local",
+      "media_type": "photo",
+      "title": "Hunter Root performing solo acoustic set in Harrisburg, Pennsylvania",
+      "description": "Hunter Root seated on stage performing solo with acoustic guitar in Harrisburg, Pennsylvania. The stage features dramatic blue, yellow, and pink lighting with pedals and equipment arranged at his feet. The intimate venue setup captures a typical solo performance configuration.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-27T21:04:09",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "common",
+          "gear",
+          "live_show",
+          "solo"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-027",
+      "source_url": null,
+      "source_platform": "other",
+      "media_type": "photo",
+      "title": "Hunter Root performing solo with acoustic guitar on stage in Harrisburg, PA",
+      "description": "Hunter Root performs solo acoustic on stage in Harrisburg, Pennsylvania, bathed in blue stage lighting. He sits on a stool with an acoustic guitar, surrounded by various pedals and equipment at his feet. The intimate performance setup features dramatic blue lighting and visible stage monitors.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-27T21:04:31",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "common",
+          "gear",
+          "live_show",
+          "solo"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-028",
+      "source_url": null,
+      "source_platform": "local",
+      "media_type": "photo",
+      "title": "Hunter Root performing acoustic solo set in Harrisburg, Pennsylvania",
+      "description": "Hunter Root sits on a stool performing an intimate acoustic guitar set in Harrisburg, Pennsylvania. The stage is bathed in blue atmospheric lighting with LED stage lights visible overhead. His pedalboard and various effects pedals are visible on the floor in front of him, with another musician partially visible on the right side of the stage.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-27T21:04:48",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "common",
+          "gear",
+          "live_show",
+          "solo"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-029",
+      "source_url": null,
+      "source_platform": null,
+      "media_type": "video",
+      "title": "",
+      "description": "",
+      "post_date": null,
+      "released_at": "2026-05-27T21:05:41",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "common"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-030",
+      "source_url": null,
+      "source_platform": "local",
+      "media_type": "photo",
+      "title": "Hunter Root acoustic performance with bassist, filmed at venue near Hershey PA",
+      "description": "Live performance setup showing acoustic guitarist and bassist performing on stage with dramatic blue and white lighting. The drum kit displays 'Hunter Root' branding, and a camera on tripod is capturing the performance. Photo taken near Hershey, Pennsylvania.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-27T21:04:41",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "band",
+          "live_show",
+          "notable"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-031",
+      "source_url": null,
+      "source_platform": "local",
+      "media_type": "photo",
+      "title": "Hunter Root live performance at venue in Muhlenberg Township, PA",
+      "description": "Live performance photo showing two musicians on stage in Muhlenberg Township, PA (near Reading). Acoustic guitarist/vocalist on left with long blonde hair, bassist on right with long hair and striped shirt. Professional stage lighting with blue and white beams, drum kit visible in background with \"Hunter Root\" logo. Camera equipment visible in foreground capturing the performance.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-27T21:04:43",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "band",
+          "gear",
+          "live_show",
+          "notable"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-032",
+      "source_url": null,
+      "source_platform": "local",
+      "media_type": "photo",
+      "title": "Hunter Root live performance with bassist, professional camera recording setup",
+      "description": "Hunter Root performing acoustic guitar and vocals with a bassist (likely Nick Root) in a striped shirt on stage. Professional camera on tripod capturing the performance. Drum kit with Hunter Root logo visible in background with dramatic blue and white stage lighting.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-27T21:04:18",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "band",
+          "gear",
+          "live_show",
+          "notable"
+        ]
+      }
+    },
+    {
       "id": "MV-HR-20260405-033",
       "source_url": null,
       "source_platform": "local",
@@ -61,6 +821,89 @@
       }
     },
     {
+      "id": "MV-HR-20260405-034",
+      "source_url": "https://www.facebook.com/hunter.root.7/posts/pfbid0TNo8U4RZNAK15kTAZQKYts4WZgWThRBGSYJP8NqtkcTkgScSizVTNBXinSuiZ3UAl",
+      "source_platform": "facebook",
+      "media_type": "link",
+      "title": "Guitar Lessons",
+      "description": "Thanks to the folks who've reached out about getting guitar lessons from me! 🙏 The ball is actually rolling now so definitely message me if you're interested!\nThe next musical thing on the list is to release this single. It features my first guest musician I've ever had on my solo project, the one and only Robin Chambers on violin! Keep your eyes peeled for a release date. 🌠",
+      "post_date": "2022-02-08",
+      "released_at": "2026-05-27T21:04:59",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "milestone",
+          "new_music",
+          "notable",
+          "personal",
+          "pre_release",
+          "solo"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-035",
+      "source_url": "https://www.facebook.com/hunter.root.7/posts/pfbid035M9N6bysWKtheVAjsAikGC9bXPUkmgNrdWnU2razvXr6GrDAf3nu6eHTkJBG3DFcl",
+      "source_platform": "facebook",
+      "media_type": "photo",
+      "title": "Getting a head start on preparing for tour later this year with a chip sandwich.",
+      "description": "Getting a head start on preparing for tour later this year with a chip sandwich.",
+      "post_date": "2019-05-21",
+      "released_at": "2026-05-27T21:06:22",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "personal",
+          "solo",
+          "tour",
+          "unique"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260405-037",
+      "source_url": "https://www.instagram.com/p/DAHCaeoPtYI/",
+      "source_platform": "instagram",
+      "media_type": "photo",
+      "title": "hunterrootofficial 80wHey y'all! I just wanted to pop in and say we've been on the road the last couple weeks so I ha",
+      "description": "hunterrootofficial\n \n80w\nHey y'all! I just wanted to pop in and say we've been on the road the last couple weeks so I haven't been posting as much. Apologies! Will get back on that grind ASAP. I will also say I've also been busy recording a new song and cannot wait to share it soon! 😁 Much love to everyone who's been out to a show on this run. We got more dates, check hunterroot.com/shows for tix. 🎟️ @bearsvilletheater tonight in New York.✌️\n.\n.\n#musician #tour",
+      "post_date": "2024-09-19",
+      "released_at": "2026-05-27T21:05:19",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "new_music",
+          "notable",
+          "personal",
+          "pre_release",
+          "solo",
+          "tour",
+          "tour_announcement"
+        ]
+      }
+    },
+    {
       "id": "MV-HR-20260405-038",
       "source_url": "https://www.facebook.com/reel/1137424761619325",
       "source_platform": "facebook",
@@ -83,6 +926,91 @@
           "milestone",
           "personal",
           "unique"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260416-001",
+      "source_url": "https://www.reverbnation.com/hunterroot2",
+      "source_platform": "reverbnation",
+      "media_type": "link",
+      "title": "Hunter Root — archived ReverbNation page",
+      "description": "Rock, Singer Songwriter, Blues",
+      "post_date": "2018-05-19",
+      "released_at": "2026-05-27T21:04:37",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "unsorted": [
+          "artist_page",
+          "solo"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260416-003",
+      "source_url": "https://www.reverbnation.com/medusasdisco",
+      "source_platform": "reverbnation",
+      "media_type": "link",
+      "title": "Medusa's Disco — archived ReverbNation page",
+      "description": "Rock, Psychedelic, Alternative",
+      "post_date": "2020-02-02",
+      "released_at": "2026-05-27T21:05:27",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "medusas_disco"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "unsorted": [
+          "artist_page"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260416-005",
+      "source_url": "https://www.reverbnation.com/medusasdisco/song/19361978-park-bench-pigeons",
+      "source_platform": "reverbnation",
+      "media_type": "link",
+      "title": "Park Bench Pigeons — archived ReverbNation page",
+      "description": "Medusa's Disco — Rock, Psychedelic, Alternative — Lancaster, PA",
+      "post_date": "2020-02-02",
+      "released_at": "2026-05-27T21:05:36",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "medusas_disco"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "unsorted": [
+          "song_page"
         ]
       }
     },
@@ -141,6 +1069,445 @@
         ],
         "unsorted": [
           "song_page"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-001",
+      "source_url": "https://www.reverbnation.com/runwiththehunt/song/14767555-brain-cell",
+      "source_platform": "reverbnation",
+      "media_type": "audio",
+      "title": "Brain Cell — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-05-27T21:05:46",
+      "primary_url": "https://assets.weird.baby/audio/0b/0b65aa63ffa9856c473f03ba3e361a7137a93415f2e3a34e5e959d6a3cac3459.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "era": [
+          "rwth"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-003",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "audio",
+      "title": "Dead Man — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-05-27T21:05:48",
+      "primary_url": "https://assets.weird.baby/audio/78/780e1384fcc70c74eb050866adfb09d040be5516216369c491a55e4fde9c359d.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "era": [
+          "rwth"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-005",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "audio",
+      "title": "Doors with Keys — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-05-27T21:05:50",
+      "primary_url": "https://assets.weird.baby/audio/58/58c53cc87bc39bbafc9f84afbb5c1ec5919738b5324dbd0cec1e3652262cb702.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "era": [
+          "rwth"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-007",
+      "source_url": "https://www.reverbnation.com/runwiththehunt/song/13297881-eyes-are-oceans",
+      "source_platform": "reverbnation",
+      "media_type": "audio",
+      "title": "Eyes are Oceans — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-05-27T21:05:53",
+      "primary_url": "https://assets.weird.baby/audio/fd/fdf4283653fc49bb85654808460fd588d2653dbbe1b9c802d174bcefd2b71be2.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "era": [
+          "rwth"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-009",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "audio",
+      "title": "Freezer Burnt — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-05-27T21:06:06",
+      "primary_url": "https://assets.weird.baby/audio/75/7506a7b0f0f2cc664337aebc54e0549e60396f01a33b4f687993ce0f0e8fb934.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "era": [
+          "rwth"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-011",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "audio",
+      "title": "Northern Light Streaks — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-05-27T21:06:08",
+      "primary_url": "https://assets.weird.baby/audio/aa/aace4be80e879f2fad5b10f2223634cdd9a1e744bfad8334936b7f558568a70a.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "era": [
+          "rwth"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-013",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "audio",
+      "title": "Playing Music with Our Bones — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-05-27T21:06:18",
+      "primary_url": "https://assets.weird.baby/audio/e0/e0ccb3524cba0d31df4c215ff6c3e3c8145085d083fbb25a6773a248a6426cd4.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "era": [
+          "rwth"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-015",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "audio",
+      "title": "Same Page — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-05-27T21:05:55",
+      "primary_url": "https://assets.weird.baby/audio/3b/3b3c3569db8ded027a448a4c5bd3aeb9e9c135ad50e881ac7ff9d73333abdd8c.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "era": [
+          "rwth"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-017",
+      "source_url": "https://www.reverbnation.com/runwiththehunt/song/13563739-straightlaced",
+      "source_platform": "reverbnation",
+      "media_type": "audio",
+      "title": "Straightlaced — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-05-27T21:06:02",
+      "primary_url": "https://assets.weird.baby/audio/73/73fa16ef17a9dc2622d433eaab651b9d29406a574b97dad6918f31de3366557a.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "era": [
+          "rwth"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-019",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "audio",
+      "title": "Think My Mind — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-05-27T21:05:58",
+      "primary_url": "https://assets.weird.baby/audio/8c/8ccf1adda4bf1c57af77d6d97ee9cd4bf1e24c03d4048638fffd03436a22884b.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "era": [
+          "rwth"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-021",
+      "source_url": "https://www.reverbnation.com/runwiththehunt/song/14309195-time-flow-zero",
+      "source_platform": "reverbnation",
+      "media_type": "audio",
+      "title": "Time Flow Zero — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-05-27T21:06:10",
+      "primary_url": "https://assets.weird.baby/audio/d6/d693ac3556bb0c2c4933d3b8d3c3e98fcaaa6211c1d27d71005e39c314652f45.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "era": [
+          "rwth"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260417-023",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "audio",
+      "title": "Trees and Everything — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-05-27T21:06:12",
+      "primary_url": "https://assets.weird.baby/audio/6e/6e172dd61b8ed4c575244b71cfa3acc901218877d136f721b0af3cacccc52510.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "era": [
+          "rwth"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
+      "id": "MV-20260419-002",
+      "source_url": "https://www.facebook.com/reel/1137424761619325",
+      "source_platform": "facebook",
+      "media_type": "photo",
+      "title": "Facebook reel featuring puppet character created by ElmThree Productions",
+      "description": "Facebook reel posted by ElmThree Productions featuring a bearded puppet character with red bandana. The post honors @cheechandchong and references their 'Huge fan of Cheech and Chong' fandom, describing it as being about 'our #1st Hunter Root' with original audio.",
+      "post_date": "2025-09-03",
+      "released_at": "2026-05-27T21:04:22",
+      "primary_url": "https://assets.weird.baby/assets/a5/a53b134b79f2579f0d0419f480465f1c3ca7a1f58409f9809b933e608e7a5fc0.png",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/b3/b30c279d2773607baf8f6c5d33b8b5352725e7debb9765a7b8f91f09f4a4e896.jpg",
+      "tags": {
+        "exhibit": [
+          "hunter_root"
+        ]
+      }
+    },
+    {
+      "id": "MV-20260419-003",
+      "source_url": null,
+      "source_platform": null,
+      "media_type": "photo",
+      "title": "",
+      "description": "",
+      "post_date": null,
+      "released_at": "2026-05-27T21:05:43",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "unsorted": [
+          "rare"
         ]
       }
     },
@@ -205,6 +1572,39 @@
       }
     },
     {
+      "id": "MV-HR-20260421-001",
+      "source_url": "https://www.reverbnation.com/runwiththehunt",
+      "source_platform": "reverbnation",
+      "media_type": "audio",
+      "title": "Song — audio recording",
+      "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
+      "post_date": null,
+      "released_at": "2026-05-27T21:06:16",
+      "primary_url": "https://assets.weird.baby/audio/0b/0b15c358f6ca85c824448b083c14e476dc7ab3f3fac108da05ff7d4ffc85b015.mp3",
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "era": [
+          "rwth"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "type": [
+          "audio",
+          "mp3"
+        ]
+      }
+    },
+    {
       "id": "MV-20260518-001",
       "source_url": "https://www.youtube.com/watch?v=7Lttb_59EYw",
       "source_platform": "youtube",
@@ -239,6 +1639,94 @@
         ],
         "source": [
           "youtube"
+        ],
+        "year": [
+          "2023"
+        ]
+      }
+    },
+    {
+      "id": "MV-20260523-001",
+      "source_url": "https://www.youtube.com/watch?v=vPW49GU38Ng",
+      "source_platform": "youtube",
+      "media_type": "link",
+      "title": "Hunter Root - ‘94 (Official Music Video)",
+      "description": "Hunter Root - '94 (official). Album: crooked.",
+      "post_date": "2025-07-31",
+      "released_at": "2026-05-27T21:04:25",
+      "primary_url": null,
+      "thumbnail_url": "https://i.ytimg.com/vi/vPW49GU38Ng/maxresdefault.jpg",
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "author": [
+          "hunter_root"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "content_kind": [
+          "official"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "scope": [
+          "hunter_root"
+        ],
+        "song": [
+          "94"
+        ],
+        "source": [
+          "youtube"
+        ],
+        "type": [
+          "video"
+        ],
+        "year": [
+          "2025"
+        ]
+      }
+    },
+    {
+      "id": "MV-20260523-004",
+      "source_url": "https://www.youtube.com/watch?v=n2m8sP17E-c",
+      "source_platform": "youtube",
+      "media_type": "link",
+      "title": "Hunter Root - Town Rat Heathen (Official Music Video)",
+      "description": "Hunter Root - Town Rat Heathen (official). Album: arkansas.",
+      "post_date": "2023-02-03",
+      "released_at": "2026-05-27T21:05:21",
+      "primary_url": null,
+      "thumbnail_url": "https://i.ytimg.com/vi/n2m8sP17E-c/maxresdefault.jpg",
+      "tags": {
+        "album": [
+          "arkansas"
+        ],
+        "author": [
+          "hunter_root"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "content_kind": [
+          "official"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "scope": [
+          "hunter_root"
+        ],
+        "song": [
+          "town_rat_heathen"
+        ],
+        "source": [
+          "youtube"
+        ],
+        "type": [
+          "video"
         ],
         "year": [
           "2023"
@@ -963,7 +2451,7 @@
       "title": "Hunter Root - The Keeper (Official Visualizer Video)",
       "description": "Hunter Root - The Keeper (official). Album: crooked.",
       "post_date": "2025-10-16",
-      "released_at": "2026-05-24T22:20:06",
+      "released_at": "2026-05-27T21:02:47",
       "primary_url": null,
       "thumbnail_url": "https://i.ytimg.com/vi/bXZo69DNSrM/maxresdefault.jpg",
       "tags": {
@@ -1271,7 +2759,7 @@
       "title": "Hunter Root - Low (Official Visualizer Video)",
       "description": "Hunter Root - Low (official). Album: crooked.",
       "post_date": "2025-10-16",
-      "released_at": "2026-05-24T22:20:04",
+      "released_at": "2026-05-27T21:02:47",
       "primary_url": null,
       "thumbnail_url": "https://i.ytimg.com/vi/WRjngwtGGFk/maxresdefault.jpg",
       "tags": {
@@ -1447,7 +2935,7 @@
       "title": "Hunter Root - Flash in the Pan (Official Visualizer Video)",
       "description": "Hunter Root - Flash in the Pan (official). Album: crooked.",
       "post_date": "2025-10-16",
-      "released_at": "2026-05-24T22:20:03",
+      "released_at": "2026-05-27T21:02:47",
       "primary_url": null,
       "thumbnail_url": "https://i.ytimg.com/vi/03NAxazLuhY/maxresdefault.jpg",
       "tags": {
@@ -1491,7 +2979,7 @@
       "title": "Hunter Root - If the Body is a Temple (Official Visualizer Video)",
       "description": "Hunter Root - If the Body is a Temple (official). Album: crooked.",
       "post_date": "2025-10-16",
-      "released_at": "2026-05-24T22:20:03",
+      "released_at": "2026-05-27T21:02:46",
       "primary_url": null,
       "thumbnail_url": "https://i.ytimg.com/vi/-2aU97nuzYE/maxresdefault.jpg",
       "tags": {
