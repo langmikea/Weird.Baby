@@ -363,6 +363,12 @@ If asked to do "lint cleanup", these are the targets. Don't pretend they're triv
 
 Maintained here. Newest first.
 
+### 2026-05-30 → content_kind front-end block + -036 triage decision (`9bce017`)
+- `HrExhibitFlow.jsx` + `.css`: added a `content_kind` media-variant block (`ContentKindBadge` / `contentKindOf`) to all five artifact-card feet. Renders the spec §3.5 values (official/live/lyrics/cover) as a gold-bordered uppercase chip in the deck's pill language. Off-spec values (e.g. the `content_kind:other` on the Central-PA gallery container) are ignored; cards with no spec-valid content_kind are byte-identical to before. Display-only, code-only — no export/DB change. Built + deployed; verified live on weird.baby/hr: 39 badges (official 25 / live 11 / lyrics 3), gallery + coverflow unregressed.
+- Step-zero re-verified the `6c1aec1` broken-preview fallback across all three surfaces (gallery card cover, lightbox large image, thumb strip) via uncommitted bogus-URL edits to `hunter_root.json`; reverted to a clean tree.
+- Artifact **-036** (`MV-HR-20260405-036`, `HOMESTEAD_Reboot_Complete.jpg` — a live acoustic shot with a "HOMESTEAD: Reboot complete" overlay): diagnosed as stuck in MV **`inbox`**, not a render bug. It's already export-excluded, so it correctly does not render. Operator opted not to publish it ("image can be deleted"); left in inbox, **no MV write performed**. Optional archive/delete deferred to explicit operator word.
+- ⚠️ The "Pre-existing lint debt (4 errors)" baseline below is **STALE**: `npm run lint` actually reports **256 errors / 6 warnings** (the react-hooks/immutability + set-state-in-effect rules now fire broadly across Exhibit.jsx). This change added **zero** new. Worth reconciling the baseline note.
+
 ### 2026-05-30 → broken-preview fallback for gallery/artifact images
 - `HrExhibitFlow.jsx` + `.css`: gallery/artifact images with a null/empty `src` or that 404/fail to load now degrade to a styled placeholder (muted INK/GOLD tile, artifact title + "image unavailable") instead of silent blankness — across the gallery card cover and the lightbox large image + thumb strip. Background-image surfaces (no native `onError`) detect failure via an out-of-band `Image()` probe hook (`useImageFailed`); the lightbox `<img>` uses native `onError` (`FallbackImg`, keyed on `src`). Display-only — no DB/sync/export touch. Addresses the HEIC-incident failure mode (assets fail by path OR format with no front-end signal).
 
