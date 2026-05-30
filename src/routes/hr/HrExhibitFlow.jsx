@@ -815,6 +815,41 @@ function pickSpan(seedStr, biasWide) {
   return { span_w };
 }
 
+// ─── content_kind variant block (2026-05-30) ────────────────────────────────
+// content_kind is MV's media-variant taxonomy, defined in
+// DATA_ARCHITECTURE_SPEC_v2.1-target.md §3.5 ("media variant
+// (official/live/lyrics/cover)"). The export (tools/export-artifacts.mjs)
+// groups the namespaced `content_kind:<v>` tags under card.tags.content_kind.
+// Only the four spec-allowed values render a block; any other value (e.g. a
+// stray `content_kind:other` carried by a source artifact) is ignored so the
+// deck never surfaces an off-spec label. A card with no spec-valid
+// content_kind renders no block at all — the pre-existing card shape is
+// untouched, so cards without the tag are byte-identical to before.
+const CONTENT_KIND_LABELS = {
+  official: "Official",
+  live: "Live",
+  lyrics: "Lyrics",
+  cover: "Cover",
+};
+function contentKindOf(card) {
+  const vals = card && card.tags && Array.isArray(card.tags.content_kind)
+    ? card.tags.content_kind
+    : [];
+  for (const v of vals) {
+    if (Object.prototype.hasOwnProperty.call(CONTENT_KIND_LABELS, v)) return v;
+  }
+  return null;
+}
+function ContentKindBadge({ card }) {
+  const kind = contentKindOf(card);
+  if (!kind) return null;
+  return (
+    <span className={"hr-content-kind hr-content-kind-" + kind} data-content-kind={kind}>
+      {CONTENT_KIND_LABELS[kind]}
+    </span>
+  );
+}
+
 function LinkCard({ card }) {
   const visStyle = card.thumbnail_url
     ? {
@@ -833,6 +868,7 @@ function LinkCard({ card }) {
       <div className="hr-card-foot">
         <div className="hr-card-title">{card.title || "(untitled)"}</div>
         {card.post_date && <div className="hr-card-meta">{card.post_date}</div>}
+        <ContentKindBadge card={card} />
       </div>
     </>
   );
@@ -855,6 +891,7 @@ function PhotoCard({ card }) {
       <div className="hr-card-foot">
         <div className="hr-card-title">{card.title || "(untitled)"}</div>
         {card.post_date && <div className="hr-card-meta">{card.post_date}</div>}
+        <ContentKindBadge card={card} />
       </div>
     </>
   );
@@ -975,6 +1012,7 @@ function AudioCard({ card, isPlaying, onPlayPause }) {
       <div className="hr-card-foot">
         <div className="hr-card-title">{title}</div>
         {card.post_date && <div className="hr-card-meta">{card.post_date}</div>}
+        <ContentKindBadge card={card} />
       </div>
     </>
   );
@@ -991,6 +1029,7 @@ function PlaceholderCard({ card }) {
       <div className="hr-card-foot">
         <div className="hr-card-title hr-card-title-sm">{card.title || "(untitled)"}</div>
         <div className="hr-card-meta">{card.media_type || "(unknown)"}</div>
+        <ContentKindBadge card={card} />
       </div>
     </>
   );
@@ -1130,6 +1169,7 @@ function GalleryCard({ card }) {
       <div className="hr-card-foot">
         <div className="hr-card-title">{card.title || "(untitled)"}</div>
         {card.post_date && <div className="hr-card-meta">{card.post_date}</div>}
+        <ContentKindBadge card={card} />
       </div>
     </>
   );

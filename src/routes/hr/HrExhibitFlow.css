@@ -251,6 +251,28 @@
 }
 .hr-card-credit strong { font-weight: 500; color: var(--hr-gold-hi); font-style: normal; }
 
+/* content_kind variant block (2026-05-30) — media-variant taxonomy badge
+   (official/live/lyrics/cover) per DATA_ARCHITECTURE_SPEC_v2.1-target.md §3.5.
+   Its own block in the card foot; rendered only when the artifact carries a
+   spec-valid content_kind (see ContentKindBadge in HrExhibitFlow.jsx), so cards
+   without one are unaffected. Token-only (canonical single-gold), square edges
+   to match the deck's pill/tab language. */
+.hr-content-kind {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 7px;
+  font-family: var(--hr-sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--hr-gold);
+  background: var(--hr-ink-soft);
+  border: 1px solid var(--hr-gold-lo);
+  border-radius: 0;
+}
+
 /* PhotoCard */
 .hr-card-photo-vis {
   flex: 1;
