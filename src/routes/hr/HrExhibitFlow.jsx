@@ -996,7 +996,112 @@ function PlaceholderCard({ card }) {
   );
 }
 
-function ArtifactCard({ card, playingAudioId, setPlayingAudioId }) {
+// ─── Gallery container card (Phase 3) ───────────────────────────────────────
+// Deck tile for a card_kind:gallery container. Shows the cover thumbnail (or a
+// count placeholder until assets are synced) plus a stacked-frames badge with
+// the photo count. Rendered as a <button> by ArtifactCard so clicking opens the
+// in-page lightbox rather than navigating away.
+function GalleryCard({ card }) {
+  const gallery = Array.isArray(card.gallery) ? card.gallery : [];
+  const cover = card.thumbnail_url
+    || (gallery.find(g => g.id === card.cover_artifact_id) || {}).thumbnail_url
+    || (gallery[0] || {}).thumbnail_url
+    || null;
+  const count = gallery.length;
+  const visStyle = cover
+    ? { backgroundImage: `url(${cover})`, backgroundSize: "cover", backgroundPosition: "center" }
+    : null;
+  return (
+    <>
+      <div className="hr-card-video-vis" style={visStyle ?? undefined}>
+        {!cover && <div className="hr-gallery-card-ph">{count} photos</div>}
+        <span className="hr-gallery-card-badge" aria-hidden="true">
+          <svg width="11" height="11" viewBox="0 0 16 16">
+            <rect x="3.5" y="1.5" width="10" height="10" fill="none" stroke="currentColor" />
+            <rect x="1.5" y="4.5" width="10" height="10" fill="none" stroke="currentColor" />
+          </svg>
+          {count}
+        </span>
+      </div>
+      <div className="hr-card-foot">
+        <div className="hr-card-title">{card.title || "(untitled)"}</div>
+        {card.post_date && <div className="hr-card-meta">{card.post_date}</div>}
+      </div>
+    </>
+  );
+}
+
+// ─── Gallery lightbox overlay (Phase 3) ─────────────────────────────────────
+// Full-viewport overlay matching the deck's INK/GOLD/BORDER language. Large
+// active image (falls back to a titled placeholder when an asset isn't synced
+// yet), prev/next arrows, a thumbnail strip, a caption, and close affordances:
+// ✕ button, backdrop click, and Escape. Arrow keys step the active photo. The
+// open card is held at the HrExhibitFlow root so this renders above the deck.
+function GalleryOverlay({ card, onClose }) {
+  const items = Array.isArray(card && card.gallery) ? card.gallery : [];
+  const n = items.length;
+  const startIdx = Math.max(0, items.findIndex(g => g.id === (card && card.cover_artifact_id)));
+  const [idx, setIdx] = useState(startIdx === -1 ? 0 : startIdx);
+  const go = useCallback((d) => { if (n) setIdx(i => (i + d + n) % n); }, [n]);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") onClose();
+      else if (e.key === "ArrowRight") go(1);
+      else if (e.key === "ArrowLeft") go(-1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose, go]);
+
+  // Lock body scroll while the overlay is open.
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+
+  if (!n) return null;
+  const cur = items[idx];
+  const big = cur.primary_url || cur.thumbnail_url || null;
+  return (
+    <div className="hr-gallery-ov" role="dialog" aria-modal="true"
+         aria-label={card.title || "gallery"} onClick={onClose}>
+      <button className="hr-gallery-ov-close" onClick={onClose} aria-label="Close gallery">✕</button>
+      <div className="hr-gallery-ov-stage" onClick={(e) => e.stopPropagation()}>
+        <button className="hr-gallery-ov-nav" onClick={() => go(-1)} aria-label="Previous photo">‹</button>
+        <div className="hr-gallery-ov-figure">
+          {big
+            ? <img className="hr-gallery-ov-img" src={big} alt={cur.title || ""} />
+            : <div className="hr-gallery-ov-ph"><span>{cur.title || "(image not synced yet)"}</span></div>}
+        </div>
+        <button className="hr-gallery-ov-nav" onClick={() => go(1)} aria-label="Next photo">›</button>
+      </div>
+      <div className="hr-gallery-ov-cap" onClick={(e) => e.stopPropagation()}>
+        <div className="hr-gallery-ov-cap-title">{cur.title || "(untitled)"}</div>
+        <div className="hr-gallery-ov-cap-meta">
+          {idx + 1} / {n}{cur.post_date ? " · " + cur.post_date : ""}
+        </div>
+      </div>
+      <div className="hr-gallery-ov-strip" onClick={(e) => e.stopPropagation()}>
+        {items.map((g, i) => (
+          <button
+            key={g.id}
+            className={"hr-gallery-ov-thumb" + (i === idx ? " is-active" : "")}
+            onClick={() => setIdx(i)}
+            aria-label={`Photo ${i + 1}`}
+            aria-current={i === idx ? "true" : undefined}
+            style={g.thumbnail_url ? { backgroundImage: `url(${g.thumbnail_url})` } : undefined}
+          >
+            {!g.thumbnail_url && <span>{i + 1}</span>}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery }) {
   const isLink = card.media_type === "link" && !!card.source_url;
   const isPhoto = card.media_type === "photo" && !!card.primary_url;
   // Phase C of Audio Delivery (per brief §3.5 / §9.3): media_type='audio'
@@ -1004,13 +1109,16 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId }) {
   // (LinkCard / PhotoCard pattern) thanks to the MV-side normalization
   // from 'mixed' to 'audio' executed in Phase C step 1.
   const isAudio = card.media_type === "audio" && !!card.primary_url;
+  // Phase 3: gallery container. media_type is 'other', so without this it would
+  // fall through to PlaceholderCard. Detected via the export's card_kind field.
+  const isGallery = card.card_kind === "gallery" && Array.isArray(card.gallery);
   // pickSpan bias: link / photo lean wide so the thumbnails read at a
   // comfortable size. Audio is hard-forced to 1-col below per operator
   // decision 2026-05-23 (visual review during first production deploy at
   // https://weird.baby/hr): audio cards are uniform album-art squares;
   // pickSpan's wide-bias variant produced 2x-tall cards that broke the
   // "matching album art" aesthetic from the 2026-05-22 operator-lock.
-  const { span_w: rolledSpan } = pickSpan(card.id || "", isLink || isPhoto);
+  const { span_w: rolledSpan } = pickSpan(card.id || "", isLink || isPhoto || isGallery);
   const span_w = isAudio ? 1 : rolledSpan;
   const baseStyle = {
     ...spanStyle(span_w),
@@ -1020,7 +1128,8 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId }) {
   const className = ["hr-card", "card-fade-in",
     isLink ? "hr-card-link" : null,
     isPhoto ? "hr-card-photo" : null,
-    isAudio ? "hr-card-audio" : null]
+    isAudio ? "hr-card-audio" : null,
+    isGallery ? "hr-card-gallery" : null]
     .filter(Boolean).join(" ");
   if (isLink) {
     return (
@@ -1071,6 +1180,19 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId }) {
       </div>
     );
   }
+  if (isGallery) {
+    return (
+      <button
+        type="button"
+        className={className}
+        style={{ ...baseStyle, cursor: "pointer", textAlign: "left", font: "inherit", color: "inherit", padding: 0 }}
+        onClick={() => onOpenGallery && onOpenGallery(card)}
+        aria-label={`Open gallery: ${card.title || "untitled"} — ${card.gallery.length} photos`}
+      >
+        <GalleryCard card={card} />
+      </button>
+    );
+  }
   return (
     <div className={className} style={baseStyle}>
       <PlaceholderCard card={card} />
@@ -1079,7 +1201,7 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId }) {
 }
 
 // ─── PAGE / GRID — ported from v28 ──────────────────────────────────────────
-function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId }) {
+function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpenGallery }) {
   // Phase C: filterKey is intentionally NOT included in audio cards' react
   // keys. The operator-locked rule (2026-05-22) requires that filter
   // changes never touch playback state. Including filterKey here would
@@ -1129,6 +1251,7 @@ function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId }) {
               card={card}
               playingAudioId={playingAudioId}
               setPlayingAudioId={setPlayingAudioId}
+              onOpenGallery={onOpenGallery}
             />
           );
         })}
@@ -1699,6 +1822,10 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   // operator-locked rule (2026-05-22), filter changes do NOT touch this
   // state; no useEffect resets it on selected/tagFiltered shifts.
   const [playingAudioId, setPlayingAudioId] = useState(null);
+  // Phase 3: gallery lightbox. Holds the open gallery container card (or null).
+  // Lifted to the root so the overlay layers above the deck/grid and survives
+  // grid reflows. Closed via ✕ / backdrop / Escape (see GalleryOverlay).
+  const [openGallery, setOpenGallery] = useState(null);
   // MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
   // setKalState is wired into clear() so the dormant state stays in sync;
   // kalState is intentionally not read in v1.
@@ -1887,6 +2014,9 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   // .hr-section-deck-host CSS rules so the React tree stays stable.
   return (
     <section className="hr-section">
+      {openGallery && (
+        <GalleryOverlay card={openGallery} onClose={() => setOpenGallery(null)} />
+      )}
       {/* MOBILE FALLBACK — pill columns render inline above the grid on
           narrow viewports. CSS hides this on desktop and hides the deck
           on mobile. */}
@@ -1911,6 +2041,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
               totalCount={ARTIFACTS.length}
               playingAudioId={playingAudioId}
               setPlayingAudioId={setPlayingAudioId}
+              onOpenGallery={setOpenGallery}
             />
           </div>
         </div>

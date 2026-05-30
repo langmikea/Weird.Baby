@@ -141,7 +141,8 @@ const PER_EXHIBIT_SQL = `SELECT a.id, a.source_url, a.source_platform, a.media_t
        a.tags, a.description_short, a.description_long,
        a.post_date, a.post_date_confidence,
        a.released_at,
-       a.parent_artifact_id
+       a.parent_artifact_id,
+       a.notes
 FROM artifacts a
 WHERE a.status = 'released'
   AND a.archived_at IS NULL
@@ -150,6 +151,25 @@ WHERE a.status = 'released'
     SELECT 1 FROM json_each(a.tags)
     WHERE json_each.value = ?
   );`;
+
+// Gallery-container children pull (Phase 2). A container card
+// (tagged `card_kind:gallery`) derives its gallery[] from its LIVE released,
+// non-archived child artifacts — the ones re-parented under it in MV. Selects
+// the SAME columns as PER_EXHIBIT_SQL so each child passes through
+// buildArtifactRecord identically. Ordered by id: capture_date and post_date
+// are uniform within a show container, so the numeric id suffix is the only
+// stable capture-order signal. Parameterized on the parent id.
+const CHILDREN_SQL = `SELECT a.id, a.source_url, a.source_platform, a.media_type,
+       a.tags, a.description_short, a.description_long,
+       a.post_date, a.post_date_confidence,
+       a.released_at,
+       a.parent_artifact_id,
+       a.notes
+FROM artifacts a
+WHERE a.status = 'released'
+  AND a.archived_at IS NULL
+  AND a.parent_artifact_id = ?
+ORDER BY a.id;`;
 
 // Count released artifacts (parent only) that carry NO exhibit:* badge. These
 // are surfaced in the summary so the operator can spot under-curated rows.
@@ -304,8 +324,24 @@ function parseYoutubeId(url) {
   return null;
 }
 
+// ─── notes JSON parse ────────────────────────────────────────────────────────
+// Gallery-container cards store structured metadata in the `notes` column:
+// { card_kind, container, cover_artifact_id, ... }. Plain-prose notes (the
+// common case) fail JSON.parse and return null; callers treat null as "no
+// structured notes."
+function parseNotesJson(notes) {
+  if (typeof notes !== "string" || !notes) return null;
+  try {
+    const o = JSON.parse(notes);
+    return (o && typeof o === "object" && !Array.isArray(o)) ? o : null;
+  } catch { return null; }
+}
+
 // ─── Row → artifact record ──────────────────────────────────────────────────
-function buildArtifactRecord(row, manifest) {
+// opts.fetchChildren(parentId) -> child rows (for gallery containers).
+// opts.isChild guards against recursion: gallery items never get their own
+// gallery[], even if a child were itself tagged card_kind:gallery.
+function buildArtifactRecord(row, manifest, opts = {}) {
   // Parse tags JSON array, group by namespace.
   let rawTags = [];
   if (typeof row.tags === "string" && row.tags) {
@@ -353,7 +389,7 @@ function buildArtifactRecord(row, manifest) {
     if (ytId) thumbnail_url = `https://i.ytimg.com/vi/${ytId}/maxresdefault.jpg`;
   }
 
-  return {
+  const record = {
     id: row.id,
     source_url: row.source_url,
     source_platform: row.source_platform,
@@ -366,6 +402,36 @@ function buildArtifactRecord(row, manifest) {
     thumbnail_url,
     tags: sortedTags,
   };
+
+  // ─── Gallery containers (Phase 2) ──────────────────────────────────────────
+  // A top-level card tagged `card_kind:gallery` derives a gallery[] from its
+  // live released children (re-parented under it in MV). Each child passes
+  // through this same builder (isChild guard prevents recursion) so gallery
+  // items carry the identical flat shape the deck's card components already
+  // read — id, media_type, title, primary_url, thumbnail_url, tags, etc.
+  // `capture_order` (1-based, id-sorted) is added per item. The container's
+  // own thumbnail falls back to the cover child's thumbnail so the deck tile
+  // shows the gallery cover once assets are synced.
+  const cardKind = sortedTags.card_kind ? sortedTags.card_kind[0] : null;
+  if (!opts.isChild && cardKind === "gallery" && typeof opts.fetchChildren === "function") {
+    const notesObj = parseNotesJson(row.notes);
+    const childRows = opts.fetchChildren(row.id) || [];
+    const gallery = childRows.map((cr, i) => {
+      const item = buildArtifactRecord(cr, manifest, { isChild: true });
+      item.capture_order = i + 1;
+      return item;
+    });
+    record.card_kind = "gallery";
+    record.cover_artifact_id =
+      notesObj && notesObj.cover_artifact_id ? notesObj.cover_artifact_id : null;
+    record.gallery = gallery;
+    if (!record.thumbnail_url && record.cover_artifact_id) {
+      const cover = gallery.find(g => g.id === record.cover_artifact_id);
+      if (cover && cover.thumbnail_url) record.thumbnail_url = cover.thumbnail_url;
+    }
+  }
+
+  return record;
 }
 
 // ─── Atomic write (temp + rename, per v5 §6.1) ──────────────────────────────
@@ -462,6 +528,8 @@ async function main() {
     const allExhibits = Array.from(new Set([...discovered, ...KNOWN_EXHIBITS])).sort();
 
     const perExhibit = db.prepare(PER_EXHIBIT_SQL);
+    const childrenStmt = db.prepare(CHILDREN_SQL);
+    const fetchChildren = (parentId) => childrenStmt.all(parentId);
     const counts = {};
     const filesToWrite = [];
     for (const name of allExhibits) {
@@ -471,7 +539,7 @@ async function main() {
       }
       const rows = runSchemaSensitive(() => perExhibit.all(`exhibit:${name}`));
       logVerbose(opts.verbose, `  ${name}: ${rows.length} row(s)`);
-      const artifacts = rows.map(row => buildArtifactRecord(row, ASSET_MANIFEST));
+      const artifacts = rows.map(row => buildArtifactRecord(row, ASSET_MANIFEST, { fetchChildren }));
       counts[name] = artifacts.length;
       filesToWrite.push({
         name,

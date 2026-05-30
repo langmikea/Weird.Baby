@@ -1,7 +1,7 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-05-28T16:25:32.571Z",
+    "exported_at": "2026-05-30T09:55:58.997Z",
     "filter": "released, not archived, badged for this exhibit",
     "vocabulary_csv_sha": null
   },
@@ -358,343 +358,6 @@
       }
     },
     {
-      "id": "MV-HR-20260405-016",
-      "source_url": null,
-      "source_platform": "other",
-      "media_type": "photo",
-      "title": "Stage setup at Harrisburg venue with instruments and gear before performance",
-      "description": "Empty stage at a Harrisburg, Pennsylvania venue on October 10, 2025, showing a complete band setup with drum kit branded 'Allman Rose', guitars, bass, keyboard, amplifiers, and monitors arranged on patterned rugs. Red curtain backdrop and stage lighting create an intimate performance atmosphere in what appears to be a small to mid-sized venue.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-27T21:03:10",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "band",
-          "gear",
-          "live_show",
-          "notable"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-017",
-      "source_url": null,
-      "source_platform": "other",
-      "media_type": "photo",
-      "title": "Hunter Root drum kit and stage setup at Harrisburg, Pennsylvania venue",
-      "description": "Full stage setup for Hunter Root at a Harrisburg, Pennsylvania venue, featuring a red drum kit with custom \"Hunter Root\" logo on the bass drum head, flanked by amplifiers and a red hollow-body electric guitar. The professional stage arrangement is set against deep red curtains, ready for performance.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-27T21:03:20",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "band",
-          "gear",
-          "live_show",
-          "notable"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-018",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Hunter Root drum kit on stage in Harrisburg, Pennsylvania with red curtain backdrop",
-      "description": "A drum kit with 'Hunter Root' branding on the bass drum head is set up on stage in Harrisburg, Pennsylvania. The kit features red/burgundy shells and is positioned against a deep red curtain backdrop, with various cables and a BOSS amplifier visible on stage.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-27T21:03:35",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "band",
-          "gear",
-          "live_show"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-019",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Hunter Root band performing live at a Harrisburg venue with full lighting",
-      "description": "Full band performance captured at a Harrisburg, Pennsylvania venue on October 10, 2025. The stage setup includes two guitarists, upright bass, drums, and keyboard, illuminated by purple and red stage lighting. Multiple guitar effects pedals are visible on the floor in front of the performers.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-27T21:03:37",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "band",
-          "gear",
-          "live_show",
-          "notable"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-020",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Live band performance at Harrisburg, PA venue with colorful stage lighting",
-      "description": "Hunter Root and band performing live in Harrisburg, Pennsylvania. Three musicians visible on stage with bass, guitar, and vocals, backed by drums and additional band members. Vibrant purple and blue stage lighting creates an intimate club atmosphere with equipment and cables visible on the venue floor.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-27T21:03:41",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "band",
-          "common",
-          "gear",
-          "live_show"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-021",
-      "source_url": null,
-      "source_platform": "other",
-      "media_type": "photo",
-      "title": "Hunter Root band performing live on stage in Harrisburg, Pennsylvania",
-      "description": "Live performance photo from Harrisburg, Pennsylvania showing Hunter Root band on stage with drum kit displaying 'Hunter Root' logo. The stage setup includes amplifiers, pedal boards, and oriental-style rugs. Blue stage lights illuminate the venue backdrop as band members perform energetically.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-27T21:03:44",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "band",
-          "common",
-          "gear",
-          "live_show"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-022",
-      "source_url": null,
-      "source_platform": "other",
-      "media_type": "photo",
-      "title": "Hunter Root band performing live on stage in Harrisburg, Pennsylvania",
-      "description": "Live performance photo showing Hunter Root band on stage in Harrisburg, Pennsylvania. Three musicians are visible with the drummer behind a kit displaying the Hunter Root logo, while two other members work with instruments and equipment. The stage features colorful floral-patterned rugs and various guitar pedals in the foreground.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-27T21:03:47",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "band",
-          "gear",
-          "live_show",
-          "notable"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-023",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Hunter Root performing live on stage in Harrisburg, Pennsylvania",
-      "description": "Hunter Root performing live on stage in Harrisburg, Pennsylvania with band members. The stage is set with drums, amplifiers, and multiple microphones, with decorative rugs on the floor and stage lighting visible in the background. Two performers are visible mid-performance in an intimate venue setting.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-27T21:03:51",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "band",
-          "common",
-          "gear",
-          "live_show"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-024",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Hunter Root performing on stage in Harrisburg, Pennsylvania with long hair",
-      "description": "Live performance photo taken in Harrisburg, Pennsylvania showing Hunter Root on stage with long wavy hair and light-colored shirt, alongside another performer. The stage setup includes multiple microphone stands, guitar pedals and rugs visible in the foreground, and blue stage lights overhead.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-27T21:04:01",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "band",
-          "gear",
-          "live_show",
-          "notable"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-025",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Hunter Root performing solo acoustic set in Harrisburg, Pennsylvania",
-      "description": "Hunter Root sits on a stool performing an intimate solo acoustic set in Harrisburg, Pennsylvania. The stage is bathed in dramatic blue lighting with yellow and red spotlights behind him, guitar pedals and equipment scattered at his feet. He wears black Converse sneakers, black pants, and a light-colored shirt while playing acoustic guitar and singing into a microphone.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-27T21:04:06",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "common",
-          "gear",
-          "live_show",
-          "solo"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-026",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Hunter Root performing solo acoustic set in Harrisburg, Pennsylvania",
-      "description": "Hunter Root seated on stage performing solo with acoustic guitar in Harrisburg, Pennsylvania. The stage features dramatic blue, yellow, and pink lighting with pedals and equipment arranged at his feet. The intimate venue setup captures a typical solo performance configuration.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-27T21:04:09",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "common",
-          "gear",
-          "live_show",
-          "solo"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-027",
-      "source_url": null,
-      "source_platform": "other",
-      "media_type": "photo",
-      "title": "Hunter Root performing solo with acoustic guitar on stage in Harrisburg, PA",
-      "description": "Hunter Root performs solo acoustic on stage in Harrisburg, Pennsylvania, bathed in blue stage lighting. He sits on a stool with an acoustic guitar, surrounded by various pedals and equipment at his feet. The intimate performance setup features dramatic blue lighting and visible stage monitors.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-27T21:04:31",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "common",
-          "gear",
-          "live_show",
-          "solo"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-028",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Hunter Root performing acoustic solo set in Harrisburg, Pennsylvania",
-      "description": "Hunter Root sits on a stool performing an intimate acoustic guitar set in Harrisburg, Pennsylvania. The stage is bathed in blue atmospheric lighting with LED stage lights visible overhead. His pedalboard and various effects pedals are visible on the floor in front of him, with another musician partially visible on the right side of the stage.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-27T21:04:48",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "common",
-          "gear",
-          "live_show",
-          "solo"
-        ]
-      }
-    },
-    {
       "id": "MV-HR-20260405-029",
       "source_url": null,
       "source_platform": null,
@@ -714,109 +377,6 @@
         ],
         "unsorted": [
           "common"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-030",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Hunter Root acoustic performance with bassist, filmed at venue near Hershey PA",
-      "description": "Live performance setup showing acoustic guitarist and bassist performing on stage with dramatic blue and white lighting. The drum kit displays 'Hunter Root' branding, and a camera on tripod is capturing the performance. Photo taken near Hershey, Pennsylvania.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-27T21:04:41",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "band",
-          "live_show",
-          "notable"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-031",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Hunter Root live performance at venue in Muhlenberg Township, PA",
-      "description": "Live performance photo showing two musicians on stage in Muhlenberg Township, PA (near Reading). Acoustic guitarist/vocalist on left with long blonde hair, bassist on right with long hair and striped shirt. Professional stage lighting with blue and white beams, drum kit visible in background with \"Hunter Root\" logo. Camera equipment visible in foreground capturing the performance.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-27T21:04:43",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "band",
-          "gear",
-          "live_show",
-          "notable"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-032",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Hunter Root live performance with bassist, professional camera recording setup",
-      "description": "Hunter Root performing acoustic guitar and vocals with a bassist (likely Nick Root) in a striped shirt on stage. Professional camera on tripod capturing the performance. Drum kit with Hunter Root logo visible in background with dramatic blue and white stage lighting.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-27T21:04:18",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "band",
-          "gear",
-          "live_show",
-          "notable"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-033",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Hunter Root with two friends at a venue in Lancaster, PA area",
-      "description": "Hunter Root (center) poses with two friends at what appears to be a performance venue near Lancaster, Pennsylvania. The intimate venue setting features exposed ceiling beams, stage lighting, and a curtained stage area. Photo taken in the Lancaster area based on GPS coordinates.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-05-25T13:31:05",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "common",
-          "fan",
-          "live_show",
-          "personal"
         ]
       }
     },
@@ -1551,23 +1111,6 @@
           "lyme_disease",
           "notable",
           "personal"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260419-001",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Hunter Root performing acoustic solo set in Harrisburg, Pennsylvania",
-      "description": "Hunter Root sits on a stool performing an intimate acoustic guitar set in Harrisburg, Pennsylvania. The stage is bathed in blue atmospheric lighting with LED stage lights visible overhead. His pedalboard and various effects pedals are visible on the floor in front of him, with another musician partially visible on the right side of the stage.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-04-19T14:30:48",
-      "primary_url": "https://assets.weird.baby/assets/c1/c1521d32a5436f99bb6f369045228043815b018ccbe33cec00dd93049e47921a.jpg",
-      "thumbnail_url": "https://assets.weird.baby/thumbnails/0e/0e7812958fa2cf0f2b35b0a9230acf4de94987711a1932bc888b95d7ef1efe12.jpg",
-      "tags": {
-        "exhibit": [
-          "hunter_root"
         ]
       }
     },
@@ -3331,6 +2874,332 @@
           "2024"
         ]
       }
+    },
+    {
+      "id": "MV-20260529-001",
+      "source_url": null,
+      "source_platform": null,
+      "media_type": "other",
+      "title": "Hunter Root — Central PA, Oct 2025",
+      "description": "Hunter Root live, Central Pennsylvania, October 2025. Show container card; its photo gallery is derived from the live released child photos re-parented under it.",
+      "post_date": "2025-10-10",
+      "released_at": "2026-05-29T21:37:09",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "bands": [
+          "hunter_root"
+        ],
+        "card_kind": [
+          "gallery"
+        ],
+        "content_kind": [
+          "other"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ]
+      },
+      "card_kind": "gallery",
+      "cover_artifact_id": "MV-HR-20260405-017",
+      "gallery": [
+        {
+          "id": "MV-HR-20260405-016",
+          "source_url": null,
+          "source_platform": "other",
+          "media_type": "photo",
+          "title": "Stage setup at Harrisburg venue with instruments and gear before performance",
+          "description": "Empty stage at a Harrisburg, Pennsylvania venue on October 10, 2025, showing a complete band setup with drum kit branded 'Hunter Root', guitars, bass, keyboard, amplifiers, and monitors arranged on patterned rugs. Red curtain backdrop and stage lighting create an intimate performance atmosphere in what appears to be a small to mid-sized venue.",
+          "post_date": "2025-10-10",
+          "released_at": "2026-05-27T21:03:10",
+          "primary_url": null,
+          "thumbnail_url": null,
+          "tags": {
+            "bands": [
+              "hunter_root"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "unsorted": [
+              "band",
+              "gear",
+              "live_show",
+              "notable"
+            ]
+          },
+          "capture_order": 1
+        },
+        {
+          "id": "MV-HR-20260405-017",
+          "source_url": null,
+          "source_platform": "other",
+          "media_type": "photo",
+          "title": "Hunter Root drum kit and stage setup at Harrisburg, Pennsylvania venue",
+          "description": "Full stage setup for Hunter Root at a Harrisburg, Pennsylvania venue, featuring a red drum kit with custom \"Hunter Root\" logo on the bass drum head, flanked by amplifiers and a red hollow-body electric guitar. The professional stage arrangement is set against deep red curtains, ready for performance.",
+          "post_date": "2025-10-10",
+          "released_at": "2026-05-27T21:03:20",
+          "primary_url": null,
+          "thumbnail_url": null,
+          "tags": {
+            "bands": [
+              "hunter_root"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "unsorted": [
+              "band",
+              "gear",
+              "live_show",
+              "notable"
+            ]
+          },
+          "capture_order": 2
+        },
+        {
+          "id": "MV-HR-20260405-021",
+          "source_url": null,
+          "source_platform": "other",
+          "media_type": "photo",
+          "title": "Hunter Root band performing live on stage in Harrisburg, Pennsylvania",
+          "description": "Live performance photo from Harrisburg, Pennsylvania showing Hunter Root band on stage with drum kit displaying 'Hunter Root' logo. The stage setup includes amplifiers, pedal boards, and oriental-style rugs. Blue stage lights illuminate the venue backdrop as band members perform energetically.",
+          "post_date": "2025-10-10",
+          "released_at": "2026-05-27T21:03:44",
+          "primary_url": null,
+          "thumbnail_url": null,
+          "tags": {
+            "bands": [
+              "hunter_root"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "unsorted": [
+              "band",
+              "common",
+              "gear",
+              "live_show"
+            ]
+          },
+          "capture_order": 3
+        },
+        {
+          "id": "MV-HR-20260405-022",
+          "source_url": null,
+          "source_platform": "other",
+          "media_type": "photo",
+          "title": "Hunter Root band performing live on stage in Harrisburg, Pennsylvania",
+          "description": "Live performance photo showing Hunter Root band on stage in Harrisburg, Pennsylvania. Three musicians are visible with the drummer behind a kit displaying the Hunter Root logo, while two other members work with instruments and equipment. The stage features colorful floral-patterned rugs and various guitar pedals in the foreground.",
+          "post_date": "2025-10-10",
+          "released_at": "2026-05-27T21:03:47",
+          "primary_url": null,
+          "thumbnail_url": null,
+          "tags": {
+            "bands": [
+              "hunter_root"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "unsorted": [
+              "band",
+              "gear",
+              "live_show",
+              "notable"
+            ]
+          },
+          "capture_order": 4
+        },
+        {
+          "id": "MV-HR-20260405-026",
+          "source_url": null,
+          "source_platform": "local",
+          "media_type": "photo",
+          "title": "Hunter Root performing solo acoustic set in Harrisburg, Pennsylvania",
+          "description": "Hunter Root seated on stage performing solo with acoustic guitar in Harrisburg, Pennsylvania. The stage features dramatic blue, yellow, and pink lighting with pedals and equipment arranged at his feet. The intimate venue setup captures a typical solo performance configuration.",
+          "post_date": "2025-10-10",
+          "released_at": "2026-05-27T21:04:09",
+          "primary_url": null,
+          "thumbnail_url": null,
+          "tags": {
+            "bands": [
+              "hunter_root"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "unsorted": [
+              "common",
+              "gear",
+              "live_show",
+              "solo"
+            ]
+          },
+          "capture_order": 5
+        },
+        {
+          "id": "MV-HR-20260405-027",
+          "source_url": null,
+          "source_platform": "other",
+          "media_type": "photo",
+          "title": "Hunter Root performing solo with acoustic guitar on stage in Harrisburg, PA",
+          "description": "Hunter Root performs solo acoustic on stage in Harrisburg, Pennsylvania, bathed in blue stage lighting. He sits on a stool with an acoustic guitar, surrounded by various pedals and equipment at his feet. The intimate performance setup features dramatic blue lighting and visible stage monitors.",
+          "post_date": "2025-10-10",
+          "released_at": "2026-05-27T21:04:31",
+          "primary_url": null,
+          "thumbnail_url": null,
+          "tags": {
+            "bands": [
+              "hunter_root"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "unsorted": [
+              "common",
+              "gear",
+              "live_show",
+              "solo"
+            ]
+          },
+          "capture_order": 6
+        },
+        {
+          "id": "MV-HR-20260405-028",
+          "source_url": null,
+          "source_platform": "local",
+          "media_type": "photo",
+          "title": "Hunter Root performing acoustic solo set in Harrisburg, Pennsylvania",
+          "description": "Hunter Root sits on a stool performing an intimate acoustic guitar set in Harrisburg, Pennsylvania. The stage is bathed in blue atmospheric lighting with LED stage lights visible overhead. His pedalboard and various effects pedals are visible on the floor in front of him, with another musician partially visible on the right side of the stage.",
+          "post_date": "2025-10-10",
+          "released_at": "2026-05-27T21:04:48",
+          "primary_url": null,
+          "thumbnail_url": null,
+          "tags": {
+            "bands": [
+              "hunter_root"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "unsorted": [
+              "common",
+              "gear",
+              "live_show",
+              "solo"
+            ]
+          },
+          "capture_order": 7
+        },
+        {
+          "id": "MV-HR-20260405-030",
+          "source_url": null,
+          "source_platform": "local",
+          "media_type": "photo",
+          "title": "Hunter Root acoustic performance with bassist, filmed at venue near Hershey PA",
+          "description": "Live performance setup showing acoustic guitarist and bassist performing on stage with dramatic blue and white lighting. The drum kit displays 'Hunter Root' branding, and a camera on tripod is capturing the performance. Photo taken near Hershey, Pennsylvania.",
+          "post_date": "2025-10-10",
+          "released_at": "2026-05-27T21:04:41",
+          "primary_url": null,
+          "thumbnail_url": null,
+          "tags": {
+            "bands": [
+              "hunter_root"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "unsorted": [
+              "band",
+              "live_show",
+              "notable"
+            ]
+          },
+          "capture_order": 8
+        },
+        {
+          "id": "MV-HR-20260405-031",
+          "source_url": null,
+          "source_platform": "local",
+          "media_type": "photo",
+          "title": "Hunter Root live performance at venue in Muhlenberg Township, PA",
+          "description": "Live performance photo showing two musicians on stage in Muhlenberg Township, PA (near Reading). Acoustic guitarist/vocalist on left with long blonde hair, bassist on right with long hair and striped shirt. Professional stage lighting with blue and white beams, drum kit visible in background with \"Hunter Root\" logo. Camera equipment visible in foreground capturing the performance.",
+          "post_date": "2025-10-10",
+          "released_at": "2026-05-27T21:04:43",
+          "primary_url": null,
+          "thumbnail_url": null,
+          "tags": {
+            "bands": [
+              "hunter_root"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "unsorted": [
+              "band",
+              "gear",
+              "live_show",
+              "notable"
+            ]
+          },
+          "capture_order": 9
+        },
+        {
+          "id": "MV-HR-20260405-032",
+          "source_url": null,
+          "source_platform": "local",
+          "media_type": "photo",
+          "title": "Hunter Root live performance with bassist, professional camera recording setup",
+          "description": "Hunter Root performing acoustic guitar and vocals with a bassist (likely Nick Root) in a striped shirt on stage. Professional camera on tripod capturing the performance. Drum kit with Hunter Root logo visible in background with dramatic blue and white stage lighting.",
+          "post_date": "2025-10-10",
+          "released_at": "2026-05-27T21:04:18",
+          "primary_url": null,
+          "thumbnail_url": null,
+          "tags": {
+            "bands": [
+              "hunter_root"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "unsorted": [
+              "band",
+              "gear",
+              "live_show",
+              "notable"
+            ]
+          },
+          "capture_order": 10
+        },
+        {
+          "id": "MV-HR-20260405-033",
+          "source_url": null,
+          "source_platform": "local",
+          "media_type": "photo",
+          "title": "Hunter Root with two friends at a venue in Lancaster, PA area",
+          "description": "Hunter Root (center) poses with two friends at what appears to be a performance venue near Lancaster, Pennsylvania. The intimate venue setting features exposed ceiling beams, stage lighting, and a curtained stage area. Photo taken in the Lancaster area based on GPS coordinates.",
+          "post_date": "2025-10-10",
+          "released_at": "2026-05-25T13:31:05",
+          "primary_url": null,
+          "thumbnail_url": null,
+          "tags": {
+            "bands": [
+              "hunter_root"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "unsorted": [
+              "common",
+              "fan",
+              "live_show",
+              "personal"
+            ]
+          },
+          "capture_order": 11
+        }
+      ]
     }
   ]
 }
