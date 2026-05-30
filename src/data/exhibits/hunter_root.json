@@ -1,7 +1,7 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-05-30T16:00:32.468Z",
+    "exported_at": "2026-05-30T22:31:32.466Z",
     "filter": "released, not archived, badged for this exhibit",
     "vocabulary_csv_sha": null
   },
@@ -354,29 +354,6 @@
           "notable",
           "songwriting",
           "songwriting_process"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-029",
-      "source_url": null,
-      "source_platform": null,
-      "media_type": "video",
-      "title": "",
-      "description": "",
-      "post_date": null,
-      "released_at": "2026-05-27T21:05:41",
-      "primary_url": null,
-      "thumbnail_url": null,
-      "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "common"
         ]
       }
     },
@@ -1039,49 +1016,6 @@
       "released_at": "2026-05-27T21:04:22",
       "primary_url": "https://assets.weird.baby/assets/a5/a53b134b79f2579f0d0419f480465f1c3ca7a1f58409f9809b933e608e7a5fc0.png",
       "thumbnail_url": "https://assets.weird.baby/thumbnails/b3/b30c279d2773607baf8f6c5d33b8b5352725e7debb9765a7b8f91f09f4a4e896.jpg",
-      "tags": {
-        "exhibit": [
-          "hunter_root"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260419-003",
-      "source_url": null,
-      "source_platform": null,
-      "media_type": "photo",
-      "title": "",
-      "description": "",
-      "post_date": null,
-      "released_at": "2026-05-27T21:05:43",
-      "primary_url": "https://assets.weird.baby/assets/68/68bb9caec8a666c5cf7dc2193a761db07f02579cc13683c836d311d808efcc15.jpg",
-      "thumbnail_url": "https://assets.weird.baby/thumbnails/97/97efaef5022f07b11b17298120657a89804b889e5baea83ddb01e9ae08363432.jpg",
-      "tags": {
-        "album": [
-          "run_with_the_hunt"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
-          "rare"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260419-004",
-      "source_url": null,
-      "source_platform": null,
-      "media_type": "photo",
-      "title": "",
-      "description": "",
-      "post_date": null,
-      "released_at": "2026-04-19T14:35:16",
-      "primary_url": "https://assets.weird.baby/assets/fc/fc8b8945c540cc67ae9239bb97c677e3e4a86788430b76bb3fae814d8b95c1d7.jpg",
-      "thumbnail_url": "https://assets.weird.baby/thumbnails/18/18e46e02cd97cc3232565cb814b52fabb89f5b9a561b8ba49a1fcae2b0fcd737.jpg",
       "tags": {
         "exhibit": [
           "hunter_root"
