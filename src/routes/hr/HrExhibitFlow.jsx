@@ -996,11 +996,110 @@ function PlaceholderCard({ card }) {
   );
 }
 
+// ─── Broken-preview fallback (defensive rendering, 2026-05-30) ──────────────
+// Assets can fail by path (404) OR by format (the HEIC incident: a URL the
+// browser can't decode). Both a CSS background-image and a bare <img> degrade
+// to silent blankness — no signal to the viewer or the operator. These helpers
+// turn a missing or failed preview into a visible, titled placeholder in the
+// deck's INK/GOLD language. Display-only: no DB / sync / export change.
+
+// Probe an image URL out-of-band so a background-image (which has no onError)
+// can still detect load failure. Returns true once the URL has failed to load.
+// Keyed on src so it re-probes if src changes. State is set only from the async
+// load/error callbacks, never synchronously in the effect body, so this doesn't
+// trip react-hooks/set-state-in-effect. The browser dedupes the probe fetch
+// against the real background-image request, so there's no double download.
+function useImageFailed(src) {
+  const [failed, setFailed] = useState(false);
+  useEffect(() => {
+    if (!src) return undefined;
+    let alive = true;
+    const probe = new Image();
+    probe.onload = () => { if (alive) setFailed(false); };
+    probe.onerror = () => { if (alive) setFailed(true); };
+    probe.src = src;
+    return () => { alive = false; };
+  }, [src]);
+  return failed;
+}
+
+// "Broken image" mark in currentColor: a framed thumbnail with a diagonal
+// strike. Inline SVG so font/icon loading can't shift or hide the affordance.
+function BrokenImageGlyph({ size = 26 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true"
+         fill="none" stroke="currentColor" strokeWidth="1.4">
+      <rect x="3" y="4.5" width="18" height="15" />
+      <path d="M3 15l5-5 4 4 3-3 6 6" />
+      <line x1="4" y1="4" x2="20" y2="20" />
+    </svg>
+  );
+}
+
+// Muted placeholder tile. variant controls sizing/affordance density:
+//   'card'  — gallery deck tile (fills .hr-card-video-vis), title + note
+//   'large' — lightbox stage, title + note
+//   'thumb' — lightbox strip, compact glyph + index
+function MediaPlaceholder({ title, variant = "card", index }) {
+  if (variant === "thumb") {
+    return (
+      <span className="hr-media-ph-thumb" aria-hidden="true">
+        <BrokenImageGlyph size={16} />
+        {index != null && <em>{index}</em>}
+      </span>
+    );
+  }
+  return (
+    <div
+      className={"hr-media-ph hr-media-ph-" + variant}
+      role="img"
+      aria-label={(title ? title + " — " : "") + "image unavailable"}
+    >
+      <BrokenImageGlyph size={variant === "large" ? 34 : 26} />
+      <span className="hr-media-ph-title">{title || "(untitled)"}</span>
+      <span className="hr-media-ph-note">image unavailable</span>
+    </div>
+  );
+}
+
+// Lightbox large image with onError fallback. A real <img> (criterion 2), so
+// it uses native onError; on null/empty src or a load failure it renders the
+// shared placeholder instead of a broken-image glyph. The caller keys this on
+// src (<FallbackImg key={big} .../>) so navigating to another photo remounts
+// it and resets the error flag — no setState-in-effect needed.
+function FallbackImg({ src, alt, title, className }) {
+  const [errored, setErrored] = useState(false);
+  if (!src || errored) {
+    return <MediaPlaceholder title={title} variant="large" />;
+  }
+  return (
+    <img className={className} src={src} alt={alt} onError={() => setErrored(true)} />
+  );
+}
+
+// Lightbox thumb-strip cell. background-image (no onError), so failure is
+// detected via the useImageFailed probe; falls back to the compact placeholder.
+function GalleryThumb({ item, index, active, onSelect }) {
+  const failed = useImageFailed(item.thumbnail_url);
+  const showThumb = !!item.thumbnail_url && !failed;
+  return (
+    <button
+      className={"hr-gallery-ov-thumb" + (active ? " is-active" : "")}
+      onClick={onSelect}
+      aria-label={`Photo ${index + 1}`}
+      aria-current={active ? "true" : undefined}
+      style={showThumb ? { backgroundImage: `url(${item.thumbnail_url})` } : undefined}
+    >
+      {!showThumb && <MediaPlaceholder variant="thumb" index={index + 1} />}
+    </button>
+  );
+}
+
 // ─── Gallery container card (Phase 3) ───────────────────────────────────────
 // Deck tile for a card_kind:gallery container. Shows the cover thumbnail (or a
-// count placeholder until assets are synced) plus a stacked-frames badge with
-// the photo count. Rendered as a <button> by ArtifactCard so clicking opens the
-// in-page lightbox rather than navigating away.
+// titled placeholder when the cover is missing or fails to load) plus a
+// stacked-frames badge with the photo count. Rendered as a <button> by
+// ArtifactCard so clicking opens the in-page lightbox rather than navigating away.
 function GalleryCard({ card }) {
   const gallery = Array.isArray(card.gallery) ? card.gallery : [];
   const cover = card.thumbnail_url
@@ -1008,13 +1107,18 @@ function GalleryCard({ card }) {
     || (gallery[0] || {}).thumbnail_url
     || null;
   const count = gallery.length;
-  const visStyle = cover
+  // Show the cover while it's present and hasn't failed (incl. the brief
+  // 'loading' window, so working images never flash a placeholder). Drop to
+  // the titled placeholder only when there's no cover or the probe errored.
+  const failed = useImageFailed(cover);
+  const showCover = !!cover && !failed;
+  const visStyle = showCover
     ? { backgroundImage: `url(${cover})`, backgroundSize: "cover", backgroundPosition: "center" }
     : null;
   return (
     <>
       <div className="hr-card-video-vis" style={visStyle ?? undefined}>
-        {!cover && <div className="hr-gallery-card-ph">{count} photos</div>}
+        {!showCover && <MediaPlaceholder title={card.title} variant="card" />}
         <span className="hr-gallery-card-badge" aria-hidden="true">
           <svg width="11" height="11" viewBox="0 0 16 16">
             <rect x="3.5" y="1.5" width="10" height="10" fill="none" stroke="currentColor" />
@@ -1071,9 +1175,13 @@ function GalleryOverlay({ card, onClose }) {
       <div className="hr-gallery-ov-stage" onClick={(e) => e.stopPropagation()}>
         <button className="hr-gallery-ov-nav" onClick={() => go(-1)} aria-label="Previous photo">‹</button>
         <div className="hr-gallery-ov-figure">
-          {big
-            ? <img className="hr-gallery-ov-img" src={big} alt={cur.title || ""} />
-            : <div className="hr-gallery-ov-ph"><span>{cur.title || "(image not synced yet)"}</span></div>}
+          <FallbackImg
+            key={big || "ph"}
+            className="hr-gallery-ov-img"
+            src={big}
+            alt={cur.title || ""}
+            title={cur.title}
+          />
         </div>
         <button className="hr-gallery-ov-nav" onClick={() => go(1)} aria-label="Next photo">›</button>
       </div>
@@ -1085,16 +1193,13 @@ function GalleryOverlay({ card, onClose }) {
       </div>
       <div className="hr-gallery-ov-strip" onClick={(e) => e.stopPropagation()}>
         {items.map((g, i) => (
-          <button
+          <GalleryThumb
             key={g.id}
-            className={"hr-gallery-ov-thumb" + (i === idx ? " is-active" : "")}
-            onClick={() => setIdx(i)}
-            aria-label={`Photo ${i + 1}`}
-            aria-current={i === idx ? "true" : undefined}
-            style={g.thumbnail_url ? { backgroundImage: `url(${g.thumbnail_url})` } : undefined}
-          >
-            {!g.thumbnail_url && <span>{i + 1}</span>}
-          </button>
+            item={g}
+            index={i}
+            active={i === idx}
+            onSelect={() => setIdx(i)}
+          />
         ))}
       </div>
     </div>

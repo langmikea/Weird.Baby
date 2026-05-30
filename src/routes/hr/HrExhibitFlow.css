@@ -1223,3 +1223,64 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
 }
 .hr-gallery-ov-thumb:hover { opacity: 0.9; }
 .hr-gallery-ov-thumb.is-active { opacity: 1; border-color: var(--hr-gold); }
+
+/* ── Broken/missing-preview placeholder (defensive rendering, 2026-05-30) ──
+   Shared muted tile for an image whose src is null/empty or fails to load.
+   Matches the deck's dark/gold language (mirrors .hr-gallery-ov-ph). The
+   'card' variant fills .hr-card-video-vis (position: relative); 'large' sizes
+   the lightbox stage itself; 'thumb' is a compact glyph for the strip. */
+.hr-media-ph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  padding: 14px;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #15110a 0%, #0a0a0a 65%);
+  color: var(--hr-gold-lo);
+}
+.hr-media-ph-card {
+  position: absolute;
+  inset: 0;
+}
+.hr-media-ph-large {
+  width: min(70vw, 560px);
+  height: min(56vh, 560px);
+  gap: 12px;
+  border: 1px solid var(--hr-gold-lo);
+}
+.hr-media-ph-title {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  color: var(--hr-gold-hi);
+  max-width: 92%;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.hr-media-ph-large .hr-media-ph-title { font-size: 13px; }
+.hr-media-ph-note {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--hr-gold-mute);
+}
+.hr-media-ph-large .hr-media-ph-note { font-size: 10px; }
+.hr-media-ph-thumb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  line-height: 1;
+  color: var(--hr-gold-mute);
+}
+.hr-media-ph-thumb em {
+  font-style: normal;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
