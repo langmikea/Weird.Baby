@@ -192,6 +192,41 @@
   color: var(--hr-gold-hi);
 }
 
+/* ── FB social-plugin embed cards (2026-05-31) ───────────────────
+   plugins/video.php (watch/reel) + plugins/post.php (posts) iframe embeds.
+   No app token, no FB JS SDK. The iframe fills the vis area; aspect-ratio is
+   set per FB content kind via the data-fbkind attribute on the card. See
+   FbEmbedCard / fbEmbedFor in HrExhibitFlow.jsx. FB embeds render on a white
+   surface; that is inherent to FB's chrome, not a deck token. */
+.hr-card-fbembed .hr-card-video-vis {
+  flex: none;
+  padding: 0;
+  background: #fff;
+  overflow: hidden;
+}
+.hr-card-fbembed[data-fbkind="video"] .hr-card-video-vis { aspect-ratio: 16 / 9; }
+.hr-card-fbembed[data-fbkind="reel"]  .hr-card-video-vis { aspect-ratio: 9 / 16; }
+.hr-card-fbembed[data-fbkind="post"]  .hr-card-video-vis { aspect-ratio: 4 / 5; }
+.hr-fbembed-frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.hr-card-fb-open {
+  display: inline-block;
+  margin-top: 6px;
+  font-family: var(--hr-sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--hr-gold-lo);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.hr-card-fb-open:hover { color: var(--hr-gold-hi); }
+
 /* ── Phase 1.5c — voice cards (curatorial commentary; HR_EXIT_FLOW) ────── */
 /* Warmer background and a small "curator's note" badge in the top-right
    corner, anchored in the GOLD accent. Distinguishable at a glance from

@@ -1413,14 +1413,87 @@ function AlbumOverlay({ card, onClose }) {
   );
 }
 
+// ─── FB social-plugin embed (2026-05-31) ────────────────────────
+// Renders Facebook videos / reels / posts inline via the plugins/video.php and
+// plugins/post.php IFRAME endpoints. These need NO app token and NO FB JS SDK
+// (the bare iframe is the social-plugin path; xfbml/SDK and the graph oEmbed
+// API both require an app_id / app-access-token — out of scope, no credentials).
+// Honors UX_SPEC §C.5.2 (Social Archive: "Facebook embed loads inline") and
+// VISION_LOCK G-12 (historical FB artifacts may be embedded). Front-end only;
+// no MV / export change.
+//
+// Live-verify caveat: FB iframes only render PUBLIC content, and logged-out
+// visitors may see a login wall or blank frame. A cross-origin iframe exposes
+// no load/error signal, so failure can't be auto-detected — every embed always
+// carries an "Open on Facebook ↗" escape hatch in the foot (the same graceful
+// degradation posture as the broken-preview fallback, 2026-05-30).
+function fbPluginSrc(plugin, href, showText) {
+  return `https://www.facebook.com/plugins/${plugin}?href=${encodeURIComponent(href)}`
+    + `&show_text=${showText ? "true" : "false"}&width=500`;
+}
+function fbEmbedFor(url) {
+  if (!url || typeof url !== "string") return null;
+  const vMatch = url.match(/[?&]v=(\d+)/) || url.match(/\/videos\/(\d+)/);
+  const reelMatch = url.match(/\/reel\/(\d+)/);
+  if (vMatch) {
+    const href = `https://www.facebook.com/watch/?v=${vMatch[1]}`;
+    return { kind: "video", src: fbPluginSrc("video.php", href, false) };
+  }
+  if (reelMatch) {
+    const href = `https://www.facebook.com/reel/${reelMatch[1]}/`;
+    return { kind: "reel", src: fbPluginSrc("video.php", href, false) };
+  }
+  if (/\/posts\//.test(url) || /\/permalink\//.test(url) || /story\.php/.test(url)) {
+    return { kind: "post", src: fbPluginSrc("post.php", url, true) };
+  }
+  return null;
+}
+
+function FbEmbedCard({ card }) {
+  const embed = fbEmbedFor(card.source_url);
+  return (
+    <>
+      <div className="hr-card-video-vis">
+        {embed && (
+          <iframe
+            className="hr-fbembed-frame"
+            src={embed.src}
+            title={card.title || "Facebook embed"}
+            loading="lazy"
+            scrolling="no"
+            frameBorder="0"
+            allowFullScreen
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          />
+        )}
+      </div>
+      <div className="hr-card-foot">
+        <div className="hr-card-title hr-card-title-sm">{card.title || "(untitled)"}</div>
+        {card.post_date && <div className="hr-card-meta">{card.post_date}</div>}
+        <a
+          className="hr-card-fb-open"
+          href={card.source_url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open on Facebook ↗
+        </a>
+        <ContentKindBadge card={card} />
+      </div>
+    </>
+  );
+}
+
 function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum }) {
-  const isLink = card.media_type === "link" && !!card.source_url;
-  const isPhoto = card.media_type === "photo" && !!card.primary_url;
+  const fbEmbed = card.source_platform === "facebook" ? fbEmbedFor(card.source_url) : null;
+  const isFbEmbed = !!fbEmbed;
+  const isLink = !isFbEmbed && card.media_type === "link" && !!card.source_url;
+  const isPhoto = !isFbEmbed && card.media_type === "photo" && !!card.primary_url;
   // Phase C of Audio Delivery (per brief §3.5 / §9.3): media_type='audio'
   // dispatches to AudioCard. Predicate keys on the single-token check
   // (LinkCard / PhotoCard pattern) thanks to the MV-side normalization
   // from 'mixed' to 'audio' executed in Phase C step 1.
-  const isAudio = card.media_type === "audio" && !!card.primary_url;
+  const isAudio = !isFbEmbed && card.media_type === "audio" && !!card.primary_url;
   // Phase 3: gallery container. media_type is 'other', so without this it would
   // fall through to PlaceholderCard. Detected via the export's card_kind field.
   const isGallery = card.card_kind === "gallery" && Array.isArray(card.gallery);
@@ -1433,20 +1506,29 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
   // https://weird.baby/hr): audio cards are uniform album-art squares;
   // pickSpan's wide-bias variant produced 2x-tall cards that broke the
   // "matching album art" aesthetic from the 2026-05-22 operator-lock.
-  const { span_w: rolledSpan } = pickSpan(card.id || "", isLink || isPhoto || isGallery || isAlbum);
-  const span_w = isAudio ? 1 : rolledSpan;
+  const isFbVideo = isFbEmbed && fbEmbed.kind === "video";
+  const { span_w: rolledSpan } = pickSpan(card.id || "", isLink || isPhoto || isGallery || isAlbum || isFbVideo);
+  const span_w = isAudio || (isFbEmbed && !isFbVideo) ? 1 : rolledSpan;
   const baseStyle = {
     ...spanStyle(span_w),
     border: `1px solid ${BORDER}`,
     background: INK_CARD,
   };
   const className = ["hr-card", "card-fade-in",
+    isFbEmbed ? "hr-card-fbembed" : null,
     isLink ? "hr-card-link" : null,
     isPhoto ? "hr-card-photo" : null,
     isAudio ? "hr-card-audio" : null,
     isGallery ? "hr-card-gallery" : null,
     isAlbum ? "hr-card-album" : null]
     .filter(Boolean).join(" ");
+  if (isFbEmbed) {
+    return (
+      <div className={className} style={baseStyle} data-fbkind={fbEmbed.kind}>
+        <FbEmbedCard card={card} />
+      </div>
+    );
+  }
   if (isLink) {
     return (
       <a
