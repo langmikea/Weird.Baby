@@ -851,9 +851,13 @@ function ContentKindBadge({ card }) {
 }
 
 function LinkCard({ card }) {
-  const visStyle = card.thumbnail_url
+  // YouTube cards render here (media_type:"link", source_platform:"youtube").
+  // Resolve maxresdefault → hqdefault so videos without a maxres render still
+  // show a thumbnail (see useResolvedThumb).
+  const thumb = useResolvedThumb(card.thumbnail_url);
+  const visStyle = thumb
     ? {
-        backgroundImage: `url(${card.thumbnail_url})`,
+        backgroundImage: `url(${thumb})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }
@@ -1060,6 +1064,69 @@ function useImageFailed(src) {
     return () => { alive = false; };
   }, [src]);
   return failed;
+}
+
+// Resolve a YouTube thumbnail URL, falling back maxresdefault → hqdefault.
+// YouTube only generates maxresdefault.jpg for uploads at ≥720p; lower-res
+// uploads have no maxres render, while hqdefault.jpg (480×360) exists for any
+// public video. The MV export hard-codes maxresdefault, so two real, public
+// HR videos (Fa5GKxEgf7c + uaFHDfuohxc — confirmed live via oEmbed 2026-05-31)
+// were rendering thumbnail-less. The fix lives in the card path, robust for
+// any future maxres-less video and independent of the upstream export.
+//
+// Detection subtlety: a missing thumbnail resolution does NOT 404. YouTube
+// returns a 120×90 gray placeholder with HTTP 200, so onload/onerror can't
+// tell a real maxres (1280×720) from a missing one — we must inspect the
+// decoded width. ≤320px wide ⇒ the placeholder ⇒ fall back to hqdefault.
+// Non-ytimg and already-hqdefault URLs pass through untouched (no probe).
+const YT_MAXRES_RE = /^(https?:\/\/i\.ytimg\.com\/vi\/[^/]+\/)maxresdefault(\.jpg.*)?$/i;
+const YT_PLACEHOLDER_MAX_W = 320;
+function useResolvedThumb(url) {
+  const m = typeof url === "string" ? YT_MAXRES_RE.exec(url) : null;
+  const fallback = m ? `${m[1]}hqdefault${m[2] || ""}` : null;
+  const [useFallback, setUseFallback] = useState(false);
+  // Out-of-band probe. State is set only from async load/error callbacks,
+  // never synchronously in the effect body, so this doesn't trip
+  // react-hooks/set-state-in-effect (same posture as useImageFailed).
+  useEffect(() => {
+    if (!fallback) return undefined;
+    let alive = true;
+    const probe = new Image();
+    probe.onload = () => {
+      if (alive && probe.naturalWidth > 0 && probe.naturalWidth <= YT_PLACEHOLDER_MAX_W) {
+        setUseFallback(true);
+      }
+    };
+    probe.onerror = () => { if (alive) setUseFallback(true); };
+    probe.src = url;
+    return () => { alive = false; };
+  }, [url, fallback]);
+  return useFallback && fallback ? fallback : url;
+}
+
+// Track an element's live content-box width via ResizeObserver. Used by
+// FbEmbedCard to drive the --fb-w scale variable for the FB iframe (see the
+// FB embed sizing block in HrExhibitFlow.css). Returns [ref, width]; width is
+// 0 until the first observation, so callers gate the CSS var on a truthy value
+// and the CSS carries a sane default. State is set only from the RO callback,
+// never synchronously in the effect body, so it doesn't trip
+// react-hooks/set-state-in-effect.
+function useElementWidth() {
+  const ref = useRef(null);
+  const [width, setWidth] = useState(0);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof ResizeObserver === "undefined") return undefined;
+    const ro = new ResizeObserver(entries => {
+      for (const e of entries) {
+        const w = Math.round(e.contentRect.width);
+        if (w) setWidth(w);
+      }
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  return [ref, width];
 }
 
 // "Broken image" mark in currentColor: a framed thumbnail with a diagonal
@@ -1451,9 +1518,17 @@ function fbEmbedFor(url) {
 
 function FbEmbedCard({ card }) {
   const embed = fbEmbedFor(card.source_url);
+  // --fb-w carries the tile's live width so the CSS can scale FB's fixed
+  // 500px-wide plugin canvas to fill the column at any span/viewport (see the
+  // FB embed sizing block in HrExhibitFlow.css).
+  const [visRef, visW] = useElementWidth();
   return (
     <>
-      <div className="hr-card-video-vis">
+      <div
+        className="hr-card-video-vis"
+        ref={visRef}
+        style={visW ? { "--fb-w": visW } : undefined}
+      >
         {embed && (
           <iframe
             className="hr-fbembed-frame"

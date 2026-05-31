@@ -192,27 +192,54 @@
   color: var(--hr-gold-hi);
 }
 
-/* ── FB social-plugin embed cards (2026-05-31) ───────────────────
+/* ── FB social-plugin embed cards (2026-05-31; scale-fit 2026-05-31) ──────
    plugins/video.php (watch/reel) + plugins/post.php (posts) iframe embeds.
-   No app token, no FB JS SDK. The iframe fills the vis area; aspect-ratio is
-   set per FB content kind via the data-fbkind attribute on the card. See
-   FbEmbedCard / fbEmbedFor in HrExhibitFlow.jsx. FB embeds render on a white
-   surface; that is inherent to FB's chrome, not a deck token. */
+   No app token, no FB JS SDK. See FbEmbedCard / fbEmbedFor in
+   HrExhibitFlow.jsx. FB embeds render on a white surface; that is inherent
+   to FB's chrome, not a deck token.
+
+   Sizing model — why this isn't just width/height:100%. A raw FB plugin lays
+   its content out at a FIXED pixel width (the &width= param, locked at 500 in
+   fbPluginSrc) and computes its own height. The iframe ELEMENT, though, is the
+   grid column: ~278px at 1-col (reel/post), ~572px at 2-col (video), fully
+   fluid on mobile. So a width:100% iframe only shows a 278/572-px window onto
+   500px-wide FB content — horizontal clip at 1-col (≈222px lost), white margin
+   + bottom letterbox at 2-col. With no FB JS SDK there's no fluid-width mode
+   and the cross-origin frame exposes no size to read.
+
+   Fix: lay the iframe out at FB's exact native size (500 × a per-kind height
+   that equals 500 × the tile's inverse aspect) and uniformly scale it to fill
+   the tile. --fb-w is the tile's live pixel width (set by useElementWidth on
+   the vis in FbEmbedCard); scale = --fb-w / 500 maps the 500px FB canvas onto
+   the tile width exactly — no horizontal clip at any column span or viewport,
+   and the per-kind iframe height makes the scaled frame fill the aspect box
+   with no letterbox. The aspect-ratio on the vis still defines the tile's
+   masonry shape, mirroring the gallery/album 4/5 tiles. */
 .hr-card-fbembed .hr-card-video-vis {
   flex: none;
   padding: 0;
   background: #fff;
   overflow: hidden;
+  position: relative;
 }
 .hr-card-fbembed[data-fbkind="video"] .hr-card-video-vis { aspect-ratio: 16 / 9; }
 .hr-card-fbembed[data-fbkind="reel"]  .hr-card-video-vis { aspect-ratio: 9 / 16; }
 .hr-card-fbembed[data-fbkind="post"]  .hr-card-video-vis { aspect-ratio: 4 / 5; }
 .hr-fbembed-frame {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 500px;
   border: 0;
   display: block;
+  transform-origin: top left;
+  transform: scale(calc(var(--fb-w, 280) / 500));
 }
+/* Pre-scale heights = 500 × the tile's inverse aspect, so frame × scale fills
+   the vis box: video 500×9/16, reel 500×16/9, post 500×5/4. */
+.hr-card-fbembed[data-fbkind="video"] .hr-fbembed-frame { height: 281px; }
+.hr-card-fbembed[data-fbkind="reel"]  .hr-fbembed-frame { height: 889px; }
+.hr-card-fbembed[data-fbkind="post"]  .hr-fbembed-frame { height: 625px; }
 .hr-card-fb-open {
   display: inline-block;
   margin-top: 6px;
