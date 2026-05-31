@@ -62,7 +62,41 @@ import { HR_JOURNAL_PROMPTS } from "../../data/hr_journal_prompts.js";
 // at the dimension-discovery step (it's a routing tag, not a content tag, per
 // v5.2 §3). Adding a new namespace in MV automatically grows the pill columns
 // on the next export+build; no museum-side code change required.
-const ARTIFACTS = Array.isArray(EXHIBIT?.artifacts) ? EXHIBIT.artifacts : [];
+const RAW_ARTIFACTS = Array.isArray(EXHIBIT?.artifacts) ? EXHIBIT.artifacts : [];
+// ─── Facebook filter facet (2026-05-31) ─────────────────────────────────────
+// The 16 source_platform:"facebook" artifacts carry no `source:` tag, unlike
+// YouTube / ReverbNation / etc. whose MV export emits source:["youtube"] /
+// source:["reverbnation"]. Because every pill column is discovered from
+// artifact.tags namespaces (buildDimensions) and matchFilter reads
+// item.tags[ns], the FB artifacts never appeared in the tier-2 "Source" column
+// (Formats tab) and so were unfilterable — even though YouTube et al. are.
+//
+// Fix, keyed on source_platform === "facebook" (per kickoff): APPEND a
+// "facebook" value to the source tag for every FB-platform artifact at load, so
+// all 16 join the SAME Source column as YouTube under one new "Facebook" pill —
+// consistent with the existing facet pattern, no new column.
+//
+// Append, not replace: 13 of the 16 carry no source tag, but 3 cross-posted
+// clips (MV-HR-…-008/011/014) already carry other source values
+// (distrokid/tiktok/instagram = their content origin). Preserving those keeps
+// their existing pills intact while still surfacing them under Facebook — the
+// source namespace is multi-value, so an artifact can sit under several source
+// pills. This is what makes the Facebook pill match exactly all 16 FB embeds
+// while leaving every other pill's membership unchanged.
+//
+// Front-end only: hunter_root.json is regenerated from MV and stays
+// authoritative; this derivation never writes back. Idempotent — skips an
+// artifact that already lists "facebook". A shallow clone (+ fresh source array)
+// avoids mutating the imported JSON.
+const ARTIFACTS = RAW_ARTIFACTS.map(a => {
+  if (a && a.source_platform === "facebook") {
+    const existing = Array.isArray(a.tags?.source) ? a.tags.source : [];
+    if (!existing.includes("facebook")) {
+      return { ...a, tags: { ...(a.tags || {}), source: [...existing, "facebook"] } };
+    }
+  }
+  return a;
+});
 const { HR_DIMENSIONS, HR_GROUP_LABELS, displayFor } = buildDimensions(ARTIFACTS);
 
 // ─── COLOR / FONT TOKENS ────────────────────────────────────────────────────
@@ -1516,23 +1550,53 @@ function fbEmbedFor(url) {
   return null;
 }
 
+// Read an embed's intrinsic pixel dimensions from the artifact record when the
+// export provides them. Returns { w, h } (positive, finite) or null. Tolerant of
+// string or numeric fields and of either media_* or embed_* naming, so it lights
+// up whichever the MV/export side eventually emits.
+function fbEmbedDims(card) {
+  const w = Number(card.media_width ?? card.embed_width);
+  const h = Number(card.media_height ?? card.embed_height);
+  if (Number.isFinite(w) && Number.isFinite(h) && w > 0 && h > 0) {
+    return { w, h };
+  }
+  return null;
+}
+
 function FbEmbedCard({ card }) {
   const embed = fbEmbedFor(card.source_url);
   // --fb-w carries the tile's live width so the CSS can scale FB's fixed
   // 500px-wide plugin canvas to fill the column at any span/viewport (see the
   // FB embed sizing block in HrExhibitFlow.css).
   const [visRef, visW] = useElementWidth();
+  // Per-card aspect (2026-05-31): the front-end half of per-video FB sizing —
+  // the proper fix for mixed-orientation FB videos (a single per-kind box must
+  // either crop portrait clips or letterbox landscape ones; the cross-origin
+  // frame exposes no size to read). When the export carries the embed's
+  // intrinsic pixel dimensions, size THIS card to that exact aspect: box
+  // aspect-ratio = w/h, and since fbPluginSrc fixes &width=500 the frame's
+  // pre-scale height = 500 × h/w, so the scaled frame fills the box with no crop
+  // and no gap. The export does not emit these fields yet, so today every card
+  // falls through to the per-kind .hr-card-fbembed[data-fbkind] CSS box —
+  // byte-for-byte the prior behavior, no regression. When MV/export later
+  // carries FB video dimensions, the fit corrects with no further front-end change.
+  const dims = fbEmbedDims(card);
+  const visStyle = {};
+  if (visW) visStyle["--fb-w"] = visW;
+  if (dims) visStyle.aspectRatio = `${dims.w} / ${dims.h}`;
+  const frameStyle = dims ? { height: `${Math.round((500 * dims.h) / dims.w)}px` } : undefined;
   return (
     <>
       <div
         className="hr-card-video-vis"
         ref={visRef}
-        style={visW ? { "--fb-w": visW } : undefined}
+        style={Object.keys(visStyle).length ? visStyle : undefined}
       >
         {embed && (
           <iframe
             className="hr-fbembed-frame"
             src={embed.src}
+            style={frameStyle}
             title={card.title || "Facebook embed"}
             loading="lazy"
             scrolling="no"

@@ -214,7 +214,16 @@
    the tile width exactly — no horizontal clip at any column span or viewport,
    and the per-kind iframe height makes the scaled frame fill the aspect box
    with no letterbox. The aspect-ratio on the vis still defines the tile's
-   masonry shape, mirroring the gallery/album 4/5 tiles. */
+   masonry shape, mirroring the gallery/album 4/5 tiles.
+
+   Per-card override (2026-05-31): the per-kind aspect-ratio + frame-height rules
+   below are FALLBACKS. When the export carries an embed's intrinsic dimensions,
+   FbEmbedCard (fbEmbedDims) sets the vis aspect-ratio and the frame height inline
+   — computed as box aspect = w/h and frame height = 500 × h/w — which wins over
+   these classes. That is the front-end half of per-video FB sizing (the proper
+   fix for mixed-orientation FB videos, where one fixed per-kind box must either
+   crop portrait clips or letterbox landscape ones). Until MV/export emits those
+   fields, the per-kind boxes apply unchanged — no behavior change today. */
 .hr-card-fbembed .hr-card-video-vis {
   flex: none;
   padding: 0;
