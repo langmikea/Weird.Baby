@@ -172,3 +172,33 @@ Per CLAUDE.md quirk #10, batch all MV-writes (F4, and any of F6/F8 done MV-side)
 
 > **Commit note (per CLAUDE.md §2 / FUSE-truncation risk):** do not commit from the sandbox. Stage host-side in PowerShell with the explicit path:
 > `git add docs/REVERBNATION_PARITY_SCOPE-20260530-224748.md` then commit + push host-side.
+
+---
+
+## BUILD ADDENDUM — Path 2 executed (2026-05-30, later session)
+
+Operator chose **Path 2** (album-group in place, MV-true) and the **full RN list** (15 tracks). G-DEC resolved.
+
+**Museum-side code built + verified (sandbox):** `card_kind:"album"` container — the audio analogue of the
+gallery container. `AlbumCard` deck tile (cover + track-count badge) opens `AlbumOverlay` (ordered numbered
+tracklist, sequential mp3 auto-advance, reuses the existing `<audio>` path; **no new player subsystem**, so
+F2 is avoided as intended). Export `card_kind:"album"` branch orders `tracks[]` by `notes.track_order`,
+excludes the cover child, assigns `track_no`, resolves the cover thumbnail. Files: `HrExhibitFlow.jsx`,
+`HrExhibitFlow.css`, `tools/export-artifacts.mjs`. Lint held at the documented **4 err / 6 warn** baseline
+(zero new); babel-parse + export unit test + full pipeline dry-run all pass. Build/deploy are host-side.
+
+**Cover (F1/F12) — resolved.** Operator confirmed `MV-20260419-003` (clean couch/acoustic-guitar shot) as
+the cover. The MP3s' embedded art is the **same image watermarked "ReverbNation"**; the clean vaulted `-003`
+is the master. `-004` is *Medusa's Disco* (unrelated). `-003` was R2-synced but `vault`; it is **re-released**
+in the MV-write step so it survives re-sync.
+
+**Track order (F6) — resolved.** Not in the data (post_date null; ID3 carries title only). Taken from the
+**ReverbNation `/songs` page** per operator directive (the 15-song order, archive-confirmed).
+
+**Scope correction (was stale).** "13 RN tracks" → MV actually holds **all 15** already; **no ingest**.
+Whiskey to the Sun = `MV-HR-20260417-025` (`vault`→released). Park Bench Pigeons = `MV-HR-20260416-014`
+(audio child of archived page `-011`; re-parented onto the album; a duplicate PBP family exists at `-005`).
+
+**Remaining (host-side, gated):** run `rwth_album_mvwrite.py --apply` (MV closed, auto-snapshot) →
+`sync-assets-to-r2` → `export-artifacts` (top-level 76→64, intended) → build → deploy → live-verify →
+host-side commit. Full steps in `docs/RWTH_ALBUM_RUNBOOK-20260530.md`.

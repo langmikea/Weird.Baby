@@ -1246,7 +1246,174 @@ function GalleryOverlay({ card, onClose }) {
   );
 }
 
-function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery }) {
+// ─── Album container (RWTH parity, 2026-05-30) ──────────────────────────────
+// The audio analogue of the gallery container. The deck tile (AlbumCard) shows
+// the album cover + a track-count badge and opens AlbumOverlay — an ordered,
+// numbered tracklist with sequential mp3 playback and auto-advance. Reuses the
+// same HTML5 <audio> approach as AudioCard (no new player subsystem); the
+// overlay owns ONE <audio> element and steps to the next track on 'ended'.
+// Cover + tracks come from the export's card_kind:"album" record
+// (cover_artifact_id + ordered tracks[] each with track_no).
+function stripAudioSuffix(title) {
+  // RWTH titles arrive as "Brain Cell — audio recording"; strip the trailing
+  // "audio recording" qualifier for tracklist display only. MV title untouched.
+  if (typeof title !== "string") return "";
+  return title.replace(/\s*[—–-]\s*audio recording\s*$/i, "").trim() || title.trim();
+}
+
+function albumCover(card, tracks) {
+  return card.thumbnail_url
+    || (tracks.find(t => t.id === card.cover_artifact_id) || {}).thumbnail_url
+    || (tracks[0] || {}).thumbnail_url
+    || null;
+}
+
+function AlbumCard({ card }) {
+  const tracks = Array.isArray(card.tracks) ? card.tracks : [];
+  const cover = albumCover(card, tracks);
+  const count = tracks.length;
+  const failed = useImageFailed(cover);
+  const showCover = !!cover && !failed;
+  const visStyle = showCover
+    ? { backgroundImage: `url(${cover})`, backgroundSize: "cover", backgroundPosition: "center" }
+    : null;
+  return (
+    <>
+      <div className="hr-card-video-vis" style={visStyle ?? undefined}>
+        {!showCover && <MediaPlaceholder title={card.title} variant="card" />}
+        <span className="hr-album-card-badge" aria-hidden="true">
+          <svg width="11" height="11" viewBox="0 0 16 16">
+            <circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" />
+            <circle cx="8" cy="8" r="1.6" fill="currentColor" />
+          </svg>
+          {count}
+        </span>
+      </div>
+      <div className="hr-card-foot">
+        <div className="hr-card-title">{card.title || "(untitled)"}</div>
+        <div className="hr-card-meta">{count} track{count === 1 ? "" : "s"}</div>
+        <ContentKindBadge card={card} />
+      </div>
+    </>
+  );
+}
+
+function AlbumOverlay({ card, onClose }) {
+  const tracks = Array.isArray(card && card.tracks) ? card.tracks : [];
+  const n = tracks.length;
+  const audioRef = useRef(null);
+  const [curIdx, setCurIdx] = useState(-1);
+  const [playing, setPlaying] = useState(false);
+  const cover = albumCover(card, tracks);
+
+  const toggle = useCallback((i) => {
+    setCurIdx(prev => {
+      if (prev === i) { setPlaying(pl => !pl); return prev; }
+      setPlaying(true);
+      return i;
+    });
+  }, []);
+
+  // Drive the single <audio> from curIdx/playing.
+  useEffect(() => {
+    const el = audioRef.current;
+    if (!el) return;
+    if (curIdx < 0) { el.pause(); return; }
+    if (playing) {
+      const pr = el.play();
+      if (pr && typeof pr.catch === "function") {
+        pr.catch(err => { if (import.meta.env.DEV) console.warn("AlbumOverlay play() rejected", err); });
+      }
+    } else {
+      el.pause();
+    }
+  }, [curIdx, playing]);
+
+  // Auto-advance to the next track on end; stop after the last.
+  useEffect(() => {
+    const el = audioRef.current;
+    if (!el) return;
+    const onEnded = () => {
+      setCurIdx(i => {
+        const nxt = i + 1;
+        if (nxt < n) { setPlaying(true); return nxt; }
+        setPlaying(false);
+        return -1;
+      });
+    };
+    el.addEventListener("ended", onEnded);
+    return () => el.removeEventListener("ended", onEnded);
+  }, [n]);
+
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+
+  if (!n) return null;
+  const cur = curIdx >= 0 ? tracks[curIdx] : null;
+  return (
+    <div className="hr-album-ov" role="dialog" aria-modal="true"
+         aria-label={card.title || "album"} onClick={onClose}>
+      <button className="hr-album-ov-close" onClick={onClose} aria-label="Close album">✕</button>
+      <div className="hr-album-ov-stage" onClick={(e) => e.stopPropagation()}>
+        <div className="hr-album-ov-cover">
+          <FallbackImg
+            className="hr-album-ov-cover-img"
+            src={cover}
+            alt={card.title || ""}
+            title={card.title}
+          />
+          <div className="hr-album-ov-cap">
+            <div className="hr-album-ov-cap-title">{card.title || "(untitled)"}</div>
+            <div className="hr-album-ov-cap-meta">{n} track{n === 1 ? "" : "s"}</div>
+          </div>
+        </div>
+        <ol className="hr-album-ov-list">
+          {tracks.map((t, i) => {
+            const isCur = i === curIdx;
+            const isPlayingThis = isCur && playing;
+            const disabled = !t.primary_url;
+            return (
+              <li key={t.id} className={"hr-album-ov-row" + (isCur ? " is-current" : "")}>
+                <button
+                  type="button"
+                  className="hr-album-ov-trackbtn"
+                  onClick={() => toggle(i)}
+                  disabled={disabled}
+                  aria-label={(isPlayingThis ? "Pause " : "Play ") + stripAudioSuffix(t.title)}
+                  aria-pressed={isPlayingThis}
+                >
+                  <span className="hr-album-ov-num" aria-hidden="true">
+                    {isPlayingThis ? (
+                      <svg width="12" height="12" viewBox="0 0 20 20"><rect x="4" y="3" width="4" height="14" fill="currentColor" /><rect x="12" y="3" width="4" height="14" fill="currentColor" /></svg>
+                    ) : isCur ? (
+                      <svg width="12" height="12" viewBox="0 0 20 20"><polygon points="5,3 5,17 17,10" fill="currentColor" /></svg>
+                    ) : (
+                      i + 1
+                    )}
+                  </span>
+                  <span className="hr-album-ov-tt">{stripAudioSuffix(t.title) || "(untitled)"}</span>
+                  {disabled && <span className="hr-album-ov-na">unavailable</span>}
+                </button>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+      <audio ref={audioRef} src={cur ? cur.primary_url : undefined} preload="none" />
+    </div>
+  );
+}
+
+function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum }) {
   const isLink = card.media_type === "link" && !!card.source_url;
   const isPhoto = card.media_type === "photo" && !!card.primary_url;
   // Phase C of Audio Delivery (per brief §3.5 / §9.3): media_type='audio'
@@ -1257,13 +1424,16 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery }
   // Phase 3: gallery container. media_type is 'other', so without this it would
   // fall through to PlaceholderCard. Detected via the export's card_kind field.
   const isGallery = card.card_kind === "gallery" && Array.isArray(card.gallery);
+  // RWTH parity: album container. media_type is 'other'; detected via the
+  // export's card_kind:"album" + tracks[]. Opens AlbumOverlay like gallery.
+  const isAlbum = card.card_kind === "album" && Array.isArray(card.tracks);
   // pickSpan bias: link / photo lean wide so the thumbnails read at a
   // comfortable size. Audio is hard-forced to 1-col below per operator
   // decision 2026-05-23 (visual review during first production deploy at
   // https://weird.baby/hr): audio cards are uniform album-art squares;
   // pickSpan's wide-bias variant produced 2x-tall cards that broke the
   // "matching album art" aesthetic from the 2026-05-22 operator-lock.
-  const { span_w: rolledSpan } = pickSpan(card.id || "", isLink || isPhoto || isGallery);
+  const { span_w: rolledSpan } = pickSpan(card.id || "", isLink || isPhoto || isGallery || isAlbum);
   const span_w = isAudio ? 1 : rolledSpan;
   const baseStyle = {
     ...spanStyle(span_w),
@@ -1274,7 +1444,8 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery }
     isLink ? "hr-card-link" : null,
     isPhoto ? "hr-card-photo" : null,
     isAudio ? "hr-card-audio" : null,
-    isGallery ? "hr-card-gallery" : null]
+    isGallery ? "hr-card-gallery" : null,
+    isAlbum ? "hr-card-album" : null]
     .filter(Boolean).join(" ");
   if (isLink) {
     return (
@@ -1338,6 +1509,19 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery }
       </button>
     );
   }
+  if (isAlbum) {
+    return (
+      <button
+        type="button"
+        className={className}
+        style={{ ...baseStyle, cursor: "pointer", textAlign: "left", font: "inherit", color: "inherit", padding: 0 }}
+        onClick={() => onOpenAlbum && onOpenAlbum(card)}
+        aria-label={`Open album: ${card.title || "untitled"} — ${card.tracks.length} tracks`}
+      >
+        <AlbumCard card={card} />
+      </button>
+    );
+  }
   return (
     <div className={className} style={baseStyle}>
       <PlaceholderCard card={card} />
@@ -1346,7 +1530,7 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery }
 }
 
 // ─── PAGE / GRID — ported from v28 ──────────────────────────────────────────
-function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpenGallery }) {
+function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum }) {
   // Phase C: filterKey is intentionally NOT included in audio cards' react
   // keys. The operator-locked rule (2026-05-22) requires that filter
   // changes never touch playback state. Including filterKey here would
@@ -1397,6 +1581,7 @@ function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpe
               playingAudioId={playingAudioId}
               setPlayingAudioId={setPlayingAudioId}
               onOpenGallery={onOpenGallery}
+              onOpenAlbum={onOpenAlbum}
             />
           );
         })}
@@ -1971,6 +2156,9 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   // Lifted to the root so the overlay layers above the deck/grid and survives
   // grid reflows. Closed via ✕ / backdrop / Escape (see GalleryOverlay).
   const [openGallery, setOpenGallery] = useState(null);
+  // RWTH parity: album overlay. Holds the open album container card (or null),
+  // lifted to the root so the modal layers above the deck and survives reflows.
+  const [openAlbum, setOpenAlbum] = useState(null);
   // MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
   // setKalState is wired into clear() so the dormant state stays in sync;
   // kalState is intentionally not read in v1.
@@ -2162,6 +2350,9 @@ export default function HrExhibitFlow({ activeAlbumId }) {
       {openGallery && (
         <GalleryOverlay card={openGallery} onClose={() => setOpenGallery(null)} />
       )}
+      {openAlbum && (
+        <AlbumOverlay card={openAlbum} onClose={() => setOpenAlbum(null)} />
+      )}
       {/* MOBILE FALLBACK — pill columns render inline above the grid on
           narrow viewports. CSS hides this on desktop and hides the deck
           on mobile. */}
@@ -2187,6 +2378,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
               playingAudioId={playingAudioId}
               setPlayingAudioId={setPlayingAudioId}
               onOpenGallery={setOpenGallery}
+              onOpenAlbum={setOpenAlbum}
             />
           </div>
         </div>

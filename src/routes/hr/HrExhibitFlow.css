@@ -1306,3 +1306,132 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   font-size: 10px;
   font-variant-numeric: tabular-nums;
 }
+
+/* ─── Album container (RWTH parity, 2026-05-30) ──────────────────────────────
+   Deck tile badge mirrors the gallery badge; the overlay is a cover + ordered
+   tracklist in the deck's INK/GOLD/BORDER language. */
+.hr-album-card-badge {
+  position: absolute;
+  top: 6px; right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--hr-gold-hi);
+  background: rgba(14, 11, 6, 0.8);
+  border: 1px solid var(--hr-gold-lo);
+  padding: 2px 5px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hr-album-ov {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(5, 5, 5, 0.94);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  font-family: 'Geist', system-ui, -apple-system, sans-serif;
+}
+.hr-album-ov-close {
+  position: absolute;
+  top: 14px; right: 18px;
+  background: transparent;
+  border: none;
+  color: var(--hr-gold);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.12s;
+}
+.hr-album-ov-close:hover { color: var(--hr-gold-hi); }
+.hr-album-ov-stage {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 22px;
+  width: 100%;
+  max-width: min(900px, 92vw);
+  max-height: 80vh;
+}
+.hr-album-ov-cover {
+  flex: none;
+  width: min(38vw, 320px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.hr-album-ov-cover-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid var(--hr-border);
+  background: #050505;
+}
+.hr-album-ov-cap-title { color: var(--hr-gold-hi); font-size: 15px; letter-spacing: 0.02em; }
+.hr-album-ov-cap-meta {
+  color: var(--hr-gold-mute);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  margin-top: 3px;
+}
+.hr-album-ov-list {
+  flex: 1;
+  min-width: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 72vh;
+  overflow-y: auto;
+}
+.hr-album-ov-row { border-bottom: 1px solid var(--hr-border); }
+.hr-album-ov-row.is-current { background: var(--hr-ink-soft); }
+.hr-album-ov-trackbtn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--hr-gold-lo);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  padding: 9px 8px;
+  transition: color 0.12s, background 0.12s;
+}
+.hr-album-ov-trackbtn:hover { color: var(--hr-gold-hi); background: rgba(14, 11, 6, 0.6); }
+.hr-album-ov-trackbtn:disabled { cursor: default; color: var(--hr-gold-mute); }
+.hr-album-ov-row.is-current .hr-album-ov-trackbtn { color: var(--hr-gold-hi); }
+.hr-album-ov-num {
+  flex: none;
+  width: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--hr-gold);
+}
+.hr-album-ov-tt { flex: 1; min-width: 0; font-size: 14px; }
+.hr-album-ov-na {
+  flex: none;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--hr-gold-mute);
+}
+@media (max-width: 720px) {
+  .hr-album-ov-stage { flex-direction: column; align-items: center; gap: 14px; max-height: none; }
+  .hr-album-ov-cover { width: min(70vw, 320px); }
+  .hr-album-ov-list { max-height: 40vh; width: 100%; }
+}

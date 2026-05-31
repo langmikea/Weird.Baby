@@ -431,6 +431,42 @@ function buildArtifactRecord(row, manifest, opts = {}) {
     }
   }
 
+  // ─── Album containers (RWTH parity, 2026-05-30) ─────────────────────────────
+  // A top-level card tagged `card_kind:album` is the audio analogue of the
+  // gallery container: it derives an ordered `tracks[]` from its live released
+  // audio children (re-parented under it in MV) and carries a cover image via
+  // `cover_artifact_id`. Unlike gallery, the cover is a NON-track child (a
+  // photo), so it is filtered out of `tracks[]` and only used to source the
+  // container thumbnail. Running order is explicit: `notes.track_order` is an
+  // array of child ids; tracks sort by their index in it (unknown ids sort
+  // last, then by id for determinism). `track_no` is the 1-based display index.
+  if (!opts.isChild && cardKind === "album" && typeof opts.fetchChildren === "function") {
+    const notesObj = parseNotesJson(row.notes);
+    const childRows = opts.fetchChildren(row.id) || [];
+    const children = childRows.map(cr => buildArtifactRecord(cr, manifest, { isChild: true }));
+    const coverId = notesObj && notesObj.cover_artifact_id ? notesObj.cover_artifact_id : null;
+    const order = notesObj && Array.isArray(notesObj.track_order) ? notesObj.track_order : [];
+    const orderIdx = (id) => {
+      const k = order.indexOf(id);
+      return k === -1 ? Number.MAX_SAFE_INTEGER : k;
+    };
+    const tracks = children
+      .filter(c => c.id !== coverId && c.media_type === "audio")
+      .sort((a, b) => {
+        const d = orderIdx(a.id) - orderIdx(b.id);
+        if (d !== 0) return d;
+        return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+      });
+    tracks.forEach((t, i) => { t.track_no = i + 1; });
+    record.card_kind = "album";
+    record.cover_artifact_id = coverId;
+    record.tracks = tracks;
+    if (!record.thumbnail_url && coverId) {
+      const cover = children.find(c => c.id === coverId);
+      if (cover && cover.thumbnail_url) record.thumbnail_url = cover.thumbnail_url;
+    }
+  }
+
   return record;
 }
 
