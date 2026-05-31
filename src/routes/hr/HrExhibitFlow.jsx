@@ -1528,26 +1528,21 @@ function AlbumOverlay({ card, onClose }) {
 // no load/error signal, so failure can't be auto-detected — every embed always
 // carries an "Open on Facebook ↗" escape hatch in the foot (the same graceful
 // degradation posture as the broken-preview fallback, 2026-05-30).
-function fbPluginSrc(plugin, href, showText) {
+function fbPluginSrc(plugin, href, showText, width = 500) {
   return `https://www.facebook.com/plugins/${plugin}?href=${encodeURIComponent(href)}`
-    + `&show_text=${showText ? "true" : "false"}&width=500`;
+    + `&show_text=${showText ? "true" : "false"}&width=${Math.round(width)}`;
 }
+// All FB artifacts embed via plugins/post.php (video/reel/post); a video is also
+// a post and post.php self-sizes + reports height via postMessage. Returns the
+// ORIGINAL url as href; per-card src is built at the tile width in FbEmbedCard.
 function fbEmbedFor(url) {
   if (!url || typeof url !== "string") return null;
-  const vMatch = url.match(/[?&]v=(\d+)/) || url.match(/\/videos\/(\d+)/);
-  const reelMatch = url.match(/\/reel\/(\d+)/);
-  if (vMatch) {
-    const href = `https://www.facebook.com/watch/?v=${vMatch[1]}`;
-    return { kind: "video", src: fbPluginSrc("video.php", href, false) };
-  }
-  if (reelMatch) {
-    const href = `https://www.facebook.com/reel/${reelMatch[1]}/`;
-    return { kind: "reel", src: fbPluginSrc("video.php", href, false) };
-  }
-  if (/\/posts\//.test(url) || /\/permalink\//.test(url) || /story\.php/.test(url)) {
-    return { kind: "post", src: fbPluginSrc("post.php", url, true) };
-  }
-  return null;
+  const isVideo = /[?&]v=\d+/.test(url) || /\/videos\/\d+/.test(url);
+  const isReel = /\/reel\/\d+/.test(url);
+  const isPost = /\/posts\//.test(url) || /\/permalink\//.test(url) || /story\.php/.test(url);
+  if (!isVideo && !isReel && !isPost) return null;
+  const kind = isVideo ? "video" : isReel ? "reel" : "post";
+  return { kind, href: url };
 }
 
 // Read an embed's intrinsic pixel dimensions from the artifact record when the
@@ -1563,28 +1558,57 @@ function fbEmbedDims(card) {
   return null;
 }
 
+// Generous per-kind FALLBACK frame heights (px, pre-scale) for when FB has not
+// posted a measured height. Erring tall letterboxes; never crops.
+const FB_FALLBACK_H = { video: 620, reel: 1040, post: 720 };
+
 function FbEmbedCard({ card }) {
   const embed = fbEmbedFor(card.source_url);
-  // --fb-w carries the tile's live width so the CSS can scale FB's fixed
-  // 500px-wide plugin canvas to fill the column at any span/viewport (see the
-  // FB embed sizing block in HrExhibitFlow.css).
+  const kind = embed ? embed.kind : "post";
   const [visRef, visW] = useElementWidth();
-  // Per-card aspect (2026-05-31): the front-end half of per-video FB sizing —
-  // the proper fix for mixed-orientation FB videos (a single per-kind box must
-  // either crop portrait clips or letterbox landscape ones; the cross-origin
-  // frame exposes no size to read). When the export carries the embed's
-  // intrinsic pixel dimensions, size THIS card to that exact aspect: box
-  // aspect-ratio = w/h, and since fbPluginSrc fixes &width=500 the frame's
-  // pre-scale height = 500 × h/w, so the scaled frame fills the box with no crop
-  // and no gap. The export does not emit these fields yet, so today every card
-  // falls through to the per-kind .hr-card-fbembed[data-fbkind] CSS box —
-  // byte-for-byte the prior behavior, no regression. When MV/export later
-  // carries FB video dimensions, the fit corrects with no further front-end change.
+  const frameRef = useRef(null);
+  const [postedH, setPostedH] = useState(0);
+  useEffect(() => {
+    function onMessage(e) {
+      let host = "";
+      try { host = new URL(e.origin).hostname; } catch { return; }
+      if (host !== "facebook.com" && host !== "www.facebook.com" && !host.endsWith(".facebook.com")) return;
+      const win = frameRef.current && frameRef.current.contentWindow;
+      if (win && e.source && e.source !== win) return;
+      let d = e.data;
+      if (typeof d === "string") { try { d = JSON.parse(d); } catch { return; } }
+      if (!d || typeof d !== "object") return;
+      const h = Number(
+        d.height ?? d.frameHeight ?? (d.data && d.data.height) ?? (d.params && d.params.height)
+      );
+      if (Number.isFinite(h) && h > 40) setPostedH(Math.ceil(h));
+    }
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, []);
+  // Width-fill (Option 3): request post.php at ~tile width (clamped to FB 350-750,
+  // 10px-quantized to keep the src stable), then scale only the residual so the
+  // frame fills the tile exactly (no white gutters). Box height = scaled frame
+  // height, so the frame never overflows -> never cropped (short content letterboxes).
   const dims = fbEmbedDims(card);
+  const tileW = visW || 0;
+  const reqW = Math.min(750, Math.max(350, Math.round(tileW / 10) * 10 || 350));
+  const scale = tileW > 0 ? tileW / reqW : 1;
+  const fallbackH = Math.round((FB_FALLBACK_H[kind] || FB_FALLBACK_H.post) * (500 / reqW));
+  const effH = dims ? Math.round((reqW * dims.h) / dims.w) : (postedH || fallbackH);
+  const src = embed ? fbPluginSrc("post.php", embed.href, true, reqW) : null;
   const visStyle = {};
-  if (visW) visStyle["--fb-w"] = visW;
-  if (dims) visStyle.aspectRatio = `${dims.w} / ${dims.h}`;
-  const frameStyle = dims ? { height: `${Math.round((500 * dims.h) / dims.w)}px` } : undefined;
+  if (dims) {
+    visStyle.aspectRatio = `${dims.w} / ${dims.h}`;
+  } else if (tileW > 0) {
+    visStyle.height = `${Math.round(scale * effH)}px`;
+  }
+  const frameStyle = {
+    width: `${reqW}px`,
+    height: `${effH}px`,
+    transform: `scale(${scale})`,
+    transformOrigin: "top left",
+  };
   return (
     <>
       <div
@@ -1592,10 +1616,11 @@ function FbEmbedCard({ card }) {
         ref={visRef}
         style={Object.keys(visStyle).length ? visStyle : undefined}
       >
-        {embed && (
+        {embed && tileW > 0 && (
           <iframe
+            ref={frameRef}
             className="hr-fbembed-frame"
-            src={embed.src}
+            src={src}
             style={frameStyle}
             title={card.title || "Facebook embed"}
             loading="lazy"

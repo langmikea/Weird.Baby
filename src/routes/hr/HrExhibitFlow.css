@@ -192,7 +192,7 @@
   color: var(--hr-gold-hi);
 }
 
-/* ── FB social-plugin embed cards (2026-05-31; scale-fit 2026-05-31) ──────
+/* ── FB social-plugin embed cards (2026-05-31; post.php + width-fill + postMessage auto-height + letterbox fallback) ──────
    plugins/video.php (watch/reel) + plugins/post.php (posts) iframe embeds.
    No app token, no FB JS SDK. See FbEmbedCard / fbEmbedFor in
    HrExhibitFlow.jsx. FB embeds render on a white surface; that is inherent
@@ -224,6 +224,12 @@
    fix for mixed-orientation FB videos, where one fixed per-kind box must either
    crop portrait clips or letterbox landscape ones). Until MV/export emits those
    fields, the per-kind boxes apply unchanged — no behavior change today. */
+/* 2026-05-31 width-fill (Option 3): request post.php at ~tile width (clamped to
+   FB 350-750, 10px-quantized) and scale the frame by tileW/reqW to fill the tile
+   exactly, killing the white side gutters. width/height/transform are inline from
+   FbEmbedCard; box height = scaled frame height (never cropped; short content
+   letterboxes). The aspect-ratio + per-kind frame-height rules below are a
+   pre-measurement hint only, overridden by the inline heights. */
 .hr-card-fbembed .hr-card-video-vis {
   flex: none;
   padding: 0;
@@ -235,14 +241,15 @@
 .hr-card-fbembed[data-fbkind="reel"]  .hr-card-video-vis { aspect-ratio: 9 / 16; }
 .hr-card-fbembed[data-fbkind="post"]  .hr-card-video-vis { aspect-ratio: 4 / 5; }
 .hr-fbembed-frame {
+  /* Width-fill 2026-05-31: width/height/transform/transform-origin are set inline
+     by FbEmbedCard (requested at ~tile width, scaled to fill). The old hardcoded
+     width:500 + --fb-w scale were removed (they left white gutters when the tile
+     width drifted from 500). */
   position: absolute;
   top: 0;
   left: 0;
-  width: 500px;
   border: 0;
   display: block;
-  transform-origin: top left;
-  transform: scale(calc(var(--fb-w, 280) / 500));
 }
 /* Pre-scale heights = 500 × the tile's inverse aspect, so frame × scale fills
    the vis box: video 500×9/16, reel 500×16/9, post 500×5/4. */
