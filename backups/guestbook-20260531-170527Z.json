@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Papa Weird.Baby",
+    "note": "aka Mike Lang. I built the place.",
+    "badge": "Founding Visitor",
+    "signed_at": "2026-04-10 17:58:46"
+  },
+  {
+    "id": 2,
+    "name": "James E",
+    "note": "Strangers looking out for each other for no reason other than it's the right thing to do.",
+    "badge": "Founding Visitor",
+    "signed_at": "2026-04-20 14:55:57"
+  },
+  {
+    "id": 3,
+    "name": "Testy McTestface",
+    "note": "Testing",
+    "badge": "Founding Visitor",
+    "signed_at": "2026-05-15 20:34:02"
+  },
+  {
+    "id": 4,
+    "name": "Larry Leibensperger",
+    "note": "",
+    "badge": "Founding Visitor",
+    "signed_at": "2026-05-31 13:54:28"
+  },
+  {
+    "id": 5,
+    "name": "Larry Leibensperger",
+    "note": "The Kindness of a gentlemen (Mike) trying to help others!",
+    "badge": "Founding Visitor",
+    "signed_at": "2026-05-31 13:56:35"
+  }
+]
