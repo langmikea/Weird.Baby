@@ -1138,27 +1138,38 @@ function useResolvedThumb(url) {
   return useFallback && fallback ? fallback : url;
 }
 
-// Track an element's live content-box width via ResizeObserver. Used by
-// FbEmbedCard to drive the --fb-w scale variable for the FB iframe (see the
-// FB embed sizing block in HrExhibitFlow.css). Returns [ref, width]; width is
-// 0 until the first observation, so callers gate the CSS var on a truthy value
-// and the CSS carries a sane default. State is set only from the RO callback,
-// never synchronously in the effect body, so it doesn't trip
-// react-hooks/set-state-in-effect.
+// Track an element's live content-box width. Used by FbEmbedCard to drive the
+// inline width-fill scale for the FB iframe (see the FB embed sizing block in
+// HrExhibitFlow.css) and by the FacebookOverlay stage. Returns [ref, width];
+// width is 0 only until the first POST-LAYOUT measurement.
+//
+// Reliability fix (RC-A, 2026-06-01 card-shape audit): the previous version
+// set width only from a ResizeObserver whose initial callback, in the deck's
+// mount sequence, could arrive with a 0-width contentRect and then never fire
+// again — stranding width at 0, so every gated Facebook iframe never mounted
+// (16 blank boxes). Now a requestAnimationFrame fires the first measure AFTER
+// layout (reading getBoundingClientRect / offsetWidth directly), and a
+// ResizeObserver keeps it live on later resizes. setState happens only inside
+// the rAF / RO callbacks (never synchronously in the effect body), so this
+// stays clear of react-hooks/set-state-in-effect; the functional-update guard
+// makes a repeat measure of an unchanged width a no-op, so it can't loop.
 function useElementWidth() {
   const ref = useRef(null);
   const [width, setWidth] = useState(0);
   useEffect(() => {
     const el = ref.current;
-    if (!el || typeof ResizeObserver === "undefined") return undefined;
-    const ro = new ResizeObserver(entries => {
-      for (const e of entries) {
-        const w = Math.round(e.contentRect.width);
-        if (w) setWidth(w);
-      }
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
+    if (!el) return undefined;
+    const measure = () => {
+      const w = Math.round(el.getBoundingClientRect().width) || el.offsetWidth || 0;
+      if (w) setWidth(prev => (prev === w ? prev : w));
+    };
+    const raf = requestAnimationFrame(measure);
+    let ro;
+    if (typeof ResizeObserver !== "undefined") {
+      ro = new ResizeObserver(measure);
+      ro.observe(el);
+    }
+    return () => { cancelAnimationFrame(raf); if (ro) ro.disconnect(); };
   }, []);
   return [ref, width];
 }
@@ -1696,6 +1707,13 @@ function FbEmbedCard({ card, onOpenFacebook }) {
         ref={visRef}
         style={Object.keys(visStyle).length ? visStyle : undefined}
       >
+        {/* RC-A no-blank fallback (2026-06-01): a titled placeholder sits
+            BEHIND the iframe, so a slow / refused / not-yet-measured embed
+            shows a styled tile instead of a blank white box. The opaque FB
+            embed paints over it once it loads. FB cards carry no thumbnail
+            (primary_url / thumbnail_url are null in the export), so this is
+            the title-only variant of the shared MediaPlaceholder. */}
+        <MediaPlaceholder title={card.title} variant="card" />
         {embed && tileW > 0 && (
           <iframe
             ref={frameRef}
@@ -1863,7 +1881,79 @@ function FacebookOverlay({ card, onClose }) {
   );
 }
 
-function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum, onOpenYouTube, onOpenFacebook }) {
+// ─── Photo lightbox (universal-lightbox build 4, Instagram, 2026-06-01) ──────
+// The single Instagram card (MV-HR-20260405-037) is a self-hosted photo —
+// primary_url PNG on assets.weird.baby + the post caption in description — so
+// the in-site experience is our own image at full resolution + the caption:
+// full fidelity, NO embed, NO token, NO third-party dependency (scoping doc
+// §3.3). Reuses the GalleryOverlay/YouTubeOverlay/FacebookOverlay shell contract
+// verbatim: full-viewport role="dialog", ✕ / backdrop / Escape close, body-
+// scroll lock, and an open state held at the HrExhibitFlow root
+// ({openPhoto && …}). The image degrades to the shared MediaPlaceholder via
+// FallbackImg if the asset 404s (broken-preview posture, 2026-05-30).
+//
+// Comment ceiling (scoping doc §3.3 / §6.1): even a live IG embed shows only the
+// post + caption, never the comment thread — and here the asset is self-hosted,
+// so we don't embed at all. The "Open on Instagram ↗" link is kept as the
+// always-present escape hatch (comments + the canonical post).
+//
+// Forward-compat (scoping doc §3.3 / §3.9): any future self-hosted photo card
+// lightboxes identically; the escape-hatch label derives from source_platform,
+// and the caption falls back to title when description is absent.
+function PhotoOverlay({ card, onClose }) {
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  // Lock body scroll while the overlay is open (mirrors YouTubeOverlay).
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+
+  const big = (card && card.primary_url) || (card && card.thumbnail_url) || null;
+  const title = card.title || "photo";
+  // The IG card's title is a machine-truncation of the caption, so the full
+  // caption (description) is the substance; fall back to title if absent.
+  const captionText = (card && card.description) || card.title || "";
+  const platform = card && card.source_platform;
+  const platformLabel = platform
+    ? platform.charAt(0).toUpperCase() + platform.slice(1)
+    : "source";
+
+  return (
+    <div className="hr-photo-ov" role="dialog" aria-modal="true"
+         aria-label={title} onClick={onClose}>
+      <button className="hr-photo-ov-close" onClick={onClose} aria-label="Close photo">✕</button>
+      <div className="hr-photo-ov-stage" onClick={(e) => e.stopPropagation()}>
+        <div className="hr-photo-ov-figure">
+          <FallbackImg
+            key={big || "ph"}
+            className="hr-photo-ov-img"
+            src={big}
+            alt={card.title || ""}
+            title={card.title}
+          />
+        </div>
+        <div className="hr-photo-ov-cap">
+          {captionText ? <div className="hr-photo-ov-cap-body">{captionText}</div> : null}
+          <div className="hr-photo-ov-cap-meta">
+            {card.post_date ? card.post_date + " · " : ""}
+            <a className="hr-photo-ov-link" href={card.source_url}
+               target="_blank" rel="noopener noreferrer">
+              Open on {platformLabel} ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum, onOpenYouTube, onOpenFacebook, onOpenPhoto }) {
   const fbEmbed = card.source_platform === "facebook" ? fbEmbedFor(card.source_url) : null;
   const isFbEmbed = !!fbEmbed;
   // Universal-lightbox build 1: YouTube cards open the in-site player overlay
@@ -1894,7 +1984,14 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
   // "matching album art" aesthetic from the 2026-05-22 operator-lock.
   const isFbVideo = isFbEmbed && fbEmbed.kind === "video";
   const { span_w: rolledSpan } = pickSpan(card.id || "", isLink || isYouTube || isPhoto || isGallery || isAlbum || isFbVideo);
-  const span_w = isAudio || (isFbEmbed && !isFbVideo) ? 1 : rolledSpan;
+  // All Facebook cards forced to 1-col / narrow per operator decision 2026-06-01
+  // (incognito visual review on weird.baby/hr): FB post & video embeds have a
+  // portrait-ish natural shape and distort when stretched to a 2-col (wide)
+  // span; narrow renders like a proper FB post. Overrides the FNV-hash rolled
+  // span for FB only (source_platform === "facebook"); all other card types
+  // keep their operator-locked varied spans. Supersedes the earlier rule that
+  // forced only non-video FB embeds (isFbEmbed && !isFbVideo) to 1-col.
+  const span_w = card.source_platform === "facebook" || isAudio ? 1 : rolledSpan;
   const baseStyle = {
     ...spanStyle(span_w),
     border: `1px solid ${BORDER}`,
@@ -1949,16 +2046,22 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
     );
   }
   if (isPhoto) {
+    // Universal-lightbox build 4: the self-hosted photo (the single Instagram
+    // card today) opens the in-site PhotoOverlay instead of a new tab. Render
+    // the same PhotoCard tile, but as a <button> that opens the overlay at the
+    // root — mirroring isYouTube/isGallery/isAlbum. The "Open on Instagram ↗"
+    // escape hatch lives inside the overlay (scoping doc §3.3). A future photo
+    // without a hosted primary_url never reaches here (isPhoto requires it).
     return (
-      <a
+      <button
+        type="button"
         className={className}
-        style={baseStyle}
-        href={card.primary_url}
-        target="_blank"
-        rel="noopener noreferrer"
+        style={{ ...baseStyle, cursor: "pointer", textAlign: "left", font: "inherit", color: "inherit", padding: 0 }}
+        onClick={() => onOpenPhoto && onOpenPhoto(card)}
+        aria-label={`Open photo: ${card.title || "untitled"}`}
       >
         <PhotoCard card={card} />
-      </a>
+      </button>
     );
   }
   if (isAudio) {
@@ -2017,7 +2120,7 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
 }
 
 // ─── PAGE / GRID — ported from v28 ──────────────────────────────────────────
-function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum, onOpenYouTube, onOpenFacebook }) {
+function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum, onOpenYouTube, onOpenFacebook, onOpenPhoto }) {
   // Phase C: filterKey is intentionally NOT included in audio cards' react
   // keys. The operator-locked rule (2026-05-22) requires that filter
   // changes never touch playback state. Including filterKey here would
@@ -2071,6 +2174,7 @@ function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpe
               onOpenAlbum={onOpenAlbum}
               onOpenYouTube={onOpenYouTube}
               onOpenFacebook={onOpenFacebook}
+              onOpenPhoto={onOpenPhoto}
             />
           );
         })}
@@ -2658,6 +2762,12 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   // survives grid reflows. {openFacebook && …} also tears down the post.php
   // iframe on close (✕ / backdrop / Escape) so any playing FB video stops.
   const [openFacebook, setOpenFacebook] = useState(null);
+  // Universal-lightbox build 4: photo overlay (the single Instagram card today).
+  // Holds the open photo card (or null), lifted to the root so the modal layers
+  // above the deck and survives grid reflows. {openPhoto && …} unmounts the
+  // overlay on close (✕ / backdrop / Escape); the self-hosted image needs no
+  // player teardown (no iframe/audio), unlike YouTube/Facebook.
+  const [openPhoto, setOpenPhoto] = useState(null);
   // MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
   // setKalState is wired into clear() so the dormant state stays in sync;
   // kalState is intentionally not read in v1.
@@ -2858,6 +2968,9 @@ export default function HrExhibitFlow({ activeAlbumId }) {
       {openFacebook && (
         <FacebookOverlay card={openFacebook} onClose={() => setOpenFacebook(null)} />
       )}
+      {openPhoto && (
+        <PhotoOverlay card={openPhoto} onClose={() => setOpenPhoto(null)} />
+      )}
       {/* MOBILE FALLBACK — pill columns render inline above the grid on
           narrow viewports. CSS hides this on desktop and hides the deck
           on mobile. */}
@@ -2886,6 +2999,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
               onOpenAlbum={setOpenAlbum}
               onOpenYouTube={setOpenYouTube}
               onOpenFacebook={setOpenFacebook}
+              onOpenPhoto={setOpenPhoto}
             />
           </div>
         </div>
