@@ -1651,7 +1651,13 @@ function fbEmbedDims(card) {
 
 // Generous per-kind FALLBACK frame heights (px, pre-scale) for when FB has not
 // posted a measured height. Erring tall letterboxes; never crops.
-const FB_FALLBACK_H = { video: 620, reel: 1040, post: 720 };
+// Video/reel have a real fixed aspect, so their fallbacks are modest. POSTS have
+// no fixed aspect — caption length varies — so a 720 fallback clipped the last
+// text line / engagement bar on longer posts (clipping fix 2026-06-01). The
+// post.php postMessage height (handled below) sizes a post to its actual content
+// when FB reports it; until/unless it does, this taller fallback letterboxes a
+// long post instead of cropping it.
+const FB_FALLBACK_H = { video: 620, reel: 1040, post: 1100 };
 
 function FbEmbedCard({ card, onOpenFacebook }) {
   const embed = fbEmbedFor(card.source_url);
@@ -1730,36 +1736,35 @@ function FbEmbedCard({ card, onOpenFacebook }) {
         )}
       </div>
       <div className="hr-card-foot">
-        {/* Universal-lightbox build 2: the title doubles as the in-site expand
-            trigger. The grid tile stays the compact inline post.php embed
-            (above, untouched) — this only ADDS a click-to-expand path that opens
-            FacebookOverlay with a large, readable post/video. A dedicated foot
-            control (not a whole-tile click) is used because the inline iframe is
-            cross-origin and captures its own clicks; this keeps inline playback
-            fully interactive with zero regression. Falls back to a plain title
-            when no opener is threaded. */}
-        {onOpenFacebook ? (
-          <button
-            type="button"
-            className="hr-card-fb-expand"
-            onClick={() => onOpenFacebook(card)}
-            aria-label={`Expand post: ${card.title || "untitled"}`}
+        {/* FB cards: the post.php embed (show_text=true) already renders the
+            post's caption text AND its date inside the iframe, so the foot no
+            longer repeats them — that italic-title + date pair was shown twice
+            (redundant-foot fix 2026-06-01). What remains is the in-site expand
+            affordance and the always-present "Open on Facebook ↗" escape hatch —
+            neither is shown by the embed. The expand control is now icon+label
+            (it used to BE the caption text) so the lightbox entry point survives
+            without duplicating the caption. */}
+        <div className="hr-card-fb-actions">
+          {onOpenFacebook && (
+            <button
+              type="button"
+              className="hr-card-fb-expand"
+              onClick={() => onOpenFacebook(card)}
+              aria-label={`Expand post: ${card.title || "untitled"}`}
+            >
+              <span className="hr-card-fb-expand-icon" aria-hidden="true">⤢</span>
+              <span className="hr-card-fb-expand-label">Expand</span>
+            </button>
+          )}
+          <a
+            className="hr-card-fb-open"
+            href={card.source_url}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <span className="hr-card-title hr-card-title-sm">{card.title || "(untitled)"}</span>
-            <span className="hr-card-fb-expand-icon" aria-hidden="true">⤢</span>
-          </button>
-        ) : (
-          <div className="hr-card-title hr-card-title-sm">{card.title || "(untitled)"}</div>
-        )}
-        {card.post_date && <div className="hr-card-meta">{card.post_date}</div>}
-        <a
-          className="hr-card-fb-open"
-          href={card.source_url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Open on Facebook ↗
-        </a>
+            Open on Facebook ↗
+          </a>
+        </div>
         <ContentKindBadge card={card} />
       </div>
     </>

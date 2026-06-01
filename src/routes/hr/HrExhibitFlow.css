@@ -239,7 +239,13 @@
 }
 .hr-card-fbembed[data-fbkind="video"] .hr-card-video-vis { aspect-ratio: 16 / 9; }
 .hr-card-fbembed[data-fbkind="reel"]  .hr-card-video-vis { aspect-ratio: 9 / 16; }
-.hr-card-fbembed[data-fbkind="post"]  .hr-card-video-vis { aspect-ratio: 4 / 5; }
+/* Posts have NO fixed aspect (caption length varies) — a fixed 4/5 box was too
+   short and clipped taller posts. They now size to the inline measured/fallback
+   height set by FbEmbedCard (post.php postMessage height when FB reports it, a
+   tall never-crop fallback until then). A min-height floor only keeps the
+   pre-measurement placeholder visible; it never caps a taller post.
+   (clipping fix 2026-06-01) */
+.hr-card-fbembed[data-fbkind="post"]  .hr-card-video-vis { min-height: 320px; }
 .hr-fbembed-frame {
   /* Width-fill 2026-05-31: width/height/transform/transform-origin are set inline
      by FbEmbedCard (requested at ~tile width, scaled to fill). The old hardcoded
@@ -1634,10 +1640,20 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
 /* FB grid-tile "expand" trigger — the foot title becomes a button that opens
    FacebookOverlay. Button reset so it reads identically to the prior <div>
    title, plus a small ⤢ glyph signalling in-site expand. */
+/* FB card foot actions (2026-06-01 redundant-foot fix): the caption + date were
+   removed (the embed shows them), leaving the expand control and the escape-hatch
+   link stacked compactly. */
+.hr-card-fb-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+.hr-card-fb-actions .hr-card-fb-open { margin-top: 0; }
 .hr-card-fb-expand {
   display: inline-flex;
-  align-items: baseline;
-  gap: 6px;
+  align-items: center;
+  gap: 5px;
   background: transparent;
   border: none;
   padding: 0;
@@ -1652,7 +1668,17 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   font-size: 12px;
   transition: color 0.12s;
 }
-.hr-card-fb-expand:hover .hr-card-fb-expand-icon { color: var(--hr-gold-hi); }
+.hr-card-fb-expand-label {
+  font-family: var(--hr-sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--hr-gold-lo);
+  transition: color 0.15s;
+}
+.hr-card-fb-expand:hover .hr-card-fb-expand-icon,
+.hr-card-fb-expand:hover .hr-card-fb-expand-label { color: var(--hr-gold-hi); }
 
 .hr-album-ov {
   position: fixed;
