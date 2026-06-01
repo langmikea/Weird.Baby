@@ -1405,6 +1405,73 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   z-index: 2;
 }
 
+/* ─── YouTube lightbox (universal-lightbox build 1, 2026-05-31) ──────────────
+   Mirrors the .hr-gallery-ov shell: full-viewport INK backdrop, ✕ close,
+   centered stage. The stage holds a 16:9 responsive iframe clamped to the
+   viewport, plus a caption row carrying the "Watch on YouTube ↗" escape hatch
+   (comments live only on the watch page — scoping doc §3.1/§6.1). */
+.hr-yt-ov {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(5, 5, 5, 0.94);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  font-family: 'Geist', system-ui, -apple-system, sans-serif;
+}
+.hr-yt-ov-close {
+  position: absolute;
+  top: 14px; right: 18px;
+  background: transparent;
+  border: none;
+  color: var(--hr-gold);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.12s;
+}
+.hr-yt-ov-close:hover { color: var(--hr-gold-hi); }
+.hr-yt-ov-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: min(1100px, 92vw);
+}
+.hr-yt-ov-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 78vh;
+  background: #000;
+  border: 1px solid var(--hr-border);
+}
+.hr-yt-ov-iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.hr-yt-ov-cap { text-align: center; max-width: min(1100px, 92vw); }
+.hr-yt-ov-cap-title { color: var(--hr-gold-hi); font-size: 14px; }
+.hr-yt-ov-cap-meta {
+  color: var(--hr-gold-lo);
+  font-size: 12px;
+  margin-top: 4px;
+}
+.hr-yt-ov-link {
+  color: var(--hr-gold);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hr-gold-lo);
+  transition: color 0.12s;
+}
+.hr-yt-ov-link:hover { color: var(--hr-gold-hi); }
+
 .hr-album-ov {
   position: fixed;
   inset: 0;

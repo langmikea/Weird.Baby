@@ -1514,6 +1514,86 @@ function AlbumOverlay({ card, onClose }) {
   );
 }
 
+// ─── YouTube lightbox (universal-lightbox build 1, 2026-05-31) ──────────────
+// Clicking a YouTube artifact card opens this in-site overlay with an embedded
+// youtube-nocookie.com/embed player instead of navigating to a new browser tab.
+// Reuses the GalleryOverlay/AlbumOverlay shell contract verbatim: full-viewport
+// role="dialog", ✕ / backdrop / Escape close, body-scroll lock, and an open
+// state held at the HrExhibitFlow root ({openYouTube && …}). That conditional
+// render is also the player teardown — closing unmounts the iframe so the audio
+// stops (scoping doc §4.5 teardown discipline; no hidden-but-playing iframe).
+//
+// Comment ceiling (scoping doc §3.1 / §6.1): the embedded player is player-only.
+// There is NO supported parameter/API to render the YouTube comment thread
+// inside an embed — comments live only on the watch page. The "Watch on YouTube
+// ↗" link is therefore kept as the always-present escape hatch (comments + the
+// refused-embed fallback, since a cross-origin iframe gives no readable
+// load/error signal for an age-gated or embed-disabled video).
+const YT_ID_RE = /(?:[?&]v=|youtu\.be\/|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{6,})/;
+function youtubeIdFromUrl(url) {
+  if (typeof url !== "string") return null;
+  const m = YT_ID_RE.exec(url);
+  return m ? m[1] : null;
+}
+
+function YouTubeOverlay({ card, onClose }) {
+  const vid = youtubeIdFromUrl(card && card.source_url);
+
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  // Lock body scroll while the overlay is open (mirrors GalleryOverlay).
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+
+  const title = card.title || "video";
+  // youtube-nocookie reduces initial tracking (scoping doc §3.1). autoplay=1 is
+  // honored because the open is a user click (the gesture). rel=0 limits the
+  // related-video shelf; modestbranding trims the chrome.
+  const embedSrc = vid
+    ? `https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&rel=0&modestbranding=1`
+    : null;
+
+  return (
+    <div className="hr-yt-ov" role="dialog" aria-modal="true"
+         aria-label={title} onClick={onClose}>
+      <button className="hr-yt-ov-close" onClick={onClose} aria-label="Close video">✕</button>
+      <div className="hr-yt-ov-stage" onClick={(e) => e.stopPropagation()}>
+        <div className="hr-yt-ov-frame">
+          {embedSrc ? (
+            <iframe
+              className="hr-yt-ov-iframe"
+              src={embedSrc}
+              title={title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          ) : (
+            <MediaPlaceholder title={card.title} variant="large" />
+          )}
+        </div>
+        <div className="hr-yt-ov-cap">
+          <div className="hr-yt-ov-cap-title">{card.title || "(untitled)"}</div>
+          <div className="hr-yt-ov-cap-meta">
+            {card.post_date ? card.post_date + " · " : ""}
+            <a className="hr-yt-ov-link" href={card.source_url}
+               target="_blank" rel="noopener noreferrer">
+              Watch on YouTube ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── FB social-plugin embed (2026-05-31) ────────────────────────
 // Renders Facebook videos / reels / posts inline via the plugins/video.php and
 // plugins/post.php IFRAME endpoints. These need NO app token and NO FB JS SDK
@@ -1648,10 +1728,17 @@ function FbEmbedCard({ card }) {
   );
 }
 
-function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum }) {
+function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum, onOpenYouTube }) {
   const fbEmbed = card.source_platform === "facebook" ? fbEmbedFor(card.source_url) : null;
   const isFbEmbed = !!fbEmbed;
-  const isLink = !isFbEmbed && card.media_type === "link" && !!card.source_url;
+  // Universal-lightbox build 1: YouTube cards open the in-site player overlay
+  // instead of a new tab. Split off from the generic isLink so ONLY YouTube
+  // changes — reverbnation / other link cards keep the <a target="_blank">
+  // behavior untouched (scope discipline). A YouTube card whose URL has no
+  // parseable video id falls through to isLink → new-tab, a safe fallback.
+  const ytId = card.source_platform === "youtube" ? youtubeIdFromUrl(card.source_url) : null;
+  const isYouTube = !isFbEmbed && !!ytId;
+  const isLink = !isFbEmbed && !isYouTube && card.media_type === "link" && !!card.source_url;
   const isPhoto = !isFbEmbed && card.media_type === "photo" && !!card.primary_url;
   // Phase C of Audio Delivery (per brief §3.5 / §9.3): media_type='audio'
   // dispatches to AudioCard. Predicate keys on the single-token check
@@ -1671,7 +1758,7 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
   // pickSpan's wide-bias variant produced 2x-tall cards that broke the
   // "matching album art" aesthetic from the 2026-05-22 operator-lock.
   const isFbVideo = isFbEmbed && fbEmbed.kind === "video";
-  const { span_w: rolledSpan } = pickSpan(card.id || "", isLink || isPhoto || isGallery || isAlbum || isFbVideo);
+  const { span_w: rolledSpan } = pickSpan(card.id || "", isLink || isYouTube || isPhoto || isGallery || isAlbum || isFbVideo);
   const span_w = isAudio || (isFbEmbed && !isFbVideo) ? 1 : rolledSpan;
   const baseStyle = {
     ...spanStyle(span_w),
@@ -1681,6 +1768,7 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
   const className = ["hr-card", "card-fade-in",
     isFbEmbed ? "hr-card-fbembed" : null,
     isLink ? "hr-card-link" : null,
+    isYouTube ? "hr-card-link hr-card-youtube" : null,
     isPhoto ? "hr-card-photo" : null,
     isAudio ? "hr-card-audio" : null,
     isGallery ? "hr-card-gallery" : null,
@@ -1691,6 +1779,24 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
       <div className={className} style={baseStyle} data-fbkind={fbEmbed.kind}>
         <FbEmbedCard card={card} />
       </div>
+    );
+  }
+  if (isYouTube) {
+    // In-site player: render the same LinkCard tile (thumbnail + play triangle)
+    // but as a <button> that opens YouTubeOverlay at the root, rather than an
+    // <a target="_blank">. No "↗" external-arrow — it no longer leaves the site;
+    // the play triangle signals in-site playback. The "Watch on YouTube ↗"
+    // escape hatch lives inside the overlay.
+    return (
+      <button
+        type="button"
+        className={className}
+        style={{ ...baseStyle, cursor: "pointer", textAlign: "left", font: "inherit", color: "inherit", padding: 0 }}
+        onClick={() => onOpenYouTube && onOpenYouTube(card)}
+        aria-label={`Play video: ${card.title || "untitled"}`}
+      >
+        <LinkCard card={card} />
+      </button>
     );
   }
   if (isLink) {
@@ -1776,7 +1882,7 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
 }
 
 // ─── PAGE / GRID — ported from v28 ──────────────────────────────────────────
-function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum }) {
+function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum, onOpenYouTube }) {
   // Phase C: filterKey is intentionally NOT included in audio cards' react
   // keys. The operator-locked rule (2026-05-22) requires that filter
   // changes never touch playback state. Including filterKey here would
@@ -1828,6 +1934,7 @@ function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpe
               setPlayingAudioId={setPlayingAudioId}
               onOpenGallery={onOpenGallery}
               onOpenAlbum={onOpenAlbum}
+              onOpenYouTube={onOpenYouTube}
             />
           );
         })}
@@ -2405,6 +2512,11 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   // RWTH parity: album overlay. Holds the open album container card (or null),
   // lifted to the root so the modal layers above the deck and survives reflows.
   const [openAlbum, setOpenAlbum] = useState(null);
+  // Universal-lightbox build 1: YouTube player overlay. Holds the open YouTube
+  // card (or null), lifted to the root so the modal layers above the deck and
+  // survives grid reflows. {openYouTube && …} also tears down the iframe player
+  // on close (✕ / backdrop / Escape) so audio stops.
+  const [openYouTube, setOpenYouTube] = useState(null);
   // MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
   // setKalState is wired into clear() so the dormant state stays in sync;
   // kalState is intentionally not read in v1.
@@ -2599,6 +2711,9 @@ export default function HrExhibitFlow({ activeAlbumId }) {
       {openAlbum && (
         <AlbumOverlay card={openAlbum} onClose={() => setOpenAlbum(null)} />
       )}
+      {openYouTube && (
+        <YouTubeOverlay card={openYouTube} onClose={() => setOpenYouTube(null)} />
+      )}
       {/* MOBILE FALLBACK — pill columns render inline above the grid on
           narrow viewports. CSS hides this on desktop and hides the deck
           on mobile. */}
@@ -2625,6 +2740,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
               setPlayingAudioId={setPlayingAudioId}
               onOpenGallery={setOpenGallery}
               onOpenAlbum={setOpenAlbum}
+              onOpenYouTube={setOpenYouTube}
             />
           </div>
         </div>
