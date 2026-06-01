@@ -1642,7 +1642,7 @@ function fbEmbedDims(card) {
 // posted a measured height. Erring tall letterboxes; never crops.
 const FB_FALLBACK_H = { video: 620, reel: 1040, post: 720 };
 
-function FbEmbedCard({ card }) {
+function FbEmbedCard({ card, onOpenFacebook }) {
   const embed = fbEmbedFor(card.source_url);
   const kind = embed ? embed.kind : "post";
   const [visRef, visW] = useElementWidth();
@@ -1712,7 +1712,27 @@ function FbEmbedCard({ card }) {
         )}
       </div>
       <div className="hr-card-foot">
-        <div className="hr-card-title hr-card-title-sm">{card.title || "(untitled)"}</div>
+        {/* Universal-lightbox build 2: the title doubles as the in-site expand
+            trigger. The grid tile stays the compact inline post.php embed
+            (above, untouched) — this only ADDS a click-to-expand path that opens
+            FacebookOverlay with a large, readable post/video. A dedicated foot
+            control (not a whole-tile click) is used because the inline iframe is
+            cross-origin and captures its own clicks; this keeps inline playback
+            fully interactive with zero regression. Falls back to a plain title
+            when no opener is threaded. */}
+        {onOpenFacebook ? (
+          <button
+            type="button"
+            className="hr-card-fb-expand"
+            onClick={() => onOpenFacebook(card)}
+            aria-label={`Expand post: ${card.title || "untitled"}`}
+          >
+            <span className="hr-card-title hr-card-title-sm">{card.title || "(untitled)"}</span>
+            <span className="hr-card-fb-expand-icon" aria-hidden="true">⤢</span>
+          </button>
+        ) : (
+          <div className="hr-card-title hr-card-title-sm">{card.title || "(untitled)"}</div>
+        )}
         {card.post_date && <div className="hr-card-meta">{card.post_date}</div>}
         <a
           className="hr-card-fb-open"
@@ -1728,7 +1748,122 @@ function FbEmbedCard({ card }) {
   );
 }
 
-function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum, onOpenYouTube }) {
+// ─── Facebook lightbox (universal-lightbox build 2, 2026-06-01) ─────────────
+// Clicking the expand affordance on a Facebook artifact card opens this in-site
+// overlay with a LARGE, readable plugins/post.php embed — the same embed
+// mechanism FbEmbedCard uses inline in the grid, but rendered at a comfortable
+// reading width (FB's 750px plugin max) with a vertical scroll region so a tall
+// post/video is fully readable in-site. The grid tile stays the compact inline
+// embed; this is purely additive (scoping doc §4.3 Option B / build-2 kickoff).
+//
+// Reuses the GalleryOverlay/AlbumOverlay/YouTubeOverlay shell contract verbatim:
+// full-viewport role="dialog", ✕ / backdrop / Escape close, body-scroll lock,
+// and an open state held at the HrExhibitFlow root ({openFacebook && …}). That
+// conditional render is also the player teardown — closing unmounts the iframe
+// so any playing FB video's audio stops (scoping doc §4.5).
+//
+// Comment ceiling (scoping doc §3.2 / §6.1): the post plugin renders the post
+// (text + media) but NOT the comment thread or live engagement — no token-free
+// FB plugin does. The "Open on Facebook ↗" link is kept as the always-present
+// escape hatch (comments + the logged-out / refused-embed fallback, since a
+// cross-origin iframe gives no readable load/error signal).
+//
+// Logged-out caveat (scoping doc §3.2 / §6.2): FB renders public content
+// differently for a logged-out visitor than for the operator's logged-in
+// browser, so live-verify must be done in an incognito window.
+function FacebookOverlay({ card, onClose }) {
+  const embed = fbEmbedFor(card && card.source_url);
+  const kind = embed ? embed.kind : "post";
+  const [stageRef, stageW] = useElementWidth();
+  const frameRef = useRef(null);
+  const [postedH, setPostedH] = useState(0);
+
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  // Lock body scroll while the overlay is open (mirrors YouTubeOverlay).
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+
+  // post.php reports its rendered height via postMessage; mirror FbEmbedCard's
+  // origin-checked listener so the frame grows to the full post height.
+  useEffect(() => {
+    function onMessage(e) {
+      let host = "";
+      try { host = new URL(e.origin).hostname; } catch { return; }
+      if (host !== "facebook.com" && host !== "www.facebook.com" && !host.endsWith(".facebook.com")) return;
+      const win = frameRef.current && frameRef.current.contentWindow;
+      if (win && e.source && e.source !== win) return;
+      let d = e.data;
+      if (typeof d === "string") { try { d = JSON.parse(d); } catch { return; } }
+      if (!d || typeof d !== "object") return;
+      const h = Number(
+        d.height ?? d.frameHeight ?? (d.data && d.data.height) ?? (d.params && d.params.height)
+      );
+      if (Number.isFinite(h) && h > 40) setPostedH(Math.ceil(h));
+    }
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, []);
+
+  // Request post.php at the stage width (clamped to FB's 350–750 plugin range,
+  // 10px-quantized to keep the src stable across re-renders) so the embed
+  // renders crisp at a large, readable size — no residual scaling needed, since
+  // we control the stage width directly. Height comes from postMessage; a
+  // generous per-kind fallback letterboxes (never crops) until FB reports.
+  const reqW = Math.min(750, Math.max(350, Math.round((stageW || 500) / 10) * 10));
+  const fallbackH = Math.round((FB_FALLBACK_H[kind] || FB_FALLBACK_H.post) * (500 / reqW));
+  const frameH = postedH || fallbackH;
+  const src = embed ? fbPluginSrc("post.php", embed.href, true, reqW) : null;
+  const title = card.title || "Facebook post";
+
+  return (
+    <div className="hr-fb-ov" role="dialog" aria-modal="true"
+         aria-label={title} onClick={onClose}>
+      <button className="hr-fb-ov-close" onClick={onClose} aria-label="Close post">✕</button>
+      <div className="hr-fb-ov-stage" ref={stageRef} onClick={(e) => e.stopPropagation()}>
+        <div className="hr-fb-ov-scroll">
+          <div className="hr-fb-ov-frame" style={{ height: `${frameH}px` }}>
+            {src ? (
+              <iframe
+                ref={frameRef}
+                className="hr-fb-ov-iframe"
+                src={src}
+                style={{ width: `${reqW}px`, height: `${frameH}px` }}
+                title={title}
+                scrolling="no"
+                frameBorder="0"
+                allowFullScreen
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+            ) : (
+              <MediaPlaceholder title={card.title} variant="large" />
+            )}
+          </div>
+        </div>
+        <div className="hr-fb-ov-cap">
+          <div className="hr-fb-ov-cap-title">{card.title || "(untitled)"}</div>
+          <div className="hr-fb-ov-cap-meta">
+            {card.post_date ? card.post_date + " · " : ""}
+            <a className="hr-fb-ov-link" href={card.source_url}
+               target="_blank" rel="noopener noreferrer">
+              Open on Facebook ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum, onOpenYouTube, onOpenFacebook }) {
   const fbEmbed = card.source_platform === "facebook" ? fbEmbedFor(card.source_url) : null;
   const isFbEmbed = !!fbEmbed;
   // Universal-lightbox build 1: YouTube cards open the in-site player overlay
@@ -1777,7 +1912,7 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
   if (isFbEmbed) {
     return (
       <div className={className} style={baseStyle} data-fbkind={fbEmbed.kind}>
-        <FbEmbedCard card={card} />
+        <FbEmbedCard card={card} onOpenFacebook={onOpenFacebook} />
       </div>
     );
   }
@@ -1882,7 +2017,7 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
 }
 
 // ─── PAGE / GRID — ported from v28 ──────────────────────────────────────────
-function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum, onOpenYouTube }) {
+function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum, onOpenYouTube, onOpenFacebook }) {
   // Phase C: filterKey is intentionally NOT included in audio cards' react
   // keys. The operator-locked rule (2026-05-22) requires that filter
   // changes never touch playback state. Including filterKey here would
@@ -1935,6 +2070,7 @@ function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpe
               onOpenGallery={onOpenGallery}
               onOpenAlbum={onOpenAlbum}
               onOpenYouTube={onOpenYouTube}
+              onOpenFacebook={onOpenFacebook}
             />
           );
         })}
@@ -2517,6 +2653,11 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   // survives grid reflows. {openYouTube && …} also tears down the iframe player
   // on close (✕ / backdrop / Escape) so audio stops.
   const [openYouTube, setOpenYouTube] = useState(null);
+  // Universal-lightbox build 2: Facebook post/video overlay. Holds the open FB
+  // card (or null), lifted to the root so the modal layers above the deck and
+  // survives grid reflows. {openFacebook && …} also tears down the post.php
+  // iframe on close (✕ / backdrop / Escape) so any playing FB video stops.
+  const [openFacebook, setOpenFacebook] = useState(null);
   // MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
   // setKalState is wired into clear() so the dormant state stays in sync;
   // kalState is intentionally not read in v1.
@@ -2714,6 +2855,9 @@ export default function HrExhibitFlow({ activeAlbumId }) {
       {openYouTube && (
         <YouTubeOverlay card={openYouTube} onClose={() => setOpenYouTube(null)} />
       )}
+      {openFacebook && (
+        <FacebookOverlay card={openFacebook} onClose={() => setOpenFacebook(null)} />
+      )}
       {/* MOBILE FALLBACK — pill columns render inline above the grid on
           narrow viewports. CSS hides this on desktop and hides the deck
           on mobile. */}
@@ -2741,6 +2885,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
               onOpenGallery={setOpenGallery}
               onOpenAlbum={setOpenAlbum}
               onOpenYouTube={setOpenYouTube}
+              onOpenFacebook={setOpenFacebook}
             />
           </div>
         </div>
