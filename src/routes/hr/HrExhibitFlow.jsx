@@ -1174,6 +1174,163 @@ function useElementWidth() {
   return [ref, width];
 }
 
+// ─── Masonry row-span (RC-C fix, 2026-06-01) ────────────────────────────────
+// The artifact grid is a masonry: each card spans exactly its own content
+// height so cards pack with no row-stretch and no gutters (see the
+// .hr-artifact-grid block in HrExhibitFlow.css — 1px implicit row tracks,
+// align-items:start). This hook measures each card's natural (content) height
+// and sets grid-row-end = span (height + GAP), so the card reserves exactly its
+// height plus the 14px vertical gap.
+//
+// Why this fixes the FB-post clip/void: a post self-sizes ASYNCHRONOUSLY — FB
+// reports its content height via postMessage well after first paint (postedH in
+// FbEmbedCard), and the embed's iframe is position:absolute (out of flow) inside
+// an overflow:hidden vis box, so the iframe's own growth never reaches the card's
+// measured height directly — the card only grows when React writes the new vis
+// height in response to that postMessage. The span must therefore react to the
+// embed's reported height, not guess it ahead of time. We re-measure on EVERY
+// plausible trigger and coalesce them into one post-layout pass:
+//
+//   1. per-card ResizeObserver — any card whose measured box changes;
+//   2. the FB postMessage height event itself — authoritative + async, and the
+//      reliable signal even if the RO coalesces/drops a notification under the
+//      mount-time burst (all FB cards get their width + start posting heights in
+//      the same few frames — exactly when "ResizeObserver loop … undelivered
+//      notifications" strands a card with its earlier, too-short span, which is
+//      the overlap this fixes);
+//   3. nested iframe / <img> load (capture phase — load doesn't bubble) — FB
+//      iframes, YouTube thumbnails, gallery/album/photo images that size late;
+//   4. window resize — column width changes => every card's height changes;
+//   5. a few settle sweeps — FB embeds resize multiple times as their own
+//      images/fonts load, sometimes with no further event we can hook on the
+//      final one; the delayed passes guarantee the last height is captured.
+//
+// No reflow loop: align-items:start means writing grid-row-end never changes a
+// card's own border-box height, and we write a span only when it actually
+// changes — so a re-measure can never grow the thing we just measured. rAF
+// coalescing reads getBoundingClientRect AFTER the browser settles the reflow a
+// trigger caused, never a stale (pre-growth) height. useLayoutEffect runs the
+// first pass pre-paint, so the CSS default span never flashes. Re-runs whenever
+// the matched set changes (cards added/removed by filtering).
+const MASONRY_ROW_GAP = 14; // px — matches column-gap; baked into each span
+// Settle watcher (RC-D fix, 2026-06-01): the old approach re-measured at four
+// FIXED delays (120/400/900/1800 ms) and otherwise leaned on the per-card
+// ResizeObserver. That captured a NON-FINAL height for FB embeds: FB posts a
+// height, the card grows, then FB collapses to its settled height (images/video
+// thumbnails load) AFTER 1800 ms — and under the 16-iframe mount burst the RO
+// coalesces/drops notifications ("ResizeObserver loop … undelivered
+// notifications"), so no trigger fires on that late change. The stranded span
+// was usually TOO TALL (FB shrank after the last sweep → trailing void inside
+// the cell → grid-auto-flow:dense can't backfill an occupied-but-empty cell →
+// jaggies); for the occasional card that grew late it was TOO SHORT (→ clip,
+// e.g. the column-3 half-line crop). Fix: poll until the layout is QUIESCENT
+// instead of guessing when FB is done. We re-measure every POLL_MS; any pass
+// that changes a span re-arms the window; once spans hold steady for
+// STABLE_PASSES consecutive polls we stop. A late event (postMessage / RO /
+// load / resize) re-arms the watcher. Bounded by MAX_MS from mount so an
+// animated / never-settling embed can't poll forever. Cheap: a few rect reads
+// per pass, only during the initial settle, then idle.
+const MASONRY_SETTLE_POLL_MS = 150;     // re-measure cadence while settling
+const MASONRY_SETTLE_STABLE_PASSES = 3; // consecutive no-change polls => settled
+const MASONRY_SETTLE_MAX_MS = 15000;    // absolute cap on the settle watch
+function useMasonryRowSpan(dep) {
+  const gridRef = useRef(null);
+  useLayoutEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return undefined;
+    // Write a card's span ONLY when it changes — avoids needless style writes
+    // and any chance of feeding the ResizeObserver. Returns the rendered height.
+    const applyOne = (card) => {
+      const h = Math.ceil(card.getBoundingClientRect().height);
+      if (h <= 0) return false;
+      const next = `span ${h + MASONRY_ROW_GAP}`;
+      if (card.style.gridRowEnd !== next) { card.style.gridRowEnd = next; return true; }
+      return false;
+    };
+    // Returns whether ANY card's span changed this pass (drives quiescence).
+    const applyAll = () => {
+      let changed = false;
+      for (const card of grid.children) { if (applyOne(card)) changed = true; }
+      return changed;
+    };
+    // Quiescence settle watcher: poll until spans stop changing, then stop.
+    // Re-armed by every late trigger so FB's post-1800ms settle is always caught.
+    let pollId = 0;
+    let stablePasses = 0;
+    const clock = () => (typeof performance !== "undefined" ? performance.now() : Date.now());
+    const startedAt = clock();
+    const tick = () => {
+      pollId = 0;
+      if (applyAll()) stablePasses = 0; else stablePasses++;
+      // FB posts settle on their own async schedule and the decisive late
+      // change can fire NO trigger we observe (RO coalesced in the 16-iframe
+      // mount burst, FB's cross-origin internal 'load' never reaching our
+      // capture listener, or a silent reflow with no postMessage). Geometry
+      // polling is the only event-independent catch, so while a post embed is
+      // present we keep sampling to MAX_MS regardless of the stable-pass count
+      // (fixes the column-3 half-line crop: a stale-short span lets the opaque
+      // INK_CARD neighbor below over-paint the post's last line). Read-mostly
+      // and bounded; applyOne writes only on change so this can't loop.
+      const keepForFbPost = !!grid.querySelector('[data-fbkind="post"]');
+      if ((keepForFbPost || stablePasses < MASONRY_SETTLE_STABLE_PASSES) && clock() - startedAt < MASONRY_SETTLE_MAX_MS) {
+        pollId = setTimeout(tick, MASONRY_SETTLE_POLL_MS);
+      }
+    };
+    const armSettle = () => {
+      stablePasses = 0; // a fresh trigger means we are not settled yet
+      if (!pollId && clock() - startedAt < MASONRY_SETTLE_MAX_MS) {
+        pollId = setTimeout(tick, MASONRY_SETTLE_POLL_MS);
+      }
+    };
+    // Coalesce every event burst into ONE rAF-batched, post-layout pass, and
+    // (re)arm the settle watcher so a late / silent FB resize is still captured.
+    let rafId = 0;
+    const schedule = () => {
+      armSettle();
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => { rafId = 0; if (applyAll()) stablePasses = 0; });
+    };
+    // First pass synchronously (pre-paint, no default-span flash), then a rAF
+    // pass to catch the embeds' width-driven first render; schedule() also arms
+    // the settle watch that polls to the true final (settled) height.
+    applyAll();
+    schedule();
+    // 1) per-card ResizeObserver
+    let ro;
+    if (typeof ResizeObserver !== "undefined") {
+      ro = new ResizeObserver(schedule);
+      for (const card of grid.children) ro.observe(card);
+    }
+    // 2) FB embed height event — react to the reported height directly.
+    const onMessage = (e) => {
+      let host = "";
+      try { host = new URL(e.origin).hostname; } catch { return; }
+      if (host !== "facebook.com" && host !== "www.facebook.com" && !host.endsWith(".facebook.com")) return;
+      let d = e.data;
+      if (typeof d === "string") { try { d = JSON.parse(d); } catch { return; } }
+      if (!d || typeof d !== "object") return;
+      const h = Number(d.height ?? d.frameHeight ?? (d.data && d.data.height) ?? (d.params && d.params.height));
+      if (Number.isFinite(h) && h > 40) schedule();
+    };
+    window.addEventListener("message", onMessage);
+    // 3) nested iframe / image loads (capture phase — load doesn't bubble)
+    grid.addEventListener("load", schedule, true);
+    // 4) window resize
+    window.addEventListener("resize", schedule);
+    // 5) settle watch — armed by the initial schedule() above and re-armed by
+    //    every trigger; replaces the old fixed-delay sweep list.
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      if (pollId) clearTimeout(pollId);
+      if (ro) ro.disconnect();
+      window.removeEventListener("message", onMessage);
+      grid.removeEventListener("load", schedule, true);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [dep]);
+  return gridRef;
+}
+
 // "Broken image" mark in currentColor: a framed thumbnail with a diagonal
 // strike. Inline SVG so font/icon loading can't shift or hide the affordance.
 function BrokenImageGlyph({ size = 26 }) {
@@ -1659,7 +1816,7 @@ function fbEmbedDims(card) {
 // long post instead of cropping it.
 const FB_FALLBACK_H = { video: 620, reel: 1040, post: 1100 };
 
-function FbEmbedCard({ card, onOpenFacebook }) {
+function FbEmbedCard({ card }) {
   const embed = fbEmbedFor(card.source_url);
   const kind = embed ? embed.kind : "post";
   const [visRef, visW] = useElementWidth();
@@ -1691,8 +1848,27 @@ function FbEmbedCard({ card, onOpenFacebook }) {
   const tileW = visW || 0;
   const reqW = Math.min(750, Math.max(350, Math.round(tileW / 10) * 10 || 350));
   const scale = tileW > 0 ? tileW / reqW : 1;
+  // POSTS — get out of the embed's way (2026-06-01). A post has no fixed aspect,
+  // and post.php self-sizes its own content; the only correct height is the one
+  // FB reports via postMessage (postedH). Use it verbatim so the frame is exactly
+  // as tall as its content — no bottom clip, no black gap. We impose no height of
+  // our own. Until/unless a height arrives, show a modest graceful loading box
+  // (placeholder + foot affordances visible), NOT the old ~1100px void that both
+  // clipped at FB's internal cutoff and left dead space below. (Operator floor:
+  // prefer the embed's native self-sizing over our custom sizing.)
+  const isPost = kind === "post";
+  // Frame px at reqW; displayed height ≈ this × scale (~360–400px at a 1-col
+  // tile). The postMessage height replaces it the moment FB reports, growing the
+  // box to the exact content.
+  const POST_LOADING_H = 480;
+  // VIDEO / REEL — genuinely fixed-aspect media; left on their existing per-kind
+  // fallback (and export dims when present). Untouched by the posts fix.
   const fallbackH = Math.round((FB_FALLBACK_H[kind] || FB_FALLBACK_H.post) * (500 / reqW));
-  const effH = dims ? Math.round((reqW * dims.h) / dims.w) : (postedH || fallbackH);
+  const effH = dims
+    ? Math.round((reqW * dims.h) / dims.w)
+    : isPost
+      ? (postedH || POST_LOADING_H)
+      : (postedH || fallbackH);
   const src = embed ? fbPluginSrc("post.php", embed.href, true, reqW) : null;
   const visStyle = {};
   if (dims) {
@@ -1735,38 +1911,17 @@ function FbEmbedCard({ card, onOpenFacebook }) {
           />
         )}
       </div>
-      <div className="hr-card-foot">
-        {/* FB cards: the post.php embed (show_text=true) already renders the
-            post's caption text AND its date inside the iframe, so the foot no
-            longer repeats them — that italic-title + date pair was shown twice
-            (redundant-foot fix 2026-06-01). What remains is the in-site expand
-            affordance and the always-present "Open on Facebook ↗" escape hatch —
-            neither is shown by the embed. The expand control is now icon+label
-            (it used to BE the caption text) so the lightbox entry point survives
-            without duplicating the caption. */}
-        <div className="hr-card-fb-actions">
-          {onOpenFacebook && (
-            <button
-              type="button"
-              className="hr-card-fb-expand"
-              onClick={() => onOpenFacebook(card)}
-              aria-label={`Expand post: ${card.title || "untitled"}`}
-            >
-              <span className="hr-card-fb-expand-icon" aria-hidden="true">⤢</span>
-              <span className="hr-card-fb-expand-label">Expand</span>
-            </button>
-          )}
-          <a
-            className="hr-card-fb-open"
-            href={card.source_url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Open on Facebook ↗
-          </a>
-        </div>
-        <ContentKindBadge card={card} />
-      </div>
+      {/* No foot on FB cards (redundant-foot removal, 2026-06-01). The
+          post.php embed (show_text=true) renders the caption + date and
+          provides its own interaction (Share, and the post links through to
+          Facebook), so the "⤢ Expand" control and the "Open on Facebook ↗"
+          link were redundant clutter and are removed — along with the
+          content-kind chip, per operator direction. Dropping the foot also
+          removes the black foot region that read as a void below the white
+          embed and lets the card height settle to exactly the embed height
+          (masonry measures the card box; with the foot gone, box = embed).
+          The in-site FB lightbox is retired with the Expand control
+          (FacebookOverlay is mothballed below — see its eslint-disable). */}
     </>
   );
 }
@@ -1794,6 +1949,14 @@ function FbEmbedCard({ card, onOpenFacebook }) {
 // Logged-out caveat (scoping doc §3.2 / §6.2): FB renders public content
 // differently for a logged-out visitor than for the operator's logged-in
 // browser, so live-verify must be done in an incognito window.
+//
+// MOTHBALLED (2026-06-01): the FB card foot — the only entry point — was
+// removed (operator: the embed already provides Share + link-through, the
+// footer was redundant clutter). This component is intentionally not rendered;
+// it is preserved for revival (restore an entry affordance + open state + the
+// {openFacebook && …} render at the root). Kept out of the dead-code lint via
+// the disable below.
+// eslint-disable-next-line no-unused-vars
 function FacebookOverlay({ card, onClose }) {
   const embed = fbEmbedFor(card && card.source_url);
   const kind = embed ? embed.kind : "post";
@@ -1958,7 +2121,7 @@ function PhotoOverlay({ card, onClose }) {
   );
 }
 
-function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum, onOpenYouTube, onOpenFacebook, onOpenPhoto }) {
+function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum, onOpenYouTube, onOpenPhoto }) {
   const fbEmbed = card.source_platform === "facebook" ? fbEmbedFor(card.source_url) : null;
   const isFbEmbed = !!fbEmbed;
   // Universal-lightbox build 1: YouTube cards open the in-site player overlay
@@ -2014,7 +2177,7 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
   if (isFbEmbed) {
     return (
       <div className={className} style={baseStyle} data-fbkind={fbEmbed.kind}>
-        <FbEmbedCard card={card} onOpenFacebook={onOpenFacebook} />
+        <FbEmbedCard card={card} />
       </div>
     );
   }
@@ -2125,13 +2288,15 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
 }
 
 // ─── PAGE / GRID — ported from v28 ──────────────────────────────────────────
-function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum, onOpenYouTube, onOpenFacebook, onOpenPhoto }) {
+function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum, onOpenYouTube, onOpenPhoto }) {
   // Phase C: filterKey is intentionally NOT included in audio cards' react
   // keys. The operator-locked rule (2026-05-22) requires that filter
   // changes never touch playback state. Including filterKey here would
   // remount every card on any pill toggle, killing any playing audio.
   // The card.id alone is stable across filter reflows.
   const filterKey = useMemo(() => matched.map(c => c.id).join(","), [matched]);
+  // Masonry: re-pack row-spans whenever the matched set changes (RC-C fix).
+  const gridRef = useMasonryRowSpan(filterKey);
   return (
     <>
       <div className="hr-page-header">
@@ -2161,7 +2326,7 @@ function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpe
           <span className="hr-panel-count-total"> of {totalCount}</span>
         </span>
       </div>
-      <div className="hr-artifact-grid">
+      <div className="hr-artifact-grid" ref={gridRef}>
         {matched.map(card => {
           // Audio cards key on id ONLY (stable across filter reflows) so
           // they don't remount and interrupt playback. Non-audio cards
@@ -2178,7 +2343,6 @@ function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpe
               onOpenGallery={onOpenGallery}
               onOpenAlbum={onOpenAlbum}
               onOpenYouTube={onOpenYouTube}
-              onOpenFacebook={onOpenFacebook}
               onOpenPhoto={onOpenPhoto}
             />
           );
@@ -2441,7 +2605,7 @@ const SEED_ENTRIES = [
     fact1: "Played this for my therapist. She asked me to play it again. That's all I need to say about it.",
     up: 10, dn: 0, voted: null, mine: false, undoTimer: null },
   { id: 9, date: "2026-03-01", handle: "crookedhome25", ctx: "'94'", era: "solo",
-    fact1: "Opening Crooked Home with a year as a title — that's a statement. You know right away this one is going to cost him something.",
+    fact1: "Opening Crooked Home with a year as a title ΓÇö that's a statement. You know right away this one is going to cost him something.",
     up: 5, dn: 0, voted: null, mine: false, undoTimer: null },
   { id: 10, date: "2025-07-20", handle: "violet_lemke_fan", ctx: "Violet Lemke cover", era: "solo",
     fact1: "Found Hunter Root through Violet Lemke's cover. Then I found the original and it ruined me. Now I listen to both.",
@@ -2479,7 +2643,7 @@ function JournalContent({ prompts, eraFilter }) {
   // setState-in-effect is intentional here: the weighted order depends on
   // Math.random() (we shuffle), so useMemo would re-roll on every render.
   // We compute once whenever filtered.length / eraFilter changes. The
-  // dependency on `filtered.length` (not `filtered`) is also intentional —
+  // dependency on `filtered.length` (not `filtered`) is also intentional ΓÇö
   // we don't want to rebuild when an entry's vote count flips.
   const [weighted, setWeighted] = useState([]);
   useEffect(() => {
@@ -2639,14 +2803,14 @@ function JournalContent({ prompts, eraFilter }) {
             <button
               className="hr-jnl-btn"
               onClick={() => setFeedIdx(prev => (prev - 1 + feedOrder.length) % feedOrder.length)}
-            >‹</button>
+            >ΓÇ╣</button>
             <span className="hr-jnl-counter">
               {(feedIdx % feedOrder.length) + 1} / {feedOrder.length}
             </span>
             <button
               className="hr-jnl-btn"
               onClick={() => setFeedIdx(prev => (prev + 1) % feedOrder.length)}
-            >›</button>
+            >ΓÇ║</button>
           </div>
         )}
       </div>
@@ -2654,7 +2818,7 @@ function JournalContent({ prompts, eraFilter }) {
   );
 }
 
-// ─── AUDIT STRIP — O12: dev-only ────────────────────────────────────────────
+// ΓöÇΓöÇΓöÇ AUDIT STRIP ΓÇö O12: dev-only ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 function _mkSel(groups) {
   const out = {};
   HR_DIMENSIONS.forEach(({ key }) => { out[key] = new Set(); });
@@ -2663,7 +2827,7 @@ function _mkSel(groups) {
 }
 function _runMatch(sel) { return ARTIFACTS.filter(i => matchFilter(i, sel)).length; }
 
-// Audit assertions are written generically against the v5 tag-shape — they
+// Audit assertions are written generically against the v5 tag-shape ΓÇö they
 // use `tags[group]?.includes(slug)` so they're correct against any artifact
 // set without hardcoding HR-specific namespaces. AuditStrip remains dev-only
 // and is not rendered; the function is preserved for revival.
@@ -2675,9 +2839,9 @@ function _itemCarries(item, group, slug) {
 function buildAuditResults() {
   const N = ARTIFACTS.length;
   const tests = [];
-  // 1. all off → full catalog
+  // 1. all off ΓåÆ full catalog
   const t1 = _runMatch(_mkSel({}));
-  tests.push({ id: 1, name: "all off → full catalog", expected: N, actual: t1, pass: t1 === N });
+  tests.push({ id: 1, name: "all off ΓåÆ full catalog", expected: N, actual: t1, pass: t1 === N });
   // Tests 2-4 sample the first discovered dimension; if no dimensions exist
   // (e.g., before the first export populates the exhibit JSON), the sample
   // tests are reported as trivially passing.
@@ -2720,13 +2884,13 @@ function AuditStrip() {
       title="HR phase 1.5b sanity audit"
     >
       <div style={{ fontWeight: 600, textTransform: "uppercase" }}>
-        hr audit · {allPass ? "ALL PASS" : "FAIL"} · {tests.filter(t => t.pass).length}/{tests.length} · catalog={catalogSize} {open ? "▾" : "▸"}
+        hr audit ┬╖ {allPass ? "ALL PASS" : "FAIL"} ┬╖ {tests.filter(t => t.pass).length}/{tests.length} ┬╖ catalog={catalogSize} {open ? "Γû╛" : "Γû╕"}
       </div>
       {open && (
         <div style={{ marginTop: "6px", fontSize: "10.5px", lineHeight: 1.5 }}>
           {tests.map(t => (
             <div key={t.id} style={{ color: t.pass ? "#cde1bd" : "#f3c2c2" }}>
-              {t.pass ? "✓" : "✗"} #{t.id} {t.name}
+              {t.pass ? "Γ£ô" : "Γ£ù"} #{t.id} {t.name}
               <span style={{ opacity: 0.75, marginLeft: "6px" }}>exp={t.expected} got={t.actual}</span>
             </div>
           ))}
@@ -2736,7 +2900,7 @@ function AuditStrip() {
   );
 }
 
-// ─── ROOT — HrExhibitFlow component, exported for Exhibit.jsx line 908 ──────
+// ΓöÇΓöÇΓöÇ ROOT ΓÇö HrExhibitFlow component, exported for Exhibit.jsx line 908 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 export default function HrExhibitFlow({ activeAlbumId }) {
   // activeAlbumId is accepted for prop compatibility with Exhibit.jsx but
   // is not consumed by the deck in v1. Future tabs / filters may key off
@@ -2752,25 +2916,25 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   const [playingAudioId, setPlayingAudioId] = useState(null);
   // Phase 3: gallery lightbox. Holds the open gallery container card (or null).
   // Lifted to the root so the overlay layers above the deck/grid and survives
-  // grid reflows. Closed via ✕ / backdrop / Escape (see GalleryOverlay).
+  // grid reflows. Closed via Γ£ò / backdrop / Escape (see GalleryOverlay).
   const [openGallery, setOpenGallery] = useState(null);
   // RWTH parity: album overlay. Holds the open album container card (or null),
   // lifted to the root so the modal layers above the deck and survives reflows.
   const [openAlbum, setOpenAlbum] = useState(null);
   // Universal-lightbox build 1: YouTube player overlay. Holds the open YouTube
   // card (or null), lifted to the root so the modal layers above the deck and
-  // survives grid reflows. {openYouTube && …} also tears down the iframe player
-  // on close (✕ / backdrop / Escape) so audio stops.
+  // survives grid reflows. {openYouTube && ΓÇª} also tears down the iframe player
+  // on close (Γ£ò / backdrop / Escape) so audio stops.
   const [openYouTube, setOpenYouTube] = useState(null);
   // Universal-lightbox build 2: Facebook post/video overlay. Holds the open FB
   // card (or null), lifted to the root so the modal layers above the deck and
-  // survives grid reflows. {openFacebook && …} also tears down the post.php
-  // iframe on close (✕ / backdrop / Escape) so any playing FB video stops.
+  // survives grid reflows. {openFacebook && ΓÇª} also tears down the post.php
+  // iframe on close (Γ£ò / backdrop / Escape) so any playing FB video stops.
   const [openFacebook, setOpenFacebook] = useState(null);
   // Universal-lightbox build 4: photo overlay (the single Instagram card today).
   // Holds the open photo card (or null), lifted to the root so the modal layers
-  // above the deck and survives grid reflows. {openPhoto && …} unmounts the
-  // overlay on close (✕ / backdrop / Escape); the self-hosted image needs no
+  // above the deck and survives grid reflows. {openPhoto && ΓÇª} unmounts the
+  // overlay on close (Γ£ò / backdrop / Escape); the self-hosted image needs no
   // player teardown (no iframe/audio), unlike YouTube/Facebook.
   const [openPhoto, setOpenPhoto] = useState(null);
   // MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
@@ -2779,7 +2943,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   const [_kalState, setKalState] = useState(KAL_STATE_DEFAULT);
   const [shuffle, setShuffle] = useState(false);
   const [loop, setLoop] = useState(false);
-  // O8 — captured for snapshot display only; not currently sourced.
+  // O8 ΓÇö captured for snapshot display only; not currently sourced.
   const [playingTrack] = useState(null);
   const [spinePosition] = useState(null);
   const [activeTab, setActiveTab] = useState(null);
@@ -2798,7 +2962,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   const [resizeHover, setResizeHover] = useState(false);
   const [userPresets, setUserPresets] = useState({ P1: null, P2: null, P3: null });
   const [searchFocusSignal, setSearchFocusSignal] = useState(0);
-  // Per UX_CONTROLS_SPEC v0.4 §5.5: auto-focus the Deep Tracks search input on
+  // Per UX_CONTROLS_SPEC v0.4 ┬º5.5: auto-focus the Deep Tracks search input on
   // first open of the tab per session only. Subsequent opens do not steal focus.
   const searchAutoFocusedRef = useRef(false);
   const hoverTimerRef = useRef(null);
@@ -2976,7 +3140,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
       {openPhoto && (
         <PhotoOverlay card={openPhoto} onClose={() => setOpenPhoto(null)} />
       )}
-      {/* MOBILE FALLBACK — pill columns render inline above the grid on
+      {/* MOBILE FALLBACK ΓÇö pill columns render inline above the grid on
           narrow viewports. CSS hides this on desktop and hides the deck
           on mobile. */}
       <div className="hr-mobile-pills">
@@ -2988,7 +3152,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
         ))}
       </div>
 
-      {/* DECK HOST — sized so the deck can sit at its bottom via sticky
+      {/* DECK HOST ΓÇö sized so the deck can sit at its bottom via sticky
           positioning. The grid scrolls inside hr-section-deck-host. */}
       <div className="hr-section-deck-host">
         <div className={"animated " + (resizing ? "resizing " : (!open && hoverPeek ? "quick " : ""))}
@@ -3045,7 +3209,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
                         }}
                         onMouseEnter={has ? (e) => { e.currentTarget.style.opacity = "1"; } : undefined}
                         onMouseLeave={has ? (e) => { e.currentTarget.style.opacity = "0.85"; } : undefined}
-                      >✕</span>
+                      >Γ£ò</span>
                     );
                   })()}
                   {isActive && open && (
@@ -3101,7 +3265,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
         </div>
       </div>
 
-      {/* O12 — AuditStrip removed: was a dev-only fixed-bottom-right pill at
+      {/* O12 ΓÇö AuditStrip removed: was a dev-only fixed-bottom-right pill at
           z-index 9999 that occluded the player bar's right-side controls.
           The AuditStrip function is kept above for easy revival. */}
     </section>

@@ -129,20 +129,46 @@
 .hr-panel-count-big { color: var(--hr-gold-hi); font-weight: 700; }
 .hr-panel-count-total { color: var(--hr-gold-lo); font-weight: 400; }
 
-/* ── Artifact grid ─────────────────────────────────────────────────────── */
+/* ── Artifact grid — masonry (RC-C fix 2026-06-01) ──────────────────────────
+   WAS a row-based grid (grid-auto-rows:auto + default align-items:stretch):
+   every card in a row was forced to the row's tallest member's height. A
+   self-sizing FB post sharing a row with a tall video got its cell stretched
+   to the video's height and could NOT render at its natural content height —
+   producing the post clip + black void, and the empty gutters under every
+   shorter card. The equal-height-row constraint was overriding the embeds'
+   own self-sizing. Post clipping and the RC-C gutters were one root cause.
+
+   NOW masonry via fine implicit row tracks: each card spans exactly its own
+   content height (grid-row-end set in JS — see useMasonryRowSpan in
+   HrExhibitFlow.jsx), so cards pack to natural height with no row-stretch and
+   no gutters. align-items:start keeps each card at content height (the grid
+   area only reserves track space; it never stretches the card). The varied
+   1-/2-col spans (operator-locked "B rule", 2026-05-22) are UNCHANGED —
+   grid-template-columns + grid-column:span still drive width variety; masonry
+   only packs the varied HEIGHTS. grid-auto-flow:dense is retained (unchanged
+   from before this fix), so reading order stays row-major with local backfill.
+   row-gap is 0 because the 14px vertical gap is baked into each card's
+   row-span (height + 14); column-gap keeps the 14px horizontal gap.          */
 .hr-artifact-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 280px));
   justify-content: start;
-  grid-auto-rows: auto;
-  gap: 14px;
+  grid-auto-rows: 1px;        /* fine masonry tracks; card row-span set in JS */
+  column-gap: 14px;
+  row-gap: 0;                 /* vertical gap is baked into each card's span */
   grid-auto-flow: dense;
+  align-items: start;         /* cards keep natural height — NO row-stretch */
 }
 .hr-card {
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative; /* Phase 1.5c: anchor for badge / link-arrow overlays */
+  /* Pre-measurement reservation: until useMasonryRowSpan sets the real
+     grid-row span (synchronously, pre-paint, in useLayoutEffect), reserve a
+     middling track count so a card never collapses to the 1px auto-row. JS
+     overwrites this with the measured height the same frame. */
+  grid-row-end: span 360;
 }
 
 /* ── Phase C: per-media-type aspect ratios ──────────────────────────────
@@ -239,13 +265,15 @@
 }
 .hr-card-fbembed[data-fbkind="video"] .hr-card-video-vis { aspect-ratio: 16 / 9; }
 .hr-card-fbembed[data-fbkind="reel"]  .hr-card-video-vis { aspect-ratio: 9 / 16; }
-/* Posts have NO fixed aspect (caption length varies) — a fixed 4/5 box was too
-   short and clipped taller posts. They now size to the inline measured/fallback
-   height set by FbEmbedCard (post.php postMessage height when FB reports it, a
-   tall never-crop fallback until then). A min-height floor only keeps the
-   pre-measurement placeholder visible; it never caps a taller post.
-   (clipping fix 2026-06-01) */
-.hr-card-fbembed[data-fbkind="post"]  .hr-card-video-vis { min-height: 320px; }
+/* Posts have NO fixed aspect (caption length varies). They self-size to FB's
+   reported content height (post.php postMessage height, set inline by
+   FbEmbedCard) — exactly as tall as the content, no bottom clip and no black
+   gap. We impose no height of our own; until/unless a height arrives the inline
+   style shows a modest graceful loading box. The low min-height floor only keeps
+   the box from collapsing before measurement; it never caps a taller post and is
+   kept small so a SHORT measured post leaves no dead space either.
+   (get-out-of-the-embed's-way fix 2026-06-01; was a ~1100px void) */
+.hr-card-fbembed[data-fbkind="post"]  .hr-card-video-vis { min-height: 120px; }
 .hr-fbembed-frame {
   /* Width-fill 2026-05-31: width/height/transform/transform-origin are set inline
      by FbEmbedCard (requested at ~tile width, scaled to fill). The old hardcoded
@@ -262,19 +290,6 @@
 .hr-card-fbembed[data-fbkind="video"] .hr-fbembed-frame { height: 281px; }
 .hr-card-fbembed[data-fbkind="reel"]  .hr-fbembed-frame { height: 889px; }
 .hr-card-fbembed[data-fbkind="post"]  .hr-fbembed-frame { height: 625px; }
-.hr-card-fb-open {
-  display: inline-block;
-  margin-top: 6px;
-  font-family: var(--hr-sans);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--hr-gold-lo);
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.hr-card-fb-open:hover { color: var(--hr-gold-hi); }
 
 /* ── Phase 1.5c — voice cards (curatorial commentary; HR_EXIT_FLOW) ────── */
 /* Warmer background and a small "curator's note" badge in the top-right
@@ -1637,48 +1652,10 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
 }
 .hr-photo-ov-link:hover { color: var(--hr-gold-hi); }
 
-/* FB grid-tile "expand" trigger — the foot title becomes a button that opens
-   FacebookOverlay. Button reset so it reads identically to the prior <div>
-   title, plus a small ⤢ glyph signalling in-site expand. */
-/* FB card foot actions (2026-06-01 redundant-foot fix): the caption + date were
-   removed (the embed shows them), leaving the expand control and the escape-hatch
-   link stacked compactly. */
-.hr-card-fb-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 5px;
-}
-.hr-card-fb-actions .hr-card-fb-open { margin-top: 0; }
-.hr-card-fb-expand {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-.hr-card-fb-expand-icon {
-  color: var(--hr-gold);
-  font-size: 12px;
-  transition: color 0.12s;
-}
-.hr-card-fb-expand-label {
-  font-family: var(--hr-sans);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--hr-gold-lo);
-  transition: color 0.15s;
-}
-.hr-card-fb-expand:hover .hr-card-fb-expand-icon,
-.hr-card-fb-expand:hover .hr-card-fb-expand-label { color: var(--hr-gold-hi); }
+/* FB card foot removed (2026-06-01): FB cards no longer render a foot — the
+   embed provides its own caption/date/interaction — so the .hr-card-fb-actions
+   / .hr-card-fb-expand(-icon/-label) / .hr-card-fb-open rules were removed as
+   dead. (FacebookOverlay is mothballed in HrExhibitFlow.jsx.) */
 
 .hr-album-ov {
   position: fixed;
