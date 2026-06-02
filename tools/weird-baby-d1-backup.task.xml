@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-16"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   Task Scheduler definition: monthly weird-baby D1 / guestbook backup.
 
@@ -37,7 +37,7 @@
     <Principal id="Author">
       <!-- TODO(operator): replace with your account, e.g. LAPTOP\Mike .
            Or omit and pass /ru "<you>" to schtasks at import time. -->
-      <UserId>TODO\\REPLACE_WITH_YOUR_USER</UserId>
+      <UserId>mikeslaptop\macun</UserId>
       <LogonType>InteractiveToken</LogonType>
       <RunLevel>LeastPrivilege</RunLevel>
     </Principal>
