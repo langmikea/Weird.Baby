@@ -1,3 +1,7 @@
+## Decisions / closed
+
+- COL3 FB post clip: CLOSED — ACCEPTED (2026-06-02). Logged-out-only cosmetic clip of the longest post's like/comment/share row. NOT a column bug (column is random per load); NOT an open defect. Cause = fixed-height box that never self-sizes because raw post.php sends no height. Dead-end theories + fix options recorded in docs/FINDING-fb-post-clip.md. Do NOT re-investigate as a mystery — read that doc first.
+
 # Weird.Baby Museum — STATE
 
 The durable reference for the Museum: stack, routes, mothballed-for-v1
