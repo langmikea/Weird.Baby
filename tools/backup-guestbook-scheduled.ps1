@@ -28,7 +28,8 @@
 
 [CmdletBinding()]
 param(
-    [switch]$NoCommit
+    [switch]$NoCommit,
+    [switch]$NoPush
 )
 
 $ErrorActionPreference = "Stop"
@@ -91,8 +92,29 @@ try {
     $msg = "backup: weird-baby D1 guestbook snapshot $commitStamp (scheduled)"
     git commit -m $msg 2>&1 | ForEach-Object { Add-Content -Path $logFile -Value $_ -Encoding utf8 }
     Write-Log "Committed locally: $msg"
-    Write-Log "Reminder: operator pushes with 'git push' when ready."
-    Write-Log "=== scheduled guestbook backup END (ok, committed) ==="
+
+    if ($NoPush) {
+        Write-Log "NoPush set - skipping push. Local commit only."
+        Write-Log "=== scheduled guestbook backup END (ok, committed, no push) ==="
+        exit 0
+    }
+
+    # Push is best-effort: a local commit is already a valid backup. A push
+    # failure (no network / creds expired) must NOT fail the run.
+    try {
+        git push origin main 2>&1 | ForEach-Object { Add-Content -Path $logFile -Value $_ -Encoding utf8 }
+        if ($LASTEXITCODE -eq 0) {
+            Write-Log "Pushed to origin/main."
+            Write-Log "=== scheduled guestbook backup END (ok, committed + pushed) ==="
+        } else {
+            Write-Log "PUSH FAILED (exit $LASTEXITCODE) - local commit is intact; push manually. Check creds/network."
+            Write-Log "=== scheduled guestbook backup END (ok committed, push failed) ==="
+        }
+    }
+    catch {
+        Write-Log ("PUSH FAILED (exception, local commit intact; push manually): " + $_.Exception.Message)
+        Write-Log "=== scheduled guestbook backup END (ok committed, push failed) ==="
+    }
     exit 0
 }
 catch {
