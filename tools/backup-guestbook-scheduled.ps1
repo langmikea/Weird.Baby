@@ -34,6 +34,18 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+function Invoke-Git {
+    param([Parameter(ValueFromRemainingArguments=$true)][string[]]$GitArgs)
+    # Run git, merge stderr into stdout for logging, never throw on stderr.
+    $old = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    $out = & git @GitArgs 2>&1
+    $code = $LASTEXITCODE
+    $ErrorActionPreference = $old
+    if ($out) { Add-Content -Path $logFile -Value ($out | Out-String) -Encoding utf8 }
+    return $code
+}
+
 # Repo root = parent of this script's tools/ directory.
 $repoRoot   = Split-Path -Parent $PSScriptRoot
 $logDir     = Join-Path $repoRoot "backups"
@@ -78,11 +90,11 @@ try {
     # Recover any index lock / partial state that may bleed in from other tooling.
     if (Test-Path .git\index.lock) { Remove-Item .git\index.lock -Force }
 
-    git add backups/ 2>&1 | ForEach-Object { Add-Content -Path $logFile -Value $_ -Encoding utf8 }
+    $null = Invoke-Git add backups/
 
     # Anything staged under backups/?
-    git diff --cached --quiet -- backups/
-    if ($LASTEXITCODE -eq 0) {
+    $staged = Invoke-Git diff --cached --quiet -- backups/
+    if ($staged -eq 0) {
         Write-Log "No new backup files to commit (nothing staged). Done."
         Write-Log "=== scheduled guestbook backup END (ok, nothing to commit) ==="
         exit 0
@@ -90,7 +102,12 @@ try {
 
     $commitStamp = (Get-Date).ToUniversalTime().ToString("yyyyMMdd-HHmmss") + "Z"
     $msg = "backup: weird-baby D1 guestbook snapshot $commitStamp (scheduled)"
-    git commit -m $msg 2>&1 | ForEach-Object { Add-Content -Path $logFile -Value $_ -Encoding utf8 }
+    $rc = Invoke-Git commit -m $msg
+    if ($rc -ne 0) {
+        Write-Log "LOCAL COMMIT FAILED (rc=$rc) (files are on disk, commit manually)"
+        Write-Log "=== scheduled guestbook backup END (ok export, commit failed) ==="
+        exit 0
+    }
     Write-Log "Committed locally: $msg"
 
     if ($NoPush) {
@@ -101,18 +118,12 @@ try {
 
     # Push is best-effort: a local commit is already a valid backup. A push
     # failure (no network / creds expired) must NOT fail the run.
-    try {
-        git push origin main 2>&1 | ForEach-Object { Add-Content -Path $logFile -Value $_ -Encoding utf8 }
-        if ($LASTEXITCODE -eq 0) {
-            Write-Log "Pushed to origin/main."
-            Write-Log "=== scheduled guestbook backup END (ok, committed + pushed) ==="
-        } else {
-            Write-Log "PUSH FAILED (exit $LASTEXITCODE) - local commit is intact; push manually. Check creds/network."
-            Write-Log "=== scheduled guestbook backup END (ok committed, push failed) ==="
-        }
-    }
-    catch {
-        Write-Log ("PUSH FAILED (exception, local commit intact; push manually): " + $_.Exception.Message)
+    $pc = Invoke-Git push origin main
+    if ($pc -eq 0) {
+        Write-Log "Pushed to origin/main."
+        Write-Log "=== scheduled guestbook backup END (ok, committed + pushed) ==="
+    } else {
+        Write-Log "PUSH FAILED (rc=$pc) - local commit is intact; push manually. Check creds/network."
         Write-Log "=== scheduled guestbook backup END (ok committed, push failed) ==="
     }
     exit 0
