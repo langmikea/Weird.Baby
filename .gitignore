@@ -29,3 +29,9 @@ dist-ssr
 !.dev.vars.example
 .env*
 !.env.example
+
+# Scratch / pre-edit backups and stale build dirs (cleanup 2026-06-02)
+*.pre-*
+_cowork/
+.phase1_retired_files/
+dist.pre*/
