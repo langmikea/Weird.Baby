@@ -15,3 +15,5 @@
 *.ttf binary
 *.otf binary
 *.pdf binary
+# Task Scheduler XML must stay UTF-16 LE + BOM; never LF-normalize it.
+*.task.xml binary
