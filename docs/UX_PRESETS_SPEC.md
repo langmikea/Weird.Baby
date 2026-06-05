@@ -1,0 +1,138 @@
+# Weird.Baby Museum — UX Presets Spec, v0.2 (DRAFT)
+
+**Date:** 2026-06-05
+**Status:** Working draft v0.2. Not locked. Verified against live code (Cowork drift ledger, 2026-06-05). Produced from a live design session (Mike + system engineer) plus a full read of the canonical set.
+**Fills:** `UX_CONTROLS_SPEC_v0.4 §C.5.0` names a "forthcoming `UX_PRESETS_SPEC`." This is that document's first draft.
+**Authority above this doc:** `CANON_UX_LIFECYCLE_SPEC_v0.5` (F=ma, preset-as-artifact), `CANON_VISION_LOCK_v0.3`, `CANON_UX_SPEC_v0.3` (§C.5.0, §N.2, §N.7), `CANON_UX_CONTROLS_SPEC_v0.4` (§8.4, §9). Where they speak, they win. This doc adds what they don't say and records this session's decisions.
+
+---
+
+## §0 — What a preset is (grounded, not invented)
+
+A preset is **an artifact** (`UX_LIFECYCLE_SPEC §4.5`, §1 #8). It carries tags, has a stable internal identity, and can be featured, shared, scheduled, and retired through the same mechanisms as any album or video. It is **a single slice** — one configuration; there is no chaining (locked 2026-05-12). It is **shareable** via a cryptic-but-stable short URL (`weird.baby/p/<shortid>`) that resolves to the preset's internal identity.
+
+F=ma consequence: a preset is not a special UI mechanism. It is data, like everything else. The localStorage snapshot machinery currently in `HrExhibitFlow.jsx` (schema v1, `focusedAlbumId`, self-heal) is the **anonymous-session persistence substrate** beneath the artifact model — correct and useful for v1's session-scoped, account-less world (`VISION_LOCK T-02`), but it is not the model. The model is the artifact.
+
+**There is no preset-less state** (`UX_LIFECYCLE_SPEC §4.2`). The museum's entry state *is* a preset, tagged as the entry preset for that surface, swappable by the operator at runtime. The visitor always stands inside some preset. "Now Playing" / "Active View" = the preset currently in effect.
+
+---
+
+## §0.1 — This layers onto the existing framework; it does not replace it
+
+**Load-bearing constraint (Mike, this session).** Everything in this spec is implemented by wiring the preset/verb behavior **into the museum's existing surfaces** — the real coverflow shelf, the dock, the tracklist with its variant pills, the persistent player. The companion prototype's boxed two-column layout is a *thinking instrument only*; it is not the target UI. A build must not introduce a parallel "presets screen" that supplants the current views. Save / Play / Show / Reset / Now Playing attach to the surfaces that already exist (`UX_SPEC §C`, §N; `UX_CONTROLS_SPEC §9` presets tab).
+
+---
+
+## §1 — The two scopes (built, specced, confirmed)
+
+The museum already runs two independent filtering surfaces. This is not a proposal; it is in code and promoted to spec.
+
+**The Player (jukebox).** `UX_SPEC §N.7`: the persistent player keeps a track playing while the visitor browses to a different album; an audio-only overlay signals that what is *seen* is loosely coupled to what is *heard*. The player has its own selection — what is stocked and playing — independent of the wall.
+
+**The Deck (wall).** The coverflow + the dock's tier/group/tag filters (`UX_CONTROLS_SPEC §3`: within-group OR, across-group AND, empty-group-silent). Shapes what the visitor browses.
+
+**They filter independently.** Changing the deck does not interrupt the player (`UX_CONTROLS_SPEC §8.4`: interrupting playback the visitor chose is hostile). Changing the player does not move the wall.
+
+**A preset captures both scopes.** (Mike, this session.) One snapshot spans the jukebox state and the deck state.
+
+---
+
+## §2 — Variant grammar (the "stock the jukebox — source" question, resolved by canon)
+
+Per `UX_SPEC §N.2`, variant selection is **already locked as radio semantics**:
+
+- Each track row carries its available variants (Official / Live / Lyrics / Cover — taxonomy in `hunter-root.js`). Availability is uneven: some tracks have only Official, some have Live, etc.
+- **At most one variant active per track at any time.** Mutually exclusive within the row.
+- Clicking an inactive variant activates it and deselects the prior. Clicking the active variant deselects it → row returns to no-variant-selected.
+- This is one-of-N with the option of zero. Not checkboxes.
+
+**Consequence for "stock the jukebox":** version selection is **per-song**, not a global preference. A catalog-wide "prefer Official, fall back to live" toggle would fight this grammar and silently mishandle uneven availability. The jukebox is stocked by the per-row variant radios plus shuffle and loop. (This corrects the flat source-pills in prototype v1/v2.)
+
+**Default which version plays:** there is no separate "default version rule" because there is no preset-less state (§0). Whatever the active preset holds *is* the default. (Mike, this session.)
+
+---
+
+## §3 — The verbs (this session's decisions)
+
+| Verb | Acts on | Behavior | Source |
+|---|---|---|---|
+| **Save** | both scopes | Writes the current jukebox + deck state into a preset (an artifact). Names it (editable; defaults to a filter summary). | Mike: rename from "SAVE HERE" |
+| **Play** | both scopes | Commits a saved preset — jukebox + deck become the Active View. Replaces the old "Apply." | Mike: "Apply should say Play" |
+| **Show** | deck only | Peeks at a preset's wall **without committing**. The jukebox keeps playing untouched. Nothing commits. | Mike + §8.4 |
+| **Reset** | one slot | Empties a user slot. Replaces "CLEAR SLOT." | Mike: rename |
+| **Now Playing** | both scopes | Returns the visitor to the Active View (the committed preset) after a Show peek. | Mike |
+
+**Active View** (Mike's definition, locked for this doc): *the Player and Deck output resulting from the committed filters and settings.* Both scopes. It is "where you actually are."
+
+**Show is consequence-free** because the deck is independent of the jukebox (§1) and there is no preset-less limbo (§0): a Show peek changes only the wall; the music plays on; nothing needs a Keep/Cancel step. Best-practice basis: preview-without-commit is a recognized pattern, but hover-based preview is rejected (undiscoverable, touch-hostile, accessibility-poor) — Show is an explicit, sticky, single-action peek with an explicit return (Now Playing).
+
+**Idle auto-return** (Mike): after a Show peek, if the visitor does not touch anything *and* the jukebox advances to a new album, the wall returns to the Active View on its own — automatic Now Playing. (Timing TBD by feel; prototype uses a short value to make it testable.)
+
+---
+
+## §4 — Mobile floor (Mike + `VISION_LOCK G-10`)
+
+Desktop is the museum's home: both scopes side by side, full deck filtering. The **phone floor** is narrower and specific: the **player (jukebox)** and the **default (factory) presets** must be usable. Deep deck filtering and wall-browsing ride in the back seat on mobile. `G-10` shape: spine as vertically-scrollable album tiles, one tap to open, persistent mini-player at bottom. The Show / Now Playing / Active View loop must remain legible when the deck is de-emphasized — a stress test of the model.
+
+---
+
+## §5 — Open questions (for the prototype to resolve by feel, then lock)
+
+These are genuinely undecided and are what the prototype exists to answer:
+
+1. **Now Playing placement** — a row among the preset slots (live, un-saveable Active View), a control near the player, or both? (Prototype tries "both" to react against.)
+2. **Show's visual treatment** — how does "peeking vs committed" read at a glance? (Prototype uses a status ribbon + dashed peek outline.)
+3. **Idle auto-return timing and trigger** — gentle or startling? Tie strictly to "jukebox advanced + idle," or simpler?
+4. **Naming UI** — name-on-save dialog vs inline-editable slot label. (Prototype uses inline.)
+5. **Shared-preset landing** (`UX_SPEC §C.5.0` Q3) — does `weird.baby/p/<id>` land at the Lobby first (default per §L.1) or directly in the preset state? Canon default is Lobby-first; confirm.
+
+---
+
+## §6 — Verify-against-live (Cowork brief; host-side only)
+
+This draft rests on the five Drive-reachable canon docs plus the live deployed site. The following are **host-side only** (referenced by canon, not synced to Drive) and must be read by Cowork on Mike's machine before any integration code is written:
+
+- `CANONICAL_VOCABULARY.md` — tag tier vocabulary; confirms how variant/era/source tags are actually structured.
+- `DATA_WORKFLOW_SPEC_v0.2.md` — sovereign tag set, vocabulary-as-data, stable-ID rules.
+- `STATE.md` — current project state and backlog.
+- `weird-baby-museum` working tree — confirmed current repo (the `weird-baby-update` Drive copy is stale/retired). Specifically: `HrExhibitFlow.jsx` (preset machinery; persistence + hardening confirmed present, capture unwired), `Exhibit.jsx` (§N.7 audio-only overlay, §N.2 variant radios, player state), `hr_dimensions.js` (the `TIER_BY_NAMESPACE` heuristic flagged as drift in `LIFECYCLE §4.3`), the spine adapter `hunter-root-spine.js`.
+- `prototype_a_v27.html` — the reference implementation for `UX_CONTROLS_SPEC §§4.8/5.5/6.5/9`.
+
+**Cowork's task:** produce a drift ledger — for each item in this spec, does the live code match, partially match, or contradict it? Particular targets: is preset-as-artifact reflected anywhere, or only the localStorage snapshot? Is entry-state-as-preset implemented (`LIFECYCLE §5` says "likely no such mechanism today")? Does the variant radio (§N.2) match this spec's §2? The ledger tells us how far the built system sits from this spec before integration begins.
+
+---
+
+## §7 — Drift ledger results (Cowork verification, 2026-06-05)
+
+Confirmed against the live `weird-baby-museum` tree:
+
+- **MATCH:** variant radio grammar is verbatim (`handleTagClick`); preset persistence + id-hardening landed (`PRESET_SCHEMA_VERSION=1`, `focusedAlbumId`, self-heal).
+- **PARTIAL:** capture is null-stubbed (`playingTrack`/`spinePosition` `useState(null)`, no setters, ~L3041–3042).
+- **ABSENT:** artifact model, `/p/<id>` sharing, entry-state-as-preset, Show, Now Playing, idle-return. These are all net-new.
+- `weird-baby-update` is dead code — zero refs. (Drive should still be re-synced so look-ups don't mislead. Ops.)
+
+Spec corrections from the ledger:
+- `TIER_BY_NAMESPACE` heuristic is **gone** — replaced 2026-05-19 by the `vocabulary.json` registry. Vocabulary-as-data is **implemented**, not pending. (Earlier draft was stale.)
+- Prototype reference is `prototype_a_v28_3.html`, not v27.
+
+---
+
+## §8 — Prerequisites (must precede any build) [from ledger]
+
+Two spec-vs-framework conflicts surfaced that block implementation until resolved:
+
+### §8.1 — Mobile presets surface (BLOCKS the §4 mobile floor)
+The entire deck, **including the Presets tab**, is `display:none` at ≤720px. So the §4 requirement ("player + default presets usable on phone") **directly contradicts live code** — factory presets are currently unreachable on a phone. Prerequisite: a mobile surface for (at minimum) the default/factory presets that survives the ≤720px deck-hide. This is a UX-design item, not just wiring — where do presets live on the phone when the dock is gone? Resolve before build.
+
+### §8.2 — Stable track + variant IDs (BLOCKS per-song variant capture)
+Per-row variant capture has nothing stable to reference: tracks carry no IDs and videos are positional in the spine contract. The id-hardening philosophy (stable refs, never indices — the reason `focusedAlbumId` exists) **cannot extend to track variants** until the track/variant layer has stable identity. Prerequisite: assign stable IDs to tracks and their variants in the data contract. Without this, a build silently falls back to positional indices — the exact fragility the hardening was built to prevent.
+
+---
+
+## §9 — Implementation seam (Q5, from ledger)
+
+The single boundary between the two scopes is `<ExhibitFlow activeAlbumId={album.id} />`. Capture/restore means widening that boundary (or lifting state). The snapshot shape and the Presets UI are **already forward-compatible**, so the verbs are mostly **renames + scope-widening**, not new machinery — once §8.1 and §8.2 are resolved. This keeps the build modest: the hard parts are the two prerequisites, not the wiring.
+
+---
+
+*End of UX_PRESETS_SPEC v0.2 DRAFT. Not locked. Verified against live code via Cowork drift ledger 2026-06-05. Companion prototype: `prototype_presets_v3.html` (thinking instrument only — not the target UI, per §0.1).*
