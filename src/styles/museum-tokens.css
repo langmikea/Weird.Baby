@@ -4,10 +4,16 @@
  * Defined here once; consumed by route-level CSS files.
  *
  * Phase 4b: extracted from src/routes/exhibit/Exhibit.css to align
- * the HR deck with the carousel/track-selector. Carousel itself is
- * still hardcoded against the same values; future phase may refactor
- * it to consume these tokens. Variable names keep the --hr- prefix
- * pending a future rename pass.
+ * the HR deck with the carousel/track-selector.
+ *
+ * 2026 palette rework: replaced the flat near-black + flattened-gold
+ * scheme with a COOL GRAPHITE elevation ladder. Depth now comes from
+ * layered surface luminance (page -> deck -> inset -> card -> raised),
+ * per dark-UI elevation practice, not from borders over a void. The
+ * gold ramp is restored to an actual ramp (mute -> lo -> gold -> hi)
+ * so gold reads as a true accent again instead of painting everything.
+ * Both Exhibit.css (carousel/top half) and HrExhibitFlow.css (deck)
+ * consume these tokens, so the whole HR page rides one ground.
  *
  * Font loading: the carousel's Exhibit.css already @imports DM Serif
  * Display, Syne, and Courier Prime via Google Fonts. The deck only
@@ -17,27 +23,30 @@
  */
 
 :root {
-  /* Surfaces — cool near-blacks, neutral, matching the carousel */
-  --hr-ink: #080808;
-  --hr-ink-soft: #0d0d0d;       /* active row tint */
-  --hr-ink-card: #0a0a0a;       /* default card surface — solid, not rgba */
-  --hr-ink-card-hi: #0e0e0e;    /* essay / elevated card surface */
+  /* ── Surfaces — cool graphite elevation ladder ──────────────────────────
+     Each step is a luminance rung; higher = more elevated = lighter.
+     page(bg) -> ink(deck) -> ink-soft(inset/active) -> ink-card -> ink-card-hi(raised) */
+  --hr-bg:           #141518;   /* page ground — darkest rung, behind the deck */
+  --hr-ink:          #1a1c20;   /* deck surface — one step up from the page */
+  --hr-ink-soft:     #212328;   /* inset / active-row / pill-active tint */
+  --hr-ink-card:     #26282e;   /* default card surface — solid, not rgba */
+  --hr-ink-card-hi:  #2d3037;   /* raised: chrome bar, essay/elevated card, hover */
 
-  /* Borders — neutral cool gray */
-  --hr-border: #1a1a1a;
-  --hr-border-hi: #252525;
+  /* Borders — quiet cool gray; depth carries hierarchy, borders only delineate */
+  --hr-border:       #2c2f35;
+  --hr-border-hi:    #3a3e46;
 
-  /* Accent — single gold, with deck-only ramp variants */
-  --hr-gold: #b8974a;           /* canonical museum gold (WEIRD.BABY logo) */
-  --hr-gold-hi: #b8974a;        /* iterate-1: dropped from cream #d4c49a to canonical gold per "match the WEIRD.BABY logo" call. Brightest tier of the ramp now collapses to canonical gold. */
-  --hr-gold-lo: #b8974a;        /* iterate-2: dropped from #a89770 to canonical gold so border lines (tab strip / deck body top / dashed column-label rules) match the single-gold tone. */
-  --hr-gold-mute: #555;         /* disabled gold */
+  /* Accent — single restored gold ramp (mute -> lo -> gold -> hi) */
+  --hr-gold:      #c6a559;   /* canonical museum gold (WEIRD.BABY logo family) */
+  --hr-gold-hi:   #e4cf94;   /* brightest tier — counts, active labels, key titles */
+  --hr-gold-lo:   #9a8a6b;   /* dim tier — eyebrows, meta, border accents */
+  --hr-gold-mute: #5e5e66;   /* disabled */
 
-  /* Body / mid text */
-  --hr-dim: #b8974a;            /* iterate-1: dropped from cream #d4c49a to canonical gold per the WEIRD.BABY-match call. Body / mid-strength text now reads at the canonical gold instead of carousel-cream. */
+  /* Body / mid text — warm-neutral, NOT gold (restores tonal hierarchy) */
+  --hr-dim:       #b9bcc4;
 
   /* Typography — loaded webfaces (imported by src/routes/exhibit/Exhibit.css) */
   --hr-serif: 'DM Serif Display', Georgia, serif;
-  --hr-sans: 'Syne', system-ui, -apple-system, sans-serif;
-  --hr-mono: 'Courier Prime', 'Courier New', monospace;
+  --hr-sans:  'Syne', system-ui, -apple-system, sans-serif;
+  --hr-mono:  'Courier Prime', 'Courier New', monospace;
 }
