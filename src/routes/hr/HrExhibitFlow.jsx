@@ -29,6 +29,8 @@
 //   - O7: localStorage key is `wb-hr-deck-height` (HR-namespaced).
 //   - O8: preset snapshots capture player state for display only — APPLY
 //     does not restore player state in v1. Comment block at makePresetSnapshot.
+//     User slots P1–P3 persist to localStorage (`wb-hr-presets`, controls
+//     §9.5 v1); Set fields round-trip via serialize/load helpers there.
 //   - O9: Shuffle / Loop pills toggle local state but no-op against the
 //     player. Comment block at PresetsContent.
 //   - O11: @media(max-width: 720px) hides the deck and falls back to inline
@@ -145,6 +147,15 @@ const DECK_MIN_H = 200;
 const DECK_MAX_FRAC = 0.75;
 const DECK_DEFAULT_H_SHARED = 480;
 const STORAGE_KEY = "wb-hr-deck-height"; // O7 — matches wb-hr-split / wb-hr-cfh
+// Preset persistence (UX_CONTROLS_SPEC v0.4 §9.5: v1 = localStorage,
+// exhibit-scoped, no login). HR-namespaced per O7 convention, so the key is
+// exhibit-scoped by construction. Lifecycle §4.5's MV-artifact promotion is
+// a later phase; this key/format is the v1 store it would migrate from.
+const PRESETS_STORAGE_KEY = "wb-hr-presets";
+// Persisted-snapshot format version. Bump when the saved shape changes so
+// loadUserPresets can migrate. v1 nulls player-state on load (lifecycle §4.5
+// promotion will read this). See PRESET_COMPARE_PASS.
+const PRESET_SCHEMA_VERSION = 1;
 const HOVER_DELAY_OPEN = 60;
 const HOVER_DELAY_CLOSE = 450;
 
@@ -525,9 +536,92 @@ function makePresetSnapshot({ selected, shuffle, loop, playingTrack, spinePositi
     shuffle: !!shuffle,
     loop: !!loop,
     playingTrack: playingTrack ? { ...playingTrack } : null,
-    spinePosition: spinePosition ?? null,
+    // O8/SPINE: store focused album by STABLE id, never by derived-spine index
+    // (the index ordering changed when SPINE was retired). null until player
+    // capture is wired; APPLY ignores it in v1 (deferred per controls §9.4).
+    focusedAlbumId: spinePosition?.albumId ?? (typeof spinePosition === "string" ? spinePosition : null),
+    schemaVersion: PRESET_SCHEMA_VERSION,
     savedAt: Date.now(),
   };
+}
+
+// ─── PRESET PERSISTENCE — localStorage round-trip (controls §9.5 v1) ─────────
+// Snapshots hold Sets (selected[group], optional __randomIds), which JSON
+// drops silently — so serialization converts Sets ⇄ arrays explicitly.
+// Hydration is defensive: any slot that doesn't parse back to the expected
+// shape loads as empty rather than crashing the deck. Note the SPINE caveat:
+// persisted playingTrack/spinePosition predate the derived spine and are
+// display-only (O8); APPLY never reads them in v1.
+function serializeSelected(sel) {
+  if (!sel || typeof sel !== "object") return null;
+  const out = {};
+  for (const k of Object.keys(sel)) {
+    out[k] = sel[k] instanceof Set ? [...sel[k]] : [];
+  }
+  return out;
+}
+
+function deserializeSelected(raw) {
+  if (!raw || typeof raw !== "object") return null;
+  const out = {};
+  for (const k of Object.keys(raw)) {
+    out[k] = new Set(Array.isArray(raw[k]) ? raw[k] : []);
+  }
+  return out;
+}
+
+function serializeUserPresets(presets) {
+  const out = {};
+  for (const slot of ["P1", "P2", "P3"]) {
+    const p = presets?.[slot];
+    out[slot] = p
+      ? {
+          selected: serializeSelected(p.selected),
+          shuffle: !!p.shuffle,
+          loop: !!p.loop,
+          playingTrack: p.playingTrack ?? null,
+          focusedAlbumId: p.focusedAlbumId ?? null,
+          schemaVersion: p.schemaVersion ?? PRESET_SCHEMA_VERSION,
+          savedAt: p.savedAt ?? null,
+        }
+      : null;
+  }
+  return out;
+}
+
+function loadUserPresets() {
+  const empty = { P1: null, P2: null, P3: null };
+  try {
+    if (typeof localStorage === "undefined") return empty;
+    const raw = localStorage.getItem(PRESETS_STORAGE_KEY);
+    if (!raw) return empty;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") return empty;
+    const out = { ...empty };
+    for (const slot of ["P1", "P2", "P3"]) {
+      const p = parsed[slot];
+      if (!p || typeof p !== "object") continue;
+      const selected = deserializeSelected(p.selected);
+      if (!selected) continue; // malformed slot → load as empty
+      out[slot] = {
+        selected,
+        shuffle: !!p.shuffle,
+        loop: !!p.loop,
+        playingTrack:
+          p.playingTrack && typeof p.playingTrack === "object" ? p.playingTrack : null,
+        // Pre-version records (shipped before schemaVersion existed) carried a
+        // spinePosition index into the now-dead spine ordering. Upgrade-on-load:
+        // drop the stale index, null the id-based field. Self-heals the format.
+        focusedAlbumId:
+          p.schemaVersion >= 1 && typeof p.focusedAlbumId === "string" ? p.focusedAlbumId : null,
+        schemaVersion: PRESET_SCHEMA_VERSION,
+        savedAt: typeof p.savedAt === "number" ? p.savedAt : null,
+      };
+    }
+    return out;
+  } catch {
+    return empty;
+  }
 }
 
 // Stage 2 (v28_3): the v28 port's local prettyTag(tag) helper has been
@@ -2960,7 +3054,9 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   });
   const [resizing, setResizing] = useState(false);
   const [resizeHover, setResizeHover] = useState(false);
-  const [userPresets, setUserPresets] = useState({ P1: null, P2: null, P3: null });
+  // Controls §9.5 v1: user preset slots persist in localStorage (exhibit-
+  // scoped key). Hydrate once on mount; write-through on every change below.
+  const [userPresets, setUserPresets] = useState(() => loadUserPresets());
   const [searchFocusSignal, setSearchFocusSignal] = useState(0);
   // Per UX_CONTROLS_SPEC v0.4 ┬º5.5: auto-focus the Deep Tracks search input on
   // first open of the tab per session only. Subsequent opens do not steal focus.
@@ -2974,6 +3070,19 @@ export default function HrExhibitFlow({ activeAlbumId }) {
       }
     } catch { /* ignore */ }
   }, [deckHeight]);
+
+  // Write-through preset persistence (controls §9.5 v1). Mirrors the
+  // deck-height pattern above: best-effort, silent on quota/privacy errors.
+  useEffect(() => {
+    try {
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem(
+          PRESETS_STORAGE_KEY,
+          JSON.stringify(serializeUserPresets(userPresets))
+        );
+      }
+    } catch { /* ignore */ }
+  }, [userPresets]);
 
   // Tag filters narrow the catalog. Kaleidoscope recipe is dormant in v1.
   const tagFiltered = useMemo(
