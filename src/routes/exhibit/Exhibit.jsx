@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 import "./Exhibit.css";
 
 // ─── TYPE CONFIG ──────────────────────────────────────────────────────────────
-const TAG_SLOTS = ["official", "live", "lyrics", "clip", "cover"];
+const TAG_SLOTS = ["official", "live", "lyrics", "clip", "cover", "audio"];
 const TYPE_META = {
   official: { label: "OFFICIAL", color: "#b8974a" },
   live:     { label: "LIVE",     color: "#4a8a6a" },
   clip:     { label: "CLIP",     color: "#a07840" },
   lyrics:   { label: "LYRICS",   color: "#7a6a9a" },
   cover:    { label: "COVER",    color: "#3a7a9a" },
+  audio:    { label: "AUDIO",    color: "#8a6a3a" },
   hr_cover: { label: "COVER",    color: "#3a7a9a" },
   fan_cover:{ label: "COVER",    color: "#3a7a9a" },
 };
@@ -207,6 +208,11 @@ function useYTPlayer({ containerRef, onEnded }) {
     else p.playVideo();
   }, []);
 
+  const pause = useCallback(() => {
+    const p = playerRef.current;
+    if (p && readyRef.current) p.pauseVideo();
+  }, []);
+
   const toggleMute = useCallback(() => {
     const p = playerRef.current;
     if (!p || !readyRef.current) return;
@@ -228,7 +234,61 @@ function useYTPlayer({ containerRef, onEnded }) {
     };
   }, []);
 
-  return { loadVideo, togglePlay, toggleMute, setVolume, getState };
+  return { loadVideo, pause, togglePlay, toggleMute, setVolume, getState };
+}
+
+// ─── AUDIO PLAYER HOOK ────────────────────────────────────────────────────────
+// Mirrors useYTPlayer's surface for foundation audio tracks ({ audioUrl }).
+// Same queue, same controls — the play effect branches on ytId vs audioUrl.
+function useAudioPlayer({ onEnded }) {
+  const audioRef   = useRef(null);
+  const onEndedRef = useRef(onEnded);
+  useEffect(() => { onEndedRef.current = onEnded; });
+
+  function ensureAudio() {
+    if (!audioRef.current) {
+      const a = new Audio();
+      a.preload = "auto";
+      a.addEventListener("ended", () => onEndedRef.current?.());
+      audioRef.current = a;
+    }
+    return audioRef.current;
+  }
+
+  const loadAudio = useCallback((url) => {
+    const a = ensureAudio();
+    a.src = url;
+    a.currentTime = 0;
+    a.play().catch(() => {});
+  }, []);
+
+  const pause = useCallback(() => { audioRef.current?.pause(); }, []);
+
+  const togglePlay = useCallback(() => {
+    const a = audioRef.current;
+    if (!a || !a.src) return;
+    if (a.paused) a.play().catch(() => {}); else a.pause();
+  }, []);
+
+  const toggleMute = useCallback(() => {
+    const a = audioRef.current;
+    if (a) a.muted = !a.muted;
+  }, []);
+
+  const setVolume = useCallback((v) => {
+    const a = audioRef.current;
+    if (a) a.volume = Math.max(0, Math.min(100, v)) / 100;
+  }, []);
+
+  const getState = useCallback(() => {
+    const a = audioRef.current;
+    if (!a) return { playing: false, muted: false, volume: 100 };
+    return { playing: !a.paused && !a.ended, muted: a.muted, volume: Math.round(a.volume * 100) };
+  }, []);
+
+  useEffect(() => () => { audioRef.current?.pause(); }, []);
+
+  return { loadAudio, pause, togglePlay, toggleMute, setVolume, getState };
 }
 
 // ─── SPLIT PERSISTENCE ────────────────────────────────────────────────────────
@@ -516,6 +576,9 @@ export default function Exhibit({ artist }) {
     containerRef: ytDivRef,
     onEnded: useCallback(() => advanceQueue(), []),
   });
+  const audio = useAudioPlayer({
+    onEnded: useCallback(() => advanceQueue(), []),
+  });
 
   // ── Init ──────────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -586,7 +649,8 @@ export default function Exhibit({ artist }) {
   useEffect(() => {
     if (playingAlbum===null || playingTrack===null || playingVideo===null) return;
     const v = SPINE[playingAlbum].tracks[playingTrack].videos[playingVideo];
-    if (v?.ytId) yt.loadVideo(v.ytId);
+    if (v?.ytId)          { audio.pause(); yt.loadVideo(v.ytId); }
+    else if (v?.audioUrl) { yt.pause(); audio.loadAudio(v.audioUrl); }
   }, [playingAlbum, playingTrack, playingVideo]);
 
   function advanceQueue() {
@@ -652,6 +716,7 @@ export default function Exhibit({ artist }) {
     : null;
   const curTrack = curVideo && playingTrack !== null ? SPINE[playingAlbum ?? 0].tracks[playingTrack] : null;
   const curAlbum = playingAlbum !== null ? SPINE[playingAlbum] : null;
+  const isAudioSrc = !!curVideo?.audioUrl;
 
   const thumbTrack = activeTrack !== null ? album.tracks[activeTrack] : album.tracks.find(t => t.videos.length > 0);
   const thumbVid   = thumbTrack?.videos?.[0];
@@ -744,8 +809,10 @@ export default function Exhibit({ artist }) {
                 <div className="vp-inner">
                   <div ref={ytDivRef} className="yt-player" />
 
-                  {/* Audio-only overlay — hides video when browsing a different album */}
-                  {hasVideo && !playingThisAlbum && (
+                  {/* Audio-only overlay — hides video when browsing a different
+                      album, or when the current source is an audio track (no
+                      video frame to show) */}
+                  {hasVideo && (!playingThisAlbum || isAudioSrc) && (
                     <div className="vp-audio-only">
                       {album.art ? (
                         <img className="vp-ao-art" src={album.art} alt={album.title} />
@@ -769,7 +836,16 @@ export default function Exhibit({ artist }) {
                   {!hasVideo && thumbVid && (
                     <div className="vp-thumb"
                       onClick={() => thumbTrack && handleTrackSelect(activeDisplay, album.tracks.indexOf(thumbTrack))}>
-                      <img src={`https://img.youtube.com/vi/${thumbVid.ytId}/hqdefault.jpg`} alt="" />
+                      {thumbVid.ytId ? (
+                        <img src={`https://img.youtube.com/vi/${thumbVid.ytId}/hqdefault.jpg`} alt="" />
+                      ) : album.art ? (
+                        <img src={album.art} alt="" />
+                      ) : (
+                        <div style={{
+                          width: "100%", height: "100%",
+                          background: `linear-gradient(135deg, ${(album.accent||'#b8974a')}33 0%, #0c0c0c 60%, #050505 100%)`,
+                        }} />
+                      )}
                       <div className="vp-thumb-hint">
                         <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
                           <circle cx="24" cy="24" r="23" stroke="rgba(255,255,255,0.15)" strokeWidth="1"/>
@@ -807,8 +883,10 @@ export default function Exhibit({ artist }) {
           video={curVideo} track={curTrack} album={curAlbum}
           onSkipBack={handleSkipBack} onSkipForward={handleSkipForward}
           canSkipBack={canSkipBack} canSkipForward={canSkipForward}
-          onTogglePlay={yt.togglePlay} onToggleMute={yt.toggleMute}
-          onSetVolume={yt.setVolume} getState={yt.getState}
+          onTogglePlay={isAudioSrc ? audio.togglePlay : yt.togglePlay}
+          onToggleMute={isAudioSrc ? audio.toggleMute : yt.toggleMute}
+          onSetVolume={isAudioSrc ? audio.setVolume : yt.setVolume}
+          getState={isAudioSrc ? audio.getState : yt.getState}
         />
       </div>
     </>
