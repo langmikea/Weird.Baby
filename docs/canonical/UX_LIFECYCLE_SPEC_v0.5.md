@@ -172,6 +172,8 @@ Presets are **shareable**. A visitor can share a preset URL with another visitor
 
 Presets enable the "Experiential Playlist" — a curated end-to-end museum exhibit experience that includes the curator's own narrative.
 
+*Elaborated by the child spec `docs/UX_PRESETS_SPEC.md` (v0.2 draft, 2026-06-05): the two scopes (player/deck), the verb set, the mobile floor, and the two build prerequisites (its §8).*
+
 ### §4.6 — Multi-exhibit membership via badge tags
 
 An artifact appears in an exhibit because it carries that exhibit's badge tag (`exhibit:<name>`). A single artifact can carry **multiple badges** and appear in multiple exhibits simultaneously.
@@ -276,8 +278,9 @@ For someone new to the museum or returning after time away:
 3. **Read VISION_LOCK_v0.3** for the architectural rules.
 4. **Read UX_SPEC_v0.3** for the visitor surfaces.
 5. **Read UX_CONTROLS_SPEC_v0.4** for the dock/filter mechanics.
+6. **Read UX_PRESETS_SPEC** (`docs/UX_PRESETS_SPEC.md`, v0.2 draft) for the presets layer — the child doc elaborating §4.5.
 
-After reading all five, you have the complete UX specification of the museum.
+After reading all five, you have the complete UX specification of the museum; item 6 adds the presets layer (draft, not yet locked).
 
 ---
 

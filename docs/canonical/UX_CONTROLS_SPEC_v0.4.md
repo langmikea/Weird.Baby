@@ -765,7 +765,7 @@ after v1 ships and launch pressure clears.
 | `docs/KALEIDOSCOPE_v3_DECISIONS.md` | Peer decision record. §7 of this spec codifies its [locked] items. |
 | `prototypes/prototype_a_v17.html` | Reference implementation for §4.8, §5.5, §6.5. |
 | `prototypes/kaleidoscope_v3.html` | Reference implementation for §7.1–§7.5. |
-| Future: `UX_PRESETS_SPEC.md` | Child. Extends §9. |
+| `docs/UX_PRESETS_SPEC.md` (v0.2 draft, landed 2026-06-05) | Child. Extends §9 — scopes, verbs (Save/Play/Show/Reset/Now Playing), mobile floor, build blockers (its §8). |
 | Future: `UX_KALEIDOSCOPE_SPEC.md` | Possible child if §7 grows large enough to warrant extraction. |
 
 ---

@@ -721,9 +721,10 @@ pull.
   what the museum has given them.
 
 **The presets-and-sharing architecture is deferred to a separate
-preplanning session** and will be specified in a forthcoming
-`UX_PRESETS_SPEC`. The outstanding questions for that session
-(recorded here so they're not forgotten):
+preplanning session** and is specified in `docs/UX_PRESETS_SPEC.md`
+(v0.2 draft, landed 2026-06-05 — formerly "forthcoming"). The
+outstanding questions recorded for that session, with status as of
+2026-06-05:
 
 1. Named presets (visitor titles them, shareable) vs automatic
    presets (museum saves on exit, resumable) — or both?
@@ -738,6 +739,16 @@ preplanning session** and will be specified in a forthcoming
 5. Preset as a contribution (vision lock C-05 "contribution shell"):
    is a preset just another row in the polymorphic contributions
    table, with its own surface pattern?
+
+**[Status 2026-06-05, per `docs/UX_PRESETS_SPEC.md`]** Q5 is answered:
+a preset is **an artifact** (`UX_LIFECYCLE_SPEC_v0.5 §4.5`) — tagged,
+stable identity, featured/shared/scheduled/retired like any other
+artifact. Single-slice / no chaining is **locked** (2026-05-12). The
+visitor verbs (Save / Play / Show / Reset / Now Playing) are specified
+in `UX_PRESETS_SPEC §3`. Q3 (shared-preset landing: Lobby-first vs
+direct) remains **open** — tracked as `UX_PRESETS_SPEC §5` item 5.
+Build prerequisites (blockers) live in `UX_PRESETS_SPEC §8` and
+`STATE.md`.
 
 **What v1 provides in the absence of preset architecture:**
 
