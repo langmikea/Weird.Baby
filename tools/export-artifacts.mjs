@@ -446,18 +446,55 @@ function buildArtifactRecord(row, manifest, opts = {}) {
     const children = childRows.map(cr => buildArtifactRecord(cr, manifest, { isChild: true }));
     const coverId = notesObj && notesObj.cover_artifact_id ? notesObj.cover_artifact_id : null;
     const order = notesObj && Array.isArray(notesObj.track_order) ? notesObj.track_order : [];
-    const orderIdx = (id) => {
-      const k = order.indexOf(id);
-      return k === -1 ? Number.MAX_SAFE_INTEGER : k;
+
+    const playable = children.filter(c =>
+      c.id !== coverId &&
+      (c.media_type === "audio" ||
+       (c.media_type === "link" && c.source_platform === "youtube")));
+
+    const keyOf = (c) => (c.tags && c.tags.song && c.tags.song[0]) ? c.tags.song[0] : c.id;
+    const KIND_RANK = { official: 0, live: 1, lyrics: 2, cover: 3 };
+    const kindOf = (c) => (c.tags && c.tags.content_kind && c.tags.content_kind[0]) || "official";
+    const ytId = (url) => {
+      const m = (url||"").match(/[?&]v=([A-Za-z0-9_-]{11})/) || (url||"").match(/youtu\.be\/([A-Za-z0-9_-]{11})/);
+      return m ? m[1] : null;
     };
-    const tracks = children
-      .filter(c => c.id !== coverId && c.media_type === "audio")
-      .sort((a, b) => {
-        const d = orderIdx(a.id) - orderIdx(b.id);
-        if (d !== 0) return d;
-        return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
-      });
-    tracks.forEach((t, i) => { t.track_no = i + 1; });
+
+    const groups = new Map();
+    for (const c of playable) {
+      const k = keyOf(c);
+      if (!groups.has(k)) groups.set(k, []);
+      groups.get(k).push(c);
+    }
+    const orderIdx = (key) => { const k = order.indexOf(key); return k === -1 ? Number.MAX_SAFE_INTEGER : k; };
+
+    const tracks = [...groups.entries()].map(([key, members]) => {
+      members.sort((a,b) => (KIND_RANK[kindOf(a)] ?? 9) - (KIND_RANK[kindOf(b)] ?? 9));
+      const head = members[0];
+      const videos = members.map(m => {
+        if (m.media_type === "link" && m.source_platform === "youtube") {
+          return { ytId: ytId(m.source_url), label: m.title, type: kindOf(m) };
+        }
+        return { audioUrl: m.primary_url, label: m.title, type: "audio" };
+      }).filter(v => v.ytId || v.audioUrl);
+      return {
+        id: head.id,
+        song: (head.tags && head.tags.song && head.tags.song[0]) || null,
+        title: head.title,
+        media_type: head.media_type,
+        primary_url: head.primary_url ?? null,
+        thumbnail_url: head.thumbnail_url ?? null,
+        tags: head.tags,
+        videos,
+        __key: key,
+      };
+    }).sort((a,b) => {
+      const d = orderIdx(a.__key) - orderIdx(b.__key);
+      if (d !== 0) return d;
+      return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+    });
+
+    tracks.forEach((t,i) => { t.track_no = i + 1; delete t.__key; });
     record.card_kind = "album";
     record.cover_artifact_id = coverId;
     record.tracks = tracks;

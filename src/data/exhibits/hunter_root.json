@@ -1,7 +1,7 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-05-31T00:42:13.112Z",
+    "exported_at": "2026-06-05T02:49:32.096Z",
     "filter": "released, not archived, badged for this exhibit",
     "vocabulary_csv_sha": null
   },
@@ -634,7 +634,7 @@
       "title": "Lyme disease is kicking my ass",
       "description": "Lyme disease is kicking my ass",
       "post_date": "2025-11-02",
-      "released_at": "2026-05-25T13:30:59",
+      "released_at": "2026-05-30T21:12:44",
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
@@ -649,1734 +649,6 @@
           "lyme_disease",
           "notable",
           "personal"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260518-001",
-      "source_url": "https://www.youtube.com/watch?v=7Lttb_59EYw",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Reverend (Official Music Video)",
-      "description": "Hunter Root - Reverend (official). Album: arkansas.",
-      "post_date": "2023-03-30",
-      "released_at": "2026-05-24T19:38:58",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/7Lttb_59EYw/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "arkansas"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "reverend"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "year": [
-          "2023"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-001",
-      "source_url": "https://www.youtube.com/watch?v=vPW49GU38Ng",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - ‘94 (Official Music Video)",
-      "description": "Hunter Root - '94 (official). Album: crooked.",
-      "post_date": "2025-07-31",
-      "released_at": "2026-05-27T21:04:25",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/vPW49GU38Ng/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "crooked_home"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "94"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2025"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-004",
-      "source_url": "https://www.youtube.com/watch?v=n2m8sP17E-c",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Town Rat Heathen (Official Music Video)",
-      "description": "Hunter Root - Town Rat Heathen (official). Album: arkansas.",
-      "post_date": "2023-02-03",
-      "released_at": "2026-05-27T21:05:21",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/n2m8sP17E-c/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "arkansas"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "town_rat_heathen"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2023"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-007",
-      "source_url": "https://www.youtube.com/watch?v=QFpJf0RDsXc",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Quicksand Sinking (Official Music Video)",
-      "description": "Hunter Root - Quicksand Sinking (official). Album: arkansas.",
-      "post_date": "2023-10-13",
-      "released_at": "2026-05-24T22:17:04",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/QFpJf0RDsXc/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "arkansas"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "quicksand_sinking"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2023"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-010",
-      "source_url": "https://www.youtube.com/watch?v=HLdiK-6WTwM",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Cookin' in the Bathroom (Official Music Video)",
-      "description": "Hunter Root - Cookin' in the Bathroom (official). Album: crooked.",
-      "post_date": "2024-11-07",
-      "released_at": "2026-05-24T22:17:49",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/HLdiK-6WTwM/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "crooked_home"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "cookin_in_the_bathroom"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2024"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-013",
-      "source_url": "https://www.youtube.com/watch?v=2Lm8noK3hQI",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "A Pot Song",
-      "description": "Hunter Root - A Pot Song (official). Album: crooked.",
-      "post_date": "2025-04-20",
-      "released_at": "2026-05-24T22:17:53",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/2Lm8noK3hQI/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "crooked_home"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "a_pot_song"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2025"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-016",
-      "source_url": "https://www.youtube.com/watch?v=JA1p8WSQRQQ",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Lampshade (Lyric Video)",
-      "description": "Hunter Root - Lampshade (lyrics). Album: dandelions.",
-      "post_date": "2020-09-04",
-      "released_at": "2026-05-24T22:19:12",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/JA1p8WSQRQQ/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "mimicking_the_sun_like_dandelions"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "lyrics"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "lampshade"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2020"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-019",
-      "source_url": "https://www.youtube.com/watch?v=13IUBFvIkls",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Quicksand Sinking (Official Lyric Video)",
-      "description": "Hunter Root - Quicksand Sinking (lyrics). Album: arkansas.",
-      "post_date": "2022-04-15",
-      "released_at": "2026-05-24T22:19:18",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/13IUBFvIkls/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "arkansas"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "lyrics"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "release_type": [
-          "single"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "quicksand_sinking"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2022"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-022",
-      "source_url": "https://www.youtube.com/watch?v=uaFHDfuohxc",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Silver Lining (Official Video)",
-      "description": "Hunter Root - Silver Lining (official). Album: arkansas.",
-      "post_date": "2023-05-19",
-      "released_at": "2026-05-24T22:19:41",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/uaFHDfuohxc/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "arkansas"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "silver_lining"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2023"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-025",
-      "source_url": "https://www.youtube.com/watch?v=wi5G_Zn74gc",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - My Brother's Bones (Official Music Video)",
-      "description": "Hunter Root - My Brother's Bones (official). Album: crooked.",
-      "post_date": "2025-08-22",
-      "released_at": "2026-05-24T22:20:08",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/wi5G_Zn74gc/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "crooked_home"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "my_brothers_bones"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2025"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-028",
-      "source_url": "https://www.youtube.com/watch?v=_w0wz5o9dWU",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Grain Of Rice (live in studio)",
-      "description": "Hunter Root - Grain Of Rice (live). Album: arkansas.",
-      "post_date": "2022-12-09",
-      "released_at": "2026-05-24T22:20:08",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/_w0wz5o9dWU/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "arkansas"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "live"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "grain_of_rice"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2022"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-031",
-      "source_url": "https://www.youtube.com/watch?v=z1K0HWTDrL8",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Can't Outshine The Truth (Live @Rok10productions)",
-      "description": "Hunter Root - Can't Outshine The Truth (live). Album: arkansas.",
-      "post_date": "2023-11-09",
-      "released_at": "2026-05-24T22:27:48",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/z1K0HWTDrL8/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "arkansas"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "live"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "cant_outshine_the_truth"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2023"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-034",
-      "source_url": "https://www.youtube.com/watch?v=4HIfc5MLu6k",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Homestead (Official Music Video)",
-      "description": "Hunter Root - Homestead (official). Album: dandelions.",
-      "post_date": "2025-07-01",
-      "released_at": "2026-05-24T22:20:08",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/4HIfc5MLu6k/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "mimicking_the_sun_like_dandelions"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "homestead"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2025"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-037",
-      "source_url": "https://www.youtube.com/watch?v=NJYYmXnAN0s",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Cookin' in the Bathroom (live acoustic)",
-      "description": "Hunter Root - Cookin' in the Bathroom (live). Album: crooked.",
-      "post_date": "2024-12-18",
-      "released_at": "2026-05-24T22:20:08",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/NJYYmXnAN0s/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "crooked_home"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "live"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "cookin_in_the_bathroom"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2024"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-040",
-      "source_url": "https://www.youtube.com/watch?v=Wv0_mujJUQU",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Nothin' Wrong (Official Music Video)",
-      "description": "Hunter Root - Nothin' Wrong (official). Album: skipping.",
-      "post_date": "2021-07-16",
-      "released_at": "2026-05-24T22:20:07",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/Wv0_mujJUQU/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "skipping_stones_that_sink_before_theyre_thrown"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "release_type": [
-          "single"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "nothin_wrong"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2021"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-042",
-      "source_url": "https://www.youtube.com/watch?v=KMJVLWr34Rc",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Don't Blame the Breeze (Official Artwork Video)",
-      "description": "Hunter Root - Don't Blame The Breeze (official). Album: skipping.",
-      "post_date": "2021-06-08",
-      "released_at": "2026-05-24T22:20:07",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/KMJVLWr34Rc/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "skipping_stones_that_sink_before_theyre_thrown"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "dont_blame_the_breeze"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2021"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-045",
-      "source_url": "https://www.youtube.com/watch?v=L7-1T7F7_R0",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Favorite Friend (Official Music Video)",
-      "description": "Hunter Root - Favorite Friend (official). Album: dandelions.",
-      "post_date": "2020-07-25",
-      "released_at": "2026-05-24T22:20:07",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/L7-1T7F7_R0/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "mimicking_the_sun_like_dandelions"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "favorite_friend"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2020"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-047",
-      "source_url": "https://www.youtube.com/watch?v=omU0Xt3yB-o",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Town Rat Heathen (Live @Rok10productions)",
-      "description": "Hunter Root - Town Rat Heathen (live). Album: arkansas.",
-      "post_date": "2023-11-16",
-      "released_at": "2026-05-24T22:20:07",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/omU0Xt3yB-o/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "arkansas"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "live"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "town_rat_heathen"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2023"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-049",
-      "source_url": "https://www.youtube.com/watch?v=BOQHN-O4DDc",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Little Red Riding Hood (Live @ MCHS)",
-      "description": "Hunter Root - Little Red Riding Hood (live). Album: dandelions.",
-      "post_date": "2023-06-15",
-      "released_at": "2026-05-24T22:20:06",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/BOQHN-O4DDc/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "mimicking_the_sun_like_dandelions"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "live"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "little_red_riding_hood"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2023"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-051",
-      "source_url": "https://www.youtube.com/watch?v=bXZo69DNSrM",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - The Keeper (Official Visualizer Video)",
-      "description": "Hunter Root - The Keeper (official). Album: crooked.",
-      "post_date": "2025-10-16",
-      "released_at": "2026-05-27T21:02:47",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/bXZo69DNSrM/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "crooked_home"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "the_keeper"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2025"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-053",
-      "source_url": "https://www.youtube.com/watch?v=d0TXF6iXFRQ",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Family Tree (Live in studio)",
-      "description": "Hunter Root - Family Tree (live). Album: dandelions.",
-      "post_date": "2019-11-01",
-      "released_at": "2026-05-24T22:20:06",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/d0TXF6iXFRQ/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "mimicking_the_sun_like_dandelions"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "live"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "family_tree"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2019"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-055",
-      "source_url": "https://www.youtube.com/watch?v=YlU1CBJkJ5w",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Friendly Fire (Official Music Video)",
-      "description": "Hunter Root - Friendly Fire (official). Album: crooked.",
-      "post_date": "2025-10-03",
-      "released_at": "2026-05-24T22:20:06",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/YlU1CBJkJ5w/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "crooked_home"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "friendly_fire"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2025"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-057",
-      "source_url": "https://www.youtube.com/watch?v=Fa5GKxEgf7c",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Few Steps Back (Live / The Couch Sessions)",
-      "description": "Hunter Root - Few Steps Back (live). Album: arkansas.",
-      "post_date": "2023-07-25",
-      "released_at": "2026-05-24T22:20:05",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/Fa5GKxEgf7c/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "arkansas"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "live"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "few_steps_back"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2023"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-059",
-      "source_url": "https://www.youtube.com/watch?v=EjdXxigzBp8",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Lampshade (Live in studio)",
-      "description": "Hunter Root - Lampshade (live). Album: dandelions.",
-      "post_date": "2020-01-03",
-      "released_at": "2026-05-24T22:20:05",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/EjdXxigzBp8/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "mimicking_the_sun_like_dandelions"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "live"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "lampshade"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2020"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-061",
-      "source_url": "https://www.youtube.com/watch?v=04UlgUA9Uo0",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - California Sober (Live @Rok10productions)",
-      "description": "Hunter Root - California Sober (live). Album: arkansas.",
-      "post_date": "2023-11-03",
-      "released_at": "2026-05-24T22:20:05",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/04UlgUA9Uo0/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "arkansas"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "live"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "california_sober"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2023"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-063",
-      "source_url": "https://www.youtube.com/watch?v=TLtIAsdi6k8",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - \"Friendly Fire\" (Official Lyric Video)",
-      "description": "Hunter Root - Friendly Fire (lyrics). Album: crooked.",
-      "post_date": "2025-09-11",
-      "released_at": "2026-05-24T22:20:04",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/TLtIAsdi6k8/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "crooked_home"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "lyrics"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "friendly_fire"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2025"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-065",
-      "source_url": "https://www.youtube.com/watch?v=WRjngwtGGFk",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Low (Official Visualizer Video)",
-      "description": "Hunter Root - Low (official). Album: crooked.",
-      "post_date": "2025-10-16",
-      "released_at": "2026-05-27T21:02:47",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/WRjngwtGGFk/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "crooked_home"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "low"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2025"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-067",
-      "source_url": "https://www.youtube.com/watch?v=XdiGZUWlU0Y",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Sleight of Hand (Official Audio)",
-      "description": "Hunter Root - Shapeshifter (official). Album: wheel.",
-      "post_date": "2020-05-01",
-      "released_at": "2026-05-24T22:20:04",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/XdiGZUWlU0Y/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "life_inside_a_wheel"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "shapeshifter"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2020"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-069",
-      "source_url": "https://www.youtube.com/watch?v=Pic6JU8ZiUY",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - People Are Programs (Official Music Video)",
-      "description": "Hunter Root - People Are Programs (official). Album: wheel.",
-      "post_date": "2019-02-16",
-      "released_at": "2026-05-24T22:20:03",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/Pic6JU8ZiUY/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "life_inside_a_wheel"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "people_are_programs"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2019"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-071",
-      "source_url": "https://www.youtube.com/watch?v=ZJipWxlqIvc",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Cusp Of The Mend (Official Art Video)",
-      "description": "Hunter Root - Cusp Of The Mend (official). Album: skipping.",
-      "post_date": "2021-03-26",
-      "released_at": "2026-05-24T22:20:03",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/ZJipWxlqIvc/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "skipping_stones_that_sink_before_theyre_thrown"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "cusp_of_the_mend"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2021"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-073",
-      "source_url": "https://www.youtube.com/watch?v=03NAxazLuhY",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Flash in the Pan (Official Visualizer Video)",
-      "description": "Hunter Root - Flash in the Pan (official). Album: crooked.",
-      "post_date": "2025-10-16",
-      "released_at": "2026-05-27T21:02:47",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/03NAxazLuhY/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "crooked_home"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "flash_in_the_pan"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2025"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-075",
-      "source_url": "https://www.youtube.com/watch?v=-2aU97nuzYE",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - If the Body is a Temple (Official Visualizer Video)",
-      "description": "Hunter Root - If the Body is a Temple (official). Album: crooked.",
-      "post_date": "2025-10-16",
-      "released_at": "2026-05-27T21:02:46",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/-2aU97nuzYE/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "crooked_home"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "if_the_body_is_a_temple"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2025"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-077",
-      "source_url": "https://www.youtube.com/watch?v=T0cdoRZ5LXg",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Town Rat Heathen",
-      "description": "Hunter Root - Town Rat Heathen (live). Album: arkansas.",
-      "post_date": "2023-03-03",
-      "released_at": "2026-05-24T22:20:02",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/T0cdoRZ5LXg/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "arkansas"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "live"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "format": [
-          "short"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "town_rat_heathen"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2023"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-079",
-      "source_url": "https://www.youtube.com/watch?v=M9HlNdBm2gw",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - The Devil is the Culprit (Official Visualizer Video)",
-      "description": "Hunter Root - The Devil is the Culprit (official). Album: crooked.",
-      "post_date": "2025-10-16",
-      "released_at": "2026-05-24T22:20:02",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/M9HlNdBm2gw/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "crooked_home"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "the_devil_is_the_culprit"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2025"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-081",
-      "source_url": "https://www.youtube.com/watch?v=QDqNREtunWE",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Out of my Hands (Official Visualizer Video)",
-      "description": "Hunter Root - Out of my Hands (official). Album: crooked.",
-      "post_date": "2025-10-16",
-      "released_at": "2026-05-24T22:20:02",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/QDqNREtunWE/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "crooked_home"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "out_of_my_hands"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2025"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-083",
-      "source_url": "https://www.youtube.com/watch?v=pJSOjyrRIRs",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - String Up A Necklace (Official Visualizer Video)",
-      "description": "Hunter Root - String Up a Necklace (official). Album: crooked.",
-      "post_date": "2025-10-16",
-      "released_at": "2026-05-24T22:20:01",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/pJSOjyrRIRs/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "crooked_home"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "string_up_a_necklace"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2025"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-085",
-      "source_url": "https://www.youtube.com/watch?v=mmR0SLtDSdo",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root - Bad Sign (Official Visualizer Video)",
-      "description": "Hunter Root - Bad Sign (official). Album: crooked.",
-      "post_date": "2025-10-16",
-      "released_at": "2026-05-24T22:20:01",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/mmR0SLtDSdo/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "crooked_home"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "bad_sign"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2025"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-087",
-      "source_url": "https://www.youtube.com/watch?v=PPzNfNOMUHE",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "Hunter Root  - Hand in the Fire (Official Visualizer Video)",
-      "description": "Hunter Root - Hand in the Fire (official). Album: crooked.",
-      "post_date": "2025-10-16",
-      "released_at": "2026-05-24T22:20:00",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/PPzNfNOMUHE/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "crooked_home"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "official"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "hand_in_the_fire"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2025"
-        ]
-      }
-    },
-    {
-      "id": "MV-20260523-089",
-      "source_url": "https://www.youtube.com/watch?v=Olv9qIVoBgQ",
-      "source_platform": "youtube",
-      "media_type": "link",
-      "title": "\"Straitlaced\" live out now! #rock #indie #singersongwriter #foryou #fyp #live #livemusic #musician",
-      "description": "Hunter Root - Straitlaced (live). Album: cracked.",
-      "post_date": "2024-02-23",
-      "released_at": "2026-05-24T19:45:29",
-      "primary_url": null,
-      "thumbnail_url": "https://i.ytimg.com/vi/Olv9qIVoBgQ/maxresdefault.jpg",
-      "tags": {
-        "album": [
-          "they_finally_cracked_me"
-        ],
-        "author": [
-          "hunter_root"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "live"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "format": [
-          "short"
-        ],
-        "release_type": [
-          "single"
-        ],
-        "scope": [
-          "hunter_root"
-        ],
-        "song": [
-          "straitlaced"
-        ],
-        "source": [
-          "youtube"
-        ],
-        "type": [
-          "video"
-        ],
-        "year": [
-          "2024"
         ]
       }
     },
@@ -2739,13 +1011,9 @@
       "tracks": [
         {
           "id": "MV-HR-20260417-001",
-          "source_url": "https://www.reverbnation.com/runwiththehunt/song/14767555-brain-cell",
-          "source_platform": "reverbnation",
-          "media_type": "audio",
+          "song": null,
           "title": "Brain Cell — audio recording",
-          "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
-          "post_date": null,
-          "released_at": "2026-05-27T21:05:46",
+          "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/0b/0b65aa63ffa9856c473f03ba3e361a7137a93415f2e3a34e5e959d6a3cac3459.mp3",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
           "tags": {
@@ -2769,17 +1037,20 @@
               "mp3"
             ]
           },
+          "videos": [
+            {
+              "audioUrl": "https://assets.weird.baby/audio/0b/0b65aa63ffa9856c473f03ba3e361a7137a93415f2e3a34e5e959d6a3cac3459.mp3",
+              "label": "Brain Cell — audio recording",
+              "type": "audio"
+            }
+          ],
           "track_no": 1
         },
         {
           "id": "MV-HR-20260417-021",
-          "source_url": "https://www.reverbnation.com/runwiththehunt/song/14309195-time-flow-zero",
-          "source_platform": "reverbnation",
-          "media_type": "audio",
+          "song": null,
           "title": "Time Flow Zero — audio recording",
-          "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
-          "post_date": null,
-          "released_at": "2026-05-27T21:06:10",
+          "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/d6/d693ac3556bb0c2c4933d3b8d3c3e98fcaaa6211c1d27d71005e39c314652f45.mp3",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
           "tags": {
@@ -2803,17 +1074,20 @@
               "mp3"
             ]
           },
+          "videos": [
+            {
+              "audioUrl": "https://assets.weird.baby/audio/d6/d693ac3556bb0c2c4933d3b8d3c3e98fcaaa6211c1d27d71005e39c314652f45.mp3",
+              "label": "Time Flow Zero — audio recording",
+              "type": "audio"
+            }
+          ],
           "track_no": 2
         },
         {
           "id": "MV-HR-20260417-017",
-          "source_url": "https://www.reverbnation.com/runwiththehunt/song/13563739-straightlaced",
-          "source_platform": "reverbnation",
-          "media_type": "audio",
+          "song": null,
           "title": "Straightlaced — audio recording",
-          "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
-          "post_date": null,
-          "released_at": "2026-05-27T21:06:02",
+          "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/73/73fa16ef17a9dc2622d433eaab651b9d29406a574b97dad6918f31de3366557a.mp3",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
           "tags": {
@@ -2837,17 +1111,20 @@
               "mp3"
             ]
           },
+          "videos": [
+            {
+              "audioUrl": "https://assets.weird.baby/audio/73/73fa16ef17a9dc2622d433eaab651b9d29406a574b97dad6918f31de3366557a.mp3",
+              "label": "Straightlaced — audio recording",
+              "type": "audio"
+            }
+          ],
           "track_no": 3
         },
         {
           "id": "MV-HR-20260417-025",
-          "source_url": "https://www.reverbnation.com/runwiththehunt/song/13447330-whiskey-to-the-sun",
-          "source_platform": "reverbnation",
-          "media_type": "audio",
+          "song": null,
           "title": "Whiskey to the Sun — audio recording",
-          "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
-          "post_date": null,
-          "released_at": "2026-05-31T00:39:31",
+          "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/48/48afb11da9af6f2f18212c20a170e14e6cedb1bf539e4878bd353611cf9e6fe3.mp3",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
           "tags": {
@@ -2871,17 +1148,20 @@
               "mp3"
             ]
           },
+          "videos": [
+            {
+              "audioUrl": "https://assets.weird.baby/audio/48/48afb11da9af6f2f18212c20a170e14e6cedb1bf539e4878bd353611cf9e6fe3.mp3",
+              "label": "Whiskey to the Sun — audio recording",
+              "type": "audio"
+            }
+          ],
           "track_no": 4
         },
         {
           "id": "MV-HR-20260417-007",
-          "source_url": "https://www.reverbnation.com/runwiththehunt/song/13297881-eyes-are-oceans",
-          "source_platform": "reverbnation",
-          "media_type": "audio",
+          "song": null,
           "title": "Eyes are Oceans — audio recording",
-          "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
-          "post_date": null,
-          "released_at": "2026-05-27T21:05:53",
+          "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/fd/fdf4283653fc49bb85654808460fd588d2653dbbe1b9c802d174bcefd2b71be2.mp3",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
           "tags": {
@@ -2905,17 +1185,20 @@
               "mp3"
             ]
           },
+          "videos": [
+            {
+              "audioUrl": "https://assets.weird.baby/audio/fd/fdf4283653fc49bb85654808460fd588d2653dbbe1b9c802d174bcefd2b71be2.mp3",
+              "label": "Eyes are Oceans — audio recording",
+              "type": "audio"
+            }
+          ],
           "track_no": 5
         },
         {
           "id": "MV-HR-20260417-023",
-          "source_url": "https://www.reverbnation.com/runwiththehunt",
-          "source_platform": "reverbnation",
-          "media_type": "audio",
+          "song": null,
           "title": "Trees and Everything — audio recording",
-          "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
-          "post_date": null,
-          "released_at": "2026-05-27T21:06:12",
+          "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/6e/6e172dd61b8ed4c575244b71cfa3acc901218877d136f721b0af3cacccc52510.mp3",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
           "tags": {
@@ -2939,17 +1222,20 @@
               "mp3"
             ]
           },
+          "videos": [
+            {
+              "audioUrl": "https://assets.weird.baby/audio/6e/6e172dd61b8ed4c575244b71cfa3acc901218877d136f721b0af3cacccc52510.mp3",
+              "label": "Trees and Everything — audio recording",
+              "type": "audio"
+            }
+          ],
           "track_no": 6
         },
         {
           "id": "MV-HR-20260417-005",
-          "source_url": "https://www.reverbnation.com/runwiththehunt",
-          "source_platform": "reverbnation",
-          "media_type": "audio",
+          "song": null,
           "title": "Doors with Keys — audio recording",
-          "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
-          "post_date": null,
-          "released_at": "2026-05-27T21:05:50",
+          "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/58/58c53cc87bc39bbafc9f84afbb5c1ec5919738b5324dbd0cec1e3652262cb702.mp3",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
           "tags": {
@@ -2973,17 +1259,20 @@
               "mp3"
             ]
           },
+          "videos": [
+            {
+              "audioUrl": "https://assets.weird.baby/audio/58/58c53cc87bc39bbafc9f84afbb5c1ec5919738b5324dbd0cec1e3652262cb702.mp3",
+              "label": "Doors with Keys — audio recording",
+              "type": "audio"
+            }
+          ],
           "track_no": 7
         },
         {
           "id": "MV-HR-20260417-011",
-          "source_url": "https://www.reverbnation.com/runwiththehunt",
-          "source_platform": "reverbnation",
-          "media_type": "audio",
+          "song": null,
           "title": "Northern Light Streaks — audio recording",
-          "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
-          "post_date": null,
-          "released_at": "2026-05-27T21:06:08",
+          "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/aa/aace4be80e879f2fad5b10f2223634cdd9a1e744bfad8334936b7f558568a70a.mp3",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
           "tags": {
@@ -3007,17 +1296,20 @@
               "mp3"
             ]
           },
+          "videos": [
+            {
+              "audioUrl": "https://assets.weird.baby/audio/aa/aace4be80e879f2fad5b10f2223634cdd9a1e744bfad8334936b7f558568a70a.mp3",
+              "label": "Northern Light Streaks — audio recording",
+              "type": "audio"
+            }
+          ],
           "track_no": 8
         },
         {
           "id": "MV-HR-20260416-014",
-          "source_url": "https://www.reverbnation.com/runwiththehunt/song/12495875-park-bench-pigeons",
-          "source_platform": "reverbnation",
-          "media_type": "audio",
+          "song": null,
           "title": "Park Bench Pigeons — audio recording",
-          "description": "Run With The Hunt — mp3 160 kbps — 312s",
-          "post_date": "2016-06-30",
-          "released_at": "2026-04-21T21:21:27",
+          "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/ec/ec58d4bbede48aff0cf95e391711d895b30488ab83a54a5aee2906c34e9c677a.mp3",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
           "tags": {
@@ -3041,17 +1333,20 @@
               "mp3"
             ]
           },
+          "videos": [
+            {
+              "audioUrl": "https://assets.weird.baby/audio/ec/ec58d4bbede48aff0cf95e391711d895b30488ab83a54a5aee2906c34e9c677a.mp3",
+              "label": "Park Bench Pigeons — audio recording",
+              "type": "audio"
+            }
+          ],
           "track_no": 9
         },
         {
           "id": "MV-HR-20260417-009",
-          "source_url": "https://www.reverbnation.com/runwiththehunt",
-          "source_platform": "reverbnation",
-          "media_type": "audio",
+          "song": null,
           "title": "Freezer Burnt — audio recording",
-          "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
-          "post_date": null,
-          "released_at": "2026-05-27T21:06:06",
+          "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/75/7506a7b0f0f2cc664337aebc54e0549e60396f01a33b4f687993ce0f0e8fb934.mp3",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
           "tags": {
@@ -3075,17 +1370,20 @@
               "mp3"
             ]
           },
+          "videos": [
+            {
+              "audioUrl": "https://assets.weird.baby/audio/75/7506a7b0f0f2cc664337aebc54e0549e60396f01a33b4f687993ce0f0e8fb934.mp3",
+              "label": "Freezer Burnt — audio recording",
+              "type": "audio"
+            }
+          ],
           "track_no": 10
         },
         {
           "id": "MV-HR-20260417-013",
-          "source_url": "https://www.reverbnation.com/runwiththehunt",
-          "source_platform": "reverbnation",
-          "media_type": "audio",
+          "song": null,
           "title": "Playing Music with Our Bones — audio recording",
-          "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
-          "post_date": null,
-          "released_at": "2026-05-27T21:06:18",
+          "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/e0/e0ccb3524cba0d31df4c215ff6c3e3c8145085d083fbb25a6773a248a6426cd4.mp3",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
           "tags": {
@@ -3109,17 +1407,20 @@
               "mp3"
             ]
           },
+          "videos": [
+            {
+              "audioUrl": "https://assets.weird.baby/audio/e0/e0ccb3524cba0d31df4c215ff6c3e3c8145085d083fbb25a6773a248a6426cd4.mp3",
+              "label": "Playing Music with Our Bones — audio recording",
+              "type": "audio"
+            }
+          ],
           "track_no": 11
         },
         {
           "id": "MV-HR-20260417-015",
-          "source_url": "https://www.reverbnation.com/runwiththehunt",
-          "source_platform": "reverbnation",
-          "media_type": "audio",
+          "song": null,
           "title": "Same Page — audio recording",
-          "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
-          "post_date": null,
-          "released_at": "2026-05-27T21:05:55",
+          "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/3b/3b3c3569db8ded027a448a4c5bd3aeb9e9c135ad50e881ac7ff9d73333abdd8c.mp3",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
           "tags": {
@@ -3143,17 +1444,20 @@
               "mp3"
             ]
           },
+          "videos": [
+            {
+              "audioUrl": "https://assets.weird.baby/audio/3b/3b3c3569db8ded027a448a4c5bd3aeb9e9c135ad50e881ac7ff9d73333abdd8c.mp3",
+              "label": "Same Page — audio recording",
+              "type": "audio"
+            }
+          ],
           "track_no": 12
         },
         {
           "id": "MV-HR-20260421-001",
-          "source_url": "https://www.reverbnation.com/runwiththehunt",
-          "source_platform": "reverbnation",
-          "media_type": "audio",
+          "song": null,
           "title": "Song — audio recording",
-          "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
-          "post_date": null,
-          "released_at": "2026-05-27T21:06:16",
+          "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/0b/0b15c358f6ca85c824448b083c14e476dc7ab3f3fac108da05ff7d4ffc85b015.mp3",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
           "tags": {
@@ -3177,17 +1481,20 @@
               "mp3"
             ]
           },
+          "videos": [
+            {
+              "audioUrl": "https://assets.weird.baby/audio/0b/0b15c358f6ca85c824448b083c14e476dc7ab3f3fac108da05ff7d4ffc85b015.mp3",
+              "label": "Song — audio recording",
+              "type": "audio"
+            }
+          ],
           "track_no": 13
         },
         {
           "id": "MV-HR-20260417-003",
-          "source_url": "https://www.reverbnation.com/runwiththehunt",
-          "source_platform": "reverbnation",
-          "media_type": "audio",
+          "song": null,
           "title": "Dead Man — audio recording",
-          "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
-          "post_date": null,
-          "released_at": "2026-05-27T21:05:48",
+          "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/78/780e1384fcc70c74eb050866adfb09d040be5516216369c491a55e4fde9c359d.mp3",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
           "tags": {
@@ -3211,17 +1518,20 @@
               "mp3"
             ]
           },
+          "videos": [
+            {
+              "audioUrl": "https://assets.weird.baby/audio/78/780e1384fcc70c74eb050866adfb09d040be5516216369c491a55e4fde9c359d.mp3",
+              "label": "Dead Man — audio recording",
+              "type": "audio"
+            }
+          ],
           "track_no": 14
         },
         {
           "id": "MV-HR-20260417-019",
-          "source_url": "https://www.reverbnation.com/runwiththehunt",
-          "source_platform": "reverbnation",
-          "media_type": "audio",
+          "song": null,
           "title": "Think My Mind — audio recording",
-          "description": "Run With The Hunt — mp3 (Phase 2 manual recovery)",
-          "post_date": null,
-          "released_at": "2026-05-27T21:05:58",
+          "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/8c/8ccf1adda4bf1c57af77d6d97ee9cd4bf1e24c03d4048638fffd03436a22884b.mp3",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
           "tags": {
@@ -3245,7 +1555,1832 @@
               "mp3"
             ]
           },
+          "videos": [
+            {
+              "audioUrl": "https://assets.weird.baby/audio/8c/8ccf1adda4bf1c57af77d6d97ee9cd4bf1e24c03d4048638fffd03436a22884b.mp3",
+              "label": "Think My Mind — audio recording",
+              "type": "audio"
+            }
+          ],
           "track_no": 15
+        }
+      ]
+    },
+    {
+      "id": "MV-HR-ALBUM-arkansas",
+      "source_url": null,
+      "source_platform": null,
+      "media_type": "other",
+      "title": "Arkansas",
+      "description": "",
+      "post_date": null,
+      "released_at": "2026-06-05T02:38:29",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "arkansas"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "card_kind": [
+          "album"
+        ],
+        "content_kind": [
+          "other"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ]
+      },
+      "card_kind": "album",
+      "cover_artifact_id": null,
+      "tracks": [
+        {
+          "id": "MV-20260518-001",
+          "song": "reverend",
+          "title": "Hunter Root - Reverend (Official Music Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/7Lttb_59EYw/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "arkansas"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "reverend"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "year": [
+              "2023"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "7Lttb_59EYw",
+              "label": "Hunter Root - Reverend (Official Music Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 1
+        },
+        {
+          "id": "MV-20260523-004",
+          "song": "town_rat_heathen",
+          "title": "Hunter Root - Town Rat Heathen (Official Music Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/n2m8sP17E-c/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "arkansas"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "town_rat_heathen"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2023"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "n2m8sP17E-c",
+              "label": "Hunter Root - Town Rat Heathen (Official Music Video)",
+              "type": "official"
+            },
+            {
+              "ytId": "omU0Xt3yB-o",
+              "label": "Hunter Root - Town Rat Heathen (Live @Rok10productions)",
+              "type": "live"
+            },
+            {
+              "ytId": "T0cdoRZ5LXg",
+              "label": "Hunter Root - Town Rat Heathen",
+              "type": "live"
+            }
+          ],
+          "track_no": 2
+        },
+        {
+          "id": "MV-20260523-007",
+          "song": "quicksand_sinking",
+          "title": "Hunter Root - Quicksand Sinking (Official Music Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/QFpJf0RDsXc/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "arkansas"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "quicksand_sinking"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2023"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "QFpJf0RDsXc",
+              "label": "Hunter Root - Quicksand Sinking (Official Music Video)",
+              "type": "official"
+            },
+            {
+              "ytId": "13IUBFvIkls",
+              "label": "Hunter Root - Quicksand Sinking (Official Lyric Video)",
+              "type": "lyrics"
+            }
+          ],
+          "track_no": 3
+        },
+        {
+          "id": "MV-20260523-022",
+          "song": "silver_lining",
+          "title": "Hunter Root - Silver Lining (Official Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/uaFHDfuohxc/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "arkansas"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "silver_lining"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2023"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "uaFHDfuohxc",
+              "label": "Hunter Root - Silver Lining (Official Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 4
+        },
+        {
+          "id": "MV-20260523-028",
+          "song": "grain_of_rice",
+          "title": "Hunter Root - Grain Of Rice (live in studio)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/_w0wz5o9dWU/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "arkansas"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "live"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "grain_of_rice"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2022"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "_w0wz5o9dWU",
+              "label": "Hunter Root - Grain Of Rice (live in studio)",
+              "type": "live"
+            }
+          ],
+          "track_no": 5
+        },
+        {
+          "id": "MV-20260523-031",
+          "song": "cant_outshine_the_truth",
+          "title": "Hunter Root - Can't Outshine The Truth (Live @Rok10productions)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/z1K0HWTDrL8/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "arkansas"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "live"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "cant_outshine_the_truth"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2023"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "z1K0HWTDrL8",
+              "label": "Hunter Root - Can't Outshine The Truth (Live @Rok10productions)",
+              "type": "live"
+            }
+          ],
+          "track_no": 6
+        },
+        {
+          "id": "MV-20260523-057",
+          "song": "few_steps_back",
+          "title": "Hunter Root - Few Steps Back (Live / The Couch Sessions)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/Fa5GKxEgf7c/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "arkansas"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "live"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "few_steps_back"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2023"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "Fa5GKxEgf7c",
+              "label": "Hunter Root - Few Steps Back (Live / The Couch Sessions)",
+              "type": "live"
+            }
+          ],
+          "track_no": 7
+        },
+        {
+          "id": "MV-20260523-061",
+          "song": "california_sober",
+          "title": "Hunter Root - California Sober (Live @Rok10productions)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/04UlgUA9Uo0/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "arkansas"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "live"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "california_sober"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2023"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "04UlgUA9Uo0",
+              "label": "Hunter Root - California Sober (Live @Rok10productions)",
+              "type": "live"
+            }
+          ],
+          "track_no": 8
+        }
+      ]
+    },
+    {
+      "id": "MV-HR-ALBUM-crooked_home",
+      "source_url": null,
+      "source_platform": null,
+      "media_type": "other",
+      "title": "Crooked Home",
+      "description": "",
+      "post_date": null,
+      "released_at": "2026-06-05T02:38:29",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "card_kind": [
+          "album"
+        ],
+        "content_kind": [
+          "other"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ]
+      },
+      "card_kind": "album",
+      "cover_artifact_id": null,
+      "tracks": [
+        {
+          "id": "MV-20260523-001",
+          "song": "94",
+          "title": "Hunter Root - ‘94 (Official Music Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/vPW49GU38Ng/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "crooked_home"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "94"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2025"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "vPW49GU38Ng",
+              "label": "Hunter Root - ‘94 (Official Music Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 1
+        },
+        {
+          "id": "MV-20260523-010",
+          "song": "cookin_in_the_bathroom",
+          "title": "Hunter Root - Cookin' in the Bathroom (Official Music Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/HLdiK-6WTwM/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "crooked_home"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "cookin_in_the_bathroom"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2024"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "HLdiK-6WTwM",
+              "label": "Hunter Root - Cookin' in the Bathroom (Official Music Video)",
+              "type": "official"
+            },
+            {
+              "ytId": "NJYYmXnAN0s",
+              "label": "Hunter Root - Cookin' in the Bathroom (live acoustic)",
+              "type": "live"
+            }
+          ],
+          "track_no": 2
+        },
+        {
+          "id": "MV-20260523-013",
+          "song": "a_pot_song",
+          "title": "A Pot Song",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/2Lm8noK3hQI/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "crooked_home"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "a_pot_song"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2025"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "2Lm8noK3hQI",
+              "label": "A Pot Song",
+              "type": "official"
+            }
+          ],
+          "track_no": 3
+        },
+        {
+          "id": "MV-20260523-025",
+          "song": "my_brothers_bones",
+          "title": "Hunter Root - My Brother's Bones (Official Music Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/wi5G_Zn74gc/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "crooked_home"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "my_brothers_bones"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2025"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "wi5G_Zn74gc",
+              "label": "Hunter Root - My Brother's Bones (Official Music Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 4
+        },
+        {
+          "id": "MV-20260523-051",
+          "song": "the_keeper",
+          "title": "Hunter Root - The Keeper (Official Visualizer Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/bXZo69DNSrM/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "crooked_home"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "the_keeper"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2025"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "bXZo69DNSrM",
+              "label": "Hunter Root - The Keeper (Official Visualizer Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 5
+        },
+        {
+          "id": "MV-20260523-055",
+          "song": "friendly_fire",
+          "title": "Hunter Root - Friendly Fire (Official Music Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/YlU1CBJkJ5w/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "crooked_home"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "friendly_fire"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2025"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "YlU1CBJkJ5w",
+              "label": "Hunter Root - Friendly Fire (Official Music Video)",
+              "type": "official"
+            },
+            {
+              "ytId": "TLtIAsdi6k8",
+              "label": "Hunter Root - \"Friendly Fire\" (Official Lyric Video)",
+              "type": "lyrics"
+            }
+          ],
+          "track_no": 6
+        },
+        {
+          "id": "MV-20260523-065",
+          "song": "low",
+          "title": "Hunter Root - Low (Official Visualizer Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/WRjngwtGGFk/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "crooked_home"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "low"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2025"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "WRjngwtGGFk",
+              "label": "Hunter Root - Low (Official Visualizer Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 7
+        },
+        {
+          "id": "MV-20260523-073",
+          "song": "flash_in_the_pan",
+          "title": "Hunter Root - Flash in the Pan (Official Visualizer Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/03NAxazLuhY/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "crooked_home"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "flash_in_the_pan"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2025"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "03NAxazLuhY",
+              "label": "Hunter Root - Flash in the Pan (Official Visualizer Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 8
+        },
+        {
+          "id": "MV-20260523-075",
+          "song": "if_the_body_is_a_temple",
+          "title": "Hunter Root - If the Body is a Temple (Official Visualizer Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/-2aU97nuzYE/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "crooked_home"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "if_the_body_is_a_temple"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2025"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "-2aU97nuzYE",
+              "label": "Hunter Root - If the Body is a Temple (Official Visualizer Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 9
+        },
+        {
+          "id": "MV-20260523-079",
+          "song": "the_devil_is_the_culprit",
+          "title": "Hunter Root - The Devil is the Culprit (Official Visualizer Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/M9HlNdBm2gw/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "crooked_home"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "the_devil_is_the_culprit"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2025"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "M9HlNdBm2gw",
+              "label": "Hunter Root - The Devil is the Culprit (Official Visualizer Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 10
+        },
+        {
+          "id": "MV-20260523-081",
+          "song": "out_of_my_hands",
+          "title": "Hunter Root - Out of my Hands (Official Visualizer Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/QDqNREtunWE/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "crooked_home"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "out_of_my_hands"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2025"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "QDqNREtunWE",
+              "label": "Hunter Root - Out of my Hands (Official Visualizer Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 11
+        },
+        {
+          "id": "MV-20260523-083",
+          "song": "string_up_a_necklace",
+          "title": "Hunter Root - String Up A Necklace (Official Visualizer Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/pJSOjyrRIRs/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "crooked_home"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "string_up_a_necklace"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2025"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "pJSOjyrRIRs",
+              "label": "Hunter Root - String Up A Necklace (Official Visualizer Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 12
+        },
+        {
+          "id": "MV-20260523-085",
+          "song": "bad_sign",
+          "title": "Hunter Root - Bad Sign (Official Visualizer Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/mmR0SLtDSdo/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "crooked_home"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "bad_sign"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2025"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "mmR0SLtDSdo",
+              "label": "Hunter Root - Bad Sign (Official Visualizer Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 13
+        },
+        {
+          "id": "MV-20260523-087",
+          "song": "hand_in_the_fire",
+          "title": "Hunter Root  - Hand in the Fire (Official Visualizer Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/PPzNfNOMUHE/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "crooked_home"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "hand_in_the_fire"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2025"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "PPzNfNOMUHE",
+              "label": "Hunter Root  - Hand in the Fire (Official Visualizer Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 14
+        }
+      ]
+    },
+    {
+      "id": "MV-HR-ALBUM-wheel",
+      "source_url": null,
+      "source_platform": null,
+      "media_type": "other",
+      "title": "Life Inside A Wheel",
+      "description": "",
+      "post_date": null,
+      "released_at": "2026-06-05T02:38:29",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "life_inside_a_wheel"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "card_kind": [
+          "album"
+        ],
+        "content_kind": [
+          "other"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ]
+      },
+      "card_kind": "album",
+      "cover_artifact_id": null,
+      "tracks": [
+        {
+          "id": "MV-20260523-067",
+          "song": "shapeshifter",
+          "title": "Hunter Root - Sleight of Hand (Official Audio)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/XdiGZUWlU0Y/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "life_inside_a_wheel"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "shapeshifter"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2020"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "XdiGZUWlU0Y",
+              "label": "Hunter Root - Sleight of Hand (Official Audio)",
+              "type": "official"
+            }
+          ],
+          "track_no": 1
+        },
+        {
+          "id": "MV-20260523-069",
+          "song": "people_are_programs",
+          "title": "Hunter Root - People Are Programs (Official Music Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/Pic6JU8ZiUY/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "life_inside_a_wheel"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "people_are_programs"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2019"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "Pic6JU8ZiUY",
+              "label": "Hunter Root - People Are Programs (Official Music Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 2
+        }
+      ]
+    },
+    {
+      "id": "MV-HR-ALBUM-dandelions",
+      "source_url": null,
+      "source_platform": null,
+      "media_type": "other",
+      "title": "Mimicking the Sun Like Dandelions",
+      "description": "",
+      "post_date": null,
+      "released_at": "2026-06-05T02:38:29",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "mimicking_the_sun_like_dandelions"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "card_kind": [
+          "album"
+        ],
+        "content_kind": [
+          "other"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ]
+      },
+      "card_kind": "album",
+      "cover_artifact_id": null,
+      "tracks": [
+        {
+          "id": "MV-20260523-059",
+          "song": "lampshade",
+          "title": "Hunter Root - Lampshade (Live in studio)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/EjdXxigzBp8/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "mimicking_the_sun_like_dandelions"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "live"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "lampshade"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2020"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "EjdXxigzBp8",
+              "label": "Hunter Root - Lampshade (Live in studio)",
+              "type": "live"
+            },
+            {
+              "ytId": "JA1p8WSQRQQ",
+              "label": "Hunter Root - Lampshade (Lyric Video)",
+              "type": "lyrics"
+            }
+          ],
+          "track_no": 1
+        },
+        {
+          "id": "MV-20260523-034",
+          "song": "homestead",
+          "title": "Hunter Root - Homestead (Official Music Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/4HIfc5MLu6k/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "mimicking_the_sun_like_dandelions"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "homestead"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2025"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "4HIfc5MLu6k",
+              "label": "Hunter Root - Homestead (Official Music Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 2
+        },
+        {
+          "id": "MV-20260523-045",
+          "song": "favorite_friend",
+          "title": "Hunter Root - Favorite Friend (Official Music Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/L7-1T7F7_R0/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "mimicking_the_sun_like_dandelions"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "favorite_friend"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2020"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "L7-1T7F7_R0",
+              "label": "Hunter Root - Favorite Friend (Official Music Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 3
+        },
+        {
+          "id": "MV-20260523-049",
+          "song": "little_red_riding_hood",
+          "title": "Hunter Root - Little Red Riding Hood (Live @ MCHS)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/BOQHN-O4DDc/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "mimicking_the_sun_like_dandelions"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "live"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "little_red_riding_hood"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2023"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "BOQHN-O4DDc",
+              "label": "Hunter Root - Little Red Riding Hood (Live @ MCHS)",
+              "type": "live"
+            }
+          ],
+          "track_no": 4
+        },
+        {
+          "id": "MV-20260523-053",
+          "song": "family_tree",
+          "title": "Hunter Root - Family Tree (Live in studio)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/d0TXF6iXFRQ/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "mimicking_the_sun_like_dandelions"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "live"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "family_tree"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2019"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "d0TXF6iXFRQ",
+              "label": "Hunter Root - Family Tree (Live in studio)",
+              "type": "live"
+            }
+          ],
+          "track_no": 5
+        }
+      ]
+    },
+    {
+      "id": "MV-HR-ALBUM-skipping",
+      "source_url": null,
+      "source_platform": null,
+      "media_type": "other",
+      "title": "Skipping Stones That Sink Before They're Thrown",
+      "description": "",
+      "post_date": null,
+      "released_at": "2026-06-05T02:38:29",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "skipping_stones_that_sink_before_theyre_thrown"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "card_kind": [
+          "album"
+        ],
+        "content_kind": [
+          "other"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ]
+      },
+      "card_kind": "album",
+      "cover_artifact_id": null,
+      "tracks": [
+        {
+          "id": "MV-20260523-040",
+          "song": "nothin_wrong",
+          "title": "Hunter Root - Nothin' Wrong (Official Music Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/Wv0_mujJUQU/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "skipping_stones_that_sink_before_theyre_thrown"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "release_type": [
+              "single"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "nothin_wrong"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2021"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "Wv0_mujJUQU",
+              "label": "Hunter Root - Nothin' Wrong (Official Music Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 1
+        },
+        {
+          "id": "MV-20260523-042",
+          "song": "dont_blame_the_breeze",
+          "title": "Hunter Root - Don't Blame the Breeze (Official Artwork Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/KMJVLWr34Rc/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "skipping_stones_that_sink_before_theyre_thrown"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "dont_blame_the_breeze"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2021"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "KMJVLWr34Rc",
+              "label": "Hunter Root - Don't Blame the Breeze (Official Artwork Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 2
+        },
+        {
+          "id": "MV-20260523-071",
+          "song": "cusp_of_the_mend",
+          "title": "Hunter Root - Cusp Of The Mend (Official Art Video)",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/ZJipWxlqIvc/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "skipping_stones_that_sink_before_theyre_thrown"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "official"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "cusp_of_the_mend"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2021"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "ZJipWxlqIvc",
+              "label": "Hunter Root - Cusp Of The Mend (Official Art Video)",
+              "type": "official"
+            }
+          ],
+          "track_no": 3
+        }
+      ]
+    },
+    {
+      "id": "MV-HR-ALBUM-cracked",
+      "source_url": null,
+      "source_platform": null,
+      "media_type": "other",
+      "title": "They Finally Cracked Me",
+      "description": "",
+      "post_date": null,
+      "released_at": "2026-06-05T02:38:29",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "they_finally_cracked_me"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "card_kind": [
+          "album"
+        ],
+        "content_kind": [
+          "other"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ]
+      },
+      "card_kind": "album",
+      "cover_artifact_id": null,
+      "tracks": [
+        {
+          "id": "MV-20260523-089",
+          "song": "straitlaced",
+          "title": "\"Straitlaced\" live out now! #rock #indie #singersongwriter #foryou #fyp #live #livemusic #musician",
+          "media_type": "link",
+          "primary_url": null,
+          "thumbnail_url": "https://i.ytimg.com/vi/Olv9qIVoBgQ/maxresdefault.jpg",
+          "tags": {
+            "album": [
+              "they_finally_cracked_me"
+            ],
+            "author": [
+              "hunter_root"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "live"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "format": [
+              "short"
+            ],
+            "release_type": [
+              "single"
+            ],
+            "scope": [
+              "hunter_root"
+            ],
+            "song": [
+              "straitlaced"
+            ],
+            "source": [
+              "youtube"
+            ],
+            "type": [
+              "video"
+            ],
+            "year": [
+              "2024"
+            ]
+          },
+          "videos": [
+            {
+              "ytId": "Olv9qIVoBgQ",
+              "label": "\"Straitlaced\" live out now! #rock #indie #singersongwriter #foryou #fyp #live #livemusic #musician",
+              "type": "live"
+            }
+          ],
+          "track_no": 1
         }
       ]
     }
