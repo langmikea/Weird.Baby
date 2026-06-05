@@ -9,7 +9,7 @@ decisions, and pointers to canonical specs. **Does NOT cover current
 progress, deploy status, or what's next** — see `NAVIGATION.md` and
 `git log` for that.
 
-**Last refreshed:** 2026-05-15
+**Last refreshed:** 2026-06-05
 
 ## What this is
 

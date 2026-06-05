@@ -13,8 +13,8 @@ which exhibits artists and their artifacts to visitors. Hunter Root is
 the primary artist content currently built out; other artists are
 planned. The Museum reads released artifacts from MV (the upstream
 artifact vault) and renders them as exhibits. The Museum is
-in-development — the deployed build at https://weird.baby exists, but
-significant working-tree changes since the last deploy have not
+live — the deployed build at https://weird.baby is current as of 2026-06-05 (version e785223f), and
+recent working-tree changes have
 shipped, and the Deep Dive / MV-export pipeline is still being
 specified.
 
@@ -108,8 +108,8 @@ There are three systems, related as follows:
   Stance B was chosen, 2026-05-14. Museum work doesn't block on MV
   cleanup that has no scheduled date.
 
-- **The deployed Museum is behind the working tree.** The build at
-  weird.baby is from 2026-04-15; the working tree has accumulated
+- **The deployed Museum is current.** The build at
+  weird.baby was deployed 2026-06-05 (version e785223f); it includes
   significant uncommitted/unbuilt changes (exhibit UX iterations,
   Deep Dive scaffolding, vocabulary work). The release discipline
   recorded in `CLAUDE.md` is operator-confirmed only — features
@@ -293,8 +293,8 @@ green-lit; all await operator direction.
 **Not in BUILD scope:** asset delivery and the curation GUI are later, separate
 milestones — see v2.1-target §11, Category B.
 
-**Deploy gap (unchanged):** the Museum is still deployed at https://weird.baby
-from a build dated 2026-04-15; the working tree has unshipped UX work. That gap
+**Deploy gap (CLOSED 2026-06-05):** the Museum at https://weird.baby is current
+(version e785223f) — Graphite palette, unified album foundation, and foundation-driven player (audio + YouTube, SPINE retired) all live. That gap
 is separate from the data-architecture work.
 
 ## What's not here
