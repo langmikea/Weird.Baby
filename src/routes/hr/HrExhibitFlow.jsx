@@ -527,9 +527,10 @@ function presetSummaryText(p) {
   return flags.length ? `${body}  ·  ${flags.join(" + ")}` : body;
 }
 
-// O8 — preset snapshot: capture playingTrack + spinePosition for display
-// only. APPLY does not restore player state in v1; it restores selected /
-// shuffle / loop only. Deferred to a follow-up phase.
+// Preset snapshot (UX_PRESETS_SPEC s8.2): playingTrack and spinePosition are
+// the REAL player state, crossed from Exhibit.jsx as props. playingTrack is
+// { albumId, trackId, variantId } (stable ids); spinePosition is the focused
+// album's stable id.
 function makePresetSnapshot({ selected, shuffle, loop, playingTrack, spinePosition }) {
   return {
     selected: cloneSelected(selected),
@@ -537,8 +538,8 @@ function makePresetSnapshot({ selected, shuffle, loop, playingTrack, spinePositi
     loop: !!loop,
     playingTrack: playingTrack ? { ...playingTrack } : null,
     // O8/SPINE: store focused album by STABLE id, never by derived-spine index
-    // (the index ordering changed when SPINE was retired). null until player
-    // capture is wired; APPLY ignores it in v1 (deferred per controls §9.4).
+    // (the index ordering changed when SPINE was retired). Sourced live from
+    // the activeAlbumId prop on the Exhibit.jsx seam.
     focusedAlbumId: spinePosition?.albumId ?? (typeof spinePosition === "string" ? spinePosition : null),
     schemaVersion: PRESET_SCHEMA_VERSION,
     savedAt: Date.now(),
@@ -2995,11 +2996,11 @@ function AuditStrip() {
 }
 
 // ΓöÇΓöÇΓöÇ ROOT ΓÇö HrExhibitFlow component, exported for Exhibit.jsx line 908 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
-export default function HrExhibitFlow({ activeAlbumId }) {
-  // activeAlbumId is accepted for prop compatibility with Exhibit.jsx but
-  // is not consumed by the deck in v1. Future tabs / filters may key off
-  // it (e.g., to seed era from album).
-  void activeAlbumId;
+export default function HrExhibitFlow({ activeAlbumId, playingTrack = null }) {
+  // Preset capture (UX_PRESETS_SPEC s8.2/s9): real player state crosses the
+  // Exhibit.jsx seam as props. activeAlbumId is the focused album's STABLE id
+  // (recorded as focusedAlbumId in snapshots); playingTrack is
+  // { albumId, trackId, variantId } in stable ids, or null when idle.
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState(() => makeEntrySelection());
   // Phase C: one-card-at-a-time audio playback. Lifted here so that
@@ -3037,9 +3038,7 @@ export default function HrExhibitFlow({ activeAlbumId }) {
   const [_kalState, setKalState] = useState(KAL_STATE_DEFAULT);
   const [shuffle, setShuffle] = useState(false);
   const [loop, setLoop] = useState(false);
-  // O8 ΓÇö captured for snapshot display only; not currently sourced.
-  const [playingTrack] = useState(null);
-  const [spinePosition] = useState(null);
+  const spinePosition = activeAlbumId ?? null;
   const [activeTab, setActiveTab] = useState(null);
   const [hoverPeek, setHoverPeek] = useState(false);
   const [deckHeight, setDeckHeight] = useState(() => {
