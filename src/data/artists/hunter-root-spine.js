@@ -4,8 +4,8 @@
 //
 // Contract consumed by Exhibit.jsx (do not change):
 //   album = { id, title, year, art, accent, tracks: [ track ] }
-//   track = { title, videos: [ video ] }
-//   video = { ytId, audioUrl, label, type }   // ytId for YouTube, audioUrl for mp3
+//   track = { id, title, videos: [ video ] }      // id = stable track id (foundation)
+//   video = { id, ytId, audioUrl, label, type }  // id = ytId or slug(audioUrl), stable per rendition
 //
 // Albums with no foundation art (cover_artifact_id null) get art:null and
 // accent:null — Exhibit.jsx renders its placeholder gradient. Never
@@ -89,8 +89,10 @@ export function buildSpineFromArtifacts(exhibitJson, albumsConfig) {
       art: c.thumbnail_url ?? null,
       accent: cfg.accent ?? null,
       tracks: (c.tracks || []).map(t => ({
+        id: t.id,
         title: cleanTrackTitle(t.title, t.song ?? t.tags?.song?.[0] ?? null),
         videos: (t.videos || []).map(v => ({
+          id: v.ytId ?? (v.audioUrl ? slugify(v.audioUrl) : null),
           ytId: v.ytId ?? null,
           audioUrl: v.audioUrl ?? null,
           label: cleanLabel(v.label),
