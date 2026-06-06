@@ -1,7 +1,7 @@
-# Weird.Baby Museum — UX Presets Spec, v0.2 (DRAFT)
+# Weird.Baby Museum — UX Presets Spec, v0.3
 
 **Date:** 2026-06-05
-**Status:** Working draft v0.2. Not locked. Verified against live code (Cowork drift ledger, 2026-06-05). Produced from a live design session (Mike + system engineer) plus a full read of the canonical set.
+**Status:** Working draft v0.3. Not locked. Verified against live code (Cowork drift ledger, 2026-06-05). Produced from a live design session (Mike + system engineer) plus a full read of the canonical set.
 **Fills:** `UX_CONTROLS_SPEC_v0.4 §C.5.0` names a "forthcoming `UX_PRESETS_SPEC`." This is that document's first draft.
 **Authority above this doc:** `CANON_UX_LIFECYCLE_SPEC_v0.5` (F=ma, preset-as-artifact), `CANON_VISION_LOCK_v0.3`, `CANON_UX_SPEC_v0.3` (§C.5.0, §N.2, §N.7), `CANON_UX_CONTROLS_SPEC_v0.4` (§8.4, §9). Where they speak, they win. This doc adds what they don't say and records this session's decisions.
 
@@ -121,11 +121,33 @@ Spec corrections from the ledger:
 
 Two spec-vs-framework conflicts surfaced that block implementation until resolved:
 
-### §8.1 — Mobile presets surface (BLOCKS the §4 mobile floor)
-The entire deck, **including the Presets tab**, is `display:none` at ≤720px. So the §4 requirement ("player + default presets usable on phone") **directly contradicts live code** — factory presets are currently unreachable on a phone. Prerequisite: a mobile surface for (at minimum) the default/factory presets that survives the ≤720px deck-hide. This is a UX-design item, not just wiring — where do presets live on the phone when the dock is gone? Resolve before build.
+### §8.1 — Mobile presets surface [RESOLVED 2026-06-05, Mike]
+**Finding (live inspection at 390px):** the tabbed dock does not merely hide at ≤720px — it collapses into a single vertical scroll. Filter groups (SOURCE, CONTENT KIND, CARD KIND) and the artifact deck linearize into stacked, tappable sections; the desktop tabs become a legend in body copy. **Presets are the one section that did not make this transition** — hence unreachable on phone. So this was a missing section, not a hard hide.
 
-### §8.2 — Stable track + variant IDs (BLOCKS per-song variant capture)
-Per-row variant capture has nothing stable to reference: tracks carry no IDs and videos are positional in the spine contract. The id-hardening philosophy (stable refs, never indices — the reason `focusedAlbumId` exists) **cannot extend to track variants** until the track/variant layer has stable identity. Prerequisite: assign stable IDs to tracks and their variants in the data contract. Without this, a build silently falls back to positional indices — the exact fragility the hardening was built to prevent.
+**Resolution:** add a **PRESETS section to the mobile vertical scroll**, using the pattern the filter groups already establish (stacked header + tappable rows). Specifically:
+- Factory/default presets render as full-width tap rows, each offering **Play** (commit) and **Show**. This satisfies the mobile floor (player + default presets usable on phone).
+- **Mobile is view-and-apply only** (Mike): no Save / name / Reset slot authoring on phone. Slot authoring stays desktop-only. Mobile presets are for *steering with the defaults*, not creating them.
+- **Placement: high** in the scroll (near the player/coverflow), treating presets as primary steering rather than an afterthought.
+- No new interaction grammar required — reuses the existing stacked-section pattern.
+
+(Note: this resolves the §4 mobile-floor contradiction. The remaining work is wiring, gated only by §8.2.)
+
+### §8.2 — Stable track + variant IDs [SCOPED 2026-06-05]
+
+**Contract as-found (read from live `weird-baby-museum`):**
+- **Albums already have stable IDs.** `hunter-root.js` is an album registry: `{ id:"arkansas", tag:"arkansas", year:2023 }`. Short stable `id` + stable `tag` join key. (This is why `focusedAlbumId` works.)
+- **Tracks have no ID.** Adapter type contract (`hunter-root-spine.js` L7): `track = { title, videos:[video] }`. A track is identified only by a display `title` that is *derived at adapter time* via `cleanTrackTitle()` — not durable.
+- **Variants/videos have no ID.** `video = { ytId, audioUrl, label, type }` (L8). Identified by `ytId`/`audioUrl` + `label`; positional within `videos[]`.
+- **But a latent stable key already exists in the data.** The adapter reads a **`song` slug** off tracks (`t.song ?? t.tags?.song?.[0]`, L92) and the comment (L34) notes `song:shapeshifter` matches `hr_facts` trackIds. `hr_facts.js` is already keyed by track slug throughout (section-4 scan: ~50 id-keyed entries). So track identity half-exists in the data layer — it is simply not carried onto the spine `track`/`video` objects the player and presets consume.
+
+**Scoped change (smaller than "invent IDs"):**
+1. **Track stable ID:** propagate the existing `song` slug onto the spine `track` object — `track.id = song slug` (already present in source data and already used as the `hr_facts` join key). No new identity invented; surface what exists.
+2. **Variant stable key:** add a stable per-variant key on the spine `video` object. Candidate: `ytId` when present, else a hash/slug of `audioUrl`, namespaced by track — e.g. `variantId = `${track.id}:${ytId ?? slug(audioUrl)}``. Must be stable across rebuilds (not array index).
+3. **Adapter is the single change point.** Both additions happen in `hunter-root-spine.js` `.map()` (L91–94) where `track` and `video` objects are already being constructed. No data-file migration required if the `song` slug is reliably present; spot-check coverage first.
+
+**Preset consequence:** a preset's per-song variant capture references `{ albumId, trackId, variantId }` — all stable, all resolved at apply-time against the rebuilt spine (same philosophy as `focusedAlbumId`). No positional indices.
+
+**Prerequisite work before build:** (a) confirm `song` slug coverage across all tracks (any track missing it needs one added in source); (b) define the `variantId` rule and apply in the adapter; (c) extend the snapshot shape to carry `trackId`/`variantId`. Item (a) is the only possible data-entry task; (b)/(c) are code.
 
 ---
 
@@ -135,4 +157,4 @@ The single boundary between the two scopes is `<ExhibitFlow activeAlbumId={album
 
 ---
 
-*End of UX_PRESETS_SPEC v0.2 DRAFT. Not locked. Verified against live code via Cowork drift ledger 2026-06-05. Companion prototype: `prototype_presets_v3.html` (thinking instrument only — not the target UI, per §0.1).*
+*End of UX_PRESETS_SPEC v0.3 DRAFT. Not locked. Verified against live code via Cowork drift ledger 2026-06-05. Companion prototype: `prototype_presets_v3.html` (thinking instrument only — not the target UI, per §0.1).*
