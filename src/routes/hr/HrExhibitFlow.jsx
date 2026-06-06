@@ -2557,10 +2557,12 @@ function PresetsContent({
   userPresets, setUserPresets, selected, setSelected,
   shuffle, setShuffle, loop, setLoop,
   playingTrack, spinePosition,
+  onRestorePlayer, peekSelected, setPeekSelected,
 }) {
   const [lastFactoryApplied, setLastFactoryApplied] = useState(null);
 
   const applyFactoryPreset = (preset) => {
+    setPeekSelected(null); // factory apply is a commit; leave any Show peek
     const next = preset.apply();
     const cleared = {};
     HR_DIMENSIONS.forEach(({ key }) => { cleared[key] = new Set(); });
@@ -2578,12 +2580,15 @@ function PresetsContent({
     const snap = makePresetSnapshot({ selected, shuffle, loop, playingTrack, spinePosition });
     setUserPresets(prev => ({ ...prev, [slot]: snap }));
   };
-  // O8 — APPLY restores selected / shuffle / loop only. Player state
-  // (playingTrack, spinePosition) is captured in snapshots for display
-  // but not restored; that's a follow-up phase.
-  const applySlot = (slot) => {
+  // Play (UX_PRESETS_SPEC s3): commits a saved preset -- deck AND jukebox
+  // become the Active View. The only verb allowed to interrupt active
+  // playback (controls s8.4). Player state restores by STABLE ids, resolved
+  // to current spine indices at apply-time inside Exhibit.jsx
+  // (onRestorePlayer); a snapshot saved while idle leaves playback alone.
+  const playSlot = (slot) => {
     const p = userPresets[slot];
     if (!p) return;
+    setPeekSelected(null);
     if (p.selected) {
       setSelected(cloneSelected(p.selected));
       setShuffle(!!p.shuffle);
@@ -2591,7 +2596,20 @@ function PresetsContent({
     } else {
       setSelected(cloneSelected(p));
     }
+    if (onRestorePlayer && (p.playingTrack || p.focusedAlbumId)) {
+      onRestorePlayer({
+        focusedAlbumId: p.focusedAlbumId ?? null,
+        playingTrack: p.playingTrack ?? null,
+      });
+    }
   };
+  // Show (s3): deck-only peek. Nothing commits; the jukebox keeps playing.
+  const showSlot = (slot) => {
+    const p = userPresets[slot];
+    if (!p?.selected) return;
+    setPeekSelected(cloneSelected(p.selected));
+  };
+  // Reset (s3, replaces "clear slot"): empties a user slot.
   const clearSlot = (slot) => {
     setUserPresets(prev => ({ ...prev, [slot]: null }));
   };
@@ -2599,6 +2617,25 @@ function PresetsContent({
   return (
     <div className="wb-scroll hr-content-body">
       <div className="hr-presets-section-label">presets</div>
+      {/* Now Playing (s3): visible only during a Show peek; returns the wall
+          to the Active View. The jukebox was never touched by the peek. */}
+      {peekSelected !== null && (
+        <div
+          role="button"
+          onClick={() => setPeekSelected(null)}
+          title="return the wall to the Active View"
+          style={{
+            display: "flex", alignItems: "center", gap: 10,
+            margin: "0 0 10px", padding: "5px 10px", width: "fit-content",
+            border: "1px dashed " + GOLD_HI, borderRadius: 4,
+            color: GOLD_HI, fontSize: 11, letterSpacing: "0.04em",
+            cursor: "pointer", userSelect: "none",
+          }}
+        >
+          <span style={{ opacity: 0.8 }}>showing a preset (deck only)</span>
+          <span style={{ fontWeight: 600 }}>now playing &#x21a9;</span>
+        </div>
+      )}
       <div className="hr-presets-top-row">
         <div className="hr-presets-slots-col">
           {["P1", "P2", "P3"].map(slot => {
@@ -2613,21 +2650,29 @@ function PresetsContent({
                 <button
                   className="preset-row-btn"
                   style={S.presetRowBtn(has, true)}
-                  onClick={has ? () => applySlot(slot) : undefined}
+                  onClick={has ? () => playSlot(slot) : undefined}
                   aria-disabled={!has}
-                >apply</button>
+                  title={has ? "commit this preset: deck + jukebox become the Active View" : undefined}
+                >play</button>
+                <button
+                  className="preset-row-btn"
+                  style={S.presetRowBtn(has, true)}
+                  onClick={has ? () => showSlot(slot) : undefined}
+                  aria-disabled={!has}
+                  title={has ? "peek at this preset's wall without committing; the jukebox keeps playing" : undefined}
+                >show</button>
                 <button
                   className="preset-row-btn"
                   style={S.presetRowBtn(has, false)}
                   onClick={has ? () => clearSlot(slot) : undefined}
                   aria-disabled={!has}
-                >clear slot</button>
+                >reset</button>
                 <button
                   className="preset-row-btn"
                   style={S.presetRowBtn(true, true)}
                   onClick={() => saveHere(slot)}
                   title={has ? "overwrite this slot with current state" : "save current state to this slot"}
-                >save here</button>
+                >save</button>
               </div>
             );
           })}
@@ -2996,7 +3041,7 @@ function AuditStrip() {
 }
 
 // ΓöÇΓöÇΓöÇ ROOT ΓÇö HrExhibitFlow component, exported for Exhibit.jsx line 908 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
-export default function HrExhibitFlow({ activeAlbumId, playingTrack = null }) {
+export default function HrExhibitFlow({ activeAlbumId, playingTrack = null, onRestorePlayer }) {
   // Preset capture (UX_PRESETS_SPEC s8.2/s9): real player state crosses the
   // Exhibit.jsx seam as props. activeAlbumId is the focused album's STABLE id
   // (recorded as focusedAlbumId in snapshots); playingTrack is
@@ -3039,6 +3084,12 @@ export default function HrExhibitFlow({ activeAlbumId, playingTrack = null }) {
   const [shuffle, setShuffle] = useState(false);
   const [loop, setLoop] = useState(false);
   const spinePosition = activeAlbumId ?? null;
+  // Show / Now Playing (UX_PRESETS_SPEC s3): a Show peek swaps the DECK's
+  // filter input only -- the jukebox keeps playing untouched (controls s8.4,
+  // 'Show is consequence-free'). peekSelected holds the peeked preset's
+  // selection, or null when the wall shows the Active View. Any committed
+  // filter interaction (toggle / clear) dismisses the peek first.
+  const [peekSelected, setPeekSelected] = useState(null);
   const [activeTab, setActiveTab] = useState(null);
   const [hoverPeek, setHoverPeek] = useState(false);
   const [deckHeight, setDeckHeight] = useState(() => {
@@ -3085,12 +3136,13 @@ export default function HrExhibitFlow({ activeAlbumId, playingTrack = null }) {
 
   // Tag filters narrow the catalog. Kaleidoscope recipe is dormant in v1.
   const tagFiltered = useMemo(
-    () => ARTIFACTS.filter(c => matchFilter(c, selected)),
-    [selected]
+    () => ARTIFACTS.filter(c => matchFilter(c, peekSelected ?? selected)),
+    [selected, peekSelected]
   );
   const finalMatched = tagFiltered;
 
   const toggle = (group, tag) => {
+    setPeekSelected(null); // touching committed filters returns to the Active View
     setSelected(prev => {
       const next = {};
       for (const { key } of HR_DIMENSIONS) next[key] = new Set(prev[key] ?? []);
@@ -3102,6 +3154,7 @@ export default function HrExhibitFlow({ activeAlbumId, playingTrack = null }) {
 
   // eslint-disable-next-line no-unused-vars -- preserved for future revival of the original clear-all behavior
   const clear = () => {
+    setPeekSelected(null);
     setSelected(makeEntrySelection());
     setKalState(KAL_STATE_DEFAULT);
     setShuffle(false);
@@ -3116,6 +3169,7 @@ export default function HrExhibitFlow({ activeAlbumId, playingTrack = null }) {
   const clearTab = (tabKey) => {
     const tab = TABS.find(t => t.key === tabKey);
     if (!tab) return;
+    setPeekSelected(null);
     if (tab.kind === "tier") {
       setSelected(prev => {
         const next = {};
@@ -3366,6 +3420,8 @@ export default function HrExhibitFlow({ activeAlbumId, playingTrack = null }) {
                   shuffle={shuffle} setShuffle={setShuffle}
                   loop={loop} setLoop={setLoop}
                   playingTrack={playingTrack} spinePosition={spinePosition}
+                  onRestorePlayer={onRestorePlayer}
+                  peekSelected={peekSelected} setPeekSelected={setPeekSelected}
                 />
               )}
             </div>

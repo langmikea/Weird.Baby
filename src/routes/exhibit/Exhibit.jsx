@@ -705,6 +705,36 @@ export default function Exhibit({ artist }) {
     }
   }
 
+  // ── Preset restore (UX_PRESETS_SPEC §3 "Play") ───────────────────────────
+  // Resolve saved STABLE ids back to current spine indices at apply-time
+  // (ids are durable; indices are derived) and drive the player. Per controls
+  // §8.4 only the Play verb may interrupt active playback, so this is only
+  // invoked from Play. A snapshot saved while idle (playingTrack null) leaves
+  // current playback untouched.
+  function restorePlayerFromPreset({ focusedAlbumId, playingTrack: saved } = {}) {
+    if (focusedAlbumId) {
+      const fi = SPINE.findIndex(a => a.id === focusedAlbumId);
+      if (fi >= 0) selectAlbum(fi, true);
+    }
+    if (!saved || !saved.albumId) return;
+    const ai = SPINE.findIndex(a => a.id === saved.albumId);
+    if (ai < 0) return; // album left the spine — nothing to drive
+    const ti = SPINE[ai].tracks.findIndex(t => t.id === saved.trackId);
+    if (ti < 0) return; // track left the album
+    const track = SPINE[ai].tracks[ti];
+    let vi = track.videos.findIndex(v => v.id === saved.variantId);
+    if (vi < 0) vi = track.videos.length ? 0 : -1; // variant gone → first available
+    if (vi < 0) return;
+    // Reflect the restore in the tracklist UI (active row + variant radio),
+    // then play the exact variant.
+    setAlbumActiveTrack(prev => ({ ...prev, [ai]: ti }));
+    setAlbumSelectedVis(prev => {
+      const albumMap = prev[ai] ?? {};
+      return { ...prev, [ai]: { ...albumMap, [ti]: new Set([vi]) } };
+    });
+    startPlay(ai, ti, vi);
+  }
+
   // ── Derived display state ─────────────────────────────────────────────────
   const album       = SPINE[activeDisplay];
   const activeTrack = albumActiveTrack[activeDisplay] ?? null;
@@ -894,7 +924,11 @@ export default function Exhibit({ artist }) {
             playingTrack carries the live player identity as stable ids
             (null when idle) so the preset host can snapshot it. */}
         {ExhibitFlow && (
-          <ExhibitFlow activeAlbumId={album.id} playingTrack={playingTrackIds} />
+          <ExhibitFlow
+            activeAlbumId={album.id}
+            playingTrack={playingTrackIds}
+            onRestorePlayer={restorePlayerFromPreset}
+          />
         )}
 
         <PlayerBar
