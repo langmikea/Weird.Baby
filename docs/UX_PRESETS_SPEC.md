@@ -143,7 +143,7 @@ Two spec-vs-framework conflicts surfaced that block implementation until resolve
 
 **Re-scoped work (smaller + mechanical):**
 1. **IDs:** none to create. Propagate the existing item `id` onto the spine track object in the adapter (`hunter-root-spine.js`, currently drops it). One adapter change.
-2. **Variant key:** none to derive — each item's own `id` is the stable variant key.
+2. **Variant key:** renditions (inside `videos[]`) have NO id of their own — only tracks do. Derive in the adapter: `id = ytId ?? slug(audioUrl)`.
 3. **Data task (the only one):** backfill `song` on the ~15 audio items, derivable from title and/or the matching video's slug. Mechanical, ~15 edits. Prerequisite for the §N.2 radio to group audio with video.
 
 **Preset consequence:** per-song variant capture references the item `id` directly (stable, present). Apply-time resolution against the rebuilt export. No positional indices. The blocker reduces to the ~15-item `song` backfill.
