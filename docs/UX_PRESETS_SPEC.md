@@ -1,7 +1,7 @@
-# Weird.Baby Museum — UX Presets Spec, v0.3
+# Weird.Baby Museum — UX Presets Spec, v0.4
 
 **Date:** 2026-06-05
-**Status:** Working draft v0.3. Not locked. Verified against live code (Cowork drift ledger, 2026-06-05). Produced from a live design session (Mike + system engineer) plus a full read of the canonical set.
+**Status:** Working draft v0.4. Not locked. Verified against live code (Cowork drift ledger, 2026-06-05). Produced from a live design session (Mike + system engineer) plus a full read of the canonical set.
 **Fills:** `UX_CONTROLS_SPEC_v0.4 §C.5.0` names a "forthcoming `UX_PRESETS_SPEC`." This is that document's first draft.
 **Authority above this doc:** `CANON_UX_LIFECYCLE_SPEC_v0.5` (F=ma, preset-as-artifact), `CANON_VISION_LOCK_v0.3`, `CANON_UX_SPEC_v0.3` (§C.5.0, §N.2, §N.7), `CANON_UX_CONTROLS_SPEC_v0.4` (§8.4, §9). Where they speak, they win. This doc adds what they don't say and records this session's decisions.
 
@@ -132,24 +132,21 @@ Two spec-vs-framework conflicts surfaced that block implementation until resolve
 
 (Note: this resolves the §4 mobile-floor contradiction. The remaining work is wiring, gated only by §8.2.)
 
-### §8.2 — Stable track + variant IDs [SCOPED 2026-06-05]
+### §8.2 — Stable track + variant IDs [RE-SCOPED 2026-06-05, verified against foundation export]
 
-**Contract as-found (read from live `weird-baby-museum`):**
-- **Albums already have stable IDs.** `hunter-root.js` is an album registry: `{ id:"arkansas", tag:"arkansas", year:2023 }`. Short stable `id` + stable `tag` join key. (This is why `focusedAlbumId` works.)
-- **Tracks have no ID.** Adapter type contract (`hunter-root-spine.js` L7): `track = { title, videos:[video] }`. A track is identified only by a display `title` that is *derived at adapter time* via `cleanTrackTitle()` — not durable.
-- **Variants/videos have no ID.** `video = { ytId, audioUrl, label, type }` (L8). Identified by `ytId`/`audioUrl` + `label`; positional within `videos[]`.
-- **But a latent stable key already exists in the data.** The adapter reads a **`song` slug** off tracks (`t.song ?? t.tags?.song?.[0]`, L92) and the comment (L34) notes `song:shapeshifter` matches `hr_facts` trackIds. `hr_facts.js` is already keyed by track slug throughout (section-4 scan: ~50 id-keyed entries). So track identity half-exists in the data layer — it is simply not carried onto the spine `track`/`video` objects the player and presets consume.
+**Contract as-found (read from `src/data/exhibits/hunter_root.json`, the foundation export the adapter consumes — NOT the album-registry file):**
+- **Every media item already has a stable `id`** (e.g. `MV-HR-20260417-001`). The earlier claim "tracks carry no IDs" was wrong — it described the album registry (`hunter-root.js`), not the real source. Track/variant identity already exists.
+- **The variant model is FLAT, not nested.** Each rendition is its own first-class item in `tracks[]` with its own `id`, `media_type` (audio|video), `primary_url`, `title`, `tags`. The official video and the audio recording of the same song are *separate items*, not a nested `videos[]`. (Corrects the v0.2 nesting assumption.)
+- **`song` is the GROUPING key**, not identity. Items sharing a `song` slug are renditions of one song. The variant radio (§N.2 "one version per song") = "choose one item from the set sharing a `song`."
 
-**Scoped change (smaller than "invent IDs"):**
-1. **Track stable ID:** propagate the existing `song` slug onto the spine `track` object — `track.id = song slug` (already present in source data and already used as the `hr_facts` join key). No new identity invented; surface what exists.
-2. **Variant stable key:** add a stable per-variant key on the spine `video` object. Candidate: `ytId` when present, else a hash/slug of `audioUrl`, namespaced by track — e.g. `variantId = `${track.id}:${ytId ?? slug(audioUrl)}``. Must be stable across rebuilds (not array index).
-3. **Adapter is the single change point.** Both additions happen in `hunter-root-spine.js` `.map()` (L91–94) where `track` and `video` objects are already being constructed. No data-file migration required if the `song` slug is reliably present; spot-check coverage first.
+**Coverage finding (full scan):** of ~90 media items, 81 have a `song` slug; the ~15 without are **all audio recordings** — videos were slugged, audio was not. The song name is in each title ("Dead Man — audio recording"). Audio variants currently orphan from their song group.
 
-**Preset consequence:** a preset's per-song variant capture references `{ albumId, trackId, variantId }` — all stable, all resolved at apply-time against the rebuilt spine (same philosophy as `focusedAlbumId`). No positional indices.
+**Re-scoped work (smaller + mechanical):**
+1. **IDs:** none to create. Propagate the existing item `id` onto the spine track object in the adapter (`hunter-root-spine.js`, currently drops it). One adapter change.
+2. **Variant key:** none to derive — each item's own `id` is the stable variant key.
+3. **Data task (the only one):** backfill `song` on the ~15 audio items, derivable from title and/or the matching video's slug. Mechanical, ~15 edits. Prerequisite for the §N.2 radio to group audio with video.
 
-**Prerequisite work before build:** (a) confirm `song` slug coverage across all tracks (any track missing it needs one added in source); (b) define the `variantId` rule and apply in the adapter; (c) extend the snapshot shape to carry `trackId`/`variantId`. Item (a) is the only possible data-entry task; (b)/(c) are code.
-
----
+**Preset consequence:** per-song variant capture references the item `id` directly (stable, present). Apply-time resolution against the rebuilt export. No positional indices. The blocker reduces to the ~15-item `song` backfill.
 
 ## §9 — Implementation seam (Q5, from ledger)
 
@@ -157,4 +154,4 @@ The single boundary between the two scopes is `<ExhibitFlow activeAlbumId={album
 
 ---
 
-*End of UX_PRESETS_SPEC v0.3 DRAFT. Not locked. Verified against live code via Cowork drift ledger 2026-06-05. Companion prototype: `prototype_presets_v3.html` (thinking instrument only — not the target UI, per §0.1).*
+*End of UX_PRESETS_SPEC v0.4 DRAFT. Not locked. Verified against live code via Cowork drift ledger 2026-06-05. Companion prototype: `prototype_presets_v3.html` (thinking instrument only — not the target UI, per §0.1).*
