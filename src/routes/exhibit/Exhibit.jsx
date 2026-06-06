@@ -718,6 +718,20 @@ export default function Exhibit({ artist }) {
   const curAlbum = playingAlbum !== null ? SPINE[playingAlbum] : null;
   const isAudioSrc = !!curVideo?.audioUrl;
 
+  // Preset capture (UX_PRESETS_SPEC 8.2/9): live player identity by STABLE
+  // id, never by array index. The spine adapter guarantees album.id
+  // (foundation id), track.id (foundation item id) and video.id
+  // (ytId ?? slug(audioUrl)), so this object survives spine reorderings.
+  // Crossed to the preset host via prop-widening at the existing
+  // <ExhibitFlow> seam (spec 9) -- least-invasive option.
+  const playingTrackIds = curVideo
+    ? {
+        albumId: curAlbum?.id ?? null,
+        trackId: curTrack?.id ?? null,
+        variantId: curVideo?.id ?? null,
+      }
+    : null;
+
   const thumbTrack = activeTrack !== null ? album.tracks[activeTrack] : album.tracks.find(t => t.videos.length > 0);
   const thumbVid   = thumbTrack?.videos?.[0];
   const hasVideo   = curVideo !== null;
@@ -876,8 +890,12 @@ export default function Exhibit({ artist }) {
           </div>
         </div>
 
-        {/* EXHIBIT FLOW — optional, only rendered if artist provides one */}
-        {ExhibitFlow && <ExhibitFlow activeAlbumId={album.id} />}
+        {/* EXHIBIT FLOW — optional, only rendered if artist provides one.
+            playingTrack carries the live player identity as stable ids
+            (null when idle) so the preset host can snapshot it. */}
+        {ExhibitFlow && (
+          <ExhibitFlow activeAlbumId={album.id} playingTrack={playingTrackIds} />
+        )}
 
         <PlayerBar
           video={curVideo} track={curTrack} album={curAlbum}
