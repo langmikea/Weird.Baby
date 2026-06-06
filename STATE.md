@@ -9,7 +9,7 @@ decisions, and pointers to canonical specs. **Does NOT cover current
 progress, deploy status, or what's next** — see `NAVIGATION.md` and
 `git log` for that.
 
-**Last refreshed:** 2026-06-05
+**Last refreshed:** 2026-06-06
 
 ## What this is
 
@@ -41,28 +41,30 @@ saying "MOTHBALLED for v1 per STATE.md" point at this section.
   Decision dates to the v28 controls-dock simplification pass; revives
   when the operator chooses to re-expose audio meters post-launch.
 
-## Presets — build prerequisites (BLOCKERS)
+## Presets — capture/restore wiring (LANDED 2026-06-06)
 
-Recorded 2026-06-05 (presets design session + Cowork drift ledger).
-Spec: `docs/UX_PRESETS_SPEC.md` (v0.2 draft). **Both items below BLOCK
-any presets build** — do not start preset wiring until they clear.
+The 2026-06-05 blockers cleared and the §8.2/§9 build landed. Spec:
+`docs/UX_PRESETS_SPEC.md` (v0.4).
 
-- **[BLOCKER] Mobile presets surface.** The deck — including the
-  Presets tab — is `display:none` at ≤720px, so factory presets are
-  unreachable on a phone. This contradicts the mobile floor (player +
-  factory presets must be usable on phone). UX-design decision needed:
-  where do presets live on mobile when the dock is gone? Owner: Mike
-  (UX call). Ref: `docs/UX_PRESETS_SPEC.md §8.1`.
-- **[BLOCKER] Stable track + variant IDs.** Tracks carry no IDs and
-  videos are positional in the spine contract, so per-song variant
-  capture has nothing stable to reference. Data-contract change,
-  upstream of all preset wiring. Ref: `docs/UX_PRESETS_SPEC.md §8.2`.
+- **Stable ids** — the adapter surfaces stable ids onto the spine
+  (49cd044): every track carries `id` (foundation id), every rendition
+  carries `id = ytId ?? slug(audioUrl)`; `song` backfill in 9bbeb91.
+- **Capture** — live player identity crosses the `<ExhibitFlow>` seam
+  as props (`activeAlbumId` + `playingTrack` as `{ albumId, trackId,
+  variantId }` stable ids). Snapshots record real state; the
+  `useState(null)` stubs are gone.
+- **Restore** — `onRestorePlayer` callback on the same seam;
+  `Exhibit.jsx` resolves ids → current spine indices at apply-time and
+  drives the player. Verbs per spec §3: Play / Show / Now Playing /
+  Reset / Save, honoring controls §8.4 (only Play interrupts playback;
+  Show is deck-only; Now Playing returns to the Active View).
+- **State-crossing mechanism:** prop-widening at the existing seam —
+  no context, no lifted state. Ref: `docs/UX_PRESETS_SPEC.md §9`.
 
-Implementation seam, for when the blockers clear: the single boundary
-between the two scopes is `<ExhibitFlow activeAlbumId={album.id} />`;
-capture/restore means widening that boundary or lifting state. The
-verbs are mostly renames + scope-widening, not new machinery.
-Ref: `docs/UX_PRESETS_SPEC.md §9`.
+Remaining (not blockers): mobile presets section build (§8.1 — design
+resolved 2026-06-05: presets join the mobile vertical scroll,
+view-and-apply only), idle auto-return (§5 #3), shuffle/loop player
+semantics (O9), artifact/share model (§0).
 
 ## Canonical docs
 

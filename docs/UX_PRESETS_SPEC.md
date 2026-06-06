@@ -111,6 +111,8 @@ Confirmed against the live `weird-baby-museum` tree:
 - **ABSENT:** artifact model, `/p/<id>` sharing, entry-state-as-preset, Show, Now Playing, idle-return. These are all net-new.
 - `weird-baby-update` is dead code — zero refs. (Drive should still be re-synced so look-ups don't mislead. Ops.)
 
+**Update 2026-06-06:** the PARTIAL row (null-stubbed capture) and the Show / Now Playing entries in the ABSENT row are historical — capture is wired and the Play / Show / Now Playing verbs landed. See §9. (Artifact model, `/p/<id>` sharing, entry-state-as-preset, idle-return remain absent.)
+
 Spec corrections from the ledger:
 - `TIER_BY_NAMESPACE` heuristic is **gone** — replaced 2026-05-19 by the `vocabulary.json` registry. Vocabulary-as-data is **implemented**, not pending. (Earlier draft was stale.)
 - Prototype reference is `prototype_a_v28_3.html`, not v27.
@@ -132,7 +134,7 @@ Two spec-vs-framework conflicts surfaced that block implementation until resolve
 
 (Note: this resolves the §4 mobile-floor contradiction. The remaining work is wiring, gated only by §8.2.)
 
-### §8.2 — Stable track + variant IDs [RE-SCOPED 2026-06-05, verified against foundation export]
+### §8.2 — Stable track + variant IDs [RE-SCOPED 2026-06-05; LANDED 2026-06-06]
 
 **Contract as-found (read from `src/data/exhibits/hunter_root.json`, the foundation export the adapter consumes — NOT the album-registry file):**
 - **Every media item already has a stable `id`** (e.g. `MV-HR-20260417-001`). The earlier claim "tracks carry no IDs" was wrong — it described the album registry (`hunter-root.js`), not the real source. Track/variant identity already exists.
@@ -146,11 +148,19 @@ Two spec-vs-framework conflicts surfaced that block implementation until resolve
 2. **Variant key:** renditions (inside `videos[]`) have NO id of their own — only tracks do. Derive in the adapter: `id = ytId ?? slug(audioUrl)`.
 3. **Data task (the only one):** backfill `song` on the ~15 audio items, derivable from title and/or the matching video's slug. Mechanical, ~15 edits. Prerequisite for the §N.2 radio to group audio with video.
 
-**Preset consequence:** per-song variant capture references the item `id` directly (stable, present). Apply-time resolution against the rebuilt export. No positional indices. The blocker reduces to the ~15-item `song` backfill.
+**Preset consequence:** per-song variant capture references the item `id` directly (stable, present). Apply-time resolution against the rebuilt export. No positional indices.
 
-## §9 — Implementation seam (Q5, from ledger)
+**Status (2026-06-06):** all three items landed — `song` backfill (9bbeb91), adapter id propagation + derived variant id (49cd044: every spine `track` carries `id`, every rendition carries `id = ytId ?? slug(audioUrl)`). No longer a blocker.
 
-The single boundary between the two scopes is `<ExhibitFlow activeAlbumId={album.id} />`. Capture/restore means widening that boundary (or lifting state). The snapshot shape and the Presets UI are **already forward-compatible**, so the verbs are mostly **renames + scope-widening**, not new machinery — once §8.1 and §8.2 are resolved. This keeps the build modest: the hard parts are the two prerequisites, not the wiring.
+## §9 — Implementation seam (Q5, from ledger) [IMPLEMENTED 2026-06-06]
+
+The single boundary between the two scopes is the `<ExhibitFlow>` element in `Exhibit.jsx`. **Chosen state-crossing mechanism: prop-widening at that existing seam** — the least invasive of the options this section anticipated (no context, no lifted state):
+
+- **Capture (down):** `activeAlbumId` (the focused album's stable id) and `playingTrack` (`{ albumId, trackId, variantId }`, stable ids derived from the spine objects; `null` when idle) flow as props into `HrExhibitFlow`, replacing the former `useState(null)` stubs. `makePresetSnapshot` records them as `focusedAlbumId` + `playingTrack` — real state, schema v1 unchanged.
+- **Restore (up):** an `onRestorePlayer` callback prop. `Exhibit.jsx` resolves the saved ids back to *current* spine indices at apply-time (ids are durable; indices are derived). A missing variant falls back to the track's first available rendition; a missing track or album degrades to focus-only. The restore reflects the active row + variant radio in the tracklist, then drives the player.
+- **Verbs (§3) wired on the desktop slots:** Play (commits both scopes — the only verb permitted to interrupt active playback, per controls §8.4; presets saved while idle leave playback alone), Show (deck-only peek via a `peekSelected` overlay on the artifact filter; the jukebox is untouched and nothing commits), Now Playing (clears the peek, returning the wall to the Active View), Reset, Save.
+
+Still open after this build: idle auto-return (§5 #3), shuffle/loop player semantics (O9), the mobile presets section build (§8.1 — design resolved), and the artifact/share model (§0).
 
 ---
 
