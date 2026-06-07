@@ -98,10 +98,11 @@ The 2026-06-05 blockers cleared and the §8.2/§9 build landed. Spec:
 Remaining (not blockers): §8.1 mobile presets phase 2 — factory Show +
 mobile peek-return chip (phase 1 apply-only pills built + deployed
 2026-06-07, 298b08f; factory presets stay deck-only, player fields
-normalized explicitly neutral at apply — see spec §8.1.1), idle
-auto-return (§5 #3), preset naming UI (§5 #4), and the larger
-preset-as-artifact / shareable-`/p/<id>` infrastructure (§0;
-UX_LIFECYCLE_SPEC §4.5/§4.2).
+normalized explicitly neutral at apply — see spec §8.1.1), preset
+naming UI (§5 #4), and the larger preset-as-artifact /
+shareable-`/p/<id>` infrastructure (§0; UX_LIFECYCLE_SPEC §4.5/§4.2).
+Idle auto-return BUILT 2026-06-07 (Mike: Option A — song change +
+idle ≥ 8s clears a Show peek; spec §3/§5 #3; timing open to feel).
 
 O9 shuffle/loop WIRED (2026-06-07, 524bf41, deployed + verified live):
 shuffle randomizes the next-up queue (build time + live toggle-on,

@@ -67,6 +67,7 @@ Per `UX_SPEC §N.2`, variant selection is **already locked as radio semantics**:
 **Show is consequence-free** because the deck is independent of the jukebox (§1) and there is no preset-less limbo (§0): a Show peek changes only the wall; the music plays on; nothing needs a Keep/Cancel step. Best-practice basis: preview-without-commit is a recognized pattern, but hover-based preview is rejected (undiscoverable, touch-hostile, accessibility-poor) — Show is an explicit, sticky, single-action peek with an explicit return (Now Playing).
 
 **Idle auto-return** (Mike): after a Show peek, if the visitor does not touch anything *and* the jukebox advances to a new album, the wall returns to the Active View on its own — automatic Now Playing. (Timing TBD by feel; prototype uses a short value to make it testable.)
+**[BUILT 2026-06-07, trigger corrected]:** the play queue is album-scoped and never leaves the album on its own, so "advances to a new album" could never fire. Locked (Mike, Option A): trigger = **song change + idle**. A jukebox song change (albumId/trackId; a variant advance within the same song doesn't count) while the visitor has made no pointer/key input for `IDLE_RETURN_MS` (8s, feel value, constant in `HrExhibitFlow.jsx`) clears the peek.
 
 ---
 
@@ -82,7 +83,7 @@ These are genuinely undecided and are what the prototype exists to answer:
 
 1. **Now Playing placement** — a row among the preset slots (live, un-saveable Active View), a control near the player, or both? (Prototype tries "both" to react against.)
 2. **Show's visual treatment** — how does "peeking vs committed" read at a glance? (Prototype uses a status ribbon + dashed peek outline.)
-3. **Idle auto-return timing and trigger** — gentle or startling? Tie strictly to "jukebox advanced + idle," or simpler?
+3. **Idle auto-return timing and trigger** — gentle or startling? Tie strictly to "jukebox advanced + idle," or simpler? **[DECIDED 2026-06-07, Mike: Option A — song change + idle. Built; see §3 note. Timing (8s) stays open to feel-tuning.]**
 4. **Naming UI** — name-on-save dialog vs inline-editable slot label. (Prototype uses inline.)
 5. **Shared-preset landing** (`UX_SPEC §C.5.0` Q3) — does `weird.baby/p/<id>` land at the Lobby first (default per §L.1) or directly in the preset state? Canon default is Lobby-first; confirm.
 
@@ -188,7 +189,7 @@ The single boundary between the two scopes is the `<ExhibitFlow>` element in `Ex
 - **Restore (up):** an `onRestorePlayer` callback prop. `Exhibit.jsx` resolves the saved ids back to *current* spine indices at apply-time (ids are durable; indices are derived). A missing variant falls back to the track's first available rendition; a missing track or album degrades to focus-only. The restore reflects the active row + variant radio in the tracklist, then drives the player.
 - **Verbs (§3) wired on the desktop slots:** Play (commits both scopes — the only verb permitted to interrupt active playback, per controls §8.4; presets saved while idle leave playback alone), Show (deck-only peek via a `peekSelected` overlay on the artifact filter; the jukebox is untouched and nothing commits), Now Playing (clears the peek, returning the wall to the Active View), Reset, Save.
 
-Still open after this build: idle auto-return (§5 #3), §8.1 mobile presets phase 2 (factory Show + mobile peek-return chip; phase 1 apply-only pills live 2026-06-07), and the artifact/share model (§0). O9 shuffle/loop WIRED 2026-06-07 (524bf41): player-owned state crossed at this same seam; shuffle randomizes the next-up queue, loop replays the current selection on end (controls §9.2), verified live.
+Still open after this build: §8.1 mobile presets phase 2 (factory Show + mobile peek-return chip; phase 1 apply-only pills live 2026-06-07) and the artifact/share model (§0). Idle auto-return BUILT 2026-06-07 (song change + idle, see §3/§5 #3). O9 shuffle/loop WIRED 2026-06-07 (524bf41): player-owned state crossed at this same seam; shuffle randomizes the next-up queue, loop replays the current selection on end (controls §9.2), verified live.
 
 ---
 

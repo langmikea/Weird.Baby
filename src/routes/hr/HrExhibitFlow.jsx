@@ -159,6 +159,14 @@ const PRESET_SCHEMA_VERSION = 1;
 const HOVER_DELAY_OPEN = 60;
 const HOVER_DELAY_CLOSE = 450;
 
+// §5 #3 idle auto-return (Option A, Mike 2026-06-07): with a Show peek up,
+// a jukebox SONG CHANGE while the visitor has been idle this long returns
+// the wall to the Active View on its own (automatic Now Playing, spec §3).
+// Spec §3 originally said "advances to a new album", but the play queue is
+// album-scoped and never leaves the album by itself — trigger locked to
+// song change + idle instead. Timing is a feel value; tune here.
+const IDLE_RETURN_MS = 8000;
+
 // ─── TABS — six entries; Journal sits last among functional tabs ────────────
 // Stage 3 placement: Journal sits AFTER the v28_3 functional tabs in their
 // v28_3 order (Artist · Formats · Deep Tracks · Presets), then ✕. This is
@@ -3087,6 +3095,33 @@ export default function HrExhibitFlow({
   // selection, or null when the wall shows the Active View. Any committed
   // filter interaction (toggle / clear) dismisses the peek first.
   const [peekSelected, setPeekSelected] = useState(null);
+
+  // §5 #3 idle auto-return (Option A): while a Show peek is up, a song
+  // change with the visitor idle ≥ IDLE_RETURN_MS clears the peek —
+  // automatic Now Playing. "Touch" = any pointer or key input anywhere on
+  // the page (capture phase). Song identity = albumId/trackId (a variant
+  // advance within the same song does not count as a song change).
+  const lastTouchRef = useRef(Date.now());
+  useEffect(() => {
+    const touch = () => { lastTouchRef.current = Date.now(); };
+    window.addEventListener("pointerdown", touch, true);
+    window.addEventListener("keydown", touch, true);
+    return () => {
+      window.removeEventListener("pointerdown", touch, true);
+      window.removeEventListener("keydown", touch, true);
+    };
+  }, []);
+  const prevSongKeyRef = useRef(null);
+  useEffect(() => {
+    const key = playingTrack ? `${playingTrack.albumId}/${playingTrack.trackId}` : null;
+    const prev = prevSongKeyRef.current;
+    prevSongKeyRef.current = key;
+    if (peekSelected === null) return;
+    if (!key || !prev || key === prev) return;            // only a real song-to-song change
+    if (Date.now() - lastTouchRef.current < IDLE_RETURN_MS) return; // visitor not idle
+    setPeekSelected(null); // automatic Now Playing (spec §3)
+  }, [playingTrack, peekSelected]);
+
   // §8.1 — hoisted from PresetsContent so the desktop deck tab and the
   // mobile presets surface share one apply path. At apply time a factory
   // preset is normalized to the same field shape Save emits
