@@ -84,7 +84,7 @@ These are genuinely undecided and are what the prototype exists to answer:
 1. **Now Playing placement** — a row among the preset slots (live, un-saveable Active View), a control near the player, or both? (Prototype tries "both" to react against.)
 2. **Show's visual treatment** — how does "peeking vs committed" read at a glance? (Prototype uses a status ribbon + dashed peek outline.)
 3. **Idle auto-return timing and trigger** — gentle or startling? Tie strictly to "jukebox advanced + idle," or simpler? **[DECIDED 2026-06-07, Mike: Option A — song change + idle. Built; see §3 note. Timing (8s) stays open to feel-tuning.]**
-4. **Naming UI** — name-on-save dialog vs inline-editable slot label. (Prototype uses inline.)
+4. **Naming UI** — name-on-save dialog vs inline-editable slot label. (Prototype uses inline.) **[DECIDED 2026-06-07, Mike: inline, AUTOPOPULATED — naming never demands input. Built: default name derives from the snapshot (first tag label +N / "N random artifacts" / "everything"); the slot label is an in-place editable input; full filter summary stays as the tooltip; `name` persists in the localStorage round-trip (pre-naming records hydrate null and fall back to the summary).]**
 5. **Shared-preset landing** (`UX_SPEC §C.5.0` Q3) — does `weird.baby/p/<id>` land at the Lobby first (default per §L.1) or directly in the preset state? Canon default is Lobby-first; confirm.
 
 ---

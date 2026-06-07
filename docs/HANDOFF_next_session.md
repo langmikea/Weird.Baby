@@ -23,7 +23,7 @@ Working rules in effect (see `STATE.md` → Working Doctrine, committed):
 ## Open work (top level)
 UX-facing:
 - **Mobile presets phase 2 (§8.1)** — phase 1 (apply-only factory pills, hoisted `applyFactoryPreset`, neutral player fields) is live (298b08f). Remaining: factory **Show** analogue via `peekSelected` + mobile peek-return "now playing ↩" chip. Note for Show: "Surprise me" re-rolls per `apply()` call — compute once per interaction or accept the re-roll (§8.1.1 flag). The player-state prerequisite was resolved the other way: factory presets stay deck-only; at apply they normalize to Save's field shape with player fields explicitly neutral (`playingTrack: null` = leave playback alone; no fabricated ids).
-- **Preset naming UI (§5 #4)** — name-on-save with default.
+- ~~**Preset naming UI (§5 #4)**~~ — BUILT 2026-06-07 (Mike: inline slot-label input, autopopulated at save, edit optional; `name` in the localStorage round-trip, legacy slots fall back to summary).
 - ~~**Shuffle/loop semantics (O9)**~~ — WIRED + deployed + verified live 2026-06-07 (524bf41). Shuffle randomizes the next-up queue; loop replays the current selection on end (controls §9.2). State owned by Exhibit.jsx, crossed at the seam.
 - ~~**Idle auto-return (§5 #3)**~~ — BUILT 2026-06-07 (Mike: Option A — song change while idle ≥ 8s clears the peek; spec §3 trigger corrected, album-advance was impossible). `IDLE_RETURN_MS` open to feel-tuning.
 - **Brand-aligned aesthetic** (backlog) — W.B infrastructure mirrors the logo (1960s B&W-photo, logo-like font); content keeps full vibrancy/palette.

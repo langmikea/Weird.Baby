@@ -748,6 +748,23 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   font-weight: 600;
   text-transform: uppercase;
 }
+/* §5 #4 — inline preset name: autopopulated at save, visitor-editable in
+   place. Reads as text at rest; dashed underline appears on hover/focus. */
+.hr-preset-name-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px dashed transparent;
+  color: var(--hr-gold);
+  font-family: var(--hr-serif);
+  font-style: italic;
+  font-size: 13px;
+  padding: 2px 4px;
+  outline: none;
+}
+.hr-preset-name-input:hover { border-bottom-color: var(--hr-border-hi); }
+.hr-preset-name-input:focus { border-bottom-color: var(--hr-gold-lo); }
 .preset-row-btn:hover {
   color: var(--hr-gold-hi);
   border-color: var(--hr-gold-lo);

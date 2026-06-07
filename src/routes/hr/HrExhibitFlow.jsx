@@ -534,6 +534,24 @@ function presetSummaryText(p) {
   return flags.length ? `${body}  ·  ${flags.join(" + ")}` : body;
 }
 
+// §5 #4 naming (Option A, Mike 2026-06-07): slots carry a visitor-editable
+// name, AUTOPOPULATED at save so naming never demands input. Default derives
+// from the snapshot's most distinctive content: the first selected tag's
+// display label (+N when more), "N random artifacts" for a surprise capture,
+// "everything" for a no-filter capture.
+function defaultPresetName(snap) {
+  const sel = snap?.selected;
+  if (sel?.__randomIds) return `${sel.__randomIds.size} random artifacts`;
+  const parts = [];
+  if (sel) {
+    for (const { key } of HR_DIMENSIONS) {
+      if (sel[key]?.size) for (const s of sel[key]) parts.push(displayFor(key, s));
+    }
+  }
+  if (!parts.length) return "everything";
+  return parts.length === 1 ? parts[0] : `${parts[0]} +${parts.length - 1}`;
+}
+
 // Preset snapshot (UX_PRESETS_SPEC s8.2): playingTrack and spinePosition are
 // the REAL player state, crossed from Exhibit.jsx as props. playingTrack is
 // { albumId, trackId, variantId } (stable ids); spinePosition is the focused
@@ -585,6 +603,7 @@ function serializeUserPresets(presets) {
     out[slot] = p
       ? {
           selected: serializeSelected(p.selected),
+          name: typeof p.name === "string" ? p.name : null, // §5 #4
           shuffle: !!p.shuffle,
           loop: !!p.loop,
           playingTrack: p.playingTrack ?? null,
@@ -613,6 +632,9 @@ function loadUserPresets() {
       if (!selected) continue; // malformed slot → load as empty
       out[slot] = {
         selected,
+        // §5 #4: pre-naming records hydrate with name null; the UI falls
+        // back to the filter summary until the visitor edits or re-saves.
+        name: typeof p.name === "string" ? p.name : null,
         shuffle: !!p.shuffle,
         loop: !!p.loop,
         playingTrack:
@@ -2576,7 +2598,11 @@ function PresetsContent({
   const slotIsFilled = (slot) => !!userPresets[slot];
   const saveHere = (slot) => {
     const snap = makePresetSnapshot({ selected, shuffle, loop, playingTrack, spinePosition });
+    snap.name = defaultPresetName(snap); // §5 #4: autopopulated, edit optional
     setUserPresets(prev => ({ ...prev, [slot]: snap }));
+  };
+  const renameSlot = (slot, name) => {
+    setUserPresets(prev => prev[slot] ? { ...prev, [slot]: { ...prev[slot], name } } : prev);
   };
   // Play (UX_PRESETS_SPEC s3): commits a saved preset -- deck AND jukebox
   // become the Active View. The only verb allowed to interrupt active
@@ -2642,9 +2668,21 @@ function PresetsContent({
             return (
               <div key={slot} style={S.presetSlotRow(has)}>
                 <span className="hr-preset-slot-label">{slot}</span>
-                <span style={S.presetSummary(!has)} title={has ? presetSummaryText(p) : undefined}>
-                  {has ? presetSummaryText(p) : "empty"}
-                </span>
+                {has ? (
+                  // §5 #4 (Option A): inline-editable name, autopopulated at
+                  // save — the visitor never has to type. Full filter summary
+                  // stays available as the tooltip.
+                  <input
+                    className="hr-preset-name-input"
+                    value={p.name ?? presetSummaryText(p)}
+                    title={presetSummaryText(p)}
+                    onChange={(e) => renameSlot(slot, e.target.value)}
+                    aria-label={`name for preset ${slot}`}
+                    maxLength={48}
+                  />
+                ) : (
+                  <span style={S.presetSummary(true)}>empty</span>
+                )}
                 <button
                   className="preset-row-btn"
                   style={S.presetRowBtn(has, true)}
