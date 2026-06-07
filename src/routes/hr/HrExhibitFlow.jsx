@@ -175,6 +175,17 @@ const TABS = [
 ];
 
 // ─── FACTORY PRESETS — adapted to HR's dimensions ───────────────────────────
+// 2026-06-07 repair (verified live on weird.baby/hr): the v28-ported recipes
+// filtered on namespaces this exhibit's export does not carry (src/era/type
+// with values press/stage/seeds/video). matchFilter only reads the discovered
+// HR_DIMENSIONS (album/people/bands/source/content_kind/card_kind), so four
+// of five presets committed an empty filter — silent no-ops on desktop and
+// mobile (gold highlight, wall unchanged). Repaired where the catalog
+// supports the intent: "Years past" → the Medusa's Disco chapter via album
+// tags (the recipe's era:medusas intent). Removed the three with no
+// filterable equivalent — press/stage/video content is not tagged in the v5
+// export (only in `unsorted`, which buildDimensions excludes). Re-add by
+// recipe only when the export carries the tags.
 const FACTORY_PRESETS = [
   {
     key: "surprise", label: "Surprise me", desc: "a handful at random",
@@ -184,20 +195,8 @@ const FACTORY_PRESETS = [
     },
   },
   {
-    key: "press", label: "Press clippings", desc: "what the world said",
-    apply: () => ({ src: new Set(["press"]) }),
-  },
-  {
-    key: "stage", label: "Live captures", desc: "captured on stage",
-    apply: () => ({ src: new Set(["stage"]) }),
-  },
-  {
     key: "deephist", label: "Years past", desc: "the older catalog",
-    apply: () => ({ era: new Set(["seeds", "medusas"]) }),
-  },
-  {
-    key: "videos", label: "Video evidence", desc: "music videos & clips",
-    apply: () => ({ type: new Set(["video"]) }),
+    apply: () => ({ album: new Set(["medusas_disco"]) }),
   },
 ];
 
