@@ -1158,6 +1158,11 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   display: none;
 }
 
+/* ── Mobile presets pill stack (§8.1; hidden on desktop) ───────────────── */
+.hr-mobile-presets {
+  display: none;
+}
+
 /* ── Mobile (O11) ──────────────────────────────────────────────────────── */
 /* Below 720px, hide the deck entirely and render the pill columns inline
    above the artifact grid as a simple stack. No tab strip, no resize. */
@@ -1179,6 +1184,24 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   }
   .hr-section .hr-section-deck-host > .animated:not(:first-child) {
     display: none;
+  }
+  /* §8.1 — factory presets as a tappable pill stack above the inline
+     pill columns. Matches the pill-stack idiom below. */
+  .hr-mobile-presets {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 12px 4px;
+    border-bottom: 1px solid var(--hr-border);
+  }
+  .hr-mobile-preset-pill {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 10px;
+    border: 1px solid var(--hr-border);
+    border-radius: 4px;
+    cursor: pointer;
   }
   /* Show the inline pill stack at the top of the section. */
   .hr-mobile-pills {

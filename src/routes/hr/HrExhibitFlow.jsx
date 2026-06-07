@@ -2558,22 +2558,12 @@ function PresetsContent({
   shuffle, setShuffle, loop, setLoop,
   playingTrack, spinePosition,
   onRestorePlayer, peekSelected, setPeekSelected,
+  applyFactoryPreset,
 }) {
+  // §8.1 — applyFactoryPreset itself is hoisted to the root (shared with the
+  // mobile presets surface); only the applied-card highlight state stays
+  // local to the desktop tab. Desktop passes its setter into the hoisted fn.
   const [lastFactoryApplied, setLastFactoryApplied] = useState(null);
-
-  const applyFactoryPreset = (preset) => {
-    setPeekSelected(null); // factory apply is a commit; leave any Show peek
-    const next = preset.apply();
-    const cleared = {};
-    HR_DIMENSIONS.forEach(({ key }) => { cleared[key] = new Set(); });
-    if (next.__randomIds) {
-      setSelected({ ...cleared, __randomIds: next.__randomIds });
-    } else {
-      for (const [k, v] of Object.entries(next)) cleared[k] = v;
-      setSelected(cleared);
-    }
-    setLastFactoryApplied(preset.key);
-  };
 
   const slotIsFilled = (slot) => !!userPresets[slot];
   const saveHere = (slot) => {
@@ -2707,7 +2697,7 @@ function PresetsContent({
           <div
             key={p.key}
             style={S.presetCard(lastFactoryApplied === p.key)}
-            onClick={() => applyFactoryPreset(p)}
+            onClick={() => applyFactoryPreset(p, setLastFactoryApplied)}
           >
             <span className="hr-preset-label">{p.label}</span>
             <span className="hr-preset-desc">{p.desc}</span>
@@ -3090,6 +3080,37 @@ export default function HrExhibitFlow({ activeAlbumId, playingTrack = null, onRe
   // selection, or null when the wall shows the Active View. Any committed
   // filter interaction (toggle / clear) dismisses the peek first.
   const [peekSelected, setPeekSelected] = useState(null);
+  // §8.1 — hoisted from PresetsContent so the desktop deck tab and the
+  // mobile presets surface share one apply path. At apply time a factory
+  // preset is normalized to the same field shape Save emits
+  // (makePresetSnapshot), with the player fields explicitly neutral:
+  // factory presets are deck curations, not captured moments — there is
+  // no track to restore. playingTrack: null is the same "leave playback
+  // alone" signal Save already emits when nothing is playing; mobile Play
+  // reads it identically (§8.4: the jukebox plays on). We never fabricate
+  // a track id. The highlight setter is an optional arg defaulting to a
+  // no-op: desktop passes its applied-card setter; mobile omits it (no
+  // applied highlight on mobile).
+  const applyFactoryPreset = (preset, setHighlight = () => {}) => {
+    setPeekSelected(null); // factory apply is a commit; leave any Show peek
+    const next = preset.apply();
+    const cleared = {};
+    HR_DIMENSIONS.forEach(({ key }) => { cleared[key] = new Set(); });
+    const normalized = {
+      selected: next.__randomIds
+        ? { ...cleared, __randomIds: next.__randomIds }
+        : Object.assign(cleared, next),
+      shuffle: false,
+      loop: false,
+      playingTrack: null,   // nothing playing to restore — jukebox plays on
+      focusedAlbumId: null, // no captured spine focus
+    };
+    // Only the deck commits. playingTrack / focusedAlbumId are both null,
+    // so the playSlot restore gate (p.playingTrack || p.focusedAlbumId)
+    // would never fire — same as applying a snapshot saved while idle.
+    setSelected(normalized.selected);
+    setHighlight(preset.key);
+  };
   const [activeTab, setActiveTab] = useState(null);
   const [hoverPeek, setHoverPeek] = useState(false);
   const [deckHeight, setDeckHeight] = useState(() => {
@@ -3302,6 +3323,26 @@ export default function HrExhibitFlow({ activeAlbumId, playingTrack = null, onRe
       {openPhoto && (
         <PhotoOverlay card={openPhoto} onClose={() => setOpenPhoto(null)} />
       )}
+      {/* MOBILE PRESETS (§8.1) — factory presets as a tappable pill stack
+          above the inline pill columns. Deck curations only: a tap commits
+          deck filters via the hoisted applyFactoryPreset (which dismisses
+          any Show peek through the existing peekSelected path) and leaves
+          the jukebox alone. No Save, no Reset, no applied-card highlight on
+          mobile (the highlight setter is omitted → no-op). Hidden on
+          desktop via CSS. */}
+      <div className="hr-mobile-presets">
+        {FACTORY_PRESETS.map(p => (
+          <div
+            key={p.key}
+            className="hr-mobile-preset-pill"
+            role="button"
+            onClick={() => applyFactoryPreset(p)}
+          >
+            <span className="hr-preset-label">{p.label}</span>
+            <span className="hr-preset-desc">{p.desc}</span>
+          </div>
+        ))}
+      </div>
       {/* MOBILE FALLBACK ΓÇö pill columns render inline above the grid on
           narrow viewports. CSS hides this on desktop and hides the deck
           on mobile. */}
@@ -3422,6 +3463,7 @@ export default function HrExhibitFlow({ activeAlbumId, playingTrack = null, onRe
                   playingTrack={playingTrack} spinePosition={spinePosition}
                   onRestorePlayer={onRestorePlayer}
                   peekSelected={peekSelected} setPeekSelected={setPeekSelected}
+                  applyFactoryPreset={applyFactoryPreset}
                 />
               )}
             </div>
