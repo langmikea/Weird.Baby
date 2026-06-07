@@ -9,7 +9,41 @@ decisions, and pointers to canonical specs. **Does NOT cover current
 progress, deploy status, or what's next** — see `NAVIGATION.md` and
 `git log` for that.
 
-**Last refreshed:** 2026-06-06
+**Last refreshed:** 2026-06-07
+
+## Working Doctrine (for any agent/session)
+
+Standing Ops rules. Each one was paid for by a real failure; read before
+any repo work, any session, any agent.
+
+1. **Verify before scoping.** Read the actual file in the live
+   `weird-baby-museum` working tree before reasoning about it. Never
+   scope against memory, against Drive copies (Drive has served
+   stale/retired trees), or against assumption. Past errors traced
+   directly to this: scoping against the album-registry file instead of
+   the foundation export; reading a retired repo from Drive.
+2. **Don't guess — look it up.** Use pwsh (read-only) or Cowork to read
+   real code/data. If a claim about the codebase isn't backed by a file
+   just read, it is a guess and must not be acted on.
+3. **Default to Cowork for repo work.** For repo reads, big-file edits
+   (`HrExhibitFlow.jsx` ~152KB, `Exhibit.jsx` ~37KB), and multi-file
+   scoping, prefer a Cowork task over chat-driven pwsh paste-back:
+   Cowork has full repo reach, is faster, and avoids the human relay's
+   buffer limits and paste errors.
+4. **Drive the live UI by accessibility ref, not pixel coordinates.**
+   The dock has tiny targets and a peek-to-open animation; pixel clicks
+   miss silently. Use `find`/`read_page` refs. (A live verification
+   session lost time to missed pixel-clicks that ref-based clicks fixed
+   immediately.)
+5. **Never put load-bearing work inside if/else in scripts that get
+   pasted line-by-line** — the `else` orphans in the console and
+   silently skips the body. Use flat statements with explicit
+   verify-or-abort. (This silently skipped a real edit once; a commit
+   message overclaimed as a result.)
+6. **Durability.** Work isn't done until committed AND pushed AND (for
+   UI changes) deployed: `npm run build && npx wrangler deploy` — there
+   is no CI; deploy is manual. Scratch files and local commits are not
+   durable.
 
 ## What this is
 
