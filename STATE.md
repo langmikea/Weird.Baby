@@ -98,7 +98,22 @@ The 2026-06-05 blockers cleared and the §8.2/§9 build landed. Spec:
 Remaining (not blockers): mobile presets section build (§8.1 — design
 resolved 2026-06-05: presets join the mobile vertical scroll,
 view-and-apply only), idle auto-return (§5 #3), shuffle/loop player
-semantics (O9), artifact/share model (§0).
+semantics (O9), preset naming UI (§5 #4), and the larger
+preset-as-artifact / shareable-`/p/<id>` infrastructure (§0;
+UX_LIFECYCLE_SPEC §4.5/§4.2).
+
+## Backlog (durable design direction)
+
+Standing items not yet started. Day-to-day sequencing lives in
+`NAVIGATION.md` / `BACKLOG.md`; these are recorded here because they are
+durable direction, not session-scoped tasks.
+
+- **Brand-aligned museum aesthetic.** All Weird.Baby infrastructure (the
+  museum shell: chrome, dock, controls, frames) should mirror the W.B
+  logo — 1960s black-and-white-photo appeal, typeface akin to the
+  logo's font. Content shown inside (album art, video, imagery) retains
+  full vibrancy and palette. Principle: **brand frames the vessel;
+  content stays vivid.** (Owner: Mike, UX. Status: not started.)
 
 ## Canonical docs
 
