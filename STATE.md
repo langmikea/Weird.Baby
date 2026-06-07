@@ -99,9 +99,11 @@ Remaining (not blockers): §8.1 mobile presets phase 2 — factory Show +
 mobile peek-return chip (phase 1 apply-only pills built + deployed
 2026-06-07, 298b08f; factory presets stay deck-only, player fields
 normalized explicitly neutral at apply — see spec §8.1.1) and the
-larger preset-as-artifact / shareable-`/p/<id>` infrastructure (§0;
-UX_LIFECYCLE_SPEC §4.5/§4.2). Naming UI BUILT 2026-06-07 (Mike:
-inline, autopopulated — spec §5 #4).
+preset-as-artifact model (operator tagging/featuring, entry-state-
+as-preset; §0, UX_LIFECYCLE_SPEC §4.5/§4.2). Naming UI BUILT
+2026-06-07 (Mike: inline, autopopulated — spec §5 #4). Sharing BUILT
+2026-06-07 (Mike: Lobby-first — `/p/<shortid>` + Share verb + D1
+`presets` table; spec §5 #5).
 Idle auto-return BUILT 2026-06-07 (Mike: Option A — song change +
 idle ≥ 8s clears a Show peek; spec §3/§5 #3; timing open to feel).
 

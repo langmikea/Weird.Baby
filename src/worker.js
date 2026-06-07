@@ -74,6 +74,51 @@ export default {
       }
     }
 
+    // ── Preset sharing (UX_PRESETS_SPEC §0: weird.baby/p/<shortid>) ─────────
+    // POST /api/presets {payload:<snapshot>} → {id}. Payload stored opaque,
+    // size-capped, shape-checked just enough to refuse junk.
+    if (url.pathname === "/api/presets" && request.method === "POST") {
+      try {
+        const body = await request.text();
+        if (body.length > 8192) {
+          return new Response(JSON.stringify({ error: "too large" }), { status: 413, headers: cors });
+        }
+        const snap = JSON.parse(body)?.payload;
+        if (!snap || typeof snap !== "object" || typeof snap.selected !== "object") {
+          return new Response(JSON.stringify({ error: "bad payload" }), { status: 400, headers: cors });
+        }
+        // Cryptic-but-stable short id (§0): 8 crypto-random base36 chars.
+        const bytes = new Uint8Array(8);
+        crypto.getRandomValues(bytes);
+        const id = [...bytes].map(b => (b % 36).toString(36)).join("");
+        await env.weird_baby_db.prepare(
+          "INSERT INTO presets (short_id, payload, created_at) VALUES (?, ?, datetime('now'))"
+        ).bind(id, JSON.stringify(snap)).run();
+        return new Response(JSON.stringify({ ok: true, id }), { headers: { ...cors, "Content-Type": "application/json" } });
+      } catch (e) {
+        return new Response(JSON.stringify({ error: e.message }), { status: 500, headers: cors });
+      }
+    }
+
+    // GET /api/presets/<id> — resolve a shared preset to its snapshot
+    if (url.pathname.startsWith("/api/presets/") && request.method === "GET") {
+      try {
+        const id = url.pathname.slice("/api/presets/".length);
+        if (!/^[a-z0-9]{4,16}$/.test(id)) {
+          return new Response(JSON.stringify({ error: "bad id" }), { status: 400, headers: cors });
+        }
+        const row = await env.weird_baby_db.prepare(
+          "SELECT payload FROM presets WHERE short_id = ?"
+        ).bind(id).first();
+        if (!row) {
+          return new Response(JSON.stringify({ error: "not found" }), { status: 404, headers: cors });
+        }
+        return new Response(JSON.stringify({ ok: true, payload: JSON.parse(row.payload) }), { headers: { ...cors, "Content-Type": "application/json" } });
+      } catch (e) {
+        return new Response(JSON.stringify({ error: e.message }), { status: 500, headers: cors });
+      }
+    }
+
     return new Response("Not found", { status: 404 });
   }
 };

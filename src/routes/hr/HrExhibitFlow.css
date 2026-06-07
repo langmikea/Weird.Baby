@@ -765,6 +765,18 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
 }
 .hr-preset-name-input:hover { border-bottom-color: var(--hr-border-hi); }
 .hr-preset-name-input:focus { border-bottom-color: var(--hr-gold-lo); }
+/* §0 share — transient per-slot note ("link copied" / fallback URL). */
+.hr-preset-share-note {
+  font-size: 10px;
+  color: var(--hr-gold-hi);
+  letter-spacing: 0.04em;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+  user-select: all;
+}
 .preset-row-btn:hover {
   color: var(--hr-gold-hi);
   border-color: var(--hr-gold-lo);

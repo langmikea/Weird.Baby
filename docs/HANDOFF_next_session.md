@@ -30,7 +30,7 @@ UX-facing:
 
 Required infrastructure (the next big lift):
 - **Preset-as-artifact** (Lifecycle §4.5) — today localStorage snapshot; canon wants a first-class shareable/tagged artifact.
-- **Shareable preset URLs** `weird.baby/p/<id>` — depends on artifact model.
+- ~~**Shareable preset URLs** `weird.baby/p/<id>`~~ — BUILT 2026-06-07 (D1 `presets` table, `POST/GET /api/presets`, Share verb per slot, Lobby-first landing per Mike). Built as the visitor-facing slice ahead of the artifact model; the model can absorb it later.
 - **Entry-state-as-preset** (Lifecycle §4.2) — "no preset-less state"; likely not yet implemented.
 
 ## Recommended next step

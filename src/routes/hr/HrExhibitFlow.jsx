@@ -596,22 +596,48 @@ function deserializeSelected(raw) {
   return out;
 }
 
+// Single-snapshot wire shape — shared by localStorage persistence and the
+// §0 share payload (POST /api/presets), so a shared preset is byte-for-byte
+// the same thing a saved slot is.
+function serializeSnapshot(p) {
+  return {
+    selected: serializeSelected(p.selected),
+    name: typeof p.name === "string" ? p.name : null, // §5 #4
+    shuffle: !!p.shuffle,
+    loop: !!p.loop,
+    playingTrack: p.playingTrack ?? null,
+    focusedAlbumId: p.focusedAlbumId ?? null,
+    schemaVersion: p.schemaVersion ?? PRESET_SCHEMA_VERSION,
+    savedAt: p.savedAt ?? null,
+  };
+}
+
+// Defensive single-snapshot hydration — mirrors the loadUserPresets slot
+// rules (malformed → null rather than crash; focusedAlbumId honored only on
+// schemaVersion >= 1 records). Used for incoming shared presets.
+function deserializeSnapshot(raw) {
+  if (!raw || typeof raw !== "object") return null;
+  const selected = deserializeSelected(raw.selected);
+  if (!selected) return null;
+  return {
+    selected,
+    name: typeof raw.name === "string" ? raw.name : null,
+    shuffle: !!raw.shuffle,
+    loop: !!raw.loop,
+    playingTrack:
+      raw.playingTrack && typeof raw.playingTrack === "object" ? raw.playingTrack : null,
+    focusedAlbumId:
+      raw.schemaVersion >= 1 && typeof raw.focusedAlbumId === "string" ? raw.focusedAlbumId : null,
+    schemaVersion: PRESET_SCHEMA_VERSION,
+    savedAt: typeof raw.savedAt === "number" ? raw.savedAt : null,
+  };
+}
+
 function serializeUserPresets(presets) {
   const out = {};
   for (const slot of ["P1", "P2", "P3"]) {
     const p = presets?.[slot];
-    out[slot] = p
-      ? {
-          selected: serializeSelected(p.selected),
-          name: typeof p.name === "string" ? p.name : null, // §5 #4
-          shuffle: !!p.shuffle,
-          loop: !!p.loop,
-          playingTrack: p.playingTrack ?? null,
-          focusedAlbumId: p.focusedAlbumId ?? null,
-          schemaVersion: p.schemaVersion ?? PRESET_SCHEMA_VERSION,
-          savedAt: p.savedAt ?? null,
-        }
-      : null;
+    out[slot] = p ? serializeSnapshot(p) : null;
   }
   return out;
 }
@@ -2604,6 +2630,39 @@ function PresetsContent({
   const renameSlot = (slot, name) => {
     setUserPresets(prev => prev[slot] ? { ...prev, [slot]: { ...prev[slot], name } } : prev);
   };
+  // §0 Share: publish the slot's snapshot (same wire shape as persistence)
+  // and put weird.baby/p/<id> on the clipboard. Clipboard denial degrades to
+  // showing the link inline so it can be copied by hand.
+  const [shareNote, setShareNote] = useState({});
+  const noteTimerRef = useRef({});
+  const flashNote = (slot, text, ms) => {
+    setShareNote(s => ({ ...s, [slot]: text }));
+    clearTimeout(noteTimerRef.current[slot]);
+    noteTimerRef.current[slot] = setTimeout(
+      () => setShareNote(s => ({ ...s, [slot]: null })), ms
+    );
+  };
+  const shareSlot = async (slot) => {
+    const p = userPresets[slot];
+    if (!p) return;
+    try {
+      const r = await fetch("/api/presets", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ payload: serializeSnapshot(p) }),
+      });
+      const j = await r.json();
+      if (!r.ok || !j.id) throw new Error(j.error || "share failed");
+      const link = `${window.location.origin}/p/${j.id}`;
+      try {
+        await navigator.clipboard.writeText(link);
+        flashNote(slot, "link copied", 6000);
+      } catch {
+        flashNote(slot, link, 15000); // clipboard blocked → show it
+      }
+    } catch {
+      flashNote(slot, "share failed", 4000);
+    }
+  };
   // Play (UX_PRESETS_SPEC s3): commits a saved preset -- deck AND jukebox
   // become the Active View. The only verb allowed to interrupt active
   // playback (controls s8.4). Player state restores by STABLE ids, resolved
@@ -2709,6 +2768,16 @@ function PresetsContent({
                   onClick={() => saveHere(slot)}
                   title={has ? "overwrite this slot with current state" : "save current state to this slot"}
                 >save</button>
+                <button
+                  className="preset-row-btn"
+                  style={S.presetRowBtn(has, true)}
+                  onClick={has ? () => shareSlot(slot) : undefined}
+                  aria-disabled={!has}
+                  title={has ? "publish this preset and copy its weird.baby/p/ link" : undefined}
+                >share</button>
+                {shareNote[slot] && (
+                  <span className="hr-preset-share-note">{shareNote[slot]}</span>
+                )}
               </div>
             );
           })}
@@ -3149,6 +3218,34 @@ export default function HrExhibitFlow({
       window.removeEventListener("keydown", touch, true);
     };
   }, []);
+  // §0 sharing + §5 #5 Lobby-first: a /p/<id> visit parked its snapshot in
+  // sessionStorage; apply it ONCE on arrival with the Play verb's semantics
+  // (§3: deck + jukebox become the Active View). Consumed on read so
+  // back-navigation doesn't re-apply. Note: player restore happens outside
+  // a user gesture — if the browser blocks autoplay, the track loads ready
+  // to play rather than playing; the deck state applies regardless.
+  useEffect(() => {
+    let raw = null;
+    try {
+      raw = sessionStorage.getItem("wb_pending_preset");
+      if (raw) sessionStorage.removeItem("wb_pending_preset");
+    } catch { /* storage unavailable → nothing to apply */ }
+    if (!raw) return;
+    let p = null;
+    try { p = deserializeSnapshot(JSON.parse(raw)); } catch { /* malformed → ignore */ }
+    if (!p) return;
+    setSelected(cloneSelected(p.selected));
+    setShuffle(!!p.shuffle);
+    setLoop(!!p.loop);
+    if (onRestorePlayer && (p.playingTrack || p.focusedAlbumId)) {
+      onRestorePlayer({
+        focusedAlbumId: p.focusedAlbumId ?? null,
+        playingTrack: p.playingTrack ?? null,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const prevSongKeyRef = useRef(null);
   useEffect(() => {
     const key = playingTrack ? `${playingTrack.albumId}/${playingTrack.trackId}` : null;
