@@ -29,6 +29,17 @@ function getOrderedVis(track, selSet) {
   return TAG_SLOTS.map(s => typeToVi[s]).filter(vi => vi !== undefined && selSet.has(vi));
 }
 
+// O9 Shuffle — Fisher–Yates over queue entries; pure. Used at queue build /
+// loop refill and on live toggle-on. (Not Array.sort(random) — biased.)
+function shuffleEntries(entries) {
+  const a = [...entries];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 function buildPlayQueue(album, startTi, selVisMap) {
   const n = album.tracks.length;
   const result = [];
@@ -568,6 +579,31 @@ export default function Exhibit({ artist }) {
   const queueAlbumRef  = useRef(null);
   const lastSkipRef    = useRef(0);
 
+  // O9 (controls spec §9.2) — shuffle / loop are real player semantics, so
+  // they are owned HERE (the player's scope) and crossed to the preset deck
+  // via prop-widening at the <ExhibitFlow> seam — the same mechanism as
+  // playingTrack / onRestorePlayer (presets spec §9). Shuffle randomizes the
+  // next-up queue; Loop replays the current selection on end. advanceQueue
+  // is a first-render closure (the YT/audio onEnded callbacks freeze it), so
+  // it reads these through refs, never through state.
+  const [shuffle, setShuffle] = useState(false);
+  const [loop, setLoop]       = useState(false);
+  const shuffleRef  = useRef(false);
+  const loopRef     = useRef(false);
+  const loopSeedRef = useRef([]);   // the built selection, replayed on end when Loop is on
+  const playingNowRef = useRef({ ai: null, ti: null, vi: null });
+  useEffect(() => { loopRef.current = loop; }, [loop]);
+  useEffect(() => {
+    shuffleRef.current = shuffle;
+    // Toggle-on randomizes the LIVE next-up queue immediately (§9.2
+    // "randomizes the player's next-up queue"). Toggle-off keeps the
+    // already-shuffled remainder (the original order was consumed); the
+    // next queue build is ordered again.
+    if (shuffle && playQueueRef.current.length > 1) {
+      playQueueRef.current = shuffleEntries(playQueueRef.current);
+    }
+  }, [shuffle]);
+
   const [split, setSplit] = usePersist(artist.splitKey, 50);
   const [cfH,   setCfH]   = usePersist(artist.cfKey,    300);
 
@@ -639,7 +675,9 @@ export default function Exhibit({ artist }) {
     const album  = SPINE[albumIdx];
     const selVis = albumSelectedVis[albumIdx] ?? {};
     const queue  = buildPlayQueue(album, ti, selVis);
-    playQueueRef.current  = queue.slice(1);
+    loopSeedRef.current = queue; // O9 Loop: the selection to replay on end
+    const rest = queue.slice(1);
+    playQueueRef.current  = shuffleRef.current ? shuffleEntries(rest) : rest;
     queueAlbumRef.current = albumIdx;
     setPlayingAlbum(albumIdx);
     setPlayingTrack(ti);
@@ -648,13 +686,23 @@ export default function Exhibit({ artist }) {
 
   useEffect(() => {
     if (playingAlbum===null || playingTrack===null || playingVideo===null) return;
+    // O9: mirror the live position into a ref so advanceQueue (first-render
+    // closure) can detect a loop refill that lands on the same video.
+    playingNowRef.current = { ai: playingAlbum, ti: playingTrack, vi: playingVideo };
     const v = SPINE[playingAlbum].tracks[playingTrack].videos[playingVideo];
     if (v?.ytId)          { audio.pause(); yt.loadVideo(v.ytId); }
     else if (v?.audioUrl) { yt.pause(); audio.loadAudio(v.audioUrl); }
   }, [playingAlbum, playingTrack, playingVideo]);
 
   function advanceQueue() {
-    const queue = playQueueRef.current;
+    let queue = playQueueRef.current;
+    if (!queue.length && loopRef.current && loopSeedRef.current.length) {
+      // O9 Loop (§9.2): replay the current selection on end instead of
+      // stopping; re-randomized per pass when Shuffle is also on.
+      queue = shuffleRef.current
+        ? shuffleEntries(loopSeedRef.current)
+        : [...loopSeedRef.current];
+    }
     if (!queue.length) { setPlayingAlbum(null); setPlayingTrack(null); setPlayingVideo(null); return; }
     const next = queue[0];
     const [firstVi, ...restVis] = next.vis;
@@ -662,7 +710,16 @@ export default function Exhibit({ artist }) {
       ? [{ ti:next.ti, vis:restVis }, ...queue.slice(1)]
       : queue.slice(1);
     const ai = queueAlbumRef.current;
-    setPlayingAlbum(ai); setPlayingTrack(next.ti); setPlayingVideo(firstVi);
+    const now = playingNowRef.current;
+    if (now.ai === ai && now.ti === next.ti && now.vi === firstVi) {
+      // Loop refill landed on the video that just ended — identical state
+      // would not re-trigger the load effect. Same null-then-set idiom as
+      // the skip-back restart path.
+      setPlayingVideo(null);
+      setTimeout(() => { setPlayingAlbum(ai); setPlayingTrack(next.ti); setPlayingVideo(firstVi); }, 50);
+    } else {
+      setPlayingAlbum(ai); setPlayingTrack(next.ti); setPlayingVideo(firstVi);
+    }
     setAlbumActiveTrack(prev => ({ ...prev, [ai]: next.ti }));
   }
 
@@ -697,7 +754,9 @@ export default function Exhibit({ artist }) {
       const vis = getOrderedVis(track, sel ?? new Set([0]));
       if (!vis.length) continue;
       const queue = buildPlayQueue(album, ti, selVis);
-      playQueueRef.current = queue.slice(1);
+      loopSeedRef.current = queue; // O9 Loop: new selection start
+      const rest = queue.slice(1);
+      playQueueRef.current = shuffleRef.current ? shuffleEntries(rest) : rest;
       queueAlbumRef.current = ai;
       setPlayingAlbum(ai); setPlayingTrack(ti); setPlayingVideo(vis[0]);
       setAlbumActiveTrack(prev => ({ ...prev, [ai]: ti }));
@@ -795,7 +854,9 @@ export default function Exhibit({ artist }) {
 
   const bodyRef = useRef(null);
   const canSkipBack    = playingTrack !== null;
-  const canSkipForward = playQueueRef.current.length > 0;
+  // O9: with Loop on, skip-forward at the end of the queue refills from the
+  // selection (advanceQueue handles it), so the control stays live.
+  const canSkipForward = playQueueRef.current.length > 0 || (loop && playingTrack !== null);
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (
@@ -928,6 +989,8 @@ export default function Exhibit({ artist }) {
             activeAlbumId={album.id}
             playingTrack={playingTrackIds}
             onRestorePlayer={restorePlayerFromPreset}
+            shuffle={shuffle} setShuffle={setShuffle}
+            loop={loop} setLoop={setLoop}
           />
         )}
 

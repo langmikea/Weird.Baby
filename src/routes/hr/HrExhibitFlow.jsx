@@ -2549,9 +2549,10 @@ function DeepTracksContent({ dims, selected, toggle, query, setQuery, focusSigna
 }
 
 // ─── PRESETS — ported from v28 ──────────────────────────────────────────────
-// O9: shuffle / loop pills toggle local state but no-op against the player.
-// Real player wiring is a follow-up phase. The state still flows into
-// preset snapshots so the data shape is forward-compatible.
+// O9 (wired 2026-06-07): shuffle / loop pills drive the real player — state
+// is owned by Exhibit.jsx and crosses the seam as props (controls spec §9.2:
+// Shuffle randomizes the next-up queue; Loop replays the current selection
+// on end). Snapshot capture unchanged.
 function PresetsContent({
   userPresets, setUserPresets, selected, setSelected,
   shuffle, setShuffle, loop, setLoop,
@@ -2668,9 +2669,10 @@ function PresetsContent({
         </div>
         <div className="hr-presets-player-col">
           <div className="hr-presets-player-label">player</div>
-          {/* O9 — shuffle / loop are state-only stubs in v1. They do not
-              affect playback. Captured into preset snapshots so the data
-              shape is forward-compatible when the real wiring lands. */}
+          {/* O9 (wired 2026-06-07) — shuffle / loop are live player controls:
+              shuffle randomizes the next-up queue, loop replays the current
+              selection on end (controls spec §9.2). Still captured into
+              preset snapshots, same data shape. */}
           <div
             style={S.presetsPill(shuffle)}
             onClick={() => setShuffle(s => !s)}
@@ -3030,7 +3032,15 @@ function AuditStrip() {
 }
 
 // ΓöÇΓöÇΓöÇ ROOT ΓÇö HrExhibitFlow component, exported for Exhibit.jsx line 908 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
-export default function HrExhibitFlow({ activeAlbumId, playingTrack = null, onRestorePlayer }) {
+export default function HrExhibitFlow({
+  activeAlbumId, playingTrack = null, onRestorePlayer,
+  // O9 (wired 2026-06-07): shuffle / loop are owned by the player in
+  // Exhibit.jsx and cross the seam as props — same prop-widening mechanism
+  // as playingTrack / onRestorePlayer (presets spec §9). Defaults keep the
+  // component safe if mounted without a player host.
+  shuffle = false, setShuffle = () => {},
+  loop = false, setLoop = () => {},
+}) {
   // Preset capture (UX_PRESETS_SPEC s8.2/s9): real player state crosses the
   // Exhibit.jsx seam as props. activeAlbumId is the focused album's STABLE id
   // (recorded as focusedAlbumId in snapshots); playingTrack is
@@ -3070,8 +3080,6 @@ export default function HrExhibitFlow({ activeAlbumId, playingTrack = null, onRe
   // setKalState is wired into clear() so the dormant state stays in sync;
   // kalState is intentionally not read in v1.
   const [_kalState, setKalState] = useState(KAL_STATE_DEFAULT);
-  const [shuffle, setShuffle] = useState(false);
-  const [loop, setLoop] = useState(false);
   const spinePosition = activeAlbumId ?? null;
   // Show / Now Playing (UX_PRESETS_SPEC s3): a Show peek swaps the DECK's
   // filter input only -- the jukebox keeps playing untouched (controls s8.4,
