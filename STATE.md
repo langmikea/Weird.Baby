@@ -126,15 +126,19 @@ durable direction, not session-scoped tasks.
   logo — 1960s black-and-white-photo appeal, typeface akin to the
   logo's font. Content shown inside (album art, video, imagery) retains
   full vibrancy and palette. Principle: **brand frames the vessel;
-  content stays vivid.** (Owner: Mike, UX. Status: PASS 1 BUILT
-  2026-06-07 — Mike locked Option A "dark silver": museum-tokens gold
-  ramp → silver, graphite surfaces → neutral, warm literals in the HR
-  deck swept to grays, JS mirror constants matched; Fredoka trialed on
-  the nav wordmark only. Deliberately untouched, awaiting Mike's read:
-  variant-pill type colors (OFFICIAL/LIVE/… color-coding), journal
-  semantic green/red, per-album accent colors (content-adjacent), the
-  Lobby and Gift Shop surfaces, and all mothballed palettes
-  (Kaleidoscope LEDs, AuditStrip).)
+  content stays vivid.** (Owner: Mike, UX. Status: PASS 2 BUILT
+  2026-06-07. Pass 1 [dark silver] read flat — Mike: "try light, think
+  outside the box." Pass 2 concept: THE PHOTO ALBUM PAGE — shell goes
+  1960s photo-paper (mat-board ground, print-stock surfaces, photo-black
+  accent ramp in museum-tokens + JS mirrors), cards read as prints with
+  real shadows, card meta goes typewriter, film grain washes the room
+  (Exhibit.css ::after, under the lightboxes), lightboxes stay a dark
+  projection booth (scoped token re-pin), video placeholders stay dark
+  screens ("photos are paper; video is television"), badges pinned light
+  over imagery. Fredoka wordmark trial carries over. Deliberately
+  untouched, awaiting Mike's read: variant-pill type colors, journal
+  semantic green/red, per-album accents, Lobby, Gift Shop, mothballed
+  palettes.)
 
 ## Canonical docs
 

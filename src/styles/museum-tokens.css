@@ -22,35 +22,36 @@
  * @import here.
  */
 
-/* 2026-06-07 brand-aligned B&W rework (Mike, Option A: dark silver).
- * The shell goes 1960s silver-gelatin — neutral grays, no warm or cool
- * cast — mirroring the W.B logo's black-and-white photo. Content inside
- * the frames keeps full vibrancy: "brand frames the vessel; content
- * stays vivid" (STATE.md backlog). Token NAMES are kept (--hr-gold is
- * plumbing across two CSS files and a JS mirror); read "gold" as
- * "accent ramp". Values are now the silver ramp. */
+/* 2026-06-07 brand-aligned B&W rework, PASS 2 (Mike: dark silver read flat
+ * — "try light, think outside the box"). Concept: THE PHOTO ALBUM PAGE.
+ * The shell is 1960s photo-paper — warm-white print stock on mat board,
+ * photo-black accents, film grain over the room (Exhibit.css), cards as
+ * prints with real shadows, lightboxes kept dark like a projection booth
+ * (scoped re-pin in HrExhibitFlow.css). Content inside the frames keeps
+ * full vibrancy: "brand frames the vessel; content stays vivid."
+ * Token NAMES are kept (--hr-gold is plumbing); read "gold" as "accent" —
+ * the ramp now runs photo-black on paper. */
 :root {
-  /* ── Surfaces — neutral elevation ladder (cast removed) ─────────────────
-     Each step is a luminance rung; higher = more elevated = lighter.
-     page(bg) -> ink(deck) -> ink-soft(inset/active) -> ink-card -> ink-card-hi(raised) */
-  --hr-bg:           #131313;   /* page ground — darkest rung, behind the deck */
-  --hr-ink:          #1a1a1a;   /* deck surface — one step up from the page */
-  --hr-ink-soft:     #212121;   /* inset / active-row / pill-active tint */
-  --hr-ink-card:     #262626;   /* default card surface — solid, not rgba */
-  --hr-ink-card-hi:  #2e2e2e;   /* raised: chrome bar, essay/elevated card, hover */
+  /* ── Surfaces — paper elevation ladder. INVERTED logic: higher rung =
+     whiter print stock; the page ground is the mat board under it all. */
+  --hr-bg:           #d9d5ca;   /* mat board — the table the prints lie on */
+  --hr-ink:          #ece9e0;   /* album page surface */
+  --hr-ink-soft:     #e2deD3;   /* inset / active-row tint — pressed paper */
+  --hr-ink-card:     #faf8f3;   /* print stock — card surface */
+  --hr-ink-card-hi:  #ffffff;   /* brightest print white — raised chrome */
 
-  /* Borders — quiet neutral gray; depth carries hierarchy, borders only delineate */
-  --hr-border:       #2d2d2d;
-  --hr-border-hi:    #3e3e3e;
+  /* Borders — paper edges; depth carries hierarchy, borders only delineate */
+  --hr-border:       #c6c2b7;
+  --hr-border-hi:    #a9a59a;
 
-  /* Accent — silver ramp (mute -> lo -> "gold" -> hi); names historical */
-  --hr-gold:      #c9c9c9;   /* silver — print-white accent (was museum gold) */
-  --hr-gold-hi:   #ededed;   /* brightest tier — counts, active labels, key titles */
-  --hr-gold-lo:   #8e8e8e;   /* dim tier — eyebrows, meta, border accents */
-  --hr-gold-mute: #5e5e5e;   /* disabled */
+  /* Accent — photo-black ramp (mute -> lo -> "gold" -> hi); names historical */
+  --hr-gold:      #211f1c;   /* photo black — primary accent on paper */
+  --hr-gold-hi:   #000000;   /* deepest tier — counts, active labels, key titles */
+  --hr-gold-lo:   #57544d;   /* dim tier — eyebrows, meta, border accents */
+  --hr-gold-mute: #9b978d;   /* disabled — faded print */
 
-  /* Body / mid text — neutral mid-gray (restores tonal hierarchy) */
-  --hr-dim:       #b6b6b6;
+  /* Body / mid text — developed-print dark gray */
+  --hr-dim:       #3b3933;
 
   /* Typography — loaded webfaces (imported by src/routes/exhibit/Exhibit.css) */
   --hr-serif: 'DM Serif Display', Georgia, serif;

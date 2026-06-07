@@ -106,20 +106,20 @@ const { HR_DIMENSIONS, HR_GROUP_LABELS, displayFor } = buildDimensions(ARTIFACTS
 // canonical museum palette in src/styles/museum-tokens.css. These constants
 // mirror the --hr-* CSS variables so every S.* inline-style builder picks up
 // the new look automatically.
-const INK = "#080808";
-const INK_SOFT = "#0d0d0d";
-const INK_CARD = "#0a0a0a";          // solid hex, not rgba (Q3 flattened)
-const INK_CARD_HI = "#0e0e0e";       // solid hex, not rgba
-const BORDER = "#1a1a1a";
-const BORDER_HI = "#252525";
-// 2026-06-07 B&W rework (Option A, dark silver): the gold constants go
-// silver with the museum-tokens ramp — names kept (plumbing), read GOLD as
-// "accent". Single-tone pattern from iterate-1/2 preserved.
-const GOLD = "#c9c9c9";
-const GOLD_HI = "#c9c9c9";  // single-accent-tone call carried over from the gold era
-const GOLD_LO = "#c9c9c9";  // single-accent-tone call carried over from the gold era
-const GOLD_MUTE = "#555";
-const DIM = "#c9c9c9";       // matched to GOLD per the single-tone call
+const INK = "#ece9e0";
+const INK_SOFT = "#e2ded3";
+const INK_CARD = "#faf8f3";          // solid hex, not rgba (Q3 flattened)
+const INK_CARD_HI = "#ffffff";       // solid hex, not rgba
+const BORDER = "#c6c2b7";
+const BORDER_HI = "#a9a59a";
+// 2026-06-07 B&W rework PASS 2 (Mike: light "photo album page"): the ink
+// ladder flips to paper stock, the accent constants go photo-black — names
+// kept (plumbing), read GOLD as "accent". Single-tone pattern preserved.
+const GOLD = "#211f1c";
+const GOLD_HI = "#211f1c";  // single-accent-tone call carried over from the gold era
+const GOLD_LO = "#211f1c";  // single-accent-tone call carried over from the gold era
+const GOLD_MUTE = "#9b978d";
+const DIM = "#211f1c";       // matched to GOLD per the single-tone call
 // MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
 // Kaleidoscope LED palette — re-tuned to v17's museum gold, not v3's neon.
 // (Used inline by the mothballed VuMeter, which is never rendered.)

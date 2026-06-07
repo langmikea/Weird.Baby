@@ -1817,3 +1817,71 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   .hr-album-ov-cover { width: min(70vw, 320px); }
   .hr-album-ov-list { max-height: 40vh; width: 100%; }
 }
+
+/* ════ B&W PASS 2 — the photo album page (2026-06-07, Mike: light) ════════
+   Shell palette is photo-paper via museum-tokens; this block carries what
+   tokens can't express: prints, typed captions, the projection booth, and
+   screen scrims. Content imagery stays vivid throughout. */
+
+/* Cards read as PRINTS lying on the album page — the soft lift of a real
+   photograph on mat stock. */
+.hr-card {
+  box-shadow: 0 1px 2px rgba(40, 36, 28, 0.28), 0 2px 6px rgba(40, 36, 28, 0.12);
+  border-radius: 1px;
+}
+
+/* Typed captions: the meta line under each print goes typewriter. */
+.hr-card-meta { font-family: var(--hr-mono); }
+
+/* The lightboxes stay a darkened viewing room (projection booth) — re-pin
+   the dark ramp inside overlay scopes so the light shell doesn't invert
+   them. Their literal #050505/#141414 interiors remain correct. */
+.hr-gallery-ov, .hr-yt-ov, .hr-fb-ov, .hr-photo-ov, .hr-album-ov {
+  --hr-gold: #c9c9c9;
+  --hr-gold-hi: #ededed;
+  --hr-gold-lo: #8e8e8e;
+  --hr-gold-mute: #6e6e6e;
+  --hr-dim: #b6b6b6;
+  --hr-border: #2d2d2d;
+  --hr-border-hi: #3e3e3e;
+  --hr-ink: #1a1a1a;
+  --hr-ink-soft: #212121;
+  --hr-ink-card: #262626;
+  --hr-ink-card-hi: #2e2e2e;
+}
+
+/* Badges and play glyphs sit on dark scrims OVER imagery — screen
+   furniture, not paper; pinned light regardless of shell. */
+.hr-card-video-live, .hr-card-video-dur,
+.hr-gallery-card-badge, .hr-album-card-badge, .hr-card-voice-badge {
+  color: #efefef;
+  border-color: #8e8e8e;
+}
+.hr-card-video-play { border-color: #bdbdbd; }
+.hr-card-video-play-tri { border-left-color: #e8e8e8; }
+
+/* Photo/art placeholders go paper. Video placeholders deliberately stay a
+   dark SCREEN on the light page — photos are paper; video is television. */
+.hr-card-photo-vis {
+  background: linear-gradient(135deg, #efede6 0%, #e4e1d8 60%, #dad6cc 100%);
+}
+.hr-card-photo-frame { border-color: #a9a59a; }
+.hr-card-photo-label { color: #57544d; }
+.hr-card-art-vis {
+  background:
+    radial-gradient(circle at 30% 40%, #e6e2d7 0%, transparent 40%),
+    radial-gradient(circle at 70% 60%, #dcd8cc 0%, transparent 45%),
+    #efede6;
+}
+.hr-card-art-circle { border-color: #a9a59a; }
+
+/* Voice-of-the-artist card: pencil-shade tint instead of the old amber. */
+.hr-card-voice {
+  background: rgba(33, 31, 28, 0.06) !important;
+  border-color: #a9a59a !important;
+}
+.hr-card-voice-badge { background: rgba(13, 13, 13, 0.7); }
+
+/* Journal compose surfaces go paper (were hard-coded near-black). */
+.hr-jnl-handle, .hr-jnl-text, .hr-jnl-entry { background: #faf8f3; }
+.hr-jnl-btn { background: #f1eee6; }
