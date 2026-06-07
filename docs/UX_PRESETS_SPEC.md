@@ -134,6 +134,30 @@ Two spec-vs-framework conflicts surfaced that block implementation until resolve
 
 (Note: this resolves the §4 mobile-floor contradiction. The remaining work is wiring, gated only by §8.2.)
 
+#### §8.1.1 — Build scoping note (Cowork, 2026-06-07 — scoped, NOT built)
+
+Verified against the live tree at `dcd4f7e`.
+
+**How the mobile layout is produced.** There is no separate mobile component. The "Mobile (O11)" block in `HrExhibitFlow.css` (`@media (max-width: 720px)`, ~L1161) hides the deck chrome (`.hr-tab-strip`, `.hr-deck-body`, the animated deck panels) and shows `.hr-mobile-pills` — a stacked pill-column container that `HrExhibitFlow.jsx` renders **unconditionally** as the first content child of `<section className="hr-section">` (~L3308). Visibility is CSS-only so the React tree stays stable across the breakpoint. The mobile vertical scroll is therefore: `Exhibit.jsx`'s coverflow / tracklist / video / facts panels, then this section (inline filter pills + 2-column artifact grid), with the fixed PlayerBar at bottom.
+
+**Which component renders presets on desktop.** `PresetsContent` (`HrExhibitFlow.jsx` ~L2556), mounted only as the deck's Presets tab body (~L3417) — unreachable on mobile because the entire deck is `display: none`, which is exactly the §8.1 finding. Factory presets are the in-file `FACTORY_PRESETS` array (~L178; five deck-scope filter recipes). User slots P1–P3 and shuffle/loop also live in `PresetsContent` but stay desktop-only per the resolution above.
+
+**Mount point.** A new `.hr-mobile-presets` block inside `hr-section`, immediately **before** `.hr-mobile-pills` — the highest point of the scroll this component controls, directly after the player/coverflow in the page scroll. Satisfies "Placement: high."
+
+**Minimal change (two files; contained):**
+
+1. `HrExhibitFlow.jsx` — hoist `applyFactoryPreset` (currently closed over inside `PresetsContent`) to `HrExhibitFlow` scope; it needs only `setSelected` / `setPeekSelected` / `HR_DIMENSIONS`, all already in scope there. Add a factory Show analogue: `setPeekSelected(<the preset's apply()-shaped selection>)` — `peekSelected` already overlays the artifact filter (`tagFiltered`, ~L3139, including the `__randomIds` path in `matchFilter`). Render `FACTORY_PRESETS` as full-width tap rows with **Play** / **Show** buttons, plus a peek-return "now playing ↩" chip when `peekSelected !== null` (the desktop chip lives inside the hidden deck, so mobile needs its own). No new state, no new interaction grammar — the stacked-section pattern `.hr-mobile-pills` establishes.
+2. `HrExhibitFlow.css` — `.hr-mobile-presets { display: none; }` on desktop, plus rules inside the existing O11 media block, mirroring `.hr-mobile-pills`.
+
+No `Exhibit.jsx` change, no new props across the §9 seam, no Save / Reset / naming on mobile (view-and-apply only).
+
+**Flags (what could make it more than a contained change):**
+
+- **Factory presets are deck-only recipes** — they carry no player/jukebox state. Mobile Play on a factory preset steers the wall but never stocks the player. If the §4 mobile floor ("the player and the default presets must be usable") is read as factory presets *driving the jukebox*, that requires authoring player state into `FACTORY_PRESETS` and restoring it through the §9 seam — net-new content + wiring, beyond this scope. Decide before build.
+- **"Surprise me" re-rolls per call** (`apply()` draws 3 random ids each invocation): Show-then-Play would peek one set and commit a different one. Either compute once per row interaction or accept the re-roll.
+- **`HrExhibitFlow.jsx` is ~152 KB** — far past the Edit-tool truncation boundary; build edits must use anchor-based Python patches with byte verification (CLAUDE.md hard rules).
+- Idle auto-return (§5 #3) remains unbuilt and is **not** part of this change.
+
 ### §8.2 — Stable track + variant IDs [RE-SCOPED 2026-06-05; LANDED 2026-06-06]
 
 **Contract as-found (read from `src/data/exhibits/hunter_root.json`, the foundation export the adapter consumes — NOT the album-registry file):**
