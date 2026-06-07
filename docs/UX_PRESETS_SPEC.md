@@ -134,9 +134,11 @@ Two spec-vs-framework conflicts surfaced that block implementation until resolve
 
 (Note: this resolves the §4 mobile-floor contradiction. The remaining work is wiring, gated only by §8.2.)
 
-#### §8.1.1 — Build scoping note (Cowork, 2026-06-07 — scoped, NOT built)
+#### §8.1.1 — Build scoping note (Cowork, 2026-06-07 — phase 1 BUILT + DEPLOYED 2026-06-07)
 
 Verified against the live tree at `dcd4f7e`.
+
+**Phase 1 status (commit 298b08f; deployed, Worker version 0b08d288; verified in the served CSS bundle):** `applyFactoryPreset` hoisted to `HrExhibitFlow` root scope — highlight setter is now an optional arg defaulting to a no-op (desktop passes `setLastFactoryApplied`, applied-card highlight unchanged; mobile omits it). `.hr-mobile-presets` mounted immediately before `.hr-mobile-pills`; factory presets render as apply-only tap pills (label + desc). CSS: hidden-by-default base rule + visible rules inside the O11 media block. The first flag below is **DECIDED in code:** factory presets remain deck-only curations — at apply they normalize to the same field shape Save emits, with player fields explicitly neutral (`shuffle: false`, `loop: false`, `playingTrack: null`, `focusedAlbumId: null`). `playingTrack: null` is the same "leave playback alone" signal Save emits when idle; no track ids are fabricated. **Remaining for phase 2:** the factory **Show** analogue and the mobile peek-return "now playing ↩" chip (the unbuilt parts of item 1 below; the "Surprise me" re-roll flag applies to Show).
 
 **How the mobile layout is produced.** There is no separate mobile component. The "Mobile (O11)" block in `HrExhibitFlow.css` (`@media (max-width: 720px)`, ~L1161) hides the deck chrome (`.hr-tab-strip`, `.hr-deck-body`, the animated deck panels) and shows `.hr-mobile-pills` — a stacked pill-column container that `HrExhibitFlow.jsx` renders **unconditionally** as the first content child of `<section className="hr-section">` (~L3308). Visibility is CSS-only so the React tree stays stable across the breakpoint. The mobile vertical scroll is therefore: `Exhibit.jsx`'s coverflow / tracklist / video / facts panels, then this section (inline filter pills + 2-column artifact grid), with the fixed PlayerBar at bottom.
 
@@ -184,7 +186,7 @@ The single boundary between the two scopes is the `<ExhibitFlow>` element in `Ex
 - **Restore (up):** an `onRestorePlayer` callback prop. `Exhibit.jsx` resolves the saved ids back to *current* spine indices at apply-time (ids are durable; indices are derived). A missing variant falls back to the track's first available rendition; a missing track or album degrades to focus-only. The restore reflects the active row + variant radio in the tracklist, then drives the player.
 - **Verbs (§3) wired on the desktop slots:** Play (commits both scopes — the only verb permitted to interrupt active playback, per controls §8.4; presets saved while idle leave playback alone), Show (deck-only peek via a `peekSelected` overlay on the artifact filter; the jukebox is untouched and nothing commits), Now Playing (clears the peek, returning the wall to the Active View), Reset, Save.
 
-Still open after this build: idle auto-return (§5 #3), shuffle/loop player semantics (O9), the mobile presets section build (§8.1 — design resolved), and the artifact/share model (§0).
+Still open after this build: idle auto-return (§5 #3), shuffle/loop player semantics (O9), §8.1 mobile presets phase 2 (factory Show + mobile peek-return chip; phase 1 apply-only pills live 2026-06-07), and the artifact/share model (§0).
 
 ---
 
