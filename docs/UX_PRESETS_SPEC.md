@@ -188,7 +188,7 @@ The single boundary between the two scopes is the `<ExhibitFlow>` element in `Ex
 - **Restore (up):** an `onRestorePlayer` callback prop. `Exhibit.jsx` resolves the saved ids back to *current* spine indices at apply-time (ids are durable; indices are derived). A missing variant falls back to the track's first available rendition; a missing track or album degrades to focus-only. The restore reflects the active row + variant radio in the tracklist, then drives the player.
 - **Verbs (§3) wired on the desktop slots:** Play (commits both scopes — the only verb permitted to interrupt active playback, per controls §8.4; presets saved while idle leave playback alone), Show (deck-only peek via a `peekSelected` overlay on the artifact filter; the jukebox is untouched and nothing commits), Now Playing (clears the peek, returning the wall to the Active View), Reset, Save.
 
-Still open after this build: idle auto-return (§5 #3), shuffle/loop player semantics (O9), §8.1 mobile presets phase 2 (factory Show + mobile peek-return chip; phase 1 apply-only pills live 2026-06-07), and the artifact/share model (§0).
+Still open after this build: idle auto-return (§5 #3), §8.1 mobile presets phase 2 (factory Show + mobile peek-return chip; phase 1 apply-only pills live 2026-06-07), and the artifact/share model (§0). O9 shuffle/loop WIRED 2026-06-07 (524bf41): player-owned state crossed at this same seam; shuffle randomizes the next-up queue, loop replays the current selection on end (controls §9.2), verified live.
 
 ---
 

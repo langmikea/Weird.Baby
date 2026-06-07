@@ -99,9 +99,17 @@ Remaining (not blockers): §8.1 mobile presets phase 2 — factory Show +
 mobile peek-return chip (phase 1 apply-only pills built + deployed
 2026-06-07, 298b08f; factory presets stay deck-only, player fields
 normalized explicitly neutral at apply — see spec §8.1.1), idle
-auto-return (§5 #3), shuffle/loop player semantics (O9), preset naming
-UI (§5 #4), and the larger preset-as-artifact / shareable-`/p/<id>`
-infrastructure (§0; UX_LIFECYCLE_SPEC §4.5/§4.2).
+auto-return (§5 #3), preset naming UI (§5 #4), and the larger
+preset-as-artifact / shareable-`/p/<id>` infrastructure (§0;
+UX_LIFECYCLE_SPEC §4.5/§4.2).
+
+O9 shuffle/loop WIRED (2026-06-07, 524bf41, deployed + verified live):
+shuffle randomizes the next-up queue (build time + live toggle-on,
+Fisher–Yates); loop replays the current selection on end (controls
+§9.2). State owned by the player in Exhibit.jsx, crossed to the deck
+as props at the `<ExhibitFlow>` seam. Verified on weird.baby/hr: loop
+wraps the album without stopping, loop-off exhausts and stops, shuffle
+produces non-sequential order; snapshot capture unchanged.
 
 ## Backlog (durable design direction)
 
