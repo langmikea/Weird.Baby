@@ -112,11 +112,14 @@ const INK_CARD = "#0a0a0a";          // solid hex, not rgba (Q3 flattened)
 const INK_CARD_HI = "#0e0e0e";       // solid hex, not rgba
 const BORDER = "#1a1a1a";
 const BORDER_HI = "#252525";
-const GOLD = "#b8974a";
-const GOLD_HI = "#b8974a";  // iterate-1: dropped from cream #d4c49a to canonical gold per WEIRD.BABY-match call
-const GOLD_LO = "#b8974a";  // iterate-2: dropped from #a89770 to canonical gold so dim-tier borders / labels match the single-gold tone
+// 2026-06-07 B&W rework (Option A, dark silver): the gold constants go
+// silver with the museum-tokens ramp — names kept (plumbing), read GOLD as
+// "accent". Single-tone pattern from iterate-1/2 preserved.
+const GOLD = "#c9c9c9";
+const GOLD_HI = "#c9c9c9";  // single-accent-tone call carried over from the gold era
+const GOLD_LO = "#c9c9c9";  // single-accent-tone call carried over from the gold era
 const GOLD_MUTE = "#555";
-const DIM = "#b8974a";       // iterate-1: dropped from cream #d4c49a to canonical gold per WEIRD.BABY-match call
+const DIM = "#c9c9c9";       // matched to GOLD per the single-tone call
 // MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
 // Kaleidoscope LED palette — re-tuned to v17's museum gold, not v3's neon.
 // (Used inline by the mothballed VuMeter, which is never rendered.)
@@ -359,7 +362,7 @@ const S = {
     boxSizing: "border-box", borderRadius: 0,
     border: `1px solid ${active ? GOLD : (zero ? "transparent" : (noneSelected ? "transparent" : BORDER))}`,
     background: active ? INK_SOFT : "transparent",
-    color: active ? GOLD_HI : (zero ? BORDER_HI : (noneSelected ? GOLD_HI : "#6a5520")),
+    color: active ? GOLD_HI : (zero ? BORDER_HI : (noneSelected ? GOLD_HI : "#6e6e6e")),
     opacity: zero ? 0.2 : 1,
     pointerEvents: zero ? "none" : "auto",
     cursor: zero ? "default" : "pointer",
@@ -375,7 +378,7 @@ const S = {
   pillCount: (active, zero, noneSelected) => ({
     fontSize: "10px", fontWeight: 500,
     // Match the label color exactly so number and word read as one tone.
-    color: active ? GOLD_HI : (zero ? BORDER_HI : (noneSelected ? GOLD_HI : "#6a5520")),
+    color: active ? GOLD_HI : (zero ? BORDER_HI : (noneSelected ? GOLD_HI : "#6e6e6e")),
     fontVariantNumeric: "tabular-nums",
   }),
 

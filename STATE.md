@@ -126,7 +126,15 @@ durable direction, not session-scoped tasks.
   logo — 1960s black-and-white-photo appeal, typeface akin to the
   logo's font. Content shown inside (album art, video, imagery) retains
   full vibrancy and palette. Principle: **brand frames the vessel;
-  content stays vivid.** (Owner: Mike, UX. Status: not started.)
+  content stays vivid.** (Owner: Mike, UX. Status: PASS 1 BUILT
+  2026-06-07 — Mike locked Option A "dark silver": museum-tokens gold
+  ramp → silver, graphite surfaces → neutral, warm literals in the HR
+  deck swept to grays, JS mirror constants matched; Fredoka trialed on
+  the nav wordmark only. Deliberately untouched, awaiting Mike's read:
+  variant-pill type colors (OFFICIAL/LIVE/… color-coding), journal
+  semantic green/red, per-album accent colors (content-adjacent), the
+  Lobby and Gift Shop surfaces, and all mothballed palettes
+  (Kaleidoscope LEDs, AuditStrip).)
 
 ## Canonical docs
 

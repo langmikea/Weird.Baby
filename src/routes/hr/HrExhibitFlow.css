@@ -296,7 +296,7 @@
    corner, anchored in the GOLD accent. Distinguishable at a glance from
    the colder evidence cards. */
 .hr-card-voice {
-  background: rgba(50, 38, 14, 0.55) !important;
+  background: rgba(46, 46, 46, 0.55) !important;
   border-color: var(--hr-gold-mute) !important;
 }
 .hr-card-voice-badge {
@@ -309,7 +309,7 @@
   text-transform: uppercase;
   font-weight: 600;
   color: var(--hr-gold);
-  background: rgba(14, 11, 6, 0.7);
+  background: rgba(13, 13, 13, 0.7);
   padding: 2px 6px;
   border: 1px solid var(--hr-gold-lo);
   pointer-events: none;
@@ -375,7 +375,7 @@
 /* PhotoCard */
 .hr-card-photo-vis {
   flex: 1;
-  background: linear-gradient(135deg, #2d2513 0%, #1a140a 60%, #0e0b06 100%);
+  background: linear-gradient(135deg, #2b2b2b 0%, #181818 60%, #0d0d0d 100%);
   border-bottom: 1px solid var(--hr-border);
   position: relative;
   display: flex;
@@ -399,9 +399,9 @@
 .hr-card-art-vis {
   flex: 1;
   background:
-    radial-gradient(circle at 30% 40%, #3a2e14 0%, transparent 40%),
-    radial-gradient(circle at 70% 60%, #4a3818 0%, transparent 45%),
-    #1a140a;
+    radial-gradient(circle at 30% 40%, #383838 0%, transparent 40%),
+    radial-gradient(circle at 70% 60%, #464646 0%, transparent 45%),
+    #181818;
   border-bottom: 1px solid var(--hr-border);
   position: relative;
 }
@@ -417,7 +417,7 @@
 /* VideoCard */
 .hr-card-video-vis {
   flex: 1;
-  background: linear-gradient(180deg, #1a140a 0%, #2d2513 100%);
+  background: linear-gradient(180deg, #181818 0%, #2b2b2b 100%);
   border-bottom: 1px solid var(--hr-border);
   position: relative;
   display: flex;
@@ -432,7 +432,7 @@
   font-weight: 500;
   color: var(--hr-gold-hi);
   text-transform: uppercase;
-  background: rgba(14, 11, 6, 0.8);
+  background: rgba(13, 13, 13, 0.8);
   padding: 2px 6px;
   border: 1px solid var(--hr-gold-lo);
 }
@@ -456,7 +456,7 @@
   bottom: 6px; right: 6px;
   font-size: 10px;
   color: var(--hr-gold-hi);
-  background: rgba(14, 11, 6, 0.8);
+  background: rgba(13, 13, 13, 0.8);
   padding: 1px 5px;
   letter-spacing: 0.05em;
   font-variant-numeric: tabular-nums;
@@ -528,7 +528,7 @@
 .hr-card-session-vis {
   flex: 1;
   background:
-    linear-gradient(120deg, rgba(200, 160, 80, 0.08) 0%, transparent 50%),
+    linear-gradient(120deg, rgba(178, 178, 178, 0.08) 0%, transparent 50%),
     var(--hr-ink-soft);
   border-bottom: 1px solid var(--hr-border);
   position: relative;
@@ -819,18 +819,18 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
 /* ── Scrollbar styling ─────────────────────────────────────────────────── */
 .wb-scroll {
   scrollbar-width: thin;
-  scrollbar-color: rgba(138, 120, 70, 0.35) transparent;
+  scrollbar-color: rgba(132, 132, 132, 0.35) transparent;
 }
 .wb-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
 .wb-scroll::-webkit-scrollbar-track { background: transparent; }
 .wb-scroll::-webkit-scrollbar-thumb {
-  background: rgba(138, 120, 70, 0.35);
+  background: rgba(132, 132, 132, 0.35);
   border-radius: 4px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 .wb-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(184, 151, 74, 0.55);
+  background: rgba(168, 168, 168, 0.55);
   background-clip: padding-box;
   border: 2px solid transparent;
 }
@@ -1069,7 +1069,7 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
 .hr-kal-knob {
   width: 58px; height: 58px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #2a2110, #14100a);
+  background: radial-gradient(circle at 35% 30%, #282828, #131313);
   border: 2px solid var(--hr-border-hi);
   position: relative;
   cursor: grab;
@@ -1092,7 +1092,7 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   font-size: 13px;
   color: var(--hr-gold-hi);
   font-variant-numeric: tabular-nums;
-  background: rgba(14, 11, 6, 0.92);
+  background: rgba(13, 13, 13, 0.92);
   border-radius: 50%;
   opacity: 0;
   pointer-events: none;
@@ -1101,7 +1101,7 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
 }
 .hr-kal-switch {
   width: 44px; height: 24px;
-  background: #120e07;
+  background: #111111;
   border: 1px solid var(--hr-border);
   border-radius: 12px;
   position: relative;
@@ -1140,7 +1140,7 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   flex-direction: column-reverse;
   gap: 2px;
   padding: 4px 4px;
-  background: #0a0805;
+  background: #090909;
   border: 1px solid var(--hr-border);
   border-radius: 3px;
   box-shadow: inset 0 1px 3px rgba(0,0,0,0.7);
@@ -1150,7 +1150,7 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   width: 40px;
   height: 7px;
   border-radius: 1px;
-  background: #1f1a0e;
+  background: #1d1d1d;
   transition: background 70ms ease, box-shadow 70ms ease;
 }
 .hr-vu-readout-stack {
@@ -1282,7 +1282,7 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   font-variant-numeric: tabular-nums;
   line-height: 1;
   color: var(--hr-gold-hi);
-  background: rgba(14, 11, 6, 0.8);
+  background: rgba(13, 13, 13, 0.8);
   border: 1px solid var(--hr-gold-lo);
   padding: 2px 5px;
   pointer-events: none;
@@ -1346,7 +1346,7 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   justify-content: center;
   text-align: center;
   padding: 24px;
-  background: linear-gradient(135deg, #15110a 0%, #0a0a0a 65%);
+  background: linear-gradient(135deg, #141414 0%, #0a0a0a 65%);
   border: 1px solid var(--hr-gold-lo);
   color: var(--hr-gold-lo);
   font-size: 13px;
@@ -1355,7 +1355,7 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
 .hr-gallery-ov-nav {
   flex: none;
   width: 44px; height: 64px;
-  background: rgba(14, 11, 6, 0.7);
+  background: rgba(13, 13, 13, 0.7);
   border: 1px solid var(--hr-gold-lo);
   color: var(--hr-gold);
   font-size: 28px;
@@ -1388,7 +1388,7 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   width: 54px; height: 54px;
   background-size: cover;
   background-position: center;
-  background-color: #15110a;
+  background-color: #141414;
   border: 1px solid var(--hr-border);
   cursor: pointer;
   color: var(--hr-gold-mute);
@@ -1417,7 +1417,7 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   text-align: center;
   padding: 14px;
   box-sizing: border-box;
-  background: linear-gradient(135deg, #15110a 0%, #0a0a0a 65%);
+  background: linear-gradient(135deg, #141414 0%, #0a0a0a 65%);
   color: var(--hr-gold-lo);
 }
 .hr-media-ph-card {
@@ -1477,7 +1477,7 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   font-variant-numeric: tabular-nums;
   line-height: 1;
   color: var(--hr-gold-hi);
-  background: rgba(14, 11, 6, 0.8);
+  background: rgba(13, 13, 13, 0.8);
   border: 1px solid var(--hr-gold-lo);
   padding: 2px 5px;
   pointer-events: none;
@@ -1791,7 +1791,7 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   padding: 9px 8px;
   transition: color 0.12s, background 0.12s;
 }
-.hr-album-ov-trackbtn:hover { color: var(--hr-gold-hi); background: rgba(14, 11, 6, 0.6); }
+.hr-album-ov-trackbtn:hover { color: var(--hr-gold-hi); background: rgba(13, 13, 13, 0.6); }
 .hr-album-ov-trackbtn:disabled { cursor: default; color: var(--hr-gold-mute); }
 .hr-album-ov-row.is-current .hr-album-ov-trackbtn { color: var(--hr-gold-hi); }
 .hr-album-ov-num {

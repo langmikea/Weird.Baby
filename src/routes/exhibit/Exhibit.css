@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;800&family=Courier+Prime:wght@400&display=swap');
+/* 2026-06-07 B&W rework: brand wordmark face (rounded, akin to the logo's
+   bubble lettering). Trial scope: the nav wordmark only. */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow-x:clip;scroll-snap-type:y mandatory;scroll-behavior:smooth}
 
@@ -9,7 +12,10 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 
 /* NAV */
 .ex-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 32px 0;flex-shrink:0;scroll-snap-align:start}
-.ex-nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--hr-gold);background:none;border:none;cursor:pointer;transition:opacity .2s}
+/* B&W rework trial: wordmark in the logo-like rounded face, mixed case
+   ("Weird.Baby", as the logo letters it), tracking relaxed for the bubble
+   forms. Rest of the nav stays Syne pending Mike's read. */
+.ex-nav-logo{font-family:var(--wb-brand,'Fredoka',sans-serif);font-weight:600;font-size:.85rem;letter-spacing:.06em;text-transform:none;color:var(--hr-gold);background:none;border:none;cursor:pointer;transition:opacity .2s}
 .ex-nav-logo:hover{opacity:.7}
 .ex-nav-sub{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:.12em;text-transform:uppercase;color:var(--hr-gold)}
 .ex-nav-return{font-family:'Syne',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--hr-gold);background:none;border:none;cursor:pointer;transition:opacity .2s}
