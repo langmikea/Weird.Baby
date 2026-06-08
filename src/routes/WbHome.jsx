@@ -85,8 +85,12 @@ export default function WbHome() {
         .wb-submit:hover { background: #211f1c; color: #f5f3ec; }
         .wb-confirmed { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 1rem; color: #211f1c; padding: 14px 0 6px; display: block; transform: scaleY(1.15); }
         @keyframes rise { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-        .wb-entries { margin-top: 14px; max-height: 120px; overflow-y: auto; scrollbar-width: none; }
-        .wb-entries::-webkit-scrollbar { display: none; }
+        /* 2026-06-07 Mike: guest book wasn't scrollable-in-practice — taller
+           viewport and a visible thin scrollbar so all entries are reachable. */
+        .wb-entries { margin-top: 14px; max-height: 34vh; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #a9a59a transparent; }
+        .wb-entries::-webkit-scrollbar { width: 6px; }
+        .wb-entries::-webkit-scrollbar-thumb { background: #a9a59a; border-radius: 3px; }
+        .wb-entries::-webkit-scrollbar-track { background: transparent; }
         .wb-entry { display: flex; align-items: baseline; gap: 10px; padding: 5px 0; border-bottom: 1px solid #d8d4c9; animation: rise 0.4s ease; }
         .wb-entry-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.8rem; color: #211f1c; white-space: nowrap; }
         .wb-entry-note { font-family: 'Courier Prime', monospace; font-style: italic; font-size: 0.7rem; color: #6f6b62; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }

@@ -179,7 +179,9 @@ const IDLE_RETURN_MS = 8000;
 // (between Deep Tracks and Presets) in Stage 2; moved to position 5 here.
 const TABS = [
   { key: "artist",  label: "Artist",      kind: "tier",    tier: 1, width: 120 },
-  { key: "media",   label: "Formats",     kind: "tier",    tier: 2, width: 130 },
+  // 2026-06-07 Mike: "Formats" → "Source" — the tab's actual content is the
+  // Source column (plus content/card kind, re-tiered in vocabulary.json).
+  { key: "media",   label: "Source",      kind: "tier",    tier: 2, width: 130 },
   { key: "deep",    label: "Deep Tracks", kind: "tier",    tier: 3, width: 120 },
   { key: "presets", label: "Presets",     kind: "special", special: "presets", width: 110 },
   { key: "journal", label: "Journal",     kind: "special", special: "journal", width: 110 },
@@ -2452,33 +2454,11 @@ function P3Panel({ matched, totalCount, playingAudioId, setPlayingAudioId, onOpe
   const gridRef = useMasonryRowSpan(filterKey);
   return (
     <>
-      <div className="hr-page-header">
-        <div className="hr-eyebrow">Weird.Baby · Hunter Root · {ARTIFACTS.length} artifacts</div>
-        <h1 className="hr-page-title">the artifact deck</h1>
-        {/* Stage 3 (v28_3 deck shape, full column complement): page sub
-            describes the deck a fan actually walks into — five base tabs
-            from v28_3 plus Journal appended as HR's sixth tab. Era pill
-            column carries the locked Hunter Root vocabulary in proper
-            case. Album and Song pills mirror the spine (un-clickable
-            until artifacts get tagged); People / Venue / Format / Media /
-            Provenance / Odds render as empty columns until pre-launch
-            tagging fills them in. */}
-        <p className="hr-page-sub">
-          Tabs: Artist · Formats · Deep Tracks · Presets · Journal · ✕.
-          Search lives inside Deep Tracks. Shuffle and Loop appear in Presets
-          as pill switches alongside the user slots; for now they capture
-          state for display only and do not act on the player.
-        </p>
-      </div>
-      <div className="hr-panel-head">
-        <span className="hr-panel-head-label">
-          artifacts <span className="hr-panel-head-muted"> · the material evidence</span>
-        </span>
-        <span className="hr-panel-count">
-          <span className="hr-panel-count-big">{matched.length}</span>
-          <span className="hr-panel-count-total"> of {totalCount}</span>
-        </span>
-      </div>
+      {/* 2026-06-07 Mike: page header (eyebrow / "the artifact deck" title /
+          tab-explainer sub) and the "artifacts · the material evidence"
+          panel-head REMOVED — the wall speaks for itself. The explainer was
+          also stale (shuffle/loop have acted on the player since O9 wired).
+          totalCount prop retained at the call seam for any future count UI. */}
       <div className="hr-artifact-grid" ref={gridRef}>
         {matched.map(card => {
           // Audio cards key on id ONLY (stable across filter reflows) so
@@ -3052,14 +3032,14 @@ function JournalContent({ prompts, eraFilter }) {
             <button
               className="hr-jnl-btn"
               onClick={() => setFeedIdx(prev => (prev - 1 + feedOrder.length) % feedOrder.length)}
-            >ΓÇ╣</button>
+            >{"‹"}</button>
             <span className="hr-jnl-counter">
               {(feedIdx % feedOrder.length) + 1} / {feedOrder.length}
             </span>
             <button
               className="hr-jnl-btn"
               onClick={() => setFeedIdx(prev => (prev + 1) % feedOrder.length)}
-            >ΓÇ║</button>
+            >{"›"}</button>
           </div>
         )}
       </div>
@@ -3592,7 +3572,7 @@ export default function HrExhibitFlow({
                         }}
                         onMouseEnter={has ? (e) => { e.currentTarget.style.opacity = "1"; } : undefined}
                         onMouseLeave={has ? (e) => { e.currentTarget.style.opacity = "0.85"; } : undefined}
-                      >Γ£ò</span>
+                      >{"✕"}</span>
                     );
                   })()}
                   {isActive && open && (

@@ -81,7 +81,8 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 .tl-tracks{list-style:none;padding:0 0 24px}
 .tl-album-label{padding:20px 20px 14px;border-bottom:1px solid var(--hr-border);margin-bottom:4px}
 .tl-album-title{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(.95rem,1.6vw,1.2rem);color:var(--hr-gold);line-height:1.2}
-.tl-track{display:flex;align-items:center;padding:5px 20px;border-left:2px solid transparent;cursor:pointer;transition:background .15s,border-left-color .2s;user-select:none}
+/* 2026-06-07 Mike: tighter rows, less whitespace. */
+.tl-track{display:flex;align-items:center;padding:2px 20px;border-left:2px solid transparent;cursor:pointer;transition:background .15s,border-left-color .2s;user-select:none}
 .tl-track:hover{background:var(--hr-ink-soft)}
 .tl-active{background:var(--hr-ink-soft)}
 .tl-novid{cursor:default;opacity:.32}
@@ -93,11 +94,12 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 .tl-title{font-family:'Courier Prime',monospace;font-size:.88rem;color:var(--hr-gold);flex:1;padding:0 10px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* TAG GRID */
-.tl-tags{display:grid;grid-template-columns:repeat(5,48px);gap:3px;flex-shrink:0}
-.tl-tag{font-family:'Syne',sans-serif;font-weight:600;font-size:.42rem;letter-spacing:.1em;padding:2px 0;background:transparent;border:1px solid transparent;cursor:pointer;border-radius:1px;transition:color .15s,border-color .15s;text-align:center;width:100%}
+/* 2026-06-07 Mike: variant buttons bolder + larger for legibility. */
+.tl-tags{display:grid;grid-template-columns:repeat(5,56px);gap:3px;flex-shrink:0}
+.tl-tag{font-family:'Syne',sans-serif;font-weight:700;font-size:.55rem;letter-spacing:.08em;padding:3px 0;background:transparent;border:1px solid transparent;cursor:pointer;border-radius:1px;transition:color .15s,border-color .15s;text-align:center;width:100%}
 .tl-tag-sel{opacity:1}
 .tl-tag-dim{color:var(--hr-dim) !important;border-color:var(--hr-gold-mute) !important}
-.tl-tag-ghost{display:block;width:48px;height:18px;pointer-events:none}
+.tl-tag-ghost{display:block;width:56px;height:18px;pointer-events:none}
 
 /* VIDEO PANEL — stable right column */
 .vp-area{position:relative;width:100%;background:var(--hr-ink-card);border:1px solid var(--hr-border-hi);flex-shrink:0}
@@ -105,7 +107,8 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 .vp-inner{position:absolute;inset:0}
 .yt-player{width:100%;height:100%;display:block}
 .vp-thumb{position:absolute;inset:0;cursor:pointer;z-index:1}
-.vp-thumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:.6;transition:opacity .2s}
+/* 2026-06-07 Mike: stop graying the video — thumb shows at full strength. */
+.vp-thumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:1;transition:opacity .2s}
 .vp-thumb:hover img{opacity:.8}
 .vp-thumb-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
 .vp-empty-state{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--hr-gold-mute)}
@@ -140,7 +143,10 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 .fs-btn-dis{opacity:.18;pointer-events:none}
 
 /* PLAYER BAR */
-.pb{position:fixed;bottom:0;left:0;right:0;height:60px;background:var(--hr-ink-card);border-top:1px solid var(--hr-border);display:flex;align-items:center;gap:12px;padding:0 20px;z-index:100}
+/* 2026-06-07 Mike: player bar goes DARK on the paper page — unmissable,
+   and consistent with the projection-booth rule (screens are dark).
+   Tokens re-pinned inside the bar's scope. */
+.pb{--hr-gold:#c9c9c9;--hr-gold-hi:#ededed;--hr-gold-lo:#8e8e8e;--hr-gold-mute:#8e8e8e;--hr-dim:#b6b6b6;--hr-ink-card:#1a1a1a;--hr-border:#3e3e3e;position:fixed;bottom:0;left:0;right:0;height:60px;background:var(--hr-ink-card);border-top:1px solid var(--hr-border);display:flex;align-items:center;gap:12px;padding:0 20px;z-index:100;box-shadow:0 -2px 10px rgba(20,18,14,.25)}
 .pb-art{width:36px;height:36px;object-fit:cover;border-radius:1px;flex-shrink:0}
 .pb-art-ph{display:block}
 .pb-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
