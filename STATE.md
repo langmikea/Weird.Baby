@@ -135,10 +135,13 @@ durable direction, not session-scoped tasks.
   (Exhibit.css ::after, under the lightboxes), lightboxes stay a dark
   projection booth (scoped token re-pin), video placeholders stay dark
   screens ("photos are paper; video is television"), badges pinned light
-  over imagery. Fredoka wordmark trial carries over. Deliberately
-  untouched, awaiting Mike's read: variant-pill type colors, journal
-  semantic green/red, per-album accents, Lobby, Gift Shop, mothballed
-  palettes.)
+  over imagery. Fredoka wordmark trial carries over. Pass 2 accepted by
+  Mike ("close enough for this pass"); PASS 2b extends the album page to
+  the LOBBY (WbHome inline styles — the B&W logo now sits on its native
+  paper; grain wash added) and the GIFT SHOP (GiftShop.css remap + grain)
+  so the whole building reads as one stock. Deliberately untouched,
+  awaiting Mike's read: variant-pill type colors, journal semantic
+  green/red, per-album accents, mothballed palettes.)
 
 ## Canonical docs
 
