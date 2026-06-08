@@ -168,12 +168,17 @@ function useYTPlayer({ containerRef, onEnded }) {
   const onEndedRef = useRef(onEnded);
   useEffect(() => { onEndedRef.current = onEnded; });
 
-  function initPlayer(ytId) {
+  // Eagerly construct the player on mount (fixes mobile first-click playback).
+  // Builds with no videoId + autoplay:0 so nothing plays on load. The guard in
+  // initPlayer (playerRef.current) keeps this from colliding with loadVideo's
+  // legacy build path; onReady's pendingRef replay still honors an early click.
+  useEffect(() => { ensureApi(() => initPlayer()); }, []);
+
+  function initPlayer() {
     if (!containerRef.current || playerRef.current) return;
     playerRef.current = new window.YT.Player(containerRef.current, {
       width: "100%", height: "100%",
-      videoId: ytId,
-      playerVars: { autoplay: 1, controls: 1, modestbranding: 1, rel: 0, iv_load_policy: 3, playsinline: 1 },
+      playerVars: { autoplay: 0, controls: 1, modestbranding: 1, rel: 0, iv_load_policy: 3, playsinline: 1 },
       events: {
         onReady() {
           readyRef.current = true;
