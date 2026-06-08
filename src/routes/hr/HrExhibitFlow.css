@@ -34,7 +34,7 @@
   position: relative;
   min-height: calc(100vh - 64px);
   scroll-snap-align: center;
-  background: var(--hr-ink);
+  background: #e7e3d8;
   color: var(--hr-dim);
   font-family: var(--hr-sans);
   font-size: 14px;
@@ -152,7 +152,7 @@
 .hr-artifact-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 280px));
-  justify-content: start;
+  justify-content: center;
   grid-auto-rows: 1px;        /* fine masonry tracks; card row-span set in JS */
   column-gap: 14px;
   row-gap: 0;                 /* vertical gap is baked into each card's span */
@@ -592,7 +592,7 @@ body:has(.pb) .hr-deck { bottom: 60px; }
 .hr-deck-body {
   position: absolute;
   top: 30px; left: 0; right: 0; bottom: 0;
-  background: var(--hr-ink);
+  background: #e7e3d8;
   border-top: 1px solid var(--hr-gold-lo);
   pointer-events: auto;
   display: flex;
@@ -753,12 +753,12 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
 .hr-preset-name-input {
   flex: 1;
   min-width: 0;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.04);
   border: none;
   border-bottom: 1px dashed transparent;
   color: var(--hr-gold);
   font-family: var(--hr-serif);
-  font-style: italic;
+  font-style: normal;
   font-size: 13px;
   padding: 2px 4px;
   outline: none;

@@ -322,7 +322,7 @@ const S = {
       fontSize: isClose ? "14px" : "10.5px",
       letterSpacing: isClose ? "0" : "0.12em",
       textTransform: isClose ? "none" : "uppercase",
-      fontWeight: active ? 800 : 500,
+      fontWeight: active ? 900 : 500,
       color: textColor,
       background: active ? INK_SOFT : INK,
       border: `1px solid ${borderColor}`, borderBottom: "none",
@@ -3542,7 +3542,7 @@ export default function HrExhibitFlow({
             onMouseEnter={() => { if (!open) { cancelHoverTimer(); scheduleHoverOpen(); } }}
             onMouseLeave={() => { if (!open) scheduleHoverClose(); }}
           >
-            {TABS.map(t => {
+            {TABS.filter(t => t.key !== "journal").map(t => {
               const isActive = activeTab === t.key;
               const isClose = t.kind === "close";
               return (
@@ -3584,6 +3584,18 @@ export default function HrExhibitFlow({
                 </div>
               );
             })}
+            {open && (
+              <div
+                role="button"
+                aria-label="Hide panel"
+                title="Hide panel"
+                className="tab-hoverable"
+                onClick={(e) => { e.stopPropagation(); setActiveTab(null); setHoverPeek(false); cancelHoverTimer(); }}
+                style={S.tab(false, open, 34, true)}
+              >
+                <span aria-hidden="true">▾</span>
+              </div>
+            )}
           </div>
 
           {open && currentTab && (

@@ -2,6 +2,9 @@
 /* 2026-06-07 B&W rework: brand wordmark face (rounded, akin to the logo's
    bubble lettering). Trial scope: the nav wordmark only. */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&display=swap');
+/* Oswald 600 — SELF-HOSTED (vendored woff2, no runtime Google request).
+   Used by the carousel variant badges (.tl-tag). */
+@font-face{font-family:'Oswald';font-style:normal;font-weight:600;font-display:swap;src:url('../../assets/fonts/oswald-600.woff2') format('woff2');}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow-x:clip;scroll-snap-type:y mandatory;scroll-behavior:smooth}
 
@@ -75,14 +78,14 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 .vr-dh:hover .vr-dh-line{background:color-mix(in srgb, var(--hr-gold) 33%, transparent)}
 
 /* RIGHT — fixed, never scrolls */
-.ex-right{display:flex;flex-direction:column;background:var(--hr-ink);overflow:hidden}
+.ex-right{display:flex;flex-direction:column;background:#e7e3d8;overflow:hidden}
 
 /* TRACKLIST */
-.tl-tracks{list-style:none;padding:0 0 24px}
+.tl-tracks{list-style:none;padding:0 0 14px}
 .tl-album-label{padding:20px 20px 14px;border-bottom:1px solid var(--hr-border);margin-bottom:4px}
 .tl-album-title{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(.95rem,1.6vw,1.2rem);color:var(--hr-gold);line-height:1.2}
 /* 2026-06-07 Mike: tighter rows, less whitespace. */
-.tl-track{display:flex;align-items:center;padding:2px 20px;border-left:2px solid transparent;cursor:pointer;transition:background .15s,border-left-color .2s;user-select:none}
+.tl-track{display:flex;align-items:center;padding:1px 20px;border-left:2px solid transparent;cursor:pointer;transition:background .15s,border-left-color .2s;user-select:none}
 .tl-track:hover{background:var(--hr-ink-soft)}
 .tl-active{background:var(--hr-ink-soft)}
 .tl-novid{cursor:default;opacity:.32}
@@ -95,11 +98,11 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 
 /* TAG GRID */
 /* 2026-06-07 Mike: variant buttons bolder + larger for legibility. */
-.tl-tags{display:grid;grid-template-columns:repeat(5,56px);gap:3px;flex-shrink:0}
-.tl-tag{font-family:'Syne',sans-serif;font-weight:700;font-size:.55rem;letter-spacing:.08em;padding:3px 0;background:transparent;border:1px solid transparent;cursor:pointer;border-radius:1px;transition:color .15s,border-color .15s;text-align:center;width:100%}
+.tl-tags{display:grid;grid-template-columns:48px 32px 42px 33px 41px 40px;gap:6px;flex-shrink:0}
+.tl-tag{font-family:'Oswald',sans-serif;font-weight:600;font-size:.55rem;letter-spacing:0;padding:3px 7px;background:transparent;border:1px solid transparent;cursor:pointer;border-radius:1px;transition:color .15s,border-color .15s;text-align:center;width:100%}
 .tl-tag-sel{opacity:1}
-.tl-tag-dim{color:var(--hr-dim) !important;border-color:var(--hr-gold-mute) !important}
-.tl-tag-ghost{display:block;width:56px;height:18px;pointer-events:none}
+.tl-tag-dim{color:var(--hr-gold-mute) !important;border-color:var(--hr-gold-mute) !important}
+.tl-tag-ghost{display:block;pointer-events:none}
 
 /* VIDEO PANEL — stable right column */
 .vp-area{position:relative;width:100%;background:var(--hr-ink-card);border:1px solid var(--hr-border-hi);flex-shrink:0}
@@ -132,7 +135,7 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 .fs-block.fs-entering.fs-dir-down{opacity:0;transform:translateY(-18px)}
 .fs-block.fs-visible.fs-dir-down{animation:fs-in-down .55s cubic-bezier(.34,1.56,.64,1) both}
 .fs-block.fs-idle{opacity:0}
-.fs-line{font-family:'DM Serif Display',Georgia,serif;font-style:italic;font-size:1.18rem;color:var(--hr-gold);line-height:1.6}
+.fs-line{font-family:var(--hr-sans);font-style:normal;font-size:1.18rem;color:var(--hr-gold);line-height:1.6}
 .fs-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
 .fs-rule{height:1px;width:28px;opacity:.4;border-radius:1px;flex-shrink:0}
 .fs-nav{display:flex;gap:0}
