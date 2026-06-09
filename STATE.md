@@ -13,6 +13,8 @@ progress, deploy status, or what's next** — see `NAVIGATION.md` and
 
 ## Working Doctrine (for any agent/session)
 
+Canonical process manual: docs/canonical/OPERATIONS.md (read first; this section is mirrored there).
+
 Standing Ops rules. Each one was paid for by a real failure; read before
 any repo work, any session, any agent.
 

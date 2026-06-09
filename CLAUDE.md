@@ -1,5 +1,7 @@
 # Claude session notes
 
+**READ FIRST: docs/canonical/OPERATIONS.md — the operating manual. It governs process; this file is reference.**
+
 This file is for future Claude sessions on this repo. The human (Mike) doesn't read it. Keep it terse, practical, and up-to-date with anything that bit you.
 
 If you're starting fresh: read this top-to-bottom before touching code. Then read `docs/MUSEUM_UX.md` for current direction.
