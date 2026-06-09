@@ -69,19 +69,9 @@ There used to be `"clip"` entries; they're gone as of merge `e4ea01b`.
 
 ## Design tokens
 
-Single canonical gold across the codebase. JS constants in `HrExhibitFlow.jsx`:
+**Canonical source of truth: `src/styles/museum-tokens.css`** — the `--hr-*` custom properties. Do not duplicate hex values here; read them from that file. (This table previously hard-coded the pre-graphite dark+gold palette — `INK #080808`, `GOLD… #b8974a` — which drifted out of date and became a stale third copy. Removed to prevent future work from scoping against wrong values.)
 
-| Constant | Value | Use |
-|---|---|---|
-| `INK` | `#080808` | Section background |
-| `INK_SOFT` | `#0d0d0d` | Active tab / pill fill, "raised card" |
-| `INK_CARD`, `INK_CARD_HI` | `#0a0a0a`, `#0e0e0e` | Card backgrounds |
-| `BORDER` | `#1a1a1a` | Pill default border |
-| `BORDER_HI` | `#252525` | Zero-count pill text |
-| `GOLD` / `GOLD_HI` / `GOLD_LO` / `DIM` | all `#b8974a` | Canonical gold (consolidated; comments preserve the cream-→-gold history) |
-| `GOLD_MUTE` | `#555` | Disabled / muted controls |
-
-Inline-styled "less bright gold" values: `#6a5520` (deck pill unselected), `#7a7a7a` (tracklist tag unselected). When in doubt, prefer one of these instead of inventing new shades.
+The JS constants at `HrExhibitFlow.jsx:109-122` (`INK`, `BORDER`, `GOLD*`, `DIM`…) are a **hand-copied mirror** of those `--hr-*` tokens, read by the `S.*` inline-style builders. They must be kept in sync with `museum-tokens.css` by hand — there is no build-time link, so edits to the CSS ramp do not propagate to the JS automatically. When changing palette, edit `museum-tokens.css` first, then re-sync the JS mirror to match. `HrExhibitFlow.css` consumes the tokens via `var(--hr-*)` and stays in sync by construction.
 
 ## Exhibit deck — non-obvious behaviors
 

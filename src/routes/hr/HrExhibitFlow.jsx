@@ -116,10 +116,10 @@ const BORDER_HI = "#a9a59a";
 // ladder flips to paper stock, the accent constants go photo-black — names
 // kept (plumbing), read GOLD as "accent". Single-tone pattern preserved.
 const GOLD = "#211f1c";
-const GOLD_HI = "#211f1c";  // single-accent-tone call carried over from the gold era
-const GOLD_LO = "#211f1c";  // single-accent-tone call carried over from the gold era
+const GOLD_HI = "#000000";  // synced to --hr-gold-hi (deepest tier)
+const GOLD_LO = "#57544d";  // synced to --hr-gold-lo (dim tier)
 const GOLD_MUTE = "#9b978d";
-const DIM = "#211f1c";       // matched to GOLD per the single-tone call
+const DIM = "#3b3933";       // synced to --hr-dim (body)
 // MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
 // Kaleidoscope LED palette — re-tuned to v17's museum gold, not v3's neon.
 // (Used inline by the mothballed VuMeter, which is never rendered.)
