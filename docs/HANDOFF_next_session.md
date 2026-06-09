@@ -1,40 +1,33 @@
-# HANDOFF — Weird.Baby Museum, presets + next steps (paste as opening message of a fresh session)
+# HANDOFF — next session (written 2026-06-09, HEAD 347b1e8)
 
-Working rules in effect (see `STATE.md` → Working Doctrine, committed):
-- Mike owns UX-facing / UX-impactful calls. The engineer owns Ops.
-- Verify against the live `weird-baby-museum` repo before scoping. Never trust Drive copies (they've served stale/retired trees) or memory. Don't guess — read the file with pwsh (read-only) or Cowork.
-- Default to Cowork for repo reads, big-file edits, and multi-file scoping — faster, full repo reach, avoids the human paste relay's limits/errors.
-- Drive the live UI by accessibility ref, not pixel coordinates (tiny dock targets + peek-to-open animation make pixel clicks miss silently).
-- No load-bearing work inside if/else in line-by-line-pasted scripts (the `else` orphans and silently skips). Flat statements + explicit verify-or-abort.
-- Durable = committed AND pushed AND (for UI) deployed. Sandbox has NO push/deploy creds; Mike pushes (`git push origin main`) and deploys (`npm run build && npx wrangler deploy`) from PowerShell. No CI.
-- A behavior does not change unless there is a stated reason for it to change.
-- One question at a time, plain syntax, only when genuinely load-bearing and undecidable; otherwise assume-and-state.
+**Orientation is NOT in this file.** Read `docs/canonical/OPERATIONS.md`
+first (CLAUDE.md points there), then STATE.md, then this. This file is
+session-scoped context only.
 
-## Where things stand (all live on origin/main + deployed)
-- **Presets feature is functionally complete, deployed, and verified live.** Save / Play / Show / Now Playing all confirmed by direct test on weird.baby/hr:
-  - Save captures both scopes (player by stable id; deck filters — e.g. "Source: Reverbnation").
-  - Play restores exact track + variant by id (survives reordering — id resolution, not index).
-  - Show = deck-only peek, jukebox plays on (§8.4 honored), status ribbon + Now Playing return.
-  - Now Playing clears peek → Active View, playback uninterrupted.
-- **Data + adapter groundwork done:** every track has a `song` slug (15 audio-only backfilled); adapter surfaces stable `track.id` + derived `video.id` onto the spine (commit 49cd044). Capture/restore wired via prop-widening at the `<ExhibitFlow>` seam (commits ea49b32, 1b070f1, 8a4dec2, 55e230e).
-- **Spec of record:** `docs/UX_PRESETS_SPEC.md` (v0.4). §8.2 LANDED, §9 IMPLEMENTED, §8.1 phase 1 BUILT + DEPLOYED 2026-06-07 (298b08f; §8.1.1 status note).
-- **Doctrine + backlog committed** (4fb2007, dcd4f7e, 2d59f7d), pushed.
-
-## Open work (top level)
-UX-facing:
-- **Mobile presets phase 2 (§8.1)** — phase 1 (apply-only factory pills, hoisted `applyFactoryPreset`, neutral player fields) is live (298b08f). Remaining: factory **Show** analogue via `peekSelected` + mobile peek-return "now playing ↩" chip. Note for Show: "Surprise me" re-rolls per `apply()` call — compute once per interaction or accept the re-roll (§8.1.1 flag). The player-state prerequisite was resolved the other way: factory presets stay deck-only; at apply they normalize to Save's field shape with player fields explicitly neutral (`playingTrack: null` = leave playback alone; no fabricated ids).
-- ~~**Preset naming UI (§5 #4)**~~ — BUILT 2026-06-07 (Mike: inline slot-label input, autopopulated at save, edit optional; `name` in the localStorage round-trip, legacy slots fall back to summary).
-- ~~**Shuffle/loop semantics (O9)**~~ — WIRED + deployed + verified live 2026-06-07 (524bf41). Shuffle randomizes the next-up queue; loop replays the current selection on end (controls §9.2). State owned by Exhibit.jsx, crossed at the seam.
-- ~~**Idle auto-return (§5 #3)**~~ — BUILT 2026-06-07 (Mike: Option A — song change while idle ≥ 8s clears the peek; spec §3 trigger corrected, album-advance was impossible). `IDLE_RETURN_MS` open to feel-tuning.
-- **Brand-aligned aesthetic** (backlog) — W.B infrastructure mirrors the logo (1960s B&W-photo, logo-like font); content keeps full vibrancy/palette.
-
-Required infrastructure (the next big lift):
-- **Preset-as-artifact** (Lifecycle §4.5) — today localStorage snapshot; canon wants a first-class shareable/tagged artifact.
-- ~~**Shareable preset URLs** `weird.baby/p/<id>`~~ — BUILT 2026-06-07 (D1 `presets` table, `POST/GET /api/presets`, Share verb per slot, Lobby-first landing per Mike). Built as the visitor-facing slice ahead of the artifact model; the model can absorb it later.
-- **Entry-state-as-preset** (Lifecycle §4.2) — "no preset-less state"; likely not yet implemented.
+## Where the UX-overhaul arc stands
+- Job: top-down UX overhaul — (1) aesthetic foundation, (2) master
+  layout, (3) components. Session brief is with Mike.
+- Ground truth gathered: a verified read-only map of the aesthetic
+  layer, layout, tracklist, and PUV/FactScroller (line ranges in
+  OPERATIONS.md §5). Key finding: JS token mirrors at
+  `HrExhibitFlow.jsx:109-122` flatten the photo-black ramp to one tone
+  (#211f1c) and inline `S.*` styles do not track CSS token edits.
 
 ## Recommended next step
-Finish **§8.1 mobile presets phase 2** — factory Show + mobile peek-return chip, same two files, no seam change; settle the "Surprise me" re-roll question (compute once per interaction vs. accept) before building Show. Alternatively Mike may prioritize naming UI (§5 #4) or idle auto-return (§5 #3). Phase 1 is live and verified in the served bundle; a hands-on 390px pass on weird.baby/hr is still worth doing.
+Scope + build the **token-mirror fix** (foundation before aesthetics).
+BLOCKED ON one open UX question to Mike, asked but not yet answered:
+- Deck chrome: (A) join the page's tonal ramp (more hierarchy), or
+  (B) stay deliberately flat black (fix propagation only, pixel-identical).
+Get the answer FIRST; A and B are different edits.
 
-## Recovered hazard to watch
-The working tree was once found with three files truncated mid-write (sync flakiness); Cowork restored from HEAD. Everything since is committed/pushed clean. If you see a truncated file, check HEAD before editing.
+## Then, in order
+1. Logo placement system (overhaul #1; logo image is Lobby-only today).
+2. Mike's parked aesthetic reads: variant-pill type colors, journal
+   green/red, per-album accents.
+3. Overhaul #2 master layout, #3 components (Exhibit.jsx owns
+   tracklist/player/PUV; HrExhibitFlow.jsx owns deck/dock — see map).
+
+## Parked (unchanged)
+S8.1 mobile presets phase 2; preset-as-artifact; entry-state-as-preset;
+facts content fill (hr_facts.js is seed data); gitignore cleanup
+(dist_stale_1780929658/ et al.); STATE.md refresh for June 8-9 work.
