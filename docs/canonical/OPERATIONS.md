@@ -126,7 +126,7 @@ Handoffs rot in days; git log is the progress record. A handoff's
 standing order.
 
 **Files that do NOT exist (do not look for, do not invent):**
-`START_HERE.txt`, `BUILD_LOCK.txt`. There is no build-lock mechanism.
+`BUILD_LOCK.txt` — no build-lock mechanism exists. (`C:\AI\START_HERE.md` is now REAL: the cross-project bootstrap, canonical at `docs/canonical/START_HERE.md`, added 2026-06-09.)
 (These were hallucinated by a past session and propagated through two
 handoffs. If a future session adds a real lock mechanism, it updates this
 line.)
@@ -191,3 +191,4 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 4. Optionally drop refreshed OPERATIONS.md + STATE.md into
    `G:\My Drive\_conduit\` (with stamps) so chat sessions can self-orient
    without a paste.
+
