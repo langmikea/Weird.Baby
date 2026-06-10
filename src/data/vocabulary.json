@@ -1,10 +1,9 @@
 {
   "metadata": {
     "source": "http://127.0.0.1:51822/db",
-    "exported_at": "2026-06-05T02:49:32.096Z",
-    "row_count": 19,
-    "schema": "vocabulary v1 — namespace, display_name, tier, sort_order, retired_at",
-    "manual_edits": "2026-06-07 (Mike: categories on wrong page): content_kind tier 3->2 sort 5; card_kind ADDED tier 2 sort 6 (was unregistered, fell to tier-3 Deep Tracks). MIRROR IN MV's vocabulary table before the next export-artifacts run or this is overwritten."
+    "exported_at": "2026-06-10T23:29:39.119Z",
+    "row_count": 18,
+    "schema": "vocabulary v1 — namespace, display_name, tier, sort_order, retired_at"
   },
   "namespaces": [
     {
@@ -122,14 +121,7 @@
     {
       "namespace": "content_kind",
       "display_name": "Content Kind",
-      "tier": 2,
-      "sort_order": 5,
-      "retired_at": null
-    },
-    {
-      "namespace": "card_kind",
-      "display_name": "Card Kind",
-      "tier": 2,
+      "tier": 3,
       "sort_order": 6,
       "retired_at": null
     },

@@ -1,7 +1,7 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-06-05T02:49:32.096Z",
+    "exported_at": "2026-06-10T23:29:39.119Z",
     "filter": "released, not archived, badged for this exhibit",
     "vocabulary_csv_sha": null
   },
@@ -18,19 +18,23 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "attributes": [
+          "new_music",
+          "notable",
+          "pre_release"
+        ],
         "bands": [
           "hunter_root"
+        ],
+        "event": [
+          "tour",
+          "tour_announcement"
         ],
         "exhibit": [
           "hunter_root"
         ],
-        "unsorted": [
-          "new_music",
-          "notable",
-          "pre_release",
-          "solo",
-          "tour",
-          "tour_announcement"
+        "lineup": [
+          "solo"
         ]
       }
     },
@@ -46,17 +50,19 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "attributes": [
+          "early_version",
+          "new_music",
+          "notable",
+          "personal"
+        ],
         "bands": [
           "hunter_root"
         ],
         "exhibit": [
           "hunter_root"
         ],
-        "unsorted": [
-          "early_version",
-          "new_music",
-          "notable",
-          "personal",
+        "lineup": [
           "solo"
         ]
       }
@@ -73,13 +79,7 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
+        "attributes": [
           "fan",
           "milestone",
           "new_music",
@@ -87,6 +87,12 @@
           "personal",
           "pre_release",
           "released"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
         ]
       }
     },
@@ -102,18 +108,22 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "attributes": [
+          "gear",
+          "new_music",
+          "notable",
+          "released"
+        ],
         "bands": [
           "hunter_root"
+        ],
+        "event": [
+          "rehearsal"
         ],
         "exhibit": [
           "hunter_root"
         ],
-        "unsorted": [
-          "gear",
-          "new_music",
-          "notable",
-          "rehearsal",
-          "released",
+        "lineup": [
           "solo"
         ]
       }
@@ -130,22 +140,23 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "attributes": [
+          "new_music",
+          "notable",
+          "pre_release",
+          "promotional_post"
+        ],
         "bands": [
           "hunter_root"
         ],
         "exhibit": [
           "hunter_root"
         ],
-        "source": [
-          "distrokid",
-          "tiktok"
-        ],
-        "unsorted": [
-          "new_music",
-          "notable",
-          "pre_release",
-          "promotional_post",
+        "lineup": [
           "solo"
+        ],
+        "source": [
+          "tiktok"
         ]
       }
     },
@@ -161,18 +172,20 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "bands": [
-          "hunter_root"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "unsorted": [
+        "attributes": [
           "fan",
           "lyme_disease",
           "notable",
-          "personal",
+          "personal"
+        ],
+        "bands": [
+          "hunter_root"
+        ],
+        "event": [
           "tour_announcement"
+        ],
+        "exhibit": [
+          "hunter_root"
         ]
       }
     },
@@ -191,22 +204,26 @@
         "album": [
           "medusas_disco"
         ],
+        "attributes": [
+          "lancaster_pa",
+          "notable"
+        ],
         "bands": [
           "hunter_root"
+        ],
+        "event": [
+          "advance_tickets",
+          "event_listing",
+          "live_show",
+          "ticketing",
+          "tour",
+          "tour_announcement"
         ],
         "exhibit": [
           "hunter_root"
         ],
-        "unsorted": [
-          "advance_tickets",
-          "event_listing",
-          "lancaster_pa",
-          "live_show",
-          "notable",
-          "solo",
-          "ticketing",
-          "tour",
-          "tour_announcement"
+        "lineup": [
+          "solo"
         ]
       }
     },
@@ -222,22 +239,22 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "attributes": [
+          "fan_cover_song",
+          "notable",
+          "personal",
+          "promotional_post"
+        ],
         "bands": [
           "hunter_root"
+        ],
+        "event": [
+          "live_show"
         ],
         "exhibit": [
           "hunter_root"
         ],
-        "source": [
-          "distrokid",
-          "tiktok"
-        ],
-        "unsorted": [
-          "fan_cover_song",
-          "live_show",
-          "notable",
-          "personal",
-          "promotional_post",
+        "lineup": [
           "solo"
         ]
       }
@@ -254,15 +271,15 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "attributes": [
+          "notable",
+          "personal"
+        ],
         "bands": [
           "hunter_root"
         ],
         "exhibit": [
           "hunter_root"
-        ],
-        "unsorted": [
-          "notable",
-          "personal"
         ]
       }
     },
@@ -278,6 +295,14 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "attributes": [
+          "family",
+          "indieartist",
+          "loss",
+          "personal",
+          "rare",
+          "tribute"
+        ],
         "bands": [
           "hunter_root"
         ],
@@ -286,14 +311,6 @@
         ],
         "people": [
           "nick_root"
-        ],
-        "unsorted": [
-          "family",
-          "indieartist",
-          "loss",
-          "personal",
-          "rare",
-          "tribute"
         ]
       }
     },
@@ -309,22 +326,24 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "attributes": [
+          "account_hacked",
+          "fan",
+          "notable",
+          "personal",
+          "social"
+        ],
         "bands": [
           "hunter_root"
+        ],
+        "event": [
+          "fall_tour"
         ],
         "exhibit": [
           "hunter_root"
         ],
         "source": [
           "instagram"
-        ],
-        "unsorted": [
-          "fall_tour",
-          "fan",
-          "hacked_account",
-          "notable",
-          "personal",
-          "social"
         ]
       }
     },
@@ -340,20 +359,19 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "attributes": [
+          "account_hacked",
+          "early_stages",
+          "mental_health",
+          "new_music",
+          "notable",
+          "songwriting"
+        ],
         "bands": [
           "hunter_root"
         ],
         "exhibit": [
           "hunter_root"
-        ],
-        "unsorted": [
-          "early_stages",
-          "instagram_hacked",
-          "mental_health",
-          "new_song",
-          "notable",
-          "songwriting",
-          "songwriting_process"
         ]
       }
     },
@@ -369,18 +387,20 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "attributes": [
+          "milestone",
+          "new_music",
+          "notable",
+          "personal",
+          "pre_release"
+        ],
         "bands": [
           "hunter_root"
         ],
         "exhibit": [
           "hunter_root"
         ],
-        "unsorted": [
-          "milestone",
-          "new_music",
-          "notable",
-          "personal",
-          "pre_release",
+        "lineup": [
           "solo"
         ]
       }
@@ -397,17 +417,21 @@
       "primary_url": "https://assets.weird.baby/assets/cd/cd43e67c278e821451f730f71f52ed0e179e1a961a29a7b6e25a3128842f1140.jpg",
       "thumbnail_url": "https://assets.weird.baby/thumbnails/59/59fca3d83c9e194b1bd1afeb782e368e05fb7ddbc364909d06f62f0091bd2819.jpg",
       "tags": {
+        "attributes": [
+          "personal",
+          "unique"
+        ],
         "bands": [
           "hunter_root"
+        ],
+        "event": [
+          "tour"
         ],
         "exhibit": [
           "hunter_root"
         ],
-        "unsorted": [
-          "personal",
-          "solo",
-          "tour",
-          "unique"
+        "lineup": [
+          "solo"
         ]
       }
     },
@@ -423,20 +447,24 @@
       "primary_url": "https://assets.weird.baby/assets/d8/d8b100ab50ecde19eb3d50369f998f4f48b11bff214e21e801e3adce78e81df8.png",
       "thumbnail_url": "https://assets.weird.baby/thumbnails/b8/b81174b1746478a5873eaf1e80c1c846565713f6b68d1801fec49bdbb37b055a.jpg",
       "tags": {
+        "attributes": [
+          "new_music",
+          "notable",
+          "personal",
+          "pre_release"
+        ],
         "bands": [
           "hunter_root"
+        ],
+        "event": [
+          "tour",
+          "tour_announcement"
         ],
         "exhibit": [
           "hunter_root"
         ],
-        "unsorted": [
-          "new_music",
-          "notable",
-          "personal",
-          "pre_release",
-          "solo",
-          "tour",
-          "tour_announcement"
+        "lineup": [
+          "solo"
         ]
       }
     },
@@ -452,17 +480,17 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "attributes": [
+          "merch",
+          "milestone",
+          "personal",
+          "unique"
+        ],
         "bands": [
           "hunter_root"
         ],
         "exhibit": [
           "hunter_root"
-        ],
-        "unsorted": [
-          "merch",
-          "milestone",
-          "personal",
-          "unique"
         ]
       }
     },
@@ -478,18 +506,20 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "attributes": [
+          "artist_page"
+        ],
         "bands": [
           "hunter_root"
         ],
         "exhibit": [
           "hunter_root"
         ],
+        "lineup": [
+          "solo"
+        ],
         "source": [
           "reverbnation"
-        ],
-        "unsorted": [
-          "artist_page",
-          "solo"
         ]
       }
     },
@@ -508,6 +538,9 @@
         "album": [
           "medusas_disco"
         ],
+        "attributes": [
+          "artist_page"
+        ],
         "bands": [
           "hunter_root"
         ],
@@ -516,9 +549,6 @@
         ],
         "source": [
           "reverbnation"
-        ],
-        "unsorted": [
-          "artist_page"
         ]
       }
     },
@@ -537,6 +567,9 @@
         "album": [
           "medusas_disco"
         ],
+        "attributes": [
+          "song_page"
+        ],
         "bands": [
           "hunter_root"
         ],
@@ -545,9 +578,6 @@
         ],
         "source": [
           "reverbnation"
-        ],
-        "unsorted": [
-          "song_page"
         ]
       }
     },
@@ -566,6 +596,9 @@
         "album": [
           "run_with_the_hunt"
         ],
+        "attributes": [
+          "artist_page"
+        ],
         "bands": [
           "hunter_root"
         ],
@@ -574,9 +607,6 @@
         ],
         "source": [
           "reverbnation"
-        ],
-        "unsorted": [
-          "artist_page"
         ]
       }
     },
@@ -595,6 +625,9 @@
         "album": [
           "run_with_the_hunt"
         ],
+        "attributes": [
+          "song_page"
+        ],
         "bands": [
           "hunter_root"
         ],
@@ -603,9 +636,6 @@
         ],
         "source": [
           "reverbnation"
-        ],
-        "unsorted": [
-          "song_page"
         ]
       }
     },
@@ -638,17 +668,17 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "attributes": [
+          "artist_message",
+          "lyme_disease",
+          "notable",
+          "personal"
+        ],
         "bands": [
           "hunter_root"
         ],
         "exhibit": [
           "hunter_root"
-        ],
-        "unsorted": [
-          "artist_message",
-          "lyme_disease",
-          "notable",
-          "personal"
         ]
       }
     },
@@ -692,17 +722,21 @@
           "primary_url": "https://assets.weird.baby/assets/0a/0a26010136d35e9475899e3a751502a2635e973c85a497b39410469439d8a601.jpg",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/7f/7f3200e748abb9f55b66f43456920de1bf2cdaf4814ad3dc4414924cbf784da4.jpg",
           "tags": {
+            "attributes": [
+              "gear",
+              "notable"
+            ],
             "bands": [
               "hunter_root"
+            ],
+            "event": [
+              "live_show"
             ],
             "exhibit": [
               "hunter_root"
             ],
-            "unsorted": [
-              "band",
-              "gear",
-              "live_show",
-              "notable"
+            "lineup": [
+              "band"
             ]
           },
           "capture_order": 1
@@ -719,17 +753,21 @@
           "primary_url": "https://assets.weird.baby/assets/73/7301d07f8a483897d073138da6ac5b35072aff0a864a74a5a29f2e42785ccafc.jpg",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/46/46090a400ae94245ff48d20ad6fa3dfa879e7943be1ed79c262b4d856fb6059c.jpg",
           "tags": {
+            "attributes": [
+              "gear",
+              "notable"
+            ],
             "bands": [
               "hunter_root"
+            ],
+            "event": [
+              "live_show"
             ],
             "exhibit": [
               "hunter_root"
             ],
-            "unsorted": [
-              "band",
-              "gear",
-              "live_show",
-              "notable"
+            "lineup": [
+              "band"
             ]
           },
           "capture_order": 2
@@ -746,17 +784,21 @@
           "primary_url": "https://assets.weird.baby/assets/2c/2c0e86d1a47da07f4a306845bc758cc6814cb60816f6d35c1f5b3a0f8093787b.jpg",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/2f/2f6b15da2466a96aeb839d084c2a22481b9d160dac2f8b3f19fe2c60486b2e8b.jpg",
           "tags": {
+            "attributes": [
+              "common",
+              "gear"
+            ],
             "bands": [
               "hunter_root"
+            ],
+            "event": [
+              "live_show"
             ],
             "exhibit": [
               "hunter_root"
             ],
-            "unsorted": [
-              "band",
-              "common",
-              "gear",
-              "live_show"
+            "lineup": [
+              "band"
             ]
           },
           "capture_order": 3
@@ -773,17 +815,21 @@
           "primary_url": "https://assets.weird.baby/assets/e9/e9ac1638cb112052442e358810eb3accf2379e81323a62417fa51211d8f6b054.jpg",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/93/93d526bb5fa3be0d56f855bfba6cf4decc0b0c305f7c401e7f91cd41ab9dce83.jpg",
           "tags": {
+            "attributes": [
+              "gear",
+              "notable"
+            ],
             "bands": [
               "hunter_root"
+            ],
+            "event": [
+              "live_show"
             ],
             "exhibit": [
               "hunter_root"
             ],
-            "unsorted": [
-              "band",
-              "gear",
-              "live_show",
-              "notable"
+            "lineup": [
+              "band"
             ]
           },
           "capture_order": 4
@@ -800,16 +846,20 @@
           "primary_url": "https://assets.weird.baby/assets/9c/9ca1b526880298e4b477bad0865f0100105d0d1aa3e5512410a05c0b9fb0066e.jpg",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/f9/f9662e6365004e0d691b6b2c0413fd39f248ac03a968501ab002c54273a1ad6e.jpg",
           "tags": {
+            "attributes": [
+              "common",
+              "gear"
+            ],
             "bands": [
               "hunter_root"
+            ],
+            "event": [
+              "live_show"
             ],
             "exhibit": [
               "hunter_root"
             ],
-            "unsorted": [
-              "common",
-              "gear",
-              "live_show",
+            "lineup": [
               "solo"
             ]
           },
@@ -827,16 +877,20 @@
           "primary_url": "https://assets.weird.baby/assets/7d/7dc64fdfdf20ad1f2319018b97ead7e6eda546275540dd7d26a50cad5eb79636.jpg",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/06/0686dcf5e9d22737c4872bf0a523449c6054b9b378c9e13008acee61df6d49d8.jpg",
           "tags": {
+            "attributes": [
+              "common",
+              "gear"
+            ],
             "bands": [
               "hunter_root"
+            ],
+            "event": [
+              "live_show"
             ],
             "exhibit": [
               "hunter_root"
             ],
-            "unsorted": [
-              "common",
-              "gear",
-              "live_show",
+            "lineup": [
               "solo"
             ]
           },
@@ -854,16 +908,20 @@
           "primary_url": "https://assets.weird.baby/assets/06/062c6ac840ab11381124adbad394f57aa552ac4bfbae2bd8ecf66e899f1c03e1.jpg",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/1d/1db5245478c05a0ab2a2d2b8d102e169f47e8a8fcb32f549b5a2db8b3fa36f34.jpg",
           "tags": {
+            "attributes": [
+              "common",
+              "gear"
+            ],
             "bands": [
               "hunter_root"
+            ],
+            "event": [
+              "live_show"
             ],
             "exhibit": [
               "hunter_root"
             ],
-            "unsorted": [
-              "common",
-              "gear",
-              "live_show",
+            "lineup": [
               "solo"
             ]
           },
@@ -881,16 +939,20 @@
           "primary_url": "https://assets.weird.baby/assets/a4/a41be0bc4f396a73518d925bfb83dc11fe47358247fc32833fc5239bef4ad9e1.jpg",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/75/757df9922ac99465829f01254cf94b03f0268dcb6a4a634735bb3d9ff0e18033.jpg",
           "tags": {
+            "attributes": [
+              "notable"
+            ],
             "bands": [
               "hunter_root"
+            ],
+            "event": [
+              "live_show"
             ],
             "exhibit": [
               "hunter_root"
             ],
-            "unsorted": [
-              "band",
-              "live_show",
-              "notable"
+            "lineup": [
+              "band"
             ]
           },
           "capture_order": 8
@@ -907,17 +969,21 @@
           "primary_url": "https://assets.weird.baby/assets/1d/1df9a8bc84f997fce01306d8f463f2e96eb021bd38889059ac45ac55e89d158b.jpg",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/c3/c3a074897121cfc0dfe214f4e39a61c59299ed2cfe4db3b3f00ee1cedab88637.jpg",
           "tags": {
+            "attributes": [
+              "gear",
+              "notable"
+            ],
             "bands": [
               "hunter_root"
+            ],
+            "event": [
+              "live_show"
             ],
             "exhibit": [
               "hunter_root"
             ],
-            "unsorted": [
-              "band",
-              "gear",
-              "live_show",
-              "notable"
+            "lineup": [
+              "band"
             ]
           },
           "capture_order": 9
@@ -934,17 +1000,21 @@
           "primary_url": "https://assets.weird.baby/assets/72/72e5f05b338541505901f8442a1b9a1a07f5717b1c6937382799448512abdb34.jpg",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/80/8062ed501547239de0eabe437451bd61c7c3df0ac0c6350109d0b759bdc20e3f.jpg",
           "tags": {
+            "attributes": [
+              "gear",
+              "notable"
+            ],
             "bands": [
               "hunter_root"
+            ],
+            "event": [
+              "live_show"
             ],
             "exhibit": [
               "hunter_root"
             ],
-            "unsorted": [
-              "band",
-              "gear",
-              "live_show",
-              "notable"
+            "lineup": [
+              "band"
             ]
           },
           "capture_order": 10
@@ -961,17 +1031,19 @@
           "primary_url": "https://assets.weird.baby/assets/e3/e326b727b2801d5fa3a731dcc96f65c1dd2db4a8e8d4f7158349e9f7171690d7.jpg",
           "thumbnail_url": "https://assets.weird.baby/thumbnails/a5/a557c3af8cf165b98f266d6a683e5ed65aa215c9a68b6a4bc85124d0b45e5fc1.jpg",
           "tags": {
+            "attributes": [
+              "common",
+              "fan",
+              "personal"
+            ],
             "bands": [
               "hunter_root"
             ],
+            "event": [
+              "live_show"
+            ],
             "exhibit": [
               "hunter_root"
-            ],
-            "unsorted": [
-              "common",
-              "fan",
-              "live_show",
-              "personal"
             ]
           },
           "capture_order": 11
@@ -1011,7 +1083,7 @@
       "tracks": [
         {
           "id": "MV-HR-20260417-001",
-          "song": "brain_cell",
+          "song": null,
           "title": "Brain Cell — audio recording",
           "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/0b/0b65aa63ffa9856c473f03ba3e361a7137a93415f2e3a34e5e959d6a3cac3459.mp3",
@@ -1048,7 +1120,7 @@
         },
         {
           "id": "MV-HR-20260417-021",
-          "song": "time_flow_zero",
+          "song": null,
           "title": "Time Flow Zero — audio recording",
           "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/d6/d693ac3556bb0c2c4933d3b8d3c3e98fcaaa6211c1d27d71005e39c314652f45.mp3",
@@ -1085,7 +1157,7 @@
         },
         {
           "id": "MV-HR-20260417-017",
-          "song": "straitlaced",
+          "song": null,
           "title": "Straightlaced — audio recording",
           "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/73/73fa16ef17a9dc2622d433eaab651b9d29406a574b97dad6918f31de3366557a.mp3",
@@ -1122,7 +1194,7 @@
         },
         {
           "id": "MV-HR-20260417-025",
-          "song": "whiskey_to_the_sun",
+          "song": null,
           "title": "Whiskey to the Sun — audio recording",
           "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/48/48afb11da9af6f2f18212c20a170e14e6cedb1bf539e4878bd353611cf9e6fe3.mp3",
@@ -1159,7 +1231,7 @@
         },
         {
           "id": "MV-HR-20260417-007",
-          "song": "eyes_are_oceans",
+          "song": null,
           "title": "Eyes are Oceans — audio recording",
           "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/fd/fdf4283653fc49bb85654808460fd588d2653dbbe1b9c802d174bcefd2b71be2.mp3",
@@ -1196,7 +1268,7 @@
         },
         {
           "id": "MV-HR-20260417-023",
-          "song": "trees_and_everything",
+          "song": null,
           "title": "Trees and Everything — audio recording",
           "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/6e/6e172dd61b8ed4c575244b71cfa3acc901218877d136f721b0af3cacccc52510.mp3",
@@ -1233,7 +1305,7 @@
         },
         {
           "id": "MV-HR-20260417-005",
-          "song": "doors_with_keys",
+          "song": null,
           "title": "Doors with Keys — audio recording",
           "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/58/58c53cc87bc39bbafc9f84afbb5c1ec5919738b5324dbd0cec1e3652262cb702.mp3",
@@ -1270,7 +1342,7 @@
         },
         {
           "id": "MV-HR-20260417-011",
-          "song": "northern_light_streaks",
+          "song": null,
           "title": "Northern Light Streaks — audio recording",
           "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/aa/aace4be80e879f2fad5b10f2223634cdd9a1e744bfad8334936b7f558568a70a.mp3",
@@ -1307,7 +1379,7 @@
         },
         {
           "id": "MV-HR-20260416-014",
-          "song": "park_bench_pigeons",
+          "song": null,
           "title": "Park Bench Pigeons — audio recording",
           "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/ec/ec58d4bbede48aff0cf95e391711d895b30488ab83a54a5aee2906c34e9c677a.mp3",
@@ -1344,7 +1416,7 @@
         },
         {
           "id": "MV-HR-20260417-009",
-          "song": "freezer_burnt",
+          "song": null,
           "title": "Freezer Burnt — audio recording",
           "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/75/7506a7b0f0f2cc664337aebc54e0549e60396f01a33b4f687993ce0f0e8fb934.mp3",
@@ -1381,7 +1453,7 @@
         },
         {
           "id": "MV-HR-20260417-013",
-          "song": "playing_music_with_our_bones",
+          "song": null,
           "title": "Playing Music with Our Bones — audio recording",
           "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/e0/e0ccb3524cba0d31df4c215ff6c3e3c8145085d083fbb25a6773a248a6426cd4.mp3",
@@ -1418,7 +1490,7 @@
         },
         {
           "id": "MV-HR-20260417-015",
-          "song": "same_page",
+          "song": null,
           "title": "Same Page — audio recording",
           "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/3b/3b3c3569db8ded027a448a4c5bd3aeb9e9c135ad50e881ac7ff9d73333abdd8c.mp3",
@@ -1455,7 +1527,7 @@
         },
         {
           "id": "MV-HR-20260421-001",
-          "song": "song",
+          "song": null,
           "title": "Song — audio recording",
           "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/0b/0b15c358f6ca85c824448b083c14e476dc7ab3f3fac108da05ff7d4ffc85b015.mp3",
@@ -1492,7 +1564,7 @@
         },
         {
           "id": "MV-HR-20260417-003",
-          "song": "dead_man",
+          "song": null,
           "title": "Dead Man — audio recording",
           "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/78/780e1384fcc70c74eb050866adfb09d040be5516216369c491a55e4fde9c359d.mp3",
@@ -1529,7 +1601,7 @@
         },
         {
           "id": "MV-HR-20260417-019",
-          "song": "think_my_mind",
+          "song": null,
           "title": "Think My Mind — audio recording",
           "media_type": "audio",
           "primary_url": "https://assets.weird.baby/audio/8c/8ccf1adda4bf1c57af77d6d97ee9cd4bf1e24c03d4048638fffd03436a22884b.mp3",
@@ -1746,6 +1818,11 @@
               "type": "official"
             },
             {
+              "ytId": "XXnTxA_GF24",
+              "label": "Quicksand Sinking (Line Check Audio Sessions)",
+              "type": "live"
+            },
+            {
               "ytId": "13IUBFvIkls",
               "label": "Hunter Root - Quicksand Sinking (Official Lyric Video)",
               "type": "lyrics"
@@ -1892,6 +1969,11 @@
             {
               "ytId": "z1K0HWTDrL8",
               "label": "Hunter Root - Can't Outshine The Truth (Live @Rok10productions)",
+              "type": "live"
+            },
+            {
+              "ytId": "FbOoHjoSyec",
+              "label": "Can't Outshine The Truth (Line Check Audio Sessions)",
               "type": "live"
             }
           ],
@@ -2123,6 +2205,11 @@
               "ytId": "NJYYmXnAN0s",
               "label": "Hunter Root - Cookin' in the Bathroom (live acoustic)",
               "type": "live"
+            },
+            {
+              "ytId": "vF1D0tYjEws",
+              "label": "Cookin' in the Bathroom (Violet Lempke Cover)",
+              "type": "cover"
             }
           ],
           "track_no": 2
@@ -2871,12 +2958,12 @@
       "cover_artifact_id": null,
       "tracks": [
         {
-          "id": "MV-20260523-059",
+          "id": "MV-HR-20260610-003",
           "song": "lampshade",
-          "title": "Hunter Root - Lampshade (Live in studio)",
+          "title": "Lampshade (Official Audio)",
           "media_type": "link",
           "primary_url": null,
-          "thumbnail_url": "https://i.ytimg.com/vi/EjdXxigzBp8/maxresdefault.jpg",
+          "thumbnail_url": "https://i.ytimg.com/vi/nyt2GjSMABI/maxresdefault.jpg",
           "tags": {
             "album": [
               "mimicking_the_sun_like_dandelions"
@@ -2888,7 +2975,7 @@
               "hunter_root"
             ],
             "content_kind": [
-              "live"
+              "official"
             ],
             "exhibit": [
               "hunter_root"
@@ -2910,6 +2997,11 @@
             ]
           },
           "videos": [
+            {
+              "ytId": "nyt2GjSMABI",
+              "label": "Lampshade (Official Audio)",
+              "type": "official"
+            },
             {
               "ytId": "EjdXxigzBp8",
               "label": "Hunter Root - Lampshade (Live in studio)",
@@ -3020,12 +3112,12 @@
           "track_no": 3
         },
         {
-          "id": "MV-20260523-049",
+          "id": "MV-HR-20260610-001",
           "song": "little_red_riding_hood",
-          "title": "Hunter Root - Little Red Riding Hood (Live @ MCHS)",
+          "title": "Little Red Riding Hood (Official Audio)",
           "media_type": "link",
           "primary_url": null,
-          "thumbnail_url": "https://i.ytimg.com/vi/BOQHN-O4DDc/maxresdefault.jpg",
+          "thumbnail_url": "https://i.ytimg.com/vi/mnLwxpCfqRc/maxresdefault.jpg",
           "tags": {
             "album": [
               "mimicking_the_sun_like_dandelions"
@@ -3037,7 +3129,7 @@
               "hunter_root"
             ],
             "content_kind": [
-              "live"
+              "official"
             ],
             "exhibit": [
               "hunter_root"
@@ -3055,25 +3147,35 @@
               "video"
             ],
             "year": [
-              "2023"
+              "2020"
             ]
           },
           "videos": [
             {
+              "ytId": "mnLwxpCfqRc",
+              "label": "Little Red Riding Hood (Official Audio)",
+              "type": "official"
+            },
+            {
               "ytId": "BOQHN-O4DDc",
               "label": "Hunter Root - Little Red Riding Hood (Live @ MCHS)",
+              "type": "live"
+            },
+            {
+              "ytId": "g5_Wwbpwz_4",
+              "label": "Little Red Riding Hood (Live with Todd Haley)",
               "type": "live"
             }
           ],
           "track_no": 4
         },
         {
-          "id": "MV-20260523-053",
+          "id": "MV-HR-20260610-002",
           "song": "family_tree",
-          "title": "Hunter Root - Family Tree (Live in studio)",
+          "title": "Family Tree (Official Audio)",
           "media_type": "link",
           "primary_url": null,
-          "thumbnail_url": "https://i.ytimg.com/vi/d0TXF6iXFRQ/maxresdefault.jpg",
+          "thumbnail_url": "https://i.ytimg.com/vi/m4C5mxjCUis/maxresdefault.jpg",
           "tags": {
             "album": [
               "mimicking_the_sun_like_dandelions"
@@ -3085,7 +3187,7 @@
               "hunter_root"
             ],
             "content_kind": [
-              "live"
+              "official"
             ],
             "exhibit": [
               "hunter_root"
@@ -3103,10 +3205,15 @@
               "video"
             ],
             "year": [
-              "2019"
+              "2020"
             ]
           },
           "videos": [
+            {
+              "ytId": "m4C5mxjCUis",
+              "label": "Family Tree (Official Audio)",
+              "type": "official"
+            },
             {
               "ytId": "d0TXF6iXFRQ",
               "label": "Hunter Root - Family Tree (Live in studio)",
@@ -3331,7 +3438,7 @@
         {
           "id": "MV-20260523-089",
           "song": "straitlaced",
-          "title": "\"Straitlaced\" live out now! #rock #indie #singersongwriter #foryou #fyp #live #livemusic #musician",
+          "title": "Straitlaced (Live)",
           "media_type": "link",
           "primary_url": null,
           "thumbnail_url": "https://i.ytimg.com/vi/Olv9qIVoBgQ/maxresdefault.jpg",
@@ -3376,7 +3483,12 @@
           "videos": [
             {
               "ytId": "Olv9qIVoBgQ",
-              "label": "\"Straitlaced\" live out now! #rock #indie #singersongwriter #foryou #fyp #live #livemusic #musician",
+              "label": "Straitlaced (Live)",
+              "type": "live"
+            },
+            {
+              "ytId": "jSxCptRelM8",
+              "label": "Straitlaced (Live at Cats Meow 2018)",
               "type": "live"
             }
           ],
