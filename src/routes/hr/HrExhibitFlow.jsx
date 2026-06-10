@@ -293,8 +293,8 @@ const S = {
        `absolute` it followed the section, which is centered in the
        viewport with a 32px gap above and below — that gap pushed the
        tabs 32px above viewport bottom. */
-    position: "fixed", top: 0,
-    width: deckW + "px",
+    position: "relative",
+    width: "100%",
     background: "transparent",
     zIndex: 10,
     pointerEvents: "none",
