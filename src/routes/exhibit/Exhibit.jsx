@@ -483,16 +483,23 @@ function NpBars({ color }) {
 }
 
 // ─── PLAYER BAR ───────────────────────────────────────────────────────────────
-function PlayerBar({ video, track, album, onSkipBack, onSkipForward, canSkipBack, canSkipForward, onTogglePlay, onToggleMute, onSetVolume, getState }) {
+function PlayerBar({ video, track, album, live, onIdlePlay, onSkipBack, onSkipForward, canSkipBack, canSkipForward, onTogglePlay, onToggleMute, onSetVolume, getState }) {
   const [, forceRender] = useState(0);
+  // Phase 2a: the bar is always mounted (never returns null). Only an
+  // *actually playing* source (`live`) drives the 500ms progress repaint — an
+  // idle bar showing the cued-next preview must not poll or animate.
   useEffect(() => {
-    if (!video) return;
+    if (!live) return;
     const id = setInterval(() => forceRender(n => n + 1), 500);
     return () => clearInterval(id);
-  }, [video]);
+  }, [live]);
 
-  if (!video) return null;
-  const st = getState?.() || { playing: false, muted: false, volume: 100 };
+  // Idle (nothing playing): render the cued-next preview, paused with play
+  // armed. Transport state is read from the live player only when playing;
+  // idle is statically paused so we never poke an unready YT/audio element.
+  const st = live
+    ? (getState?.() || { playing: false, muted: false, volume: 100 })
+    : { playing: false, muted: false, volume: 100 };
 
   return (
     <div className="pb">
@@ -501,7 +508,7 @@ function PlayerBar({ video, track, album, onSkipBack, onSkipForward, canSkipBack
         : <div className="pb-art pb-art-ph" style={{ background: album?.accent || "#1a1a1a" }} />}
       <div className="pb-info">
         <div className="pb-track">{track?.title}</div>
-        <div className="pb-sub" style={{ color: typeColor(video.type) }}>{typeLabel(video.type)}</div>
+        {video && <div className="pb-sub" style={{ color: typeColor(video.type) }}>{typeLabel(video.type)}</div>}
       </div>
       <div className="pb-controls">
         <button className={`pb-skip${canSkipBack?"":" pb-skip-dis"}`} onClick={onSkipBack}>
@@ -511,7 +518,7 @@ function PlayerBar({ video, track, album, onSkipBack, onSkipForward, canSkipBack
           </svg>
         </button>
 
-        <button className="pb-ctrl" onClick={onTogglePlay}>
+        <button className="pb-ctrl" onClick={live ? onTogglePlay : onIdlePlay}>
           {st.playing ? (
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <rect x="3" y="2" width="3" height="10" rx="1" fill="currentColor"/>
@@ -812,6 +819,40 @@ export default function Exhibit({ artist }) {
   const curAlbum = playingAlbum !== null ? SPINE[playingAlbum] : null;
   const isAudioSrc = !!curVideo?.audioUrl;
 
+  // ── Idle cued-track preview (Phase 2a) ──────────────────────────────────────
+  // READ-ONLY derivation of "what would play first if the user pressed play
+  // now" on the active album, for the always-present idle player bar. This is a
+  // pure derived value: it NEVER calls advanceQueue and NEVER writes
+  // playQueueRef / loopSeedRef / queueAlbumRef, so the real queue build is
+  // untouched until an actual play. Loop only governs end-of-queue replay, so
+  // it cannot change the *first* track; Shuffle's real (random) order is only
+  // committed inside startPlay at play time, so the preview deliberately uses a
+  // deterministic eligible pick (the active album's focused-or-first playable
+  // track) rather than pre-committing a shuffle order.
+  function deriveCuedPreview() {
+    const ai = activeDisplay;
+    const al = SPINE[ai];
+    if (!al) return null;
+    const selVisAlbum = albumSelectedVis[ai] ?? {};
+    const at = albumActiveTrack[ai] ?? null;
+    // Precedence mirrors the idle thumbnail / handleTrackSelect entry point:
+    // the focused row first, then the album's natural order.
+    const order = [];
+    if (at !== null) order.push(at);
+    for (let ti = 0; ti < al.tracks.length; ti++) if (ti !== at) order.push(ti);
+    for (const ti of order) {
+      const track = al.tracks[ti];
+      if (!track.videos.length) continue;
+      const sel = selVisAlbum[ti];
+      if (sel && sel.size === 0) continue;          // explicitly deselected → skip (matches buildPlayQueue)
+      const vis = getOrderedVis(track, sel ?? new Set([0]));
+      if (!vis.length) continue;
+      return { ai, ti, vi: vis[0], track, album: al, video: track.videos[vis[0]] };
+    }
+    return null;
+  }
+  const cuedPreview = curVideo ? null : deriveCuedPreview();
+
   // Preset capture (UX_PRESETS_SPEC 8.2/9): live player identity by STABLE
   // id, never by array index. The spine adapter guarantees album.id
   // (foundation id), track.id (foundation item id) and video.id
@@ -862,6 +903,19 @@ export default function Exhibit({ artist }) {
   // O9: with Loop on, skip-forward at the end of the queue refills from the
   // selection (advanceQueue handles it), so the control stays live.
   const canSkipForward = playQueueRef.current.length > 0 || (loop && playingTrack !== null);
+
+  // Phase 2a: the bar shows the live source when playing, else the cued-next
+  // preview. `pbLive` is the actually-playing gate that drives the repaint loop.
+  const pbLive  = curVideo !== null;
+  const pbVideo = curVideo ?? cuedPreview?.video ?? null;
+  const pbTrack = curTrack ?? cuedPreview?.track ?? null;
+  const pbAlbum = curAlbum ?? cuedPreview?.album ?? null;
+  // Idle play arms the cued track through the SAME entry point a tracklist
+  // click uses (handleTrackSelect → startPlay), so the real queue is built at
+  // actual play time — the preview never bypasses the real queue build.
+  const onIdlePlay = cuedPreview
+    ? () => handleTrackSelect(cuedPreview.ai, cuedPreview.ti)
+    : undefined;
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (
@@ -1000,7 +1054,8 @@ export default function Exhibit({ artist }) {
         )}
 
         <PlayerBar
-          video={curVideo} track={curTrack} album={curAlbum}
+          video={pbVideo} track={pbTrack} album={pbAlbum}
+          live={pbLive} onIdlePlay={onIdlePlay}
           onSkipBack={handleSkipBack} onSkipForward={handleSkipForward}
           canSkipBack={canSkipBack} canSkipForward={canSkipForward}
           onTogglePlay={isAudioSrc ? audio.togglePlay : yt.togglePlay}
