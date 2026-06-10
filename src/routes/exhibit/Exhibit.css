@@ -6,7 +6,7 @@
    Used by the carousel variant badges (.tl-tag). */
 @font-face{font-family:'Oswald';font-style:normal;font-weight:600;font-display:swap;src:url('../../assets/fonts/oswald-600.woff2') format('woff2');}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow-x:clip;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow-x:clip;scroll-snap-type:y proximity;scroll-behavior:smooth}
 
 /* ROOT */
 .ex-root{opacity:0;transition:opacity .8s ease;display:flex;flex-direction:column;min-height:100vh;padding:0 8px 64px}
@@ -25,7 +25,7 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:240px 240px;
 }
-.ex-snap{scroll-snap-align:center}
+.ex-snap{}
 .ex-root.visible{opacity:1}
 
 /* NAV */
