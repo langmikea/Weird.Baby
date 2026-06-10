@@ -26,7 +26,7 @@
 //     scrolls inside the section.
 //   - O6 = hybrid: static styles live in HrExhibitFlow.css. Parameterized
 //     S.* builders that take props remain as inline JS objects in this file.
-//   - O7: localStorage key is `wb-hr-deck-height` (HR-namespaced).
+//   - O7: localStorage key is `wb-hr-deck-width` (HR-namespaced).
 //   - O8: preset snapshots capture player state for display only — APPLY
 //     does not restore player state in v1. Comment block at makePresetSnapshot.
 //     User slots P1–P3 persist to localStorage (`wb-hr-presets`, controls
@@ -149,7 +149,7 @@ const TAB_STRIP_H = 30;
 const DECK_MIN_H = 200;
 const DECK_MAX_FRAC = 0.75;
 const DECK_DEFAULT_H_SHARED = 480;
-const STORAGE_KEY = "wb-hr-deck-height"; // O7 — matches wb-hr-split / wb-hr-cfh
+const STORAGE_KEY = "wb-hr-deck-width"; // O7 — matches wb-hr-split / wb-hr-cfh
 // Preset persistence (UX_CONTROLS_SPEC v0.4 §9.5: v1 = localStorage,
 // exhibit-scoped, no login). HR-namespaced per O7 convention, so the key is
 // exhibit-scoped by construction. Lifecycle §4.5's MV-artifact promotion is
@@ -276,31 +276,31 @@ function kalIsDefault(k) {
 
 // ─── PARAMETERIZED STYLES — kept inline per O6 (hybrid CSS strategy) ────────
 // Static styles live in HrExhibitFlow.css (.hr-* classes). Parameterized
-// builders that take props (active state, widths, open state, deckPx, etc.)
+// builders that take props (active state, widths, open state, deckW, etc.)
 // stay here as inline JS objects.
 const S = {
-  // panelPos: positions the artifact-grid pane above the deck. deckPx changes
+  // panelPos: positions the artifact-grid pane above the deck. deckW changes
   // as the deck peeks / opens / resizes.
-  panelPos: (deckPx) => ({
-    position: "absolute", left: 0, right: 0, top: 0, bottom: deckPx + "px",
+  panelPos: (deckW) => ({
+    position: "absolute", right: 0, top: 0, bottom: 0, left: deckW + "px",
   }),
 
   // deck: bottom-anchored. height swings between TAB_PEEK / TAB_STRIP_H /
   // resizable open height.
-  deck: (deckPx) => ({
+  deck: (deckW) => ({
     /* `position: fixed` so the deck pins to the viewport bottom
        regardless of the section's scroll-snap-align: center. With
        `absolute` it followed the section, which is centered in the
        viewport with a 32px gap above and below — that gap pushed the
        tabs 32px above viewport bottom. */
-    position: "fixed", left: 0, right: 0,
-    height: deckPx + "px",
+    position: "fixed", top: 0,
+    width: deckW + "px",
     background: "transparent",
     zIndex: 10,
     pointerEvents: "none",
-    /* `bottom` is set by .hr-deck in HrExhibitFlow.css so it can be
-       conditional on whether the player bar is in the DOM (60 when
-       playing, 0 when not).
+    /* `left` (rail dock) + `bottom` are set by .hr-deck in HrExhibitFlow.css;
+       `bottom` stays conditional on whether the player bar is in the DOM (60
+       when playing, 0 when not).
        Clip the tab strip's bottom-overhang at the deck's bottom edge.
        The strip is 42px tall but the closed-idle deck is only 14px
        (TAB_PEEK), so 28px hangs below. Without overflow:hidden the
@@ -325,26 +325,25 @@ const S = {
       fontWeight: active ? 900 : 500,
       color: textColor,
       background: active ? INK_SOFT : INK,
-      border: `1px solid ${borderColor}`, borderBottom: "none",
-      borderTopLeftRadius: "6px", borderTopRightRadius: "6px",
-      height: TAB_STRIP_H + "px",
-      width: width + "px", minWidth: width + "px",
+      border: `1px solid ${borderColor}`, borderLeft: "none",
+      borderTopRightRadius: "6px", borderBottomRightRadius: "6px",
+      width: TAB_STRIP_H + "px", height: "auto",
       display: "flex", alignItems: "center", justifyContent: "center",
       gap: "6px",
       transition: "border-color 0.12s, color 0.12s, font-weight 0.12s, background 0.12s",
       padding: "0 6px", boxSizing: "border-box",
-      flexShrink: 0, marginRight: "2px",
+      flexShrink: 0, marginBottom: "2px",
       whiteSpace: "nowrap", overflow: "visible", textOverflow: "ellipsis",
     };
   },
 
-  // resizeHandle: ns-resize affordance at top of deckBody.
+  // resizeHandle: ew-resize affordance at right edge of the rail body.
   resizeHandle: (hovered) => ({
-    position: "absolute", top: "-4px",
-    left: 0, right: 0, height: "8px",
-    cursor: "ns-resize", zIndex: 14,
+    position: "absolute", right: "-4px",
+    top: 0, bottom: 0, width: "8px",
+    cursor: "ew-resize", zIndex: 14,
     background: hovered
-      ? `linear-gradient(to bottom, transparent 0%, ${GOLD_LO} 45%, ${GOLD_LO} 55%, transparent 100%)`
+      ? `linear-gradient(to right, transparent 0%, ${GOLD_LO} 45%, ${GOLD_LO} 55%, transparent 100%)`
       : "transparent",
     transition: "background 0.15s",
   }),
@@ -3273,7 +3272,7 @@ export default function HrExhibitFlow({
   };
   const [activeTab, setActiveTab] = useState(null);
   const [hoverPeek, setHoverPeek] = useState(false);
-  const [deckHeight, setDeckHeight] = useState(() => {
+  const [deckWidth, setDeckWidth] = useState(() => {
     try {
       const raw = typeof localStorage !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
       if (raw) {
@@ -3297,10 +3296,10 @@ export default function HrExhibitFlow({
   useEffect(() => {
     try {
       if (typeof localStorage !== "undefined") {
-        localStorage.setItem(STORAGE_KEY, String(deckHeight));
+        localStorage.setItem(STORAGE_KEY, String(deckWidth));
       }
     } catch { /* ignore */ }
-  }, [deckHeight]);
+  }, [deckWidth]);
 
   // Write-through preset persistence (controls §9.5 v1). Mirrors the
   // deck-height pattern above: best-effort, silent on quota/privacy errors.
@@ -3394,8 +3393,8 @@ export default function HrExhibitFlow({
 
   useEffect(() => {
     const onResize = () => {
-      const vh = window.innerHeight;
-      setDeckHeight(prev => Math.max(DECK_MIN_H, Math.min(prev, vh * DECK_MAX_FRAC)));
+      const vw = window.innerWidth;
+      setDeckWidth(prev => Math.max(DECK_MIN_H, Math.min(prev, vw * DECK_MAX_FRAC)));
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
@@ -3417,10 +3416,10 @@ export default function HrExhibitFlow({
   };
 
   const open = activeTab !== null && activeTab !== "close";
-  let deckPx;
-  if (open) deckPx = deckHeight;
-  else if (hoverPeek) deckPx = TAB_STRIP_H;
-  else deckPx = TAB_PEEK;
+  let deckW;
+  if (open) deckW = deckWidth;
+  else if (hoverPeek) deckW = TAB_STRIP_H;
+  else deckW = TAB_PEEK;
 
   const handleTabClick = (tabKey) => {
     if (tabKey === "close") { setActiveTab(null); setHoverPeek(false); return; }
@@ -3436,12 +3435,12 @@ export default function HrExhibitFlow({
   const startResize = useCallback((e) => {
     e.preventDefault(); e.stopPropagation();
     setResizing(true);
-    const startY = e.clientY, startH = deckHeight, vh = window.innerHeight;
+    const startX = e.clientX, startW = deckWidth, vw = window.innerWidth;
     const onMove = (me) => {
-      const dy = me.clientY - startY;
-      let next = startH - dy;
-      next = Math.max(DECK_MIN_H, Math.min(next, vh * DECK_MAX_FRAC));
-      setDeckHeight(next);
+      const dx = me.clientX - startX;
+      let next = startW + dx;
+      next = Math.max(DECK_MIN_H, Math.min(next, vw * DECK_MAX_FRAC));
+      setDeckWidth(next);
     };
     const onUp = () => {
       setResizing(false);
@@ -3450,7 +3449,7 @@ export default function HrExhibitFlow({
     };
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseup", onUp);
-  }, [deckHeight]);
+  }, [deckWidth]);
 
   const animClass = "animated" + (resizing ? " resizing" : (!open && hoverPeek ? " quick" : ""));
   const panelClickHandler = () => {
@@ -3519,7 +3518,7 @@ export default function HrExhibitFlow({
           positioning. The grid scrolls inside hr-section-deck-host. */}
       <div className="hr-section-deck-host">
         <div className={"animated " + (resizing ? "resizing " : (!open && hoverPeek ? "quick " : ""))}
-             style={{ ...S.panelPos(deckPx), position: "absolute" }}
+             style={{ ...S.panelPos(deckW), position: "absolute" }}
              onClick={panelClickHandler}>
           <div className="wb-scroll hr-panel-scroll">
             <P3Panel
@@ -3536,7 +3535,7 @@ export default function HrExhibitFlow({
           </div>
         </div>
 
-        <div className={"hr-deck " + animClass} style={S.deck(deckPx)} onClick={(e) => e.stopPropagation()}>
+        <div className={"hr-deck " + animClass} style={S.deck(deckW)} onClick={(e) => e.stopPropagation()}>
           <div
             className="hr-tab-strip"
             onMouseEnter={() => { if (!open) { cancelHoverTimer(); scheduleHoverOpen(); } }}
@@ -3577,8 +3576,8 @@ export default function HrExhibitFlow({
                   })()}
                   {isActive && open && (
                     <span aria-hidden style={{
-                      position: "absolute", left: -1, right: -1, bottom: -1,
-                      height: 1, background: INK_SOFT, pointerEvents: "none",
+                      position: "absolute", top: -1, bottom: -1, right: -1,
+                      width: 1, background: INK_SOFT, pointerEvents: "none",
                     }} />
                   )}
                 </div>
@@ -3593,7 +3592,7 @@ export default function HrExhibitFlow({
                 onClick={(e) => { e.stopPropagation(); setActiveTab(null); setHoverPeek(false); cancelHoverTimer(); }}
                 style={S.tab(false, open, 34, true)}
               >
-                <span aria-hidden="true">▾</span>
+                <span aria-hidden="true">◂</span>
               </div>
             )}
           </div>
