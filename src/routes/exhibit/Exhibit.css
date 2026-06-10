@@ -9,7 +9,7 @@
 html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow-x:clip;scroll-snap-type:y proximity;scroll-behavior:smooth}
 
 /* ROOT */
-.ex-root{opacity:0;transition:opacity .8s ease;display:flex;flex-direction:column;min-height:100vh;padding:0 8px 64px}
+.ex-root{opacity:0;transition:opacity .8s ease;display:flex;flex-direction:column;min-height:max(100vh, calc(var(--ex-true-h, 0px) + 64px));padding:0 8px 64px}
 /* B&W PASS 2 (2026-06-07): film grain over the whole room — a fixed wash
    above the page (z 950) but below the lightboxes (z 1000), so photo
    viewing stays clean. Multiply keeps the paper texture present without
@@ -149,7 +149,7 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 /* 2026-06-07 Mike: player bar goes DARK on the paper page — unmissable,
    and consistent with the projection-booth rule (screens are dark).
    Tokens re-pinned inside the bar's scope. */
-.pb{--hr-gold:#c9c9c9;--hr-gold-hi:#ededed;--hr-gold-lo:#8e8e8e;--hr-gold-mute:#8e8e8e;--hr-dim:#b6b6b6;--hr-ink-card:#1a1a1a;--hr-border:#3e3e3e;position:sticky;top:0;bottom:0;left:0;right:0;height:60px;background:var(--hr-ink-card);border-top:1px solid var(--hr-border);display:flex;align-items:center;gap:12px;padding:0 20px;z-index:100;box-shadow:0 -2px 10px rgba(20,18,14,.25)}
+.pb{--hr-gold:#c9c9c9;--hr-gold-hi:#ededed;--hr-gold-lo:#8e8e8e;--hr-gold-mute:#8e8e8e;--hr-dim:#b6b6b6;--hr-ink-card:#1a1a1a;--hr-border:#3e3e3e;position:fixed;bottom:0;left:0;right:0;height:60px;background:var(--hr-ink-card);border-top:1px solid var(--hr-border);display:flex;align-items:center;gap:12px;padding:0 20px;z-index:100;box-shadow:0 -2px 10px rgba(20,18,14,.25)}
 .pb-art{width:36px;height:36px;object-fit:cover;border-radius:1px;flex-shrink:0}
 .pb-art-ph{display:block}
 .pb-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
