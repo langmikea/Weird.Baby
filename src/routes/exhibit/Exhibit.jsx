@@ -1040,6 +1040,17 @@ export default function Exhibit({ artist }) {
           </div>
         </div>
 
+        <PlayerBar
+          video={pbVideo} track={pbTrack} album={pbAlbum}
+          live={pbLive} onIdlePlay={onIdlePlay}
+          onSkipBack={handleSkipBack} onSkipForward={handleSkipForward}
+          canSkipBack={canSkipBack} canSkipForward={canSkipForward}
+          onTogglePlay={isAudioSrc ? audio.togglePlay : yt.togglePlay}
+          onToggleMute={isAudioSrc ? audio.toggleMute : yt.toggleMute}
+          onSetVolume={isAudioSrc ? audio.setVolume : yt.setVolume}
+          getState={isAudioSrc ? audio.getState : yt.getState}
+        />
+
         {/* EXHIBIT FLOW — optional, only rendered if artist provides one.
             playingTrack carries the live player identity as stable ids
             (null when idle) so the preset host can snapshot it. */}
@@ -1052,17 +1063,6 @@ export default function Exhibit({ artist }) {
             loop={loop} setLoop={setLoop}
           />
         )}
-
-        <PlayerBar
-          video={pbVideo} track={pbTrack} album={pbAlbum}
-          live={pbLive} onIdlePlay={onIdlePlay}
-          onSkipBack={handleSkipBack} onSkipForward={handleSkipForward}
-          canSkipBack={canSkipBack} canSkipForward={canSkipForward}
-          onTogglePlay={isAudioSrc ? audio.togglePlay : yt.togglePlay}
-          onToggleMute={isAudioSrc ? audio.toggleMute : yt.toggleMute}
-          onSetVolume={isAudioSrc ? audio.setVolume : yt.setVolume}
-          getState={isAudioSrc ? audio.getState : yt.getState}
-        />
       </div>
     </>
   );
