@@ -1,7 +1,7 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-06-10T23:29:39.119Z",
+    "exported_at": "2026-06-11T20:09:38.675Z",
     "filter": "released, not archived, badged for this exhibit",
     "vocabulary_csv_sha": null
   },
@@ -1648,7 +1648,7 @@
       "post_date": null,
       "released_at": "2026-06-05T02:38:29",
       "primary_url": null,
-      "thumbnail_url": null,
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/72/72f06d56b60a6e4d0d4c11ccdb5b93f4755a87114b47b53e118092976142134a.jpg",
       "tags": {
         "album": [
           "arkansas"
@@ -1667,7 +1667,7 @@
         ]
       },
       "card_kind": "album",
-      "cover_artifact_id": null,
+      "cover_artifact_id": "MV-HR-20260611-001",
       "tracks": [
         {
           "id": "MV-20260518-001",
@@ -2087,7 +2087,7 @@
       "post_date": null,
       "released_at": "2026-06-05T02:38:29",
       "primary_url": null,
-      "thumbnail_url": null,
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/13/13702858366ccd320f5f7851ac4b0f684b87e7d5a8f2dca844d3c824e363b44d.jpg",
       "tags": {
         "album": [
           "crooked_home"
@@ -2106,7 +2106,7 @@
         ]
       },
       "card_kind": "album",
-      "cover_artifact_id": null,
+      "cover_artifact_id": "MV-HR-20260611-002",
       "tracks": [
         {
           "id": "MV-20260523-001",
@@ -2807,7 +2807,7 @@
       "post_date": null,
       "released_at": "2026-06-05T02:38:29",
       "primary_url": null,
-      "thumbnail_url": null,
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/f8/f8fc1c1af84b767862d9dac415d3217dac4d9da1d28b663465734a3707edb4b8.jpg",
       "tags": {
         "album": [
           "life_inside_a_wheel"
@@ -2826,7 +2826,7 @@
         ]
       },
       "card_kind": "album",
-      "cover_artifact_id": null,
+      "cover_artifact_id": "MV-HR-20260611-003",
       "tracks": [
         {
           "id": "MV-20260523-067",
@@ -2936,7 +2936,7 @@
       "post_date": null,
       "released_at": "2026-06-05T02:38:29",
       "primary_url": null,
-      "thumbnail_url": null,
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/be/be7643adca082acd502ba67810379d4b91e2ed89d37c70e2b26aeb42a41b14f7.jpg",
       "tags": {
         "album": [
           "mimicking_the_sun_like_dandelions"
@@ -2955,7 +2955,7 @@
         ]
       },
       "card_kind": "album",
-      "cover_artifact_id": null,
+      "cover_artifact_id": "MV-HR-20260611-004",
       "tracks": [
         {
           "id": "MV-HR-20260610-003",
@@ -3234,7 +3234,7 @@
       "post_date": null,
       "released_at": "2026-06-05T02:38:29",
       "primary_url": null,
-      "thumbnail_url": null,
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/ad/ad9a08b22bb8e77ff836610041ed993b4089049d4a342fd73b4ab5b712333268.jpg",
       "tags": {
         "album": [
           "skipping_stones_that_sink_before_theyre_thrown"
@@ -3253,7 +3253,7 @@
         ]
       },
       "card_kind": "album",
-      "cover_artifact_id": null,
+      "cover_artifact_id": "MV-HR-20260611-005",
       "tracks": [
         {
           "id": "MV-20260523-040",
@@ -3414,7 +3414,7 @@
       "post_date": null,
       "released_at": "2026-06-05T02:38:29",
       "primary_url": null,
-      "thumbnail_url": null,
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/28/283ab0d8c2b8ae975979853a441eae78a007c9669cb411aa5ff753f6d9b76423.jpg",
       "tags": {
         "album": [
           "they_finally_cracked_me"
@@ -3433,7 +3433,7 @@
         ]
       },
       "card_kind": "album",
-      "cover_artifact_id": null,
+      "cover_artifact_id": "MV-HR-20260611-006",
       "tracks": [
         {
           "id": "MV-20260523-089",

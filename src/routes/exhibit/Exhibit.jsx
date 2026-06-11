@@ -1000,10 +1000,10 @@ export default function Exhibit({ artist }) {
                   {!hasVideo && thumbVid && (
                     <div className="vp-thumb"
                       onClick={() => thumbTrack && handleTrackSelect(activeDisplay, album.tracks.indexOf(thumbTrack))}>
-                      {thumbVid.ytId ? (
-                        <img src={`https://img.youtube.com/vi/${thumbVid.ytId}/hqdefault.jpg`} alt="" />
-                      ) : album.art ? (
+                      {album.art ? (
                         <img className="vp-thumb-album" src={album.art} alt="" />
+                      ) : thumbVid.ytId ? (
+                        <img src={`https://img.youtube.com/vi/${thumbVid.ytId}/hqdefault.jpg`} alt="" />
                       ) : (
                         <div style={{
                           width: "100%", height: "100%",
