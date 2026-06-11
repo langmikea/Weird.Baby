@@ -98,10 +98,10 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 
 /* TAG GRID */
 /* 2026-06-07 Mike: variant buttons bolder + larger for legibility. */
-.tl-tags{display:grid;grid-template-columns:48px 32px 42px 33px 41px 40px;gap:6px;flex-shrink:0}
-.tl-tag{font-family:'Oswald',sans-serif;font-weight:600;font-size:.55rem;letter-spacing:0;padding:3px 7px;background:transparent;border:1px solid transparent;cursor:pointer;border-radius:1px;transition:color .15s,border-color .15s;text-align:center;width:100%}
+.tl-tags{display:grid;grid-template-columns:repeat(6,50px);gap:6px;flex-shrink:0;order:-1;margin-right:8px}
+.tl-tag{font-family:'Oswald',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.02em;padding:4px 0;background:transparent;border:1px solid transparent;cursor:pointer;border-radius:1px;transition:color .15s,border-color .15s,opacity .15s;text-align:center;width:100%}
 .tl-tag-sel{opacity:1}
-.tl-tag-dim{color:var(--hr-gold-mute) !important;border-color:var(--hr-gold-mute) !important}
+.tl-tag-dim{color:var(--hr-gold-mute) !important;border-color:var(--hr-gold-mute) !important;opacity:.45}
 .tl-tag-ghost{display:block;pointer-events:none}
 
 /* VIDEO PANEL — stable right column */
@@ -127,8 +127,8 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 .vp-ao-label{display:flex;align-items:center;gap:7px;font-family:'Courier Prime',monospace;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--hr-gold-mute);white-space:nowrap}
 
 /* FACT SCROLLER */
-.fs-wrap{flex:1;display:flex;flex-direction:column;padding:18px 20px 14px;border-top:1px solid var(--hr-border);position:relative;overflow:hidden}
-.fs-viewport{flex:1;overflow:hidden;min-height:72px}
+.fs-wrap{flex:1;display:flex;flex-direction:column;padding:10px 20px 8px;border-top:1px solid var(--hr-border);position:relative;overflow:hidden}
+.fs-viewport{flex:1;overflow:hidden;min-height:44px}
 .fs-block{text-align:center;padding:0 8px}
 @keyframes fs-in-up{0%{opacity:0;transform:translateY(18px)}60%{opacity:1;transform:translateY(-4px)}100%{opacity:1;transform:translateY(0)}}
 @keyframes fs-in-down{0%{opacity:0;transform:translateY(-18px)}60%{opacity:1;transform:translateY(4px)}100%{opacity:1;transform:translateY(0)}}
@@ -137,7 +137,7 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 .fs-block.fs-entering.fs-dir-down{opacity:0;transform:translateY(-18px)}
 .fs-block.fs-visible.fs-dir-down{animation:fs-in-down .55s cubic-bezier(.34,1.56,.64,1) both}
 .fs-block.fs-idle{opacity:0}
-.fs-line{font-family:var(--hr-sans);font-style:normal;font-size:1.18rem;color:var(--hr-gold);line-height:1.6}
+.fs-line{font-family:var(--hr-sans);font-style:normal;font-size:1.34rem;color:var(--hr-gold);line-height:1.35}
 .fs-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
 .fs-rule{height:1px;width:28px;opacity:.4;border-radius:1px;flex-shrink:0}
 .fs-nav{display:flex;gap:0}
@@ -151,18 +151,18 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 /* 2026-06-07 Mike: player bar goes DARK on the paper page — unmissable,
    and consistent with the projection-booth rule (screens are dark).
    Tokens re-pinned inside the bar's scope. */
-.pb{--hr-gold:#c9c9c9;--hr-gold-hi:#ededed;--hr-gold-lo:#8e8e8e;--hr-gold-mute:#8e8e8e;--hr-dim:#b6b6b6;--hr-ink-card:#1a1a1a;--hr-border:#3e3e3e;position:fixed;bottom:0;left:0;right:0;height:60px;background:var(--hr-ink-card);border-top:1px solid var(--hr-border);display:flex;align-items:center;gap:12px;padding:0 20px;z-index:100;box-shadow:0 -2px 10px rgba(20,18,14,.25)}
-.pb-art{width:36px;height:36px;object-fit:cover;border-radius:1px;flex-shrink:0}
+.pb{--hr-gold:#c9c9c9;--hr-gold-hi:#ededed;--hr-gold-lo:#8e8e8e;--hr-gold-mute:#8e8e8e;--hr-dim:#b6b6b6;--hr-ink-card:#1a1a1a;--hr-border:#3e3e3e;position:fixed;bottom:0;left:0;right:0;height:68px;background:var(--hr-ink-card);border-top:2px solid #b8974a;display:flex;align-items:center;gap:12px;padding:0 20px;z-index:100;box-shadow:0 -4px 18px rgba(0,0,0,.45)}
+.pb-art{width:46px;height:46px;object-fit:cover;border-radius:1px;flex-shrink:0}
 .pb-art-ph{display:block}
 .pb-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
-.pb-track{font-family:'Courier Prime',monospace;font-size:.8rem;color:var(--hr-gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pb-track{font-family:'Courier Prime',monospace;font-size:.88rem;color:var(--hr-gold-hi);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pb-sub{font-family:'Syne',sans-serif;font-weight:600;font-size:.5rem;letter-spacing:.15em}
 .pb-controls{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .pb-skip{background:none;border:none;color:var(--hr-gold-mute);cursor:pointer;padding:4px;display:flex;align-items:center;transition:color .15s}
 .pb-skip:hover{color:var(--hr-gold)}
 .pb-skip-dis{opacity:.2;pointer-events:none}
-.pb-ctrl{background:none;border:none;color:var(--hr-gold-mute);cursor:pointer;padding:4px;display:flex;align-items:center;transition:color .15s}
-.pb-ctrl:hover{color:var(--hr-gold)}
+.pb-ctrl{background:#b8974a;border:none;color:#141414;cursor:pointer;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s,transform .1s}
+.pb-ctrl:hover{background:#d4af5e;transform:scale(1.05)}
 .pb-vol{width:60px;height:3px;accent-color:var(--hr-gold);cursor:pointer;opacity:.5;transition:opacity .15s}
 .pb-vol:hover{opacity:1}
 
@@ -177,6 +177,6 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
   .pb{padding:0 12px}
   .cf-wrap .cf-album{width:180px;height:180px}
   .tl-track{padding:9px 16px}
-  .tl-tags{grid-template-columns:repeat(5,40px)}
+  .tl-tags{grid-template-columns:repeat(6,42px)}
   .tl-tag-ghost{width:40px}
 }

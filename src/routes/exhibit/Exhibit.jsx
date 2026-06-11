@@ -151,10 +151,6 @@ function FactScroller({ facts, albumId, trackTitle, accent }) {
       </div>
       <div className="fs-footer">
         {accent && <div className="fs-rule" style={{ background: accent }} />}
-        <div className="fs-nav">
-          <button className={`fs-btn${canBack ? "" : " fs-btn-dis"}`} onClick={navBack}>&#8249;</button>
-          <button className={`fs-btn${canForward ? "" : " fs-btn-dis"}`} onClick={navForward}>&#8250;</button>
-        </div>
       </div>
     </div>
   );
