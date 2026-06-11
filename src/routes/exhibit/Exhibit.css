@@ -35,7 +35,7 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
    forms. Rest of the nav stays Syne pending Mike's read. */
 .ex-nav-logo{font-family:var(--wb-brand,'Fredoka',sans-serif);font-weight:600;font-size:.85rem;letter-spacing:.06em;text-transform:none;color:var(--hr-gold);background:none;border:none;cursor:pointer;transition:opacity .2s}
 .ex-nav-logo:hover{opacity:.7}
-.ex-nav-sub{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:.12em;text-transform:uppercase;color:var(--hr-gold)}
+.ex-nav-sub{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:.12em;text-transform:uppercase;color:var(--hr-gold);cursor:pointer;position:absolute;left:50%;transform:translateX(-50%)}
 .ex-nav-return{font-family:'Syne',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--hr-gold);background:none;border:none;cursor:pointer;transition:opacity .2s}
 .ex-nav-return:hover{opacity:.7}
 
@@ -85,7 +85,7 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 .tl-album-label{padding:20px 20px 14px;border-bottom:1px solid var(--hr-border);margin-bottom:4px}
 .tl-album-title{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(.95rem,1.6vw,1.2rem);color:var(--hr-gold);line-height:1.2}
 .ex-album-banner{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:14px 32px 10px;border-top:1px solid var(--hr-border)}
-.ex-album-banner-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.3rem,3vw,2.1rem);letter-spacing:.14em;text-transform:uppercase;color:var(--hr-gold);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ex-album-banner-title{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1rem,1.8vw,1.35rem);letter-spacing:.1em;text-transform:uppercase;color:var(--hr-gold);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ex-album-banner-aux{flex:1;min-height:1px}
 /* 2026-06-07 Mike: tighter rows, less whitespace. */
 .tl-track{display:flex;align-items:center;padding:1px 20px;border-left:2px solid transparent;cursor:pointer;transition:background .15s,border-left-color .2s;user-select:none}
@@ -105,6 +105,8 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 .tl-tag{font-family:'Oswald',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.02em;padding:4px 0;background:transparent;border:1px solid transparent;cursor:pointer;border-radius:1px;transition:color .15s,border-color .15s,opacity .15s;text-align:center;width:100%}
 .tl-tag-sel{opacity:1}
 .tl-tag-dim{color:var(--hr-gold-mute) !important;border-color:var(--hr-gold-mute) !important;opacity:.45}
+.tl-rend{order:-1;margin-right:8px;flex-shrink:0;width:96px;font-family:'Oswald',sans-serif;font-weight:700;font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;color:var(--hr-gold);background:var(--hr-ink-card,#1a1a1a);border:1px solid var(--hr-border);border-radius:2px;padding:4px 6px;cursor:pointer}
+.tl-rend:focus{outline:none;border-color:#b8974a}
 .tl-tag-ghost{display:block;pointer-events:none}
 
 /* VIDEO PANEL — stable right column */
@@ -181,5 +183,6 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
   .cf-wrap .cf-album{width:180px;height:180px}
   .tl-track{padding:9px 16px}
   .tl-tags{grid-template-columns:repeat(6,42px)}
+  .tl-rend{width:74px;font-size:.6rem}
   .tl-tag-ghost{width:40px}
 }

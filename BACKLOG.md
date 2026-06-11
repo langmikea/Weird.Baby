@@ -136,3 +136,37 @@ resolve the RWTH song-tag stripping (Tier 3) — a cleanup pass is a suspect.
 - Phase 2.5 session-brief move — SESSION_CLOSE files no longer tracked
 - Batch 1 rendition enrichment (8 renditions + TFCM title fix) — 8fb0e86
 - Design review 2026-06-10 — stable-base verdict, fragility inventory
+
+---
+## INTAKE 2026-06-11 PM (Mike) - pre-launch sweep
+- CAROUSEL-DENSITY: use full carousel width, more albums visible at once.
+- LOGO-TOPLEFT: tiny Weird.Baby logo mark in nav top-left (needs asset plumbing).
+- NEWS-COLLECTOR: News of Today + News of This Day -> PUV material + deck filler cards for odd masonry shapes.
+- CLAUDE-CERT + CLEAN-CERT (post-launch deep-clean track, NOT a launch gate): Claude certifies every artifact before Mike review; clean-cert = reviewed + unaltered since (updated_at tamper detection); MV filter to find/set; implementation = Ops proposal.
+- TAG-AUDIT + RAWTEXT-AUDIT: how are artifacts actually tagged; is raw text retained everywhere for future search/tag-gen.
+- TABS-OUT -> P&F POPOVERS: tabs removed; PRESETS & FILTERS popover editors over static museum; agile rapid prototyping; Claude proposes UX.
+- FB-DOWNLOAD-TEST: never tested; test on Mike's own FB account before HR permission lands.
+
+---
+## INTAKE 2026-06-11 EVENING (Mike)
+### Live defects (Cycle 2 in flight)
+- DECKBUG-FBBLOCKS: FB embeds show black/white block at bottom (hardcoded frame heights vs actual).
+- DECKBUG-SEAM: background seam where deck tabs lie; first artifact row crammed at exhibit bottom edge.
+- DECKBUG-UNAVAILABLE-LEAD: first deck card is a rights-restricted FB video FB refuses to embed -> demote to link card or change leadoff (MV data decision).
+- SNAP-DOUBLE: html+body both scroll-snap (fix in Cycle 2a); tap-to-top snap-captured (fix: instant).
+### GUI
+- TITLESEL: song title IS the dropdown; one option per rendition with descriptive label. Supersedes pill-cycling. (Cycle 2a; iterate on look.)
+- SELECTION-MODEL note (needs clarification later): cycling multiples within a type; one of each type per category; a song from each category permitted.
+- AUDIO-ONLY-RENDITIONS: [AUDIO] per track for screen-off playback (YT halts video). RWTH mp3-on-R2 pattern is the template.
+### Features / platform
+- EXPORT-PRESETS-SPOTIFY: export jukebox presets as Spotify (etc.) playlists.
+- WALLPAPER-1960S: wallpaper = 1960s B&W photo feel (ISO grain, satin paper softness; reference Weird.Baby logo).
+- CAPTURE-ALL-TO-DISK: vault every capturable asset (YT etc).
+- LEGAL-NONCOMMERCIAL-REVIEW: noncommercial-only platform clauses vs free museum - needs proper review.
+- SEO-GOOGLE (post-launch): when/how we appear in Google; readiness checklist.
+### MediaVault
+- MV-SIMPLE-ID: simple definitive artifact ID in detail pane ("ID ######").
+- MV-DEDUP: cleanup/dedup pass (two Cheech & Chong artifacts spotted).
+- MV-TEXT-REFRESH: tags + full source-page text re-pulled on most artifacts (pairs with TAG-AUDIT/CERT).
+- MV-SHOW-ALBUM-ART: show album art in MV UI.
+- MV-COUNT-LOGIC: "# of ##" when only # accessible - fix the denominator.
