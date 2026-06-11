@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-06-11T20:09:38.231Z",
+  "generated_at": "2026-06-11T20:57:46.009Z",
   "artifacts": {
     "MV-20260419-001": {
       "primary_url": "https://assets.weird.baby/assets/c1/c1521d32a5436f99bb6f369045228043815b018ccbe33cec00dd93049e47921a.jpg",
@@ -18,7 +18,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/b3/b30c279d2773607baf8f6c5d33b8b5352725e7debb9765a7b8f91f09f4a4e896.jpg",
       "thumbnail_sha256": "b30c279d2773607baf8f6c5d33b8b5352725e7debb9765a7b8f91f09f4a4e896",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:20.405Z"
+      "last_synced_at": "2026-06-11T20:57:28.554Z"
     },
     "MV-20260419-004": {
       "primary_url": "https://assets.weird.baby/assets/fc/fc8b8945c540cc67ae9239bb97c677e3e4a86788430b76bb3fae814d8b95c1d7.jpg",
@@ -36,7 +36,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "thumbnail_sha256": "4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478",
       "thumbnail_source": "apic",
-      "last_synced_at": "2026-06-11T20:09:24.787Z"
+      "last_synced_at": "2026-06-11T20:57:41.121Z"
     },
     "MV-HR-20260417-001": {
       "primary_url": "https://assets.weird.baby/audio/0b/0b65aa63ffa9856c473f03ba3e361a7137a93415f2e3a34e5e959d6a3cac3459.mp3",
@@ -45,7 +45,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "thumbnail_sha256": "4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478",
       "thumbnail_source": "apic",
-      "last_synced_at": "2026-06-11T20:09:25.099Z"
+      "last_synced_at": "2026-06-11T20:57:41.377Z"
     },
     "MV-HR-20260417-003": {
       "primary_url": "https://assets.weird.baby/audio/78/780e1384fcc70c74eb050866adfb09d040be5516216369c491a55e4fde9c359d.mp3",
@@ -54,7 +54,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "thumbnail_sha256": "4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478",
       "thumbnail_source": "apic",
-      "last_synced_at": "2026-06-11T20:09:25.338Z"
+      "last_synced_at": "2026-06-11T20:57:41.614Z"
     },
     "MV-HR-20260417-005": {
       "primary_url": "https://assets.weird.baby/audio/58/58c53cc87bc39bbafc9f84afbb5c1ec5919738b5324dbd0cec1e3652262cb702.mp3",
@@ -63,7 +63,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "thumbnail_sha256": "4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478",
       "thumbnail_source": "apic",
-      "last_synced_at": "2026-06-11T20:09:25.634Z"
+      "last_synced_at": "2026-06-11T20:57:41.895Z"
     },
     "MV-HR-20260417-007": {
       "primary_url": "https://assets.weird.baby/audio/fd/fdf4283653fc49bb85654808460fd588d2653dbbe1b9c802d174bcefd2b71be2.mp3",
@@ -72,7 +72,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "thumbnail_sha256": "4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478",
       "thumbnail_source": "apic",
-      "last_synced_at": "2026-06-11T20:09:25.855Z"
+      "last_synced_at": "2026-06-11T20:57:42.154Z"
     },
     "MV-HR-20260417-009": {
       "primary_url": "https://assets.weird.baby/audio/75/7506a7b0f0f2cc664337aebc54e0549e60396f01a33b4f687993ce0f0e8fb934.mp3",
@@ -81,7 +81,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "thumbnail_sha256": "4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478",
       "thumbnail_source": "apic",
-      "last_synced_at": "2026-06-11T20:09:26.093Z"
+      "last_synced_at": "2026-06-11T20:57:42.396Z"
     },
     "MV-HR-20260417-011": {
       "primary_url": "https://assets.weird.baby/audio/aa/aace4be80e879f2fad5b10f2223634cdd9a1e744bfad8334936b7f558568a70a.mp3",
@@ -90,7 +90,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "thumbnail_sha256": "4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478",
       "thumbnail_source": "apic",
-      "last_synced_at": "2026-06-11T20:09:26.320Z"
+      "last_synced_at": "2026-06-11T20:57:42.640Z"
     },
     "MV-HR-20260417-013": {
       "primary_url": "https://assets.weird.baby/audio/e0/e0ccb3524cba0d31df4c215ff6c3e3c8145085d083fbb25a6773a248a6426cd4.mp3",
@@ -99,7 +99,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "thumbnail_sha256": "4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478",
       "thumbnail_source": "apic",
-      "last_synced_at": "2026-06-11T20:09:26.565Z"
+      "last_synced_at": "2026-06-11T20:57:42.887Z"
     },
     "MV-HR-20260417-015": {
       "primary_url": "https://assets.weird.baby/audio/3b/3b3c3569db8ded027a448a4c5bd3aeb9e9c135ad50e881ac7ff9d73333abdd8c.mp3",
@@ -108,7 +108,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "thumbnail_sha256": "4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478",
       "thumbnail_source": "apic",
-      "last_synced_at": "2026-06-11T20:09:26.799Z"
+      "last_synced_at": "2026-06-11T20:57:43.094Z"
     },
     "MV-HR-20260417-017": {
       "primary_url": "https://assets.weird.baby/audio/73/73fa16ef17a9dc2622d433eaab651b9d29406a574b97dad6918f31de3366557a.mp3",
@@ -117,7 +117,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "thumbnail_sha256": "4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478",
       "thumbnail_source": "apic",
-      "last_synced_at": "2026-06-11T20:09:27.030Z"
+      "last_synced_at": "2026-06-11T20:57:43.292Z"
     },
     "MV-HR-20260417-019": {
       "primary_url": "https://assets.weird.baby/audio/8c/8ccf1adda4bf1c57af77d6d97ee9cd4bf1e24c03d4048638fffd03436a22884b.mp3",
@@ -126,7 +126,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "thumbnail_sha256": "4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478",
       "thumbnail_source": "apic",
-      "last_synced_at": "2026-06-11T20:09:27.289Z"
+      "last_synced_at": "2026-06-11T20:57:43.547Z"
     },
     "MV-HR-20260417-021": {
       "primary_url": "https://assets.weird.baby/audio/d6/d693ac3556bb0c2c4933d3b8d3c3e98fcaaa6211c1d27d71005e39c314652f45.mp3",
@@ -135,7 +135,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "thumbnail_sha256": "4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478",
       "thumbnail_source": "apic",
-      "last_synced_at": "2026-06-11T20:09:27.514Z"
+      "last_synced_at": "2026-06-11T20:57:43.753Z"
     },
     "MV-HR-20260417-023": {
       "primary_url": "https://assets.weird.baby/audio/6e/6e172dd61b8ed4c575244b71cfa3acc901218877d136f721b0af3cacccc52510.mp3",
@@ -144,7 +144,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "thumbnail_sha256": "4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478",
       "thumbnail_source": "apic",
-      "last_synced_at": "2026-06-11T20:09:27.745Z"
+      "last_synced_at": "2026-06-11T20:57:44.006Z"
     },
     "MV-HR-20260417-025": {
       "primary_url": "https://assets.weird.baby/audio/48/48afb11da9af6f2f18212c20a170e14e6cedb1bf539e4878bd353611cf9e6fe3.mp3",
@@ -153,7 +153,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "thumbnail_sha256": "4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478",
       "thumbnail_source": "apic",
-      "last_synced_at": "2026-06-11T20:09:28.000Z"
+      "last_synced_at": "2026-06-11T20:57:44.272Z"
     },
     "MV-HR-20260421-001": {
       "primary_url": "https://assets.weird.baby/audio/0b/0b15c358f6ca85c824448b083c14e476dc7ab3f3fac108da05ff7d4ffc85b015.mp3",
@@ -162,7 +162,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/42/4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478.jpg",
       "thumbnail_sha256": "4289f4a0a075b8c0ececa03719d9ea228f8e864e1b0ca46464888e5830f61478",
       "thumbnail_source": "apic",
-      "last_synced_at": "2026-06-11T20:09:28.234Z"
+      "last_synced_at": "2026-06-11T20:57:44.504Z"
     },
     "MV-20260419-003": {
       "primary_url": "https://assets.weird.baby/assets/68/68bb9caec8a666c5cf7dc2193a761db07f02579cc13683c836d311d808efcc15.jpg",
@@ -171,7 +171,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/97/97efaef5022f07b11b17298120657a89804b889e5baea83ddb01e9ae08363432.jpg",
       "thumbnail_sha256": "97efaef5022f07b11b17298120657a89804b889e5baea83ddb01e9ae08363432",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:20.655Z"
+      "last_synced_at": "2026-06-11T20:57:28.807Z"
     },
     "MV-HR-20260405-035": {
       "primary_url": "https://assets.weird.baby/assets/cd/cd43e67c278e821451f730f71f52ed0e179e1a961a29a7b6e25a3128842f1140.jpg",
@@ -180,7 +180,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/59/59fca3d83c9e194b1bd1afeb782e368e05fb7ddbc364909d06f62f0091bd2819.jpg",
       "thumbnail_sha256": "59fca3d83c9e194b1bd1afeb782e368e05fb7ddbc364909d06f62f0091bd2819",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:24.207Z"
+      "last_synced_at": "2026-06-11T20:57:40.557Z"
     },
     "MV-HR-20260405-037": {
       "primary_url": "https://assets.weird.baby/assets/d8/d8b100ab50ecde19eb3d50369f998f4f48b11bff214e21e801e3adce78e81df8.png",
@@ -189,7 +189,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/b8/b81174b1746478a5873eaf1e80c1c846565713f6b68d1801fec49bdbb37b055a.jpg",
       "thumbnail_sha256": "b81174b1746478a5873eaf1e80c1c846565713f6b68d1801fec49bdbb37b055a",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:24.491Z"
+      "last_synced_at": "2026-06-11T20:57:40.848Z"
     },
     "MV-HR-20260405-016": {
       "primary_url": "https://assets.weird.baby/assets/0a/0a26010136d35e9475899e3a751502a2635e973c85a497b39410469439d8a601.jpg",
@@ -198,7 +198,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/7f/7f3200e748abb9f55b66f43456920de1bf2cdaf4814ad3dc4414924cbf784da4.jpg",
       "thumbnail_sha256": "7f3200e748abb9f55b66f43456920de1bf2cdaf4814ad3dc4414924cbf784da4",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:20.974Z"
+      "last_synced_at": "2026-06-11T20:57:29.128Z"
     },
     "MV-HR-20260405-017": {
       "primary_url": "https://assets.weird.baby/assets/73/7301d07f8a483897d073138da6ac5b35072aff0a864a74a5a29f2e42785ccafc.jpg",
@@ -207,7 +207,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/46/46090a400ae94245ff48d20ad6fa3dfa879e7943be1ed79c262b4d856fb6059c.jpg",
       "thumbnail_sha256": "46090a400ae94245ff48d20ad6fa3dfa879e7943be1ed79c262b4d856fb6059c",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:21.282Z"
+      "last_synced_at": "2026-06-11T20:57:29.467Z"
     },
     "MV-HR-20260405-021": {
       "primary_url": "https://assets.weird.baby/assets/2c/2c0e86d1a47da07f4a306845bc758cc6814cb60816f6d35c1f5b3a0f8093787b.jpg",
@@ -216,7 +216,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/2f/2f6b15da2466a96aeb839d084c2a22481b9d160dac2f8b3f19fe2c60486b2e8b.jpg",
       "thumbnail_sha256": "2f6b15da2466a96aeb839d084c2a22481b9d160dac2f8b3f19fe2c60486b2e8b",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:21.586Z"
+      "last_synced_at": "2026-06-11T20:57:33.345Z"
     },
     "MV-HR-20260405-022": {
       "primary_url": "https://assets.weird.baby/assets/e9/e9ac1638cb112052442e358810eb3accf2379e81323a62417fa51211d8f6b054.jpg",
@@ -225,7 +225,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/93/93d526bb5fa3be0d56f855bfba6cf4decc0b0c305f7c401e7f91cd41ab9dce83.jpg",
       "thumbnail_sha256": "93d526bb5fa3be0d56f855bfba6cf4decc0b0c305f7c401e7f91cd41ab9dce83",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:21.881Z"
+      "last_synced_at": "2026-06-11T20:57:33.609Z"
     },
     "MV-HR-20260405-026": {
       "primary_url": "https://assets.weird.baby/assets/9c/9ca1b526880298e4b477bad0865f0100105d0d1aa3e5512410a05c0b9fb0066e.jpg",
@@ -234,7 +234,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/f9/f9662e6365004e0d691b6b2c0413fd39f248ac03a968501ab002c54273a1ad6e.jpg",
       "thumbnail_sha256": "f9662e6365004e0d691b6b2c0413fd39f248ac03a968501ab002c54273a1ad6e",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:22.185Z"
+      "last_synced_at": "2026-06-11T20:57:38.518Z"
     },
     "MV-HR-20260405-027": {
       "primary_url": "https://assets.weird.baby/assets/7d/7dc64fdfdf20ad1f2319018b97ead7e6eda546275540dd7d26a50cad5eb79636.jpg",
@@ -243,7 +243,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/06/0686dcf5e9d22737c4872bf0a523449c6054b9b378c9e13008acee61df6d49d8.jpg",
       "thumbnail_sha256": "0686dcf5e9d22737c4872bf0a523449c6054b9b378c9e13008acee61df6d49d8",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:22.455Z"
+      "last_synced_at": "2026-06-11T20:57:38.843Z"
     },
     "MV-HR-20260405-028": {
       "primary_url": "https://assets.weird.baby/assets/06/062c6ac840ab11381124adbad394f57aa552ac4bfbae2bd8ecf66e899f1c03e1.jpg",
@@ -252,7 +252,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/1d/1db5245478c05a0ab2a2d2b8d102e169f47e8a8fcb32f549b5a2db8b3fa36f34.jpg",
       "thumbnail_sha256": "1db5245478c05a0ab2a2d2b8d102e169f47e8a8fcb32f549b5a2db8b3fa36f34",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:22.765Z"
+      "last_synced_at": "2026-06-11T20:57:39.107Z"
     },
     "MV-HR-20260405-030": {
       "primary_url": "https://assets.weird.baby/assets/a4/a41be0bc4f396a73518d925bfb83dc11fe47358247fc32833fc5239bef4ad9e1.jpg",
@@ -261,7 +261,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/75/757df9922ac99465829f01254cf94b03f0268dcb6a4a634735bb3d9ff0e18033.jpg",
       "thumbnail_sha256": "757df9922ac99465829f01254cf94b03f0268dcb6a4a634735bb3d9ff0e18033",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:23.071Z"
+      "last_synced_at": "2026-06-11T20:57:39.398Z"
     },
     "MV-HR-20260405-031": {
       "primary_url": "https://assets.weird.baby/assets/1d/1df9a8bc84f997fce01306d8f463f2e96eb021bd38889059ac45ac55e89d158b.jpg",
@@ -270,7 +270,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/c3/c3a074897121cfc0dfe214f4e39a61c59299ed2cfe4db3b3f00ee1cedab88637.jpg",
       "thumbnail_sha256": "c3a074897121cfc0dfe214f4e39a61c59299ed2cfe4db3b3f00ee1cedab88637",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:23.357Z"
+      "last_synced_at": "2026-06-11T20:57:39.706Z"
     },
     "MV-HR-20260405-032": {
       "primary_url": "https://assets.weird.baby/assets/72/72e5f05b338541505901f8442a1b9a1a07f5717b1c6937382799448512abdb34.jpg",
@@ -279,7 +279,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/80/8062ed501547239de0eabe437451bd61c7c3df0ac0c6350109d0b759bdc20e3f.jpg",
       "thumbnail_sha256": "8062ed501547239de0eabe437451bd61c7c3df0ac0c6350109d0b759bdc20e3f",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:23.656Z"
+      "last_synced_at": "2026-06-11T20:57:40.021Z"
     },
     "MV-HR-20260405-033": {
       "primary_url": "https://assets.weird.baby/assets/e3/e326b727b2801d5fa3a731dcc96f65c1dd2db4a8e8d4f7158349e9f7171690d7.jpg",
@@ -288,7 +288,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/a5/a557c3af8cf165b98f266d6a683e5ed65aa215c9a68b6a4bc85124d0b45e5fc1.jpg",
       "thumbnail_sha256": "a557c3af8cf165b98f266d6a683e5ed65aa215c9a68b6a4bc85124d0b45e5fc1",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:23.965Z"
+      "last_synced_at": "2026-06-11T20:57:40.300Z"
     },
     "MV-HR-20260611-001": {
       "primary_url": "https://assets.weird.baby/assets/9c/9c466372130a70a22b47ab7f8b30856427ae6e0f7aeb610fd8e0e4abb740acfa.jpg",
@@ -297,7 +297,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/72/72f06d56b60a6e4d0d4c11ccdb5b93f4755a87114b47b53e118092976142134a.jpg",
       "thumbnail_sha256": "72f06d56b60a6e4d0d4c11ccdb5b93f4755a87114b47b53e118092976142134a",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:30.256Z"
+      "last_synced_at": "2026-06-11T20:57:44.744Z"
     },
     "MV-HR-20260611-002": {
       "primary_url": "https://assets.weird.baby/assets/de/de5aea11981d01e41e21eb64956436a28dd4900110d2e97851ad8da72e12bdc6.jpg",
@@ -306,7 +306,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/13/13702858366ccd320f5f7851ac4b0f684b87e7d5a8f2dca844d3c824e363b44d.jpg",
       "thumbnail_sha256": "13702858366ccd320f5f7851ac4b0f684b87e7d5a8f2dca844d3c824e363b44d",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:31.667Z"
+      "last_synced_at": "2026-06-11T20:57:45.033Z"
     },
     "MV-HR-20260611-003": {
       "primary_url": "https://assets.weird.baby/assets/d9/d9bd287c718fc0940ea009cc697a3a84a027587a330600368655a0c21465b621.jpg",
@@ -315,7 +315,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/f8/f8fc1c1af84b767862d9dac415d3217dac4d9da1d28b663465734a3707edb4b8.jpg",
       "thumbnail_sha256": "f8fc1c1af84b767862d9dac415d3217dac4d9da1d28b663465734a3707edb4b8",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:33.840Z"
+      "last_synced_at": "2026-06-11T20:57:45.273Z"
     },
     "MV-HR-20260611-004": {
       "primary_url": "https://assets.weird.baby/assets/c9/c9d6206248239e8af1bd430191fe3cab9a42207ef1ecbfc415361c2c118dfbc9.jpg",
@@ -324,7 +324,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/be/be7643adca082acd502ba67810379d4b91e2ed89d37c70e2b26aeb42a41b14f7.jpg",
       "thumbnail_sha256": "be7643adca082acd502ba67810379d4b91e2ed89d37c70e2b26aeb42a41b14f7",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:35.338Z"
+      "last_synced_at": "2026-06-11T20:57:45.546Z"
     },
     "MV-HR-20260611-005": {
       "primary_url": "https://assets.weird.baby/assets/32/32d7531e7a89f7a917634e840dd7511f0f4f05388929127c401900a01474cc78.jpg",
@@ -333,7 +333,7 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/ad/ad9a08b22bb8e77ff836610041ed993b4089049d4a342fd73b4ab5b712333268.jpg",
       "thumbnail_sha256": "ad9a08b22bb8e77ff836610041ed993b4089049d4a342fd73b4ab5b712333268",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:36.573Z"
+      "last_synced_at": "2026-06-11T20:57:45.794Z"
     },
     "MV-HR-20260611-006": {
       "primary_url": "https://assets.weird.baby/assets/8d/8df4f6548a486beea8ba5d8d19195addfe8c8f8c076b748b5ee0e4108ba4d4f1.jpg",
@@ -342,7 +342,52 @@
       "thumbnail_url": "https://assets.weird.baby/thumbnails/28/283ab0d8c2b8ae975979853a441eae78a007c9669cb411aa5ff753f6d9b76423.jpg",
       "thumbnail_sha256": "283ab0d8c2b8ae975979853a441eae78a007c9669cb411aa5ff753f6d9b76423",
       "thumbnail_source": "image",
-      "last_synced_at": "2026-06-11T20:09:38.231Z"
+      "last_synced_at": "2026-06-11T20:57:46.009Z"
+    },
+    "MV-HR-20260405-019": {
+      "primary_url": "https://assets.weird.baby/assets/24/24af74c626c0ca28b0025521dc9d72f3d3330c59d03e05d3a4b4519756dd6835.jpg",
+      "primary_sha256": "24af74c626c0ca28b0025521dc9d72f3d3330c59d03e05d3a4b4519756dd6835",
+      "primary_bytes": 3043055,
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/64/64c517112518e17ccaf552faebb3b55eea6af94607046896657e41d148ba16aa.jpg",
+      "thumbnail_sha256": "64c517112518e17ccaf552faebb3b55eea6af94607046896657e41d148ba16aa",
+      "thumbnail_source": "image",
+      "last_synced_at": "2026-06-11T20:57:31.015Z"
+    },
+    "MV-HR-20260405-020": {
+      "primary_url": "https://assets.weird.baby/assets/67/679edc396408c3f31c17485a54091b955178ad4448f21c6a84f0c882c38f9bd2.jpg",
+      "primary_sha256": "679edc396408c3f31c17485a54091b955178ad4448f21c6a84f0c882c38f9bd2",
+      "primary_bytes": 3446593,
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/2b/2b34c532aef98e4a058d52d7e9971f816a8273a0c638afc30cb31176d7c9a65e.jpg",
+      "thumbnail_sha256": "2b34c532aef98e4a058d52d7e9971f816a8273a0c638afc30cb31176d7c9a65e",
+      "thumbnail_source": "image",
+      "last_synced_at": "2026-06-11T20:57:33.066Z"
+    },
+    "MV-HR-20260405-023": {
+      "primary_url": "https://assets.weird.baby/assets/e1/e18afa520108fb9c587d54cd32cfc71341a76ae936c877aba937434fc886db26.jpg",
+      "primary_sha256": "e18afa520108fb9c587d54cd32cfc71341a76ae936c877aba937434fc886db26",
+      "primary_bytes": 3106857,
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/93/930a502d9f958b55b5561884a1c4f062193802b11f58b4fbcc0a54241d4e3971.jpg",
+      "thumbnail_sha256": "930a502d9f958b55b5561884a1c4f062193802b11f58b4fbcc0a54241d4e3971",
+      "thumbnail_source": "image",
+      "last_synced_at": "2026-06-11T20:57:35.291Z"
+    },
+    "MV-HR-20260405-024": {
+      "primary_url": "https://assets.weird.baby/assets/5b/5bf34af9b511f9dea3239bc047f86c9b8c4d8844369a8bf89f4b6d4de0cdfffc.jpg",
+      "primary_sha256": "5bf34af9b511f9dea3239bc047f86c9b8c4d8844369a8bf89f4b6d4de0cdfffc",
+      "primary_bytes": 2084729,
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/8f/8f4c1f5f7c45bd7f1dce3e22171151f9f48cda8f2e70ebd52ac75457d9c4d095.jpg",
+      "thumbnail_sha256": "8f4c1f5f7c45bd7f1dce3e22171151f9f48cda8f2e70ebd52ac75457d9c4d095",
+      "thumbnail_source": "image",
+      "last_synced_at": "2026-06-11T20:57:36.743Z"
+    },
+    "MV-HR-20260405-025": {
+      "primary_url": "https://assets.weird.baby/assets/15/1528ebd12a04670ce55617c7fe0ed5427235c3511ef91859955125512843372a.jpg",
+      "primary_sha256": "1528ebd12a04670ce55617c7fe0ed5427235c3511ef91859955125512843372a",
+      "primary_bytes": 2547351,
+      "thumbnail_url": "https://assets.weird.baby/thumbnails/a9/a96c9b2e3682aa3381ddc7e2f73e390aaefb71e513a5af7f365e7997a245a7ea.jpg",
+      "thumbnail_sha256": "a96c9b2e3682aa3381ddc7e2f73e390aaefb71e513a5af7f365e7997a245a7ea",
+      "thumbnail_source": "image",
+      "last_synced_at": "2026-06-11T20:57:38.242Z"
     }
   }
 }
