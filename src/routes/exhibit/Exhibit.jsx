@@ -406,9 +406,6 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
 
   return (
     <ol className="tl-tracks">
-      <li className="tl-album-label">
-        <div className="tl-album-title">{album.title}</div>
-      </li>
       {album.tracks.map((track, ti) => {
         const hasVids  = track.videos.length > 0;
         const isActive = activeTrack === ti;
@@ -941,6 +938,10 @@ export default function Exhibit({ artist }) {
         </div>
 
         {/* MAIN TWO-COLUMN AREA */}
+        <div className="ex-album-banner">
+          <div className="ex-album-banner-title">{album.title}</div>
+          <div className="ex-album-banner-aux" />
+        </div>
         <div className="ex-main ex-snap">
           <div className="ex-main-inner" ref={bodyRef}
             style={{ gridTemplateColumns: `${split}fr 10px ${100-split}fr` }}>

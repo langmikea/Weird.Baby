@@ -9,7 +9,7 @@
 html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow-x:clip;scroll-snap-type:y proximity;scroll-behavior:smooth}
 
 /* ROOT */
-.ex-root{opacity:0;transition:opacity .8s ease;display:flex;flex-direction:column;min-height:max(100vh, calc(var(--ex-true-h, 0px) + 64px));padding:0 8px 64px}
+.ex-root{opacity:0;transition:opacity .8s ease;display:flex;flex-direction:column;min-height:max(100vh, calc(var(--ex-true-h, 0px) + 64px));padding:54px 8px 64px}
 /* B&W PASS 2 (2026-06-07): film grain over the whole room — a fixed wash
    above the page (z 950) but below the lightboxes (z 1000), so photo
    viewing stays clean. Multiply keeps the paper texture present without
@@ -29,7 +29,7 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 .ex-root.visible{opacity:1}
 
 /* NAV */
-.ex-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 32px 0;flex-shrink:0;scroll-snap-align:start}
+.ex-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;position:fixed;top:0;left:0;right:0;z-index:90;background:var(--hr-bg);border-bottom:1px solid var(--hr-border)}
 /* B&W rework trial: wordmark in the logo-like rounded face, mixed case
    ("Weird.Baby", as the logo letters it), tracking relaxed for the bubble
    forms. Rest of the nav stays Syne pending Mike's read. */
@@ -84,6 +84,9 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 .tl-tracks{list-style:none;padding:0 0 14px}
 .tl-album-label{padding:20px 20px 14px;border-bottom:1px solid var(--hr-border);margin-bottom:4px}
 .tl-album-title{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(.95rem,1.6vw,1.2rem);color:var(--hr-gold);line-height:1.2}
+.ex-album-banner{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:14px 32px 10px;border-top:1px solid var(--hr-border)}
+.ex-album-banner-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.3rem,3vw,2.1rem);letter-spacing:.14em;text-transform:uppercase;color:var(--hr-gold);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ex-album-banner-aux{flex:1;min-height:1px}
 /* 2026-06-07 Mike: tighter rows, less whitespace. */
 .tl-track{display:flex;align-items:center;padding:1px 20px;border-left:2px solid transparent;cursor:pointer;transition:background .15s,border-left-color .2s;user-select:none}
 .tl-track:hover{background:var(--hr-ink-soft)}
@@ -169,7 +172,7 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 @keyframes npb{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
 
 @media(max-width:720px){
-  .ex-nav{padding:16px 16px 0}
+  .ex-nav{padding:12px 16px}
   .cf-dh{padding:0 16px}
   .ex-main-inner{grid-template-columns:1fr !important}
   .vr-dh{display:none}
