@@ -2314,7 +2314,7 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
   // span for FB only (source_platform === "facebook"); all other card types
   // keep their operator-locked varied spans. Supersedes the earlier rule that
   // forced only non-video FB embeds (isFbEmbed && !isFbVideo) to 1-col.
-  const span_w = card.source_platform === "facebook" || isAudio ? 1 : rolledSpan;
+  const span_w = card.source_platform === "facebook" || isAudio || isAlbum ? 1 : rolledSpan;
   const baseStyle = {
     ...spanStyle(span_w),
     border: `1px solid ${BORDER}`,

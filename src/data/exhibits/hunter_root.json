@@ -1,7 +1,7 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-06-11T20:57:46.522Z",
+    "exported_at": "2026-06-11T21:36:47.343Z",
     "filter": "released, not archived, badged for this exhibit",
     "vocabulary_csv_sha": null
   },
@@ -372,171 +372,6 @@
         ],
         "exhibit": [
           "hunter_root"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-019",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Hunter Root band performing live at a Harrisburg venue with full lighting",
-      "description": "Full band performance captured at a Harrisburg, Pennsylvania venue on October 10, 2025. The stage setup includes two guitarists, upright bass, drums, and keyboard, illuminated by purple and red stage lighting. Multiple guitar effects pedals are visible on the floor in front of the performers.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-06-11T16:34:21",
-      "primary_url": "https://assets.weird.baby/assets/24/24af74c626c0ca28b0025521dc9d72f3d3330c59d03e05d3a4b4519756dd6835.jpg",
-      "thumbnail_url": "https://assets.weird.baby/thumbnails/64/64c517112518e17ccaf552faebb3b55eea6af94607046896657e41d148ba16aa.jpg",
-      "tags": {
-        "attributes": [
-          "gear",
-          "notable"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "live"
-        ],
-        "event": [
-          "live_show"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "lineup": [
-          "band"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-020",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Live band performance at Harrisburg, PA venue with colorful stage lighting",
-      "description": "Hunter Root and band performing live in Harrisburg, Pennsylvania. Three musicians visible on stage with bass, guitar, and vocals, backed by drums and additional band members. Vibrant purple and blue stage lighting creates an intimate club atmosphere with equipment and cables visible on the venue floor.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-06-11T16:35:12",
-      "primary_url": "https://assets.weird.baby/assets/67/679edc396408c3f31c17485a54091b955178ad4448f21c6a84f0c882c38f9bd2.jpg",
-      "thumbnail_url": "https://assets.weird.baby/thumbnails/2b/2b34c532aef98e4a058d52d7e9971f816a8273a0c638afc30cb31176d7c9a65e.jpg",
-      "tags": {
-        "attributes": [
-          "common",
-          "gear"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "live"
-        ],
-        "event": [
-          "live_show"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "lineup": [
-          "band"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-023",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Hunter Root performing live on stage in Harrisburg, Pennsylvania",
-      "description": "Hunter Root performing live on stage in Harrisburg, Pennsylvania with band members. The stage is set with drums, amplifiers, and multiple microphones, with decorative rugs on the floor and stage lighting visible in the background. Two performers are visible mid-performance in an intimate venue setting.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-06-11T16:35:26",
-      "primary_url": "https://assets.weird.baby/assets/e1/e18afa520108fb9c587d54cd32cfc71341a76ae936c877aba937434fc886db26.jpg",
-      "thumbnail_url": "https://assets.weird.baby/thumbnails/93/930a502d9f958b55b5561884a1c4f062193802b11f58b4fbcc0a54241d4e3971.jpg",
-      "tags": {
-        "attributes": [
-          "common",
-          "gear"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "live"
-        ],
-        "event": [
-          "live_show"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "lineup": [
-          "band"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-024",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Hunter Root performing on stage in Harrisburg, Pennsylvania with long hair",
-      "description": "Live performance photo taken in Harrisburg, Pennsylvania showing Hunter Root on stage with long wavy hair and light-colored shirt, alongside another performer. The stage setup includes multiple microphone stands, guitar pedals and rugs visible in the foreground, and blue stage lights overhead.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-06-11T16:35:29",
-      "primary_url": "https://assets.weird.baby/assets/5b/5bf34af9b511f9dea3239bc047f86c9b8c4d8844369a8bf89f4b6d4de0cdfffc.jpg",
-      "thumbnail_url": "https://assets.weird.baby/thumbnails/8f/8f4c1f5f7c45bd7f1dce3e22171151f9f48cda8f2e70ebd52ac75457d9c4d095.jpg",
-      "tags": {
-        "attributes": [
-          "gear",
-          "notable"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "live"
-        ],
-        "event": [
-          "live_show"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "lineup": [
-          "band"
-        ]
-      }
-    },
-    {
-      "id": "MV-HR-20260405-025",
-      "source_url": null,
-      "source_platform": "local",
-      "media_type": "photo",
-      "title": "Hunter Root performing solo acoustic set in Harrisburg, Pennsylvania",
-      "description": "Hunter Root sits on a stool performing an intimate solo acoustic set in Harrisburg, Pennsylvania. The stage is bathed in dramatic blue lighting with yellow and red spotlights behind him, guitar pedals and equipment scattered at his feet. He wears black Converse sneakers, black pants, and a light-colored shirt while playing acoustic guitar and singing into a microphone.",
-      "post_date": "2025-10-10",
-      "released_at": "2026-06-11T16:35:43",
-      "primary_url": "https://assets.weird.baby/assets/15/1528ebd12a04670ce55617c7fe0ed5427235c3511ef91859955125512843372a.jpg",
-      "thumbnail_url": "https://assets.weird.baby/thumbnails/a9/a96c9b2e3682aa3381ddc7e2f73e390aaefb71e513a5af7f365e7997a245a7ea.jpg",
-      "tags": {
-        "attributes": [
-          "common",
-          "gear"
-        ],
-        "bands": [
-          "hunter_root"
-        ],
-        "content_kind": [
-          "live"
-        ],
-        "event": [
-          "live_show"
-        ],
-        "exhibit": [
-          "hunter_root"
-        ],
-        "lineup": [
-          "solo"
         ]
       }
     },
@@ -938,6 +773,74 @@
           "capture_order": 2
         },
         {
+          "id": "MV-HR-20260405-019",
+          "source_url": null,
+          "source_platform": "local",
+          "media_type": "photo",
+          "title": "Hunter Root band performing live at a Harrisburg venue with full lighting",
+          "description": "Full band performance captured at a Harrisburg, Pennsylvania venue on October 10, 2025. The stage setup includes two guitarists, upright bass, drums, and keyboard, illuminated by purple and red stage lighting. Multiple guitar effects pedals are visible on the floor in front of the performers.",
+          "post_date": "2025-10-10",
+          "released_at": "2026-06-11T16:34:21",
+          "primary_url": "https://assets.weird.baby/assets/24/24af74c626c0ca28b0025521dc9d72f3d3330c59d03e05d3a4b4519756dd6835.jpg",
+          "thumbnail_url": "https://assets.weird.baby/thumbnails/64/64c517112518e17ccaf552faebb3b55eea6af94607046896657e41d148ba16aa.jpg",
+          "tags": {
+            "attributes": [
+              "gear",
+              "notable"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "live"
+            ],
+            "event": [
+              "live_show"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "lineup": [
+              "band"
+            ]
+          },
+          "capture_order": 3
+        },
+        {
+          "id": "MV-HR-20260405-020",
+          "source_url": null,
+          "source_platform": "local",
+          "media_type": "photo",
+          "title": "Live band performance at Harrisburg, PA venue with colorful stage lighting",
+          "description": "Hunter Root and band performing live in Harrisburg, Pennsylvania. Three musicians visible on stage with bass, guitar, and vocals, backed by drums and additional band members. Vibrant purple and blue stage lighting creates an intimate club atmosphere with equipment and cables visible on the venue floor.",
+          "post_date": "2025-10-10",
+          "released_at": "2026-06-11T16:35:12",
+          "primary_url": "https://assets.weird.baby/assets/67/679edc396408c3f31c17485a54091b955178ad4448f21c6a84f0c882c38f9bd2.jpg",
+          "thumbnail_url": "https://assets.weird.baby/thumbnails/2b/2b34c532aef98e4a058d52d7e9971f816a8273a0c638afc30cb31176d7c9a65e.jpg",
+          "tags": {
+            "attributes": [
+              "common",
+              "gear"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "live"
+            ],
+            "event": [
+              "live_show"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "lineup": [
+              "band"
+            ]
+          },
+          "capture_order": 4
+        },
+        {
           "id": "MV-HR-20260405-021",
           "source_url": null,
           "source_platform": "other",
@@ -966,7 +869,7 @@
               "band"
             ]
           },
-          "capture_order": 3
+          "capture_order": 5
         },
         {
           "id": "MV-HR-20260405-022",
@@ -997,7 +900,109 @@
               "band"
             ]
           },
-          "capture_order": 4
+          "capture_order": 6
+        },
+        {
+          "id": "MV-HR-20260405-023",
+          "source_url": null,
+          "source_platform": "local",
+          "media_type": "photo",
+          "title": "Hunter Root performing live on stage in Harrisburg, Pennsylvania",
+          "description": "Hunter Root performing live on stage in Harrisburg, Pennsylvania with band members. The stage is set with drums, amplifiers, and multiple microphones, with decorative rugs on the floor and stage lighting visible in the background. Two performers are visible mid-performance in an intimate venue setting.",
+          "post_date": "2025-10-10",
+          "released_at": "2026-06-11T16:35:26",
+          "primary_url": "https://assets.weird.baby/assets/e1/e18afa520108fb9c587d54cd32cfc71341a76ae936c877aba937434fc886db26.jpg",
+          "thumbnail_url": "https://assets.weird.baby/thumbnails/93/930a502d9f958b55b5561884a1c4f062193802b11f58b4fbcc0a54241d4e3971.jpg",
+          "tags": {
+            "attributes": [
+              "common",
+              "gear"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "live"
+            ],
+            "event": [
+              "live_show"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "lineup": [
+              "band"
+            ]
+          },
+          "capture_order": 7
+        },
+        {
+          "id": "MV-HR-20260405-024",
+          "source_url": null,
+          "source_platform": "local",
+          "media_type": "photo",
+          "title": "Hunter Root performing on stage in Harrisburg, Pennsylvania with long hair",
+          "description": "Live performance photo taken in Harrisburg, Pennsylvania showing Hunter Root on stage with long wavy hair and light-colored shirt, alongside another performer. The stage setup includes multiple microphone stands, guitar pedals and rugs visible in the foreground, and blue stage lights overhead.",
+          "post_date": "2025-10-10",
+          "released_at": "2026-06-11T16:35:29",
+          "primary_url": "https://assets.weird.baby/assets/5b/5bf34af9b511f9dea3239bc047f86c9b8c4d8844369a8bf89f4b6d4de0cdfffc.jpg",
+          "thumbnail_url": "https://assets.weird.baby/thumbnails/8f/8f4c1f5f7c45bd7f1dce3e22171151f9f48cda8f2e70ebd52ac75457d9c4d095.jpg",
+          "tags": {
+            "attributes": [
+              "gear",
+              "notable"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "live"
+            ],
+            "event": [
+              "live_show"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "lineup": [
+              "band"
+            ]
+          },
+          "capture_order": 8
+        },
+        {
+          "id": "MV-HR-20260405-025",
+          "source_url": null,
+          "source_platform": "local",
+          "media_type": "photo",
+          "title": "Hunter Root performing solo acoustic set in Harrisburg, Pennsylvania",
+          "description": "Hunter Root sits on a stool performing an intimate solo acoustic set in Harrisburg, Pennsylvania. The stage is bathed in dramatic blue lighting with yellow and red spotlights behind him, guitar pedals and equipment scattered at his feet. He wears black Converse sneakers, black pants, and a light-colored shirt while playing acoustic guitar and singing into a microphone.",
+          "post_date": "2025-10-10",
+          "released_at": "2026-06-11T16:35:43",
+          "primary_url": "https://assets.weird.baby/assets/15/1528ebd12a04670ce55617c7fe0ed5427235c3511ef91859955125512843372a.jpg",
+          "thumbnail_url": "https://assets.weird.baby/thumbnails/a9/a96c9b2e3682aa3381ddc7e2f73e390aaefb71e513a5af7f365e7997a245a7ea.jpg",
+          "tags": {
+            "attributes": [
+              "common",
+              "gear"
+            ],
+            "bands": [
+              "hunter_root"
+            ],
+            "content_kind": [
+              "live"
+            ],
+            "event": [
+              "live_show"
+            ],
+            "exhibit": [
+              "hunter_root"
+            ],
+            "lineup": [
+              "solo"
+            ]
+          },
+          "capture_order": 9
         },
         {
           "id": "MV-HR-20260405-026",
@@ -1028,7 +1033,7 @@
               "solo"
             ]
           },
-          "capture_order": 5
+          "capture_order": 10
         },
         {
           "id": "MV-HR-20260405-027",
@@ -1059,7 +1064,7 @@
               "solo"
             ]
           },
-          "capture_order": 6
+          "capture_order": 11
         },
         {
           "id": "MV-HR-20260405-028",
@@ -1090,7 +1095,7 @@
               "solo"
             ]
           },
-          "capture_order": 7
+          "capture_order": 12
         },
         {
           "id": "MV-HR-20260405-030",
@@ -1120,7 +1125,7 @@
               "band"
             ]
           },
-          "capture_order": 8
+          "capture_order": 13
         },
         {
           "id": "MV-HR-20260405-031",
@@ -1151,7 +1156,7 @@
               "band"
             ]
           },
-          "capture_order": 9
+          "capture_order": 14
         },
         {
           "id": "MV-HR-20260405-032",
@@ -1182,7 +1187,7 @@
               "band"
             ]
           },
-          "capture_order": 10
+          "capture_order": 15
         },
         {
           "id": "MV-HR-20260405-033",
@@ -1211,7 +1216,7 @@
               "hunter_root"
             ]
           },
-          "capture_order": 11
+          "capture_order": 16
         }
       ]
     },
