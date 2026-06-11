@@ -1,144 +1,138 @@
 # Weird.Baby Museum — Backlog
 
-**Last updated:** 2026-05-02 (post-Phase-2a Cleanup)
+**Last updated:** 2026-06-11 (post design review + Batch 1 rendition enrichment)
 
 This file holds aspirational work. When something here lands a commit,
-remove the line. `NAVIGATION.md` describes current state — what's
-committed, what's deployed, what's in the working tree. `STATE.md` is the
+remove the line. `NAVIGATION.md` describes current state. `STATE.md` is the
 durable reference (stack, routes, mothballs).
 
 ---
 
-## Tier 1 — Active Build (museum experience, next sessions)
+## Tier 1 — Active (in flight or next session)
 
-**Tracklist Queue Overhaul.** Rework tracklist interaction in `Exhibit.jsx`:
-single click adds to queue (not immediate play); double click plays now then
-returns to queue; video stays visible regardless of which album is browsed;
-when nothing is playing, show album cover for the focused album (not YT
-thumbnail). Requires visible queue UI, double-click handler, interrupt+resume
-logic, video-area render changes. Touches the core of `Exhibit.jsx`. Scope
-before building.
+**Video-panel stretch fix.** Idle `.vp-thumb` overlay renders album art /
+YT thumbs with a bare unclassed `<img>` that stretches to fill; the
+`.vp-audio-only` / `.vp-ao-art` path sizes correctly. Mirror the ao-art fit
+treatment onto the thumb overlay imgs (Exhibit.jsx ~line 1001–1012 +
+Exhibit.css). Scoped 2026-06-11; waiting on Exhibit.css read.
 
-**Hunter Root Links Enrichment.** Many tracks in `hunter-root.js` have empty
-`videos[]` arrays. Research and populate: YouTube videos, official audio,
-live performances, covers. The data structure already supports multiple
-types per track (official, live, clip, lyrics, cover). Pure content/data
-work — no code changes.
+**Batch 1b — album covers into MV.** Six covers acquired from Bandcamp
+(1200×1200, authoritative): arkansas, crooked_home, life_inside_a_wheel,
+mimicking_the_sun_like_dandelions, skipping_stones, they_finally_cracked_me.
+Ingest as photo artifacts, parent to containers, set notes.cover_artifact_id,
+R2 sync, export, deploy. Pattern: follow MV-20260419-003 (RWTH cover) row +
+storage conventions. Fixes the empty carousel AND feeds the idle panel.
 
----
+**Batch 2 — discography reconciliation.** See docs/BATCH2_SCOPING-20260611.md.
+Arkansas missing 3 tracks, Life Inside A Wheel missing 10, Phone Recordings
+EP + Sleight of Hand single + ~14 standalone singles unmodeled. GATED ON
+operator decision: where do non-album releases live in the exhibit.
 
-## Tier 2 — Pre-Launch Required (build before any public mention)
-
-**Phase 2b — Deploy verification.** First deploy of the post-Phase-2a tree.
-Run `npx vite build`, then `npx wrangler deploy`. Confirm `/hr` renders the
-new HrExhibitFlow correctly in production; confirm guestbook still writes to
-D1; confirm the route table change (no more `/cb`, `/hr/workshop`,
-`/hr/workshop/lyric-map`, `/hr/merch`) doesn't break any external links.
-
-**Phase 2.5 — Move session-close briefs out of repo.** Per `RESET_PROTOCOL.md`,
-session-close briefs and probe bundles do not live in the live museum repo.
-The ~30 `docs/SESSION_CLOSE_v*.md` files are grandfathered as frozen
-artifacts; they need to move to `C:\AI\_sessions\` (create the directory if
-it doesn't exist). Untracked `.bak` files in `docs/` and the `_quarantine/`
-directory should also be deleted from the working tree at the same time
-(Phase 2a recorded the deletions in the index but couldn't unlink the files
-from the working tree due to a sandbox permission issue).
-
-**Founding Visitor Easter Egg.** From `VISION.md`. Timestamped badge for
-anyone who visits before public announcement. Needs a D1 schema change.
-400+ visits so far are all Mike's own — not urgent yet, but must land
-before any external link points to weird.baby.
-
-**Persistent Guest Book Entries (Cloudflare D1).** Currently ephemeral.
-Real guest contributions need persistence. Storage target: D1 (decided
-April 14 brainstorm — KV is wrong tool, D1 is the answer). Part of the
-contribution shell architecture (see `VISION.md`).
-
-**Persistent Vote Counts (Cloudflare D1).** Pairs with guest book
-persistence. Votes should survive page reload. Anonymous dedup via
-fingerprint (IP+UA hash), server-side — not localStorage. Storage target:
-D1.
-
-**Fan Playlists.** Fan-curated playlists embedded in the tracklist drawer,
-not a separate page. Fan-submitted, zero friction, no login required,
-immediate publish. Hover-to-peek on playlist cards. Selecting a playlist
-loads it into the player. Creation flow: `+` button on any track builds a
-staging tray; version-aware. Submit with name + your name + blurb. Anonymous
-playlists are frozen on submit. Museum also authors playlists in the same
-system. Full spec: `docs/FEATURE_fan_playlists.md`.
+**Release the 6 inbox photos.** Harrisburg live shots (MV-HR-20260405-019/
+020/023/024/025/036) sitting in inbox — release call + gallery placement.
 
 ---
 
-## Tier 3 — Quality of Life (improves the experience, not blocking)
+## Tier 2 — Pre-Launch Required
 
-**SM Video/Audio Handoff.** Fade/pause/resume the playing song when a social
-media video plays in a panel.
+**/hr deep-link 404.** Worker serves 404 for /hr hit directly (no SPA
+fallback); route only works client-side from root. Breaks shared links and
+refresh. Deploy-config change — own scoped task. (Found 2026-06-10 review.)
 
-**Real Auth for Entry Ownership/Delete.** Needed once journal entries
-persist. Users should own their entries.
+**Founding Visitor Easter Egg.** Timestamped badge for pre-announcement
+visitors. D1 schema change. Must land before any external link.
 
-**Weighted Journal Selection Tied to Live Vote Data.** Currently
-random/weighted by static config. Should reflect actual votes.
+**Persistent Guest Book Entries (D1).** Currently ephemeral.
 
-**ytId duplicate-card question.** The `ytId` value `FbOoHjoSyec` appears on
-both an `HR_ARTIFACTS` entry (`art-8-2022-09-09`) and an `HR_ARCHIVE` entry
-(`arc-20-2022-09-09`) — same video referenced twice across two source files.
-Phase 1.5d normalized the URL fallback; the deduping question (do we want
-two cards pointing at the same video?) is still open.
+**Persistent Vote Counts (D1).** Anonymous dedup via IP+UA hash, server-side.
 
-**Mobile UX polish.** Inline scroll-snap deck + artifact grid haven't been
-tested at narrow widths since the Phase 1.5 port. Pass through the
-viewports the gift shop covers and confirm tap targets and deck tab strip
-behave.
+**Fan Playlists.** Spec: docs/FEATURE_fan_playlists.md. SEQUENCE AFTER the
+Tracklist Queue Overhaul — both touch the queue core.
 
 ---
 
-## Tier 4 — Polish & Cleanup (batch in one commit anytime)
+## Tier 3 — Quality of Life
 
-**UI polish.** Center `HUNTER ROOT` in the nav bar; journal alignment
-fine-tuning (closer on P2, slightly off on P3); active album on coverflow
-should be larger.
+**Tracklist Queue Overhaul.** Single click queues, double click plays-now,
+visible queue UI, interrupt+resume, video-area render changes. Touches the
+core of Exhibit.jsx — scope before building. (Moved from old Tier 1: it's a
+landmine-class change, not a quick win.)
 
-**Content polish.** Artist photos for the gift shop roster (typography
-fallback works for now); rewrite the featured blurb in `wb_roster.js`
-(post-Phase-1 it's the older "Central PA songwriter" line — Lancaster
-revision is in the working tree, not committed); walked-in bell audio
-file for the gift shop.
+**RWTH children: restore song: tags in MV.** Stripped MV-side between
+2026-05-31 and 06-10 (origin unknown — possibly the fruitless session or tag
+cleanup). Invisible today (id-fallback grouping works); breaks the moment a
+RWTH track gains a second rendition. Also: investigate what stripped them.
+
+**Cover-pill verify.** TAG_SLOTS includes "cover" so the pill should render
+for the Violet Lempke cover on Cookin' — confirm on live; fix if absent.
+
+**SM Video/Audio Handoff.** Fade/pause/resume song when a panel SM video plays.
+
+**Real Auth for Entry Ownership/Delete.** Once journal entries persist.
+
+**Weighted Journal Selection Tied to Live Vote Data.**
+
+**ytId duplicate question.** FbOoHjoSyec now referenced 3x (HR_ARTIFACTS
+art-8-2022-09-09, HR_ARCHIVE arc-20-2022-09-09, and rendition
+MV-HR-20260610-004). Decide policy for multi-surface video reuse.
+
+**Live-clip curation sweep.** ~10 fan-corpus live clips (Wonder Bar, Acid
+Palms, Nectar's, band versions) — operator taste pass, anytime.
+
+**Mobile UX verify-pass.** Deck de-fix, proximity snap, and the fixed bottom
+player bar (iOS safe-area, viewport-height quirks) have never been checked at
+narrow widths since the Phases 1–3b relayout. Mostly operator thumbs.
+
+**Shorts bucket.** ~140 channel shorts/promo posts in
+yt_research/yt_bulk_triage_20260524T005805Z.md need a home-or-skip decision.
+
+---
+
+## Tier 4 — Polish & Cleanup
+
+**UI polish.** Center HUNTER ROOT in nav; journal alignment (P2/P3); active
+coverflow album larger.
+
+**Content polish.** Artist photos for gift shop roster; rewrite wb_roster.js
+featured blurb (the Lancaster revision was lost uncommitted — rewrite from
+scratch); walked-in bell audio for gift shop.
 
 ---
 
 ## Tier 5 — Future / When Ready
 
-**Museum Merch Pipeline.** Big Cartel + Printful. Gift shop has placeholder
-("Museum merch coming soon"). Build when ready to actually sell things.
+**Top-pin revisit (player bar).** Parked by explicit decision 2026-06 (Phase
+3b). Genuine layout problem: sticky containing block vs abs-grid scroll
+decoupling. Do not reopen without a scoped tradeoff decision.
 
-**Content Archive Preservation.** Hard copies of all linked archive assets
-+ Digital Archive Catalog System. Fan group posts, per-item metadata,
-preservation flags. Needs scoping session before build.
+**Museum Merch Pipeline.** Big Cartel + Printful.
+
+**Content Archive Preservation.** Hard copies + Digital Archive Catalog
+System. Needs scoping session.
 
 ---
 
 ## Outside museum (system-level, tracked elsewhere)
 
-- OneDrive migration for `C:\AI` workspace
-- Cancel Square Online subscription (manual action)
-- Cancel/disable GoDaddy site builder (manual action)
+- OneDrive migration for C:\AI workspace
+- Cancel Square Online subscription (manual)
+- Cancel/disable GoDaddy site builder (manual)
 
 ---
 
 ## MediaVault Tag Vocabulary — Targeted Cleanup
 
-Three targeted cleanups specified in `docs/MV_TAG_CLEANUP_DESIGN.md`:
-platform category, unused-4 disposition, rarity/scope depth check. Cleanups
-1 and 2 are build-bites; Cleanup 3 is a discovery-bite.
+Per docs/MV_TAG_CLEANUP_DESIGN.md: platform category, unused-4 disposition,
+rarity/scope depth check. NOTE: before running any further tag cleanup,
+resolve the RWTH song-tag stripping (Tier 3) — a cleanup pass is a suspect.
 
 ---
 
-## Done in Phase 2a (removed from this list)
+## Done since last update (removed)
 
-- Carsie Blanton exhibit + roster + data files (deleted Phase 1)
-- LyricMap workshop tool (deleted Phase 1)
-- Orphan HR files: HrPanel2, HrPanel3, HrMerch (deleted Phase 1)
-- `/hr/merch` redirect (route removed Phase 1)
-- v28 deck ported to HrExhibitFlow (Phase 1.5)
-- video_kind Normalization Pass (already done in v31, was lingering)
+- Exhibit relayout Phases 1–3b (scroll snap, always-on player bar, deck
+  de-fix, bar relocated + fixed to viewport bottom) — shipped f8a28bc
+- Phase 2b deploy verification — long since deployed and verified
+- Phase 2.5 session-brief move — SESSION_CLOSE files no longer tracked
+- Batch 1 rendition enrichment (8 renditions + TFCM title fix) — 8fb0e86
+- Design review 2026-06-10 — stable-base verdict, fragility inventory
