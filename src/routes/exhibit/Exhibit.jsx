@@ -1003,7 +1003,7 @@ export default function Exhibit({ artist }) {
                       {thumbVid.ytId ? (
                         <img src={`https://img.youtube.com/vi/${thumbVid.ytId}/hqdefault.jpg`} alt="" />
                       ) : album.art ? (
-                        <img src={album.art} alt="" />
+                        <img className="vp-thumb-album" src={album.art} alt="" />
                       ) : (
                         <div style={{
                           width: "100%", height: "100%",

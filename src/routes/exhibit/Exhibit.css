@@ -113,6 +113,8 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 /* 2026-06-07 Mike: stop graying the video — thumb shows at full strength. */
 .vp-thumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:1;transition:opacity .2s}
 .vp-thumb:hover img{opacity:.8}
+.vp-thumb{background:var(--hr-bg)}
+.vp-thumb img.vp-thumb-album{width:min(88%,340px);height:min(88%,340px);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:2px;box-shadow:0 12px 48px rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.08)}
 .vp-thumb-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
 .vp-empty-state{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--hr-gold-mute)}
 
