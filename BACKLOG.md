@@ -204,3 +204,12 @@ TEST PROTOCOL (Mike's account): request JSON+High, all-time, Posts + Photos and 
 ### GAP-ANALYSIS 2026-06-12 (Claude): CONTENT-MINIMUM-STANDARD vs reality
 0 of 48 museum tracks meet AUDIO+OFFICIAL. Split: RWTH 15/15 audio-only; other 33 video-only (29 have officials; 4 Arkansas live-cuts + Straitlaced likely have NO official - standard needs 'best-available video' exception clause).
 KEY RECOMMENDATION - BANDCAMP AUDIO LAYER: buy Hunter's catalog on Bandcamp (FLAC quality, legal, pays the artist) -> vault -> R2 -> attach audio renditions via RWTH pattern. One move closes the 33-track AUDIO gap, advances CAPTURE-ALL-TO-DISK legitimately, satisfies screen-off playback, and moots YT-audio archival questions. Cost: tens of dollars. Folds into Batch 2 as its biggest component.
+
+### RJJ-ENUMERATION 2026-06-12 (Claude, browser pass) - scour playbook item D9 CLOSED
+RJJ's Reactions (@rjjsreactions-rk7zh, 15.7K subs) 'Hunter Root' playlist PLogTP8PTFkYxhg_lPBmgUxUz85xu96D1l + channel = 5 HR reactions total:
+- Town Rat Heathen reaction - DLQtthJbRRI (15:51, ~2023)
+- Reverend reaction - cua9sQd_FTE (12:17, ~2023)
+- Charleston Girl (Tyler Childers cover) reaction - uSeO_9-TPHg (7:22, ~2024) <- reaction to Hunter's COVER, new find
+- Chase the Dragon reaction - 8SlYEOijcTo (9:47, ~2025)
+- Cookin' in the Bathroom reaction - tOzREHZp7g0 (10:42, ~2025; on channel, not yet in his playlist)
+Candidates for a future 'the internet reacts' deck section; all embed-only per content strategy.
