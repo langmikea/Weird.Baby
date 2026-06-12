@@ -433,19 +433,18 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
             <span className="tl-num">
               {playing ? <NpBars color="#b8974a" /> : String(ti+1).padStart(2,"0")}
             </span>
-            <span className="tl-title">{track.title}</span>
-            {skipped && <span className="tl-skip-mark">skip</span>}
-            {hasVids && (
-              <select className="tl-rend" value={[...selSet][0] ?? 0}
+            {hasVids ? (
+              <select className="tl-titlesel" value={[...selSet][0] ?? 0}
                 onClick={e => e.stopPropagation()}
                 onChange={e => { e.stopPropagation(); onTagClick(ti, Number(e.target.value)); }}>
-                {TAG_SLOTS.map(slot => {
-                  const vi = typeToVi[slot];
-                  if (vi === undefined) return null;
-                  return <option key={slot} value={vi}>{typeLabel(track.videos[vi].type)}</option>;
-                })}
+                {track.videos.map((v, vi) => (
+                  <option key={vi} value={vi}>{v.label || (track.title + " — " + typeLabel(v.type))}</option>
+                ))}
               </select>
+            ) : (
+              <span className="tl-title">{track.title}</span>
             )}
+            {skipped && <span className="tl-skip-mark">skip</span>}
           </li>
         );
       })}
@@ -912,7 +911,7 @@ export default function Exhibit({ artist }) {
         {/* NAV */}
         <div className="ex-nav">
           <button className="ex-nav-logo" onClick={() => navigate(`/shop?from=${artist.shopExitParam}`)}>Weird.Baby</button>
-          <div className="ex-nav-sub" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>{artist.name}</div>
+          <div className="ex-nav-sub" onClick={() => window.scrollTo({ top: 0, behavior: "auto" })}>{artist.name}</div>
           <button className="ex-nav-return" onClick={() => navigate(`/shop?from=${artist.shopExitParam}`)}>Gift Shop</button>
         </div>
 

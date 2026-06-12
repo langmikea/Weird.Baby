@@ -6,7 +6,8 @@
    Used by the carousel variant badges (.tl-tag). */
 @font-face{font-family:'Oswald';font-style:normal;font-weight:600;font-display:swap;src:url('../../assets/fonts/oswald-600.woff2') format('woff2');}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow-x:clip;scroll-snap-type:y proximity;scroll-behavior:smooth}
+html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow-x:clip}
+html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 
 /* ROOT */
 .ex-root{opacity:0;transition:opacity .8s ease;display:flex;flex-direction:column;min-height:max(100vh, calc(var(--ex-true-h, 0px) + 64px));padding:54px 8px 64px}
@@ -98,6 +99,8 @@ html,body{background:var(--hr-bg);color:var(--hr-gold);min-height:100vh;overflow
 .tl-skip-mark{font-family:'Courier Prime',monospace;font-size:.5rem;color:var(--hr-gold-mute);margin-left:6px;flex-shrink:0;letter-spacing:.08em}
 .tl-num{font-family:'Courier Prime',monospace;font-size:.65rem;color:var(--hr-gold-mute);min-width:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .tl-title{font-family:'Courier Prime',monospace;font-size:.88rem;color:var(--hr-gold);flex:1;padding:0 10px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tl-titlesel{font-family:'Courier Prime',monospace;font-size:.88rem;color:var(--hr-gold);flex:1;padding:0 10px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:transparent;border:none;appearance:none;-webkit-appearance:none;cursor:pointer}
+.tl-track:hover .tl-titlesel{color:var(--hr-gold-hi)}
 
 /* TAG GRID */
 /* 2026-06-07 Mike: variant buttons bolder + larger for legibility. */
