@@ -64,7 +64,7 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 .cf-dh:hover .cf-dh-line,.cf-dh:hover .cf-dh-dot{background:color-mix(in srgb, var(--hr-gold) 33%, transparent)}
 
 /* MAIN TWO-COLUMN BODY */
-.ex-main{display:grid;flex:1;border-top:1px solid var(--hr-border);position:relative;overflow:hidden}
+.ex-main{display:grid;flex:1;border-top:1px solid var(--hr-border);border-bottom:1px solid var(--hr-border);position:relative;overflow:hidden}
 .ex-main-inner{display:grid;height:100%}
 
 /* LEFT — scrollable tracklist */

@@ -317,9 +317,9 @@ function usePersist(key, def) {
 function getSlot(off) {
   const a = Math.abs(off), s = off < 0 ? -1 : 1;
   if (a===0) return { x:0,       z:0,    ry:0,      sc:1,    op:1,    zi:10 };
-  if (a===1) return { x:s*210,   z:-80,  ry:s*-45,  sc:.85,  op:.85,  zi:9  };
-  if (a===2) return { x:s*360,   z:-160, ry:s*-65,  sc:.7,   op:.6,   zi:8  };
-  return           { x:s*480,   z:-220, ry:s*-75,  sc:.55,  op:.35,  zi:7  };
+  if (a===1) return { x:s*240,   z:-80,  ry:s*-45,  sc:.85,  op:.9,   zi:9  };
+  if (a===2) return { x:s*450,   z:-150, ry:s*-58,  sc:.74,  op:.75,  zi:8  };
+  return           { x:s*620,   z:-210, ry:s*-68,  sc:.62,  op:.55,  zi:7  };
 }
 
 function AlbumCover({ album }) {
@@ -438,7 +438,7 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
                 onClick={e => e.stopPropagation()}
                 onChange={e => { e.stopPropagation(); onTagClick(ti, Number(e.target.value)); }}>
                 {track.videos.map((v, vi) => (
-                  <option key={vi} value={vi}>{v.label || (track.title + " — " + typeLabel(v.type))}</option>
+                  <option key={vi} value={vi}>{v.label && v.label.indexOf(track.title) === 0 ? v.label : track.title + " — " + (v.label || typeLabel(v.type))}</option>
                 ))}
               </select>
             ) : (
