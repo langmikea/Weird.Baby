@@ -186,3 +186,9 @@ resolve the RWTH song-tag stripping (Tier 3) — a cleanup pass is a suspect.
 - WB-COLOR: define 'Weird.Baby {color_name}' - one brand accent that pairs with B&W 1960s photos on satin paper; cool, timeless, for the ages. Claude to bring proposals.
 - YT-ARCHIVE-LEGAL: archival-only download question folded into LEGAL-NONCOMMERCIAL-REVIEW; interim stance unchanged (source files from Hunter for his content).
 - NEXT SESSION OPENERS: Mike's two launch decisions (Batch 2 in/out + placement; tabs->P&F timing) + deck-zone eyes verdict.
+
+### INTAKE 2026-06-12 EARLY (Mike, post-midnight)
+- TL-BOLD-FACE: tracklist dropdown closed face = BOLD song title + lighter descriptor. Needs overlay-face pattern (native select popup kept). Cycle 3 opener.
+- TL-TIGHT-DESCRIPTORS: normalize rendition descriptors - 'AUDIO' not 'audio recording'; tight uppercase type + qualifier (LIVE - place/date). Render-side munging.
+- TL-BIGGER-TEXT: tracklist font size up (~.88rem -> ~1rem) + row breathing.
+- BG-NON-SACRED + WALLPAPER-TILE: background color also clean slate; Mike suggests a TILED textured-photo wallpaper (satin paper texture, possibly tinted) to carpet the look incl. color. Fold into WB-COLOR live mock session: trial accent + bg/tile together.
