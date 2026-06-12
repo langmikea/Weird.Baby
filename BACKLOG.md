@@ -170,3 +170,9 @@ resolve the RWTH song-tag stripping (Tier 3) — a cleanup pass is a suspect.
 - MV-TEXT-REFRESH: tags + full source-page text re-pulled on most artifacts (pairs with TAG-AUDIT/CERT).
 - MV-SHOW-ALBUM-ART: show album art in MV UI.
 - MV-COUNT-LOGIC: "# of ##" when only # accessible - fix the denominator.
+
+### DECISION 2026-06-11 (late): FB/YT content strategy reaffirmed
+- FB-DIMS measurement batch CANCELLED before execution - conflicted with plan of record.
+- Plan of record: HR requests FB data export -> DL link -> Mike downloads -> vault + serve real files. Embeds are interim only; no further investment in embed fidelity beyond disposable cosmetics.
+- Remaining interim FB work: demote the rights-blocked Unavailable leadoff card (tiny MV presentation change); optional one-rule CSS so letterbox reads as deliberate screen.
+- YT: EMBED at launch (licensed, robust). Long-term archive of Hunter-owned content = source files FROM HUNTER via same pipeline, NOT YT ripping (ToS + rights). Third-party content (reactions/covers/Topic audio) stays embed-only pending LEGAL-NONCOMMERCIAL-REVIEW / creator permission. Metadata/transcripts/thumbnails archiving continues - the defensible preservation layer.
