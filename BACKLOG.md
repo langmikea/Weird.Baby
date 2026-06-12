@@ -176,3 +176,13 @@ resolve the RWTH song-tag stripping (Tier 3) — a cleanup pass is a suspect.
 - Plan of record: HR requests FB data export -> DL link -> Mike downloads -> vault + serve real files. Embeds are interim only; no further investment in embed fidelity beyond disposable cosmetics.
 - Remaining interim FB work: demote the rights-blocked Unavailable leadoff card (tiny MV presentation change); optional one-rule CSS so letterbox reads as deliberate screen.
 - YT: EMBED at launch (licensed, robust). Long-term archive of Hunter-owned content = source files FROM HUNTER via same pipeline, NOT YT ripping (ToS + rights). Third-party content (reactions/covers/Topic audio) stays embed-only pending LEGAL-NONCOMMERCIAL-REVIEW / creator permission. Metadata/transcripts/thumbnails archiving continues - the defensible preservation layer.
+
+### INTAKE 2026-06-11 NIGHT (wrap-up notes, Mike)
+- CAROUSEL-ARROWS: larger arrow hit targets (real or virtual).
+- CAROUSEL-SWIPE: more visual reaction/feedback to a swipe.
+- CONTENT-MINIMUM-STANDARD: every song on every album carries AT MINIMUM an AUDIO + OFFICIAL VIDEO rendition; gap analysis folds into Batch 2.
+- PER-SONG-WEB-SCOUR: eventually search the web for ANY mention of each song and follow the clues (extends playbook rule 6 from reactions to all mentions).
+- BANNER-MATCH-NAV: album banner title same size as HUNTER ROOT nav title (~1.1rem Syne) - one-line CSS, rides next punch-list cycle.
+- WB-COLOR: define 'Weird.Baby {color_name}' - one brand accent that pairs with B&W 1960s photos on satin paper; cool, timeless, for the ages. Claude to bring proposals.
+- YT-ARCHIVE-LEGAL: archival-only download question folded into LEGAL-NONCOMMERCIAL-REVIEW; interim stance unchanged (source files from Hunter for his content).
+- NEXT SESSION OPENERS: Mike's two launch decisions (Batch 2 in/out + placement; tabs->P&F timing) + deck-zone eyes verdict.
