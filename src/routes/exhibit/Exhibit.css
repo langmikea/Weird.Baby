@@ -89,7 +89,7 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 .ex-album-banner-title{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1rem,1.8vw,1.35rem);letter-spacing:.1em;text-transform:uppercase;color:var(--hr-gold);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ex-album-banner-aux{flex:1;min-height:1px}
 /* 2026-06-07 Mike: tighter rows, less whitespace. */
-.tl-track{display:flex;align-items:center;padding:1px 20px;border-left:2px solid transparent;cursor:pointer;transition:background .15s,border-left-color .2s;user-select:none}
+.tl-track{display:flex;align-items:center;padding:3px 20px;border-left:2px solid transparent;cursor:pointer;transition:background .15s,border-left-color .2s;user-select:none}
 .tl-track:hover{background:var(--hr-ink-soft)}
 .tl-active{background:var(--hr-ink-soft)}
 .tl-novid{cursor:default;opacity:.32}
@@ -97,10 +97,14 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 .tl-skipped .tl-title{text-decoration:line-through;text-decoration-color:var(--hr-gold-mute)}
 .tl-skipped{opacity:.38}
 .tl-skip-mark{font-family:'Courier Prime',monospace;font-size:.5rem;color:var(--hr-gold-mute);margin-left:6px;flex-shrink:0;letter-spacing:.08em}
-.tl-num{font-family:'Courier Prime',monospace;font-size:.65rem;color:var(--hr-gold-mute);min-width:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.tl-title{font-family:'Courier Prime',monospace;font-size:.88rem;color:var(--hr-gold);flex:1;padding:0 10px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tl-titlesel{font-family:'Courier Prime',monospace;font-size:.88rem;color:var(--hr-gold);flex:1;padding:0 10px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:transparent;border:none;appearance:none;-webkit-appearance:none;cursor:pointer}
-.tl-track:hover .tl-titlesel{color:var(--hr-gold-hi)}
+.tl-num{font-family:'Courier Prime',monospace;font-size:.72rem;color:var(--hr-gold-mute);min-width:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tl-title{font-family:'Courier Prime',monospace;font-size:.98rem;color:var(--hr-gold);flex:1;padding:0 10px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tl-selwrap{position:relative;flex:1;min-width:0;display:flex;align-items:center;padding:0 10px}
+.tl-selface{pointer-events:none;display:flex;align-items:baseline;gap:8px;min-width:0;overflow:hidden;white-space:nowrap}
+.tl-selface b{font-family:'Courier Prime',monospace;font-weight:700;font-size:1rem;color:var(--hr-gold)}
+.tl-selface i{font-style:normal;font-family:'Oswald',sans-serif;font-size:.7rem;letter-spacing:.06em;color:var(--hr-gold-mute);overflow:hidden;text-overflow:ellipsis}
+.tl-titlesel{position:absolute;inset:0;width:100%;opacity:0;font-size:16px;border:none;background:transparent;appearance:none;-webkit-appearance:none;cursor:pointer}
+.tl-track:hover .tl-selface b{color:var(--hr-gold-hi)}
 
 /* TAG GRID */
 /* 2026-06-07 Mike: variant buttons bolder + larger for legibility. */

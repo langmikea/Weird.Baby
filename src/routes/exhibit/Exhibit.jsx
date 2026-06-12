@@ -305,6 +305,13 @@ function useAudioPlayer({ onEnded }) {
 
 // ─── SPLIT PERSISTENCE ────────────────────────────────────────────────────────
 const SPLIT_MIN = 25; const SPLIT_MAX = 75;
+function tidyDesc(title, v) {
+  let d = (v && (v.label || typeLabel(v.type))) || "";
+  if (title && d.indexOf(title) === 0) d = d.slice(title.length).replace(/^[\s\u2014\u2013-]+/, "");
+  d = d.toUpperCase().replace("AUDIO RECORDING", "AUDIO").replace("OFFICIAL MUSIC VIDEO", "OFFICIAL VIDEO");
+  return d;
+}
+
 const CF_MIN    = 160; const CF_MAX    = 440;
 
 function usePersist(key, def) {
@@ -434,13 +441,19 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
               {playing ? <NpBars color="#b8974a" /> : String(ti+1).padStart(2,"0")}
             </span>
             {hasVids ? (
-              <select className="tl-titlesel" value={[...selSet][0] ?? 0}
-                onClick={e => e.stopPropagation()}
-                onChange={e => { e.stopPropagation(); onTagClick(ti, Number(e.target.value)); }}>
-                {track.videos.map((v, vi) => (
-                  <option key={vi} value={vi}>{v.label && v.label.indexOf(track.title) === 0 ? v.label : track.title + " — " + (v.label || typeLabel(v.type))}</option>
-                ))}
-              </select>
+              <span className="tl-selwrap">
+                <span className="tl-selface" aria-hidden="true">
+                  <b>{track.title}</b>
+                  <i>{tidyDesc(track.title, track.videos[[...selSet][0] ?? 0])}</i>
+                </span>
+                <select className="tl-titlesel" value={[...selSet][0] ?? 0}
+                  onClick={e => e.stopPropagation()}
+                  onChange={e => { e.stopPropagation(); onTagClick(ti, Number(e.target.value)); }}>
+                  {track.videos.map((v, vi) => (
+                    <option key={vi} value={vi}>{track.title + " — " + tidyDesc(track.title, v)}</option>
+                  ))}
+                </select>
+              </span>
             ) : (
               <span className="tl-title">{track.title}</span>
             )}
