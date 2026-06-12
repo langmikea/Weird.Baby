@@ -192,3 +192,5 @@ resolve the RWTH song-tag stripping (Tier 3) — a cleanup pass is a suspect.
 - TL-TIGHT-DESCRIPTORS: normalize rendition descriptors - 'AUDIO' not 'audio recording'; tight uppercase type + qualifier (LIVE - place/date). Render-side munging.
 - TL-BIGGER-TEXT: tracklist font size up (~.88rem -> ~1rem) + row breathing.
 - BG-NON-SACRED + WALLPAPER-TILE: background color also clean slate; Mike suggests a TILED textured-photo wallpaper (satin paper texture, possibly tinted) to carpet the look incl. color. Fold into WB-COLOR live mock session: trial accent + bg/tile together.
+
+### COLOR VERDICT 2026-06-12 (Mike): trio compelling but HUNTER ROOT/album titles BLEND when they should STAND OUT at those values. Mike researching, will return with specific request. Easter-egg backstory (DuPont car paint -> Fender -> museum) APPROVED - keep regardless of final hue.
