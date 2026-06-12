@@ -10,12 +10,14 @@ import { buildSpineFromArtifacts } from "./hunter-root-spine.js";
 // placeholder gradient (the retired bandcamp art stays retired).
 const ALBUMS = [
   { id: "rwth",       tag: "run_with_the_hunt" },
+  { id: "phone",      tag: "phone_recordings_ep",                      year: 2017 },
   { id: "cracked",    tag: "they_finally_cracked_me",                  year: 2018 },
   { id: "wheel",      tag: "life_inside_a_wheel",                      year: 2019 },
   { id: "dandelions", tag: "mimicking_the_sun_like_dandelions",        year: 2020 },
   { id: "skipping",   tag: "skipping_stones_that_sink_before_theyre_thrown", year: 2021 },
   { id: "arkansas",   tag: "arkansas",                                 year: 2023 },
   { id: "crooked",    tag: "crooked_home",                             year: 2025 },
+  { id: "rarities",   tag: "rarities" },
 ];
 
 const spine = buildSpineFromArtifacts(EXHIBIT, ALBUMS);
