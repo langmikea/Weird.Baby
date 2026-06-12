@@ -2278,7 +2278,8 @@ function PhotoOverlay({ card, onClose }) {
 
 function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, onOpenAlbum, onOpenYouTube, onOpenPhoto }) {
   const fbEmbed = card.source_platform === "facebook" ? fbEmbedFor(card.source_url) : null;
-  const isFbEmbed = !!fbEmbed;
+  const presLink = Array.isArray(card.tags?.presentation) && card.tags.presentation.includes("link");
+  const isFbEmbed = !!fbEmbed && !presLink;
   // Universal-lightbox build 1: YouTube cards open the in-site player overlay
   // instead of a new tab. Split off from the generic isLink so ONLY YouTube
   // changes — reverbnation / other link cards keep the <a target="_blank">
@@ -2286,7 +2287,7 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
   // parseable video id falls through to isLink → new-tab, a safe fallback.
   const ytId = card.source_platform === "youtube" ? youtubeIdFromUrl(card.source_url) : null;
   const isYouTube = !isFbEmbed && !!ytId;
-  const isLink = !isFbEmbed && !isYouTube && card.media_type === "link" && !!card.source_url;
+  const isLink = !isFbEmbed && !isYouTube && (card.media_type === "link" || presLink) && !!card.source_url;
   const isPhoto = !isFbEmbed && card.media_type === "photo" && !!card.primary_url;
   // Phase C of Audio Delivery (per brief §3.5 / §9.3): media_type='audio'
   // dispatches to AudioCard. Predicate keys on the single-token check

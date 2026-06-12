@@ -1,7 +1,7 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-06-11T21:36:47.343Z",
+    "exported_at": "2026-06-12T12:10:20.002Z",
     "filter": "released, not archived, badged for this exhibit",
     "vocabulary_csv_sha": null
   },
@@ -35,6 +35,9 @@
         ],
         "lineup": [
           "solo"
+        ],
+        "presentation": [
+          "link"
         ]
       }
     },
