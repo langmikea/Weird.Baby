@@ -194,3 +194,9 @@ resolve the RWTH song-tag stripping (Tier 3) — a cleanup pass is a suspect.
 - BG-NON-SACRED + WALLPAPER-TILE: background color also clean slate; Mike suggests a TILED textured-photo wallpaper (satin paper texture, possibly tinted) to carpet the look incl. color. Fold into WB-COLOR live mock session: trial accent + bg/tile together.
 
 ### COLOR VERDICT 2026-06-12 (Mike): trio compelling but HUNTER ROOT/album titles BLEND when they should STAND OUT at those values. Mike researching, will return with specific request. Easter-egg backstory (DuPont car paint -> Fender -> museum) APPROVED - keep regardless of final hue.
+
+### FB-EXPORT-RECON 2026-06-12 (Claude, pre-test research)
+Mechanism: Accounts Center -> Your information -> 'Download Your Information'. Options: HTML or JSON format; media quality High/Medium/Low; date range; per-category selection (Posts, Photos and Videos, Messages, etc.); deliver as ZIP download or transfer to Google Drive/Dropbox. Big accounts can exceed 12GB / multiple ZIPs; narrowing date range avoids timeouts. Link arrives by notification/email when ready.
+FOR OUR PIPELINE: request JSON + High + all-time + (Posts, Photos and Videos) - JSON is the machine-readable shape MV ingest wants; skip Messages.
+KEY CAVEAT: even 'High' media is RECOMPRESSED by Facebook - the export yields FB's copies, NOT originals. Implication: the FB export is the right source for FB-NATIVE content (reels, post videos, photos), but produced music videos still want Hunter's actual source files. TWO asks for Hunter, not one: (a) run DYI export, (b) share masters for produced work.
+TEST PROTOCOL (Mike's account): request JSON+High, all-time, Posts + Photos and Videos only -> when ZIP arrives: map structure (folder layout, how video files pair with their JSON metadata; which fields exist - timestamps, captions, locations) -> report -> Claude designs the MV ingest mapping from the real shape.
