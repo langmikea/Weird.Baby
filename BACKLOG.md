@@ -1,6 +1,6 @@
 # Weird.Baby Museum — Backlog
 
-**Last updated:** 2026-06-11 (post design review + Batch 1 rendition enrichment)
+**Last updated:** 2026-06-13 (Ops: backup + route-table items logged)
 
 This file holds aspirational work. When something here lands a commit,
 remove the line. `NAVIGATION.md` describes current state. `STATE.md` is the
@@ -117,6 +117,13 @@ System. Needs scoping session.
 - OneDrive migration for C:\AI workspace
 - Cancel Square Online subscription (manual)
 - Cancel/disable GoDaddy site builder (manual)
+- Off-GitHub repo backup: clone to an off-disk target (external drive or cloud-synced folder) + scheduled refresh — OPS-CHARTER §3.1, the #1 data-loss guard. Pursue 2026-06-17 or later (Mike traveling, no external-drive access). Can ride the OneDrive migration above.
+
+---
+
+## Ops / Infrastructure (Claude-owned, Ops-timed)
+
+- Route-status table upgrade: promote STATE.md "Live routes" from a name list to LIVE / STUB / REDIRECT + powering component per route (OPS-CHARTER §1). Fold in when the route table is next touched (i.e., when `/drawing` or the Stacks surface lands). Ops decides exact timing.
 
 ---
 
