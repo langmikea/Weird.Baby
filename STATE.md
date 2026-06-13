@@ -59,6 +59,8 @@ Weird.Baby Museum. A curatorial platform. Currently exhibiting Hunter Root.
 - `/hr/home`, `/hr/media`, `/hr/archive`, `/hr/fan-wall` — HR sub-routes
 - `/shop` — gift shop
 
+Planned routes when this table is next touched: `/drawing`, and the Stacks filter surface.
+
 ## Stack
 
 React 19, Vite 8, Cloudflare Workers, D1 (`weird-baby-db`).

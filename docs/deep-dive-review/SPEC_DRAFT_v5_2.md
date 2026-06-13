@@ -114,6 +114,10 @@ Phase v5-7 (bulk ingest) remains operator-paced and out of the v5.x patch arc.
 - It does not resolve Q-2, Q-3, or Q-4 — those remain for phase prompts.
 - It does not specify exact code shapes for any phase — that's the phase prompts' job.
 
+### Deferred — discovery data-model reconciliation (logged 2026-06-13)
+
+- Before any discovery data-model work, reconcile `discovery-filter-ux-spec.md` §9: `facet_type: total|partial` on every facet; split Kind from Format into two required tags.
+
 ---
 
 *End of SPEC_DRAFT_v5_2.md.*
