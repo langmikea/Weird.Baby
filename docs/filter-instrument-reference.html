@@ -1,0 +1,362 @@
+<!-- THE STACKS — Filter Instrument v5 (full-width, PC-optimized) -->
+<style>
+  :root{
+    --paper:#e9e1d2; --paper-hi:#f2ecdf; --paper-lo:#ddd1ba;
+    --ink:#241d18; --ink-soft:#6a5d50; --ink-faint:#9a8d7c;
+    --ox:#7a2326; --ox-hi:#9c3033;
+    --line:#cdbfa6; --line-soft:#dbd0b9;
+    --mono:'Courier New',ui-monospace,monospace;
+    --disp:'Helvetica Neue',Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  .si-root{font-family:var(--disp);color:var(--ink);
+    background:repeating-linear-gradient(0deg,#0000000a 0 1px,transparent 1px 3px),var(--paper);
+    padding:22px 26px 40px;-webkit-font-smoothing:antialiased;line-height:1.45}
+  .si-wrap{max-width:1280px;margin:0 auto}
+
+  .si-head{display:flex;align-items:baseline;justify-content:space-between;
+    border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:14px;gap:10px;flex-wrap:wrap}
+  .si-head h1{font-size:12px;font-weight:800;letter-spacing:.34em;text-transform:uppercase}
+  .si-head .sub{font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.03em}
+
+  /* SELECTED-TAGS BAR — on top */
+  .activebar{border:1.5px solid var(--ink);border-radius:3px;background:var(--paper-hi);
+    padding:9px 12px;margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-height:42px}
+  .activebar .lead{font-size:9.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-soft);flex:none}
+  .activebar .tk{background:var(--ink);color:var(--paper-hi);border-radius:2px;padding:3px 9px;
+    font-family:var(--mono);font-size:11px;display:flex;gap:7px;align-items:center}
+  .activebar .tk.adv{background:var(--ox)}
+  .activebar .tk .rm{cursor:pointer;opacity:.6}
+  .activebar .tk .rm:hover{opacity:1}
+  .activebar .none{font-family:var(--mono);font-size:11px;color:var(--ink-faint)}
+  .activebar .grow{flex:1}
+  .activebar .clr{font-family:var(--mono);font-size:11px;color:var(--ink-faint);background:none;border:none;
+    cursor:pointer;text-decoration:underline;text-underline-offset:3px;flex:none}
+  .activebar .clr:hover{color:var(--ox)}
+  .activebar .clr:disabled{opacity:.3;cursor:default;text-decoration:none}
+
+  /* THREADS */
+  .thread-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+  .thread-bar .tlead{font-size:9.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-soft);margin-right:2px}
+  .thread{cursor:pointer;border:1.5px solid var(--ink);background:var(--paper-hi);border-radius:2px;
+    padding:6px 12px;font-size:12.5px;font-weight:700;transition:.12s;font-family:var(--disp);color:var(--ink)}
+  .thread:hover{background:var(--ink);color:var(--paper-hi);transform:translateY(-1px)}
+  .thread.curator{border-color:var(--ox)}
+  .thread.curator:hover,.thread.curator.active{background:var(--ox);border-color:var(--ox);color:var(--paper-hi)}
+  .thread.user{border-style:dashed;border-color:var(--ink-soft)}
+  .thread.user:hover,.thread.user.active{border-style:solid}
+  .thread.active{background:var(--ink);color:var(--paper-hi)}
+  .thread-more select{font-family:var(--disp);font-size:12px;font-weight:600;color:var(--ink-soft);
+    background:var(--paper-hi);border:1.5px solid var(--line);border-radius:2px;padding:6px 26px 6px 11px;
+    cursor:pointer;outline:none;appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='6'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%236a5d50'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 9px center}
+  .thread-more select:hover{border-color:var(--ox)}
+
+  .opts{display:flex;align-items:center;gap:16px;margin:6px 0 12px}
+  .togg{display:inline-flex;align-items:center;gap:7px;cursor:pointer;font-size:11px;
+    color:var(--ink-soft);font-family:var(--mono)}
+  .togg input{appearance:none;width:30px;height:16px;border-radius:9px;background:var(--line);
+    position:relative;cursor:pointer;transition:.15s;flex:none}
+  .togg input:checked{background:var(--ox)}
+  .togg input::after{content:"";position:absolute;width:12px;height:12px;border-radius:50%;
+    background:var(--paper-hi);top:2px;left:2px;transition:.15s}
+  .togg input:checked::after{left:16px}
+
+  /* BASIC SURFACE — full-width facet columns */
+  .surface{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;align-items:start}
+  .facet{border:1px solid var(--line);background:var(--paper-hi);border-radius:3px;padding:11px 12px 12px}
+  .facet.format{background:var(--paper);border-style:dashed}
+  .facet-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:9px}
+  .facet-head .ttl{font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+  .facet-head .state{font-family:var(--mono);font-size:9.5px;color:var(--ink-faint)}
+  .facet-head .state.on{color:var(--ox);cursor:pointer}
+  .facet-head .state.on:hover{text-decoration:underline;text-underline-offset:2px}
+  .ptag{font-family:var(--mono);font-size:8.5px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ox);border:1px solid var(--ox);border-radius:2px;padding:1px 4px;margin-left:7px;vertical-align:1px}
+  .pnote{font-family:var(--mono);font-size:9.5px;color:var(--ink-faint);line-height:1.4;
+    margin:-3px 0 7px;padding-bottom:6px;border-bottom:1px dotted var(--line-soft)}
+
+  .facet-filter{margin-bottom:7px}
+  .facet-filter input{width:100%;font-family:var(--mono);font-size:11.5px;color:var(--ink);
+    background:var(--paper);border:1.5px solid var(--line);border-radius:2px;padding:6px 9px;outline:none}
+  .facet-filter input:focus{border-color:var(--ox)}
+  .facet-filter input::placeholder{color:var(--ink-faint)}
+
+  .chips{display:flex;flex-direction:column;gap:5px}
+  .chips.scroll{max-height:230px;overflow-y:auto;border:1px solid var(--line-soft);border-radius:2px;padding:6px}
+  .chips.scroll::-webkit-scrollbar{width:7px}
+  .chips.scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+  .chip{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:var(--paper);
+    border-radius:2px;padding:0 10px;height:31px;cursor:pointer;transition:.1s;font-family:var(--disp);
+    width:100%;text-align:left}
+  .facet.format .chip{background:var(--paper-hi)}
+  .chip .lab{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+  .chip .ct{font-family:var(--mono);font-size:10px;color:var(--ink-faint);flex:none}
+  .chip:hover{border-color:var(--ox);transform:translateX(2px)}
+  .chip:hover .ct{color:var(--ox-hi)}
+  .chip.sel{background:var(--ink);border-color:var(--ink);color:var(--paper-hi)}
+  .chip.sel .ct{color:var(--paper-lo)}
+  .chip.sel:hover{background:var(--ox);border-color:var(--ox)}
+  .chip.zero{opacity:.32;pointer-events:none;border-style:dotted}
+  .chip.hidden{display:none}
+  .chip .ic{font-size:12px;flex:none;width:14px;text-align:center}
+  .nolist{font-family:var(--mono);font-size:11px;color:var(--ink-faint);padding:4px 2px}
+
+  /* DETAIL banner + zone */
+  .adv-banner{margin-top:18px;cursor:pointer;background:var(--ink);color:var(--paper-hi);border-radius:3px;
+    padding:11px 15px;display:flex;align-items:center;justify-content:space-between;transition:.12s}
+  .adv-banner:hover{background:var(--ox)}
+  .adv-banner .t{font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase}
+  .adv-banner .d{font-family:var(--mono);font-size:10px;color:var(--paper-lo);letter-spacing:.02em;margin-top:2px}
+  .adv-banner:hover .d{color:#f0d9c9}
+  .adv-banner .chev{font-family:var(--mono);font-size:14px;transition:.2s}
+  .adv-banner.open .chev{transform:rotate(180deg)}
+  .adv-zone{border:1.5px solid var(--ink);border-top:none;border-radius:0 0 3px 3px;padding:14px;display:none}
+  .adv-zone.open{display:block}
+  .adv-zone .surface{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+
+  /* FOOTER */
+  .si-foot{margin-top:18px;border-top:2px solid var(--ink);padding-top:14px;
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .tally{font-family:var(--mono);font-size:13px;font-weight:700}
+  .tally b{color:var(--ox);font-size:16px}
+  .tally .of{color:var(--ink-faint);font-weight:400;font-size:12px}
+  .si-foot .grow{flex:1}
+  .btn{font-family:var(--disp);font-size:12px;font-weight:700;letter-spacing:.03em;border:1.5px solid var(--ink);
+    background:var(--paper-hi);color:var(--ink);padding:9px 18px;border-radius:2px;cursor:pointer;transition:.12s}
+  .btn:hover{background:var(--ink);color:var(--paper-hi);transform:translateY(-1px)}
+  .btn.ghost{border-color:var(--ink-soft);color:var(--ink-soft);font-weight:600}
+  .btn.ghost:hover{background:var(--ink-soft);color:var(--paper-hi)}
+  .btn.prime{background:var(--ox);border-color:var(--ox);color:var(--paper-hi)}
+  .btn.prime:hover{background:var(--ox-hi);border-color:var(--ox-hi)}
+</style>
+
+<div class="si-root">
+<div class="si-wrap">
+  <div class="si-head"><h1>The&nbsp;Stacks · Filter</h1><div class="sub" id="livecount"></div></div>
+
+  <div class="activebar" id="activebar"></div>
+
+  <div class="thread-bar" id="threadbar"></div>
+  <div class="opts"><label class="togg"><input type="checkbox" id="hidezero"> hide empty</label></div>
+
+  <div class="surface" id="board"></div>
+
+  <div class="adv-banner" id="advbanner">
+    <div><div class="t">Detail Filtering</div>
+      <div class="d">album · song · venue · platform · people — for finding one specific thing</div></div>
+    <span class="chev">▾</span>
+  </div>
+  <div class="adv-zone" id="advzone"><div class="surface" id="advsurface"></div></div>
+
+  <div class="si-foot">
+    <div class="tally"><b id="tnum">54</b> artifacts <span class="of" id="tof"></span></div>
+    <div class="grow"></div>
+    <button class="btn ghost" id="save">save thread</button>
+    <button class="btn ghost" id="cancel">cancel</button>
+    <button class="btn prime" id="ok">OK</button>
+  </div>
+</div>
+</div>
+
+<script>
+(function(){
+  const albums=[
+    {t:"Hollow Season",era:"Hollow Season Era"},{t:"Paper Engines",era:"Breakthrough"},
+    {t:"Dust & Daughters",era:"Recent"},{t:"The Tin Roots EP",era:"Early Years"},
+    {t:"Long Way Down",era:"Touring Years"},{t:"Saltwater Hymns",era:"Recent"}
+  ];
+  const songsByAlbum={
+    "Hollow Season":["Hollow Season","Sunday Iron","Marrow","Low Field"],
+    "Paper Engines":["Paper Engines","Sunlit Motor","Ditchlight"],
+    "Dust & Daughters":["Dust & Daughters","Sunrise County","Threadbare"],
+    "The Tin Roots EP":["Tin Roof","First Frost"],
+    "Long Way Down":["Long Way Down","Sundown Mile","Engine No.9"],
+    "Saltwater Hymns":["Saltwater Hymn","Sunken Bell","Brine"]
+  };
+  const topics=["Songwriting","Recording","Touring","Family","Gear","Influences"];
+  const projects=["Solo","The Tin Roots","Side Project","Collaborations"];
+  const eras=["Early Years","Breakthrough","Hollow Season Era","Touring Years","Recent"];
+  // KIND = role (the perusal axis); FORMAT = medium
+  const kinds=["Performance","Interview","Review","Cover","Studio","Candid","Press","Fan Submission"];
+  const formats=[["Photo","◧"],["Video","▷"],["Audio","♪"],["Text","¶"],["Web","◍"]];
+  // detail/hunt facets
+  const sources=["Facebook","Instagram","YouTube","TikTok","Reddit","Official Site","Archive.org","Fan Submission"];
+  const people=["Producer (D. Vane)","The Tin Roots","Sister (M. Root)","Engineer (K. Salt)","Manager (R. Ode)"];
+  const venues=["The Basement","Ryman Aud.","Red Rocks","Bell House","Tin Roof Bar","Mercury Lounge",
+    "9:30 Club","Troubadour","The Fillmore","Bowery Ballroom","First Ave","Cain's Ballroom"];
+
+  let A=[],id=0;
+  albums.forEach(al=>songsByAlbum[al.t].forEach(sg=>{for(let k=0;k<3;k++){
+    const fmt=formats[(id+k)%formats.length];
+    const kind=kinds[(id+k*3)%kinds.length];
+    const proj=al.t==="The Tin Roots EP"?"The Tin Roots":(id%9===0?"Collaborations":(id%13===0?"Side Project":"Solo"));
+    // SOURCE is genuinely partial: only externally-sourced artifacts have a platform.
+    // Studio/Candid/Performance archive material has NO source — it never lived on a platform.
+    let source=null;
+    if(kind==="Fan Submission")source="Fan Submission";
+    else if(fmt[0]==="Web")source=(id%2?"Official Site":"Archive.org");
+    else if(fmt[0]==="Video"&&(kind==="Interview"||kind==="Performance"))source="YouTube";
+    else if(kind==="Press"||kind==="Review")source=["Facebook","Instagram","TikTok","Reddit"][id%4];
+    // else: studio photo, audio demo, candid, etc. — source stays null (off-platform)
+    A.push({id,fmt:fmt[0],icon:fmt[1],kind,project:proj,era:al.era,album:al.t,song:sg,
+      topic:topics[(id*2+k)%topics.length],year:2007+(albums.indexOf(al)*3)+k,
+      source,person:people[id%people.length],
+      venue:kind==="Performance"?venues[id%venues.length]:null});
+    id++;
+  }}));
+
+  const SEL={project:new Set(),era:new Set(),topic:new Set(),kind:new Set(),fmt:new Set(),
+    album:new Set(),song:new Set(),venue:new Set(),source:new Set(),person:new Set()};
+  const FAC=Object.keys(SEL);
+  const ADV=["album","song","venue","source","person"];
+  let hideZero=false,advOpen=false,activeThread=null,snapshot=null;
+  const fq={};
+
+  // TOTAL facets: every artifact has exactly one value (Era, Kind, Format, Project, Topic).
+  // PARTIAL facets: only some artifacts have a value (Source, Venue, People, Album, Song).
+  // For a PARTIAL facet, selecting a value SCOPES its own population — artifacts the facet
+  // does not apply to (value == null) are exempt, never amputated.
+  const PARTIAL=new Set(["source","venue","person","album","song"]);
+
+  function matches(a,exclude){for(const f of FAC){if(f===exclude)continue;
+    const s=SEL[f];if(s.size===0)continue;
+    const v=a[f];
+    if(v==null){ if(PARTIAL.has(f)) continue; else return false; } // partial: exempt; total: reject
+    if(!s.has(v))return false;}return true;}
+  const results=()=>A.filter(a=>matches(a,null));
+  const countFor=(f,v)=>A.filter(a=>a[f]===v&&matches(a,f)).length;
+
+  // how many artifacts are being "held safe" by partial-facet scoping right now:
+  // items kept in the result set that have no value in some partial facet that's currently filtered.
+  function heldSafe(){
+    const activePartials=[...PARTIAL].filter(f=>SEL[f].size);
+    if(!activePartials.length)return 0;
+    return results().filter(a=>activePartials.some(f=>a[f]==null)).length;
+  }
+
+  const THREADS=[
+    {name:"The Hollow Season",kind:"curator",sel:{album:["Hollow Season"]}},
+    {name:"In Their Own Words",kind:"curator",sel:{kind:["Interview"]}},
+    {name:"Covers & Fan Work",kind:"curator",sel:{kind:["Cover","Fan Submission"]}},
+    {name:"On the Road",kind:"curator",sel:{topic:["Touring"],kind:["Performance"]}},
+    {name:"Not TikTok",kind:"curator",sel:{kind:["Press"],source:["Facebook","Instagram","Reddit"]}},
+    {name:"my late nights",kind:"user",sel:{fmt:["Audio","Video"],era:["Recent"]}}
+  ];
+  const SHOWN=3;
+  function sameAsThread(t){for(const f of FAC){const w=new Set(t.sel[f]||[]);
+    if(w.size!==SEL[f].size)return false;for(const v of w)if(!SEL[f].has(v))return false;}return true;}
+  function applyThread(t){FAC.forEach(f=>SEL[f].clear());for(const f in t.sel)t.sel[f].forEach(v=>SEL[f].add(v));
+    if(ADV.some(f=>t.sel[f]))advOpen=true;}
+
+  function renderThreads(){
+    const bar=document.getElementById("threadbar");bar.innerHTML='<span class="tlead">Threads</span>';
+    THREADS.slice(0,SHOWN).forEach((t,i)=>bar.appendChild(threadBtn(t,i)));
+    const rest=THREADS.slice(SHOWN);
+    if(rest.length){const w=document.createElement("span");w.className="thread-more";
+      const s=document.createElement("select");
+      s.innerHTML=`<option value="">more…</option>`+rest.map((t,j)=>`<option value="${j+SHOWN}">${t.name}</option>`).join("");
+      s.value=(activeThread!==null&&activeThread>=SHOWN)?String(activeThread):"";
+      s.onchange=e=>{if(e.target.value==="")return;applyThread(THREADS[+e.target.value]);activeThread=+e.target.value;render();};
+      w.appendChild(s);bar.appendChild(w);}
+  }
+  function threadBtn(t,i){const b=document.createElement("button");
+    const on=sameAsThread(t)&&FAC.some(f=>SEL[f].size);
+    b.className="thread "+t.kind+(on?" active":"");b.textContent=t.name;
+    b.onclick=()=>{if(on){FAC.forEach(f=>SEL[f].clear());activeThread=null;}else{applyThread(t);activeThread=i;}render();};
+    return b;}
+
+  function render(){renderThreads();renderActive();renderBoard();renderAdv();renderTally();}
+
+  const board=document.getElementById("board");
+  function renderBoard(){board.innerHTML="";
+    facet(board,"kind","Kind",kinds);
+    facet(board,"topic","Topic",topics);
+    facet(board,"era","Era",eras);
+    facet(board,"project","Project / Band",projects);
+    facet(board,"fmt","Format",formats.map(f=>f[0]),Object.fromEntries(formats),true);
+  }
+  function shell(parent,key,title,isFormat){const d=document.createElement("div");
+    d.className="facet"+(isFormat?" format":"")+(PARTIAL.has(key)?" partial":"");const n=SEL[key].size;
+    const tag=PARTIAL.has(key)?`<span class="ptag">scopes</span>`:``;
+    d.innerHTML=`<div class="facet-head"><span class="ttl">${title}${tag}</span>
+      <span class="state ${n?'on':''}">${n?n+" · clear":"all"}</span></div>`;
+    if(n)d.querySelector(".state").onclick=()=>{SEL[key].clear();activeThread=null;render();};
+    if(PARTIAL.has(key)&&n){
+      const note=document.createElement("div");note.className="pnote";
+      note.textContent="narrows items that have a "+title.toLowerCase().split(" / ")[0]+"; leaves the rest in view";
+      d.appendChild(note);
+    }
+    parent.appendChild(d);return d;}
+  function facet(parent,key,title,values,icons,isFormat){
+    const d=shell(parent,key,title,isFormat);const LONG=8;let vals=values;
+    if(values.length>LONG){
+      const ff=document.createElement("div");ff.className="facet-filter";
+      const inp=document.createElement("input");inp.placeholder=`filter…`;inp.value=fq[key]||"";inp.id=`ff_${key}`;
+      inp.oninput=e=>{fq[key]=e.target.value;render();
+        const ni=document.getElementById(`ff_${key}`);if(ni){ni.focus();ni.setSelectionRange(ni.value.length,ni.value.length);}};
+      ff.appendChild(inp);d.appendChild(ff);
+      vals=values.filter(v=>v.toLowerCase().includes((fq[key]||"").toLowerCase()));
+    }
+    const g=document.createElement("div");g.className="chips"+(values.length>LONG?" scroll":"");
+    if(!vals.length)g.innerHTML='<div class="nolist">no matches</div>';
+    vals.forEach(v=>g.appendChild(chip(key,v,icons?{icon:icons[v]}:{})));
+    d.appendChild(g);
+  }
+  function chip(key,val,opts={}){
+    const ct=countFor(key,val),sel=SEL[key].has(val),zero=ct===0&&!sel;
+    const b=document.createElement("button");
+    b.className="chip"+(sel?" sel":"")+(zero?" zero":"")+(zero&&hideZero?" hidden":"");
+    const ic=opts.icon?`<span class="ic">${opts.icon}</span>`:"";
+    b.innerHTML=`${ic}<span class="lab">${val}</span><span class="ct">${ct}</span>`;
+    b.onclick=()=>{const s=SEL[key];s.has(val)?s.delete(val):s.add(val);activeThread=null;render();};
+    return b;
+  }
+
+  const advzone=document.getElementById("advzone"),advbanner=document.getElementById("advbanner");
+  const advsurface=document.getElementById("advsurface");
+  function renderAdv(){advsurface.innerHTML="";
+    advzone.classList.toggle("open",advOpen);advbanner.classList.toggle("open",advOpen);
+    facet(advsurface,"album","Album",albums.map(a=>a.t));
+    facet(advsurface,"song","Song",[...new Set([].concat(...Object.values(songsByAlbum)))]);
+    facet(advsurface,"venue","Venue",venues);
+    facet(advsurface,"source","Source / Platform",sources);
+    facet(advsurface,"person","People",people);
+  }
+  advbanner.onclick=()=>{advOpen=!advOpen;render();};
+
+  function renderActive(){const el=document.getElementById("activebar");const tk=[];
+    FAC.forEach(f=>SEL[f].forEach(v=>tk.push([f,v])));
+    let html='<span class="lead">In view</span>';
+    el.innerHTML=html;
+    if(!tk.length){el.innerHTML+='<span class="none">everything — nothing filtered yet</span>';}
+    else tk.forEach(([f,v])=>{const t=document.createElement("span");
+      t.className="tk"+(ADV.includes(f)?" adv":"");t.innerHTML=`${v}<span class="rm">✕</span>`;
+      t.querySelector(".rm").onclick=()=>{SEL[f].delete(v);activeThread=null;render();};el.appendChild(t);});
+    const grow=document.createElement("span");grow.className="grow";el.appendChild(grow);
+    const clr=document.createElement("button");clr.className="clr";clr.textContent="↺ clear all";
+    clr.disabled=!tk.length;clr.onclick=()=>{FAC.forEach(f=>SEL[f].clear());activeThread=null;render();};
+    el.appendChild(clr);
+  }
+  function renderTally(){const n=results().length;
+    document.getElementById("tnum").textContent=n;
+    const safe=heldSafe();
+    document.getElementById("tof").textContent=`/ ${A.length}`+(safe?`  ·  +${safe} off-facet kept`:``);
+    const any=FAC.some(f=>SEL[f].size);
+    document.getElementById("livecount").textContent=any?`${n} of ${A.length} in view`:`all ${A.length} artifacts`;}
+
+  snapshot=(()=>{const o={};FAC.forEach(f=>o[f]=[...SEL[f]]);return o;})();
+  document.getElementById("hidezero").onchange=e=>{hideZero=e.target.checked;render();};
+  document.getElementById("save").onclick=()=>{if(!FAC.some(f=>SEL[f].size)){alert("Select filters first, then save them as a Thread.");return;}
+    const nm=prompt("Name this Thread:");if(!nm)return;const sel={};FAC.forEach(f=>{if(SEL[f].size)sel[f]=[...SEL[f]];});
+    THREADS.push({name:nm,kind:"user",sel});activeThread=THREADS.length-1;render();};
+  document.getElementById("cancel").onclick=()=>{FAC.forEach(f=>{SEL[f].clear();snapshot[f].forEach(v=>SEL[f].add(v));});
+    activeThread=null;render();alert("(Prototype) Cancel — reverted to the set as it was when this opened.");};
+  document.getElementById("ok").onclick=()=>alert(`(Prototype) OK — committing ${results().length} artifacts to the deck and closing.`);
+
+  render();
+})();
+</script>
