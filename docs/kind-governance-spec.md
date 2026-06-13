@@ -6,7 +6,7 @@
 document has been applied. No DDL has run, no row has been written, no tag has
 been changed, no existing file has been edited.
 
-**Repo / commit:** weird-baby-museum @ `955fc99`.
+**Repo / commit:** weird-baby-museum @ `0a061d9` (label-resolution edits pending commit).
 
 **What this is:** the specification for promoting **Kind** — the visitor
 *perusal axis* — from the unenforced `content_kind` tag soup into a **governed
@@ -41,10 +41,10 @@ title-case.
 | Slug | Display | Visitor-facing definition — what you expect when you tap this |
 |---|---|---|
 | `performance` | Performance | Them playing live — a show, a set, an on-stage clip. *Tap this to watch them play.* |
-| `release` | Release | A finished, published work — a track, single, album, or official music video, as it was put out into the world. *Tap this for the music itself.* |
+| `release` | Music | A finished, published work — a track, single, album, or official music video, as it was put out into the world. *Tap this for the music itself.* |
 | `announcement` | Announcement | News the band put out — a show date, a drop, a milestone, a statement. *Tap this for "here's what's happening."* |
-| `studio` | Studio | The work behind the music — rehearsal, recording, writing, behind-the-scenes craft. *Tap this to see how it gets made.* |
-| `candid` | Candid | Off-stage, unstaged moments — hanging out, travel, life around the band. *Tap this for the human, unposed side.* |
+| `studio` | In the Studio | The work behind the music — rehearsal, recording, writing, behind-the-scenes craft. *Tap this to see how it gets made.* |
+| `candid` | Off Stage | Off-stage, unstaged moments — hanging out, travel, life around the band. *Tap this for the human, unposed side.* |
 
 ### Reserved for inflow (2) — defined, not yet populated
 
@@ -218,6 +218,28 @@ the following — **none edited here:**
   marked superseded** with respect to the Kind/`content_kind` routing — **as a
   separate later commit, not in this write.**
 
+### 5a. Multi-Kind — logged future migration (not a config flag)
+
+**Single-select is the chosen model: one Kind per artifact** (ratified, §0/§6 Q5).
+Multi-Kind is recorded here as a **known possible future migration, not a config
+flag** — there is no toggle that turns it on. Switching models is a schema-level
+change, and the cost is **asymmetric**:
+
+- **single → multi is expensive.** It requires a schema migration: a separate
+  `kind_tags` table (or a JSON array column) to hold multiple values per artifact;
+  the single-row `CHECK` (§2) rewritten as set-membership machinery (each member
+  validated against the closed vocabulary); ingest emission changed to write a set
+  rather than one scalar (§3); **every Kind-reading filter query updated** from
+  scalar equality to set membership; and the existing data migrated into the new
+  shape.
+- **multi → single is cheap.** A curation step picks the single dominant Kind per
+  artifact and the extra column/table is dropped.
+
+**Trigger to revisit:** if the ~5 dual-role artifacts (e.g. a `live-music-video`
+that is genuinely both **Performance** and **Music**) prove in real browsing that
+they need to surface under both chips. Until that evidence appears, **curation
+assigns the single dominant Kind** and the model stays single-select.
+
 ---
 
 ## 6. Open questions for Mike
@@ -226,12 +248,21 @@ the following — **none edited here:**
 
 1. Are `Performance / Release / Announcement / Studio / Candid` the exact strings
    a visitor sees, or display aliases over the slugs?
+   **RESOLVED:** the display names in §1 (Performance, Music, Announcement, In the
+   Studio, Off Stage) are the exact visitor-facing strings; the lowercase slugs
+   (`performance`, `release`, `announcement`, `studio`, `candid`) remain the
+   storage values. Display names are aliases over the unchanged slugs.
 2. **"Studio"** — does it read as *recordings* or as *photos* to a visitor?
    Candidate relabels: "In the Studio" / "Behind the Scenes."
+   **RESOLVED:** "In the Studio" (slug `studio` unchanged).
 3. **"Candid"** — keep, or warmer ("Off Stage" / "Life")?
+   **RESOLVED:** "Off Stage" (slug `candid` unchanged).
 4. **"Release"** — keep, or "Music" / "Releases" for a non-industry visitor?
+   **RESOLVED:** "Music" (slug `release` unchanged).
 5. Confirm single-select reads correctly to visitors: one Kind per artifact, no
    multi-Kind chips.
+   **RESOLVED: single-select confirmed** — one Kind per artifact, no multi-Kind
+   chips. Multi-Kind logged as a future migration in §5a, not a config flag.
 
 ### Ingest-build (enforcement timing, reserved-Kind activation)
 
