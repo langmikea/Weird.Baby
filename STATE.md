@@ -58,6 +58,7 @@ Weird.Baby Museum. A curatorial platform. Currently exhibiting Hunter Root.
 - `/hr` — Hunter Root exhibit
 - `/hr/home`, `/hr/media`, `/hr/archive`, `/hr/fan-wall` — HR sub-routes
 - `/shop` — gift shop
+- `/p/:id` — preset-share landing (resolves a shared preset, parks the snapshot, lands the visitor at the front door; unknown/broken ids degrade to a plain Lobby visit)
 
 Planned routes when this table is next touched: `/drawing`, and the Stacks filter surface.
 
