@@ -127,6 +127,10 @@ System. Needs scoping session.
 
 ---
 
+## Deferred notes (extracted from museum-orientation-e1c2a20 before its deletion, 2026-06-13)
+
+- DISCOVERY-DATAMODEL-RECONCILE: before any discovery data-model work, land a note in `docs/deep-dive-review/SPEC_DRAFT_v5_2.md` §7 ("What v5.2 does NOT do"), cross-ref §5: reconcile `discovery-filter-ux-spec.md` §9 — `facet_type: total|partial` on every facet; split Kind from Format into two required tags. (Feeds the filter-system build. v5.2 is the active discovery spec head; facet schema is spread across the v-spec line + CANONICAL_VOCABULARY.md.)
+- ROUTE-TABLE-PLANNED: add a STATE.md "Planned routes" line for `/drawing` + the Stacks surface; reconcile STATE.md route table to `src/App.jsx` <Routes> (~lines 54–64; live: /, /admin, /hr, /hr/home, /hr/media, /hr/archive, /hr/fan-wall, /shop, /p/:id). Prereq = OPS-CHARTER §8 first-run checklist item 2 (confirm the one canonical STATE.md). Pairs with the Route-status table upgrade already in Ops/Infrastructure below.
 ## MediaVault Tag Vocabulary — Targeted Cleanup
 
 Per docs/MV_TAG_CLEANUP_DESIGN.md: platform category, unused-4 disposition,
