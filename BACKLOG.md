@@ -145,6 +145,13 @@ resolve the RWTH song-tag stripping (Tier 3) — a cleanup pass is a suspect.
 - Design review 2026-06-10 — stable-base verdict, fragility inventory
 
 ---
+## INTAKE 2026-06-13 (Mike)
+### New items
+- PUV-HEIGHT-ADJUSTABLE: adjustable height of the PUV->Video box, scaling both (PUV and video) proportionally along the way. (New; distinct from the Tier-1 video-panel stretch/img-fit fix.)
+- DECK-SCROLL-OCCLUSION (live defect): cannot scroll to the bottom of the deck — the fixed player bar hides it. Bottom deck content is unreachable. (Related to Tier-5 top-pin + DECKBUG-SEAM but distinct: functional occlusion, not just seam cosmetics.)
+### Refinements to open threads
+- WB-COLOR / COLOR-VERDICT resolution (Mike's "specific request" promised 2026-06-12): Mike prefers the colors AND fonts of `docs/filter-instrument-reference.html` (the v7_1 filter instrument). Use it as the color+font design source for the WB-COLOR live mock. (Source file also at C:\Users\macun\Downloads\filter-instrument-v7_1.html.)
+- TITLESEL / SELECTION-MODEL clarification: clicking a SONG should PLAY the song; clicking the extra DESCRIPTOR text after the song should open a DROPDOWN. Descriptors that carry dropdown data need a FLAG (data-model addition: a per-descriptor "has-dropdown-data" flag drives whether the descriptor is interactive).
 ## INTAKE 2026-06-11 PM (Mike) - pre-launch sweep
 - CAROUSEL-DENSITY: use full carousel width, more albums visible at once.
 - LOGO-TOPLEFT: tiny Weird.Baby logo mark in nav top-left (needs asset plumbing).
