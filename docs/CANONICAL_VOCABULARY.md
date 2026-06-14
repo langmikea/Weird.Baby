@@ -1,6 +1,12 @@
 # Canonical Museum Vocabulary
 
-**Status:** Authoritative. Read this before any work that touches museum tag vocabulary, pill columns, or artifact categorization.
+> **SUPERSEDED (2026-06-14).** This document describes the **retired tier model**
+> and is **no longer authoritative**. The live model for artifact categorization
+> is the **Kind governed field** — see `docs/kind-governance-spec.md` and
+> `docs/kind-NEXT-SESSION.md`. This file is retained as historical record only.
+> Do NOT orient to the three-tier model below for new work.
+
+**Status:** RETIRED — superseded by the Kind spec. Retained for history.
 
 **Provenance:** Locked across multiple sessions of iterative UX prototyping in April–May 2026, culminating in the v28_3 controls-dock prototype and confirmed in the May 11 2026 canonical recovery session.
 
