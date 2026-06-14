@@ -8,11 +8,6 @@
   "artifacts": [
     {
       "id": "MV-HR-20260405-004",
-      "kind": "Announcement",
-      "topic": "Touring",
-      "era": "Recent",
-      "format": "Video",
-      "source": "facebook",
       "source_url": "https://www.facebook.com/watch?ref=saved&v=738622082558442",
       "source_platform": "facebook",
       "media_type": "video",
@@ -23,6 +18,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "announcement"
+        ],
+        "topic": [
+          "touring"
+        ],
+        "era": [
+          "recent"
+        ],
+        "format": [
+          "video"
+        ],
         "attributes": [
           "new_music",
           "notable",
@@ -48,11 +55,6 @@
     },
     {
       "id": "MV-HR-20260405-005",
-      "kind": "Performance",
-      "topic": "Songwriting",
-      "era": "On the Road",
-      "format": "Video",
-      "source": "facebook",
       "source_url": "https://www.facebook.com/watch?ref=saved&v=1768231697028127",
       "source_platform": "facebook",
       "media_type": "video",
@@ -63,6 +65,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "performance"
+        ],
+        "topic": [
+          "songwriting"
+        ],
+        "era": [
+          "on_the_road"
+        ],
+        "format": [
+          "video"
+        ],
         "attributes": [
           "early_version",
           "new_music",
@@ -82,11 +96,6 @@
     },
     {
       "id": "MV-HR-20260405-006",
-      "kind": "Announcement",
-      "topic": "Recording",
-      "era": "On the Road",
-      "format": "Video",
-      "source": "facebook",
       "source_url": "https://www.facebook.com/watch?ref=saved&v=755734052557156",
       "source_platform": "facebook",
       "media_type": "video",
@@ -97,6 +106,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "announcement"
+        ],
+        "topic": [
+          "recording"
+        ],
+        "era": [
+          "on_the_road"
+        ],
+        "format": [
+          "video"
+        ],
         "attributes": [
           "fan",
           "milestone",
@@ -116,11 +137,6 @@
     },
     {
       "id": "MV-HR-20260405-007",
-      "kind": "Studio",
-      "topic": "Recording",
-      "era": "On the Road",
-      "format": "Video",
-      "source": "facebook",
       "source_url": "https://www.facebook.com/watch?ref=saved&v=3533165300277563",
       "source_platform": "facebook",
       "media_type": "video",
@@ -131,6 +147,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "studio"
+        ],
+        "topic": [
+          "recording"
+        ],
+        "era": [
+          "on_the_road"
+        ],
+        "format": [
+          "video"
+        ],
         "attributes": [
           "gear",
           "new_music",
@@ -153,11 +181,6 @@
     },
     {
       "id": "MV-HR-20260405-008",
-      "kind": "Performance",
-      "topic": "Songwriting",
-      "era": "Breakthrough",
-      "format": "Video",
-      "source": "facebook",
       "source_url": "https://www.facebook.com/watch?ref=saved&v=368621548505423",
       "source_platform": "facebook",
       "media_type": "video",
@@ -168,6 +191,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "performance"
+        ],
+        "topic": [
+          "songwriting"
+        ],
+        "era": [
+          "breakthrough"
+        ],
+        "format": [
+          "video"
+        ],
         "attributes": [
           "new_music",
           "notable",
@@ -190,11 +225,6 @@
     },
     {
       "id": "MV-HR-20260405-009",
-      "kind": "Announcement",
-      "topic": "Touring",
-      "era": "Recent",
-      "format": "Text",
-      "source": "facebook",
       "source_url": "https://www.facebook.com/hunterrootmusic/posts/pfbid0eUv1dz1hrNzCbG2oW3woyYt1uQzqj1qfiVR93N8XVYbU2C7kaFN8eGF1UtBMjaTml",
       "source_platform": "facebook",
       "media_type": "link",
@@ -205,6 +235,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "announcement"
+        ],
+        "topic": [
+          "touring"
+        ],
+        "era": [
+          "recent"
+        ],
+        "format": [
+          "text"
+        ],
         "attributes": [
           "fan",
           "lyme_disease",
@@ -224,11 +266,6 @@
     },
     {
       "id": "MV-HR-20260405-010",
-      "kind": "Performance",
-      "topic": "Touring",
-      "era": "On the Road",
-      "format": "Web",
-      "source": "other",
       "source_url": "https://theticketing.co/e/hunterrootlive",
       "source_platform": "other",
       "media_type": "link",
@@ -239,6 +276,21 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "performance"
+        ],
+        "topic": [
+          "touring"
+        ],
+        "era": [
+          "on_the_road"
+        ],
+        "format": [
+          "web"
+        ],
+        "source": [
+          "other"
+        ],
         "album": [
           "medusas_disco"
         ],
@@ -267,11 +319,6 @@
     },
     {
       "id": "MV-HR-20260405-011",
-      "kind": "Cover",
-      "topic": "Songwriting",
-      "era": "On the Road",
-      "format": "Video",
-      "source": "facebook",
       "source_url": "https://www.facebook.com/watch?ref=saved&v=810914703992548",
       "source_platform": "facebook",
       "media_type": "video",
@@ -282,6 +329,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "cover"
+        ],
+        "topic": [
+          "songwriting"
+        ],
+        "era": [
+          "on_the_road"
+        ],
+        "format": [
+          "video"
+        ],
         "attributes": [
           "fan_cover_song",
           "notable",
@@ -304,11 +363,6 @@
     },
     {
       "id": "MV-HR-20260405-012",
-      "kind": "Press",
-      "topic": "Songwriting",
-      "era": "On the Road",
-      "format": "Text",
-      "source": "facebook",
       "source_url": "https://www.facebook.com/watch?ref=saved&v=934622031119101",
       "source_platform": "facebook",
       "media_type": "link",
@@ -319,6 +373,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "press"
+        ],
+        "topic": [
+          "songwriting"
+        ],
+        "era": [
+          "on_the_road"
+        ],
+        "format": [
+          "text"
+        ],
         "attributes": [
           "notable",
           "personal"
@@ -333,11 +399,6 @@
     },
     {
       "id": "MV-HR-20260405-013",
-      "kind": "Candid",
-      "topic": "Family",
-      "era": "Breakthrough",
-      "format": "Text",
-      "source": "facebook",
       "source_url": "https://www.facebook.com/hunter.root.7/posts/pfbid02Hwepahwce8rAjPpFoqxhyBcedDi55sAhvKNcpumWMkXz4sJHzWrnrvwuqKDxvEujl",
       "source_platform": "facebook",
       "media_type": "link",
@@ -348,6 +409,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "candid"
+        ],
+        "topic": [
+          "family"
+        ],
+        "era": [
+          "breakthrough"
+        ],
+        "format": [
+          "text"
+        ],
         "attributes": [
           "family",
           "indieartist",
@@ -369,11 +442,6 @@
     },
     {
       "id": "MV-HR-20260405-014",
-      "kind": "Announcement",
-      "topic": "Influences",
-      "era": "On the Road",
-      "format": "Video",
-      "source": "facebook",
       "source_url": "https://www.facebook.com/watch?ref=saved&v=443712638554964",
       "source_platform": "facebook",
       "media_type": "video",
@@ -384,6 +452,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "announcement"
+        ],
+        "topic": [
+          "influences"
+        ],
+        "era": [
+          "on_the_road"
+        ],
+        "format": [
+          "video"
+        ],
         "attributes": [
           "account_hacked",
           "fan",
@@ -407,11 +487,6 @@
     },
     {
       "id": "MV-HR-20260405-015",
-      "kind": "Performance",
-      "topic": "Songwriting",
-      "era": "On the Road",
-      "format": "Video",
-      "source": "facebook",
       "source_url": "https://www.facebook.com/watch?ref=saved&v=755734052557156",
       "source_platform": "facebook",
       "media_type": "video",
@@ -422,6 +497,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "performance"
+        ],
+        "topic": [
+          "songwriting"
+        ],
+        "era": [
+          "on_the_road"
+        ],
+        "format": [
+          "video"
+        ],
         "attributes": [
           "account_hacked",
           "early_stages",
@@ -440,11 +527,6 @@
     },
     {
       "id": "MV-HR-20260405-034",
-      "kind": "Announcement",
-      "topic": "Gear",
-      "era": "Breakthrough",
-      "format": "Text",
-      "source": "facebook",
       "source_url": "https://www.facebook.com/hunter.root.7/posts/pfbid0TNo8U4RZNAK15kTAZQKYts4WZgWThRBGSYJP8NqtkcTkgScSizVTNBXinSuiZ3UAl",
       "source_platform": "facebook",
       "media_type": "link",
@@ -455,6 +537,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "announcement"
+        ],
+        "topic": [
+          "gear"
+        ],
+        "era": [
+          "breakthrough"
+        ],
+        "format": [
+          "text"
+        ],
         "attributes": [
           "milestone",
           "new_music",
@@ -475,11 +569,6 @@
     },
     {
       "id": "MV-HR-20260405-035",
-      "kind": "Candid",
-      "topic": "Touring",
-      "era": "Finding the Sound",
-      "format": "Photo",
-      "source": "facebook",
       "source_url": "https://www.facebook.com/hunter.root.7/posts/pfbid035M9N6bysWKtheVAjsAikGC9bXPUkmgNrdWnU2razvXr6GrDAf3nu6eHTkJBG3DFcl",
       "source_platform": "facebook",
       "media_type": "photo",
@@ -490,6 +579,18 @@
       "primary_url": "https://assets.weird.baby/assets/cd/cd43e67c278e821451f730f71f52ed0e179e1a961a29a7b6e25a3128842f1140.jpg",
       "thumbnail_url": "https://assets.weird.baby/thumbnails/59/59fca3d83c9e194b1bd1afeb782e368e05fb7ddbc364909d06f62f0091bd2819.jpg",
       "tags": {
+        "content_kind": [
+          "candid"
+        ],
+        "topic": [
+          "touring"
+        ],
+        "era": [
+          "finding_the_sound"
+        ],
+        "format": [
+          "photo"
+        ],
         "attributes": [
           "personal",
           "unique"
@@ -510,11 +611,6 @@
     },
     {
       "id": "MV-HR-20260405-037",
-      "kind": "Announcement",
-      "topic": "Touring",
-      "era": "On the Road",
-      "format": "Photo",
-      "source": "instagram",
       "source_url": "https://www.instagram.com/p/DAHCaeoPtYI/",
       "source_platform": "instagram",
       "media_type": "photo",
@@ -525,6 +621,21 @@
       "primary_url": "https://assets.weird.baby/assets/d8/d8b100ab50ecde19eb3d50369f998f4f48b11bff214e21e801e3adce78e81df8.png",
       "thumbnail_url": "https://assets.weird.baby/thumbnails/b8/b81174b1746478a5873eaf1e80c1c846565713f6b68d1801fec49bdbb37b055a.jpg",
       "tags": {
+        "content_kind": [
+          "announcement"
+        ],
+        "topic": [
+          "touring"
+        ],
+        "era": [
+          "on_the_road"
+        ],
+        "format": [
+          "photo"
+        ],
+        "source": [
+          "instagram"
+        ],
         "attributes": [
           "new_music",
           "notable",
@@ -548,11 +659,6 @@
     },
     {
       "id": "MV-HR-20260405-038",
-      "kind": "Performance",
-      "topic": "Influences",
-      "era": "Recent",
-      "format": "Video",
-      "source": "facebook",
       "source_url": "https://www.facebook.com/reel/1137424761619325",
       "source_platform": "facebook",
       "media_type": "video",
@@ -563,6 +669,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "performance"
+        ],
+        "topic": [
+          "influences"
+        ],
+        "era": [
+          "recent"
+        ],
+        "format": [
+          "video"
+        ],
         "attributes": [
           "merch",
           "milestone",
@@ -579,11 +697,6 @@
     },
     {
       "id": "MV-HR-20260416-001",
-      "kind": "Music",
-      "topic": "Influences",
-      "era": "Early Days",
-      "format": "Web",
-      "source": "reverbnation",
       "source_url": "https://www.reverbnation.com/hunterroot2",
       "source_platform": "reverbnation",
       "media_type": "link",
@@ -594,6 +707,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "music"
+        ],
+        "topic": [
+          "influences"
+        ],
+        "era": [
+          "early_days"
+        ],
+        "format": [
+          "web"
+        ],
         "attributes": [
           "artist_page"
         ],
@@ -613,11 +738,6 @@
     },
     {
       "id": "MV-HR-20260416-003",
-      "kind": "Music",
-      "topic": "Influences",
-      "era": "Finding the Sound",
-      "format": "Web",
-      "source": "reverbnation",
       "source_url": "https://www.reverbnation.com/medusasdisco",
       "source_platform": "reverbnation",
       "media_type": "link",
@@ -628,6 +748,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "music"
+        ],
+        "topic": [
+          "influences"
+        ],
+        "era": [
+          "finding_the_sound"
+        ],
+        "format": [
+          "web"
+        ],
         "album": [
           "medusas_disco"
         ],
@@ -647,11 +779,6 @@
     },
     {
       "id": "MV-HR-20260416-005",
-      "kind": "Music",
-      "topic": "Songwriting",
-      "era": "Finding the Sound",
-      "format": "Web",
-      "source": "reverbnation",
       "source_url": "https://www.reverbnation.com/medusasdisco/song/19361978-park-bench-pigeons",
       "source_platform": "reverbnation",
       "media_type": "link",
@@ -662,6 +789,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "music"
+        ],
+        "topic": [
+          "songwriting"
+        ],
+        "era": [
+          "finding_the_sound"
+        ],
+        "format": [
+          "web"
+        ],
         "album": [
           "medusas_disco"
         ],
@@ -681,11 +820,6 @@
     },
     {
       "id": "MV-HR-20260416-009",
-      "kind": "Music",
-      "topic": "Influences",
-      "era": "Early Days",
-      "format": "Web",
-      "source": "reverbnation",
       "source_url": "https://www.reverbnation.com/runwiththehunt",
       "source_platform": "reverbnation",
       "media_type": "link",
@@ -696,6 +830,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "music"
+        ],
+        "topic": [
+          "influences"
+        ],
+        "era": [
+          "early_days"
+        ],
+        "format": [
+          "web"
+        ],
         "album": [
           "run_with_the_hunt"
         ],
@@ -715,11 +861,6 @@
     },
     {
       "id": "MV-HR-20260416-011",
-      "kind": "Music",
-      "topic": "Songwriting",
-      "era": "Early Days",
-      "format": "Web",
-      "source": "reverbnation",
       "source_url": "https://www.reverbnation.com/runwiththehunt/song/12495875-park-bench-pigeons",
       "source_platform": "reverbnation",
       "media_type": "link",
@@ -730,6 +871,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "music"
+        ],
+        "topic": [
+          "songwriting"
+        ],
+        "era": [
+          "early_days"
+        ],
+        "format": [
+          "web"
+        ],
         "album": [
           "run_with_the_hunt"
         ],
@@ -766,11 +919,6 @@
     },
     {
       "id": "MV-HR-20260405-003",
-      "kind": "Candid",
-      "topic": "Family",
-      "era": "Recent",
-      "format": "Video",
-      "source": "facebook",
       "source_url": "https://www.facebook.com/watch?ref=saved&v=1887755838800880",
       "source_platform": "facebook",
       "media_type": "video",
@@ -781,6 +929,18 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
+        "content_kind": [
+          "candid"
+        ],
+        "topic": [
+          "family"
+        ],
+        "era": [
+          "recent"
+        ],
+        "format": [
+          "video"
+        ],
         "attributes": [
           "artist_message",
           "lyme_disease",
