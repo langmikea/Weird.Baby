@@ -1,5 +1,9 @@
 # Kind — Next-Session Orientation
 
+> **READ `docs/canonical/OPERATIONS.md` FIRST** — it is the cross-session
+> operating manual (process authority: roles, the carry model, the three
+> surfaces). Then `docs/canonical/START_HERE.md`. Only then this note.
+
 Orientation for the next Claude picking up Kind work. Read this first, then
 `docs/kind-governance-spec.md`.
 
