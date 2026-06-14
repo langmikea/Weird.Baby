@@ -1,6 +1,6 @@
 # Discovery Metadata Spec — The Model-A Data Model
 
-**Status:** v0.2 — data model for the Discovery filter instrument. All v0.1 `[PROPOSAL — Mike to confirm]` items resolved to decisions (this revision). Pairs with `discovery-filter-ux-spec.md` (the UX side); this is the metadata side.
+**Status:** v0.2.1 — data model for the Discovery filter instrument. All v0.1 `[PROPOSAL — Mike to confirm]` items resolved to decisions; v0.2.1 adds the `release`/"Music" Kind value for catalog/landing pages and clarifies that Era is leaves-only (containers exempt). Pairs with `discovery-filter-ux-spec.md` (the UX side); this is the metadata side.
 **Owner:** Mike (curation/confirmation) · Claude (drafting/build support)
 **Companion doc:** `discovery-filter-ux-spec.md` — values and rules here are pulled from its §2 (facet model), §3 (total/partial engine), and §9 (metadata hand-off).
 **Decision of record:** Mike chose **Model A** (Kind / Topic / Era / Project / Format facets + total/partial scoping). This document is the authoritative expression of Model A.
@@ -52,11 +52,13 @@ Notes on the table:
 
 ## 2. Kind values (the hero facet)
 
-**Written in UX spec §2** (the *role* of the artifact):
+**Written in UX spec §2** (the *role* of the artifact), plus `Music` added in v0.2.1 (see below):
 
-`Performance` · `Interview` · `Review` · `Cover` · `Studio` · `Candid` · `Press` · `Fan Submission`
+`Performance` · `Interview` · `Review` · `Cover` · `Studio` · `Candid` · `Press` · `Fan Submission` · `Music`
 
 `facet_type: total`, **`closed`** — every artifact gets exactly one Kind. Kind is the "what else is here" axis, the primary reason a visitor wanders.
+
+**`Music` (slug `release`) — added v0.2.1, for catalog/landing pages.** The eight UX-spec Kind values describe *posts and events* (a performance, an interview, a candid moment). They do not fit an artifact whose nature is "a release's home on a platform" — an archived ReverbNation artist/song page, and, prospectively, a Spotify or Bandcamp release. These are catalog entries, not events. **`Music` is the Kind for catalog/landing pages across all platforms** (ReverbNation today; Spotify/Bandcamp when added). The slug `release` and display label "Music" deliberately mirror the shipped MediaVault Kind field (`kind-governance-spec.md`, where `release` displays as "Music"), so the Discovery and storage vocabularies share this value rather than diverging on it. Decided this session (Mike) when the five ReverbNation pages had no honest fit among the eight original values.
 
 **Resolved — Kind is closed.** Kind is the hero discovery axis and must stay short and scannable (§2 "short, scannable lists"); an open Kind list would let the spine of the instrument drift. Adding a new Kind is a deliberate curator decision (a spec edit), not a side-effect of new data. If a future artifact genuinely fits no existing Kind, that is a signal to consciously extend the closed list, not to auto-grow it.
 
@@ -128,9 +130,9 @@ Structure **locked** (Mike, this session): five contiguous buckets spanning 2016
 
 **Defaults applied:** these five labels with these ranges; each artifact's Era seeded from its `post_date` year as a *starting hint* only — Era is curation (§7), so a 2025-dated retrospective about the early days may belong in *Early Days* by intent. The `rwth` slug maps into **Early Days**. The two *author-interpretive* labels ("Breakthrough," "On the Road") are carried as v0.2 default text and remain repaintable; their structure (range, anchor) is locked.
 
-### Resolved — Era is hard-required
+### Resolved — Era is hard-required (on leaves)
 
-Era is *total* (one value per artifact) per §3, but most top-level artifacts currently carry no era tag. **Era is hard-required for the retag (fill all 33):** a total facet with gaps breaks the "every artifact has exactly one value" contract and leaves chips that silently drop artifacts. All 33 receive an Era during the retag.
+Era is *total* (one value per artifact) per §3, but most leaf artifacts currently carry no era tag. **Era is hard-required for the retag on every leaf:** a total facet with gaps breaks the "every artifact has exactly one value" contract and leaves chips that silently drop artifacts. **Clarified v0.2.1 — Era is leaves-only.** Container cards are exempt from Era exactly as they are exempt from Kind+Format (§4): containers are structural groupings, not era-filterable artifacts, and have no `post_date` to seed from. So "all artifacts get an Era" means **all leaves** — in the first retag scope, the 23 leaves of `hunter_root.json` (22 after dropping one malformed duplicate, see §7). The 10 album/gallery containers carry no Era. This matches the shipped Kind precedent (containers exempt at every layer).
 
 ---
 
@@ -216,3 +218,8 @@ All eleven v0.1 `[PROPOSAL — Mike to confirm]` items, resolved this session:
 9. **Generic `link` → Web vs Text** → Web default, Text override when the post is the substance.
 10. **Container cards Kind/Format** → exempt; children tag normally; no synthetic values.
 11. **Era buckets + ranges** → five contiguous buckets 2016–2025, structure locked; two labels (Breakthrough, On the Road) provisional display text, repaintable.
+
+**v0.2.1 additions (this session):**
+
+12. **`Music` (slug `release`) added to the Kind list** → catalog/landing pages (ReverbNation now, Spotify/Bandcamp later) take Kind = Music; mirrors the shipped MediaVault `release`→"Music" field. Kind list grows from 8 to 9 values, still closed.
+13. **Era is leaves-only** → containers exempt from Era (as they are from Kind+Format); "all artifacts" = all leaves. First-scope retag: 22 leaves (one malformed duplicate, `MV-20260419-002`, dropped as a data-hygiene item).
