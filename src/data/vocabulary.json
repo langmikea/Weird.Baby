@@ -1,8 +1,8 @@
 {
   "metadata": {
     "source": "http://127.0.0.1:51822/db",
-    "exported_at": "2026-06-12T17:09:28.173Z",
-    "row_count": 18,
+    "exported_at": "2026-06-15T14:55:18.300Z",
+    "row_count": 19,
     "schema": "vocabulary v1 — namespace, display_name, tier, sort_order, retired_at"
   },
   "namespaces": [
@@ -53,6 +53,13 @@
       "display_name": "Era",
       "tier": 1,
       "sort_order": 7,
+      "retired_at": null
+    },
+    {
+      "namespace": "topic",
+      "display_name": "Topic",
+      "tier": 1,
+      "sort_order": 8,
       "retired_at": null
     },
     {

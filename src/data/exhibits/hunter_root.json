@@ -1,7 +1,7 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-06-12T17:09:28.173Z",
+    "exported_at": "2026-06-15T14:55:18.300Z",
     "filter": "released, not archived, badged for this exhibit",
     "vocabulary_csv_sha": null
   },
@@ -18,18 +18,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "announcement"
-        ],
-        "topic": [
-          "touring"
-        ],
-        "era": [
-          "recent"
-        ],
-        "format": [
-          "video"
-        ],
         "attributes": [
           "new_music",
           "notable",
@@ -38,6 +26,12 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "announcement"
+        ],
+        "era": [
+          "recent"
+        ],
         "event": [
           "tour",
           "tour_announcement"
@@ -45,11 +39,17 @@
         "exhibit": [
           "hunter_root"
         ],
+        "format": [
+          "video"
+        ],
         "lineup": [
           "solo"
         ],
         "presentation": [
           "link"
+        ],
+        "topic": [
+          "touring"
         ]
       }
     },
@@ -65,18 +65,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "performance"
-        ],
-        "topic": [
-          "songwriting"
-        ],
-        "era": [
-          "on_the_road"
-        ],
-        "format": [
-          "video"
-        ],
         "attributes": [
           "early_version",
           "new_music",
@@ -86,11 +74,23 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "performance"
+        ],
+        "era": [
+          "on_the_road"
+        ],
         "exhibit": [
           "hunter_root"
         ],
+        "format": [
+          "video"
+        ],
         "lineup": [
           "solo"
+        ],
+        "topic": [
+          "songwriting"
         ]
       }
     },
@@ -106,18 +106,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "announcement"
-        ],
-        "topic": [
-          "recording"
-        ],
-        "era": [
-          "on_the_road"
-        ],
-        "format": [
-          "video"
-        ],
         "attributes": [
           "fan",
           "milestone",
@@ -130,8 +118,20 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "announcement"
+        ],
+        "era": [
+          "on_the_road"
+        ],
         "exhibit": [
           "hunter_root"
+        ],
+        "format": [
+          "video"
+        ],
+        "topic": [
+          "recording"
         ]
       }
     },
@@ -147,18 +147,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "studio"
-        ],
-        "topic": [
-          "recording"
-        ],
-        "era": [
-          "on_the_road"
-        ],
-        "format": [
-          "video"
-        ],
         "attributes": [
           "gear",
           "new_music",
@@ -168,14 +156,26 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "studio"
+        ],
+        "era": [
+          "on_the_road"
+        ],
         "event": [
           "rehearsal"
         ],
         "exhibit": [
           "hunter_root"
         ],
+        "format": [
+          "video"
+        ],
         "lineup": [
           "solo"
+        ],
+        "topic": [
+          "recording"
         ]
       }
     },
@@ -191,18 +191,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "performance"
-        ],
-        "topic": [
-          "songwriting"
-        ],
-        "era": [
-          "breakthrough"
-        ],
-        "format": [
-          "video"
-        ],
         "attributes": [
           "new_music",
           "notable",
@@ -212,14 +200,26 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "performance"
+        ],
+        "era": [
+          "breakthrough"
+        ],
         "exhibit": [
           "hunter_root"
+        ],
+        "format": [
+          "video"
         ],
         "lineup": [
           "solo"
         ],
         "source": [
           "tiktok"
+        ],
+        "topic": [
+          "songwriting"
         ]
       }
     },
@@ -235,18 +235,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "announcement"
-        ],
-        "topic": [
-          "touring"
-        ],
-        "era": [
-          "recent"
-        ],
-        "format": [
-          "text"
-        ],
         "attributes": [
           "fan",
           "lyme_disease",
@@ -256,11 +244,23 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "announcement"
+        ],
+        "era": [
+          "recent"
+        ],
         "event": [
           "tour_announcement"
         ],
         "exhibit": [
           "hunter_root"
+        ],
+        "format": [
+          "text"
+        ],
+        "topic": [
+          "touring"
         ]
       }
     },
@@ -276,21 +276,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "performance"
-        ],
-        "topic": [
-          "touring"
-        ],
-        "era": [
-          "on_the_road"
-        ],
-        "format": [
-          "web"
-        ],
-        "source": [
-          "other"
-        ],
         "album": [
           "medusas_disco"
         ],
@@ -300,6 +285,12 @@
         ],
         "bands": [
           "hunter_root"
+        ],
+        "content_kind": [
+          "performance"
+        ],
+        "era": [
+          "on_the_road"
         ],
         "event": [
           "advance_tickets",
@@ -312,8 +303,17 @@
         "exhibit": [
           "hunter_root"
         ],
+        "format": [
+          "web"
+        ],
         "lineup": [
           "solo"
+        ],
+        "source": [
+          "other"
+        ],
+        "topic": [
+          "touring"
         ]
       }
     },
@@ -329,18 +329,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "cover"
-        ],
-        "topic": [
-          "songwriting"
-        ],
-        "era": [
-          "on_the_road"
-        ],
-        "format": [
-          "video"
-        ],
         "attributes": [
           "fan_cover_song",
           "notable",
@@ -350,14 +338,26 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "cover"
+        ],
+        "era": [
+          "on_the_road"
+        ],
         "event": [
           "live_show"
         ],
         "exhibit": [
           "hunter_root"
         ],
+        "format": [
+          "video"
+        ],
         "lineup": [
           "solo"
+        ],
+        "topic": [
+          "songwriting"
         ]
       }
     },
@@ -373,18 +373,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "press"
-        ],
-        "topic": [
-          "songwriting"
-        ],
-        "era": [
-          "on_the_road"
-        ],
-        "format": [
-          "text"
-        ],
         "attributes": [
           "notable",
           "personal"
@@ -392,8 +380,20 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "press"
+        ],
+        "era": [
+          "on_the_road"
+        ],
         "exhibit": [
           "hunter_root"
+        ],
+        "format": [
+          "text"
+        ],
+        "topic": [
+          "songwriting"
         ]
       }
     },
@@ -409,18 +409,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "candid"
-        ],
-        "topic": [
-          "family"
-        ],
-        "era": [
-          "breakthrough"
-        ],
-        "format": [
-          "text"
-        ],
         "attributes": [
           "family",
           "indieartist",
@@ -432,11 +420,23 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "candid"
+        ],
+        "era": [
+          "breakthrough"
+        ],
         "exhibit": [
           "hunter_root"
         ],
+        "format": [
+          "text"
+        ],
         "people": [
           "nick_root"
+        ],
+        "topic": [
+          "family"
         ]
       }
     },
@@ -452,18 +452,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "announcement"
-        ],
-        "topic": [
-          "influences"
-        ],
-        "era": [
-          "on_the_road"
-        ],
-        "format": [
-          "video"
-        ],
         "attributes": [
           "account_hacked",
           "fan",
@@ -474,14 +462,26 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "announcement"
+        ],
+        "era": [
+          "on_the_road"
+        ],
         "event": [
           "fall_tour"
         ],
         "exhibit": [
           "hunter_root"
         ],
+        "format": [
+          "video"
+        ],
         "source": [
           "instagram"
+        ],
+        "topic": [
+          "influences"
         ]
       }
     },
@@ -497,18 +497,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "performance"
-        ],
-        "topic": [
-          "songwriting"
-        ],
-        "era": [
-          "on_the_road"
-        ],
-        "format": [
-          "video"
-        ],
         "attributes": [
           "account_hacked",
           "early_stages",
@@ -520,8 +508,20 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "performance"
+        ],
+        "era": [
+          "on_the_road"
+        ],
         "exhibit": [
           "hunter_root"
+        ],
+        "format": [
+          "video"
+        ],
+        "topic": [
+          "songwriting"
         ]
       }
     },
@@ -537,18 +537,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "announcement"
-        ],
-        "topic": [
-          "gear"
-        ],
-        "era": [
-          "breakthrough"
-        ],
-        "format": [
-          "text"
-        ],
         "attributes": [
           "milestone",
           "new_music",
@@ -559,11 +547,23 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "announcement"
+        ],
+        "era": [
+          "breakthrough"
+        ],
         "exhibit": [
           "hunter_root"
         ],
+        "format": [
+          "text"
+        ],
         "lineup": [
           "solo"
+        ],
+        "topic": [
+          "gear"
         ]
       }
     },
@@ -579,18 +579,6 @@
       "primary_url": "https://assets.weird.baby/assets/cd/cd43e67c278e821451f730f71f52ed0e179e1a961a29a7b6e25a3128842f1140.jpg",
       "thumbnail_url": "https://assets.weird.baby/thumbnails/59/59fca3d83c9e194b1bd1afeb782e368e05fb7ddbc364909d06f62f0091bd2819.jpg",
       "tags": {
-        "content_kind": [
-          "candid"
-        ],
-        "topic": [
-          "touring"
-        ],
-        "era": [
-          "finding_the_sound"
-        ],
-        "format": [
-          "photo"
-        ],
         "attributes": [
           "personal",
           "unique"
@@ -598,14 +586,26 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "candid"
+        ],
+        "era": [
+          "finding_the_sound"
+        ],
         "event": [
           "tour"
         ],
         "exhibit": [
           "hunter_root"
         ],
+        "format": [
+          "photo"
+        ],
         "lineup": [
           "solo"
+        ],
+        "topic": [
+          "touring"
         ]
       }
     },
@@ -621,21 +621,6 @@
       "primary_url": "https://assets.weird.baby/assets/d8/d8b100ab50ecde19eb3d50369f998f4f48b11bff214e21e801e3adce78e81df8.png",
       "thumbnail_url": "https://assets.weird.baby/thumbnails/b8/b81174b1746478a5873eaf1e80c1c846565713f6b68d1801fec49bdbb37b055a.jpg",
       "tags": {
-        "content_kind": [
-          "announcement"
-        ],
-        "topic": [
-          "touring"
-        ],
-        "era": [
-          "on_the_road"
-        ],
-        "format": [
-          "photo"
-        ],
-        "source": [
-          "instagram"
-        ],
         "attributes": [
           "new_music",
           "notable",
@@ -645,6 +630,12 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "announcement"
+        ],
+        "era": [
+          "on_the_road"
+        ],
         "event": [
           "tour",
           "tour_announcement"
@@ -652,8 +643,17 @@
         "exhibit": [
           "hunter_root"
         ],
+        "format": [
+          "photo"
+        ],
         "lineup": [
           "solo"
+        ],
+        "source": [
+          "instagram"
+        ],
+        "topic": [
+          "touring"
         ]
       }
     },
@@ -669,18 +669,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "performance"
-        ],
-        "topic": [
-          "influences"
-        ],
-        "era": [
-          "recent"
-        ],
-        "format": [
-          "video"
-        ],
         "attributes": [
           "merch",
           "milestone",
@@ -690,8 +678,20 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "performance"
+        ],
+        "era": [
+          "recent"
+        ],
         "exhibit": [
           "hunter_root"
+        ],
+        "format": [
+          "video"
+        ],
+        "topic": [
+          "influences"
         ]
       }
     },
@@ -707,32 +707,32 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "music"
-        ],
-        "topic": [
-          "influences"
-        ],
-        "era": [
-          "early_days"
-        ],
-        "format": [
-          "web"
-        ],
         "attributes": [
           "artist_page"
         ],
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "music"
+        ],
+        "era": [
+          "early_days"
+        ],
         "exhibit": [
           "hunter_root"
+        ],
+        "format": [
+          "web"
         ],
         "lineup": [
           "solo"
         ],
         "source": [
           "reverbnation"
+        ],
+        "topic": [
+          "influences"
         ]
       }
     },
@@ -748,18 +748,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "music"
-        ],
-        "topic": [
-          "influences"
-        ],
-        "era": [
-          "finding_the_sound"
-        ],
-        "format": [
-          "web"
-        ],
         "album": [
           "medusas_disco"
         ],
@@ -769,11 +757,23 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "music"
+        ],
+        "era": [
+          "finding_the_sound"
+        ],
         "exhibit": [
           "hunter_root"
         ],
+        "format": [
+          "web"
+        ],
         "source": [
           "reverbnation"
+        ],
+        "topic": [
+          "influences"
         ]
       }
     },
@@ -789,18 +789,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "music"
-        ],
-        "topic": [
-          "songwriting"
-        ],
-        "era": [
-          "finding_the_sound"
-        ],
-        "format": [
-          "web"
-        ],
         "album": [
           "medusas_disco"
         ],
@@ -810,11 +798,23 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "music"
+        ],
+        "era": [
+          "finding_the_sound"
+        ],
         "exhibit": [
           "hunter_root"
         ],
+        "format": [
+          "web"
+        ],
         "source": [
           "reverbnation"
+        ],
+        "topic": [
+          "songwriting"
         ]
       }
     },
@@ -830,18 +830,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "music"
-        ],
-        "topic": [
-          "influences"
-        ],
-        "era": [
-          "early_days"
-        ],
-        "format": [
-          "web"
-        ],
         "album": [
           "run_with_the_hunt"
         ],
@@ -851,11 +839,23 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "music"
+        ],
+        "era": [
+          "early_days"
+        ],
         "exhibit": [
           "hunter_root"
         ],
+        "format": [
+          "web"
+        ],
         "source": [
           "reverbnation"
+        ],
+        "topic": [
+          "influences"
         ]
       }
     },
@@ -871,18 +871,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "music"
-        ],
-        "topic": [
-          "songwriting"
-        ],
-        "era": [
-          "early_days"
-        ],
-        "format": [
-          "web"
-        ],
         "album": [
           "run_with_the_hunt"
         ],
@@ -892,11 +880,23 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "music"
+        ],
+        "era": [
+          "early_days"
+        ],
         "exhibit": [
           "hunter_root"
         ],
+        "format": [
+          "web"
+        ],
         "source": [
           "reverbnation"
+        ],
+        "topic": [
+          "songwriting"
         ]
       }
     },
@@ -929,18 +929,6 @@
       "primary_url": null,
       "thumbnail_url": null,
       "tags": {
-        "content_kind": [
-          "candid"
-        ],
-        "topic": [
-          "family"
-        ],
-        "era": [
-          "recent"
-        ],
-        "format": [
-          "video"
-        ],
         "attributes": [
           "artist_message",
           "lyme_disease",
@@ -950,8 +938,20 @@
         "bands": [
           "hunter_root"
         ],
+        "content_kind": [
+          "candid"
+        ],
+        "era": [
+          "recent"
+        ],
         "exhibit": [
           "hunter_root"
+        ],
+        "format": [
+          "video"
+        ],
+        "topic": [
+          "family"
         ]
       }
     },
