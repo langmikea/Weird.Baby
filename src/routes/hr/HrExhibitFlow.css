@@ -1997,3 +1997,127 @@ input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
   .hrfi-root{padding:16px 14px 20px;}
   .hrfi-surface{grid-template-columns:1fr 1fr;}
 }
+
+
+/* ── BAR-DOCK: Filter + Presets in the player bar (2026-06-16) ────────────
+   The Filter icon and a Presets trigger, relocated from the deck tab-strip into
+   the always-on player bar. The cluster is portaled into the bar's generic
+   #hr-bar-slot (inside .pb-controls, Exhibit.jsx). Everything is scoped to
+   .hr-bar-* / .pb-ext-slot so no existing deck or bar rule is touched.
+   OCCLUSION (DECK-SCROLL-OCCLUSION): the cluster lives inside the bar's fixed
+   68px row (align-items:center) and adds ZERO height — it cannot push the bar
+   taller or hide more of the deck. */
+.pb-ext-slot { display: flex; align-items: center; }
+
+.hr-bar-trigs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 4px;
+  padding-left: 10px;
+  border-left: 1px solid #3e3e3e;
+}
+.hr-bar-trig {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 9px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: #b6b6b6;
+  font-family: 'Syne', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color .15s, background .15s, border-color .15s;
+}
+.hr-bar-trig:hover { color: #ededed; background: rgba(184,151,74,0.14); }
+.hr-bar-trig.is-on { color: #141414; background: #b8974a; border-color: #b8974a; }
+.hr-bar-trig-ico { display: inline-flex; }
+.hr-bar-trig-ico svg { width: 15px; height: 15px; display: block; }
+.hr-bar-trig-lbl { line-height: 1; }
+
+@media (max-width: 560px) {
+  .hr-bar-trigs { gap: 2px; padding-left: 7px; margin-left: 2px; }
+  .hr-bar-trig { padding: 0 7px; }
+  .hr-bar-trig-lbl { display: none; }
+}
+
+.hr-bar-pop-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: transparent;
+}
+.hr-bar-pop {
+  --hr-bg:#d9d5ca; --hr-ink:#ece9e0; --hr-ink-soft:#e2deD3;
+  --hr-ink-card:#faf8f3; --hr-ink-card-hi:#ffffff;
+  --hr-border:#c6c2b7; --hr-border-hi:#a9a59a;
+  --hr-gold:#211f1c; --hr-gold-hi:#000000; --hr-gold-lo:#57544d; --hr-gold-mute:#9b978d;
+  --hr-dim:#3b3933;
+  --hr-serif:'Fraunces', Georgia, serif;
+  --hr-sans:'Geist', system-ui, -apple-system, sans-serif;
+  --hr-mono:'Courier Prime', 'Courier New', monospace;
+
+  position: fixed;
+  right: 12px;
+  bottom: calc(68px + 10px + env(safe-area-inset-bottom, 0px));
+  z-index: 130;
+  width: min(380px, 92vw);
+  max-height: min(60vh, 460px);
+  display: flex;
+  flex-direction: column;
+  background: var(--hr-ink-card);
+  color: var(--hr-dim);
+  font-family: var(--hr-sans);
+  border: 1px solid var(--hr-border-hi);
+  border-radius: 6px;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.42);
+  overflow: hidden;
+}
+.hr-bar-pop-head {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 10px 7px 14px;
+  font-family: var(--hr-sans);
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--hr-gold-lo);
+  border-bottom: 1px dashed var(--hr-border);
+}
+.hr-bar-pop-x {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  color: var(--hr-gold-lo);
+  opacity: 0.65;
+  padding: 2px 4px;
+  transition: opacity .12s;
+}
+.hr-bar-pop-x:hover { opacity: 1; }
+.hr-bar-pop-body {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (max-width: 560px) {
+  .hr-bar-pop {
+    left: 8px;
+    right: 8px;
+    width: auto;
+    max-height: min(64vh, 460px);
+  }
+}

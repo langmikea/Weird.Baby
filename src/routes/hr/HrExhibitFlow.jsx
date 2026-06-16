@@ -44,6 +44,7 @@
 import {
   useState, useMemo, useLayoutEffect, useEffect, useRef, useCallback,
 } from "react";
+import { createPortal } from "react-dom";
 import "./HrExhibitFlow.css";
 import { buildDimensions } from "./hr_dimensions.js";
 import EXHIBIT from "../../data/exhibits/hunter_root.json";
@@ -3429,6 +3430,21 @@ export default function HrExhibitFlow({
   // route through the existing `toggle`/`setSelected`, so playback is never
   // touched (operator-locked rule).
   const [filterOpen, setFilterOpen] = useState(false);
+  // BAR-DOCK (2026-06-16): Filter + Presets triggers relocated from the deck
+  // tab-strip into the always-on player bar. The bar is a generic sibling
+  // (PlayerBar / .pb in Exhibit.jsx), so HR injects its controls through a
+  // portal into the bar's #hr-bar-slot. barSlot holds that mount node once it
+  // exists; presetsBarOpen drives the bar-launched Presets pop-over. All logic
+  // (setFilterOpen, applyFactoryPreset, PresetsContent) is reused unchanged —
+  // this is a trigger relocation, not an engine change.
+  const [barSlot, setBarSlot] = useState(null);
+  const [presetsBarOpen, setPresetsBarOpen] = useState(false);
+  useEffect(() => {
+    // PlayerBar is always mounted (Exhibit renders it as a sibling), so the
+    // slot exists after first paint. Re-query is cheap and guards remounts.
+    const el = document.getElementById("hr-bar-slot");
+    if (el) setBarSlot(el);
+  }, []);
   // MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
   // setKalState is wired into clear() so the dormant state stays in sync;
   // kalState is intentionally not read in v1.
@@ -3744,6 +3760,91 @@ export default function HrExhibitFlow({
           onClose={() => setFilterOpen(false)}
         />
       )}
+      {/* BAR-DOCK (2026-06-16) — Filter + Presets triggers, relocated from the
+          deck tab-strip into the always-on player bar. Portaled into the bar's
+          generic #hr-bar-slot (PlayerBar lives in Exhibit.jsx, a sibling of
+          this flow). Filter opens the unchanged FilterInstrumentOverlay; Presets
+          opens a bar-anchored pop-over hosting the existing PresetsContent with
+          the same props as the (now-removed) deck-tab instance. No engine
+          change; matchFilter/applyFactoryPreset untouched. The pop-over is a
+          child of the fixed bar's stacking context, so it opens ABOVE the bar
+          and above the deck (the root FilterInstrumentOverlay at z-index 1200
+          still layers over both). */}
+      {barSlot && createPortal(
+        <>
+          <div className="hr-bar-trigs">
+            <button
+              type="button"
+              className={"hr-bar-trig" + (filterOpen ? " is-on" : "")}
+              title="Filters"
+              aria-label="Open filters"
+              aria-pressed={filterOpen}
+              onClick={() => { setPresetsBarOpen(false); setFilterOpen(true); }}
+            >
+              <span className="hr-bar-trig-ico" aria-hidden="true">
+                <svg viewBox="0 0 16 16">
+                  <path d="M1 2.5h14l-5.4 6.2v4.4l-3.2 1.6V8.7z" fill="currentColor" />
+                </svg>
+              </span>
+              <span className="hr-bar-trig-lbl">Filters</span>
+            </button>
+            <button
+              type="button"
+              className={"hr-bar-trig" + (presetsBarOpen ? " is-on" : "")}
+              title="Presets"
+              aria-label="Open presets"
+              aria-haspopup="dialog"
+              aria-expanded={presetsBarOpen}
+              onClick={() => setPresetsBarOpen(o => !o)}
+            >
+              <span className="hr-bar-trig-ico" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none">
+                  <line x1="2" y1="4.5" x2="14" y2="4.5" stroke="currentColor" strokeWidth="1.3" />
+                  <line x1="2" y1="8" x2="14" y2="8" stroke="currentColor" strokeWidth="1.3" />
+                  <line x1="2" y1="11.5" x2="14" y2="11.5" stroke="currentColor" strokeWidth="1.3" />
+                  <circle cx="5.5" cy="4.5" r="1.7" fill="currentColor" />
+                  <circle cx="10.5" cy="8" r="1.7" fill="currentColor" />
+                  <circle cx="6.5" cy="11.5" r="1.7" fill="currentColor" />
+                </svg>
+              </span>
+              <span className="hr-bar-trig-lbl">Presets</span>
+            </button>
+          </div>
+          {presetsBarOpen && (
+            <>
+              <div
+                className="hr-bar-pop-scrim"
+                aria-hidden="true"
+                onClick={() => setPresetsBarOpen(false)}
+              />
+              <div className="hr-bar-pop" role="dialog" aria-label="Presets">
+                <div className="hr-bar-pop-head">
+                  <span>presets</span>
+                  <button
+                    type="button"
+                    className="hr-bar-pop-x"
+                    aria-label="Close presets"
+                    onClick={() => setPresetsBarOpen(false)}
+                  >✕</button>
+                </div>
+                <div className="hr-bar-pop-body">
+                  <PresetsContent
+                    userPresets={userPresets} setUserPresets={setUserPresets}
+                    selected={selected} setSelected={setSelected}
+                    shuffle={shuffle} setShuffle={setShuffle}
+                    loop={loop} setLoop={setLoop}
+                    playingTrack={playingTrack} spinePosition={spinePosition}
+                    onRestorePlayer={onRestorePlayer}
+                    peekSelected={peekSelected} setPeekSelected={setPeekSelected}
+                    applyFactoryPreset={applyFactoryPreset}
+                  />
+                </div>
+              </div>
+            </>
+          )}
+        </>,
+        barSlot
+      )}
       {/* MOBILE PRESETS (§8.1) — factory presets as a tappable pill stack
           above the inline pill columns. Deck curations only: a tap commits
           deck filters via the hoisted applyFactoryPreset (which dismisses
@@ -3803,7 +3904,11 @@ export default function HrExhibitFlow({
             onMouseEnter={() => { if (!open) { cancelHoverTimer(); scheduleHoverOpen(); } }}
             onMouseLeave={() => { if (!open) scheduleHoverClose(); }}
           >
-            {TABS.filter(t => t.key !== "journal").map(t => {
+            {/* BAR-DOCK (2026-06-16): the Filter ICON (special:"board") and the
+                Presets tab (special:"presets") are no longer rendered here —
+                both triggers now live in the player bar (see barControls portal
+                at the root). Journal keeps its existing exclusion/behaviour. */}
+            {TABS.filter(t => t.key !== "journal" && t.special !== "board" && t.special !== "presets").map(t => {
               // v7_1 pop-over: the board tab is now a filter ICON that opens the
               // FilterInstrumentOverlay instead of expanding the deck body. It
               // reads "active" while the overlay is open so the icon stays lit.

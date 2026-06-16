@@ -562,6 +562,11 @@ function PlayerBar({ video, track, album, live, onIdlePlay, onSkipBack, onSkipFo
             <text x="4" y="10" fill="currentColor" fontSize="7" fontFamily="sans-serif" fontWeight="600">CC</text>
           </svg>
         </button>
+
+        {/* Generic extension slot — an artist's ExhibitFlow may portal its own
+            bar-docked controls in here (HR flow injects Filter + Presets). Empty
+            and inert for exhibits that don't use it; adds no height. */}
+        <div className="pb-ext-slot" id="hr-bar-slot" />
       </div>
     </div>
   );
