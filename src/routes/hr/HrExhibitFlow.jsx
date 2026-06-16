@@ -525,13 +525,26 @@ function itemHasTag(item, group, tag) {
   return Array.isArray(arr) && arr.includes(tag);
 }
 
+// Partial facets scope their own population; artifacts without a value are
+// exempt, not amputated (spec §, docs/filter-instrument-reference.html L221).
+// Single source of truth: the live partial set IS the Detail zone's columns
+// (DETAIL_PARTIAL_KEYS = album/source/people). The reference's "person" maps
+// to live "people"; the reference's "venue"/"song" are not live namespaces, so
+// reusing DETAIL_PARTIAL_KEYS is the name-confirmed, drift-proof set. Every
+// other facet (the BOARD_TOTAL_KEYS — content_kind/topic/era/bands/format)
+// stays strict: an item missing that facet is rejected.
+const PARTIAL_FACETS = new Set(DETAIL_PARTIAL_KEYS);
+
 function matchFilter(item, selected) {
   if (selected.__randomIds) return selected.__randomIds.has(item.id);
   for (const { key } of HR_DIMENSIONS) {
     const sel = selected[key];
     if (!(sel instanceof Set) || sel.size === 0) continue;
     const arr = item?.tags?.[key];
-    if (!Array.isArray(arr)) return false;
+    if (!Array.isArray(arr) || arr.length === 0) {
+      if (PARTIAL_FACETS.has(key)) continue;   // partial: exempt (null-exempt)
+      return false;                            // total: reject (strict)
+    }
     let carries = false;
     for (const v of arr) {
       if (sel.has(v)) { carries = true; break; }
