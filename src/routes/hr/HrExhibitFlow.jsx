@@ -178,14 +178,68 @@ const IDLE_RETURN_MS = 8000;
 // surface; Journal becomes the right-most non-close tab. Was position 4
 // (between Deep Tracks and Presets) in Stage 2; moved to position 5 here.
 const TABS = [
-  { key: "artist",  label: "Artist",      kind: "tier",    tier: 1, width: 120 },
-  // 2026-06-07 Mike: "Formats" → "Source" — the tab's actual content is the
-  // Source column (plus content/card kind, re-tiered in vocabulary.json).
-  { key: "media",   label: "Source",      kind: "tier",    tier: 2, width: 130 },
-  { key: "deep",    label: "Deep Tracks", kind: "tier",    tier: 3, width: 120 },
-  { key: "presets", label: "Presets",     kind: "special", special: "presets", width: 110 },
-  { key: "journal", label: "Journal",     kind: "special", special: "journal", width: 110 },
+  // TABS-OUT Stage A (2026-06-15): the three tier-depth tabs (Artist / Source /
+  // Deep Tracks) collapse into ONE always-grouped Board surface -- all five
+  // TOTAL facets visible at once, no depth-tabs. Authority:
+  // docs/filter-instrument-reference.html renderBoard() + the TABS-OUT brief 5.
+  // matchFilter, PillGroupColumn and PresetsContent are untouched; only the
+  // layout shell changes. Stage B adds the Detail (partials) zone; Stage D
+  // folds Presets into the v7_1 Threads strip.
+  { key: "board",   label: "Filters",  kind: "special", special: "board",   width: 56 },
+  { key: "presets", label: "Presets",  kind: "special", special: "presets", width: 110 },
+  { key: "journal", label: "Journal",  kind: "special", special: "journal", width: 110 },
 ];
+
+// --- TABS-OUT board model (Stage A) -----------------------------------------
+// The Basic surface renders the five TOTAL facets in this fixed order
+// (renderBoard order, brief 3): Kind, Topic, Era, Project/Band, Format --
+// mapped to live tag namespaces. Grouping is by TOTAL vs PARTIAL, NOT by
+// vocabulary tier (the live tiers are mismatched: content_kind=3, format=2,
+// era/topic/bands=1; tier-grouping would scatter these five across three
+// columns). Facets absent from the live data are skipped at render time.
+const BOARD_TOTAL_KEYS = ["content_kind", "topic", "era", "bands", "format"];
+// Container cards (album x9 + gallery x1) carry content_kind:"other" and are
+// exempt from Kind (discovery-metadata-spec.md 4). "other" is never a
+// visitor-facing Kind pill, so it is dropped from the Kind column's values
+// (8 discovered -> 7 real kinds).
+const KIND_SUPPRESSED_VALUES = new Set(["other"]);
+// Resolved once at module load (HR_DIMENSIONS is module-constant). Each entry
+// is { key, values }; the Kind column drops "other"; columns with no live
+// values are omitted so empty namespaces never reserve a header.
+const BOARD_COLUMNS = (() => {
+  const byKey = {};
+  HR_DIMENSIONS.forEach(d => { byKey[d.key] = d; });
+  return BOARD_TOTAL_KEYS
+    .map(key => byKey[key])
+    .filter(Boolean)
+    .map(dim => ({
+      key: dim.key,
+      values: dim.key === "content_kind"
+        ? dim.values.filter(v => !KIND_SUPPRESSED_VALUES.has(v))
+        : dim.values,
+    }))
+    .filter(col => col.values.length > 0);
+})();
+
+// v7_1 pop-over (2026-06-15): the Detail (partials) zone. The reference's ADV
+// surface is album · song · venue · source · people; HR's live data carries
+// album/source/people only (song + venue are untagged → null-exempt, skipped
+// per brief §3). Resolved like BOARD_COLUMNS: live dim values, absent facets
+// omitted. "other" is NOT suppressed on source (only Kind drops it).
+const DETAIL_PARTIAL_KEYS = ["album", "source", "people"];
+const DETAIL_COLUMNS = (() => {
+  const byKey = {};
+  HR_DIMENSIONS.forEach(d => { byKey[d.key] = d; });
+  return DETAIL_PARTIAL_KEYS
+    .map(key => byKey[key])
+    .filter(Boolean)
+    .map(dim => ({ key: dim.key, values: dim.values }))
+    .filter(col => col.values.length > 0);
+})();
+// Format-medium glyphs, lifted from the v7_1 reference's format facet. Live
+// format values are photo/text/video/web; audio (♪) is mapped for parity but
+// not present in the current export.
+const HRFI_FORMAT_ICONS = { photo: "◧", video: "▷", audio: "♪", text: "¶", web: "◍" };
 
 // ─── FACTORY PRESETS — adapted to HR's dimensions ───────────────────────────
 // 2026-06-07 repair (verified live on weird.baby/hr): the v28-ported recipes
@@ -2497,6 +2551,8 @@ function ScrollFadeContainer({ children }) {
 // ─── TAB CONTENT COMPONENTS — ported from v28, plus JournalContent ──────────
 // Stage 3: pillWidth no longer threads through here. PillGroupColumn owns
 // its own per-column measurement via useColumnPillWidth.
+// TABS-OUT Stage A: tier render replaced by BoardContent; TierContent kept for
+// revival (auto-ignored by no-unused-vars varsIgnorePattern ^[A-Z_]).
 function TierContent({ dims, selected, toggle }) {
   return (
     <ScrollFadeContainer>
@@ -2512,6 +2568,197 @@ function TierContent({ dims, selected, toggle }) {
   );
 }
 
+// TABS-OUT Stage A: the Basic surface. Renders the five TOTAL facets at once,
+// each via the untouched PillGroupColumn, in renderBoard order (Kind, Topic,
+// Era, Project/Band, Format). Columns are resolved in BOARD_COLUMNS (module
+// load): Kind drops the container-only "other" value (metadata-spec 4) and
+// empty facets are omitted. Reuses TierContent's .hr-groups-row layout; the
+// v7_1 visual skin lands in Stage C.
+function BoardContent({ selected, toggle }) {
+  return (
+    <ScrollFadeContainer>
+      <div className="hr-groups-row">
+        {BOARD_COLUMNS.map(col => (
+          <PillGroupColumn
+            key={col.key} group={col.key} values={col.values}
+            items={ARTIFACTS} selected={selected} toggle={toggle}
+          />
+        ))}
+      </div>
+    </ScrollFadeContainer>
+  );
+}
+
+// ─── v7_1 FILTER INSTRUMENT POP-OVER (2026-06-15) ───────────────────────────
+// The visual-first deliverable: a filter ICON opens this centered overlay,
+// painted in the v7_1 reference look (docs/filter-instrument-reference.html)
+// and populated with the LIVE HR facets. Presentation layer ONLY — it reads
+// `selected` and writes through the same `toggle(group, value)` + `countForPill`
+// the deck already uses, so the proven matchFilter plumbing is untouched
+// (brief §4: "Do NOT touch matchFilter semantics"). Selection is live (the wall
+// updates as chips toggle); "apply" just closes, "cancel" reverts to the
+// snapshot captured when the overlay opened. It never touches player state: the
+// only writes are toggle / clear / applyFactoryPreset, all of which leave
+// playback alone (operator-locked rule). Basic board = the five TOTAL facets
+// (BOARD_COLUMNS, "other" dropped from Kind); Detail zone = the live partials
+// (DETAIL_COLUMNS: album/source/people; song+venue null-exempt, skipped).
+function FilterInstrumentOverlay({
+  selected, setSelected, toggle,
+  factoryPresets, applyFactoryPreset,
+  matchedCount, totalCount, onClose,
+}) {
+  const [hideZero, setHideZero] = useState(false);
+  const [advOpen, setAdvOpen] = useState(
+    () => DETAIL_PARTIAL_KEYS.some(k => selected[k] instanceof Set && selected[k].size > 0)
+  );
+  // Snapshot the selection on open so Cancel can revert (dismissable, non-
+  // destructive). Captured once, on first render.
+  const snapshotRef = useRef(null);
+  if (snapshotRef.current === null) snapshotRef.current = cloneSelected(selected);
+
+  // Escape closes — parity with the other root overlays (Gallery/YouTube/…).
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  const activeTokens = [];
+  HR_DIMENSIONS.forEach(({ key }) => {
+    if (selected[key] instanceof Set) selected[key].forEach(v => activeTokens.push([key, v]));
+  });
+  const anySel = activeTokens.length > 0;
+
+  const clearAll = () => {
+    const cleared = {};
+    HR_DIMENSIONS.forEach(({ key }) => { cleared[key] = new Set(); });
+    setSelected(cleared);
+  };
+  const clearGroup = (group) => {
+    setSelected(prev => {
+      const next = {};
+      for (const { key } of HR_DIMENSIONS) next[key] = new Set(prev[key] ?? []);
+      next[group] = new Set();
+      return next;
+    });
+  };
+  const cancel = () => { setSelected(cloneSelected(snapshotRef.current)); onClose(); };
+
+  const renderFacet = (col, isFormat) => {
+    const sel = selected[col.key] instanceof Set ? selected[col.key] : new Set();
+    const n = sel.size;
+    const scroll = col.values.length > 8;
+    return (
+      <div key={col.key} className={"hrfi-facet" + (isFormat ? " hrfi-format" : "")}>
+        <div className="hrfi-facet-head">
+          <span className="hrfi-ttl">{HR_GROUP_LABELS[col.key] || col.key}</span>
+          <span
+            className={"hrfi-state" + (n ? " hrfi-on" : "")}
+            onClick={n ? () => clearGroup(col.key) : undefined}
+          >{n ? `${n} · clear` : "all"}</span>
+        </div>
+        <div className={"hrfi-chips" + (scroll ? " hrfi-scroll" : "")}>
+          {col.values.map(v => {
+            const isSel = sel.has(v);
+            const ct = countForPill(ARTIFACTS, selected, col.key, v);
+            const zero = !isSel && ct === 0;
+            const icon = isFormat ? HRFI_FORMAT_ICONS[v] : null;
+            return (
+              <button
+                key={v}
+                className={"hrfi-chip" + (isSel ? " hrfi-sel" : "") + (zero ? " hrfi-zero" : "") + (zero && hideZero ? " hrfi-hidden" : "")}
+                onClick={() => toggle(col.key, v)}
+              >
+                {icon ? <span className="hrfi-ic">{icon}</span> : null}
+                <span className="hrfi-lab">{displayFor(col.key, v)}</span>
+                <span className="hrfi-ct">{ct}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div
+      className="hrfi-overlay"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Filter the Hunter Root collection"
+    >
+      <div className="hrfi-root" onClick={(e) => e.stopPropagation()}>
+        <div className="hrfi-head">
+          <h2>Hunter&nbsp;Root · Filter</h2>
+          <span className="hrfi-sub">{anySel ? `${matchedCount} of ${totalCount} in view` : `all ${totalCount} artifacts`}</span>
+          <button className="hrfi-x" aria-label="Close filter" onClick={onClose}>✕</button>
+        </div>
+
+        <div className="hrfi-activebar">
+          <span className="hrfi-lead">In view</span>
+          {!anySel && <span className="hrfi-none">everything — nothing filtered yet</span>}
+          {activeTokens.map(([k, v]) => (
+            <span key={k + "/" + v} className={"hrfi-tk" + (DETAIL_PARTIAL_KEYS.includes(k) ? " hrfi-adv" : "")}>
+              {displayFor(k, v)}
+              <span className="hrfi-rm" onClick={() => toggle(k, v)}>✕</span>
+            </span>
+          ))}
+          <span className="hrfi-grow" />
+          <button className="hrfi-clr" disabled={!anySel} onClick={clearAll}>↺ clear all</button>
+        </div>
+
+        {factoryPresets.length > 0 && (
+          <div className="hrfi-threadbar">
+            <span className="hrfi-tlead">Threads</span>
+            {factoryPresets.map(p => (
+              <button key={p.key} className="hrfi-thread" onClick={() => applyFactoryPreset(p)}>{p.label}</button>
+            ))}
+          </div>
+        )}
+
+        <div className="hrfi-opts">
+          <label className="hrfi-togg">
+            <input type="checkbox" checked={hideZero} onChange={(e) => setHideZero(e.target.checked)} /> hide empty
+          </label>
+        </div>
+
+        <div className="hrfi-surface">
+          {BOARD_COLUMNS.map(col => renderFacet(col, col.key === "format"))}
+        </div>
+
+        {DETAIL_COLUMNS.length > 0 && (
+          <div className="hrfi-detail-wrap">
+            <div className={"hrfi-adv-banner" + (advOpen ? " hrfi-open" : "")} onClick={() => setAdvOpen(o => !o)}>
+              <div>
+                <div className="hrfi-t">Detail Filtering</div>
+                <div className="hrfi-d">{DETAIL_COLUMNS.map(c => (HR_GROUP_LABELS[c.key] || c.key).toLowerCase()).join(" · ")} — narrow to one specific item</div>
+              </div>
+              <span className="hrfi-chev">▾</span>
+            </div>
+            {advOpen && (
+              <div className="hrfi-adv-zone hrfi-open">
+                <div className="hrfi-surface">
+                  {DETAIL_COLUMNS.map(col => renderFacet(col, false))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        <div className="hrfi-foot">
+          <div className="hrfi-tally"><b>{matchedCount}</b> artifacts <span className="hrfi-of">/ {totalCount}</span></div>
+          <span className="hrfi-grow" />
+          <button className="hrfi-btn hrfi-ghost" onClick={cancel}>cancel</button>
+          <button className="hrfi-btn hrfi-prime" onClick={onClose}>apply</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// TABS-OUT Stage A: Deep Tracks search retired with the tier tabs; DeepTracksContent
+// kept for revival (auto-ignored by no-unused-vars varsIgnorePattern ^[A-Z_]).
 function DeepTracksContent({ dims, selected, toggle, query, setQuery, focusSignal }) {
   const inputRef = useRef(null);
   useEffect(() => { if (focusSignal) inputRef.current?.focus(); }, [focusSignal]);
@@ -3144,6 +3391,7 @@ export default function HrExhibitFlow({
   // Exhibit.jsx seam as props. activeAlbumId is the focused album's STABLE id
   // (recorded as focusedAlbumId in snapshots); playingTrack is
   // { albumId, trackId, variantId } in stable ids, or null when idle.
+  // eslint-disable-next-line no-unused-vars -- TABS-OUT Stage A: deep-search query retired with the tier tabs; setQuery still referenced by preserved clear()
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState(() => makeEntrySelection());
   // Phase C: one-card-at-a-time audio playback. Lifted here so that
@@ -3175,6 +3423,12 @@ export default function HrExhibitFlow({
   // overlay on close (Γ£ò / backdrop / Escape); the self-hosted image needs no
   // player teardown (no iframe/audio), unlike YouTube/Facebook.
   const [openPhoto, setOpenPhoto] = useState(null);
+  // v7_1 pop-over (2026-06-15): the filter ICON in the deck strip opens this
+  // overlay (FilterInstrumentOverlay) above the static museum. Held at the root
+  // so it layers over the deck/grid like the other lightboxes. Filter changes
+  // route through the existing `toggle`/`setSelected`, so playback is never
+  // touched (operator-locked rule).
+  const [filterOpen, setFilterOpen] = useState(false);
   // MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
   // setKalState is wired into clear() so the dormant state stays in sync;
   // kalState is intentionally not read in v1.
@@ -3289,9 +3543,11 @@ export default function HrExhibitFlow({
   // Controls §9.5 v1: user preset slots persist in localStorage (exhibit-
   // scoped key). Hydrate once on mount; write-through on every change below.
   const [userPresets, setUserPresets] = useState(() => loadUserPresets());
+  // eslint-disable-next-line no-unused-vars -- TABS-OUT Stage A: Deep Tracks auto-focus retired with the tier tabs; preserved for revival
   const [searchFocusSignal, setSearchFocusSignal] = useState(0);
   // Per UX_CONTROLS_SPEC v0.4 ┬º5.5: auto-focus the Deep Tracks search input on
   // first open of the tab per session only. Subsequent opens do not steal focus.
+  // eslint-disable-next-line no-unused-vars -- TABS-OUT Stage A: Deep Tracks auto-focus retired with the tier tabs; preserved for revival
   const searchAutoFocusedRef = useRef(false);
   const hoverTimerRef = useRef(null);
 
@@ -3344,22 +3600,21 @@ export default function HrExhibitFlow({
     setQuery("");
   };
 
-  // Per-tab clear: scope the reset to just the dimensions/state that the
-  // given tab owns. Tier tabs (artist/media/deep) clear their tier's
-  // dimension keys; deep also clears the search query. Presets clears
-  // shuffle/loop. Journal has nothing to clear.
+  // Per-tab clear: scope the reset to just the dimensions/state that the given
+  // tab owns. TABS-OUT Stage A: the Board tab clears every TOTAL facet it shows
+  // (the five renderBoard columns). Presets clears shuffle/loop. Journal has
+  // nothing to clear.
   const clearTab = (tabKey) => {
     const tab = TABS.find(t => t.key === tabKey);
     if (!tab) return;
     setPeekSelected(null);
-    if (tab.kind === "tier") {
+    if (tab.special === "board") {
       setSelected(prev => {
         const next = {};
         for (const d of HR_DIMENSIONS) next[d.key] = new Set(prev[d.key] ?? []);
-        for (const d of HR_DIMENSIONS) if (d.tier === tab.tier) next[d.key] = new Set();
+        for (const key of BOARD_TOTAL_KEYS) next[key] = new Set();
         return next;
       });
-      if (tab.key === "deep") setQuery("");
     } else if (tab.special === "presets") {
       setShuffle(false);
       setLoop(false);
@@ -3368,11 +3623,8 @@ export default function HrExhibitFlow({
 
   // Does this tab have anything to clear right now?
   const tabHasSelection = (tab) => {
-    if (tab.kind === "tier") {
-      const dimsInTab = HR_DIMENSIONS.filter(d => d.tier === tab.tier);
-      const anyDim = dimsInTab.some(d => (selected[d.key] instanceof Set) && selected[d.key].size > 0);
-      if (tab.key === "deep") return anyDim || query.length > 0;
-      return anyDim;
+    if (tab.special === "board") {
+      return BOARD_TOTAL_KEYS.some(key => (selected[key] instanceof Set) && selected[key].size > 0);
     }
     if (tab.special === "presets") return shuffle || loop;
     return false;
@@ -3428,10 +3680,6 @@ export default function HrExhibitFlow({
     if (activeTab === tabKey) { setActiveTab(null); setHoverPeek(false); return; }
     setActiveTab(tabKey);
     setHoverPeek(false);
-    if (tabKey === "deep" && !searchAutoFocusedRef.current) {
-      setSearchFocusSignal(s => s + 1);
-      searchAutoFocusedRef.current = true;
-    }
   };
 
   const startResize = useCallback((e) => {
@@ -3483,6 +3731,18 @@ export default function HrExhibitFlow({
       )}
       {openPhoto && (
         <PhotoOverlay card={openPhoto} onClose={() => setOpenPhoto(null)} />
+      )}
+      {filterOpen && (
+        <FilterInstrumentOverlay
+          selected={selected}
+          setSelected={setSelected}
+          toggle={toggle}
+          factoryPresets={FACTORY_PRESETS}
+          applyFactoryPreset={applyFactoryPreset}
+          matchedCount={finalMatched.length}
+          totalCount={ARTIFACTS.length}
+          onClose={() => setFilterOpen(false)}
+        />
       )}
       {/* MOBILE PRESETS (§8.1) — factory presets as a tappable pill stack
           above the inline pill columns. Deck curations only: a tap commits
@@ -3544,18 +3804,34 @@ export default function HrExhibitFlow({
             onMouseLeave={() => { if (!open) scheduleHoverClose(); }}
           >
             {TABS.filter(t => t.key !== "journal").map(t => {
-              const isActive = activeTab === t.key;
+              // v7_1 pop-over: the board tab is now a filter ICON that opens the
+              // FilterInstrumentOverlay instead of expanding the deck body. It
+              // reads "active" while the overlay is open so the icon stays lit.
+              const isBoardTrigger = t.special === "board";
+              const isActive = isBoardTrigger ? filterOpen : activeTab === t.key;
               const isClose = t.kind === "close";
               return (
                 <div
                   key={t.key}
                   className={isActive ? "" : "tab-hoverable"}
                   style={S.tab(isActive, open, t.width, isClose)}
-                  onClick={(e) => { e.stopPropagation(); handleTabClick(t.key); }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (isBoardTrigger) setFilterOpen(true);
+                    else handleTabClick(t.key);
+                  }}
                   role="button"
-                  title={t.label}
+                  title={isBoardTrigger ? "Filters" : t.label}
                 >
-                  <span>{t.label}</span>
+                  <span>
+                    {isBoardTrigger ? (
+                      <span className="hrfi-trigger-ico" aria-label="Open filters">
+                        <svg viewBox="0 0 16 16" aria-hidden="true">
+                          <path d="M1 2.5h14l-5.4 6.2v4.4l-3.2 1.6V8.7z" fill="currentColor" />
+                        </svg>
+                      </span>
+                    ) : t.label}
+                  </span>
                   {(() => {
                     const has = tabHasSelection(t);
                     return (
@@ -3607,23 +3883,9 @@ export default function HrExhibitFlow({
                 onMouseEnter={() => setResizeHover(true)}
                 onMouseLeave={() => setResizeHover(false)}
               />
-              {currentTab.kind === "tier" && (() => {
-                const dims = HR_DIMENSIONS.filter(d => d.tier === currentTab.tier);
-                if (currentTab.key === "deep") {
-                  return (
-                    <DeepTracksContent
-                      dims={dims} selected={selected} toggle={toggle}
-                      query={query} setQuery={setQuery}
-                      focusSignal={searchFocusSignal}
-                    />
-                  );
-                }
-                return (
-                  <TierContent
-                    dims={dims} selected={selected} toggle={toggle}
-                  />
-                );
-              })()}
+              {currentTab.kind === "special" && currentTab.special === "board" && (
+                <BoardContent selected={selected} toggle={toggle} />
+              )}
               {currentTab.kind === "special" && currentTab.special === "journal" && (
                 <JournalContent prompts={HR_JOURNAL_PROMPTS} eraFilter={null} />
               )}
