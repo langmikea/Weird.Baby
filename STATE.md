@@ -1,3 +1,69 @@
+<!-- ============================================================= -->
+<!-- LIVE LEDGER — source of truth. Read this block first.          -->
+<!-- Last updated: 2026-06-17. Below this block: durable reference. -->
+<!-- ============================================================= -->
+
+# Weird.Baby Museum — LIVE LEDGER
+
+## Ops Rule 0 — THE GROUND CHECK (read before acting)
+
+Before ANY state-changing action — writing a build brief, editing a file, declaring something "done", or any tool call that does more than read — STATE THIS:
+
+> "Ground check: what fact am I acting on, and did I verify it THIS session?"
+
+If the answer is "I remember" / "the log says" / "Cowork reported" / "the doc says" — **STOP. That is the off-ramp forming.** Verify against the live tree first.
+
+Either party may say **"Follow the process"** at any time. It means: halt, verify against the live tree (live tree > git > docs > chat), THEN proceed.
+
+Paid for by the 2026-06-17 derived-era incident: charging into the problem in front of us — building before verifying, trusting a build log over the live disk — produced a corrupted client build and a near-miss. This class of error has cost full weeks before. The trip-wire exists so the stop is an EVENT, not a hope.
+
+Ops work takes top priority, based on the Ops need in the moment.
+
+## LIVE (deployed, verified)
+
+- Site: https://weird.baby — LIVE and CURRENT. Last deploy `67b3c7ec`, 2026-06-16 23:04 (verified via `wrangler deployments list`, 2026-06-17).
+- Status: SOFT-LAUNCHED — visible but not advertised / not yet in search engines.
+- Repo HEAD: `753b17e`, in sync with origin/main.
+
+## FULL-LAUNCH GATES (soft-launch -> advertised launch) — INCOMPLETE BY DESIGN
+
+These must be true before driving traffic (Google search, advertising). This list is deliberately incomplete — ADD to it as gaps surface; do not treat as closed.
+
+- [ ] Gift Shops hooked up (artist shops wired/functional, not just routes existing).
+- [ ] Mike's gift shop built (Mike has source work to bring when scoped).
+- [ ] Substantially more content (museum needs many more artifacts before traffic is worth driving).
+- [ ] (more expected — capture as found)
+
+## NEXT (ordered queue — pull from here)
+
+1. [DONE 2026-06-17] Off-GitHub backup — OneDrive mirror `753b17e`.
+2. [DONE 2026-06-17] STATE.md rebuilt as live ledger (this block).
+3. Content expansion toward full-launch gate (largest lever for launch).
+4. Gift shop wiring + Mike's gift shop build (gated on Mike bringing source).
+5. Derived-era client re-wire — HOST-SIDE ONLY, fixed depth, no slider. Parked in docs/derived-era-WIP/. NOT a launch gate.
+6. Press batch (16 URLs) — gated behind derived-era re-wire.
+
+## KNOWN ISSUES (accepted, not yet fixed)
+
+- DECK-SCROLL-OCCLUSION — player bar hides deck bottom. Confirmed reproducing 2026-06-17. Category: minor / infrequent / consistent annoyance. PIGGYBACK when deck-area work opens the file; not pulled standalone.
+- DECKBUG-FBBLOCKS — FB embed renders as black/white block. Reproduction unconfirmed.
+- Inbox photo MV-HR-20260405-036 — 1 of 6 unreleased (5 released).
+- Video-panel YT-thumb fallback — unclassed full-bleed img; mostly moot since albums carry art.
+
+## BACKUP STATUS
+
+- Off-GitHub: OneDrive mirror at `~\OneDrive\_backups\weird-baby-museum\`, `753b17e`, 2026-06-17. POINT-IN-TIME (does not auto-update).
+- STANDING OPS ITEMS (not yet automated): (a) periodic re-mirror so backup stays current; (b) quarterly restore-drill per charter 3.4 — a backup nobody restored is a rumor.
+
+## CANNOT-VERIFY-FROM-MUSEUM-SESSION (flag, separate pass)
+
+- All MediaVault-repo items (C:\AI\Platform\MediaVault) — not reachable in a Museum session. Needs MV-side pass.
+- Mobile UX, banner-match-nav, cover-pill render — need live narrow-width inspection.
+
+<!-- ============================================================= -->
+<!-- END LIVE LEDGER. Durable reference (pre-2026-06-17) follows.   -->
+<!-- ============================================================= -->
+
 ## Decisions / closed
 
 - COL3 FB post clip: CLOSED — ACCEPTED (2026-06-02). Logged-out-only cosmetic clip of the longest post's like/comment/share row. NOT a column bug (column is random per load); NOT an open defect. Cause = fixed-height box that never self-sizes because raw post.php sends no height. Dead-end theories + fix options recorded in docs/FINDING-fb-post-clip.md. Do NOT re-investigate as a mystery — read that doc first.
@@ -157,3 +223,4 @@ authoritative over any narrative in this file.
 Child spec (draft, not yet locked): `docs/UX_PRESETS_SPEC.md` — the
 presets spec that `UX_SPEC_v0.3 §C.5.0` named as forthcoming; child of
 `UX_CONTROLS_SPEC_v0.4 §9` and `UX_LIFECYCLE_SPEC_v0.5 §4.5`.
+
