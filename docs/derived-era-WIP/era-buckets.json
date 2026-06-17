@@ -1,0 +1,21 @@
+{
+  "schema": "era-buckets v0.2 — committed client config (imported by hr_era.js next to vocabulary.json)",
+  "authority": "docs/derived-era-spec_v0.2.md §3.2",
+  "note": [
+    "The ONLY file Mike edits on each bucket revision (≥3 expected near-term).",
+    "Maps a year range -> era label. The client maps each record's weighted",
+    "date-set through these ranges at read time, so editing this file changes",
+    "nothing about the baked artifacts — no re-export, no MV write.",
+    "rwth is DROPPED as a value: it folds into Early Days by date (2016).",
+    "The era SLUG used for tag membership is derived from the label by",
+    "lowercasing and replacing runs of non-alphanumerics with underscores",
+    "('Early Days' -> 'early_days'), which matches the existing MV era: slugs."
+  ],
+  "buckets": [
+    { "label": "Early Days",        "start": 2016, "end": 2018 },
+    { "label": "Finding the Sound", "start": 2019, "end": 2020 },
+    { "label": "Breakthrough",      "start": 2021, "end": 2022 },
+    { "label": "On the Road",       "start": 2023, "end": 2024 },
+    { "label": "Recent",            "start": 2025, "end": 2025 }
+  ]
+}

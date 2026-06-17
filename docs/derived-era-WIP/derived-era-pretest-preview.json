@@ -1,0 +1,5326 @@
+{
+  "generated_at": "2026-06-17T02:14:30.788Z",
+  "exhibit": "hunter_root",
+  "note": "Derived-Era v0.2 pre-test preview. NOT a deploy artifact. era_by_depth uses hr_era.deriveEraSlugs.",
+  "bucket_order": [
+    "early_days",
+    "finding_the_sound",
+    "breakthrough",
+    "on_the_road",
+    "recent"
+  ],
+  "summary": {
+    "leaves": 187,
+    "hand_leaves": 37,
+    "mismatches": 0,
+    "rwth": 15,
+    "underivable": 0,
+    "weight_distinct_values": 70
+  },
+  "counts_by_depth": {
+    "shallow": {
+      "counts": {
+        "early_days": 39,
+        "finding_the_sound": 36,
+        "breakthrough": 20,
+        "on_the_road": 42,
+        "recent": 50
+      },
+      "multiEraLeaves": 0
+    },
+    "medium": {
+      "counts": {
+        "early_days": 40,
+        "finding_the_sound": 40,
+        "breakthrough": 20,
+        "on_the_road": 66,
+        "recent": 50
+      },
+      "multiEraLeaves": 29
+    },
+    "deep": {
+      "counts": {
+        "early_days": 40,
+        "finding_the_sound": 40,
+        "breakthrough": 20,
+        "on_the_road": 67,
+        "recent": 50
+      },
+      "multiEraLeaves": 30
+    }
+  },
+  "leaves": [
+    {
+      "id": "MV-HR-20260405-004",
+      "hand_era": [
+        "recent"
+      ],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.92,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-005",
+      "hand_era": [
+        "on_the_road"
+      ],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-006",
+      "hand_era": [
+        "on_the_road"
+      ],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-007",
+      "hand_era": [
+        "on_the_road"
+      ],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.33,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-008",
+      "hand_era": [
+        "breakthrough"
+      ],
+      "dates": [
+        {
+          "year": 2022,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-009",
+      "hand_era": [
+        "recent"
+      ],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 0.92,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-010",
+      "hand_era": [
+        "on_the_road"
+      ],
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.82,
+          "role": "event_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.67,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "finding_the_sound",
+        "on_the_road"
+      ],
+      "era_deep": [
+        "finding_the_sound",
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-011",
+      "hand_era": [
+        "on_the_road"
+      ],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.84,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-012",
+      "hand_era": [
+        "on_the_road"
+      ],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-013",
+      "hand_era": [
+        "breakthrough"
+      ],
+      "dates": [
+        {
+          "year": 2021,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-014",
+      "hand_era": [
+        "on_the_road"
+      ],
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.6,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-015",
+      "hand_era": [
+        "on_the_road"
+      ],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-034",
+      "hand_era": [
+        "breakthrough"
+      ],
+      "dates": [
+        {
+          "year": 2022,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-035",
+      "hand_era": [
+        "finding_the_sound"
+      ],
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.71,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound",
+        "on_the_road"
+      ],
+      "era_deep": [
+        "finding_the_sound",
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-037",
+      "hand_era": [
+        "on_the_road"
+      ],
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.48,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-038",
+      "hand_era": [
+        "recent"
+      ],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260416-001",
+      "hand_era": [
+        "early_days"
+      ],
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260416-003",
+      "hand_era": [
+        "finding_the_sound"
+      ],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.07,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260416-005",
+      "hand_era": [
+        "finding_the_sound"
+      ],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.15,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260416-009",
+      "hand_era": [
+        "early_days"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2016,
+          "weight": 1.67,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260416-011",
+      "hand_era": [
+        "early_days"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2016,
+          "weight": 1.45,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-20260419-002",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-003",
+      "hand_era": [
+        "recent"
+      ],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-016",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.12,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-017",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.08,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-019",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.74,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-020",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.91,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-021",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.69,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-022",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.7,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-023",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.89,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-024",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.44,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-025",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.37,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-026",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.05,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-027",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.08,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-028",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.1,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-030",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.21,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-031",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.73,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-032",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.51,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260405-033",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.05,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-20260419-003",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 0.77,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260416-014",
+      "hand_era": [
+        "rwth"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2016,
+          "weight": 1.23,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260417-001",
+      "hand_era": [
+        "rwth"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 1.23,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260417-003",
+      "hand_era": [
+        "rwth"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 1.23,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260417-005",
+      "hand_era": [
+        "rwth"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 1.24,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260417-007",
+      "hand_era": [
+        "rwth"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 1.24,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260417-009",
+      "hand_era": [
+        "rwth"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 1.24,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260417-011",
+      "hand_era": [
+        "rwth"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 1.26,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260417-013",
+      "hand_era": [
+        "rwth"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 1.27,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260417-015",
+      "hand_era": [
+        "rwth"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 1.23,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260417-017",
+      "hand_era": [
+        "rwth"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 1.24,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260417-019",
+      "hand_era": [
+        "rwth"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 1.24,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260417-021",
+      "hand_era": [
+        "rwth"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 1.24,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260417-023",
+      "hand_era": [
+        "rwth"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 1.26,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260417-025",
+      "hand_era": [
+        "rwth"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 1.25,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260421-001",
+      "hand_era": [
+        "rwth"
+      ],
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 1.22,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-20260518-001",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-20260523-004",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-20260523-007",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-20260523-019",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2022,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough",
+        "on_the_road"
+      ],
+      "era_deep": [
+        "breakthrough",
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-20260523-022",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-20260523-028",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2022,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.75,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough",
+        "on_the_road"
+      ],
+      "era_deep": [
+        "breakthrough",
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-20260523-031",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.61,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-20260523-047",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-20260523-057",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-20260523-061",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-20260523-077",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.91,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260610-004",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2022,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.23,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 0.99,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough",
+        "on_the_road"
+      ],
+      "era_deep": [
+        "breakthrough",
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260610-005",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.42,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.21,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260611-001",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 1.35,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-001",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 1.52,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.46,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-002",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 1.53,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.47,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-003",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 1.53,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.47,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-004",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 1.51,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.45,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-005",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 1.52,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.46,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-006",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.09,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-007",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 1.53,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.47,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-008",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 1.52,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.46,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-009",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 1.52,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.46,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-010",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 1.53,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.47,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-011",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-20260523-001",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-20260523-025",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-20260523-051",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-20260523-055",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-20260523-063",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-20260523-065",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-20260523-073",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-20260523-075",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-20260523-079",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-20260523-081",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-20260523-083",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-20260523-085",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-20260523-087",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260611-002",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 1.36,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-012",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 1.5,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.44,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-013",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 1.5,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.44,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-014",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-015",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-016",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-017",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 1.53,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.47,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-018",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 1.7,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.49,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-019",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 1.55,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.49,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-020",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 1.52,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.46,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-021",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 1.53,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.47,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-022",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 1.52,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.46,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-023",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "recent"
+      ],
+      "era_deep": [
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-20260523-069",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2019,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2019,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260611-003",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 1.39,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-024",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2019,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-025",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 1.57,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2019,
+          "weight": 1.51,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-026",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 1.56,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2019,
+          "weight": 1.5,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-027",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 1.7,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2019,
+          "weight": 1.49,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-028",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2019,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-029",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2019,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-030",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 1.56,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2019,
+          "weight": 1.5,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-031",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 1.56,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2019,
+          "weight": 1.5,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-032",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2019,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-033",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 1.55,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2019,
+          "weight": 1.49,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-034",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2019,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-035",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2019,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-20260523-016",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.63,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-20260523-034",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.78,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "finding_the_sound",
+        "recent"
+      ],
+      "era_deep": [
+        "finding_the_sound",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-20260523-045",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-20260523-049",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.77,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "finding_the_sound",
+        "on_the_road"
+      ],
+      "era_deep": [
+        "finding_the_sound",
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-20260523-053",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.89,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-20260523-059",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.89,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260610-001",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.4,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.19,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260610-002",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.35,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.14,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260610-003",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.34,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.13,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260610-006",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.42,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.21,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days",
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "early_days",
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260611-004",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 1.44,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-036",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 1.57,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.51,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-037",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 1.58,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.52,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-038",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 1.59,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.53,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-039",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 1.57,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.51,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-040",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 1.56,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.5,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-041",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 1.57,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.51,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-042",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 1.58,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.52,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-043",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 1.57,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.51,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-044",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 1.58,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.52,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-045",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 1.57,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.51,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound"
+      ],
+      "era_deep": [
+        "finding_the_sound"
+      ]
+    },
+    {
+      "id": "MV-20260523-040",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2021,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2021,
+          "weight": 1.92,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2021,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-20260523-042",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2021,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2021,
+          "weight": 1.87,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2021,
+          "weight": 1.48,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-20260523-071",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2021,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2021,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2021,
+          "weight": 1.82,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-HR-20260611-005",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2021,
+          "weight": 1.49,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-046",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2021,
+          "weight": 1.56,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2021,
+          "weight": 1.17,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-047",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2021,
+          "weight": 1.6,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2021,
+          "weight": 1.54,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-048",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2021,
+          "weight": 1.61,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2021,
+          "weight": 1.55,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-049",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2021,
+          "weight": 1.59,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2021,
+          "weight": 1.53,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-050",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2021,
+          "weight": 1.61,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2021,
+          "weight": 1.55,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-051",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2021,
+          "weight": 1.6,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2021,
+          "weight": 1.54,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-052",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2021,
+          "weight": 1.61,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2021,
+          "weight": 1.55,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-053",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2021,
+          "weight": 1.74,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2021,
+          "weight": 1.53,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-054",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2021,
+          "weight": 1.61,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2021,
+          "weight": 1.55,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-055",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2021,
+          "weight": 1.6,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2021,
+          "weight": 1.54,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "breakthrough"
+      ],
+      "era_medium": [
+        "breakthrough"
+      ],
+      "era_deep": [
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "MV-20260523-089",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2018,
+          "weight": 1.64,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2018,
+          "weight": 1.28,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "early_days",
+        "on_the_road"
+      ],
+      "era_deep": [
+        "early_days",
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260610-007",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2018,
+          "weight": 1.39,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2018,
+          "weight": 1.18,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260611-006",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 1.41,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-056",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 1.55,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2018,
+          "weight": 1.49,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-057",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 1.55,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2018,
+          "weight": 1.49,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-058",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2018,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-059",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2018,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-060",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 1.56,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2018,
+          "weight": 1.5,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-061",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 1.56,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2018,
+          "weight": 1.5,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-062",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 1.56,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2018,
+          "weight": 1.5,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-063",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 1.56,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2018,
+          "weight": 1.5,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-064",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 1.61,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2018,
+          "weight": 1.55,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-065",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2018,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-066",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2018,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-067",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2017,
+          "weight": 1.56,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2017,
+          "weight": 1.5,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-068",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2017,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2017,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-069",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2017,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2017,
+          "weight": 1.48,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-070",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2017,
+          "weight": 1.63,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2017,
+          "weight": 1.57,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-071",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2017,
+          "weight": 1.53,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2017,
+          "weight": 1.47,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-079",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2017,
+          "weight": 1.51,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "early_days"
+      ],
+      "era_medium": [
+        "early_days"
+      ],
+      "era_deep": [
+        "early_days"
+      ]
+    },
+    {
+      "id": "MV-20260523-010",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.89,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-20260523-013",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.53,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.29,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-20260523-037",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.89,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-20260523-067",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.92,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.89,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "finding_the_sound"
+      ],
+      "era_medium": [
+        "finding_the_sound",
+        "on_the_road"
+      ],
+      "era_deep": [
+        "finding_the_sound",
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260610-008",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.42,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.21,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "recent"
+      ],
+      "era_medium": [
+        "on_the_road",
+        "recent"
+      ],
+      "era_deep": [
+        "on_the_road",
+        "recent"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-072",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.33,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-073",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.33,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-074",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 1.55,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.34,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-075",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 1.56,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.35,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-076",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 1.53,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.32,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-077",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 1.32,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.08,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    },
+    {
+      "id": "MV-HR-20260612-078",
+      "hand_era": [],
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 1.54,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.33,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ],
+      "era_shallow": [
+        "on_the_road"
+      ],
+      "era_medium": [
+        "on_the_road"
+      ],
+      "era_deep": [
+        "on_the_road"
+      ]
+    }
+  ]
+}
