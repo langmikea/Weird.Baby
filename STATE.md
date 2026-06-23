@@ -50,6 +50,23 @@ These must be true before driving traffic (Google search, advertising). This lis
 - Inbox photo MV-HR-20260405-036 — 1 of 6 unreleased (5 released).
 - Video-panel YT-thumb fallback — unclassed full-bleed img; mostly moot since albums carry art.
 
+## GIFT SHOP — MERCH PIPELINE (added 2026-06-23, verified this session)
+
+Reality the ledger previously missed. Code (`src/data/wb_merch.js`) is correct as-is — `live:false`, "coming soon" is the accurate visitor state. This records the OPERATOR-side state behind it.
+
+- **Printful account: LIVE.** Logged in as Mike. One store exists: "Weird.Baby", tagged **Live + QuickStore** (Printful's native storefront, US-only, $0/mo). NOT Big Cartel.
+- **Stickers BUILT + SOLD.** Product "Weird.Baby Sticker", published, 3 kiss-cut white variants: 3"x3" (#15583638, $4.50), 4"x4" (#15583639, $4.50), 5.5"x5.5" (#15583640, $5.00). Mike test-bought 10 — print quality good, thin white border as expected.
+- **Sticker size ceiling = 5.5" square.** Catalog kiss-cut sizes: 3"/4"/5.5"/15"x3.75". The 15" is a bumper strip — REJECTED by Mike (square only). No larger square exists. Sticker line is COMPLETE.
+- **PARKED quality item:** the 3 sticker variants carry an OLD low-res file. Mike has a better 2400px master. Refresh = swap master into each variant's design, confirm no res warning. Deferrable; blocks nothing.
+
+## STOREFRONT DECISION (settled 2026-06-23)
+
+- **Long-term: custom domain `shop.weird.baby` wanted.** Today: URL not a factor.
+- **Path:** use the existing free Quick Store now (pre-launch, near-zero traffic — no fee justified yet). Stand up **Big Cartel Platinum + attach `shop.weird.baby` at launch**, when traffic justifies the $15/mo.
+- **Key fact:** Quick Store CANNOT take a custom domain ever (Printful confirmed). Big Cartel free also can't — needs Platinum ($15/mo). So custom URL = Big Cartel Platinum, full stop.
+- **Durable asset insight:** the reusable work is the Printful PRODUCTS (designs/print files), portable to any storefront. The storefront is a thin wrapper, cheaply rebuilt. Quick-Store-now wastes nothing but a 10-min wrapper.
+- **NEXT merch products (durable work, storefront-agnostic):** shirts, hats. Not yet built.
+
 ## BACKUP STATUS
 
 - Off-GitHub: OneDrive mirror at `~\OneDrive\_backups\weird-baby-museum\`, `753b17e`, 2026-06-17. POINT-IN-TIME (does not auto-update).
