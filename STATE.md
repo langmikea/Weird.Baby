@@ -59,6 +59,22 @@ Reality the ledger previously missed. Code (`src/data/wb_merch.js`) is correct a
 - **Sticker size ceiling = 5.5" square.** Catalog kiss-cut sizes: 3"/4"/5.5"/15"x3.75". The 15" is a bumper strip — REJECTED by Mike (square only). No larger square exists. Sticker line is COMPLETE.
 - **PARKED quality item:** the 3 sticker variants carry an OLD low-res file. Mike has a better 2400px master. Refresh = swap master into each variant's design, confirm no res warning. Deferrable; blocks nothing.
 
+## GIFT SHOP — SHIPPED LIVE (2026-06-23, deploy c12cffe5)
+
+The gift shop is LIVE on weird.baby/shop (verified incognito). Supersedes the "decision/parked" notes below for shop-render status.
+
+- **WB sticker is for sale in-shop.** wb_merch.js: live:true, links to https://weird-baby.printful.me. Sticker image cropped tight (was whitespace-heavy), at public/images/wb-merch/sticker.png.
+- **Layout: all sections are unified horizontal BANNERS** (Featured + Friends share the .featured-artist structure via a shared <Banner> component in GiftShop.jsx). No more square grids.
+- **Page order:** one FEATURED section (top, enlarged label) -> FRIENDS (Weird.Baby banner first, then non-featured roster, then the FEATURED artist repeated last). Everyone appears once in Friends; featured artist shows top + tail. Logic: others/featuredInRoster split in GiftShop.jsx.
+- **Removed:** all CTA buttons, the price line, and the no-cut blurb (Mike: kill all extra text/buttons).
+- **Hunter Root:** image filled (Crooked Home art, public/images/wb-merch/hunter-root.png), blurb = "Records, prints, and road-worn merch from a songwriter worth following home." (timeless, no album count). Store link unchanged (hunterroot.com, correct).
+- **WB Friends-banner bio:** "Stickers, shirts, and hats from the museum itself. Buy a little weirdness — and help us keep the lights on for the artists we love."
+- Commit 16c76d4, deploy c12cffe5, wrangler 4.81.1.
+
+### Still open (not done this session)
+- Shirts + hats: not built. Next durable merch product work, storefront-agnostic.
+- Sticker low-res refresh: the 3 Printful sticker VARIANTS still carry the old low-res master (the in-shop image is fine; this is the product print file on Printful's side). Deferrable.
+- shop.weird.baby custom domain: deferred to launch (Big Cartel Platinum), per storefront decision above.
 ## STOREFRONT DECISION (settled 2026-06-23)
 
 - **Long-term: custom domain `shop.weird.baby` wanted.** Today: URL not a factor.
