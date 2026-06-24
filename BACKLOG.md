@@ -53,10 +53,11 @@ Tracklist Queue Overhaul — both touch the queue core.
 
 ## Tier 3 — Quality of Life
 
-**Tracklist Queue Overhaul.** Single click queues, double click plays-now,
-visible queue UI, interrupt+resume, video-area render changes. Touches the
-core of Exhibit.jsx — scope before building. (Moved from old Tier 1: it's a
-landmine-class change, not a quick win.)
+**Tracklist Queue Overhaul.** SUPERSEDED 2026-06-24 by TL-INTERACTION-2026-06-24
+(see intake block). Queue mechanics (visible queue UI, interrupt+resume,
+video-area render) remain valid as future work, but the click-model is now
+defined by the new spec, not "single-click queues / double-click plays."
+Touches the core of Exhibit.jsx — scope before building.
 
 **RWTH children: restore song: tags in MV.** Stripped MV-side between
 2026-05-31 and 06-10 (origin unknown — possibly the fruitless session or tag
@@ -93,9 +94,8 @@ yt_research/yt_bulk_triage_20260524T005805Z.md need a home-or-skip decision.
 **UI polish.** Center HUNTER ROOT in nav; journal alignment (P2/P3); active
 coverflow album larger.
 
-**Content polish.** Artist photos for gift shop roster; rewrite wb_roster.js
-featured blurb (the Lancaster revision was lost uncommitted — rewrite from
-scratch); walked-in bell audio for gift shop.
+**Content polish.** Artist photos for gift shop roster (Hunter done; others
+pending); walked-in bell audio for gift shop. [Featured blurb DONE 2026-06-23.]
 
 ---
 
@@ -105,7 +105,7 @@ scratch); walked-in bell audio for gift shop.
 3b). Genuine layout problem: sticky containing block vs abs-grid scroll
 decoupling. Do not reopen without a scoped tradeoff decision.
 
-**Museum Merch Pipeline.** Big Cartel + Printful.
+**Museum Merch Pipeline.** SHIPPED 2026-06-23 (Printful Quick Store live, sticker for sale, gift shop banners — deploy c12cffe5). Remaining: shirts + hats (new products), Big Cartel Platinum + shop.weird.baby at launch. See STATE.md "GIFT SHOP — SHIPPED LIVE".
 
 **Content Archive Preservation.** Hard copies + Digital Archive Catalog
 System. Needs scoping session.
@@ -149,13 +149,33 @@ resolve the RWTH song-tag stripping (Tier 3) — a cleanup pass is a suspect.
 - Design review 2026-06-10 — stable-base verdict, fragility inventory
 
 ---
+## INTAKE 2026-06-24 (Mike) — post gift-shop-ship
+### New exhibits / pages
+- EXHIBIT-WEIRDBABY (Med): add a Weird.Baby exhibit (the museum as its own exhibit subject). Uses the shared Exhibit.jsx + per-artist config pattern (src/data/artists/). Scope content first.
+- EXHIBIT-SONGS-ESSENTIAL (Med): add exhibit "songs everyone should hear at least once." Curatorial/content-driven; same Exhibit.jsx config pattern. Scope the song list + sourcing.
+- LOBBY-DIRECTORY (Med): build the lobby page as the site directory — the front-door index to every exhibit + the shop. (Distinct from current WbHome lobby; this is the navigational directory surface.)
+
+### PUV
+- PUV-FACTS-FIX (Med, COWORK JOB): the PUV fact content is wrong/needs correction (data in src/routes/hr/hr_facts.js). Content fix, not the box-sizing fixes (those are PUV-HEIGHT-ADJUSTABLE + Tier-1 stretch fix). Cowork can read + draft corrected facts; Mike writes.
+
+### Tracklist — TL-INTERACTION-2026-06-24 (SUPERSEDES all prior TITLESEL / queue click-model)
+This is the single source of truth for tracklist click behavior. Replaces TITLESEL (06-11), SELECTION-MODEL (06-13), and the click-model half of Tracklist Queue Overhaul.
+- Single click on SONG TITLE -> FOCUS the track (select/highlight; does NOT play).
+- Double click on SONG TITLE -> PLAY the track.
+- Click on SONG DESCRIPTION (the descriptor text) -> open a DROPDOWN. (Carries forward the prior "descriptor has-dropdown-data flag" idea: descriptors with dropdown data are interactive.)
+- Track NUMBERS: darker (currently too light).
+- CURRENTLY-PLAYING track: make it MUCH more visually obvious.
+- All of the above live in the shared Exhibit.jsx tracklist (TrackList) — landmine-class, shared across exhibits now. Scope before building.
+
+### iPhone / mobile
+- IPHONE-CLEANUP (Low — LAST step before launch): clean up iPhone/narrow-width views. Folds together with the existing Tier-3 "Mobile UX verify-pass" + STATE.md mobile-UX flag. Do last.
 ## INTAKE 2026-06-13 (Mike)
 ### New items
 - PUV-HEIGHT-ADJUSTABLE: adjustable height of the PUV->Video box, scaling both (PUV and video) proportionally along the way. (New; distinct from the Tier-1 video-panel stretch/img-fit fix.)
 - DECK-SCROLL-OCCLUSION (live defect): cannot scroll to the bottom of the deck — the fixed player bar hides it. Bottom deck content is unreachable. (Related to Tier-5 top-pin + DECKBUG-SEAM but distinct: functional occlusion, not just seam cosmetics.)
 ### Refinements to open threads
 - WB-COLOR / COLOR-VERDICT resolution (Mike's "specific request" promised 2026-06-12): Mike prefers the colors AND fonts of `docs/filter-instrument-reference.html` (the v7_1 filter instrument). Use it as the color+font design source for the WB-COLOR live mock. (Source file also at C:\Users\macun\Downloads\filter-instrument-v7_1.html.)
-- TITLESEL / SELECTION-MODEL clarification: clicking a SONG should PLAY the song; clicking the extra DESCRIPTOR text after the song should open a DROPDOWN. Descriptors that carry dropdown data need a FLAG (data-model addition: a per-descriptor "has-dropdown-data" flag drives whether the descriptor is interactive).
+- TITLESEL / SELECTION-MODEL: [SUPERSEDED 2026-06-24 by TL-INTERACTION — see latest intake. The descriptor->dropdown idea and the per-descriptor has-dropdown-data flag carry forward into the new spec.]
 ## INTAKE 2026-06-11 PM (Mike) - pre-launch sweep
 - CAROUSEL-DENSITY: use full carousel width, more albums visible at once.
 - LOGO-TOPLEFT: tiny Weird.Baby logo mark in nav top-left (needs asset plumbing).
@@ -173,7 +193,7 @@ resolve the RWTH song-tag stripping (Tier 3) — a cleanup pass is a suspect.
 - DECKBUG-UNAVAILABLE-LEAD: first deck card is a rights-restricted FB video FB refuses to embed -> demote to link card or change leadoff (MV data decision).
 - SNAP-DOUBLE: html+body both scroll-snap (fix in Cycle 2a); tap-to-top snap-captured (fix: instant).
 ### GUI
-- TITLESEL: song title IS the dropdown; one option per rendition with descriptive label. Supersedes pill-cycling. (Cycle 2a; iterate on look.)
+- TITLESEL: [SUPERSEDED 2026-06-24 by TL-INTERACTION — see latest intake. Original: song title IS the dropdown.]
 - SELECTION-MODEL note (needs clarification later): cycling multiples within a type; one of each type per category; a song from each category permitted.
 - AUDIO-ONLY-RENDITIONS: [AUDIO] per track for screen-off playback (YT halts video). RWTH mp3-on-R2 pattern is the template.
 ### Features / platform
