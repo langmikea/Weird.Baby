@@ -7,9 +7,9 @@
 // Room anatomy, top to bottom:
 //   1. Walked-in bell (plays once on mount, no-op if sound file missing)
 //   2. "GIFT SHOP" signage
-//   3. FEATURED — one artist, prominent, links out to their external store
-//   4. WEIRD.BABY — the museum's own merch (coming soon until pipeline is live)
-//   5. FRIENDS — the full roster, displayed out of love
+//   3. FEATURED banner (top)
+//   4. FRIENDS — Weird.Baby first, then the roster
+//   5. FEATURED banner again (bottom, identical)
 //   6. LOBBY exit (right-aligned)
 
 import React, { useEffect, useMemo, useRef } from "react";
@@ -17,6 +17,46 @@ import { Link, useSearchParams } from "react-router-dom";
 import { wbRoster, getArtistById, pickRandomArtist } from "../../data/wb_roster";
 import { wbMerch } from "../../data/wb_merch";
 import "./GiftShop.css";
+
+// Weird.Baby shown as the first banner in Friends — same shape as an artist.
+const wbAsBanner = {
+  id: "weird-baby",
+  name: wbMerch.storeName,
+  storeUrl: wbMerch.storeUrl,
+  image: wbMerch.featured[0]?.img || null,
+  blurb:
+    "Stickers, shirts, and hats from the museum itself. Buy a little weirdness — and help us keep the lights on for the artists we love.",
+};
+
+function Banner({ entry }) {
+  return (
+    <a
+      className="featured-artist"
+      href={entry.storeUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Visit ${entry.name}'s store — opens in a new tab`}
+    >
+      <div className="featured-artist__image-wrap">
+        {entry.image ? (
+          <img src={entry.image} alt="" className="featured-artist__image" />
+        ) : (
+          <div className="featured-artist__image-fallback" aria-hidden="true">
+            <div className="featured-artist__image-fallback-name">
+              {entry.name}
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="featured-artist__meta">
+        <div className="featured-artist__name">{entry.name}</div>
+        {entry.blurb && (
+          <div className="featured-artist__blurb">{entry.blurb}</div>
+        )}
+      </div>
+    </a>
+  );
+}
 
 export default function GiftShop() {
   const [searchParams] = useSearchParams();
@@ -27,7 +67,6 @@ export default function GiftShop() {
     return fromExhibit || pickRandomArtist();
   }, [fromId]);
 
-  // Walked-in bell. Plays once on mount. Silent fail if file missing.
   const bellRef = useRef(null);
   useEffect(() => {
     const bell = bellRef.current;
@@ -37,6 +76,16 @@ export default function GiftShop() {
       playPromise.catch(() => {});
     }
   }, []);
+
+  // Friends list: Weird.Baby first, then everyone once,
+  // with the featured artist moved to the very end.
+  const others = wbRoster.filter((a) => a.id !== featured?.id);
+  const featuredInRoster = wbRoster.find((a) => a.id === featured?.id);
+  const friends = [
+    wbAsBanner,
+    ...others,
+    ...(featuredInRoster ? [featuredInRoster] : []),
+  ];
 
   return (
     <div className="gift-shop">
@@ -51,126 +100,24 @@ export default function GiftShop() {
         <h1 className="gift-shop__title">GIFT SHOP</h1>
       </header>
 
-      {/* FEATURED ARTIST */}
+      {/* FEATURED (top) */}
       {featured && (
         <section className="gift-shop__section gift-shop__featured">
-          <div className="gift-shop__eyebrow">Featured</div>
-          <a
-            className="featured-artist"
-            href={featured.storeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Visit ${featured.name}'s store — opens in a new tab`}
-          >
-            <div className="featured-artist__image-wrap">
-              {featured.image ? (
-                <img
-                  src={featured.image}
-                  alt=""
-                  className="featured-artist__image"
-                />
-              ) : (
-                <div className="featured-artist__image-fallback" aria-hidden="true">
-                  <div className="featured-artist__image-fallback-name">
-                    {featured.name}
-                  </div>
-                </div>
-              )}
-            </div>
-            <div className="featured-artist__meta">
-              <div className="featured-artist__name">{featured.name}</div>
-              {featured.blurb && (
-                <div className="featured-artist__blurb">{featured.blurb}</div>
-              )}
-              <div className="featured-artist__cta">
-                Visit {featured.name}'s store →
-              </div>
-            </div>
-          </a>
+          <div className="gift-shop__eyebrow gift-shop__eyebrow--featured">
+            Featured
+          </div>
+          <Banner entry={featured} />
         </section>
       )}
 
-      {/* WEIRD.BABY'S OWN MERCH */}
-      <section className="gift-shop__section gift-shop__wb">
-        <div className="gift-shop__eyebrow">Weird.Baby</div>
-        {wbMerch.live && wbMerch.featured.length > 0 ? (
-          <>
-            <div className="wb-merch__grid">
-              {wbMerch.featured.map((item, i) => (
-                <a
-                  key={i}
-                  className="wb-merch__item"
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div className="wb-merch__image-wrap">
-                    {item.img ? (
-                      <img
-                        src={item.img}
-                        alt=""
-                        className="wb-merch__image"
-                      />
-                    ) : (
-                      <div className="wb-merch__image-placeholder" />
-                    )}
-                  </div>
-                  <div className="wb-merch__title">{item.title}</div>
-                  <div className="wb-merch__price">{item.price}</div>
-                </a>
-              ))}
-            </div>
-            <div className="gift-shop__cta-wrap">
-              <a
-                className="gift-shop__cta"
-                href={wbMerch.storeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Visit the Weird.Baby store →
-              </a>
-            </div>
-          </>
-        ) : (
-          <div className="wb-merch__placeholder">
-            <p>Museum merch coming soon.</p>
-          </div>
-        )}
-      </section>
-
-      {/* FRIENDS — the wall of love */}
+      {/* FRIENDS — Weird.Baby first, then the roster */}
       <section className="gift-shop__section gift-shop__friends">
-        <div className="gift-shop__eyebrow">Friends</div>
+        <div className="gift-shop__eyebrow gift-shop__eyebrow--friends">
+          Friends
+        </div>
         <div className="friends__grid">
-          {wbRoster.map((artist) => (
-            <a
-              key={artist.id}
-              className="friends__card"
-              href={artist.storeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Visit ${artist.name}'s store — opens in a new tab`}
-            >
-              <div className="friends__image-wrap">
-                {artist.image ? (
-                  <img
-                    src={artist.image}
-                    alt=""
-                    className="friends__image"
-                  />
-                ) : (
-                  <div className="friends__image-fallback" aria-hidden="true">
-                    <div className="friends__image-fallback-name">
-                      {artist.name}
-                    </div>
-                  </div>
-                )}
-              </div>
-              <div className="friends__name">{artist.name}</div>
-              {artist.blurb && (
-                <div className="friends__blurb">{artist.blurb}</div>
-              )}
-            </a>
+          {friends.map((entry) => (
+            <Banner key={entry.id} entry={entry} />
           ))}
         </div>
       </section>

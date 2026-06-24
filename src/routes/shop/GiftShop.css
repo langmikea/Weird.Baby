@@ -38,13 +38,22 @@
 
 .gift-shop__eyebrow {
   font-family: 'Syne', sans-serif;
-  font-weight: 600;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
-  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  font-size: 1.1rem;
   color: #211f1c;
   text-align: center;
   margin-bottom: 1.5rem;
+}
+
+.gift-shop__eyebrow--featured {
+  font-size: 1.5rem;
+  letter-spacing: 0.24em;
+}
+
+.gift-shop__eyebrow--friends {
+  font-size: 1.25rem;
 }
 
 /* ─── FEATURED ARTIST ──────────────────────────────────────────────── */
@@ -128,18 +137,22 @@
 
 /* ─── WEIRD.BABY MERCH ─────────────────────────────────────────────── */
 .wb-merch__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 1.25rem;
   margin-bottom: 1.5rem;
 }
 
 .wb-merch__item {
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(180px, 240px) 1fr;
+  gap: 2rem;
+  align-items: center;
   text-decoration: none;
   color: inherit;
   border: 1px solid #c6c2b7;
   background: #faf8f3;
+  padding: 1.75rem;
   overflow: hidden;
   transition: border-color 0.2s, transform 0.2s;
 }
@@ -169,16 +182,18 @@
 }
 
 .wb-merch__title {
-  padding: 0.7rem 0.85rem 0.15rem;
-  font-family: 'Courier Prime', monospace;
-  font-size: 0.82rem;
+  padding: 0;
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 2rem;
   color: #211f1c;
+  line-height: 1.1;
+  margin-bottom: 0.4rem;
 }
 
 .wb-merch__price {
-  padding: 0 0.85rem 0.7rem;
+  padding: 0;
   font-family: 'Courier Prime', monospace;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   color: #6f6b62;
 }
 
@@ -225,18 +240,21 @@
 
 /* ─── FRIENDS ──────────────────────────────────────────────────────── */
 .friends__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
 }
 
 .friends__card {
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(180px, 240px) 1fr;
+  gap: 2rem;
+  align-items: center;
   text-decoration: none;
   color: inherit;
   border: 1px solid #c6c2b7;
   background: #faf8f3;
-  padding-bottom: 1rem;
+  padding: 1.75rem;
   transition: border-color 0.2s, transform 0.2s;
 }
 
@@ -250,8 +268,7 @@
   aspect-ratio: 1 / 1;
   overflow: hidden;
   background: #ece9e0;
-  margin-bottom: 0.85rem;
-  border-bottom: 1px solid #c6c2b7;
+  border: 1px solid #c6c2b7;
 }
 
 .friends__image {
@@ -281,18 +298,21 @@
 }
 
 .friends__name {
-  padding: 0 0.95rem 0.25rem;
+  padding: 0;
   font-family: 'DM Serif Display', Georgia, serif;
-  font-size: 1.1rem;
+  font-size: 2rem;
   color: #211f1c;
+  line-height: 1.1;
+  margin-bottom: 0.6rem;
 }
 
 .friends__blurb {
-  padding: 0 0.95rem;
+  padding: 0;
   font-family: 'Courier Prime', monospace;
-  font-size: 0.74rem;
-  color: #6f6b62;
-  line-height: 1.45;
+  font-size: 0.88rem;
+  color: #57544d;
+  line-height: 1.55;
+  max-width: 42ch;
 }
 
 /* ─── EXIT (right-aligned) ─────────────────────────────────────────── */
@@ -330,20 +350,31 @@
   .gift-shop__title {
     font-size: 2rem;
   }
-  .featured-artist {
+  .featured-artist,
+  .friends__card,
+  .wb-merch__item {
     grid-template-columns: 1fr;
     gap: 1.25rem;
     padding: 1.25rem;
   }
-  .featured-artist__name {
+  .featured-artist__name,
+  .friends__name,
+  .wb-merch__title {
     font-size: 1.6rem;
-  }
-  .friends__grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
   }
 }
 
+/* No-cut caption — quiet, centered, under signage */
+.gift-shop__cut-note {
+  text-align: center;
+  max-width: 52ch;
+  margin: -1.5rem auto 3rem;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.8rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: #57544d;
+}
 /* B&W PASS 2: film grain over the shop, same wash as the exhibit and
    Lobby — one room, one stock. */
 .gift-shop::after {

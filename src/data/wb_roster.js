@@ -18,8 +18,8 @@ export const wbRoster = [
     exhibitRoute: "/hr",
     storeUrl: "https://www.hunterroot.com/",
     storePlatform: "Squarespace",
-    image: null, // typography fallback until photo added
-    blurb: "Central PA songwriter. Six albums. Aphantasic lyric cinema.",
+    image: "/images/wb-merch/hunter-root.png",
+    blurb: "Records, prints, and road-worn merch from a songwriter worth following home.",
   },
 ];
 
