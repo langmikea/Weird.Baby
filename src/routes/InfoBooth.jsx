@@ -25,11 +25,15 @@ export default function InfoBooth() {
         .booth-nav-return { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: #211f1c; text-decoration: none; transition: opacity 0.2s; }
         .booth-nav-logo:hover, .booth-nav-return:hover { opacity: 0.7; }
 
-        .booth-card { max-width: 560px; background: #faf8f3; border: 1px solid #c6c2b7; padding: 52px 56px 44px; position: relative; box-shadow: 0 1px 2px rgba(33,31,28,0.12), 0 6px 18px rgba(33,31,28,0.08); }
+        /* Centered placard (Mike 2026-07-06: the credo was wrapping badly —
+           breaks are now deliberate, an inscription, not a paragraph). */
+        .booth-card { max-width: 560px; text-align: center; background: #faf8f3; border: 1px solid #c6c2b7; padding: 52px 56px 44px; position: relative; box-shadow: 0 1px 2px rgba(33,31,28,0.12), 0 6px 18px rgba(33,31,28,0.08); }
         .booth-words { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.02rem, 1.5vw, 1.2rem); line-height: 1.85; color: #2b2924; }
-        .booth-words p { margin-bottom: 1.15em; }
+        .booth-words p { margin-bottom: 1.2em; }
         .booth-words p:last-of-type { margin-bottom: 0; }
-        .booth-rule { width: 36px; height: 1px; background: #211f1c; opacity: 0.5; margin: 26px 0 22px; }
+        .booth-credo { font-size: clamp(1.18rem, 1.9vw, 1.42rem); line-height: 1.65; }
+        .booth-credo em { font-style: italic; color: #211f1c; }
+        .booth-rule { width: 36px; height: 1px; background: #211f1c; opacity: 0.5; margin: 26px auto 22px; }
         .booth-contact { font-family: 'Courier Prime', monospace; font-size: 0.78rem; letter-spacing: 0.06em; color: #57544d; }
         .booth-contact a { color: #211f1c; text-decoration: none; border-bottom: 1px solid #a9a59a; }
         .booth-pending { font-style: italic; color: #9b978d; font-size: 0.68rem; margin-left: 6px; }
@@ -53,8 +57,14 @@ export default function InfoBooth() {
         {/* THE WORDS — DRAFT v0, Papa's voice. Mike edits or approves. */}
         <div className="booth-card">
           <div className="booth-words">
-            <p>The Weird.Baby Museum is free. Equally free. Always.</p>
-            <p>No tickets, no tiers, no ads. Every visitor is royalty.</p>
+            <p className="booth-credo">
+              The Weird.Baby Museum is free.<br />
+              Equally free. <em>Always.</em>
+            </p>
+            <p>
+              No tickets, no tiers, no ads.<br />
+              Every visitor is royalty.
+            </p>
             <p>
               The museum owns nothing and takes nothing. Money that passes
               through here goes to making the world better — all of it,
