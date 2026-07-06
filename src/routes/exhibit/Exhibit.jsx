@@ -448,7 +448,7 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
             {hasVids ? (
               <span className="tl-selwrap">
                 <b className="tl-tt">{track.title}</b>
-                <span className="tl-typewrap">
+                <span className="tl-typewrap" onClick={e => e.stopPropagation()}>
                   <select className="tl-typesel" value={[...selSet][0] ?? 0}
                     onClick={e => e.stopPropagation()}
                     onChange={e => { e.stopPropagation(); onTagClick(ti, Number(e.target.value)); }}>
