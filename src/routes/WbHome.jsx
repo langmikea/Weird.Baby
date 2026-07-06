@@ -61,8 +61,15 @@ export default function WbHome() {
         .wb-tagline { font-family: 'Courier Prime', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: #57544d; margin-top: 24px; position: relative; z-index: 1; animation: blink 3s step-end infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
-        .wb-explore { margin-top: 48px; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: #6f6b62; background: none; border: none; cursor: pointer; transition: color 0.3s; white-space: nowrap; z-index: 1; padding: 8px 0; position: relative; }
-        .wb-explore:hover { color: #211f1c; }
+        /* DIRECTORY (Stage 3, WB_ARTIST_LOBBY_BOOTH-20260706): four listings
+           replace the single explore button. Museum signage — type only,
+           no images. Booth-behind-glass was inspiration, not literal. */
+        .wb-directory { margin-top: 44px; z-index: 1; position: relative; width: min(300px, 80%); }
+        .wb-dir-label { font-family: 'Courier Prime', monospace; font-size: 0.56rem; letter-spacing: 0.28em; text-transform: uppercase; color: #9b978d; margin-bottom: 10px; text-align: center; }
+        .wb-dir-entry { display: flex; justify-content: space-between; align-items: baseline; width: 100%; padding: 9px 2px; background: none; border: none; border-top: 1px solid #c6c2b7; cursor: pointer; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: #6f6b62; transition: color 0.3s; white-space: nowrap; }
+        .wb-dir-entry:last-child { border-bottom: 1px solid #c6c2b7; }
+        .wb-dir-entry:hover { color: #211f1c; }
+        .wb-dir-arrow { font-family: 'Courier Prime', monospace; font-size: 0.6rem; color: inherit; }
 
         .wb-right { display: flex; flex-direction: column; justify-content: center; padding: 48px 52px; overflow: hidden; position: relative; }
         .wb-note { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1rem, 1.35vw, 1.25rem); line-height: 1.75; color: #2b2924; margin-bottom: 10px; }
@@ -106,7 +113,7 @@ export default function WbHome() {
           .wb-left { padding: 48px 24px 32px; border-right: none; border-bottom: 1px solid #c6c2b7; }
           .wb-logo { width: min(240px, 70vw); }
           .wb-right { padding: 36px 28px 60px; }
-          .wb-explore { margin-top: 32px; }
+          .wb-directory { margin-top: 32px; }
         }
       `}</style>
 
@@ -114,9 +121,21 @@ export default function WbHome() {
         <div className="wb-left">
           <img src="/WeirdBaby_PhotoID.png" alt="Weird.Baby" className="wb-logo" />
           <div className="wb-tagline">something is being built here</div>
-          <button className="wb-explore" onClick={() => navigate("/hr")}>
-            explore what's here →
-          </button>
+          <nav className="wb-directory" aria-label="Museum directory">
+            <div className="wb-dir-label">Directory</div>
+            <button className="wb-dir-entry" onClick={() => navigate("/hr")}>
+              <span>Hunter Root</span><span className="wb-dir-arrow">→</span>
+            </button>
+            <button className="wb-dir-entry" onClick={() => navigate("/wb")}>
+              <span>Weird.Baby</span><span className="wb-dir-arrow">→</span>
+            </button>
+            <button className="wb-dir-entry" onClick={() => navigate("/booth")}>
+              <span>Information Booth</span><span className="wb-dir-arrow">→</span>
+            </button>
+            <button className="wb-dir-entry" onClick={() => navigate("/shop")}>
+              <span>Gift Shop</span><span className="wb-dir-arrow">→</span>
+            </button>
+          </nav>
         </div>
 
         <div className="wb-right">
