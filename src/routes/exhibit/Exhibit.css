@@ -101,12 +101,11 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 .tl-title{font-family:'Courier Prime',monospace;font-size:.98rem;color:var(--hr-gold);flex:1;padding:0 10px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 /* 2026-07-06 Mike: number/title click plays. Variant dropdown = a VISIBLE
    styled select at the type position (popup anchors there, not the title).
-   Plain mono type, no italics, wider gap after the title. Single-rendition
-   tracks render plain .tl-type text — no dropdown at all. */
+   Plain mono type, no italics, wider gap after the title. Always drops,
+   even with one option — consistent affordance. */
 .tl-selwrap{flex:1;min-width:0;display:flex;align-items:baseline;gap:14px;padding:0 10px;overflow:hidden}
 .tl-tt{font-family:'Courier Prime',monospace;font-weight:700;font-size:1rem;color:var(--hr-gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tl-track:hover .tl-tt{color:var(--hr-gold-hi)}
-.tl-type{font-family:'Courier Prime',monospace;font-size:.68rem;letter-spacing:.04em;color:var(--hr-gold-mute);white-space:nowrap;flex-shrink:0}
 .tl-typewrap{position:relative;display:inline-flex;align-items:baseline;flex-shrink:0}
 .tl-typewrap::after{content:"▾";position:absolute;right:2px;top:50%;transform:translateY(-52%);font-size:.55rem;color:var(--hr-gold-mute);pointer-events:none}
 .tl-typesel{font-family:'Courier Prime',monospace;font-size:.68rem;letter-spacing:.04em;color:var(--hr-gold-mute);background:transparent;border:none;appearance:none;-webkit-appearance:none;cursor:pointer;padding:0 14px 0 0;max-width:220px;overflow:hidden;text-overflow:ellipsis}

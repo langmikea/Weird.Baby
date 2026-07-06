@@ -79,22 +79,14 @@ export default function GiftShop() {
         aria-hidden="true"
       />
 
-      {/* LOBBY EXITS — both top corners, styled like the exhibit's nav
-          buttons (Mike 2026-07-06) */}
-      <nav className="gift-shop__exit gift-shop__exit--left" aria-label="Gift shop exit">
-        <Link to="/" className="gift-shop__exit-link">
-          ← LOBBY
-        </Link>
-      </nav>
-      <nav className="gift-shop__exit gift-shop__exit--right" aria-label="Gift shop exit">
-        <Link to="/" className="gift-shop__exit-link">
-          LOBBY →
-        </Link>
-      </nav>
-
-      <header className="gift-shop__signage">
-        <h1 className="gift-shop__title">GIFT SHOP</h1>
-      </header>
+      {/* TITLE BAR — museum-standard exhibit format (Mike 2026-07-06):
+          brand left → lobby · room name center · exit right → lobby.
+          Mirrors Exhibit.jsx's ex-nav (brand / artist / Gift Shop). */}
+      <div className="gift-shop__nav">
+        <Link to="/" className="gift-shop__nav-logo">Weird.Baby</Link>
+        <h1 className="gift-shop__nav-sub">Gift Shop</h1>
+        <Link to="/" className="gift-shop__nav-return">Lobby</Link>
+      </div>
 
       {/* TOP BILLING — unlabeled */}
       {featured && (

@@ -440,26 +440,23 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
             <span className="tl-num">
               {playing ? <NpBars color="#b8974a" /> : String(ti+1).padStart(2,"0")}
             </span>
+            {/* 2026-07-06 Mike: number/title click PLAYS (bubbles to the row).
+                The variant dropdown is a VISIBLE styled select sitting where
+                the type text is, so the popup anchors there — not the title.
+                It ALWAYS drops, even with one option — a type that sometimes
+                does nothing is disorienting (Mike). */}
             {hasVids ? (
-              {/* 2026-07-06 Mike: number/title click PLAYS (bubbles to the row).
-                  The variant dropdown is a VISIBLE styled select sitting where
-                  the type text is, so the popup anchors there — not the title.
-                  Single-rendition tracks get plain type text, no dropdown. */}
               <span className="tl-selwrap">
                 <b className="tl-tt">{track.title}</b>
-                {track.videos.length > 1 ? (
-                  <span className="tl-typewrap">
-                    <select className="tl-typesel" value={[...selSet][0] ?? 0}
-                      onClick={e => e.stopPropagation()}
-                      onChange={e => { e.stopPropagation(); onTagClick(ti, Number(e.target.value)); }}>
-                      {track.videos.map((v, vi) => (
-                        <option key={vi} value={vi}>{tidyDesc(track.title, v)}</option>
-                      ))}
-                    </select>
-                  </span>
-                ) : (
-                  <span className="tl-type">{tidyDesc(track.title, track.videos[0])}</span>
-                )}
+                <span className="tl-typewrap">
+                  <select className="tl-typesel" value={[...selSet][0] ?? 0}
+                    onClick={e => e.stopPropagation()}
+                    onChange={e => { e.stopPropagation(); onTagClick(ti, Number(e.target.value)); }}>
+                    {track.videos.map((v, vi) => (
+                      <option key={vi} value={vi}>{tidyDesc(track.title, v)}</option>
+                    ))}
+                  </select>
+                </span>
               </span>
             ) : (
               <span className="tl-title">{track.title}</span>

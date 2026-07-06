@@ -4,7 +4,7 @@
  * on paper; was museum gold on dark).
  */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;800&family=Courier+Prime:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;700;800&family=Courier+Prime:wght@400&family=Fredoka:wght@600&display=swap');
 
 .gift-shop {
   background: #d9d5ca;
@@ -12,24 +12,64 @@
   min-height: 100vh;
   max-width: 960px;
   margin: 0 auto;
-  padding: 3rem 1.5rem 5rem;
+  padding: 5.5rem 1.5rem 5rem; /* top clears the fixed title bar */
   font-family: 'Courier Prime', monospace;
-  position: relative; /* anchors the top-right lobby exit */
+  position: relative;
 }
 
-/* GIFT SHOP signage */
-.gift-shop__signage {
-  text-align: center;
-  margin-bottom: 3rem;
+/* TITLE BAR — museum-standard exhibit format (Mike 2026-07-06). Mirrors
+   Exhibit.css .ex-nav / -logo / -sub / -return, re-pinned to paper tones. */
+.gift-shop__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 90;
+  background: #d9d5ca;
+  border-bottom: 1px solid #c6c2b7;
 }
 
-.gift-shop__title {
-  font-family: 'DM Serif Display', Georgia, serif;
-  font-size: 2.75rem;
+.gift-shop__nav-logo {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
   color: #211f1c;
-  letter-spacing: 0.18em;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.gift-shop__nav-sub {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #211f1c;
   margin: 0;
-  font-weight: 400;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.gift-shop__nav-return {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #211f1c;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.gift-shop__nav-logo:hover,
+.gift-shop__nav-return:hover,
+.gift-shop__nav-logo:focus-visible,
+.gift-shop__nav-return:focus-visible {
+  opacity: 0.7;
 }
 
 /* Sections */
@@ -296,46 +336,16 @@
   max-width: 42ch;
 }
 
-/* ─── EXITS (both top corners — Mike 2026-07-06; text-style buttons
-   matching the exhibit's ex-nav-return "Gift Shop" button) ──────────── */
-.gift-shop__exit {
-  position: absolute;
-  top: 2.6rem;
-}
-
-.gift-shop__exit--left  { left: 1.5rem; }
-.gift-shop__exit--right { right: 1.5rem; }
-
-.gift-shop__exit-link {
-  background: none;
-  border: none;
-  color: #211f1c;
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 0.7rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-
-.gift-shop__exit-link:hover,
-.gift-shop__exit-link:focus-visible {
-  opacity: 0.7;
-}
-
 /* ─── MOBILE ───────────────────────────────────────────────────────── */
 @media (max-width: 720px) {
   .gift-shop {
     padding: 4.5rem 1rem 4rem;
   }
-  .gift-shop__exit {
-    top: 1.25rem;
+  .gift-shop__nav {
+    padding: 12px 16px;
   }
-  .gift-shop__exit--left  { left: 1rem; }
-  .gift-shop__exit--right { right: 1rem; }
-  .gift-shop__title {
-    font-size: 2rem;
+  .gift-shop__nav-sub {
+    font-size: 0.95rem;
   }
   .featured-artist,
   .friends__card,
