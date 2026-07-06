@@ -167,6 +167,15 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
   Cowork session do read-modify-write on large files; big-file edits are
   surgical and host-side. If a file looks truncated, check HEAD before
   editing.
+- **Cowork mount READ-LAG (2026-07-06).** Files edited via Cowork's
+  host-side file tools can read back stale/truncated through the bash
+  mount INDEFINITELY (App.jsx served 64 of 71 lines 30+ min after edit).
+  Host is truth — verify freshly host-edited files with host-side reads
+  or /tmp reconstructions, never by parsing them through the mount.
+  Sandbox-side writes are consistent in both views immediately. Same
+  session: sandbox `git status` orphaned an undeletable `.git/index.lock`
+  + phantom staged deletions — the host-side `Remove-Item .git\index.lock;
+  git reset --mixed HEAD` prelude cleared both, as documented.
 - **Virtiofs:** phantom deletions in `git status` from the sandbox (HR
   commits host-side only, with `Remove-Item .git\index.lock; git reset
   --mixed HEAD` prelude); SQLite COMMIT failures (use `/tmp` work-copy +

@@ -1,6 +1,6 @@
 <!-- ============================================================= -->
 <!-- LIVE LEDGER — source of truth. Read this block first.          -->
-<!-- Last updated: 2026-06-17. Below this block: durable reference. -->
+<!-- Last updated: 2026-07-06. Below this block: durable reference. -->
 <!-- ============================================================= -->
 
 # Weird.Baby Museum — LIVE LEDGER
@@ -21,9 +21,20 @@ Ops work takes top priority, based on the Ops need in the moment.
 
 ## LIVE (deployed, verified)
 
-- Site: https://weird.baby — LIVE and CURRENT. Last deploy `67b3c7ec`, 2026-06-16 23:04 (verified via `wrangler deployments list`, 2026-06-17).
+- Site: https://weird.baby — LIVE and CURRENT. Last deploy `676d20a9`, 2026-07-06 23:33Z (verified via `wrangler deployments list` paste-back + Mike's incognito walk, 2026-07-06).
 - Status: SOFT-LAUNCHED — visible but not advertised / not yet in search engines.
-- Repo HEAD: `753b17e`, in sync with origin/main.
+- Repo HEAD at deploy: `b875c8c`, pushed to origin/main (docs commit follows same session).
+
+## SHIPPED 2026-07-06 — WB_ARTIST_LOBBY_BOOTH-20260706 (deploy 676d20a9)
+
+Brief executed via Cowork, stages 1–5, Mike gating each stage live. Now on weird.baby:
+
+- **/wb — Weird.Baby house exhibit.** Hand-authored spine in `src/data/artists/weird-baby.js` (no MV; six Vol 1 recordings as repo assets `public/audio/wb/`, registration slot numbers in filenames). Display order Coconuts → E.D. Yahdah → registration order (Mike). Album display title "The Making of BoWB V1". Composed cover `public/images/wb/vol1_cover_v1.png` (gray field, red "the making of", white "The Best of"/"Vol. 1", Fredoka, logo centerpiece; generated via PIL, spec by Mike). `exhibitFlow` omitted — Exhibit.jsx:1065 guard renders player-only; `facts: []` safe. Holes by design.
+- **Lobby directory** (WbHome.jsx): four rows — HUNTER ROOT / WEIRD.BABY / INFORMATION BOOTH / GIFT SHOP — replace the single explore button. Guestbook untouched.
+- **/booth — Information Booth.** Placard in Lobby paper chrome, all-Fredoka, Mike's words v4 (short credo, thank-you + papa@weird.baby). FAQ button expands the card IN PLACE (native `<details>` accordion, collapsed; 2 Q&As from Mike's words). Subdued FAQ/Lobby buttons. NOTE: papa@weird.baby not yet set up — mail bounces until the Cloudflare email task (Deferred) lands.
+- **Shop rework** (Mike's calls at preview): museum-standard title bar (brand / GIFT SHOP / Lobby — same format as exhibit nav, now the room convention), top billing only (no tail repeat), FEATURED/FRIENDS labels gone, standalone WB banner removed — WB rides the roster (sticker head image, blurb "Six little blues from Papa."). Big signage + corner exits absorbed into the bar.
+- **Tracklist interaction (museum-wide, /hr too):** number/title click PLAYS; variant dropdown is a visible type-anchored select that always drops (even one option); hit target padded 9px vertically.
+- Deferred (recorded in the brief + BACKLOG intake 2026-07-06): real Vol 1 cover art, MV ingestion of Vol 1, wb_merch live-flip, booth email, charter doc, FAQ-surface governance items, org-level credo.
 
 ## FULL-LAUNCH GATES (soft-launch -> advertised launch) — INCOMPLETE BY DESIGN
 
@@ -156,6 +167,8 @@ Weird.Baby Museum. A curatorial platform. Currently exhibiting Hunter Root.
 - `/admin` — operator dashboard (`mmm` key sequence)
 - `/hr` — Hunter Root exhibit
 - `/hr/home`, `/hr/media`, `/hr/archive`, `/hr/fan-wall` — HR sub-routes
+- `/wb` — Weird.Baby house exhibit (added 2026-07-06)
+- `/booth` — Information Booth (added 2026-07-06)
 - `/shop` — gift shop
 - `/p/:id` — preset-share landing (resolves a shared preset, parks the snapshot, lands the visitor at the front door; unknown/broken ids degrade to a plain Lobby visit)
 
