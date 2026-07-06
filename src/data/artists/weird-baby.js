@@ -1,9 +1,12 @@
 // src/data/artists/weird-baby.js
 // Hand-authored spine + config for the Weird.Baby house exhibit (/wb).
 // Mirrors hunterRoot minus MediaVault: no foundation export — the six Vol 1
-// recordings are repo-local assets (public/audio/wb/), slot order per the
-// weird_baby_vol1 README tracklist (2026-06-18). MV ingestion of Vol 1 is
-// deferred (post-vocab-migration) per WB_ARTIST_LOBBY_BOOTH-20260706.
+// recordings are repo-local assets (public/audio/wb/). MV ingestion of Vol 1
+// is deferred (post-vocab-migration) per WB_ARTIST_LOBBY_BOOTH-20260706.
+//
+// Display order is PRESENTATION order (Mike 2026-07-06: lead with Coconuts,
+// then E.D. Yahdah, then registration order). The vol1 repo's slot numbers
+// (in the mp3 filenames) are registration canon and unchanged.
 //
 // Contract consumed by Exhibit.jsx (see hunter-root-spine.js header):
 //   album = { id, title, year, art, accent, tracks: [ track ] }
@@ -24,9 +27,31 @@ const spine = [
     id: "vol1",
     title: "Best of Weird.Baby — Vol 1",
     year: 2026,
-    art: "/images/wb/vol1_cover_v0.png", // logo stands in as v0 cover per Mike 2026-07-06
+    art: "/images/wb/vol1_cover_v1.png", // v1 composed cover (Mike's spec 2026-07-06): red "the making of" / white "The Best of" / logo / red "Vol. 1"
     accent: null,
     tracks: [
+      {
+        id: "coconuts",
+        title: "Coconuts",
+        videos: [{
+          id: "audio_wb_06_coconuts_2026_06_17_mp3",
+          ytId: null,
+          audioUrl: "/audio/wb/06_coconuts_2026-06-17.mp3",
+          label: REC_LABEL,
+          type: "audio",
+        }],
+      },
+      {
+        id: "ed_yahdah",
+        title: "E.D. Yahdah",
+        videos: [{
+          id: "audio_wb_05_ed_yahdah_2026_06_16_mp3",
+          ytId: null,
+          audioUrl: "/audio/wb/05_ed_yahdah_2026-06-16.mp3",
+          label: REC_LABEL,
+          type: "audio",
+        }],
+      },
       {
         id: "weird_baby_blues",
         title: "Weird Baby Blues",
@@ -67,28 +92,6 @@ const spine = [
           id: "audio_wb_04_how_i_saved_the_world_blues_2026_06_17_mp3",
           ytId: null,
           audioUrl: "/audio/wb/04_how_i_saved_the_world_blues_2026-06-17.mp3",
-          label: REC_LABEL,
-          type: "audio",
-        }],
-      },
-      {
-        id: "ed_yahdah",
-        title: "E.D. Yahdah",
-        videos: [{
-          id: "audio_wb_05_ed_yahdah_2026_06_16_mp3",
-          ytId: null,
-          audioUrl: "/audio/wb/05_ed_yahdah_2026-06-16.mp3",
-          label: REC_LABEL,
-          type: "audio",
-        }],
-      },
-      {
-        id: "coconuts",
-        title: "Coconuts",
-        videos: [{
-          id: "audio_wb_06_coconuts_2026_06_17_mp3",
-          ytId: null,
-          audioUrl: "/audio/wb/06_coconuts_2026-06-17.mp3",
           label: REC_LABEL,
           type: "audio",
         }],

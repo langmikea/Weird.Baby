@@ -4,29 +4,19 @@
 // Circulation: exhibits exit here. Direct URL arrivals land here too.
 // Exits: the artist's external store (leaves weird.baby), or back to the lobby.
 //
-// Room anatomy, top to bottom:
+// Room anatomy, top to bottom (2026-07-06 rework — Mike: top billing only, no
+// section labels, lobby exit in the top-right corner, and Weird.Baby rides the
+// roster like any other artist — no standalone WB banner):
 //   1. Walked-in bell (plays once on mount, no-op if sound file missing)
-//   2. "GIFT SHOP" signage
-//   3. FEATURED banner (top)
-//   4. FRIENDS — Weird.Baby first, then the roster
-//   5. FEATURED banner again (bottom, identical)
-//   6. LOBBY exit (right-aligned)
+//   2. LOBBY exit (top-right corner)
+//   3. "GIFT SHOP" signage
+//   4. Top billing — one banner (?from=<id> match, else random from roster)
+//   5. The rest of the roster, once each, unlabeled — no repeat of top billing
 
 import React, { useEffect, useMemo, useRef } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { wbRoster, getArtistById, pickRandomArtist } from "../../data/wb_roster";
-import { wbMerch } from "../../data/wb_merch";
 import "./GiftShop.css";
-
-// Weird.Baby shown as the first banner in Friends — same shape as an artist.
-const wbAsBanner = {
-  id: "weird-baby",
-  name: wbMerch.storeName,
-  storeUrl: wbMerch.storeUrl,
-  image: wbMerch.featured[0]?.img || null,
-  blurb:
-    "Stickers, shirts, and hats from the museum itself. Buy a little weirdness — and help us keep the lights on for the artists we love.",
-};
 
 function Banner({ entry }) {
   return (
@@ -77,15 +67,8 @@ export default function GiftShop() {
     }
   }, []);
 
-  // Friends list: Weird.Baby first, then everyone once,
-  // with the featured artist moved to the very end.
+  // Everyone except top billing, once each. No tail repeat (Mike 2026-07-06).
   const others = wbRoster.filter((a) => a.id !== featured?.id);
-  const featuredInRoster = wbRoster.find((a) => a.id === featured?.id);
-  const friends = [
-    wbAsBanner,
-    ...others,
-    ...(featuredInRoster ? [featuredInRoster] : []),
-  ];
 
   return (
     <div className="gift-shop">
@@ -96,38 +79,34 @@ export default function GiftShop() {
         aria-hidden="true"
       />
 
-      <header className="gift-shop__signage">
-        <h1 className="gift-shop__title">GIFT SHOP</h1>
-      </header>
-
-      {/* FEATURED (top) */}
-      {featured && (
-        <section className="gift-shop__section gift-shop__featured">
-          <div className="gift-shop__eyebrow gift-shop__eyebrow--featured">
-            Featured
-          </div>
-          <Banner entry={featured} />
-        </section>
-      )}
-
-      {/* FRIENDS — Weird.Baby first, then the roster */}
-      <section className="gift-shop__section gift-shop__friends">
-        <div className="gift-shop__eyebrow gift-shop__eyebrow--friends">
-          Friends
-        </div>
-        <div className="friends__grid">
-          {friends.map((entry) => (
-            <Banner key={entry.id} entry={entry} />
-          ))}
-        </div>
-      </section>
-
-      {/* LOBBY EXIT — right-aligned */}
+      {/* LOBBY EXIT — top-right corner */}
       <nav className="gift-shop__exit" aria-label="Gift shop exit">
         <Link to="/" className="gift-shop__exit-link">
           LOBBY →
         </Link>
       </nav>
+
+      <header className="gift-shop__signage">
+        <h1 className="gift-shop__title">GIFT SHOP</h1>
+      </header>
+
+      {/* TOP BILLING — unlabeled */}
+      {featured && (
+        <section className="gift-shop__section gift-shop__featured">
+          <Banner entry={featured} />
+        </section>
+      )}
+
+      {/* THE REST OF THE ROSTER — unlabeled */}
+      {others.length > 0 && (
+        <section className="gift-shop__section gift-shop__friends">
+          <div className="friends__grid">
+            {others.map((entry) => (
+              <Banner key={entry.id} entry={entry} />
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

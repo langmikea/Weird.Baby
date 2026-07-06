@@ -3,9 +3,9 @@
 // Every featured artist in the museum appears here, once.
 //
 // The gift shop reads this file for:
-//   - the Featured slot (random pick when no exhibit context, or matched by `id`
-//     when arriving from an exhibit via ?from=<id>)
-//   - the Friends wall at the bottom (all of them, displayed out of love)
+//   - the top-billing slot (random pick when no exhibit context, or matched by
+//     `id` when arriving from an exhibit via ?from=<id>)
+//   - the rest-of-roster banners below it
 //
 // To add an artist: append an entry. That's it. No other files need to change.
 // To remove an artist: delete the entry. Any ?from=<id> pointing at them will
@@ -27,7 +27,7 @@ export const wbRoster = [
     exhibitRoute: "/wb",
     storeUrl: "https://weird-baby.printful.me",
     storePlatform: "Printful",
-    image: null,
+    image: "/images/wb-merch/sticker.png", // Mike 2026-07-06: sticker art heads the WB banner
     blurb: "Six little blues from Papa.", // Mike-approved 2026-07-06
   },
 ];

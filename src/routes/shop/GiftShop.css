@@ -14,6 +14,7 @@
   margin: 0 auto;
   padding: 3rem 1.5rem 5rem;
   font-family: 'Courier Prime', monospace;
+  position: relative; /* anchors the top-right lobby exit */
 }
 
 /* GIFT SHOP signage */
@@ -34,26 +35,6 @@
 /* Sections */
 .gift-shop__section {
   margin: 3.5rem 0;
-}
-
-.gift-shop__eyebrow {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: 1.1rem;
-  color: #211f1c;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.gift-shop__eyebrow--featured {
-  font-size: 1.5rem;
-  letter-spacing: 0.24em;
-}
-
-.gift-shop__eyebrow--friends {
-  font-size: 1.25rem;
 }
 
 /* ─── FEATURED ARTIST ──────────────────────────────────────────────── */
@@ -315,9 +296,11 @@
   max-width: 42ch;
 }
 
-/* ─── EXIT (right-aligned) ─────────────────────────────────────────── */
+/* ─── EXIT (top-right corner — Mike 2026-07-06) ────────────────────── */
 .gift-shop__exit {
-  margin-top: 4.5rem;
+  position: absolute;
+  top: 2.4rem;
+  right: 1.5rem;
   text-align: right;
 }
 
@@ -345,7 +328,14 @@
 /* ─── MOBILE ───────────────────────────────────────────────────────── */
 @media (max-width: 720px) {
   .gift-shop {
-    padding: 2rem 1rem 4rem;
+    padding: 4.5rem 1rem 4rem;
+  }
+  .gift-shop__exit {
+    top: 1.25rem;
+    right: 1rem;
+  }
+  .gift-shop__exit-link {
+    padding: 0.6rem 1.2rem;
   }
   .gift-shop__title {
     font-size: 2rem;
