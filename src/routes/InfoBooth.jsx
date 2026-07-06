@@ -25,24 +25,26 @@ export default function InfoBooth() {
         .booth-nav-return { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: #211f1c; text-decoration: none; transition: opacity 0.2s; }
         .booth-nav-logo:hover, .booth-nav-return:hover { opacity: 0.7; }
 
-        /* Centered placard (Mike 2026-07-06: the credo was wrapping badly —
-           breaks are now deliberate, an inscription, not a paragraph). */
-        .booth-card { max-width: 560px; text-align: center; background: #faf8f3; border: 1px solid #c6c2b7; padding: 52px 56px 44px; position: relative; box-shadow: 0 1px 2px rgba(33,31,28,0.12), 0 6px 18px rgba(33,31,28,0.08); }
-        .booth-words { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.02rem, 1.5vw, 1.2rem); line-height: 1.85; color: #2b2924; }
-        .booth-words p { margin-bottom: 1.2em; }
+        /* v3 (Mike 2026-07-06: body read small/weak/squinty, mat space wasted;
+           font constraint lifted). The WORDS are this room's exhibit — billed
+           like it. Credo in brand Fredoka (ties to the Vol 1 cover); body in
+           large full-ink serif; nothing faded, nothing micro. */
+        .booth-card { max-width: 720px; width: 100%; text-align: center; background: #faf8f3; border: 1px solid #c6c2b7; padding: 60px 64px 48px; position: relative; box-shadow: 0 1px 2px rgba(33,31,28,0.12), 0 6px 18px rgba(33,31,28,0.08); }
+        .booth-credo { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: clamp(1.55rem, 3vw, 2.1rem); line-height: 1.45; color: #211f1c; margin-bottom: 0.9em; }
+        .booth-credo em { font-style: normal; border-bottom: 3px solid #211f1c; }
+        .booth-words { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.22rem, 2vw, 1.5rem); line-height: 1.7; color: #211f1c; }
+        .booth-words p { margin-bottom: 1.05em; }
         .booth-words p:last-of-type { margin-bottom: 0; }
-        .booth-credo { font-size: clamp(1.18rem, 1.9vw, 1.42rem); line-height: 1.65; }
-        .booth-credo em { font-style: italic; color: #211f1c; }
-        .booth-rule { width: 36px; height: 1px; background: #211f1c; opacity: 0.5; margin: 26px auto 22px; }
-        .booth-contact { font-family: 'Courier Prime', monospace; font-size: 0.78rem; letter-spacing: 0.06em; color: #57544d; }
-        .booth-contact a { color: #211f1c; text-decoration: none; border-bottom: 1px solid #a9a59a; }
-        .booth-pending { font-style: italic; color: #9b978d; font-size: 0.68rem; margin-left: 6px; }
-        .booth-aside { margin-top: 10px; font-family: 'Courier Prime', monospace; font-style: italic; font-size: 0.72rem; color: #837f75; }
+        .booth-rule { width: 52px; height: 2px; background: #211f1c; opacity: 0.6; margin: 30px auto 24px; }
+        .booth-contact { font-family: 'Courier Prime', monospace; font-size: 0.95rem; letter-spacing: 0.05em; color: #211f1c; }
+        .booth-contact a { color: #211f1c; text-decoration: none; border-bottom: 1px solid #57544d; }
+        .booth-pending { font-style: italic; color: #837f75; font-size: 0.8rem; margin-left: 6px; }
+        .booth-aside { margin-top: 12px; font-family: 'Courier Prime', monospace; font-style: italic; font-size: 0.95rem; color: #57544d; }
 
         @media (max-width: 680px) {
           .booth-nav { padding: 12px 16px; }
           .booth-nav-sub { font-size: 0.95rem; }
-          .booth-card { padding: 36px 26px 30px; }
+          .booth-card { padding: 40px 26px 32px; }
         }
       `}</style>
 
@@ -56,11 +58,11 @@ export default function InfoBooth() {
 
         {/* THE WORDS — DRAFT v0, Papa's voice. Mike edits or approves. */}
         <div className="booth-card">
+          <div className="booth-credo">
+            The Weird.Baby Museum is free.<br />
+            Equally free. <em>Always.</em>
+          </div>
           <div className="booth-words">
-            <p className="booth-credo">
-              The Weird.Baby Museum is free.<br />
-              Equally free. <em>Always.</em>
-            </p>
             <p>
               No tickets, no tiers, no ads.<br />
               Every visitor is royalty.
@@ -71,7 +73,7 @@ export default function InfoBooth() {
               always.
             </p>
             <p>
-              One person keeps this place, and keeping it pays nothing.
+              One person keeps this place, and it pays nothing.
               That&rsquo;s the deal, and it never changes.
             </p>
           </div>
