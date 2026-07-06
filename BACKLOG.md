@@ -251,3 +251,7 @@ RJJ's Reactions (@rjjsreactions-rk7zh, 15.7K subs) 'Hunter Root' playlist PLogTP
 - Chase the Dragon reaction - 8SlYEOijcTo (9:47, ~2025)
 - Cookin' in the Bathroom reaction - tOzREHZp7g0 (10:42, ~2025; on channel, not yet in his playlist)
 Candidates for a future 'the internet reacts' deck section; all embed-only per content strategy.
+
+### BOOTH-SESSION INTAKE 2026-07-06 (Mike, via Cowork session; CAPTURE ONLY — timing TBD by Ops, per Mike "don't let me hijack the train")
+- FAQ SURFACE (format: FAQ per Mike). Capture + display the governance constraints for all to see. Mike's clarification, near-verbatim: the one-person line ("One person keeps this place, and the job pays nothing. That's the deal, and it never changes.") refers to the ROLE of Papa Weird.Baby and the overarching Weird.Baby org — one day it "may be false" as written for the museum itself. Standing constraints to display: he will never pay to have it managed; only zero-invoice services accepted. Context: booth v4 cut the money + one-person paragraphs (placard went short); the FAQ is where the full deal lives.
+- ORG-LEVEL CREDO: "We need similar [words] for Weird.Baby in general at some point" — a Weird.Baby-wide statement beyond the museum's booth. Related to, but not the same as, the full charter workstream already recorded in WB_ARTIST_LOBBY_BOOTH-20260706 Deferred.

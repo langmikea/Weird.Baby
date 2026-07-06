@@ -13,7 +13,7 @@ export default function InfoBooth() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;700;800&family=Courier+Prime:ital,wght@0,400;1,400&family=Fredoka:wght@600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;700;800&family=Courier+Prime:ital,wght@0,400;1,400&family=Fredoka:wght@400;600&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html, body { height: 100%; background: #d9d5ca; color: #211f1c; }
         .booth-root { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 96px 24px 64px; position: relative; }
@@ -30,16 +30,18 @@ export default function InfoBooth() {
            like it. Credo in brand Fredoka (ties to the Vol 1 cover); body in
            large full-ink serif; nothing faded, nothing micro. */
         .booth-card { max-width: 720px; width: 100%; text-align: center; background: #faf8f3; border: 1px solid #c6c2b7; padding: 60px 64px 48px; position: relative; box-shadow: 0 1px 2px rgba(33,31,28,0.12), 0 6px 18px rgba(33,31,28,0.08); }
+        /* v4 (Mike 2026-07-06): his words verbatim, short placard. Whole card
+           in the brand face (the top lines were the part that read well) —
+           body Fredoka 400, deliberate one-line beats, no unplanned wraps. */
         .booth-credo { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: clamp(1.55rem, 3vw, 2.1rem); line-height: 1.45; color: #211f1c; margin-bottom: 0.9em; }
         .booth-credo em { font-style: normal; border-bottom: 3px solid #211f1c; }
-        .booth-words { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.22rem, 2vw, 1.5rem); line-height: 1.7; color: #211f1c; }
-        .booth-words p { margin-bottom: 1.05em; }
+        .booth-words { font-family: 'Fredoka', sans-serif; font-weight: 400; font-size: clamp(1.2rem, 2vw, 1.5rem); line-height: 1.75; color: #211f1c; }
+        .booth-words p { margin-bottom: 0.35em; }
         .booth-words p:last-of-type { margin-bottom: 0; }
         .booth-rule { width: 52px; height: 2px; background: #211f1c; opacity: 0.6; margin: 30px auto 24px; }
-        .booth-contact { font-family: 'Courier Prime', monospace; font-size: 0.95rem; letter-spacing: 0.05em; color: #211f1c; }
-        .booth-contact a { color: #211f1c; text-decoration: none; border-bottom: 1px solid #57544d; }
-        .booth-pending { font-style: italic; color: #837f75; font-size: 0.8rem; margin-left: 6px; }
-        .booth-aside { margin-top: 12px; font-family: 'Courier Prime', monospace; font-style: italic; font-size: 0.95rem; color: #57544d; }
+        .booth-contact { font-family: 'Fredoka', sans-serif; font-weight: 400; font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: #211f1c; }
+        .booth-contact a { color: #211f1c; text-decoration: none; border-bottom: 2px solid #57544d; }
+        .booth-contact a:hover { opacity: 0.7; }
 
         @media (max-width: 680px) {
           .booth-nav { padding: 12px 16px; }
@@ -63,26 +65,13 @@ export default function InfoBooth() {
             Equally free. <em>Always.</em>
           </div>
           <div className="booth-words">
-            <p>
-              No tickets, no tiers, no ads.<br />
-              Every visitor is royalty.
-            </p>
-            <p>
-              The museum owns nothing and takes nothing. Money that passes
-              through here goes to making the world better — all of it,
-              always.
-            </p>
-            <p>
-              One person keeps this place, and it pays nothing.
-              That&rsquo;s the deal, and it never changes.
-            </p>
+            <p>No tickets, no tiers, no ads.</p>
+            <p>The museum owns nothing and takes nothing.</p>
           </div>
           <div className="booth-rule" />
           <div className="booth-contact">
-            Questions? <a href="mailto:papa@weird.baby">papa@weird.baby</a>
-            <span className="booth-pending">(pending email setup)</span>
+            Thank you. <a href="mailto:papa@weird.baby">papa@weird.baby</a>
           </div>
-          <div className="booth-aside">The gift shop is to your right.</div>
         </div>
       </div>
     </>
