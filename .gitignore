@@ -35,3 +35,6 @@ dist-ssr
 _cowork/
 .phase1_retired_files/
 dist.pre*/
+
+# DB dumps - durable home is OneDrive mirror, not git (RCCA 2026-07-06)
+backups/

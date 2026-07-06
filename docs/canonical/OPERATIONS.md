@@ -192,3 +192,21 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
    `G:\My Drive\_conduit\` (with stamps) so chat sessions can self-orient
    without a paste.
 
+
+## Delivery & Commit Gates (RCCA 2026-07-06 — stranded-Downloads incident)
+
+Root cause: delivery and commit steps completing silently, unverified. Proven
+losses: MV_VOCAB_MIGRATION_BRIEF-20260624 (stranded in Downloads 12 days),
+MV_VOCAB_RECONCILE_PLAN-20260624 (believed committed 6/24; was untracked until
+2026-07-06), weird_baby_combined.docx (stranded 75 days).
+
+1. LANDING GATE — a chat deliverable does not exist until it is at its target
+   path in the tree. Downloads is transit, never storage. Prefer heredoc
+   direct-write to target path over browser download. Any file that does
+   transit Downloads is copied to the tree and committed in the same session.
+2. COMMIT GATE — no commit is "done" until `git status --short` is re-run and
+   the new hash is confirmed in `git log`. Narrating a commit is not a commit.
+3. SESSION-CLOSE CHECK — before any session ends: `git status --short` is
+   empty, or every remaining line is explained and accepted.
+4. DB dumps (`backups/`) are gitignored by policy. Durable home: OneDrive
+   mirror, not git history.
