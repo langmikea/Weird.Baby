@@ -7,9 +7,25 @@
 // The full charter is a separate workstream; these words are only the
 // visitor-facing tip of it.
 
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
+// FAQ seed items — DRAFT, pending Mike's ruling. Q1's answer is the money
+// paragraph Mike cut from the placard for brevity (content was accepted);
+// Q2 is drafted from his 2026-07-06 governance note (see BACKLOG intake).
+const FAQ = [
+  {
+    q: "Where does the money go?",
+    a: "The museum owns nothing and takes nothing. Money that passes through here goes to making the world better — all of it, always.",
+  },
+  {
+    q: "Who keeps this place?",
+    a: "One person — Papa Weird.Baby. The job pays nothing, the museum never pays to be managed, and only zero-invoice services are accepted. That's the deal, and it never changes.",
+  },
+];
+
 export default function InfoBooth() {
+  const [faqOpen, setFaqOpen] = useState(false);
   return (
     <>
       <style>{`
@@ -43,6 +59,22 @@ export default function InfoBooth() {
         .booth-contact a { color: #211f1c; text-decoration: none; border-bottom: 2px solid #57544d; }
         .booth-contact a:hover { opacity: 0.7; }
 
+        .booth-actions { display: flex; justify-content: space-between; margin-top: 36px; }
+        /* Subdued by design (Mike 2026-07-06): readers find these at the end
+           of the card — they don't need to shout. Quiet gray, wakes on hover. */
+        .booth-btn { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.66rem; letter-spacing: 0.25em; text-transform: uppercase; color: #6f6b62; background: none; border: 1px solid #c6c2b7; padding: 10px 22px; cursor: pointer; text-decoration: none; transition: color 0.2s, border-color 0.2s; }
+        .booth-btn:hover, .booth-btn:focus-visible { color: #211f1c; border-color: #211f1c; background: none; }
+
+        /* FAQ — expands the card in place; items are native <details>,
+           collapsed by default. */
+        .booth-faq { margin-top: 30px; border-top: 1px solid #c6c2b7; text-align: left; }
+        .booth-faq details { border-bottom: 1px solid #d8d4c9; padding: 14px 4px; }
+        .booth-faq summary { cursor: pointer; font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 1.08rem; color: #211f1c; list-style: none; display: flex; justify-content: space-between; align-items: baseline; }
+        .booth-faq summary::-webkit-details-marker { display: none; }
+        .booth-faq summary::after { content: "+"; font-family: 'Courier Prime', monospace; font-size: 1.15rem; color: #57544d; }
+        .booth-faq details[open] summary::after { content: "–"; }
+        .booth-faq-a { font-family: 'Fredoka', sans-serif; font-weight: 400; font-size: 1rem; line-height: 1.65; color: #2b2924; padding: 10px 4px 4px; }
+
         @media (max-width: 680px) {
           .booth-nav { padding: 12px 16px; }
           .booth-nav-sub { font-size: 0.95rem; }
@@ -72,6 +104,30 @@ export default function InfoBooth() {
           <div className="booth-contact">
             Thank you. <a href="mailto:papa@weird.baby">papa@weird.baby</a>
           </div>
+
+          {/* FAQ left, Lobby right (Mike 2026-07-06). FAQ expands the card
+              in place — low-friction, contiguous; visitor stays in the room. */}
+          <div className="booth-actions">
+            <button
+              className="booth-btn"
+              onClick={() => setFaqOpen(o => !o)}
+              aria-expanded={faqOpen}
+            >
+              FAQ
+            </button>
+            <Link to="/" className="booth-btn">Lobby</Link>
+          </div>
+
+          {faqOpen && (
+            <div className="booth-faq">
+              {FAQ.map(({ q, a }) => (
+                <details key={q}>
+                  <summary>{q}</summary>
+                  <div className="booth-faq-a">{a}</div>
+                </details>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </>
