@@ -25,9 +25,9 @@ const REC_LABEL = "Recording — 2026-06";
 const spine = [
   {
     id: "vol1",
-    title: "Best of Weird.Baby — Vol 1",
+    title: "The Making of BoWB V1", // display title per Mike 2026-07-06 (registration title: Best of Weird.Baby — Vol 1)
     year: 2026,
-    art: "/images/wb/vol1_cover_v1.png", // v1 composed cover (Mike's spec 2026-07-06): red "the making of" / white "The Best of" / logo / red "Vol. 1"
+    art: "/images/wb/vol1_cover_v1.png", // composed cover (Mike 2026-07-06): gray field, red "the making of" (pop), white "The Best of" / logo / white "Vol. 1", smaller photo larger text
     accent: null,
     tracks: [
       {

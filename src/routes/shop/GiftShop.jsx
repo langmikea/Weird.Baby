@@ -79,8 +79,14 @@ export default function GiftShop() {
         aria-hidden="true"
       />
 
-      {/* LOBBY EXIT — top-right corner */}
-      <nav className="gift-shop__exit" aria-label="Gift shop exit">
+      {/* LOBBY EXITS — both top corners, styled like the exhibit's nav
+          buttons (Mike 2026-07-06) */}
+      <nav className="gift-shop__exit gift-shop__exit--left" aria-label="Gift shop exit">
+        <Link to="/" className="gift-shop__exit-link">
+          ← LOBBY
+        </Link>
+      </nav>
+      <nav className="gift-shop__exit gift-shop__exit--right" aria-label="Gift shop exit">
         <Link to="/" className="gift-shop__exit-link">
           LOBBY →
         </Link>

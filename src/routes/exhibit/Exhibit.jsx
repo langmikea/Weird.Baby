@@ -441,23 +441,25 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
               {playing ? <NpBars color="#b8974a" /> : String(ti+1).padStart(2,"0")}
             </span>
             {hasVids ? (
-              {/* 2026-07-06 Mike: number/title click PLAYS (bubbles to the row);
-                  ONLY the type text opens the variant dropdown — the invisible
-                  select overlays .tl-typewrap, not the whole row face. */}
+              {/* 2026-07-06 Mike: number/title click PLAYS (bubbles to the row).
+                  The variant dropdown is a VISIBLE styled select sitting where
+                  the type text is, so the popup anchors there — not the title.
+                  Single-rendition tracks get plain type text, no dropdown. */}
               <span className="tl-selwrap">
-                <span className="tl-selface" aria-hidden="true">
-                  <b>{track.title}</b>
-                </span>
-                <span className="tl-typewrap">
-                  <i>{tidyDesc(track.title, track.videos[[...selSet][0] ?? 0])}</i>
-                  <select className="tl-titlesel" value={[...selSet][0] ?? 0}
-                    onClick={e => e.stopPropagation()}
-                    onChange={e => { e.stopPropagation(); onTagClick(ti, Number(e.target.value)); }}>
-                    {track.videos.map((v, vi) => (
-                      <option key={vi} value={vi}>{track.title + " — " + tidyDesc(track.title, v)}</option>
-                    ))}
-                  </select>
-                </span>
+                <b className="tl-tt">{track.title}</b>
+                {track.videos.length > 1 ? (
+                  <span className="tl-typewrap">
+                    <select className="tl-typesel" value={[...selSet][0] ?? 0}
+                      onClick={e => e.stopPropagation()}
+                      onChange={e => { e.stopPropagation(); onTagClick(ti, Number(e.target.value)); }}>
+                      {track.videos.map((v, vi) => (
+                        <option key={vi} value={vi}>{tidyDesc(track.title, v)}</option>
+                      ))}
+                    </select>
+                  </span>
+                ) : (
+                  <span className="tl-type">{tidyDesc(track.title, track.videos[0])}</span>
+                )}
               </span>
             ) : (
               <span className="tl-title">{track.title}</span>

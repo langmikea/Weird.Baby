@@ -296,33 +296,32 @@
   max-width: 42ch;
 }
 
-/* ─── EXIT (top-right corner — Mike 2026-07-06) ────────────────────── */
+/* ─── EXITS (both top corners — Mike 2026-07-06; text-style buttons
+   matching the exhibit's ex-nav-return "Gift Shop" button) ──────────── */
 .gift-shop__exit {
   position: absolute;
-  top: 2.4rem;
-  right: 1.5rem;
-  text-align: right;
+  top: 2.6rem;
 }
 
+.gift-shop__exit--left  { left: 1.5rem; }
+.gift-shop__exit--right { right: 1.5rem; }
+
 .gift-shop__exit-link {
-  display: inline-block;
-  padding: 0.95rem 2.25rem;
-  border: 1px solid #211f1c;
-  background: transparent;
+  background: none;
+  border: none;
   color: #211f1c;
   font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 0.22em;
+  font-weight: 800;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background 0.2s, color 0.2s;
+  transition: opacity 0.2s;
 }
 
 .gift-shop__exit-link:hover,
 .gift-shop__exit-link:focus-visible {
-  background: #211f1c;
-  color: #ece9e0;
+  opacity: 0.7;
 }
 
 /* ─── MOBILE ───────────────────────────────────────────────────────── */
@@ -332,11 +331,9 @@
   }
   .gift-shop__exit {
     top: 1.25rem;
-    right: 1rem;
   }
-  .gift-shop__exit-link {
-    padding: 0.6rem 1.2rem;
-  }
+  .gift-shop__exit--left  { left: 1rem; }
+  .gift-shop__exit--right { right: 1rem; }
   .gift-shop__title {
     font-size: 2rem;
   }
