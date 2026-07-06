@@ -441,18 +441,23 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
               {playing ? <NpBars color="#b8974a" /> : String(ti+1).padStart(2,"0")}
             </span>
             {hasVids ? (
+              {/* 2026-07-06 Mike: number/title click PLAYS (bubbles to the row);
+                  ONLY the type text opens the variant dropdown — the invisible
+                  select overlays .tl-typewrap, not the whole row face. */}
               <span className="tl-selwrap">
                 <span className="tl-selface" aria-hidden="true">
                   <b>{track.title}</b>
-                  <i>{tidyDesc(track.title, track.videos[[...selSet][0] ?? 0])}</i>
                 </span>
-                <select className="tl-titlesel" value={[...selSet][0] ?? 0}
-                  onClick={e => e.stopPropagation()}
-                  onChange={e => { e.stopPropagation(); onTagClick(ti, Number(e.target.value)); }}>
-                  {track.videos.map((v, vi) => (
-                    <option key={vi} value={vi}>{track.title + " — " + tidyDesc(track.title, v)}</option>
-                  ))}
-                </select>
+                <span className="tl-typewrap">
+                  <i>{tidyDesc(track.title, track.videos[[...selSet][0] ?? 0])}</i>
+                  <select className="tl-titlesel" value={[...selSet][0] ?? 0}
+                    onClick={e => e.stopPropagation()}
+                    onChange={e => { e.stopPropagation(); onTagClick(ti, Number(e.target.value)); }}>
+                    {track.videos.map((v, vi) => (
+                      <option key={vi} value={vi}>{track.title + " — " + tidyDesc(track.title, v)}</option>
+                    ))}
+                  </select>
+                </span>
               </span>
             ) : (
               <span className="tl-title">{track.title}</span>

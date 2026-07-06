@@ -99,10 +99,13 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 .tl-skip-mark{font-family:'Courier Prime',monospace;font-size:.5rem;color:var(--hr-gold-mute);margin-left:6px;flex-shrink:0;letter-spacing:.08em}
 .tl-num{font-family:'Courier Prime',monospace;font-size:.72rem;color:var(--hr-gold-mute);min-width:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .tl-title{font-family:'Courier Prime',monospace;font-size:.98rem;color:var(--hr-gold);flex:1;padding:0 10px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tl-selwrap{position:relative;flex:1;min-width:0;display:flex;align-items:center;padding:0 10px}
-.tl-selface{pointer-events:none;display:flex;align-items:baseline;gap:8px;min-width:0;overflow:hidden;white-space:nowrap}
+/* 2026-07-06 Mike: number/title click plays; only the TYPE text drops the
+   variant select. The invisible select now overlays .tl-typewrap only. */
+.tl-selwrap{flex:1;min-width:0;display:flex;align-items:baseline;gap:8px;padding:0 10px}
+.tl-selface{pointer-events:none;display:flex;align-items:baseline;min-width:0;overflow:hidden;white-space:nowrap}
 .tl-selface b{font-family:'Courier Prime',monospace;font-weight:700;font-size:1rem;color:var(--hr-gold)}
-.tl-selface i{font-style:normal;font-family:'Oswald',sans-serif;font-size:.7rem;letter-spacing:.06em;color:var(--hr-gold-mute);overflow:hidden;text-overflow:ellipsis}
+.tl-typewrap{position:relative;display:flex;align-items:baseline;min-width:0;overflow:hidden}
+.tl-typewrap i{font-style:normal;font-family:'Oswald',sans-serif;font-size:.7rem;letter-spacing:.06em;color:var(--hr-gold-mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tl-titlesel{position:absolute;inset:0;width:100%;opacity:0;font-size:16px;border:none;background:transparent;appearance:none;-webkit-appearance:none;cursor:pointer}
 .tl-track:hover .tl-selface b{color:var(--hr-gold-hi)}
 
