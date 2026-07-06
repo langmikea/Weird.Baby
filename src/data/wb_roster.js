@@ -21,6 +21,15 @@ export const wbRoster = [
     image: "/images/wb-merch/hunter-root.png",
     blurb: "Records, prints, and road-worn merch from a songwriter worth following home.",
   },
+  {
+    id: "wb",
+    name: "Weird.Baby",
+    exhibitRoute: "/wb",
+    storeUrl: "https://weird-baby.printful.me",
+    storePlatform: "Printful",
+    image: null,
+    blurb: "Six little blues from Papa.", // Mike-approved 2026-07-06
+  },
 ];
 
 // Helper: find an artist by id, or return null.

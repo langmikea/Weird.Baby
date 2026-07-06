@@ -7,6 +7,7 @@ import HrHome     from "./routes/hr/HrHome.jsx";
 import HrMedia    from "./routes/hr/HrMedia.jsx";
 import HrArchive  from "./routes/hr/HrArchive.jsx";
 import HrFanWall  from "./routes/hr/HrFanWall.jsx";
+import WbSpine    from "./routes/wb/WbSpine.jsx";
 import GiftShop   from "./routes/shop/GiftShop.jsx";
 
 function KeyWatcher() {
@@ -59,6 +60,7 @@ export default function App() {
         <Route path="/hr/media" element={<HrMedia />} />
         <Route path="/hr/archive" element={<HrArchive />} />
         <Route path="/hr/fan-wall" element={<HrFanWall />} />
+        <Route path="/wb" element={<WbSpine />} />
         <Route path="/shop" element={<GiftShop />} />
         <Route path="/p/:id" element={<PresetLanding />} />
       </Routes>
