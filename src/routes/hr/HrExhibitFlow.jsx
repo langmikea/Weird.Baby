@@ -196,9 +196,10 @@ const TABS = [
 // (renderBoard order, brief 3): Kind, Topic, Era, Project/Band, Format --
 // mapped to live tag namespaces. Grouping is by TOTAL vs PARTIAL, NOT by
 // vocabulary tier (the live tiers are mismatched: content_kind=3, format=2,
-// era/topic/bands=1; tier-grouping would scatter these five across three
+// era/topic/band=1; tier-grouping would scatter these five across three
 // columns). Facets absent from the live data are skipped at render time.
-const BOARD_TOTAL_KEYS = ["content_kind", "topic", "era", "bands", "format"];
+// (bands -> band rename: MV vocab migration Stage 4, 2026-07-07.)
+const BOARD_TOTAL_KEYS = ["content_kind", "topic", "era", "band", "format"];
 // Container cards (album x9 + gallery x1) carry content_kind:"other" and are
 // exempt from Kind (discovery-metadata-spec.md 4). "other" is never a
 // visitor-facing Kind pill, so it is dropped from the Kind column's values
@@ -531,7 +532,7 @@ function itemHasTag(item, group, tag) {
 // (DETAIL_PARTIAL_KEYS = album/source/people). The reference's "person" maps
 // to live "people"; the reference's "venue"/"song" are not live namespaces, so
 // reusing DETAIL_PARTIAL_KEYS is the name-confirmed, drift-proof set. Every
-// other facet (the BOARD_TOTAL_KEYS — content_kind/topic/era/bands/format)
+// other facet (the BOARD_TOTAL_KEYS — content_kind/topic/era/band/format)
 // stays strict: an item missing that facet is rejected.
 const PARTIAL_FACETS = new Set(DETAIL_PARTIAL_KEYS);
 

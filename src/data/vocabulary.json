@@ -1,7 +1,7 @@
 {
   "metadata": {
     "source": "http://127.0.0.1:51822/db",
-    "exported_at": "2026-07-07T01:22:24.808Z",
+    "exported_at": "2026-07-07T01:28:39.798Z",
     "row_count": 22,
     "schema": "vocabulary v1 — namespace, display_name, tier, sort_order, retired_at"
   },
@@ -42,8 +42,8 @@
       "retired_at": null
     },
     {
-      "namespace": "bands",
-      "display_name": "Bands",
+      "namespace": "band",
+      "display_name": "Band",
       "tier": 1,
       "sort_order": 6,
       "retired_at": null

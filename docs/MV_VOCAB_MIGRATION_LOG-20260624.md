@@ -71,9 +71,22 @@ Resolution simulation under locked rule (URL-host > column > tag): provenance UR
 
 **Gate: PASS.**
 
-## STAGE 4 — bands -> band rename
+## STAGE 4 — bands -> band rename (D-d)
 
-_Not started._
+Stage 3 commit gate first: `8a5457b` pushed (`be2a857..8a5457b`), status clean.
+
+Coupling ground-truth (this session): `export-artifacts.mjs` contains ZERO literal `bands` — it groups tags by namespace generically, so the export needs no code change. Client dimensions/pills are DYNAMIC (`buildDimensions` from artifact namespaces; HrExhibitFlow.jsx:63-67) — the pill column renames itself on re-export. The only hardcoded functional read: `BOARD_TOTAL_KEYS` (HrExhibitFlow.jsx:201). `hunter-root-spine.js`: no bands reads. MV-side: `attention_rules.py` `CATEGORY_BANDS="bands"` is a dead backward-compat alias (defined, imported nowhere) — no edit. Comment at HrExhibitFlow.jsx:249 is historical narrative — left as history.
+
+- Client edit (host-side file tools, surgical): `BOARD_TOTAL_KEYS` "bands"→"band" + the two current-state comments (199, 535); rename annotated in-line.
+- Scripts: `tools/mv_vocab_stage4a_band_rename.ps1` (DB write, server stopped; pinned to 284+4=288 payloads, vocabulary bands=(1,6,None), registry {284,4}; renames vocabulary row bands→band/Band keeping tier/sort; renames 2 registry slugs; lineup:band untouchable and asserted 12 before AND after) + `tools/mv_vocab_stage4b_export_verify.ps1` (server running: re-export; verifies 0 "bands" keys / 0 bands: strings in hunter_root.json, band namespace present in vocabulary.json, bands absent).
+- Filter-board render check ("board renders band") lands in Stage 8's client smoke test, per plan.
+
+**Paste-back (2026-07-07, verified):**
+
+- 4a: 288 occurrences replaced across 288 artifacts (no artifact carried both band tags); 0 `bands:` remaining; band:hunter_root 284 / band:medusas_disco 4; lineup:band 12 before and after; vocabulary `('band','Band',1,6,None)`, no bands row; whole-registry 0/0/0; artifacts 293; integrity ok.
+- 4b: export clean (33 artifacts, 199,282 bytes; vocabulary 22 rows). hunter_root.json: 0 `"bands"` keys, 141 `"band"` keys, 0 `bands:` strings (`band:hunter_root strings: 0` is correct — export emits namespace-grouped keys, not raw ns:value strings; old file identical in this respect). vocabulary.json: band present, bands absent. Documented-harmless UV_HANDLE_CLOSING assertion appeared post-completion, as OPERATIONS §8 predicts. Diff shape: hunter_root.json 284 lines churned (the rename), vocabulary.json 6, HrExhibitFlow.jsx 7 (BOARD_TOTAL_KEYS + comments).
+
+**Gate: PASS.**
 
 ## STAGE 5 / 5b — SKIPPED per locked F5/F4 (logged as separate backlog item)
 
