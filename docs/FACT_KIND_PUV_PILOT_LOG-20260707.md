@@ -76,4 +76,23 @@ Rebuild mechanics ground-truthed: no triggers, no views; 6 named indexes on arti
 
 **Gate: PASS** (Ops verification verdict per delegated paste-back check — every expected value clean; swap itself was Mike's explicit approval).
 
-**Commit gate:** _pending._
+**Commit gate:** `cf17d5c` pushed (`2e2e789..cf17d5c`); `status --short` clean post-commit; hash confirmed in log.
+
+---
+
+## STAGE 3 — Register `fact` + regenerate surfaces
+
+Per Flag-A resolution: registration = `core/tag_vocabulary.json` `kind_column` block (the Kind registry); DB vocabulary/tags tables untouched (no kind:* slugs exist for ANY kind value — verified). Edits (Cowork host-side file tools, mount-lag safe): `fact` appended to `kind_column.values` + `value_meta` entry (label "Fact" — assume-and-stated, Mike's word invited at the Stage 4 gate per Flag C) + note updated to record the 2026-07-07 landing; `_meta.generated_from` refreshed (211 registry slugs — was stale at 210).
+
+- Script: `tools/fact_kind_stage3_verify.ps1` (READ-ONLY) — DB CHECK = 8 values with `fact` last; 0 kind=fact rows yet; vocabulary 22 / registry 211 / no kind:* slugs; tag_vocabulary.json ≡ DB (kind_column == CHECK, namespaces == registry, tier/sort mirror); client vocabulary.json 22 rows ≡ vocabulary table; hunter_root.json 33 artifacts, no fact records.
+- Sequence: Cowork edit → Mike: MV server up → `npm run export-artifacts` (client vocabulary.json regeneration expected content-identical — vocabulary table unchanged; hunter_root.json timestamp-only churn expected per Stage-8a precedent) → verify script → paste-back → commit gate.
+
+**Paste-back (2026-07-07, verified — third run CLEAN):**
+
+Run history, honest: (run 1) export skipped — MV not launched — AND verifier FAIL that was a **verifier bug, Ops' error**: vocabulary.json is `{metadata, namespaces:[22]}` and the check measured top-level dict keys (2) instead of rows. Fixed; a freshness check added (exported_at must postdate Stage-8a's 01:40:59Z) so the paste-back proves the export ran. (run 2) freshness check correctly caught the export failing again (server closed early — check did its job). (run 3) export clean with MV up: 33 artifacts / **199,282 bytes — byte count identical to Stage-8a, content idempotence as predicted**; vocabulary 22 rows; documented-harmless UV_HANDLE_CLOSING. Verify: 13/13 OK — DB CHECK 8 values with `fact`; 0 kind=fact rows; vocabulary 22 / registry 211 / no kind:* slugs; artifacts 293 / integrity ok; tag_vocabulary.json ≡ DB (kind_column == CHECK order, namespaces == registry exact, tier/sort mirror); client vocabulary.json 22/22, exported_at 2026-07-07T02:44:31Z (fresh); hunter_root.json 33 artifacts, no fact records. `STAGE3_VERIFY CLEAN`.
+
+Git at gate: MV `M core/tag_vocabulary.json`; WBM `M` run log + hunter_root.json + vocabulary.json (timestamp churn per Stage-8a precedent) + `??` stage3 script. All expected, nothing stray.
+
+**Gate: PASS** (Ops verdict per delegated paste-back check — every expected value clean).
+
+**Commit gate (spans both repos):** _pending._
