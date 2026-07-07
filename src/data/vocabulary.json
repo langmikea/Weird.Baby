@@ -1,8 +1,8 @@
 {
   "metadata": {
     "source": "http://127.0.0.1:51822/db",
-    "exported_at": "2026-07-07T16:14:48.220Z",
-    "row_count": 22,
+    "exported_at": "2026-07-07T19:03:30.156Z",
+    "row_count": 23,
     "schema": "vocabulary v1 — namespace, display_name, tier, sort_order, retired_at"
   },
   "namespaces": [
@@ -151,6 +151,13 @@
       "display_name": "Attributes",
       "tier": 3,
       "sort_order": 9,
+      "retired_at": null
+    },
+    {
+      "namespace": "speaker",
+      "display_name": "Speaker",
+      "tier": 3,
+      "sort_order": 10,
       "retired_at": null
     },
     {

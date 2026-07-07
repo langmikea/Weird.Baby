@@ -1,7 +1,7 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-07-07T16:14:48.220Z",
+    "exported_at": "2026-07-07T19:03:30.156Z",
     "filter": "released, not archived, badged for this exhibit",
     "vocabulary_csv_sha": null,
     "derived_era": "v0.2 — weighted date-sets baked on leaves; era derived client-side (era-buckets.json)"
@@ -8237,6 +8237,712 @@
             }
           ],
           "track_no": 7
+        }
+      ]
+    },
+    {
+      "id": "MV-20260617-001",
+      "source_url": "https://blueharvestbeat.wordpress.com/2014/08/14/kurt-cobain-lancaster-and-cold-pizza-my-interview-with-medusas-disco/",
+      "source_platform": "press",
+      "media_type": "text",
+      "title": "Kurt Cobain, Lancaster, and Cold Pizza: Interview with Medusa's Disco",
+      "description": "Earliest known press. Establishes Medusa's Disco was formerly named SEEDS. 2014 lineup: Wynton Huddle (gtr/vox), Alex Aument (drums), Hunter Root (gtr/vox), Tyler (bass). Casual band-personality interview.",
+      "post_date": "2014-08-14",
+      "released_at": "2026-07-07T14:32:34",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "content_kind": [
+          "interview"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "alex_aument",
+          "tyler",
+          "wynton_huddle"
+        ],
+        "source": [
+          "press"
+        ],
+        "topic": [
+          "roots"
+        ]
+      },
+      "dates": [
+        {
+          "year": 2014,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ]
+    },
+    {
+      "id": "MV-20260617-002",
+      "source_url": "https://chasingdestino.com/2018/04/25/interview-with-medusas-disco/",
+      "source_platform": "press",
+      "media_type": "text",
+      "title": "Interview with Medusa's Disco",
+      "description": "MD interview ahead of SXSW/Warped Tour era. Notes first show was the Chameleon Club main stage in Lancaster (before they had a bassist; footage at youtube.com/watch?v=9FWPcJE05YI). Lineup listed with Anthony Procopio.",
+      "post_date": "2018-04-25",
+      "released_at": "2026-07-07T14:32:34",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "content_kind": [
+          "interview"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "alex_aument",
+          "anthony_procopio",
+          "wynton_huddle"
+        ],
+        "source": [
+          "press"
+        ],
+        "topic": [
+          "roots"
+        ],
+        "venue": [
+          "chameleon_club"
+        ]
+      },
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ]
+    },
+    {
+      "id": "MV-20260617-004",
+      "source_url": "https://lancasteronline.com/features/medusas-disco-celebrates-the-release-of-orphic-grimoire-with-a-show-at-xl-live-on/article_355d7358-ead0-11e9-ad21-8f2c7f83766b.html",
+      "source_platform": "press",
+      "media_type": "text",
+      "title": "Medusa's Disco celebrates the release of 'Orphic Grimoire' with a show at XL Live",
+      "description": "Local-paper feature on MD's album 'Orphic Grimoire' (first album since 2017), release show Oct 11 2019 at XL Live, Harrisburg. Justin Wohlfeil joins on bass + production. Mentions the 'Medusa's Discult' fan group.",
+      "post_date": "2019-10-10",
+      "released_at": "2026-07-07T14:32:34",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "orphic_grimoire"
+        ],
+        "band": [
+          "medusas_disco"
+        ],
+        "content_kind": [
+          "press"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "alex_aument",
+          "justin_wohlfeil",
+          "wynton_huddle"
+        ],
+        "source": [
+          "press"
+        ],
+        "topic": [
+          "release"
+        ],
+        "venue": [
+          "xl_live"
+        ]
+      },
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ]
+    },
+    {
+      "id": "MV-20260617-005",
+      "source_url": "https://www.whiskeyriff.com/2023/04/25/hunter-root-dedicates-new-album-arkansas-to-late-older-brother/",
+      "source_platform": "press",
+      "media_type": "text",
+      "title": "Hunter Root Dedicates New Album 'Arkansas' To Late Older Brother",
+      "description": "Press on the Arkansas dedication. Notes ~decade in music, three solo records since 2018, Town Rat Heathen went viral in January 2023 (~1M Spotify streams), Root also frontman of Medusa's Disco.",
+      "post_date": "2023-04-25",
+      "released_at": "2026-07-07T14:32:34",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "arkansas"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "content_kind": [
+          "press"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "song": [
+          "town_rat_heathen"
+        ],
+        "source": [
+          "press"
+        ],
+        "topic": [
+          "family"
+        ]
+      },
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.73,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.26,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ]
+    },
+    {
+      "id": "MV-20260617-006",
+      "source_url": "https://muzicnotez.com/magazine/2024/01/interview-with-roots-rock-artist-hunter-root-on-viral-success-and-latest-album-arkansas/",
+      "source_platform": "press",
+      "media_type": "text",
+      "title": "Interview with Roots Rock Artist Hunter Root on Viral Success",
+      "description": "Interview covering influences and the viral moment. Origin story: a 20-second TikTok clip of the first verse of Town Rat Heathen hit 500k views, prompting him to finish and release the song. Influences: Stones/Zeppelin/Doors/Skynyrd -> Nirvana/Soundgarden/AIC -> Black Keys/Cage the Elephant/Arctic Monkeys -> Growlers/Ty Segall/Thee Oh Sees/King Gizzard.",
+      "post_date": "2024-01-22",
+      "released_at": "2026-07-07T14:32:34",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "arkansas"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "content_kind": [
+          "interview"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "song": [
+          "town_rat_heathen"
+        ],
+        "source": [
+          "press"
+        ],
+        "topic": [
+          "influences"
+        ]
+      },
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.44,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.31,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ]
+    },
+    {
+      "id": "MV-20260617-007",
+      "source_url": "https://shorefire.com/releases/entry/hunter-root-announces-new-album-crooked-home-out-october-17",
+      "source_platform": "press",
+      "media_type": "text",
+      "title": "Hunter Root Announces New Album Crooked Home",
+      "description": "Label press release announcing Crooked Home (Oct 17 2025, via Tolok). First single '94. Recorded at Nashville's Addiction Studios.",
+      "post_date": "2025-08-01",
+      "released_at": "2026-07-07T14:32:34",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "content_kind": [
+          "press"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "song": [
+          "94"
+        ],
+        "source": [
+          "press"
+        ],
+        "topic": [
+          "release"
+        ]
+      },
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.64,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.17,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ]
+    },
+    {
+      "id": "MV-20260617-008",
+      "source_url": "https://jambands.com/news/2025/08/01/watch-hunter-root-previews-new-lp-crooked-home-with-first-single-and-official-music-video-94/",
+      "source_platform": "press",
+      "media_type": "text",
+      "title": "Hunter Root Previews New LP 'Crooked Home' with First Single '94",
+      "description": "Preview of '94 + official video. Producer Anders Osborne, engineer David Kalmusky at Addiction Studios. Guests: Chad Cromwell (drums), Marc Rogers (bass/keys), Lindsay Lou (backing vox).",
+      "post_date": "2025-08-01",
+      "released_at": "2026-07-07T14:32:34",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "content_kind": [
+          "press"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "anders_osborne",
+          "chad_cromwell",
+          "david_kalmusky",
+          "lindsay_lou",
+          "marc_rogers"
+        ],
+        "song": [
+          "94"
+        ],
+        "source": [
+          "press"
+        ],
+        "topic": [
+          "release"
+        ]
+      },
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.76,
+          "role": "song_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.63,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ]
+    },
+    {
+      "id": "MV-20260617-009",
+      "source_url": "https://isthmus.com/events/hunter-root-2025/",
+      "source_platform": "press",
+      "media_type": "text",
+      "title": "Hunter Root - Crooked Home (Isthmus, Madison WI)",
+      "description": "Album feature + tour announce. Confirms brother died in 2021. Produced by Anders Osborne, engineered by David Kalmusky, overdubs at Sound Emporium. Fall 2025 tour opens Oct 10 at The Abbey Bar, Harrisburg.",
+      "post_date": "2025-09-12",
+      "released_at": "2026-07-07T14:32:34",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "content_kind": [
+          "press"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "anders_osborne",
+          "david_kalmusky",
+          "nick_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "topic": [
+          "release"
+        ]
+      },
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.61,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ]
+    },
+    {
+      "id": "MV-20260617-010",
+      "source_url": "https://shorefire.com/releases/entry/hunter-root-unveils-new-album-crooked-home",
+      "source_platform": "press",
+      "media_type": "text",
+      "title": "Award-Winning Multi-Instrumentalist Hunter Root Unveils New Album Crooked Home",
+      "description": "Release-day press. 12 tracks. Themes: grief, working-class struggle, chronic pain, Lyme disease, family addiction legacy. '94 about brother's heroin/cancer story; 'My Brother's Bones' a tribute; 'String Up a Necklace' about a necklace from his girlfriend.",
+      "post_date": "2025-10-17",
+      "released_at": "2026-07-07T14:32:34",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "content_kind": [
+          "press"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "song": [
+          "94",
+          "my_brothers_bones",
+          "string_up_a_necklace"
+        ],
+        "source": [
+          "press"
+        ],
+        "topic": [
+          "family"
+        ]
+      },
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.86,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.3,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ]
+    },
+    {
+      "id": "MV-20260617-011",
+      "source_url": "https://americanahighways.org/2025/10/21/interview-hunter-root-turning-grief-into-grace-on-crooked-home/",
+      "source_platform": "press",
+      "media_type": "text",
+      "title": "Hunter Root: Turning Grief Into Grace on Crooked Home",
+      "description": "Deepest interview. First-person on Nick: heroin addiction from ~15, sarcoma while in Kensington Philly, came home for last 6 months, died at 27 (11 months older than Hunter). Raised in a home where both parents struggled with addiction; guitar as refuge. '94 nearly the album title.",
+      "post_date": "2025-10-21",
+      "released_at": "2026-07-07T14:32:34",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "content_kind": [
+          "interview"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "song": [
+          "94"
+        ],
+        "source": [
+          "press"
+        ],
+        "topic": [
+          "family"
+        ]
+      },
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.71,
+          "role": "album_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.39,
+          "role": "song_ref",
+          "source": "inferred"
+        }
+      ]
+    },
+    {
+      "id": "MV-20260617-012",
+      "source_url": "https://briandambrosio.substack.com/p/hunter-root",
+      "source_platform": "press",
+      "media_type": "text",
+      "title": "Hunter Root: Turning Grief Into Grace (Substack)",
+      "description": "Substack version of the Americana Highways interview; carries additional first-person detail (hospice in the living room; 'a piece of me went with him'; brother's fear of not being remembered).",
+      "post_date": "2025-10-16",
+      "released_at": "2026-07-07T14:32:34",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "content_kind": [
+          "interview"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "topic": [
+          "family"
+        ]
+      },
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.2,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ]
+    },
+    {
+      "id": "MV-20260617-013",
+      "source_url": "https://thecountrynote.com/in-the-news/where-truth-finds-its-voice-fast-tracks-with-hunter-root/",
+      "source_platform": "press",
+      "media_type": "text",
+      "title": "Where Truth Finds Its Voice: Fast Tracks with Hunter Root",
+      "description": "Interview. Fans connected with exact biographical detail (dad in jail, brother in rehab). Recording Crooked Home in Nashville was first time he didn't do everything himself.",
+      "post_date": "2025-11-24",
+      "released_at": "2026-07-07T14:32:34",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "content_kind": [
+          "interview"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "topic": [
+          "family"
+        ]
+      },
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2025,
+          "weight": 1.33,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ]
+    },
+    {
+      "id": "MV-HR-20260707-005",
+      "source_url": "https://pamusician.net/hitting-the-road-september-2019/",
+      "source_platform": "press",
+      "media_type": "text",
+      "title": "Hitting the Road - September 2019 (PA Musician Magazine)",
+      "description": "Michele Kelly's touring column, September 2019 issue: Medusa's Disco close the Peace of Mind concert series at Rt. 61 Roadhouse, Sunbury - the night after opening for Godsmack at Musikfest, Allentown. Lineup listed with Justin Wohlfeil on bass; 'Book Upon My Shelf' single (8/14/19, first in 3 years) noted; Orphic Grimoire release party at XL Live Oct 11 announced. No direct band quotes in the piece.",
+      "post_date": "2019-09-05",
+      "released_at": "2026-07-07T14:32:34",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "content_kind": [
+          "press"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "topic": [
+          "touring"
+        ]
+      },
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ]
+    },
+    {
+      "id": "MV-HR-20260707-006",
+      "source_url": "https://nepaudio.wordpress.com/2019/10/20/orphic-grimoire/",
+      "source_platform": "press",
+      "media_type": "text",
+      "title": "'Orphic Grimoire' perpetuates the hurricane of Medusa's Disco: An Album Review (NEPAudio)",
+      "description": "Track-by-track album review by Sarah Kate Gittleman (NEPAudio, 2019-10-20). Notes Orphic Grimoire as the band's fourth studio release, recorded/mixed/produced entirely by Medusa's Disco; lineup Huddle/Root/Aument/Wohlfeil; highlights 'Belly Ache' (with YAM YAM's Jason Mescia on sax) and closer 'Sizzle Into Oblivion' as the fan favorite.",
+      "post_date": "2019-10-20",
+      "released_at": "2026-07-07T14:32:34",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "orphic_grimoire"
+        ],
+        "band": [
+          "medusas_disco"
+        ],
+        "content_kind": [
+          "press"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "topic": [
+          "release"
+        ]
+      },
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
         }
       ]
     }
