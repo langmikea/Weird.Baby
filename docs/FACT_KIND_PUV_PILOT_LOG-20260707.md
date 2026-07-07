@@ -136,4 +136,18 @@ Facts are vault-status → they must be ABSENT from the export, and the export m
 
 **Gate: PASS** (Ops verdict per delegated paste-back check).
 
-**Commit gate:** _pending._
+**Commit gate:** `3b7923c` pushed (`7edd002..3b7923c`); status clean; hash confirmed in log.
+
+---
+
+## STAGE 6 — Close
+
+- **Deploy: NO-OP, by design** — client artifacts content-unchanged (Stage 5 proof); weird.baby stays at `ffcf7fbd`. Per brief: "deploy only if client artifacts changed" — they did not.
+- STATE.md: new SHIPPED block added above the vocab-migration block (this ID, 4 facts, vault status, corrections at gate, deferrals, no-deploy rationale).
+- Backup retained: `core/backups/mediavault_pre-fact-kind-20260707T020813Z.sqlite`. STANDING REMINDER: OneDrive mirror is the durable home for DB backups (per Delivery & Commit Gates #4) — carry this one over with the next mirror refresh.
+- Deferred, recorded: FactScroller tag-based re-wire + fact display UI (Mike-led) + weight + sourceless-marker set = the next workstream (spec §Execution 4–5); fact COLLECTION brief beyond the pilot also still ahead; harmonica rider HELD.
+- DB head state at close: 297 artifacts / 4 facts / kind CHECK 8 values / registry 211-0-0 / integrity ok / sha256 `CA49A556…`.
+
+**PILOT COMPLETE.** Stages 0–5 executed and gated; Stage 6 close rides the final commit below. Every DB write ran host-side by Mike; every gate has an explicit verdict on this record; spec-vs-brief conflicts resolved spec-first (Flag A) or by Mike's authority (Flag B, wording corrections).
+
+**Final commit gate (session close):** _recorded in the commit that carries this line — hash in `git log`._

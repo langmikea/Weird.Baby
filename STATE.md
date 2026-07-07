@@ -25,6 +25,15 @@ Ops work takes top priority, based on the Ops need in the moment.
 - Status: SOFT-LAUNCHED — visible but not advertised / not yet in search engines.
 - Repo HEAD at deploy: `a7b8d62` + final migration docs commit follows same session.
 
+## SHIPPED 2026-07-07 — FACT KIND + PUV PILOT (FACT_KIND_PUV_PILOT-20260707; DB-only, NO deploy)
+
+Executed per `docs/FACT_KIND_PUV_PILOT_BRIEF-20260707.md`, every stage gated + committed (run log: `docs/FACT_KIND_PUV_PILOT_LOG-20260707.md` — paste-backs, hashes, gate verdicts, delegation arrangement on the record). Backup: `MediaVault/core/backups/mediavault_pre-fact-kind-20260707T020813Z.sqlite` (verified; gitignored, OneDrive mirror is the durable home). Site UNCHANGED — still `ffcf7fbd`; export proven content-idempotent, deploy no-op by design.
+
+- DB: artifacts table REBUILT — kind CHECK now 8 values (+`fact`, F10 closed); 293→297 artifacts: **4 pilot facts** `MV-HR-20260707-001..004` (kind=fact, media_type=text, **status=vault** — Mike's Flag-B call: no export, no wall tiles until display UI exists). Registry synced (211 slugs, 0-0-0); source tag==column 297/297.
+- Facts carry Mike's wording verbatim + real in-vault breadcrumbs (Americana Highways / ReverbNation / Blue Harvest 2014). Two brief premises corrected at the wording gate: Nick Root death-year UNVERIFIED → omitted entirely; RWTH = Hunter's FIRST SOLO RECORD, not a band.
+- Registry: `fact` registered in `tag_vocabulary.json` kind_column (MV `903d52d`); DB vocabulary/tags tables deliberately untouched (kind is a column, not a tag — no kind:* slugs exist for ANY kind value).
+- Deferred to the FactScroller re-wire workstream (spec §Execution 4–5): weight signal (no schema home), sourceless-marker closed set, tag-based PUV matching, fact display UI (Mike-led). Harmonica rider: stays HELD (operator-list required; nothing registers at zero usage).
+
 ## SHIPPED 2026-07-07 — MV VOCABULARY MIGRATION (Stages 0-4, 6, 8; deploy ffcf7fbd)
 
 Executed per `docs/MV_VOCAB_MIGRATION_BRIEF-20260624.md`, all 10 forks LOCKED per reconcile plan Part E, every stage gated + committed (run log: `docs/MV_VOCAB_MIGRATION_LOG-20260624.md` — full paste-backs, hashes, verdicts). Head = live MV DB. Backup: `MediaVault/core/backups/mediavault_pre-vocab-reconcile-v2-20260707T010514Z.sqlite` (integrity ok, gitignored; OneDrive mirror is the durable home).
