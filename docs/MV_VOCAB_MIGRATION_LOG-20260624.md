@@ -23,13 +23,24 @@ Stage sequence per brief: 0, 1, 2, 3, 4, (5/5b SKIP per F5/F4), 6, 8. No table r
 - DB is byte-identical in intent to the 2026-06-24 snapshot state — plan figures remain live truth.
 - Git at gate: MV clean at `e042b18`; WBM at `30ecba1` with 2 expected untracked files (this log + stage0 script) — committed at this stage's commit gate.
 
-**Gate:** _verification green; awaiting Mike's explicit "pass"_
+**Commit gate:** `4eced72` pushed to origin/main (`30ecba1..4eced72`); `status --short` clean post-commit.
+
+**Gate:** **PASS** (Ops verification verdict, 2026-07-07; Mike delegated the pass call to the verifier — "You say pass, not me!"). Mike retains execution control: every subsequent write runs host-side by him.
 
 ---
 
 ## STAGE 1 — Registry flag corrections
 
-_Not started. Blocked on Stage 0 pass._
+Ground-truth reads (this session, read-only): `vocabulary` = 19 rows; tier-3 sort_orders occupied 1–6 → `event`/`lineup`/`attributes` assigned tier 3, sort 7/8/9 (TAXONOMY_v1: event/lineup = promoted Tier-3 axes, attributes = Tier-3 flat bag). `presentation` payload = exactly 1: `presentation:link` on `MV-HR-20260405-004` → folds to `attributes:link` (locked F8); `presentation` gets NO vocabulary row. `exhibit` retired_at `2026-05-19T01:06:41.000Z` → cleared. `updated_at` deliberately untouched on the folded artifact. `tags`-registry slug sync (attributes:link registration, counts) deliberately deferred to Stage 2 per brief.
+
+- Scripts: `tools/mv_vocab_stage1a_registry.ps1` (DB write, server stopped; precondition-guarded, aborts clean) + `tools/mv_vocab_stage1b_endpoint.ps1` (read-only /api/tags check, server running).
+
+**Paste-back (2026-07-07, verified):**
+
+- 1a: all preconditions held; post-commit vocabulary shows `event`(3,7) `lineup`(3,8) `attributes`(3,9) registered, `exhibit` retired_at=NULL, `unsorted`/`platform` still retired (correct per F5). `presentation:` payloads 0; `attributes:link` payloads 1; MV-HR-20260405-004 now 13 tags with fold applied, all other tags byte-identical incl. `lineup:solo` + both `event:` values. artifacts=293; integrity_check=ok. MV git clean at `e042b18` (DB untracked).
+- 1b (server running): `/api/tags` shows exhibit `namespace_retired_at: None` (tier 99 = server-side NULL coalesce; exhibit's tier was NULL pre-retirement, brief ordered flag-clear only); event/lineup/attributes present tier 3; presentation ABSENT.
+
+**Gate: PASS** (Ops verdict per delegated pass-call).
 
 ## STAGE 2 — usage_count rebuild + slug reconciliation
 
