@@ -95,4 +95,31 @@ Git at gate: MV `M core/tag_vocabulary.json`; WBM `M` run log + hunter_root.json
 
 **Gate: PASS** (Ops verdict per delegated paste-back check — every expected value clean).
 
-**Commit gate (spans both repos):** _pending._
+**Commit gate (spans both repos):** MV `903d52d` pushed (`15e5bda..903d52d`), WBM `e857cac` pushed (`cf17d5c..e857cac`); both `status --short` clean post-commit; hashes confirmed in logs.
+
+---
+
+## RIDER — `instrument:harmonica` (after Stage 3, own commit)
+
+Ground truth: migration did NOT add it (no `instrument` namespace among 22 vocabulary rows; WBM `f19014e` logged it HELD — operator-list required, zero text evidence). Escalated to Mike (rider scope undelegated) with the registry constraint stated: zero-zero-usage invariant means no slug registers at usage 0 — either (a) Mike names artifacts now (one script: tag + register slug at true count + `instrument` namespace row) or (b) stays HELD. **Decision:** stays HELD (assume-and-stated to Mike with the Stage 4 package, not countermanded; matches `f19014e` recorded state; nothing registers at zero usage).
+
+---
+
+## STAGE 4 — Pilot facts (wording gate: MIKE, undelegated)
+
+**Wording gate CLOSED (2026-07-07, Mike):** four facts (Mike expanded from three — brief allows 3–5), text verbatim his. Two brief premises overturned at the gate, content authority = Mike:
+
+1. **Death-year dropped** — "2021 corrects 2020" premise UNVERIFIED per Mike; no date appears anywhere in Fact 1; `referenced_dates` NULL.
+2. **RWTH corrected** — brief said "confirmed band, Manheim PA"; Mike: **first solo record** (transitional). Facts 2/4 carry `album:run_with_the_hunt`.
+
+The facts (ids MV-HR-20260707-001..004): (1) Nick Root — older brother, gone at 27, cancer; breadcrumb Americana Highways (in-vault MV-20260617-011), corroboration noted. (2) RWTH first of the solo records, Manheim PA; breadcrumb ReverbNation (MV-HR-20260416-009). (3) Founding member of SEEDS → Medusa's Disco rename due to trademarks; breadcrumb Blue Harvest 2014 (MV-20260617-001), trademark reason = operator knowledge. (4) RWTH transitional piece to the modern solo career; breadcrumb ReverbNation, characterization = operator knowledge.
+
+All four: `kind='fact'`, `media_type='text'`, **`status='vault'`** (Flag B option b), `storage_mode='url_only'`, `ingest_source='cowork'`, lines = `description_short`/`description_long`, provenance trail in `notes`. Every source is a REAL in-vault artifact URL — no sourceless markers needed for the pilot; marker-set finalization deferred with the FactScroller work. Weight: DEFERRED to FactScroller re-wire (assume-and-stated, not countermanded). Label "Fact" stands. Zero vocabulary changes: all 22 tag payloads use existing slugs (script hard-aborts otherwise).
+
+- Script: `tools/fact_kind_stage4_insert.ps1` — pinned to post-Stage-2 sha256 `F983A840…`; precondition-guarded (ids/sequence/fact-rows absent, all slugs registered); one transaction; pinned 11-slug registry delta; post-asserts 297 artifacts / 4 facts / registry 211-0-0 / source agreement 297; SELECT-back of all four facts as queryable proof; rollback untouched on any mismatch.
+
+**Paste-back (2026-07-07, verified):** preconditions held (sha `F983A840…` matched, no WAL/SHM); registry delta == pinned 11 slugs exactly; artifacts 297 / kind=fact 4; registry 211 slugs, 0 mismatches, 0 zero-usage; source tag==column 297/297; `integrity_check=ok`; all four facts SELECT-back verbatim with breadcrumb URLs. `STAGE4_INSERT_OK`. Live DB sha256 now `CA49A556CD08306775DFFDAB969621AD6D33A7303F25A7D7804A97FBD2066B40`.
+
+**Gate: PASS** (Ops verdict per delegated paste-back check; wording was Mike's, undelegated, closed above).
+
+**Commit gate:** _pending._
