@@ -54,9 +54,22 @@ Dry-run (read-only, 2026-07-07, post-Stage-1 state confirmed fresh through mount
 
 **Gate: PASS.**
 
-## STAGE 3 — source collapse + allowed-set (fresh disagreement measurement to be recorded here)
+## STAGE 3 — source collapse + allowed-set (F6)
 
-_Not started._
+Stage 2 commit gate first: `be2a857` pushed (`e685cff..be2a857`), status clean.
+
+**FRESH tag-vs-column disagreement measurement (2026-07-07, read-only; supersedes stale 23/6 and 3/0): 14.** Breakdown: 12 = the 2026-06-17 press batch (`source:web` tag vs `press` column, no URL — column wins, per F6 keep-press); 2 = URL-host overrides stray tags (MV-HR-20260405-008 tiktok-tag→facebook, MV-HR-20260405-014 instagram-tag→facebook).
+
+Resolution simulation under locked rule (URL-host > column > tag): provenance URL 124 / column 150 / tag 0; **zero non-NULL column changes** — the column already obeys the rule. 19 artifacts have no URL-host, NULL column, no tag — all local-drop/cowork vaulted assets (8 ALBUM containers, phone-recording batch, local drops): **assume-and-stated → `local`** (the F6-kept value that accurately describes them; fills the NULL column). Final distribution (sum 293): youtube 105, bandcamp 79, reverbnation 42, local 31, facebook 16, press 12, other 7, instagram 1. YouTube column set unchanged (105; 48 of them released → thumbnail synthesis unaffected). Tag rewrites: 49 + 19 = 68 artifacts end with exactly one `source:` tag agreeing with the column. Registry sync in-script (new slugs source:facebook/press/local; source:web + source:tiktok drop to 0 → dropped; counts fixed).
+
+- Scripts: `tools/mv_vocab_stage3a_source.ps1` (DB write, server stopped; pinned to 14 disagreements + the exact 19-id local set + exact final distribution, aborts clean on drift) + `tools/mv_vocab_stage3b_export_verify.ps1` (server running: re-export, then HEAD-vs-new diff proving the youtube source_platform set unchanged).
+
+**Paste-back (2026-07-07, verified):**
+
+- 3a: 68/68 tag updates; registry adds source:facebook/local/press, drops source:tiktok/web, fixes instagram→1 (stray tag on -014 became facebook per URL-host; remaining 1 = the instagram-column artifact), other→7, youtube→105. Post: 293/293 one-tag + tag==column agreement; column and tag distributions identical (youtube 105, bandcamp 79, reverbnation 42, local 31, facebook 16, press 12, other 7, instagram 1); 19 fills all local; whole-registry 0/0/0; artifacts 293; integrity ok.
+- 3b: export clean (33 artifacts, 199,425 bytes; vocabulary 22 rows = 19 + Stage-1's event/lineup/attributes). source_platform diffs = exactly the 10 released local-fills (None→local). **Anomaly chased before verdict:** verifier reported youtube set "unchanged (0 ids)" — vacuous, because youtube artifacts surface as track renditions (ytId), never as (id,source_platform) records; identical structure in HEAD. Real youtube surface verified directly: i.ytimg.com thumbnail set md5-identical HEAD vs new; ytId count 47=47 **host-side** (a sandbox-mount read said 46 — mount read-lag hazard confirmed live; host is truth, per OPERATIONS §8).
+
+**Gate: PASS.**
 
 ## STAGE 4 — bands -> band rename
 

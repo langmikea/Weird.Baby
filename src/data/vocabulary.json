@@ -1,8 +1,8 @@
 {
   "metadata": {
     "source": "http://127.0.0.1:51822/db",
-    "exported_at": "2026-06-15T14:55:18.300Z",
-    "row_count": 19,
+    "exported_at": "2026-07-07T01:22:24.808Z",
+    "row_count": 22,
     "schema": "vocabulary v1 — namespace, display_name, tier, sort_order, retired_at"
   },
   "namespaces": [
@@ -133,11 +133,32 @@
       "retired_at": null
     },
     {
+      "namespace": "event",
+      "display_name": "Event",
+      "tier": 3,
+      "sort_order": 7,
+      "retired_at": null
+    },
+    {
+      "namespace": "lineup",
+      "display_name": "Lineup",
+      "tier": 3,
+      "sort_order": 8,
+      "retired_at": null
+    },
+    {
+      "namespace": "attributes",
+      "display_name": "Attributes",
+      "tier": 3,
+      "sort_order": 9,
+      "retired_at": null
+    },
+    {
       "namespace": "exhibit",
       "display_name": "Exhibit",
       "tier": null,
       "sort_order": null,
-      "retired_at": "2026-05-19T01:06:41.000Z"
+      "retired_at": null
     }
   ]
 }

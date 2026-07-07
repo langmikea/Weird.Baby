@@ -1,7 +1,7 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-06-15T14:55:18.300Z",
+    "exported_at": "2026-07-07T01:22:24.808Z",
     "filter": "released, not archived, badged for this exhibit",
     "vocabulary_csv_sha": null
   },
@@ -19,6 +19,7 @@
       "thumbnail_url": null,
       "tags": {
         "attributes": [
+          "link",
           "new_music",
           "notable",
           "pre_release"
@@ -45,8 +46,8 @@
         "lineup": [
           "solo"
         ],
-        "presentation": [
-          "link"
+        "source": [
+          "facebook"
         ],
         "topic": [
           "touring"
@@ -89,6 +90,9 @@
         "lineup": [
           "solo"
         ],
+        "source": [
+          "facebook"
+        ],
         "topic": [
           "songwriting"
         ]
@@ -129,6 +133,9 @@
         ],
         "format": [
           "video"
+        ],
+        "source": [
+          "facebook"
         ],
         "topic": [
           "recording"
@@ -174,6 +181,9 @@
         "lineup": [
           "solo"
         ],
+        "source": [
+          "facebook"
+        ],
         "topic": [
           "recording"
         ]
@@ -216,7 +226,7 @@
           "solo"
         ],
         "source": [
-          "tiktok"
+          "facebook"
         ],
         "topic": [
           "songwriting"
@@ -258,6 +268,9 @@
         ],
         "format": [
           "text"
+        ],
+        "source": [
+          "facebook"
         ],
         "topic": [
           "touring"
@@ -356,6 +369,9 @@
         "lineup": [
           "solo"
         ],
+        "source": [
+          "facebook"
+        ],
         "topic": [
           "songwriting"
         ]
@@ -391,6 +407,9 @@
         ],
         "format": [
           "text"
+        ],
+        "source": [
+          "facebook"
         ],
         "topic": [
           "songwriting"
@@ -435,6 +454,9 @@
         "people": [
           "nick_root"
         ],
+        "source": [
+          "facebook"
+        ],
         "topic": [
           "family"
         ]
@@ -478,7 +500,7 @@
           "video"
         ],
         "source": [
-          "instagram"
+          "facebook"
         ],
         "topic": [
           "influences"
@@ -519,6 +541,9 @@
         ],
         "format": [
           "video"
+        ],
+        "source": [
+          "facebook"
         ],
         "topic": [
           "songwriting"
@@ -562,6 +587,9 @@
         "lineup": [
           "solo"
         ],
+        "source": [
+          "facebook"
+        ],
         "topic": [
           "gear"
         ]
@@ -603,6 +631,9 @@
         ],
         "lineup": [
           "solo"
+        ],
+        "source": [
+          "facebook"
         ],
         "topic": [
           "touring"
@@ -689,6 +720,9 @@
         ],
         "format": [
           "video"
+        ],
+        "source": [
+          "facebook"
         ],
         "topic": [
           "influences"
@@ -914,6 +948,9 @@
       "tags": {
         "exhibit": [
           "hunter_root"
+        ],
+        "source": [
+          "facebook"
         ]
       }
     },
@@ -950,6 +987,9 @@
         "format": [
           "video"
         ],
+        "source": [
+          "facebook"
+        ],
         "topic": [
           "family"
         ]
@@ -958,7 +998,7 @@
     {
       "id": "MV-20260529-001",
       "source_url": null,
-      "source_platform": null,
+      "source_platform": "local",
       "media_type": "other",
       "title": "Hunter Root — Central PA, Oct 2025",
       "description": "Hunter Root live, Central Pennsylvania, October 2025. Show container card; its photo gallery is derived from the live released child photos re-parented under it.",
@@ -978,6 +1018,9 @@
         ],
         "exhibit": [
           "hunter_root"
+        ],
+        "source": [
+          "local"
         ]
       },
       "card_kind": "gallery",
@@ -1010,6 +1053,9 @@
             ],
             "lineup": [
               "band"
+            ],
+            "source": [
+              "other"
             ]
           },
           "capture_order": 1
@@ -1041,6 +1087,9 @@
             ],
             "lineup": [
               "band"
+            ],
+            "source": [
+              "other"
             ]
           },
           "capture_order": 2
@@ -1075,6 +1124,9 @@
             ],
             "lineup": [
               "band"
+            ],
+            "source": [
+              "local"
             ]
           },
           "capture_order": 3
@@ -1109,6 +1161,9 @@
             ],
             "lineup": [
               "band"
+            ],
+            "source": [
+              "local"
             ]
           },
           "capture_order": 4
@@ -1140,6 +1195,9 @@
             ],
             "lineup": [
               "band"
+            ],
+            "source": [
+              "other"
             ]
           },
           "capture_order": 5
@@ -1171,6 +1229,9 @@
             ],
             "lineup": [
               "band"
+            ],
+            "source": [
+              "other"
             ]
           },
           "capture_order": 6
@@ -1205,6 +1266,9 @@
             ],
             "lineup": [
               "band"
+            ],
+            "source": [
+              "local"
             ]
           },
           "capture_order": 7
@@ -1239,6 +1303,9 @@
             ],
             "lineup": [
               "band"
+            ],
+            "source": [
+              "local"
             ]
           },
           "capture_order": 8
@@ -1273,6 +1340,9 @@
             ],
             "lineup": [
               "solo"
+            ],
+            "source": [
+              "local"
             ]
           },
           "capture_order": 9
@@ -1304,6 +1374,9 @@
             ],
             "lineup": [
               "solo"
+            ],
+            "source": [
+              "local"
             ]
           },
           "capture_order": 10
@@ -1335,6 +1408,9 @@
             ],
             "lineup": [
               "solo"
+            ],
+            "source": [
+              "other"
             ]
           },
           "capture_order": 11
@@ -1366,6 +1442,9 @@
             ],
             "lineup": [
               "solo"
+            ],
+            "source": [
+              "local"
             ]
           },
           "capture_order": 12
@@ -1396,6 +1475,9 @@
             ],
             "lineup": [
               "band"
+            ],
+            "source": [
+              "local"
             ]
           },
           "capture_order": 13
@@ -1427,6 +1509,9 @@
             ],
             "lineup": [
               "band"
+            ],
+            "source": [
+              "local"
             ]
           },
           "capture_order": 14
@@ -1458,6 +1543,9 @@
             ],
             "lineup": [
               "band"
+            ],
+            "source": [
+              "local"
             ]
           },
           "capture_order": 15
@@ -1487,6 +1575,9 @@
             ],
             "exhibit": [
               "hunter_root"
+            ],
+            "source": [
+              "local"
             ]
           },
           "capture_order": 16
@@ -1496,7 +1587,7 @@
     {
       "id": "MV-HR-20260531-001",
       "source_url": null,
-      "source_platform": null,
+      "source_platform": "local",
       "media_type": "other",
       "title": "Run With The Hunt",
       "description": "",
@@ -1519,6 +1610,9 @@
         ],
         "exhibit": [
           "hunter_root"
+        ],
+        "source": [
+          "local"
         ]
       },
       "card_kind": "album",
@@ -2084,7 +2178,7 @@
     {
       "id": "MV-HR-ALBUM-arkansas",
       "source_url": null,
-      "source_platform": null,
+      "source_platform": "local",
       "media_type": "other",
       "title": "Arkansas",
       "description": "",
@@ -2107,6 +2201,9 @@
         ],
         "exhibit": [
           "hunter_root"
+        ],
+        "source": [
+          "local"
         ]
       },
       "card_kind": "album",
@@ -2707,7 +2804,7 @@
     {
       "id": "MV-HR-ALBUM-crooked_home",
       "source_url": null,
-      "source_platform": null,
+      "source_platform": "local",
       "media_type": "other",
       "title": "Crooked Home",
       "description": "",
@@ -2730,6 +2827,9 @@
         ],
         "exhibit": [
           "hunter_root"
+        ],
+        "source": [
+          "local"
         ]
       },
       "card_kind": "album",
@@ -3381,7 +3481,7 @@
     {
       "id": "MV-HR-ALBUM-wheel",
       "source_url": null,
-      "source_platform": null,
+      "source_platform": "local",
       "media_type": "other",
       "title": "Life Inside A Wheel",
       "description": "",
@@ -3404,6 +3504,9 @@
         ],
         "exhibit": [
           "hunter_root"
+        ],
+        "source": [
+          "local"
         ]
       },
       "card_kind": "album",
@@ -3995,7 +4098,7 @@
     {
       "id": "MV-HR-ALBUM-dandelions",
       "source_url": null,
-      "source_platform": null,
+      "source_platform": "local",
       "media_type": "other",
       "title": "Mimicking the Sun Like Dandelions",
       "description": "",
@@ -4018,6 +4121,9 @@
         ],
         "exhibit": [
           "hunter_root"
+        ],
+        "source": [
+          "local"
         ]
       },
       "card_kind": "album",
@@ -4558,7 +4664,7 @@
     {
       "id": "MV-HR-ALBUM-skipping",
       "source_url": null,
-      "source_platform": null,
+      "source_platform": "local",
       "media_type": "other",
       "title": "Skipping Stones That Sink Before They're Thrown",
       "description": "",
@@ -4581,6 +4687,9 @@
         ],
         "exhibit": [
           "hunter_root"
+        ],
+        "source": [
+          "local"
         ]
       },
       "card_kind": "album",
@@ -5089,7 +5198,7 @@
     {
       "id": "MV-HR-ALBUM-cracked",
       "source_url": null,
-      "source_platform": null,
+      "source_platform": "local",
       "media_type": "other",
       "title": "They Finally Cracked Me",
       "description": "",
@@ -5112,6 +5221,9 @@
         ],
         "exhibit": [
           "hunter_root"
+        ],
+        "source": [
+          "local"
         ]
       },
       "card_kind": "album",
@@ -5666,7 +5778,7 @@
     {
       "id": "MV-HR-ALBUM-phone_recordings",
       "source_url": null,
-      "source_platform": null,
+      "source_platform": "local",
       "media_type": "other",
       "title": "Phone Recordings EP",
       "description": "",
@@ -5689,6 +5801,9 @@
         ],
         "exhibit": [
           "hunter_root"
+        ],
+        "source": [
+          "local"
         ]
       },
       "card_kind": "album",
@@ -5939,7 +6054,7 @@
     {
       "id": "MV-HR-ALBUM-rarities",
       "source_url": null,
-      "source_platform": null,
+      "source_platform": "local",
       "media_type": "other",
       "title": "SINGLES & RARITIES",
       "description": "",
@@ -5962,6 +6077,9 @@
         ],
         "exhibit": [
           "hunter_root"
+        ],
+        "source": [
+          "local"
         ]
       },
       "card_kind": "album",
