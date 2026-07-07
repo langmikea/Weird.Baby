@@ -21,9 +21,20 @@ Ops work takes top priority, based on the Ops need in the moment.
 
 ## LIVE (deployed, verified)
 
-- Site: https://weird.baby — LIVE and CURRENT. Last deploy version `2b1a853b` (wrangler 4.81.1), 2026-07-07 (verified via deploy output + Mike's incognito walk + Ops bundle checks: press cards render, no vault leakage).
+- Site: https://weird.baby — LIVE and CURRENT. Last deploy version `b89cfb91` (wrangler 4.81.1), 2026-07-07 (FactScroller re-plumb; verified via deploy output + Ops live Chrome checks: recipe cards cycle vault facts, credits right-aligned, no fact tiles on the wall, scroll-to-bottom clears the player bar).
 - Status: SOFT-LAUNCHED — visible but not advertised / not yet in search engines.
-- Repo HEAD at deploy: `eb8ec09` + ledger/log close commit follows same session.
+- Repo HEAD at deploy: `af42808` + docs close commit follows same session.
+
+## SHIPPED 2026-07-07 — FACTSCROLLER RE-PLUMB + FIRST RECIPE CARDS (FACTSCROLLER_REPLUMB-20260707; deploy b89cfb91)
+
+Executed per `docs/FACTSCROLLER_REPLUMB_BRIEF-20260707.md`, all 4 stages gated (run log: `docs/FACTSCROLLER_REPLUMB_LOG-20260707.md` — paste-backs, gate verdicts, live-verify on the record). Backup: `MediaVault/core/backups/mediavault_pre-factscroller-20260707T202907Z.sqlite` (verified; gitignored — OneDrive mirror is the durable home, RE-MIRROR PENDING). MV DB writes host-side; WBM through `af42808` + docs close.
+
+- **The 97 facts are LIVE.** DB: 97 `fact` artifacts flipped vault→released (`released_at` set); 2 recipe-card artifacts inserted `MV-HR-20260707-100` (Nick Root) / `-101` (Arkansas), kind NULL / media_type other / `card_kind:recipe` (NEW vocab value, registered at usage 2). 392→394 artifacts; registry 230→231, 0 mismatch / 0 zero-usage; id_sequence 20260707 stale-4 repaired → 101 (Flag D).
+- **Export re-plumbed** (`tools/export-artifacts.mjs`): facts export to a SEPARATE `hunter_root.facts.json` (97); wall SQL structurally excludes `kind='fact'` (two independent locks) — facts NEVER tile the wall (Mike's standing ruling, enforced in SQL not convention). Recipe cards pass through with their baked recipe query; era-derivation exempts `recipe`. Wall = 49 (47 + 2 recipe); verify proved wall ∩ facts-payload = ∅.
+- **Client** (`src/lib/fact-select.js` NEW + surgical edits to Exhibit.jsx / HrExhibitFlow.jsx / spine / config): player scroller + living recipe cards read the vault via a shared selector — tag-based CLIMB (song→album→era→artist, unsignaled, fountain never dries) + weight = per-session selection frequency (closes the PUV pilot's deferred weight signal, NO schema). `splitFact` puts the quote in the big box, the source breadcrumb in the small box (Mike's display ruling). `hr_facts.js` RETIRED from the live path (kept in-tree, unimported — it carried Nick's death year as 2020; vault truth is 2021-04-15).
+- **Eyeball polish (Mike-gated):** player scroller keeps its bounce, gains overflow fade-mask + right-aligned breadcrumb; recipe cards = fixed-height body (no masonry reflow flash), soft cross-fade, desynced start, right-aligned credit, small eyebrow for identity. Scroll-to-bottom fixed: panel bottom padding → 5.5rem clears the 68px player bar (also eases the standing DECK-SCROLL-OCCLUSION). A **Recipe** pill now sits in the Card Kind filter group.
+- Selector unit-tested (27/27 + splitFact 8/8); big-file edits compile-verified via git-HEAD reconstruction + esbuild (mount read-lag defeated per OPERATIONS §8); deployed bundle live-verified in Chrome.
+- Deferred: fact COLLECTION beyond 97 + more recipe cards · `hr_facts.js` unique-seed salvage brief · strict critics-only Arkansas variant (BACKLOG low/low) · breadcrumb icon (spec §6) · font/motion polish once volume grows.
 
 ## SHIPPED 2026-07-07 — PRESS BATCH + FACT FACTORY RUN 1 (PRESS_BATCH_INGEST-20260707; deploy 2b1a853b)
 
@@ -90,7 +101,8 @@ These must be true before driving traffic (Google search, advertising). This lis
 3. Content expansion toward full-launch gate (largest lever for launch).
 4. Gift shop wiring + Mike's gift shop build (gated on Mike bringing source).
 5. [DONE 2026-07-07] Press batch — SHIPPED as PRESS_BATCH_INGEST-20260707 (14 released, 93 facts vaulted; content-expansion gate progress: +14 visitor-facing artifacts, wall now 47).
-6. FactScroller re-plumb (spec Sequencing A/B) — UNBLOCKED: vault holds 97 facts; player scroller re-wire + first recipe cards (Nick Root; Arkansas reviews). Next brief.
+6. [DONE 2026-07-07] FactScroller re-plumb — SHIPPED as FACTSCROLLER_REPLUMB-20260707 (deploy b89cfb91): 97 facts live via player scroller + 2 living recipe cards (Nick Root, Arkansas); climb + weight; facts structurally off the wall.
+7. Fact collection beyond the pilot 97 (more recipe cards, more facts) + `hr_facts.js` unique-seed salvage — largest remaining content lever for the FactScroller surface.
 
 ## KNOWN ISSUES (accepted, not yet fixed)
 

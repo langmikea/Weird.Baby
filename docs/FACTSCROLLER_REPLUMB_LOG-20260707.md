@@ -138,6 +138,13 @@ Assume-and-stated for the next eyeball: recipe cards keep a small eyebrow (the r
 - **Credit to the RHS.** Breadcrumb right-aligned in both surfaces (`fs-crumb` margin-left:auto + right; `rc-crumb` right).
 - Both CSS-only. **Mike: "Nice! Approved. Proceed." — Stage 3 EYEBALL GATE: PASS.**
 
-## STAGE 4 — Deploy + close — _in progress_
+## STAGE 4 — Deploy + close — DONE
 
-Client verified building + previewing clean (Mike's `npm run preview`, live-walked). Deploy is Mike's (host-side, durable path).
+- Stage 3 committed `af42808` (`e5648e6..af42808`, pushed; 8 files, +303/−49).
+- Build clean (51 modules); `npx wrangler deploy` → **Version `b89cfb91`** (`b89cfb91-3eb6-46fe-8629-f760d806d747`), wrangler 4.81.1.
+- **Ops live verification (Claude-in-Chrome on https://weird.baby/hr):** deployed bundle = `index-Ddp_xBq3.js` (matches build); 2 recipe cards render (eyebrows "Nick Root"/"Arkansas"); cards cycle REAL vault facts (e.g. Nick "Two weeks before he died…" + credit "— Hunter Root, Americana Highways, 2025"; Arkansas "The main reason it's titled this…" + "— Hunter Root, Whiskey Riff, 2023"); credits right-aligned; panel bottom padding 88px live; wall scrolls to the bottom with clearance below the last row (screenshot on session record). No fact tiles on the wall (structural lock holds — Stage 2 verify).
+- Mike live walk: _to confirm on weird.baby (already approved on preview)._
+
+**SHIPPED.** All four stages executed and gated; every DB write host-side by Mike; scroller look/motion preserved per ruling (player = bounce + overflow fit only; recipe cards = new soft-fade surface); facts reach visitors ONLY via scrollers/recipe cards, enforced structurally at the export SQL. 
+
+Deferred / on the record: fact COLLECTION beyond the 97 (more recipe cards, more facts) · `hr_facts.js` unique-seed salvage brief · strict critics-only Arkansas recipe variant (BACKLOG, low/low) · breadcrumb icon (spec §6 extra credit) · font/motion polish pass once volume grows · OneDrive re-mirror of `mediavault_pre-factscroller-20260707T202907Z.sqlite`.
