@@ -1,9 +1,10 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-07-07T03:11:39.122Z",
+    "exported_at": "2026-07-07T14:26:36.789Z",
     "filter": "released, not archived, badged for this exhibit",
-    "vocabulary_csv_sha": null
+    "vocabulary_csv_sha": null,
+    "derived_era": "v0.2 — weighted date-sets baked on leaves; era derived client-side (era-buckets.json)"
   },
   "artifacts": [
     {
@@ -30,9 +31,6 @@
         "content_kind": [
           "announcement"
         ],
-        "era": [
-          "recent"
-        ],
         "event": [
           "tour",
           "tour_announcement"
@@ -52,7 +50,21 @@
         "topic": [
           "touring"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.92,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260405-005",
@@ -78,9 +90,6 @@
         "content_kind": [
           "performance"
         ],
-        "era": [
-          "on_the_road"
-        ],
         "exhibit": [
           "hunter_root"
         ],
@@ -96,7 +105,15 @@
         "topic": [
           "songwriting"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260405-006",
@@ -125,9 +142,6 @@
         "content_kind": [
           "announcement"
         ],
-        "era": [
-          "on_the_road"
-        ],
         "exhibit": [
           "hunter_root"
         ],
@@ -140,7 +154,15 @@
         "topic": [
           "recording"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260405-007",
@@ -166,9 +188,6 @@
         "content_kind": [
           "studio"
         ],
-        "era": [
-          "on_the_road"
-        ],
         "event": [
           "rehearsal"
         ],
@@ -187,7 +206,21 @@
         "topic": [
           "recording"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2023,
+          "weight": 1.33,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260405-008",
@@ -213,9 +246,6 @@
         "content_kind": [
           "performance"
         ],
-        "era": [
-          "breakthrough"
-        ],
         "exhibit": [
           "hunter_root"
         ],
@@ -231,7 +261,15 @@
         "topic": [
           "songwriting"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2022,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260405-009",
@@ -257,9 +295,6 @@
         "content_kind": [
           "announcement"
         ],
-        "era": [
-          "recent"
-        ],
         "event": [
           "tour_announcement"
         ],
@@ -275,7 +310,21 @@
         "topic": [
           "touring"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 0.92,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260405-010",
@@ -302,9 +351,6 @@
         "content_kind": [
           "performance"
         ],
-        "era": [
-          "on_the_road"
-        ],
         "event": [
           "advance_tickets",
           "event_listing",
@@ -328,7 +374,27 @@
         "topic": [
           "touring"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.82,
+          "role": "event_ref",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.67,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260405-011",
@@ -354,9 +420,6 @@
         "content_kind": [
           "cover"
         ],
-        "era": [
-          "on_the_road"
-        ],
         "event": [
           "live_show"
         ],
@@ -375,7 +438,21 @@
         "topic": [
           "songwriting"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.84,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260405-012",
@@ -399,9 +476,6 @@
         "content_kind": [
           "press"
         ],
-        "era": [
-          "on_the_road"
-        ],
         "exhibit": [
           "hunter_root"
         ],
@@ -414,7 +488,15 @@
         "topic": [
           "songwriting"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260405-013",
@@ -442,9 +524,6 @@
         "content_kind": [
           "candid"
         ],
-        "era": [
-          "breakthrough"
-        ],
         "exhibit": [
           "hunter_root"
         ],
@@ -460,7 +539,15 @@
         "topic": [
           "family"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2021,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260405-014",
@@ -487,9 +574,6 @@
         "content_kind": [
           "announcement"
         ],
-        "era": [
-          "on_the_road"
-        ],
         "event": [
           "fall_tour"
         ],
@@ -505,7 +589,21 @@
         "topic": [
           "influences"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.6,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260405-015",
@@ -533,9 +631,6 @@
         "content_kind": [
           "performance"
         ],
-        "era": [
-          "on_the_road"
-        ],
         "exhibit": [
           "hunter_root"
         ],
@@ -548,7 +643,15 @@
         "topic": [
           "songwriting"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2023,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260405-034",
@@ -575,9 +678,6 @@
         "content_kind": [
           "announcement"
         ],
-        "era": [
-          "breakthrough"
-        ],
         "exhibit": [
           "hunter_root"
         ],
@@ -593,7 +693,15 @@
         "topic": [
           "gear"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2022,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260405-035",
@@ -617,9 +725,6 @@
         "content_kind": [
           "candid"
         ],
-        "era": [
-          "finding_the_sound"
-        ],
         "event": [
           "tour"
         ],
@@ -638,7 +743,21 @@
         "topic": [
           "touring"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2019,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.71,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260405-037",
@@ -664,9 +783,6 @@
         "content_kind": [
           "announcement"
         ],
-        "era": [
-          "on_the_road"
-        ],
         "event": [
           "tour",
           "tour_announcement"
@@ -686,7 +802,21 @@
         "topic": [
           "touring"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2024,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2024,
+          "weight": 1.48,
+          "role": "event_ref",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260405-038",
@@ -712,9 +842,6 @@
         "content_kind": [
           "performance"
         ],
-        "era": [
-          "recent"
-        ],
         "exhibit": [
           "hunter_root"
         ],
@@ -727,7 +854,15 @@
         "topic": [
           "influences"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260416-001",
@@ -750,9 +885,6 @@
         "content_kind": [
           "music"
         ],
-        "era": [
-          "early_days"
-        ],
         "exhibit": [
           "hunter_root"
         ],
@@ -768,7 +900,15 @@
         "topic": [
           "influences"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2018,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260416-003",
@@ -794,9 +934,6 @@
         "content_kind": [
           "music"
         ],
-        "era": [
-          "finding_the_sound"
-        ],
         "exhibit": [
           "hunter_root"
         ],
@@ -809,7 +946,21 @@
         "topic": [
           "influences"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.07,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260416-005",
@@ -835,9 +986,6 @@
         "content_kind": [
           "music"
         ],
-        "era": [
-          "finding_the_sound"
-        ],
         "exhibit": [
           "hunter_root"
         ],
@@ -850,7 +998,21 @@
         "topic": [
           "songwriting"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2020,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2020,
+          "weight": 1.15,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260416-009",
@@ -876,9 +1038,6 @@
         "content_kind": [
           "music"
         ],
-        "era": [
-          "early_days"
-        ],
         "exhibit": [
           "hunter_root"
         ],
@@ -891,7 +1050,21 @@
         "topic": [
           "influences"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2016,
+          "weight": 1.67,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260416-011",
@@ -917,9 +1090,6 @@
         "content_kind": [
           "music"
         ],
-        "era": [
-          "early_days"
-        ],
         "exhibit": [
           "hunter_root"
         ],
@@ -932,7 +1102,21 @@
         "topic": [
           "songwriting"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2016,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        },
+        {
+          "year": 2016,
+          "weight": 1.45,
+          "role": "album_ref",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-20260419-002",
@@ -952,7 +1136,15 @@
         "source": [
           "facebook"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-HR-20260405-003",
@@ -978,9 +1170,6 @@
         "content_kind": [
           "candid"
         ],
-        "era": [
-          "recent"
-        ],
         "exhibit": [
           "hunter_root"
         ],
@@ -993,7 +1182,15 @@
         "topic": [
           "family"
         ]
-      }
+      },
+      "dates": [
+        {
+          "year": 2025,
+          "weight": 2,
+          "role": "publish",
+          "source": "inferred"
+        }
+      ]
     },
     {
       "id": "MV-20260529-001",
@@ -1058,6 +1255,20 @@
               "other"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.12,
+              "role": "event_ref",
+              "source": "inferred"
+            }
+          ],
           "capture_order": 1
         },
         {
@@ -1092,6 +1303,20 @@
               "other"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.08,
+              "role": "event_ref",
+              "source": "inferred"
+            }
+          ],
           "capture_order": 2
         },
         {
@@ -1129,6 +1354,20 @@
               "local"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.74,
+              "role": "event_ref",
+              "source": "inferred"
+            }
+          ],
           "capture_order": 3
         },
         {
@@ -1166,6 +1405,20 @@
               "local"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.91,
+              "role": "event_ref",
+              "source": "inferred"
+            }
+          ],
           "capture_order": 4
         },
         {
@@ -1200,6 +1453,20 @@
               "other"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.69,
+              "role": "event_ref",
+              "source": "inferred"
+            }
+          ],
           "capture_order": 5
         },
         {
@@ -1234,6 +1501,20 @@
               "other"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.7,
+              "role": "event_ref",
+              "source": "inferred"
+            }
+          ],
           "capture_order": 6
         },
         {
@@ -1271,6 +1552,20 @@
               "local"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.89,
+              "role": "event_ref",
+              "source": "inferred"
+            }
+          ],
           "capture_order": 7
         },
         {
@@ -1308,6 +1603,20 @@
               "local"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.44,
+              "role": "event_ref",
+              "source": "inferred"
+            }
+          ],
           "capture_order": 8
         },
         {
@@ -1345,6 +1654,20 @@
               "local"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.37,
+              "role": "event_ref",
+              "source": "inferred"
+            }
+          ],
           "capture_order": 9
         },
         {
@@ -1379,6 +1702,20 @@
               "local"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.05,
+              "role": "event_ref",
+              "source": "inferred"
+            }
+          ],
           "capture_order": 10
         },
         {
@@ -1413,6 +1750,20 @@
               "other"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.08,
+              "role": "event_ref",
+              "source": "inferred"
+            }
+          ],
           "capture_order": 11
         },
         {
@@ -1447,6 +1798,20 @@
               "local"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.1,
+              "role": "event_ref",
+              "source": "inferred"
+            }
+          ],
           "capture_order": 12
         },
         {
@@ -1480,6 +1845,20 @@
               "local"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.21,
+              "role": "event_ref",
+              "source": "inferred"
+            }
+          ],
           "capture_order": 13
         },
         {
@@ -1514,6 +1893,20 @@
               "local"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.73,
+              "role": "event_ref",
+              "source": "inferred"
+            }
+          ],
           "capture_order": 14
         },
         {
@@ -1548,6 +1941,20 @@
               "local"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.51,
+              "role": "event_ref",
+              "source": "inferred"
+            }
+          ],
           "capture_order": 15
         },
         {
@@ -1580,6 +1987,20 @@
               "local"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.05,
+              "role": "event_ref",
+              "source": "inferred"
+            }
+          ],
           "capture_order": 16
         }
       ]
@@ -1632,9 +2053,6 @@
             "band": [
               "hunter_root"
             ],
-            "era": [
-              "rwth"
-            ],
             "exhibit": [
               "hunter_root"
             ],
@@ -1646,6 +2064,14 @@
               "mp3"
             ]
           },
+          "dates": [
+            {
+              "year": 2016,
+              "weight": 1.23,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/0b/0b65aa63ffa9856c473f03ba3e361a7137a93415f2e3a34e5e959d6a3cac3459.mp3",
@@ -1669,9 +2095,6 @@
             "band": [
               "hunter_root"
             ],
-            "era": [
-              "rwth"
-            ],
             "exhibit": [
               "hunter_root"
             ],
@@ -1683,6 +2106,14 @@
               "mp3"
             ]
           },
+          "dates": [
+            {
+              "year": 2016,
+              "weight": 1.24,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/d6/d693ac3556bb0c2c4933d3b8d3c3e98fcaaa6211c1d27d71005e39c314652f45.mp3",
@@ -1706,9 +2137,6 @@
             "band": [
               "hunter_root"
             ],
-            "era": [
-              "rwth"
-            ],
             "exhibit": [
               "hunter_root"
             ],
@@ -1720,6 +2148,14 @@
               "mp3"
             ]
           },
+          "dates": [
+            {
+              "year": 2016,
+              "weight": 1.24,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/73/73fa16ef17a9dc2622d433eaab651b9d29406a574b97dad6918f31de3366557a.mp3",
@@ -1743,9 +2179,6 @@
             "band": [
               "hunter_root"
             ],
-            "era": [
-              "rwth"
-            ],
             "exhibit": [
               "hunter_root"
             ],
@@ -1757,6 +2190,14 @@
               "mp3"
             ]
           },
+          "dates": [
+            {
+              "year": 2016,
+              "weight": 1.25,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/48/48afb11da9af6f2f18212c20a170e14e6cedb1bf539e4878bd353611cf9e6fe3.mp3",
@@ -1780,9 +2221,6 @@
             "band": [
               "hunter_root"
             ],
-            "era": [
-              "rwth"
-            ],
             "exhibit": [
               "hunter_root"
             ],
@@ -1794,6 +2232,14 @@
               "mp3"
             ]
           },
+          "dates": [
+            {
+              "year": 2016,
+              "weight": 1.24,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/fd/fdf4283653fc49bb85654808460fd588d2653dbbe1b9c802d174bcefd2b71be2.mp3",
@@ -1817,9 +2263,6 @@
             "band": [
               "hunter_root"
             ],
-            "era": [
-              "rwth"
-            ],
             "exhibit": [
               "hunter_root"
             ],
@@ -1831,6 +2274,14 @@
               "mp3"
             ]
           },
+          "dates": [
+            {
+              "year": 2016,
+              "weight": 1.26,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/6e/6e172dd61b8ed4c575244b71cfa3acc901218877d136f721b0af3cacccc52510.mp3",
@@ -1854,9 +2305,6 @@
             "band": [
               "hunter_root"
             ],
-            "era": [
-              "rwth"
-            ],
             "exhibit": [
               "hunter_root"
             ],
@@ -1868,6 +2316,14 @@
               "mp3"
             ]
           },
+          "dates": [
+            {
+              "year": 2016,
+              "weight": 1.24,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/58/58c53cc87bc39bbafc9f84afbb5c1ec5919738b5324dbd0cec1e3652262cb702.mp3",
@@ -1891,9 +2347,6 @@
             "band": [
               "hunter_root"
             ],
-            "era": [
-              "rwth"
-            ],
             "exhibit": [
               "hunter_root"
             ],
@@ -1905,6 +2358,14 @@
               "mp3"
             ]
           },
+          "dates": [
+            {
+              "year": 2016,
+              "weight": 1.26,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/aa/aace4be80e879f2fad5b10f2223634cdd9a1e744bfad8334936b7f558568a70a.mp3",
@@ -1928,9 +2389,6 @@
             "band": [
               "hunter_root"
             ],
-            "era": [
-              "rwth"
-            ],
             "exhibit": [
               "hunter_root"
             ],
@@ -1942,6 +2400,20 @@
               "mp3"
             ]
           },
+          "dates": [
+            {
+              "year": 2016,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2016,
+              "weight": 1.23,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/ec/ec58d4bbede48aff0cf95e391711d895b30488ab83a54a5aee2906c34e9c677a.mp3",
@@ -1965,9 +2437,6 @@
             "band": [
               "hunter_root"
             ],
-            "era": [
-              "rwth"
-            ],
             "exhibit": [
               "hunter_root"
             ],
@@ -1979,6 +2448,14 @@
               "mp3"
             ]
           },
+          "dates": [
+            {
+              "year": 2016,
+              "weight": 1.24,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/75/7506a7b0f0f2cc664337aebc54e0549e60396f01a33b4f687993ce0f0e8fb934.mp3",
@@ -2002,9 +2479,6 @@
             "band": [
               "hunter_root"
             ],
-            "era": [
-              "rwth"
-            ],
             "exhibit": [
               "hunter_root"
             ],
@@ -2016,6 +2490,14 @@
               "mp3"
             ]
           },
+          "dates": [
+            {
+              "year": 2016,
+              "weight": 1.27,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/e0/e0ccb3524cba0d31df4c215ff6c3e3c8145085d083fbb25a6773a248a6426cd4.mp3",
@@ -2039,9 +2521,6 @@
             "band": [
               "hunter_root"
             ],
-            "era": [
-              "rwth"
-            ],
             "exhibit": [
               "hunter_root"
             ],
@@ -2053,6 +2532,14 @@
               "mp3"
             ]
           },
+          "dates": [
+            {
+              "year": 2016,
+              "weight": 1.23,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/3b/3b3c3569db8ded027a448a4c5bd3aeb9e9c135ad50e881ac7ff9d73333abdd8c.mp3",
@@ -2076,9 +2563,6 @@
             "band": [
               "hunter_root"
             ],
-            "era": [
-              "rwth"
-            ],
             "exhibit": [
               "hunter_root"
             ],
@@ -2090,6 +2574,14 @@
               "mp3"
             ]
           },
+          "dates": [
+            {
+              "year": 2016,
+              "weight": 1.22,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/0b/0b15c358f6ca85c824448b083c14e476dc7ab3f3fac108da05ff7d4ffc85b015.mp3",
@@ -2113,9 +2605,6 @@
             "band": [
               "hunter_root"
             ],
-            "era": [
-              "rwth"
-            ],
             "exhibit": [
               "hunter_root"
             ],
@@ -2127,6 +2616,14 @@
               "mp3"
             ]
           },
+          "dates": [
+            {
+              "year": 2016,
+              "weight": 1.23,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/78/780e1384fcc70c74eb050866adfb09d040be5516216369c491a55e4fde9c359d.mp3",
@@ -2150,9 +2647,6 @@
             "band": [
               "hunter_root"
             ],
-            "era": [
-              "rwth"
-            ],
             "exhibit": [
               "hunter_root"
             ],
@@ -2164,6 +2658,14 @@
               "mp3"
             ]
           },
+          "dates": [
+            {
+              "year": 2016,
+              "weight": 1.24,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/8c/8ccf1adda4bf1c57af77d6d97ee9cd4bf1e24c03d4048638fffd03436a22884b.mp3",
@@ -2248,6 +2750,26 @@
               "2023"
             ]
           },
+          "dates": [
+            {
+              "year": 2023,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "uaFHDfuohxc",
@@ -2301,6 +2823,26 @@
               "2023"
             ]
           },
+          "dates": [
+            {
+              "year": 2023,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "QFpJf0RDsXc",
@@ -2364,6 +2906,26 @@
               "2023"
             ]
           },
+          "dates": [
+            {
+              "year": 2023,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "n2m8sP17E-c",
@@ -2424,6 +2986,26 @@
               "2023"
             ]
           },
+          "dates": [
+            {
+              "year": 2023,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "7Lttb_59EYw",
@@ -2477,6 +3059,26 @@
               "2022"
             ]
           },
+          "dates": [
+            {
+              "year": 2022,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.75,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "_w0wz5o9dWU",
@@ -2530,6 +3132,26 @@
               "2023"
             ]
           },
+          "dates": [
+            {
+              "year": 2023,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.61,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "z1K0HWTDrL8",
@@ -2588,6 +3210,26 @@
               "2023"
             ]
           },
+          "dates": [
+            {
+              "year": 2023,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "04UlgUA9Uo0",
@@ -2641,6 +3283,20 @@
               "2023"
             ]
           },
+          "dates": [
+            {
+              "year": 2023,
+              "weight": 1.52,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.46,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/04/04d22c8454a2c2d47f061cc098fc727939be4848d504c91e51caf7b9b3adafdf.mp3",
@@ -2689,6 +3345,26 @@
               "2023"
             ]
           },
+          "dates": [
+            {
+              "year": 2023,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "Fa5GKxEgf7c",
@@ -2742,6 +3418,20 @@
               "2023"
             ]
           },
+          "dates": [
+            {
+              "year": 2023,
+              "weight": 1.53,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.47,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/5a/5a15a2093576c00c0e9b54bb11046884460b6ef8c4c5aff353a32348834f2d83.mp3",
@@ -2790,6 +3480,20 @@
               "2023"
             ]
           },
+          "dates": [
+            {
+              "year": 2023,
+              "weight": 1.54,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2023,
+              "weight": 1.48,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/8f/8ffaf0894e8a08b422a40e26c91f132a4b2fa98353c743e58c56f02070d4e0c0.mp3",
@@ -2874,6 +3578,26 @@
               "2025"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "vPW49GU38Ng",
@@ -2927,6 +3651,26 @@
               "2025"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "WRjngwtGGFk",
@@ -2980,6 +3724,26 @@
               "2025"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "pJSOjyrRIRs",
@@ -3033,6 +3797,26 @@
               "2025"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "PPzNfNOMUHE",
@@ -3086,6 +3870,26 @@
               "2025"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "03NAxazLuhY",
@@ -3139,6 +3943,26 @@
               "2025"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "YlU1CBJkJ5w",
@@ -3197,6 +4021,26 @@
               "2025"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "M9HlNdBm2gw",
@@ -3250,6 +4094,26 @@
               "2025"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "-2aU97nuzYE",
@@ -3303,6 +4167,26 @@
               "2025"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "bXZo69DNSrM",
@@ -3356,6 +4240,26 @@
               "2025"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "QDqNREtunWE",
@@ -3409,6 +4313,26 @@
               "2025"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "mmR0SLtDSdo",
@@ -3462,6 +4386,26 @@
               "2025"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2025,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "wi5G_Zn74gc",
@@ -3551,6 +4495,20 @@
               "2019"
             ]
           },
+          "dates": [
+            {
+              "year": 2019,
+              "weight": 1.54,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2019,
+              "weight": 1.48,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/30/306b3f027a5921cd91bfc55474a3bdca9ef2d1d47fa8d0f7dc034726f457ef35.mp3",
@@ -3599,6 +4557,20 @@
               "2019"
             ]
           },
+          "dates": [
+            {
+              "year": 2019,
+              "weight": 1.57,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2019,
+              "weight": 1.51,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/4e/4eaea8e93954e280595edca077b0e0761d9a922904195568d71414d1c21f0758.mp3",
@@ -3647,6 +4619,26 @@
               "2019"
             ]
           },
+          "dates": [
+            {
+              "year": 2019,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2019,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2019,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "Pic6JU8ZiUY",
@@ -3700,6 +4692,20 @@
               "2019"
             ]
           },
+          "dates": [
+            {
+              "year": 2019,
+              "weight": 1.7,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2019,
+              "weight": 1.49,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/a4/a42f91c4e15a7832e3949707ae983b777c963855e138c11c1da0431c3d30a3c1.mp3",
@@ -3748,6 +4754,20 @@
               "2019"
             ]
           },
+          "dates": [
+            {
+              "year": 2019,
+              "weight": 1.54,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2019,
+              "weight": 1.48,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/67/67f11f2151adc8a11c9ab97260013633c0aa68f1f98ec435b3f7ff3bf7f0f896.mp3",
@@ -3796,6 +4816,20 @@
               "2019"
             ]
           },
+          "dates": [
+            {
+              "year": 2019,
+              "weight": 1.54,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2019,
+              "weight": 1.48,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/66/666ad6bfdc1b7791c2420eb6444132b37bc00cc11ea0e8cf1f883346dc08fabb.mp3",
@@ -3844,6 +4878,20 @@
               "2019"
             ]
           },
+          "dates": [
+            {
+              "year": 2019,
+              "weight": 1.56,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2019,
+              "weight": 1.5,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/13/13d6a8cbae0865efc64d2eb15f12c12ddb42ee33de8c705903773f9eccf7c793.mp3",
@@ -3892,6 +4940,20 @@
               "2019"
             ]
           },
+          "dates": [
+            {
+              "year": 2019,
+              "weight": 1.56,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2019,
+              "weight": 1.5,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/b2/b2e47f4683230b58b43f3c8fa274a3d0a95acb7aa24e02377752c7b9336f302f.mp3",
@@ -3940,6 +5002,20 @@
               "2019"
             ]
           },
+          "dates": [
+            {
+              "year": 2019,
+              "weight": 1.54,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2019,
+              "weight": 1.48,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/30/30b175274917aed13543aa8a772b07516f194188114502c65a9a9d164d1f0287.mp3",
@@ -3988,6 +5064,20 @@
               "2019"
             ]
           },
+          "dates": [
+            {
+              "year": 2019,
+              "weight": 1.55,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2019,
+              "weight": 1.49,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/13/13ec5075b5e57aabc283c131dc2659259b7b0d977a4f82886cae28916f51eb68.mp3",
@@ -4036,6 +5126,20 @@
               "2019"
             ]
           },
+          "dates": [
+            {
+              "year": 2019,
+              "weight": 1.54,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2019,
+              "weight": 1.48,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/3c/3c31277c9f7b58208d50cbc2f1d2ea821b155dc47dd57aae6e0413ac32bdca3c.mp3",
@@ -4084,6 +5188,20 @@
               "2019"
             ]
           },
+          "dates": [
+            {
+              "year": 2019,
+              "weight": 1.54,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2019,
+              "weight": 1.48,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/38/38d973fdc406a304adfae65cd473f95dd1a5cff1be68b1a7b85c1b99dbcf039e.mp3",
@@ -4168,6 +5286,26 @@
               "2020"
             ]
           },
+          "dates": [
+            {
+              "year": 2020,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2020,
+              "weight": 1.34,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2020,
+              "weight": 1.13,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "nyt2GjSMABI",
@@ -4231,6 +5369,26 @@
               "2020"
             ]
           },
+          "dates": [
+            {
+              "year": 2020,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2020,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2020,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "L7-1T7F7_R0",
@@ -4284,6 +5442,26 @@
               "2020"
             ]
           },
+          "dates": [
+            {
+              "year": 2020,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2020,
+              "weight": 1.4,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2020,
+              "weight": 1.19,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "mnLwxpCfqRc",
@@ -4347,6 +5525,26 @@
               "2025"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2020,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2020,
+              "weight": 1.78,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "4HIfc5MLu6k",
@@ -4400,6 +5598,20 @@
               "2020"
             ]
           },
+          "dates": [
+            {
+              "year": 2020,
+              "weight": 1.56,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2020,
+              "weight": 1.5,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/05/05f0d69d56b17be93545a599f8565a9909d0b7fc6ed0331dabf0dd4da34dc15a.mp3",
@@ -4448,6 +5660,26 @@
               "2020"
             ]
           },
+          "dates": [
+            {
+              "year": 2020,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2020,
+              "weight": 1.35,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2020,
+              "weight": 1.14,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "m4C5mxjCUis",
@@ -4506,6 +5738,20 @@
               "2020"
             ]
           },
+          "dates": [
+            {
+              "year": 2020,
+              "weight": 1.58,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2020,
+              "weight": 1.52,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/54/54e73aab48ee69ed66ac7b419288adb9027c21733697938d65229d2e4cd7f2d1.mp3",
@@ -4554,6 +5800,20 @@
               "2020"
             ]
           },
+          "dates": [
+            {
+              "year": 2020,
+              "weight": 1.57,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2020,
+              "weight": 1.51,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/b4/b418445898870715b7a13b60d694b6dcf29b040096f4ab6bc2ab1c52f6286a61.mp3",
@@ -4602,6 +5862,20 @@
               "2020"
             ]
           },
+          "dates": [
+            {
+              "year": 2020,
+              "weight": 1.58,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2020,
+              "weight": 1.52,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/82/82f00d8ca85a9df0542d3c9aa9e64355dfc59477b3dc588da3c7c5ca491800be.mp3",
@@ -4650,6 +5924,20 @@
               "2020"
             ]
           },
+          "dates": [
+            {
+              "year": 2020,
+              "weight": 1.57,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2020,
+              "weight": 1.51,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/70/70b72ce82755bc68c95d8b91f0ffe458d964c617a8d5203e4034d8569cb0a62a.mp3",
@@ -4734,6 +6022,26 @@
               "2021"
             ]
           },
+          "dates": [
+            {
+              "year": 2021,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2021,
+              "weight": 1.87,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2021,
+              "weight": 1.48,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "KMJVLWr34Rc",
@@ -4790,6 +6098,26 @@
               "2021"
             ]
           },
+          "dates": [
+            {
+              "year": 2021,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2021,
+              "weight": 1.92,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2021,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "Wv0_mujJUQU",
@@ -4843,6 +6171,26 @@
               "2021"
             ]
           },
+          "dates": [
+            {
+              "year": 2021,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2021,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2021,
+              "weight": 1.82,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "ZJipWxlqIvc",
@@ -4896,6 +6244,20 @@
               "2021"
             ]
           },
+          "dates": [
+            {
+              "year": 2021,
+              "weight": 1.59,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2021,
+              "weight": 1.53,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/83/83187b24123103cec55668102b52c85a248b88a1339cb0c2ba2a97fef5da0d47.mp3",
@@ -4944,6 +6306,20 @@
               "2021"
             ]
           },
+          "dates": [
+            {
+              "year": 2021,
+              "weight": 1.61,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2021,
+              "weight": 1.55,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/8f/8f90b0fc0bf5b3d8007f54181eac0af475615c12a00bdf8702bb80999e530531.mp3",
@@ -4992,6 +6368,20 @@
               "2021"
             ]
           },
+          "dates": [
+            {
+              "year": 2021,
+              "weight": 1.6,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2021,
+              "weight": 1.54,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/3a/3ad36138297122f729c0bb50975852810071905d4a944f81b50263e10d970db3.mp3",
@@ -5040,6 +6430,20 @@
               "2021"
             ]
           },
+          "dates": [
+            {
+              "year": 2021,
+              "weight": 1.61,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2021,
+              "weight": 1.55,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/15/15bcdfab6242da64a4937f3a0bf061943db7bc2b3aacca8e5488b2311d0e72e1.mp3",
@@ -5088,6 +6492,20 @@
               "2021"
             ]
           },
+          "dates": [
+            {
+              "year": 2021,
+              "weight": 1.74,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2021,
+              "weight": 1.53,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/f2/f2abdb846abc8e4cbfb87dc40162401b5e5fe62ccd2894f3e767e254e77a208e.mp3",
@@ -5136,6 +6554,20 @@
               "2021"
             ]
           },
+          "dates": [
+            {
+              "year": 2021,
+              "weight": 1.61,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2021,
+              "weight": 1.55,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/3b/3b4027d7a467dd7915affc6fef6f5bbda45bfe913eb9a4aa27e1a54f4ca9b269.mp3",
@@ -5184,6 +6616,20 @@
               "2021"
             ]
           },
+          "dates": [
+            {
+              "year": 2021,
+              "weight": 1.6,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2021,
+              "weight": 1.54,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/9a/9a1db955e1e64440032f9c6357bd4b6a0da4312a7e769a5833e6590ad5ed16c4.mp3",
@@ -5268,6 +6714,20 @@
               "2018"
             ]
           },
+          "dates": [
+            {
+              "year": 2018,
+              "weight": 1.55,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2018,
+              "weight": 1.49,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/ff/ff9828252cd22c5bc6ef48000d5af8d4507865d222bc94c712c95091626d4fa9.mp3",
@@ -5322,6 +6782,26 @@
               "2024"
             ]
           },
+          "dates": [
+            {
+              "year": 2024,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2018,
+              "weight": 1.64,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2018,
+              "weight": 1.28,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "Olv9qIVoBgQ",
@@ -5380,6 +6860,20 @@
               "2018"
             ]
           },
+          "dates": [
+            {
+              "year": 2018,
+              "weight": 1.54,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2018,
+              "weight": 1.48,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/f2/f2d54a09d0c93183342d373889b15e677f9e56cc183720b3bfc8b1cfff633624.mp3",
@@ -5428,6 +6922,20 @@
               "2018"
             ]
           },
+          "dates": [
+            {
+              "year": 2018,
+              "weight": 1.54,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2018,
+              "weight": 1.48,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/f6/f638b1517914bfbe32cca432b0cdabd5b169687ebc5b8dda2b8c071d4cf5df55.mp3",
@@ -5476,6 +6984,20 @@
               "2018"
             ]
           },
+          "dates": [
+            {
+              "year": 2018,
+              "weight": 1.56,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2018,
+              "weight": 1.5,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/5c/5c661997254a6d9d4327acc62d135357af50dba769c8b08c26751bad309827e9.mp3",
@@ -5524,6 +7046,20 @@
               "2018"
             ]
           },
+          "dates": [
+            {
+              "year": 2018,
+              "weight": 1.56,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2018,
+              "weight": 1.5,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/f8/f806ac811f887e6b7d3df069f98b18ccdc92a4674c49bafe985386816b4c4c30.mp3",
@@ -5572,6 +7108,20 @@
               "2018"
             ]
           },
+          "dates": [
+            {
+              "year": 2018,
+              "weight": 1.56,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2018,
+              "weight": 1.5,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/a5/a566207cd5378cf0502f2e5c2f7445c9b13191a5fcf0b71bae37a01df7b187c4.mp3",
@@ -5620,6 +7170,20 @@
               "2018"
             ]
           },
+          "dates": [
+            {
+              "year": 2018,
+              "weight": 1.56,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2018,
+              "weight": 1.5,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/3b/3b3f5833d55d251983a4a37cce15360aabbc193910e2113601af5a0c67b7b3f0.mp3",
@@ -5668,6 +7232,20 @@
               "2018"
             ]
           },
+          "dates": [
+            {
+              "year": 2018,
+              "weight": 1.61,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2018,
+              "weight": 1.55,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/11/113041f4e88f00490ef6ae4116f6294b34ff9660dba500577f011f92ef65d39a.mp3",
@@ -5716,6 +7294,20 @@
               "2018"
             ]
           },
+          "dates": [
+            {
+              "year": 2018,
+              "weight": 1.54,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2018,
+              "weight": 1.48,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/8e/8eaac26aabe058e3133d3452c8534b759539df59d10c959f0bafdb6e5b6b7935.mp3",
@@ -5764,6 +7356,20 @@
               "2018"
             ]
           },
+          "dates": [
+            {
+              "year": 2018,
+              "weight": 1.54,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2018,
+              "weight": 1.48,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/ca/ca0c03d2a2e5ef4e4eb53f28ef0110cf8ca865ae57b33fa0b37613b919d07b0a.mp3",
@@ -5848,6 +7454,20 @@
               "2017"
             ]
           },
+          "dates": [
+            {
+              "year": 2017,
+              "weight": 1.56,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2017,
+              "weight": 1.5,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/72/72faadd375cc8ebcbbb4c361901b79a44acc01f163337c6c3e0129b19238d399.mp3",
@@ -5896,6 +7516,20 @@
               "2017"
             ]
           },
+          "dates": [
+            {
+              "year": 2017,
+              "weight": 1.54,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2017,
+              "weight": 1.48,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/37/376f14d2d30dfb690f1774cdc32462a662c178d6d674004fbed46c8277256b74.mp3",
@@ -5944,6 +7578,20 @@
               "2017"
             ]
           },
+          "dates": [
+            {
+              "year": 2017,
+              "weight": 1.54,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2017,
+              "weight": 1.48,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/c7/c77d42a234a863f7efd18ac6886b973fb666e05e38c153af9e714117c4765de2.mp3",
@@ -5992,6 +7640,20 @@
               "2017"
             ]
           },
+          "dates": [
+            {
+              "year": 2017,
+              "weight": 1.63,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2017,
+              "weight": 1.57,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/a2/a2d10ee3d2c9a0b497afcf6444a6a58f538df2823287fe26754ada6e643d6023.mp3",
@@ -6040,6 +7702,20 @@
               "2017"
             ]
           },
+          "dates": [
+            {
+              "year": 2017,
+              "weight": 1.53,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2017,
+              "weight": 1.47,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/42/42fcb0dd7b1c15f6d0b211143aff4ecc402fab819d205928524a93a7a5896de0.mp3",
@@ -6124,6 +7800,20 @@
               "2019"
             ]
           },
+          "dates": [
+            {
+              "year": 2024,
+              "weight": 1.54,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.33,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/f9/f9fe8e40896f706605906aeb2e61010b912be44fb8eaa87de68f3afc33e5d0fa.mp3",
@@ -6172,6 +7862,26 @@
               "2020"
             ]
           },
+          "dates": [
+            {
+              "year": 2020,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.89,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "XdiGZUWlU0Y",
@@ -6225,6 +7935,20 @@
               "2024"
             ]
           },
+          "dates": [
+            {
+              "year": 2024,
+              "weight": 1.55,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.34,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/15/153eb85afd7fd4124ea488e1df8279832621862d5e88b1d4a62a1260b803fe6f.mp3",
@@ -6273,6 +7997,26 @@
               "2024"
             ]
           },
+          "dates": [
+            {
+              "year": 2024,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.92,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.89,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "HLdiK-6WTwM",
@@ -6336,6 +8080,20 @@
               "2024"
             ]
           },
+          "dates": [
+            {
+              "year": 2024,
+              "weight": 1.53,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.32,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/44/4415c5649ba3ed0d63e0f5eb9613f4dee25e3cc23e72ed4b762bbe8fad24106a.mp3",
@@ -6384,6 +8142,26 @@
               "2025"
             ]
           },
+          "dates": [
+            {
+              "year": 2025,
+              "weight": 2,
+              "role": "publish",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.53,
+              "role": "album_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.29,
+              "role": "song_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "ytId": "2Lm8noK3hQI",
@@ -6437,6 +8215,20 @@
               "2025"
             ]
           },
+          "dates": [
+            {
+              "year": 2024,
+              "weight": 1.54,
+              "role": "song_ref",
+              "source": "inferred"
+            },
+            {
+              "year": 2024,
+              "weight": 1.33,
+              "role": "album_ref",
+              "source": "inferred"
+            }
+          ],
           "videos": [
             {
               "audioUrl": "https://assets.weird.baby/audio/81/81935220054f704908005918a0a2bc033c2683e6734a12c30b418d0edaad1a27.mp3",

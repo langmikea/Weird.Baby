@@ -1,0 +1,47 @@
+{
+  "schema": "era-config v0.2 — reference-date registry (read by tools/export-artifacts.mjs)",
+  "authority": "docs/derived-era-spec_v0.2.md §3.3 / §4.1",
+  "note": [
+    "Maps a dated ASPECT slug to the YEAR it anchors to. The export reads this",
+    "to give every reference a year, then the centrality heuristic weights it.",
+    "Broadened beyond album-only (v0.1) to carry every dated aspect type:",
+    "album, event, song, tour, person. Year source for albums is MV's own",
+    "`year:` tags (cleaner than post_date for album anchors); events use the",
+    "modal post_date year of the artifacts carrying them. Songs inherit their",
+    "co-tagged album's year at export time (not enumerated here). `tours` and",
+    "`people` are structurally present but SPARSE in the live MV — see",
+    "_coverage below. Edited rarely; version-controlled next to era-buckets.json."
+  ],
+  "_coverage": {
+    "album": "10/10 dated. 9 strong (dominant year:/post_date signal); rarities is a singles-&-rarities grab-bag spanning 2019–2025 — anchored to its plurality year (2024) but flagged: Mike may prefer it contribute no era.",
+    "event": "8/8 dated, but values are GENERIC categories (tour, live_show, …), not specific dated events — anchored to modal post_date year, low confidence. Publish date is the real anchor for event-bearing leaves anyway.",
+    "song": "0 enumerated — songs inherit their co-tagged album's year at export time (every song-tagged track in live MV also carries an album: tag).",
+    "tour": "SPARSE — the tour: namespace is empty in live MV (0 values). Registry kept for forward-compat / Medusa's Disco import.",
+    "person": "SPARSE — only 1 people: tag in live MV, undated. No dated-person anchors today."
+  },
+  "albums": {
+    "run_with_the_hunt":                              { "year": 2016, "confidence": "high", "source": "post_date" },
+    "phone_recordings_ep":                            { "year": 2017, "confidence": "medium", "source": "year_tag" },
+    "they_finally_cracked_me":                        { "year": 2018, "confidence": "high", "source": "year_tag" },
+    "life_inside_a_wheel":                            { "year": 2019, "confidence": "high", "source": "year_tag" },
+    "medusas_disco":                                  { "year": 2020, "confidence": "medium", "source": "post_date+phase_anchor", "note": "phase-anchored to Finding the Sound per spec; spans 2020–2024 in MV" },
+    "mimicking_the_sun_like_dandelions":              { "year": 2020, "confidence": "high", "source": "year_tag" },
+    "skipping_stones_that_sink_before_theyre_thrown": { "year": 2021, "confidence": "high", "source": "year_tag" },
+    "arkansas":                                       { "year": 2023, "confidence": "high", "source": "year_tag" },
+    "rarities":                                       { "year": 2024, "confidence": "low", "source": "plurality_year_tag", "note": "FLAGGED: grab-bag spanning 2019–2025; set year to null to make rarities contribute no era (per v0.1 report proposal)" },
+    "crooked_home":                                   { "year": 2025, "confidence": "high", "source": "year_tag" }
+  },
+  "events": {
+    "tour":              { "year": 2024, "confidence": "low", "source": "modal_post_date" },
+    "tour_announcement": { "year": 2024, "confidence": "low", "source": "modal_post_date" },
+    "fall_tour":         { "year": 2024, "confidence": "low", "source": "post_date" },
+    "live_show":         { "year": 2024, "confidence": "low", "source": "modal_post_date" },
+    "rehearsal":         { "year": 2023, "confidence": "low", "source": "post_date" },
+    "advance_tickets":   { "year": 2024, "confidence": "low", "source": "post_date" },
+    "event_listing":     { "year": 2024, "confidence": "low", "source": "post_date" },
+    "ticketing":         { "year": 2024, "confidence": "low", "source": "post_date" }
+  },
+  "songs": {},
+  "tours": {},
+  "people": {}
+}

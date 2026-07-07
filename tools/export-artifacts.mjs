@@ -50,6 +50,7 @@ import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { tmpdir } from "node:os";
 import Database from "better-sqlite3";
+import { loadEraConfig, deriveDates } from "./era-derivation.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(HERE, "..");
@@ -58,6 +59,9 @@ const DEFAULT_OUTPUT_DIR = "src/data/exhibits";
 const VOCAB_CSV_PATH = resolve(REPO_ROOT, "docs/deep-dive-vocabulary.csv");
 const EXHIBITS_CONFIG_PATH = resolve(REPO_ROOT, "src/data/exhibits.config.json");
 const MANIFEST_PATH = resolve(REPO_ROOT, "tools/sync-assets-to-r2-manifest.json");
+// Derived-Era v0.2 (DERIVED_ERA_REWIRE-20260707): reference-date registry read
+// by deriveDates(). Committed at repo root next to this tooling's other configs.
+const ERA_CONFIG_PATH = resolve(REPO_ROOT, "era-config.json");
 
 // ─── Known exhibits ─────────────────────────────────────────────────────────
 // Files for these are written even if no released artifact currently carries
@@ -142,6 +146,7 @@ const PER_EXHIBIT_SQL = `SELECT a.id, a.source_url, a.source_platform, a.media_t
        a.post_date, a.post_date_confidence,
        a.released_at,
        a.parent_artifact_id,
+       a.extracted_text, a.referenced_dates,
        a.notes
 FROM artifacts a
 WHERE a.status = 'released'
@@ -164,6 +169,7 @@ const CHILDREN_SQL = `SELECT a.id, a.source_url, a.source_platform, a.media_type
        a.post_date, a.post_date_confidence,
        a.released_at,
        a.parent_artifact_id,
+       a.extracted_text, a.referenced_dates,
        a.notes
 FROM artifacts a
 WHERE a.status = 'released'
@@ -373,6 +379,40 @@ function buildArtifactRecord(row, manifest, opts = {}) {
     sortedTags[ns] = [...tagsByNamespace[ns]].sort();
   }
 
+  // ─── Derived-Era v0.2 (DERIVED_ERA_REWIRE-20260707; spec §3.1/§4.1/§6) ────
+  // Bake the weighted, year-normalized date-set on LEAVES (album/gallery
+  // containers are exempt; children are always leaves). The export no longer
+  // bakes an era label — the client derives era from `dates` at module load
+  // (src/routes/hr/hr_era.js + src/data/era-buckets.json). Legacy hand `era:`
+  // tags remain in MV as curation inputs but are STRIPPED from the baked
+  // record: derivation reproduces every one of them (pretest correctness
+  // proof, 0/37 mismatches, re-proven 2026-07-06 against live MV). A curator
+  // era_override in the referenced_dates column bakes through and wins
+  // outright client-side (§3.4 — curation is king).
+  const cardKindForEra = sortedTags.card_kind ? sortedTags.card_kind[0] : null;
+  const isEraExemptContainer =
+    !opts.isChild && (cardKindForEra === "album" || cardKindForEra === "gallery");
+  delete sortedTags.era;
+  let bakedDates = null;
+  let eraOverride = null;
+  if (!isEraExemptContainer && opts.eraCtx) {
+    const derived = deriveDates(row, sortedTags, opts.eraCtx.config, {
+      isChildAlbum: opts.isChildAlbum ?? null,
+    });
+    bakedDates = derived.dates;
+    for (const wid of derived.warnings) opts.eraCtx.underivable.push(wid);
+  }
+  if (typeof row.referenced_dates === "string" && row.referenced_dates) {
+    try {
+      const o = JSON.parse(row.referenced_dates);
+      if (o && typeof o === "object" && !Array.isArray(o) &&
+          Array.isArray(o.era_override) && o.era_override.length) {
+        eraOverride = o.era_override.filter(v => typeof v === "string" && v.length > 0);
+        if (!eraOverride.length) eraOverride = null;
+      }
+    } catch { /* malformed override JSON -> no override */ }
+  }
+
   // URL dispatch (Phase B of Asset Delivery, 2026-05-21):
   //   1. Asset manifest lookup wins if present (R2-synced primary AND thumbnail).
   //   2. YouTube thumbnail synthesis (Q-4) for media_type='link' + source_platform='youtube'.
@@ -401,6 +441,8 @@ function buildArtifactRecord(row, manifest, opts = {}) {
     primary_url,
     thumbnail_url,
     tags: sortedTags,
+    ...(bakedDates ? { dates: bakedDates } : {}),
+    ...(eraOverride ? { era_override: eraOverride } : {}),
   };
 
   // ─── Gallery containers (Phase 2) ──────────────────────────────────────────
@@ -417,7 +459,7 @@ function buildArtifactRecord(row, manifest, opts = {}) {
     const notesObj = parseNotesJson(row.notes);
     const childRows = opts.fetchChildren(row.id) || [];
     const gallery = childRows.map((cr, i) => {
-      const item = buildArtifactRecord(cr, manifest, { isChild: true });
+      const item = buildArtifactRecord(cr, manifest, { isChild: true, eraCtx: opts.eraCtx });
       item.capture_order = i + 1;
       return item;
     });
@@ -443,7 +485,11 @@ function buildArtifactRecord(row, manifest, opts = {}) {
   if (!opts.isChild && cardKind === "album" && typeof opts.fetchChildren === "function") {
     const notesObj = parseNotesJson(row.notes);
     const childRows = opts.fetchChildren(row.id) || [];
-    const children = childRows.map(cr => buildArtifactRecord(cr, manifest, { isChild: true }));
+    // Derived-Era: album children reference their own container album; the
+    // ownAlbumBonus (spec §5) needs the container's album slug threaded down.
+    const albumSlugForEra = (sortedTags.album && sortedTags.album[0]) ? sortedTags.album[0] : null;
+    const children = childRows.map(cr => buildArtifactRecord(cr, manifest,
+      { isChild: true, isChildAlbum: albumSlugForEra, eraCtx: opts.eraCtx }));
     const coverId = notesObj && notesObj.cover_artifact_id ? notesObj.cover_artifact_id : null;
     const order = notesObj && Array.isArray(notesObj.track_order) ? notesObj.track_order : [];
 
@@ -485,6 +531,7 @@ function buildArtifactRecord(row, manifest, opts = {}) {
         primary_url: head.primary_url ?? null,
         thumbnail_url: head.thumbnail_url ?? null,
         tags: head.tags,
+        ...(head.dates ? { dates: head.dates } : {}),
         videos,
         __key: key,
       };
@@ -560,6 +607,11 @@ async function main() {
   const KNOWN_EXHIBITS = loadKnownExhibits();
   const ASSET_MANIFEST = loadAssetManifest();
 
+  // Derived-Era v0.2: reference-date registry + run-wide underivable collector.
+  // Fails early (before contacting MV) if era-config.json is missing/broken.
+  const ERA_CONFIG = loadEraConfig(ERA_CONFIG_PATH);
+  const ERA_CTX = { config: ERA_CONFIG, underivable: [] };
+
   const { url, buf } = await fetchMvBlob(opts.mvBase, opts.verbose);
 
   const exportedAt = new Date().toISOString();
@@ -612,7 +664,7 @@ async function main() {
       }
       const rows = runSchemaSensitive(() => perExhibit.all(`exhibit:${name}`));
       logVerbose(opts.verbose, `  ${name}: ${rows.length} row(s)`);
-      const artifacts = rows.map(row => buildArtifactRecord(row, ASSET_MANIFEST, { fetchChildren }));
+      const artifacts = rows.map(row => buildArtifactRecord(row, ASSET_MANIFEST, { fetchChildren, eraCtx: ERA_CTX }));
       counts[name] = artifacts.length;
       filesToWrite.push({
         name,
@@ -622,6 +674,7 @@ async function main() {
             exported_at: exportedAt,
             filter: "released, not archived, badged for this exhibit",
             vocabulary_csv_sha: vocabSha,
+            derived_era: "v0.2 — weighted date-sets baked on leaves; era derived client-side (era-buckets.json)",
           },
           artifacts,
         },
@@ -683,6 +736,13 @@ async function main() {
   lines.push(`  Asset manifest: ${Object.keys(ASSET_MANIFEST.artifacts).length} artifact(s)` +
              (existsSync(MANIFEST_PATH) ? ` (${MANIFEST_PATH})` : " (absent — no R2 URLs)"));
   lines.push(`  Released artifacts with no exhibit badge: ${result.skippedNoBadge}`);
+  // Derived-Era v0.2 warning guard (spec §6): era is hard-required on leaves;
+  // an underivable leaf must never ship silently era-less.
+  lines.push(`  Derived-era: weighted date-sets baked on leaves; era label NOT baked (v0.2)`);
+  lines.push(`  Underivable leaves (no post_date, no dated reference, no override): ${ERA_CTX.underivable.length}`);
+  for (const wid of ERA_CTX.underivable) {
+    lines.push(`    WARNING underivable leaf ships era-less: ${wid}`);
+  }
   lines.push(`  Vocabulary registry: ${result.vocabularyRows.length} row(s)` +
              ` (${vocabularyBytes} bytes)` + (opts.dryRun ? " (dry-run)" : ""));
   lines.push(`    src/data/vocabulary.json: ${result.vocabularyRows.length} namespace(s)`);
