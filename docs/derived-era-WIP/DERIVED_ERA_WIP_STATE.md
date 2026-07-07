@@ -50,3 +50,8 @@ Next session, hard rule: all client edits go through host-side PowerShell. Nothi
 
 ## Truth ranking reminder
 Live tree > git > docs > chat. When resuming, re-verify the live MV schema and the live client code before trusting this note — it was accurate at d395496 on 2026-06-17 but the tree is the authority.
+
+---
+## CLOSED 2026-07-07 — RESUMED AND SHIPPED (deploy 8fb3aab1)
+This workstream shipped per docs/DERIVED_ERA_REWIRE_BRIEF-20260707.md (run log: docs/DERIVED_ERA_REWIRE_LOG-20260707.md). The parked files were placed live at Stage 3; buckets re-ruled to 7 album-anchored (era-buckets.json v0.3); labels date-led; pill order chronological. This note SUPERSEDES the resume plan above — do not re-execute it.
+

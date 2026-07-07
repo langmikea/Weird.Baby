@@ -21,10 +21,19 @@ Ops work takes top priority, based on the Ops need in the moment.
 
 ## LIVE (deployed, verified)
 
-- Site: https://weird.baby — LIVE and CURRENT. Last deploy version `ffcf7fbd` (wrangler 4.81.1), 2026-07-07 ~02:00Z (verified via deploy output + Mike's incognito walk).
+- Site: https://weird.baby — LIVE and CURRENT. Last deploy version `8fb3aab1` (wrangler 4.81.1), 2026-07-07 16:36Z (verified via deploy output + HTTP 200; incognito walk = Mike, this session).
 - Status: SOFT-LAUNCHED — visible but not advertised / not yet in search engines.
-- Repo HEAD at deploy: `a7b8d62` + final migration docs commit follows same session.
+- Repo HEAD at deploy: `420c6ba` + ledger/log close commit follows same session.
 
+## SHIPPED 2026-07-07 — DERIVED-ERA RE-WIRE (DERIVED_ERA_REWIRE-20260707; deploy 8fb3aab1)
+
+Executed per `docs/DERIVED_ERA_REWIRE_BRIEF-20260707.md`, WIP-state-authoritative, every stage gated (run log: `docs/DERIVED_ERA_REWIRE_LOG-20260707.md`). NO DB write (referenced_dates already applied 6/17, all NULL — Stage 0 backup waived by Stage 1 verdict). The 6/17 parked implementation is LIVE, corrected per the incident: all client edits host-side via Mike-run scripts, everything re-verified against the live tree first.
+
+- Export bakes weighted date-sets per leaf (`tools/era-derivation.mjs` + root `era-config.json` registry); era label NO LONGER baked; legacy hand `era:` tags stay in MV as curation inputs. Curator channel: `referenced_dates.era_override` bakes through, wins outright.
+- Client derives era at module load at FIXED depth 0.5 — NO slider (locked; proximity filter = separate future workstream). `src/routes/hr/hr_era.js` + `src/data/era-buckets.json`; `hr_dimensions.js`/`matchFilter` untouched.
+- Era pills: **7 album-anchored buckets** (re-ruled 2026-07-07, replacing the 5): 2013 Band Years / 2017 Going Solo / 2019 Wheel / 2020 Dandelions / 2021 Skipping Stones / 2022 Arkansas / 2024–now Crooked Home (open-ended, catches future-dated releases). Date-led display labels; CHRONOLOGICAL pill order (era only, other facets alphabetical). rwth folds to Band Years 15/15.
+- Proofs: correctness v2 — 37 hand tags remap clean, 0 flags; export==oracle per-artifact; 0 underivable; pre-2013 check clear (DB min 2014). Deck pills at 0.5: 2/1/1/3/1/8/10, 3 multi-era cards, containers era-less by design.
+- Bucket revisions = edit `src/data/era-buckets.json` alone (proven: the 5→7 redraw touched no artifact, export content-idempotent). Stage scripts: `docs/derived-era-WIP/derived_era_stage3/4/4b/4c/4d/5*.ps1`. Commits `30beff0` (Stage 3) + `420c6ba` (Stage 4).
 ## SHIPPED 2026-07-07 — FACT KIND + PUV PILOT (FACT_KIND_PUV_PILOT-20260707; DB-only, NO deploy)
 
 Executed per `docs/FACT_KIND_PUV_PILOT_BRIEF-20260707.md`, every stage gated + committed (run log: `docs/FACT_KIND_PUV_PILOT_LOG-20260707.md` — paste-backs, hashes, gate verdicts, delegation arrangement on the record). Backup: `MediaVault/core/backups/mediavault_pre-fact-kind-20260707T020813Z.sqlite` (verified; gitignored, OneDrive mirror is the durable home). Site UNCHANGED — still `ffcf7fbd`; export proven content-idempotent, deploy no-op by design.
@@ -69,8 +78,7 @@ These must be true before driving traffic (Google search, advertising). This lis
 2. [DONE 2026-06-17] STATE.md rebuilt as live ledger (this block).
 3. Content expansion toward full-launch gate (largest lever for launch).
 4. Gift shop wiring + Mike's gift shop build (gated on Mike bringing source).
-5. Derived-era client re-wire — HOST-SIDE ONLY, fixed depth, no slider. Parked in docs/derived-era-WIP/. NOT a launch gate.
-6. Press batch (16 URLs) — gated behind derived-era re-wire.
+5. Press batch (16 URLs) — UNBLOCKED 2026-07-07 (derived-era re-wire SHIPPED). Next brief follows.
 
 ## KNOWN ISSUES (accepted, not yet fixed)
 

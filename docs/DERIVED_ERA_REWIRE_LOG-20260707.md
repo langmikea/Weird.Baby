@@ -67,9 +67,17 @@ Era-only order change: pills sort by bucket order (`ERA_SLUGS` from era-buckets.
 
 - **Mike runs:** `pwsh docs/derived-era-WIP/derived_era_stage4d_pill_order.ps1` (after 4b; order-independent of 4c). Two anchored verify-or-abort edits to `HrExhibitFlow.jsx` only (+10 lines). Commit rides the combined Stage 4 commit from the 4c script (add the 4d script path to the git-add list).
 
+## Stage 5 — first run ABORT (2026-07-07): bad bundle check, wiring fine
+
+Abort at "built bundle does not contain the_band_years" was a FALSE ALARM — Ops error, owned: the check was written against a wrong assumption. Era slugs are COMPUTED at runtime (`eraSlug(label)`) and by design never exist as literals anywhere in `src/` (verified: 0 occurrences) — so no build, dev or prod, can ever contain them; the working dev preview at the same HEAD is the functional proof the wiring is present. What the bundle verifiably carries is the era-buckets.json LABEL strings (statically imported via hr_era.js, inlined by Vite, string values survive minification). Check v2: require all three ASCII era-only labels ("The Band Years", "Going Solo", "The Arkansas Era" — no album-title collisions; "·" display strings avoided since the minifier may unicode-escape non-ASCII). Script fixed in place, no wiring change, safe to re-run from the top (abort happened before preview/deploy/docs — nothing shipped, ledger untouched).
+
 ## Stage 5 — pending: dist clean-remove → build → preview → deploy → verify live → STATE.md (SHIPPED block; remove NEXT #5; flip press-batch gate to UNBLOCKED) → this log closed with paste-backs + hashes → session-close clean.
 
 ## Out-of-scope confirmations (stop conditions honored)
 - No era slider / variable-depth UI anywhere in the diff.
 - No vocabulary change: MV vocabulary/tags tables untouched; exported `vocabulary.json` regenerates with only its timestamp differing; era: slugs stay in MV as curation inputs.
 - No DB write; no client-source write from the sandbox (client edits land only via Mike-run scripts; export/verify tooling was written via host-side file tools and is marker+sentinel-verified by the stage script before use).
+
+## Stage 5 — SHIPPED (deploy 8fb3aab1, 2026-07-07 16:36Z)
+dist clean-rebuilt; preview gated by Mike; deployed; weird.baby HTTP 200 + Mike's incognito walk. STATE.md ledger updated (SHIPPED block, NEXT #5 removed, press batch UNBLOCKED). Run log closed. Standing item reminder: OneDrive mirror is point-in-time at 753b17e — re-mirror when convenient.
+
