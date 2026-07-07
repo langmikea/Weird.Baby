@@ -1,0 +1,2501 @@
+{
+  "metadata": {
+    "exhibit": "hunter_root",
+    "exported_at": "2026-07-07T20:38:58.067Z",
+    "filter": "kind='fact', released, not archived, badged for this exhibit",
+    "schema": "facts v1 — id, lines[2], tags (grouped, era kept verbatim)"
+  },
+  "facts": [
+    {
+      "id": "MV-HR-20260707-001",
+      "lines": [
+        "Nick Root was Hunter's older brother.",
+        "He was gone at 27, taken by cancer."
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-002",
+      "lines": [
+        "The first of the solo records was Run With The Hunt.",
+        "Jam, grunge, and acoustic rock out of Manheim, PA."
+      ],
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "era": [
+          "rwth"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-003",
+      "lines": [
+        "Hunter was a founding member of SEEDS.",
+        "Which became Medusa's Disco due to trademarks."
+      ],
+      "tags": {
+        "band": [
+          "hunter_root",
+          "medusas_disco"
+        ],
+        "era": [
+          "early_days"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-004",
+      "lines": [
+        "Run With The Hunt was Hunter's first solo record.",
+        "A transitional piece to his modern solo career."
+      ],
+      "tags": {
+        "album": [
+          "run_with_the_hunt"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "era": [
+          "rwth"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "reverbnation"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-007",
+      "lines": [
+        "Inspired by other's talents, Emotions, Thoughts, Existence, Pain.",
+        "— Hunter Root, Blue Harvest Beat, 2014"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "influences"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-008",
+      "lines": [
+        "We're musically Influenced by: Led Zeppelin, Nirvana, The Doors",
+        "— Hunter Root, Blue Harvest Beat, 2014"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "influences"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-009",
+      "lines": [
+        "Favorite midnight snack: \"Cereal.\"",
+        "Alex: cold pizza. Wynton: frozen food. Tyler: a Nutella-banana sandwich."
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-010",
+      "lines": [
+        "Wynton's Dad's living room was the first time we played together as a 4-piece band.",
+        "— Alex Aument, Blue Harvest Beat, 2014"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "alex_aument"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-011",
+      "lines": [
+        "First song the band ever played together: \"Strange Chemistry\"",
+        "— Tyler, Blue Harvest Beat, 2014"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "tyler"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-012",
+      "lines": [
+        "We chose \"Questioned By A Ghost\" because our super fan Nathan Reinsmith misheard a lyric on our hidden track \"Medicine\"",
+        "— Tyler, Blue Harvest Beat, 2014"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "tyler"
+        ],
+        "topic": [
+          "songwriting"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-013",
+      "lines": [
+        "Park Bench Pigeons — It's growth from my solo album version to the SEEDS creation",
+        "Hunter, Wynton and Tyler all had solo albums before SEEDS."
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-014",
+      "lines": [
+        "Queens of the Stone Age, Butthole Surfers, Nirvana, Primus, Syd Barrett-era Pink Floyd, Incubus, Miles Davis, I could go on, surely.",
+        "— Wynton Huddle, Blue Harvest Beat, 2014"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "wynton_huddle"
+        ],
+        "topic": [
+          "influences"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-015",
+      "lines": [
+        "An album that we can listen to on repeat and find a new element to love… Queens Of The Stone Age – Like Clockwork and Incubus – A Crow Left Of The Murder",
+        "— Hunter Root, Blue Harvest Beat, 2014"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "influences"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-016",
+      "lines": [
+        "Hunter's vocals channel a pre-needle Cobain with Morrison appreciation.",
+        "— Harrison Giza, Blue Harvest Beat, 2014"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "harrison_giza"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-017",
+      "lines": [
+        "The solos are just the right amount of melting face you need in your morning coffee.",
+        "— Harrison Giza, Blue Harvest Beat, 2014"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "harrison_giza"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-018",
+      "lines": [
+        "In August 2014 the band had been together about a year and a half.",
+        "Conceived in Lancaster County — Hunter's words to Blue Harvest Beat."
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "blue_harvest_beat"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-019",
+      "lines": [
+        "Wynton came up with the main riff in our friend's garage… The band was not formed at this point in time.",
+        "— Hunter Root, Blue Harvest Beat, 2014"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "songwriting"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-020",
+      "lines": [
+        "Medusa's first show was the main stage of the Chameleon Club in Lancaster… This was before we even had a bassist!",
+        "— Wynton Huddle, Chasing Destino, 2018"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "wynton_huddle"
+        ],
+        "topic": [
+          "roots"
+        ],
+        "venue": [
+          "chameleon_club"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-021",
+      "lines": [
+        "It was our second year in a row attending it and was even better than last year!",
+        "— Wynton Huddle, Chasing Destino, 2018"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "wynton_huddle"
+        ],
+        "topic": [
+          "touring"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-022",
+      "lines": [
+        "We don't suck. You won't hate us.",
+        "— Wynton Huddle, Chasing Destino, 2018"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "wynton_huddle"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-023",
+      "lines": [
+        "Hunter had an infatuation with cacti, but after pulling some needles out of his butt he's been less than eager.",
+        "— Wynton Huddle, Chasing Destino, 2018"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "wynton_huddle"
+        ],
+        "topic": [
+          "touring"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-024",
+      "lines": [
+        "We do indeed. It's not an easy balancing act, but we will all do whatever we must to keep the ball rolling!",
+        "— Wynton Huddle, Chasing Destino, 2018"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "wynton_huddle"
+        ],
+        "topic": [
+          "touring"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-025",
+      "lines": [
+        "We went from engineer to engineer and bassist to bassist trying to find the right thing. The solution for both things was in the same person.",
+        "— Wynton Huddle, LancasterOnline, 2019"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "justin_wohlfeil"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "wynton_huddle"
+        ],
+        "topic": [
+          "recording"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-026",
+      "lines": [
+        "I was not expecting to find [our market] in the PA festival scene… we break the monotony up a little bit.",
+        "— Wynton Huddle, LancasterOnline, 2019"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "wynton_huddle"
+        ],
+        "topic": [
+          "touring"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-027",
+      "lines": [
+        "some of the songs have a new, rawer energy from that experience",
+        "— Justin Wohlfeil, LancasterOnline, 2019"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "justin_wohlfeil"
+        ],
+        "topic": [
+          "touring"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-028",
+      "lines": [
+        "I'm a really big fan of memes, so I'm glad to follow the page and see what people come up with; it gets me going.",
+        "— Alex Aument, LancasterOnline, 2019"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "alex_aument"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-029",
+      "lines": [
+        "The fans already know every single word to songs because we've been playing them for so long, and they're not even out yet",
+        "— Wynton Huddle, LancasterOnline, 2019"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "wynton_huddle"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-030",
+      "lines": [
+        "When people leave a show, we just want them to feel liberated and refreshed.",
+        "— Wynton Huddle, LancasterOnline, 2019"
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "wynton_huddle"
+        ],
+        "topic": [
+          "touring"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-031",
+      "lines": [
+        "Orphic Grimoire was recorded in Justin Wohlfeil's studio inside the Chameleon Club.",
+        "The band hunkered down there from October 2018, in frequent four-hour sessions."
+      ],
+      "tags": {
+        "album": [
+          "orphic_grimoire"
+        ],
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "lancaster_online"
+        ],
+        "topic": [
+          "recording"
+        ],
+        "venue": [
+          "chameleon_club"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-032",
+      "lines": [
+        "August 2019 — Medusa's Disco opened for Godsmack at Allentown's Musikfest.",
+        "Their biggest crowd yet."
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "lancaster_online"
+        ],
+        "topic": [
+          "touring"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-033",
+      "lines": [
+        "Fans ran a dedicated Facebook group: \"Medusa's Discult.\"",
+        "~550 members in 2019 — per LNP, the only Lancaster band with its own fan group."
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "lancaster_online"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-034",
+      "lines": [
+        "A Who tribute set at \"Dam Stock\" in Austin, PA went so well it became a live recording.",
+        "Plus a second Who-centric show at Tellus360, Nov 8, 2019."
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "lancaster_online"
+        ],
+        "topic": [
+          "touring"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-035",
+      "lines": [
+        "I am Pennsylvania raised but I was born in Fayetteville, Arkansas. My brother and I both.",
+        "— Hunter Root, Whiskey Riff, 2023"
+      ],
+      "tags": {
+        "album": [
+          "arkansas"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-036",
+      "lines": [
+        "The main reason it's titled this is for my older brother, Nicholas Root… He would love this name and would completely get it, being born there means a lot to us both.",
+        "— Hunter Root, Whiskey Riff, 2023"
+      ],
+      "tags": {
+        "album": [
+          "arkansas"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-037",
+      "lines": [
+        "Nick passed away two years ago as of April 15th at the age of 27. I was 26 when he died. He played guitar before me and is the reason I picked it up to begin with.",
+        "— Hunter Root, Whiskey Riff, 2023"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-038",
+      "lines": [
+        "One of his worries on his deathbed was that he wouldn't be remembered when he was gone. Fuck that, this one is forever for you Nick, I wouldn't be here without you!",
+        "— Hunter Root, Whiskey Riff, 2023"
+      ],
+      "tags": {
+        "album": [
+          "arkansas"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-039",
+      "lines": [
+        "If you haven't heard of Hunter Root yet, I suggest you change that.",
+        "— Hill Douglas, Whiskey Riff, 2023"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hill_douglas"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-040",
+      "lines": [
+        "This guy is the real deal, so you're going to want to mark your calendars for this one.",
+        "— Hill Douglas, Whiskey Riff, 2023"
+      ],
+      "tags": {
+        "album": [
+          "arkansas"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hill_douglas"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-041",
+      "lines": [
+        "\"Town Rat Heathen\" dropped in January 2023 and went viral.",
+        "Nearly a million Spotify streams inside four months."
+      ],
+      "tags": {
+        "album": [
+          "arkansas"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "song": [
+          "town_rat_heathen"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "whiskey_riff"
+        ],
+        "topic": [
+          "release"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-042",
+      "lines": [
+        "I started playing drums and guitar at the age of twelve because of my older brother, Nick. He was a guitar player and was my first true inspiration to pick up an instrument.",
+        "— Hunter Root, MuzicNotez, 2024"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-043",
+      "lines": [
+        "My first influences were classic rock bands that my father listened to… The Rolling Stones, Led Zeppelin, The Doors, Lynyrd Skynyrd",
+        "— Hunter Root, MuzicNotez, 2024"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "influences"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-044",
+      "lines": [
+        "Since I was a boy I just wanted to be able to make honest music for a living. That has always been my dream.",
+        "— Hunter Root, MuzicNotez, 2024"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "songwriting"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-045",
+      "lines": [
+        "I don't think music in itself has goals. The true point of music is simply the music itself.",
+        "— Hunter Root, MuzicNotez, 2024"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "songwriting"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-046",
+      "lines": [
+        "My favorite concert was probably the time I saw \"Fuzz\" at Underground Arts in Philly",
+        "— Hunter Root, MuzicNotez, 2024"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "influences"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-047",
+      "lines": [
+        "\"Arkansas\" has strong folky, country, southern rock roots that permeate the whole record.",
+        "— Hunter Root, MuzicNotez, 2024"
+      ],
+      "tags": {
+        "album": [
+          "arkansas"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "songwriting"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-048",
+      "lines": [
+        "I released a twenty second clip on Tiktok of me singing and playing the first verse. It got 500k views which prompted me to finish the song and release it immediately.",
+        "— Hunter Root, MuzicNotez, 2024"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "song": [
+          "town_rat_heathen"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "release"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-049",
+      "lines": [
+        "I went from 400 monthly listeners to 100k in a few months. It's over 3M plays on Spotify now.",
+        "\"It is completely surreal… I feel blessed.\" — MuzicNotez, January 2024"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "song": [
+          "town_rat_heathen"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "release"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-050",
+      "lines": [
+        "you have way more time and freedom to do things at your own leisure. Art is sensitive so not being rushed affects the product tremendously.",
+        "— Hunter Root on recording solo, MuzicNotez, 2024"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "recording"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-051",
+      "lines": [
+        "I just want to thank all my friends and fans pre-viral for helping me get to this point… You know who you are. And thank you to the new fans, Much love.",
+        "— Hunter Root, MuzicNotez, 2024"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-052",
+      "lines": [
+        "The songs weren't written to deliver a message. They're simply confessions set to music.",
+        "— Hunter Root, Shore Fire Media, 2025"
+      ],
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "songwriting"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-053",
+      "lines": [
+        "Crooked Home was produced by Anders Osborne and engineered by David Kalmusky.",
+        "Cut at Addiction Studios, Nashville; released October 17, 2025 via Tolok."
+      ],
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "anders_osborne",
+          "david_kalmusky"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "shore_fire_media"
+        ],
+        "topic": [
+          "recording"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-054",
+      "lines": [
+        "Chad Cromwell — Neil Young's and Mark Knopfler's drummer — plays on Crooked Home.",
+        "With Marc Rogers on bass and keys, and Lindsay Lou's backing vocals on two tracks."
+      ],
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "chad_cromwell",
+          "lindsay_lou",
+          "marc_rogers"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "shore_fire_media"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-055",
+      "lines": [
+        "The \"'94\" single art is a childhood photo of Hunter and Nick.",
+        "Taken outside their dad's truck."
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "song": [
+          "94"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "shore_fire_media"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-056",
+      "lines": [
+        "Back in 1994 / Glad I woke up but I didn't wake up too sure / Back in 1993 / The devil made his way inside a kid and then he never broke free…",
+        "— \"'94\", Hunter Root, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "song": [
+          "94"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-057",
+      "lines": [
+        "If you had to make up a name for a rocking but acoustic artist who tells straightforward stories without pathos, \"Hunter Root\" would fit the bill exactly.",
+        "— Isthmus, 2025"
+      ],
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "isthmus"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-058",
+      "lines": [
+        "While the songs are in part a tribute to Root's brother, who died in 2021, the album isn't a downer.",
+        "— Isthmus, 2025"
+      ],
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "isthmus"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-059",
+      "lines": [
+        "\"Friendly Fire\" was the third single off Crooked Home.",
+        "Born from a fallout with close friends."
+      ],
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "song": [
+          "friendly_fire"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "isthmus"
+        ],
+        "topic": [
+          "release"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-060",
+      "lines": [
+        "The Crooked Home tour opened October 10, 2025, at The Abbey Bar in Harrisburg.",
+        "Then New York, Philadelphia, Boston, Nashville, Chicago and more."
+      ],
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "isthmus"
+        ],
+        "topic": [
+          "touring"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-061",
+      "lines": [
+        "Crooked Home is a personal reckoning that tells the story of my life, a life shaped by loss, addiction, and illness.",
+        "— Hunter Root, Shore Fire Media, 2025"
+      ],
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-062",
+      "lines": [
+        "I think a lot of folks listen to my music because it helps them through tough times. If there is anything I hope this album has to offer, it's that — a little bit of light.",
+        "— Hunter Root, Shore Fire Media, 2025"
+      ],
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-063",
+      "lines": [
+        "Crooked Home was the first record Hunter cut live with a full band.",
+        "In his whole career."
+      ],
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "shore_fire_media"
+        ],
+        "topic": [
+          "recording"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-064",
+      "lines": [
+        "The album ran through vintage mics once used by Bob Dylan and Marianne Faithfull.",
+        "And reverb plates from Johnny Cash sessions."
+      ],
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "shore_fire_media"
+        ],
+        "topic": [
+          "gear"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-065",
+      "lines": [
+        "\"String Up a Necklace\" is about a necklace his girlfriend made him.",
+        "To remind him of home while touring."
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "song": [
+          "string_up_a_necklace"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "shore_fire_media"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-066",
+      "lines": [
+        "\"My Brother's Bones\" is a tribute to Nick.",
+        "Born of Hunter's wish to give his brother a proper resting place."
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "song": [
+          "my_brothers_bones"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "shore_fire_media"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-067",
+      "lines": [
+        "\"Flash in the Pan\" is about working-class hardship.",
+        "The divide between wealth and the lower-middle-class world Hunter grew up in."
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "song": [
+          "flash_in_the_pan"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "shore_fire_media"
+        ],
+        "topic": [
+          "songwriting"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-068",
+      "lines": [
+        "Half the songs ended up being about my brother… '94' was almost the album title. It's the heart of it all.",
+        "— Hunter Root, Americana Highways, 2025"
+      ],
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "song": [
+          "94"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-069",
+      "lines": [
+        "He was a heroin addict since he was about fifteen. He got sarcoma while he was living in Kensington, Philly… and he came home to die. I was there for the last six months of his life.",
+        "— Hunter Root, Americana Highways, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-070",
+      "lines": [
+        "He was doing hospice in our living room. It woke me up. When he died—only eleven months older than me—it felt like a piece of me went with him.",
+        "— Hunter Root, Americana Highways, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-071",
+      "lines": [
+        "I'd just run to my room, grab the guitar, and hide in music. That was my formula for dealing with stuff. It's a healthy habit I built early, and it's what's kept me alive.",
+        "— Hunter Root, Americana Highways, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-072",
+      "lines": [
+        "My brother's biggest fear was not being remembered. So it was obvious what I had to do: remember him through music. I didn't plan it out, but it became everything.",
+        "— Hunter Root, Americana Highways, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-073",
+      "lines": [
+        "That Bronco was huge for us. When my dad sold it after we moved back to Pennsylvania, my brother cried. It's in the ''94' video.",
+        "— Hunter Root, Americana Highways, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "song": [
+          "94"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-074",
+      "lines": [
+        "Two weeks before he died, he wanted to go back to Kensington one last time to get high… Watching him wheel himself away, looking like a skeleton—it's burned in my brain.",
+        "— Hunter Root, Americana Highways, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-075",
+      "lines": [
+        "It made people cry. That's when I knew—it's my first truly sad song, intentionally sad… That's what they want from music, and that's what I want to give: honesty.",
+        "— Hunter Root, Americana Highways, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "song": [
+          "94"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-076",
+      "lines": [
+        "He started playing guitar first, when he was eight. He's the reason I play. I wanted to be in a band with him. I wouldn't be doing any of this if it wasn't for him.",
+        "— Hunter Root, Americana Highways, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-077",
+      "lines": [
+        "The label put money into the record, but it's still just me being me. The quality's higher, but the goal's the same: to turn pain into something that matters.",
+        "— Hunter Root, Americana Highways, 2025"
+      ],
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "recording"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-078",
+      "lines": [
+        "My brother was always running from something dark. I'm just trying to face it head-on through music. That's how I keep him alive. That's how I keep myself alive.",
+        "— Hunter Root, Americana Highways, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "family"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-079",
+      "lines": [
+        "Crooked Home was Hunter's first label-backed release.",
+        "At 30, based in Columbia, outside Lancaster."
+      ],
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "americana_highways"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-080",
+      "lines": [
+        "For the first time ever, all I had to do was sing and play in real time. It was the best result I have ever had. More honest. More alive.",
+        "— Hunter Root, The Country Note, 2025"
+      ],
+      "tags": {
+        "album": [
+          "crooked_home"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "recording"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-081",
+      "lines": [
+        "I have been playing music since I was twelve. I am just a full blooded musician. That is all I know how to do.",
+        "— Hunter Root, The Country Note, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-082",
+      "lines": [
+        "It's spelled Root — but pronounced \"Rut.\"",
+        "The spelling stuck as the stage name; he says it suits the music's earthy tone."
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "the_country_note"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-083",
+      "lines": [
+        "I have always struggled to fit in genre wise. Every time I hear something new, it ends up in my music. I do not want to land anywhere because I like so many styles.",
+        "— Hunter Root, The Country Note, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "influences"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-084",
+      "lines": [
+        "Arkansas was the first time I wrote real lines about real places and the things I actually did. And that is when people connected.",
+        "— Hunter Root, The Country Note, 2025"
+      ],
+      "tags": {
+        "album": [
+          "arkansas"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "songwriting"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-085",
+      "lines": [
+        "People were not just connecting with vague lines. They connected with the exact story. My dad in jail. My brother in rehab. The legal drug stuff.",
+        "— Hunter Root, The Country Note, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "song": [
+          "town_rat_heathen"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "songwriting"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-086",
+      "lines": [
+        "If I was on a deserted island, I would just need my guitar and the ability to play a song all the way through. That is home for me.",
+        "— Hunter Root, The Country Note, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "songwriting"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-087",
+      "lines": [
+        "This is my heart and soul. Not being able to tour weighs on me mentally. But I still have room to get better. I am not worried.",
+        "— Hunter Root, The Country Note, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "touring"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-088",
+      "lines": [
+        "Everything I love about Hank, that is what people connect with in my music. That is wild to think about.",
+        "— Hunter Root, The Country Note, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "hunter_root"
+        ],
+        "topic": [
+          "influences"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-089",
+      "lines": [
+        "Struggle is struggle.",
+        "— Michelle Osterhoudt, The Country Note, 2025"
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "michelle_osterhoudt"
+        ],
+        "topic": [
+          "songwriting"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-090",
+      "lines": [
+        "A song he wishes he could hear again for the first time.",
+        "Nirvana's unplugged \"Where Did You Sleep Last Night.\""
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "the_country_note"
+        ],
+        "topic": [
+          "influences"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-091",
+      "lines": [
+        "The lyric comes first now — it used to be the riff.",
+        "Notebook and pen; writing happens on the couch with the TV off, or on a long walk with coffee."
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "the_country_note"
+        ],
+        "topic": [
+          "songwriting"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-092",
+      "lines": [
+        "He grew up in Lancaster's Amish country.",
+        "Rural life plus psychedelic rock, grunge, and bluegrass shaped the sound."
+      ],
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "the_country_note"
+        ],
+        "topic": [
+          "roots"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-093",
+      "lines": [
+        "The night after opening for Godsmack, Medusa's Disco closed the Peace of Mind series at Rt. 61 Roadhouse in Sunbury.",
+        "\"They showed no signs of disinterest\" — PA Musician's columnist."
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "michele_kelly"
+        ],
+        "topic": [
+          "touring"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-094",
+      "lines": [
+        "\"Book Upon My Shelf\" landed August 14, 2019.",
+        "The band's first single in three years."
+      ],
+      "tags": {
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "song": [
+          "book_upon_my_shelf"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "pa_musician"
+        ],
+        "topic": [
+          "release"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-095",
+      "lines": [
+        "Medusa's Disco's songwriting is a quality that sets them apart from other bands.",
+        "— Sarah Kate Gittleman, NEPAudio, 2019"
+      ],
+      "tags": {
+        "album": [
+          "orphic_grimoire"
+        ],
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "sarah_kate_gittleman"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-096",
+      "lines": [
+        "the album is a perfect snapshot of the energy that Medusa's Disco brings to listeners",
+        "— Sarah Kate Gittleman, NEPAudio, 2019"
+      ],
+      "tags": {
+        "album": [
+          "orphic_grimoire"
+        ],
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "sarah_kate_gittleman"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-097",
+      "lines": [
+        "Orphic Grimoire — the band's fourth studio release.",
+        "Recorded, mixed, and produced entirely by Medusa's Disco."
+      ],
+      "tags": {
+        "album": [
+          "orphic_grimoire"
+        ],
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "nepaudio"
+        ],
+        "topic": [
+          "recording"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-098",
+      "lines": [
+        "\"Belly Ache\" carries a saxophone break by YAM YAM's Jason Mescia.",
+        "Woven into the instrumental breakdown."
+      ],
+      "tags": {
+        "album": [
+          "orphic_grimoire"
+        ],
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "nepaudio"
+        ],
+        "topic": [
+          "recording"
+        ]
+      }
+    },
+    {
+      "id": "MV-HR-20260707-099",
+      "lines": [
+        "On \"Sizzle Into Oblivion\": \"it is nothing short of the stuff goosebumps are risen from.\"",
+        "The album closer — per the review, the most popular song among fans."
+      ],
+      "tags": {
+        "album": [
+          "orphic_grimoire"
+        ],
+        "band": [
+          "medusas_disco"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "press"
+        ],
+        "speaker": [
+          "sarah_kate_gittleman"
+        ]
+      }
+    }
+  ]
+}

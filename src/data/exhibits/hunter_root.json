@@ -1,7 +1,7 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-07-07T19:03:30.156Z",
+    "exported_at": "2026-07-07T20:38:58.067Z",
     "filter": "released, not archived, badged for this exhibit",
     "vocabulary_csv_sha": null,
     "derived_era": "v0.2 — weighted date-sets baked on leaves; era derived client-side (era-buckets.json)"
@@ -8945,6 +8945,89 @@
           "source": "inferred"
         }
       ]
+    },
+    {
+      "id": "MV-HR-20260707-100",
+      "source_url": null,
+      "source_platform": "local",
+      "media_type": "other",
+      "title": "Nick Root",
+      "description": "The older brother. The reason there's a guitar in these hands at all.",
+      "post_date": null,
+      "released_at": "2026-07-07T20:29:55",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "band": [
+          "hunter_root"
+        ],
+        "card_kind": [
+          "recipe"
+        ],
+        "content_kind": [
+          "other"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "people": [
+          "nick_root"
+        ],
+        "source": [
+          "local"
+        ],
+        "topic": [
+          "family"
+        ]
+      },
+      "card_kind": "recipe",
+      "recipe": {
+        "all": [
+          "people:nick_root"
+        ],
+        "any": [],
+        "not": []
+      }
+    },
+    {
+      "id": "MV-HR-20260707-101",
+      "source_url": null,
+      "source_platform": "local",
+      "media_type": "other",
+      "title": "Arkansas",
+      "description": "What the critics said about Arkansas — and a few words from the man himself.",
+      "post_date": null,
+      "released_at": "2026-07-07T20:29:55",
+      "primary_url": null,
+      "thumbnail_url": null,
+      "tags": {
+        "album": [
+          "arkansas"
+        ],
+        "band": [
+          "hunter_root"
+        ],
+        "card_kind": [
+          "recipe"
+        ],
+        "content_kind": [
+          "other"
+        ],
+        "exhibit": [
+          "hunter_root"
+        ],
+        "source": [
+          "local"
+        ]
+      },
+      "card_kind": "recipe",
+      "recipe": {
+        "all": [
+          "album:arkansas"
+        ],
+        "any": [],
+        "not": []
+      }
     }
   ]
 }

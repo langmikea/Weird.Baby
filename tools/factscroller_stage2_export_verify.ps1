@@ -9,7 +9,10 @@ $py = Join-Path $env:TEMP 'factscroller_stage2_exportverify.py'
 $code = @'
 import json, sys, os
 REPO = r'C:\AI\Projects\weird-baby-museum'
-wall = json.load(open(os.path.join(REPO, 'src', 'data', 'exhibits', 'hunter_root.json')))
+def loadjson(p):
+    with open(p, encoding='utf-8') as fh:
+        return json.load(fh)
+wall = loadjson(os.path.join(REPO, 'src', 'data', 'exhibits', 'hunter_root.json'))
 facts_path = os.path.join(REPO, 'src', 'data', 'exhibits', 'hunter_root.facts.json')
 ok = True
 def check(label, cond, got):
@@ -18,10 +21,16 @@ def check(label, cond, got):
     if not cond: ok = False
 
 wa = wall['artifacts']
-ids = [a['id'] for a in wa]
-fact_ids = [i for i in ids if i.startswith('MV-HR-20260707-') and i.split('-')[-1] in {'%03d'%n for n in range(1,100)}]
+wall_ids = set(a['id'] for a in wa)
+# Structural-lock test done RIGHT: cross-reference the facts payload, not an id
+# range. -005/-006 are ingested PRESS artifacts (legitimately on the wall), not
+# facts — an id-range guess false-flags them. The exact invariant: no id that
+# appears in the facts payload may appear on the wall.
+_fp_early = loadjson(facts_path) if os.path.exists(facts_path) else {'facts': []}
+fact_payload_ids = set(f['id'] for f in _fp_early['facts'])
+overlap = sorted(wall_ids & fact_payload_ids)
 check('wall artifact count (expect 49 = 47 + 2 recipe)', len(wa) == 49, len(wa))
-check('ZERO fact ids on the wall (structural lock)', len(fact_ids) == 0, fact_ids)
+check('ZERO facts on the wall (wall ∩ facts payload = empty)', len(overlap) == 0, overlap)
 check('no kind field leaks to wall records', all('kind' not in a for a in wa), 'clean' if all('kind' not in a for a in wa) else 'LEAK')
 
 recipes = [a for a in wa if a.get('card_kind') == 'recipe']
@@ -40,7 +49,7 @@ check('Arkansas title verbatim', ark and ark['title']=='Arkansas', ark and ark.g
 # facts payload
 if not os.path.exists(facts_path):
     check('facts payload file exists', False, 'MISSING hunter_root.facts.json'); print('VERIFY_DONE'); sys.exit(0 if ok else 1)
-fp = json.load(open(facts_path))
+fp = loadjson(facts_path)
 fl = fp['facts']
 check('facts payload count (expect 97)', len(fl) == 97, len(fl))
 check('every fact has 2-line surface', all(isinstance(f.get('lines'), list) and len(f['lines'])==2 for f in fl), 'shape ok' if all(isinstance(f.get('lines'),list) and len(f['lines'])==2 for f in fl) else 'BAD')
@@ -55,7 +64,7 @@ era_facts = [f['id'] for f in fl if f['tags'].get('era')]
 check('legacy era tags kept on facts (expect 3)', len(era_facts) == 3, era_facts)
 
 # vocabulary carries card_kind namespace (recipe pill renders under it)
-voc = json.load(open(os.path.join(REPO, 'src', 'data', 'vocabulary.json')))
+voc = loadjson(os.path.join(REPO, 'src', 'data', 'vocabulary.json'))
 # card_kind may be absent from registry (falls through to tier 3) — that's fine;
 # the pill still renders. Just report presence for the record.
 ck = next((n for n in voc['namespaces'] if n['namespace']=='card_kind'), None)

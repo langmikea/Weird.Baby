@@ -1,7 +1,7 @@
 {
   "metadata": {
     "source": "http://127.0.0.1:51822/db",
-    "exported_at": "2026-07-07T19:03:30.156Z",
+    "exported_at": "2026-07-07T20:38:58.067Z",
     "row_count": 23,
     "schema": "vocabulary v1 — namespace, display_name, tier, sort_order, retired_at"
   },
