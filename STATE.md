@@ -21,9 +21,20 @@ Ops work takes top priority, based on the Ops need in the moment.
 
 ## LIVE (deployed, verified)
 
-- Site: https://weird.baby — LIVE and CURRENT. Last deploy version `8fb3aab1` (wrangler 4.81.1), 2026-07-07 16:36Z (verified via deploy output + HTTP 200; incognito walk = Mike, this session).
+- Site: https://weird.baby — LIVE and CURRENT. Last deploy version `2b1a853b` (wrangler 4.81.1), 2026-07-07 (verified via deploy output + Mike's incognito walk + Ops bundle checks: press cards render, no vault leakage).
 - Status: SOFT-LAUNCHED — visible but not advertised / not yet in search engines.
-- Repo HEAD at deploy: `420c6ba` + ledger/log close commit follows same session.
+- Repo HEAD at deploy: `eb8ec09` + ledger/log close commit follows same session.
+
+## SHIPPED 2026-07-07 — PRESS BATCH + FACT FACTORY RUN 1 (PRESS_BATCH_INGEST-20260707; deploy 2b1a853b)
+
+Executed per `docs/PRESS_BATCH_INGEST_BRIEF-20260707.md`, every stage gated + committed (run log: `docs/PRESS_BATCH_INGEST_LOG-20260707.md`; Stage 1 delta + Stage 3 candidates docs alongside). Backup: `MediaVault/core/backups/mediavault_pre-press-batch-20260707T180632Z.sqlite` (verified; gitignored — OneDrive mirror is the durable home, RE-MIRROR PENDING). MV repo `9c95833`, museum through `eb8ec09`.
+
+- Roster ground-truth: the brief's "16-URL list" existed in no tree; Mike ruled the found 15 (13 already vaulted 6/17 as `MV-20260617-001..013` + PA Musician + NEPAudio). Stage 2 was NORMALIZE+COMPLETE, not fresh ingest — no duplicates.
+- DB: kind CHECK rebuilt +`press` (9 values, cf17d5c mold); reserved `interview` ACTIVATED (first inhabitants). 299→392 artifacts: 14 press/interview RELEASED (12 updated + 2 ingested `MV-HR-20260707-005/006`), fan-crash video stays vaulted (link dead/private, Mike browser-checked); **93 facts** `MV-HR-20260707-007..099` (kind=fact, ALL VAULT — hidden until FactScroller re-wire). Facts = every quote from every source + derived facts, wording gate PASS all-93 as worded.
+- NEW `speaker:` tag axis (tier 3): quote-speaker on facts; values = persons AND outlets (Mike's amendment); 19 slugs registered at first use. Pilot fact 001 breadcrumb strengthened — Nick's death date now source-backed (Root via Whiskey Riff: 2021-04-15, age 27); wording unchanged.
+- Corrections landed at gates: Substack (`-012`) is the ORIGINAL of the Americana Highways interview (post_date → 2025-10-16); Country Note date TZ artifact fixed (→ 2025-11-24). Watch-item on record: producer-credit conflict (Osborne/Kalmusky vs D'Ambrosio's "Kalmuskey") — facts worded per three-source majority.
+- Export: 33→47 records; 0 underivable; facts excluded by status; vocabulary.json +speaker row (board unaffected — facet keys hardcoded). Filter board gains Interview/Press content-kind pills + Topic roots/release. HAZARD RECONFIRMED: mount read-lag served a truncated tag_vocabulary.json after host edit — false alarm, host file was whole; JSON validity checks now ride the scripts.
+- Feeds unlocked: FactScroller Sequencing C DONE (vault filled, 97 facts); "Arkansas reviews" + "Nick Root" recipe cards now buildable; next brief = FactScroller re-plumb (Sequencing A/B).
 
 ## SHIPPED 2026-07-07 — DERIVED-ERA RE-WIRE (DERIVED_ERA_REWIRE-20260707; deploy 8fb3aab1)
 
@@ -78,7 +89,8 @@ These must be true before driving traffic (Google search, advertising). This lis
 2. [DONE 2026-06-17] STATE.md rebuilt as live ledger (this block).
 3. Content expansion toward full-launch gate (largest lever for launch).
 4. Gift shop wiring + Mike's gift shop build (gated on Mike bringing source).
-5. Press batch (16 URLs) — UNBLOCKED 2026-07-07 (derived-era re-wire SHIPPED). Next brief follows.
+5. [DONE 2026-07-07] Press batch — SHIPPED as PRESS_BATCH_INGEST-20260707 (14 released, 93 facts vaulted; content-expansion gate progress: +14 visitor-facing artifacts, wall now 47).
+6. FactScroller re-plumb (spec Sequencing A/B) — UNBLOCKED: vault holds 97 facts; player scroller re-wire + first recipe cards (Nick Root; Arkansas reviews). Next brief.
 
 ## KNOWN ISSUES (accepted, not yet fixed)
 

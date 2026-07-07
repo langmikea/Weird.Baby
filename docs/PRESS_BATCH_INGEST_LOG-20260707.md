@@ -40,4 +40,15 @@ Brief: docs/PRESS_BATCH_INGEST_BRIEF-20260707.md · Ops: Claude (Cowork) · MV w
 - Expected post-state: 392 artifacts; facts 97 (all vault); released 211 unchanged; registry 230, 0/0; source parity 392; band 388; speaker occurrences 93.
 - GATE (verification, delegated): **PASS** (Ops, 2026-07-07). Host run clean: STAGE3_OK / JSON_VALID (19 speaker values) / STAGE3_SCRIPT_DONE, zero aborts; paste-back on record. Independent verify against fresh mount copy (sha256 `72BF738A…` matches host post-hash): integrity ok; 392 artifacts; 97/97 facts vault-status; released 211 UNCHANGED (no fact reaches visitors); registry 230 (0 unregistered / 0 zero-usage); speaker occurrences 93 (top: hunter_root 43, wynton_huddle 10, shore_fire_media 8); C46 three-breadcrumb ruling and pilot-001 append verified in the rows.
 - Post-run DB sha256: `72BF738AD43EE967893180362829B08E6F6D81499F58F20BDD130E055172807F` (pin for Stage 4 if it writes).
-- Commit gate: pending. Then Stage 4 (export + verify + STATE.md + close).
+- Commit gate: **PASS** — MV `9c95833` committed AND pushed (origin confirmed; Stage 2 push debt cleared same gate); museum `b158c8f` committed AND pushed, origin confirmed. Both trees clean.
+
+## Stage 4 — Export + deploy + close: PASS
+- Export (host, MV server up): 47 artifacts (33 + 14 released press/interview), 263,070 B; 0 underivable leaves; weighted date-sets baked; vocabulary registry 23 rows (+speaker). Spot gates in paste-back all correct: released rows present, vaulted video absent, facts absent, no speaker tags in export.
+- Ops deep verify (host-side reads): all 14 released ids present exactly once in hunter_root.json; record shape correct (grouped tags, dates baked, e.g. `-005` = 2019/publish/weight 2); vocabulary.json carries speaker namespace (client board unaffected — facet keys hardcoded).
+- Commit `eb8ec09` (explicit paths) + push, origin confirmed. Build clean (vite 8.0.7). **Deploy `2b1a853b-c0b7-42c4-982b-56f08db57003`** (wrangler 4.81.1).
+- Live verification: weird.baby/hr HTTP 200; shipped bundle (hash-matched `index-DXRMLY3e.js`) contains `MV-HR-20260707-005`, contains NO fact ids and NO vaulted-video id — zero vault leakage. Mike incognito walk: press cards render on the wall (screenshot on session record).
+- GATE: PASS. STATE.md ledger updated (SHIPPED block, LIVE deploy, NEXT queue: press batch DONE, FactScroller re-plumb unblocked).
+
+## Session-close
+- Ledger + this log close ride the final commit. Standing reminder: OneDrive re-mirror of the MV backup + repo mirror are point-in-time and now stale-by-one-session.
+- STOP-CONDITION AUDIT: zero unapproved vocab values (every addition named + Mike-gated: press, interview activation, speaker axis, 19 speaker slugs); zero integrity mismatches (every stage integrity_check=ok, two pinned rebuild/insert runs, zero rollbacks); every fact defensible (verbatim quotes + breadcrumbs to in-vault sources; wording gate PASS all-93).
