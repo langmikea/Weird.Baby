@@ -21,9 +21,18 @@ Ops work takes top priority, based on the Ops need in the moment.
 
 ## LIVE (deployed, verified)
 
-- Site: https://weird.baby — LIVE and CURRENT. Last deploy `676d20a9`, 2026-07-06 23:33Z (verified via `wrangler deployments list` paste-back + Mike's incognito walk, 2026-07-06).
+- Site: https://weird.baby — LIVE and CURRENT. Last deploy version `ffcf7fbd` (wrangler 4.81.1), 2026-07-07 ~02:00Z (verified via deploy output + Mike's incognito walk).
 - Status: SOFT-LAUNCHED — visible but not advertised / not yet in search engines.
-- Repo HEAD at deploy: `b875c8c`, pushed to origin/main (docs commit follows same session).
+- Repo HEAD at deploy: `a7b8d62` + final migration docs commit follows same session.
+
+## SHIPPED 2026-07-07 — MV VOCABULARY MIGRATION (Stages 0-4, 6, 8; deploy ffcf7fbd)
+
+Executed per `docs/MV_VOCAB_MIGRATION_BRIEF-20260624.md`, all 10 forks LOCKED per reconcile plan Part E, every stage gated + committed (run log: `docs/MV_VOCAB_MIGRATION_LOG-20260624.md` — full paste-backs, hashes, verdicts). Head = live MV DB. Backup: `MediaVault/core/backups/mediavault_pre-vocab-reconcile-v2-20260707T010514Z.sqlite` (integrity ok, gitignored; OneDrive mirror is the durable home).
+
+- DB: exhibit un-retired; event/lineup/attributes registered (tier 3); presentation folded to attributes:link; tags registry rebuilt (210 slugs, 0 mismatch/0 unregistered/0 zero-usage); source collapsed (fresh disagreement=14; tag==column 293/293; 19 NULLs→local; youtube 105 unchanged); **bands→band renamed (288 payloads)** — lineup:band untouched.
+- Client: `BOARD_TOTAL_KEYS` bands→band (HrExhibitFlow.jsx); exports regenerated (hunter_root.json, vocabulary.json 22 rows). Filter board renders Band; Medusa's Disco absent BY DATA (its 4 artifacts unreleased — appears on release, no code needed).
+- Docs: `MediaVault/core/tag_vocabulary.json` regenerated v2.0 (demoted, non-authoritative per F3); `TAXONOMY_v1.md` rewritten as-built (MV repo `15e5bda`).
+- Deferred (locked): content_kind/card_kind kept (F4/F5); artifact_kind/format routing = backlog; `fact` Kind + the one table rebuild = separate later workstream (F10/Stage 7).
 
 ## SHIPPED 2026-07-06 — WB_ARTIST_LOBBY_BOOTH-20260706 (deploy 676d20a9)
 

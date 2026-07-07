@@ -108,4 +108,16 @@ File regenerations (host-side file tools, this session; mount freshness probed �
 
 ## STAGE 8 — Final re-export + client verification
 
-_Not started._
+Stage 6 commit gates first: MV `15e5bda` (`e042b18..15e5bda`), WBM `a7b8d62` (`072c577..a7b8d62`), both clean.
+
+Plan: (8a) final export — DB unchanged since Stage 4's export, so the two data files must come back byte-identical (idempotence check) — then clean production build (`Remove-Item dist` first, standing rule). (8b) Mike's client smoke test on the local preview: filter board renders **Band** column (band facet), album/gallery containers, content-variant badge, source facet incl. the new local/press/facebook values, no console errors. (8c) on Mike's live-behavior confirmation: deploy (wrangler 4.81.1) + final commit.
+
+- Script: `tools/mv_vocab_stage8a_final_export_build.ps1`.
+
+**Paste-back 8a (2026-07-07, verified):** export clean (33 artifacts / 199,282 bytes / 22 vocab rows — byte counts identical to Stage 4b). Idempotence check showed a 1-line diff per data file — **chased, not waved through:** both diffs are line 4 `"exported_at"` (the exporter stamps run time). Content-level idempotence holds; the "expect NO diff" phrasing in the script was miscalibrated against a self-stamping exporter. Clean build: 48 modules, no errors, fresh dist (27 files). Refreshed-timestamp files ride the final commit.
+
+**8b (Mike's client smoke test, local preview — verified via screenshots):** filter board renders **Band** column (Hunter Root, 32 — one exported artifact carries no band tag, same as pre-migration); album containers render (Arkansas tracklist); content-variant badge live ("Silver Lining OFFICIAL"); source facet shows reconciled values incl. new `local`(10), counts sum to 33. **"Only one band" finding chased:** all 4 `band:medusas_disco` artifacts are unreleased vault items (the 2026-06-17 press batch) — never exported; pre-migration export's `bands` key also carried only hunter_root values, so live behavior is IDENTICAL, not a regression. Medusa's Disco appears automatically when its artifacts release. Press absent from source facet for the same reason.
+
+**8c (deploy + live walk):** wrangler 4.81.1 confirmed; deployed the exact smoke-tested dist; Version `ffcf7fbd-1b59-4198-ad17-b912fe62ab1f`; 2 assets updated (index.html + index-CP2I3FS8.js). Mike's incognito walk on weird.baby/hr: wall renders, filter board + Band column + reconciled source facet live; only visible blemish = DECKBUG-FBBLOCKS (pre-existing known issue, unrelated). (`deployments list` tail showed a stale 2026-06-12 record — truncated-list display quirk; deploy output + incognito walk are the authoritative proof.)
+
+**Gate: PASS — MIGRATION COMPLETE.** Stages 0–4, 6, 8 executed; 5/5b skipped per locked F4/F5; no table rebuild; no `fact` add. All ten fork resolutions honored as locked. Backup retained at `core/backups/mediavault_pre-vocab-reconcile-v2-20260707T010514Z.sqlite`.
