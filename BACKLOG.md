@@ -1,6 +1,6 @@
 # Weird.Baby Museum — Backlog
 
-**Last updated:** 2026-06-13 (Ops: backup + route-table items logged)
+**Last updated:** 2026-07-07 (Ops: post-vocab-migration items logged)
 
 This file holds aspirational work. When something here lands a commit,
 remove the line. `NAVIGATION.md` describes current state. `STATE.md` is the
@@ -32,6 +32,21 @@ operator decision: where do non-album releases live in the exhibit.
 020/023/024/025/036) sitting in inbox — release call + gallery placement.
 
 ---
+
+**instrument:harmonica facet — HELD by Mike 2026-07-07.** Pre-approved
+direction (2026-07-05) but held at the post-migration gate. Recon finding:
+ZERO "harmonica" mentions in vault text (descriptions/extracted/notes) and no
+instrument:* tags — the artifact list must be operator-supplied; do not mine
+for it. Ready-made shape when revived: `instrument` namespace tier 3 sort 10,
+value `harmonica`; deck pill column appears automatically on export; do NOT
+add to BOARD_TOTAL_KEYS. Same host-side write pattern as the vocab migration
+(run log: docs/MV_VOCAB_MIGRATION_LOG-20260624.md).
+
+**artifact_kind/format routing + retirement (vocab migration F5 deferral).**
+Route artifact_kind (thumbnail/transcript -> type reserved) and format
+(-> type/attributes), retire the emptied namespaces, drop `format` from
+client BOARD_TOTAL_KEYS, re-export. Deliberately NOT done in the 2026-07-07
+vocab migration per locked F5.
 
 ## Tier 2 — Pre-Launch Required
 
