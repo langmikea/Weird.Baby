@@ -1,7 +1,16 @@
-import { FACTS } from "../../routes/hr/hr_facts.js";
+// FACTSCROLLER_REPLUMB-20260707 (delta e): the player scroller now reads the
+// vaulted-then-released `fact` artifacts via the export's facts payload. The
+// static hr_facts.js seed set is RETIRED FROM THE LIVE PATH — it stays in the
+// tree (unimported) because it carried stale/unverified content (e.g. Nick's
+// death year as 2020; the vault's source-backed truth is 2021-04-15). Unique
+// seeds, if any are worth keeping, get vaulted with breadcrumbs in a separate
+// salvage brief.
 import HrExhibitFlow from "../../routes/hr/HrExhibitFlow.jsx";
 import EXHIBIT from "../exhibits/hunter_root.json";
+import FACTS_PAYLOAD from "../exhibits/hunter_root.facts.json";
 import { buildSpineFromArtifacts } from "./hunter-root-spine.js";
+
+const FACTS = Array.isArray(FACTS_PAYLOAD?.facts) ? FACTS_PAYLOAD.facts : [];
 
 // Presentation config — coverflow order, short album ids (hr_facts albumIds
 // key off these), and display years. Years live here because the foundation's
@@ -25,6 +34,14 @@ const spine = buildSpineFromArtifacts(EXHIBIT, ALBUMS);
 export const hunterRoot = {
   id: "hr",
   name: "Hunter Root",
+  exhibitSlug: "hunter_root",
+  // FACTSCROLLER_REPLUMB-20260707: the scroller's era tier (T3) bridges the
+  // facts' LEGACY era slugs to a spine album id. Only 3 era-tagged facts exist
+  // (era:rwth ×2 carry album:run_with_the_hunt and match at album tier anyway;
+  // era:early_days ×1 has no album tag, so it needs this bridge to be reachable
+  // above the artist floor when the rwth album plays). Vestigial by design;
+  // grows if more era-only facts land. Album ids without an entry get [].
+  eraAlias: { rwth: ["rwth", "early_days"] },
   spine,
   facts: FACTS,
   defaultActiveIndex: Math.max(0, spine.findIndex(a => a.id === "arkansas")),

@@ -49,7 +49,13 @@ import "./HrExhibitFlow.css";
 import { buildDimensions } from "./hr_dimensions.js";
 import { eraForRecord, ERA_DISPLAY, ERA_SLUGS } from "./hr_era.js";
 import EXHIBIT from "../../data/exhibits/hunter_root.json";
+import FACTS_PAYLOAD from "../../data/exhibits/hunter_root.facts.json";
+import { makeFactCycler, splitFact } from "../../lib/fact-select.js";
 import { HR_JOURNAL_PROMPTS } from "../../data/hr_journal_prompts.js";
+
+// FACTSCROLLER_REPLUMB-20260707: the fact pool the living recipe cards draw
+// from — the SAME vaulted-then-released facts the player scroller reads.
+const RECIPE_FACTS = Array.isArray(FACTS_PAYLOAD?.facts) ? FACTS_PAYLOAD.facts : [];
 
 // ─── EXHIBIT INPUT — artifacts and derived dimensions ──────────────────────
 // Phase v5-3+v5-4 (per docs/archive/SPEC_DRAFT_v5.md §4 and
@@ -1340,6 +1346,82 @@ function PlaceholderCard({ card }) {
   );
 }
 
+// ─── RECIPE CARD (living card) — FACTSCROLLER_REPLUMB-20260707 ───────────────
+// "Some cards are ALIVE: scrolling text" (FACTSCROLLER_SPEC_v1.0). A recipe
+// card cycles facts pulled by ITS OWN RECIPE (a tag query baked into the
+// export) from the shared vault. Filter-obedient via its own tags (matchFilter
+// handles it upstream). Weight = per-session frequency, owned by the cycler.
+//
+// Display model (2026-07-07 eyeball, Mike): a small EYEBROW names the recipe
+// ("Nick Root"); the BIG box holds the quote/fact; the SMALL box (foot) holds
+// the BREADCRUMB — the source credit, and nothing more (the old editorial blurb
+// was dropped — it competed with the per-fact credit). Motion is a SOFT
+// cross-fade (not the player scroller's bounce — Mike asked for softer here).
+// Fixed body height so cycling never resizes the card (kills the masonry
+// reflow "flash"); a random start offset desyncs cards from each other.
+function RecipeCard({ card }) {
+  const [current, setCurrent] = useState(null);
+  const [phase, setPhase]     = useState("idle"); // idle | in | out
+  const cyclerRef = useRef(null);
+  const timerRef  = useRef(null);
+  const swapRef   = useRef(null);
+  const shownRef  = useRef(false);
+
+  useEffect(() => {
+    const recipe = card.recipe && typeof card.recipe === "object" ? card.recipe : null;
+    cyclerRef.current = makeFactCycler({ facts: RECIPE_FACTS, recipe });
+    setCurrent(null);
+    setPhase("idle");
+    shownRef.current = false;
+    clearTimeout(timerRef.current);
+    clearTimeout(swapRef.current);
+    // Desync: a random start offset so cards don't all flip in lockstep.
+    schedule(500 + Math.random() * 2600);
+    return () => { clearTimeout(timerRef.current); clearTimeout(swapRef.current); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [card.id]);
+
+  function schedule(delay = 8000) {
+    clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      const next = cyclerRef.current ? cyclerRef.current.next() : null;
+      if (!next) { schedule(8000); return; }   // empty pool: hold, retry
+      if (!shownRef.current) {
+        shownRef.current = true;
+        setCurrent(next);
+        setPhase("in");
+      } else {
+        setPhase("out");                        // fade current out …
+        swapRef.current = setTimeout(() => {    // … then swap + fade the next in
+          setCurrent(next);
+          setPhase("in");
+        }, 480);
+      }
+      schedule(8000);
+    }, delay);
+  }
+
+  const parts = current ? splitFact(current) : null;
+
+  return (
+    <>
+      <div className="hr-card-recipe-vis">
+        <div className="rc-eyebrow">{card.title || ""}</div>
+        <div className="rc-stage">
+          {parts && (
+            <div className={`rc-block rc-${phase}`}>
+              {parts.quote.map((ln, i) => <div className="rc-quote" key={i}>{ln}</div>)}
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="hr-card-foot hr-card-foot-crumb">
+        <div className="rc-crumb">{(parts && parts.breadcrumb) || ""}</div>
+      </div>
+    </>
+  );
+}
+
 // ─── Broken-preview fallback (defensive rendering, 2026-05-30) ──────────────
 // Assets can fail by path (404) OR by format (the HEIC incident: a URL the
 // browser can't decode). Both a CSS background-image and a bare <img> degrade
@@ -2412,6 +2494,9 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
   // RWTH parity: album container. media_type is 'other'; detected via the
   // export's card_kind:"album" + tracks[]. Opens AlbumOverlay like gallery.
   const isAlbum = card.card_kind === "album" && Array.isArray(card.tracks);
+  // FACTSCROLLER_REPLUMB-20260707: living recipe card. media_type is 'other';
+  // detected via the export's card_kind:"recipe" + a baked recipe object.
+  const isRecipe = card.card_kind === "recipe" && card.recipe && typeof card.recipe === "object";
   // pickSpan bias: link / photo lean wide so the thumbnails read at a
   // comfortable size. Audio is hard-forced to 1-col below per operator
   // decision 2026-05-23 (visual review during first production deploy at
@@ -2419,7 +2504,7 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
   // pickSpan's wide-bias variant produced 2x-tall cards that broke the
   // "matching album art" aesthetic from the 2026-05-22 operator-lock.
   const isFbVideo = isFbEmbed && fbEmbed.kind === "video";
-  const { span_w: rolledSpan } = pickSpan(card.id || "", isLink || isYouTube || isPhoto || isGallery || isAlbum || isFbVideo);
+  const { span_w: rolledSpan } = pickSpan(card.id || "", isLink || isYouTube || isPhoto || isGallery || isAlbum || isFbVideo || isRecipe);
   // All Facebook cards forced to 1-col / narrow per operator decision 2026-06-01
   // (incognito visual review on weird.baby/hr): FB post & video embeds have a
   // portrait-ish natural shape and distort when stretched to a 2-col (wide)
@@ -2440,7 +2525,8 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
     isPhoto ? "hr-card-photo" : null,
     isAudio ? "hr-card-audio" : null,
     isGallery ? "hr-card-gallery" : null,
-    isAlbum ? "hr-card-album" : null]
+    isAlbum ? "hr-card-album" : null,
+    isRecipe ? "hr-card-recipe" : null]
     .filter(Boolean).join(" ");
   if (isFbEmbed) {
     return (
@@ -2546,6 +2632,14 @@ function ArtifactCard({ card, playingAudioId, setPlayingAudioId, onOpenGallery, 
       >
         <AlbumCard card={card} />
       </button>
+    );
+  }
+  if (isRecipe) {
+    // Living card — no click target; the body scrolls on its own timer.
+    return (
+      <div className={className} style={baseStyle}>
+        <RecipeCard card={card} />
+      </div>
     );
   }
   return (

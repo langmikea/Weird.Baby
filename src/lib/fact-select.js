@@ -21,6 +21,29 @@
 // The render path (JSX/CSS/timing/nav in Exhibit.jsx) is UNTOUCHED — this
 // module only decides WHICH fact is next.
 
+// ─── quote / breadcrumb split (display model, 2026-07-07 eyeball) ──────────────
+// Mike's ruling at the Stage 3 eyeball: the QUOTE/FACT goes in the big box, the
+// BREADCRUMB (source credit) in the small box — "what it needs, not more."
+// 64 of 97 facts were authored with the credit as a trailing em-dash line
+// ("— Hunter Root, Whiskey Riff, 2023"); the other 33 are two-line derived
+// facts with no credit line. splitFact separates them for display:
+//   { quote: [line, ...], breadcrumb: "— …" | null }
+// The last line is the breadcrumb ONLY when it opens with an em/en/hyphen dash
+// AND there is at least one quote line above it. Everything is preserved
+// verbatim (Mike's wording is gated) — this only decides which box each line
+// lands in. No data/export change.
+const ATTR_LINE_RE = /^\s*[—–-]\s+/;
+export function splitFact(fact) {
+  const lines = Array.isArray(fact && fact.lines)
+    ? fact.lines.filter(x => typeof x === "string")
+    : [];
+  const last = lines.length ? lines[lines.length - 1] : "";
+  if (lines.length >= 2 && ATTR_LINE_RE.test(last)) {
+    return { quote: lines.slice(0, -1), breadcrumb: last };
+  }
+  return { quote: lines, breadcrumb: null };
+}
+
 // ─── tag matching ─────────────────────────────────────────────────────────────
 // A fact "carries" a tag "ns:value" when tags[ns] includes value. Mirrors the
 // exporter's grouped-tag shape exactly (split on the first colon).

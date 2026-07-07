@@ -88,8 +88,13 @@ export function buildSpineFromArtifacts(exhibitJson, albumsConfig) {
       year: cfg.year ?? null,
       art: c.thumbnail_url ?? null,
       accent: cfg.accent ?? null,
+      // FACTSCROLLER_REPLUMB-20260707: additive fields for the scroller's
+      // tag-based climb. `tag` = the MV album slug (T2 match); `song` on each
+      // track = the song slug (T1 match). Existing spine consumers ignore them.
+      tag: cfg.tag ?? null,
       tracks: (c.tracks || []).map(t => ({
         id: t.id,
+        song: t.song ?? t.tags?.song?.[0] ?? null,
         title: cleanTrackTitle(t.title, t.song ?? t.tags?.song?.[0] ?? null),
         videos: (t.videos || []).map(v => ({
           id: v.ytId ?? (v.audioUrl ? slugify(v.audioUrl) : null),

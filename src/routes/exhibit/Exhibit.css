@@ -146,7 +146,13 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 
 /* FACT SCROLLER */
 .fs-wrap{flex:1;display:flex;flex-direction:column;padding:10px 20px 8px;border-top:1px solid var(--hr-border);position:relative;overflow:hidden}
-.fs-viewport{flex:1;overflow:hidden;min-height:44px}
+/* Overflow fit (2026-07-07 eyeball, "fix overflow only"): long press quotes
+   (up to ~180 chars) wrap and would hard-clip at the viewport edge, lopping off
+   the closing quote mark. A bottom fade-mask lets a long quote fade out softly
+   instead of a jarring cut. Motion unchanged. */
+.fs-viewport{flex:1;overflow:hidden;min-height:44px;
+  -webkit-mask-image:linear-gradient(to bottom,#000 80%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 80%,transparent 100%)}
 .fs-block{text-align:center;padding:0 8px}
 @keyframes fs-in-up{0%{opacity:0;transform:translateY(18px)}60%{opacity:1;transform:translateY(-4px)}100%{opacity:1;transform:translateY(0)}}
 @keyframes fs-in-down{0%{opacity:0;transform:translateY(-18px)}60%{opacity:1;transform:translateY(4px)}100%{opacity:1;transform:translateY(0)}}
@@ -156,7 +162,11 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 .fs-block.fs-visible.fs-dir-down{animation:fs-in-down .55s cubic-bezier(.34,1.56,.64,1) both}
 .fs-block.fs-idle{opacity:0}
 .fs-line{font-family:var(--hr-sans);font-style:normal;font-size:1.34rem;color:var(--hr-gold);line-height:1.35}
-.fs-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.fs-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px;gap:12px}
+/* Breadcrumb credit (2026-07-07 eyeball): the source, demoted — smaller, lighter,
+   italic — so it reads as a quiet credit, not a second title competing with the
+   quote. */
+.fs-crumb{font-family:var(--hr-sans);font-style:italic;font-size:.82rem;color:var(--hr-gold);opacity:.5;line-height:1.3;text-align:right;margin-left:auto}
 .fs-rule{height:1px;width:28px;opacity:.4;border-radius:1px;flex-shrink:0}
 .fs-nav{display:flex;gap:0}
 .fs-btn{background:var(--hr-ink-card-hi);border:1px solid var(--hr-border-hi);color:var(--hr-gold-mute);cursor:pointer;font-size:.85rem;width:26px;height:26px;display:flex;align-items:center;justify-content:center;transition:color .15s,border-color .15s;font-family:'Courier Prime',monospace}

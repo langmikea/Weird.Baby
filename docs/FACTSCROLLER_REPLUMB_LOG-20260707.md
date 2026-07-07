@@ -82,6 +82,12 @@ Exporter edits already in the tree (committed with this stage): syntax-checked (
 
 **Remaining Stage 2 (Mike):** commit exporter+scripts+log → MV up → `npm run export-artifacts` → `stage2_export_verify` → commit data payloads → Stage 2 commit gate.
 
+**Stage 2 CLOSED (2026-07-07):**
+- Exporter/scripts/log/selector committed `abebfa7` (`018314f..abebfa7`, pushed).
+- Export clean: `hunter_root.json` 49 artifacts, `hunter_root.facts.json` 97 facts, `vocabulary.json` 23 rows; 0 underivable; 0 no-badge.
+- Verify: one real fix landed — the "zero facts on wall" test originally guessed by id-range and false-flagged `-005`/`-006` (ingested PRESS artifacts, legitimately on the wall). Corrected to the exact invariant: **wall ∩ facts-payload ids = ∅** (verified empty). Plus UTF-8 on the embedded Python's `open()` (Windows cp1252 crash on the em-dash blurb). **18/18 OK**, exit 0.
+- Data payloads committed `e5648e6` (`abebfa7..e5648e6`, pushed); tree clean. **Stage 2 commit gate: PASS.**
+
 ### Stage 3 pre-draft (started while Stage 2 export runs — see Stage 3 section)
 
 ## STAGE 3 — Client re-plumb — _pre-draft started (module only); full wiring holds for the Stage 2 export + Mike's eyeball_
@@ -91,11 +97,47 @@ Exporter edits already in the tree (committed with this stage): syntax-checked (
 - `factHasTag` / `matchRecipe` / `climbTier` (song 3 → album 2 → era 1 → exhibit 0, −1 off-exhibit) / `climbCandidates` / `recipeCandidates` / `pickWeighted` (score = tier·100 − shown·10 + jitter, bands never cross) / `makeFactCycler` (`next`/`setContext`/`poolSize`; avoids back-to-back repeats; `setContext` re-points the climb on track change WITHOUT resetting shown-counts so weight = session frequency).
 - Tests: `/tmp/fs_test.mjs` (sandbox, deterministic RNG) — **27/27 pass**: tag match incl. malformed; recipe all/any/not + empty-matches-nothing (a malformed/absent recipe scrolls nothing, never the whole vault); climb tiers; first-meet is the track fact; fountain never returns null; climbs to album then artist floor; never surfaces off-exhibit facts; no immediate repeat; recipe pool balances (Nick-style pool ~50/50); single-fact thin pool keeps returning it; empty pool → null; `setContext` preserves weight.
 
-**Still to wire (HOLDS for Stage 2 export landing + Mike's eyeball — needs the real payload to preview against):**
+**WIRED this session (host files, surgical anchored edits — compile-verified, awaiting Mike's build + eyeball):**
+- `src/data/artists/hunter-root-spine.js` — spine albums gain `tag` (MV album slug, T2), tracks gain `song` (song slug, T1). Additive; existing consumers unaffected.
+- `src/data/artists/hunter-root.js` — `facts` now = the facts payload (`hunter_root.facts.json`); static `hr_facts.js` import REMOVED (delta e — retired from live path, file stays in-tree unimported). Added `exhibitSlug:"hunter_root"` + `eraAlias:{rwth:["rwth","early_days"]}`.
+- `src/routes/exhibit/Exhibit.jsx` — `import { makeFactCycler }`; `FactScroller` internals swapped to the cycler (climb ctx from now-playing track); **render path byte-identical** (fs-* JSX/CSS/.55s/7.5s/nav all unchanged); mount passes `albumTag`/`songSlug`/`eraSlugs`/`exhibit`. Dead `buildFactQueue` removed.
+- `src/routes/hr/HrExhibitFlow.jsx` — facts-payload import + `RECIPE_FACTS`; `RecipeCard` component (cycler + fs-* body); `isRecipe` predicate + className + dispatch branch before the placeholder fallback. Filter obedience is automatic (matchFilter reads the card's own tags — no change).
+- `src/routes/hr/HrExhibitFlow.css` — one layout-only rule `.hr-card-recipe .hr-card-recipe-vis` (Flag E, minimal): padded centered scroll box; reuses `fs-*` motion/type VERBATIM.
+
+**Compile verification (mount-lag defeated per OPERATIONS §8).** A sandbox `vite build` was unreliable — the bash mount served a stale/truncated view of the freshly-edited `HrExhibitFlow.jsx` (reported 186,911 B / 4082 lines ending mid-token; the authoritative Read-tool view is complete + clean through L4158, and the committed HEAD blob is 4075 lines ending `}`). Verified instead by RECONSTRUCTION: git-HEAD baselines + the exact anchored edits, esbuild-bundled with `packages:'external'` → **ESBUILD_OK, 0 warnings** (all local source compiles, imports resolve, JSX balanced). Host RecipeCard spot-checked intact via Read tool. Selector unit tests remain 27/27.
+
+**Still HOLDS for Mike (host-side — authoritative build reads real files, not the mount):**
+- `npm run build` host-side (the real compile gate) → local preview.
+- **Mike's eyeball gate:** play a track → scroller cycles real vault facts (first-meet on track, climbs); filter the wall → both recipe cards alive and filter-obedient; look unchanged from the version he likes.
+- **On the record for the eyeball (assume-and-stated, easy to change):** (1) recipe-card body reuses the player scroller's 1.34rem gold type verbatim — may read large in a small wall card (Flag F polish, parked); (2) a **Recipe** pill now appears under the Card Kind filter group.
+
+_Superseded pre-draft note (kept for history):_
 - `Exhibit.jsx` — `FactScroller` reads the facts payload via `makeFactCycler` climb ctx keyed to now-playing track; render path (JSX/CSS/`fs-*`/7.5 s/‹ › nav) BYTE-IDENTICAL. Facts payload threads in as `artist.facts` (from `hunter_root.facts.json`); `hunter-root.js` swaps the static `hr_facts.js` import for the payload (delta e: retire static set from the live path). A tiny album→era-slug alias map (only 3 era facts) feeds `ctx.eraSlugs`.
 - `HrExhibitFlow.jsx` — `isRecipe` branch in the card dispatch (`card_kind:recipe` + `record.recipe`): renders the existing card shell with a scrolling body driven by `makeFactCycler({facts, recipe})`, filter-obedient via the card's own tags (matchFilter already handles it — no change). **FLAG E:** NEW `.hr-card` scrolling-region CSS in `HrExhibitFlow.css`, reusing `fs-*` animation/type verbatim; zero edits to existing scroller rules.
 - Big-file hazard (OPERATIONS §8): `HrExhibitFlow.jsx` (~162 KB) + `Exhibit.jsx` (~43 KB) edits are surgical/anchored, host-verified — no Cowork read-modify-write on the large files.
 
 **Mike's eyeball gate (Stage 3):** play a track → scroller cycles real vault facts; filter the wall → both recipe cards alive; look unchanged from the version he likes.
 
-## STAGE 4 — Deploy + close — _pending_
+### Stage 3 EYEBALL round 1 (2026-07-07) — "Pretty good!!!!" + polish pass
+
+Mike's feedback + rulings, and what changed. Root cause of most of it: the vault facts are long-form press quotes (line 1 avg 100 / max 182 chars) but the scroller was built for two short seed lines → overflow clipped the closing quote ("missing end quotes"), variable heights drove the masonry reflow "flash."
+
+Gate answers: **player scroller = fix overflow only, keep bounce** · **display model = quote in the big box, breadcrumb (source) in the small box, "nothing more"** (drops the competing editorial blurb).
+
+Shipped (all client, host files; compile-verified via git-HEAD reconstruction + esbuild, 0 warnings; `splitFact` unit-tested 8/8):
+- **`splitFact` (src/lib/fact-select.js)** — separates quote from the trailing "— Speaker, Source, Year" credit line. 64/97 facts carry that credit → small box; 33 are 2-line derived facts → whole fact in the big box, credit box empty ("not more").
+- **Player scroller** — quote in the viewport (bounce UNCHANGED per ruling), breadcrumb demoted to the footer small/light/italic; long quotes fit via a bottom fade-mask instead of a hard clip. (Breadcrumb-in-footer applied here too — assume-and-stated from Mike's general "accreditation smaller/less-dark/italic" note; easy to revert if he meant cards only.)
+- **Recipe cards** — FIXED body height (150px) so cycling never resizes the card → no more masonry reflow flash; small eyebrow names the recipe, big box = quote (fade-masked), small foot = breadcrumb; **soft cross-fade in/out** (not the bounce — Mike asked softer here); **desynced** via a random 0.5–3.1s start offset so cards don't flip in lockstep; editorial blurb DROPPED.
+- "A lot of cards don't scroll" = by design (only the 2 recipe cards are living; the other 47 are static tiles) — confirmed, not a bug.
+
+Assume-and-stated for the next eyeball: recipe cards keep a small eyebrow (the recipe name) for identity; player scroller also got the breadcrumb footer.
+
+### Stage 3 EYEBALL round 2 (2026-07-07) — two fixes, then APPROVED
+
+- **"Can't scroll to the bottom of the page."** Diagnosed live in Mike's preview via Claude-in-Chrome: the fixed player bar is 68px, but `.hr-panel-scroll` had only 20px bottom padding — the last wall row hid behind the bar. The 2 recipe cards are the tallest cards AND sort last (ids -100/-101), so they exposed the standing DECK-SCROLL-OCCLUSION. Fix: panel bottom padding → 5.5rem desktop / 5rem mobile (clears the 68px bar; live-tested — last card then sits fully above the bar). Eases the standing occlusion issue too.
+- **Credit to the RHS.** Breadcrumb right-aligned in both surfaces (`fs-crumb` margin-left:auto + right; `rc-crumb` right).
+- Both CSS-only. **Mike: "Nice! Approved. Proceed." — Stage 3 EYEBALL GATE: PASS.**
+
+## STAGE 4 — Deploy + close — _in progress_
+
+Client verified building + previewing clean (Mike's `npm run preview`, live-walked). Deploy is Mike's (host-side, durable path).

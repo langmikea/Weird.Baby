@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { makeFactCycler, splitFact } from "../../lib/fact-select.js";
 import "./Exhibit.css";
 
 // ─── TYPE CONFIG ──────────────────────────────────────────────────────────────
@@ -55,51 +56,45 @@ function buildPlayQueue(album, startTi, selVisMap) {
   return result;
 }
 
-// ─── FACT SELECTOR ────────────────────────────────────────────────────────────
-function buildFactQueue(facts, albumId, trackTitle, seenIds) {
-  const score = f => {
-    let b = f.weight ?? 5;
-    if (f.type === "intro") b += 20;
-    if (f.type === "track" && f.trackId === trackTitle) b += 15;
-    if (f.type === "album" && f.albumId === albumId) b += 5;
-    if (seenIds.has(f.id)) b = 1;
-    return b + Math.random() * 0.9;
-  };
-  const ok = facts.filter(f => {
-    if (f.albumId && f.albumId !== albumId) return false;
-    if (f.trackId && f.trackId !== trackTitle) return false;
-    return true;
-  });
-  const intros = ok.filter(f => f.type === "intro").sort((a,b) => score(b)-score(a)).slice(0,2);
-  const rest   = ok.filter(f => f.type !== "intro").sort((a,b) => score(b)-score(a));
-  return [...intros, ...rest];
-}
-
 // ─── FACT SCROLLER ────────────────────────────────────────────────────────────
-function FactScroller({ facts, albumId, trackTitle, accent }) {
+// FACTSCROLLER_REPLUMB-20260707 (Sequencing A): the scroller now reads the
+// vaulted-then-released `fact` artifacts (via the facts payload) through the
+// shared selector's tag-based CLIMB (song → album → era → artist), keyed to the
+// now-playing track. Weight = per-session selection frequency (spec ruling 5),
+// owned by the cycler; it persists across track changes so the vault spreads.
+// The render path below (fs-* JSX/CSS, .55s bounce, 7.5s cadence, ‹ › nav) is
+// UNCHANGED — only the data source swapped. Look/motion untouched (ruling 1).
+function FactScroller({ facts, albumTag, songSlug, eraSlugs, exhibit, accent }) {
   const [current, setCurrent]     = useState(null);
   const [direction, setDirection] = useState("up");
   const [phase, setPhase]         = useState("idle");
-  const seenRef    = useRef(new Set());
   const historyRef = useRef([]);
   const posRef     = useRef(-1);
-  const queueRef   = useRef([]);
   const timerRef   = useRef(null);
-  const albumRef   = useRef(albumId);
-  const trackRef   = useRef(trackTitle);
-  const factsRef   = useRef(facts);
+  const cyclerRef  = useRef(null);
+  const factsRef   = useRef(null);
+  const eraKey = Array.isArray(eraSlugs) ? eraSlugs.join(",") : "";
 
   useEffect(() => {
-    albumRef.current = albumId;
-    trackRef.current = trackTitle;
-    factsRef.current = facts;
-    queueRef.current = buildFactQueue(facts, albumId, trackTitle, seenRef.current);
+    // Build the cycler once per facts array identity; weight (shown-counts)
+    // lives inside it and survives track changes.
+    if (cyclerRef.current === null || factsRef.current !== facts) {
+      cyclerRef.current = makeFactCycler({ facts: facts || [], ctx: null });
+      factsRef.current = facts;
+    }
+    cyclerRef.current.setContext({
+      song: songSlug || null,
+      album: albumTag || null,
+      eraSlugs: eraSlugs || null,
+      exhibit: exhibit || null,
+    });
     historyRef.current = [];
     posRef.current = -1;
     clearTimeout(timerRef.current);
     schedule(600, "up");
     return () => clearTimeout(timerRef.current);
-  }, [albumId, trackTitle, facts]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [albumTag, songSlug, eraKey, exhibit, facts]);
 
   function show(fact, dir) {
     setDirection(dir);
@@ -111,11 +106,8 @@ function FactScroller({ facts, albumId, trackTitle, accent }) {
   function schedule(delay = 7500) {
     clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
-      if (!queueRef.current.length)
-        queueRef.current = buildFactQueue(factsRef.current, albumRef.current, trackRef.current, seenRef.current);
-      const next = queueRef.current.shift();
+      const next = cyclerRef.current ? cyclerRef.current.next() : null;
       if (!next) return;
-      seenRef.current.add(next.id);
       historyRef.current.push(next);
       posRef.current = historyRef.current.length - 1;
       show(next, "up");
@@ -139,17 +131,23 @@ function FactScroller({ facts, albumId, trackTitle, accent }) {
   const canBack    = posRef.current > 0;
   const canForward = posRef.current < historyRef.current.length - 1;
 
+  // Display model (2026-07-07 eyeball): QUOTE in the viewport, BREADCRUMB (the
+  // source credit) demoted to the footer, small + light + italic. Motion (the
+  // .55s bounce) is UNCHANGED — Mike ruled "fix overflow only, keep bounce" for
+  // the player scroller; the overflow fit is the fs-viewport mask in CSS.
+  const parts = current ? splitFact(current) : null;
+
   return (
     <div className="fs-wrap">
       <div className="fs-viewport">
-        {current && (
+        {parts && (
           <div className={`fs-block fs-${phase} fs-dir-${direction}`}>
-            <div className="fs-line">{current.lines[0]}</div>
-            <div className="fs-line">{current.lines[1]}</div>
+            {parts.quote.map((ln, i) => <div className="fs-line" key={i}>{ln}</div>)}
           </div>
         )}
       </div>
       <div className="fs-footer">
+        {parts && parts.breadcrumb && <div className="fs-crumb">{parts.breadcrumb}</div>}
         {accent && <div className="fs-rule" style={{ background: accent }} />}
       </div>
     </div>
@@ -1043,8 +1041,10 @@ export default function Exhibit({ artist }) {
               {/* FACTS */}
               <FactScroller
                 facts={FACTS}
-                albumId={album.id}
-                trackTitle={activeTrack !== null ? album.tracks[activeTrack]?.title : null}
+                albumTag={album.tag}
+                songSlug={activeTrack !== null ? album.tracks[activeTrack]?.song : null}
+                eraSlugs={artist.eraAlias?.[album.id] ?? []}
+                exhibit={artist.exhibitSlug}
                 accent={album.accent}
               />
             </div>
