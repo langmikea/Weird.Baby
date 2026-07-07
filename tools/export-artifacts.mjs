@@ -141,6 +141,12 @@ ORDER BY exhibit_name;`;
 // Per-exhibit artifact pull. Parameterized: the badge value is passed as a
 // SQL parameter, not interpolated, so an exotic exhibit name can't break the
 // query (the regex above also guards against weird shapes before we get here).
+// FACTSCROLLER_REPLUMB-20260707 structural lock 1 of 2: kind='fact' rows are
+// excluded from the WALL query at the SQL level, regardless of status. Facts
+// reach visitors ONLY through the facts payload (FACTS_SQL below) consumed by
+// scrollers/recipe cards — never as standalone wall tiles (Mike's standing
+// ruling, FACTSCROLLER_SPEC_v1.0). Lock 2: the facts payload is a separate
+// file (<name>.facts.json) the deck never imports.
 const PER_EXHIBIT_SQL = `SELECT a.id, a.source_url, a.source_platform, a.media_type,
        a.tags, a.description_short, a.description_long,
        a.post_date, a.post_date_confidence,
@@ -152,6 +158,7 @@ FROM artifacts a
 WHERE a.status = 'released'
   AND a.archived_at IS NULL
   AND a.parent_artifact_id IS NULL
+  AND (a.kind IS NULL OR a.kind <> 'fact')
   AND EXISTS (
     SELECT 1 FROM json_each(a.tags)
     WHERE json_each.value = ?
@@ -174,7 +181,27 @@ const CHILDREN_SQL = `SELECT a.id, a.source_url, a.source_platform, a.media_type
 FROM artifacts a
 WHERE a.status = 'released'
   AND a.archived_at IS NULL
+  AND (a.kind IS NULL OR a.kind <> 'fact')
   AND a.parent_artifact_id = ?
+ORDER BY a.id;`;
+
+// Per-exhibit FACTS pull (FACTSCROLLER_REPLUMB-20260707). kind='fact'
+// artifacts (PUV_FACT_MODEL_SPEC) export through this dedicated channel into
+// src/data/exhibits/<name>.facts.json — the payload the player scroller and
+// living recipe cards read. Selection mirrors the wall filter (released,
+// non-archived, exhibit-badged) but keys on kind='fact' — the exact rows the
+// wall query excludes. Era tags are KEPT verbatim on facts (no date-baking,
+// no era derivation): facts are scroller data matched by raw tags, not deck
+// tiles with era pills.
+const FACTS_SQL = `SELECT a.id, a.description_short, a.description_long, a.tags
+FROM artifacts a
+WHERE a.status = 'released'
+  AND a.archived_at IS NULL
+  AND a.kind = 'fact'
+  AND EXISTS (
+    SELECT 1 FROM json_each(a.tags)
+    WHERE json_each.value = ?
+  )
 ORDER BY a.id;`;
 
 // Count released artifacts (parent only) that carry NO exhibit:* badge. These
@@ -389,9 +416,13 @@ function buildArtifactRecord(row, manifest, opts = {}) {
   // proof, 0/37 mismatches, re-proven 2026-07-06 against live MV). A curator
   // era_override in the referenced_dates column bakes through and wins
   // outright client-side (§3.4 — curation is king).
+  // `recipe` joined the exempt class 2026-07-07 (FACTSCROLLER_REPLUMB): living
+  // recipe cards are museum apparatus, era-less by design like the containers
+  // ("containers era-less by design" — derived-era deck-pill precedent).
   const cardKindForEra = sortedTags.card_kind ? sortedTags.card_kind[0] : null;
   const isEraExemptContainer =
-    !opts.isChild && (cardKindForEra === "album" || cardKindForEra === "gallery");
+    !opts.isChild && (cardKindForEra === "album" || cardKindForEra === "gallery" ||
+                      cardKindForEra === "recipe");
   delete sortedTags.era;
   let bakedDates = null;
   let eraOverride = null;
@@ -551,7 +582,60 @@ function buildArtifactRecord(row, manifest, opts = {}) {
     }
   }
 
+  // ─── Recipe cards (FACTSCROLLER_REPLUMB-20260707) ──────────────────────────
+  // A top-level card tagged `card_kind:recipe` is a LIVING card: it renders as
+  // an ordinary wall tile (filter-obedient via its tags) whose body cycles
+  // facts selected from the exhibit's facts payload by the recipe query stored
+  // in its notes JSON: { card_kind:"recipe", recipe:{ all:[], any:[], not:[] } }.
+  // The recipe bakes through verbatim; the client's fact selector interprets it.
+  // A recipe card with missing/malformed recipe notes ships WITHOUT the recipe
+  // field and the client falls back to placeholder rendering — fail visible,
+  // not silent-crash.
+  if (!opts.isChild && cardKind === "recipe") {
+    const notesObj = parseNotesJson(row.notes);
+    record.card_kind = "recipe";
+    const r = notesObj && notesObj.recipe;
+    if (r && typeof r === "object" && !Array.isArray(r)) {
+      const arr = (v) => Array.isArray(v) ? v.filter(x => typeof x === "string" && x.includes(":")) : [];
+      record.recipe = { all: arr(r.all), any: arr(r.any), not: arr(r.not) };
+    }
+  }
+
   return record;
+}
+
+// ─── Row → fact record (FACTSCROLLER_REPLUMB-20260707) ──────────────────────
+// Facts payload shape consumed by the player scroller and living recipe cards:
+// { id, lines:[description_short, description_long], tags:{ns:[values]} }.
+// Tags are grouped exactly like buildArtifactRecord but NOTHING is stripped or
+// derived — era: tags ride verbatim (the scroller's climb matches raw tags).
+function buildFactRecord(row) {
+  let rawTags = [];
+  if (typeof row.tags === "string" && row.tags) {
+    try {
+      const parsed = JSON.parse(row.tags);
+      if (Array.isArray(parsed)) rawTags = parsed.filter(t => typeof t === "string");
+    } catch { /* malformed JSON tag column -> treat as empty */ }
+  }
+  const tagsByNamespace = {};
+  for (const t of rawTags) {
+    const colon = t.indexOf(":");
+    if (colon <= 0) continue;
+    const ns = t.slice(0, colon);
+    const value = t.slice(colon + 1);
+    if (!value) continue;
+    if (!tagsByNamespace[ns]) tagsByNamespace[ns] = [];
+    if (!tagsByNamespace[ns].includes(value)) tagsByNamespace[ns].push(value);
+  }
+  const sortedTags = {};
+  for (const ns of Object.keys(tagsByNamespace).sort()) {
+    sortedTags[ns] = [...tagsByNamespace[ns]].sort();
+  }
+  return {
+    id: row.id,
+    lines: [row.description_short ?? "", row.description_long ?? ""],
+    tags: sortedTags,
+  };
 }
 
 // ─── Atomic write (temp + rename, per v5 §6.1) ──────────────────────────────
@@ -654,8 +738,10 @@ async function main() {
 
     const perExhibit = db.prepare(PER_EXHIBIT_SQL);
     const childrenStmt = db.prepare(CHILDREN_SQL);
+    const factsStmt = db.prepare(FACTS_SQL);
     const fetchChildren = (parentId) => childrenStmt.all(parentId);
     const counts = {};
+    const factCounts = {};
     const filesToWrite = [];
     for (const name of allExhibits) {
       if (!EXHIBIT_NAME_RE.test(name)) {
@@ -679,9 +765,29 @@ async function main() {
           artifacts,
         },
       });
+
+      // FACTSCROLLER_REPLUMB-20260707: dedicated facts payload per exhibit.
+      // Written unconditionally (empty facts:[] for exhibits with no facts) so
+      // a static client import never 404s at build time.
+      const factRows = runSchemaSensitive(() => factsStmt.all(`exhibit:${name}`));
+      logVerbose(opts.verbose, `  ${name}: ${factRows.length} fact(s)`);
+      const facts = factRows.map(buildFactRecord);
+      factCounts[name] = facts.length;
+      filesToWrite.push({
+        name: `${name}.facts`,
+        payload: {
+          metadata: {
+            exhibit: name,
+            exported_at: exportedAt,
+            filter: "kind='fact', released, not archived, badged for this exhibit",
+            schema: "facts v1 — id, lines[2], tags (grouped, era kept verbatim)",
+          },
+          facts,
+        },
+      });
     }
 
-    return { discovered, allExhibits, counts, filesToWrite, skippedNoBadge, vocabularyRows };
+    return { discovered, allExhibits, counts, factCounts, filesToWrite, skippedNoBadge, vocabularyRows };
   });
 
   // Phase 1.1: build the vocabulary payload from the rows we pulled above.
@@ -732,6 +838,7 @@ async function main() {
   ];
   for (const name of result.allExhibits) {
     lines.push(`    ${name}.json: ${result.counts[name] ?? 0} artifact(s)`);
+    lines.push(`    ${name}.facts.json: ${result.factCounts[name] ?? 0} fact(s)`);
   }
   lines.push(`  Asset manifest: ${Object.keys(ASSET_MANIFEST.artifacts).length} artifact(s)` +
              (existsSync(MANIFEST_PATH) ? ` (${MANIFEST_PATH})` : " (absent — no R2 URLs)"));
