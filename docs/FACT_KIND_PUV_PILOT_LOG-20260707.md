@@ -122,4 +122,18 @@ All four: `kind='fact'`, `media_type='text'`, **`status='vault'`** (Flag B optio
 
 **Gate: PASS** (Ops verdict per delegated paste-back check; wording was Mike's, undelegated, closed above).
 
+**Commit gate:** `7edd002` pushed (`e857cac..7edd002`); status clean except the expected untracked stage5 script (rides Stage 5's commit); hash confirmed in log.
+
+---
+
+## STAGE 5 — Export + client sanity (expectation INVERTED per Flag B option b)
+
+Facts are vault-status → they must be ABSENT from the export, and the export must be content-idempotent (only `exported_at` churn). Client-error stop condition is structurally defused twice over: exporter never emits the `kind` column (Stage 1 delta), and no fact reaches the export at all. Content-identical export ⇒ the DEPLOYED client already proves render-unregressed; no rebuild/deploy expected (Stage 6 deploy = no-op unless this stage surprises).
+
+- Script: `tools/fact_kind_stage5_export_verify.ps1` (READ-ONLY) — DB 297/4/integrity ok, 4 facts still vault; hunter_root.json 33 artifacts, zero `MV-HR-20260707` ids, no kind leakage, fresh exported_at; vocabulary.json 22 rows fresh; then git diff proof (expect ONLY exported_at lines in the two data files).
+
+**Paste-back (2026-07-07, verified):** 8/8 OK — DB 297/4/integrity ok, facts all vault; hunter_root.json 33 artifacts, zero MV-HR-20260707 ids, no kind leakage; both exports fresh (03:11:39Z). Content-idempotence PROOF: git diff shows exactly 2 changed lines across both data files — both `exported_at`. `STAGE5_VERIFY CLEAN`. No client error possible and none observed; no build, **no deploy needed** (client artifacts content-unchanged).
+
+**Gate: PASS** (Ops verdict per delegated paste-back check).
+
 **Commit gate:** _pending._
