@@ -1,13 +1,15 @@
 {
-  "generated_at": "2026-07-07T14:26:36.958Z",
+  "generated_at": "2026-07-07T16:14:48.054Z",
   "exhibit": "hunter_root",
   "note": "Derived-Era v0.2 pre-test preview. NOT a deploy artifact. era_by_depth uses hr_era.deriveEraSlugs.",
   "bucket_order": [
-    "early_days",
-    "finding_the_sound",
-    "breakthrough",
-    "on_the_road",
-    "recent"
+    "the_band_years",
+    "going_solo",
+    "life_inside_a_wheel",
+    "dandelions",
+    "skipping_stones",
+    "the_arkansas_era",
+    "crooked_home"
   ],
   "summary": {
     "leaves": 187,
@@ -20,33 +22,39 @@
   "counts_by_depth": {
     "shallow": {
       "counts": {
-        "early_days": 39,
-        "finding_the_sound": 36,
-        "breakthrough": 20,
-        "on_the_road": 42,
-        "recent": 50
+        "the_band_years": 18,
+        "going_solo": 21,
+        "life_inside_a_wheel": 16,
+        "dandelions": 20,
+        "skipping_stones": 15,
+        "the_arkansas_era": 34,
+        "crooked_home": 63
       },
       "multiEraLeaves": 0
     },
     "medium": {
       "counts": {
-        "early_days": 40,
-        "finding_the_sound": 40,
-        "breakthrough": 20,
-        "on_the_road": 66,
-        "recent": 50
+        "the_band_years": 18,
+        "going_solo": 22,
+        "life_inside_a_wheel": 16,
+        "dandelions": 25,
+        "skipping_stones": 15,
+        "the_arkansas_era": 34,
+        "crooked_home": 66
       },
-      "multiEraLeaves": 29
+      "multiEraLeaves": 9
     },
     "deep": {
       "counts": {
-        "early_days": 40,
-        "finding_the_sound": 40,
-        "breakthrough": 20,
-        "on_the_road": 67,
-        "recent": 50
+        "the_band_years": 18,
+        "going_solo": 22,
+        "life_inside_a_wheel": 16,
+        "dandelions": 25,
+        "skipping_stones": 15,
+        "the_arkansas_era": 34,
+        "crooked_home": 66
       },
-      "multiEraLeaves": 30
+      "multiEraLeaves": 9
     }
   },
   "leaves": [
@@ -70,15 +78,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -95,13 +101,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -118,13 +124,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -147,13 +153,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -170,13 +176,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "breakthrough"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "breakthrough"
+        "the_arkansas_era"
       ]
     },
     {
@@ -199,14 +205,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -235,15 +240,15 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_medium": [
-        "finding_the_sound",
-        "on_the_road"
+        "dandelions",
+        "crooked_home"
       ],
       "era_deep": [
-        "finding_the_sound",
-        "on_the_road"
+        "dandelions",
+        "crooked_home"
       ]
     },
     {
@@ -266,13 +271,15 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era",
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era",
+        "crooked_home"
       ]
     },
     {
@@ -289,13 +296,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -312,13 +319,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_medium": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_deep": [
-        "breakthrough"
+        "skipping_stones"
       ]
     },
     {
@@ -341,13 +348,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road"
+        "crooked_home"
       ]
     },
     {
@@ -364,13 +371,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -387,13 +394,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "breakthrough"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "breakthrough"
+        "the_arkansas_era"
       ]
     },
     {
@@ -416,15 +423,15 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_medium": [
-        "finding_the_sound",
-        "on_the_road"
+        "life_inside_a_wheel",
+        "crooked_home"
       ],
       "era_deep": [
-        "finding_the_sound",
-        "on_the_road"
+        "life_inside_a_wheel",
+        "crooked_home"
       ]
     },
     {
@@ -447,13 +454,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road"
+        "crooked_home"
       ]
     },
     {
@@ -470,13 +477,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -493,13 +500,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -522,13 +529,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -551,13 +558,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -580,13 +587,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -609,13 +616,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -630,13 +637,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -653,13 +660,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -680,15 +687,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -709,15 +714,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -738,15 +741,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -767,15 +768,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -796,15 +795,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -825,15 +822,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -854,15 +849,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -883,15 +876,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -912,15 +903,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -941,15 +930,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -970,15 +957,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -999,15 +984,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -1028,15 +1011,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -1057,15 +1038,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -1086,15 +1065,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -1115,15 +1092,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -1138,13 +1113,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -1167,13 +1142,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -1190,13 +1165,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -1213,13 +1188,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -1236,13 +1211,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -1259,13 +1234,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -1282,13 +1257,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -1305,13 +1280,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -1328,13 +1303,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -1351,13 +1326,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -1374,13 +1349,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -1397,13 +1372,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -1420,13 +1395,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -1443,13 +1418,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -1466,13 +1441,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -1489,13 +1464,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "the_band_years"
       ],
       "era_medium": [
-        "early_days"
+        "the_band_years"
       ],
       "era_deep": [
-        "early_days"
+        "the_band_years"
       ]
     },
     {
@@ -1522,13 +1497,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -1555,13 +1530,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -1588,13 +1563,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -1621,15 +1596,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "breakthrough",
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "breakthrough",
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -1656,13 +1629,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -1689,15 +1662,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "breakthrough",
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "breakthrough",
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -1724,13 +1695,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -1757,13 +1728,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -1790,13 +1761,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -1823,13 +1794,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -1856,13 +1827,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -1889,15 +1860,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "breakthrough",
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "breakthrough",
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -1924,13 +1893,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -1945,13 +1914,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -1972,13 +1941,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -1999,13 +1968,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -2026,13 +1995,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -2053,13 +2022,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -2080,13 +2049,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -2107,13 +2076,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -2134,13 +2103,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -2161,13 +2130,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -2188,13 +2157,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -2215,13 +2184,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -2242,13 +2211,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "on_the_road"
+        "the_arkansas_era"
       ]
     },
     {
@@ -2275,13 +2244,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2308,13 +2277,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2341,13 +2310,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2374,13 +2343,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2407,13 +2376,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2440,13 +2409,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2473,13 +2442,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2506,13 +2475,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2539,13 +2508,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2572,13 +2541,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2605,13 +2574,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2638,13 +2607,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2671,13 +2640,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2692,13 +2661,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2719,13 +2688,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2746,13 +2715,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2773,13 +2742,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2800,13 +2769,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2827,13 +2796,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2854,13 +2823,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2881,13 +2850,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2908,13 +2877,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2935,13 +2904,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2962,13 +2931,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -2989,13 +2958,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -3016,13 +2985,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -3049,13 +3018,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ]
     },
     {
@@ -3070,13 +3039,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ]
     },
     {
@@ -3097,13 +3066,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ]
     },
     {
@@ -3124,13 +3093,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ]
     },
     {
@@ -3151,13 +3120,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ]
     },
     {
@@ -3178,13 +3147,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ]
     },
     {
@@ -3205,13 +3174,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ]
     },
     {
@@ -3232,13 +3201,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ]
     },
     {
@@ -3259,13 +3228,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ]
     },
     {
@@ -3286,13 +3255,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ]
     },
     {
@@ -3313,13 +3282,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ]
     },
     {
@@ -3340,13 +3309,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ]
     },
     {
@@ -3367,13 +3336,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ]
     },
     {
@@ -3394,13 +3363,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ]
     },
     {
@@ -3427,13 +3396,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -3460,15 +3429,15 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "finding_the_sound",
-        "recent"
+        "dandelions",
+        "crooked_home"
       ],
       "era_deep": [
-        "finding_the_sound",
-        "recent"
+        "dandelions",
+        "crooked_home"
       ]
     },
     {
@@ -3495,13 +3464,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -3528,15 +3497,15 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "the_arkansas_era"
       ],
       "era_medium": [
-        "finding_the_sound",
-        "on_the_road"
+        "dandelions",
+        "the_arkansas_era"
       ],
       "era_deep": [
-        "finding_the_sound",
-        "on_the_road"
+        "dandelions",
+        "the_arkansas_era"
       ]
     },
     {
@@ -3563,13 +3532,15 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "life_inside_a_wheel"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "life_inside_a_wheel",
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "life_inside_a_wheel",
+        "dandelions"
       ]
     },
     {
@@ -3596,13 +3567,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -3629,13 +3600,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -3662,13 +3633,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -3695,13 +3666,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -3728,15 +3699,15 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days",
-        "finding_the_sound"
+        "going_solo",
+        "dandelions"
       ],
       "era_deep": [
-        "early_days",
-        "finding_the_sound"
+        "going_solo",
+        "dandelions"
       ]
     },
     {
@@ -3751,13 +3722,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -3778,13 +3749,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -3805,13 +3776,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -3832,13 +3803,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -3859,13 +3830,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -3886,13 +3857,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -3913,13 +3884,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -3940,13 +3911,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -3967,13 +3938,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -3994,13 +3965,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -4021,13 +3992,13 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_deep": [
-        "finding_the_sound"
+        "dandelions"
       ]
     },
     {
@@ -4054,13 +4025,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_medium": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_deep": [
-        "breakthrough"
+        "skipping_stones"
       ]
     },
     {
@@ -4087,13 +4058,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_medium": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_deep": [
-        "breakthrough"
+        "skipping_stones"
       ]
     },
     {
@@ -4120,13 +4091,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_medium": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_deep": [
-        "breakthrough"
+        "skipping_stones"
       ]
     },
     {
@@ -4141,13 +4112,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_medium": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_deep": [
-        "breakthrough"
+        "skipping_stones"
       ]
     },
     {
@@ -4168,13 +4139,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_medium": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_deep": [
-        "breakthrough"
+        "skipping_stones"
       ]
     },
     {
@@ -4195,13 +4166,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_medium": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_deep": [
-        "breakthrough"
+        "skipping_stones"
       ]
     },
     {
@@ -4222,13 +4193,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_medium": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_deep": [
-        "breakthrough"
+        "skipping_stones"
       ]
     },
     {
@@ -4249,13 +4220,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_medium": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_deep": [
-        "breakthrough"
+        "skipping_stones"
       ]
     },
     {
@@ -4276,13 +4247,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_medium": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_deep": [
-        "breakthrough"
+        "skipping_stones"
       ]
     },
     {
@@ -4303,13 +4274,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_medium": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_deep": [
-        "breakthrough"
+        "skipping_stones"
       ]
     },
     {
@@ -4330,13 +4301,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_medium": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_deep": [
-        "breakthrough"
+        "skipping_stones"
       ]
     },
     {
@@ -4357,13 +4328,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_medium": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_deep": [
-        "breakthrough"
+        "skipping_stones"
       ]
     },
     {
@@ -4384,13 +4355,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_medium": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_deep": [
-        "breakthrough"
+        "skipping_stones"
       ]
     },
     {
@@ -4411,13 +4382,13 @@
         }
       ],
       "era_shallow": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_medium": [
-        "breakthrough"
+        "skipping_stones"
       ],
       "era_deep": [
-        "breakthrough"
+        "skipping_stones"
       ]
     },
     {
@@ -4444,15 +4415,15 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_medium": [
-        "early_days",
-        "on_the_road"
+        "going_solo",
+        "crooked_home"
       ],
       "era_deep": [
-        "early_days",
-        "on_the_road"
+        "going_solo",
+        "crooked_home"
       ]
     },
     {
@@ -4479,13 +4450,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4500,13 +4471,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4527,13 +4498,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4554,13 +4525,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4581,13 +4552,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4608,13 +4579,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4635,13 +4606,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4662,13 +4633,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4689,13 +4660,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4716,13 +4687,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4743,13 +4714,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4770,13 +4741,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4797,13 +4768,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4824,13 +4795,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4851,13 +4822,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4878,13 +4849,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4905,13 +4876,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4932,13 +4903,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4953,13 +4924,13 @@
         }
       ],
       "era_shallow": [
-        "early_days"
+        "going_solo"
       ],
       "era_medium": [
-        "early_days"
+        "going_solo"
       ],
       "era_deep": [
-        "early_days"
+        "going_solo"
       ]
     },
     {
@@ -4986,13 +4957,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road"
+        "crooked_home"
       ]
     },
     {
@@ -5019,15 +4990,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -5054,13 +5023,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road"
+        "crooked_home"
       ]
     },
     {
@@ -5087,15 +5056,15 @@
         }
       ],
       "era_shallow": [
-        "finding_the_sound"
+        "dandelions"
       ],
       "era_medium": [
-        "finding_the_sound",
-        "on_the_road"
+        "dandelions",
+        "crooked_home"
       ],
       "era_deep": [
-        "finding_the_sound",
-        "on_the_road"
+        "dandelions",
+        "crooked_home"
       ]
     },
     {
@@ -5122,15 +5091,13 @@
         }
       ],
       "era_shallow": [
-        "recent"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road",
-        "recent"
+        "crooked_home"
       ]
     },
     {
@@ -5151,13 +5118,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road"
+        "crooked_home"
       ]
     },
     {
@@ -5178,13 +5145,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road"
+        "crooked_home"
       ]
     },
     {
@@ -5205,13 +5172,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road"
+        "crooked_home"
       ]
     },
     {
@@ -5232,13 +5199,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road"
+        "crooked_home"
       ]
     },
     {
@@ -5259,13 +5226,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road"
+        "crooked_home"
       ]
     },
     {
@@ -5286,13 +5253,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road"
+        "crooked_home"
       ]
     },
     {
@@ -5313,13 +5280,13 @@
         }
       ],
       "era_shallow": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_medium": [
-        "on_the_road"
+        "crooked_home"
       ],
       "era_deep": [
-        "on_the_road"
+        "crooked_home"
       ]
     }
   ]

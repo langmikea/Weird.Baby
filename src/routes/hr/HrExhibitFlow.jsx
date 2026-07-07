@@ -47,6 +47,7 @@ import {
 import { createPortal } from "react-dom";
 import "./HrExhibitFlow.css";
 import { buildDimensions } from "./hr_dimensions.js";
+import { eraForRecord, ERA_DISPLAY, ERA_SLUGS } from "./hr_era.js";
 import EXHIBIT from "../../data/exhibits/hunter_root.json";
 import { HR_JOURNAL_PROMPTS } from "../../data/hr_journal_prompts.js";
 
@@ -91,7 +92,7 @@ const RAW_ARTIFACTS = Array.isArray(EXHIBIT?.artifacts) ? EXHIBIT.artifacts : []
 // authoritative; this derivation never writes back. Idempotent — skips an
 // artifact that already lists "facebook". A shallow clone (+ fresh source array)
 // avoids mutating the imported JSON.
-const ARTIFACTS = RAW_ARTIFACTS.map(a => {
+const FB_ARTIFACTS = RAW_ARTIFACTS.map(a => {
   if (a && a.source_platform === "facebook") {
     const existing = Array.isArray(a.tags?.source) ? a.tags.source : [];
     if (!existing.includes("facebook")) {
@@ -100,7 +101,49 @@ const ARTIFACTS = RAW_ARTIFACTS.map(a => {
   }
   return a;
 });
-const { HR_DIMENSIONS, HR_GROUP_LABELS, displayFor } = buildDimensions(ARTIFACTS);
+// ─── Derived-Era v0.2 — FIXED depth, NO slider (DERIVED_ERA_REWIRE-20260707) ─
+// The export bakes a weighted date-set per leaf and no longer bakes an era
+// label (tools/export-artifacts.mjs + tools/era-derivation.mjs). Era derives
+// HERE, once, at module load, at a FIXED depth — the spec's "medium"
+// (cutoff 0.5; threshold = cutoff × publish anchor 2.0). The depth slider is
+// a LOCKED NO per the 6/17-incident rewire brief; the proximity/applicability
+// filter Mike actually wants is a separate, freshly-specced workstream.
+// eraForRecord (src/routes/hr/hr_era.js): curator era_override wins outright;
+// else derive from dates through src/data/era-buckets.json; else fall back to
+// any legacy baked tags.era (none after the Stage 3 export). Containers carry
+// no dates and derive no era — same visible behavior as before. Downstream is
+// untouched: buildDimensions discovers the derived era values and matchFilter
+// consumes tags.era exactly as it consumes every other facet.
+const FIXED_ERA_DEPTH = 0.5;
+const ARTIFACTS = FB_ARTIFACTS.map(a => {
+  if (!a) return a;
+  const era = eraForRecord(a, FIXED_ERA_DEPTH);
+  const tags = { ...(a.tags || {}) };
+  if (era.length) { tags.era = era; } else { delete tags.era; }
+  return { ...a, tags };
+});
+
+const { HR_DIMENSIONS, HR_GROUP_LABELS, displayFor: displayForBase } = buildDimensions(ARTIFACTS);
+// Era pill labels go date-led (gate ruling 2026-07-07): "<years> · <descriptor>"
+// from src/data/era-buckets.json via ERA_DISPLAY (hr_era.js). DISPLAY ONLY —
+// slugs and derivation untouched. Every era value render routes through
+// displayFor (pills, chips, board columns, filter search — verified), so this
+// wrap covers them all; option labels are remapped for any direct consumer.
+const displayFor = (group, slug) =>
+  (group === "era" && ERA_DISPLAY[slug]) ? ERA_DISPLAY[slug] : displayForBase(group, slug);
+for (const d of HR_DIMENSIONS) {
+  if (d.key === "era") {
+    for (const o of d.options) o.label = ERA_DISPLAY[o.slug] ?? o.label;
+    // Order ruling 2026-07-07: era pills read CHRONOLOGICALLY — bucket order
+    // from era-buckets.json (ERA_SLUGS), not the alphabetical default other
+    // facets keep. Sorting options AND values here at module load propagates
+    // to every consumer (pill columns, board totals, filter overlay): the
+    // column tables are resolved from these arrays after this loop runs.
+    const eraRank = (s) => { const i = ERA_SLUGS.indexOf(s); return i === -1 ? 99 : i; };
+    d.options.sort((a, b) => eraRank(a.slug) - eraRank(b.slug));
+    d.values = d.options.map(o => o.slug);
+  }
+}
 
 // ─── COLOR / FONT TOKENS ────────────────────────────────────────────────────
 // Phase 4b: retargeted from the deck's v28 warm-amber palette to the

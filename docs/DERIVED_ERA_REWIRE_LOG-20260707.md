@@ -38,6 +38,35 @@ Every claim below verified THIS session against live MV (host copy → /tmp, int
 - **Mike runs (only after Stage 3 gate):** `pwsh docs/derived-era-WIP/derived_era_stage4.ps1`. Three anchored verify-or-abort edits to `HrExhibitFlow.jsx`: hr_era import; existing module-load map renamed `FB_ARTIFACTS`; new map derives `tags.era = eraForRecord(a, 0.5)` before `buildDimensions`. Expected line delta +23; script refuses to write on any anchor/count mismatch; restore = `git checkout -- src/routes/hr/HrExhibitFlow.jsx`.
 - **GATE (Mike's, UX-visible):** local render → /hr → Filters. Era pills populate with real counts, 5 eras, no rwth, multi-era artifacts under each era they touch, nothing regressed. Expected pill counts above. Build note: `hr_era.js` uses `import … with { type: "json" }` — expected fine under Vite 8/Node 22; if the build trips on it, STOP and paste the error back (do not hand-patch).
 
+## Stage 4 — GATE VERDICT (Mike, 2026-07-07): mechanics PASS, labels FAIL → Stage 4b
+
+Root cause per ruling: pill UX overclaiming (theme) vs card UX delivering (time window). Ruling: era pill display labels go date-led — `<year range from bucket config> · <soft descriptor>`, era-of-period voice ("The Breakthrough Years", not "Breakthrough"). **DISPLAY ONLY — no derivation, weight, slug, or override changes.** Stage 3 committed at `30beff0`; Stage 4 mechanics applied in working tree, commit held for 4b.
+
+**Stage 4b — PREPARED (Ops), wording APPROVED at UX gate (Hybrid set):**
+2016–2018 · The Early Days / 2019–2020 · Finding the Sound / 2021–2022 · The Breakthrough Years / 2023–2024 · On the Road / 2025 · The Recent Era.
+
+- Verified (host-side grep): every era value render routes through `displayFor()` (pills, chips, board columns, filter-search) → one wrap point covers all; bonus: year digits become searchable in the filter search.
+- Three display-only touches, all client source, all via Mike-run script `docs/derived-era-WIP/derived_era_stage4b_labels.ps1` (anchored, verify-or-abort, double-apply guarded): `era-buckets.json` gains optional `display` per bucket (slug still derives from `label` — unchanged); `hr_era.js` exports `ERA_DISPLAY` (fallback `<years> · <label>` if `display` omitted, so future bucket revisions stay one-file edits); `HrExhibitFlow.jsx` wraps `displayFor` at the buildDimensions destructure + remaps era option labels.
+- Sandbox sim on the Stage-3 export: slugs unchanged, all 5 labels resolve, every derived era value covered, no missing display entries.
+- After the script: back to Mike's eyeball gate (counts/behavior identical to the mechanics-PASS run), then commit Stage 4 + 4b together per the printed command.
+
+## Stage 4c — ERA MODEL RE-RULED (Mike, 2026-07-07, 50,000 ft): 7 album-anchored buckets
+
+Ruling: boundaries 2013 / 2017 / 2019 / 2020 / 2021 / 2022 / 2024–open replace the 5-bucket set; display = era START year (single date), current era "–now"; rwth fold targets The Band Years. Display + bucket redraw only — no derivation/weight/override changes. Naming flag (assume-and-state): buckets live in `era-buckets.json`, not `era-config.json` (the reference-date registry, unchanged by design — this redraw is exactly the artifact-churn-free edit the v0.2 model was built for: one file, no re-derivation, export content-idempotent).
+
+- **Pre-2013 check: CLEAR** — whole-DB min post_date year 2014 (n=168 dated rows), exported population min 2016. No Band Years escalation. Bonus: the open-ended 2024–9999 bucket fixes a latent hole (a 2026-dated vault row exists that the closed 2025–2025 set would have dropped bucket-less on release).
+- **Correctness proof v2** (tools/era-pretest.mjs, Ops-patched host-side): hand tags = year-range oracle from the retired 5-set (rwth = 2016 album anchor); shallow-derived years must honor them; contradictions FLAG, never forced. **Sandbox chain run: 0 flags — all 37 remap cleanly.** Remap: rwth→band_years 15, early_days→band_years 2 / going_solo 1, finding_the_sound→wheel 1 / dandelions 2, breakthrough→skipping_stones 1 / arkansas_era 2, on_the_road→arkansas_era 6 / crooked_home 3, recent→crooked_home 4.
+- rwth fold v2: 15/15 → the_band_years. Underivable: 0. Export content-idempotent (buckets never touch baked dates); export-vs-oracle per-artifact: PASS.
+- Deck pills at fixed 0.5 (sandbox sim): Band Years 2 · Going Solo 1 · Wheel 1 · Dandelions 3 · Skipping Stones 1 · Arkansas Era 8 · Crooked Home 10; 3 multi-era cards; 10 containers era-less.
+- **Mike runs:** `pwsh docs/derived-era-WIP/derived_era_stage4c_rebucket.ps1` (repo root, MV running, 4b-applied tree) → paste back → eyeball gate → combined Stage 4 commit per printed command.
+- **Flagged for the eyeball gate (pre-existing behavior, now conspicuous):** era pill order is alphabetical-by-slug, so date-led labels render non-chronologically (2024, 2020, 2017, 2019, 2021, 2022, 2013). Unchanged behavior per doctrine #7 — if it reads wrong, chronological ordering is a one-line client edit; separate ruling, script ready on request.
+
+## Stage 4d — ORDER RULING (Mike, 2026-07-07): era pills chronological
+
+Era-only order change: pills sort by bucket order (`ERA_SLUGS` from era-buckets.json) instead of the alphabetical-by-slug default; other facets untouched. Grounded host-side: pill columns, board totals and filter overlay all consume `dim.values`/`dim.options`, whose column tables resolve at module load AFTER the 4b era loop — sorting there propagates everywhere. Sandbox sim confirms: 2013 Band Years → 2017 Going Solo → 2019 Wheel → 2020 Dandelions → 2021 Skipping Stones → 2022 Arkansas → 2024–now Crooked Home (was 2024, 2020, 2017, 2019, 2021, 2022, 2013).
+
+- **Mike runs:** `pwsh docs/derived-era-WIP/derived_era_stage4d_pill_order.ps1` (after 4b; order-independent of 4c). Two anchored verify-or-abort edits to `HrExhibitFlow.jsx` only (+10 lines). Commit rides the combined Stage 4 commit from the 4c script (add the 4d script path to the git-add list).
+
 ## Stage 5 — pending: dist clean-remove → build → preview → deploy → verify live → STATE.md (SHIPPED block; remove NEXT #5; flip press-batch gate to UNBLOCKED) → this log closed with paste-backs + hashes → session-close clean.
 
 ## Out-of-scope confirmations (stop conditions honored)

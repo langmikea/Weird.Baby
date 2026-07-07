@@ -30,6 +30,16 @@ export function eraSlug(label) {
 // Era slugs in bucket order — the stable pill set for the Era column.
 export const ERA_SLUGS = ERA_BUCKETS.map(b => eraSlug(b.label));
 
+// Date-led display labels for era pills (gate ruling 2026-07-07): slug ->
+// "<year range> · <soft descriptor>", sourced from the bucket config's
+// optional `display` (fallback: "<years> · <label>"). DISPLAY ONLY — slugs,
+// derivation, weights and overrides untouched. A bucket revision that moves
+// the bounds updates the visible years in era-buckets.json alone.
+export const ERA_DISPLAY = Object.fromEntries(ERA_BUCKETS.map(b => [
+  eraSlug(b.label),
+  b.display || `${b.start === b.end ? b.start : `${b.start}–${b.end}`} · ${b.label}`,
+]));
+
 // Map a year to its bucket slug (or null if outside every range).
 export function bucketSlugForYear(year) {
   if (typeof year !== "number" || !Number.isFinite(year)) return null;

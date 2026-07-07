@@ -1,21 +1,25 @@
 {
-  "schema": "era-buckets v0.2 — committed client config (imported by hr_era.js next to vocabulary.json)",
-  "authority": "docs/derived-era-spec_v0.2.md §3.2",
+  "schema": "era-buckets v0.3 — committed client config (imported by hr_era.js next to vocabulary.json)",
+  "authority": "docs/derived-era-spec_v0.2.md §3.2 · re-ruled 2026-07-07 (Mike): 7 album-anchored buckets",
   "note": [
-    "The ONLY file Mike edits on each bucket revision (≥3 expected near-term).",
-    "Maps a year range -> era label. The client maps each record's weighted",
-    "date-set through these ranges at read time, so editing this file changes",
-    "nothing about the baked artifacts — no re-export, no MV write.",
-    "rwth is DROPPED as a value: it folds into Early Days by date (2016).",
-    "The era SLUG used for tag membership is derived from the label by",
-    "lowercasing and replacing runs of non-alphanumerics with underscores",
-    "('Early Days' -> 'early_days'), which matches the existing MV era: slugs."
+    "The ONLY file Mike edits on each bucket revision. Maps a year range ->",
+    "era label. The client maps each record's weighted date-set through these",
+    "ranges at read time, so editing this file changes nothing about the baked",
+    "artifacts — no re-export, no MV write. This v0.3 redraw (5 -> 7 buckets)",
+    "is itself the proof: artifacts untouched, one file edited.",
+    "The era SLUG derives from `label` (lowercase, non-alphanumerics -> _).",
+    "display: date-led pill label — era START year only, current era '–now'",
+    "(gate re-rule 2026-07-07). The last bucket is OPEN-ENDED (end: 9999) so",
+    "future-dated releases always land in the current era.",
+    "rwth folds into The Band Years by date (run_with_the_hunt -> 2016)."
   ],
   "buckets": [
-    { "label": "Early Days",        "start": 2016, "end": 2018 },
-    { "label": "Finding the Sound", "start": 2019, "end": 2020 },
-    { "label": "Breakthrough",      "start": 2021, "end": 2022 },
-    { "label": "On the Road",       "start": 2023, "end": 2024 },
-    { "label": "Recent",            "start": 2025, "end": 2025 }
+    { "label": "The Band Years",      "start": 2013, "end": 2016, "display": "2013 · The Band Years" },
+    { "label": "Going Solo",          "start": 2017, "end": 2018, "display": "2017 · Going Solo" },
+    { "label": "Life Inside a Wheel", "start": 2019, "end": 2019, "display": "2019 · Life Inside a Wheel" },
+    { "label": "Dandelions",          "start": 2020, "end": 2020, "display": "2020 · Dandelions" },
+    { "label": "Skipping Stones",     "start": 2021, "end": 2021, "display": "2021 · Skipping Stones" },
+    { "label": "The Arkansas Era",    "start": 2022, "end": 2023, "display": "2022 · The Arkansas Era" },
+    { "label": "Crooked Home",        "start": 2024, "end": 9999, "display": "2024–now · Crooked Home" }
   ]
 }

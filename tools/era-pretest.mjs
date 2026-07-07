@@ -17,7 +17,7 @@ import { writeFileSync } from "node:fs";
 import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadEraConfig, deriveDates } from "./era-derivation.mjs";
-import { deriveEraSlugs, eraForRecord, bucketSlugForYear, eraSlug, ERA_SLUGS, DEPTH }
+import { deriveEraSlugs, eraForRecord, bucketSlugForYear, eraSlug, ERA_SLUGS, DEPTH, PUBLISH_WEIGHT }
   from "../src/routes/hr/hr_era.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -98,20 +98,47 @@ function main() {
   const rwth = leaves.filter(l => l.handEra.includes("rwth"));
   const rwthBad = rwth.filter(l => {
     const e = deriveEraSlugs(l.dates, DEPTH.shallow);
-    return !(e.length === 1 && e[0] === "early_days");
+    return !(e.length === 1 && e[0] === "the_band_years");
   });
 
   // ─── 3. CORRECTNESS PROOF: derive-at-shallow == the hand era: tags (§8) ────
   // hand 'rwth' folds to 'early_days'. Every other hand value should equal the
   // single shallow-derived bucket.
-  const mapHand = (slug) => (slug === "rwth" ? "early_days" : slug);
+  // v2 (7-bucket re-rule 2026-07-07): hand era: tags were applied against the
+  // RETIRED 5-bucket set. They remain the human-judgment oracle as YEAR
+  // RANGES: a hand tag asserts the leaf belongs in its old bucket's years
+  // (rwth = the 2016 album anchor). Proof: every shallow-surviving year falls
+  // inside the union of the hand tags' old ranges, and each hand tag is
+  // witnessed by at least one shallow year. The NEW bucket then follows from
+  // the year. Contradictions are FLAGGED, never forced.
+  const OLD_ERA_RANGES = {
+    early_days: [2016, 2018], finding_the_sound: [2019, 2020],
+    breakthrough: [2021, 2022], on_the_road: [2023, 2024],
+    recent: [2025, 2025], rwth: [2016, 2016],
+  };
+  const shallowYears = (dates) => {
+    if (!dates.length) return [];
+    const maxw = Math.max(...dates.map(d => d.weight));
+    const thr = DEPTH.shallow * PUBLISH_WEIGHT;
+    return [...new Set(dates.filter(d => d.weight >= thr || d.weight === maxw).map(d => d.year))];
+  };
   const handLeaves = leaves.filter(l => l.handEra.length > 0);
   const mismatches = [];
+  const remap = new Map();  // "oldTag -> newBucket" counts, for the report
   for (const l of handLeaves) {
-    const expected = [...new Set(l.handEra.map(mapHand))].sort();
-    const derived = deriveEraSlugs(l.dates, DEPTH.shallow).slice().sort();
-    if (JSON.stringify(expected) !== JSON.stringify(derived)) {
-      mismatches.push({ id: l.id, hand: l.handEra, expected, derived });
+    const years = shallowYears(l.dates);
+    const derived = deriveEraSlugs(l.dates, DEPTH.shallow);
+    const unknown = l.handEra.filter(h => !OLD_ERA_RANGES[h]);
+    const inSomeRange = (y) => l.handEra.some(h => OLD_ERA_RANGES[h] && y >= OLD_ERA_RANGES[h][0] && y <= OLD_ERA_RANGES[h][1]);
+    const witnessed = (h) => OLD_ERA_RANGES[h] && years.some(y => y >= OLD_ERA_RANGES[h][0] && y <= OLD_ERA_RANGES[h][1]);
+    if (unknown.length || !years.length || !years.every(inSomeRange) || !l.handEra.every(witnessed)) {
+      mismatches.push({ id: l.id, hand: l.handEra, years, derived });
+      continue;
+    }
+    for (const h of l.handEra) {
+      const y = years.find(yy => yy >= OLD_ERA_RANGES[h][0] && yy <= OLD_ERA_RANGES[h][1]);
+      const k = `${h} -> ${bucketSlugForYear(y)}`;
+      remap.set(k, (remap.get(k) || 0) + 1);
     }
   }
 
@@ -162,18 +189,20 @@ function main() {
   P("════════════════════════════════════════════════════════════════════");
   P(`Leaves evaluated: ${leaves.length}  (top-level + album/gallery children; containers exempt)`);
   P("");
-  P("── CORRECTNESS PROOF (derive-at-shallow reproduces hand era: tags) ──");
-  P(`  Hand-tagged leaves checked: ${handLeaves.length}   Mismatches: ${mismatches.length}`);
+  P("── CORRECTNESS PROOF v2 (shallow-derived years honor the hand era: tags' old ranges) ──");
+  P(`  Hand-tagged leaves checked: ${handLeaves.length}   Flagged (no clean map): ${mismatches.length}`);
   if (mismatches.length) {
-    for (const m of mismatches) P(`    MISMATCH ${m.id}: hand=${JSON.stringify(m.hand)} expected=${JSON.stringify(m.expected)} derived=${JSON.stringify(m.derived)}`);
+    for (const m of mismatches) P(`    FLAG ${m.id}: hand=${JSON.stringify(m.hand)} shallowYears=${JSON.stringify(m.years)} derivedNew=${JSON.stringify(m.derived)}`);
   } else {
-    P("  ✓ 0 mismatches — derivation reproduces every hand-applied era tag.");
+    P("  ✓ 0 flags — every hand tag remaps cleanly to the 7-bucket set.");
   }
+  P("  Remap (old hand tag -> new bucket · leaf count):");
+  for (const [k, n] of [...remap.entries()].sort()) P(`    ${k} · ${n}`);
   P("");
-  P("── rwth fold (era:rwth → Early Days) ──");
-  P(`  era:rwth leaves: ${rwth.length}   not folding to early_days: ${rwthBad.length}`);
+  P("── rwth fold (era:rwth → The Band Years, re-rule 2026-07-07) ──");
+  P(`  era:rwth leaves: ${rwth.length}   not folding to the_band_years: ${rwthBad.length}`);
   if (rwthBad.length) for (const l of rwthBad) P(`    BAD ${l.id} -> ${JSON.stringify(deriveEraSlugs(l.dates, DEPTH.shallow))}`);
-  else P("  ✓ all era:rwth leaves derive to ['early_days'] at shallow.");
+  else P("  ✓ all era:rwth leaves derive to ['the_band_years'] at shallow.");
   P("");
   P("── Underivable leaves (no derivable date; era is hard-required) ──");
   P(`  Count: ${underivable.length}   ${underivable.length ? "" : "(spec §6 expected 2 — see report note)"}`);

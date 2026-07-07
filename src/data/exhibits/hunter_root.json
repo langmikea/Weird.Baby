@@ -1,7 +1,7 @@
 {
   "metadata": {
     "exhibit": "hunter_root",
-    "exported_at": "2026-07-07T14:26:36.789Z",
+    "exported_at": "2026-07-07T16:14:48.220Z",
     "filter": "released, not archived, badged for this exhibit",
     "vocabulary_csv_sha": null,
     "derived_era": "v0.2 — weighted date-sets baked on leaves; era derived client-side (era-buckets.json)"
