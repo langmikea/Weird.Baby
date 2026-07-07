@@ -1,0 +1,79 @@
+# `fact` Kind + PUV Pilot — RUN LOG
+
+**Brief:** `FACT_KIND_PUV_PILOT_BRIEF-20260707.md` · **Authority:** PUV_FACT_MODEL_SPEC.md + MV vocab migration run log (deferred items) + kind-governance-spec.md. Spec outranks brief on conflict.
+**Run date:** 2026-07-07 · **Executor:** Ops (Claude, Cowork) · **Host execution + gates:** Mike
+**Pattern:** ALL DB writes host-side pwsh; paste-back verified; explicit "pass" from Mike at every gate; commit gate every stage (Stage 0: record only, no commit per brief).
+**Stop conditions:** any Stage-2 integrity mismatch · any Stage-5 client error · any vocabulary change not named in the brief/deferred list.
+
+Orientation verified this session (read-only): WBM HEAD `2e2e789` (brief committed), MV HEAD `15e5bda` — both match the migration run log's close. Prerequisite (vocabulary reconciliation complete) confirmed against `MV_VOCAB_MIGRATION_LOG-20260624.md`: Stages 0–4, 6, 8 all PASS, deploy `ffcf7fbd`, `fact` add explicitly deferred to this workstream (F10/Stage 7).
+
+---
+
+## STAGE 0 — Backup (MANDATORY FIRST)
+
+- Script: `tools/fact_kind_stage0_backup.ps1` (written this session; Mike runs host-side, MV server stopped).
+- Writes: `core/backups/mediavault_pre-fact-kind-<UTC>.sqlite` (+ throwaway verifier in %TEMP%). `core/backups/` gitignored by policy; durable home = OneDrive mirror.
+- Verification to capture from paste-back: backup path; SRC/DST byte + sha256 match; `PRAGMA integrity_check` = ok on the BACKUP opened read-only; artifacts=293; band=288/bands=0/fact=0; vocabulary=22 rows; kind column filled=146; current artifacts DDL kind-CHECK region (feeds Stage 1 delta); git status/log both repos.
+
+**Paste-back (2026-07-07T02:08Z, verified):**
+
+- Backup: `core/backups/mediavault_pre-fact-kind-20260707T020813Z.sqlite`
+- SRC/DST both 1,953,792 bytes; sha256 both `2848EBE829DBC8CA398B23EC5A50A32AC81267EBE8D2F62715FE87310224BCA9`; no WAL/SHM present.
+- Backup read-only open: `integrity_check=ok`; artifacts=293; band 288 / bands 0 / fact 0; vocabulary 22 rows; tags registry 211 slugs (consistent with migration Stage 2 close 210 − 2 drops + 3 adds in Stage 3); kind column filled 146 (release 107, performance 23, candid 9, announcement 6, studio 1, NULL 147).
+- Current artifacts DDL kind CHECK captured (feeds Stage 1): `CHECK(kind IN ('performance','release','announcement','studio','candid','interview','fan'))` — 7 values, `fact` absent, column nullable (containers exempt per kind-governance-spec §2).
+- Git at gate: MV clean at `15e5bda`; WBM at `2e2e789` with 2 expected untracked files (this log + stage0 script). No commit this stage per brief; both files ride a later commit gate.
+
+**Gate: PASS** (Mike, explicit, 2026-07-07). Delegation arrangement stated on the record: read-only/verification gates (0, 1, paste-back checks) — delegated; verifier's pass counts when every expected check is clean, ANY anomaly escalates to Mike. Never delegated: Stage 2 swap go-ahead, Stage 4 fact wording (voice = UX = Mike), rider scope.
+
+---
+
+## STAGE 1 — Authorities delta (read-only)
+
+Sources read this session: PUV_FACT_MODEL_SPEC.md, MV_VOCAB_MIGRATION_BRIEF/LOG-20260624.md, kind-governance-spec.md, live DB (Stage-0 backup, sha256-matched to host paste-back `2848EBE8…` — mount verified current for the DB), `tools/export-artifacts.mjs` (host-side reads), `core/tag_vocabulary.json` (HOST-side reads only — the bash mount serves the STALE pre-Stage-6 copy, 3,369 bytes / Jun 13: READ-LAG hazard reconfirmed live, per OPERATIONS §8).
+
+### 1. Current kind CHECK set (host-verified, Stage 0 paste-back)
+
+`CHECK(kind IN ('performance','release','announcement','studio','candid','interview','fan'))` — 7 values, column nullable (containers exempt, kind-governance-spec §2), appended after `archived_at`, `referenced_dates` follows. Filled 146/293 (release 107, performance 23, candid 9, announcement 6, studio 1; NULL 147).
+
+### 2. What the rebuild adds
+
+**`fact` — and nothing else.** F10 (locked): "`fact` joins the `kind` COLUMN — but that is Stage 7, a SEPARATE later workstream." The deferred list names no other CHECK change; content_kind/card_kind kept (F4/F5), artifact_kind/format routing is backlog, harmonica is the rider (own commit, after Stage 3). New set = existing 7 + `'fact'` (8 values). Everything else byte-preserved.
+
+Rebuild mechanics ground-truthed: no triggers, no views; 6 named indexes on artifacts (+ PK autoindex) — DDL captured; only FK is the self-FK `parent_artifact_id REFERENCES artifacts(id) ON DELETE CASCADE`; `ingest_queue.artifact_id` is a plain column, NO FK — no external dependency. 28 columns.
+
+### 3. Fact-artifact shape (spec → live columns)
+
+- **Kind:** `kind='fact'` column; `media_type='text'`; `status='released'` (required — export selects released+badged only); tag `exhibit:hunter_root` (export discovery keys on it).
+- **Fact text (two-line surface):** `description_short` = line 1, `description_long` = line 2 — exactly the fields the exporter already emits as `title`/`description`. No new field, no schema change.
+- **Breadcrumb:** `source_url` where a URL exists; `source_platform` + matching `source:` tag from the RECONCILED allowed set only (preserves the migration's tag==column invariant); marker values for sourceless facts (`operator-knowledge`/`artist-direct`/`unverified` — spec-named) live in `ingest_source` (ungoverned free field, existing values are ingest-channel strings). `referenced_dates` available for the Nick-Root-2021 date.
+- **Scope tags:** existing namespaces only — `band:`/`album:`/`song:`/`era:`/`topic:`. No new namespace.
+- **Weight:** NO home in the live schema (no column; kind values are not tags). PROPOSED: defer weight to the FactScroller re-wire workstream (no consumer exists in this brief). Decision at Stage 4 gate.
+- **Vote slot:** reserved, unbuilt, nothing to do (spec Deferred).
+- **id:** `MV-HR-{YYYYMMDD}-{seq}` per id_format registry + `id_sequence` table.
+
+### 4. FLAGS (anomalies — escalated, not improvised)
+
+- **FLAG A — brief vs registry ground truth.** Brief Stage 3 says "Register `fact` in the vocabulary registry (usage_count 0)". Ground truth: kind values are NOT in the DB `vocabulary` table (no kind namespace row) and NOT in the `tags` registry (zero `kind:*` slugs) — Kind's registry is the `kind_column` block in `tag_vocabulary.json` (which already notes "fact joins this set in the later fact workstream"). Spec-conformant resolution (spec wins): Stage 3 = add `fact` to `kind_column.values` + `value_meta`; DB vocabulary table untouched; regenerated client `vocabulary.json` expected content-identical. No `tags` row is created — a `kind:fact` slug would put a non-tag in the tag registry, diverging from all 7 existing kind values.
+- **FLAG B — Stage 5 expectation vs exporter reality.** `PER_EXHIBIT_SQL` does NOT select the `kind` column — the client never sees `kind='fact'`, so "client errors on unknown kind" is structurally impossible. BUT released fact artifacts WILL export as ordinary records → render as placeholder text tiles on the /hr wall and count in filter-board facets. Visible UX consequence; Mike decides at the Stage 4 gate (before any insert): accept tiles for pilot / hold facts at vault (conflicts with brief's "facts present in hunter_root.json") / exporter guard (code change — flagged loudly per brief). Also: Stage 5's "vocabulary carries `fact`" is satisfied by `tag_vocabulary.json` kind_column, not client vocabulary.json.
+- **FLAG C (minor) — display label** for `fact` in `value_meta` ("Fact"?) — Mike's word; bundle with Stage 4 gate.
+
+**Gate: PASS** (Mike, with the Stage 2 swap approval). Flag resolutions: **A** — spec-conformant reading accepted (kind_column block IS the registry; no DB registry row). **B — Mike chose option (b): pilot facts stay `status='vault'`, NOT released.** Deliberate deviation from the brief's Stage 5 wording ("facts present in hunter_root.json"), Mike's call at gate, UX authority: no fact tiles on the wall, no facet-count changes. Stage 5 verification INVERTS: export runs clean, facts ABSENT from hunter_root.json (vault never exports — established), export content-idempotent vs pre-insert. **C + weight** — still queued for the Stage 4 gate.
+
+---
+
+## STAGE 2 — Table rebuild: kind CHECK gains `fact` (host-side)
+
+- Script: `tools/fact_kind_stage2_rebuild.ps1` — pinned to Stage-0 sha256; one transaction; all parity checks BEFORE the drop; rollback-on-any-mismatch; post-swap FK/integrity/distribution/invariant checks; stop-condition on any failure.
+- **Swap gate: APPROVED by Mike explicitly (undelegated) — "Swap approved — go."**
+
+**Paste-back (2026-07-07, verified):**
+
+- Preconditions: no WAL/SHM; live sha256 == pinned `2848EBE8…`.
+- Rebuild: 293 rows copied; two-way EXCEPT parity 0/0 across all 28 columns; swap + 6 indexes recreated; `foreign_key_check` 0; `integrity_check=ok`.
+- Post-swap: new DDL carries `CHECK(kind IN (…,'interview','fan','fact'))` exactly once; column list identical (28); named indexes 6/6; kind distribution unchanged (147 NULL / 107 release / 23 performance / 9 candid / 6 announcement / 1 studio); source tag==column 293/293; band 288; vocabulary 22 rows. `REBUILD_OK`.
+- Live DB sha256 now `F983A84014BD31626BDC8B3733DA1DEE533172C080B75D5032E3808B87BA2E7F`; no WAL/SHM.
+- Git: MV clean (DB untracked by policy); WBM 3 untracked (this log + stage0/stage2 scripts) — ride this stage's commit gate.
+
+**Gate: PASS** (Ops verification verdict per delegated paste-back check — every expected value clean; swap itself was Mike's explicit approval).
+
+**Commit gate:** _pending._
