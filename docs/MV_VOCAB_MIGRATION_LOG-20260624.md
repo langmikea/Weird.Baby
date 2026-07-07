@@ -44,7 +44,15 @@ Ground-truth reads (this session, read-only): `vocabulary` = 19 rows; tier-3 sor
 
 ## STAGE 2 — usage_count rebuild + slug reconciliation
 
-_Not started._
+Stage 1 commit gate first: `e685cff` pushed (`4eced72..e685cff`), status clean.
+
+Dry-run (read-only, 2026-07-07, post-Stage-1 state confirmed fresh through mount): registry 247 slugs vs 210 distinct payload slugs; 180 already correct. Diff: **16 adds** (used-but-unregistered: attributes:link, card_kind:gallery, content_kind:announcement/music/performance, era:breakthrough/rwth, format:photo/text/video/web, source:other, topic:gear/recording/songwriting/touring), **53 drops** (all zero-usage: 48 decomposed `unsorted:*`, 5 TAXONOMY_v1 album stubs, source:distrokid — F7 pre-empts that piece of F6), **14 count fixes** (incl. bands:hunter_root 283→284, exhibit:hunter_root 292→293, content_kind:studio 78→79 — the exact D-g drift). Post: 247−53+16 = 210, closes exactly.
+
+- Script: `tools/mv_vocab_stage2_registry_rebuild.ps1` — recomputes from payloads at run time, pinned to 16/53/14; aborts clean on drift. Adds use registry convention (display_name NULL, created_at 'YYYY-MM-DD HH:MM:SS' UTC).
+
+**Paste-back (2026-07-07, verified):** applied exactly the dry-run diff — 53 drops / 16 adds / 14 fixes, lists byte-matching the dry run. Closure: registry 210 slugs; count mismatches 0; unregistered payload slugs 0; zero-usage rows 0; artifacts 293; integrity_check ok. MV git clean at `e042b18`. (Harmless `utcnow` DeprecationWarning in worker; no effect.)
+
+**Gate: PASS.**
 
 ## STAGE 3 — source collapse + allowed-set (fresh disagreement measurement to be recorded here)
 
