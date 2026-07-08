@@ -146,8 +146,9 @@ The gift shop is LIVE on weird.baby/shop (verified incognito). Supersedes the "d
 
 ## BACKUP STATUS
 
-- Off-GitHub: OneDrive mirror at `~\OneDrive\_backups\weird-baby-museum\`, `753b17e`, 2026-06-17. POINT-IN-TIME (does not auto-update).
-- STANDING OPS ITEMS (not yet automated): (a) periodic re-mirror so backup stays current; (b) quarterly restore-drill per charter 3.4 — a backup nobody restored is a rumor.
+- Off-GitHub (repo): OneDrive mirror at `~\OneDrive\_backups\weird-baby-museum\`, `753b17e`, 2026-06-17. POINT-IN-TIME (does not auto-update).
+- **DB backups (MediaVault): NOW MIRRORED — 2026-07-07.** Discovery found the OneDrive DB-backup home was EMPTY (the "durable home for DB backups" was aspirational — 34 local snapshots existed only on disk). All 34 `.sqlite` backups copied + sha256-verified to `~\OneDrive\_backups\MediaVault\core\backups\` (mirrors the source tree). Critical `mediavault_pre-factscroller-20260707T020813...T202907Z.sqlite` verified (`72BF738A…`). Re-run `C:\AI\mirror_db_backups.ps1` after any new backup — it is idempotent (copies only missing/changed, verifies each).
+- STANDING OPS ITEMS (not yet automated): (a) periodic re-mirror so backups stay current — now a one-command step (`mirror_db_backups.ps1`); (b) quarterly restore-drill per charter 3.4 — a backup nobody restored is a rumor.
 
 ## CANNOT-VERIFY-FROM-MUSEUM-SESSION (flag, separate pass)
 
