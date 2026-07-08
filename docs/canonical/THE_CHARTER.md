@@ -1,17 +1,20 @@
 # THE CHARTER — Weird.Baby
-**Status:** DRAFT v0.1 — awaiting Papa's pen. Not published.
-**Drafted:** 2026-07-06, from the founding conversation + VISION.md + April 2026 notes.
+**Status:** DRAFT v0.3 — awaiting Papa's full review. Not published.
+**v0.3:** folds in the funding doctrine (CHARTER_RAW_LEDS-20260707) — the Coffers and the Beneficiaries. v0.2 rulings preserved.
 **Distinct from:** OPS-CHARTER.md (internal working agreement). This is the soul document.
 
-> *"I'm not a rich man, but I've got enough to finish.
-> Invest the rest in ___."* — Papa Weird.Baby
+> *"I'm not a rich man, but I've got enough to finish."*
+> *"Why keep grabbing for more? Take all you need, not grab all you can."*
+> *"We know the names of the people who kept the most for themselves
+> in life. They're the Illionaires."* — Papa Weird.Baby
 
 ## What Weird.Baby Is
-[ THE SENTENCE — still unwritten. April knew it was missing; it still is.
-  Candidates to react to, not accept:
-  - "Weird.Baby is a museum that gives everything away."
-  - "Weird.Baby turns the love of music into good for everyone."
-  - "One person, a free museum, and everything it earns handed to the world." ]
+Weird.Baby is built from gifts and gives everything away.
+Everything it needs arrives free, as donated service. Every dollar
+it generates leaves, as charity. Nothing is bought. Nothing is kept.
+
+[ THE SENTENCE candidate, Papa 2026-07-06:
+  "Take all you need, not grab all you can." — react on review ]
 
 ## The Purpose — immutable
 Weird.Baby exists to make the world demonstrably better, and it starts
@@ -33,6 +36,31 @@ Everything else in this document protects that.
    to make more pie.
 6. **Methods change. Purpose doesn't.** How things get done will be
    rewritten a thousand times. What they're done *for* is written once.
+
+## The Coffers — how the LEDs stay on
+Weird.Baby doesn't make money and holds no assets. Its few costs are
+small, named, and public — and each one is covered by a sponsor who
+pays for the thing itself, never into a fund:
+- Every cost has a name, a number, and a sponsor on the record.
+- Every cost has a METER. When a cost is covered, its meter reads full,
+  its door says "we're good, thanks!" and closes. No overfilling.
+  No pooling. Not even a generous dollar gets held.
+- Help arrives as the THING: pay the registrar directly; buy the actual
+  giveaway guitar and ship it; pay the store to ship the stickers. If
+  your help would arrive as money in Weird.Baby's hands, it isn't help
+  we can take — and we'll happily show you the door that is.
+- The proof is structural: there is no account to fill. There has
+  never been one. There never will be.
+
+## The Beneficiaries — how the giving lands
+Contributions and proceeds are forwarded to established charitable
+organizations, and to people caught doing conspicuous good.
+- Beneficiaries are CHOSEN, never applied-to. There is no application,
+  no pitch meeting, no grant form.
+- Want some of that charitable donation stuff? The honest truth:
+  consistently get into the public eye for acting like a complete
+  WeeBee. Direct contact hurts your chances.
+- We find you being publicly good. That's the whole process.
 
 ## Succession
 When a Papa's keeping ends, one person — chosen, not elected; willing,
@@ -56,5 +84,9 @@ with it, you'd have to be an absolute turd.
 1. **Acquisition escape clause.** April 2026 allowed "sell only if the
    buyer can do more good"; the founding conversation leaned never.
    Unresolved. Parked 2026-07-06.
-2. **The blank in Papa's quote.** What exactly the rest is invested in —
-   the one word or phrase this whole document points at. Still the work.
+2. **The blank in Papa's quote.** Direction found 2026-07-06: the ethic
+   is "take all you need, not grab all you can." Whether that phrase IS
+   the answer or points at it — Papa's call on full review.
+3. **The domain-registration mechanism.** The meter's link must pay the
+   registrar directly — in-kind, never a held balance. Mechanism TBD
+   at build time (Ops flag, 2026-07-07).
