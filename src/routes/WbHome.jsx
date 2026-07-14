@@ -123,9 +123,12 @@ export default function WbHome() {
           <div className="wb-tagline">something is being built here</div>
           <nav className="wb-directory" aria-label="Museum directory">
             <div className="wb-dir-label">Directory</div>
-            <button className="wb-dir-entry" onClick={() => navigate("/hr")}>
-              <span>Hunter Root</span><span className="wb-dir-arrow">→</span>
-            </button>
+            {/* Hunter Root exhibit delisted 2026-07-07 (Mike's direction).
+                /hr route remains live but unlinked; proper shutdown is a
+                future workstream after the dust settles. */}
+            <div className="wb-dir-entry" style={{ cursor: "default" }}>
+              <span>Robots</span><span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "0.52rem", letterSpacing: "0.16em", color: "#9b978d" }}>coming soon</span>
+            </div>
             <button className="wb-dir-entry" onClick={() => navigate("/wb")}>
               <span>Weird.Baby</span><span className="wb-dir-arrow">→</span>
             </button>
