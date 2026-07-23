@@ -69,8 +69,11 @@ export default function Robots() {
             </button>
           </nav>
         </div>
+        {/* Text = The Record lines 178 / 59 / 47 verbatim (Mike's words,
+            excavation doc: LANDING_VOICE_CANDIDATES-20260723.md).
+            PROPOSED markers dropped per the mega-shift order — this is the
+            ready-to-ship version, staged for Mike's museum sitting. */}
         <div className="rb-right">
-          <span className="rb-proposed">proposed — Mike's words, verbatim (The Record, entry of record line 178); swap or approve</span>
           <p className="rb-note">
             What&rsquo;s the Greatest Enigma in the World? MGK-VIIIp That&rsquo;s
             what. A machine built to tell the future but discontinued for the
@@ -79,17 +82,13 @@ export default function Robots() {
             Then re-shut down only to appear in our possession? I know,
             it&rsquo;s confusing. But that&rsquo;s what Enigmas are, Intriguing.
           </p>
-          <span className="rb-proposed">proposed — The Record line 59</span>
           <p className="rb-whisper">
             But whoever ABEAL was, whatever they did, there is no trace of
             them today. It is a true Enigma.
           </p>
           <div className="rb-rule" />
-          <span className="rb-proposed">proposed — The Record line 47</span>
           <div className="rb-foot">
             We&rsquo;ll keep you posted with updates as we uncover more.
-            <br />[PAPA: remaining blocks — candidates at
-            LANDING_VOICE_CANDIDATES-20260723.md]
           </div>
         </div>
       </div>

@@ -61,6 +61,7 @@ body.usermode .keyhint{display:none}
 body.usermode .device>span:not(.px){display:none}
 body.usermode .lbl span{display:none}
 body.usermode .btns button[onclick="devRunBoot()"]{display:none}
+body.usermode .devonly{display:none}
 </style>
 <div class="cols">
  <div class="device">
@@ -82,6 +83,8 @@ body.usermode .btns button[onclick="devRunBoot()"]{display:none}
    <button onclick="devRestartBoot()" title="power-cycle, then run the boot sequence (boot is MANDATORY on the unit per porch doctrine)"><span class="ico" style="font-size:13px">&#9211;</span> Restart (boot)</button>
    <button onclick="devRestartNoBoot()" title="power-cycle straight to the menu (as the unit is flashed today)"><span class="ico" style="font-size:13px">&#9211;</span> Restart (no boot)</button>
    <button id="umbtn" onclick="setUserMode(!document.body.classList.contains('usermode'))" title="show or hide the workshop panels">SIMPLE VIEW</button>
+   <button class="devonly" onclick="devResetBootLevel()" title="reset the install state to virgin (level 1 boot on next restart)">Reset install [dev]</button>
+   <button class="devonly" onclick="devGlitchToggle()" title="toggle the fleet-wide glitch layer">Glitch on/off [dev]</button>
   </div>
   <p class="keyhint"><kbd>&darr;</kbd>/SCROLL = rotary &nbsp; <kbd>Enter</kbd>/CLICK/tap front = shutter &nbsp; <kbd>Space</kbd>/SHAKE = shake &nbsp; <kbd>W A S D</kbd> (hold) = tilt for bubbles &nbsp; mic: unused by firmware</p>
  </div>
@@ -2599,7 +2602,8 @@ function setup(){
  Messages_Load();
  Scaffold_Load();
  Messages_Trigger("first_boot");
- Doors_Restructure(); /* [DOORS RULING B, 2026-07-22 night pass] */
+ Doors_Restructure(); /* four doors — porch 2026-07-23 */
+ Boot3();             /* boot is MANDATORY (porch doctrine); three-level per canon */
 }
 /* ============ [TWIN-BUILT 2026-07-22 night] DOORS RESTRUCTURE (ruling B) ============
    Three-door top level: DOOR_A (answers-class: Answers/Advice/Detectors),
@@ -2619,42 +2623,69 @@ function doorRow(t,r,label,linkMenu,linkLine,exe){
  MENU_PARAMETER_TABLE[t][r]=[900+t*40+r,linkMenu,linkLine,exe,1,1,1,1];
 }
 function Doors_Restructure(){
- const A=MENU_TABLE.length, B=A+1, C=A+2, R=A+3, CT=A+4;
- for(const t of [A,B,C,R,CT]){MENU_TABLE[t]=[];MENU_PARAMETER_TABLE[t]=[];}
- /* DOOR_A: answers-class */
- doorRow(A,0,"Answers",ANSWERS,0,0); doorRow(A,1,"Advice",ADVICE,0,0);
- doorRow(A,2,"Detectors",DETECTORS,0,0); doorRow(A,3,"back",R,0,0);
- MENU_TABLE[A][4]=["[doors]",".end"];MENU_PARAMETER_TABLE[A][4]=[0,R,0,0,1,1,1,1];
- /* DOOR_B: lines-class — honest scaffold (engine pending; app-pattern build) */
- doorRow(B,0,"LINES - NOT INSTALLED",R,0,0); doorRow(B,1,"back",R,0,0);
- MENU_TABLE[B][2]=["[doors]",".end"];MENU_PARAMETER_TABLE[B][2]=[0,R,0,0,1,1,1,1];
- /* DOOR_C: specialized (+ the Gambler's casino territory — persona-reserved,
-    shown dev-side until gating wires up; GATING SEAM flagged) */
- doorRow(C,0,"Predictions",PREDICTIONS,0,0); doorRow(C,1,"Probabilities",PROBABILITIES,0,0);
- doorRow(C,2,"Games",GAMES,0,0); doorRow(C,3,"Messages",MESSAGES,0,0);
- doorRow(C,4,"Casino [-21]",CT,0,0);
- doorRow(C,5,"back",R,0,0);
- MENU_TABLE[C][6]=["[doors]",".end"];MENU_PARAMETER_TABLE[C][6]=[0,R,0,0,1,1,1,1];
- /* the casino table: 4 exe rows -> Games_EXE via the +5 map */
+ /* [FOUR DOORS — porch ruling 2026-07-23, supersedes the A/B/C skeleton]
+    ANSWERS / PROGRAMS / MESSAGES (inbox alone, direct) / SETTINGS.
+    Sorting principle: FUNCTION-OVER-STRUCTURE. Nothing deleted; legacy tree
+    intact (devLegacyMenu()). Scaffold rows are honest not-installed entries;
+    persona rows tagged [-NN]. Casino placement under PROGRAMS = Ops call
+    (function-over-structure: it gives you games) — FLAGGED, not ruled. */
+ const DA=MENU_TABLE.length, DP=DA+1, DS=DA+2, R=DA+3, CT=DA+4;
+ for(const t of [DA,DP,DS,R,CT]){MENU_TABLE[t]=[];MENU_PARAMETER_TABLE[t]=[];}
+ /* ANSWERS door */
+ doorRow(DA,0,"Answers",ANSWERS,0,0);
+ doorRow(DA,1,"Advice",ADVICE,0,0);
+ doorRow(DA,2,"Excuses (not installed)",DA,0,0);
+ doorRow(DA,3,"Lines (not installed)",DA,0,0);
+ doorRow(DA,4,"Predictions",PREDICTIONS,0,0);
+ doorRow(DA,5,"Probabilities",PROBABILITIES,0,0);
+ doorRow(DA,6,"ELIZ [-02] (not installed)",DA,0,0);
+ doorRow(DA,7,"back",R,0,0);
+ MENU_TABLE[DA][8]=["[doors]",".end"];MENU_PARAMETER_TABLE[DA][8]=[0,R,0,0,1,1,1,1];
+ /* PROGRAMS door */
+ doorRow(DP,0,"Games",GAMES,0,0);
+ doorRow(DP,1,"Detectors",DETECTORS,0,0);
+ doorRow(DP,2,"Calculator (not installed)",DP,0,0);
+ doorRow(DP,3,"Notepad (not installed)",DP,0,0);
+ doorRow(DP,4,"Radio [-07] (not installed)",DP,0,0);
+ doorRow(DP,5,"Phone Tap [-07] (not installed)",DP,0,0);
+ doorRow(DP,6,"Casino [-21]",CT,0,0);
+ doorRow(DP,7,"back",R,0,0);
+ MENU_TABLE[DP][8]=["[doors]",".end"];MENU_PARAMETER_TABLE[DP][8]=[0,R,0,0,1,1,1,1];
+ /* SETTINGS door */
+ doorRow(DS,0,"Preferences",PREFERENCES,0,0);
+ doorRow(DS,1,"User",USER,0,0);
+ doorRow(DS,2,"Codes",CODES,0,0);
+ doorRow(DS,3,"back",R,0,0);
+ MENU_TABLE[DS][4]=["[doors]",".end"];MENU_PARAMETER_TABLE[DS][4]=[0,R,0,0,1,1,1,1];
+ /* the casino table (unchanged mechanics; +5 id map) */
  doorRow(CT,0,"Slots",GAMES,0,1); doorRow(CT,1,"Craps",GAMES,0,1);
  doorRow(CT,2,"Blackjack",GAMES,0,1); doorRow(CT,3,"Roulette",GAMES,0,1);
- doorRow(CT,4,"back",C,0,0);
- MENU_TABLE[CT][5]=["[doors]",".end"];MENU_PARAMETER_TABLE[CT][5]=[0,C,0,0,1,1,1,1];
+ doorRow(CT,4,"back",DP,0,0);
+ MENU_TABLE[CT][5]=["[doors]",".end"];MENU_PARAMETER_TABLE[CT][5]=[0,DP,0,0,1,1,1,1];
  CASINO_TABLE=CT;
- /* [CASINO GATING WIRE 2026-07-23] Juan's casino rides the passcode mechanism per
-    the displayability doctrine — hidden until the code is entered. PLACEHOLDER
-    code 2121 (the CvC-1965 pattern: clearly non-final; Papa places the real
-    RELEASE-code wording at words). */
- MENU_PARAMETER_TABLE[C][4][READ_ACCESS_PASSCODE]=2121;
- /* [BACK-ROW RE-AIM 2026-07-23 — the flagged seam] legacy branch back-rows aimed
-    at pre-doors parents (tables 0/1/3); re-aim them to the door that now owns the
-    branch. Mechanical, token-safe, nothing deleted — the rows themselves stand. */
- const DOOR_OF={5:A,8:A,9:A,6:C,7:C,13:C,2:C,4:R,14:R,15:R,16:4,17:4,18:R,19:4,10:2,11:2,12:2};
+ /* casino stays passcode-gated (placeholder 2121, CvC pattern) */
+ MENU_PARAMETER_TABLE[DP][6][READ_ACCESS_PASSCODE]=2121;
+ /* THE DOORS ROOT: four doors, MESSAGES direct to the inbox */
+ doorRow(R,0,"ANSWERS",DA,0,0);
+ doorRow(R,1,"PROGRAMS",DP,0,0);
+ doorRow(R,2,"MESSAGES",MESSAGES,0,0);
+ doorRow(R,3,"SETTINGS",DS,0,0);
+ MENU_TABLE[R][4]=["[doors]",".end"];MENU_PARAMETER_TABLE[R][4]=[0,R,0,0,1,1,1,1];
+ DOORS_ROOT=R;
+ /* mail-run twin-delta row in the games table (unchanged) */
+ const gt=MENU_TABLE[GAMES], gp=MENU_PARAMETER_TABLE[GAMES];
+ let ei=gt.findIndex(r=>r&&r[1]===".end");
+ if(ei<0)ei=gt.length;
+ gt.splice(ei,0,["[twin]","Mail Run"]);
+ gp.splice(ei,0,[176,GAMES,ei,1,1,1,1,1]);
+ MAILRUN_ROW=ei;
+ /* back-row re-aim: legacy parents 0/1/3 -> the owning door */
+ const DOOR_OF={5:DA,8:DA,6:DA,7:DA,9:DP,13:DP,2:R,4:DS,14:DS,15:DS,16:4,17:4,18:4,19:4,10:2,11:2,12:2};
  let reaimed=0;
- for(let t=2;t<A;t++){ /* every legacy table except the old roots 0/1 */
+ for(let t=2;t<DA;t++){
   if(!MENU_TABLE[t])continue;
-  for(let r=0;r<MENU_TABLE[t].length;r++){
-   const pr=MENU_PARAMETER_TABLE[t][r];
+  for(let r2=0;r2<MENU_TABLE[t].length;r2++){
+   const pr=MENU_PARAMETER_TABLE[t][r2];
    if(!pr||pr[links_to_Exe]===1)continue;
    if(pr[linked_menuNum]===0||pr[linked_menuNum]===1||pr[linked_menuNum]===3){
     pr[linked_menuNum]=(DOOR_OF[t]!==undefined)?DOOR_OF[t]:R;
@@ -2662,24 +2693,139 @@ function Doors_Restructure(){
    }
   }
  }
- chip("ok","back-row re-aim: "+reaimed+" row(s) now aim at door parents");
- /* mail-run: twin-delta row appended to the games table before its .end (TTT precedent) */
- const gt=MENU_TABLE[GAMES], gp=MENU_PARAMETER_TABLE[GAMES];
- let ei=gt.findIndex(r=>r&&r[1]===".end");
- if(ei<0)ei=gt.length;
- gt.splice(ei,0,["[twin]","Mail Run"]);
- gp.splice(ei,0,[176,GAMES,ei,1,1,1,1,1]);
- MAILRUN_ROW=ei;
- /* the doors root: three doors + surviving system branches */
- doorRow(R,0,"DOOR_A",A,0,0); doorRow(R,1,"DOOR_B",B,0,0); doorRow(R,2,"DOOR_C",C,0,0);
- doorRow(R,3,"Preferences",PREFERENCES,0,0); doorRow(R,4,"User",USER,0,0);
- doorRow(R,5,"Codes",CODES,0,0);
- MENU_TABLE[R][6]=["[doors]",".end"];MENU_PARAMETER_TABLE[R][6]=[0,R,0,0,1,1,1,1];
- DOORS_ROOT=R;
  menuNum_PTR=R;lineNum_PTR=0;currentState=MENU_SYSTEM_COLD_START;
- chip("ok","DOORS restructure live (ruling B): root re-homed; legacy tree intact - devLegacyMenu() to compare");
+ chip("ok","FOUR DOORS live (porch 2026-07-23): ANSWERS/PROGRAMS/MESSAGES/SETTINGS; re-aim "+reaimed+" rows; legacy intact");
 }
 function devLegacyMenu(){menuNum_PTR=0;lineNum_PTR=0;currentState=MENU_SYSTEM_COLD_START;chip("warn","legacy menu root (pre-doors) - dev view");}
+/* ============ [THREE-LEVEL BOOT — porch canon 2026-07-23] ============
+   Wake order FLIPS: FRONT first (PLEASE WAIT class), then the top wakes into
+   monitor mode. L1 VIRGIN / L2 FIRST-RUN / L3 ESTABLISHED, persisted via
+   localStorage (twin-appropriate; the unit persists per WS1). All words below
+   are assembled from EXISTING vocabulary (boot text, monitor sets, scaffold
+   is-statements, canon fancy-speak "RESPONSE CURVE" from Prediction Response
+   Curve Biasing). Descriptive-not-sacred per the ruling.
+   [PAPA] SLOTS: the L1 chatter stream reserves egg/passcode real estate —
+   marked EGG-SLOT in Boot3_Chatter; no eggs invented here. */
+const BOOT_LEVEL_KEY="wbr_boot_level";
+function bootLevel(){try{return parseInt(localStorage.getItem(BOOT_LEVEL_KEY)||"0",10);}catch(e){return 0;}}
+function setBootLevel(n){try{localStorage.setItem(BOOT_LEVEL_KEY,String(n));}catch(e){}}
+function devResetBootLevel(){setBootLevel(0);chip("warn","[DEV] install state reset to VIRGIN — Restart to see Level 1");}
+async function frontSay(lines){
+ Activate_the_Screen(FRONT_SCREEN,true);
+ const rows=[Row_01,Row_02,Row_03];
+ for(let i=0;i<lines.length&&i<3;i++)screenPrintLn(rows[i],0,lines[i],(i===Math.min(lines.length,3)-1)?1:0);
+}
+async function Boot3_SelfCorrect(){
+ /* glitch doctrine: a boot step may error and SELF-CORRECT — flat, existing words */
+ if(!glitchOn||Math.random()>=GLITCH_RATE*220)return;
+ await frontSay([" RETRYING"]);await sleep(500);
+}
+async function Boot3_Chatter(ms){
+ /* L1 top-screen chatter: rich, compelling, needn't make sense — assembled from
+    the existing pools ONLY. EGG-SLOT: [PAPA] may seed lines/encodings here
+    (passcode real estate) — deliberately not invented by Ops. */
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ const until=performance.now()+ms;
+ const log=[];
+ const mk=()=>{
+  const k=random(0,5);
+  if(k===0)return opCodes[random(0,MAX_OPCODES)]+"  "+opOperands[random(0,MAX_OPERANDS)];
+  if(k===1)return MON_SET4[random(0,MON_SET4.length)].replace("%",String(random(1,40)));
+  if(k===2)return ["SELF TEST","MEMORY CHECK","AUDIO CHECK","DISPLAY CHECK"][random(0,4)]+" OK";
+  if(k===3)return ["PREDICTION ENGINE - DATA NOT LOADED","USER RECORD - NOT ON FILE","RESPONSE CURVE - LOADING","CODE ACCEPTED"][random(0,4)];
+  return "PROCESSES "+random(1,9)+" RUN";
+ };
+ while(performance.now()<until){
+  log.push(mk());if(log.length>9)log.shift();
+  OLED.clearDisplay();
+  for(let i=0;i<log.length;i++)screenPrintLn(4+i*6,3,log[i],0);
+  OLED.display();
+  if(glitchOn&&Math.random()<GLITCH_RATE*160){log.push("RETRYING");if(log.length>9)log.shift();}
+  await sleep(240);
+ }
+}
+async function Boot3(){
+ if(bootRunning)return;
+ bootRunning=true;
+ const lvl=bootLevel();
+ await frontSay([" PLEASE WAIT"]);
+ await sleep(500);
+ Activate_the_Screen(TOP_SCREEN,true);System_Monitor(); /* the top wakes second, into monitor mode */
+ if(lvl<=0){ /* ---- LEVEL 1: VIRGIN ---- */
+  await sleep(400);
+  await frontSay([" SYSTEM RECORD -"," NOT ON FILE"]);await sleep(900);
+  await frontSay([" INVESTIGATING"]);await sleep(700);await Boot3_SelfCorrect();
+  await frontSay([" FRESH INSTALLATION"," DETERMINED"]);await sleep(800);
+  await frontSay([" OPERATING SYSTEM"," DOWNLOAD - EST 12 SEC"," PLEASE WAIT"]);
+  Mon_StartConnection(1);
+  await Boot3_Chatter(11000);
+  await frontSay([" DOWNLOAD COMPLETE"," RESTARTING"]);await sleep(900);
+  setBootLevel(1);
+  bootRunning=false;
+  return Boot3(); /* self-retries boot */
+ }
+ if(lvl===1){ /* ---- LEVEL 2: FIRST-RUN SETUP ---- */
+  await sleep(300);
+  await frontSay([" SYSTEM FILE FOUND"," FIRST RUN SETUP"]);await sleep(800);
+  for(const d of ["MEMORY CHECK OK","AUDIO CHECK OK","DISPLAY CHECK OK","RESPONSE CURVE - LOADED"]){
+   await frontSay([" "+d]);await sleep(420);await Boot3_SelfCorrect();
+  }
+  /* the calibration dance: PERMIT or POSTPONE — never "answers" */
+  await frontSay([" EXTERNAL CONTENT -"," MESSAGES - FILES -"," RESPONSE CALIBRATION"]);await sleep(1100);
+  Activate_the_Screen(FRONT_SCREEN,true);
+  screenPrintLn(Row_01,0," DOWNLOAD NOW?",0);
+  screenPrintLn(Row_02,0," CLICK  = PERMIT",0);
+  screenPrintLn(Row_03,0," SCROLL = POSTPONE",1);
+  Device_Manager[SHUTTER][BUFFER_VALUE]=EMPTY;Device_Manager[ROTARY_DIAL][BUFFER_VALUE]=EMPTY;
+  let choice=null;const t0=performance.now();
+  while(choice===null){
+   HW_Rescan_All_Input_Buffers();
+   if(Pull_From_Buffer(SHUTTER))choice="permit";
+   else if(Pull_From_Buffer(ROTARY_DIAL))choice="postpone";
+   else await sleep(60);
+   if(performance.now()-t0>120000)choice="postpone"; /* guard: never hang the bench */
+  }
+  if(choice==="permit"){
+   await frontSay([" DOWNLOADING"]);Mon_StartConnection(2);
+   await Boot3_Chatter(3500);
+   Messages_Trigger("first_boot");
+  } else {
+   await frontSay([" POSTPONED -"," AVAILABLE LATER"]);await sleep(800);
+  }
+  setBootLevel(2);
+ } else { /* ---- LEVEL 3: ESTABLISHED (sleep-like) ---- */
+  await sleep(300);
+  await Boot3_SelfCorrect();
+  await frontSay([" USER RECORD -"," ON FILE"," SYSTEM OK"]);await sleep(700);
+ }
+ Activate_the_Screen(TOP_SCREEN,true);
+ Activate_the_Screen(FRONT_SCREEN,true);Draw_the_Menu_Screen();Draw_the_Menu_Line();
+ currentState=MENU_SYSTEM_COLD_START;
+ bootRunning=false;
+}
+/* ============ [GLITCH ENGINE — fleet-wide doctrine 2026-07-23] ============
+   Very low per-instant probability, lightly applied: stutter flashes, screen
+   tears, audio pops; boot self-corrections ride Boot3_SelfCorrect. One tunable
+   rate; dev-OFFable. */
+let GLITCH_RATE=0.0006, glitchOn=true;
+function devGlitchToggle(){glitchOn=!glitchOn;chip("ok","[DEV] glitch layer "+(glitchOn?"ON":"OFF"));}
+function Glitch_Tick(){
+ if(!glitchOn||bootRunning)return;
+ if(Math.random()>=GLITCH_RATE)return;
+ const kind=random(0,3);
+ const scr=(random(0,2)===0)?topOLED:frontOLED;
+ const cvid=(scr===topOLED)?"cvTop":"cvFront";
+ if(kind===0){scr.invertDisplay(true);setTimeout(()=>{try{scr.invertDisplay(false);}catch(e){}},70);}
+ else if(kind===1){
+  try{
+   const cv=document.getElementById(cvid),ctx=cv.getContext("2d");
+   const y=Math.trunc(Math.random()*cv.height*0.8),h=8+Math.trunc(Math.random()*14);
+   const img=ctx.getImageData(0,y,cv.width,h);
+   ctx.putImageData(img,6,y);
+   setTimeout(()=>{try{scr.display();}catch(e){}},90);
+  }catch(e){}
+ } else {PlaySound(Scroll);}
+}
 /* ---- [USER-FACING MODE] one toggle; human-syntax labels when visible ---- */
 const UM_LBLS={};
 function setUserMode(on){
@@ -2703,6 +2849,7 @@ function osTick(){
   const t=performance.now();
   for(let i=0;i<iters;i++)MGK_VIIIp_OS();
   monOsMs=(performance.now()-t)/iters; /* [NO-DEAD-WOOD] real per-iteration cost feeds the CPU graph */
+  Glitch_Tick();                       /* [GLITCH DOCTRINE] lightly, everywhere */
  }
 }
 setInterval(osTick,50);
