@@ -126,9 +126,11 @@ export default function WbHome() {
             {/* Hunter Root exhibit delisted 2026-07-07 (Mike's direction).
                 /hr route remains live but unlinked; proper shutdown is a
                 future workstream after the dust settles. */}
-            <div className="wb-dir-entry" style={{ cursor: "default" }}>
-              <span>Robots</span><span style={{ fontFamily: "'Courier Prime', monospace", fontSize: "0.52rem", letterSpacing: "0.16em", color: "#9b978d" }}>coming soon</span>
-            </div>
+            {/* Robots live link — §D2 ruling 2026-07-23 (coming-soon retires).
+                STAGED: reaches the public site only when Mike deploys (D7). */}
+            <button className="wb-dir-entry" onClick={() => navigate("/robots")}>
+              <span>Robots</span><span className="wb-dir-arrow">→</span>
+            </button>
             <button className="wb-dir-entry" onClick={() => navigate("/wb")}>
               <span>Weird.Baby</span><span className="wb-dir-arrow">→</span>
             </button>

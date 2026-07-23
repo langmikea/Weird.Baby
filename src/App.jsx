@@ -10,6 +10,7 @@ import HrFanWall  from "./routes/hr/HrFanWall.jsx";
 import WbSpine    from "./routes/wb/WbSpine.jsx";
 import InfoBooth  from "./routes/InfoBooth.jsx";
 import GiftShop   from "./routes/shop/GiftShop.jsx";
+import Robots     from "./routes/robots/Robots.jsx";
 
 function KeyWatcher() {
   const navigate = useNavigate();
@@ -64,6 +65,7 @@ export default function App() {
         <Route path="/wb" element={<WbSpine />} />
         <Route path="/booth" element={<InfoBooth />} />
         <Route path="/shop" element={<GiftShop />} />
+        <Route path="/robots" element={<Robots />} />
         <Route path="/p/:id" element={<PresetLanding />} />
       </Routes>
     </BrowserRouter>

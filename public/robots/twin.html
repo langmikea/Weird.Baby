@@ -1,0 +1,2851 @@
+<!DOCTYPE html>
+<!-- MGK-VIIIp DIGITAL TWIN - slices 1+2: boot + menu + ANSWERS LOOP
+     weird-baby-robots | generated 2026-07-15
+     Architecture + fidelity map: docs/TWIN_ARCHITECTURE-fidelity-map-20260715.md
+     Firmware source: robots/mgk-viiip/firmware/MGK_VIIIp_01__20240721_WORKS/ (anchors inline)
+     Layers: [FW] transliterated firmware (function names 1:1) | [SHIM] hardware stand-ins | [DEV] chrome.
+     Fidelity rule: firmware behavior copied exactly, bugs included and badged; unknowns flagged, never invented.
+     Audio: relative paths into ../robots/mgk-viiip/content/build/SD/ (ruled 2026-07-15). Missing files -> visible chips.
+     Boot: as-flashed default = Boot() NOT run (commented out in setup(), main .ino:175). Dev toggle runs it.
+     Displays (round-3 correction - CODE-anchored, see ground-truth doc s1):
+       Front: HEIGHT=32 ctor [main:127] -> MUX 0x1F + COMPINS 0x02 sequential [Adafruit_SSD1306.cpp:583-585,604-605]
+       on alternated-wired 64-row glass -> 32 driver rows land on EVERY OTHER glass line = INTERLACED (default,
+       non-optional; confirmed vs unit). Top: HEIGHT=64 [main:128] -> MUX 0x3F + COMPINS 0x12 alternated
+       [Adafruit_SSD1306.cpp:607-608] -> all 64 rows progressive. Both render discrete emissive rows (scanline
+       structure), 1:1 pixels, integer scale display-only. Dev override for front mapping = marked NON-CANONICAL.
+       NeoPixels [main:167-172]: idle = ALWAYS steady dim blue raw (0,0,16) both pixels; Boot() recolors pixel 0
+       only (red/green/orange) and never runs as-flashed. Twin: gamma-honest dim glow + raw label + alive badge.
+     STANDING CONSTRAINT (Mike): twin will someday live on the museum website - single-file, no-network stays law. -->
+<html><head><meta charset="utf-8"><title>MGK-VIIIp digital twin - slices 1+2</title>
+<style>
+ body{font-family:system-ui,sans-serif;background:#1d1f24;color:#e8e6e3;margin:0;padding:18px}
+ h1{font-size:17px;font-weight:600;margin:0 0 2px}
+ .sub{color:#9a978f;font-size:12px;margin:0 0 14px}
+ .cols{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start}
+ .device{background:#26282e;border-radius:12px;padding:16px;min-width:430px}
+ .scr{background:#0c0d10;border:8px solid #383b42;border-radius:8px;padding:10px;display:inline-block;line-height:0;margin:4px 0}
+ .lbl{font-size:11px;color:#8a877f;margin:8px 0 2px;letter-spacing:.06em}
+ canvas{image-rendering:pixelated;background:#000;display:block}
+ .btns{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+ /* [Mike ruling 2026-07-17] machine-input controls: larger, slightly more visual */
+ .btns button.ctl{font-size:15px;padding:11px 18px;background:#3a4150;border-color:#5c6579;display:inline-flex;align-items:center;gap:8px;font-weight:600;letter-spacing:.03em}
+ .btns button.ctl:hover{background:#454d5f}
+ .btns .ico{font-size:18px;line-height:1;color:#9fb6dc}
+ .zoombtn{font-size:11px;padding:2px 10px;border-radius:10px}
+ .zoombtn.zactive{background:#4a5468;border-color:#7a86a0;color:#fff}
+ button{background:#33363d;color:#e8e6e3;border:1px solid #4a4d55;border-radius:6px;padding:6px 12px;font-size:13px;cursor:pointer}
+ button:hover{background:#3d4048}
+ .px{width:14px;height:14px;border-radius:50%;display:inline-block;margin-right:6px;border:1px solid #000;vertical-align:middle}
+ .dev{flex:1;min-width:380px;max-width:560px}
+ .panel{background:#26282e;border-radius:10px;padding:10px 14px;margin-bottom:12px}
+ .panel h2{font-size:12px;font-weight:600;color:#b8b5ad;margin:0 0 8px;letter-spacing:.08em}
+ table{font-size:12px;border-collapse:collapse;width:100%}
+ td,th{padding:2px 8px;text-align:left;color:#c9c6be}th{color:#8a877f;font-weight:500}
+ #serial{font-family:monospace;font-size:11px;background:#141519;border-radius:6px;padding:8px;height:90px;overflow-y:auto;color:#9fdcb8;white-space:pre-wrap}
+ .chip{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 4px 2px 0}
+ .chip.miss{background:#5b1f1f;color:#f0a0a0}.chip.ok{background:#1f4030;color:#9fdcb8}.chip.warn{background:#4d3d14;color:#ecd191}
+ .bug{font-size:12px;color:#ecd191;margin:3px 0;padding-left:14px;text-indent:-14px}
+ .kv{font-size:12px;color:#c9c6be}.kv b{color:#e8e6e3;font-weight:600}
+ input[type=range]{vertical-align:middle}
+ textarea{width:100%;height:80px;background:#141519;color:#c9c6be;border:1px solid #4a4d55;border-radius:6px;font-family:monospace;font-size:11px;box-sizing:border-box}
+ .keyhint{font-size:11px;color:#8a877f;line-height:1.6}
+ kbd{background:#33363d;border:1px solid #4a4d55;border-radius:4px;padding:0 5px;font-size:11px}
+</style></head><body>
+<h1>MGK-VIIIp digital twin <span style="color:#8a877f;font-weight:400">&mdash; slices 1+2: boot + menu + answers</span></h1>
+<p class="sub">Transliterated firmware (20240721_WORKS), hardware shimmed, bugs preserved and badged. Answers loop live: pick a persona, ask, SHAKE. The twin is the dev environment; the unit is the print run.</p>
+<style>
+/* [USER-FACING MODE 2026-07-22 night] presentation mode: all dev chrome behind one toggle (?user=1 or the VIEW button). Human-syntax law governs everything visible. */
+body.usermode .dev{display:none}
+body.usermode #bootbtn{display:none}
+body.usermode .keyhint{display:none}
+body.usermode .device>span:not(.px){display:none}
+body.usermode .lbl span{display:none}
+body.usermode .btns button[onclick="devRunBoot()"]{display:none}
+</style>
+<div class="cols">
+ <div class="device">
+  <span class="px" id="npx0"></span><span id="npxv0" style="font-size:10px;color:#8a877f;margin-right:8px">off</span><span class="px" id="npx1"></span><span id="npxv1" style="font-size:10px;color:#8a877f;margin-right:8px">off</span><span class="chip ok" style="margin-left:4px">pixels alive</span><span style="font-size:11px;color:#8a877f"> idle truth [main:170-172]: steady dim blue (0,0,16), no pattern; Boot() recolors pixel 0 only</span>
+  <div class="lbl" style="display:flex;align-items:center;gap:8px">SCREEN SIZE
+   <button class="zoombtn" id="z2" onclick="setZoom(2)">half</button>
+   <button class="zoombtn" id="z3" onclick="setZoom(3)">&#190;</button>
+   <button class="zoombtn" id="z4" onclick="setZoom(4)">full</button>
+   <span style="color:#5a5a56">(display-only integer scaling; &frac34; is the default per porch ruling 2026-07-17)</span></div>
+  <div class="lbl">TOP SCREEN (machine top &mdash; the glass) &mdash; 128&times;64, all rows driven [main:128; SSD1306.cpp:607-608]</div>
+  <div class="scr"><canvas id="cvTop" width="384" height="192"></canvas></div>
+  <div class="lbl">FRONT SCREEN (machine front &mdash; menu) &mdash; 128&times;64, 32 driver rows interlaced onto even lines [main:127; SSD1306.cpp:604-605]</div>
+  <div class="scr"><canvas id="cvFront" width="384" height="192"></canvas></div>
+  <div class="btns">
+   <button class="ctl" onclick="devRotary()" title="rotary dial - one detent"><span class="ico">&#10227;</span>SCROLL</button>
+   <button class="ctl" onclick="devShutter()" title="shutter button"><span class="ico">&#9673;</span>CLICK</button>
+   <button class="ctl" onclick="devShake()" title="shake the unit (>1.3g)"><span class="ico">&#8779;</span>SHAKE</button>
+   <button onclick="devRunBoot()" id="bootbtn"><span class="ico" style="font-size:13px">&#9654;</span> Boot() [dev]</button>
+   <button onclick="devRestartBoot()" title="power-cycle, then run the boot sequence (boot is MANDATORY on the unit per porch doctrine)"><span class="ico" style="font-size:13px">&#9211;</span> Restart (boot)</button>
+   <button onclick="devRestartNoBoot()" title="power-cycle straight to the menu (as the unit is flashed today)"><span class="ico" style="font-size:13px">&#9211;</span> Restart (no boot)</button>
+   <button id="umbtn" onclick="setUserMode(!document.body.classList.contains('usermode'))" title="show or hide the workshop panels">SIMPLE VIEW</button>
+  </div>
+  <p class="keyhint"><kbd>&darr;</kbd>/SCROLL = rotary &nbsp; <kbd>Enter</kbd>/CLICK/tap front = shutter &nbsp; <kbd>Space</kbd>/SHAKE = shake &nbsp; <kbd>W A S D</kbd> (hold) = tilt for bubbles &nbsp; mic: unused by firmware</p>
+ </div>
+ <div class="dev">
+  <div class="panel"><h2>MACHINE STATE</h2><div class="kv" id="stview"></div></div>
+  <div class="panel"><h2>PROCESS REGISTRY <span style="color:#666">[3_PROC_MGR.ino]</span></h2><table id="procview"></table>
+   <div style="margin-top:6px"><button onclick="devKill()" style="font-size:11px;padding:3px 8px">End foreground stub process</button></div></div>
+  <div class="panel"><h2>INBOX <span style="color:#666">[RAM-only per ruling; testing shortcuts below]</span></h2>
+   <div class="kv" id="inboxview"></div>
+   <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">
+    <button onclick="devDeliverNext()" style="font-size:11px;padding:3px 8px">Deliver next message</button>
+    <button onclick="devDeliverAll()" style="font-size:11px;padding:3px 8px">Deliver all</button>
+    <button onclick="devUnreadAll()" style="font-size:11px;padding:3px 8px">Mark all unread</button>
+    <button onclick="devResetInbox()" style="font-size:11px;padding:3px 8px">Reset inbox</button>
+   </div></div>
+  <div class="panel"><h2>ANSWER SELECTION &mdash; live weights <span style="color:#666">[BIAS.ino:29-84]</span></h2>
+   <div class="kv" id="selview"></div></div>
+  <div class="panel"><h2>SERIAL MONITOR</h2><div id="serial"></div></div>
+  <div class="panel"><h2>AUDIO (DFPlayer shim)</h2><div id="chips"><span style="font-size:11px;color:#666">no playFolder calls yet</span></div></div>
+  <div class="panel"><h2>KNOWN BUGS PRESERVED (badged, not fixed)</h2>
+   <div class="bug" style="color:#9fdcb8">&#9673; RESOLVED (round 3): front interlace is code truth &mdash; COMPINS 0x02 sequential (HEIGHT==32 branch, Adafruit_SSD1306.cpp:604-605) on alternated-wired 64-row glass lands the 32 driver rows on every other line. Confirmed vs unit. Top: COMPINS 0x12, all 64 rows progressive [SSD1306.cpp:607-608].</div>
+   <div class="bug">&#9888; Boot() commented out in setup() [main:175] &mdash; unit never boots the show. Twin matches; dev button runs it.</div>
+   <div class="bug">&#9888; Hidden menu rows still render when navigation lands on them (entry-render quirk) [MENU_MAP g].</div>
+   <div class="bug">&#9888; RUN_ACCESS passcodes exist on all 175 rows, checked nowhere.</div>
+   <div class="bug">&#9888; Only 5 handlers wired; every other executable leaf silently does nothing [Run_EXE default].</div>
+   <div class="bug">&#9888; Polarity menu offers Affirmative (row 6) but the enum tops at 5 &mdash; selecting it writes an out-of-enum value.</div>
+   <div class="bug">&#9888; Clarity bias save writes FLASH_POLARITY_BIAS [BIAS_SET:57] (harmless: flash save is itself a stub).</div>
+   <div class="bug">&#9888; Settings are RAM-only: "Save to flash not implemented" [FLASH.ino:12]. Twin matches (no persistence).</div>
+   <div class="bug">&#9888; file-256 bug LIVE [M8BALL:132]: default voice 8 (CEO) + answer 19 computes file 256 &mdash; badged when it fires.</div>
+   <div class="bug">&#9888; blank end-frame bug LIVE: reveal animation ends with the triangle fully off-screen [4_GRAPHICS:105-108] &mdash; badged at each reveal.</div>
+   <div class="bug">&#9888; v2.0 reveal is SILENT: playFolder line missing from its case [M8BALL:161-168] &mdash; the 1-line bench splice fixes the unit; twin preserves until then.</div>
+   <div class="bug" style="color:#9fdcb8">&#9673; FIXED (issue 9, twin-side): bubble trails &mdash; shim now uses Adafruit's own Bresenham for BOTH drawCircle and fillCircle (was: Bresenham outline vs distance-formula erase). Firmware never had this bug.</div>
+   <div class="bug" style="color:#9fdcb8">&#9673; NEW (Ops, 2026-07-15): <b>BREADTH MARCH</b> &mdash; every remaining domain now leads somewhere real. LIVE (nearly-free mechanics): Probabilities &times;5 (coin/number/card/dice/lottery), Detectors &times;4 (<b>the mic becomes real</b> &mdash; needle reads the same RMS the firmware already computes), Advice rows 1+3 (<b>generative</b> column-assembly &mdash; the machine's first non-selective engine), Voice &times;11 (one line). SCAFFOLD (says what it will be, admits it is a stub): Predictions, Codes, User, mgkModel, Advice 0/2/4-7. <b>All words are stubs</b> &mdash; parked for the 50Kft session. Table: content/tables/scaffold.csv carries descriptor + memory-note + evidence per row.</div>
+   <div class="bug" style="color:#9fdcb8">&#9673; NEW (Ops, 2026-07-15): <b>MESSAGES implemented</b> &mdash; the discovery-doctrine keystone. Firmware has no handler for any of the 15 message leaves. Reveal is driven by message STATUS (ruling 4): an undelivered message's menu row stays hidden and turns visible when its trigger fires &mdash; the first thing in the twin that writes the menu tables at runtime. RAM-only (ruling 2): the inbox resets on power-cycle, exactly as settings do. Morse is real (ruling 5): NeoPixel keyer lamp + click per element + marks on the glass. Bodies drafted by Ops for Mike's pen (ruling 1). Delayed answers DEFERRED (ruling 3). The 2022 usage-nag idea KILLED (ruling 6).</div>
+   <div class="bug" style="color:#9fdcb8">&#9673; NEW (Ops, 2026-07-15): <b>GAMES branch implemented</b> &mdash; all four rows playable (Tilt Drive, Gobble Don't Fall, AvoidSteroids revived from the 346 commented-out lines, Snow Globe). Firmware has NO games handler; spec: docs/FIRMWARE_CHANGE_SPEC-games-20260715.md. Conventions chosen for Mike's gate: scroll = exit (as Answers), score = RAM-only, failure = flat/no taunt.</div>
+   <div class="bug" style="color:#9fdcb8">&#9673; RULED + FIXED (Mike 2026-07-15): <b>menuRow &rarr; tableSlot DECOUPLE</b> &mdash; firmware passes the menu row as M8B_ID and indexes 3-slot tables with it [1_MGK-VIIIp:8 &rarr; 2_data_M8BALL:67], so any persona at row &ge; 3 reads out of bounds. Twin now maps row &rarr; slot; uncompiled personas show "PERSONA NOT INSTALLED" instead of garbage. Firmware patch queued (spec &sect;9).</div>
+   <div class="bug" style="color:#9fdcb8">&#9673; RULED + FIXED (Mike 2026-07-15): factory default polarityBiasNOW <b>100 &rarr; 0</b> (flat, classic M8B). At 100 the weight formula zeroed every non-exact polarity tag &mdash; 4 of 20 answers reachable at power-on, on EVERY engine [BIAS.ino:17 + :34-37]. Was never a 65 bug. Finding + distribution proof: docs/FINDING-polarity-bias-default-20260715.md. Firmware patch pending at the bench.</div>
+   <div class="bug">&#9888; Affirmative bug PARKED (harmless at bias 0): the menu offers 6 polarity rows, the enum has 5; selecting Affirmative writes setting 5, which no answer tag matches. At bias 0 all weights stay 100 so the spread is unaffected; at bias 100 it would zero everything and return -1 + Serial "SHIT!" [BIAS.ino:53].</div>
+   <div class="bug">&#9888; Content = table-resolved (Definitely fix + v2.0 overlay); flashed unit still hand-written until bench splice &mdash; known delta, per ARCHITECTURAL LAW.</div>
+   <div class="bug" style="color:#9fdcb8">&#9673; NEW (porch session 2026-07-17, evening build): <b>TIC-TAC-TOE</b> twin-delta menu row (id 175 &mdash; D.8 STATUS listed it; the menu catches up with the spec). PvP / PvC / CvC; C vs C plays five accelerating draws to the WOPR conclusion, with fanfare. <b>PASSCODE ARCHITECTURE</b> implemented per doctrine: codes grant displayability; unknown codes accepted &amp; held (legitimate). <b>Interlace treatment</b> reduced sharply per ruling (front lit/gap ratio inverted; top unchanged = ceiling; mapping stays code truth). <b>&frac34; default size.</b> Restart-with-boot / restart-without buttons (boot is MANDATORY on the unit per doctrine &mdash; bench item). Msg 02 tombstoned DELETED; msg 10 = the quiet ending (grid of one) at system/1, trigger inventory_complete.</div>
+   <div class="bug" style="color:#9fdcb8">&#9673; CARDS SESSION (2026-07-18): <b>AvoidSteroids respec</b> per RW-3 ruling &mdash; many-slow-asteroids traffic weave (12 concurrent, 0.35&times; speed) + CLICK = single aimed shot (one in flight; hit = +5). Walls stay the original's one-shot bumpers. <b>C vs C tic-tac-toe now PASSCODE-GATED</b> per RW-4 &mdash; the mode joins the cycle only after its code is accepted (placeholder 1965; the real code + its placed reveal land at the words pass).</div>
+  </div>
+  <div class="panel"><h2>DEV CONTROLS <span style="color:#666">(non-fidelity)</span></h2>
+   <div class="kv">Speed <input type="range" id="speed" min="0.25" max="4" step="0.25" value="1"> <span id="speedval">1&times;</span>
+   &nbsp; PRNG seed: <b id="seedview"></b></div>
+   <div class="kv" style="margin-top:4px">Timing note: ms-faithful async; OS loop &asymp;40 iter/s at 1&times; (I2C-paced approximation, flagged in fidelity map).</div>
+   <div class="kv" style="margin-top:4px"><label><input type="checkbox" onchange="setFrontMap(this.checked?'tophalf':null)"> front mapping override: top-half <b style="color:#ecd191">(NON-CANONICAL &mdash; canonical = interlaced, from code)</b></label></div>
+   <div class="kv" style="margin-top:4px">MIC level <input type="range" id="mic" min="0" max="80" step="1" value="0" oninput="MIC_LEVEL=+this.value;document.getElementById('micval').textContent=this.value"> <span id="micval">0</span>
+    <span style="color:#8a877f">&mdash; drives the real RMS path the Detectors read (no browser mic; slider stands in)</span></div>
+   <div class="kv" style="margin-top:4px"><label><input type="checkbox" onchange="MGK65_TIGHT_ROWS=this.checked"> MGK-65 reveal rows: tight 28/38 <span style="color:#8a877f">(unchecked = NIAC's own 32/48)</span></label> &mdash; Mike's pick</div>
+   <div class="kv" style="margin-top:4px">Access code <input id="codein" size="8" style="background:#141519;color:#c9c6be;border:1px solid #4a4d55;border-radius:4px;padding:2px 6px" onkeydown="if(event.key==='Enter'){Enter_Code(this.value);this.value='';}">
+    <button onclick="Enter_Code(document.getElementById('codein').value);document.getElementById('codein').value=''" style="font-size:11px;padding:3px 8px">Enter</button>
+    <span style="color:#8a877f">&mdash; displayability doctrine: unhides matching rows; unknown codes are accepted &amp; held (legitimate). Try 411, 7, 101&ndash;103; 1965 unlocks a game mode (placeholder code).</span></div>
+  </div>
+  <div class="panel"><h2>ITEM REGISTRY (175 rows)</h2>
+   <div class="kv" id="regsummary"></div>
+   <button onclick="devExportReg()" style="font-size:11px;padding:3px 8px;margin-top:6px">Export registry + delta JSON</button>
+   <textarea id="regout" readonly></textarea></div>
+ </div>
+</div>
+<script>
+"use strict";
+
+/* ============ [SHIM] fonts + framebuffer + GFX ============ */
+function b2u(b){return Uint8Array.from(atob(b),c=>c.charCodeAt(0));}
+const FONT_FS={bm:b2u("///+SH7v3790QBmGZ/3/MwzDM/7/mYZhkBAfH97/P4PA/B8J/P738eBAOBB8MMYgxkDGQHyAOZwBPgNjAmMEYww+CBwOAfg7g7g/AeA+Z3bj7hzzx/4/cP/0GGMcc444444YcMMGCGGDDjhxxxxxxjjjGEAhPkUoOHDn/+cOHPyc/8D8CMQjEIRiEYgAPj+d3H4/H4/H4/Hdz+PgCP/znOc5znOAPj+4/HA4HBwcHBwcD/f4PH/n5wcMDgcH5+d+PA4eHi4uTk6O//8ODg5/P5AYDef7ngcDgfH/58A+P5z8Duf738fj8d3v4+D//8Dg4GBwMDgcDA4HA4A/H+4/h+PPx/vP4fh/Pf4/AD4/vdx+Px/e/zuB+c/jwPwAB+D8AAfl4ACDx98MB4D4HwGA///AAA///ABwPwPgOH3x4IAAPj+4/HA4HBwcHA4AA4HAA/AP/B4OOAJw6WMZwhnGEcYzxjJj/nPcPAAf+AfwBwDwD4D4HYGcGcOMP+f+cGYH4HD/n/uD8H4P/z/3BuD8H4P/7/gfg/545wfgDgDgDgDgBwd48/4fgP+P/ODuDuB+B+B+B+B+DuDv/P+A///4HA4H+/3A4HA4H//4///4HA4H+/3A4HA4HA4AD4f547g+AcA4/x/gbg3jn9Dy4Pwfg/B+D////wfg/B+D8H4O//////4HBwcHBwcHB+fn53484O4c445w7g/A/g9w5w444c4O4ODg4ODg4ODg4ODg4P//+H/h/4f+H+x/s37N+zfs355+efnn55zg/h/D/H/P2fu/N+f8f4fw/g4Pgf8ePODuA/AfgPwH4DuDnjx/wPgA/5/7h/B+D8P/9/zgHAOAcA4AD4H/Hjzg7gPwH4D8B+G7j548f+D7gAj/j/zg7g7g7g7/z/zg7g7g7g7g8D8P+8fwfgH8H/A/APwdx7/h+P//xwOBwOBwOBwOBwOBwOD8H4Pwfg/B+D8H4Pwfx7/h8GBnDnDjDDDDnBmBmB+A8A8A8AYAYcO44ZxwzjzjNnGbMO2YNnwbPA8eB48Bw4DhgHDnjjnB+B+A8AcA8B+BnDnHDnDg4Pw5xxjDuDYHwHAOAcA4BwDg///A4ODwcHBweDg4H//4/+7u7u7u7u/whhCGEIQwhDCA/3d3d3d3d3/wGBw8PjZmY8P/wMw/H+44Dj+e7jue/57g4DgOA7z/vO4fh+H4fzv+7wAfP9x8DgcDgON/jwADgcDnd/u/j8fj8f3v87g+P5zcP///gcN/jwA73f+5znOc5wA7v938fj8fj+9/ncD8d/Hw4HA4He//n4/H4/H4/H44/H////53B3d3d3d3f+DgcDgcfndz8fj+dzncbjj//////u97//45+Ofjn45+Ofjn45+OcO9/+Px+Px+Px+PxwB4f5zuH4fh+Hc5/h4DvP+87h+H4fh/O/7vOA4DgOAA7v/38fj8fj+9/ncDgcDgc7/84444444A+P7j8D8P8P8f/HwBzv/c5znOecOPx+Px+Px+Px/+9wOGYZznMMw3D4HgeBwDjHZ5meZnmd7jSw88PPDzwc4BznOPweB4HgeD8c5zg4dhnOc4zDsPgeB4DAMBwOA4A/v4OHDg4cOD//zdmZm7mZmZnMP//gM5mZmd2ZmZuwHGO"),g:[[0,0,0,5,0,1],[0,3,13,6,2,-12],[5,7,5,9,1,-12],[10,10,12,10,0,-11],[25,9,15,10,1,-13],[42,16,13,16,0,-12],[68,12,13,13,1,-12],[88,3,5,5,1,-12],[90,6,17,6,1,-12],[103,6,17,6,0,-12],[116,5,6,7,1,-12],[120,7,8,11,2,-7],[127,3,5,4,1,-1],[129,5,2,6,0,-5],[131,3,2,4,1,-1],[132,5,13,5,0,-12],[141,9,13,10,1,-12],[156,5,13,10,2,-12],[165,9,13,10,1,-12],[180,8,13,10,1,-12],[193,8,13,10,2,-12],[206,9,13,10,1,-12],[221,9,13,10,1,-12],[236,9,13,10,0,-12],[251,10,13,10,0,-12],[268,9,13,10,1,-12],[283,3,9,4,1,-8],[287,3,12,4,1,-8],[292,9,9,11,1,-8],[303,9,6,11,1,-6],[310,9,9,11,1,-8],[321,9,13,11,1,-12],[336,16,15,18,0,-12],[366,12,13,13,0,-12],[386,11,13,13,1,-12],[404,12,13,13,1,-12],[424,12,13,13,1,-12],[444,9,13,12,1,-12],[459,9,13,11,1,-12],[474,11,13,14,1,-12],[492,11,13,13,1,-12],[510,3,13,6,1,-12],[515,8,13,10,1,-12],[528,12,13,13,1,-12],[548,8,13,11,1,-12],[561,14,13,16,1,-12],[584,11,13,14,1,-12],[602,13,13,14,1,-12],[624,11,13,12,1,-12],[642,13,14,14,1,-12],[665,12,13,13,1,-12],[685,11,13,12,1,-12],[703,9,13,12,2,-12],[718,11,13,13,1,-12],[736,12,13,12,0,-12],[756,17,13,17,0,-12],[784,12,13,12,0,-12],[804,11,13,12,1,-12],[822,9,13,11,1,-12],[837,4,17,6,1,-12],[846,5,13,5,0,-12],[855,4,17,6,0,-12],[864,8,8,11,1,-12],[872,10,1,10,0,4],[874,3,2,5,0,-12],[875,10,10,10,1,-9],[888,10,13,11,1,-12],[905,9,10,10,1,-9],[917,9,13,11,1,-12],[932,9,10,10,1,-9],[944,5,13,6,1,-12],[953,9,14,11,1,-9],[969,9,13,11,1,-12],[984,3,13,5,1,-12],[989,4,17,5,0,-12],[998,9,13,10,1,-12],[1013,3,13,5,1,-12],[1018,14,10,16,1,-9],[1036,9,10,11,1,-9],[1048,10,10,11,1,-9],[1061,10,14,11,1,-9],[1079,9,14,11,1,-9],[1095,6,10,7,1,-9],[1103,9,10,10,1,-9],[1115,5,12,6,1,-11],[1123,9,10,11,1,-9],[1135,10,10,10,0,-9],[1148,14,10,14,0,-9],[1166,10,10,10,0,-9],[1179,10,14,10,0,-9],[1197,8,10,9,1,-9],[1207,4,17,7,1,-12],[1216,1,17,5,2,-12],[1219,4,17,7,2,-12],[1228,8,2,9,0,-4]],yAdv:22};
+const FONT_TT={bm:b2u("AOi0vvp55IVC29bAakCVgKqAXQBg4IAlSHbcdUDFTsUct5LzHHPe5Uj33vecoEYqIuOAiKjlBFfGV9rXXHJG1tzzzvPIc9a32ukuJNS3WpJOv9q/+lbU10hW9tfqcRzpJLbWtqS3+rVatSTlTvJOiIDknlTgkM7wmtxyMC7WdzArpHeUmtq4IJqAl2rJLv/Q1tBWoNbodrJyQHngXSa2sLegv/CpULWU73BqJtjIrHi4XnRrrquqtXTYaqygcYB3jmTkwNqA4FUAXQ7JgO+AYLbodbb/gEcA4FUOmJAykGbYMkFORXpReuF6eXqq+tr6e+5yMoBH7lPu4+6j7keuU67jrqOu19zO+kfeU97j3s/eo96qgHfcit4q3uLeot4q9J74d10ARd5R3uHeed6h3m3ef+BxlEX2Ufbh9qH2moBlQOEkoSR51s9aRVRRVOFUzVShVEOEfuCK1irW4tai1iqygJroorKAAHvmf3CvPK88oqS97r3uAACAoH/m6qrg"),g:[[0,1,1,2,0,-5],[1,1,5,2,0,-5],[2,3,2,4,0,-5],[3,3,5,4,0,-5],[5,3,5,4,0,-5],[7,3,5,4,0,-5],[9,3,5,4,0,-5],[11,1,2,2,0,-5],[12,2,5,3,0,-5],[14,2,5,3,0,-5],[16,3,3,4,0,-5],[18,3,3,4,0,-4],[20,2,2,3,0,-2],[21,3,1,4,0,-3],[22,1,1,2,0,-1],[23,3,5,4,0,-5],[25,3,5,4,0,-5],[27,2,5,3,0,-5],[29,3,5,4,0,-5],[31,3,5,4,0,-5],[33,3,5,4,0,-5],[35,3,5,4,0,-5],[37,3,5,4,0,-5],[39,3,5,4,0,-5],[41,3,5,4,0,-5],[43,3,5,4,0,-5],[45,1,3,2,0,-4],[46,2,4,3,0,-4],[47,3,5,4,0,-5],[49,3,3,4,0,-4],[51,3,5,4,0,-5],[53,3,5,4,0,-5],[55,3,5,4,0,-5],[57,3,5,4,0,-5],[59,3,5,4,0,-5],[61,3,5,4,0,-5],[63,3,5,4,0,-5],[65,3,5,4,0,-5],[67,3,5,4,0,-5],[69,3,5,4,0,-5],[71,3,5,4,0,-5],[73,3,5,4,0,-5],[75,3,5,4,0,-5],[77,3,5,4,0,-5],[79,3,5,4,0,-5],[81,3,5,4,0,-5],[83,3,5,4,0,-5],[85,3,5,4,0,-5],[87,3,5,4,0,-5],[89,3,5,4,0,-5],[91,3,5,4,0,-5],[93,3,5,4,0,-5],[95,3,5,4,0,-5],[97,3,5,4,0,-5],[99,3,5,4,0,-5],[101,3,5,4,0,-5],[103,3,5,4,0,-5],[105,3,5,4,0,-5],[107,3,5,4,0,-5],[109,3,5,4,0,-5],[111,3,3,4,0,-4],[113,3,5,4,0,-5],[115,3,2,4,0,-5],[116,3,1,4,0,-1],[117,2,2,3,0,-5],[118,3,4,4,0,-4],[120,3,5,4,0,-5],[122,3,4,4,0,-4],[124,3,5,4,0,-5],[126,3,4,4,0,-4],[128,3,5,4,0,-5],[130,3,5,4,0,-4],[132,3,5,4,0,-5],[134,1,5,2,0,-5],[135,3,6,4,0,-5],[138,3,5,4,0,-5],[140,3,5,4,0,-5],[142,3,4,4,0,-4],[144,3,4,4,0,-4],[146,3,4,4,0,-4],[148,3,5,4,0,-4],[150,3,5,4,0,-4],[152,3,4,4,0,-4],[154,3,4,4,0,-4],[156,3,5,4,0,-5],[158,3,4,4,0,-4],[160,3,4,4,0,-4],[162,3,4,4,0,-4],[164,3,4,4,0,-4],[166,3,5,4,0,-4],[168,3,4,4,0,-4],[170,3,5,4,0,-5],[172,1,5,2,0,-5],[173,3,5,4,0,-5],[175,3,2,4,0,-5]],yAdv:6};
+const CLASSIC=b2u("AAAAAAA+W09bPj5rT2s+HD58PhwYPH48GBxXfVccHF5/XhwAGDwYAP/nw+f/ABgkGAD/59vn/zBIOgYOJil5KSZAfwUFB0B/BSU/WjznPFp/PhwcCAgcHD5/FCJ/IhRfXwBfXwYJfwF/AGaJlWpgYGBgYJSi/6KUCAR+BAgQIH4gEAgIKhwICBwqCAgeEBAQEAweDB4MMDg+ODAGDj4OBgAAAAAAAABfAAAABwAHABR/FH8UJCp/KhIjEwhkYjZJViBQAAgHAwAAHCJBAABBIhwAKhx/HCoICD4ICACAcDAACAgICAgAAGBgACAQCAQCPlFJRT4AQn9AAHJJSUlGIUFJTTMYFBJ/ECdFRUU5PEpJSTFBIREJBzZJSUk2RklJKR4AABQAAABANAAAAAgUIkEUFBQUFABBIhQIAgFZCQY+QV1ZTnwSERJ8f0lJSTY+QUFBIn9BQUE+f0lJSUF/CQkJAT5BQVFzfwgICH8AQX9BACBAQT8BfwgUIkF/QEBAQH8CHAJ/fwQIEH8+QUFBPn8JCQkGPkFRIV5/CRkpRiZJSUkyAwF/AQM/QEBAPx8gQCAfP0A4QD9jFAgUYwMEeAQDYVlJTUMAf0FBQQIECBAgAEFBQX8EAgECBEBAQEBAAAMHCAAgVFR4QH8oREQ4OERERCg4REQofzhUVFQYAAh+CQIYpKSceH8IBAR4AER9QAAgQEA9AH8QKEQAAEF/QAB8BHgEeHwIBAR4OERERDj8GCQkGBgkJBj8fAgEBAhIVFRUJAQEP0QkPEBAIHwcIEAgHDxAMEA8RCgQKERMkJCQfERkVExEAAg2QQAAAHcAAABBNggAAgECBAI8JiMmPB6hoWESOkBAIHo4VFRVWSFVVXlBIlRUeEIhVVR4QCBUVXlADB5SchI5VVVVWTlUVFRZOVVUVFgAAEV8QQACRX1CAAFFfEB9EhESffAoJSjwfFRVRQAgVFR8VHwKCX9JMklJSTI6REREOjJKSEgwOkFBIXo6QkAgeACdoKB9PUJCQj09QEBAPTwk/yQkSH5JQ2YrL/wvK/8JKfYgwIh+CQMgVFR5QQAARH1BMEhISjI4QEAiegB6CgpyfQ0ZMX0mKSkvKCYpKSkmMEhNQCA4CAgICAgICAg4LxDIrLovECg0+gAAewAACBQqFCIiFCoUCFUAVQBVqlWqVar/Vf9V/wAAAP8AEBAQ/wAUFBT/ABAQ/wD/EBDwEPAUFBT8ABQU9wD/AAD/AP8UFPQE/BQUFxAfEBAfEB8UFBQfABAQEPAAAAAAHxAQEBAfEBAQEPAQAAAA/xAQEBAQEBAQEP8QAAAA/xQAAP8A/wAAHxAXAAD8BPQUFBcQFxQU9AT0AAD/APcUFBQUFBQU9wD3FBQUFxQQEB8QHxQUFPQUEBDwEPAAAB8QHwAAAB8UAAAA/BQAAPAQ8BAQ/xD/FBQU/xQQEBAfAAAAAPAQ///////w8PDw8P///wAAAAAA//8PDw8PDzhERDhE/EpKSjR+AgIGBgJ+An4CY1VJQWM4REQ8BEB+IB4gBgJ+AgKZpeelmRwqSSocTHIBckwwSk1NMDBIeEgwvGJaRj0+SUlJAH4BAQF+KioqKipERF9EREBRSkRAQERKUUAAAP8BA+CA/wAACAhrawg2EjYkNgYPCQ8GAAAYGAAAABAQADBA/wEBAB8BAR4AGR0XEgA8PDw8AAAAAAA=");
+const WHITE=1, BLACK=0, SSD1306_WHITE=1;
+
+function Screen(w,h,glassH,canvasId,blitFlip){
+ /* h = DRIVER buffer rows (what firmware addresses); glassH = physical glass rows. 1:1 pixels, never stretched. */
+ this.w=w;this.h=h;this.glassH=glassH;this.fb=new Uint8Array(w*h);this.rotation=0;this.inverted=false;
+ this.cv=document.getElementById(canvasId);this.ctx=this.cv.getContext("2d");this.flip=blitFlip;
+ this.cursor_x=0;this.cursor_y=0;this.textcolor=WHITE;this.font=null;this.wrap=true;
+}
+Screen.prototype.drawPixel=function(x,y,c){
+ x=Math.trunc(x);y=Math.trunc(y);
+ if(this.rotation==2){x=this.w-1-x;y=this.h-1-y;}
+ if(x<0||x>=this.w||y<0||y>=this.h)return;
+ this.fb[y*this.w+x]=c;
+};
+Screen.prototype.clearDisplay=function(){this.fb.fill(0);};
+Screen.prototype.fillRect=function(x,y,w,h,c){for(let j=0;j<h;j++)for(let i=0;i<w;i++)this.drawPixel(x+i,y+j,c);};
+Screen.prototype.drawRect=function(x,y,w,h,c){for(let i=0;i<w;i++){this.drawPixel(x+i,y,c);this.drawPixel(x+i,y+h-1,c);}for(let j=0;j<h;j++){this.drawPixel(x,y+j,c);this.drawPixel(x+w-1,y+j,c);}};
+Screen.prototype.drawFastHLine=function(x,y,w,c){for(let i=0;i<w;i++)this.drawPixel(x+i,y,c);};
+Screen.prototype.writeLine=function(x0,y0,x1,y1,c){
+ x0=Math.trunc(x0);y0=Math.trunc(y0);x1=Math.trunc(x1);y1=Math.trunc(y1);
+ let dx=Math.abs(x1-x0),dy=-Math.abs(y1-y0),sx=x0<x1?1:-1,sy=y0<y1?1:-1,err=dx+dy;
+ for(;;){this.drawPixel(x0,y0,c);if(x0==x1&&y0==y1)break;const e2=2*err;
+  if(e2>=dy){err+=dy;x0+=sx;}if(e2<=dx){err+=dx;y0+=sy;}}
+};
+Screen.prototype.drawTriangle=function(x0,y0,x1,y1,x2,y2,c){this.writeLine(x0,y0,x1,y1,c);this.writeLine(x1,y1,x2,y2,c);this.writeLine(x2,y2,x0,y0,c);};
+Screen.prototype.drawLine=function(x0,y0,x1,y1,c){this.writeLine(x0,y0,x1,y1,c);}; /* [GFX] drawLine wraps writeLine, as Adafruit's does */
+/* Adafruit_GFX drawCircle/fillCircle - same Bresenham family for both, as the library does.
+   [issue 9 fix, STATE 2026-07-15]: the twin previously erased with a distance-formula disc while
+   drawing outlines with Bresenham; the two plot different edge pixels, so erases missed pixels and
+   bubbles left trails. Firmware never had this bug - it was a shim rasterizer mismatch. */
+Screen.prototype.drawCircle=function(cx,cy,r,c){cx=Math.trunc(cx);cy=Math.trunc(cy);r=Math.trunc(r);
+ let f=1-r,ddF_x=1,ddF_y=-2*r,x=0,y=r;
+ this.drawPixel(cx,cy+r,c);this.drawPixel(cx,cy-r,c);this.drawPixel(cx+r,cy,c);this.drawPixel(cx-r,cy,c);
+ while(x<y){
+  if(f>=0){y--;ddF_y+=2;f+=ddF_y;}
+  x++;ddF_x+=2;f+=ddF_x;
+  this.drawPixel(cx+x,cy+y,c);this.drawPixel(cx-x,cy+y,c);this.drawPixel(cx+x,cy-y,c);this.drawPixel(cx-x,cy-y,c);
+  this.drawPixel(cx+y,cy+x,c);this.drawPixel(cx-y,cy+x,c);this.drawPixel(cx+y,cy-x,c);this.drawPixel(cx-y,cy-x,c);
+ }
+};
+Screen.prototype.writeFastVLine=function(x,y,h,c){for(let i=0;i<h;i++)this.drawPixel(x,y+i,c);};
+Screen.prototype.fillCircleHelper=function(x0,y0,r,corners,delta,c){
+ let f=1-r,ddF_x=1,ddF_y=-2*r,x=0,y=r,px=x,py=y;
+ delta++;
+ while(x<y){
+  if(f>=0){y--;ddF_y+=2;f+=ddF_y;}
+  x++;ddF_x+=2;f+=ddF_x;
+  if(x<(y+1)){
+   if(corners&1)this.writeFastVLine(x0+x,y0-y,2*y+delta,c);
+   if(corners&2)this.writeFastVLine(x0-x,y0-y,2*y+delta,c);
+  }
+  if(y!=py){
+   if(corners&1)this.writeFastVLine(x0+py,y0-px,2*px+delta,c);
+   if(corners&2)this.writeFastVLine(x0-py,y0-px,2*px+delta,c);
+   py=y;
+  }
+  px=x;
+ }
+};
+Screen.prototype.fillCircle=function(cx,cy,r,c){cx=Math.trunc(cx);cy=Math.trunc(cy);r=Math.trunc(r);
+ this.writeFastVLine(cx,cy-r,2*r+1,c);
+ this.fillCircleHelper(cx,cy,r,3,0,c);
+};
+Screen.prototype.invertDisplay=function(f){this.inverted=f;};
+Screen.prototype.setRotation=function(r){this.rotation=r;};
+Screen.prototype.setCursor=function(x,y){this.cursor_x=x;this.cursor_y=y;};
+Screen.prototype.setFont=function(f){this.font=f;};
+Screen.prototype.setTextSize=function(s){};
+Screen.prototype.setTextColor=function(c){this.textcolor=c;};
+Screen.prototype.print=function(text){
+ text=String(text);
+ for(const ch of text){
+  const cc=ch.charCodeAt(0);
+  if(ch=='\n'){this.cursor_x=0;this.cursor_y+=this.font?this.font.yAdv:8;continue;}
+  if(ch=='\r')continue;
+  if(!this.font){ /* classic built-in 5x7 [GFX default] */
+   if(this.wrap&&(this.cursor_x+6)>this.w){this.cursor_x=0;this.cursor_y+=8;}
+   for(let i=0;i<5;i++){let col=CLASSIC[cc*5+i];
+    for(let j=0;j<8;j++)if(col&(1<<j))this.drawPixel(this.cursor_x+i,this.cursor_y+j,this.textcolor);}
+   this.cursor_x+=6;
+  } else {
+   if(cc<0x20||cc>0x7E){this.cursor_x+=0;continue;}
+   const g=this.font.g[cc-0x20];const off=g[0],w=g[1],h=g[2],xa=g[3],xo=g[4],yo=g[5];
+   if(w>0&&h>0&&this.wrap&&(this.cursor_x+xo+w)>this.w){this.cursor_x=0;this.cursor_y+=this.font.yAdv;}
+   let bit=0;
+   for(let yy=0;yy<h;yy++)for(let xx=0;xx<w;xx++){
+    if(this.font.bm[off+(bit>>3)]&(0x80>>(bit&7)))this.drawPixel(this.cursor_x+xo+xx,this.cursor_y+yo+yy,this.textcolor);bit++;}
+   this.cursor_x+=xa;
+  }
+ }
+};
+Screen.prototype.getTextBounds=function(text){ /* custom fonts, single line (firmware usage) */
+ if(!this.font)return{w:String(text).length*6,h:8};
+ let minx=1e9,maxx=-1e9,x=0;
+ for(const ch of String(text)){const cc=ch.charCodeAt(0);if(cc<0x20||cc>0x7E)continue;
+  const g=this.font.g[cc-0x20];if(g[1]>0&&g[2]>0){minx=Math.min(minx,x+g[4]);maxx=Math.max(maxx,x+g[4]+g[1]-1);}x+=g[3];}
+ return{w:maxx>=minx?maxx-minx+1:0,h:this.font.yAdv};
+};
+/* Front glass mapping is CODE truth, not a choice: COMPINS 0x02 (sequential, chosen for HEIGHT==32
+   [Adafruit_SSD1306.cpp:604-605]) on alternated-wired 64-row glass -> driver row r lights glass line 2r.
+   Confirmed vs physical unit (Mike, gate round 3). Override exists in dev controls, marked NON-CANONICAL. */
+let FRONT_MAP_OVERRIDE=null; /* null = canonical interlace; "tophalf" = non-canonical dev override */
+let MGK65_TIGHT_ROWS=false;  /* 65 reveal row pair: false = NIAC's 32/48, true = 28/38 (Mike picks) */
+Screen.prototype.display=function(){
+ /* true 128x64 glass, 1:1 pixels, no stretching. Each glass row is a discrete emissive line:
+    each row cell lights z-1 px with a 1px dark scanline gap (glass structure, display-only).
+    [DEV, Mike ruling 2026-07-17] z = SCREEN_ZOOM (integer, no smoothing): half (2x) default, size control in chrome. */
+ const ctx=this.ctx;const z=SCREEN_ZOOM;
+ if(this.cv.width!==this.w*z||this.cv.height!==this.glassH*z){this.cv.width=this.w*z;this.cv.height=this.glassH*z;}
+ ctx.imageSmoothingEnabled=false;ctx.fillStyle="#000";ctx.fillRect(0,0,this.cv.width,this.cv.height);
+ ctx.fillStyle="rgb(230,242,255)";
+ for(let gy=0;gy<this.glassH;gy++){
+  let dy,rowH=z-1;                                                  /* top: z-1 lit + 1 gap = the CEILING (porch ruling: no more than current) */
+  if(this.h==this.glassH){dy=gy;}                                   /* top: progressive, all rows [SSD1306.cpp:607-608] */
+  else if(FRONT_MAP_OVERRIDE=="tophalf"){dy=(gy<this.h)?gy:-1;}     /* NON-CANONICAL dev override */
+  else {dy=(gy%2==0)?gy/2:-1;rowH=2*z-1;}                           /* front canonical interlace [SSD1306.cpp:604-605] - MAPPING unchanged (code truth); porch ruling 2026-07-17: the dark-line treatment was far too drastic -> lit band now spans into the dark line (ratio inverted: 2z-1 lit / 1 gap), display-only */
+  if(dy<0)continue;
+  for(let x=0;x<this.w;x++){
+   let sx=x,sy=dy;if(this.flip){sx=this.w-1-x;sy=this.h-1-dy;}
+   let v=this.fb[sy*this.w+sx];if(this.inverted)v=1-v;
+   if(v)ctx.fillRect(x*z,gy*z,z,rowH);
+  }
+ }
+};
+
+/* ============ [SHIM] clock, PRNG, Serial, DFPlayer, NeoPixels, inputs ============ */
+let SCREEN_ZOOM=3; /* [DEV, Mike porch ruling 2026-07-17] screens THREE-QUARTER by default (supersedes the morning half-size ruling); integer display-only scaling, size control in device panel */
+function setZoom(z){
+ SCREEN_ZOOM=z;
+ if(typeof topOLED!=="undefined"){topOLED.display();frontOLED.display();}
+ for(const b of document.querySelectorAll(".zoombtn"))b.classList.toggle("zactive",b.id==="z"+z);
+}
+let SPEED=1;
+const t0=performance.now();
+function millis(){return Math.trunc((performance.now()-t0)*SPEED);}
+function sleep(ms){return new Promise(r=>setTimeout(r,ms/SPEED));}
+let seed=(Math.random()*0x7fffffff)|0;
+document.getElementById("seedview").textContent=seed;
+let rngState=seed||1;
+function rngU32(){rngState^=rngState<<13;rngState>>>=0;rngState^=rngState>>17;rngState^=rngState<<5;rngState>>>=0;return rngState;}
+function random(a,b){if(b===undefined){return rngU32()%a;}return a+(rngU32()%(b-a));}
+function constrain(v,lo,hi){return v<lo?lo:(v>hi?hi:v);}
+function abs(v){return Math.abs(v);}
+function strcmp(a,b){return a===b?0:1;}
+const Serial={buf:"",print:function(s){this.buf+=String(s);this.flush();},println:function(s){this.buf+=(s===undefined?"":String(s))+"\n";this.flush();},
+ flush:function(){const el=document.getElementById("serial");el.textContent=this.buf.split("\n").slice(-60).join("\n");el.scrollTop=el.scrollHeight;},begin:function(){}};
+const AUDIO_BASE="../robots/mgk-viiip/content/build/SD/";
+let currentAudio=null;
+const player={
+ playFolder:function(folder,file){
+  /* DFPlayer plays WAV and MP3 both; the SAM set is .wav, earlier sets .mp3 - try wav, fall back */
+  const stem=String(file).padStart(3,"0");
+  const name=stem+".wav";const url=AUDIO_BASE+String(folder).padStart(2,"0")+"/"+name;
+  if(file>255)chip("miss","<b>FILE-256 BUG</b> [bug d, M8BALL:132]: requested file "+file+" &gt; 255 &mdash; DFPlayer undefined behavior");
+  const over255=file>255?" <b>256+</b>":"";
+  if(currentAudio){currentAudio.pause();} /* DFPlayer: new command interrupts current track */
+  const a=new Audio(url);currentAudio=a;
+  a.play().then(()=>chip("ok","&#9834; "+folder+"/"+name)).catch(()=>{
+   const b=new Audio(AUDIO_BASE+String(folder).padStart(2,"0")+"/"+stem+".mp3");currentAudio=b;
+   b.play().then(()=>chip("ok","&#9834; "+folder+"/"+stem+".mp3")).catch(()=>chip("miss","&#9834; missing "+folder+"/"+stem+" (.wav/.mp3)"+over255));
+  });
+ },
+ pause:function(){if(currentAudio)currentAudio.pause();},
+ volume:function(v){},begin:function(){}
+};
+function chip(kind,html){
+ const c=document.getElementById("chips");
+ if(c.firstChild&&c.firstChild.tagName!="SPAN")c.innerHTML="";
+ else if(c.firstChild&&c.firstChild.tagName=="SPAN"&&c.firstChild.style)c.innerHTML="";
+ const s=document.createElement("span");s.className="chip "+kind;s.innerHTML=html;c.prepend(s);
+ while(c.children.length>6)c.removeChild(c.lastChild);
+}
+/* [SHIM] NeoPixel display: gamma-honest, NOT normalized. A WS2812 drives linear PWM; the eye sees
+   ~(v/255)^(1/2.2). Raw (0,0,16) = faint but clearly visible blue glow - rendered as exactly that.
+   Firmware idle truth [main:167-172]: both pixels steady dim blue (0,0,16), forever; no pattern. */
+const pixels={raw:[[0,0,0],[0,0,0]],
+ setPixelColor:function(i,c){this.raw[i]=c;},
+ Color:function(r,g,b){return [r,g,b];},
+ show:function(){
+  for(let i=0;i<2;i++){
+   const rgb=this.raw[i];const g22=v=>Math.round(255*Math.pow(v/255,1/2.2));
+   const el=document.getElementById("npx"+i), lb=document.getElementById("npxv"+i);
+   if(Math.max(rgb[0],rgb[1],rgb[2])==0){el.style.background="#000";lb.textContent="off";}
+   else{el.style.background="rgb("+g22(rgb[0])+","+g22(rgb[1])+","+g22(rgb[2])+")";
+    lb.textContent="("+rgb[0]+","+rgb[1]+","+rgb[2]+")";}
+  }},
+ clear:function(){this.raw=[[0,0,0],[0,0,0]];},begin:function(){}};
+/* [SHIM] IMU: synthetic accel vector in g. Idle = (0,0,1). Tilt keys (WASD) bend x/y; Space/SHAKE spikes
+   magnitude past the 1.3 threshold [M8BALL:31]. Firmware readAcceleration(x,y,z) is by-ref; JS returns [x,y,z]. */
+let tiltX=0,tiltY=0,shakeUntil=0;
+const IMU={
+ accelerationAvailable:function(){return true;},
+ readAcceleration:function(){
+  /* [FIX a, 2026-07-22] shake synth must OSCILLATE sign like a real shake: the old
+     always-positive synth fed ax=(+)^3*-300 (left) / ay=(+)^3*150 (down) every frame,
+     so bubbles pooled bottom-left under shake. Magnitude unchanged (Get_Shake_Value
+     uses sqrt of squares — sign-safe). */
+  if(performance.now()<shakeUntil){const s1=Math.random()<0.5?-1:1,s2=Math.random()<0.5?-1:1;
+   return [s1*(0.9+Math.random()*0.7),s2*(0.8+Math.random()*0.6),1.0];}
+  return [tiltX,tiltY,1.0];}
+};
+function devShake(){shakeUntil=performance.now()+700;}
+/* input edge queues: hardware loses edges while buffer FULL; twin drops beyond 1 queued (closest match, flagged) */
+let rotaryPending=0, shutterPending=0;
+function devRotary(){if(rotaryPending<1)rotaryPending++;}
+function devShutter(){if(shutterPending<1)shutterPending++;}
+window.addEventListener("keydown",e=>{
+ if(e.key=="ArrowDown"){devRotary();e.preventDefault();}
+ else if(e.key=="Enter"){devShutter();e.preventDefault();}
+ else if(e.key==" "){devShake();e.preventDefault();}
+ else if(e.key=="a"||e.key=="A"){tiltX=-0.35;}
+ else if(e.key=="d"||e.key=="D"){tiltX=0.35;}
+ else if(e.key=="w"||e.key=="W"){tiltY=-0.35;}
+ else if(e.key=="s"||e.key=="S"){tiltY=0.35;}});
+window.addEventListener("keyup",e=>{
+ if("aAdD".includes(e.key))tiltX=0;
+ if("wWsS".includes(e.key))tiltY=0;});
+document.getElementById("cvFront").addEventListener("click",devShutter);
+/* wheel control REMOVED per slice-1 gate ruling 3 - hijacked page scroll */
+
+/* ============ [FW] main .ino - constants + globals ============ */
+const NO_SCREEN=0, TOP_SCREEN=0x3C, FRONT_SCREEN=0x3D;                   /* [main:21-23] */
+const MAX_SCREEN_WIDTH=128, MAX_SCREEN_HEIGHT=64, MIN_SCREEN_HEIGHT=32;  /* [main:25-27] */
+const TOP_SCREEN_HEIGHT=64, FRONT_SCREEN_HEIGHT=32;
+const SMALL_SCREEN=32, LARGE_SCREEN=64;
+const SMALL_FONT=0, MEDIUM_FONT=1, LARGE_FONT=2;                          /* [main:37-39] */
+const TOP_SCREEN_DEFAULT_FONT=0, FRONT_SCREEN_DEFAULT_FONT=1;            /* [main:41-42] */
+const Header_01="-(A)BEAL MGK-VIIIp >-";                                  /* [main:45] */
+const Row_01=0, Row_02=13, Row_03=24;                                     /* [main:46-48] */
+/* UPID enum [main:51-83] */
+const NO_UPID=-1, HW_RESCAN_ALL_INPUT_BUFFERS=0, MGK_VIIIP=1, MESSAGES=2, PROGRAMS=3,
+ PREFERENCES=4, ANSWERS=5, PREDICTIONS=6, PROBABILITIES=7, ADVICE=8, DETECTORS=9,
+ VOICE_MSGS=10, TEXT_MSGS=11, SYSTEM_MSGS=12, GAMES=13, CODES=14, USER=15,
+ POLARITY=16, POLARITY_SETTING=17, CLARITY=18, CLARITY_SETTING=19, MGKMODEL=20, VOICE=21,
+ MENU_SYSTEM=22, SYSTEM_MONITOR=23, UPID_MAX=24, BUBBLES=25;
+const PROCESS_UNIQUE_ID=0, PROCESS_STATE=1, PROCESS_PRIORITY=2, PROCESS_ATTRIBUTE_MAX=3;
+const NO_STATE=-1, STOP=0, RUN=1;
+const NO_PRIORITY=99, NORMAL_PRIORITY=51, HIGH_PRIORITY=31;
+const FLASH_POLARITY_SETTING=0, FLASH_CLARITY_SETTING=1, FLASH_POLARITY_BIAS=2, FLASH_CLARITY_BIAS=3;
+const frontOLED=new Screen(MAX_SCREEN_WIDTH,SMALL_SCREEN,64,"cvFront",false); /* [main:127] 32-row driver buffer, interlaced onto 64-row glass */
+const topOLED=new Screen(MAX_SCREEN_WIDTH,LARGE_SCREEN,64,"cvTop",true);      /* [main:128] */
+let OLED=frontOLED;                                                          /* [main:131] */
+let Active_Process_Name="Waiting for User Input";                            /* [main:134] */
+let menuNum_PTR=0, lineNum_PTR=0;                                            /* [main:136-137] */
+let currentScreenHeight=0;
+let currentVoiceID=8;  /* TESTING - default to CEO [main:140] */
+
+/* ============ [DATA] content tables - REAL CSVs via REAL resolver (ARCHITECTURAL LAW, MENU_MAP s1.5) ============
+   Twin content = table-resolved. KNOWN DELTA vs flashed unit (hand-written tables, 'Definately') until bench splice. */
+const CSV_CORE="answer_id,polarity_tag,text\n0,2,Ask again_later.\n1,2,Cannot_predict now.\n2,2,Concentrate_and ask again.\n3,2,Reply hazy._Try again.\n4,0,Definitely_No.\n5,1,Don't count_on it.\n6,0,My reply_is no.\n7,0,My sources_say no.\n8,1,Outlook_not so good.\n9,1,Very doubtful.\n10,3,\"As I see it,_yes.\"\n11,4,It is_certain.\n12,4,It is_decidedly so.\n13,3,Most_likely.\n14,3,Outlook good.\n15,3,Signs point_to yes.\n16,4,Yes.\n17,4,\"Yes,_definitely.\"\n18,4,You may_rely on it.\n19,4,Without_a doubt.\n";
+const CSV_ENGOV="engine_id,answer_id,text\n1,0,Ask again later.\n1,1,Cannot predict_now.\n1,2,\"Concentrate,_and ask again.\"\n1,4,Definitely no.\n1,10,\"As I see it, yes.\"\n1,11,It is certain.\n1,13,Most likely.\n1,17,\"Yes, definitely.\"\n";
+const CSV_CLOV="engine_id,answer_id,clarity_level,text\n2,0,0,Processing... Go_back to your porn.\n2,0,1,Hold your horses!_System overloaded.\n2,0,2,\"Dial down the_urgency, will ya?\"\n2,0,3,Insufficient_data. Please wait.\n2,0,4,\"I'll revisit this_shortly, colleague.\"\n2,1,0,Error! Variables_unstable.\n2,1,1,System overload._Need reboot!\n2,1,2,\"Data's all_scrambled, dude.\"\n2,1,3,Insufficient data_for calculation.\n2,1,4,Analysis inconclusive_at this time.\n2,2,0,Invalid query._Please rephrase.\n2,2,1,\"Whoa, that was garbled!_Try again, please.\"\n2,2,2,Error 404:_Question not found\n2,2,3,Request cannot_be processed.\n2,2,4,Query requires_clarification.\n2,3,0,System diagnostics_inconclusive.\n2,3,1,VVindows has_encountered an error.\n2,3,2,My data stream_is corrupted.\n2,3,3,Insufficient input_for response.\n2,3,4,Analysis requires_additional data.\n2,4,0,Access denied._Operation aborted.\n2,4,1,\"Negative, ghost rider._System says NOPE!\"\n2,4,2,Security firewall_breach! That's a no-go.\n2,4,3,System error._Not an option.\n2,4,4,Protocol prohibits_action. Request denied.\n2,5,0,System error._Outlook unfavorable.\n2,5,1,Fatal Error! Don't get your_floppy disk in a twist.\n2,5,2,System predicts_low success rate.\n2,5,3,Error code: Uh-oh._Not lookin' good.\n2,5,4,Probabilities are_not encouraging.\n2,6,0,Request_denied.\n2,6,1,You have been_disconnected.\n2,6,2,Error. Error._Abort! Abort!\n2,6,3,System shutdown_initiated.\n2,6,4,I must_decline.\n2,7,0,Network offline._Consensus negative.\n2,7,1,System reports a_brick wall ahead.\n2,7,2,Intel download_failed. It's a NO.\n2,7,3,Assets indicate an_operational dead-end.\n2,7,4,Contacts provide_negative confirmation.\n2,8,0,System instability_detected.\n2,8,1,Warning! The data_looks corrupt.\n2,8,2,High risk alert._Potential failure.\n2,8,3,Analysis indicates_potential complications.\n2,8,4,Proceed carefully._Possible errors ahead.\n2,9,0,Error 404:_Success not found.\n2,9,1,System crash likely._Don't bet on it!\n2,9,2,I'm picking up a lot_of static on this one.\n2,9,3,Analysis indicates_poor strategy.\n2,9,4,Warning: Potential data_corruption detected.\n2,10,0,System diagnostics:_Green light.\n2,10,1,Data stream_indicates 'go'.\n2,10,2,Affirmative._Proceed as planned.\n2,10,3,Analysis confirms_feasibility.\n2,10,4,Current calculations_support a positive outcome.\n2,11,0,[Triumphant Windows Startup Sound]\n2,11,1,System reports_absolute certainty.\n2,11,2,100%. No bugs_detected.\n2,11,3,Analysis confirms_inevitability.\n2,11,4,This cannot be_refuted. It is certain.\n2,12,0,Data verified._This is the path.\n2,12,1,Calculating... Yes! System_confirms affirmative.\n2,12,2,Calculation confirms._It's a definite go.\n2,12,3,Analysis dictates_positive outcome.\n2,12,4,The algorithm is certain._Proceed with confidence.\n2,13,0,System predicts_success probability.\n2,13,1,Error detection minimal._Let's roll the dice.\n2,13,2,Analysis indicates_probable success.\n2,13,3,Calculated risk_assessment: Acceptable.\n2,13,4,\"The odds are in your_favor, though not absolute.\"\n2,14,0,System online._All lights green.\n2,14,1,Fortune cookie_says YES!\n2,14,2,Happy beep boops! The_future is lookin' bright.\n2,14,3,Analysis indicates_favorable outcome.\n2,14,4,Optimistic system_forecast detected.\n2,15,0,System diagnostics_favorable.\n2,15,1,The pixels are twinkling!_It's your lucky day.\n2,15,2,Analysis indicates_positive response.\n2,15,3,Indications_are optimistic.\n2,15,4,Analysis leans towards_positive outcome.\n2,16,0,Affirmative.\n2,16,1,Beep!_(Translation: Yes).\n2,16,2,\"Sure,_why not?\"\n2,16,3,Executing_command...\n2,16,4,As you_wish.\n2,17,0,[Windows 'tada' sound effect]\n2,17,1,Hell yeah! System_fully supports this.\n2,17,2,Absolutely! Let's_make it happen!\n2,17,3,Affirmative! Action_sequence initiated!\n2,17,4,Proceed with complete_confidence. Operation approved.\n2,18,0,Data integrity_confirmed.\n2,18,1,\"You have my digital_signature, pal.\"\n2,18,2,Error-free_guarantee! Proceed!\n2,18,3,Protocol verified._You have my word.\n2,18,4,My calculations are_absolute. Trust me.\n2,19,0,System diagnostics:_100% operational.\n2,19,1,Error detection: Zero._This is rock-solid.\n2,19,2,Absolutely. System_integrity confirmed.\n2,19,3,Analysis indicates_absolute certainty.\n2,19,4,This is the only logical_course of action.\n";
+function csvParse(text){
+ const lines=text.trim().split(/\r?\n/);const hdr=csvLine(lines[0]);
+ return lines.slice(1).filter(l=>l.length).map(l=>{const v=csvLine(l);const o={};hdr.forEach((h,i)=>o[h]=v[i]);return o;});}
+function csvLine(l){const out=[];let cur="",q=false;
+ for(let i=0;i<l.length;i++){const c=l[i];
+  if(q){if(c=='"'){if(l[i+1]=='"'){cur+='"';i++;}else q=false;}else cur+=c;}
+  else{if(c=='"')q=true;else if(c==','){out.push(cur);cur="";}else cur+=c;}}
+ out.push(cur);return out;}
+const T_CORE={},T_ENGOV={},T_CLOV={};
+csvParse(CSV_CORE).forEach(r=>T_CORE[+r.answer_id]=r);
+csvParse(CSV_ENGOV).forEach(r=>T_ENGOV[r.engine_id+"|"+r.answer_id]=r.text);
+csvParse(CSV_CLOV).forEach(r=>T_CLOV[r.engine_id+"|"+r.answer_id+"|"+r.clarity_level]=r.text);
+/* the REAL resolver order [MENU_MAP s1.5]: unit ?? clarity ?? engine ?? core (unit layer empty this pass) */
+function resolveAnswer(e,a,c){
+ let t=T_CLOV[e+"|"+a+"|"+c];
+ if(t===undefined)t=T_ENGOV[e+"|"+a];
+ if(t===undefined)t=T_CORE[a].text;
+ return t;
+}
+function split2(t){const i=t.indexOf("_");return i<0?[t,""]:[t.slice(0,i),t.slice(i+1)];}
+/* [Mike ruling 2026-07-15] a [bracketed] cell is a TRIGGERED SOUND EFFECT, not spoken text:
+   the machine plays the sound AS the answer; the table carries empty display strings. */
+function isSFX(t){const s=t.trim();return s.startsWith("[")&&s.endsWith("]");}
+const SFX_TEXT={}; /* engine|answer|clarity -> the sfx directive, for the twin's chrome */
+/* M8B_AnswerTable[3][20][5][2] - built from tables (diff-proof PASS vs hand-written, DIFF_REPORT 20260714) */
+const ANSWERS_PER_TABLE=20;
+const M8B_AnswerTable=[];
+for(let e=0;e<3;e++){const ea=[];for(let a=0;a<20;a++){const row=[];
+ for(let c=0;c<5;c++){const t=resolveAnswer(e,a,c);
+  if(isSFX(t)){SFX_TEXT[e+"|"+a+"|"+c]=t.trim();row.push(["",""]);}
+  else row.push(split2(t));}
+ ea.push(row);}M8B_AnswerTable.push(ea);}
+/* M8B_Answers_ParametersTable[3][20][3] [BIAS.ino:20-25] - byte-identical to generated (param diff: zero lines) */
+const M8B_Answers_ParametersTable=[];
+for(let e=0;e<3;e++){const ea=[];for(let a=0;a<20;a++)ea.push([e,a,+T_CORE[a].polarity_tag]);M8B_Answers_ParametersTable.push(ea);}
+
+/* ============ [FW] BIAS.ino globals ============ */
+const Negative=0,Pessimistic=1,Neutral=2,Favorable=3,Optimistic=4,polaritySetting_Max=5; /* [BIAS:1-6] NOTE: no Affirmative - preserved bug */
+const Uncouth=0,Offensive=1,Discourteous=2,Impartial=3,Mannerly=4,claritySetting_MAX=5;
+let polaritySettingNOW=Neutral, claritySettingNOW=Impartial;
+/* [TWIN DELTA - Mike ruling 2026-07-15] polarityBiasNOW factory default 100 -> 0.
+   At 100 the weight formula zeroed every non-exact polarity tag: 4 of 20 answers reachable at
+   power-on, on every engine (docs/FINDING-polarity-bias-default-20260715.md). 0 = flat, the classic
+   M8B spread - lore-consistent with "MGK-NIAC (1945, original M8B responses only)".
+   clarityBiasNOW stays 100: pinning clarity to the setting IS the ruled defaults-only behavior.
+   Firmware patch: docs/FIRMWARE_CHANGE_SPEC-mgk65-20260715.md s7. */
+let polarityBiasNOW=0, clarityBiasNOW=100;
+function Polarity_Engine_Response(M8B_ball_ID){                       /* [BIAS:29-55] exact */
+ let polarityBias_SubTot=0;
+ for(let i=0;i<ANSWERS_PER_TABLE;i++){
+  const d=abs(M8B_Answers_ParametersTable[M8B_ball_ID][i][2]-polaritySettingNOW);
+  polarityBias_SubTot+=constrain(100-(polarityBiasNOW*d),0,100);}
+ const randomNum=random(0,polarityBias_SubTot);
+ polarityBias_SubTot=0;
+ for(let i=0;i<ANSWERS_PER_TABLE;i++){
+  const d=abs(M8B_Answers_ParametersTable[M8B_ball_ID][i][2]-polaritySettingNOW);
+  polarityBias_SubTot+=constrain(100-(polarityBiasNOW*d),0,100);
+  if(polarityBias_SubTot>=randomNum)return i;}
+ Serial.println("SHIT!");                                             /* [BIAS:53] yes, really */
+ return -1;
+}
+function Clarity_Engine_Response(M8B_ball_ID){                        /* [BIAS:57-84] exact */
+ let clarityBias_SubTot=0;
+ for(let i=0;i<claritySetting_MAX;i++){
+  const d=abs(i-claritySettingNOW);
+  clarityBias_SubTot+=constrain(100-clarityBiasNOW*d,0,100);}
+ const randomNum=random(0,clarityBias_SubTot);
+ clarityBias_SubTot=0;
+ for(let i=0;i<claritySetting_MAX;i++){
+  const d=abs(i-claritySettingNOW);
+  clarityBias_SubTot+=constrain(100-clarityBiasNOW*d,0,100);
+  if(clarityBias_SubTot>=randomNum)return i;}
+ return -1;
+}
+
+/* ============ [FW] FLASH.ino ============ */
+function Save_To_Flash(variableID){ Serial.println("Save to flash not implemented"); } /* [FLASH:11-22] exact - RAM-only */
+
+/* ============ [FW] 4_AUDIO.ino ============ */
+const DataTransfer=0,Connected=1,PowerMaury=2,Select=3,Scroll=4,WhiteNoise=5,BeepsAndBoops=6,ConnectionSuccess=7,
+ Slosh_0=8,Slosh_1=9,Slosh_2=10,Slosh_3=11,Slosh_4=12;
+function PlaySound(SoundID){                                                  /* [4_AUDIO:18-29] */
+ switch(SoundID){
+  case DataTransfer: player.playFolder(4,1);break;
+  case Connected: player.playFolder(4,9);break;
+  case PowerMaury: player.playFolder(2,4);break;
+  case Select: player.playFolder(4,13);break;
+  case Scroll: player.playFolder(4,10);break;
+  case WhiteNoise: player.playFolder(3,6);break;
+  case BeepsAndBoops: player.playFolder(4,1);break;
+  case ConnectionSuccess: player.playFolder(4,9);break;
+ }
+}
+
+/* ============ [FW] 3_PROC_MGR.ino - exact ============ */
+const PROCESS_POINTER_MAX=10;
+const Process_Registry=Array.from({length:PROCESS_POINTER_MAX},()=>[NO_UPID,NO_STATE,NO_PRIORITY]);
+function Initialize_the_Process_Registry(){for(let i=0;i<PROCESS_POINTER_MAX;i++){Process_Registry[i][PROCESS_UNIQUE_ID]=NO_UPID;Process_Registry[i][PROCESS_STATE]=NO_STATE;Process_Registry[i][PROCESS_PRIORITY]=NO_PRIORITY;}}
+function Get_Ptr_for_uniqueProcessID(id){for(let i=0;i<PROCESS_POINTER_MAX;i++)if(Process_Registry[i][PROCESS_UNIQUE_ID]==id)return i;return -1;}
+function Start_Process(id,pri){for(let i=0;i<PROCESS_POINTER_MAX;i++){if(Process_Registry[i][PROCESS_STATE]==NO_STATE){Process_Registry[i][PROCESS_UNIQUE_ID]=id;Process_Registry[i][PROCESS_STATE]=RUN;Process_Registry[i][PROCESS_PRIORITY]=pri;break;}}}
+function Pause_Process(id){const p=Get_Ptr_for_uniqueProcessID(id);if(p!=-1)Process_Registry[p][PROCESS_STATE]=STOP;}
+function Unpause_Process(id){const p=Get_Ptr_for_uniqueProcessID(id);if(p!=-1)Process_Registry[p][PROCESS_STATE]=RUN;}
+function End_Process(id){const p=Get_Ptr_for_uniqueProcessID(id);if(p!=-1){Process_Registry[p][PROCESS_UNIQUE_ID]=NO_UPID;Process_Registry[p][PROCESS_STATE]=NO_STATE;Process_Registry[p][PROCESS_PRIORITY]=NO_PRIORITY;}}
+let lastCheckedProcessPointer=-1; /* static [3_PROC_MGR:62] */
+function Process_to_Run_Next(){
+ for(let i=lastCheckedProcessPointer+1;i<PROCESS_POINTER_MAX;i++){
+  if(Process_Registry[i][PROCESS_STATE]==RUN){lastCheckedProcessPointer=i;return Process_Registry[i][PROCESS_UNIQUE_ID];}}
+ lastCheckedProcessPointer=-1;return 0;
+}
+
+/* ============ [FW] 5_INPUT.ino ============ */
+const EMPTY=0, FULL=1;
+const NO_INPUT_DEVICE=0, SHUTTER=1, ROTARY_DIAL=2, MIC=3, INPUT_DEVICE_MAX=4;
+const DEVICE_STATE=0, BUFFER_VALUE=1, SEND_COMMAND=2, INPUT_DEVICE_ATTR_MAX=3;
+const Device_Manager=Array.from({length:INPUT_DEVICE_MAX},()=>[0,0,0]);
+function Pull_From_Buffer(dev){const t=Device_Manager[dev][BUFFER_VALUE];Device_Manager[dev][BUFFER_VALUE]=EMPTY;return t;}
+function HW_Rescan_All_Input_Buffers(){for(let i=0;i<INPUT_DEVICE_MAX;i++)HW_Rescan_Input_Buffer(i);}
+function HW_Rescan_Input_Buffer(dev){
+ if(Device_Manager[dev][BUFFER_VALUE]==EMPTY){
+  switch(dev){case NO_INPUT_DEVICE:break;case SHUTTER:HW_Rescan_SHUTTER();break;
+   case ROTARY_DIAL:HW_Rescan_ROTARY_DIAL();break;case MIC:HW_Rescan_MIC();break;}}}
+function HW_Rescan_SHUTTER(){ /* [SHIM] release-edge semantics collapse to one queued click */
+ if(shutterPending>0){shutterPending--;Device_Manager[SHUTTER][BUFFER_VALUE]=FULL;PlaySound(Select);}}
+function HW_Rescan_ROTARY_DIAL(){
+ if(rotaryPending>0){rotaryPending--;Device_Manager[ROTARY_DIAL][BUFFER_VALUE]=FULL;PlaySound(Scroll);}}
+function HW_Rescan_MIC(){ /* firmware reads mic RMS and does nothing with it [5_INPUT:79-88] - stub is behaviorally exact */ }
+/* [SHIM] The_Mic_Has_Data() computes RMS over the PDM buffer [5_INPUT:111-120]. The twin has no
+   microphone by default; MIC_LEVEL is driven by the dev slider (or a real mic if Mike enables one).
+   The detector consumes the same RMS the firmware already knows how to compute. */
+let MIC_LEVEL=0;
+function Mic_RMS(){return MIC_LEVEL*(0.85+Math.random()*0.3);}
+function Get_Shake_Value(){                                           /* [5_INPUT:98-105] */
+ let shakeValue=0;
+ if(IMU.accelerationAvailable()){const a=IMU.readAcceleration();
+  shakeValue=Math.sqrt(a[0]*a[0]+a[1]*a[1]+a[2]*a[2]);}
+ return shakeValue;
+}
+function Unit_Is_Shaking(t){return Get_Shake_Value()>=t;}             /* [5_INPUT:107-109] */
+
+/* ============ [FW] 2_data_MENU.ino - verbatim (parsed from source) ============ */
+const menuName=0, lineName=1;
+const menuSelectionID=0, linked_menuNum=1, linked_lineNum=2, links_to_Exe=3,
+ READ_ACCESS_PASSCODE=4, RUN_ACCESS_PASSCODE=5, my_READ_ACCESS_PASSCODE=6, my_RUN_ACCESS_PASSCODE=7;
+const MENU_TABLE_SRC=[[["Root","MGK-VIIIp"],["Root","Messages"],["Root","Programs"],["Root","Preferences"],["Root",".end"]],[["MGK-VIIIp","Answers"],["MGK-VIIIp","Predictions"],["MGK-VIIIp","Probabilities"],["MGK-VIIIp","Advice"],["MGK-VIIIp","Detectors"],["MGK-VIIIp","< Back"],["MGK-VIIIp",".end"]],[["Messages","Voice Msgs"],["Messages","Text Msgs"],["Messages","System Msgs"],["Messages","< Back"],["Messages",".end"]],[["Programs","Games"],["Programs","Codes"],["Programs","< Back"],["Programs",".end"]],[["Preferences","User"],["Preferences","Polarity"],["Preferences","Clarity"],["Preferences","mgkModel"],["Preferences","Voice"],["Preferences","< Back"],["Preferences",".end"]],[["Answers","MGK-NIAC"],["Answers","MGK-v2.0"],["Answers","MGK-65"],["Answers","MGK-Einstein"],["Answers","MGK-Yogi"],["Answers","MGK-DYK"],["Answers","MGK-HR"],["Answers","The Everyman"],["Answers","The Informer"],["Answers","The CEO"],["Answers","The Assistant"],["Answers","The Intelligencer"],["Answers","The Gambler"],["Answers","The Marksman"],["Answers","The Futurist"],["Answers","The Executive"],["Answers","The Machine"],["Answers","The Translator"],["Answers","The Astronaut"],["Answers","The Commander"],["Answers","The Mechanic"],["Answers","The Reactor"],["Answers","MGK-VIIIp-16"],["Answers","MGK-VIIIp-17"],["Answers","MGK-VIIIp-18"],["Answers","MGK-VIIIp-19"],["Answers","MGK-VIIIp-20"],["Answers","MGK-VIIIp-21"],["Answers","MGK-VIIIp-22"],["Answers","MGK-VIIIp-23"],["Answers","MGK-VIIIp-24"],["Answers","MGK-VIIIp-25"],["Answers","MGK-VIIIp-26"],["Answers","MGK-VIIIp-27"],["Answers","MGK-VIIIp-28"],["Answers","MGK-VIIIp-29"],["Answers","MGK-VIIIp-30"],["Answers","MGK-VIIIp-31"],["Answers","MGK-VIIIp-32"],["Answers","< BACK"],["Answers",".end"]],[["Predictions","Fortune"],["Predictions","Horoscope"],["Predictions","< Back"],["Predictions",".end"]],[["Probabilities","Coin Flip"],["Probabilities","Pick a number"],["Probabilities","Pick a card"],["Probabilities","Roll Dice"],["Probabilities","Lottery Numbers"],["Probabilities","< Back"],["Probabilities",".end"]],[["Advice","Everyday"],["Advice","Career Chooser"],["Advice","Career Advice"],["Advice","Office Nickname"],["Advice","Water Cooler"],["Advice","Partners"],["Advice","Friends & Family"],["Advice","Inlaws and Outlaws"],["Advice","< Back"],["Advice",".end"]],[["Detectors","Bullshit Detector"],["Detectors","Stud Detector"],["Detectors","Trustworthy Detector"],["Detectors","Attractiveness Detector"],["Detectors","< Back"],["Detectors",".end"]],[["Voice Msgs","Welcome"],["Voice Msgs","Msg 01"],["Voice Msgs","Msg 02"],["Voice Msgs","Msg 03"],["Voice Msgs","Msg 04"],["Voice Msgs","Msg 05"],["Voice Msgs","Msg 06"],["Voice Msgs","< Back"],["Voice Msgs",".end"]],[["Text Msgs","Welcome"],["Text Msgs","Text Msg 01"],["Text Msgs","Text Msg 02"],["Text Msgs","Text Msg 03"],["Text Msgs","Text Msg 04"],["Text Msgs","< Back"],["Text Msgs",".end"]],[["System Msgs","System Msg 01"],["System Msgs","System Msg 02"],["System Msgs","System Msg 03"],["System Msgs","< Back"],["System Msgs",".end"]],[["Games","Tilt Drive"],["Games","Gobble Don't Fall"],["Games","AvoidSteroids"],["Games","Snow Globe"],["Games","Tic-Tac-Toe"],["Games","< Back"],["Games",".end"]],[["Codes","Code Runner"],["Codes","BIST"],["Codes","Userdata"],["Codes","Checksum"],["Codes","< Back"],["Codes",".end"]],[["User","Name"],["User","Security"],["User","< Back"],["User",".end"]],[["Polarity","Polarity Bias"],["Polarity","Polarity Setting"],["Polarity","< Back"],["Polarity",".end"]],[["Polarity Setting","Negative"],["Polarity Setting","Pessimistic"],["Polarity Setting","Neutral"],["Polarity Setting","Favorable"],["Polarity Setting","Optimistic"],["Polarity Setting","Affirmative"],["Polarity Setting","< Back"],["Polarity Setting",".end"]],[["Clarity","Clarity Bias"],["Clarity","Clarity Setting"],["Clarity","< Back"],["Clarity",".end"]],[["Clarity Setting","Uncouth"],["Clarity Setting","Offensive"],["Clarity Setting","Discourteous"],["Clarity Setting","Impartial"],["Clarity Setting","Mannerly"],["Clarity Setting","< Back"],["Clarity Setting",".end"]],[["mgkModel","Classic"],["mgkModel","Large"],["mgkModel","Audio"],["mgkModel","< Back"],["mgkModel",".end"]],[["Voice","Voice 00"],["Voice","Voice 01"],["Voice","Voice 02"],["Voice","Voice 03"],["Voice","Voice 04"],["Voice","Voice 05"],["Voice","Voice 06"],["Voice","Voice 07"],["Voice","Voice 08"],["Voice","Voice 09"],["Voice","Voice 10"],["Voice","< Back"],["Voice",".end"]]];
+const MENU_PARAMETER_TABLE_SRC=[[[0,1,0,0,1,1,1,1],[1,2,0,0,1,1,1,1],[2,3,0,0,1,1,1,1],[3,4,0,0,1,1,1,1],[4,0,0,0,1,1,1,1]],[[5,5,0,0,1,1,1,1],[6,6,0,0,1,1,1,1],[7,7,0,0,1,1,1,1],[8,8,0,0,411,411,411,411],[9,9,0,0,7,7,7,7],[10,0,0,0,1,1,1,1],[11,1,0,0,1,1,1,1]],[[12,10,0,0,1,1,1,1],[13,11,0,0,1,1,1,1],[14,12,0,0,1,1,1,1],[15,0,1,0,1,1,1,1],[16,2,0,0,1,1,1,1]],[[17,13,0,0,1,1,1,1],[18,14,0,0,1,1,1,1],[19,0,2,0,1,1,1,1],[20,3,0,0,1,1,1,1]],[[21,15,0,0,1,1,1,1],[22,16,0,0,1,0,1,0],[23,18,0,0,1,0,1,0],[24,20,0,0,1,1,1,1],[25,21,0,0,1,0,1,0],[26,0,3,0,1,1,1,1],[27,4,0,0,1,1,1,1]],[[28,5,0,1,1,1,1,1],[29,5,1,1,1,1,1,1],[30,5,2,1,1,1,1,1],[31,5,3,1,0,1,0,1],[32,5,4,1,0,1,0,1],[33,5,5,1,0,1,0,1],[34,5,6,1,0,1,0,1],[35,5,7,1,101,101,101,101],[36,5,8,1,102,102,102,102],[37,5,9,1,103,103,103,103],[38,5,10,1,0,104,0,104],[39,5,11,1,0,105,0,105],[40,5,12,1,0,106,0,106],[41,5,13,1,0,107,0,107],[42,5,14,1,0,108,0,108],[43,5,15,1,0,109,0,109],[44,5,16,1,0,110,0,110],[45,5,17,1,0,111,0,111],[46,5,18,1,0,112,0,112],[47,5,19,1,0,113,0,113],[48,5,20,1,0,114,0,114],[49,5,21,1,0,115,0,115],[50,5,22,1,0,116,0,116],[51,5,23,1,0,117,0,117],[52,5,24,1,0,118,0,118],[53,5,25,1,0,119,0,119],[54,5,26,1,0,120,0,120],[55,5,27,1,0,121,0,121],[56,5,28,1,0,122,0,122],[57,5,29,1,0,123,0,123],[58,5,30,1,0,124,0,124],[59,5,31,1,0,125,0,125],[60,5,32,1,0,126,0,126],[61,5,33,1,0,127,0,127],[62,5,34,1,0,128,0,128],[63,5,35,1,0,129,0,129],[64,5,36,1,0,130,0,130],[65,5,37,1,0,131,0,131],[66,5,38,1,0,132,0,132],[67,1,0,0,1,1,1,1],[68,5,0,0,1,1,1,1]],[[69,6,0,1,1,1,1,1],[70,6,1,1,1,1,1,1],[71,1,1,0,1,1,1,1],[72,6,0,0,1,1,1,1]],[[73,7,0,1,1,1,1,1],[74,7,1,1,1,1,1,1],[75,7,2,1,1,1,1,1],[76,7,3,1,1,1,1,1],[77,7,4,1,1,1,1,1],[78,1,2,0,1,1,1,1],[79,7,0,0,1,1,1,1]],[[80,8,0,1,1,1,1,1],[81,8,1,1,1,1,1,1],[82,8,2,1,1,1,1,1],[83,8,3,1,1,1,1,1],[84,8,4,1,1,1,1,1],[85,8,5,1,1,1,1,1],[86,8,6,1,1,1,1,1],[87,8,7,1,1,1,1,1],[88,1,3,0,1,1,1,1],[89,8,0,0,1,1,1,1]],[[90,9,0,1,1,1,1,1],[91,9,1,1,1,1,1,1],[92,9,2,1,1,1,1,1],[93,9,3,1,1,1,1,1],[94,1,4,0,1,1,1,1],[95,9,0,0,1,1,1,1]],[[96,10,0,1,1,1,1,1],[97,10,1,1,2,1,2,1],[98,10,2,1,2,1,2,1],[99,10,3,1,2,1,2,1],[100,10,4,1,2,1,2,1],[101,10,5,1,2,1,2,1],[102,10,6,1,2,1,2,1],[103,2,0,0,1,1,1,1],[104,10,0,0,1,1,1,1]],[[105,11,0,1,1,1,1,1],[106,11,1,1,2,1,2,1],[107,11,2,1,2,1,2,1],[108,11,3,1,2,1,2,1],[109,11,4,1,2,1,2,1],[110,2,1,0,1,1,1,1],[111,11,0,0,1,1,1,1]],[[112,12,0,1,2,1,2,1],[113,12,1,1,2,1,2,1],[114,12,2,1,2,1,2,1],[115,2,2,0,1,1,1,1],[116,12,0,0,1,1,1,1]],[[117,13,0,1,1,1,1,1],[118,13,1,1,1,1,1,1],[119,13,2,1,1,1,1,1],[120,13,3,1,1,1,1,1],[175,13,4,1,1,1,1,1],[121,3,0,0,1,1,1,1],[122,13,0,0,1,1,1,1]],[[123,14,0,1,1,1,1,1],[124,14,1,1,1,1,1,1],[125,14,2,1,1,1,1,1],[126,14,3,1,1,1,1,1],[127,3,1,0,1,1,1,1],[128,14,0,0,1,1,1,1]],[[129,15,0,1,1,1,1,1],[130,15,1,1,1,1,1,1],[131,4,0,0,1,1,1,1],[132,15,0,0,1,1,1,1]],[[133,16,0,1,1,1,1,1],[134,17,0,0,1,1,1,1],[135,4,1,0,1,1,1,1],[136,16,0,0,1,1,1,1]],[[137,17,0,1,1,1,1,1],[138,17,1,1,1,1,1,1],[139,17,2,1,1,1,1,1],[140,17,3,1,1,1,1,1],[141,17,4,1,1,1,1,1],[142,17,5,1,1,1,1,1],[143,16,1,0,1,1,1,1],[144,17,0,0,1,1,1,1]],[[145,18,0,1,1,1,1,1],[146,19,0,0,1,1,1,1],[147,4,2,0,1,1,1,1],[148,18,0,0,1,1,1,1]],[[149,19,0,1,1,1,1,1],[150,19,1,1,1,1,1,1],[151,19,2,1,1,1,1,1],[152,19,3,1,1,1,1,1],[153,19,4,1,1,1,1,1],[154,18,1,0,1,1,1,1],[155,19,0,0,1,1,1,1]],[[156,20,0,1,1,1,1,1],[157,20,1,1,1,1,1,1],[158,20,2,1,1,1,1,1],[159,4,3,0,1,1,1,1],[160,20,0,0,1,1,1,1]],[[161,21,0,1,1,1,1,1],[162,21,1,1,1,1,1,1],[163,21,2,1,1,1,1,1],[164,21,3,1,1,1,1,1],[165,21,4,1,1,1,1,1],[166,21,5,1,1,1,1,1],[167,21,6,1,1,1,1,1],[168,21,7,1,1,1,1,1],[169,21,8,1,1,1,1,1],[170,21,9,1,1,1,1,1],[171,21,10,1,1,1,1,1],[172,4,4,0,1,1,1,1],[173,21,0,0,1,1,1,1]],[[174,22,0,1,1,1,1,1]]];
+/* pad to C dimensions [23][41] with zero-init (matches firmware memory) */
+const MENU_TABLE=[], MENU_PARAMETER_TABLE=[];
+for(let t=0;t<23;t++){
+ const nt=[],pt=[];
+ for(let r=0;r<41;r++){
+  const src=(MENU_TABLE_SRC[t]||[])[r];nt.push(src?[src[0],src[1]]:[null,null]);
+  const ps=(MENU_PARAMETER_TABLE_SRC[t]||[])[r];pt.push(ps?ps.slice():[0,0,0,0,0,0,0,0]);
+ }
+ MENU_TABLE.push(nt);MENU_PARAMETER_TABLE.push(pt);
+}
+
+/* ============ [FW] MENU.ino - exact ============ */
+const MENU_SYSTEM_COLD_START=0, CHECK_FOR_INPUT=1, DETERMINE_IF_EXE=2, RUN_EXE_ST=3,
+ SCROLL_THE_MENU=4, CLICK_THE_MENU=5, UPDATE_MENU_LEVEL=6;
+let currentState=MENU_SYSTEM_COLD_START;
+function Menu_System(){
+ switch(currentState){
+  case MENU_SYSTEM_COLD_START:
+   Update_the_Menu_Screen();
+   /* [FIX d, 2026-07-22 — POST-EXIT ANCHOR: STAY] firmware truth: the exiting
+      process CONSUMES its exit input and the menu redraws the SAME line. The
+      inconsistency Mike saw was stale input buffered DURING a foreground process
+      (rescan keeps running) being read at CHECK_FOR_INPUT right after unpause —
+      a ghost scroll/click = "auto-advance". Flush stale buffers at COLD_START so
+      re-entry always lands where you left. Firmware spec note owed (same flush). */
+   Pull_From_Buffer(ROTARY_DIAL);Pull_From_Buffer(SHUTTER);
+   currentState=CHECK_FOR_INPUT; break;
+  case CHECK_FOR_INPUT:
+   if(Pull_From_Buffer(ROTARY_DIAL)){currentState=SCROLL_THE_MENU;}
+   else if(Pull_From_Buffer(SHUTTER)){currentState=DETERMINE_IF_EXE;}
+   break;
+  case SCROLL_THE_MENU: Scroll_the_Menu(); currentState=CHECK_FOR_INPUT; break;
+  case DETERMINE_IF_EXE:
+   currentState = Is_Menu_Item_Executable() ? RUN_EXE_ST : CLICK_THE_MENU; break;
+  case RUN_EXE_ST: currentState=MENU_SYSTEM_COLD_START; Run_EXE(); break;
+  case CLICK_THE_MENU: Update_Menu_Level(); Update_the_Menu_Screen(); currentState=CHECK_FOR_INPUT; break;
+ }
+}
+function Run_EXE(){                                                          /* [MENU:54-79] the ONLY 5 wired handlers */
+ registryTouch(get_as_int(menuSelectionID));
+ switch(get_as_int(linked_menuNum)){
+  case ANSWERS: Pause_Process(MENU_SYSTEM); Start_Process(ANSWERS,NORMAL_PRIORITY); break;
+  case POLARITY: Pause_Process(MENU_SYSTEM); Start_Process(POLARITY,NORMAL_PRIORITY); break;
+  case CLARITY: Pause_Process(MENU_SYSTEM); Start_Process(CLARITY,NORMAL_PRIORITY); break;
+  case POLARITY_SETTING: polaritySettingNOW=lineNum_PTR; Save_To_Flash(FLASH_POLARITY_SETTING); break;
+  case CLARITY_SETTING:
+   claritySettingNOW=lineNum_PTR; Save_To_Flash(FLASH_CLARITY_SETTING);
+   Messages_Trigger("settings_changed");
+   if(claritySettingNOW<=Offensive)Messages_Trigger("clarity_uncouth");
+   break;
+  case GAMES:   /* [TWIN DELTA] firmware: no handler - clicking a game does nothing on the unit today */
+   Pause_Process(MENU_SYSTEM); Start_Process(GAMES,NORMAL_PRIORITY); break;
+  case VOICE_MSGS: case TEXT_MSGS: case SYSTEM_MSGS:   /* [TWIN DELTA] the inbox */
+   Pause_Process(MENU_SYSTEM); Start_Process(MESSAGES_PROC,NORMAL_PRIORITY); break;
+  case PROBABILITIES:   /* [TWIN DELTA] five real micro-interactions */
+   Pause_Process(MENU_SYSTEM); Start_Process(PROBABILITIES,NORMAL_PRIORITY); break;
+  case DETECTORS:       /* [TWIN DELTA] */
+   Pause_Process(MENU_SYSTEM); Start_Process(DETECTORS,NORMAL_PRIORITY); break;
+  case ADVICE:          /* [TWIN DELTA] rows 1 + 3 are live (generative); the rest scaffold */
+   if(lineNum_PTR==1||lineNum_PTR==3){Pause_Process(MENU_SYSTEM); Start_Process(ADVICE,NORMAL_PRIORITY);}
+   else {scafUpid="ADVICE"; Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY);}
+   break;
+  case VOICE:           /* [TWIN DELTA] one line, and 11 rows become real */
+   currentVoiceID=lineNum_PTR;
+   chip("ok","voice set to slot "+currentVoiceID+" (firmware hardcodes 8; per-engine voices override - spec s3)");
+   break;
+  case PREDICTIONS: scafUpid="PREDICTIONS"; Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY); break;
+  case CODES:       scafUpid="CODES";       Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY); break;
+  case USER:        scafUpid="USER";        Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY); break;
+  case MGKMODEL:    scafUpid="MGKMODEL";    Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY); break;
+  default: chip("warn","scaffold: '"+get_as_char(lineName)+"' has no handler [Run_EXE default]"); break;
+ }
+}
+function Update_the_Menu_Screen(){Activate_the_Screen(FRONT_SCREEN,true);Draw_the_Menu_Screen();Draw_the_Menu_Line();}
+function Draw_the_Menu_Screen(){screenPrintLn(Row_01,0,Header_01,1);screenPrintLn(Row_02,21,"Please Select:",1);}
+function Mod_the_Menu_Line(){
+ switch(menuNum_PTR){
+  case CLARITY_SETTING: if(claritySettingNOW==lineNum_PTR)screenPrintLn(Row_03,17,"*",1); break;
+  case POLARITY_SETTING: if(polaritySettingNOW==lineNum_PTR)screenPrintLn(Row_03,17,"*",1); break;
+ }
+}
+function Draw_the_Menu_Line(){OLED.setTextColor(WHITE);screenPrintLn(Row_03,27,get_as_char(lineName),1);Mod_the_Menu_Line();}
+function Scroll_the_Menu(){
+ Activate_the_Screen(FRONT_SCREEN,true);
+ lineNum_PTR++;
+ let guard=0;
+ while(!readAccess_ENABLED()){lineNum_PTR++;
+  if(++guard>10000){chip("miss","<b>WOULD HANG HARDWARE</b>: no readable row in table "+menuNum_PTR);lineNum_PTR=0;break;}}
+ if(strcmp(get_as_char(lineName),".end")==0){lineNum_PTR=0;}
+ OLED.setTextColor(WHITE);
+ Update_the_Menu_Screen();
+ Active_Process_Name=get_as_char(lineName);
+}
+function Is_Menu_Item_Executable(){return get_as_int(links_to_Exe)==1;}
+function Update_Menu_Level(){
+ const TEMP=get_as_int(linked_menuNum);
+ lineNum_PTR=get_as_int(linked_lineNum);
+ menuNum_PTR=TEMP;
+ Active_Process_Name=get_as_char(lineName);
+}
+function get_as_int(col){return MENU_PARAMETER_TABLE[menuNum_PTR][lineNum_PTR][col];}
+function get_as_char(col){const v=MENU_TABLE[menuNum_PTR][lineNum_PTR][col];return v===null?"":v;}
+function readAccess_ENABLED(){
+ switch(get_as_int(READ_ACCESS_PASSCODE)){case 0:return false;case 1:return true;default:return false;} /* passcode values = plain hidden [MENU:166-172] */
+}
+
+/* ============ [FW] SCREENS.ino ============ */
+function Set_OLED_pointer_to_Target_Screen(id){OLED=(id==FRONT_SCREEN)?frontOLED:(id==TOP_SCREEN)?topOLED:null;}
+function setScreenHeight(h){ /* [SCREENS:48-50] creates a LOCAL object - does nothing. Preserved no-op. */ }
+function printText(row,col,text){OLED.setCursor(col,row);OLED.print(text);}
+function DisplayImmediately(pub){if(pub==1)OLED.display();}
+function screenPrintLnCentered(row,text,pub){
+ const b=OLED.getTextBounds(text);
+ const col=Math.trunc((MAX_SCREEN_WIDTH-b.w)/2);
+ printText(row,col,text);DisplayImmediately(pub);
+}
+function screenPrintLn(row,col,text,pub){printText(row,col,text);DisplayImmediately(pub);}
+function AutoRotateScreen(id){OLED.setRotation(id==FRONT_SCREEN?0:2);}
+function setFont(f){
+ switch(f){case 0:OLED.setFont(FONT_TT);break;case 1:OLED.setFont(null);break;case 2:OLED.setFont(FONT_FS);break;}
+ OLED.setTextSize(1);OLED.setTextColor(WHITE);
+}
+function Activate_the_Screen(id,clear){
+ Set_OLED_pointer_to_Target_Screen(id);AutoRotateScreen(id);
+ switch(id){
+  case TOP_SCREEN: currentScreenHeight=TOP_SCREEN_HEIGHT; setScreenHeight(currentScreenHeight); setFont(TOP_SCREEN_DEFAULT_FONT); break;
+  case FRONT_SCREEN: currentScreenHeight=FRONT_SCREEN_HEIGHT; setScreenHeight(currentScreenHeight); setFont(FRONT_SCREEN_DEFAULT_FONT); break;
+ }
+ if(clear)OLED.clearDisplay();
+ OLED.display();
+}
+/* window structs [SCREENS:1-21] */
+const CODE_WINDOW=0, GRAPH_WINDOW=1, PROCESS_WINDOW=2, WINDOW_COUNT=3;
+const windows=[{name:"CODE MONITOR",x:0,y:0,width:37,height:42},
+ {name:"GRAPH MONITOR",x:39,y:0,width:89,height:42},
+ {name:"STATUS MONITOR",x:0,y:44,width:128,height:20}];
+function ClearWindow(n){if(n>=0&&n<WINDOW_COUNT){const w=windows[n];OLED.fillRect(w.x,w.y,w.width,w.height,BLACK);DrawWindowOutline(n);}}
+function DrawWindowOutline(n){if(n>=0&&n<WINDOW_COUNT){const w=windows[n];OLED.drawRect(w.x,w.y,w.width,w.height,WHITE);}}
+
+/* ============ [FW] SYSTEM_MONITOR.ino - exact ============ */
+const MAX_CODE_LINES=6, MAX_OPCODES=17, MAX_OPERANDS=40, OPCODE_NUM=0, OPERAND_NUM=1;
+const code=[new Array(MAX_CODE_LINES).fill(0),new Array(MAX_CODE_LINES).fill(0)];
+const opCodes=["dex","jmp","jsr","lda","ldx","ora","orx","rts","sta","stx","bne","beq","bcs","cmp","inx","inc","dec"];
+const opOperands=["","MAL","MCL","SCL",".MB","AML",".GL","KML",".IC",".SK","$00","$01","$A8","$A3","$23","$2A","$4C","$A6","$5D","$FF","$07","$D1","$B8","$A5","$24","$FA","$C9","$B6","$D9","$F2"," 09"," 00"," 01"," 02"," 04"," 08"," 16"," 32","128","255"];
+/* ============ [TWIN-BUILT 2026-07-22] MONITOR BUILD — three-window spec +
+   cycling sets 1-4 (Job One capture; flat-1960s material, already gated).
+   CODE window stands as shipped. STATUS (long bottom box) gains title dressing
+   + cycling system messages + connection narration during server sessions.
+   GRAPH (large box) self-cycles: TEST / CPU / TEMP / XFER graphs, and an
+   audio-signal display while the modem "transmits".
+   DOCTRINE FLAG (Mike): the GRAPH "TEST" placeholder is EGG 1 (porch:
+   test_complete replaces it only after the egg) — preserved as a cycle state
+   rather than deleted; ruling wanted on whether it may share the window. */
+/* [NO-DEAD-WOOD LAW, Mike 2026-07-22 dinner-2] every monitor claim = REAL machine
+   truth. Removed as fake: SELF TEST OK / MEMORY CHECK OK / AUDIO CHECK OK /
+   DISPLAY CHECK OK (no self test runs), EFFICIENCY 98% (unmeasured — returns with
+   the health mechanic), TEMP (nothing thermal exists), synthetic XFER graph.
+   Kept real: SYSTEM OK (the loop IS running), WAITING FOR USER INPUT (shown only
+   when actually idle at the menu), UPTIME (millis), PROCESSES n RUN (registry),
+   CPU graph (measured OS-tick milliseconds), the delivery narration (narrates a
+   REAL delivery, real record count), SIGNAL display (renders during a real
+   transmission event). TEST exempt (Egg 1, Papa-placed). */
+const MON_SET2=["RETRYING","AUDIO NOT DETECTED","CHECK OWNERS MANUAL"]; /* not-OK class: dev-flagged only until the health mechanic (ruled) */
+const MON_SET4=["CONNECTION STARTED","DIALING","CARRIER DETECTED","HANDSHAKE COMPLETE","TRANSMISSION","% RECORDS RECEIVED","TRANSMISSION COMPLETE","CONNECTION CLOSED"];
+let monNotOK=false, monMsgAt=0, monMsgIdx=0, monConn=null, monGraphMode=0, monGraphAt=0;
+const monHist={cpu:[]};let monOsMs=1;
+function Mon_StartConnection(records){monConn={step:0,at:millis(),records:records||1};}
+function Mon_Idle(){return Get_Ptr_for_uniqueProcessID(MENU_SYSTEM)!==-1&&Process_Registry[Get_Ptr_for_uniqueProcessID(MENU_SYSTEM)][PROCESS_STATE]==RUN&&currentState==CHECK_FOR_INPUT;}
+function Mon_EventsLine(){ /* line 2: generic/special monitor events — all REAL */
+ if(monConn){
+  if(millis()>monConn.at+900){monConn.step++;monConn.at=millis();
+   if(monConn.step>=MON_SET4.length){monConn=null;}}
+  if(monConn)return MON_SET4[monConn.step].replace("%",String(monConn.records));
+ }
+ const up=Math.trunc(millis()/60000);
+ let procs=0;for(let i=0;i<PROCESS_POINTER_MAX;i++)if(Process_Registry[i][PROCESS_STATE]==RUN)procs++;
+ const pool=["SYSTEM OK"].concat(Mon_Idle()?["WAITING FOR USER INPUT"]:[],
+  ["UPTIME "+up+" MIN","PROCESSES "+procs+" RUN"],monNotOK?MON_SET2:[]);
+ if(millis()>monMsgAt+2200){monMsgIdx++;monMsgAt=millis();}
+ return pool[monMsgIdx%pool.length];
+}
+function Mon_ProcessLine(){ /* line 1: the process + a process-specific REAL datum */
+ let d="";
+ if(Get_Ptr_for_uniqueProcessID(ANSWERS)!==-1)d="ASKS "+askCount;
+ else if(Get_Ptr_for_uniqueProcessID(GAMES)!==-1)d="SCORE "+gameScore;
+ else if(Get_Ptr_for_uniqueProcessID(MESSAGES_PROC)!==-1)d="UNREAD "+Messages_Unread();
+ else if(Mon_Idle())d="ROW "+lineNum_PTR;
+ return (Active_Process_Name+"  "+d).slice(0,41);
+}
+function Mon_PushSample(){ /* CPU = measured OS tick time (real) */
+ monHist.cpu.push(constrain(Math.trunc(monOsMs*8),1,95));
+ if(monHist.cpu.length>40)monHist.cpu.shift();
+}
+function Mon_DrawSpark(vals,label){
+ screenPrintLn(8,42,label,0);
+ const w=windows[GRAPH_WINDOW];
+ for(let i=1;i<vals.length;i++){
+  const x0=w.x+3+(i-1)*2,x1=w.x+3+i*2;
+  const y0=w.y+w.height-3-Math.trunc(vals[i-1]*(w.height-14)/100);
+  const y1=w.y+w.height-3-Math.trunc(vals[i]*(w.height-14)/100);
+  OLED.drawLine(x0,y0,x1,y1,WHITE);
+ }
+}
+function Mon_Graph_Window(){
+ Mon_PushSample();
+ if(monConn){ /* audio-signal display during modem transmission */
+  screenPrintLn(8,42,"SIGNAL",0);
+  /* renders only DURING a real transmission event (no-dead-wood: the display is
+     texture, the event is true); amplitude peaks at the TRANSMISSION steps */
+  const w=windows[GRAPH_WINDOW],mid=w.y+Math.trunc(w.height/2)+4;
+  const amp=(monConn&&monConn.step>=4&&monConn.step<=6)?12:4;
+  for(let i=0;i<w.width-8;i+=2){
+   const a=random(0,amp);
+   OLED.drawLine(w.x+4+i,mid-a,w.x+4+i,mid+a,WHITE);}
+  return;
+ }
+ if(millis()>monGraphAt+3500){monGraphMode=(monGraphMode+1)%2;monGraphAt=millis();}
+ switch(monGraphMode){
+  case 0: screenPrintLn(10,45,"TEST",0); break; /* EGG 1 surface — preserved verbatim; exempt from no-dead-wood */
+  case 1: Mon_DrawSpark(monHist.cpu,"CPU"); break; /* real measured tick ms */
+ }
+}
+function Mon_Status_Window(){
+ /* [LAYOUT FIX, Mike dinner-2] two-line approach chosen (cleaner: no title on the
+    border): line 1 = PROCESS + process-specific datum; line 2 = events. Rows sit
+    inside the outline (box y44..63; TomThumb rows at 48/57). */
+ const w=windows[PROCESS_WINDOW];
+ screenPrintLn(w.y+4,3,Mon_ProcessLine(),0);
+ screenPrintLn(w.y+13,3,String(Mon_EventsLine()).slice(0,41),0);
+}
+function System_Monitor(){for(let i=0;i<WINDOW_COUNT;i++)UpdateWindow(i);OLED.display();}
+function UpdateWindow(i){
+ switch(i){
+  case CODE_WINDOW: Activate_the_Screen(TOP_SCREEN,false);setFont(SMALL_FONT);ClearWindow(i);OLED.setTextColor(WHITE);scrollFauxAssemblyLanguage();break;
+  case GRAPH_WINDOW: Activate_the_Screen(TOP_SCREEN,false);setFont(SMALL_FONT);ClearWindow(i);OLED.setTextColor(WHITE);Mon_Graph_Window();break;
+  case PROCESS_WINDOW: Activate_the_Screen(TOP_SCREEN,false);setFont(SMALL_FONT);ClearWindow(i);OLED.setTextColor(WHITE);Mon_Status_Window();break;
+ }
+ OLED.display();
+}
+function scrollFauxAssemblyLanguage(){
+ for(let l=0;l<MAX_CODE_LINES-1;l++){code[OPCODE_NUM][l]=code[OPCODE_NUM][l+1];code[OPERAND_NUM][l]=code[OPERAND_NUM][l+1];}
+ code[OPCODE_NUM][MAX_CODE_LINES-1]=random(MAX_OPCODES);
+ code[OPERAND_NUM][MAX_CODE_LINES-1]=random(MAX_OPERANDS);
+ for(let l=0;l<MAX_CODE_LINES;l++){
+  const y=6*(l+1)+1;
+  screenPrintLn(y,3,opCodes[code[OPCODE_NUM][l]],0);
+  screenPrintLn(y,22,opOperands[code[OPERAND_NUM][l]],0);
+ }
+}
+
+/* ============ [FW] 4_GRAPHICS.ino (async-paced; ms values firmware-exact) ============ */
+const ZOOM_IN=0, ZOOM_OUT=1, HOVER=2, SWIRL=3;
+const X_CENTER=64, PI=3.14159, TWO_PI_OVER_3=2*PI/3;
+async function frameTick(){OLED.display();await sleep(15);} /* [SHIM] stands in for I2C transfer time */
+async function DisplayStatic(milliSecs){
+ const myTimer=millis()+milliSecs;PlaySound(WhiteNoise);
+ while(millis()<myTimer){Display_Random_Noise();await sleep(30);}
+ OLED.clearDisplay();OLED.display();player.pause();
+}
+function Display_Random_Noise(){
+ for(let y=0;y<currentScreenHeight;y++)for(let x=0;x<MAX_SCREEN_WIDTH;x++)OLED.drawPixel(x,y,random(256)>128?WHITE:BLACK);
+ OLED.display();
+}
+async function spotFlicker(cyclesMax){let n=0;OLED.clearDisplay();
+ while(n++<=cyclesMax){OLED.drawPixel(X_CENTER,currentScreenHeight/2,BLACK);await frameTick();OLED.drawPixel(X_CENTER,currentScreenHeight/2,WHITE);await frameTick();}}
+async function rectangleFlicker(cyclesMax,rectHeightMax,rectOffset){
+ let h=0;OLED.clearDisplay();
+ for(let c=1;c<=cyclesMax;c++){h=currentScreenHeight/2*(c/cyclesMax);
+  OLED.fillRect(0,currentScreenHeight/2-(h/2)-rectOffset,128,h,WHITE);await frameTick();
+  OLED.fillRect(0,currentScreenHeight/2-(h/2)-rectOffset,128,h,BLACK);await frameTick();}}
+async function lineFlicker(cyclesMax){let n=0;OLED.clearDisplay();
+ while(n++<=cyclesMax){OLED.drawFastHLine(0,currentScreenHeight/2,128,BLACK);await frameTick();OLED.drawFastHLine(0,currentScreenHeight/2,128,WHITE);await frameTick();}}
+async function screenFlicker(cyclesMax){let n=0;
+ while(n++<=cyclesMax){OLED.invertDisplay(true);await frameTick();OLED.invertDisplay(false);await frameTick();}}
+async function crtWarmStart(){
+ await spotFlicker(4);await lineFlicker(15);await DisplayStatic(2000);
+ await rectangleFlicker(0,4,0);await rectangleFlicker(1,4,-4);await rectangleFlicker(8,14,0);
+ await screenFlicker(1);await rectangleFlicker(3,20,0);await rectangleFlicker(1,14,-8);await rectangleFlicker(8,24,0);
+}
+
+/* ============ [FW] BOOT.ino - full, async-paced, exact delays ============ */
+const SPINNER_DELAY=200, SUCCESS_DELAY=200, LOGO_DELAY=1000, COPYRIGHT_DELAY=1500, PATENT_DELAY=1500;
+async function Boot(){
+ Activate_the_Screen(FRONT_SCREEN,true);Activate_the_Screen(TOP_SCREEN,true);
+ pixels.setPixelColor(0,pixels.Color(255,0,0));pixels.show();
+ await warmUpAndBootTOP_SCREEN();await warmUpAndBootFRONT_SCREEN();
+ pixels.setPixelColor(0,pixels.Color(0,255,0));pixels.show();
+ PlaySound(BeepsAndBoops);
+ Activate_the_Screen(FRONT_SCREEN,false);
+ await animateLogo();
+ PlaySound(BeepsAndBoops);
+ displayLoadingScreen();
+ await animateSpinner();
+ PlaySound(ConnectionSuccess);
+ await displaySuccess();
+ pixels.setPixelColor(0,pixels.Color(200,40,0));pixels.show();
+}
+async function warmUpAndBootTOP_SCREEN(){
+ Activate_the_Screen(TOP_SCREEN,true);await crtWarmStart();
+ setFont(LARGE_FONT);
+ screenPrintLn(20,0,"       PLEASE ",0);screenPrintLn(36,0,"         WAIT ",1);
+}
+async function warmUpAndBootFRONT_SCREEN(){Activate_the_Screen(FRONT_SCREEN,false);await crtWarmStart();}
+async function animateLogo(){
+ Activate_the_Screen(FRONT_SCREEN,false);await sleep(1500);
+ await spotFlicker(4);await BOOT_Triangles();PlaySound(PowerMaury);await sleep(100);
+ screenPrintLn(8,38,"MGK-VIIIp",1);await sleep(LOGO_DELAY);
+ Activate_the_Screen(FRONT_SCREEN,false);setFont(SMALL_FONT);PlaySound(PowerMaury);
+ screenPrintLn(32,1,"(c) (tm)",1);await sleep(COPYRIGHT_DELAY);
+ Activate_the_Screen(FRONT_SCREEN,false);setFont(SMALL_FONT);PlaySound(PowerMaury);
+ screenPrintLn(32,85,"(Pat Pend)",1);await sleep(PATENT_DELAY);
+}
+function displayLoadingScreen(){
+ Activate_the_Screen(FRONT_SCREEN,true);
+ screenPrintLn(Row_01,0,Header_01,1);screenPrintLn(Row_02,0,"    LOADING",1);
+}
+async function animateSpinner(){
+ const frames=["|","/","-","\\"];
+ for(let s=0;s<4;s++)for(const f of frames){animateSpinnerFrame(f);await sleep(SPINNER_DELAY);}
+}
+function animateSpinnerFrame(f){
+ OLED.setTextColor(WHITE);screenPrintLn(13,85,f,1);
+ OLED.setTextColor(BLACK);screenPrintLn(13,85,f,1);
+}
+async function displaySuccess(){
+ for(let s=1;s<=4;s++){
+  OLED.setTextColor(WHITE);screenPrintLn(13,70,"SUCCESS",1);await sleep(SUCCESS_DELAY);
+  OLED.setTextColor(BLACK);screenPrintLn(13,70,"SUCCESS",1);await sleep(SUCCESS_DELAY);}
+}
+async function BOOT_Triangles(){
+ const zoom_Max=18,x_center=64,y_center=14,x_scale=Math.trunc(x_center/y_center)*0.8,Pi=3.14159,msFrameDelay=100;
+ let zoom=0,dTheta=0;
+ while(zoom<=zoom_Max){
+  dTheta=(2*Pi/zoom_Max)*zoom;
+  const x0=(zoom*Math.sin(dTheta)*x_scale)+x_center, y0=(zoom*Math.cos(dTheta))+y_center;
+  const x1=(zoom*Math.sin(Pi*4/3+dTheta)*x_scale)+x_center, y1=(zoom*Math.cos(Pi*4/3+dTheta))+y_center;
+  const x2=(zoom*Math.sin(-Pi*4/3+dTheta)*x_scale)+x_center, y2=(zoom*Math.cos(-Pi*4/3+dTheta))+y_center;
+  OLED.clearDisplay();OLED.drawTriangle(x0,y0,x1,y1,x2,y2,WHITE);OLED.display();
+  zoom++;await sleep(msFrameDelay);
+ }
+ player.playFolder(2,4);
+}
+
+/* ============ [FW] Bubbles.ino - exact ============ */
+const MIN_SPAWN_RADIUS=1,MAX_SPAWN_RADIUS=4,MAX_COMBINED_RADIUS=7,GROWTH_RATE=0.1,DISSOLVE_RATE=0.1,STICK_THRESHOLD=0.1,MAX_BUBBLES=25;
+function newBubble(){return{x:0,y:0,vx:0,vy:0,radius:0,targetRadius:0,active:false,moving:false,dissolving:false,hasGrown:false};}
+const bubbles=Array.from({length:MAX_BUBBLES},newBubble);
+let previousBubbles=bubbles.map(b=>({...b}));
+function spawnBubbles(spawnQuantity){                                 /* [Bubbles:24-63] */
+ let index=-1;
+ for(let spawn=0;spawn<spawnQuantity;spawn++){
+  for(let i=0;i<MAX_BUBBLES;i++){if(!bubbles[i].active){index=i;break;}}
+  if(index==-1)return;
+  let overlap,guard=0;
+  do{overlap=false;
+   bubbles[index].x=random(MAX_SPAWN_RADIUS,MAX_SCREEN_WIDTH-MAX_SPAWN_RADIUS);
+   bubbles[index].y=random(MAX_SPAWN_RADIUS,MAX_SCREEN_HEIGHT-MAX_SPAWN_RADIUS);
+   bubbles[index].vx=0;bubbles[index].vy=0;bubbles[index].radius=0;
+   bubbles[index].targetRadius=random(MIN_SPAWN_RADIUS,MAX_SPAWN_RADIUS);
+   bubbles[index].active=true;bubbles[index].moving=false;bubbles[index].dissolving=false;bubbles[index].hasGrown=false;
+   for(let i=0;i<MAX_BUBBLES;i++){
+    if(i!=index&&bubbles[i].active){
+     const dx=bubbles[index].x-bubbles[i].x,dy=bubbles[index].y-bubbles[i].y;
+     if(Math.sqrt(dx*dx+dy*dy)<bubbles[index].targetRadius+bubbles[i].targetRadius){overlap=true;break;}}}
+  }while(overlap&&++guard<500);
+ }
+}
+function Update_Bubbles(){                                            /* [Bubbles:65-185] exact incl. draw-to-current-OLED quirk */
+ if(IMU.accelerationAvailable()){
+  const acc=IMU.readAcceleration();
+  let ax=Math.pow(acc[0],3),ay=Math.pow(acc[1],3);
+  ax*=-300;ay*=150;
+  previousBubbles=bubbles.map(b=>({...b}));
+  for(let i=0;i<MAX_BUBBLES;i++){
+   const b=bubbles[i];
+   if(!b.active)continue;
+   if(!b.hasGrown){if(b.radius<b.targetRadius){b.radius+=GROWTH_RATE;
+    if(b.radius>=b.targetRadius){b.radius=b.targetRadius;b.hasGrown=true;}}}
+   if(!b.moving){if(abs(ax)>STICK_THRESHOLD||abs(ay)>STICK_THRESHOLD){b.moving=true;}else continue;}
+   const sizeFactor=1.0/b.targetRadius;
+   b.vx+=ax*sizeFactor;b.vy+=ay*sizeFactor;
+   b.x+=b.vx;b.y+=b.vy;
+   if(b.x<b.radius){b.x=b.radius;b.vx=0;}
+   if(b.x>MAX_SCREEN_WIDTH-b.radius){b.x=MAX_SCREEN_WIDTH-b.radius;b.vx=0;}
+   if(b.y<b.radius){b.y=b.radius;b.vy=0;}
+   if(b.y>MAX_SCREEN_HEIGHT-b.radius){b.y=MAX_SCREEN_HEIGHT-b.radius;b.vy=0;}
+   const inCorner=(b.x<=b.radius||b.x>=MAX_SCREEN_WIDTH-b.radius)&&(b.y<=b.radius||b.y>=MAX_SCREEN_HEIGHT-b.radius);
+   if(inCorner)b.dissolving=true;
+   if(b.dissolving){b.radius-=DISSOLVE_RATE;
+    if(b.radius<=0){b.active=false;b.dissolving=false;b.radius=0;}}
+   if(b.hasGrown&&b.active){
+    for(let j=0;j<MAX_BUBBLES;j++){
+     if(i!=j&&bubbles[j].active&&bubbles[j].hasGrown){
+      const dx=b.x-bubbles[j].x,dy=b.y-bubbles[j].y;
+      if(Math.sqrt(dx*dx+dy*dy)<b.radius+bubbles[j].radius){
+       b.radius+=bubbles[j].radius;b.radius=Math.min(b.radius,MAX_COMBINED_RADIUS);
+       bubbles[j].active=false;bubbles[j].radius=0;bubbles[j].hasGrown=false;}}}}
+  }
+  for(let i=0;i<MAX_BUBBLES;i++){const p=previousBubbles[i];
+   if(p.active)OLED.fillCircle(p.x,p.y,p.radius,BLACK);}
+  for(let i=0;i<MAX_BUBBLES;i++){const b=bubbles[i];
+   if(b.active)OLED.drawCircle(b.x,b.y,b.radius,WHITE);}
+  OLED.display();
+ }
+}
+
+/* ============ [FW] 4_GRAPHICS.ino - triangle animation (async-paced, geometry exact) ============ */
+const COIN_FLOURISH_SKIP=2; /* [POLISH 2026-07-23, tunable — Mike] coin flip renders every Nth
+   flourish frame: 1 = the full answer-reveal ceremony (~3.1 s), 2 = repeated-flip default
+   (~1.6 s), 3 = brisk. Answers always use 1 (the reveal keeps its full ceremony). */
+async function Draw_Triangle_Animation(animationType,frameSkip){      /* [4_GRAPHICS:92-111] */
+ const skip=frameSkip||1;
+ const ZOOM_MAX=128,Frames_Stage01=30,Frames_Stage02=15,PI_HALF=PI/2;
+ switch(animationType){
+  case ZOOM_IN:
+   for(let i=0;i<=Frames_Stage01;i+=skip){
+    const ihalf=Math.trunc(i/2); /* C integer division [4_GRAPHICS:100-101] */
+    const theta=PI_HALF*(Frames_Stage01-ihalf)/Frames_Stage01;
+    const zoom=ZOOM_MAX*Math.sin(PI_HALF*ihalf/Frames_Stage01);
+    await Draw_One_Triangle(zoom,theta*6,theta*2);
+   }
+   for(let i=0;i<=Frames_Stage02;i+=skip){
+    await Draw_One_Triangle(150+i,3*PI_HALF,PI_HALF);
+   }
+   break;
+ }
+}
+async function Draw_One_Triangle(zoom,xRotation,yRotation){           /* [4_GRAPHICS:113-137] */
+ let angle=0.0;
+ const displayWidth=128.0,displayHeight=64.0;
+ const cos_x=Math.cos(xRotation),sin_y=Math.sin(yRotation);
+ const x0=zoom*cos_x+displayWidth/2, y0=zoom*sin_y+displayHeight/2;
+ angle+=TWO_PI_OVER_3;
+ const x1=zoom*Math.cos(angle+xRotation)+displayWidth/2, y1=zoom*Math.sin(angle+yRotation)+displayHeight/2;
+ angle+=TWO_PI_OVER_3;
+ const x2=zoom*Math.cos(angle+xRotation)+displayWidth/2, y2=zoom*Math.sin(angle+yRotation)+displayHeight/2;
+ OLED.clearDisplay();
+ OLED.drawTriangle(x0,y0,x1,y1,x2,y2,SSD1306_WHITE);
+ Update_Bubbles();
+ OLED.display();
+ await sleep(15); /* [SHIM] I2C frame pacing */
+}
+
+/* ============ [FW] M8BALL.ino - the 7-state answers machine ============ */
+const REDIRECT_OUTPUT_TO_FLUIDIC_SUSPENSION=0,ASK_YOUR_QUESTION=1,FINISH_ASKING_YOUR_QUESTION=2,
+ REVEAL_THE_ANSWER=3,START_THE_DISPLAY_TIMER=4,WAIT_OUT_THE_TIMER_AND_NO_DO_OVERS=5,CLEANUP_TIME=6;
+const MGK_NIAC=0,MGK_v2_0=1,MGK_65=2; /* [2_data_M8BALL:10-12] menu-row = persona-ID coupling */
+/* [TWIN DELTA - Mike ruling 1, 2026-07-15] per-engine voice, from engine_registry (firmware today has
+   a single global currentVoiceID hardcoded to 8). Bench splice will need this as a firmware change. */
+const ENGINE_VOICE={0:8,1:3,2:0};
+/* [TWIN DELTA - Mike ruled GO 2026-07-15] menuRow -> tableSlot DECOUPLE.
+   Firmware today: M8B_Answers_EXE(lineNum_PTR) [1_MGK-VIIIp:8] passes the MENU ROW as M8B_ID, which
+   then indexes M8B_AnswerTable[3] and M8B_Answers_ParametersTable[3] - so any persona at menu row >= 3
+   reads OUT OF BOUNDS. Persona 5 lands at row >= 3 whoever is cast, so the decouple is due now.
+   Design: identity stays the menu row (screen treatment, voice, lore); TABLE ACCESS goes through the
+   slot map. Uncompiled personas return -1 and are handled gracefully instead of reading garbage.
+   Firmware patch: FIRMWARE_CHANGE_SPEC-mgk65-20260715.md s9. */
+const SCAFFOLD_PROC=27; /* [TWIN DELTA] honest-scaffold renderer for unbuilt rows */
+const MESSAGES_PROC=26; /* [TWIN DELTA] new process id; firmware's MESSAGES=2 is the MENU, not a process */
+const M8B_MENUROW_TO_SLOT=[0,1,2,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+                           -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]; /* 39 personas, 3 compiled */
+function Table_Slot_For_Menu_Row(row){
+ if(row<0||row>=M8B_MENUROW_TO_SLOT.length)return -1;
+ return M8B_MENUROW_TO_SLOT[row];
+}
+const VoiceID_MAX=13;                 /* [2_data_M8BALL:50-64] */
+let M8B_currentState=0;               /* firmware: function-static [M8BALL:14] -> module var (transliteration note) */
+let M8B_displayTimer=0;
+const M8B_MIN_READ_MS=2500;           /* [flag-3 ruling] minimum read time before shake-to-reask; TUNABLE (Mike) */
+let M8B_busy=false;                   /* [SHIM] async guard - firmware blocks the whole OS during these draws */
+let blankFrameBadged=false;
+function M8B_Answers_EXE(M8B_ID){                                     /* [M8BALL:11-73] */
+ const displayTime=2000;
+ switch(M8B_currentState){
+  case REDIRECT_OUTPUT_TO_FLUIDIC_SUSPENSION:
+   M8B_busy=true;
+   (async()=>{await Redirect_Output_to_Fluidic_Suspension(M8B_ID);
+    M8B_currentState=ASK_YOUR_QUESTION;M8B_busy=false;})();
+   break;
+  case ASK_YOUR_QUESTION:
+   Ask_Your_Question(M8B_ID);
+   spawnBubbles(random(MAX_BUBBLES));
+   M8B_currentState=FINISH_ASKING_YOUR_QUESTION;
+   break;
+  case FINISH_ASKING_YOUR_QUESTION:
+   if(Pull_From_Buffer(ROTARY_DIAL)){M8B_currentState=CLEANUP_TIME;}
+   else if(Unit_Is_Shaking(1.3)){spawnBubbles(random(MAX_BUBBLES));M8B_currentState=REVEAL_THE_ANSWER;}
+   else if(Pull_From_Buffer(SHUTTER)){
+    /* [FIX b, 2026-07-22] NIAC is SHAKE-ONLY per the D.8 MGK-Options matrix (VSI x,
+       PPI blank). Click is CONSUMED (no ghost-click into the menu later) but ignored.
+       v2.0 + 65 carry PPI in the matrix and keep the click path. Firmware today does
+       not gate this — twin delta anchored on the matrix; rides the firmware spec. */
+    if(M8B_ID!==MGK_NIAC){M8B_currentState=REVEAL_THE_ANSWER;}
+   }
+   break;
+  case REVEAL_THE_ANSWER:
+   M8B_busy=true;
+   askCount++; Messages_Trigger("ask");    /* [TWIN DELTA] the machine notices, and delivers on a schedule */
+   (async()=>{await M8B_Reveals_Answer(M8B_ID);
+    M8B_currentState=START_THE_DISPLAY_TIMER;M8B_busy=false;})();
+   break;
+  case START_THE_DISPLAY_TIMER:
+   /* [FIX f, 2026-07-22 — REVEAL-HOLD LAW] no machine timeout: the answer HOLDS
+      until the user disturbs it. The 2000ms displayTime is retired; state name kept
+      (firmware transliteration). NO-DO-OVERS is SUPERSEDED by the law (shake now
+      returns to ask instead of re-flashing the redirect card) — function kept
+      firmware-exact but unreferenced; firmware spec change owed. */
+   /* [REFINED per Mike flag-3 ruling 2026-07-22 evening] reveal-hold stands, BUT
+      shake-to-reask requires a MINIMUM READ TIME first — no instant re-rolls; the
+      do-over gate is "long enough to read it". Tunable constant; firmware spec §11. */
+   M8B_displayTimer=millis()+M8B_MIN_READ_MS;
+   M8B_currentState=WAIT_OUT_THE_TIMER_AND_NO_DO_OVERS;
+   break;
+  case WAIT_OUT_THE_TIMER_AND_NO_DO_OVERS:
+   if(Pull_From_Buffer(ROTARY_DIAL)){M8B_currentState=CLEANUP_TIME;}        /* scroll exits everywhere, anytime */
+   else if(Unit_Is_Shaking(1.3)&&millis()>M8B_displayTimer){spawnBubbles(random(MAX_BUBBLES));M8B_currentState=ASK_YOUR_QUESTION;} /* re-ask only after the read gate */
+   else{Pull_From_Buffer(SHUTTER);Update_Bubbles();}                        /* click consumed, no effect; answer holds */
+   break;
+  case CLEANUP_TIME:
+   M8B_busy=true;
+   (async()=>{
+    End_Process(ANSWERS);
+    Activate_the_Screen(TOP_SCREEN,true);
+    await DisplayStatic(1000);
+    Activate_the_Screen(TOP_SCREEN,true);
+    End_Process(BUBBLES);
+    /* [FIX c, 2026-07-22] unpause AFTER the exit static. Unpausing first let
+       Menu_System's COLD_START repoint OLED to FRONT mid-static — the noise frames
+       landed on the front buffer and the menu never redrew (the frozen-front-screen
+       bug, reproduced NIAC/v2.0/65 — one cause, this ordering). */
+    Unpause_Process(SYSTEM_MONITOR);
+    Unpause_Process(MENU_SYSTEM);
+    M8B_currentState=REDIRECT_OUTPUT_TO_FLUIDIC_SUSPENSION;M8B_busy=false;})();
+   break;
+  default:
+   M8B_currentState=REDIRECT_OUTPUT_TO_FLUIDIC_SUSPENSION;
+   break;
+ }
+}
+async function Redirect_Output_to_Fluidic_Suspension(M8B_ID){         /* [M8BALL:75-92] */
+ switch(M8B_ID){
+  case MGK_NIAC:
+  case MGK_v2_0:
+  case MGK_65:   /* [TWIN DELTA - ruling 1] 65 routes through NIAC's proven handoff (firmware omits it today) */
+   Activate_the_Screen(FRONT_SCREEN,true);
+   screenPrintLn(Row_01,0," ----<          >----",0);
+   screenPrintLn(Row_01,40,get_as_char(lineName),0);
+   screenPrintLn(Row_02,0," OUTPUT REDIRECTED TO",0);
+   screenPrintLn(Row_03,0,"  FLUIDIC SUSPENSION ",1);
+   Pause_Process(SYSTEM_MONITOR);
+   Activate_the_Screen(TOP_SCREEN,true);
+   await DisplayStatic(2000);
+   Activate_the_Screen(TOP_SCREEN,true);
+   Start_Process(BUBBLES,NORMAL_PRIORITY);
+ }
+}
+function Ask_Your_Question(M8B_ID){                                   /* [M8BALL:94-121] */
+ switch(M8B_ID){
+  case MGK_NIAC:
+   Activate_the_Screen(TOP_SCREEN,true);setFont(LARGE_FONT);
+   screenPrintLn(20,0," Ask question,",1);
+   screenPrintLn(Row_03+15,0,"   then shake.",1);
+   setFont(SMALL_FONT);
+   screenPrintLn(55,0,"             >>> scroll to exit <<<",1);
+   break;
+  case MGK_v2_0:
+   Activate_the_Screen(TOP_SCREEN,true);setFont(LARGE_FONT);
+   screenPrintLn(20,0," Ask question,",1);
+   screenPrintLn(Row_03+15,0,"   then shake.",1);
+   setFont(SMALL_FONT);
+   screenPrintLn(55,0,"             >>> scroll to exit <<<",1);
+   break;
+  case MGK_65:
+   /* [TWIN DELTA - ruling 1] was: FRONT_SCREEN stub (announced the handoff, then the reveal
+      overwrote it and line 2 fell off the 32-row buffer = the bug Mike tested live).
+      Now: NIAC's proven top-screen ask. Firmware change spec: docs/FIRMWARE_CHANGE_SPEC-mgk65-*.md */
+   Activate_the_Screen(TOP_SCREEN,true);setFont(LARGE_FONT);
+   screenPrintLn(20,0," Ask question,",1);
+   screenPrintLn(Row_03+15,0,"   then shake.",1);
+   setFont(SMALL_FONT);
+   screenPrintLn(55,0,"             >>> scroll to exit <<<",1);
+   break;
+ }
+}
+async function M8B_Reveals_Answer(M8B_ID){                            /* [M8BALL:123-176] */
+ const ANSWER_LINE_0=0,ANSWER_LINE_1=1;
+ const slot=Table_Slot_For_Menu_Row(M8B_ID);          /* [DECOUPLE] tables are indexed by SLOT */
+ if(slot<0){                                          /* persona not compiled: graceful, not garbage */
+  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+  screenPrintLnCentered(30,"PERSONA NOT INSTALLED",1);
+  chip("warn","persona at menu row "+M8B_ID+" has no compiled table slot &mdash; firmware today would read out of bounds here [DECOUPLE]");
+  return;
+ }
+ const Polarity_Response=Polarity_Engine_Response(slot);
+ const Clarity_Response=Clarity_Engine_Response(slot);
+ const Audio_Response_Folder=(M8B_ID*claritySetting_MAX)+Clarity_Response+10;   /* [M8BALL:131] folder keys off IDENTITY */
+ const engVoice=(ENGINE_VOICE[M8B_ID]!==undefined)?ENGINE_VOICE[M8B_ID]:currentVoiceID; /* [TWIN DELTA] per-engine voice */
+ const Audio_Response_File=(Polarity_Response*VoiceID_MAX)+engVoice+1;         /* [M8BALL:132] */
+ Serial.print("M8B_ID: ");Serial.println(M8B_ID);
+ Serial.print("Clarity_Response: ");Serial.println(Clarity_Response);
+ Serial.print("Polarity_Response: ");Serial.println(Polarity_Response);
+ Serial.print("currentVoiceID: ");Serial.println(engVoice);
+ Serial.println();
+ Serial.print("Audio_Response_Folder: ");Serial.println(Audio_Response_Folder);
+ Serial.print("Audio_Response_File: ");Serial.println(Audio_Response_File);
+ Serial.println();
+ switch(M8B_ID){
+  case MGK_NIAC:
+   Activate_the_Screen(TOP_SCREEN,false);setFont(LARGE_FONT);
+   OLED.clearDisplay();
+   await Draw_Triangle_Animation(ZOOM_IN);
+   badgeBlankFrame();
+   screenPrintLnCentered(32,M8B_AnswerTable[slot][Polarity_Response][Clarity_Response][ANSWER_LINE_0],1);
+   screenPrintLnCentered(48,M8B_AnswerTable[slot][Polarity_Response][Clarity_Response][ANSWER_LINE_1],1);
+   player.playFolder(Audio_Response_Folder,Audio_Response_File);
+   break;
+  case MGK_v2_0:
+   Activate_the_Screen(TOP_SCREEN,false);setFont(LARGE_FONT);
+   OLED.clearDisplay();
+   await Draw_Triangle_Animation(ZOOM_IN);
+   badgeBlankFrame();
+   screenPrintLnCentered(16,M8B_AnswerTable[slot][Polarity_Response][Clarity_Response][ANSWER_LINE_0],1);
+   screenPrintLnCentered(32,M8B_AnswerTable[slot][Polarity_Response][Clarity_Response][ANSWER_LINE_1],1);
+   /* NO playFolder here - the known missing 1-line v2.0 touch [M8BALL:161-168], deferred to bench splice */
+   chip("warn","v2.0 reveal: silent by firmware &mdash; playFolder line missing [M8BALL:161-168], bench splice pending");
+   break;
+  case MGK_65:
+   /* [TWIN DELTA - ruling 1] NIAC's machinery: top screen + triangle flourish + audio.
+      Font reconciliation: SMALL_FONT (TomThumb) fits 100/100 of 65's cells; LARGE_FONT
+      (NIAC's FreeSansBold) overflows 86/100 because 65's sentences are long. Rows 32/48 are
+      NIAC's own; MGK65_TIGHT_ROWS offers 28/38 for the small font - Mike picks in the preview. */
+   Activate_the_Screen(TOP_SCREEN,false);setFont(SMALL_FONT);
+   OLED.clearDisplay();
+   await Draw_Triangle_Animation(ZOOM_IN);
+   badgeBlankFrame();
+   {
+    const sfx=SFX_TEXT[slot+"|"+Polarity_Response+"|"+Clarity_Response];
+    const rows=MGK65_TIGHT_ROWS?[28,38]:[32,48];
+    if(sfx){
+     /* the sound IS the answer: no text, the flourish carries the screen */
+     chip("warn","SFX cell fired: "+sfx+" &mdash; sound is the answer, screen shows the flourish only");
+    } else {
+     screenPrintLnCentered(rows[0],M8B_AnswerTable[slot][Polarity_Response][Clarity_Response][ANSWER_LINE_0],1);
+     screenPrintLnCentered(rows[1],M8B_AnswerTable[slot][Polarity_Response][Clarity_Response][ANSWER_LINE_1],1);
+    }
+    player.playFolder(Audio_Response_Folder,Audio_Response_File);
+   }
+   break;
+ }
+}
+function badgeBlankFrame(){
+ if(!blankFrameBadged){blankFrameBadged=true;
+  chip("warn","blank end-frame bug: ZOOM_IN's final zoom-165 triangle lands entirely off-screen [4_GRAPHICS:105-108]");}
+}
+function NO_Do_Overs(){                                               /* [M8BALL:178-186] */
+ if(Unit_Is_Shaking(1.3)){
+  Activate_the_Screen(FRONT_SCREEN,true);
+  screenPrintLn(Row_01,0," ----<          >----",0);
+  screenPrintLn(Row_01,40,get_as_char(lineName),0);
+  screenPrintLn(Row_02,0," OUTPUT REDIRECTED TO",0);
+  screenPrintLn(Row_03,0,"  FLUIDIC SUSPENSION ",1);
+ }
+}
+
+/* ============ [FW] BIAS_SET.ino - bias entry screens, exact ============ */
+const BIAS_COLD_START=0,BIAS_DATA_INPUT_BUTTON=1,BIAS_DATA_INPUT=2,BIAS_CANCEL_BUTTON=3,BIAS_OK_BUTTON=4,BIAS_SAVE=5,BIAS_EXIT=6;
+let currentState_Set_The_Bias=BIAS_COLD_START;
+let tempBiasValue=-1;
+function Set_The_Bias(BIAS_TYPE){                                     /* [BIAS_SET:13-77] */
+ switch(currentState_Set_The_Bias){
+  case BIAS_COLD_START:
+   if(BIAS_TYPE==CLARITY)tempBiasValue=clarityBiasNOW;
+   else if(BIAS_TYPE==POLARITY)tempBiasValue=polarityBiasNOW;
+   changeState_Set_The_Bias(BIAS_DATA_INPUT_BUTTON);
+   break;
+  case BIAS_DATA_INPUT_BUTTON:
+   if(Pull_From_Buffer(ROTARY_DIAL)){changeState_Set_The_Bias(BIAS_CANCEL_BUTTON);}
+   else if(Pull_From_Buffer(SHUTTER)){changeState_Set_The_Bias(BIAS_DATA_INPUT);}
+   break;
+  case BIAS_DATA_INPUT:
+   if(Pull_From_Buffer(ROTARY_DIAL)){tempBiasValue=(tempBiasValue+1)%101;Refresh_the_Bias_Screen();}
+   else if(Pull_From_Buffer(SHUTTER)){changeState_Set_The_Bias(BIAS_DATA_INPUT_BUTTON);}
+   break;
+  case BIAS_CANCEL_BUTTON:
+   if(Pull_From_Buffer(ROTARY_DIAL)){changeState_Set_The_Bias(BIAS_OK_BUTTON);}
+   else if(Pull_From_Buffer(SHUTTER)){changeState_Set_The_Bias(BIAS_EXIT);}
+   break;
+  case BIAS_OK_BUTTON:
+   if(Pull_From_Buffer(ROTARY_DIAL)){changeState_Set_The_Bias(BIAS_DATA_INPUT_BUTTON);}
+   else if(Pull_From_Buffer(SHUTTER)){changeState_Set_The_Bias(BIAS_SAVE);}
+   break;
+  case BIAS_SAVE:
+   if(BIAS_TYPE==CLARITY){clarityBiasNOW=tempBiasValue;
+    Save_To_Flash(FLASH_POLARITY_BIAS); /* [BIAS_SET:57] copy-paste bug preserved: clarity save targets POLARITY flash slot */
+   }else if(BIAS_TYPE==POLARITY){polarityBiasNOW=tempBiasValue;Save_To_Flash(FLASH_POLARITY_BIAS);}
+   changeState_Set_The_Bias(BIAS_EXIT);
+   break;
+  case BIAS_EXIT:
+   End_Process(BIAS_TYPE);
+   Unpause_Process(SYSTEM_MONITOR);
+   Unpause_Process(MENU_SYSTEM);
+   changeState_Set_The_Bias(BIAS_COLD_START);
+   break;
+  default:
+   changeState_Set_The_Bias(BIAS_COLD_START);
+   Serial.println("Error: Unknown bias state");
+   break;
+ }
+}
+function changeState_Set_The_Bias(s){currentState_Set_The_Bias=s;Refresh_the_Bias_Screen();}
+function Refresh_the_Bias_Screen(){Activate_the_Screen(FRONT_SCREEN,true);Draw_the_Bias_Screen();Draw_the_Bias_Line();}
+function Draw_the_Bias_Screen(){                                      /* [BIAS_SET:91-103] */
+ screenPrintLn(Row_01,1," [ ENTER NEW BIAS ]",1);
+ if(currentState_Set_The_Bias==BIAS_CANCEL_BUTTON)screenPrintLn(Row_03,12,"<cancel>",1);
+ else screenPrintLn(Row_03,12," cancel ",1);
+ if(currentState_Set_The_Bias==BIAS_OK_BUTTON)screenPrintLn(Row_03,70,"<  OK  >",1);
+ else screenPrintLn(Row_03,70,"   ok ",1);
+}
+function Draw_the_Bias_Line(){                                        /* [BIAS_SET:105-111] */
+ if(currentState_Set_The_Bias==BIAS_DATA_INPUT)screenPrintLn(Row_02,29,"<<     >>",1);
+ else if(currentState_Set_The_Bias==BIAS_DATA_INPUT_BUTTON)screenPrintLn(Row_02,29," <     > ",1);
+ screenPrintLn(Row_02,50,String(tempBiasValue),1);
+}
+
+/* ============ [DEV] process kill (kept from slice 1 - now also resets machines) ============ */
+function devKill(){
+ for(const id of [ANSWERS,POLARITY,CLARITY,GAMES,MESSAGES_PROC,PROBABILITIES,DETECTORS,ADVICE,SCAFFOLD_PROC]){
+  if(Get_Ptr_for_uniqueProcessID(id)!=-1){
+   End_Process(id);End_Process(BUBBLES);Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
+   M8B_currentState=REDIRECT_OUTPUT_TO_FLUIDIC_SUSPENSION;M8B_busy=false;
+   currentState_Set_The_Bias=BIAS_COLD_START;gameState_FSM=GAME_COLD_START;
+   chip("ok","force-ended process "+id+"; menu resumed [DEV - firmware exits via scroll/cancel]");
+   currentState=MENU_SYSTEM_COLD_START;return;}}
+ chip("ok","no foreground process running");
+}
+
+
+/* ============================================================================
+   [TWIN-IMPLEMENTED] GAMES branch - the first non-Answers domain.
+   Ops recommendation, Mike said "recommend and proceed" 2026-07-15.
+   Firmware today: Games menu rows exist [2_data_MENU:135-140], all visible,
+   all exe, ZERO handlers - Run_EXE hits default: break, nothing happens.
+   Spec for the bench: docs/FIRMWARE_CHANGE_SPEC-games-20260715.md
+
+   Conventions chosen (Ops judgment, flagged for Mike's gate):
+   - EXIT = scroll (rotary), matching the Answers loop. Consistent, proven.
+   - SCORE = RAM-only, evaporates on exit. Matches the settings doctrine
+     (Save_To_Flash is a stub; nothing persists).
+   - FAILURE = flat and in-character. The machine states the outcome; it does
+     not taunt, chase or beg for another go (slot-machine-never-evil).
+   - Games run on the TOP screen (128x64 progressive); the FRONT screen carries
+     the title + score, like the fluidic-redirect card does for Answers.
+   ============================================================================ */
+const GAME_TILT_DRIVE=0, GAME_GOBBLE=1, GAME_AVOIDSTEROIDS=2, GAME_SNOWGLOBE=3, GAME_TICTACTOE=4; /* [TWIN DELTA, porch ruling 2026-07-17] menu row id 175; D.8 STATUS listed Tic-Tac-Toe ("finish writing code") - the menu finally catches up with the spec */
+const GAME_COLD_START=0, GAME_RUN=1, GAME_OVER=2, GAME_CLEANUP=3;
+let gameState_FSM=GAME_COLD_START, gameOverAt=0, gameScore=0, gameBest=0, gameWarned=false;
+
+function Game_Front_Card(title,line3,scoreLine){
+ /* [games batch 2026-07-18] formatting pass (Mike): title 2px left; every row
+    clipped to the 21-char front line (kills the stray-digit wrap); score line
+    live-replaceable (real-time score, TIE counters, idle warnings) */
+ Activate_the_Screen(FRONT_SCREEN,true);
+ screenPrintLn(Row_01,0," ----<          >----",0);
+ screenPrintLn(Row_01,38,title,0);
+ const s2=(scoreLine!==undefined)?scoreLine:
+  ("SCORE "+String(gameScore).padStart(4,"0")+" BEST "+String(gameBest).padStart(4,"0"));
+ screenPrintLn(Row_02,0,String(s2).slice(0,21),0);
+ screenPrintLn(Row_03,0,String(line3).slice(0,21),1);
+ /* [FIX e, 2026-07-22] restore the TOP pointer: games run on the top screen, and
+    every mid-game card refresh (Gobble/AS real-time score, TTT phase cards) left
+    OLED aimed at FRONT — the next game frame rendered onto the front glass
+    (the dual-screen-mid-game bug). No clear: the card stays, the pointer returns. */
+ Activate_the_Screen(TOP_SCREEN,false);
+}
+function Games_EXE(gameID){                  /* the process body, shaped like M8B_Answers_EXE */
+ gameID=Game_ID_From_Menu(gameID);           /* [GAME NIGHT] casino table + mail-run row mapping */
+ switch(gameState_FSM){
+  case GAME_COLD_START:
+   gameScore=0; gameWarned=false;
+   Pause_Process(SYSTEM_MONITOR);
+   /* [FIX g, 2026-07-22] order was init -> card -> ACTIVATE TOP WITH CLEAR, which
+      wiped anything init drew (TTT's mode screen rendered, then got cleared — blank
+      top at game start). Now: card first, then activate+clear top, THEN init, so
+      init drawing lands on the live top screen. */
+   Game_Front_Card(Game_Name(gameID),"  <<< scroll to exit ");
+   Activate_the_Screen(TOP_SCREEN,true);
+   Game_Init(gameID);
+   gameState_FSM=GAME_RUN;
+   break;
+  case GAME_RUN:
+   if(Pull_From_Buffer(ROTARY_DIAL)){gameState_FSM=GAME_CLEANUP;break;}   /* scroll = exit, as Answers */
+   Game_Step(gameID);
+   break;
+  case GAME_OVER:
+   if(Pull_From_Buffer(ROTARY_DIAL)){gameState_FSM=GAME_CLEANUP;}         /* scroll = exit, ALWAYS - the convention holds in every state */
+   else if(Pull_From_Buffer(SHUTTER)){gameState_FSM=GAME_COLD_START;gameWarned=false;}  /* click = play again */
+   else if(millis()>gameOverAt){gameState_FSM=GAME_CLEANUP;}              /* or it lets you go */
+   else if(!gameWarned&&millis()>gameOverAt-4000){gameWarned=true;        /* [games batch] warn BEFORE auto-end, with the reason */
+    Game_Front_Card(Game_Name(gameID),"idle - menu in 4s",undefined);}
+   break;
+  case GAME_CLEANUP:
+   End_Process(GAMES);
+   Unpause_Process(SYSTEM_MONITOR);
+   Unpause_Process(MENU_SYSTEM);
+   Activate_the_Screen(TOP_SCREEN,true);
+   gameState_FSM=GAME_COLD_START;
+   break;
+ }
+}
+function Game_Name(id){return ["Tilt Drive","Gobble","AvoidSter","SnowGlobe","TicTacToe","Slots","Craps","Blackjack","Roulette","Mail Run"][id]||"GAME";}
+
+/* ---------- TIC-TAC-TOE (row 4, twin-delta id 175; games batch respec 2026-07-18) ----------
+   Mike's rulings this pass: CLICK = GO (shake cycles mode); the machine NEVER
+   loses (full minimax - no setting deliberately allows it yet); auto-end after
+   5 min inactivity WITH warning; no blank-screen start; CvC on the TOP screen
+   with the full WOPR choreography, ending on the Joshua nod ("HOW ABOUT A NICE
+   GAME OF CHESS?" - no chess exists in the machine; that is the joke).
+   SCROLL exits always, every state - the house convention holds. */
+const TTT_MODE_SELECT=0, TTT_PLAY=1, TTT_WOPR=2;
+const TTT_IDLE_LIMIT=300000, TTT_IDLE_WARN=270000;  /* 5 min auto-end, warn at 4:30 */
+let tttPhase=TTT_MODE_SELECT, tttMode=0, tttBoard=[], tttTurn=1, tttCursor=4,
+    tttMoveAt=0, tttTiltAt=0, tttTies=0, tttLastInput=0, tttIdleWarned=false,
+    wopr=null;
+const TTT_MODES=["P vs P","P vs C","C vs C"];
+/* [RW-4 RULED 2026-07-18] C vs C is PASSCODE-GATED: the mode does not appear in
+   the cycle until its code is accepted (displayability doctrine). Doctrine noted:
+   deterministic storytelling over earned-waiting - the gate's existence gets a
+   PLACED reveal (manual/margins/messages) at the words pass, which also names
+   the REAL code. 1965 is an Ops PLACEHOLDER (the year the games were drafted). */
+const TTT_CVC_CODE=1965;
+function TTT_mode_count(){return ACCEPTED_CODES.has(TTT_CVC_CODE)?3:2;}
+function TTT_init(){
+ tttPhase=TTT_MODE_SELECT; tttBoard=[0,0,0,0,0,0,0,0,0]; tttTurn=1; tttCursor=4;
+ tttTies=0; wopr=null; tttLastInput=millis(); tttIdleWarned=false;
+ TTT_draw_mode();
+}
+function TTT_touch(){tttLastInput=millis();tttIdleWarned=false;}
+function TTT_draw_mode(){
+ OLED.clearDisplay(); setFont(SMALL_FONT);
+ screenPrintLnCentered(12,"TIC-TAC-TOE",0);
+ screenPrintLnCentered(26,"MODE: "+TTT_MODES[tttMode],0);
+ screenPrintLnCentered(40,"shake = mode   CLICK = GO",0);   /* click is go [ruling] */
+ screenPrintLnCentered(52,">>> scroll to exit <<<",1);
+}
+function TTT_start(){
+ tttBoard=[0,0,0,0,0,0,0,0,0]; tttTurn=1; tttCursor=4; tttMoveAt=millis()+400;
+ tttTiltAt=millis()+900;
+ if(tttMode===2){tttPhase=TTT_WOPR; tttTies=0;
+  wopr={stage:"G1",at:millis(),delay:800,t0:0};
+  Game_Front_Card(Game_Name(GAME_TICTACTOE),"observing","GAME 1  TIES 0000");
+ } else {tttPhase=TTT_PLAY;
+  Game_Front_Card(Game_Name(GAME_TICTACTOE)," <<< scroll to exit");}
+ TTT_draw_board();
+}
+function TTT_cell_xy(i){const c=i%3,r=Math.trunc(i/3);return [40+c*16,8+r*16];}
+function TTT_draw_board(){
+ OLED.clearDisplay();
+ for(let k=1;k<3;k++){
+  OLED.drawLine(40+k*16,8,40+k*16,56,WHITE); OLED.drawLine(40,8+k*16,88,8+k*16,WHITE);
+ }
+ OLED.drawLine(40,8,88,8,WHITE);OLED.drawLine(40,56,88,56,WHITE);
+ OLED.drawLine(40,8,40,56,WHITE);OLED.drawLine(88,8,88,56,WHITE);
+ for(let i=0;i<9;i++){
+  const xy=TTT_cell_xy(i);const x=xy[0],y=xy[1];
+  if(tttBoard[i]===1){OLED.drawLine(x+3,y+3,x+13,y+13,WHITE);OLED.drawLine(x+13,y+3,x+3,y+13,WHITE);}
+  else if(tttBoard[i]===2){OLED.drawCircle(x+8,y+8,5,WHITE);}
+ }
+ setFont(SMALL_FONT);
+ if(tttPhase===TTT_PLAY&&TTT_human_turn()){
+  const xy=TTT_cell_xy(tttCursor);const x=xy[0],y=xy[1];
+  OLED.drawLine(x+1,y+1,x+4,y+1,WHITE);OLED.drawLine(x+1,y+1,x+1,y+4,WHITE);
+  OLED.drawLine(x+15,y+15,x+12,y+15,WHITE);OLED.drawLine(x+15,y+15,x+15,y+12,WHITE);
+  screenPrintLn(22,94,"tilt=aim",0);      /* no blank starts: the verbs are on the glass */
+  screenPrintLn(30,94,"clk=put",0);
+ }
+ screenPrintLn(42,94,(tttPhase===TTT_WOPR)?"AUTO":"TURN",0);
+ screenPrintLn(50,94,(tttPhase===TTT_WOPR)?("T "+tttTies):(tttTurn===1?"X":"O"),0);
+ OLED.display();
+}
+function TTT_human_turn(){return tttPhase===TTT_PLAY&&(tttMode===0||(tttMode===1&&tttTurn===1));}
+function TTT_lines(){return [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];}
+function TTT_winner(b){
+ const L=TTT_lines();
+ for(let i=0;i<L.length;i++){const l=L[i];
+  if(b[l[0]]&&b[l[0]]===b[l[1]]&&b[l[1]]===b[l[2]])return b[l[0]];}
+ return b.every(v=>v)?3:0;
+}
+/* full minimax - the machine NEVER loses [ruling: unless a setting deliberately
+   allows it, and none does]. 9 cells; trivial depth. Ties preferred over losses. */
+function TTT_minimax(b,me,turn){
+ const w=TTT_winner(b);
+ if(w===me)return {s:1};
+ if(w===3)return {s:0};
+ if(w)return {s:-1};
+ let best=null;
+ for(let i=0;i<9;i++){
+  if(b[i])continue;
+  b[i]=turn;
+  const r=TTT_minimax(b,me,turn===1?2:1);
+  b[i]=0;
+  const score=(turn===me)?r.s:r.s;   /* score always from me's perspective */
+  if(best===null||(turn===me?score>best.s:score<best.s))best={s:score,mv:i};
+ }
+ return best;
+}
+function TTT_policy(b,me){const r=TTT_minimax(b.slice(),me,me);return (r&&r.mv!==undefined)?r.mv:-1;}
+function TTT_place(i){
+ if(tttBoard[i])return false;
+ tttBoard[i]=tttTurn; PlaySound(Select);
+ const w=TTT_winner(tttBoard);
+ if(w){TTT_conclude(w);return true;}
+ tttTurn=tttTurn===1?2:1;
+ tttMoveAt=millis()+((tttPhase===TTT_WOPR)?wopr.delay:400);
+ TTT_draw_board(); return true;
+}
+function TTT_conclude(w){
+ if(tttPhase===TTT_WOPR){TTT_wopr_gameEnd(w);return;}
+ TTT_draw_board();
+ setFont(SMALL_FONT);
+ const msg=w===3?"DRAW":(w===1?"X WINS":"O WINS");
+ screenPrintLn(12,94,msg,0);OLED.display();
+ if(w===1&&tttMode===1)gameScore++;   /* cannot happen at perfect play; kept for the future deliberate-handicap setting */
+ if(gameScore>gameBest)gameBest=gameScore;
+ Game_Front_Card(Game_Name(GAME_TICTACTOE),"click=again scrl=exit");
+ gameOverAt=millis()+10000; gameWarned=false; gameState_FSM=GAME_OVER;
+}
+/* ---- the WOPR choreography (Mike's respec, beat = 700 ms) ----
+   G1 slow+plodding -> pause a beat -> one game at 5x -> stop 2 beats ->
+   normal, then EXPONENTIAL RAMP (10 s down to 30 ms, hold 5 s) with the TIE
+   counter visibly accelerating -> ALL DARK 5 beats -> faint glow slowly
+   breathing (hope of life) -> SAFETY REBOOT from non-corrupted memory ->
+   back in TTT -> the message -> "HOW ABOUT A NICE GAME OF CHESS?" */
+const WOPR_BEAT=700;
+function TTT_wopr_newGame(){tttBoard=[0,0,0,0,0,0,0,0,0];tttTurn=1;tttMoveAt=millis()+wopr.delay;}
+function TTT_wopr_gameEnd(w){
+ if(w===3)tttTies++;   /* at perfect play it is always 3; counted honestly anyway */
+ Game_Front_Card(Game_Name(GAME_TICTACTOE),"observing",
+  "GAME "+(tttTies+1)+"  TIES "+String(tttTies).padStart(4,"0"));
+ TTT_draw_board();
+ switch(wopr.stage){
+  case "G1":   wopr={stage:"PAUSE1",at:millis()+WOPR_BEAT,delay:160}; break;
+  case "G5X":  wopr={stage:"STOP2",at:millis()+2*WOPR_BEAT,delay:400}; break;
+  case "RAMP": TTT_wopr_newGame(); break;   /* ramp keeps playing; delay is managed in step */
+ }
+}
+function TTT_wopr_step(){
+ const now=millis();
+ switch(wopr.stage){
+  case "G1": case "G5X": case "RAMP":
+   if(wopr.stage==="RAMP"){
+    const t=(now-wopr.t0)/1000;
+    if(t<10)wopr.delay=Math.max(30,400*Math.exp(-0.26*t));   /* 400ms -> ~30ms over 10 s */
+    else if(t<15)wopr.delay=30;                               /* hold 5 s at full speed */
+    else {wopr={stage:"DARK",at:now+5*WOPR_BEAT};             /* ALL DARK, 5 beats */
+     OLED.clearDisplay();OLED.display();
+     Activate_the_Screen(FRONT_SCREEN,true);frontOLED.clearDisplay();frontOLED.display();
+     pixels.setPixelColor(0,pixels.Color(0,0,0));pixels.setPixelColor(1,pixels.Color(0,0,0));pixels.show();
+     return;}
+   }
+   if(now>tttMoveAt){const mv=TTT_policy(tttBoard,tttTurn);if(mv>=0)TTT_place(mv);}
+   break;
+  case "PAUSE1":
+   if(now>wopr.at){wopr={stage:"G5X",at:now,delay:160};TTT_wopr_newGame();
+    Game_Front_Card(Game_Name(GAME_TICTACTOE),"observing","REPLAY 5X  TIES "+String(tttTies).padStart(4,"0"));}
+   break;
+  case "STOP2":
+   if(now>wopr.at){wopr={stage:"RAMP",at:now,delay:400,t0:now};TTT_wopr_newGame();
+    Game_Front_Card(Game_Name(GAME_TICTACTOE),"observing","ANALYZING  TIES "+String(tttTies).padStart(4,"0"));}
+   break;
+  case "DARK":
+   if(now>wopr.at){wopr={stage:"BREATHE",at:now+7*WOPR_BEAT,t0:now};}
+   break;
+  case "BREATHE":{ /* faint glow, slowly breathing - hope of life */
+   const ph=(Math.sin((now-wopr.t0)/900)+1)/2;
+   const v=Math.round(2+ph*10);
+   pixels.setPixelColor(0,pixels.Color(0,0,v));pixels.setPixelColor(1,pixels.Color(0,0,v));pixels.show();
+   OLED.clearDisplay();
+   OLED.fillCircle(64,32,2+Math.round(ph*2),WHITE);
+   OLED.display();
+   if(now>wopr.at){wopr={stage:"REBOOT",at:now+3500,t0:now,flick:0};
+    pixels.setPixelColor(0,pixels.Color(0,0,16));pixels.setPixelColor(1,pixels.Color(0,0,16));pixels.show();
+    PlaySound(PowerMaury);}
+   break;}
+  case "REBOOT":{ /* safety reboot from non-corrupted memory */
+   if(now-wopr.t0>wopr.flick*300&&wopr.flick<4){wopr.flick++;   /* a few CRT flickers */
+    OLED.clearDisplay();
+    for(let i=0;i<90;i++)OLED.drawPixel(random(0,128),random(0,64),WHITE);
+    OLED.display();}
+   if(now-wopr.t0>1400&&!wopr.txt){wopr.txt=true;
+    OLED.clearDisplay();setFont(SMALL_FONT);
+    screenPrintLnCentered(22,"SAFETY REBOOT",0);
+    screenPrintLnCentered(34,"RESTORING FROM",0);
+    screenPrintLnCentered(42,"PROTECTED MEMORY",0);
+    OLED.display();}
+   if(now>wopr.at){wopr={stage:"RESTORED",at:now+2*WOPR_BEAT};
+    tttBoard=[0,0,0,0,0,0,0,0,0];TTT_draw_board();
+    Game_Front_Card(Game_Name(GAME_TICTACTOE),"restored","GAMES "+(tttTies)+"  TIES "+String(tttTies).padStart(4,"0"));}
+   break;}
+  case "RESTORED":
+   if(now>wopr.at){wopr={stage:"MSG",at:now,line:0};OLED.clearDisplay();setFont(SMALL_FONT);}
+   break;
+  case "MSG":{
+   const L=["ANALYSIS COMPLETE.","TIES: "+tttTies,"WINNER: NONE","",
+            "A STRANGE GAME.","THE ONLY WINNING MOVE","IS NOT TO PLAY.","",
+            "HOW ABOUT A NICE GAME","OF CHESS?"];
+   if(now>wopr.at&&wopr.line<L.length){
+    if(L[wopr.line]!=="")screenPrintLnCentered(6+wopr.line*5+(wopr.line>3?3:0),L[wopr.line],0);
+    OLED.display();PlaySound(Scroll);
+    wopr.line++;
+    wopr.at=now+((wopr.line===4||wopr.line===8)?2*WOPR_BEAT:450);
+    if(wopr.line===L.length){  /* the Joshua nod lands; no chess exists in the machine */
+     PlaySound(ConnectionSuccess);
+     Game_Front_Card(Game_Name(GAME_TICTACTOE),"click=again scrl=exit");
+     gameOverAt=millis()+20000; gameWarned=false; gameState_FSM=GAME_OVER;
+    }
+   }
+   break;}
+ }
+}
+function TTT_step(){
+ const now=millis();
+ /* 5-minute inactivity auto-end, with warning [ruling] - human phases only */
+ if(tttPhase!==TTT_WOPR){
+  const idle=now-tttLastInput;
+  if(idle>TTT_IDLE_LIMIT){gameState_FSM=GAME_CLEANUP;return;}
+  if(idle>TTT_IDLE_WARN&&!tttIdleWarned){tttIdleWarned=true;
+   Game_Front_Card(Game_Name(GAME_TICTACTOE),"idle - menu in 30s");}
+ }
+ if(tttPhase===TTT_MODE_SELECT){
+  if(Unit_Is_Shaking(1.3)&&now>tttTiltAt){tttMode=(tttMode+1)%TTT_mode_count();tttTiltAt=now+800;
+   PlaySound(Select);TTT_touch();TTT_draw_mode();return;}
+  if(Pull_From_Buffer(SHUTTER)){PlaySound(Connected);TTT_touch();TTT_start();}  /* CLICK = GO */
+  return;
+ }
+ if(tttPhase===TTT_WOPR){TTT_wopr_step();return;}
+ /* PLAY */
+ if(TTT_human_turn()){
+  const t=tiltVec();
+  if(now>tttTiltAt&&(Math.abs(t[0])>0.2||Math.abs(t[1])>0.2)){
+   let c=tttCursor%3,r=Math.trunc(tttCursor/3);
+   if(Math.abs(t[0])>=Math.abs(t[1]))c=constrain(c+(t[0]>0?1:-1),0,2);
+   else r=constrain(r+(t[1]>0?1:-1),0,2);
+   if(r*3+c!==tttCursor){tttCursor=r*3+c;PlaySound(Scroll);TTT_touch();TTT_draw_board();}
+   tttTiltAt=now+250;
+  }
+  if(Pull_From_Buffer(SHUTTER)){TTT_touch();TTT_place(tttCursor);}
+ } else if(now>tttMoveAt){
+  const mv=TTT_policy(tttBoard,tttTurn);
+  if(mv>=0)TTT_place(mv);
+ }
+}
+function Game_Over(){
+ if(gameScore>gameBest)gameBest=gameScore;
+ Activate_the_Screen(TOP_SCREEN,false);setFont(SMALL_FONT);
+ screenPrintLnCentered(30,"GAME OVER",0);
+ screenPrintLnCentered(40,"score "+gameScore,1);
+ Game_Front_Card(Game_Name(currentGameID),"click=again scrl=exit");   /* flat. no taunt, no beg. */
+ gameOverAt=millis()+10000; gameWarned=false;
+ gameState_FSM=GAME_OVER;
+}
+/* [GAME NIGHT 2026-07-23] new ids: casino suite 5-8 (Gambler-reserved; homed via
+   the casino table under DOOR_C — GATING SEAM flagged: twin shows them dev-side
+   until persona gating wires up) + cockpit mail-run 9 (RW-3, twin-first proof). */
+const GAME_SLOTS=5, GAME_CRAPS=6, GAME_BLACKJACK=7, GAME_ROULETTE=8, GAME_MAILRUN=9;
+let CASINO_TABLE=-1, MAILRUN_ROW=-1; /* set by Doors_Restructure */
+function Game_ID_From_Menu(line){
+ if(menuNum_PTR===CASINO_TABLE&&line<=3)return line+5; /* casino table rows 0-3 -> 5-8 */
+ if(menuNum_PTR===GAMES&&line===MAILRUN_ROW)return GAME_MAILRUN;
+ return line;
+}
+let currentGameID=0;
+function Game_Init(id){currentGameID=id;
+ switch(id){
+  case GAME_TILT_DRIVE: TD_init(); break;
+  case GAME_GOBBLE: GB_init(); break;
+  case GAME_AVOIDSTEROIDS: AS_init(); break;
+  case GAME_SNOWGLOBE: SG_init(); break;
+  case GAME_TICTACTOE: TTT_init(); break;
+  case GAME_SLOTS: SL_init(); break;
+  case GAME_CRAPS: CR_init(); break;
+  case GAME_BLACKJACK: BJ_init(); break;
+  case GAME_ROULETTE: RL_init(); break;
+  case GAME_MAILRUN: MR_init(); break;
+ }
+}
+function Game_Step(id){
+ switch(id){
+  case GAME_TILT_DRIVE: TD_step(); break;
+  case GAME_GOBBLE: GB_step(); break;
+  case GAME_AVOIDSTEROIDS: AS_step(); break;
+  case GAME_SNOWGLOBE: SG_step(); break;
+  case GAME_TICTACTOE: TTT_step(); break;
+  case GAME_SLOTS: SL_step(); break;
+  case GAME_CRAPS: CR_step(); break;
+  case GAME_BLACKJACK: BJ_step(); break;
+  case GAME_ROULETTE: RL_step(); break;
+  case GAME_MAILRUN: MR_step(); break;
+ }
+}
+function tiltVec(){const a=IMU.readAcceleration();return [a[0],a[1]];}
+
+/* ---------- SNOW GLOBE (row 3) - the machine already knew how to do this ----------
+   The bubble system IS a snow globe: tilt-driven particles, gravity, drag, settling.
+   Reuses the proven integrator shape [Bubbles.ino]; no scoring - it is a toy, not a game. */
+const SNOW_MAX=60;
+let snow=[];
+function SG_init(){
+ snow=[];
+ for(let i=0;i<SNOW_MAX;i++)snow.push({x:random(2,MAX_SCREEN_WIDTH-2),y:random(2,MAX_SCREEN_HEIGHT-2),vx:0,vy:0,r:(i%7==0)?1:0,
+  m:0.8+random(0,5)/10,rest:random(0,4)}); /* [POLISH] mass + pile-depth variance */
+}
+function SG_step(){
+ /* [POLISH 2026-07-23, issue 12] feel pass, existing vocabulary only:
+    per-flake mass (big flakes sink truer, small ones ride the tilt), a light
+    flutter on airborne small flakes, and a textured settle — flakes come to
+    REST (no bounce jitter) at slightly varied depths so the pile reads as a
+    pile, not a line. */
+ const t=tiltVec();
+ const gx=t[0]*-0.25, gy=t[1]*0.25;
+ OLED.clearDisplay();
+ if(Unit_Is_Shaking(1.3)){
+  for(const s of snow){s.vx+=(random(0,200)-100)/60;s.vy+=(random(0,200)-100)/60;}
+ }
+ for(const s of snow){
+  const m=s.m||1;
+  s.vx=(s.vx+gx/m)*0.92; s.vy=(s.vy+(gy/m)+0.045*m)*0.92;
+  const airborne=Math.abs(s.vx)+Math.abs(s.vy)>0.12;
+  if(airborne&&s.r===0)s.vx+=(random(0,21)-10)/260;  /* small-flake flutter */
+  s.x+=s.vx; s.y+=s.vy;
+  if(s.x<1){s.x=1;s.vx=0;} if(s.x>MAX_SCREEN_WIDTH-2){s.x=MAX_SCREEN_WIDTH-2;s.vx=0;}
+  if(s.y<1){s.y=1;s.vy=0;}
+  const floor=MAX_SCREEN_HEIGHT-2-(s.rest||0);
+  if(s.y>floor){s.y=floor;
+   if(Math.abs(s.vy)<0.3){s.vy=0;s.vx*=0.5;}else{s.vy*=-0.12;}}
+  if(s.r>0)OLED.drawCircle(s.x,s.y,1,WHITE); else OLED.drawPixel(Math.trunc(s.x),Math.trunc(s.y),WHITE);
+ }
+ OLED.display();
+}
+
+/* ---------- AVOIDSTEROIDS (row 2) - revived from 9_GAME_Space.ino ----------
+   346 commented-out lines, ported. Kept from the original: 3 spaceships (lives),
+   drag 0.9, VMAX/inertia, accelerometer steering with inverted sign, angle from
+   velocity via atan2, isosceles-triangle ship with 30-deg nose, irregular polygon
+   asteroid (radius jitter per segment), wall rebound that KILLS the wall, offscreen
+   timeouts (5s ship / 3s asteroid), dist() collision.
+   REVIVAL DECISIONS (the original never ran - it was commented out mid-build):
+   (a) Play area: the original used currentScreenHeight for BOTH x and y, so with
+       EXTRA_BORDER_X=32 the left wall (x=32) sat RIGHT of the right wall (x=31) -
+       degenerate. Twin uses MAX_SCREEN_WIDTH for x, screen height for y.
+   (b) Speed cap: original read dist(0,0,vx,vx) - vx twice. Twin uses (vx,vy).
+   (c) Tuning: raw accel * 1g would launch the ship; twin scales accel and clamps
+       VMAX to something playable. Numbers are the only invented part - flagged.
+   (d) The original drew via a `display.` object that does not exist in this
+       firmware (it uses the OLED pointer) - ported to OLED->.
+   All four are recorded in docs/FIRMWARE_CHANGE_SPEC-games-20260715.md. */
+const SPACESHIP_SIZE=3, ASTEROID_SIZE=5;
+const SPACESHIP_NOSE_ANGLE=(30*PI/180);
+const SPACESHIP_VMAX=6, ASTEROID_VMAX=2, SPACESHIP_DRAG=0.9, ACCEL_SCALE=0.6;
+const OFFSCREEN_TIMEOUT_SPACESHIP=5000, OFFSCREEN_TIMEOUT_ASTEROID=3000;
+let AS_state=null;
+function AS_dist(x1,y1,x2,y2){return Math.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));}
+function AS_init(){
+ /* [RW-3 RULED 2026-07-18] many-slow-asteroids TRAFFIC WEAVE + single-shot click.
+    The field fills with slow drifters; the game is weaving between them.
+    CLICK fires ONE aimed shot from the nose (one in flight at a time). */
+ const W=MAX_SCREEN_WIDTH,H=MAX_SCREEN_HEIGHT,B=1;
+ AS_state={ships:[],numSpaceships:3,asteroids:[],bullet:null,lastAsteroidTime:millis(),isGameOver:false,
+  walls:[{x1:B,y1:B,x2:W-1-B,y2:B,isAlive:true},                 /* top */
+         {x1:B,y1:H-1-B,x2:W-1-B,y2:H-1-B,isAlive:true},         /* bottom */
+         {x1:B,y1:B,x2:B,y2:H-1-B,isAlive:true},                 /* left */
+         {x1:W-1-B,y1:B,x2:W-1-B,y2:H-1-B,isAlive:true}]};       /* right */
+ AS_spawnShip();
+}
+function AS_spawnShip(){
+ AS_state.ship={x:MAX_SCREEN_WIDTH/2,y:MAX_SCREEN_HEIGHT/2,vx:0,vy:0,ax:0,ay:0,
+  isAlive:true,offscreen:false,deathTime:0,angle:0};
+}
+const AS_MAX_ASTEROIDS=12, AS_SLOW=0.35;  /* traffic weave: many, SLOW [RW-3] */
+function AS_spawnAsteroid(){
+ const a={};const side=random(0,4);
+ const W=MAX_SCREEN_WIDTH,H=MAX_SCREEN_HEIGHT;
+ if(side==0){a.x=random(0,W);a.y=-ASTEROID_SIZE*2;}
+ else if(side==1){a.x=W+ASTEROID_SIZE*2;a.y=random(0,H);}
+ else if(side==2){a.x=random(0,W);a.y=H+ASTEROID_SIZE*2;}
+ else {a.x=-ASTEROID_SIZE*2;a.y=random(0,H);}
+ a.vx=((random(0,2*ASTEROID_VMAX*10)/10)-ASTEROID_VMAX)*AS_SLOW;
+ a.vy=((random(0,2*ASTEROID_VMAX*10)/10)-ASTEROID_VMAX)*AS_SLOW;
+ if(Math.abs(a.vx)<0.15&&Math.abs(a.vy)<0.15)a.vx=ASTEROID_VMAX*AS_SLOW/2;  /* never a dead asteroid */
+ a.isAlive=true;a.spawnTime=millis();
+ AS_state.asteroids.push(a);
+}
+function AS_step(){
+ const S=AS_state, sh=S.ship;
+ /* --- update spaceship [orig updateSpaceship] --- */
+ sh.vx*=SPACESHIP_DRAG; sh.vy*=SPACESHIP_DRAG;
+ if(AS_dist(0,0,sh.vx,sh.vy)<SPACESHIP_VMAX){          /* (b) fixed: was dist(0,0,vx,vx) */
+  const a=IMU.readAcceleration();
+  sh.ax=-a[0]*ACCEL_SCALE; sh.ay=-a[1]*ACCEL_SCALE;    /* inverted sign, as the original */
+  sh.vx+=sh.ax; sh.vy+=sh.ay;
+ }
+ sh.x+=sh.vx; sh.y+=sh.vy;
+ sh.angle=Math.atan2(sh.vy,sh.vx); if(sh.angle<0)sh.angle+=2*PI;
+ /* --- asteroids: fill the field, slowly [RW-3] --- */
+ if(S.asteroids.filter(a=>a.isAlive).length<AS_MAX_ASTEROIDS && millis()-S.lastAsteroidTime>500){
+  AS_spawnAsteroid();S.lastAsteroidTime=millis();}
+ for(const a of S.asteroids){
+  if(!a.isAlive)continue;
+  const nx=a.x+a.vx, ny=a.y+a.vy;
+  if((nx-ASTEROID_SIZE/2<S.walls[2].x1||nx+ASTEROID_SIZE/2>S.walls[3].x1)&&S.walls[2].isAlive&&S.walls[3].isAlive)a.vx=-a.vx;
+  if((ny-ASTEROID_SIZE/2<S.walls[0].y1||ny+ASTEROID_SIZE/2>S.walls[1].y1)&&S.walls[0].isAlive&&S.walls[1].isAlive)a.vy=-a.vy;
+  a.x+=a.vx; a.y+=a.vy;
+  if(a.x<0||a.x>=MAX_SCREEN_WIDTH||a.y<0||a.y>=MAX_SCREEN_HEIGHT){
+   if(millis()-a.spawnTime>OFFSCREEN_TIMEOUT_ASTEROID){a.isAlive=false;gameScore++;
+    Game_Front_Card(Game_Name(GAME_AVOIDSTEROIDS)," <<< scroll to exit");}   /* survived one: +1 */
+  }
+ }
+ S.asteroids=S.asteroids.filter(a=>a.isAlive||millis()-a.spawnTime<20000);
+ /* --- the single shot [RW-3]: CLICK fires one aimed round; one in flight --- */
+ if(Pull_From_Buffer(SHUTTER)&&!S.bullet&&sh.isAlive){
+  S.bullet={x:sh.x+SPACESHIP_SIZE*Math.cos(sh.angle),y:sh.y+SPACESHIP_SIZE*Math.sin(sh.angle),
+   vx:4*Math.cos(sh.angle),vy:4*Math.sin(sh.angle)};
+  PlaySound(Scroll);
+ }
+ if(S.bullet){
+  const b=S.bullet; b.x+=b.vx; b.y+=b.vy;
+  let hit=false;
+  for(const a of S.asteroids){
+   if(a.isAlive&&AS_dist(b.x,b.y,a.x,a.y)<ASTEROID_SIZE+1){
+    a.isAlive=false;hit=true;gameScore+=5;PlaySound(Select);
+    Game_Front_Card(Game_Name(GAME_AVOIDSTEROIDS)," <<< scroll to exit");break;}
+  }
+  if(hit||b.x<0||b.x>=MAX_SCREEN_WIDTH||b.y<0||b.y>=MAX_SCREEN_HEIGHT)S.bullet=null;
+ }
+ /* --- collisions [orig checkCollisions] --- */
+ if(sh.isAlive){
+  const off=(sh.x<0||sh.x>=MAX_SCREEN_WIDTH||sh.y<0||sh.y>=MAX_SCREEN_HEIGHT);
+  if(off){if(!sh.offscreen){sh.deathTime=millis();sh.offscreen=true;}}else sh.offscreen=false;
+  if(sh.offscreen&&millis()-sh.deathTime>OFFSCREEN_TIMEOUT_SPACESHIP)AS_loseShip();
+  for(const a of S.asteroids){
+   if(a.isAlive&&AS_dist(sh.x,sh.y,a.x,a.y)<SPACESHIP_SIZE+ASTEROID_SIZE){
+    a.isAlive=false;AS_loseShip();break;
+   }
+  }
+  for(let j=0;j<4;j++){const w=S.walls[j];
+   if(!w.isAlive)continue;
+   const hit=(j==0&&sh.y-SPACESHIP_SIZE<w.y1)||(j==1&&sh.y+SPACESHIP_SIZE>w.y1)||
+             (j==2&&sh.x-SPACESHIP_SIZE<w.x1)||(j==3&&sh.x+SPACESHIP_SIZE>w.x1);
+   if(hit){sh.vx=-sh.vx;sh.vy=-sh.vy;w.isAlive=false;PlaySound(Select);}  /* rebound + wall dies, as the original */
+  }
+ }
+ /* --- draw --- */
+ OLED.clearDisplay();
+ for(let j=0;j<4;j++){const w=S.walls[j];if(w.isAlive)OLED.writeLine(w.x1,w.y1,w.x2,w.y2,WHITE);}
+ if(sh.isAlive){
+  const x1=sh.x+SPACESHIP_SIZE*Math.cos(sh.angle), y1=sh.y+SPACESHIP_SIZE*Math.sin(sh.angle);
+  const x2=sh.x+SPACESHIP_SIZE*Math.cos(sh.angle+PI-SPACESHIP_NOSE_ANGLE/2), y2=sh.y+SPACESHIP_SIZE*Math.sin(sh.angle+PI-SPACESHIP_NOSE_ANGLE/2);
+  const x3=sh.x+SPACESHIP_SIZE*Math.cos(sh.angle+PI+SPACESHIP_NOSE_ANGLE/2), y3=sh.y+SPACESHIP_SIZE*Math.sin(sh.angle+PI+SPACESHIP_NOSE_ANGLE/2);
+  OLED.writeLine(x1,y1,x2,y2,WHITE);OLED.writeLine(x2,y2,x3,y3,WHITE);OLED.writeLine(x3,y3,x1,y1,WHITE);
+ }
+ for(const a of S.asteroids){
+  if(!a.isAlive)continue;
+  for(let i=0;i<360;i+=45){
+   const r1=ASTEROID_SIZE+random(0,3)-1, r2=ASTEROID_SIZE+random(0,3)-1;
+   OLED.writeLine(a.x+r1*Math.cos(i*PI/180),a.y+r1*Math.sin(i*PI/180),
+                  a.x+r2*Math.cos((i+45)*PI/180),a.y+r2*Math.sin((i+45)*PI/180),WHITE);
+  }
+ }
+ if(S.bullet)OLED.fillCircle(S.bullet.x,S.bullet.y,1,WHITE);
+ setFont(SMALL_FONT);
+ for(let i=0;i<S.numSpaceships;i++)screenPrintLn(6,3+i*5,"^",0);   /* lives */
+ OLED.display();
+}
+function AS_loseShip(){
+ AS_state.numSpaceships--;
+ PlaySound(WhiteNoise);
+ if(AS_state.numSpaceships<=0){AS_state.isGameOver=true;Game_Over();}
+ else AS_spawnShip();
+}
+
+/* ---------- TILT DRIVE (row 0) ---------- */
+/* [GAME NIGHT 2026-07-23 — TILT DRIVE REBUILT per Mike's respec + games-spec
+   addendum] The wiggly-straight-road is DEAD. New form: an UNENDING GENERATED
+   LANDSCAPE — free 2D travel, the world scrolls under a center-fixed car whose
+   HEADING follows the tilt vector (the proven AvoidSteroids atan2 pattern).
+   Terrain = deterministic hash of tile coordinates (zero storage, infinite in
+   every direction); obstacles use the existing display vocabulary (circles =
+   brush, rects = rocks). Standing conventions: scroll exits, click replays,
+   RAM-only score, flat failure, idle warning (framework-supplied). */
+let TD=null;
+function TD_hash(ix,iy){let h=((ix|0)*73856093)^((iy|0)*19349663);h=Math.imul(h^(h>>>13),2654435761)>>>0;return h;}
+const TD_TILE=32, TD_CAR_R=2, TD_GRACE=2000;
+function TD_obstacles(){ /* obstacles for all tiles overlapping the viewport */
+ const out=[];
+ const x0=Math.floor((TD.wx-70)/TD_TILE),x1=Math.floor((TD.wx+70)/TD_TILE);
+ const y0=Math.floor((TD.wy-40)/TD_TILE),y1=Math.floor((TD.wy+40)/TD_TILE);
+ for(let ix=x0;ix<=x1;ix++)for(let iy=y0;iy<=y1;iy++){
+  const h=TD_hash(ix,iy);
+  if(h%4===3)continue;                           /* one tile in four is open ground */
+  const ox=ix*TD_TILE+8+(h%17), oy=iy*TD_TILE+8+((h>>5)%17);
+  out.push({x:ox,y:oy,r:2+((h>>9)%3),rock:((h>>3)%2)===0});
+ }
+ return out;
+}
+function TD_init(){TD={wx:0,wy:0,vx:0,vy:0,angle:0,dist:0,t0:millis()};
+ /* clear the spawn tile's obstacle risk by starting mid-tile-gap: nudge until clear */
+ let guard=0;while(TD_obstacles().some(o=>AS_dist(o.x,o.y,TD.wx,TD.wy)<o.r+TD_CAR_R+4)&&guard++<50){TD.wx+=7;}
+}
+function TD_step(){
+ const a=IMU.readAcceleration();
+ TD.vx=(TD.vx+(-a[0])*0.35)*0.90; TD.vy=(TD.vy+(-a[1])*0.35)*0.90;  /* AS sign convention */
+ TD.wx+=TD.vx; TD.wy+=TD.vy;
+ const sp=AS_dist(0,0,TD.vx,TD.vy);
+ TD.dist+=sp;
+ if(sp>0.25){TD.angle=Math.atan2(TD.vy,TD.vx);if(TD.angle<0)TD.angle+=2*PI;}
+ OLED.clearDisplay();
+ const obs=TD_obstacles();
+ for(const o of obs){
+  const sx=Math.trunc(o.x-TD.wx+64),sy=Math.trunc(o.y-TD.wy+32);
+  if(sx<-6||sx>134||sy<-6||sy>70)continue;
+  if(o.rock)OLED.drawRect(sx-o.r,sy-o.r,o.r*2,o.r*2,WHITE);
+  else OLED.drawCircle(sx,sy,o.r,WHITE);
+ }
+ /* the car: center-fixed triangle pointing along the heading (AS nose geometry) */
+ const cx=64,cy=32,n=5;
+ const nx=cx+n*Math.cos(TD.angle),ny=cy+n*Math.sin(TD.angle);
+ const b1x=cx+n*Math.cos(TD.angle+2.6),b1y=cy+n*Math.sin(TD.angle+2.6);
+ const b2x=cx+n*Math.cos(TD.angle-2.6),b2y=cy+n*Math.sin(TD.angle-2.6);
+ OLED.drawTriangle(nx,ny,b1x,b1y,b2x,b2y,WHITE);
+ /* collision — after a spawn grace so power-on can settle */
+ if(millis()-TD.t0>TD_GRACE){
+  for(const o of obs){
+   if(AS_dist(o.x,o.y,TD.wx,TD.wy)<o.r+TD_CAR_R){Game_Over();return;}
+  }
+ }
+ const sc=Math.trunc(TD.dist/10);
+ if(sc!==gameScore){gameScore=sc;
+  if(sc%10===0)Game_Front_Card(Game_Name(GAME_TILT_DRIVE)," <<< scroll to exit");}
+ OLED.display();
+}
+
+/* ============ [GAME NIGHT 2026-07-23] THE GAMBLER'S CASINO SUITE (ids 5-8) ============
+   PERSONA-RESERVED (Juan −21): homed under DOOR_C via the casino table.
+   GATING SEAM (flagged): the twin shows these dev-side; persona gating wires up
+   with the release-code mechanism. Text = MECHANICAL LABELS ONLY (BET/DEAL/HIT/
+   STAND/ROLL class, 1965-flat); anything wanting Juan's voice = [PAPA] slots in
+   APPWORDS_gambler (win/lose verdict rows already stubbed there).
+   slot-machine-never-evil: losing is FLAT — no near-miss taunting, no begging. */
+const SL_SYMS=["CHERRY","BELL","BAR","LEMON","PLUM","MELON","SEVEN"];
+let SL=null;
+function SL_init(){SL={reels:[0,1,2],spin:0,msg:"CLICK = PULL"};SL_draw();}
+function SL_draw(){
+ OLED.clearDisplay();setFont(SMALL_FONT);
+ screenPrintLnCentered(10,"S L O T S",0);
+ screenPrintLnCentered(30,SL_SYMS[SL.reels[0]]+"  "+SL_SYMS[SL.reels[1]]+"  "+SL_SYMS[SL.reels[2]],0);
+ screenPrintLnCentered(48,SL.msg,0);
+ screenPrintLnCentered(58,">>> scroll to exit <<<",1);
+}
+function SL_step(){
+ if(SL.spin>0){
+  SL.spin--;
+  if(SL.spin>16||SL.spin%2===0)SL.reels[0]=random(0,7);
+  if(SL.spin>8)SL.reels[1]=random(0,7);
+  SL.reels[2]=random(0,7);
+  if(SL.spin===0){
+   const r=SL.reels;
+   if(r[0]===r[1]&&r[1]===r[2]){gameScore+=10;SL.msg="THREE OF A KIND  +10";}
+   else if(r[0]===r[1]||r[1]===r[2]||r[0]===r[2]){gameScore+=2;SL.msg="PAIR  +2";}
+   else SL.msg="NO WIN";                       /* flat. */
+   Game_Front_Card(Game_Name(GAME_SLOTS)," <<< scroll to exit");
+  } else SL.msg="- - -";
+  SL_draw();return;
+ }
+ if(Pull_From_Buffer(SHUTTER)){SL.spin=24;PlaySound(Scroll);}
+}
+let CR=null;
+function CR_init(){CR={bet:0,point:0,msg:"CLICK=BET  SHAKE=ROLL",d:[0,0]};CR_draw();}
+function CR_draw(){
+ OLED.clearDisplay();setFont(SMALL_FONT);
+ screenPrintLnCentered(10,"C R A P S",0);
+ screenPrintLnCentered(22,"BET: "+(CR.bet===0?"PASS":"DONT PASS"),0);
+ screenPrintLnCentered(34,CR.d[0]?("ROLL  "+CR.d[0]+" + "+CR.d[1]+" = "+(CR.d[0]+CR.d[1])):"",0);
+ screenPrintLnCentered(46,CR.point?("POINT IS "+CR.point):CR.msg,0);
+ screenPrintLnCentered(58,">>> scroll to exit <<<",1);
+}
+function CR_step(){
+ if(Pull_From_Buffer(SHUTTER)&&!CR.point){CR.bet=1-CR.bet;CR_draw();return;}
+ if(Unit_Is_Shaking(1.3)){
+  CR.d=[random(1,7),random(1,7)];const t=CR.d[0]+CR.d[1];
+  if(!CR.point){
+   if(t===7||t===11){CR.msg=(CR.bet===0)?"PASS WINS  +1":"PASS WINS";if(CR.bet===0)gameScore++;}
+   else if(t===2||t===3){CR.msg=(CR.bet===1)?"CRAPS  DONT WINS  +1":"CRAPS";if(CR.bet===1)gameScore++;}
+   else if(t===12){CR.msg="CRAPS  PUSH";}
+   else {CR.point=t;CR.msg="";}
+  } else {
+   if(t===CR.point){CR.msg=(CR.bet===0)?"POINT MADE  +1":"POINT MADE";if(CR.bet===0)gameScore++;CR.point=0;}
+   else if(t===7){CR.msg=(CR.bet===1)?"SEVEN OUT  +1":"SEVEN OUT";if(CR.bet===1)gameScore++;CR.point=0;}
+   else CR.msg="";
+  }
+  Game_Front_Card(Game_Name(GAME_CRAPS)," <<< scroll to exit");
+  CR_draw();
+ }
+}
+let BJ=null;
+function BJ_val(h){let v=0,aces=0;for(const c of h){const r=c%13;v+=(r===0)?11:(r>=10)?10:r+1;if(r===0)aces++;}
+ while(v>21&&aces>0){v-=10;aces--;}return v;}
+function BJ_name(c){return RANKS[c%13]+" "+SUITS[Math.trunc(c/13)].slice(0,1);}
+function BJ_deal(){ /* the true deck + the force hook (magician/gambler ruling) */
+ if(probDeckAt>=probDeck.length)Prob_Shuffle();
+ const forced=Card_Force_Hook?Card_Force_Hook():null;
+ if(forced&&typeof forced.card==="number")return forced.card;
+ return probDeck[probDeckAt++];
+}
+function BJ_init(){
+ if(probDeck.length===0)Prob_Shuffle();
+ BJ={you:[BJ_deal(),BJ_deal()],dealer:[BJ_deal(),BJ_deal()],done:false,msg:"CLICK=HIT  SHAKE=STAND"};
+ BJ_draw();
+}
+function BJ_draw(){
+ OLED.clearDisplay();setFont(SMALL_FONT);
+ screenPrintLnCentered(8,"B L A C K J A C K",0);
+ screenPrintLnCentered(20,"DEALER  "+(BJ.done?BJ.dealer.map(BJ_name).join("  ")+"  ("+BJ_val(BJ.dealer)+")":BJ_name(BJ.dealer[0])+"  [ ]"),0);
+ screenPrintLnCentered(34,"YOU  "+BJ.you.map(BJ_name).join("  ")+"  ("+BJ_val(BJ.you)+")",0);
+ screenPrintLnCentered(48,BJ.msg,0);
+ screenPrintLnCentered(58,">>> scroll to exit <<<",1);
+}
+function BJ_settle(){
+ while(BJ_val(BJ.dealer)<17)BJ.dealer.push(BJ_deal()); /* DEALER STANDS ON 17 — flat rule card */
+ const y=BJ_val(BJ.you),d=BJ_val(BJ.dealer);
+ if(d>21||y>d){BJ.msg="WIN  +1";gameScore++;}
+ else if(y===d)BJ.msg="PUSH";
+ else BJ.msg="DEALER WINS";                             /* flat. */
+ BJ.done=true;BJ_draw();
+ Game_Front_Card(Game_Name(GAME_BLACKJACK)," <<< scroll to exit");
+}
+function BJ_step(){
+ if(BJ.done){if(Pull_From_Buffer(SHUTTER)){BJ_init();}return;}
+ if(Pull_From_Buffer(SHUTTER)){
+  BJ.you.push(BJ_deal());
+  if(BJ_val(BJ.you)>21){BJ.msg="BUST";BJ.done=true;Game_Front_Card(Game_Name(GAME_BLACKJACK)," <<< scroll to exit");}
+  BJ_draw();return;
+ }
+ if(Unit_Is_Shaking(1.3)&&!BJ.done)BJ_settle();
+}
+const RL_REDS=[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]; /* standard wheel — factual */
+let RL=null;
+function RL_init(){RL={bet:0,spin:0,n:0,msg:"CLICK=BET  SHAKE=SPIN"};RL_draw();}
+function RL_label(n){return n===37?"00":String(n);}
+function RL_color(n){return (n===0||n===37)?"HOUSE":RL_REDS.indexOf(n)>=0?"RED":"BLACK";}
+function RL_draw(){
+ OLED.clearDisplay();setFont(SMALL_FONT);
+ screenPrintLnCentered(10,"R O U L E T T E",0);
+ screenPrintLnCentered(22,"BET: "+["RED","BLACK","ODD","EVEN"][RL.bet],0);
+ setFont(LARGE_FONT);screenPrintLnCentered(40,RL.spin>0?RL_label(RL.n):(RL.msg==="?"?"":RL_label(RL.n)+" "+RL_color(RL.n)),0);
+ setFont(SMALL_FONT);
+ screenPrintLnCentered(52,RL.spin>0?"NO MORE BETS":RL.msg,0);
+ screenPrintLnCentered(60,">>> scroll to exit <<<",1);
+}
+function RL_step(){
+ if(RL.spin>0){
+  RL.spin--;
+  if(RL.spin%Math.max(1,Math.trunc((24-RL.spin)/6))===0)RL.n=random(0,38); /* the cycling number display settles */
+  if(RL.spin===0){
+   const c=RL_color(RL.n),odd=RL.n%37%2===1&&RL.n!==0&&RL.n!==37;
+   const win=(RL.bet===0&&c==="RED")||(RL.bet===1&&c==="BLACK")||(RL.bet===2&&odd&&c!=="HOUSE")||(RL.bet===3&&!odd&&c!=="HOUSE");
+   RL.msg=win?"WIN  +1":(c==="HOUSE"?"HOUSE":"NO WIN");   /* flat. */
+   if(win)gameScore++;
+   Game_Front_Card(Game_Name(GAME_ROULETTE)," <<< scroll to exit");
+  }
+  RL_draw();return;
+ }
+ if(Pull_From_Buffer(SHUTTER)){RL.bet=(RL.bet+1)%4;RL.msg="?";RL_draw();return;}
+ if(Unit_Is_Shaking(1.3)){RL.spin=24;PlaySound(Scroll);}
+}
+
+/* ============ [GAME NIGHT 2026-07-23] COCKPIT MAIL-RUN (id 9; RW-3, twin-first) ============
+   Forward view: starfield + asteroids approach through z; tilt steers the ship
+   laterally; CLICK = MEGA-BOMB clears everything visible (ONE per leg, unused
+   bombs STACK); simple HUD homes you to the base; dock -> load -> launch, then
+   the next base, round-robin. Death is flat. FIRMWARE COST LINE (the standing
+   HW-budget gate): ~200 lines C ≈ 2.5-3 KB flash; RAM ≈ 24 rocks x 5 floats +
+   30 stars x 3 ≈ 700 B — the same weight class as AvoidSteroids (346 lines).
+   NOT expensive; the bench decision has its numbers. */
+const MR_BASES=["BASE 1","BASE 2","BASE 3"], MR_LEG=340;
+let MR=null;
+function MR_init(){
+ MR={sx:0,sy:0,stars:[],rocks:[],base:0,dist:MR_LEG,bombs:1,phase:0,phAt:0};
+ for(let i=0;i<24;i++)MR.stars.push({x:(random(0,200)-100)/100,y:(random(0,200)-100)/100,z:random(10,100)/100});
+}
+function MR_proj(o){const k=0.2+o.z*0.8;
+ return {x:64+(o.x-MR.sx*0.5)*70*k,y:32+(o.y-MR.sy*0.5)*36*k,r:Math.max(1,Math.trunc(o.z*5))};}
+function MR_step(){
+ if(MR.phase>0){ /* DOCK -> LOAD -> LAUNCH beats */
+  OLED.clearDisplay();setFont(SMALL_FONT);
+  screenPrintLnCentered(28,["DOCK","LOAD","LAUNCH"][MR.phase-1],0);
+  screenPrintLnCentered(44,MR_BASES[MR.base],1);
+  if(millis()>MR.phAt+700){
+   MR.phase++;
+   if(MR.phase>3){MR.phase=0;gameScore++;MR.bombs++;MR.base=(MR.base+1)%3;MR.dist=MR_LEG;
+    Game_Front_Card(Game_Name(GAME_MAILRUN)," <<< scroll to exit");}
+   MR.phAt=millis();
+  }
+  return;
+ }
+ const a=IMU.readAcceleration();
+ MR.sx=constrain(MR.sx+(-a[0])*0.06,-1,1);MR.sy=constrain(MR.sy+(-a[1])*0.06,-1,1);
+ MR.dist-=0.5;
+ for(const s of MR.stars){s.z+=0.02;if(s.z>1){s.z=0.1;s.x=(random(0,200)-100)/100;s.y=(random(0,200)-100)/100;}}
+ if(MR.rocks.length<5&&random(0,24)===0)
+  MR.rocks.push({x:(random(0,160)-80)/100,y:(random(0,160)-80)/100,z:0.08});
+ if(Pull_From_Buffer(SHUTTER)&&MR.bombs>0){MR.bombs--;MR.rocks=[];PlaySound(WhiteNoise);} /* the mega-bomb */
+ OLED.clearDisplay();
+ for(const s of MR.stars){const p=MR_proj(s);OLED.drawPixel(Math.trunc(p.x),Math.trunc(p.y),WHITE);}
+ for(const r of MR.rocks){r.z+=0.012;const p=MR_proj(r);OLED.drawCircle(Math.trunc(p.x),Math.trunc(p.y),p.r,WHITE);}
+ const hit=MR.rocks.find(r=>r.z>=1&&Math.abs(r.x-MR.sx*0.5)<0.22&&Math.abs(r.y-MR.sy*0.5)<0.22);
+ if(hit){Game_Over();return;}
+ MR.rocks=MR.rocks.filter(r=>r.z<1);
+ /* HUD: crosshair ship + homing line + counters (mechanical labels) */
+ OLED.drawLine(60,32,68,32,WHITE);OLED.drawLine(64,28,64,36,WHITE);
+ setFont(SMALL_FONT);
+ screenPrintLn(6,2,MR_BASES[MR.base]+"  DIST "+Math.max(0,Math.trunc(MR.dist)),0);
+ screenPrintLn(6,96,"BOMB "+MR.bombs,0);
+ if(MR.dist<=0){MR.phase=1;MR.phAt=millis();PlaySound(ConnectionSuccess);}
+ OLED.display();
+}
+
+/* ---------- GOBBLE DON'T FALL (row 1) ---------- */
+let GB=null;
+function GB_placeAway(minDist,r){    /* never spawn on the player - a hole under the spawn = instant loss, score 0 */
+ for(let tries=0;tries<40;tries++){
+  const x=random(8,MAX_SCREEN_WIDTH-8), y=random(8,MAX_SCREEN_HEIGHT-8);
+  if(AS_dist(x,y,64,32)>minDist)return {x:x,y:y,r:r,on:true};
+ }
+ return {x:8,y:8,r:r,on:true};
+}
+/* [Mike ruling 2026-07-15] "fall" = hole AND/OR edge - variety permitted, mix both.
+   Each board rolls its own hazard: holes only / deadly edges only / both. A deadly edge
+   is drawn as a border so you can see the rule before you learn it the hard way. */
+const GB_HOLES=0, GB_EDGE=1, GB_BOTH=2;
+function GB_newBoard(first){
+ GB.mode=first?GB_HOLES:random(0,3);        /* first board is always the gentle one */
+ GB.holes=[];
+ if(GB.mode!=GB_EDGE){const n=(GB.mode==GB_BOTH)?3:5;
+  for(let i=0;i<n;i++)GB.holes.push(GB_placeAway(18,4));}
+ for(const d of GB.dots){const p=GB_placeAway(10,1);d.on=true;d.x=p.x;d.y=p.y;}
+}
+function GB_init(){
+ GB={x:64,y:32,vx:0,vy:0,dots:[],holes:[],mode:GB_HOLES,board:0};
+ for(let i=0;i<6;i++)GB.dots.push(GB_placeAway(10,1));
+ GB_newBoard(true);
+}
+function GB_step(){
+ const t=tiltVec();
+ GB.vx=(GB.vx+t[0]*-0.6)*0.9; GB.vy=(GB.vy+t[1]*0.6)*0.9;
+ const nx=GB.x+GB.vx, ny=GB.y+GB.vy;
+ const edgeDeadly=(GB.mode==GB_EDGE||GB.mode==GB_BOTH);
+ if(edgeDeadly){
+  if(nx<3||nx>MAX_SCREEN_WIDTH-4||ny<3||ny>MAX_SCREEN_HEIGHT-4){Game_Over();return;}  /* "fall" = off the edge */
+  GB.x=nx; GB.y=ny;
+ } else {
+  GB.x=constrain(nx,2,MAX_SCREEN_WIDTH-3);
+  GB.y=constrain(ny,2,MAX_SCREEN_HEIGHT-3);
+ }
+ OLED.clearDisplay();
+ if(edgeDeadly)OLED.drawRect(1,1,MAX_SCREEN_WIDTH-2,MAX_SCREEN_HEIGHT-2,WHITE);  /* the rule, visible */
+ for(const h of GB.holes){OLED.drawCircle(h.x,h.y,h.r,WHITE);
+  if(AS_dist(GB.x,GB.y,h.x,h.y)<h.r-1){Game_Over();return;}}   /* "fall" = into a hole */
+ let left=0;
+ for(const d of GB.dots){
+  if(!d.on)continue; left++;
+  OLED.fillCircle(d.x,d.y,1,WHITE);
+  if(AS_dist(GB.x,GB.y,d.x,d.y)<4){d.on=false;gameScore+=10;PlaySound(Select);
+   Game_Front_Card(Game_Name(GAME_GOBBLE)," <<< scroll to exit");}   /* [games batch] real-time score */
+ }
+ if(left==0){   /* cleared: keep score, roll a fresh board (and its hazard) */
+  GB.board++; GB.x=64; GB.y=32; GB.vx=0; GB.vy=0;
+  GB_newBoard(false);
+  Game_Front_Card(Game_Name(GAME_GOBBLE)," <<< scroll to exit");   /* per-screen refresh: board rolls, card follows */
+ }
+ OLED.fillCircle(GB.x,GB.y,2,WHITE);
+ OLED.display();
+}
+
+
+/* ============================================================================
+   [TWIN-IMPLEMENTED] MESSAGES - the discovery-doctrine keystone.
+   Mike rulings 2026-07-15: (1) bodies drafted by Ops, Mike's pen at the gate.
+   (2) RAM-only for now, WITH testing shortcuts in the twin. (3) delayed answers
+   DEFERRED (needs a clock). (4) reveal is driven by message STATUS, not menu
+   READ_ACCESS. (5) Morse is REAL. (6) the 2022 usage-nag idea: KILLED
+   ("ask to slow down, take a break, you again?!?!" - a machine chasing its user;
+   slot-machine-never-evil).
+   Firmware today: 15 message leaves across 3 menus, ZERO handlers.
+   Spec: docs/FIRMWARE_CHANGE_SPEC-messages-20260715.md
+   ============================================================================ */
+const CSV_MSGS="msg_id,menu,row,type,status,from,subject,body,audio_folder,audio_file,trigger,provenance\n0,text,0,TXT,READ,MGK-Assistant,Welcome!,Your MGK-VIIIp is paired_to this case and ready._Ask it anything._It will answer._It is not always right.,,,seeded,WORDS PARKED (canon reversal 2026-07-15; redesign at 50Kft under the simulated-data-downloads fiction). D.8 TXT_MSG id 1 - subject verbatim; body drafted.\n1,text,1,TXT,READ,MGK-Assistant,Start Up Procedure,1. Rest the unit level._2. Ask your question._3. Shake it. Or press_the shutter._4. Read the suspension.,,,seeded,WORDS PARKED (canon reversal 2026-07-15; redesign at 50Kft under the simulated-data-downloads fiction). D.8 TXT_MSG id 0 - subject verbatim; body drafted.\n2,text,2,TXT,NOT_READ,MGK-Assistant,New Feature Added,[PLACEHOLDER - 50Kft redesign]_Sync received._New mode uploaded.,,,seeded,WORDS PARKED (canon reversal 2026-07-15; redesign at 50Kft under the simulated-data-downloads fiction). THE REVEAL CHANNEL. Prior draft KILLED by the reversal (it ended 'You had it all along' - said the machine hid depth; the fiction says capability ARRIVES). D.8 TXT_MSG id 2 - subject + NOT_READ verbatim. Redesign seed: 2022 Ideas.txt 'Update installed - New mode uploaded (VOICE ADDED TO std 8ball)'.\n3,text,3,TXT,NOT_SENT,MGK-Assistant,ALERT!,Nightly summary filed_with the Answer Engine_as usual. 41 questions._3 flagged for review._Disregard this message.,,,ask_count_20,WORDS PARKED (canon reversal 2026-07-15; redesign at 50Kft under the simulated-data-downloads fiction). D.8 TXT_MSG id 3 - memo verbatim: 'MGK Assisant accidentally reveals it is listening and reporting back to the cloud'. Easter egg (ledger #9). Under the fiction this stops being an accident and becomes evidence the uplink is live.\n4,text,4,TXT,NOT_SENT,MGK-Assistant,Language Advisory,Clarity is set low._Guests may be offended._The unit is not_responsible for what_it has been told to say.,,,clarity_uncouth,WORDS PARKED (canon reversal 2026-07-15; redesign at 50Kft under the simulated-data-downloads fiction). D.8 TXT_MSG id 4 - memo verbatim: 'If they use vulgar mode they get warnings'. States the fact once; not a nag.\n5,voice,0,AUDIO,READ,MGK-Assistant,Welcome,Audio message._Press the shutter to play.,4,9,seeded,WORDS PARKED (canon reversal 2026-07-15; redesign at 50Kft under the simulated-data-downloads fiction). D.8 TXT_MSG id 6 type AUDIO. Asset unconfirmed - chips as missing rather than invented.\n6,voice,1,AUDIO,NOT_SENT,unknown,PASS CODES,\"Recording. Origin_unknown. Voices reading_numbers, slowly._0-0-0-0. Then 6-9._Then 8-0-0-8-5.\",4,1,ask_count_40,\"WORDS PARKED (canon reversal 2026-07-15; redesign at 50Kft under the simulated-data-downloads fiction). D.8 TXT_MSG id 6 - memo verbatim: 'It is a message where other users shared secret codes'. Numbers = the manual's Appendix 1 passcodes (0000, 69, 80085). The in-fiction passcode discovery path.\"\n7,system,0,TXT,NOT_SENT,MGK-VIIIp,System Msg 01,Self test complete._All subsystems nominal._Fluidic suspension_within tolerance.,,,first_boot,WORDS PARKED (canon reversal 2026-07-15; redesign at 50Kft under the simulated-data-downloads fiction). Drafted; BIST lore (D.4). Subject is the sheet's placeholder.\n8,killed,,TXT,DELETED,MGK-VIIIp,System Msg 02,,,,,\"KILLED (Mike, porch ruling 2026-07-17). Off-canon since Arc consequence 2; ruled dead at the Stage 2 gate. 'Service is not available in your region' -> nugget list entry 1 (PORCH_CAPTURE). Tombstone kept per D.8 DELETED enum; menu row system/1 freed and reassigned to the ending notice (msg 10).\"\n9,system,2,MORSE_CODE,NOT_SENT,unknown,System Msg 03,STILL LISTENING,,,ask_count_60,WORDS PARKED (canon reversal 2026-07-15; redesign at 50Kft under the simulated-data-downloads fiction). D.8 TXT_MSG id 7 type MORSE_CODE. Body = plain text; the machine keys it. Pairs with the ALERT. The Informer's dossier carries a Morse keyer.\n10,system,1,TXT,NOT_SENT,MGK-VIIIp,System Msg 02,[stub - the grid of one]_RECORD CHECK COMPLETE._Unit record matches_MASTER BUILD INVENTORY._Nothing further is held._REF KEY: {unit_key_code},,,inventory_complete,\"THE QUIET ENDING (Mike, porch ruling 2026-07-17): a CRC/checksum-style notice that the unit's record now matches the master build inventory - 'you got everything that's here; this is where it died.' The Act III key code rides as an unremarkable line ({unit_key_code} <- unit_registry.csv). Body is a STUB for Papa's pen. Menu home = system/1 (freed by the Msg 02 kill - flag: Papa confirms the reassignment). Trigger 'inventory_complete' = everything else delivered (predicate, not counter).\"\n";
+const MSG_TXT=0, MSG_AUDIO=1, MSG_MORSE=2;                       /* [D.8 TXT_MSG] enum MSG_TYPES */
+const MSG_NOT_SENT=0, MSG_NOT_READ=1, MSG_READ=2, MSG_DELETED=3; /* [D.8 TXT_MSG] enum MSG_STATES */
+const TYPE_ID={TXT:MSG_TXT,AUDIO:MSG_AUDIO,MORSE_CODE:MSG_MORSE};
+const STATE_ID={NOT_SENT:MSG_NOT_SENT,NOT_READ:MSG_NOT_READ,READ:MSG_READ,DELETED:MSG_DELETED};
+const MENU_OF={voice:VOICE_MSGS,text:TEXT_MSGS,system:SYSTEM_MSGS};
+let MESSAGES_INBOX=[]; /* [TWIN FIX 2026-07-17] was 'MESSAGES' - collided with the firmware UPID enum MESSAGES=2 (the menu), a load-time SyntaxError that killed the whole script (twin non-responsive). Spec (FIRMWARE_CHANGE_SPEC-messages) already warned about this exact collision. */
+function Messages_Load(){
+ MESSAGES_INBOX=csvParse(CSV_MSGS).map(r=>({
+  id:+r.msg_id, menu:r.menu, row:+r.row, type:TYPE_ID[r.type], status:STATE_ID[r.status],
+  from:r.from, subject:r.subject, body:r.body,
+  folder:r.audio_folder?+r.audio_folder:0, file:r.audio_file?+r.audio_file:0,
+  trigger:r.trigger}));
+ Messages_Sync_Menu();
+}
+/* [RULING 4] STATUS drives visibility: an undelivered message's row stays hidden.
+   This is the doctrine's clock - the machine reveals itself on a schedule.
+   NOTE: this is the first time anything writes the menu tables at runtime. */
+function Messages_Sync_Menu(){
+ for(const m of MESSAGES_INBOX){
+  const t=MENU_OF[m.menu];
+  if(t===undefined)continue;
+  const visible=(m.status!==MSG_NOT_SENT&&m.status!==MSG_DELETED);
+  MENU_PARAMETER_TABLE[t][m.row][READ_ACCESS_PASSCODE]=visible?1:2;   /* 2 = hidden, as the tables ship */
+  MENU_TABLE[t][m.row][lineName]=Messages_Row_Label(m);
+ }
+}
+function Messages_Row_Label(m){
+ const mark=(m.status===MSG_NOT_READ)?"*":" ";
+ return mark+m.subject;
+}
+function Messages_Find(menuNum,row){
+ for(const m of MESSAGES_INBOX){if(MENU_OF[m.menu]===menuNum&&m.row===row)return m;}
+ return null;
+}
+function Messages_Unread(){return MESSAGES_INBOX.filter(m=>m.status===MSG_NOT_READ).length;}
+/* delivery: NOT_SENT -> NOT_READ when a trigger fires. RAM-only [ruling 2] - the inbox
+   forgets on power-cycle, exactly as settings do (Save_To_Flash is a stub). */
+let askCount=0, deliveredAnnounce=false;
+function Messages_Trigger(name){
+ let fired=0;
+ for(const m of MESSAGES_INBOX){
+  if(m.status!==MSG_NOT_SENT)continue;
+  let hit=false;
+  if(m.trigger===name)hit=true;
+  else if(m.trigger&&m.trigger.startsWith("ask_count_")&&name==="ask")hit=(askCount>=+m.trigger.split("_")[2]);
+  if(hit){m.status=MSG_NOT_READ;fired++;
+   chip("ok","&#9993; message delivered: \""+m.subject+"\" &mdash; "+Messages_Unread()+" unread");
+   PlaySound(Connected);   /* the 2022 "You got mail!" beat - asset chips missing until Mike supplies one */
+  }
+ }
+ if(fired){Messages_Sync_Menu();Mon_StartConnection(fired);} /* [MONITOR BUILD] a delivery IS a server session — the bottom box narrates it */
+ return fired;
+}
+
+/* ---- the reader (a process, shaped like the others) ---- */
+const MSGV_COLD=0, MSGV_SHOW=1, MSGV_MORSE=2, MSGV_EXIT=3;
+let msgvState=MSGV_COLD, msgvMsg=null, msgvPage=0, msgvMorse=null;
+let scafUpid="";
+function Messages_EXE(){
+ switch(msgvState){
+  case MSGV_COLD:
+   msgvMsg=Messages_Find(menuNum_PTR,lineNum_PTR);
+   if(!msgvMsg){msgvState=MSGV_EXIT;break;}
+   if(msgvMsg.status===MSG_NOT_READ){msgvMsg.status=MSG_READ;Messages_Sync_Menu();}  /* opening marks it read */
+   Pause_Process(SYSTEM_MONITOR);
+   msgvPage=0;
+   Messages_Draw(msgvMsg);
+   if(msgvMsg.type===MSG_AUDIO)player.playFolder(msgvMsg.folder,msgvMsg.file);
+   if(msgvMsg.type===MSG_MORSE){msgvMorse=Morse_Begin(msgvMsg.body);msgvState=MSGV_MORSE;break;}
+   msgvState=MSGV_SHOW;
+   break;
+  case MSGV_SHOW:
+   if(Pull_From_Buffer(ROTARY_DIAL)){msgvState=MSGV_EXIT;}                  /* scroll exits - the convention */
+   else if(Pull_From_Buffer(SHUTTER)){
+    if(msgvMsg.type===MSG_AUDIO)player.playFolder(msgvMsg.folder,msgvMsg.file);  /* click replays audio */
+    else msgvState=MSGV_EXIT;
+   }
+   break;
+  case MSGV_MORSE:
+   if(Pull_From_Buffer(ROTARY_DIAL)){pixels.setPixelColor(1,pixels.Color(0,0,16));pixels.show();msgvState=MSGV_EXIT;break;}
+   if(!Morse_Step(msgvMorse)){pixels.setPixelColor(1,pixels.Color(0,0,16));pixels.show();msgvState=MSGV_SHOW;}
+   break;
+  case MSGV_EXIT:
+   End_Process(MESSAGES_PROC);
+   Unpause_Process(SYSTEM_MONITOR);
+   Unpause_Process(MENU_SYSTEM);
+   Activate_the_Screen(TOP_SCREEN,true);
+   msgvState=MSGV_COLD;
+   break;
+ }
+}
+function Messages_Draw(m){
+ /* front card: who it's from + the subject, like a slip in a pneumatic tube */
+ Activate_the_Screen(FRONT_SCREEN,true);
+ screenPrintLn(Row_01,0," FROM: "+m.from,0);
+ screenPrintLn(Row_02,0," "+m.subject,0);
+ screenPrintLn(Row_03,0,(m.type===MSG_AUDIO)?" click=play  scroll=exit":" scroll to exit",1);
+ /* top screen: the body */
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ const lines=(m.type===MSG_MORSE)?["keying..."]:m.body.split("_");
+ for(let i=0;i<lines.length&&i<9;i++)screenPrintLn(8+i*6,2,lines[i],0);
+ OLED.display();
+}
+/* ---- [RULING 5] real Morse. The machine has no tone generator (DFPlayer only),
+   so it keys the way the hardware actually can: NeoPixel blink + the Select click
+   per element + the marks on the glass. That is implementable on the real unit. ---- */
+const MORSE_TABLE={A:".-",B:"-...",C:"-.-.",D:"-..",E:".",F:"..-.",G:"--.",H:"....",I:"..",J:".---",K:"-.-",L:".-..",M:"--",N:"-.",O:"---",P:".--.",Q:"--.-",R:".-.",S:"...",T:"-",U:"..-",V:"...-",W:".--",X:"-..-",Y:"-.--",Z:"--..","0":"-----","1":".----","2":"..---","3":"...--","4":"....-","5":".....","6":"-....","7":"--...","8":"---..","9":"----.","?":"..--..","/":"-..-."," ":"/"};
+const MORSE_DIT=90;   /* ms; dah = 3x, gap = 1x, letter gap = 3x, word gap = 7x */
+function Morse_Begin(text){
+ const seq=[];
+ for(const ch of text.toUpperCase()){
+  const code=MORSE_TABLE[ch];
+  if(!code)continue;
+  if(code==="/"){seq.push({on:false,ms:MORSE_DIT*7});continue;}
+  for(const el of code){seq.push({on:true,ms:(el==="-")?MORSE_DIT*3:MORSE_DIT});seq.push({on:false,ms:MORSE_DIT});}
+  seq.push({on:false,ms:MORSE_DIT*2});   /* -> 3 dits between letters */
+ }
+ return {seq:seq,i:0,until:0,marks:"",text:text};
+}
+function Morse_Step(M){
+ if(M.i>=M.seq.length)return false;
+ if(millis()<M.until)return true;
+ const e=M.seq[M.i];
+ if(e.on){
+  pixels.setPixelColor(1,pixels.Color(255,120,0));pixels.show();   /* the keyer lamp */
+  PlaySound(Select);
+  M.marks+=(e.ms>MORSE_DIT)?"-":".";
+ } else {
+  pixels.setPixelColor(1,pixels.Color(0,0,0));pixels.show();
+  if(e.ms>=MORSE_DIT*2)M.marks+=" ";
+ }
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ const shown=M.marks.slice(-30);
+ screenPrintLn(20,2,"receiving:",0);
+ screenPrintLn(30,2,shown,1);
+ M.until=millis()+e.ms;
+ M.i++;
+ return true;
+}
+
+
+/* ============================================================================
+   [TWIN-IMPLEMENTED] THE BREADTH MARCH - honest scaffold for every remaining
+   domain (Mike, 2026-07-15). Rules: every row leads somewhere real that shows
+   what it will be; mechanics only where nearly free; WORDS ARE STUBBED (parked
+   for the 50Kft session, under the simulated-data-downloads fiction).
+   Table: content/tables/scaffold.csv (descriptor + memory_note + evidence).
+   Firmware today: none of these rows do anything (Run_EXE default: break).
+   ============================================================================ */
+const CSV_SCAFFOLD="menu,row,name,kind,descriptor,memory_note,evidence\nPREDICTIONS,0,Fortune,scaffold,[stub] fortune cookie_40 fortunes x 5 registers_exist in the workbook,\"~4 KB flash (40x5 strings avg 40 ch) + ~0 RAM; reuses the reveal renderer\",\"D.8 sheet 'Fortune Cookie' = 344 cells / 44 rows, fully authored, same shape as an answer table. DEFERRED: Answers-shaped (Mike: not more of those).\"\nPREDICTIONS,1,Horoscope,scaffold,[stub] needs a sign_and a date_the machine has no clock,\"~2 KB flash (12 readings) + ~0 RAM; blocked on input design\",\"Nothing authored anywhere. Needs a design ruling: how does a clockless machine know the date? Ask the user their sign via the dial?\"\nPROBABILITIES,0,Coin Flip,live,,\"~0.3 KB flash, ~8 B RAM\",\"D.8 STATUS: 'Write the code'. No content needed - pure mechanic.\"\nPROBABILITIES,1,Pick a number,live,,\"~0.3 KB flash, ~8 B RAM\",\"D.8 STATUS: 'Write the code'.\"\nPROBABILITIES,2,Pick a card,live,,\"~0.6 KB flash (52-card names generated, not stored), ~8 B RAM\",\"No content needed - suits/ranks are computed.\"\nPROBABILITIES,3,Roll Dice,live,,\"~0.4 KB flash, ~8 B RAM\",\"Shake to roll - reuses Unit_Is_Shaking.\"\nPROBABILITIES,4,Lottery Numbers,live,,\"~0.4 KB flash, ~24 B RAM (6 picks)\",\"No content needed.\"\nADVICE,0,Everyday,scaffold,[stub] advice for_the ordinary day,\"~1 KB flash if generator-driven\",\"Whole ADVICE branch is hidden at the parent (READ=411). Unhiding is a discovery-doctrine ruling.\"\nADVICE,1,Career Chooser,live,,\"~3 KB flash for the full JOBS grid (52+39+33 column entries); ~12 B RAM\",\"D.8 'JOBS' sheet = 196 cells: 3 columns (adjective | noun | role) + a CLARITY column -> 'Amateur Ninja Accountant'. THE MECHANIC IS GENERATIVE, not selective. Twin ships a 6x6x6 placeholder subset; full ingest is a content session.\"\nADVICE,2,Career Advice,scaffold,[stub] advice about_the career you have,\"~1 KB flash\",\"No dedicated sheet; likely generator-driven.\"\nADVICE,3,Office Nickname,live,,\"~2 KB flash for a curated subset of NIcknames; ~8 B RAM\",\"D.8 'NIcknames' = 230 cells / 149 rows, crude prank-name lists (Bart-Simpson register). Twin ships a clean placeholder subset - the real list needs a vulgar-mode ruling vs the Clarity registers.\"\nADVICE,4,Water Cooler,scaffold,[stub] small talk_generator,\"~2 KB flash (D.8 Generators columns)\",\"D.8 'Generators' = 785 cells: TECHNO JARGON / EUPHEMISM / financial-proverb mad-lib columns.\"\nADVICE,5,Partners,scaffold,[stub] advice about_the person you chose,\"~1 KB flash\",No content authored.\nADVICE,6,Friends & Family,scaffold,[stub] advice about_the people you did not choose,\"~1 KB flash\",No content authored.\nADVICE,7,Inlaws and Outlaws,scaffold,[stub] advice about_the people you got anyway,\"~1 KB flash\",No content authored.\nDETECTORS,0,Bullshit Detector,live,,\"~1.5 KB flash (needle draw + verdict bands), ~64 B RAM; PDM mic buffer (256 samples) ALREADY resident\",\"THE ONLY FEATURE THAT MAKES THE MIC REAL. The_Mic_Has_Data() (RMS>30) is written and works [5_INPUT:111-120]; HW_Rescan_MIC consumes nothing. Manual hedges VCS as 'a novelty and should be treated as such'.\"\nDETECTORS,1,Stud Detector,live,,\"~0.2 KB flash (shares the needle)\",Same needle, different verdict band table.\nDETECTORS,2,Trustworthy Detector,live,,\"~0.2 KB flash (shares the needle)\",Same needle.\nDETECTORS,3,Attractiveness Detector,live,,\"~0.2 KB flash (shares the needle)\",Same needle.\nVOICE_MSGS,2,Msg 01,scaffold,[stub] awaiting sync,\"~0.1 KB each\",Message rows beyond the seeded set. Delivery is built; words parked.\nCODES,0,Code Runner,scaffold,[stub] the faux-assembly_scroller as a feature,\"~0.2 KB flash - the scroller ALREADY EXISTS in SYSTEM_MONITOR\",\"scrollFauxAssemblyLanguage [SYSTEM_MONITOR:45-63] with its opcode/operand pools is already written and running on the top screen.\"\nCODES,1,BIST,scaffold,[stub] built-in self test_a pass/fail parade,\"~1 KB flash + ~10 content rows\",\"D.4 manual: BIST + AMMMS maintenance messaging is real lore. The visual language exists (crtWarmStart, static, monitor windows).\"\nCODES,2,Userdata,scaffold,[stub] what the machine_has kept about you,\"~0.5 KB flash\",\"Ties to the ALERT Easter egg and the 2022 usage-tracking idea (the nag itself is KILLED; the data is not).\"\nCODES,3,Checksum,scaffold,[stub] a number that_proves nothing,\"~0.3 KB flash\",No content authored.\nUSER,0,Name,scaffold,[stub] the machine asks_who you are,\"~0.5 KB flash + 16 B RAM; NO persistence (flash stub)\",\"Blocked on the same persistence gap as everything else. Under the downloads fiction the name would come back from the servers.\"\nUSER,1,Security,scaffold,[stub] passcodes exist_and are checked nowhere,\"~0.5 KB flash\",\"READ/RUN passcodes are carried on all 175 rows and checked nowhere [MENU_MAP]. The PASS CODES message is the in-fiction path to learning one.\"\nMGKMODEL,0,Classic,scaffold,[stub] output mode:_front screen only,\"~0 (a mode flag)\",\"D.8 MGK-Options matrix implies mgkModel switches the OUTPUT personality (ElectronScope CH4 vs 8K vs audibles). NEEDS A DESIGN RULING - what the 3 modes ARE.\"\nMGKMODEL,1,Large,scaffold,[stub] output mode:_the big glass,\"~0 (a mode flag)\",Same ruling.\nMGKMODEL,2,Audio,scaffold,[stub] output mode:_voice enunciator,\"~0 (a mode flag)\",Same ruling.\n";
+let SCAFFOLD={};
+function Scaffold_Load(){
+ SCAFFOLD={};
+ for(const r of csvParse(CSV_SCAFFOLD)){
+  SCAFFOLD[r.menu+"|"+r.row]={name:r.name,kind:r.kind,descriptor:r.descriptor,mem:r.memory_note};
+ }
+}
+function Scaffold_For(upidName,row){return SCAFFOLD[upidName+"|"+row];}
+
+/* ---- the honest scaffold screen: says what the row WILL be, admits it is a stub ---- */
+const SCAF_COLD=0, SCAF_SHOW=1, SCAF_EXIT=2;
+let scafState=SCAF_COLD, scafEntry=null;
+function Scaffold_EXE(upidName){
+ switch(scafState){
+  case SCAF_COLD:
+   scafEntry=Scaffold_For(upidName,lineNum_PTR);
+   Pause_Process(SYSTEM_MONITOR);
+   Activate_the_Screen(FRONT_SCREEN,true);
+   screenPrintLn(Row_01,0," "+(scafEntry?scafEntry.name:get_as_char(lineName)),0);
+   screenPrintLn(Row_02,0," [SCAFFOLD - not built]",0);
+   screenPrintLn(Row_03,0," scroll to exit",1);
+   Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+   {
+    const d=(scafEntry&&scafEntry.descriptor)?scafEntry.descriptor:"[stub]";
+    const lines=d.split("_");
+    for(let i=0;i<lines.length&&i<8;i++)screenPrintLn(14+i*7,3,lines[i],0);
+    screenPrintLn(56,3,"words parked - 50Kft",0);
+    OLED.display();
+   }
+   chip("warn","scaffold: "+(scafEntry?scafEntry.name:"?")+" &mdash; shows what it will be; words parked. mem: "+(scafEntry?scafEntry.mem:"?"));
+   scafState=SCAF_SHOW;
+   break;
+  case SCAF_SHOW:
+   if(Pull_From_Buffer(ROTARY_DIAL)||Pull_From_Buffer(SHUTTER))scafState=SCAF_EXIT;
+   break;
+  case SCAF_EXIT:
+   End_Process(SCAFFOLD_PROC);
+   Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
+   Activate_the_Screen(TOP_SCREEN,true);
+   scafState=SCAF_COLD;
+   break;
+ }
+}
+
+/* ---- PROBABILITIES: five real micro-interactions, ~0 content [D.8 STATUS: "Write the code"] ---- */
+const PROB_COLD=0, PROB_WAIT=1, PROB_SHOW=2, PROB_EXIT=3;
+let probState=PROB_COLD, probResult="", probResult2="";
+const SUITS=["HEARTS","SPADES","CLUBS","DIAMONDS"];
+const RANKS=["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+function Probabilities_EXE(which){
+ switch(probState){
+  case PROB_COLD:
+   Pause_Process(SYSTEM_MONITOR);
+   probResult="";probResult2="";
+   Prob_Prompt(which);
+   probState=PROB_WAIT;
+   break;
+  case PROB_WAIT:
+   if(probBusy)break;
+   if(Pull_From_Buffer(ROTARY_DIAL)){probState=PROB_EXIT;break;}
+   /* [POLISH b, 2026-07-22] merged dice/number rows: CLICK cycles the preset, SHAKE rolls */
+   if(Prob_IsMerged(which)){
+    if(Pull_From_Buffer(SHUTTER)){probPreset=(probPreset+1)%PROB_PRESETS.length;Prob_Prompt(which);break;}
+    if(Unit_Is_Shaking(1.3)){Prob_Roll(which);probState=PROB_SHOW;}
+   } else if(Pull_From_Buffer(SHUTTER)||Unit_Is_Shaking(1.3)){Prob_Roll(which);probState=PROB_SHOW;}
+   break;
+  case PROB_SHOW:
+   if(probBusy)break;
+   if(Pull_From_Buffer(ROTARY_DIAL)){probState=PROB_EXIT;}
+   else if(Prob_IsMerged(which)){
+    if(Pull_From_Buffer(SHUTTER)){probPreset=(probPreset+1)%PROB_PRESETS.length;Prob_Prompt(which);probState=PROB_WAIT;}
+    else if(Unit_Is_Shaking(1.3)){Prob_Roll(which);}
+   }
+   else if(Pull_From_Buffer(SHUTTER)||Unit_Is_Shaking(1.3)){Prob_Roll(which);}
+   break;
+  case PROB_EXIT:
+   End_Process(PROBABILITIES);
+   Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
+   Activate_the_Screen(TOP_SCREEN,true);
+   probState=PROB_COLD;
+   break;
+ }
+}
+/* [POLISH 2026-07-22] coin rides the FLUIDIC display; dice+number MERGED (Mike ruled
+   the collision); cards = a TRUE SHUFFLED DECK with force-card hooks (hooks only —
+   the magician/gambler ruling; zero persona content here). Full per-die range config
+   beyond presets = app-pattern config-card territory: SPECCED, not built (flag). */
+let probBusy=false, probPreset=0;
+const PROB_PRESETS=[{n:1,s:6},{n:2,s:6},{n:3,s:6},{n:1,s:10},{n:2,s:10},{n:1,s:100}]; /* 1x100 = the old Pick-a-Number */
+function Prob_IsMerged(which){return which==1||which==3;}
+let probDeck=[], probDeckAt=0;
+let Card_Force_Hook=null; /* [HOOK] persona/BS-config force-card slot — returns {rank,suit} or null; NO content wired */
+function Prob_Shuffle(){probDeck=[];for(let i=0;i<52;i++)probDeck.push(i);
+ for(let i=51;i>0;i--){const j=random(0,i+1);const t=probDeck[i];probDeck[i]=probDeck[j];probDeck[j]=t;}
+ probDeckAt=0;}
+function Prob_Prompt(which){
+ const merged=Prob_IsMerged(which);
+ const p=PROB_PRESETS[probPreset];
+ Activate_the_Screen(FRONT_SCREEN,true);
+ if(which==0){ /* coin: the fluidic dressing, like the answers redirect card */
+  screenPrintLn(Row_01,0," ----<          >----",0);
+  screenPrintLn(Row_01,40,"COIN FLIP",0);
+  screenPrintLn(Row_02,0," OUTPUT REDIRECTED TO",0);
+  screenPrintLn(Row_03,0,"  FLUIDIC SUSPENSION ",1);
+ } else {
+  screenPrintLn(Row_01,0," "+(merged?("DICE  "+p.n+" DIE OF "+p.s):["","","PICK A CARD","","LOTTERY"][which]),0);
+  screenPrintLn(Row_02,0,merged?" click=dice shake=roll":(which==4?" shake to roll":" click or shake"),0);
+  screenPrintLn(Row_03,0," scroll to exit",1);
+ }
+ Activate_the_Screen(TOP_SCREEN,true);setFont(LARGE_FONT);
+ screenPrintLnCentered(38,"?",1);
+}
+function Prob_Roll(which){
+ if(which==0){ /* [POLISH a] the coin SURFACES out of the fluid: triangle flourish + face */
+  probBusy=true;
+  (async()=>{
+   Activate_the_Screen(TOP_SCREEN,true);setFont(LARGE_FONT);
+   await Draw_Triangle_Animation(ZOOM_IN,COIN_FLOURISH_SKIP); /* [POLISH] repeated-flip pace */
+   probResult=(random(0,2)==0)?"HEADS":"TAILS";
+   screenPrintLnCentered(38,probResult,1);
+   PlaySound(Select);probBusy=false;})();
+  return;
+ }
+ switch(which){
+  case 1: case 3: { /* merged dice/number */
+   const p=PROB_PRESETS[probPreset];const vals=[];let sum=0;
+   for(let i=0;i<p.n;i++){const v=random(1,p.s+1);vals.push(v);sum+=v;}
+   probResult=vals.join(" + ");probResult2=(p.n>1)?("= "+sum):"";
+   if(p.n==1)probResult=String(vals[0]);
+   break;}
+  case 2: { /* true deck: play through before reshuffle */
+   if(probDeckAt>=probDeck.length){Prob_Shuffle();
+    Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+    screenPrintLnCentered(38,"SHUFFLING",1);setFont(LARGE_FONT);}
+   let card;
+   const forced=Card_Force_Hook?Card_Force_Hook():null; /* [HOOK] bias/settings force-card */
+   if(forced){card=forced;}
+   else{const c=probDeck[probDeckAt++];card={rank:RANKS[c%13],suit:SUITS[Math.trunc(c/13)]};}
+   probResult=card.rank;probResult2=card.suit;
+   break;}
+  case 4: {const picks=[]; while(picks.length<6){const p=random(1,50); if(picks.indexOf(p)<0)picks.push(p);}
+           picks.sort((x,y)=>x-y); probResult=picks.slice(0,3).join(" "); probResult2=picks.slice(3).join(" "); break;}
+ }
+ PlaySound(Select);
+ Activate_the_Screen(TOP_SCREEN,true);setFont(LARGE_FONT);
+ if(probResult2){screenPrintLnCentered(28,probResult,0);screenPrintLnCentered(48,probResult2,1);}
+ else screenPrintLnCentered(38,probResult,1);
+}
+
+/* ---- DETECTORS: the mic becomes real. The_Mic_Has_Data() (RMS>30) is written and
+   works [5_INPUT:111-120]; nothing has ever consumed it. Point it, it reads, it judges. ---- */
+const DET_COLD=0, DET_READ=1, DET_VERDICT=2, DET_EXIT=3;
+let detState=DET_COLD, detLevel=0, detPeak=0, detUntil=0, detVerdict="";
+const DET_BANDS=[
+ ["[stub] NO TRACE","[stub] SOME","[stub] HEAVY"],   /* Bullshit */
+ ["[stub] UNPROVEN","[stub] PLAUSIBLE","[stub] CONFIRMED"],
+ ["[stub] DOUBTFUL","[stub] CONDITIONAL","[stub] TRUSTED"],
+ ["[stub] BELOW SPEC","[stub] WITHIN SPEC","[stub] ABOVE SPEC"]
+];
+function Detectors_EXE(which){
+ switch(detState){
+  case DET_COLD:
+   Pause_Process(SYSTEM_MONITOR);
+   detLevel=0;detPeak=0;detVerdict="";
+   Activate_the_Screen(FRONT_SCREEN,true);
+   screenPrintLn(Row_01,0," "+get_as_char(lineName),0);
+   screenPrintLn(Row_02,0," speak. it listens.",0);
+   screenPrintLn(Row_03,0," click=verdict scroll=exit",1);
+   detState=DET_READ;
+   break;
+  case DET_READ: {
+   if(Pull_From_Buffer(ROTARY_DIAL)){detState=DET_EXIT;break;}
+   /* the real mic path: RMS over the PDM buffer, the same test the firmware already computes */
+   const rms=Mic_RMS();
+   detLevel=detLevel*0.8+rms*0.2;
+   if(detLevel>detPeak)detPeak=detLevel;
+   Det_Draw(detLevel);
+   if(Pull_From_Buffer(SHUTTER)){
+    const band=(detPeak<12)?0:(detPeak<40)?1:2;
+    detVerdict=DET_BANDS[which][band];
+    detUntil=millis()+4000;
+    Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+    screenPrintLnCentered(26,detVerdict,0);
+    screenPrintLnCentered(40,"peak "+Math.trunc(detPeak),0);
+    screenPrintLnCentered(52,"[verdict words parked]",1);
+    PlaySound(Connected);
+    detState=DET_VERDICT;
+   }
+   break;
+  }
+  case DET_VERDICT:
+   if(Pull_From_Buffer(ROTARY_DIAL))detState=DET_EXIT;
+   else if(Pull_From_Buffer(SHUTTER)||millis()>detUntil){detPeak=0;detState=DET_READ;}
+   break;
+  case DET_EXIT:
+   End_Process(DETECTORS);
+   Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
+   Activate_the_Screen(TOP_SCREEN,true);
+   detState=DET_COLD;
+   break;
+ }
+}
+function Det_Draw(level){
+ /* a needle. 1965 test equipment, not a VU meter. */
+ Activate_the_Screen(TOP_SCREEN,true);
+ const cx=64, cy=58, r=44;
+ OLED.writeLine(cx-r,cy,cx+r,cy,WHITE);
+ for(let a=0;a<=180;a+=30){
+  const rad=a*PI/180;
+  OLED.writeLine(cx-Math.cos(rad)*r,cy-Math.sin(rad)*r,cx-Math.cos(rad)*(r-4),cy-Math.sin(rad)*(r-4),WHITE);
+ }
+ const t=constrain(level/60,0,1);
+ const ang=(1-t)*PI;
+ OLED.writeLine(cx,cy,cx-Math.cos(ang)*(r-6),cy-Math.sin(ang)*(r-6),WHITE);
+ OLED.fillCircle(cx,cy,2,WHITE);
+ setFont(SMALL_FONT);
+ screenPrintLn(8,3,"[stub] "+get_as_char(lineName).trim(),0);
+ OLED.display();
+}
+
+/* ---- ADVICE: the generative mechanic (column pick + assemble) - the machine's
+   first non-selective content engine. Columns here are PLACEHOLDER SUBSETS; the
+   real grids exist in D.8 (JOBS 196 cells, NIcknames 230, Generators 785) and are
+   a content session, not a march item. ---- */
+const ADV_JOBS=[["[stub] Amateur","[stub] Angry","[stub] Aspiring","[stub] Certified","[stub] Chief","[stub] Junior"],
+                ["[stub] Ninja","[stub] Space","[stub] Tickler","[stub] Dream","[stub] Armpit","[stub] Data"],
+                ["[stub] Accountant","[stub] Lawyer","[stub] Analyst","[stub] Sniffer","[stub] Supervisor","[stub] Associate"]];
+const ADV_NICK=["[stub] The Bubble","[stub] The Wedge","[stub] The Flat Pack","[stub] The Moon","[stub] The Ski Slope","[stub] The Brick"];
+const ADV_COLD=0, ADV_SHOW=1, ADV_EXIT=2;
+let advState=ADV_COLD, advLines=[];
+function Advice_EXE(which){
+ switch(advState){
+  case ADV_COLD:
+   Pause_Process(SYSTEM_MONITOR);
+   Advice_Roll(which);
+   Activate_the_Screen(FRONT_SCREEN,true);
+   screenPrintLn(Row_01,0," "+get_as_char(lineName),0);
+   screenPrintLn(Row_02,0," click=again",0);
+   screenPrintLn(Row_03,0," scroll to exit",1);
+   advState=ADV_SHOW;
+   break;
+  case ADV_SHOW:
+   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_EXIT;}
+   else if(Pull_From_Buffer(SHUTTER)||Unit_Is_Shaking(1.3)){Advice_Roll(which);}
+   break;
+  case ADV_EXIT:
+   End_Process(ADVICE);
+   Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
+   Activate_the_Screen(TOP_SCREEN,true);
+   advState=ADV_COLD;
+   break;
+ }
+}
+function Advice_Roll(which){
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ if(which==1){        /* Career Chooser - the JOBS grid: adjective + noun + role */
+  advLines=[ADV_JOBS[0][random(0,6)],ADV_JOBS[1][random(0,6)],ADV_JOBS[2][random(0,6)]];
+  screenPrintLn(16,3,"you should be:",0);
+  for(let i=0;i<3;i++)screenPrintLn(28+i*8,8,advLines[i],0);
+ } else if(which==3){ /* Office Nickname */
+  advLines=[ADV_NICK[random(0,6)]];
+  screenPrintLn(16,3,"they call you:",0);
+  screenPrintLn(30,8,advLines[0],0);
+ }
+ screenPrintLn(56,3,"[placeholder columns - real",0);
+ screenPrintLn(62,3,"grids live in D.8]",0);
+ OLED.display();
+ PlaySound(Select);
+}
+
+/* ============ [FW] 1_MGK-VIIIp.ino - the OS ============ */
+function MGK_VIIIp_OS(){
+ const PTRN=Process_to_Run_Next();
+ switch(PTRN){
+  case HW_RESCAN_ALL_INPUT_BUFFERS: HW_Rescan_All_Input_Buffers(); break;
+  case MENU_SYSTEM: Menu_System(); break;
+  case SYSTEM_MONITOR: System_Monitor(); break;
+  case ANSWERS: if(!M8B_busy)M8B_Answers_EXE(lineNum_PTR); break;  /* busy = firmware's blocking draw, OS frozen */
+  case POLARITY: Set_The_Bias(POLARITY); break;
+  case CLARITY: Set_The_Bias(CLARITY); break;
+  case BUBBLES: Update_Bubbles(); break;
+  case GAMES: Games_EXE(lineNum_PTR); break;   /* [TWIN DELTA] firmware has no GAMES handler */
+  case MESSAGES_PROC: Messages_EXE(); break;   /* [TWIN DELTA] firmware has no messages handler */
+  case PROBABILITIES: Probabilities_EXE(lineNum_PTR); break;   /* [TWIN DELTA] */
+  case DETECTORS: Detectors_EXE(lineNum_PTR); break;           /* [TWIN DELTA] the mic becomes real */
+  case ADVICE: Advice_EXE(lineNum_PTR); break;                 /* [TWIN DELTA] generative mechanic */
+  case SCAFFOLD_PROC: Scaffold_EXE(scafUpid); break;           /* [TWIN DELTA] honest scaffold */
+ }
+}
+
+/* ============ [FW] setup() [main:142-194] - as-flashed: Boot() commented out ============ */
+function setup(){
+ Serial.begin(9600);
+ player.begin();player.volume(30);
+ pixels.begin();pixels.clear();pixels.show();
+ pixels.setPixelColor(0,pixels.Color(0,0,16));pixels.setPixelColor(1,pixels.Color(0,0,16));pixels.show();
+ /* Boot();  <-- commented out in firmware [main:175] - preserved */
+ Activate_the_Screen(TOP_SCREEN,true);
+ Activate_the_Screen(FRONT_SCREEN,true);
+ Draw_the_Menu_Screen();Draw_the_Menu_Line();
+ Initialize_the_Process_Registry();
+ Start_Process(SYSTEM_MONITOR,NORMAL_PRIORITY);
+ Start_Process(HW_RESCAN_ALL_INPUT_BUFFERS,NORMAL_PRIORITY);
+ Start_Process(MENU_SYSTEM,NORMAL_PRIORITY);
+ Messages_Load();
+ Scaffold_Load();
+ Messages_Trigger("first_boot");
+ Doors_Restructure(); /* [DOORS RULING B, 2026-07-22 night pass] */
+}
+/* ============ [TWIN-BUILT 2026-07-22 night] DOORS RESTRUCTURE (ruling B) ============
+   Three-door top level: DOOR_A (answers-class: Answers/Advice/Detectors),
+   DOOR_B (lines-class: engine pending — honest scaffold), DOOR_C (specialized:
+   Predictions/Probabilities/Games/Messages-as-one-entry). System branches
+   (Preferences/User/Codes) stay at root. NOTHING DELETED: new tables are APPENDED
+   past the firmware's 23; the legacy tree remains intact and navigable
+   (devLegacyMenu() returns to it). Door names = PLACEHOLDER TOKENS (DOOR_A/B/C) —
+   the on-screen naming is Papa's moment at manual-print. Visibility/passcode
+   semantics preserved: door rows carry READ=1/RUN=1 (plain visible); every
+   existing row keeps its own codes untouched. KNOWN SEAM (flagged): branch
+   back-rows still link to their LEGACY parents; the naming/polish pass re-aims
+   them when the doors lock. */
+let DOORS_ROOT=-1;
+function doorRow(t,r,label,linkMenu,linkLine,exe){
+ MENU_TABLE[t][r]=["[doors]",label];
+ MENU_PARAMETER_TABLE[t][r]=[900+t*40+r,linkMenu,linkLine,exe,1,1,1,1];
+}
+function Doors_Restructure(){
+ const A=MENU_TABLE.length, B=A+1, C=A+2, R=A+3, CT=A+4;
+ for(const t of [A,B,C,R,CT]){MENU_TABLE[t]=[];MENU_PARAMETER_TABLE[t]=[];}
+ /* DOOR_A: answers-class */
+ doorRow(A,0,"Answers",ANSWERS,0,0); doorRow(A,1,"Advice",ADVICE,0,0);
+ doorRow(A,2,"Detectors",DETECTORS,0,0); doorRow(A,3,"back",R,0,0);
+ MENU_TABLE[A][4]=["[doors]",".end"];MENU_PARAMETER_TABLE[A][4]=[0,R,0,0,1,1,1,1];
+ /* DOOR_B: lines-class — honest scaffold (engine pending; app-pattern build) */
+ doorRow(B,0,"LINES - NOT INSTALLED",R,0,0); doorRow(B,1,"back",R,0,0);
+ MENU_TABLE[B][2]=["[doors]",".end"];MENU_PARAMETER_TABLE[B][2]=[0,R,0,0,1,1,1,1];
+ /* DOOR_C: specialized (+ the Gambler's casino territory — persona-reserved,
+    shown dev-side until gating wires up; GATING SEAM flagged) */
+ doorRow(C,0,"Predictions",PREDICTIONS,0,0); doorRow(C,1,"Probabilities",PROBABILITIES,0,0);
+ doorRow(C,2,"Games",GAMES,0,0); doorRow(C,3,"Messages",MESSAGES,0,0);
+ doorRow(C,4,"Casino [-21]",CT,0,0);
+ doorRow(C,5,"back",R,0,0);
+ MENU_TABLE[C][6]=["[doors]",".end"];MENU_PARAMETER_TABLE[C][6]=[0,R,0,0,1,1,1,1];
+ /* the casino table: 4 exe rows -> Games_EXE via the +5 map */
+ doorRow(CT,0,"Slots",GAMES,0,1); doorRow(CT,1,"Craps",GAMES,0,1);
+ doorRow(CT,2,"Blackjack",GAMES,0,1); doorRow(CT,3,"Roulette",GAMES,0,1);
+ doorRow(CT,4,"back",C,0,0);
+ MENU_TABLE[CT][5]=["[doors]",".end"];MENU_PARAMETER_TABLE[CT][5]=[0,C,0,0,1,1,1,1];
+ CASINO_TABLE=CT;
+ /* [CASINO GATING WIRE 2026-07-23] Juan's casino rides the passcode mechanism per
+    the displayability doctrine — hidden until the code is entered. PLACEHOLDER
+    code 2121 (the CvC-1965 pattern: clearly non-final; Papa places the real
+    RELEASE-code wording at words). */
+ MENU_PARAMETER_TABLE[C][4][READ_ACCESS_PASSCODE]=2121;
+ /* [BACK-ROW RE-AIM 2026-07-23 — the flagged seam] legacy branch back-rows aimed
+    at pre-doors parents (tables 0/1/3); re-aim them to the door that now owns the
+    branch. Mechanical, token-safe, nothing deleted — the rows themselves stand. */
+ const DOOR_OF={5:A,8:A,9:A,6:C,7:C,13:C,2:C,4:R,14:R,15:R,16:4,17:4,18:R,19:4,10:2,11:2,12:2};
+ let reaimed=0;
+ for(let t=2;t<A;t++){ /* every legacy table except the old roots 0/1 */
+  if(!MENU_TABLE[t])continue;
+  for(let r=0;r<MENU_TABLE[t].length;r++){
+   const pr=MENU_PARAMETER_TABLE[t][r];
+   if(!pr||pr[links_to_Exe]===1)continue;
+   if(pr[linked_menuNum]===0||pr[linked_menuNum]===1||pr[linked_menuNum]===3){
+    pr[linked_menuNum]=(DOOR_OF[t]!==undefined)?DOOR_OF[t]:R;
+    pr[linked_lineNum]=0;reaimed++;
+   }
+  }
+ }
+ chip("ok","back-row re-aim: "+reaimed+" row(s) now aim at door parents");
+ /* mail-run: twin-delta row appended to the games table before its .end (TTT precedent) */
+ const gt=MENU_TABLE[GAMES], gp=MENU_PARAMETER_TABLE[GAMES];
+ let ei=gt.findIndex(r=>r&&r[1]===".end");
+ if(ei<0)ei=gt.length;
+ gt.splice(ei,0,["[twin]","Mail Run"]);
+ gp.splice(ei,0,[176,GAMES,ei,1,1,1,1,1]);
+ MAILRUN_ROW=ei;
+ /* the doors root: three doors + surviving system branches */
+ doorRow(R,0,"DOOR_A",A,0,0); doorRow(R,1,"DOOR_B",B,0,0); doorRow(R,2,"DOOR_C",C,0,0);
+ doorRow(R,3,"Preferences",PREFERENCES,0,0); doorRow(R,4,"User",USER,0,0);
+ doorRow(R,5,"Codes",CODES,0,0);
+ MENU_TABLE[R][6]=["[doors]",".end"];MENU_PARAMETER_TABLE[R][6]=[0,R,0,0,1,1,1,1];
+ DOORS_ROOT=R;
+ menuNum_PTR=R;lineNum_PTR=0;currentState=MENU_SYSTEM_COLD_START;
+ chip("ok","DOORS restructure live (ruling B): root re-homed; legacy tree intact - devLegacyMenu() to compare");
+}
+function devLegacyMenu(){menuNum_PTR=0;lineNum_PTR=0;currentState=MENU_SYSTEM_COLD_START;chip("warn","legacy menu root (pre-doors) - dev view");}
+/* ---- [USER-FACING MODE] one toggle; human-syntax labels when visible ---- */
+const UM_LBLS={};
+function setUserMode(on){
+ document.body.classList.toggle("usermode",on);
+ document.querySelectorAll(".device .lbl").forEach((el,i)=>{
+  if(!(i in UM_LBLS))UM_LBLS[i]=el.innerHTML;
+  if(on){const t=el.textContent;
+   el.textContent=t.indexOf("TOP SCREEN")>=0?"TOP SCREEN":t.indexOf("FRONT SCREEN")>=0?"FRONT SCREEN":t.indexOf("SCREEN SIZE")>=0?"":t;
+   if(t.indexOf("SCREEN SIZE")>=0)el.innerHTML=UM_LBLS[i]; /* size row keeps its buttons; its note span hides via CSS */
+  } else el.innerHTML=UM_LBLS[i];
+ });
+ const b=document.getElementById("umbtn");if(b)b.textContent=on?"WORKSHOP VIEW":"SIMPLE VIEW";
+}
+if(new URLSearchParams(location.search).has("user"))setUserMode(true);
+
+/* ============ [DEV] driver, chrome, registry ============ */
+let osRunning=true, bootRunning=false;
+function osTick(){
+ if(osRunning&&!bootRunning){
+  const iters=Math.max(1,Math.round(2*SPEED));
+  const t=performance.now();
+  for(let i=0;i<iters;i++)MGK_VIIIp_OS();
+  monOsMs=(performance.now()-t)/iters; /* [NO-DEAD-WOOD] real per-iteration cost feeds the CPU graph */
+ }
+}
+setInterval(osTick,50);
+async function devRunBoot(){
+ if(bootRunning)return;
+ bootRunning=true;document.getElementById("bootbtn").disabled=true;
+ chip("warn","running Boot() [dev toggle - unit skips this]");
+ await Boot();
+ /* after boot, firmware setup would continue; restore menu screens as setup does */
+ Activate_the_Screen(TOP_SCREEN,true);Activate_the_Screen(FRONT_SCREEN,true);
+ Draw_the_Menu_Screen();Draw_the_Menu_Line();
+ bootRunning=false;document.getElementById("bootbtn").disabled=false;
+}
+function devReset(){location.reload();}
+/* ---- [TWIN-IMPLEMENTED] PASSCODE ARCHITECTURE (porch doctrine 2026-07-17) ----
+   A code grants DISPLAYABILITY, not access: rows whose READ_ACCESS equals the
+   accepted code become visible. Codes with no current target are ACCEPTED AND
+   PERSISTED with no visible effect - that is legitimate, by ruling ("code
+   accepted" now, the path opens later). RAM-only, as all state is (WS1).
+   Values 0/1/2 are plain visibility flags, never codes. Startup gates (the
+   locked-door-at-launch shape) are the website-side future, not built here. */
+let ACCEPTED_CODES=new Set();
+function Enter_Code(raw){
+ const code=parseInt(String(raw).trim(),10);
+ if(isNaN(code)||code<=2){chip("miss","CODE REJECTED - not a code");return;}
+ const isNew=!ACCEPTED_CODES.has(code);
+ ACCEPTED_CODES.add(code);
+ let unhid=0;
+ for(let t=0;t<MENU_PARAMETER_TABLE.length;t++)
+  for(let r=0;r<MENU_PARAMETER_TABLE[t].length;r++)
+   if(MENU_PARAMETER_TABLE[t][r][READ_ACCESS_PASSCODE]===code){
+    MENU_PARAMETER_TABLE[t][r][READ_ACCESS_PASSCODE]=1;unhid++;
+   }
+ if(unhid)chip("ok","CODE ACCEPTED - "+unhid+" item(s) now displayable");
+ else chip("ok","CODE ACCEPTED"+(isNew?"":" (already held)")+" - no visible effect"+(isNew?" (yet)":""));
+ Draw_the_Menu_Screen();Draw_the_Menu_Line();
+}
+/* [porch doctrine 2026-07-17] boot is MANDATORY every power-on (the dev disable was
+   expedience); firmware change rides the bench batch. The twin offers both restarts. */
+function devRestartBoot(){location.hash="boot";location.reload();}
+function devRestartNoBoot(){if(location.hash)history.replaceState(null,"",location.pathname+location.search);location.reload();}
+/* ---- [DEV, ruling 2] testing shortcuts: the inbox is RAM-only, so deliveries would
+   otherwise need real play (20/40/60 asks). Non-fidelity; the machine does not do this. ---- */
+function devDeliverNext(){
+ const m=MESSAGES_INBOX.find(x=>x.status===MSG_NOT_SENT);
+ if(!m){chip("ok","nothing left to deliver");return;}
+ m.status=MSG_NOT_READ;Messages_Sync_Menu();Mon_StartConnection(1);
+ chip("ok","&#9993; [DEV] delivered: \""+m.subject+"\"");
+ PlaySound(Connected);
+}
+function devDeliverAll(){let k=0;for(const m of MESSAGES_INBOX)if(m.status===MSG_NOT_SENT){m.status=MSG_NOT_READ;k++;}
+ Messages_Sync_Menu();if(k)Mon_StartConnection(k);chip("ok","[DEV] delivered "+k+" message(s)");}
+function devUnreadAll(){for(const m of MESSAGES_INBOX)if(m.status===MSG_READ)m.status=MSG_NOT_READ;
+ Messages_Sync_Menu();chip("ok","[DEV] all marked unread");}
+function devResetInbox(){askCount=0;Messages_Load();chip("ok","[DEV] inbox reset to seed state (as a power-cycle would)");}
+function inboxReadout(){
+ const S=["NOT_SENT","NOT_READ","READ","DELETED"];
+ const T=["TXT","AUDIO","MORSE"];
+ let h="unread: <b>"+Messages_Unread()+"</b> &middot; asks this session: <b>"+askCount+"</b> <span style='color:#8a877f'>(triggers at 20/40/60)</span><br><div style='font-size:11px;margin-top:3px'>";
+ for(const m of MESSAGES_INBOX){
+  const col=(m.status===MSG_NOT_SENT)?"#5a5a56":(m.status===MSG_NOT_READ)?"#9fdcb8":"#b8b5ad";
+  h+="<div style='color:"+col+"'>"+(m.status===MSG_NOT_READ?"&#9679; ":"&nbsp;&nbsp; ")+m.menu+"/"+m.row+" &middot; "+T[m.type]+" &middot; "+m.subject+" <span style='color:#666'>["+S[m.status]+(m.trigger?" &larr; "+m.trigger:"")+"]</span></div>";
+ }
+ return h+"</div>";
+}
+function setFrontMap(v){FRONT_MAP_OVERRIDE=v;frontOLED.display();}
+document.getElementById("speed").addEventListener("input",e=>{
+ SPEED=parseFloat(e.target.value);document.getElementById("speedval").textContent=SPEED+"×";});
+
+const UPID_NAMES={};
+[["HW_RESCAN",0],["MGK_VIIIP",1],["MESSAGES",2],["PROGRAMS",3],["PREFERENCES",4],["ANSWERS",5],["PREDICTIONS",6],["PROBABILITIES",7],["ADVICE",8],["DETECTORS",9],["VOICE_MSGS",10],["TEXT_MSGS",11],["SYSTEM_MSGS",12],["GAMES",13],["CODES",14],["USER",15],["POLARITY",16],["POLARITY_SETTING",17],["CLARITY",18],["CLARITY_SETTING",19],["MGKMODEL",20],["VOICE",21],["MENU_SYSTEM",22],["SYSTEM_MONITOR",23],["BUBBLES",25]].forEach(p=>UPID_NAMES[p[1]]=p[0]);
+const POL_NAMES=["Negative","Pessimistic","Neutral","Favorable","Optimistic","(5=out of enum! Affirmative bug)"];
+const CLA_NAMES=["Uncouth","Offensive","Discourteous","Impartial","Mannerly"];
+function selectionReadout(){
+ /* mirrors Polarity_Engine_Response / Clarity_Engine_Response weight math exactly [BIAS.ino:29-84] */
+ const eng=(Get_Ptr_for_uniqueProcessID(ANSWERS)!==-1)?lineNum_PTR:2;
+ const E=(eng>=0&&eng<=2)?eng:2;
+ const TAG=["Negative","Pessimistic","AskAgain","Optimistic","Affirmative"];
+ let reach=0,tot=0;const per={};
+ for(let i=0;i<ANSWERS_PER_TABLE;i++){
+  const tag=M8B_Answers_ParametersTable[E][i][2];
+  const w=constrain(100-(polarityBiasNOW*abs(tag-polaritySettingNOW)),0,100);
+  if(w>0){reach++;tot+=w;per[i]=w;}
+ }
+ let creach=0;for(let i=0;i<claritySetting_MAX;i++){if(constrain(100-clarityBiasNOW*abs(i-claritySettingNOW),0,100)>0)creach++;}
+ const cls=reach<=4?"#f0a0a0":(reach<20?"#ecd191":"#9fdcb8");
+ let h="engine <b>"+E+"</b> &middot; polarity setting <b>"+(POL_NAMES[polaritySettingNOW]||polaritySettingNOW)+"</b> &middot; bias <b>"+polarityBiasNOW+"</b><br>"
+  +"<span style='color:"+cls+"'>reachable answers: <b>"+reach+" / 20</b></span> &middot; clarity registers reachable: <b>"+creach+" / 5</b><br>"
+  +"<span style='font-size:11px;color:#8a877f'>weight = constrain(100 &minus; bias &times; |tag &minus; setting|, 0, 100). At bias 100 every non-exact tag scores 0.</span><br>";
+ h+="<div style='font-size:11px;margin-top:4px'>";
+ for(let i=0;i<ANSWERS_PER_TABLE;i++){
+  const tag=M8B_Answers_ParametersTable[E][i][2];
+  const w=per[i]||0;
+  h+="<span title='"+TAG[tag]+"' style='display:inline-block;width:34px;color:"+(w>0?"#9fdcb8":"#5a5a56")+"'>a"+i+":"+w+"</span>";
+ }
+ h+="</div>";
+ document.getElementById("selview").innerHTML=h;
+}
+function refreshChrome(){
+ selectionReadout();
+ document.getElementById("inboxview").innerHTML=inboxReadout();
+ const st=document.getElementById("stview");
+ st.innerHTML="menu <b>"+menuNum_PTR+"</b> ("+( (MENU_TABLE[menuNum_PTR][0][menuName])||"zero-init table" )+") row <b>"+lineNum_PTR+"</b> &mdash; line: <b>"+(get_as_char(lineName)||"&empty;")+"</b><br>"
+  +"menu FSM state: <b>"+["COLD_START","CHECK_FOR_INPUT","DETERMINE_IF_EXE","RUN_EXE","SCROLL","CLICK","UPDATE_LEVEL"][currentState]+"</b> &nbsp; Active_Process_Name: <b>"+Active_Process_Name+"</b><br>"
+  +"polarity: <b>"+(POL_NAMES[polaritySettingNOW]||polaritySettingNOW)+"</b> ("+polaritySettingNOW+") &nbsp; clarity: <b>"+(CLA_NAMES[claritySettingNOW]||claritySettingNOW)+"</b> ("+claritySettingNOW+")<br>"
+  +"polarityBias: <b>"+polarityBiasNOW+"</b> &nbsp; clarityBias: <b>"+clarityBiasNOW+"</b> &nbsp; voice: <b>"+currentVoiceID+"</b> (CEO, TESTING default) &nbsp; millis: "+millis();
+ let h="<tr><th>slot</th><th>process</th><th>state</th><th>pri</th></tr>";
+ for(let i=0;i<PROCESS_POINTER_MAX;i++){const r=Process_Registry[i];
+  if(r[0]==NO_UPID&&r[1]==NO_STATE)continue;
+  h+="<tr><td>"+i+"</td><td>"+(UPID_NAMES[r[0]]||r[0])+"</td><td>"+(r[1]==RUN?"RUN":r[1]==STOP?"STOP":"-")+"</td><td>"+r[2]+"</td></tr>";}
+ document.getElementById("procview").innerHTML=h;
+}
+setInterval(refreshChrome,200);
+
+/* item registry: one entry per menuSelectionID, status + delta trace */
+const WIRED=new Set([ANSWERS,POLARITY,CLARITY,POLARITY_SETTING,CLARITY_SETTING]);
+const ITEM_REGISTRY=[];
+for(let t=0;t<MENU_PARAMETER_TABLE_SRC.length;t++){
+ for(let r=0;r<MENU_PARAMETER_TABLE_SRC[t].length;r++){
+  const p=MENU_PARAMETER_TABLE_SRC[t][r];
+  const nm=(MENU_TABLE_SRC[t]&&MENU_TABLE_SRC[t][r])?MENU_TABLE_SRC[t][r][1]:"(zero-init)";
+  let status;
+  if(p[3]==1){status=WIRED.has(p[1])?"firmware-exact-handler":"scaffold-no-handler";}
+  else status="firmware-exact-nav";
+  ITEM_REGISTRY.push({id:p[0],table:t,row:r,name:nm,read:p[4],run:p[5],exe:p[3],status:status,touched:0,delta:null});
+ }
+}
+function registryTouch(id){const e=ITEM_REGISTRY.find(x=>x.id==id);if(e)e.touched++;}
+function regSummary(){
+ const c={};ITEM_REGISTRY.forEach(e=>c[e.status]=(c[e.status]||0)+1);
+ document.getElementById("regsummary").innerHTML=
+  Object.entries(c).map(([k,v])=>v+" "+k).join(" &middot; ")+" &middot; "+ITEM_REGISTRY.length+" total";
+}
+regSummary();
+function devExportReg(){
+ document.getElementById("regout").value=JSON.stringify({
+  twin:"MGK-VIIIp digital twin",slice:1,generated:"2026-07-15",
+  firmware_head:"MGK_VIIIp_01__20240721_WORKS",
+  deltas:ITEM_REGISTRY.filter(e=>e.delta),registry:ITEM_REGISTRY},null,1);
+}
+
+setup();
+setZoom(SCREEN_ZOOM); /* [DEV] apply the ¾ default + mark the active size button */
+if(location.hash==="#boot")devRunBoot(); /* Restart (boot) path */
+refreshChrome();
+</script></body></html>
