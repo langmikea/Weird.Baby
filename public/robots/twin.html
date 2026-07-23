@@ -62,6 +62,44 @@ body.usermode .device>span:not(.px){display:none}
 body.usermode .lbl span{display:none}
 body.usermode .btns button[onclick="devRunBoot()"]{display:none}
 body.usermode .devonly{display:none}
+/* [TWIN-AS-ARTIFACT 2026-07-23] the machine as OBJECT: photo chrome, phosphor
+   glass, period crosshair. Photos are HARDWARE REFERENCE ONLY (canon) — the
+   screens in them are outdated; the live canvases replace them. Degrades to the
+   classic bench when reference/photos/ is absent (e.g. the museum-served copy
+   until the photos ship there). */
+#unitstage{display:none;position:relative;margin:10px auto;max-width:min(96vw,880px);
+ background:#0b0b0a;padding:16px;border-radius:6px;gap:14px;
+ cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='25' height='25'><g stroke='%23dfe8ff' stroke-width='1.6'><line x1='12.5' y1='0' x2='12.5' y2='9'/><line x1='12.5' y1='16' x2='12.5' y2='25'/><line x1='0' y1='12.5' x2='9' y2='12.5'/><line x1='16' y1='12.5' x2='25' y2='12.5'/></g><circle cx='12.5' cy='12.5' r='2.1' fill='none' stroke='%23dfe8ff' stroke-width='1.1'/></svg>") 12 12, crosshair;}
+body.unitview #unitstage{display:flex}
+body.unitview .device .scr{display:none}
+body.unitview .device>.lbl{display:none!important}
+body.unitview{background:#0a0a09}
+/* CENTERED-CROP COMPOSITE (ruled: optically centered beats photogrammetry;
+   photos serve the presentation — cropped/zoomed via CSS vars for Mike's nudges) */
+.unitwrap{position:relative;flex:1 1 0;min-width:0;aspect-ratio:1/1;overflow:hidden;border-radius:4px;background:#000}
+.unitwrap img{position:absolute;display:block;border-radius:0}
+#imgFront{width:var(--fzoom,140%);left:calc(50% + var(--fdx,-1.5%));top:calc(50% + var(--fdy,8.2%));transform:translate(-50%,-50%)}
+#imgTop{width:var(--tzoom,150%);left:calc(50% + var(--tdx,3.7%));top:calc(50% - var(--tdy,10.1%));transform:translate(-50%,-50%)}
+/* FULL PERIOD B&W (RULED): default = archival footage read — chrome AND screens
+   grayscale; the screens keep glow/contrast. Dev compare = colorchrome. */
+.unitwrap img{filter:grayscale(1) contrast(1.18) brightness(.97)}
+.unitwrap canvas{image-rendering:pixelated;
+ filter:grayscale(1) contrast(1.3) brightness(1.12)
+  drop-shadow(0 0 3px rgba(255,255,255,.5)) drop-shadow(0 0 1px rgba(255,255,255,.75));}
+body.colorchrome .unitwrap img{filter:none}
+body.colorchrome .unitwrap canvas{filter:sepia(1) hue-rotate(192deg) saturate(2.2) brightness(1.12)
+  drop-shadow(0 0 3px rgba(120,170,255,.55)) drop-shadow(0 0 1px rgba(190,215,255,.8))}
+.glassmask{position:absolute;display:none;background:#000;overflow:hidden;
+ align-items:center;justify-content:center;transform:translate(-50%,-50%)}
+body.unitview .glassmask{display:flex}
+#maskFront{left:50%;top:50%;width:38%;aspect-ratio:1/1;clip-path:circle(50% at 50% 50%)}
+#maskTop{left:50%;top:50%;width:42%;aspect-ratio:2/1;border-radius:3px}
+.glassmask canvas{width:104%!important;height:auto!important;position:static!important;clip-path:none!important}
+@media (max-width:700px){#unitstage{flex-direction:column}}
+
+#unitstage.gl-jit{transform:translateY(1px) skewX(.25deg);opacity:.93}
+@media (max-width:700px){#unitstage{max-width:96vw;padding:10px}}
+
 </style>
 <div class="cols">
  <div class="device">
@@ -71,6 +109,16 @@ body.usermode .devonly{display:none}
    <button class="zoombtn" id="z3" onclick="setZoom(3)">&#190;</button>
    <button class="zoombtn" id="z4" onclick="setZoom(4)">full</button>
    <span style="color:#5a5a56">(display-only integer scaling; &frac34; is the default per porch ruling 2026-07-17)</span></div>
+  <div id="unitstage">
+   <div class="unitwrap" id="unitfront">
+    <img id="imgFront" alt="MGK-VIIIp front">
+    <div class="glassmask" id="maskFront"></div>
+   </div>
+   <div class="unitwrap" id="unittop">
+    <img id="imgTop" alt="MGK-VIIIp top monitor">
+    <div class="glassmask" id="maskTop"></div>
+   </div>
+  </div>
   <div class="lbl">TOP SCREEN (machine top &mdash; the glass) &mdash; 128&times;64, all rows driven [main:128; SSD1306.cpp:607-608]</div>
   <div class="scr"><canvas id="cvTop" width="384" height="192"></canvas></div>
   <div class="lbl">FRONT SCREEN (machine front &mdash; menu) &mdash; 128&times;64, 32 driver rows interlaced onto even lines [main:127; SSD1306.cpp:604-605]</div>
@@ -85,6 +133,8 @@ body.usermode .devonly{display:none}
    <button id="umbtn" onclick="setUserMode(!document.body.classList.contains('usermode'))" title="show or hide the workshop panels">SIMPLE VIEW</button>
    <button class="devonly" onclick="devResetBootLevel()" title="reset the install state to virgin (level 1 boot on next restart)">Reset install [dev]</button>
    <button class="devonly" onclick="devGlitchToggle()" title="toggle the fleet-wide glitch layer">Glitch on/off [dev]</button>
+   <button class="devonly" onclick="devUnitToggle()" title="present the machine as a photographic object vs the bench screens">Unit view [dev]</button>
+   <button class="devonly" onclick="devFeedBWToggle()" title="compare against color chrome — period B&W is the ruled default">Color compare [dev]</button>
   </div>
   <p class="keyhint"><kbd>&darr;</kbd>/SCROLL = rotary &nbsp; <kbd>Enter</kbd>/CLICK/tap front = shutter &nbsp; <kbd>Space</kbd>/SHAKE = shake &nbsp; <kbd>W A S D</kbd> (hold) = tilt for bubbles &nbsp; mic: unused by firmware</p>
  </div>
@@ -1686,7 +1736,44 @@ function SG_step(){
    if(Math.abs(s.vy)<0.3){s.vy=0;s.vx*=0.5;}else{s.vy*=-0.12;}}
   if(s.r>0)OLED.drawCircle(s.x,s.y,1,WHITE); else OLED.drawPixel(Math.trunc(s.x),Math.trunc(s.y),WHITE);
  }
+ SG_drawSnowman();
+ SG_music();
  OLED.display();
+}
+function SG_drawSnowman(){ /* [2026-07-23] existing display vocabulary: circles, lines, pixels — period-flat */
+ const x=26,base=58;
+ OLED.drawCircle(x,base,8,WHITE);        /* body */
+ OLED.drawCircle(x,base-11,5,WHITE);     /* torso */
+ OLED.drawCircle(x,base-19,3,WHITE);     /* head */
+ OLED.drawPixel(x-1,base-20,WHITE);OLED.drawPixel(x+1,base-20,WHITE); /* eyes */
+ OLED.drawLine(x-5,base-13,x-12,base-17,WHITE); /* arms */
+ OLED.drawLine(x+5,base-13,x+12,base-17,WHITE);
+}
+/* [SNOW GLOBE MUSIC 2026-07-23] Jingle Bells — James Lord Pierpont, 1857,
+   PUBLIC DOMAIN melody only; chiptune-flat square wave via a WebAudio SHIM.
+   TWIN-ONLY: the firmware has NO tone generator (the Morse ruling precedent) —
+   the honest bench path is a generated PD file on the SD card. FLAGGED. */
+let sgAC=null,sgNoteAt=0,sgIdx=0;
+const SG_TUNE=[ /* [freqHz,beats] — the 1857 chorus, key of C */
+ [329.63,1],[329.63,1],[329.63,2],[329.63,1],[329.63,1],[329.63,2],
+ [329.63,1],[392.00,1],[261.63,1.5],[293.66,.5],[329.63,4],
+ [349.23,1],[349.23,1],[349.23,1.5],[349.23,.5],[349.23,1],[329.63,1],[329.63,1],[329.63,.5],[329.63,.5],
+ [329.63,1],[293.66,1],[293.66,1],[329.63,1],[293.66,2],[392.00,2]];
+function SG_music(){
+ if(currentGameID!==GAME_SNOWGLOBE||gameState_FSM!==GAME_RUN){sgIdx=0;return;}
+ try{
+  if(!sgAC)sgAC=new (window.AudioContext||window.webkitAudioContext)();
+  const now=performance.now();
+  if(now<sgNoteAt)return;
+  const [f,b]=SG_TUNE[sgIdx%SG_TUNE.length];sgIdx++;
+  const dur=b*280;
+  sgNoteAt=now+dur+40;
+  const o=sgAC.createOscillator(),g=sgAC.createGain();
+  o.type="square";o.frequency.value=f;
+  g.gain.value=0.025;g.gain.setTargetAtTime(0,sgAC.currentTime+dur/1000*0.8,0.03);
+  o.connect(g);g.connect(sgAC.destination);
+  o.start();o.stop(sgAC.currentTime+dur/1000);
+ }catch(e){/* audio unavailable: silent globe, no failure */}
 }
 
 /* ---------- AVOIDSTEROIDS (row 2) - revived from 9_GAME_Space.ino ----------
@@ -2603,6 +2690,8 @@ function setup(){
  Scaffold_Load();
  Messages_Trigger("first_boot");
  Doors_Restructure(); /* four doors — porch 2026-07-23 */
+ Unit_LoadPhotos();   /* [PHOTO PATH FIX] candidate-chain: museum layout, then repo layout */
+ Unit_View(true);     /* [EYEBALL RULING] unit view = DEFAULT everywhere; degrades if photos missing */
  Boot3();             /* boot is MANDATORY (porch doctrine); three-level per canon */
 }
 /* ============ [TWIN-BUILT 2026-07-22 night] DOORS RESTRUCTURE (ruling B) ============
@@ -2824,8 +2913,55 @@ function Glitch_Tick(){
    ctx.putImageData(img,6,y);
    setTimeout(()=>{try{scr.display();}catch(e){}},90);
   }catch(e){}
- } else {PlaySound(Scroll);}
+ } else {PlaySound(Scroll);} /* audio pop/hiccup */
+ if(unitViewOn&&Math.random()<0.5){const st=document.getElementById("unitstage");
+  if(st){st.classList.add("gl-jit");setTimeout(()=>st.classList.remove("gl-jit"),90);}}
 }
+/* ---- [TWIN-AS-ARTIFACT] unit-chrome composite ---- */
+let unitPhotosOK=true, unitViewOn=false;
+/* [PHOTO PATH FIX 2026-07-23] ROOT CAUSE of the museum bench-fallback: the
+   static src "../reference/photos/" resolves correctly from the repo's tools/
+   but, served at /robots/twin.html, climbs OUT of /robots/ to a path that does
+   not exist. Candidate-chain loader: try the same-dir sibling first (museum
+   layout /robots/reference/photos/), then the repo layout (../reference/
+   photos/). ONE copy ritual works both places. */
+function Unit_LoadPhotos(){
+ const CAND=["reference/photos/","../reference/photos/"];
+ let ci=0;
+ const f=document.getElementById("imgFront"),t=document.getElementById("imgTop");
+ function tryNext(){
+  if(ci>=CAND.length){Unit_PhotosMissing();return;}
+  const base=CAND[ci++];
+  let pending=2,failed=false;
+  const done=()=>{if(--pending===0){if(failed)tryNext();else chip("ok","unit chrome photos found at "+base);}};
+  f.onerror=()=>{failed=true;done();};f.onload=done;
+  t.onerror=()=>{failed=true;done();};t.onload=done;
+  f.src=base+"front_full.png";t.src=base+"top_monitor.png";
+ }
+ tryNext();
+}
+const UNIT_HOME={};
+function Unit_PhotosMissing(){
+ unitPhotosOK=false;
+ if(unitViewOn)Unit_View(false);
+ chip("warn","unit chrome: reference photos not found at ../reference/photos/ — bench view. SWAP LINE: copy front_full.png + top_monitor.png beside the twin and point the two <img src> at them.");
+}
+function Unit_View(on){
+ if(on&&!unitPhotosOK)return;
+ unitViewOn=on;
+ document.body.classList.toggle("unitview",on);
+ const cvF=document.getElementById("cvFront"),cvT=document.getElementById("cvTop");
+ if(!UNIT_HOME.front){UNIT_HOME.front=cvF.parentElement;UNIT_HOME.top=cvT.parentElement;}
+ if(on){
+  document.getElementById("maskFront").appendChild(cvF);
+  document.getElementById("maskTop").appendChild(cvT);
+ } else {
+  cvF.removeAttribute("style");cvT.removeAttribute("style");
+  UNIT_HOME.front.appendChild(cvF);UNIT_HOME.top.appendChild(cvT);
+ }
+}
+function devUnitToggle(){Unit_View(!unitViewOn);chip("ok","[DEV] "+(unitViewOn?"UNIT view (the machine as object)":"BENCH view"));}
+function devFeedBWToggle(){document.body.classList.toggle("colorchrome");chip("ok","[DEV] COLOR compare "+(document.body.classList.contains("colorchrome")?"ON (color)":"OFF (period B&W — the ruled default)"));}
 /* ---- [USER-FACING MODE] one toggle; human-syntax labels when visible ---- */
 const UM_LBLS={};
 function setUserMode(on){
@@ -2838,6 +2974,8 @@ function setUserMode(on){
   } else el.innerHTML=UM_LBLS[i];
  });
  const b=document.getElementById("umbtn");if(b)b.textContent=on?"WORKSHOP VIEW":"SIMPLE VIEW";
+ /* [EYEBALL RULING 2026-07-23] unit view is the twin's FACE in BOTH modes;
+    bench reachable via devUnitToggle. */
 }
 if(new URLSearchParams(location.search).has("user"))setUserMode(true);
 
