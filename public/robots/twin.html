@@ -18,38 +18,51 @@
      STANDING CONSTRAINT (Mike): twin will someday live on the museum website - single-file, no-network stays law. -->
 <html><head><meta charset="utf-8"><title>MGK-VIIIp digital twin - slices 1+2</title>
 <style>
- body{font-family:system-ui,sans-serif;background:#1d1f24;color:#e8e6e3;margin:0;padding:18px}
- h1{font-size:17px;font-weight:600;margin:0 0 2px}
- .sub{color:#9a978f;font-size:12px;margin:0 0 14px}
+ /* [REVIEW ITEM 1, 2026-07-24] page chrome = W.B museum print grammar (paper
+    stock / photo-black ink / courier micro-labels / hairlines), per the landing
+    page. SYSTEM FONT STACKS ONLY (single-file-no-network law forbids the
+    landing page's font @import). THE FEED STAYS THE FEED: canvases, the .scr
+    bezels, and #unitstage keep their own dark treatment. */
+ body{font-family:Georgia,'Times New Roman',serif;background:#d9d5ca;color:#211f1c;margin:0;padding:18px}
+ h1{font-size:17px;font-weight:600;margin:0 0 2px;letter-spacing:.02em}
+ .sub{color:#57544d;font-size:12px;margin:0 0 14px}
  .cols{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start}
- .device{background:#26282e;border-radius:12px;padding:16px;min-width:430px}
+ .device{background:#ece9e0;border:1px solid #c6c2b7;border-radius:2px;padding:16px;min-width:430px}
  .scr{background:#0c0d10;border:8px solid #383b42;border-radius:8px;padding:10px;display:inline-block;line-height:0;margin:4px 0}
- .lbl{font-size:11px;color:#8a877f;margin:8px 0 2px;letter-spacing:.06em}
+ .lbl{font-family:'Courier New',monospace;font-size:10px;color:#837f75;margin:8px 0 2px;letter-spacing:.18em;text-transform:uppercase}
  canvas{image-rendering:pixelated;background:#000;display:block}
  .btns{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
  /* [Mike ruling 2026-07-17] machine-input controls: larger, slightly more visual */
- .btns button.ctl{font-size:15px;padding:11px 18px;background:#3a4150;border-color:#5c6579;display:inline-flex;align-items:center;gap:8px;font-weight:600;letter-spacing:.03em}
- .btns button.ctl:hover{background:#454d5f}
- .btns .ico{font-size:18px;line-height:1;color:#9fb6dc}
- .zoombtn{font-size:11px;padding:2px 10px;border-radius:10px}
- .zoombtn.zactive{background:#4a5468;border-color:#7a86a0;color:#fff}
- button{background:#33363d;color:#e8e6e3;border:1px solid #4a4d55;border-radius:6px;padding:6px 12px;font-size:13px;cursor:pointer}
- button:hover{background:#3d4048}
- .px{width:14px;height:14px;border-radius:50%;display:inline-block;margin-right:6px;border:1px solid #000;vertical-align:middle}
+ .btns button.ctl{font-size:13px;padding:11px 18px;background:#211f1c;color:#f5f3ec;border-color:#211f1c;display:inline-flex;align-items:center;gap:8px;font-weight:600;letter-spacing:.14em}
+ .btns button.ctl:hover{background:#3b3831}
+ .btns .ico{font-size:17px;line-height:1;color:#d9d5ca}
+ .zoombtn{font-size:10px;padding:2px 10px;border-radius:1px}
+ .zoombtn.zactive{background:#211f1c;border-color:#211f1c;color:#f5f3ec}
+ button{background:#faf8f3;color:#211f1c;border:1px solid #c6c2b7;border-radius:1px;padding:6px 12px;font-size:11px;cursor:pointer;font-family:'Courier New',monospace;letter-spacing:.1em;text-transform:uppercase}
+ button:hover{background:#211f1c;color:#f5f3ec}
+ .px{width:14px;height:14px;border-radius:50%;display:inline-block;margin-right:6px;border:1px solid #57544d;vertical-align:middle}
  .dev{flex:1;min-width:380px;max-width:560px}
- .panel{background:#26282e;border-radius:10px;padding:10px 14px;margin-bottom:12px}
- .panel h2{font-size:12px;font-weight:600;color:#b8b5ad;margin:0 0 8px;letter-spacing:.08em}
+ .panel{background:#ece9e0;border:1px solid #c6c2b7;border-radius:2px;padding:10px 14px;margin-bottom:12px}
+ .panel h2{font-family:'Courier New',monospace;font-size:10px;font-weight:600;color:#57544d;margin:0 0 8px;letter-spacing:.24em;text-transform:uppercase}
  table{font-size:12px;border-collapse:collapse;width:100%}
- td,th{padding:2px 8px;text-align:left;color:#c9c6be}th{color:#8a877f;font-weight:500}
- #serial{font-family:monospace;font-size:11px;background:#141519;border-radius:6px;padding:8px;height:90px;overflow-y:auto;color:#9fdcb8;white-space:pre-wrap}
- .chip{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 4px 2px 0}
- .chip.miss{background:#5b1f1f;color:#f0a0a0}.chip.ok{background:#1f4030;color:#9fdcb8}.chip.warn{background:#4d3d14;color:#ecd191}
- .bug{font-size:12px;color:#ecd191;margin:3px 0;padding-left:14px;text-indent:-14px}
- .kv{font-size:12px;color:#c9c6be}.kv b{color:#e8e6e3;font-weight:600}
+ td,th{padding:2px 8px;text-align:left;color:#3b3831}th{color:#837f75;font-weight:500;font-family:'Courier New',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+ #serial{font-family:'Courier New',monospace;font-size:11px;background:#faf8f3;border:1px solid #c6c2b7;border-radius:1px;padding:8px;height:90px;overflow-y:auto;color:#2b2924;white-space:pre-wrap}
+ .chip{display:inline-block;font-family:'Courier New',monospace;font-size:10px;letter-spacing:.06em;padding:2px 8px;border-radius:1px;margin:2px 4px 2px 0;border:1px solid #c6c2b7}
+ .chip.miss{background:#f0e2e0;color:#7a2a20;border-color:#c9a49c}.chip.ok{background:#e6ebe2;color:#31502e;border-color:#a8b8a2}.chip.warn{background:#efe8d4;color:#6b5a1c;border-color:#c9bd94}
+ .bug{font-size:12px;color:#6b5a1c;margin:3px 0;padding-left:14px;text-indent:-14px}
+ .kv{font-size:12px;color:#3b3831}.kv b{color:#211f1c;font-weight:600}
  input[type=range]{vertical-align:middle}
- textarea{width:100%;height:80px;background:#141519;color:#c9c6be;border:1px solid #4a4d55;border-radius:6px;font-family:monospace;font-size:11px;box-sizing:border-box}
- .keyhint{font-size:11px;color:#8a877f;line-height:1.6}
- kbd{background:#33363d;border:1px solid #4a4d55;border-radius:4px;padding:0 5px;font-size:11px}
+ textarea{width:100%;height:80px;background:#faf8f3;color:#2b2924;border:1px solid #c6c2b7;border-radius:1px;font-family:'Courier New',monospace;font-size:11px;box-sizing:border-box}
+ .keyhint{font-family:'Courier New',monospace;font-size:10px;color:#837f75;line-height:1.8;letter-spacing:.04em}
+ kbd{background:#faf8f3;border:1px solid #c6c2b7;border-radius:1px;padding:0 5px;font-size:10px;font-family:'Courier New',monospace}
+ /* [CLICK-FEEDBACK LAW 2026-07-24] every click flashes the shutter-LED tell:
+    a brief red accent low on the front composite (the behind-shutter LED) and
+    a ring on the CLICK control. Subtle; position tunable (Mike's nudge). */
+ .unitwrap{--clickglow:radial-gradient(circle at 50% 86%, rgba(255,58,28,.34) 0%, transparent 30%)}
+ #unitfront.clickflash::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:5;
+  background:var(--clickglow);animation:shutterflash .18s ease-out forwards}
+ @keyframes shutterflash{0%{opacity:1}100%{opacity:0}}
+ .btns button.clickflash{box-shadow:0 0 0 2px rgba(190,45,20,.55)}
 </style></head><body>
 <h1>MGK-VIIIp digital twin <span style="color:#8a877f;font-weight:400">&mdash; slices 1+2: boot + menu + answers</span></h1>
 <p class="sub">Transliterated firmware (20240721_WORKS), hardware shimmed, bugs preserved and badged. Answers loop live: pick a persona, ask, SHAKE. The twin is the dev environment; the unit is the print run.</p>
@@ -73,7 +86,7 @@ body.usermode .devonly{display:none}
 body.unitview #unitstage{display:flex}
 body.unitview .device .scr{display:none}
 body.unitview .device>.lbl{display:none!important}
-body.unitview{background:#0a0a09}
+body.unitview{background:#d9d5ca} /* [ITEM 1] chrome stays paper; the stage inside #unitstage stays museum-ink */
 /* CENTERED-CROP COMPOSITE (ruled: optically centered beats photogrammetry;
    photos serve the presentation — cropped/zoomed via CSS vars for Mike's nudges) */
 .unitwrap{position:relative;flex:1 1 0;min-width:0;aspect-ratio:1/1;overflow:hidden;border-radius:4px;background:#000}
@@ -217,7 +230,16 @@ Screen.prototype.drawPixel=function(x,y,c){
  if(x<0||x>=this.w||y<0||y>=this.h)return;
  this.fb[y*this.w+x]=c;
 };
-Screen.prototype.clearDisplay=function(){this.fb.fill(0);};
+Screen.prototype.clearDisplay=function(){
+ /* [THEATER LAW 2026-07-24, fleet-wide] a clear drops color/gamma first:
+    the outgoing frame persists as a dim phosphor ghost for one beat, then
+    fades. One hook here = everywhere clears happen. */
+ if(THEATER_ON){let lit=false;for(let i=0;i<this.fb.length;i++){if(this.fb[i]){lit=true;break;}}
+  if(lit){this.ghost=this.fb.slice();this.ghostAt=performance.now();}}
+ this.fb.fill(0);
+};
+let THEATER_ON=true; const THEATER_DECAY_MS=230, THEATER_MAX_ALPHA=0.34;
+function devTheaterToggle(){THEATER_ON=!THEATER_ON;return THEATER_ON;} /* console-only */
 Screen.prototype.fillRect=function(x,y,w,h,c){for(let j=0;j<h;j++)for(let i=0;i<w;i++)this.drawPixel(x+i,y+j,c);};
 Screen.prototype.drawRect=function(x,y,w,h,c){for(let i=0;i<w;i++){this.drawPixel(x+i,y,c);this.drawPixel(x+i,y+h-1,c);}for(let j=0;j<h;j++){this.drawPixel(x,y+j,c);this.drawPixel(x+w-1,y+j,c);}};
 Screen.prototype.drawFastHLine=function(x,y,w,c){for(let i=0;i<w;i++)this.drawPixel(x+i,y,c);};
@@ -326,6 +348,27 @@ Screen.prototype.display=function(){
    if(v)ctx.fillRect(x*z,gy*z,z,rowH);
   }
  }
+ /* [THEATER LAW] the decaying ghost of the cleared frame - dimmed, under-lit */
+ if(this.ghost){
+  const age=performance.now()-this.ghostAt;
+  if(age>THEATER_DECAY_MS){this.ghost=null;}
+  else{
+   ctx.fillStyle="rgba(230,242,255,"+(THEATER_MAX_ALPHA*(1-age/THEATER_DECAY_MS)).toFixed(3)+")";
+   for(let gy=0;gy<this.glassH;gy++){
+    let dy,rowH=z-1;
+    if(this.h==this.glassH){dy=gy;}
+    else if(FRONT_MAP_OVERRIDE=="tophalf"){dy=(gy<this.h)?gy:-1;}
+    else {dy=(gy%2==0)?gy/2:-1;rowH=2*z-1;}
+    if(dy<0)continue;
+    for(let x=0;x<this.w;x++){
+     let sx=x,sy=dy;if(this.flip){sx=this.w-1-x;sy=this.h-1-dy;}
+     if(this.ghost[sy*this.w+sx]&&!this.fb[sy*this.w+sx])ctx.fillRect(x*z,gy*z,z,rowH);
+    }
+   }
+   if(!this._ghostTick){this._ghostTick=true;
+    requestAnimationFrame(()=>{this._ghostTick=false;if(this.ghost)this.display();});}
+  }
+ }
 };
 
 /* ============ [SHIM] clock, PRNG, Serial, DFPlayer, NeoPixels, inputs ============ */
@@ -408,7 +451,18 @@ function devShake(){shakeUntil=performance.now()+700;}
 /* input edge queues: hardware loses edges while buffer FULL; twin drops beyond 1 queued (closest match, flagged) */
 let rotaryPending=0, shutterPending=0;
 function devRotary(){if(rotaryPending<1)rotaryPending++;}
-function devShutter(){if(shutterPending<1)shutterPending++;}
+function devShutter(){if(shutterPending<1)shutterPending++;Click_Flash();}
+function Click_Flash(){ /* [CLICK-FEEDBACK LAW 2026-07-24] the unit's own tell */
+ try{
+  const f=document.getElementById('unitfront');
+  if(f&&document.body.classList.contains('unitview')){
+   f.classList.remove('clickflash');void f.offsetWidth;f.classList.add('clickflash');
+   setTimeout(()=>f.classList.remove('clickflash'),200);
+  }
+  const b=document.querySelector('.btns button.ctl[onclick="devShutter()"]');
+  if(b){b.classList.add('clickflash');setTimeout(()=>b.classList.remove('clickflash'),170);}
+ }catch(e){}
+}
 window.addEventListener("keydown",e=>{
  if(e.key=="ArrowDown"){devRotary();e.preventDefault();}
  else if(e.key=="Enter"){devShutter();e.preventDefault();}
@@ -658,8 +712,8 @@ function Run_EXE(){                                                          /* 
    Pause_Process(MENU_SYSTEM); Start_Process(PROBABILITIES,NORMAL_PRIORITY); break;
   case DETECTORS:       /* [TWIN DELTA] */
    Pause_Process(MENU_SYSTEM); Start_Process(DETECTORS,NORMAL_PRIORITY); break;
-  case ADVICE:          /* [TWIN DELTA] rows 1 + 3 are live (generative); the rest scaffold */
-   if(lineNum_PTR==1||lineNum_PTR==3){Pause_Process(MENU_SYSTEM); Start_Process(ADVICE,NORMAL_PRIORITY);}
+  case ADVICE:          /* [TWIN DELTA] rows 1/2/3 live (career suite, review rebuild 2026-07-24); the rest scaffold */
+   if(lineNum_PTR>=1&&lineNum_PTR<=3){Pause_Process(MENU_SYSTEM); Start_Process(ADVICE,NORMAL_PRIORITY);}
    else {scafUpid="ADVICE"; Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY);}
    break;
   case APPP:            /* [APP-PATTERN ENGINE] excuses / lines */
@@ -672,6 +726,8 @@ function Run_EXE(){                                                          /* 
    Pause_Process(MENU_SYSTEM); Start_Process(BRAINP,NORMAL_PRIORITY); break;
   case INKP:            /* [PSYCH −02] */
    Pause_Process(MENU_SYSTEM); Start_Process(INKP,NORMAL_PRIORITY); break;
+  case TAPP:            /* [PHONE TAP −07] */
+   Pause_Process(MENU_SYSTEM); Start_Process(TAPP,NORMAL_PRIORITY); break;
   case VOICE:           /* [TWIN DELTA] one line, and 11 rows become real */
    currentVoiceID=lineNum_PTR;
    chip("ok","voice set to slot "+currentVoiceID+" (firmware hardcodes 8; per-engine voices override - spec s3)");
@@ -836,9 +892,12 @@ function Mon_Status_Window(){
  /* [LAYOUT FIX, Mike dinner-2] two-line approach chosen (cleaner: no title on the
     border): line 1 = PROCESS + process-specific datum; line 2 = events. Rows sit
     inside the outline (box y44..63; TomThumb rows at 48/57). */
+ /* [REVIEW ITEM 5, 2026-07-24] the two lines center vertically in the box:
+    interior y45..62 (18px), two 5px TomThumb lines + 4px gap = 14px -> tops at
+    47/56 -> baselines w.y+8 / w.y+17 (TomThumb prints from baseline-5). */
  const w=windows[PROCESS_WINDOW];
- screenPrintLn(w.y+4,3,Mon_ProcessLine(),0);
- screenPrintLn(w.y+13,3,String(Mon_EventsLine()).slice(0,41),0);
+ screenPrintLn(w.y+8,3,Mon_ProcessLine(),0);
+ screenPrintLn(w.y+17,3,String(Mon_EventsLine()).slice(0,41),0);
 }
 function System_Monitor(){for(let i=0;i<WINDOW_COUNT;i++)UpdateWindow(i);OLED.display();}
 function UpdateWindow(i){
@@ -1125,7 +1184,18 @@ function M8B_Answers_EXE(M8B_ID){                                     /* [M8BALL
    break;
   case WAIT_OUT_THE_TIMER_AND_NO_DO_OVERS:
    if(Pull_From_Buffer(ROTARY_DIAL)){M8B_currentState=CLEANUP_TIME;}        /* scroll exits everywhere, anytime */
-   else if(Unit_Is_Shaking(1.3)&&millis()>M8B_displayTimer){spawnBubbles(random(MAX_BUBBLES));M8B_currentState=ASK_YOUR_QUESTION;} /* re-ask only after the read gate */
+   else if(Unit_Is_Shaking(1.3)&&millis()>M8B_displayTimer){
+    /* [REVIEW ITEM 2, 2026-07-24] post-answer shake: flash "ASK A QUESTION..."
+       and proceed INSTANTLY into the next cycle - no dwell on the flash. The
+       shake IS the ask ritual; the machine answers the question being asked. */
+    spawnBubbles(random(MAX_BUBBLES));
+    M8B_busy=true;
+    (async()=>{
+     Activate_the_Screen(TOP_SCREEN,true);setFont(LARGE_FONT);
+     screenPrintLn(36,0," ASK A QUESTION...",1);
+     await sleep(420);
+     M8B_currentState=REVEAL_THE_ANSWER;M8B_busy=false;})();
+   }
    else{Pull_From_Buffer(SHUTTER);Update_Bubbles();}                        /* click consumed, no effect; answer holds */
    break;
   case CLEANUP_TIME:
@@ -1231,8 +1301,11 @@ async function M8B_Reveals_Answer(M8B_ID){                            /* [M8BALL
    OLED.clearDisplay();
    await Draw_Triangle_Animation(ZOOM_IN);
    badgeBlankFrame();
-   screenPrintLnCentered(16,M8B_AnswerTable[slot][Polarity_Response][Clarity_Response][ANSWER_LINE_0],1);
-   screenPrintLnCentered(32,M8B_AnswerTable[slot][Polarity_Response][Clarity_Response][ANSWER_LINE_1],1);
+   /* [REVIEW ITEM 3, 2026-07-24] v2.0 content centered vertically - NIAC's
+      proven 32/48 pair (the visually-centered rows on the 64-line glass).
+      Engine animation differentiation = HELD for Mike's 1Q session. */
+   screenPrintLnCentered(32,M8B_AnswerTable[slot][Polarity_Response][Clarity_Response][ANSWER_LINE_0],1);
+   screenPrintLnCentered(48,M8B_AnswerTable[slot][Polarity_Response][Clarity_Response][ANSWER_LINE_1],1);
    /* NO playFolder here - the known missing 1-line v2.0 touch [M8BALL:161-168], deferred to bench splice */
    chip("warn","v2.0 reveal: silent by firmware &mdash; playFolder line missing [M8BALL:161-168], bench splice pending");
    break;
@@ -1241,19 +1314,35 @@ async function M8B_Reveals_Answer(M8B_ID){                            /* [M8BALL
       Font reconciliation: SMALL_FONT (TomThumb) fits 100/100 of 65's cells; LARGE_FONT
       (NIAC's FreeSansBold) overflows 86/100 because 65's sentences are long. Rows 32/48 are
       NIAC's own; MGK65_TIGHT_ROWS offers 28/38 for the small font - Mike picks in the preview. */
-   Activate_the_Screen(TOP_SCREEN,false);setFont(SMALL_FONT);
+   /* [REVIEW ITEM 3, 2026-07-24] 65 gets the LARGER classic font. 65's
+      sentences run to 31ch; classic fits 21/line, so the two cell lines
+      re-wrap at display time (mechanical, words untouched) into up to 4
+      centered rows. TomThumb path retired; MGK65_TIGHT_ROWS obsolete (kept
+      harmless for the dev checkbox). */
+   Activate_the_Screen(TOP_SCREEN,false);setFont(1);
    OLED.clearDisplay();
    await Draw_Triangle_Animation(ZOOM_IN);
    badgeBlankFrame();
    {
     const sfx=SFX_TEXT[slot+"|"+Polarity_Response+"|"+Clarity_Response];
-    const rows=MGK65_TIGHT_ROWS?[28,38]:[32,48];
     if(sfx){
      /* the sound IS the answer: no text, the flourish carries the screen */
      chip("warn","SFX cell fired: "+sfx+" &mdash; sound is the answer, screen shows the flourish only");
     } else {
-     screenPrintLnCentered(rows[0],M8B_AnswerTable[slot][Polarity_Response][Clarity_Response][ANSWER_LINE_0],1);
-     screenPrintLnCentered(rows[1],M8B_AnswerTable[slot][Polarity_Response][Clarity_Response][ANSWER_LINE_1],1);
+     const wrapped=[];
+     for(const cl of [M8B_AnswerTable[slot][Polarity_Response][Clarity_Response][ANSWER_LINE_0],
+                      M8B_AnswerTable[slot][Polarity_Response][Clarity_Response][ANSWER_LINE_1]]){
+      if(!cl)continue;
+      let line="";
+      for(const w of String(cl).split(" ")){
+       if(((line+" "+w).trim()).length<=21)line=(line+" "+w).trim();
+       else {if(line)wrapped.push(line);line=w;}
+      }
+      if(line)wrapped.push(line);
+     }
+     const top=Math.trunc((64-(wrapped.length*8+(wrapped.length-1)*2))/2);
+     for(let i=0;i<wrapped.length;i++)screenPrintLnCentered(top+i*10,wrapped[i],0);
+     OLED.display();
     }
     player.playFolder(Audio_Response_Folder,Audio_Response_File);
    }
@@ -2755,6 +2844,97 @@ function Messages_Find(menuNum,row){
  return null;
 }
 function Messages_Unread(){return MESSAGES_INBOX.filter(m=>m.status===MSG_NOT_READ).length;}
+/* ============ [PHONE TAP -07 - PARALLEL SHIFT 2026-07-24] ============
+   The Informer's last channel. MSG-MECHANICS REUSE per
+   FIRMWARE_CHANGE_SPEC-messages: intercepted material accumulates like
+   messages (NOT_SENT -> NOT_READ -> READ; unread marks; delivery rides the
+   downloads fiction via Mon_StartConnection - "the tap picked up more
+   overnight"). HOMED BELOW THE MESSAGES MACHINERY (the MSG_* enums it reuses - a
+   load-order/TDZ constraint, caught by the headless lap). SELF-CONTAINED +
+   ADDITIVE: no existing code path is edited;
+   overnight delivery is checked on app entry (elapsed-time gate), plus
+   devTapDeliver() for the bench. CONTENT LAW: all traffic is [PAPA]/scaffold
+   placeholder - no invented storylines; the only numbers are the manual's own
+   codes (the PASS CODES message precedent). RAM-only, as messages are. */
+const TAPP=34;
+const TAP_OVERNIGHT_MS=90000; /* twin stand-in for "overnight" - real clock is bench work */
+let TAP_LOG=[
+ {id:0,status:MSG_READ,    stamp:"0214",subject:"TAP TEST",     body:"[scaffold - channel proof]_CARRIER PRESENT._CONTENT IS PAPA'S PEN."},
+ {id:1,status:MSG_NOT_READ,stamp:"0219",subject:"INTERCEPT 001",body:"[PAPA slot 1 - traffic]_carrier only._no voice on the line."},
+ {id:2,status:MSG_NOT_READ,stamp:"0311",subject:"INTERCEPT 002",body:"[PAPA slot 2 - traffic]_numbers again._0-0-0-0. then nothing."},
+ {id:3,status:MSG_NOT_SENT,stamp:"0348",subject:"INTERCEPT 003",body:"[PAPA slot 3 - traffic]"},
+ {id:4,status:MSG_NOT_SENT,stamp:"0402",subject:"INTERCEPT 004",body:"[PAPA slot 4 - traffic]"},
+];
+let tapState=0, tapIdx=-1, tapLastEntry=0;
+function Tap_Unread(){return TAP_LOG.filter(t=>t.status===MSG_NOT_READ).length;}
+function Tap_Visible(){return TAP_LOG.filter(t=>t.status===MSG_NOT_READ||t.status===MSG_READ);}
+function Tap_Deliver(k){ /* the tap picked up more overnight */
+ let fired=0;
+ for(const t of TAP_LOG){
+  if(fired>=k)break;
+  if(t.status===MSG_NOT_SENT){t.status=MSG_NOT_READ;fired++;}
+ }
+ if(fired){
+  chip("ok","&#9742; the tap picked up "+fired+" overnight &mdash; "+Tap_Unread()+" unread");
+  PlaySound(Connected);
+  Mon_StartConnection(fired); /* a delivery IS a server session */
+ }
+ return fired;
+}
+function devTapDeliver(){return Tap_Deliver(1);} /* bench shortcut - console only */
+function Tap_List(){
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(8,3,"PHONE TAP  unread "+Tap_Unread(),0);
+ const vis=Tap_Visible();
+ for(let i=0;i<vis.length&&i<7;i++){
+  const t=vis[i];
+  screenPrintLn(16+i*6,3,((t.status===MSG_NOT_READ)?"*":" ")+t.stamp+"  "+t.subject,0);
+ }
+ screenPrintLn(58,3,"click = read",0);
+ OLED.display();
+}
+function Tap_Show(t){
+ if(t.status===MSG_NOT_READ)t.status=MSG_READ; /* opening marks it read */
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(8,3,"PHONE TAP  "+t.stamp+"  "+t.subject,0);
+ const lines=t.body.split("_");
+ for(let i=0;i<lines.length&&i<7;i++)screenPrintLn(18+i*6,3,lines[i],0);
+ screenPrintLn(58,3,"click = next",0);
+ OLED.display();
+}
+function Tap_EXE(){
+ switch(tapState){
+  case 0: /* entry: the overnight check, then the log */
+   Pause_Process(SYSTEM_MONITOR);
+   if(tapLastEntry&&(millis()-tapLastEntry)>TAP_OVERNIGHT_MS)Tap_Deliver(1);
+   tapLastEntry=millis();
+   Psy_Front("TAP"," it holds the line");
+   Tap_List();tapIdx=-1;
+   tapState=1;break;
+  case 1: /* the log */
+   if(Pull_From_Buffer(ROTARY_DIAL)){tapState=3;break;}
+   if(Pull_From_Buffer(SHUTTER)){
+    const vis=Tap_Visible();
+    if(vis.length){tapIdx=0;Tap_Show(vis[tapIdx]);tapState=2;}
+   }
+   break;
+  case 2: /* reading: click steps the log, wraps back to the list */
+   if(Pull_From_Buffer(ROTARY_DIAL)){Tap_List();tapState=1;break;}
+   if(Pull_From_Buffer(SHUTTER)){
+    const vis=Tap_Visible();
+    tapIdx++;
+    if(tapIdx<vis.length)Tap_Show(vis[tapIdx]);
+    else {Tap_List();tapState=1;}
+   }
+   break;
+  case 3:
+   End_Process(TAPP);
+   Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
+   Activate_the_Screen(TOP_SCREEN,true);
+   tapState=0;break;
+ }
+}
+
 /* delivery: NOT_SENT -> NOT_READ when a trigger fires. RAM-only [ruling 2] - the inbox
    forgets on power-cycle, exactly as settings do (Save_To_Flash is a stub). */
 let askCount=0, deliveredAnnounce=false;
@@ -3096,26 +3276,147 @@ function Det_Draw(level){
    first non-selective content engine. Columns here are PLACEHOLDER SUBSETS; the
    real grids exist in D.8 (JOBS 196 cells, NIcknames 230, Generators 785) and are
    a content session, not a march item. ---- */
-const ADV_JOBS=[["[stub] Amateur","[stub] Angry","[stub] Aspiring","[stub] Certified","[stub] Chief","[stub] Junior"],
-                ["[stub] Ninja","[stub] Space","[stub] Tickler","[stub] Dream","[stub] Armpit","[stub] Data"],
-                ["[stub] Accountant","[stub] Lawyer","[stub] Analyst","[stub] Sniffer","[stub] Supervisor","[stub] Associate"]];
-const ADV_NICK=["[stub] The Bubble","[stub] The Wedge","[stub] The Flat Pack","[stub] The Moon","[stub] The Ski Slope","[stub] The Brick"];
-const ADV_COLD=0, ADV_SHOW=1, ADV_EXIT=2;
-let advState=ADV_COLD, advLines=[];
+/* [REVIEW REBUILD 2026-07-24 — items 7/8/9]
+   CAREER CHOOSER (row 1) + CAREER ADVICE (row 2): GUI-grammar conformant
+   (front three-row rail card / top detail / four-register case). The search =
+   DELIBERATE BS THEATER: a visible match meter climbs, the cycle SLOWS as it
+   approaches, occasionally detects a LOCAL MINIMUM, backs up FASTER, resumes
+   the global hunt. Deterministic-friendly (scripted profile from ints at run
+   start). SHAKE runs the search (not click); click cycles the in-app bs level
+   (LOCAL equivalent — wiring to the real BS engine rides the BS-hook seam,
+   flagged). "Stub" labels killed per review: pool words display clean; the
+   pools remain PLACEHOLDER SUBSETS of the real D.8 grids (JOBS 196 cells) —
+   provenance lives here, not on the glass.
+   OFFICE NICKNAME (row 3) = EARNED EGG (canon 2026-07-24): introspective
+   mode — what they call YOU; NOT modifiable by bs; the truth. Earn condition
+   = OPS PROPOSAL (asks >= 40 — the machine has heard enough; FLAGGED, Papa's
+   call), nickname content = [PAPA] single slot (one truth, not a pool). */
+const ADV_JOBS=[["Amateur","Angry","Aspiring","Certified","Chief","Junior"],
+                ["Ninja","Space","Tickler","Dream","Armpit","Data"],
+                ["Accountant","Lawyer","Analyst","Sniffer","Supervisor","Associate"]];
+const ADV_COLD=0, ADV_READY=1, ADV_SEARCH=2, ADV_RESULT=3, ADV_NICKV=4, ADV_EXIT=5;
+let advState=ADV_COLD, advWhich=0, advBS=1, advSearch=null;
+const NICK_EARN_ASKS=40; /* [OPS PROPOSAL — flagged] */
+function Nick_Earned(){return askCount>=NICK_EARN_ASKS;}
+function Adv_Title(){return advWhich===1?"CAREER SEARCH":"GUIDANCE SEARCH";}
+function Adv_Meter(match){
+ /* the match meter: plain track + number, 1965 test equipment (no box - boxes are monitor-only) */
+ OLED.drawRect(3,50,100,8,WHITE);
+ const w=Math.trunc(match*96/100);
+ if(w>0)OLED.fillRect(5,52,w,4,WHITE);
+ screenPrintLn(57,108,"match",0);
+ screenPrintLn(63,108,String(match)+"%",0);
+}
+function Adv_Idle_Card(){
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(8,3,Adv_Title(),0);
+ screenPrintLn(8,106,"bs "+advBS,0);
+ screenPrintLn(28,8,"SHAKE TO RUN THE SEARCH.",0);
+ Adv_Meter(0);
+ OLED.display();
+}
+function Adv_NewSearch(){
+ const steps=26+advBS*6, dips=[];
+ for(let i=0;i<1+advBS;i++)dips.push(random(8,steps-6));
+ advSearch={steps:steps,dips:dips.sort((a,b)=>a-b),i:0,match:0,phase:0,back:0,at:0,
+  words:["","",""],rec:random(100,9999)};
+}
+function Adv_Draw_Search(){
+ const s=advSearch;
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(8,3,Adv_Title(),0);
+ screenPrintLn(8,106,"bs "+advBS,0);
+ if(advWhich===1){for(let i=0;i<3;i++)screenPrintLn(18+i*7,8,s.words[i],0);}
+ else screenPrintLn(24,8,"record "+s.rec,0);
+ if(s.phase===1)screenPrintLn(44,8,"LOCAL MINIMUM DETECTED",0);
+ Adv_Meter(s.match);
+ OLED.display();
+}
+function Adv_Search_Tick(){
+ const s=advSearch;
+ if(millis()<s.at)return false;
+ if(s.phase===0){ /* the climb - slows as match rises */
+  s.i++;
+  if(advWhich===1)s.words=[ADV_JOBS[0][random(0,6)],ADV_JOBS[1][random(0,6)],ADV_JOBS[2][random(0,6)]];
+  else s.rec=random(100,9999);
+  s.match=Math.min(99,Math.trunc(100*s.i/s.steps)+random(0,4));
+  if(s.dips.length&&s.i>=s.dips[0]){s.dips.shift();s.phase=1;s.back=random(3,7);PlaySound(Scroll);}
+  s.at=millis()+80+s.match*9;
+  if(s.i>=s.steps){s.match=100;s.phase=2;}
+ } else if(s.phase===1){ /* the local minimum - backs up FASTER */
+  s.match=Math.max(5,s.match-random(8,15));
+  s.i=Math.max(1,s.i-1);
+  s.back--;
+  if(s.back<=0)s.phase=0;
+  s.at=millis()+55;
+ }
+ Adv_Draw_Search();
+ return s.phase===2;
+}
+function Adv_Result_Card(){
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ if(advWhich===1){
+  screenPrintLn(8,3,"YOU SHOULD BE:",0);
+  for(let i=0;i<3;i++)screenPrintLn(20+i*8,8,advSearch.words[i],0);
+ } else {
+  /* [ITEM 8] the daily-affirmations presentation frame - STRUCTURE ONLY;
+     the pool is a [PAPA] pen slot per drafting law */
+  screenPrintLn(8,3,"TODAY'S GUIDANCE:",0);
+  screenPrintLn(24,8,"[PAPA - affirmation pool]",0);
+  screenPrintLn(34,8,"record "+advSearch.rec+" matched",0);
+ }
+ screenPrintLn(8,106,"bs "+advBS,0);
+ Adv_Meter(100);
+ OLED.display();
+ PlaySound(ConnectionSuccess);
+}
+function Adv_Nick_Card(){
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ if(Nick_Earned()){
+  /* the truth: one deterministic [PAPA] cell; NO bs datum on this card - the
+     introspective mode is not modifiable (canon) */
+  screenPrintLn(8,3,"THEY CALL YOU:",0);
+  screenPrintLn(28,8,"[PAPA - the true nickname]",0);
+ } else {
+  screenPrintLn(8,3,"OFFICE NICKNAME",0);
+  screenPrintLn(26,8,"USER RECORD INSUFFICIENT.",0);
+  screenPrintLn(36,8,"asks "+askCount+" of "+NICK_EARN_ASKS,0); /* real datum; wording=[PAPA] */
+ }
+ OLED.display();
+}
 function Advice_EXE(which){
  switch(advState){
   case ADV_COLD:
    Pause_Process(SYSTEM_MONITOR);
-   Advice_Roll(which);
-   Activate_the_Screen(FRONT_SCREEN,true);
-   screenPrintLn(Row_01,0," "+get_as_char(lineName),0);
-   screenPrintLn(Row_02,0," click=again",0);
-   screenPrintLn(Row_03,0,">>> scroll to exit <<<",1);
-   advState=ADV_SHOW;
+   advWhich=which;
+   if(which===3){
+    Psy_Front("NICKNAME",Nick_Earned()?" introspective mode":" not yet earned");
+    Adv_Nick_Card();
+    advState=ADV_NICKV;
+   } else {
+    Psy_Front(which===1?"CAREERS":"GUIDANCE"," <shake=run click=bs>");
+    Adv_Idle_Card();
+    advState=ADV_READY;
+   }
    break;
-  case ADV_SHOW:
-   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_EXIT;}
-   else if(Pull_From_Buffer(SHUTTER)||Unit_Is_Shaking(1.3)){Advice_Roll(which);}
+  case ADV_READY:
+   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_EXIT;break;}
+   if(Pull_From_Buffer(SHUTTER)){advBS=(advBS+1)%4;Adv_Idle_Card();}
+   if(Unit_Is_Shaking(1.3)){Adv_NewSearch();advState=ADV_SEARCH;}
+   break;
+  case ADV_SEARCH:
+   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_EXIT;break;}
+   Pull_From_Buffer(SHUTTER); /* consumed during the hunt */
+   if(Adv_Search_Tick()){Adv_Result_Card();advState=ADV_RESULT;}
+   break;
+  case ADV_RESULT:
+   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_EXIT;break;}
+   Pull_From_Buffer(SHUTTER); /* click consumed; SHAKE runs, per the ruling */
+   if(Unit_Is_Shaking(1.3)){Psy_Front(advWhich===1?"CAREERS":"GUIDANCE"," <shake=run click=bs>");Adv_NewSearch();advState=ADV_SEARCH;}
+   break;
+  case ADV_NICKV:
+   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_EXIT;break;}
+   Pull_From_Buffer(SHUTTER); /* the truth takes no input */
    break;
   case ADV_EXIT:
    End_Process(ADVICE);
@@ -3124,22 +3425,6 @@ function Advice_EXE(which){
    advState=ADV_COLD;
    break;
  }
-}
-function Advice_Roll(which){
- Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
- if(which==1){        /* Career Chooser - the JOBS grid: adjective + noun + role */
-  advLines=[ADV_JOBS[0][random(0,6)],ADV_JOBS[1][random(0,6)],ADV_JOBS[2][random(0,6)]];
-  screenPrintLn(16,3,"you should be:",0);
-  for(let i=0;i<3;i++)screenPrintLn(28+i*8,8,advLines[i],0);
- } else if(which==3){ /* Office Nickname */
-  advLines=[ADV_NICK[random(0,6)]];
-  screenPrintLn(16,3,"they call you:",0);
-  screenPrintLn(30,8,advLines[0],0);
- }
- screenPrintLn(56,3,"[placeholder columns - real",0);
- screenPrintLn(62,3,"grids live in D.8]",0);
- OLED.display();
- PlaySound(Select);
 }
 
 /* ============ [FW] 1_MGK-VIIIp.ino - the OS ============ */
@@ -3164,6 +3449,7 @@ function MGK_VIIIp_OS(){
   case ELIZP: Eliz_EXE(); break;                               /* [PSYCH −02] */
   case BRAINP: Brain_EXE(); break;                             /* [PSYCH −02] */
   case INKP: Ink_EXE(); break;                                 /* [PSYCH −02] */
+  case TAPP: Tap_EXE(); break;                                 /* [PHONE TAP −07] */
  }
 }
 
@@ -3233,7 +3519,7 @@ function Doors_Restructure(){
  doorRow(DP,4,"Calculator (not installed)",DP,0,0);
  doorRow(DP,5,"Notepad (not installed)",DP,0,0);
  doorRow(DP,6,"Radio [-07]",RADIOP,0,1);   /* built; persona-gating rides the seam */
- doorRow(DP,7,"Phone Tap [-07] (not installed)",DP,0,0);
+ doorRow(DP,7,"Phone Tap [-07]",TAPP,0,1);   /* built; parallel shift 2026-07-24 */
  doorRow(DP,8,"Casino [-21]",CT,0,0);
  doorRow(DP,9,"back",R,0,0);
  MENU_TABLE[DP][10]=["[doors]",".end"];MENU_PARAMETER_TABLE[DP][10]=[0,R,0,0,1,1,1,1];
