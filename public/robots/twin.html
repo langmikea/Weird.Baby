@@ -662,6 +662,16 @@ function Run_EXE(){                                                          /* 
    if(lineNum_PTR==1||lineNum_PTR==3){Pause_Process(MENU_SYSTEM); Start_Process(ADVICE,NORMAL_PRIORITY);}
    else {scafUpid="ADVICE"; Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY);}
    break;
+  case APPP:            /* [APP-PATTERN ENGINE] excuses / lines */
+   Pause_Process(MENU_SYSTEM); Start_Process(APPP,NORMAL_PRIORITY); break;
+  case RADIOP:          /* [RADIO −07] */
+   Pause_Process(MENU_SYSTEM); Start_Process(RADIOP,NORMAL_PRIORITY); break;
+  case ELIZP:           /* [PSYCH −02] */
+   Pause_Process(MENU_SYSTEM); Start_Process(ELIZP,NORMAL_PRIORITY); break;
+  case BRAINP:          /* [PSYCH −02] */
+   Pause_Process(MENU_SYSTEM); Start_Process(BRAINP,NORMAL_PRIORITY); break;
+  case INKP:            /* [PSYCH −02] */
+   Pause_Process(MENU_SYSTEM); Start_Process(INKP,NORMAL_PRIORITY); break;
   case VOICE:           /* [TWIN DELTA] one line, and 11 rows become real */
    currentVoiceID=lineNum_PTR;
    chip("ok","voice set to slot "+currentVoiceID+" (firmware hardcodes 8; per-engine voices override - spec s3)");
@@ -781,12 +791,12 @@ function Mon_EventsLine(){ /* line 2: generic/special monitor events — all REA
  if(millis()>monMsgAt+2200){monMsgIdx++;monMsgAt=millis();}
  return pool[monMsgIdx%pool.length];
 }
-function Mon_ProcessLine(){ /* line 1: the process + a process-specific REAL datum */
+function Mon_ProcessLine(){ /* [A6 letter] Title-Case name + lowercase datum */
  let d="";
- if(Get_Ptr_for_uniqueProcessID(ANSWERS)!==-1)d="ASKS "+askCount;
- else if(Get_Ptr_for_uniqueProcessID(GAMES)!==-1)d="SCORE "+gameScore;
- else if(Get_Ptr_for_uniqueProcessID(MESSAGES_PROC)!==-1)d="UNREAD "+Messages_Unread();
- else if(Mon_Idle())d="ROW "+lineNum_PTR;
+ if(Get_Ptr_for_uniqueProcessID(ANSWERS)!==-1)d="asks "+askCount;
+ else if(Get_Ptr_for_uniqueProcessID(GAMES)!==-1)d="score "+gameScore;
+ else if(Get_Ptr_for_uniqueProcessID(MESSAGES_PROC)!==-1)d="unread "+Messages_Unread();
+ else if(Mon_Idle())d="row "+lineNum_PTR;
  return (Active_Process_Name+"  "+d).slice(0,41);
 }
 function Mon_PushSample(){ /* CPU = measured OS tick time (real) */
@@ -1384,7 +1394,7 @@ function Games_EXE(gameID){                  /* the process body, shaped like M8
       wiped anything init drew (TTT's mode screen rendered, then got cleared — blank
       top at game start). Now: card first, then activate+clear top, THEN init, so
       init drawing lands on the live top screen. */
-   Game_Front_Card(Game_Name(gameID),"  <<< scroll to exit ");
+   Game_Front_Card(Game_Name(gameID),">>> scroll to exit <<<");
    Activate_the_Screen(TOP_SCREEN,true);
    Game_Init(gameID);
    gameState_FSM=GAME_RUN;
@@ -1398,7 +1408,7 @@ function Games_EXE(gameID){                  /* the process body, shaped like M8
    else if(Pull_From_Buffer(SHUTTER)){gameState_FSM=GAME_COLD_START;gameWarned=false;}  /* click = play again */
    else if(millis()>gameOverAt){gameState_FSM=GAME_CLEANUP;}              /* or it lets you go */
    else if(!gameWarned&&millis()>gameOverAt-4000){gameWarned=true;        /* [games batch] warn BEFORE auto-end, with the reason */
-    Game_Front_Card(Game_Name(gameID),"idle - menu in 4s",undefined);}
+    Game_Front_Card(Game_Name(gameID),"<idle - menu in 4s>",undefined);}
    break;
   case GAME_CLEANUP:
    End_Process(GAMES);
@@ -1409,7 +1419,7 @@ function Games_EXE(gameID){                  /* the process body, shaped like M8
    break;
  }
 }
-function Game_Name(id){return ["Tilt Drive","Gobble","AvoidSter","SnowGlobe","TicTacToe","Slots","Craps","Blackjack","Roulette","Mail Run"][id]||"GAME";}
+function Game_Name(id){return ["Tilt Drive","Gobble","AvoidSter","SnowGlobe","TicTacToe","Slots","Craps","Blackjack","Roulette","Mail Run","Sniper"][id]||"GAME";}
 
 /* ---------- TIC-TAC-TOE (row 4, twin-delta id 175; games batch respec 2026-07-18) ----------
    Mike's rulings this pass: CLICK = GO (shake cycles mode); the machine NEVER
@@ -1451,7 +1461,7 @@ function TTT_start(){
   wopr={stage:"G1",at:millis(),delay:800,t0:0};
   Game_Front_Card(Game_Name(GAME_TICTACTOE),"observing","GAME 1  TIES 0000");
  } else {tttPhase=TTT_PLAY;
-  Game_Front_Card(Game_Name(GAME_TICTACTOE)," <<< scroll to exit");}
+  Game_Front_Card(Game_Name(GAME_TICTACTOE),">>> scroll to exit <<<");}
  TTT_draw_board();
 }
 function TTT_cell_xy(i){const c=i%3,r=Math.trunc(i/3);return [40+c*16,8+r*16];}
@@ -1626,7 +1636,7 @@ function TTT_step(){
   const idle=now-tttLastInput;
   if(idle>TTT_IDLE_LIMIT){gameState_FSM=GAME_CLEANUP;return;}
   if(idle>TTT_IDLE_WARN&&!tttIdleWarned){tttIdleWarned=true;
-   Game_Front_Card(Game_Name(GAME_TICTACTOE),"idle - menu in 30s");}
+   Game_Front_Card(Game_Name(GAME_TICTACTOE),"<idle - menu in 30s>");}
  }
  if(tttPhase===TTT_MODE_SELECT){
   if(Unit_Is_Shaking(1.3)&&now>tttTiltAt){tttMode=(tttMode+1)%TTT_mode_count();tttTiltAt=now+800;
@@ -1660,14 +1670,448 @@ function Game_Over(){
  gameOverAt=millis()+10000; gameWarned=false;
  gameState_FSM=GAME_OVER;
 }
+/* ============ [APP-PATTERN ENGINE — dinner marathon 2026-07-23] ============
+   Implements APP_PATTERN_SPEC: WHO/WHY config card, per-field WING IT, one
+   overall WING IT, phrase draw. Pools = the LANDED APPWORDS rows verbatim
+   (sample/ruled material only; no invention). BS-weighted sass = wired when
+   pools carry bands (the MGK-BS distance formula is the engine per spec §3 —
+   hook marked below). VISUAL: canon-conservative — front three-row grid +
+   the original bracket-rail; result on TOP per the two-screen role law;
+   composition detail = current-style placeholder pending the G6 1Q. */
+const APPP=29;
+const APP_POOLS={
+ excuses:{
+  personas:["THE CEO","THE GAMBLER","THE EVERYMAN"],
+  who:{0:["THE BOARD","A CLIENT","THE WIFE","THE TAX MAN","THE PRESS","HEAD OFFICE","THE GOLF FOURSOME","THE STOCKHOLDERS"],
+       1:["BOSS","SIGNIFICANT OTHER","FAMILY","BANK","CREDITORS","BOOKIE"],
+       2:["BOSS","WIFE","THE DEPARTMENT","THE CLUB"]},
+  why:{0:["MISSED THE NUMBERS","LATE AGAIN","FORGOT THE DATE","OVERPROMISED","LOST THE ACCOUNT","OVER BUDGET"],
+       1:["LOST THE RENT","ON A STREAK","ONE MORE HAND","THE SYSTEM WORKS","BORROWED AGAINST THE CAR"],
+       2:["MISSED THE APPOINTMENT","BURNED THE ROAST","FORGOT THE BIRTHDAY","OVERSPENT THE BUDGET"]},
+  phrases:{0:["THE AUDITORS ARE IN. DO NOT WAIT UP.","RESULTS REFLECT STRATEGIC REPOSITIONING. PATIENCE WILL BE REWARDED.","THE QUARTER WAS AN ANOMALY. THE FUNDAMENTALS REMAIN STRONG.","DELEGATE IT. THAT IS WHAT STAFF IS FOR."],
+           1:["THE CAR NEEDED WORK. EXPENSIVE WORK.","I WAS AT THE LODGE. ASK ANYBODY.","THE BONUS IS COMING. IT IS PRACTICALLY CERTAIN."],
+           2:["THE MEMO NEVER REACHED MY DESK.","I DELEGATED THAT. CLEARLY IN ERROR.","MY CALENDAR SHOWS OTHERWISE.","THAT WAS DISCUSSED BEFORE I JOINED THE MEETING."]}
+ },
+ lines:{
+  personas:["THE INFORMER","THE GAMBLER"],
+  classes:{0:["PICK-UP","BREAKUP","EXCUSE"],1:["SASS"]},
+  phrases:{0:{"PICK-UP":["I NEVER FORGET A FACE. YOURS I WOULD HAVE REMEMBERED TWICE."],
+              "BREAKUP":["YOU DESERVE A MAN WHO CAN STAY. I AM NOT PERMITTED EITHER."],
+              "EXCUSE":["THE EMBASSY PARTY RAN LONG. THEY ALWAYS DO."]},
+           1:{"SASS":["THE HOUSE REMEMBERS ITS FRIENDS."]}}
+ }
+};
+const APP_COLD=0,APP_CONFIG=1,APP_SHOW=2,APP_EXIT=3;
+let appState=APP_COLD,appKind=null,appFields=[],appSel=[],appField=0,appResult="";
+function App_Fields(kind){
+ if(kind==="excuses")return [
+  {name:"WHO AM I",opts:["WING IT"].concat(APP_POOLS.excuses.personas)},
+  {name:"WHO FOR",opts:null},   /* resolved after persona */
+  {name:"WHY",opts:null}];
+ return [
+  {name:"WHO AM I",opts:["WING IT"].concat(APP_POOLS.lines.personas)},
+  {name:"CLASS",opts:null}];
+}
+function App_OptsFor(f){
+ const persona=appSel[0]>0?appSel[0]-1:random(0,(appKind==="excuses"?3:2));
+ if(appKind==="excuses"){
+  if(f===1)return ["WING IT"].concat(APP_POOLS.excuses.who[persona]);
+  if(f===2)return ["WING IT"].concat(APP_POOLS.excuses.why[persona]);
+ } else if(f===1)return ["WING IT"].concat(APP_POOLS.lines.classes[appSel[0]>0?appSel[0]-1:0]);
+ return ["WING IT"];
+}
+function App_DrawConfig(){
+ Activate_the_Screen(FRONT_SCREEN,true);
+ const f=appFields[appField];
+ const opts=f.opts||App_OptsFor(appField);
+ const cur=opts[appSel[appField]%opts.length];
+ screenPrintLn(Row_01,0," ----<          >----",0);
+ screenPrintLn(Row_01,40,appKind==="excuses"?"Excuses":"Lines",0);
+ screenPrintLn(Row_02,0," "+f.name+": "+cur,0);
+ setFont(SMALL_FONT);
+ screenPrintLn(Row_03+6,0," click=change  shake=next  scroll=exit",1);
+ setFont(FRONT_SCREEN_DEFAULT_FONT===1?1:1);setFont(1);
+}
+function App_Resolve(){
+ /* wing-its resolve random; then draw the phrase. [BS HOOK: when pools carry
+    sass bands, weight here via the Clarity distance formula — spec §3.] */
+ const P2=APP_POOLS[appKind];
+ const persona=(appSel[0]>0)?appSel[0]-1:random(0,P2.personas.length);
+ let phrase="";
+ if(appKind==="excuses"){
+  const pool=P2.phrases[persona];
+  phrase=pool[random(0,pool.length)];
+ } else {
+  const classes=P2.classes[persona];
+  const ci=(appSel[1]&&appSel[1]>0)?(appSel[1]-1)%classes.length:random(0,classes.length);
+  const pool=P2.phrases[persona][classes[ci]];
+  phrase=pool[random(0,pool.length)];
+ }
+ appResult=phrase;
+ /* result on TOP (apps GUI, two-screen law); [G6 letter resolved 2026-07-23]
+    the centering law governs apps — this left-anchored grid IS the conforming
+    composition; centered stays reserved for the answer. */
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(8,3,(appKind==="excuses"?"EXCUSE":"LINE")+" - "+P2.personas[persona],0);
+ const words=phrase.split(" ");let line="",y=24;
+ for(const w of words){
+  if((line+" "+w).trim().length>30){screenPrintLn(y,3,line.trim(),0);y+=8;line=w;}
+  else line=(line+" "+w);
+ }
+ screenPrintLn(y,3,line.trim(),0);
+ screenPrintLn(58,3,"click = another   shake = configure",1);
+ PlaySound(Select);
+}
+function Apps_EXE(line){
+ switch(appState){
+  case APP_COLD:
+   Pause_Process(SYSTEM_MONITOR);
+   appKind=(line===2)?"excuses":"lines";
+   appFields=App_Fields(appKind);
+   appSel=appFields.map(()=>0);appField=0;
+   App_DrawConfig();
+   appState=APP_CONFIG;
+   break;
+  case APP_CONFIG:
+   if(Pull_From_Buffer(ROTARY_DIAL)){appState=APP_EXIT;break;}
+   if(Pull_From_Buffer(SHUTTER)){
+    const opts=appFields[appField].opts||App_OptsFor(appField);
+    appSel[appField]=(appSel[appField]+1)%opts.length;
+    App_DrawConfig();break;}
+   if(Unit_Is_Shaking(1.3)){
+    appField++;
+    if(appField>=appFields.length){App_Resolve();appState=APP_SHOW;}
+    else App_DrawConfig();
+   }
+   break;
+  case APP_SHOW:
+   if(Pull_From_Buffer(ROTARY_DIAL)){appState=APP_EXIT;}
+   else if(Pull_From_Buffer(SHUTTER)){App_Resolve();}       /* another draw */
+   else if(Unit_Is_Shaking(1.3)){appField=0;App_DrawConfig();appState=APP_CONFIG;}
+   break;
+  case APP_EXIT:
+   End_Process(APPP);
+   Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
+   Activate_the_Screen(TOP_SCREEN,true);
+   appState=APP_COLD;
+   break;
+ }
+}
+/* ============ [RADIO — Informer −07, dinner marathon] ============
+   Push-button band stepping (click = next stop; scroll = exit — matrix-clean,
+   no tilt). Audio = WebAudio TWIN SHIM (bench path = 3-4 SD loops + playFolder,
+   S-class — flagged). Numbers = beep-groups from the manual's own codes
+   (0000/69/80085 — existing canon numbers); no external content, no voices.
+   Band names never printed — the dial shows KC positions only (discovery). */
+const RADIOP=30;
+const RADIO_BANDS=[{kc:570,kind:"static"},{kc:760,kind:"murmurs"},{kc:1120,kind:"numbers"},{kc:1400,kind:"dead"}];
+let radioState=0,radioBand=0,radioAC=null,radioNodes=[],radioNumAt=0,radioNumSeq=[],radioNumIdx=0;
+function Radio_StopAudio(){for(const n of radioNodes){try{n.stop?n.stop():n.disconnect();}catch(e){}}radioNodes=[];}
+function Radio_Audio(){
+ Radio_StopAudio();
+ try{
+  if(!radioAC)radioAC=new (window.AudioContext||window.webkitAudioContext)();
+  const kind=RADIO_BANDS[radioBand].kind;
+  if(kind==="dead")return;
+  const g=radioAC.createGain();g.connect(radioAC.destination);radioNodes.push(g);
+  if(kind==="static"||kind==="murmurs"){
+   const len=radioAC.sampleRate*2,buf=radioAC.createBuffer(1,len,radioAC.sampleRate);
+   const d=buf.getChannelData(0);for(let i=0;i<len;i++)d[i]=Math.random()*2-1;
+   const srcn=radioAC.createBufferSource();srcn.buffer=buf;srcn.loop=true;
+   if(kind==="murmurs"){const f=radioAC.createBiquadFilter();f.type="lowpass";f.frequency.value=300;
+    srcn.connect(f);f.connect(g);g.gain.value=0.015;radioNodes.push(f);}
+   else {srcn.connect(g);g.gain.value=0.03;}
+   srcn.start();radioNodes.push(srcn);
+  } else if(kind==="numbers"){
+   g.gain.value=0.0;radioNumSeq=[];radioNumIdx=0;radioNumAt=0; /* beeps scheduled per tick */
+  }
+ }catch(e){}
+}
+const RADIO_CODES=[[0,0,0,0],[6,9],[8,0,0,8,5]];
+function Radio_NumbersTick(){
+ if(RADIO_BANDS[radioBand].kind!=="numbers"||!radioAC)return;
+ const now=performance.now();
+ if(now<radioNumAt)return;
+ if(radioNumIdx>=radioNumSeq.length){
+  radioNumSeq=RADIO_CODES[random(0,RADIO_CODES.length)].slice();radioNumIdx=0;
+  radioNumAt=now+1600;return;
+ }
+ const digit=radioNumSeq[radioNumIdx++];
+ try{
+  const o=radioAC.createOscillator(),g=radioAC.createGain();
+  o.type="sine";o.frequency.value=800;g.gain.value=0.03;
+  o.connect(g);g.connect(radioAC.destination);
+  const dur=(digit===0)?0.5:0.12*Math.max(1,digit);
+  o.start();o.stop(radioAC.currentTime+dur);
+  radioNodes.push(o);
+ }catch(e){}
+ radioNumAt=now+900;
+}
+function Radio_Draw(){
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ /* the dial: ruler + KC marks + needle */
+ OLED.drawFastHLine(8,40,112,WHITE);
+ for(let i=0;i<RADIO_BANDS.length;i++){
+  const x=14+i*32;
+  OLED.drawLine(x,36,x,44,WHITE);
+  screenPrintLn(52,x-8,String(RADIO_BANDS[i].kc),0);
+ }
+ screenPrintLn(60,44,"KILOCYCLES",0);
+ const nx=14+radioBand*32;
+ OLED.drawLine(nx,20,nx,36,WHITE);OLED.fillRect(nx-1,20,3,6,WHITE);
+ OLED.display();
+ Activate_the_Screen(FRONT_SCREEN,true);
+ screenPrintLn(Row_01,0," ----<          >----",0);
+ screenPrintLn(Row_01,46,"Radio",0);
+ screenPrintLn(Row_02,0," click to tune",0);
+ setFont(SMALL_FONT);
+ screenPrintLn(Row_03+6,0,"      >>> scroll to exit <<<",1);
+ setFont(1);
+}
+function Radio_EXE(){
+ switch(radioState){
+  case 0:
+   Pause_Process(SYSTEM_MONITOR);
+   radioBand=0;Radio_Draw();Radio_Audio();
+   radioState=1;break;
+  case 1:
+   if(Pull_From_Buffer(ROTARY_DIAL)){radioState=2;break;}
+   if(Pull_From_Buffer(SHUTTER)){radioBand=(radioBand+1)%RADIO_BANDS.length;Radio_Draw();Radio_Audio();}
+   Radio_NumbersTick();
+   break;
+  case 2:
+   Radio_StopAudio();
+   End_Process(RADIOP);
+   Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
+   Activate_the_Screen(TOP_SCREEN,true);
+   radioState=0;break;
+ }
+}
+
+/* ============ [PSYCH SUITE -02: ELIZ / BRAIN TRAINING / INKBLOTS - 2026-07-23] ============
+   THE MIC-THEATER LAW (layer-1): the machine measures RMS and duration ONLY -
+   it never comprehends. Every prompt and reflection is content-free per the
+   real ELIZA's honesty: nothing the machine says depends on what was said to
+   it. Words from APPWORDS_everyman.csv as tagged (flat / placeholder-texture);
+   [PAPA] gap slots honored - not invented here (eliz PROMPT 5, brain
+   encouragement pool). Composition per the G6 letter: left-anchored grid,
+   ONE centered ceremonial line = the machine's utterance. */
+const ELIZP=31, BRAINP=32, INKP=33;
+const ELIZ_WHO=["YOUR MOTHER","YOUR HUSBAND","YOUR WIFE","THE NEIGHBORS","YOUR BOSS","YOURSELF"];
+const ELIZ_WHY=["TROUBLE SLEEPING","NERVES","A DECISION TO MAKE","NO REASON"];
+const ELIZ_REFLECT=["GO ON.","TELL ME MORE ABOUT THAT.","AND HOW DID THAT MAKE YOU FEEL?"];
+/* ---- shared theater primitives ---- */
+function Psy_Front(name,line2){
+ Activate_the_Screen(FRONT_SCREEN,true);
+ screenPrintLn(Row_01,0," ----<          >----",0);
+ screenPrintLn(Row_01,46,name,0);
+ screenPrintLn(Row_02,0,line2,0);
+ setFont(SMALL_FONT);
+ screenPrintLn(Row_03+6,0,"      >>> scroll to exit <<<",1);
+ setFont(1);
+}
+function Psy_Utter(text,y){
+ /* the utterance: the one ceremonial centered element; wraps to two lines */
+ y=y||30;setFont(SMALL_FONT);
+ if(OLED.getTextBounds(text).w<=122){screenPrintLnCentered(y,text,0);return;}
+ const words=text.split(" ");let a="",b="";
+ for(const w of words){
+  if(!b&&OLED.getTextBounds((a+" "+w).trim()).w<=122)a=(a+" "+w).trim();
+  else b=(b+" "+w).trim();
+ }
+ screenPrintLnCentered(y-5,a,0);screenPrintLnCentered(y+5,b,0);
+}
+function Psy_Card(header,utter,status){
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(8,3,header,0);
+ Psy_Utter(utter);
+ if(status)screenPrintLn(58,3,status,0);
+ OLED.display();
+}
+function Psy_Meter(level){
+ /* the listening meter: RMS only, a plain bar - 1965 test equipment */
+ OLED.fillRect(62,55,64,8,BLACK);
+ OLED.drawRect(62,55,64,8,WHITE);
+ const w=Math.trunc(constrain(level/60,0,1)*60);
+ if(w>0)OLED.fillRect(64,57,w,4,WHITE);
+ OLED.display();
+}
+/* ---- ELIZ: prompt-speak-reflect ---- */
+let ezState=0, ezWho=0, ezWhy=0, ezTurn=0, ezLevel=0, ezUntil=0;
+function Eliz_EXE(){
+ switch(ezState){
+  case 0: /* intake */
+   Pause_Process(SYSTEM_MONITOR);
+   ezWho=random(0,ELIZ_WHO.length);ezWhy=random(0,ELIZ_WHY.length);ezTurn=0;ezLevel=0;
+   Psy_Front("ELIZ"," it listens");
+   Psy_Card("ELIZ  intake: "+ELIZ_WHY[ezWhy].toLowerCase(),"TELL ME ABOUT "+ELIZ_WHO[ezWho]+".","LISTENING...");
+   PlaySound(Select);
+   ezState=1;break;
+  case 1: /* listening: the meter rides RMS; the words go nowhere */
+   if(Pull_From_Buffer(ROTARY_DIAL)){ezState=3;break;}
+   ezLevel=ezLevel*0.8+Mic_RMS()*0.2;
+   Psy_Meter(ezLevel);
+   if(Pull_From_Buffer(SHUTTER)){
+    ezTurn++;
+    if(ezTurn>ELIZ_REFLECT.length){
+     Psy_Card("ELIZ","WE WILL RETURN TO "+ELIZ_WHO[ezWho]+" NEXT SESSION.","SESSION FILED.");
+     PlaySound(Connected);
+     ezUntil=millis()+2500;ezState=2;
+    } else {
+     Psy_Card("ELIZ  session "+ezTurn,ELIZ_REFLECT[ezTurn-1],"LISTENING...");
+     PlaySound(Select);
+    }
+   }
+   break;
+  case 2: /* filing theater, then out */
+   if(millis()>ezUntil||Pull_From_Buffer(ROTARY_DIAL)||Pull_From_Buffer(SHUTTER))ezState=3;
+   break;
+  case 3:
+   End_Process(ELIZP);
+   Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
+   Activate_the_Screen(TOP_SCREEN,true);
+   ezState=0;break;
+ }
+}
+/* ---- BRAIN TRAINING: three computed drills, answered ALOUD (mic theater);
+        self-scored - no win state (slot-machine-never-evil). ---- */
+let brState=0, brDrill=0, brSeq=[], brA=0, brB=0, brGrid=[], brChanged=0,
+    brLevel=0, brUntil=0, brStep=0;
+function Brain_New(){
+ brDrill=random(0,3);brLevel=0;brStep=0;
+ if(brDrill===0){brSeq=[];for(let i=0;i<5;i++)brSeq.push(random(0,10));}
+ if(brDrill===1){brA=random(2,10);brB=random(2,10);}
+ if(brDrill===2){brGrid=[];for(let i=0;i<24;i++)brGrid.push(random(0,2));brChanged=random(0,24);}
+}
+function Brain_Grid(highlight){
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(8,3,"BRAIN TRAINING",0);
+ for(let i=0;i<24;i++){
+  const cx=22+(i%6)*14, cy=14+Math.trunc(i/6)*10;
+  if(brGrid[i])OLED.fillRect(cx,cy,10,7,WHITE);
+  else OLED.drawRect(cx,cy,10,7,WHITE);
+ }
+ if(highlight){
+  const cx=22+(brChanged%6)*14, cy=14+Math.trunc(brChanged/6)*10;
+  OLED.drawRect(cx-3,cy-3,16,13,WHITE);
+ }
+ OLED.display();
+}
+function Brain_EXE(){
+ switch(brState){
+  case 0:
+   Pause_Process(SYSTEM_MONITOR);
+   Brain_New();
+   Psy_Front("BRAIN"," an exercise");
+   if(brDrill===0){Psy_Card("BRAIN TRAINING","WATCH THE SEQUENCE.","");brUntil=millis()+900;brState=1;}
+   if(brDrill===1){Psy_Card("BRAIN TRAINING",brA+" x "+brB+" = ?","SPEAK YOUR ANSWER");brState=2;}
+   if(brDrill===2){Brain_Grid(false);screenPrintLn(58,3,"STUDY THE FRAME",1);brUntil=millis()+2500;brState=1;}
+   PlaySound(Select);
+   break;
+  case 1: /* the timed show (memory digits / observation frame swap) */
+   if(Pull_From_Buffer(ROTARY_DIAL)){brState=4;break;}
+   if(millis()>brUntil){
+    if(brDrill===0){
+     if(brStep<brSeq.length){Psy_Card("BRAIN TRAINING",String(brSeq[brStep]),"");brStep++;brUntil=millis()+700;}
+     else {Psy_Card("BRAIN TRAINING","REPEAT IT.","SPEAK - LISTENING...");brState=2;}
+    } else { /* observation: one cell changes */
+     brGrid[brChanged]=brGrid[brChanged]?0:1;
+     Brain_Grid(false);screenPrintLn(58,3,"WHAT CHANGED?",1);brState=2;
+    }
+   }
+   break;
+  case 2: /* answered aloud - RMS meter only, never comprehension */
+   if(Pull_From_Buffer(ROTARY_DIAL)){brState=4;break;}
+   brLevel=brLevel*0.8+Mic_RMS()*0.2;
+   Psy_Meter(brLevel);
+   if(Pull_From_Buffer(SHUTTER)){ /* the reveal - self-scored */
+    if(brDrill===0)Psy_Card("BRAIN TRAINING",brSeq.join(" "),"EXERCISE COMPLETE.");
+    if(brDrill===1)Psy_Card("BRAIN TRAINING",brA+" x "+brB+" = "+(brA*brB),"EXERCISE COMPLETE.");
+    if(brDrill===2){Brain_Grid(true);screenPrintLn(58,3,"EXERCISE COMPLETE.",1);}
+    PlaySound(Connected);
+    brState=3;
+   }
+   break;
+  case 3: /* click = another drill; scroll = exit */
+   if(Pull_From_Buffer(ROTARY_DIAL))brState=4;
+   else if(Pull_From_Buffer(SHUTTER))brState=0;
+   break;
+  case 4:
+   End_Process(BRAINP);
+   Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
+   Activate_the_Screen(TOP_SCREEN,true);
+   brState=0;break;
+ }
+}
+/* ---- INKBLOTS: generative mirrored blot (computed symmetry, no stored art);
+        the machine records nothing it understands. ---- */
+let inkState=0, inkSeed=1, inkLook=0, inkLevel=0, inkUntil=0;
+function Ink_RNG(){inkSeed=(inkSeed*1103515245+12345)&0x7fffffff;return inkSeed/0x7fffffff;}
+function Ink_Draw(seed){
+ inkSeed=seed;
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(8,3,"INKBLOT",0);
+ let x=40,y=28;
+ for(let i=0;i<220;i++){
+  x=constrain(x+Math.trunc(Ink_RNG()*7)-3,8,62);
+  y=constrain(y+Math.trunc(Ink_RNG()*7)-3,14,50);
+  const r=1+Math.trunc(Ink_RNG()*2);
+  OLED.fillCircle(x,y,r,WHITE);
+  OLED.fillCircle(127-x,y,r,WHITE); /* the fold */
+ }
+ OLED.display();
+}
+let inkBlotSeed=1;
+function Ink_EXE(){
+ switch(inkState){
+  case 0:
+   Pause_Process(SYSTEM_MONITOR);
+   inkBlotSeed=random(1,0x7ffffff);inkLook=0;inkLevel=0;
+   Psy_Front("INKBLOT"," WHAT DO YOU SEE?");
+   Ink_Draw(inkBlotSeed);
+   PlaySound(Select);
+   inkState=1;break;
+  case 1: /* looking + speaking: RMS meter only */
+   if(Pull_From_Buffer(ROTARY_DIAL)){inkState=3;break;}
+   inkLevel=inkLevel*0.8+Mic_RMS()*0.2;
+   Psy_Meter(inkLevel);
+   if(Pull_From_Buffer(SHUTTER)){
+    screenPrintLn(58,3,"RESPONSE FILED.",1);
+    PlaySound(Connected);
+    inkUntil=millis()+1200;inkState=2;
+   }
+   break;
+  case 2: /* filed; then the second look, then a fresh blot */
+   if(Pull_From_Buffer(ROTARY_DIAL)){inkState=3;break;}
+   if(millis()>inkUntil){
+    if(inkLook===0){
+     inkLook=1;
+     Psy_Front("INKBLOT"," LOOK AGAIN.");
+     Ink_Draw(inkBlotSeed); /* the SAME blot - determinism via the seed */
+    } else {
+     inkLook=0;inkBlotSeed=random(1,0x7ffffff);
+     Psy_Front("INKBLOT"," WHAT DO YOU SEE?");
+     Ink_Draw(inkBlotSeed);
+    }
+    inkState=1;
+   }
+   break;
+  case 3:
+   End_Process(INKP);
+   Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
+   Activate_the_Screen(TOP_SCREEN,true);
+   inkState=0;break;
+ }
+}
 /* [GAME NIGHT 2026-07-23] new ids: casino suite 5-8 (Gambler-reserved; homed via
    the casino table under DOOR_C — GATING SEAM flagged: twin shows them dev-side
    until persona gating wires up) + cockpit mail-run 9 (RW-3, twin-first proof). */
-const GAME_SLOTS=5, GAME_CRAPS=6, GAME_BLACKJACK=7, GAME_ROULETTE=8, GAME_MAILRUN=9;
-let CASINO_TABLE=-1, MAILRUN_ROW=-1; /* set by Doors_Restructure */
+const GAME_SLOTS=5, GAME_CRAPS=6, GAME_BLACKJACK=7, GAME_ROULETTE=8, GAME_MAILRUN=9, GAME_SNIPER=10;
+let CASINO_TABLE=-1, MAILRUN_ROW=-1, SNIPER_ROW=-1, ANSWERS_DOOR=-1; /* set by Doors_Restructure */
 function Game_ID_From_Menu(line){
  if(menuNum_PTR===CASINO_TABLE&&line<=3)return line+5; /* casino table rows 0-3 -> 5-8 */
  if(menuNum_PTR===GAMES&&line===MAILRUN_ROW)return GAME_MAILRUN;
+ if(menuNum_PTR===GAMES&&line===SNIPER_ROW)return GAME_SNIPER;
  return line;
 }
 let currentGameID=0;
@@ -1683,6 +2127,7 @@ function Game_Init(id){currentGameID=id;
   case GAME_BLACKJACK: BJ_init(); break;
   case GAME_ROULETTE: RL_init(); break;
   case GAME_MAILRUN: MR_init(); break;
+  case GAME_SNIPER: SN_init(); break;
  }
 }
 function Game_Step(id){
@@ -1697,6 +2142,7 @@ function Game_Step(id){
   case GAME_BLACKJACK: BJ_step(); break;
   case GAME_ROULETTE: RL_step(); break;
   case GAME_MAILRUN: MR_step(); break;
+  case GAME_SNIPER: SN_step(); break;
  }
 }
 function tiltVec(){const a=IMU.readAcceleration();return [a[0],a[1]];}
@@ -1850,7 +2296,7 @@ function AS_step(){
   a.x+=a.vx; a.y+=a.vy;
   if(a.x<0||a.x>=MAX_SCREEN_WIDTH||a.y<0||a.y>=MAX_SCREEN_HEIGHT){
    if(millis()-a.spawnTime>OFFSCREEN_TIMEOUT_ASTEROID){a.isAlive=false;gameScore++;
-    Game_Front_Card(Game_Name(GAME_AVOIDSTEROIDS)," <<< scroll to exit");}   /* survived one: +1 */
+    Game_Front_Card(Game_Name(GAME_AVOIDSTEROIDS),">>> scroll to exit <<<");}   /* survived one: +1 */
   }
  }
  S.asteroids=S.asteroids.filter(a=>a.isAlive||millis()-a.spawnTime<20000);
@@ -1866,7 +2312,7 @@ function AS_step(){
   for(const a of S.asteroids){
    if(a.isAlive&&AS_dist(b.x,b.y,a.x,a.y)<ASTEROID_SIZE+1){
     a.isAlive=false;hit=true;gameScore+=5;PlaySound(Select);
-    Game_Front_Card(Game_Name(GAME_AVOIDSTEROIDS)," <<< scroll to exit");break;}
+    Game_Front_Card(Game_Name(GAME_AVOIDSTEROIDS),">>> scroll to exit <<<");break;}
   }
   if(hit||b.x<0||b.x>=MAX_SCREEN_WIDTH||b.y<0||b.y>=MAX_SCREEN_HEIGHT)S.bullet=null;
  }
@@ -1973,7 +2419,7 @@ function TD_step(){
  }
  const sc=Math.trunc(TD.dist/10);
  if(sc!==gameScore){gameScore=sc;
-  if(sc%10===0)Game_Front_Card(Game_Name(GAME_TILT_DRIVE)," <<< scroll to exit");}
+  if(sc%10===0)Game_Front_Card(Game_Name(GAME_TILT_DRIVE),">>> scroll to exit <<<");}
  OLED.display();
 }
 
@@ -1987,12 +2433,12 @@ function TD_step(){
 const SL_SYMS=["CHERRY","BELL","BAR","LEMON","PLUM","MELON","SEVEN"];
 let SL=null;
 function SL_init(){SL={reels:[0,1,2],spin:0,msg:"CLICK = PULL"};SL_draw();}
-function SL_draw(){
+function SL_draw(){ /* [G6+A9 letters] zoned left; ONE centered ceremonial line (the reels) */
  OLED.clearDisplay();setFont(SMALL_FONT);
- screenPrintLnCentered(10,"S L O T S",0);
+ screenPrintLn(8,3,"SLOTS",0);
  screenPrintLnCentered(30,SL_SYMS[SL.reels[0]]+"  "+SL_SYMS[SL.reels[1]]+"  "+SL_SYMS[SL.reels[2]],0);
- screenPrintLnCentered(48,SL.msg,0);
- screenPrintLnCentered(58,">>> scroll to exit <<<",1);
+ screenPrintLn(46,3,SL.msg,0);
+ screenPrintLn(58,3,">>> scroll to exit <<<",1);
 }
 function SL_step(){
  if(SL.spin>0){
@@ -2005,7 +2451,7 @@ function SL_step(){
    if(r[0]===r[1]&&r[1]===r[2]){gameScore+=10;SL.msg="THREE OF A KIND  +10";}
    else if(r[0]===r[1]||r[1]===r[2]||r[0]===r[2]){gameScore+=2;SL.msg="PAIR  +2";}
    else SL.msg="NO WIN";                       /* flat. */
-   Game_Front_Card(Game_Name(GAME_SLOTS)," <<< scroll to exit");
+   Game_Front_Card(Game_Name(GAME_SLOTS),">>> scroll to exit <<<");
   } else SL.msg="- - -";
   SL_draw();return;
  }
@@ -2013,13 +2459,13 @@ function SL_step(){
 }
 let CR=null;
 function CR_init(){CR={bet:0,point:0,msg:"CLICK=BET  SHAKE=ROLL",d:[0,0]};CR_draw();}
-function CR_draw(){
+function CR_draw(){ /* [G6+A9] zoned left; the roll is the ceremonial line */
  OLED.clearDisplay();setFont(SMALL_FONT);
- screenPrintLnCentered(10,"C R A P S",0);
- screenPrintLnCentered(22,"BET: "+(CR.bet===0?"PASS":"DONT PASS"),0);
- screenPrintLnCentered(34,CR.d[0]?("ROLL  "+CR.d[0]+" + "+CR.d[1]+" = "+(CR.d[0]+CR.d[1])):"",0);
- screenPrintLnCentered(46,CR.point?("POINT IS "+CR.point):CR.msg,0);
- screenPrintLnCentered(58,">>> scroll to exit <<<",1);
+ screenPrintLn(8,3,"CRAPS",0);
+ screenPrintLn(20,3,"BET: "+(CR.bet===0?"PASS":"DONT PASS"),0);
+ if(CR.d[0])screenPrintLnCentered(34,CR.d[0]+" + "+CR.d[1]+" = "+(CR.d[0]+CR.d[1]),0);
+ screenPrintLn(46,3,CR.point?("POINT IS "+CR.point):CR.msg,0);
+ screenPrintLn(58,3,">>> scroll to exit <<<",1);
 }
 function CR_step(){
  if(Pull_From_Buffer(SHUTTER)&&!CR.point){CR.bet=1-CR.bet;CR_draw();return;}
@@ -2035,7 +2481,7 @@ function CR_step(){
    else if(t===7){CR.msg=(CR.bet===1)?"SEVEN OUT  +1":"SEVEN OUT";if(CR.bet===1)gameScore++;CR.point=0;}
    else CR.msg="";
   }
-  Game_Front_Card(Game_Name(GAME_CRAPS)," <<< scroll to exit");
+  Game_Front_Card(Game_Name(GAME_CRAPS),">>> scroll to exit <<<");
   CR_draw();
  }
 }
@@ -2054,13 +2500,13 @@ function BJ_init(){
  BJ={you:[BJ_deal(),BJ_deal()],dealer:[BJ_deal(),BJ_deal()],done:false,msg:"CLICK=HIT  SHAKE=STAND"};
  BJ_draw();
 }
-function BJ_draw(){
+function BJ_draw(){ /* [G6+A9] hands zoned left; the verdict is the ceremonial line */
  OLED.clearDisplay();setFont(SMALL_FONT);
- screenPrintLnCentered(8,"B L A C K J A C K",0);
- screenPrintLnCentered(20,"DEALER  "+(BJ.done?BJ.dealer.map(BJ_name).join("  ")+"  ("+BJ_val(BJ.dealer)+")":BJ_name(BJ.dealer[0])+"  [ ]"),0);
- screenPrintLnCentered(34,"YOU  "+BJ.you.map(BJ_name).join("  ")+"  ("+BJ_val(BJ.you)+")",0);
- screenPrintLnCentered(48,BJ.msg,0);
- screenPrintLnCentered(58,">>> scroll to exit <<<",1);
+ screenPrintLn(8,3,"BLACKJACK",0);
+ screenPrintLn(20,3,"DEALER  "+(BJ.done?BJ.dealer.map(BJ_name).join(" ")+" ("+BJ_val(BJ.dealer)+")":BJ_name(BJ.dealer[0])+" [ ]"),0);
+ screenPrintLn(32,3,"YOU  "+BJ.you.map(BJ_name).join(" ")+" ("+BJ_val(BJ.you)+")",0);
+ screenPrintLnCentered(46,BJ.msg,0);
+ screenPrintLn(58,3,">>> scroll to exit <<<",1);
 }
 function BJ_settle(){
  while(BJ_val(BJ.dealer)<17)BJ.dealer.push(BJ_deal()); /* DEALER STANDS ON 17 — flat rule card */
@@ -2069,13 +2515,13 @@ function BJ_settle(){
  else if(y===d)BJ.msg="PUSH";
  else BJ.msg="DEALER WINS";                             /* flat. */
  BJ.done=true;BJ_draw();
- Game_Front_Card(Game_Name(GAME_BLACKJACK)," <<< scroll to exit");
+ Game_Front_Card(Game_Name(GAME_BLACKJACK),">>> scroll to exit <<<");
 }
 function BJ_step(){
  if(BJ.done){if(Pull_From_Buffer(SHUTTER)){BJ_init();}return;}
  if(Pull_From_Buffer(SHUTTER)){
   BJ.you.push(BJ_deal());
-  if(BJ_val(BJ.you)>21){BJ.msg="BUST";BJ.done=true;Game_Front_Card(Game_Name(GAME_BLACKJACK)," <<< scroll to exit");}
+  if(BJ_val(BJ.you)>21){BJ.msg="BUST";BJ.done=true;Game_Front_Card(Game_Name(GAME_BLACKJACK),">>> scroll to exit <<<");}
   BJ_draw();return;
  }
  if(Unit_Is_Shaking(1.3)&&!BJ.done)BJ_settle();
@@ -2085,14 +2531,14 @@ let RL=null;
 function RL_init(){RL={bet:0,spin:0,n:0,msg:"CLICK=BET  SHAKE=SPIN"};RL_draw();}
 function RL_label(n){return n===37?"00":String(n);}
 function RL_color(n){return (n===0||n===37)?"HOUSE":RL_REDS.indexOf(n)>=0?"RED":"BLACK";}
-function RL_draw(){
+function RL_draw(){ /* [G6+A9] bet zoned left; the number is the ceremonial line */
  OLED.clearDisplay();setFont(SMALL_FONT);
- screenPrintLnCentered(10,"R O U L E T T E",0);
- screenPrintLnCentered(22,"BET: "+["RED","BLACK","ODD","EVEN"][RL.bet],0);
+ screenPrintLn(8,3,"ROULETTE",0);
+ screenPrintLn(18,3,"BET: "+["RED","BLACK","ODD","EVEN"][RL.bet],0);
  setFont(LARGE_FONT);screenPrintLnCentered(40,RL.spin>0?RL_label(RL.n):(RL.msg==="?"?"":RL_label(RL.n)+" "+RL_color(RL.n)),0);
  setFont(SMALL_FONT);
- screenPrintLnCentered(52,RL.spin>0?"NO MORE BETS":RL.msg,0);
- screenPrintLnCentered(60,">>> scroll to exit <<<",1);
+ screenPrintLn(50,3,RL.spin>0?"NO MORE BETS":RL.msg,0);
+ screenPrintLn(58,3,">>> scroll to exit <<<",1);
 }
 function RL_step(){
  if(RL.spin>0){
@@ -2103,7 +2549,7 @@ function RL_step(){
    const win=(RL.bet===0&&c==="RED")||(RL.bet===1&&c==="BLACK")||(RL.bet===2&&odd&&c!=="HOUSE")||(RL.bet===3&&!odd&&c!=="HOUSE");
    RL.msg=win?"WIN  +1":(c==="HOUSE"?"HOUSE":"NO WIN");   /* flat. */
    if(win)gameScore++;
-   Game_Front_Card(Game_Name(GAME_ROULETTE)," <<< scroll to exit");
+   Game_Front_Card(Game_Name(GAME_ROULETTE),">>> scroll to exit <<<");
   }
   RL_draw();return;
  }
@@ -2135,7 +2581,7 @@ function MR_step(){
   if(millis()>MR.phAt+700){
    MR.phase++;
    if(MR.phase>3){MR.phase=0;gameScore++;MR.bombs++;MR.base=(MR.base+1)%3;MR.dist=MR_LEG;
-    Game_Front_Card(Game_Name(GAME_MAILRUN)," <<< scroll to exit");}
+    Game_Front_Card(Game_Name(GAME_MAILRUN),">>> scroll to exit <<<");}
    MR.phAt=millis();
   }
   return;
@@ -2155,10 +2601,52 @@ function MR_step(){
  MR.rocks=MR.rocks.filter(r=>r.z<1);
  /* HUD: crosshair ship + homing line + counters (mechanical labels) */
  OLED.drawLine(60,32,68,32,WHITE);OLED.drawLine(64,28,64,36,WHITE);
- setFont(SMALL_FONT);
- screenPrintLn(6,2,MR_BASES[MR.base]+"  DIST "+Math.max(0,Math.trunc(MR.dist)),0);
- screenPrintLn(6,96,"BOMB "+MR.bombs,0);
+ setFont(SMALL_FONT); /* [G8 letter] HUD at the bottom edge per canon 2.3 */
+ screenPrintLn(58,2,MR_BASES[MR.base]+"  DIST "+Math.max(0,Math.trunc(MR.dist)),0);
+ screenPrintLn(58,96,"BOMB "+MR.bombs,0);
  if(MR.dist<=0){MR.phase=1;MR.phAt=millis();PlaySound(ConnectionSuccess);}
+ OLED.display();
+}
+
+/* ============ [SNIPER — Informer −07, dinner marathon; game id 10] ============
+   Tilt-aim, click-shoot, on the proven game machinery. HOMED provisionally at
+   PROGRAMS/Games (Ops recommendation: the machinery IS the games framework —
+   tilt integrator, conventions, score; Detectors would fit the persona but not
+   the mechanics). Flat range vocabulary per the persona-doc spec; surveillance
+   framing (OBSERVATION LOGGED), never-evil. Persona-gating rides the seam. */
+let SN=null;
+function SN_init(){
+ SN={ax:64,ay:32,wind:(random(0,2)===0?-1:1)*(0.08+random(0,20)/200),targets:[],range:80+random(0,320)};
+ for(let i=0;i<3;i++)SN.targets.push({x:random(14,114),y:random(10,54),vx:(random(0,20)-10)/40,vy:(random(0,20)-10)/60});
+}
+function SN_step(){
+ const a=IMU.readAcceleration();
+ SN.ax=constrain(SN.ax+(-a[0])*1.6+SN.wind,4,124);
+ SN.ay=constrain(SN.ay+(-a[1])*1.6,4,60);
+ for(const t of SN.targets){
+  t.x+=t.vx;t.y+=t.vy;
+  if(t.x<8||t.x>120)t.vx=-t.vx;
+  if(t.y<8||t.y>56)t.vy=-t.vy;
+ }
+ if(Pull_From_Buffer(SHUTTER)){
+  PlaySound(Scroll);
+  const hit=SN.targets.find(t=>AS_dist(t.x,t.y,SN.ax,SN.ay)<5);
+  if(hit){gameScore++;
+   hit.x=random(14,114);hit.y=random(10,54);
+   Game_Front_Card(Game_Name(GAME_SNIPER)," OBSERVATION LOGGED");
+   SN.range=80+random(0,320);SN.wind=(random(0,2)===0?-1:1)*(0.08+random(0,20)/200);
+  }
+ }
+ OLED.clearDisplay();
+ for(const t of SN.targets)OLED.drawCircle(Math.trunc(t.x),Math.trunc(t.y),3,WHITE);
+ /* the reticle */
+ const x=Math.trunc(SN.ax),y=Math.trunc(SN.ay);
+ OLED.drawCircle(x,y,6,WHITE);
+ OLED.drawLine(x-9,y,x-3,y,WHITE);OLED.drawLine(x+3,y,x+9,y,WHITE);
+ OLED.drawLine(x,y-9,x,y-3,WHITE);OLED.drawLine(x,y+3,x,y+9,WHITE);
+ setFont(SMALL_FONT);
+ screenPrintLn(6,2,"WIND "+(SN.wind<0?"LEFT":"RIGHT"),0);
+ screenPrintLn(6,84,"RANGE "+SN.range+" YD",0);
  OLED.display();
 }
 
@@ -2208,12 +2696,12 @@ function GB_step(){
   if(!d.on)continue; left++;
   OLED.fillCircle(d.x,d.y,1,WHITE);
   if(AS_dist(GB.x,GB.y,d.x,d.y)<4){d.on=false;gameScore+=10;PlaySound(Select);
-   Game_Front_Card(Game_Name(GAME_GOBBLE)," <<< scroll to exit");}   /* [games batch] real-time score */
+   Game_Front_Card(Game_Name(GAME_GOBBLE),">>> scroll to exit <<<");}   /* [games batch] real-time score */
  }
  if(left==0){   /* cleared: keep score, roll a fresh board (and its hazard) */
   GB.board++; GB.x=64; GB.y=32; GB.vx=0; GB.vy=0;
   GB_newBoard(false);
-  Game_Front_Card(Game_Name(GAME_GOBBLE)," <<< scroll to exit");   /* per-screen refresh: board rolls, card follows */
+  Game_Front_Card(Game_Name(GAME_GOBBLE),">>> scroll to exit <<<");   /* per-screen refresh: board rolls, card follows */
  }
  OLED.fillCircle(GB.x,GB.y,2,WHITE);
  OLED.display();
@@ -2328,7 +2816,7 @@ function Messages_Draw(m){
  Activate_the_Screen(FRONT_SCREEN,true);
  screenPrintLn(Row_01,0," FROM: "+m.from,0);
  screenPrintLn(Row_02,0," "+m.subject,0);
- screenPrintLn(Row_03,0,(m.type===MSG_AUDIO)?" click=play  scroll=exit":" scroll to exit",1);
+ screenPrintLn(Row_03,0,(m.type===MSG_AUDIO)?" click=play  scroll=exit":">>> scroll to exit <<<",1);
  /* top screen: the body */
  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
  const lines=(m.type===MSG_MORSE)?["keying..."]:m.body.split("_");
@@ -2402,7 +2890,7 @@ function Scaffold_EXE(upidName){
    Activate_the_Screen(FRONT_SCREEN,true);
    screenPrintLn(Row_01,0," "+(scafEntry?scafEntry.name:get_as_char(lineName)),0);
    screenPrintLn(Row_02,0," [SCAFFOLD - not built]",0);
-   screenPrintLn(Row_03,0," scroll to exit",1);
+   screenPrintLn(Row_03,0,">>> scroll to exit <<<",1);
    Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
    {
     const d=(scafEntry&&scafEntry.descriptor)?scafEntry.descriptor:"[stub]";
@@ -2489,7 +2977,7 @@ function Prob_Prompt(which){
  } else {
   screenPrintLn(Row_01,0," "+(merged?("DICE  "+p.n+" DIE OF "+p.s):["","","PICK A CARD","","LOTTERY"][which]),0);
   screenPrintLn(Row_02,0,merged?" click=dice shake=roll":(which==4?" shake to roll":" click or shake"),0);
-  screenPrintLn(Row_03,0," scroll to exit",1);
+  screenPrintLn(Row_03,0,">>> scroll to exit <<<",1);
  }
  Activate_the_Screen(TOP_SCREEN,true);setFont(LARGE_FONT);
  screenPrintLnCentered(38,"?",1);
@@ -2540,6 +3028,8 @@ const DET_BANDS=[
  ["[stub] UNPROVEN","[stub] PLAUSIBLE","[stub] CONFIRMED"],
  ["[stub] DOUBTFUL","[stub] CONDITIONAL","[stub] TRUSTED"],
  ["[stub] BELOW SPEC","[stub] WITHIN SPEC","[stub] ABOVE SPEC"]
+,
+ ["SPY-NORMAL","WEIRDO","SPY"]  /* [−07 Spy Detector, dinner marathon] RULED verdicts; band order low→high peak = mechanical pick, trivially swappable — flagged */
 ];
 function Detectors_EXE(which){
  switch(detState){
@@ -2564,9 +3054,9 @@ function Detectors_EXE(which){
     detVerdict=DET_BANDS[which][band];
     detUntil=millis()+4000;
     Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
-    screenPrintLnCentered(26,detVerdict,0);
-    screenPrintLnCentered(40,"peak "+Math.trunc(detPeak),0);
-    screenPrintLnCentered(52,"[verdict words parked]",1);
+    screenPrintLnCentered(26,detVerdict,0);            /* the verdict = the ceremonial line */
+    screenPrintLn(46,3,"peak "+Math.trunc(detPeak),0);  /* [G6 letter] data to the grid */
+    screenPrintLn(58,3,"[verdict words parked]",1);
     PlaySound(Connected);
     detState=DET_VERDICT;
    }
@@ -2620,7 +3110,7 @@ function Advice_EXE(which){
    Activate_the_Screen(FRONT_SCREEN,true);
    screenPrintLn(Row_01,0," "+get_as_char(lineName),0);
    screenPrintLn(Row_02,0," click=again",0);
-   screenPrintLn(Row_03,0," scroll to exit",1);
+   screenPrintLn(Row_03,0,">>> scroll to exit <<<",1);
    advState=ADV_SHOW;
    break;
   case ADV_SHOW:
@@ -2669,6 +3159,11 @@ function MGK_VIIIp_OS(){
   case DETECTORS: Detectors_EXE(lineNum_PTR); break;           /* [TWIN DELTA] the mic becomes real */
   case ADVICE: Advice_EXE(lineNum_PTR); break;                 /* [TWIN DELTA] generative mechanic */
   case SCAFFOLD_PROC: Scaffold_EXE(scafUpid); break;           /* [TWIN DELTA] honest scaffold */
+  case APPP: Apps_EXE(lineNum_PTR); break;                     /* [APP-PATTERN ENGINE] */
+  case RADIOP: Radio_EXE(); break;                             /* [RADIO −07] */
+  case ELIZP: Eliz_EXE(); break;                               /* [PSYCH −02] */
+  case BRAINP: Brain_EXE(); break;                             /* [PSYCH −02] */
+  case INKP: Ink_EXE(); break;                                 /* [PSYCH −02] */
  }
 }
 
@@ -2723,23 +3218,25 @@ function Doors_Restructure(){
  /* ANSWERS door */
  doorRow(DA,0,"Answers",ANSWERS,0,0);
  doorRow(DA,1,"Advice",ADVICE,0,0);
- doorRow(DA,2,"Excuses (not installed)",DA,0,0);
- doorRow(DA,3,"Lines (not installed)",DA,0,0);
+ doorRow(DA,2,"Excuses",APPP,0,1);   /* app-pattern engine live */
+ doorRow(DA,3,"Lines",APPP,0,1);
  doorRow(DA,4,"Predictions",PREDICTIONS,0,0);
  doorRow(DA,5,"Probabilities",PROBABILITIES,0,0);
- doorRow(DA,6,"ELIZ [-02] (not installed)",DA,0,0);
+ doorRow(DA,6,"ELIZ [-02]",ELIZP,0,1);   /* built; psych suite 2026-07-23 */
  doorRow(DA,7,"back",R,0,0);
  MENU_TABLE[DA][8]=["[doors]",".end"];MENU_PARAMETER_TABLE[DA][8]=[0,R,0,0,1,1,1,1];
  /* PROGRAMS door */
  doorRow(DP,0,"Games",GAMES,0,0);
  doorRow(DP,1,"Detectors",DETECTORS,0,0);
- doorRow(DP,2,"Calculator (not installed)",DP,0,0);
- doorRow(DP,3,"Notepad (not installed)",DP,0,0);
- doorRow(DP,4,"Radio [-07] (not installed)",DP,0,0);
- doorRow(DP,5,"Phone Tap [-07] (not installed)",DP,0,0);
- doorRow(DP,6,"Casino [-21]",CT,0,0);
- doorRow(DP,7,"back",R,0,0);
- MENU_TABLE[DP][8]=["[doors]",".end"];MENU_PARAMETER_TABLE[DP][8]=[0,R,0,0,1,1,1,1];
+ doorRow(DP,2,"Brain Training [-02]",BRAINP,0,1);   /* built; psych suite 2026-07-23 */
+ doorRow(DP,3,"Inkblots [-02]",INKP,0,1);           /* built; psych suite 2026-07-23 */
+ doorRow(DP,4,"Calculator (not installed)",DP,0,0);
+ doorRow(DP,5,"Notepad (not installed)",DP,0,0);
+ doorRow(DP,6,"Radio [-07]",RADIOP,0,1);   /* built; persona-gating rides the seam */
+ doorRow(DP,7,"Phone Tap [-07] (not installed)",DP,0,0);
+ doorRow(DP,8,"Casino [-21]",CT,0,0);
+ doorRow(DP,9,"back",R,0,0);
+ MENU_TABLE[DP][10]=["[doors]",".end"];MENU_PARAMETER_TABLE[DP][10]=[0,R,0,0,1,1,1,1];
  /* SETTINGS door */
  doorRow(DS,0,"Preferences",PREFERENCES,0,0);
  doorRow(DS,1,"User",USER,0,0);
@@ -2753,14 +3250,14 @@ function Doors_Restructure(){
  MENU_TABLE[CT][5]=["[doors]",".end"];MENU_PARAMETER_TABLE[CT][5]=[0,DP,0,0,1,1,1,1];
  CASINO_TABLE=CT;
  /* casino stays passcode-gated (placeholder 2121, CvC pattern) */
- MENU_PARAMETER_TABLE[DP][6][READ_ACCESS_PASSCODE]=2121;
+ MENU_PARAMETER_TABLE[DP][8][READ_ACCESS_PASSCODE]=2121; /* row moved by psych-suite insert */
  /* THE DOORS ROOT: four doors, MESSAGES direct to the inbox */
- doorRow(R,0,"ANSWERS",DA,0,0);
- doorRow(R,1,"PROGRAMS",DP,0,0);
- doorRow(R,2,"MESSAGES",MESSAGES,0,0);
- doorRow(R,3,"SETTINGS",DS,0,0);
+ doorRow(R,0,"Answers",DA,0,0);
+ doorRow(R,1,"Programs",DP,0,0);
+ doorRow(R,2,"Messages",MESSAGES,0,0);
+ doorRow(R,3,"Settings",DS,0,0);
  MENU_TABLE[R][4]=["[doors]",".end"];MENU_PARAMETER_TABLE[R][4]=[0,R,0,0,1,1,1,1];
- DOORS_ROOT=R;
+ DOORS_ROOT=R; ANSWERS_DOOR=DA;
  /* mail-run twin-delta row in the games table (unchanged) */
  const gt=MENU_TABLE[GAMES], gp=MENU_PARAMETER_TABLE[GAMES];
  let ei=gt.findIndex(r=>r&&r[1]===".end");
@@ -2768,6 +3265,15 @@ function Doors_Restructure(){
  gt.splice(ei,0,["[twin]","Mail Run"]);
  gp.splice(ei,0,[176,GAMES,ei,1,1,1,1,1]);
  MAILRUN_ROW=ei;
+ gt.splice(ei+1,0,["[twin]","Sniper [-07]"]);
+ gp.splice(ei+1,0,[177,GAMES,ei+1,1,1,1,1,1]);
+ SNIPER_ROW=ei+1;
+ /* spy detector: twin-delta row on the Detectors table (machinery home) */
+ const dt2=MENU_TABLE[DETECTORS],dp2=MENU_PARAMETER_TABLE[DETECTORS];
+ let di=dt2.findIndex(r=>r&&r[1]===".end");
+ if(di<0)di=dt2.length;
+ dt2.splice(di,0,["[twin]","Spy Detector [-07]"]);
+ dp2.splice(di,0,[178,DETECTORS,di,1,1,1,1,1]);
  /* back-row re-aim: legacy parents 0/1/3 -> the owning door */
  const DOOR_OF={5:DA,8:DA,6:DA,7:DA,9:DP,13:DP,2:R,4:DS,14:DS,15:DS,16:4,17:4,18:4,19:4,10:2,11:2,12:2};
  let reaimed=0;
@@ -2804,32 +3310,31 @@ async function frontSay(lines){
  const rows=[Row_01,Row_02,Row_03];
  for(let i=0;i<lines.length&&i<3;i++)screenPrintLn(rows[i],0,lines[i],(i===Math.min(lines.length,3)-1)?1:0);
 }
+async function frontCeremony(text){ /* [G1 letter] the ceremony font, one line, front */
+ Activate_the_Screen(FRONT_SCREEN,true);setFont(2);
+ screenPrintLnCentered(22,text,1);
+ setFont(1);
+}
+async function frontRail(name){ /* [A3] the original bracket-rail card opens boot sections */
+ Activate_the_Screen(FRONT_SCREEN,true);
+ screenPrintLn(Row_01,0," ----<          >----",0);
+ screenPrintLn(Row_01,40,name,1);
+}
 async function Boot3_SelfCorrect(){
  /* glitch doctrine: a boot step may error and SELF-CORRECT — flat, existing words */
  if(!glitchOn||Math.random()>=GLITCH_RATE*220)return;
  await frontSay([" RETRYING"]);await sleep(500);
 }
 async function Boot3_Chatter(ms){
- /* L1 top-screen chatter: rich, compelling, needn't make sense — assembled from
-    the existing pools ONLY. EGG-SLOT: [PAPA] may seed lines/encodings here
-    (passcode real estate) — deliberately not invented by Ops. */
- Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ /* [G2 letter] the chatter runs INSIDE the monitor windows — the CODE window
+    scrolls, the STATUS line narrates the connection, the GRAPH shows SIGNAL:
+    boxed per canon 2.3/2.4, and the download fiction gets the machine's own
+    face. EGG-SLOT: [PAPA] may seed the pools (passcode real estate) —
+    deliberately not invented by Ops. */
+ Activate_the_Screen(TOP_SCREEN,true);
  const until=performance.now()+ms;
- const log=[];
- const mk=()=>{
-  const k=random(0,5);
-  if(k===0)return opCodes[random(0,MAX_OPCODES)]+"  "+opOperands[random(0,MAX_OPERANDS)];
-  if(k===1)return MON_SET4[random(0,MON_SET4.length)].replace("%",String(random(1,40)));
-  if(k===2)return ["SELF TEST","MEMORY CHECK","AUDIO CHECK","DISPLAY CHECK"][random(0,4)]+" OK";
-  if(k===3)return ["PREDICTION ENGINE - DATA NOT LOADED","USER RECORD - NOT ON FILE","RESPONSE CURVE - LOADING","CODE ACCEPTED"][random(0,4)];
-  return "PROCESSES "+random(1,9)+" RUN";
- };
  while(performance.now()<until){
-  log.push(mk());if(log.length>9)log.shift();
-  OLED.clearDisplay();
-  for(let i=0;i<log.length;i++)screenPrintLn(4+i*6,3,log[i],0);
-  OLED.display();
-  if(glitchOn&&Math.random()<GLITCH_RATE*160){log.push("RETRYING");if(log.length>9)log.shift();}
+  System_Monitor();
   await sleep(240);
  }
 }
@@ -2837,17 +3342,19 @@ async function Boot3(){
  if(bootRunning)return;
  bootRunning=true;
  const lvl=bootLevel();
- await frontSay([" PLEASE WAIT"]);
+ await frontCeremony("PLEASE WAIT");   /* [G1 letter] */
  await sleep(500);
  Activate_the_Screen(TOP_SCREEN,true);System_Monitor(); /* the top wakes second, into monitor mode */
  if(lvl<=0){ /* ---- LEVEL 1: VIRGIN ---- */
   await sleep(400);
+  await frontRail("INSTALL");await sleep(600);PlaySound(BeepsAndBoops); /* [A3+A4] */
   await frontSay([" SYSTEM RECORD -"," NOT ON FILE"]);await sleep(900);
   await frontSay([" INVESTIGATING"]);await sleep(700);await Boot3_SelfCorrect();
   await frontSay([" FRESH INSTALLATION"," DETERMINED"]);await sleep(800);
-  await frontSay([" OPERATING SYSTEM"," DOWNLOAD - EST 12 SEC"," PLEASE WAIT"]);
+  await frontSay([" OPERATING SYSTEM"," DOWNLOAD"," EST 12 SECONDS"]);
   Mon_StartConnection(1);
   await Boot3_Chatter(11000);
+  PlaySound(ConnectionSuccess); /* [A4] */
   await frontSay([" DOWNLOAD COMPLETE"," RESTARTING"]);await sleep(900);
   setBootLevel(1);
   bootRunning=false;
@@ -2855,16 +3362,17 @@ async function Boot3(){
  }
  if(lvl===1){ /* ---- LEVEL 2: FIRST-RUN SETUP ---- */
   await sleep(300);
+  await frontRail("SETUP");await sleep(600);PlaySound(BeepsAndBoops); /* [A3+A4] */
   await frontSay([" SYSTEM FILE FOUND"," FIRST RUN SETUP"]);await sleep(800);
   for(const d of ["MEMORY CHECK OK","AUDIO CHECK OK","DISPLAY CHECK OK","RESPONSE CURVE - LOADED"]){
    await frontSay([" "+d]);await sleep(420);await Boot3_SelfCorrect();
   }
   /* the calibration dance: PERMIT or POSTPONE — never "answers" */
-  await frontSay([" EXTERNAL CONTENT -"," MESSAGES - FILES -"," RESPONSE CALIBRATION"]);await sleep(1100);
+  await frontSay([" EXTERNAL CONTENT"," MESSAGES AND FILES"," RESPONSE CALIBRATION"]);await sleep(1100);
   Activate_the_Screen(FRONT_SCREEN,true);
   screenPrintLn(Row_01,0," DOWNLOAD NOW?",0);
-  screenPrintLn(Row_02,0," CLICK  = PERMIT",0);
-  screenPrintLn(Row_03,0," SCROLL = POSTPONE",1);
+  screenPrintLn(Row_02,0," <click = permit>",0);
+  screenPrintLn(Row_03,0," <scroll = postpone>",1);
   Device_Manager[SHUTTER][BUFFER_VALUE]=EMPTY;Device_Manager[ROTARY_DIAL][BUFFER_VALUE]=EMPTY;
   let choice=null;const t0=performance.now();
   while(choice===null){
@@ -2885,6 +3393,7 @@ async function Boot3(){
  } else { /* ---- LEVEL 3: ESTABLISHED (sleep-like) ---- */
   await sleep(300);
   await Boot3_SelfCorrect();
+  PlaySound(PowerMaury); /* [A4] */
   await frontSay([" USER RECORD -"," ON FILE"," SYSTEM OK"]);await sleep(700);
  }
  Activate_the_Screen(TOP_SCREEN,true);
