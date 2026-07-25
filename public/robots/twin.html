@@ -5271,6 +5271,20 @@ const BOOT_LEVEL_KEY="wbr_boot_level";
 function bootLevel(){try{return parseInt(localStorage.getItem(BOOT_LEVEL_KEY)||"0",10);}catch(e){return 0;}}
 function setBootLevel(n){try{localStorage.setItem(BOOT_LEVEL_KEY,String(n));}catch(e){}}
 function devResetBootLevel(){setBootLevel(0);chip("warn","[DEV] install state reset to VIRGIN — Restart to see Level 1");}
+function Top_Working(t){
+ /* [GA3 - THE TWO-SCREEN PERFORMANCE] the top shows THE WORKING HAPPENING
+    behind each front command - sparks + the executing line, synchronized
+    to the front's beat. */
+ try{
+  Activate_the_Screen(TOP_SCREEN,false);setFont(SMALL_FONT);
+  OLED.fillRect(0,10,128,44,BLACK);
+  for(let i=0;i<16;i++)OLED.drawPixel(random(0,128),random(12,52),WHITE);
+  screenPrintLn(30,8,"exec: "+String(t).trim().toLowerCase(),0);
+  screenPrintLn(40,8,"........",0);
+  OLED.display();
+  Activate_the_Screen(FRONT_SCREEN,false);
+ }catch(e){}
+}
 async function frontSay(lines){
  /* [D1 WALK REWORK] the front = MAJOR boot steps at Level-1 pace, styled as
     a terminal prompt: vertically centered, "> " prompt on the lead line, a
@@ -5285,6 +5299,7 @@ async function frontSay(lines){
  const last=(nl>0)?((nl===1?"> ":"  ")+String(lines[nl-1]).replace(/^\s+/,"")):"";
  OLED.fillRect(2+last.length*6,top+(nl-1)*10,5,7,WHITE); /* the cursor block */
  OLED.display();
+ if(bootRunning)Top_Working(lines[0]||""); /* [GA3] the top joins the dance */
 }
 let BOOT_PACE=1.6; /* [X4 walk-six] the global ceremony multiplier - dev-tunable */
 function bsleep(ms){return sleep(Math.round(ms*BOOT_PACE));}
@@ -5396,6 +5411,20 @@ async function Boot3_SelfCorrect(){
  monRetriesLast++;
  await frontSay([" RETRYING"]);await bsleep(500);
 }
+async function Dial_Handshake(){
+ /* [A1 - CAUSALITY ABSOLUTE] dial -> carrier -> handshake -> LINK UP; only
+    then may a download exist. The top narrates the working (GA3). */
+ FX_dial90();
+ const steps=["DIALING...","CARRIER DETECTED","HANDSHAKE","LINK UP"];
+ for(let i=0;i<steps.length;i++){
+  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+  screenPrintLn(6,3,"CONNECTION",0);OLED.drawLine(0,9,127,9,WHITE);
+  for(let j=0;j<=i;j++)screenPrintLn(20+j*8,8,steps[j]+(j<i?"  OK":""),0);
+  OLED.display();
+  await bsleep(i===0?1100:650);
+ }
+ Activate_the_Screen(FRONT_SCREEN,false);
+}
 let monStutters=0;
 async function Boot3_Chatter(ms,withBar){
  /* [G2 letter] the chatter runs INSIDE the monitor windows. EGG-SLOT: [PAPA]
@@ -5407,8 +5436,8 @@ async function Boot3_Chatter(ms,withBar){
     the credit) = BANKED; the trigger hook fires at 5. Spice, not epic. */
  Activate_the_Screen(TOP_SCREEN,true);
  const t0=performance.now(), until=t0+ms;
- let nextScreech=1e15; /* [X3] the repeating screech is DEAD on boots */
- FX_dial90();           /* [X3] one true 90s connection, ~3s */
+ let nextScreech=1e15; /* [X3] screech dead; [A1] the dial LEFT the chatter -
+    Dial_Handshake() runs it BEFORE any download exists. Pure download here. */
  const stutterAt=(Math.random()<(0.10+(100-Health_H())/250))?(t0+ms*(0.25+Math.random()*0.5)):0;
  let stuttered=false;
  while(performance.now()<until){
@@ -5434,6 +5463,40 @@ async function Boot3_Chatter(ms,withBar){
   await sleep(240);
  }
 }
+async function Boot_Original_Charge(){
+ /* [GA2] the skeleton, beat for beat (BOOT.ino:9-62); [GA3] the top works
+    behind each front beat; [GA1] every step earns its dwell. */
+ PlaySound(BeepsAndBoops);
+ Activate_the_Screen(TOP_SCREEN,false);setFont(SMALL_FONT);
+ screenPrintLn(10,3,"> VIDEO",0);screenPrintLn(18,3,"CH F OK",0);OLED.display();
+ Activate_the_Screen(FRONT_SCREEN,false);
+ await bsleep(1000);
+ try{if(typeof spotFlicker==="function")spotFlicker(4);}catch(e){}
+ try{if(typeof BOOT_Triangles==="function")await BOOT_Triangles();}catch(e){}
+ PlaySound(PowerMaury);await bsleep(100);
+ setFont(1);screenPrintLn(8,38,"MGK-VIIIp",1);await bsleep(1000);   /* LOGO_DELAY */
+ Activate_the_Screen(TOP_SCREEN,false);setFont(SMALL_FONT);
+ screenPrintLn(26,3,"> IDENT",0);screenPrintLn(34,3,"MARK OK",0);OLED.display();
+ Activate_the_Screen(FRONT_SCREEN,false);setFont(SMALL_FONT);
+ PlaySound(PowerMaury);
+ screenPrintLn(32,1,"(c) (tm)",1);await bsleep(1500);               /* COPYRIGHT_DELAY */
+ PlaySound(PowerMaury);
+ screenPrintLn(32,85,"(Pat Pend)",1);await bsleep(1500);            /* PATENT_DELAY */
+ Activate_the_Screen(FRONT_SCREEN,true);
+ screenPrintLn(Row_01,0,Header_01,1);
+ screenPrintLn(Row_02,0,"    LOADING",1);
+ const frames=["|","/","-","\\"];
+ for(let sc=0;sc<3;sc++)for(let f=0;f<4;f++){                       /* the spinner */
+  setFont(1);screenPrintLn(Row_03,60,frames[f],1);
+  Activate_the_Screen(TOP_SCREEN,false);setFont(SMALL_FONT);
+  OLED.fillRect(0,44,128,10,BLACK);
+  screenPrintLn(50,3,"SEG "+(sc*4+f+1)+"/12 OK",0);OLED.display();  /* [GA3] the working */
+  Activate_the_Screen(FRONT_SCREEN,false);
+  await bsleep(170);                                                /* SPINNER_DELAY class */
+ }
+ PlaySound(ConnectionSuccess);
+ await bsleep(300);
+}
 async function Boot3(){
  if(bootRunning)return;
  unitPowered=true; /* [W1] any boot implies power */
@@ -5442,15 +5505,36 @@ async function Boot3(){
  health.powerOns++;health.ageSessions=(health.ageSessions||0)+1; /* [C5] one session older */
  Health_Spend(H_BOOT_COST);monRetriesLast=0; /* [HEALTH] real counters */
  const lvl=bootLevel();
- await frontCeremony("PLEASE WAIT");   /* [G1 letter] */
- await bsleep(500);
- Activate_the_Screen(TOP_SCREEN,true);System_Monitor(); /* the top wakes second, into monitor mode */
+ /* [A2 - THE POWER-ON CEREMONY, exact spec] power -> beats -> the glass
+    ILLUMINATES -> static -> test signal -> beat -> blank -> beat x2 ->
+    the sequence. PLEASE WAIT no longer opens the show (killed). */
+ await bsleep(450);await bsleep(450);                 /* a couple beats, dark */
+ Activate_the_Screen(TOP_SCREEN,true);if(typeof crtWarmStart==="function")crtWarmStart();
+ Activate_the_Screen(FRONT_SCREEN,true);if(typeof crtWarmStart==="function")crtWarmStart();
+ Activate_the_Screen(TOP_SCREEN,false);
+ await DisplayStatic(900);                            /* static signal */
+ OLED.clearDisplay();setFont(SMALL_FONT);
+ screenPrintLnCentered(22,"TEST SIGNAL",0);
+ for(let i=0;i<48;i+=6)OLED.fillRect(40+i,32,4,12,WHITE);
+ OLED.display();await bsleep(700);                    /* test signal */
+ await bsleep(400);                                   /* beat */
+ OLED.clearDisplay();OLED.display();
+ await bsleep(400);await bsleep(400);                 /* blank, beat x2 */
+ /* [GA2 - THE BOOT BASIS] Mike's original charge, excavated from BOOT.ino:
+    flicker -> triangles -> PowerMaury -> the mark -> (c)(tm) -> (Pat Pend)
+    -> LOADING + the |/-\ spinner -> success. Original delays x the pace. */
+ await Boot_Original_Charge();
+ Activate_the_Screen(TOP_SCREEN,true);System_Monitor(); /* the monitor takes the top */
  if(lvl<=0){ /* ---- LEVEL 1: VIRGIN ---- */
   await bsleep(650);
   await frontRail("INSTALL");await bsleep(600);PlaySound(BeepsAndBoops); /* [A3+A4] */
   await frontSay([" SYSTEM RECORD -"," NOT ON FILE"]);await bsleep(1300);
   await frontSay([" INVESTIGATING"]);await bsleep(1000);await Boot3_SelfCorrect();
   await frontSay([" FRESH INSTALLATION"," DETERMINED"]);await bsleep(1100);
+  /* [A1] the order, absolute: dial -> handshake -> ESTABLISHED -> download */
+  await frontSay([" DIALING"]);
+  await Dial_Handshake();
+  await frontSay([" CONNECTION"," ESTABLISHED"]);await bsleep(700);
   await frontSay([" OPERATING SYSTEM"," DOWNLOAD"]); /* [D2] the bar, not a count */
   Mon_StartConnection(1);
   await Boot3_Chatter(11000,true);
@@ -5489,6 +5573,8 @@ async function Boot3(){
    if(performance.now()-t0>120000)choice="postpone"; /* guard: never hang the bench */
   }
   if(choice==="permit"){
+   await frontSay([" DIALING"]);
+   await Dial_Handshake(); /* [A1] the same causality on the content pull */
    await frontSay([" DOWNLOADING"]);Mon_StartConnection(2);
    await Boot3_Chatter(3500,true);
    Messages_Trigger("first_boot");
