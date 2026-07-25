@@ -932,7 +932,10 @@ export default function Exhibit({ artist }) {
         <div className="ex-nav">
           <button className="ex-nav-logo" onClick={() => navigate(`/shop?from=${artist.shopExitParam}`)}>Weird.Baby</button>
           <div className="ex-nav-sub" onClick={() => window.scrollTo({ top: 0, behavior: "auto" })}>{artist.name}</div>
-          <button className="ex-nav-return" onClick={() => navigate(`/shop?from=${artist.shopExitParam}`)}>Gift Shop</button>
+          {/* [one-shop ruling, walk-six] config-driven: the entry stays in the
+              template (present in the DOM) but hides for exhibits that must
+              not advertise a shop — /robots today. */}
+          <button className="ex-nav-return" style={artist.shopEntryHidden ? { display: "none" } : undefined} onClick={() => navigate(`/shop?from=${artist.shopExitParam}`)}>Gift Shop</button>
         </div>
 
         {/* CAROUSEL */}

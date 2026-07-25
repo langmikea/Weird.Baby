@@ -223,6 +223,7 @@ body.usermode .lbl.anno{display:none}
    <button class="devonly" onclick="devWalkMode()" title="hide the known dead ends from the review path (list chip-reported)">Walk mode [dev]</button>
    <button class="devonly" onclick="devGlitchNow()" title="fire one glitch right now, to see it">Glitch now [dev]</button>
    <button class="devonly" onclick="devThink()" title="cycle the computing-length default S/M/L">Think S/M/L [dev]</button>
+   <button class="devonly" onclick="devPace()" title="cycle the boot ceremony pace x1.0 / x1.6 / x2.2">Boot pace [dev]</button>
    <button class="devonly" onclick="devFeedBWToggle()" title="compare against color chrome — period B&W is the ruled default">Color compare [dev]</button>
   </div>
   <p class="keyhint"><kbd>&darr;</kbd>/SCROLL = rotary &nbsp; <kbd>Enter</kbd>/CLICK/tap front = shutter &nbsp; <kbd>Space</kbd>/SHAKE = shake &nbsp; <kbd>W A S D</kbd> (hold) = tilt for bubbles &nbsp; mic: unused by firmware</p>
@@ -563,6 +564,22 @@ function FX_noise(dur,gain,when){
   s.start(c.currentTime+(when||0));
  }catch(e){}
 }
+function FX_dial90(){
+ /* [X3 walk-six] the FIRST-BOOT connection: a ~3s 90s dial-up - DTMF dial,
+    carrier handshake warble, static burst. The looping screech (the siren)
+    is DEAD on boots; SD asset FLAGGED for the audio pass. */
+ try{
+  const DTMF=[[697,1209],[770,1336],[852,1477],[697,1336],[941,1336],[770,1209],[852,1336]];
+  for(let i=0;i<DTMF.length;i++){
+   FX_tone(DTMF[i][0],0.09,"sine",0.12,i*0.11);
+   FX_tone(DTMF[i][1],0.09,"sine",0.12,i*0.11);
+  }
+  FX_tone(1200,0.5,"square",0.05,0.9);      /* the answer tone */
+  FX_tone(2250,0.45,"sine",0.06,1.35);      /* the handshake warble */
+  FX_tone(1800,0.35,"sine",0.05,1.7);
+  FX_noise(0.9,0.05,2.1);                   /* the static burst - carrier acquired */
+ }catch(e){}
+}
 function FX_modem(dur){ /* [D4] the download screech: carrier warble + hiss */
  FX_noise(dur,0.02);
  for(let t=0;t<dur;t+=0.16){
@@ -591,6 +608,7 @@ function FX_play(id){
  }
 }
 function devShake(){
+ if(!unitPowered)return; /* [X1] off means off */
  /* [T5] escalation: repeated fast presses shake HARDER and LONGER */
  const now=performance.now();
  if(now-devShakeLastAt<900)devShakeLevel=Math.min(3,devShakeLevel+1);
@@ -602,8 +620,8 @@ function devShake(){
 let devShakeLastAt=0, devShakeLevel=1, shakeMag=1.0;
 /* input edge queues: hardware loses edges while buffer FULL; twin drops beyond 1 queued (closest match, flagged) */
 let rotaryPending=0, shutterPending=0;
-function devRotary(){if(rotaryPending<1)rotaryPending++;}
-function devShutter(){if(shutterPending<1)shutterPending++;Click_Flash();}
+function devRotary(){if(!unitPowered)return;if(rotaryPending<1)rotaryPending++;} /* [X1] */
+function devShutter(){if(!unitPowered)return;if(shutterPending<1)shutterPending++;Click_Flash();} /* [X1+X2: no response, no flash, when off */
 function Click_Flash(){ /* [CLICK-FEEDBACK LAW 2026-07-24] the unit's own tell */
  try{
   const f=document.getElementById('unitfront');
@@ -616,6 +634,7 @@ function Click_Flash(){ /* [CLICK-FEEDBACK LAW 2026-07-24] the unit's own tell *
  }catch(e){}
 }
 window.addEventListener("keydown",e=>{
+ if(!unitPowered)return; /* [X1] the power switch alone lives on a dead machine */
  if(e.key=="ArrowDown"){devRotary();e.preventDefault();}
  else if(e.key=="Enter"){devShutter();e.preventDefault();}
  else if(e.key==" "){devShake();e.preventDefault();}
@@ -743,6 +762,8 @@ function Save_To_Flash(variableID){ Serial.println("Save to flash not implemente
 const DataTransfer=0,Connected=1,PowerMaury=2,Select=3,Scroll=4,WhiteNoise=5,BeepsAndBoops=6,ConnectionSuccess=7,
  Slosh_0=8,Slosh_1=9,Slosh_2=10,Slosh_3=11,Slosh_4=12;
 function PlaySound(SoundID){                                                  /* [4_AUDIO:18-29] */
+ /* [X1 walk-six - OFF MEANS OFF] a powered-down machine makes NO sound. */
+ if(!unitPowered)return;
  /* [B2 WALK FIX] the twin voices effects through the synth shim - guaranteed
     audible. The firmware's playFolder mapping is untouched (bench truth);
     real SD assets supersede this shim at the audio pass. */
@@ -1795,6 +1816,7 @@ function V20_Robot_Voice(text){
     pitch - the true robotic timbre is an SD asset (audio pass).
     PLACEHOLDER [PAPA-J6]. Silent where speechSynthesis is absent. */
  try{
+  if(!unitPowered)return; /* [X1] */
   if(!V20_VOICE_ON||!window.speechSynthesis)return;
   speechSynthesis.cancel();
   const words=String(text).toLowerCase().split(/\s+/).filter(Boolean);
@@ -4961,7 +4983,14 @@ function Power_Standby(){
 }
 function devPower(){
  if(!unitPowered){unitPowered=true;PlaySound(Select);Boot3();} /* boot is MANDATORY per porch doctrine */
- else{(async()=>{unitPowered=false;try{await CRT_PowerOff();}catch(e){}Power_Standby();})();}
+ else{(async()=>{
+  unitPowered=false;
+  /* [X1] everything audible dies with the power */
+  try{speechSynthesis.cancel();}catch(e){}
+  try{Radio_StopAudio();}catch(e){}
+  try{await CRT_PowerOff();}catch(e){}
+  Power_Standby();
+ })();}
 }
 /* ============ [TWIN-BUILT 2026-07-22 night] DOORS RESTRUCTURE (ruling B) ============
    Three-door top level: DOOR_A (answers-class: Answers/Advice/Detectors),
@@ -5126,6 +5155,12 @@ async function frontSay(lines){
  OLED.fillRect(2+last.length*6,top+(nl-1)*10,5,7,WHITE); /* the cursor block */
  OLED.display();
 }
+let BOOT_PACE=1.6; /* [X4 walk-six] the global ceremony multiplier - dev-tunable */
+function bsleep(ms){return sleep(Math.round(ms*BOOT_PACE));}
+function devPace(){
+ BOOT_PACE=(BOOT_PACE>=2.2)?1.0:Math.round((BOOT_PACE+0.6)*10)/10;
+ chip("ok","[DEV] boot pace x"+BOOT_PACE);
+}
 async function frontCeremony(text){ /* [G1 letter] the ceremony font, one line, front */
  Activate_the_Screen(FRONT_SCREEN,true);setFont(2);
  screenPrintLnCentered(22,text,1);
@@ -5203,7 +5238,7 @@ async function Boot3_SelfCorrect(){
  const p=(glitchOn?GLITCH_RATE*220:0)+Math.max(0,H_RETRY_AT-Health_H())/220;
  if(Math.random()>=p)return;
  monRetriesLast++;
- await frontSay([" RETRYING"]);await sleep(500);
+ await frontSay([" RETRYING"]);await bsleep(500);
 }
 let monStutters=0;
 async function Boot3_Chatter(ms,withBar){
@@ -5216,7 +5251,8 @@ async function Boot3_Chatter(ms,withBar){
     the credit) = BANKED; the trigger hook fires at 5. Spice, not epic. */
  Activate_the_Screen(TOP_SCREEN,true);
  const t0=performance.now(), until=t0+ms;
- let nextScreech=0;
+ let nextScreech=1e15; /* [X3] the repeating screech is DEAD on boots */
+ FX_dial90();           /* [X3] one true 90s connection, ~3s */
  const stutterAt=(Math.random()<(0.10+(100-Health_H())/250))?(t0+ms*(0.25+Math.random()*0.5)):0;
  let stuttered=false;
  while(performance.now()<until){
@@ -5251,32 +5287,32 @@ async function Boot3(){
  Health_Spend(H_BOOT_COST);monRetriesLast=0; /* [HEALTH] real counters */
  const lvl=bootLevel();
  await frontCeremony("PLEASE WAIT");   /* [G1 letter] */
- await sleep(500);
+ await bsleep(500);
  Activate_the_Screen(TOP_SCREEN,true);System_Monitor(); /* the top wakes second, into monitor mode */
  if(lvl<=0){ /* ---- LEVEL 1: VIRGIN ---- */
-  await sleep(650);
-  await frontRail("INSTALL");await sleep(600);PlaySound(BeepsAndBoops); /* [A3+A4] */
-  await frontSay([" SYSTEM RECORD -"," NOT ON FILE"]);await sleep(1300);
-  await frontSay([" INVESTIGATING"]);await sleep(1000);await Boot3_SelfCorrect();
-  await frontSay([" FRESH INSTALLATION"," DETERMINED"]);await sleep(1100);
+  await bsleep(650);
+  await frontRail("INSTALL");await bsleep(600);PlaySound(BeepsAndBoops); /* [A3+A4] */
+  await frontSay([" SYSTEM RECORD -"," NOT ON FILE"]);await bsleep(1300);
+  await frontSay([" INVESTIGATING"]);await bsleep(1000);await Boot3_SelfCorrect();
+  await frontSay([" FRESH INSTALLATION"," DETERMINED"]);await bsleep(1100);
   await frontSay([" OPERATING SYSTEM"," DOWNLOAD"]); /* [D2] the bar, not a count */
   Mon_StartConnection(1);
   await Boot3_Chatter(11000,true);
   PlaySound(ConnectionSuccess); /* [A4] */
-  await frontSay([" DOWNLOAD COMPLETE"," RESTARTING"]);await sleep(900);
+  await frontSay([" DOWNLOAD COMPLETE"," RESTARTING"]);await bsleep(900);
   setBootLevel(1);
   bootRunning=false;
   return Boot3(); /* self-retries boot */
  }
  if(lvl===1){ /* ---- LEVEL 2: FIRST-RUN SETUP ---- */
-  await sleep(300);
-  await frontRail("SETUP");await sleep(600);PlaySound(BeepsAndBoops); /* [A3+A4] */
-  await frontSay([" SYSTEM FILE FOUND"," FIRST RUN SETUP"]);await sleep(1100);
+  await bsleep(300);
+  await frontRail("SETUP");await bsleep(600);PlaySound(BeepsAndBoops); /* [A3+A4] */
+  await frontSay([" SYSTEM FILE FOUND"," FIRST RUN SETUP"]);await bsleep(1100);
   for(const d of ["MEMORY CHECK OK","AUDIO CHECK OK","DISPLAY CHECK OK","RESPONSE CURVE - LOADED"]){
-   await frontSay([" "+d]);await sleep(420);await Boot3_SelfCorrect();
+   await frontSay([" "+d]);await bsleep(420);await Boot3_SelfCorrect();
   }
   /* the calibration dance: PERMIT or POSTPONE — never "answers" */
-  await frontSay([" EXTERNAL CONTENT"," MESSAGES AND FILES"," RESPONSE CALIBRATION"]);await sleep(1500);
+  await frontSay([" EXTERNAL CONTENT"," MESSAGES AND FILES"," RESPONSE CALIBRATION"]);await bsleep(1500);
   /* [D3 WALK REWORK] the offer arrives as the MENU STRUCTURE the user
      already knows: scroll browses, click selects (the established GUI). */
   Device_Manager[SHUTTER][BUFFER_VALUE]=EMPTY;Device_Manager[ROTARY_DIAL][BUFFER_VALUE]=EMPTY;
@@ -5301,14 +5337,14 @@ async function Boot3(){
    await Boot3_Chatter(3500,true);
    Messages_Trigger("first_boot");
   } else {
-   await frontSay([" POSTPONED -"," AVAILABLE LATER"]);await sleep(800);
+   await frontSay([" POSTPONED -"," AVAILABLE LATER"]);await bsleep(800);
   }
   setBootLevel(2);
  } else { /* ---- LEVEL 3: ESTABLISHED (sleep-like) ---- */
-  await sleep(300);
+  await bsleep(300);
   await Boot3_SelfCorrect();
   PlaySound(PowerMaury); /* [A4] */
-  await frontSay([" USER RECORD -"," ON FILE"," SYSTEM OK"]);await sleep(700);
+  await frontSay([" USER RECORD -"," ON FILE"," SYSTEM OK"]);await bsleep(700);
  }
  Activate_the_Screen(TOP_SCREEN,true);
  Activate_the_Screen(FRONT_SCREEN,true);Draw_the_Menu_Screen();Draw_the_Menu_Line();
