@@ -216,8 +216,11 @@ export default function Robots() {
       </div>
 
       {/* the pop-over: the machine performs on its museum-ink stage */}
+      {/* [W2 walk-four 2026-07-25] explicit close ONLY — the backdrop-click
+          close ate reviews mid-session (a stray click off the machine tore
+          the visitor out of it). Close = the button or Escape, nothing else. */}
       {twinOpen && (
-        <div className="rb-overlay" onClick={e => { if (e.target === e.currentTarget) setTwinOpen(false); }}>
+        <div className="rb-overlay">
           <div className="rb-stage">
             <button className="rb-close" onClick={() => setTwinOpen(false)}>Close ✕</button>
             <iframe src="/robots/twin.html?user=1" title="MGK-VIIIp digital twin" />

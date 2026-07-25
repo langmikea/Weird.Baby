@@ -58,10 +58,11 @@
  /* [CLICK-FEEDBACK LAW 2026-07-24] every click flashes the shutter-LED tell:
     a brief red accent low on the front composite (the behind-shutter LED) and
     a ring on the CLICK control. Subtle; position tunable (Mike's nudge). */
- /* [T6 WALK] the click tell = the APERTURE ITSELF: the centermost circle
-    throws one full-bright WHITE flash (red read as alarm, Mike's call).
-    Geometry matches the 38% front mask; FLAGGED for Mike's nudge. */
- .unitwrap{--clickglow:radial-gradient(circle at 50% 50%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.55) 14%, transparent 20%)}
+ /* [T6+W10 WALK-FOUR] the click tell = the APERTURE: the centermost circle
+    IN THE LENS (the lens sits BELOW the screen - the flash moved to it).
+    White, full-bright, tight. --flashx/--flashy = Mike's nudge handles. */
+ .unitwrap{--flashx:50%;--flashy:76%;
+  --clickglow:radial-gradient(circle at var(--flashx) var(--flashy), rgba(255,255,255,.95) 0%, rgba(255,255,255,.55) 8%, transparent 13%)}
  #unitfront.clickflash::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:5;
   background:var(--clickglow);animation:shutterflash .18s ease-out forwards}
  @keyframes shutterflash{0%{opacity:1}100%{opacity:0}}
@@ -166,6 +167,16 @@ body.usermode .sub{display:none}
 body.usermode h1 span{display:none}
 body.usermode .lbl.anno{display:none}
 
+/* [W9 - the ROLLING BAND] a display-rate mismatch on the MONITOR only: one
+   soft band drifting down the glass, slight by law. Rides --secmon. */
+.scr.top::before,#maskTop::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:7;
+ opacity:calc(var(--secmon)*.9);
+ background:linear-gradient(180deg,transparent 0%,rgba(255,255,255,.06) 42%,rgba(255,255,255,.11) 50%,rgba(255,255,255,.06) 58%,transparent 100%);
+ background-size:100% 44px;background-repeat:no-repeat;
+ animation:bandroll 6.5s linear infinite}
+#maskTop::before{z-index:2}
+@keyframes bandroll{0%{background-position:0 -44px}100%{background-position:0 100%}}
+
 </style>
 <div class="cols">
  <div class="device">
@@ -186,10 +197,11 @@ body.usermode .lbl.anno{display:none}
    </div>
   </div>
   <div class="lbl anno">TOP SCREEN (machine top &mdash; the glass) &mdash; 128&times;64, all rows driven [main:128; SSD1306.cpp:607-608]</div>
-  <div class="scr"><canvas id="cvTop" width="384" height="192"></canvas></div>
+  <div class="scr top"><canvas id="cvTop" width="384" height="192"></canvas></div>
   <div class="lbl anno">FRONT SCREEN (machine front &mdash; menu) &mdash; 128&times;64, 32 driver rows interlaced onto even lines [main:127; SSD1306.cpp:604-605]</div>
   <div class="scr"><canvas id="cvFront" width="384" height="192"></canvas></div>
   <div class="btns">
+   <button class="ctl" onclick="devPower()" title="power the unit on or off (the rear switch, cashed as one visible control)"><span class="ico">&#9211;</span>POWER</button>
    <button class="ctl" onclick="devRotary()" title="rotary dial - one detent"><span class="ico">&#10227;</span>SCROLL</button>
    <button class="ctl" onclick="devShutter()" title="shutter button"><span class="ico">&#9673;</span>CLICK</button>
    <button class="ctl" onclick="devShake()" title="shake the unit (>1.3g)"><span class="ico">&#8779;</span>SHAKE</button>
@@ -551,6 +563,13 @@ function FX_modem(dur){ /* [D4] the download screech: carrier warble + hiss */
  }
  FX_tone(2100,0.25,"sine",0.02,dur*0.55);
 }
+function FX_reveal(){ /* [W6] mechanical thunk + fluidic settle - organic, not synth-bright */
+ try{
+  FX_tone(72,0.16,"sine",0.5,0);
+  FX_tone(48,0.30,"sine",0.35,0.10);
+  FX_noise(0.5,0.10,0.05);
+ }catch(e){}
+}
 function FX_play(id){
  switch(id){
   case Select:            FX_tone(880,0.035,"square",0.05);break;
@@ -849,8 +868,8 @@ function Run_EXE(){                                                          /* 
    Pause_Process(MENU_SYSTEM); Start_Process(PROBABILITIES,NORMAL_PRIORITY); break;
   case DETECTORS:       /* [TWIN DELTA] */
    Pause_Process(MENU_SYSTEM); Start_Process(DETECTORS,NORMAL_PRIORITY); break;
-  case ADVICE:          /* [TWIN DELTA] rows 1/2/3 live (career suite, review rebuild 2026-07-24); the rest scaffold */
-   if(lineNum_PTR>=1&&lineNum_PTR<=3){Pause_Process(MENU_SYSTEM); Start_Process(ADVICE,NORMAL_PRIORITY);}
+  case ADVICE:          /* [W12 WALK-FOUR] the family rows 0-2 = the panel-model apps */
+   if(lineNum_PTR>=0&&lineNum_PTR<=2){Pause_Process(MENU_SYSTEM); Start_Process(ADVICE,NORMAL_PRIORITY);}
    else {scafUpid="ADVICE"; Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY);}
    break;
   case APPP:            /* [APP-PATTERN ENGINE] excuses / lines */
@@ -893,12 +912,21 @@ function Draw_the_Menu_Screen(){
  if(menuDepth>0)OLED.display();
 }
 function Mod_the_Menu_Line(){
+ /* [W3] the settings star rides INSIDE the standard bracket line now;
+    firmware name kept - the hook reports is-current-setting. */
  switch(menuNum_PTR){
-  case CLARITY_SETTING: if(claritySettingNOW==lineNum_PTR)screenPrintLn(Row_03,17,"*",1); break;
-  case POLARITY_SETTING: if(polaritySettingNOW==lineNum_PTR)screenPrintLn(Row_03,17,"*",1); break;
+  case CLARITY_SETTING: return claritySettingNOW==lineNum_PTR;
+  case POLARITY_SETTING: return polaritySettingNOW==lineNum_PTR;
  }
+ return false;
 }
-function Draw_the_Menu_Line(){OLED.setTextColor(WHITE);screenPrintLn(Row_03,27,get_as_char(lineName),1);Mod_the_Menu_Line();}
+function Draw_the_Menu_Line(){
+ /* [W3 - ONE HIGHLIGHT STANDARD, Mike's walk ruling] "> Row <" brackets,
+    centered - every menu, every screen, one voice. */
+ OLED.setTextColor(WHITE);
+ const star=Mod_the_Menu_Line()?" *":"";
+ screenPrintLnCentered(Row_03,"> "+get_as_char(lineName)+star+" <",1);
+}
 function Scroll_the_Menu(){
  Activate_the_Screen(FRONT_SCREEN,true);
  lineNum_PTR++;
@@ -938,6 +966,16 @@ function screenPrintLnCentered(row,text,pub){
  const col=Math.trunc((MAX_SCREEN_WIDTH-b.w)/2);
  printText(row,col,text);DisplayImmediately(pub);
 }
+/* [C4 - THE HINT ZONE] one place, one style, fleet-wide: TomThumb, bottom
+   edge of the top glass, band CLEARED first (the W7 bug: notes overwrote
+   each other). The standardized verbs live here and nowhere else. */
+const HINT_BACK="<scroll back>", HINT_AGAIN="<shake again  scroll back>",
+      HINT_CONTINUE="<shake to continue>", HINT_NODO="<no do-overs>";
+function Hint(text){
+ setFont(SMALL_FONT);
+ OLED.fillRect(0,55,128,9,BLACK);
+ screenPrintLnCentered(62,text,1);
+}
 function screenPrintLn(row,col,text,pub){printText(row,col,text);DisplayImmediately(pub);}
 function AutoRotateScreen(id){OLED.setRotation(id==FRONT_SCREEN?0:2);}
 function setFont(f){
@@ -968,7 +1006,9 @@ const opCodes=["dex","jmp","jsr","lda","ldx","ora","orx","rts","sta","stx","bne"
 /* [M4 - OS redesign under the empowerment ruling] the family-initials
    operand tokens retire (weak content, Mike's call); operands are now flat
    system vocabulary - addresses and immediates only. */
-const opOperands=["","$0100","$0A80","$1F40","$00","$01","$A8","$A3","$23","$2A","$4C","$A6","$5D","$FF","$07","$D1","$B8","$A5","$24","$FA","$C9","$B6","$D9","$F2","#09","#00","#01","#02","#04","#08","#16","#32","#128","#255","$0E00","$0400","$C000","$FFFE","$8000","$2000"];
+/* [W9 fix] operands clipped to the CODE window's 37px - the long address
+   tokens were bleeding into the graph (the junk Mike saw). 3 chars max. */
+const opOperands=["","$00","$01","$07","$0A","$23","$24","$2A","$3B","$44","$4C","$5D","$68","$7F","$80","$A3","$A5","$A6","$A8","$B6","$B8","$C0","$C9","$D1","$D9","$F2","$FA","$FE","$FF","#00","#01","#02","#04","#08","#09","#16","#32","#64","#99","#FF"];
 /* ============ [TWIN-BUILT 2026-07-22] MONITOR BUILD — three-window spec +
    cycling sets 1-4 (Job One capture; flat-1960s material, already gated).
    CODE window stands as shipped. STATUS (long bottom box) gains title dressing
@@ -1096,24 +1136,44 @@ function UpdateWindow(i){
  }
  OLED.display();
 }
-let monCodeMode=0, monCodeAt=0;
+let monCodeMode=0, monCodeAt=0, monDos=null, monDosN=0;
+function Mon_DOS(){
+ /* [W9 - THE DOS PROMPT, promoted per the walk] the code window runs
+    process commands - some tied to REAL machine work (condition, sessions,
+    link state), some flavor; OS voice, zero personality. */
+ if(!monDos){
+  let procs=0;for(let i=0;i<PROCESS_POINTER_MAX;i++)if(Process_Registry[i][PROCESS_STATE]==RUN)procs++;
+  const cmds=[
+   {c:"STAT",o:["PROC "+procs,"COND "+Math.round(Health_H())+"%"]},
+   {c:"MEM",o:["98K OK"]},
+   {c:"SYNC",o:[monConn?"LINK UP":"NO LINK"]},
+   {c:"AGE",o:["S "+((health&&health.ageSessions)||0)]},
+   {c:"CHK",o:[Health_H()<40?"1 WARN":"0 ERR"]},
+  ];
+  monDos={cmd:cmds[monDosN%cmds.length],typed:0,at:0};monDosN++;
+ }
+ const d=monDos;
+ if(d.typed<d.cmd.c.length&&millis()>d.at){d.typed++;d.at=millis()+140;}
+ screenPrintLn(7,3,"> "+d.cmd.c.slice(0,d.typed),0);
+ if(d.typed>=d.cmd.c.length){
+  for(let i=0;i<d.cmd.o.length;i++)screenPrintLn(14+i*7,3,d.cmd.o[i],0);
+  screenPrintLn(14+d.cmd.o.length*7,3,">",0);
+  if(Math.trunc(millis()/600)%2===0)OLED.fillRect(8,9+d.cmd.o.length*7,3,5,WHITE);
+ } else if(Math.trunc(millis()/300)%2===0){OLED.fillRect(12+d.typed*4,2,3,5,WHITE);}
+}
 function scrollFauxAssemblyLanguage(){
  /* [M4 - OS redesign] the 24/7 scroll retires. The code window CYCLES with
     one coherent terminal aesthetic: (0) an assembly burst, (1) a system
     readout (real numbers), (2) a quiet prompt. ~9s each; theater, not
     novelty. */
- if(millis()>monCodeAt+9000){monCodeMode=(monCodeMode+1)%3;monCodeAt=millis();}
+ if(millis()>monCodeAt+9000){monCodeMode=(monCodeMode+1)%3;monCodeAt=millis();monDos=null;}
  if(monCodeMode===1){ /* the readout - real values, terminal-flat */
   let procs=0;for(let i=0;i<PROCESS_POINTER_MAX;i++)if(Process_Registry[i][PROCESS_STATE]==RUN)procs++;
   const rows=["PROC "+procs,"ASKS "+askCount,"LOAD "+(monHist.cpu.length?monHist.cpu[monHist.cpu.length-1]:0),"COND "+Math.round(Health_H()),"UP "+Math.trunc(millis()/60000)+"M"];
   for(let i=0;i<rows.length;i++)screenPrintLn(7+i*7,3,rows[i],0);
   return;
  }
- if(monCodeMode===2){ /* the quiet prompt: a cursor, breathing */
-  screenPrintLn(10,3,">",0);
-  if(Math.trunc(millis()/600)%2===0)OLED.fillRect(9,6,4,5,WHITE);
-  return;
- }
+ if(monCodeMode===2){Mon_DOS();return;} /* [W9] the DOS prompt, promoted */
  for(let l=0;l<MAX_CODE_LINES-1;l++){code[OPCODE_NUM][l]=code[OPCODE_NUM][l+1];code[OPERAND_NUM][l]=code[OPERAND_NUM][l+1];}
  code[OPCODE_NUM][MAX_CODE_LINES-1]=random(MAX_OPCODES);
  code[OPERAND_NUM][MAX_CODE_LINES-1]=random(MAX_OPERANDS);
@@ -1222,6 +1282,23 @@ const MIN_SPAWN_RADIUS=1,MAX_SPAWN_RADIUS=4,MAX_COMBINED_RADIUS=7,GROWTH_RATE=0.
 function newBubble(){return{x:0,y:0,vx:0,vy:0,radius:0,targetRadius:0,active:false,moving:false,dissolving:false,hasGrown:false};}
 const bubbles=Array.from({length:MAX_BUBBLES},newBubble);
 let previousBubbles=bubbles.map(b=>({...b}));
+function Session_Bubbles(){
+ /* [C5 - THE AGING DOCTRINE] the theatrical clock: bubbles ride SESSIONS.
+    Day-0 = ONE tiny bubble; the suspension gains bubbles as sessions
+    accumulate; a worn machine (low H) froths a little more. */
+ const s=(health&&health.ageSessions)||0;
+ let count=1+Math.trunc(Math.max(0,s-1)/3)+Math.trunc((100-Health_H())/30);
+ return constrain(count,1,MAX_BUBBLES);
+}
+function Fluidic_Seed(){
+ const count=Session_Bubbles();
+ spawnBubbles(count);
+ if(count===1){for(const b of bubbles)if(b.active){b.targetRadius=1;break;}} /* day-0 truth: one TINY bubble */
+ if(count>=12&&health&&!health.fluidNoted){
+  health.fluidNoted=1;Health_Save();
+  Messages_Trigger("fluidic_service"); /* [C5] past too-long, the machine dispatches its OWN message; words=[PAPA] */
+ }
+}
 function spawnBubbles(spawnQuantity){                                 /* [Bubbles:24-63] */
  let index=-1;
  for(let spawn=0;spawn<spawnQuantity;spawn++){
@@ -1345,6 +1422,7 @@ let M8B_displayTimer=0;
 const M8B_MIN_READ_MS=2500;           /* [flag-3 ruling] minimum read time before shake-to-reask; TUNABLE (Mike) */
 let M8B_busy=false;                   /* [SHIM] async guard - firmware blocks the whole OS during these draws */
 let M8B_reaskGate=0, M8B_earlyShakes=0, M8B_holdNoted=false, M8B_shakeLatch=false; /* [B1/T8] latch = one count per shake EPISODE, not per tick */
+let NIAC_slide=null, M8B_hintNow=null; /* [W6 microslide / hint-zone redraw] */
 let blankFrameBadged=false;
 function M8B_Answers_EXE(M8B_ID){                                     /* [M8BALL:11-73] */
  const displayTime=2000;
@@ -1356,12 +1434,12 @@ function M8B_Answers_EXE(M8B_ID){                                     /* [M8BALL
    break;
   case ASK_YOUR_QUESTION:
    Ask_Your_Question(M8B_ID);
-   spawnBubbles(random(MAX_BUBBLES));
+   spawnBubbles(random(1,4)); /* [C5] agitation adds a FEW - the population is the AGE */
    M8B_currentState=FINISH_ASKING_YOUR_QUESTION;
    break;
   case FINISH_ASKING_YOUR_QUESTION:
    if(Pull_From_Buffer(ROTARY_DIAL)){M8B_currentState=CLEANUP_TIME;}
-   else if(Unit_Is_Shaking(1.3)&&millis()>M8B_reaskGate){spawnBubbles(random(MAX_BUBBLES));M8B_currentState=REVEAL_THE_ANSWER;} /* [B1] */
+   else if(Unit_Is_Shaking(1.3)&&millis()>M8B_reaskGate){spawnBubbles(random(1,4));M8B_currentState=REVEAL_THE_ANSWER;} /* [B1] */
    else if(Pull_From_Buffer(SHUTTER)){
     /* [FIX b, 2026-07-22] NIAC is SHAKE-ONLY per the D.8 MGK-Options matrix (VSI x,
        PPI blank). Click is CONSUMED (no ghost-click into the menu later) but ignored.
@@ -1392,7 +1470,7 @@ function M8B_Answers_EXE(M8B_ID){                                     /* [M8BALL
    M8B_currentState=WAIT_OUT_THE_TIMER_AND_NO_DO_OVERS;
    break;
   case WAIT_OUT_THE_TIMER_AND_NO_DO_OVERS:
-   if(Pull_From_Buffer(ROTARY_DIAL)){M8B_currentState=CLEANUP_TIME;M8B_holdNoted=false;M8B_earlyShakes=0;}
+   if(Pull_From_Buffer(ROTARY_DIAL)){M8B_currentState=CLEANUP_TIME;M8B_holdNoted=false;M8B_earlyShakes=0;NIAC_slide=null;M8B_hintNow=null;}
    else if(Unit_Is_Shaking(1.3)&&!M8B_shakeLatch&&millis()<=M8B_displayTimer){
     /* [T8] early shake: no do-overs, the timer resets; repeat offenders meet
        the recalibration egg (OS-personality-free penance; spice, not epic).
@@ -1401,7 +1479,7 @@ function M8B_Answers_EXE(M8B_ID){                                     /* [M8BALL
     M8B_displayTimer=millis()+M8B_MIN_READ_MS;
     M8B_earlyShakes++;
     if(M8B_earlyShakes>=3){
-     M8B_earlyShakes=0;M8B_busy=true;
+     M8B_earlyShakes=0;M8B_busy=true;NIAC_slide=null;M8B_hintNow=null;
      (async()=>{
       Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
       screenPrintLnCentered(26,"ERROR DETECTED.",0);
@@ -1417,7 +1495,7 @@ function M8B_Answers_EXE(M8B_ID){                                     /* [M8BALL
       await sleep(700);
       M8B_currentState=REVEAL_THE_ANSWER;M8B_busy=false;})();
     } else {
-     setFont(SMALL_FONT);screenPrintLn(58,3,"<no do-overs>",1);setFont(LARGE_FONT);
+     Hint(HINT_NODO);M8B_hintNow=HINT_NODO;setFont(LARGE_FONT); /* [W7] the band clears before every note now */
      PlaySound(Scroll);
     }
    }
@@ -1426,13 +1504,13 @@ function M8B_Answers_EXE(M8B_ID){                                     /* [M8BALL
        and proceed INSTANTLY into the next cycle - no dwell on the flash. The
        shake IS the ask ritual; the machine answers the question being asked. */
     M8B_shakeLatch=true;
-    spawnBubbles(random(MAX_BUBBLES));
+    NIAC_slide=null;M8B_hintNow=null; /* [W6] the microslide ends with the answer */
+    spawnBubbles(random(1,4));
     M8B_busy=true;
     (async()=>{
      if(M8B_ID===MGK_65&&P65_LAST){await Portal_65(P65_LAST,true);P65_LAST=null;} /* [THEATER] the answer is swallowed - the portal runs in reverse */
      Activate_the_Screen(TOP_SCREEN,true);
-     if(M8B_ID===MGK_65){setFont(1);screenPrintLnCentered(30,"ASK A QUESTION",1);} /* [B5] sized to 65's register */
-     else {setFont(LARGE_FONT);screenPrintLn(36,0," ASK A QUESTION...",1);}
+     setFont(1);screenPrintLnCentered(30,"ASK A QUESTION",1); /* [W5] one register - the classic face, 65 and NIAC alike */
      await sleep(700);                               /* [B5] the flash gets its beat */
      M8B_reaskGate=millis()+900;                     /* [B1] the carrying shake must STOP first */
      M8B_currentState=FINISH_ASKING_YOUR_QUESTION;   /* [B1] then the machine WAITS for the ask */
@@ -1440,10 +1518,12 @@ function M8B_Answers_EXE(M8B_ID){                                     /* [M8BALL
    }
    else{
     if(!Unit_Is_Shaking(1.05))M8B_shakeLatch=false; /* [T8] hysteresis: release only at true rest */
-    Pull_From_Buffer(SHUTTER);Update_Bubbles();
+    Pull_From_Buffer(SHUTTER);
+    NIAC_Slide_Tick(M8B_ID); /* [W6] the microslide lives here */
+    Update_Bubbles();
     if(!M8B_holdNoted&&millis()>M8B_displayTimer){ /* [T8] the quiet permission note */
      M8B_holdNoted=true;
-     setFont(SMALL_FONT);screenPrintLn(58,3,"<shake to continue>",1);setFont(LARGE_FONT);
+     Hint(HINT_CONTINUE);M8B_hintNow=HINT_CONTINUE;setFont(LARGE_FONT); /* [W7] */
     }
    }
    break;
@@ -1494,11 +1574,15 @@ async function Redirect_Output_to_Fluidic_Suspension(M8B_ID){         /* [M8BALL
    screenPrintLn(Row_03,0,"  FLUIDIC SUSPENSION ",1);
    Pause_Process(SYSTEM_MONITOR);
    Activate_the_Screen(TOP_SCREEN,true);
-   await CRT_Death();   /* [CRT LAW - T3: fluidic ENTER only] */
-   await CRT_Birth();
-   await DisplayStatic(2000);
-   OLED.clearDisplay();OLED.display();await sleep(260); /* [T4] the stable-blank beat */
+   /* [W4 - THE CORRECTED HANDOFF] static belongs to CRT MODE: the monitor's
+      last breath is noise, the tube collapses line-and-dot, and THEN the
+      fluid FILLS the glass - bubbles dispersing until the suspension stands
+      stable. (CRT_Birth removed from this seam; birth = CRT's own return.) */
+   await DisplayStatic(1200);
+   await CRT_Death();
+   await Fluid_Fill();
    Activate_the_Screen(TOP_SCREEN,true);
+   Fluidic_Seed();       /* [C5] the suspension carries its AGE */
    Start_Process(BUBBLES,NORMAL_PRIORITY);
  }
 }
@@ -1508,15 +1592,13 @@ function Ask_Your_Question(M8B_ID){                                   /* [M8BALL
    Activate_the_Screen(TOP_SCREEN,true);setFont(LARGE_FONT);
    screenPrintLn(20,0," Ask question,",1);
    screenPrintLn(Row_03+15,0,"   then shake.",1);
-   setFont(SMALL_FONT);
-   screenPrintLn(55,0,"             >>> scroll to exit <<<",1);
+   Hint(HINT_BACK);
    break;
   case MGK_v2_0:
    Activate_the_Screen(TOP_SCREEN,true);setFont(LARGE_FONT);
    screenPrintLn(20,0," Ask question,",1);
    screenPrintLn(Row_03+15,0,"   then shake.",1);
-   setFont(SMALL_FONT);
-   screenPrintLn(55,0,"             >>> scroll to exit <<<",1);
+   Hint(HINT_BACK);
    break;
   case MGK_65:
    /* [TWIN DELTA - ruling 1] was: FRONT_SCREEN stub (announced the handoff, then the reveal
@@ -1525,8 +1607,7 @@ function Ask_Your_Question(M8B_ID){                                   /* [M8BALL
    Activate_the_Screen(TOP_SCREEN,true);setFont(LARGE_FONT);
    screenPrintLn(20,0," Ask question,",1);
    screenPrintLn(Row_03+15,0,"   then shake.",1);
-   setFont(SMALL_FONT);
-   screenPrintLn(55,0,"             >>> scroll to exit <<<",1);
+   Hint(HINT_BACK);
    break;
  }
 }
@@ -1559,7 +1640,7 @@ async function M8B_Reveals_Answer(M8B_ID){                            /* [M8BALL
       LARGER than the glass (a ball window shows a partial face) - its two
       slanted edges frame the words. Twin = the full version; firmware
       simplifies (flagged for the spec). */
-   Activate_the_Screen(TOP_SCREEN,false);setFont(LARGE_FONT);
+   Activate_the_Screen(TOP_SCREEN,false);setFont(1); /* [W5] the classic register */
    OLED.clearDisplay();                   /* [T3] no CRT frame per shake - fluidic mode is already entered */
    await NIAC_Die_Reveal(
     M8B_AnswerTable[slot][Polarity_Response][Clarity_Response][ANSWER_LINE_0],
@@ -1626,32 +1707,50 @@ async function M8B_Reveals_Answer(M8B_ID){                            /* [M8BALL
 }
 /* ---- [ENGINE THEATER 2026-07-24] the three reveals ---- */
 async function NIAC_Die_Reveal(l0,l1){
- /* [T9 WALK REWORK] the ACTUAL Magic 8-Ball read: the die does not slide -
-    it SURFACES. The final face renders once; each frame reveals more of it
-    through thinning murk (dither mask + suspended-particle noise), with a
-    faint late wobble. Character-true; the tilt-follows-die idea = LEDGER. */
- OLED.clearDisplay();
- NIAC_Die_Frame(0,0,l0,l1);
- const face=OLED.fb.slice();
- for(let t=0;t<=1.001;t+=0.07){
-  const cover=Math.pow(t,1.6);            /* the face condenses out of the blue */
-  OLED.fb.fill(0);
-  for(let i=0;i<face.length;i++)if(face[i]&&Math.random()<cover)OLED.fb[i]=1;
-  const murk=Math.trunc((1-t)*70);        /* suspended particles thin as it rises */
-  for(let i=0;i<murk;i++)OLED.drawPixel(random(0,128),random(0,64),WHITE);
+ /* [W6 WALK-FOUR] ORGANIC, not electronic (electronic = 2.0's register):
+    the face RISES through the murk - a slow drift up with a soft sway that
+    dies, suspended particles thinning as it settles. The dither-condense +
+    jitter-wobble read as static; killed. Then THE MICROSLIDE takes over.
+    Sounds = mechanical + fluidic (FX_reveal). */
+ FX_reveal();
+ for(let t=0;t<=1.001;t+=0.055){
+  const ease=1-Math.pow(1-t,2.2);
+  const dy=Math.round((1-ease)*16);              /* rising through the liquid */
+  const dx=Math.round(Math.sin(t*5.2)*(1-t)*2);  /* a soft sway that dies */
+  OLED.clearDisplay();
+  NIAC_Die_Frame(dx,dy,l0,l1);
+  const murk=Math.trunc((1-t)*46);
+  for(let i=0;i<murk;i++)OLED.drawCircle(random(0,128),random(0,64),random(0,2),WHITE);
   OLED.display();
-  await sleep(46);
+  await sleep(52);
  }
- const wob=[1,-1,0];
- for(const w of wob){OLED.clearDisplay();NIAC_Die_Frame(w,0,l0,l1);OLED.display();await sleep(70);}
+ OLED.clearDisplay();NIAC_Die_Frame(0,0,l0,l1);OLED.display();
+ /* [W6 - THE MICROSLIDE] the answer never sits dead: a slow creep on a
+    predefined vector; TILT adds natural drift (NIAC_Slide_Tick). */
+ NIAC_slide={l0:l0,l1:l1,ox:0,oy:0,vx:(random(0,2)?0.05:-0.05),vy:0.03};
+}
+function NIAC_Slide_Tick(id){
+ if(!NIAC_slide||id!==MGK_NIAC)return;
+ const s=NIAC_slide;
+ s.ox+=s.vx+tiltX*0.5;s.oy+=s.vy+tiltY*0.35;
+ s.ox=constrain(s.ox,-9,9);s.oy=constrain(s.oy,-7,7);
+ Activate_the_Screen(TOP_SCREEN,false);
+ OLED.clearDisplay();
+ NIAC_Die_Frame(Math.round(s.ox),Math.round(s.oy),s.l0,s.l1);
+ if(M8B_hintNow)Hint(M8B_hintNow);
+ OLED.display();
 }
 function NIAC_Die_Frame(dx,dy,l0,l1){
- OLED.drawLine(-40+dx,-10+dy,64+dx,96+dy,WHITE);   /* the face's slanted edges */
+ /* [W6] the die face: slanted edges BEVELED (molded plastic, not wireframe).
+    [W5] text = the classic register - the M8B raised-letter read, not bold. */
+ OLED.drawLine(-40+dx,-10+dy,64+dx,96+dy,WHITE);
  OLED.drawLine(168+dx,-10+dy,64+dx,96+dy,WHITE);
- setFont(LARGE_FONT);
+ OLED.drawLine(-46+dx,-10+dy,60+dx,98+dy,WHITE);   /* the bevel pair */
+ OLED.drawLine(174+dx,-10+dy,68+dx,98+dy,WHITE);
+ setFont(1);
  const b0=OLED.getTextBounds(String(l0)),b1=OLED.getTextBounds(String(l1));
- printText(32+dy,Math.trunc(64+dx-b0.w/2),String(l0));
- printText(48+dy,Math.trunc(64+dx-b1.w/2),String(l1));
+ printText(26+dy,Math.trunc(64+dx-b0.w/2),String(l0));
+ printText(38+dy,Math.trunc(64+dx-b1.w/2),String(l1));
 }
 let P65_LAST=null;
 async function Portal_65(ans,reverse){
@@ -1825,7 +1924,7 @@ function Games_EXE(gameID){                  /* the process body, shaped like M8
       wiped anything init drew (TTT's mode screen rendered, then got cleared — blank
       top at game start). Now: card first, then activate+clear top, THEN init, so
       init drawing lands on the live top screen. */
-   Game_Front_Card(Game_Name(gameID),">>> scroll to exit <<<");
+   Game_Front_Card(Game_Name(gameID),"<scroll back>");
    Activate_the_Screen(TOP_SCREEN,true);
    Game_Init(gameID);
    gameState_FSM=GAME_RUN;
@@ -1890,7 +1989,7 @@ function TTT_draw_mode(){
  screenPrintLnCentered(12,"TIC-TAC-TOE",0);
  screenPrintLnCentered(26,"MODE: "+TTT_MODES[tttMode],0);
  screenPrintLnCentered(40,"shake = mode   CLICK = GO",0);   /* click is go [ruling] */
- screenPrintLnCentered(52,">>> scroll to exit <<<",1);
+ Hint(HINT_BACK);
 }
 function TTT_start(){
  tttBoard=[0,0,0,0,0,0,0,0,0]; tttTurn=1; tttCursor=4; tttMoveAt=millis()+400;
@@ -1899,17 +1998,16 @@ function TTT_start(){
   wopr={stage:"G1",at:millis(),delay:800,t0:0};
   Game_Front_Card(Game_Name(GAME_TICTACTOE),"observing","GAME 1  TIES 0000");
  } else {tttPhase=TTT_PLAY;
-  Game_Front_Card(Game_Name(GAME_TICTACTOE),">>> scroll to exit <<<");}
+  Game_Front_Card(Game_Name(GAME_TICTACTOE),"<scroll back>");}
  TTT_draw_board();
 }
 function TTT_cell_xy(i){const c=i%3,r=Math.trunc(i/3);return [40+c*16,8+r*16];}
 function TTT_draw_board(){
  OLED.clearDisplay();
+ /* [W11] the board = a HASH: the four strokes overshoot, no bounding box */
  for(let k=1;k<3;k++){
-  OLED.drawLine(40+k*16,8,40+k*16,56,WHITE); OLED.drawLine(40,8+k*16,88,8+k*16,WHITE);
+  OLED.drawLine(40+k*16,4,40+k*16,60,WHITE); OLED.drawLine(36,8+k*16,92,8+k*16,WHITE);
  }
- OLED.drawLine(40,8,88,8,WHITE);OLED.drawLine(40,56,88,56,WHITE);
- OLED.drawLine(40,8,40,56,WHITE);OLED.drawLine(88,8,88,56,WHITE);
  for(let i=0;i<9;i++){
   const xy=TTT_cell_xy(i);const x=xy[0],y=xy[1];
   if(tttBoard[i]===1){OLED.drawLine(x+3,y+3,x+13,y+13,WHITE);OLED.drawLine(x+13,y+3,x+3,y+13,WHITE);}
@@ -1953,7 +2051,21 @@ function TTT_minimax(b,me,turn){
  }
  return best;
 }
-function TTT_policy(b,me){const r=TTT_minimax(b.slice(),me,me);return (r&&r.mv!==undefined)?r.mv:-1;}
+function TTT_policy(b,me){
+ /* [W11] perfect play VARIES: gather every equally-perfect root move and
+    pick among them at random - the deterministic line was the tell. */
+ let bestS=null,cands=[];
+ for(let i=0;i<9;i++){
+  if(b[i])continue;
+  b[i]=me;
+  const r=TTT_minimax(b.slice(),me,me===1?2:1);
+  b[i]=0;
+  const s=r?r.s:0;
+  if(bestS===null||s>bestS){bestS=s;cands=[i];}
+  else if(s===bestS)cands.push(i);
+ }
+ return cands.length?cands[random(0,cands.length)]:-1;
+}
 function TTT_place(i){
  if(tttBoard[i])return false;
  tttBoard[i]=tttTurn; PlaySound(Select);
@@ -2322,7 +2434,7 @@ function Radio_Draw(){
  Activate_the_Screen(FRONT_SCREEN,true);
  screenPrintLn(Row_01,0," ----<          >----",0);
  screenPrintLn(Row_01,46,"Radio",0);
- screenPrintLn(Row_02,0," <scroll=tune click=set>",0);  /* [R1] */
+ screenPrintLn(Row_02,0," <scroll tune  click set>",0);  /* [R1; W8 verbs standardized] */
  setFont(SMALL_FONT);
  screenPrintLn(Row_03+6,0,"      the needle finds broadcasts",1);
  setFont(1);
@@ -2396,7 +2508,7 @@ function Psy_Front(name,line2){
  screenPrintLn(Row_01,46,name,0);
  screenPrintLn(Row_02,0,line2,0);
  setFont(SMALL_FONT);
- screenPrintLn(Row_03+6,0,"      >>> scroll to exit <<<",1);
+ screenPrintLnCentered(Row_03+6,"<scroll back>",1);
  setFont(1);
 }
 function Psy_Utter(text,y){
@@ -2656,7 +2768,7 @@ function SON_step(){
  switch(son.phase){
   case 0: /* the config card (navigation) */
    if(Unit_Is_Shaking(1.3)){son.phase=1;son.t0=millis();son.value=0;
-    Game_Front_Card(Game_Name(GAME_STOPNUM),">>> scroll to exit <<<"," the count is live");
+    Game_Front_Card(Game_Name(GAME_STOPNUM),"<scroll back>"," the count is live");
     break;}
    if(Pull_From_Buffer(ROTARY_DIAL)){
     if(sonCfgMode===0)sonCfgField=(sonCfgField+1)%(SON_CFG_FIELDS.length+1);
@@ -2906,7 +3018,7 @@ function AS_step(){
   a.x+=a.vx; a.y+=a.vy;
   if(a.x<0||a.x>=MAX_SCREEN_WIDTH||a.y<0||a.y>=MAX_SCREEN_HEIGHT){
    if(millis()-a.spawnTime>OFFSCREEN_TIMEOUT_ASTEROID){a.isAlive=false;gameScore++;
-    Game_Front_Card(Game_Name(GAME_AVOIDSTEROIDS),">>> scroll to exit <<<");}   /* survived one: +1 */
+    Game_Front_Card(Game_Name(GAME_AVOIDSTEROIDS),"<scroll back>");}   /* survived one: +1 */
   }
  }
  S.asteroids=S.asteroids.filter(a=>a.isAlive||millis()-a.spawnTime<20000);
@@ -2922,7 +3034,7 @@ function AS_step(){
   for(const a of S.asteroids){
    if(a.isAlive&&AS_dist(b.x,b.y,a.x,a.y)<ASTEROID_SIZE+1){
     a.isAlive=false;hit=true;gameScore+=5;PlaySound(Select);
-    Game_Front_Card(Game_Name(GAME_AVOIDSTEROIDS),">>> scroll to exit <<<");break;}
+    Game_Front_Card(Game_Name(GAME_AVOIDSTEROIDS),"<scroll back>");break;}
   }
   if(hit||b.x<0||b.x>=MAX_SCREEN_WIDTH||b.y<0||b.y>=MAX_SCREEN_HEIGHT)S.bullet=null;
  }
@@ -3029,7 +3141,7 @@ function TD_step(){
  }
  const sc=Math.trunc(TD.dist/10);
  if(sc!==gameScore){gameScore=sc;
-  if(sc%10===0)Game_Front_Card(Game_Name(GAME_TILT_DRIVE),">>> scroll to exit <<<");}
+  if(sc%10===0)Game_Front_Card(Game_Name(GAME_TILT_DRIVE),"<scroll back>");}
  OLED.display();
 }
 
@@ -3048,7 +3160,7 @@ function SL_draw(){ /* [G6+A9 letters] zoned left; ONE centered ceremonial line 
  screenPrintLn(8,3,"SLOTS",0);
  screenPrintLnCentered(30,SL_SYMS[SL.reels[0]]+"  "+SL_SYMS[SL.reels[1]]+"  "+SL_SYMS[SL.reels[2]],0);
  screenPrintLn(46,3,SL.msg,0);
- screenPrintLn(58,3,">>> scroll to exit <<<",1);
+ screenPrintLn(58,3,"<scroll back>",1);
 }
 function SL_step(){
  if(SL.spin>0){
@@ -3061,7 +3173,7 @@ function SL_step(){
    if(r[0]===r[1]&&r[1]===r[2]){gameScore+=10;SL.msg="THREE OF A KIND  +10";}
    else if(r[0]===r[1]||r[1]===r[2]||r[0]===r[2]){gameScore+=2;SL.msg="PAIR  +2";}
    else SL.msg="NO WIN";                       /* flat. */
-   Game_Front_Card(Game_Name(GAME_SLOTS),">>> scroll to exit <<<");
+   Game_Front_Card(Game_Name(GAME_SLOTS),"<scroll back>");
   } else SL.msg="- - -";
   SL_draw();return;
  }
@@ -3076,7 +3188,7 @@ function CR_draw(){ /* [G6+A9] zoned left; the roll is the ceremonial line */
  screenPrintLn(20,3,"BET: "+(CR.bet===0?"PASS":"DONT PASS"),0);
  if(CR.d[0])screenPrintLnCentered(34,CR.d[0]+" + "+CR.d[1]+" = "+(CR.d[0]+CR.d[1]),0);
  screenPrintLn(46,3,CR.point?("POINT IS "+CR.point):CR.msg,0);
- screenPrintLn(58,3,">>> scroll to exit <<<",1);
+ screenPrintLn(58,3,"<scroll back>",1);
 }
 function CR_step(){
  if(Pull_From_Buffer(SHUTTER)&&!CR.point){CR.bet=1-CR.bet;CR_draw();return;}
@@ -3092,7 +3204,7 @@ function CR_step(){
    else if(t===7){CR.msg=(CR.bet===1)?"SEVEN OUT  +1":"SEVEN OUT";if(CR.bet===1)gameScore++;CR.point=0;}
    else CR.msg="";
   }
-  Game_Front_Card(Game_Name(GAME_CRAPS),">>> scroll to exit <<<");
+  Game_Front_Card(Game_Name(GAME_CRAPS),"<scroll back>");
   CR_draw();
  }
 }
@@ -3117,7 +3229,7 @@ function BJ_draw(){ /* [G6+A9] hands zoned left; the verdict is the ceremonial l
  screenPrintLn(20,3,"DEALER  "+(BJ.done?BJ.dealer.map(BJ_name).join(" ")+" ("+BJ_val(BJ.dealer)+")":BJ_name(BJ.dealer[0])+" [ ]"),0);
  screenPrintLn(32,3,"YOU  "+BJ.you.map(BJ_name).join(" ")+" ("+BJ_val(BJ.you)+")",0);
  screenPrintLnCentered(46,BJ.msg,0);
- screenPrintLn(58,3,">>> scroll to exit <<<",1);
+ screenPrintLn(58,3,"<scroll back>",1);
 }
 function BJ_settle(){
  while(BJ_val(BJ.dealer)<17)BJ.dealer.push(BJ_deal()); /* DEALER STANDS ON 17 — flat rule card */
@@ -3126,13 +3238,13 @@ function BJ_settle(){
  else if(y===d)BJ.msg="PUSH";
  else BJ.msg="DEALER WINS";                             /* flat. */
  BJ.done=true;BJ_draw();
- Game_Front_Card(Game_Name(GAME_BLACKJACK),">>> scroll to exit <<<");
+ Game_Front_Card(Game_Name(GAME_BLACKJACK),"<scroll back>");
 }
 function BJ_step(){ /* [C2 two-context] shake = hit (another card); click = stand (a choice) */
  if(BJ.done){if(Pull_From_Buffer(SHUTTER)||Unit_Is_Shaking(1.3)){BJ_init();}return;}
  if(Unit_Is_Shaking(1.3)){
   BJ.you.push(BJ_deal());
-  if(BJ_val(BJ.you)>21){BJ.msg="BUST";BJ.done=true;Game_Front_Card(Game_Name(GAME_BLACKJACK),">>> scroll to exit <<<");}
+  if(BJ_val(BJ.you)>21){BJ.msg="BUST";BJ.done=true;Game_Front_Card(Game_Name(GAME_BLACKJACK),"<scroll back>");}
   BJ_draw();return;
  }
  if(Pull_From_Buffer(SHUTTER)&&!BJ.done)BJ_settle();
@@ -3149,7 +3261,7 @@ function RL_draw(){ /* [G6+A9] bet zoned left; the number is the ceremonial line
  setFont(LARGE_FONT);screenPrintLnCentered(40,RL.spin>0?RL_label(RL.n):(RL.msg==="?"?"":RL_label(RL.n)+" "+RL_color(RL.n)),0);
  setFont(SMALL_FONT);
  screenPrintLn(50,3,RL.spin>0?"NO MORE BETS":RL.msg,0);
- screenPrintLn(58,3,">>> scroll to exit <<<",1);
+ screenPrintLn(58,3,"<scroll back>",1);
 }
 function RL_step(){
  if(RL.spin>0){
@@ -3160,7 +3272,7 @@ function RL_step(){
    const win=(RL.bet===0&&c==="RED")||(RL.bet===1&&c==="BLACK")||(RL.bet===2&&odd&&c!=="HOUSE")||(RL.bet===3&&!odd&&c!=="HOUSE");
    RL.msg=win?"WIN  +1":(c==="HOUSE"?"HOUSE":"NO WIN");   /* flat. */
    if(win)gameScore++;
-   Game_Front_Card(Game_Name(GAME_ROULETTE),">>> scroll to exit <<<");
+   Game_Front_Card(Game_Name(GAME_ROULETTE),"<scroll back>");
   }
   RL_draw();return;
  }
@@ -3192,7 +3304,7 @@ function MR_step(){
   if(millis()>MR.phAt+700){
    MR.phase++;
    if(MR.phase>3){MR.phase=0;gameScore++;MR.bombs++;MR.base=(MR.base+1)%3;MR.dist=MR_LEG;
-    Game_Front_Card(Game_Name(GAME_MAILRUN),">>> scroll to exit <<<");}
+    Game_Front_Card(Game_Name(GAME_MAILRUN),"<scroll back>");}
    MR.phAt=millis();
   }
   return;
@@ -3307,12 +3419,12 @@ function GB_step(){
   if(!d.on)continue; left++;
   OLED.fillCircle(d.x,d.y,1,WHITE);
   if(AS_dist(GB.x,GB.y,d.x,d.y)<4){d.on=false;gameScore+=10;PlaySound(Select);
-   Game_Front_Card(Game_Name(GAME_GOBBLE),">>> scroll to exit <<<");}   /* [games batch] real-time score */
+   Game_Front_Card(Game_Name(GAME_GOBBLE),"<scroll back>");}   /* [games batch] real-time score */
  }
  if(left==0){   /* cleared: keep score, roll a fresh board (and its hazard) */
   GB.board++; GB.x=64; GB.y=32; GB.vx=0; GB.vy=0;
   GB_newBoard(false);
-  Game_Front_Card(Game_Name(GAME_GOBBLE),">>> scroll to exit <<<");   /* per-screen refresh: board rolls, card follows */
+  Game_Front_Card(Game_Name(GAME_GOBBLE),"<scroll back>");   /* per-screen refresh: board rolls, card follows */
  }
  OLED.fillCircle(GB.x,GB.y,2,WHITE);
  OLED.display();
@@ -3913,7 +4025,7 @@ function Messages_Draw(m){
  Activate_the_Screen(FRONT_SCREEN,true);
  screenPrintLn(Row_01,0," FROM: "+m.from,0);
  screenPrintLn(Row_02,0," "+m.subject,0);
- screenPrintLn(Row_03,0,(m.type===MSG_AUDIO)?" click=play  scroll=exit":">>> scroll to exit <<<",1);
+ screenPrintLn(Row_03,0,(m.type===MSG_AUDIO)?" click=play  scroll=exit":"<scroll back>",1);
  /* top screen: the body */
  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
  const lines=(m.type===MSG_MORSE)?["keying..."]:m.body.split("_");
@@ -3987,7 +4099,7 @@ function Scaffold_EXE(upidName){
    Activate_the_Screen(FRONT_SCREEN,true);
    screenPrintLn(Row_01,0," "+(scafEntry?scafEntry.name:get_as_char(lineName)),0);
    screenPrintLn(Row_02,0," [SCAFFOLD - not built]",0);
-   screenPrintLn(Row_03,0,">>> scroll to exit <<<",1);
+   screenPrintLn(Row_03,0,"<scroll back>",1);
    Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
    {
     const d=(scafEntry&&scafEntry.descriptor)?scafEntry.descriptor:"[stub]";
@@ -4119,7 +4231,7 @@ function Prob_Prompt(which){
  } else {
   screenPrintLn(Row_01,0," "+(merged?("DICE  "+p.n+" DIE OF "+p.s):["","","PICK A CARD","","LOTTERY"][which]),0);
   screenPrintLn(Row_02,0,merged?" click=dice shake=roll":(which==4?" shake to roll":" click or shake"),0);
-  screenPrintLn(Row_03,0,">>> scroll to exit <<<",1);
+  screenPrintLn(Row_03,0,"<scroll back>",1);
  }
  Activate_the_Screen(TOP_SCREEN,true);setFont(LARGE_FONT);
  screenPrintLnCentered(38,"?",1);
@@ -4256,18 +4368,42 @@ function Det_Draw(level){
 const ADV_JOBS=[["Amateur","Angry","Aspiring","Certified","Chief","Junior"],
                 ["Ninja","Space","Tickler","Dream","Armpit","Data"],
                 ["Accountant","Lawyer","Analyst","Sniffer","Supervisor","Associate"]];
-const ADV_COLD=0, ADV_READY=1, ADV_SEARCH=2, ADV_RESULT=3, ADV_NICKV=4, ADV_EXIT=5;
-let advState=ADV_COLD, advWhich=0, advBS=1, advSearch=null;
+const ADV_COLD=0, ADV_PANEL=1, ADV_SEARCH=2, ADV_RESULT=3, ADV_NICKV=4, ADV_EXIT=5, ADV_NICKB=6;
+let advState=ADV_COLD, advWhich=0, advBS=1, advSearch=null, advPanel=null, advNickAt=0;
+/* [C4 - THE PANEL MODEL, pilot; W12 - THE ADVICE FAMILY] every user variable
+   always visible with its current value; scroll moves the highlight, click
+   enters the field, scroll changes it in place, click keeps it. The panel is
+   the app's HOME BASE; scroll past the last field = the concierge. Values
+   below are structural vocabulary (existing labels), no invented flavor. */
+const ADV_MEMBERS=[
+ {t:"EVERYDAY ADVICE",fields:[{l:"BS",v:["0","1","2","3"],i:1}]},
+ {t:"WORK ADVICE",fields:[{l:"MODE",v:["GUIDANCE","CAREERS","NICKNAME"],i:0},{l:"BS",v:["0","1","2","3"],i:1}]},
+ {t:"PERSONAL ADVICE",fields:[{l:"FOR",v:["PARTNER","FRIENDS+FAM","INLAWS"],i:0},{l:"BS",v:["0","1","2","3"],i:1}]},
+];
+function Adv_Panel_Draw(){
+ const M=ADV_MEMBERS[advPanel.m];
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(6,3,M.t,0);                          /* title zone */
+ OLED.drawLine(0,9,127,9,WHITE);
+ for(let f=0;f<M.fields.length;f++){                /* body: the panel */
+  const fd=M.fields[f],y=20+f*10;
+  const isSel=(advPanel.sel===f),inEdit=isSel&&advPanel.edit;
+  screenPrintLn(y,10,(isSel&&!inEdit?"> ":"")+fd.l+(isSel&&!inEdit?" <":""),0);
+  screenPrintLn(y,64,(inEdit?"> ":"")+fd.v[fd.i]+(inEdit?" <":""),0);
+ }
+ Hint(advPanel.edit?"<scroll change  click keep>":"<click set  shake run>");
+ OLED.display();
+}
 const NICK_EARN_ASKS=40; /* [OPS PROPOSAL — flagged] */
 function Nick_Earned(){return askCount>=NICK_EARN_ASKS;}
 function Adv_Title(){return advWhich===1?"CAREER SEARCH":"GUIDANCE SEARCH";}
 function Adv_Meter(match){
- /* the match meter: plain track + number, 1965 test equipment (no box - boxes are monitor-only) */
- OLED.drawRect(3,50,100,8,WHITE);
+ /* the match meter: plain track + value (M3 grammar), riding ABOVE the
+    hint zone per the three-zone template */
+ OLED.drawRect(3,44,100,8,WHITE);
  const w=Math.trunc(match*96/100);
- if(w>0)OLED.fillRect(5,52,w,4,WHITE);
- screenPrintLn(57,108,"match",0);
- screenPrintLn(63,108,String(match)+"%",0);
+ if(w>0)OLED.fillRect(5,46,w,4,WHITE);
+ screenPrintLn(50,106,String(match)+"%",0);
 }
 function Adv_Idle_Card(){
  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
@@ -4286,12 +4422,14 @@ function Adv_NewSearch(){
 function Adv_Draw_Search(){
  const s=advSearch;
  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
- screenPrintLn(8,3,Adv_Title(),0);
- screenPrintLn(8,106,"bs "+advBS,0);
- if(advWhich===1){for(let i=0;i<3;i++)screenPrintLn(18+i*7,8,s.words[i],0);}
- else screenPrintLn(24,8,"record "+s.rec,0);
- if(s.phase===1)screenPrintLn(44,8,"LOCAL MINIMUM DETECTED",0);
+ screenPrintLn(6,3,Adv_Title(),0);
+ screenPrintLn(6,110,"bs "+advBS,0);
+ OLED.drawLine(0,9,127,9,WHITE);
+ if(advWhich===1){for(let i=0;i<3;i++)screenPrintLn(17+i*7,8,s.words[i],0);}
+ else screenPrintLn(22,8,"record "+s.rec,0);
+ if(s.phase===1)screenPrintLn(36,8,"LOCAL MINIMUM DETECTED",0);
  Adv_Meter(s.match);
+ Hint(HINT_BACK);
  OLED.display();
 }
 function Adv_Search_Tick(){
@@ -4316,19 +4454,22 @@ function Adv_Search_Tick(){
  return s.phase===2;
 }
 function Adv_Result_Card(){
+ /* three-zone: title / result body / hint. Pools stay [PAPA] pen slots. */
+ const M=ADV_MEMBERS[advPanel.m];
  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(6,3,M.t,0);
+ OLED.drawLine(0,9,127,9,WHITE);
  if(advWhich===1){
-  screenPrintLn(8,3,"YOU SHOULD BE:",0);
-  for(let i=0;i<3;i++)screenPrintLn(20+i*8,8,advSearch.words[i],0);
+  screenPrintLn(15,3,"YOU SHOULD BE:",0);
+  for(let i=0;i<3;i++)screenPrintLn(24+i*7,8,advSearch.words[i],0);
  } else {
-  /* [ITEM 8] the daily-affirmations presentation frame - STRUCTURE ONLY;
-     the pool is a [PAPA] pen slot per drafting law */
-  screenPrintLn(8,3,"TODAY'S GUIDANCE:",0);
-  screenPrintLn(24,8,"[PAPA - affirmation pool]",0);
-  screenPrintLn(34,8,"record "+advSearch.rec+" matched",0);
+  const forv=(advPanel.m===2)?M.fields[0].v[M.fields[0].i]:null;
+  screenPrintLn(15,3,forv?("FOR "+forv+":"):"TODAY'S GUIDANCE:",0);
+  screenPrintLn(26,8,advPanel.m===0?"[PAPA - everyday pool]":(forv?("[PAPA - "+forv.toLowerCase()+" pool]"):"[PAPA - affirmation pool]"),0);
+  screenPrintLn(35,8,"record "+advSearch.rec+" matched",0);
  }
- screenPrintLn(8,106,"bs "+advBS,0);
  Adv_Meter(100);
+ Hint(HINT_AGAIN);
  OLED.display();
  PlaySound(ConnectionSuccess);
 }
@@ -4344,40 +4485,65 @@ function Adv_Nick_Card(){
   screenPrintLn(26,8,"USER RECORD INSUFFICIENT.",0);
   screenPrintLn(36,8,"asks "+askCount+" of "+NICK_EARN_ASKS,0); /* real datum; wording=[PAPA] */
  }
+ Hint(HINT_BACK);
  OLED.display();
 }
 function Advice_EXE(which){
+ /* [C1+C2+C4] arrive -> PANEL (config, home base) -> shake performs ->
+    result -> shake again / scroll back to the panel; scroll past the
+    panel's last field returns control to the concierge. */
  switch(advState){
-  case ADV_COLD:
+  case ADV_COLD:{
    Pause_Process(SYSTEM_MONITOR);
-   advWhich=which;
-   if(which===3){
-    Psy_Front("NICKNAME",Nick_Earned()?" introspective mode":" not yet earned");
-    Adv_Nick_Card();
-    advState=ADV_NICKV;
-   } else {
-    Psy_Front(which===1?"CAREERS":"GUIDANCE"," <shake=run click=bs>");
-    Adv_Idle_Card();
-    advState=ADV_READY;
+   advPanel={m:constrain(which,0,2),sel:0,edit:false};
+   const M=ADV_MEMBERS[advPanel.m];
+   for(const fd of M.fields)if(fd.l==="BS")advBS=parseInt(fd.v[fd.i]);
+   Psy_Front(M.t,""); /* [C1] the concierge shows the destination; verbs live on the top glass */
+   Adv_Panel_Draw();
+   advState=ADV_PANEL;
+   break;}
+  case ADV_PANEL:{
+   const M=ADV_MEMBERS[advPanel.m];
+   if(Pull_From_Buffer(ROTARY_DIAL)){
+    if(advPanel.edit){const fd=M.fields[advPanel.sel];fd.i=(fd.i+1)%fd.v.length;PlaySound(Scroll);Adv_Panel_Draw();}
+    else{
+     advPanel.sel++;PlaySound(Scroll);
+     if(advPanel.sel>=M.fields.length){advState=ADV_EXIT;break;} /* [C4] scroll past the panel = the concierge */
+     Adv_Panel_Draw();
+    }
+    break;
    }
-   break;
-  case ADV_READY:
-   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_EXIT;break;}
-   if(Pull_From_Buffer(SHUTTER)){advBS=(advBS+1)%4;Adv_Idle_Card();}
-   if(Unit_Is_Shaking(1.3)){Adv_NewSearch();advState=ADV_SEARCH;}
+   if(Pull_From_Buffer(SHUTTER)){advPanel.edit=!advPanel.edit;PlaySound(Select);Adv_Panel_Draw();break;}
+   if(!advPanel.edit&&Unit_Is_Shaking(1.3)){
+    for(const fd of M.fields)if(fd.l==="BS")advBS=parseInt(fd.v[fd.i]);
+    const mode=(advPanel.m===1)?M.fields[0].v[M.fields[0].i]:null;
+    if(mode==="NICKNAME"){
+     /* [C3] even the truth is FETCHED - a visible consult, then the card */
+     Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+     screenPrintLn(6,3,M.t,0);OLED.drawLine(0,9,127,9,WHITE);
+     screenPrintLn(30,8,"CONSULTING RECORD "+askCount+"...",0);OLED.display();
+     advNickAt=millis()+900;advState=ADV_NICKB;
+     break;
+    }
+    advWhich=(mode==="CAREERS")?1:0;
+    Adv_NewSearch();advState=ADV_SEARCH;
+   }
+   break;}
+  case ADV_NICKB:
+   if(millis()>advNickAt){Adv_Nick_Card();advState=ADV_NICKV;}
    break;
   case ADV_SEARCH:
-   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_EXIT;break;}
+   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_PANEL;advPanel.sel=0;advPanel.edit=false;Adv_Panel_Draw();break;}
    Pull_From_Buffer(SHUTTER); /* consumed during the hunt */
    if(Adv_Search_Tick()){Adv_Result_Card();advState=ADV_RESULT;}
    break;
   case ADV_RESULT:
-   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_EXIT;break;}
-   Pull_From_Buffer(SHUTTER); /* click consumed; SHAKE runs, per the ruling */
-   if(Unit_Is_Shaking(1.3)){Psy_Front(advWhich===1?"CAREERS":"GUIDANCE"," <shake=run click=bs>");Adv_NewSearch();advState=ADV_SEARCH;}
+   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_PANEL;advPanel.sel=0;advPanel.edit=false;Adv_Panel_Draw();break;}
+   Pull_From_Buffer(SHUTTER);
+   if(Unit_Is_Shaking(1.3)){Adv_NewSearch();advState=ADV_SEARCH;}
    break;
   case ADV_NICKV:
-   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_EXIT;break;}
+   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_PANEL;advPanel.sel=0;advPanel.edit=false;Adv_Panel_Draw();break;}
    Pull_From_Buffer(SHUTTER); /* the truth takes no input */
    break;
   case ADV_EXIT:
@@ -4441,7 +4607,16 @@ function setup(){
  Health_Load();       /* [HEALTH] the persisted condition wakes with the machine */
  Unit_LoadPhotos();   /* [PHOTO PATH FIX] candidate-chain: museum layout, then repo layout */
  Unit_View(true);     /* [EYEBALL RULING] unit view = DEFAULT everywhere; degrades if photos missing */
- Boot3();             /* boot is MANDATORY (porch doctrine); three-level per canon */
+ Power_Standby();     /* [W1] the machine arrives OFF - the POWER control starts it */
+}
+let unitPowered=false;
+function Power_Standby(){
+ /* [W1] dark glass; the rear-switch intent cashed as one visible control. */
+ try{topOLED.clearDisplay();topOLED.display();frontOLED.clearDisplay();frontOLED.display();}catch(e){}
+}
+function devPower(){
+ if(!unitPowered){unitPowered=true;PlaySound(Select);Boot3();} /* boot is MANDATORY per porch doctrine */
+ else{(async()=>{unitPowered=false;try{await CRT_PowerOff();}catch(e){}Power_Standby();})();}
 }
 /* ============ [TWIN-BUILT 2026-07-22 night] DOORS RESTRUCTURE (ruling B) ============
    Three-door top level: DOOR_A (answers-class: Answers/Advice/Detectors),
@@ -4521,6 +4696,16 @@ function Doors_Restructure(){
     row 6 Friends & Fam -> FOLDED into Excuses/Lines WHO (D.8 label reused).
     row 7 Inlaws and Outlaws = PARKED (flavor call is Mike's) - untouched. */
  for(const r of [0,4,5,6])MENU_PARAMETER_TABLE[ADVICE][r][READ_ACCESS_PASSCODE]=0;
+ /* [W12 WALK-FOUR - THE ADVICE FAMILY] the visible members = Everyday
+    Advice / Work Advice / Personal Advice (the C4 panel-model pilot). The
+    old rows fold IN: careers + nickname ride Work's MODE field; partner /
+    friends+family / inlaws ride Personal's FOR field. Rows stay in the
+    table per the tombstone law. */
+ MENU_TABLE[ADVICE][0][1]="Everyday Advice";
+ MENU_TABLE[ADVICE][1][1]="Work Advice";
+ MENU_TABLE[ADVICE][2][1]="Personal Advice";
+ for(const r of [0,1,2])MENU_PARAMETER_TABLE[ADVICE][r][READ_ACCESS_PASSCODE]=1;
+ for(const r of [3,4,5,6,7])MENU_PARAMETER_TABLE[ADVICE][r][READ_ACCESS_PASSCODE]=0;
  /* mail-run twin-delta row in the games table (unchanged) */
  const gt=MENU_TABLE[GAMES], gp=MENU_PARAMETER_TABLE[GAMES];
  let ei=gt.findIndex(r=>r&&r[1]===".end");
@@ -4625,6 +4810,33 @@ async function CRT_Birth(){
  }
  OLED.clearDisplay();OLED.display();
 }
+async function Fluid_Fill(){
+ /* [W4] the fluid fills the glass: the level rises with a wobbling meniscus,
+    agitation bubbles burst at the fill front and thin out; it settles. */
+ for(let lvl=0;lvl<=64;lvl+=3){
+  OLED.clearDisplay();
+  const surf=64-lvl;
+  for(let x=0;x<128;x+=2){
+   const y=surf+Math.round(Math.sin(x*0.19+lvl*0.5)*2);
+   if(y>=0&&y<64)OLED.drawPixel(x,y,WHITE);
+  }
+  const agit=Math.max(2,14-Math.trunc(lvl/6));
+  for(let i=0;i<agit;i++){
+   const bx=random(0,128),by=surf+random(0,12)-6;
+   if(by>=0&&by<64)OLED.drawCircle(bx,by,random(1,3),WHITE);
+  }
+  OLED.display();
+  await sleep(65);
+ }
+ for(let s=5;s>=0;s--){ /* the agitation dies down */
+  OLED.clearDisplay();
+  for(let i=0;i<s;i++)OLED.drawCircle(random(0,128),random(0,64),random(1,2),WHITE);
+  OLED.display();
+  await sleep(90);
+ }
+ OLED.clearDisplay();OLED.display();
+ await sleep(200);
+}
 async function CRT_PowerOff(){ /* both screens die, front last (it woke first) */
  Activate_the_Screen(TOP_SCREEN,false);await CRT_Death();
  Activate_the_Screen(FRONT_SCREEN,false);await CRT_Death();
@@ -4677,9 +4889,11 @@ async function Boot3_Chatter(ms,withBar){
 }
 async function Boot3(){
  if(bootRunning)return;
+ unitPowered=true; /* [W1] any boot implies power */
  bootRunning=true;
  if(!health)Health_Load();
- health.powerOns++;Health_Spend(H_BOOT_COST);monRetriesLast=0; /* [HEALTH] real counters */
+ health.powerOns++;health.ageSessions=(health.ageSessions||0)+1; /* [C5] one session older */
+ Health_Spend(H_BOOT_COST);monRetriesLast=0; /* [HEALTH] real counters */
  const lvl=bootLevel();
  await frontCeremony("PLEASE WAIT");   /* [G1 letter] */
  await sleep(500);
@@ -4764,6 +4978,7 @@ const H_CARE_GAIN=15, H_ASK_COST=0.15, H_BOOT_COST=1.0, H_GLITCH_COST=0.2,
       H_RETRY_AT=85, H_ADVISE_AT=50;
 function Health_Load(){try{health=JSON.parse(localStorage.getItem("wbr_health"))||null;}catch(e){health=null;}
  if(!health)health={h:100,powerOns:0,careCount:0};
+ if(health.ageSessions===undefined)health.ageSessions=0; /* [C5] the clock starts at day-0; existing machines RESET to day-0 truth (walk ruling) */
  monNotOK=(health.h<H_ADVISE_AT);}
 function Health_Save(){try{localStorage.setItem("wbr_health",JSON.stringify(health));}catch(e){}}
 function Health_H(){return health?health.h:100;}
@@ -4865,7 +5080,7 @@ if(new URLSearchParams(location.search).has("user"))setUserMode(true);
 /* ============ [DEV] driver, chrome, registry ============ */
 let osRunning=true, bootRunning=false;
 function osTick(){
- if(osRunning&&!bootRunning){
+ if(osRunning&&!bootRunning&&unitPowered){ /* [W1] no power, no OS */
   const iters=Math.max(1,Math.round(2*SPEED));
   const t=performance.now();
   for(let i=0;i<iters;i++)MGK_VIIIp_OS();
@@ -4911,7 +5126,7 @@ function Enter_Code(raw){
 /* [porch doctrine 2026-07-17] boot is MANDATORY every power-on (the dev disable was
    expedience); firmware change rides the bench batch. The twin offers both restarts. */
 function devRestartBoot(){(async()=>{try{await CRT_PowerOff();}catch(e){}location.hash="boot";location.reload();})();}
-function devRestartNoBoot(){(async()=>{try{await CRT_PowerOff();}catch(e){}if(location.hash)history.replaceState(null,"",location.pathname+location.search);location.reload();})();}
+function devRestartNoBoot(){(async()=>{try{await CRT_PowerOff();}catch(e){}location.hash="menu";location.reload();})();} /* [W1] #menu = powered, no boot (as flashed) */
 /* ---- [DEV, ruling 2] testing shortcuts: the inbox is RAM-only, so deliveries would
    otherwise need real play (20/40/60 asks). Non-fidelity; the machine does not do this. ---- */
 function devDeliverNext(){
@@ -5014,6 +5229,7 @@ function devExportReg(){
 
 setup();
 setZoom(SCREEN_ZOOM); /* [DEV] apply the ¾ default + mark the active size button */
-if(location.hash==="#boot")devRunBoot(); /* Restart (boot) path */
+if(location.hash==="#boot"){unitPowered=true;devRunBoot();} /* Restart (boot) path */
+else if(location.hash==="#menu"){unitPowered=true;} /* [W1] dev: straight to the menu, as flashed */
 refreshChrome();
 </script></body></html>
