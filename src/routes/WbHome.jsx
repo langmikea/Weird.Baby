@@ -57,7 +57,8 @@ export default function WbHome() {
         .wb-left { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; border-right: 1px solid #c6c2b7; position: relative; background: #ece9e0; }
         .wb-left::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, #f7f5ee 0%, transparent 70%); pointer-events: none; }
         .wb-logo { width: min(340px, 85%); height: auto; filter: none; position: relative; animation: float 7s ease-in-out infinite; z-index: 1; }
-        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(-0.5deg); } 50% { transform: translateY(-10px) rotate(0.5deg); } }
+        /* [walk-five] the float, slightly bigger per Mike */
+        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(-0.7deg); } 50% { transform: translateY(-14px) rotate(0.7deg); } }
         .wb-tagline { font-family: 'Courier Prime', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: #57544d; margin-top: 24px; position: relative; z-index: 1; animation: blink 3s step-end infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
@@ -94,7 +95,9 @@ export default function WbHome() {
         @keyframes rise { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
         /* 2026-06-07 Mike: guest book wasn't scrollable-in-practice — taller
            viewport and a visible thin scrollbar so all entries are reachable. */
-        .wb-entries { margin-top: 14px; max-height: 34vh; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #a9a59a transparent; }
+        /* [walk-five] the book, EASIER AND MORE INVITING to scroll — taller,
+           boxed as the physical book (not tucked away), thumb always visible. */
+        .wb-entries { margin-top: 14px; max-height: 44vh; overflow-y: scroll; border: 1px solid #c6c2b7; border-radius: 1px; background: #faf8f3; padding: 4px 12px; scrollbar-width: thin; scrollbar-color: #a9a59a transparent; }
         .wb-entries::-webkit-scrollbar { width: 6px; }
         .wb-entries::-webkit-scrollbar-thumb { background: #a9a59a; border-radius: 3px; }
         .wb-entries::-webkit-scrollbar-track { background: transparent; }
@@ -152,14 +155,15 @@ export default function WbHome() {
             will be remembered differently<br />
             than the ones who come later.
           </p>
-          <p className="wb-whisper">You are early. That is noted.</p>
+          {/* [walk-five] "You are early. That is noted." killed — redundant
+              with the note above (the book already says what early means). */}
           <div className="wb-rule" />
           <div className="wb-book-label">Guest Book</div>
 
           {!submitted ? (
             <>
               <div className="wb-entry-box">
-                <span className="wb-entry-box-label">Name</span>
+                <span className="wb-entry-box-label">What should we call you?</span>
                 <input className="wb-input" placeholder="sign here..." value={name} onChange={e => setName(e.target.value)} maxLength={60} />
               </div>
               <textarea className="wb-input wb-textarea" placeholder="what brought you here? (optional)" value={note} onChange={e => setNote(e.target.value)} maxLength={280} />

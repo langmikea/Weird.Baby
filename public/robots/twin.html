@@ -66,6 +66,12 @@
  #unitfront.clickflash::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:5;
   background:var(--clickglow);animation:shutterflash .18s ease-out forwards}
  @keyframes shutterflash{0%{opacity:1}100%{opacity:0}}
+ /* [F1 walk-five] POWER mis-pressed: now visually DISTINCT (outlined pill,
+    double border) and physically APART from the input controls. */
+ .btns button.ctl.pwr{margin-right:28px;border-radius:18px;background:transparent;color:#211f1c;border:2px double #211f1c}
+ .btns button.ctl.pwr:hover{background:#211f1c;color:#f5f3ec}
+ body.usermode .btns button.ctl.pwr{background:transparent;color:#e6e6e6;border:2px double #9a9a9a;border-radius:18px}
+ body.usermode .btns button.ctl.pwr:hover{background:#e6e6e6;color:#0c0d10}
  .btns button.clickflash{box-shadow:0 0 0 2px rgba(33,31,28,.55)}
  body.usermode .btns button.clickflash{box-shadow:0 0 0 2px rgba(255,255,255,.8)}
 </style></head><body>
@@ -201,7 +207,7 @@ body.usermode .lbl.anno{display:none}
   <div class="lbl anno">FRONT SCREEN (machine front &mdash; menu) &mdash; 128&times;64, 32 driver rows interlaced onto even lines [main:127; SSD1306.cpp:604-605]</div>
   <div class="scr"><canvas id="cvFront" width="384" height="192"></canvas></div>
   <div class="btns">
-   <button class="ctl" onclick="devPower()" title="power the unit on or off (the rear switch, cashed as one visible control)"><span class="ico">&#9211;</span>POWER</button>
+   <button class="ctl pwr" onclick="devPower()" title="power the unit on or off (the rear switch, cashed as one visible control)"><span class="ico">&#9211;</span>POWER</button>
    <button class="ctl" onclick="devRotary()" title="rotary dial - one detent"><span class="ico">&#10227;</span>SCROLL</button>
    <button class="ctl" onclick="devShutter()" title="shutter button"><span class="ico">&#9673;</span>CLICK</button>
    <button class="ctl" onclick="devShake()" title="shake the unit (>1.3g)"><span class="ico">&#8779;</span>SHAKE</button>
@@ -216,6 +222,7 @@ body.usermode .lbl.anno{display:none}
    <button class="devonly" onclick="devParcelReset()" title="fresh machine: day-one parcel state">Parcel reset [dev]</button>
    <button class="devonly" onclick="devWalkMode()" title="hide the known dead ends from the review path (list chip-reported)">Walk mode [dev]</button>
    <button class="devonly" onclick="devGlitchNow()" title="fire one glitch right now, to see it">Glitch now [dev]</button>
+   <button class="devonly" onclick="devThink()" title="cycle the computing-length default S/M/L">Think S/M/L [dev]</button>
    <button class="devonly" onclick="devFeedBWToggle()" title="compare against color chrome — period B&W is the ruled default">Color compare [dev]</button>
   </div>
   <p class="keyhint"><kbd>&darr;</kbd>/SCROLL = rotary &nbsp; <kbd>Enter</kbd>/CLICK/tap front = shutter &nbsp; <kbd>Space</kbd>/SHAKE = shake &nbsp; <kbd>W A S D</kbd> (hold) = tilt for bubbles &nbsp; mic: unused by firmware</p>
@@ -890,11 +897,18 @@ function Run_EXE(){                                                          /* 
    Pause_Process(MENU_SYSTEM); Start_Process(CALCP,NORMAL_PRIORITY); break;
   case NOTEP:           /* [DESK TOOLS] */
    Pause_Process(MENU_SYSTEM); Start_Process(NOTEP,NORMAL_PRIORITY); break;
+  case FORTP: Pause_Process(MENU_SYSTEM); Start_Process(FORTP,NORMAL_PRIORITY); break;
+  case HOROP: Pause_Process(MENU_SYSTEM); Start_Process(HOROP,NORMAL_PRIORITY); break;
   case VOICE:           /* [TWIN DELTA] one line, and 11 rows become real */
    currentVoiceID=lineNum_PTR;
    chip("ok","voice set to slot "+currentVoiceID+" (firmware hardcodes 8; per-engine voices override - spec s3)");
    break;
-  case PREDICTIONS: scafUpid="PREDICTIONS"; Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY); break;
+  case PREDICTIONS: /* [B1/B2 walk-five] Fortune + Horoscope are BUILT */
+   if(lineNum_PTR===0){Pause_Process(MENU_SYSTEM); Start_Process(FORTP,NORMAL_PRIORITY);}
+   else if(lineNum_PTR===1){Pause_Process(MENU_SYSTEM); Start_Process(HOROP,NORMAL_PRIORITY);}
+   else {scafUpid="PREDICTIONS"; Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY);}
+   break;
+  case BSP: Pause_Process(MENU_SYSTEM); Start_Process(BSP,NORMAL_PRIORITY); break; /* [B4] */
   case CODES:       scafUpid="CODES";       Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY); break;
   case USER:        scafUpid="USER";        Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY); break;
   case MGKMODEL:    scafUpid="MGKMODEL";    Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY); break;
@@ -921,11 +935,13 @@ function Mod_the_Menu_Line(){
  return false;
 }
 function Draw_the_Menu_Line(){
- /* [W3 - ONE HIGHLIGHT STANDARD, Mike's walk ruling] "> Row <" brackets,
-    centered - every menu, every screen, one voice. */
+ /* [W3 - ONE HIGHLIGHT STANDARD] "> Row <" brackets, centered, everywhere.
+    [F2 walk-five] back rows are PASSAGE, not selection - no brackets. */
  OLED.setTextColor(WHITE);
+ const lbl=get_as_char(lineName);
+ if(String(lbl).trim().toLowerCase().indexOf("back")>=0){screenPrintLnCentered(Row_03,lbl,1);return;}
  const star=Mod_the_Menu_Line()?" *":"";
- screenPrintLnCentered(Row_03,"> "+get_as_char(lineName)+star+" <",1);
+ screenPrintLnCentered(Row_03,"> "+lbl+star+" <",1);
 }
 function Scroll_the_Menu(){
  Activate_the_Screen(FRONT_SCREEN,true);
@@ -1924,7 +1940,10 @@ function Games_EXE(gameID){                  /* the process body, shaped like M8
       wiped anything init drew (TTT's mode screen rendered, then got cleared — blank
       top at game start). Now: card first, then activate+clear top, THEN init, so
       init drawing lands on the live top screen. */
-   Game_Front_Card(Game_Name(gameID),"<scroll back>");
+   /* [U2 - THE DISPLAY-REDIRECT LAW] the user is ALWAYS told where to look:
+      floating games ride the FLUIDIC display, the rest run on the monitor. */
+   Game_Front_Card(Game_Name(gameID),"<scroll back>",
+    (gameID===GAME_SNOWGLOBE)?" OUTPUT: FLUIDIC DISPLAY":" OUTPUT: MONITOR");
    Activate_the_Screen(TOP_SCREEN,true);
    Game_Init(gameID);
    gameState_FSM=GAME_RUN;
@@ -2503,10 +2522,18 @@ const ELIZ_WHY=["TROUBLE SLEEPING","NERVES","A DECISION TO MAKE","NO REASON"];
 const ELIZ_REFLECT=["GO ON.","TELL ME MORE ABOUT THAT.","AND HOW DID THAT MAKE YOU FEEL?"];
 /* ---- shared theater primitives ---- */
 function Psy_Front(name,line2){
+ /* [F3 walk-five] the rail card broke on long names (EVERYDAY ADVICE wrecked
+    the format): names that fit ride centered IN the rail gap; longer names
+    drop the rail and center alone. */
  Activate_the_Screen(FRONT_SCREEN,true);
- screenPrintLn(Row_01,0," ----<          >----",0);
- screenPrintLn(Row_01,46,name,0);
- screenPrintLn(Row_02,0,line2,0);
+ const b=OLED.getTextBounds(String(name));
+ if(b.w<=58){
+  screenPrintLn(Row_01,0," ----<          >----",0);
+  printText(Row_01,Math.trunc(66-b.w/2),String(name));
+ } else {
+  screenPrintLnCentered(Row_01,String(name),0);
+ }
+ if(line2)screenPrintLn(Row_02,0,line2,0);
  setFont(SMALL_FONT);
  screenPrintLnCentered(Row_03+6,"<scroll back>",1);
  setFont(1);
@@ -2729,23 +2756,23 @@ function SON_init(){
  SON_Cfg_Draw();
 }
 function SON_Fmt(v){return v.toFixed(son.places);}
-function SON_Cfg_Draw(){ /* the nested-menu card (C2 pattern) */
- Activate_the_Screen(FRONT_SCREEN,true);
- screenPrintLn(Row_01,0," ----<          >----",0);
- screenPrintLn(Row_01,34,"Stop On A #",0);
- if(sonCfgField>=SON_CFG_FIELDS.length){screenPrintLn(Row_02,0," back",0);}
- else{
-  const val=(sonCfgField===0)?String(son.places):SON_SPEEDS[son.speed].name;
-  screenPrintLn(Row_02,0,(sonCfgMode===1?" ":" >")+SON_CFG_FIELDS[sonCfgField]+(sonCfgMode===1?" = >":": ")+val,0);
- }
- setFont(SMALL_FONT);
- screenPrintLn(Row_03+6,0,sonCfgMode===1?" scroll=values  click=select":" scroll=fields  click=open  shake=start",1);
- setFont(1);
+function SON_Cfg_Draw(){
+ /* [F5 walk-five] conformed to the C4 three-zone panel: title / fields with
+    the bracket grammar / the hint zone. Config lives on the TOP glass (C1);
+    the front stays the concierge card. */
+ Psy_Front("STOP ON A NUMBER","");
  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
- screenPrintLn(8,3,"STOP ON A NUMBER",0);
- screenPrintLn(22,8,"SUM OF EXACTLY 10.00 WINS.",0);
- screenPrintLn(32,8,"wins "+sonBest.wins+"   closest "+SON_Fmt2(sonBest.closest),0); /* real persisted bests */
- screenPrintLn(58,3,"shake = start",0);
+ screenPrintLn(6,3,"STOP ON A NUMBER",0);
+ OLED.drawLine(0,9,127,9,WHITE);
+ const vals=[String(son.places),SON_SPEEDS[son.speed].name];
+ for(let f=0;f<SON_CFG_FIELDS.length;f++){
+  const y=17+f*9,isSel=(sonCfgField===f),inEdit=isSel&&sonCfgMode===1;
+  screenPrintLn(y,10,(isSel&&!inEdit?"> ":"")+SON_CFG_FIELDS[f]+(isSel&&!inEdit?" <":""),0);
+  screenPrintLn(y,64,(inEdit?"> ":"")+vals[f]+(inEdit?" <":""),0);
+ }
+ screenPrintLn(38,8,"SUM OF EXACTLY 10.00 WINS.",0);
+ screenPrintLn(46,8,"wins "+sonBest.wins+"  closest "+SON_Fmt2(sonBest.closest),0);
+ Hint(sonCfgMode===1?"<scroll change  click keep>":"<click set  shake run>");
  OLED.display();
 }
 function SON_Fmt2(v){return Number(v).toFixed(2);}
@@ -2761,7 +2788,7 @@ function SON_Game_Draw(dark){
   setFont(SMALL_FONT);
  }
  screenPrintLn(46,3,"SUM "+SON_Fmt(son.sum)+"   STOPS "+son.stops,0);
- screenPrintLn(58,3,"shake = stop   scroll = back",0);
+ Hint("<shake stop  scroll back>");
  OLED.display();
 }
 function SON_step(){
@@ -2771,17 +2798,16 @@ function SON_step(){
     Game_Front_Card(Game_Name(GAME_STOPNUM),"<scroll back>"," the count is live");
     break;}
    if(Pull_From_Buffer(ROTARY_DIAL)){
-    if(sonCfgMode===0)sonCfgField=(sonCfgField+1)%(SON_CFG_FIELDS.length+1);
-    else{
+    if(sonCfgMode===0){
+     sonCfgField++;
+     if(sonCfgField>=SON_CFG_FIELDS.length){gameState_FSM=GAME_CLEANUP;break;} /* [C4] scroll past the panel = out */
+    } else {
      if(sonCfgField===0)son.places=(son.places%3)+1;
      else son.speed=(son.speed+1)%SON_SPEEDS.length;
     }
     SON_Cfg_Draw();break;}
    if(Pull_From_Buffer(SHUTTER)){
-    if(sonCfgMode===0){
-     if(sonCfgField>=SON_CFG_FIELDS.length){gameState_FSM=GAME_CLEANUP;break;} /* back row */
-     sonCfgMode=1;
-    } else sonCfgMode=0;
+    sonCfgMode=(sonCfgMode===0)?1:0;
     SON_Cfg_Draw();
    }
    break;
@@ -2811,7 +2837,7 @@ function SON_step(){
     son.sum=0;son.stops=0;
    } else {
     if(son.sum>sonBest.closest){sonBest.closest=son.sum;SON_SaveBest();} /* closest approach persists */
-    screenPrintLn(54,3,"shake = next   scroll = back",0);
+    Hint(HINT_AGAIN);
    }
    OLED.display();
    son.phase=3;break;}
@@ -2874,10 +2900,21 @@ function tiltVec(){const a=IMU.readAcceleration();return [a[0],a[1]];}
    Reuses the proven integrator shape [Bubbles.ino]; no scoring - it is a toy, not a game. */
 const SNOW_MAX=60;
 let snow=[];
+let SGx=null;
+function SG_Santa_Enabled(){try{return !!(JSON.parse(localStorage.getItem("wbr_santa"))||{}).on;}catch(e){return false;}}
 function SG_init(){
  snow=[];
  for(let i=0;i<SNOW_MAX;i++)snow.push({x:random(2,MAX_SCREEN_WIDTH-2),y:random(2,MAX_SCREEN_HEIGHT-2),vx:0,vy:0,r:(i%7==0)?1:0,
   m:0.8+random(0,5)/10,rest:random(0,4)}); /* [POLISH] mass + pile-depth variance */
+ /* [B5 - THE SANTA BUILD, the U1 exemplar] one roll per visit: earned
+    (snowman rolled off on a prior visit) = strong odds; never earned =
+    a system-controlled chance that GROWS with the machine's age. */
+ const earned=SG_Santa_Enabled();
+ const s=(health&&health.ageSessions)||0;
+ const p=earned?0.55:Math.min(0.05+s*0.02,0.30);
+ SGx={shake:0,zips:0,snowman:0,rollX:26,fallen:[],msgSent:false,
+  santa:(Math.random()<p)?{x:-24,y:9,at:millis()+6000+random(0,9000),wob:0,gone:false}:null,
+  santaSeen:false,utoh:false,musicHold:0};
 }
 function SG_step(){
  /* [POLISH 2026-07-23, issue 12] feel pass, existing vocabulary only:
@@ -2888,8 +2925,25 @@ function SG_step(){
  const t=tiltVec();
  const gx=t[0]*-0.25, gy=t[1]*0.25;
  OLED.clearDisplay();
- if(Unit_Is_Shaking(1.3)){
+ const shakingNow=Unit_Is_Shaking(1.3), shakeVal=Get_Shake_Value();
+ if(shakingNow){
   for(const s of snow){s.vx+=(random(0,200)-100)/60;s.vy+=(random(0,200)-100)/60;}
+  SGx.shake++;
+  /* [B5] the record needle ZIPS on a hard shake; after the settle + a beat,
+     the needle drops and the song ALWAYS restarts from ITS BEGINNING. */
+  if(shakeVal>2.2&&millis()>SGx.musicHold){
+   SGx.zips++;SGx.musicHold=millis()+2200;
+   try{FX_tone(1400,0.18,"sawtooth",0.30,0);FX_tone(300,0.12,"sawtooth",0.2,0.05);}catch(e){}
+   sgIdx=0; /* the interrupted song will restart clean */
+  }
+  /* the snowman ladder: wobble -> parts off -> collapse */
+  if(SGx.shake>70&&SGx.snowman===0){SGx.snowman=1;}
+  if(SGx.shake>140&&SGx.snowman===1){SGx.snowman=2;
+   SGx.fallen.push({x:14,y:41,vx:-0.3,vy:0,r:2},{x:38,y:41,vx:0.3,vy:0,r:2}); /* the arms float with the flakes */
+  }
+  if(SGx.shake>220&&SGx.snowman===2){SGx.snowman=3;
+   SGx.fallen.push({x:26,y:39,vx:0,vy:-0.2,r:3}); /* the head joins the weather */
+  }
  }
  for(const s of snow){
   const m=s.m||1;
@@ -2904,18 +2958,81 @@ function SG_step(){
    if(Math.abs(s.vy)<0.3){s.vy=0;s.vx*=0.5;}else{s.vy*=-0.12;}}
   if(s.r>0)OLED.drawCircle(s.x,s.y,1,WHITE); else OLED.drawPixel(Math.trunc(s.x),Math.trunc(s.y),WHITE);
  }
+ /* [B5] fallen parts ride the same physics as the flakes */
+ for(const f of SGx.fallen){
+  f.vx=(f.vx+gx)*0.94;f.vy=(f.vy+gy+0.03)*0.94;
+  f.x+=f.vx;f.y+=f.vy;
+  if(f.x<2){f.x=2;f.vx=0;}if(f.x>125){f.x=125;f.vx=0;}
+  if(f.y<2){f.y=2;f.vy=0;}if(f.y>60){f.y=60;f.vy=0;}
+  OLED.drawCircle(f.x,f.y,f.r,WHITE);
+ }
+ /* [B5] the collapsed snowman ROLLS off screen on tilt - that EARNS Santa */
+ if(SGx.snowman===3){
+  SGx.rollX+=tiltX*1.4;
+  if(SGx.rollX<-14||SGx.rollX>142){
+   if(!SG_Santa_Enabled()){try{localStorage.setItem("wbr_santa",JSON.stringify({on:1}));}catch(e){}
+    chip("ok","[B5] the snowman left the globe - Santa is EARNED for the next visits");}
+   SGx.snowman=4; /* gone */
+  }
+ }
  SG_drawSnowman();
+ SG_Santa_Tick(shakingNow,shakeVal);
  SG_music();
  OLED.display();
 }
-function SG_drawSnowman(){ /* [2026-07-23] existing display vocabulary: circles, lines, pixels — period-flat */
- const x=26,base=58;
+function SG_Santa_Tick(shakingNow,shakeVal){
+ /* [B5 + U1] the flyby: when you shake, HE shakes; too much = ut-oh (he
+    climbs off). A completed sighting posts THE FIRST UNSCRIPTED MESSAGE -
+    system-generated from THIS visit's real behavior. */
+ const S=SGx.santa;
+ if(!S||S.gone||millis()<S.at)return;
+ S.x+=1.1;
+ S.wob=shakingNow?(random(0,5)-2):0;
+ if(shakingNow&&shakeVal>2.4&&!SGx.utoh){SGx.utoh=true;} /* ut-oh */
+ if(SGx.utoh)S.y-=0.8; /* he pulls up and away */
+ const x=Math.round(S.x),y=Math.round(S.y+S.wob);
+ if(y>-6){
+  OLED.drawLine(x,y+3,x+10,y+3,WHITE);          /* the runner */
+  OLED.drawRect(x+6,y,5,3,WHITE);               /* the sleigh */
+  OLED.drawPixel(x+8,y-1,WHITE);                /* the driver */
+  OLED.drawPixel(x-3,y+1,WHITE);OLED.drawPixel(x-6,y,WHITE);OLED.drawPixel(x-9,y-1,WHITE); /* the team */
+ }
+ if(S.x>140||S.y<-8){
+  S.gone=true;SGx.santaSeen=!SGx.utoh;
+  if(SGx.santaSeen&&!SGx.msgSent){SGx.msgSent=true;Unscripted_Send("SANTA","* SIGHTING FOLLOW-UP",Santa_Compose());}
+ }
+}
+function Santa_Compose(){
+ /* [U1 - quality gate] structure + real observed behavior; flavor = [PAPA].
+    Zero OS personality: the machine reports, the slots carry the voice. */
+ const bs=BS_For("snowglobe");
+ let b="OBSERVED "+SGx.shake+" SHAKES THIS VISIT. ";
+ if(SGx.zips>0)b+="MUSIC INTERRUPTED "+SGx.zips+"X. ";
+ if(SGx.snowman>=3)b+="SNOWMAN: DOWN. ";
+ if(SGx.snowman===4)b+="SNOWMAN: GONE. ";
+ b+=(bs>=2)?"[PAPA - santa spicy line]":"[PAPA - santa mild line]";
+ return b;
+}
+function SG_drawSnowman(){ /* [B5] state ladder: intact / wobble / parts off / collapsed / gone */
+ if(!SGx||SGx.snowman===4)return;
+ const wob=(SGx.snowman>=1&&Unit_Is_Shaking(1.3))?(random(0,3)-1):0;
+ const x=(SGx.snowman===3)?Math.round(SGx.rollX):26+wob, base=58;
+ if(SGx.snowman===3){ /* the pile - three circles down */
+  OLED.drawCircle(x,base,8,WHITE);
+  OLED.drawCircle(x+9,base+1,5,WHITE);
+  OLED.drawCircle(x-8,base+2,3,WHITE);
+  return;
+ }
  OLED.drawCircle(x,base,8,WHITE);        /* body */
  OLED.drawCircle(x,base-11,5,WHITE);     /* torso */
- OLED.drawCircle(x,base-19,3,WHITE);     /* head */
- OLED.drawPixel(x-1,base-20,WHITE);OLED.drawPixel(x+1,base-20,WHITE); /* eyes */
- OLED.drawLine(x-5,base-13,x-12,base-17,WHITE); /* arms */
- OLED.drawLine(x+5,base-13,x+12,base-17,WHITE);
+ if(SGx.snowman<3){
+  OLED.drawCircle(x,base-19,3,WHITE);    /* head */
+  OLED.drawPixel(x-1,base-20,WHITE);OLED.drawPixel(x+1,base-20,WHITE);
+ }
+ if(SGx.snowman<2){
+  OLED.drawLine(x-5,base-13,x-12,base-17,WHITE); /* arms */
+  OLED.drawLine(x+5,base-13,x+12,base-17,WHITE);
+ }
 }
 /* [SNOW GLOBE MUSIC 2026-07-23] Jingle Bells — James Lord Pierpont, 1857,
    PUBLIC DOMAIN melody only; chiptune-flat square wave via a WebAudio SHIM.
@@ -2929,6 +3046,7 @@ const SG_TUNE=[ /* [freqHz,beats] — the 1857 chorus, key of C */
  [329.63,1],[293.66,1],[293.66,1],[329.63,1],[293.66,2],[392.00,2]];
 function SG_music(){
  if(currentGameID!==GAME_SNOWGLOBE||gameState_FSM!==GAME_RUN){sgIdx=0;return;}
+ if(SGx&&millis()<SGx.musicHold)return; /* [B5] the needle settles, a beat, then the drop */
  try{
   if(!sgAC)sgAC=new (window.AudioContext||window.webkitAudioContext)();
   const now=performance.now();
@@ -3108,40 +3226,50 @@ function TD_obstacles(){ /* obstacles for all tiles overlapping the viewport */
  }
  return out;
 }
-function TD_init(){TD={wx:0,wy:0,vx:0,vy:0,angle:0,dist:0,t0:millis()};
- /* clear the spawn tile's obstacle risk by starting mid-tile-gap: nudge until clear */
- let guard=0;while(TD_obstacles().some(o=>AS_dist(o.x,o.y,TD.wx,TD.wy)<o.r+TD_CAR_R+4)&&guard++<50){TD.wx+=7;}
+function TD_init(){
+ /* [F4 walk-five REBUILD] the old top-down obstacle field read as nothing.
+    Now: DRIVING VOCABULARY - horizon, a perspective road that curves, a
+    car steered by TILT, traffic that grows as it approaches. The old
+    world-walk machinery (TD_obstacles) is tombstoned, not deleted. */
+ TD={x:0,curve:0,curveTgt:0,phase:0,dist:0,t0:millis(),obs:[],nextObs:millis()+1400};
 }
 function TD_step(){
- const a=IMU.readAcceleration();
- TD.vx=(TD.vx+(-a[0])*0.35)*0.90; TD.vy=(TD.vy+(-a[1])*0.35)*0.90;  /* AS sign convention */
- TD.wx+=TD.vx; TD.wy+=TD.vy;
- const sp=AS_dist(0,0,TD.vx,TD.vy);
- TD.dist+=sp;
- if(sp>0.25){TD.angle=Math.atan2(TD.vy,TD.vx);if(TD.angle<0)TD.angle+=2*PI;}
+ const HZN=16;
+ if(millis()>TD.nextObs){TD.obs.push({t:0.02,lane:random(0,3)-1});TD.nextObs=millis()+900+random(0,900);}
+ if(random(0,90)===0)TD.curveTgt=(random(0,3)-1)*0.9;
+ TD.curve+=(TD.curveTgt-TD.curve)*0.02;
+ TD.x=constrain(TD.x+tiltX*0.10-TD.curve*0.018,-1.6,1.6); /* the road pushes; you steer against it */
+ TD.phase=(TD.phase+3)%16;
+ TD.dist+=1;
  OLED.clearDisplay();
- const obs=TD_obstacles();
- for(const o of obs){
-  const sx=Math.trunc(o.x-TD.wx+64),sy=Math.trunc(o.y-TD.wy+32);
-  if(sx<-6||sx>134||sy<-6||sy>70)continue;
-  if(o.rock)OLED.drawRect(sx-o.r,sy-o.r,o.r*2,o.r*2,WHITE);
-  else OLED.drawCircle(sx,sy,o.r,WHITE);
+ OLED.drawLine(0,HZN,127,HZN,WHITE);                      /* the horizon */
+ for(let y=HZN+2;y<64;y+=2){                              /* road edges + scrolling dashes */
+  const t=(y-HZN)/(63-HZN);
+  const w=3+t*54;
+  const cx=64+TD.curve*Math.pow(1-t,2)*46-TD.x*t*34;
+  OLED.drawPixel(Math.round(cx-w),y,WHITE);
+  OLED.drawPixel(Math.round(cx+w),y,WHITE);
+  if(((y+TD.phase)%16)<8)OLED.drawPixel(Math.round(cx),y,WHITE);
  }
- /* the car: center-fixed triangle pointing along the heading (AS nose geometry) */
- const cx=64,cy=32,n=5;
- const nx=cx+n*Math.cos(TD.angle),ny=cy+n*Math.sin(TD.angle);
- const b1x=cx+n*Math.cos(TD.angle+2.6),b1y=cy+n*Math.sin(TD.angle+2.6);
- const b2x=cx+n*Math.cos(TD.angle-2.6),b2y=cy+n*Math.sin(TD.angle-2.6);
- OLED.drawTriangle(nx,ny,b1x,b1y,b2x,b2y,WHITE);
- /* collision — after a spawn grace so power-on can settle */
+ for(const o of TD.obs){                                  /* traffic, growing as it comes */
+  o.t+=0.016+o.t*0.02;
+  const t=Math.min(o.t,1),y=HZN+t*(63-HZN),w=3+t*54;
+  const cx=64+TD.curve*Math.pow(1-t,2)*46-TD.x*t*34;
+  const ox=cx+o.lane*w*0.55,r=Math.max(1,Math.round(t*6));
+  if(y<62)OLED.drawRect(Math.round(ox-r),Math.round(y-r),r*2,Math.max(2,r),WHITE);
+ }
+ OLED.drawRect(59,54,10,6,WHITE);                         /* the car, low and center */
+ OLED.drawPixel(60,60,WHITE);OLED.drawPixel(67,60,WHITE); /* wheels */
+ OLED.drawPixel(61,53,WHITE);OLED.drawPixel(66,53,WHITE); /* windshield posts */
  if(millis()-TD.t0>TD_GRACE){
-  for(const o of obs){
-   if(AS_dist(o.x,o.y,TD.wx,TD.wy)<o.r+TD_CAR_R){Game_Over();return;}
+  if(Math.abs(TD.x)>1.35){Game_Over();return;}            /* off the road */
+  for(const o of TD.obs){
+   if(o.t>0.88&&o.t<1.06&&Math.abs(o.lane*31-TD.x*34)<9){Game_Over();return;}
   }
  }
- const sc=Math.trunc(TD.dist/10);
- if(sc!==gameScore){gameScore=sc;
-  if(sc%10===0)Game_Front_Card(Game_Name(GAME_TILT_DRIVE),"<scroll back>");}
+ TD.obs=TD.obs.filter(o=>o.t<1.1);
+ const sc=Math.trunc(TD.dist/8);
+ if(sc!==gameScore)gameScore=sc;
  OLED.display();
 }
 
@@ -3473,6 +3601,31 @@ function Messages_Row_Label(m){
  const mark=(m.status===MSG_NOT_READ)?"*":" ";
  return mark+m.subject;
 }
+/* [U1 - THE UNSCRIPTED-MESSAGING DOCTRINE] behavior-triggered messages
+   composed at runtime from REAL observed data. A new row is spliced into
+   System Msgs before "< Back"; the inbox object rides the same machinery
+   as every scripted message (open/read/unread marks). Quality gate: every
+   caller composes from real counters; flavor = [PAPA] slots only. */
+let unscriptedCount=0;
+function Unscripted_Send(from,subject,body){
+ try{
+  const t=SYSTEM_MSGS,T=MENU_TABLE[t],Pm=MENU_PARAMETER_TABLE[t];
+  let bi=T.findIndex(r=>r&&String(r[1]).toLowerCase().indexOf("back")>=0);
+  if(bi<0)return false;
+  T.splice(bi,0,["System Msgs","*"+subject]);
+  const proto=Pm[0].slice();
+  proto[0]=900+unscriptedCount;
+  Pm.splice(bi,0,proto);
+  MESSAGES_INBOX.push({id:900+unscriptedCount,menu:"system",row:bi,
+   type:MESSAGES_INBOX.length?MESSAGES_INBOX[0].type:0,status:MSG_NOT_READ,
+   from:from,subject:subject,body:body,folder:0,file:0,trigger:"unscripted"});
+  unscriptedCount++;
+  Messages_Sync_Menu();
+  PlaySound(ConnectionSuccess);
+  chip("ok","[U1] unscripted message posted: "+subject);
+  return true;
+ }catch(e){return false;}
+}
 function Messages_Find(menuNum,row){
  for(const m of MESSAGES_INBOX){if(MENU_OF[m.menu]===menuNum&&m.row===row)return m;}
  return null;
@@ -3597,7 +3750,163 @@ function Messages_Trigger(name){
    twin / +8B WS1 on the unit (fit-audited). Delivery rides the server
    fiction (Mon_StartConnection + the boxed chatter); menu visibility rides
    the messages pattern (READ_ACCESS 2 <-> 1) — one mechanism, third user. */
-const PARCELP=35;
+const PARCELP=35, FORTP=39, HOROP=40, BSP=41;
+/* ============ [B1 walk-five] FORTUNE - the 1960s cookie register ============
+   Family rhythm C2: nothing to configure -> the config station SKIPS.
+   All fortune flavor = [PAPA] pen slots (drafting law). */
+const FORT_POOL=["[PAPA - fortune slot 1]","[PAPA - fortune slot 2]","[PAPA - fortune slot 3]",
+ "[PAPA - fortune slot 4]","[PAPA - fortune slot 5]","[PAPA - fortune slot 6]"];
+let fortState=0,fortNo=0;
+function Fort_Ready(){
+ Psy_Front("FORTUNE","");
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(6,3,"FORTUNE",0);OLED.drawLine(0,9,127,9,WHITE);
+ screenPrintLnCentered(32,"COOKIE REGISTER READY",0);
+ Hint("<shake run  scroll back>");
+ OLED.display();
+}
+async function Fort_Crack(){
+ /* [C3] the cookie CRACKS - visible work before the slip */
+ for(let i=0;i<8;i++){
+  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+  screenPrintLn(6,3,"FORTUNE",0);OLED.drawLine(0,9,127,9,WHITE);
+  const sp=i*2;
+  OLED.drawCircle(58-sp,34,10,WHITE);OLED.drawCircle(70+sp,34,10,WHITE); /* the halves parting */
+  for(let c=0;c<i;c++)OLED.drawPixel(60+random(0,8),30+random(0,8),WHITE); /* crumbs */
+  OLED.display();
+  await sleep(90);
+ }
+}
+function Fort_Slip(){
+ fortNo++;
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(6,3,"FORTUNE",0);OLED.drawLine(0,9,127,9,WHITE);
+ screenPrintLnCentered(24,"- - - - - - - - - - - -",0);
+ screenPrintLnCentered(33,FORT_POOL[random(0,FORT_POOL.length)],0);
+ screenPrintLnCentered(42,"- - - - - - - - - - - -",0);
+ screenPrintLn(50,96,"No."+fortNo,0);
+ Hint(HINT_AGAIN);
+ OLED.display();
+ PlaySound(Select);
+}
+function Fort_EXE(){
+ switch(fortState){
+  case 0:
+   Pause_Process(SYSTEM_MONITOR);
+   Fort_Ready();fortState=1;break;
+  case 1:
+   if(Pull_From_Buffer(ROTARY_DIAL)){fortState=3;break;}
+   Pull_From_Buffer(SHUTTER);
+   if(Unit_Is_Shaking(1.3)){fortState=2;(async()=>{await Fort_Crack();Fort_Slip();fortState=1;})();}
+   break;
+  case 3:
+   End_Process(FORTP);
+   Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
+   Activate_the_Screen(TOP_SCREEN,true);
+   fortState=0;break;
+ }
+}
+/* ============ [B2 walk-five] HOROSCOPE - the 60s newspaper register ============
+   The user SCOPES THE SIGN (C4 panel, one field). CONTENT LAW: no
+   disprovable statements - nothing date-based, nothing falsifiable; the
+   pool is [PAPA] with that constraint recorded here at the source. */
+const HORO_SIGNS=["ARIES","TAURUS","GEMINI","CANCER","LEO","VIRGO","LIBRA","SCORPIO","SAGITTARIUS","CAPRICORN","AQUARIUS","PISCES"];
+let horoState=0,horoSign=0,horoEdit=false;
+function Horo_Panel(){
+ Psy_Front("HOROSCOPE","");
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(6,3,"HOROSCOPE",0);OLED.drawLine(0,9,127,9,WHITE);
+ screenPrintLn(22,10,(horoEdit?"":"> ")+"SIGN"+(horoEdit?"":" <"),0);
+ screenPrintLn(22,64,(horoEdit?"> ":"")+HORO_SIGNS[horoSign]+(horoEdit?" <":""),0);
+ Hint(horoEdit?"<scroll change  click keep>":"<click set  shake run>");
+ OLED.display();
+}
+async function Horo_Consult(){
+ for(let i=0;i<10;i++){ /* [C3] consulting the chart - a wheeling sky */
+  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+  screenPrintLn(6,3,"HOROSCOPE",0);OLED.drawLine(0,9,127,9,WHITE);
+  for(let s=0;s<14;s++)OLED.drawPixel(random(0,128),random(12,52),WHITE);
+  OLED.drawCircle(64,32,6+i,WHITE);
+  OLED.display();
+  await sleep(85);
+ }
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(6,3,"HOROSCOPE",0);OLED.drawLine(0,9,127,9,WHITE);
+ screenPrintLn(18,3,HORO_SIGNS[horoSign]+":",0);
+ screenPrintLn(28,8,"[PAPA - horoscope pool,",0);
+ screenPrintLn(36,8," no disprovable lines]",0);
+ Hint(HINT_AGAIN);
+ OLED.display();
+ PlaySound(Select);
+}
+function Horo_EXE(){
+ switch(horoState){
+  case 0:
+   Pause_Process(SYSTEM_MONITOR);
+   horoEdit=false;Horo_Panel();horoState=1;break;
+  case 1:
+   if(Pull_From_Buffer(ROTARY_DIAL)){
+    if(horoEdit){horoSign=(horoSign+1)%12;PlaySound(Scroll);Horo_Panel();}
+    else{horoState=3;} /* [C4] scroll past the one-field panel = out */
+    break;}
+   if(Pull_From_Buffer(SHUTTER)){horoEdit=!horoEdit;PlaySound(Select);Horo_Panel();break;}
+   if(!horoEdit&&Unit_Is_Shaking(1.3)){horoState=2;(async()=>{await Horo_Consult();horoState=1;})();}
+   break;
+  case 3:
+   End_Process(HOROP);
+   Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
+   Activate_the_Screen(TOP_SCREEN,true);
+   horoState=0;break;
+ }
+}
+/* ============ [B4] the BS LEVEL app - the system's one control panel ============ */
+let bsState=0,bsSel=0,bsEdit=false;
+const BS_APPS=[["GLOBAL",null],["ADVICE","advice"],["GLOBE","snowglobe"]];
+function BS_Panel(){
+ Psy_Front("BS LEVEL","");
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(6,3,"BS LEVEL",0);OLED.drawLine(0,9,127,9,WHITE);
+ for(let f=0;f<BS_APPS.length;f++){
+  const y=18+f*9,isSel=(bsSel===f),inEdit=isSel&&bsEdit;
+  const key=BS_APPS[f][1];
+  const val=key===null?String(BS_STORE.global):((BS_STORE.apps[key]===undefined||BS_STORE.apps[key]==="G")?"GLOBAL":String(BS_STORE.apps[key]));
+  screenPrintLn(y,10,(isSel&&!inEdit?"> ":"")+BS_APPS[f][0]+(isSel&&!inEdit?" <":""),0);
+  screenPrintLn(y,64,(inEdit?"> ":"")+val+(inEdit?" <":""),0);
+ }
+ screenPrintLn(48,8,"apps set LOCAL or ride GLOBAL",0);
+ Hint(bsEdit?"<scroll change  click keep>":"<click set  scroll thru>");
+ OLED.display();
+}
+function BS_EXE(){
+ if(!BS_STORE)BS_Load();
+ switch(bsState){
+  case 0: Pause_Process(SYSTEM_MONITOR);bsSel=0;bsEdit=false;BS_Panel();bsState=1;break;
+  case 1:
+   if(Pull_From_Buffer(ROTARY_DIAL)){
+    if(bsEdit){
+     const key=BS_APPS[bsSel][1];
+     if(key===null)BS_STORE.global=(BS_STORE.global+1)%4;
+     else{
+      const cur=(BS_STORE.apps[key]===undefined||BS_STORE.apps[key]==="G")?-1:+BS_STORE.apps[key];
+      BS_STORE.apps[key]=(cur>=3)?"G":String(cur+1);
+     }
+     BS_Save();PlaySound(Scroll);BS_Panel();
+    } else {
+     bsSel++;
+     if(bsSel>=BS_APPS.length){bsState=3;break;} /* [C4] scroll past = out */
+     BS_Panel();
+    }
+    break;}
+   if(Pull_From_Buffer(SHUTTER)){bsEdit=!bsEdit;PlaySound(Select);BS_Panel();break;}
+   Pull_From_Buffer(SHUTTER);
+   break;
+  case 3:
+   End_Process(BSP);
+   Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
+   Activate_the_Screen(TOP_SCREEN,true);
+   bsState=0;break;
+ }
+}
 const P_V20_ASKS=20, P_65_ASKS=60, P_65_V20ASKS=15,
       P_GAMEPACK_ASKS=10, P_APPS_ASKS=25, P_DET_ASKS=30;   /* [J1 tunables] */
 const PARCEL_NAMES={v20:"MGK-v2.0",m65:"MGK-65",gamepack:"GAME PACK",
@@ -3736,11 +4045,13 @@ function devSecMon(v){ /* [M7] security-monitor layer intensity, 0-100 */
 let walkOn=false, walkSaved=[];
 function devWalkMode(){
  const DA=DOORS_ROOT-3;
+ /* [walk-five re-sweep] Predictions LEFT the list (Fortune+Horoscope are
+    built); mgkModel JOINED it (the missed scaffold Mike hit). The list =
+    every row that still routes to SCAFFOLD_PROC. */
  const targets=[
-  [DA,"Predictions","door: Fortune+Horoscope scaffold"],
   [PROGRAMS,"Codes","door: Runner/BIST/Userdata/Checksum scaffold"],
   [PREFERENCES,"User","door: Name/Security scaffold"],
-  [ADVICE,"Inlaws and Outlaws","parked (flavor call is Mike's)"],
+  [PREFERENCES,"mgkModel","scaffold (the owned miss)"],
  ];
  if(!walkOn){
   walkSaved=[];const hid=[];
@@ -4369,17 +4680,34 @@ const ADV_JOBS=[["Amateur","Angry","Aspiring","Certified","Chief","Junior"],
                 ["Ninja","Space","Tickler","Dream","Armpit","Data"],
                 ["Accountant","Lawyer","Analyst","Sniffer","Supervisor","Associate"]];
 const ADV_COLD=0, ADV_PANEL=1, ADV_SEARCH=2, ADV_RESULT=3, ADV_NICKV=4, ADV_EXIT=5, ADV_NICKB=6;
-let advState=ADV_COLD, advWhich=0, advBS=1, advSearch=null, advPanel=null, advNickAt=0;
+let advState=ADV_COLD, advWhich=0, advBS=1, advSearch=null, advPanel=null, advNickAt=0, advThink=1;
 /* [C4 - THE PANEL MODEL, pilot; W12 - THE ADVICE FAMILY] every user variable
    always visible with its current value; scroll moves the highlight, click
    enters the field, scroll changes it in place, click keeps it. The panel is
    the app's HOME BASE; scroll past the last field = the concierge. Values
    below are structural vocabulary (existing labels), no invented flavor. */
+/* [B4 walk-five - ONE COHERENT BS SYSTEM] a GLOBAL BS setting covers
+   everything; each BS-using app carries its own entry that either overrides
+   or rides GLOBAL; and every such app exposes the control from within
+   (the panel BS field IS the app's entry - editing it writes the store). */
+let BS_STORE=null;
+function BS_Load(){try{BS_STORE=JSON.parse(localStorage.getItem("wbr_bs"))||null;}catch(e){BS_STORE=null;}
+ if(!BS_STORE)BS_STORE={global:1,apps:{advice:"G",snowglobe:"G"}};}
+function BS_Save(){try{localStorage.setItem("wbr_bs",JSON.stringify(BS_STORE));}catch(e){}}
+function BS_For(app){if(!BS_STORE)BS_Load();const e=BS_STORE.apps[app];return (e===undefined||e==="G")?BS_STORE.global:+e;}
+const BS_VALS=["GLOBAL","0","1","2","3"];
+function BS_FieldIdx(app){if(!BS_STORE)BS_Load();const e=BS_STORE.apps[app];return (e===undefined||e==="G")?0:(+e)+1;}
+/* [F6 walk-five] THINK = the user-facing computing-length control (S/M/L);
+   the dev default rides devThink(). */
 const ADV_MEMBERS=[
- {t:"EVERYDAY ADVICE",fields:[{l:"BS",v:["0","1","2","3"],i:1}]},
- {t:"WORK ADVICE",fields:[{l:"MODE",v:["GUIDANCE","CAREERS","NICKNAME"],i:0},{l:"BS",v:["0","1","2","3"],i:1}]},
- {t:"PERSONAL ADVICE",fields:[{l:"FOR",v:["PARTNER","FRIENDS+FAM","INLAWS"],i:0},{l:"BS",v:["0","1","2","3"],i:1}]},
+ {t:"EVERYDAY ADVICE",fields:[{l:"BS",v:BS_VALS,i:0},{l:"THINK",v:["S","M","L"],i:1}]},
+ {t:"WORK ADVICE",fields:[{l:"MODE",v:["GUIDANCE","CAREERS","NICKNAME"],i:0},{l:"BS",v:BS_VALS,i:0},{l:"THINK",v:["S","M","L"],i:1}]},
+ {t:"PERSONAL ADVICE",fields:[{l:"FOR",v:["PARTNER","FRIENDS+FAM","INLAWS"],i:0},{l:"BS",v:BS_VALS,i:0},{l:"THINK",v:["S","M","L"],i:1}]},
 ];
+let devThinkDefault=1;
+function devThink(){devThinkDefault=(devThinkDefault+1)%3;
+ for(const m of ADV_MEMBERS){const f=m.fields.find(x=>x.l==="THINK");if(f)f.i=devThinkDefault;}
+ chip("ok","[DEV] THINK default = "+["S","M","L"][devThinkDefault]);}
 function Adv_Panel_Draw(){
  const M=ADV_MEMBERS[advPanel.m];
  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
@@ -4414,10 +4742,14 @@ function Adv_Idle_Card(){
  OLED.display();
 }
 function Adv_NewSearch(){
- const steps=26+advBS*6, dips=[];
+ /* [F6] computing length rides THINK (S/M/L) with immersive randomness;
+    L earns a SANDBAG pass - the machine looking busy for the user's sake,
+    within reality's limits (a mechanism, not a personality). */
+ const mult=[0.6,1.0,1.6][advThink]*(0.85+random(0,31)/100);
+ const steps=Math.max(10,Math.round((26+advBS*6)*mult)), dips=[];
  for(let i=0;i<1+advBS;i++)dips.push(random(8,steps-6));
  advSearch={steps:steps,dips:dips.sort((a,b)=>a-b),i:0,match:0,phase:0,back:0,at:0,
-  words:["","",""],rec:random(100,9999)};
+  words:["","",""],rec:random(100,9999),sandbag:(advThink===2),sandbagged:false};
 }
 function Adv_Draw_Search(){
  const s=advSearch;
@@ -4428,6 +4760,7 @@ function Adv_Draw_Search(){
  if(advWhich===1){for(let i=0;i<3;i++)screenPrintLn(17+i*7,8,s.words[i],0);}
  else screenPrintLn(22,8,"record "+s.rec,0);
  if(s.phase===1)screenPrintLn(36,8,"LOCAL MINIMUM DETECTED",0);
+ if(s.sandbagged&&s.phase===0)screenPrintLn(36,88,"VERIFYING",0); /* [F6] */
  Adv_Meter(s.match);
  Hint(HINT_BACK);
  OLED.display();
@@ -4442,7 +4775,11 @@ function Adv_Search_Tick(){
   s.match=Math.min(99,Math.trunc(100*s.i/s.steps)+random(0,4));
   if(s.dips.length&&s.i>=s.dips[0]){s.dips.shift();s.phase=1;s.back=random(3,7);PlaySound(Scroll);}
   s.at=millis()+80+s.match*9;
-  if(s.i>=s.steps){s.match=100;s.phase=2;}
+  if(s.i>=s.steps){
+   if(s.sandbag&&!s.sandbagged){ /* [F6] the visible busy-work: one verify re-climb */
+    s.sandbagged=true;s.match=86;s.i=Math.max(1,s.steps-5);
+   } else {s.match=100;s.phase=2;}
+  }
  } else if(s.phase===1){ /* the local minimum - backs up FASTER */
   s.match=Math.max(5,s.match-random(8,15));
   s.i=Math.max(1,s.i-1);
@@ -4497,7 +4834,8 @@ function Advice_EXE(which){
    Pause_Process(SYSTEM_MONITOR);
    advPanel={m:constrain(which,0,2),sel:0,edit:false};
    const M=ADV_MEMBERS[advPanel.m];
-   for(const fd of M.fields)if(fd.l==="BS")advBS=parseInt(fd.v[fd.i]);
+   for(const fd of M.fields)if(fd.l==="BS")fd.i=BS_FieldIdx("advice"); /* [B4] the panel shows the store's truth */
+   advBS=BS_For("advice");
    Psy_Front(M.t,""); /* [C1] the concierge shows the destination; verbs live on the top glass */
    Adv_Panel_Draw();
    advState=ADV_PANEL;
@@ -4515,7 +4853,11 @@ function Advice_EXE(which){
    }
    if(Pull_From_Buffer(SHUTTER)){advPanel.edit=!advPanel.edit;PlaySound(Select);Adv_Panel_Draw();break;}
    if(!advPanel.edit&&Unit_Is_Shaking(1.3)){
-    for(const fd of M.fields)if(fd.l==="BS")advBS=parseInt(fd.v[fd.i]);
+    for(const fd of M.fields){
+     if(fd.l==="BS"){BS_STORE.apps.advice=(fd.i===0)?"G":String(fd.i-1);BS_Save();} /* [B4] in-app control writes the system */
+     if(fd.l==="THINK")advThink=fd.i;
+    }
+    advBS=BS_For("advice");
     const mode=(advPanel.m===1)?M.fields[0].v[M.fields[0].i]:null;
     if(mode==="NICKNAME"){
      /* [C3] even the truth is FETCHED - a visible consult, then the card */
@@ -4563,6 +4905,9 @@ function MGK_VIIIp_OS(){
   case MENU_SYSTEM: Menu_System(); break;
   case SYSTEM_MONITOR: System_Monitor(); break;
   case ANSWERS: if(!M8B_busy)M8B_Answers_EXE(lineNum_PTR); break;  /* busy = firmware's blocking draw, OS frozen */
+  case FORTP: Fort_EXE(); break;   /* [B1] */
+  case HOROP: Horo_EXE(); break;   /* [B2] */
+  case BSP: BS_EXE(); break;       /* [B4] */
   case POLARITY: Set_The_Bias(POLARITY); break;
   case CLARITY: Set_The_Bias(CLARITY); break;
   case BUBBLES: Update_Bubbles(); break;
@@ -4687,6 +5032,16 @@ function Doors_Restructure(){
  doorRow(R,2,"Messages",MESSAGES,0,0);
  doorRow(R,3,"Settings",DS,0,0);
  MENU_TABLE[R][4]=["[doors]",".end"];MENU_PARAMETER_TABLE[R][4]=[0,R,0,0,1,1,1,1];
+ /* [B4] the BS LEVEL row rides Preferences (before < Back) */
+ {
+  const pt=MENU_TABLE[PREFERENCES],pp=MENU_PARAMETER_TABLE[PREFERENCES];
+  let pbi=pt.findIndex(r=>r&&String(r[1]).toLowerCase().indexOf("back")>=0);
+  if(pbi>=0){
+   pt.splice(pbi,0,["Preferences","BS Level"]);
+   pp.splice(pbi,0,[181,BSP,0,1,1,1,1,1]);
+  }
+ }
+ BS_Load(); /* [B4] the store wakes with the machine */
  DOORS_ROOT=R; ANSWERS_DOOR=DA;
  /* [DEAD-DOORS EXECUTIONS 2026-07-24 - audit recommendations, Ops-executed;
     NOTHING DELETED (rows stay in the table, visibility 0 = tombstone):
