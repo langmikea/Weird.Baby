@@ -224,6 +224,7 @@ body.usermode .lbl.anno{display:none}
    <button class="devonly" onclick="devGlitchNow()" title="fire one glitch right now, to see it">Glitch now [dev]</button>
    <button class="devonly" onclick="devThink()" title="cycle the computing-length default S/M/L">Think S/M/L [dev]</button>
    <button class="devonly" onclick="devPace()" title="cycle the boot ceremony pace x1.0 / x1.6 / x2.2">Boot pace [dev]</button>
+   <button class="devonly" onclick="devGolden()" title="the GOLDEN REFERENCE SET: the proven ASK dance + panel dance, annotated (click advances)">Golden ref [dev]</button>
    <button class="devonly" onclick="devFeedBWToggle()" title="compare against color chrome — period B&W is the ruled default">Color compare [dev]</button>
   </div>
   <p class="keyhint"><kbd>&darr;</kbd>/SCROLL = rotary &nbsp; <kbd>Enter</kbd>/CLICK/tap front = shutter &nbsp; <kbd>Space</kbd>/SHAKE = shake &nbsp; <kbd>W A S D</kbd> (hold) = tilt for bubbles &nbsp; mic: unused by firmware</p>
@@ -939,7 +940,11 @@ function Run_EXE(){                                                          /* 
 function Update_the_Menu_Screen(){Activate_the_Screen(FRONT_SCREEN,true);Draw_the_Menu_Screen();Draw_the_Menu_Line();}
 let menuDepth=0;
 function Draw_the_Menu_Screen(){
+ if(menuNum_PTR===ANSWERS){ /* [V3] the ASK level format: header + item + back */
+  screenPrintLn(Row_01,0," ASK MGK >",1);
+ } else {
  screenPrintLn(Row_01,0,Header_01,1);screenPrintLn(Row_02,21,"Please Select:",1);
+ }
  /* [T1] self-orientation: one pixel-dot per drill level, top-right corner.
     Depth resets whenever the draw lands on a root surface (drift guard). */
  if(menuNum_PTR===0||(typeof DOORS_ROOT!=="undefined"&&menuNum_PTR===DOORS_ROOT))menuDepth=0;
@@ -960,6 +965,11 @@ function Draw_the_Menu_Line(){
     [F2 walk-five] back rows are PASSAGE, not selection - no brackets. */
  OLED.setTextColor(WHITE);
  const lbl=get_as_char(lineName);
+ if(menuNum_PTR===ANSWERS){ /* [V3] "> MGK-NIAC >" at mid-row; "< Back" plain */
+  if(String(lbl).trim().toLowerCase().indexOf("back")>=0)screenPrintLn(Row_02,0,"< Back",1);
+  else{screenPrintLn(Row_02,0,"> "+lbl+" >",1);screenPrintLn(Row_03,0,"< Back",1);}
+  return;
+ }
  if(String(lbl).trim().toLowerCase().indexOf("back")>=0){screenPrintLnCentered(Row_03,lbl,1);return;}
  const star=Mod_the_Menu_Line()?" *":"";
  screenPrintLnCentered(Row_03,"> "+lbl+star+" <",1);
@@ -976,15 +986,22 @@ function Scroll_the_Menu(){
  Active_Process_Name=get_as_char(lineName);
 }
 function Is_Menu_Item_Executable(){return get_as_int(links_to_Exe)==1;}
+let menuTrail=[];
 function Update_Menu_Level(){
- /* [T1] depth bookkeeping: back rows surface one level, everything else
-    drills one down; clamped, and re-zeroed at root by the draw. */
+ /* [T1] depth bookkeeping + [V6 walk-seven] THE TRAIL: backing out returns
+    to WHERE YOU WERE (the row you drilled from), not the table's hardwired
+    row-0 landing (the always-lands-on-ASK bug). */
  const lbl=String(get_as_char(lineName)).trim().toLowerCase();
- if(lbl.indexOf("back")>=0)menuDepth=Math.max(0,menuDepth-1);
- else menuDepth=Math.min(6,menuDepth+1);
+ const isBack=lbl.indexOf("back")>=0;
+ if(isBack)menuDepth=Math.max(0,menuDepth-1);
+ else{menuDepth=Math.min(6,menuDepth+1);menuTrail.push([menuNum_PTR,lineNum_PTR]);if(menuTrail.length>12)menuTrail.shift();}
  const TEMP=get_as_int(linked_menuNum);
  lineNum_PTR=get_as_int(linked_lineNum);
  menuNum_PTR=TEMP;
+ if(isBack&&menuTrail.length){
+  const t=menuTrail.pop();
+  if(t[0]===menuNum_PTR)lineNum_PTR=t[1]; /* restore the exact row when the trail matches */
+ }
  Active_Process_Name=get_as_char(lineName);
 }
 function get_as_int(col){return MENU_PARAMETER_TABLE[menuNum_PTR][lineNum_PTR][col];}
@@ -1008,6 +1025,61 @@ function screenPrintLnCentered(row,text,pub){
    each other). The standardized verbs live here and nowhere else. */
 const HINT_BACK="<scroll back>", HINT_AGAIN="<shake again  scroll back>",
       HINT_CONTINUE="<shake to continue>", HINT_NODO="<no do-overs>";
+/* [G1 - THE HANDOFF LAW] the PROVEN front dance, stamped on every app
+   entry: rail card -> redirect wording -> CRT death/birth -> confirmation +
+   test signal for a beat -> content. Non-fluidic destination = AUX DISPLAY. */
+async function Aux_Handoff(name){
+ Activate_the_Screen(FRONT_SCREEN,true);
+ const b=OLED.getTextBounds(String(name));
+ if(b.w<=58){screenPrintLn(Row_01,0," ----<          >----",0);printText(Row_01,Math.trunc(66-b.w/2),String(name));}
+ else screenPrintLnCentered(Row_01,String(name),0);
+ screenPrintLn(Row_02,0," OUTPUT REDIRECTED TO",0);
+ screenPrintLn(Row_03,0,"     AUX DISPLAY     ",1);
+ Pause_Process(SYSTEM_MONITOR);
+ Activate_the_Screen(TOP_SCREEN,true);
+ await CRT_Death();await CRT_Birth();
+ setFont(SMALL_FONT);
+ screenPrintLnCentered(22,"AUX DISPLAY - SIGNAL OK",0);
+ for(let i=0;i<48;i+=6)OLED.fillRect(40+i,32,4,12,WHITE); /* the test bars */
+ OLED.display();
+ await sleep(750);
+ OLED.clearDisplay();OLED.display();await sleep(240);
+}
+/* [G2 - THE APP PANEL DANCE, TTT-seeded FINAL FORM] fields -> GO> -> <EXIT
+   -> around (the ring); arrive ON the first option (or GO> when none);
+   click enters a field, scroll changes, click sets + bounces up; GO> and
+   <EXIT are VISIBLE DESTINATIONS - shake-to-run and scroll-past-exit are
+   RETIRED from panels. */
+function PanelG_Draw(p){
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(6,3,p.title,0);OLED.drawLine(0,9,127,9,WHITE);
+ for(let f=0;f<p.fields.length;f++){
+  const y=17+f*9,isSel=(p.sel===f),inEdit=isSel&&p.edit;
+  screenPrintLn(y,10,(isSel&&!inEdit?"> ":"")+p.fields[f].l+(isSel&&!inEdit?" <":""),0);
+  screenPrintLn(y,64,(inEdit?"> ":"")+p.fields[f].v[p.fields[f].i]+(inEdit?" <":""),0);
+ }
+ if(p.note)screenPrintLn(45,8,p.note,0);
+ screenPrintLn(58,4,(p.sel===p.fields.length+1?"> ":"")+"<EXIT",0);
+ screenPrintLn(58,96,(p.sel===p.fields.length?"> ":"")+"GO>",0);
+ OLED.display();
+}
+function PanelG_Input(p){
+ if(Pull_From_Buffer(ROTARY_DIAL)){
+  if(p.edit){const fd=p.fields[p.sel];fd.i=(fd.i+1)%fd.v.length;if(fd.onChange)fd.onChange(fd);}
+  else p.sel=(p.sel+1)%(p.fields.length+2);
+  PlaySound(Scroll);PanelG_Draw(p);return null;
+ }
+ if(Pull_From_Buffer(SHUTTER)){
+  PlaySound(Select);
+  if(p.sel===p.fields.length)return "go";
+  if(p.sel===p.fields.length+1)return "exit";
+  if(p.edit){p.edit=false;if(p.fields[p.sel].onSet)p.fields[p.sel].onSet(p.fields[p.sel]);}
+  else if(p.fields.length)p.edit=true;
+  PanelG_Draw(p);return null;
+ }
+ Pull_From_Buffer(SHUTTER);
+ return null;
+}
 function Hint(text){
  setFont(SMALL_FONT);
  OLED.fillRect(0,55,128,9,BLACK);
@@ -3778,7 +3850,7 @@ const PARCELP=35, FORTP=39, HOROP=40, BSP=41;
    All fortune flavor = [PAPA] pen slots (drafting law). */
 const FORT_POOL=["[PAPA - fortune slot 1]","[PAPA - fortune slot 2]","[PAPA - fortune slot 3]",
  "[PAPA - fortune slot 4]","[PAPA - fortune slot 5]","[PAPA - fortune slot 6]"];
-let fortState=0,fortNo=0;
+let fortState=0,fortNo=0,fortBusy=false;
 function Fort_Ready(){
  Psy_Front("FORTUNE","");
  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
@@ -3806,20 +3878,29 @@ function Fort_Slip(){
  screenPrintLnCentered(24,"- - - - - - - - - - - -",0);
  screenPrintLnCentered(33,FORT_POOL[random(0,FORT_POOL.length)],0);
  screenPrintLnCentered(42,"- - - - - - - - - - - -",0);
+ screenPrintLn(50,8,"LUCKY NUMBERS "+random(1,50)+" "+random(1,50)+" "+random(1,50),0); /* [V8] real randoms, cookie-canonical furniture */
  screenPrintLn(50,96,"No."+fortNo,0);
  Hint(HINT_AGAIN);
  OLED.display();
  PlaySound(Select);
 }
+let fortPanel=null;
 function Fort_EXE(){
  switch(fortState){
   case 0:
-   Pause_Process(SYSTEM_MONITOR);
-   Fort_Ready();fortState=1;break;
-  case 1:
-   if(Pull_From_Buffer(ROTARY_DIAL)){fortState=3;break;}
+   fortPanel={title:"FORTUNE",fields:[],sel:0,edit:false,note:"COOKIE REGISTER READY"};
+   fortState=4;
+   (async()=>{await Aux_Handoff("FORTUNE");PanelG_Draw(fortPanel);fortState=1;})(); /* [G1] */
+   break;
+  case 1:{
+   const act=PanelG_Input(fortPanel); /* [G2] arrive ON GO> (no fields) */
+   if(act==="exit"){fortState=3;break;}
+   if(act==="go"){fortState=2;(async()=>{await Fort_Crack();Fort_Slip();fortState=2;})();}
+   break;}
+  case 2: /* the slip holds: shake = another (generative), scroll = the panel */
+   if(Pull_From_Buffer(ROTARY_DIAL)){PanelG_Draw(fortPanel);fortState=1;break;}
    Pull_From_Buffer(SHUTTER);
-   if(Unit_Is_Shaking(1.3)){fortState=2;(async()=>{await Fort_Crack();Fort_Slip();fortState=1;})();}
+   if(Unit_Is_Shaking(1.3)&&!fortBusy){(async()=>{fortBusy=true;await Fort_Crack();Fort_Slip();fortBusy=false;})();}
    break;
   case 3:
    End_Process(FORTP);
@@ -3861,18 +3942,23 @@ async function Horo_Consult(){
  OLED.display();
  PlaySound(Select);
 }
+let horoPanel=null;
 function Horo_EXE(){
  switch(horoState){
   case 0:
-   Pause_Process(SYSTEM_MONITOR);
-   horoEdit=false;Horo_Panel();horoState=1;break;
-  case 1:
-   if(Pull_From_Buffer(ROTARY_DIAL)){
-    if(horoEdit){horoSign=(horoSign+1)%12;PlaySound(Scroll);Horo_Panel();}
-    else{horoState=3;} /* [C4] scroll past the one-field panel = out */
-    break;}
-   if(Pull_From_Buffer(SHUTTER)){horoEdit=!horoEdit;PlaySound(Select);Horo_Panel();break;}
-   if(!horoEdit&&Unit_Is_Shaking(1.3)){horoState=2;(async()=>{await Horo_Consult();horoState=1;})();}
+   horoPanel={title:"HOROSCOPE",fields:[{l:"SIGN",v:HORO_SIGNS,i:horoSign,onSet:f=>{horoSign=f.i;}}],sel:0,edit:false};
+   horoState=4;
+   (async()=>{await Aux_Handoff("HOROSCOPE");PanelG_Draw(horoPanel);horoState=1;})(); /* [G1; V8 controls clarified via G2 */
+   break;
+  case 1:{
+   const act=PanelG_Input(horoPanel); /* [G2] */
+   if(act==="exit"){horoState=3;break;}
+   if(act==="go"){horoSign=horoPanel.fields[0].i;horoState=2;(async()=>{await Horo_Consult();horoState=2;})();}
+   break;}
+  case 2: /* the card holds: shake = another, scroll = the panel */
+   if(Pull_From_Buffer(ROTARY_DIAL)){PanelG_Draw(horoPanel);horoState=1;break;}
+   Pull_From_Buffer(SHUTTER);
+   if(Unit_Is_Shaking(1.3)){horoState=5;(async()=>{await Horo_Consult();horoState=2;})();}
    break;
   case 3:
    End_Process(HOROP);
@@ -3899,29 +3985,23 @@ function BS_Panel(){
  Hint(bsEdit?"<scroll change  click keep>":"<click set  scroll thru>");
  OLED.display();
 }
+let bsPanel=null;
 function BS_EXE(){
  if(!BS_STORE)BS_Load();
  switch(bsState){
-  case 0: Pause_Process(SYSTEM_MONITOR);bsSel=0;bsEdit=false;BS_Panel();bsState=1;break;
-  case 1:
-   if(Pull_From_Buffer(ROTARY_DIAL)){
-    if(bsEdit){
-     const key=BS_APPS[bsSel][1];
-     if(key===null)BS_STORE.global=(BS_STORE.global+1)%4;
-     else{
-      const cur=(BS_STORE.apps[key]===undefined||BS_STORE.apps[key]==="G")?-1:+BS_STORE.apps[key];
-      BS_STORE.apps[key]=(cur>=3)?"G":String(cur+1);
-     }
-     BS_Save();PlaySound(Scroll);BS_Panel();
-    } else {
-     bsSel++;
-     if(bsSel>=BS_APPS.length){bsState=3;break;} /* [C4] scroll past = out */
-     BS_Panel();
-    }
-    break;}
-   if(Pull_From_Buffer(SHUTTER)){bsEdit=!bsEdit;PlaySound(Select);BS_Panel();break;}
-   Pull_From_Buffer(SHUTTER);
-   break;
+  case 0:{
+   const mk=(label,key)=>({l:label,v:key===null?["0","1","2","3"]:["GLOBAL","0","1","2","3"],
+    i:key===null?BS_STORE.global:BS_FieldIdx(key),
+    onSet:f=>{if(key===null)BS_STORE.global=f.i;else BS_STORE.apps[key]=(f.i===0)?"G":String(f.i-1);BS_Save();}});
+   bsPanel={title:"BS LEVEL",fields:[mk("GLOBAL",null),mk("ADVICE","advice"),mk("GLOBE","snowglobe")],
+    sel:0,edit:false,note:"apps set LOCAL or ride GLOBAL"};
+   bsState=4;
+   (async()=>{await Aux_Handoff("BS LEVEL");PanelG_Draw(bsPanel);bsState=1;})(); /* [G1] */
+   break;}
+  case 1:{
+   const act=PanelG_Input(bsPanel); /* [G2] GO> = apply (already saved on set) */
+   if(act==="go"||act==="exit")bsState=3;
+   break;}
   case 3:
    End_Process(BSP);
    Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
@@ -4460,12 +4540,69 @@ function Scaffold_EXE(upidName){
 const PROB_COLD=0, PROB_WAIT=1, PROB_SHOW=2, PROB_EXIT=3, PROB_CFG=4;
 let probState=PROB_COLD, probResult="", probResult2="";
 const SUITS=["HEARTS","SPADES","CLUBS","DIAMONDS"];
+/* [V7 walk-seven] suit SYMBOLS, 9x9 pixel glyphs - spelled words retired */
+function Suit_Glyph(x,y,s){
+ if(s===0||s===3){ /* heart / diamond */
+  if(s===0){OLED.fillCircle(x+2,y+2,2,WHITE);OLED.fillCircle(x+6,y+2,2,WHITE);
+   OLED.fillTriangle?OLED.fillTriangle(x,y+3,x+8,y+3,x+4,y+8,WHITE):OLED.drawTriangle(x,y+3,x+8,y+3,x+4,y+8,WHITE);}
+  else{OLED.drawTriangle(x+4,y,x,y+4,x+8,y+4,WHITE);OLED.drawTriangle(x+4,y+8,x,y+4,x+8,y+4,WHITE);}
+ } else { /* spade / club */
+  if(s===1){OLED.drawTriangle(x+4,y,x,y+5,x+8,y+5,WHITE);OLED.fillCircle(x+2,y+5,2,WHITE);OLED.fillCircle(x+6,y+5,2,WHITE);}
+  else{OLED.fillCircle(x+4,y+2,2,WHITE);OLED.fillCircle(x+1,y+5,2,WHITE);OLED.fillCircle(x+7,y+5,2,WHITE);}
+  OLED.fillRect(x+3,y+6,3,3,WHITE);
+ }
+}
+async function Card_Ceremony(){
+ /* [V7] the initialization ceremony on the golden basic template */
+ const steps=["VERIFYING COUNT... 52","REMOVING JOKERS... 2","SHUFFLING","SHUFFLING","SHUFFLING"];
+ for(let i=0;i<steps.length;i++){
+  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+  screenPrintLn(6,3,"PICK A CARD",0);OLED.drawLine(0,9,127,9,WHITE);
+  screenPrintLnCentered(30,steps[i],0);
+  if(i>=2){for(let c=0;c<9;c++)OLED.drawRect(24+c*8+random(0,3),40+random(0,5),7,10,WHITE); /* the riffle */
+   try{FX_noise(0.22,0.08,0);}catch(e){}}
+  OLED.display();
+  await sleep(i>=2?520:700);
+ }
+ /* CUT? - click cuts, scroll plays it straight */
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(6,3,"PICK A CARD",0);OLED.drawLine(0,9,127,9,WHITE);
+ screenPrintLnCentered(28,"CUT?",0);
+ Hint("<click cut  scroll straight>");
+ OLED.display();
+ Device_Manager[SHUTTER][BUFFER_VALUE]=EMPTY;Device_Manager[ROTARY_DIAL][BUFFER_VALUE]=EMPTY;
+ const t0=performance.now();
+ while(performance.now()-t0<15000){
+  HW_Rescan_All_Input_Buffers();
+  if(Pull_From_Buffer(SHUTTER)){try{FX_tone(300,0.05,"square",0.1,0);}catch(e){}break;}
+  if(Pull_From_Buffer(ROTARY_DIAL))break;
+  await sleep(60);
+ }
+ /* the deal - your card, the top card */
+ try{FX_noise(0.09,0.1,0);FX_tone(180,0.05,"square",0.08,0.1);}catch(e){}
+ const s=random(0,4),r=random(0,13);
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(6,3,"PICK A CARD",0);OLED.drawLine(0,9,127,9,WHITE);
+ OLED.drawRect(48,16,32,40,WHITE);              /* the card */
+ setFont(1);printText(28,54,RANKS[r]);
+ Suit_Glyph(60,36,s);
+ setFont(SMALL_FONT);
+ screenPrintLnCentered(60,"THE TOP CARD",0);
+ Hint(HINT_AGAIN);
+ OLED.display();
+ PlaySound(Select);
+}
 const RANKS=["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
 function Probabilities_EXE(which){
  switch(probState){
   case PROB_COLD:
    Pause_Process(SYSTEM_MONITOR);
    probResult="";probResult2="";
+   if(which===2){ /* [V7] cards open with the ceremony (G1 dance + ritual) */
+    probBusy=true;probState=PROB_SHOW;
+    (async()=>{await Aux_Handoff("PICK A CARD");await Card_Ceremony();probBusy=false;})();
+    break;
+   }
    Prob_Prompt(which);
    probState=PROB_WAIT;
    break;
@@ -4503,6 +4640,10 @@ function Probabilities_EXE(which){
   case PROB_SHOW:
    if(probBusy)break;
    if(Pull_From_Buffer(ROTARY_DIAL)){probState=PROB_EXIT;}
+   else if(which===2){ /* [V7] shake = another deal (re-shuffle, no full re-init) */
+    Pull_From_Buffer(SHUTTER);
+    if(Unit_Is_Shaking(1.3)){probBusy=true;(async()=>{await Card_Ceremony();probBusy=false;})();}
+   }
    else if(Prob_IsMerged(which)){
     if(Pull_From_Buffer(SHUTTER)){probPreset=(probPreset+1)%PROB_PRESETS.length;Prob_Prompt(which);probState=PROB_WAIT;}
     else if(Unit_Is_Shaking(1.3)){Prob_Roll(which);}
@@ -4853,36 +4994,26 @@ function Advice_EXE(which){
     panel's last field returns control to the concierge. */
  switch(advState){
   case ADV_COLD:{
-   Pause_Process(SYSTEM_MONITOR);
-   advPanel={m:constrain(which,0,2),sel:0,edit:false};
-   const M=ADV_MEMBERS[advPanel.m];
-   for(const fd of M.fields)if(fd.l==="BS")fd.i=BS_FieldIdx("advice"); /* [B4] the panel shows the store's truth */
+   const M=ADV_MEMBERS[constrain(which,0,2)];
+   advPanel={m:constrain(which,0,2),title:M.t,fields:M.fields,sel:0,edit:false};
+   for(const fd of M.fields)if(fd.l==="BS")fd.i=BS_FieldIdx("advice");
    advBS=BS_For("advice");
-   Psy_Front(M.t,""); /* [C1] the concierge shows the destination; verbs live on the top glass */
-   Adv_Panel_Draw();
-   advState=ADV_PANEL;
+   advState=ADV_NICKB;advNickAt=1e15; /* park input during the dance */
+   (async()=>{await Aux_Handoff(M.t);PanelG_Draw(advPanel);advState=ADV_PANEL;})(); /* [G1] */
    break;}
   case ADV_PANEL:{
+   /* [G2] the ring; GO> runs, <EXIT leaves - shake retired from the panel */
    const M=ADV_MEMBERS[advPanel.m];
-   if(Pull_From_Buffer(ROTARY_DIAL)){
-    if(advPanel.edit){const fd=M.fields[advPanel.sel];fd.i=(fd.i+1)%fd.v.length;PlaySound(Scroll);Adv_Panel_Draw();}
-    else{
-     advPanel.sel++;PlaySound(Scroll);
-     if(advPanel.sel>=M.fields.length){advState=ADV_EXIT;break;} /* [C4] scroll past the panel = the concierge */
-     Adv_Panel_Draw();
-    }
-    break;
-   }
-   if(Pull_From_Buffer(SHUTTER)){advPanel.edit=!advPanel.edit;PlaySound(Select);Adv_Panel_Draw();break;}
-   if(!advPanel.edit&&Unit_Is_Shaking(1.3)){
+   const act=PanelG_Input(advPanel);
+   if(act==="exit"){advState=ADV_EXIT;break;}
+   if(act==="go"){
     for(const fd of M.fields){
-     if(fd.l==="BS"){BS_STORE.apps.advice=(fd.i===0)?"G":String(fd.i-1);BS_Save();} /* [B4] in-app control writes the system */
+     if(fd.l==="BS"){BS_STORE.apps.advice=(fd.i===0)?"G":String(fd.i-1);BS_Save();}
      if(fd.l==="THINK")advThink=fd.i;
     }
     advBS=BS_For("advice");
     const mode=(advPanel.m===1)?M.fields[0].v[M.fields[0].i]:null;
     if(mode==="NICKNAME"){
-     /* [C3] even the truth is FETCHED - a visible consult, then the card */
      Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
      screenPrintLn(6,3,M.t,0);OLED.drawLine(0,9,127,9,WHITE);
      screenPrintLn(30,8,"CONSULTING RECORD "+askCount+"...",0);OLED.display();
@@ -4897,17 +5028,17 @@ function Advice_EXE(which){
    if(millis()>advNickAt){Adv_Nick_Card();advState=ADV_NICKV;}
    break;
   case ADV_SEARCH:
-   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_PANEL;advPanel.sel=0;advPanel.edit=false;Adv_Panel_Draw();break;}
+   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_PANEL;advPanel.sel=0;advPanel.edit=false;PanelG_Draw(advPanel);break;}
    Pull_From_Buffer(SHUTTER); /* consumed during the hunt */
    if(Adv_Search_Tick()){Adv_Result_Card();advState=ADV_RESULT;}
    break;
   case ADV_RESULT:
-   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_PANEL;advPanel.sel=0;advPanel.edit=false;Adv_Panel_Draw();break;}
+   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_PANEL;advPanel.sel=0;advPanel.edit=false;PanelG_Draw(advPanel);break;}
    Pull_From_Buffer(SHUTTER);
-   if(Unit_Is_Shaking(1.3)){Adv_NewSearch();advState=ADV_SEARCH;}
+   if(Unit_Is_Shaking(1.3)){Adv_NewSearch();advState=ADV_SEARCH;} /* shake stays generative INSIDE the running app */
    break;
   case ADV_NICKV:
-   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_PANEL;advPanel.sel=0;advPanel.edit=false;Adv_Panel_Draw();break;}
+   if(Pull_From_Buffer(ROTARY_DIAL)){advState=ADV_PANEL;advPanel.sel=0;advPanel.edit=false;PanelG_Draw(advPanel);break;}
    Pull_From_Buffer(SHUTTER); /* the truth takes no input */
    break;
   case ADV_EXIT:
@@ -5019,7 +5150,7 @@ function Doors_Restructure(){
  const DA=MENU_TABLE.length, DP=DA+1, DS=DA+2, R=DA+3, CT=DA+4;
  for(const t of [DA,DP,DS,R,CT]){MENU_TABLE[t]=[];MENU_PARAMETER_TABLE[t]=[];}
  /* ANSWERS door */
- doorRow(DA,0,"Ask",ANSWERS,0,0);        /* [T2 WALK] ANSWERS->Answers duplicate killed; "Ask" = flat-functional (Ops-provisional word, flagged) */
+ doorRow(DA,0,"ASK MGK",ANSWERS,0,0);    /* [V3 walk-seven] the ask door, named to the new level format */
  doorRow(DA,1,"Advice",ADVICE,0,0);
  doorRow(DA,2,"Excuses",APPP,0,1);   /* app-pattern engine live */
  doorRow(DA,3,"Lines",APPP,0,1);
@@ -5157,6 +5288,31 @@ async function frontSay(lines){
 }
 let BOOT_PACE=1.6; /* [X4 walk-six] the global ceremony multiplier - dev-tunable */
 function bsleep(ms){return sleep(Math.round(ms*BOOT_PACE));}
+/* [G3 - THE GOLDEN REFERENCE SET] the proven flows, dev-viewable and
+   annotated. Future builds diff against THESE STATES, not prose. */
+const GOLDEN=[
+ ["ASK 1/5","front: menu, '> Row <' bracket line","concierge decides; click executes"],
+ ["ASK 2/5","front: rail card + OUTPUT REDIRECTED TO","destination named (FLUIDIC or AUX)"],
+ ["ASK 3/5","top: CRT death -> birth","the tube changes hands"],
+ ["ASK 4/5","top: confirmation + TEST SIGNAL, a beat","then content arrives"],
+ ["ASK 5/5","return: scroll -> concierge, SAME row","the trail restores (V6)"],
+ ["PANEL 1/4","arrive ON option 1; GO> low-right, <EXIT low-left","visible destinations"],
+ ["PANEL 2/4","scroll = THE RING: options -> GO> -> <EXIT -> around","one dial, one loop"],
+ ["PANEL 3/4","click option = enter; scroll changes; click sets + bounces","no verb tricks"],
+ ["PANEL 4/4","click GO> = run; click <EXIT = concierge; shake = generative INSIDE only","the law"],
+];
+let goldenIdx=-1;
+function devGolden(){
+ goldenIdx=(goldenIdx+1)%GOLDEN.length;
+ const g=GOLDEN[goldenIdx];
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(6,3,"GOLDEN - "+g[0],0);OLED.drawLine(0,9,127,9,WHITE);
+ screenPrintLn(24,4,g[1],0);
+ screenPrintLn(40,4,g[2],0);
+ Hint("<golden button = next>");
+ OLED.display();
+ chip("ok","[G3] golden "+g[0]+": "+g[1]);
+}
 function devPace(){
  BOOT_PACE=(BOOT_PACE>=2.2)?1.0:Math.round((BOOT_PACE+0.6)*10)/10;
  chip("ok","[DEV] boot pace x"+BOOT_PACE);
@@ -5402,7 +5558,7 @@ function Glitch_Tick(){
    ctx.putImageData(img,6,y);
    setTimeout(()=>{try{scr.display();}catch(e){}},90);
   }catch(e){}
- } else {PlaySound(Scroll);} /* audio pop/hiccup */
+ } else {try{if(unitPowered){FX_tone(60,0.22,"sawtooth",0.05,0);FX_noise(0.08,0.03,0.02);}}catch(e){}} /* [V4] the "zowt" - a mains-hum transient; chosen over silence as the more period-true tell (FLAGGED) */
  if(unitViewOn&&Math.random()<0.5){const st=document.getElementById("unitstage");
   if(st){st.classList.add("gl-jit");setTimeout(()=>st.classList.remove("gl-jit"),90);}}
 }
@@ -5470,14 +5626,26 @@ if(new URLSearchParams(location.search).has("user"))setUserMode(true);
 
 /* ============ [DEV] driver, chrome, registry ============ */
 let osRunning=true, bootRunning=false;
+const MAINT_AT=[120,480,1440]; /* [V5] minutes; dev-tunable thresholds */
+let upLastTick=0, upSaveAt=0;
 function osTick(){
  if(osRunning&&!bootRunning&&unitPowered){ /* [W1] no power, no OS */
+  /* [V5] TOTAL UPTIME, persisted beside the session clock */
+  const nowR=performance.now();
+  if(upLastTick&&health){health.uptimeMs=(health.uptimeMs||0)+(nowR-upLastTick);
+   if(nowR>upSaveAt){upSaveAt=nowR+60000;Health_Save();
+    const upMin=Math.trunc(health.uptimeMs/60000),mi=health.maintIdx||0;
+    if(mi<MAINT_AT.length&&upMin>=MAINT_AT[mi]){health.maintIdx=mi+1;Health_Save();
+     Unscripted_Send("SERVICE","* SCHEDULED MAINTENANCE",
+      "TOTAL UPTIME "+upMin+" MIN. SERVICE INTERVAL "+MAINT_AT[mi]+" REACHED. [PAPA - service notice line]"); /* [U1] live-generated, real datum */
+    }}}
+  upLastTick=nowR;
   const iters=Math.max(1,Math.round(2*SPEED));
   const t=performance.now();
   for(let i=0;i<iters;i++)MGK_VIIIp_OS();
   monOsMs=(performance.now()-t)/iters; /* [NO-DEAD-WOOD] real per-iteration cost feeds the CPU graph */
   Glitch_Tick();                       /* [GLITCH DOCTRINE] lightly, everywhere */
- }
+ } else {upLastTick=0;} /* [V5] the clock stops with the power */
 }
 setInterval(osTick,50);
 async function devRunBoot(){

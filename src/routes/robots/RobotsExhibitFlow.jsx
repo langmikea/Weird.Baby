@@ -62,6 +62,15 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
 
   return (
     <>
+      {/* [V2 walk-seven] deck / player-bar / scroll coordination: the deck
+          lifts over the player bar (the exhibit's own :has pattern) and the
+          page keeps clearance so the tracklist never hides under the deck.
+          Scoped: this style exists only while /robots is mounted. */}
+      <style>{`
+        body:has(.pb) .rb-deck { bottom: 60px; }
+        .rb-deck { transition: bottom 0.3s ease; }
+        .ex-root { padding-bottom: 56px; }
+      `}</style>
       <div className="rb-deck" style={S.deck}>
         <span style={S.log}>
           {activeAlbumId === "robots"

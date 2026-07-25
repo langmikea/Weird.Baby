@@ -26,7 +26,7 @@ const spine = [
     id: "mgk-niac",
     title: "MGK-NIAC",
     year: 1945,
-    art: null,
+    art: "/WeirdBaby_PhotoID.png", /* [V1] the W.B logo on every non-VIIIp cover */
     accent: null,
     tracks: [
       { id: "niac-soon", title: "Coming soon", videos: [] },
@@ -36,7 +36,7 @@ const spine = [
     id: "mgk-viiip",
     title: "MGK-VIIIp",
     year: 1965,
-    art: null,
+    art: "/robots/art/viiip.png", /* [V1] the unit itself (reference/photos/front_full) */
     accent: null,
     tracks: [
       { id: "machine", title: "The Machine", videos: [] },
@@ -48,7 +48,7 @@ const spine = [
     id: "nru-2000",
     title: "NRU-2000",
     year: null,
-    art: null,
+    art: "/WeirdBaby_PhotoID.png", /* [V1] */
     accent: null,
     tracks: [
       { id: "nru-soon", title: "Coming soon", videos: [] },
@@ -58,7 +58,7 @@ const spine = [
     id: "robots",
     title: "Robots",
     year: null,
-    art: null,
+    art: "/WeirdBaby_PhotoID.png", /* [V1] */
     accent: null,
     tracks: [
       { id: "findings", title: "Latest findings", videos: [] },
