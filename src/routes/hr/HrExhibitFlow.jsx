@@ -153,23 +153,34 @@ for (const d of HR_DIMENSIONS) {
 
 // ─── COLOR / FONT TOKENS ────────────────────────────────────────────────────
 // Phase 4b: retargeted from the deck's v28 warm-amber palette to the
-// canonical museum palette in src/styles/museum-tokens.css. These constants
-// mirror the --hr-* CSS variables so every S.* inline-style builder picks up
-// the new look automatically.
-const INK = "#ece9e0";
-const INK_SOFT = "#e2ded3";
-const INK_CARD = "#faf8f3";          // solid hex, not rgba (Q3 flattened)
-const INK_CARD_HI = "#ffffff";       // solid hex, not rgba
-const BORDER = "#c6c2b7";
-const BORDER_HI = "#a9a59a";
+// canonical museum palette in src/styles/museum-tokens.css.
+//
+// [R3, 2026-07-29] THE HAND-SYNC IS GONE. These twelve constants used to be
+// literal hexes carrying comments that said "synced to --wb-gold-hi",
+// "synced to --wb-dim" — i.e. a mirror of the CSS kept up to date by
+// remembering to. They now read from src/styles/tokens.js, which is the one
+// JS source paired with museum-tokens.css.
+// The NAMES are deliberately unchanged: ~190 KB of S.* inline-style builders
+// reference INK / GOLD / DIM and friends, and renaming them would be a large
+// diff for no gain. Only where the values COME FROM has changed, so the
+// render is byte-for-byte what it was.
+// Verified value-for-value against the CSS :root at the time of the change.
+import { T as MUSEUM } from "../../styles/tokens.js";
+
+const INK = MUSEUM.ink;
+const INK_SOFT = MUSEUM.inkSoft;
+const INK_CARD = MUSEUM.inkCard;        // solid hex, not rgba (Q3 flattened)
+const INK_CARD_HI = MUSEUM.inkCardHi;   // solid hex, not rgba
+const BORDER = MUSEUM.border;
+const BORDER_HI = MUSEUM.borderHi;
 // 2026-06-07 B&W rework PASS 2 (Mike: light "photo album page"): the ink
 // ladder flips to paper stock, the accent constants go photo-black — names
 // kept (plumbing), read GOLD as "accent". Single-tone pattern preserved.
-const GOLD = "#211f1c";
-const GOLD_HI = "#000000";  // synced to --hr-gold-hi (deepest tier)
-const GOLD_LO = "#57544d";  // synced to --hr-gold-lo (dim tier)
-const GOLD_MUTE = "#9b978d";
-const DIM = "#3b3933";       // synced to --hr-dim (body)
+const GOLD = MUSEUM.gold;
+const GOLD_HI = MUSEUM.goldHi;
+const GOLD_LO = MUSEUM.goldLo;
+const GOLD_MUTE = MUSEUM.goldMute;
+const DIM = MUSEUM.dim;
 // MOTHBALLED for v1 per STATE.md; do not render. Revives post-launch.
 // Kaleidoscope LED palette — re-tuned to v17's museum gold, not v3's neon.
 // (Used inline by the mothballed VuMeter, which is never rendered.)

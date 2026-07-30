@@ -34,29 +34,47 @@
 :root {
   /* ── Surfaces — paper elevation ladder. INVERTED logic: higher rung =
      whiter print stock; the page ground is the mat board under it all. */
-  --hr-bg:           #d9d5ca;   /* mat board — the table the prints lie on */
-  --hr-ink:          #ece9e0;   /* album page surface */
-  --hr-ink-soft:     #e2deD3;   /* inset / active-row tint — pressed paper */
-  --hr-ink-card:     #faf8f3;   /* print stock — card surface */
-  --hr-ink-card-hi:  #ffffff;   /* brightest print white — raised chrome */
+    /* ---- R7 2026-07-30: THE NAMES ARE THE HOUSE'S NOW ----------------
+     These were --hr-*: the museum's shared vocabulary wearing one
+     exhibit's initials, so every new wing had to adopt Hunter Root's
+     dialect to look like the building. The canonical names are --wb-*.
+     THE --hr-* NAMES SURVIVE AS ALIASES, immediately below, so nothing
+     that still says --hr-gold breaks and the migration can stay lazy
+     for as long as it likes. Same values, so the rename cannot move a
+     pixel - which is the acceptance test. */
+  --wb-bg: #d9d5ca;
+  --wb-ink: #ece9e0;
+  --wb-ink-soft: #e2deD3;
+  --wb-ink-card: #faf8f3;
+  --wb-ink-card-hi: #ffffff;
+  --wb-border: #c6c2b7;
+  --wb-border-hi: #a9a59a;
+  --wb-gold: #211f1c;
+  --wb-gold-hi: #000000;
+  --wb-gold-lo: #57544d;
+  --wb-gold-mute: #9b978d;
+  --wb-dim: #3b3933;
+  --wb-serif: 'DM Serif Display', Georgia, serif;
+  --wb-sans: 'Syne', system-ui, -apple-system, sans-serif;
+  --wb-mono: 'Courier Prime', 'Courier New', monospace;
 
-  /* Borders — paper edges; depth carries hierarchy, borders only delineate */
-  --hr-border:       #c6c2b7;
-  --hr-border-hi:    #a9a59a;
-
-  /* Accent — photo-black ramp (mute -> lo -> "gold" -> hi); names historical */
-  --hr-gold:      #211f1c;   /* photo black — primary accent on paper */
-  --hr-gold-hi:   #000000;   /* deepest tier — counts, active labels, key titles */
-  --hr-gold-lo:   #57544d;   /* dim tier — eyebrows, meta, border accents */
-  --hr-gold-mute: #9b978d;   /* disabled — faded print */
-
-  /* Body / mid text — developed-print dark gray */
-  --hr-dim:       #3b3933;
-
-  /* Typography — loaded webfaces (imported by src/routes/exhibit/Exhibit.css) */
-  --hr-serif: 'DM Serif Display', Georgia, serif;
-  --hr-sans:  'Syne', system-ui, -apple-system, sans-serif;
-  --hr-mono:  'Courier Prime', 'Courier New', monospace;
+  /* ---- the old names, as aliases. Delete a line only when nothing
+     references it; there is no hurry and no benefit to hurrying. */
+  --hr-bg: var(--wb-bg);
+  --hr-ink: var(--wb-ink);
+  --hr-ink-soft: var(--wb-ink-soft);
+  --hr-ink-card: var(--wb-ink-card);
+  --hr-ink-card-hi: var(--wb-ink-card-hi);
+  --hr-border: var(--wb-border);
+  --hr-border-hi: var(--wb-border-hi);
+  --hr-gold: var(--wb-gold);
+  --hr-gold-hi: var(--wb-gold-hi);
+  --hr-gold-lo: var(--wb-gold-lo);
+  --hr-gold-mute: var(--wb-gold-mute);
+  --hr-dim: var(--wb-dim);
+  --hr-serif: var(--wb-serif);
+  --hr-sans: var(--wb-sans);
+  --hr-mono: var(--wb-mono);
   /* Brand wordmark face — rounded, akin to the logo's bubble lettering.
      Trial scope: the nav wordmark only (2026-06-07). */
   --wb-brand: 'Fredoka', 'Baloo 2', 'Quicksand', system-ui, sans-serif;

@@ -14,54 +14,52 @@
 // chapter footage lands at the words/media pass). Empty-video tracks render
 // the template's own no-video state (tl-novid), which is the honest read.
 //
-// Family order per Mike (walk-five): NIAC → VIIIp → NRU, plus the "Robots"
-// CONCEPT ALBUM carrying the findings log. exhibitFlow = RobotsExhibitFlow
-// (the template's documented extension seam): the twin artifact + the log
-// line + the overlay live there.
+// Family order per Mike (walk-five) was NIAC → VIIIp → NRU plus the "Robots"
+// CONCEPT ALBUM. As of 2026-07-29 the two coming-soon families are REMOVED
+// (see the no-coming-soon note on the spine); the order among what remains is
+// unchanged. exhibitFlow = RobotsExhibitFlow (the template's documented
+// extension seam): the twin artifact + the log line + the overlay live there.
 
 import RobotsExhibitFlow from "../../routes/robots/RobotsExhibitFlow.jsx";
 
+/* ---- NO-COMING-SOON [Mike 2026-07-29] ---------------------------------
+   MGK-NIAC and NRU-2000 are REMOVED from the carousel. Both were the same
+   shape: the house logo for cover art plus a single track reading "Coming
+   soon". Under Mike's credo - placeholders used extremely sparingly and only
+   when they earn something - those two earned nothing. A visitor spun the
+   deck, landed on a logo, and was told to come back later. Two of the four
+   albums were that.
+   ---- R1 RULED [Mike 2026-07-30]: "Robots" COMES OUT TOO. --------------
+   The findings-log album is removed. THE CAROUSEL IS REAL ROBOTS ONLY - the
+   deck is a rack of machines, and an album that is a house logo over a
+   changelog is not a machine. Ops had flagged it to stay on the reasoning
+   that the log is real content rather than a promise; Mike's ruling is that
+   the credo is about the DECK's subject, not about whether the content
+   behind a cover exists. The deck now holds exactly one album, MGK-VIIIp,
+   which is the only robot with a photograph and a tracklist.
+   THE FINDINGS LOG IS NOT LOST - it has no home on the deck, and the
+   container-model proposal already gives it one below the line as a `text`
+   or `journal` kind (EXHIBIT_CONTAINER_PROPOSAL-20260729.md, verdict 5).
+   Nothing is lost when a family earns a photo and a track either: the
+   entries come back as data, in this file, with no component changes. */
 const spine = [
-  {
-    id: "mgk-niac",
-    title: "MGK-NIAC",
-    year: 1945,
-    art: "/WeirdBaby_PhotoID.png", /* [V1] the W.B logo on every non-VIIIp cover */
-    accent: null,
-    tracks: [
-      { id: "niac-soon", title: "Coming soon", videos: [] },
-    ],
-  },
   {
     id: "mgk-viiip",
     title: "MGK-VIIIp",
     year: 1965,
-    art: "/robots/art/viiip.png", /* [V1] the unit itself (reference/photos/front_full) */
+    /* [2026-07-29] B&W, and the glass now carries the BIOS beat instead of a
+       stale "LOADING SUCCESS" from a months-old flash. Generated from the
+       twin's OWN ceremony: Beat() was wrapped and the framebuffer sampled at
+       the labelled beat "the mark lands" in Charge_Front - the triangle
+       spin-out with MGK-VIIIp / BIOS under it - then composited into the
+       front-view photo at the measured portal aperture and printed to B&W.
+       Provenance + the exact numbers: robots repo STATE.md, THE NIGHT RUN. */
+    art: "/robots/art/viiip.png",
     accent: null,
     tracks: [
       { id: "machine", title: "The Machine", videos: [] },
       { id: "restoration", title: "The Restoration", videos: [] },
       { id: "record", title: "The Record", videos: [] },
-    ],
-  },
-  {
-    id: "nru-2000",
-    title: "NRU-2000",
-    year: null,
-    art: "/WeirdBaby_PhotoID.png", /* [V1] */
-    accent: null,
-    tracks: [
-      { id: "nru-soon", title: "Coming soon", videos: [] },
-    ],
-  },
-  {
-    id: "robots",
-    title: "Robots",
-    year: null,
-    art: "/WeirdBaby_PhotoID.png", /* [V1] */
-    accent: null,
-    tracks: [
-      { id: "findings", title: "Latest findings", videos: [] },
     ],
   },
 ];
