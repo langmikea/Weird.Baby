@@ -29,6 +29,21 @@
 //
 // `viewerPoster` on the album is what the panel shows when nothing is playing
 // and nothing is selected — see the note on it below.
+//
+// ---- B12 2026-07-30: TAGS (Q10) — FOUNDATION ONLY ---------------------------
+// Albums and tracks may carry `tags: [string]`. This is the searchability
+// foundation and NOTHING ELSE: no filter UI, no preset UI, no index emitter.
+// SEARCH-FIRST is the ruling — a tag exists so a search can FIND an object,
+// not so a preset can collect one.
+//   - the vocabulary is flat and small, and a tag is a word a visitor might
+//     actually type: "opa", "1965", "manual", "twin" — not a taxonomy;
+//   - album tags are NOT copied down into their tracks. A query unions the
+//     track's tags with its album's at read time; duplicating them into the
+//     data is how a tag vocabulary starts disagreeing with itself;
+//   - a missing `tags` is legal everywhere and means "no tags", so /hr and
+//     /wb need no migration and cannot notice this exists.
+// The OPA-class case the container proposal describes ("every artifact tagged
+// opa, across every album") is a QUERY over this field. It is not built.
 
 import RobotsExhibitFlow from "../../routes/robots/RobotsExhibitFlow.jsx";
 
@@ -44,6 +59,7 @@ const spine = [
     id: "mgk-viiip",
     title: "MGK-VIIIp",
     year: 1965,
+    tags: ["mgk", "viiip", "1965", "abeal", "machine"],
     /* [2026-07-29] B&W, and the glass carries the BIOS beat instead of a stale
        "LOADING SUCCESS" from a months-old flash. Generated from the twin's OWN
        ceremony — the framebuffer sampled at the labelled beat "the mark lands"
@@ -67,6 +83,7 @@ const spine = [
         id: "machine",
         title: "Run the machine",
         videos: [],
+        tags: ["twin", "firmware", "1965", "interactive"],
         /* the underperforming deck button retires into a track, where it has
            a still and a paragraph to earn the press. The button does not open
            the twin itself — it fires an event the exhibit flow listens for, so
@@ -116,6 +133,7 @@ const spine = [
         id: "manual",
         title: "The manual",
         videos: [],
+        tags: ["manual", "plate", "1965", "scan", "opa"],
         /* HONEST v1: a face that says what the object is and what state it is
            in. No plates yet — the scans are Mike's to make — and no
            "coming soon", because a face that describes the artifact is not a
@@ -170,6 +188,7 @@ const spine = [
         id: "record",
         title: "The record",
         videos: [],
+        tags: ["journal", "record", "2024", "provenance"],
         face: {
           kind: "text",
           title: "THE RECORD",
@@ -244,6 +263,7 @@ const spine = [
     id: "wbr",
     title: "Weird.Baby Robots",
     year: null,
+    tags: ["wbr", "house", "front-desk"],
     /* [E3 PLACEHOLDER — FLAGGED FOR SWAP]
        Mike is drawing a WBR logo. Until it lands this is a clean typographic
        cover in the house register, generated inline as an SVG data URI so it
@@ -275,6 +295,7 @@ const spine = [
         id: "about",
         title: "Who we are",
         videos: [],
+        tags: ["about", "house", "purveyor"],
         face: {
           kind: "text",
           title: "WHO WE ARE",
@@ -307,6 +328,7 @@ const spine = [
         id: "faq",
         title: "FAQ",
         videos: [],
+        tags: ["faq", "questions", "buying"],
         face: {
           kind: "text",
           title: "FREQUENTLY ASKED",
@@ -346,6 +368,7 @@ const spine = [
         id: "contact",
         title: "Contact",
         videos: [],
+        tags: ["contact", "provenance", "corrections"],
         face: {
           kind: "text",
           title: "CONTACT",

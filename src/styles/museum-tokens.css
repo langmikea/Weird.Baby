@@ -58,23 +58,16 @@
   --wb-sans: 'Syne', system-ui, -apple-system, sans-serif;
   --wb-mono: 'Courier Prime', 'Courier New', monospace;
 
-  /* ---- the old names, as aliases. Delete a line only when nothing
-     references it; there is no hurry and no benefit to hurrying. */
-  --hr-bg: var(--wb-bg);
-  --hr-ink: var(--wb-ink);
-  --hr-ink-soft: var(--wb-ink-soft);
-  --hr-ink-card: var(--wb-ink-card);
-  --hr-ink-card-hi: var(--wb-ink-card-hi);
-  --hr-border: var(--wb-border);
-  --hr-border-hi: var(--wb-border-hi);
-  --hr-gold: var(--wb-gold);
-  --hr-gold-hi: var(--wb-gold-hi);
-  --hr-gold-lo: var(--wb-gold-lo);
-  --hr-gold-mute: var(--wb-gold-mute);
-  --hr-dim: var(--wb-dim);
-  --hr-serif: var(--wb-serif);
-  --hr-sans: var(--wb-sans);
-  --hr-mono: var(--wb-mono);
+  /* ---- B11 2026-07-30: THE ALIASES ARE RETIRED ------------------
+     R7 kept fifteen --hr-* aliases so the migration could stay lazy.
+     It finished instead: a sweep of src/ and public/ finds ZERO live
+     references (the only hits left are in a .pre-barmove backup file,
+     which is not built). Aliases that alias nothing are a map of a
+     road that was already closed, so they go.
+     PIXEL-IDENTITY IS THE ACCEPTANCE TEST, and it is met by
+     construction: removing a definition that nothing reads cannot
+     change a computed value. Proven on glass anyway - see STATE,
+     THE BREEZY SESSION. */
   /* Brand wordmark face — rounded, akin to the logo's bubble lettering.
      Trial scope: the nav wordmark only (2026-06-07). */
   --wb-brand: 'Fredoka', 'Baloo 2', 'Quicksand', system-ui, sans-serif;
