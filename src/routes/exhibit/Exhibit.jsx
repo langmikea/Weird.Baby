@@ -311,6 +311,17 @@ function tidyDesc(title, v) {
 }
 
 const CF_MIN    = 160; const CF_MAX    = 440;
+/* [X2 2026-07-30] THE BODY HEIGHT DRAG — same-only-different to the carousel's.
+   `.ex-main` is `flex:1` inside `.ex-root`, so the tracklist/viewer block has
+   always taken whatever height the viewport had left: the page FORCED it and
+   the visitor could not argue. The carousel has had a height handle since /hr,
+   so the mechanism did not need inventing, only pointing at a second target —
+   identical drag, identical persistence, identical snap-to-default, identical
+   handle furniture.
+   OPT-IN BY CONFIG: only an artist declaring `bodyKey` grows the handle, so
+   /hr and /wb render exactly as they did today. Turning it on for them is one
+   line each in their config and no component change at all. */
+const BODY_MIN  = 260; const BODY_MAX  = 1100; const BODY_DEF = 460;
 
 function usePersist(key, def) {
   const [v, setV] = useState(() => { try { return parseFloat(localStorage.getItem(key)) || def; } catch { return def; } });
@@ -413,6 +424,14 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
     <ol className="tl-tracks">
       {album.tracks.map((track, ti) => {
         const hasVids  = track.videos.length > 0;
+        /* [X3 2026-07-30] A FACE MAKES A ROW SELECTABLE. There were TWO gates
+           on a video-less row, not one: Exhibit's handleTrackSelect bailed
+           before recording the selection, AND the row itself refused to call
+           onSelect at all. Fixing either alone changes nothing, which is why
+           the first fix looked like it had not built. A row with a face has
+           somewhere to go, so it may be clicked; a row with neither videos nor
+           a face is still inert, exactly as before. */
+        const selectable = hasVids || !!track.face;
         const isActive = activeTrack === ti;
         const playing  = playingTrackIdx === ti;
         const skipped  = isSkipped(ti);
@@ -429,11 +448,15 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
             className={[
               "tl-track",
               isActive  ? "tl-active"   : "",
-              !hasVids  ? "tl-novid"    : "",
+              /* [X3] `.tl-novid` means DEAD (cursor:default, 32% opacity, no
+                 hover). A face-bearing row is alive, so it must not wear the
+                 dead class — it was reading as greyed-out and unclickable
+                 while being the whole point of the exhibit. */
+              !selectable ? "tl-novid" : "",
               skipped   ? "tl-skipped"  : "",
             ].filter(Boolean).join(" ")}
             style={isActive ? { borderLeftColor: "#b8974a" } : {}}
-            onClick={() => hasVids && !skipped && onSelect(ti)}
+            onClick={() => selectable && !skipped && onSelect(ti)}
           >
             <span className="tl-num">
               {playing ? <NpBars color="#b8974a" /> : String(ti+1).padStart(2,"0")}
@@ -624,6 +647,36 @@ export default function Exhibit({ artist }) {
 
   const [split, setSplit] = usePersist(artist.splitKey, 50);
   const [cfH,   setCfH]   = usePersist(artist.cfKey,    300);
+  /* [X2] Hooks cannot be conditional, so the state always exists; the KEY is
+     what is conditional. An artist without `bodyKey` gets an inert slot that
+     nothing reads and nothing renders. */
+  const [bodyH, setBodyH] = usePersist(artist.bodyKey || "wb-body-off", BODY_DEF);
+  const bodyResizable = !!artist.bodyKey;
+  const mainRef = useRef(null);
+
+  /* [X2 FIX] THE DEFAULT MUST LEAVE ITS OWN HANDLE GRABBABLE.
+     Measured at 1600x1000: the player bar is fixed at the viewport floor
+     (y 829..897, z 100) and the 460px default put the drag handle at y
+     877..891 — INSIDE THE BAR. elementsFromPoint returned `pb > bd-dh`, so
+     the first thing a visitor would try to grab was the one thing they could
+     not. Same shape as the E4 deck defect: a fixed bar over a control.
+     Only the DEFAULT is fitted, and only when the visitor has not already
+     chosen: a stored height is their decision and is never overridden. Drag
+     freely past this afterwards — the page scrolls and the handle stays
+     reachable (see the .bd-dh bottom margin in Exhibit.css). */
+  useEffect(() => {
+    if (!bodyResizable) return;
+    let stored = null;
+    try { stored = localStorage.getItem(artist.bodyKey); } catch { /* private mode */ }
+    if (stored) return;
+    const el = mainRef.current;
+    if (!el) return;
+    const top  = el.getBoundingClientRect().top + window.scrollY;
+    const bar  = document.querySelector(".pb");
+    const barH = bar ? bar.getBoundingClientRect().height : 0;
+    const fits = Math.round(window.innerHeight - top - barH - 30);
+    if (fits >= BODY_MIN && fits < BODY_DEF) setBodyH(fits);
+  }, [bodyResizable]);
 
   const ytDivRef = useRef(null);
   const yt = useYTPlayer({
@@ -664,7 +717,20 @@ export default function Exhibit({ artist }) {
     const track  = SPINE[albumIdx].tracks[ti];
     const selSet = (albumSelectedVis[albumIdx] ?? {})[ti] ?? new Set([0]);
     const vis    = getOrderedVis(track, selSet);
-    if (!vis.length) return;
+    if (!vis.length) {
+      /* [X3 2026-07-30] A TRACK CAN BE CONTENT WITHOUT BEING PLAYBACK.
+         This early return was written when every track was a video, and it
+         made a video-less track UNSELECTABLE: the click bailed before
+         setAlbumActiveTrack, `activeTrack` stayed null, and the viewer kept
+         falling back to the FIRST face in the album. Every Robots track
+         therefore opened on "Run the machine" no matter which row you hit —
+         invisible until the faces stopped being interchangeable.
+         Selecting a face-bearing track now registers the selection and simply
+         does not start a player. /hr and /wb tracks all carry videos, so this
+         branch never runs for them. */
+      if (track && track.face) setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));
+      return;
+    }
     setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));
     startPlay(albumIdx, ti, vis[0]);
   }
@@ -910,6 +976,24 @@ export default function Exhibit({ artist }) {
     window.addEventListener("pointerup", () => window.removeEventListener("pointermove", onMove), { once: true });
   }
 
+  /* [X2] THE SAME DRAG, A DIFFERENT TARGET. Line for line the carousel's:
+     capture the pointer, track the delta from the grab, snap within 12px of
+     the default, clamp, persist. Deliberately NOT factored into a shared
+     helper — two call sites do not earn an abstraction, and keeping them
+     side by side is what makes "same-only-different" checkable by eye. */
+  function makeBodyDrag(e) {
+    e.preventDefault();
+    e.currentTarget.setPointerCapture(e.pointerId);
+    const startY = e.clientY, startH = bodyH;
+    function onMove(ev) {
+      let h = startH + (ev.clientY - startY);
+      if (Math.abs(h - BODY_DEF) < 12) h = BODY_DEF;
+      setBodyH(Math.max(BODY_MIN, Math.min(BODY_MAX, Math.round(h))));
+    }
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", () => window.removeEventListener("pointermove", onMove), { once: true });
+  }
+
   const bodyRef = useRef(null);
   const canSkipBack    = playingTrack !== null;
   // O9: with Loop on, skip-forward at the end of the queue refills from the
@@ -964,7 +1048,10 @@ export default function Exhibit({ artist }) {
           <div className="ex-album-banner-title">{album.title}</div>
           <div className="ex-album-banner-aux" />
         </div>
-        <div className="ex-main ex-snap">
+        {/* [X2] `flex:1` is what FORCED the height. When the artist opts in,
+            an explicit height replaces it and the drag owns the number. */}
+        <div className="ex-main ex-snap" ref={mainRef}
+          style={bodyResizable ? { height: bodyH, flex: "0 0 auto" } : undefined}>
           <div className="ex-main-inner" ref={bodyRef}
             style={{ gridTemplateColumns: `${split}fr 10px ${100-split}fr` }}>
 
@@ -1064,6 +1151,31 @@ export default function Exhibit({ artist }) {
                             {activeFace.lines.map((l, i) => <li key={i}>{l}</li>)}
                           </ul>
                         )}
+                        {/* [X3 2026-07-30] THE FIRST LAYER. `lines` is a
+                            register — a few fixed key/value facts about the
+                            object. `entries` is the object's own CONTENTS: the
+                            log's dated posts, the manual's sections, the FAQ's
+                            questions. Structure real, words minimal-but-true,
+                            [PAPA] where they are Mike's. Same discipline as
+                            `face` itself: data, never a component, so /hr and
+                            /wb cannot notice it exists. */}
+                        {Array.isArray(activeFace.entries) && activeFace.entries.length > 0 && (
+                          <ol className="vp-face-entries">
+                            {activeFace.entries.map((en, i) => (
+                              <li key={i} className="vp-fe">
+                                {en.stamp && <span className="vp-fe-stamp">{en.stamp}</span>}
+                                <span className="vp-fe-body">
+                                  <span className="vp-fe-title">{en.title}</span>
+                                  {en.line && <span className="vp-fe-line">{en.line}</span>}
+                                  {en.note && <span className="vp-fe-note">{en.note}</span>}
+                                </span>
+                              </li>
+                            ))}
+                          </ol>
+                        )}
+                        {activeFace.footer && (
+                          <div className="vp-face-footer">{activeFace.footer}</div>
+                        )}
                         {activeFace.action && (
                           <button
                             className="vp-face-action"
@@ -1106,6 +1218,17 @@ export default function Exhibit({ artist }) {
 
           </div>
         </div>
+
+        {/* [X2] BODY HEIGHT DRAG — the carousel's handle, pointed at the body.
+            Rendered only for artists that opted in, so the exhibits that never
+            asked for it keep their exact DOM. */}
+        {bodyResizable && (
+          <div className="bd-dh" onPointerDown={makeBodyDrag}>
+            <div className="bd-dh-line" />
+            <div className="bd-dh-dot" />
+            <div className="bd-dh-line" />
+          </div>
+        )}
 
         <PlayerBar
           video={pbVideo} track={pbTrack} album={pbAlbum}

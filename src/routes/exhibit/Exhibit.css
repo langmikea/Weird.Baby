@@ -43,6 +43,40 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 .vp-face-lines li{font-family:'Courier Prime','Courier New',monospace;
   font-size:clamp(.58rem,.95vw,.7rem);letter-spacing:.06em;
   color:var(--wb-gold-lo);white-space:pre-wrap}
+
+/* [X3 2026-07-30] THE FIRST LAYER — the log sheet.
+   The container proposal describes the journal's presentation as "a date-index
+   that reads period-true, like a log sheet: ruled columns, stamped dates".
+   This is that, at first-layer fidelity: a stamp column in the mono face, a
+   rule under every row, and the entry's own words beside it. It carries the
+   manual's sections and the FAQ's questions too, because all three are the
+   same shape — a stamp, a title, and one true line. */
+.vp-face-entries{list-style:none;padding:0;margin:0;
+  border-top:1px solid var(--wb-border)}
+.vp-fe{display:flex;gap:14px;align-items:baseline;
+  padding:9px 0;border-bottom:1px solid var(--wb-border)}
+.vp-fe-stamp{flex:0 0 auto;min-width:8.5ch;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:clamp(.55rem,.9vw,.66rem);letter-spacing:.08em;
+  text-transform:uppercase;color:var(--wb-gold-lo);white-space:nowrap}
+.vp-fe-body{display:flex;flex-direction:column;gap:3px;min-width:0}
+.vp-fe-title{font-family:'Syne',sans-serif;font-weight:700;
+  font-size:clamp(.62rem,1vw,.75rem);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--wb-gold)}
+.vp-fe-line{font-family:'DM Serif Display',Georgia,serif;
+  font-size:clamp(.76rem,1.2vw,.92rem);line-height:1.4;color:var(--wb-dim);
+  max-width:56ch}
+.vp-fe-note{font-family:'Courier Prime','Courier New',monospace;
+  font-size:clamp(.53rem,.85vw,.62rem);letter-spacing:.07em;
+  color:var(--wb-gold-lo);opacity:.85}
+.vp-face-footer{margin-top:12px;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:clamp(.53rem,.85vw,.63rem);letter-spacing:.07em;
+  color:var(--wb-gold-lo);opacity:.85}
+@media (max-width:640px){
+  .vp-fe{flex-direction:column;gap:4px}
+  .vp-fe-stamp{min-width:0}
+}
 /* [E5 2026-07-30] THE CTA IS STICKY, not merely bottom-aligned.
    The visual walk caught it at tablet: the face body scrolls, and with
    margin-top:auto the button sat at the END of the scroll — so on a short
@@ -127,6 +161,23 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 .cf-dh-line{flex:1;height:1px;background:var(--wb-border);border-radius:1px;transition:background .2s}
 .cf-dh-dot{width:4px;height:4px;border-radius:50%;background:var(--wb-border-hi);flex-shrink:0;transition:background .2s}
 .cf-dh:hover .cf-dh-line,.cf-dh:hover .cf-dh-dot{background:color-mix(in srgb, var(--wb-gold) 33%, transparent)}
+
+/* [X2 2026-07-30] BODY HEIGHT DRAG — the carousel handle's twin, below the
+   tracklist/viewer block instead of above it. Same 14px grab strip, same rule
+   + dot furniture, same hover. Written out rather than sharing a selector with
+   .cf-dh so the two can drift apart later without one silently moving the
+   other; they are the same TODAY, and that is a fact about today. */
+.bd-dh{height:14px;cursor:row-resize;display:flex;align-items:center;justify-content:center;gap:6px;flex-shrink:0;padding:0 32px}
+.bd-dh-line{flex:1;height:1px;background:var(--wb-border);border-radius:1px;transition:background .2s}
+.bd-dh-dot{width:4px;height:4px;border-radius:50%;background:var(--wb-border-hi);flex-shrink:0;transition:background .2s}
+.bd-dh:hover .bd-dh-line,.bd-dh:hover .bd-dh-dot{background:color-mix(in srgb, var(--wb-gold) 33%, transparent)}
+/* [X2 FIX] SCROLL ROOM UNDER THE HANDLE. The fitted default keeps the handle
+   clear of the player bar at rest, but a visitor who drags the body TALLER is
+   entitled to reach the handle again — so the document must be able to scroll
+   far enough to lift it out from under a 68px fixed bar. Without this the
+   handle can end its own page directly beneath the bar and become ungrabbable
+   at exactly the moment it is most wanted. */
+body:has(.pb) .bd-dh{margin-bottom:82px}
 
 /* MAIN TWO-COLUMN BODY */
 .ex-main{display:grid;flex:1;border-top:1px solid var(--wb-border);border-bottom:1px solid var(--wb-border);position:relative;overflow:hidden}
