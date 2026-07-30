@@ -985,10 +985,30 @@ export default function Exhibit({ artist }) {
     e.preventDefault();
     e.currentTarget.setPointerCapture(e.pointerId);
     const startY = e.clientY, startH = bodyH;
+
+    /* [O3b 2026-07-30] THE DRAG STOPS WHERE NOTHING FURTHER IS REVEALED.
+       BODY_MAX was a flat 1100px, which let the visitor keep dragging long
+       after every column had run out of content — the reward for pulling was
+       more empty cream. The useful ceiling is not a constant, it is a
+       MEASUREMENT: how much is currently hidden. Each scrollable column
+       reports `scrollHeight - clientHeight`; the largest of those is exactly
+       how much taller the body can get before the last hidden row appears.
+       Measured at pointerdown rather than continuously, so the ceiling cannot
+       drift under the visitor's own drag — a moving limit feels like a fault
+       even when the arithmetic is right. */
+    let hidden = 0;
+    try {
+      document.querySelectorAll(".ex-left, .vp-face-body, .fs-wrap")
+        .forEach(el => {
+          hidden = Math.max(hidden, el.scrollHeight - el.clientHeight);
+        });
+    } catch { /* measurement is an optimisation; the hard clamps still apply */ }
+    const ceiling = Math.min(BODY_MAX, Math.max(BODY_DEF, startH + hidden + 8));
+
     function onMove(ev) {
       let h = startH + (ev.clientY - startY);
       if (Math.abs(h - BODY_DEF) < 12) h = BODY_DEF;
-      setBodyH(Math.max(BODY_MIN, Math.min(BODY_MAX, Math.round(h))));
+      setBodyH(Math.max(BODY_MIN, Math.min(ceiling, Math.round(h))));
     }
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerup", () => window.removeEventListener("pointermove", onMove), { once: true });
@@ -1139,12 +1159,15 @@ export default function Exhibit({ artist }) {
                       That keeps this shared component ignorant of twins; the
                       exhibit flow listens and does the exhibit-specific thing. */}
                   {!hasVideo && !thumbVid && activeFace && (
-                    <div className="vp-face">
+                    <div className={`vp-face vp-face-${activeFace.kind || "text"}`}>
                       {activeFace.still && (
                         <img className="vp-face-still" src={activeFace.still} alt="" />
                       )}
                       <div className="vp-face-body">
                         {activeFace.title && <div className="vp-face-title">{activeFace.title}</div>}
+                        {activeFace.subtitle && (
+                          <div className="vp-face-sub">{activeFace.subtitle}</div>
+                        )}
                         {activeFace.blurb && <p className="vp-face-blurb">{activeFace.blurb}</p>}
                         {Array.isArray(activeFace.lines) && activeFace.lines.length > 0 && (
                           <ul className="vp-face-lines">
@@ -1176,6 +1199,56 @@ export default function Exhibit({ artist }) {
                         {activeFace.footer && (
                           <div className="vp-face-footer">{activeFace.footer}</div>
                         )}
+                        {/* [O4 2026-07-30] THE PORTAL'S OWN FURNITURE.
+                            Presets and cross-references are DATA and stay
+                            data: the engine dispatches an id and a track name
+                            and learns nothing about twins or machines. A face
+                            without them renders exactly as before. */}
+                        {Array.isArray(activeFace.presets) && activeFace.presets.length > 0 && (
+                          <div className="vp-presets">
+                            <div className="vp-presets-head">PRESETS</div>
+                            <ul className="vp-preset-list">
+                              {activeFace.presets.map((p, i) => (
+                                <li key={i} className={`vp-preset vp-preset-${p.state || "live"}`}>
+                                  <button
+                                    className="vp-preset-btn"
+                                    onClick={() => window.dispatchEvent(new CustomEvent(
+                                      activeFace.action ? activeFace.action.event : "wb-robots-open-twin",
+                                      { detail: { album: album.id, preset: p.id, day: p.day } }
+                                    ))}
+                                  >{p.label}</button>
+                                  <span className="vp-preset-line">{p.line}</span>
+                                </li>
+                              ))}
+                            </ul>
+                            {activeFace.presetsNote && (
+                              <div className="vp-presets-note">{activeFace.presetsNote}</div>
+                            )}
+                          </div>
+                        )}
+                        {Array.isArray(activeFace.links) && activeFace.links.length > 0 && (
+                          <div className="vp-xrefs">
+                            <div className="vp-presets-head">SEE ALSO</div>
+                            <ul className="vp-xref-list">
+                              {activeFace.links.map((lk, i) => {
+                                const ti = album.tracks.findIndex(t => t.id === lk.track);
+                                return (
+                                  <li key={i} className="vp-xref">
+                                    <button
+                                      className="vp-xref-btn"
+                                      disabled={ti < 0}
+                                      onClick={() => ti >= 0 && handleTrackSelect(activeDisplay, ti)}
+                                    >{lk.label}</button>
+                                    <span className="vp-xref-line">{lk.line}</span>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </div>
+                        )}
+                        {activeFace.papa && (
+                          <div className="vp-face-papa">{activeFace.papa}</div>
+                        )}
                         {activeFace.action && (
                           <button
                             className="vp-face-action"
@@ -1205,7 +1278,16 @@ export default function Exhibit({ artist }) {
                 </div>
               </div>
 
-              {/* FACTS */}
+              {/* FACTS
+                  [O3a 2026-07-30] THE REST OF THE DEAD CREAM. `.fs-wrap` is
+                  `flex:1`, so it claimed an EQUAL SHARE of the right column
+                  with the viewer — and /robots declares `facts: []`. The
+                  result was 236px of empty scroller sitting beside a 151px
+                  viewer: the panel Mike was dragging was the smaller half of a
+                  column whose larger half had nothing in it.
+                  An exhibit with no facts does not get a fact scroller. /hr
+                  and /wb declare theirs and are untouched. */}
+              {Array.isArray(FACTS) && FACTS.length > 0 && (
               <FactScroller
                 facts={FACTS}
                 albumTag={album.tag}
@@ -1214,6 +1296,7 @@ export default function Exhibit({ artist }) {
                 exhibit={artist.exhibitSlug}
                 accent={album.accent}
               />
+              )}
             </div>
 
           </div>

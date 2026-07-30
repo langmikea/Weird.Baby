@@ -31,17 +31,45 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
   border-right:1px solid var(--wb-border);filter:grayscale(1) contrast(1.03)}
 .vp-face-body{flex:1;min-width:0;padding:clamp(14px,2.2vw,30px);
   display:flex;flex-direction:column;gap:12px;overflow-y:auto}
+/* [O5 2026-07-30] THE STICKY CONTROL MUST NOT SIT ON THE CONTENT.
+   E5 made `.vp-face-action` sticky so it could not scroll out of reach at
+   tablet. On the Portal face - the first face with enough below the fold to
+   matter - it did the other thing instead: it parked over the preset rack and
+   covered BOOT PLAYBACK. A control that hides the thing it is next to is the
+   deck defect again, one layer down.
+   Sticky is still right. What was missing is somewhere for the last rows to
+   go: the scroll box now reserves the control's own height, so the rack can
+   always be scrolled clear of it. */
+.vp-face-body:has(.vp-face-action){padding-bottom:64px}
 .vp-face-title{font-family:'Syne',sans-serif;font-weight:800;
-  font-size:clamp(.62rem,1.05vw,.78rem);letter-spacing:.22em;
+  font-size:calc(var(--face-fs) * .70);letter-spacing:.22em;
   text-transform:uppercase;color:var(--wb-gold)}
+/* [O3a 2026-07-30] THE CONTENT SCALES WITH THE PANEL.
+   THE DIAGNOSIS: `.vp-area` is locked to 16:9 by a `padding-top:56.25%`
+   spacer, which is derived from WIDTH. Dragging the body taller therefore
+   moved the floor and never the panel, and every pixel gained landed as dead
+   cream (`.ex-right` background) underneath a video frame that had not
+   changed size. The layout grew; the content could not.
+   TWO FIXES, and both are gated on a face being present so /hr and /wb -
+   where 16:9 is correct because the content really is video - are untouched:
+     1. the panel FILLS the column instead of holding an aspect ratio;
+     2. the type scales off the panel's own HEIGHT (`cqh`) as well as the
+        viewport width, taking whichever is smaller so a tall narrow panel
+        cannot blow the line length out.
+   `--face-fs` is the one dial; every other size in the face is a ratio of it,
+   so the face keeps its internal proportions at any panel size. */
+body:has(.vp-face) .vp-area{flex:1 1 auto;min-height:0}
+body:has(.vp-face) .vp-area::before{display:none}
+.vp-inner{container-type:size}
+.vp-face{--face-fs:clamp(.80rem, min(1.30vw, 3.05cqh), 1.20rem)}
 .vp-face-blurb{font-family:'DM Serif Display',Georgia,serif;
-  font-size:clamp(.86rem,1.35vw,1.1rem);line-height:1.45;color:var(--wb-dim);
+  font-size:var(--face-fs);line-height:1.45;color:var(--wb-dim);
   max-width:52ch}
 .vp-face-lines{list-style:none;padding:0;margin:0;display:flex;
   flex-direction:column;gap:5px;border-top:1px solid var(--wb-border);
   padding-top:11px}
 .vp-face-lines li{font-family:'Courier Prime','Courier New',monospace;
-  font-size:clamp(.58rem,.95vw,.7rem);letter-spacing:.06em;
+  font-size:calc(var(--face-fs) * .62);letter-spacing:.06em;
   color:var(--wb-gold-lo);white-space:pre-wrap}
 
 /* [X3 2026-07-30] THE FIRST LAYER — the log sheet.
@@ -57,18 +85,87 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
   padding:9px 0;border-bottom:1px solid var(--wb-border)}
 .vp-fe-stamp{flex:0 0 auto;min-width:8.5ch;
   font-family:'Courier Prime','Courier New',monospace;
-  font-size:clamp(.55rem,.9vw,.66rem);letter-spacing:.08em;
+  font-size:calc(var(--face-fs) * .58);letter-spacing:.08em;
   text-transform:uppercase;color:var(--wb-gold-lo);white-space:nowrap}
 .vp-fe-body{display:flex;flex-direction:column;gap:3px;min-width:0}
 .vp-fe-title{font-family:'Syne',sans-serif;font-weight:700;
-  font-size:clamp(.62rem,1vw,.75rem);letter-spacing:.09em;
+  font-size:calc(var(--face-fs) * .68);letter-spacing:.09em;
   text-transform:uppercase;color:var(--wb-gold)}
 .vp-fe-line{font-family:'DM Serif Display',Georgia,serif;
-  font-size:clamp(.76rem,1.2vw,.92rem);line-height:1.4;color:var(--wb-dim);
+  font-size:calc(var(--face-fs) * .84);line-height:1.4;color:var(--wb-dim);
   max-width:56ch}
 .vp-fe-note{font-family:'Courier Prime','Courier New',monospace;
-  font-size:clamp(.53rem,.85vw,.62rem);letter-spacing:.07em;
+  font-size:calc(var(--face-fs) * .55);letter-spacing:.07em;
   color:var(--wb-gold-lo);opacity:.85}
+/* ======== O4 2026-07-30: THE PORTAL FACE ==============================
+   IT MUST NOT READ AS PAPER. The manual and the record are documents and they
+   wear the museum's print stock. The Portal is a DOORWAY to a running machine,
+   and Mike's note is the spec: it should feel like a transition point, heading
+   down tunnels and corridors to a completely different thing.
+   So the register changes materially at this one face: the projection-booth
+   ground the twin's own overlay uses, the mono face throughout, and controls
+   that read as channel selections rather than as buttons on a card. The two
+   dark values are the SAME PAIR RobotsExhibitFlow names as the projection
+   booth - they are deliberately not museum tokens, and this is the second
+   place the exception is taken, on purpose and for the same reason. */
+.vp-face-portal{background:#0b0b0a;color:#cfcbc0}
+.vp-face-portal .vp-face-still{filter:grayscale(1) contrast(1.12) brightness(.82);
+  border-right:1px solid #3b3831}
+.vp-face-portal .vp-face-title{color:#e8e4d8;letter-spacing:.30em}
+.vp-face-sub{font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--face-fs) * .60);letter-spacing:.14em;text-transform:uppercase;
+  color:#8a857a;margin-top:-6px}
+.vp-face-portal .vp-face-blurb{color:#b8b3a6;max-width:56ch}
+.vp-face-portal .vp-face-lines{border-top:1px solid #3b3831}
+.vp-face-portal .vp-face-lines li{color:#9b968a}
+/* [O5 2026-07-30] ON THE PORTAL, THE DOOR IS NOT A FOOTER.
+   `.vp-face-action` is sticky-bottom everywhere else, and that is right for a
+   face whose control is a secondary afterthought. Here the control IS the
+   track: sticky put it over the preset rack at every scroll position, and
+   reserving padding only fixed the end of the scroll, not the middle.
+   So on this one face it stops floating and takes its place in the column,
+   directly under the register block and ABOVE the presets - which is also the
+   right reading order: you are told what this is, you are given the door, and
+   THEN you are offered the ways of walking through it. */
+.vp-face-portal .vp-face-action{position:static;margin-top:2px;
+  order:0;align-self:flex-start;
+  background:#cfcbc0;color:#0b0b0a;border:1px solid #cfcbc0;box-shadow:none;
+  font-size:calc(var(--face-fs) * .62);padding:9px 18px;letter-spacing:.24em}
+.vp-face-portal .vp-face-action:hover{background:transparent;color:#e8e4d8;
+  border-color:#e8e4d8}
+.vp-face-portal .vp-presets{order:1}
+.vp-face-portal .vp-xrefs{order:2}
+.vp-face-portal .vp-face-papa{order:3}
+
+/* the preset rack + the cross-references */
+.vp-presets,.vp-xrefs{border-top:1px solid #3b3831;padding-top:10px}
+.vp-presets-head{font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--face-fs) * .55);letter-spacing:.26em;color:#8a857a;
+  margin-bottom:7px}
+.vp-preset-list,.vp-xref-list{list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:7px}
+.vp-preset,.vp-xref{display:flex;gap:11px;align-items:baseline}
+.vp-preset-btn,.vp-xref-btn{flex:0 0 auto;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--face-fs) * .58);letter-spacing:.14em;text-transform:uppercase;
+  background:transparent;color:#e8e4d8;border:1px solid #57544d;
+  padding:4px 9px;cursor:pointer;white-space:nowrap;
+  transition:background .16s,color .16s,border-color .16s}
+.vp-preset-btn:hover,.vp-xref-btn:hover{background:#e8e4d8;color:#0b0b0a;border-color:#e8e4d8}
+.vp-preset-btn:disabled,.vp-xref-btn:disabled{opacity:.4;cursor:default}
+.vp-preset-line,.vp-xref-line{font-family:'DM Serif Display',Georgia,serif;
+  font-size:calc(var(--face-fs) * .78);line-height:1.35;color:#a5a094}
+/* a preset whose state is only partly wired says so in its own colour rather
+   than in a word - the label stays clean and the rack stays scannable. */
+.vp-preset-partial .vp-preset-btn{border-style:dashed;color:#a5a094}
+.vp-presets-note,.vp-face-papa{font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--face-fs) * .54);letter-spacing:.06em;color:#7d7869;
+  margin-top:8px;line-height:1.5}
+.vp-face-papa{border-top:1px dashed #3b3831;padding-top:8px}
+@media (max-width:640px){
+  .vp-preset,.vp-xref{flex-direction:column;gap:3px}
+}
+
 .vp-face-footer{margin-top:12px;
   font-family:'Courier Prime','Courier New',monospace;
   font-size:clamp(.53rem,.85vw,.63rem);letter-spacing:.07em;

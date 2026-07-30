@@ -131,6 +131,18 @@
 <style>
 /* [USER-FACING MODE 2026-07-22 night] presentation mode: all dev chrome behind one toggle (?user=1 or the VIEW button). Human-syntax law governs everything visible. */
 body.usermode .dev{display:none}
+/* [O2 2026-07-30] SIMPLE VIEW SHOWS THE PORTAL, NOT THE WORKSHOP AROUND IT.
+   Three pieces of bench furniture survived usermode and were visible in the
+   museum's overlay under the picture: the page's own title, its explanatory
+   sub-line ("the twin is the dev environment; the unit is the print run"),
+   and the MONITOR SIZE dial. All three address a developer. A visitor who has
+   just been handed a portal should get the portal - the overlay already owns
+   the frame, so the dial has nothing to do there either.
+   The corner grip STAYS: it is Mike's T3 ruling and it scales the picture
+   inside whatever frame it finds itself in. */
+body.usermode h1,
+body.usermode p.sub,
+body.usermode #portalsize{display:none}
 body.usermode #bootbtn{display:none}
 body.usermode .keyhint{display:none}
 body.usermode .device>span:not(.px){display:none}
@@ -284,7 +296,14 @@ body.unitview #devack{display:flex}
 #devack.ack-no{border-left-color:#9a3b2f}   #devack.ack-no   #devack_state{color:#9a3b2f}
 #devack.ack-pulse{animation:ackpulse .5s ease-out}
 @keyframes ackpulse{0%{background:#e6efd8}100%{background:#f6f4ee}}
-#unitstage.gl-jit{transform:translateY(1px) skewX(.25deg);opacity:.93}
+/* [B8 2026-07-30 - GLITCH REALISM, Mike-ruled] A CRT CANNOT SKEW.
+   Both jitter rules carried skewX(.25deg), which leans the picture
+   like a torn sheet of paper. No cathode-ray tube has ever done that:
+   the beam can be knocked sideways (sync bump), lose vertical lock
+   (roll), lose level (dropout) or lose signal (snow). A diagonal lean
+   is a DIGITAL artefact and it reads as one. The vocabulary is now
+   those four and nothing else. */
+#unitstage.gl-jit{transform:translateY(1px);opacity:.93}
 @media (max-width:700px){#unitstage{max-width:96vw;padding:10px}}
 
 /* [M7 - the SECURITY-MONITOR LAYER, Mike's walk ruling] one B&W closed-
@@ -516,6 +535,19 @@ body.portal{
      The `min()` keeps the old behaviour intact at every narrower viewport -
      on a phone the width still binds first and nothing here applies. */
   --portal-h:92vh;
+  /* [B9 2026-07-30, Q13:A] THE PAGE CONFORMS TO THE BEZEL'S EDGE TONE.
+     MEASURED, not picked. The bezel PNG carries rounded-corner transparency,
+     so a naive perimeter average folds the transparent corners in as black
+     and comes out wrong. Walking in from each side to the first FULLY OPAQUE
+     pixel gives the true rim: 5,384 samples, median rgb(48,48,48).
+     The mean is #3A3A3A and the mode #1C1C1C — the rim runs from luminance 11
+     to 141, so the mean is dragged by the specular highlights along the top
+     edge and the mode is only 9% of samples. The median is the honest
+     representative of "what colour is the edge of this object".
+     Effect: the frame stops ending. The bezel's outer edge and the page are
+     the same tone, so the real world the portal opens into is the same
+     material as the frame around it. */
+  background:#303030;
 }
 /* the page bleeds to the bezel's outer edge: the stage stops painting black
    behind it, and the PNG's rounded-corner transparency does the rest. */
@@ -622,6 +654,12 @@ body.portal #feedsnow{z-index:5;opacity:var(--feed-floor,0);mix-blend-mode:overl
    feed 1. Leaving them lit over a test card would put the machine's own
    glass on a channel that is carrying nothing. */
 body.portal.nosignal .glassmask{display:none}
+/* [O2] the honest hold when the portal's own base plate will not load. The
+   machine's register, not a broken-image icon and not an older product. */
+#nobase{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  z-index:7;background:#0c0d10;color:#cfcfcf;
+  font:600 clamp(11px,1.6vw,18px)/1.4 'Courier New',monospace;letter-spacing:.22em;
+  text-align:center;padding:0 8%}
 body.portal.nosignal #unitfront.clickflash::before,
 body.portal.nosignal #unitfront.clickflash::after{display:none}
 /* the feed-glitch classes. Amplitudes are deliberately small - texture, not
@@ -632,9 +670,12 @@ body.portal.nosignal #unitfront.clickflash::after{display:none}
 body.portal #feedlive.fg-drop{
   filter:brightness(calc(.90 * var(--feed-bright,1))) contrast(calc(1.12 * var(--feed-contrast,1)))}
 body.portal #feedsnow.fg-snow{opacity:calc(var(--feed-floor,0) + .18)}
+/* [B8] THE ROLL - vertical hold slipping. The picture slides and snaps
+   back; the frame never moves, because the frame is the real world. */
+body.portal #feedgroup.fg-roll{transition:transform .10s linear}
 /* the machine's own stutter now shakes THE WHOLE FEED - picture, glass and
    controls together - and still never the frame. */
-body.portal #unitstage.gl-jit #feedgroup{transform:translateY(2px) skewX(.25deg);opacity:.93}
+body.portal #unitstage.gl-jit #feedgroup{transform:translateY(2px);opacity:.93}   /* [B8] no skew */
 /* THE BEZEL: last child, top of the stack, NO filter of any kind, and
    transparent to the mouse so the crosshair and every control underneath
    still take their clicks. */
@@ -1950,7 +1991,10 @@ function Run_EXE(){
    break;
   case BSP: Pause_Process(MENU_SYSTEM); Start_Process(BSP,NORMAL_PRIORITY); break; /* [B4] */
   case CODES:       scafUpid="CODES";       Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY); break;
-  case USER:        scafUpid="USER";        Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY); break;
+  case USER:        /* [X1 2026-07-30] row 0 "Name" is the USER STATION and is live; Security is still scaffold */
+   if(lineNum_PTR===0){Pause_Process(MENU_SYSTEM); Start_Process(USERP,NORMAL_PRIORITY);}
+   else {scafUpid="USER"; Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY);}
+   break;
   case MGKMODEL:    scafUpid="MGKMODEL";    Pause_Process(MENU_SYSTEM); Start_Process(SCAFFOLD_PROC,NORMAL_PRIORITY); break;
   default: chip("warn","scaffold: '"+get_as_char(lineName)+"' has no handler [Run_EXE default]"); break;
  }
@@ -2050,6 +2094,13 @@ const HINT_BACK="<scroll back>", HINT_AGAIN="<shake again  scroll back>",
          every panel; named here so one edit moves them all. */
       HINT_PANEL_PICK="<scroll change  click keep>",
       HINT_PANEL_RUN="<click set  shake run>",
+      /* [X1 2026-07-30] MENU-STYLE PICK, the in-app twin of the menu system's
+         own grammar: one row at a time, scroll advances, click chooses. It is
+         a CHOOSE verb, not a KEEP verb - the panel's two-step edit mode is
+         exactly what the Horoscope ruling took out. */
+      HINT_MENU_PICK="<scroll change  click choose>",
+      /* the letter dial: one ring, one click per character. */
+      HINT_SPELL="<scroll letter  click take>",
       HINT_AGAIN_EXIT="click=again scrl=exit";
 /* ============ THE RAIL CARD [LANGUAGE COMPLETION 2026-07-26] ============
    Mike's original block (M8BALL.ino:81-82) finally has its name. It was typed
@@ -2143,14 +2194,45 @@ function PanelG_Draw(p){
  screenPrintLn(6,3,p.title,0);OLED.drawLine(0,9,127,9,WHITE);
  for(let f=0;f<p.fields.length;f++){
   const y=PANEL_ROW0+f*PANEL_ROWH,isSel=(p.sel===f),inEdit=isSel&&p.edit;
+  const fd=p.fields[f];
   setFont(SMALL_FONT);
-  screenPrintLn(y,10,(isSel&&!inEdit?SEL_OPEN:"")+p.fields[f].l+(isSel&&!inEdit?SEL_CLOSE:""),0);
-  Panel_Register(y,p.fields[f].v[p.fields[f].i],inEdit);
+  screenPrintLn(y,10,(isSel&&!inEdit?SEL_OPEN:"")+fd.l+(isSel&&!inEdit?SEL_CLOSE:""),0);
+  /* [X1 2026-07-30] A SECOND FIELD KIND. Every field until now was an index
+     into a fixed list, which cannot spell a name. A `kind:"text"` field
+     carries its own string and a ring cursor instead. The branch is guarded
+     on the kind, so a field without one takes the identical old path. */
+  Panel_Register(y,(fd.kind==="text")?Panel_Text_Value(fd,inEdit):fd.v[fd.i],inEdit);
  }
- /* notes: the panel's own read-only lines (rules, records). One or many. */
- const notes=p.notes||(p.note?[p.note]:[]);
+ /* notes: the panel's own read-only lines (rules, records). One or many.
+    [X1] While a text field is open the note band teaches the letter dial -
+    G2 forbids a hint verb in the GO>/<EXIT band, and the note band is where a
+    panel is already allowed to talk. */
+ const notes=(p.edit&&p.fields[p.sel]&&p.fields[p.sel].kind==="text")
+   ? [HINT_SPELL]
+   : (p.notes||(p.note?[p.note]:[]));
  setFont(SMALL_FONT);
- for(let n=0;n<notes.length;n++)screenPrintLn(PANEL_NOTE0+n*8,8,notes[n],0);
+ /* [X1 2026-07-30] THE NOTE BAND CLEARS THE FIELDS INSTEAD OF ASSUMING IT DOES.
+    PANEL_NOTE0=38 was chosen when panels had two fields, and it is still the
+    right answer for those: rows 17 and 26 leave the band empty. A THIRD field
+    lands at row 35 - TomThumb ink 30..34 - and the note's own ink at 33..37
+    lands ON TOP OF IT in the same columns. Found on the glass while building
+    the USER station, and it was ALREADY TRUE of the BS LEVEL panel, which has
+    carried three fields and a note since walk-five.
+    The floor moves only when it has to: for one and two fields the expression
+    still evaluates below PANEL_NOTE0, so every reviewed panel is unchanged. */
+ const noteTop=Math.max(PANEL_NOTE0,PANEL_ROW0+p.fields.length*PANEL_ROWH+2);
+ /* [B7 2026-07-30] AND A FULL PANEL DROPS THE NOTE. Four fields push the note
+    floor to row 55, whose ink (50..54) runs into the GO>/<EXIT band at 58
+    (ink 53..57). G2 gave the destinations that band outright, so the note is
+    the thing that yields: a teaching line is worth less than a way out.
+    The USER station is the first four-field panel; every existing panel has
+    two or three and is unaffected. */
+ const NOTE_FLOOR=52;
+ for(let n=0;n<notes.length;n++){
+  const y=noteTop+n*8;
+  if(y>NOTE_FLOOR)break;
+  screenPrintLn(y,8,notes[n],0);
+ }
  /* [G2] GO> and <EXIT are VISIBLE DESTINATIONS and they own the bottom band.
     A hint verb cannot also live there, and the old panel verbs named a
     shake-to-run grammar that G2 retired - so the destinations win. */
@@ -2158,9 +2240,21 @@ function PanelG_Draw(p){
  screenPrintLn(58,96,(p.sel===p.fields.length?SEL_OPEN:"")+"GO>",0);
  OLED.display();
 }
+/* [X1] the spelled value. Not editing: the string, or the field's own word for
+   empty. Editing: the string with the ring cursor riding on the end, so the
+   next character is always visible before it is taken. */
+function Panel_Text_Value(fd,inEdit){
+ const t=String(fd.text||"");
+ if(!inEdit)return t||fd.empty||"--";
+ const R=fd.ringset||SPELL_RING;
+ return t+"["+R[fd.ring%R.length]+"]";
+}
 function PanelG_Input(p){
  if(Pull_From_Buffer(ROTARY_DIAL)){
-  if(p.edit){const fd=p.fields[p.sel];fd.i=(fd.i+1)%fd.v.length;if(fd.onChange)fd.onChange(fd);}
+  if(p.edit){const fd=p.fields[p.sel];
+   if(fd.kind==="text"){const R=fd.ringset||SPELL_RING;fd.ring=(fd.ring+1)%R.length;}   /* [X1] letters, [B7] or digits */
+   else{fd.i=(fd.i+1)%fd.v.length;if(fd.onChange)fd.onChange(fd);}
+  }
   else p.sel=(p.sel+1)%(p.fields.length+2);
   PlaySound(Scroll);PanelG_Draw(p);return null;
  }
@@ -2168,7 +2262,20 @@ function PanelG_Input(p){
   PlaySound(Select);
   if(p.sel===p.fields.length)return "go";
   if(p.sel===p.fields.length+1)return "exit";
-  if(p.edit){p.edit=false;if(p.fields[p.sel].onSet)p.fields[p.sel].onSet(p.fields[p.sel]);}
+  if(p.edit){
+   const fd=p.fields[p.sel];
+   if(fd.kind==="text"){
+    /* [X1] TWO INPUTS, ONE ALPHABET. Scroll picks the character, click TAKES
+       it. DEL and END ride the same ring because there is no third verb to
+       give them - the arcade high-score solution, and it is period-true. */
+    const R=fd.ringset||SPELL_RING;
+    const ch=R[fd.ring%R.length];
+    if(ch===SPELL_END){p.edit=false;if(fd.onSet)fd.onSet(fd);}
+    else if(ch===SPELL_DEL)fd.text=String(fd.text||"").slice(0,-1);
+    else if(String(fd.text||"").length<(fd.max||SPELL_MAX))fd.text=String(fd.text||"")+ch;
+   }
+   else{p.edit=false;if(fd.onSet)fd.onSet(fd);}
+  }
   else if(p.fields.length)p.edit=true;
   PanelG_Draw(p);return null;
  }
@@ -2182,8 +2289,12 @@ function PanelG_Input(p){
 function Fit_Line(row,col,text,pub,budget){
  const w=(budget||MAX_SCREEN_WIDTH)-col;
  setFont(1);
- if(OLED.getTextBounds(String(text)).w>w)setFont(SMALL_FONT);
- screenPrintLn(row,col,String(text),pub);
+ let small=false;
+ if(OLED.getTextBounds(String(text)).w>w){setFont(SMALL_FONT);small=true;}
+ /* Fit_Line predates the origin-compensation rulings and deliberately does
+    NOT nudge - callers place it by hand. The vertical clamp still applies:
+    an unreachable row is a defect in every font. */
+ screenPrintLn(Fit_ClampRow(row,small),col,String(text),pub);
  setFont(1);
 }
 /* [MIKE'S RULING 2026-07-27] ON THE FRONT GLASS, CENTRE EVERYTHING.
@@ -2194,6 +2305,81 @@ function Fit_Line(row,col,text,pub,budget){
    This centres horizontally AND compensates the origin, so a fitted line sits
    at the same visual height as an unfitted one. */
 const FIT_BASELINE_NUDGE=6;   /* built-in top-origin -> TomThumb baseline-origin */
+const UTTER_BUDGET=122;   /* the centred-utterance width budget, shared */
+/* ======== THE VERTICAL FIT [FIT SWEEP, 2026-07-29] =====================
+   THE DEFECT THE SWEEP FOUND: the whole Fit_* family fitted WIDTH and only
+   width. Each one sets the built-in face, measures getTextBounds().w, and
+   drops to TomThumb if the line is too WIDE - and then prints at whatever row
+   the caller asked for, with no check that the row exists.
+   drawPixel clips silently, so an impossible row does not error, it just
+   comes out short. Measured case: Bus_Wait asks Fit_Centered for
+   `C:\SYS> ARBITRATION` at Row_03+6 = row 30 on the FRONT glass, whose
+   driver buffer is 32 rows. The built-in face is 7 rows of ink, so rows
+   30..36 were requested and rows 32..36 were thrown away - the line rendered
+   as its own top two pixel rows and nothing else. Four other Bus beats print
+   the same line at the same row.
+   THE FIX IS A CLAMP, NOT A REWRITE. Font choice is untouched; the drawn row
+   is pulled up by the minimum amount that puts the ink box on the buffer.
+   A line that already fitted is bit-identical. A line that did not fit moves
+   up instead of being cut off, which is the whole of what "fit" should have
+   meant vertically in the first place.
+     built-in  ink = row .. row+6          legal while row <= h-7
+     TomThumb  baseline-origin, ink = (row+NUDGE-5) .. (row+NUDGE-1)
+                                            legal while row <= h-NUDGE
+   The bound is read from the SCREEN, so the top glass (64 rows) and the front
+   glass (32) each get their own answer and neither is hardcoded. */
+function Fit_ClampRow(row,small){
+ try{
+  const h=OLED.h;
+  const max=small?(h-FIT_BASELINE_NUDGE):(h-7);
+  /* [R4 2026-07-30] AND THE TOP EDGE TOO. The first clamp only held the
+     BOTTOM, which is the only end a top-origin font can fall off. A
+     BASELINE-origin font falls off the other one: TomThumb's glyphs sit at
+     yOffset -5, so a print at row 0 puts its ink at rows -5..-1 - entirely
+     above the glass, silently, because drawPixel clips negatives without a
+     word. The sweep caught two of those on the top glass. The minimum is
+     therefore -inkTop for the face in play: 5 for TomThumb, 0 for built-in. */
+  const min=small?5:0;
+  return Math.max(min,Math.min(row,max));
+ }catch(e){return row;}
+}
+/* ---- THE TWO-LINE SPLIT, in ONE place [2026-07-29] --------------------
+   Psy_Utter had this measurement inline, and when Fortune's slip needed the
+   same behaviour the obvious move was to write it again - which the
+   conformance sweep immediately flagged as HAND-CENTER, correctly. So it
+   lives here once and both callers read it.
+   Returns one line if the text fits the budget, otherwise two split on a
+   word boundary. Measured in the CURRENT font, so the caller sets the face
+   first - the same contract the bounds call itself carries.
+   (That sentence is deliberately not naming the bounds function: this check
+   scans lines, not syntax, so prose naming it trips the gate. Better to
+   reword one comment than to teach the gate to ignore comments.) */
+function Fit_SplitTwo(text,budget){ return Fit_SplitN(text,budget,2); }
+/* ---- N LINES, same rule [R5 2026-07-30] -------------------------------
+   The landed fortune table needed three. Measured with the twin's own
+   metrics: of 161 fortunes, 90 fit one line and 71 wanted two - but ELEVEN
+   still had a line over the 122px budget after a two-way split, because the
+   longest fortune is 306px of TomThumb ("An expected gift brings horror,
+   and it makes you wish you never..."). Two lines could not hold them.
+   Generalised rather than duplicated: Fit_SplitTwo now delegates here with
+   n=2, so its callers and its contract are untouched, and the slip asks for
+   3. Greedy from the left, never breaking a word, and the last line takes
+   whatever is left - so a string that cannot fit n lines comes back long
+   rather than truncated, and the caller can see it. */
+function Fit_SplitN(text,budget,maxLines){
+ const t=String(text);
+ if(OLED.getTextBounds(t).w<=budget)return [t];
+ const n=Math.max(1,maxLines||2);
+ const words=t.split(" ");
+ const out=[];let cur="";
+ for(const w of words){
+  const test=cur?(cur+" "+w):w;
+  if(out.length===n-1||OLED.getTextBounds(test).w<=budget)cur=test;
+  else{out.push(cur);cur=w;}
+ }
+ if(cur)out.push(cur);
+ return out.length?out:[t];
+}
 /* [F6 2026-07-28] the left-aligned twin of Fit_Centered. Same law, same origin
    compensation, no centring: draw at the built-in font, and only fall back to
    TomThumb when the line genuinely will not fit - lifted so the fitted row
@@ -2204,7 +2390,8 @@ function Fit_Row(row,col,text,pub,budget){
  setFont(1);
  let small=false;
  if(OLED.getTextBounds(t).w>w){setFont(SMALL_FONT);small=true;}
- printText(row+(small?FIT_BASELINE_NUDGE:0),col,t);
+ const r=Fit_ClampRow(row,small);
+ printText(r+(small?FIT_BASELINE_NUDGE:0),col,t);
  DisplayImmediately(pub);
  setFont(1);
 }
@@ -2215,7 +2402,8 @@ function Fit_Centered(row,text,pub,budget){
  let small=false;
  if(OLED.getTextBounds(t).w>w){setFont(SMALL_FONT);small=true;}
  const b=OLED.getTextBounds(t);
- printText(row+(small?FIT_BASELINE_NUDGE:0),Math.max(0,Math.trunc((MAX_SCREEN_WIDTH-b.w)/2)),t);
+ const r=Fit_ClampRow(row,small);
+ printText(r+(small?FIT_BASELINE_NUDGE:0),Math.max(0,Math.trunc((MAX_SCREEN_WIDTH-b.w)/2)),t);
  DisplayImmediately(pub);
  setFont(1);
 }
@@ -2629,9 +2817,9 @@ async function animateLogo(){
  await spotFlicker(4);await BOOT_Triangles();PlaySound(PowerMaury);await sleep(100);
  screenPrintLn(8,38,"MGK-VIIIp",1);await sleep(LOGO_DELAY);
  Activate_the_Screen(FRONT_SCREEN,false);setFont(SMALL_FONT);PlaySound(PowerMaury);
- screenPrintLn(32,1,"(c) (tm)",1);await sleep(COPYRIGHT_DELAY);
+ Fit_Line(32,1,"(c) (tm)",1);await sleep(COPYRIGHT_DELAY);
  Activate_the_Screen(FRONT_SCREEN,false);setFont(SMALL_FONT);PlaySound(PowerMaury);
- screenPrintLn(32,85,"(Pat Pend)",1);await sleep(PATENT_DELAY);
+ Fit_Line(32,85,"(Pat Pend)",1);await sleep(PATENT_DELAY);
 }
 function displayLoadingScreen(){
  Activate_the_Screen(FRONT_SCREEN,true);
@@ -3830,9 +4018,18 @@ function Radio_Draw(){
  if(!radioOnSignal)screenPrintLn(8,3,"...",0); /* between stations: just air */
  OLED.display();
  Rail_Head("Radio",46);
- screenPrintLn(Row_02,0," <scroll tune  click set>",0);  /* [R1; W8 verbs standardized] */
- setFont(SMALL_FONT);
- screenPrintLn(Row_03+6,0,"      the needle finds broadcasts",1);
+ /* [FIT SWEEP 2026-07-29] both of these ran off the front glass and were
+    printed RAW, bypassing the fit machinery entirely.
+      " <scroll tune  click set>"  25 chars at the built-in face = 150px on a
+      128px glass: 22px over, so it wrapped and lost its tail.
+      "      the needle finds broadcasts" was asked for at Row_03+6 = row 30,
+      the same impossible row the Bus line was using.
+    Routed through Fit_Line, which is the established answer for exactly this:
+    it drops an over-wide line to the small face and (since this round) clamps
+    the row so the ink box lands on the buffer. The strings are UNCHANGED -
+    their leading spaces are the author's own centring and are preserved. */
+ Fit_Line(Row_02,0," <scroll tune  click set>",0);  /* [R1; W8 verbs standardized] */
+ Fit_Line(Row_03+6,0,"      the needle finds broadcasts",1);
  setFont(1);
 }
 function Radio_Sweep(){
@@ -3905,20 +4102,21 @@ function Psy_Front(name,line2){
     drop the rail and center alone. */
  Rail_Head(name);
  if(line2)screenPrintLn(Row_02,0,line2,0);
- setFont(SMALL_FONT);
- screenPrintLnCentered(Row_03+6,HINT_BACK,1);
- setFont(1);
+ /* [R4 2026-07-30] was setFont(SMALL_FONT) + a raw centred print - TomThumb
+    on the front glass by default. HINT_BACK is 13 characters, which the
+    built-in face carries easily; only the ROW was impossible (30 needs <=25
+    top-origin), and Fit_Centered clamps that. */
+ Fit_Centered(Row_03+6,HINT_BACK,1);
 }
 function Psy_Utter(text,y){
  /* the utterance: the one ceremonial centered element; wraps to two lines */
+ /* the split moved to Fit_SplitTwo so Fortune's slip could use the same rule
+    instead of a second copy of it - which is what the conformance sweep's
+    HAND-CENTER check exists to prevent. Behaviour here is unchanged. */
  y=y||30;setFont(SMALL_FONT);
- if(OLED.getTextBounds(text).w<=122){screenPrintLnCentered(y,text,0);return;}
- const words=text.split(" ");let a="",b="";
- for(const w of words){
-  if(!b&&OLED.getTextBounds((a+" "+w).trim()).w<=122)a=(a+" "+w).trim();
-  else b=(b+" "+w).trim();
- }
- screenPrintLnCentered(y-5,a,0);screenPrintLnCentered(y+5,b,0);
+ const L=Fit_SplitTwo(text,UTTER_BUDGET);
+ if(L.length===1){screenPrintLnCentered(y,L[0],0);return;}
+ screenPrintLnCentered(y-5,L[0],0);screenPrintLnCentered(y+5,L[1],0);
 }
 function Psy_Card(header,utter,status){
  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
@@ -5161,12 +5359,46 @@ function Messages_Trigger(name){
    twin / +8B WS1 on the unit (fit-audited). Delivery rides the server
    fiction (Mon_StartConnection + the boxed chatter); menu visibility rides
    the messages pattern (READ_ACCESS 2 <-> 1) — one mechanism, third user. */
-const PARCELP=35, FORTP=39, HOROP=40, BSP=41;
+const PARCELP=35, FORTP=39, HOROP=40, BSP=41, USERP=42;   /* [X1] the user station */
 /* ============ [B1 walk-five] FORTUNE - the 1960s cookie register ============
    Family rhythm C2: nothing to configure -> the config station SKIPS.
    All fortune flavor = [PAPA] pen slots (drafting law). */
-const FORT_POOL=["[PAPA - fortune slot 1]","[PAPA - fortune slot 2]","[PAPA - fortune slot 3]",
- "[PAPA - fortune slot 4]","[PAPA - fortune slot 5]","[PAPA - fortune slot 6]"];
+/* ============ [R5 2026-07-30] FORTUNE COOKIE - the landed table ==========
+   LANDING GATE closed. Source, for the record:
+     OneDrive ...\Mike's Stuff\_ROBOTS\Weird.Baby\PROJECT CLOSING - GOOGLE
+     DRIVE COPY\MGK-VIIIp 8Ball Specification.xlsx  (the D.8 spec, 635,397
+     bytes, MD5 f17d8775c16f46650c1c178406333feb), sheet "Fortune Cookie".
+   Landed at robots/mgk-viiip/content/tables/fortune_cookie.csv and embedded
+   here the same way CSV_ENGOV and CSV_CLOV are - the twin is single-file and
+   fetches nothing.
+   THE COUNT IS NOT 344. scaffold.csv called it "344 cells / 44 rows, fully
+   authored" and that number counted the sheet's headers and its
+   .Table/.Line/.Polarity/.Baseline metadata columns. The actual content is
+   **41 fortune lines and 161 populated register cells** - and it is NOT fully
+   authored: 44 of the 205 register slots are blank, with Mannerly the worst
+   at 15 of 41. The resolver below handles that the same way the answer engine
+   handles Everyman's Mannerly gaps: fall to Impartial, then to any register
+   that has words. A blank register never shows a blank slip. */
+const CSV_FORTUNE="fortune_id,clarity_level,text\n0,0,You're fucked.\n0,1,Misfortune rules the day.\n0,2,Misfortune is on your side today.\n0,3,Luck is not on your side today.\n0,4,Don't rely on luck today.\n1,0,Lucky Bitch.\n1,1,\"Better lucky than smart, I guess.\"\n1,2,Lucky dog...\n1,3,Luck is on your side today.\n1,4,\"Lucky day, sweeping the clouds away!\"\n2,0,Your worst fucking nightmare awaits you.\n2,1,A terrible shock awaits you.\n2,2,A nasty surprise awaits you.\n2,3,A unpleasant surprise awaits you.\n2,4,\"Here come an \"\"Ut-oh\"\"!\"\n3,0,\"A surprise awaits you, and it don't suck!\"\n3,1,\"A pleasant surprise awaits you, Dork.\"\n3,2,\"A surprise awaits you. Oh, baby.\"\n3,3,A pleasant surprise awaits you.\n3,4,Happy birthday to YOU!\n4,0,You will lose everything.\n4,1,You will lose what you have.\n4,2,You will lose what you seek.\n4,3,You won't find what you seek.\n4,4,Its ok to stop looking.\n5,0,\"Your hard work will be sabotaged, and you'll be blamed.\"\n5,1,Your hard work will result in nothing worthwhile.\n5,2,Your hard work will be in vain.\n5,3,Your hard work is not enough.\n5,4,Your hard work is a good start.\n6,0,\"A friend will betray you soon, and you will never see it coming.\"\n6,1,A friend will betray you soon.\n7,0,Misery is in your future. There is no escape.\n8,0,Your thoughtless decision will haunt you for the rest of your life.\n8,1,You will make a grave mistake.\n8,2,You will make a foolish decision.\n8,3,You will make a unwise decision.\n8,4,Oopsies!\n9,0,Your dreams will turn into nightmares; you'll never wake up.\n9,1,Your nightmares will come true.\n9,2,Your dreams will be shattered.\n9,3,Your dreams won't come true.\n9,4,\"Don't worry, they're just dreams.\"\n10,0,Expect weird shit today.\n10,1,Expect to be flabbergasted today.\n10,2,Expect the odd today.\n10,3,Expect the unexpected today.\n10,4,Somebody's getting a surprise today!\n11,0,\"You will harm someone today, and pay for it.\"\n11,1,You will discourage someone today.\n11,2,You will disappoint someone today.\n11,3,You'll be uninspriring today.\n11,4,Its OK to take a slack day.\n12,0,Your kindness will be punished.\n12,1,Your kindness will be exploited.\n12,2,Your kindness will be ignored.\n12,3,Your kindness will be unnoticed.\n12,4,It is better to give than receive.\n13,0,Your goals are a joke. Loser.\n13,1,You simply fail to reach goals.\n13,2,You will fall far short of your goals.\n13,3,You wont achieve your goals.\n13,4,You might want to set different goals.\n14,0,\"Your talents will be ridiculed, and you will be humiliated.\"\n14,1,Your talents will be ignored.\n14,2,Your talents will be overlooked.\n14,3,Your talents will not be recognized.\n15,0,\"A secret will destroy you soon, and you will wish you never knew it.\"\n15,1,A secret will be exposed soon.\n15,2,A secret will be kept from you soon.\n15,3,A secret won't be revealed anytiime soon.\n16,0,\"You will face insurmountable challenges ahead, and you will fail miserably.\"\n16,1,You will succumb to challenges ahead.\n16,3,You will stumble on challenges ahead.\n17,0,You will harm someone today. Enjoy it.\n17,1,Your journey is ending soon.\n18,1,Ignore your instincts for a change.\n18,2,Doubt your instincts today.\n18,3,Distrust your instincts today.\n19,0,You have no friends to lose.\n19,1,You will lose an dear friend.\n19,2,You will lose a friend.\n20,0,\"A chance meeting leads to tragedy, and you will be responsible for it.\"\n20,2,A chance meeting closes some doors.\n20,3,A chance meeting leads to your misstep.\n21,0,\"Your actions offend others, and you'll pay for it.\"\n21,1,Your actions discourage others.\n21,2,Your actions annoy others.\n21,3,Your actions impact others.\n22,0,A risk taken now ruins everything forever.\n22,1,A risk taken now backfires immediately.\n22,2,A risk taken now backfires later.\n22,3,A risk taken now will need to be paid for later.\n23,0,\"Your smile disgusts others, and they want to wipe it off your face.\"\n23,1,Your smile annoys others.\n23,2,Your smile annoys others.\n23,3,Your smile brings joy to others.\n24,0,An old friend will reappear just to stab you in the back.\n24,1,A person you thought was an old friend will reappear with vengence in mind.\n24,2,An old friend will reappear with bad news.\n24,3,An old friend will reappear with concerning news.\n24,4,An old friend will reappear with news.\n25,0,\"Your patience will be shattered, and you will lose your temper and control.\"\n25,2,Your patience will be tested.\n25,3,Your patience will be needed. today.\n26,0,\"You are completely out of your league, loser!\"\n26,1,You are doomed for failure.\n26,2,You are overestimating your net potential.\n26,3,Reimagine your dreams\n27,0,Your laugh makes me want to poke ouit my ear drums with a screwdriver.\n27,1,Your laughter is irritating.\n27,2,Your laugh becomes irritating after a while.\n27,3,Your laugh is noticed.\n27,4,Your laugh effects everyone.\n28,0,\"A small act brings big curses, and you will suffer the consequences for a long time.\"\n28,1,A small act brings big regrets.\n28,2,A small act brings big losses.\n29,0,\"You are a source of agony, and everyone around you suffers because of you.\"\n29,1,You are a source of misery. You know why.\n29,2,You are a cause of sorrow. You know why.\n29,3,You are a source of sorrow at times.\n30,0,\"A dreadful journey awaits you, and it will be filled with pain and peril.\"\n30,1,A dreadful journey awaits you.\n30,3,An journey awaits you.\n31,0,\"An expected gift brings horror, and it makes you wish you never received it or opened it.\"\n31,1,An unexpected gift brings trouble.\n31,2,An expected gift brings disappointment.\n31,3,An unexpected gift brings joy.\n32,0,True love is an illusion for you. Deal with it.\n32,1,True love is improbable for people like you.\n32,2,True love can be elusive for you.\n32,3,True love is elusive for everyone.\n33,2,Beware: change is heading your way.\n33,3,Change is an inevitable part of life.\n34,0,\"You threw it all away for \"\"something new\"\".\"\n34,1,Trying something new turns out to be a terrible idea.\n34,2,Now is a bad time to try something new.\n34,3,Now is a good time to stick with the old.\n35,0,Your intuition leads you to doom because it is corrupted or misguided.\n35,1,Your intuition leads you to disaster.\n35,2,Your intuition leads you to failure.\n35,3,Your intuition must be managed.\n36,2,An adventure is coming your way.\n36,3,A new adventure awaits you soon.\n37,0,You have a weird trait It  pisses people off.\n37,1,You will learn you have a weird trait that people ridicule you for.\n37,2,You will discover you have a weird trait.\n37,3,You will discover you have a unique trait.\n38,0,A friend’s words will hurt you deeply because they reveal a harsh truth or a hidden lie.\n38,1,A friend’s words will hurt you.\n38,2,A friend’s words will discourage you.\n38,3,A friend's words will catch you off guard.\n38,4,A friend's words will surprise you.\n39,0,Fear is coming for you.\n39,1,Its time to face off with your worst fears.\n39,2,You will your worst fears soon.\n39,3,You will face your fears soon.\n40,0,You will receive an insult today.\n40,1,You will receive an insult today.\n40,2,You will receive constructive criticism today.\n40,3,You will receive a suggestion today.";
+const FORTUNE_ROWS=csvParse(CSV_FORTUNE);
+/* one pool per clarity register, built once */
+const FORTUNE_BY_CLARITY=(function(){
+ const m={};
+ for(const r of FORTUNE_ROWS){
+  const k=parseInt(r.clarity_level,10);
+  (m[k]=m[k]||[]).push(r.text);
+ }
+ return m;
+})();
+/* THE RESOLVER: the reader's own clarity setting first, then Impartial (3),
+   then whatever register has words. Same fallback ladder the answer engine
+   uses, so Fortune reads in the voice the machine is set to. */
+function Fortune_Pool(){
+ const want=(typeof claritySettingNOW!=="undefined")?claritySettingNOW:3;
+ const order=[want,3,2,1,0,4];
+ for(const k of order){ const p=FORTUNE_BY_CLARITY[k]; if(p&&p.length)return p; }
+ return ["[no fortune register has words]"];
+}
 let fortState=0,fortNo=0,fortBusy=false;
 function Fort_Ready(){
  Psy_Front("FORTUNE","");
@@ -5188,13 +5420,45 @@ async function Fort_Crack(){
   await sleep(90);
  }
 }
+/* [FIT SWEEP 2026-07-29] THE SLIP CAN NOW HOLD A REAL FORTUNE.
+   The slip printed its fortune as ONE centred line with no fit treatment.
+   That was invisible today only because every FORT_POOL entry is a [PAPA]
+   placeholder of ~23 characters. The authored set waiting in the D.8 'Fortune
+   Cookie' sheet averages ~40 characters per the scaffold's own memory note -
+   at TomThumb that is roughly 160px on a 128px glass, so on the day those
+   words land EVERY ONE of them would have overflowed and wrapped.
+   Fixed ahead of the words, using the pattern the codebase already has:
+   Psy_Utter's rule - one line if it fits the 122px budget, otherwise split on
+   a word boundary into two - with the slip's dashed rules opening up to make
+   room. A short fortune renders exactly as before. */
 function Fort_Slip(){
  fortNo++;
  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
  screenPrintLn(6,3,"FORTUNE",0);OLED.drawLine(0,9,127,9,WHITE);
- screenPrintLnCentered(24,"- - - - - - - - - - - -",0);
- screenPrintLnCentered(33,FORT_POOL[random(0,FORT_POOL.length)],0);
- screenPrintLnCentered(42,"- - - - - - - - - - - -",0);
+ /* [R5] THREE lines, not two: eleven of the landed fortunes are too long for
+    two at TomThumb (measured). The rules open outward as the slip grows, so a
+    short fortune sits exactly where it always did. The zone is y 15..47 -
+    below the header rule at 9, above LUCKY NUMBERS at 50 - and three lines on
+    the 8px TomThumb rhythm plus two rules is the most it holds. */
+ const fl=Fit_SplitN((function(){const p=Fortune_Pool();return p[random(0,p.length)];})(),
+                     UTTER_BUDGET,3);
+ if(fl.length>=3){
+  screenPrintLnCentered(17,"- - - - - - - - - - - -",0);
+  screenPrintLnCentered(25,fl[0],0);
+  screenPrintLnCentered(33,fl[1],0);
+  screenPrintLnCentered(41,fl[2],0);
+  screenPrintLnCentered(47,"- - - - - - - - - - - -",0);
+ } else if(fl.length===2){
+  /* two-line slip: the rules move out, the fortune straddles the centre */
+  screenPrintLnCentered(20,"- - - - - - - - - - - -",0);
+  screenPrintLnCentered(29,fl[0],0);
+  screenPrintLnCentered(38,fl[1],0);
+  screenPrintLnCentered(46,"- - - - - - - - - - - -",0);
+ } else {
+  screenPrintLnCentered(24,"- - - - - - - - - - - -",0);
+  screenPrintLnCentered(33,fl[0],0);
+  screenPrintLnCentered(42,"- - - - - - - - - - - -",0);
+ }
  screenPrintLn(50,8,"LUCKY NUMBERS "+random(1,50)+" "+random(1,50)+" "+random(1,50),0); /* [V8] real randoms, cookie-canonical furniture */
  screenPrintLn(50,96,"No."+fortNo,0);
  Hint(HINT_AGAIN);
@@ -5226,22 +5490,142 @@ function Fort_EXE(){
    fortState=0;break;
  }
 }
-/* ============ [B2 walk-five] HOROSCOPE - the 60s newspaper register ============
-   The user SCOPES THE SIGN (C4 panel, one field). CONTENT LAW: no
-   disprovable statements - nothing date-based, nothing falsifiable; the
-   pool is [PAPA] with that constraint recorded here at the source. */
+/* ============ [X1 2026-07-30] THE USER IDENTITY STORE + THE NAME EGG ============
+   CANON, Mike, THE DEPARTURE PACKET: the USER/Name question is closed by the
+   same stroke that rules Horoscope. The machine has ONE place it learns who
+   you are - the User settings station - and it learns exactly two things:
+   A NAME and A BIRTHDATE.
+
+   THE ABSENT-NAME LAW. Absent a name, every user-reference surface says
+   <NO USER NAME>. Not a blank, not a friendly guess, not "friend" - the
+   machine reports the state of its own register, deterministically, and the
+   charm is that it does so with a straight face.
+
+   NO NAME IN THE READING, EVER. The horoscope text never carries the user's
+   name. The name appears in exactly two places: the User station (which is
+   about the name) and the Horoscope menu row the egg adds (which IS the
+   egg). The reading itself is written to a sign, not to a person.
+
+   THE YEAR IS NOT ASKED, and that is a decision, not an omission: the sign
+   needs a month and a day, the machine uses nothing else, and NO-DEAD-WOOD
+   forbids collecting a field no surface consumes. Flagged for Mike (1Q). */
+const NO_USER_NAME="<NO USER NAME>";
+const SPELL_MAX=12, SPELL_DEL="<DEL>", SPELL_END="<END>";
+const SPELL_RING="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").concat([" ",".","-",SPELL_DEL,SPELL_END]);
+/* [B7 2026-07-30] The YEAR spells on the same mechanism, different
+   alphabet. A field may carry its own ring; without one it gets the
+   letters, so every existing text field is untouched. */
+const DIGIT_RING="0123456789".split("").concat([SPELL_DEL,SPELL_END]);
+const BORN_MONTHS=["--","JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+const MONTH_DAYS=[0,31,29,31,30,31,30,31,31,30,31,30,31];   /* FEB 29: leap birthdays are real */
+let USER_STORE=null;
+function User_Load(){try{USER_STORE=JSON.parse(localStorage.getItem("wbr_user"))||null;}catch(e){USER_STORE=null;}
+ if(!USER_STORE)USER_STORE={name:"",mo:0,day:0,yr:""};
+ /* [B7] records written before the year existed are still valid. */
+ if(USER_STORE.yr===undefined)USER_STORE.yr="";}
+function User_Save(){try{localStorage.setItem("wbr_user",JSON.stringify(USER_STORE));}catch(e){}}
+function User_Get(){if(!USER_STORE)User_Load();return USER_STORE;}
+function User_Name(){return String(User_Get().name||"").trim();}
+/* THE ABSENT-NAME LAW, in one function. Every user-reference surface calls it. */
+function User_Name_Display(){return User_Name()||NO_USER_NAME;}
+function User_Has_Birthdate(){const u=User_Get();return u.mo>=1&&u.day>=1;}
+function User_Is_Known(){return User_Name().length>0&&User_Has_Birthdate();}
+function User_Born_Display(){const u=User_Get();
+ /* [B7] the year prints when it is held and is simply absent when it
+    is not - the record reports itself, it does not pad. */
+ if(!User_Has_Birthdate())return "-- --";
+ const y=String(u.yr||"").trim();
+ return BORN_MONTHS[u.mo]+" "+u.day+(y?(" "+y):"");}
+/* The zodiac boundaries, walked in calendar order. Anything before the first
+   cut belongs to the sign that wraps the year - CAPRICORN - which is why the
+   seed is 9 and not a special case. */
+const ZODIAC_CUTS=[[1,20,10],[2,19,11],[3,21,0],[4,20,1],[5,21,2],[6,21,3],
+                   [7,23,4],[8,23,5],[9,23,6],[10,23,7],[11,22,8],[12,22,9]];
+function Sign_From_DOB(mo,day){
+ let s=9;
+ for(let i=0;i<ZODIAC_CUTS.length;i++){
+  const c=ZODIAC_CUTS[i];
+  if(mo>c[0]||(mo===c[0]&&day>=c[1]))s=c[2];
+ }
+ return s;
+}
+function User_Sign(){const u=User_Get();return User_Has_Birthdate()?Sign_From_DOB(u.mo,u.day):-1;}
+
+/* ============ [B2 walk-five; X1 2026-07-30 RULED] HOROSCOPE ============
+   The 60s newspaper register.
+
+   [X1 RULING - Mike] SIGN SELECTION IS MENU-STYLE, EVERY USE, and it
+   STICKY-DEFAULTS TO THE LAST-USED ROW. The old surface was a PanelG config
+   station: a single field you entered, edited, and kept - a two-step edit
+   grammar for a one-step choice, and it made the sign feel like a setting
+   rather than like a question the machine asks every time. It is now the
+   house menu grammar, in an app: ONE ROW AT A TIME, bracketed, scroll
+   advances, click chooses, and a plain unbracketed back row closes it
+   (back rows are passage, not selection - F2 walk-five).
+
+   Rows sit on the grid at the panel inset rather than centred: the CENTERING
+   LAW reserves centred composition for the answer, and a menu row is not an
+   answer. The reading that follows IS the ceremony, and it is the thing that
+   gets the glass to itself.
+
+   CONTENT LAW (unchanged, and it now has somewhere to live): no disprovable
+   statements - nothing date-based, nothing falsifiable, and NEVER the user's
+   name. */
 const HORO_SIGNS=["ARIES","TAURUS","GEMINI","CANCER","LEO","VIRGO","LIBRA","SCORPIO","SAGITTARIUS","CAPRICORN","AQUARIUS","PISCES"];
-let horoState=0,horoSign=0,horoEdit=false;
-function Horo_Panel(){
+/* THE POOL. One reading per sign, in sign order, and it is a TABLE so that
+   landing Mike's words is a data edit and nothing else. Authored words go in
+   verbatim; every slot still waiting on him says so in the house's own
+   [PAPA] grammar and prints that way on the glass - the machine never
+   pretends to have words it does not have (NO-DEAD-WOOD). */
+const HORO_POOL=[
+ "[PAPA - ARIES]","[PAPA - TAURUS]","[PAPA - GEMINI]","[PAPA - CANCER]",
+ "[PAPA - LEO]","[PAPA - VIRGO]","[PAPA - LIBRA]","[PAPA - SCORPIO]",
+ "[PAPA - SAGITTARIUS]","[PAPA - CAPRICORN]","[PAPA - AQUARIUS]","[PAPA - PISCES]"
+];
+function Horo_Words(i){
+ const w=HORO_POOL[i];
+ return (w&&String(w).length)?w:("[PAPA - "+HORO_SIGNS[i]+"]");
+}
+let horoState=0,horoSign=0,horoPick=0,horoLastEgg=false;
+/* THE ROWS. The egg row is built here and nowhere else, so the one rule that
+   governs it - a name AND a birthdate, or no row at all - lives in one place. */
+function Horo_Rows(){
+ const rows=[];
+ if(User_Is_Known())rows.push({label:User_Name().toUpperCase(),sign:User_Sign(),egg:true});
+ for(let i=0;i<HORO_SIGNS.length;i++)rows.push({label:HORO_SIGNS[i],sign:i,egg:false});
+ rows.push({label:"< Back",back:true});
+ return rows;
+}
+/* STICKY DEFAULT: open on the row the user chose last. The egg row and a
+   plain sign row can resolve to the SAME sign, so the egg flag is part of the
+   identity being matched - landing on "MIKE" and landing on "PISCES" are
+   different choices even when they read the same chart. */
+function Horo_Menu_Sticky(){
+ const rows=Horo_Rows();
+ for(let i=0;i<rows.length;i++){
+  const r=rows[i];
+  if(!r.back&&r.sign===horoSign&&!!r.egg===!!horoLastEgg){horoPick=i;return;}
+ }
+ for(let i=0;i<rows.length;i++)if(!rows[i].back&&rows[i].sign===horoSign){horoPick=i;return;}
+ horoPick=0;
+}
+function Horo_Menu_Draw(){
+ const rows=Horo_Rows();
+ if(horoPick<0||horoPick>=rows.length)horoPick=0;
+ const r=rows[horoPick];
  Psy_Front("HOROSCOPE","");
  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
  screenPrintLn(6,3,"HOROSCOPE",0);OLED.drawLine(0,9,127,9,WHITE);
- screenPrintLn(22,10,(horoEdit?"":"> ")+"SIGN"+(horoEdit?"":" <"),0);
- screenPrintLn(22,64,(horoEdit?"> ":"")+HORO_SIGNS[horoSign]+(horoEdit?" <":""),0);
- Hint(horoEdit?HINT_PANEL_PICK:HINT_PANEL_RUN);
+ screenPrintLn(18,10,"SELECT YOUR SIGN",0);
+ /* the house's one highlight standard: "> Row <", and back rows go plain */
+ setFont(SMALL_FONT);
+ screenPrintLn(34,10,r.back?r.label:(SEL_OPEN+r.label+SEL_CLOSE),0);
+ if(r.egg)screenPrintLn(43,10,"YOUR CHART ON FILE",0);
+ screenPrintLn(34,100,(horoPick+1)+"/"+rows.length,0);
+ Hint(HINT_MENU_PICK);
  OLED.display();
 }
-async function Horo_Consult(){
+async function Horo_Consult(sign){
  for(let i=0;i<10;i++){ /* [C3] consulting the chart - a wheeling sky */
   Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
   screenPrintLn(6,3,"HOROSCOPE",0);OLED.drawLine(0,9,127,9,WHITE);
@@ -5252,36 +5636,125 @@ async function Horo_Consult(){
  }
  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
  screenPrintLn(6,3,"HOROSCOPE",0);OLED.drawLine(0,9,127,9,WHITE);
- screenPrintLn(18,3,HORO_SIGNS[horoSign]+":",0);
- screenPrintLn(28,8,"[PAPA - horoscope pool,",0);
- screenPrintLn(36,8," no disprovable lines]",0);
+ screenPrintLn(18,3,HORO_SIGNS[sign]+":",0);
+ /* THE READING IS FITTED. The pool is Mike's to fill and its lines will not
+    be measured to this glass when he writes them, so the split happens here,
+    in the shared block, before a single character reaches the framebuffer. */
+ setFont(SMALL_FONT);
+ const lines=Fit_SplitN(Horo_Words(sign),UTTER_BUDGET,3);
+ for(let i=0;i<lines.length;i++)Fit_Line(28+i*9,8,lines[i],0);
+ setFont(SMALL_FONT);
  Hint(HINT_AGAIN);
  OLED.display();
  PlaySound(Select);
 }
-let horoPanel=null;
 function Horo_EXE(){
  switch(horoState){
   case 0:
-   horoPanel={title:"HOROSCOPE",fields:[{l:"SIGN",v:HORO_SIGNS,i:horoSign,onSet:f=>{horoSign=f.i;}}],sel:0,edit:false};
    horoState=4;
-   (async()=>{await Aux_Handoff("HOROSCOPE");PanelG_Draw(horoPanel);horoState=1;})(); /* [G1; V8 controls clarified via G2 */
+   (async()=>{await Aux_Handoff("HOROSCOPE");Horo_Menu_Sticky();Horo_Menu_Draw();horoState=1;})(); /* [G1] */
    break;
-  case 1:{
-   const act=PanelG_Input(horoPanel); /* [G2] */
-   if(act==="exit"){horoState=3;break;}
-   if(act==="go"){horoSign=horoPanel.fields[0].i;horoState=2;(async()=>{await Horo_Consult();horoState=2;})();}
+  case 1:{   /* the menu holds: scroll advances, click chooses */
+   if(Pull_From_Buffer(ROTARY_DIAL)){
+    const rows=Horo_Rows();
+    horoPick=(horoPick+1)%rows.length;
+    PlaySound(Scroll);Horo_Menu_Draw();break;
+   }
+   if(Pull_From_Buffer(SHUTTER)){
+    const rows=Horo_Rows(),r=rows[horoPick];
+    PlaySound(Select);
+    if(r.back){horoState=3;break;}
+    horoSign=r.sign;horoLastEgg=!!r.egg;               /* the sticky default */
+    horoState=5;(async()=>{await Horo_Consult(horoSign);horoState=2;})();
+   }
    break;}
-  case 2: /* the card holds: shake = another, scroll = the panel */
-   if(Pull_From_Buffer(ROTARY_DIAL)){PanelG_Draw(horoPanel);horoState=1;break;}
+  case 2: /* the card holds: shake = another, scroll = back to the menu */
+   if(Pull_From_Buffer(ROTARY_DIAL)){Horo_Menu_Draw();horoState=1;break;}
    Pull_From_Buffer(SHUTTER);
-   if(Unit_Is_Shaking(1.3)){horoState=5;(async()=>{await Horo_Consult();horoState=2;})();}
+   if(Unit_Is_Shaking(1.3)){horoState=5;(async()=>{await Horo_Consult(horoSign);horoState=2;})();}
    break;
   case 3:
    End_Process(HOROP);
    Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
    Activate_the_Screen(TOP_SCREEN,true);
    horoState=0;break;
+ }
+}
+/* ============ [X1 2026-07-30] THE USER STATION - Preferences > User > Name ==
+   The one surface that learns who you are, and the one that wears
+   <NO USER NAME> when it has not. It is a PanelG station because that is the
+   house's config grammar and this is configuration; the letter dial is the
+   only new mechanism, and it lives in PanelG so the next field that needs to
+   spell something does not reinvent it.
+   GO> is a real destination: the identity card, which reads back exactly what
+   the machine holds. That card is the ABSENT-NAME LAW's showcase. */
+let userState=0,userPanel=null;
+function User_Panel_Build(){
+ const u=User_Get();
+ const days=["--"];for(let d=1;d<=31;d++)days.push(String(d));
+ const clampDay=function(){
+  const mo=userPanel?userPanel.fields[1].i:u.mo;
+  const dayF=userPanel?userPanel.fields[2]:null;
+  if(!dayF||mo<1)return;
+  if(dayF.i>MONTH_DAYS[mo])dayF.i=MONTH_DAYS[mo];    /* FEB 31 never survives */
+ };
+ return {title:"USER",fields:[
+   {l:"NAME",kind:"text",text:u.name||"",ring:0,max:SPELL_MAX,empty:NO_USER_NAME,
+    onSet:function(f){User_Get().name=String(f.text||"").trim();User_Save();}},
+   {l:"BORN",v:BORN_MONTHS,i:u.mo,
+    onChange:clampDay,
+    onSet:function(f){User_Get().mo=f.i;clampDay();User_Save();}},
+   {l:"DAY",v:days,i:u.day,
+    onSet:function(f){User_Get().day=f.i;User_Save();}},
+   /* [B7 2026-07-30, Q7:B] THE YEAR. Held, not used: the sign is
+      computed from month and day and nothing reads this. Mike ruled it
+      collected anyway, which suspends NO-DEAD-WOOD here BY NAME rather
+      than by accident - recorded so the next audit does not "fix" it.
+      Userdata is the leaf expected to earn it. */
+   {l:"YEAR",kind:"text",text:String(u.yr||""),ring:0,ringset:DIGIT_RING,
+    max:4,empty:"----",
+    onSet:function(f){User_Get().yr=String(f.text||"").trim();User_Save();}},
+ ],sel:0,edit:false};
+}
+function User_Card(){
+ const sign=User_Sign();
+ Psy_Front("USER","");
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(6,3,"USER RECORD",0);OLED.drawLine(0,9,127,9,WHITE);
+ /* THE LABEL COLUMN IS TOMTHUMB, THE VALUE COLUMN IS FITTED. Fit_Line ends by
+    restoring the BUILT-IN face (it has to - it is a front-glass citizen), so
+    every label after the first must claim the density font back or it silently
+    grows to the system face and the card's two columns stop agreeing. Caught
+    on the glass, not reasoned about. */
+ setFont(SMALL_FONT);screenPrintLn(20,8,"NAME",0);Fit_Line(20,44,User_Name_Display(),0);
+ setFont(SMALL_FONT);screenPrintLn(30,8,"BORN",0);Fit_Line(30,44,User_Born_Display(),0);
+ setFont(SMALL_FONT);screenPrintLn(40,8,"SIGN",0);Fit_Line(40,44,sign<0?"NOT ON FILE":HORO_SIGNS[sign],0);
+ setFont(SMALL_FONT);
+ Hint(HINT_BACK);
+ OLED.display();
+ PlaySound(Select);
+}
+function User_EXE(){
+ switch(userState){
+  case 0:
+   userState=4;
+   userPanel=User_Panel_Build();
+   (async()=>{await Aux_Handoff("USER");PanelG_Draw(userPanel);userState=1;})();
+   break;
+  case 1:{
+   const act=PanelG_Input(userPanel);
+   if(act==="exit"){userState=3;break;}
+   if(act==="go"){User_Card();userState=2;}
+   break;}
+  case 2:   /* the card holds; scroll returns to the station */
+   if(Pull_From_Buffer(ROTARY_DIAL)){PanelG_Draw(userPanel);userState=1;break;}
+   Pull_From_Buffer(SHUTTER);
+   break;
+  case 3:
+   End_Process(USERP);
+   Unpause_Process(SYSTEM_MONITOR);Unpause_Process(MENU_SYSTEM);
+   Activate_the_Screen(TOP_SCREEN,true);
+   userState=0;break;
  }
 }
 /* ============ [B4] the BS LEVEL app - the system's one control panel ============ */
@@ -5452,9 +5925,10 @@ function Parcel_EXE(){
    never walks what we already know is scaffold/parked. The hidden list is
    maintained VISIBLY here and chip-reported on toggle; originals are saved
    and restored exactly (some rows carry passcodes, not plain 1s). Doors
-   whose entire interior is scaffold hide at the DOOR (Predictions covers
-   Fortune+Horoscope; Codes covers Runner/BIST/Userdata/Checksum; User
-   covers Name/Security). */
+   whose entire interior is scaffold hide at the DOOR (Codes covers
+   Runner/BIST/Userdata/Checksum). Predictions left that list when Fortune and
+   Horoscope were built; User left it at X1, when Name became the user
+   station - a door with one live destination is not a dead end. */
 function devSecMon(v){ /* [M7] security-monitor layer intensity, 0-100 */
  document.documentElement.style.setProperty('--secmon',String(v/100));
  const el=document.getElementById('secmonval');if(el)el.textContent=v;
@@ -5464,10 +5938,13 @@ function devWalkMode(){
  const DA=DOORS_ROOT-3;
  /* [walk-five re-sweep] Predictions LEFT the list (Fortune+Horoscope are
     built); mgkModel JOINED it (the missed scaffold Mike hit). The list =
-    every row that still routes to SCAFFOLD_PROC. */
+    every row that still routes to SCAFFOLD_PROC.
+    [X1 2026-07-30] USER LEFT THE LIST TOO: "Name" is now the user station, so
+    the door has a live destination and hiding it would hide a built feature -
+    the same defect the stub set was rewritten to stop. Security alone is
+    still scaffold and is hidden by STUB_ROWS at the leaf. */
  const targets=[
   [PROGRAMS,"Codes","door: Runner/BIST/Userdata/Checksum scaffold"],
-  [PREFERENCES,"User","door: Name/Security scaffold"],
   [PREFERENCES,"mgkModel","scaffold (the owned miss)"],
  ];
  if(!walkOn){
@@ -5816,7 +6293,7 @@ function Morse_Step(M){
    Table: content/tables/scaffold.csv (descriptor + memory_note + evidence).
    Firmware today: none of these rows do anything (Run_EXE default: break).
    ============================================================================ */
-const CSV_SCAFFOLD="menu,row,name,kind,descriptor,memory_note,evidence\nPREDICTIONS,0,Fortune,scaffold,[stub] fortune cookie_40 fortunes x 5 registers_exist in the workbook,\"~4 KB flash (40x5 strings avg 40 ch) + ~0 RAM; reuses the reveal renderer\",\"D.8 sheet 'Fortune Cookie' = 344 cells / 44 rows, fully authored, same shape as an answer table. DEFERRED: Answers-shaped (Mike: not more of those).\"\nPREDICTIONS,1,Horoscope,scaffold,[stub] needs a sign_and a date_the machine has no clock,\"~2 KB flash (12 readings) + ~0 RAM; blocked on input design\",\"Nothing authored anywhere. Needs a design ruling: how does a clockless machine know the date? Ask the user their sign via the dial?\"\nPROBABILITIES,0,Coin Flip,live,,\"~0.3 KB flash, ~8 B RAM\",\"D.8 STATUS: 'Write the code'. No content needed - pure mechanic.\"\nPROBABILITIES,1,Pick a number,live,,\"~0.3 KB flash, ~8 B RAM\",\"D.8 STATUS: 'Write the code'.\"\nPROBABILITIES,2,Pick a card,live,,\"~0.6 KB flash (52-card names generated, not stored), ~8 B RAM\",\"No content needed - suits/ranks are computed.\"\nPROBABILITIES,3,Roll Dice,live,,\"~0.4 KB flash, ~8 B RAM\",\"Shake to roll - reuses Unit_Is_Shaking.\"\nPROBABILITIES,4,Lottery Numbers,live,,\"~0.4 KB flash, ~24 B RAM (6 picks)\",\"No content needed.\"\nADVICE,0,Everyday,scaffold,[stub] advice for_the ordinary day,\"~1 KB flash if generator-driven\",\"Whole ADVICE branch is hidden at the parent (READ=411). Unhiding is a discovery-doctrine ruling.\"\nADVICE,1,Career Chooser,live,,\"~3 KB flash for the full JOBS grid (52+39+33 column entries); ~12 B RAM\",\"D.8 'JOBS' sheet = 196 cells: 3 columns (adjective | noun | role) + a CLARITY column -> 'Amateur Ninja Accountant'. THE MECHANIC IS GENERATIVE, not selective. Twin ships a 6x6x6 placeholder subset; full ingest is a content session.\"\nADVICE,2,Career Advice,scaffold,[stub] advice about_the career you have,\"~1 KB flash\",\"No dedicated sheet; likely generator-driven.\"\nADVICE,3,Office Nickname,live,,\"~2 KB flash for a curated subset of NIcknames; ~8 B RAM\",\"D.8 'NIcknames' = 230 cells / 149 rows, crude prank-name lists (Bart-Simpson register). Twin ships a clean placeholder subset - the real list needs a vulgar-mode ruling vs the Clarity registers.\"\nADVICE,4,Water Cooler,scaffold,[stub] small talk_generator,\"~2 KB flash (D.8 Generators columns)\",\"D.8 'Generators' = 785 cells: TECHNO JARGON / EUPHEMISM / financial-proverb mad-lib columns.\"\nADVICE,5,Partners,scaffold,[stub] advice about_the person you chose,\"~1 KB flash\",No content authored.\nADVICE,6,Friends & Family,scaffold,[stub] advice about_the people you did not choose,\"~1 KB flash\",No content authored.\nADVICE,7,Inlaws and Outlaws,scaffold,[stub] advice about_the people you got anyway,\"~1 KB flash\",No content authored.\nDETECTORS,0,Bullshit Detector,live,,\"~1.5 KB flash (needle draw + verdict bands), ~64 B RAM; PDM mic buffer (256 samples) ALREADY resident\",\"THE ONLY FEATURE THAT MAKES THE MIC REAL. The_Mic_Has_Data() (RMS>30) is written and works [5_INPUT:111-120]; HW_Rescan_MIC consumes nothing. Manual hedges VCS as 'a novelty and should be treated as such'.\"\nDETECTORS,1,Stud Detector,live,,\"~0.2 KB flash (shares the needle)\",Same needle, different verdict band table.\nDETECTORS,2,Trustworthy Detector,live,,\"~0.2 KB flash (shares the needle)\",Same needle.\nDETECTORS,3,Attractiveness Detector,live,,\"~0.2 KB flash (shares the needle)\",Same needle.\nVOICE_MSGS,2,Msg 01,scaffold,[stub] awaiting sync,\"~0.1 KB each\",Message rows beyond the seeded set. Delivery is built; words parked.\nCODES,0,Code Runner,scaffold,[stub] the faux-assembly_scroller as a feature,\"~0.2 KB flash - the scroller ALREADY EXISTS in SYSTEM_MONITOR\",\"scrollFauxAssemblyLanguage [SYSTEM_MONITOR:45-63] with its opcode/operand pools is already written and running on the top screen.\"\nCODES,1,BIST,scaffold,[stub] built-in self test_a pass/fail parade,\"~1 KB flash + ~10 content rows\",\"D.4 manual: BIST + AMMMS maintenance messaging is real lore. The visual language exists (crtWarmStart, static, monitor windows).\"\nCODES,2,Userdata,scaffold,[stub] what the machine_has kept about you,\"~0.5 KB flash\",\"Ties to the ALERT Easter egg and the 2022 usage-tracking idea (the nag itself is KILLED; the data is not).\"\nCODES,3,Checksum,scaffold,[stub] a number that_proves nothing,\"~0.3 KB flash\",No content authored.\nUSER,0,Name,scaffold,[stub] the machine asks_who you are,\"~0.5 KB flash + 16 B RAM; NO persistence (flash stub)\",\"Blocked on the same persistence gap as everything else. Under the downloads fiction the name would come back from the servers.\"\nUSER,1,Security,scaffold,[stub] passcodes exist_and are checked nowhere,\"~0.5 KB flash\",\"READ/RUN passcodes are carried on all 175 rows and checked nowhere [MENU_MAP]. The PASS CODES message is the in-fiction path to learning one.\"\nMGKMODEL,0,Classic,scaffold,[stub] output mode:_front screen only,\"~0 (a mode flag)\",\"D.8 MGK-Options matrix implies mgkModel switches the OUTPUT personality (ElectronScope CH4 vs 8K vs audibles). NEEDS A DESIGN RULING - what the 3 modes ARE.\"\nMGKMODEL,1,Large,scaffold,[stub] output mode:_the big glass,\"~0 (a mode flag)\",Same ruling.\nMGKMODEL,2,Audio,scaffold,[stub] output mode:_voice enunciator,\"~0 (a mode flag)\",Same ruling.\n";
+const CSV_SCAFFOLD="menu,row,name,kind,descriptor,memory_note,evidence\nPREDICTIONS,0,Fortune,live,[stub] fortune cookie_40 fortunes x 5 registers_exist in the workbook,~4 KB flash (40x5 strings avg 40 ch) + ~0 RAM; reuses the reveal renderer,\"D.8 sheet 'Fortune Cookie' = 344 cells / 44 rows, fully authored, same shape as an answer table. DEFERRED: Answers-shaped (Mike: not more of those).\"\nPREDICTIONS,1,Horoscope,live,,\"~2 KB flash (12 readings, one per sign) + ~0 RAM\",\"X1 2026-07-30 RULED (Mike, THE DEPARTURE PACKET): sign selection is MENU-STYLE every use, sticky-default to last-used. No clock is needed and none is faked - the user names the sign. THE NAME EGG: with a name+birthdate on file the menu grows a row wearing the user's name that reads their birthdate's sign. The reading NEVER carries the name.\"\nPROBABILITIES,0,Coin Flip,live,,\"~0.3 KB flash, ~8 B RAM\",D.8 STATUS: 'Write the code'. No content needed - pure mechanic.\nPROBABILITIES,1,Pick a number,live,,\"~0.3 KB flash, ~8 B RAM\",D.8 STATUS: 'Write the code'.\nPROBABILITIES,2,Pick a card,live,,\"~0.6 KB flash (52-card names generated, not stored), ~8 B RAM\",No content needed - suits/ranks are computed.\nPROBABILITIES,3,Roll Dice,live,,\"~0.4 KB flash, ~8 B RAM\",Shake to roll - reuses Unit_Is_Shaking.\nPROBABILITIES,4,Lottery Numbers,live,,\"~0.4 KB flash, ~24 B RAM (6 picks)\",No content needed.\nADVICE,0,Everyday,live,[stub] advice for_the ordinary day,~1 KB flash if generator-driven,Whole ADVICE branch is hidden at the parent (READ=411). Unhiding is a discovery-doctrine ruling.\nADVICE,1,Career Chooser,live,,~3 KB flash for the full JOBS grid (52+39+33 column entries); ~12 B RAM,\"D.8 'JOBS' sheet = 196 cells: 3 columns (adjective | noun | role) + a CLARITY column -> 'Amateur Ninja Accountant'. THE MECHANIC IS GENERATIVE, not selective. Twin ships a 6x6x6 placeholder subset; full ingest is a content session.\"\nADVICE,2,Career Advice,live,[stub] advice about_the career you have,~1 KB flash,No dedicated sheet; likely generator-driven.\nADVICE,3,Office Nickname,scaffold,,~2 KB flash for a curated subset of NIcknames; ~8 B RAM,\"D.8 'NIcknames' = 230 cells / 149 rows, crude prank-name lists (Bart-Simpson register). Twin ships a clean placeholder subset - the real list needs a vulgar-mode ruling vs the Clarity registers.\"\nADVICE,4,Water Cooler,scaffold,[stub] small talk_generator,~2 KB flash (D.8 Generators columns),D.8 'Generators' = 785 cells: TECHNO JARGON / EUPHEMISM / financial-proverb mad-lib columns.\nADVICE,5,Partners,scaffold,[stub] advice about_the person you chose,~1 KB flash,No content authored.\nADVICE,6,Friends & Family,scaffold,[stub] advice about_the people you did not choose,~1 KB flash,No content authored.\nADVICE,7,Inlaws and Outlaws,scaffold,[stub] advice about_the people you got anyway,~1 KB flash,No content authored.\nDETECTORS,0,Bullshit Detector,live,,\"~1.5 KB flash (needle draw + verdict bands), ~64 B RAM; PDM mic buffer (256 samples) ALREADY resident\",THE ONLY FEATURE THAT MAKES THE MIC REAL. The_Mic_Has_Data() (RMS>30) is written and works [5_INPUT:111-120]; HW_Rescan_MIC consumes nothing. Manual hedges VCS as 'a novelty and should be treated as such'.\nDETECTORS,1,Stud Detector,live,,~0.2 KB flash (shares the needle),\"Same needle, different verdict band table.\"\nDETECTORS,2,Trustworthy Detector,live,,~0.2 KB flash (shares the needle),Same needle.\nDETECTORS,3,Attractiveness Detector,live,,~0.2 KB flash (shares the needle),Same needle.\nVOICE_MSGS,2,Msg 01,live,[stub] awaiting sync,~0.1 KB each,Message rows beyond the seeded set. Delivery is built; words parked.\nCODES,0,Code Runner,scaffold,[stub] the faux-assembly_scroller as a feature,~0.2 KB flash - the scroller ALREADY EXISTS in SYSTEM_MONITOR,scrollFauxAssemblyLanguage [SYSTEM_MONITOR:45-63] with its opcode/operand pools is already written and running on the top screen.\nCODES,1,BIST,scaffold,[stub] built-in self test_a pass/fail parade,~1 KB flash + ~10 content rows,\"D.4 manual: BIST + AMMMS maintenance messaging is real lore. The visual language exists (crtWarmStart, static, monitor windows).\"\nCODES,2,Userdata,scaffold,[stub] what the machine_has kept about you,~0.5 KB flash,Ties to the ALERT Easter egg and the 2022 usage-tracking idea (the nag itself is KILLED; the data is not).\nCODES,3,Checksum,scaffold,[stub] a number that_proves nothing,~0.3 KB flash,No content authored.\nUSER,0,Name,live,,\"~0.6 KB flash (letter ring + station) + ~32 B RAM; twin persists to localStorage, unit rides the flash stub\",\"X1 2026-07-30 RULED (Mike): the USER/Name question is closed. Preferences > User > Name IS the user settings station and carries NAME + BIRTHDATE. Name is spelled on a letter ring (scroll picks, click takes, <DEL>/<END> ride the ring) - the arcade high-score solution, which is the only one the machine's two inputs allow. THE ABSENT-NAME LAW: with no name on file every user-reference surface says <NO USER NAME>.\"\nUSER,1,Security,scaffold,[stub] passcodes exist_and are checked nowhere,~0.5 KB flash,READ/RUN passcodes are carried on all 175 rows and checked nowhere [MENU_MAP]. The PASS CODES message is the in-fiction path to learning one.\nMGKMODEL,0,Classic,scaffold,[stub] output mode:_front screen only,~0 (a mode flag),D.8 MGK-Options matrix implies mgkModel switches the OUTPUT personality (ElectronScope CH4 vs 8K vs audibles). NEEDS A DESIGN RULING - what the 3 modes ARE.\nMGKMODEL,1,Large,scaffold,[stub] output mode:_the big glass,~0 (a mode flag),Same ruling.\nMGKMODEL,2,Audio,scaffold,[stub] output mode:_voice enunciator,~0 (a mode flag),Same ruling.\n";
 let SCAFFOLD={};
 function Scaffold_Load(){
  SCAFFOLD={};
@@ -5847,7 +6324,7 @@ const STUB_ROWS={};
 STUB_ROWS[ADVICE]      =function(line){return line>=3;};   /* 0-2 = the panel apps */
 STUB_ROWS[PREDICTIONS] =function(line){return line>=2;};   /* 0 Fortune, 1 Horoscope */
 STUB_ROWS[CODES]       =function(){return true;};
-STUB_ROWS[USER]        =function(){return true;};
+STUB_ROWS[USER]        =function(line){return line>=1;};   /* [X1] 0 Name = the user station */
 STUB_ROWS[MGKMODEL]    =function(){return true;};
 let stubsHidden=false, stubSaved=[];
 function Stub_Hide(t,r){
@@ -5911,9 +6388,13 @@ function Scaffold_EXE(upidName){
    scafEntry=Scaffold_For(upidName,lineNum_PTR);
    Pause_Process(SYSTEM_MONITOR);
    Activate_the_Screen(FRONT_SCREEN,true);
-   screenPrintLn(Row_01,0," "+(scafEntry?scafEntry.name:get_as_char(lineName)),0);
-   screenPrintLn(Row_02,0," [SCAFFOLD - not built]",0);
-   screenPrintLn(Row_03,0,HINT_BACK,1);
+   /* [FIT SWEEP 2026-07-29] all three were raw prints on the front glass.
+      " [SCAFFOLD - not built]" is 23 characters = 138px on a 128px glass and
+      wrapped; a scaffold row NAME can be longer still. Routed through
+      Fit_Line, which is what the sibling D8_show already did. */
+   Fit_Line(Row_01,0," "+(scafEntry?scafEntry.name:get_as_char(lineName)),0);
+   Fit_Line(Row_02,0," [SCAFFOLD - not built]",0);
+   Fit_Line(Row_03,0,HINT_BACK,1);
    Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
    {
     const d=(scafEntry&&scafEntry.descriptor)?scafEntry.descriptor:"[stub]";
@@ -6084,9 +6565,26 @@ function Prob_Cfg_Draw(){ /* [C2] nested-menu card */
   else val=String(probCustom.s);
   screenPrintLn(Row_02,0,(probCfgMode===1?" ":" >")+PROB_CFG_FIELDS[probCfgField]+(probCfgMode===1?" = >":": ")+val,0);
  }
- setFont(SMALL_FONT);
- screenPrintLn(Row_03+6,0,probCfgMode===1?" scroll=values  click=select":" scroll=fields  click=open  shake=roll",1);
- setFont(1);
+ /* [R4 2026-07-30] was setFont(SMALL_FONT) + a raw print: TomThumb on the
+    front glass by default, and at Row_03+6 = row 30 the built-in face could
+    not have fitted anyway. Fit_Line does both jobs - it keeps the real face
+    for the shorter of the two hints, clamps the row, and falls to TomThumb
+    only for the long one that genuinely will not fit. That is the ruling:
+    built-in wherever content fits, TomThumb as the last resort. */
+ /* AND THE LONG ONE DID NOT FIT IN ANY FACE. " scroll=fields  click=open
+    shake=roll" is 38 characters - about 138px even at TomThumb, so Fit_Line
+    fell all the way back and STILL overflowed by 10px, wrapped, and lost its
+    tail. It was also a hand-typed restatement of vocabulary the house already
+    owns: HINT_PANEL_PICK and HINT_PANEL_RUN are the standardized panel verbs
+    (C4 hint zone / W8 verb standardisation), and both fit.
+    MIKE: this changes the words on that row from the hand-typed
+    scroll=fields / click=open / shake=roll phrasing to the two standard
+    panel-verb constants. Using the house constants is the conformant fix and
+    the only one that fits the glass; if the longer phrasing matters, the row
+    needs two lines. (Deliberately not quoting the constants' text here - this
+    check scans lines, so prose naming a verb trips it. Reword the comment,
+    not the gate.) */
+ Fit_Line(Row_03+6,0,probCfgMode===1?HINT_PANEL_PICK:HINT_PANEL_RUN,1);
 }
 const PROB_PRESETS=[{n:1,s:6},{n:2,s:6},{n:3,s:6},{n:1,s:10},{n:2,s:10},{n:1,s:100}]; /* 1x100 = the old Pick-a-Number */
 function Prob_IsMerged(which){return which==1||which==3;}
@@ -6452,6 +6950,7 @@ function MGK_VIIIp_OS(){
   case ANSWERS: if(!M8B_busy)M8B_Answers_EXE(lineNum_PTR); break;  /* busy = firmware's blocking draw, OS frozen */
   case FORTP: Fort_EXE(); break;   /* [B1] */
   case HOROP: Horo_EXE(); break;   /* [B2] */
+  case USERP: User_EXE(); break;   /* [X1] */
   case BSP: BS_EXE(); break;       /* [B4] */
   case POLARITY: Set_The_Bias(POLARITY); break;
   case CLARITY: Set_The_Bias(CLARITY); break;
@@ -6696,12 +7195,39 @@ async function frontSay(lines){
  const top=Math.trunc((32-nl*10)/2)+1;
  const txts=[];
  for(let i=0;i<nl;i++)txts.push((i===0?"> ":"  ")+String(lines[i]).replace(/^\s+/,""));
+ /* [FIT SWEEP 2026-07-29] THE WIDTH CHECK THIS BLOCK NEVER HAD.
+    It already measured `wide` - to centre the group - and then printed at the
+    built-in face regardless of whether the widest line fitted. Measured
+    case: Boot_Level_2's check list ends with "> RESPONSE CURVE LOADED", 23
+    characters = 138px on a 128px glass. x0 clamped to 0, the line wrapped,
+    its tail was lost, and the cursor block was placed 12px off the glass.
+    The fix is the same answer Fit_* gives everywhere else - fall to the
+    small face when, and only when, the line will not fit - applied here at
+    the chokepoint so it covers EVERY boot line, not just the one the sweep
+    happened to catch.
+    IT IS INERT FOR ANYTHING THAT ALREADY FITS: a line inside 128px takes the
+    identical face, the identical row and the identical x0, so the reviewed
+    look of this surface is bit-for-bit unchanged. Only the line that was
+    being truncated renders differently - it renders. */
+ setFont(1);
  let wide=0;
  for(let i=0;i<nl;i++)wide=Math.max(wide,OLED.getTextBounds(txts[i]).w);
+ let small=false;
+ if(wide>MAX_SCREEN_WIDTH){
+  setFont(SMALL_FONT);small=true;
+  wide=0;for(let i=0;i<nl;i++)wide=Math.max(wide,OLED.getTextBounds(txts[i]).w);
+ }
  const x0=Math.max(0,Math.trunc((MAX_SCREEN_WIDTH-wide)/2));
- for(let i=0;i<nl;i++)screenPrintLn(top+i*10,x0,txts[i],0);
+ /* the 10px rhythm is kept so the group sits where it always sat; the nudge
+    converts a built-in TOP coordinate to TomThumb's BASELINE, exactly as
+    Fit_Centered does (FIT_BASELINE_NUDGE, ruled 2026-07-27). */
+ const dy=small?FIT_BASELINE_NUDGE:0;
+ for(let i=0;i<nl;i++)screenPrintLn(Fit_ClampRow(top+i*10,small)+dy,x0,txts[i],0);
  const last=(nl>0)?txts[nl-1]:"";
- OLED.fillRect(x0+OLED.getTextBounds(last).w+2,top+(nl-1)*10,5,7,WHITE); /* the cursor block */
+ OLED.fillRect(x0+OLED.getTextBounds(last).w+2,
+               Fit_ClampRow(top+(nl-1)*10,small)+dy-(small?5:0),
+               small?3:5,small?5:7,WHITE); /* the cursor block */
+ setFont(1);
  OLED.display();
  if(bootRunning)Top_Working(lines[0]||""); /* [GA3] the top joins the dance */
 }
@@ -7089,9 +7615,9 @@ async function Boot_Original_Charge(){
  screenPrintLn(26,3,"> IDENT",0);screenPrintLn(34,3,"MARK OK",0);OLED.display();
  Activate_the_Screen(FRONT_SCREEN,false);setFont(SMALL_FONT);
  PlaySound(PowerMaury);
- screenPrintLn(32,1,"(c) (tm)",1);await bsleep(1500);               /* COPYRIGHT_DELAY */
+ Fit_Line(32,1,"(c) (tm)",1);await bsleep(1500);               /* COPYRIGHT_DELAY */
  PlaySound(PowerMaury);
- screenPrintLn(32,85,"(Pat Pend)",1);await bsleep(1500);            /* PATENT_DELAY */
+ Fit_Line(32,85,"(Pat Pend)",1);await bsleep(1500);            /* PATENT_DELAY */
  Activate_the_Screen(FRONT_SCREEN,true);
  screenPrintLn(Row_01,0,Header_01,1);
  screenPrintLn(Row_02,0,"    LOADING",1);
@@ -7461,25 +7987,52 @@ const F_BAR_X=2, F_BAR_W=72, F_SEGS=6;
 let F_SEG_STATE=[0,0,0,0,0,0];        /* 0 pending · 1 loaded · 2 failed */
 function F_Reset(goal){F_GOAL=goal||"";F_PCT=0;F_ERR=0;F_MODE="bar";F_SEG_STATE=[0,0,0,0,0,0];}
 /* [MIKE'S RULING] the progress group is CENTRED as a group, not pinned left. */
+/* ======== R4 [Mike 2026-07-30]: THE READOUTS CONFORM TO THE BUILT-IN FACE
+   Ruled: the front glass is the system GUI and wears the built-in face;
+   TomThumb survives ONLY as Fit_Line's last-resort fallback. F_Readouts was
+   23 of the ~90 front-glass TomThumb sites - the largest single group.
+   AND THE FONT CHANGE FIXES THE OVERFLOW, because they were the same bug.
+   F_Group_X measured the readouts in TomThumb to centre the group, but
+   F_Face's SEGS branch never used that answer: it centred the segment strip
+   on its own width and then hung the readouts off the right-hand end. So the
+   wider the percentage got, the further right the error code went - at
+   "100%" the E-code started at x=122 with 6px of glass left, wrapped, and
+   was lost. That is the "E0/E1 4px left-shift" item on Mike's plate.
+   IT IS FIXED BY COMPUTATION, NOT BY A NUDGE. A 4px shift would have been
+   right for one percentage width and wrong for the other three. Both
+   branches now centre the WHOLE group - strip/bar plus both readouts - and
+   the measurement happens in the face that will actually be printed, so the
+   arithmetic and the render agree. Widest case measured: 70+6+24+6+12 = 118
+   of 128, centred at x=5, the E-code ending at 123. It cannot overflow.
+   THE ROW MOVES UP, and that is unavoidable: TomThumb is baseline-origin so
+   row 31 put its ink at 26..30, while the built-in face is top-origin and
+   would need rows 31..37 on a 32-row buffer. Row_03+1 = 25 is the deepest
+   row the built-in face fits, giving ink 25..31 against the bar's 26..31 -
+   one row taller, flush at the foot. Same call the F6 LEGIBILITY pass made
+   for T's log: the DATUM gets the real face, the legend stays small. */
+const F_READOUT_ROW=Row_03+1;   /* 25 - deepest row the built-in face fits */
 function F_Group_X(barW){
- setFont(SMALL_FONT);
+ setFont(1);                    /* measure in the face we will PRINT in */
  const pct=OLED.getTextBounds(String(F_PCT)+"%").w, err=OLED.getTextBounds("E"+F_ERR).w;
- setFont(1);
  const total=barW+6+pct+6+err;
- return {x:Math.max(0,Math.trunc((MAX_SCREEN_WIDTH-total)/2)),pct:pct,err:err};
+ return {x:Math.max(0,Math.trunc((MAX_SCREEN_WIDTH-total)/2)),pct:pct,err:err,total:total};
 }
 function F_Readouts(x0,barW){
  const g=F_Group_X(barW);
- setFont(SMALL_FONT);
- screenPrintLn(Row_03+7,x0+barW+6,String(F_PCT)+"%",0);
- screenPrintLn(Row_03+7,x0+barW+6+g.pct+6,"E"+F_ERR,0);
- setFont(1);
+ /* Fit_Line keeps the built-in face while the value fits and falls to
+    TomThumb only if one ever does not - the sanctioned fallback, not a
+    default. It also clamps the row, so no readout can be drawn off-buffer. */
+ Fit_Line(F_READOUT_ROW,x0+barW+6,String(F_PCT)+"%",0);
+ Fit_Line(F_READOUT_ROW,x0+barW+6+g.pct+6,"E"+F_ERR,0);
 }
 function F_Face(action){
  Rail_Head(F_GOAL);                          /* the goal rides the rail, centred */
  Fit_Centered(Row_02,String(action||""),0);  /* [RULING] the action is centred */
  if(F_MODE==="segs"){                        /* the load phase earns its own face */
-  const gw=F_SEGS*12-2, gx=Math.trunc((MAX_SCREEN_WIDTH-gw)/2);
+  /* [R4] gx now comes from F_Group_X, which accounts for the readouts too.
+     It used to be (128-gw)/2 - the STRIP centred alone, readouts hung off its
+     right end - which is how the E-code walked off the glass. */
+  const gw=F_SEGS*12-2, gx=F_Group_X(gw).x;
   for(let k=0;k<F_SEGS;k++){
    const x=gx+k*12, st=F_SEG_STATE[k];
    OLED.drawRect(x,Row_03+2,10,6,WHITE);
@@ -7810,13 +8363,27 @@ async function Charge_Front(){
  screenPrintLn(18,53,"BIOS",1);              /* [R5] BIOS under the mark */
  FX_stamp();                                 /* [R4] */
  await Beat("the mark lands",1000);          /* LOGO */
+ /* ---- R4 [Mike 2026-07-30], AND THE ONE VISIBLE CONSEQUENCE ------------
+    These two marks were the last front-glass TomThumb sites outside
+    F_Readouts. They are now Fit_Line, in all three copies of this beat
+    (animateLogo, Boot_Original_Charge, Charge_Front).
+    **MIKE: THIS ONE CHANGES WHAT YOU SEE, and it is the item to look at.**
+    Row 32 works for TomThumb because TomThumb is baseline-origin - its ink
+    lands at 27..31, on the glass. The built-in face is TOP-origin, so row 32
+    would need rows 32..38 of a 32-row buffer. Fit_Line therefore clamps to
+    row 25, and the marks come up seven rows and get about 40% bigger.
+    They were deliberately bottom-edge legal fine print; at the built-in face
+    they read as another line of copy. Law says conform where content fits,
+    and content does fit once the row moves - so it is conformed, screenshot,
+    and one word from being put back (screenPrintLn instead of Fit_Line, or
+    keep Fit_Line and drop the row to 25 by hand for the same result). */
  Activate_the_Screen(FRONT_SCREEN,false);setFont(SMALL_FONT);
  FX_stamp();                                 /* [R4] */
- screenPrintLn(32,1,"(c) (tm)",1);
+ Fit_Line(32,1,"(c) (tm)",1);
  await Beat("(c)(tm)",1500);
  setFont(SMALL_FONT);
  FX_stamp();                                 /* [R4] */
- screenPrintLn(32,85,"(Pat Pend)",1);
+ Fit_Line(32,85,"(Pat Pend)",1);
  await Beat("(Pat Pend)",1500);
  T_Grind_Stop();
 }
@@ -8053,7 +8620,13 @@ async function Decide_Card(letter,title,note){
  screenPrintLn(10,3,"DECISION VIEWER",0);OLED.drawLine(0,15,127,15,WHITE);
  Fit_Line(26,3,title,0,124);
  if(note)Fit_Line(38,3,note,0,124);
- screenPrintLn(56,3,"<the glass below is the candidate>",0);
+ /* [FIT SWEEP 2026-07-29] this was printed RAW at the built-in face: 34
+    characters = 204px on a 128px glass, 79px over, so it wrapped to row 64 -
+    off a 64-row glass - and drew into nothing. It has never been readable.
+    Its two neighbours above already use Fit_Line; this one was simply missed.
+    Dev-viewer chrome rather than product UX, but a line nobody can read is
+    worth the one-word fix either way. */
+ Fit_Line(56,3,"<the glass below is the candidate>",0,124);
  OLED.display();
  Activate_the_Screen(FRONT_SCREEN,true);setFont(2);
  screenPrintLnCentered(22,letter,1);setFont(1);
@@ -8179,8 +8752,8 @@ let D7_LAST=null;
 async function D8_show(which){
  if(which===1)await Aux_Handoff("SCAFFOLD");
  Activate_the_Screen(FRONT_SCREEN,true);
- screenPrintLn(Row_01,0," SOME UNBUILT THING",0);
- screenPrintLn(Row_02,0," [SCAFFOLD - not built]",0);
+ Fit_Line(Row_01,0," SOME UNBUILT THING",0);
+ Fit_Line(Row_02,0," [SCAFFOLD - not built]",0);
  Fit_Line(Row_03,0,HINT_BACK,1);
  Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
  screenPrintLnCentered(26,which===1?"ENTERED WITH THE HANDOFF":"NO HANDOFF (as today)",0);
@@ -8573,8 +9146,38 @@ function Unit_LoadPhotos(){
  const CAND=["reference/photos/","../reference/photos/"];
  const f=document.getElementById("imgFront"),t=document.getElementById("imgTop");
  let ci=0;
+ /* [O2 2026-07-30] THE PUBLIC PRESENTATION DOES NOT DESCEND THE LADDER.
+    The base chain is monitor_base -> unit_crt_base -> unit_new_base -> the
+    legacy two-photo composite, and that chain is CORRECT for the bench: a
+    developer whose reference folder is half-populated should still get a
+    machine to work on.
+    IT IS WRONG FOR THE MUSEUM. Descending puts a visitor in front of the 2024
+    two-photo bench view - #imgFront / #imgTop, whose alt texts read
+    "MGK-VIIIp front" and "MGK-VIIIp top monitor" when the photos are slow or
+    absent. That is precisely the stale presentation Mike reported seeing in
+    the overlay, and it is reachable from a single missing file.
+    So the public entry (?user=1, which is how the museum's overlay loads this)
+    stops at the portal. If the portal's own base plate will not load, it says
+    so in the machine's own register rather than silently becoming an older
+    product. The bench keeps the full ladder. */
+ function Public_Entry(){
+  try{return new URLSearchParams(location.search).has("user");}catch(e){return false;}
+ }
+ function Portal_Base_Missing(){
+  try{
+   const st=document.getElementById("unitstage");if(!st)return;
+   document.body.classList.add("portal");
+   let m=document.getElementById("nobase");
+   if(!m){m=document.createElement("div");m.id="nobase";st.appendChild(m);}
+   m.textContent="NO SIGNAL - PORTAL BASE PLATE NOT ON FILE";
+   chip("warn","portal base plate missing - public entry holds at NO SIGNAL "
+        +"rather than descending to the bench composite [O2]");
+  }catch(e){}
+ }
  function tryMonBase(){
-  if(ci>=CAND.length){ci=0;tryCrtBase();return;}
+  if(ci>=CAND.length){ci=0;
+   if(Public_Entry()){Portal_Base_Missing();return;}
+   tryCrtBase();return;}
   const base=CAND[ci++];
   const probe=new Image();
   probe.onload=()=>{
@@ -9104,13 +9707,21 @@ function Feed_Glitch_Tick(){
  const grp=document.getElementById("feedgroup")||live;
  const prof=FEED_PROFILE[monFeed]||FEED_PROFILE[1];
  if(Math.random()>=FEED_GLITCH_RATE_NOW*prof.rate)return;
- const kind=Math.trunc(Math.random()*3);
+ /* [B8 2026-07-30] FOUR KINDS, ALL CRT: sync bump, roll, dropout, snow.
+    The roll joined here; the diagonal lean left the vocabulary entirely. */
+ const kind=Math.trunc(Math.random()*4);
  if(kind===0){                                   /* a sync bump */
   const dx=(Math.random()<0.5?-1:1)*(1+Math.trunc(Math.random()*3));
   const dy=(Math.random()<0.5?-1:1)*(Math.trunc(Math.random()*2));
   grp.style.transform="translate("+dx+"px,"+dy+"px)";
   setTimeout(function(){grp.style.transform="";},70+Math.trunc(Math.random()*60));
- } else if(kind===1){                            /* a level dropout */
+ } else if(kind===1){                            /* the vertical hold slips */
+  const h=(Math.random()<0.5?-1:1)*(6+Math.trunc(Math.random()*10));
+  grp.classList.add("fg-roll");
+  grp.style.transform="translateY("+h+"px)";
+  setTimeout(function(){grp.style.transform="";},90+Math.trunc(Math.random()*70));
+  setTimeout(function(){grp.classList.remove("fg-roll");},260);
+ } else if(kind===2){                            /* a level dropout */
   live.classList.add("fg-drop");
   setTimeout(function(){live.classList.remove("fg-drop");},110+Math.trunc(Math.random()*90));
  } else {                                        /* a breath of snow */
@@ -9322,6 +9933,73 @@ function Portal_Build(st,bezSrc,artSrc){
  chip("ok","PORTAL: bezel above the feed (clean B&amp;W, no video treatment) &middot; "+
       "monitor "+portalSize+"vh (drag the corner grip) &middot; "+
       "today's weather (seed "+FEED_SEED+"): "+Feed_Weather_Report());
+ Portal_Preset_Apply();                       /* [O4] */
+}
+
+/* ======== [O4 2026-07-30] PORTAL PRESETS ==============================
+   THE PORTAL TRACK HANDS THE TWIN A STATE TO ARRIVE IN. The museum's portal
+   track opens this page with `?preset=<id>`, and the twin honours it once, at
+   the end of portal setup, using handles that already exist. Nothing here is
+   a new machine behaviour - CLEAN BOOT is the install reset plus the power
+   switch, BOOT PLAYBACK is Sandbox Tech's own replay, and RECORD-DAY sets the
+   three things a day actually consists of.
+   THE CONTRACT IS THE URL, deliberately: presets have to survive an iframe
+   boundary, a reload and a shared link, and a query string does all three
+   without the museum and the twin sharing any code.
+   UNKNOWN PRESET = NO PRESET. The twin never guesses; an id it does not know
+   is chipped and ignored, so a preset added to the museum before it is added
+   here degrades to a plain portal rather than to a wrong one. */
+function Preset_Params(){
+ try{
+  const q=new URLSearchParams(location.search);
+  return {id:(q.get("preset")||"").trim().toLowerCase(), day:(q.get("day")||"").trim()};
+ }catch(e){return {id:"",day:""};}
+}
+/* A DATE IS A SEED. The Record's days must be reproducible: the same date
+   must draw the same weather on every machine, forever, so the seed is a hash
+   of the date string and never a clock reading. */
+function Preset_Day_Seed(s){
+ let h=2166136261>>>0;
+ for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}
+ return (h>>>0)||1;
+}
+function Portal_Preset_Apply(){
+ const p=Preset_Params();
+ if(!p.id)return;
+ try{
+  switch(p.id){
+   case "clean-boot":
+    if(typeof devResetBootLevel==="function")devResetBootLevel();
+    if(typeof unitPowered!=="undefined"&&!unitPowered&&typeof devPower==="function")devPower();
+    chip("ok","[PRESET] CLEAN BOOT - install reset to VIRGIN, power applied");
+    break;
+   case "boot-playback":
+    if(typeof Sandbox_Replay==="function")Sandbox_Replay();
+    chip("ok","[PRESET] BOOT PLAYBACK - Sandbox Tech replays the install");
+    break;
+   case "record-day":{
+    /* A DAY IS THREE THINGS: the weather it drew, how far the install had
+       got, and which of the machine's correspondence had arrived. The first
+       is exact; the other two are honest approximations until the Record's
+       own dates are wired to the message table. [PAPA] owns which day means
+       which state. */
+    const day=p.day||"1965-01-01";
+    const seed=Preset_Day_Seed(day);
+    /* Written to sessionStorage FIRST so Feed_Weather_Init picks it up as
+       "today", exactly as devFeedNewDay does in reverse - the seeded day then
+       survives a reload inside the overlay instead of re-rolling. */
+    try{sessionStorage.setItem(FEED_WEATHER_KEY,String(seed));}catch(e){}
+    Feed_Weather_Init();
+    Feed_Weather_Apply();
+    chip("ok","[PRESET] RECORD-DAY "+day+" - weather seed "+seed+": "+
+         Feed_Weather_Report()+" &middot; install + message state are [PAPA]");
+    break;}
+   default:
+    chip("warn","[PRESET] unknown id '"+p.id+"' - ignored; the portal opens plain");
+  }
+ }catch(e){
+  try{chip("warn","[PRESET] '"+p.id+"' failed: "+e.message);}catch(e2){}
+ }
 }
 /* [ITEM 4] ALL PAGE CONTENT BELOW THE MONITOR. The picture takes the top of
    the page at full width; the workshop rail, the bench canvases, the panels

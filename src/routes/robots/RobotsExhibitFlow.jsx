@@ -26,6 +26,9 @@ const PROJECTION_EDGE  = "#3b3831";
 
 export default function RobotsExhibitFlow({ activeAlbumId }) {
   const [twinOpen, setTwinOpen] = useState(false);
+  const [closeHot, setCloseHot] = useState(false);   /* [O1] inline styles have no :hover */
+  /* [O4] the preset rides the src; default is the plain portal. */
+  const [twinSrc, setTwinSrc] = useState("/robots/twin.html?user=1");
 
   useEffect(() => {
     function onKey(e) { if (e.key === "Escape") setTwinOpen(false); }
@@ -38,8 +41,24 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
      unchanged and still owns explicit-close (the W2 ruling) and Escape.
      Exhibit.jsx dispatches a named event rather than calling in, so the shared
      engine never learns what a twin is — the seam stays a seam. */
+  /* [O4 2026-07-30] THE PRESET CROSSES THE BOUNDARY IN THE URL.
+     The portal track dispatches an id (and, for a Record day, a date); this
+     turns it into a query string on the iframe. That is deliberate rather than
+     postMessage: a query string survives the iframe boundary, a reload inside
+     the overlay, and being copied into a link, and it means the museum and the
+     twin share NO CODE — only a contract about two words.
+     An unknown id is not filtered here. The twin ignores ids it does not know
+     and opens plain, so a preset can be added to the exhibit before the
+     machine learns it and the failure mode is "nothing special happened". */
   useEffect(() => {
-    function open() { setTwinOpen(true); }
+    function open(e) {
+      const d = (e && e.detail) || {};
+      const q = new URLSearchParams({ user: "1" });
+      if (d.preset) q.set("preset", String(d.preset));
+      if (d.day) q.set("day", String(d.day));
+      setTwinSrc(`/robots/twin.html?${q.toString()}`);
+      setTwinOpen(true);
+    }
     window.addEventListener("wb-robots-open-twin", open);
     return () => window.removeEventListener("wb-robots-open-twin", open);
   }, []);
@@ -66,12 +85,30 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
       boxShadow: "0 0 60px rgba(0,0,0,0.7)",
     },
     iframe: { width: "100%", height: "100%", border: 0, borderRadius: 4, background: PROJECTION_BLACK },
+    /* [O1 2026-07-30] THE BLACK RECTANGLE, DIAGNOSED.
+       This control was not unstyled — it was styled on a stale assumption
+       about one word. It asked for `MUSEUM.gold` on `PROJECTION_BLACK`, and
+       since the B&W rework **--wb-gold is #211f1c: photo black, not gold.**
+       So it rendered #211F1C on #0B0B0A — measured on glass, a contrast ratio
+       of about 1.06:1. A black block with a black label on it.
+       The irony is on the record: tokens.js carries a comment warning that the
+       old gold-on-dark fallbacks were stale, and this button walked into the
+       same trap from the other side.
+       THE FIX READS AGAINST THE ROOM IT IS IN. The overlay is a projection
+       booth (deliberately dark, and exempt from the paper palette by the
+       standing rule "photos are paper; video is television"), so the control
+       is drawn in PRINT STOCK — outline at rest, filling on hover, which is
+       the same inversion `.vp-face-action` uses in the light. */
     close: {
       position: "absolute", top: -1, right: -1, zIndex: 2,
       fontFamily: MUSEUM.mono, fontSize: "0.62rem",
       letterSpacing: "0.2em", textTransform: "uppercase",
-      background: MUSEUM.gold, color: PROJECTION_BLACK,
-      border: `1px solid ${PROJECTION_BLACK}`, padding: "7px 14px", cursor: "pointer",
+      background: "transparent", color: MUSEUM.ink,
+      border: `1px solid ${MUSEUM.ink}`, padding: "7px 14px", cursor: "pointer",
+      lineHeight: 1, transition: "background .18s, color .18s",
+    },
+    closeHover: {
+      background: MUSEUM.ink, color: PROJECTION_BLACK,
     },
   };
 
@@ -97,8 +134,15 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
       {twinOpen && (
         <div style={S.overlay}>
           <div style={S.stage}>
-            <button style={S.close} onClick={() => setTwinOpen(false)}>Close ✕</button>
-            <iframe style={S.iframe} src="/robots/twin.html?user=1" title="MGK-VIIIp digital twin" />
+            <button
+              style={closeHot ? { ...S.close, ...S.closeHover } : S.close}
+              onMouseEnter={() => setCloseHot(true)}
+              onMouseLeave={() => setCloseHot(false)}
+              onFocus={() => setCloseHot(true)}
+              onBlur={() => setCloseHot(false)}
+              onClick={() => setTwinOpen(false)}
+            >Close ✕</button>
+            <iframe style={S.iframe} src={twinSrc} title="MGK-VIIIp digital twin — the Portal" />
           </div>
         </div>
       )}

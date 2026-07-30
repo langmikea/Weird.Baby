@@ -80,53 +80,84 @@ const spine = [
       "MGK-VIIIp −02 “The Informer”, front and top, as received.",
     tracks: [
       {
-        id: "machine",
-        title: "Run the machine",
+        id: "portal",
+        title: "The Portal",
         videos: [],
-        tags: ["twin", "firmware", "1965", "interactive"],
-        /* the underperforming deck button retires into a track, where it has
-           a still and a paragraph to earn the press. The button does not open
-           the twin itself — it fires an event the exhibit flow listens for, so
-           the shared engine stays ignorant of what a twin is. */
+        tags: ["portal", "twin", "firmware", "1965", "interactive"],
+        /* ---- O4 2026-07-30: THE PORTAL IS A TRACK, NOT A BUTTON ----------
+           Mike's ruling. "Run the machine" was a verb on a shelf of nouns,
+           and the thing behind it is not a demonstration — it is a DOORWAY.
+           THE NAME IS THE REVELATION: the p in MGK-VIIIp meant PORTAL all
+           along (CANON 2026-07-29), so the track does not need a name
+           invented for it. It had one.
+           THE FACE IS DELIBERATELY NOT A LOG SHEET. The manual and the record
+           are paper, and they read as paper. This is a transition point —
+           down the tunnel to something that behaves differently — so it wears
+           the instrument register instead: dark ground, the SOURCE/GLASS/STATE
+           block, presets like channel selections. A visitor should be able to
+           feel the change of material before they read a word of it. */
         face: {
-          kind: "monitor",
-          title: "THE ARTIFACT, RUNNING",
+          kind: "portal",
+          title: "THE PORTAL",
+          subtitle: "MGK-VIIIp \u00b7 the p was never \u201cportable\u201d",
           blurb:
-            "A working transliteration of the unit's own firmware — the 1965 " +
-            "menu system, its answer engines, and both glasses, driven from " +
-            "the real tables. Not a video of a machine. The machine.",
+            "A camera is pointed at a running unit, somewhere, and the feed " +
+            "arrives here. Source unknown, location unknown, reason unknown \u2014 " +
+            "the frame does not explain itself. What comes through is not a " +
+            "recording: it is the 1965 firmware, running, and it answers.",
           still: "/robots/art/viiip.png",
           lines: [
-            "SOURCE  MGK_VIIIp_01__20240721_WORKS",
-            "GLASS   128×64 front · 128×64 top",
-            "STATE   cold start — boot is mandatory",
+            "SOURCE   MGK_VIIIp_01__20240721_WORKS",
+            "GLASS    128\u00d764 front \u00b7 128\u00d764 top",
+            "FEED     1 of 5 \u00b7 quality drawn per session",
+            "STATE    cold start \u2014 boot is mandatory",
           ],
-          /* WHAT IS ACTUALLY BEHIND THE BUTTON. Every row below is a surface
-             that exists and runs today — no row here is a promise. */
-          entries: [
-            { stamp: "DOOR 1", title: "Answers",
-              line: "The classic twenty, and the engines that colour them — " +
-                    "NIAC, v2.0, 65, and the persona grids.",
-              note: "polarity + clarity registers live" },
-            { stamp: "DOOR 2", title: "Programs",
-              line: "Probabilities and Detectors are complete. Five games. " +
-                    "The mic is real: the needle reads what it hears.",
-              note: "probabilities 5/5 · detectors 4/4" },
-            { stamp: "DOOR 3", title: "Messages",
-              line: "The inbox, delivered by trigger rather than by date — " +
-                    "a row stays hidden until the machine has a reason.",
-              note: "RAM-only, exactly as the settings are" },
-            { stamp: "DOOR 4", title: "Settings",
-              line: "Polarity, clarity, model, voice — and the user record, " +
-                    "which is the only thing it asks you for.",
-              note: "new 2026-07-30: name + birthdate" },
-            { stamp: "CEREMONY", title: "The boot is mandatory",
-              line: "Three levels: virgin install, first run with the " +
-                    "calibration dance, and the fast established wake.",
-              note: "the front glass wakes first" },
+          /* [PAPA] the richer wording for the subtitle and the blurb. What is
+             here is house register and true; what is missing is the lore only
+             Mike can put in a visitor's mouth. */
+          papa: "[PAPA] \u2014 the Portal's own words: what the frame is, and how " +
+                "much of the three unknowns to say out loud on the way in.",
+          action: { label: "Open the portal", event: "wb-robots-open-twin" },
+          /* ---- THE PRESETS ------------------------------------------------
+             THE MECHANISM IS THE DELIVERABLE; the list is expected to grow.
+             A preset is DATA: an id the twin knows, a label, one line of what
+             it does. The museum never reaches into the machine — it hands the
+             id across the boundary in the URL, and an id the twin does not
+             know degrades to a plain portal rather than to a wrong one.
+             CLEAN BOOT and BOOT PLAYBACK are wired and run today.
+             RECORD-DAY is the frame with two honest examples: a day is a
+             weather seed plus an install level plus which correspondence had
+             arrived, and only the first of those three is exact yet. The
+             Record has 436 entries and will supply the rest. */
+          presets: [
+            { id: "clean-boot", label: "CLEAN BOOT", state: "live",
+              line: "Install reset to VIRGIN, then power. The machine has " +
+                    "never met you and has to put itself together first." },
+            { id: "boot-playback", label: "BOOT PLAYBACK", state: "live",
+              line: "Sandbox Tech replays the install exactly as it landed \u2014 " +
+                    "step by step, without compromising it." },
+            { id: "record-day", day: "2024-01-01", label: "RECORD DAY \u00b7 01 JAN 24",
+              state: "partial",
+              line: "The day the three boxes arrived. Weather is seeded from " +
+                    "the date and is exact; install and message state are [PAPA]." },
+            { id: "record-day", day: "2024-01-26", label: "RECORD DAY \u00b7 26 JAN 24",
+              state: "partial",
+              line: "\u201cBut we were wrong.\u201d The day the record corrected " +
+                    "itself in public. Same frame, same caveat." },
           ],
-          footer: "Runs in the page. Nothing is installed, nothing is uploaded.",
-          action: { label: "Bring up the monitor", event: "wb-robots-open-twin" },
+          presetsNote:
+            "Presets arrive with the feed. Unknown to the machine = ignored, " +
+            "and the portal opens plain.",
+          /* ---- THE CROSS-REFERENCES ---------------------------------------
+             In-register, not web-blue: these are references on an instrument
+             panel, so they select the track rather than navigate anywhere. */
+          links: [
+            { track: "manual", label: "THE MANUAL",
+              line: "What the machine says about itself, including the parts " +
+                    "it gets wrong." },
+            { track: "record", label: "THE RECORD",
+              line: "What we said about it, week by week, as it happened." },
+          ],
         },
       },
       {
