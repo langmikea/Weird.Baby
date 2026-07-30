@@ -33,6 +33,17 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  /* [E2 2026-07-30] THE BUTTON MOVED INTO A TRACK. The "Run the machine" face
+     in the video panel fires this event; the overlay machinery below is
+     unchanged and still owns explicit-close (the W2 ruling) and Escape.
+     Exhibit.jsx dispatches a named event rather than calling in, so the shared
+     engine never learns what a twin is — the seam stays a seam. */
+  useEffect(() => {
+    function open() { setTwinOpen(true); }
+    window.addEventListener("wb-robots-open-twin", open);
+    return () => window.removeEventListener("wb-robots-open-twin", open);
+  }, []);
+
   /* [R3, 2026-07-29] THE THIRD PALETTE IS GONE.
      These six values used to be written as var(--wb-x, #hardcoded), and the
      fallbacks were STALE: #b8974a / #101010 / #6a5520 are the pre-2026
@@ -41,26 +52,9 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
      they were dead code that would have rendered the WRONG palette on the
      one day it mattered. Reading the shared JS source instead gives the
      identical computed values and removes the trap. */
+  /* [E4] the deck's three style keys (deck / log / btn) went with it. What
+     remains is the overlay the twin lives in. */
   const S = {
-    deck: {
-      position: "fixed", left: 0, right: 0, bottom: 0, zIndex: 500,
-      display: "flex", alignItems: "center", justifyContent: "center",
-      gap: 18, padding: "10px 16px",
-      background: MUSEUM.inkSoft,
-      borderTop: `1px solid ${MUSEUM.goldLo}`,
-    },
-    log: {
-      fontFamily: MUSEUM.mono, fontSize: "0.58rem",
-      letterSpacing: "0.16em", textTransform: "uppercase",
-      color: MUSEUM.goldMute,
-    },
-    btn: {
-      fontFamily: MUSEUM.mono, fontSize: "0.62rem",
-      letterSpacing: "0.2em", textTransform: "uppercase",
-      background: "transparent", color: MUSEUM.gold,
-      border: `1px solid ${MUSEUM.goldLo}`,
-      padding: "8px 16px", cursor: "pointer",
-    },
     overlay: {
       position: "fixed", inset: 0, zIndex: 1000, background: "rgba(10,10,9,0.9)",
       display: "flex", alignItems: "center", justifyContent: "center",
@@ -83,26 +77,21 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
 
   return (
     <>
-      {/* [V2 walk-seven] deck / player-bar / scroll coordination: the deck
-          lifts over the player bar (the exhibit's own :has pattern) and the
-          page keeps clearance so the tracklist never hides under the deck.
-          Scoped: this style exists only while /robots is mounted. */}
-      <style>{`
-        body:has(.pb) .rb-deck { bottom: 60px; }
-        .rb-deck { transition: bottom 0.3s ease; }
-        .ex-root { padding-bottom: 56px; }
-      `}</style>
-      <div className="rb-deck" style={S.deck}>
-        {/* [R1, 2026-07-30] the two-branch log line collapses to one. The
-            "robots" album it tested for was removed from the deck (real
-            robots only), so the findings-log branch became unreachable —
-            dead conditional dressed as a feature. The findings log itself is
-            not lost; it lands below the line in the container model. */}
-        <span style={S.log}>The artifact: the machine itself, running.</span>
-        <button style={S.btn} onClick={() => setTwinOpen(true)}>
-          Run the machine
-        </button>
-      </div>
+      {/* ======== E4 2026-07-30: THE DECK IS RETIRED ======================
+          MEASURED, not guessed. At 1600x1000 the deck sat at y 847..897 with
+          z-index 500 while .ex-main ran y 417..922 — so it COVERED THE BOTTOM
+          75px OF BOTH THE TRACKLIST AND THE VIEWER. `.ex-root{padding-bottom}`
+          could not help: .ex-main is flex:1 inside .ex-root and grows to fill,
+          so the padding moved the floor without moving the deck off it.
+          That was half of Mike's "vertical resize is obstructed".
+          AND IT HAD NOTHING LEFT TO DO. Its two contents were the log line —
+          which R1 collapsed to a single string when the findings-log album
+          left the deck — and the "Run the machine" button, which E2 moved into
+          the track face where it has a still and a paragraph to earn the
+          press. A fixed bar carrying one sentence and a duplicate button is
+          not a deck, it is 50px of obstruction with a shadow.
+          The OVERLAY machinery below is untouched and still owns the twin,
+          explicit-close (W2) and Escape. Only its trigger moved. */}
 
       {/* [W2 walk-four] explicit close ONLY — the button or Escape. */}
       {twinOpen && (

@@ -22,6 +22,58 @@
 html,body{background:var(--wb-bg);color:var(--wb-gold);min-height:100vh;overflow-x:clip}
 html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 
+/* ---- E2 2026-07-30: THE TRACK FACE + THE VIEWER POSTER --------------------
+   What the video panel shows when a track has no footage. Print-stock, house
+   register, tokens only — no hex literals, so it follows the palette. */
+.vp-face{position:absolute;inset:0;display:flex;align-items:stretch;gap:0;
+  background:var(--wb-ink);overflow:hidden}
+.vp-face-still{width:38%;min-width:0;object-fit:cover;object-position:center;
+  border-right:1px solid var(--wb-border);filter:grayscale(1) contrast(1.03)}
+.vp-face-body{flex:1;min-width:0;padding:clamp(14px,2.2vw,30px);
+  display:flex;flex-direction:column;gap:12px;overflow-y:auto}
+.vp-face-title{font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(.62rem,1.05vw,.78rem);letter-spacing:.22em;
+  text-transform:uppercase;color:var(--wb-gold)}
+.vp-face-blurb{font-family:'DM Serif Display',Georgia,serif;
+  font-size:clamp(.86rem,1.35vw,1.1rem);line-height:1.45;color:var(--wb-dim);
+  max-width:52ch}
+.vp-face-lines{list-style:none;padding:0;margin:0;display:flex;
+  flex-direction:column;gap:5px;border-top:1px solid var(--wb-border);
+  padding-top:11px}
+.vp-face-lines li{font-family:'Courier Prime','Courier New',monospace;
+  font-size:clamp(.58rem,.95vw,.7rem);letter-spacing:.06em;
+  color:var(--wb-gold-lo);white-space:pre-wrap}
+/* [E5 2026-07-30] THE CTA IS STICKY, not merely bottom-aligned.
+   The visual walk caught it at tablet: the face body scrolls, and with
+   margin-top:auto the button sat at the END of the scroll — so on a short
+   panel the one thing the track exists to offer was below the fold, and a
+   hit-test at its centre landed on the fact scroller behind. Sticky keeps it
+   on the glass at every panel height; the backdrop stops the register lines
+   from sliding under it illegibly. */
+.vp-face-action{align-self:flex-start;margin-top:auto;
+  position:sticky;bottom:0;z-index:2;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:clamp(.6rem,1vw,.72rem);letter-spacing:.2em;text-transform:uppercase;
+  background:var(--wb-gold);color:var(--wb-ink-card);
+  border:1px solid var(--wb-gold);padding:11px 20px;cursor:pointer;
+  box-shadow:0 -10px 12px -6px var(--wb-ink);
+  transition:background .2s,color .2s}
+.vp-face-action:hover{background:transparent;color:var(--wb-gold)}
+.vp-poster{position:absolute;inset:0;background:var(--wb-ink);overflow:hidden}
+.vp-poster img{width:100%;height:100%;object-fit:contain;display:block;
+  filter:grayscale(1) contrast(1.03)}
+.vp-poster-cap{position:absolute;left:0;right:0;bottom:0;padding:8px 14px;
+  font-family:'Courier Prime','Courier New',monospace;font-size:.6rem;
+  letter-spacing:.1em;color:var(--wb-gold-lo);
+  background:color-mix(in srgb, var(--wb-ink) 86%, transparent);
+  border-top:1px solid var(--wb-border)}
+/* the still stacks above the copy when the panel is narrow */
+@media (max-width:900px){
+  .vp-face{flex-direction:column}
+  .vp-face-still{width:100%;height:34%;border-right:0;
+    border-bottom:1px solid var(--wb-border)}
+}
+
 /* ROOT */
 .ex-root{opacity:0;transition:opacity .8s ease;display:flex;flex-direction:column;min-height:max(100vh, calc(var(--ex-true-h, 0px) + 64px));padding:54px 8px 64px}
 /* B&W PASS 2 (2026-06-07): film grain over the whole room — a fixed wash
@@ -82,6 +134,25 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 
 /* LEFT — scrollable tracklist */
 .ex-left{overflow-y:auto;overflow-x:hidden;border-right:1px solid var(--wb-border);scrollbar-width:thin;scrollbar-color:var(--wb-border-hi) transparent}
+/* [E5 2026-07-30] CLEARANCE FOR THE PLAYER BAR — and an honest note on what
+   this does and does not fix.
+   WHAT IT FIXES: .ex-left and .fs-wrap are INTERNALLY scrolled columns of
+   fixed height. A position:fixed .pb over their bottom edge hides a strip that
+   their own scrolling can never reach — the same shape of defect as the Robots
+   deck in E4, where 75px of tracklist and viewer sat permanently under a bar.
+   The padding gives those columns room to scroll clear.
+   WHAT IT DOES NOT FIX, and does not need to: the walk also flagged
+   `tl-track <- pb` on /hr at 533px wide, and that one is a FALSE POSITIVE of
+   the audit rather than a defect. At mobile the tracklist is not internally
+   scrolled — the DOCUMENT scrolls, the page is 14,500px long, and a fixed
+   bottom bar necessarily covers whichever row happens to be under it at the
+   current scroll offset. That row is always one flick from view. Every player
+   bar on the internet behaves this way. The audit's hit-test cannot tell
+   "permanently unreachable" from "currently underneath", so the distinction is
+   recorded here instead of being padded away. */
+body:has(.pb) .ex-left{padding-bottom:76px}
+body:has(.pb) .fs-wrap{padding-bottom:76px}
+body:has(.pb) .ex-root{padding-bottom:88px}
 .ex-left::-webkit-scrollbar{width:3px}
 .ex-left::-webkit-scrollbar-track{background:transparent}
 .ex-left::-webkit-scrollbar-thumb{background:var(--wb-border-hi);border-radius:2px}

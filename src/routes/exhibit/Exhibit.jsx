@@ -876,6 +876,12 @@ export default function Exhibit({ artist }) {
   const thumbTrack = activeTrack !== null ? album.tracks[activeTrack] : album.tracks.find(t => t.videos.length > 0);
   const thumbVid   = thumbTrack?.videos?.[0];
   const hasVideo   = curVideo !== null;
+  /* [E2] the selected track's face, if it declares one. Falls back to the
+     album's FIRST track that has a face, so landing on the album (before any
+     track is clicked) still shows something rather than a hole. */
+  const activeFace = (activeTrack !== null ? album.tracks[activeTrack]?.face : null)
+                     ?? album.tracks.find(t => t.face)?.face
+                     ?? null;
 
   // ── Drag handles ──────────────────────────────────────────────────────────
   function makeSplitDrag(e, containerRef) {
@@ -1031,7 +1037,53 @@ export default function Exhibit({ artist }) {
                       </div>
                     </div>
                   )}
-                  {!hasVideo && !thumbVid && (
+                  {/* ---- E2 2026-07-30: THE FACE, AND THE POSTER -----------
+                      The template's no-video state was a dark panel with a grey
+                      play triangle. For an exhibit whose every track is
+                      video-less that WAS the exhibit, and Mike killed it.
+                      Two replacements, in priority order:
+                        1. the selected track's own `face` — description, still,
+                           register lines, and optionally a button;
+                        2. failing that, the album's `viewerPoster` — something
+                           real to land on.
+                      The old empty state is kept as the last resort so /hr and
+                      /wb, which declare neither, render exactly as before.
+                      THE BUTTON FIRES AN EVENT, it does not know what it opens.
+                      That keeps this shared component ignorant of twins; the
+                      exhibit flow listens and does the exhibit-specific thing. */}
+                  {!hasVideo && !thumbVid && activeFace && (
+                    <div className="vp-face">
+                      {activeFace.still && (
+                        <img className="vp-face-still" src={activeFace.still} alt="" />
+                      )}
+                      <div className="vp-face-body">
+                        {activeFace.title && <div className="vp-face-title">{activeFace.title}</div>}
+                        {activeFace.blurb && <p className="vp-face-blurb">{activeFace.blurb}</p>}
+                        {Array.isArray(activeFace.lines) && activeFace.lines.length > 0 && (
+                          <ul className="vp-face-lines">
+                            {activeFace.lines.map((l, i) => <li key={i}>{l}</li>)}
+                          </ul>
+                        )}
+                        {activeFace.action && (
+                          <button
+                            className="vp-face-action"
+                            onClick={() => window.dispatchEvent(
+                              new CustomEvent(activeFace.action.event, { detail: { album: album.id } })
+                            )}
+                          >{activeFace.action.label}</button>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  {!hasVideo && !thumbVid && !activeFace && album.viewerPoster && (
+                    <div className="vp-poster">
+                      <img src={album.viewerPoster} alt="" />
+                      {album.viewerPosterCaption && (
+                        <div className="vp-poster-cap">{album.viewerPosterCaption}</div>
+                      )}
+                    </div>
+                  )}
+                  {!hasVideo && !thumbVid && !activeFace && !album.viewerPoster && (
                     <div className="vp-empty-state">
                       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
                         <path d="M7 5.5L22 14L7 22.5V5.5Z" fill="#2a2a2a"/>
