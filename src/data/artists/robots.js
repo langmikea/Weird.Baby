@@ -293,7 +293,14 @@ const spine = [
              gone. They come back one at a time, when the storyline has a
              reason to tempt someone with them - which is worth more than
              having them all on the shelf on day one.
-             `id: null` = no preset param. The plain portal, deliberately. */
+             [FR2 2026-07-31] AND `id: null` = no preset param WAS THE BUG.
+             "The plain portal, deliberately" sounded like restraint and read
+             to the machine as "apply nothing": Portal_Preset_Apply returns
+             early on a null id, so the one entry every visitor takes was the
+             only one that asked the machine for nothing — and what it got was
+             the twin's own default, which is POWERED OFF. The frozen face
+             promised a running unit and the click delivered a dark one.
+             Every entry names its recipe now. */
           /* ---- L2 2026-07-31: RECIPES, NOT A BUTTON SEA -------------------
              A dropdown in the house register, urgent-and-important at the
              top. Each entry is a RECIPE the machine knows by name (see
@@ -307,9 +314,10 @@ const spine = [
              LAST STATE and TEST BENCH. See STATE, the L2 entry. */
           presetsLabel: "ARRIVE AS",
           presets: [
-            { id: null, label: "STANDARD", state: "live",
+            { id: "standard", label: "STANDARD", state: "live",
               line: "A unit that has been running for sixty years and has met " +
-                    "you before. What clicking the picture serves." },
+                    "you before — and, if you were here a moment ago, " +
+                    "exactly as you left it." },
             { id: "idling-updated", label: "IDLING, UPDATED", state: "live",
               line: "Powered, booted, updated, power-cycled, rebooted. Idle, " +
                     "and waiting to be asked something." },
@@ -319,10 +327,14 @@ const spine = [
             { id: "off-first-boot", label: "OFF \u00b7 FIRST BOOT PENDING", state: "live",
               line: "Dark. Never run. Waiting for someone to reach over and " +
                     "throw the switch." },
+            /* [FR2] STILL HELD, and the distinction is the point: STANDARD
+               now resumes WITHIN a browsing session, on a mark that dies with
+               the window. This entry would carry state ACROSS visits, which
+               is the part Mike has not ruled on. */
             { id: "last-state", label: "LAST STATE", state: "held",
               why: "awaiting a privacy ruling",
-              line: "However you left it. Not wired \u2014 the twin already " +
-                    "remembers more than this menu would admit to." },
+              line: "However you left it, across visits \u2014 not within one, " +
+                    "which STANDARD now does on its own." },
             { id: "test-bench", label: "TEST BENCH", state: "held",
               why: "dev entry, by URL",
               line: "The workshop, with the panels showing. Reachable at " +
