@@ -302,7 +302,13 @@ function useAudioPlayer({ onEnded }) {
 }
 
 // ─── SPLIT PERSISTENCE ────────────────────────────────────────────────────────
-const SPLIT_MIN = 25; const SPLIT_MAX = 75;
+/* [S8 2026-07-30] HORIZONTAL WHITESPACE YIELDS TO THE VIEWER. The tracklist
+   was floored at 25% of the width — on /robots that is a three-row list
+   holding a quarter of the screen while the viewer, which owns everything
+   now (S7), is squeezed. The floor drops to 10%: enough for the numbers and
+   a truncated title, which is all a three-track list needs. The ceiling
+   rises too, for the rare case where the list IS the content. */
+const SPLIT_MIN = 10; const SPLIT_MAX = 82;
 function tidyDesc(title, v) {
   let d = (v && (v.label || typeLabel(v.type))) || "";
   if (title && d.indexOf(title) === 0) d = d.slice(title.length).replace(/^[\s\u2014\u2013-]+/, "");
@@ -645,12 +651,19 @@ export default function Exhibit({ artist }) {
     }
   }, [shuffle]);
 
-  const [split, setSplit] = usePersist(artist.splitKey, 50);
+  /* [S8 2026-07-30] THE DEFAULT SPLIT IS THE ARTIST'S. 50/50 is right for a
+     music exhibit whose tracklist is twenty rows deep. /robots has THREE
+     tracks, so half the screen was a column with nine-tenths of it empty —
+     the horizontal half of the dead-space complaint. An artist may now state
+     its own opening split; without one, 50 as before. */
+  const [split, setSplit] = usePersist(artist.splitKey, artist.splitDefault ?? 50);
   const [cfH,   setCfH]   = usePersist(artist.cfKey,    300);
   /* [X2] Hooks cannot be conditional, so the state always exists; the KEY is
      what is conditional. An artist without `bodyKey` gets an inert slot that
      nothing reads and nothing renders. */
   const [bodyH, setBodyH] = usePersist(artist.bodyKey || "wb-body-off", BODY_DEF);
+  /* [S6] the log's volume: closed shows the latest entry + a date index. */
+  const [logOpen, setLogOpen] = useState(false);
   const bodyResizable = !!artist.bodyKey;
   const mainRef = useRef(null);
 
@@ -729,6 +742,7 @@ export default function Exhibit({ artist }) {
          does not start a player. /hr and /wb tracks all carry videos, so this
          branch never runs for them. */
       if (track && track.face) setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));
+      setLogOpen(false);          /* [S6] a new track opens its volume closed */
       return;
     }
     setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));
@@ -1160,10 +1174,19 @@ export default function Exhibit({ artist }) {
                       exhibit flow listens and does the exhibit-specific thing. */}
                   {!hasVideo && !thumbVid && activeFace && (
                     <div className={`vp-face vp-face-${activeFace.kind || "text"}`}>
-                      {activeFace.still && (
-                        <img className="vp-face-still" src={activeFace.still} alt="" />
-                      )}
+                      {/* [S7 2026-07-30] NOTHING FLOATS BETWEEN THE PANELS.
+                          `.vp-face-still` was a flex SIBLING of the body at
+                          38% width, so it read as a large photo hanging in
+                          the gap between the tracklist and the viewer rather
+                          than as anything the viewer owned. Mike's ruling:
+                          THE VIEWER OWNS EVERYTHING — images are track content
+                          INSIDE it. The image is now the first block in the
+                          body's own flow, scrolls with the rest of the track,
+                          and scales with the panel like every other element. */}
                       <div className="vp-face-body">
+                        {activeFace.still && (
+                          <img className="vp-face-still" src={activeFace.still} alt="" />
+                        )}
                         {activeFace.title && <div className="vp-face-title">{activeFace.title}</div>}
                         {activeFace.subtitle && (
                           <div className="vp-face-sub">{activeFace.subtitle}</div>
@@ -1182,9 +1205,22 @@ export default function Exhibit({ artist }) {
                             [PAPA] where they are Mike's. Same discipline as
                             `face` itself: data, never a component, so /hr and
                             /wb cannot notice it exists. */}
+                        {/* [S6 2026-07-30] A LOG OPENS AT THE END.
+                            `entriesMode:"log"` shows the MOST RECENT entry
+                            first and gives the reader a period-true way back
+                            through the rest: a ruled index of dates, the way
+                            a bound volume carries one. No pager chrome, no
+                            "next post" — the index IS the navigation, exactly
+                            as the container proposal specified for `journal`.
+                            Reversal happens HERE, not in the data: the
+                            entries stay in the order they happened. */}
                         {Array.isArray(activeFace.entries) && activeFace.entries.length > 0 && (
                           <ol className="vp-face-entries">
-                            {activeFace.entries.map((en, i) => (
+                            {(activeFace.entriesMode === "log"
+                                ? [...activeFace.entries].reverse()
+                                : activeFace.entries
+                             ).slice(0, activeFace.entriesMode === "log" && !logOpen ? 1 : undefined)
+                             .map((en, i) => (
                               <li key={i} className="vp-fe">
                                 {en.stamp && <span className="vp-fe-stamp">{en.stamp}</span>}
                                 <span className="vp-fe-body">
@@ -1195,6 +1231,26 @@ export default function Exhibit({ artist }) {
                               </li>
                             ))}
                           </ol>
+                        )}
+                        {activeFace.entriesMode === "log" &&
+                         Array.isArray(activeFace.entries) && activeFace.entries.length > 1 && (
+                          <div className="vp-log">
+                            <button className="vp-log-toggle" onClick={() => setLogOpen(o => !o)}>
+                              {logOpen ? "CLOSE THE VOLUME" : "EARLIER ENTRIES"}
+                            </button>
+                            {!logOpen && (
+                              <ol className="vp-log-index">
+                                {[...activeFace.entries].reverse().slice(1).map((en, i) => (
+                                  <li key={i}>
+                                    <button className="vp-log-jump" onClick={() => setLogOpen(true)}>
+                                      <span className="vp-log-stamp">{en.stamp}</span>
+                                      <span className="vp-log-title">{en.title}</span>
+                                    </button>
+                                  </li>
+                                ))}
+                              </ol>
+                            )}
+                          </div>
                         )}
                         {activeFace.footer && (
                           <div className="vp-face-footer">{activeFace.footer}</div>
@@ -1249,7 +1305,13 @@ export default function Exhibit({ artist }) {
                         {activeFace.papa && (
                           <div className="vp-face-papa">{activeFace.papa}</div>
                         )}
-                        {activeFace.action && (
+                        {/* [S5 2026-07-30] THE STANDALONE LAUNCH LINK IS GONE.
+                            It usurped the rack: a door beside four doors, all
+                            leading to the same room in different states. The
+                            PRESETS ARE THE ENTRIES. A face may still declare
+                            `action` — the preset buttons read its event name —
+                            but it no longer renders a button of its own. */}
+                        {activeFace.action && !activeFace.presets && (
                           <button
                             className="vp-face-action"
                             onClick={() => window.dispatchEvent(

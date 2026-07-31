@@ -453,6 +453,27 @@ body.monbase .glassmask canvas{width:100%!important;height:100%!important;
      scanlines either; it resolves their average. Pixelated stays everywhere
      the glass is shown at or above 1:1, which is every bench view. */
   image-rendering:auto!important}
+/* [S9a 2026-07-30] THE CANVAS EDGE, DISSOLVED (not rounded).
+   The apertures are RECTANGLES cut to measured marker centroids, and the
+   standing ruling is explicit that nothing may round them again - the old
+   `circle(50%)` resolved against the diagonal and ate 17px off each end of a
+   128px line. But the physical window is ROUND, so the rectangle's straight
+   bottom edge crosses the lens and reads as a hard seam against the photo's
+   own black. Mike's (a).
+   So the edge is FEATHERED, not clipped: a few percent of alpha falloff at
+   the boundary, which dissolves the seam while every pixel of content stays
+   where it is. Vertical carries most of it (4% of 52px is about 2px, and the
+   deepest ink row sits at 95% - inside the solid stop). Horizontal is
+   deliberately tiny (1.2%, about 1px) because that is the axis the ruling
+   protects: a full-width line dims at its very ends rather than losing them.
+   Two gradients intersected, so the falloff applies on both axes at once. */
+body.monbase .glassmask canvas{
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 4%,#000 96%,transparent 100%),
+                     linear-gradient(to right,transparent 0,#000 1.2%,#000 98.8%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to bottom,transparent 0,#000 4%,#000 96%,transparent 100%),
+             linear-gradient(to right,transparent 0,#000 1.2%,#000 98.8%,transparent 100%);
+  mask-composite:intersect}
 /* THE FLASH at the measured dot: the aperture lights, the bloom is its spill */
 body.monbase #unitfront.clickflash::before{content:'';position:absolute;
   left:28.95%;top:59.4583%;width:1.4%;aspect-ratio:1/1;margin:-0.7% 0 0 -0.7%;
@@ -930,9 +951,24 @@ body.monbase .chy:focus,body.monbase .chy:focus-visible{outline:none}
 body.monbase .chy .chytxt{display:flex;align-items:center;justify-content:center;
   width:100%;height:100%;pointer-events:none}
 /* the ONLY state: inverse video while held. Last, so it beats hover. */
+/* [S2 2026-07-30] THE SCRIM WAS TOO STRONG AND THE HOLE READ AS INK.
+   MEASURED on the SERVED build, latched digit 1: glyph mean 84.6 against a
+   slug of 234.6 - 6.27:1. That is legible, and it is exactly what the
+   original note predicted ("around value 81"). It is also indistinguishable
+   from BLACK INK at this size, which is the one thing T4 set out to kill: a
+   knockout that looks like ink has not knocked anything out as far as the eye
+   is concerned.
+   The picture behind that button measures ~193, so the scrim at .62 was
+   pulling the hole down to 84. At .34 the same arithmetic lands it near 133 -
+   still clearly darker than the slug, but light enough to carry the FEED'S
+   OWN TEXTURE through the letterform, which is what makes it read as a hole
+   instead of a glyph. It also moves, because the feed does.
+   The value is deliberately not lower: this is a cutout onto a live picture,
+   so its contrast is the tube's to set, and on a darker feed the digit
+   correctly goes darker. */
 body.monbase .chy:active,body.monbase .chy.chydown,
 body.monbase .chy:hover:active,body.monbase .chy:hover.chydown{
-  background-color:rgba(18,18,18,.62);   /* the scrim: the picture, dimmed */
+  background-color:rgba(18,18,18,.34);   /* the scrim: the picture, dimmed */
   color:transparent;text-shadow:none;border-color:#fff}
 body.monbase .chy:active .chytxt,body.monbase .chy.chydown .chytxt{visibility:hidden}
 body.monbase .chy:active::before,body.monbase .chy.chydown::before{
@@ -974,7 +1010,15 @@ body.monbase #unitstage::after{content:'';position:absolute;
    at every stage width. */
 #maskTop::before{z-index:2}
 body.monbase #maskTop::before{background-size:100% 62%}
-@keyframes bandroll{0%{background-position:0 -44px}100%{background-position:0 100%}}
+/* [S1 2026-07-30] THE UNIT MISMATCH, FIXED. `background-size` became a
+   PERCENTAGE (100% 62%) when the band was sized to the glass, but these
+   keyframes still drove `background-position` from a PIXEL value, so the two
+   did not share units and the band spent part of every cycle entirely off
+   the glass. Both ends are percentages now: -100% is fully above the
+   aperture, 200% fully below, so one band crosses per cycle at any size.
+   This was NOT the cause of the dark bands - that was the scanline aliasing
+   above - but it was a real defect found on the way. */
+@keyframes bandroll{0%{background-position:0 -100%}100%{background-position:0 200%}}
 
 </style>
 <div class="cols">
@@ -1247,14 +1291,15 @@ Screen.prototype.display=function(){
     each row cell lights z-1 px with a 1px dark scanline gap (glass structure, display-only).
     [DEV, Mike ruling 2026-07-17] z = SCREEN_ZOOM (integer, no smoothing): half (2x) default, size control in chrome. */
  const ctx=this.ctx;const z=SCREEN_ZOOM;
+ const gap=this.gapPx();   /* [S1] 1 at bench scale, 0 inside the aperture */
  if(this.cv.width!==this.w*z||this.cv.height!==this.glassH*z){this.cv.width=this.w*z;this.cv.height=this.glassH*z;}
  ctx.imageSmoothingEnabled=false;ctx.fillStyle="#000";ctx.fillRect(0,0,this.cv.width,this.cv.height);
  ctx.fillStyle="rgb(230,242,255)";
  for(let gy=0;gy<this.glassH;gy++){
-  let dy,rowH=z-1;                                                  /* top: z-1 lit + 1 gap = the CEILING (porch ruling: no more than current) */
+  let dy,rowH=z-gap;                                                /* top: z-gap lit (+1 gap at bench scale) - the CEILING (porch ruling: no more than current) */
   if(this.h==this.glassH){dy=gy;}                                   /* top: progressive, all rows [SSD1306.cpp:607-608] */
   else if(FRONT_MAP_OVERRIDE=="tophalf"){dy=(gy<this.h)?gy:-1;}     /* NON-CANONICAL dev override */
-  else {dy=(gy%2==0)?gy/2:-1;rowH=2*z-1;}                           /* front canonical interlace [SSD1306.cpp:604-605] - MAPPING unchanged (code truth); porch ruling 2026-07-17: the dark-line treatment was far too drastic -> lit band now spans into the dark line (ratio inverted: 2z-1 lit / 1 gap), display-only */
+  else {dy=(gy%2==0)?gy/2:-1;rowH=2*z-gap;}                           /* front canonical interlace [SSD1306.cpp:604-605] - MAPPING unchanged (code truth); porch ruling 2026-07-17: the dark-line treatment was far too drastic -> lit band now spans into the dark line (ratio inverted: 2z-1 lit / 1 gap), display-only */
   if(dy<0)continue;
   for(let x=0;x<this.w;x++){
    let sx=x,sy=dy;if(this.flip){sx=this.w-1-x;sy=this.h-1-dy;}
@@ -1269,10 +1314,10 @@ Screen.prototype.display=function(){
   else{
    ctx.fillStyle="rgba(230,242,255,"+(THEATER_MAX_ALPHA*(1-age/THEATER_DECAY_MS)).toFixed(3)+")";
    for(let gy=0;gy<this.glassH;gy++){
-    let dy,rowH=z-1;
+    let dy,rowH=z-gap;   /* [S1] the ghost bands too if it disagrees with the live pass */
     if(this.h==this.glassH){dy=gy;}
     else if(FRONT_MAP_OVERRIDE=="tophalf"){dy=(gy<this.h)?gy:-1;}
-    else {dy=(gy%2==0)?gy/2:-1;rowH=2*z-1;}
+    else {dy=(gy%2==0)?gy/2:-1;rowH=2*z-gap;}
     if(dy<0)continue;
     for(let x=0;x<this.w;x++){
      let sx=x,sy=dy;if(this.flip){sx=this.w-1-x;sy=this.h-1-dy;}
@@ -1286,6 +1331,48 @@ Screen.prototype.display=function(){
 };
 
 /* ============ [SHIM] clock, PRNG, Serial, DFPlayer, NeoPixels, inputs ============ */
+/* ======== [S1 2026-07-30] THE SCANLINE GAP IS A FUNCTION OF SIZE ========
+   MIKE'S REPRO (power OFF then ON, watch the noise) ROOT-CAUSED BY MEASURING
+   THE SAME INSTANT AT THREE STAGES:
+     A. topOLED.fb        DARK RUNS = 0   - the machine's truth is clean noise
+     B. cvTop (384x192)   DARK RUNS = 64  - the blit bakes one gap per glass row
+     C. the aperture      107x52, scale y = 0.2711
+   So the bands are NOT the W9 rolling band (which paints BEHIND the canvas and
+   cannot be seen at all), not the CRT keyframes, and not phosphor ghosting.
+   They are the BAKED SCANLINES ALIASING: 64 rows of "2 lit + 1 dark" is a
+   period-3 pattern, and the aperture minifies 192px into 52 - 3.69 source rows
+   per output row. A 3.69-against-3 beat is exactly a slow band pattern, and it
+   survives `image-rendering:auto` because Chrome's minification samples a
+   couple of texels rather than box-averaging all 3.69 of them.
+   THAT ALSO EXPLAINS THE VARIANCE Mike saw. The beat's PHASE depends on the
+   aperture's sub-pixel position and height, which shift with the stage size
+   and the device pixel ratio - so the band count and contrast change from
+   power-cycle to power-cycle while nothing in the machine has changed.
+   THE FIX IS THE PHYSICS THE FILE ALREADY WROTE DOWN: "at this size a real
+   monitor does not resolve its own scanlines either; it resolves their
+   average." Below roughly one device pixel per glass row a scanline CANNOT be
+   resolved, so it must not be baked. The gap is therefore MEASURED, not
+   assumed - which also means the gap comes back correctly when Mike drags the
+   monitor large, and the bench (at or above 1:1) is untouched.
+   The check is cached: display() runs constantly and a layout read per frame
+   would be its own defect. */
+const GLASS_SCANLINE_MIN=1.6;   /* device px per glass row to resolve a gap */
+const GLASS_GAP_TTL=500;        /* ms between re-measurements */
+Screen.prototype.gapPx=function(){
+ const now=(typeof performance!=="undefined")?performance.now():Date.now();
+ if(this._gapAt&&(now-this._gapAt)<GLASS_GAP_TTL)return this._gap;
+ this._gapAt=now;
+ let gap=1;
+ try{
+  const r=this.cv.getBoundingClientRect();
+  if(r.height>0){
+   const per=(r.height/this.glassH)*(window.devicePixelRatio||1);
+   if(per<GLASS_SCANLINE_MIN)gap=0;
+  }
+ }catch(e){}
+ this._gap=gap;
+ return gap;
+};
 let SCREEN_ZOOM=3; /* [DEV, Mike porch ruling 2026-07-17] screens THREE-QUARTER by default (supersedes the morning half-size ruling); integer display-only scaling, size control in device panel */
 function setZoom(z){
  SCREEN_ZOOM=z;
@@ -7162,7 +7249,23 @@ function devLegacyMenu(){menuNum_PTR=0;lineNum_PTR=0;currentState=MENU_SYSTEM_CO
    [PAPA] SLOTS: the L1 chatter stream reserves egg/passcode real estate —
    marked EGG-SLOT in Boot3_Chatter; no eggs invented here. */
 const BOOT_LEVEL_KEY="wbr_boot_level";
-function bootLevel(){try{return parseInt(localStorage.getItem(BOOT_LEVEL_KEY)||"0",10);}catch(e){return 0;}}
+/* [S3 2026-07-30, Mike] THE DEFAULT IS A RETURNING MACHINE.
+   A first-time visitor was being handed the VIRGIN install - the longest,
+   strangest ceremony the machine has, before they had any idea what they
+   were looking at. That is the wrong first impression for a portal: what
+   arrives down the wire should be a unit that has been running for sixty
+   years, not one being unboxed.
+   So an ABSENT record now reads as ESTABLISHED (level 2), not virgin. The
+   virgin experience is not lost - it is the CLEAN BOOT preset, which is
+   the deliberate way to ask for it. A record that EXISTS is still obeyed
+   exactly as before, so a machine mid-journey is untouched. */
+const BOOT_LEVEL_DEFAULT=2;   /* L3-class: established, recognises its owner */
+function bootLevel(){try{
+  const v=localStorage.getItem(BOOT_LEVEL_KEY);
+  if(v===null||v==="")return BOOT_LEVEL_DEFAULT;
+  const n=parseInt(v,10);
+  return Number.isFinite(n)?n:BOOT_LEVEL_DEFAULT;
+ }catch(e){return BOOT_LEVEL_DEFAULT;}}
 function setBootLevel(n){try{localStorage.setItem(BOOT_LEVEL_KEY,String(n));}catch(e){}}
 function devResetBootLevel(){setBootLevel(0);chip("warn","[DEV] install state reset to VIRGIN — Restart to see Level 1");}
 function Top_Working(t){
@@ -9344,7 +9447,16 @@ function Mon_Controls_In(){
   if(!strip){strip=document.createElement("div");strip.id="monlayout";}
   warp.appendChild(strip);
   if(!strip.childElementCount){
-   for(let i=1;i<=5;i++){
+   /* [S4 2026-07-30, Mike] THE STRIP IS 1-4 AND [X].
+       Five feeds were four more than the fiction needed and one more than the
+       strip could spare. The fifth position becomes the way OUT: press X and
+       the portal closes. It sits with the other controls, in the same
+       register, and it is learned in one press - which is the whole argument
+       against the button that used to live outside the picture.
+       The strip is the ONLY close affordance now; the overlay's own control
+       retires (museum side). Escape still works, because a keyboard exit
+       costs nothing and W2 asked for an explicit one. */
+   for(let i=1;i<=4;i++){
     const b=document.createElement("button");
     b.className="chy";
     Chy_Label(b,String(i));
@@ -9354,7 +9466,28 @@ function Mon_Controls_In(){
     b.setAttribute("onclick","devLayout("+i+")");
     strip.appendChild(b);
    }
+   const x=document.createElement("button");
+   x.className="chy chy-x";
+   Chy_Label(x,"X");
+   Chy_Knock(x,"X",CHY_M.dw,CHY_M.dh,CHY_M.dfs,CHY_M.dwt);
+   x.title="close the portal";
+   x.setAttribute("onclick","Portal_Close()");
+   strip.appendChild(x);
   }
+ }catch(e){}
+}
+/* [S4] THE WAY OUT. Inside the museum's overlay the twin is an iframe, so
+   closing means telling the parent; standalone there is no parent to tell and
+   the press is a no-op that says so. postMessage is right here where a query
+   string was right for the presets: this is an EVENT, not a state to arrive
+   in, and it travels the other way. */
+function Portal_Close(){
+ try{
+  if(window.parent&&window.parent!==window){
+   window.parent.postMessage({wb:"portal-close"},"*");
+   return;
+  }
+  chip("ok","[X] close is for the portal frame - standalone there is nothing to close");
  }catch(e){}
 }
 /* ======== T6: THE POWER CONTROL SHOWS MACHINE STATE ====================

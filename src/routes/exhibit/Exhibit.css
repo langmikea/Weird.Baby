@@ -27,8 +27,18 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
    register, tokens only — no hex literals, so it follows the palette. */
 .vp-face{position:absolute;inset:0;display:flex;align-items:stretch;gap:0;
   background:var(--wb-ink);overflow:hidden}
-.vp-face-still{width:38%;min-width:0;object-fit:cover;object-position:center;
-  border-right:1px solid var(--wb-border);filter:grayscale(1) contrast(1.03)}
+/* [S7] one column: the body is the whole face, and everything the track owns
+   lives inside it. */
+.vp-face>.vp-face-body{flex:1 1 auto;width:100%}
+/* [S7 2026-07-30] THE IMAGE IS CONTENT, NOT FURNITURE. Was a 38%-wide flex
+   sibling that read as a photo floating in the gap between the panels. It is
+   now a block in the body's own flow — full width of the text column, capped
+   by the panel's HEIGHT so it shrinks continuously as the body is dragged
+   shorter (S8) instead of holding a fixed share and forcing the words out. */
+.vp-face-still{display:block;width:100%;max-height:min(38cqh,260px);
+  object-fit:cover;object-position:center;
+  border:1px solid var(--wb-border);filter:grayscale(1) contrast(1.03);
+  flex:0 0 auto}
 .vp-face-body{flex:1;min-width:0;padding:clamp(14px,2.2vw,30px);
   display:flex;flex-direction:column;gap:12px;overflow-y:auto}
 /* [O5 2026-07-30] THE STICKY CONTROL MUST NOT SIT ON THE CONTENT.
@@ -110,7 +120,7 @@ body:has(.vp-face) .vp-area::before{display:none}
    place the exception is taken, on purpose and for the same reason. */
 .vp-face-portal{background:#0b0b0a;color:#cfcbc0}
 .vp-face-portal .vp-face-still{filter:grayscale(1) contrast(1.12) brightness(.82);
-  border-right:1px solid #3b3831}
+  border:1px solid #3b3831}
 .vp-face-portal .vp-face-title{color:#e8e4d8;letter-spacing:.30em}
 .vp-face-sub{font-family:'Courier Prime','Courier New',monospace;
   font-size:calc(var(--face-fs) * .60);letter-spacing:.14em;text-transform:uppercase;
@@ -166,6 +176,29 @@ body:has(.vp-face) .vp-area::before{display:none}
   .vp-preset,.vp-xref{flex-direction:column;gap:3px}
 }
 
+/* [S6 2026-07-30] THE LOG'S INDEX — a bound volume's date list, not a pager.
+   Ruled rows, stamps in the mono face, and one verb to open the volume. The
+   container proposal asked for "a date-index that reads period-true, like a
+   log sheet", and this is that at first-layer fidelity. */
+.vp-log{margin-top:10px;border-top:1px solid var(--wb-border);padding-top:9px}
+.vp-log-toggle{font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--face-fs) * .56);letter-spacing:.22em;text-transform:uppercase;
+  background:transparent;color:var(--wb-gold);border:1px solid var(--wb-border-hi);
+  padding:5px 11px;cursor:pointer;transition:background .16s,color .16s}
+.vp-log-toggle:hover{background:var(--wb-gold);color:var(--wb-ink-card)}
+.vp-log-index{list-style:none;padding:0;margin:9px 0 0}
+.vp-log-index li{border-bottom:1px solid var(--wb-border)}
+.vp-log-jump{display:flex;gap:12px;align-items:baseline;width:100%;text-align:left;
+  background:transparent;border:0;padding:5px 2px;cursor:pointer}
+.vp-log-jump:hover{background:var(--wb-ink-soft)}
+.vp-log-stamp{flex:0 0 auto;min-width:8.5ch;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--face-fs) * .55);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--wb-gold-lo)}
+.vp-log-title{font-family:'Syne',sans-serif;font-weight:700;
+  font-size:calc(var(--face-fs) * .62);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--wb-gold)}
+
 .vp-face-footer{margin-top:12px;
   font-family:'Courier Prime','Courier New',monospace;
   font-size:clamp(.53rem,.85vw,.63rem);letter-spacing:.07em;
@@ -201,8 +234,8 @@ body:has(.vp-face) .vp-area::before{display:none}
 /* the still stacks above the copy when the panel is narrow */
 @media (max-width:900px){
   .vp-face{flex-direction:column}
-  .vp-face-still{width:100%;height:34%;border-right:0;
-    border-bottom:1px solid var(--wb-border)}
+  /* [S7] the still is in-flow now; the old side-by-side override is dead. */
+  .vp-face-still{max-height:34cqh}
 }
 
 /* ROOT */

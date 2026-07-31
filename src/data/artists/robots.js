@@ -54,7 +54,137 @@ import RobotsExhibitFlow from "../../routes/robots/RobotsExhibitFlow.jsx";
    THE CAROUSEL IS REAL ROBOTS ONLY, plus the purveyor's own album (below).
    Entries come back as data, in this file, when a family earns a photograph
    and a tracklist. No component changes needed. */
+/* [S10] the WBR tracks, declared once and referenced by both covers. */
+const WBR_TRACKS = [
+      {
+        id: "about",
+        title: "Who we are",
+        videos: [],
+        tags: ["about", "house", "purveyor"],
+        face: {
+          kind: "text",
+          title: "WHO WE ARE",
+          blurb:
+            "Weird.Baby buys weird things, works out what they are, and sells " +
+            "the ones that should go on living. The robots wing is the part of " +
+            "that work which refused to stay a footnote.",
+          lines: [
+            "TRADE    we buy weird things and work out what they are",
+            "TAGLINE  “Purveyors of the Weird.Baby.”",
+          ],
+          entries: [
+            { stamp: "WHAT", title: "A purveyor, not a maker",
+              line: "Four parties touched these machines and only one of them " +
+                    "built anything. We are the one that arrived sixty years late.",
+              note: "" },
+            { stamp: "HOW", title: "Found, cleaned, returned",
+              line: "Power first, then the glass, then the software — and only " +
+                    "then the question of what any of it was for.",
+              note: "" },
+            { stamp: "WHY", title: "[PAPA]",
+              line: "The house's own answer to the only question a visitor " +
+                    "actually asks.",
+              note: "[PAPA] — this one is Mike's and should stay Mike's" },
+          ],
+          footer: "“Restoration house” is not what we are. Weird.Baby is Weird.Baby.",
+        },
+      },
+      {
+        id: "faq",
+        title: "FAQ",
+        videos: [],
+        tags: ["faq", "questions", "buying"],
+        face: {
+          kind: "text",
+          title: "FREQUENTLY ASKED",
+          blurb:
+            "The questions that actually arrive, answered plainly. What is it, " +
+            "does it work, is it for sale, and why does it know that.",
+          entries: [
+            { stamp: "Q", title: "Is it real?",
+              line: "The hardware is. Everything the machine says about where " +
+                    "it came from is the machine's account of it.",
+              note: "[PAPA] — how straight to play this" },
+            { stamp: "Q", title: "Does it still work?",
+              line: "Yes. Power was the hard part, and it was solved — the " +
+                    "batteries came back, and the software followed.",
+              note: "[PAPA]" },
+            { stamp: "Q", title: "How many are there?",
+              line: "31.4. The fraction is not a typo and we are not going to " +
+                    "explain it.",
+              note: "" },
+            { stamp: "Q", title: "Can I buy one?",
+              line: "Some. Not all — several are held, and one is patient zero.",
+              note: "[PAPA] — what to say about availability" },
+            { stamp: "Q", title: "Why does it know that?",
+              line: "It does not. It performs a calculation against a " +
+                    "prescribed model, and it never pretends otherwise.",
+              note: "" },
+            { stamp: "Q", title: "Who is W.O.?",
+              line: "Unknown. That is not a deflection — it is the honest " +
+                    "state of the record, and it has been since the first box arrived.",
+              note: "" },
+          ],
+          footer: "The answers a visitor gets should be shorter than these. " +
+                  "[PAPA] — the final wording throughout.",
+        },
+      },
+      {
+        id: "contact",
+        title: "Contact",
+        videos: [],
+        tags: ["contact", "provenance", "corrections"],
+        face: {
+          kind: "text",
+          title: "CONTACT",
+          blurb:
+            "For provenance questions, corrections to the record, and anyone " +
+            "who thinks they have seen one of these before.",
+          entries: [
+            { stamp: "PROVENANCE", title: "You have seen one before",
+              line: "The most useful message we can receive. Where, when, and " +
+                    "any number you can remember off it.",
+              note: "" },
+            { stamp: "CORRECTION", title: "The record is wrong",
+              line: "It will be, in places — it was written as things happened " +
+                    "and some of it was wrong on the day.",
+              note: "" },
+            { stamp: "PURCHASE", title: "Availability",
+              line: "Which units are held, which are not, and what a case tier " +
+                    "actually includes.",
+              note: "[PAPA]" },
+            { stamp: "REACH", title: "[PAPA]",
+              line: "Address, and the decision about how much of it to publish.",
+              note: "[PAPA] — a decision, not a writing task" },
+          ],
+        },
+      },
+];
+
 const spine = [
+  /* ---- S10 2026-07-30: THE COVER VARIANT, FAR LEFT ---------------------
+     Mike's ruling: duplicate the Robots cover with the "Weird.Baby" wordmark
+     replaced by THE WB MARK — the smiling baby in the ring, from the museum's
+     own assets — and give the variant the first position in the deck.
+     EVERYTHING ELSE IS HELD CONSTANT ON PURPOSE: same ground, same border,
+     same "ROBOTS" setting, same rule, same strapline, same square. The only
+     variable is wordmark-vs-mark, because that is the comparison being asked
+     for. Generated by `tools/make_robots_cover.py` — not hand-composited, so
+     a re-render cannot drift.
+     THE TRACKS ARE SHARED BY REFERENCE, not copied. Two covers, one album's
+     worth of content; a second copy of six faces would be two things to keep
+     in step and one of them would eventually be wrong. */
+  {
+    id: "wbr-logo",
+    title: "Weird.Baby Robots",
+    year: null,
+    tags: ["wbr", "house", "front-desk", "cover-variant"],
+    art: "/robots/art/wbr-cover-logo.png",
+    accent: null,
+    viewerPoster: "/WeirdBaby_PhotoID.png",
+    viewerPosterCaption: "Weird.Baby — purveyors of the weird.",
+    tracks: WBR_TRACKS,
+  },
   {
     id: "mgk-viiip",
     title: "MGK-VIIIp",
@@ -221,7 +351,15 @@ const spine = [
         videos: [],
         tags: ["journal", "record", "2024", "provenance"],
         face: {
+          /* [S6 2026-07-30] THE RECORD OPENS ON ITS MOST RECENT ENTRY.
+             A log that opens at the beginning is an archive; a log that opens
+             at the end is a RECORD - it tells you where things stand and lets
+             you walk back. `entriesMode:"log"` asks the viewer for the
+             newest-first order and the period-true browse (S6); the entries
+             below stay in the order they happened, because that is the truth
+             and the presentation is the viewer's job. */
           kind: "text",
+          entriesMode: "log",
           title: "THE RECORD",
           blurb:
             "The weekly log of the reverse-discovery: what arrived, what it " +
@@ -321,111 +459,7 @@ const spine = [
     accent: null,
     viewerPoster: "/WeirdBaby_PhotoID.png",
     viewerPosterCaption: "Weird.Baby — purveyors of the weird.",
-    tracks: [
-      {
-        id: "about",
-        title: "Who we are",
-        videos: [],
-        tags: ["about", "house", "purveyor"],
-        face: {
-          kind: "text",
-          title: "WHO WE ARE",
-          blurb:
-            "Weird.Baby buys weird things, works out what they are, and sells " +
-            "the ones that should go on living. The robots wing is the part of " +
-            "that work which refused to stay a footnote.",
-          lines: [
-            "TRADE    we buy weird things and work out what they are",
-            "TAGLINE  “Purveyors of the Weird.Baby.”",
-          ],
-          entries: [
-            { stamp: "WHAT", title: "A purveyor, not a maker",
-              line: "Four parties touched these machines and only one of them " +
-                    "built anything. We are the one that arrived sixty years late.",
-              note: "" },
-            { stamp: "HOW", title: "Found, cleaned, returned",
-              line: "Power first, then the glass, then the software — and only " +
-                    "then the question of what any of it was for.",
-              note: "" },
-            { stamp: "WHY", title: "[PAPA]",
-              line: "The house's own answer to the only question a visitor " +
-                    "actually asks.",
-              note: "[PAPA] — this one is Mike's and should stay Mike's" },
-          ],
-          footer: "“Restoration house” is not what we are. Weird.Baby is Weird.Baby.",
-        },
-      },
-      {
-        id: "faq",
-        title: "FAQ",
-        videos: [],
-        tags: ["faq", "questions", "buying"],
-        face: {
-          kind: "text",
-          title: "FREQUENTLY ASKED",
-          blurb:
-            "The questions that actually arrive, answered plainly. What is it, " +
-            "does it work, is it for sale, and why does it know that.",
-          entries: [
-            { stamp: "Q", title: "Is it real?",
-              line: "The hardware is. Everything the machine says about where " +
-                    "it came from is the machine's account of it.",
-              note: "[PAPA] — how straight to play this" },
-            { stamp: "Q", title: "Does it still work?",
-              line: "Yes. Power was the hard part, and it was solved — the " +
-                    "batteries came back, and the software followed.",
-              note: "[PAPA]" },
-            { stamp: "Q", title: "How many are there?",
-              line: "31.4. The fraction is not a typo and we are not going to " +
-                    "explain it.",
-              note: "" },
-            { stamp: "Q", title: "Can I buy one?",
-              line: "Some. Not all — several are held, and one is patient zero.",
-              note: "[PAPA] — what to say about availability" },
-            { stamp: "Q", title: "Why does it know that?",
-              line: "It does not. It performs a calculation against a " +
-                    "prescribed model, and it never pretends otherwise.",
-              note: "" },
-            { stamp: "Q", title: "Who is W.O.?",
-              line: "Unknown. That is not a deflection — it is the honest " +
-                    "state of the record, and it has been since the first box arrived.",
-              note: "" },
-          ],
-          footer: "The answers a visitor gets should be shorter than these. " +
-                  "[PAPA] — the final wording throughout.",
-        },
-      },
-      {
-        id: "contact",
-        title: "Contact",
-        videos: [],
-        tags: ["contact", "provenance", "corrections"],
-        face: {
-          kind: "text",
-          title: "CONTACT",
-          blurb:
-            "For provenance questions, corrections to the record, and anyone " +
-            "who thinks they have seen one of these before.",
-          entries: [
-            { stamp: "PROVENANCE", title: "You have seen one before",
-              line: "The most useful message we can receive. Where, when, and " +
-                    "any number you can remember off it.",
-              note: "" },
-            { stamp: "CORRECTION", title: "The record is wrong",
-              line: "It will be, in places — it was written as things happened " +
-                    "and some of it was wrong on the day.",
-              note: "" },
-            { stamp: "PURCHASE", title: "Availability",
-              line: "Which units are held, which are not, and what a case tier " +
-                    "actually includes.",
-              note: "[PAPA]" },
-            { stamp: "REACH", title: "[PAPA]",
-              line: "Address, and the decision about how much of it to publish.",
-              note: "[PAPA] — a decision, not a writing task" },
-          ],
-        },
-      },
-    ],
+    tracks: WBR_TRACKS,
   },
 ];
 
@@ -438,6 +472,10 @@ export const robotsExhibit = {
   facts: [],
   defaultActiveIndex: Math.max(0, spine.findIndex(a => a.id === "mgk-viiip")),
   splitKey: "wb-rb-split",
+  /* [S8] three tracks do not need half the screen. The viewer owns everything
+     (S7), so it opens owning most of the width too; the splitter still moves
+     freely from 10% to 82%. */
+  splitDefault: 24,
   cfKey: "wb-rb-cfh",
   /* [X2 2026-07-30] BODY HEIGHT IS THE VISITOR'S. Declaring bodyKey grows the
      drag handle under the tracklist/viewer block and persists the height, the
