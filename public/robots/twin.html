@@ -2188,6 +2188,14 @@ const HINT_BACK="<scroll back>", HINT_AGAIN="<shake again  scroll back>",
       HINT_MENU_PICK="<scroll change  click choose>",
       /* the letter dial: one ring, one click per character. */
       HINT_SPELL="<scroll letter  click take>",
+      /* [G2 2026-07-31] THE REGISTER'S VERBS. A record is read a page at a
+         time (click on), corrected where it was entered (scroll amend), and
+         struck out only by the machine's ACT verb, twice. Named here with the
+         rest because the sweep is right: a verb typed at its site is a verb
+         that drifts from its twin somewhere else. */
+      HINT_REC_PAGE="<click on  scroll amend>",
+      HINT_REC_PURGE="<shake to purge  scroll amend>",
+      HINT_REC_CONFIRM="<shake again  scroll cancel>",
       HINT_AGAIN_EXIT="click=again scrl=exit";
 /* ============ THE RAIL CARD [LANGUAGE COMPLETION 2026-07-26] ============
    Mike's original block (M8BALL.ino:81-82) finally has its name. It was typed
@@ -2415,6 +2423,19 @@ const UTTER_BUDGET=122;   /* the centred-utterance width budget, shared */
                                             legal while row <= h-NUDGE
    The bound is read from the SCREEN, so the top glass (64 rows) and the front
    glass (32) each get their own answer and neither is hardcoded. */
+/* [G2 2026-07-31] MEASURE IN ORDER TO CLIP - the family's horizontal twin of
+   Fit_ClampRow. Fit_Line handles a line that may change FACE to fit; this is
+   for a fixed-face COLUMN that must not leave its box, and it trims by
+   measurement rather than by a character count so a wording change cannot
+   silently run off the right edge. It lives here, and is an owner of
+   getTextBounds by name, because the conformance check is right to be
+   suspicious of a lone measurement: the answer is one owner, not an
+   exemption at every site that needs one. */
+function Fit_ClipTo(text,w){
+ let t=String(text);
+ try{ while(t.length&&OLED.getTextBounds(t).w>w) t=t.slice(0,-1); }catch(e){}
+ return t;
+}
 function Fit_ClampRow(row,small){
  try{
   const h=OLED.h;
@@ -5803,23 +5824,185 @@ function User_Panel_Build(){
     onSet:function(f){User_Get().yr=String(f.text||"").trim();User_Save();}},
  ],sel:0,edit:false};
 }
+/* ============ [G2 2026-07-31] THE HOUSE REGISTER ==========================
+   THE DOCTRINE, MADE A FEATURE. The guest gets the richest experience the
+   machine can give, and the house is ARCHITECTURALLY unable to harvest
+   anything beyond what that experience needs. There are no sneak-arounds:
+   W.B possesses ZERO personal information, always. Nothing here has a
+   network path - there is no endpoint to send it to, which is a stronger
+   promise than a policy saying we choose not to.
+   So the machine can afford to be OPEN about it. This is a HOUSE REGISTER,
+   not a cookie banner: the unit turns the ledger around and shows the guest
+   their own page, in the guest's own words, with the two controls a register
+   has always had - AMEND an entry, or strike the page out entirely.
+   THE HONEST DISTINCTION THIS SURFACE MUST MAKE. The loaders all default to
+   a populated object when storage is empty (`if(!health)health={h:100,...}`),
+   so an in-memory value proves nothing about what is WRITTEN DOWN. Every row
+   therefore asks STORAGE, not the live object, whether there is a record -
+   otherwise a machine holding nothing would show a guest a full page and the
+   register would be lying in the guest's favour, which is still lying.
+   [PAPA] WORDING SLOTS: every label and every phrase below is a plain-words
+   draft standing in for Mike's. The structure is the deliverable; the voice
+   is his. Marked PAPA-WORDS at each site. */
+const REC_PAGES = 4;
+function Rec_Stored(k){try{return localStorage.getItem(k)!==null;}catch(e){return false;}}
+function Rec_StoredS(k){try{return sessionStorage.getItem(k)!==null;}catch(e){return false;}}
+const REC_NONE = "NOTHING ON FILE";          /* [PAPA-WORDS] */
+/* [PAPA-WORDS] the install levels in the guest's terms, not the boot table's. */
+function Rec_Install(){
+ if(!Rec_Stored(BOOT_LEVEL_KEY))return "ASSUMED ESTABLISHED";
+ const l=bootLevel();
+ return l<=0?"NEVER STARTED":(l===1?"STARTED ONCE":"ESTABLISHED");
+}
+/* THE NINE THINGS, IN HUMAN TERMS. No key names reach the glass: a guest
+   should not have to know the word `localStorage` to read their own record.
+   Labels are held to 9 characters because the label column is 36px of
+   TomThumb and the value column has to survive too. */
+function Rec_Page(p){
+ const u=User_Get(), sign=User_Sign();
+ if(p===0)return {t:"YOUR RECORD",rows:[            /* [PAPA-WORDS] */
+   ["NAME",  Rec_Stored("wbr_user")&&User_Name()?User_Name_Display():REC_NONE],
+   ["BORN",  Rec_Stored("wbr_user")&&User_Has_Birthdate()?User_Born_Display():REC_NONE],
+   ["SIGN",  sign<0?REC_NONE:HORO_SIGNS[sign]],
+   ["INSTALL",Rec_Install()],
+ ]};
+ if(p===1)return {t:"ALSO HELD",rows:[              /* [PAPA-WORDS] */
+   ["CONDITION",Rec_Stored("wbr_health")?(Math.round(Health_H())+"%"):REC_NONE],
+   ["STARTS",   Rec_Stored("wbr_health")?String(health&&health.powerOns||0):REC_NONE],
+   ["DELIVERED",Rec_Stored("wbr_parcel")&&parcel&&parcel.keys.length
+                 ?(parcel.keys.length+" PARCELS"):REC_NONE],
+   ["SNOWGLOBE",Rec_Stored("wbr_santa")?"SHAKEN":REC_NONE],
+ ]};
+ if(p===2)return {t:"ALSO HELD",rows:[              /* [PAPA-WORDS] */
+   ["HI SCORE", Rec_Stored("wbr_son_best")&&sonBest&&(sonBest.wins||sonBest.closest)
+                 ?(sonBest.wins+" WON"):REC_NONE],
+   ["SETTINGS", Rec_Stored("wbr_bs")?"ADJUSTED BY YOU":"FACTORY"],
+   ["WINDOW",   Rec_StoredS(PORTAL_SIZE_KEY)?(portalSize+"VH, THIS VISIT"):REC_NONE],
+   ["WEATHER",  Rec_StoredS(FEED_WEATHER_KEY)?"SET, THIS VISIT":REC_NONE],
+ ]};
+ /* [PAPA-WORDS] the doctrine in the machine's own mouth. Four lines, because
+    four lines is what the glass has - and because a promise that needs more
+    than four lines is usually not one. */
+ return {t:"THE HOUSE RULE",note:[
+   "ALL OF IT LIVES IN THIS",
+   "BROWSER AND NOWHERE ELSE.",
+   "W.B KEEPS NO COPY AND HAS",
+   "NO WAY TO ASK FOR ONE.",
+ ]};
+}
 function User_Card(){
- const sign=User_Sign();
- Psy_Front("USER","");
- Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
- screenPrintLn(6,3,"USER RECORD",0);OLED.drawLine(0,9,127,9,WHITE);
- /* THE LABEL COLUMN IS TOMTHUMB, THE VALUE COLUMN IS FITTED. Fit_Line ends by
-    restoring the BUILT-IN face (it has to - it is a front-glass citizen), so
-    every label after the first must claim the density font back or it silently
-    grows to the system face and the card's two columns stop agreeing. Caught
-    on the glass, not reasoned about. */
- setFont(SMALL_FONT);screenPrintLn(20,8,"NAME",0);Fit_Line(20,44,User_Name_Display(),0);
- setFont(SMALL_FONT);screenPrintLn(30,8,"BORN",0);Fit_Line(30,44,User_Born_Display(),0);
- setFont(SMALL_FONT);screenPrintLn(40,8,"SIGN",0);Fit_Line(40,44,sign<0?"NOT ON FILE":HORO_SIGNS[sign],0);
+ Psy_Front("USER","");                       /* the front keeps the station */
+ Rec_Draw();
+}
+/* THE VALUE COLUMN IS A COLUMN, NOT AN UTTERANCE - so it is NOT Fit_Line.
+   Fit_Line takes the BUILT-IN face whenever the text is short enough to fit,
+   which is exactly right for a front-glass line speaking on its own and
+   exactly wrong here: on a four-row card it meant "MIKE" rendered large while
+   "NOTHING ON FILE" rendered small, the two faces sat on different baselines,
+   and the tall rows walked down into the rows beneath them. Seen on the
+   glass, in the capture - the source reads fine either way.
+   So the register holds one face for both columns and CLIPS instead, by
+   measurement rather than by a character count, so a longer wording in a
+   later pass cannot silently run off the right edge. */
+function Rec_Value(y,text){
  setFont(SMALL_FONT);
+ screenPrintLn(Fit_ClampRow(y,true),52,Fit_ClipTo(text,MAX_SCREEN_WIDTH-52),0);
+}
+function Rec_Draw(){
+ const pg=Rec_Page(recPage);
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(6,3,pg.t+"  "+(recPage+1)+"/"+REC_PAGES,0);
+ OLED.drawLine(0,9,127,9,WHITE);
+ if(pg.rows){
+  /* THE LABEL COLUMN IS TOMTHUMB, THE VALUE COLUMN IS FITTED. Fit_Line ends
+     by restoring the BUILT-IN face (it has to - it is a front-glass citizen),
+     so every label after the first must claim the density font back or it
+     silently grows to the system face and the two columns stop agreeing.
+     Caught on the glass in X1, and it bites exactly the same way here. */
+  const ys=[18,28,38,48];
+  for(let r=0;r<pg.rows.length;r++){
+   setFont(SMALL_FONT);screenPrintLn(ys[r],8,pg.rows[r][0],0);
+   Rec_Value(ys[r],pg.rows[r][1]);
+  }
+ } else {
+  const ys=[18,27,36,45];
+  for(let r=0;r<pg.note.length;r++){setFont(SMALL_FONT);screenPrintLn(ys[r],6,pg.note[r],0);}
+ }
+ setFont(SMALL_FONT);
+ /* THE VERBS ARE THE HOUSE'S, NOT NEW ONES. Click advances (click chooses),
+    scroll goes back (scroll is this machine's BACK everywhere else), and
+    SHAKE ACTS - which is why the one destructive control in the building is
+    a shake and not a click. */
+ Hint(recPage===REC_PAGES-1?"<shake to purge  scroll back>"      /* [PAPA-WORDS] */
+                           :"<click on  scroll back>");
+ OLED.display();
+ PlaySound(Select);
+}
+function Rec_Confirm_Draw(){
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(6,3,"PURGE THE RECORD",0);OLED.drawLine(0,9,127,9,WHITE);
+ /* [PAPA-WORDS] */
+ const L=["THIS ERASES EVERYTHING","THE UNIT HOLDS ABOUT YOU.","IT CANNOT BE UNDONE."];
+ const ys=[20,30,40];
+ for(let r=0;r<L.length;r++){setFont(SMALL_FONT);screenPrintLn(ys[r],6,L[r],0);}
+ Hint(HINT_REC_CONFIRM);                    /* the house's own do-over grammar */
+ OLED.display();
+ PlaySound(Select);
+}
+/* THE PURGE IS A REAL WIPE, NOT A LOGOUT. Every key the twin writes is named
+   here - the seven that persist and the two that only last the visit - and
+   the in-memory state is reloaded behind them, so the machine is in the same
+   condition it would be in for a guest who had never touched it. It is NOT a
+   factory reset: an ABSENT install record reads as ESTABLISHED by the S3
+   ruling, so the unit stays a sixty-year-old machine that no longer knows
+   who you are. That is the honest description and the register says so. */
+/* THE KEY LISTS ARE FUNCTIONS, AND THAT IS NOT STYLE. As top-level consts
+   they read BOOT_LEVEL_KEY, PORTAL_SIZE_KEY and FEED_WEATHER_KEY - all three
+   declared THOUSANDS OF LINES FURTHER DOWN - so they ran in those bindings'
+   temporal dead zone, threw at load, and took every `let` after this point in
+   the file with them: the whole machine failed to initialise. Nothing in the
+   file's own gates saw it, because the symbols are all perfectly real; only
+   the ORDER was wrong, and only running it showed that. Deferring the read to
+   call time is the fix, and the reason is written here so the next list of
+   key names does not quietly do it again. */
+function Rec_Keys_Local(){return ["wbr_user","wbr_health","wbr_parcel","wbr_santa",
+                                  "wbr_son_best","wbr_bs",BOOT_LEVEL_KEY];}
+function Rec_Keys_Session(){return [PORTAL_SIZE_KEY,FEED_WEATHER_KEY];}
+function Rec_Purge(){
+ const KL=Rec_Keys_Local(), KS=Rec_Keys_Session();
+ for(const k of KL){try{localStorage.removeItem(k);}catch(e){}}
+ for(const k of KS){try{sessionStorage.removeItem(k);}catch(e){}}
+ USER_STORE=null;User_Load();
+ health=null;Health_Load();
+ parcel=null;Parcel_Load();Parcel_Sync_Menu();   /* the unlocked rows re-hide */
+ sonBest=null;SON_LoadBest();
+ BS_STORE=null;BS_Load();
+ Portal_Size_Set(PORTAL_SIZE_DEF,false);         /* false: do not re-write it */
+ userPanel=User_Panel_Build();                   /* the station held the old name */
+ try{chip("ok","[G2] user record purged - "+(KL.length+KS.length)+" keys removed");}catch(e){}
+}
+function Rec_Purged_Draw(){
+ Activate_the_Screen(TOP_SCREEN,true);setFont(SMALL_FONT);
+ screenPrintLn(6,3,"RECORD PURGED",0);OLED.drawLine(0,9,127,9,WHITE);
+ /* [PAPA-WORDS] */
+ const L=["NOTHING ON FILE.","THE UNIT STILL WORKS -","IT SIMPLY DOES NOT","KNOW YOU ANY MORE."];
+ const ys=[18,27,36,45];
+ for(let r=0;r<L.length;r++){setFont(SMALL_FONT);screenPrintLn(ys[r],6,L[r],0);}
  Hint(HINT_BACK);
  OLED.display();
  PlaySound(Select);
+}
+let recPage=0, recShakeWas=false;
+/* SHAKE IS A LEVEL, NOT AN EVENT. `Unit_Is_Shaking` reports the accelerometer
+   RIGHT NOW, so a single shake reads true for as many ticks as the guest keeps
+   shaking - and the one shake that opens the purge confirmation would still be
+   reading true when the confirmation asks for a shake, purging the record
+   instantly with no chance to read the question. The edge latch requires the
+   unit to come back to rest between the two, which is what "shake AGAIN"
+   actually means and what makes the second one a decision. */
+function Rec_Shake_Edge(){
+ const now=Unit_Is_Shaking(1.3), edge=now&&!recShakeWas;
+ recShakeWas=now;return edge;
 }
 function User_EXE(){
  switch(userState){
@@ -5831,9 +6014,30 @@ function User_EXE(){
   case 1:{
    const act=PanelG_Input(userPanel);
    if(act==="exit"){userState=3;break;}
-   if(act==="go"){User_Card();userState=2;}
+   if(act==="go"){recPage=0;User_Card();userState=2;}
    break;}
-  case 2:   /* the card holds; scroll returns to the station */
+  case 2:   /* THE REGISTER. click turns the page, scroll amends, shake purges */
+   if(Pull_From_Buffer(ROTARY_DIAL)){
+    /* SCROLL IS BACK, AND BACK FROM A RECORD IS THE PLACE YOU CHANGE IT.
+       AMEND needed no new mechanism: the station's fields already are the
+       amendment, so the register hands the guest to them rather than growing
+       a second editor that could disagree with the first. */
+    PanelG_Draw(userPanel);userState=1;break;
+   }
+   if(Pull_From_Buffer(SHUTTER)){
+    recPage=(recPage+1)%REC_PAGES;Rec_Draw();break;
+   }
+   if(recPage===REC_PAGES-1&&Rec_Shake_Edge()){
+    recShakeWas=true;          /* the opening shake must be RELEASED first */
+    userState=5;Rec_Confirm_Draw();
+   }
+   break;
+  case 5:   /* the confirm: one more shake, or scroll to walk away */
+   if(Pull_From_Buffer(ROTARY_DIAL)){Rec_Draw();userState=2;break;}
+   if(Rec_Shake_Edge()){Rec_Purge();Rec_Purged_Draw();userState=6;break;}
+   Pull_From_Buffer(SHUTTER);
+   break;
+  case 6:   /* the notice holds; scroll returns to a station that now reads empty */
    if(Pull_From_Buffer(ROTARY_DIAL)){PanelG_Draw(userPanel);userState=1;break;}
    Pull_From_Buffer(SHUTTER);
    break;
@@ -10096,42 +10300,78 @@ function Preset_Day_Seed(s){
  for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}
  return (h>>>0)||1;
 }
+/* ======== [L2 2026-07-31] A PRESET IS A RECIPE: NAMED STATE DELTAS ========
+   Mike's ruling: "Recipes are DATA, so Mike can direct new ones in plain
+   language." The switch that used to live here was code - a new preset meant
+   a new branch. A recipe is now a ROW, and every row is the same four or five
+   knobs the machine actually has:
+
+     power   "on" | "off"      the rear switch
+     level   0 | 1 | 2         install state: virgin / first-run / established
+     replay  true              Sandbox Tech replays the install
+     day     "YYYY-MM-DD"      seed the weather from a Record date
+     dev     true              leave the workshop showing (bench state)
+
+   Anything not named is LEFT ALONE, which is what makes these deltas rather
+   than states: a recipe says what it changes and is silent about the rest.
+   An unknown id is chipped and ignored, so the museum may name a recipe
+   before the machine learns it and the failure mode is "nothing happened". */
+const PORTAL_RECIPES={
+ /* what clicking the face serves - and it is a recipe like any other, which
+    is the point of L1: there is no special "normal" path. */
+ "standard":       {power:"on", level:2},
+ /* Mike's recipe A: powered, booted, updated, power-cycled, rebooted, idle.
+    The UPDATE is not a delta - message 2 ("New Feature Added") is SEEDED in
+    the inbox, so an established machine already carries it. Recorded here so
+    the absence of an `updated` knob reads as a finding and not an omission. */
+ "idling-updated": {power:"on", level:2},
+ /* recipe B */
+ "boot-playback":  {power:"on", level:2, replay:true},
+ /* recipe C: virgin, dark, waiting. Power OFF is the whole point - the
+    machine has never run and is not running now. */
+ "off-first-boot": {power:"off", level:0},
+ /* recipe E: the bench. DEV-ONLY BY DEFAULT - see the museum side. */
+ "test-bench":     {power:"on", level:2, dev:true},
+ /* carried, still wired, currently unexposed */
+ "clean-boot":     {power:"on", level:0},
+ "record-day":     {power:"on", level:2, day:"1965-01-01"}
+};
+function Preset_Day_Seed_For(day){return Preset_Day_Seed(day);}
 function Portal_Preset_Apply(){
  const p=Preset_Params();
  if(!p.id)return;
+ const r=PORTAL_RECIPES[p.id];
+ if(!r){
+  try{chip("warn","[RECIPE] unknown id '"+p.id+"' - ignored; the portal opens plain");}catch(e){}
+  return;
+ }
+ const did=[];
  try{
-  switch(p.id){
-   case "clean-boot":
-    if(typeof devResetBootLevel==="function")devResetBootLevel();
-    if(typeof unitPowered!=="undefined"&&!unitPowered&&typeof devPower==="function")devPower();
-    chip("ok","[PRESET] CLEAN BOOT - install reset to VIRGIN, power applied");
-    break;
-   case "boot-playback":
-    if(typeof Sandbox_Replay==="function")Sandbox_Replay();
-    chip("ok","[PRESET] BOOT PLAYBACK - Sandbox Tech replays the install");
-    break;
-   case "record-day":{
-    /* A DAY IS THREE THINGS: the weather it drew, how far the install had
-       got, and which of the machine's correspondence had arrived. The first
-       is exact; the other two are honest approximations until the Record's
-       own dates are wired to the message table. [PAPA] owns which day means
-       which state. */
-    const day=p.day||"1965-01-01";
-    const seed=Preset_Day_Seed(day);
-    /* Written to sessionStorage FIRST so Feed_Weather_Init picks it up as
-       "today", exactly as devFeedNewDay does in reverse - the seeded day then
-       survives a reload inside the overlay instead of re-rolling. */
-    try{sessionStorage.setItem(FEED_WEATHER_KEY,String(seed));}catch(e){}
-    Feed_Weather_Init();
-    Feed_Weather_Apply();
-    chip("ok","[PRESET] RECORD-DAY "+day+" - weather seed "+seed+": "+
-         Feed_Weather_Report()+" &middot; install + message state are [PAPA]");
-    break;}
-   default:
-    chip("warn","[PRESET] unknown id '"+p.id+"' - ignored; the portal opens plain");
+  /* ORDER MATTERS AND IS FIXED: install state before power, because the
+     level decides which boot the power-on performs; the weather before
+     either, because it is what the picture is drawn with; the replay last,
+     because it is a performance and wants a machine to perform on. */
+  const day=p.day||r.day;
+  if(day){
+   const seed=Preset_Day_Seed(day);
+   try{sessionStorage.setItem(FEED_WEATHER_KEY,String(seed));}catch(e){}
+   Feed_Weather_Init();Feed_Weather_Apply();
+   did.push("weather seeded from "+day+" ("+seed+")");
   }
+  if(r.level!==undefined&&typeof setBootLevel==="function"){
+   setBootLevel(r.level);
+   did.push("install level "+r.level);
+  }
+  if(r.power!==undefined&&typeof unitPowered!=="undefined"&&typeof devPower==="function"){
+   const want=(r.power==="on");
+   if(unitPowered!==want){devPower();did.push("power "+r.power);}
+   else did.push("power already "+r.power);
+  }
+  if(r.dev&&typeof setUserMode==="function"){setUserMode(false);did.push("workshop shown");}
+  if(r.replay&&typeof Sandbox_Replay==="function"){Sandbox_Replay();did.push("sandbox replay");}
+  chip("ok","[RECIPE] "+p.id+" - "+(did.length?did.join(" &middot; "):"no deltas"));
  }catch(e){
-  try{chip("warn","[PRESET] '"+p.id+"' failed: "+e.message);}catch(e2){}
+  try{chip("warn","[RECIPE] '"+p.id+"' failed after "+did.length+" step(s): "+e.message);}catch(e2){}
  }
 }
 /* [ITEM 4] ALL PAGE CONTENT BELOW THE MONITOR. The picture takes the top of

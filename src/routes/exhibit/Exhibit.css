@@ -64,24 +64,23 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
      max-width tied to cqh clamped a 3:4 plate to 131px and letterboxed it
      inside its own box - the crop came back wearing a different hat. */
   border:1px solid var(--wb-border);filter:grayscale(1) contrast(1.03)}
-/* [L1 2026-07-31] THE LIVE PLATE. The portal runs inside the face at face
-   scale, so the plate stops being a picture box and becomes a screen: the
-   twin's own stage decides the aspect (5:4, the bezel's), and the iframe is
-   scaled to fit rather than cropped.
-   The hit layer sits over the whole frame because the iframe swallows clicks —
-   a live document inside a card cannot also be the card's button. It carries
-   no visible chrome: the invitation is the moving picture, not a widget. */
-.vp-face-live{position:relative;aspect-ratio:5/4;height:min(48cqh,210px);width:auto;
-  border:1px solid var(--wb-border);overflow:hidden;background:#0b0b0a}
-.vp-face-portal .vp-face-live{border-color:#3b3831}
-.vp-face-liveframe{position:absolute;inset:0;width:100%;height:100%;border:0;
-  display:block;pointer-events:none;background:#0b0b0a}
-.vp-face-livehit{position:absolute;inset:0;z-index:2;cursor:pointer;
-  background:transparent;border:0;padding:0;
-  transition:box-shadow .18s,background .18s}
-.vp-face-livehit:hover,.vp-face-livehit:focus-visible{
-  outline:none;background:rgba(232,228,216,.06);
-  box-shadow:inset 0 0 0 1px rgba(232,228,216,.55)}
+/* [G1 2026-07-31] THE FROZEN PORTAL IS A SCREEN, NOT A PHOTOGRAPH.
+   F1's plate rules are right for a placed photo and wrong here: `max-width:260px`
+   against a 5:4 capture clamps the width before the height rule is satisfied,
+   and `object-fit:contain` then letterboxes the picture inside its own box -
+   the same crop-in-a-different-hat that F1 took three passes to kill. The
+   capture's aspect is the twin stage's own, so the height drives it and the
+   width is left alone. Geometry inherited from the live plate it replaces, so
+   the composition Mike approved does not move.
+   The grayscale filter also goes: this is the machine's own render, and a
+   render of a monochrome machine does not need to be told to be monochrome. */
+.vp-face-portal .vp-face-still{height:min(48cqh,210px);width:auto;max-width:none;
+  filter:none;border:1px solid #3b3831;background:#0b0b0a}
+.vp-face-door{display:block;padding:0;border:0;background:transparent;cursor:pointer;
+  transition:box-shadow .18s,filter .18s}
+.vp-face-door:hover .vp-face-still,.vp-face-door:focus-visible .vp-face-still{
+  filter:brightness(1.10);border-color:rgba(232,228,216,.55)}
+.vp-face-door:focus-visible{outline:none}
 
 .vp-face-platecap{font-family:'Courier Prime','Courier New',monospace;
   font-size:calc(var(--face-fs) * .52);letter-spacing:.07em;
@@ -178,8 +177,8 @@ body:has(.vp-face) .vp-area::before{display:none}
    booth - they are deliberately not museum tokens, and this is the second
    place the exception is taken, on purpose and for the same reason. */
 .vp-face-portal{background:#0b0b0a;color:#cfcbc0}
-.vp-face-portal .vp-face-still{filter:grayscale(1) contrast(1.12) brightness(.82);
-  border:1px solid #3b3831}
+/* [G1] the portal's grayscale/contrast treatment retired with the placed
+   photo - see THE FROZEN PORTAL IS A SCREEN above. */
 .vp-face-portal .vp-face-title{color:#e8e4d8;letter-spacing:.30em}
 .vp-face-sub{font-family:'Courier Prime','Courier New',monospace;
   font-size:calc(var(--face-fs) * .60);letter-spacing:.14em;text-transform:uppercase;
@@ -382,7 +381,7 @@ body:has(.pb) .bd-dh{margin-bottom:82px}
 .ex-main-inner{display:grid;height:100%}
 
 /* LEFT — scrollable tracklist */
-.ex-left{overflow-y:auto;overflow-x:hidden;border-right:1px solid var(--wb-border);scrollbar-width:thin;scrollbar-color:var(--wb-border-hi) transparent}
+.ex-left{min-width:0;overflow-y:auto;overflow-x:hidden;border-right:1px solid var(--wb-border);scrollbar-width:thin;scrollbar-color:var(--wb-border-hi) transparent}
 /* [E5 2026-07-30] CLEARANCE FOR THE PLAYER BAR — and an honest note on what
    this does and does not fix.
    WHAT IT FIXES: .ex-left and .fs-wrap are INTERNALLY scrolled columns of
@@ -412,7 +411,7 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .vr-dh:hover .vr-dh-line{background:color-mix(in srgb, var(--wb-gold) 33%, transparent)}
 
 /* RIGHT — fixed, never scrolls */
-.ex-right{display:flex;flex-direction:column;background:#e7e3d8;overflow:hidden}
+.ex-right{min-width:0;display:flex;flex-direction:column;background:#e7e3d8;overflow:hidden}
 
 /* TRACKLIST */
 .tl-tracks{list-style:none;padding:0 0 14px}

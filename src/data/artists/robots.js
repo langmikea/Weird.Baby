@@ -243,9 +243,18 @@ const spine = [
              STANDARD view — which is a recipe like any other, not a special
              path. The still stays in the file as the fallback the renderer
              uses when `live` is absent. */
-          live: "/robots/twin.html?user=1&preset=standard",
-          liveOpenPreset: null,
-          still: "/robots/art/viiip.png",
+          /* [G1 2026-07-31, Mike-ruled] THE FROZEN FACE (supersedes the live
+             face). The face is a STATIC capture of the exact standard view a
+             visitor gets when they click it — taken from THE MACHINE'S OWN
+             RENDER by tools/capture_portal_face.js in the robots repo, running
+             the STANDARD recipe. It cannot drift from its destination, because
+             re-running the capture is how it is made.
+             THE FICTION: the portal was paused to frozen. The fluidic heaters
+             were not running; solidification at -31.4 F.
+             The live face is ledgered A+++++++ and costs nothing now — page
+             load boots no twin at all. */
+          still: "/robots/art/portal-standard.png",
+          stillCaption: "PORTAL · PAUSED TO FROZEN · −31.4 F",
           lines: [
             "SOURCE   MGK_VIIIp_01__20240721_WORKS",
             "GLASS    128\u00d764 front \u00b7 128\u00d764 top",

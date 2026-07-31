@@ -308,7 +308,20 @@ function useAudioPlayer({ onEnded }) {
    now (S7), is squeezed. The floor drops to 10%: enough for the numbers and
    a truncated title, which is all a three-track list needs. The ceiling
    rises too, for the rare case where the list IS the content. */
-const SPLIT_MIN = 10; const SPLIT_MAX = 82;
+/* [G3 2026-07-31] AND S8 DID NOT ACTUALLY WORK. The number moved to 10 and the
+   column still stopped near a quarter of the width, because the floor was
+   never this constant: `.ex-main-inner` is a GRID, and a grid track sized in
+   `fr` will not shrink past its item's min-content width — `auto` is the
+   default minimum. So the tracklist bottomed out wherever its longest
+   unbreakable row happened to land, which on /robots is about 24%. Lowering a
+   constant that was not binding is exactly the class of fix that reports
+   success and changes nothing; the track sizing had to change with it (see
+   the `minmax(0, ...)` at the grid, below).
+   THE GUEST ADJUSTS THEIR OWN CHAIR. Both directions are now generous and the
+   only hard limits left are the ones physics asks for: nothing negative, and
+   nothing fully vanished — 4% still shows the numbers column, so the list
+   thins to a rule rather than disappearing without a handle back. */
+const SPLIT_MIN = 4; const SPLIT_MAX = 92;
 function tidyDesc(title, v) {
   let d = (v && (v.label || typeLabel(v.type))) || "";
   if (title && d.indexOf(title) === 0) d = d.slice(title.length).replace(/^[\s\u2014\u2013-]+/, "");
@@ -664,22 +677,8 @@ export default function Exhibit({ artist }) {
   const [bodyH, setBodyH] = usePersist(artist.bodyKey || "wb-body-off", BODY_DEF);
   /* [S6] the log's volume: closed shows the latest entry + a date index. */
   const [logOpen, setLogOpen] = useState(false);
-  /* [L1] ONE MACHINE AT A TIME. The live face yields while the overlay holds
-     the twin; two instances would mean two OS loops, two audio graphs and two
-     canvas pipelines for one visitor looking at one of them. */
-  const [liveHidden, setLiveHidden] = useState(false);
   /* [L2] which recipe is selected; index, reset when the track changes. */
   const [recipeIdx, setRecipeIdx] = useState(0);
-  useEffect(() => {
-    function down() { setLiveHidden(true); }
-    function up()   { setLiveHidden(false); }
-    window.addEventListener("wb-robots-open-twin", down);
-    window.addEventListener("wb-robots-twin-closed", up);
-    return () => {
-      window.removeEventListener("wb-robots-open-twin", down);
-      window.removeEventListener("wb-robots-twin-closed", up);
-    };
-  }, []);
   const bodyResizable = !!artist.bodyKey;
   const mainRef = useRef(null);
 
@@ -980,6 +979,19 @@ export default function Exhibit({ artist }) {
                      ?? album.tracks.find(t => t.face)?.face
                      ?? null;
 
+  /* [G1 2026-07-31] ONE DOOR, TWO HANDLES. The frozen face IS the standard
+     view, so clicking the picture and pressing ENTER must go to the same
+     place with the same recipe — one function, not two copies that can
+     drift. Held recipes open nothing from either handle. */
+  function enterRecipe() {
+    const p = activeFace?.presets?.[recipeIdx];
+    if (activeFace?.presets && (!p || p.state === "held")) return;
+    window.dispatchEvent(new CustomEvent(
+      activeFace?.action ? activeFace.action.event : "wb-robots-open-twin",
+      { detail: { album: album.id, preset: p ? p.id : null, day: p ? p.day : undefined } }
+    ));
+  }
+
   // ── Drag handles ──────────────────────────────────────────────────────────
   function makeSplitDrag(e, containerRef) {
     e.preventDefault();
@@ -1110,7 +1122,11 @@ export default function Exhibit({ artist }) {
         <div className="ex-main ex-snap" ref={mainRef}
           style={bodyResizable ? { height: bodyH, flex: "0 0 auto" } : undefined}>
           <div className="ex-main-inner" ref={bodyRef}
-            style={{ gridTemplateColumns: `${split}fr 10px ${100-split}fr` }}>
+            /* [G3] minmax(0, Nfr) — without the explicit 0 minimum the track
+               refuses to go below its content and the split percentage becomes
+               a suggestion. */
+            style={{ gridTemplateColumns:
+              `minmax(0, ${split}fr) 10px minmax(0, ${100-split}fr)` }}>
 
             {/* LEFT — tracklist */}
             <div className="ex-left">
@@ -1227,39 +1243,29 @@ export default function Exhibit({ artist }) {
                             )}
                             {activeFace.blurb && <p className="vp-face-blurb">{activeFace.blurb}</p>}
                           </div>
-                          {/* [L1 2026-07-31] THE FACE IS THE PORTAL.
-                              A photograph of the machine is a photograph. The
-                              face now embeds the machine ITSELF, running, at
-                              face scale — feeds, weather, glitches, the lot —
-                              and clicking it opens the standard view, which is
-                              a recipe like any other.
-                              ONE MACHINE AT A TIME. The live face unmounts the
-                              moment the overlay opens and returns when it
-                              closes, so there are never two twins running.
-                              That is the whole performance story: see the cost
-                              note in STATE. */}
-                          {activeFace.live && !liveHidden && (
-                            <figure className="vp-face-plate vp-face-live">
-                              <iframe
-                                className="vp-face-liveframe"
-                                src={activeFace.live}
-                                title="The Portal — live"
-                                tabIndex={-1}
-                                scrolling="no"
-                              />
-                              <button
-                                className="vp-face-livehit"
-                                aria-label={activeFace.action?.label || "Open the portal"}
-                                onClick={() => window.dispatchEvent(new CustomEvent(
-                                  activeFace.action ? activeFace.action.event : "wb-robots-open-twin",
-                                  { detail: { album: album.id, preset: activeFace.liveOpenPreset || null } }
-                                ))}
-                              />
-                            </figure>
-                          )}
-                          {activeFace.still && !activeFace.live && (
+                          {/* [G1 2026-07-31] THE LIVE FACE IS RETIRED.
+                              Mike ruled the face frozen, so the iframe, its
+                              hit layer and the one-machine gate all went with
+                              it - dead machinery is dead whether or not it
+                              once worked. It is ledgered A+++++++ and lives in
+                              git at d43b9db, one revert away, which is a
+                              better home than an unused branch in this file. */}
+                          {activeFace.still && (
                             <figure className="vp-face-plate">
-                              <img className="vp-face-still" src={activeFace.still} alt="" />
+                              {activeFace.presets ? (
+                                /* [G1] the frozen portal is still the door. The
+                                   live face was clickable through a transparent
+                                   hit layer, because an iframe swallows clicks;
+                                   a still does not, so the picture can simply BE
+                                   the button and the hit layer retires with the
+                                   iframe. Same destination as ENTER. */
+                                <button className="vp-face-door" onClick={enterRecipe}
+                                        aria-label="Open the portal">
+                                  <img className="vp-face-still" src={activeFace.still} alt="" />
+                                </button>
+                              ) : (
+                                <img className="vp-face-still" src={activeFace.still} alt="" />
+                              )}
                               {activeFace.stillCaption && (
                                 <figcaption className="vp-face-platecap">{activeFace.stillCaption}</figcaption>
                               )}
@@ -1364,14 +1370,7 @@ export default function Exhibit({ artist }) {
                               <button
                                 className="vp-recipe-go"
                                 disabled={activeFace.presets[recipeIdx]?.state === "held"}
-                                onClick={() => {
-                                  const p = activeFace.presets[recipeIdx];
-                                  if (!p || p.state === "held") return;
-                                  window.dispatchEvent(new CustomEvent(
-                                    activeFace.action ? activeFace.action.event : "wb-robots-open-twin",
-                                    { detail: { album: album.id, preset: p.id, day: p.day } }
-                                  ));
-                                }}
+                                onClick={enterRecipe}
                               >ENTER</button>
                             </div>
                             {activeFace.presets[recipeIdx]?.line && (
