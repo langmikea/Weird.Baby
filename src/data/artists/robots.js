@@ -58,7 +58,7 @@ import RobotsExhibitFlow from "../../routes/robots/RobotsExhibitFlow.jsx";
 const WBR_TRACKS = [
       {
         id: "about",
-        title: "Who we are",
+        title: "Who We Are",
         videos: [],
         tags: ["about", "house", "purveyor"],
         face: {
@@ -235,6 +235,16 @@ const spine = [
             "arrives here. Source unknown, location unknown, reason unknown \u2014 " +
             "the frame does not explain itself. What comes through is not a " +
             "recording: it is the 1965 firmware, running, and it answers.",
+          /* [L1 2026-07-31] THE FACE IS THE PORTAL (supersedes F1's placed
+             photo for THIS track only — the manual and the record keep
+             theirs, because a document is not a machine).
+             The face runs the actual twin at face scale, doing all the things
+             a portal does. `liveOpenPreset:null` means clicking it opens the
+             STANDARD view — which is a recipe like any other, not a special
+             path. The still stays in the file as the fallback the renderer
+             uses when `live` is absent. */
+          live: "/robots/twin.html?user=1&preset=standard",
+          liveOpenPreset: null,
           still: "/robots/art/viiip.png",
           lines: [
             "SOURCE   MGK_VIIIp_01__20240721_WORKS",
@@ -259,40 +269,61 @@ const spine = [
              weather seed plus an install level plus which correspondence had
              arrived, and only the first of those three is exact yet. The
              Record has 436 entries and will supply the rest. */
+          /* ---- F2 2026-07-31: FINE DINING, NOT A BUFFET (Mike, doctrine) ---
+             "Not an all-you-can-eat buffet; this is fine dining."
+             FOUR presets and two cross-references made this face a menu of
+             everything the machinery can do. That is a spec sheet, not an
+             invitation: a visitor standing in front of a doorway does not
+             want four doors and a bibliography, they want THE door.
+             SO: ONE BUTTON. The generic unit, already past first boot - which
+             is the machine's own default since S3, so this entry carries no
+             preset id at all and the portal opens exactly as it comes.
+             THE MACHINERY IS UNTOUCHED AND STAYS BUILT. clean-boot,
+             boot-playback and record-day are all still wired end to end, in
+             the twin and across the URL boundary; only their BUTTONS are
+             gone. They come back one at a time, when the storyline has a
+             reason to tempt someone with them - which is worth more than
+             having them all on the shelf on day one.
+             `id: null` = no preset param. The plain portal, deliberately. */
+          /* ---- L2 2026-07-31: RECIPES, NOT A BUTTON SEA -------------------
+             A dropdown in the house register, urgent-and-important at the
+             top. Each entry is a RECIPE the machine knows by name (see
+             PORTAL_RECIPES in the twin) — named state deltas, so a new one is
+             a row here and a row there, and Mike can direct it in plain
+             language.
+             `state` drives the rendering, not the wiring:
+               live    selectable now
+               held    listed, deliberately not wired — carries `why`
+             TWO ARE NOT WIRED, ON PURPOSE, AND BOTH ARE FLAGGED:
+             LAST STATE and TEST BENCH. See STATE, the L2 entry. */
+          presetsLabel: "ARRIVE AS",
           presets: [
-            { id: "clean-boot", label: "CLEAN BOOT", state: "live",
-              line: "Install reset to VIRGIN, then power. The machine has " +
-                    "never met you and has to put itself together first." },
+            { id: null, label: "STANDARD", state: "live",
+              line: "A unit that has been running for sixty years and has met " +
+                    "you before. What clicking the picture serves." },
+            { id: "idling-updated", label: "IDLING, UPDATED", state: "live",
+              line: "Powered, booted, updated, power-cycled, rebooted. Idle, " +
+                    "and waiting to be asked something." },
             { id: "boot-playback", label: "BOOT PLAYBACK", state: "live",
               line: "Sandbox Tech replays the install exactly as it landed \u2014 " +
                     "step by step, without compromising it." },
-            { id: "record-day", day: "2024-01-01", label: "RECORD DAY \u00b7 01 JAN 24",
-              state: "partial",
-              line: "The day the three boxes arrived. Weather is seeded from " +
-                    "the date and is exact; install and message state are [PAPA]." },
-            { id: "record-day", day: "2024-01-26", label: "RECORD DAY \u00b7 26 JAN 24",
-              state: "partial",
-              line: "\u201cBut we were wrong.\u201d The day the record corrected " +
-                    "itself in public. Same frame, same caveat." },
-          ],
-          presetsNote:
-            "Presets arrive with the feed. Unknown to the machine = ignored, " +
-            "and the portal opens plain.",
-          /* ---- THE CROSS-REFERENCES ---------------------------------------
-             In-register, not web-blue: these are references on an instrument
-             panel, so they select the track rather than navigate anywhere. */
-          links: [
-            { track: "manual", label: "THE MANUAL",
-              line: "What the machine says about itself, including the parts " +
-                    "it gets wrong." },
-            { track: "record", label: "THE RECORD",
-              line: "What we said about it, week by week, as it happened." },
+            { id: "off-first-boot", label: "OFF \u00b7 FIRST BOOT PENDING", state: "live",
+              line: "Dark. Never run. Waiting for someone to reach over and " +
+                    "throw the switch." },
+            { id: "last-state", label: "LAST STATE", state: "held",
+              why: "awaiting a privacy ruling",
+              line: "However you left it. Not wired \u2014 the twin already " +
+                    "remembers more than this menu would admit to." },
+            { id: "test-bench", label: "TEST BENCH", state: "held",
+              why: "dev entry, by URL",
+              line: "The workshop, with the panels showing. Reachable at " +
+                    "?preset=test-bench; not a door for visitors." },
           ],
         },
       },
       {
         id: "manual",
-        title: "The manual",
+        title: "The Manual",
         videos: [],
         tags: ["manual", "plate", "1965", "scan", "opa"],
         /* HONEST v1: a face that says what the object is and what state it is
@@ -347,7 +378,7 @@ const spine = [
       },
       {
         id: "record",
-        title: "The record",
+        title: "The Record",
         videos: [],
         tags: ["journal", "record", "2024", "provenance"],
         face: {

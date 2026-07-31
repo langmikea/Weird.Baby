@@ -664,6 +664,22 @@ export default function Exhibit({ artist }) {
   const [bodyH, setBodyH] = usePersist(artist.bodyKey || "wb-body-off", BODY_DEF);
   /* [S6] the log's volume: closed shows the latest entry + a date index. */
   const [logOpen, setLogOpen] = useState(false);
+  /* [L1] ONE MACHINE AT A TIME. The live face yields while the overlay holds
+     the twin; two instances would mean two OS loops, two audio graphs and two
+     canvas pipelines for one visitor looking at one of them. */
+  const [liveHidden, setLiveHidden] = useState(false);
+  /* [L2] which recipe is selected; index, reset when the track changes. */
+  const [recipeIdx, setRecipeIdx] = useState(0);
+  useEffect(() => {
+    function down() { setLiveHidden(true); }
+    function up()   { setLiveHidden(false); }
+    window.addEventListener("wb-robots-open-twin", down);
+    window.addEventListener("wb-robots-twin-closed", up);
+    return () => {
+      window.removeEventListener("wb-robots-open-twin", down);
+      window.removeEventListener("wb-robots-twin-closed", up);
+    };
+  }, []);
   const bodyResizable = !!artist.bodyKey;
   const mainRef = useRef(null);
 
@@ -743,6 +759,7 @@ export default function Exhibit({ artist }) {
          branch never runs for them. */
       if (track && track.face) setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));
       setLogOpen(false);          /* [S6] a new track opens its volume closed */
+      setRecipeIdx(0);            /* [L2] and its selector at the top entry */
       return;
     }
     setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));
@@ -1050,7 +1067,13 @@ export default function Exhibit({ artist }) {
   // ── Render ────────────────────────────────────────────────────────────────
   return (
     <>
-      <div className={`ex-root${visible?" visible":""}`}>
+      {/* [F3 2026-07-31] THE WING NAMES ITSELF. A data attribute so per-wing
+          styling has a hook that is not a hack — the same discipline as
+          bodyKey / splitDefault / shopEntryHidden, which are all per-artist
+          switches rather than global changes. Used by the tracklist type
+          scale below: /robots opens at 24% width with three tracks and wants
+          bigger type; /hr and /wb run twenty rows at 50% and do not. */}
+      <div className={`ex-root${visible?" visible":""}`} data-exhibit={artist.exhibitSlug || artist.id}>
 
         {/* NAV */}
         <div className="ex-nav">
@@ -1184,14 +1207,65 @@ export default function Exhibit({ artist }) {
                           body's own flow, scrolls with the rest of the track,
                           and scales with the panel like every other element. */}
                       <div className="vp-face-body">
-                        {activeFace.still && (
-                          <img className="vp-face-still" src={activeFace.still} alt="" />
-                        )}
-                        {activeFace.title && <div className="vp-face-title">{activeFace.title}</div>}
-                        {activeFace.subtitle && (
-                          <div className="vp-face-sub">{activeFace.subtitle}</div>
-                        )}
-                        {activeFace.blurb && <p className="vp-face-blurb">{activeFace.blurb}</p>}
+                        {/* [F1 2026-07-31] THE PHOTO IS NOT A BANNER (Mike, doctrine).
+                            S7 moved the still INSIDE the viewer, which was right,
+                            but it landed as a full-width block across the top —
+                            a banner. A banner crops the picture to a letterbox
+                            slot it was never composed for, eats the height the
+                            words need, and tells you nothing you could not have
+                            been told in a caption.
+                            So the head is a COMPOSITION: the text column and the
+                            picture side by side, the picture SIZED to about a
+                            third and shaped to its own aspect rather than to a
+                            crop. Faces without a still collapse the grid to one
+                            column and are unaffected. */}
+                        <div className="vp-face-head">
+                          <div className="vp-face-headtext">
+                            {activeFace.title && <div className="vp-face-title">{activeFace.title}</div>}
+                            {activeFace.subtitle && (
+                              <div className="vp-face-sub">{activeFace.subtitle}</div>
+                            )}
+                            {activeFace.blurb && <p className="vp-face-blurb">{activeFace.blurb}</p>}
+                          </div>
+                          {/* [L1 2026-07-31] THE FACE IS THE PORTAL.
+                              A photograph of the machine is a photograph. The
+                              face now embeds the machine ITSELF, running, at
+                              face scale — feeds, weather, glitches, the lot —
+                              and clicking it opens the standard view, which is
+                              a recipe like any other.
+                              ONE MACHINE AT A TIME. The live face unmounts the
+                              moment the overlay opens and returns when it
+                              closes, so there are never two twins running.
+                              That is the whole performance story: see the cost
+                              note in STATE. */}
+                          {activeFace.live && !liveHidden && (
+                            <figure className="vp-face-plate vp-face-live">
+                              <iframe
+                                className="vp-face-liveframe"
+                                src={activeFace.live}
+                                title="The Portal — live"
+                                tabIndex={-1}
+                                scrolling="no"
+                              />
+                              <button
+                                className="vp-face-livehit"
+                                aria-label={activeFace.action?.label || "Open the portal"}
+                                onClick={() => window.dispatchEvent(new CustomEvent(
+                                  activeFace.action ? activeFace.action.event : "wb-robots-open-twin",
+                                  { detail: { album: album.id, preset: activeFace.liveOpenPreset || null } }
+                                ))}
+                              />
+                            </figure>
+                          )}
+                          {activeFace.still && !activeFace.live && (
+                            <figure className="vp-face-plate">
+                              <img className="vp-face-still" src={activeFace.still} alt="" />
+                              {activeFace.stillCaption && (
+                                <figcaption className="vp-face-platecap">{activeFace.stillCaption}</figcaption>
+                              )}
+                            </figure>
+                          )}
+                        </div>
                         {Array.isArray(activeFace.lines) && activeFace.lines.length > 0 && (
                           <ul className="vp-face-lines">
                             {activeFace.lines.map((l, i) => <li key={i}>{l}</li>)}
@@ -1260,48 +1334,57 @@ export default function Exhibit({ artist }) {
                             data: the engine dispatches an id and a track name
                             and learns nothing about twins or machines. A face
                             without them renders exactly as before. */}
+                        {/* [L2 2026-07-31] A SELECTOR, NOT A BUTTON SEA.
+                            Four doors side by side made the visitor compare
+                            before entering. A named selector asks one
+                            question — how do you want to arrive — and the
+                            answer is one line of type in the machine's own
+                            register. Entries marked `held` render disabled
+                            with their reason visible, because a menu that
+                            hides what it is not offering is lying about the
+                            size of the room. */}
                         {Array.isArray(activeFace.presets) && activeFace.presets.length > 0 && (
-                          <div className="vp-presets">
-                            <div className="vp-presets-head">PRESETS</div>
-                            <ul className="vp-preset-list">
-                              {activeFace.presets.map((p, i) => (
-                                <li key={i} className={`vp-preset vp-preset-${p.state || "live"}`}>
-                                  <button
-                                    className="vp-preset-btn"
-                                    onClick={() => window.dispatchEvent(new CustomEvent(
-                                      activeFace.action ? activeFace.action.event : "wb-robots-open-twin",
-                                      { detail: { album: album.id, preset: p.id, day: p.day } }
-                                    ))}
-                                  >{p.label}</button>
-                                  <span className="vp-preset-line">{p.line}</span>
-                                </li>
-                              ))}
-                            </ul>
-                            {activeFace.presetsNote && (
-                              <div className="vp-presets-note">{activeFace.presetsNote}</div>
+                          <div className="vp-recipes">
+                            <label className="vp-recipes-head" htmlFor="vp-recipe-sel">
+                              {activeFace.presetsLabel || "ARRIVE AS"}
+                            </label>
+                            <div className="vp-recipe-row">
+                              <select
+                                id="vp-recipe-sel"
+                                className="vp-recipe-sel"
+                                value={recipeIdx}
+                                onChange={e => setRecipeIdx(Number(e.target.value))}
+                              >
+                                {activeFace.presets.map((p, i) => (
+                                  <option key={i} value={i} disabled={p.state === "held"}>
+                                    {p.label}{p.state === "held" && p.why ? `  — ${p.why}` : ""}
+                                  </option>
+                                ))}
+                              </select>
+                              <button
+                                className="vp-recipe-go"
+                                disabled={activeFace.presets[recipeIdx]?.state === "held"}
+                                onClick={() => {
+                                  const p = activeFace.presets[recipeIdx];
+                                  if (!p || p.state === "held") return;
+                                  window.dispatchEvent(new CustomEvent(
+                                    activeFace.action ? activeFace.action.event : "wb-robots-open-twin",
+                                    { detail: { album: album.id, preset: p.id, day: p.day } }
+                                  ));
+                                }}
+                              >ENTER</button>
+                            </div>
+                            {activeFace.presets[recipeIdx]?.line && (
+                              <div className="vp-recipe-line">{activeFace.presets[recipeIdx].line}</div>
                             )}
                           </div>
                         )}
-                        {Array.isArray(activeFace.links) && activeFace.links.length > 0 && (
-                          <div className="vp-xrefs">
-                            <div className="vp-presets-head">SEE ALSO</div>
-                            <ul className="vp-xref-list">
-                              {activeFace.links.map((lk, i) => {
-                                const ti = album.tracks.findIndex(t => t.id === lk.track);
-                                return (
-                                  <li key={i} className="vp-xref">
-                                    <button
-                                      className="vp-xref-btn"
-                                      disabled={ti < 0}
-                                      onClick={() => ti >= 0 && handleTrackSelect(activeDisplay, ti)}
-                                    >{lk.label}</button>
-                                    <span className="vp-xref-line">{lk.line}</span>
-                                  </li>
-                                );
-                              })}
-                            </ul>
-                          </div>
-                        )}
+                        {/* [L3 2026-07-31] THE SEE-ALSO RENDERER WENT WITH ITS DATA.
+                            F2 removed the Portal's cross-references; no face
+                            declares `links` now, so the code that drew them
+                            was carrying nothing. "Nothing extra unless it
+                            carries more than its own weight" applies to the
+                            renderer as much as to the page. */}
                         {activeFace.papa && (
                           <div className="vp-face-papa">{activeFace.papa}</div>
                         )}

@@ -29,8 +29,18 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
   /* [O4] the preset rides the src; default is the plain portal. */
   const [twinSrc, setTwinSrc] = useState("/robots/twin.html?user=1");
 
+  /* [L1 2026-07-31] CLOSING ANNOUNCES ITSELF. The Portal track's face runs a
+     live twin and stands down while this overlay holds one — one machine at a
+     time. It cannot know when it may come back unless the close says so, and
+     an event keeps the seam a seam: the flow still tells the engine nothing
+     about twins, it just says the twin is no longer up. */
+  function closeTwin() {
+    setTwinOpen(false);
+    try { window.dispatchEvent(new CustomEvent("wb-robots-twin-closed")); } catch { /* no-op */ }
+  }
+
   useEffect(() => {
-    function onKey(e) { if (e.key === "Escape") setTwinOpen(false); }
+    function onKey(e) { if (e.key === "Escape") closeTwin(); }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
@@ -45,7 +55,7 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
      do is close a panel the visitor opened. */
   useEffect(() => {
     function onMsg(e) {
-      if (e && e.data && e.data.wb === "portal-close") setTwinOpen(false);
+      if (e && e.data && e.data.wb === "portal-close") closeTwin();
     }
     window.addEventListener("message", onMsg);
     return () => window.removeEventListener("message", onMsg);
