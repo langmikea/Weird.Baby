@@ -406,119 +406,106 @@ const spine = [
            block, presets like channel selections. A visitor should be able to
            feel the change of material before they read a word of it. */
         face: {
-          kind: "portal",
+          /* ======== [P2 2026-08-02] THE CONTROL ROOM ======================
+             Mike's ruling: the Portal track's face becomes the immersion's
+             FIRST STEP — a dark, non-descript control page, half portal-esque
+             itself. Everything that used to be here (the frozen plate, the
+             register block, the ARRIVE AS dropdown, the prose) is replaced by
+             an INSTRUMENT PANEL: you set the machine up, then you throw the
+             latch, and the portal comes up.
+
+             THE PANEL IS DATA, LIKE EVERY OTHER FACE. `kind:"panel"` adds a
+             renderer that knows how to draw a drum, a bat switch, a lamp, a
+             dial and a latch — and knows nothing about MGK, portals or
+             maintenance. Every word, every position and every arming rule is
+             declared here. /hr and /wb declare no faces at all, so they
+             cannot notice this exists.
+
+             THE CONTROLS TELL THE STORY; THEY ARE NOT THE STORY (Mike).
+             C1 says the portal spends its first fortnight in automated,
+             NON-INTERRUPTIBLE maintenance. C3 says the entry state today is
+             one state: boots and updates complete, powered, sitting at the
+             prompt. The SAME TWO LAMPS say both — AUTO MAINT lit + AT PROMPT
+             dark is the launch fortnight; AUTO MAINT dark + AT PROMPT lit is
+             today. Nothing about the fortnight is built; the panel is simply
+             an instrument capable of reporting it, set to today.
+             C2 is respected by omission: the frozen state is not referenced
+             anywhere on this page, because it has no storyline yet.
+
+             THE COMPOSITION, per C3's one-entry-state hold:
+               DRUM      six positions, ONE of which arms (STANDARD). The
+                         other five are engraved on the drum and roll past —
+                         they exist, they are legible, and they do not arm.
+                         That is the fine-dining hold made mechanical: the
+                         menu shows the size of the room without pretending
+                         every door is open.
+               SWITCHES  two, because two is what the story needs and the
+                         brief says no more controls than needed.
+               DIAL      LIVE / SEEDED. LIVE arms. SEEDED re-reads the lamps
+                         and does not arm — there is no seeded feed yet.
+               LATCH     throws only when the panel is armed. */
+          kind: "panel",
           title: "THE PORTAL",
-          subtitle: "MGK-VIIIp \u00b7 the p was never \u201cportable\u201d",
-          blurb:
-            "A camera is pointed at a running unit, somewhere, and the feed " +
-            "arrives here. Source unknown, location unknown, reason unknown \u2014 " +
-            "the frame does not explain itself. What comes through is not a " +
-            "recording: it is the 1965 firmware, running, and it answers.",
-          /* [L1 2026-07-31] THE FACE IS THE PORTAL (supersedes F1's placed
-             photo for THIS track only — the manual and the record keep
-             theirs, because a document is not a machine).
-             The face runs the actual twin at face scale, doing all the things
-             a portal does. `liveOpenPreset:null` means clicking it opens the
-             STANDARD view — which is a recipe like any other, not a special
-             path. The still stays in the file as the fallback the renderer
-             uses when `live` is absent. */
-          /* [G1 2026-07-31, Mike-ruled] THE FROZEN FACE (supersedes the live
-             face). The face is a STATIC capture of the exact standard view a
-             visitor gets when they click it — taken from THE MACHINE'S OWN
-             RENDER by tools/capture_portal_face.js in the robots repo, running
-             the STANDARD recipe. It cannot drift from its destination, because
-             re-running the capture is how it is made.
-             THE FICTION: the portal was paused to frozen. The fluidic heaters
-             were not running; solidification at -31.4 F.
-             The live face is ledgered A+++++++ and costs nothing now — page
-             load boots no twin at all. */
-          still: "/robots/art/portal-standard.png",
-          stillCaption: "PORTAL · PAUSED TO FROZEN · −31.4 F",
-          lines: [
-            "SOURCE   MGK_VIIIp_01__20240721_WORKS",
-            "GLASS    128\u00d764 front \u00b7 128\u00d764 top",
-            "FEED     1 of 5 \u00b7 quality drawn per session",
-            "STATE    cold start \u2014 boot is mandatory",
-          ],
-          /* [PAPA] the richer wording for the subtitle and the blurb. What is
-             here is house register and true; what is missing is the lore only
-             Mike can put in a visitor's mouth. */
-          papa: "[PAPA] \u2014 the Portal's own words: what the frame is, and how " +
-                "much of the three unknowns to say out loud on the way in.",
-          action: { label: "Open the portal", event: "wb-robots-open-twin" },
-          /* ---- THE PRESETS ------------------------------------------------
-             THE MECHANISM IS THE DELIVERABLE; the list is expected to grow.
-             A preset is DATA: an id the twin knows, a label, one line of what
-             it does. The museum never reaches into the machine — it hands the
-             id across the boundary in the URL, and an id the twin does not
-             know degrades to a plain portal rather than to a wrong one.
-             CLEAN BOOT and BOOT PLAYBACK are wired and run today.
-             RECORD-DAY is the frame with two honest examples: a day is a
-             weather seed plus an install level plus which correspondence had
-             arrived, and only the first of those three is exact yet. The
-             Record has 436 entries and will supply the rest. */
-          /* ---- F2 2026-07-31: FINE DINING, NOT A BUFFET (Mike, doctrine) ---
-             "Not an all-you-can-eat buffet; this is fine dining."
-             FOUR presets and two cross-references made this face a menu of
-             everything the machinery can do. That is a spec sheet, not an
-             invitation: a visitor standing in front of a doorway does not
-             want four doors and a bibliography, they want THE door.
-             SO: ONE BUTTON. The generic unit, already past first boot - which
-             is the machine's own default since S3, so this entry carries no
-             preset id at all and the portal opens exactly as it comes.
-             THE MACHINERY IS UNTOUCHED AND STAYS BUILT. clean-boot,
-             boot-playback and record-day are all still wired end to end, in
-             the twin and across the URL boundary; only their BUTTONS are
-             gone. They come back one at a time, when the storyline has a
-             reason to tempt someone with them - which is worth more than
-             having them all on the shelf on day one.
-             [FR2 2026-07-31] AND `id: null` = no preset param WAS THE BUG.
-             "The plain portal, deliberately" sounded like restraint and read
-             to the machine as "apply nothing": Portal_Preset_Apply returns
-             early on a null id, so the one entry every visitor takes was the
-             only one that asked the machine for nothing — and what it got was
-             the twin's own default, which is POWERED OFF. The frozen face
-             promised a running unit and the click delivered a dark one.
-             Every entry names its recipe now. */
-          /* ---- L2 2026-07-31: RECIPES, NOT A BUTTON SEA -------------------
-             A dropdown in the house register, urgent-and-important at the
-             top. Each entry is a RECIPE the machine knows by name (see
-             PORTAL_RECIPES in the twin) — named state deltas, so a new one is
-             a row here and a row there, and Mike can direct it in plain
-             language.
-             `state` drives the rendering, not the wiring:
-               live    selectable now
-               held    listed, deliberately not wired — carries `why`
-             TWO ARE NOT WIRED, ON PURPOSE, AND BOTH ARE FLAGGED:
-             LAST STATE and TEST BENCH. See STATE, the L2 entry. */
-          presetsLabel: "ARRIVE AS",
-          presets: [
-            { id: "standard", label: "STANDARD", state: "live",
-              line: "A unit that has been running for sixty years and has met " +
-                    "you before — and, if you were here a moment ago, " +
-                    "exactly as you left it." },
-            { id: "idling-updated", label: "IDLING, UPDATED", state: "live",
-              line: "Powered, booted, updated, power-cycled, rebooted. Idle, " +
-                    "and waiting to be asked something." },
-            { id: "boot-playback", label: "BOOT PLAYBACK", state: "live",
-              line: "Sandbox Tech replays the install exactly as it landed \u2014 " +
-                    "step by step, without compromising it." },
-            { id: "off-first-boot", label: "OFF \u00b7 FIRST BOOT PENDING", state: "live",
-              line: "Dark. Never run. Waiting for someone to reach over and " +
-                    "throw the switch." },
-            /* [FR2] STILL HELD, and the distinction is the point: STANDARD
-               now resumes WITHIN a browsing session, on a mark that dies with
-               the window. This entry would carry state ACROSS visits, which
-               is the part Mike has not ruled on. */
-            { id: "last-state", label: "LAST STATE", state: "held",
-              why: "awaiting a privacy ruling",
-              line: "However you left it, across visits \u2014 not within one, " +
-                    "which STANDARD now does on its own." },
-            { id: "test-bench", label: "TEST BENCH", state: "held",
-              why: "dev entry, by URL",
-              line: "The workshop, with the panels showing. Reachable at " +
-                    "?preset=test-bench; not a door for visitors." },
-          ],
+          subtitle: "FEED CONTROL \u00b7 MGK-VIIIp",
+          panel: {
+            plate: "A-BEAL INSTRUMENT DIV. \u00b7 FEED CONTROL \u00b7 TYPE 8p",
+            drum: {
+              label: "FEED",
+              sub: "SELECT \u00b7 ONE ARMED",
+              /* positions are read in drum order, top to bottom. `arms:true`
+                 is the only one that lights the drum and permits the latch. */
+              positions: [
+                { id: "standard", label: "STANDARD", arms: true,
+                  line: "The unit as it stands: boots and updates complete, " +
+                        "powered, waiting at the opening prompt." },
+                { id: "idling-updated", label: "IDLING, UPD", arms: false,
+                  why: "held \u2014 one entry state (C3)" },
+                { id: "boot-playback", label: "BOOT PLAYBK", arms: false,
+                  why: "held \u2014 one entry state (C3)" },
+                { id: "off-first-boot", label: "OFF \u00b7 1ST BOOT", arms: false,
+                  why: "held \u2014 one entry state (C3)" },
+                { id: "last-state", label: "LAST STATE", arms: false,
+                  why: "held \u2014 awaiting a privacy ruling" },
+                { id: "test-bench", label: "TEST BENCH", arms: false,
+                  why: "held \u2014 workshop entry, by URL" },
+              ],
+            },
+            switches: [
+              /* [C1] the fortnight, as an instrument. Thrown UP the machine is
+                 in automated maintenance and will not be interrupted — the
+                 latch goes dark and says why. Thrown DOWN, maintenance is
+                 complete, which is where C3 leaves it today. */
+              { id: "maint", label: "AUTO MAINT", sub: "NON-INTERRUPTIBLE",
+                on: false, armsWhen: false,
+                held: "Maintenance is running. The machine will not be hurried.",
+                lamp: "amber" },
+              /* [C3] the entry state, as an instrument. */
+              { id: "prompt", label: "AT PROMPT", sub: "BOOTS + UPDATES DONE",
+                on: true, armsWhen: true,
+                held: "The unit is not at its prompt.",
+                lamp: "warm" },
+            ],
+            dial: {
+              label: "SOURCE",
+              positions: [
+                { id: "live", label: "LIVE", arms: true },
+                { id: "seeded", label: "SEEDED", arms: false,
+                  why: "no seeded feed on file \u2014 the lamps read the seed, " +
+                       "and there is nothing to read" },
+              ],
+            },
+            latch: {
+              label: "LATCH",
+              armed: "FEED ARMED",
+              idle: "NOT ARMED",
+              event: "wb-robots-open-twin",
+            },
+          },
+          /* [PAPA] every engraved word on this panel is a plain-words draft:
+             the plate, the switch legends, the held reasons. The instrument
+             layout is the deliverable; the legends are Mike's. */
+          papa: "[PAPA] \u2014 the engraved legends: plate wording, switch " +
+                "names, and what the panel says when it refuses to arm.",
         },
       },
       {

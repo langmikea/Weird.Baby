@@ -21,11 +21,38 @@ import { T as MUSEUM } from "../../styles/tokens.js";
    museum palette is the paper; this is the room the screen lives in. Named
    here so they read as an intentional exception instead of as two more
    stray hexes for the next audit to flag. */
-const PROJECTION_BLACK = "#0b0b0a";
-const PROJECTION_EDGE  = "#3b3831";
+/* [P1 2026-08-02] BOTH OLD CONSTANTS WENT WITH THE FRAMED STAGE.
+   PROJECTION_EDGE drew a border there is no longer a border to draw, and
+   PROJECTION_BLACK was left declared-and-unread the moment the frame stopped
+   painting its own ground - dead either way, so neither stayed.
+   [FORK A RULED, Mike 2026-08-02] THE GROUND IS BLACK.
+   This briefly carried B9's measured bezel rim (#303030, 5,384 samples,
+   median rgb(48,48,48)), chosen so the frame would stop ending - and Mike
+   ruled the other way, which is a different intent rather than a corrected
+   number: the portal is an object ON a surface, not continuous with it.
+   The tone must match the TWIN'S OWN portal ground exactly, because the two
+   meet with no seam anywhere across the full-bleed view; both are black, and
+   both carry CR1's whisper of screen behind the picture. If one is ever
+   changed the other has to move with it. */
+const PORTAL_GROUND = "#000";
 
 export default function RobotsExhibitFlow({ activeAlbumId }) {
   const [twinOpen, setTwinOpen] = useState(false);
+  /* ======== [CR1 / FORK A (b) 2026-08-02] THE H-TEAR =====================
+     Mike's canon: the whole portal view is ITSELF a screen, and the portal is
+     a screen ON it. The evidence-in-fiction is a tear that rips through
+     EVERYTHING AT ONCE - background and portal together - because a tear can
+     only cross both if both are the same surface.
+     SO IT IS DRAWN HERE, ABOVE THE IFRAME, AND NOT INSIDE THE TWIN. A tear
+     inside the twin could only ever cross the twin; it would prove the
+     opposite of what it is there to prove. One element spanning the whole
+     view is the only honest place for it.
+     DETERMINISTIC, PER THE GLITCH-REALISM LAW. No Math.random anywhere: the
+     gaps and the heights come from a fixed script that is walked in order and
+     wraps. The same session produces the same sequence, which is what makes
+     it a scripted event rather than noise - and it is RARE by design, tens of
+     seconds apart, because a tear that happens often is a texture. */
+  const [tear, setTear] = useState(null);
   /* [O4] the preset rides the src; default is the plain portal. */
   const [twinSrc, setTwinSrc] = useState("/robots/twin.html?user=1");
 
@@ -38,6 +65,33 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
     setTwinOpen(false);
     try { window.dispatchEvent(new CustomEvent("wb-robots-twin-closed")); } catch { /* no-op */ }
   }
+
+  /* gap before the tear (ms), then how tall it is (vh) and how far the
+     picture slips (px). Walked in order, wrapping - a script, not a shuffle. */
+  const TEAR_SCRIPT = [
+    { after: 26000, h: 2.4, slip:  7 },
+    { after: 41000, h: 1.1, slip: -4 },
+    { after: 33000, h: 3.6, slip: 11 },
+    { after: 57000, h: 1.7, slip: -6 },
+  ];
+  const TEAR_MS = 130;                 /* one or two frames of a real rip */
+  useEffect(() => {
+    if (!twinOpen) { setTear(null); return; }
+    let i = 0, alive = true, t1, t2;
+    function schedule() {
+      const step = TEAR_SCRIPT[i % TEAR_SCRIPT.length];
+      t1 = setTimeout(() => {
+        if (!alive) return;
+        /* the y position walks too, so the rip does not always land in the
+           same place - still scripted, still no randomness. */
+        const y = 12 + ((i * 37) % 74);
+        setTear({ y, h: step.h, slip: step.slip });
+        t2 = setTimeout(() => { if (alive) { setTear(null); i++; schedule(); } }, TEAR_MS);
+      }, step.after);
+    }
+    schedule();
+    return () => { alive = false; clearTimeout(t1); clearTimeout(t2); };
+  }, [twinOpen]);
 
   useEffect(() => {
     function onKey(e) { if (e.key === "Escape") closeTwin(); }
@@ -99,17 +153,31 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
   /* [E4] the deck's three style keys (deck / log / btn) went with it. What
      remains is the overlay the twin lives in. */
   const S = {
+    /* ======== [P1 2026-08-02] THE PORTAL VIEW IS THE WHOLE VIEW ==========
+       Mike: a full-width empty dark frame with nothing in it but the floating
+       portal. What was here was the opposite of that - a 1080px-wide panel,
+       centred, with a border, a radius and a 60px drop shadow, sitting on a
+       90%-opaque wash with the exhibit showing through at the edges. That is
+       a LIGHTBOX: it says "here is a thing on a page". The portal is not a
+       thing on a page; the page is supposed to stop existing.
+       So the overlay IS the stage now: inset 0, no padding, no border, no
+       radius, no shadow, nothing to centre because there is nothing beside
+       it. The ground is opaque, not a wash, because a wash means the room
+       behind it is still there and dimmed - and it is not still there.
+       WHAT IS DELIBERATELY ABSENT: no controls, no chrome, no caption, no
+       close button. The way out is [X] on the digit strip, inside the
+       picture, in the machine's own register (S4) - plus Escape (W2).
+       MOVE AND RESIZE ARE THE TWIN'S OWN and are untouched: the corner grip
+       (T3) and the drag live inside the iframe and neither cares what shape
+       this frame is. */
     overlay: {
-      position: "fixed", inset: 0, zIndex: 1000, background: "rgba(10,10,9,0.9)",
-      display: "flex", alignItems: "center", justifyContent: "center",
-      padding: "3vh 3vw",
+      position: "fixed", inset: 0, zIndex: 1000,
+      background: `var(--wb-portal-ground, ${PORTAL_GROUND})`,
     },
-    stage: {
-      width: "min(96vw, 1080px)", height: "92vh", background: PROJECTION_BLACK,
-      border: `1px solid ${PROJECTION_EDGE}`, borderRadius: 4, position: "relative",
-      boxShadow: "0 0 60px rgba(0,0,0,0.7)",
+    iframe: {
+      width: "100%", height: "100%", border: 0, display: "block",
+      background: `var(--wb-portal-ground, ${PORTAL_GROUND})`,
     },
-    iframe: { width: "100%", height: "100%", border: 0, borderRadius: 4, background: PROJECTION_BLACK },
     /* [S4 2026-07-30] THE CLOSE CONTROL IS GONE FROM HERE. Its style keys
        and hover state went with it; the way out is [X] on the digit strip,
        inside the picture.
@@ -142,14 +210,30 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
       {/* [W2 walk-four] explicit close ONLY — the button or Escape. */}
       {twinOpen && (
         <div style={S.overlay}>
-          <div style={S.stage}>
             {/* [S4] THE OUTSIDE CLOSE BUTTON IS RETIRED. O1 fixed its
                 contrast; this ruling removes the control entirely. The way
                 out is [X] on the digit strip — inside the picture, in the
                 machine's register, learned in one press — plus Escape, which
                 W2 asked for and which costs nothing. */}
-            <iframe style={S.iframe} src={twinSrc} title="MGK-VIIIp digital twin — the Portal" />
-          </div>
+          <iframe
+            style={tear ? { ...S.iframe, transform: `translateX(${tear.slip}px)` } : S.iframe}
+            src={twinSrc} title="MGK-VIIIp digital twin — the Portal" />
+          {/* the rip itself: a bright hairline with a smeared band under it,
+              sitting OVER the whole view. The picture slips sideways for the
+              same 130ms, so the band reads as the seam the slip happened at
+              rather than as a bar laid on top of a still image. */}
+          {tear && (
+            <div aria-hidden="true" style={{
+              position: "absolute", left: 0, right: 0,
+              top: `${tear.y}%`, height: `${tear.h}vh`,
+              pointerEvents: "none", zIndex: 2,
+              background:
+                "linear-gradient(180deg,rgba(255,255,255,.55) 0 1px," +
+                "rgba(255,255,255,.10) 1px 40%,rgba(0,0,0,.35) 40% 100%)",
+              backdropFilter: "brightness(1.45) contrast(.82)",
+              WebkitBackdropFilter: "brightness(1.45) contrast(.82)",
+            }} />
+          )}
         </div>
       )}
     </>

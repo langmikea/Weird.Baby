@@ -624,6 +624,152 @@ function PlayerBar({ video, track, album, live, onIdlePlay, onSkipBack, onSkipFo
 }
 
 // ─── ROOT ─────────────────────────────────────────────────────────────────────
+
+/* ======== [P2 2026-08-02] THE INSTRUMENT PANEL ==========================
+   A renderer for `face.panel`, and DELIBERATELY NOTHING MORE. It knows how to
+   draw a drum, a bat switch, an incandescent lamp, a rotary dial and a latch;
+   it does not know what a portal is, what MGK-VIIIp is, or why maintenance
+   would be non-interruptible. Every legend, every position and every arming
+   rule arrives as data from the artist config — the same discipline `face`
+   itself has carried since E2 — so /hr and /wb, which declare no faces at
+   all, cannot notice this exists.
+
+   ARMING IS ONE RULE, EVALUATED IN ONE PLACE. A panel is armed when the drum
+   sits on a position that arms, the dial sits on a position that arms, and
+   every switch matches its `armsWhen`. Anything else is not armed, and the
+   panel says WHICH instrument is refusing and why — a control that declines
+   silently is the same defect as a menu that hides what it is not offering.
+
+   THE DRUM IS A REAL CYLINDER, not a list that cross-fades. The positions are
+   laid around it in 3D and it rotates to bring one into the window, because
+   that is the instrument Mike specified and a fade would be a picture of it
+   rather than the thing — the same fault the ASK row carried in FR1.
+   Geometry: with N faces of height h, the radius that makes them meet
+   edge-to-edge is (h/2) / tan(pi/N).
+   IT IS LIT ONLY WHEN ARMED. An unlit drum is still legible: you can read
+   what the machine could do and see that it is not doing it. */
+function InstrumentPanel({ decl }) {
+  const D = decl || {};
+  const drumPos = Array.isArray(D.drum && D.drum.positions) ? D.drum.positions : [];
+  const dialPos = Array.isArray(D.dial && D.dial.positions) ? D.dial.positions : [];
+  const swDecl  = Array.isArray(D.switches) ? D.switches : [];
+
+  const [drumIdx, setDrumIdx] = useState(0);
+  const [dialIdx, setDialIdx] = useState(0);
+  const [swOn, setSwOn] = useState(() => swDecl.map(w => !!w.on));
+
+  const N = Math.max(drumPos.length, 1);
+  const STEP = 360 / N;
+  const FACE_H = 34;
+  const RADIUS = N > 2 ? (FACE_H / 2) / Math.tan(Math.PI / N) : FACE_H;
+
+  const drum = drumPos[drumIdx] || {};
+  const dial = dialPos[dialIdx] || {};
+  const swBad = swDecl.findIndex((w, i) => swOn[i] !== !!w.armsWhen);
+  const armed = !!drum.arms && !!dial.arms && swBad === -1;
+
+  /* the panel explains its own refusal, most-specific first */
+  let refusal = null;
+  if (!armed) {
+    if (swBad !== -1) refusal = swDecl[swBad].held;
+    else if (!drum.arms) refusal = drum.why;
+    else if (!dial.arms) refusal = dial.why;
+  }
+
+  function roll(d) { setDrumIdx(i => (i + d + N) % N); }
+
+  return (
+    <div className={"ip" + (armed ? " ip-armed" : "")}>
+      {D.plate && <div className="ip-plate">{D.plate}</div>}
+
+      <div className="ip-deck">
+        {/* ---- THE DRUM ---- */}
+        <div className="ip-bay ip-bay-drum">
+          <div className="ip-legend">{D.drum && D.drum.label}</div>
+          <div className="ip-drumwrap">
+            <button className="ip-roll" onClick={() => roll(-1)} aria-label="roll up">&#9650;</button>
+            <div className="ip-drum">
+              <div className="ip-drum-spin" style={{ transform: `rotateX(${drumIdx * STEP}deg)` }}>
+                {drumPos.map((p, i) => (
+                  <div key={p.id || i} className="ip-drum-face"
+                       style={{ transform: `rotateX(${-i * STEP}deg) translateZ(${RADIUS}px)` }}>
+                    {p.label}
+                  </div>
+                ))}
+              </div>
+              <div className="ip-drum-glass" />
+            </div>
+            <button className="ip-roll" onClick={() => roll(1)} aria-label="roll down">&#9660;</button>
+          </div>
+          {D.drum && D.drum.sub && <div className="ip-sub">{D.drum.sub}</div>}
+        </div>
+
+        {/* ---- THE BAT SWITCHES ---- */}
+        <div className="ip-bay ip-bay-switches">
+          {swDecl.map((w, i) => (
+            <div key={w.id || i} className="ip-sw">
+              <span className={"ip-lamp ip-lamp-" + (w.lamp || "warm") + (swOn[i] ? " ip-lit" : "")} />
+              <button className={"ip-bat" + (swOn[i] ? " ip-bat-up" : "")}
+                      onClick={() => setSwOn(v => v.map((x, j) => (j === i ? !x : x)))}
+                      aria-pressed={swOn[i]} aria-label={w.label}>
+                <span className="ip-bat-lever" />
+              </button>
+              <span className="ip-sw-legend">
+                <span className="ip-sw-name">{w.label}</span>
+                {w.sub && <span className="ip-sw-sub">{w.sub}</span>}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* ---- THE ROTARY DIAL ---- */}
+        <div className="ip-bay ip-bay-dial">
+          <div className="ip-legend">{D.dial && D.dial.label}</div>
+          <div className="ip-dial">
+            <button className="ip-knob"
+                    style={{ transform: `rotate(${dialIdx * 90 - 45}deg)` }}
+                    onClick={() => setDialIdx(i => (i + 1) % Math.max(dialPos.length, 1))}
+                    aria-label={"source: " + (dial.label || "")}>
+              <span className="ip-knob-mark" />
+            </button>
+            <div className="ip-dial-marks">
+              {dialPos.map((p, i) => (
+                <span key={p.id || i}
+                      className={"ip-dial-mark" + (i === dialIdx ? " ip-on" : "")}>{p.label}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ---- THE LATCH ---- */}
+      <div className="ip-latchbay">
+        <button className="ip-latch" disabled={!armed}
+                onClick={() => {
+                  if (!armed) return;
+                  window.dispatchEvent(new CustomEvent(
+                    (D.latch && D.latch.event) || "wb-robots-open-twin",
+                    { detail: { preset: drum.id } }
+                  ));
+                }}>
+          <span className="ip-latch-face">{(D.latch && D.latch.label) || "LATCH"}</span>
+        </button>
+        <div className="ip-state">
+          <span className={"ip-lamp ip-lamp-green" + (armed ? " ip-lit" : "")} />
+          <span className="ip-state-txt">
+            {armed ? ((D.latch && D.latch.armed) || "ARMED")
+                   : ((D.latch && D.latch.idle) || "NOT ARMED")}
+          </span>
+        </div>
+      </div>
+
+      {/* the panel says why it will not arm — never silently */}
+      {!armed && refusal && <div className="ip-refusal">{refusal}</div>}
+      {armed && drum.line && <div className="ip-readout">{drum.line}</div>}
+    </div>
+  );
+}
+
 export default function Exhibit({ artist }) {
   const SPINE = artist.spine;
   const FACTS = artist.facts;
@@ -1245,6 +1391,14 @@ export default function Exhibit({ artist }) {
                           body's own flow, scrolls with the rest of the track,
                           and scales with the panel like every other element. */}
                       <div className="vp-face-body">
+                        {/* [P2 2026-08-02] A PANEL FACE IS THE WHOLE FACE.
+                            It gets no blurb, no register block, no plate and
+                            no dropdown above it — the panel IS the page, and
+                            anything stacked on top would be the buffet again.
+                            Every other kind falls through unchanged. */}
+                        {activeFace.panel ? (
+                          <InstrumentPanel decl={activeFace.panel} />
+                        ) : (<>
                         {/* [F1 2026-07-31] THE PHOTO IS NOT A BANNER (Mike, doctrine).
                             S7 moved the still INSIDE the viewer, which was right,
                             but it landed as a full-width block across the top —
@@ -1460,6 +1614,7 @@ export default function Exhibit({ artist }) {
                             )}
                           >{activeFace.action.label}</button>
                         )}
+                        </>)}
                       </div>
                     </div>
                   )}

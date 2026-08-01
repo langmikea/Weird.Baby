@@ -568,7 +568,27 @@ body.portal{
      Effect: the frame stops ending. The bezel's outer edge and the page are
      the same tone, so the real world the portal opens into is the same
      material as the frame around it. */
-  background:#303030;
+  /* [FORK A RULED, Mike 2026-08-02] AND THE GROUND IS NOW BLACK, WHICH
+     SUPERSEDES B9 FOR THE PORTAL VIEW. B9's measurement is not wrong and is
+     kept above, because the reasoning still holds for what it was solving:
+     matching the rim made the frame stop ending. Mike's ruling asks for the
+     opposite relationship - the portal is an object ON something, not
+     continuous with it - so the tone is black and the rim match is retired
+     rather than deleted. The number stays on the page so the next reader
+     knows it was measured and overruled, not forgotten.
+     [CR1 / FORK A (a)] THE BAREST REVEAL THAT THIS IS A SCREEN. Behind the
+     portal, and ONLY there, the black carries a whisper of structure: a
+     phosphor-fine horizontal rule at ~3px and one very slow, very shallow
+     sheen. It is meant to be missed on the first look and noticed on the
+     third - if it reads as a texture it is too strong. Nothing here is the
+     reveal itself; the reveal is CR1's future machinery, and this is only
+     enough surface for a tear to have something to tear. */
+  background:
+    repeating-linear-gradient(0deg,
+      rgba(255,255,255,.011) 0 1px, transparent 1px 3px),
+    radial-gradient(120% 80% at 50% 42%,
+      rgba(255,255,255,.022), rgba(255,255,255,0) 60%),
+    #000;
 }
 /* the page bleeds to the bezel's outer edge: the stage stops painting black
    behind it, and the PNG's rounded-corner transparency does the rest. */
@@ -724,6 +744,47 @@ body.colorchrome.portal .glassmask canvas{filter:sepia(1) hue-rotate(192deg) sat
 body.portal #stagerow{display:block}
 body.portal #devrail{flex:1 1 auto;max-height:none;flex-direction:row;
   flex-wrap:wrap;padding-right:0;margin-bottom:10px}
+/* [P1 2026-08-02] THE DEV RAIL IS NOT PART OF THE PICTURE.
+   `body.usermode .bgroup{display:none}` has hidden the workshop button groups
+   since usermode existed - and it stopped working the moment Dev_Rail_In()
+   started MOVING those groups into #devrail, because `#devrail .bgroup`
+   carries an id and outranks it. So the rail rebuilt itself out of the very
+   elements usermode had just hidden, and the visitor's portal view has been
+   carrying a strip of BOOT / Ceremony / Charge / Bus / Full preview /
+   Play-Pause / Single-step / Sandbox replay [dev] along its bottom edge.
+   It did not show up in any earlier check because a probe that asks
+   ".bgroup" for its computed display gets the answer for the groups still
+   sitting in .btns, and the moved ones are a different set of nodes -
+   answering honestly about the wrong elements.
+   HIDE THE RAIL, NOT THE BUTTONS. The buttons are legitimately the
+   workshop's; what is wrong is the container being exempt from usermode. One
+   id beats one id, and this rule comes after, so it wins in both the portal
+   and the plain unit view. */
+body.usermode #devrail{display:none}
+/* ...AND THE ACK BOX IS THE SAME FAULT ONE ELEMENT OVER. `#devack` is
+   display:none by default and `body.unitview #devack{display:flex}` turns it
+   back on for the unit view - which the portal is - so the visitor's frame
+   carried a running commentary of the boot ("RUNNING F/T dance - beat 25:
+   segment 1 settles") along its bottom edge. Two surfaces, one pattern: a
+   dev thing hidden by a class rule and un-hidden by a more specific one that
+   was never taught about usermode. */
+body.usermode #devack{display:none}
+
+/* ---- [P1 2026-08-02] IN THE PORTAL VIEW, THE PICTURE IS THE PAGE --------
+   THE TWO RULES ABOVE ARE PATCHES AND THIS IS THE FIX. Both #devrail and
+   #devack leaked the same way: usermode hid a thing by class, a LATER and
+   MORE SPECIFIC rule un-hid it for the unit view, and nobody taught that rule
+   about usermode. Chasing them one at a time loses by construction - the next
+   workshop surface added to this file inherits the same exemption and appears
+   in a visitor's portal without anyone touching the portal.
+   So the portal view states the rule POSITIVELY instead: in usermode, the
+   only child of <body> that renders is the portal itself. Anything else, of
+   any specificity, present today or added next month, is off. The stage and
+   the chyron both live inside #portalbar, so the picture and its controls are
+   untouched - as are the grip and the drag, which are inside it too.
+   Deliberately `> *`, direct children only: this hides the OTHER COLUMNS, not
+   anything within the picture. */
+body.portal.usermode > *:not(#portalbar){display:none}
 @media (max-width:560px){#portalbar{margin:-8px -8px 10px}}
 
 /* ---- THE ON-SCREEN CONTROLS -------------------------------------------
