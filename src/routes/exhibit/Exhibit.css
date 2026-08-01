@@ -322,7 +322,15 @@ body:has(.vp-face) .vp-area::before{display:none}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:240px 240px;
 }
-.ex-snap{}
+/* [M7 2026-08-01] SNAP WAS CONFIGURED AND DID NOTHING. `html` has carried
+   `scroll-snap-type:y proximity` since the b&w pass, but NO ELEMENT EVER
+   DECLARED AN ALIGNMENT - this rule was an empty shell - so the page had a
+   snap container with zero snap points and behaved exactly like a page with
+   no snapping at all. Two points is the whole of it: the top of the deck and
+   the top of the viewer block. PROXIMITY, not mandatory, because a reader
+   part-way down a long record must be allowed to simply stop there. */
+.ex-snap{scroll-snap-align:start;scroll-margin-top:8px}
+.ex-album-banner{scroll-snap-align:start;scroll-margin-top:8px}
 .ex-root.visible{opacity:1}
 
 /* NAV */
@@ -420,6 +428,16 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .ex-album-banner{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:14px 32px 10px;border-top:1px solid var(--wb-border)}
 .ex-album-banner-title{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1rem,1.8vw,1.35rem);letter-spacing:.1em;text-transform:uppercase;color:var(--wb-gold);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ex-album-banner-aux{flex:1;min-height:1px}
+/* [M4 2026-08-01] THE NAME IS MGK-VIIIp, AND THE FINAL p IS LOWERCASE.
+   `text-transform:uppercase` was rewriting it to MGK-VIIIP everywhere the
+   album title appeared - the styling was overruling the data about what the
+   object is CALLED, which is not a styling decision. Scoped by the exhibit
+   attribute that already exists, so /hr and /wb keep their uppercase
+   register: in this wing the data already carries the intended casing
+   ("MGK-VIIIp", "Weird.Baby Robots") and is simply allowed to say it. */
+[data-exhibit="robots"] .ex-album-banner-title,
+[data-exhibit="robots"] .cf-ph-title,
+[data-exhibit="robots"] .vp-ao-ph-title{text-transform:none}
 /* 2026-06-07 Mike: tighter rows, less whitespace. */
 .tl-track{display:flex;align-items:center;padding:3px 20px;border-left:2px solid transparent;cursor:pointer;transition:background .15s,border-left-color .2s;user-select:none}
 .tl-track:hover{background:var(--wb-ink-soft)}
@@ -553,3 +571,49 @@ body:has(.pb) .ex-root{padding-bottom:88px}
   .tl-rend{width:74px;font-size:.6rem}
   .tl-tag-ghost{width:40px}
 }
+
+/* ================= [M5 2026-08-01] THE RECORD =============================
+   The index stands until a record is chosen; the chosen record fills the
+   frame. No volume-wide open/close buttons - the head of the record is the
+   control, and it toggles the one page you are looking at. */
+.vp-rec-index{list-style:none;margin:0;padding:0}
+.vp-rec-row{padding:0}
+.vp-rec-open{display:flex;gap:14px;width:100%;text-align:left;background:none;
+  border:0;border-top:1px solid var(--wb-border);padding:10px 2px;cursor:pointer;
+  color:inherit;font:inherit;transition:background .15s}
+.vp-rec-open:hover,.vp-rec-open:focus-visible{background:rgba(232,228,216,.05);outline:none}
+.vp-rec-index .vp-rec-row:last-child .vp-rec-open{border-bottom:1px solid var(--wb-border)}
+/* the peek is one line: enough to recognise the entry, not enough to read it
+   instead of opening it. */
+.vp-rec-peek{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;
+  overflow:hidden;opacity:.72}
+
+.vp-rec{display:flex;flex-direction:column;gap:14px;min-height:0}
+.vp-rec-head{display:flex;gap:14px;align-items:baseline;width:100%;text-align:left;
+  background:none;border:0;border-bottom:1px solid var(--wb-border);
+  padding:0 0 10px;cursor:pointer;color:inherit;font:inherit}
+.vp-rec-head:hover .vp-rec-title,.vp-rec-head:focus-visible .vp-rec-title{
+  text-decoration:underline;text-underline-offset:3px}
+.vp-rec-head:focus-visible{outline:none}
+.vp-rec-title{font-family:'DM Serif Display',Georgia,serif;
+  font-size:calc(var(--face-fs) * 1.12);line-height:1.2;color:var(--wb-gold)}
+.vp-rec-body{display:flex;flex-direction:column;gap:10px}
+.vp-rec-line{margin:0;font-size:calc(var(--face-fs) * .92);line-height:1.62;
+  color:var(--wb-gold-lo)}
+
+/* THE ENDMARK. A hairline that stops, with a tombstone set into it. The page
+   is over and says so - no scrolling to find out. */
+.vp-rec-end{display:flex;align-items:center;gap:12px;margin-top:4px;opacity:.75}
+.vp-rec-end::before,.vp-rec-end::after{content:"";flex:1;height:1px;background:var(--wb-border)}
+.vp-rec-end i{display:block;width:7px;height:7px;background:var(--wb-gold-lo)}
+
+.vp-rec-nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.vp-rec-step{font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--face-fs) * .62);letter-spacing:.14em;text-transform:uppercase;
+  background:none;border:1px solid var(--wb-border);color:var(--wb-gold-lo);
+  padding:7px 13px;cursor:pointer;transition:border-color .18s,color .18s}
+.vp-rec-step:hover:not(:disabled),.vp-rec-step:focus-visible:not(:disabled){
+  border-color:var(--wb-gold-lo);color:var(--wb-gold);outline:none}
+.vp-rec-step:disabled{opacity:.3;cursor:default}
+.vp-rec-count{font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--face-fs) * .58);letter-spacing:.12em;color:var(--wb-gold-mute)}

@@ -340,7 +340,14 @@ const CF_MIN    = 160; const CF_MAX    = 440;
    OPT-IN BY CONFIG: only an artist declaring `bodyKey` grows the handle, so
    /hr and /wb render exactly as they did today. Turning it on for them is one
    line each in their config and no component change at all. */
-const BODY_MIN  = 260; const BODY_MAX  = 1100; const BODY_DEF = 460;
+/* [M6 2026-08-01] THE FRAME OPENS LONG. 460px was sized so the drag handle
+   cleared the fixed player bar, which solved a collision and left the viewer
+   short: a face with a register, an index and a record had to be scrolled
+   before it could be read at all. Mike's ruling is a generous default -
+   plenty of space, plenty to scroll - so the default roughly doubles and the
+   ceiling rises with it. MIN is untouched; a visitor's stored height is still
+   never overridden. */
+const BODY_MIN  = 260; const BODY_MAX  = 1600; const BODY_DEF = 880;
 
 function usePersist(key, def) {
   const [v, setV] = useState(() => { try { return parseFloat(localStorage.getItem(key)) || def; } catch { return def; } });
@@ -675,8 +682,12 @@ export default function Exhibit({ artist }) {
      what is conditional. An artist without `bodyKey` gets an inert slot that
      nothing reads and nothing renders. */
   const [bodyH, setBodyH] = usePersist(artist.bodyKey || "wb-body-off", BODY_DEF);
-  /* [S6] the log's volume: closed shows the latest entry + a date index. */
-  const [logOpen, setLogOpen] = useState(false);
+  /* [M5 2026-08-01] ONE RECORD AT A TIME, BY INDEX — not a volume that is
+     open or shut. S6's model was a single boolean driving two buttons
+     ("EARLIER ENTRIES" / "CLOSE THE VOLUME") that operated on the whole log;
+     Mike killed both. A record now opens on its own, fills the frame, and
+     closes by the same control that opened it. null = the index is showing. */
+  const [openEntry, setOpenEntry] = useState(null);
   /* [L2] which recipe is selected; index, reset when the track changes. */
   const [recipeIdx, setRecipeIdx] = useState(0);
   const bodyResizable = !!artist.bodyKey;
@@ -703,7 +714,18 @@ export default function Exhibit({ artist }) {
     const bar  = document.querySelector(".pb");
     const barH = bar ? bar.getBoundingClientRect().height : 0;
     const fits = Math.round(window.innerHeight - top - barH - 30);
-    if (fits >= BODY_MIN && fits < BODY_DEF) setBodyH(fits);
+    /* [M6 2026-08-01] THE FIT MAY GROW THE FRAME, NEVER SHRINK IT.
+       This line used to pull the default DOWN to whatever the viewport had
+       spare - which quietly cancelled M6: the default became 880 and the
+       frame still opened at 489, because `fits` was smaller and won. Same
+       shape as the FR3 finding, one round earlier: a default that is never
+       reached is not a default.
+       The clamp existed so the drag handle could not land inside the fixed
+       player bar. A frame TALLER than the viewport does not have that
+       problem - the handle is below the fold, the page scrolls, and reaching
+       it is ordinary scrolling. So the fit is now allowed to grow a generous
+       frame on a tall screen and forbidden from shrinking it on a short one. */
+    if (fits > BODY_DEF && fits <= BODY_MAX) setBodyH(fits);
   }, [bodyResizable]);
 
   const ytDivRef = useRef(null);
@@ -757,7 +779,7 @@ export default function Exhibit({ artist }) {
          does not start a player. /hr and /wb tracks all carry videos, so this
          branch never runs for them. */
       if (track && track.face) setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));
-      setLogOpen(false);          /* [S6] a new track opens its volume closed */
+      setOpenEntry(null);         /* [M5] a new track opens on its index */
       setRecipeIdx(0);            /* [L2] and its selector at the top entry */
       return;
     }
@@ -1294,44 +1316,81 @@ export default function Exhibit({ artist }) {
                             as the container proposal specified for `journal`.
                             Reversal happens HERE, not in the data: the
                             entries stay in the order they happened. */}
-                        {Array.isArray(activeFace.entries) && activeFace.entries.length > 0 && (
-                          <ol className="vp-face-entries">
-                            {(activeFace.entriesMode === "log"
-                                ? [...activeFace.entries].reverse()
-                                : activeFace.entries
-                             ).slice(0, activeFace.entriesMode === "log" && !logOpen ? 1 : undefined)
-                             .map((en, i) => (
-                              <li key={i} className="vp-fe">
+                        {/* [M5 2026-08-01] THE RECORD OPENS ONE PAGE AT A TIME.
+                            A `list` face renders every entry as before. A `log`
+                            face is a bound volume: the index stands until a
+                            record is chosen, then THAT RECORD FILLS THE FRAME
+                            and nothing else competes with it. The control that
+                            opened it closes it — there is no separate shut
+                            button, because the two Mike killed were exactly
+                            that and they were operating on the whole volume
+                            rather than on the page you were reading.
+                            Moving between records happens FROM INSIDE a
+                            record, which is the thing a reader actually wants
+                            and the old index could not do: it could only put
+                            you back at the top. */}
+                        {Array.isArray(activeFace.entries) && activeFace.entries.length > 0 && (() => {
+                          const isLog = activeFace.entriesMode === "log";
+                          /* reversal happens HERE, not in the data: the entries
+                             stay in the order they happened. */
+                          const list = isLog ? [...activeFace.entries].reverse() : activeFace.entries;
+                          if (!isLog) return (
+                            <ol className="vp-face-entries">
+                              {list.map((en, i) => (
+                                <li key={i} className="vp-fe">
+                                  {en.stamp && <span className="vp-fe-stamp">{en.stamp}</span>}
+                                  <span className="vp-fe-body">
+                                    <span className="vp-fe-title">{en.title}</span>
+                                    {en.line && <span className="vp-fe-line">{en.line}</span>}
+                                    {en.note && <span className="vp-fe-note">{en.note}</span>}
+                                  </span>
+                                </li>
+                              ))}
+                            </ol>
+                          );
+                          const open = openEntry !== null && list[openEntry] ? openEntry : null;
+                          if (open === null) return (
+                            <ol className="vp-face-entries vp-rec-index">
+                              {list.map((en, i) => (
+                                <li key={i} className="vp-fe vp-rec-row">
+                                  <button className="vp-rec-open" onClick={() => setOpenEntry(i)}>
+                                    {en.stamp && <span className="vp-fe-stamp">{en.stamp}</span>}
+                                    <span className="vp-fe-body">
+                                      <span className="vp-fe-title">{en.title}</span>
+                                      {en.line && <span className="vp-fe-line vp-rec-peek">{en.line}</span>}
+                                    </span>
+                                  </button>
+                                </li>
+                              ))}
+                            </ol>
+                          );
+                          const en = list[open];
+                          return (
+                            <div className="vp-rec">
+                              <button className="vp-rec-head" onClick={() => setOpenEntry(null)}
+                                      title="close this record">
                                 {en.stamp && <span className="vp-fe-stamp">{en.stamp}</span>}
-                                <span className="vp-fe-body">
-                                  <span className="vp-fe-title">{en.title}</span>
-                                  {en.line && <span className="vp-fe-line">{en.line}</span>}
-                                  {en.note && <span className="vp-fe-note">{en.note}</span>}
-                                </span>
-                              </li>
-                            ))}
-                          </ol>
-                        )}
-                        {activeFace.entriesMode === "log" &&
-                         Array.isArray(activeFace.entries) && activeFace.entries.length > 1 && (
-                          <div className="vp-log">
-                            <button className="vp-log-toggle" onClick={() => setLogOpen(o => !o)}>
-                              {logOpen ? "CLOSE THE VOLUME" : "EARLIER ENTRIES"}
-                            </button>
-                            {!logOpen && (
-                              <ol className="vp-log-index">
-                                {[...activeFace.entries].reverse().slice(1).map((en, i) => (
-                                  <li key={i}>
-                                    <button className="vp-log-jump" onClick={() => setLogOpen(true)}>
-                                      <span className="vp-log-stamp">{en.stamp}</span>
-                                      <span className="vp-log-title">{en.title}</span>
-                                    </button>
-                                  </li>
-                                ))}
-                              </ol>
-                            )}
-                          </div>
-                        )}
+                                <span className="vp-rec-title">{en.title}</span>
+                              </button>
+                              <div className="vp-rec-body">
+                                {en.line && <p className="vp-rec-line">{en.line}</p>}
+                                {en.note && <p className="vp-fe-note">{en.note}</p>}
+                              </div>
+                              {/* THE PAGE ENDS DEFINITIVELY. A reader should never
+                                  have to wonder whether there is more below the
+                                  fold; the mark says the record is finished, the
+                                  way a set proof closes with a tombstone. */}
+                              <div className="vp-rec-end" aria-hidden="true"><i /></div>
+                              <nav className="vp-rec-nav">
+                                <button className="vp-rec-step" disabled={open === 0}
+                                        onClick={() => setOpenEntry(open - 1)}>‹ NEWER</button>
+                                <span className="vp-rec-count">{open + 1} of {list.length}</span>
+                                <button className="vp-rec-step" disabled={open === list.length - 1}
+                                        onClick={() => setOpenEntry(open + 1)}>OLDER ›</button>
+                              </nav>
+                            </div>
+                          );
+                        })()}
                         {activeFace.footer && (
                           <div className="vp-face-footer">{activeFace.footer}</div>
                         )}

@@ -58,12 +58,12 @@ import RobotsExhibitFlow from "../../routes/robots/RobotsExhibitFlow.jsx";
 const WBR_TRACKS = [
       {
         id: "about",
-        title: "Who We Are",
+        title: "Welcome",
         videos: [],
         tags: ["about", "house", "purveyor"],
         face: {
           kind: "text",
-          title: "WHO WE ARE",
+          title: "WELCOME",
           blurb:
             "Weird.Baby buys weird things, works out what they are, and sells " +
             "the ones that should go on living. The robots wing is the part of " +
@@ -210,6 +210,185 @@ const spine = [
       "MGK-VIIIp −02 “The Informer”, front and top, as received.",
     tracks: [
       {
+        id: "record",
+        title: "The Record",
+        videos: [],
+        tags: ["journal", "record", "2024", "provenance"],
+        face: {
+          /* [S6 2026-07-30] THE RECORD OPENS ON ITS MOST RECENT ENTRY.
+             A log that opens at the beginning is an archive; a log that opens
+             at the end is a RECORD - it tells you where things stand and lets
+             you walk back. `entriesMode:"log"` asks the viewer for the
+             newest-first order and the period-true browse (S6); the entries
+             below stay in the order they happened, because that is the truth
+             and the presentation is the viewer's job. */
+          kind: "text",
+          entriesMode: "log",
+          title: "THE RECORD",
+          blurb:
+            "The weekly log of the reverse-discovery: what arrived, what it " +
+            "turned out to be, and what is still unexplained. Written as it " +
+            "happened, which is not the order it makes sense in.",
+          lines: [
+            "SOURCE   The Record — 436 paragraph records, in repo",
+            "INDEX    date-stamped, log-sheet register",
+            "ORDER    as it happened, not as it makes sense",
+          ],
+          /* THE FIRST LAYER IS REAL. Ten entries, real dates, and one true
+             sentence each, taken from the blog archive itself — not invented
+             to fill a template. The full bodies are Mike's to place, and the
+             [PAPA] rows are the ones where a summary would be putting words
+             in the narrator's mouth. */
+          entries: [
+            { stamp: "01 JAN 24", title: "Three boxes",
+              line: "An anonymous drop: three cartons, marked classified and " +
+                    "fragile on every side, with a note taped to them signed “-W.O.”",
+              note: "the note's full text is in the archive" },
+            { stamp: "05 JAN 24", title: "Who is W.O.?",
+              line: "The first entry. Three units are named on the boxing, " +
+                    "and ABEAL is assumed — wrongly — to be their creator.",
+              note: "" },
+            { stamp: "12 JAN 24", title: "Something off about this drop",
+              line: "Office supplies, personal items and cold-war hardware, " +
+                    "no documentation, everything gathered in a rush.",
+              note: "ABEAL is “a division of ScrapCo”" },
+            { stamp: "19 JAN 24", title: "The One-Page-Ads",
+              line: "The framed ads turn out not to be original: ABEAL " +
+                    "retro-fitted other people's ads, with words covered and things taped down.",
+              note: "" },
+            { stamp: "26 JAN 24", title: "But we were wrong",
+              line: "The retraction. ABEAL did not start it — they received " +
+                    "the tech from someone else. They were responsible for the looks.",
+              note: "the record correcting itself, in public" },
+            { stamp: "02 FEB 24", title: "Logos and slogans",
+              line: "The shirts are made from original elements off the " +
+                    "boxing — which is the first mention that per-unit slogans exist.",
+              note: "[PAPA] — the slogans themselves are unwritten" },
+            { stamp: "09 FEB 24", title: "MGK-NIAC, and a name",
+              line: "The original project title surfaces, and with it Carter " +
+                    "Bookman — “his life is a mystery (some may say an Enigma??)”.",
+              note: "" },
+            { stamp: "16 FEB 24", title: "Ionizers and crushed walnut",
+              line: "Restoration chemistry: the cases through the electronic " +
+                    "ionizers, the body casings tumbled in crushed walnut.",
+              note: "" },
+            { stamp: "22 MAR 24", title: "Bias, in 1965",
+              line: "Two engines — Prediction and Answer — both running off a " +
+                    "changeable bias setting built before bias settings were a thing.",
+              note: "" },
+            { stamp: "05 APR 24", title: "The cases open",
+              line: "Photographs of the three cases and their artifacts: a " +
+                    "spy camera, a real telegraph, and a 1960s CEO's day.",
+              note: "" },
+          ],
+          footer: "First layer only — ten of 436 records. The full entries, and " +
+                  "the order they want to be read in, are [PAPA].",
+        },
+      },
+      {
+        id: "manual",
+        title: "The Manual",
+        videos: [],
+        tags: ["manual", "plate", "1965", "scan", "opa"],
+        /* HONEST v1: a face that says what the object is and what state it is
+           in. No plates yet — the scans are Mike's to make — and no
+           "coming soon", because a face that describes the artifact is not a
+           promise, it is a catalogue entry. */
+        face: {
+          kind: "plate",
+          title: "THE OWNER'S MANUAL",
+          blurb:
+            "The unit shipped with a manual, and the manual is where the " +
+            "machine explains itself — including the parts it gets wrong. " +
+            "Page images, not transcription: the typography is the evidence.",
+          lines: [
+            "FORMAT  page plates, original look-and-feel",
+            "NAV     microfiche-style scrub (designed, not built)",
+            "PLATES  not yet imaged",
+          ],
+          /* THE CONTENTS PAGE, WHICH IS REAL EVEN THOUGH THE PLATES ARE NOT.
+             Every section below is attested in the record or in the firmware;
+             what is missing is the IMAGE of the page, and each row says so
+             rather than pretending otherwise. */
+          entries: [
+            { stamp: "§ 1", title: "Start-up procedure",
+              line: "One of the two items present in every generic unit's " +
+                    "inbox from the moment the OS is installed — never “sent”.",
+              note: "attested · plate not imaged" },
+            { stamp: "§ 2", title: "Operating the answer engine",
+              line: "Ask, then shake. The reveal holds until you disturb it; " +
+                    "the machine never times your reading out.",
+              note: "attested · plate not imaged" },
+            { stamp: "§ 3", title: "Bias, and what it is for",
+              line: "The polarity and clarity registers, described in the " +
+                    "manual's own UNIVAC-corporate register.",
+              note: "attested · plate not imaged" },
+            { stamp: "§ 4", title: "BIST and AMMMS maintenance",
+              line: "The built-in self test and the maintenance messaging — " +
+                    "real lore, and the visual language already exists.",
+              note: "attested · plate not imaged" },
+            { stamp: "APP. 1", title: "The passcode landscape",
+              line: "0000 through 80085, the tape, and the grid. A found " +
+                    "artifact, not an objective — there is no game.",
+              note: "the strongest candidate to image first" },
+            { stamp: "MARGINS", title: "The hands in the margins",
+              line: "Technicians' and owners' handwriting, scanned with the " +
+                    "pages during cataloging. The margins are recovered evidence.",
+              note: "[PAPA] — which hands, and what they wrote" },
+          ],
+          footer: "Page images are Mike's to make. Until they exist this is a " +
+                  "catalogue entry, and it says so.",
+        },
+      },
+      {
+        /* [C4 / M2 2026-08-01] THE FIRST-LEVEL ARTIFACT SLOT.
+           Mike's doctrine ordered the tracks Record, Manual, [artifact],
+           Portal — "not afterthoughts and add-ons, but not the boilerplate
+           either". The slot was left unnamed, so it is filled with the one
+           first-level artifact that is REAL AND IN HAND TODAY: the firmware
+           itself. Two trees are on file and both are checked in.
+           THIS FACE IS HONESTLY v1 AND SAYS SO. It carries what can be
+           verified by looking — the tree names, the form, which one the twin
+           transliterates — and claims nothing about contents it has not read.
+           If Mike means a different artifact for this slot, the track is
+           renamed and re-faced here and nothing else moves. */
+        id: "firmware",
+        title: "The Firmware",
+        videos: [],
+        tags: ["firmware", "artifact", "source", "1965", "ino"],
+        face: {
+          kind: "text",
+          title: "THE FIRMWARE",
+          subtitle: "THE MACHINE'S OWN MIND, ON FILE",
+          blurb:
+            "Everything the unit knows how to do is in here \u2014 not a " +
+            "description of the machine's behaviour but the behaviour itself, " +
+            "in the form the machine reads it. The twin in the Portal track is " +
+            "a transliteration of the first tree, bugs preserved and badged.",
+          lines: [
+            "TREES    2 on file",
+            "PRIMARY  MGK_VIIIp_01__20240721_WORKS \u2014 the tree the twin follows",
+            "SECOND   MGK_VIIIp_02__20260724_AUDIT",
+            "FORM     .ino modules \u2014 menu, boot, audio, graphics, input, games",
+          ],
+          entries: [
+            { stamp: "v1", title: "What this page is, plainly",
+              line: "A first version. The trees are real, checked in, and named " +
+                    "exactly as they sit on disk. What is NOT here is a reading " +
+                    "of them: no walkthrough, no annotated source, no claim " +
+                    "about what any module does beyond what its name says.",
+              note: "[PAPA] the artifact slot is Mike's to name \u2014 this is the honest floor, not the ceiling" },
+            { stamp: "WHY", title: "Why it sits with the founding documents",
+              line: "The Record says what was found. The Manual says what it was " +
+                    "sold as. The firmware is the only one of the three that " +
+                    "cannot be wrong about the machine, because it is the machine.",
+              note: "" },
+          ],
+          entriesMode: "list",
+          footer: "MGK-VIIIp \u00b7 FIRMWARE \u00b7 v1",
+        },
+      },
+      {
         id: "portal",
         title: "The Portal",
         videos: [],
@@ -343,175 +522,47 @@ const spine = [
         },
       },
       {
-        id: "manual",
-        title: "The Manual",
+        /* [M2 2026-08-01] THE MACHINE'S OWN FAQ — added per Mike, and kept
+           distinct from the house FAQ on the front desk: that one answers
+           questions about Weird.Baby, this one answers questions about the
+           unit. Same shape, different desk. */
+        id: "mgk-faq",
+        title: "FAQ",
         videos: [],
-        tags: ["manual", "plate", "1965", "scan", "opa"],
-        /* HONEST v1: a face that says what the object is and what state it is
-           in. No plates yet — the scans are Mike's to make — and no
-           "coming soon", because a face that describes the artifact is not a
-           promise, it is a catalogue entry. */
+        tags: ["faq", "questions", "mgk"],
         face: {
-          kind: "plate",
-          title: "THE OWNER'S MANUAL",
-          blurb:
-            "The unit shipped with a manual, and the manual is where the " +
-            "machine explains itself — including the parts it gets wrong. " +
-            "Page images, not transcription: the typography is the evidence.",
-          lines: [
-            "FORMAT  page plates, original look-and-feel",
-            "NAV     microfiche-style scrub (designed, not built)",
-            "PLATES  not yet imaged",
-          ],
-          /* THE CONTENTS PAGE, WHICH IS REAL EVEN THOUGH THE PLATES ARE NOT.
-             Every section below is attested in the record or in the firmware;
-             what is missing is the IMAGE of the page, and each row says so
-             rather than pretending otherwise. */
-          entries: [
-            { stamp: "§ 1", title: "Start-up procedure",
-              line: "One of the two items present in every generic unit's " +
-                    "inbox from the moment the OS is installed — never “sent”.",
-              note: "attested · plate not imaged" },
-            { stamp: "§ 2", title: "Operating the answer engine",
-              line: "Ask, then shake. The reveal holds until you disturb it; " +
-                    "the machine never times your reading out.",
-              note: "attested · plate not imaged" },
-            { stamp: "§ 3", title: "Bias, and what it is for",
-              line: "The polarity and clarity registers, described in the " +
-                    "manual's own UNIVAC-corporate register.",
-              note: "attested · plate not imaged" },
-            { stamp: "§ 4", title: "BIST and AMMMS maintenance",
-              line: "The built-in self test and the maintenance messaging — " +
-                    "real lore, and the visual language already exists.",
-              note: "attested · plate not imaged" },
-            { stamp: "APP. 1", title: "The passcode landscape",
-              line: "0000 through 80085, the tape, and the grid. A found " +
-                    "artifact, not an objective — there is no game.",
-              note: "the strongest candidate to image first" },
-            { stamp: "MARGINS", title: "The hands in the margins",
-              line: "Technicians' and owners' handwriting, scanned with the " +
-                    "pages during cataloging. The margins are recovered evidence.",
-              note: "[PAPA] — which hands, and what they wrote" },
-          ],
-          footer: "Page images are Mike's to make. Until they exist this is a " +
-                  "catalogue entry, and it says so.",
-        },
-      },
-      {
-        id: "record",
-        title: "The Record",
-        videos: [],
-        tags: ["journal", "record", "2024", "provenance"],
-        face: {
-          /* [S6 2026-07-30] THE RECORD OPENS ON ITS MOST RECENT ENTRY.
-             A log that opens at the beginning is an archive; a log that opens
-             at the end is a RECORD - it tells you where things stand and lets
-             you walk back. `entriesMode:"log"` asks the viewer for the
-             newest-first order and the period-true browse (S6); the entries
-             below stay in the order they happened, because that is the truth
-             and the presentation is the viewer's job. */
           kind: "text",
-          entriesMode: "log",
-          title: "THE RECORD",
+          title: "FAQ",
+          subtitle: "ABOUT THIS MACHINE",
           blurb:
-            "The weekly log of the reverse-discovery: what arrived, what it " +
-            "turned out to be, and what is still unexplained. Written as it " +
-            "happened, which is not the order it makes sense in.",
-          lines: [
-            "SOURCE   The Record — 436 paragraph records, in repo",
-            "INDEX    date-stamped, log-sheet register",
-            "ORDER    as it happened, not as it makes sense",
-          ],
-          /* THE FIRST LAYER IS REAL. Ten entries, real dates, and one true
-             sentence each, taken from the blog archive itself — not invented
-             to fill a template. The full bodies are Mike's to place, and the
-             [PAPA] rows are the ones where a summary would be putting words
-             in the narrator's mouth. */
+            "The questions that actually get asked about the unit, answered as " +
+            "plainly as the answers are known \u2014 and marked where they are not.",
           entries: [
-            { stamp: "01 JAN 24", title: "Three boxes",
-              line: "An anonymous drop: three cartons, marked classified and " +
-                    "fragile on every side, with a note taped to them signed “-W.O.”",
-              note: "the note's full text is in the archive" },
-            { stamp: "05 JAN 24", title: "Who is W.O.?",
-              line: "The first entry. Three units are named on the boxing, " +
-                    "and ABEAL is assumed — wrongly — to be their creator.",
+            { stamp: "Q", title: "Does it still work?",
+              line: "Yes. Both units power on and run their own firmware. The " +
+                    "Portal track is not a simulation of that claim; it is the " +
+                    "firmware running.",
               note: "" },
-            { stamp: "12 JAN 24", title: "Something off about this drop",
-              line: "Office supplies, personal items and cold-war hardware, " +
-                    "no documentation, everything gathered in a rush.",
-              note: "ABEAL is “a division of ScrapCo”" },
-            { stamp: "19 JAN 24", title: "The One-Page-Ads",
-              line: "The framed ads turn out not to be original: ABEAL " +
-                    "retro-fitted other people's ads, with words covered and things taped down.",
+            { stamp: "Q", title: "Is the Portal the real machine?",
+              line: "It is the real firmware on shimmed hardware \u2014 the twin. " +
+                    "The unit itself is a physical object in a room; the twin is " +
+                    "how it is met from here.",
               note: "" },
-            { stamp: "26 JAN 24", title: "But we were wrong",
-              line: "The retraction. ABEAL did not start it — they received " +
-                    "the tech from someone else. They were responsible for the looks.",
-              note: "the record correcting itself, in public" },
-            { stamp: "02 FEB 24", title: "Logos and slogans",
-              line: "The shirts are made from original elements off the " +
-                    "boxing — which is the first mention that per-unit slogans exist.",
-              note: "[PAPA] — the slogans themselves are unwritten" },
-            { stamp: "09 FEB 24", title: "MGK-NIAC, and a name",
-              line: "The original project title surfaces, and with it Carter " +
-                    "Bookman — “his life is a mystery (some may say an Enigma??)”.",
-              note: "" },
-            { stamp: "16 FEB 24", title: "Ionizers and crushed walnut",
-              line: "Restoration chemistry: the cases through the electronic " +
-                    "ionizers, the body casings tumbled in crushed walnut.",
-              note: "" },
-            { stamp: "22 MAR 24", title: "Bias, in 1965",
-              line: "Two engines — Prediction and Answer — both running off a " +
-                    "changeable bias setting built before bias settings were a thing.",
-              note: "" },
-            { stamp: "05 APR 24", title: "The cases open",
-              line: "Photographs of the three cases and their artifacts: a " +
-                    "spy camera, a real telegraph, and a 1960s CEO's day.",
+            { stamp: "Q", title: "Why does it say ERROR so often?",
+              line: "The Manual's own line is the answer \u2014 and the story " +
+                    "around it is Mike's to tell, so it is held rather than " +
+                    "half-told here.",
+              note: "held \u2014 storyline first (C1/C2)" },
+            { stamp: "Q", title: "Can I buy one?",
+              line: "No. The shop carries what the shop carries; the machines " +
+                    "are not stock.",
               note: "" },
           ],
-          footer: "First layer only — ten of 436 records. The full entries, and " +
-                  "the order they want to be read in, are [PAPA].",
+          entriesMode: "list",
+          footer: "MGK-VIIIp \u00b7 FAQ",
         },
       },
     ],
-  },
-  /* ======== E3 2026-07-30: THE PURVEYOR'S OWN ALBUM ======================
-     Mike, ASAP: a "Weird.Baby Robots" album — the house, not a machine. The
-     basics a visitor looks for, in the house register, NOT a scripted story.
-     Deliberately thin on lore: this is the front desk, not the exhibit.
-     COVER ART IS A PLACEHOLDER — see the note on `art`. */
-  {
-    id: "wbr",
-    title: "Weird.Baby Robots",
-    year: null,
-    tags: ["wbr", "house", "front-desk"],
-    /* [E3 PLACEHOLDER — FLAGGED FOR SWAP]
-       Mike is drawing a WBR logo. Until it lands this is a clean typographic
-       cover in the house register, generated inline as an SVG data URI so it
-       ships with the config and needs no asset: photo-paper ground, photo-black
-       type, the wordmark stacked the way the deck's other covers letter it.
-       It is a PLACEHOLDER THAT EARNS ITS PLACE under the no-coming-soon credo
-       because the album behind it is real content — but it is still a
-       placeholder, and the swap is one line: point `art` at the logo file. */
-    art:
-      "data:image/svg+xml;utf8," +
-      encodeURIComponent(
-        '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600">' +
-          '<rect width="600" height="600" fill="#d9d5ca"/>' +
-          '<rect x="26" y="26" width="548" height="548" fill="none" stroke="#211f1c" stroke-width="2"/>' +
-          '<text x="300" y="252" text-anchor="middle" fill="#211f1c" ' +
-          'font-family="Georgia,serif" font-size="76" letter-spacing="2">Weird.Baby</text>' +
-          '<text x="300" y="352" text-anchor="middle" fill="#211f1c" ' +
-          'font-family="Georgia,serif" font-size="104" letter-spacing="10">ROBOTS</text>' +
-          '<line x1="150" y1="392" x2="450" y2="392" stroke="#211f1c" stroke-width="2"/>' +
-          '<text x="300" y="436" text-anchor="middle" fill="#57544d" ' +
-          'font-family="Courier New,monospace" font-size="21" letter-spacing="6">PURVEYORS OF THE WEIRD</text>' +
-        "</svg>"
-      ),
-    accent: null,
-    viewerPoster: "/WeirdBaby_PhotoID.png",
-    viewerPosterCaption: "Weird.Baby — purveyors of the weird.",
-    tracks: WBR_TRACKS,
   },
 ];
 
@@ -522,7 +573,12 @@ export const robotsExhibit = {
   eraAlias: {},
   spine,
   facts: [],
-  defaultActiveIndex: Math.max(0, spine.findIndex(a => a.id === "mgk-viiip")),
+  /* [M1 2026-08-01] THE DECK OPENS ON THE FIRST ALBUM. It used to seek out
+     MGK-VIIIp by id, which put the carousel's landing position in one place
+     and the deck's ORDER in another — two facts that have to agree with no
+     mechanism making them agree. The front desk is first in the spine, and
+     the deck now simply starts at the front. */
+  defaultActiveIndex: 0,
   splitKey: "wb-rb-split",
   /* [S8] three tracks do not need half the screen. The viewer owns everything
      (S7), so it opens owning most of the width too; the splitter still moves
@@ -536,8 +592,12 @@ export const robotsExhibit = {
   bodyKey: "wb-rb-bodyh",
   visitPath: "/robots",
   shopExitParam: "robots",
-  // [one-shop ruling] the template's Gift Shop entry stays IN the title bar
-  // (present per template) but hidden for Robots — /shop is the one shop.
-  shopEntryHidden: true,
+  /* [M3 2026-08-01] THE GIFT SHOP IS BACK IN THE TITLE BAR. The one-shop
+     ruling is unchanged - there is still exactly one shop - but hiding the
+     door was the wrong reading of it: a visitor deep in the robots wing had
+     no way to the shop except the wordmark, which does not look like a way to
+     the shop. It points at the standard W.B gift shop, carrying `from=robots`
+     as it always did. */
+  shopEntryHidden: false,
   exhibitFlow: RobotsExhibitFlow,
 };
