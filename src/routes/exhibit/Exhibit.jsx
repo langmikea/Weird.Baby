@@ -1287,7 +1287,7 @@ export default function Exhibit({ artist }) {
         </div>
         {/* [X2] `flex:1` is what FORCED the height. When the artist opts in,
             an explicit height replaces it and the drag owns the number. */}
-        <div className="ex-main ex-snap" ref={mainRef}
+        <div className="ex-main" ref={mainRef}
           style={bodyResizable ? { height: bodyH, flex: "0 0 auto" } : undefined}>
           <div className="ex-main-inner" ref={bodyRef}
             /* [G3] minmax(0, Nfr) — without the explicit 0 minimum the track

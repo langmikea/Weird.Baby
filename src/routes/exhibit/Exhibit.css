@@ -322,15 +322,48 @@ body:has(.vp-face) .vp-area::before{display:none}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:240px 240px;
 }
-/* [M7 2026-08-01] SNAP WAS CONFIGURED AND DID NOTHING. `html` has carried
-   `scroll-snap-type:y proximity` since the b&w pass, but NO ELEMENT EVER
-   DECLARED AN ALIGNMENT - this rule was an empty shell - so the page had a
-   snap container with zero snap points and behaved exactly like a page with
-   no snapping at all. Two points is the whole of it: the top of the deck and
-   the top of the viewer block. PROXIMITY, not mandatory, because a reader
-   part-way down a long record must be allowed to simply stop there. */
-.ex-snap{scroll-snap-align:start;scroll-margin-top:8px}
-.ex-album-banner{scroll-snap-align:start;scroll-margin-top:8px}
+/* [SNAP FIGHT 2026-08-02] THE EXHIBIT CARRIES NO SNAP TARGETS, ON PURPOSE.
+   M7 added two - `.ex-snap` on the viewer and `.ex-album-banner` - and Mike
+   hit the consequence on the live build: after resizing the viewer, scrolling
+   to the album deck yanked the page away before he could touch a cover.
+
+   MEASURED, BEFORE ANY FIX (desktop 1582x904, viewer at 1200px). Eleven scroll
+   positions were requested across the top of the page and where each SETTLED
+   was recorded:
+     8 of 11 were yanked, worst yank 280px
+     only 4 rest positions existed at all: 0, 40, 360, 409
+     everything from 80 to 320 was pulled to 360 - where the deck is 0% visible
+   The deck was not hard to reach. It was UNREACHABLE except by being already
+   at the very top, which is precisely "before he could click them".
+
+   WHY IT FIGHTS HERE AND NOT ON /hr, WHICH IS WHERE M7 GOT THE IDEA:
+   /hr's targets are its SECTIONS - roughly a screen tall each, tiling the
+   whole page, so wherever a reader stops there is a target nearby and the
+   snap only ever tidies up. The exhibit's two targets sat close together near
+   the top of an 1,800px page, which leaves the deck region orphaned between
+   "the very top" and "the banner". Proximity then does exactly what it says:
+   the nearest snap position wins, and from anywhere in the deck the nearest
+   one is the banner - below it.
+
+   MIKE'S FIRST-CHOICE FIX WAS BUILT AND MEASURED AND IT MADE THINGS WORSE.
+   Giving the carousel its own alignment sounds right and is not: with
+   `align:start` its snap position IS scroll 0, because the deck already sits
+   at the top of the page. It adds no new resting place and strengthens the
+   pull toward the one that existed, so the 40px rest disappeared:
+     A  carousel as a target      3 rests, 1 showing the deck  (was 2)
+     B  A + banner target dropped 2 rests, 1 showing the deck
+     C  viewer target only        4 rests, 3 showing the deck, 289px worst yank
+     D  no targets                11 rests, 0 yanked, nothing unreachable
+   Only D satisfies the rule Mike stated - snapping must NEVER prevent reaching
+   or interacting with any content - so D is what is here. There is no CSS knob
+   for the proximity threshold; the only way to leave the intermediate
+   positions resting is to stop competing for them.
+
+   `html{scroll-snap-type:y proximity}` STAYS at the top of this file and is
+   untouched: it is what /hr's tiled sections use, and with no targets on the
+   exhibit it is inert here - which is the state the exhibit was in before M7
+   and the state it is in again. If snapping is ever wanted on this page it
+   needs targets that TILE, the way /hr's do, not two of them at one end. */
 .ex-root.visible{opacity:1}
 
 /* NAV */
