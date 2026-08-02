@@ -480,6 +480,12 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
                  while being the whole point of the exhibit. */
               !selectable ? "tl-novid" : "",
               skipped   ? "tl-skipped"  : "",
+              /* [M-c 2026-08-02] THE PLAYING ROW SAYS SO. It carried no class
+                 at all - the only tell was the number swapping for bars, and
+                 whatever bolding fell out of other rules, which read as an
+                 unexplained emphasis rather than as "this is the one
+                 playing". Now it is a named state with a rule of its own. */
+              playing   ? "tl-playing"  : "",
             ].filter(Boolean).join(" ")}
             style={isActive ? { borderLeftColor: "#b8974a" } : {}}
             onClick={() => selectable && !skipped && onSelect(ti)}
@@ -1212,6 +1218,26 @@ export default function Exhibit({ artist }) {
          does not start a player. /hr and /wb tracks all carry videos, so this
          branch never runs for them. */
       if (track && track.face) setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));
+      /* [M-b 2026-08-02] THE VIDEO YIELDS WHEN THE VISITOR WALKS AWAY.
+         Selecting a face-bearing track registered the selection and left the
+         player mounted - so a video that was playing stayed on screen, on
+         top of the page the visitor had just asked for, still making noise.
+         The viewer had two things in it and only one had been asked for.
+         Navigating to a track that is NOT playback is an instruction to stop
+         playing: the queue is dropped and the player unmounts. It is not a
+         pause - there is nothing on screen left to resume from, and a hidden
+         paused player is the same bug wearing a quieter coat. */
+      /* AND THE PLAYER IS ACTUALLY STOPPED, not merely forgotten. Clearing
+         the state hides the picture, but the YouTube iframe is a PERSISTENT
+         HOST - it is mounted once and reused - so dropping the state left it
+         alive and audible behind the page the visitor had just opened.
+         Measured: after navigating away the face rendered correctly and the
+         iframe was still there. Pausing both transports is what makes
+         "walked away" mean "stopped". */
+      try { yt.pause(); } catch { /* not mounted yet */ }
+      try { audio.pause(); } catch { /* no audio transport */ }
+      setPlayingAlbum(null); setPlayingTrack(null); setPlayingVideo(null);
+      playQueueRef.current = [];
       setOpenEntry(null);         /* [M5] a new track opens on its index */
       setRecipeIdx(0);            /* [L2] and its selector at the top entry */
       return;

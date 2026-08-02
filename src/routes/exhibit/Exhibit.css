@@ -483,6 +483,16 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .tl-track{display:flex;align-items:center;padding:3px 20px;border-left:2px solid transparent;cursor:pointer;transition:background .15s,border-left-color .2s;user-select:none}
 .tl-track:hover{background:var(--wb-ink-soft)}
 .tl-active{background:var(--wb-ink-soft)}
+/* [M-c 2026-08-02] THE PLAYING TRACK IS OBVIOUS, AND IT IS THE ONLY THING
+   USING THIS SIGNAL. A lit left rule plus a warmed ground reads instantly as
+   "this one is running" - unlike bold text, which the eye reads as importance
+   rather than as state, and which is why the old emphasis was unexplainable.
+   `tl-active` (what you are LOOKING at) and `tl-playing` (what you are
+   HEARING) are now two different marks, because they are two different
+   facts and they are frequently not the same row. */
+.tl-playing{background:linear-gradient(90deg,rgba(184,151,74,.16),rgba(184,151,74,.04) 60%,transparent);
+  border-left-color:#b8974a !important}
+.tl-playing .tl-title{color:var(--wb-gold)}
 .tl-novid{cursor:default;opacity:.32}
 .tl-novid:hover{background:transparent}
 .tl-skipped .tl-title{text-decoration:line-through;text-decoration-color:var(--wb-gold-mute)}
@@ -526,8 +536,19 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .tl-tag-ghost{display:block;pointer-events:none}
 
 /* VIDEO PANEL — stable right column */
-.vp-area{position:relative;width:100%;background:var(--wb-ink-card);border:1px solid var(--wb-border-hi);flex-shrink:0}
-.vp-area::before{content:"";display:block;padding-top:56.25%}
+/* [M-a 2026-08-02] THE VIDEO FILLS ITS FRAME AND RESIZES WITH IT.
+   `.vp-area` was pinned to 16:9 by a `padding-top:56.25%` spacer and
+   `flex-shrink:0`, so the picture was a fixed-aspect block that ignored the
+   frame around it: drag the viewer taller and the video stayed the same size
+   with dead ground under it; drag it shorter and it overflowed. A ratio box
+   is the right tool when the CONTAINER is unknown - here the container is
+   known and is the whole point, so the picture should take it.
+   The area now grows with the frame, and the player inside is absolutely
+   positioned to fill it. `object-fit` does nothing to an iframe, so filling
+   is done by geometry rather than by asking the embed politely. */
+.vp-area{position:relative;width:100%;flex:1 1 auto;min-height:0;
+  background:var(--wb-ink-card);border:1px solid var(--wb-border-hi)}
+.vp-area>iframe,.vp-area>div>iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .vp-inner{position:absolute;inset:0}
 .yt-player{width:100%;height:100%;display:block}
 .vp-thumb{position:absolute;inset:0;cursor:pointer;z-index:1}
