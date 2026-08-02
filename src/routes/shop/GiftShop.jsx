@@ -112,7 +112,11 @@ export default function GiftShop() {
         <Link to="/" className="gift-shop__nav-return">Lobby</Link>
       </div>
 
-      {/* TOP BILLING — unlabeled */}
+      {/* TOP BILLING — unlabeled. [F7b] The house banner holds the slot by
+          default (Hunter Root's full-width banner is gone per Mike — he rides
+          the artist tiles now); `?top=<wal-id>` still promotes a WAL artist
+          to full size, and the house then shows in the tail so its own shop
+          is always one scroll away. */}
       {walTop ? (
         <section className="gift-shop__section gift-shop__featured">
           <Banner entry={walTop} />
@@ -123,17 +127,14 @@ export default function GiftShop() {
         </section>
       )}
 
-      {/* [WAL 2026-08-02] WORTH A LISTEN — HALF-SIZE BANNERS.
-          Mike: every WAL artist gets a banner in the shop, at half size. The
-          slots are built here and the ART IS A PLACEHOLDER — the same
-          typographic fallback the roster already uses when an entry has no
-          image, so nothing new was invented to hold a picture that does not
-          exist yet. FLAGGED: Mike's art replaces `image` and nothing else
-          moves.
-          A banner with no destination is NOT a link. Mikey Mike has no
-          confirmed official store or site, and a banner that goes nowhere is
-          worse than a banner that says so — so those render as plain cards
-          with the reason on them rather than as dead anchors. */}
+      {/* [F7b 2026-08-02] THE ARTIST TILES — ONE TEMPLATE, DATA ONLY.
+          Every artist tile below is one row of `walEntries`, which is itself
+          a straight map of the WAL wing's own artist data: four artists
+          today, a fifth is a data entry, and NOTHING here changes when one
+          arrives. Tiles are DOUBLE HEIGHT per Mike — the grid runs two-up so
+          each plate doubles its edge, and the artist's own face (W8) fills
+          it. A tile with no confirmed destination still renders dead rather
+          than pretending to be a link. */}
       {walEntries.length > 0 && (
         <section className="gift-shop__section gift-shop__wal">
           <div className="wal-banners__grid">
@@ -158,11 +159,13 @@ export default function GiftShop() {
         </section>
       )}
 
-      {/* THE REST OF THE ROSTER — unlabeled */}
-      {others.length > 0 && (
+      {/* THE REST OF THE ROSTER — unlabeled. With Hunter Root templated into
+          the tiles this is the house banner when a WAL artist took the top
+          slot, and empty otherwise. */}
+      {(walTop ? wbRoster : others).length > 0 && (
         <section className="gift-shop__section gift-shop__friends">
           <div className="friends__grid">
-            {others.map((entry) => (
+            {(walTop ? wbRoster : others).map((entry) => (
               <Banner key={entry.id} entry={entry} />
             ))}
           </div>

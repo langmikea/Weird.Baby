@@ -1038,6 +1038,18 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    `.ex-nav`, so the two never overlap. */
 .ex-banner-console{position:sticky;top:52px;z-index:80;
   background:var(--wb-bg);border-bottom:1px solid var(--wb-border)}
+/* [F2 2026-08-02] THE APRON — the bleed-through, diagnosed and closed.
+   MEASURED: the fixed nav is 45px tall on this build (its height is content
+   + padding, so it moves with fonts), while the console sticks at a
+   HARD-CODED top:52px. That mismatch is a 7px OPEN STRIP between the two
+   bands, and elementsFromPoint in the strip returned `.vp-collage` — the
+   tiles were painting raw between the nav and the header band, which is
+   exactly Mike's screenshot. A constant cannot be right across font loads
+   and zoom levels, so the console now wears an opaque apron that extends
+   upward past its own top edge: whatever the actual gap is (up to 16px), it
+   shows house paper, never the content scrolling beneath. */
+.ex-banner-console::before{content:"";position:absolute;left:0;right:0;
+  bottom:100%;height:16px;background:var(--wb-bg)}
 .ex-banner-console .ex-album-banner-aux{flex:1;min-width:0;display:flex;
   align-items:center;justify-content:flex-end;gap:10px}
 
@@ -1068,58 +1080,9 @@ body:has(.pb) .ex-root{padding-bottom:88px}
   .bt-type{display:none}
 }
 
-/* the vault button: a question mark, because that is the question a museum
-   label always provokes and never has room to answer. */
-.ex-vaultbtn{width:24px;height:24px;flex:0 0 auto;padding:0;border-radius:50%;
-  border:1px solid var(--wb-border-hi);background:transparent;color:var(--wb-gold-lo);
-  font-family:'Courier Prime','Courier New',monospace;font-size:.75rem;
-  line-height:1;cursor:pointer;transition:background .15s,color .15s}
-.ex-vaultbtn:hover,.ex-vaultbtn-on{background:var(--wb-gold);color:var(--wb-ink);
-  border-color:var(--wb-gold)}
-.ex-vaultbtn:focus-visible{outline:2px solid var(--wb-gold);outline-offset:2px}
-
-/* ===========================================================================
-   [C-d 2026-08-02] THE VAULT POPUP
-   =========================================================================== */
-/* IT DOCKS BOTTOM-LEFT, AND THAT IS A CORRECTION.
-   The first version sat bottom-RIGHT and covered the Stage's own page
-   transport — measured, with "Next ›" underneath it. This building has fixed
-   that exact defect twice already (the E4 deck over the tracklist, the X2 drag
-   handle inside the player bar) and the rule that came out of it is: a floating
-   panel never lands on a control.
-   Bottom-left is the one region of this layout that is empty in every state —
-   the tracklist runs seven or nine rows and the column below it is dead space
-   in all four artists. The panel covers nothing because there is nothing
-   there. */
-.fp{position:fixed;left:22px;bottom:22px;z-index:120;width:min(370px,calc(100vw - 44px));
-  background:var(--wb-ink-card);border:1px solid var(--wb-gold-lo);
-  box-shadow:0 18px 44px rgba(0,0,0,.34);padding:14px 16px 12px}
-.fp-head{display:flex;align-items:center;justify-content:space-between;gap:10px;
-  border-bottom:1px solid var(--wb-border);padding-bottom:7px;margin-bottom:10px}
-.fp-eyebrow{font-family:'Courier Prime','Courier New',monospace;font-size:.5rem;
-  letter-spacing:.24em;text-transform:uppercase;color:var(--wb-gold-lo)}
-.fp-x{background:none;border:0;color:var(--wb-gold-lo);font-size:1.05rem;
-  line-height:1;cursor:pointer;padding:0 2px}
-.fp-x:hover{color:var(--wb-gold)}
-.fp-line{font-family:'DM Serif Display',Georgia,serif;font-size:.98rem;
-  line-height:1.36;color:var(--wb-gold);margin:0 0 5px}
-.fp-empty{color:var(--wb-gold-lo);font-style:italic}
-.fp-crumb{font-family:'Courier Prime','Courier New',monospace;font-size:.56rem;
-  letter-spacing:.06em;color:var(--wb-gold-lo);margin:7px 0 0;text-align:right}
-.fp-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;
-  margin-top:11px;border-top:1px solid var(--wb-border);padding-top:8px}
-.fp-count{font-family:'Courier Prime','Courier New',monospace;font-size:.52rem;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--wb-gold-lo)}
-.fp-next{background:none;border:1px solid var(--wb-border-hi);color:var(--wb-gold);
-  font-family:'Courier Prime','Courier New',monospace;font-size:.55rem;
-  letter-spacing:.16em;text-transform:uppercase;padding:5px 11px;cursor:pointer}
-.fp-next:hover{background:var(--wb-gold);color:var(--wb-ink);border-color:var(--wb-gold)}
-@media (max-width:720px){
-  /* on a phone it stops being a corner card and becomes a sheet at the foot of
-     the screen — a 370px card floating in a 504px viewport is a modal wearing a
-     popup's clothes. */
-  .fp{left:12px;right:12px;bottom:12px;width:auto}
-}
+/* [F5 2026-08-02] the vault ?-button and the fact popup (.ex-vaultbtn, .fp*)
+   are retired with their component - factoids ride the PUV scroller now,
+   ambient during the show. One revert away at 7c3a231. */
 
 /* ===========================================================================
    [C-b/C-c 2026-08-02] THE MUSEUM CARD — MAGAZINE + SIDEBOXES
@@ -1225,7 +1188,11 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    yields its height to the face's own flow while the iframe underneath stays
    mounted and audible (W1: the stow is visual-only). */
 .ex-root[data-flat="1"] .vp-area{position:relative;flex:0 0 auto;min-height:0;height:auto}
-.ex-root[data-flat="1"] .vp-area-flat:not(.vp-area-stowed){aspect-ratio:16/9}
+/* [F3] the fit may CAP the frame's height (--fit-area-max); the player
+   letterboxes inside it, and on the dark stage the bars vanish into the
+   ground. Without a cap the frame is plain 16:9. */
+.ex-root[data-flat="1"] .vp-area-flat:not(.vp-area-stowed){aspect-ratio:16/9;
+  max-height:var(--fit-area-max,none)}
 /* `container-type:size` on .vp-inner is right for the staged wings (it feeds
    the cqh type scale) and FATAL in static flow: size containment ignores the
    children, so an auto-height inner would collapse to zero. The flat wing
@@ -1238,8 +1205,16 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    house ground is what makes the stow visual-only rather than a fight. */
 .ex-root[data-flat="1"] .vp-face{position:relative;inset:auto;z-index:4;overflow:visible}
 .ex-root[data-flat="1"] .vp-face-body{overflow:visible;height:auto}
-/* the scroller strip keeps its strip proportions under an auto-height column */
-.ex-root[data-flat="1"] .fs-wrap{flex:0 0 auto;min-height:120px}
+/* [F4 2026-08-02] THE SCROLLER IS SIZED TO ITS CONTENT — a two-line budget.
+   The 120px min-height was a strip picked by eye and it left MEASURED dead
+   black under the facts: viewport 74px against a 29px one-line fact. The
+   fact face is two lines tall at most before the fade-mask takes over, so
+   the viewport is now exactly two lines of the fact type
+   (2 × 1.34rem × 1.35 line-height) and the wrap holds nothing but content,
+   padding and the credit row. Fixed rather than auto so the footer does not
+   jump as one- and two-line facts cycle. */
+.ex-root[data-flat="1"] .fs-wrap{flex:0 0 auto;min-height:0}
+.ex-root[data-flat="1"] .fs-viewport{flex:0 0 auto;height:3.7rem;min-height:0}
 
 /* ---- [W10] THE SECTION HEADER — "Coconuts" over the numbers --------------- */
 .tl-header{list-style:none;padding:16px 20px 5px;cursor:default;user-select:none;
@@ -1308,4 +1283,26 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 @media (max-width:720px){
   .vp-collage{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px 10px}
   .tl-header{padding:14px 16px 4px}
+}
+
+/* ===========================================================================
+   [F6 2026-08-02] PHONE FIRST PASS — the mechanical cures.
+   Mike does NOT want the site optimized for phone yet; these are only the
+   fixes whose absence makes a tap read as "nothing happened". The full
+   findings list lives in docs/PHONE_FINDINGS.md for a future focused pass.
+   =========================================================================== */
+/* TAP FEEDBACK: on coarse pointers a row must acknowledge the finger the
+   instant it lands — hover states never fire there, so without this the
+   only feedback was whatever the tap eventually caused offscreen. */
+@media (pointer: coarse) {
+  .tl-track:active{background:rgba(184,151,74,.22);transition:none}
+  .vp-trail-go:active{background:rgba(184,151,74,.22);transition:none}
+  .vp-collage-tile:active{transform:rotate(0deg) scale(.97)}
+  .wb-dir-entry:active{color:#211f1c}
+}
+/* ACTIVE-STATE VISIBILITY at stacked widths: the selected row is the only
+   trace of your last tap once the viewer is below the fold, so it stops
+   being a whisper — a lit left rule and a firmer ground. */
+@media (max-width:720px){
+  .tl-active{border-left-color:#b8974a;background:rgba(184,151,74,.14)}
 }

@@ -349,9 +349,24 @@ const CF_MIN    = 160; const CF_MAX    = 440;
    never overridden. */
 const BODY_MIN  = 260; const BODY_MAX  = 1600; const BODY_DEF = 880;
 
-function usePersist(key, def) {
-  const [v, setV] = useState(() => { try { return parseFloat(localStorage.getItem(key)) || def; } catch { return def; } });
-  const set = useCallback(val => { setV(val); try { localStorage.setItem(key, val); } catch { /* localStorage may be unavailable in private mode; ignore */ } }, [key]);
+/* [F3 2026-08-02] A SETTING CAN BE SESSION-SCOPED. Wings that fit themselves
+   on entry (WAL) keep the visitor's adjustments for THE SESSION and re-fit
+   fresh next visit — a sticky-forever localStorage number would quietly
+   overrule tomorrow's better fit on a different window size. Wings that
+   declare nothing keep localStorage exactly as before. */
+function usePersist(key, def, scope) {
+  /* a primitive, not a helper closure: a per-render function in the deps
+     defeats the compiler's memoization (it flagged exactly that). */
+  const inSession = scope === "session";
+  const [v, setV] = useState(() => {
+    try { return parseFloat((inSession ? sessionStorage : localStorage).getItem(key)) || def; }
+    catch { return def; }
+  });
+  const set = useCallback(val => {
+    setV(val);
+    try { (inSession ? sessionStorage : localStorage).setItem(key, val); }
+    catch { /* storage may be unavailable in private mode; ignore */ }
+  }, [key, inSession]);
   return [v, set];
 }
 
@@ -757,70 +772,13 @@ function BannerTransport({ video, track, live, onStop, onTogglePlay, onSetVolume
   );
 }
 
-// ─── FACT POPUP ───────────────────────────────────────────────────────────────
-/* [C-d 2026-08-02] THE CASE NOTE — and an honest note about what this is.
-   The order says "the /hr popup-factoid feature resurrected". IT IS NOT IN THE
-   LIVE TREE. `grep` across src/ and across the whole git history for "factoid",
-   "popup", "fact tile" and "FactCard" turns up nothing that was ever a popup:
-   /hr's fact surfaces are the inline FactScroller under the player and the
-   living recipe cards on the wall, and STATE.md records the standing ruling
-   that facts NEVER tile the wall. So there is no code to revive, and dressing
-   an invention up as a revival would be the worse of the two errors.
-
-   WHAT IS BUILT INSTEAD is the nearest real thing, named for what it is: a
-   summonable fact, dismissible, drawn from the same vault by the same shipped
-   cycler. It answers the question a museum label always provokes and never has
-   room for — "is there more about this?" — and it answers it about WHATEVER IS
-   IN FRONT OF YOU, because it takes the same climb context the scroller does.
-
-   IT IS OFF UNTIL ASKED FOR. Nothing pops at the visitor. A room that
-   interrupts you with trivia is a room that thinks its facts matter more than
-   its subject. */
-function FactPopup({ facts, ctx, onClose }) {
-  const cyclerRef = useRef(null);
-  const [fact, setFact] = useState(null);
-  const [n, setN] = useState(0);
-
-  useEffect(() => {
-    cyclerRef.current = makeFactCycler({ facts: facts || [], ctx });
-    setFact(cyclerRef.current.next());
-    setN(cyclerRef.current.poolSize());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [facts, ctx && ctx.song, ctx && ctx.album, ctx && ctx.exhibit]);
-
-  useEffect(() => {
-    function onKey(e) { if (e.key === "Escape") onClose(); }
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
-
-  const parts = fact ? splitFact(fact) : null;
-
-  return (
-    <div className="fp" role="dialog" aria-label="A fact about this">
-      <div className="fp-head">
-        <span className="fp-eyebrow">FROM THE VAULT</span>
-        <button className="fp-x" onClick={onClose} aria-label="Close">&#215;</button>
-      </div>
-      <div className="fp-body">
-        {parts
-          ? parts.quote.map((l, i) => <p className="fp-line" key={i}>{l}</p>)
-          : <p className="fp-line fp-empty">Nothing on file for this one yet.</p>}
-        {parts && parts.breadcrumb && <p className="fp-crumb">{parts.breadcrumb}</p>}
-      </div>
-      <div className="fp-foot">
-        {/* THE POOL SIZE IS SHOWN because a fact with no denominator reads as
-            the only one there is. Saying "one of 68" is what makes the next
-            press worth making. */}
-        <span className="fp-count">{n ? "one of " + n : ""}</span>
-        <button className="fp-next"
-                onClick={() => setFact(cyclerRef.current && cyclerRef.current.next())}>
-          Another &rsaquo;
-        </button>
-      </div>
-    </div>
-  );
-}
+/* [F5 2026-08-02] THE FACT POPUP IS RETIRED (Ops-ruled, Mike confirmed).
+   C-d's summonable ?-button fact card asked the visitor to THINK to press a
+   help button; the ruling is that factoids belong in the PUV scroller during
+   playback - ambient, uninvited, part of the show - and the scroller already
+   carries the same vault through the same climb. The component, its state,
+   the title-bar ? and the .fp/.ex-vaultbtn CSS are all gone together (dead
+   machinery is dead); the whole surface is one revert away at 7c3a231. */
 
 // ─── ROOT ─────────────────────────────────────────────────────────────────────
 
@@ -1434,8 +1392,9 @@ export default function Exhibit({ artist }) {
      tracks, so half the screen was a column with nine-tenths of it empty —
      the horizontal half of the dead-space complaint. An artist may now state
      its own opening split; without one, 50 as before. */
-  const [split, setSplit] = usePersist(artist.splitKey, artist.splitDefault ?? 50);
-  const [cfH,   setCfH]   = usePersist(artist.cfKey,    300);
+  const sizingScope = artist.fitOnEntry ? "session" : undefined;
+  const [split, setSplit] = usePersist(artist.splitKey, artist.splitDefault ?? 50, sizingScope);
+  const [cfH,   setCfH]   = usePersist(artist.cfKey,    300, sizingScope);
   /* [X2] Hooks cannot be conditional, so the state always exists; the KEY is
      what is conditional. An artist without `bodyKey` gets an inert slot that
      nothing reads and nothing renders. */
@@ -1448,8 +1407,6 @@ export default function Exhibit({ artist }) {
   const [openEntry, setOpenEntry] = useState(null);
   /* [L2] which recipe is selected; index, reset when the track changes. */
   const [recipeIdx, setRecipeIdx] = useState(0);
-  /* [C-d] the vault popup is CLOSED until asked for. See FactPopup. */
-  const [factOpen, setFactOpen] = useState(false);
   const bodyResizable = !!artist.bodyKey;
   const mainRef = useRef(null);
 
@@ -1487,6 +1444,68 @@ export default function Exhibit({ artist }) {
        frame on a tall screen and forbidden from shrinking it on a short one. */
     if (fits > BODY_DEF && fits <= BODY_MAX) setBodyH(fits);
   }, [bodyResizable]);
+
+  /* ── [F3 2026-08-02] OPTIMAL FIT ON ENTRY — measured, not tasted ──────────
+     Mike's ruling: on entering the wing, the tracklist, the viewer and the
+     PUV scroller should SNAP TO sizes where ALL of them fit on one screen.
+     The fit is COMPUTED from the live layout: the frame above the body is
+     measured as it stands (nav, carousel, drag strip, banner — whatever they
+     actually are on this screen with these fonts), the viewer's height is a
+     pure function of its column width (16:9), and the two levers the visitor
+     already owns — carousel height, then column split — are turned only as
+     far as the arithmetic requires:
+       lever 1: the carousel gives up height, down to its floor;
+       lever 2: only if that is not enough, the viewer column narrows.
+     RUNS ONCE PER SESSION: the visitor's own drags (and this fit's result)
+     are session-sticky via sessionStorage, so within a visit the room stays
+     where they put it, and a fresh visit re-fits for whatever window it
+     finds. A preset can drive the same sizes by writing the session keys —
+     they are ordinary state behind ordinary setters, which is the seam.
+     Wings that do not declare `fitOnEntry` never run any of this. */
+  const fitDoneRef = useRef(false);
+  useLayoutEffect(() => {
+    if (!artist.fitOnEntry || fitDoneRef.current) return;
+    fitDoneRef.current = true;
+    const main = mainRef.current, inner = bodyRef.current;
+    const rootEl = main ? main.closest(".ex-root") : null;
+    if (!main || !inner || !rootEl) return;
+    /* a session-restored area cap must be re-applied on every mount — it
+       lives in a CSS variable, which does not survive a reload on its own. */
+    let storedCap = null, stored = null;
+    try {
+      storedCap = sessionStorage.getItem(artist.cfKey + "-cap");
+      stored = sessionStorage.getItem(artist.cfKey);
+    } catch { /* private mode */ }
+    if (storedCap) rootEl.style.setProperty("--fit-area-max", storedCap + "px");
+    if (stored) return;         /* this session already chose its sizes */
+    const fsEl = rootEl.querySelector(".fs-wrap");
+    const leftEl = rootEl.querySelector(".ex-left");
+    const fsH = fsEl ? fsEl.getBoundingClientRect().height : 0;
+    const leftH = leftEl ? leftEl.scrollHeight : 0;
+    const padB = parseFloat(getComputedStyle(rootEl).paddingBottom) || 0;
+    const topBase = main.getBoundingClientRect().top + window.scrollY - cfH;
+    const avail = window.innerHeight - topBase - padB - 8;  /* rounding slack */
+    const innerW = inner.getBoundingClientRect().width;
+    const areaNatural = ((innerW - 10) * (100 - split) / 100) * (9 / 16);
+    const mainNatural = Math.max(areaNatural + fsH, leftH);
+    /* lever 1: the carousel gives up height, down to its floor. */
+    let ch = Math.min(CF_MAX, Math.max(CF_MIN, avail - mainNatural));
+    if (ch + mainNatural > avail) {
+      /* lever 2: cap the VIDEO AREA's height and let the player letterbox —
+         on the dark stage the bars are black on near-black. This keeps the
+         column widths the visitor expects: the earlier draft narrowed the
+         viewer column instead, and the arithmetic dutifully produced a
+         62%-wide tracklist that was mostly empty paper — a fit that
+         technically fit and read as a mistake. The split is not a fit lever;
+         it stays where the visitor (or the wing default) put it. */
+      ch = CF_MIN;
+      const cap = Math.max(160, Math.round(avail - ch - fsH));
+      rootEl.style.setProperty("--fit-area-max", cap + "px");
+      try { sessionStorage.setItem(artist.cfKey + "-cap", cap); } catch { /* private mode */ }
+    }
+    if (Math.round(ch) !== Math.round(cfH)) setCfH(Math.round(ch));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const ytDivRef = useRef(null);
   const yt = useYTPlayer({
@@ -1590,6 +1609,24 @@ export default function Exhibit({ artist }) {
          (M-e), invoked only by controls that mean it. */
       setOpenEntry(null);         /* [M5] a new track opens on its index */
       setRecipeIdx(0);            /* [L2] and its selector at the top entry */
+      /* [F6 2026-08-02] ON A PHONE, THE TAP MUST VISIBLY DO SOMETHING.
+         At narrow widths the columns stack and the viewer sits BELOW the
+         tracklist — selecting a card changed a region the visitor could not
+         see, which reads as "nothing happened". The obvious mechanical cure:
+         bring the thing that changed to them. Desktop layouts (both columns
+         on one screen) are untouched; this fires only where the stack
+         exists (the flat wing at stacked widths). */
+      if (artist.faceFlow === "flat" && window.innerWidth <= 720) {
+        /* a timeout, not a rAF: the scroll must land AFTER React has swapped
+           the face in, or it measures the old layout and goes nowhere. The
+           offset clears the fixed nav and the sticky console. */
+        setTimeout(() => {
+          const area = document.querySelector(".vp-area");
+          if (!area) return;
+          const y = area.getBoundingClientRect().top + window.scrollY - 118;
+          window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+        }, 120);
+      }
       return;
     }
     setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));
@@ -1803,18 +1840,6 @@ export default function Exhibit({ artist }) {
   /* [M-e / C-d 2026-08-02] the two per-wing switches, read once and named, so
      the render below asks a question rather than restating a condition. */
   const bannerTransport = artist.transport === "banner";
-  const hasFacts = Array.isArray(FACTS) && FACTS.length > 0;
-  /* The popup's climb context is the track the visitor is LOOKING at, not the
-     one that happens to be playing — the button says "about what you are
-     looking at" and it has to mean it. `useMemo` because a fresh object every
-     render would rebuild the cycler every render and reset the walk. */
-  const factCtx = React.useMemo(() => ({
-    song: activeTrack !== null ? (album.tracks[activeTrack]?.song ?? null) : null,
-    album: album.tag ?? null,
-    eraSlugs: artist.eraAlias?.[album.id] ?? [],
-    exhibit: artist.exhibitSlug ?? null,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }), [activeTrack, album.id, album.tag, artist.exhibitSlug]);
 
   const thumbTrack = activeTrack !== null ? album.tracks[activeTrack] : album.tracks.find(t => t.videos.length > 0);
   const thumbVid   = thumbTrack?.videos?.[0];
@@ -1832,7 +1857,12 @@ export default function Exhibit({ artist }) {
   const selFace = activeTrack !== null ? (album.tracks[activeTrack]?.face ?? null) : null;
   const fallbackFace = selFace ?? album.tracks.find(t => t.face)?.face ?? null;
   const flatFaces = artist.faceFlow === "flat";
-  const face = flatFaces ? selFace : fallbackFace;
+  /* [F7a 2026-08-02] a flat album with NOTHING TO CUE (no playable song, so
+     no poster to land on — the house album) falls back to its first face,
+     the same courtesy E2 gives the staged wings: landing shows the room's
+     own page rather than a hole. Artist albums have songs, so they still
+     land on the song's poster and never hit this branch. */
+  const face = flatFaces ? (selFace ?? (!thumbVid ? fallbackFace : null)) : fallbackFace;
   const showFace = flatFaces ? !!face : (!hasVideo && !thumbVid && !!fallbackFace);
 
   /* [G1 2026-07-31] ONE DOOR, TWO HANDLES. The frozen face IS the standard
@@ -1971,30 +2001,22 @@ export default function Exhibit({ artist }) {
         {/* MAIN TWO-COLUMN AREA */}
         {/* [M-e 2026-08-02] THE BANNER IS NOW A CONSOLE, WHERE THE ARTIST ASKS
             FOR ONE. `ex-album-banner-aux` has been an empty flex spacer since
-            it was built; the transport and the vault control move into it, so
-            the wing gains two controls and zero pixels of height. Wings that
-            declare no `transport` render the identical empty div. */}
+            it was built; the transport moves into it, so the wing gains a
+            transport and zero pixels of height. Wings that declare no
+            `transport` render the identical empty div. [F5] The vault
+            ?-button that shared this slot is retired — factoids ride the
+            scroller, ambient, not a help control. */}
         <div className={"ex-album-banner" + (bannerTransport ? " ex-banner-console" : "")}>
           <div className="ex-album-banner-title">{album.title}</div>
           <div className="ex-album-banner-aux">
             {bannerTransport && (
-              <>
-                <BannerTransport
-                  video={curVideo} track={curTrack} live={pbLive}
-                  onStop={stopPlayback}
-                  onTogglePlay={isAudioSrc ? audio.togglePlay : yt.togglePlay}
-                  onSetVolume={isAudioSrc ? audio.setVolume : yt.setVolume}
-                  getState={isAudioSrc ? audio.getState : yt.getState}
-                />
-                {hasFacts && (
-                  <button className={"ex-vaultbtn" + (factOpen ? " ex-vaultbtn-on" : "")}
-                          onClick={() => setFactOpen(v => !v)}
-                          aria-pressed={factOpen}
-                          title="A fact about what you are looking at">
-                    ?
-                  </button>
-                )}
-              </>
+              <BannerTransport
+                video={curVideo} track={curTrack} live={pbLive}
+                onStop={stopPlayback}
+                onTogglePlay={isAudioSrc ? audio.togglePlay : yt.togglePlay}
+                onSetVolume={isAudioSrc ? audio.setVolume : yt.setVolume}
+                getState={isAudioSrc ? audio.getState : yt.getState}
+              />
             )}
           </div>
         </div>
@@ -2580,12 +2602,6 @@ export default function Exhibit({ artist }) {
           onSetVolume={isAudioSrc ? audio.setVolume : yt.setVolume}
           getState={isAudioSrc ? audio.getState : yt.getState}
         />)}
-
-        {/* [C-d 2026-08-02] THE VAULT POPUP. Mounted last so it lays over the
-            room, and only when the visitor has asked for it. */}
-        {factOpen && hasFacts && (
-          <FactPopup facts={FACTS} ctx={factCtx} onClose={() => setFactOpen(false)} />
-        )}
 
         {/* EXHIBIT FLOW — optional, only rendered if artist provides one.
             playingTrack carries the live player identity as stable ids

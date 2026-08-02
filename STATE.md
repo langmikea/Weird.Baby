@@ -28,7 +28,42 @@ wing's technical voice; it is a colorful celebration. Set the stage, drop the
 house lights, cue the music, spotlight — the only place to look. Cecil B.
 energy. (The B&W site law does NOT apply to WAL — W8.)
 
-## SEALED 2026-08-02 — WAL SPOTLIGHT ROUND (v32; commit + push this session, DEPLOY IS MIKE'S — mirror/deploy pending)
+## SEALED 2026-08-02 — MUSEUM FIT ROUND (v33; DEPLOY IS MIKE'S — mirror/deploy pending)
+
+Mike's refinement round on the spotlight wing, F1–F7. Round log:
+`docs/MUSEUM_FIT_LOG-20260802.md`. Collage wall protected and re-verified.
+
+- **F1 tracklist CORRECTED**: "Coconuts"/"E. D. Yadah" were Mike's own songs
+  used as EXAMPLES — both rows dead. Structure now: 01..n songs → About the
+  Songs → About the Artist (+ the doors out, rehomed) → What they are up to.
+- **F2 bleed diagnosed**: the fixed nav is 45px, the sticky console pinned at
+  a hard-coded top:52px — a 7px open strip where the collage painted raw.
+  Closed with an opaque apron on the console (::before, covers ±16px of
+  nav-height variance).
+- **F3 fit on entry**: WAL sizes itself from measurement — carousel yields
+  first (to its 160 floor), then the video frame's height caps and the player
+  letterboxes on the dark stage; the split is not a fit lever (the first
+  draft's 62%-empty tracklist was rejected). Session-sticky via
+  sessionStorage (`fitOnEntry` + scoped usePersist); fresh visit re-fits.
+- **F4** scroller tightened to a two-line budget (was 120px min with measured
+  dead black). **F5** the ?-button and FactPopup RETIRED (revival: 7c3a231);
+  factoids ride the scroller, ambient.
+- **F6 phone first pass**: tap `:active` feedback (coarse pointers), stronger
+  selected-row state at stacked widths, scroll-the-viewer-to-the-finger on
+  card taps (flat wing ≤720 only). Everything else identified honestly in
+  `docs/PHONE_FINDINGS.md` — NOT optimized, per Mike. Dev-pane caveat banked
+  there: smooth-scroll cannot animate in the non-composited preview pane.
+- **F7a** the wing's FIRST ALBUM is the house explaining itself (lands on
+  "What this room is", [PAPA] throughout). **F7b** gift shop: HR full-width
+  banner gone (he rides the artist tiles), tiles double height (two-up grid),
+  whole page template-driven off the WAL artist data. **F7c** lobby subtitle
+  live — default "A Singer-Songwriter Museum", candidates 2–4 at
+  `/?subtitle=N`, MIKE PICKS. **F7d** sweep clean: only the live /hr route,
+  its own config, and the admin jump remain — no visitor-facing pointers.
+- Gates: lint 11/10 (= baseline), build green, zero console errors, desktop +
+  375px walked, /hr /wb /robots /shop /booth verified.
+
+## SEALED 2026-08-02 — WAL SPOTLIGHT ROUND (v32; pushed, origin-verified — DEPLOY still Mike's)
 
 Mike's glass session on the finished wing, W1–W10, autonomous Code-lane round.
 Full round log + interpretation flags: `docs/WAL_SPOTLIGHT_LOG-20260802.md`.

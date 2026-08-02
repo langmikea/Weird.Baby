@@ -392,8 +392,12 @@
    when Mike's art lands it drops in without a re-crop. `--dead` is a banner
    with no destination: it keeps the shape so the row reads evenly and drops
    the hover and the pointer so it cannot pretend to be a link. */
+/* [F7b 2026-08-02] DOUBLE HEIGHT, per Mike: the tile's plate is square and
+   sized by its column, so doubling the tile means halving the column count —
+   two-up where four fit before, each plate roughly twice the edge. More
+   artists never change this rule; they just wrap onto more rows. */
 .wal-banners__grid{display:grid;gap:22px;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))}
 .featured-artist--half .featured-artist__image-wrap{aspect-ratio:1/1}
 .featured-artist--half .featured-artist__name{font-size:1.05rem}
 .featured-artist--dead{cursor:default;opacity:.72}

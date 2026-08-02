@@ -1,8 +1,24 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+
+/* [F7c 2026-08-02] THE SUBTITLE — so a stranger knows what Weird.Baby IS
+   before they are asked to explore it. Mike named the class ("Solo Artist" /
+   "Singer Songwriter"); these are the rendered candidates, SHOWN-THEN-ASKED:
+   `/?subtitle=2..4` previews each on the live page, the first is the working
+   default, and MIKE PICKS — nothing here is final until he does. [PAPA] */
+const SUBTITLE_CANDIDATES = [
+  "A Singer-Songwriter Museum",
+  "A Solo Artist Museum",
+  "The Singer-Songwriter Museum",
+  "Museum of the Solo Artist",
+];
 
 export default function WbHome() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const subtitle = SUBTITLE_CANDIDATES[
+    (parseInt(searchParams.get("subtitle"), 10) || 1) - 1
+  ] || SUBTITLE_CANDIDATES[0];
   const [name, setName] = useState("");
   const [note, setNote] = useState("");
   const [entries, setEntries] = useState([]);
@@ -59,7 +75,11 @@ export default function WbHome() {
         .wb-logo { width: min(340px, 85%); height: auto; filter: none; position: relative; animation: float 7s ease-in-out infinite; z-index: 1; }
         /* [walk-five] the float, slightly bigger per Mike */
         @keyframes float { 0%, 100% { transform: translateY(0px) rotate(-0.7deg); } 50% { transform: translateY(-14px) rotate(0.7deg); } }
-        .wb-tagline { font-family: 'Courier Prime', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: #57544d; margin-top: 24px; position: relative; z-index: 1; animation: blink 3s step-end infinite; }
+        /* [F7c] the subtitle: what this place IS, in museum signage — steady
+           (no blink; it is a fact, not an ellipsis), one step up from the
+           tagline in weight and presence. */
+        .wb-subtitle { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.3em; text-transform: uppercase; color: #2b2924; margin-top: 22px; position: relative; z-index: 1; }
+        .wb-tagline { font-family: 'Courier Prime', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: #57544d; margin-top: 12px; position: relative; z-index: 1; animation: blink 3s step-end infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
         /* DIRECTORY (Stage 3, WB_ARTIST_LOBBY_BOOTH-20260706): four listings
@@ -123,22 +143,18 @@ export default function WbHome() {
       <div className={`wb-root ${visible ? "visible" : ""}`}>
         <div className="wb-left">
           <img src="/WeirdBaby_PhotoID.png" alt="Weird.Baby" className="wb-logo" />
+          <div className="wb-subtitle">{subtitle}</div>
           <div className="wb-tagline">something is being built here</div>
           <nav className="wb-directory" aria-label="Museum directory">
             <div className="wb-dir-label">Directory</div>
             {/* Hunter Root delisted 2026-07-07 (Mike's direction); /hr live
                 but unlinked.
-                [W5 2026-08-02, Mike's ruling] THAT STATUS IS NOW PERMANENT AND
-                NAMED: /hr is REFERENCE-HELD. It was the most stable thing this
-                museum had and it taught the machinery every pattern the other
-                wings inherited - it has outlived that purpose. Nothing is
-                deleted and nothing is shut down: the route stays live, the
-                archive stays complete, and it stays unlisted per the unlisted
-                law. Hunter Root himself is now a WORTH A LISTEN artist like
-                any other, and his WAL LINK track points back here - which is
-                why "unlisted" is the right word and "retired" is not.
-                The "proper shutdown" workstream this comment used to promise
-                is therefore CLOSED, not deferred. */}
+                [W9 2026-08-02 amendment] The route stays live and unlisted,
+                but NOTHING points at it any more: the WAL wing's pointers to
+                /hr were removed per Mike (the HR museum concept was never
+                approved and is history). Hunter Root is a WORTH A LISTEN
+                artist served from our own vault; his door out is his own
+                site. /hr remains reachable only by URL, as an archive. */}
             {/* Robots live link — §D2 ruling 2026-07-23 (coming-soon retires).
                 STAGED: reaches the public site only when Mike deploys (D7). */}
             <button className="wb-dir-entry" onClick={() => navigate("/robots")}>

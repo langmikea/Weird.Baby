@@ -12,15 +12,10 @@
 // gracefully fall back to random.
 
 export const wbRoster = [
-  {
-    id: "hr",
-    name: "Hunter Root",
-    exhibitRoute: "/hr",
-    storeUrl: "https://www.hunterroot.com/",
-    storePlatform: "Squarespace",
-    image: "/images/wb-merch/hunter-root.png",
-    blurb: "Records, prints, and road-worn merch from a songwriter worth following home.",
-  },
+  /* [F7b 2026-08-02] Hunter Root's FULL-WIDTH banner is REMOVED per Mike.
+     His shop presence now rides the WAL artist tiles like everyone else's —
+     one artist, one tile, one template. His entry is gone rather than
+     flagged off; `?from=hr` degrades gracefully to the house pick. */
   {
     id: "wb",
     name: "Weird.Baby",

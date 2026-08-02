@@ -17,32 +17,26 @@
 // drop the house lights, cue the music, spotlight — the only place to look.
 // The B&W site law does NOT apply in this wing (W8).
 //
-// ---- THE TRACKLIST (Mike's category set, verbatim, W10 2026-08-02) ---------
-// Every WAL artist gets the SAME tracklist shape, and the shape is the
-// deliverable — a new artist is a new entry in ARTISTS below and nothing else:
+// ---- THE TRACKLIST (Mike's intent, CORRECTED — F1 2026-08-02) --------------
+// Last round's flag paid for itself: "Coconuts" and "E. D. Yadah" were MIKE'S
+// OWN SONG TITLES used as EXAMPLES of tracklist rows — foreign examples, not
+// categories — and both are dead. His actual point: the tracklist lists the
+// SONGS, then the song fact sheet and the rest. Every WAL artist gets the
+// SAME shape, and the shape is the deliverable — a new artist is a new entry
+// in ARTISTS below and nothing else:
 //
-//   Coconuts             the songs — numbered, playable, the main event
-//   E. D. Yadah          everywhere else they exist: their place, shows,
-//                        the better listen, their store  [INTERPRETED — flag]
-//   About the Songs      the songs' museum cards, one page
-//   About the Artist     the artist's museum card + the two honest questions
-//   What they are up to  their own recent uploads, as a collage of their
-//                        own thumbnails  [W2's poster wall]
+//   01..n  the artist's own songs   numbered, playable, the main event
+//   About the Songs                 the songs' fact sheet — the museum cards
+//   About the Artist                the artist's card, the two honest
+//                                   questions, and the DOORS OUT (site,
+//                                   listen, store, channel — rehomed from
+//                                   the dead links row)
+//   What they are up to             their own uploads as the collage wall
+//                                   (+ the tour door where one exists)
 //
-// The Gift Shop row is REMOVED from the list (W10); the shop stays one press
-// away in the title bar. The indented per-song card sub-rows died in favor of
-// "About the Songs" (W10). The previous row names (The Artist / Their Place /
-// Shows / Listen / Shop / Lately) and the seven-site naming study behind them
-// are in git at 1031d1c^ — the study still stands; the categories changed.
-//
-// ***** INTERPRETATION FLAGS, FOR MIKE'S CONFIRMATION (not guessed silently):
-//   · "Coconuts" read as THE SONGS — the sweet meat of the exhibit, per the
-//     order's own hint. The header row above the numbers prints the name.
-//   · "E. D. Yadah" read as THE YADDA-YADDA — the chatter row: every door out
-//     to where the artist actually lives (site, shows, listen, store).
-//   · "What they are up to" absorbed the old Lately feed AND the tour link —
-//     what they posted and where they are playing are both "up to".
-// Any of the three renames is one string here if Mike rules otherwise.
+// The Gift Shop row stays REMOVED (W10); the shop is one press away in the
+// title bar. Confirmed rulings from the last round that stand: the sub-rows
+// are dead, categories are unnumbered, songs alone carry numbers.
 //
 // ---- BELOW THE LINE: DELIBERATELY EMPTY -------------------------------------
 // Mike: the artifact shelf under the fold was the /hr blocker, and we are not
@@ -587,15 +581,6 @@ const ARTISTS = [
    [W10] The `kind` chips died with the old row names: the categories are
    honest nouns now and a mono label repeating them was noise. */
 
-/* [W10] the section header over the numbered songs. It is DATA - a track with
-   `header: true` renders as an inert section label and consumes no number -
-   so a wing that declares none renders none and /hr, /wb and /robots are
-   byte-identical. */
-function coconutsHeader(a) {
-  return { id: a.id + "-h-coconuts", title: "Coconuts", header: true,
-           tags: [...a.tags], videos: [] };
-}
-
 function songTrack(a, s) {
   return {
     id: a.id + "-song-" + s.slug,
@@ -606,43 +591,26 @@ function songTrack(a, s) {
   };
 }
 
-/* [W10] E. D. YADAH — the yadda-yadda: every door out to where the artist
-   actually lives. Absorbs the old Their Place / Shows / Listen / Shop rows;
-   each door appears only where the thing exists, which has always been the
-   template's law. [INTERPRETATION FLAGGED for Mike in the face's PAPA slot.] */
-function yadahTrack(a) {
+/* [F1 2026-08-02] THE DOORS OUT — now the closing block of About the Artist.
+   "E. D. Yadah" is DEAD: it was one of MIKE'S OWN SONG TITLES used as an
+   example row name, mistaken last round for a category (the interpretation
+   flag did its job — the flag was raised, Mike ruled, the row died). The
+   doors it carried were real, so they rehome where they always belonged: at
+   the foot of the artist's own card, after you have met them. Each door
+   appears only where the thing exists, which has always been the template's
+   law. The tour door stays on "What they are up to" — where they are playing
+   is that face's half of the story. */
+function doorsFor(a) {
   const trail = [];
   if (a.site) trail.push({ label: a.siteLabel || a.site, url: a.site,
     scent: a.siteScent || "The artist's own place." });
-  if (a.tickets) trail.push({ label: a.tickets.label, url: a.tickets.url,
-    scent: "Where to stand in the same room as it — the one thing an exhibit cannot give you." });
   if (a.listen) trail.push({ label: a.listen.label, url: a.listen.url,
     scent: "Where to hear it without paying an advertiser for the privilege." });
   if (a.shop) trail.push({ label: a.shop.label, url: a.shop.url,
     scent: "Their own store." });
   if (a.channel && a.channel !== a.site) trail.push({ label: "Their channel", url: a.channel,
     scent: "Where the songs land first, verified from their own uploads." });
-  if (!trail.length) return null;
-  return {
-    id: a.id + "-yadah",
-    unnumbered: true,      /* a category, not a track — consumes no number */
-    title: "E. D. Yadah",
-    tags: [...a.tags, "links"],
-    videos: [],
-    face: {
-      kind: "text",
-      title: "E. D. YADAH",
-      subtitle: a.name.toUpperCase(),
-      blurb: "The yadda-yadda: everywhere else they exist. Every door here " +
-             "is theirs and leaves the building.",
-      lines: a.siteNote ? ["NOTE     " + a.siteNote] : undefined,
-      trail,
-      footer: "WORTH A LISTEN · " + a.name,
-      papa: "[PAPA / INTERPRETATION FLAG] “E. D. Yadah” read as the " +
-            "chatter row — the doors out. Mike confirms or renames; the fix " +
-            "is one string.",
-    },
-  };
+  return trail.length ? trail : undefined;
 }
 
 /* [W10] ABOUT THE SONGS — the per-song museum cards, merged onto one page.
@@ -714,6 +682,10 @@ function aboutArtistTrack(a) {
           note: "" },
       ],
       entriesMode: "list",
+      /* [F1] the doors out close the card — site, listen, store, channel —
+         after the visitor has met the person the doors belong to. */
+      trail: doorsFor(a),
+      lines: a.siteNote ? ["NOTE     " + a.siteNote] : undefined,
       footer: "WORTH A LISTEN · " + a.name,
       /* PROVENANCE ON THE PAGE, not just in a comment a developer reads. */
       papa: (a.aboutNote ? a.aboutNote + "  " : "") +
@@ -757,24 +729,116 @@ function upToTrack(a) {
         { k: "Showing", v: a.feed.length + " of the most recent" },
       ],
       footer: "WORTH A LISTEN · " + a.name,
-      papa: "[PAPA / INTERPRETATION FLAG] “What they are up to” absorbed " +
-            "the old Lately feed and the tour door. Mike confirms.",
+      /* [F1] the interpretation flag came down: Mike kept this category. */
+      papa: "[PAPA] — the collage caption wording, and whether any upload " +
+            "earns a row of its own.",
     },
   };
 }
 
-/* the tracklist, in Mike's ruled order (W10). */
+/* the tracklist, in Mike's corrected order (F1). */
 function tracksFor(a) {
-  const out = [coconutsHeader(a)];
+  const out = [];
   a.songs.forEach(s => out.push(songTrack(a, s)));
-  out.push(yadahTrack(a));
   out.push(aboutSongsTrack(a));
   out.push(aboutArtistTrack(a));
   out.push(upToTrack(a));
   return out.filter(Boolean);
 }
 
-const spine = ARTISTS.map(a => ({
+/* ===== [F7a 2026-08-02] THE HOUSE ALBUM — the wing explains itself ==========
+   Mike's banked note, built: WAL gets a FIRST ALBUM whose subject is the room
+   — what it is and its place in the museum. It sits first in the coverflow
+   and the wing LANDS on it, so a visitor who walks in cold is told where they
+   are before they are asked to click anything. House voice throughout, [PAPA]
+   on every word that is Mike's to say.
+   THE COVER IS THE HOUSE'S OWN and deliberately not an artist photo: the
+   frame may introduce itself in the frame's voice — paper ground, house
+   type — precisely because everywhere else the artists bring the color. */
+const HOUSE_COVER = "data:image/svg+xml;utf8," + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600">' +
+    '<rect width="600" height="600" fill="#d9d5ca"/>' +
+    '<rect x="26" y="26" width="548" height="548" fill="none" stroke="#211f1c" stroke-width="2"/>' +
+    '<text x="300" y="235" text-anchor="middle" fill="#211f1c" font-family="Georgia,serif" font-size="64" letter-spacing="3">WORTH</text>' +
+    '<text x="300" y="317" text-anchor="middle" fill="#211f1c" font-family="Georgia,serif" font-size="64" letter-spacing="3">A</text>' +
+    '<text x="300" y="399" text-anchor="middle" fill="#211f1c" font-family="Georgia,serif" font-size="64" letter-spacing="3">LISTEN</text>' +
+    '<line x1="150" y1="440" x2="450" y2="440" stroke="#211f1c" stroke-width="2"/>' +
+    '<text x="300" y="482" text-anchor="middle" fill="#57544d" font-family="Courier New,monospace" font-size="19" letter-spacing="5">WEIRD.BABY</text>' +
+  "</svg>");
+
+const HOUSE_ALBUM = {
+  id: "worth-a-listen",
+  title: "Worth A Listen",
+  tag: "worth_a_listen",
+  year: null,
+  tags: ["wal", "house"],
+  art: HOUSE_COVER,
+  accent: null,
+  viewerPoster: null,
+  tracks: [
+    {
+      id: "wal-house-room",
+      unnumbered: true,   /* the room's own pages are not songs */
+      title: "What this room is",
+      tags: ["wal", "house", "about"],
+      videos: [],
+      face: {
+        kind: "text",
+        title: "WHAT THIS ROOM IS",
+        subtitle: "WORTH A LISTEN",
+        blurb: "Songs somebody in this house loves, pointed at. That is the " +
+               "whole show.",
+        label: [
+          "Every album in this room is an artist, and every artist gets the " +
+          "same stage: their songs, playable; a fact sheet about the songs; " +
+          "a museum card about them; and a wall of what they have been up " +
+          "to lately, in their own pictures. The doors all lead out — to " +
+          "their site, their store, their channel — because this exhibit " +
+          "is a pointer, not a home.",
+          "The pictures and the songs are the artists'. The frame is ours, " +
+          "and the frame's whole job is to stay out of the light.",
+        ],
+        tombstone: [
+          { k: "In this room", v: "Four artists · eight songs, all playable" },
+          { k: "The standard", v: "Someone here thinks they are worth a listen" },
+          { k: "The doors", v: "All of them lead to the artist's own place" },
+        ],
+        footer: "WORTH A LISTEN · WEIRD.BABY",
+        papa: "[PAPA] — the room's own words, every line of them.",
+      },
+    },
+    {
+      id: "wal-house-place",
+      unnumbered: true,   /* the room's own pages are not songs */
+      title: "Its place in the museum",
+      tags: ["wal", "house", "about"],
+      videos: [],
+      face: {
+        kind: "text",
+        title: "ITS PLACE IN THE MUSEUM",
+        subtitle: "WORTH A LISTEN",
+        blurb: "The rest of Weird.Baby looks inward at its own catalogue. " +
+               "This wing points outward.",
+        label: [
+          "Weird.Baby is a museum: it keeps a vault, writes cards, and " +
+          "exhibits what it holds. Worth A Listen is the one room built the " +
+          "other way around — nothing in it is ours, and that is the point. " +
+          "It exists so a good song with somebody else's name on it has a " +
+          "place in this building too.",
+        ],
+        trail: [
+          { label: "The Information Booth", url: "/booth",
+            scent: "The house's own FAQ — who we are and how to reach us." },
+        ],
+        footer: "WORTH A LISTEN · WEIRD.BABY",
+        papa: "[PAPA] — the house's account of itself; Mike edits, nothing " +
+              "here claims to be final.",
+      },
+    },
+  ],
+};
+
+const spine = [HOUSE_ALBUM, ...ARTISTS.map(a => ({
   id: a.id,
   title: a.name,
   /* the fact vault's ALBUM tier. In this wing an album IS an artist, so
@@ -790,7 +854,7 @@ const spine = ARTISTS.map(a => ({
   accent: null,
   viewerPoster: null,
   tracks: tracksFor(a),
-}));
+}))];
 
 export const worthAListenArtists = ARTISTS;
 
@@ -821,6 +885,10 @@ export const worthAListenExhibit = {
   /* [W3 2026-08-02] the cued song's poster is the VIDEO'S own thumbnail, not
      the house cover — the artists' imagery carries the page. */
   thumbFromVideo: true,
+  /* [F3 2026-08-02] on entry the room fits itself to the screen — tracklist,
+     viewer and scroller all visible at once, computed from measurement; the
+     visitor's own adjustments hold for the session. */
+  fitOnEntry: true,
   /* [M-e 2026-08-02] the transport stows into the artist-name bar, and the
      fixed 68px player bar stands down with it. */
   transport: "banner",
