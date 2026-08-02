@@ -21,30 +21,47 @@
 // recreating it. WAL albums carry NO below-the-line artifacts at all. When an
 // artist earns one it arrives as data, here, the way the robots wing did it.
 //
-// ---- W1: VIDEO IDS — WHAT COULD AND COULD NOT BE CONFIRMED -----------------
-// The brief asks for ids cross-checked against the artist's OFFICIAL channel,
-// with channel identity CONFIRMED rather than assumed. That bar was met for
-// exactly one artist, and the reason matters:
+// ---- W1: VIDEO IDS - ALL EIGHT CONFIRMED ---------------------------------
+// Every song in this wing plays, and every id was checked against the video's
+// OWN metadata before it was written.
 //
-//   · HUNTER ROOT — CONFIRMED, and not from the open web at all. He is OUR
-//     artist and the museum holds his catalogue: both ids come from the
-//     foundation export (src/data/exhibits/hunter_root.json), each carrying a
-//     MediaVault id and a content_kind of "official". That is a stronger
-//     provenance than any search result could be — the museum IS the source.
-//     Mike's "Nothing Wrong" cross-checked to our `nothin_wrong`, whose real
-//     title is "Nothin' Wrong"; corrected here rather than silently matched.
+// HOW. YouTube renders the uploader in JavaScript, so fetching a watch page
+// returns a bare footer - which is why an earlier pass could confirm nothing
+// and honestly wrote nothing. The oEmbed endpoint is the way through:
+//   https://www.youtube.com/oembed?url=<watch url>&format=json
+// is plain JSON, needs no key and no scripting, and returns BOTH the video's
+// title AND its channel. Title says which song; author_name says whose
+// channel it is on. That is exactly "channel identity confirmed, not
+// assumed", and it was available the whole time.
 //
-//   · JESSE WELLES, CARSIE BLANTON, MIKEY MIKE — NOT CONFIRMED, so NOT
-//     WRITTEN. Search returns several plausible uploads per song (studio,
-//     live, festival, lyric) and a search result is not proof of which
-//     channel hosts it. The obvious next step — fetching the watch page to
-//     read the uploader — DOES NOT WORK: YouTube renders that in JavaScript
-//     and the fetch returns a bare footer. And the artists' own sites do not
-//     embed or link their videos (wellesmusic.com checked directly: Welcome /
-//     Tour / Contact / Connect / SHOP, no video links anywhere).
-//     So there is no path from here to a channel-confirmed id, and eleven
-//     guessed characters is exactly the invented link the brief forbids.
-//     Those songs keep honest faces naming what is missing.
+// ***** THE MAPPING CORRECTION - FOUR OF SIX WERE TRANSPOSED *****
+// Mike supplied six ids from radio-list URLs and asked for the mapping to be
+// confirmed rather than trusted. It needed confirming:
+//
+//   id            SUPPLIED AS                    ACTUALLY IS
+//   7rWDzLUOreo   Mikey Mike / Doin' Me          correct
+//   KMo-TKhW5VY   Mikey Mike / Cooler            correct
+//   B7i6Vys6aPI   Welles / That Can't Be Right   Blanton / SHIT LIST
+//   DAFmxnJA_OQ   Welles / There's A Hole        Blanton / BE GOOD
+//   cqfJnUgvso0   Blanton / Be Good              Welles / That Can't Be Right
+//   s9FBnLxcqqw   Blanton / Shit List            Welles / There's A Hole
+//
+// The two pairs were swapped as blocks, AND Carsie's two were reversed within
+// their pair. NO ID WAS WRONG - every one is a real official video sitting on
+// the right artist's own channel; only the labels had drifted in transit. So
+// the ids are filed where the videos say they belong, and the transposition
+// is RECORDED rather than quietly straightened: a silent fix would leave
+// nobody any wiser about where the labels came from, and the next paste from
+// the same source will have the same shape.
+//
+// Corroboration worth keeping: cqfJnUgvso0 surfaced in the FIRST research
+// pass as a candidate for Welles' "That Can't Be Right" and was refused for
+// want of proof. oEmbed now confirms exactly that - the caution was right to
+// refuse it, and right about which song it was.
+//
+// HUNTER ROOT's two needed none of this: he is our artist, and both came from
+// the museum's own foundation export with MediaVault provenance and a
+// content_kind of "official".
 //
 // ---- W2: COVERS — WHY THEY ARE TYPOGRAPHIC ---------------------------------
 // The brief allows official video thumbnails, artist-provided press images
@@ -106,12 +123,13 @@ const ARTISTS = [
     name: "Mikey Mike",
     tags: ["wal", "mikey-mike"],
     songs: [
-      { title: "Doin' Me", ytId: null,
+      { title: "Doin' Me", ytId: "7rWDzLUOreo",   /* oEmbed: Mikey Mike channel */
         note: "Mike wrote this as \u201cI'm Doin' Me\u201d. The record appears " +
               "to be \u201cDoin' Me\u201d (2017), made with Rick Rubin and " +
               "widely heard from a Canon advert sync. Title flagged, not " +
               "corrected in silence \u2014 [PAPA] confirms." },
-      { title: "Cooler", ytId: null, note: "" },
+      { title: "Cooler", ytId: "KMo-TKhW5VY",
+        note: "Confirmed by oEmbed: Mikey Mike - Cooler [Official Lyric Video], Mikey Mike channel." },
     ],
     site: null,
     siteNote: "No official artist site confirmed \u2014 several unrelated acts " +
@@ -186,8 +204,13 @@ const ARTISTS = [
     name: "Jesse Welles",
     tags: ["wal", "jesse-welles"],
     songs: [
-      { title: "That Can't Be Right", ytId: null, note: "" },
-      { title: "There's A Hole", ytId: null, note: "" },
+      /* [TRANSPOSED] Mike supplied this id under Carsie Blanton; the
+         video's own title and channel say Jesse Welles. Filed by what it is. */
+      { title: "That Can't Be Right", ytId: "cqfJnUgvso0",
+        note: "Confirmed by oEmbed: That Can't Be Right, Jesse Welles channel." },
+      /* [TRANSPOSED] supplied under Carsie Blanton. */
+      { title: "There's A Hole", ytId: "s9FBnLxcqqw",
+        note: "Confirmed by oEmbed: There's A Hole, Jesse Welles channel." },
     ],
     /* VERIFIED 2026-08-02 by reading the site itself: wellesmusic.com is the
        official home (Welcome / Tour / Contact / Connect, and a SHOP that
@@ -218,8 +241,11 @@ const ARTISTS = [
     name: "Carsie Blanton",
     tags: ["wal", "carsie-blanton"],
     songs: [
-      { title: "Be Good", ytId: null, note: "" },
-      { title: "Shit List", ytId: null,
+      /* [TRANSPOSED, AND REVERSED WITHIN THE PAIR] supplied under Jesse
+         Welles, and in the other order. Filed by what the videos are. */
+      { title: "Be Good", ytId: "DAFmxnJA_OQ",
+        note: "Confirmed by oEmbed: BE GOOD by Carsie Blanton - OFFICIAL LYRIC VIDEO, Carsie Blanton channel." },
+      { title: "Shit List", ytId: "B7i6Vys6aPI",   /* oEmbed: Carsie Blanton channel */
         note: "Second single from Love & Rage." },
     ],
     site: "https://www.carsieblanton.com",
