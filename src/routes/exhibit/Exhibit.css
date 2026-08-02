@@ -675,16 +675,55 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .vp-face-panel .vp-face-title{color:#d8d3c6;letter-spacing:.30em}
 .vp-face-panel .vp-face-sub{color:#7e7869}
 
+/* [N2 2026-08-02] WINDOW DRESSING: THE PANEL IS AN OBJECT, NOT A DIV.
+   It read flat-on-a-webpage because it had exactly two edges (a light hairline
+   on top, a dark one underneath) and nothing else: no thickness, no fixings,
+   no history. A real panel of this period is a steel plate BOLTED to
+   something, lit from above, with the brushing running one way and sixty
+   years of hands around the controls.
+   FOUR THINGS, EACH DOING ONE JOB:
+     the bevel   a bright top lip and a dark bottom lip INSIDE the border, so
+                 the plate has thickness rather than an outline
+     the lift    a real drop shadow onto the black ground - Fork B ruled the
+                 console FLOATS, and a floating thing casts
+     the brush   the vertical machining already here, kept, plus a faint
+                 diagonal so the surface catches light unevenly
+     the wear    one soft bloom under the controls where hands have been.
+                 Deliberately not a texture tile: dirt that repeats reads as
+                 wallpaper, and this has to survive being looked at. */
 .ip{--steel:#2b2c2a;--steel-hi:#3c3d3a;--steel-lo:#1d1e1c;
   --engrave:#8d887a;--engrave-hi:#c9c3b3;
+  position:relative;
   display:flex;flex-direction:column;gap:clamp(14px,2vw,22px);
-  padding:clamp(16px,2.4vw,30px);
+  padding:clamp(20px,2.6vw,32px);
   background:
-    linear-gradient(180deg,rgba(255,255,255,.045),rgba(0,0,0,.16)),
+    radial-gradient(80% 120% at 24% 78%,rgba(255,255,255,.030),rgba(255,255,255,0) 58%),
+    linear-gradient(163deg,rgba(255,255,255,.028) 0 18%,rgba(255,255,255,0) 46%),
+    linear-gradient(180deg,rgba(255,255,255,.055),rgba(0,0,0,.20)),
     repeating-linear-gradient(90deg,rgba(255,255,255,.014) 0 1px,transparent 1px 3px),
     var(--steel);
-  border-top:1px solid var(--steel-hi);border-bottom:1px solid #0d0e0d;
+  border:1px solid #191a18;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.13),      /* the top lip */
+    inset 0 -1px 0 rgba(0,0,0,.55),           /* the bottom lip */
+    inset 1px 0 0 rgba(255,255,255,.04),
+    inset -1px 0 0 rgba(0,0,0,.35),
+    0 14px 28px -12px rgba(0,0,0,.85),        /* the lift off the ground */
+    0 2px 0 rgba(0,0,0,.6);
   font-family:'Courier Prime','Courier New',monospace}
+
+/* MOUNTING SCREWS. A slotted head, seated in a countersunk dish, each turned
+   to its own angle by the renderer. */
+.ip-screw{position:absolute;width:11px;height:11px;border-radius:50%;
+  background:
+    linear-gradient(var(--turn,0deg),transparent 0 41%,#151614 41% 59%,transparent 59% 100%),
+    radial-gradient(circle at 38% 33%,#5a5b54,#26272400 72%),
+    radial-gradient(circle at 50% 50%,#3a3b37,#212220);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.22),inset 0 -1px 1px rgba(0,0,0,.5),
+             0 1px 1px rgba(0,0,0,.45);
+  pointer-events:none}
+.ip-screw-tl{left:9px;top:9px} .ip-screw-tr{right:9px;top:9px}
+.ip-screw-bl{left:9px;bottom:9px} .ip-screw-br{right:9px;bottom:9px}
 
 /* the engraved maker's plate: cut into the steel, so the light sits BELOW */
 .ip-plate{align-self:flex-start;font-size:calc(var(--face-fs) * .52);
@@ -766,8 +805,11 @@ body:has(.pb) .ex-root{padding-bottom:88px}
              inset 0 1px 1px rgba(255,255,255,.35)}
 
 /* ---- THE ROTARY DIAL --------------------------------------------------- */
-.ip-dial{display:flex;align-items:center;gap:12px}
-.ip-knob{width:46px;height:46px;border-radius:50%;padding:0;cursor:pointer;
+/* [N1] the dial is a DIAL: the knob at the centre of its own field, the
+   legends on the arc around it. The field has to be big enough for the arc,
+   so it is sized rather than flowed. */
+.ip-dial{position:relative;width:150px;height:118px;flex:0 0 auto}
+.ip-knob{position:absolute;left:20px;top:50%;margin-top:-23px;width:46px;height:46px;border-radius:50%;padding:0;cursor:pointer;
   position:relative;border:1px solid #4a4b45;
   background:
     repeating-conic-gradient(from 0deg,#3a3b37 0 4deg,#2a2b28 4deg 8deg),
@@ -776,8 +818,11 @@ body:has(.pb) .ex-root{padding-bottom:88px}
   transition:transform .3s cubic-bezier(.2,.8,.3,1)}
 .ip-knob-mark{position:absolute;left:50%;top:5px;width:3px;height:15px;
   border-radius:2px;background:#ded9cb;transform:translateX(-50%)}
-.ip-dial-marks{display:flex;flex-direction:column;gap:5px}
-.ip-dial-mark{font-size:calc(var(--face-fs) * .5);letter-spacing:.2em;color:#5f5b51}
+/* the marks layer sits ON the knob's centre so the arc maths has one origin */
+.ip-dial-marks{position:absolute;left:43px;top:50%;width:0;height:0}
+.ip-dial-mark{position:relative;font-size:calc(var(--face-fs) * .5);
+  letter-spacing:.2em;color:#5f5b51}
+/* [N1] the tie line was tried and rejected as noise - see Exhibit.jsx. */
 .ip-dial-mark.ip-on{color:var(--engrave-hi);text-shadow:0 0 7px rgba(232,228,216,.28)}
 
 /* ---- THE LATCH ---------------------------------------------------------

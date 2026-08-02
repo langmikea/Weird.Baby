@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { makeFactCycler, splitFact } from "../../lib/fact-select.js";
 import "./Exhibit.css";
@@ -648,6 +648,22 @@ function PlayerBar({ video, track, album, live, onIdlePlay, onSkipBack, onSkipFo
    edge-to-edge is (h/2) / tan(pi/N).
    IT IS LIT ONLY WHEN ARMED. An unlit drum is still legible: you can read
    what the machine could do and see that it is not doing it. */
+/* the detent arc: positions spread across a sweep to the RIGHT of the knob,
+   so the labels read left-to-right and never cross the pointer. One position
+   sits at the middle of the sweep rather than at its edge. */
+const DIAL_SWEEP = 100, DIAL_FROM = 40, DIAL_R = 54;
+function dialArc(i, n) {
+  const a = n <= 1 ? DIAL_FROM + DIAL_SWEEP / 2
+                   : DIAL_FROM + (DIAL_SWEEP * i) / (n - 1);
+  const rad = a * Math.PI / 180;
+  return {
+    position: "absolute",
+    left: `calc(50% + ${(DIAL_R * Math.sin(rad)).toFixed(2)}px)`,
+    top: `calc(50% - ${(DIAL_R * Math.cos(rad)).toFixed(2)}px)`,
+    transform: "translateY(-50%)",
+    whiteSpace: "nowrap",
+  };
+}
 function InstrumentPanel({ decl }) {
   const D = decl || {};
   const drumPos = Array.isArray(D.drum && D.drum.positions) ? D.drum.positions : [];
@@ -657,6 +673,44 @@ function InstrumentPanel({ decl }) {
   const [drumIdx, setDrumIdx] = useState(0);
   const [dialIdx, setDialIdx] = useState(0);
   const [swOn, setSwOn] = useState(() => swDecl.map(w => !!w.on));
+
+  /* [N1 2026-08-02] THE POINTER POINTS AT THE LEGEND IT HAS CHOSEN.
+     The knob rotated by `idx * 90 - 45`, which is a number that happens to
+     move rather than an angle that means anything: at LIVE the mark aimed up
+     and to the LEFT, away from both legends, and at SEEDED it aimed up and to
+     the right at nothing in particular. On a real instrument the pointer is
+     how you read the setting, so it has to aim AT the reading.
+     MEASURED, NOT TABULATED. The angle is computed from where the legends
+     actually land - knob centre to legend centre - rather than written down
+     as a constant per position. A table would be right until someone adds a
+     third source, restyles the column or wraps a label, and then it would be
+     confidently wrong; this cannot drift because it reads the layout it is
+     pointing into. */
+  const knobRef = useRef(null);
+  const marksRef = useRef(null);
+  const [angles, setAngles] = useState([]);
+  useLayoutEffect(() => {
+    const k = knobRef.current, m = marksRef.current;
+    if (!k || !m) return;
+    function measure() {
+      const kb = k.getBoundingClientRect();
+      const cx = kb.left + kb.width / 2, cy = kb.top + kb.height / 2;
+      const out = [];
+      for (const el of m.children) {
+        const b = el.getBoundingClientRect();
+        const dx = (b.left + b.width / 2) - cx;
+        const dy = (b.top + b.height / 2) - cy;
+        /* CSS rotate(0) puts the mark at 12 o'clock, so 0deg is -Y and the
+           angle grows clockwise: atan2(dx, -dy). */
+        out.push(Math.atan2(dx, -dy) * 180 / Math.PI);
+      }
+      setAngles(out);
+    }
+    measure();
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(measure) : null;
+    if (ro) { ro.observe(m); ro.observe(k); }
+    return () => { if (ro) ro.disconnect(); };
+  }, [dialPos.length]);
 
   const N = Math.max(drumPos.length, 1);
   const STEP = 360 / N;
@@ -680,6 +734,16 @@ function InstrumentPanel({ decl }) {
 
   return (
     <div className={"ip" + (armed ? " ip-armed" : "")}>
+      {/* [N2 2026-08-02] THE PANEL IS MOUNTED, NOT PRINTED. Four screws in
+          the corners, each seated at a DIFFERENT angle - a screw that lines
+          up with its neighbours is a logo, not a fastener, and the eye knows
+          the difference without being told why. They are furniture, so they
+          live in the renderer with the bevels and the wear rather than in the
+          artist config: no face should have to declare its own screws. */}
+      <i className="ip-screw ip-screw-tl" aria-hidden="true" style={{ "--turn": "18deg" }} />
+      <i className="ip-screw ip-screw-tr" aria-hidden="true" style={{ "--turn": "-42deg" }} />
+      <i className="ip-screw ip-screw-bl" aria-hidden="true" style={{ "--turn": "71deg" }} />
+      <i className="ip-screw ip-screw-br" aria-hidden="true" style={{ "--turn": "-7deg" }} />
       {D.plate && <div className="ip-plate">{D.plate}</div>}
 
       <div className="ip-deck">
@@ -726,16 +790,45 @@ function InstrumentPanel({ decl }) {
         <div className="ip-bay ip-bay-dial">
           <div className="ip-legend">{D.dial && D.dial.label}</div>
           <div className="ip-dial">
-            <button className="ip-knob"
-                    style={{ transform: `rotate(${dialIdx * 90 - 45}deg)` }}
+            <button ref={knobRef} className="ip-knob"
+                    style={{ transform: `rotate(${angles[dialIdx] ?? 0}deg)` }}
                     onClick={() => setDialIdx(i => (i + 1) % Math.max(dialPos.length, 1))}
                     aria-label={"source: " + (dial.label || "")}>
               <span className="ip-knob-mark" />
             </button>
-            <div className="ip-dial-marks">
+            {/* [N1 2026-08-02] THE LEGENDS SIT ON AN ARC, AND THAT IS WHAT
+                MAKES THE POINTER READABLE. Stacked in a column they measured
+                82deg and 98deg from the knob - the pointer aimed at the right
+                legend and the SIXTEEN DEGREES between them was invisible, so
+                the instrument looked broken while being exactly correct. A
+                rotary selector's detents are spread around its dial; laid on
+                a 100deg arc the same two positions are a hundred degrees
+                apart and the throw is unmistakable.
+                The arc is generated from the number of positions, so a third
+                source spaces itself, and the pointer angle is still MEASURED
+                from where the legends actually land - the layout moved, the
+                aiming code did not have to. */}
+            <div ref={marksRef} className="ip-dial-marks">
               {dialPos.map((p, i) => (
                 <span key={p.id || i}
-                      className={"ip-dial-mark" + (i === dialIdx ? " ip-on" : "")}>{p.label}</span>
+                      style={dialArc(i, dialPos.length)}
+                      className={"ip-dial-mark" + (i === dialIdx ? " ip-on" : "")}>
+                  {/* [N1 2026-08-02] THE TIE LINE WAS BUILT, RENDERED AND
+                      REJECTED - Mike asked to be told if it was noise, and it
+                      was. A rule from the legend back toward the knob touches
+                      NEITHER end: the knob is round and the line stops short
+                      of its rim, the label has its own letter-spacing and the
+                      line stops short of that too. What it actually reads as,
+                      at the size this is set, is an em-dash in front of the
+                      word - punctuation, not a connection. Tried at 14px and
+                      at 27px; the longer one reads as a leader rule pointing
+                      at nothing, which is worse.
+                      THE POINTER IS ALREADY THE INDICATOR. It is measured to
+                      aim at the chosen legend and it sweeps 73deg between the
+                      two, so the relationship is stated once, by the
+                      instrument, in the way the instrument states things. */}
+                  {p.label}
+                </span>
               ))}
             </div>
           </div>
