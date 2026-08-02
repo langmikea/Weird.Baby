@@ -397,6 +397,32 @@ function aboutTrack(a) {
                 "the whole editorial standard and it is not pretending to be " +
                 "anything grander.",
           note: "[PAPA]" },
+        /* ===== [R3 2026-08-02] THE MONEY QUESTION, ANSWERED FIRST =========
+           Mike's doctrine: the business model must be unmistakable UP FRONT,
+           with no digging. An artist reaching this page should learn what
+           this house takes from them before they learn anything else - and
+           the answer is nothing.
+           WHY IT IS FIRST AND NOT BURIED: the launch-readiness ledger found
+           that an artist could walk the entire click-path - album, songs,
+           About, Link, shop - without ever meeting the mission. "We are not
+           affiliated" says what we are NOT doing; it never answers "does
+           anyone here make money off my song".
+           HUMOUR FILTERED (the ya-owe-me lesson): charm is allowed, edges
+           are not. Every line below is a [PAPA] DRAFT - Mike edits, and
+           nothing here claims to be final. */
+        { stamp: "Q", title: "Does Weird.Baby make money from this?",
+          line: "No. Not from the song, not from the play, not from the link. " +
+                "There is no ad on this page, no affiliate code in any link, " +
+                "and no cut of anything you buy from the artist. Every " +
+                "commercial door in this exhibit opens onto their shop, not " +
+                "ours.",
+          note: "[PAPA] - the money answer. Tight is the whole point." },
+        { stamp: "Q", title: "Then why does this exist?",
+          line: "Because someone here thinks these records are worth a " +
+                "listen and that pointing at them costs us nothing. That is " +
+                "the entire business model of this wing, and it is not a " +
+                "loss leader for a different one.",
+          note: "[PAPA] - the mission, in the artist's own reading order." },
         { stamp: "Q", title: "Is Weird.Baby affiliated with them?",
           line: "No. Nothing here is endorsed by the artist, nothing here is " +
                 "sold on their behalf, and every link goes to their own place.",
