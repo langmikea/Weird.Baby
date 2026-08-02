@@ -921,15 +921,35 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    of px of scrollHeight it could not scroll to, and the verification of "no
    hidden content" measured the measurer instead of the page. Clipping at the
    stage makes scrollHeight tell the truth again. */
-.stg{display:flex;flex-direction:column;min-height:0;flex:1;overflow:hidden;
+/* `--stg-colgap` is declared HERE, on the element that is always present and
+   never conditional, because the packer in Exhibit.jsx reads it. Putting it on
+   `.stg-2col` would make the packer depend on a class the packer itself sets —
+   see the ordering bug documented at the read site. One number, one home. */
+.stg{--stg-colgap:38px;
+  display:flex;flex-direction:column;min-height:0;flex:1;overflow:hidden;
   padding:clamp(14px,2.2vw,30px);gap:12px}
 .stg-page{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;
   overflow:hidden}
 /* WIDTH BUYS A COLUMN, NOT A LONGER LINE (Mike). column-fill:auto is not a
    style choice - it is the only mode whose flow order matches the packer's. */
-.stg-page.stg-2col,.stg-measure.stg-2col{display:block;column-count:2;
-  column-gap:38px;column-fill:auto;column-rule:1px solid var(--wb-border)}
-.stg-page.stg-2col>*,.stg-measure.stg-2col>*{break-inside:avoid;margin-bottom:12px}
+/* [STAGE FIX 2026-08-02] EXPLICIT COLUMNS, NOT MULTICOL. The packer places
+   every block in a named column, so the page is a flex ROW of flex COLUMNS
+   and there is no browser column algorithm to disagree with. `column-gap` is
+   still the gap the packer reads when it works out a column's width, so the
+   two stay in step by reading the same number. */
+.stg-page.stg-2col{display:flex;flex-direction:row;align-items:stretch;
+  gap:12px var(--stg-colgap);column-gap:var(--stg-colgap)}
+.stg-col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:12px;
+  overflow:hidden}
+/* THE DIVIDER SITS IN THE GAP, NOT ON A COLUMN. A `border-left` plus padding
+   on the second column reduced ITS content width below the `colW` the packer
+   measured at — so the packer's plan was right for a column that no longer
+   existed, and the column clipped by 53px. A pseudo-element in the middle of
+   the page touches neither column's width. Both columns are `flex:1 1 0`, so
+   the 50% line is exactly the centre of the gap. */
+.stg-page.stg-2col{position:relative}
+.stg-page.stg-2col::before{content:"";position:absolute;left:50%;top:0;bottom:0;
+  width:1px;background:var(--wb-border);pointer-events:none}
 /* the measuring layer: laid out for real, shown to no one, touched by no one */
 .stg-measure{position:absolute;left:-99999px;top:0;width:100%;
   visibility:hidden;pointer-events:none;
@@ -972,3 +992,209 @@ body:has(.pb) .ex-root{padding-bottom:88px}
   color:var(--wb-gold)}
 .vp-trail-scent{font-family:'DM Serif Display',Georgia,serif;
   font-size:calc(var(--face-fs) * .8);line-height:1.4;color:var(--wb-gold-lo)}
+
+/* ===========================================================================
+   [M-d 2026-08-02] TRACKLIST — THE KIND MARK AND THE SUB-ROW
+   R-a's naming law made the row TITLES honest nouns. These two rules make the
+   row's KIND explicit beside them, so a title never has to carry "(card)" to
+   be readable, and a card never has to pretend to be a track of its own.
+   =========================================================================== */
+/* the kind mark sits at the row's right edge, in the register the deck already
+   uses for machine-side words: monospace, letterspaced, quiet. It is a LABEL,
+   so it must never out-shout the title it labels. */
+.tl-kind{margin-left:auto;flex:0 0 auto;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--wb-gold-lo);opacity:.72;padding-left:10px;white-space:nowrap}
+.tl-track:hover .tl-kind,.tl-active .tl-kind{opacity:1}
+/* the PLAYING row's mark warms with it — one state, stated once in each place
+   the row expresses state, rather than a second competing signal. */
+.tl-playing .tl-kind{color:var(--wb-gold);opacity:1}
+
+/* A SUB-ROW BELONGS TO THE ROW ABOVE IT. It indents, it draws a rule where its
+   number would be, and it sets its title one step down — three quiet signals
+   that agree, instead of one loud one. */
+/* 42px, not 20px. The first version set 20 — which is EXACTLY what
+   `.tl-track{padding:3px 20px}` already had, so the rule applied cleanly and
+   moved nothing. A value that is not binding is not a fix, and it reports
+   success while changing nothing; measured in the browser before it was
+   believed. */
+.tl-sub{padding-left:42px}
+.tl-sub .tl-title,.tl-sub .tl-tt{font-size:.92em;color:var(--wb-gold-lo)}
+.tl-sub:hover .tl-title,.tl-sub.tl-active .tl-title{color:var(--wb-gold)}
+.tl-subrule{display:inline-block;width:9px;height:1px;background:var(--wb-gold-lo);
+  opacity:.55;vertical-align:middle}
+
+/* ===========================================================================
+   [M-e 2026-08-02] THE BANNER TRANSPORT
+   The player stows into the artist-name bar. `.ex-album-banner-aux` has been an
+   empty flex spacer since it was built; the transport lands in it and costs the
+   page ZERO new vertical pixels — where the fixed `.pb` cost 68 of them whether
+   or not anything was playing.
+   =========================================================================== */
+/* STICKY IS THE HALF OF "STOP FROM ANYWHERE" THAT IS NOT THE ESCAPE KEY.
+   A stop control that scrolls off the top of an 880px viewer is a stop control
+   you have to go and find, which is the complaint. It rides under the fixed
+   `.ex-nav`, so the two never overlap. */
+.ex-banner-console{position:sticky;top:52px;z-index:80;
+  background:var(--wb-bg);border-bottom:1px solid var(--wb-border)}
+.ex-banner-console .ex-album-banner-aux{flex:1;min-width:0;display:flex;
+  align-items:center;justify-content:flex-end;gap:10px}
+
+.bt{display:flex;align-items:center;gap:8px;min-width:0}
+.bt-now{display:flex;align-items:center;gap:7px;min-width:0;margin-right:4px}
+.bt-title{font-family:'Courier Prime','Courier New',monospace;font-size:.62rem;
+  letter-spacing:.08em;color:var(--wb-gold);white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;max-width:22ch}
+.bt-type{font-family:'Courier Prime','Courier New',monospace;font-size:.5rem;
+  letter-spacing:.18em;white-space:nowrap}
+.bt-btn{display:inline-flex;align-items:center;justify-content:center;
+  width:24px;height:24px;padding:0;border:1px solid var(--wb-border-hi);
+  border-radius:50%;background:transparent;color:var(--wb-gold);cursor:pointer;
+  transition:background .15s,color .15s,border-color .15s}
+.bt-btn:hover{background:var(--wb-gold);color:var(--wb-ink);border-color:var(--wb-gold)}
+.bt-btn:focus-visible{outline:2px solid var(--wb-gold);outline-offset:2px}
+/* STOP IS THE ONLY SQUARE IN THE ROW. Play/pause is a toggle; stop is a
+   different verb and ends the performance, so it does not get the same shape.
+   The eye reads the difference before the label does. */
+.bt-stop{border-radius:3px}
+.bt-vol{width:74px;accent-color:var(--wb-gold);cursor:pointer}
+@media (max-width:720px){
+  /* on a phone the transport keeps STOP and play and drops the rest — the
+     floor survives the narrowest screen, which is the whole point of calling
+     it the floor. */
+  .bt-vol{display:none}
+  .bt-title{max-width:11ch}
+  .bt-type{display:none}
+}
+
+/* the vault button: a question mark, because that is the question a museum
+   label always provokes and never has room to answer. */
+.ex-vaultbtn{width:24px;height:24px;flex:0 0 auto;padding:0;border-radius:50%;
+  border:1px solid var(--wb-border-hi);background:transparent;color:var(--wb-gold-lo);
+  font-family:'Courier Prime','Courier New',monospace;font-size:.75rem;
+  line-height:1;cursor:pointer;transition:background .15s,color .15s}
+.ex-vaultbtn:hover,.ex-vaultbtn-on{background:var(--wb-gold);color:var(--wb-ink);
+  border-color:var(--wb-gold)}
+.ex-vaultbtn:focus-visible{outline:2px solid var(--wb-gold);outline-offset:2px}
+
+/* ===========================================================================
+   [C-d 2026-08-02] THE VAULT POPUP
+   =========================================================================== */
+/* IT DOCKS BOTTOM-LEFT, AND THAT IS A CORRECTION.
+   The first version sat bottom-RIGHT and covered the Stage's own page
+   transport — measured, with "Next ›" underneath it. This building has fixed
+   that exact defect twice already (the E4 deck over the tracklist, the X2 drag
+   handle inside the player bar) and the rule that came out of it is: a floating
+   panel never lands on a control.
+   Bottom-left is the one region of this layout that is empty in every state —
+   the tracklist runs seven or nine rows and the column below it is dead space
+   in all four artists. The panel covers nothing because there is nothing
+   there. */
+.fp{position:fixed;left:22px;bottom:22px;z-index:120;width:min(370px,calc(100vw - 44px));
+  background:var(--wb-ink-card);border:1px solid var(--wb-gold-lo);
+  box-shadow:0 18px 44px rgba(0,0,0,.34);padding:14px 16px 12px}
+.fp-head{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  border-bottom:1px solid var(--wb-border);padding-bottom:7px;margin-bottom:10px}
+.fp-eyebrow{font-family:'Courier Prime','Courier New',monospace;font-size:.5rem;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--wb-gold-lo)}
+.fp-x{background:none;border:0;color:var(--wb-gold-lo);font-size:1.05rem;
+  line-height:1;cursor:pointer;padding:0 2px}
+.fp-x:hover{color:var(--wb-gold)}
+.fp-line{font-family:'DM Serif Display',Georgia,serif;font-size:.98rem;
+  line-height:1.36;color:var(--wb-gold);margin:0 0 5px}
+.fp-empty{color:var(--wb-gold-lo);font-style:italic}
+.fp-crumb{font-family:'Courier Prime','Courier New',monospace;font-size:.56rem;
+  letter-spacing:.06em;color:var(--wb-gold-lo);margin:7px 0 0;text-align:right}
+.fp-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin-top:11px;border-top:1px solid var(--wb-border);padding-top:8px}
+.fp-count{font-family:'Courier Prime','Courier New',monospace;font-size:.52rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--wb-gold-lo)}
+.fp-next{background:none;border:1px solid var(--wb-border-hi);color:var(--wb-gold);
+  font-family:'Courier Prime','Courier New',monospace;font-size:.55rem;
+  letter-spacing:.16em;text-transform:uppercase;padding:5px 11px;cursor:pointer}
+.fp-next:hover{background:var(--wb-gold);color:var(--wb-ink);border-color:var(--wb-gold)}
+@media (max-width:720px){
+  /* on a phone it stops being a corner card and becomes a sheet at the foot of
+     the screen — a 370px card floating in a 504px viewport is a modal wearing a
+     popup's clothes. */
+  .fp{left:12px;right:12px;bottom:12px;width:auto}
+}
+
+/* ===========================================================================
+   [C-b/C-c 2026-08-02] THE MUSEUM CARD — MAGAZINE + SIDEBOXES
+   The Stage already sets two columns above 760px and fills the first before the
+   second. So a magazine page is not a new layout engine: it is running text
+   authored as one block and asides authored as their own, flowing after it.
+   Below 760px the stage is one column and the same blocks stack — the phone
+   gets a single-column article, which is what a phone wants.
+   =========================================================================== */
+/* the INTERPRETIVE LABEL: the 75-150 words that say what this is doing here.
+   Set as reading matter, not as a caption. */
+.vp-card-label{display:flex;flex-direction:column;gap:.7em}
+.vp-card-label p{font-family:'DM Serif Display',Georgia,serif;
+  font-size:calc(var(--face-fs) * .92);line-height:1.5;color:var(--wb-gold);
+  max-width:62ch;margin:0}
+
+/* the TOMBSTONE: the factual register. Key left, value right, hairline between
+   rows - the form a museum has used for a century because it is scannable
+   without being read. `data-stage-split` lets it break across pages by ROW,
+   so a long register on a phone pages instead of overrunning. */
+/* THE RULES LIVE ON THE ROW, NOT ON THE CONTAINER — and that is a correction.
+   `data-stage-split` clones the container around EACH row so a long register
+   can page by row. With the hairlines on the container, every clone drew its
+   own top AND bottom rule and a seven-row register read as seven stacked
+   boxes. Measured on Carsie Blanton's card, page 2.
+   A border-top on every row is identical whether the rows are siblings in one
+   `dl` or one-per-clone, which is the only version that survives being split. */
+.vp-tomb{margin:0;padding:0}
+.vp-tomb-row{display:grid;grid-template-columns:minmax(88px,auto) 1fr;gap:12px;
+  padding:5px 0;border-top:1px dotted var(--wb-border)}
+.vp-tomb dt{font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--face-fs) * .58);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--wb-gold-lo);margin:0;padding-top:.15em}
+.vp-tomb dd{font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--face-fs) * .68);line-height:1.45;color:var(--wb-gold);margin:0}
+
+/* the SIDEBOXES: boxed asides. They are what makes it read as a magazine page
+   rather than as a document - a ruled box beside running text is the oldest
+   signal in print for "related, but step out of the sentence to read it". */
+.vp-box{border:1px solid var(--wb-gold-lo);background:var(--wb-ink-soft);
+  padding:11px 13px;break-inside:avoid}
+.vp-box-head{font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--face-fs) * .58);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--wb-gold-lo);margin:0 0 7px;font-weight:400}
+.vp-box-lines{list-style:none;margin:0;padding:0;display:flex;
+  flex-direction:column;gap:5px}
+.vp-box-lines li{font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--face-fs) * .66);line-height:1.45;color:var(--wb-gold)}
+.vp-box-note{font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--face-fs) * .56);line-height:1.5;color:var(--wb-gold-lo);
+  margin:8px 0 0;border-top:1px dashed var(--wb-border);padding-top:6px}
+
+/* ===========================================================================
+   [R-c 2026-08-02] THE SCROLLER IS A STRIP, NOT A HALF.
+   `.fs-wrap{flex:1}` gives the fact scroller an EQUAL SHARE of the right
+   column with the viewer. That was harmless while WAL declared `facts: []` and
+   the scroller never rendered. Wiring the vault turned it on — and measured,
+   it took 448px of an 880px column, halving the frame that the video and the
+   museum card live in. Turning content on should not cost the exhibit half its
+   viewer.
+   O3a already established the principle in the other direction ("an exhibit
+   with no facts does not get a fact scroller"); this is the same principle at
+   the next size down. Two lines and a breadcrumb do not need 448px.
+   SCOPED TO THE STAGED WING so /hr's shipped proportions are untouched —
+   `[data-stage="1"]` is WAL alone today, and /hr is not staged. */
+.ex-root[data-stage="1"] .fs-wrap{flex:0 0 auto;
+  height:clamp(104px,17%,184px);min-height:0}
+
+/* [STAGE FIX 2026-08-02] the transport keeps its space when it has nothing to
+   say. `visibility:hidden` and not `display:none`: the whole point is that the
+   row still occupies its 42px, so the packer's measurement of the page cannot
+   be changed by the packer's own conclusion. Pointer-inert and hidden from the
+   accessibility tree, so nothing is offered that is not there. */
+.stg-tp-idle{visibility:hidden;pointer-events:none}
+
+/* a page with only one column of content keeps the empty column (line length)
+   and drops the rule (a divider beside nothing reads as a fault). */
+.stg-page.stg-2col.stg-1up::before{display:none}

@@ -446,6 +446,18 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
     const s = selectedVis[ti]; return s && s.size === 0;
   }
 
+  /* [M-d 2026-08-02] THE NUMBERS COUNT MARKERS, NOT ARRAY SLOTS.
+     A row's number was `ti + 1` — its index in the array — which was correct
+     only while every row was a numbered thing. Sub-rows (a song's museum card,
+     R-a) are deliberately UNNUMBERED, so index-as-number would have counted
+     them anyway and made every song after the first one carry the wrong number
+     while displaying nothing at the slot that ate it.
+     The map is built once, in order, and only advances on a row that actually
+     shows a number. A wing with no sub-rows gets exactly the numbers it had. */
+  const numberOf = [];
+  let n = 0;
+  album.tracks.forEach((t, i) => { numberOf[i] = t.sub ? null : (n += 1); });
+
   return (
     <ol className="tl-tracks">
       {album.tracks.map((track, ti) => {
@@ -486,12 +498,23 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
                  unexplained emphasis rather than as "this is the one
                  playing". Now it is a named state with a rule of its own. */
               playing   ? "tl-playing"  : "",
+              /* [M-d 2026-08-02] A SUB-ROW BELONGS TO THE ROW ABOVE IT.
+                 Per the trail-marker law a numbered row is a MARKER, and
+                 doubling the markers halves the odds the visitor keeps the one
+                 that matters. So a song's museum card indents under its song
+                 and draws a rule where its number would be: the song is the
+                 marker, the card is one of the trees. */
+              track.sub ? "tl-sub" : "",
             ].filter(Boolean).join(" ")}
             style={isActive ? { borderLeftColor: "#b8974a" } : {}}
             onClick={() => selectable && !skipped && onSelect(ti)}
           >
             <span className="tl-num">
-              {playing ? <NpBars color="#b8974a" /> : String(ti+1).padStart(2,"0")}
+              {playing
+                ? <NpBars color="#b8974a" />
+                : (numberOf[ti] === null
+                    ? <i className="tl-subrule" aria-hidden="true" />
+                    : String(numberOf[ti]).padStart(2, "0"))}
             </span>
             {/* 2026-07-06 Mike: number/title click PLAYS (bubbles to the row).
                 The variant dropdown is a VISIBLE styled select sitting where
@@ -514,6 +537,16 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
             ) : (
               <span className="tl-title">{track.title}</span>
             )}
+            {/* [M-d 2026-08-02] EVERY ROW SAYS WHAT KIND OF THING IT IS.
+                Before this, a tracklist row was legible only by guessing:
+                "Link" and "About" read as titles, a song read as a title, and
+                the only way to know which of them would start a player was to
+                click one and find out. R-a's naming law made the TITLES honest
+                nouns; this makes the KIND explicit beside them, so the title
+                never has to carry "(card)" to be readable.
+                It is DATA — `track.kind` — so a wing that declares none renders
+                none, and /hr, /wb and /robots are byte-identical. */}
+            {track.kind && <span className="tl-kind">{track.kind}</span>}
             {skipped && <span className="tl-skip-mark">skip</span>}
           </li>
         );
@@ -624,6 +657,156 @@ function PlayerBar({ video, track, album, live, onIdlePlay, onSkipBack, onSkipFo
             bar-docked controls in here (HR flow injects Filter + Presets). Empty
             and inert for exhibits that don't use it; adds no height. */}
         <div className="pb-ext-slot" id="hr-bar-slot" />
+      </div>
+    </div>
+  );
+}
+
+// ─── BANNER TRANSPORT ─────────────────────────────────────────────────────────
+/* [M-e 2026-08-02] THE TRANSPORT STOWS INTO THE ARTIST-NAME BAR.
+   Mike's shape, built. The fixed 68px `.pb` was furniture at the viewport floor
+   whether or not anything was playing: it sat on top of the page, it is the
+   standing DECK-SCROLL-OCCLUSION defect, and the census had already measured it
+   eating 11% of a phone screen in the robots wing. But a music wing genuinely
+   needs a transport — so rather than delete it (robots' answer) or keep it
+   (everyone else's), it MOVES into a bar the room already had.
+
+   THE ARTIST-NAME BAR WAS ALREADY THERE AND HALF EMPTY. `.ex-album-banner`
+   carries the album title on the left and has carried an empty
+   `.ex-album-banner-aux` on the right since it was built. The transport lands
+   in the slot that was waiting for it, costs ZERO new vertical space, and
+   travels with the thing it controls instead of floating over it.
+
+   THE THREE TIERS, AS ORDERED:
+     floor        STOP, from anywhere. Sticky bar + the Escape key.
+     plus         play / pause.
+     triple-plus  volume, through the YouTube iframe API.
+   Volume and play/pause were already wired to the YT API by the old bar; what
+   was missing was the floor, which is the one a visitor actually needs.
+
+   OPT-IN BY CONFIG (`transport: "banner"`), never by route sniffing — the same
+   discipline as `bodyKey`, `stage` and `playerBar`. /hr, /wb and /robots
+   declare nothing and are untouched. */
+function BannerTransport({ video, track, live, onStop, onTogglePlay, onSetVolume, getState }) {
+  const [, forceRender] = useState(0);
+  useEffect(() => {
+    if (!live) return;
+    const id = setInterval(() => forceRender(n => n + 1), 500);
+    return () => clearInterval(id);
+  }, [live]);
+
+  /* NOTHING PLAYING MEANS NO TRANSPORT. The old bar rendered an idle preview of
+     what WOULD play, which is a control for a thing that is not happening; in a
+     bar that shares a line with the artist's name it would also be permanent
+     clutter. Silence gets the artist's name and nothing else. */
+  if (!live) return null;
+  const st = getState?.() || { playing: false, muted: false, volume: 100 };
+
+  return (
+    <div className="bt" role="group" aria-label="player">
+      <span className="bt-now">
+        <NpBars color="#b8974a" />
+        <span className="bt-title">{track?.title}</span>
+        {video && (
+          <span className="bt-type" style={{ color: typeColor(video.type) }}>
+            {typeLabel(video.type)}
+          </span>
+        )}
+      </span>
+
+      {/* STOP is FIRST and it is the only square in the row. Play and pause are
+          the same button and it is a toggle; stop is a different verb and gets
+          a different shape, because a control that ends something should not
+          look like the control that suspends it. */}
+      <button className="bt-btn bt-stop" onClick={onStop}
+              title="Stop (Esc)" aria-label="Stop">
+        <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+          <rect x="1" y="1" width="10" height="10" rx="1" fill="currentColor" />
+        </svg>
+      </button>
+
+      <button className="bt-btn" onClick={onTogglePlay}
+              title={st.playing ? "Pause" : "Play"}
+              aria-label={st.playing ? "Pause" : "Play"}>
+        {st.playing ? (
+          <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+            <rect x="2" y="1" width="3" height="10" rx="1" fill="currentColor" />
+            <rect x="7" y="1" width="3" height="10" rx="1" fill="currentColor" />
+          </svg>
+        ) : (
+          <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+            <path d="M2 1L11 6L2 11V1Z" fill="currentColor" />
+          </svg>
+        )}
+      </button>
+
+      <input type="range" className="bt-vol" min="0" max="100"
+             value={st.volume} aria-label="Volume"
+             onChange={e => onSetVolume?.(Number(e.target.value))} />
+    </div>
+  );
+}
+
+// ─── FACT POPUP ───────────────────────────────────────────────────────────────
+/* [C-d 2026-08-02] THE CASE NOTE — and an honest note about what this is.
+   The order says "the /hr popup-factoid feature resurrected". IT IS NOT IN THE
+   LIVE TREE. `grep` across src/ and across the whole git history for "factoid",
+   "popup", "fact tile" and "FactCard" turns up nothing that was ever a popup:
+   /hr's fact surfaces are the inline FactScroller under the player and the
+   living recipe cards on the wall, and STATE.md records the standing ruling
+   that facts NEVER tile the wall. So there is no code to revive, and dressing
+   an invention up as a revival would be the worse of the two errors.
+
+   WHAT IS BUILT INSTEAD is the nearest real thing, named for what it is: a
+   summonable fact, dismissible, drawn from the same vault by the same shipped
+   cycler. It answers the question a museum label always provokes and never has
+   room for — "is there more about this?" — and it answers it about WHATEVER IS
+   IN FRONT OF YOU, because it takes the same climb context the scroller does.
+
+   IT IS OFF UNTIL ASKED FOR. Nothing pops at the visitor. A room that
+   interrupts you with trivia is a room that thinks its facts matter more than
+   its subject. */
+function FactPopup({ facts, ctx, onClose }) {
+  const cyclerRef = useRef(null);
+  const [fact, setFact] = useState(null);
+  const [n, setN] = useState(0);
+
+  useEffect(() => {
+    cyclerRef.current = makeFactCycler({ facts: facts || [], ctx });
+    setFact(cyclerRef.current.next());
+    setN(cyclerRef.current.poolSize());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [facts, ctx && ctx.song, ctx && ctx.album, ctx && ctx.exhibit]);
+
+  useEffect(() => {
+    function onKey(e) { if (e.key === "Escape") onClose(); }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  const parts = fact ? splitFact(fact) : null;
+
+  return (
+    <div className="fp" role="dialog" aria-label="A fact about this">
+      <div className="fp-head">
+        <span className="fp-eyebrow">FROM THE VAULT</span>
+        <button className="fp-x" onClick={onClose} aria-label="Close">&#215;</button>
+      </div>
+      <div className="fp-body">
+        {parts
+          ? parts.quote.map((l, i) => <p className="fp-line" key={i}>{l}</p>)
+          : <p className="fp-line fp-empty">Nothing on file for this one yet.</p>}
+        {parts && parts.breadcrumb && <p className="fp-crumb">{parts.breadcrumb}</p>}
+      </div>
+      <div className="fp-foot">
+        {/* THE POOL SIZE IS SHOWN because a fact with no denominator reads as
+            the only one there is. Saying "one of 68" is what makes the next
+            press worth making. */}
+        <span className="fp-count">{n ? "one of " + n : ""}</span>
+        <button className="fp-next"
+                onClick={() => setFact(cyclerRef.current && cyclerRef.current.next())}>
+          Another &rsaquo;
+        </button>
       </div>
     </div>
   );
@@ -938,7 +1121,8 @@ function InstrumentPanel({ decl }) {
 function Stage({ blocks, deps, footer }) {
   const wrapRef = useRef(null);
   const measRef = useRef(null);
-  const [pages, setPages] = useState([[0, blocks.length]]);
+  /* a page is a LIST OF COLUMNS, each column a [from,to) run of blocks. */
+  const [pages, setPages] = useState([[[0, blocks.length]]]);
   const [pg, setPg] = useState(0);
   const [cols, setCols] = useState(1);
 
@@ -952,7 +1136,61 @@ function Stage({ blocks, deps, footer }) {
          there is genuinely room for two of them side by side. */
       const n = box.width >= 760 ? 2 : 1;
       setCols(n);
-      const avail = Math.max(80, box.height) * n;
+      /* ==== [STAGE FIX 2026-08-02] PACK BY COLUMN, NOT BY PAGE ==============
+         THE BUG, MEASURED. Capacity was budgeted as `height * n` — the total
+         ink a page can hold. That is right only if blocks may straddle a
+         column boundary, and a boxed aside may not: `break-inside: avoid` is
+         the whole point of a box. So a page could be "full" by arithmetic
+         while the browser, unable to split the last block, pushed it into a
+         THIRD column of a two-column box — outside the element, under
+         `overflow:hidden`. Content silently gone.
+         Measured on Carsie Blanton's artist card: page box 1169x613,
+         scrollWidth 1773. A 396px sidebox landed at x=1207 with 234px left in
+         column two. That is exactly the trap this component was built to
+         abolish, arriving sideways.
+         THE FIX IS TO PLAN THE UNIT THE BROWSER ACTUALLY BREAKS ON. Runs are
+         packed to ONE COLUMN each, then grouped n-at-a-time into pages, so no
+         block is ever asked to straddle. And because a greedy browser could
+         still fill a column differently from the plan, the last block of each
+         planned column carries `break-after: column` — the plan is not a hope,
+         it is instructed. */
+      const colH = Math.max(80, box.height);
+
+      /* ==== [STAGE FIX 2026-08-02, part two] MEASURE AT THE REAL WIDTH ======
+         The comment above this component has always claimed the measuring
+         layer is "the same width and the same column geometry as the real
+         page". IT WAS NOT. `.stg-measure` is `position:absolute; width:100%`,
+         which resolves against the STAGE, while `.stg-page` sits inside it
+         with its own padding. Measured: 1229px against 1169px — a 60px lie,
+         and with two columns that is 596px of column against 566px.
+         Narrower columns make text TALLER, so every block measured short: one
+         label block reported 157px and rendered 188px. The packer was solving
+         the right problem with the wrong numbers, which is why its pages had
+         always run a little over.
+         Pinning the width from the page itself makes them identical BY
+         CONSTRUCTION rather than by two CSS rules agreeing, which is the only
+         version that cannot drift. */
+      /* THE GAP COMES FROM A CUSTOM PROPERTY, NOT FROM THE COMPUTED COLUMN-GAP,
+         AND THE REASON IS AN ORDERING BUG THAT COST TWO MEASUREMENTS TO FIND.
+         `column-gap` only has a value once `.stg-2col` is on the element — and
+         that class comes from `cols`, which THIS function sets. So on the first
+         plan after a face changes from one-column to two, the class was not on
+         yet, the gap read as `normal` (0), and colW came out as the whole page
+         width. Blocks measured against a 1169px line instead of a 566px one are
+         far too short, the packer over-filled, and the column clipped by 53px.
+         Re-measuring later fixed it, which is exactly why it looked
+         intermittent.
+         `--stg-colgap` is declared on `.stg`, which is always present and never
+         conditional, so the packer and the stylesheet read ONE number and the
+         plan cannot depend on its own output. */
+      const colGap = parseFloat(
+        getComputedStyle(wrap).getPropertyValue("--stg-colgap")) || 0;
+      const colW = Math.max(80, (wrap.clientWidth - colGap * (n - 1)) / n);
+      if (Math.round(meas.clientWidth) !== Math.round(colW)) {
+        meas.style.width = Math.round(colW) + "px";
+        /* read something back to force the reflow before heights are taken */
+        void meas.offsetWidth;
+      }
       const kids = Array.from(meas.children);
       /* THE GAP IS PART OF THE HEIGHT. The page is a flex column with a gap,
          so N blocks occupy sum(heights) + (N-1)*gap - and the first version
@@ -960,28 +1198,34 @@ function Stage({ blocks, deps, footer }) {
          let the LAST page overrun by exactly that much (measured: 30px on a
          3-block page, 82px on a 7-block one). Counted properly now. */
       const gap = parseFloat(getComputedStyle(meas).rowGap || getComputedStyle(meas).gap || 0) || 0;
-      const out = [];
+      /* ---- pass 1: pack COLUMNS, each of which must hold on its own ---- */
+      const runs = [];
       let start = 0, run = 0;
       kids.forEach((el, i) => {
         const h = el.getBoundingClientRect().height +
                   parseFloat(getComputedStyle(el).marginBottom || 0) +
                   (i > start ? gap : 0);
-        if (h > avail && run === 0) {
-          /* taller than the whole stage: its own page, and we say so */
-          out.push([i, i + 1]);
+        if (h > colH && run === 0) {
+          /* taller than a whole column: its own column, and we say so. The
+             stage still refuses to crop silently — it overruns loudly. */
+          runs.push([i, i + 1]);
           try {
             console.warn("[stage] block " + i + " is " + Math.round(h) +
-              "px and the stage holds " + Math.round(avail) +
-              "px - it gets a page of its own and will overrun. Split it upstream.");
+              "px and a column holds " + Math.round(colH) +
+              "px - it gets a column of its own and will overrun. Split it upstream.");
           } catch (e) { /* console may be absent */ }
           start = i + 1; run = 0;
           return;
         }
-        if (run + h > avail && i > start) { out.push([start, i]); start = i; run = h; }
+        if (run + h > colH && i > start) { runs.push([start, i]); start = i; run = h; }
         else { run += h; }
       });
-      if (start < kids.length) out.push([start, kids.length]);
-      setPages(out.length ? out : [[0, kids.length]]);
+      if (start < kids.length) runs.push([start, kids.length]);
+
+      /* ---- pass 2: n columns make a page ---- */
+      const out = [];
+      for (let c = 0; c < runs.length; c += n) out.push(runs.slice(c, c + n));
+      setPages(out.length ? out : [[[0, kids.length]]]);
     }
     plan();
     const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(plan) : null;
@@ -994,7 +1238,7 @@ function Stage({ blocks, deps, footer }) {
   useEffect(() => { setPg(0); }, [deps]);
   const last = pages.length - 1;
   const cur = Math.min(pg, last);
-  const [from, to] = pages[cur] || [0, blocks.length];
+  const pageCols = pages[cur] || [[0, blocks.length]];
 
   /* the transport is the only navigation, and it is absent when there is
      only one page - a single-page document does not need a page control. */
@@ -1011,15 +1255,67 @@ function Stage({ blocks, deps, footer }) {
 
   return (
     <div className="stg">
-      <div ref={wrapRef} className={"stg-page" + (cols > 1 ? " stg-2col" : "")}>
-        {blocks.slice(from, to)}
+      {/* ==== [STAGE FIX 2026-08-02, part three] THE PACKER OWNS THE COLUMNS ==
+          The page was a CSS multi-column box and the packer was trying to
+          predict what that box would do. It could not: `column-fill:auto`
+          fills greedily, `break-inside:avoid` makes a boxed aside jump rather
+          than split, and the two together push content into a column that does
+          not exist — clipped away under `overflow:hidden`.
+          Two rounds of trying to instruct the browser (a break-after hint, a
+          width correction) each fixed a real defect and still left content
+          lost, because the disagreement was structural: two algorithms were
+          laying out the same page.
+          So there is only one now. The packer already computes exactly which
+          blocks belong in which column; it renders them there. Each column is
+          a plain flex column of its own run, and nothing can overflow into a
+          column that was never planned. The multicol rules are gone with the
+          bug — `column-fill`, `break-inside`, `break-after` and the width
+          reconciliation all existed to referee a negotiation that no longer
+          happens. */}
+      {/* A SHORT PAGE KEEPS ITS COLUMN WIDTH BUT LOSES ITS RULE.
+          The last page of a document — and any document small enough to be one
+          page — often fills only the first column. Two things follow, and they
+          pull in opposite directions:
+            · the empty column must still be THERE, or the surviving column
+              stretches to the full width and the line length doubles, which is
+              precisely the "width buys a column, not a longer line" ruling
+              being broken by its own layout;
+            · the divider must NOT be there, because a full-height rule with
+              nothing to the right of it reads as a fault rather than as a
+              column that ran out.
+          So the page is padded to `cols` columns and the rule is dropped. */}
+      <div ref={wrapRef} className={"stg-page" +
+             (cols > 1 ? " stg-2col" : "") +
+             (pageCols.length < 2 ? " stg-1up" : "")}>
+        {Array.from({ length: Math.max(cols, pageCols.length) }, (_, ci) => {
+          const r = pageCols[ci];
+          return (
+            <div className="stg-col" key={ci}>
+              {r ? blocks.slice(r[0], r[1]) : null}
+            </div>
+          );
+        })}
       </div>
       {/* the measuring layer: same width, same columns, never seen, never
           reachable by pointer or by a screen reader. */}
       <div ref={measRef} className={"stg-measure" + (cols > 1 ? " stg-2col" : "")}
            aria-hidden="true">{blocks}</div>
-      {many && (
-        <nav className="stg-tp">
+      {/* ==== [STAGE FIX 2026-08-02, part four] THE TRANSPORT ALWAYS HOLDS ITS
+          GROUND, and this is the last of the four and the one that was really
+          doing the damage.
+          The transport used to render only when there was more than one page.
+          So the packer measured a page 667px tall, decided the document needed
+          three pages, and THE ACT OF DECIDING added a 42px control that shrank
+          the page it had just measured to 613. Planned content 666 against a
+          613 box: 53px clipped, every time a single-page face was followed by
+          a multi-page one. A plan invalidated by its own output.
+          The row is now always in the flow and merely goes invisible when
+          there is one page — so nothing is shown that is not needed, which is
+          what the ruling actually asks, while the geometry stops moving under
+          the measurement. */}
+      {(
+        <nav className={"stg-tp" + (many ? "" : " stg-tp-idle")}
+             aria-hidden={many ? undefined : "true"}>
           <button className="stg-step" disabled={cur === 0}
                   onClick={() => setPg(p => Math.max(0, p - 1))}>&lsaquo; Back</button>
           <span className="stg-cnt">
@@ -1129,6 +1425,8 @@ export default function Exhibit({ artist }) {
   const [openEntry, setOpenEntry] = useState(null);
   /* [L2] which recipe is selected; index, reset when the track changes. */
   const [recipeIdx, setRecipeIdx] = useState(0);
+  /* [C-d] the vault popup is CLOSED until asked for. See FactPopup. */
+  const [factOpen, setFactOpen] = useState(false);
   const bodyResizable = !!artist.bodyKey;
   const mainRef = useRef(null);
 
@@ -1201,6 +1499,44 @@ export default function Exhibit({ artist }) {
     return () => document.removeEventListener("keydown", onKey);
   }, [active]);
 
+  /* ── [M-e 2026-08-02] STOP — THE FLOOR OF THE TRANSPORT ───────────────────
+     THE ONE CONTROL THE WING DID NOT HAVE. The bar could play, pause, skip and
+     mute; it could not STOP. Those are not the same verb. Pause leaves a video
+     mounted, holding the frame, one stray click from resuming; stop ends the
+     performance and gives the room back.
+     THIS IS THE ONLY STOP IN THE FILE. M-b's walk-away path had grown its own
+     copy of this sequence inline, and two copies of "how to stop" is exactly
+     how one of them ends up missing a line — so that path now calls this, and
+     there is one definition of what stopping means.
+     IT PAUSES BOTH TRANSPORTS FIRST, and that ordering is load-bearing: the
+     YouTube iframe is a PERSISTENT HOST, mounted once and reused, so clearing
+     the React state alone would hide the picture and leave it audible behind
+     the page. Silence first, then forget. */
+  const stopPlayback = useCallback(() => {
+    try { yt.pause(); } catch { /* the player may not be mounted yet */ }
+    try { audio.pause(); } catch { /* this wing may have no audio transport */ }
+    playQueueRef.current = [];
+    loopSeedRef.current = [];
+    queueAlbumRef.current = null;
+    playingNowRef.current = { ai: null, ti: null, vi: null };
+    setPlayingAlbum(null); setPlayingTrack(null); setPlayingVideo(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /* STOP FROM ANYWHERE, and "anywhere" is meant literally. The banner control
+     is sticky so it never scrolls off, and Escape stops from wherever the
+     visitor's hands already are — including with focus inside the tracklist,
+     which is where they will be. A player you cannot silence without hunting
+     for the button is the complaint that produced this. */
+  useEffect(() => {
+    function onKey(e) {
+      if (e.key !== "Escape") return;
+      stopPlayback();
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [stopPlayback]);
+
   // ── Track selection ───────────────────────────────────────────────────────
   function handleTrackSelect(albumIdx, ti) {
     const track  = SPINE[albumIdx].tracks[ti];
@@ -1231,13 +1567,15 @@ export default function Exhibit({ artist }) {
          the state hides the picture, but the YouTube iframe is a PERSISTENT
          HOST - it is mounted once and reused - so dropping the state left it
          alive and audible behind the page the visitor had just opened.
-         Measured: after navigating away the face rendered correctly and the
-         iframe was still there. Pausing both transports is what makes
-         "walked away" mean "stopped". */
-      try { yt.pause(); } catch { /* not mounted yet */ }
-      try { audio.pause(); } catch { /* no audio transport */ }
-      setPlayingAlbum(null); setPlayingTrack(null); setPlayingVideo(null);
-      playQueueRef.current = [];
+         [M-b PROVEN 2026-08-02] The open question from the previous round is
+         closed: at the centre of the video frame, elementsFromPoint returns
+         the FACE's stage - not the iframe. Both are position:absolute inset:0
+         with z-index auto inside `.vp-inner`, so paint order is DOM order, and
+         the face is the later sibling with an opaque ground. It is STOWED
+         BEHIND, not covering. Screenshot and hit-test both on the record.
+         [M-e] The sequence itself now lives in stopPlayback() — one stop, so
+         walking away and pressing STOP cannot drift apart. */
+      stopPlayback();
       setOpenEntry(null);         /* [M5] a new track opens on its index */
       setRecipeIdx(0);            /* [L2] and its selector at the top entry */
       return;
@@ -1450,6 +1788,22 @@ export default function Exhibit({ artist }) {
       }
     : null;
 
+  /* [M-e / C-d 2026-08-02] the two per-wing switches, read once and named, so
+     the render below asks a question rather than restating a condition. */
+  const bannerTransport = artist.transport === "banner";
+  const hasFacts = Array.isArray(FACTS) && FACTS.length > 0;
+  /* The popup's climb context is the track the visitor is LOOKING at, not the
+     one that happens to be playing — the button says "about what you are
+     looking at" and it has to mean it. `useMemo` because a fresh object every
+     render would rebuild the cycler every render and reset the walk. */
+  const factCtx = React.useMemo(() => ({
+    song: activeTrack !== null ? (album.tracks[activeTrack]?.song ?? null) : null,
+    album: album.tag ?? null,
+    eraSlugs: artist.eraAlias?.[album.id] ?? [],
+    exhibit: artist.exhibitSlug ?? null,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), [activeTrack, album.id, album.tag, artist.exhibitSlug]);
+
   const thumbTrack = activeTrack !== null ? album.tracks[activeTrack] : album.tracks.find(t => t.videos.length > 0);
   const thumbVid   = thumbTrack?.videos?.[0];
   const hasVideo   = curVideo !== null;
@@ -1594,9 +1948,34 @@ export default function Exhibit({ artist }) {
         </div>
 
         {/* MAIN TWO-COLUMN AREA */}
-        <div className="ex-album-banner">
+        {/* [M-e 2026-08-02] THE BANNER IS NOW A CONSOLE, WHERE THE ARTIST ASKS
+            FOR ONE. `ex-album-banner-aux` has been an empty flex spacer since
+            it was built; the transport and the vault control move into it, so
+            the wing gains two controls and zero pixels of height. Wings that
+            declare no `transport` render the identical empty div. */}
+        <div className={"ex-album-banner" + (bannerTransport ? " ex-banner-console" : "")}>
           <div className="ex-album-banner-title">{album.title}</div>
-          <div className="ex-album-banner-aux" />
+          <div className="ex-album-banner-aux">
+            {bannerTransport && (
+              <>
+                <BannerTransport
+                  video={curVideo} track={curTrack} live={pbLive}
+                  onStop={stopPlayback}
+                  onTogglePlay={isAudioSrc ? audio.togglePlay : yt.togglePlay}
+                  onSetVolume={isAudioSrc ? audio.setVolume : yt.setVolume}
+                  getState={isAudioSrc ? audio.getState : yt.getState}
+                />
+                {hasFacts && (
+                  <button className={"ex-vaultbtn" + (factOpen ? " ex-vaultbtn-on" : "")}
+                          onClick={() => setFactOpen(v => !v)}
+                          aria-pressed={factOpen}
+                          title="A fact about what you are looking at">
+                    ?
+                  </button>
+                )}
+              </>
+            )}
+          </div>
         </div>
         {/* [X2] `flex:1` is what FORCED the height. When the artist opts in,
             an explicit height replaces it and the drag owns the number. */}
@@ -1770,6 +2149,63 @@ export default function Exhibit({ artist }) {
                             </figure>
                           )}
                         </div>
+                        {/* ==== [C-b/C-c 2026-08-02] THE MUSEUM CARD ==========
+                            R-a's finding, built. A museum has TWO labels for an
+                            object and they are not interchangeable:
+                              · the TOMBSTONE — the factual register. Maker,
+                                date, medium, credit line. It does not change
+                                when the object moves rooms.
+                              · the INTERPRETIVE (extended) LABEL — 75–150 words
+                                of what it is doing HERE. It does change, because
+                                it is written for this exhibition.
+                            The shipped face already had both halves and did not
+                            know their names: `lines` was the tombstone, `blurb`
+                            was the interpretive label. Naming them is what let
+                            them be laid out as what they are.
+
+                            MAGAZINE + SIDEBOXES, AND THE STAGE ALREADY DID IT.
+                            The Stage sets two columns at >=760px and fills the
+                            first before the second. Running text with boxed
+                            asides flowing after it IS a magazine page — so the
+                            card is authored as SEPARATE TOP-LEVEL BLOCKS rather
+                            than as one grid. One grid would have been a single
+                            indivisible slab that the stage could only warn about
+                            and overrun; separate blocks page properly on a
+                            phone. The layout is a consequence of the packing
+                            model instead of a fight with it. */}
+                        {/* `data-stage-split` ON THE LABEL, and it is not
+                            cosmetic. Authored as ONE block, a three-paragraph
+                            interpretive label is a single indivisible slab: the
+                            packer cannot fit it after the head in column one,
+                            so it drops the whole thing into column two and
+                            leaves two-thirds of column one empty. Measured on
+                            Carsie Blanton's card — a page that was half white.
+                            Split by paragraph, the same words flow and fill,
+                            which is what a magazine column does. */}
+                        {activeFace.label && (
+                          <div className="vp-card-label" data-stage-split="row">
+                            {(Array.isArray(activeFace.label) ? activeFace.label : [activeFace.label])
+                              .map((p, i) => <p key={i}>{p}</p>)}
+                          </div>
+                        )}
+                        {Array.isArray(activeFace.tombstone) && activeFace.tombstone.length > 0 && (
+                          <dl className="vp-tomb" data-stage-split="row">
+                            {activeFace.tombstone.map((row, i) => (
+                              <div className="vp-tomb-row" key={i}>
+                                <dt>{row.k}</dt><dd>{row.v}</dd>
+                              </div>
+                            ))}
+                          </dl>
+                        )}
+                        {Array.isArray(activeFace.sideboxes) && activeFace.sideboxes.map((b, i) => (
+                          <aside className="vp-box" key={i}>
+                            <h4 className="vp-box-head">{b.title}</h4>
+                            <ul className="vp-box-lines">
+                              {(b.lines || []).map((l, j) => <li key={j}>{l}</li>)}
+                            </ul>
+                            {b.note && <p className="vp-box-note">{b.note}</p>}
+                          </aside>
+                        ))}
                         {Array.isArray(activeFace.lines) && activeFace.lines.length > 0 && (
                           <ul className="vp-face-lines">
                             {activeFace.lines.map((l, i) => <li key={i}>{l}</li>)}
@@ -1872,8 +2308,18 @@ export default function Exhibit({ artist }) {
                             SCENT - why following it is worth the click. The
                             trail is data on the face like everything else, so
                             a wing that declares none renders none. */}
+                        {/* `data-stage-split` because a trail is a LIST, and a
+                            list authored as one block is the exact case the
+                            stage warns about and overruns. Measured on the
+                            Lately face, whose trail is eleven uploads: 63px
+                            past the bottom of its column. The stage's own
+                            instruction for that is "split it into smaller
+                            blocks upstream" — this is upstream. The rules are
+                            on the rows rather than the container, so a trail
+                            broken across pages looks identical to one that is
+                            not. */}
                         {Array.isArray(activeFace.trail) && activeFace.trail.length > 0 && (
-                          <ul className="vp-trail">
+                          <ul className="vp-trail" data-stage-split="row">
                             {activeFace.trail.map((t, i) => (
                               <li key={i}>
                                 <button className="vp-trail-go"
@@ -2024,7 +2470,12 @@ export default function Exhibit({ artist }) {
             `playerBar:false` gets none. The music wings declare nothing and
             keep theirs exactly as it was; the per-setting redesign is a
             future pass and is not attempted here. */}
-        {artist.playerBar !== false && (
+        {/* [M-e 2026-08-02] AND THE FIXED BAR STANDS DOWN WHERE THE BANNER
+            TOOK OVER. Rendering both would be two transports disagreeing about
+            the same player, and would put the thing that was moved back on top
+            of the thing it was moved out of. `playerBar:false` still works on
+            its own for a wing with no transport at all (robots). */}
+        {artist.playerBar !== false && !bannerTransport && (
         <PlayerBar
           video={pbVideo} track={pbTrack} album={pbAlbum}
           live={pbLive} onIdlePlay={onIdlePlay}
@@ -2035,6 +2486,12 @@ export default function Exhibit({ artist }) {
           onSetVolume={isAudioSrc ? audio.setVolume : yt.setVolume}
           getState={isAudioSrc ? audio.getState : yt.getState}
         />)}
+
+        {/* [C-d 2026-08-02] THE VAULT POPUP. Mounted last so it lays over the
+            room, and only when the visitor has asked for it. */}
+        {factOpen && hasFacts && (
+          <FactPopup facts={FACTS} ctx={factCtx} onClose={() => setFactOpen(false)} />
+        )}
 
         {/* EXHIBIT FLOW — optional, only rendered if artist provides one.
             playingTrack carries the live player identity as stable ids
