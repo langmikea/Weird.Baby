@@ -131,8 +131,15 @@ const ARTISTS = [
       { title: "Cooler", ytId: "KMo-TKhW5VY",
         note: "Confirmed by oEmbed: Mikey Mike - Cooler [Official Lyric Video], Mikey Mike channel." },
     ],
-    site: null,
-    siteNote: "No official artist site confirmed \u2014 several unrelated acts " +
+    /* [L1 2026-08-02] HE HAS A VERIFIED HOME NOW, from an unfakeable
+       direction: oEmbed returns the UPLOADING channel for a video, and the
+       uploader of "Mikey Mike - Doin' Me (Official Video)" is
+       @findmikeymike. That is the channel verified BY THE UPLOAD rather than
+       by a search ranking - which is exactly what was missing when this
+       entry had to leave the door shut. */
+    site: "https://www.youtube.com/@findmikeymike",
+    siteLabel: "his channel",
+    siteNote: "No website or store confirmed \u2014 several unrelated acts " +
               "share this name, and picking the wrong one is worse than " +
               "leaving the door shut. [PAPA] supplies it.",
     shop: null,
@@ -143,6 +150,7 @@ const ARTISTS = [
       "KNOWN FOR   \u201cDoin' Me\u201d (2017)",
       "MADE WITH   Rick Rubin",
       "HEARD IN    a Canon advert \u2014 how most people met the song",
+      "CHANNEL     @findmikeymike - verified from his own upload",
       "ON FILE     little else that could be verified",
     ],
     aboutNote: "The thinnest entry in the wing, and it says so. What is here " +
@@ -193,6 +201,7 @@ const ARTISTS = [
       "\u201994               from Crooked Home; the single art is a childhood " +
       "photo of Hunter and Nick",
       "TAUGHT US        every pattern the other wings inherited",
+      "BENCH            78 songs on file; 2 surfaced here",
     ],
     aboutNote: "Sourced from the museum's own foundation export rather than " +
                "from the open web \u2014 he is our artist and this is our record " +
@@ -222,7 +231,13 @@ const ARTISTS = [
     siteLabel: "wellesmusic.com",
     shop: { label: "Shop", url: "https://jessewelles.redstarmerch.com/" },
     tickets: { label: "Tour & tickets", url: "https://www.wellesmusic.com/tour" },
-    channel: "https://www.youtube.com/channel/UCmb7zAvq9IxHi_UnP93AVSQ",
+    /* [L1 2026-08-02] CORRECTED. This carried a /channel/UCmb7... URL taken
+       from a SEARCH RESULT. The channel that actually uploaded his official
+       video - per oEmbed author_url - is @hellswelles. They may well be the
+       same channel under a handle and an id, but that was never confirmed,
+       and an unconfirmed equivalence is not a fact. The old id is kept in
+       docs/WAL_LINK_LEDGER.md as UNVERIFIED so it is not reinstated. */
+    channel: "https://www.youtube.com/@hellswelles",
     /* [W4] Sources: Wikipedia (birth name, birthplace, prior monikers),
        Rolling Stone's profile, Farm Aid coverage of the Dave Matthews
        introduction. Only what those state. */
@@ -232,6 +247,7 @@ const ARTISTS = [
       "ALSO        has recorded as Welles and as Jeh Sea Wells",
       "WRITES      topical songs, released fast and often",
       "NOTED BY    Dave Matthews, introducing him at Farm Aid",
+      "CHANNEL     @hellswelles - verified from his own upload",
     ],
     aboutNote: "[PAPA] \u2014 the voice. The facts are checked; how warmly the " +
                "house talks about him is Mike's.",
@@ -251,7 +267,9 @@ const ARTISTS = [
     site: "https://www.carsieblanton.com",
     siteLabel: "carsieblanton.com",
     shop: { label: "Shop", url: "https://www.carsieblanton.com/shop/" },
-    channel: "https://music.youtube.com/playlist?list=PLbY5r0VuZYArGmGD4HWrvtcx8YDFzjCXn",
+    /* [L1] the verified channel (oEmbed author_url of her own BE GOOD lyric
+       video) rather than the search-found playlist. */
+    channel: "https://www.youtube.com/@CarsieBlanton",
     /* MIKE'S RULING, KEPT: her Bandcamp streams the catalogue free and
        without advertising and pays her directly, so it stays the NAMED better
        listen rather than being buried under a video. */
@@ -264,6 +282,7 @@ const ARTISTS = [
       "\u201cBe Good\u201d      a call to love your neighbour, plainly meant",
       "\u201cShit List\u201d    second single from Love & Rage",
       "RECENT         Everything is Great, with The Burning Hell",
+      "CHANNEL        @CarsieBlanton - verified from her own upload",
       "BEST LISTEN    Bandcamp \u2014 free, no ads, pays her directly",
     ],
     aboutNote: "[PAPA] \u2014 the voice.",
