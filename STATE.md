@@ -19,6 +19,54 @@ Paid for by the 2026-06-17 derived-era incident: charging into the problem in fr
 
 Ops work takes top priority, based on the Ops need in the moment.
 
+## THE SPOTLIGHT DOCTRINE (Mike, 2026-08-02 — standing, governs WAL and any celebration wing)
+
+The museum is THE FRAME — it neither detracts nor distracts; done right it
+enables the art to reach full potential. THE ARTISTS BRING THE COLOR — their
+photos, videos and thumbnails ARE the color. WAL is NOT held to the robots
+wing's technical voice; it is a colorful celebration. Set the stage, drop the
+house lights, cue the music, spotlight — the only place to look. Cecil B.
+energy. (The B&W site law does NOT apply to WAL — W8.)
+
+## SEALED 2026-08-02 — WAL SPOTLIGHT ROUND (v32; commit + push this session, DEPLOY IS MIKE'S — mirror/deploy pending)
+
+Mike's glass session on the finished wing, W1–W10, autonomous Code-lane round.
+Full round log + interpretation flags: `docs/WAL_SPOTLIGHT_LOG-20260802.md`.
+
+- **W1 video persistence**: navigation no longer stops the player (supersedes
+  v30's M-b walk-away stop). A face lays OVER the running video — visual-only
+  stow, audio continues, same iframe (element-identity proven in the lap);
+  stopping is the transport's STOP, Escape, or queue end.
+- **W10 tracklist**: Mike's category set verbatim — Coconuts (header over the
+  numbered songs) / E. D. Yadah (the doors out) / About the Songs / About the
+  Artist / What they are up to. Gift-shop row removed (title bar keeps the
+  shop); the indented song-card sub-rows died. THREE INTERPRETATIONS FLAGGED
+  for Mike in the data file + round log (Coconuts=songs; Yadah=links;
+  up-to=feed+tour).
+- **W7 flat**: WAL retires the staged pager + fixed body height
+  (`faceFlow:"flat"`); faces run full length in the page's own flow, zero
+  internal scrolling (measured 0 hidden px on every face, phone + desktop).
+  The no-scroll law survives as "no inner scroll traps; the document scrolls".
+  /robots keeps its stage.
+- **W4 buttons**: root cause found + fixed — face `action` events carried no
+  `href`, so every WAL door was dead while trail rows worked. Buttons redesigned
+  to the spotlight register (marquee doors, lit left rule).
+- **W2/W3 color via embeds**: cued songs show the video's own poster frame
+  (maxres→hq); "What they are up to" is a glued-up tilted COLLAGE of the
+  artist's own thumbnails, every tile opens the video.
+- **W8 crayons**: real artist imagery vaulted at `public/images/wal/` (4 covers
+  + 2 plates), provenance per image in `docs/WAL_PHOTO_PROVENANCE-20260802.md`,
+  ALL PENDING Mike's permit-or-deny emails before go-live. Gift-shop WAL
+  banners ride the same art (FLAGGED-FOR-ART closed).
+- **W5**: money talk is off the artists' stages (lives in /booth's FAQ).
+  **W9**: no HRRW — every /hr pointer removed from WAL; HR is a WAL artist
+  served from our vault; his door out is hunterroot.com.
+- **W6**: stage goes dark via a scoped token re-pin on `.ex-right` (the .pb
+  projection-booth mechanism); frame quiet, imagery lit.
+- Gates: lint at HEAD baseline (11 err/10 warn, all pre-existing), vite build
+  green, /hr /wb /robots /shop verified unregressed, browser lap phone+desktop
+  with zero console errors.
+
 ## LIVE (deployed, verified)
 
 - Site: https://weird.baby — LIVE and CURRENT. Last deploy version `b89cfb91` (wrangler 4.81.1), 2026-07-07 (FactScroller re-plumb; verified via deploy output + Ops live Chrome checks: recipe cards cycle vault facts, credits right-aligned, no fact tiles on the wall, scroll-to-bottom clears the player bar).

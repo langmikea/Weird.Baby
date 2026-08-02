@@ -84,7 +84,10 @@ export default function GiftShop() {
   const walEntries = worthAListenArtists.map((a) => ({
     id: "wal-" + a.id,
     name: a.name,
-    image: null,                       /* FLAGGED FOR ART */
+    /* [W8 2026-08-02] the flag is closed: the WAL wing vaulted each artist's
+       own public face (provenance in docs/WAL_PHOTO_PROVENANCE-20260802.md),
+       and the shop banner rides the same asset. */
+    image: a.art || null,
     storeUrl: (a.shop && a.shop.url) ||
               (a.listen && a.listen.url) ||
               (a.site && a.site.startsWith("http") ? a.site : null),

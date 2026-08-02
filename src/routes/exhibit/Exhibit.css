@@ -1198,3 +1198,114 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 /* a page with only one column of content keeps the empty column (line length)
    and drops the rule (a divider beside nothing reads as a fault). */
 .stg-page.stg-2col.stg-1up::before{display:none}
+
+/* ===========================================================================
+   [W1–W10 2026-08-02] WORTH A LISTEN — THE SPOTLIGHT ROUND
+   THE DOCTRINE (Mike, W6): the museum is THE FRAME — it neither detracts nor
+   distracts; done right it enables the art to reach full potential. The
+   ARTISTS BRING THE COLOR — their photos, videos and thumbnails ARE the
+   color. Set the stage, drop the house lights, cue the music, spotlight.
+   Everything below is scoped to the flat wing ([data-flat="1"]) or the WAL
+   wing ([data-exhibit="wal"]); /hr, /wb and /robots render byte-identically.
+   =========================================================================== */
+
+/* ---- [W7] THE FLAT FLOW — no internal scrolling anywhere ------------------
+   The staged frame (fixed height, paginated faces) is retired for this wing.
+   The body takes its natural height, every face runs full length in the
+   page's own flow, and the DOCUMENT is the one thing that scrolls — which is
+   ordinary reading, not a scroll trap; the Stage's no-scroll law survives in
+   that reading. */
+.ex-root[data-flat="1"] .ex-main{overflow:visible}
+.ex-root[data-flat="1"] .ex-main-inner{height:auto}
+.ex-root[data-flat="1"] .ex-left{overflow:visible;padding-bottom:0}
+.ex-root[data-flat="1"] .ex-right{overflow:visible}
+
+/* THE AREA'S TWO STATES. A 16:9 picture frame when the wing is showing a
+   video or the cued song's poster; STOWED when a face is shown — the frame
+   yields its height to the face's own flow while the iframe underneath stays
+   mounted and audible (W1: the stow is visual-only). */
+.ex-root[data-flat="1"] .vp-area{position:relative;flex:0 0 auto;min-height:0;height:auto}
+.ex-root[data-flat="1"] .vp-area-flat:not(.vp-area-stowed){aspect-ratio:16/9}
+/* `container-type:size` on .vp-inner is right for the staged wings (it feeds
+   the cqh type scale) and FATAL in static flow: size containment ignores the
+   children, so an auto-height inner would collapse to zero. The flat wing
+   reads its type off the viewport instead. */
+.ex-root[data-flat="1"] .vp-inner{container-type:normal}
+.ex-root[data-flat="1"] .vp-area-stowed .vp-inner{position:static}
+/* the face joins the page flow at full length — and it is RELATIVE, not
+   static, because the iframe behind it is absolutely positioned and would
+   otherwise paint on top; a positioned face with a z-index and the opaque
+   house ground is what makes the stow visual-only rather than a fight. */
+.ex-root[data-flat="1"] .vp-face{position:relative;inset:auto;z-index:4;overflow:visible}
+.ex-root[data-flat="1"] .vp-face-body{overflow:visible;height:auto}
+/* the scroller strip keeps its strip proportions under an auto-height column */
+.ex-root[data-flat="1"] .fs-wrap{flex:0 0 auto;min-height:120px}
+
+/* ---- [W10] THE SECTION HEADER — "Coconuts" over the numbers --------------- */
+.tl-header{list-style:none;padding:16px 20px 5px;cursor:default;user-select:none;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:.62rem;
+  letter-spacing:.34em;text-transform:uppercase;color:var(--wb-gold-lo)}
+
+/* ---- [W6] HOUSE LIGHTS DOWN — the WAL stage goes dark ---------------------
+   The paper ground is the museum's print stock and it is right for documents;
+   a spotlight wing wants a dark house so the artists' imagery is the only
+   bright thing in the room. Content vivid, frame quiet.
+   HOW: a scoped token re-pin, exactly the .pb / projection-booth mechanism
+   ("screens are dark", 2026-06-07) — the album-page palette maps --wb-ink to
+   paper, so the stage re-pins the ramp inside its own column and every face,
+   register, trail and fact line flips to light-on-dark without touching a
+   single component rule. The tracklist and nav stay on the house paper: the
+   FRAME is the museum's; the STAGE is dark; the imagery is the light. */
+[data-exhibit="wal"] .ex-right{
+  --wb-ink:#121110;--wb-ink-soft:#1e1c1a;--wb-ink-card:#1a1918;--wb-ink-card-hi:#242220;
+  --wb-border:#3b3831;--wb-border-hi:#57544d;
+  --wb-gold:#e8e4d8;--wb-gold-hi:#ffffff;--wb-gold-lo:#a5a094;--wb-gold-mute:#8a857a;
+  --wb-dim:#cfcbc0;
+  background:var(--wb-ink)}
+/* the B&W site law does NOT apply to WAL (W8) — plates keep their color. */
+[data-exhibit="wal"] .vp-face-still{filter:none;max-width:min(100%,420px)}
+[data-exhibit="wal"] .vp-poster img{filter:none}
+
+/* ---- [W4b] BUTTONS IN THE SPOTLIGHT REGISTER ------------------------------
+   The trail rows are the wing's working buttons (every one now actually
+   opens its door — W4a). They read as marquee doors: a lit left rule, a
+   raised card, the label in the display face — visible without shouting
+   over the imagery. */
+[data-exhibit="wal"] .vp-trail{gap:7px;padding:4px 0}
+[data-exhibit="wal"] .vp-trail-go{border:1px solid var(--wb-border-hi);
+  border-left:3px solid #b8974a;background:rgba(255,255,255,.03);
+  padding:12px 16px;margin:0;
+  transition:background .16s,border-color .16s,transform .12s}
+[data-exhibit="wal"] .vp-trail-go:hover,
+[data-exhibit="wal"] .vp-trail-go:focus-visible{background:rgba(184,151,74,.14);
+  border-color:#b8974a;transform:translateX(3px)}
+[data-exhibit="wal"] .vp-trail-label{font-family:'Syne',sans-serif;font-weight:800;
+  font-size:calc(var(--face-fs, 1rem) * .74);letter-spacing:.12em}
+[data-exhibit="wal"] .vp-trail-label::after{content:"  ↗";color:#b8974a}
+
+/* ---- [W2] THE COLLAGE — glued up, tilted, the artists' own pictures -------
+   White paper mats on the dark stage, each at its own small angle with a
+   real shadow: a poster wall, not a listing. Hover squares the tile up and
+   lifts it — the spotlight lands on the one under the hand. The hqdefault
+   poster frames are 4:3 with baked letterbox bars; the 16:9 crop trims the
+   bars off. */
+.vp-collage{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:20px 16px;padding:12px 6px 8px}
+.vp-collage-tile{position:relative;display:block;border:0;cursor:pointer;
+  background:#f3efe6;padding:8px 8px 10px;
+  transform:rotate(var(--tilt,0deg));
+  box-shadow:0 7px 20px rgba(0,0,0,.5);
+  transition:transform .18s cubic-bezier(.2,.8,.3,1),box-shadow .18s}
+.vp-collage-tile:hover,.vp-collage-tile:focus-visible{transform:rotate(0deg) scale(1.05);
+  box-shadow:0 14px 34px rgba(0,0,0,.65);z-index:2;outline:none}
+.vp-collage-tile img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.vp-collage-cap{display:flex;flex-direction:column;gap:2px;padding-top:7px;text-align:left}
+.vp-collage-date{font-family:'Courier Prime',monospace;font-size:.56rem;
+  letter-spacing:.12em;color:#57544d}
+.vp-collage-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.72rem;
+  line-height:1.3;color:#211f1c;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+@media (max-width:720px){
+  .vp-collage{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px 10px}
+  .tl-header{padding:14px 16px 4px}
+}

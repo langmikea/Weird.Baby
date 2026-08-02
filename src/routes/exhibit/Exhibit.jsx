@@ -456,11 +456,21 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
      shows a number. A wing with no sub-rows gets exactly the numbers it had. */
   const numberOf = [];
   let n = 0;
-  album.tracks.forEach((t, i) => { numberOf[i] = t.sub ? null : (n += 1); });
+  /* [W10 2026-08-02] header rows are section labels and `unnumbered` rows
+     are categories, not tracks — neither consumes a number. Only the songs
+     count, which is what makes the numbers mean "song" again. */
+  album.tracks.forEach((t, i) => { numberOf[i] = (t.sub || t.header || t.unnumbered) ? null : (n += 1); });
 
   return (
     <ol className="tl-tracks">
       {album.tracks.map((track, ti) => {
+        /* [W10 2026-08-02] A HEADER ROW IS A SECTION LABEL, NOT A TRACK.
+           It is data (`track.header`), so a wing that declares none renders
+           none and /hr, /wb and /robots are byte-identical. Inert: no click,
+           no number, no hover state. */
+        if (track.header) {
+          return <li key={ti} className="tl-header">{track.title}</li>;
+        }
         const hasVids  = track.videos.length > 0;
         /* [X3 2026-07-30] A FACE MAKES A ROW SELECTABLE. There were TWO gates
            on a video-less row, not one: Exhibit's handleTrackSelect bailed
@@ -1359,6 +1369,19 @@ function StageChildren({ children, deps, footer }) {
   return <Stage blocks={blocks} deps={deps} footer={footer} />;
 }
 
+/* [W7 2026-08-02] THE FLAT ALTERNATIVE TO THE STAGE — one column, full
+   length, in the page's own flow. Mike's ruling for WAL: the stacked, paged
+   cards were classy but a barrier to exploration; each face is now FLAT with
+   the full page length available and NO internal scrolling. The Stage's
+   no-scroll LAW survives in its only honest reading — there is still no
+   inner scroll trap anywhere; the DOCUMENT is the one thing that scrolls,
+   which is ordinary reading, not a trap. The same children render in both
+   modes, so a wing switching frames rewrites nothing. */
+function FaceFlow({ flat, children, deps, footer }) {
+  if (flat) return <div className="vp-flat">{children}</div>;
+  return <StageChildren deps={deps} footer={footer}>{children}</StageChildren>;
+}
+
 export default function Exhibit({ artist }) {
   const SPINE = artist.spine;
   const FACTS = artist.facts;
@@ -1554,28 +1577,17 @@ export default function Exhibit({ artist }) {
          does not start a player. /hr and /wb tracks all carry videos, so this
          branch never runs for them. */
       if (track && track.face) setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));
-      /* [M-b 2026-08-02] THE VIDEO YIELDS WHEN THE VISITOR WALKS AWAY.
-         Selecting a face-bearing track registered the selection and left the
-         player mounted - so a video that was playing stayed on screen, on
-         top of the page the visitor had just asked for, still making noise.
-         The viewer had two things in it and only one had been asked for.
-         Navigating to a track that is NOT playback is an instruction to stop
-         playing: the queue is dropped and the player unmounts. It is not a
-         pause - there is nothing on screen left to resume from, and a hidden
-         paused player is the same bug wearing a quieter coat. */
-      /* AND THE PLAYER IS ACTUALLY STOPPED, not merely forgotten. Clearing
-         the state hides the picture, but the YouTube iframe is a PERSISTENT
-         HOST - it is mounted once and reused - so dropping the state left it
-         alive and audible behind the page the visitor had just opened.
-         [M-b PROVEN 2026-08-02] The open question from the previous round is
-         closed: at the centre of the video frame, elementsFromPoint returns
-         the FACE's stage - not the iframe. Both are position:absolute inset:0
-         with z-index auto inside `.vp-inner`, so paint order is DOM order, and
-         the face is the later sibling with an opaque ground. It is STOWED
-         BEHIND, not covering. Screenshot and hit-test both on the record.
-         [M-e] The sequence itself now lives in stopPlayback() — one stop, so
-         walking away and pressing STOP cannot drift apart. */
-      stopPlayback();
+      /* [W1 2026-08-02] THE VIDEO PERSISTS — Mike's ruling, SUPERSEDING M-b.
+         M-b (v30) stopped playback when the visitor selected a non-video
+         track; Mike overruled it this round: a video plays until STOPPED or
+         ENDED. Selecting a face-bearing track lays the face's content OVER
+         the running video — the stow is VISUAL-ONLY, the audio continues —
+         and returning to the video's own row shows it still running (the
+         player state is untouched, so the same-video guard in startPlay's
+         effect never reloads it). The stop verbs are the transport's STOP,
+         the Escape key, and the end of the queue; navigation is no longer
+         one of them. stopPlayback() remains the one definition of stopping
+         (M-e), invoked only by controls that mean it. */
       setOpenEntry(null);         /* [M5] a new track opens on its index */
       setRecipeIdx(0);            /* [L2] and its selector at the top entry */
       return;
@@ -1807,22 +1819,31 @@ export default function Exhibit({ artist }) {
   const thumbTrack = activeTrack !== null ? album.tracks[activeTrack] : album.tracks.find(t => t.videos.length > 0);
   const thumbVid   = thumbTrack?.videos?.[0];
   const hasVideo   = curVideo !== null;
-  /* [E2] the selected track's face, if it declares one. Falls back to the
-     album's FIRST track that has a face, so landing on the album (before any
-     track is clicked) still shows something rather than a hole. */
-  const activeFace = (activeTrack !== null ? album.tracks[activeTrack]?.face : null)
-                     ?? album.tracks.find(t => t.face)?.face
-                     ?? null;
+  /* [W1/W7 2026-08-02] TWO FACE MODES, ONE RENDER PATH.
+     `selFace` is the SELECTED track's own face; `fallbackFace` is E2's
+     original derivation (selected face, else the album's first face, so a
+     staged wing landing on an album shows something rather than a hole).
+     STAGED wings (robots) keep E2 exactly: the face shows only when no video
+     and no thumb, from the fallback chain.
+     FLAT wings (`faceFlow:"flat"` — WAL) show a face only when a face row is
+     actually selected — and show it even while a video PLAYS, laid over the
+     stowed picture (W1): the frame is the frame, the artist is the color, and
+     landing on an album gives the SONG's own poster, not a card. */
+  const selFace = activeTrack !== null ? (album.tracks[activeTrack]?.face ?? null) : null;
+  const fallbackFace = selFace ?? album.tracks.find(t => t.face)?.face ?? null;
+  const flatFaces = artist.faceFlow === "flat";
+  const face = flatFaces ? selFace : fallbackFace;
+  const showFace = flatFaces ? !!face : (!hasVideo && !thumbVid && !!fallbackFace);
 
   /* [G1 2026-07-31] ONE DOOR, TWO HANDLES. The frozen face IS the standard
      view, so clicking the picture and pressing ENTER must go to the same
      place with the same recipe — one function, not two copies that can
      drift. Held recipes open nothing from either handle. */
   function enterRecipe() {
-    const p = activeFace?.presets?.[recipeIdx];
-    if (activeFace?.presets && (!p || p.state === "held")) return;
+    const p = face?.presets?.[recipeIdx];
+    if (face?.presets && (!p || p.state === "held")) return;
     window.dispatchEvent(new CustomEvent(
-      activeFace?.action ? activeFace.action.event : "wb-robots-open-twin",
+      face?.action ? face.action.event : "wb-robots-open-twin",
       { detail: { album: album.id, preset: p ? p.id : null, day: p ? p.day : undefined } }
     ));
   }
@@ -1920,7 +1941,7 @@ export default function Exhibit({ artist }) {
           switches rather than global changes. Used by the tracklist type
           scale below: /robots opens at 24% width with three tracks and wants
           bigger type; /hr and /wb run twenty rows at 50% and do not. */}
-      <div className={`ex-root${visible?" visible":""}`} data-exhibit={artist.exhibitSlug || artist.id} data-stage={artist.stage ? "1" : undefined}>
+      <div className={`ex-root${visible?" visible":""}`} data-exhibit={artist.exhibitSlug || artist.id} data-stage={artist.stage ? "1" : undefined} data-flat={flatFaces ? "1" : undefined}>
 
         {/* NAV */}
         <div className="ex-nav">
@@ -2008,7 +2029,16 @@ export default function Exhibit({ artist }) {
             {/* RIGHT — permanent video + facts */}
             <div className="ex-right">
               {/* VIDEO AREA */}
-              <div className="vp-area">
+              {/* [W1/W7 2026-08-02] IN A FLAT WING THE AREA HAS TWO STATES:
+                  a 16:9 picture frame (video playing, or the cued song's own
+                  poster), or STOWED under a shown face — the frame's height
+                  hands over to the face's full-length flow while the iframe
+                  underneath stays MOUNTED AND AUDIBLE, because W1 says a
+                  video plays until stopped or ended and the stow is
+                  visual-only. Staged and music wings keep their exact DOM. */}
+              <div className={"vp-area" +
+                    (flatFaces ? " vp-area-flat" : "") +
+                    (flatFaces && showFace ? " vp-area-stowed" : "")}>
                 <div className="vp-inner">
                   <div ref={ytDivRef} className="yt-player" />
 
@@ -2036,10 +2066,25 @@ export default function Exhibit({ artist }) {
                   )}
 
                   {/* Thumbnail overlay — visible when no video is playing */}
-                  {!hasVideo && thumbVid && (
+                  {!hasVideo && thumbVid && !(flatFaces && showFace) && (
                     <div className="vp-thumb"
                       onClick={() => thumbTrack && handleTrackSelect(activeDisplay, album.tracks.indexOf(thumbTrack))}>
-                      {album.art ? (
+                      {/* [W3 2026-08-02] COLOR VIA EMBEDS. A wing declaring
+                          `thumbFromVideo` shows the cued VIDEO'S OWN poster
+                          frame, full-bleed — the thumbnail is part of the
+                          embed's function when displaying that video (Mike's
+                          ruling), and the artist's imagery is what carries
+                          the page. maxres first, hq when maxres is absent.
+                          Wings that declare nothing keep the house cover. */}
+                      {artist.thumbFromVideo && thumbVid.ytId ? (
+                        <img src={`https://i.ytimg.com/vi/${thumbVid.ytId}/maxresdefault.jpg`} alt=""
+                          onError={e => {
+                            if (!e.currentTarget.dataset.fb) {
+                              e.currentTarget.dataset.fb = "1";
+                              e.currentTarget.src = `https://i.ytimg.com/vi/${thumbVid.ytId}/hqdefault.jpg`;
+                            }
+                          }} />
+                      ) : album.art ? (
                         <img className="vp-thumb-album" src={album.art} alt="" />
                       ) : thumbVid.ytId ? (
                         <img src={`https://img.youtube.com/vi/${thumbVid.ytId}/hqdefault.jpg`} alt="" />
@@ -2071,8 +2116,8 @@ export default function Exhibit({ artist }) {
                       THE BUTTON FIRES AN EVENT, it does not know what it opens.
                       That keeps this shared component ignorant of twins; the
                       exhibit flow listens and does the exhibit-specific thing. */}
-                  {!hasVideo && !thumbVid && activeFace && (
-                    <div className={`vp-face vp-face-${activeFace.kind || "text"}`}>
+                  {showFace && (
+                    <div className={`vp-face vp-face-${face.kind || "text"}`}>
                       {/* [S7 2026-07-30] NOTHING FLOATS BETWEEN THE PANELS.
                           `.vp-face-still` was a flex SIBLING of the body at
                           38% width, so it read as a large photo hanging in
@@ -2088,18 +2133,25 @@ export default function Exhibit({ artist }) {
                             no dropdown above it — the panel IS the page, and
                             anything stacked on top would be the buffet again.
                             Every other kind falls through unchanged. */}
-                        {activeFace.panel ? (
-                          <InstrumentPanel decl={activeFace.panel} />
+                        {face.panel ? (
+                          <InstrumentPanel decl={face.panel} />
                         ) : (
                         /* [STAGE 2026-08-02] THE FACE IS STAGED, BY CONFIG.
                            `artist.stage` opts a wing in. /hr and /wb do not
                            declare it - and could not use it anyway, since
                            they declare no faces at all - so the standard
                            lands on one route and cannot reach the music
-                           wings until someone asks it to. */
-                        <StageChildren
+                           wings until someone asks it to.
+                           [W7 2026-08-02] OR IT IS FLAT, BY CONFIG. A wing
+                           declaring `faceFlow:"flat"` (WAL) renders the same
+                           blocks in one full-length column in the page's own
+                           flow — no pagination, no internal scrolling; the
+                           document is the one thing that scrolls. Same
+                           children, different frame; the robots wing keeps
+                           its stage. */
+                        <FaceFlow flat={flatFaces}
                           deps={String(activeTrack) + ":" + String(openEntry)}
-                          footer={activeFace.footer ? null : null}>
+                          footer={face.footer ? null : null}>
                         {/* [F1 2026-07-31] THE PHOTO IS NOT A BANNER (Mike, doctrine).
                             S7 moved the still INSIDE the viewer, which was right,
                             but it landed as a full-width block across the top —
@@ -2114,11 +2166,11 @@ export default function Exhibit({ artist }) {
                             column and are unaffected. */}
                         <div className="vp-face-head">
                           <div className="vp-face-headtext">
-                            {activeFace.title && <div className="vp-face-title">{activeFace.title}</div>}
-                            {activeFace.subtitle && (
-                              <div className="vp-face-sub">{activeFace.subtitle}</div>
+                            {face.title && <div className="vp-face-title">{face.title}</div>}
+                            {face.subtitle && (
+                              <div className="vp-face-sub">{face.subtitle}</div>
                             )}
-                            {activeFace.blurb && <p className="vp-face-blurb">{activeFace.blurb}</p>}
+                            {face.blurb && <p className="vp-face-blurb">{face.blurb}</p>}
                           </div>
                           {/* [G1 2026-07-31] THE LIVE FACE IS RETIRED.
                               Mike ruled the face frozen, so the iframe, its
@@ -2127,9 +2179,9 @@ export default function Exhibit({ artist }) {
                               once worked. It is ledgered A+++++++ and lives in
                               git at d43b9db, one revert away, which is a
                               better home than an unused branch in this file. */}
-                          {activeFace.still && (
+                          {face.still && (
                             <figure className="vp-face-plate">
-                              {activeFace.presets ? (
+                              {face.presets ? (
                                 /* [G1] the frozen portal is still the door. The
                                    live face was clickable through a transparent
                                    hit layer, because an iframe swallows clicks;
@@ -2138,13 +2190,13 @@ export default function Exhibit({ artist }) {
                                    iframe. Same destination as ENTER. */
                                 <button className="vp-face-door" onClick={enterRecipe}
                                         aria-label="Open the portal">
-                                  <img className="vp-face-still" src={activeFace.still} alt="" />
+                                  <img className="vp-face-still" src={face.still} alt="" />
                                 </button>
                               ) : (
-                                <img className="vp-face-still" src={activeFace.still} alt="" />
+                                <img className="vp-face-still" src={face.still} alt="" />
                               )}
-                              {activeFace.stillCaption && (
-                                <figcaption className="vp-face-platecap">{activeFace.stillCaption}</figcaption>
+                              {face.stillCaption && (
+                                <figcaption className="vp-face-platecap">{face.stillCaption}</figcaption>
                               )}
                             </figure>
                           )}
@@ -2182,22 +2234,22 @@ export default function Exhibit({ artist }) {
                             Carsie Blanton's card — a page that was half white.
                             Split by paragraph, the same words flow and fill,
                             which is what a magazine column does. */}
-                        {activeFace.label && (
+                        {face.label && (
                           <div className="vp-card-label" data-stage-split="row">
-                            {(Array.isArray(activeFace.label) ? activeFace.label : [activeFace.label])
+                            {(Array.isArray(face.label) ? face.label : [face.label])
                               .map((p, i) => <p key={i}>{p}</p>)}
                           </div>
                         )}
-                        {Array.isArray(activeFace.tombstone) && activeFace.tombstone.length > 0 && (
+                        {Array.isArray(face.tombstone) && face.tombstone.length > 0 && (
                           <dl className="vp-tomb" data-stage-split="row">
-                            {activeFace.tombstone.map((row, i) => (
+                            {face.tombstone.map((row, i) => (
                               <div className="vp-tomb-row" key={i}>
                                 <dt>{row.k}</dt><dd>{row.v}</dd>
                               </div>
                             ))}
                           </dl>
                         )}
-                        {Array.isArray(activeFace.sideboxes) && activeFace.sideboxes.map((b, i) => (
+                        {Array.isArray(face.sideboxes) && face.sideboxes.map((b, i) => (
                           <aside className="vp-box" key={i}>
                             <h4 className="vp-box-head">{b.title}</h4>
                             <ul className="vp-box-lines">
@@ -2206,9 +2258,9 @@ export default function Exhibit({ artist }) {
                             {b.note && <p className="vp-box-note">{b.note}</p>}
                           </aside>
                         ))}
-                        {Array.isArray(activeFace.lines) && activeFace.lines.length > 0 && (
+                        {Array.isArray(face.lines) && face.lines.length > 0 && (
                           <ul className="vp-face-lines">
-                            {activeFace.lines.map((l, i) => <li key={i}>{l}</li>)}
+                            {face.lines.map((l, i) => <li key={i}>{l}</li>)}
                           </ul>
                         )}
                         {/* [X3 2026-07-30] THE FIRST LAYER. `lines` is a
@@ -2241,11 +2293,11 @@ export default function Exhibit({ artist }) {
                             record, which is the thing a reader actually wants
                             and the old index could not do: it could only put
                             you back at the top. */}
-                        {Array.isArray(activeFace.entries) && activeFace.entries.length > 0 && (() => {
-                          const isLog = activeFace.entriesMode === "log";
+                        {Array.isArray(face.entries) && face.entries.length > 0 && (() => {
+                          const isLog = face.entriesMode === "log";
                           /* reversal happens HERE, not in the data: the entries
                              stay in the order they happened. */
-                          const list = isLog ? [...activeFace.entries].reverse() : activeFace.entries;
+                          const list = isLog ? [...face.entries].reverse() : face.entries;
                           if (!isLog) return (
                             <ol className="vp-face-entries" data-stage-split="row">
                               {list.map((en, i) => (
@@ -2318,9 +2370,9 @@ export default function Exhibit({ artist }) {
                             on the rows rather than the container, so a trail
                             broken across pages looks identical to one that is
                             not. */}
-                        {Array.isArray(activeFace.trail) && activeFace.trail.length > 0 && (
+                        {Array.isArray(face.trail) && face.trail.length > 0 && (
                           <ul className="vp-trail" data-stage-split="row">
-                            {activeFace.trail.map((t, i) => (
+                            {face.trail.map((t, i) => (
                               <li key={i}>
                                 <button className="vp-trail-go"
                                         onClick={() => window.dispatchEvent(new CustomEvent(
@@ -2332,8 +2384,38 @@ export default function Exhibit({ artist }) {
                             ))}
                           </ul>
                         )}
-                        {activeFace.footer && (
-                          <div className="vp-face-footer">{activeFace.footer}</div>
+                        {/* [W2 2026-08-02] THE COLLAGE — a glued-up wall of
+                            the artist's own thumbnails, tilted like posters
+                            on a green-room door. Mike's ruling: users click
+                            pretty pictures; they do NOT read words to guess
+                            at quality — so the picture IS the row and the
+                            words ride a small caption strip. Every tile is
+                            the video's own poster surface (W3) and opens the
+                            video through the wing's own link seam. DATA on
+                            the face like everything else: a wing that
+                            declares no collage renders none. */}
+                        {Array.isArray(face.collage) && face.collage.length > 0 && (
+                          <div className="vp-collage">
+                            {face.collage.map((c, i) => (
+                              <button key={i} className="vp-collage-tile"
+                                style={{ "--tilt": `${((i * 7) % 9) - 4}deg` }}
+                                onClick={() => window.dispatchEvent(new CustomEvent(
+                                  "wb-wal-open-link", { detail: { href: c.href } }))}>
+                                {/* eager, not lazy: the collage IS the page's
+                                    payoff and a dozen poster frames are cheap;
+                                    a wall that fills in as you watch reads as
+                                    a broken wall. */}
+                                <img src={c.img} alt="" />
+                                <span className="vp-collage-cap">
+                                  {c.date && <span className="vp-collage-date">{c.date}</span>}
+                                  <span className="vp-collage-title">{c.label}</span>
+                                </span>
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                        {face.footer && (
+                          <div className="vp-face-footer">{face.footer}</div>
                         )}
                         {/* [O4 2026-07-30] THE PORTAL'S OWN FURNITURE.
                             Presets and cross-references are DATA and stay
@@ -2349,10 +2431,10 @@ export default function Exhibit({ artist }) {
                             with their reason visible, because a menu that
                             hides what it is not offering is lying about the
                             size of the room. */}
-                        {Array.isArray(activeFace.presets) && activeFace.presets.length > 0 && (
+                        {Array.isArray(face.presets) && face.presets.length > 0 && (
                           <div className="vp-recipes">
                             <label className="vp-recipes-head" htmlFor="vp-recipe-sel">
-                              {activeFace.presetsLabel || "ARRIVE AS"}
+                              {face.presetsLabel || "ARRIVE AS"}
                             </label>
                             <div className="vp-recipe-row">
                               <select
@@ -2361,7 +2443,7 @@ export default function Exhibit({ artist }) {
                                 value={recipeIdx}
                                 onChange={e => setRecipeIdx(Number(e.target.value))}
                               >
-                                {activeFace.presets.map((p, i) => (
+                                {face.presets.map((p, i) => (
                                   <option key={i} value={i} disabled={p.state === "held"}>
                                     {p.label}{p.state === "held" && p.why ? `  — ${p.why}` : ""}
                                   </option>
@@ -2369,12 +2451,12 @@ export default function Exhibit({ artist }) {
                               </select>
                               <button
                                 className="vp-recipe-go"
-                                disabled={activeFace.presets[recipeIdx]?.state === "held"}
+                                disabled={face.presets[recipeIdx]?.state === "held"}
                                 onClick={enterRecipe}
                               >ENTER</button>
                             </div>
-                            {activeFace.presets[recipeIdx]?.line && (
-                              <div className="vp-recipe-line">{activeFace.presets[recipeIdx].line}</div>
+                            {face.presets[recipeIdx]?.line && (
+                              <div className="vp-recipe-line">{face.presets[recipeIdx].line}</div>
                             )}
                           </div>
                         )}
@@ -2384,8 +2466,8 @@ export default function Exhibit({ artist }) {
                             was carrying nothing. "Nothing extra unless it
                             carries more than its own weight" applies to the
                             renderer as much as to the page. */}
-                        {activeFace.papa && (
-                          <div className="vp-face-papa">{activeFace.papa}</div>
+                        {face.papa && (
+                          <div className="vp-face-papa">{face.papa}</div>
                         )}
                         {/* [S5 2026-07-30] THE STANDALONE LAUNCH LINK IS GONE.
                             It usurped the rack: a door beside four doors, all
@@ -2393,19 +2475,31 @@ export default function Exhibit({ artist }) {
                             PRESETS ARE THE ENTRIES. A face may still declare
                             `action` — the preset buttons read its event name —
                             but it no longer renders a button of its own. */}
-                        {activeFace.action && !activeFace.presets && (
+                        {/* [W4a 2026-08-02] THE BUTTON CARRIES ITS OWN HREF —
+                            and this was the wing-wide dead-button bug. The
+                            dispatch sent `{ album }` and nothing else, while
+                            WalExhibitFlow's listener opens `detail.href`; so
+                            every action button in the wing fired an event
+                            that named no destination and silently did
+                            nothing. The trail rows, which do pass href, were
+                            the proof the seam itself worked. The action's own
+                            href now rides the detail; listeners that ignore
+                            it (robots' twin-opener) see one extra field and
+                            no change. */}
+                        {face.action && !face.presets && (
                           <button
                             className="vp-face-action"
                             onClick={() => window.dispatchEvent(
-                              new CustomEvent(activeFace.action.event, { detail: { album: album.id } })
+                              new CustomEvent(face.action.event,
+                                { detail: { album: album.id, href: face.action.href } })
                             )}
-                          >{activeFace.action.label}</button>
+                          >{face.action.label}</button>
                         )}
-                        </StageChildren>)}
+                        </FaceFlow>)}
                       </div>
                     </div>
                   )}
-                  {!hasVideo && !thumbVid && !activeFace && album.viewerPoster && (
+                  {!hasVideo && !thumbVid && !fallbackFace && album.viewerPoster && (
                     <div className="vp-poster">
                       <img src={album.viewerPoster} alt="" />
                       {album.viewerPosterCaption && (
@@ -2413,7 +2507,7 @@ export default function Exhibit({ artist }) {
                       )}
                     </div>
                   )}
-                  {!hasVideo && !thumbVid && !activeFace && !album.viewerPoster && (
+                  {!hasVideo && !thumbVid && !fallbackFace && !album.viewerPoster && (
                     <div className="vp-empty-state">
                       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
                         <path d="M7 5.5L22 14L7 22.5V5.5Z" fill="#2a2a2a"/>

@@ -7,152 +7,95 @@
 // albums, each with tracks, each track carrying videos or a `face`. Anything
 // that felt like it needed a new component was rewritten until it did not.
 //
-// ---- THE TEMPLATE (Mike's ruling, RE-NAMED per R-a 2026-08-02) --------------
+// ============================================================================
+// THE SPOTLIGHT DOCTRINE (Mike, W6, 2026-08-02) — governs this whole wing
+// ============================================================================
+// The museum is THE FRAME: it neither detracts nor distracts; done right it
+// enables the art to reach full potential. THE ARTISTS BRING THE COLOR —
+// their photos, videos and thumbnails ARE the color. WAL is NOT held to the
+// robots wing's technical voice; it is a colorful celebration. Set the stage,
+// drop the house lights, cue the music, spotlight — the only place to look.
+// The B&W site law does NOT apply in this wing (W8).
+//
+// ---- THE TRACKLIST (Mike's category set, verbatim, W10 2026-08-02) ---------
 // Every WAL artist gets the SAME tracklist shape, and the shape is the
 // deliverable — a new artist is a new entry in ARTISTS below and nothing else:
 //
-//   01..n   the songs         SONG     the video, official upload
-//    ·      (the same title)  CARD     that song's museum card — a SUB-ROW
-//           The Artist        CARD     the artist's museum card + the FAQ
-//           Their Place       LINK     hands off to the artist's own website
-//           Shows             LIVE     where they exist, and only there
-//           Listen            LISTEN   where a better listen exists
-//           Shop              SHOP     the house shop, that artist top-billed
-//           Lately            FEED     their own recent uploads (R-b)
+//   Coconuts             the songs — numbered, playable, the main event
+//   E. D. Yadah          everywhere else they exist: their place, shows,
+//                        the better listen, their store  [INTERPRETED — flag]
+//   About the Songs      the songs' museum cards, one page
+//   About the Artist     the artist's museum card + the two honest questions
+//   What they are up to  their own recent uploads, as a collage of their
+//                        own thumbnails  [W2's poster wall]
 //
-// ***** WHY THE ROWS ARE NAMED WHAT THEY ARE NAMED *****
-// Seven artist sites were read on 2026-08-02 — Taylor Swift, Nick Cave, Dolly
-// Parton, Radiohead, Carsie Blanton, Jesse Welles, Hunter Root. NOT ONE of them
-// has a section called "About". Six of the seven have a page that does that
-// job; they simply refuse to name it after the topic. They name the thing:
-// Archive, Library, Store, Live, Tour, Shows, Music, Books, Lyrics, Tunes,
-// My Letter, The Red Hand Files, Life & Career.
+// The Gift Shop row is REMOVED from the list (W10); the shop stays one press
+// away in the title bar. The indented per-song card sub-rows died in favor of
+// "About the Songs" (W10). The previous row names (The Artist / Their Place /
+// Shows / Listen / Shop / Lately) and the seven-site naming study behind them
+// are in git at 1031d1c^ — the study still stands; the categories changed.
 //
-// So `About` became **The Artist** and `Link` became **Their Place** — the row
-// now says what its own shipped copy already said ("the artist's own place").
-// `Shop` was KEPT: six of seven say Shop or Store, and inventing a better word
-// for the one thing the world already agrees on would be worse than useless.
-// Shows and Listen were SPLIT OUT of the shop row, because where to see them
-// and where to hear them are different questions and folding them hid the
-// answer to the better one.
-// Full study: `weird-baby-robots/docs/WAL_PHASE0-20260802.md`.
+// ***** INTERPRETATION FLAGS, FOR MIKE'S CONFIRMATION (not guessed silently):
+//   · "Coconuts" read as THE SONGS — the sweet meat of the exhibit, per the
+//     order's own hint. The header row above the numbers prints the name.
+//   · "E. D. Yadah" read as THE YADDA-YADDA — the chatter row: every door out
+//     to where the artist actually lives (site, shows, listen, store).
+//   · "What they are up to" absorbed the old Lately feed AND the tour link —
+//     what they posted and where they are playing are both "up to".
+// Any of the three renames is one string here if Mike rules otherwise.
 //
 // ---- BELOW THE LINE: DELIBERATELY EMPTY -------------------------------------
 // Mike: the artifact shelf under the fold was the /hr blocker, and we are not
-// recreating it. WAL albums carry NO below-the-line artifacts at all. When an
-// artist earns one it arrives as data, here, the way the robots wing did it.
+// recreating it. WAL albums carry NO below-the-line artifacts at all.
 //
-// ---- W1: VIDEO IDS - ALL EIGHT CONFIRMED ---------------------------------
+// ---- VIDEO IDS — ALL EIGHT CONFIRMED ---------------------------------------
 // Every song in this wing plays, and every id was checked against the video's
-// OWN metadata before it was written. RE-CONFIRMED 2026-08-02: all four
-// distinct channels re-queried live this session, all four still agree.
+// OWN metadata (oEmbed: title + author channel) before it was written.
+// RE-CONFIRMED 2026-08-02. The full transposition ledger — Mike's supplied
+// six ids arrived with two artist-pairs swapped as blocks and Carsie's two
+// reversed within their pair; every id was REAL and only the labels had
+// drifted — is preserved in git (1031d1c) and summarized per-song below.
+// Hunter Root's two came from the museum's own foundation export with
+// MediaVault provenance; they needed no open-web confirmation at all.
 //
-// HOW. YouTube renders the uploader in JavaScript, so fetching a watch page
-// returns a bare footer - which is why an earlier pass could confirm nothing
-// and honestly wrote nothing. The oEmbed endpoint is the way through:
-//   https://www.youtube.com/oembed?url=<watch url>&format=json
-// is plain JSON, needs no key and no scripting, and returns BOTH the video's
-// title AND its channel. Title says which song; author_name says whose
-// channel it is on. That is exactly "channel identity confirmed, not
-// assumed", and it was available the whole time.
-//
-// ***** THE MAPPING CORRECTION - FOUR OF SIX WERE TRANSPOSED *****
-// Mike supplied six ids from radio-list URLs and asked for the mapping to be
-// confirmed rather than trusted. It needed confirming:
-//
-//   id            SUPPLIED AS                    ACTUALLY IS
-//   7rWDzLUOreo   Mikey Mike / Doin' Me          correct
-//   KMo-TKhW5VY   Mikey Mike / Cooler            correct
-//   B7i6Vys6aPI   Welles / That Can't Be Right   Blanton / SHIT LIST
-//   DAFmxnJA_OQ   Welles / There's A Hole        Blanton / BE GOOD
-//   cqfJnUgvso0   Blanton / Be Good              Welles / That Can't Be Right
-//   s9FBnLxcqqw   Blanton / Shit List            Welles / There's A Hole
-//
-// The two pairs were swapped as blocks, AND Carsie's two were reversed within
-// their pair. NO ID WAS WRONG - every one is a real official video sitting on
-// the right artist's own channel; only the labels had drifted in transit. So
-// the ids are filed where the videos say they belong, and the transposition
-// is RECORDED rather than quietly straightened: a silent fix would leave
-// nobody any wiser about where the labels came from, and the next paste from
-// the same source will have the same shape.
-//
-// Corroboration worth keeping: cqfJnUgvso0 surfaced in the FIRST research
-// pass as a candidate for Welles' "That Can't Be Right" and was refused for
-// want of proof. oEmbed now confirms exactly that - the caution was right to
-// refuse it, and right about which song it was.
-//
-// HUNTER ROOT's two needed none of this: he is our artist, and both came from
-// the museum's own foundation export with MediaVault provenance and a
-// content_kind of "official".
-//
-// ---- W2: COVERS — WHY THEY ARE TYPOGRAPHIC ---------------------------------
-// The brief allows official video thumbnails, artist-provided press images
-// with clear licensing, or equivalent — and says to fall back to the house
-// typographic cover rather than take a rights gamble.
-//
-//   · A YOUTUBE THUMBNAIL IS NOT FREE-TO-USE. It is a still from the artist's
-//     or label's copyrighted work, served by a third party. Hotlinking one as
-//     exhibit art is a rights gamble wearing a technical disguise.
-//   · NO CLEAN PRESS KIT WAS FOUND. Carsie Blanton's press page was read
-//     directly: it carries critic quotes and a contact address, and offers no
-//     downloadable photography and no usage terms at all.
-//   · SO: house typographic covers for the three outside artists, in the WBR
-//     cover discipline — photo-paper ground, photo-black type, the B&W
-//     site law. FLAGGED: Mike's art replaces `art` and nothing else moves.
-//   · HUNTER ROOT IS THE EXCEPTION, AND HONESTLY SO. His cover comes from the
-//     museum's own foundation export, which is our catalogue of our own
-//     artist — the same asset the /hr wing has always drawn. No third party's
-//     rights are being guessed at.
-//   · [R-b 2026-08-02] THE SAME RULING KILLED THE PHOTO SLIDESHOW. Every image
-//     source on offer — YT thumbnails, IG/FB embeds, og:image scraping,
-//     fan-made, press galleries — is the same rights gamble at a different
-//     scale. What ships instead is a VIDEO wall (`Lately`, below), because the
-//     embed player is the one mechanism YouTube publishes *for this purpose*.
-//
-// ---- COVERS ------------------------------------------------------------------
-// Typographic placeholders in the house register, generated inline as SVG data
-// URIs so they ship with the config and need no asset pipeline. FLAGGED FOR
-// ART: Mike's covers replace `art` with a path and nothing else changes.
+// ---- COVERS & PHOTOS — THE CRAYONS ARE OUT (W8, supersedes the old W2) -----
+// The typographic placeholder covers are RETIRED. Mike's W8 ruling: source
+// artist imagery from their public presences NOW — album-art / logo /
+// homepage-wallpaper class, best quality — with provenance logged per image
+// and a permit-or-deny email to every artist BEFORE go-live. None are
+// expected to object; the place looked like a card catalog until the crayons
+// came out. The earlier this-file ruling ("a YouTube thumbnail is not
+// free-to-use") is SUPERSEDED for two narrow, ruled cases:
+//   · channel/site portraits vaulted under public/images/wal/ — logged in
+//     docs/WAL_PHOTO_PROVENANCE-20260802.md, pending the permission emails;
+//   · video THUMBNAILS shown by the embed and the collage (W3) — the player's
+//     own poster surface for the video being pointed at, hotlinked from
+//     YouTube's CDN, part of the embed's function.
+// Anything outside those two classes is still a rights gamble and still out.
 
 import { worthAListenFacts } from "./worth-a-listen-facts.js";
 
-/* the house cover: photo-paper ground, photo-black type, the wordmark stacked
-   the way the deck's other covers letter it. One function, four covers, so
-   they cannot drift apart. */
-function cover(name, sub) {
-  const lines = String(name).split(" ");
-  const big = lines.length > 1 ? lines : [name];
-  const y0 = big.length > 1 ? 250 : 300;
-  const body = big
-    .map((w, i) =>
-      `<text x="300" y="${y0 + i * 82}" text-anchor="middle" fill="#211f1c" ` +
-      `font-family="Georgia,serif" font-size="${w.length > 8 ? 58 : 72}" ` +
-      `letter-spacing="3">${w}</text>`)
-    .join("");
-  return "data:image/svg+xml;utf8," + encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600">' +
-      '<rect width="600" height="600" fill="#d9d5ca"/>' +
-      '<rect x="26" y="26" width="548" height="548" fill="none" stroke="#211f1c" stroke-width="2"/>' +
-      body +
-      '<line x1="150" y1="420" x2="450" y2="420" stroke="#211f1c" stroke-width="2"/>' +
-      '<text x="300" y="462" text-anchor="middle" fill="#57544d" ' +
-      'font-family="Courier New,monospace" font-size="19" letter-spacing="5">' +
-      (sub || "WORTH A LISTEN") + "</text>" +
-    "</svg>");
-}
-
 /* ---- the per-artist source of truth ----------------------------------------
-   `songs`  : [{ title, slug, ytId, note, card }]
-   `site`   : the artist's own website, or null when unconfirmed
-   `shop`   : { label, url } or null — only where one was actually found
-   `card`   : the artist's museum card — tombstone + interpretive label
-   `feed`   : their own recent uploads, read from their own channel feed     */
+   `songs`   : [{ title, slug, ytId, note, card }]
+   `site`    : the artist's own website (never a resale/SEO domain — see the
+               named traps below), or null when unconfirmed
+   `shop`    : { label, url } or null — only where one was actually found
+   `listen`  : a better listen than the ad-funnel, where one exists
+   `tickets` : tour/tickets, where the artist's own site carries one
+   `channel` : the channel VERIFIED FROM THE UPLOADS (oEmbed author_url)
+   `card`    : the artist's museum card — tombstone + interpretive label
+   `art`     : the coverflow cover — the artist's own public face (W8)
+   `plate`   : an About-the-Artist picture, where a good one exists (W8)
+   `feed`    : their own recent uploads, read from their own channel feed     */
 const ARTISTS = [
   {
     id: "carsie-blanton",
     tag: "carsie_blanton",
     name: "Carsie Blanton",
     tags: ["wal", "carsie-blanton"],
+    art: "/images/wal/carsie-blanton-cover.jpg",
+    plate: "/images/wal/carsie-blanton-poster.png",
+    plateCaption: "Her own site's poster.",
     songs: [
       /* [TRANSPOSED, AND REVERSED WITHIN THE PAIR] supplied under Jesse
          Welles, and in the other order. Filed by what the videos are. */
@@ -194,7 +137,8 @@ const ARTISTS = [
     ],
     site: "https://www.carsieblanton.com",
     siteLabel: "carsieblanton.com",
-    shop: { label: "Shop", url: "https://www.carsieblanton.com/shop/" },
+    siteScent: "Her own place. Everything that matters about her lives there.",
+    shop: { label: "Her own shop", url: "https://www.carsieblanton.com/shop/" },
     /* [L1] the verified channel (oEmbed author_url of her own BE GOOD lyric
        video) rather than the search-found playlist. */
     channel: "https://www.youtube.com/@CarsieBlanton",
@@ -203,10 +147,6 @@ const ARTISTS = [
        listen rather than being buried under a video. */
     listen: { label: "Bandcamp — free, no ads", url: "https://carsieblanton.bandcamp.com" },
     marker: "She writes protest songs you can dance to, and she means every word of the protest.",
-    /* [C-b 2026-08-02] THE ARTIST'S MUSEUM CARD.
-       Two labels, because a museum has two: the TOMBSTONE is the factual
-       register and does not change when the object moves rooms; the
-       INTERPRETIVE LABEL is what it is doing HERE, and does. */
     card: {
       tombstone: [
         { k: "Born", v: "22 July 1985, Luray, Virginia" },
@@ -254,13 +194,8 @@ const ARTISTS = [
                   "Opened on Paul Simon's 2011 tour"] },
       ],
     },
-    trail: [
-      { label: "Her own shop", url: "https://www.carsieblanton.com/shop/", scent: "Where the money goes to her." },
-      { label: "Bandcamp - the whole catalogue, free", url: "https://carsieblanton.bandcamp.com", scent: "No ads, no algorithm, no middle. Start anywhere." },
-      { label: "Her channel", url: "https://www.youtube.com/@CarsieBlanton", scent: "Official videos, verified from her own uploads." },
-    ],
     aboutNote: "Sources: her own site and press page, read directly; Wikipedia for the biography; Shore Fire Media for “Shit List”; Folk Alliance International for the 2026 award; her own upload feed for everything dated 2026. Her politics are quoted from her songs and her own framing, not characterised for her.",
-    /* [R-b] her own recent uploads, read 2026-08-02 from her own channel feed */
+    /* her own recent uploads, read 2026-08-02 from her own channel feed */
     feed: [
       { d: "2026-07-04", t: "PEACE AND FREEDOM (official video)", v: "18,242", id: "mHZWwEO1l4M" },
       { d: "2026-07-01", t: "CANADIAN FLAG (official video)", v: "1,083", id: "yho0MIK-xOE" },
@@ -276,21 +211,19 @@ const ARTISTS = [
     ],
   },
   {
-    /* ===== [W5 2026-08-02, Mike's ruling — a landmark] ==================
-       HUNTER ROOT IS A WAL ARTIST NOW. /hr was the most stable thing this
-       museum had and it taught the machinery every pattern the other wings
-       inherited; it has outlived that purpose. It RETIRES TO REFERENCE-HELD:
-       nothing deleted, the route still live, unlisted in the directory per
-       the unlisted law. His entry here is the same shape as everyone else's,
-       which is the point of the ruling.
-       HIS SONGS COME FROM OUR OWN CATALOGUE. Both ids are foundation-backed
-       with MediaVault provenance and a content_kind of "official" — the
-       museum is the source, so this is the one artist whose media needed no
-       open-web guessing at all. */
+    /* ===== [W5 2026-07-30 ruling, W9 2026-08-02 amendment] ==============
+       HUNTER ROOT IS A WAL ARTIST, SERVED FROM OUR OWN VAULT — and that is
+       the whole statement now. [W9] The "reference wing" button and every
+       /hr pointer are REMOVED from this wing: the HR museum concept was
+       never approved (no response) and is history. Nothing in WAL points at
+       /hr; his songs and facts come from the museum's own catalogue, which
+       needed no open-web guessing at all. His LINK door goes where every
+       other artist's does — his own site. */
     id: "hunter-root",
     tag: "hunter_root",
     name: "Hunter Root",
     tags: ["wal", "hunter-root", "house"],
+    art: "/images/wal/hunter-root-cover.jpg",
     songs: [
       { title: "’94", slug: "94", ytId: "vPW49GU38Ng",
         note: "Official music video. Museum catalogue MV-20260523-001, " +
@@ -333,55 +266,39 @@ const ARTISTS = [
           ],
         } },
     ],
-    /* THE LINK QUESTION, DECIDED HONESTLY. Every other artist's LINK track
-       hands off to their own website. Hunter Root's standing web presence in
-       this building IS /hr - it is deeper than anything a link could reach,
-       it is still live, and it is still ours. So the LINK track points there,
-       and the wing stays reachable-but-unlisted rather than being hidden or
-       removed. If Mike later has an off-site home for him, this one line
-       changes and nothing else does. */
-    site: "/hr",
-    siteLabel: "The Hunter Root reference wing",
-    siteNote: "Reference-held: live, complete, and unlisted in the directory. " +
-              "It is the deepest thing in the museum about any artist.",
-    /* [R-a 2026-08-02] HE GETS A SHOP ROW NOW, AND THE W5 RULING IS UNTOUCHED.
-       W5 pointed his LINK row inward at /hr and that stands. But it was a
-       ruling about the LINK row, not about the SHOP row, and the template's
-       rule has always been "where they exist, and only where they exist".
-       hunterroot.com was read directly this session: Crooked Home on vinyl,
-       special vinyl, CD and bundle; a Chase The Dragon 7-inch; Arkansas on
-       vinyl; a Back in 94' tee. It exists. */
-    shop: { label: "Shop", url: "https://www.hunterroot.com/" },
+    /* [W9] his door out is his own site, same as everyone else's. His store
+       lives at the same address, so ONE row carries both scents rather than
+       two rows to one place. */
+    site: "https://www.hunterroot.com/",
+    siteLabel: "hunterroot.com",
+    siteScent: "His own place. Merch, tour, tunes, bio.",
+    shop: null,
     marker: "Half of Crooked Home is about his brother Nick. He says ’94 is the heart of it all.",
     card: {
       tombstone: [
-        { k: "In this museum", v: "The reference wing, /hr — unlisted, still live" },
-        { k: "Catalogue", v: "78 songs on file in our own vault" },
+        { k: "Catalogue", v: "78 songs on file in the museum's own vault" },
         { k: "Albums", v: "Nine" },
         { k: "Surfaced here", v: "Two" },
         { k: "His own site", v: "hunterroot.com — Merch, Tour, Tunes, Bio, Contact" },
         { k: "On record", v: "Crooked Home, Arkansas, Chase The Dragon" },
       ],
       label: [
-        "He is the house artist, and the reason this building works. /hr was " +
-        "the most stable thing the museum had and it taught the machinery " +
-        "every pattern the other wings inherited — the coverflow, the " +
-        "tracklist grammar, the player frame, the fact vault. It has outlived " +
-        "that purpose and retires to reference-held: nothing deleted, the " +
-        "route still live, unlisted in the directory.",
+        "He is the house artist, and the reason this building works: his " +
+        "catalogue taught the museum's machinery every pattern the other " +
+        "wings inherited — the coverflow, the tracklist grammar, the player " +
+        "frame, the fact vault.",
         "His entry here is exactly the same shape as everyone else's, which " +
-        "is the point of the ruling. The difference is that his card can draw " +
-        "on a hundred and nineteen facts from our own vault rather than from " +
-        "the open web.",
+        "is the point. The difference is that his card can draw on a hundred " +
+        "and nineteen facts from our own vault rather than from the open web.",
       ],
       sideboxes: [
-        { title: "Where the money goes",
+        { title: "In his own store",
           lines: ["Crooked Home — vinyl, special vinyl, CD, bundle",
                   "Arkansas — vinyl LP",
                   "Chase The Dragon — 7-inch",
                   "Back in 94' — tee",
                   "Hat"],
-          note: "Read off his own store, 2026. The Gift Shop row lands on the house shop with him top-billed; his own store is one click on from there." },
+          note: "Read off his own store, 2026." },
         { title: "Lately, in his own words",
           lines: ["“C❄caine C❄caine” — out 19 June 2026",
                   "“I Tried” — recorded live in studio, out 7 August 2026",
@@ -389,12 +306,7 @@ const ARTISTS = [
                   "On tour through July 2026"] },
       ],
     },
-    trail: [
-      { label: "The Hunter Root reference wing", url: "/hr", scent: "The deepest thing in this building about any artist. 78 songs, nine albums." },
-      { label: "hunterroot.com", url: "https://www.hunterroot.com/", scent: "His own place. Merch, tour, tunes." },
-    ],
     aboutNote: "Sourced from the museum's own foundation export and his own words in it - he is our artist and this is our record of him. The store and the recent uploads were read directly off his own site and his own channel feed, 2026-08-02.",
-    coverArt: "https://i.ytimg.com/vi/vPW49GU38Ng/maxresdefault.jpg",
     feed: [
       { d: "2026-07-29", t: "Lonesome had an only child", v: "8,385", id: "8J-cunYqb7w" },
       { d: "2026-07-23", t: "“I Tried” — live in studio, guitar and vocals", v: "5,604", id: "yez2aoLYVnw" },
@@ -411,6 +323,9 @@ const ARTISTS = [
     tag: "jesse_welles",
     name: "Jesse Welles",
     tags: ["wal", "jesse-welles"],
+    art: "/images/wal/jesse-welles-cover.jpg",
+    plate: "/images/wal/jesse-welles-plate.jpg",
+    plateCaption: "From his own site.",
     songs: [
       /* [TRANSPOSED] Mike supplied this id under Carsie Blanton; the
          video's own title and channel say Jesse Welles. Filed by what it is. */
@@ -461,15 +376,15 @@ const ARTISTS = [
        does not "fix" this link to a worse one. */
     site: "https://www.wellesmusic.com",
     siteLabel: "wellesmusic.com",
-    shop: { label: "Shop", url: "https://jessewelles.redstarmerch.com/" },
+    siteScent: "His own place. Tour, contact, the lot.",
+    shop: { label: "The store", url: "https://jessewelles.redstarmerch.com/" },
     tickets: { label: "Tour & tickets", url: "https://www.wellesmusic.com/tour" },
     /* [L1 2026-08-02] CORRECTED, THEN CLOSED. This carried a /channel/UCmb7...
        URL taken from a SEARCH RESULT, and the handle @hellswelles replaced it
        because an unconfirmed equivalence is not a fact.
        THE EQUIVALENCE IS NOW CONFIRMED: @hellswelles' own channel page returns
        externalId UCmb7zAvq9IxHi_UnP93AVSQ — the very id that was held as
-       UNVERIFIED. There was never anything wrong with the id; only with what
-       we could prove about it. The ledger row moves UNVERIFIED -> OFFICIAL. */
+       UNVERIFIED. The ledger row moves UNVERIFIED -> OFFICIAL. */
     channel: "https://www.youtube.com/@hellswelles",
     marker: "He writes the news. A man with a guitar in a field, posting songs about this week, most weeks.",
     card: {
@@ -514,12 +429,6 @@ const ARTISTS = [
           note: "Both rank high. Both are ticket-resale and SEO pages. Named here so nobody 'fixes' his link to a worse one." },
       ],
     },
-    trail: [
-      { label: "wellesmusic.com", url: "https://www.wellesmusic.com", scent: "His own place. Tour, contact, the lot." },
-      { label: "Tour dates", url: "https://www.wellesmusic.com/tour", scent: "He plays constantly. This is where it is real." },
-      { label: "His channel", url: "https://www.youtube.com/@hellswelles", scent: "Where the songs land first, verified from his own uploads." },
-      { label: "The store", url: "https://jessewelles.redstarmerch.com/", scent: "Linked from his own site." },
-    ],
     aboutNote: "Sources: wellesmusic.com read directly; Wikipedia for the biography, discography, charts and awards; Rolling Stone and Vulture for the reception; Farm Aid coverage for the Dave Matthews introduction; his own upload feed for everything dated 2026.",
     feed: [
       { d: "2026-07-28", t: "Whistle Boeing / Come As You Are", v: "28,367", id: "S2hTmmwELGA" },
@@ -540,6 +449,7 @@ const ARTISTS = [
     tag: "mikey_mike",
     name: "Mikey Mike",
     tags: ["wal", "mikey-mike"],
+    art: "/images/wal/mikey-mike-cover.jpg",
     songs: [
       { title: "Doin' Me", slug: "doin_me", ytId: "7rWDzLUOreo",
         note: "Mike wrote this as “I'm Doin' Me”. The record appears " +
@@ -591,15 +501,13 @@ const ARTISTS = [
        direction: oEmbed returns the UPLOADING channel for a video, and the
        uploader of "Mikey Mike - Doin' Me (Official Video)" is
        @findmikeymike. That is the channel verified BY THE UPLOAD rather than
-       by a search ranking - which is exactly what was missing when this
-       entry had to leave the door shut. */
+       by a search ranking. */
     site: "https://www.youtube.com/@findmikeymike",
     siteLabel: "his channel",
+    siteScent: "The only surface confirmed to be his. Verified from the upload itself.",
     /* ***** [R-a 2026-08-02] THE LEAD WAS RIGHT AND THE LINK IS STILL REFUSED.
-       The ledger recorded `findmikeymike` as "a strong lead — the kind of
-       handle an artist reuses across platforms". It was: findmikeymike.com
-       resolves, and it IS his (98 mentions of his name, his Spotify, his
-       socials, a MERCH and TOUR nav).
+       findmikeymike.com resolves, and it IS his (98 mentions of his name, his
+       Spotify, his socials, a MERCH and TOUR nav).
        IT IS ALSO COMPROMISED. The page body is stuffed with an injected SEO
        link farm — Indonesian gambling domains (putarslot88, vipwin88,
        indo7poker, pedetogel) and two dozen unrelated restaurant and
@@ -607,9 +515,8 @@ const ARTISTS = [
        So the door stays shut, for a reason that has nothing to do with
        identity, and the reason is written down so that a future pass does not
        "close the gap" by adding it. ***** */
-    siteNote: "His channel is the only surface linked here. He does own " +
-              "findmikeymike.com, and it is currently serving injected spam — " +
-              "so it is named in the ledger and linked nowhere.",
+    siteNote: "He does own findmikeymike.com, and it is currently serving " +
+              "injected spam — so it is named in the ledger and linked nowhere.",
     shop: null,
     marker: "You have almost certainly heard him without knowing it - and he made the record with Rick Rubin.",
     card: {
@@ -661,9 +568,6 @@ const ARTISTS = [
                   "He played “Amazon Prime” before it was released"] },
       ],
     },
-    trail: [
-      { label: "His channel", url: "https://www.youtube.com/@findmikeymike", scent: "The only surface confirmed to be his. Verified from the upload itself." },
-    ],
     aboutNote: "Sources: Faded Glamour's 2017 piece on “Doin' Me” (the Canon sync, the Rick Rubin involvement, the Rihanna and Universal credits); Apple Music and Deezer for the discography and the Salisbury origin; a 2020 Titusville interview for the 2019 European run. His own domain is deliberately not linked — see the ledger.",
     feed: [
       { d: "2026-06-09", t: "We Might Kill Each Other (official video)", v: "1,155", id: "mt1ko1y0AhU" },
@@ -679,91 +583,122 @@ const ARTISTS = [
 
 /* ---- the template, applied -------------------------------------------------
    Every builder returns a track or null; nulls are filtered at the spine, so
-   "only where they exist" needs no conditional at the call site. */
+   "only where they exist" needs no conditional at the call site.
+   [W10] The `kind` chips died with the old row names: the categories are
+   honest nouns now and a mono label repeating them was noise. */
 
-/* [M-d] every track declares its KIND. It is data, so a wing that declares
-   none renders none and /hr, /wb and /robots are byte-identical. */
+/* [W10] the section header over the numbered songs. It is DATA - a track with
+   `header: true` renders as an inert section label and consumes no number -
+   so a wing that declares none renders none and /hr, /wb and /robots are
+   byte-identical. */
+function coconutsHeader(a) {
+  return { id: a.id + "-h-coconuts", title: "Coconuts", header: true,
+           tags: [...a.tags], videos: [] };
+}
+
 function songTrack(a, s) {
   return {
     id: a.id + "-song-" + s.slug,
     title: s.title,
-    kind: "song",
     song: s.slug,                       /* the fact vault's first-meet tier */
     tags: [...a.tags, "song"],
     videos: s.ytId ? [{ ytId: s.ytId, label: s.title, type: "official" }] : [],
-    face: s.ytId ? undefined : {
+  };
+}
+
+/* [W10] E. D. YADAH — the yadda-yadda: every door out to where the artist
+   actually lives. Absorbs the old Their Place / Shows / Listen / Shop rows;
+   each door appears only where the thing exists, which has always been the
+   template's law. [INTERPRETATION FLAGGED for Mike in the face's PAPA slot.] */
+function yadahTrack(a) {
+  const trail = [];
+  if (a.site) trail.push({ label: a.siteLabel || a.site, url: a.site,
+    scent: a.siteScent || "The artist's own place." });
+  if (a.tickets) trail.push({ label: a.tickets.label, url: a.tickets.url,
+    scent: "Where to stand in the same room as it — the one thing an exhibit cannot give you." });
+  if (a.listen) trail.push({ label: a.listen.label, url: a.listen.url,
+    scent: "Where to hear it without paying an advertiser for the privilege." });
+  if (a.shop) trail.push({ label: a.shop.label, url: a.shop.url,
+    scent: "Their own store." });
+  if (a.channel && a.channel !== a.site) trail.push({ label: "Their channel", url: a.channel,
+    scent: "Where the songs land first, verified from their own uploads." });
+  if (!trail.length) return null;
+  return {
+    id: a.id + "-yadah",
+    unnumbered: true,      /* a category, not a track — consumes no number */
+    title: "E. D. Yadah",
+    tags: [...a.tags, "links"],
+    videos: [],
+    face: {
       kind: "text",
-      title: s.title.toUpperCase(),
+      title: "E. D. YADAH",
       subtitle: a.name.toUpperCase(),
-      blurb:
-        "The official upload for this song was not confirmed in the research " +
-        "pass, so no player is wired here rather than a guessed one. " +
-        (a.channel ? "The artist's own channel is one press away."
-                   : "The artist's channel is not confirmed either."),
-      lines: [
-        "ARTIST   " + a.name,
-        "SONG     " + s.title,
-        "VIDEO    not confirmed — [PAPA] supplies the id",
-      ].concat(s.note ? ["NOTE     " + s.note] : []),
-      papa: "[PAPA] — the official video id, and the words this song " +
-            "deserves once it plays.",
-      action: a.channel
-        ? { label: "Open the artist's channel", event: "wb-wal-open-link",
-            href: a.channel }
-        : undefined,
+      blurb: "The yadda-yadda: everywhere else they exist. Every door here " +
+             "is theirs and leaves the building.",
+      lines: a.siteNote ? ["NOTE     " + a.siteNote] : undefined,
+      trail,
+      footer: "WORTH A LISTEN · " + a.name,
+      papa: "[PAPA / INTERPRETATION FLAG] “E. D. Yadah” read as the " +
+            "chatter row — the doors out. Mike confirms or renames; the fix " +
+            "is one string.",
     },
   };
 }
 
-/* [C-c 2026-08-02] THE PER-SONG MUSEUM CARD, AS A SUB-ROW.
-   A card cannot share the frame with its song: M-a made the video FILL the
-   viewer by geometry, which is right, and which means there is no room left
-   beside it for a page of text. So the card is its own row.
-   It is NOT a numbered track. Under the trail-marker law a numbered row is a
-   marker, and doubling the markers halves the odds the visitor keeps the one
-   that matters. The song is the marker; its card is one of the trees. */
-function songCardTrack(a, s) {
-  if (!s.card) return null;
+/* [W10] ABOUT THE SONGS — the per-song museum cards, merged onto one page.
+   The interpretive labels run as entries (stamped with the track numbers);
+   the factual registers ride as sideboxes, one per song. This is what
+   replaced the indented sub-rows, per Mike's order. */
+function aboutSongsTrack(a) {
+  const withCards = a.songs.filter(s => s.card);
+  if (!withCards.length) return null;
   return {
-    id: a.id + "-card-" + s.slug,
-    title: s.title,
-    kind: "card",
-    sub: true,
-    song: s.slug,
+    id: a.id + "-about-songs",
+    unnumbered: true,      /* a category, not a track — consumes no number */
+    title: "About the Songs",
     tags: [...a.tags, "card"],
     videos: [],
     face: {
       kind: "text",
-      title: s.title.toUpperCase(),
+      title: "ABOUT THE SONGS",
       subtitle: a.name.toUpperCase(),
-      tombstone: s.card.tombstone,
-      label: s.card.label,
+      entries: withCards.map((s, i) => ({
+        stamp: String(i + 1).padStart(2, "0"),
+        title: s.title,
+        line: s.card.label.join(" "),
+      })),
+      entriesMode: "list",
+      sideboxes: withCards.map(s => ({
+        title: s.title + " — the record",
+        lines: s.card.tombstone.map(r => r.k.toUpperCase() + "   " + r.v),
+      })),
       footer: "WORTH A LISTEN · " + a.name,
-      papa: "[PAPA] — the words for this song's card.",
+      papa: "[PAPA] — the words for the songs' cards.",
     },
   };
 }
 
-function artistCardTrack(a) {
+/* ABOUT THE ARTIST — the museum card: tombstone (the factual register),
+   interpretive label (what they are doing here), sideboxes, and the TWO
+   honest questions. [W5] The where-does-the-money-go block is DEAD in this
+   room — it was the wrong stage for it; it lives in W.B's own FAQ at /booth.
+   [W8] The plate is the artist's own public imagery, in color. */
+function aboutArtistTrack(a) {
   return {
-    id: a.id + "-artist",
-    title: "The Artist",
-    kind: "card",
+    id: a.id + "-about-artist",
+    unnumbered: true,      /* a category, not a track — consumes no number */
+    title: "About the Artist",
     tags: [...a.tags, "about", "faq"],
     videos: [],
     face: {
       kind: "text",
-      title: "THE ARTIST",
+      title: "ABOUT THE ARTIST",
       subtitle: a.name.toUpperCase(),
-      /* [TRAIL-MARKER LAW 2026-08-02] THE HEADLINE LAYER IS ONE SENTENCE.
-         A visitor remembers one or two things at most, and ten things reduces
-         the odds they keep the one that matters. So the blurb is the ONE
-         thing about this artist worth carrying out of the building - not a
-         summary of them. Everything beneath is the trees: it makes the scene
-         real and nobody inspects it. */
+      /* [TRAIL-MARKER LAW] the blurb is the ONE thing about this artist worth
+         carrying out of the building - not a summary of them. */
       blurb: a.marker,
-      /* the two museum labels, per R-a: the factual register and the 75-150
-         words of what this is doing here. */
+      still: a.plate || undefined,
+      stillCaption: a.plate ? a.plateCaption : undefined,
       tombstone: a.card.tombstone,
       label: a.card.label,
       sideboxes: a.card.sideboxes,
@@ -773,227 +708,69 @@ function artistCardTrack(a) {
                 "the whole editorial standard and it is not pretending to be " +
                 "anything grander.",
           note: "[PAPA]" },
-        /* ===== [R3 2026-08-02] THE MONEY QUESTION, ANSWERED FIRST =========
-           Mike's doctrine: the business model must be unmistakable UP FRONT,
-           with no digging. An artist reaching this page should learn what
-           this house takes from them before they learn anything else - and
-           the answer is nothing.
-           WHY IT IS FIRST AND NOT BURIED: the launch-readiness ledger found
-           that an artist could walk the entire click-path - album, songs,
-           About, Link, shop - without ever meeting the mission. "We are not
-           affiliated" says what we are NOT doing; it never answers "does
-           anyone here make money off my song".
-           HUMOUR FILTERED (the ya-owe-me lesson): charm is allowed, edges
-           are not. Every line below is a [PAPA] DRAFT - Mike edits, and
-           nothing here claims to be final. */
-        { stamp: "Q", title: "Does Weird.Baby make money from this?",
-          line: "No. Not from the song, not from the play, not from the link. " +
-                "There is no ad on this page, no affiliate code in any link, " +
-                "and no cut of anything you buy from the artist. Every " +
-                "commercial door in this exhibit opens onto their shop, not " +
-                "ours.",
-          note: "[PAPA] - the money answer. Tight is the whole point." },
-        { stamp: "Q", title: "Then why does this exist?",
-          line: "Because someone here thinks these records are worth a " +
-                "listen and that pointing at them costs us nothing. That is " +
-                "the entire business model of this wing, and it is not a " +
-                "loss leader for a different one.",
-          note: "[PAPA] - the mission, in the artist's own reading order." },
         { stamp: "Q", title: "Is Weird.Baby affiliated with them?",
           line: "No. Nothing here is endorsed by the artist, nothing here is " +
                 "sold on their behalf, and every link goes to their own place.",
           note: "" },
-        { stamp: "Q", title: "How do I support them?",
-          line: a.shop || a.listen
-            ? "Their own shop and their own store are linked in this album. " +
-              "Use those rather than anything here."
-            : "Buy from them directly wherever you find them — this " +
-              "exhibit has no store of its own and never will.",
-          note: "" },
       ],
       entriesMode: "list",
-      /* THE TRAIL. Each marker is a link with a SCENT LINE - one clause
-         saying why it is worth following. Set the markers, let them find the
-         way. Every url here is verified per the ledger discipline; anything
-         unverified is not shipped. */
-      trail: a.trail,
       footer: "WORTH A LISTEN · " + a.name,
-      /* PROVENANCE ON THE PAGE, not just in a comment a developer reads.
-         The [PAPA] slot already exists and already renders, so the note rides
-         it rather than growing the face contract a field it does not need. */
+      /* PROVENANCE ON THE PAGE, not just in a comment a developer reads. */
       papa: (a.aboutNote ? a.aboutNote + "  " : "") +
-            "[PAPA] — the card copy and the FAQ answers.",
+            "[PAPA] — the card copy and the two answers.",
     },
   };
 }
 
-function placeTrack(a) {
-  return {
-    id: a.id + "-place",
-    title: "Their Place",
-    kind: "link",
-    tags: [...a.tags, "link"],
-    videos: [],
-    face: {
-      kind: "text",
-      title: "THEIR PLACE",
-      subtitle: a.name.toUpperCase(),
-      blurb: a.site
-        ? "The artist's own place. This exhibit is a pointer, not a home — " +
-          "everything that matters about them is theirs and lives there."
-        : "No official site is on file for this artist yet.",
-      lines: a.site
-        ? ["SITE     " + (a.siteLabel || a.site)]
-            .concat(a.siteNote ? ["NOTE     " + a.siteNote] : [])
-        : ["SITE     not on file", "WHY      " + (a.siteNote || "unconfirmed")],
-      action: a.site
-        ? { label: "Go to " + (a.siteLabel || "the artist's site"),
-            event: "wb-wal-open-link", href: a.site }
-        : undefined,
-      papa: "[PAPA] — the handoff wording.",
-    },
-  };
-}
-
-/* [R-a] SHOWS AND LISTEN WERE SPLIT OUT OF THE SHOP ROW.
-   They had been three answers folded into one row titled "Shop", which hid
-   the two better ones. Where to SEE them, where to HEAR them and where to BUY
-   from them are three different questions and now three different rows —
-   each of which appears only where the thing exists. */
-function showsTrack(a) {
-  if (!a.tickets) return null;
-  return {
-    id: a.id + "-shows",
-    title: "Shows",
-    kind: "live",
-    tags: [...a.tags, "live"],
-    videos: [],
-    face: {
-      kind: "text",
-      title: "SHOWS",
-      subtitle: a.name.toUpperCase(),
-      blurb: "Where to stand in the same room as it. This is the one thing " +
-             "an exhibit genuinely cannot give you.",
-      lines: ["TICKETS  " + a.tickets.url],
-      action: { label: a.tickets.label, event: "wb-wal-open-link", href: a.tickets.url },
-      papa: "[PAPA] — the wording.",
-    },
-  };
-}
-
-function listenTrack(a) {
-  if (!a.listen) return null;
-  return {
-    id: a.id + "-listen",
-    title: "Listen",
-    kind: "listen",
-    tags: [...a.tags, "listen"],
-    videos: [],
-    face: {
-      kind: "text",
-      title: "LISTEN",
-      subtitle: a.name.toUpperCase(),
-      blurb: "Where to hear it without paying an advertiser for the privilege.",
-      lines: ["LISTEN   " + a.listen.url,
-              "WHY      " + a.listen.label],
-      action: { label: a.listen.label, event: "wb-wal-open-link", href: a.listen.url },
-      papa: "[PAPA] — whether a second listen destination is ever worth a second row.",
-    },
-  };
-}
-
-function shopTrack(a) {
-  if (!a.shop) return null;
-  return {
-    id: a.id + "-shop",
-    title: "Shop",
-    kind: "shop",
-    tags: [...a.tags, "shop"],
-    videos: [],
-    face: {
-      kind: "text",
-      title: "SHOP",
-      subtitle: a.name.toUpperCase(),
-      blurb: "Where the money goes to them.",
-      lines: ["THEIR STORE  " + a.shop.url],
-      /* [C3 2026-08-02] THE SHOP TRACK GOES TO THE HOUSE SHOP, TOP-BILLED.
-         Mike's ruling: a WAL artist's shop track lands on the W.B gift-shop
-         conglomerate page with THAT artist at full size on top and everyone
-         else below per the template - and they stay in the everyone-section
-         too, so the page reads as a shop rather than as a redirect.
-         The artist crosses in the URL, exactly the way portal presets do:
-         `/shop?top=<id>`. Same contract, same reasoning - a query string
-         survives a reload and a copied link, and the shop needs to know one
-         word rather than to import anything. Their own store is still one
-         click on, from their banner. */
-      action: { label: "The Gift Shop", event: "wb-wal-shop", href: "/shop?top=" + a.id },
-      papa: "[PAPA] — the wording.",
-    },
-  };
-}
-
-/* [R-b 2026-08-02] LATELY — THE VIDEO WALL THAT REPLACED THE PHOTO SLIDESHOW.
-   The slideshow question was ruled: every image source on offer is a rights
-   gamble, and the one asset class affirmatively licensed to us is the embed.
-   So the wall is video, and its contents come from the artist's OWN upload
-   feed — read from youtube.com/feeds/videos.xml for the channel id resolved
-   off their own channel page, not from a search.
-
-   IT IS BAKED, NOT FETCHED. A live fetch would make the visitor's browser
-   call YouTube on load for a list nobody asked for; the snapshot date is
-   stated on the face instead, because a dated snapshot is honest and an
-   undated live number is not.
-
-   THE ROWS ARE NOT PLAYABLE, ON PURPOSE. Promoting them into the tracklist
-   would rank a hashtag-only clip alongside the two songs this wing actually
-   chose, and curation is the whole product here. They are trail markers out
-   to the video — which is what a pointer-not-a-home exhibit should do. */
-function latelyTrack(a) {
+/* [W10/W2] WHAT THEY ARE UP TO — the artist's own recent uploads as a WALL OF
+   THEIR OWN PICTURES: each tile is the video's own thumbnail (the embed's
+   poster surface, per Mike's W3 ruling), glued up at a tilt like a poster
+   wall, and each one opens the video. Users click pretty pictures; they do
+   not read words to guess at quality (W2). The tour door rides here too -
+   where they are playing is the other half of "up to".
+   IT IS BAKED, NOT FETCHED: the snapshot date is on the face, because a dated
+   snapshot is honest and an undated live number is not. */
+function upToTrack(a) {
   if (!Array.isArray(a.feed) || !a.feed.length) return null;
   return {
-    id: a.id + "-lately",
-    title: "Lately",
-    kind: "feed",
+    id: a.id + "-up-to",
+    unnumbered: true,      /* a category, not a track — consumes no number */
+    title: "What they are up to",
     tags: [...a.tags, "feed"],
     videos: [],
     face: {
       kind: "text",
-      title: "LATELY",
+      title: "WHAT THEY ARE UP TO",
       subtitle: a.name.toUpperCase(),
-      blurb: "What this artist has actually been doing, taken from their own " +
-             "upload feed rather than from anybody's write-up of it.",
-      tombstone: [
-        { k: "Source", v: "Their own channel feed" },
-        { k: "Read", v: "2 August 2026" },
-        { k: "Showing", v: a.feed.length + " of the most recent" },
-        { k: "Counts", v: "A snapshot, dated — not a live number" },
-      ],
-      trail: a.feed.map(f => ({
-        label: f.d + "   " + f.t,
-        url: "https://www.youtube.com/watch?v=" + f.id,
-        scent: f.v + " views as of 2 August 2026",
+      collage: a.feed.map(f => ({
+        img: "https://i.ytimg.com/vi/" + f.id + "/hqdefault.jpg",
+        href: "https://www.youtube.com/watch?v=" + f.id,
+        label: f.t,
+        date: f.d,
       })),
+      trail: a.tickets
+        ? [{ label: a.tickets.label, url: a.tickets.url,
+             scent: "They play constantly. This is where it is real." }]
+        : undefined,
+      tombstone: [
+        { k: "Source", v: "Their own channel feed, read 2 August 2026" },
+        { k: "Showing", v: a.feed.length + " of the most recent" },
+      ],
       footer: "WORTH A LISTEN · " + a.name,
-      papa: "[PAPA] — whether any of these earns a row of its own.",
+      papa: "[PAPA / INTERPRETATION FLAG] “What they are up to” absorbed " +
+            "the old Lately feed and the tour door. Mike confirms.",
     },
   };
 }
 
-/* the tracklist, in the ruled order. Each song is followed immediately by its
-   own card, so the card is never more than one row from the thing it is
-   about. */
+/* the tracklist, in Mike's ruled order (W10). */
 function tracksFor(a) {
-  const out = [];
-  a.songs.forEach(s => {
-    out.push(songTrack(a, s));
-    out.push(songCardTrack(a, s));
-  });
-  out.push(artistCardTrack(a));
-  out.push(placeTrack(a));
-  out.push(showsTrack(a));
-  out.push(listenTrack(a));
-  out.push(shopTrack(a));
-  out.push(latelyTrack(a));
+  const out = [coconutsHeader(a)];
+  a.songs.forEach(s => out.push(songTrack(a, s)));
+  out.push(yadahTrack(a));
+  out.push(aboutSongsTrack(a));
+  out.push(aboutArtistTrack(a));
+  out.push(upToTrack(a));
   return out.filter(Boolean);
 }
 
@@ -1006,10 +783,10 @@ const spine = ARTISTS.map(a => ({
   tag: a.tag,
   year: null,
   tags: a.tags,
-  /* FLAGGED FOR ART where it is a placeholder. `coverArt` is set only where
-     the museum owns the source (Hunter Root's own catalogue); everyone else
-     gets the house typographic cover rather than a rights gamble. */
-  art: a.coverArt || cover(a.name),
+  /* [W8] the artist's own public face, vaulted with provenance — see
+     docs/WAL_PHOTO_PROVENANCE-20260802.md. In color; the B&W law does not
+     apply to WAL. */
+  art: a.art,
   accent: null,
   viewerPoster: null,
   tracks: tracksFor(a),
@@ -1023,24 +800,28 @@ export const worthAListenExhibit = {
   exhibitSlug: "wal",
   eraAlias: {},
   spine,
-  /* [R-c 2026-08-02] THE VAULT IS WIRED. This was `[]`, which is why the
-     player scroller never ran in this wing and why there was nothing for a
-     popup to pop. 321 sourced facts now, in the museum's own fact shape,
+  /* [R-c 2026-08-02] 321 sourced facts, in the museum's own fact shape,
      consumed by the shipped selector with no new selection code. */
   facts: worthAListenFacts,
   defaultActiveIndex: 0,
   splitKey: "wb-wal-split",
   splitDefault: 26,
   cfKey: "wb-wal-cfh",
-  bodyKey: "wb-wal-bodyh",
   visitPath: "/wal",
   shopExitParam: "wal",
   shopEntryHidden: false,
-  /* the ruled viewer standard: this wing is staged from the day it opens, so
-     it never has a scroll trap to migrate away from later. */
-  stage: true,
+  /* [W7 2026-08-02] THE CARDS GO FLAT. `stage: true` (the paginated fixed
+     frame) and `bodyKey` (the fixed body height) are RETIRED for this wing:
+     every face renders at full length in the page's own flow, with no
+     internal scrolling anywhere. The Stage's no-scroll LAW is kept in the
+     only honest reading — no inner scroll traps; the document is the one
+     thing that scrolls, which is ordinary reading. The robots wing keeps its
+     staged frame; the composition choice is per-wing config, as ever. */
+  faceFlow: "flat",
+  /* [W3 2026-08-02] the cued song's poster is the VIDEO'S own thumbnail, not
+     the house cover — the artists' imagery carries the page. */
+  thumbFromVideo: true,
   /* [M-e 2026-08-02] the transport stows into the artist-name bar, and the
-     fixed 68px player bar stands down with it. Opt-in by config so /hr, /wb
-     and /robots are untouched. */
+     fixed 68px player bar stands down with it. */
   transport: "banner",
 };

@@ -26,13 +26,13 @@ export default function WalExhibitFlow() {
       catch { window.location.assign(href); }
     }
     window.addEventListener("wb-wal-open-link", open);
-    /* [C3] the shop verb is the same door with an internal href, so it
-       navigates in place rather than opening a tab - the gift shop is this
-       building, not somebody else's. */
-    window.addEventListener("wb-wal-shop", open);
+    /* [W10 2026-08-02] the `wb-wal-shop` verb retired with the Shop row —
+       Mike's category set removed the gift shop from the tracklist, and a
+       listener for an event nobody fires is dead machinery. The shop stays
+       one press away in the title bar; C3's internal-href reasoning lives on
+       in `open` itself, which still navigates in place for any "/" href. */
     return () => {
       window.removeEventListener("wb-wal-open-link", open);
-      window.removeEventListener("wb-wal-shop", open);
     };
   }, []);
   return null;
