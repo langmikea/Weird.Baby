@@ -26,7 +26,14 @@ export default function WalExhibitFlow() {
       catch { window.location.assign(href); }
     }
     window.addEventListener("wb-wal-open-link", open);
-    return () => window.removeEventListener("wb-wal-open-link", open);
+    /* [C3] the shop verb is the same door with an internal href, so it
+       navigates in place rather than opening a tab - the gift shop is this
+       building, not somebody else's. */
+    window.addEventListener("wb-wal-shop", open);
+    return () => {
+      window.removeEventListener("wb-wal-open-link", open);
+      window.removeEventListener("wb-wal-shop", open);
+    };
   }, []);
   return null;
 }

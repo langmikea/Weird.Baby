@@ -119,44 +119,45 @@ function cover(name, sub) {
    `about`  : the register lines and the FAQ that rides with them            */
 const ARTISTS = [
   {
-    id: "mikey-mike",
-    name: "Mikey Mike",
-    tags: ["wal", "mikey-mike"],
+    id: "carsie-blanton",
+    name: "Carsie Blanton",
+    tags: ["wal", "carsie-blanton"],
     songs: [
-      { title: "Doin' Me", ytId: "7rWDzLUOreo",   /* oEmbed: Mikey Mike channel */
-        note: "Mike wrote this as \u201cI'm Doin' Me\u201d. The record appears " +
-              "to be \u201cDoin' Me\u201d (2017), made with Rick Rubin and " +
-              "widely heard from a Canon advert sync. Title flagged, not " +
-              "corrected in silence \u2014 [PAPA] confirms." },
-      { title: "Cooler", ytId: "KMo-TKhW5VY",
-        note: "Confirmed by oEmbed: Mikey Mike - Cooler [Official Lyric Video], Mikey Mike channel." },
+      /* [TRANSPOSED, AND REVERSED WITHIN THE PAIR] supplied under Jesse
+         Welles, and in the other order. Filed by what the videos are. */
+      { title: "Be Good", ytId: "DAFmxnJA_OQ",
+        note: "Confirmed by oEmbed: BE GOOD by Carsie Blanton - OFFICIAL LYRIC VIDEO, Carsie Blanton channel." },
+      { title: "Shit List", ytId: "B7i6Vys6aPI",   /* oEmbed: Carsie Blanton channel */
+        note: "Second single from Love & Rage." },
     ],
-    /* [L1 2026-08-02] HE HAS A VERIFIED HOME NOW, from an unfakeable
-       direction: oEmbed returns the UPLOADING channel for a video, and the
-       uploader of "Mikey Mike - Doin' Me (Official Video)" is
-       @findmikeymike. That is the channel verified BY THE UPLOAD rather than
-       by a search ranking - which is exactly what was missing when this
-       entry had to leave the door shut. */
-    site: "https://www.youtube.com/@findmikeymike",
-    siteLabel: "his channel",
-    siteNote: "No website or store confirmed \u2014 several unrelated acts " +
-              "share this name, and picking the wrong one is worse than " +
-              "leaving the door shut. [PAPA] supplies it.",
-    shop: null,
-    /* [W4] VERIFIED PUBLIC FACTS ONLY. Sources: Faded Glamour's 2017 piece on
-       "Doin' Me" (the Canon advert sync, the Rick Rubin involvement). Nothing
-       beyond what coverage states is asserted here. */
+    site: "https://www.carsieblanton.com",
+    siteLabel: "carsieblanton.com",
+    shop: { label: "Shop", url: "https://www.carsieblanton.com/shop/" },
+    /* [L1] the verified channel (oEmbed author_url of her own BE GOOD lyric
+       video) rather than the search-found playlist. */
+    channel: "https://www.youtube.com/@CarsieBlanton",
+    /* MIKE'S RULING, KEPT: her Bandcamp streams the catalogue free and
+       without advertising and pays her directly, so it stays the NAMED better
+       listen rather than being buried under a video. */
+    listen: { label: "Bandcamp \u2014 free, no ads", url: "https://carsieblanton.bandcamp.com" },
+    /* [W4] Sources: her own site's description of the work, Shore Fire's
+       release note for "Shit List" (second single from Love & Rage), and her
+       site's own account of the recent record. */
     about: [
-      "KNOWN FOR   \u201cDoin' Me\u201d (2017)",
-      "MADE WITH   Rick Rubin",
-      "HEARD IN    a Canon advert \u2014 how most people met the song",
-      "CHANNEL     @findmikeymike - verified from his own upload",
-      "ON FILE     little else that could be verified",
+      "IN HER WORDS   hooks, chutzpah, revolutionary optimism",
+      "THE ALIGNMENT  equality, plainly and repeatedly, in the songs themselves",
+      "BE GOOD        love your neighbour - Jesus and Dr King, said straight",
+      "SHIT LIST      second single from Love & Rage; the list is fascists",
+      "RECENT         Everything is Great, with The Burning Hell",
+      "BEST LISTEN    Bandcamp - free, no ads, pays her directly",
     ],
-    aboutNote: "The thinnest entry in the wing, and it says so. What is here " +
-               "is what contemporary coverage of the record states; the rest " +
-               "waits for [PAPA] rather than being filled in with plausible " +
-               "sentences.",
+    marker: "She writes protest songs you can dance to, and she means every word of the protest.",
+    trail: [
+      { label: "Her own shop", url: "https://www.carsieblanton.com/shop/", scent: "Where the money goes to her." },
+      { label: "Bandcamp - the whole catalogue, free", url: "https://carsieblanton.bandcamp.com", scent: "No ads, no algorithm, no middle. Start anywhere." },
+      { label: "Her channel", url: "https://www.youtube.com/@CarsieBlanton", scent: "Official videos, verified from her own uploads." },
+    ],
+    aboutNote: "Sources: her own site's description of the work; Shore Fire Media's release note for \u201cShit List\u201d (second single from Love & Rage); her site's account of Everything is Great. Her politics are quoted from her songs and her own framing, not characterised for her.",
   },
   {
     /* ===== [W5 2026-08-02, Mike's ruling \u2014 a landmark] ==================
@@ -196,16 +197,17 @@ const ARTISTS = [
     shop: null,
     /* [W4] from the museum's own foundation export - our own records. */
     about: [
-      "IN THIS MUSEUM   the reference wing, /hr \u2014 unlisted, still live",
+      "IN THIS MUSEUM   the reference wing, /hr - unlisted, still live",
       "CATALOGUE        78 songs on file in the museum's own vault",
-      "\u201994               from Crooked Home; the single art is a childhood " +
-      "photo of Hunter and Nick",
-      "TAUGHT US        every pattern the other wings inherited",
-      "BENCH            78 songs on file; 2 surfaced here",
+      "\u201994               \u201calmost the album title. It's the heart of it all.\u201d",
+      "THE SLEEVE       the single art is a childhood photo of Hunter and Nick",
+      "WHY HE IS HERE   he taught this museum every pattern the other wings use",
     ],
-    aboutNote: "Sourced from the museum's own foundation export rather than " +
-               "from the open web \u2014 he is our artist and this is our record " +
-               "of him.",
+    marker: "Half of Crooked Home is about his brother Nick. He says \u201994 is the heart of it all.",
+    trail: [
+      { label: "The Hunter Root reference wing", url: "/hr", scent: "The deepest thing in this building about any artist. 78 songs, nine albums." },
+    ],
+    aboutNote: "Sourced from the museum's own foundation export and his own words in it - he is our artist and this is our record of him.",
     coverArt: "https://i.ytimg.com/vi/vPW49GU38Ng/maxresdefault.jpg",
   },
   {
@@ -243,49 +245,61 @@ const ARTISTS = [
        introduction. Only what those state. */
     about: [
       "FROM        Ozark, Arkansas",
-      "SPELLING    Jesse Welles \u2014 confirmed, not Jess",
+      "THE HABIT   topical songs, written fast and released often",
       "ALSO        has recorded as Welles and as Jeh Sea Wells",
-      "WRITES      topical songs, released fast and often",
+      "BEFORE      fronted Dead Indian and Cosmic American",
       "NOTED BY    Dave Matthews, introducing him at Farm Aid",
-      "CHANNEL     @hellswelles - verified from his own upload",
+      "SPELLING    Jesse Welles - confirmed, not Jess",
     ],
-    aboutNote: "[PAPA] \u2014 the voice. The facts are checked; how warmly the " +
-               "house talks about him is Mike's.",
+    marker: "He writes the news. A man with a guitar in a field, posting songs about this week, most weeks.",
+    trail: [
+      { label: "wellesmusic.com", url: "https://www.wellesmusic.com", scent: "His own place. Tour, contact, the lot." },
+      { label: "Tour dates", url: "https://www.wellesmusic.com/tour", scent: "He plays constantly. This is where it is real." },
+      { label: "His channel", url: "https://www.youtube.com/@hellswelles", scent: "Where the songs land first, verified from his own uploads." },
+      { label: "The store", url: "https://jessewelles.redstarmerch.com/", scent: "Linked from his own site." },
+    ],
+    aboutNote: "Sources: wellesmusic.com read directly; Wikipedia for birthplace and prior monikers; Rolling Stone's profile; Farm Aid coverage of the Dave Matthews introduction.",
   },
   {
-    id: "carsie-blanton",
-    name: "Carsie Blanton",
-    tags: ["wal", "carsie-blanton"],
+    id: "mikey-mike",
+    name: "Mikey Mike",
+    tags: ["wal", "mikey-mike"],
     songs: [
-      /* [TRANSPOSED, AND REVERSED WITHIN THE PAIR] supplied under Jesse
-         Welles, and in the other order. Filed by what the videos are. */
-      { title: "Be Good", ytId: "DAFmxnJA_OQ",
-        note: "Confirmed by oEmbed: BE GOOD by Carsie Blanton - OFFICIAL LYRIC VIDEO, Carsie Blanton channel." },
-      { title: "Shit List", ytId: "B7i6Vys6aPI",   /* oEmbed: Carsie Blanton channel */
-        note: "Second single from Love & Rage." },
+      { title: "Doin' Me", ytId: "7rWDzLUOreo",   /* oEmbed: Mikey Mike channel */
+        note: "Mike wrote this as \u201cI'm Doin' Me\u201d. The record appears " +
+              "to be \u201cDoin' Me\u201d (2017), made with Rick Rubin and " +
+              "widely heard from a Canon advert sync. Title flagged, not " +
+              "corrected in silence \u2014 [PAPA] confirms." },
+      { title: "Cooler", ytId: "KMo-TKhW5VY",
+        note: "Confirmed by oEmbed: Mikey Mike - Cooler [Official Lyric Video], Mikey Mike channel." },
     ],
-    site: "https://www.carsieblanton.com",
-    siteLabel: "carsieblanton.com",
-    shop: { label: "Shop", url: "https://www.carsieblanton.com/shop/" },
-    /* [L1] the verified channel (oEmbed author_url of her own BE GOOD lyric
-       video) rather than the search-found playlist. */
-    channel: "https://www.youtube.com/@CarsieBlanton",
-    /* MIKE'S RULING, KEPT: her Bandcamp streams the catalogue free and
-       without advertising and pays her directly, so it stays the NAMED better
-       listen rather than being buried under a video. */
-    listen: { label: "Bandcamp \u2014 free, no ads", url: "https://carsieblanton.bandcamp.com" },
-    /* [W4] Sources: her own site's description of the work, Shore Fire's
-       release note for "Shit List" (second single from Love & Rage), and her
-       site's own account of the recent record. */
+    /* [L1 2026-08-02] HE HAS A VERIFIED HOME NOW, from an unfakeable
+       direction: oEmbed returns the UPLOADING channel for a video, and the
+       uploader of "Mikey Mike - Doin' Me (Official Video)" is
+       @findmikeymike. That is the channel verified BY THE UPLOAD rather than
+       by a search ranking - which is exactly what was missing when this
+       entry had to leave the door shut. */
+    site: "https://www.youtube.com/@findmikeymike",
+    siteLabel: "his channel",
+    siteNote: "No website or store confirmed \u2014 several unrelated acts " +
+              "share this name, and picking the wrong one is worse than " +
+              "leaving the door shut. [PAPA] supplies it.",
+    shop: null,
+    /* [W4] VERIFIED PUBLIC FACTS ONLY. Sources: Faded Glamour's 2017 piece on
+       "Doin' Me" (the Canon advert sync, the Rick Rubin involvement). Nothing
+       beyond what coverage states is asserted here. */
     about: [
-      "DESCRIBES AS   hooks, chutzpah, revolutionary optimism",
-      "\u201cBe Good\u201d      a call to love your neighbour, plainly meant",
-      "\u201cShit List\u201d    second single from Love & Rage",
-      "RECENT         Everything is Great, with The Burning Hell",
-      "CHANNEL        @CarsieBlanton - verified from her own upload",
-      "BEST LISTEN    Bandcamp \u2014 free, no ads, pays her directly",
+      "KNOWN FOR   \u201cDoin' Me\u201d (2017)",
+      "MADE WITH   Rick Rubin",
+      "HEARD IN    a Canon advert - how most people met the song",
+      "CHANNEL     @findmikeymike - verified from his own upload",
+      "ON FILE     little else that could be verified",
     ],
-    aboutNote: "[PAPA] \u2014 the voice.",
+    marker: "You have almost certainly heard him without knowing it - and he made the record with Rick Rubin.",
+    trail: [
+      { label: "His channel", url: "https://www.youtube.com/@findmikeymike", scent: "The only surface confirmed to be his. Verified from the upload itself." },
+    ],
+    aboutNote: "Sources: Faded Glamour's 2017 piece on \u201cDoin' Me\u201d (the Canon sync, the Rick Rubin involvement). The thinnest entry in the wing, and it says so rather than being padded.",
   },
 ];
 
@@ -367,9 +381,17 @@ function shopTrack(a) {
           "and where to give the artist money if you want to."
         : "Where to see them, and where the money goes to them.",
       lines: rows,
-      action: { label: a.shop ? a.shop.label : a.listen.label,
-                event: "wb-wal-open-link",
-                href: a.shop ? a.shop.url : a.listen.url },
+      /* [C3 2026-08-02] THE SHOP TRACK GOES TO THE HOUSE SHOP, TOP-BILLED.
+         Mike's ruling: a WAL artist's shop track lands on the W.B gift-shop
+         conglomerate page with THAT artist at full size on top and everyone
+         else below per the template - and they stay in the everyone-section
+         too, so the page reads as a shop rather than as a redirect.
+         The artist crosses in the URL, exactly the way portal presets do:
+         `/shop?top=<id>`. Same contract, same reasoning - a query string
+         survives a reload and a copied link, and the shop needs to know one
+         word rather than to import anything. Their own store is still one
+         click on, from their banner. */
+      action: { label: "The Gift Shop", event: "wb-wal-shop", href: "/shop?top=" + a.id },
       papa: "[PAPA] — the wording, and whether tickets and merch want " +
             "separate tracks once an artist has both.",
     },
@@ -386,10 +408,13 @@ function aboutTrack(a) {
       kind: "text",
       title: "ABOUT",
       subtitle: a.name.toUpperCase(),
-      blurb:
-        "Who they are, in the house register — and the questions that " +
-        "actually get asked, answered on the same page rather than filed " +
-        "somewhere else.",
+      /* [TRAIL-MARKER LAW 2026-08-02] THE HEADLINE LAYER IS ONE SENTENCE.
+         A visitor remembers one or two things at most, and ten things reduces
+         the odds they keep the one that matters. So the blurb is now the ONE
+         thing about this artist worth carrying out of the building - not a
+         summary of them. The register beneath is the trees: it makes the
+         scene real and nobody inspects it. */
+      blurb: a.marker,
       lines: a.about,
       entries: [
         { stamp: "Q", title: "Why is this artist in the museum?",
@@ -436,6 +461,11 @@ function aboutTrack(a) {
           note: "" },
       ],
       entriesMode: "list",
+      /* THE TRAIL. Each marker is a link with a SCENT LINE - one clause
+         saying why it is worth following. Set the markers, let them find the
+         way. Every url here is verified per the ledger discipline; anything
+         unverified is not shipped. */
+      trail: a.trail,
       footer: "WORTH A LISTEN · " + a.name,
       /* PROVENANCE ON THE PAGE, not just in a comment a developer reads.
          The [PAPA] slot already exists and already renders, so the note rides

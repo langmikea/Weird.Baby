@@ -1841,6 +1841,25 @@ export default function Exhibit({ artist }) {
                             </div>
                           );
                         })()}
+                        {/* [TRAIL 2026-08-02] MARKERS, NOT A LINK DUMP.
+                            Each row is a destination plus one clause of
+                            SCENT - why following it is worth the click. The
+                            trail is data on the face like everything else, so
+                            a wing that declares none renders none. */}
+                        {Array.isArray(activeFace.trail) && activeFace.trail.length > 0 && (
+                          <ul className="vp-trail">
+                            {activeFace.trail.map((t, i) => (
+                              <li key={i}>
+                                <button className="vp-trail-go"
+                                        onClick={() => window.dispatchEvent(new CustomEvent(
+                                          "wb-wal-open-link", { detail: { href: t.url } }))}>
+                                  <span className="vp-trail-label">{t.label}</span>
+                                  {t.scent && <span className="vp-trail-scent">{t.scent}</span>}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                         {activeFace.footer && (
                           <div className="vp-face-footer">{activeFace.footer}</div>
                         )}

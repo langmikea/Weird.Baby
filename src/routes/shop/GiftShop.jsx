@@ -74,6 +74,13 @@ export default function GiftShop() {
   /* WAL artists, mapped into the banner shape the shop already speaks. The
      destination is the artist's own store where one was confirmed, their own
      site where it was not, and nothing at all where neither is known. */
+  /* [C3 2026-08-02] TOP BILLING BY QUERY PARAM. `/shop?top=<artist-id>`
+     promotes that artist to the featured slot at full size. They ALSO stay in
+     the WAL section below - Mike's ruling - so the page still reads as the
+     whole shop rather than as one artist's landing page with a tail. An
+     unknown or absent id simply falls through to the normal featured pick,
+     which is the same degrade-quietly contract the portal presets use. */
+  const topId = searchParams.get("top");
   const walEntries = worthAListenArtists.map((a) => ({
     id: "wal-" + a.id,
     name: a.name,
@@ -82,6 +89,7 @@ export default function GiftShop() {
               (a.listen && a.listen.url) ||
               (a.site && a.site.startsWith("http") ? a.site : null),
   }));
+  const walTop = topId ? walEntries.find((w) => w.id === "wal-" + topId) : null;
 
   return (
     <div className="gift-shop">
@@ -102,7 +110,11 @@ export default function GiftShop() {
       </div>
 
       {/* TOP BILLING — unlabeled */}
-      {featured && (
+      {walTop ? (
+        <section className="gift-shop__section gift-shop__featured">
+          <Banner entry={walTop} />
+        </section>
+      ) : featured && (
         <section className="gift-shop__section gift-shop__featured">
           <Banner entry={featured} />
         </section>

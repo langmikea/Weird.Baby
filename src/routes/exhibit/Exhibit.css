@@ -936,3 +936,18 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    bottom rule on the last row would draw a second line between every pair.
    Top-only is seamless whether the list is whole or paged. */
 .vp-rec-index .vp-rec-row:last-child .vp-rec-open{border-bottom:0}
+
+/* [TRAIL 2026-08-02] THE MARKERS. A destination and one clause of scent. Set
+   as rows rather than as a paragraph of links, because a trail is walked one
+   marker at a time and a paragraph is read once and forgotten. */
+.vp-trail{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.vp-trail>li{margin:0}
+.vp-trail-go{display:flex;flex-direction:column;gap:2px;width:100%;text-align:left;
+  background:none;border:0;border-top:1px solid var(--wb-border);
+  padding:9px 2px;cursor:pointer;color:inherit;font:inherit;transition:background .15s}
+.vp-trail-go:hover,.vp-trail-go:focus-visible{background:rgba(232,228,216,.05);outline:none}
+.vp-trail-label{font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--face-fs) * .62);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--wb-gold)}
+.vp-trail-scent{font-family:'DM Serif Display',Georgia,serif;
+  font-size:calc(var(--face-fs) * .8);line-height:1.4;color:var(--wb-gold-lo)}
