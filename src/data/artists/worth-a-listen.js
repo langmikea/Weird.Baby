@@ -21,26 +21,49 @@
 // recreating it. WAL albums carry NO below-the-line artifacts at all. When an
 // artist earns one it arrives as data, here, the way the robots wing did it.
 //
-// ---- WHAT IS VERIFIED, AND WHAT IS NOT --------------------------------------
-// Every URL in this file was checked in the research pass on 2026-08-02 and
-// NOTHING was invented. Where a fact could not be confirmed, the slot carries
-// a flag instead of a guess — an empty `videos` array renders the track's face
-// rather than a dead embed, so an unverified song is a page that works and
-// says what it is missing, not a broken player.
+// ---- W1: VIDEO IDS — WHAT COULD AND COULD NOT BE CONFIRMED -----------------
+// The brief asks for ids cross-checked against the artist's OFFICIAL channel,
+// with channel identity CONFIRMED rather than assumed. That bar was met for
+// exactly one artist, and the reason matters:
 //
-// THE SPECIFIC GAPS, named so they can be closed:
-//   · YouTube video IDs for the songs were NOT confirmed for any artist. A
-//     search result is not a video id, and guessing eleven characters is
-//     exactly the invented link the brief forbids. Each song track therefore
-//     links to the artist's OFFICIAL channel or store and marks `ytId` TODO.
-//   · MIKEY MIKE: the track Mike wrote as "I'm Doin' Me" is almost certainly
-//     "DOIN' ME" (2017, made with Rick Rubin, known from the Canon advert
-//     sync). No official artist website was confirmed — several unrelated
-//     acts share the name — so his LINK and SHOP tracks are held.
-//   · HUNTER ROOT: he already has a wing in this museum (/hr). His WAL LINK
-//     track points AT that wing rather than off-site, because the museum is
-//     his official presence here. The two songs were not cross-checked
-//     against the /hr foundation data in this run.
+//   · HUNTER ROOT — CONFIRMED, and not from the open web at all. He is OUR
+//     artist and the museum holds his catalogue: both ids come from the
+//     foundation export (src/data/exhibits/hunter_root.json), each carrying a
+//     MediaVault id and a content_kind of "official". That is a stronger
+//     provenance than any search result could be — the museum IS the source.
+//     Mike's "Nothing Wrong" cross-checked to our `nothin_wrong`, whose real
+//     title is "Nothin' Wrong"; corrected here rather than silently matched.
+//
+//   · JESSE WELLES, CARSIE BLANTON, MIKEY MIKE — NOT CONFIRMED, so NOT
+//     WRITTEN. Search returns several plausible uploads per song (studio,
+//     live, festival, lyric) and a search result is not proof of which
+//     channel hosts it. The obvious next step — fetching the watch page to
+//     read the uploader — DOES NOT WORK: YouTube renders that in JavaScript
+//     and the fetch returns a bare footer. And the artists' own sites do not
+//     embed or link their videos (wellesmusic.com checked directly: Welcome /
+//     Tour / Contact / Connect / SHOP, no video links anywhere).
+//     So there is no path from here to a channel-confirmed id, and eleven
+//     guessed characters is exactly the invented link the brief forbids.
+//     Those songs keep honest faces naming what is missing.
+//
+// ---- W2: COVERS — WHY THEY ARE TYPOGRAPHIC ---------------------------------
+// The brief allows official video thumbnails, artist-provided press images
+// with clear licensing, or equivalent — and says to fall back to the house
+// typographic cover rather than take a rights gamble.
+//
+//   · A YOUTUBE THUMBNAIL IS NOT FREE-TO-USE. It is a still from the artist's
+//     or label's copyrighted work, served by a third party. Hotlinking one as
+//     exhibit art is a rights gamble wearing a technical disguise.
+//   · NO CLEAN PRESS KIT WAS FOUND. Carsie Blanton's press page was read
+//     directly: it carries critic quotes and a contact address, and offers no
+//     downloadable photography and no usage terms at all.
+//   · SO: house typographic covers for the three outside artists, in the WBR
+//     cover discipline — photo-paper ground, photo-black type, the B&W
+//     site law. FLAGGED: Mike's art replaces `art` and nothing else moves.
+//   · HUNTER ROOT IS THE EXCEPTION, AND HONESTLY SO. His cover comes from the
+//     museum's own foundation export, which is our catalogue of our own
+//     artist — the same asset the /hr wing has always drawn. No third party's
+//     rights are being guessed at.
 //
 // ---- COVERS ------------------------------------------------------------------
 // Typographic placeholders in the house register, generated inline as SVG data
@@ -84,44 +107,79 @@ const ARTISTS = [
     tags: ["wal", "mikey-mike"],
     songs: [
       { title: "Doin' Me", ytId: null,
-        note: "Mike wrote this as “I'm Doin' Me”. The record appears to " +
-              "be “Doin' Me” (2017, made with Rick Rubin; widely heard " +
-              "from a Canon advert sync). Title flagged, not corrected in " +
-              "silence — [PAPA] confirms." },
-      { title: "Cooler", ytId: null,
-        note: "Not confirmed against an official upload in the research pass." },
+        note: "Mike wrote this as \u201cI'm Doin' Me\u201d. The record appears " +
+              "to be \u201cDoin' Me\u201d (2017), made with Rick Rubin and " +
+              "widely heard from a Canon advert sync. Title flagged, not " +
+              "corrected in silence \u2014 [PAPA] confirms." },
+      { title: "Cooler", ytId: null, note: "" },
     ],
     site: null,
-    siteNote: "No official artist site confirmed — several unrelated acts " +
+    siteNote: "No official artist site confirmed \u2014 several unrelated acts " +
               "share this name, and picking the wrong one is worse than " +
               "leaving the door shut. [PAPA] supplies it.",
     shop: null,
+    /* [W4] VERIFIED PUBLIC FACTS ONLY. Sources: Faded Glamour's 2017 piece on
+       "Doin' Me" (the Canon advert sync, the Rick Rubin involvement). Nothing
+       beyond what coverage states is asserted here. */
     about: [
-      "KNOWN FOR   “Doin' Me” (2017)",
+      "KNOWN FOR   \u201cDoin' Me\u201d (2017)",
       "MADE WITH   Rick Rubin",
-      "HEARD IN    a Canon advert, which is how most people met it",
+      "HEARD IN    a Canon advert \u2014 how most people met the song",
+      "ON FILE     little else that could be verified",
     ],
+    aboutNote: "The thinnest entry in the wing, and it says so. What is here " +
+               "is what contemporary coverage of the record states; the rest " +
+               "waits for [PAPA] rather than being filled in with plausible " +
+               "sentences.",
   },
   {
+    /* ===== [W5 2026-08-02, Mike's ruling \u2014 a landmark] ==================
+       HUNTER ROOT IS A WAL ARTIST NOW. /hr was the most stable thing this
+       museum had and it taught the machinery every pattern the other wings
+       inherited; it has outlived that purpose. It RETIRES TO REFERENCE-HELD:
+       nothing deleted, the route still live, unlisted in the directory per
+       the unlisted law. His entry here is the same shape as everyone else's,
+       which is the point of the ruling.
+       HIS SONGS COME FROM OUR OWN CATALOGUE. Both ids are foundation-backed
+       with MediaVault provenance and a content_kind of "official" \u2014 the
+       museum is the source, so this is the one artist whose media needed no
+       open-web guessing at all. */
     id: "hunter-root",
     name: "Hunter Root",
     tags: ["wal", "hunter-root", "house"],
     songs: [
-      { title: "'94", ytId: null, note: "" },
-      { title: "Nothing Wrong", ytId: null, note: "" },
+      { title: "\u201994", ytId: "vPW49GU38Ng",
+        note: "Official music video. Museum catalogue MV-20260523-001, " +
+              "album Crooked Home." },
+      { title: "Nothin' Wrong", ytId: "Wv0_mujJUQU",
+        note: "Official music video. Museum catalogue MV-20260523-040, album " +
+              "Skipping Stones That Sink Before They're Thrown. Mike wrote " +
+              "\u201cNothing Wrong\u201d; the catalogue title is \u201cNothin' Wrong\u201d." },
     ],
-    /* HE ALREADY HAS A WING HERE. The LINK track points INTO the museum
-       rather than out of it, because /hr IS his presence in this building. */
+    /* THE LINK QUESTION, DECIDED HONESTLY. Every other artist's LINK track
+       hands off to their own website. Hunter Root's standing web presence in
+       this building IS /hr - it is deeper than anything a link could reach,
+       it is still live, and it is still ours. So the LINK track points there,
+       and the wing stays reachable-but-unlisted rather than being hidden or
+       removed. If Mike later has an off-site home for him, this one line
+       changes and nothing else does. */
     site: "/hr",
-    siteLabel: "The Hunter Root wing",
-    siteNote: "In-museum. This is the one WAL link that does not leave the " +
-              "building, and that is the correct answer rather than a " +
-              "convenient one.",
+    siteLabel: "The Hunter Root reference wing",
+    siteNote: "Reference-held: live, complete, and unlisted in the directory. " +
+              "It is the deepest thing in the museum about any artist.",
     shop: null,
+    /* [W4] from the museum's own foundation export - our own records. */
     about: [
-      "IN THIS MUSEUM   yes — he has his own wing",
-      "FIND HIM         /hr, with the full deck and the archive",
+      "IN THIS MUSEUM   the reference wing, /hr \u2014 unlisted, still live",
+      "CATALOGUE        78 songs on file in the museum's own vault",
+      "\u201994               from Crooked Home; the single art is a childhood " +
+      "photo of Hunter and Nick",
+      "TAUGHT US        every pattern the other wings inherited",
     ],
+    aboutNote: "Sourced from the museum's own foundation export rather than " +
+               "from the open web \u2014 he is our artist and this is our record " +
+               "of him.",
+    coverArt: "https://i.ytimg.com/vi/vPW49GU38Ng/maxresdefault.jpg",
   },
   {
     id: "jesse-welles",
@@ -131,19 +189,29 @@ const ARTISTS = [
       { title: "That Can't Be Right", ytId: null, note: "" },
       { title: "There's A Hole", ytId: null, note: "" },
     ],
-    /* VERIFIED 2026-08-02: the official site is wellesmusic.com. Note that
-       jessewelles.org and jessewellestour.com surface high in search and are
-       NOT official - ticket-resale and SEO pages. Naming them here so the
-       next person does not "fix" this link to a worse one. */
+    /* VERIFIED 2026-08-02 by reading the site itself: wellesmusic.com is the
+       official home (Welcome / Tour / Contact / Connect, and a SHOP that
+       resolves to jessewelles.redstarmerch.com).
+       NAMED TRAP: jessewelles.org and jessewellestour.com rank high and are
+       NOT official - ticket-resale and SEO pages. Recorded so the next person
+       does not "fix" this link to a worse one. */
     site: "https://www.wellesmusic.com",
     siteLabel: "wellesmusic.com",
-    shop: { label: "Tour & tickets", url: "https://www.wellesmusic.com/tour" },
+    shop: { label: "Shop", url: "https://jessewelles.redstarmerch.com/" },
+    tickets: { label: "Tour & tickets", url: "https://www.wellesmusic.com/tour" },
     channel: "https://www.youtube.com/channel/UCmb7zAvq9IxHi_UnP93AVSQ",
+    /* [W4] Sources: Wikipedia (birth name, birthplace, prior monikers),
+       Rolling Stone's profile, Farm Aid coverage of the Dave Matthews
+       introduction. Only what those state. */
     about: [
       "FROM        Ozark, Arkansas",
-      "SPELLING    Jesse Welles — confirmed, not Jess",
+      "SPELLING    Jesse Welles \u2014 confirmed, not Jess",
       "ALSO        has recorded as Welles and as Jeh Sea Wells",
+      "WRITES      topical songs, released fast and often",
+      "NOTED BY    Dave Matthews, introducing him at Farm Aid",
     ],
+    aboutNote: "[PAPA] \u2014 the voice. The facts are checked; how warmly the " +
+               "house talks about him is Mike's.",
   },
   {
     id: "carsie-blanton",
@@ -158,16 +226,21 @@ const ARTISTS = [
     siteLabel: "carsieblanton.com",
     shop: { label: "Shop", url: "https://www.carsieblanton.com/shop/" },
     channel: "https://music.youtube.com/playlist?list=PLbY5r0VuZYArGmGD4HWrvtcx8YDFzjCXn",
-    /* MIKE'S PREFERENCE, APPLIED: "if a song is offered free-and-legal without
-       ads somewhere better, prefer it". Her Bandcamp streams the catalogue
-       free and without advertising, and it pays her directly - so it is named
-       as the better listen rather than buried under the video. */
-    listen: { label: "Bandcamp — free, no ads", url: "https://carsieblanton.bandcamp.com" },
+    /* MIKE'S RULING, KEPT: her Bandcamp streams the catalogue free and
+       without advertising and pays her directly, so it stays the NAMED better
+       listen rather than being buried under a video. */
+    listen: { label: "Bandcamp \u2014 free, no ads", url: "https://carsieblanton.bandcamp.com" },
+    /* [W4] Sources: her own site's description of the work, Shore Fire's
+       release note for "Shit List" (second single from Love & Rage), and her
+       site's own account of the recent record. */
     about: [
       "DESCRIBES AS   hooks, chutzpah, revolutionary optimism",
+      "\u201cBe Good\u201d      a call to love your neighbour, plainly meant",
+      "\u201cShit List\u201d    second single from Love & Rage",
       "RECENT         Everything is Great, with The Burning Hell",
-      "BEST LISTEN    Bandcamp — free, no ads, pays her directly",
+      "BEST LISTEN    Bandcamp \u2014 free, no ads, pays her directly",
     ],
+    aboutNote: "[PAPA] \u2014 the voice.",
   },
 ];
 
@@ -230,9 +303,10 @@ function linkTrack(a) {
 }
 
 function shopTrack(a) {
-  if (!a.shop && !a.listen) return null;
+  if (!a.shop && !a.listen && !a.tickets) return null;
   const rows = [];
   if (a.shop) rows.push("SHOP     " + a.shop.url);
+  if (a.tickets) rows.push("TICKETS  " + a.tickets.url);
   if (a.listen) rows.push("LISTEN   " + a.listen.url);
   return {
     id: a.id + "-shop",
@@ -292,7 +366,11 @@ function aboutTrack(a) {
       ],
       entriesMode: "list",
       footer: "WORTH A LISTEN · " + a.name,
-      papa: "[PAPA] — the about copy and the FAQ answers.",
+      /* PROVENANCE ON THE PAGE, not just in a comment a developer reads.
+         The [PAPA] slot already exists and already renders, so the note rides
+         it rather than growing the face contract a field it does not need. */
+      papa: (a.aboutNote ? a.aboutNote + "  " : "") +
+            "[PAPA] — the about copy and the FAQ answers.",
     },
   };
 }
@@ -302,8 +380,10 @@ const spine = ARTISTS.map(a => ({
   title: a.name,
   year: null,
   tags: a.tags,
-  /* FLAGGED FOR ART: typographic placeholder in the house register. */
-  art: cover(a.name),
+  /* FLAGGED FOR ART where it is a placeholder. `coverArt` is set only where
+     the museum owns the source (Hunter Root's own catalogue); everyone else
+     gets the house typographic cover rather than a rights gamble. */
+  art: a.coverArt || cover(a.name),
   accent: null,
   viewerPoster: null,
   tracks: [

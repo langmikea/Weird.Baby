@@ -386,14 +386,16 @@
   background-size: 240px 240px;
 }
 
-/* [WAL 2026-08-02] HALF-SIZE BANNERS. The shop's own banner, at half scale,
-   two-up where there is room. `--dead` is a banner with no destination: it
-   keeps the shape so the row reads evenly, and drops the hover and the
-   pointer so it cannot pretend to be a link. */
-.wal-banners__grid{display:grid;gap:18px;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-.featured-artist--half .featured-artist__image-wrap{aspect-ratio:2/1}
-.featured-artist--half .featured-artist__name{font-size:.95rem}
+/* [W3 2026-08-02] WAL BANNERS ARE DOUBLE HEIGHT (Mike upgraded from half).
+   The grid keeps its two-up rhythm and the image well doubles: a 2:1 letterbox
+   became a 1:1 plate, which is also the shape an album cover actually is - so
+   when Mike's art lands it drops in without a re-crop. `--dead` is a banner
+   with no destination: it keeps the shape so the row reads evenly and drops
+   the hover and the pointer so it cannot pretend to be a link. */
+.wal-banners__grid{display:grid;gap:22px;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.featured-artist--half .featured-artist__image-wrap{aspect-ratio:1/1}
+.featured-artist--half .featured-artist__name{font-size:1.05rem}
 .featured-artist--dead{cursor:default;opacity:.72}
 .featured-artist--dead:hover{transform:none;box-shadow:none}
 .featured-artist__note{font-family:'Courier Prime','Courier New',monospace;

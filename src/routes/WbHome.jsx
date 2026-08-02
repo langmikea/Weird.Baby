@@ -126,9 +126,19 @@ export default function WbHome() {
           <div className="wb-tagline">something is being built here</div>
           <nav className="wb-directory" aria-label="Museum directory">
             <div className="wb-dir-label">Directory</div>
-            {/* Hunter Root exhibit delisted 2026-07-07 (Mike's direction).
-                /hr route remains live but unlinked; proper shutdown is a
-                future workstream after the dust settles. */}
+            {/* Hunter Root delisted 2026-07-07 (Mike's direction); /hr live
+                but unlinked.
+                [W5 2026-08-02, Mike's ruling] THAT STATUS IS NOW PERMANENT AND
+                NAMED: /hr is REFERENCE-HELD. It was the most stable thing this
+                museum had and it taught the machinery every pattern the other
+                wings inherited - it has outlived that purpose. Nothing is
+                deleted and nothing is shut down: the route stays live, the
+                archive stays complete, and it stays unlisted per the unlisted
+                law. Hunter Root himself is now a WORTH A LISTEN artist like
+                any other, and his WAL LINK track points back here - which is
+                why "unlisted" is the right word and "retired" is not.
+                The "proper shutdown" workstream this comment used to promise
+                is therefore CLOSED, not deferred. */}
             {/* Robots live link — §D2 ruling 2026-07-23 (coming-soon retires).
                 STAGED: reaches the public site only when Mike deploys (D7). */}
             <button className="wb-dir-entry" onClick={() => navigate("/robots")}>
