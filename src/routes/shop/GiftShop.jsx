@@ -16,12 +16,13 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { wbRoster, getArtistById, pickRandomArtist } from "../../data/wb_roster";
+import { worthAListenArtists } from "../../data/artists/worth-a-listen.js";
 import "./GiftShop.css";
 
-function Banner({ entry }) {
+function Banner({ entry, half }) {
   return (
     <a
-      className="featured-artist"
+      className={"featured-artist" + (half ? " featured-artist--half" : "")}
       href={entry.storeUrl}
       target="_blank"
       rel="noopener noreferrer"
@@ -70,6 +71,18 @@ export default function GiftShop() {
   // Everyone except top billing, once each. No tail repeat (Mike 2026-07-06).
   const others = wbRoster.filter((a) => a.id !== featured?.id);
 
+  /* WAL artists, mapped into the banner shape the shop already speaks. The
+     destination is the artist's own store where one was confirmed, their own
+     site where it was not, and nothing at all where neither is known. */
+  const walEntries = worthAListenArtists.map((a) => ({
+    id: "wal-" + a.id,
+    name: a.name,
+    image: null,                       /* FLAGGED FOR ART */
+    storeUrl: (a.shop && a.shop.url) ||
+              (a.listen && a.listen.url) ||
+              (a.site && a.site.startsWith("http") ? a.site : null),
+  }));
+
   return (
     <div className="gift-shop">
       <audio
@@ -92,6 +105,41 @@ export default function GiftShop() {
       {featured && (
         <section className="gift-shop__section gift-shop__featured">
           <Banner entry={featured} />
+        </section>
+      )}
+
+      {/* [WAL 2026-08-02] WORTH A LISTEN — HALF-SIZE BANNERS.
+          Mike: every WAL artist gets a banner in the shop, at half size. The
+          slots are built here and the ART IS A PLACEHOLDER — the same
+          typographic fallback the roster already uses when an entry has no
+          image, so nothing new was invented to hold a picture that does not
+          exist yet. FLAGGED: Mike's art replaces `image` and nothing else
+          moves.
+          A banner with no destination is NOT a link. Mikey Mike has no
+          confirmed official store or site, and a banner that goes nowhere is
+          worse than a banner that says so — so those render as plain cards
+          with the reason on them rather than as dead anchors. */}
+      {walEntries.length > 0 && (
+        <section className="gift-shop__section gift-shop__wal">
+          <div className="wal-banners__grid">
+            {walEntries.map((entry) => (
+              entry.storeUrl
+                ? <Banner key={entry.id} entry={entry} half />
+                : (
+                  <div key={entry.id} className="featured-artist featured-artist--half featured-artist--dead">
+                    <div className="featured-artist__image-wrap">
+                      <div className="featured-artist__image-fallback" aria-hidden="true">
+                        <div className="featured-artist__image-fallback-name">{entry.name}</div>
+                      </div>
+                    </div>
+                    <div className="featured-artist__meta">
+                      <div className="featured-artist__name">{entry.name}</div>
+                      <div className="featured-artist__note">no store on file</div>
+                    </div>
+                  </div>
+                )
+            ))}
+          </div>
         </section>
       )}
 

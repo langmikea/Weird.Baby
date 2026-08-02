@@ -586,5 +586,14 @@ export const robotsExhibit = {
      the shop. It points at the standard W.B gift shop, carrying `from=robots`
      as it always did. */
   shopEntryHidden: false,
+  /* [STAGE 2026-08-02] THE RULED STANDARD, OPTED IN HERE AND NOWHERE ELSE.
+     The viewer becomes a fixed stage that never scrolls; content is fitted
+     and paged. /hr and /wb do not declare this and are untouched. */
+  stage: true,
+  /* [STAGE] THE PLAYER BAR IS NOT A FIXTURE (Mike's doctrine). This wing has
+     no music - its one moving thing is a machine behind a latch - so a
+     permanent transport here was a control for something that never plays,
+     sitting on the stage and lying about its height. */
+  playerBar: false,
   exhibitFlow: RobotsExhibitFlow,
 };

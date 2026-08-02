@@ -134,6 +134,13 @@ export default function WbHome() {
             <button className="wb-dir-entry" onClick={() => navigate("/robots")}>
               <span>Robots</span><span className="wb-dir-arrow">→</span>
             </button>
+            {/* [WAL 2026-08-02] WORTH A LISTEN - listed exactly like the
+                others: same button, same arrow, same navigate call. A new
+                exhibit is one entry here and one route, which is the whole
+                point of the machinery being shared. */}
+            <button className="wb-dir-entry" onClick={() => navigate("/wal")}>
+              <span>Worth A Listen</span><span className="wb-dir-arrow">&rarr;</span>
+            </button>
             <button className="wb-dir-entry" onClick={() => navigate("/wb")}>
               <span>Weird.Baby</span><span className="wb-dir-arrow">→</span>
             </button>

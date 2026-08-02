@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback, useLayoutEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { makeFactCycler, splitFact } from "../../lib/fact-select.js";
 import "./Exhibit.css";
@@ -666,6 +666,37 @@ function dialArc(i, n) {
 }
 function InstrumentPanel({ decl }) {
   const D = decl || {};
+  /* [STAGE 2026-08-02] A PANEL IS SCALED TO FIT, NEVER CROPPED.
+     The viewer no longer scrolls, so an instrument taller than its frame is
+     not "scroll a bit" any more - it is a cropped panel, and a cropped panel
+     can hide the latch. Tightening the spacing at narrow widths recovered
+     most of it (100px over at 504 wide, down to 27px) but chasing the last
+     pixels was starting to cost legibility, and it would have to be chased
+     again for every new frame size.
+     So the rule is exact instead: measure the panel against the frame and
+     scale it down by whatever it is over. A real panel seen from further
+     away is smaller and still whole, which is the honest reading of a fixed
+     instrument in a fixed stage. Scaling only ever shrinks - a panel with
+     room to spare is left at its true size rather than blown up. */
+  const fitRef = useRef(null);
+  const [fit, setFit] = useState(1);
+  useLayoutEffect(() => {
+    const el = fitRef.current;
+    if (!el || !el.parentElement) return;
+    function measure() {
+      const avail = el.parentElement.clientHeight;
+      if (!avail) return;
+      const natural = el.scrollHeight;
+      /* two pixels of headroom: sub-pixel rounding in the scaled rect left a
+         2px residue at the frame's edge, and a hairline of slack costs
+         nothing visible while making "nothing is cropped" exactly true. */
+      setFit(natural > avail ? Math.max(0.6, (avail - 2) / natural) : 1);
+    }
+    measure();
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(measure) : null;
+    if (ro) { ro.observe(el.parentElement); ro.observe(el); }
+    return () => { if (ro) ro.disconnect(); };
+  }, []);
   const drumPos = Array.isArray(D.drum && D.drum.positions) ? D.drum.positions : [];
   const dialPos = Array.isArray(D.dial && D.dial.positions) ? D.dial.positions : [];
   const swDecl  = Array.isArray(D.switches) ? D.switches : [];
@@ -733,7 +764,9 @@ function InstrumentPanel({ decl }) {
   function roll(d) { setDrumIdx(i => (i + d + N) % N); }
 
   return (
-    <div className={"ip" + (armed ? " ip-armed" : "")}>
+    <div ref={fitRef} className={"ip" + (armed ? " ip-armed" : "")}
+         style={fit < 1 ? { transform: `scale(${fit.toFixed(4)})`,
+                            transformOrigin: "top center" } : undefined}>
       {/* [N2 2026-08-02] THE PANEL IS MOUNTED, NOT PRINTED. Four screws in
           the corners, each seated at a DIFFERENT angle - a screw that lines
           up with its neighbours is a logo, not a fastener, and the eye knows
@@ -861,6 +894,167 @@ function InstrumentPanel({ decl }) {
       {armed && drum.line && <div className="ip-readout">{drum.line}</div>}
     </div>
   );
+}
+
+
+/* ======== [STAGE 2026-08-02] THE VIEWER NEVER SCROLLS ====================
+   Mike's ruling, built. The viewer stops being a box with a scrollbar and
+   becomes a STAGE: a fixed frame that content is FITTED to and advanced
+   through as pages. The trap it replaces was measured before it died - The
+   Record hid 182px of itself on a desktop and 533px on a phone, and on a
+   phone every single track was trapped, because the panel scrolled inside
+   itself while the page behind it still had scroll left.
+
+   HOW IT PAGINATES, AND WHY IT IS HONEST ABOUT IT.
+   The caller hands the stage a list of BLOCKS - indivisible things, each of
+   which must land whole on some page. The stage renders them all once into a
+   measuring layer that is the same width and the same column geometry as the
+   real page, reads their true heights off the DOM, and packs greedily. It
+   does not estimate from character counts and it does not guess: a block's
+   height is whatever the browser says it is at the width it will really have.
+
+   COLUMNS ARE PART OF THE CAPACITY, NOT DECORATION. Mike ruled that width
+   buys a COLUMN rather than a longer line, so a wide stage sets two columns -
+   and two columns hold twice the block-height. `column-fill:auto` fills the
+   first column before the second, which is the only mode that matches the
+   packing model; the default (balance) would flow blocks in an order the
+   packer did not choose and the two would disagree at the bottom of a page.
+
+   SHORT PAGES ARE ALLOWED, per the ruling. Pages fill naturally, the last
+   page ends where the document ends, and the endmark closes it. Nothing is
+   stretched to reach the bottom and no page is padded to look full.
+
+   THE ONE CASE THAT CANNOT BE PACKED is a single block taller than the whole
+   stage. It gets a page of its own and IS ALLOWED TO EXCEED IT - and says so
+   in the console rather than clipping silently, because silently cropping is
+   the trap coming back wearing a different hat. The fix for a real one is to
+   split it into smaller blocks upstream; the stage refuses to pretend. */
+function Stage({ blocks, deps, footer }) {
+  const wrapRef = useRef(null);
+  const measRef = useRef(null);
+  const [pages, setPages] = useState([[0, blocks.length]]);
+  const [pg, setPg] = useState(0);
+  const [cols, setCols] = useState(1);
+
+  /* one measure, run on layout and on any resize of the stage */
+  useLayoutEffect(() => {
+    const wrap = wrapRef.current, meas = measRef.current;
+    if (!wrap || !meas) return;
+    function plan() {
+      const box = wrap.getBoundingClientRect();
+      /* the measure rule: one comfortable column, and a second only when
+         there is genuinely room for two of them side by side. */
+      const n = box.width >= 760 ? 2 : 1;
+      setCols(n);
+      const avail = Math.max(80, box.height) * n;
+      const kids = Array.from(meas.children);
+      /* THE GAP IS PART OF THE HEIGHT. The page is a flex column with a gap,
+         so N blocks occupy sum(heights) + (N-1)*gap - and the first version
+         packed on heights alone, which under-counted by one gap per block and
+         let the LAST page overrun by exactly that much (measured: 30px on a
+         3-block page, 82px on a 7-block one). Counted properly now. */
+      const gap = parseFloat(getComputedStyle(meas).rowGap || getComputedStyle(meas).gap || 0) || 0;
+      const out = [];
+      let start = 0, run = 0;
+      kids.forEach((el, i) => {
+        const h = el.getBoundingClientRect().height +
+                  parseFloat(getComputedStyle(el).marginBottom || 0) +
+                  (i > start ? gap : 0);
+        if (h > avail && run === 0) {
+          /* taller than the whole stage: its own page, and we say so */
+          out.push([i, i + 1]);
+          try {
+            console.warn("[stage] block " + i + " is " + Math.round(h) +
+              "px and the stage holds " + Math.round(avail) +
+              "px - it gets a page of its own and will overrun. Split it upstream.");
+          } catch (e) { /* console may be absent */ }
+          start = i + 1; run = 0;
+          return;
+        }
+        if (run + h > avail && i > start) { out.push([start, i]); start = i; run = h; }
+        else { run += h; }
+      });
+      if (start < kids.length) out.push([start, kids.length]);
+      setPages(out.length ? out : [[0, kids.length]]);
+    }
+    plan();
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(plan) : null;
+    if (ro) ro.observe(wrap);
+    return () => { if (ro) ro.disconnect(); };
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [deps, blocks.length]);
+
+  /* a new document starts at its first page */
+  useEffect(() => { setPg(0); }, [deps]);
+  const last = pages.length - 1;
+  const cur = Math.min(pg, last);
+  const [from, to] = pages[cur] || [0, blocks.length];
+
+  /* the transport is the only navigation, and it is absent when there is
+     only one page - a single-page document does not need a page control. */
+  const many = pages.length > 1;
+  useEffect(() => {
+    if (!many) return;
+    function onKey(e) {
+      if (e.key === "ArrowRight" || e.key === "PageDown") setPg(p => Math.min(last, p + 1));
+      if (e.key === "ArrowLeft" || e.key === "PageUp") setPg(p => Math.max(0, p - 1));
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [many, last]);
+
+  return (
+    <div className="stg">
+      <div ref={wrapRef} className={"stg-page" + (cols > 1 ? " stg-2col" : "")}>
+        {blocks.slice(from, to)}
+      </div>
+      {/* the measuring layer: same width, same columns, never seen, never
+          reachable by pointer or by a screen reader. */}
+      <div ref={measRef} className={"stg-measure" + (cols > 1 ? " stg-2col" : "")}
+           aria-hidden="true">{blocks}</div>
+      {many && (
+        <nav className="stg-tp">
+          <button className="stg-step" disabled={cur === 0}
+                  onClick={() => setPg(p => Math.max(0, p - 1))}>&lsaquo; Back</button>
+          <span className="stg-cnt">
+            {footer ? footer + "  \u00b7  " : ""}Page {cur + 1} of {pages.length}
+          </span>
+          <button className="stg-step" disabled={cur === last}
+                  onClick={() => setPg(p => Math.min(last, p + 1))}>Next &rsaquo;</button>
+        </nav>
+      )}
+    </div>
+  );
+}
+
+
+/* THE WRAPPER, and why the face's JSX was not rewritten to use the stage.
+   Every block the viewer draws already exists as a top-level child of the
+   face body - the head, the register, the entries, the footer, the [PAPA]
+   note, the controls. `React.Children.toArray` hands exactly those back, so
+   the stage can paginate the face WITHOUT any of that markup moving. A
+   rewrite would have churned two hundred lines of working, commented JSX to
+   arrive at the same list.
+
+   `data-stage-split` FLATTENS A CONTAINER. A ten-entry index is one DOM node
+   and would page as one indivisible slab - which on a phone is exactly the
+   trap again, so the stage would have to warn and overrun. A container marked
+   for splitting is expanded into one block per child, each re-wrapped in a
+   clone of its own container so it keeps its element type and its classes.
+   That is what lets a long list break across pages by ROW. */
+function StageChildren({ children, deps, footer }) {
+  const blocks = [];
+  React.Children.toArray(children).forEach((child, i) => {
+    const split = child && child.props && child.props["data-stage-split"];
+    if (split && child.props.children) {
+      React.Children.toArray(child.props.children).forEach((row, j) => {
+        blocks.push(React.cloneElement(child, { key: "s" + i + "-" + j }, row));
+      });
+    } else {
+      blocks.push(child);
+    }
+  });
+  return <Stage blocks={blocks} deps={deps} footer={footer} />;
 }
 
 export default function Exhibit({ artist }) {
@@ -1346,7 +1540,7 @@ export default function Exhibit({ artist }) {
           switches rather than global changes. Used by the tracklist type
           scale below: /robots opens at 24% width with three tracks and wants
           bigger type; /hr and /wb run twenty rows at 50% and do not. */}
-      <div className={`ex-root${visible?" visible":""}`} data-exhibit={artist.exhibitSlug || artist.id}>
+      <div className={`ex-root${visible?" visible":""}`} data-exhibit={artist.exhibitSlug || artist.id} data-stage={artist.stage ? "1" : undefined}>
 
         {/* NAV */}
         <div className="ex-nav">
@@ -1491,7 +1685,16 @@ export default function Exhibit({ artist }) {
                             Every other kind falls through unchanged. */}
                         {activeFace.panel ? (
                           <InstrumentPanel decl={activeFace.panel} />
-                        ) : (<>
+                        ) : (
+                        /* [STAGE 2026-08-02] THE FACE IS STAGED, BY CONFIG.
+                           `artist.stage` opts a wing in. /hr and /wb do not
+                           declare it - and could not use it anyway, since
+                           they declare no faces at all - so the standard
+                           lands on one route and cannot reach the music
+                           wings until someone asks it to. */
+                        <StageChildren
+                          deps={String(activeTrack) + ":" + String(openEntry)}
+                          footer={activeFace.footer ? null : null}>
                         {/* [F1 2026-07-31] THE PHOTO IS NOT A BANNER (Mike, doctrine).
                             S7 moved the still INSIDE the viewer, which was right,
                             but it landed as a full-width block across the top —
@@ -1582,7 +1785,7 @@ export default function Exhibit({ artist }) {
                              stay in the order they happened. */
                           const list = isLog ? [...activeFace.entries].reverse() : activeFace.entries;
                           if (!isLog) return (
-                            <ol className="vp-face-entries">
+                            <ol className="vp-face-entries" data-stage-split="row">
                               {list.map((en, i) => (
                                 <li key={i} className="vp-fe">
                                   {en.stamp && <span className="vp-fe-stamp">{en.stamp}</span>}
@@ -1597,7 +1800,7 @@ export default function Exhibit({ artist }) {
                           );
                           const open = openEntry !== null && list[openEntry] ? openEntry : null;
                           if (open === null) return (
-                            <ol className="vp-face-entries vp-rec-index">
+                            <ol className="vp-face-entries vp-rec-index" data-stage-split="row">
                               {list.map((en, i) => (
                                 <li key={i} className="vp-fe vp-rec-row">
                                   <button className="vp-rec-open" onClick={() => setOpenEntry(i)}>
@@ -1707,7 +1910,7 @@ export default function Exhibit({ artist }) {
                             )}
                           >{activeFace.action.label}</button>
                         )}
-                        </>)}
+                        </StageChildren>)}
                       </div>
                     </div>
                   )}
@@ -1764,6 +1967,19 @@ export default function Exhibit({ artist }) {
           </div>
         )}
 
+        {/* [STAGE 2026-08-02] THE PLAYER BAR IS NO LONGER A FIXTURE.
+            Mike's doctrine: a transport appears only where the setting has
+            purpose for it, and its form may differ per setting. /robots has
+            no music - its one moving thing is a machine behind a latch - so
+            a permanent 68px of fixed furniture there was a control for
+            something that never plays, sitting on top of the stage and lying
+            about the height available to it. The census measured it at 11%
+            of a 624px screen.
+            OPT-OUT BY CONFIG, not by route sniffing: an artist declaring
+            `playerBar:false` gets none. The music wings declare nothing and
+            keep theirs exactly as it was; the per-setting redesign is a
+            future pass and is not attempted here. */}
+        {artist.playerBar !== false && (
         <PlayerBar
           video={pbVideo} track={pbTrack} album={pbAlbum}
           live={pbLive} onIdlePlay={onIdlePlay}
@@ -1773,7 +1989,7 @@ export default function Exhibit({ artist }) {
           onToggleMute={isAudioSrc ? audio.toggleMute : yt.toggleMute}
           onSetVolume={isAudioSrc ? audio.setVolume : yt.setVolume}
           getState={isAudioSrc ? audio.getState : yt.getState}
-        />
+        />)}
 
         {/* EXHIBIT FLOW — optional, only rendered if artist provides one.
             playingTrack carries the live player identity as stable ids

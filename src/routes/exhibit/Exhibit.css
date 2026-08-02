@@ -856,3 +856,75 @@ body:has(.pb) .ex-root{padding-bottom:88px}
   .ip-deck{gap:20px}
   .ip-drum{width:clamp(140px,44vw,180px)}
 }
+/* [STAGE 2026-08-02] THE PANEL MUST FIT THE FRAME IT IS MOUNTED IN.
+   Mike ruled the Portal landing stays as-is, and it does - same instruments,
+   same arrangement, same logic. What changed is that the viewer no longer
+   scrolls, so a panel 100px taller than the frame is no longer "scroll a
+   bit", it is CROPPED - and a cropped instrument hides the latch.
+   Measured at 504px wide: 100px over. Tightening the panel's own spacing at
+   narrow widths recovers it without moving a single control. */
+@media (max-width:620px){
+  .ip{padding:clamp(12px,3vw,18px);gap:11px}
+  .ip-deck{gap:14px}
+  .ip-bay-switches{gap:11px}
+  .ip-dial{height:104px}
+  .ip-latchbay{padding-top:10px;gap:12px}
+  .ip-latch{padding:10px 24px}
+  .ip-plate{padding:4px 9px}
+  .ip-screw{display:none}   /* the fixings are the first thing a small plate loses */
+  .ip-bat{height:36px} .ip-bat-lever{height:15px;top:16px} .ip-bat-up .ip-bat-lever{top:5px}
+  .ip-knob{width:40px;height:40px;margin-top:-20px}
+  .ip-refusal,.ip-readout{line-height:1.45;padding-left:10px}
+  .vp-face-panel .vp-face-head{padding-top:clamp(10px,2vw,16px)}
+}
+
+/* ================= [STAGE 2026-08-02] THE FIXED STAGE =====================
+   The ruled standard. The frame does not scroll - it cannot, because nothing
+   in here is a scroll container. Content is fitted and paged.
+   The old behaviour is gone rather than disabled: `.vp-face-body` used to be
+   `overflow-y:auto`, which is the exact mechanism that hid 533px of The
+   Record on a phone. It clips now, and the pagination is what makes clipping
+   safe: a page only ever contains blocks that were measured to fit it. */
+.ex-root[data-stage="1"] .vp-face-body{overflow:hidden;padding:0;min-height:0}
+/* `overflow:hidden` here is not decoration. The measuring layer is
+   absolutely positioned, and an absolutely positioned child STILL EXTENDS ITS
+   ANCESTOR'S SCROLL EXTENT - so without this the face body reported hundreds
+   of px of scrollHeight it could not scroll to, and the verification of "no
+   hidden content" measured the measurer instead of the page. Clipping at the
+   stage makes scrollHeight tell the truth again. */
+.stg{display:flex;flex-direction:column;min-height:0;flex:1;overflow:hidden;
+  padding:clamp(14px,2.2vw,30px);gap:12px}
+.stg-page{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;
+  overflow:hidden}
+/* WIDTH BUYS A COLUMN, NOT A LONGER LINE (Mike). column-fill:auto is not a
+   style choice - it is the only mode whose flow order matches the packer's. */
+.stg-page.stg-2col,.stg-measure.stg-2col{display:block;column-count:2;
+  column-gap:38px;column-fill:auto;column-rule:1px solid var(--wb-border)}
+.stg-page.stg-2col>*,.stg-measure.stg-2col>*{break-inside:avoid;margin-bottom:12px}
+/* the measuring layer: laid out for real, shown to no one, touched by no one */
+.stg-measure{position:absolute;left:-99999px;top:0;width:100%;
+  visibility:hidden;pointer-events:none;
+  display:flex;flex-direction:column;gap:12px}
+.stg{position:relative}
+
+/* THE TRANSPORT - present only when there is more than one page. A
+   single-page document does not need a page control, which is what
+   "short-allowed" means at the bottom of the frame as well as the top. */
+.stg-tp{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  flex:0 0 auto;padding-top:10px;border-top:1px solid var(--wb-border)}
+.stg-step{font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--face-fs) * .58);letter-spacing:.16em;text-transform:uppercase;
+  background:none;border:1px solid var(--wb-border);color:var(--wb-gold-lo);
+  padding:7px 13px;cursor:pointer;transition:border-color .18s,color .18s}
+.stg-step:hover:not(:disabled),.stg-step:focus-visible:not(:disabled){
+  border-color:var(--wb-gold-lo);color:var(--wb-gold);outline:none}
+.stg-step:disabled{opacity:.3;cursor:default}
+.stg-cnt{font-family:'Courier Prime','Courier New',monospace;
+  font-size:calc(var(--face-fs) * .54);letter-spacing:.14em;color:var(--wb-gold-mute)}
+.vp-face-panel .stg{padding:0}
+
+/* [STAGE] the index row closes on its TOP rule only. With the stage
+   splitting a list across pages each row carries its own container, so a
+   bottom rule on the last row would draw a second line between every pair.
+   Top-only is seamless whether the list is whole or paged. */
+.vp-rec-index .vp-rec-row:last-child .vp-rec-open{border-bottom:0}
