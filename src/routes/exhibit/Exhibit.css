@@ -359,8 +359,21 @@ body:has(.vp-face) .vp-area::before{display:none}
    16:9 AND CROPPED, because the source is a video poster and every one of them
    is 16:9 already — `object-fit:cover` is insurance against a square, not a
    crop anybody will see. */
+/* [C1 2026-08-03] THE PLATE TAKES THE ROOM THE RECORD CARDS GAVE BACK.
+   Mike's C1 killed the per-song provenance sideboxes and then named the risk in
+   the same breath: "it must not become a text-only landing." Removing two grey
+   registers from the top of About the Songs frees most of a screen, and a
+   17%/168px picture was sized for a face that had a second column of furniture
+   competing with it. It no longer does.
+   At clamp(140px,26%,260px) the song's poster is the first thing on the face
+   with a shape, at a size a visitor reads as a picture rather than as an icon
+   beside a paragraph — which is what the VISUAL HOOK LAW asks of the surface.
+   ONE CONSUMER, CHECKED. `.vp-fe-plate` renders only where an entry declares
+   `img`, and About the Songs (worth-a-listen.js) is the only face in the
+   building that does; the robots wing's entry lists declare none and are
+   unchanged to the byte. */
 .vp-fe-plated{align-items:flex-start}
-.vp-fe-plate{flex:0 0 auto;width:clamp(96px,17%,168px);aspect-ratio:16/9;
+.vp-fe-plate{flex:0 0 auto;width:clamp(140px,26%,260px);aspect-ratio:16/9;
   object-fit:cover;display:block;
   background:var(--wb-ink-card);
   border:1px solid var(--wb-border);
@@ -2533,7 +2546,26 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
 [data-exhibit="wal"] .vp-area-flat:not(.vp-area-stowed) .vp-inner{
   box-shadow:0 0 0 1px var(--wb-border-hi)}
 /* the B&W site law does NOT apply to WAL (W8) — plates keep their color. */
-[data-exhibit="wal"] .vp-face-still{filter:none;max-width:min(100%,420px)}
+/* [C4 2026-08-03] AND A PORTRAIT PLATE IS NO LONGER LETTERBOXED INSIDE ITS OWN
+   FRAME. Measured, not guessed: with `height:min(48cqh,210px)` fixed and the
+   width left to the flex line, Hunter Root's new 1100×1377 portrait resolved to
+   a 420×210 BOX — so `object-fit:contain` painted the picture at 168×210 and
+   left 126px of empty paper on each side, with the 1px border ringing the empty
+   box rather than the photograph. Carsie's 1200×630 landscape happened to
+   escape it because its natural width at that height already sat inside the
+   clamp; the defect was invisible until a plate taller than it is wide arrived,
+   and Jesse's 1500×1878 was sitting in it too.
+   THE FIX IS TO STOP FIXING THE HEIGHT. Both axes become maxima, so the
+   picture's own ratio decides the box on every plate: a portrait lands at
+   240×300, a landscape at 420×220, and neither has a margin painted inside its
+   own border. `align-self:flex-start` keeps the flex column from handing the
+   image a cross-size it never asked for. This is the same principle the F1 note
+   at `.vp-face-still` states — "the height sets the size and the width follows
+   the picture's own aspect" — applied on the axis F1 could not test, because
+   until this round no WAL plate was taller than it was wide. */
+[data-exhibit="wal"] .vp-face-still{filter:none;align-self:flex-start;
+  width:auto;height:auto;
+  max-width:min(100%,420px);max-height:min(64cqh,300px)}
 [data-exhibit="wal"] .vp-poster img{filter:none}
 
 /* ===========================================================================

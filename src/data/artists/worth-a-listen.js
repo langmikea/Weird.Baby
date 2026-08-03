@@ -363,20 +363,37 @@ const ARTISTS = [
        "About the Artist SPECIFICALLY must open on an interesting image/visual,
        not paragraphs." Two of the four artists declared a `plate` and two did
        not, so half this wing's artist cards opened on a heading and then prose.
-       WHAT IS USED, AND WHY IT IS NOT A NEW RIGHTS DECISION. This is the file
-       already vaulted and already logged in docs/WAL_PHOTO_PROVENANCE-20260802
-       — the ’94 video's poster frame, which is the Crooked Home childhood-photo
-       sleeve, from OUR OWN catalogue (MV-20260523-001). No outside rights are
-       in play and nothing new is sourced, which is the whole reason it is
-       reachable today rather than being another ART-pending slot.
-       IT IS THE SAME FILE THE COVERFLOW SHOWS, AND THAT IS A NAMED TRADE, not
-       an oversight: a card that opens on the record you just pressed is a
-       weaker hook than a portrait would be, and it is a much stronger one than
-       four paragraphs. When a portrait exists this is one string.
-       [PAPA] is NOT used here — a picture is not a sentence and the scrubber
-       cuts sentences; the want is carried in the round log instead. */
-    plate: "/images/wal/hunter-root-cover.jpg",
-    plateCaption: "The ’94 sleeve — a childhood photograph, from the museum's own vault.",
+       F1 filled this slot with the coverflow's own file — the ’94 poster frame
+       — and named the trade in the same breath: "a card that opens on the
+       record you just pressed is a weaker hook than a portrait would be … WHEN
+       A PORTRAIT EXISTS THIS IS ONE STRING."
+
+       [C4 2026-08-03] THE PORTRAIT EXISTS. IT IS THE ONE STRING.
+       Mike: "fine as-is unless a better vault image exists; check and use the
+       best available." The vault was checked rather than assumed — all 49
+       artifacts in src/data/exhibits/hunter_root.json, of which exactly three
+       carry media_type "photo" — and each was fetched and looked at:
+         · MV-20260419-002  a puppet by ElmThree Productions. Not him.
+         · MV-HR-20260405-035  him, grinning, holding a chip sandwich — but the
+             capture is a Facebook post complete with the post header and a
+             browser scrollbar down its right edge. A screenshot of a page, not
+             a photograph of a person.
+         · MV-HR-20260405-037  THE ONE. An Instagram capture whose photo panel
+             is a clean, front-facing, smiling portrait: him in the driver's
+             seat, tie-dye Chet Vincent tee, daylight. Cropped out of the
+             Instagram chrome at the capture's own resolution (3840×1823 → the
+             panel at 1197×1499, resampled to 1100 wide) it is a plate, and it
+             is the best picture of Hunter Root this museum holds.
+       WHY THIS IS STILL NOT A NEW RIGHTS DECISION. Same class as the file it
+       replaces: OUR OWN vaulted catalogue of our own house artist, released in
+       MediaVault, exported by our own tool. Nothing was fetched from an outside
+       surface for it — the crop is of a capture we already hold. Logged in
+       docs/WAL_PHOTO_PROVENANCE-20260802.md with the other five.
+       AND THE COVERFLOW GETS ITS FILE BACK TO ITSELF: `art` and `plate` are no
+       longer the same image, so pressing the record and then reading his card
+       are two different pictures, which is what the duplication cost. */
+    plate: "/images/wal/hunter-root-plate.jpg",
+    plateCaption: "On the road, September 2024 — from the museum's own vault.",
     songs: [
       { title: "’94", slug: "94", ytId: "vPW49GU38Ng",
         note: "Official music video. Museum catalogue MV-20260523-001, " +
@@ -1128,9 +1145,31 @@ function doorsFor(a) {
 }
 
 /* [W10] ABOUT THE SONGS — the per-song museum cards, merged onto one page.
-   The interpretive labels run as entries (stamped with the track numbers);
-   the factual registers ride as sideboxes, one per song. This is what
-   replaced the indented sub-rows, per Mike's order. */
+   The interpretive labels run as entries, stamped with the track numbers.
+
+   [C1 2026-08-03] THE RECORD CARDS ARE GONE FROM THE WALL, NOT FROM THE FILE.
+   MIKE: "the per-song provenance cards (MAKER / MEDIUM / PUBLISHED BY / ALSO
+   AT / VERIFIED / FROM / RELEASED AS / PRODUCED BY / SOURCE) are OUR audit
+   trail dressed as content — useless to a visitor, without direction or
+   purpose, and redundant against the numbered paragraph that follows for the
+   same song."
+   He is right on all three counts, and the third is the one that settles it.
+   The register printed "FROM  Skipping Stones That Sink Before They're Thrown"
+   and "MEDIUM  Official music video" directly above a paragraph that says what
+   the song is and why it is here — so a visitor read the same fact twice, in
+   the weaker order, and the weaker one came FIRST: the sideboxes rendered
+   ABOVE the entries (Exhibit.jsx draws `sideboxes` before `entries`), which
+   put two grey boxes of accession numbers between the visitor and every word
+   written for them. On a two-song face that is the whole first screen.
+   WHAT IS DELETED IS ONE `sideboxes:` KEY. Every `card.tombstone` below is
+   untouched, and that is deliberate: the tombstones are the verification
+   record — the accession ids, the oEmbed author_url checks, the transposition
+   ledger that caught two swapped artist-pairs. That discipline is unchanged.
+   It simply stops being furniture in a public room. The file is the ledger;
+   the wall is for the visitor.
+   (This does NOT generalise to `aboutArtistTrack`. Its sideboxes are the
+   artist's own material — awards, catalogue, billing — which is content a
+   visitor came for, not a record of how we checked it.) */
 function aboutSongsTrack(a) {
   const withCards = a.songs.filter(s => s.card);
   if (!withCards.length) return null;
@@ -1162,10 +1201,9 @@ function aboutSongsTrack(a) {
         img: s.ytId ? "https://i.ytimg.com/vi/" + s.ytId + "/hqdefault.jpg" : undefined,
       })),
       entriesMode: "list",
-      sideboxes: withCards.map(s => ({
-        title: s.title + " — the record",
-        lines: s.card.tombstone.map(r => r.k.toUpperCase() + "   " + r.v),
-      })),
+      /* [C1] no `sideboxes` — see the header. `s.card.tombstone` is still read
+         by nothing on this face and still kept by every song, which is the
+         point of the change rather than an oversight in it. */
       footer: "WORTH A LISTEN · " + a.name,
       papa: "[PAPA] — the words for the songs' cards.",
     },

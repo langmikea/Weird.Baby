@@ -24,6 +24,7 @@ surface (findmikeymike.com — injected SEO spam, see the ledger note in
 | jesse-welles-plate.jpg | Jesse Welles | Press portrait "Jesse Welles-3.jpg", his own site's og:image. | wellesmusic.com (og:image) | https://static1.squarespace.com/static/57fbbc0b9de4bbd015d55e5a/t/65f353342c850a5d6cf964c2/1710445376493/Jesse+Welles-3.jpg?format=1500w | 1500×1878 | About the Artist plate |
 | mikey-mike-cover.jpg | Mikey Mike | His channel portrait: porch cam still, cigarette, wagon of records. His own chosen public face. | youtube.com/@findmikeymike (channel og:image) | https://yt3.googleusercontent.com/N-PA1_tOHmfb4aO1-5B8K1Bvq2MpD5akVYsyEOdZexQUc-raCHXik5BnL5KiISbupFfwzJHQmA=s900-c-k-c0x00ffffff-no-rj | 900×900 | Coverflow cover |
 | hunter-root-cover.jpg | Hunter Root | The ’94 video's poster frame (the Crooked Home childhood-photo sleeve). OUR OWN CATALOGUE — MV-20260523-001, foundation-backed; no outside rights in play. | museum vault / YouTube poster surface | https://i.ytimg.com/vi/vPW49GU38Ng/maxresdefault.jpg | 1280×720 | Coverflow cover |
+| hunter-root-plate.jpg | Hunter Root | **Added 2026-08-03 (C4).** Front-facing portrait: driver's seat, tie-dye Chet Vincent tee, daylight. OUR OWN CATALOGUE — MV-HR-20260405-037, released in MediaVault and carried by our own export. Derived by cropping the photo panel out of the Instagram chrome in the stored capture (source 3840×1823 → panel 1197×1499 at 880,75–2077,1574 → resampled to 1100 wide, JPEG q88). Nothing was fetched from an outside surface: the crop is of an asset the museum already held. | museum vault (MediaVault export → assets.weird.baby) | https://assets.weird.baby/assets/d8/d8b100ab50ecde19eb3d50369f998f4f48b11bff214e21e801e3adce78e81df8.png | 1100×1377 | About the Artist plate |
 
 Rejected in the pass, and why:
 - `hunterroot.com` og:image (`Large.png`, 1500×1498) — fetched and inspected:
@@ -32,6 +33,20 @@ Rejected in the pass, and why:
   not needed: two of hers were already better-fitted to their slots. Deleted.
 - findmikeymike.com — his real domain, currently serving an injected SEO link
   farm. Not fetched from, not linked, per the standing ledger note.
+
+Rejected in the C4 vault sweep (2026-08-03), and why — all three `media_type:
+"photo"` artifacts in `hunter_root.json` were fetched and looked at, not
+filtered on metadata:
+- `MV-20260419-002` — a bearded puppet character by ElmThree Productions,
+  filed under the exhibit because the reel references Hunter Root. Not a
+  picture of him at all.
+- `MV-HR-20260405-035` — him, grinning, holding a chip sandwich (Facebook,
+  2019-05-21). A real and characterful photograph, but the stored capture is
+  of the POST: Facebook's own header, the poster's name and date, and a
+  browser scrollbar down the right edge. Cropping to the image alone leaves a
+  usable but soft frame; -037 was better on every axis, so this stays unused
+  rather than becoming a second-best plate.
+- `MV-HR-20260405-037` — **taken**, see the table above.
 
 Video THUMBNAILS shown by the wing's embeds and collage (i.ytimg.com URLs)
 are not vaulted files and are not in this table: per Mike's W3 ruling they are

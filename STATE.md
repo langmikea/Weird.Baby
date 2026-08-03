@@ -42,6 +42,96 @@ Current compliance, every face and page, audited on the built page:
 `docs/VISUAL_HOOK_AUDIT-20260803.md`. Five surfaces remain text-only — all in
 the robots wing, none a landing, all ART-pending rather than code-pending.
 
+## SEALED 2026-08-03 — THE CLEANUP ROUND (v41; C1–C4. PUSH + DEPLOY ARE MIKE'S)
+
+Autonomous single-agent Code-lane round on Mike's remote-control brief. Full
+round log: `docs/MUSEUM_CLEANUP_LOG-20260803.md`. Frames:
+`docs/cleanup-round-20260803/`. Cleans up after v40, below.
+
+- **C1 THE RECORD CARDS ARE OFF THE WALL, AND STILL IN THE FILE.** Mike: the
+  per-song provenance cards are "OUR audit trail dressed as content … redundant
+  against the numbered paragraph that follows for the same song." All nine
+  labels (MAKER/MEDIUM/PUBLISHED BY/…) were one generated `sideboxes:` key in
+  `aboutSongsTrack`, and **the redundancy was worse than stated: `Exhibit.jsx`
+  draws `sideboxes` BEFORE `entries`**, so on a two-song face two grey registers
+  took the entire first screen and every word written for a visitor sat below the
+  fold. **One key deleted; every `card.tombstone` kept** (verified after: 15
+  `tombstone:` keys, 8 `k:"Maker"`) — verification discipline unchanged, it just
+  stops being furniture in a public room. **Does NOT generalise to
+  `aboutArtistTrack`**, whose sideboxes are the artist's own awards/catalogue/
+  billing — content a visitor came for, not a record of how we checked it; the
+  distinction is written into the file. **Hook re-applied:** `.vp-fe-plate`
+  `clamp(96,17%,168)` → **`clamp(140,26%,260)`**, since the picture no longer
+  competes with a column of furniture. **One consumer, checked** — only About the
+  Songs declares entry `img`; the robots wing's entry lists are byte-identical.
+  Verified 0 boxes / 2 plates / 0 broken images on all four artists.
+- **C2 "FOUNDATION" IS DEAD; THE ROOM IS `WHERE THE MONEY GOES` AT `/money`.**
+  Mike ruled the word carries a legal expectation the charter refuses. v40 saw
+  the same tension and answered it by making "there is no fund" answer one —
+  defensible, and the wrong trade: **a name that has to be walked back in its own
+  first paragraph costs a visitor something to read.** Chosen over "The Ledger"
+  (implies books and periods — the machinery the room denies) and "Nothing Is
+  Kept" (charter's own sentence, but a stranger scanning the board cannot tell
+  what room it is, against M8's law). **It is this house's own phrase for this
+  exact subject** — W5 retired the where-does-the-money-go block from the
+  artists' cards because it "lives in W.B's own FAQ", and this room is that FAQ.
+  **Swept whole:** route, both files, component, `data-room`, `.fnd-`→`.mny-`,
+  title bar, directory board, Q1. Share tags needed nothing (one site-wide set,
+  word never in it). **`/foundation` → `/money` redirects, and the reasoning went
+  the WRONG WAY FIRST — Rule 0, exactly.** The round was scoped on a fact true at
+  session start (v40 committed, unpushed, never deployed ⇒ no link to honour ⇒ no
+  alias), and that argument was written into the file. **Checked against the live
+  site instead of trusted:** `weird.baby/foundation` returned **200** and the
+  deployed bundle carried the old route and strings — **Mike pushed AND deployed
+  v40 mid-round.** Without the redirect the next deploy breaks a live URL, and
+  **`App.jsx` has no catch-all**, so it breaks to a blank shell rather than a
+  404. The premise was true when the session opened and false when it was acted
+  on; only probing the live surface caught it. **One regression the rename
+  caused, caught on glass:**
+  at 390px the bar offers 196px and the new name needs 220px, so it printed
+  "WHERE THE MONEY …" — **the only truncated title in the building**, every other
+  room 0px over. MuseumBar's ellipsis mechanic is NOT overridden in general (its
+  320px defence stands); this room takes one further step **alone**, scoped
+  `html[data-room="money"]` at ≤430px, 0.7rem/0.04em = 188px. Re-measured: money
+  untruncated at 11.2px, five other rooms unchanged at 12.8px.
+- **C3 IT SHIPS, AND IT CLAIMS NOTHING.** Mike: "no one important is going to do
+  real research on us right now." DRAFT v0.3 is not a blocker. Audited every
+  answer's `textContent` (including collapsed `<details>`, which `innerText` does
+  not reach) for `501(c)|non-profit|registered|registration|charity number|tax|
+  deduct|incorporat|LLC|charitable`: **two matches, both correct** — Q1's
+  disclaimer ("no registration, no charity number, and no receipt … that does
+  anything to your taxes") and Q4 describing the **recipients**. **Q1 rewritten,
+  not retitled:** "Is this a charity?" is the question a stranger arrives with,
+  and answering it outright is the room's licence to ship — silence would be
+  answered by their assumptions, which are wrong. **One subtraction, stated:**
+  the charter's clause-3 list of gifted services drops "the legal work" **in the
+  room only** — a page that denies the entity in Q1 cannot describe its ongoing
+  legal work in Q10. The charter is unchanged. Twelve questions, **zero `[PAPA]`
+  leaks**, every scrubbed answer ends on a whole sentence.
+- **C4 THE PORTRAIT EXISTED, AND FINDING IT EXPOSED A LAYOUT DEFECT.** v40's own
+  note had pre-committed the answer ("when a portrait exists this is one
+  string"). **All three `media_type:"photo"` artifacts in `hunter_root.json` were
+  fetched and LOOKED AT**, not filtered on metadata: a puppet (not him), the chip
+  sandwich (him, but the capture is of the Facebook post — header, scrollbar), and
+  **`MV-HR-20260405-037`**, whose photo panel is a clean front-facing portrait.
+  Cropped out of the Instagram chrome (3840×1823 → 1197×1499 → 1100 wide) to
+  `hunter-root-plate.jpg`. **Not a new rights decision** — our own vault, our own
+  house artist, nothing fetched from an outside surface; logged with the other
+  five. `art` and `plate` are no longer the same file. **THE DEFECT:** the new
+  plate rendered **letterboxed inside its own frame** — fixed `height` + flex
+  width gave a 1100×1377 portrait a **420×210 box**, so `contain` painted it at
+  168×210 with 126px of empty paper each side and **the border ringing the empty
+  box**. Carsie's landscape escaped it, which is why it stayed invisible; **Jesse
+  Welles's 1500×1878 had been sitting in it since F1.** Fix: both axes become
+  maxima + `align-self:flex-start`, so the picture's ratio decides the box. All
+  three now match their natural ratio to within 0.008.
+
+**Gates:** lint 11 err / 9 warn (= HEAD baseline, zero new), vite build green,
+desktop 1706×900 + genuine 390×740 iframe lap, zero page-level horizontal scroll
+on eight routes, zero title truncation, zero `[PAPA]` leaks, zero legal claims.
+
+---
+
 ## SEALED 2026-08-03 — THE FOUNDATION ROUND (v40; F0–F4. PUSH + DEPLOY ARE MIKE'S)
 
 Autonomous single-agent Code-lane round on Mike's remote-control brief. Full

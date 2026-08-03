@@ -1,4 +1,4 @@
-// src/routes/Foundation.jsx — THE WEIRD.BABY FOUNDATION (/foundation).
+// src/routes/Money.jsx — WHERE THE MONEY GOES (/money).
 //
 // [F3 2026-08-03] MIKE: "THE WEIRD.BABY FOUNDATION (new directory section): add
 // it to the directory. Use the INFORMATION BOOTH as the template driving its
@@ -8,9 +8,55 @@
 // already dictated on this. Build from what exists; [PAPA] where his voice must
 // land; nothing invented."
 //
+// [C2 2026-08-03] AND THEN MIKE RULED ON THE NAME, WHICH IS WHY THIS FILE IS
+// NOT CALLED Foundation.jsx. His words: "Foundation" carries a legal
+// expectation the charter deliberately refuses, and he wants to stay entirely
+// out of any space requiring legal today. The last round built the room, saw
+// the same tension, and answered it by making "there is no fund" the first
+// sentence on the page — a defensible answer, and the wrong one: it left the
+// museum arguing with its own signage. A name that has to be walked back in its
+// own first paragraph is a name that costs a visitor something to read.
+//
+// ─── THE THREE NAMES CONSIDERED, AND WHY THIS ONE ────────────────────────────
+//   "Where the Money Goes"  ← CHOSEN. Zero legal freight — it is a direction,
+//       not an entity, and no reader has ever expected a filing behind a
+//       sentence. It says what is behind the door in the words a stranger would
+//       use to ask. And it is not invented for this round: it is THIS HOUSE'S
+//       OWN PHRASE for exactly this subject — the W5 ruling in
+//       worth-a-listen.js retired the where-does-the-money-go block from the
+//       artists' cards on the grounds that it "lives in W.B's own FAQ", and
+//       this room is where that FAQ went. The board now reads as a pair: the
+//       booth answers what this place IS, this one answers where the money
+//       goes.
+//   "The Ledger"            — shortest, and it matches the room's own hook. Cut
+//       because it implies books, accounts and periods — precisely the
+//       machinery the room exists to say does not exist. A visitor arriving at
+//       "The Ledger" expects figures to check; the honest figure is one zero,
+//       and a name that promises a statement and delivers a placard is the same
+//       defect as "Foundation" wearing a different coat.
+//   "Nothing Is Kept"       — the charter's own sentence, maximum house voice,
+//       no freight at all. Cut on the directory board: a stranger scanning five
+//       lines cannot tell what room it is, and M8's law for that board is that
+//       the names say what kind of thing each entry is.
+//
+// The charter's refusal STANDS and is not softened by the rename — the room
+// still says there is no fund, no account and nothing set aside. What changed
+// is that it no longer has to say it in order to defend its own title.
+//
+// [C3 2026-08-03] THIS ROOM SHIPS, and Mike ruled why: "no one important is
+// going to do real research on us right now; I prefer viewing stuff online."
+// THE_CHARTER.md being DRAFT v0.3 is therefore not a blocker — but shipping
+// raises the bar on one specific thing, so it was audited line by line before
+// this file was saved: NOTHING ON THIS PAGE CLAIMS A LEGAL STATUS, A
+// REGISTRATION, OR A TAX TREATMENT. There is no "non-profit", no "501(c)", no
+// "registered", no "charitable organisation" applied to US (the phrase appears
+// once and it describes the RECIPIENTS), and no suggestion that anything a
+// visitor does here is deductible. Q1 states the absence outright rather than
+// leaving it to be inferred, because an unanswered "is this a charity?" is
+// answered by the visitor's assumptions, and their assumptions are wrong.
+//
 // ─── WHERE EVERY SENTENCE ON THIS PAGE CAME FROM ─────────────────────────────
-// NOTHING HERE IS NEW DOCTRINE. Four sources, all in the tree, all read this
-// session:
+// NOTHING HERE IS NEW DOCTRINE. Four sources, all in the tree:
 //
 //   docs/canonical/THE_CHARTER.md          — What Weird.Baby Is; The Purpose;
 //                                            The Law (6 clauses); The Coffers;
@@ -31,28 +77,13 @@
 //                                            the two rooms cannot contradict
 //                                            each other.
 //
-// ─── THE ONE THING THE ARCHIVE DOES NOT SAY, AND IT IS THE ROOM'S NAME ───────
-// The charter never uses the word "foundation", and it refuses the thing the
-// word normally means: a foundation has an endowment, and clause 4 of the Law
-// is that money never stops here. A visitor who reads "Foundation" in a museum
-// directory will arrive expecting a fund.
-// THAT TENSION IS NOT PAPERED OVER — IT IS THE FIRST ANSWER ON THE PAGE. Saying
-// "there is no fund" in the room called the Foundation is the strongest version
-// of the doctrine this house has, and burying it would have been the "digging"
-// the R3 doctrine forbids. The name is Mike's and stands; the sentence that
-// makes it honest is the one below.
-// The legal half — whether an entity is ever formed — is explicitly UNRESOLVED
-// in the archive ("LLC and formalities: not today, only if attention arrives
-// first"), so it carries a [PAPA] and the visitor is told nothing either way.
-//
 // ─── STATUS OF THE SOURCE, STATED PLAINLY ────────────────────────────────────
 // THE_CHARTER.md reads "DRAFT v0.3 — awaiting Papa's full review. Not
 // published." This page is therefore built to the marker discipline rather than
 // to a publication decision: every sentence that is a POSITION Papa has not
 // ruled carries [PAPA] and is scrubbed at the render seam, so no unruled words
 // can reach a visitor. What survives is the part the charter states as settled
-// law plus what this museum has already published at /booth. Whether the room
-// ships at all is a deploy decision and deploys are Mike's.
+// law plus what this museum has already published at /booth.
 //
 // ─── TEMPLATE ────────────────────────────────────────────────────────────────
 // The booth's, deliberately and literally: this file imports InfoBooth.css and
@@ -60,11 +91,11 @@
 // contact line and the way back. Mike named that room as the pattern; the
 // strongest form of "use it as the template" is to use the same rules rather
 // than a second copy that drifts from them by Tuesday. Only what is NEW here —
-// this room's ground and its own visual hook — lives in Foundation.css.
+// this room's ground and its own visual hook — lives in Money.css.
 
 import { Link } from "react-router-dom";
 import "./InfoBooth.css";
-import "./Foundation.css";
+import "./Money.css";
 import { useRoom } from "../lib/use-room.js";
 import { useArrival } from "../lib/use-arrival.js";
 import MuseumBar from "../components/MuseumBar.jsx";
@@ -89,14 +120,20 @@ import { visitorProse, kept } from "../lib/visitor-prose.js";
    marker or the sentence. */
 const FAQ = [
   {
-    q: "Is this a foundation?",
-    a: "Not the kind with a building and an endowment. There is no fund here, " +
-       "no account, and nothing set aside — that is not modesty, it is the " +
-       "arrangement: money does not stop at Weird.Baby, so there is never a " +
-       "balance for it to stop in. What the word means here is the set of " +
-       "rules the whole place is built on, written down and kept. [PAPA] — " +
-       "whether Weird.Baby is ever formally incorporated, and as what, is " +
-       "Papa's call and is not settled.",
+    /* [C2/C3] WAS "Is this a foundation?", which only had to be asked because
+       the room used to be called one. The question a stranger actually arrives
+       with is this one, and the answer is the room's licence to ship: it denies
+       the registration and the tax treatment in the same breath, so nobody can
+       infer either from the museum's silence. */
+    q: "Is this a charity?",
+    a: "Not in the legal sense, and nothing here is set up to be one. There " +
+       "is no registration, no charity number, and no receipt at the end of " +
+       "it that does anything to your taxes — because there is nothing here " +
+       "to give to. Money does not stop at Weird.Baby, so there is never a " +
+       "balance for it to stop in: no fund, no account, nothing set aside. " +
+       "The name on the door is the whole of it. Where the money goes is " +
+       "out, to somebody else, always. [PAPA] — whether Weird.Baby is ever " +
+       "formally incorporated, and as what, is Papa's call and is not settled.",
   },
   {
     q: "Why do this at all?",
@@ -168,12 +205,20 @@ const FAQ = [
        "on this is Papa's own and is his to write or to leave unwritten.",
   },
   {
+    /* [C3] the charter's clause 3 lists "the design, the code, the shelf, the
+       legal work" as the gifts of service. THE LEGAL WORK IS NOT LISTED HERE,
+       and the subtraction is deliberate rather than an omission: this page now
+       tells a visitor in Q1 that there is no registration and no entity, and a
+       room that says that and then mentions its ongoing legal work in the next
+       breath is describing machinery it has just denied. The clause is
+       unchanged in the charter, which is the document that records what is
+       accepted; this is the room, which describes what is here. */
     q: "Who pays you?",
     a: "Nobody. One person keeps this place and the job pays nothing — not " +
        "salary, not expenses, not credit taken. The museum never pays to be " +
-       "managed, and only zero-invoice services are accepted: the design, the " +
-       "code, the shelf, the legal work all arrive as gifts of service. " +
-       "That's the deal, and it never changes.",
+       "managed, and only zero-invoice services are accepted: the design, " +
+       "the code and the shelf all arrive as gifts of service. That's the " +
+       "deal, and it never changes.",
   },
   {
     q: "Do you make anything from the artists you show?",
@@ -195,13 +240,13 @@ const FAQ = [
   },
 ];
 
-export default function Foundation() {
+export default function Money() {
   /* [R5] this room owns the page ground while it is mounted — see
      src/lib/use-room.js and the header of this route's stylesheet. */
-  useRoom("foundation");
+  useRoom("money");
   /* [M2] first visit of the session opens at the top; a return keeps the
      question the visitor had open and the place they were reading. */
-  useArrival("foundation");
+  useArrival("money");
 
   /* Scrubbed at the render seam, exactly as the booth does it. An answer that
      were ever ENTIRELY a marker would vanish rather than print one — the
@@ -211,8 +256,8 @@ export default function Foundation() {
     .filter(({ q, a }) => kept(q) && kept(a));
 
   return (
-    <div className="booth-root fnd-root">
-      <MuseumBar room="The Foundation" />
+    <div className="booth-root mny-root">
+      <MuseumBar room="Where the Money Goes" />
 
       <div className="booth-card">
         {/* ==== [F1/F3 2026-08-03] THE ACCOUNT ==============================
@@ -231,15 +276,20 @@ export default function Foundation() {
             again. Nothing here is measured, so nothing here can go out of date
             — which is the difference between this and a live counter, and the
             reason it is a ledger rather than a dashboard.
+            [C2] IT ALSO CARRIES THE ROOM'S TITLE NOW. Under the old name the
+            card had to introduce itself; under this one the head and the
+            figure finish the sentence the door started — where the money goes,
+            and how much of it stayed. The object did not change, its caption
+            did.
             `aria-hidden`, for the booth ticket's reason: the answers below say
             all four facts in sentences, and a screen reader hearing "$0.00
             HELD, EVER" as a fragment ahead of them is served worse, not
             better. */}
-        <div className="fnd-ledger" aria-hidden="true">
-          <div className="fnd-ledger-head">Weird.Baby &mdash; the account</div>
-          <div className="fnd-ledger-figure">$0.00</div>
-          <div className="fnd-ledger-caption">held, ever</div>
-          <dl className="fnd-ledger-rows">
+        <div className="mny-ledger" aria-hidden="true">
+          <div className="mny-ledger-head">Weird.Baby &mdash; the account</div>
+          <div className="mny-ledger-figure">$0.00</div>
+          <div className="mny-ledger-caption">held, ever</div>
+          <dl className="mny-ledger-rows">
             <div><dt>Owned</dt><dd>nothing</dd></div>
             <div><dt>Kept by the keeper</dt><dd>nothing</dd></div>
             <div><dt>Passed on</dt><dd>all of it</dd></div>
@@ -283,7 +333,7 @@ export default function Foundation() {
             pointer should read. */}
         <p className="booth-back">
           <Link to="/booth">The Information Booth</Link>
-          <span className="fnd-sep"> &middot; </span>
+          <span className="mny-sep"> &middot; </span>
           <Link to="/">Back to the lobby</Link>
         </p>
       </div>

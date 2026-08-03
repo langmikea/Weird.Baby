@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useNavigate, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import WbHome     from "./routes/WbHome.jsx";
 import WbAdmin    from "./routes/WbAdmin.jsx";
@@ -9,7 +9,7 @@ import HrArchive  from "./routes/hr/HrArchive.jsx";
 import HrFanWall  from "./routes/hr/HrFanWall.jsx";
 import WbSpine    from "./routes/wb/WbSpine.jsx";
 import InfoBooth  from "./routes/InfoBooth.jsx";
-import Foundation from "./routes/Foundation.jsx";
+import Money      from "./routes/Money.jsx";
 import GiftShop   from "./routes/shop/GiftShop.jsx";
 import Robots     from "./routes/robots/Robots.jsx";
 import Wal        from "./routes/wal/Wal.jsx";
@@ -66,8 +66,25 @@ export default function App() {
         <Route path="/hr/fan-wall" element={<HrFanWall />} />
         <Route path="/wb" element={<WbSpine />} />
         <Route path="/booth" element={<InfoBooth />} />
-        {/* [F3 2026-08-03] the Foundation — Mike's new directory section. */}
-        <Route path="/foundation" element={<Foundation />} />
+        {/* [F3 2026-08-03] Mike's new directory section. [C2 2026-08-03] it was
+            `/foundation` and is now `/money`: Mike ruled the old name carried a
+            legal expectation the charter refuses. */}
+        <Route path="/money" element={<Money />} />
+        {/* [C2 2026-08-03] AND THE OLD DOOR STILL OPENS, because it is REAL.
+            This redirect was very nearly not written. The reasoning against it
+            was that `/foundation` had only ever existed in one unpushed commit,
+            so no link in the world could point at it — and that reasoning was
+            checked against the live site instead of being trusted, which is the
+            only reason it did not ship as a defect: **Mike pushed AND deployed
+            v40 mid-round**, so `https://weird.baby/foundation` was serving the
+            room while this rename was being written.
+            WITHOUT THIS LINE THE NEXT DEPLOY BREAKS A LIVE URL, and breaks it in
+            the worst available way: there is no catch-all route in this table,
+            so an unmatched path renders the shell and nothing in it — a blank
+            page, not even a 404. `replace` so the dead name does not sit in the
+            visitor's back button.
+            It is the one place the retired word survives on purpose. */}
+        <Route path="/foundation" element={<Navigate to="/money" replace />} />
         <Route path="/shop" element={<GiftShop />} />
         <Route path="/robots" element={<Robots />} />
         <Route path="/wal" element={<Wal />} />
