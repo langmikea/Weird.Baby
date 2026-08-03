@@ -1,14 +1,26 @@
 /* src/routes/shop/GiftShop.css
  * B&W PASS 2 (2026-06-07): the photo album page — matches the exhibit's
- * light paper shell (museum-tokens). Single accent: #211f1c (photo black
+ * light paper shell (museum-tokens). Single accent: --wb-gold (photo black
  * on paper; was museum gold on dark).
+ *
+ * [L3 2026-08-02] AND IT NOW ACTUALLY READS THEM. This header cited
+ * "museum-tokens" from the day it was written while the file used NONE of them:
+ * B7/R1 counted 45 hard-coded colours here, 41 of them byte-for-byte a --wb-*
+ * that already existed. Those 41 are now `var(--wb-*)`. The remaining three
+ * values have no token and are listed in the round log with what they are and
+ * what they should probably become — they are Mike's, not Ops'.
+ * THE IMPORT IS NOW DECLARED rather than assumed. The tokens did resolve here
+ * before, because Vite bundles every stylesheet into one document and
+ * Exhibit.css/HrExhibitFlow.css import them — but that is bundling luck, not a
+ * dependency. A room that reads the palette says so.
  */
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;700;800&family=Courier+Prime:wght@400&family=Fredoka:wght@600&display=swap');
+@import url('./../../styles/museum-tokens.css');
 
 .gift-shop {
-  background: #d9d5ca;
-  color: #211f1c;
+  background: var(--wb-bg);
+  color: var(--wb-gold);
   min-height: 100vh;
   max-width: 960px;
   margin: 0 auto;
@@ -27,8 +39,8 @@
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 90;
-  background: #d9d5ca;
-  border-bottom: 1px solid #c6c2b7;
+  background: var(--wb-bg);
+  border-bottom: 1px solid var(--wb-border);
 }
 
 /* [B7/R2 2026-08-02] THE WORDMARK READS THE TOKEN, like the exhibit's does.
@@ -43,7 +55,7 @@
   font-weight: 600;
   font-size: 0.85rem;
   letter-spacing: 0.06em;
-  color: #211f1c;
+  color: var(--wb-gold);
   text-decoration: none;
   transition: opacity 0.2s;
 }
@@ -54,7 +66,7 @@
   font-size: 1.1rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #211f1c;
+  color: var(--wb-gold);
   margin: 0;
   position: absolute;
   left: 50%;
@@ -67,7 +79,7 @@
   font-size: 0.7rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: #211f1c;
+  color: var(--wb-gold);
   text-decoration: none;
   transition: opacity 0.2s;
 }
@@ -92,23 +104,23 @@
   align-items: center;
   text-decoration: none;
   color: inherit;
-  border: 1px solid #c6c2b7;
-  background: #faf8f3;
+  border: 1px solid var(--wb-border);
+  background: var(--wb-ink-card);
   padding: 1.75rem;
   transition: border-color 0.2s, transform 0.2s;
 }
 
 .featured-artist:hover,
 .featured-artist:focus-visible {
-  border-color: #211f1c;
+  border-color: var(--wb-gold);
   transform: translateY(-2px);
 }
 
 .featured-artist__image-wrap {
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: #ece9e0;
-  border: 1px solid #c6c2b7;
+  background: var(--wb-ink);
+  border: 1px solid var(--wb-border);
 }
 
 .featured-artist__image {
@@ -127,20 +139,20 @@
   justify-content: center;
   padding: 1.5rem;
   text-align: center;
-  background: linear-gradient(135deg, #211f1c14 0%, #faf8f3 65%, #ece9e0 100%);
+  background: linear-gradient(135deg, #211f1c14 0%, var(--wb-ink-card) 65%, var(--wb-ink) 100%);
 }
 
 .featured-artist__image-fallback-name {
   font-family: 'DM Serif Display', Georgia, serif;
   font-size: 1.4rem;
-  color: #211f1c;
+  color: var(--wb-gold);
   line-height: 1.2;
 }
 
 .featured-artist__name {
   font-family: 'DM Serif Display', Georgia, serif;
   font-size: 2rem;
-  color: #211f1c;
+  color: var(--wb-gold);
   margin-bottom: 0.6rem;
   line-height: 1.1;
 }
@@ -148,7 +160,7 @@
 .featured-artist__blurb {
   font-family: 'Courier Prime', monospace;
   font-size: 0.88rem;
-  color: #57544d;
+  color: var(--wb-gold-lo);
   margin-bottom: 1.4rem;
   line-height: 1.55;
   max-width: 42ch;
@@ -160,7 +172,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #211f1c;
+  color: var(--wb-gold);
 }
 
 /* ─── WEIRD.BABY MERCH ─────────────────────────────────────────────── */
@@ -178,8 +190,8 @@
   align-items: center;
   text-decoration: none;
   color: inherit;
-  border: 1px solid #c6c2b7;
-  background: #faf8f3;
+  border: 1px solid var(--wb-border);
+  background: var(--wb-ink-card);
   padding: 1.75rem;
   overflow: hidden;
   transition: border-color 0.2s, transform 0.2s;
@@ -187,14 +199,14 @@
 
 .wb-merch__item:hover,
 .wb-merch__item:focus-visible {
-  border-color: #211f1c;
+  border-color: var(--wb-gold);
   transform: translateY(-2px);
 }
 
 .wb-merch__image-wrap {
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: #ece9e0;
+  background: var(--wb-ink);
 }
 
 .wb-merch__image {
@@ -213,7 +225,7 @@
   padding: 0;
   font-family: 'DM Serif Display', Georgia, serif;
   font-size: 2rem;
-  color: #211f1c;
+  color: var(--wb-gold);
   line-height: 1.1;
   margin-bottom: 0.4rem;
 }
@@ -228,9 +240,9 @@
 .wb-merch__placeholder {
   text-align: center;
   padding: 2.25rem 1rem;
-  border: 1px dashed #c6c2b7;
+  border: 1px dashed var(--wb-border);
   color: #8a867c;
-  background: #faf8f3;
+  background: var(--wb-ink-card);
 }
 
 .wb-merch__placeholder p {
@@ -248,9 +260,9 @@
 .gift-shop__cta {
   display: inline-block;
   padding: 0.75rem 1.6rem;
-  border: 1px solid #211f1c;
+  border: 1px solid var(--wb-gold);
   background: transparent;
-  color: #211f1c;
+  color: var(--wb-gold);
   font-family: 'Syne', sans-serif;
   font-weight: 600;
   font-size: 0.7rem;
@@ -262,8 +274,8 @@
 
 .gift-shop__cta:hover,
 .gift-shop__cta:focus-visible {
-  background: #211f1c;
-  color: #ece9e0;
+  background: var(--wb-gold);
+  color: var(--wb-ink);
 }
 
 /* ─── FRIENDS ──────────────────────────────────────────────────────── */
@@ -280,23 +292,23 @@
   align-items: center;
   text-decoration: none;
   color: inherit;
-  border: 1px solid #c6c2b7;
-  background: #faf8f3;
+  border: 1px solid var(--wb-border);
+  background: var(--wb-ink-card);
   padding: 1.75rem;
   transition: border-color 0.2s, transform 0.2s;
 }
 
 .friends__card:hover,
 .friends__card:focus-visible {
-  border-color: #211f1c;
+  border-color: var(--wb-gold);
   transform: translateY(-2px);
 }
 
 .friends__image-wrap {
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: #ece9e0;
-  border: 1px solid #c6c2b7;
+  background: var(--wb-ink);
+  border: 1px solid var(--wb-border);
 }
 
 .friends__image {
@@ -315,13 +327,13 @@
   justify-content: center;
   padding: 1rem;
   text-align: center;
-  background: linear-gradient(135deg, #211f1c14 0%, #faf8f3 65%, #ece9e0 100%);
+  background: linear-gradient(135deg, #211f1c14 0%, var(--wb-ink-card) 65%, var(--wb-ink) 100%);
 }
 
 .friends__image-fallback-name {
   font-family: 'DM Serif Display', Georgia, serif;
   font-size: 1.1rem;
-  color: #211f1c;
+  color: var(--wb-gold);
   line-height: 1.2;
 }
 
@@ -329,7 +341,7 @@
   padding: 0;
   font-family: 'DM Serif Display', Georgia, serif;
   font-size: 2rem;
-  color: #211f1c;
+  color: var(--wb-gold);
   line-height: 1.1;
   margin-bottom: 0.6rem;
 }
@@ -338,7 +350,7 @@
   padding: 0;
   font-family: 'Courier Prime', monospace;
   font-size: 0.88rem;
-  color: #57544d;
+  color: var(--wb-gold-lo);
   line-height: 1.55;
   max-width: 42ch;
 }
@@ -377,7 +389,7 @@
   font-size: 0.8rem;
   font-style: italic;
   line-height: 1.6;
-  color: #57544d;
+  color: var(--wb-gold-lo);
 }
 /* B&W PASS 2: film grain over the shop, same wash as the exhibit and
    Lobby — one room, one stock. */

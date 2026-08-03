@@ -805,7 +805,7 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    `--wb-gold-hi:#ededed` — and then the two hottest things in the bar ignored it
    and typed a literal. Reading the ramp is not a new palette; it is the palette
    that was already declared one line to the left. */
-.pb{--wb-gold:#c9c9c9;--wb-gold-hi:#ededed;--wb-gold-lo:#8e8e8e;--wb-gold-mute:#8e8e8e;--wb-dim:#b6b6b6;--wb-ink-card:#1a1a1a;--wb-border:#3e3e3e;position:fixed;bottom:0;left:0;right:0;height:68px;background:var(--wb-ink-card);border-top:2px solid var(--wb-gold-lo);display:flex;align-items:center;gap:12px;padding:0 20px;z-index:100;box-shadow:0 -4px 18px rgba(0,0,0,.45)}
+.pb{--wb-gold:var(--wb-booth-gold);--wb-gold-hi:var(--wb-booth-gold-hi);--wb-gold-lo:var(--wb-booth-gold-lo);--wb-gold-mute:var(--wb-booth-gold-mute);--wb-dim:var(--wb-booth-dim);--wb-ink-card:var(--wb-booth-ink-card);--wb-border:var(--wb-booth-border);position:fixed;bottom:0;left:0;right:0;height:68px;background:var(--wb-ink-card);border-top:2px solid var(--wb-gold-lo);display:flex;align-items:center;gap:12px;padding:0 20px;z-index:100;box-shadow:0 -4px 18px rgba(0,0,0,.45)}
 .pb-art{width:46px;height:46px;object-fit:cover;border-radius:1px;flex-shrink:0}
 .pb-art-ph{display:block}
 .pb-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}

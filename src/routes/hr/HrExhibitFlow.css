@@ -2122,11 +2122,19 @@ input.searchbar::placeholder { color: var(--wb-gold-mute); font-style: italic; }
   background: transparent;
 }
 .hr-bar-pop {
-  --wb-bg:#d9d5ca; --wb-ink:#ece9e0; --wb-ink-soft:#e2deD3;
-  --wb-ink-card:#faf8f3; --wb-ink-card-hi:#ffffff;
-  --wb-border:#c6c2b7; --wb-border-hi:#a9a59a;
-  --wb-gold:#211f1c; --wb-gold-hi:#000000; --wb-gold-lo:#57544d; --wb-gold-mute:#9b978d;
-  --wb-dim:#3b3933;
+  /* [L3 2026-08-02] THE PALETTE IS READ BACK, NOT RE-TYPED. This popover is a
+     DOM child of the player bar, whose rule re-pins the whole ramp dark; the
+     popover is paper and had to undo that, and did it by writing all twelve
+     values out again — a second copy that forks the first time a token moves.
+     The `--wb-paper-*` aliases in museum-tokens.css exist for exactly this
+     escape. Same values, one source. */
+  --wb-bg:var(--wb-paper-bg); --wb-ink:var(--wb-paper-ink);
+  --wb-ink-soft:var(--wb-paper-ink-soft);
+  --wb-ink-card:var(--wb-paper-ink-card); --wb-ink-card-hi:var(--wb-paper-ink-card-hi);
+  --wb-border:var(--wb-paper-border); --wb-border-hi:var(--wb-paper-border-hi);
+  --wb-gold:var(--wb-paper-gold); --wb-gold-hi:var(--wb-paper-gold-hi);
+  --wb-gold-lo:var(--wb-paper-gold-lo); --wb-gold-mute:var(--wb-paper-gold-mute);
+  --wb-dim:var(--wb-paper-dim);
   --wb-serif:'Fraunces', Georgia, serif;
   --wb-sans:'Geist', system-ui, -apple-system, sans-serif;
   --wb-mono:'Courier Prime', 'Courier New', monospace;

@@ -1,3 +1,16 @@
+// src/routes/WbHome.jsx — the LOBBY (/).
+//
+// [L3 2026-08-02] THE TOKEN CONFORMANCE ROUND. B7/R1 counted 43 hard-coded
+// colours on this surface and ZERO reads of the design tokens; 33 of the 43
+// were byte-for-byte a `--wb-*` that already existed. Those 33 now read the
+// token. The other ten have no token and are listed in the round log with what
+// they are and what they should probably become — Ops does not invent palette.
+//
+// WHY THE INLINE `<style>` BLOCK STILL WORKS: custom properties live on :root
+// and Vite bundles every stylesheet into one document, so `var(--wb-*)`
+// resolves here even though this file cannot `@import` anything. That is
+// verified, not assumed — but it is also bundling luck rather than a declared
+// dependency, which is R5's point and R5's job (see the round log).
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -66,11 +79,11 @@ export default function WbHome() {
            B&W print; it finally sits on its native stock. Photo-black
            accents replace museum gold; structure and motion untouched. */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body { height: 100%; overflow: hidden; background: #d9d5ca; color: #211f1c; }
+        html, body { height: 100%; overflow: hidden; background: var(--wb-bg); color: var(--wb-gold); }
         .wb-root { height: 100vh; width: 100vw; display: grid; grid-template-columns: 1fr 1fr; opacity: 0; transition: opacity 0.9s ease; overflow: hidden; }
         .wb-root.visible { opacity: 1; }
         .wb-root::after { content: ''; position: fixed; inset: 0; z-index: 950; pointer-events: none; opacity: 0.07; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 240px 240px; }
-        .wb-left { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; border-right: 1px solid #c6c2b7; position: relative; background: #ece9e0; }
+        .wb-left { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; border-right: 1px solid var(--wb-border); position: relative; background: var(--wb-ink); }
         .wb-left::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, #f7f5ee 0%, transparent 70%); pointer-events: none; }
         .wb-logo { width: min(340px, 85%); height: auto; filter: none; position: relative; animation: float 7s ease-in-out infinite; z-index: 1; }
         /* [walk-five] the float, slightly bigger per Mike */
@@ -79,24 +92,24 @@ export default function WbHome() {
            (no blink; it is a fact, not an ellipsis), one step up from the
            tagline in weight and presence. */
         .wb-subtitle { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.3em; text-transform: uppercase; color: #2b2924; margin-top: 22px; position: relative; z-index: 1; }
-        .wb-tagline { font-family: 'Courier Prime', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: #57544d; margin-top: 12px; position: relative; z-index: 1; animation: blink 3s step-end infinite; }
+        .wb-tagline { font-family: 'Courier Prime', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--wb-gold-lo); margin-top: 12px; position: relative; z-index: 1; animation: blink 3s step-end infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
         /* DIRECTORY (Stage 3, WB_ARTIST_LOBBY_BOOTH-20260706): four listings
            replace the single explore button. Museum signage — type only,
            no images. Booth-behind-glass was inspiration, not literal. */
         .wb-directory { margin-top: 44px; z-index: 1; position: relative; width: min(300px, 80%); }
-        .wb-dir-label { font-family: 'Courier Prime', monospace; font-size: 0.56rem; letter-spacing: 0.28em; text-transform: uppercase; color: #9b978d; margin-bottom: 10px; text-align: center; }
-        .wb-dir-entry { display: flex; justify-content: space-between; align-items: baseline; width: 100%; padding: 9px 2px; background: none; border: none; border-top: 1px solid #c6c2b7; cursor: pointer; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: #6f6b62; transition: color 0.3s; white-space: nowrap; }
-        .wb-dir-entry:last-child { border-bottom: 1px solid #c6c2b7; }
-        .wb-dir-entry:hover { color: #211f1c; }
+        .wb-dir-label { font-family: 'Courier Prime', monospace; font-size: 0.56rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--wb-gold-mute); margin-bottom: 10px; text-align: center; }
+        .wb-dir-entry { display: flex; justify-content: space-between; align-items: baseline; width: 100%; padding: 9px 2px; background: none; border: none; border-top: 1px solid var(--wb-border); cursor: pointer; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: #6f6b62; transition: color 0.3s; white-space: nowrap; }
+        .wb-dir-entry:last-child { border-bottom: 1px solid var(--wb-border); }
+        .wb-dir-entry:hover { color: var(--wb-gold); }
         .wb-dir-arrow { font-family: 'Courier Prime', monospace; font-size: 0.6rem; color: inherit; }
 
         .wb-right { display: flex; flex-direction: column; justify-content: center; padding: 48px 52px; overflow: hidden; position: relative; }
         .wb-note { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1rem, 1.35vw, 1.25rem); line-height: 1.75; color: #2b2924; margin-bottom: 10px; }
         .wb-note em { color: #2b2924; font-style: italic; }
         .wb-whisper { font-family: 'Courier Prime', monospace; font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: #837f75; margin-bottom: 26px; }
-        .wb-rule { width: 36px; height: 1px; background: #211f1c; margin-bottom: 22px; opacity: 0.5; }
+        .wb-rule { width: 36px; height: 1px; background: var(--wb-gold); margin-bottom: 22px; opacity: 0.5; }
 
         /* [P13 2026-08-02] THE BOOK GETS A HEADING, NOT A LABEL.
            Mike: "the whole guestbook layout needs a tweak — the lobby to its
@@ -108,9 +121,9 @@ export default function WbHome() {
            rows — and the count rides the heading, because a guest book that
            says how many people have signed is doing the one piece of
            persuasion this page actually wants to do. */
-        .wb-book-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 1px solid #211f1c; padding-bottom: 7px; margin-bottom: 14px; }
-        .wb-book-label { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; color: #211f1c; display: block; }
-        .wb-book-count { font-family: 'Courier Prime', monospace; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: #9b978d; white-space: nowrap; }
+        .wb-book-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--wb-gold); padding-bottom: 7px; margin-bottom: 14px; }
+        .wb-book-label { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--wb-gold); display: block; }
+        .wb-book-count { font-family: 'Courier Prime', monospace; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--wb-gold-mute); white-space: nowrap; }
 
         /* ===================================================================
            [B2 2026-08-02] THE INPUT FIELD TEMPLATE — Mike, site-wide.
@@ -148,9 +161,9 @@ export default function WbHome() {
            register rather than the lobby's. That is the template working as
            intended: the mechanics are site-wide, the type is the room's.
            =================================================================== */
-        .wb-field { width: 100%; display: block; font-family: 'DM Serif Display', serif; font-size: 0.84rem; line-height: 1.45; color: #211f1c; background: #faf8f3; border: 1px solid #c6c2b7; border-radius: 1px; padding: 10px 12px; outline: none; caret-color: #211f1c; transition: border-color 0.25s; }
-        .wb-field::placeholder { color: #a9a59a; font-style: italic; }
-        .wb-field:focus { border-color: #211f1c; }
+        .wb-field { width: 100%; display: block; font-family: 'DM Serif Display', serif; font-size: 0.84rem; line-height: 1.45; color: var(--wb-gold); background: var(--wb-ink-card); border: 1px solid var(--wb-border); border-radius: 1px; padding: 10px 12px; outline: none; caret-color: var(--wb-gold); transition: border-color 0.25s; }
+        .wb-field::placeholder { color: var(--wb-border-hi); font-style: italic; }
+        .wb-field:focus { border-color: var(--wb-gold); }
         .wb-field-note { resize: none; height: 60px; }
 
         /* THE COMPOSITION Mike specified: the note first at full width, then
@@ -179,9 +192,9 @@ export default function WbHome() {
            different overhangs off one shared row height, and the pair reads
            as misaligned no matter what the layout says. The row keeps the
            book's type; it does not keep the illusion. */
-        .wb-submit { margin-top: 0; padding: 13px; background: transparent; border: 1px solid #211f1c; color: #211f1c; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s; display: block; }
-        .wb-submit:hover { background: #211f1c; color: #f5f3ec; }
-        .wb-confirmed { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 1rem; color: #211f1c; padding: 14px 0 6px; display: block; transform: scaleY(1.15); }
+        .wb-submit { margin-top: 0; padding: 13px; background: transparent; border: 1px solid var(--wb-gold); color: var(--wb-gold); font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s; display: block; }
+        .wb-submit:hover { background: var(--wb-gold); color: #f5f3ec; }
+        .wb-confirmed { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 1rem; color: var(--wb-gold); padding: 14px 0 6px; display: block; transform: scaleY(1.15); }
         @keyframes rise { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
         /* 2026-06-07 Mike: guest book wasn't scrollable-in-practice — taller
            viewport and a visible thin scrollbar so all entries are reachable. */
@@ -218,19 +231,19 @@ export default function WbHome() {
            and paint two different overhangs), which retires the hazard. The
            16px stays as ordinary separation between the form and the book —
            it is now a gap that means what it measures. */
-        .wb-entries { --gb-row: 30px; margin-top: 16px; max-height: calc(var(--gb-row) * 7 + 2px); overflow-y: auto; scroll-snap-type: y proximity; overscroll-behavior: contain; border: 1px solid #c6c2b7; border-radius: 1px; background: #faf8f3; scrollbar-width: thin; scrollbar-color: #a9a59a transparent; }
+        .wb-entries { --gb-row: 30px; margin-top: 16px; max-height: calc(var(--gb-row) * 7 + 2px); overflow-y: auto; scroll-snap-type: y proximity; overscroll-behavior: contain; border: 1px solid var(--wb-border); border-radius: 1px; background: var(--wb-ink-card); scrollbar-width: thin; scrollbar-color: var(--wb-border-hi) transparent; }
         .wb-entries::-webkit-scrollbar { width: 6px; }
-        .wb-entries::-webkit-scrollbar-thumb { background: #a9a59a; border-radius: 3px; }
+        .wb-entries::-webkit-scrollbar-thumb { background: var(--wb-border-hi); border-radius: 3px; }
         .wb-entries::-webkit-scrollbar-track { background: transparent; }
-        .wb-entry { display: flex; align-items: baseline; gap: 12px; height: var(--gb-row); padding: 0 12px; border-bottom: 1px solid #e2ded3; scroll-snap-align: start; animation: rise 0.4s ease; }
+        .wb-entry { display: flex; align-items: baseline; gap: 12px; height: var(--gb-row); padding: 0 12px; border-bottom: 1px solid var(--wb-ink-soft); scroll-snap-align: start; animation: rise 0.4s ease; }
         .wb-entry:last-child { border-bottom: 0; }
         .wb-entry:hover { background: #f2efe6; }
-        .wb-entry-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.02em; color: #211f1c; white-space: nowrap; }
+        .wb-entry-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.02em; color: var(--wb-gold); white-space: nowrap; }
         .wb-entry-note { font-family: 'Courier Prime', monospace; font-style: italic; font-size: 0.72rem; color: #6f6b62; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
-        .wb-entry-date { font-family: 'Courier Prime', monospace; font-size: 0.62rem; color: #9b978d; white-space: nowrap; }
+        .wb-entry-date { font-family: 'Courier Prime', monospace; font-size: 0.62rem; color: var(--wb-gold-mute); white-space: nowrap; }
 
         .wb-footer { position: absolute; bottom: 18px; right: 24px; font-family: 'Courier Prime', monospace; font-size: 0.56rem; letter-spacing: 0.1em; color: #b0aca1; display: flex; align-items: center; gap: 7px; }
-        .wb-mark { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border: 1px solid #a9a59a; border-radius: 50%; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.42rem; letter-spacing: 0.04em; color: #a9a59a; animation: float-mark 9s ease-in-out infinite; flex-shrink: 0; }
+        .wb-mark { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border: 1px solid var(--wb-border-hi); border-radius: 50%; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.42rem; letter-spacing: 0.04em; color: var(--wb-border-hi); animation: float-mark 9s ease-in-out infinite; flex-shrink: 0; }
         @keyframes float-mark { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-4px); } }
 
         /* THE LOBBY IS A FIXED 100vh AND THE RIGHT PANE CLIPS WHAT DOES NOT
@@ -248,7 +261,7 @@ export default function WbHome() {
         @media (max-width: 680px) {
           html, body { overflow: auto; }
           .wb-root { height: auto; min-height: 100vh; grid-template-columns: 1fr; overflow: auto; }
-          .wb-left { padding: 48px 24px 32px; border-right: none; border-bottom: 1px solid #c6c2b7; }
+          .wb-left { padding: 48px 24px 32px; border-right: none; border-bottom: 1px solid var(--wb-border); }
           .wb-logo { width: min(240px, 70vw); }
           .wb-right { padding: 36px 28px 60px; }
           .wb-directory { margin-top: 32px; }

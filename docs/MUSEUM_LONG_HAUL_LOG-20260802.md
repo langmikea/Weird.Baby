@@ -219,4 +219,184 @@ Per Mike's instruction. Recorded in STATE.
 
 ---
 
-*(Sections for L3–L6 are appended as each is sealed.)*
+---
+
+## L3 · THE TOKEN CONFORMANCE ROUND
+
+**Ordered:** *"four visitor-facing surfaces use ZERO design tokens — 151
+hard-coded colors, 96 byte-identical to an existing `--wb-*`. GiftShop.css cites
+museum-tokens in its header while using none. Conform all four to the token
+system; pixel-identity is the acceptance test. Anything NOT byte-identical to an
+existing token: list it with what it is and what it should probably become — do
+not invent palette."*
+
+### The ledger is now a tool, not a table
+
+`tools/token-audit.mjs` (new) parses the palette out of `museum-tokens.css`
+itself — it does not re-type it, which would have been a third mirror — and
+reports per surface: literals found, how many are byte-for-byte an existing
+token, how many are not, and how many `var(--wb-*)` reads the surface already
+makes. `--verbose` prints every unmatched value with its first site.
+
+R1's table was reproducible only from a script in a run log. This one re-runs on
+demand, so the next colour typed by hand is visible the day it lands.
+
+**One correction it makes to R1's method:** an `rgba()` whose RGB triple matches
+a token is NOT byte-identical to it — swapping it would drop the alpha. Those are
+counted as decisions, never as mechanical. R1's "96" is unaffected (all 96 were
+plain hex); the difference shows up on `Exhibit.css`, where 44 alpha-bearing
+`rgba()` values had been counted as matches.
+
+### Before / after
+
+| surface | `var(--wb-*)` before → after | literals before → after |
+|---|---|---|
+| `GiftShop.css` | 1 → **41** | 44 → **4** |
+| `WbHome.jsx` | 0 → **33** | 43 → **10** |
+| `InfoBooth.jsx` | 1 → **23** | 27 → **5** |
+| `WbAdmin.jsx` | 0 → **14** | 38 → **27** |
+
+**96 substitutions**, exactly the count R1 predicted.
+
+### Pixel-identity, proved statically rather than eyeballed
+
+Every `var(--wb-*)` written this round was substituted back to its token's
+literal value and the result diffed against `git HEAD`. Two of the three colour
+surfaces round-trip **byte-for-byte identical**; the third differs in exactly one
+character, and that character is a finding of its own (below). Nothing else in
+those files moved.
+
+That is a stronger acceptance test than a screenshot comparison, and it does not
+depend on the **/shop nondeterminism** at all — which, worth noting, is now gone
+anyway: B1 and J3 made billing a pure function of the URL, so `pickRandomArtist`
+no longer runs on that page.
+
+Live verification that the tokens actually resolve (they are not imported by the
+inline-style surfaces): `/` `#d9d5ca` · `/booth` `#211f1c` / `#faf8f3` /
+`#c6c2b7` · `/shop` all four probes · `/admin` accent `rgb(201,201,201)`.
+
+### THREE THINGS THE SWEEP FOUND THAT THE SWEEP WAS NOT LOOKING FOR
+
+**1 · The token file had a typo that made its own audit lie.**
+`--wb-ink-soft: #e2deD3` — a capital D, from the day it was written. Identical to
+a browser; a *different string* to any byte-for-byte audit. Every surface that
+typed the lowercase form read as "not a token". Fixed to `#e2ded3` (the JS mirror
+in `tokens.js` already had it lowercase, so this also closes a silent gap in the
+H1 mirror contract). Pixel-identity is trivial: one colour.
+
+**2 · The palette was being re-typed one level down, to escape a re-pin.**
+`.hr-bar-pop` (the filter/preset popover) is a DOM child of the player bar, whose
+rule re-pins the whole ramp dark. The popover is paper, so it had to undo that —
+and CSS gives no way to say "revert this custom property to its root value"
+(`initial` yields the guaranteed-invalid value, not the inherited one). So it
+**wrote all twelve values out again**: a full second copy of the palette that
+forks the first time a token moves. Fixed with `--wb-paper-*` aliases in the
+token file — a `var()` inside a custom property is substituted where it is
+DECLARED, so each alias freezes the `:root` value and every descendant inherits
+it, including descendants standing inside a re-pin. Same values, one source.
+
+**3 · The museum's dark scope lived inside one selector, so the second room that
+wanted it had to copy seven values.** "Screens are dark" is a standing rule of
+this building; the ramp expressing it was declared inline in `.pb`'s rule in
+`Exhibit.css`, where it read as that bar's private business. It is not — and the
+moment J1 sent the operator's room to it, the only way to adopt it was a copy.
+Promoted to `--wb-booth-*` in the token file; `.pb` and `.adm` both read it.
+Byte-for-byte the bar's own values, moved not chosen.
+
+### THE DECISION LIST — values with no token
+
+Ops does not invent palette. Each of these is stated with what it IS and what it
+should PROBABLY become; the call is Mike's.
+
+**The two strongest recommendations first, because each is a rung the ramp is
+actually missing** — both appear on more than one surface, independently typed,
+which is what a de-facto token looks like:
+
+| value | where | what it is | should probably become |
+|---|---|---|---|
+| **`#6f6b62`** ×4 | shop merch price · lobby directory rows · booth buttons | a mid grey sitting between `--wb-gold-lo` `#57544d` and `--wb-gold-mute` `#9b978d` — the "secondary label" weight | a NEW rung, `--wb-gold-mid`. Three surfaces reached for it independently |
+| **`#2b2924`** ×4 | lobby subtitle + two more · booth FAQ answers | body ink one step lighter than `--wb-gold` `#211f1c` — running text, not headline | a NEW rung, `--wb-ink-body`, or fold into `--wb-gold` |
+
+Remaining, per surface:
+
+| surface | value | what it is | should probably become |
+|---|---|---|---|
+| `GiftShop.css` | `#211f1c14` ×2 | `--wb-gold` at 8% — top stop of the fallback-plate gradient | `color-mix(in srgb, var(--wb-gold) 8%, transparent)` (not byte-identical; rounds) |
+| | `#8a867c` | placeholder-copy grey | `--wb-gold-mute` `#9b978d` |
+| `WbHome.jsx` | `#f7f5ee` | the lit centre of the lobby's radial | `--wb-ink-card` `#faf8f3`, or a new `--wb-paper-lit` |
+| | `#837f75` | the whisper line under the subtitle | `--wb-gold-mute` |
+| | `#f5f3ec` | Sign-button label reversed out of black | `--wb-ink-card` |
+| | `#f2efe6` | guest-book row hover ground | a new `--wb-ink-hover` — it is between `--wb-ink` and `--wb-ink-card` and there is no rung there |
+| | `#b0aca1` | the footer credit | `--wb-border-hi` `#a9a59a` |
+| `InfoBooth.jsx` | `#d8d4c9` | the rule between FAQ rows | `--wb-border` `#c6c2b7` |
+
+**`WbAdmin.jsx` — all 27 remaining values, listed, none changed.** J4 asked
+whether the operator's room joins the museum; that is Mike's, and the room is
+still fully on the pre-2026 dark scheme. What was taken is J1, which he ruled:
+eleven gold sites now read `--wb-booth-gold`.
+
+| group | values | what they are | should probably become |
+|---|---|---|---|
+| grounds | `#050505` ×2 · `#0c0c0c` · `#0d0d0d` · `#0f0f0f` ×2 · `#141414` · `#161616` · `#1a1a1a` · `#222222` ×2 · `#2a2a2a` ×2 | an eleven-step near-black ladder — page, card, rule, hover, empty-state | the booth's `--wb-booth-ink-card` `#1a1a1a` + `--wb-booth-border` `#3e3e3e` cover the middle; the ladder wants three rungs, not eleven |
+| type | `#d0cbc3` ×3 · `#e8e4dc` · `#aaaaaa` · `#555555` ×4 · `#444444` · `#333333` ×3 | body, name, table cell, label, muted, faint | `--wb-booth-dim` `#b6b6b6` · `--wb-booth-gold` `#c9c9c9` · `--wb-booth-gold-lo` `#8e8e8e` |
+| gold residue | `#2a2218` | the FOUNDING badge's rule — the retired gold's own shadow | goes with the gold: `--wb-booth-border` |
+| coincidence | `#1a1a1a` | a header rule that happens to equal `--wb-booth-ink-card` | do NOT substitute on the match alone — a rule is not a card ground. Named so the audit's "1 = a token" on this file is not read as a missed sweep |
+
+### ALSO LISTED — the type half of the token system is not conformed either
+
+The palette is not the only thing in `museum-tokens.css`. `--wb-serif`,
+`--wb-sans` and `--wb-mono` exist, and the font stacks are typed by hand almost
+everywhere:
+
+| surface | `font-family` literals | reading a token |
+|---|---|---|
+| `GiftShop.css` | 16 | 1 |
+| `WbHome.jsx` | 17 | 0 |
+| `InfoBooth.jsx` | 9 | 1 |
+| `WbAdmin.jsx` | 9 | 0 |
+| `Exhibit.css` | 82 | 3 |
+| `HrExhibitFlow.css` | 30 | 21 |
+
+**Not taken this round, deliberately, because it is NOT byte-identical.** The
+literals read `'Syne', sans-serif`; the token reads
+`'Syne', system-ui, -apple-system, sans-serif`. Same pixels whenever Syne loads,
+different pixels when it does not — so substituting is a fallback-behaviour
+change, not a conformance one, and it fails the acceptance test this round was
+given. It is a real 163-site drift and it wants its own decision.
+
+### FOUND IN THE LAP — `/admin` white-screened on any API error
+
+Not a palette bug; found because verifying the palette required the page to
+render, and it did not.
+
+`fetch("/api/admin").then(r => r.json())` **resolves happily on a 500** — the
+worker answers `{"error":"D1_ERROR: no such table: guestbook"}` with a JSON body,
+so `.catch` never fires and `data` becomes an object with no `guestbook`.
+Downstream, `data.guestbook?.length === 0` is **false** for `undefined` (the
+optional chain returns undefined, and `undefined !== 0`), so the render took the
+TABLE branch and called `.map` on nothing. React unmounted the tree: **a blank
+page, no message, on the one route whose whole job is to say what is going on.**
+The `setError` state existed and was unreachable.
+
+Reproduced exactly that way on the dev server. The same 500 in production gives
+the same blank page. Fixed: honour the status, surface the error the server
+already sent, and read `!length` (which covers absent, empty and zero alike, as
+the sibling sections already did). Verified: `/admin` now renders its chrome and
+prints *"Error: D1_ERROR: no such table: guestbook"*.
+
+### And the build broke while writing this, which is R5's argument in one line
+
+Adding a prose comment containing backticks to `WbAdmin.jsx`'s inline
+`<style>` template literal ended the literal and failed the build at parse. R5
+says a stylesheet that can be broken by punctuation belongs in a `.css` file; it
+has now done it twice.
+
+### Gates
+
+- **lint 11 errors / 9 warnings** — HEAD baseline, zero new.
+- **vite build green.**
+- `/` `/booth` `/shop` `/admin` walked; token resolution verified live on each.
+
+---
+
+*(Sections for L4–L6 are appended as each is sealed.)*

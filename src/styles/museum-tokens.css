@@ -44,7 +44,14 @@
      pixel - which is the acceptance test. */
   --wb-bg: #d9d5ca;
   --wb-ink: #ece9e0;
-  --wb-ink-soft: #e2deD3;
+  /* [L3 2026-08-02] the capital D is gone. It was `#e2deD3` from the day the
+     token was written — the same colour, and invisible to a browser, but a
+     byte-for-byte audit of "which literals equal a token" reads it as a
+     different string and under-reports every surface that typed the lowercase
+     form (which all of them did). A source of truth that cannot be string-matched
+     against its own consumers is a source of truth with a blind spot.
+     Pixel-identity is trivially met: `#e2deD3` and `#e2ded3` are one colour. */
+  --wb-ink-soft: #e2ded3;
   --wb-ink-card: #faf8f3;
   --wb-ink-card-hi: #ffffff;
   --wb-border: #c6c2b7;
@@ -71,4 +78,54 @@
   /* Brand wordmark face — rounded, akin to the logo's bubble lettering.
      Trial scope: the nav wordmark only (2026-06-07). */
   --wb-brand: 'Fredoka', 'Baloo 2', 'Quicksand', system-ui, sans-serif;
+
+  /* ---- [L3 2026-08-02] THE PAPER RAMP, HELD FOR THE SCOPES THAT MUST ESCAPE
+     A DARK RE-PIN --------------------------------------------------------
+     The museum has two scoped re-pins that overwrite this ramp for their own
+     ground — the player bar (`.pb`, the projection booth) and the WAL stage.
+     Anything nested INSIDE one of them that belongs on paper has to get the
+     paper ramp back, and CSS gives no way to say "revert this custom property
+     to its root value": `initial` yields the guaranteed-invalid value, not the
+     inherited one. So `.hr-bar-pop` — the filter/preset popover, a DOM child of
+     the player bar — RE-TYPED ALL TWELVE VALUES. That is R1's finding one level
+     down: a full second copy of the palette, which forks silently the first time
+     a token here changes.
+     THESE ALIASES ARE THAT COPY, HELD ONCE, IN THE FILE THAT OWNS IT. A `var()`
+     inside a custom property is substituted where the property is DECLARED, so
+     each alias freezes the :root value at :root and every descendant inherits it
+     — including descendants standing inside a re-pin. An escaping scope now says
+     `--wb-bg: var(--wb-paper-bg)` and cannot drift.
+     Pixel-identity is by construction: the aliases ARE the tokens. */
+  --wb-paper-bg: var(--wb-bg);
+  --wb-paper-ink: var(--wb-ink);
+  --wb-paper-ink-soft: var(--wb-ink-soft);
+  --wb-paper-ink-card: var(--wb-ink-card);
+  --wb-paper-ink-card-hi: var(--wb-ink-card-hi);
+  --wb-paper-border: var(--wb-border);
+  --wb-paper-border-hi: var(--wb-border-hi);
+  --wb-paper-gold: var(--wb-gold);
+  --wb-paper-gold-hi: var(--wb-gold-hi);
+  --wb-paper-gold-lo: var(--wb-gold-lo);
+  --wb-paper-gold-mute: var(--wb-gold-mute);
+  --wb-paper-dim: var(--wb-dim);
+
+  /* ---- [L3 2026-08-02] THE PROJECTION BOOTH, PROMOTED OUT OF ONE RULE ----
+     "Screens are dark" (2026-06-07) is a standing rule of this building, and the
+     ramp that expresses it was declared INSIDE a single selector — the player
+     bar's, in Exhibit.css — where it read as that bar's private business. It is
+     not: it is the museum's dark scope, and the moment a second room wanted it
+     (the operator's, this round, under J1) the only way to adopt it was to copy
+     seven values. That is R1's finding again, one level up: the palette re-typed
+     because the palette had nowhere to be.
+     THESE ARE THE BAR'S OWN VALUES, MOVED, NOT CHOSEN. Byte for byte what
+     `.pb` declared; the bar now reads them and paints identically. A room that
+     wants the booth says `--wb-gold: var(--wb-booth-gold)` and joins the scope
+     instead of forking it. */
+  --wb-booth-gold: #c9c9c9;
+  --wb-booth-gold-hi: #ededed;
+  --wb-booth-gold-lo: #8e8e8e;
+  --wb-booth-gold-mute: #8e8e8e;
+  --wb-booth-dim: #b6b6b6;
+  --wb-booth-ink-card: #1a1a1a;
+  --wb-booth-border: #3e3e3e;
 }
