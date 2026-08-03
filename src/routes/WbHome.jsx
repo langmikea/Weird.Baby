@@ -12,31 +12,31 @@
 // verified, not assumed — but it is also bundling luck rather than a declared
 // dependency, which is R5's point and R5's job (see the round log).
 import { useState, useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./WbHome.css";
 import { useRoom } from "../lib/use-room.js";
 
-/* [F7c 2026-08-02] THE SUBTITLE — so a stranger knows what Weird.Baby IS
-   before they are asked to explore it. Mike named the class ("Solo Artist" /
-   "Singer Songwriter"); these are the rendered candidates, SHOWN-THEN-ASKED:
-   `/?subtitle=2..4` previews each on the live page, the first is the working
-   default, and MIKE PICKS — nothing here is final until he does. [PAPA] */
-const SUBTITLE_CANDIDATES = [
-  "A Singer-Songwriter Museum",
-  "A Solo Artist Museum",
-  "The Singer-Songwriter Museum",
-  "Museum of the Solo Artist",
-];
+/* [M-ID 2026-08-03] MIKE HAS ANSWERED, AND THE ANSWER RETIRES THE QUESTION.
+   F7c rendered four candidates behind `/?subtitle=2..4` and said "MIKE PICKS —
+   nothing here is final until he does". He picked, and he picked none of them:
+   "it is THE MUSEUM. No singer-songwriter qualifier, nothing narrowing —
+   all-encompassing."
+   Every candidate named a CLASS OF ARTIST, and every one of them was a fence.
+   The building already holds a machine wing and a wing of other people's
+   records; "a singer-songwriter museum" was untrue the day the robots opened
+   and would have to be re-argued at every new wing. A name that has to shrink
+   to stay accurate is the wrong name.
+   The candidate list and the `?subtitle=` preview go with it. A shown-then-
+   asked device that outlives the asking becomes four dead strings and a query
+   parameter nobody will ever type again — and, worse, a live URL that still
+   renders a retired identity. */
+const SUBTITLE = "The Museum";
 
 export default function WbHome() {
   /* [R5] this room owns the page ground while it is mounted — see
      src/lib/use-room.js and the header of this route's stylesheet. */
   useRoom("lobby");
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const subtitle = SUBTITLE_CANDIDATES[
-    (parseInt(searchParams.get("subtitle"), 10) || 1) - 1
-  ] || SUBTITLE_CANDIDATES[0];
   const [name, setName] = useState("");
   const [note, setNote] = useState("");
   const [entries, setEntries] = useState([]);
@@ -81,7 +81,7 @@ export default function WbHome() {
       <div className={`wb-root ${visible ? "visible" : ""}`}>
         <div className="wb-left">
           <img src="/WeirdBaby_PhotoID.png" alt="Weird.Baby" className="wb-logo" />
-          <div className="wb-subtitle">{subtitle}</div>
+          <div className="wb-subtitle">{SUBTITLE}</div>
           <div className="wb-tagline">something is being built here</div>
           <nav className="wb-directory" aria-label="Museum directory">
             <div className="wb-dir-label">Directory</div>
@@ -93,20 +93,36 @@ export default function WbHome() {
                 approved and is history). Hunter Root is a WORTH A LISTEN
                 artist served from our own vault; his door out is his own
                 site. /hr remains reachable only by URL, as an archive. */}
+            {/* [M8 2026-08-03] THE DIRECTORY NAMES THE EXHIBITS PROPERLY.
+                Mike's list, verbatim: Weird.Baby Robots · Weird.Baby Music ·
+                Other Music Worth a Listen · Information Booth.
+                WHAT THE OLD NAMES WERE DOING WRONG. "Robots" and "Weird.Baby"
+                were ROUTE names wearing a directory's clothes: a stranger
+                reading the board could not tell that the first two are the
+                house's OWN work and the third is other people's, which is the
+                single most useful fact a museum directory can carry. "Worth A
+                Listen" named the standard and not the contents. And a lobby
+                board with an entry called "Weird.Baby" directly under a
+                Weird.Baby wordmark reads as "the site", not "a room in it".
+                The order is Mike's order and it says the same thing the names
+                do — ours, ours, theirs, then the desk. The shop keeps the end
+                of the board: it is not an exhibit and was not in his list.
+                A directory entry is still one line and one route (WAL's own
+                note below); only the words changed. */}
             {/* Robots live link — §D2 ruling 2026-07-23 (coming-soon retires).
                 STAGED: reaches the public site only when Mike deploys (D7). */}
             <button className="wb-dir-entry" onClick={() => navigate("/robots")}>
-              <span>Robots</span><span className="wb-dir-arrow">→</span>
-            </button>
-            {/* [WAL 2026-08-02] WORTH A LISTEN - listed exactly like the
-                others: same button, same arrow, same navigate call. A new
-                exhibit is one entry here and one route, which is the whole
-                point of the machinery being shared. */}
-            <button className="wb-dir-entry" onClick={() => navigate("/wal")}>
-              <span>Worth A Listen</span><span className="wb-dir-arrow">&rarr;</span>
+              <span>Weird.Baby Robots</span><span className="wb-dir-arrow">→</span>
             </button>
             <button className="wb-dir-entry" onClick={() => navigate("/wb")}>
-              <span>Weird.Baby</span><span className="wb-dir-arrow">→</span>
+              <span>Weird.Baby Music</span><span className="wb-dir-arrow">→</span>
+            </button>
+            {/* [WAL 2026-08-02] listed exactly like the others: same button,
+                same arrow, same navigate call. A new exhibit is one entry here
+                and one route, which is the whole point of the machinery being
+                shared. */}
+            <button className="wb-dir-entry" onClick={() => navigate("/wal")}>
+              <span>Other Music Worth a Listen</span><span className="wb-dir-arrow">&rarr;</span>
             </button>
             <button className="wb-dir-entry" onClick={() => navigate("/booth")}>
               <span>Information Booth</span><span className="wb-dir-arrow">→</span>

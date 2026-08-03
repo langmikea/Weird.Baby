@@ -19,6 +19,58 @@ Paid for by the 2026-06-17 derived-era incident: charging into the problem in fr
 
 Ops work takes top priority, based on the Ops need in the moment.
 
+## THE IDENTITY (Mike, 2026-08-03 — standing, outranks every prior naming pass)
+
+**It is THE MUSEUM.** No singer-songwriter qualifier, no solo-artist
+qualifier, nothing narrowing — all-encompassing.
+
+F7c had rendered four candidates behind `/?subtitle=2..4` and asked Mike to
+pick; he picked none of them, because all four named a CLASS OF ARTIST and
+every one of them was a fence. The building already holds a machine wing and a
+wing of other people's records — "a singer-songwriter museum" was untrue the
+day the robots opened and would have to be re-argued at every new wing. A name
+that has to shrink to stay accurate is the wrong name.
+
+BUILT (M-ID): the lobby subtitle reads **"The Museum"**. The candidate array
+and the `?subtitle=` preview are retired with it — a shown-then-asked device
+that outlives the asking is four dead strings plus a live URL that still
+renders a retired identity.
+
+## THE PERSONALITY MAP (Mike, 2026-08-03 — standing, governs voice everywhere)
+
+Each surface has its own register. Copy, imagery and tone answer to the room
+they are standing in, not to a single house voice.
+
+| Surface | Register |
+|---|---|
+| **FRONT PAGE** (`/`) | Short, concise. Don't scare anyone. Heavily philanthropic. |
+| **ROBOTS** (`/robots`) | Liberal, artistic, creative, sci-fi. |
+| **W.B MUSIC** (`/wb`) | Joyous celebration · complete silliness · political unrest. |
+| **WAL** (`/wal`) | The ARTISTS shine. W.B does not overshadow. W.B is a listener in the room with everyone else — it just happens to be W.B's room. |
+| **GIFT SHOPS** (`/shop`) | Trustworthy places to do business; the return to normalcy of the real world. |
+
+Consistent with THE SPOTLIGHT DOCTRINE (below) for WAL, and it extends the same
+logic to every other room: the frame takes the register of what it frames.
+
+## THE NO-HIDDEN-INFORMATION LAW (Mike, 2026-08-03 — standing, site-wide)
+
+**Everything visible at once, always.**
+
+Card-advance and next-buttons are a sneaky way of adding pages. People will not
+flick to discover whether something is interesting — a visitor who has to
+operate a control before they can find out what is behind it mostly does not,
+so paged content is hidden content wearing a button.
+
+- **Links exist to take a visitor somewhere BIGGER, not to turn a page.**
+- **The one exception is slideshows** (a reel is a reel; it declares itself).
+- The original vision holds: **one page per exhibit, offsite links only,
+  artifacts below the line.**
+
+This SUPERSEDES the staged pager wherever the pager turns pages on the visitor
+(`faceFlow` staged wings — robots; and any surviving card-advance on WAL). The
+Stage's no-scroll law survives only in W7's reading: no inner scroll traps; the
+DOCUMENT is the one thing that scrolls, which is ordinary reading.
+
 ## THE RELEASE DOCTRINES (Mike, 2026-08-02 — standing, govern what we build toward)
 
 Three rulings about SHAPE OF RELEASE rather than shape of a page. They govern

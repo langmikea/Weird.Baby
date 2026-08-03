@@ -1760,9 +1760,28 @@ export default function Exhibit({ artist }) {
     } catch { /* private mode */ }
     if (storedCap) rootEl.style.setProperty("--fit-area-max", storedCap + "px");
     if (stored) return;         /* this session already chose its sizes */
-    const fsEl = rootEl.querySelector(".fs-wrap");
+    /* [M0c 2026-08-03] THE SCROLLER'S ROOM IS RESERVED, NOT MEASURED.
+       This line used to be `fsEl ? fsEl.getBoundingClientRect().height : 0`,
+       and on this wing the `: 0` branch is the one that ALWAYS ran: the fit
+       fires on entry, entry lands on album 0 (the house card), a face is stowed
+       over the viewer there and P4 renders no scroller under a stowed face. So
+       the fit believed the strip cost nothing and gave the picture its share.
+       Measured before: /wal document 850px inside a 780px window — 70px over,
+       at every desktop size tried, i.e. F3's "all on one screen" was false on
+       the screen it had just measured.
+       AND MEASURING THE LIVE ELEMENT IS WRONG EVEN WHEN IT EXISTS, because the
+       strip breathes with the fact showing in it (48px one line, 77px two) and
+       the facts cycle every 7.5s — a fit to the current fact fits now and
+       overflows before the visitor has finished the first quote.
+       So the number is the strip's CEILING and it comes from the stylesheet
+       that decides it (`--fs-strip-reserve`, summed from its own six
+       declarations beside the flat-wing scroller rules). The element is no
+       longer consulted at all. Wings that declare no reserve get 0px, which is
+       what every wing outside this fit already had. */
     const leftEl = rootEl.querySelector(".ex-left");
-    const fsH = fsEl ? fsEl.getBoundingClientRect().height : 0;
+    const fsH = parseFloat(
+      getComputedStyle(rootEl).getPropertyValue("--fs-strip-reserve")
+    ) || 0;
     const leftH = leftEl ? leftEl.scrollHeight : 0;
     const padB = parseFloat(getComputedStyle(rootEl).paddingBottom) || 0;
     const topBase = main.getBoundingClientRect().top + window.scrollY - cfH;

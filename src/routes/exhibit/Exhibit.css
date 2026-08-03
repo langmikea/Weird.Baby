@@ -487,20 +487,51 @@ body:has(.vp-face) .vp-area::before{display:none}
 .cf-dis{opacity:.15;pointer-events:none}
 
 /* CAROUSEL HEIGHT DRAG */
+/* [M0a 2026-08-03] MIKE: "NO RESIZING IS AVAILABLE — the split/drag handle is
+   gone or dead on the WAL artist page."
+   BOTH HANDLES ARE MECHANICALLY ALIVE. Driven by synthetic pointer events on
+   /wal at 1440x780 the split drag moved the columns 363->559 and the carousel
+   drag moved 160->240 with the viewer trading 439->359, exactly as P1 and F3
+   built them. Nothing is dead. What is wrong is that NEITHER HANDLE HAS A
+   VISIBLE AFFORDANCE, so "gone or dead" is the only reading a visitor has —
+   and Mike could not tell which, which is the tell.
+   MEASURED, in the manner the .cf-year finding above was measured:
+     .cf-dh-line  #c6c2b7 on #d9d5ca = 1.21:1   (a 1px rule)
+     .cf-dh-dot   #a9a59a on #d9d5ca = 1.68:1   (a 4px disc)
+     .vr-dh-line  1px WIDE and ZERO PIXELS TALL — not faint, ABSENT.
+   The last one is the real answer and it is a plain CSS accident: the line is
+   an `align-items:stretch` flex item that also says `margin:auto`, and auto
+   margins beat stretch — so it shrink-wraps to its content, and its content is
+   nothing. The column separator a visitor DOES see there is `.ex-left`'s
+   border-right, which is not the handle and is 1.21:1 itself.
+   THE FIX IS AN AFFORDANCE, NOT A NEW MECHANIC. Both handles keep their
+   geometry, their DOM and their drag; they gain the grip that says grab me —
+   three dots in the ink ramp (`--wb-gold-lo`, 5.15:1) with the rule quieted to
+   `--wb-gold-mute` (1.99:1) so the grip is the thing that reads, not the line.
+   Three dots from one node via box-shadow: no DOM change, so nothing that
+   measures or hit-tests these strips has to be re-verified. */
 .cf-dh{height:14px;cursor:row-resize;display:flex;align-items:center;justify-content:center;gap:6px;flex-shrink:0;padding:0 32px}
-.cf-dh-line{flex:1;height:1px;background:var(--wb-border);border-radius:1px;transition:background .2s}
-.cf-dh-dot{width:4px;height:4px;border-radius:50%;background:var(--wb-border-hi);flex-shrink:0;transition:background .2s}
-.cf-dh:hover .cf-dh-line,.cf-dh:hover .cf-dh-dot{background:color-mix(in srgb, var(--wb-gold) 33%, transparent)}
+.cf-dh-line{flex:1;height:1px;background:var(--wb-gold-mute);border-radius:1px;transition:background .2s}
+.cf-dh-dot{width:4px;height:4px;border-radius:50%;background:var(--wb-gold-lo);flex-shrink:0;
+  box-shadow:-9px 0 0 var(--wb-gold-lo),9px 0 0 var(--wb-gold-lo);
+  transition:background .2s,box-shadow .2s}
+.cf-dh:hover .cf-dh-line{background:var(--wb-gold-lo)}
+.cf-dh:hover .cf-dh-dot{background:var(--wb-gold);box-shadow:-9px 0 0 var(--wb-gold),9px 0 0 var(--wb-gold)}
 
 /* [X2 2026-07-30] BODY HEIGHT DRAG — the carousel handle's twin, below the
    tracklist/viewer block instead of above it. Same 14px grab strip, same rule
    + dot furniture, same hover. Written out rather than sharing a selector with
    .cf-dh so the two can drift apart later without one silently moving the
    other; they are the same TODAY, and that is a fact about today. */
+/* [M0a] the twin gets the same grip, for the same measured reason — it is the
+   same 1.21:1 rule and the same 1.68:1 disc on /robots. */
 .bd-dh{height:14px;cursor:row-resize;display:flex;align-items:center;justify-content:center;gap:6px;flex-shrink:0;padding:0 32px}
-.bd-dh-line{flex:1;height:1px;background:var(--wb-border);border-radius:1px;transition:background .2s}
-.bd-dh-dot{width:4px;height:4px;border-radius:50%;background:var(--wb-border-hi);flex-shrink:0;transition:background .2s}
-.bd-dh:hover .bd-dh-line,.bd-dh:hover .bd-dh-dot{background:color-mix(in srgb, var(--wb-gold) 33%, transparent)}
+.bd-dh-line{flex:1;height:1px;background:var(--wb-gold-mute);border-radius:1px;transition:background .2s}
+.bd-dh-dot{width:4px;height:4px;border-radius:50%;background:var(--wb-gold-lo);flex-shrink:0;
+  box-shadow:-9px 0 0 var(--wb-gold-lo),9px 0 0 var(--wb-gold-lo);
+  transition:background .2s,box-shadow .2s}
+.bd-dh:hover .bd-dh-line{background:var(--wb-gold-lo)}
+.bd-dh:hover .bd-dh-dot{background:var(--wb-gold);box-shadow:-9px 0 0 var(--wb-gold),9px 0 0 var(--wb-gold)}
 /* [X2 FIX] SCROLL ROOM UNDER THE HANDLE. The fitted default keeps the handle
    clear of the player bar at rest, but a visitor who drags the body TALLER is
    entitled to reach the handle again — so the document must be able to scroll
@@ -582,9 +613,24 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .ex-left::-webkit-scrollbar-thumb{background:var(--wb-border-hi);border-radius:2px}
 
 /* VERTICAL DRAG HANDLE */
+/* [M0a 2026-08-03] THE SPLIT HANDLE HAD NO PICTURE AT ALL — see the note at
+   .cf-dh. `.vr-dh-line` measured 1px WIDE by ZERO PIXELS TALL on /wal: an
+   `align-items:stretch` item that also declares `margin:auto`, and auto margins
+   win over stretch, so the element shrink-wrapped its (empty) content. Every
+   session since it was written has shipped a resize control that draws nothing.
+   The line becomes a real rule again (`align-self:stretch`, which says the
+   intent in the one place that can no longer be overridden by the margin), and
+   the GRIP — the part that says grab me — rides a pseudo-element so the DOM is
+   untouched. Same three-dot ink mark as the horizontal handles, turned 90°. */
 .vr-dh{width:10px;cursor:col-resize;display:flex;align-items:stretch;justify-content:center;position:relative;z-index:10}
-.vr-dh-line{width:1px;background:var(--wb-border);transition:background .2s;margin:auto}
-.vr-dh:hover .vr-dh-line{background:color-mix(in srgb, var(--wb-gold) 33%, transparent)}
+.vr-dh-line{width:1px;align-self:stretch;background:var(--wb-gold-mute);transition:background .2s;margin:0 auto}
+.vr-dh::after{content:"";position:absolute;top:50%;left:50%;
+  width:4px;height:4px;margin:-2px 0 0 -2px;border-radius:50%;
+  background:var(--wb-gold-lo);
+  box-shadow:0 -9px 0 var(--wb-gold-lo),0 9px 0 var(--wb-gold-lo);
+  transition:background .2s,box-shadow .2s;pointer-events:none}
+.vr-dh:hover .vr-dh-line{background:var(--wb-gold-lo)}
+.vr-dh:hover::after{background:var(--wb-gold);box-shadow:0 -9px 0 var(--wb-gold),0 9px 0 var(--wb-gold)}
 
 /* RIGHT — fixed, never scrolls */
 .ex-right{min-width:0;display:flex;flex-direction:column;background:#e7e3d8;overflow:hidden}
@@ -705,6 +751,30 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .vp-ao-label{display:flex;align-items:center;gap:7px;font-family:'Courier Prime',monospace;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--wb-gold-mute);white-space:nowrap}
 
 /* FACT SCROLLER */
+/* [M0b 2026-08-03] THE STRIP STANDS BELOW THE PICTURE. IT WAS STANDING ON IT.
+   MIKE: "the PUV strip still overlaps the video — the caption/fact strip sits
+   on the picture's lower edge rather than below it."
+   IT IS NOT A Z-OVERLAP AND I LOOKED FOR ONE. Measured on /wal at six desktop
+   sizes from 1280x660 to 1920x1080, and on /hr: in every single case
+   `.vp-area`'s bottom edge and `.fs-wrap`'s top edge are THE SAME NUMBER —
+   gap 0. The strip is flush against the frame, always, everywhere.
+   ON THE PAPER WINGS THAT READS AS A SEAM, because a dark picture meets a
+   #e7e3d8 strip. ON THE WAL STAGE IT DOES NOT: W6 re-pinned that column to a
+   warm charcoal, a playing video letterboxes its own black inside the frame,
+   and the strip's ground is the same charcoal — so there is no edge anywhere
+   between the picture and the quote, and the quote reads as a caption BURNED
+   INTO the bottom of the video. That is exactly the sentence Mike wrote.
+   TWO THINGS, AND ONLY THESE TWO. (1) Air: the strip is furniture standing
+   UNDER the exhibit, so it gets room to stand in. (2) The picture gets an
+   EDGE — the frame the dark stage swallowed. That is a box-shadow ring rather
+   than a border so it cannot move the aspect-ratio box by a pixel; the flat
+   wing's `--fit-area-max` arithmetic is measured against that box and a border
+   would have quietly changed the fit.
+   NOT SCOPED TO WAL, because the gap-0 measurement is the same on /hr and the
+   review's pattern 1 — "a rule is written for the frame in front of you and the
+   next frame never gets checked" — is what put this defect in three wings one
+   at a time. The costed pixels are stated: the picture gives up 12. */
+.ex-right>.fs-wrap{margin-top:12px}
 .fs-wrap{flex:1;display:flex;flex-direction:column;padding:10px 20px 8px;border-top:1px solid var(--wb-border);position:relative;overflow:hidden}
 /* Overflow fit (2026-07-07 eyeball, "fix overflow only"): long press quotes
    (up to ~180 chars) wrap and would hard-clip at the viewport edge, lopping off
@@ -1619,6 +1689,31 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    reads its type off the viewport instead. */
 .ex-root[data-flat="1"] .vp-inner{container-type:normal}
 .ex-root[data-flat="1"] .vp-area-stowed .vp-inner{position:static}
+/* [M0b 2026-08-03] THE FRAME IS THE PICTURE'S SIZE, NOT THE SLOT'S.
+   F3's cap makes the AREA a letterbox slot — the box keeps the column's full
+   width and only its height is capped, so at 1440x780 it is 1046x331 (3.2:1)
+   and at 1280x660 it is 928x211 (4.4:1). A 16:9 video inside that is
+   height-limited, so it renders 585x329 with 230px of YouTube's own black down
+   each side, and F3's note says exactly that and calls it fine: "the player
+   letterboxes inside it, and on the dark stage the bars vanish into the
+   ground."
+   THAT REASONING IS TRUE ONLY WHILE NOTHING DRAWS THE BOX. The moment M0b puts
+   a ring on the frame — which is what makes the strip legibly BELOW the
+   picture on a charcoal stage — the ring would enclose 460px of black wings
+   and a picture floating in the middle of them. A frame around the bars is a
+   worse answer than no frame.
+   So the inner box is fitted TO the picture: same height, 16:9, centred in the
+   slot, and the stage shows through where YouTube's bars used to be. The
+   picture does not change size by one pixel (it was always height-limited);
+   what changes is that its edges are now OUR box's edges, so the ring rings the
+   photograph and the cued poster stops being cropped by `object-fit:cover`.
+   Absolutely positioned with a definite height and `width:auto`, so the aspect
+   ratio resolves off the height — the one direction that works here. Measured:
+   slot 1046x331 -> picture 585x329 centred, `.vp-area` untouched at 1046x331,
+   so the fit's arithmetic reads the same numbers it always did. */
+.ex-root[data-flat="1"] .vp-area-flat:not(.vp-area-stowed) .vp-inner{
+  left:50%;right:auto;transform:translateX(-50%);
+  height:100%;width:auto;aspect-ratio:16/9;max-width:100%}
 /* the face joins the page flow at full length — and it is RELATIVE, not
    static, because the iframe behind it is absolutely positioned and would
    otherwise paint on top; a positioned face with a z-index and the opaque
@@ -1652,6 +1747,37 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 .ex-root[data-flat="1"] .fs-viewport{flex:0 0 auto;height:auto;
   min-height:1.85rem;max-height:3.7rem}
 .ex-root[data-flat="1"] .fs-footer{margin-top:5px}
+
+/* [M0c 2026-08-03] THE ROOM THE FIT MUST LEAVE FOR THIS STRIP, DECLARED WHERE
+   THE STRIP'S HEIGHT IS DECIDED.
+   F3's fit measures the live `.fs-wrap` to know how much of the screen the
+   scroller wants. On entry this wing shows album 0 — the house card — where a
+   face is stowed over the viewer and P4's rule renders NO SCROLLER AT ALL, so
+   the measurement came back 0 and the fit handed the picture the strip's
+   share. Measured consequence at every desktop size tried: the document ran
+   42–70px longer than the window (1440x780 -> 850), i.e. the one thing F3
+   promised — "tracklist, viewer and PUV scroller all fit on one screen" — was
+   false on the very screen it was computed for.
+   A LIVE MEASUREMENT WOULD STILL BE WRONG EVEN WHEN THE STRIP IS THERE. The
+   strip breathes: 48px on a one-line fact, 77px on a two-line one, and the
+   facts cycle every 7.5s. Fitting to the fact that happens to be showing means
+   the room fits now and overflows in seven seconds. So the fit reserves the
+   strip's CEILING, always, and never measures it.
+   THE CEILING, ADDED UP FROM THE RULES DIRECTLY ABOVE:
+     12  .ex-right>.fs-wrap margin-top   (M0b)
+      1  border-top
+      7  padding-top
+   59.2  .fs-viewport max-height (3.7rem)
+      5  .fs-footer margin-top
+     17  .fs-footer height with a credit line (measured; the footer is 0 when
+         a fact carries no breadcrumb, which is the cheap case, not the case
+         to size for)
+      6  padding-bottom
+   = 107.2 -> 108. Read by the fit in Exhibit.jsx. It lives here, in CSS, next
+   to the six declarations it sums, so a change to any of them is a change in
+   front of this number rather than in another file. */
+.ex-root{--fs-strip-reserve:0px}
+.ex-root[data-flat="1"]{--fs-strip-reserve:108px}
 
 /* ---- [W10] THE SECTION HEADER — "Coconuts" over the numbers --------------- */
 .tl-header{list-style:none;padding:16px 20px 5px;cursor:default;user-select:none;
@@ -1691,6 +1817,17 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
   background:
     radial-gradient(120% 70% at 50% -6%, #2f2921 0%, rgba(47,41,33,0) 62%),
     var(--wb-ink)}
+/* [M0b 2026-08-03] AND ON THIS STAGE THE PICTURE GETS ITS EDGE BACK.
+   The frame's own boundary is invisible here: charcoal stage, black letterbox
+   inside a playing embed, charcoal strip beneath. A 1px ring at 2.82:1 against
+   the stage is the whole difference between "a picture with a caption under it"
+   and "a caption printed on a video". Ring, not border: `box-shadow` paints
+   outside the box and cannot disturb the aspect-ratio geometry the fit is
+   computed against.
+   IT RINGS THE PICTURE, NOT THE SLOT — see the note at `.vp-inner` in the flat
+   wing's own block below, which is what makes those two the same rectangle. */
+[data-exhibit="wal"] .vp-area-flat:not(.vp-area-stowed) .vp-inner{
+  box-shadow:0 0 0 1px var(--wb-border-hi)}
 /* the B&W site law does NOT apply to WAL (W8) — plates keep their color. */
 [data-exhibit="wal"] .vp-face-still{filter:none;max-width:min(100%,420px)}
 [data-exhibit="wal"] .vp-poster img{filter:none}
