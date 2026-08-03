@@ -76,6 +76,31 @@
   --wb-sans: 'Syne', system-ui, -apple-system, sans-serif;
   --wb-mono: 'Courier Prime', 'Courier New', monospace;
 
+  /* ---- [R2 2026-08-03] THE READING FACE, WHICH THE BUILDING DID NOT HAVE ----
+     MIKE, TWICE: the body type on the exhibit faces is hard to read.
+     THE DIAGNOSIS IS THE FACE, NOT THE SIZE. `--wb-serif` is DM Serif Display,
+     and the name is the specification: it is a DISPLAY serif — Didone-class
+     stroke contrast (hairline thins against heavy stems), small apertures,
+     high stroke-count per em. Those are the right properties for a word set
+     large and the wrong ones for four hundred words set at 17px, where the
+     thins thin out to nothing and the counters close up. Bumping the size, the
+     only lever the ramp offered, makes a headline face bigger; it does not make
+     it a text face. So the building gets a third role it never declared: not
+     display, not register — READING.
+     WHY FRAUNCES, AND WHY IT COSTS NOTHING. It is already in this repo's one
+     font <link>, already loaded on every page, and it is already MIKE'S OWN
+     PICK — the v28_3 pairing he chose for the HR deck (`HrExhibitFlow.css:32`).
+     It is also the only face in the bundle with an OPTICAL SIZE axis (opsz
+     9..144): at low opsz the design opens its apertures, drops its stroke
+     contrast and grows its x-height, which is the difference between a face
+     that has been shrunk and a face that was drawn to be small. That is what
+     `font-optical-sizing:auto` buys wherever this token is used, and it is why
+     the fix is a face swap rather than another number.
+     NOT A SITE-WIDE SWAP. `--wb-serif` is untouched and still means display;
+     this token is applied where Mike's complaint lives (the exhibit faces'
+     reading matter — see Exhibit.css). Nothing that reads --wb-serif moves. */
+  --wb-read: 'Fraunces', 'Source Serif 4', Georgia, serif;
+
   /* ---- B11 2026-07-30: THE ALIASES ARE RETIRED ------------------
      R7 kept fifteen --hr-* aliases so the migration could stay lazy.
      It finished instead: a sweep of src/ and public/ finds ZERO live

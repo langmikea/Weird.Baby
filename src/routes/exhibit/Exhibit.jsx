@@ -2809,6 +2809,68 @@ export default function Exhibit({ artist }) {
                               .map((p, i) => <p key={i}>{p}</p>)}
                           </div>
                         )}
+                        {/* ==== [R5b 2026-08-03] THE BILL — a poster for the
+                            whole show ==========================================
+                            MIKE killed "Its place in the museum" ("never meant
+                            literally") and named the replacement: ABOUT OUR
+                            CURRENT ARTISTS — "a one-page POSTER for the complete
+                            show; functionally a poster, not a literal image: the
+                            top-level details that PROMOTE the show. All four
+                            artists, what they are, why they're here, the
+                            standard. Serious and respectful, energetic,
+                            WEIRD.BABY IN FULL COLORS."
+                            A POSTER'S NAMES ARE DOORS. The one thing that
+                            separates a printed bill from this one is that a
+                            visitor can press a name and be standing in front of
+                            that artist a moment later — so each act calls
+                            `selectAlbum` on the album it names. That is the
+                            promotion actually paying off rather than describing
+                            itself. It resolves the album by ID against the live
+                            spine, so a bill naming an act that is not in the
+                            room renders as type and cannot dead-end.
+                            IN FULL COLORS, AND THE COLOR IS THEIRS. The panels
+                            are the artists' own covers, in color, per W8 — the
+                            spotlight doctrine says the artists bring the color
+                            and this is the house borrowing it rather than
+                            inventing a palette to compete with it. The one house
+                            value per act (`hue`) is a DESIGN choice and is
+                            declared as one in the data; it is not a fact about
+                            anybody. */}
+                        {face.bill && Array.isArray(face.bill.acts) && (
+                          <div className="vp-bill" data-stage-split="row">
+                            {face.bill.standard && (
+                              <p className="vp-bill-standard">{face.bill.standard}</p>
+                            )}
+                            <div className="vp-bill-acts">
+                              {face.bill.acts.map((act, i) => {
+                                const at = SPINE.findIndex(al => al.id === act.album);
+                                const Tag = at >= 0 ? "button" : "div";
+                                return (
+                                  <Tag className="vp-bill-act" key={i}
+                                    style={act.hue ? { "--act": act.hue } : undefined}
+                                    onClick={at >= 0 ? () => selectAlbum(at, true) : undefined}>
+                                    {act.art && (
+                                      <img className="vp-bill-art" src={act.art} alt="" />
+                                    )}
+                                    <span className="vp-bill-name">{act.name}</span>
+                                    {act.what && (
+                                      <span className="vp-bill-what">{act.what}</span>
+                                    )}
+                                    {act.why && (
+                                      <span className="vp-bill-why">{act.why}</span>
+                                    )}
+                                    {at >= 0 && (
+                                      <span className="vp-bill-go">Open the room</span>
+                                    )}
+                                  </Tag>
+                                );
+                              })}
+                            </div>
+                            {face.bill.foot && (
+                              <p className="vp-bill-foot">{face.bill.foot}</p>
+                            )}
+                          </div>
+                        )}
                         {Array.isArray(face.tombstone) && face.tombstone.length > 0 && (
                           <dl className="vp-tomb" data-stage-split="row">
                             {/* [P20 2026-08-02] THE BACK OF THE BASEBALL CARD
@@ -2837,6 +2899,80 @@ export default function Exhibit({ artist }) {
                               </div>
                             ))}
                           </dl>
+                        )}
+                        {/* ==== [R6 2026-08-03] THE RECORD BOARD ==============
+                            MIKE: "chart history and comparable metrics are VERY
+                            interesting to fans. Add a metrics/achievements
+                            surface per artist carrying only VERIFIABLE, DURABLE
+                            facts — documented chart entries where they genuinely
+                            exist, certifications, festival billings, notable
+                            syncs (Mikey Mike's Canon placement is the model),
+                            sourced per the ledger discipline. Do NOT write live
+                            view counts or anything that goes stale by next week.
+                            Nothing invented, nothing estimated."
+                            WHY IT IS NOT THE TOMBSTONE. The register answers
+                            "what IS this" — born, based, label, records. This
+                            answers "what has this artist DONE that a third party
+                            wrote down". They are different questions and they
+                            have different half-lives: a tombstone row is true
+                            forever, a record-board row is true from a date. So
+                            every row carries a KIND (chart / award / nomination
+                            / billing / sync / credit) and a WHEN, and the kind
+                            is what makes the block scannable — a fan looking for
+                            chart history should not have to read a biography to
+                            find out there is none.
+                            THE EMPTY STATE IS THE POINT, and it is P16's own
+                            ruling applied one block up: an artist with no
+                            documented chart entry gets the block SAYING SO. A
+                            missing shelf reads as an oversight; a shelf with a
+                            note on it reads as the truth about him. Two of the
+                            four artists in this wing are that case and the wing
+                            is more honest for showing it.
+                            NOTHING HERE REFRESHES. Every row was true when it
+                            was written and stays true: a chart peak, an award, a
+                            billing, a sync. View counts are deliberately absent
+                            — they belong to `feed`, which is dated on its own
+                            face, and to the weekly-refresh automation, not to a
+                            board of achievements. */}
+                        {face.metrics && (face.metrics.rows?.length > 0 || face.metrics.note) && (
+                          <div className="vp-metrics" data-stage-split="row">
+                            <h4 className="vp-metrics-head">
+                              {face.metrics.title || "Chart history and achievements"}
+                            </h4>
+                            {face.metrics.rows?.length > 0 && (
+                              <ul className="vp-metrics-list">
+                                {face.metrics.rows.map((m, i) => (
+                                  <li className="vp-metric" key={i}>
+                                    <span className="vp-metric-kind">{m.kind}</span>
+                                    <span className="vp-metric-body">
+                                      {/* the same door rule as the register's:
+                                          a row that can name where it was
+                                          checked SHOULD, and a row whose fact
+                                          has no readable public source stays
+                                          plain type rather than borrowing a
+                                          link that does not prove it. */}
+                                      {m.url ? (
+                                        <button className="vp-metric-go"
+                                          title={m.src ? "Source: " + m.src : undefined}
+                                          onClick={() => openLink(m.url)}>
+                                          {m.fact}
+                                        </button>
+                                      ) : (
+                                        <span className="vp-metric-fact">{m.fact}</span>
+                                      )}
+                                      {m.src && !m.url && (
+                                        <span className="vp-metric-src">{m.src}</span>
+                                      )}
+                                    </span>
+                                    <span className="vp-metric-when">{m.when}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                            {face.metrics.note && (
+                              <p className="vp-metrics-note">{face.metrics.note}</p>
+                            )}
+                          </div>
                         )}
                         {/* ==== [P16 2026-08-02] THE RECORDS ARE DOORS =======
                             MIKE: "every record needs LINKS TO THE ALBUM as

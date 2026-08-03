@@ -19,6 +19,107 @@ Paid for by the 2026-06-17 derived-era incident: charging into the problem in fr
 
 Ops work takes top priority, based on the Ops need in the moment.
 
+## SEALED 2026-08-03 — THE RHYTHM ROUND (v38; R0–R6. PUSH + DEPLOY ARE MIKE'S)
+
+Autonomous single-agent Code-lane round on Mike's remote-control brief. Full
+round log: `docs/MUSEUM_RHYTHM_LOG-20260803.md`. Before/after frames:
+`docs/rhythm-20260803/`.
+
+- **R0 V2 IS THE EXHIBIT GROUND.** Mike picked optometrist variation 2; it
+  existed only as an injected screenshot, so it is now a real rule at the WAL
+  stage re-pin. Measured: body ink **14.18:1 → 10.44:1** — one stop of glare
+  gone, every step still clearing its job (quiet ink 6.11:1 AAA, mutest 4.83:1
+  AA). `--wb-gold-mute` is lifted PAST a flat translation on purpose: the literal
+  one (`#a49a83`) measures **4.19:1**, under AA for the register's small mono, so
+  a palette lift would have cost legibility at the bottom while fixing it at the
+  top. M0b's ring keeps its number (2.82 → **2.83:1**). **Scope verified live,
+  not assumed:** `/robots` reports `--wb-ink:#ece9e0` — the paper ramp. It is a
+  paper wing and shares no part of this.
+- **R1 "HUMANLY SOUP" WAS ONE MISSING DECLARATION.** `.vp-flat` — the flat
+  wing's top-level container, holding fifteen blocks of different kinds — was a
+  PLAIN BLOCK while every other container on a face is a flex column with a gap.
+  Measured distance from the last line of a biography to the first row of the
+  register: **0px**. A four-step ladder derived from `--face-fs`
+  (tight .55x / block 1.0x / **section 2.6x** / end 3.8x) replaces it; the ratios
+  are the point, because 1 : 2.6 : 3.8 is legible AS a ratio and a flat 12px is
+  legible as nothing. THE RULES CAME OFF to pay for it — the deck's full-width
+  hairline, the register block's and the log sheet's — which is Mike's "not more
+  rules and lines" applied by subtraction. Section heads were dressed as
+  footnotes (`--fs-micro` mono at `--wb-gold-lo`, identical to a caption) and are
+  now Syne 800 at `--fs-small`, full ink. **Found while measuring: the biggest
+  hole on the page was in the HEAD** — `.vp-face-head` 216px, its text column
+  60px, **156px of nothing** between the artist's name and the first sentence
+  about her, left behind when L5 correctly moved the lead out of F1's two-column
+  composition for the stage packer. The flat wing has no packer, so the plate
+  floats and the words set beside it. Document +26% longer; that is the
+  breathing room and it is the trade.
+- **R2 IT WAS NEVER THE SIZE.** Measured before: the label already ran at
+  **19.6px** — `--face-fs` at its ceiling — so the only dial P7 left raises the
+  headline and the register too, the move P7 itself rules out. Four faults, all
+  properties of the FACE and the LINE: DM Serif Display is a Didone-class
+  DISPLAY serif (thins sub-pixel at reading size, counters closed); `ch` is the
+  advance of ZERO and under-reports this line by a quarter, so 62ch was running
+  ~80 characters; 1.5 leading is a sans number; light-on-dark blooms shut its own
+  word spaces. Now `--wb-read` = **Fraunces** — already in the one font `<link>`,
+  already loaded, already MIKE'S OWN PICK (v28_3, HR deck), and the only face in
+  the bundle with an **optical-size axis**, which is the difference between a
+  face that has been shrunk and one drawn to be small. 56ch = **67 characters,
+  counted** (range rects), one off Bringhurst's 66. `--wb-serif` untouched.
+- **R3 BOTH HALVES, AND (a) IS NOT THE SAME BUG AS M0a.** M0a's grip is
+  `top:50%` OF THE HANDLE, and on a flat wing the handle is the document: at
+  1456×900 the grip sits at viewport y=**1782** in an 811px window — **971px
+  below the fold** — leaving a 1px line at **1.99:1** as the only visible
+  affordance, the very number M0a measured and accepted on the assumption the
+  grip was on screen. The grip is STICKY now, at mid-viewport, reachable at every
+  scroll position; no DOM change, drag invariant preserved. (b) `.ex-left` was
+  **433 × 2864px holding 133px of content — 95.4% empty paper** — because W7 made
+  the grid row the document's height and the column stretched into it by default.
+  `align-self:start` + sticky + a `max-height`/`overflow` BOUND; stands down at
+  720px, the frame's own one-column threshold read off that rule.
+- **R4 ALIGNED, AND IT IS NOT CLOSE.** Every row was its own grid, so the value
+  column started at **x=597, 605, 561** on three consecutive rows and at five
+  different positions on Carsie's seven-row card. Now **665, seven times**
+  (`subgrid`, `max-content`, survives `data-stage-split` cloning). Judged at the
+  real measure as asked: aligned wins because a ragged key column moves the eye's
+  return point every line, turning one downward glance into seven searches.
+- **R5a "WELCOME"**, not "Welcome to the Listening Room": the room's name is
+  already printed TWICE on that page (title bar + subtitle), so the longer form
+  invents a THIRD name for one room in the sentence whose job is to stop a
+  stranger being confused. Written to the three-masters doctrine as ONE descent
+  through the face's existing blocks — blurb=seconds, ¶1 what is here, ¶2 the
+  standard, ¶3 what we are not, ¶4 the why, tombstone=the checkable version — no
+  announced tiers. **No collapse, as a ruling:** 280 words; a control would hide
+  the depth the doctrine asks for and save one flick. Every fact is checkable in
+  this repo (the privacy line is a statement about `worker.js`'s `visits` table).
+  M6's booth pointer moved here, following its own stated reason.
+- **R5b THE BILL.** "Its place in the museum" is dead — it was the museum
+  explaining its filing system to someone who came to hear music. Replaced by the
+  poster: the standard, then a 2×2 block of acts in the artists' own colour, then
+  the small print. **The names are DOORS** (`selectAlbum`), which is the one
+  thing a printed bill cannot be. Two-up EXPLICITLY — `auto-fit` dealt four and
+  broke every name over two lines, which is P10's lesson in this same wing.
+  Acts are read off `ARTISTS` by a builder that throws on an unknown id, so
+  **not one new fact about any artist enters here**. A sixth ramp step
+  (`--fs-display`, 1.56×) was added the way P7 says to add one.
+- **R6 THE RECORD BOARD**, between the register and the shelf because that is the
+  order a fan reads in: who, what they have done, where to get it. Jesse 7 rows
+  (three US AAA peaks, four Grammy nominations, the Americana award, Farm Aid,
+  the label), Mikey 5 (**the Canon sync — Mike's own named model**, Rubin,
+  *Unapologetic*, Universal, the London sell-out), Carsie 5, **Hunter Root 0 and
+  it says why**. Nothing invented: every row was already sourced in the file;
+  rows with a readable page keep it as a door, rows without stay plain type per
+  P20. Kimmel and Colbert DROPPED — real, undated in this repo, and a board with
+  a year column does not estimate. Three sideboxes moved rather than copied, so
+  nothing is duplicated. **NO LIVE COUNTS.** The weekly-refresh candidates are
+  named in the log: **37 baked `feed[].v` view counts** (the upload LIST is the
+  half that actually rots), one tombstone row on Jesse's "There's A Hole", and an
+  explicit warning that a chart PEAK is durable and must never be rewritten into
+  a current position.
+- Gates: **lint 11 err / 9 warn** (= HEAD baseline, zero new), vite build green,
+  desktop 1456×900 + genuine 390px iframe lap. 390px: zero page-level horizontal
+  scroll, poster/register/board all stack, plate unfloats, tracklist stands down.
+  The lap harness `public/_lap.html` was created and removed before seal.
+
 ## SEALED 2026-08-03 — THE MORNING RIP (v37; M0–M12. PUSH + DEPLOY ARE MIKE'S)
 
 Autonomous single-agent Code-lane round on Mike's remote-control brief, sealed in

@@ -205,14 +205,47 @@ const ARTISTS = [
       ],
       /* [P22] the twelve-line discography is GONE. What is left is the one
          sidebox that was never a list of records — the band. */
+      /* [R6 2026-08-03] AND NOW IT IS ONLY THE BAND. Three of these five lines
+         were BILLINGS — Wood Brothers, Hadestown, Paul Simon — filed under a
+         heading about who plays with her, because before the record board
+         existed there was nowhere else for an achievement to go. They have
+         moved to `metrics` below, where a reader looking for them can find them
+         by kind. Nothing is duplicated: a fact is in one block or the other. */
       sideboxes: [
         { title: "On stage",
           lines: ["Usually a trio, sometimes called the Handsome Band",
-                  "Joe Plowman, bass · Patrick Firth, keyboards",
-                  "Opened for The Wood Brothers from 2010",
-                  "Played one of the Fates in Hadestown, 2011",
-                  "Opened on Paul Simon's 2011 tour"] },
+                  "Joe Plowman, bass · Patrick Firth, keyboards"] },
       ],
+    },
+    /* ===== [R6 2026-08-03] THE RECORD BOARD ================================
+       Mike's brief: verifiable, durable facts only — documented charts where
+       they genuinely exist, certifications, billings, notable syncs. Nothing
+       invented, nothing estimated, no live counts.
+       CARSIE HAS NO DOCUMENTED CHART ENTRY IN THIS MUSEUM'S SOURCES, and the
+       block says so rather than going quiet. She has an award with a door on
+       it, a catalogue with a door on it, and three billings carried over from
+       the sidebox above. Those three have no single readable page in our
+       sources, so per the ledger discipline they are plain type and the note
+       says where they came from — the same rule P20 applied to the register and
+       P16 to the records shelf. */
+    metrics: {
+      rows: [
+        { kind: "Award", when: "2026",
+          fact: "Folk Alliance International Artist of the Year — tied with I'm With Her",
+          url: "https://www.youtube.com/watch?v=NFTza3tVsQ8",
+          src: "her own upload of the acceptance speech" },
+        { kind: "Catalogue", when: "2005–2026",
+          fact: "Twelve records, every one of them released independently",
+          url: "https://carsieblanton.bandcamp.com/music", src: "her own Bandcamp" },
+        { kind: "Billing", when: "2011", fact: "Opened on Paul Simon's tour" },
+        { kind: "Billing", when: "from 2010", fact: "Opened for The Wood Brothers" },
+        { kind: "Stage", when: "2011", fact: "Played one of the Fates in Hadestown" },
+      ],
+      note: "No chart entry and no certification is documented for her in this " +
+            "museum's sources. The three unlinked lines are carried from her " +
+            "own press page and the biography this card cites; neither has a " +
+            "single readable page to point at, so they are set as plain type " +
+            "rather than borrowing a link that would not prove them.",
     },
     /* [P16] THE RECORDS THIS ROOM POINTS AT — every slug read off her own
        Bandcamp catalogue page, 2026-08-02. The other thirteen releases are
@@ -420,6 +453,25 @@ const ARTISTS = [
           note: "Read off his own store, 2026." },
       ],
     },
+    /* ===== [R6 2026-08-03] THE RECORD BOARD, WITH NOTHING ON IT ============
+       AND THE HOUSE ARTIST IS THE ONE WHO MUST GET THIS RIGHT. He is ours; he
+       is the one artist in the wing whose board we could pad without anyone
+       outside this building noticing, because the museum holds his whole
+       catalogue and could dress vault counts up as achievements. A vault count
+       is not a chart position and this museum does not get to blur the two on
+       its own artist and then claim the standard on everyone else's.
+       So the board is empty and says why. His catalogue facts are the register
+       above, where catalogue facts belong. P16's ruling, third application:
+       a missing shelf reads as an oversight; a shelf with a note on it reads
+       as the truth. */
+    metrics: {
+      note: "No chart entry, certification, festival billing or sync is " +
+            "documented for him in this museum's sources. That is a statement " +
+            "about what we hold and not about the work — his record here is " +
+            "the catalogue itself: 78 songs and nine albums on file in the " +
+            "museum's own vault, in the register above. He is the house " +
+            "artist, and the house does not get to grade him on a curve.",
+    },
     /* [P16] slugs read off his own Bandcamp catalogue page, 2026-08-02; years
        from the museum's own era buckets (src/data/era-buckets.json). */
     records: {
@@ -626,15 +678,54 @@ const ARTISTS = [
          block below, where each entry is a door. The two sideboxes that
          remain are not discographies — one is chart history, the other is a
          warning. */
+      /* [R6] "On the charts" is GONE FROM HERE — see the record board below.
+         A sidebox is a boxed aside: "related, but step out of the sentence to
+         read it" (the rule at `.vp-box`). Chart history is not an aside on a
+         card about a charting artist; it is one of the two or three things a
+         fan came to the page for, and it was in a box beside a warning about
+         SEO domains. It has a block of its own now and it is not in both. */
       sideboxes: [
-        { title: "On the charts",
-          lines: ["“Horses” — US AAA no. 2, 2025",
-                  "“Wheel” — US AAA no. 7, 2025",
-                  "“Won't You Come Out Tonight” — US AAA no. 11, 2026"] },
         { title: "Two links that are not his",
           lines: ["jessewelles.org", "jessewellestour.com"],
           note: "Both rank high. Both are ticket-resale and SEO pages. Named here so nobody 'fixes' his link to a worse one." },
       ],
+    },
+    /* ===== [R6 2026-08-03] THE RECORD BOARD ================================
+       HE IS THE ONE ARTIST IN THE WING WITH REAL CHART HISTORY, and it was
+       filed in a SIDEBOX called "On the charts" — a boxed aside, in the same
+       register as "Two links that are not his". P22's own note flagged the
+       oddity ("one is chart history, the other is a warning") and left it,
+       because there was no block for chart history to be. There is now.
+       THE SIDEBOX IS RETIRED, NOT COPIED. The three peaks live here and only
+       here. Their door is the Wikipedia article this card already cites, and
+       the citation is not new: his `aboutNote` declares "Wikipedia for the
+       biography, discography, CHARTS AND AWARDS" in as many words.
+       DROPPED ON PURPOSE: Kimmel and Colbert. Both are real and both are in
+       the biography above; neither carries a DATE anywhere in this repository,
+       and a board with a year column is not the place to estimate one. */
+    metrics: {
+      rows: [
+        { kind: "Chart", when: "2025", fact: "“Horses” — US AAA no. 2",
+          url: "https://en.wikipedia.org/wiki/Jesse_Welles", src: "Wikipedia" },
+        { kind: "Chart", when: "2025", fact: "“Wheel” — US AAA no. 7",
+          url: "https://en.wikipedia.org/wiki/Jesse_Welles", src: "Wikipedia" },
+        { kind: "Chart", when: "2026",
+          fact: "“Won't You Come Out Tonight” — US AAA no. 11",
+          url: "https://en.wikipedia.org/wiki/Jesse_Welles", src: "Wikipedia" },
+        { kind: "Nominations", when: "2026",
+          fact: "Four nominations at the 68th Grammy Awards",
+          url: "https://en.wikipedia.org/wiki/Jesse_Welles", src: "Wikipedia" },
+        { kind: "Award", when: "2025",
+          fact: "Spirit of Americana / Free Speech Award",
+          url: "https://en.wikipedia.org/wiki/Jesse_Welles", src: "Wikipedia" },
+        { kind: "Billing", when: "Sept 2024",
+          fact: "Farm Aid, introduced by Dave Matthews" },
+        { kind: "Label", when: "current", fact: "300 Entertainment" },
+      ],
+      note: "No certification is documented for him in this museum's sources. " +
+            "The Farm Aid billing is carried from the coverage this card " +
+            "cites and has no single readable page to point at, so it is set " +
+            "as plain type.",
     },
     /* [P16] slugs read off his own Bandcamp catalogue page, 2026-08-02. */
     records: {
@@ -824,13 +915,52 @@ const ARTISTS = [
       /* [P22] the ten-line release list is gone with the other
          discographies. What remains are the two boxes that were never
          catalogues — a person, and a week on the road. */
+      /* [R6] the sell-out moved to the record board; what is left in the box is
+         the WEEK — a route and a song played before it existed, which is a
+         story about a man on the road and not a metric. */
       sideboxes: [
         { title: "September 2019",
           lines: ["Germany, then Sweden, then London",
                   "The Waiting Room, on the 20th",
-                  "Sold out in about five days",
                   "He played “Amazon Prime” before it was released"] },
       ],
+    },
+    /* ===== [R6 2026-08-03] THE RECORD BOARD ================================
+       MIKE NAMED THIS ONE AS THE MODEL: "notable syncs (Mikey Mike's Canon
+       placement is the model)". It is the model because it is the exact shape
+       the brief is after — a third party put the record somewhere, it is
+       written down, and it is still true. It is also the single most
+       interesting line about him and it was buried in the middle of a
+       biography paragraph.
+       NO CHART, NO CERTIFICATION, and the block says so. He is the artist this
+       wing has already had to be honest about twice (no verifiable store, a
+       compromised domain), and this is the third time — same doctrine, same
+       words: an empty shelf with a label on it is the honest object. */
+    metrics: {
+      rows: [
+        { kind: "Sync", when: "2017",
+          fact: "Canon, “Live for the Story: Boundaries” — the advert most people met him through",
+          url: "https://www.fadedglamour.co.uk/2017/06/listen-mikey-mike-doin-me-canon-advert-song.html",
+          src: "Faded Glamour" },
+        { kind: "Credit", when: "2017",
+          fact: "Debut single “Doin' Me”, produced by Rick Rubin",
+          url: "https://www.fadedglamour.co.uk/2017/06/listen-mikey-mike-doin-me-canon-advert-song.html",
+          src: "Faded Glamour" },
+        { kind: "Credit", when: "2012",
+          fact: "Co-producer on Rihanna's Unapologetic",
+          url: "https://www.fadedglamour.co.uk/2017/06/listen-mikey-mike-doin-me-canon-advert-song.html",
+          src: "Faded Glamour" },
+        { kind: "Publishing", when: "before 2017",
+          fact: "Signed to Universal's publishing arm for several years",
+          url: "https://www.fadedglamour.co.uk/2017/06/listen-mikey-mike-doin-me-canon-advert-song.html",
+          src: "Faded Glamour" },
+        { kind: "Billing", when: "Sept 2019",
+          fact: "The Waiting Room, London — sold out in about five days",
+          src: "a 2020 Titusville interview, held in print" },
+      ],
+      note: "No chart entry and no certification is documented for him in this " +
+            "museum's sources. The London date's source is a print interview " +
+            "with no live page, so it is named rather than linked.",
     },
     /* [P16] THE ONE ARTIST WITH NO DOOR TO GIVE, AND THE BLOCK SAYS SO.
        Checked this round and all three came back empty-handed:
@@ -1027,6 +1157,15 @@ function aboutArtistTrack(a) {
       still: a.plate || undefined,
       stillCaption: a.plate ? a.plateCaption : undefined,
       tombstone: a.card.tombstone,
+      /* [R6 2026-08-03] THE RECORD BOARD, between the register and the shelf,
+         and the position is the argument. The register says what this artist
+         IS; the board says what a third party wrote down that they DID; the
+         shelf says where to go and hear it. That is the order a fan reads in —
+         who, then what they have done, then how to get it — and it is why the
+         board is not appended at the bottom with the provenance notes.
+         `metrics` is optional like everything else on a face: an artist that
+         declares none renders none, and the block is not drawn empty. */
+      metrics: a.metrics,
       label: a.card.label,
       sideboxes: a.card.sideboxes,
       /* [P16/P22 2026-08-02] THE DISCOGRAPHY DIED AND THE RECORDS GOT DOORS.
@@ -1135,6 +1274,26 @@ function tracksFor(a) {
   return out.filter(Boolean);
 }
 
+/* [R5b 2026-08-03] THE BILL'S ACTS ARE READ OFF `ARTISTS`, NOT RETYPED.
+   A poster that lists its own acts from a second copy of the line-up is a
+   poster that goes out of date silently — the wing gains an artist, the bill
+   does not, and nothing anywhere reports it. So the promotional copy is the
+   only thing authored per act; the NAME, the ALBUM ID the press navigates to,
+   and the PICTURE are all read from the same entry the coverflow is built
+   from. An id that names nobody drops out of the bill rather than rendering a
+   dead panel, and the throw is loud rather than silent because a bill missing
+   an artist is a content defect and should not be discovered by a visitor.
+   The running order is the ORDER GIVEN, not the array's: a poster's order is a
+   billing decision, and this one is Mike's. */
+function billActs(copy) {
+  return copy.map(c => {
+    const a = ARTISTS.find(x => x.id === c.id);
+    if (!a) throw new Error("billActs: no artist with id " + c.id);
+    return { album: a.id, name: a.name, art: a.art,
+             what: c.what, why: c.why, hue: c.hue };
+  });
+}
+
 /* ===== [F7a 2026-08-02] THE HOUSE ALBUM — the wing explains itself ==========
    Mike's banked note, built: WAL gets a FIRST ALBUM whose subject is the room
    — what it is and its place in the museum. It sits first in the coverflow
@@ -1168,12 +1327,26 @@ const HOUSE_ALBUM = {
     {
       id: "wal-house-room",
       unnumbered: true,   /* the room's own pages are not songs */
-      title: "What this room is",
+      /* [R5a 2026-08-03] "WHAT THIS ROOM IS" BECOMES "WELCOME", AND IT IS THE
+         SHORTER OF THE TWO NAMES MIKE OFFERED.
+         He offered "Welcome" or "Welcome to the Listening Room" and asked for a
+         pick with a reason. THE REASON IS THAT THE ROOM ALREADY HAS A NAME AND
+         IT IS PRINTED TWICE ON THIS PAGE: the title bar says WORTH A LISTEN,
+         and the card's own subtitle says WORTH A LISTEN directly under the
+         heading. "The Listening Room" would be a THIRD name for one room,
+         introduced at the door, in the sentence whose whole job is to stop a
+         stranger being confused. A greeting does not need to re-name the
+         building it is standing in — the building is already saying its name
+         over the greeter's shoulder.
+         "Welcome" also does the job the old title did not. "What this room is"
+         is a HEADING ON A DEFINITION; a visitor who has just walked in is being
+         handed a specification. "Welcome" is addressed to them. */
+      title: "Welcome",
       tags: ["wal", "house", "about"],
       videos: [],
       face: {
         kind: "text",
-        title: "WHAT THIS ROOM IS",
+        title: "WELCOME",
         subtitle: "WORTH A LISTEN",
         /* [M11 2026-08-03] REWRITTEN TO THE PERSONALITY MAP.
            MIKE, on this wing: "the ARTISTS shine; W.B does not overshadow;
@@ -1186,22 +1359,90 @@ const HOUSE_ALBUM = {
            in the SAME ROW as the visitor, and that is a different sentence.
            No claim is added or removed: four artists, eight songs, the same
            four surfaces each, every door leading out. */
-        blurb: "Records somebody in this house could not stop playing, pointed " +
-               "at. That is the whole show.",
+        /* [R5a 2026-08-03] SPELLED OUT, TO THE THREE-MASTERS DOCTRINE.
+           MIKE: "seconds for the skimmer, depth for the curious, the why for
+           the intrigued — one path, no announced levels."
+           HOW THAT IS BUILT HERE, AND WHY IT IS NOT THREE SECTIONS: the doctrine
+           forbids announcing the levels, so the page cannot say "in brief" and
+           "in detail" — it has to be ONE descent that each reader leaves at
+           their own depth. The face's existing blocks already are that descent
+           and nobody had used them as one:
+             blurb      the SECONDS. One sentence. A skimmer who reads nothing
+                        else leaves knowing what the room is for.
+             label ¶1   what is actually here and what you can do with it.
+             label ¶2   the standard — why these four and not others.
+             label ¶3   what we are not, and where every door goes.
+             label ¶4   the WHY, and it is the deepest thing on the page:
+                        how the cards were made and what that costs us.
+             tombstone  the checkable version of all of it, for the reader who
+                        wants to verify rather than be told.
+           A reader who stops after the first sentence has been served. A reader
+           who goes to the bottom finds provenance. Nothing announces a tier.
+           NO COLLAPSE HERE, AND THAT IS THE RULING RATHER THAN AN OVERSIGHT.
+           Mike said collapse/expand "ONLY where truly beneficial". This page is
+           ~280 words: a disclosure control would hide the depth the doctrine
+           asks for behind a press, add a decision to a page whose job is to
+           remove one, and save a reader roughly one flick of a scroll wheel.
+           Where a collapse genuinely earns its place in this wing is the RECORD
+           on the robots side (ten long entries) — and that one already has it.
+           EVERY FACT BELOW IS CHECKABLE IN THIS REPOSITORY. Four artists and
+           eight songs: the ARTISTS array and its two-songs-each shape. The four
+           surfaces: `tracksFor`. The doors: `doorsFor`. What we keep: the
+           `visits` table in src/worker.js stores page, referrer and a timestamp
+           and nothing else — the privacy sentence is a statement about the code,
+           the same way M3 wrote the booth's. The pictures: every file and its
+           source URL are in docs/WAL_PHOTO_PROVENANCE-20260802.md, which also
+           carries the come-down-on-deny undertaking quoted here. */
+        blurb: "Four artists somebody in this house could not stop playing. " +
+               "Eight songs, all of them one press away.",
         label: [
-          "Every album in this room is an artist, and every artist gets the " +
-          "same stage: their songs, playable; a sheet about the songs; a card " +
-          "about them; and a wall of what they have been up to lately, in " +
-          "their own pictures. Every door leads out — their site, their store, " +
-          "their channel — because this room is a pointer and not a home.",
+          "Every album in the carousel above is an artist, and every artist " +
+          "gets the same four pages: their songs, playable right here; a sheet " +
+          "about the songs; a card about them; and a wall of what they have " +
+          "been up to lately, in their own pictures.",
+          "The standard is not chart position and it is not how many people " +
+          "already know. It is that somebody here could not stop playing the " +
+          "record and thinks you should hear it. That is the whole test, and " +
+          "it is why this room can hold a man posting a song about this week, " +
+          "a songwriter you have already heard in an advert without learning " +
+          "his name, and our own house artist, without ranking them against " +
+          "each other.",
           "We are not their label, their agent, or their critic. We are one " +
-          "more person in the room who thinks you should hear this. The room " +
-          "happens to be ours. The night belongs to them.",
+          "more person in the room who thinks you should hear this. So every " +
+          "door leads out — their site, their store, their channel, their tour " +
+          "dates — and there is nothing here to sign up for and no account to " +
+          "make. The room happens to be ours. The night belongs to them.",
+          "What is written on these cards was read at its source. Every " +
+          "quotation was opened where it was said, and one that could not be " +
+          "checked is not on the wall; where an artist has no honest door to " +
+          "give, the card says so rather than sending you somewhere we have " +
+          "not read. The pictures are the artists' own public imagery, logged " +
+          "file by file with where it came from, and they come down the day " +
+          "any of them asks.",
         ],
         tombstone: [
           { k: "In this room", v: "Four artists · eight songs, all playable" },
-          { k: "The standard", v: "Someone here thinks they are worth a listen" },
+          { k: "Every artist gets", v: "Their songs · a sheet · a card · a wall" },
+          { k: "The standard", v: "Someone here could not stop playing it" },
           { k: "The doors", v: "All of them lead to the artist's own place" },
+          { k: "What we keep", v: "A page name and a timestamp. No accounts, no profiles." },
+          { k: "The pictures", v: "Their own, logged file by file, down on request" },
+          { k: "The quotes", v: "Read at the source, or not printed" },
+        ],
+        /* [M6 2026-08-03, REHOMED BY R5b] MIKE: the booth pointer was "too loud
+           and duplicative — one quiet inline link where it genuinely helps."
+           Loud: it was a P10 marquee door, a register built for doors OUT of
+           the building. Duplicative: the card it stood on was the house
+           explaining itself, and the door's scent said that again.
+           M6's own answer to "where does it genuinely help" was "the end of the
+           paragraph a stranger has just read about who runs this place". That
+           paragraph is on THIS card now (label ¶3 — what we are not, and what
+           we do not keep), so the link followed its reason here rather than
+           staying on a page that is now a poster. `quiet` is the flag; see the
+           note at the render. */
+        trail: [
+          { label: "the Information Booth", url: "/booth", quiet: true,
+            scent: "Who runs this place, and how to reach them:" },
         ],
         footer: "WORTH A LISTEN · WEIRD.BABY",
         papa: "[PAPA] — the room's own words, every line of them.",
@@ -1210,40 +1451,101 @@ const HOUSE_ALBUM = {
     {
       id: "wal-house-place",
       unnumbered: true,   /* the room's own pages are not songs */
-      title: "Its place in the museum",
+      /* ===== [R5b 2026-08-03] "ITS PLACE IN THE MUSEUM" IS KILLED ============
+         MIKE: it was "never meant literally". He is right, and the page proved
+         him right by having nothing to do: it was a single paragraph of the
+         museum explaining its own filing system to a visitor who came to hear
+         music. A room's place in a building is an ARCHITECT'S fact. It is not a
+         thing anybody standing in the room needs told, and F7a's own note gives
+         the game away — the album was scoped as "what it is AND its place in
+         the museum", two subjects, and the first one is the whole job.
+         WHAT REPLACES IT IS THE POSTER FOR THE SHOW. Mike's spec, verbatim:
+         "ABOUT OUR CURRENT ARTISTS: a one-page POSTER for the complete show —
+         functionally a poster, not a literal image: the top-level details that
+         PROMOTE the show. Serious and respectful, energetic, WEIRD.BABY IN FULL
+         COLORS. All four artists, what they are, why they're here, the
+         standard."
+         SO THE SECOND HOUSE PAGE STOPS BEING ABOUT THE HOUSE. Page one is the
+         welcome; page two is the BILL. Between them a stranger who walks in
+         cold gets what the room is and who is in it, in that order, before
+         being asked to press anything — which is F7a's whole reason for the
+         house album existing, finally spent on something a visitor wants.
+         THE ACTS ARE BUILT FROM `ARTISTS`, NOT RETYPED. Name, album id and
+         picture are read off the same entries the coverflow is built from, so
+         the poster cannot advertise an artist the room does not contain or show
+         a picture the wing has stopped using. Only the promotional copy — what
+         they are, why they are here, and the house accent — is authored, and
+         every claim in it is already carried, sourced, on that artist's own
+         card. NOT ONE NEW FACT ABOUT ANY OF THEM ENTERS THE BUILDING HERE. */
+      title: "About our current artists",
       tags: ["wal", "house", "about"],
       videos: [],
       face: {
         kind: "text",
-        title: "ITS PLACE IN THE MUSEUM",
+        title: "ABOUT OUR CURRENT ARTISTS",
         subtitle: "WORTH A LISTEN",
-        /* [M11] same register move as the room's first page: the house
-           describing itself without standing in front of anybody. */
-        blurb: "Every other room in this building looks inward at what we " +
-               "keep. This one looks out of the window.",
+        blurb: "Four of them. Two songs each, all playable. Every one of them " +
+               "is somebody's favourite record and none of them is ours.",
+        bill: {
+          standard: "The standard in this room is not chart position and not " +
+                    "how many people already know. It is that somebody in this " +
+                    "house could not stop playing the record and thinks you " +
+                    "should hear it.",
+          acts: billActs([
+            { id: "carsie-blanton",
+              what: "Songwriter · Philadelphia",
+              /* every clause below is on her own card, sourced: the twenty
+                 years and the twelve independent records in the register, the
+                 2026 Folk Alliance award (with her own upload of the speech as
+                 the door), and the marker line itself. */
+              why: "Twenty years of touring, twelve records and every one of " +
+                   "them independent, and an Artist of the Year award she tied " +
+                   "for in 2026. She writes protest songs you can dance to.",
+              hue: "#f79ac4" },
+            { id: "jesse-welles",
+              what: "Songwriter · Arkansas",
+              why: "A song about this week, written this week, posted most " +
+                   "weeks — usually a man, a guitar and a field. Four Grammy " +
+                   "nominations at the 68th for doing exactly that.",
+              hue: "#9ccf7a" },
+            { id: "mikey-mike",
+              what: "Songwriter and producer · Los Angeles",
+              why: "A debut single produced by Rick Rubin that reached most " +
+                   "people through a Canon advert. You have almost certainly " +
+                   "heard him without ever learning his name.",
+              hue: "#e8b45c" },
+            { id: "hunter-root",
+              what: "Songwriter · the house artist",
+              why: "Ours, and the reason the building works: his catalogue " +
+                   "taught this museum's machinery every pattern the other " +
+                   "wings inherited. He stands in the same row as everyone " +
+                   "else here.",
+              hue: "#d8c9a0" },
+          ]),
+          foot: "Press a name to open that artist's room. Every card in it was " +
+                "written from sources that were opened and read, every door " +
+                "leads to the artist's own place, and the pictures are their " +
+                "own — logged file by file, and down the day any of them asks.",
+        },
         label: [
-          "Weird.Baby is a museum. It keeps a vault, writes cards, and exhibits " +
-          "what it holds — and Worth A Listen is the one room built the other " +
-          "way round, where nothing on the walls is ours. That is not a gap in " +
-          "the collection. It is the reason the room exists: so that a song " +
-          "with somebody else's name on it has somewhere to be heard in here " +
-          "too.",
+          "They have nothing to do with each other. That is not an accident and " +
+          "it is not a shortage of taste: a room that only holds records which " +
+          "agree is a room with one record in it. What the four have in common " +
+          "is the only thing this museum asks for, which is that somebody here " +
+          "could not stop playing them.",
         ],
-        /* [M6 2026-08-03] MIKE: the booth pointer was "too loud and
-           duplicative — one quiet inline link where it genuinely helps."
-           Loud: it was a P10 marquee door, a register built for doors OUT of
-           the building. Duplicative: the card it stands on is the house
-           explaining itself, and the door's scent said that again.
-           Where it genuinely helps is the end of the paragraph a stranger has
-           just read about who runs this place — which is one sentence, with
-           one link in it. `quiet` is the flag; see the note at the render. */
-        trail: [
-          { label: "the Information Booth", url: "/booth", quiet: true,
-            scent: "Who runs this place, and how to reach them:" },
-        ],
+        /* [R5b] M6's quiet booth pointer MOVED, and moving it is keeping M6
+           rather than overriding it. Its ruling was that the link belongs "at
+           the end of the paragraph a stranger has just read about who runs this
+           place" — and that paragraph is no longer on this page; this page is
+           now about the four artists. The paragraph it names is on the WELCOME
+           card, so the link went with it. A pointer left standing where its own
+           reason has walked away is the kind of orphan every round of this
+           project has had to go back and remove. */
         footer: "WORTH A LISTEN · WEIRD.BABY",
-        papa: "[PAPA] — the house's account of itself; Mike edits, nothing " +
-              "here claims to be final.",
+        papa: "[PAPA] — the promotional copy, the running order and the four " +
+              "house accents. Every claim about an artist here is already on " +
+              "that artist's own card, sourced there.",
       },
     },
   ],

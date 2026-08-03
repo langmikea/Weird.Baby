@@ -152,7 +152,17 @@ body:has(.vp-face) .vp-area::before{display:none}
   --fs-small:max(.86rem, calc(var(--face-fs) * .85));
   --fs-body:var(--face-fs);
   --fs-lead:calc(var(--face-fs) * 1.14);
-  --fs-head:calc(var(--face-fs) * 1.32)}
+  --fs-head:calc(var(--face-fs) * 1.32);
+  /* [R5b 2026-08-03] A SIXTH STEP, ADDED THE WAY P7 SAYS TO ADD ONE.
+     P7's law is "nothing on a face may set a raw font-size again: it picks a
+     step" — which means a face that needs a size the ramp does not have must
+     EXTEND THE RAMP, not defect from it. The poster needs one: an artist's name
+     on a bill is the largest thing on its panel and `--fs-head` is the size of
+     the page's own title, so at head size the four names would tie with the
+     heading above them and the bill would have no top rank of its own.
+     1.56 keeps the ramp's ~1.18x progression exactly one step past head. It is
+     used by `.vp-bill-name` and by nothing else. */
+  --fs-display:calc(var(--face-fs) * 1.56)}
 /* [P8 2026-08-02] THE PULL QUOTE LEAVES THE DISPLAY FACE.
    Mike: "KILL the curly display font on the artist pull-quote — it outsizes
    everything and is hard to read. Use the house register."
@@ -177,10 +187,121 @@ body:has(.vp-face) .vp-area::before{display:none}
    container (`.vp-flat`) is a plain block with no gap at all, so the lead
    arrived hard against the subtitle. MEASURED on /wal: 0px where there had been
    10. This is the 10, put back where the container cannot supply it. */
-.vp-flat > .vp-face-blurb{margin-top:10px}
+/* ===========================================================================
+   [R1 2026-08-03] THE FLAT DOCUMENT GETS A RHYTHM
+   MIKE'S DIAGNOSIS, VERBATIM: "technically delineated, but humanly soup."
+   Sections spill into each other; no pacing. His instruction is as specific as
+   the complaint: SPACE, WEIGHT AND SCALE do the work — not more rules and
+   lines.
+   WHY THERE WAS NO PACING, MEASURED. `.vp-flat` was a PLAIN BLOCK. Every other
+   container on a face is a flex column with a gap (`.vp-face-body` 12px,
+   `.vp-card-label` .7em, `.vp-records` 8px, `.vp-deck` 11px) — the flat wing's
+   own top-level container was the one place in the chain that supplied none, so
+   the distance between "the last line of the artist's biography" and "the first
+   row of the register" was whatever margin those two elements happened to
+   carry: **zero**, on /wal. Fifteen blocks of completely different kinds, all
+   butted at 0px. That is the soup, and it is one missing declaration.
+   THE LADDER. Four steps, all derived from `--face-fs` so the pacing follows
+   the type instead of drifting from it at other sizes:
+     tight  .55x   inside a movement (a heading and the lead beneath it)
+     block  1.0x   between kin (two sideboxes; a label and its note)
+     sect   2.6x   A NEW SECTION BEGINS
+     end    3.8x   the document is over
+   The ratios are the point. 1 : 2.6 : 3.8 is legible AS a ratio at a glance —
+   a reader does not measure it, they see three distinct distances and read
+   three distinct relationships. A flat 12px everywhere is legible as nothing.
+   NOT GAP — `margin-top` on the adjacent sibling. `gap` is one number for the
+   whole container and cannot say "but this one is a section", which is the
+   entire job here. It also lets L5's rule above become one line of this system
+   instead of a special case sitting outside it.
+   WHAT PAYS FOR THE SPACE: the rules come out. `.vp-deck`'s full-width hairline
+   and `.vp-face-entries`' are removed below — with 2.6x of air above a heading
+   that is now full-ink and a size up, a 1px line across the page is a third
+   signal saying what two stronger ones already said. That is Mike's "not more
+   rules and lines", applied by subtraction rather than by restraint.
+   SCOPE: `.vp-flat` — the flat wings, /wal and /robots. The staged frame packs
+   its own columns and is untouched; /hr and /wb declare no faces at all. */
+.vp-face{
+  --rh-tight:calc(var(--face-fs) * .55);
+  --rh-block:calc(var(--face-fs) * 1);
+  --rh-sect:calc(var(--face-fs) * 2.6);
+  --rh-end:calc(var(--face-fs) * 3.8)}
+/* the default distance between two top-level blocks. */
+.vp-flat > * + *{margin-top:var(--rh-block)}
+/* THE LEAD IS ONE MOVEMENT: heading, then the sentence the visitor came for,
+   then the reading matter. L5's 10px, now stated as a step of the ladder. */
+.vp-flat > .vp-face-blurb{margin-top:var(--rh-tight)}
+/* A SECTION BEGINS. Each of these is a different KIND of object — a register,
+   a shelf, a wall, a deck of cards, a set of doors — and the jump in distance
+   is what tells a reader they have finished one and started another. */
+.vp-flat > .vp-tomb,
+.vp-flat > .vp-metrics,
+.vp-flat > .vp-records,
+.vp-flat > .vp-deck,
+.vp-flat > .vp-bill,
+.vp-flat > .vp-collage,
+.vp-flat > .vp-reel,
+.vp-flat > .vp-recipes,
+.vp-flat > .vp-face-lines,
+.vp-flat > .vp-face-entries,
+.vp-flat > .vp-rec-index,
+.vp-flat > .vp-rec-body,
+.vp-flat > .vp-trail{margin-top:var(--rh-sect)}
+/* SIDEBOXES ARE KIN TO EACH OTHER and a section as a GROUP: the first one
+   opens the section, the rest of the run closes up beside it. */
+.vp-flat > :not(.vp-box) + .vp-box{margin-top:var(--rh-sect)}
+.vp-flat > .vp-box + .vp-box{margin-top:var(--rh-block)}
+/* AND THE DOCUMENT ENDS. The running foot and the provenance line are not the
+   next section — they are the page furniture after the page, and the distance
+   is what says so without a rule drawn under the last paragraph. */
+.vp-flat > .vp-face-footer,
+.vp-flat > .vp-face-papa{margin-top:var(--rh-end)}
+.vp-flat > .vp-face-footer + .vp-face-papa{margin-top:var(--rh-block)}
+
+/* ---- [R1] THE LARGEST HOLE ON THE PAGE, AND IT WAS IN THE HEAD ------------
+   MEASURED, /wal at 1456px, Carsie Blanton: `.vp-face-head` is 216px tall
+   because the plate is; `.vp-face-headtext` inside it is **60px**. The other
+   **156px** is nothing — a void between the artist's name and the first
+   sentence about her, on the page whose complaint is pacing. It is the biggest
+   single gap in the document and it is not a gap anyone chose: F1 built the
+   head as a two-column COMPOSITION back when the lead lived inside the text
+   column, and L5 later moved the lead OUT — correctly, for the stage packer's
+   sake — which left the text column holding a title and a subtitle against a
+   210px picture.
+   THE FLAT WING HAS NO PACKER, so it can have the composition back. The plate
+   FLOATS instead of taking a grid track: the heading, the lead and the opening
+   paragraphs set beside it and then close under it, which is a magazine head
+   and is what F1's own note describes ("it sits with the words instead of on
+   top of them, and it stops when it has said what it has to say"). No DOM
+   change; the staged frame keeps the grid, because there the lead is a separate
+   page-able block and must stay one.
+   SECTIONS CLEAR IT. A register or a shelf that began beside the picture would
+   be a table indented for no reason — running text may wrap a float, a ruled
+   block may not. */
+.vp-flat .vp-face-head:has(.vp-face-plate){display:block}
+.vp-flat .vp-face-plate{float:right;max-width:42%;
+  margin:0 0 var(--rh-block) var(--rh-sect)}
+.vp-flat > .vp-tomb,
+.vp-flat > .vp-metrics,
+.vp-flat > .vp-records,
+.vp-flat > .vp-deck,
+.vp-flat > .vp-bill,
+.vp-flat > .vp-collage,
+.vp-flat > .vp-reel,
+.vp-flat > .vp-box,
+.vp-flat > .vp-face-lines,
+.vp-flat > .vp-face-entries,
+.vp-flat > .vp-trail,
+.vp-flat > .vp-face-footer{clear:both}
+/* one column, one order: the picture stops floating where the frame stops
+   being two columns (the head's own 820px rule, above). */
+@media (max-width:820px){
+  .vp-flat .vp-face-plate{float:none;max-width:100%;margin:0 0 var(--rh-block)}
+}
+/* [R1] the section rule comes off — `--rh-sect` above it says the same thing
+   with air, and the register's own hanging indent already reads as a block. */
 .vp-face-lines{list-style:none;padding:0;margin:0;display:flex;
-  flex-direction:column;gap:5px;border-top:1px solid var(--wb-border);
-  padding-top:11px}
+  flex-direction:column;gap:5px}
 /* [P23 2026-08-02] THE REGISTER STOPS BREAKING ITS OWN COLUMN.
    These lines are authored as "KEY      value" and rely on the mono face to
    line the values up — which works exactly until one wraps, and then the
@@ -204,8 +325,10 @@ body:has(.vp-face) .vp-area::before{display:none}
    rule under every row, and the entry's own words beside it. It carries the
    manual's sections and the FAQ's questions too, because all three are the
    same shape — a stamp, a title, and one true line. */
-.vp-face-entries{list-style:none;padding:0;margin:0;
-  border-top:1px solid var(--wb-border)}
+/* [R1] the ROW rules stay — a log sheet is ruled by row and that is the form
+   itself, not a section divider. The CONTAINER's top rule goes: it was the
+   divider, and the ladder draws it in air now. */
+.vp-face-entries{list-style:none;padding:0;margin:0}
 .vp-fe{display:flex;gap:14px;align-items:baseline;
   padding:9px 0;border-bottom:1px solid var(--wb-border)}
 .vp-fe-stamp{flex:0 0 auto;min-width:8.5ch;
@@ -216,9 +339,10 @@ body:has(.vp-face) .vp-area::before{display:none}
 .vp-fe-title{font-family:'Syne',sans-serif;font-weight:700;
   font-size:var(--fs-small);letter-spacing:.09em;
   text-transform:uppercase;color:var(--wb-gold)}
-.vp-fe-line{font-family:'DM Serif Display',Georgia,serif;
-  font-size:var(--fs-body);line-height:1.4;color:var(--wb-dim);
-  max-width:56ch}
+/* [R2] reading matter — the log entry's own sentence. */
+.vp-fe-line{font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-body);line-height:1.58;color:var(--wb-dim);
+  letter-spacing:.005em;max-width:56ch}
 .vp-fe-note{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-micro);letter-spacing:.07em;
   color:var(--wb-gold-lo);opacity:.85}
@@ -288,8 +412,10 @@ body:has(.vp-face) .vp-area::before{display:none}
   cursor:pointer;transition:background .16s,color .16s}
 .vp-recipe-go:hover:not(:disabled){background:transparent;color:#e8e4d8;border-color:#e8e4d8}
 .vp-recipe-go:disabled{opacity:.35;cursor:default}
-.vp-recipe-line{font-family:'DM Serif Display',Georgia,serif;
-  font-size:var(--fs-body);line-height:1.4;color:#a5a094;max-width:60ch}
+/* [R2] reading matter — what the selected recipe does, in a sentence. */
+.vp-recipe-line{font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-body);line-height:1.55;letter-spacing:.005em;
+  color:#a5a094;max-width:56ch}
 
 .vp-presets-note,.vp-face-papa{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-micro);letter-spacing:.06em;color:#7d7869;
@@ -315,8 +441,10 @@ body:has(.vp-face) .vp-area::before{display:none}
 .vp-reel-count{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-micro);letter-spacing:.16em;text-transform:uppercase;
   color:var(--wb-gold-lo);white-space:nowrap}
-.vp-reel-note{font-family:'DM Serif Display',Georgia,serif;
-  font-size:var(--fs-body);line-height:1.5;color:var(--wb-gold-lo);margin:0}
+/* [R2] reading matter — the reel's honest empty-state sentence. */
+.vp-reel-note{font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-body);line-height:1.58;letter-spacing:.005em;
+  color:var(--wb-gold-lo);margin:0}
 .vp-reel-go{align-self:flex-start;
   font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-small);letter-spacing:.2em;text-transform:uppercase;
@@ -622,15 +750,43 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    intent in the one place that can no longer be overridden by the margin), and
    the GRIP — the part that says grab me — rides a pseudo-element so the DOM is
    untouched. Same three-dot ink mark as the horizontal handles, turned 90°. */
+/* [R3 2026-08-03] MIKE, AGAIN: "RESIZE UNAVAILABLE ON THIS SURFACE."
+   M0a FIXED A REAL DEFECT AND FIXED IT IN THE WRONG PLACE FOR A LONG PAGE.
+   The grip it added is `top:50%` of the handle — and on the flat wing the
+   handle is as tall as the DOCUMENT. Measured on /wal at 1456x900, Carsie
+   Blanton, "About the Artist":
+     .vr-dh            10 x 2864px
+     the grip (::after)  top: 1432px within it -> viewport y = 1782
+     window height                                            811
+   The one affordance the control has is parked **971px below the fold**, and
+   what a visitor at the top of the card can see of the resize handle is
+   `.vr-dh-line`: 1px wide, `--wb-gold-mute` #9b978d on the paper ground #d9d5ca
+   = **1.99:1**. M0a measured that number itself and accepted it deliberately,
+   "so the grip is the thing that reads, not the line" — which is correct
+   reasoning that silently depends on the grip being ON SCREEN. On a 2864px
+   handle it is not, and the visitor is back to a 2:1 hairline. Mike's report is
+   accurate for the second time and it is not the same bug.
+   THE GRIP STICKS TO THE SCREEN. It moves from an absolutely-positioned pseudo
+   at 50% of the handle to a STICKY one inside the line, offset to the middle of
+   the VIEWPORT — so it rides down the page with the reader and is reachable at
+   every scroll position of a document of any length. Sticky clamps to its
+   parent's box, so on a short card (the house page, 587px) it simply sits where
+   M0a put it and nothing changes there.
+   NO DOM CHANGE and no hit-test change: still a pseudo-element, still
+   `pointer-events:none`, the drag still belongs to `.vr-dh`. M0a's invariant —
+   "nothing that measures or hit-tests these strips has to be re-verified" —
+   is preserved by construction. */
 .vr-dh{width:10px;cursor:col-resize;display:flex;align-items:stretch;justify-content:center;position:relative;z-index:10}
-.vr-dh-line{width:1px;align-self:stretch;background:var(--wb-gold-mute);transition:background .2s;margin:0 auto}
-.vr-dh::after{content:"";position:absolute;top:50%;left:50%;
-  width:4px;height:4px;margin:-2px 0 0 -2px;border-radius:50%;
+.vr-dh-line{width:1px;align-self:stretch;background:var(--wb-gold-mute);transition:background .2s;margin:0 auto;
+  position:relative}
+.vr-dh-line::after{content:"";display:block;position:sticky;
+  top:calc(50vh - 12px);left:-2px;
+  width:4px;height:4px;border-radius:50%;
   background:var(--wb-gold-lo);
   box-shadow:0 -9px 0 var(--wb-gold-lo),0 9px 0 var(--wb-gold-lo);
   transition:background .2s,box-shadow .2s;pointer-events:none}
 .vr-dh:hover .vr-dh-line{background:var(--wb-gold-lo)}
-.vr-dh:hover::after{background:var(--wb-gold);box-shadow:0 -9px 0 var(--wb-gold),0 9px 0 var(--wb-gold)}
+.vr-dh:hover .vr-dh-line::after{background:var(--wb-gold);box-shadow:0 -9px 0 var(--wb-gold),0 9px 0 var(--wb-gold)}
 
 /* RIGHT — fixed, never scrolls */
 .ex-right{min-width:0;display:flex;flex-direction:column;background:#e7e3d8;overflow:hidden}
@@ -995,8 +1151,13 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 .vp-rec-title{font-family:'DM Serif Display',Georgia,serif;
   font-size:var(--fs-lead);line-height:1.2;color:var(--wb-gold)}
 .vp-rec-body{display:flex;flex-direction:column;gap:10px}
-.vp-rec-line{margin:0;font-size:var(--fs-body);line-height:1.62;
-  color:var(--wb-gold-lo)}
+/* [R2] reading matter — a Record entry's paragraphs. This rule had no family
+   of its own and inherited the body's, which made it the one piece of running
+   prose in the building whose face changed if anything above it changed. It
+   states its face now, like every other reading rule. */
+.vp-rec-line{margin:0;font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-body);line-height:1.62;letter-spacing:.005em;
+  color:var(--wb-gold-lo);max-width:56ch}
 
 /* THE ENDMARK. A hairline that stops, with a tombstone set into it. The page
    is over and says so - no scrolling to find out. */
@@ -1325,8 +1486,10 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 .vp-trail-label{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-small);letter-spacing:.1em;text-transform:uppercase;
   color:var(--wb-gold)}
-.vp-trail-scent{font-family:'DM Serif Display',Georgia,serif;
-  font-size:var(--fs-small);line-height:1.4;color:var(--wb-gold-lo)}
+/* [R2] reading matter — a door's scent is a sentence about where it goes. */
+.vp-trail-scent{font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-small);line-height:1.5;color:var(--wb-gold-lo);
+  letter-spacing:.005em}
 /* [M6 2026-08-03] AND A MARKER POINTING DOWN THE CORRIDOR IS A SENTENCE.
    The rule above says a trail is "walked one marker at a time", and that is
    true of doors OUT of the building — the reason they are set as rows and not
@@ -1335,8 +1498,11 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    passing, by a visitor who wants it. So the quiet row is exactly that: body
    copy with one underlined word in it. No card, no rule, no display caps, no
    raised ground — the four things that made the loud one loud. */
-.vp-trail-quiet{font-family:'DM Serif Display',Georgia,serif;
-  font-size:var(--fs-small);line-height:1.5;color:var(--wb-gold-lo);margin-top:14px}
+/* [R2] reading matter — this rule's own note says it: "body copy with one
+   underlined word in it". Body copy now gets the body face. */
+.vp-trail-quiet{font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-small);line-height:1.58;color:var(--wb-gold-lo);
+  letter-spacing:.005em;margin-top:14px}
 .vp-trail-quiet-go{background:none;border:0;padding:0;cursor:pointer;
   font:inherit;color:var(--wb-gold);
   text-decoration:underline;text-underline-offset:3px;
@@ -1459,10 +1625,46 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    =========================================================================== */
 /* the INTERPRETIVE LABEL: the 75-150 words that say what this is doing here.
    Set as reading matter, not as a caption. */
+/* ==== [R2 2026-08-03] THE READING MATTER GETS A READING FACE ================
+   MIKE, TWICE: "the body font/size/weight is hard to read."
+   IT WAS NEVER THE SIZE. Measured on /wal at 1456px, before this change: the
+   label ran at **19.6px** — `--face-fs` had already resolved to its ceiling —
+   over a 62ch measure at 1.5 leading. Nineteen-point-six pixels is not small
+   type. The four things actually wrong were all properties of the FACE and of
+   the line, and each is answered here rather than by turning the one dial P7
+   left (which raises the headline and the register too, and is exactly the move
+   Mike ruled out at P7: "blows up the big text to rescue the small"):
+     · FACE — DM Serif Display, a Didone-class display serif. Its thins go
+       sub-pixel at reading size and its counters close; see the token note in
+       museum-tokens.css. It becomes `--wb-read` (Fraunces, opsz-aware, already
+       loaded, already Mike's pick for the HR deck).
+     · MEASURE — `ch` is the advance of ZERO, which on this face is 13.24px
+       against a 10.20px average character: `ch` therefore UNDER-reports the
+       line by about a quarter, and 62ch was running ~80 characters. Past the
+       45–75 band at the wrong end, and the return sweep is where a long
+       measure is felt. 56ch = 741px = **67 characters, counted** (range rects
+       on Carsie's first paragraph, /wal at 1456px) — one off Bringhurst's 66.
+       The number is counted rather than assumed precisely because `ch` is not
+       a character.
+     · LEADING — 1.5 is a sans number. A serif at 19.6px light-on-dark wants
+       more air between baselines or the ascenders and descenders interlock:
+       1.62.
+     · TRACKING — light type on a dark ground blooms and closes its own word
+       spaces (the same halation that makes the ramp read hot). +.005em opens
+       them back up. It is the one thing on this list that is invisible until
+       it is missing.
+   OPTICAL SIZING IS THE POINT OF THE FACE and is declared on every rule that
+   takes it, because `auto` is only the default in browsers that implement it
+   and saying it costs one line.
+   WHERE IT APPLIES: reading matter — running prose a visitor reads in
+   sentences. NOT the register (mono, by design), NOT titles and headings
+   (display, by design), NOT the tracklist. Each rule below is swapped in place
+   rather than overridden from a block, so there is exactly one declaration per
+   element and no specificity fight for the next session to lose. */
 .vp-card-label{display:flex;flex-direction:column;gap:.7em}
-.vp-card-label p{font-family:'DM Serif Display',Georgia,serif;
-  font-size:var(--fs-body);line-height:1.5;color:var(--wb-gold);
-  max-width:62ch;margin:0}
+.vp-card-label p{font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-body);line-height:1.62;color:var(--wb-gold);
+  letter-spacing:.005em;max-width:56ch;margin:0}
 
 /* the TOMBSTONE: the factual register. Key left, value right, hairline between
    rows - the form a museum has used for a century because it is scannable
@@ -1475,14 +1677,52 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    boxes. Measured on Carsie Blanton's card, page 2.
    A border-top on every row is identical whether the rows are siblings in one
    `dl` or one-per-clone, which is the only version that survives being split. */
-.vp-tomb{margin:0;padding:0}
-.vp-tomb-row{display:grid;grid-template-columns:minmax(88px,auto) 1fr;gap:12px;
-  padding:5px 0;border-top:1px dotted var(--wb-border)}
+/* ==== [R4 2026-08-03] THE REGISTER'S TWO COLUMNS ACTUALLY LINE UP ===========
+   MIKE: align the label/value columns (IN THIS ROOM / THE STANDARD / THE DOORS),
+   render aligned, and judge it at the real measure.
+   WHY THEY DID NOT. Every row was its OWN grid — `.vp-tomb-row{display:grid}`
+   with `minmax(88px,auto)` — so the key column sized itself to that row's key
+   and nothing else. Measured on the house card, before: the value column starts
+   at x=597, 605 and 561 on three consecutive rows, because "IN THIS ROOM",
+   "THE STANDARD" and "THE DOORS" are three different lengths. On Carsie's
+   seven-row card the values start at five different x positions. It is a
+   register drawn as seven unrelated two-column rows, which is why it reads as
+   prose that has been indented rather than as a table that can be scanned.
+   THE FIX IS `subgrid` AND IT IS THE REASON subgrid EXISTS. The dl becomes the
+   grid and owns the two tracks; each row opts into its parent's tracks instead
+   of inventing its own. `max-content` on the key track means the column is as
+   wide as the LONGEST key and no wider — the register sets its own measure from
+   its own content, at every card, with no number typed anywhere.
+   IT SURVIVES BEING SPLIT. `data-stage-split="row"` clones the dl around each
+   row so a long register can page on the staged wing; a clone holding one row
+   is a one-row grid and subgrid resolves against it correctly. Same reasoning
+   as the note above about why the hairlines had to move to the row.
+   JUDGED AT THE REAL MEASURE — see the round log. Aligned wins, and the reason
+   is the failure mode of the alternative: a ragged key column puts the eye's
+   return point in a different place on every line, so scanning the values
+   (which is the only thing anyone does with a register) becomes seven separate
+   searches instead of one downward glance.
+   AND THE ROWS BREATHE. 5px of padding on a 1.45-leading mono row is a 27px
+   row: the register was the densest texture on a page whose complaint was that
+   everything had the same texture. 8px is a distinct density from the reading
+   matter above it, which is half of what makes the section change legible. */
+.vp-tomb{margin:0;padding:0;display:grid;grid-template-columns:max-content 1fr}
+.vp-tomb-row{display:grid;grid-template-columns:subgrid;grid-column:1 / -1;
+  gap:12px;padding:8px 0;border-top:1px dotted var(--wb-border)}
 .vp-tomb dt{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-small);letter-spacing:.16em;text-transform:uppercase;
   color:var(--wb-gold-lo);margin:0;padding-top:.15em}
 .vp-tomb dd{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-small);line-height:1.45;color:var(--wb-gold);margin:0}
+/* THE KEY COLUMN MAY NOT EAT THE VALUE COLUMN. `max-content` is unbounded, and
+   a phone is where an unbounded key track stops being free: at 390px a
+   thirteen-character key would take the row and leave the value a two-word
+   ribbon. Below the two-column threshold the register stacks — key over value,
+   which is what a printed register does when the page gets narrow. */
+@media (max-width:560px){
+  .vp-tomb{grid-template-columns:1fr}
+  .vp-tomb-row{gap:2px;padding:9px 0}
+}
 
 /* [P20] A REGISTER LINE THAT CAN BE CHECKED SAYS SO QUIETLY. The value keeps
    the register's own mono face and weight and gains a dotted underline — the
@@ -1499,10 +1739,22 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    Set as a register rather than as cards: these are catalogue entries, and the
    card treatment belongs to the quotations below them.
    =========================================================================== */
-.vp-records{display:flex;flex-direction:column;gap:8px}
-.vp-records-head{font-family:'Courier Prime','Courier New',monospace;
-  font-size:var(--fs-micro);letter-spacing:.2em;text-transform:uppercase;
-  color:var(--wb-gold-lo);margin:0;font-weight:400}
+.vp-records{display:flex;flex-direction:column;gap:var(--rh-tight,8px)}
+/* [R1 2026-08-03] A SECTION HEAD IS PROMOTED TO ONE.
+   This was `--fs-micro` mono at `--wb-gold-lo` — the same size, face, weight
+   and ink as a CAPTION, a credit line and a footnote. It labelled a section
+   and dressed as an aside, so the eye had nothing to climb: the page was one
+   value from top to bottom, which is the other half of "humanly soup".
+   It takes the house's heading register (Syne 800, which every title and door
+   on this face already speaks — P8's finding, applied one rank down), a step
+   up the ramp to `--fs-small`, and FULL INK. Three signals at once, none of
+   them a line. It still sits a clear rank BELOW `.vp-face-title` (`--fs-head`,
+   .22em), so the page's order is title > section > row and reads in that
+   order at a glance. */
+.vp-records-head,.vp-deck-head,.vp-metrics-head{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:var(--fs-small);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--wb-gold);margin:0}
 .vp-records-list{list-style:none;margin:0;padding:0;display:flex;
   flex-direction:column}
 .vp-record{display:grid;grid-template-columns:5.5ch 1fr auto;gap:14px;
@@ -1512,8 +1764,10 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 .vp-record-body{display:flex;flex-direction:column;gap:2px;min-width:0}
 .vp-record-title{font-family:'Syne',sans-serif;font-weight:700;
   font-size:var(--fs-small);letter-spacing:.05em;color:var(--wb-gold)}
-.vp-record-why{font-family:'DM Serif Display',Georgia,serif;
-  font-size:var(--fs-small);line-height:1.35;color:var(--wb-gold-lo)}
+/* [R2] reading matter — the one clause of why a record is on this wall. */
+.vp-record-why{font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-small);line-height:1.45;color:var(--wb-gold-lo);
+  letter-spacing:.005em}
 .vp-record-doors{display:flex;gap:6px;flex-shrink:0}
 .vp-record-door{display:inline-flex;align-items:center;justify-content:center;
   width:2.2em;height:2.2em;border-radius:50%;flex-shrink:0;
@@ -1531,6 +1785,149 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
   font-size:var(--fs-micro);line-height:1.5;color:var(--wb-gold-lo);margin:2px 0 0}
 
 /* ===========================================================================
+   [R6 2026-08-03] THE RECORD BOARD — what a third party wrote down.
+   Reasoning and the empty-state doctrine at the render site in Exhibit.jsx.
+   IT IS A SCOREBOARD, NOT A PARAGRAPH. Three fixed columns — KIND, the fact,
+   the year — because the whole use of this block is comparison: a reader wants
+   to run their eye down the kind column and find the charts, or down the year
+   column and find the recent. Set as prose that would be a biography, and the
+   wing already has one of those directly above it.
+   THE KIND COLUMN IS `max-content` AND SHARED, for exactly the reason R4 gave
+   the register subgrid: a ragged first column turns one downward glance into
+   seven separate searches. Here the grid is on the LIST rather than on a `dl`,
+   so the rows are plain subgrid items and no clone-splitting is in play.
+   =========================================================================== */
+.vp-metrics{display:flex;flex-direction:column;gap:var(--rh-tight,8px)}
+.vp-metrics-list{list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:max-content 1fr max-content}
+.vp-metric{display:grid;grid-template-columns:subgrid;grid-column:1 / -1;
+  gap:14px;align-items:baseline;padding:8px 0;
+  border-top:1px dotted var(--wb-border)}
+/* the kind is a LABEL and must never out-shout the fact it labels — the same
+   rule `.tl-kind` states for the tracklist, and the same register. */
+.vp-metric-kind{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--wb-gold-mute);white-space:nowrap}
+.vp-metric-body{display:flex;flex-direction:column;gap:2px;min-width:0}
+.vp-metric-fact{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-small);line-height:1.45;color:var(--wb-gold)}
+/* [P20's rule, reused verbatim] a fact that can be checked says so quietly:
+   the value keeps the register's own face and gains a dotted underline — the
+   footnote mark of a printed catalogue, not a web link in blue. */
+.vp-metric-go{font:inherit;font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-small);line-height:1.45;color:var(--wb-gold);
+  background:none;border:0;padding:0;text-align:left;cursor:pointer;
+  align-self:flex-start;
+  border-bottom:1px dotted var(--wb-gold-mute);
+  transition:color .15s,border-color .15s}
+.vp-metric-go:hover,.vp-metric-go:focus-visible{color:var(--wb-gold-hi);
+  border-bottom-color:var(--wb-gold-hi);outline:none}
+/* a row whose source is real but has no readable public page names the source
+   in type instead of pretending to a link. */
+.vp-metric-src{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.06em;color:var(--wb-gold-mute)}
+.vp-metric-when{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.08em;color:var(--wb-gold-lo);
+  white-space:nowrap;justify-self:end}
+.vp-metrics-note{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);line-height:1.5;color:var(--wb-gold-lo);margin:2px 0 0}
+/* A PHONE HAS ONE COLUMN. Three tracks at 390px would give the fact a ribbon
+   four words wide; the kind and the year ride the same line as a stamp above
+   the fact, which is what a printed scoreboard does when the page narrows. */
+@media (max-width:560px){
+  .vp-metrics-list{grid-template-columns:1fr}
+  .vp-metric{grid-template-columns:1fr;gap:3px;padding:10px 0}
+  .vp-metric-when{justify-self:start}
+}
+
+/* ===========================================================================
+   [R5b 2026-08-03] THE BILL — the poster for the complete show.
+   Mike's brief is the spec: a one-page POSTER, functionally rather than
+   literally — the top-level details that PROMOTE the show, all four artists,
+   what they are, why they're here, the standard. Serious and respectful,
+   energetic, WEIRD.BABY IN FULL COLORS.
+   WHAT MAKES IT A POSTER AND NOT A LIST. A list is read top to bottom in one
+   voice; a poster is read in RANKS — the show's terms, then the names, then the
+   small print — and the ranks are set by scale and color, not by rules. So:
+   the standard runs across the top at lead size in the reading face; the acts
+   are a 2x2 block of panels, each carrying the artist's own picture at full
+   colour above their name set as large as the page will take; and the small
+   print closes it. Nothing on this face is a hairline.
+   THE PANELS ARE PRESSES. See the render note — a bill whose names are doors is
+   the one thing a printed bill cannot be, and it is the reason this page earns
+   its place in a room rather than being an image of one.
+   THE ONE HOUSE VALUE PER ACT (`--act`) is a design choice declared as one in
+   the data. It lights the panel's own foot and its hover, which is the house
+   saying "this way" without painting over an artist's photograph.
+   =========================================================================== */
+.vp-bill{display:flex;flex-direction:column;gap:var(--rh-block,18px)}
+.vp-bill-standard{margin:0;max-width:52ch;
+  font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-lead);line-height:1.5;letter-spacing:.005em;
+  color:var(--wb-dim)}
+/* TWO UP, EXPLICITLY — and P10 already paid for this lesson in this wing.
+   The first cut was `auto-fit/minmax(17rem,1fr)`, which dealt FOUR across a
+   1231px column: panels 230px wide, every name broken over two lines ("Carsie /
+   Blanton", "Jesse / Welles"), and a bill whose acts are set smaller than the
+   paragraph above them. P10's note on the doors says the same thing about the
+   same mechanism — "`auto-fit` dealt THREE, which is a row of doors and a widow
+   rather than the block Mike asked for" — and a count that follows the width is
+   wrong here for the stronger reason: a POSTER's running order is a decision,
+   and a decision does not change because a window did. */
+.vp-bill-acts{display:grid;gap:22px;
+  grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:820px){
+  .vp-bill-acts{grid-template-columns:minmax(0,1fr)}
+}
+.vp-bill-act{display:flex;flex-direction:column;align-items:stretch;
+  gap:7px;text-align:left;min-width:0;
+  background:var(--wb-ink-card);color:inherit;
+  border:1px solid var(--wb-border);border-bottom:3px solid var(--act,var(--wb-gold-lo));
+  padding:0 0 15px;cursor:pointer;
+  transition:transform .16s cubic-bezier(.2,.8,.3,1),box-shadow .16s,border-color .16s}
+.vp-bill-act:not(button){cursor:default}
+button.vp-bill-act:hover,button.vp-bill-act:focus-visible{
+  transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.42);
+  border-color:var(--act,var(--wb-gold));outline:none}
+/* THE ARTIST'S OWN PICTURE, IN COLOUR — W8 says the B&W site law does not
+   reach this wing, and this is the page where that ruling does the most work:
+   four photographs the artists chose of themselves, at full strength, is the
+   whole "in full colors" instruction rendered without the house inventing a
+   single hue of its own. */
+/* 4:3, not square. At two-up these panels are ~590px wide and a square picture
+   would be 590px tall — a photograph taller than the words beside it is a
+   portrait gallery, not a bill. The landscape crop keeps the picture the loudest
+   thing on the panel and still leaves the name room to be the second. */
+.vp-bill-art{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;
+  filter:none}
+.vp-bill-name{font-family:'Syne',sans-serif;font-weight:800;
+  font-size:var(--fs-display);line-height:1.02;letter-spacing:.005em;
+  color:var(--wb-gold);padding:14px 18px 0;
+  overflow-wrap:anywhere;text-wrap:balance}
+.vp-bill-what{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--act,var(--wb-gold-lo));padding:0 18px}
+.vp-bill-why{font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-small);line-height:1.5;letter-spacing:.005em;
+  color:var(--wb-gold-lo);padding:0 18px;max-width:44ch}
+/* the press, named. P6's ruling: what is drawn must be readable, and what is
+   not readable must be written — so the panel's affordance is a WORD, not a
+   chevron a visitor has to interpret. */
+.vp-bill-go{margin-top:auto;padding:11px 18px 0;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.22em;text-transform:uppercase;
+  color:var(--wb-gold-mute);transition:color .16s}
+button.vp-bill-act:hover .vp-bill-go,
+button.vp-bill-act:focus-visible .vp-bill-go{color:var(--wb-gold)}
+.vp-bill-foot{margin:0;max-width:56ch;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);line-height:1.6;color:var(--wb-gold-lo)}
+@media (pointer:coarse){
+  button.vp-bill-act:active,button.vp-bill-act[data-pressed]{
+    transform:translateY(0) scale(.985);transition:none}
+}
+
+/* ===========================================================================
    [P17/P18/P19 2026-08-02] THE DECKS — quotations as cards on the wall.
    The collage set this wing's quality bar (Mike: "the collage wall is the
    quality bar — everything should feel like it belongs beside it"), so the
@@ -1543,11 +1940,18 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    them the heading sat hard against the block before it and read as that
    block's footnote — measured on Carsie's card, where "SAID ABOUT HER" landed
    one line under the records note. */
-.vp-deck{display:flex;flex-direction:column;gap:11px;
-  margin-top:8px;padding-top:15px;border-top:1px solid var(--wb-border)}
-.vp-deck-head{font-family:'Courier Prime','Courier New',monospace;
-  font-size:var(--fs-micro);letter-spacing:.22em;text-transform:uppercase;
-  color:var(--wb-gold-lo);margin:0;font-weight:400}
+/* [R1 2026-08-03] THE DIAGNOSIS ABOVE STANDS; THE REMEDY IS REPLACED.
+   "The heading sat hard against the block before it" is exactly right and it is
+   the same defect R1 found across the whole document — the flat container
+   supplied no distance, so every fix had to be bought locally with a rule. The
+   rule was the only tool available. It is not any more: `--rh-sect` puts 2.6x
+   of type-derived air above this block and the head is now full-ink Syne 800
+   (see `.vp-records-head`). A 1px line on top of those two would be a third
+   statement of the same thing, and Mike's instruction on this round is that the
+   lines are what to spend rather than what to add.
+   The 8px margin goes with it: distance is the ladder's business now, and a
+   block that sets its own is a block outside the system. */
+.vp-deck{display:flex;flex-direction:column;gap:var(--rh-tight,11px)}
 .vp-deck-cards{display:grid;
   grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));
   gap:18px 14px;padding:2px 4px 6px}
@@ -1564,8 +1968,12 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 .vp-qcard-eyebrow{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-micro);letter-spacing:.18em;text-transform:uppercase;
   color:#7d7869}
-.vp-qcard-text{font-family:'DM Serif Display',Georgia,serif;
-  font-size:var(--fs-small);line-height:1.42;color:#211f1c}
+/* [R2] reading matter — the quoted sentence on the card. It sits on PAPER
+   (#f3efe6), so it takes no tracking correction: the halation the +.005em
+   answers is a light-on-dark effect and this is the one reading surface in the
+   wing that is dark-on-light. */
+.vp-qcard-text{font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-small);line-height:1.52;color:#211f1c}
 /* the stamp: who said it, and where. Two weights so the eye never has to
    work out which half is the person and which half is the publication. */
 .vp-qcard-stamp{display:flex;flex-direction:column;gap:1px;margin-top:auto;
@@ -1723,6 +2131,50 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 .ex-root[data-flat="1"] .ex-left{overflow:visible;padding-bottom:0}
 .ex-root[data-flat="1"] .ex-right{overflow:visible}
 
+/* [R3 2026-08-03] THE CONTENTS LIST STOPS LEAVING THE BUILDING.
+   MIKE: "the sizing lets the tracklist's TOP scroll out of view for no benefit."
+   MEASURED, /wal at 1456x900, Carsie Blanton, "About the Artist":
+     .ex-left            433 x **2864px**
+     its only content    .tl-tracks — **133px**
+   So **95.4%** of the contents column is empty paper, the 133px of it that is
+   not sits pinned at the very top, and the moment a reader scrolls to read the
+   card — which on this page is 2.8 screens of scrolling — the list of what else
+   is in the room is gone and stays gone. It comes back only by scrolling all
+   the way home. "For no benefit" is exactly right: nothing was gained by the
+   column being 2864px tall. It was tall because W7 made the flat wing's row
+   height the document's height and `.ex-left` stretched into it by default,
+   which is a consequence nobody chose.
+   IT STICKS, AND IT IS BOUNDED. `align-self:start` stops the stretch, so the
+   column is its content's height and the grid row is still the document's;
+   `position:sticky` under the fixed title bar keeps the head reachable at every
+   scroll position. The `max-height` + `overflow:auto` is the BOUND Mike asked
+   for and it is load-bearing rather than defensive: a wing with twenty rows
+   (which /hr has, and which any future flat wing may have) must not become a
+   sticky column taller than the window — that is a panel that can never show
+   its own bottom. Bounded, it scrolls inside itself, and the head stays.
+   54px is `.ex-root`'s own top padding, which is the clearance the fixed
+   `.wb-bar` is given (MuseumBar.css says so in its header note); +10 is one
+   line of air so the first row does not touch the rule under the bar. */
+.ex-root[data-flat="1"] .ex-left{align-self:start;position:sticky;
+  top:calc(54px + 10px);
+  max-height:calc(100vh - 54px - 20px);overflow-y:auto}
+/* the player bar is fixed over the foot of the window, so a sticky column that
+   is allowed to run to 100vh runs UNDER it. Same arithmetic as `.ex-left`'s own
+   `padding-bottom:76px` in the two-column frame, applied to the height instead
+   of to the padding, because this column's height is now its own. */
+body:has(.pb) .ex-root[data-flat="1"] .ex-left{
+  max-height:calc(100vh - 54px - 20px - 76px)}
+/* A PHONE HAS NO SECOND COLUMN. 720px is the frame's own one-column threshold
+   (`.ex-main-inner{grid-template-columns:1fr !important}`, and `.vr-dh` hides
+   in the same block) — read off that rule rather than picked, so the two cannot
+   disagree later. Stacked, the tracklist and the card are one reading order,
+   and a sticky contents list there would be a panel glued over the article.
+   It stands down. */
+@media (max-width:720px){
+  .ex-root[data-flat="1"] .ex-left{position:static;max-height:none;
+    overflow-y:visible;align-self:stretch}
+}
+
 /* THE AREA'S TWO STATES. A 16:9 picture frame when the wing is showing a
    video or the cued song's poster; STOWED when a face is shown — the frame
    yields its height to the face's own flow while the iframe underneath stays
@@ -1859,13 +2311,39 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    of light behind the picture — a stage with a lamp on it rather than a hole
    cut in the page. Values stay dark enough that the imagery is still the
    brightest thing in the room, which is W6's whole ruling and is untouched. */
+/* ===== [R0 2026-08-03] THE HOUSE LIGHTS COME UP ONE STOP — V2 IS THE GROUND ==
+   MIKE PICKED OPTOMETRIST VARIATION 2 (`docs/optometrist-20260803/`), and this
+   rule is where that variation lived. V2 was rendered by injection and thrown
+   away; this is it, written down, and from here it is the wing's ground rather
+   than a proposal.
+   WHAT V2 IS AND WHY IT WON, in its own note's words: "keep the theatre, lose
+   the glare" — the smallest change that answers "too glaring" without
+   re-arguing W6. It is still light-on-dark, the imagery is still the brightest
+   thing in the room, and the frame is still a stage. The four sibling variants
+   all changed the FRAME'S JOB (a sheet, a document, paper) and Mike did not ask
+   for that.
+   MEASURED, so "one stop" is a number and not a taste:
+     body ink on ground   #f1ecdd on #211d18 = 14.18:1  ->  #f7f2e4 on #3b352c = 10.44:1
+     quiet ink on ground  ..................................  #c4bba4 = 6.11:1  (AAA body)
+     mutest ink on ground ..................................  #b0a68e = 4.83:1  (AA body)
+   Every step still clears its own job with room to spare; what leaves is 3.7
+   points of contrast at the top of the ramp, which is exactly the glare.
+   `--wb-gold-mute` is lifted a shade further than a flat one-stop translation
+   would put it (#a49a83 would have landed at 4.19:1, under AA for the register's
+   small mono), so the lift does not quietly cost legibility at the bottom.
+   THE RING KEEPS ITS NUMBER. M0b sized `.vp-inner`'s 1px ring by contrast
+   against the stage (2.82:1); on the lifted ground `#867c66` measures 2.83:1, so
+   the edge M0b argued for is the same edge, not a re-tuned one.
+   SCOPE: this wing only. /robots is a paper wing (L5's sheet-on-mat) and shares
+   no part of this ramp — checked, not assumed: the only rules that re-pin this
+   ramp are `.pb` and this one. */
 [data-exhibit="wal"] .ex-right{
-  --wb-ink:#211d18;--wb-ink-soft:#2b261f;--wb-ink-card:#262119;--wb-ink-card-hi:#332d24;
-  --wb-border:#4a4336;--wb-border-hi:#6b6353;
-  --wb-gold:#f1ecdd;--wb-gold-hi:#ffffff;--wb-gold-lo:#b4ab96;--wb-gold-mute:#968d79;
-  --wb-dim:#e0d9c8;
+  --wb-ink:#3b352c;--wb-ink-soft:#453e34;--wb-ink-card:#443d32;--wb-ink-card-hi:#514839;
+  --wb-border:#635a49;--wb-border-hi:#867c66;
+  --wb-gold:#f7f2e4;--wb-gold-hi:#ffffff;--wb-gold-lo:#c4bba4;--wb-gold-mute:#b0a68e;
+  --wb-dim:#ece5d4;
   background:
-    radial-gradient(120% 70% at 50% -6%, #2f2921 0%, rgba(47,41,33,0) 62%),
+    radial-gradient(120% 70% at 50% -6%, #4b4438 0%, rgba(75,68,56,0) 62%),
     var(--wb-ink)}
 /* [M0b 2026-08-03] AND ON THIS STAGE THE PICTURE GETS ITS EDGE BACK.
    The frame's own boundary is invisible here: charcoal stage, black letterbox
@@ -2167,10 +2645,12 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 /* words taken OUT of a document are a quotation of the document, so they are
    set as one: the museum's serif, a rule at the left, and no quote marks
    (the rule is the quote mark). */
+/* [R2] reading matter — words lifted out of a document are read, not scanned. */
 .vp-rec-doc-extract{margin:2px 0 0;padding-left:12px;
   border-left:2px solid var(--wb-gold-lo);
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:var(--fs-body);line-height:1.45;color:var(--wb-dim)}
+  font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-body);line-height:1.55;letter-spacing:.005em;
+  color:var(--wb-dim);max-width:56ch}
 .vp-rec-doc-note{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-micro);letter-spacing:.07em;line-height:1.5;
   color:var(--wb-gold-lo);opacity:.85;margin:0}
