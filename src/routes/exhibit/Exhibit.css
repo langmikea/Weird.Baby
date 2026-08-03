@@ -346,6 +346,25 @@ body:has(.vp-face) .vp-area::before{display:none}
 .vp-fe-note{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-micro);letter-spacing:.07em;
   color:var(--wb-gold-lo);opacity:.85}
+/* [F1 2026-08-03] THE PLATED ENTRY — see the note at the JSX.
+   IT IS A PRINT, NOT A THUMBNAIL. The museum's own language for a picture on
+   paper is already written twice in this stylesheet (the card plate, the
+   collage tile): a hairline, a real shadow, no rounding. This is that same
+   object at entry scale, so a song's poster reads as something mounted beside
+   its card rather than as a UI affordance stuck to a list row.
+   `align-items:flex-start` ON THE PLATED ROW ONLY. `.vp-fe` is baseline-aligned
+   because a stamp and a title are two pieces of type on one line; an image has
+   no baseline worth aligning to and would hang the whole row off its bottom
+   edge. Rows without a plate keep the baseline they were authored with.
+   16:9 AND CROPPED, because the source is a video poster and every one of them
+   is 16:9 already — `object-fit:cover` is insurance against a square, not a
+   crop anybody will see. */
+.vp-fe-plated{align-items:flex-start}
+.vp-fe-plate{flex:0 0 auto;width:clamp(96px,17%,168px);aspect-ratio:16/9;
+  object-fit:cover;display:block;
+  background:var(--wb-ink-card);
+  border:1px solid var(--wb-border);
+  box-shadow:0 2px 8px rgba(0,0,0,.14)}
 /* ======== O4 2026-07-30: THE PORTAL FACE ==============================
    IT MUST NOT READ AS PAPER. The manual and the record are documents and they
    wear the museum's print stock. The Portal is a DOORWAY to a running machine,
@@ -361,9 +380,29 @@ body:has(.vp-face) .vp-area::before{display:none}
 /* [G1] the portal's grayscale/contrast treatment retired with the placed
    photo - see THE FROZEN PORTAL IS A SCREEN above. */
 .vp-face-portal .vp-face-title{color:#e8e4d8;letter-spacing:.30em}
+/* [F0 2026-08-03] V1'S CARRY-FORWARD, CLOSED AT THE BASE INSTEAD OF BY REACH.
+   V1 found `.vp-face-sub` at #8a857a — 3.46:1 — and fixed it only inside the
+   WAL card, naming the reason it stopped there: "the same literals sit under
+   /robots' sheet at the same numbers … two of these rules also serve the
+   PORTAL, whose ground is #0b0b0a, where a darkened grey would be the same
+   defect inverted." Confirmed live this round on /robots, The Plates: 3.46:1,
+   still.
+   THE LITERAL WAS A DARK-GROUND VALUE SITTING IN A GROUND-AGNOSTIC RULE, which
+   is why it could not be fixed in place. So the base rule now reads the RAMP —
+   `--wb-gold-mute`, which every dark scope in the building already re-pins for
+   itself (the WAL stage to #b0a68e, the player bar to #8e8e8e) and which the
+   paper rooms get at this round's measured value. One declaration, correct on
+   both kinds of ground, because it stopped naming a colour and started naming a
+   ROLE.
+   THE PORTAL KEEPS #8a857a EXPLICITLY, one rule below. It is the one dark scope
+   that does NOT re-pin the ramp — its palette is a set of literals — so it is
+   the one place the token would resolve to a paper value on a near-black
+   ground. Naming it costs one selector and preserves that face byte-for-byte,
+   which is exactly the inversion V1 refused to risk by reach. */
 .vp-face-sub{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-small);letter-spacing:.14em;text-transform:uppercase;
-  color:#8a857a;margin-top:-6px}
+  color:var(--wb-gold-mute);margin-top:-6px}
+.vp-face-portal .vp-face-sub{color:#8a857a}
 .vp-face-portal .vp-face-blurb{color:#b8b3a6;max-width:56ch}
 .vp-face-portal .vp-face-lines{border-top:1px solid #3b3831}
 .vp-face-portal .vp-face-lines li{color:#9b968a}
@@ -488,6 +527,9 @@ body:has(.vp-face) .vp-area::before{display:none}
 @media (max-width:640px){
   .vp-fe{flex-direction:column;gap:4px}
   .vp-fe-stamp{min-width:0}
+  /* [F1] the column stack turns the plate side-by-side into a plate on top;
+     at that point a 17% picture is a postage stamp, so it takes the measure. */
+  .vp-fe-plate{width:100%}
 }
 /* [E5 2026-07-30] THE CTA IS STICKY, not merely bottom-aligned.
    The visual walk caught it at tablet: the face body scrolls, and with
@@ -590,8 +632,43 @@ body:has(.vp-face) .vp-area::before{display:none}
    `.ex-root`'s 54px top padding above is clearing. */
 
 /* COVERFLOW */
-.cf-wrap{display:flex;align-items:center;justify-content:center;position:relative;perspective:900px;perspective-origin:50% 50%;user-select:none;cursor:grab;overflow:hidden;touch-action:pan-y;flex-shrink:0}
+.cf-wrap{display:flex;align-items:center;justify-content:center;position:relative;user-select:none;cursor:grab;overflow:hidden;touch-action:pan-y;flex-shrink:0}
 .cf-wrap:active{cursor:grabbing}
+/* [F4 2026-08-03] THE COVERS' OWN BOX, AND THE HAZE AT ITS MARGINS.
+   MIKE: "the cut is too abrupt and limiting … at minimum a slight FADE on the
+   last visible item indicating more beyond the haze."
+   THE ABRUPTNESS WAS `overflow:hidden` DOING EXACTLY WHAT IT SAYS. A cover that
+   crossed the carousel's edge was sliced on a hard vertical, which reads as a
+   rendering fault rather than as a rack continuing past the window — the one
+   thing an edge is supposed to communicate. The clip has to stay (a cover
+   escaping into the tracklist is worse), so what changes is HOW it arrives at
+   the edge.
+   A MASK, NOT AN OVERLAY, AND THE REASON IS THE GROUND. A gradient overlay has
+   to know what colour to fade to, and this carousel stands on `--wb-bg` in
+   three wings and inside a wing that re-pins `--wb-bg` for its viewer column —
+   so an overlay would need the ground re-declared here and would fork the
+   moment a room re-pinned it. A mask fades the covers to WHATEVER is behind
+   them and cannot be wrong about the ground. It also sidesteps the
+   transparent-fades-through-black artefact entirely: there is no colour in a
+   mask, only alpha.
+   `perspective` LIVES HERE NOW — see the note at the JSX. Same value, same
+   rectangle, so nothing about the 3D moves. */
+/* THE FLEX CENTRING COMES WITH THEM, AND IT IS LOAD-BEARING RATHER THAN
+   DECORATIVE — caught on glass, not reasoned about. Every `.cf-album` is
+   `position:absolute` with NO `left`/`top`, so it is placed at its STATIC
+   position, and the static position of an abspos child of a flex container is
+   set by that container's `justify-content`/`align-items`. `.cf-wrap` said
+   `center` and the covers were therefore centred; a plain block wrapper does
+   not, so on the first render after the wrapper landed the whole carousel
+   collapsed into the top-left corner. The wrapper has to BE a centring flex
+   container or the transforms have nothing to be centred on. */
+.cf-rack{position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  perspective:900px;perspective-origin:50% 50%;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 var(--cf-haze,78px),
+    #000 calc(100% - var(--cf-haze,78px)),transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0,#000 var(--cf-haze,78px),
+    #000 calc(100% - var(--cf-haze,78px)),transparent 100%)}
 .cf-album{position:absolute;width:240px;height:240px;border-radius:2px;overflow:hidden;cursor:pointer;transition:transform .5s cubic-bezier(.25,.46,.45,.94),opacity .5s,box-shadow .5s;transform-style:preserve-3d}
 .cf-album img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
 .cf-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;border:1px solid;gap:12px}
@@ -639,7 +716,11 @@ body:has(.vp-face) .vp-area::before{display:none}
    Three dots from one node via box-shadow: no DOM change, so nothing that
    measures or hit-tests these strips has to be re-verified. */
 .cf-dh{height:14px;cursor:row-resize;display:flex;align-items:center;justify-content:center;gap:6px;flex-shrink:0;padding:0 32px}
-.cf-dh-line{flex:1;height:1px;background:var(--wb-gold-mute);border-radius:1px;transition:background .2s}
+/* [F0 2026-08-03] the rule now says `--wb-hairline`, which holds the exact
+   value it was painting before (#9b978d). M0a's ratio between the grip and the
+   line is preserved to the byte; the token it reads simply stopped being the
+   one that also has to be readable as text. */
+.cf-dh-line{flex:1;height:1px;background:var(--wb-hairline);border-radius:1px;transition:background .2s}
 .cf-dh-dot{width:4px;height:4px;border-radius:50%;background:var(--wb-gold-lo);flex-shrink:0;
   box-shadow:-9px 0 0 var(--wb-gold-lo),9px 0 0 var(--wb-gold-lo);
   transition:background .2s,box-shadow .2s}
@@ -654,7 +735,7 @@ body:has(.vp-face) .vp-area::before{display:none}
 /* [M0a] the twin gets the same grip, for the same measured reason — it is the
    same 1.21:1 rule and the same 1.68:1 disc on /robots. */
 .bd-dh{height:14px;cursor:row-resize;display:flex;align-items:center;justify-content:center;gap:6px;flex-shrink:0;padding:0 32px}
-.bd-dh-line{flex:1;height:1px;background:var(--wb-gold-mute);border-radius:1px;transition:background .2s}
+.bd-dh-line{flex:1;height:1px;background:var(--wb-hairline);border-radius:1px;transition:background .2s}  /* [F0] see .cf-dh-line */
 .bd-dh-dot{width:4px;height:4px;border-radius:50%;background:var(--wb-gold-lo);flex-shrink:0;
   box-shadow:-9px 0 0 var(--wb-gold-lo),9px 0 0 var(--wb-gold-lo);
   transition:background .2s,box-shadow .2s}
@@ -777,8 +858,8 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    "nothing that measures or hit-tests these strips has to be re-verified" —
    is preserved by construction. */
 .vr-dh{width:10px;cursor:col-resize;display:flex;align-items:stretch;justify-content:center;position:relative;z-index:10}
-.vr-dh-line{width:1px;align-self:stretch;background:var(--wb-gold-mute);transition:background .2s;margin:0 auto;
-  position:relative}
+.vr-dh-line{width:1px;align-self:stretch;background:var(--wb-hairline);transition:background .2s;margin:0 auto;
+  position:relative}  /* [F0] see .cf-dh-line */
 .vr-dh-line::after{content:"";display:block;position:sticky;
   top:calc(50vh - 12px);left:-2px;
   width:4px;height:4px;border-radius:50%;
@@ -1117,6 +1198,11 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 
 @media(max-width:720px){
   .cf-dh{padding:0 16px}
+  /* [F4] the haze is a fraction of the window, not a constant. Two 78px
+     margins on a 374px phone would spend 42% of the carousel on fade and
+     start eating the ACTIVE cover, which is the one thing the edge treatment
+     must never touch. 34px a side is 18% and still reads as a dissolve. */
+  .cf-rack{--cf-haze:34px}
   .ex-main-inner{grid-template-columns:1fr !important}
   .vr-dh{display:none}
   .ex-right{border-top:1px solid var(--wb-border)}
@@ -1915,9 +2001,28 @@ button.vp-bill-act:hover,button.vp-bill-act:focus-visible{
   font-size:var(--fs-display);line-height:1.02;letter-spacing:.005em;
   color:var(--wb-gold);padding:14px 18px 0;
   overflow-wrap:anywhere;text-wrap:balance}
+/* [F0 2026-08-03] THE HOUSE ACCENT STOPS BEING TYPE, AND F2 IS WHY IT MATTERS
+   NOW. The four `hue` values are POSTER colours — a pink, a green, an amber and
+   a sand, chosen so each act's panel reads as its own bill. As 12.2px uppercase
+   mono on print stock they measure, on the live built page:
+     #d8c9a0  1.55:1     #9ccf7a  1.70:1
+     #e8b45c  1.78:1     #f79ac4  1.91:1
+   Four descriptor lines, none of them legible, and until this round they sat on
+   the wing's SECOND page. F2 moved the bill to position one, so this is now the
+   first line of type a stranger meets in the whole exhibit — which is how a
+   reordering turned an old blemish into a landing defect.
+   THE ACCENT KEEPS BOTH ITS GRAPHIC JOBS and loses the one it was never good
+   at: `--act` still paints the panel's 3px foot rule and still takes the border
+   on hover, so the act is still colour-coded and W8's "the artists bring the
+   colour" is intact. What changes is that the WORDS are set in the ink ramp
+   (`--wb-gold-lo`, 7.12:1 on this ground) instead of in a highlighter.
+   THIS IS NOT A PALETTE CHANGE. The data declares `hue` as "a DESIGN choice …
+   not a fact about anybody"; nothing about the four values moves. A colour
+   picked to be loud behind type is simply not the same colour as one picked to
+   BE type, and only one of those two jobs was ever asked of it. */
 .vp-bill-what{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-micro);letter-spacing:.16em;text-transform:uppercase;
-  color:var(--act,var(--wb-gold-lo));padding:0 18px}
+  color:var(--wb-gold-lo);padding:0 18px}
 .vp-bill-why{font-family:var(--wb-read);font-optical-sizing:auto;
   font-size:var(--fs-small);line-height:1.5;letter-spacing:.005em;
   color:var(--wb-gold-lo);padding:0 18px;max-width:44ch}

@@ -116,6 +116,24 @@ const WBR_TRACKS = [
         face: {
           kind: "text",
           title: "WELCOME",
+          /* [F1 2026-08-03] THE VISUAL HOOK LAW, ON THE WING'S OWN FRONT DOOR.
+             MIKE: land on words alone and the visitor probably walks out; every
+             surface needs something visually compelling besides written words.
+             THIS IS THE ROBOTS WING'S LANDING. /robots opens on this album and
+             this track, so this face is the first thing a stranger sees of the
+             machine wing — and it was a heading, a lead paragraph, two register
+             lines and three entries, with no picture anywhere on it. The wing
+             whose whole subject is a PHYSICAL OBJECT was introducing itself in
+             prose, and the object was one track away the entire time.
+             THE FAMILY SHOT IS THE RIGHT ONE OF THE EIGHT. It is the only
+             photograph in the reference set that shows the machines as a GROUP
+             — "three cartons of them arrived on a dock" is the lead sentence,
+             and this is that sentence as a picture. The file is already in the
+             build (the MGK-VIIIp album's `viewerPoster` and the first tile of
+             The Plates), so nothing new is sourced and no rights question is
+             opened. */
+          still: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
+          stillCaption: "The units, as they came to us.",
           blurb:
             "In 1965 somebody built a machine to say what happens next. Sixty " +
             "years later three cartons of them arrived on a dock with no " +

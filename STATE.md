@@ -19,6 +19,141 @@ Paid for by the 2026-06-17 derived-era incident: charging into the problem in fr
 
 Ops work takes top priority, based on the Ops need in the moment.
 
+## THE VISUAL HOOK LAW (Mike, 2026-08-03 — STANDING, site-wide)
+
+> **Land on words alone and the visitor probably walks out. EVERY surface needs
+> something visually compelling besides written words — not necessarily a photo;
+> even words presented in a different FORMAT can be the hook.**
+
+**What counts as a hook:** a photograph, a plate, a collage, an instrument
+panel, an artwork — or a typographic OBJECT (a ticket, a ledger, a poster, a
+printed card). **What does not:** a heading, a rule, a pull-quote, or a register
+block. Those are typography *of* the words, not something besides them.
+
+**Where it binds hardest:** a LANDING — the first thing a visitor sees on
+arriving at a room, or on selecting an album inside one. A face three presses
+deep is still governed, but a face you arrive on is urgent.
+
+**It sits beside the trail-marker law, not on top of it.** The marker law says
+a visitor keeps one or two things; this one says they have to stay long enough
+to be handed either.
+
+Current compliance, every face and page, audited on the built page:
+`docs/VISUAL_HOOK_AUDIT-20260803.md`. Five surfaces remain text-only — all in
+the robots wing, none a landing, all ART-pending rather than code-pending.
+
+## SEALED 2026-08-03 — THE FOUNDATION ROUND (v40; F0–F4. PUSH + DEPLOY ARE MIKE'S)
+
+Autonomous single-agent Code-lane round on Mike's remote-control brief. Full
+round log: `docs/MUSEUM_FOUNDATION_LOG-20260803.md`. Frames:
+`docs/foundation-round-20260803/`. Audit: `docs/VISUAL_HOOK_AUDIT-20260803.md`.
+
+- **F0 THE MUTE FAILED ON EVERY GROUND THE MUSEUM HAS, NOT JUST ONE.** V1 asked
+  for this direction by name and Mike gave it. `--wb-gold-mute` `#9b978d`
+  measured **1.99 / 2.17 / 2.40 / 2.75 / 2.91:1** against the five paper grounds
+  — and it is not decoration: it paints the lobby's DIRECTORY, the guest book's
+  dates, the tracklist's numbers, the booth's small print. Re-pinned to
+  **`#5f5c53`, 4.56 → 6.68:1**, the QUIETEST value that clears AA. **The finding
+  under the finding:** it lands within half a stop of `--wb-gold-lo`, which
+  looks like the ramp collapsing and is a fact about the ground — on a mat this
+  light the band that is both quieter than `lo` AND legible is about half a stop
+  wide, so there is no legible mute two stops down. **NOT V1's `#6a6659`**: that
+  was measured against the CARD and is **3.92:1 on the mat**, under AA exactly
+  where the token is used most. **`--wb-hairline` holds the OLD value** because
+  the token was doing two jobs — M0a chose `#9b978d` for the drag rules
+  deliberately ("the grip is the thing that reads, not the line") and a hairline
+  does not owe 4.5:1; not one hairline pixel moved. `tokens.js` re-synced in the
+  same edit. **A text-node walker over the built page then found four more**, all
+  fixed: the DIRECTORY `4.37:1`, the colophon **`1.55:1` — the museum's own name,
+  the worst number on the site** — `.vp-face-sub` `3.46:1` (V1's carry-forward,
+  closed at the BASE by making the rule name a ROLE, with the PORTAL keeping its
+  literal in one explicit selector), and **`.vp-bill-what` at 1.55–1.91:1, which
+  F2 had just promoted to the landing page.** Re-audit: **zero failures**, every
+  room and face, desktop and 390px.
+- **F1 THE VISUAL HOOK LAW, RECORDED ABOVE AND APPLIED.** Seven surfaces gained a
+  hook and **not one new asset was sourced**, so no rights question was opened.
+  `/booth` — the room Mike calls AWESOME and the purest failure of the law in the
+  building — gets **an ADMIT ONE ticket built from its own sentence six lines
+  below it**: the museum's rule is free admission, so the object at the top of
+  the page is a ticket saying there is nothing to admit. **`About the Artist`,
+  which Mike named specifically:** two of four artists had no plate; Mikey Mike
+  gets the file the provenance log already calls "his own chosen public face",
+  Hunter Root gets the ’94 sleeve from our own catalogue — **a named trade**, the
+  same picture as his cover, weaker than a portrait and much stronger than four
+  paragraphs. **`About the Songs` was the wing's worst offender** — a page of
+  labels with no image, one row below a tracklist of songs that all HAVE a
+  picture; new optional `entries[].img` renders each song's poster as a PRINT,
+  and every entry list that declares no `img` is byte-identical. `/robots`
+  Welcome takes the family shot — "three cartons of them arrived on a dock" is
+  the lead sentence and this is that sentence as a picture.
+- **F2 THE BILL GOES FIRST, AND "WELCOME" IS DEAD.** The wing lands on the house
+  album's first track, which was ~280 words of house prose — the hook law's exact
+  failure case. The bill is the opposite of that **and already existed**;
+  reordering is the whole fix. The order still argues: page one WHO IS HERE, page
+  two THE DEAL — the order a poster and a ticket come in. **The name is "The
+  deal", and it is Mike's own published phrase** (the booth's "That's the deal,
+  and it never changes", banked in BACKLOG 2026-07-06). **R5a's own argument
+  predicts its own reversal:** it picked "Welcome" for being ADDRESSED to the
+  visitor rather than a heading on a definition — right axis, wrong end, because
+  a greeting is addressed to you and tells you nothing. It was the one row whose
+  title a skimmer could read and still not know whether to press. Not `[PAPA]`:
+  the words are already his, and a marker would hide the row's name from every
+  visitor until he ruled on a phrase he wrote.
+- **F3 THE WEIRD.BABY FOUNDATION** — `/foundation`, twelve questions, on the
+  booth's template **used literally** (it imports `InfoBooth.css` and wears its
+  class names; a second stylesheet would be identical the day it was written and
+  forked by the next round — R2's title-bar finding). **Nothing is new
+  doctrine:** THE_CHARTER, CHARTER_RAW_LEDS, the robots repo's launch-readiness
+  §R3, and the booth's own answers, all cited in the file header. **The one thing
+  the archive does not say is the room's NAME, and the page says so first** — the
+  charter never uses "foundation" and refuses what the word means (an endowment,
+  against clause 4), so "there is no fund" is answer one; burying it would be the
+  digging the doctrine forbids. **`[PAPA]` marks a position, never a fact:** the
+  charter is DRAFT v0.3 "not published", so six answers carry a marked sentence
+  and the scrubber drops it — **verified live, zero leaks, every scrubbed answer
+  ends on a whole sentence.** Left unprinted: incorporation, named beneficiaries,
+  live costs and sponsors, what the shelf earns, **and the Billionaire's Credo**,
+  which the 2026-08-02 pass flagged as wanting "his voice, or absence" — it is
+  left as absence, as that pass recommended. **The hook is the number:** the
+  charter's proof is structural, and a structural proof as a paragraph is a
+  claim while `$0.00 / held, ever` is an object. Every figure is a clause of the
+  Law, so nothing on it can go stale. Directory placement beside the booth, not
+  with the exhibits — M8's board says what KIND of thing each entry is, and the
+  Foundation is not an exhibit.
+- **F4 IT WAS A `return null`, NOT A LAYOUT PROBLEM.** The cull was
+  `Math.abs(off) > 3` and the WAL spine is five albums; the wing lands at
+  `active=0`, so Mikey Mike at `off=4` **was not in the document.** And the ramp's
+  tail gave `off=3/4/5` ONE slot, so raising the cull alone would have stacked
+  three covers on a spot — the cull was covering for the ramp. Six rings now, with
+  a settling x-series (240/210/170/**120/85**). **Measured at the size the room
+  actually opens at** — `fitOnEntry` overrides the persisted height, so at
+  1706×900 it sets cfH=160 and the five covers land at **64/166/254/319/363px
+  from centre against 839px of half-width: the fifth album is FULLY ON SCREEN.**
+  The haze is `mask-image`, not an overlay, because an overlay must know the
+  ground and this carousel stands on `--wb-bg` in three wings and inside a wing
+  that re-pins it; a mask fades to whatever is behind it and has no colour to get
+  wrong. The covers got their own box **because a mask reaches every descendant
+  including the `‹ ›` arrows**, and `perspective` had to move with them (it
+  applies to DIRECT children only). **One regression caught on glass:** abspos
+  children take their static position from the flex container's
+  `justify-content`, so the plain wrapper collapsed the carousel into the
+  top-left — the measurement JSON said "5 rendered" and was right, and the
+  screenshot said the room was broken. At 390px Carsie sits inside the haze band
+  and dissolves at her right edge, which is Mike's brief literally; every album
+  reachable by driving the arrow, both sizes.
+- Gates: **lint 11 err / 9 warn** (= HEAD baseline, zero new), vite build green,
+  desktop 1706×900 + genuine 390×740 same-origin iframe lap, zero page-level
+  horizontal scroll at 390 on every route. **No lap harness was written to the
+  repo** — the 390px frame was an injected iframe, so nothing had to be removed
+  before seal.
+- Carry-forward, named not fixed: five text-only robots faces (The Record is the
+  strongest and **its renderer now exists**); a portrait of Hunter Root;
+  `InfoBooth.css` is furniture for two rooms while named for one; the
+  Foundation's own NAME carries a legal expectation the charter refuses (Mike's
+  call); THE_CHARTER is still an unpublished draft and shipping the room is a
+  deploy decision; mute and lo are half a stop apart on the mat, which is the
+  ground's fault and is stated rather than papered over.
+
 ## SEALED 2026-08-03 — THE V1 ROUND (v39; V1–V3. PUSH + DEPLOY ARE MIKE'S)
 
 Autonomous single-agent Code-lane round on Mike's remote-control brief. Full

@@ -70,7 +70,60 @@
   --wb-gold: #211f1c;
   --wb-gold-hi: #000000;
   --wb-gold-lo: #57544d;
-  --wb-gold-mute: #9b978d;
+  /* ---- [F0 2026-08-03] THE MUTE STEP WAS NOT LEGIBLE ON THE MUSEUM'S OWN
+     GROUND, AND MIKE HAS PUT THIS FILE IN SCOPE TO FIX IT ------------------
+     V1 carried this forward by name: "`--wb-gold-mute` is ~1.9:1 on the
+     museum's own paper ground outside a re-pinned scope, and museum-tokens.css
+     is off-limits without UX direction — this is that direction being asked
+     for." It was given. Measured, all five paper grounds, WCAG 2.1:
+
+       #9b978d on  --wb-bg #d9d5ca ....... 1.99:1   FAIL
+                   --wb-ink-soft ......... 2.17:1   FAIL
+                   --wb-ink .............. 2.40:1   FAIL
+                   --wb-ink-card ......... 2.75:1   FAIL
+                   --wb-ink-card-hi ...... 2.91:1   FAIL
+
+     IT FAILS ON EVERY GROUND THE MUSEUM HAS, and it is not decoration: it
+     paints the lobby's DIRECTORY label, the guest book's dates and signature
+     count, the tracklist's numbers and its variant dropdown, the booth's
+     small print, and the register lines on the Deep Dive deck. That is the
+     museum's small mono — the type a visitor squints at hardest.
+
+     THE NEW VALUE IS THE QUIETEST ONE THAT IS STILL LEGIBLE, and that is a
+     measurement rather than a taste:
+
+       #5f5c53 on  --wb-bg #d9d5ca ....... 4.56:1   AA
+                   --wb-ink-soft ......... 4.97:1   AA
+                   --wb-ink .............. 5.50:1   AA
+                   --wb-ink-card ......... 6.30:1   AA
+                   --wb-ink-card-hi ...... 6.68:1   AA
+
+     WHY IT LANDS SO CLOSE TO `--wb-gold-lo` (5.15:1 on the mat), which looks
+     like the ramp collapsing and is really a fact about the ground: on a mat
+     board this light, the whole band that is both quieter than `lo` and still
+     AA is about half a stop wide. There is no legible mute two stops down
+     because the paper does not leave room for one. Naming that is better than
+     picking a number that pretends otherwise.
+     NOT V1's #6a6659. That value was measured against the CARD ground
+     (#faf8f3, where it makes 5.41:1) and is only 3.92:1 on the mat — under AA
+     exactly where this token is used most. Same defect, one ground over.
+     SCOPED RE-PINS ARE UNTOUCHED BY CONSTRUCTION. `.pb`, the WAL stage, the
+     lightbox and the HR popover each declare their own `--wb-gold-mute`; a
+     :root value cannot reach into them. The paper ALIAS below does follow this
+     value, which is the point of the alias. */
+  --wb-gold-mute: #5f5c53;
+  /* ---- [F0] AND THE HAIRLINE KEEPS THE OLD VALUE, ON PURPOSE ------------
+     `--wb-gold-mute` was doing two jobs under one name: the quietest TEXT step
+     (above) and the FAINTEST RULE. M0a chose #9b978d for the drag handles'
+     1px lines deliberately and said why — "the grip is the thing that reads,
+     not the line" — with the grip at `--wb-gold-lo` 5.15:1 and the line an
+     order of magnitude quieter. Darkening the text token to 4.56:1 would have
+     pulled the line to within half a stop of its own grip and silently
+     reversed a measured decision from a round that is not this one.
+     A hairline is not text and does not owe 4.5:1. It gets its own name, its
+     own value — byte-for-byte what the three handle rules were already
+     painting — and the two jobs stop sharing a token. */
+  --wb-hairline: #9b978d;
   --wb-dim: #3b3933;
   --wb-serif: 'DM Serif Display', Georgia, serif;
   --wb-sans: 'Syne', system-ui, -apple-system, sans-serif;
@@ -144,6 +197,10 @@
   --wb-paper-gold-lo: var(--wb-gold-lo);
   --wb-paper-gold-mute: var(--wb-gold-mute);
   --wb-paper-dim: var(--wb-dim);
+  /* [F0] the hairline joins the paper ramp for the same reason every other
+     name here did: a scope escaping a dark re-pin has to be able to get it
+     back, and `initial` cannot do that. */
+  --wb-paper-hairline: var(--wb-hairline);
 
   /* ---- [L3 2026-08-02] THE PROJECTION BOOTH, PROMOTED OUT OF ONE RULE ----
      "Screens are dark" (2026-06-07) is a standing rule of this building, and the

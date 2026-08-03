@@ -169,6 +169,44 @@ export default function InfoBooth() {
       <MuseumBar room="Information Booth" />
 
       <div className="booth-card">
+        {/* ==== [F1 2026-08-03] THE TICKET =====================================
+            THE VISUAL HOOK LAW (Mike, this round): "land on words alone and the
+            visitor probably walks out. EVERY surface needs something visually
+            compelling besides written words — not necessarily a photo; even
+            words presented in a different FORMAT can be the hook."
+            THIS ROOM WAS THE PUREST FAILURE OF IT IN THE BUILDING. The booth is
+            a sheet of paper carrying a credo, two lines, eleven questions and a
+            contact address — a thousand words and not one thing to look at. It
+            is also the room Mike calls AWESOME, which is the point: the writing
+            is not the problem, the LANDING is.
+            SO THE HOOK IS MADE OF THE PAGE'S OWN SENTENCE. "No tickets, no
+            tiers, no ads" is printed six lines below this, and the museum's one
+            unbreakable rule is free admission — so the object at the top of the
+            page is an admission ticket that says there is nothing to admit. A
+            printed thing, in the house's three faces, saying the same fact the
+            prose says, in the format the fact is ABOUT. That is the law's own
+            "words in a different FORMAT" clause rather than a picture we do not
+            have and would have to source.
+            IT ADDS NO CLAIM. Every word on it is already on this page or is the
+            museum's own name; nothing here needed a [PAPA].
+            `aria-hidden`, AND THAT IS NOT A SHORTCUT. A screen reader gets the
+            credo and the answers, which say all of this in sentences; hearing
+            "ADMIT ONE · NO CHARGE · NO TICKET REQUIRED" read out as loose
+            fragments ahead of them would be the same fact twice, worse the
+            first time. The device is decoration for one sense and the prose is
+            the content for both. */}
+        <div className="booth-ticket" aria-hidden="true">
+          <div className="booth-ticket-stub">
+            <span className="booth-ticket-mark">WB</span>
+            <span className="booth-ticket-no">No. &infin;</span>
+          </div>
+          <div className="booth-ticket-main">
+            <span className="booth-ticket-kicker">The Weird.Baby Museum</span>
+            <span className="booth-ticket-big">Admit One</span>
+            <span className="booth-ticket-price">No charge &middot; no ticket required</span>
+          </div>
+        </div>
+
         {/* THE PLACARD. Mike's words, unchanged in substance.
             [M3] THE LINE BREAKS ARE GONE. Mike: "the line breaks on this page
             read awkwardly." They were literal <br /> tags — a break authored

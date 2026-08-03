@@ -104,6 +104,99 @@ html[data-room="booth"], html[data-room="booth"] body {
   box-shadow: 0 1px 2px rgba(33, 31, 28, 0.12), 0 6px 18px rgba(33, 31, 28, 0.08);
 }
 
+/* ── [F1 2026-08-03] THE TICKET — the room's visual hook ──────────────────────
+   See the note at the JSX for WHY it exists. What follows is how it is built
+   and the two decisions in it that are not obvious.
+   IT IS INVERTED, and that is what makes it an OBJECT. Everything else on this
+   page is dark type on print stock; a ticket in the same key would be another
+   paragraph with a border round it. Ink ground with print-stock type is the one
+   value inversion on the sheet, so the eye lands there first — which is the
+   whole job the law gives it.
+   THE NOTCHES ARE THE SHEET SHOWING THROUGH. Two discs painted in
+   `--wb-ink-card` — the colour of the card behind the ticket — sit half on and
+   half off the perforation line, so the stub reads as torn rather than as a
+   divider. They must track `.booth-card`'s background and nothing else; if that
+   ground ever changes, these change with it because they name the same token. */
+.booth-ticket {
+  display: flex;
+  align-items: stretch;
+  max-width: 520px;
+  margin: 0 auto 38px;
+  background: var(--wb-gold);
+  color: var(--wb-ink-card);
+  box-shadow: 0 2px 4px rgba(33, 31, 28, 0.2), 0 12px 28px rgba(33, 31, 28, 0.16);
+  /* the same slight tilt the collage tiles use elsewhere in the museum — a
+     printed thing set down on a sheet, not a component aligned to a grid. */
+  transform: rotate(-1.1deg);
+}
+.booth-ticket-stub {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 18px 18px;
+  border-right: 2px dashed var(--wb-ink-card);
+}
+.booth-ticket-stub::before,
+.booth-ticket-stub::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--wb-ink-card);
+}
+.booth-ticket-stub::before { top: -8px; }
+.booth-ticket-stub::after  { bottom: -8px; }
+.booth-ticket-mark {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+.booth-ticket-no {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.54rem;
+  letter-spacing: 0.2em;
+  opacity: 0.75;
+}
+.booth-ticket-main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px 22px;
+  text-align: center;
+}
+.booth-ticket-kicker {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.54rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+.booth-ticket-big {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.3rem, 4.2vw, 1.85rem);
+  letter-spacing: 0.11em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.booth-ticket-price {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
 /* THE CREDO — signage, and the only thing on the page in the brand face.
    Each beat is its own line by structure, not by a <br />: `display:block` on
    the spans, on a measure short enough that a beat cannot wrap into the next
@@ -268,6 +361,14 @@ html[data-room="booth"], html[data-room="booth"] body {
 @media (max-width: 680px) {
   .booth-root { padding: 84px 16px 64px; }
   .booth-card { padding: 40px 26px 36px; }
+  /* [F1] THE TILT STANDS DOWN ON A PHONE, and it is a geometry fact rather
+     than a taste: a rotated box is wider than its box, and at 390px the card's
+     content column is 338px with nothing spare — a 1.1deg tilt on a full-width
+     ticket pushes ~4px past each edge and buys the page a horizontal scrollbar
+     to pay for a charm nobody can see at that size. */
+  .booth-ticket { transform: none; margin-bottom: 30px; }
+  .booth-ticket-stub { padding: 14px 13px; }
+  .booth-ticket-main { padding: 16px 12px; }
   /* `ch` is a real measurement of the font, so these caps never fight the
      viewport — they simply stop applying once the column is narrower than the
      measure. Nothing needs overriding; the padding is the only thing that

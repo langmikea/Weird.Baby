@@ -39,7 +39,13 @@ export const T = {
 
   /* the accent ramp: mute -> lo -> gold -> hi (photo-black, not gold, since
      the 2026-06-07 B&W rework; the token names are historical) */
-  goldMute:   "#9b978d",   /* --wb-gold-mute   */
+  /* [F0 2026-08-03] re-pinned with its CSS pair — the old #9b978d measured
+     1.99:1 on the museum's own mat and failed AA on all five paper grounds.
+     See the measurement table in museum-tokens.css. THE CONTRACT ABOVE IS WHY
+     THIS LINE MOVED IN THE SAME EDIT: these values are the CSS file's pair,
+     not its derivative, and a mirror that lags is worse than no mirror. */
+  goldMute:   "#5f5c53",   /* --wb-gold-mute   */
+  hairline:   "#9b978d",   /* --wb-hairline    the faintest rule, not text */
   goldLo:     "#57544d",   /* --wb-gold-lo     */
   gold:       "#211f1c",   /* --wb-gold        photo black         */
   goldHi:     "#000000",   /* --wb-gold-hi     deepest tier        */

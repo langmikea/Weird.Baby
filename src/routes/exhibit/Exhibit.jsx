@@ -479,13 +479,50 @@ function usePersist(key, def, scope) {
 }
 
 // ─── COVERFLOW ────────────────────────────────────────────────────────────────
+/* [F4 2026-08-03] THE CAROUSEL HAD A HARD EDGE, AND IT WAS HIDING AN ALBUM.
+   MIKE: "at full-left scroll Mikey Mike's album cannot be seen — the cut is too
+   abrupt and limiting."
+   HE IS DESCRIBING A `return null`, NOT A LAYOUT PROBLEM. The render culled
+   `Math.abs(off) > 3`, and the WAL spine is FIVE albums — the house card, then
+   Carsie, Hunter Root, Jesse, Mikey Mike. The wing LANDS at active=0, which
+   puts Mikey Mike at off=4. He was not faint at the edge and he was not cut in
+   half: he was not in the document. Every wing whose spine passes five albums
+   has the same hole at both ends, and /hr's does.
+   AND THE FOURTH RING WAS A DEAD END BY CONSTRUCTION. The old tail — a bare
+   `return` for every offset past 2 — gave off=3, off=4 and off=5 THE SAME slot,
+   so rendering them without changing this function would have stacked three
+   covers on one spot. The cull was covering for the ramp, which is why raising
+   the cull alone would have looked broken.
+   THE RAMP NOW RUNS SIX DEEP AND IT CLOSES UP AS IT GOES. The x-deltas were
+   240 / 210 / 170 and continue 120 / 85 — a settling series, not a repeat — so
+   the far covers deck up against the edge the way a real rack of records does
+   instead of marching off the page.
+   MEASURED ON THE BUILT PAGE, AT THE SIZE THE ROOM ACTUALLY OPENS AT. F3's
+   `fitOnEntry` computes the carousel's height on arrival and overrides the
+   persisted one, so the honest number is the one the fit produces rather than
+   the stored default: in a true 1706x900 viewport it sets cfH=160, and at full-
+   left scroll the five covers land at 64 / 166 / 254 / 319 / 363px from centre
+   against 839px of half-width. The fifth album — Mikey Mike, the one Mike could
+   not see — is FULLY ON SCREEN with room to spare. That is his "better if
+   repositioning solves it outright", solved outright rather than hazed over.
+   The haze is the insurance for the sizes the fit does not choose: a carousel
+   dragged tall, or a phone, where the rack genuinely is wider than the window.
+   Ring 5 is deliberately allowed to run past the edge: that is what the haze on
+   `.cf-wrap` is for (see Exhibit.css), and a sixth album dissolving at the
+   margin is the honest signal that there is more rack than window. */
 function getSlot(off) {
   const a = Math.abs(off), s = off < 0 ? -1 : 1;
   if (a===0) return { x:0,       z:0,    ry:0,      sc:1,    op:1,    zi:10 };
   if (a===1) return { x:s*240,   z:-80,  ry:s*-45,  sc:.85,  op:.9,   zi:9  };
   if (a===2) return { x:s*450,   z:-150, ry:s*-58,  sc:.74,  op:.75,  zi:8  };
-  return           { x:s*620,   z:-210, ry:s*-68,  sc:.62,  op:.55,  zi:7  };
+  if (a===3) return { x:s*620,   z:-210, ry:s*-68,  sc:.62,  op:.55,  zi:7  };
+  if (a===4) return { x:s*740,   z:-255, ry:s*-73,  sc:.54,  op:.38,  zi:6  };
+  return           { x:s*825,   z:-290, ry:s*-76,  sc:.47,  op:.24,  zi:5  };
 }
+/* how many rings deep the rack is drawn. Named because it is the number the
+   cull and the ramp above have to agree on, and they disagreed for five
+   albums. */
+const CF_RINGS = 5;
 
 function AlbumCover({ album }) {
   if (album.art) {
@@ -532,9 +569,25 @@ function Coverflow({ spine, active, cfH, onSelect, onSelectClick }) {
       onPointerDown={onPD} onPointerUp={onPU} onTouchStart={onTS} onTouchEnd={onTE}>
       <button className={`cf-arrow cf-l${active===0?" cf-dis":""}`} onClick={()=>onSelect(Math.max(0,active-1))}>{"<"}</button>
       <button className={`cf-arrow cf-r${active===spine.length-1?" cf-dis":""}`} onClick={()=>onSelect(Math.min(spine.length-1,active+1))}>{">"}</button>
+      {/* [F4 2026-08-03] THE RACK IS ITS OWN BOX, AND THE ONE REASON IS THE MASK.
+          The haze that dissolves a cover at the margin (Mike: "at minimum a
+          slight FADE on the last visible item indicating more beyond the haze")
+          is a `mask-image`, and a mask applies to EVERY descendant of the
+          element carrying it — including the two `‹ ›` arrows, which live at
+          left:8px / right:8px, i.e. inside the fade. Masking `.cf-wrap` would
+          have hazed away the controls along with the covers.
+          So the covers get a box of their own and the arrows stay outside it.
+          `perspective` MOVES WITH THEM: perspective applies to an element's
+          DIRECT children only, so leaving it on `.cf-wrap` would have flattened
+          the whole carousel the moment the covers became grandchildren. It is
+          the same declaration on the same rectangle (`inset:0`), so the 3D is
+          identical — that is the acceptance test, and it is met by construction.
+          Pointer events are unaffected: the drag listeners are on `.cf-wrap` and
+          events from the covers bubble to them exactly as before. */}
+      <div className="cf-rack">
       {spine.map((a,i) => {
         const off = i - active;
-        if (Math.abs(off) > 3) return null;
+        if (Math.abs(off) > CF_RINGS) return null;
         const sl = getSlot(off);
         const isActive = off === 0;
         return (
@@ -554,6 +607,7 @@ function Coverflow({ spine, active, cfH, onSelect, onSelectClick }) {
           </div>
         );
       })}
+      </div>
     </div>
   );
 }
@@ -3309,8 +3363,27 @@ export default function Exhibit({ artist }) {
                           if (!isLog) return (
                             <ol className="vp-face-entries" data-stage-split="row">
                               {list.map((en, i) => (
-                                <li key={i} className="vp-fe">
+                                <li key={i} className={"vp-fe" + (en.img ? " vp-fe-plated" : "")}>
                                   {en.stamp && <span className="vp-fe-stamp">{en.stamp}</span>}
+                                  {/* [F1 2026-08-03] AN ENTRY MAY CARRY A PICTURE.
+                                      THE VISUAL HOOK LAW (Mike, this round): land on
+                                      words alone and the visitor probably walks out —
+                                      every surface needs something visually compelling
+                                      besides written words.
+                                      "About the Songs" was the wing's worst offender: a
+                                      full page of interpretive labels with no image
+                                      anywhere on it, sitting one row below a tracklist
+                                      of songs that all HAVE a picture. The picture was
+                                      never missing; it was just never asked for.
+                                      OPTIONAL, SO NOTHING ELSE MOVES. Every entry in
+                                      the building that declares no `img` renders the
+                                      markup it rendered before — the robots wing's
+                                      Record, FAQ, Contact and Firmware faces are all
+                                      entry lists and none of them gains a byte. */}
+                                  {en.img && (
+                                    <img className="vp-fe-plate" src={en.img} alt=""
+                                         loading="lazy" />
+                                  )}
                                   <span className="vp-fe-body">
                                     {/* [P5] an entry whose title was the operator's
                                         keeps its body and loses the empty heading —

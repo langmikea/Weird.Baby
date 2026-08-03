@@ -1,0 +1,134 @@
+/* Foundation.css — THE WEIRD.BABY FOUNDATION (/foundation).
+ *
+ * [F3 2026-08-03] THIS FILE IS DELIBERATELY SHORT, AND THAT IS THE POINT.
+ *
+ * Mike named the Information Booth as this room's template. The strongest form
+ * of that instruction is to use the booth's ACTUAL RULES rather than a copy of
+ * them: Foundation.jsx imports InfoBooth.css and wears its class names for the
+ * sheet, the credo, the rule, the questions, the contact line and the way back.
+ * A second stylesheet saying the same things in `fnd-` prefixes would be
+ * identical on the day it was written and would have drifted by the next round
+ * — which is exactly the fork R2 found in the title bar (three copies of one
+ * bar) and B7 found in the palette, and the reason MuseumBar.jsx exists.
+ *
+ * So what lives here is ONLY what is new: this room's page ground, and the one
+ * object the booth does not have.
+ *
+ * (Naming note, carried rather than fixed: InfoBooth.css is now furniture for
+ * two rooms while still named for one. Renaming it means touching the room Mike
+ * calls AWESOME to change nothing a visitor can see, which is not this round's
+ * trade. Named in the round log as a want.)
+ *
+ * [R5] The ground rules are scoped to `html[data-room="foundation"]` — an
+ * attribute the component sets on mount and clears on unmount — because a
+ * stylesheet is global and permanent where a mounted `<style>` tag was not.
+ */
+
+html[data-room="foundation"], html[data-room="foundation"] body {
+  height: 100%;
+  background: var(--wb-bg);
+  color: var(--wb-gold);
+}
+
+/* the room reuses `.booth-root` whole; this class exists so the room can be
+   addressed at all without hijacking the booth's selector. */
+.fnd-root { /* intentionally empty — see the header */ }
+
+/* ── THE ACCOUNT — the room's visual hook ────────────────────────────────────
+   See the note at the JSX for WHY. What follows is how, and the two decisions
+   in it that are not obvious.
+
+   IT IS A LEDGER CARD, NOT A STAT BLOCK. The difference is the ruled rows and
+   the mono face: a dashboard says "here is a measurement, which was true when
+   it was taken"; a ledger says "here is the account, and this is what is in
+   it". Nothing on this card is measured, so nothing on it can go stale — which
+   is the honesty the charter's "the proof is structural" sentence is claiming,
+   said in furniture instead of in prose.
+
+   INVERTED, for the booth ticket's reason: everything else on the sheet is dark
+   type on print stock, so the one value inversion on the page is where the eye
+   lands. The two rooms now share a visual grammar — a single inked object at
+   the head of a page of questions — without sharing a component, because the
+   objects say different things.
+
+   THE FIGURE IS SET IN THE MONO FACE ON PURPOSE. `Courier Prime` is this
+   museum's register face — the one it uses for facts you are meant to be able
+   to check. A zero in the display serif would be a flourish; a zero in the
+   register face is an entry. */
+.fnd-ledger {
+  max-width: 460px;
+  margin: 0 auto 40px;
+  padding: 26px 30px 22px;
+  background: var(--wb-gold);
+  color: var(--wb-ink-card);
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(33, 31, 28, 0.2), 0 12px 28px rgba(33, 31, 28, 0.16);
+}
+.fnd-ledger-head {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.54rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+.fnd-ledger-figure {
+  font-family: 'Courier Prime', monospace;
+  font-weight: 700;
+  /* the one thing on the page that is allowed to be loud. It is also the only
+     place in the building where a number is the headline, and it earns that by
+     being the shortest true statement the charter can make about itself. */
+  font-size: clamp(2.6rem, 11vw, 4.1rem);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  margin-top: 12px;
+}
+.fnd-ledger-caption {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.62rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  opacity: 0.82;
+  margin-top: 4px;
+}
+.fnd-ledger-rows {
+  margin: 20px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid rgba(250, 248, 243, 0.28);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  text-align: left;
+}
+.fnd-ledger-rows > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+.fnd-ledger-rows dt {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.fnd-ledger-rows dd {
+  margin: 0;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+}
+
+/* the two ways out sit on one line; the separator is furniture and takes the
+   quiet step so it does not read as a third link. */
+.fnd-sep { color: var(--wb-gold-mute); }
+
+@media (max-width: 680px) {
+  .fnd-ledger { padding: 22px 20px 18px; margin-bottom: 32px; }
+  /* [F1] at 390px the label column and the value column stop fitting on one
+     line and the value wraps under a half-width label, which reads as a
+     mistake. Stacked, each row is a caption over its own answer. */
+  .fnd-ledger-rows > div { flex-direction: column; align-items: flex-start; gap: 1px; }
+}

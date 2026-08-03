@@ -48,7 +48,17 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
    no images. Booth-behind-glass was inspiration, not literal. */
 .wb-directory { margin-top: 44px; z-index: 1; position: relative; width: min(300px, 80%); }
 .wb-dir-label { font-family: 'Courier Prime', monospace; font-size: 0.56rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--wb-gold-mute); margin-bottom: 10px; text-align: center; }
-.wb-dir-entry { display: flex; justify-content: space-between; align-items: baseline; width: 100%; padding: 9px 2px; background: none; border: none; border-top: 1px solid var(--wb-border); cursor: pointer; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: #6f6b62; transition: color 0.3s; white-space: nowrap; }
+.wb-dir-entry { display: flex; justify-content: space-between; align-items: baseline; width: 100%; padding: 9px 2px; background: none; border: none; border-top: 1px solid var(--wb-border); cursor: pointer; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--wb-gold-mute); transition: color 0.3s; white-space: nowrap; }
+/* [F0 2026-08-03] THE DIRECTORY WAS ONE OF THE FIVE GREY LITERALS, and it is
+   the one on the front door.
+   `#6f6b62` was L3's "no token, listed in the round log" set — a hand-picked
+   grey that was trying to BE the mute step and missed it by a hair in the wrong
+   direction. Measured on the live built page by a text-node walker: 4.37:1
+   against this column's `--wb-ink` ground, where small text needs 4.5. Six rows
+   plus six arrows, at 9.6px, naming every room in the building.
+   It reads `--wb-gold-mute` now, which this round re-pinned and which measures
+   5.50:1 on the same ground. One literal became one token — V1's move, one
+   surface over, on the surface every visitor sees first. */
 .wb-dir-entry:last-child { border-bottom: 1px solid var(--wb-border); }
 .wb-dir-entry:hover { color: var(--wb-gold); }
 .wb-dir-arrow { font-family: 'Courier Prime', monospace; font-size: 0.6rem; color: inherit; }
@@ -190,8 +200,22 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
 .wb-entry-note { font-family: 'Courier Prime', monospace; font-style: italic; font-size: 0.72rem; color: #6f6b62; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
 .wb-entry-date { font-family: 'Courier Prime', monospace; font-size: 0.62rem; color: var(--wb-gold-mute); white-space: nowrap; }
 
-.wb-footer { position: absolute; bottom: 18px; right: 24px; font-family: 'Courier Prime', monospace; font-size: 0.56rem; letter-spacing: 0.1em; color: #b0aca1; display: flex; align-items: center; gap: 7px; }
-.wb-mark { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border: 1px solid var(--wb-border-hi); border-radius: 50%; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.42rem; letter-spacing: 0.04em; color: var(--wb-border-hi); animation: float-mark 9s ease-in-out infinite; flex-shrink: 0; }
+/* [F0 2026-08-03] THE COLOPHON WAS THE WORST NUMBER ON THE SITE, and it is the
+   museum's own name.
+   Measured on the live built page: "weird.baby" `#b0aca1` on the mat = 1.55:1,
+   and the "WB" roundel `--wb-border-hi` = 1.68:1 at 6.7px. Those are not quiet
+   — a 1.5:1 ratio is the difference between print stock and slightly different
+   print stock, and at that size it is a smudge. A colophon is SUPPOSED to be
+   the quietest thing on the page, and the quietest thing on the page still has
+   to be a thing.
+   BOTH NOW READ `--wb-gold-mute` (this round's re-pin): 4.56:1 on the mat, the
+   ramp's quietest legible step, which is exactly the register a colophon wants.
+   THE ROUNDEL'S BORDER IS DELIBERATELY NOT CHANGED. `--wb-border-hi` at 1.68:1
+   is a 1px ring around a 20px disc — furniture, not text, and the same call the
+   drag handles' hairline gets one file over. What had to change is the letters
+   inside it. */
+.wb-footer { position: absolute; bottom: 18px; right: 24px; font-family: 'Courier Prime', monospace; font-size: 0.56rem; letter-spacing: 0.1em; color: var(--wb-gold-mute); display: flex; align-items: center; gap: 7px; }
+.wb-mark { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border: 1px solid var(--wb-border-hi); border-radius: 50%; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.42rem; letter-spacing: 0.04em; color: var(--wb-gold-mute); animation: float-mark 9s ease-in-out infinite; flex-shrink: 0; }
 @keyframes float-mark { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-4px); } }
 
 /* THE LOBBY IS A FIXED 100vh AND THE RIGHT PANE CLIPS WHAT DOES NOT

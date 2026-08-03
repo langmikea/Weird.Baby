@@ -359,6 +359,24 @@ const ARTISTS = [
     name: "Hunter Root",
     tags: ["wal", "hunter-root", "house"],
     art: "/images/wal/hunter-root-cover.jpg",
+    /* [F1 2026-08-03] THE VISUAL HOOK LAW, APPLIED WHERE MIKE NAMED IT.
+       "About the Artist SPECIFICALLY must open on an interesting image/visual,
+       not paragraphs." Two of the four artists declared a `plate` and two did
+       not, so half this wing's artist cards opened on a heading and then prose.
+       WHAT IS USED, AND WHY IT IS NOT A NEW RIGHTS DECISION. This is the file
+       already vaulted and already logged in docs/WAL_PHOTO_PROVENANCE-20260802
+       — the ’94 video's poster frame, which is the Crooked Home childhood-photo
+       sleeve, from OUR OWN catalogue (MV-20260523-001). No outside rights are
+       in play and nothing new is sourced, which is the whole reason it is
+       reachable today rather than being another ART-pending slot.
+       IT IS THE SAME FILE THE COVERFLOW SHOWS, AND THAT IS A NAMED TRADE, not
+       an oversight: a card that opens on the record you just pressed is a
+       weaker hook than a portrait would be, and it is a much stronger one than
+       four paragraphs. When a portrait exists this is one string.
+       [PAPA] is NOT used here — a picture is not a sentence and the scrubber
+       cuts sentences; the want is carried in the round log instead. */
+    plate: "/images/wal/hunter-root-cover.jpg",
+    plateCaption: "The ’94 sleeve — a childhood photograph, from the museum's own vault.",
     songs: [
       { title: "’94", slug: "94", ytId: "vPW49GU38Ng",
         note: "Official music video. Museum catalogue MV-20260523-001, " +
@@ -815,6 +833,13 @@ const ARTISTS = [
     name: "Mikey Mike",
     tags: ["wal", "mikey-mike"],
     art: "/images/wal/mikey-mike-cover.jpg",
+    /* [F1 2026-08-03] see the note on Hunter Root's plate above. This one is
+       the better half of the same fix: the provenance log records this file as
+       "his channel portrait — porch cam still, cigarette, wagon of records; his
+       own chosen public face", so the artist card opens on a PORTRAIT of the
+       artist, which is what the block was always for. */
+    plate: "/images/wal/mikey-mike-cover.jpg",
+    plateCaption: "His own channel portrait.",
     songs: [
       { title: "Doin' Me", slug: "doin_me", ytId: "7rWDzLUOreo",
         note: "Mike wrote this as “I'm Doin' Me”. The record appears " +
@@ -1119,10 +1144,22 @@ function aboutSongsTrack(a) {
       kind: "text",
       title: "ABOUT THE SONGS",
       subtitle: a.name.toUpperCase(),
+      /* [F1 2026-08-03] THE SONGS' CARDS GET THE SONGS' PICTURES.
+         THE VISUAL HOOK LAW: every surface needs something visually compelling
+         besides written words. This face had nothing — it was the one page in
+         the wing that was pure type, and it sat directly beneath a tracklist of
+         songs each of which already ships with a picture.
+         THE PICTURE IS THE ONE THE EMBED WOULD SHOW, which is why it needs no
+         new rights ruling: W3 settled that a video's own poster surface,
+         hotlinked from YouTube's CDN, is part of the embed's function, and
+         "What they are up to" has been drawing exactly this URL per tile since
+         it was built. A song with no `ytId` renders no plate and no gap — the
+         entry simply has no `img`. */
       entries: withCards.map((s, i) => ({
         stamp: String(i + 1).padStart(2, "0"),
         title: s.title,
         line: s.card.label.join(" "),
+        img: s.ytId ? "https://i.ytimg.com/vi/" + s.ytId + "/hqdefault.jpg" : undefined,
       })),
       entriesMode: "list",
       sideboxes: withCards.map(s => ({
@@ -1323,131 +1360,25 @@ const HOUSE_ALBUM = {
   art: HOUSE_COVER,
   accent: null,
   viewerPoster: null,
+  /* ===== [F2 2026-08-03] THE BILL GOES FIRST ==============================
+     MIKE: "'About the Artists' moves to POSITION ONE."
+     THIS IS THE FIRST THING ANYBODY SEES IN THIS WING. `defaultActiveIndex: 0`
+     lands on the house album and the room opens on its first track, so
+     whatever sits here is the museum's answer to a stranger who has walked in
+     off the street. Until now that was ~280 words of house prose, which is the
+     VISUAL HOOK LAW's exact failure case (F1, this round): land on words alone
+     and the visitor probably walks out.
+     THE BILL IS THE OPPOSITE OF THAT AND IT ALREADY EXISTED. Four artists,
+     four album covers, in the artists' own colour, each one a door — R5b built
+     it and put it second. Reordering is the whole fix: nothing new is drawn,
+     nothing is invented, and the room now opens on faces instead of on an
+     essay about itself.
+     AND THE ORDER STILL READS AS AN ARGUMENT. Page one is WHO IS HERE; page
+     two is THE DEAL — what the room is, what it costs, where the doors go. A
+     stranger meets the acts and then reads the terms, which is the order a
+     poster and a ticket come in, and the reverse of the order a museum's
+     instinct puts them in. */
   tracks: [
-    {
-      id: "wal-house-room",
-      unnumbered: true,   /* the room's own pages are not songs */
-      /* [R5a 2026-08-03] "WHAT THIS ROOM IS" BECOMES "WELCOME", AND IT IS THE
-         SHORTER OF THE TWO NAMES MIKE OFFERED.
-         He offered "Welcome" or "Welcome to the Listening Room" and asked for a
-         pick with a reason. THE REASON IS THAT THE ROOM ALREADY HAS A NAME AND
-         IT IS PRINTED TWICE ON THIS PAGE: the title bar says WORTH A LISTEN,
-         and the card's own subtitle says WORTH A LISTEN directly under the
-         heading. "The Listening Room" would be a THIRD name for one room,
-         introduced at the door, in the sentence whose whole job is to stop a
-         stranger being confused. A greeting does not need to re-name the
-         building it is standing in — the building is already saying its name
-         over the greeter's shoulder.
-         "Welcome" also does the job the old title did not. "What this room is"
-         is a HEADING ON A DEFINITION; a visitor who has just walked in is being
-         handed a specification. "Welcome" is addressed to them. */
-      title: "Welcome",
-      tags: ["wal", "house", "about"],
-      videos: [],
-      face: {
-        kind: "text",
-        title: "WELCOME",
-        subtitle: "WORTH A LISTEN",
-        /* [M11 2026-08-03] REWRITTEN TO THE PERSONALITY MAP.
-           MIKE, on this wing: "the ARTISTS shine; W.B does not overshadow;
-           W.B is a LISTENER IN THE ROOM WITH EVERYONE ELSE, it just happens to
-           be W.B's room."
-           The old copy was close and missed on one word. "The frame is ours"
-           is a CURATOR speaking — it puts the house on one side of the glass
-           and the visitor on the other, which is the overshadowing the map
-           forbids even when the sentence is modest. The map says the house is
-           in the SAME ROW as the visitor, and that is a different sentence.
-           No claim is added or removed: four artists, eight songs, the same
-           four surfaces each, every door leading out. */
-        /* [R5a 2026-08-03] SPELLED OUT, TO THE THREE-MASTERS DOCTRINE.
-           MIKE: "seconds for the skimmer, depth for the curious, the why for
-           the intrigued — one path, no announced levels."
-           HOW THAT IS BUILT HERE, AND WHY IT IS NOT THREE SECTIONS: the doctrine
-           forbids announcing the levels, so the page cannot say "in brief" and
-           "in detail" — it has to be ONE descent that each reader leaves at
-           their own depth. The face's existing blocks already are that descent
-           and nobody had used them as one:
-             blurb      the SECONDS. One sentence. A skimmer who reads nothing
-                        else leaves knowing what the room is for.
-             label ¶1   what is actually here and what you can do with it.
-             label ¶2   the standard — why these four and not others.
-             label ¶3   what we are not, and where every door goes.
-             label ¶4   the WHY, and it is the deepest thing on the page:
-                        how the cards were made and what that costs us.
-             tombstone  the checkable version of all of it, for the reader who
-                        wants to verify rather than be told.
-           A reader who stops after the first sentence has been served. A reader
-           who goes to the bottom finds provenance. Nothing announces a tier.
-           NO COLLAPSE HERE, AND THAT IS THE RULING RATHER THAN AN OVERSIGHT.
-           Mike said collapse/expand "ONLY where truly beneficial". This page is
-           ~280 words: a disclosure control would hide the depth the doctrine
-           asks for behind a press, add a decision to a page whose job is to
-           remove one, and save a reader roughly one flick of a scroll wheel.
-           Where a collapse genuinely earns its place in this wing is the RECORD
-           on the robots side (ten long entries) — and that one already has it.
-           EVERY FACT BELOW IS CHECKABLE IN THIS REPOSITORY. Four artists and
-           eight songs: the ARTISTS array and its two-songs-each shape. The four
-           surfaces: `tracksFor`. The doors: `doorsFor`. What we keep: the
-           `visits` table in src/worker.js stores page, referrer and a timestamp
-           and nothing else — the privacy sentence is a statement about the code,
-           the same way M3 wrote the booth's. The pictures: every file and its
-           source URL are in docs/WAL_PHOTO_PROVENANCE-20260802.md, which also
-           carries the come-down-on-deny undertaking quoted here. */
-        blurb: "Four artists somebody in this house could not stop playing. " +
-               "Eight songs, all of them one press away.",
-        label: [
-          "Every album in the carousel above is an artist, and every artist " +
-          "gets the same four pages: their songs, playable right here; a sheet " +
-          "about the songs; a card about them; and a wall of what they have " +
-          "been up to lately, in their own pictures.",
-          "The standard is not chart position and it is not how many people " +
-          "already know. It is that somebody here could not stop playing the " +
-          "record and thinks you should hear it. That is the whole test, and " +
-          "it is why this room can hold a man posting a song about this week, " +
-          "a songwriter you have already heard in an advert without learning " +
-          "his name, and our own house artist, without ranking them against " +
-          "each other.",
-          "We are not their label, their agent, or their critic. We are one " +
-          "more person in the room who thinks you should hear this. So every " +
-          "door leads out — their site, their store, their channel, their tour " +
-          "dates — and there is nothing here to sign up for and no account to " +
-          "make. The room happens to be ours. The night belongs to them.",
-          "What is written on these cards was read at its source. Every " +
-          "quotation was opened where it was said, and one that could not be " +
-          "checked is not on the wall; where an artist has no honest door to " +
-          "give, the card says so rather than sending you somewhere we have " +
-          "not read. The pictures are the artists' own public imagery, logged " +
-          "file by file with where it came from, and they come down the day " +
-          "any of them asks.",
-        ],
-        tombstone: [
-          { k: "In this room", v: "Four artists · eight songs, all playable" },
-          { k: "Every artist gets", v: "Their songs · a sheet · a card · a wall" },
-          { k: "The standard", v: "Someone here could not stop playing it" },
-          { k: "The doors", v: "All of them lead to the artist's own place" },
-          { k: "What we keep", v: "A page name and a timestamp. No accounts, no profiles." },
-          { k: "The pictures", v: "Their own, logged file by file, down on request" },
-          { k: "The quotes", v: "Read at the source, or not printed" },
-        ],
-        /* [M6 2026-08-03, REHOMED BY R5b] MIKE: the booth pointer was "too loud
-           and duplicative — one quiet inline link where it genuinely helps."
-           Loud: it was a P10 marquee door, a register built for doors OUT of
-           the building. Duplicative: the card it stood on was the house
-           explaining itself, and the door's scent said that again.
-           M6's own answer to "where does it genuinely help" was "the end of the
-           paragraph a stranger has just read about who runs this place". That
-           paragraph is on THIS card now (label ¶3 — what we are not, and what
-           we do not keep), so the link followed its reason here rather than
-           staying on a page that is now a poster. `quiet` is the flag; see the
-           note at the render. */
-        trail: [
-          { label: "the Information Booth", url: "/booth", quiet: true,
-            scent: "Who runs this place, and how to reach them:" },
-        ],
-        footer: "WORTH A LISTEN · WEIRD.BABY",
-        papa: "[PAPA] — the room's own words, every line of them.",
-      },
-    },
     {
       id: "wal-house-place",
       unnumbered: true,   /* the room's own pages are not songs */
@@ -1546,6 +1477,172 @@ const HOUSE_ALBUM = {
         papa: "[PAPA] — the promotional copy, the running order and the four " +
               "house accents. Every claim about an artist here is already on " +
               "that artist's own card, sourced there.",
+      },
+    },
+    {
+      id: "wal-house-room",
+      unnumbered: true,   /* the room's own pages are not songs */
+      /* [R5a 2026-08-03] "WHAT THIS ROOM IS" BECOMES "WELCOME", AND IT IS THE
+         SHORTER OF THE TWO NAMES MIKE OFFERED.
+         He offered "Welcome" or "Welcome to the Listening Room" and asked for a
+         pick with a reason. THE REASON IS THAT THE ROOM ALREADY HAS A NAME AND
+         IT IS PRINTED TWICE ON THIS PAGE: the title bar says WORTH A LISTEN,
+         and the card's own subtitle says WORTH A LISTEN directly under the
+         heading. "The Listening Room" would be a THIRD name for one room,
+         introduced at the door, in the sentence whose whole job is to stop a
+         stranger being confused. A greeting does not need to re-name the
+         building it is standing in — the building is already saying its name
+         over the greeter's shoulder.
+         "Welcome" also does the job the old title did not. "What this room is"
+         is a HEADING ON A DEFINITION; a visitor who has just walked in is being
+         handed a specification. "Welcome" is addressed to them. */
+      /* ===== [F2 2026-08-03] "WELCOME" IS KILLED, AND R5a's REASONING IS WHY
+         THE REPLACEMENT LOOKS THE WAY IT DOES =============================
+         MIKE: "'Welcome' is KILLED as a name — boring, signals ceremony, we
+         don't do ceremony. Name the welcome content something that earns its
+         place."
+         HE IS RIGHT AND R5a's OWN ARGUMENT PREDICTS IT. R5a picked "Welcome"
+         for being ADDRESSED to the visitor rather than being a heading on a
+         definition, which was the right axis and the wrong end of it: a
+         greeting is addressed to you and tells you nothing. It is the one row
+         in the list whose title a skimmer can read and still not know whether
+         to press it — and every other row here (a song title, "About the
+         Songs", "What they are up to") says what is behind it.
+         THE NAME IS "THE DEAL", AND IT IS MIKE'S OWN PHRASE, ALREADY IN THIS
+         BUILDING. The Information Booth answers "Who keeps this place?" with
+         "That's the deal, and it never changes" — his words, banked in
+         BACKLOG.md's booth intake of 2026-07-06 and shipped at /booth. So the
+         name is carried across rather than invented, which is this round's
+         standing rule for anything that speaks for the house.
+         WHY IT EARNS THE ROW. The page IS an arrangement and nothing else: it
+         is free, every door leads out, there is nothing to sign up for, and
+         we keep a page name and a timestamp. "The deal" is what that page is,
+         in two words, and it promises a reader something checkable instead of
+         a handshake. It is also the exact opposite of ceremony — a deal is
+         terms, plainly stated — which is the complaint answered rather than
+         re-dressed. And the joke lands the right way round: the deal is that
+         there is no deal.
+         NOT MARKED [PAPA]. The words are already his and already published;
+         a marker would hide the row's name from every visitor until he ruled
+         on a phrase he wrote. It is one string in one place if he wants
+         another. */
+      title: "The deal",
+      tags: ["wal", "house", "about"],
+      videos: [],
+      face: {
+        kind: "text",
+        title: "THE DEAL",
+        subtitle: "WORTH A LISTEN",
+        /* [F1 2026-08-03] THE HOUSE CARD IS THE HOOK, AND IT IS WORDS IN A
+           DIFFERENT FORMAT — which the law explicitly allows: "not necessarily
+           a photo; even words presented in a different FORMAT can be the hook."
+           This is the room's own printed card (`HOUSE_COVER`, drawn above), the
+           one piece of imagery in this wing the house made rather than
+           borrowed. Set beside the opening sentence it turns a column of prose
+           into the head COMPOSITION every other card in the building opens on.
+           A PURPOSE-MADE PLATE WOULD BE BETTER and is named as a want in the
+           round log; this one costs nothing, invents nothing, and is not
+           paragraphs. */
+        still: HOUSE_COVER,
+        stillCaption: "The room's own card.",
+        /* [M11 2026-08-03] REWRITTEN TO THE PERSONALITY MAP.
+           MIKE, on this wing: "the ARTISTS shine; W.B does not overshadow;
+           W.B is a LISTENER IN THE ROOM WITH EVERYONE ELSE, it just happens to
+           be W.B's room."
+           The old copy was close and missed on one word. "The frame is ours"
+           is a CURATOR speaking — it puts the house on one side of the glass
+           and the visitor on the other, which is the overshadowing the map
+           forbids even when the sentence is modest. The map says the house is
+           in the SAME ROW as the visitor, and that is a different sentence.
+           No claim is added or removed: four artists, eight songs, the same
+           four surfaces each, every door leading out. */
+        /* [R5a 2026-08-03] SPELLED OUT, TO THE THREE-MASTERS DOCTRINE.
+           MIKE: "seconds for the skimmer, depth for the curious, the why for
+           the intrigued — one path, no announced levels."
+           HOW THAT IS BUILT HERE, AND WHY IT IS NOT THREE SECTIONS: the doctrine
+           forbids announcing the levels, so the page cannot say "in brief" and
+           "in detail" — it has to be ONE descent that each reader leaves at
+           their own depth. The face's existing blocks already are that descent
+           and nobody had used them as one:
+             blurb      the SECONDS. One sentence. A skimmer who reads nothing
+                        else leaves knowing what the room is for.
+             label ¶1   what is actually here and what you can do with it.
+             label ¶2   the standard — why these four and not others.
+             label ¶3   what we are not, and where every door goes.
+             label ¶4   the WHY, and it is the deepest thing on the page:
+                        how the cards were made and what that costs us.
+             tombstone  the checkable version of all of it, for the reader who
+                        wants to verify rather than be told.
+           A reader who stops after the first sentence has been served. A reader
+           who goes to the bottom finds provenance. Nothing announces a tier.
+           NO COLLAPSE HERE, AND THAT IS THE RULING RATHER THAN AN OVERSIGHT.
+           Mike said collapse/expand "ONLY where truly beneficial". This page is
+           ~280 words: a disclosure control would hide the depth the doctrine
+           asks for behind a press, add a decision to a page whose job is to
+           remove one, and save a reader roughly one flick of a scroll wheel.
+           Where a collapse genuinely earns its place in this wing is the RECORD
+           on the robots side (ten long entries) — and that one already has it.
+           EVERY FACT BELOW IS CHECKABLE IN THIS REPOSITORY. Four artists and
+           eight songs: the ARTISTS array and its two-songs-each shape. The four
+           surfaces: `tracksFor`. The doors: `doorsFor`. What we keep: the
+           `visits` table in src/worker.js stores page, referrer and a timestamp
+           and nothing else — the privacy sentence is a statement about the code,
+           the same way M3 wrote the booth's. The pictures: every file and its
+           source URL are in docs/WAL_PHOTO_PROVENANCE-20260802.md, which also
+           carries the come-down-on-deny undertaking quoted here. */
+        blurb: "Four artists somebody in this house could not stop playing. " +
+               "Eight songs, all of them one press away.",
+        label: [
+          "Every album in the carousel above is an artist, and every artist " +
+          "gets the same four pages: their songs, playable right here; a sheet " +
+          "about the songs; a card about them; and a wall of what they have " +
+          "been up to lately, in their own pictures.",
+          "The standard is not chart position and it is not how many people " +
+          "already know. It is that somebody here could not stop playing the " +
+          "record and thinks you should hear it. That is the whole test, and " +
+          "it is why this room can hold a man posting a song about this week, " +
+          "a songwriter you have already heard in an advert without learning " +
+          "his name, and our own house artist, without ranking them against " +
+          "each other.",
+          "We are not their label, their agent, or their critic. We are one " +
+          "more person in the room who thinks you should hear this. So every " +
+          "door leads out — their site, their store, their channel, their tour " +
+          "dates — and there is nothing here to sign up for and no account to " +
+          "make. The room happens to be ours. The night belongs to them.",
+          "What is written on these cards was read at its source. Every " +
+          "quotation was opened where it was said, and one that could not be " +
+          "checked is not on the wall; where an artist has no honest door to " +
+          "give, the card says so rather than sending you somewhere we have " +
+          "not read. The pictures are the artists' own public imagery, logged " +
+          "file by file with where it came from, and they come down the day " +
+          "any of them asks.",
+        ],
+        tombstone: [
+          { k: "In this room", v: "Four artists · eight songs, all playable" },
+          { k: "Every artist gets", v: "Their songs · a sheet · a card · a wall" },
+          { k: "The standard", v: "Someone here could not stop playing it" },
+          { k: "The doors", v: "All of them lead to the artist's own place" },
+          { k: "What we keep", v: "A page name and a timestamp. No accounts, no profiles." },
+          { k: "The pictures", v: "Their own, logged file by file, down on request" },
+          { k: "The quotes", v: "Read at the source, or not printed" },
+        ],
+        /* [M6 2026-08-03, REHOMED BY R5b] MIKE: the booth pointer was "too loud
+           and duplicative — one quiet inline link where it genuinely helps."
+           Loud: it was a P10 marquee door, a register built for doors OUT of
+           the building. Duplicative: the card it stood on was the house
+           explaining itself, and the door's scent said that again.
+           M6's own answer to "where does it genuinely help" was "the end of the
+           paragraph a stranger has just read about who runs this place". That
+           paragraph is on THIS card now (label ¶3 — what we are not, and what
+           we do not keep), so the link followed its reason here rather than
+           staying on a page that is now a poster. `quiet` is the flag; see the
+           note at the render. */
+        trail: [
+          { label: "the Information Booth", url: "/booth", quiet: true,
+            scent: "Who runs this place, and how to reach them:" },
+        ],
+        footer: "WORTH A LISTEN · WEIRD.BABY",
+        papa: "[PAPA] — the room's own words, every line of them.",
       },
     },
   ],

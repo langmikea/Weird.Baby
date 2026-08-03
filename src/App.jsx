@@ -9,6 +9,7 @@ import HrArchive  from "./routes/hr/HrArchive.jsx";
 import HrFanWall  from "./routes/hr/HrFanWall.jsx";
 import WbSpine    from "./routes/wb/WbSpine.jsx";
 import InfoBooth  from "./routes/InfoBooth.jsx";
+import Foundation from "./routes/Foundation.jsx";
 import GiftShop   from "./routes/shop/GiftShop.jsx";
 import Robots     from "./routes/robots/Robots.jsx";
 import Wal        from "./routes/wal/Wal.jsx";
@@ -65,6 +66,8 @@ export default function App() {
         <Route path="/hr/fan-wall" element={<HrFanWall />} />
         <Route path="/wb" element={<WbSpine />} />
         <Route path="/booth" element={<InfoBooth />} />
+        {/* [F3 2026-08-03] the Foundation — Mike's new directory section. */}
+        <Route path="/foundation" element={<Foundation />} />
         <Route path="/shop" element={<GiftShop />} />
         <Route path="/robots" element={<Robots />} />
         <Route path="/wal" element={<Wal />} />

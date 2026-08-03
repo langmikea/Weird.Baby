@@ -132,6 +132,22 @@ export default function WbHome() {
             <button className="wb-dir-entry" onClick={() => navigate("/booth")}>
               <span>Information Booth</span><span className="wb-dir-arrow">→</span>
             </button>
+            {/* [F3 2026-08-03] THE WEIRD.BABY FOUNDATION — Mike's new section.
+                WHY IT SITS HERE AND NOT WITH THE EXHIBITS. M8 fixed this board
+                by making the names say what kind of thing each entry is, and
+                the ORDER carry the same information: ours, ours, theirs, then
+                the desk, then the shop. The Foundation is not an exhibit —
+                there is nothing in it to look at that was collected — so it
+                cannot join the first three without breaking the reading M8
+                built. It belongs beside the Information Booth, because they are
+                the two rooms where the house explains itself: the booth answers
+                what this place IS, the Foundation answers what it is FOR and
+                where the money goes. Booth first, since a stranger asks what
+                before they ask why.
+                The shop keeps the end of the board, as M8 left it. */}
+            <button className="wb-dir-entry" onClick={() => navigate("/foundation")}>
+              <span>The Weird.Baby Foundation</span><span className="wb-dir-arrow">→</span>
+            </button>
             <button className="wb-dir-entry" onClick={() => navigate("/shop")}>
               <span>Gift Shop</span><span className="wb-dir-arrow">→</span>
             </button>
