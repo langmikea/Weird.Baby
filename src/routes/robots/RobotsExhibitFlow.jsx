@@ -142,6 +142,27 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
     return () => window.removeEventListener("wb-robots-open-twin", open);
   }, []);
 
+  /* [P23 2026-08-02] THE WING GETS DOORS, SO IT NEEDS A DOORMAN.
+     The plate wall (the album's own photographs, added this round) opens the
+     full-size image; the engine dispatches a name and knows nothing else,
+     exactly as it does for the twin above. The verb is this wing's own
+     (`linkEvent` in robots.js) rather than WAL's — a collage that fired
+     "wb-wal-open-link" here would have been a wall of dead pictures, which is
+     the W4a defect arriving in a new room.
+     A NEW TAB, with noopener: these are the museum's own plates on the
+     museum's own origin, and opening one should not throw away the exhibit
+     the visitor is standing in. */
+  useEffect(() => {
+    function open(e) {
+      const href = e && e.detail && e.detail.href;
+      if (!href) return;
+      try { window.open(href, "_blank", "noopener,noreferrer"); }
+      catch { window.location.assign(href); }
+    }
+    window.addEventListener("wb-robots-open-link", open);
+    return () => window.removeEventListener("wb-robots-open-link", open);
+  }, []);
+
   /* [R3, 2026-07-29] THE THIRD PALETTE IS GONE.
      These six values used to be written as var(--wb-x, #hardcoded), and the
      fallbacks were STALE: #b8974a / #101010 / #6a5520 are the pre-2026

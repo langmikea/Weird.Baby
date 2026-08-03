@@ -28,6 +28,77 @@ wing's technical voice; it is a colorful celebration. Set the stage, drop the
 house lights, cue the music, spotlight — the only place to look. Cecil B.
 energy. (The B&W site law does NOT apply to WAL — W8.)
 
+## THE GIFT SHOP BILLING LAW (Mike, 2026-08-02 — standing, recorded on his order)
+
+Governs who appears on `/shop` and in what order, on every exit and every
+arrival. Implemented in `src/routes/shop/GiftShop.jsx` (`billing()`), driven by
+`?from=<wing>` plus `&owner=<album-id>` where a wing's albums are artists.
+
+1. **The exhibit's OWNER gets top billing on exit.** For a one-artist wing that
+   is the wing (`/hr` → Hunter Root); for WAL it is the ARTIST whose album the
+   visitor left, which is why the exit now carries `owner=`.
+2. **Everyone else lists beneath by DATE STARTED WITH US, earliest first.**
+   The dates live on the artist data (`since:`) and are read off this
+   repository's own record — HR 2026-04-05 (first MV accession), W.B
+   2026-07-06 (the house exhibit opened), the WAL trio 2026-07-30 (the wing's
+   build). Ties break alphabetically.
+3. **WEIRD.BABY IS LISTED ONLY WHEN THE EXHIBIT WAS WEIRD.BABY'S OWN**
+   (`/wb`, `/robots`) — otherwise W.B does not appear at all. This is the
+   clause Mike reported broken ("WAL is putting W.B on the gift shop page").
+4. **Direct arrival at `/shop`** names no exhibit, so nobody takes top billing
+   and the house IS listed — the shop's own front door rather than someone's
+   exit. Ops reading, stated rather than decided silently; Mike may overrule.
+
+## SEALED 2026-08-02 — THE POLISH ROUND (v34; P1–P23. DEPLOY IS MIKE'S)
+
+Mike's glass session on v33, autonomous single-agent Code-lane round, 23 items.
+Full round log: `docs/MUSEUM_POLISH_LOG-20260802.md`. Collage wall protected and
+re-verified (11 tiles, tilt and shadow intact, captions up from 9px to 13px).
+
+- **P1 "nothing resizes" — TWO independent causes, both measured.** (a) F2's
+  console apron (`.ex-banner-console::before`, 16px at `bottom:100%`, z-index
+  80) sat exactly on the 14px carousel drag handle; `elementsFromPoint` returned
+  the banner first at every point of it. `pointer-events:none` — the apron was
+  always paint. (b) Even with the handle back, F3's `--fit-area-max` was written
+  once on entry and never revised, so the viewer was frozen. The carousel drag
+  now TRADES height with the viewer (proven: cf 160→270, area 470→360, total 630
+  preserved, session-persisted).
+- **P2 scroller 105px → 48px** (content-sized, 2-line cap kept); **P3 title bar
+  50px → 40px**; **P4 no scroller under a stowed face** (scoped to the state,
+  not to the one card Mike named).
+- **P5 [PAPA] scrubbed at the render seam, site-wide** (`scrubFace` in
+  Exhibit.jsx). Cuts by SENTENCE so real provenance survives beside the marker.
+  Data keeps its markers — they are Mike's to-do list; visitors never see one.
+  Verified zero occurrences across all five WAL albums, /hr, /wb, /robots,
+  /booth.
+- **P6 arrow removed** (the door now states its function in words). **P7 one
+  type ramp**: seventeen ad-hoc ratios of `--face-fs` replaced by five named
+  steps with rem floors — the small end stopped shrinking with the viewport
+  (was 8.3px at a 900px window). **P8 pull-quote leaves DM Serif Display** for
+  the house Syne, sized as a LEAD so it no longer outsizes the title.
+  **P9 warm charcoal stage** + a lit ellipse (was neutral #121110 under warm
+  paper tiles). **P10 doors 2×2**, explicitly two, stacking below 820px.
+- **P14** the two house questions left the artist cards (FAQ owns them).
+  **P15** doors are Name + FUNCTION + a written scent. **P16/P22** the plain
+  discographies died; a RECORDS block of doors replaced them, every link read
+  off the platform's own catalogue page this round. **P17/P18/P19** three card
+  decks (Said about them / What they said / Also) — post-it museum cards, video
+  posters where the source is an upload, every card a link to its source.
+  **P20** the tombstone gained doors. **P21** the Bandcamp line rewritten plain.
+- **P23 robots**: THE PLATES — the wing's nine real photographs, glued up on the
+  WAL collage renderer. Needed the link seam generalising (`artist.linkEvent`)
+  or the tiles would have been beautifully dead — W4a's defect pre-built into
+  the next wing. Register hanging-indent fixed; two `[PAPA]`-as-heading rows
+  given real headings with the marker demoted to the note.
+- **Found and fixed in the lap**: the door name "carsieblanton.com" is one
+  unbreakable 367px token — 404px demanded inside a 391px phone. `overflow-wrap:
+  anywhere`; worst min-content block on the page is now 184px.
+- Gates: lint 11/10 (= HEAD baseline, zero new), vite build green, all five WAL
+  albums × every face walked, /hr /wb /robots /shop /booth verified unregressed,
+  billing law verified on all seven exit cases. **Phone verified by measurement,
+  NOT by a narrow viewport** — the browser refused to resize (outerWidth 0), so
+  the min-content probe stands in for a visual narrow-width walk. Flagged.
+
 ## SEALED 2026-08-02 — MUSEUM FIT ROUND (v33; DEPLOY IS MIKE'S — mirror/deploy pending)
 
 Mike's refinement round on the spotlight wing, F1–F7. Round log:

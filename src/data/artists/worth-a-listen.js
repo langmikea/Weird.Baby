@@ -84,6 +84,15 @@ import { worthAListenFacts } from "./worth-a-listen-facts.js";
 const ARTISTS = [
   {
     id: "carsie-blanton",
+    /* [P11 2026-08-02] DATE STARTED WITH US — the gift shop's billing order.
+       Mike's GIFT SHOP BILLING LAW orders everyone below top billing by when
+       they joined us, earliest first, so every artist needs the date. These
+       are read off THIS REPOSITORY'S OWN RECORD rather than invented: Carsie,
+       Jesse and Mikey all arrived the day the wing was built (the W5 ruling
+       stamp above, and the wing's first commit); Hunter Root predates the
+       wing by months. Ties break alphabetically, which is the wing's own
+       standing law from v29. */
+    since: "2026-07-30",
     tag: "carsie_blanton",
     name: "Carsie Blanton",
     tags: ["wal", "carsie-blanton"],
@@ -131,25 +140,52 @@ const ARTISTS = [
     ],
     site: "https://www.carsieblanton.com",
     siteLabel: "carsieblanton.com",
-    siteScent: "Her own place. Everything that matters about her lives there.",
-    shop: { label: "Her own shop", url: "https://www.carsieblanton.com/shop/" },
+    siteFn: "Homepage",
+    siteScent: "Her own place — the shows list, the shop and the blog she has " +
+               "been writing since long before the records got political.",
+    shop: { label: "Her own shop", url: "https://www.carsieblanton.com/shop/",
+      fn: "Shop and tours",
+      scent: "Records and merch sold by her, with the tour dates one page over." },
     /* [L1] the verified channel (oEmbed author_url of her own BE GOOD lyric
        video) rather than the search-found playlist. */
     channel: "https://www.youtube.com/@CarsieBlanton",
+    channelLabel: "@CarsieBlanton",
+    channelScent: "Her uploads, first — and the wall of pictures in this room " +
+                  "is glued up from them.",
     /* MIKE'S RULING, KEPT: her Bandcamp streams the catalogue free and
        without advertising and pays her directly, so it stays the NAMED better
-       listen rather than being buried under a video. */
-    listen: { label: "Bandcamp — free, no ads", url: "https://carsieblanton.bandcamp.com" },
+       listen rather than being buried under a video.
+       [P21] THE WORDING IS NEW. It read "without paying an advertiser for the
+       privilege" — Mike: too brash. Same fact, plainly. */
+    listen: { label: "Bandcamp", url: "https://carsieblanton.bandcamp.com",
+      fn: "Music library",
+      scent: "Sixteen releases, free to play, pay what you want — and the " +
+             "money goes straight to her." },
+    /* verified from her own site's nav, 2026-08-02 */
+    tickets: { label: "Her shows list", url: "https://www.carsieblanton.com/shows/" },
     marker: "She writes protest songs you can dance to, and she means every word of the protest.",
     card: {
+      /* [P20 2026-08-02] LINKS ON THE BACK OF THE BASEBALL CARD. Mike loves
+         this block and asked for doors wherever possible. Every `url` below
+         was read directly this round: her Bandcamp catalogue page for the
+         records, the album's own page for the latest, her own upload of the
+         acceptance speech for the honour, Wikipedia for the birth facts.
+         "Working since" carries no door on purpose — Ain't So Green is not on
+         her Bandcamp, and there is no honest place to send someone. */
       tombstone: [
-        { k: "Born", v: "22 July 1985, Luray, Virginia" },
+        { k: "Born", v: "22 July 1985, Luray, Virginia",
+          url: "https://en.wikipedia.org/wiki/Carsie_Blanton", src: "Wikipedia" },
         { k: "Based", v: "The Philadelphia area, since 2020" },
         { k: "Before that", v: "Eugene · Philadelphia · New Orleans" },
         { k: "Working since", v: "Ain't So Green, 2005" },
-        { k: "Records", v: "Twelve, every one of them independent" },
-        { k: "Latest", v: "Everything is Great, 2026, with The Burning Hell" },
-        { k: "Honour", v: "Folk Alliance International Artist of the Year, 2026" },
+        { k: "Records", v: "Twelve, every one of them independent",
+          url: "https://carsieblanton.bandcamp.com/music", src: "her own Bandcamp" },
+        { k: "Latest", v: "Everything is Great, 2026, with The Burning Hell",
+          url: "https://carsieblanton.bandcamp.com/album/everything-is-great",
+          src: "her own Bandcamp" },
+        { k: "Honour", v: "Folk Alliance International Artist of the Year, 2026",
+          url: "https://www.youtube.com/watch?v=NFTza3tVsQ8",
+          src: "her own upload of the acceptance speech" },
       ],
       label: [
         "She was unschooled on a former cattle farm in Virginia, started " +
@@ -167,19 +203,9 @@ const ARTISTS = [
         "in. Everything she has made is released independently and priced " +
         "pay-what-you-want.",
       ],
+      /* [P22] the twelve-line discography is GONE. What is left is the one
+         sidebox that was never a list of records — the band. */
       sideboxes: [
-        { title: "The records, in order",
-          lines: ["2005  Ain't So Green", "2009  Buoy", "2010  Beau",
-                  "2012  Idiot Heart", "2014  Not Old, Not New",
-                  "2016  So Ferocious", "2019  Buck Up", "2021  Love & Rage",
-                  "2022  Body of Work", "2024  After the Revolution",
-                  "2024  The Red Album", "2026  Everything is Great"],
-          note: "Body of Work came out one song a month across 2022 and 2023." },
-        { title: "Said about her",
-          lines: ["“one of those hard-headed open-hearted protestors”",
-                  "— NPR's Fresh Air, on Love & Rage",
-                  "“delightfully surprising”",
-                  "— Ken Tucker, NPR, on Buck Up"] },
         { title: "On stage",
           lines: ["Usually a trio, sometimes called the Handsome Band",
                   "Joe Plowman, bass · Patrick Firth, keyboards",
@@ -188,6 +214,84 @@ const ARTISTS = [
                   "Opened on Paul Simon's 2011 tour"] },
       ],
     },
+    /* [P16] THE RECORDS THIS ROOM POINTS AT — every slug read off her own
+       Bandcamp catalogue page, 2026-08-02. The other thirteen releases are
+       behind the music-library door; a museum names the objects it is
+       showing, not everything in the store. */
+    records: {
+      title: "The records, and where to get them",
+      items: [
+        { year: "2021", title: "Love & Rage", why: "“Shit List” is its second single.",
+          links: [{ name: "Bandcamp", mark: "BC",
+                    url: "https://carsieblanton.bandcamp.com/album/love-rage-2021" }] },
+        { year: "2020", title: "Be Good", why: "The single the lyric video in this room belongs to.",
+          links: [{ name: "Bandcamp", mark: "BC",
+                    url: "https://carsieblanton.bandcamp.com/track/be-good-digital-single" }] },
+        { year: "2026", title: "Everything is Great", why: "The latest, made with The Burning Hell.",
+          links: [{ name: "Bandcamp", mark: "BC",
+                    url: "https://carsieblanton.bandcamp.com/album/everything-is-great" }] },
+        { year: "2024", title: "After the Revolution",
+          links: [{ name: "Bandcamp", mark: "BC",
+                    url: "https://carsieblanton.bandcamp.com/album/after-the-revolution" }] },
+      ],
+      note: "Sixteen releases sit on her own Bandcamp. Body of Work came out " +
+            "one song a month across 2022 and 2023.",
+    },
+    /* [P17/P18/P19] THE THREE DECKS. Every URL below was opened and read this
+       round; nothing is quoted that was not seen at its own source. */
+    decks: [
+      { title: "Said about her", kind: "quote", cards: [
+        { text: "one of those hard-headed, open-hearted protesters",
+          who: "Ken Tucker", where: "NPR, Fresh Air", when: "April 2021",
+          eyebrow: "on Love & Rage",
+          url: "https://www.npr.org/2021/04/26/990845574/carsie-blantons-open-hearted-protest-album-is-equal-parts-love-rage" },
+        { text: "delightfully surprising",
+          who: "Ken Tucker", where: "NPR, Fresh Air", when: "March 2019",
+          eyebrow: "on Buck Up",
+          url: "https://www.npr.org/2019/03/21/705424265/carsie-blanton-is-delightfully-surprising-on-buck-up" },
+        { text: "an open-hearted protest album",
+          who: "Shore Fire Media", where: "the release note itself", when: "2021",
+          eyebrow: "on Love & Rage",
+          url: "https://shorefire.com/releases/entry/carsie-blanton-love-and-rage-out-now" },
+      ] },
+      { title: "What Carsie said", kind: "quote", cards: [
+        { text: "hooks, chutzpah, and revolutionary optimism",
+          who: "Carsie Blanton", where: "her own site", when: "read 2026",
+          eyebrow: "on what the work is",
+          url: "https://www.carsieblanton.com/" },
+        { text: "Perhaps happiness cannot be achieved just by building a " +
+                "perfect domestic life",
+          who: "Carsie Blanton", where: "her blog", when: "“Vertigo, Bacchanalia…”",
+          eyebrow: "on happiness",
+          url: "https://carsieblanton.tumblr.com/post/159910295894/vertigo-bacchanalia-and-the-art-of-the" },
+        { watch: "NFTza3tVsQ8",
+          text: "Her Artist of the Year speech, in her own voice.",
+          who: "Carsie Blanton", where: "her own channel", when: "January 2026",
+          eyebrow: "Folk Alliance International",
+          url: "https://www.youtube.com/watch?v=NFTza3tVsQ8" },
+      ] },
+      { title: "Also", kind: "note", cards: [
+        { title: "Patreon",
+          text: "She has run one since 2013 — songs, videos, records and " +
+                "mischief, paid for directly by the people who want them.",
+          who: "patreon.com/carsieblanton", where: "her own page",
+          eyebrow: "Since 2013",
+          url: "https://www.patreon.com/carsieblanton" },
+        { title: "The blog",
+          text: "Essays on panic, on moralism, on what a good life is " +
+                "actually made of. She was writing them before the records " +
+                "turned political.",
+          who: "carsieblanton.com/blog", where: "her own writing",
+          eyebrow: "Prose",
+          url: "https://www.carsieblanton.com/blog/" },
+        { title: "Rent parties",
+          text: "Through 2020 and 2021 she threw a monthly online rent party " +
+                "to keep herself and her band paid.",
+          who: "Wikipedia", where: "read 2026",
+          eyebrow: "2020–2021",
+          url: "https://en.wikipedia.org/wiki/Carsie_Blanton" },
+      ] },
+    ],
     aboutNote: "Sources: her own site and press page, read directly; Wikipedia for the biography; Shore Fire Media for “Shit List”; Folk Alliance International for the 2026 award; her own upload feed for everything dated 2026. Her politics are quoted from her songs and her own framing, not characterised for her.",
     /* her own recent uploads, read 2026-08-02 from her own channel feed */
     feed: [
@@ -214,6 +318,10 @@ const ARTISTS = [
        needed no open-web guessing at all. His LINK door goes where every
        other artist's does — his own site. */
     id: "hunter-root",
+    /* [P11] the founding artist — the day his material entered MediaVault
+       (accession MV-HR-20260405-001 and its siblings). Nobody here is older,
+       so he heads the list whenever he is not top billing himself. */
+    since: "2026-04-05",
     tag: "hunter_root",
     name: "Hunter Root",
     tags: ["wal", "hunter-root", "house"],
@@ -265,7 +373,17 @@ const ARTISTS = [
        two rows to one place. */
     site: "https://www.hunterroot.com/",
     siteLabel: "hunterroot.com",
-    siteScent: "His own place. Merch, tour, tunes, bio.",
+    siteFn: "Homepage and shop",
+    siteScent: "His own place, and the store is the front page of it — " +
+               "Crooked Home on vinyl, Arkansas, the Chase The Dragon 7-inch.",
+    /* [P16 2026-08-02] AND HE HAS A BANDCAMP TOO, which the wing had never
+       named: his own site's "Tunes" tab points straight at it. Read directly,
+       2026-08-02. */
+    listen: { label: "Bandcamp", url: "https://hunterrootmusic.bandcamp.com",
+      fn: "Music library",
+      scent: "Where his own site sends you to listen — the records and the " +
+             "singles, free to play." },
+    tickets: { label: "His tour page", url: "https://www.hunterroot.com/hunterroottour" },
     shop: null,
     marker: "Half of Crooked Home is about his brother Nick. He says ’94 is the heart of it all.",
     card: {
@@ -273,8 +391,10 @@ const ARTISTS = [
         { k: "Catalogue", v: "78 songs on file in the museum's own vault" },
         { k: "Albums", v: "Nine" },
         { k: "Surfaced here", v: "Two" },
-        { k: "His own site", v: "hunterroot.com — Merch, Tour, Tunes, Bio, Contact" },
-        { k: "On record", v: "Crooked Home, Arkansas, Chase The Dragon" },
+        { k: "His own site", v: "hunterroot.com — Merch, Tour, Tunes, Bio, Contact",
+          url: "https://www.hunterroot.com/", src: "his own site" },
+        { k: "On record", v: "Crooked Home, Arkansas, Chase The Dragon",
+          url: "https://hunterrootmusic.bandcamp.com/music", src: "his own Bandcamp" },
       ],
       label: [
         "He is the house artist, and the reason this building works: his " +
@@ -285,6 +405,11 @@ const ARTISTS = [
         "is the point. The difference is that his card can draw on a hundred " +
         "and nineteen facts from our own vault rather than from the open web.",
       ],
+      /* [P22] the merch list stays — it is a store inventory, not a
+         discography, and it is the one place a visitor learns the records
+         exist as OBJECTS. The "lately, in his own words" list graduated into
+         the decks below, where each line is a card with the upload behind
+         it. */
       sideboxes: [
         { title: "In his own store",
           lines: ["Crooked Home — vinyl, special vinyl, CD, bundle",
@@ -293,13 +418,79 @@ const ARTISTS = [
                   "Back in 94' — tee",
                   "Hat"],
           note: "Read off his own store, 2026." },
-        { title: "Lately, in his own words",
-          lines: ["“C❄caine C❄caine” — out 19 June 2026",
-                  "“I Tried” — recorded live in studio, out 7 August 2026",
-                  "A song off a Mark Twain line, July 2026",
-                  "On tour through July 2026"] },
       ],
     },
+    /* [P16] slugs read off his own Bandcamp catalogue page, 2026-08-02; years
+       from the museum's own era buckets (src/data/era-buckets.json). */
+    records: {
+      title: "The records, and where to get them",
+      items: [
+        { year: "2024", title: "Crooked Home", why: "“’94” is the heart of it, in his own words.",
+          links: [{ name: "Bandcamp", mark: "BC",
+                    url: "https://hunterrootmusic.bandcamp.com/album/crooked-home" },
+                  { name: "His own store", mark: "ST",
+                    url: "https://www.hunterroot.com/" }] },
+        { year: "2021", title: "Skipping Stones That Sink Before They're Thrown",
+          why: "“Nothin' Wrong” is from this one.",
+          links: [{ name: "Bandcamp", mark: "BC",
+                    url: "https://hunterrootmusic.bandcamp.com/album/skipping-stones-that-sink-before-theyre-thrown" }] },
+        { year: "2022", title: "Arkansas",
+          links: [{ name: "Bandcamp", mark: "BC",
+                    url: "https://hunterrootmusic.bandcamp.com/album/arkansas" },
+                  { name: "His own store", mark: "ST",
+                    url: "https://www.hunterroot.com/" }] },
+        { year: "—", title: "Chase The Dragon", why: "A 7-inch, and a single.",
+          links: [{ name: "Bandcamp", mark: "BC",
+                    url: "https://hunterrootmusic.bandcamp.com/track/chase-the-dragon" },
+                  { name: "His own store", mark: "ST",
+                    url: "https://www.hunterroot.com/" }] },
+      ],
+      note: "Sixteen releases sit on his own Bandcamp; nine albums are on file " +
+            "in this museum's vault.",
+    },
+    decks: [
+      { title: "Said about him", kind: "quote", cards: [
+        /* from the museum's OWN vault (MV-HR-20260707-016). No URL: the
+           source is a 2014 print-era piece we hold rather than a live page,
+           and inventing a link to stand in for it would be worse than
+           saying where it actually came from. */
+        { text: "Hunter's vocals channel a pre-needle Cobain with Morrison " +
+                "appreciation.",
+          who: "Harrison Giza", where: "Blue Harvest Beat", when: "2014",
+          eyebrow: "From the museum's own vault" },
+      ] },
+      { title: "What Hunter said", kind: "quote", cards: [
+        { text: "almost the album title. It's the heart of it all.",
+          who: "Hunter Root", where: "the museum's own vault", when: "on “’94”",
+          eyebrow: "On the song this room opens with" },
+        { watch: "yez2aoLYVnw",
+          text: "“I Tried”, recorded live in the studio — guitar and vocals, " +
+                "nothing else, three weeks before the release.",
+          who: "Hunter Root", where: "his own channel", when: "July 2026",
+          eyebrow: "Live in studio",
+          url: "https://www.youtube.com/watch?v=yez2aoLYVnw" },
+        { watch: "zwXHQMsmzQU",
+          text: "A song built off a Mark Twain line — the more he learns " +
+                "about people.",
+          who: "Hunter Root", where: "his own channel", when: "July 2026",
+          eyebrow: "Off a Mark Twain line",
+          url: "https://www.youtube.com/watch?v=zwXHQMsmzQU" },
+      ] },
+      { title: "Also", kind: "note", cards: [
+        { title: "He is the reason the machinery works",
+          text: "This building's coverflow, tracklist grammar, player frame " +
+                "and fact vault were all taught by his catalogue first. Every " +
+                "other wing inherited them.",
+          who: "The museum's own record", where: "read 2026",
+          eyebrow: "The house artist" },
+        { title: "On the road",
+          text: "He was out through July 2026 and said so himself, on his " +
+                "own channel, the week it started.",
+          who: "hunterroot.com/tour", where: "his own tour page",
+          eyebrow: "2026",
+          url: "https://www.hunterroot.com/hunterroottour" },
+      ] },
+    ],
     aboutNote: "Sourced from the museum's own foundation export and his own words in it - he is our artist and this is our record of him. The store and the recent uploads were read directly off his own site and his own channel feed, 2026-08-02.",
     feed: [
       { d: "2026-07-29", t: "Lonesome had an only child", v: "8,385", id: "8J-cunYqb7w" },
@@ -314,6 +505,7 @@ const ARTISTS = [
   },
   {
     id: "jesse-welles",
+    since: "2026-07-30",
     tag: "jesse_welles",
     name: "Jesse Welles",
     tags: ["wal", "jesse-welles"],
@@ -370,8 +562,20 @@ const ARTISTS = [
        does not "fix" this link to a worse one. */
     site: "https://www.wellesmusic.com",
     siteLabel: "wellesmusic.com",
-    siteScent: "His own place. Tour, contact, the lot.",
-    shop: { label: "The store", url: "https://jessewelles.redstarmerch.com/" },
+    siteFn: "Homepage",
+    siteScent: "His own place, and a short one — the tour list, an email " +
+               "address, and nothing standing between you and either.",
+    shop: { label: "Red Star Merch", url: "https://jessewelles.redstarmerch.com/",
+      fn: "Shop",
+      scent: "The store his own site sends you to." },
+    /* [P16 2026-08-02] HE HAS A BANDCAMP, AND NOBODY HAD LOOKED. Read
+       directly this round: jessewelles.bandcamp.com carries seven records
+       under his own name. It is now the wing's music-library door for him,
+       the same as Carsie's. */
+    listen: { label: "Bandcamp", url: "https://jessewelles.bandcamp.com",
+      fn: "Music library",
+      scent: "Seven records, free to play. Through 2025 he sent the download " +
+             "profits to No Kid Hungry and the Arkansas Food Bank." },
     tickets: { label: "Tour & tickets", url: "https://www.wellesmusic.com/tour" },
     /* [L1 2026-08-02] CORRECTED, THEN CLOSED. This carried a /channel/UCmb7...
        URL taken from a SEARCH RESULT, and the handle @hellswelles replaced it
@@ -380,13 +584,25 @@ const ARTISTS = [
        externalId UCmb7zAvq9IxHi_UnP93AVSQ — the very id that was held as
        UNVERIFIED. The ledger row moves UNVERIFIED -> OFFICIAL. */
     channel: "https://www.youtube.com/@hellswelles",
+    channelLabel: "@hellswelles",
+    channelScent: "Where a song about this week goes up, most weeks — usually " +
+                  "a man, a guitar and a field.",
     marker: "He writes the news. A man with a guitar in a field, posting songs about this week, most weeks.",
     card: {
+      /* [P20] doors on the register: the biography facts point at the article
+         that carries them; the records point at his own Bandcamp. The label,
+         the award and the nominations carry no door — no page for any of them
+         was opened and read this round, and a link nobody checked is a worse
+         citation than none. */
       tombstone: [
-        { k: "Full name", v: "Jesse Allen Breckenridge Wells" },
-        { k: "Born", v: "22 November 1992, Ozark, Arkansas" },
+        { k: "Full name", v: "Jesse Allen Breckenridge Wells",
+          url: "https://en.wikipedia.org/wiki/Jesse_Welles", src: "Wikipedia" },
+        { k: "Born", v: "22 November 1992, Ozark, Arkansas",
+          url: "https://en.wikipedia.org/wiki/Jesse_Welles", src: "Wikipedia" },
         { k: "Also known as", v: "Welles · Jeh Sea Wells · Breck Shipley" },
         { k: "Label", v: "300 Entertainment" },
+        { k: "Records", v: "Seven, on his own Bandcamp",
+          url: "https://jessewelles.bandcamp.com/music", src: "his own Bandcamp" },
         { k: "Bands", v: "Dead Indian, 2012 · Cosmic-American, 2015" },
         { k: "Honour", v: "Spirit of Americana / Free Speech Award, 2025" },
         { k: "Grammys", v: "Four nominations at the 68th, 2026" },
@@ -406,14 +622,11 @@ const ARTISTS = [
         "Whitman, Melville, Cormac McCarthy and Mark Twain. It is Jesse " +
         "Welles, not Jess.",
       ],
+      /* [P22] the year-by-year album list is gone; it is now the records
+         block below, where each entry is a door. The two sideboxes that
+         remain are not discographies — one is chart history, the other is a
+         warning. */
       sideboxes: [
-        { title: "Four albums in one year",
-          lines: ["2024  Hells Welles · Patchwork",
-                  "2025  Middle · Pilgrim · Devil's Den · With the Devil",
-                  "2026  Masks Off",
-                  "and the Under the Powerlines records, dated by the",
-                  "months they cover"],
-          note: "Eight more exist as Jeh Sea Wells, between 2012 and 2018." },
         { title: "On the charts",
           lines: ["“Horses” — US AAA no. 2, 2025",
                   "“Wheel” — US AAA no. 7, 2025",
@@ -423,6 +636,72 @@ const ARTISTS = [
           note: "Both rank high. Both are ticket-resale and SEO pages. Named here so nobody 'fixes' his link to a worse one." },
       ],
     },
+    /* [P16] slugs read off his own Bandcamp catalogue page, 2026-08-02. */
+    records: {
+      title: "The records, and where to get them",
+      items: [
+        { year: "2024", title: "Hells Welles", why: "The first under his own name after the turn.",
+          links: [{ name: "Bandcamp", mark: "BC",
+                    url: "https://jessewelles.bandcamp.com/album/hells-welles" }] },
+        { year: "2024", title: "Patchwork",
+          links: [{ name: "Bandcamp", mark: "BC",
+                    url: "https://jessewelles.bandcamp.com/album/patchwork" }] },
+        { year: "2025", title: "Middle", why: "The one where he mostly stops writing the news.",
+          links: [{ name: "Bandcamp", mark: "BC",
+                    url: "https://jessewelles.bandcamp.com/album/middle" }] },
+        { year: "2025", title: "Pilgrim",
+          links: [{ name: "Bandcamp", mark: "BC",
+                    url: "https://jessewelles.bandcamp.com/album/pilgrim" }] },
+        { year: "2025", title: "Devil's Den",
+          links: [{ name: "Bandcamp", mark: "BC",
+                    url: "https://jessewelles.bandcamp.com/album/devils-den" }] },
+      ],
+      note: "Seven sit on his own Bandcamp. Eight more exist as Jeh Sea Wells, " +
+            "between 2012 and 2018, and the Under the Powerlines records are " +
+            "dated by the months they cover.",
+    },
+    decks: [
+      { title: "Said about him", kind: "quote", cards: [
+        { text: "Sings out for truth and justice",
+          who: "PopMatters", where: "on the 2025 shows", when: "2025",
+          eyebrow: "Live",
+          url: "https://www.popmatters.com/jesse-welles-concert-2025" },
+        { text: "Mostly shuns topical songs for the abstract",
+          who: "Glide Magazine", where: "album review", when: "2025",
+          eyebrow: "on Middle",
+          url: "https://glidemagazine.com/310137/rising-folk-artist-jesse-welles-mostly-shuns-topical-songs-for-the-abstract-on-middle-album-review/" },
+      ] },
+      { title: "What Jesse said", kind: "quote", cards: [
+        { text: "through the end of this year (2025) all profits from " +
+                "downloads on bandcamp will be donated to No Kid Hungry and " +
+                "Arkansas Food Bank",
+          who: "Jesse Welles", where: "his own Bandcamp", when: "read 2026",
+          eyebrow: "Where the money went",
+          url: "https://jessewelles.bandcamp.com" },
+        { watch: "s9FBnLxcqqw",
+          text: "There's A Hole — written about that week, posted that week, " +
+                "two hundred thousand views in nine days.",
+          who: "Jesse Welles", where: "his own channel", when: "July 2026",
+          eyebrow: "The habit, in one upload",
+          url: "https://www.youtube.com/watch?v=s9FBnLxcqqw" },
+      ] },
+      { title: "Also", kind: "note", cards: [
+        { title: "He gave the downloads away",
+          text: "For a whole year the profit from every Bandcamp download " +
+                "went to two food charities instead of to him. It is on his " +
+                "own store page, in his own lower case.",
+          who: "jessewelles.bandcamp.com", where: "read 2026",
+          eyebrow: "2025",
+          url: "https://jessewelles.bandcamp.com" },
+        { title: "A whole earlier catalogue",
+          text: "Eight records exist as Jeh Sea Wells between 2012 and 2018, " +
+                "plus two bands — Dead Indian and Cosmic-American — before " +
+                "anyone was calling him a folk singer.",
+          who: "Wikipedia", where: "read 2026",
+          eyebrow: "2012–2018",
+          url: "https://en.wikipedia.org/wiki/Jesse_Welles" },
+      ] },
+    ],
     aboutNote: "Sources: wellesmusic.com read directly; Wikipedia for the biography, discography, charts and awards; Rolling Stone and Vulture for the reception; Farm Aid coverage for the Dave Matthews introduction; his own upload feed for everything dated 2026.",
     feed: [
       { d: "2026-07-28", t: "Whistle Boeing / Come As You Are", v: "28,367", id: "S2hTmmwELGA" },
@@ -440,6 +719,7 @@ const ARTISTS = [
   },
   {
     id: "mikey-mike",
+    since: "2026-07-30",
     tag: "mikey_mike",
     name: "Mikey Mike",
     tags: ["wal", "mikey-mike"],
@@ -497,8 +777,11 @@ const ARTISTS = [
        @findmikeymike. That is the channel verified BY THE UPLOAD rather than
        by a search ranking. */
     site: "https://www.youtube.com/@findmikeymike",
-    siteLabel: "his channel",
-    siteScent: "The only surface confirmed to be his. Verified from the upload itself.",
+    siteLabel: "@findmikeymike",
+    siteFn: "Video channel",
+    siteScent: "The only surface confirmed to be his — verified from the " +
+               "upload itself, not from a search ranking. Everything he puts " +
+               "out lands here first.",
     /* ***** [R-a 2026-08-02] THE LEAD WAS RIGHT AND THE LINK IS STILL REFUSED.
        findmikeymike.com resolves, and it IS his (98 mentions of his name, his
        Spotify, his socials, a MERCH and TOUR nav).
@@ -538,23 +821,10 @@ const ARTISTS = [
         "to be a part of it.” He is not a large artist by the numbers, and " +
         "that is not the standard this room uses.",
       ],
+      /* [P22] the ten-line release list is gone with the other
+         discographies. What remains are the two boxes that were never
+         catalogues — a person, and a week on the road. */
       sideboxes: [
-        { title: "The record so far",
-          lines: ["2014  a track on an Ibiza club compilation",
-                  "2017  Doin' Me · Mikey Likes It · Going Charlie",
-                  "2018  Life On Earth EP",
-                  "2019  Life on Earth Vol. 1 · Amazon Prime",
-                  "2020  Little Lisa",
-                  "2022  Life on Earth Vol. 2",
-                  "2023  What Makes You Happy? (feat. Little Lisa)",
-                  "2024  four singles",
-                  "2025  Genesis · MDFLAC",
-                  "2026  We Might Kill Each Other"] },
-        { title: "Little Lisa",
-          lines: ["His elderly Vietnamese neighbour.",
-                  "He calls her his adopted grandmother.",
-                  "She has a song named after her, in 2020 —",
-                  "and a feature credit on one in 2023."] },
         { title: "September 2019",
           lines: ["Germany, then Sweden, then London",
                   "The Waiting Room, on the 20th",
@@ -562,6 +832,71 @@ const ARTISTS = [
                   "He played “Amazon Prime” before it was released"] },
       ],
     },
+    /* [P16] THE ONE ARTIST WITH NO DOOR TO GIVE, AND THE BLOCK SAYS SO.
+       Checked this round and all three came back empty-handed:
+         · mikeymike.bandcamp.com — 404, no such page;
+         · findmikeymike.com — his, and serving injected spam (see the ledger
+           above), so it stays unlinked for the reason recorded there;
+         · no store of any kind is named on any surface confirmed to be his.
+       So he gets a records block with a note and no doors, rather than
+       inventing a streaming link nobody verified. An empty shelf with a
+       label on it is the honest object; a shelf that is simply absent reads
+       as an oversight. */
+    records: {
+      title: "The records",
+      note: "No catalogue page and no store could be verified as his this " +
+            "round — his Bandcamp does not exist, and the domain he does own " +
+            "is currently serving injected spam, so this museum will not send " +
+            "you there. His own channel is the one surface confirmed to be " +
+            "his, and it is the door at the foot of this card.",
+    },
+    decks: [
+      { title: "Said about him", kind: "quote", cards: [
+        { text: "pleasingly minimal",
+          who: "Faded Glamour", where: "on Rick Rubin's production", when: "June 2017",
+          eyebrow: "on “Doin' Me”",
+          url: "https://www.fadedglamour.co.uk/2017/06/listen-mikey-mike-doin-me-canon-advert-song.html" },
+        { text: "relatively unknown",
+          who: "Faded Glamour", where: "while signed to Universal", when: "June 2017",
+          eyebrow: "on the years before the advert",
+          url: "https://www.fadedglamour.co.uk/2017/06/listen-mikey-mike-doin-me-canon-advert-song.html" },
+      ] },
+      { title: "What Mikey said", kind: "quote", cards: [
+        /* no live page: the source is a 2020 Titusville interview held in
+           print. Attributed, unlinked, and honest about which. */
+        { text: "I knew I had to be a part of it.",
+          who: "Mikey Mike", where: "a 2020 interview", when: "on watching his uncles play",
+          eyebrow: "On starting" },
+        { watch: "WsXUv-ri9fk",
+          text: "Something Rick Rubin told him that he says he will never " +
+                "forget — told in his own voice, on his own channel.",
+          who: "Mikey Mike", where: "his own channel", when: "May 2025",
+          eyebrow: "On Rick Rubin",
+          url: "https://www.youtube.com/watch?v=WsXUv-ri9fk" },
+      ] },
+      { title: "Also", kind: "note", cards: [
+        { title: "Little Lisa",
+          text: "His elderly Vietnamese neighbour, whom he calls his adopted " +
+                "grandmother. She has a song named after her from 2020, and a " +
+                "feature credit on one from 2023.",
+          who: "Apple Music and Deezer", where: "read 2026",
+          eyebrow: "A neighbour, twice on the record" },
+        { title: "Life on Earth",
+          text: "He has said the whole catalogue is ONE album, released in " +
+                "volumes across his life and finished only when he is. Two " +
+                "volumes exist so far.",
+          who: "Indie Pulse Music", where: "2018",
+          eyebrow: "One record, released slowly",
+          url: "https://indiepulsemusic.com/2018/11/04/mikey-mike-life-on-earth/" },
+        { title: "He co-produced on Unapologetic",
+          text: "Rihanna's 2012 album — the one that also carried David " +
+                "Guetta and Stargate. He was at Universal's publishing arm " +
+                "for years around it.",
+          who: "Faded Glamour", where: "June 2017",
+          eyebrow: "Before anybody knew the name",
+          url: "https://www.fadedglamour.co.uk/2017/06/listen-mikey-mike-doin-me-canon-advert-song.html" },
+      ] },
+    ],
     aboutNote: "Sources: Faded Glamour's 2017 piece on “Doin' Me” (the Canon sync, the Rick Rubin involvement, the Rihanna and Universal credits); Apple Music and Deezer for the discography and the Salisbury origin; a 2020 Titusville interview for the 2019 European run. His own domain is deliberately not linked — see the ledger.",
     feed: [
       { d: "2026-06-09", t: "We Might Kill Each Other (official video)", v: "1,155", id: "mt1ko1y0AhU" },
@@ -600,16 +935,40 @@ function songTrack(a, s) {
    appears only where the thing exists, which has always been the template's
    law. The tour door stays on "What they are up to" — where they are playing
    is that face's half of the story. */
+/* [P15 2026-08-02] THE DOORS SAY WHAT THEY ARE, AND THEY SAY IT TWICE.
+   MIKE: "the redundancy sells the point — the four doors read well as
+   Name+function pairs (Homepage / Shop and Tours / Music Library / Video
+   Channel). Keep the pattern, fill the descriptors properly."
+   So every door now carries three things and each does a different job:
+     `label` — WHOSE it is. The name a visitor would recognise or type.
+     `fn`    — WHAT it is. The four functions above, in the museum's own
+               words, so four doors to four different kinds of place never
+               read as four ways of saying "link".
+     `scent` — WHY it is worth the click, written for THIS artist rather than
+               stamped from a template. The generic lines ("Their own store.")
+               were the placeholders Mike was pointing at: technically true,
+               and they told a visitor nothing they had not already read in
+               the label above them.
+   [P21] AND THE BANDCAMP LINE STOPS SHOUTING. Mike: "too brash." It read
+   "Where to hear it without paying an advertiser for the privilege" — an
+   argument with the streaming industry, staged on someone else's card. The
+   museum's job on this door is to say what is behind it: the catalogue, free
+   to play, and the money goes to them. That is the same fact without the
+   sneer, and it is more useful. */
 function doorsFor(a) {
   const trail = [];
   if (a.site) trail.push({ label: a.siteLabel || a.site, url: a.site,
+    fn: a.siteFn || "Homepage",
     scent: a.siteScent || "The artist's own place." });
   if (a.listen) trail.push({ label: a.listen.label, url: a.listen.url,
-    scent: "Where to hear it without paying an advertiser for the privilege." });
+    fn: a.listen.fn || "Music library",
+    scent: a.listen.scent || "The catalogue, free to play, paid straight to them." });
   if (a.shop) trail.push({ label: a.shop.label, url: a.shop.url,
-    scent: "Their own store." });
-  if (a.channel && a.channel !== a.site) trail.push({ label: "Their channel", url: a.channel,
-    scent: "Where the songs land first, verified from their own uploads." });
+    fn: a.shop.fn || "Shop",
+    scent: a.shop.scent || "Records and merch, sold by them." });
+  if (a.channel && a.channel !== a.site) trail.push({ label: a.channelLabel || "Their channel",
+    url: a.channel, fn: "Video channel",
+    scent: a.channelScent || "Where the songs land first — verified from their own uploads." });
   return trail.length ? trail : undefined;
 }
 
@@ -670,17 +1029,47 @@ function aboutArtistTrack(a) {
       tombstone: a.card.tombstone,
       label: a.card.label,
       sideboxes: a.card.sideboxes,
-      entries: [
-        { stamp: "Q", title: "Why is this artist in the museum?",
-          line: "Because someone here thinks they are worth a listen. That is " +
-                "the whole editorial standard and it is not pretending to be " +
-                "anything grander.",
-          note: "[PAPA]" },
-        { stamp: "Q", title: "Is Weird.Baby affiliated with them?",
-          line: "No. Nothing here is endorsed by the artist, nothing here is " +
-                "sold on their behalf, and every link goes to their own place.",
-          note: "" },
-      ],
+      /* [P16/P22 2026-08-02] THE DISCOGRAPHY DIED AND THE RECORDS GOT DOORS.
+         Two of Mike's notes land on the same block and they only look like
+         they disagree. "DISCOGRAPHY: remove from the artist page — doesn't
+         deserve the space here" was aimed at what was there: twelve ruled
+         lines of year-and-title that a visitor could read, learn nothing
+         actionable from, and not click. "RECORDS: every record needs LINKS TO
+         THE ALBUM as ICONS, the platforms that actually carry it, verified"
+         is what a record on a museum wall is FOR — it is an object you can go
+         and get.
+         So the complete list is gone and what remains are the records this
+         page actually names — the songs' own albums, and the latest — each
+         one a door to the platform that carries it, verified by reading that
+         platform's own catalogue page. The rest of the catalogue is one press
+         away behind the music-library door, which is where a complete
+         discography belongs. */
+      records: a.records,
+      /* [P17/P18/P19 2026-08-02] THE THREE DECKS OF CARDS.
+         `Said about her` was a sidebox of run-on lines and Mike wanted three
+         things from it: the link to the source enabled, the formatting
+         rebuilt as post-its / museum cards / embeds, and MORE of it. It is
+         now one of three decks that share one renderer, because all three are
+         the same object — a short thing somebody said, and where they said
+         it:
+           · SAID ABOUT THEM  — the press, quoted and linked (P17)
+           · IN THEIR OWN WORDS — the artist, quoted and linked (P18)
+           · ALSO — the work that is not the records (P19)
+         Every card carries a real source and a real URL, and no card exists
+         without one; a quote whose source could not be read is not on the
+         wall. */
+      decks: a.decks,
+      /* [P14 2026-08-02] THE TWO HONEST QUESTIONS LEAVE THE ARTIST'S CARD.
+         MIKE: "REMOVE from all individual artist pages — Mike handles it at
+         FAQ — the 'Why is this artist in the museum?' block and the 'Is
+         Weird.Baby affiliated?' block. They go; the FAQ owns that ground."
+         He is right that they are HOUSE questions, not artist facts: the
+         answers were byte-identical on all four cards, which is the tell that
+         they belonged to the building rather than to the person. Answering
+         them four times also put the museum's throat-clearing between a
+         visitor and the artist's own doors. The ground is the Information
+         Booth's, and the wing's own first album already tells a visitor what
+         the standard is before they meet anybody. */
       entriesMode: "list",
       /* [F1] the doors out close the card — site, listen, store, channel —
          after the visitor has met the person the doors belong to. */
@@ -873,6 +1262,11 @@ export const worthAListenExhibit = {
   cfKey: "wb-wal-cfh",
   visitPath: "/wal",
   shopExitParam: "wal",
+  /* [P11 2026-08-02] IN THIS WING AN ALBUM IS AN ARTIST, so the album a
+     visitor leaves from IS the exhibit's owner for the billing law. The exit
+     carries it; /hr, /wb and /robots declare nothing and their exits do not
+     change. */
+  shopOwnerFromAlbum: true,
   shopEntryHidden: false,
   /* [W7 2026-08-02] THE CARDS GO FLAT. `stage: true` (the paginated fixed
      frame) and `bodyKey` (the fixed body height) are RETIRED for this wing:

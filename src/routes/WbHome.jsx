@@ -98,12 +98,24 @@ export default function WbHome() {
         .wb-whisper { font-family: 'Courier Prime', monospace; font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: #837f75; margin-bottom: 26px; }
         .wb-rule { width: 36px; height: 1px; background: #211f1c; margin-bottom: 22px; opacity: 0.5; }
 
-        .wb-book-label { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: #211f1c; margin-bottom: 18px; display: block; transform: scaleY(1.4); transform-origin: left center; }
+        /* [P13 2026-08-02] THE BOOK GETS A HEADING, NOT A LABEL.
+           Mike: "the whole guestbook layout needs a tweak — the lobby to its
+           left is very classy, match that quality." What makes the left side
+           classy is one device used consistently: a small mono caption over a
+           ruled list, every row a hairline apart, nothing shouting. The book
+           had a stretched 0.62rem word floating over an unrelated form. So it
+           now wears the SAME furniture as the directory — caption, rule, ruled
+           rows — and the count rides the heading, because a guest book that
+           says how many people have signed is doing the one piece of
+           persuasion this page actually wants to do. */
+        .wb-book-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 1px solid #211f1c; padding-bottom: 7px; margin-bottom: 14px; }
+        .wb-book-label { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; color: #211f1c; display: block; }
+        .wb-book-count { font-family: 'Courier Prime', monospace; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: #9b978d; white-space: nowrap; }
 
         /* ENTRY BOX — name field looks like a physical form entry */
-        .wb-entry-box { border: 1px solid #c6c2b7; border-radius: 1px; padding: 10px 14px 12px; margin-bottom: 12px; background: #faf8f3; transition: border-color 0.25s; }
+        .wb-entry-box { border: 1px solid #c6c2b7; border-radius: 1px; padding: 10px 14px 12px; margin-bottom: 10px; background: #faf8f3; transition: border-color 0.25s; }
         .wb-entry-box:focus-within { border-color: #211f1c; }
-        .wb-entry-box-label { font-family: 'Courier Prime', monospace; font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; color: #9b978d; margin-bottom: 8px; display: block; }
+        .wb-entry-box-label { font-family: 'Courier Prime', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #7d7869; margin-bottom: 8px; display: block; }
 
         .wb-input { width: 100%; background: transparent; border: none; color: #211f1c; font-family: 'DM Serif Display', serif; font-size: 0.95rem; padding: 0; outline: none; caret-color: #211f1c; display: block; transform: scaleY(1.15); transform-origin: left top; }
         .wb-input::placeholder { color: #a9a59a; font-style: italic; }
@@ -117,18 +129,59 @@ export default function WbHome() {
            viewport and a visible thin scrollbar so all entries are reachable. */
         /* [walk-five] the book, EASIER AND MORE INVITING to scroll — taller,
            boxed as the physical book (not tucked away), thumb always visible. */
-        .wb-entries { margin-top: 14px; max-height: 44vh; overflow-y: scroll; border: 1px solid #c6c2b7; border-radius: 1px; background: #faf8f3; padding: 4px 12px; scrollbar-width: thin; scrollbar-color: #a9a59a transparent; }
+        /* [P12 2026-08-02] NO MESSAGE IS EVER CUT IN HALF AT THE BOTTOM.
+           MIKE, with a screenshot: "the guestbook list leaves messages CLIPPED
+           mid-line at the bottom — never leave clipped messages; fix the
+           composition."
+           THE CAUSE IS ARITHMETIC, NOT STYLING. The box was capped at 44vh —
+           a fraction of the WINDOW — while its contents are rows of a fixed
+           type size. 44% of a viewport is never a whole number of rows except
+           by accident, so the last row was sliced at whatever fraction the
+           window happened to produce, and it changed every time anyone resized.
+           THE FIX IS TO MEASURE IN ROWS, WHICH IS THE UNIT THE CONTENT IS
+           ACTUALLY MADE OF. The --gb-row custom property is the row's exact box
+           (line + padding + rule); the cap is a whole multiple of it; and
+           scroll-snap makes every SCROLLED position land on a row boundary too
+           — because a cap that is right only at the top of the list fixes the
+           screenshot and not the defect.
+           Rows are uniform BY CONSTRUCTION for the same reason: one line each,
+           so "a whole number of rows" is a number the CSS can know. */
+        /* THE BOX'S OWN BORDER IS PART OF THE BUDGET. box-sizing:border-box is
+           set globally at the top of this sheet, so a max-height of 7 rows
+           gave the CONTENT 7 rows minus the 2px frame — and the seventh row
+           came up 28px short, which is a clipped message by a different route.
+           Measured, then counted properly. */
+        /* THE 16px IS NOT DECORATION. The submit button carries transform:
+           scaleY(1.15) — the sheet's typewriter squash — so the button PAINTS
+           about 7px taller than the box it occupies. A 4px gap put the first
+           signature under the button's own bottom edge. The gap has to clear
+           the paint, not the layout. */
+        .wb-entries { --gb-row: 30px; margin-top: 16px; max-height: calc(var(--gb-row) * 7 + 2px); overflow-y: auto; scroll-snap-type: y proximity; overscroll-behavior: contain; border: 1px solid #c6c2b7; border-radius: 1px; background: #faf8f3; scrollbar-width: thin; scrollbar-color: #a9a59a transparent; }
         .wb-entries::-webkit-scrollbar { width: 6px; }
         .wb-entries::-webkit-scrollbar-thumb { background: #a9a59a; border-radius: 3px; }
         .wb-entries::-webkit-scrollbar-track { background: transparent; }
-        .wb-entry { display: flex; align-items: baseline; gap: 10px; padding: 5px 0; border-bottom: 1px solid #d8d4c9; animation: rise 0.4s ease; }
-        .wb-entry-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.8rem; color: #211f1c; white-space: nowrap; }
-        .wb-entry-note { font-family: 'Courier Prime', monospace; font-style: italic; font-size: 0.7rem; color: #6f6b62; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
-        .wb-entry-date { font-family: 'Courier Prime', monospace; font-size: 0.6rem; color: #9b978d; white-space: nowrap; }
+        .wb-entry { display: flex; align-items: baseline; gap: 12px; height: var(--gb-row); padding: 0 12px; border-bottom: 1px solid #e2ded3; scroll-snap-align: start; animation: rise 0.4s ease; }
+        .wb-entry:last-child { border-bottom: 0; }
+        .wb-entry:hover { background: #f2efe6; }
+        .wb-entry-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.02em; color: #211f1c; white-space: nowrap; }
+        .wb-entry-note { font-family: 'Courier Prime', monospace; font-style: italic; font-size: 0.72rem; color: #6f6b62; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
+        .wb-entry-date { font-family: 'Courier Prime', monospace; font-size: 0.62rem; color: #9b978d; white-space: nowrap; }
 
         .wb-footer { position: absolute; bottom: 18px; right: 24px; font-family: 'Courier Prime', monospace; font-size: 0.56rem; letter-spacing: 0.1em; color: #b0aca1; display: flex; align-items: center; gap: 7px; }
         .wb-mark { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border: 1px solid #a9a59a; border-radius: 50%; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.42rem; letter-spacing: 0.04em; color: #a9a59a; animation: float-mark 9s ease-in-out infinite; flex-shrink: 0; }
         @keyframes float-mark { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-4px); } }
+
+        /* THE LOBBY IS A FIXED 100vh AND THE RIGHT PANE CLIPS WHAT DOES NOT
+           FIT, so on a short window the book has to give ground — and it gives
+           it in WHOLE ROWS, because a shorter list of complete signatures is
+           the point of P12 and a taller list of sliced ones is what it
+           replaced. */
+        @media (max-height: 880px) {
+          .wb-entries { max-height: calc(var(--gb-row) * 5 + 2px); }
+        }
+        @media (max-height: 760px) {
+          .wb-entries { max-height: calc(var(--gb-row) * 3 + 2px); }
+        }
 
         @media (max-width: 680px) {
           html, body { overflow: auto; }
@@ -191,15 +244,37 @@ export default function WbHome() {
           {/* [walk-five] "You are early. That is noted." killed — redundant
               with the note above (the book already says what early means). */}
           <div className="wb-rule" />
-          <div className="wb-book-label">Guest Book</div>
+          <div className="wb-book-head">
+            <span className="wb-book-label">Guest Book</span>
+            {!loading && entries.length > 0 && (
+              <span className="wb-book-count">
+                {entries.length} {entries.length === 1 ? "signature" : "signatures"}
+              </span>
+            )}
+          </div>
 
           {!submitted ? (
             <>
+              {/* [P13 2026-08-02] ONE PROMPT, NOT TWO.
+                  MIKE: "'What should we call you?' and 'sign here' collapse to
+                  just 'What should we call you?'"
+                  The field asked the same question twice in two registers — a
+                  mono caption above and an italic placeholder inside — and the
+                  placeholder's answer ("sign here…") was an instruction, not an
+                  answer to the question above it. The caption is the better of
+                  the two: it is a question, it stays visible while you type,
+                  and it does not disappear the moment you need it. */}
               <div className="wb-entry-box">
                 <span className="wb-entry-box-label">What should we call you?</span>
-                <input className="wb-input" placeholder="sign here..." value={name} onChange={e => setName(e.target.value)} maxLength={60} />
+                <input className="wb-input" value={name}
+                  onChange={e => setName(e.target.value)} maxLength={60} />
               </div>
-              <textarea className="wb-input wb-textarea" placeholder="what brought you here? (optional)" value={note} onChange={e => setNote(e.target.value)} maxLength={280} />
+              {/* [P13] "(optional)" IS GONE. Mike's call, and it was doing
+                  harm: the only two fields on the page were labelled "answer
+                  this" and "you don't have to", which is an invitation to skip
+                  the half that makes the book worth reading. Nothing enforces
+                  it either way — a blank note has always been accepted. */}
+              <textarea className="wb-input wb-textarea" placeholder="what brought you here?" value={note} onChange={e => setNote(e.target.value)} maxLength={280} />
               <button className="wb-submit" onClick={handleSubmit}>Sign the Guest Book</button>
             </>
           ) : (
@@ -209,7 +284,10 @@ export default function WbHome() {
           {!loading && entries.length > 0 && (
             <div className="wb-entries">
               {entries.map((e, i) => (
-                <div className="wb-entry" key={i}>
+                /* the full note rides `title` — the row is one ledger line by
+                   composition, and a long message is still readable on hover
+                   rather than being lost with the ellipsis. */
+                <div className="wb-entry" key={i} title={e.note || undefined}>
                   <span className="wb-entry-name">{e.name}</span>
                   {e.note && <span className="wb-entry-note">{e.note}</span>}
                   <span className="wb-entry-date">{formatDate(e.signed_at)}</span>

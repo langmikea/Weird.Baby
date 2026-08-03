@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback, useLayoutEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback, useLayoutEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { makeFactCycler, splitFact } from "../../lib/fact-select.js";
 import "./Exhibit.css";
@@ -18,6 +18,84 @@ const TYPE_META = {
 function normalizeType(t) { return (t==="hr_cover"||t==="fan_cover") ? "cover" : t; }
 function typeLabel(t) { return TYPE_META[t]?.label ?? t.toUpperCase(); }
 function typeColor(t) { return TYPE_META[t]?.color ?? "#888"; }
+
+/* ==== [P5 2026-08-02] OPERATOR MARKERS NEVER REACH A VISITOR ================
+   MIKE: "HIDE ALL [PAPA] MARKERS and anything else the user isn't meant to
+   see, on every page, site-wide. They must never be visible to visitors."
+   WHAT [PAPA] IS. It marks the words that are Papa's to write — a note from
+   the builders to the operator, sitting in the artist data beside real copy.
+   It has been rendering on the live page since the faces were built: at the
+   foot of every WAL card, inside the robots wing's entries, in the middle of
+   provenance notes a visitor SHOULD read.
+   WHY IT IS SCRUBBED AT THE RENDER SEAM AND NOT DELETED FROM THE DATA. The
+   markers are load-bearing FOR MIKE — they are the list of what still needs
+   his words — and deleting them would destroy that list to fix a display bug.
+   So the data keeps its markers and the visitor never sees one: one function,
+   applied once where a face is derived, so no wing can forget to call it and
+   a marker added tomorrow is hidden the day it is written.
+   IT CUTS BY SENTENCE, NOT BY STRING. `face.papa` routinely carries real
+   provenance and THEN the marker ("Sources: her own site... [PAPA] — the card
+   copy"). Dropping the whole field would take the sourcing down with it;
+   truncating at the bracket would leave a half-sentence. The sentence carrying
+   the marker is the operator's; the rest is the museum's, and it stays.
+   The early return means a string without a marker is never even split, so
+   the sentence splitter can never damage ordinary copy ("Vol. 1", "Dr King"). */
+const PAPA_MARK = /\[PAPA\]/;
+
+function visitorProse(s) {
+  if (typeof s !== "string" || !PAPA_MARK.test(s)) return s;
+  return s
+    .split(/(?<=[.!?])\s+/)
+    .filter(sentence => !PAPA_MARK.test(sentence))
+    .join(" ")
+    .trim()
+    .replace(/[\s;:,—–-]+$/, "");
+}
+const kept = v => typeof v === "string" ? v.trim().length > 0 : !!v;
+
+function scrubFace(face) {
+  if (!face) return face;
+  const out = { ...face };
+  ["title", "subtitle", "blurb", "footer", "papa"].forEach(k => {
+    const v = visitorProse(face[k]);
+    if (kept(v)) out[k] = v; else delete out[k];
+  });
+  if (Array.isArray(face.label)) {
+    out.label = face.label.map(visitorProse).filter(kept);
+  }
+  if (Array.isArray(face.lines)) {
+    out.lines = face.lines.map(visitorProse).filter(kept);
+  }
+  if (Array.isArray(face.tombstone)) {
+    out.tombstone = face.tombstone
+      .map(r => ({ ...r, k: visitorProse(r.k), v: visitorProse(r.v) }))
+      .filter(r => kept(r.k) || kept(r.v));
+  }
+  if (Array.isArray(face.entries)) {
+    out.entries = face.entries
+      .map(en => ({
+        ...en,
+        stamp: visitorProse(en.stamp),
+        title: visitorProse(en.title),
+        line: visitorProse(en.line),
+        note: visitorProse(en.note),
+      }))
+      /* an entry whose title AND body were both the operator's is not an
+         entry any more — it is a blank row, which is its own kind of leak. */
+      .filter(en => kept(en.title) || kept(en.line));
+  }
+  if (Array.isArray(face.sideboxes)) {
+    out.sideboxes = face.sideboxes
+      .map(b => ({
+        ...b,
+        title: visitorProse(b.title),
+        lines: (b.lines || []).map(visitorProse).filter(kept),
+        note: visitorProse(b.note),
+      }))
+      .filter(b => b.lines.length > 0 || kept(b.note));
+  }
+  return out;
+}
 
 // ─── QUEUE HELPERS ────────────────────────────────────────────────────────────
 function getOrderedVis(track, selSet) {
@@ -1841,6 +1919,39 @@ export default function Exhibit({ artist }) {
      the render below asks a question rather than restating a condition. */
   const bannerTransport = artist.transport === "banner";
 
+  /* [P11 2026-08-02] THE EXIT NAMES THE EXHIBIT'S OWNER.
+     Mike's GIFT SHOP BILLING LAW turns on one question the shop could not
+     previously answer: WHOSE exhibit did this visitor just leave? `?from=` has
+     always named the WING (hr / wb / robots / wal), which is enough where a
+     wing is one artist and useless where it is four. Leaving Carsie Blanton's
+     page and leaving Jesse Welles's page produced byte-identical exits, so the
+     shop had nothing to give top billing to and fell back to the house — which
+     is exactly the "WAL is putting W.B on the gift shop page" Mike reported.
+     So a wing whose albums ARE artists declares `shopOwnerFromAlbum` and the
+     exit carries the album's own id alongside the wing's. Wings where the wing
+     IS the owner (/hr, /wb, /robots) declare nothing and their exits are
+     unchanged to the character. */
+  const shopHref = `/shop?from=${artist.shopExitParam}` +
+    (artist.shopOwnerFromAlbum && album.id ? `&owner=${encodeURIComponent(album.id)}` : "");
+
+  /* [P23 2026-08-02] THE LINK SEAM STOPS BEING NAMED AFTER ONE WING.
+     Every door the viewer draws — trail rows, collage tiles, quote cards,
+     record doors — dispatched the literal string "wb-wal-open-link", which is
+     fine while only WAL has doors and silently fatal the moment another wing
+     grows one: /robots mounts no listener for that name, so a collage there
+     would have rendered beautifully and done nothing when pressed. That is
+     W4a's dead-button defect, pre-built into the next wing.
+     The event NAME is now config, defaulting to the existing string so WAL is
+     unchanged to the character. A wing that wants doors declares its own verb
+     and listens for it — the same discipline as `transport`, `stage` and
+     `bodyKey`, and the reason the shared engine still knows nothing about what
+     any of these doors open. */
+  const linkEvent = artist.linkEvent || "wb-wal-open-link";
+  const openLink = useCallback((href) => {
+    if (!href) return;
+    window.dispatchEvent(new CustomEvent(linkEvent, { detail: { href } }));
+  }, [linkEvent]);
+
   const thumbTrack = activeTrack !== null ? album.tracks[activeTrack] : album.tracks.find(t => t.videos.length > 0);
   const thumbVid   = thumbTrack?.videos?.[0];
   const hasVideo   = curVideo !== null;
@@ -1854,8 +1965,13 @@ export default function Exhibit({ artist }) {
      actually selected — and show it even while a video PLAYS, laid over the
      stowed picture (W1): the frame is the frame, the artist is the color, and
      landing on an album gives the SONG's own poster, not a card. */
-  const selFace = activeTrack !== null ? (album.tracks[activeTrack]?.face ?? null) : null;
-  const fallbackFace = selFace ?? album.tracks.find(t => t.face)?.face ?? null;
+  /* [P5] SCRUBBED ONCE, HERE. Every face the viewer can possibly draw passes
+     through these two bindings, so this is the one place a marker can be
+     stopped for every wing at once. */
+  const rawSelFace = activeTrack !== null ? (album.tracks[activeTrack]?.face ?? null) : null;
+  const rawFallbackFace = rawSelFace ?? album.tracks.find(t => t.face)?.face ?? null;
+  const selFace = useMemo(() => scrubFace(rawSelFace), [rawSelFace]);
+  const fallbackFace = useMemo(() => scrubFace(rawFallbackFace), [rawFallbackFace]);
   const flatFaces = artist.faceFlow === "flat";
   /* [F7a 2026-08-02] a flat album with NOTHING TO CUE (no playable song, so
      no poster to land on — the house album) falls back to its first face,
@@ -1896,10 +2012,41 @@ export default function Exhibit({ artist }) {
     e.preventDefault();
     e.currentTarget.setPointerCapture(e.pointerId);
     const startY = e.clientY, startH = cfH;
+
+    /* [P1 2026-08-02] THE FIT'S CAP YIELDS TO THE HAND — THE SECOND HALF OF
+       "NOTHING RESIZES".
+       The first half was mechanical (the console apron sat on this handle;
+       see Exhibit.css). Give the handle back and the drag STILL did nothing
+       visible, for a second and independent reason: F3's fit writes a hard
+       `--fit-area-max` onto the root and NOTHING ever revises it. So the
+       carousel could grow and shrink while the viewer beneath it stayed
+       frozen at the height the fit chose on entry — the visitor moved a lever
+       and the room did not answer.
+       THE HANDLE IS A TRADE, AND THE TRADE IS WHAT THE FIT WAS FOR. The fit's
+       whole ruling is that the carousel, the viewer and the scroller share one
+       screen; so the honest response to "give the carousel 80 more pixels" is
+       "the viewer gives up 80". Total height is preserved, the room still
+       fits, and the lever is real. Read once at pointerdown so the ceiling
+       cannot drift under the visitor's own drag (the same discipline as the
+       body drag's measured ceiling). Wings without `fitOnEntry` have no cap
+       and this whole block is inert for them. */
+    const rootEl = mainRef.current ? mainRef.current.closest(".ex-root") : null;
+    const startCap = rootEl
+      ? parseFloat(getComputedStyle(rootEl).getPropertyValue("--fit-area-max"))
+      : NaN;
+    const tradeCap = artist.fitOnEntry && rootEl && !Number.isNaN(startCap);
+
     function onMove(ev) {
       let h = startH + (ev.clientY - startY);
       if (Math.abs(h - 300) < 12) h = 300;
-      setCfH(Math.max(CF_MIN, Math.min(CF_MAX, Math.round(h))));
+      const next = Math.max(CF_MIN, Math.min(CF_MAX, Math.round(h)));
+      setCfH(next);
+      if (tradeCap) {
+        const cap = Math.max(160, Math.round(startCap + (startH - next)));
+        rootEl.style.setProperty("--fit-area-max", cap + "px");
+        try { sessionStorage.setItem(artist.cfKey + "-cap", cap); }
+        catch { /* private mode */ }
+      }
     }
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerup", () => window.removeEventListener("pointermove", onMove), { once: true });
@@ -1975,12 +2122,12 @@ export default function Exhibit({ artist }) {
 
         {/* NAV */}
         <div className="ex-nav">
-          <button className="ex-nav-logo" onClick={() => navigate(`/shop?from=${artist.shopExitParam}`)}>Weird.Baby</button>
+          <button className="ex-nav-logo" onClick={() => navigate(shopHref)}>Weird.Baby</button>
           <div className="ex-nav-sub" onClick={() => window.scrollTo({ top: 0, behavior: "auto" })}>{artist.name}</div>
           {/* [one-shop ruling, walk-six] config-driven: the entry stays in the
               template (present in the DOM) but hides for exhibits that must
               not advertise a shop — /robots today. */}
-          <button className="ex-nav-return" style={artist.shopEntryHidden ? { display: "none" } : undefined} onClick={() => navigate(`/shop?from=${artist.shopExitParam}`)}>Gift Shop</button>
+          <button className="ex-nav-return" style={artist.shopEntryHidden ? { display: "none" } : undefined} onClick={() => navigate(shopHref)}>Gift Shop</button>
         </div>
 
         {/* CAROUSEL */}
@@ -2264,13 +2411,161 @@ export default function Exhibit({ artist }) {
                         )}
                         {Array.isArray(face.tombstone) && face.tombstone.length > 0 && (
                           <dl className="vp-tomb" data-stage-split="row">
+                            {/* [P20 2026-08-02] THE BACK OF THE BASEBALL CARD
+                                GETS ITS DOORS. Mike LOVES this block and asked
+                                for one thing: "ADD LINKS wherever possible."
+                                The register is the one place on the card where
+                                every line is a checkable fact, so a line that
+                                can name where it was checked SHOULD — it is the
+                                museum's provenance and the visitor's next step
+                                in the same gesture. `url` is optional per row:
+                                a row whose fact has no readable public source
+                                stays plain type rather than borrowing a link
+                                that does not prove it. */}
                             {face.tombstone.map((row, i) => (
                               <div className="vp-tomb-row" key={i}>
-                                <dt>{row.k}</dt><dd>{row.v}</dd>
+                                <dt>{row.k}</dt>
+                                <dd>
+                                  {row.url ? (
+                                    <button className="vp-tomb-go"
+                                      title={row.src ? "Source: " + row.src : undefined}
+                                      onClick={() => openLink(row.url)}>
+                                      {row.v}
+                                    </button>
+                                  ) : row.v}
+                                </dd>
                               </div>
                             ))}
                           </dl>
                         )}
+                        {/* ==== [P16 2026-08-02] THE RECORDS ARE DOORS =======
+                            MIKE: "every record needs LINKS TO THE ALBUM as
+                            ICONS (Bandcamp, YouTube, etc. — the platforms that
+                            actually carry it, verified)."
+                            A record on a museum wall is an OBJECT, and the one
+                            thing a visitor wants from it is to go and hear it.
+                            Listed as text it was a fact about the past; listed
+                            as a door it is an offer.
+                            THE MARKS ARE TWO LETTERS, NOT A LOGO. A platform's
+                            wordmark is its trademark and this museum does not
+                            own it; a two-letter badge with the full name on the
+                            control's own label reads at a glance, survives any
+                            font stack, and belongs to us. Same reasoning as
+                            P6's arrow, arrived at from the other side: what is
+                            drawn must be readable, and what is not readable
+                            must be written.
+                            DATA, like everything else on a face — a wing that
+                            declares no records renders none. */}
+                        {/* A NOTE WITH NO ITEMS IS STILL A RECORDS BLOCK, and
+                            deliberately so: an artist whose catalogue has no
+                            door we could verify (Mikey Mike — no Bandcamp, and
+                            his own domain is serving injected spam) gets the
+                            block SAYING THAT rather than getting no block. A
+                            missing shelf reads as an oversight; a shelf with a
+                            note on it reads as the truth about him. */}
+                        {face.records && (face.records.items?.length > 0 || face.records.note) && (
+                          <div className="vp-records" data-stage-split="row">
+                            {face.records.title && (
+                              <h4 className="vp-records-head">{face.records.title}</h4>
+                            )}
+                            <ul className="vp-records-list">
+                              {(face.records.items || []).map((r, i) => (
+                                <li className="vp-record" key={i}>
+                                  <span className="vp-record-when">{r.year}</span>
+                                  <span className="vp-record-body">
+                                    <span className="vp-record-title">{r.title}</span>
+                                    {r.why && <span className="vp-record-why">{r.why}</span>}
+                                  </span>
+                                  <span className="vp-record-doors">
+                                    {(r.links || []).map((l, j) => (
+                                      <button key={j} className="vp-record-door"
+                                        title={l.name} aria-label={r.title + " on " + l.name}
+                                        onClick={() => openLink(l.url)}>
+                                        {l.mark}
+                                      </button>
+                                    ))}
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+                            {face.records.note && (
+                              <p className="vp-records-note">{face.records.note}</p>
+                            )}
+                          </div>
+                        )}
+                        {/* ==== [P17/P18/P19 2026-08-02] THE DECKS ============
+                            MIKE, on "Said about her": "(a) enable the LINK to
+                            the source thing; (b) formatting is poor — runs on,
+                            wastes space: rebuild as post-it notes / fancy
+                            museum cards / EMBEDS where possible (visuals!).
+                            Mike wanted MORE of it — that appetite is the
+                            target, don't over-feed."
+                            WHAT WAS WRONG: it was a SIDEBOX — a ruled column of
+                            mono lines where a quote and its attribution were
+                            two adjacent lines of identical weight, so a reader
+                            had to work out which was which, and the source was
+                            named but dead.
+                            WHAT IT IS NOW: cards. A quotation is a physical
+                            thing in a museum — a card pinned to the wall beside
+                            the object — so it is set as one: paper, a small
+                            tilt, a shadow, the quote in the reading face and
+                            the attribution as a stamp beneath it. The whole
+                            card is the link to its source, so "enable the LINK"
+                            is answered by the card being the door rather than
+                            by hiding a chevron in a corner.
+                            AND WHERE THE SOURCE IS A VIDEO, THE CARD IS THE
+                            VIDEO'S OWN POSTER — the embed answer to "visuals!",
+                            using the same poster surface the collage already
+                            uses (W3), so nothing new is being hotlinked and
+                            nothing new had to be invented.
+                            ONE RENDERER, THREE DECKS. What the press said, what
+                            the artist said, and what else they make are the
+                            same object — a short thing, and where it came from
+                            — so they share a renderer and differ only in
+                            heading. That is what keeps "MORE of it" from
+                            becoming three more components. */}
+                        {Array.isArray(face.decks) && face.decks.map((deck, di) => (
+                          <section className="vp-deck" key={di} data-stage-split="row">
+                            <h4 className="vp-deck-head">{deck.title}</h4>
+                            <div className="vp-deck-cards">
+                              {(deck.cards || []).map((c, ci) => {
+                              /* A CARD WITHOUT A URL IS NOT A BUTTON. Some of
+                                 the best material on these walls has no public
+                                 page behind it — the museum's own vault is the
+                                 source for Hunter Root, and two of Mikey
+                                 Mike's come from print interviews with no live
+                                 link. A control that looks pressable and does
+                                 nothing is the exact defect W4a was: so a
+                                 sourced-but-unlinked card renders as what it
+                                 is, a card, and keeps its attribution. */
+                              const Card = c.url ? "button" : "div";
+                              return (
+                                <Card key={ci}
+                                  className={"vp-qcard" + (c.watch ? " vp-qcard-watch" : "") +
+                                             (c.url ? "" : " vp-qcard-flat")}
+                                  style={{ "--tilt": `${((ci * 5) % 5) - 2}deg` }}
+                                  onClick={c.url ? () => openLink(c.url) : undefined}>
+                                  {c.watch && (
+                                    <img className="vp-qcard-still" alt=""
+                                      src={`https://i.ytimg.com/vi/${c.watch}/hqdefault.jpg`} />
+                                  )}
+                                  {c.eyebrow && <span className="vp-qcard-eyebrow">{c.eyebrow}</span>}
+                                  {c.text && (
+                                    <span className="vp-qcard-text">
+                                      {deck.kind === "quote" ? "“" + c.text + "”" : c.text}
+                                    </span>
+                                  )}
+                                  <span className="vp-qcard-stamp">
+                                    {c.who && <span className="vp-qcard-who">{c.who}</span>}
+                                    <span className="vp-qcard-src">
+                                      {[c.where, c.when].filter(Boolean).join(" · ")}
+                                    </span>
+                                  </span>
+                                </Card>
+                              );})}
+                            </div>
+                          </section>
+                        ))}
                         {Array.isArray(face.sideboxes) && face.sideboxes.map((b, i) => (
                           <aside className="vp-box" key={i}>
                             <h4 className="vp-box-head">{b.title}</h4>
@@ -2326,7 +2621,11 @@ export default function Exhibit({ artist }) {
                                 <li key={i} className="vp-fe">
                                   {en.stamp && <span className="vp-fe-stamp">{en.stamp}</span>}
                                   <span className="vp-fe-body">
-                                    <span className="vp-fe-title">{en.title}</span>
+                                    {/* [P5] an entry whose title was the operator's
+                                        keeps its body and loses the empty heading —
+                                        a blank bold line is a leak with the words
+                                        taken out. */}
+                                    {en.title && <span className="vp-fe-title">{en.title}</span>}
                                     {en.line && <span className="vp-fe-line">{en.line}</span>}
                                     {en.note && <span className="vp-fe-note">{en.note}</span>}
                                   </span>
@@ -2397,9 +2696,23 @@ export default function Exhibit({ artist }) {
                             {face.trail.map((t, i) => (
                               <li key={i}>
                                 <button className="vp-trail-go"
-                                        onClick={() => window.dispatchEvent(new CustomEvent(
-                                          "wb-wal-open-link", { detail: { href: t.url } }))}>
-                                  <span className="vp-trail-label">{t.label}</span>
+                                        onClick={() => openLink(t.url)}>
+                                  {/* [P15 2026-08-02] NAME + FUNCTION, AS MIKE
+                                      READ IT. "The four doors read well as
+                                      Name+function pairs (Homepage / Shop and
+                                      Tours / Music Library / Video Channel).
+                                      Keep the pattern, fill the descriptors
+                                      properly." The NAME is whose place it is;
+                                      the FUNCTION is what you will find when
+                                      you get there, and it is the half a
+                                      stranger steers by. `fn` is DATA on the
+                                      trail row like `label` and `scent`, so a
+                                      door without one renders exactly as
+                                      before and no other wing changes. */}
+                                  <span className="vp-trail-label">
+                                    <span className="vp-trail-name">{t.label}</span>
+                                    {t.fn && <span className="vp-trail-fn">{t.fn}</span>}
+                                  </span>
                                   {t.scent && <span className="vp-trail-scent">{t.scent}</span>}
                                 </button>
                               </li>
@@ -2421,8 +2734,7 @@ export default function Exhibit({ artist }) {
                             {face.collage.map((c, i) => (
                               <button key={i} className="vp-collage-tile"
                                 style={{ "--tilt": `${((i * 7) % 9) - 4}deg` }}
-                                onClick={() => window.dispatchEvent(new CustomEvent(
-                                  "wb-wal-open-link", { detail: { href: c.href } }))}>
+                                onClick={() => openLink(c.href)}>
                                 {/* eager, not lazy: the collage IS the page's
                                     payoff and a dozen poster frames are cheap;
                                     a wall that fills in as you watch reads as
@@ -2548,7 +2860,25 @@ export default function Exhibit({ artist }) {
                   column whose larger half had nothing in it.
                   An exhibit with no facts does not get a fact scroller. /hr
                   and /wb declare theirs and are untouched. */}
-              {Array.isArray(FACTS) && FACTS.length > 0 && (
+              {/* [P4 2026-08-02] AND A CARD GETS NO SCROLLER UNDER IT.
+                  MIKE: "remove the PUV scroller from the bottom of About the
+                  Artist entirely."
+                  The scroller is AMBIENT PLAYBACK FURNITURE — factoids that
+                  ride under a running picture (F5's ruling, when the summonable
+                  fact card was retired). Under a card face there is no picture:
+                  the video is stowed, the face runs the full length of the
+                  page, and the scroller lands at the FOOT of a two-thousand
+                  pixel document as an unexplained band of quotes with nothing
+                  above it to be ambient to. It also re-cycles every 7.5s while
+                  the visitor is reading something else entirely.
+                  SCOPED TO THE STOWED STATE, not to the one card Mike named:
+                  the reason applies identically to About the Songs, to What
+                  they are up to and to the house album's own pages, and a rule
+                  that fired on a title string rather than on the state would be
+                  a coincidence waiting to break. Cued songs and playing videos
+                  keep their scroller exactly as before; so do /hr and /wb,
+                  which are never in this state. */}
+              {Array.isArray(FACTS) && FACTS.length > 0 && !(flatFaces && showFace) && (
               <FactScroller
                 facts={FACTS}
                 albumTag={album.tag}

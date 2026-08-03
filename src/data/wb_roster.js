@@ -19,6 +19,11 @@ export const wbRoster = [
   {
     id: "wb",
     name: "Weird.Baby",
+    /* [P11 2026-08-02] DATE STARTED WITH US, for the billing law's ordering.
+       The day the house exhibit opened (STATE: SHIPPED 2026-07-06 —
+       WB_ARTIST_LOBBY_BOOTH). Note that under the law W.B is usually not on
+       the page at all; this date only matters on the exits where it is. */
+    since: "2026-07-06",
     exhibitRoute: "/wb",
     storeUrl: "https://weird-baby.printful.me",
     storePlatform: "Printful",

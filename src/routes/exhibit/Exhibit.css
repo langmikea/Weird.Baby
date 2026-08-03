@@ -83,7 +83,7 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 .vp-face-door:focus-visible{outline:none}
 
 .vp-face-platecap{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .52);letter-spacing:.07em;
+  font-size:var(--fs-micro);letter-spacing:.07em;
   color:var(--wb-gold-lo)}
 /* the plate stacks under the words when there is no width to place it in */
 @media (max-width:820px){
@@ -104,7 +104,7 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
    always be scrolled clear of it. */
 .vp-face-body:has(.vp-face-action){padding-bottom:64px}
 .vp-face-title{font-family:'Syne',sans-serif;font-weight:800;
-  font-size:calc(var(--face-fs) * .70);letter-spacing:.22em;
+  font-size:var(--fs-head);letter-spacing:.22em;
   text-transform:uppercase;color:var(--wb-gold)}
 /* [O3a 2026-07-30] THE CONTENT SCALES WITH THE PANEL.
    THE DIAGNOSIS: `.vp-area` is locked to 16:9 by a `padding-top:56.25%`
@@ -127,18 +127,67 @@ body:has(.vp-face) .vp-area::before{display:none}
    taking the full width, the type can come up: the floor rises from .80rem
    to .92rem and the ceiling from 1.20 to 1.42, and the height term relaxes
    because height is no longer being spent on a banner. */
-.vp-face{--face-fs:clamp(1.0rem, min(1.45vw, 4.6cqh), 1.42rem)}
-/* [F1] the mono register was resolving to ~9px - fine print, not a register.
-   The ratio comes up with the rest. */
-.vp-face-blurb{font-family:'DM Serif Display',Georgia,serif;
-  font-size:var(--face-fs);line-height:1.45;color:var(--wb-dim);
-  max-width:52ch}
+/* ==== [P7 2026-08-02] ONE RAMP, FIVE STEPS, A FLOOR UNDER ALL OF THEM =======
+   MIKE'S COMPLAINT, DIAGNOSED. Every size on a face was an independent ratio
+   of `--face-fs` — .52, .54, .55, .56, .58, .60, .62, .66, .68, .70, .72, .74,
+   .80, .82, .84, .92, 1.0 — seventeen steps invented one rule at a time. Two
+   things follow and Mike named both:
+     · THE JUMPS ARE ARBITRARY. The interpretive label sat at .92 and the pull
+       quote at 1.00, so the QUOTE was larger than the face's own TITLE (.70).
+       The page had no size order, so size stopped meaning rank.
+     · THE SMALL END IS UNREADABLE, AND CANNOT BE FIXED LOCALLY. At a 900px
+       window `--face-fs` bottoms out at its 1rem floor, and .52 of that is
+       8.3px. The only lever was `--face-fs` itself — which blows up the big
+       text to rescue the small, which is exactly what Mike said not to do.
+   THE RAMP. Five named steps, each ~1.18x the last, and every one of them
+   carries its OWN floor in rem — so the small end stops shrinking with the
+   viewport while the big end still scales. Nothing on a face may set a raw
+   font-size again: it picks a step. Legibility at every step is then a
+   property of the ramp rather than of seventeen separate judgements.
+   `--face-fs` stays the dial (and the name every existing rule already knows);
+   it is now the BODY step rather than a ceiling nothing reached. */
+.vp-face{
+  --face-fs:clamp(1.02rem, min(1.35vw, 4.4cqh), 1.28rem);
+  --fs-micro:max(.76rem, calc(var(--face-fs) * .72));
+  --fs-small:max(.86rem, calc(var(--face-fs) * .85));
+  --fs-body:var(--face-fs);
+  --fs-lead:calc(var(--face-fs) * 1.14);
+  --fs-head:calc(var(--face-fs) * 1.32)}
+/* [P8 2026-08-02] THE PULL QUOTE LEAVES THE DISPLAY FACE.
+   Mike: "KILL the curly display font on the artist pull-quote — it outsizes
+   everything and is hard to read. Use the house register."
+   DM Serif Display is a HEADLINE face: high contrast, tight apertures, curled
+   terminals. It is right for the reading paragraphs below (long measures, one
+   voice) and wrong for a wall quote set large — at 22px the curls were the
+   loudest thing on a page whose loudest thing is meant to be the artist's
+   photograph. The house display register is Syne, which is what every title,
+   heading and door on this face already speaks.
+   IT ALSO STOPS OUTSIZING THE TITLE. The quote is a LEAD (1.14x body); the
+   title is the HEAD (1.32x). Rank is legible from size again, which is the
+   half of Mike's note that is not about the typeface. The rule on the left is
+   what makes it read as a quotation now that it is no longer a serif. */
+.vp-face-blurb{font-family:'Syne',sans-serif;font-weight:600;
+  font-size:var(--fs-lead);line-height:1.4;color:var(--wb-dim);
+  letter-spacing:.005em;max-width:44ch;
+  border-left:2px solid var(--wb-gold-lo);padding-left:14px}
 .vp-face-lines{list-style:none;padding:0;margin:0;display:flex;
   flex-direction:column;gap:5px;border-top:1px solid var(--wb-border);
   padding-top:11px}
+/* [P23 2026-08-02] THE REGISTER STOPS BREAKING ITS OWN COLUMN.
+   These lines are authored as "KEY      value" and rely on the mono face to
+   line the values up — which works exactly until one wraps, and then the
+   continuation restarts at the left margin, under the KEY, and the column the
+   whole device depends on is gone. Measured on the robots Welcome face: TRADE's
+   value wrapped and the second line sat under the word TRADE.
+   A hanging indent is the printed-register answer and it is two properties: the
+   first line pulls back to the margin, every following line starts at the value
+   column. 9ch is the widest key in use plus its gap, and it is the same 9ch the
+   authored strings already pad to — so the CSS and the data agree by
+   construction rather than by luck. */
 .vp-face-lines li{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .72);letter-spacing:.06em;
-  color:var(--wb-gold-lo);white-space:pre-wrap}
+  font-size:var(--fs-small);letter-spacing:.06em;line-height:1.5;
+  color:var(--wb-gold-lo);white-space:pre-wrap;
+  padding-left:9ch;text-indent:-9ch}
 
 /* [X3 2026-07-30] THE FIRST LAYER — the log sheet.
    The container proposal describes the journal's presentation as "a date-index
@@ -153,17 +202,17 @@ body:has(.vp-face) .vp-area::before{display:none}
   padding:9px 0;border-bottom:1px solid var(--wb-border)}
 .vp-fe-stamp{flex:0 0 auto;min-width:8.5ch;
   font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .58);letter-spacing:.08em;
+  font-size:var(--fs-small);letter-spacing:.08em;
   text-transform:uppercase;color:var(--wb-gold-lo);white-space:nowrap}
 .vp-fe-body{display:flex;flex-direction:column;gap:3px;min-width:0}
 .vp-fe-title{font-family:'Syne',sans-serif;font-weight:700;
-  font-size:calc(var(--face-fs) * .68);letter-spacing:.09em;
+  font-size:var(--fs-small);letter-spacing:.09em;
   text-transform:uppercase;color:var(--wb-gold)}
 .vp-fe-line{font-family:'DM Serif Display',Georgia,serif;
-  font-size:calc(var(--face-fs) * .84);line-height:1.4;color:var(--wb-dim);
+  font-size:var(--fs-body);line-height:1.4;color:var(--wb-dim);
   max-width:56ch}
 .vp-fe-note{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .55);letter-spacing:.07em;
+  font-size:var(--fs-micro);letter-spacing:.07em;
   color:var(--wb-gold-lo);opacity:.85}
 /* ======== O4 2026-07-30: THE PORTAL FACE ==============================
    IT MUST NOT READ AS PAPER. The manual and the record are documents and they
@@ -181,7 +230,7 @@ body:has(.vp-face) .vp-area::before{display:none}
    photo - see THE FROZEN PORTAL IS A SCREEN above. */
 .vp-face-portal .vp-face-title{color:#e8e4d8;letter-spacing:.30em}
 .vp-face-sub{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .60);letter-spacing:.14em;text-transform:uppercase;
+  font-size:var(--fs-small);letter-spacing:.14em;text-transform:uppercase;
   color:#8a857a;margin-top:-6px}
 .vp-face-portal .vp-face-blurb{color:#b8b3a6;max-width:56ch}
 .vp-face-portal .vp-face-lines{border-top:1px solid #3b3831}
@@ -198,7 +247,7 @@ body:has(.vp-face) .vp-area::before{display:none}
 .vp-face-portal .vp-face-action{position:static;margin-top:2px;
   order:0;align-self:flex-start;
   background:#cfcbc0;color:#0b0b0a;border:1px solid #cfcbc0;box-shadow:none;
-  font-size:calc(var(--face-fs) * .62);padding:9px 18px;letter-spacing:.24em}
+  font-size:var(--fs-small);padding:9px 18px;letter-spacing:.24em}
 .vp-face-portal .vp-face-action:hover{background:transparent;color:#e8e4d8;
   border-color:#e8e4d8}
 .vp-face-portal .vp-recipes{order:1}
@@ -210,11 +259,11 @@ body:has(.vp-face) .vp-area::before{display:none}
 .vp-recipes{border-top:1px solid #3b3831;padding-top:12px;
   display:flex;flex-direction:column;gap:8px}
 .vp-recipes-head{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .58);letter-spacing:.26em;color:#8a857a}
+  font-size:var(--fs-small);letter-spacing:.26em;color:#8a857a}
 .vp-recipe-row{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap}
 .vp-recipe-sel{flex:1 1 22ch;min-width:0;
   font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .66);letter-spacing:.10em;text-transform:uppercase;
+  font-size:var(--fs-small);letter-spacing:.10em;text-transform:uppercase;
   color:#e8e4d8;background:#141312;border:1px solid #57544d;border-radius:0;
   padding:7px 10px;cursor:pointer;appearance:none;
   background-image:linear-gradient(45deg,transparent 50%,#8a857a 50%),
@@ -226,16 +275,16 @@ body:has(.vp-face) .vp-area::before{display:none}
 .vp-recipe-sel option:disabled{color:#6b6659}
 .vp-recipe-go{flex:0 0 auto;
   font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .62);letter-spacing:.24em;text-transform:uppercase;
+  font-size:var(--fs-small);letter-spacing:.24em;text-transform:uppercase;
   background:#cfcbc0;color:#0b0b0a;border:1px solid #cfcbc0;padding:7px 20px;
   cursor:pointer;transition:background .16s,color .16s}
 .vp-recipe-go:hover:not(:disabled){background:transparent;color:#e8e4d8;border-color:#e8e4d8}
 .vp-recipe-go:disabled{opacity:.35;cursor:default}
 .vp-recipe-line{font-family:'DM Serif Display',Georgia,serif;
-  font-size:calc(var(--face-fs) * .82);line-height:1.4;color:#a5a094;max-width:60ch}
+  font-size:var(--fs-body);line-height:1.4;color:#a5a094;max-width:60ch}
 
 .vp-presets-note,.vp-face-papa{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .54);letter-spacing:.06em;color:#7d7869;
+  font-size:var(--fs-micro);letter-spacing:.06em;color:#7d7869;
   margin-top:8px;line-height:1.5}
 .vp-face-papa{border-top:1px dashed #3b3831;padding-top:8px}
 @media (max-width:640px){
@@ -249,7 +298,7 @@ body:has(.vp-face) .vp-area::before{display:none}
    log sheet", and this is that at first-layer fidelity. */
 .vp-log{margin-top:10px;border-top:1px solid var(--wb-border);padding-top:9px}
 .vp-log-toggle{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .56);letter-spacing:.22em;text-transform:uppercase;
+  font-size:var(--fs-micro);letter-spacing:.22em;text-transform:uppercase;
   background:transparent;color:var(--wb-gold);border:1px solid var(--wb-border-hi);
   padding:5px 11px;cursor:pointer;transition:background .16s,color .16s}
 .vp-log-toggle:hover{background:var(--wb-gold);color:var(--wb-ink-card)}
@@ -260,15 +309,15 @@ body:has(.vp-face) .vp-area::before{display:none}
 .vp-log-jump:hover{background:var(--wb-ink-soft)}
 .vp-log-stamp{flex:0 0 auto;min-width:8.5ch;
   font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .55);letter-spacing:.08em;text-transform:uppercase;
+  font-size:var(--fs-micro);letter-spacing:.08em;text-transform:uppercase;
   color:var(--wb-gold-lo)}
 .vp-log-title{font-family:'Syne',sans-serif;font-weight:700;
-  font-size:calc(var(--face-fs) * .62);letter-spacing:.08em;text-transform:uppercase;
+  font-size:var(--fs-small);letter-spacing:.08em;text-transform:uppercase;
   color:var(--wb-gold)}
 
 .vp-face-footer{margin-top:12px;
   font-family:'Courier Prime','Courier New',monospace;
-  font-size:clamp(.53rem,.85vw,.63rem);letter-spacing:.07em;
+  font-size:var(--fs-micro);letter-spacing:.07em;
   color:var(--wb-gold-lo);opacity:.85}
 @media (max-width:640px){
   .vp-fe{flex-direction:column;gap:4px}
@@ -284,7 +333,7 @@ body:has(.vp-face) .vp-area::before{display:none}
 .vp-face-action{align-self:flex-start;margin-top:auto;
   position:sticky;bottom:0;z-index:2;
   font-family:'Courier Prime','Courier New',monospace;
-  font-size:clamp(.6rem,1vw,.72rem);letter-spacing:.2em;text-transform:uppercase;
+  font-size:var(--fs-small);letter-spacing:.2em;text-transform:uppercase;
   background:var(--wb-gold);color:var(--wb-ink-card);
   border:1px solid var(--wb-gold);padding:11px 20px;cursor:pointer;
   box-shadow:0 -10px 12px -6px var(--wb-ink);
@@ -466,7 +515,12 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .tl-tracks{list-style:none;padding:0 0 14px}
 .tl-album-label{padding:20px 20px 14px;border-bottom:1px solid var(--wb-border);margin-bottom:4px}
 .tl-album-title{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(.95rem,1.6vw,1.2rem);color:var(--wb-gold);line-height:1.2}
-.ex-album-banner{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:14px 32px 10px;border-top:1px solid var(--wb-border)}
+/* [P3 2026-08-02] THE ARTIST-NAME BAR IS TIGHTENED TO ITS TYPE.
+   Mike: "same problem — tighten." Measured at 50px tall for a 24px line: 26px
+   of it was padding, and it is the band a visitor crosses on every single
+   track change. The title's own line-height is the floor; the padding is now
+   the smallest gap that still reads as a band rather than as a collision. */
+.ex-album-banner{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:8px 32px 7px;border-top:1px solid var(--wb-border)}
 .ex-album-banner-title{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1rem,1.8vw,1.35rem);letter-spacing:.1em;text-transform:uppercase;color:var(--wb-gold);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ex-album-banner-aux{flex:1;min-height:1px}
 /* [M4 2026-08-01] THE NAME IS MGK-VIIIp, AND THE FINAL p IS LOWERCASE.
@@ -658,9 +712,9 @@ body:has(.pb) .ex-root{padding-bottom:88px}
   text-decoration:underline;text-underline-offset:3px}
 .vp-rec-head:focus-visible{outline:none}
 .vp-rec-title{font-family:'DM Serif Display',Georgia,serif;
-  font-size:calc(var(--face-fs) * 1.12);line-height:1.2;color:var(--wb-gold)}
+  font-size:var(--fs-lead);line-height:1.2;color:var(--wb-gold)}
 .vp-rec-body{display:flex;flex-direction:column;gap:10px}
-.vp-rec-line{margin:0;font-size:calc(var(--face-fs) * .92);line-height:1.62;
+.vp-rec-line{margin:0;font-size:var(--fs-body);line-height:1.62;
   color:var(--wb-gold-lo)}
 
 /* THE ENDMARK. A hairline that stops, with a tombstone set into it. The page
@@ -671,14 +725,14 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 
 .vp-rec-nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .vp-rec-step{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .62);letter-spacing:.14em;text-transform:uppercase;
+  font-size:var(--fs-small);letter-spacing:.14em;text-transform:uppercase;
   background:none;border:1px solid var(--wb-border);color:var(--wb-gold-lo);
   padding:7px 13px;cursor:pointer;transition:border-color .18s,color .18s}
 .vp-rec-step:hover:not(:disabled),.vp-rec-step:focus-visible:not(:disabled){
   border-color:var(--wb-gold-lo);color:var(--wb-gold);outline:none}
 .vp-rec-step:disabled{opacity:.3;cursor:default}
 .vp-rec-count{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .58);letter-spacing:.12em;color:var(--wb-gold-mute)}
+  font-size:var(--fs-small);letter-spacing:.12em;color:var(--wb-gold-mute)}
 
 /* ================= [P2 2026-08-02] THE CONTROL ROOM =======================
    Period instrument register: panel steel, engraved-plate legends, the house
@@ -755,7 +809,7 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .ip-screw-bl{left:9px;bottom:9px} .ip-screw-br{right:9px;bottom:9px}
 
 /* the engraved maker's plate: cut into the steel, so the light sits BELOW */
-.ip-plate{align-self:flex-start;font-size:calc(var(--face-fs) * .52);
+.ip-plate{align-self:flex-start;font-size:var(--fs-micro);
   letter-spacing:.22em;color:var(--engrave);
   text-shadow:0 1px 0 rgba(255,255,255,.10);
   border:1px solid #3a3b38;background:linear-gradient(180deg,#232422,#2c2d2b);
@@ -763,9 +817,9 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 
 .ip-deck{display:flex;flex-wrap:wrap;gap:clamp(18px,3vw,44px);align-items:flex-start}
 .ip-bay{display:flex;flex-direction:column;gap:9px;min-width:0}
-.ip-legend{font-size:calc(var(--face-fs) * .5);letter-spacing:.26em;
+.ip-legend{font-size:var(--fs-micro);letter-spacing:.26em;
   color:var(--engrave);text-shadow:0 1px 0 rgba(255,255,255,.08)}
-.ip-sub{font-size:calc(var(--face-fs) * .44);letter-spacing:.16em;color:#6c6759}
+.ip-sub{font-size:var(--fs-micro);letter-spacing:.16em;color:#6c6759}
 
 /* ---- THE DRUM ---------------------------------------------------------
    A cylinder seen through a slot in the panel. The window is cut, so it has
@@ -779,7 +833,7 @@ body:has(.pb) .ex-root{padding-bottom:88px}
   transition:transform .42s cubic-bezier(.2,.75,.25,1)}
 .ip-drum-face{position:absolute;inset:0;display:flex;align-items:center;
   justify-content:center;backface-visibility:hidden;
-  font-size:calc(var(--face-fs) * .62);letter-spacing:.16em;
+  font-size:var(--fs-small);letter-spacing:.16em;
   color:#5f5b51;   /* UNLIT: legible, and plainly not running */
   transition:color .3s,text-shadow .3s}
 /* THE DRUM IS ILLUMINATED ONLY WHEN ARMED (Mike). */
@@ -807,9 +861,9 @@ body:has(.pb) .ex-root{padding-bottom:88px}
   transition:top .16s cubic-bezier(.3,.8,.3,1),height .16s}
 .ip-bat-up .ip-bat-lever{top:5px}
 .ip-sw-legend{display:flex;flex-direction:column;gap:2px;min-width:0}
-.ip-sw-name{font-size:calc(var(--face-fs) * .54);letter-spacing:.2em;
+.ip-sw-name{font-size:var(--fs-micro);letter-spacing:.2em;
   color:var(--engrave-hi);text-shadow:0 1px 0 rgba(0,0,0,.5)}
-.ip-sw-sub{font-size:calc(var(--face-fs) * .42);letter-spacing:.12em;color:#6c6759}
+.ip-sw-sub{font-size:var(--fs-micro);letter-spacing:.12em;color:#6c6759}
 
 /* ---- THE LAMPS --------------------------------------------------------
    INCANDESCENT, not LED: a glass bulb that is visible when dark, a filament
@@ -849,7 +903,7 @@ body:has(.pb) .ex-root{padding-bottom:88px}
   border-radius:2px;background:#ded9cb;transform:translateX(-50%)}
 /* the marks layer sits ON the knob's centre so the arc maths has one origin */
 .ip-dial-marks{position:absolute;left:43px;top:50%;width:0;height:0}
-.ip-dial-mark{position:relative;font-size:calc(var(--face-fs) * .5);
+.ip-dial-mark{position:relative;font-size:var(--fs-micro);
   letter-spacing:.2em;color:#5f5b51}
 /* [N1] the tie line was tried and rejected as noise - see Exhibit.jsx. */
 .ip-dial-mark.ip-on{color:var(--engrave-hi);text-shadow:0 0 7px rgba(232,228,216,.28)}
@@ -859,7 +913,7 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .ip-latchbay{display:flex;align-items:center;gap:16px;flex-wrap:wrap;
   border-top:1px solid #3a3b38;padding-top:clamp(12px,1.8vw,20px)}
 .ip-latch{position:relative;cursor:pointer;padding:13px 34px;
-  font-family:inherit;font-size:calc(var(--face-fs) * .66);letter-spacing:.3em;
+  font-family:inherit;font-size:var(--fs-small);letter-spacing:.3em;
   color:#6d6858;background:linear-gradient(180deg,#33342f,#212220);
   border:1px solid #45463f;
   box-shadow:0 2px 0 #131413,inset 0 1px 0 rgba(255,255,255,.07);
@@ -872,11 +926,11 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .ip-armed .ip-latch:active{transform:translateY(2px);box-shadow:0 0 0 #131413,
   0 0 16px rgba(242,200,121,.2),inset 0 1px 0 rgba(255,255,255,.12)}
 .ip-state{display:flex;align-items:center;gap:9px}
-.ip-state-txt{font-size:calc(var(--face-fs) * .5);letter-spacing:.22em;color:#6c6759}
+.ip-state-txt{font-size:var(--fs-micro);letter-spacing:.22em;color:#6c6759}
 .ip-armed .ip-state-txt{color:#b8b2a2}
 
 /* the panel's own voice: why it will not arm, or what it is about to serve */
-.ip-refusal,.ip-readout{font-size:calc(var(--face-fs) * .56);line-height:1.6;
+.ip-refusal,.ip-readout{font-size:var(--fs-micro);line-height:1.6;
   letter-spacing:.04em;max-width:62ch}
 .ip-refusal{color:#a8895a;border-left:2px solid #6a5c3a;padding-left:12px}
 .ip-readout{color:#8d887a;border-left:2px solid #3a3b38;padding-left:12px}
@@ -962,14 +1016,14 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .stg-tp{display:flex;align-items:center;justify-content:space-between;gap:16px;
   flex:0 0 auto;padding-top:10px;border-top:1px solid var(--wb-border)}
 .stg-step{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .58);letter-spacing:.16em;text-transform:uppercase;
+  font-size:var(--fs-small);letter-spacing:.16em;text-transform:uppercase;
   background:none;border:1px solid var(--wb-border);color:var(--wb-gold-lo);
   padding:7px 13px;cursor:pointer;transition:border-color .18s,color .18s}
 .stg-step:hover:not(:disabled),.stg-step:focus-visible:not(:disabled){
   border-color:var(--wb-gold-lo);color:var(--wb-gold);outline:none}
 .stg-step:disabled{opacity:.3;cursor:default}
 .stg-cnt{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .54);letter-spacing:.14em;color:var(--wb-gold-mute)}
+  font-size:var(--fs-micro);letter-spacing:.14em;color:var(--wb-gold-mute)}
 .vp-face-panel .stg{padding:0}
 
 /* [STAGE] the index row closes on its TOP rule only. With the stage
@@ -988,10 +1042,10 @@ body:has(.pb) .ex-root{padding-bottom:88px}
   padding:9px 2px;cursor:pointer;color:inherit;font:inherit;transition:background .15s}
 .vp-trail-go:hover,.vp-trail-go:focus-visible{background:rgba(232,228,216,.05);outline:none}
 .vp-trail-label{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .62);letter-spacing:.1em;text-transform:uppercase;
+  font-size:var(--fs-small);letter-spacing:.1em;text-transform:uppercase;
   color:var(--wb-gold)}
 .vp-trail-scent{font-family:'DM Serif Display',Georgia,serif;
-  font-size:calc(var(--face-fs) * .8);line-height:1.4;color:var(--wb-gold-lo)}
+  font-size:var(--fs-small);line-height:1.4;color:var(--wb-gold-lo)}
 
 /* ===========================================================================
    [M-d 2026-08-02] TRACKLIST — THE KIND MARK AND THE SUB-ROW
@@ -1048,8 +1102,21 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    and zoom levels, so the console now wears an opaque apron that extends
    upward past its own top edge: whatever the actual gap is (up to 16px), it
    shows house paper, never the content scrolling beneath. */
+/* [P1 2026-08-02] AND THE APRON ATE THE CAROUSEL'S RESIZE HANDLE.
+   MIKE: "nothing resizes." MEASURED, not guessed: `.cf-dh` is the 14px drag
+   strip that sits DIRECTLY above this bar (page y 214-228 on a 1690x811
+   window), and this apron hangs 16px down from `bottom:100%` — i.e. exactly
+   over it — inside a `z-index:80` sticky. `elementsFromPoint` at every point
+   of the handle returned `.ex-album-banner` FIRST, so pointerdown never
+   reached the handle and the carousel height could not be dragged at all. A
+   drag that silently does nothing is worse than no handle.
+   The apron is PAINT. It exists to stop the collage showing through a gap
+   whose size varies with the nav's font metrics; it was never meant to be
+   hit-testable, and nothing under it is. `pointer-events:none` keeps the seal
+   exactly as F2 built it and gives the handle back — the fix is one property
+   because the defect was one property. */
 .ex-banner-console::before{content:"";position:absolute;left:0;right:0;
-  bottom:100%;height:16px;background:var(--wb-bg)}
+  bottom:100%;height:16px;background:var(--wb-bg);pointer-events:none}
 .ex-banner-console .ex-album-banner-aux{flex:1;min-width:0;display:flex;
   align-items:center;justify-content:flex-end;gap:10px}
 
@@ -1096,7 +1163,7 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    Set as reading matter, not as a caption. */
 .vp-card-label{display:flex;flex-direction:column;gap:.7em}
 .vp-card-label p{font-family:'DM Serif Display',Georgia,serif;
-  font-size:calc(var(--face-fs) * .92);line-height:1.5;color:var(--wb-gold);
+  font-size:var(--fs-body);line-height:1.5;color:var(--wb-gold);
   max-width:62ch;margin:0}
 
 /* the TOMBSTONE: the factual register. Key left, value right, hairline between
@@ -1114,10 +1181,98 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .vp-tomb-row{display:grid;grid-template-columns:minmax(88px,auto) 1fr;gap:12px;
   padding:5px 0;border-top:1px dotted var(--wb-border)}
 .vp-tomb dt{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .58);letter-spacing:.16em;text-transform:uppercase;
+  font-size:var(--fs-small);letter-spacing:.16em;text-transform:uppercase;
   color:var(--wb-gold-lo);margin:0;padding-top:.15em}
 .vp-tomb dd{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .68);line-height:1.45;color:var(--wb-gold);margin:0}
+  font-size:var(--fs-small);line-height:1.45;color:var(--wb-gold);margin:0}
+
+/* [P20] A REGISTER LINE THAT CAN BE CHECKED SAYS SO QUIETLY. The value keeps
+   the register's own mono face and weight and gains a dotted underline — the
+   footnote mark of a printed catalogue, not a web link in blue. */
+.vp-tomb-go{font:inherit;color:inherit;background:none;border:0;padding:0;
+  text-align:left;cursor:pointer;
+  border-bottom:1px dotted var(--wb-gold-mute);transition:color .15s,border-color .15s}
+.vp-tomb-go:hover,.vp-tomb-go:focus-visible{color:var(--wb-gold-hi);
+  border-bottom-color:var(--wb-gold-hi);outline:none}
+
+/* ===========================================================================
+   [P16 2026-08-02] THE RECORDS — an index where every line is a door.
+   Year, title, one clause of why it is here, and the platforms that carry it.
+   Set as a register rather than as cards: these are catalogue entries, and the
+   card treatment belongs to the quotations below them.
+   =========================================================================== */
+.vp-records{display:flex;flex-direction:column;gap:8px}
+.vp-records-head{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--wb-gold-lo);margin:0;font-weight:400}
+.vp-records-list{list-style:none;margin:0;padding:0;display:flex;
+  flex-direction:column}
+.vp-record{display:grid;grid-template-columns:5.5ch 1fr auto;gap:14px;
+  align-items:baseline;padding:9px 0;border-top:1px dotted var(--wb-border)}
+.vp-record-when{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.08em;color:var(--wb-gold-mute)}
+.vp-record-body{display:flex;flex-direction:column;gap:2px;min-width:0}
+.vp-record-title{font-family:'Syne',sans-serif;font-weight:700;
+  font-size:var(--fs-small);letter-spacing:.05em;color:var(--wb-gold)}
+.vp-record-why{font-family:'DM Serif Display',Georgia,serif;
+  font-size:var(--fs-small);line-height:1.35;color:var(--wb-gold-lo)}
+.vp-record-doors{display:flex;gap:6px;flex-shrink:0}
+.vp-record-door{display:inline-flex;align-items:center;justify-content:center;
+  width:2.2em;height:2.2em;border-radius:50%;flex-shrink:0;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.04em;
+  color:var(--wb-gold);background:transparent;
+  border:1px solid var(--wb-border-hi);cursor:pointer;
+  transition:background .15s,color .15s,border-color .15s,transform .12s}
+.vp-record-door:hover,.vp-record-door:focus-visible{background:#b8974a;
+  color:#211d18;border-color:#b8974a;transform:translateY(-1px);outline:none}
+.vp-records-note{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);line-height:1.5;color:var(--wb-gold-lo);margin:2px 0 0}
+
+/* ===========================================================================
+   [P17/P18/P19 2026-08-02] THE DECKS — quotations as cards on the wall.
+   The collage set this wing's quality bar (Mike: "the collage wall is the
+   quality bar — everything should feel like it belongs beside it"), so the
+   cards are built from the collage's own materials: warm paper, a small tilt,
+   a real shadow, and the whole card is the door. Hover squares it up and
+   lifts it, exactly as a collage tile does, because they are the same gesture
+   in two places rather than two effects that happen to resemble each other.
+   =========================================================================== */
+/* the decks are SECTIONS, and they need to look like it. Without a rule above
+   them the heading sat hard against the block before it and read as that
+   block's footnote — measured on Carsie's card, where "SAID ABOUT HER" landed
+   one line under the records note. */
+.vp-deck{display:flex;flex-direction:column;gap:11px;
+  margin-top:8px;padding-top:15px;border-top:1px solid var(--wb-border)}
+.vp-deck-head{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.22em;text-transform:uppercase;
+  color:var(--wb-gold-lo);margin:0;font-weight:400}
+.vp-deck-cards{display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));
+  gap:18px 14px;padding:2px 4px 6px}
+.vp-qcard{display:flex;flex-direction:column;gap:8px;text-align:left;
+  background:#f3efe6;color:#211f1c;border:0;cursor:pointer;
+  padding:14px 15px 12px;
+  transform:rotate(var(--tilt,0deg));
+  box-shadow:0 7px 20px rgba(0,0,0,.45);
+  transition:transform .18s cubic-bezier(.2,.8,.3,1),box-shadow .18s}
+.vp-qcard:hover,.vp-qcard:focus-visible{transform:rotate(0deg) scale(1.04);
+  box-shadow:0 14px 34px rgba(0,0,0,.6);z-index:2;outline:none}
+.vp-qcard-still{display:block;width:calc(100% + 30px);margin:-14px -15px 2px;
+  aspect-ratio:16/9;object-fit:cover}
+.vp-qcard-eyebrow{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.18em;text-transform:uppercase;
+  color:#7d7869}
+.vp-qcard-text{font-family:'DM Serif Display',Georgia,serif;
+  font-size:var(--fs-small);line-height:1.42;color:#211f1c}
+/* the stamp: who said it, and where. Two weights so the eye never has to
+   work out which half is the person and which half is the publication. */
+.vp-qcard-stamp{display:flex;flex-direction:column;gap:1px;margin-top:auto;
+  padding-top:8px;border-top:1px solid #cdc7ba}
+.vp-qcard-who{font-family:'Syne',sans-serif;font-weight:700;
+  font-size:var(--fs-micro);letter-spacing:.08em;color:#211f1c}
+.vp-qcard-src{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.06em;color:#7d7869}
 
 /* the SIDEBOXES: boxed asides. They are what makes it read as a magazine page
    rather than as a document - a ruled box beside running text is the oldest
@@ -1125,14 +1280,14 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .vp-box{border:1px solid var(--wb-gold-lo);background:var(--wb-ink-soft);
   padding:11px 13px;break-inside:avoid}
 .vp-box-head{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .58);letter-spacing:.2em;text-transform:uppercase;
+  font-size:var(--fs-small);letter-spacing:.2em;text-transform:uppercase;
   color:var(--wb-gold-lo);margin:0 0 7px;font-weight:400}
 .vp-box-lines{list-style:none;margin:0;padding:0;display:flex;
   flex-direction:column;gap:5px}
 .vp-box-lines li{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .66);line-height:1.45;color:var(--wb-gold)}
+  font-size:var(--fs-small);line-height:1.45;color:var(--wb-gold)}
 .vp-box-note{font-family:'Courier Prime','Courier New',monospace;
-  font-size:calc(var(--face-fs) * .56);line-height:1.5;color:var(--wb-gold-lo);
+  font-size:var(--fs-micro);line-height:1.5;color:var(--wb-gold-lo);
   margin:8px 0 0;border-top:1px dashed var(--wb-border);padding-top:6px}
 
 /* ===========================================================================
@@ -1213,8 +1368,25 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    (2 × 1.34rem × 1.35 line-height) and the wrap holds nothing but content,
    padding and the credit row. Fixed rather than auto so the footer does not
    jump as one- and two-line facts cycle. */
-.ex-root[data-flat="1"] .fs-wrap{flex:0 0 auto;min-height:0}
-.ex-root[data-flat="1"] .fs-viewport{flex:0 0 auto;height:3.7rem;min-height:0}
+/* [P2 2026-08-02] AND THE TWO-LINE BUDGET WAS STILL A BUDGET, NOT A FIT.
+   Mike: "still unnecessarily tall — cut unused space to the content." F4
+   replaced a 120px strip with a fixed two-line viewport, which was the right
+   direction and stopped one line short: MEASURED at 1231px column the wrap
+   still ran 105px for a fact that occupies 29 of them — a 58px viewport
+   holding one line, plus 18px of padding and a 28px credit row.
+   THE FIT IS NOW THE CONTENT'S. The viewport sizes to the fact and is capped
+   at two lines (the existing fade-mask still handles the rare longer quote),
+   the padding comes in, and the credit rides the same row as the rule instead
+   of claiming one of its own. A one-line fact now costs ~62px instead of 105.
+   WHY THE HEIGHT IS ALLOWED TO MOVE HERE AND WAS NOT BEFORE: `.fs-wrap` is
+   the LAST element in the flat wing's right column, so a fact that wraps to
+   two lines moves the bottom of the document and nothing else. F4's "fixed so
+   the footer does not jump" was reasoning about the staged frame, where the
+   scroller had a floor beneath it to push against. */
+.ex-root[data-flat="1"] .fs-wrap{flex:0 0 auto;min-height:0;padding:7px 20px 6px}
+.ex-root[data-flat="1"] .fs-viewport{flex:0 0 auto;height:auto;
+  min-height:1.85rem;max-height:3.7rem}
+.ex-root[data-flat="1"] .fs-footer{margin-top:5px}
 
 /* ---- [W10] THE SECTION HEADER — "Coconuts" over the numbers --------------- */
 .tl-header{list-style:none;padding:16px 20px 5px;cursor:default;user-select:none;
@@ -1231,12 +1403,29 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    register, trail and fact line flips to light-on-dark without touching a
    single component rule. The tracklist and nav stay on the house paper: the
    FRAME is the museum's; the STAGE is dark; the imagery is the light. */
+/* [P9 2026-08-02] THE HOUSE LIGHTS COME DOWN — THEY DO NOT GO OUT.
+   MIKE: "the black is TOO BLACK on the artist pages — the categories are good
+   but the presentation lacks the collage's cool vibe."
+   THE DIAGNOSIS IS IN THE COLLAGE ITSELF. Its tiles are #f3efe6 paper with a
+   real shadow under them, and they read warm and lit; the stage they were
+   glued to was #121110 — a neutral near-black one step off pure. Warm paper on
+   cold void is not one room, and the seam is what Mike was seeing. The greens
+   and blues of a video thumbnail also die against a neutral black: there is
+   nothing for them to be warm AGAINST.
+   SO THE STAGE BECOMES WARM CHARCOAL, AND IT IS LIT FROM THE TOP. The ramp
+   moves onto the same yellow-red axis as the museum's paper stock (the room
+   is the same building, at night), and the flat fill becomes a soft ellipse
+   of light behind the picture — a stage with a lamp on it rather than a hole
+   cut in the page. Values stay dark enough that the imagery is still the
+   brightest thing in the room, which is W6's whole ruling and is untouched. */
 [data-exhibit="wal"] .ex-right{
-  --wb-ink:#121110;--wb-ink-soft:#1e1c1a;--wb-ink-card:#1a1918;--wb-ink-card-hi:#242220;
-  --wb-border:#3b3831;--wb-border-hi:#57544d;
-  --wb-gold:#e8e4d8;--wb-gold-hi:#ffffff;--wb-gold-lo:#a5a094;--wb-gold-mute:#8a857a;
-  --wb-dim:#cfcbc0;
-  background:var(--wb-ink)}
+  --wb-ink:#211d18;--wb-ink-soft:#2b261f;--wb-ink-card:#262119;--wb-ink-card-hi:#332d24;
+  --wb-border:#4a4336;--wb-border-hi:#6b6353;
+  --wb-gold:#f1ecdd;--wb-gold-hi:#ffffff;--wb-gold-lo:#b4ab96;--wb-gold-mute:#968d79;
+  --wb-dim:#e0d9c8;
+  background:
+    radial-gradient(120% 70% at 50% -6%, #2f2921 0%, rgba(47,41,33,0) 62%),
+    var(--wb-ink)}
 /* the B&W site law does NOT apply to WAL (W8) — plates keep their color. */
 [data-exhibit="wal"] .vp-face-still{filter:none;max-width:min(100%,420px)}
 [data-exhibit="wal"] .vp-poster img{filter:none}
@@ -1246,17 +1435,62 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    opens its door — W4a). They read as marquee doors: a lit left rule, a
    raised card, the label in the display face — visible without shouting
    over the imagery. */
-[data-exhibit="wal"] .vp-trail{gap:7px;padding:4px 0}
-[data-exhibit="wal"] .vp-trail-go{border:1px solid var(--wb-border-hi);
+/* [P10 2026-08-02] THE DOORS GO TWO-UP.
+   MIKE: "the bottom buttons are wasting horizontal space — halve their width
+   and arrange 2x2 (the new geometry should help the visuals)."
+   He is right about the arithmetic and right about the consequence. A door is
+   a NAME and a FUNCTION — four or five words — and it was being given 1100px
+   of line to say them in, so every row read as a mostly-empty bar and four of
+   them read as a stack of mostly-empty bars. At half width the words fill the
+   door, the four doors make a BLOCK rather than a list, and the block is
+   roughly square, which is the shape a set of exits wants to be.
+   TWO, EXPLICITLY — not `auto-fit`. The first cut used
+   `auto-fit/minmax(20rem,1fr)` so the count could follow the width, and at a
+   1150px column it dealt THREE, which is a row of doors and a widow rather
+   than the block Mike asked for. `2x2` is the instruction and it is also the
+   better read: an odd door on a third column has no partner to line up with.
+   The stack returns below 820px, where two doors would be two slivers. */
+[data-exhibit="wal"] .vp-trail{display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;padding:4px 0}
+@media (max-width:820px){
+  [data-exhibit="wal"] .vp-trail{grid-template-columns:minmax(0,1fr)}
+}
+[data-exhibit="wal"] .vp-trail-go{height:100%;border:1px solid var(--wb-border-hi);
   border-left:3px solid #b8974a;background:rgba(255,255,255,.03);
-  padding:12px 16px;margin:0;
+  padding:12px 16px;margin:0;gap:5px;
   transition:background .16s,border-color .16s,transform .12s}
 [data-exhibit="wal"] .vp-trail-go:hover,
 [data-exhibit="wal"] .vp-trail-go:focus-visible{background:rgba(184,151,74,.14);
   border-color:#b8974a;transform:translateX(3px)}
+/* A DOMAIN IS ONE WORD, AND ON A PHONE IT IS TOO LONG A ONE.
+   Measured: "carsieblanton.com" in Syne 800 at .12em tracking has a
+   min-content width of 367px, and the door adds 37px of padding and rules —
+   404px demanded inside a 391px screen, which is a page that scrolls sideways.
+   `anywhere` lets the name break mid-token only when it must; at every width
+   with room it is untouched. The name is also given `min-width:0` so it can
+   actually shrink inside the flex row rather than pushing the row wider. */
 [data-exhibit="wal"] .vp-trail-label{font-family:'Syne',sans-serif;font-weight:800;
-  font-size:calc(var(--face-fs, 1rem) * .74);letter-spacing:.12em}
-[data-exhibit="wal"] .vp-trail-label::after{content:"  ↗";color:#b8974a}
+  font-size:var(--fs-small);letter-spacing:.12em;
+  display:flex;align-items:baseline;gap:.7em;flex-wrap:wrap;min-width:0}
+[data-exhibit="wal"] .vp-trail-name{min-width:0;overflow-wrap:anywhere}
+/* [P15] THE FUNCTION, BESIDE THE NAME. Mike kept the Name+function pattern
+   ("the redundancy sells the point") and asked for the descriptors to be
+   filled properly. The function is the half a stranger navigates by, so it
+   is set apart from the name rather than buried in the sentence beneath it. */
+[data-exhibit="wal"] .vp-trail-fn{font-family:'Courier Prime','Courier New',monospace;
+  font-weight:400;font-size:var(--fs-micro);letter-spacing:.16em;
+  color:#c8a45c;white-space:nowrap}
+/* [P6 2026-08-02] THE ARROW IS GONE.
+   MIKE: "the link-out arrow on buttons is non-intuitive and distracting —
+   remove or replace with something that reads." A bare ↗ is a convention
+   borrowed from documentation UIs; it renders at wildly varying weight across
+   the fallback stack, and it says "external" to people who already know what
+   it means and nothing at all to anyone else. Removal is the option Mike
+   allowed and it is the right one HERE, because the door now states its
+   function in words (P15) — the thing the arrow was gesturing at is written
+   down. Where LEAVING THE BUILDING is the fact worth stating, the door's own
+   scent line says so in English. */
 
 /* ---- [W2] THE COLLAGE — glued up, tilted, the artists' own pictures -------
    White paper mats on the dark stage, each at its own small angle with a
@@ -1275,9 +1509,13 @@ body:has(.pb) .ex-root{padding-bottom:88px}
   box-shadow:0 14px 34px rgba(0,0,0,.65);z-index:2;outline:none}
 .vp-collage-tile img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
 .vp-collage-cap{display:flex;flex-direction:column;gap:2px;padding-top:7px;text-align:left}
-.vp-collage-date{font-family:'Courier Prime',monospace;font-size:.56rem;
+/* [P7] the caption strip joins the ramp's floor. The collage sits OUTSIDE
+   `.vp-face`'s cascade of steps (its tiles are paper, not stage), so it
+   carries the same two floors as literals rather than inheriting them — .56rem
+   was 9px on the mat, which is a caption nobody reads. */
+.vp-collage-date{font-family:'Courier Prime',monospace;font-size:.68rem;
   letter-spacing:.12em;color:#57544d}
-.vp-collage-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.72rem;
+.vp-collage-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;
   line-height:1.3;color:#211f1c;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 @media (max-width:720px){

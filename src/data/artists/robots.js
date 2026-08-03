@@ -81,10 +81,18 @@ const WBR_TRACKS = [
               line: "Power first, then the glass, then the software — and only " +
                     "then the question of what any of it was for.",
               note: "" },
-            { stamp: "WHY", title: "[PAPA]",
-              line: "The house's own answer to the only question a visitor " +
-                    "actually asks.",
-              note: "[PAPA] — this one is Mike's and should stay Mike's" },
+            /* [P23/P5 2026-08-02] THE ROW GETS A REAL TITLE.
+               It was titled "[PAPA]" — the marker standing IN for the heading
+               rather than annotating it — and with markers now scrubbed at the
+               render seam (P5) that left a headless row on the page. The
+               heading is the house's, the ANSWER is still Mike's, and the
+               marker moves to the note where it belongs: his list survives,
+               the visitor sees a finished row. */
+            { stamp: "WHY", title: "Why we bother",
+              line: "Because a machine that still works is a machine that is " +
+                    "still saying something, and sixty years is not long enough " +
+                    "for that to stop being interesting.",
+              note: "[PAPA] — the real answer is Mike's and should stay Mike's" },
           ],
           footer: "“Restoration house” is not what we are. Weird.Baby is Weird.Baby.",
         },
@@ -153,9 +161,12 @@ const WBR_TRACKS = [
               line: "Which units are held, which are not, and what a case tier " +
                     "actually includes.",
               note: "[PAPA]" },
-            { stamp: "REACH", title: "[PAPA]",
-              line: "Address, and the decision about how much of it to publish.",
-              note: "[PAPA] — a decision, not a writing task" },
+            /* [P23/P5] same fix as the Welcome face: a real heading, the
+               marker demoted to the note. */
+            { stamp: "REACH", title: "How to reach us",
+              line: "There is one address and it is read by one person. Which " +
+                    "is slow, and is also why an answer is worth having.",
+              note: "[PAPA] — the address itself, and how much of it to publish" },
           ],
         },
       },
@@ -209,6 +220,80 @@ const spine = [
     viewerPosterCaption:
       "MGK-VIIIp −02 “The Informer”, front and top, as received.",
     tracks: [
+      /* ==== [P23 2026-08-02] THE PLATE WALL ==================================
+         MIKE: "All Weird.Baby ROBOTS pages need beautification and better text
+         — a pass raising them toward the WAL/collage quality bar (structure and
+         visuals)."
+         THE WING'S PROBLEM WAS NEVER ITS WRITING. It was that a wing about a
+         PHYSICAL OBJECT was made entirely of words: three faces of register
+         lines and log entries, and eight real photographs of the machine
+         sitting unused in `public/robots/reference/photos` — one of them
+         serving as a poster nobody sees unless they land on the album with
+         nothing selected.
+         SO THE PHOTOGRAPHS COME OUT OF THE DRAWER. This is the WAL collage
+         renderer, unchanged, pointed at the museum's own plates instead of at
+         YouTube posters: the same glued-up wall, the same tilt, the same
+         shadow, the same tap-to-open — which is exactly what "belongs beside
+         the collage wall" means when the bar is set by that wall.
+         THEY ARE OUR OWN IMAGES on our own origin, so there is no rights
+         question here at all — the one that governs WAL's tiles does not
+         arise. Captions are what the photograph SHOWS, in the wing's own
+         register; the interpretation stays on the faces that already carry it.
+         ================================================================== */
+      {
+        id: "plates",
+        title: "The Plates",
+        videos: [],
+        tags: ["plates", "photographs", "viiip", "reference"],
+        face: {
+          kind: "text",
+          title: "THE PLATES",
+          subtitle: "MGK-VIIIp",
+          blurb:
+            "The unit as received, photographed before anything was touched. " +
+            "Nine plates: the front, the glass, the base, the switch on the " +
+            "back, and the two of them together.",
+          tombstone: [
+            { k: "Subject", v: "MGK-VIIIp −02 “The Informer”, and its twin" },
+            { k: "State", v: "As received — before cleaning, before power" },
+            { k: "Plates", v: "Nine, all held by this museum" },
+            { k: "Rights", v: "Ours. Photographed here, printed here." },
+          ],
+          collage: [
+            { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
+              href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
+              label: "The pair, front and top, as received", date: "FAMILY SHOT" },
+            { img: "/robots/reference/photos/front_full.png",
+              href: "/robots/reference/photos/front_full.png",
+              label: "The front, whole", date: "FRONT" },
+            { img: "/robots/reference/photos/front_screen.png",
+              href: "/robots/reference/photos/front_screen.png",
+              label: "The front glass, lit", date: "SCREEN" },
+            { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
+              href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
+              label: "The bezel around the glass", date: "BEZEL" },
+            { img: "/robots/reference/photos/top_monitor.png",
+              href: "/robots/reference/photos/top_monitor.png",
+              label: "The top monitor", date: "TOP" },
+            { img: "/robots/reference/photos/monitor_base.png",
+              href: "/robots/reference/photos/monitor_base.png",
+              label: "The base it stands on", date: "BASE" },
+            { img: "/robots/reference/photos/unit_new_base.png",
+              href: "/robots/reference/photos/unit_new_base.png",
+              label: "The unit on its new base", date: "BASE, NEW" },
+            { img: "/robots/reference/photos/rear_power_switch.png",
+              href: "/robots/reference/photos/rear_power_switch.png",
+              label: "The power switch, round the back", date: "REAR" },
+            { img: "/robots/art/viiip.png",
+              href: "/robots/art/viiip.png",
+              label: "The cover plate — the glass carries the BIOS beat",
+              date: "COVER" },
+          ],
+          footer: "Nine plates · Weird.Baby Robots",
+          papa: "[PAPA] — the caption wording, and whether any plate earns a " +
+                "face of its own.",
+        },
+      },
       {
         id: "record",
         title: "The Record",
@@ -578,6 +663,10 @@ export const robotsExhibit = {
      are untouched; adding it there is this one line. */
   bodyKey: "wb-rb-bodyh",
   visitPath: "/robots",
+  /* [P23 2026-08-02] this wing's own door verb — see the listener in
+     RobotsExhibitFlow. Declaring it is what makes the plate wall's tiles
+     live rather than beautifully dead. */
+  linkEvent: "wb-robots-open-link",
   shopExitParam: "robots",
   /* [M3 2026-08-01] THE GIFT SHOP IS BACK IN THE TITLE BAR. The one-shop
      ruling is unchanged - there is still exactly one shop - but hiding the
