@@ -28,7 +28,22 @@ export const wbRoster = [
     storeUrl: "https://weird-baby.printful.me",
     storePlatform: "Printful",
     image: "/images/wb-merch/sticker.png", // Mike 2026-07-06: sticker art heads the WB banner
-    blurb: "Six little blues from Papa.", // Mike-approved 2026-07-06
+    /* [M7 2026-08-03] "Six little blues from Papa." IS GONE. MIKE: "remove the
+       six blue notes from W.B's own shop; conform it to the standard template."
+       TWO THINGS WRONG WITH IT AND THEY ARE THE SAME THING. It advertised SIX
+       SONGS in a room that sells a STICKER — the blues are at /wb, the shop
+       has never carried them, and a shop line that names stock it does not
+       hold is the one thing a shop must not do. And it was off-template: every
+       other entry on this page is a picture and a name, so the house was the
+       only party on the board talking about itself.
+       THE GIFT SHOP'S REGISTER (personality map, 2026-08-03) is "a trustworthy
+       place to do business; the return to normalcy of the real world." That
+       register is quiet by construction. Removing the line is not a loss of
+       voice, it is the voice.
+       No replacement blurb is written here. `Banner` renders the field only
+       when it exists, so the house tile is now the standard template exactly —
+       and what the shop should say about itself, if anything, is Mike's
+       sentence to write, not Ops'. */
   },
 ];
 

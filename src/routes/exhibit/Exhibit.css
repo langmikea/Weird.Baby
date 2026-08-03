@@ -738,14 +738,40 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .vp-thumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:1;transition:opacity .2s}
 .vp-thumb:hover img{opacity:.8}
 .vp-thumb{background:var(--wb-bg)}
-.vp-thumb img.vp-thumb-album{width:min(88%,340px);height:min(88%,340px);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:2px;box-shadow:0 12px 48px rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.08)}
+/* [M5 2026-08-03] the idle thumb carries the same two-percentages defect as
+   `.vp-ao-art` — see the note there. `object-fit` is inherited from the
+   `.vp-thumb img` rule above (cover), so it is re-stated here as contain: a
+   square cover shown whole. */
+.vp-thumb img.vp-thumb-album{height:min(88%,340px);width:auto;max-width:88%;aspect-ratio:1;object-fit:contain;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:2px;box-shadow:0 12px 48px rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.08)}
 .vp-thumb-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
 .vp-empty-state{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--wb-gold-mute)}
 
 /* AUDIO-ONLY OVERLAY */
 .vp-audio-only{position:absolute;inset:0;z-index:3;background:var(--wb-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
-.vp-ao-art{width:min(88%,340px);height:min(88%,340px);object-fit:cover;display:block;border-radius:2px;box-shadow:0 12px 48px rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.08)}
-.vp-ao-ph{width:min(88%,340px);height:min(88%,340px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;gap:14px;border-radius:2px;box-shadow:0 12px 48px rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.08)}
+/* [M5 2026-08-03] THE COVER IS A SQUARE AND WAS BEING DRAWN IN A RECTANGLE.
+   MIKE: "W.B MUSIC: the album art does not fit the viewer and gets CROPPED."
+   THE CAUSE IS TWO PERCENTAGES OF TWO DIFFERENT THINGS. `width:min(88%,340px)`
+   resolves its 88% against the viewer's WIDTH and `height:min(88%,340px)`
+   against its HEIGHT — so the box is square only by luck, on windows tall
+   enough that BOTH land on the 340px cap. Below that the two disagree, the box
+   goes oblong, and `object-fit:cover` does what cover does: it fills the oblong
+   and throws the rest of the picture away.
+   MEASURED on /wb with the Vol 1 cover (a 2048x2048 square):
+     1440x780   340 x 340   square, fine — which is why this was never caught
+     1440x620   340 x 230   110px of the cover gone
+     1200x560   340 x 203   137px gone
+      390x844   313 x 175   138px gone, on the phone
+   THE FIX IS TO SAY SQUARE ONCE. One axis drives (height, which is the scarce
+   one — that is the whole reason the box was collapsing), `aspect-ratio:1`
+   derives the other, and `max-width` clamps the narrow case with the ratio
+   keeping it square as it clamps. `contain` replaces `cover` as the second
+   half of the same repair: if a cover is ever NOT square, the visitor should
+   see the whole record rather than a well-fitted crop of it. Mike's words for
+   this were "fix to fit", and `contain` is that word in CSS.
+   The placeholder and the idle thumb carry the identical pattern and are fixed
+   with it — the same defect three times is one defect. */
+.vp-ao-art{height:min(88%,340px);width:auto;max-width:88%;aspect-ratio:1;object-fit:contain;display:block;border-radius:2px;box-shadow:0 12px 48px rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.08)}
+.vp-ao-ph{height:min(88%,340px);width:auto;max-width:88%;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;gap:14px;border-radius:2px;box-shadow:0 12px 48px rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.08)}
 .vp-ao-ph-title{font-family:'DM Serif Display',Georgia,serif;font-size:1.3rem;line-height:1.25;color:var(--wb-gold)}
 .vp-ao-ph-year{font-family:'Courier Prime',monospace;font-size:.75rem;letter-spacing:.2em;color:var(--wb-gold);opacity:.7}
 .vp-ao-label{display:flex;align-items:center;gap:7px;font-family:'Courier Prime',monospace;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--wb-gold-mute);white-space:nowrap}
@@ -1301,6 +1327,22 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
   color:var(--wb-gold)}
 .vp-trail-scent{font-family:'DM Serif Display',Georgia,serif;
   font-size:var(--fs-small);line-height:1.4;color:var(--wb-gold-lo)}
+/* [M6 2026-08-03] AND A MARKER POINTING DOWN THE CORRIDOR IS A SENTENCE.
+   The rule above says a trail is "walked one marker at a time", and that is
+   true of doors OUT of the building — the reason they are set as rows and not
+   as a paragraph of links. A pointer to another room of THIS museum is not on
+   that trail; it is an aside in the prose, and it should be read once, in
+   passing, by a visitor who wants it. So the quiet row is exactly that: body
+   copy with one underlined word in it. No card, no rule, no display caps, no
+   raised ground — the four things that made the loud one loud. */
+.vp-trail-quiet{font-family:'DM Serif Display',Georgia,serif;
+  font-size:var(--fs-small);line-height:1.5;color:var(--wb-gold-lo);margin-top:14px}
+.vp-trail-quiet-go{background:none;border:0;padding:0;cursor:pointer;
+  font:inherit;color:var(--wb-gold);
+  text-decoration:underline;text-underline-offset:3px;
+  text-decoration-color:var(--wb-gold-mute);transition:text-decoration-color .15s}
+.vp-trail-quiet-go:hover,.vp-trail-quiet-go:focus-visible{
+  text-decoration-color:var(--wb-gold);outline:none}
 
 /* ===========================================================================
    [M-d 2026-08-02] TRACKLIST — THE KIND MARK AND THE SUB-ROW
@@ -1943,13 +1985,37 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 /* TAP FEEDBACK: on coarse pointers a row must acknowledge the finger the
    instant it lands — hover states never fire there, so without this the
    only feedback was whatever the tap eventually caused offscreen. */
+/* [M9 2026-08-03] AND `:active` IS NOT A PROMISE ON A TOUCHSCREEN.
+   MIKE: "clicking a track on iPhone produces no obvious visual change (robots
+   + WAL) — fix at the point of contact."
+   F6's rules below are correct CSS and they were the right idea. They do not
+   fire, for two reasons that compound:
+     · MOBILE SAFARI WITHHOLDS `:active` FROM ELEMENTS IT DOES NOT CONSIDER
+       CLICKABLE. `.tl-track` is an `<li>`; React attaches its listener at the
+       ROOT, so nothing on the element itself tells WebKit a finger matters
+       here, and the pseudo-class is simply never entered.
+     · EVEN WHERE IT IS ENTERED, IT IS ENTERED LATE AND LEFT AT ONCE. The
+       browser holds the press back until it knows the gesture is not the
+       beginning of a scroll, and a tap on a list is over in ~60ms — so the
+       window in which a paint could happen is frequently empty. "No obvious
+       visual change" is the exact symptom of both.
+   SO THE PRESS IS OWNED BY THE ROOM RATHER THAN BY THE BROWSER. One delegated
+   `pointerdown` listener on `.ex-root` marks the pressed row with
+   `data-pressed` and holds it for a floor of 160ms — long enough to be SEEN,
+   short enough to feel like the tap and not like a state. See the note at the
+   effect in Exhibit.jsx.
+   THE `:active` RULES STAY BESIDE IT. Where the browser does fire them they
+   are instant and free, and they paint the identical value, so the two cannot
+   disagree — the attribute is the floor, not the replacement. */
 @media (pointer: coarse) {
   /* [J1] the press reads the ground's own ramp, so it darkens on paper and
      lights on the dark stage instead of flashing a retired gold on both. */
-  .tl-track:active{background:color-mix(in srgb, var(--wb-gold) 22%, transparent);transition:none}
-  .vp-trail-go:active{background:color-mix(in srgb, var(--wb-gold) 22%, transparent);transition:none}
-  .vp-collage-tile:active{transform:rotate(0deg) scale(.97)}
-  .wb-dir-entry:active{color:#211f1c}
+  .tl-track:active,.tl-track[data-pressed]{background:color-mix(in srgb, var(--wb-gold) 22%, transparent);transition:none}
+  .vp-trail-go:active,.vp-trail-go[data-pressed]{background:color-mix(in srgb, var(--wb-gold) 22%, transparent);transition:none}
+  .vp-collage-tile:active,.vp-collage-tile[data-pressed]{transform:rotate(0deg) scale(.97)}
+  .wb-dir-entry:active,.wb-dir-entry[data-pressed]{color:#211f1c}
+  .vp-trail-quiet-go[data-pressed]{text-decoration-color:var(--wb-gold)}
+  .tl-typewrap[data-pressed]{background:color-mix(in srgb, var(--wb-gold) 22%, transparent)}
 }
 /* ACTIVE-STATE VISIBILITY at stacked widths: the selected row is the only
    trace of your last tap once the viewer is below the fold, so it stops

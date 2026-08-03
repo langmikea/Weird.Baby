@@ -122,12 +122,34 @@ function billing(fromWing, ownerId) {
   const walSetFallback = !resolved && fromWing === "wal";
   const top = walSetFallback ? null : resolved;
 
-  /* CLAUSE TWO. Earliest first, ties alphabetical — the wing's own standing
-     order, and the only tiebreak that cannot be read as a favour. */
+  /* CLAUSE TWO, AS AMENDED [M7 2026-08-03]. MIKE: "WAL artists ALPHABETICAL
+     always."
+     The original clause was "earliest first, ties alphabetical", and for the
+     WAL four it was producing an order nobody could read: Hunter Root above
+     Carsie Blanton because his first accession into our vault is 2026-04-05
+     and the wing was built 2026-07-30. That date is a fact about US — when we
+     started keeping his files — and putting it in charge of the running order
+     bills one guest above another on a ledger the guest never saw. J3 already
+     ruled what these four are: "they are a set and are sized as a set." A set
+     has one honest order and it is the alphabet.
+     THE DATE RULE SURVIVES WHERE IT MEANS SOMETHING — for house entries, whose
+     dates are the museum's own history and are ours to order by. That branch
+     is UNREACHABLE TODAY and the arithmetic says why: the house is in the pool
+     only when `houseOwns || direct`, and in exactly those cases `ownerKey`
+     resolves to "wb", so the house is `top` and is filtered out of `rest`. So
+     `rest` is the WAL set, always, on every entry the law allows. It is
+     written as two branches anyway, because the day a second house entry
+     exists it will land here and silently take the alphabet's order otherwise. */
+  const walIds = new Set(walEntries.map((e) => e.id));
   const rest = pool
     .filter((e) => !top || e.id !== top.id)
-    .sort((a, b) => (a.since < b.since ? -1 : a.since > b.since ? 1 :
-                     a.name.localeCompare(b.name)));
+    .sort((a, b) => {
+      const aw = walIds.has(a.id), bw = walIds.has(b.id);
+      if (aw !== bw) return aw ? -1 : 1;              /* the set leads */
+      if (aw) return a.name.localeCompare(b.name);    /* the set is alphabetical */
+      return a.since < b.since ? -1 : a.since > b.since ? 1
+           : a.name.localeCompare(b.name);            /* the house keeps its dates */
+    });
 
   return { top, rest, walSetFallback };
 }

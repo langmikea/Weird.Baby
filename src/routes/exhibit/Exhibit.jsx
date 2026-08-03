@@ -1839,6 +1839,65 @@ export default function Exhibit({ artist }) {
     onEnded: useCallback(() => advanceQueue(), []),
   });
 
+  /* ── [M9 2026-08-03] THE ROOM ACKNOWLEDGES THE FINGER ─────────────────────
+     MIKE: "clicking a track on iPhone produces no obvious visual change
+     (robots + WAL) — fix at the point of contact."
+     F6 wrote `:active` rules under `@media (pointer:coarse)` and they are
+     correct CSS that mostly never runs — the diagnosis is on the rules
+     themselves in Exhibit.css. The short version: mobile Safari withholds
+     `:active` from an `<li>` that carries no listener of its own (React's are
+     all at the root), and where it does grant it, it grants it after the
+     scroll/tap decision and takes it back when the finger lifts ~60ms later,
+     so there is often no frame in which anything could paint.
+     THIS IS THE FLOOR UNDER THAT. One delegated `pointerdown` on the exhibit
+     root marks the thing under the finger and holds the mark for at least
+     160ms — not a state the visitor has to dismiss, a flash they cannot miss.
+     WHY DELEGATED AND NOT A PROP ON EACH ROW: the tappable things are a
+     tracklist row, a door, a collage tile and a variant select, authored in
+     four different places by three different rules, and half of them are
+     rendered from data. A listener per call site is four chances to add the
+     fifth surface and forget. The selector is the list, in one place, beside
+     the CSS that styles it.
+     POINTER EVENTS, NOT TOUCH EVENTS: `pointerdown` fires for mouse, pen and
+     touch alike, so the desktop press is acknowledged too — and the paint is
+     gated to coarse pointers in CSS, so the mouse sees nothing new.
+     `pointercancel` matters as much as `pointerup`: it is what fires when the
+     tap turns out to be the start of a scroll, and without clearing on it a
+     flicked list would leave a lit row behind it. */
+  useEffect(() => {
+    const root = mainRef.current ? mainRef.current.closest(".ex-root") : null;
+    if (!root) return;
+    const SEL = ".tl-track, .vp-trail-go, .vp-trail-quiet-go, .vp-collage-tile," +
+                " .vp-qcard, .vp-record-door, .vp-tomb-go, .tl-typewrap";
+    const HOLD = 160;
+    let el = null, at = 0, timer = 0;
+    function clear() {
+      if (!el) return;
+      const held = Date.now() - at;
+      const node = el;
+      el = null;
+      clearTimeout(timer);
+      if (held >= HOLD) node.removeAttribute("data-pressed");
+      else timer = setTimeout(() => node.removeAttribute("data-pressed"), HOLD - held);
+    }
+    function down(e) {
+      const hit = e.target.closest ? e.target.closest(SEL) : null;
+      if (!hit) return;
+      clear();
+      el = hit; at = Date.now();
+      hit.setAttribute("data-pressed", "");
+    }
+    root.addEventListener("pointerdown", down, { passive: true });
+    window.addEventListener("pointerup", clear, { passive: true });
+    window.addEventListener("pointercancel", clear, { passive: true });
+    return () => {
+      clearTimeout(timer);
+      root.removeEventListener("pointerdown", down);
+      window.removeEventListener("pointerup", clear);
+      window.removeEventListener("pointercancel", clear);
+    };
+  }, []);
+
   // ── Init ──────────────────────────────────────────────────────────────────
   useEffect(() => {
     setTimeout(() => setVisible(true), 80);
@@ -3277,9 +3336,33 @@ export default function Exhibit({ artist }) {
                             on the rows rather than the container, so a trail
                             broken across pages looks identical to one that is
                             not. */}
-                        {Array.isArray(face.trail) && face.trail.length > 0 && (
+                        {/* [M6 2026-08-03] A DOOR MAY BE QUIET.
+                            MIKE, on WAL's booth pointer: "too loud and
+                            duplicative — one quiet inline link where it
+                            genuinely helps."
+                            He is right on both counts. The card it sits on is
+                            "Its place in the museum", whose entire body is the
+                            house explaining itself; a marquee door underneath
+                            it saying "the house's own FAQ — who we are" is the
+                            same sentence again, in display caps, on a raised
+                            card with a lit rule, at the size P10 sized doors to
+                            be. A marquee door is right for a door OUT of the
+                            building — an artist's own site, their store — which
+                            is what P10 was written for and what the register
+                            still means. It is wrong for a pointer down the
+                            corridor to another room of this same museum.
+                            SO A ROW MAY DECLARE `quiet` AND BECOME A SENTENCE.
+                            Same data shape, same `openLink` seam, same
+                            `data-stage-split` behaviour — the only difference
+                            is which register it is drawn in. That is why this
+                            is a flag on the existing trail rather than a new
+                            field family for one card: any wing that grows an
+                            in-building pointer gets the right voice for free,
+                            and any wing that declares no `quiet` renders
+                            byte-identically to before. */}
+                        {Array.isArray(face.trail) && face.trail.some(t => !t.quiet) && (
                           <ul className="vp-trail" data-stage-split="row">
-                            {face.trail.map((t, i) => (
+                            {face.trail.filter(t => !t.quiet).map((t, i) => (
                               <li key={i}>
                                 <button className="vp-trail-go"
                                         onClick={() => openLink(t.url)}>
@@ -3304,6 +3387,18 @@ export default function Exhibit({ artist }) {
                               </li>
                             ))}
                           </ul>
+                        )}
+                        {Array.isArray(face.trail) && face.trail.some(t => t.quiet) && (
+                          <p className="vp-trail-quiet" data-stage-split="row">
+                            {face.trail.filter(t => t.quiet).map((t, i) => (
+                              <span key={i}>
+                                {i > 0 && "  ·  "}
+                                {t.scent ? t.scent + " " : ""}
+                                <button className="vp-trail-quiet-go"
+                                        onClick={() => openLink(t.url)}>{t.label}</button>
+                              </span>
+                            ))}
+                          </p>
                         )}
                         {/* [W2 2026-08-02] THE COLLAGE — a glued-up wall of
                             the artist's own thumbnails, tilted like posters

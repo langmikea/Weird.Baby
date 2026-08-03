@@ -1215,9 +1215,17 @@ const HOUSE_ALBUM = {
           "It exists so a good song with somebody else's name on it has a " +
           "place in this building too.",
         ],
+        /* [M6 2026-08-03] MIKE: the booth pointer was "too loud and
+           duplicative — one quiet inline link where it genuinely helps."
+           Loud: it was a P10 marquee door, a register built for doors OUT of
+           the building. Duplicative: the card it stands on is the house
+           explaining itself, and the door's scent said that again.
+           Where it genuinely helps is the end of the paragraph a stranger has
+           just read about who runs this place — which is one sentence, with
+           one link in it. `quiet` is the flag; see the note at the render. */
         trail: [
-          { label: "The Information Booth", url: "/booth",
-            scent: "The house's own FAQ — who we are and how to reach us." },
+          { label: "the Information Booth", url: "/booth", quiet: true,
+            scent: "Who runs this place, and how to reach them:" },
         ],
         footer: "WORTH A LISTEN · WEIRD.BABY",
         papa: "[PAPA] — the house's account of itself; Mike edits, nothing " +
