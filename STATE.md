@@ -70,6 +70,40 @@ from memory:
   somewhere a scheduler can read. That is a hosting decision, not a code one, and
   it is the first real question of this workstream.
 
+## THE PALETTE + SET RULINGS (Mike, 2026-08-02 — standing; answers B7's J1/J2/J3)
+
+Three rulings closing the judgment calls the adversarial review listed rather
+than guessed at (`docs/TEMPLATE_ADVERSARIAL_REVIEW.md` §3). J1 and J3 are BUILT
+(THE LONG HAUL, v36); J2 is a ruling only, by Mike's own instruction.
+
+**J1 — THE RETIRED 2025 GOLD IS RETIRED EVERYWHERE.** `#b8974a` is the pre-2026
+gold-on-dark accent; the museum's `--wb-gold` has been photo black since the B&W
+rework. It survived by inertia on thirty sites, **the player bar's play, volume
+and CC buttons included** — the most-used control in the building. Mike's answer
+to the review's "(a) leftover or (b) deliberate surviving accent" is (a):
+**it goes, the player bar included, and every site conforms to the current
+palette.** Built: all live sites now read the ramp (`var(--wb-gold*)`), which in
+inline styles and in the bar's re-pinned dark scope resolves against whatever
+ground the element stands on — no second palette is created. NOT touched and
+listed for Mike: the other five variant-type colours (green/purple/blue/two
+browns), which are a whole pre-2026 vocabulary already standing on his backlog.
+
+**J2 — THE B&W LAW AND THE LIVE TWIN: no practical difference, and the twin is
+already black and white.** No build, ruling recorded. The wing's law governs
+PHOTOGRAPHS; the Portal's twin is the machine's own running screen (an iframe of
+a separate application), and it is monochrome as it stands. Grayscaling it would
+mean reaching into another application to change nothing a visitor can see.
+
+**J3 — THE WAL SHOP PRESENCE IS THE SET OF FOUR, ALWAYS.** They are a set and
+are sized as a set. **A WAL exit that resolves no individual owner shows the WAL
+four with no W.B — THE SET IS THE FALLBACK.** This closes clause 6 of the billing
+law below: the empty top slot on `?from=wal` with no (or an unresolvable)
+`&owner=` is not an omission, it is the answer. Billing the house there would
+break Clause 3, which is the original defect Mike reported. Built as a NAMED
+branch (`walSetFallback` in `GiftShop.billing()`) and said out loud in the DOM
+(`data-billing="wal-set"`), so it cannot be deleted by the next change to the
+markup. All seven exit cases re-verified.
+
 ## THE SPOTLIGHT DOCTRINE (Mike, 2026-08-02 — standing, governs WAL and any celebration wing)
 
 The museum is THE FRAME — it neither detracts nor distracts; done right it

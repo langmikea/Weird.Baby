@@ -2099,8 +2099,12 @@ input.searchbar::placeholder { color: var(--wb-gold-mute); font-style: italic; }
   white-space: nowrap;
   transition: color .15s, background .15s, border-color .15s;
 }
-.hr-bar-trig:hover { color: #ededed; background: rgba(184,151,74,0.14); }
-.hr-bar-trig.is-on { color: #141414; background: #b8974a; border-color: #b8974a; }
+/* [J1 2026-08-02] MIKE'S RULING: the retired 2025 gold goes here too. These
+   triggers (FILTERS / PRESETS) sit inside the player bar, whose rule re-pins the
+   whole accent ramp for its dark scope — so the ramp was one selector away and
+   the literal was typed anyway. Same base→hi move as `.pb-ctrl`. */
+.hr-bar-trig:hover { color: var(--wb-gold-hi); background: color-mix(in srgb, var(--wb-gold) 14%, transparent); }
+.hr-bar-trig.is-on { color: var(--wb-ink-card); background: var(--wb-gold); border-color: var(--wb-gold); }
 .hr-bar-trig-ico { display: inline-flex; }
 .hr-bar-trig-ico svg { width: 15px; height: 15px; display: block; }
 .hr-bar-trig-lbl { line-height: 1; }

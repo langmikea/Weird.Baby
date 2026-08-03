@@ -38,3 +38,7 @@ dist.pre*/
 
 # DB dumps - durable home is OneDrive mirror, not git (RCCA 2026-07-06)
 backups/
+
+# scratch: the 390px lap harness (public/, so it is same-origin at the dev
+# server root). Never deployed.
+public/_lap.html

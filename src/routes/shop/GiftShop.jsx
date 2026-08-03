@@ -101,7 +101,25 @@ function billing(fromWing, ownerId) {
                              : houseOwns ? "wb"
                              : direct ? "wb"
                              : null);
-  const top = ownerKey ? pool.find((e) => e.id === ownerKey) || null : null;
+  /* [J3 2026-08-02] MIKE'S RULING — THE SET IS THE FALLBACK.
+     B7 listed the one case the law leaves unbilled: a WAL exit that resolves no
+     individual owner (`?from=wal` with no `&owner=`, or an `&owner=` that names
+     nobody — a stale link in the wild). It cannot bill the house without
+     breaking Clause 3, and B1's "house takes top billing" is scoped to the
+     no-exhibit-exit case, which this is not: an exhibit WAS exited.
+     MIKE: "the WAL shop presence is THE SET OF FOUR, always — they are a set,
+     sized as a set. A WAL exit with no resolvable individual owner shows the
+     WAL four with no W.B. The set IS the fallback."
+     So the empty top slot is not an omission here, it is the answer: nobody is
+     promoted out of the set, the four render at one size in the grid below, and
+     the house stays off the page exactly as Clause 3 requires. It is written as
+     a NAMED branch rather than left to fall out of `ownerKey === null`, because
+     a behaviour nobody declared is a behaviour the next change will delete —
+     and deleting this one would put W.B on a WAL page, which is the original
+     defect Mike reported. */
+  const resolved = ownerKey ? pool.find((e) => e.id === ownerKey) || null : null;
+  const walSetFallback = !resolved && fromWing === "wal";
+  const top = walSetFallback ? null : resolved;
 
   /* CLAUSE TWO. Earliest first, ties alphabetical — the wing's own standing
      order, and the only tiebreak that cannot be read as a favour. */
@@ -110,7 +128,7 @@ function billing(fromWing, ownerId) {
     .sort((a, b) => (a.since < b.since ? -1 : a.since > b.since ? 1 :
                      a.name.localeCompare(b.name)));
 
-  return { top, rest };
+  return { top, rest, walSetFallback };
 }
 
 function Banner({ entry, half }) {
@@ -151,7 +169,7 @@ export default function GiftShop() {
      already in the wild still lands where it used to. */
   const ownerId = searchParams.get("owner") || searchParams.get("top");
 
-  const { top, rest } = useMemo(() => billing(fromId, ownerId), [fromId, ownerId]);
+  const { top, rest, walSetFallback } = useMemo(() => billing(fromId, ownerId), [fromId, ownerId]);
 
   /* [B1] THE VIEW RESETS BEFORE EVERY ENTRY — on arrival and on any change of
      who is billed. `scrollRestoration:"manual"` is the half that browsers do
@@ -178,7 +196,13 @@ export default function GiftShop() {
   }, []);
 
   return (
-    <div className="gift-shop">
+    /* [J3] the branch the law took, said out loud in the DOM. Three answers are
+       possible — an owner is billed, the WAL SET is the answer, or nobody is —
+       and the third has never been reachable since B1 gave the direct arrival
+       to the house. Stating it here is what makes "the set is the fallback"
+       verifiable on glass instead of inferable from an absence. */
+    <div className="gift-shop"
+      data-billing={walSetFallback ? "wal-set" : top ? "owner" : "none"}>
       <audio
         ref={bellRef}
         src="/sounds/shop-bell.mp3"
@@ -195,10 +219,12 @@ export default function GiftShop() {
         <Link to="/" className="gift-shop__nav-return">Lobby</Link>
       </div>
 
-      {/* CLAUSE ONE — TOP BILLING, and only where the exit named an owner.
-          A direct arrival names none, so the slot is simply absent rather
-          than filled with a random face: the page opens on the whole shop,
-          which is what it is when nobody sent you. */}
+      {/* CLAUSE ONE — TOP BILLING. The owner of the exhibit that was exited;
+          [B1] the HOUSE on a direct arrival, because an unowned front door is
+          still the house's own room; and [J3] NOBODY on a WAL exit that
+          resolves no individual owner, where the set of four below IS the
+          answer and promoting one of them would invent a billing the exit did
+          not name. */}
       {top && (
         <section className="gift-shop__section gift-shop__featured">
           <Banner entry={top} />

@@ -5,8 +5,20 @@ import "./Exhibit.css";
 
 // ─── TYPE CONFIG ──────────────────────────────────────────────────────────────
 const TAG_SLOTS = ["official", "live", "lyrics", "clip", "cover", "audio"];
+/* [J1 2026-08-02] MIKE'S RULING: the retired 2025 gold `#b8974a` is RETIRED
+   EVERYWHERE, the player bar's play/volume/CC included; every site conforms to
+   the current palette. OFFICIAL was the one type painted in it, so it now reads
+   the accent ramp — `var(--wb-gold)` in an inline style resolves against
+   whatever ground the element is standing on, which is exactly the point: photo
+   black on the tracklist's paper, near-white inside the player bar's re-pinned
+   dark scope. No second mirror of the palette is created.
+   THE OTHER FIVE TYPE COLOURS ARE NOT TOUCHED and are listed for Mike: green,
+   purple, blue and two browns are a whole pre-2026 colour vocabulary, already
+   standing on his own backlog ("variant-pill type colors … awaiting Mike's
+   read", STATE). J1 named the gold; retiring its five siblings is a palette
+   decision, not a conformance one. */
 const TYPE_META = {
-  official: { label: "OFFICIAL", color: "#b8974a" },
+  official: { label: "OFFICIAL", color: "var(--wb-gold)" },
   live:     { label: "LIVE",     color: "#4a8a6a" },
   clip:     { label: "CLIP",     color: "#a07840" },
   lyrics:   { label: "LYRICS",   color: "#7a6a9a" },
@@ -15,6 +27,23 @@ const TYPE_META = {
   hr_cover: { label: "COVER",    color: "#3a7a9a" },
   fan_cover:{ label: "COVER",    color: "#3a7a9a" },
 };
+/* [J1] THE PLACEHOLDER TILE, ONCE. The same gold-tinted-on-black gradient was
+   typed out at three call sites (coverflow cover, audio-only overlay, thumb
+   fallback) and every one of them carried its own copy of the retired gold as
+   the `album.accent` fallback — which is the LIVE value, because every album in
+   every wing declares `accent: null`. One builder, so the next surface that
+   needs a placeholder cannot fork a fourth copy.
+   The fallback is now `--wb-gold-mute` rather than `--wb-gold`: the tile's own
+   ground is near-black, and the ramp's photo-black end would tint nothing.
+   Alpha is expressed with `color-mix` because a `var()` cannot take a hex alpha
+   suffix — the old `${accent}33` only ever worked on a literal. */
+function placeholderTile(accent) {
+  const a = accent || "var(--wb-gold-mute)";
+  return {
+    background: `linear-gradient(135deg, color-mix(in srgb, ${a} 20%, transparent) 0%, #0c0c0c 60%, #050505 100%)`,
+    borderColor: `color-mix(in srgb, ${a} 33%, transparent)`,
+  };
+}
 function normalizeType(t) { return (t==="hr_cover"||t==="fan_cover") ? "cover" : t; }
 function typeLabel(t) { return TYPE_META[t]?.label ?? t.toUpperCase(); }
 function typeColor(t) { return TYPE_META[t]?.color ?? "#888"; }
@@ -461,12 +490,8 @@ function AlbumCover({ album }) {
   if (album.art) {
     return <img src={album.art} alt={album.title} loading="lazy" />;
   }
-  const accent = album.accent || "#b8974a";
   return (
-    <div className="cf-placeholder" style={{
-      background: `linear-gradient(135deg, ${accent}33 0%, #0c0c0c 60%, #050505 100%)`,
-      borderColor: `${accent}55`,
-    }}>
+    <div className="cf-placeholder" style={placeholderTile(album.accent)}>
       <div className="cf-ph-title">{album.title}</div>
       <div className="cf-ph-year">{album.year}</div>
     </div>
@@ -517,7 +542,8 @@ function Coverflow({ spine, active, cfH, onSelect, onSelectClick }) {
               width: albumSize, height: albumSize,
               transform:`translateX(${sl.x*scale}px) translateZ(${sl.z*scale}px) rotateY(${sl.ry}deg) scale(${sl.sc})`,
               opacity:sl.op, zIndex:sl.zi,
-              boxShadow:isActive?"0 24px 64px rgba(0,0,0,0.8),0 0 0 1px #b8974a44":"none",
+              /* [J1] the active album's hairline ring reads the ramp. */
+              boxShadow:isActive?"0 24px 64px rgba(0,0,0,0.8),0 0 0 1px color-mix(in srgb, var(--wb-gold) 27%, transparent)":"none",
             }}
             onClick={()=>{ if(!did){ isActive ? onSelectClick(i) : onSelect(i); } }}
           >
@@ -609,12 +635,12 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
                  marker, the card is one of the trees. */
               track.sub ? "tl-sub" : "",
             ].filter(Boolean).join(" ")}
-            style={isActive ? { borderLeftColor: "#b8974a" } : {}}
+            style={isActive ? { borderLeftColor: "var(--wb-gold)" } : {}}
             onClick={() => selectable && !skipped && onSelect(ti)}
           >
             <span className="tl-num">
               {playing
-                ? <NpBars color="#b8974a" />
+                ? <NpBars color="var(--wb-gold)" />
                 : (numberOf[ti] === null
                     ? <i className="tl-subrule" aria-hidden="true" />
                     : String(numberOf[ti]).padStart(2, "0"))}
@@ -808,7 +834,7 @@ function BannerTransport({ video, track, live, onStop, onTogglePlay, onSetVolume
   return (
     <div className="bt" role="group" aria-label="player">
       <span className="bt-now">
-        <NpBars color="#b8974a" />
+        <NpBars color="var(--wb-gold)" />
         <span className="bt-title">{track?.title}</span>
         {video && (
           <span className="bt-type" style={{ color: typeColor(video.type) }}>
@@ -2400,16 +2426,13 @@ export default function Exhibit({ artist }) {
                       {album.art ? (
                         <img className="vp-ao-art" src={album.art} alt={album.title} />
                       ) : (
-                        <div className="vp-ao-ph" style={{
-                          background: `linear-gradient(135deg, ${(album.accent||'#b8974a')}33 0%, #0c0c0c 60%, #050505 100%)`,
-                          borderColor: `${(album.accent||'#b8974a')}55`,
-                        }}>
+                        <div className="vp-ao-ph" style={placeholderTile(album.accent)}>
                           <div className="vp-ao-ph-title">{album.title}</div>
                           <div className="vp-ao-ph-year">{album.year}</div>
                         </div>
                       )}
                       <div className="vp-ao-label">
-                        <NpBars color="#b8974a" />
+                        <NpBars color="var(--wb-gold)" />
                         <span>audio playing</span>
                       </div>
                     </div>
@@ -2439,10 +2462,8 @@ export default function Exhibit({ artist }) {
                       ) : thumbVid.ytId ? (
                         <img src={`https://img.youtube.com/vi/${thumbVid.ytId}/hqdefault.jpg`} alt="" />
                       ) : (
-                        <div style={{
-                          width: "100%", height: "100%",
-                          background: `linear-gradient(135deg, ${(album.accent||'#b8974a')}33 0%, #0c0c0c 60%, #050505 100%)`,
-                        }} />
+                        <div style={{ width: "100%", height: "100%",
+                          ...placeholderTile(album.accent) }} />
                       )}
                       <div className="vp-thumb-hint">
                         <svg width="48" height="48" viewBox="0 0 48 48" fill="none">

@@ -527,7 +527,28 @@ body:has(.pb) .bd-dh{margin-bottom:82px}
    "permanently unreachable" from "currently underneath", so the distinction is
    recorded here instead of being padded away. */
 body:has(.pb) .ex-left{padding-bottom:76px}
-body:has(.pb) .fs-wrap{padding-bottom:76px}
+/* [L1 2026-08-02] THE SCROLLER'S SHARE OF THIS RULE IS GONE, AND IT WAS THE
+   LARGER HALF OF THE VIEWER'S PROBLEM.
+   E5 wrote `body:has(.pb) .fs-wrap{padding-bottom:76px}` on the premise quoted
+   above — that `.fs-wrap` is an "internally scrolled column of fixed height"
+   which needs "room to scroll clear" of the bar. It is not: `.fs-wrap` is
+   `overflow:hidden` and `.fs-viewport` is `overflow:hidden` behind a fade-mask.
+   NOTHING in the scroller scrolls, so there was never a scroll position for the
+   padding to make reachable — it only made the box 76px taller.
+   AND IT NEVER CLEARED THE BAR ANYWAY. Measured across window heights with the
+   rule in place: at 700px tall the column's bottom sat 129px under the bar (the
+   76px under-provisioned by 53); at 900px tall the column ended 71px ABOVE the
+   bar and the 76px cleared nothing that needed clearing. It was a constant
+   guarding a distance that is not constant.
+   WHAT IT COST: `.fs-wrap` was `flex:1` — an equal share of the right column
+   with the viewer — and this padding was added ON TOP of that share, so the
+   scroller ran 86px LARGER than the viewer at every size. Measured on /hr:
+   viewer 133px, scroller 218px of a 352px column, and the YouTube embed
+   rendering 830x131 (a 6.3:1 letterbox where a 16:9 picture belongs).
+   WHAT REPLACES IT: nothing. Whatever part of the column the bar covers at rest
+   is one flick from view — which is E5's own stated reading of the same shape of
+   hit (`tl-track <- pb`, "always one flick from view", four lines up). The
+   scroller's own size is now the strip below. */
 body:has(.pb) .ex-root{padding-bottom:88px}
 .ex-left::-webkit-scrollbar{width:3px}
 .ex-left::-webkit-scrollbar-track{background:transparent}
@@ -574,8 +595,12 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    `tl-active` (what you are LOOKING at) and `tl-playing` (what you are
    HEARING) are now two different marks, because they are two different
    facts and they are frequently not the same row. */
-.tl-playing{background:linear-gradient(90deg,rgba(184,151,74,.16),rgba(184,151,74,.04) 60%,transparent);
-  border-left-color:#b8974a !important}
+/* [J1 2026-08-02] the mark is the ramp's accent, not the retired 2025 gold.
+   See the ruling at `.pb` below. */
+.tl-playing{background:linear-gradient(90deg,
+    color-mix(in srgb, var(--wb-gold) 16%, transparent),
+    color-mix(in srgb, var(--wb-gold) 4%, transparent) 60%,transparent);
+  border-left-color:var(--wb-gold) !important}
 .tl-playing .tl-title{color:var(--wb-gold)}
 .tl-novid{cursor:default;opacity:.32}
 .tl-novid:hover{background:transparent}
@@ -616,7 +641,7 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .tl-tag-sel{opacity:1}
 .tl-tag-dim{color:var(--wb-gold-mute) !important;border-color:var(--wb-gold-mute) !important;opacity:.45}
 .tl-rend{order:-1;margin-right:8px;flex-shrink:0;width:96px;font-family:'Oswald',sans-serif;font-weight:700;font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;color:var(--wb-gold);background:var(--wb-ink-card,#1a1a1a);border:1px solid var(--wb-border);border-radius:2px;padding:4px 6px;cursor:pointer}
-.tl-rend:focus{outline:none;border-color:#b8974a}
+.tl-rend:focus{outline:none;border-color:var(--wb-gold)}      /* [J1] */
 .tl-tag-ghost{display:block;pointer-events:none}
 
 /* VIDEO PANEL — stable right column */
@@ -683,11 +708,104 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .fs-btn:hover{color:var(--wb-gold);border-color:var(--wb-gold)}
 .fs-btn-dis{opacity:.18;pointer-events:none}
 
+/* ===========================================================================
+   [L1 2026-08-02] THE SCROLLER IS A STRIP IN THE PLAIN FRAME TOO.
+   MIKE: "the PUV scroller OVERLAPS the viewer."
+   THE SAME DEFECT, THE THIRD TIME, IN THE ONE FRAME NOBODY CAME BACK TO.
+   `.fs-wrap{flex:1}` gives the scroller an EQUAL SHARE of the right column with
+   the viewer. R-c fixed that for the staged wing and P2/F4 fixed it for the flat
+   wing — each scoped to the wing in front of it — and the museum's PRIMARY
+   exhibit, which is neither staged nor flat, kept the original. It is the
+   review's own pattern 1: a rule is written for the frame in front of you and
+   the next frame never gets checked.
+   MEASURED ON /hr BEFORE (1400x900, track playing): viewer 670x133, scroller
+   218 of a 352px column — the scroller 64% larger than the picture it is
+   ambient to, and the embed a 5:1 letterbox. AT 390px it is worse: viewer
+   340x79 (a 4.3:1 sliver) against a 164px scroller whose two-line quote was
+   guillotined by its own fade-mask and landed on the credit line.
+   THE FIX IS THE PRINCIPLE ALREADY ESTABLISHED TWICE: the scroller is FURNITURE
+   and takes a strip; the viewer is the EXHIBIT and takes the room. The strip is
+   sized in LINES OF THE FACT TYPE rather than in pixels, because that is what it
+   actually holds.
+   WHY THREE LINES AND NOT TWO (the flat wing's budget): measured against all 97
+   facts in the vault at this column's real width (792px viewport) — 12 quotes
+   run one line, 71 run two, 13 run three, 1 runs four. A two-line budget would
+   fade the last line off 14% of the vault; three carries 96 of 97 whole and
+   leaves the fade-mask for the one. The flat wing's column is 1231px wide, which
+   is why two was right there and is not right here.
+   WHY THE HEIGHT IS FIXED AND NOT `auto`: the viewer sits ABOVE this strip in a
+   flex column, so an auto-height strip would resize the video every 7.5s as
+   one- and two-line facts cycle. F4's "fixed so the footer does not jump" is
+   the correct reasoning for THIS frame; P2 relaxed it for the flat wing only
+   because there the scroller is last in the document and moves nothing.
+   SCOPED TO THE PLAIN FRAME by what the frame IS, not by exhibit name: a root
+   that declares neither `data-flat` nor `data-stage`. /hr and /wb are those two
+   today; the staged and flat wings keep their own rules byte-for-byte. */
+.ex-root:not([data-flat]):not([data-stage]) .fs-wrap{--fs-lines:3;flex:0 0 auto;
+  padding:9px 20px 9px}
+.ex-root:not([data-flat]):not([data-stage]) .fs-viewport{flex:0 0 auto;
+  min-height:0;height:calc(var(--fs-lines) * 1.34rem * 1.35)}
+.ex-root:not([data-flat]):not([data-stage]) .fs-footer{margin-top:7px}
+/* THE BAR CLEARANCE THAT REPLACES E5's, AND THE HONEST LIMIT OF IT.
+   `.ex-main`'s height is not fitted to the screen — it is the TRACKLIST's
+   natural height (the grid row is max-content and `.ex-left` is the tall item),
+   plus that column's own 76px bar padding. So the column's bottom lands at
+   `chrome + tracklist + 76`, which depends on how many tracks the album has and
+   not at all on how tall the window is. Measured on Arkansas (11 tracks): the
+   column ends at 761px, so it sits under a 68px bar at every viewport shorter
+   than 829px.
+   NO CONSTANT CAN BE RIGHT FOR THAT, and E5's 76 was the same guess costing four
+   times as much. 24px is the smallest that keeps the credit line whole at the
+   common laptop heights at or above ~805px, and it costs the picture 15px
+   instead of 76. Below that the strip's last line goes under the bar and is one
+   flick from view — the same reading E5 gave `tl-track`.
+   THE REAL FIX IS A FIT, not a padding: F3's ruling ("the tracklist, the viewer
+   and the PUV scroller SNAP TO sizes where all of them fit on one screen") is
+   built for the flat wing and /hr does not declare `fitOnEntry`. That is a UX
+   call about the carousel yielding height, so it is named here rather than
+   taken. */
+body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
+  padding-bottom:24px}
+
+/* [L1b 2026-08-02] AND AT STACKED WIDTHS THE VIEWER IS A RATIO BOX AGAIN.
+   M-a retired the `padding-top:56.25%` spacer on the ground that "a ratio box is
+   the right tool when the CONTAINER is unknown — here the container is known and
+   is the whole point". That is true of the two-column desktop frame, where the
+   column has a height and the picture should take it. It is FALSE below 720px,
+   where the grid collapses to one column, `.ex-right` has no height of its own,
+   and `flex:1 1 auto` on `.vp-area` divides a nothing.
+   THE PROOF IS /wb, WHICH HAS NO SCROLLER TO ARGUE WITH: measured at 390px the
+   house exhibit's viewer is **374 x 25px** — a twenty-five-pixel-tall video
+   player. On /hr the scroller's own share hid the same collapse behind a merely
+   bad number (340x79).
+   So at stacked widths the rule M-a replaced is the right one again, by M-a's
+   own test. Measured after: /hr 340x192 and /wb 357x201 — both exactly 16:9.
+   Four lines rather than three here because the same quote wraps further in a
+   340px column (measured: only 2 of 97 fit in two lines, 23 in three, 55 in
+   four) and the picture above is a ratio box, so the strip's height costs it
+   nothing. */
+@media (max-width:720px){
+  .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{--fs-lines:4}
+  .ex-root:not([data-flat]):not([data-stage]) .vp-area{aspect-ratio:16/9;
+    flex:0 0 auto}
+}
+
 /* PLAYER BAR */
 /* 2026-06-07 Mike: player bar goes DARK on the paper page — unmissable,
    and consistent with the projection-booth rule (screens are dark).
    Tokens re-pinned inside the bar's scope. */
-.pb{--wb-gold:#c9c9c9;--wb-gold-hi:#ededed;--wb-gold-lo:#8e8e8e;--wb-gold-mute:#8e8e8e;--wb-dim:#b6b6b6;--wb-ink-card:#1a1a1a;--wb-border:#3e3e3e;position:fixed;bottom:0;left:0;right:0;height:68px;background:var(--wb-ink-card);border-top:2px solid #b8974a;display:flex;align-items:center;gap:12px;padding:0 20px;z-index:100;box-shadow:0 -4px 18px rgba(0,0,0,.45)}
+/* [J1 2026-08-02] MIKE'S RULING — THE RETIRED 2025 GOLD IS RETIRED HERE TOO.
+   B7 found `#b8974a` still painting on nine live elements of /hr, THREE OF THEM
+   the play, volume and CC discs on this bar — the most-used control in the
+   building, wearing a colour the museum retired when it went black and white.
+   It survived by inertia, not by decision. Mike's ruling: it goes, and the bar
+   conforms to the current palette like everything else.
+   THE MECHANISM WAS ALREADY HERE AND UNUSED. This rule re-pins the whole accent
+   ramp for the bar's dark scope on its first line — `--wb-gold:#c9c9c9` up to
+   `--wb-gold-hi:#ededed` — and then the two hottest things in the bar ignored it
+   and typed a literal. Reading the ramp is not a new palette; it is the palette
+   that was already declared one line to the left. */
+.pb{--wb-gold:#c9c9c9;--wb-gold-hi:#ededed;--wb-gold-lo:#8e8e8e;--wb-gold-mute:#8e8e8e;--wb-dim:#b6b6b6;--wb-ink-card:#1a1a1a;--wb-border:#3e3e3e;position:fixed;bottom:0;left:0;right:0;height:68px;background:var(--wb-ink-card);border-top:2px solid var(--wb-gold-lo);display:flex;align-items:center;gap:12px;padding:0 20px;z-index:100;box-shadow:0 -4px 18px rgba(0,0,0,.45)}
 .pb-art{width:46px;height:46px;object-fit:cover;border-radius:1px;flex-shrink:0}
 .pb-art-ph{display:block}
 .pb-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
@@ -697,8 +815,11 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .pb-skip{background:none;border:none;color:var(--wb-gold-mute);cursor:pointer;padding:4px;display:flex;align-items:center;transition:color .15s}
 .pb-skip:hover{color:var(--wb-gold)}
 .pb-skip-dis{opacity:.2;pointer-events:none}
-.pb-ctrl{background:#b8974a;border:none;color:#141414;cursor:pointer;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s,transform .1s}
-.pb-ctrl:hover{background:#d4af5e;transform:scale(1.05)}
+/* [J1] the discs ride the bar's own ramp: base at rest, the ramp's top on
+   hover — the same base→hi move every other control in the museum makes. The
+   glyph stands on the bar's card ground so the disc reads as a lit key. */
+.pb-ctrl{background:var(--wb-gold);border:none;color:var(--wb-ink-card);cursor:pointer;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s,transform .1s}
+.pb-ctrl:hover{background:var(--wb-gold-hi);transform:scale(1.05)}
 .pb-vol{width:60px;height:3px;accent-color:var(--wb-gold);cursor:pointer;opacity:.5;transition:opacity .15s}
 .pb-vol:hover{opacity:1}
 
@@ -1254,8 +1375,11 @@ body:has(.pb) .ex-root{padding-bottom:88px}
   color:var(--wb-gold);background:transparent;
   border:1px solid var(--wb-border-hi);cursor:pointer;
   transition:background .15s,color .15s,border-color .15s,transform .12s}
-.vp-record-door:hover,.vp-record-door:focus-visible{background:#b8974a;
-  color:#211d18;border-color:#b8974a;transform:translateY(-1px);outline:none}
+/* [J1] the door lights in the stage's own ramp (re-pinned light on the dark
+   stage), and its glyph takes the stage's ink - which is the literal that was
+   already typed here. */
+.vp-record-door:hover,.vp-record-door:focus-visible{background:var(--wb-gold);
+  color:var(--wb-ink);border-color:var(--wb-gold);transform:translateY(-1px);outline:none}
 .vp-records-note{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-micro);line-height:1.5;color:var(--wb-gold-lo);margin:2px 0 0}
 
@@ -1487,12 +1611,13 @@ body:has(.pb) .ex-root{padding-bottom:88px}
   [data-exhibit="wal"] .vp-trail{grid-template-columns:minmax(0,1fr)}
 }
 [data-exhibit="wal"] .vp-trail-go{height:100%;border:1px solid var(--wb-border-hi);
-  border-left:3px solid #b8974a;background:rgba(255,255,255,.03);
+  border-left:3px solid var(--wb-gold);background:rgba(255,255,255,.03);   /* [J1] */
   padding:12px 16px;margin:0;gap:5px;
   transition:background .16s,border-color .16s,transform .12s}
 [data-exhibit="wal"] .vp-trail-go:hover,
-[data-exhibit="wal"] .vp-trail-go:focus-visible{background:rgba(184,151,74,.14);
-  border-color:#b8974a;transform:translateX(3px)}
+[data-exhibit="wal"] .vp-trail-go:focus-visible{
+  background:color-mix(in srgb, var(--wb-gold) 14%, transparent);            /* [J1] */
+  border-color:var(--wb-gold);transform:translateX(3px)}
 /* A DOMAIN IS ONE WORD, AND ON A PHONE IT IS TOO LONG A ONE.
    Measured: "carsieblanton.com" in Syne 800 at .12em tracking has a
    min-content width of 367px, and the door adds 37px of padding and rules —
@@ -1563,8 +1688,10 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    instant it lands — hover states never fire there, so without this the
    only feedback was whatever the tap eventually caused offscreen. */
 @media (pointer: coarse) {
-  .tl-track:active{background:rgba(184,151,74,.22);transition:none}
-  .vp-trail-go:active{background:rgba(184,151,74,.22);transition:none}
+  /* [J1] the press reads the ground's own ramp, so it darkens on paper and
+     lights on the dark stage instead of flashing a retired gold on both. */
+  .tl-track:active{background:color-mix(in srgb, var(--wb-gold) 22%, transparent);transition:none}
+  .vp-trail-go:active{background:color-mix(in srgb, var(--wb-gold) 22%, transparent);transition:none}
   .vp-collage-tile:active{transform:rotate(0deg) scale(.97)}
   .wb-dir-entry:active{color:#211f1c}
 }
@@ -1572,7 +1699,8 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    trace of your last tap once the viewer is below the fold, so it stops
    being a whisper — a lit left rule and a firmer ground. */
 @media (max-width:720px){
-  .tl-active{border-left-color:#b8974a;background:rgba(184,151,74,.14)}
+  .tl-active{border-left-color:var(--wb-gold);                              /* [J1] */
+    background:color-mix(in srgb, var(--wb-gold) 14%, transparent)}
 }
 
 /* ===========================================================================
