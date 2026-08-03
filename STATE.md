@@ -19,6 +19,74 @@ Paid for by the 2026-06-17 derived-era incident: charging into the problem in fr
 
 Ops work takes top priority, based on the Ops need in the moment.
 
+## SEALED 2026-08-03 — THE MORNING RIP (v37; M0–M12. PUSH + DEPLOY ARE MIKE'S)
+
+Autonomous single-agent Code-lane round on Mike's remote-control brief, sealed in
+seven parts. Full round log: `docs/MUSEUM_MORNING_RIP_LOG-20260803.md`. The
+optometrist deliverable: `docs/optometrist-20260803/` (5 renders + notes).
+
+- **M0 THE TWO LIVE DEFECTS, BOTH MISDIAGNOSED BY THEIR SYMPTOMS.** (a) Neither
+  handle is dead — driven by synthetic pointer events the split drag moves the
+  columns 363→559 and the carousel drag 160→240 with the viewer trading 439→359.
+  Neither has a visible AFFORDANCE: `.cf-dh-line` 1.21:1, `.cf-dh-dot` 1.68:1,
+  and **`.vr-dh-line` is 1px wide by ZERO PIXELS TALL** — an `align-items:stretch`
+  item that also says `margin:auto`, and auto margins beat stretch, so the split
+  handle has drawn nothing on every wing since it was written. (b) The strip is
+  not z-overlapping: at six desktop sizes and on /hr, `.vp-area`'s bottom and
+  `.fs-wrap`'s top are THE SAME NUMBER. On the charcoal stage the strip's ground,
+  the frame's black and YouTube's letterbox are one field, so the quote reads as
+  a caption burned into the video. Fixed with air + an edge — and the edge forced
+  the picture to be fitted to the FRAME rather than to F3's letterbox slot.
+  (c) **Found in diagnosis: the fit was lying about fitting.** F3 measured the
+  live `.fs-wrap`, and on entry a face is stowed and P4 renders no scroller — so
+  the measurement was ALWAYS 0 and the document ran 42–70px past the window at
+  every desktop size. The fit now reserves the strip's ceiling from a CSS-declared
+  `--fs-strip-reserve`; 0px overflow at all six sizes. **Price named for Mike:**
+  the picture is smaller on short windows now (372×209 at 1280×660). Two levers
+  to get it back are named in the log; both are UX calls.
+- **M1 ONE PAGER IN THE WHOLE BUILDING.** Every button on /wal and /robots
+  enumerated: `.stg-step` is on /robots and nowhere else. /robots swaps
+  `stage:true` for `faceFlow:"flat"` (W7's mechanism, proven on WAL). Nine faces,
+  both albums, desktop and 390px: zero clipped px, zero pagers, no `[stage]`
+  warnings. L5's sheet-on-mat re-scoped to the WING so it survived.
+- **M2** first-visit reset (`src/lib/use-arrival.js`): ONCE per room per session,
+  ALWAYS for the lobby. Presets untouched BY CONSTRUCTION (the hook moves scroll
+  only). Found: `window.scrollTo` is a **no-op on the lobby** — html and body both
+  `height:100%; overflow:auto` makes BODY the scroll port.
+- **M3 THE FAQ IS THE PAGE** — both buttons gone, eleven questions written in the
+  front page's register, privacy answer written against `worker.js` rather than
+  from goodwill. **P5's marker law had left the one file that could enforce it**:
+  `visitorProse` was private to `Exhibit.jsx`, so the booth's first [PAPA] would
+  have printed. Now `src/lib/visitor-prose.js`. Typography rebuilt on four
+  measured causes.
+- **M4 NOT CHANGED, WITH EVIDENCE.** The outline is continuous around every glyph
+  (pixel classification at two thresholds, renders in the deliverable) and
+  survives the 5.95× downscale intact. Where it READS as missing is where a
+  letter crosses the black ring — a source-artwork call, and there is no layered
+  source in the repo. **`public/WeirdBaby_PhotoID_backup.png` is CORRUPT** —
+  libspng cannot decode it.
+- **M5** the square cover was drawn in a rectangle (two percentages of two
+  different bases): **137px of it gone at 1200×560, 138px on the phone**. **M6**
+  the booth door goes from an 82px marquee to a 25px sentence (`quiet` on the
+  existing trail seam). **M7** the WAL set is alphabetical always; "Six little
+  blues from Papa." advertised six SONGS in a room that sells a STICKER and is
+  gone. **M8** the directory names the exhibits properly.
+- **M9** `:active` is not a promise on a touchscreen — Safari withholds it from an
+  `<li>` with no listener of its own, and grants it too late and drops it too
+  early. A delegated `pointerdown` holds a `data-pressed` mark for 160ms.
+- **M10 COULD NOT REPRODUCE.** Every fixed/sticky element on all seven routes
+  re-measured after scrolling: nothing moves. All four grain washes are
+  viewport-anchored with no transformed ancestor. **Needs one sentence from Mike:
+  which room.**
+- **M11 FIRST PASS.** Robots front desk entire + two lead paragraphs; WAL house
+  album's two pages. **Not one new fact** — register only. The per-artist
+  documentation is deliberately NOT rewritten: it is sourced line by line, and
+  rewriting sourced facts for register is how invented provenance gets into a
+  museum. Wants its own pass with the sources open.
+- Gates, every seal: **lint 11 err / 9 warn** (= HEAD baseline, zero new), vite
+  build green, desktop + genuine 390px lap. Final lap: all seven rooms open at
+  y=0, zero page-level horizontal scroll, zero [PAPA] anywhere, zero pagers.
+
 ## THE IDENTITY (Mike, 2026-08-03 — standing, outranks every prior naming pass)
 
 **It is THE MUSEUM.** No singer-songwriter qualifier, no solo-artist
