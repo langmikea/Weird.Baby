@@ -735,4 +735,138 @@ the page IS the screen.
 
 ---
 
-*(Section for L6 is appended when it is sealed.)*
+---
+
+## L6 · BINGE PREP — the doctrine made concrete
+
+**Ordered:** *"the Record must carry weeks of material at launch and accept
+evidence classes beyond plates (photos, transmissions, documents). Build the
+model + the surfaces that display each class, all data-driven, all
+empty-and-honest until Mike's content arrives. Deliver a short docs note on
+exactly what content shape each class expects, so Mike can produce against it."*
+
+**The docs note is `docs/RECORD_CONTENT_SHAPES.md`.** It is written for Mike, not
+for Ops: what to hand the Record, field by field, with the file rules and the
+measured volume numbers.
+
+### The model is a module now — `src/lib/record-model.js`
+
+Pure, framework-free and unit-tested, the way `fact-select.js` is: the renderer
+asks it questions and it never asks the renderer anything. It owns the date, the
+bands, the payload manifest and the document state. **29 assertions, 29 passing**
+— ISO parsing (including the calendar-vs-instant trap: `new Date("2024-01-01")`
+is the 31st of December west of Greenwich, and a log that shifts its own dates by
+timezone is not a record), stamp derivation, banding thresholds, payload counting
+and the three document states.
+
+### THE DATE — the thing D-WEEKLY-EVERYWHERE said was missing
+
+That doctrine named it exactly: *"The Record's `stamp` is a display string, not a
+date — it would need a real one."* Every entry now carries `date: "YYYY-MM-DD"`.
+
+The ten dates are **transcriptions of the stamps that were already printed**, not
+new facts. With them the index can band, an automation can ask what is new this
+week, and a new entry needs only a date because the stamp derives from it. The
+authored stamps stay and win, so nothing a visitor reads has moved.
+
+### THE THIRD CLASS — `docs`
+
+B9 gave the Record `wire` (transmissions) and `plates` (photographs) and had no
+shape for the third thing Mike named. A **document is neither**, because a
+document is a thing with a PROVENANCE first — who wrote it, when, how many pages
+— and then, separately and later, an image of it and/or words taken out of it.
+
+**Those three arrive at different times, which is exactly why they are three
+fields.** A catalogue card can be written the day the document is found; the scan
+waits on a camera; the extract waits on somebody reading it. A model demanding
+all three at once would mean nothing about a document could be published until
+everything about it was — and the Record is a log of a discovery *in progress*.
+
+So the state is part of the model rather than an accident of which fields happen
+to be filled:
+
+| state | condition | surface |
+|---|---|---|
+| `imaged` | `scan` set | the page, opening in the same reader a plate off the wall opens; a set of scans on one entry opens as **its own reel** |
+| `quoted` | no scan, `extract` set | the extract, set as a quotation of the document |
+| `held` | neither | the provenance on a dashed card, saying plainly the page itself is not here |
+
+**`held` is the honest half** — the same discipline as B8's reel, which ships
+empty and prints "reel empty" rather than rendering nothing and hoping. A card
+reading `held` is not a placeholder; it is a record of a thing the museum has and
+has not photographed.
+
+### THE INDEX AT VOLUME — bands, and a manifest per row
+
+- **Month bands**, derived from the dates. Weeks are D-EPISODE's unit and are the
+  obvious band — and at binge volume two years of weekly episodes is a hundred
+  headings, which is a hundred rows of furniture in an index trying to be
+  walkable. A month bands the same material into twenty-four and every entry
+  still carries its own day. Bands appear only at **14+ entries spanning more
+  than one month**, so today's ten-entry Record is byte-identical.
+- **A payload manifest on each row** — `PLATES 3`, `WIRE 2`, `DOCS 1`. B9 put the
+  CLASS on the index so a reader could see a week brought a transmission rather
+  than another paragraph; the count is the other half. Three photographs and a
+  transmission is a different Tuesday from one photograph, and at volume that
+  difference *is* the navigation. Absent entirely on an entry with no payloads —
+  which is every entry written so far.
+
+### AN OPENED RECORD IS A RUN OF BLOCKS, NOT ONE BLOCK
+
+Found by the volume proof, not by reading. `.vp-rec` was a single div, which the
+stage sees as one indivisible thing — fine while every entry was a paragraph, not
+fine the moment an entry carries the evidence the brief asks for. **Measured with
+a synthetic entry holding three documents and a transmission: 32px off the bottom
+of the page, clipped, no scrollbar** — the same shape of defect as D3's wall and
+L5's head, one level further in.
+
+The record's parts are now siblings and the packer pages them; the document list
+carries `data-stage-split="row"` so a stack of ten divides by card rather than as
+a lump. Same result: **0px clipped.**
+
+**One React fact banked, because it cost real time:** `React.Children.toArray`
+does **not** flatten a `<>Fragment</>` into separate children here — the packer
+kept seeing one block while the DOM showed five, which looks like success and is
+not. Returning a **keyed array** flattens correctly. Measured through the
+packer's own measure layer: 8 blocks with a fragment, 10 with an array.
+
+### THE VOLUME PROOF — 400 entries, run and reverted
+
+A generated 390-entry tail was added to the Record, measured, and removed. The
+tree is byte-identical to before the probe apart from the ten dates.
+
+| | desktop 1400px | phone 390px |
+|---|---|---|
+| index at 400 entries | **33 pages, 0px clipped** | **242 pages, 0px clipped** |
+| open entry, 3 docs + a transmission | **1 page, 0px clipped** | 0px clipped |
+
+Bands verified rendering (`FEB 2031`, `DEC 2030` …), manifests verified counting,
+and all three document states verified on glass — `held` dashed with its
+provenance, `quoted` with its extract, `imaged` with its scan wired to the reader.
+
+**The honest caveat, stated rather than buried:** 242 sheets on a phone is not
+broken — nothing clips — but it is *long*. The month bands are what make it
+walkable; if the Record ever reaches that size the next lever is a jump by period
+rather than by sheet. **Named, not built** — inventing navigation is a UX call.
+
+### Empty-and-honest, verified
+
+The shipping Record is **unchanged for a visitor**: 10 rows, no bands (below the
+threshold), no manifests (no payloads), the same stamps in the same newest-first
+order, 0px overflow at 1400px and 390px. Every new surface is present in the code
+and absent from the page until content arrives — which is the ask.
+
+### Gates
+
+- **lint 11 errors / 9 warnings** — HEAD baseline, zero new. **vite build green.**
+- **record-model: 29/29 assertions.**
+- `/robots` walked at 1400px and 390px, both albums, index and open entry, with
+  and without the volume probe.
+
+---
+
+## THE ROUND, CLOSED
+
+Five seals: L1+L2, L3, L4, L5, L6. Every gate held at the HEAD baseline
+throughout — **lint 11 errors / 9 warnings, vite build green, console clean** —
+and every claim in this log is a measurement taken this round, not a recollection.

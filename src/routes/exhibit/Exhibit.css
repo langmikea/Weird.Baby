@@ -881,7 +881,15 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 .vp-rec-peek{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;
   overflow:hidden;opacity:.72}
 
-.vp-rec{display:flex;flex-direction:column;gap:14px;min-height:0}
+/* [L6 2026-08-02] `.vp-rec` AND `.vp-rec-body` ARE RETIRED — an opened record
+   is a RUN of blocks so the stage can page it (see Exhibit.jsx). The 14px and
+   10px those two wrappers supplied as flex gaps are now margins on the parts,
+   which is what makes the change invisible on the flat wing, whose container
+   supplies no gap at all. */
+.vp-rec-line{margin-top:0}
+.vp-rec-wire,.vp-rec-plates,.vp-rec-docs{margin-top:12px}
+.vp-rec-end{margin-top:14px}
+.vp-rec-nav{margin-top:14px}
 .vp-rec-head{display:flex;gap:14px;align-items:baseline;width:100%;text-align:left;
   background:none;border:0;border-bottom:1px solid var(--wb-border);
   padding:0 0 10px;cursor:pointer;color:inherit;font:inherit}
@@ -1890,3 +1898,68 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 .vp-rec-plate-cap{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-micro);letter-spacing:.06em;line-height:1.35;
   color:var(--wb-gold-lo)}
+
+/* ===========================================================================
+   [L6 2026-08-02] BINGE PREP — the Record at volume, and its third class.
+   =========================================================================== */
+/* THE BAND. A month heading in the index, and it is deliberately the quietest
+   thing on the page: a reader walking back through a year needs a landmark, not
+   a section title. It is `aria-hidden` in the markup because the entries it
+   bands already carry their own dates — a screen reader would otherwise hear
+   the month twice per row. */
+.vp-rec-band{list-style:none;display:flex;align-items:center;gap:12px;
+  padding:14px 2px 5px;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.28em;text-transform:uppercase;
+  color:var(--wb-gold-mute)}
+.vp-rec-band::after{content:"";flex:1;height:1px;background:var(--wb-border)}
+.vp-rec-index .vp-rec-band:first-child{padding-top:4px}
+
+/* WHAT THE WEEK BROUGHT, on the index row. Deliberately lighter than the class
+   badge beside it: the class is what the entry IS, the load is what it CARRIES,
+   and one of those is a fact about the week and the other is a manifest. The
+   count sits inside the chip rather than after it so the pair cannot wrap
+   apart. */
+.vp-fe-load{align-self:center;flex-shrink:0;display:inline-flex;
+  align-items:baseline;gap:5px;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--wb-gold-mute);white-space:nowrap}
+.vp-fe-load i{font-style:normal;font-weight:700;color:var(--wb-gold-lo)}
+
+/* THE DOCUMENTS. A stack of catalogue cards, because that is what a document is
+   before it is a picture: a title, a provenance line, and a STATE that says
+   plainly how much of it has actually arrived. The state chip is the honest
+   half — a card reading `held` is not a placeholder, it is a record of a thing
+   we have and have not yet photographed. */
+.vp-rec-docs{list-style:none;margin:12px 0 0;padding:0;
+  display:flex;flex-direction:column;gap:10px}
+.vp-rec-doc{border:1px solid var(--wb-border);background:var(--wb-ink-soft);
+  padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.vp-rec-doc-head{display:flex;align-items:baseline;justify-content:space-between;
+  gap:10px;min-width:0}
+.vp-rec-doc-title{font-family:'Syne',sans-serif;font-weight:700;
+  font-size:var(--fs-small);letter-spacing:.06em;color:var(--wb-gold);
+  min-width:0;overflow:hidden;text-overflow:ellipsis}
+.vp-rec-doc-state{flex-shrink:0;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--wb-gold-lo);border:1px solid var(--wb-border-hi);
+  padding:1px 7px;white-space:nowrap}
+/* a card whose page has not arrived says so by being quieter, not by being
+   greyed out — it is a real record, not a disabled control. */
+.vp-rec-doc--held{border-style:dashed}
+.vp-rec-doc-prov{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.08em;color:var(--wb-gold-lo)}
+.vp-rec-doc-scan{width:100%;max-width:220px}
+.vp-rec-doc-scan img{aspect-ratio:3/4}
+/* words taken OUT of a document are a quotation of the document, so they are
+   set as one: the museum's serif, a rule at the left, and no quote marks
+   (the rule is the quote mark). */
+.vp-rec-doc-extract{margin:2px 0 0;padding-left:12px;
+  border-left:2px solid var(--wb-gold-lo);
+  font-family:'DM Serif Display',Georgia,serif;
+  font-size:var(--fs-body);line-height:1.45;color:var(--wb-dim)}
+.vp-rec-doc-note{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.07em;line-height:1.5;
+  color:var(--wb-gold-lo);opacity:.85;margin:0}

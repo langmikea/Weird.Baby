@@ -99,6 +99,15 @@ const WBR_TRACKS = [
             "TRADE    we buy weird things and work out what they are",
             "TAGLINE  “Purveyors of the Weird.Baby.”",
           ],
+
+          /* [L6 2026-08-02] EVERY ENTRY NOW CARRIES A REAL DATE.
+             D-WEEKLY-EVERYWHERE named this exactly: "The Record's `stamp` is a
+             display string, not a date — it would need a real one." These are
+             the dates the stamps already state, transcribed, not new facts —
+             and with them the index can band by month, an automation can ask
+             what is new this week, and a new entry needs only `date` because
+             the stamp derives from it (record-model.js). The authored stamps
+             stay, so nothing a visitor reads has moved. */
           entries: [
             { stamp: "WHAT", title: "A purveyor, not a maker",
               line: "Four parties touched these machines and only one of them " +
@@ -352,43 +361,43 @@ const spine = [
              [PAPA] rows are the ones where a summary would be putting words
              in the narrator's mouth. */
           entries: [
-            { stamp: "01 JAN 24", title: "Three boxes", evidence: "document",
+            { date: "2024-01-01", stamp: "01 JAN 24", title: "Three boxes", evidence: "document",
               line: "An anonymous drop: three cartons, marked classified and " +
                     "fragile on every side, with a note taped to them signed “-W.O.”",
               note: "the note's full text is in the archive" },
-            { stamp: "05 JAN 24", title: "Who is W.O.?", evidence: "record",
+            { date: "2024-01-05", stamp: "05 JAN 24", title: "Who is W.O.?", evidence: "record",
               line: "The first entry. Three units are named on the boxing, " +
                     "and ABEAL is assumed — wrongly — to be their creator.",
               note: "" },
-            { stamp: "12 JAN 24", title: "Something off about this drop", evidence: "record",
+            { date: "2024-01-12", stamp: "12 JAN 24", title: "Something off about this drop", evidence: "record",
               line: "Office supplies, personal items and cold-war hardware, " +
                     "no documentation, everything gathered in a rush.",
               note: "ABEAL is “a division of ScrapCo”" },
-            { stamp: "19 JAN 24", title: "The One-Page-Ads", evidence: "document",
+            { date: "2024-01-19", stamp: "19 JAN 24", title: "The One-Page-Ads", evidence: "document",
               line: "The framed ads turn out not to be original: ABEAL " +
                     "retro-fitted other people's ads, with words covered and things taped down.",
               note: "" },
-            { stamp: "26 JAN 24", title: "But we were wrong", evidence: "correction",
+            { date: "2024-01-26", stamp: "26 JAN 24", title: "But we were wrong", evidence: "correction",
               line: "The retraction. ABEAL did not start it — they received " +
                     "the tech from someone else. They were responsible for the looks.",
               note: "the record correcting itself, in public" },
-            { stamp: "02 FEB 24", title: "Logos and slogans", evidence: "object",
+            { date: "2024-02-02", stamp: "02 FEB 24", title: "Logos and slogans", evidence: "object",
               line: "The shirts are made from original elements off the " +
                     "boxing — which is the first mention that per-unit slogans exist.",
               note: "[PAPA] — the slogans themselves are unwritten" },
-            { stamp: "09 FEB 24", title: "MGK-NIAC, and a name", evidence: "record",
+            { date: "2024-02-09", stamp: "09 FEB 24", title: "MGK-NIAC, and a name", evidence: "record",
               line: "The original project title surfaces, and with it Carter " +
                     "Bookman — “his life is a mystery (some may say an Enigma??)”.",
               note: "" },
-            { stamp: "16 FEB 24", title: "Ionizers and crushed walnut", evidence: "record",
+            { date: "2024-02-16", stamp: "16 FEB 24", title: "Ionizers and crushed walnut", evidence: "record",
               line: "Restoration chemistry: the cases through the electronic " +
                     "ionizers, the body casings tumbled in crushed walnut.",
               note: "" },
-            { stamp: "22 MAR 24", title: "Bias, in 1965", evidence: "firmware",
+            { date: "2024-03-22", stamp: "22 MAR 24", title: "Bias, in 1965", evidence: "firmware",
               line: "Two engines — Prediction and Answer — both running off a " +
                     "changeable bias setting built before bias settings were a thing.",
               note: "" },
-            { stamp: "05 APR 24", title: "The cases open", evidence: "photograph",
+            { date: "2024-04-05", stamp: "05 APR 24", title: "The cases open", evidence: "photograph",
               line: "Photographs of the three cases and their artifacts: a " +
                     "spy camera, a real telegraph, and a 1960s CEO's day.",
               note: "" },

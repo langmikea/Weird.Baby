@@ -70,6 +70,85 @@ from memory:
   somewhere a scheduler can read. That is a hosting decision, not a code one, and
   it is the first real question of this workstream.
 
+## SEALED 2026-08-02 — THE LONG HAUL (v36; L1–L6. DEPLOY IS MIKE'S)
+
+Autonomous single-agent Code-lane round on Mike's long-haul brief, sealed and
+pushed in five parts. Full round log: `docs/MUSEUM_LONG_HAUL_LOG-20260802.md`.
+Content-shape note for Mike: `docs/RECORD_CONTENT_SHAPES.md`.
+
+- **L1 THE PUV SCROLLER — one defect, its third appearance, in the frame nobody
+  revisited.** `.fs-wrap{flex:1}` gave the scroller an EQUAL share of the right
+  column; R-c fixed that for the staged wing and F4/P2 for the flat wing, each
+  scoped to the wing in front of it, and the museum's primary exhibit — neither
+  staged nor flat — kept the original. Worse than equal: E5's 76px bar padding
+  was added INSIDE the flex item, so the scroller ran 86px LARGER than the
+  picture. Measured: /hr **670×133 viewer against a 218px scroller** (a 5:1
+  letterbox); at 390px **340×79**; and **/wb at 390px a TWENTY-FIVE-PIXEL-tall
+  video player**, the same collapse with no scroller to blame. E5's padding was
+  written on a false premise (`.fs-wrap` is `overflow:hidden` and does not
+  scroll) and never cleared the bar anyway (129px under at a 700px window; 71px
+  ABOVE at 900). Fixed: the scroller is a strip sized in LINES of the fact type —
+  three on desktop, measured against all 97 vault facts at this column's width;
+  two would fade the last line off 14% of them — and at stacked widths the viewer
+  is a ratio box again by M-a's own test. After: /hr 670×222, and /hr and /wb at
+  390px **both exactly 16:9**. /wal and /robots byte-identical.
+- **L2 THE RULINGS** — recorded above; J1 and J3 built (30 gold sites retired,
+  the WAL-set fallback named in code and in the DOM).
+- **L3 THE TOKEN CONFORMANCE ROUND — 96 substitutions, exactly R1's count**, and
+  pixel-identity proved STATICALLY: every `var(--wb-*)` written was substituted
+  back to its token's literal and diffed against HEAD. `tools/token-audit.mjs`
+  (new) parses the palette out of its own file and re-runs on demand. Three
+  things the sweep was not looking for: **the token file had a typo that made its
+  own audit lie** (`--wb-ink-soft: #e2deD3`); **the palette was being re-typed one
+  level down** to escape the player bar's dark re-pin (now `--wb-paper-*`
+  aliases); **the museum's dark scope lived inside one selector** so the second
+  room that wanted it had to copy seven values (now `--wb-booth-*`). Full
+  decision list — every value with what it is and what it should become — in the
+  round log, including 27 in `WbAdmin` (J4, Mike's) and 163 hand-typed font
+  stacks (not byte-identical, so not taken).
+- **L4 THE REVIEW'S REMAINING FINDINGS — R2, R3, R4, R5 and R6 all done.** One
+  `<MuseumBar>` replaces three title-bar families, and the merge exposed a live
+  defect the third copy was hiding: **32px of "HUNTER ROOT" printed on top of
+  "GIFT SHOP" at 390px**, now zero overlap on all six rooms. One `useOverlay`
+  hook replaces six Escape handlers and five scroll locks — and found that
+  `FilterInstrumentOverlay` was the one of six that never locked, and that none
+  of the eight restored focus. Six font `@import`s (already drifted: Syne at two
+  different weight lists) become one `<link>`. Three inline `<style>` template
+  literals become real `.css` files, with their mount-scoped `html, body` rules
+  preserved as `html[data-room="…"]`. `src/App.css` was 180 lines of Vite starter
+  imported by nothing — deleted. Five judgment items listed, chief among them
+  that **the wordmark points to two different rooms**.
+- **L5 THE ROBOTS WING, SECOND PASS — not one word of content written.** The
+  voids, measured: **48% of the sheet blank** (a two-column page printed on one
+  side), **76% of the contents column blank**, and a "sheet" four units of
+  luminance from its own column. Now: a single column is SET as one and centred;
+  the contents column prints the album's own poster (a photograph that, on a
+  staged wing, **nobody could ever reach**); and the page is a real print on a
+  mat. B4's photo law is finally written the way B4 said it wanted — the tenth
+  surface escaped it within four hours, exactly as B4 predicted. **The lead is
+  its own block**, which the stage had been asking for in the console on every
+  phone load (`block 0 is 244px and a column holds 202px`) while The Firmware
+  lost 83px and The Manual 39px off page 1. Both additions stand down below
+  720px, measured (206px clipped with them, 0 without).
+- **L6 BINGE PREP — the model, the surfaces, and the note.**
+  `src/lib/record-model.js` (29/29 assertions) owns the date, the bands, the
+  payload manifest and the document state. **Every entry now carries a real
+  `date`** — the thing D-WEEKLY-EVERYWHERE named as missing — transcribed from
+  the stamps already printed. The third class Mike named is built: a **document**
+  is provenance FIRST, then a scan and/or an extract, because those three arrive
+  at different times; the card states `imaged` / `quoted` / `held`, and `held` is
+  the honest half. The index bands by month and carries a payload manifest per
+  row. **Proved at 400 entries and reverted: 33 pages desktop / 242 phone, 0px
+  clipped anywhere**; the proof also found that an opened record was ONE
+  indivisible block and clipped 32px once it carried real evidence — now a run of
+  blocks. The shipping Record is unchanged for a visitor: every new surface is in
+  the code and absent from the page until content arrives.
+- Gates, every seal: **lint 11 err / 9 warn** (= HEAD baseline, zero new), vite
+  build green, console clean, and a browser lap at desktop AND a genuine 390px
+  viewport. **Harness note banked:** a framed document will not scroll until
+  `overflow-x:clip` is swapped for `hidden` — without that the narrow lap can
+  only ever see the first screen.
+
 ## THE PALETTE + SET RULINGS (Mike, 2026-08-02 — standing; answers B7's J1/J2/J3)
 
 Three rulings closing the judgment calls the adversarial review listed rather

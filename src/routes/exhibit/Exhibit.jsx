@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback, useLayoutEffect, useMemo } from "react";
 import { makeFactCycler, splitFact } from "../../lib/fact-select.js";
 import MuseumBar from "../../components/MuseumBar.jsx";
+import {
+  entryStamp, groupByPeriod, shouldBand, evidenceOf, docState,
+} from "../../lib/record-model.js";
 import "./Exhibit.css";
 
 // ─── TYPE CONFIG ──────────────────────────────────────────────────────────────
@@ -2981,12 +2984,32 @@ export default function Exhibit({ artist }) {
                             </ol>
                           );
                           const open = openEntry !== null && list[openEntry] ? openEntry : null;
+                          /* [L6 2026-08-02] THE INDEX IS BANDED WHEN IT IS LONG
+                              ENOUGH TO NEED IT — binge prep, D-BINGE.
+                              "A Record of ten entries and a Record of four
+                              hundred are the same component, and the one that
+                              breaks at four hundred is not finished." Ten rows
+                              are a list; four hundred are a wall of dates with
+                              no landmarks in it, and a reader walking back
+                              through weeks has nothing to walk BY.
+                              Bands are MONTHS, derived from each entry's real
+                              date — see the arithmetic in record-model.js for
+                              why not weeks. They appear only when there are
+                              enough entries AND more than one month among them,
+                              so today's ten-entry Record is byte-identical to
+                              before and the furniture arrives with the volume
+                              that needs it. */
                           if (open === null) return (
                             <ol className="vp-face-entries vp-rec-index" data-stage-split="row">
-                              {list.map((en, i) => (
+                              {(shouldBand(list) ? groupByPeriod(list) : list.map((entry, index) => ({ entry, index })))
+                                .map((row) => row.band !== undefined ? (
+                                  <li key={"b" + row.band} className="vp-rec-band" aria-hidden="true">
+                                    {row.label}
+                                  </li>
+                                ) : (() => { const en = row.entry, i = row.index; return (
                                 <li key={i} className="vp-fe vp-rec-row">
                                   <button className="vp-rec-open" onClick={() => setOpenEntry(i)}>
-                                    {en.stamp && <span className="vp-fe-stamp">{en.stamp}</span>}
+                                    {entryStamp(en) && <span className="vp-fe-stamp">{entryStamp(en)}</span>}
                                     <span className="vp-fe-body">
                                       {/* [B9] the class rides the INDEX, which is
                                           the point of classing at all: a reader
@@ -3007,28 +3030,65 @@ export default function Exhibit({ artist }) {
                                         {en.evidence && (
                                           <span className="vp-fe-class">{en.evidence}</span>
                                         )}
+                                        {/* [L6] WHAT THE WEEK ACTUALLY BROUGHT,
+                                            counted, on the row. B9 put the CLASS
+                                            on the index so a reader could see a
+                                            week brought a transmission rather
+                                            than another paragraph. The count is
+                                            the other half: three photographs and
+                                            a transmission is a different Tuesday
+                                            from one photograph, and at binge
+                                            volume that difference is the whole
+                                            navigation. Absent entirely on an
+                                            entry with no payloads, which is
+                                            every entry written so far — the
+                                            index does not move until the
+                                            evidence does. */}
+                                        {evidenceOf(en).map(ev => (
+                                          <span key={ev.kind} className="vp-fe-load">
+                                            {ev.kind}<i>{ev.count}</i>
+                                          </span>
+                                        ))}
                                       </span>
                                       {en.line && <span className="vp-fe-line vp-rec-peek">{en.line}</span>}
                                     </span>
                                   </button>
                                 </li>
-                              ))}
+                              ); })())}
                             </ol>
                           );
                           const en = list[open];
                           return (
-                            <div className="vp-rec">
-                              <button className="vp-rec-head" onClick={() => setOpenEntry(null)}
+                            /* [L6 2026-08-02] AN OPENED RECORD IS A RUN OF
+                                BLOCKS, NOT ONE BLOCK.
+                                It used to be a single `.vp-rec` div, which the
+                                stage sees as one indivisible thing. That was
+                                fine while every entry was a paragraph; it stops
+                                being fine the moment an entry carries the
+                                evidence D-BINGE asks for. MEASURED with a
+                                synthetic entry holding three documents and a
+                                transmission: **32px off the bottom of the page**,
+                                clipped, with no scrollbar — the same shape of
+                                defect as D3's wall and F5's head, one level in.
+                                So the record's parts are siblings and the packer
+                                pages them, and the document list carries
+                                `data-stage-split="row"` so a stack of ten
+                                documents divides by card rather than as a lump.
+                                The `.vp-rec` and `.vp-rec-body` wrappers are
+                                gone; the gaps they supplied are now margins on
+                                the parts, so the flat wing (whose container has
+                                no gap at all) reads identically. */
+                            [
+                              <button key="head" className="vp-rec-head" onClick={() => setOpenEntry(null)}
                                       title="close this record">
-                                {en.stamp && <span className="vp-fe-stamp">{en.stamp}</span>}
+                                {entryStamp(en) && <span className="vp-fe-stamp">{entryStamp(en)}</span>}
                                 <span className="vp-rec-title">{en.title}</span>
                                 {en.evidence && (
                                   <span className="vp-fe-class">{en.evidence}</span>
                                 )}
-                              </button>
-                              <div className="vp-rec-body">
-                                {en.line && <p className="vp-rec-line">{en.line}</p>}
-                                {/* ==== [B9 2026-08-02] THE RECORD CARRIES
+                              </button>,
+                              en.line ? <p key="line" className="vp-rec-line">{en.line}</p> : null,
+                              /* ==== [B9 2026-08-02] THE RECORD CARRIES
                                     EVIDENCE, NOT ONLY PARAGRAPHS ============
                                     MIKE: "The Record needs to carry more than
                                     plates: photos, electronic data
@@ -3051,14 +3111,14 @@ export default function Exhibit({ artist }) {
                                     identical reader as a plate off the wall.
                                     An entry declaring neither renders exactly
                                     as it did before, which is why the ten
-                                    entries already written did not move. */}
-                                {Array.isArray(en.wire) && en.wire.length > 0 && (
-                                  <ul className="vp-face-lines vp-rec-wire">
-                                    {en.wire.map((l, wi) => <li key={wi}>{l}</li>)}
-                                  </ul>
-                                )}
-                                {Array.isArray(en.plates) && en.plates.length > 0 && (
-                                  <div className="vp-rec-plates">
+                                 entries already written did not move. */
+                              Array.isArray(en.wire) && en.wire.length > 0 ? (
+                                <ul key="wire" className="vp-face-lines vp-rec-wire" data-stage-split="row">
+                                  {en.wire.map((l, wi) => <li key={wi}>{l}</li>)}
+                                </ul>
+                              ) : null,
+                              Array.isArray(en.plates) && en.plates.length > 0 ? (
+                                <div key="plates" className="vp-rec-plates">
                                     {en.plates.map((p, pi) => (
                                       <button key={pi} className="vp-rec-plate"
                                         onClick={() => openLink(p.img,
@@ -3070,23 +3130,95 @@ export default function Exhibit({ artist }) {
                                         )}
                                       </button>
                                     ))}
-                                  </div>
-                                )}
-                                {en.note && <p className="vp-fe-note">{en.note}</p>}
-                              </div>
-                              {/* THE PAGE ENDS DEFINITIVELY. A reader should never
-                                  have to wonder whether there is more below the
-                                  fold; the mark says the record is finished, the
-                                  way a set proof closes with a tombstone. */}
-                              <div className="vp-rec-end" aria-hidden="true"><i /></div>
-                              <nav className="vp-rec-nav">
+                                </div>
+                              ) : null,
+                              /* ==== [L6 2026-08-02] DOCUMENTS ==============
+                                    The third class Mike named, and the one B9
+                                    did not have a shape for. `wire` covers
+                                    transmissions and `plates` covers
+                                    photographs; a DOCUMENT is neither, because a
+                                    document is a thing with a PROVENANCE first —
+                                    who wrote it, when, how many pages — and then,
+                                    separately and later, an image of it and/or
+                                    words taken out of it.
+                                    THOSE THREE ARRIVE AT DIFFERENT TIMES, which
+                                    is exactly why they are three fields. A
+                                    catalogue card can be written the day the
+                                    document is found; the scan waits on a camera;
+                                    the extract waits on somebody reading it. A
+                                    model that demanded all three at once would
+                                    mean nothing about the document could be
+                                    published until everything about it was, and
+                                    the Record is a log of a discovery in
+                                    progress.
+                                    SO THE STATE IS PART OF THE MODEL, not an
+                                    accident of which fields happen to be filled:
+                                    `imaged` opens in the reader, `quoted` prints
+                                    the extract with its source, `held` prints
+                                    the provenance and says plainly that the page
+                                    itself is not here. That last one is the
+                                    honest half — the same discipline as B8's
+                                    reel, which ships empty and says "reel empty"
+                                    rather than rendering nothing and hoping.
+                                    A SET OF SCANS OPENS AS ITS OWN REEL, the
+                                    identical reader as a plate off the wall,
+                                 because a document's pages ARE a reel. */
+                              Array.isArray(en.docs) && en.docs.length > 0 ? (
+                                <ul key="docs" className="vp-rec-docs" data-stage-split="row">
+                                    {en.docs.map((doc, di) => {
+                                      const state = docState(doc);
+                                      const scans = en.docs
+                                        .filter(x => x && x.scan)
+                                        .map(x => ({ img: x.scan, label: x.title, date: x.date }));
+                                      const si = scans.findIndex(x => x.img === doc.scan);
+                                      return (
+                                        <li key={di} className={"vp-rec-doc vp-rec-doc--" + state}>
+                                          <div className="vp-rec-doc-head">
+                                            <span className="vp-rec-doc-title">{doc.title}</span>
+                                            <span className="vp-rec-doc-state">{state}</span>
+                                          </div>
+                                          {(doc.source || doc.date || doc.pages) && (
+                                            <div className="vp-rec-doc-prov">
+                                              {[doc.source, doc.date,
+                                                doc.pages ? doc.pages + "pp" : null]
+                                                .filter(Boolean).join("  ·  ")}
+                                            </div>
+                                          )}
+                                          {state === "imaged" && (
+                                            <button className="vp-rec-plate vp-rec-doc-scan"
+                                              onClick={() => openLink(doc.scan,
+                                                { set: scans, index: si < 0 ? 0 : si,
+                                                  setTitle: doc.title || en.title })}>
+                                              <img src={doc.scan} alt="" />
+                                            </button>
+                                          )}
+                                          {state === "quoted" && (
+                                            <blockquote className="vp-rec-doc-extract">
+                                              {doc.extract}
+                                            </blockquote>
+                                          )}
+                                          {doc.note && (
+                                            <p className="vp-rec-doc-note">{doc.note}</p>
+                                          )}
+                                        </li>
+                                      );
+                                  })}
+                                </ul>
+                              ) : null,
+                              en.note ? <p key="note" className="vp-fe-note">{en.note}</p> : null,
+                              /* THE PAGE ENDS DEFINITIVELY. A reader should never
+                                 have to wonder whether there is more below the
+                                 fold; the mark says the record is finished, the
+                                 way a set proof closes with a tombstone. */
+                              <div key="end" className="vp-rec-end" aria-hidden="true"><i /></div>,
+                              <nav key="nav" className="vp-rec-nav">
                                 <button className="vp-rec-step" disabled={open === 0}
                                         onClick={() => setOpenEntry(open - 1)}>‹ NEWER</button>
                                 <span className="vp-rec-count">{open + 1} of {list.length}</span>
                                 <button className="vp-rec-step" disabled={open === list.length - 1}
                                         onClick={() => setOpenEntry(open + 1)}>OLDER ›</button>
-                              </nav>
-                            </div>
+                              </nav>,
+                            ].filter(Boolean)
                           );
                         })()}
                         {/* [TRAIL 2026-08-02] MARKERS, NOT A LINK DUMP.
