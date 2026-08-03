@@ -570,4 +570,169 @@ it cost that round a real minute deciding whether Escape could safely fire it.
 
 ---
 
-*(Sections for L5–L6 are appended as each is sealed.)*
+---
+
+## L5 · THE ROBOTS WING, SECOND PASS
+
+**Ordered:** *"the wing still lags the WAL quality bar. Structure and visuals
+only — raise composition, typography, spacing, imagery presentation toward the
+collage standard. Do NOT write Mike's [PAPA] text; make the frames worthy of
+it."*
+
+**Not one word of content was written, added or altered.** Every image and every
+caption on the wing's new surfaces was already in the data.
+
+### What "lags the bar" is, in numbers
+
+Measured on `/robots` at 1400×900 before this pass:
+
+| void | measurement |
+|---|---|
+| the stage's second column | **466 of 970px — 48% of the sheet — with ZERO children**, hard against the text |
+| the contents column | **326 × 878 holding 214px of list — 664px, 76%, blank** |
+| the sheet itself | face `#ece9e0` on a column `#e7e3d8` — **four units of luminance**, no edge, no shadow |
+
+That is the wing: a two-column page printed on one side, a contents column that
+is mostly margin, and no sheet at all — in a room about a photographed physical
+object whose nine photographs appear in exactly one place.
+
+### F1 · A one-column page is SET as one column
+
+`stg-1up` already existed and already dropped the divider rule; its comment said
+the empty column was kept for LINE LENGTH. That reasoning is right and was half
+applied — it decided how WIDE the measure should be and never decided where it
+should SIT. A single column of type on a wide sheet is centred, and has been
+since there were pages.
+
+The measure is pinned to exactly the width it already had (half the sheet less
+half the gutter — the packer's own arithmetic) and the page centres it. **No
+block moves, reflows or re-paginates**; verified page 1 of The Plates sits at
+466px centred on a 970px sheet, dead on the axis.
+
+### F2 · The contents column prints the object
+
+`contentsPlate`, opt-in by config like `bodyKey` / `stage` / `playerBar` /
+`fitOnEntry` before it. The album's own `viewerPoster` and
+`viewerPosterCaption`, filed under the contents list.
+
+**Nothing is chosen or written by the rule.** Every album here already declares
+a poster picked on stated grounds and a caption already written — and on a
+STAGED wing a face covers the viewer from the moment the room opens, so that
+photograph was one **nobody ever reached**. It now stands where the room had a
+hole.
+
+Built from the collage's own materials, because the collage is the bar: warm
+print stock, a hairline, a real two-part shadow. **What it does not take is the
+tilt** — a wall of glued-up tiles is tilted because a wall is casual; a single
+plate filed under a contents list is a document, and a crooked document reads as
+an accident.
+
+### F3 · The page is a SHEET, on a MAT
+
+The one document surface in the museum that was not a print is now one:
+`--wb-ink-card` stock, inset from its frame so the mat shows on four sides, with
+the same shadow every other print in the building casts. Scoped to the staged
+wing and, inside it, to the paper faces — the Portal and the panel declare a
+dark ground on purpose and must not be given a sheet.
+
+**The mat is PADDING on the face, not an inset, and that is not a preference.**
+The first cut moved the face in with `inset:18px` and the room grew an **18px
+black border on all four sides**. Cause: `useYTPlayer` builds its player eagerly
+on mount (a fix for mobile first-click playback), so an opaque black YouTube
+iframe fills `.vp-area` on **every** wing — including this one, which declares
+`playerBar:false` and has no video at all. The face at `inset:0` had been the
+lid over it. So the face keeps `inset:0`, the mat is its padding and the sheet is
+the body inside it.
+
+### F4 · The photo law is now written the way B4 said it wanted to be written
+
+B4's own comment says a photo law written as a list of components is *"nine rules
+that the tenth new surface quietly escapes"* — and then wrote a list of six
+components. **The tenth surface arrived in this round, four hours later:** F2's
+contents plate came up in colour, measured `filter: none`, exactly as B4
+predicted and for exactly B4's reason.
+
+The rule is now every photograph in the wing (`img`, which is what every image
+here is; the interface is SVG and CSS and cannot be touched by it), with
+`[data-colour]` as an escape a surface must ASK for rather than one it gets by
+being new. Nothing declares it. Verified: every `img` on `/robots` computes
+`grayscale(1) contrast(1.03)`.
+
+### F5 · THE LEAD IS ITS OWN BLOCK — and the stage had been saying so, in words
+
+The head held the title, the subtitle AND the lead paragraph as one indivisible
+block. On a phone that block is taller than a whole page of the staged wing, and
+the packer's own diagnostic said so on every load of `/robots` at 390px:
+
+> `[stage] block 0 is 244px and a column holds 202px — it gets a column of its
+> own and will overrun. Split it upstream, or mark it data-stage-full if it
+> wants the page.`
+
+**Measured clipping at 390px: The Firmware lost 83px off page 1, The Manual
+39px.** B5/D7 fixed the WALL's phone overflow last round; these two TEXT faces
+were still losing their first page, and the console had been reporting it.
+
+Of the two remedies the message offers, `data-stage-full` is the wrong one — a
+lead paragraph is not a wall and does not want the sheet. Splitting upstream is
+right, and the seam was already in the data: `title`/`subtitle` are the page's
+HEADING, `blurb` is its LEAD. Two things, two blocks, and the packer can page
+between them.
+
+**After: 0px clipped on every face at every width tested, and the `[stage]`
+warning is gone from the console.** Firmware 4→5 pages, Manual 9→10 — content
+that was being cut is now being turned to.
+
+**And it moved something on the flat wing, which was caught and put back.** The
+lead had been inside `.vp-face-headtext` (gap 10px); as a sibling it inherits
+its container's gap, and `.vp-flat` — WAL's container — is a plain block with no
+gap at all. Measured on `/wal`: 0px where there had been 10. Restored with one
+rule scoped to the flat container.
+
+### Both additions stand down at stacked widths, and the measurement is why
+
+Below 720px the two columns are not columns — they stack inside a body of FIXED
+height, so anything added to the contents column comes straight out of the
+stage's frame. Measured at 390px with both in place: **206px of the page
+clipped** — the plate accounting for 144 and the mat for 62. With both stood
+down: zero, on all five pages of the wall.
+
+That is the rule reading its own condition rather than a compromise. The plate
+fills a void that exists only when the list is a narrow column beside a wide
+stage; when the list is a full-width band above the stage there is no void,
+there is a shortage. And a mat is the space a printed page sits in — on a phone
+the page IS the screen.
+
+### LISTED FOR MIKE — not taken
+
+1. **The house album's poster is its own logo**, so on `/robots` → Weird.Baby
+   Robots the contents plate is the same mark that is in the carousel 300px
+   above it. The mechanism is right; that one album's chosen photograph is a
+   portrait of the mark rather than of a thing. A distinct house photograph
+   would earn the slot. Content, so it is Mike's.
+2. **Per-face plates.** The face contract already supports a head still
+   (`still` / `stillCaption`, which WAL uses); the wing owns nine captioned
+   photographs and uses them on one face. Pairing a photograph to a page —
+   the front to The Record, the lit glass to The Firmware — is curation, not
+   framing, so it is listed rather than done.
+3. **The carousel band** is 1367 × 300px for two tiles. Shrinking it makes the
+   tiles smaller rather than the room fuller, so nothing was changed; a third
+   album is the real answer and that is content.
+4. **`useYTPlayer` builds a black YouTube iframe on a wing with no video** (F3,
+   above). It is invisible today because a face covers it, which is a lid rather
+   than a fix. Not touched: gating it is a change to the player's own lifecycle
+   on every wing, which is not this brief.
+
+### Gates
+
+- **lint 11 errors / 9 warnings** — HEAD baseline, zero new. **vite build green.**
+- `/robots` walked face by face and page by page at **390 / 760 / 1400px**, both
+  albums, every page of every face: **worst overflow 0px**.
+- `/hr` `/wb` `/wal` `/shop` `/booth` `/` `/admin` re-verified; `/wal`'s lead
+  spacing measured back to 10px; `/hr` `/wb` `/wal` geometry unchanged (they
+  carry no `data-stage`).
+- **Console clean across nine route/width combinations — no errors and no
+  `[stage]` overrun warnings**, which for this wing is the gate.
+
+---
+
+*(Section for L6 is appended when it is sealed.)*

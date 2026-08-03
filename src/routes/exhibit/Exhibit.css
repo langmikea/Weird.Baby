@@ -170,6 +170,14 @@ body:has(.vp-face) .vp-area::before{display:none}
   font-size:var(--fs-lead);line-height:1.4;color:var(--wb-dim);
   letter-spacing:.005em;max-width:44ch;
   border-left:2px solid var(--wb-gold-lo);padding-left:14px}
+/* [L5 2026-08-02] THE LEAD KEEPS ITS AIR ON THE FLAT WING.
+   Splitting the lead out of the head (see Exhibit.jsx) moved it from inside
+   `.vp-face-headtext`, which sets a 10px gap, to a sibling of the head. On the
+   STAGED wing that is free — the column supplies 12px — but the FLAT wing's
+   container (`.vp-flat`) is a plain block with no gap at all, so the lead
+   arrived hard against the subtitle. MEASURED on /wal: 0px where there had been
+   10. This is the 10, put back where the container cannot supply it. */
+.vp-flat > .vp-face-blurb{margin-top:10px}
 .vp-face-lines{list-style:none;padding:0;margin:0;display:flex;
   flex-direction:column;gap:5px;border-top:1px solid var(--wb-border);
   padding-top:11px}
@@ -547,6 +555,28 @@ body:has(.pb) .ex-left{padding-bottom:76px}
    hit (`tl-track <- pb`, "always one flick from view", four lines up). The
    scroller's own size is now the strip below. */
 body:has(.pb) .ex-root{padding-bottom:88px}
+/* [L5 2026-08-02] THE CONTENTS PLATE — the object, printed under its own
+   contents list. Reasoning and measurements at the render site in Exhibit.jsx.
+   IT IS BUILT FROM THE COLLAGE'S OWN MATERIALS, because the collage is the
+   quality bar this wing is being held to (Mike): warm print stock, a hairline,
+   a real shadow rather than a border pretending to be one, and the caption in
+   the museum's mono at the register's own size. What it does NOT take from the
+   collage is the tilt — a wall of glued-up tiles is tilted because a wall is
+   casual; a single plate filed under a contents list is a document, and a
+   document that is crooked reads as an accident rather than as a choice.
+   The photo law applies here like everywhere else in a monochrome wing; the
+   `[data-exhibit="robots"]` rule further down covers this img by scope, so no
+   filter is repeated here. */
+.ex-contents-plate{margin:22px 20px 26px;display:flex;flex-direction:column;gap:9px}
+.ex-contents-plate img{display:block;width:100%;height:auto;
+  background:var(--wb-ink-card);padding:9px;
+  border:1px solid var(--wb-border);
+  box-shadow:0 1px 2px rgba(33,31,28,.14),0 10px 26px rgba(33,31,28,.13)}
+.ex-contents-plate figcaption{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro,.66rem);letter-spacing:.06em;line-height:1.5;
+  color:var(--wb-gold-lo)}
+/* the plate is the LAST thing in a scrolled column, so it needs the room the
+   column's own bar-clearance gives the list above it and nothing more. */
 .ex-left::-webkit-scrollbar{width:3px}
 .ex-left::-webkit-scrollbar-track{background:transparent}
 .ex-left::-webkit-scrollbar-thumb{background:var(--wb-border-hi);border-radius:2px}
@@ -1467,6 +1497,82 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 /* a page with only one column of content keeps the empty column (line length)
    and drops the rule (a divider beside nothing reads as a fault). */
 .stg-page.stg-2col.stg-1up::before{display:none}
+/* [L5 2026-08-02] AND IT CENTRES THE MEASURE INSTEAD OF PRINTING ON ONE SIDE.
+   MIKE: the robots wing "still lags the WAL quality bar".
+   MEASURED on /robots at 1400x900, on every face that fits one column: the
+   sheet is 970px, the filled column is 466px, and the second `.stg-col` has
+   **ZERO children** — 466px, 48% of the page, blank, hard against the text.
+   That is not a margin, it is an unfinished page: the eye reads a two-column
+   layout printed on one side.
+   THE ORIGINAL REASONING WAS RIGHT AND ONLY HALF-APPLIED. The empty column was
+   kept for LINE LENGTH — so a short face does not run its lines the full 970px
+   — and that is correct. What it did not do is decide where the measure should
+   SIT. A single column of type on a wide sheet is centred; that is how a page
+   with one column of type has been set since there were pages.
+   So the measure is pinned to exactly the width it already had — half the sheet
+   less half the gutter, the same arithmetic the packer used — and the page
+   centres it. Nothing about the packer's plan changes: it still measures and
+   fills one column of the same width, so no block moves, reflows or re-paginates.
+   The empty column is dropped from the flow because a centred single column has
+   two equal margins, which is the point. */
+/* [L5 2026-08-02] THE PAGE IS A SHEET, AND IT IS ON A MAT.
+   The second half of "raise composition toward the collage standard", and the
+   cheapest real lift in the wing. MEASURED before: the face painted
+   `--wb-ink` #ece9e0 edge to edge inside a column painted #e7e3d8 — FOUR UNITS
+   of luminance apart, across a hard edge, with no shadow. There was no sheet;
+   there was a field. Everything else in this museum that is a document is a
+   PRINT — the cards, the collage tiles, the qcards, the contents plate added
+   this round — warm print stock, a hairline, and a real shadow on the mat
+   behind it. The stage was the one document surface that was not.
+   So the face takes the museum's own print stock (`--wb-ink-card`), is inset
+   from its frame so the mat shows on all four sides, and casts the same
+   two-part shadow every other print in the building casts.
+   SCOPED TO THE STAGED WING, and inside it to the paper faces only: the Portal
+   and the panel declare their own dark ground on purpose (a doorway to a
+   running machine is not a document) and must not be given a sheet.
+   THE MAT IS PADDING ON THE FACE, NOT AN INSET, AND THAT IS NOT A STYLE
+   PREFERENCE. The first cut moved the face itself in with `inset:18px` and the
+   room grew an 18px BLACK BORDER on all four sides. The cause: `useYTPlayer`
+   builds its player eagerly on mount (a fix for mobile first-click playback),
+   so an opaque black YouTube iframe fills `.vp-area` on every wing — including
+   this one, which declares `playerBar:false` and has no video at all. The face
+   at `inset:0` had been covering it. Insetting the face uncovered it.
+   So the face keeps `inset:0` and stays the lid; the MAT is the face's padding
+   and the SHEET is the body inside it. Same picture, and the black stays under
+   the lid where it has always been.
+   THE MAT COSTS THE PACKER 36px OF HEIGHT AND 36px OF WIDTH, which it re-plans
+   against on mount like any other geometry — verified face by face, zero
+   overflow on all nine, one face gaining a second page. */
+.ex-root[data-stage="1"] .vp-area{background:#e7e3d8;border-color:transparent}
+.ex-root[data-stage="1"] .vp-face:not(.vp-face-portal):not(.vp-face-panel){
+  background:#e7e3d8;padding:18px}
+.ex-root[data-stage="1"] .vp-face:not(.vp-face-portal):not(.vp-face-panel)
+  >.vp-face-body{
+  background:var(--wb-ink-card);
+  border:1px solid var(--wb-border);
+  box-shadow:0 1px 2px rgba(33,31,28,.10),0 14px 34px rgba(33,31,28,.11)}
+/* [L5] BOTH OF THIS ROUND'S ADDITIONS STAND DOWN AT STACKED WIDTHS, and the
+   measurement is why. Below 720px the two columns are not columns — they stack
+   inside a body of FIXED height, so anything added to the contents column is
+   taken straight out of the stage's own frame. Measured on /robots at 390px
+   with both in place: **206px of the page clipped**; the plate alone accounted
+   for 144 of it and the mat for 62; with both stood down, zero on all five
+   pages of the wall.
+   That is not a compromise, it is the rule reading its own condition. The plate
+   fills a VOID that exists only when the contents list is a narrow column
+   beside a wide stage; when the list is a full-width band above the stage there
+   is no void, there is a shortage. And a mat is the space a printed page sits
+   in — on a phone the page IS the screen and there is no space to sit in. */
+@media (max-width:720px){
+  .ex-root[data-stage="1"] .vp-face:not(.vp-face-portal):not(.vp-face-panel){
+    padding:0}
+  .ex-contents-plate{display:none}
+}
+
+.stg-page.stg-2col.stg-1up{justify-content:center}
+.stg-page.stg-2col.stg-1up>.stg-col{
+  flex:0 0 calc((100% - var(--stg-colgap)) / 2)}
+.stg-page.stg-2col.stg-1up>.stg-col:empty{display:none}
 
 /* ===========================================================================
    [W1–W10 2026-08-02] WORTH A LISTEN — THE SPOTLIGHT ROUND
@@ -1729,12 +1835,26 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    and the wing's own standing rule is "photos are paper; video is
    television". FLAGGED for Mike rather than decided here.
    =========================================================================== */
-.ex-root[data-exhibit="robots"] .vp-collage-tile img,
-.ex-root[data-exhibit="robots"] .vp-qcard-still,
-.ex-root[data-exhibit="robots"] .cf-album img,
-.ex-root[data-exhibit="robots"] .ex-album-banner img,
-.ex-root[data-exhibit="robots"] .vp-face-still,
-.ex-root[data-exhibit="robots"] .vp-poster img{
+/* [L5 2026-08-02] AND IT IS NOW ACTUALLY WRITTEN THAT WAY.
+   B4's own comment above says a photo law written as a list of components is
+   "nine rules that the tenth new surface quietly escapes" — and then wrote a
+   list of six components. THE TENTH SURFACE ARRIVED IN THIS ROUND, four hours
+   later: `.ex-contents-plate img` was added above and came up in colour,
+   measured `filter: none`, exactly as B4 predicted and for exactly the reason
+   B4 gave.
+   So the rule is what B4 said it wanted: EVERY PHOTOGRAPH IN THE WING, named
+   as such. `img` is the right unit — every image in this wing is a photograph
+   of the museum's own machine (covers, plates, stills, posters, reader frames);
+   the interface is drawn in SVG and inline CSS, which this cannot touch.
+   `[data-colour]` is the escape hatch, and it is deliberately something a
+   surface must ASK for rather than something it gets by being new. Nothing
+   declares it today.
+   THE PORTAL'S LIVE TWIN stays outside by nature, not by exception: it is an
+   `<iframe>` of the machine's own running screen, and the wing's standing rule
+   is "photos are paper; video is television". [J2 2026-08-02] Mike ruled it —
+   no practical difference, the twin is already monochrome, no build. */
+.ex-root[data-exhibit="robots"] img:not([data-colour]),
+.ex-root[data-exhibit="robots"] .vp-qcard-still:not([data-colour]){
   filter:grayscale(1) contrast(1.03)}
 
 /* ===========================================================================

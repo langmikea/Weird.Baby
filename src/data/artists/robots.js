@@ -756,5 +756,15 @@ export const robotsExhibit = {
      permanent transport here was a control for something that never plays,
      sitting on the stage and lying about its height. */
   playerBar: false,
+  /* [L5 2026-08-02] THE CONTENTS COLUMN PRINTS THE OBJECT.
+     This wing opens its contents column at 24% (S8) because it carries three to
+     six short rows and wanted bigger type for them. The consequence, measured:
+     326 x 878 holding 214px of list — 664px of blank paper, the largest single
+     void in the room, in a wing whose subject is a photographed physical object.
+     `contentsPlate` prints the album's own `viewerPoster` beneath the list, with
+     the caption the album already carries. Nothing is chosen or written by the
+     rule; both come off the data. Declared here and nowhere else — /hr, /wb and
+     /wal run long lists that fill their own column. */
+  contentsPlate: true,
   exhibitFlow: RobotsExhibitFlow,
 };

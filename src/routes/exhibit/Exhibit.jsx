@@ -2403,6 +2403,39 @@ export default function Exhibit({ artist }) {
                 onSelect={ti => handleTrackSelect(activeDisplay, ti)}
                 onTagClick={(ti, vi) => handleTagClick(activeDisplay, ti, vi)}
               />
+              {/* [L5 2026-08-02] THE CONTENTS COLUMN GETS THE OBJECT'S PLATE.
+                  MIKE: the robots wing "still lags the WAL quality bar …
+                  raise composition, typography, spacing, imagery presentation
+                  toward the collage standard."
+                  MEASURED on /robots at 1400x900: this column is 326 x 878 and
+                  holds 214px of contents. **664px of it — 76% — is blank
+                  paper**, and it is the largest single void in the wing. A wing
+                  about a physical object was showing the object in exactly one
+                  place: one face's collage.
+                  THE PLATE IS ALREADY CHOSEN AND ALREADY CAPTIONED. Every album
+                  here declares `viewerPoster` + `viewerPosterCaption` — a real
+                  photograph picked on stated grounds (see robots.js E2) and a
+                  caption already written — and on a STAGED wing a face covers
+                  the viewer from the moment the room opens, so the poster is a
+                  photograph nobody ever reaches. It moves to where the room has
+                  a hole. No image is chosen here and no caption is written
+                  here; both are read off the album.
+                  OPT-IN BY CONFIG (`contentsPlate`), like `bodyKey`, `stage`,
+                  `playerBar` and `fitOnEntry` before it — so /hr, /wb and /wal,
+                  whose contents columns are long lists that fill their column,
+                  keep their exact DOM. */}
+              {artist.contentsPlate && (album.viewerPoster || album.art) && (
+                <figure className="ex-contents-plate">
+                  {/* NOT lazy: the plate is part of the room's composition on
+                      entry, not a below-the-fold extra, and it sits inside a
+                      scroll container where a deferred load leaves a 20px
+                      sliver where a photograph belongs (observed). */}
+                  <img src={album.viewerPoster || album.art} alt="" />
+                  {(album.viewerPosterCaption || album.title) && (
+                    <figcaption>{album.viewerPosterCaption || album.title}</figcaption>
+                  )}
+                </figure>
+              )}
             </div>
 
             {/* VERTICAL DRAG HANDLE */}
@@ -2558,13 +2591,40 @@ export default function Exhibit({ artist }) {
                             third and shaped to its own aspect rather than to a
                             crop. Faces without a still collapse the grid to one
                             column and are unaffected. */}
+                        {/* [L5 2026-08-02] THE LEAD IS ITS OWN BLOCK, AND THE
+                            STAGE HAD BEEN SAYING SO IN THE CONSOLE.
+                            The head used to hold the title, the subtitle AND the
+                            lead paragraph as one indivisible block. On a phone
+                            that block is taller than a whole page of the staged
+                            wing, and the packer's own diagnostic said it in
+                            words, repeatedly, on every load of /robots at 390px:
+                            "[stage] block 0 is 244px and a column holds 202px —
+                            it gets a column of its own and will overrun. Split
+                            it upstream, or mark it data-stage-full if it wants
+                            the page."
+                            MEASURED CLIPPING at 390px before this: The Firmware
+                            lost 83px off page 1, The Manual 39px. B5/D7 fixed
+                            the WALL's phone overflow in the last round and these
+                            two TEXT faces were still losing their first page.
+                            `data-stage-full` is the wrong remedy of the two the
+                            message offers — a lead paragraph is not a wall and
+                            does not want the whole sheet. Splitting it upstream
+                            is the right one, and the seam is already obvious in
+                            the data: a `title`/`subtitle` are the page's HEADING
+                            and `blurb` is its LEAD. Two things, two blocks, and
+                            the packer can page between them when it has to.
+                            NOTHING MOVES ON A WIDE PAGE. The lead follows the
+                            heading exactly as before; the only difference is the
+                            gap it sits on (the column's 12px rather than the
+                            head grid's 12–22px), which is why the rule below
+                            pins it. Wings that do not page (WAL is flat, /hr and
+                            /wb declare no faces) cannot notice. */}
                         <div className="vp-face-head">
                           <div className="vp-face-headtext">
                             {face.title && <div className="vp-face-title">{face.title}</div>}
                             {face.subtitle && (
                               <div className="vp-face-sub">{face.subtitle}</div>
                             )}
-                            {face.blurb && <p className="vp-face-blurb">{face.blurb}</p>}
                           </div>
                           {/* [G1 2026-07-31] THE LIVE FACE IS RETIRED.
                               Mike ruled the face frozen, so the iframe, its
@@ -2595,6 +2655,9 @@ export default function Exhibit({ artist }) {
                             </figure>
                           )}
                         </div>
+                        {/* [L5] the LEAD, now a block of its own — see the note
+                            above the head. */}
+                        {face.blurb && <p className="vp-face-blurb">{face.blurb}</p>}
                         {/* ==== [C-b/C-c 2026-08-02] THE MUSEUM CARD ==========
                             R-a's finding, built. A museum has TWO labels for an
                             object and they are not interchangeable:
