@@ -1175,17 +1175,28 @@ const HOUSE_ALBUM = {
         kind: "text",
         title: "WHAT THIS ROOM IS",
         subtitle: "WORTH A LISTEN",
-        blurb: "Songs somebody in this house loves, pointed at. That is the " +
-               "whole show.",
+        /* [M11 2026-08-03] REWRITTEN TO THE PERSONALITY MAP.
+           MIKE, on this wing: "the ARTISTS shine; W.B does not overshadow;
+           W.B is a LISTENER IN THE ROOM WITH EVERYONE ELSE, it just happens to
+           be W.B's room."
+           The old copy was close and missed on one word. "The frame is ours"
+           is a CURATOR speaking — it puts the house on one side of the glass
+           and the visitor on the other, which is the overshadowing the map
+           forbids even when the sentence is modest. The map says the house is
+           in the SAME ROW as the visitor, and that is a different sentence.
+           No claim is added or removed: four artists, eight songs, the same
+           four surfaces each, every door leading out. */
+        blurb: "Records somebody in this house could not stop playing, pointed " +
+               "at. That is the whole show.",
         label: [
           "Every album in this room is an artist, and every artist gets the " +
-          "same stage: their songs, playable; a fact sheet about the songs; " +
-          "a museum card about them; and a wall of what they have been up " +
-          "to lately, in their own pictures. The doors all lead out — to " +
-          "their site, their store, their channel — because this exhibit " +
-          "is a pointer, not a home.",
-          "The pictures and the songs are the artists'. The frame is ours, " +
-          "and the frame's whole job is to stay out of the light.",
+          "same stage: their songs, playable; a sheet about the songs; a card " +
+          "about them; and a wall of what they have been up to lately, in " +
+          "their own pictures. Every door leads out — their site, their store, " +
+          "their channel — because this room is a pointer and not a home.",
+          "We are not their label, their agent, or their critic. We are one " +
+          "more person in the room who thinks you should hear this. The room " +
+          "happens to be ours. The night belongs to them.",
         ],
         tombstone: [
           { k: "In this room", v: "Four artists · eight songs, all playable" },
@@ -1206,14 +1217,17 @@ const HOUSE_ALBUM = {
         kind: "text",
         title: "ITS PLACE IN THE MUSEUM",
         subtitle: "WORTH A LISTEN",
-        blurb: "The rest of Weird.Baby looks inward at its own catalogue. " +
-               "This wing points outward.",
+        /* [M11] same register move as the room's first page: the house
+           describing itself without standing in front of anybody. */
+        blurb: "Every other room in this building looks inward at what we " +
+               "keep. This one looks out of the window.",
         label: [
-          "Weird.Baby is a museum: it keeps a vault, writes cards, and " +
-          "exhibits what it holds. Worth A Listen is the one room built the " +
-          "other way around — nothing in it is ours, and that is the point. " +
-          "It exists so a good song with somebody else's name on it has a " +
-          "place in this building too.",
+          "Weird.Baby is a museum. It keeps a vault, writes cards, and exhibits " +
+          "what it holds — and Worth A Listen is the one room built the other " +
+          "way round, where nothing on the walls is ours. That is not a gap in " +
+          "the collection. It is the reason the room exists: so that a song " +
+          "with somebody else's name on it has somewhere to be heard in here " +
+          "too.",
         ],
         /* [M6 2026-08-03] MIKE: the booth pointer was "too loud and
            duplicative — one quiet inline link where it genuinely helps."

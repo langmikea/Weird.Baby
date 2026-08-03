@@ -81,6 +81,31 @@ import RobotsExhibitFlow from "../../routes/robots/RobotsExhibitFlow.jsx";
    THE CAROUSEL IS REAL ROBOTS ONLY, plus the purveyor's own album (below).
    Entries come back as data, in this file, when a family earns a photograph
    and a tracklist. No component changes needed. */
+/* ===========================================================================
+   [M11 2026-08-03] THE FRONT DESK, REWRITTEN TO THE PERSONALITY MAP.
+   MIKE: "BURN DOWN AND REBUILD THE COPY — inherited from work not worthy of
+   the task. Rewrite to the personality map. Documentation/register work, not
+   Mike's creative voice; [PAPA] only where his words must land."
+   THE MAP FOR THIS WING IS "liberal, artistic, creative, sci-fi." The copy
+   that was here was none of those four: it was AUCTION-HOUSE DRY. Read it back
+   and it is an inventory clerk describing stock — "we buy weird things and
+   work out what they are", "the questions that actually arrive, answered
+   plainly", "for provenance questions, corrections to the record". Every
+   sentence true, every sentence flat.
+   AND THE SUBJECT IS SCIENCE FICTION SITTING IN A BOX. Three cartons marked
+   classified arrive on a dock with no sender. Inside is a machine built in 1965
+   to say what happens next, running two engines called Prediction and Answer.
+   Nobody knows who W.O. is. There are thirty-one and a half of them. The wing
+   was telling that story in the voice of a stock list, and Mike is right that
+   it was not worthy of it.
+   THE RULE I HELD WHILE REWRITING: **not one new fact.** Every claim below
+   already existed in this file — the four parties, the sixty years, the 31.4,
+   the two engines, the prescribed model, the one address read by one person.
+   This is a REGISTER change, which is what "documentation/register work, not
+   Mike's creative voice" asks for. Where a sentence needed a POSITION rather
+   than a fact, the [PAPA] marker that was already there stays exactly where it
+   was — his list is unchanged in length and in content.
+   =========================================================================== */
 /* [S10] the WBR tracks, declared once and referenced by both covers. */
 const WBR_TRACKS = [
       {
@@ -92,11 +117,12 @@ const WBR_TRACKS = [
           kind: "text",
           title: "WELCOME",
           blurb:
-            "Weird.Baby buys weird things, works out what they are, and sells " +
-            "the ones that should go on living. The robots wing is the part of " +
-            "that work which refused to stay a footnote.",
+            "In 1965 somebody built a machine to say what happens next. Sixty " +
+            "years later three cartons of them arrived on a dock with no " +
+            "sender's name on them. This wing is everything we have worked out " +
+            "since — and, more often, what we have not.",
           lines: [
-            "TRADE    we buy weird things and work out what they are",
+            "TRADE    we buy strange things and find out what they are",
             "TAGLINE  “Purveyors of the Weird.Baby.”",
           ],
 
@@ -110,12 +136,14 @@ const WBR_TRACKS = [
              stay, so nothing a visitor reads has moved. */
           entries: [
             { stamp: "WHAT", title: "A purveyor, not a maker",
-              line: "Four parties touched these machines and only one of them " +
-                    "built anything. We are the one that arrived sixty years late.",
+              line: "Four parties have touched these machines and only one of " +
+                    "them built anything. We are the ones who turned up sixty " +
+                    "years late, with a screwdriver and no invitation.",
               note: "" },
             { stamp: "HOW", title: "Found, cleaned, returned",
-              line: "Power first, then the glass, then the software — and only " +
-                    "then the question of what any of it was for.",
+              line: "Power first, then the glass, then the software. The " +
+                    "question of what any of it was FOR came last, and it is " +
+                    "still coming.",
               note: "" },
             /* [P23/P5 2026-08-02] THE ROW GETS A REAL TITLE.
                It was titled "[PAPA]" — the marker standing IN for the heading
@@ -125,9 +153,10 @@ const WBR_TRACKS = [
                marker moves to the note where it belongs: his list survives,
                the visitor sees a finished row. */
             { stamp: "WHY", title: "Why we bother",
-              line: "Because a machine that still works is a machine that is " +
-                    "still saying something, and sixty years is not long enough " +
-                    "for that to stop being interesting.",
+              line: "Because a machine that still runs is a machine still " +
+                    "saying something, to nobody, in a language it was given " +
+                    "before anyone here was born. Sixty years is nowhere near " +
+                    "long enough for that to stop being worth listening to.",
               note: "[PAPA] — the real answer is Mike's and should stay Mike's" },
           ],
           footer: "“Restoration house” is not what we are. Weird.Baby is Weird.Baby.",
@@ -142,31 +171,39 @@ const WBR_TRACKS = [
           kind: "text",
           title: "FREQUENTLY ASKED",
           blurb:
-            "The questions that actually arrive, answered plainly. What is it, " +
-            "does it work, is it for sale, and why does it know that.",
+            "The questions people actually turn up with, and the answers as far " +
+            "as they go. Some of them stop short. Those are the interesting ones.",
           entries: [
             { stamp: "Q", title: "Is it real?",
-              line: "The hardware is. Everything the machine says about where " +
-                    "it came from is the machine's account of it.",
+              line: "The hardware is — you can hold it, and it is heavier than " +
+                    "you expect. Everything the machine says about where it came " +
+                    "from is the machine's own account, and we print it as that.",
               note: "[PAPA] — how straight to play this" },
             { stamp: "Q", title: "Does it still work?",
-              line: "Yes. Power was the hard part, and it was solved — the " +
-                    "batteries came back, and the software followed.",
+              line: "It does. Power was the hard part and power was solved; the " +
+                    "batteries came back, the software woke up behind them, and " +
+                    "it went on doing what it was built to do as though nothing " +
+                    "had happened.",
               note: "[PAPA]" },
             { stamp: "Q", title: "How many are there?",
-              line: "31.4. The fraction is not a typo and we are not going to " +
-                    "explain it.",
+              line: "Thirty-one and a half. The fraction is not a typo and we " +
+                    "are not going to explain it.",
               note: "" },
             { stamp: "Q", title: "Can I buy one?",
-              line: "Some. Not all — several are held, and one is patient zero.",
+              line: "Some of them. Not all — several are held, and one is " +
+                    "patient zero and is going nowhere.",
               note: "[PAPA] — what to say about availability" },
             { stamp: "Q", title: "Why does it know that?",
-              line: "It does not. It performs a calculation against a " +
-                    "prescribed model, and it never pretends otherwise.",
+              line: "It does not know anything. It runs a calculation against a " +
+                    "model somebody prescribed for it in 1965, and it has never " +
+                    "once pretended otherwise. Whether that is a comfort is a " +
+                    "matter for the visitor.",
               note: "" },
             { stamp: "Q", title: "Who is W.O.?",
-              line: "Unknown. That is not a deflection — it is the honest " +
-                    "state of the record, and it has been since the first box arrived.",
+              line: "Nobody knows. That is not a deflection and it is not a " +
+                    "tease — it is the honest state of the record, and it has " +
+                    "been the honest state of the record since the first box " +
+                    "was opened.",
               note: "" },
           ],
           footer: "The answers a visitor gets should be shorter than these. " +
@@ -182,26 +219,29 @@ const WBR_TRACKS = [
           kind: "text",
           title: "CONTACT",
           blurb:
-            "For provenance questions, corrections to the record, and anyone " +
-            "who thinks they have seen one of these before.",
+            "Four reasons to write, in the order of how much they would help " +
+            "us. The first one would help enormously.",
           entries: [
             { stamp: "PROVENANCE", title: "You have seen one before",
-              line: "The most useful message we can receive. Where, when, and " +
-                    "any number you can remember off it.",
+              line: "This is the message we most want to receive. An office, a " +
+                    "basement, a photograph in somebody's shoebox — where, when, " +
+                    "and any number you can still remember off the front of it.",
               note: "" },
             { stamp: "CORRECTION", title: "The record is wrong",
-              line: "It will be, in places — it was written as things happened " +
-                    "and some of it was wrong on the day.",
+              line: "In places it certainly is. It was written as things " +
+                    "happened, which means some of it was wrong on the day it " +
+                    "was written and has been sitting there being wrong ever " +
+                    "since. Tell us and it changes, in public.",
               note: "" },
             { stamp: "PURCHASE", title: "Availability",
-              line: "Which units are held, which are not, and what a case tier " +
-                    "actually includes.",
+              line: "Which units are held, which are not, and what is actually " +
+                    "in a case when it leaves here.",
               note: "[PAPA]" },
             /* [P23/P5] same fix as the Welcome face: a real heading, the
                marker demoted to the note. */
             { stamp: "REACH", title: "How to reach us",
-              line: "There is one address and it is read by one person. Which " +
-                    "is slow, and is also why an answer is worth having.",
+              line: "One address, read by one person. That is slow, and it is " +
+                    "the same reason an answer from it is worth having.",
               note: "[PAPA] — the address itself, and how much of it to publish" },
           ],
         },
@@ -285,10 +325,14 @@ const spine = [
           kind: "text",
           title: "THE PLATES",
           subtitle: "MGK-VIIIp",
+          /* [M11] register, not facts: the nine plates and what each shows are
+             unchanged; what changed is that the sentence now says why the
+             photographs were taken before anything was touched. */
           blurb:
-            "The unit as received, photographed before anything was touched. " +
-            "Nine plates: the front, the glass, the base, the switch on the " +
-            "back, and the two of them together.",
+            "Photographed the way you photograph something before you are " +
+            "allowed to touch it — front, glass, base, the switch round the " +
+            "back, and the pair of them side by side. Nine plates of a machine " +
+            "that had been sitting in the dark since before the moon landing.",
           tombstone: [
             { k: "Subject", v: "MGK-VIIIp −02 “The Informer”, and its twin" },
             { k: "State", v: "As received — before cleaning, before power" },
@@ -346,10 +390,13 @@ const spine = [
           kind: "text",
           entriesMode: "log",
           title: "THE RECORD",
+          /* [M11] register only. Every claim — the reverse-discovery, the
+             writing-as-it-happened, the wrongness — was already here. */
           blurb:
-            "The weekly log of the reverse-discovery: what arrived, what it " +
-            "turned out to be, and what is still unexplained. Written as it " +
-            "happened, which is not the order it makes sense in.",
+            "A discovery run backwards: the object first, the explanation " +
+            "afterwards, and the explanation changing under us more than once. " +
+            "Written week by week as it happened, which is emphatically not the " +
+            "order in which any of it makes sense.",
           lines: [
             "SOURCE   The Record — 436 paragraph records, in repo",
             "INDEX    date-stamped, log-sheet register",
