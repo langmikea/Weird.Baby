@@ -816,7 +816,18 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 /* 2026-06-07 Mike: tighter rows, less whitespace. */
 .tl-track{display:flex;align-items:center;padding:3px 20px;border-left:2px solid transparent;cursor:pointer;transition:background .15s,border-left-color .2s;user-select:none}
 .tl-track:hover{background:var(--wb-ink-soft)}
-.tl-active{background:var(--wb-ink-soft)}
+/* [V3 2026-08-03] THE ARMED ROW, AND WHY ITS RULE IS THE QUIET STEP.
+   Under V3 a click on a track while something is playing SELECTS rather than
+   plays, so "the row I am looking at" and "the row I am hearing" are now
+   routinely two different rows and their marks have to be told apart at a
+   glance. They were not: this state's left rule was set inline in the JSX to
+   `--wb-gold`, the exact colour `.tl-playing` draws, leaving the whole
+   distinction to a background gradient.
+   ONE RAMP, TWO RANKS. Quiet rule = armed; full-gold rule plus the bars in the
+   number slot = running. That is the museum's own way of saying "same family,
+   different rank", and it needs no new colour, no new element and no label.
+   `.tl-playing`'s `!important` below still wins on the row that is both. */
+.tl-active{background:var(--wb-ink-soft);border-left-color:var(--wb-gold-lo)}
 /* [M-c 2026-08-02] THE PLAYING TRACK IS OBVIOUS, AND IT IS THE ONLY THING
    USING THIS SIGNAL. A lit left rule plus a warmed ground reads instantly as
    "this one is running" - unlike bold text, which the eye reads as importance
@@ -2245,10 +2256,53 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    two lines moves the bottom of the document and nothing else. F4's "fixed so
    the footer does not jump" was reasoning about the staged frame, where the
    scroller had a floor beneath it to push against. */
-.ex-root[data-flat="1"] .fs-wrap{flex:0 0 auto;min-height:0;padding:7px 20px 6px}
+/* [V2b 2026-08-03] AND P2'S "FIT" WAS STILL THREE APPROXIMATIONS IN A ROW.
+   MIKE, THIRD ROUND ON THIS STRIP: "still taller than necessary — size it to
+   its content." P2 measured the box and then sized it with numbers that are
+   NEAR the content instead of numbers that ARE the content, and three of them
+   compounded. MEASURED on /wal at 1706x810, one-line fact, no credit:
+     12.00  margin-top (M0b's costed gift from the picture)          — kept
+      0.89  border-top, the rule that separates strip from picture   — kept
+      7.00  padding-top     ... on top of the line box's OWN 3.75px of
+            half-leading, so the air above the cap-height was 10.75px
+     29.60  viewport min-height (1.85rem) for a line box of 28.944px — 0.66 dead
+      5.00  .fs-footer margin-top ... on a footer that is 0px tall and has NO
+            CHILDREN whenever the fact carries no breadcrumb — 5px of pure dead
+      0.00  the footer itself
+      6.00  padding-bottom  ... on top of 3.75px of half-leading
+     = 60.49px of strip for 28.94px of fact.
+   EVERY NUMBER HERE IS NOW THE CONTENT'S OWN. The floor and the ceiling are
+   ONE LINE and TWO LINES of the fact face, written as that arithmetic
+   (1.34rem x 1.35) rather than as rem values that round to it; the padding is
+   2px, which with the line's own half-leading gives a symmetric 5.75px of air
+   inside the rule; and an EMPTY footer stops charging for a margin above
+   nothing. RESULT, MEASURED THE SAME WAY: **45.8px** for a one-line fact
+   (from 60.5, -24%), 96.8px for two lines with a credit (from 105.8). The
+   fact itself is untouched — this takes chrome, not type.
+   THE FADE MASK WAS EATING A LINE IT WAS NEVER MEANT TO TOUCH. `.fs-viewport`
+   inherits `mask-image:linear-gradient(#000 80%,transparent)` — a fade written
+   for the frames whose viewport is 3 or 4 lines, where a PARTIAL line is
+   visible at the bottom and softening its cut is the whole point. In this wing
+   the box is a whole number of lines, so a third line begins exactly at the
+   box's bottom edge and is clipped entirely — the fade cannot soften it,
+   because there is nothing of it to soften. What the fade actually did was
+   dissolve the bottom 40% of line TWO, which always fits. The feather is now
+   4px — inside the line box's own 3.75px of trailing half-leading, so it
+   cannot reach a glyph that fits, and still soft-edges a genuine cut.
+   FOUR LINES AT STACKED WIDTHS, for the plain frame's own stated reason: at
+   390px a line holds a third of the characters, so a two-line ceiling that is
+   generous on a desktop truncates on a phone. That is the same trade
+   `--fs-lines:4` already makes for the plain frame at the same breakpoint. */
+.ex-root[data-flat="1"] .fs-wrap{flex:0 0 auto;min-height:0;padding:2px 20px}
 .ex-root[data-flat="1"] .fs-viewport{flex:0 0 auto;height:auto;
-  min-height:1.85rem;max-height:3.7rem}
+  min-height:calc(1.34rem * 1.35);max-height:calc(1.34rem * 1.35 * 2);
+  -webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 4px),transparent);
+  mask-image:linear-gradient(to bottom,#000 calc(100% - 4px),transparent)}
 .ex-root[data-flat="1"] .fs-footer{margin-top:5px}
+.ex-root[data-flat="1"] .fs-footer:empty{display:none}
+@media (max-width:720px){
+  .ex-root[data-flat="1"] .fs-viewport{max-height:calc(1.34rem * 1.35 * 4)}
+}
 
 /* [M0c 2026-08-03] THE ROOM THE FIT MUST LEAVE FOR THIS STRIP, DECLARED WHERE
    THE STRIP'S HEIGHT IS DECIDED.
@@ -2268,18 +2322,23 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    THE CEILING, ADDED UP FROM THE RULES DIRECTLY ABOVE:
      12  .ex-right>.fs-wrap margin-top   (M0b)
       1  border-top
-      7  padding-top
-   59.2  .fs-viewport max-height (3.7rem)
+      2  padding-top                                             [V2b]
+   57.9  .fs-viewport max-height (two line boxes: 1.34rem x 1.35 x 2)  [V2b]
       5  .fs-footer margin-top
-     17  .fs-footer height with a credit line (measured; the footer is 0 when
-         a fact carries no breadcrumb, which is the cheap case, not the case
-         to size for)
-      6  padding-bottom
-   = 107.2 -> 108. Read by the fit in Exhibit.jsx. It lives here, in CSS, next
-   to the six declarations it sums, so a change to any of them is a change in
-   front of this number rather than in another file. */
+     17  .fs-footer height with a credit line (measured; the footer is 0 AND
+         now display:none when a fact carries no breadcrumb, which is the
+         cheap case, not the case to size for)
+      2  padding-bottom                                          [V2b]
+   = 96.9 -> 97. Read by the fit in Exhibit.jsx. It lives here, in CSS, next
+   to the declarations it sums, so a change to any of them is a change in
+   front of this number rather than in another file.
+   [V2b 2026-08-03] WAS 108, AND THE ELEVEN PIXELS GO BACK TO THE PICTURE.
+   This number is what the entry fit subtracts from the viewer's share, so it
+   is the second place the strip's height is spent — an over-booked reserve
+   makes the picture permanently shorter than the room can afford. Re-derived,
+   not adjusted: every term above is read off the rule that sets it. */
 .ex-root{--fs-strip-reserve:0px}
-.ex-root[data-flat="1"]{--fs-strip-reserve:108px}
+.ex-root[data-flat="1"]{--fs-strip-reserve:97px}
 
 /* ---- [W10] THE SECTION HEADER — "Coconuts" over the numbers --------------- */
 .tl-header{list-style:none;padding:16px 20px 5px;cursor:default;user-select:none;
@@ -2337,7 +2396,19 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    SCOPE: this wing only. /robots is a paper wing (L5's sheet-on-mat) and shares
    no part of this ramp — checked, not assumed: the only rules that re-pin this
    ramp are `.pb` and this one. */
+/* [V1 2026-08-03] AND THE ONE TOKEN THIS LIST HAS ALWAYS MISSED.
+   `--wb-bg` was never re-pinned here, so the two PICTURE surfaces that read it —
+   `.vp-thumb` (a cued song's poster) and `.vp-audio-only` (the overlay shown
+   while a different album's audio runs) — painted themselves the house's paper
+   #d9d5ca inside a charcoal stage. It went unnoticed because the frame was
+   short and letterboxed; V2a lets it be 1414 x 795, and a paper rectangle that
+   size behind a 340px album cover is the loudest thing in the wing.
+   The stage's own ground is the right answer for both: they are the frame the
+   picture sits in when there is no picture playing, and this wing's frame is
+   dark. Found by looking at the room after the geometry changed, which is the
+   only reason it was found at all. */
 [data-exhibit="wal"] .ex-right{
+  --wb-bg:#3b352c;
   --wb-ink:#3b352c;--wb-ink-soft:#453e34;--wb-ink-card:#443d32;--wb-ink-card-hi:#514839;
   --wb-border:#635a49;--wb-border-hi:#867c66;
   --wb-gold:#f7f2e4;--wb-gold-hi:#ffffff;--wb-gold-lo:#c4bba4;--wb-gold-mute:#b0a68e;
@@ -2359,6 +2430,160 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
 /* the B&W site law does NOT apply to WAL (W8) — plates keep their color. */
 [data-exhibit="wal"] .vp-face-still{filter:none;max-width:min(100%,420px)}
 [data-exhibit="wal"] .vp-poster img{filter:none}
+
+/* ===========================================================================
+   [V1 2026-08-03] THE PAPER CARD ON THE DARK STAGE — V1 IS THE GROUND.
+   THIS SUPERSEDES R0 ABOVE, AND R0'S RULE STAYS EXACTLY WHERE IT IS.
+   MIKE'S CORRECTION: the variation he picked is the one TITLED "V1 — paper card
+   on the dark stage", not the file numbered 2. R0 read the pick as an ordinal
+   and wrote down V2 (`house lights up one stop`). The ruling is V1: **body
+   content sits on cream and reads as paper; the dark is the stage the card
+   floats on, not the ground the text stands on.**
+   WHY R0'S WORK IS KEPT RATHER THAN REVERTED. V2 was a change to the STAGE and
+   V1 is a change to what stands ON it — they are not two answers to one
+   question, they are two different rules, and the lifted ramp is now the mat
+   this card sits on. Every number R0 measured still holds for every surface
+   that is still on the stage: the picture, the ring, the caption strip. What
+   changes is that the READING MATTER leaves the stage entirely.
+   AND THAT IS WHY IT IS STRUCTURAL RATHER THAN COSMETIC. R0/P9/W6 were three
+   consecutive attempts to make text on a dark ground stop glaring, each one
+   moving the ground a stop. V1 stops answering that question: text is never on
+   the dark again, so the ground can be as dark as the imagery wants — which is
+   what W6's spotlight doctrine asked for in the first place, and what "black
+   behind PICTURES reads well" says in Mike's own sentence.
+   IT IS THE BUILDING'S OWN MOVE, MADE TWICE NOW. This is L5's sheet-on-mat from
+   the robots wing, brought across unchanged in structure: the FACE is the mat
+   (its padding is the margin the sheet sits in), the BODY is the sheet (print
+   stock, a hairline, a real shadow). The only difference is what the mat is
+   made of — paper there, the lit charcoal stage here.
+   THE MAT IS PADDING, NOT AN INSET, and L5 paid for that lesson: `useYTPlayer`
+   builds its player eagerly on mount, so an opaque black YouTube iframe sits
+   under every face. A face moved in with `inset` uncovers it and the room grows
+   a black border. The face keeps its box and stays the lid; the padding is the
+   mat.
+   THE RAMP COMES BACK VIA THE ALIASES THAT EXIST FOR EXACTLY THIS. L3 held a
+   frozen copy of the paper ramp in museum-tokens.css for "anything nested
+   INSIDE a dark re-pin that belongs on paper", because CSS has no way to revert
+   a custom property to its root value. This is the second consumer of that
+   provision and the first one it was written for. Twelve names, no literals, so
+   a palette change reaches the card the same day it reaches the lobby.
+   SCOPE. The wing's own faces, and inside them the PAPER kinds only — the
+   portal and the panel declare a dark ground on purpose (a doorway to a running
+   machine is not a document), the same exclusion L5 writes.
+   WHAT DELIBERATELY STAYS ON THE STAGE: the picture, its ring, and the PUV
+   caption strip beneath it. The ruling's own words are "body content sits on
+   cream"; a two-line caption printed under a photograph is not body content, it
+   is the photograph's label, and it belongs in the picture's frame. One rule
+   flips it if Mike wants it flipped. */
+.ex-root[data-exhibit="wal"] .vp-face:not(.vp-face-portal):not(.vp-face-panel){
+  padding:18px}
+.ex-root[data-exhibit="wal"] .vp-face:not(.vp-face-portal):not(.vp-face-panel)
+  >.vp-face-body{
+  --wb-bg:var(--wb-paper-bg);
+  --wb-ink:var(--wb-paper-ink);
+  --wb-ink-soft:var(--wb-paper-ink-soft);
+  --wb-ink-card:var(--wb-paper-ink-card);
+  --wb-ink-card-hi:var(--wb-paper-ink-card-hi);
+  --wb-border:var(--wb-paper-border);
+  --wb-border-hi:var(--wb-paper-border-hi);
+  --wb-gold:var(--wb-paper-gold);
+  --wb-gold-hi:var(--wb-paper-gold-hi);
+  --wb-gold-lo:var(--wb-paper-gold-lo);
+  /* THE ONE STEP THAT IS NOT A STRAIGHT ALIAS, AND R0 HAD TO DO THE SAME THING
+     ONE GROUND UP. `--wb-paper-gold-mute` is #9b978d, which measures **2.75:1**
+     on this card's print stock — a fail, on the register's small mono, in the
+     exact block a fan reads facts out of. R0 lifted this same step past a flat
+     translation when it moved the stage, for this same reason and in these same
+     words; the mute is the step where a ramp shift quietly costs legibility at
+     the bottom while fixing it at the top.
+     #6a6659 IS MEASURED AGAINST BOTH GROUNDS THE CARD HAS, because the card
+     carries prints on it: **4.82:1** on the sheet (#faf8f3) and **4.57:1** on a
+     quote card or collage mat (#f3efe6) — AA on the darker of the two, which is
+     the one that decides. It is still a clear step lighter than `--wb-gold-lo`
+     (6.94:1 on the sheet), so mute < lo < gold survives as a ramp. */
+  --wb-gold-mute:#6a6659;
+  --wb-dim:var(--wb-paper-dim);
+  background:var(--wb-ink-card);
+  border:1px solid var(--wb-border);
+  /* the shadow is the collage tile's, scaled to a sheet: on a dark mat the
+     paper-on-paper values L5 uses (10-11% ink) are invisible, and a print that
+     does not lift off the mat is a field again — which is the defect L5 named. */
+  box-shadow:0 2px 6px rgba(0,0,0,.35),0 20px 48px rgba(0,0,0,.5)}
+/* A MAT IS THE SPACE A PRINTED PAGE SITS IN, AND ON A PHONE THE PAGE IS THE
+   SCREEN. L5's own reasoning at the same breakpoint, and the same measurement
+   behind it: 18px of mat on each side of a 390px screen is 36px taken from a
+   measure that is already the narrowest in the building. The sheet keeps its
+   hairline and its shadow — it is still a card, it is just a card that reaches
+   the edges. */
+@media (max-width:720px){
+  .ex-root[data-exhibit="wal"] .vp-face:not(.vp-face-portal):not(.vp-face-panel){
+    padding:0}
+}
+/* ---- [V1] THE FOUR LITERALS THE OLD GROUND WAS HIDING ----------------------
+   AUDITED, NOT GUESSED: a walker over every text node on all five faces of all
+   four artists, computing each element's colour against its own resolved
+   background. Seven classes came back under AA on the card, and five of them
+   were the same story — a QUIET REGISTER GREY typed as a hex instead of taken
+   from the ramp, at a value picked while the ground behind it was charcoal:
+     .vp-face-sub                    #8a857a  3.46:1
+     .vp-face-papa / -presets-note   #7d7869  4.15:1
+     .vp-qcard-eyebrow / -src        #7d7869  3.84:1  (on a quote card's mat)
+   They are all trying to be the mute step, so they now ARE it, and inherit the
+   measured value re-pinned above. That is L3's finding in its smallest form: a
+   palette re-typed by hand drifts from the palette the moment the ground moves,
+   and these four drifted on the day the ground moved.
+   SCOPED TO THIS CARD, deliberately. The same literals sit under /robots' sheet
+   at the same numbers — a real, pre-existing condition, and not this round's to
+   change: two of these rules also serve the PORTAL, whose ground is #0b0b0a,
+   where a darkened grey would be the same defect inverted. Named in the round
+   report rather than fixed by reach. */
+.ex-root[data-exhibit="wal"] .vp-face:not(.vp-face-portal):not(.vp-face-panel)
+  >.vp-face-body :is(.vp-face-sub,.vp-face-papa,.vp-presets-note,
+  .vp-qcard-eyebrow,.vp-qcard-src){color:var(--wb-gold-mute)}
+/* THE SIXTH WAS THE WING'S OWN, AND IT IS THE WORST NUMBER ON THE PAGE.
+   `.vp-trail-fn` — the function beside a door's name (P15) — is #c8a45c, a gold
+   chosen to glow on a charcoal door. On the card it measures **2.22:1**, which
+   is decoration, not text. It takes the ramp's quiet step (6.94:1) like every
+   other piece of small register on this sheet; the door still separates name
+   from function by weight, face and tracking, which is what P15 asked for and
+   what was doing the work anyway. */
+.ex-root[data-exhibit="wal"] .vp-face:not(.vp-face-portal):not(.vp-face-panel)
+  >.vp-face-body .vp-trail-fn{color:var(--wb-gold-lo)}
+/* ---- [V1] AND THE PRINTS ON THE CARD GET THEIR EDGE BACK -------------------
+   The quote cards and the collage tiles are PAPER MATS (#f3efe6) with a heavy
+   drop shadow — a print pinned to a dark stage, which is what they were. Laid on
+   a print-stock sheet they are five units of luminance from their own ground,
+   across a hard edge: L5's "there was no sheet; there was a field", one level
+   in. A hairline restores the edge, and the shadow comes down from the value
+   that reads on charcoal to the value the rest of the building's paper-on-paper
+   prints use — the same two-part shadow the robots sheet casts. */
+.ex-root[data-exhibit="wal"] .vp-face:not(.vp-face-portal):not(.vp-face-panel)
+  >.vp-face-body :is(.vp-qcard,.vp-collage-tile){
+  border:1px solid var(--wb-border);
+  box-shadow:0 1px 2px rgba(33,31,28,.10),0 8px 20px rgba(33,31,28,.16)}
+.ex-root[data-exhibit="wal"] .vp-face:not(.vp-face-portal):not(.vp-face-panel)
+  >.vp-face-body .vp-collage-tile:hover,
+.ex-root[data-exhibit="wal"] .vp-face:not(.vp-face-portal):not(.vp-face-panel)
+  >.vp-face-body .vp-collage-tile:focus-visible,
+.ex-root[data-exhibit="wal"] .vp-face:not(.vp-face-portal):not(.vp-face-panel)
+  >.vp-face-body .vp-qcard:hover,
+.ex-root[data-exhibit="wal"] .vp-face:not(.vp-face-portal):not(.vp-face-panel)
+  >.vp-face-body .vp-qcard:focus-visible{
+  box-shadow:0 2px 4px rgba(33,31,28,.14),0 16px 34px rgba(33,31,28,.22)}
+/* ---- [V1] THE WASHES THAT ONLY EXISTED ON A DARK GROUND --------------------
+   Three interactive surfaces lit themselves by adding WHITE at very low alpha —
+   `rgba(255,255,255,.03)` on a door, `rgba(232,228,216,.05)` on a record row and
+   a trail row. On charcoal that is a visible lift; on #faf8f3 it is white on
+   white and the affordance disappears entirely. On paper a surface is raised by
+   going DARKER, so each takes the ink at the same weight it was taking light. */
+.ex-root[data-exhibit="wal"] .vp-face:not(.vp-face-portal):not(.vp-face-panel)
+  >.vp-face-body .vp-trail-go{
+  background:color-mix(in srgb, var(--wb-gold) 4%, transparent)}
+.ex-root[data-exhibit="wal"] .vp-face:not(.vp-face-portal):not(.vp-face-panel)
+  >.vp-face-body :is(.vp-rec-open,.vp-trail-quiet-go):hover,
+.ex-root[data-exhibit="wal"] .vp-face:not(.vp-face-portal):not(.vp-face-panel)
+  >.vp-face-body :is(.vp-rec-open,.vp-trail-quiet-go):focus-visible{
+  background:color-mix(in srgb, var(--wb-gold) 7%, transparent)}
 
 /* ---- [W4b] BUTTONS IN THE SPOTLIGHT REGISTER ------------------------------
    The trail rows are the wing's working buttons (every one now actually
@@ -2498,8 +2723,16 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
 /* ACTIVE-STATE VISIBILITY at stacked widths: the selected row is the only
    trace of your last tap once the viewer is below the fold, so it stops
    being a whisper — a lit left rule and a firmer ground. */
+/* [V3 2026-08-03] THE GROUND DOES THE SHOUTING HERE, NOT THE RULE. This rule
+   used to raise the border to full `--wb-gold` as well, which on a phone made
+   an armed row and a running row draw the same left mark — the one place the
+   difference matters MOST, because the viewer is below the fold and the
+   tracklist is the entire visible state. The 14% wash is the loud half of the
+   original intent and it is kept; the rule stays at the armed rank so the two
+   states still separate. (This rule also never actually applied before: the
+   colour it set was outranked by the inline style V3 has now retired.) */
 @media (max-width:720px){
-  .tl-active{border-left-color:var(--wb-gold);                              /* [J1] */
+  .tl-active{border-left-color:var(--wb-gold-lo);                           /* [J1] */
     background:color-mix(in srgb, var(--wb-gold) 14%, transparent)}
 }
 

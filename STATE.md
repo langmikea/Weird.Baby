@@ -19,6 +19,94 @@ Paid for by the 2026-06-17 derived-era incident: charging into the problem in fr
 
 Ops work takes top priority, based on the Ops need in the moment.
 
+## SEALED 2026-08-03 — THE V1 ROUND (v39; V1–V3. PUSH + DEPLOY ARE MIKE'S)
+
+Autonomous single-agent Code-lane round on Mike's remote-control brief. Full
+round log: `docs/MUSEUM_V1_LOG-20260803.md`. Before/after frames:
+`docs/v1-round-20260803/`. Two source files touched: `Exhibit.css`, `Exhibit.jsx`.
+
+- **V1 SUPERSEDES R0'S READING, AND R0'S RULE IS KEPT.** Mike meant the variation
+  TITLED "V1 — paper card on the dark stage", not the file numbered 2; R0 read the
+  pick as an ordinal. The two are not rival answers — V2 changed the STAGE, V1
+  changes what stands ON it, and the lifted ramp is now the mat the card sits on.
+  Body content is print stock (`--wb-ink-card`) with a hairline and a real shadow,
+  floating on an 18px charcoal mat: **L5's sheet-on-mat from /robots, brought
+  across unchanged in structure**, mat as PADDING not inset (L5 paid for that —
+  `useYTPlayer` builds eagerly and an inset face uncovers a black iframe). The
+  ramp returns through the **`--wb-paper-*` aliases L3 froze for exactly this
+  case** — twelve names, no literals. **This closes the black-behind-TEXT question
+  structurally**: W6 → P9 → R0 were three attempts to make text on dark stop
+  glaring; text is now never on dark, so the stage may be as dark as the imagery
+  wants. **AUDITED, NOT EYEBALLED:** a text-node walker over 4 artists × 5 faces
+  found **seven classes under AA** on the new ground — `.vp-trail-fn` **2.22:1**
+  (a `#c8a45c` gold picked to glow on a charcoal door), `--wb-gold-mute` **2.75:1**,
+  and three more grey LITERALS at 3.46–4.15 that were all trying to be the mute
+  step. Five literals became one token; the mute is re-pinned to **`#6a6659`,
+  measured against BOTH grounds the card carries** (4.82:1 on the sheet, 4.57:1 on
+  a quote-card mat) exactly as R0 lifted the mute one ground up. **Re-audit: zero
+  failures.** Three consequences handled: prints (quote cards, collage tiles) got a
+  hairline back — L5's "a field, not a sheet" one level in; three white-at-low-alpha
+  washes that only lift on charcoal became ink; and **`--wb-bg` was never in the
+  stage's re-pin list**, so `.vp-thumb`/`.vp-audio-only` were painting house paper
+  inside a charcoal stage — invisible while the frame was short, unmissable once
+  V2a made it 1414×795. **/robots needs nothing, verified live** (`--wb-ink`
+  `#ece9e0`, sheet on mat, text never on black): it shares the sheet and never had
+  the disease. **NAMED, NOT TAKEN:** the PUV caption strip stays on the stage —
+  a two-line label under a photograph is not "body content", it is the picture's
+  label. One rule flips it.
+- **V2a THE CAP WAS THE WHOLE REASON, AND IT IS ONE PROPERTY.** `.vp-area` carries
+  `aspect-ratio:16/9`, but F3's `--fit-area-max` caps its height in PIXELS, and a
+  pixel max-height does not move when a width does. Measured on the built page at
+  1706×810: slot 1243.7 × 372 (**3.4:1**), picture 658.2 × 370.2, **292.8px of dead
+  stage on EACH side — 47% of the column**; drag the split 190px wider and the
+  picture stays **658.2 × 370.2 to the pixel**. Now the width drag re-derives the
+  cap from the column's own width, so the frame is a true 16:9 of whatever the hand
+  chose: after the same drag, **1411 × 793.7, dead stage 1.6px, aspect 1.778 at
+  every step in both directions**. This is **P1's ruling one lever over** ("the
+  fit's cap yields to the hand"); F3's promise is about ARRIVAL and is untouched.
+  Ceil+1 on purpose so `aspect-ratio` resolves the box and `max-height` never binds.
+  Inert on every wing without `fitOnEntry`; handle is `display:none` below 720px.
+- **V2b P2'S FIT WAS THREE APPROXIMATIONS IN A ROW.** Measured, one line, no
+  credit: 7px padding-top sitting ON TOP of the line box's own 3.75px half-leading;
+  a 1.85rem (29.6px) floor for a 28.944px line; and **5px of footer margin above a
+  footer with NO CHILDREN** whenever a fact carries no breadcrumb — 60.49px of
+  strip for 28.94px of fact. Floor and ceiling are now ONE LINE and TWO LINES
+  written as that arithmetic; padding 2px; `:empty` footers stop charging.
+  **One-line fact: 60.5px → 46px (−24%)**; two lines + credit 105.8 → 96.8.
+  **`--fs-strip-reserve` re-derived 108 → 97**, and the eleven pixels go back to
+  the picture (entry cap 361 → 372, verified). **The fade mask was eating a line it
+  was never meant to touch**: the box is a whole number of lines, so a third line is
+  clipped ENTIRELY and cannot be softened — what the 80% fade actually dissolved was
+  the bottom 40% of line TWO, which always fits. Feather is now 4px, inside the
+  line's own trailing half-leading. Four lines at ≤720px, the plain frame's own
+  trade. /robots renders no scroller at all; /hr keeps its frame byte-for-byte.
+- **V3 ARM, THEN FIRE.** Mike's ruling implemented exactly and verified on the
+  built page: idle→click plays; click a different row while playing SELECTS and
+  does not interrupt; click the already-selected row PLAYS. A tracklist beside a
+  running player is doing two jobs — transport AND the index you read while
+  listening — and single-click-plays makes the second impossible. It is a GATE, not
+  a new path: the armed branch writes the same `albumActiveTrack` entry, so viewer,
+  face, PUV context and dropdown all follow it. **The variant picker obeys the same
+  law** — it used to start playback outright on the active row, which under V3
+  became a way to interrupt the music from a control that never said it would.
+  **The two marks are now legible:** both wore the same 2px gold rule (one from
+  CSS, one from an INLINE style), so the distinction rested on a gradient. Armed =
+  `--wb-gold-lo` + soft ground; running = full gold `!important` + gradient + bars.
+  The inline style had to GO, not just change colour — it outranked the
+  stacked-width rule written to make selection loud on a phone, which had therefore
+  never applied. Shared engine, so all four wings; verified on /hr.
+- Gates: **lint 11 err / 9 warn** (= HEAD baseline, zero new), vite build green,
+  desktop 1706×810 + genuine 390×740 iframe lap — **and every claim re-verified
+  against the LIVE BUILT bundle** (`vite build` → `wrangler dev`), as V2 required.
+  390px: zero page-level horizontal scroll (373 ≤ 390), mat stands down, picture
+  16:9, strip at its 4-line ceiling.
+- Carry-forward, named not fixed: the same five grey literals sit under /robots'
+  sheet (two of those rules also serve the PORTAL's `#0b0b0a`, where darkening
+  would invert the defect — wants its own scoped pass); `--wb-gold-mute` is
+  ~1.9:1 on the museum's own paper ground outside a re-pinned scope, and
+  `museum-tokens.css` is off-limits without UX direction — **this is that direction
+  being asked for**.
+
 ## SEALED 2026-08-03 — THE RHYTHM ROUND (v38; R0–R6. PUSH + DEPLOY ARE MIKE'S)
 
 Autonomous single-agent Code-lane round on Mike's remote-control brief. Full

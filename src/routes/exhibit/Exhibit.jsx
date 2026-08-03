@@ -636,7 +636,19 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
                  marker, the card is one of the trees. */
               track.sub ? "tl-sub" : "",
             ].filter(Boolean).join(" ")}
-            style={isActive ? { borderLeftColor: "var(--wb-gold)" } : {}}
+            /* [V3 2026-08-03] THE ARMED ROW'S RULE MOVES INTO THE STYLESHEET.
+               This was an inline `borderLeftColor:var(--wb-gold)` — the same
+               loud gold `.tl-playing` draws — so a selected row and a playing
+               row wore the identical 2px rule, and under V3 those are DIFFERENT
+               ROWS most of the time. It could not simply be re-coloured in
+               place either: an inline value outranks every stylesheet rule that
+               is not `!important`, which quietly killed the stacked-width rule
+               written to make the selected row loud on a phone.
+               So the mark is now `.tl-active`'s own declaration in Exhibit.css,
+               where the cascade can rank the three statements about this border
+               properly: armed (quiet), armed-on-a-phone, running (`!important`,
+               and it wins). No behaviour is added here; a class that was already
+               on the element does the work the inline style was doing. */
             onClick={() => selectable && !skipped && onSelect(ti)}
           >
             <span className="tl-num">
@@ -2020,12 +2032,56 @@ export default function Exhibit({ artist }) {
       }
       return;
     }
+    /* [V3 2026-08-03] A CLICK MEANS ONE OF TWO THINGS, AND WHICH ONE DEPENDS
+       ON WHETHER ANYTHING IS PLAYING. MIKE'S RULING, IN HIS OWN TERMS:
+         · nothing playing        -> a click on a track PLAYS it;
+         · something playing      -> the FIRST click on a different track
+                                     SELECTS it and does not interrupt;
+         · the already-selected   -> a click PLAYS it.
+       WHY THIS IS RIGHT AND NOT JUST ASKED FOR. A tracklist beside a running
+       player is doing two jobs at once — it is the transport AND it is the
+       index you read while listening — and a single-click-plays rule makes the
+       second job impossible: every attempt to look at what else is here stops
+       the music. The arm-then-fire pattern gives the browsing gesture back
+       without taking the playing gesture away, and it costs one extra press
+       only in the case where a visitor is already listening.
+       IT IS A GATE, NOT A NEW PATH. The selection this branch writes is the
+       same `albumActiveTrack` entry the play branch writes, so the viewer, the
+       face, the PUV context and the variant dropdown all follow the armed row
+       exactly as they follow a played one. The second click falls straight
+       through to the line below it and plays, unchanged.
+       PER ALBUM, because `albumActiveTrack` is per album: a visitor who walks
+       to another artist while a song runs arms that album's first row on the
+       first click, which is the same rule read in the same words.
+       The mark for the armed row is `.tl-active`; the mark for the running row
+       is `.tl-playing`. M-c already made those two different facts — see
+       Exhibit.css, where this round separates their left rules so the two are
+       legible at a glance now that they are routinely on different rows. */
+    const somethingPlaying = playingTrack !== null;
+    const alreadySelected  = albumActiveTrack[albumIdx] === ti;
+    if (somethingPlaying && !alreadySelected) {
+      setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));
+      setOpenEntry(null);         /* [M5] a newly armed track opens on its index */
+      setRecipeIdx(0);            /* [L2] and its selector at the top entry */
+      return;
+    }
     setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));
     startPlay(albumIdx, ti, vis[0]);
   }
 
   function handleTagClick(albumIdx, ti, vi) {
     const isActive = albumActiveTrack[albumIdx] === ti;
+    /* [V3 2026-08-03] AND THE VARIANT PICKER OBEYS THE SAME LAW.
+       Picking a variant on the ACTIVE row used to start it playing outright.
+       Under V3 a row can be active WITHOUT being the row you are hearing, so
+       that shortcut became a way to interrupt the music from a control that
+       never said it would — precisely the interruption the ruling exists to
+       stop. The picker now starts playback in the two cases where it plainly
+       means "play this": nothing is running, or this IS the running row and the
+       visitor is swapping which cut of it plays. Otherwise it records the
+       choice and waits, and the row's own second click fires it. */
+    const armedOnly = playingTrack !== null
+      && !(playingAlbum === albumIdx && playingTrack === ti);
     setAlbumSelectedVis(prev => {
       const albumMap = prev[albumIdx] ?? {};
       const current  = albumMap[ti] ?? new Set([0]);
@@ -2037,7 +2093,7 @@ export default function Exhibit({ artist }) {
         next = new Set();
       } else {
         next = new Set([vi]);
-        if (isActive) startPlay(albumIdx, ti, vi);
+        if (isActive && !armedOnly) startPlay(albumIdx, ti, vi);
       }
       return { ...prev, [albumIdx]: { ...albumMap, [ti]: next } };
     });
@@ -2317,14 +2373,54 @@ export default function Exhibit({ artist }) {
   }
 
   // ── Drag handles ──────────────────────────────────────────────────────────
+  /* [V2a 2026-08-03] THE WIDTH DRAG CARRIES THE HEIGHT WITH IT.
+     MIKE, THIRD ROUND ON THIS HANDLE: "only WIDTH can be changed; the frame
+     does NOT auto-size vertically to hold the video's aspect — dragging width
+     must carry height with it (aspect preserved)."
+     MEASURED ON THE LIVE PAGE, and the arithmetic is not in doubt. /wal at
+     1706x810 with '94 cued: `.vp-area` is 1243.7 x 361 — a 3.4:1 letterbox
+     slot, because the `aspect-ratio:16/9` on that box is capped by F3's
+     `--fit-area-max` (361px). `.vp-inner` — the actual picture — is fitted to
+     that height at 638.6 x 359.2, which leaves **302.6px of dead stage on EACH
+     side**, 49% of the column. Drag the split 200px wider and the slot grows
+     to 1430.9 while the picture stays 638.6 x 359.2 TO THE PIXEL. Nothing the
+     visitor can see answers the one lever they were handed, and the cap is the
+     entire reason: a `max-height` in pixels does not move when a width does.
+     SO THE HAND TAKES THE ASPECT, which is exactly P1's ruling on the carousel
+     handle one lever over ("the fit's cap yields to the hand"). F3's promise is
+     about ARRIVAL — the room opens with everything on one screen — and that is
+     untouched. From the moment the visitor grabs this handle the frame is a
+     true 16:9 of whatever width they chose, in both directions, and the
+     document is allowed to be longer than the window because they asked for a
+     bigger picture. Same discipline as the other two drags: computed from the
+     grab, persisted to the session key the fit already owns.
+     +1 AND A CEIL, deliberately: the cap is set just PAST the natural height so
+     `aspect-ratio` is what resolves the box and `max-height` never binds. A cap
+     rounded short by a pixel would re-letterbox the picture by a pixel, which
+     is the defect in miniature.
+     WINGS WITHOUT A CAP ARE UNAFFECTED — `.vp-area-flat` with no
+     `--fit-area-max` is already plain 16:9, so width already carried height
+     there and this block never runs for them. */
   function makeSplitDrag(e, containerRef) {
     e.preventDefault();
     e.currentTarget.setPointerCapture(e.pointerId);
+    const rootEl = mainRef.current ? mainRef.current.closest(".ex-root") : null;
+    const hasCap = !!rootEl && !Number.isNaN(parseFloat(
+      getComputedStyle(rootEl).getPropertyValue("--fit-area-max")));
     function onMove(ev) {
       const rect = containerRef.current.getBoundingClientRect();
       let pct = Math.round(((ev.clientX - rect.left) / rect.width) * 100);
       if (Math.abs(pct - 50) < 3) pct = 50;
-      setSplit(Math.max(SPLIT_MIN, Math.min(SPLIT_MAX, pct)));
+      pct = Math.max(SPLIT_MIN, Math.min(SPLIT_MAX, pct));
+      setSplit(pct);
+      if (!hasCap) return;
+      /* the viewer column is what the grid leaves after the left column and
+         the 10px handle — the same arithmetic F3 uses to size the frame. */
+      const areaW = (rect.width - 10) * (100 - pct) / 100;
+      const cap = Math.ceil(areaW * 9 / 16) + 1;
+      rootEl.style.setProperty("--fit-area-max", cap + "px");
+      try { sessionStorage.setItem(artist.cfKey + "-cap", cap); }
+      catch { /* private mode */ }
     }
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerup", () => window.removeEventListener("pointermove", onMove), { once: true });
