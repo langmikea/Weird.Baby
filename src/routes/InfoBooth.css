@@ -1,72 +1,275 @@
-/* InfoBooth.css — extracted from the inline <style> block in InfoBooth.jsx.
+/* InfoBooth.css — the INFORMATION BOOTH (/booth).
  *
- * [R5 2026-08-02] B7: three surfaces embedded complete stylesheets in
- * `<style>{`…`}</style>` template literals while every other room used a .css
- * file. The review called it hygiene. It is not only hygiene:
- *   · a template literal ENDS AT THE FIRST BACKTICK, so one backtick in a CSS
- *     comment is a build failure at parse. That happened TWICE in this round
- *     alone, both times while writing prose about the file;
- *   · the global reset was re-declared in all three, and src/index.css (which
- *     main.jsx imports, so it is guaranteed rather than bundled-by-luck) had
- *     already declared it. Those copies are gone;
- *   · the rules are now readable by tooling — the token audit, a linter, a
- *     future codemod — instead of being a string.
+ * [R5 2026-08-02] Extracted from an inline `<style>` template literal. Three
+ * surfaces embedded whole stylesheets in `<style>{`…`}</style>`, which is not
+ * only hygiene: a template literal ENDS AT THE FIRST BACKTICK, so one backtick
+ * in a CSS comment is a build failure at parse (it happened twice in one
+ * round); the global reset was re-declared in all three when src/index.css had
+ * already declared it; and the rules are now readable by tooling instead of
+ * being a string. The room's `html, body` rules were scoped by MOUNT when they
+ * lived in a `<style>` tag, so they are scoped to `html[data-room="booth"]`
+ * here — an attribute the component sets on mount and clears on unmount, the
+ * same lifetime said declaratively.
  *
- * THE ONE THING THAT WAS NOT A STRAIGHT MOVE, and why. An inline <style> is
- * scoped BY MOUNT: its `html, body` rules apply while this route is on screen
- * and vanish when it leaves. A .css file is global and permanent, so moving
- * those rules verbatim would have painted this room's ground over every other
- * room in the museum. They are now scoped to `html[data-room="booth"]`, an
- * attribute this component sets on mount and clears on unmount — the same
- * lifetime the <style> tag had, said declaratively.
- */
+ * [R4 2026-08-02] No font @import: the union of every face the museum uses is
+ * requested once, as a <link> in index.html.
+ *
+ * ===========================================================================
+ * [M3 2026-08-03] THE TYPOGRAPHY, REBUILT — MIKE: "the line breaks on this
+ * page read awkwardly; make the typography elegant."
+ *
+ * WHAT WAS ACTUALLY BREAKING, measured rather than tasted:
+ *
+ *  1. THE BREAKS WERE HAND-PLACED. The credo was one block with two `<br />`
+ *     tags in it. A `<br />` is a break authored for ONE window and printed at
+ *     EVERY window: at 1200px it landed where it was meant to, and at every
+ *     other width it cut a line that had room and left an orphan under it.
+ *     The three beats are now three ELEMENTS on a measure they cannot outrun,
+ *     so the room breaks where the reader is.
+ *
+ *  2. THE MEASURE WAS 592px OF FREDOKA. The card is 720px wide with 64px of
+ *     padding, and the body ran the full width at ~1.5rem — roughly 55–60
+ *     characters, which is passable for a two-line placard and hostile for an
+ *     answer of four sentences. Every block that is PROSE now runs on its own
+ *     measure in `ch` (the unit that means "characters"), centred in the card:
+ *     the credo short and declarative, the answers at 62ch, which is the
+ *     middle of the range typography has agreed on for a century.
+ *
+ *  3. IT WAS ALL ONE FACE AND ALL ONE SIZE. v4 put the entire card in Fredoka
+ *     because "the top lines were the part that read well" — true of a
+ *     six-line placard, and the reason a page of questions read as a wall.
+ *     THE HOUSE ALREADY HAS A TYPE SYSTEM AND IT IS USED HERE NOW: Fredoka is
+ *     the BRAND face and keeps the credo (and only the credo); Syne is the
+ *     structural face and takes the questions, which are headings; the serif
+ *     takes the answers, which are reading matter. Three jobs, three faces,
+ *     which is what makes a hierarchy legible without shouting.
+ *
+ *  4. NOTHING WAS RAGGED ON PURPOSE. Centred prose is right for a placard of
+ *     two lines and wrong for a paragraph — a centred paragraph gives the eye
+ *     a different left edge on every line. The credo stays centred because it
+ *     is signage; every answer is set flush left, with hyphenation on so the
+ *     rag stays soft at narrow widths instead of tearing a hole.
+ *
+ * The room's own register (personality map): welcoming, unhurried, nothing
+ * shouting. So the questions are quiet until you look at one, and the answer
+ * arrives without moving anything above it.
+ * =========================================================================== */
 
-/* [R4 2026-08-02] font @import removed - the union of every face the
-   museum uses is requested once, as a <link> in index.html. */
-html[data-room="booth"], html[data-room="booth"] body { height: 100%; background: var(--wb-bg); color: var(--wb-gold); }
-.booth-root { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 96px 24px 64px; position: relative; }
-.booth-root::after { content: ''; position: fixed; inset: 0; z-index: 950; pointer-events: none; opacity: 0.07; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 240px 240px; }
+html[data-room="booth"], html[data-room="booth"] body {
+  height: 100%;
+  background: var(--wb-bg);
+  color: var(--wb-gold);
+}
 
-/* TITLE BAR — [R2 2026-08-02] the .booth-nav-* family is RETIRED.
-   The room convention lives once, in src/components/MuseumBar.css, and
-   this room renders <MuseumBar room="Information Booth" />. The 96px
-   top padding on .booth-root above clears the fixed bar, unchanged.
-   (No backticks: this whole stylesheet is a template literal - R5.) */
+/* [M3] `justify-content:center` is gone. It centres a SHORT card in the
+   viewport, which is what this room used to hold; with a page of questions the
+   card is taller than the window and centring it pushes its top off the screen
+   — the heading a visitor arrives for scrolls up out of view before they have
+   read it. It sits at the top and the page scrolls, which is ordinary reading
+   (the no-hidden-information law's own preferred mechanic). */
+.booth-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 96px 24px 88px;
+  position: relative;
+}
+.booth-root::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 950;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
 
-/* v3 (Mike 2026-07-06: body read small/weak/squinty, mat space wasted;
-   font constraint lifted). The WORDS are this room's exhibit — billed
-   like it. Credo in brand Fredoka (ties to the Vol 1 cover); body in
-   large full-ink serif; nothing faded, nothing micro. */
-.booth-card { max-width: 720px; width: 100%; text-align: center; background: var(--wb-ink-card); border: 1px solid var(--wb-border); padding: 60px 64px 48px; position: relative; box-shadow: 0 1px 2px rgba(33,31,28,0.12), 0 6px 18px rgba(33,31,28,0.08); }
-/* v4 (Mike 2026-07-06): his words verbatim, short placard. Whole card
-   in the brand face (the top lines were the part that read well) —
-   body Fredoka 400, deliberate one-line beats, no unplanned wraps. */
-.booth-credo { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: clamp(1.55rem, 3vw, 2.1rem); line-height: 1.45; color: var(--wb-gold); margin-bottom: 0.9em; }
-.booth-credo em { font-style: normal; border-bottom: 3px solid var(--wb-gold); }
-.booth-words { font-family: 'Fredoka', sans-serif; font-weight: 400; font-size: clamp(1.2rem, 2vw, 1.5rem); line-height: 1.75; color: var(--wb-gold); }
-.booth-words p { margin-bottom: 0.35em; }
-.booth-words p:last-of-type { margin-bottom: 0; }
-.booth-rule { width: 52px; height: 2px; background: var(--wb-gold); opacity: 0.6; margin: 30px auto 24px; }
-.booth-contact { font-family: 'Fredoka', sans-serif; font-weight: 400; font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--wb-gold); }
-.booth-contact a { color: var(--wb-gold); text-decoration: none; border-bottom: 2px solid var(--wb-gold-lo); }
-.booth-contact a:hover { opacity: 0.7; }
+/* TITLE BAR — [R2 2026-08-02] the `.booth-nav-*` family is RETIRED; the room
+   convention lives once in src/components/MuseumBar.css. The 96px top padding
+   above clears the fixed bar. */
 
-.booth-actions { display: flex; justify-content: space-between; margin-top: 36px; }
-/* Subdued by design (Mike 2026-07-06): readers find these at the end
-   of the card — they don't need to shout. Quiet gray, wakes on hover. */
-.booth-btn { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.66rem; letter-spacing: 0.25em; text-transform: uppercase; color: #6f6b62; background: none; border: 1px solid var(--wb-border); padding: 10px 22px; cursor: pointer; text-decoration: none; transition: color 0.2s, border-color 0.2s; }
-.booth-btn:hover, .booth-btn:focus-visible { color: var(--wb-gold); border-color: var(--wb-gold); background: none; }
+/* THE SHEET. A printed page on the mat, like every other document surface in
+   this building (the robots wing's faces, the collage tiles, the contents
+   plate) — warm print stock, a hairline, and a real two-part shadow. */
+.booth-card {
+  max-width: 760px;
+  width: 100%;
+  background: var(--wb-ink-card);
+  border: 1px solid var(--wb-border);
+  padding: 64px 64px 52px;
+  position: relative;
+  box-shadow: 0 1px 2px rgba(33, 31, 28, 0.12), 0 6px 18px rgba(33, 31, 28, 0.08);
+}
 
-/* FAQ — expands the card in place; items are native <details>,
-   collapsed by default. */
-.booth-faq { margin-top: 30px; border-top: 1px solid var(--wb-border); text-align: left; }
-.booth-faq details { border-bottom: 1px solid #d8d4c9; padding: 14px 4px; }
-.booth-faq summary { cursor: pointer; font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 1.08rem; color: var(--wb-gold); list-style: none; display: flex; justify-content: space-between; align-items: baseline; }
-.booth-faq summary::-webkit-details-marker { display: none; }
-.booth-faq summary::after { content: "+"; font-family: 'Courier Prime', monospace; font-size: 1.15rem; color: var(--wb-gold-lo); }
-.booth-faq details[open] summary::after { content: "–"; }
-.booth-faq-a { font-family: 'Fredoka', sans-serif; font-weight: 400; font-size: 1rem; line-height: 1.65; color: #2b2924; padding: 10px 4px 4px; }
+/* THE CREDO — signage, and the only thing on the page in the brand face.
+   Each beat is its own line by structure, not by a <br />: `display:block` on
+   the spans, on a measure short enough that a beat cannot wrap into the next
+   one at any width this card can reach. */
+.booth-credo {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.5rem, 3vw, 2.05rem);
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  color: var(--wb-gold);
+  text-align: center;
+  /* [M3] THE MEASURE IS SET BY THE LONGEST BEAT, MEASURED. "The Weird.Baby
+     Museum is free." is 30 characters; at 22ch it broke after "Weird.Baby",
+     which is the same orphan the <br /> tags used to make and the reason this
+     block was rebuilt at all. 32ch clears the longest beat at every size the
+     clamp can reach and still stops the line well short of the card. */
+  max-width: 32ch;
+  margin: 0 auto;
+  text-wrap: balance;
+}
+.booth-credo span { display: block; }
+.booth-credo em {
+  font-style: normal;
+  border-bottom: 3px solid var(--wb-gold);
+}
+
+.booth-words {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.02rem, 1.7vw, 1.2rem);
+  line-height: 1.7;
+  color: var(--wb-gold-lo);
+  text-align: center;
+  /* longest line here is "The museum owns nothing and takes nothing." at 41
+     characters; 34ch was breaking it after "owns". */
+  max-width: 46ch;
+  margin: 22px auto 0;
+  text-wrap: balance;
+}
+
+.booth-rule {
+  width: 52px;
+  height: 2px;
+  background: var(--wb-gold);
+  opacity: 0.5;
+  margin: 40px auto;
+}
+
+/* ── THE QUESTIONS ────────────────────────────────────────────────────────── */
+/* The list is the page's exhibit, so it is billed as one: a quiet standing
+   head in the museum's structural face, then the questions. */
+.booth-faq-head {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.66rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--wb-gold-mute);
+  text-align: center;
+  margin-bottom: 26px;
+}
+.booth-faq { text-align: left; }
+
+.booth-q {
+  border-top: 1px solid var(--wb-border);
+}
+.booth-q:last-of-type { border-bottom: 1px solid var(--wb-border); }
+
+/* THE QUESTION. A heading, in the structural face, at reading size — not the
+   micro-caps this room used for its buttons. `list-style:none` plus the
+   WebKit marker reset because the default triangle is the browser's furniture
+   and this room supplies its own. */
+.booth-q summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  padding: 17px 2px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 1.02rem;
+  line-height: 1.4;
+  letter-spacing: 0.005em;
+  color: var(--wb-gold);
+  transition: color 0.15s;
+}
+.booth-q summary::-webkit-details-marker { display: none; }
+.booth-q summary:hover { color: var(--wb-gold-hi); }
+.booth-q summary:focus-visible {
+  outline: 1px solid var(--wb-gold);
+  outline-offset: 2px;
+}
+/* The sign, in the mono face — the museum's own register for a mark that is
+   apparatus rather than language. It ROTATES rather than swapping glyphs: a
+   "+" that becomes a "–" is two characters of different widths and the row
+   twitches; one glyph turned 45° is the same ink in the same place. */
+.booth-q summary::after {
+  content: "+";
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 1.05rem;
+  line-height: 1;
+  color: var(--wb-gold-mute);
+  flex-shrink: 0;
+  transition: transform 0.18s ease, color 0.15s;
+}
+.booth-q[open] summary::after {
+  transform: rotate(45deg);
+  color: var(--wb-gold);
+}
+.booth-q[open] summary { color: var(--wb-gold-hi); }
+
+/* THE ANSWER. Reading matter, so it is set as reading matter: the serif, flush
+   left, on a 62ch measure, with hyphenation so a narrow window softens the rag
+   instead of tearing a hole in it. */
+.booth-faq-a {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.02rem;
+  line-height: 1.62;
+  color: var(--wb-dim);
+  max-width: 62ch;
+  padding: 2px 2px 20px;
+  hyphens: auto;
+  text-wrap: pretty;
+}
+
+/* ── THE FOOT ─────────────────────────────────────────────────────────────── */
+.booth-contact {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 400;
+  font-size: clamp(1rem, 1.5vw, 1.16rem);
+  color: var(--wb-gold);
+  text-align: center;
+}
+.booth-contact a {
+  color: var(--wb-gold);
+  text-decoration: none;
+  border-bottom: 2px solid var(--wb-gold-lo);
+  transition: border-color 0.2s;
+}
+.booth-contact a:hover, .booth-contact a:focus-visible { border-bottom-color: var(--wb-gold); }
+
+/* The way back, as a sentence. The room's real exit is the bar's, top right;
+   this is the courtesy for a reader who has reached the bottom. */
+.booth-back {
+  margin-top: 14px;
+  text-align: center;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.booth-back a {
+  color: var(--wb-gold-mute);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.booth-back a:hover, .booth-back a:focus-visible { color: var(--wb-gold); }
 
 @media (max-width: 680px) {
-  .booth-card { padding: 40px 26px 32px; }
+  .booth-root { padding: 84px 16px 64px; }
+  .booth-card { padding: 40px 26px 36px; }
+  /* `ch` is a real measurement of the font, so these caps never fight the
+     viewport — they simply stop applying once the column is narrower than the
+     measure. Nothing needs overriding; the padding is the only thing that
+     does. */
 }

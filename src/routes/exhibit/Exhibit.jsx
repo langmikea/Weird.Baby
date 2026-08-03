@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, useLayoutEffect, useMemo } from "react";
 import { makeFactCycler, splitFact } from "../../lib/fact-select.js";
+import { visitorProse, kept } from "../../lib/visitor-prose.js";
 import MuseumBar from "../../components/MuseumBar.jsx";
 import {
   entryStamp, groupByPeriod, shouldBand, evidenceOf, docState,
@@ -71,19 +72,15 @@ function typeColor(t) { return TYPE_META[t]?.color ?? "#888"; }
    truncating at the bracket would leave a half-sentence. The sentence carrying
    the marker is the operator's; the rest is the museum's, and it stays.
    The early return means a string without a marker is never even split, so
-   the sentence splitter can never damage ordinary copy ("Vol. 1", "Dr King"). */
-const PAPA_MARK = /\[PAPA\]/;
-
-function visitorProse(s) {
-  if (typeof s !== "string" || !PAPA_MARK.test(s)) return s;
-  return s
-    .split(/(?<=[.!?])\s+/)
-    .filter(sentence => !PAPA_MARK.test(sentence))
-    .join(" ")
-    .trim()
-    .replace(/[\s;:,—–-]+$/, "");
-}
-const kept = v => typeof v === "string" ? v.trim().length > 0 : !!v;
+   the sentence splitter can never damage ordinary copy ("Vol. 1", "Dr King").
+   [M3 2026-08-03] `visitorProse`, `kept` and `PAPA_MARK` NOW LIVE IN
+   src/lib/visitor-prose.js, unchanged to the character. The ruling above says
+   SITE-WIDE and the function enforcing it was private to this file, reachable
+   only by things the exhibit renders — so the first [PAPA] written into a
+   room that is not an exhibit (the Information Booth, this round) would have
+   printed on the page. That is the defect P5 fixed, arriving through a door P5
+   could not see. `scrubFace` stays here: it knows which fields a FACE has, and
+   that is genuinely the exhibit's business. */
 
 function scrubFace(face) {
   if (!face) return face;
