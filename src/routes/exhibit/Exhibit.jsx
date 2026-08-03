@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useLayoutEffect, useMemo } from "react";
 import { makeFactCycler, splitFact } from "../../lib/fact-select.js";
 import { visitorProse, kept } from "../../lib/visitor-prose.js";
+import { useArrival } from "../../lib/use-arrival.js";
 import MuseumBar from "../../components/MuseumBar.jsx";
 import {
   entryStamp, groupByPeriod, shouldBand, evidenceOf, docState,
@@ -1710,6 +1711,17 @@ export default function Exhibit({ artist }) {
   const [recipeIdx, setRecipeIdx] = useState(0);
   const bodyResizable = !!artist.bodyKey;
   const mainRef = useRef(null);
+
+  /* [M2 2026-08-03] THE ROOM OPENS AS THE MUSEUM ARRANGED IT — ONCE A SESSION.
+     Keyed on the WING, not on the URL: an exhibit's albums are one room, and a
+     visitor moving between Carsie Blanton and Hunter Root has not arrived
+     anywhere new. The sizes half of Mike's ruling ("optimal sizes") is already
+     built and already session-scoped — F3's `fitOnEntry` writes its result to
+     sessionStorage and re-fits on a fresh visit — so this supplies the other
+     half he named, "scrolled top", on the same clock. See src/lib/use-arrival.js
+     for why `window.scrollTo` alone is not enough and why presets cannot be
+     overridden by it. */
+  useArrival(artist.exhibitSlug || artist.id);
 
   /* [X2 FIX] THE DEFAULT MUST LEAVE ITS OWN HANDLE GRABBABLE.
      Measured at 1600x1000: the player bar is fixed at the viewport floor

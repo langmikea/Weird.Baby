@@ -36,6 +36,7 @@
 import { Link } from "react-router-dom";
 import "./InfoBooth.css";
 import { useRoom } from "../lib/use-room.js";
+import { useArrival } from "../lib/use-arrival.js";
 import MuseumBar from "../components/MuseumBar.jsx";
 import { visitorProse, kept } from "../lib/visitor-prose.js";
 
@@ -148,6 +149,9 @@ export default function InfoBooth() {
   /* [R5] this room owns the page ground while it is mounted — see
      src/lib/use-room.js and the header of this route's stylesheet. */
   useRoom("booth");
+  /* [M2] first visit of the session opens at the top; a return keeps the
+     question the visitor had open and the place they were reading. */
+  useArrival("booth");
 
   /* Scrubbed at the render seam, exactly as the exhibit does it: the sentence
      carrying the marker is dropped, the rest of the answer stands. An answer

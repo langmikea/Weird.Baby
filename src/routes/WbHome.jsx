@@ -15,6 +15,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./WbHome.css";
 import { useRoom } from "../lib/use-room.js";
+import { useArrival } from "../lib/use-arrival.js";
 
 /* [M-ID 2026-08-03] MIKE HAS ANSWERED, AND THE ANSWER RETIRES THE QUESTION.
    F7c rendered four candidates behind `/?subtitle=2..4` and said "MIKE PICKS —
@@ -36,6 +37,10 @@ export default function WbHome() {
   /* [R5] this room owns the page ground while it is mounted — see
      src/lib/use-room.js and the header of this route's stylesheet. */
   useRoom("lobby");
+  /* [M2 2026-08-03] MIKE: "THE HOMEPAGE ALWAYS starts clean at the top, every
+     time — that's our space and we keep it neat." `always`, where every other
+     room in the museum resets only on the first visit of a session. */
+  useArrival("lobby", { always: true });
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [note, setNote] = useState("");
