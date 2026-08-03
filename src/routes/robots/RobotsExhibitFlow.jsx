@@ -36,8 +36,33 @@ import { T as MUSEUM } from "../../styles/tokens.js";
    changed the other has to move with it. */
 const PORTAL_GROUND = "#000";
 
+/* THE READER'S GROUND. Same reasoning as PORTAL_GROUND above and deliberately
+   the same value: a plate under the reader is lit ON a dark bench, and the
+   bench is the same bench the portal stands on. Named rather than repeated so
+   the next audit reads one intention instead of two stray hexes. */
+const READER_GROUND = "#000";
+
 export default function RobotsExhibitFlow({ activeAlbumId }) {
   const [twinOpen, setTwinOpen] = useState(false);
+  /* ======== [B6 / B8 2026-08-02] THE READER =============================
+     MIKE, B6: "MGK panels spawning new windows: counter to our standard
+     templates — fix to open in-place per the house pattern."
+     MIKE, B8: the owner's manual must be ACTUAL SCANS of the ACTUAL manual,
+     reached by microfiche-class technology — the real deal, not "in the
+     style of".
+     THOSE ARE ONE BUILD, WHICH IS WHY THEY ARE ONE COMPONENT. What B6 wants
+     is that a plate opens HERE instead of throwing the visitor into a raw
+     image on a browser tab; what B8 wants is a reader that pages and zooms a
+     reel of photographed pages. A reader that does the second does the first
+     for free — a wall of plates IS a reel with nine frames on it — so the
+     wing gets ONE reader and two ways in, rather than a lightbox now and a
+     microfiche viewer later that would do the same job twice.
+     IT LIVES HERE, NOT IN THE ENGINE, for the same reason the twin does: the
+     engine dispatches a door and knows nothing about what opens. WAL declares
+     the same collage and gets its own behaviour (a new tab at YouTube),
+     because these plates are OURS on OUR origin and those tiles are not. */
+  const [reel, setReel] = useState(null);   /* { set, i, title } | null */
+  const [zoom, setZoom] = useState(false);
   /* ======== [CR1 / FORK A (b) 2026-08-02] THE H-TEAR =====================
      Mike's canon: the whole portal view is ITSELF a screen, and the portal is
      a screen ON it. The evidence-in-fiction is a tear that rips through
@@ -93,11 +118,37 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
     return () => { alive = false; clearTimeout(t1); clearTimeout(t2); };
   }, [twinOpen]);
 
+  /* [B6] ONE KEY HANDLER, AND IT KNOWS WHICH SURFACE IS UP. It used to call
+     closeTwin() on every Escape anywhere in the wing, which fired the
+     "twin closed" announcement when no twin had been open — harmless only
+     because nothing listens to it today. With a second overlay in the room,
+     "Escape closes the thing that is open" has to be stated rather than
+     assumed: the reader is nearer the visitor, so it goes first. */
   useEffect(() => {
-    function onKey(e) { if (e.key === "Escape") closeTwin(); }
+    function onKey(e) {
+      if (e.key === "Escape") {
+        if (reel) { setReel(null); setZoom(false); return; }
+        if (twinOpen) closeTwin();
+        return;
+      }
+      if (!reel) return;
+      if (e.key === "ArrowRight" || e.key === "PageDown") step(1);
+      if (e.key === "ArrowLeft" || e.key === "PageUp") step(-1);
+    }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [reel, twinOpen]);
+
+  /* the reel wraps at both ends: a reader that stops dead at frame nine is
+     asking the visitor to remember where they started. */
+  function step(d) {
+    setZoom(false);
+    setReel(r => {
+      if (!r || !r.set.length) return r;
+      const n = r.set.length;
+      return { ...r, i: (r.i + d + n) % n };
+    });
+  }
 
   /* [S4 2026-07-30] THE PORTAL CLOSES ITSELF. Button 5 on the digit strip is
      now [X], and pressing it posts here. The close affordance is INSIDE the
@@ -149,15 +200,32 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
      (`linkEvent` in robots.js) rather than WAL's — a collage that fired
      "wb-wal-open-link" here would have been a wall of dead pictures, which is
      the W4a defect arriving in a new room.
-     A NEW TAB, with noopener: these are the museum's own plates on the
-     museum's own origin, and opening one should not throw away the exhibit
-     the visitor is standing in. */
+     [B6 2026-08-02] AND IT OPENED IN A NEW TAB, WHICH MIKE CAUGHT.
+     "Counter to our standard templates — fix to open in-place per the house
+     pattern." He is right and the old comment argues his case against
+     itself: it reasoned that opening a plate "should not throw away the
+     exhibit the visitor is standing in", then threw them into a browser tab
+     showing a bare 4.9MB PNG on a white background — no caption, no next
+     plate, no way back except the tab strip, and the museum's own chrome
+     gone. The house pattern for looking closely at an object is an OVERLAY
+     ON THE ROOM: this wing already had one for the twin, and now it has a
+     reader for its plates.
+     THE FALLBACK IS STILL A TAB, and stays deliberately: an event that
+     carries no set is a door to somewhere else, and somewhere else is not
+     ours to open in-place. Nothing in the wing fires that today; it is there
+     so a future outbound link cannot land in a reader that has nothing to
+     read. */
   useEffect(() => {
     function open(e) {
-      const href = e && e.detail && e.detail.href;
-      if (!href) return;
-      try { window.open(href, "_blank", "noopener,noreferrer"); }
-      catch { window.location.assign(href); }
+      const d = (e && e.detail) || {};
+      if (!d.href) return;
+      if (Array.isArray(d.set) && d.set.length) {
+        setZoom(false);
+        setReel({ set: d.set, i: Number(d.index) || 0, title: d.setTitle || "" });
+        return;
+      }
+      try { window.open(d.href, "_blank", "noopener,noreferrer"); }
+      catch { window.location.assign(d.href); }
     }
     window.addEventListener("wb-robots-open-link", open);
     return () => window.removeEventListener("wb-robots-open-link", open);
@@ -198,6 +266,69 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
     iframe: {
       width: "100%", height: "100%", border: 0, display: "block",
       background: `var(--wb-portal-ground, ${PORTAL_GROUND})`,
+    },
+
+    /* ======== [B6/B8] THE READER ========================================
+       DELIBERATELY NOT THE PORTAL'S OVERLAY, though it sits on the same
+       ground. The portal's rule is "the page stops existing" — no chrome, no
+       caption, no controls, because it is a doorway. A reader is the
+       opposite kind of object: it is an INSTRUMENT you operate, so it wears
+       its controls where a microfiche reader wears them — a rail under the
+       glass with the frame counter, the transport and the magnifier on it.
+       Hiding those would not be restraint, it would be a reader you cannot
+       read with. */
+    reader: {
+      position: "fixed", inset: 0, zIndex: 1001,
+      background: `var(--wb-portal-ground, ${READER_GROUND})`,
+      display: "flex", flexDirection: "column",
+    },
+    /* the glass. `overflow:auto` ONLY once magnified — at fit there is
+       nothing to pan and a scrollbar would be furniture with no function. */
+    glass: (z) => ({
+      flex: 1, minHeight: 0, position: "relative",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      overflow: z ? "auto" : "hidden",
+      cursor: z ? "zoom-out" : "zoom-in",
+      background: `var(--wb-portal-ground, ${READER_GROUND})`,
+    }),
+    /* [B4] THE SITE-WIDE PHOTO LAW, ENFORCED AT THE GLASS. Mike: the robots
+       wing is B&W ONLY, the plates included. A plate is grayscaled where it
+       is SHOWN rather than where it is stored, so the negative on disk stays
+       the negative and the law is one line instead of nine re-exports. */
+    plate: (z) => (z
+      ? { display: "block", maxWidth: "none", maxHeight: "none",
+          filter: "grayscale(1) contrast(1.03)" }
+      : { display: "block", maxWidth: "100%", maxHeight: "100%",
+          objectFit: "contain", filter: "grayscale(1) contrast(1.03)" }),
+    /* the rail: caption on the left, transport on the right, one hairline
+       above it. Museum register — mono, spaced, quiet. */
+    rail: {
+      flexShrink: 0, display: "flex", alignItems: "center", gap: "18px",
+      padding: "10px 18px",
+      borderTop: "1px solid #2a2a2a", background: "#0a0a0a",
+      fontFamily: "'Courier Prime','Courier New',monospace",
+    },
+    cap: { flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: "2px" },
+    capTitle: {
+      fontSize: ".8rem", color: "#e8e6e0", letterSpacing: ".02em",
+      overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
+    },
+    capMeta: {
+      fontSize: ".62rem", color: "#8a877f", letterSpacing: ".16em",
+      textTransform: "uppercase",
+    },
+    tp: { display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 },
+    btn: {
+      fontFamily: "'Courier Prime','Courier New',monospace",
+      fontSize: ".62rem", letterSpacing: ".16em", textTransform: "uppercase",
+      color: "#e8e6e0", background: "transparent",
+      border: "1px solid #3a3a3a", padding: "7px 12px", cursor: "pointer",
+    },
+    btnOn: {
+      fontFamily: "'Courier Prime','Courier New',monospace",
+      fontSize: ".62rem", letterSpacing: ".16em", textTransform: "uppercase",
+      color: "#0a0a0a", background: "#e8e6e0",
+      border: "1px solid #e8e6e0", padding: "7px 12px", cursor: "pointer",
     },
     /* [S4 2026-07-30] THE CLOSE CONTROL IS GONE FROM HERE. Its style keys
        and hover state went with it; the way out is [X] on the digit strip,
@@ -257,6 +388,59 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
           )}
         </div>
       )}
+
+      {/* ======== [B6/B8] THE READER, IN PLACE ==========================
+          A plate opens ON the room now, not in a browser tab. The frame is
+          lit on the bench, the rail underneath says which frame it is and
+          carries the transport, and the way out is the same two the wing
+          already teaches: an explicit control, or Escape.
+          MAGNIFY IS A REAL 1:1, not a scale factor. These are 3–5MP
+          photographs of a physical object, and the whole reason to open one
+          is to read the silkscreen on a switch — so the magnified state
+          shows the file's own pixels and lets the visitor pan, which is
+          what the bench under a real reader does. The no-inner-scroll law
+          governs READING SURFACES; panning a magnified plate is the
+          instrument working, not a trap swallowing a page. */}
+      {reel && reel.set[reel.i] && (() => {
+        const f = reel.set[reel.i];
+        const many = reel.set.length > 1;
+        return (
+          <div style={S.reader} role="dialog" aria-modal="true"
+               aria-label={(reel.title || "Plate") + " — reader"}>
+            <div style={S.glass(zoom)} onClick={() => setZoom(z => !z)}>
+              <img src={f.img} alt={f.label || ""} style={S.plate(zoom)} />
+            </div>
+            <div style={S.rail}>
+              <span style={S.cap}>
+                <span style={S.capTitle}>{f.label || reel.title}</span>
+                <span style={S.capMeta}>
+                  {[reel.title, f.date,
+                    "Frame " + (reel.i + 1) + " of " + reel.set.length]
+                    .filter(Boolean).join("  ·  ")}
+                </span>
+              </span>
+              <span style={S.tp}>
+                {many && (
+                  <button style={S.btn} onClick={() => step(-1)}
+                          aria-label="Previous frame">&lsaquo; Prev</button>
+                )}
+                {many && (
+                  <button style={S.btn} onClick={() => step(1)}
+                          aria-label="Next frame">Next &rsaquo;</button>
+                )}
+                <button style={zoom ? S.btnOn : S.btn}
+                        onClick={() => setZoom(z => !z)}
+                        aria-pressed={zoom}>
+                  {zoom ? "Fit" : "Magnify"}
+                </button>
+                <button style={S.btn}
+                        onClick={() => { setReel(null); setZoom(false); }}
+                        aria-label="Close the reader">Close</button>
+              </span>
+            </div>
+          </div>
+        );
+      })()}
     </>
   );
 }

@@ -31,8 +31,15 @@
   border-bottom: 1px solid #c6c2b7;
 }
 
+/* [B7/R2 2026-08-02] THE WORDMARK READS THE TOKEN, like the exhibit's does.
+   --wb-brand is a LIVE trial (STATE: "Brand wordmark trial, nav only"). The
+   exhibit's bar asks for var(--wb-brand, 'Fredoka', …); this one and the
+   booth's asked for the literal — so the day Mike moved the trial forward, one
+   room in three would have changed and a brand trial nobody can see whole is a
+   trial that cannot be judged. Token verified reachable on /shop: the sheets
+   bundle into one document, --wb-brand resolves on every route. */
 .gift-shop__nav-logo {
-  font-family: 'Fredoka', sans-serif;
+  font-family: var(--wb-brand, 'Fredoka', sans-serif);
   font-weight: 600;
   font-size: 0.85rem;
   letter-spacing: 0.06em;

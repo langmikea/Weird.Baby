@@ -19,6 +19,57 @@ Paid for by the 2026-06-17 derived-era incident: charging into the problem in fr
 
 Ops work takes top priority, based on the Ops need in the moment.
 
+## THE RELEASE DOCTRINES (Mike, 2026-08-02 — standing, govern what we build toward)
+
+Three rulings about SHAPE OF RELEASE rather than shape of a page. They govern
+what the museum is filled with and when, and they outrank a nice idea that does
+not serve them.
+
+**D-BINGE — launch with multiple weeks already in the Record. Design for the
+binge-watcher.** A visitor who arrives on day one should find a body of work to
+fall into, not a pilot and a promise. The consequence for BUILD is that every
+container must read well at volume and must PAGE, not scroll and not truncate:
+a Record of ten entries and a Record of four hundred are the same component, and
+the one that breaks at four hundred is not finished. (This round's B5/B9 work is
+directly downstream — the stage now pages a wall at any width, and the Record's
+model takes evidence classes so there is more than paragraphs to binge.)
+
+**D-EPISODE — the weekly rhythm.** Teasers, "on last week's episode", and shorts
+during the week; then WHAM, a FULL EPISODE — not an "update". Across all
+storyfronts at once: many plates spinning, most wobbling, are they adding more,
+oh no — that was a close one. The register is serial television, not a changelog.
+The consequence for BUILD: an episode needs a slot that can carry a WEEK
+(something dated, something that accumulates, something a visitor can walk back
+through) — which is what the Record is, and why it is the wing's spine rather
+than one of its pages.
+
+**D-WEEKLY-EVERYWHERE — new content surfaces WEEKLY across the entire W.B
+domain, and information stays current. Handled by AUTOMATION, not humans.**
+Recorded this round as doctrine; nothing is built for it yet. What automation
+would need, noted while the ground is fresh so the next round is not scoping
+from memory:
+
+- **A source of truth per storyfront that is not a JSX file.** HR already has
+  one (MediaVault → `npm run export-artifacts` → `hunter_root.json`). WAL and
+  robots are hand-authored JS — an automation cannot write to them safely. Any
+  weekly pipeline starts by giving those two wings a data file it can own.
+- **A dated spine.** "What is new this week" is unanswerable without a date on
+  every artifact. MV artifacts have one; WAL/robots faces mostly do not. The
+  Record's `stamp` is a display string, not a date — it would need a real one.
+- **An idempotent publish step.** The existing release flow is 4 manual steps
+  and step 2 is the one always missed (see Release flow, below). Automation means
+  that flow runs itself and PROVES it ran — the before/after artifact count rule
+  already exists precisely because a silent shrink is invisible in a diff.
+- **A currency check, not just a publish.** "Information stays current" is the
+  harder half: something must notice a dead link, a delisted video, a stale
+  "what they are up to". That is a crawler over the trail/door URLs the wings
+  already declare, reporting rather than editing.
+- **The blocker to name honestly:** MV runs on Mike's laptop and the sandbox
+  cannot reach it (OPERATIONS §8 / CLAUDE.md quirk 11). Weekly automation that
+  depends on MV needs MV reachable on a schedule, or an export that lives
+  somewhere a scheduler can read. That is a hosting decision, not a code one, and
+  it is the first real question of this workstream.
+
 ## THE SPOTLIGHT DOCTRINE (Mike, 2026-08-02 — standing, governs WAL and any celebration wing)
 
 The museum is THE FRAME — it neither detracts nor distracts; done right it
@@ -45,9 +96,97 @@ arrival. Implemented in `src/routes/shop/GiftShop.jsx` (`billing()`), driven by
 3. **WEIRD.BABY IS LISTED ONLY WHEN THE EXHIBIT WAS WEIRD.BABY'S OWN**
    (`/wb`, `/robots`) — otherwise W.B does not appear at all. This is the
    clause Mike reported broken ("WAL is putting W.B on the gift shop page").
-4. **Direct arrival at `/shop`** names no exhibit, so nobody takes top billing
-   and the house IS listed — the shop's own front door rather than someone's
-   exit. Ops reading, stated rather than decided silently; Mike may overrule.
+4. **Direct arrival at `/shop` — THE HOUSE TAKES TOP BILLING AND ALL ARE
+   SHOWN.** [MIKE RULED 2026-08-02, B1.] P11 stated an Ops reading here —
+   nobody billed, house merely listed — and invited an overrule; this is it.
+   A direct arrival is not an absence of an owner, it is the HOUSE'S OWN ROOM,
+   so Weird.Baby takes the top slot the way any wing's owner does on exit and
+   the roster beneath is everybody. Applies to every no-exhibit-exit case.
+5. **The view resets before every entry** [B1] — no stale billing, and no
+   stale SIGHT of it: the browser's restored scroll offset could otherwise
+   land a returning visitor below the top billing that is the room's whole
+   message. `scrollRestoration:"manual"` + scroll-to-top on arrival and on any
+   change of who is billed; the browser's own behaviour is restored on exit.
+6. **The one case the law leaves unbilled** is a WAL exit that names no owner
+   (`?from=wal` with no `&owner=`). It cannot bill the house without breaking
+   Clause 3, so the slot stays empty. Unreachable in practice — the wing always
+   sends `owner=` — but a stale link in the wild would land on it. Open for
+   Mike (review J3).
+
+## SEALED 2026-08-02 — THE BINGE + TEMPLATE ROUND (v35; D + B1–B9. DEPLOY IS MIKE'S)
+
+Autonomous single-agent Code-lane round on Mike's binge/template brief. Full
+round log: `docs/MUSEUM_BINGE_TEMPLATE_LOG-20260802.md`. The review deliverable:
+`docs/TEMPLATE_ADVERSARIAL_REVIEW.md`. Collage wall protected and re-verified.
+
+- **D — THE RELEASE DOCTRINES recorded** (above): D-BINGE, D-EPISODE,
+  D-WEEKLY-EVERYWHERE. The third is doctrine only — nothing built — with five
+  concrete notes on what automation would need, including the honest blocker
+  (MV is laptop-local; no scheduler can reach it — a hosting decision).
+- **B5 THE PLATES PAGER — one cause, two faces, both measured.** The wall is a
+  grid that auto-fills 2-across in a 582px column: **1134px into a 758px column,
+  376px clipped, three plates unreachable, no scrollbar.** The leftover footer
+  then took a page to itself — 17px of type on an empty sheet, the "blank page
+  2". Fixed by `data-stage-full` (a wall takes the PAGE at page width: 5-across
+  × 2 rows, **0px clipped**) plus the footer riding the transport, whose prop had
+  been neutered since it was written (`footer={face.footer ? null : null}`).
+  **The lap then found the same defect at 387px** (223px sheet vs 823px wall, six
+  of nine lost) — a full block now divides into as many full pages as it needs,
+  measured off the grid's real ROW geometry (height ÷ page is wrong: three tiles
+  across two columns is two rows). Phone: 5 wall pages, all nine reachable, worst
+  overflow 0px. Desktop byte-identical to before the division path existed.
+- **B6/B8 ARE ONE BUILD — THE READER.** Plates opened in a new tab showing a bare
+  4.9MB PNG on white; they now open in place, on the room. That same reader IS
+  B8's microfiche container, because a wall of plates is a reel with nine frames.
+  **B8's ruling recorded in `robots.js`:** the manual must be ACTUAL SCANS via
+  microfiche-class technology; the generated PDF/plates are **the source Mike
+  prints and photographs**, not the artifact. Scan spec recorded with it —
+  **≥2400px long edge** (the one thing code cannot fix later), whole page
+  including margins, reel order = reading order, `label` + `date` per frame.
+  Reel ships EMPTY and says so; both paths verified (temp data reverted, file
+  confirmed clean).
+- **B9 the Record takes evidence classes** — `evidence` (a word; **no permitted
+  list in code or CSS**), `wire`, `plates` (the reader's own shape). No new
+  species. Payloads ship empty deliberately: the only photographs in the repo are
+  of the unit as received, and attaching them to entries about boxes and ads
+  would be inventing provenance.
+- **B1 gift shop**: direct arrival now bills the HOUSE and shows all five (Mike
+  overruling P11's stated reading); view resets on every entry
+  (`scrollRestoration:"manual"` — without it Chrome re-applies the old offset
+  after the effect). All seven exit cases re-verified.
+- **B2 the input-field template** — `.wb-field`, named so it is a thing in the
+  stylesheet not a habit. Both fields one mechanic/face/size; name + Sign as
+  **exactly equal halves** (369.667px each, grid not flex — flex could not do it)
+  on one line below the note. P13's caption superseded. The /hr journal composer
+  already conformed and was left alone.
+- **B3** the post-it tilt formula `((ci*5)%5)-2` **could only ever return −2°** —
+  every card in every deck identically tilted since it shipped. Now the collage's
+  own coprime stride. **B4** the B&W law moves from per-component to **one rule
+  scoped to the wing**, which is why the plate wall had escaped it.
+- **B7 THE ADVERSARIAL REVIEW** — 8 drift fixed, 6 conformance items recommended
+  with reproducible evidence, 4 judgment calls, 5 templates verified holding, and
+  a 14-entry template register (drift cannot be measured without a baseline).
+  **Two findings for Mike:** (J1) **the retired 2025 gold `#b8974a` is still
+  painting on the player bar's play/volume/CC buttons** — 30 live sites, verified
+  computing `rgb(184,151,74)` on /hr; listed not fixed because it is a palette
+  decision on the most-used control. (R1) **four visitor-facing surfaces use ZERO
+  tokens** — 151 hard-coded colours, 96 byte-for-byte identical to an existing
+  `--wb-*`; tokens verified reachable on every route, so only the typing blocks
+  it. One conformance fix taken: shop + booth wordmarks read `var(--wb-brand)`
+  like the exhibit's, closing a live fork in an active brand trial.
+- Gates: **lint 11 err / 9 warn** — errors match the 11/10 HEAD baseline exactly,
+  **zero new findings** (sets normalised, sorted, compared with `comm`; the only
+  delta is one warning HEAD had and this tree does not — a dead
+  eslint-disable at the Stage's plan effect became a working one). A 12th error
+  was caught AT the gate and fixed: a second `catch (e)` with an unused binding,
+  added beside a pre-existing one that is documented debt. Vite build green. Console
+  clean with **no `[stage]` overrun warnings**, which is itself the gate. Desktop
+  lap across all seven routes + all six MGK tracks.
+  **PHONE VERIFIED BY A GENUINE 387px VIEWPORT THIS TIME** — the window manager
+  refused `resize_window` again (last round's hazard), so the lap ran in a
+  same-origin 390px iframe where media queries genuinely fire. That is what
+  caught the phone half of B5, which measurement alone would have missed;
+  recommended as the standard technique for this repo.
 
 ## SEALED 2026-08-02 — THE POLISH ROUND (v34; P1–P23. DEPLOY IS MIKE'S)
 

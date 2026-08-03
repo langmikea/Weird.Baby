@@ -36,7 +36,8 @@ export default function InfoBooth() {
         .booth-root::after { content: ''; position: fixed; inset: 0; z-index: 950; pointer-events: none; opacity: 0.07; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 240px 240px; }
 
         .booth-nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 32px; position: fixed; top: 0; left: 0; right: 0; z-index: 90; background: #d9d5ca; border-bottom: 1px solid #c6c2b7; }
-        .booth-nav-logo { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.06em; color: #211f1c; text-decoration: none; transition: opacity 0.2s; }
+        /* [B7/R2] the wordmark reads the token — see GiftShop.css for the reasoning. */
+        .booth-nav-logo { font-family: var(--wb-brand, 'Fredoka', sans-serif); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.06em; color: #211f1c; text-decoration: none; transition: opacity 0.2s; }
         .booth-nav-sub { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.12em; text-transform: uppercase; color: #211f1c; margin: 0; position: absolute; left: 50%; transform: translateX(-50%); }
         .booth-nav-return { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: #211f1c; text-decoration: none; transition: opacity 0.2s; }
         .booth-nav-logo:hover, .booth-nav-return:hover { opacity: 0.7; }

@@ -27,6 +27,33 @@
 // A track with neither videos NOR a face falls through to the template's own
 // state exactly as before, so /hr and /wb cannot notice any of this.
 //
+// ---- B9 2026-08-02: THE RECORD CARRIES EVIDENCE CLASSES ---------------------
+// MIKE: "The Record needs to carry more than plates: photos, 'electronic data
+// transmissions' and other evidence classes arrive long before units do.
+// Extend the Record's content model to accept those classes (data-driven, no
+// new species) so the binge has material."
+//
+// A log entry may now carry, all optional:
+//   evidence  a WORD naming the class — "photograph", "transmission",
+//             "document", "object", "correction", "record", anything. There is
+//             NO permitted list in the code or the CSS: the renderer prints
+//             what the data says. A class invented next month needs no build.
+//   wire      array of short lines, drawn in the machine's register block —
+//             the vocabulary this face already uses for a transmission,
+//             borrowed rather than reinvented.
+//   plates    array of { img, label, date } — the SAME shape the plate wall
+//             and the microfiche reader take, so a photograph attached to a
+//             Tuesday in 2024 opens in the identical reader as a plate off
+//             the wall. That is what "no new species" buys.
+// An entry declaring none of them renders exactly as it always did.
+//
+// THE PAYLOADS SHIP EMPTY AND THAT IS DELIBERATE. The classes below are read
+// off each entry's own sentence and are Mike's to confirm; the `wire` and
+// `plates` arrays are NOT populated, because the only photographs this
+// repository holds are of the MGK unit as received and attaching them to
+// entries about boxes, ads and restoration would be inventing provenance.
+// The container is the deliverable; the evidence is Mike's to bring.
+//
 // `viewerPoster` on the album is what the panel shows when nothing is playing
 // and nothing is selected — see the note on it below.
 //
@@ -325,49 +352,49 @@ const spine = [
              [PAPA] rows are the ones where a summary would be putting words
              in the narrator's mouth. */
           entries: [
-            { stamp: "01 JAN 24", title: "Three boxes",
+            { stamp: "01 JAN 24", title: "Three boxes", evidence: "document",
               line: "An anonymous drop: three cartons, marked classified and " +
                     "fragile on every side, with a note taped to them signed “-W.O.”",
               note: "the note's full text is in the archive" },
-            { stamp: "05 JAN 24", title: "Who is W.O.?",
+            { stamp: "05 JAN 24", title: "Who is W.O.?", evidence: "record",
               line: "The first entry. Three units are named on the boxing, " +
                     "and ABEAL is assumed — wrongly — to be their creator.",
               note: "" },
-            { stamp: "12 JAN 24", title: "Something off about this drop",
+            { stamp: "12 JAN 24", title: "Something off about this drop", evidence: "record",
               line: "Office supplies, personal items and cold-war hardware, " +
                     "no documentation, everything gathered in a rush.",
               note: "ABEAL is “a division of ScrapCo”" },
-            { stamp: "19 JAN 24", title: "The One-Page-Ads",
+            { stamp: "19 JAN 24", title: "The One-Page-Ads", evidence: "document",
               line: "The framed ads turn out not to be original: ABEAL " +
                     "retro-fitted other people's ads, with words covered and things taped down.",
               note: "" },
-            { stamp: "26 JAN 24", title: "But we were wrong",
+            { stamp: "26 JAN 24", title: "But we were wrong", evidence: "correction",
               line: "The retraction. ABEAL did not start it — they received " +
                     "the tech from someone else. They were responsible for the looks.",
               note: "the record correcting itself, in public" },
-            { stamp: "02 FEB 24", title: "Logos and slogans",
+            { stamp: "02 FEB 24", title: "Logos and slogans", evidence: "object",
               line: "The shirts are made from original elements off the " +
                     "boxing — which is the first mention that per-unit slogans exist.",
               note: "[PAPA] — the slogans themselves are unwritten" },
-            { stamp: "09 FEB 24", title: "MGK-NIAC, and a name",
+            { stamp: "09 FEB 24", title: "MGK-NIAC, and a name", evidence: "record",
               line: "The original project title surfaces, and with it Carter " +
                     "Bookman — “his life is a mystery (some may say an Enigma??)”.",
               note: "" },
-            { stamp: "16 FEB 24", title: "Ionizers and crushed walnut",
+            { stamp: "16 FEB 24", title: "Ionizers and crushed walnut", evidence: "record",
               line: "Restoration chemistry: the cases through the electronic " +
                     "ionizers, the body casings tumbled in crushed walnut.",
               note: "" },
-            { stamp: "22 MAR 24", title: "Bias, in 1965",
+            { stamp: "22 MAR 24", title: "Bias, in 1965", evidence: "firmware",
               line: "Two engines — Prediction and Answer — both running off a " +
                     "changeable bias setting built before bias settings were a thing.",
               note: "" },
-            { stamp: "05 APR 24", title: "The cases open",
+            { stamp: "05 APR 24", title: "The cases open", evidence: "photograph",
               line: "Photographs of the three cases and their artifacts: a " +
                     "spy camera, a real telegraph, and a 1960s CEO's day.",
               note: "" },
           ],
-          footer: "First layer only — ten of 436 records. The full entries, and " +
-                  "the order they want to be read in, are [PAPA].",
+          footer: "First layer only — ten of 436 records. The full entries, " +
+                  "their evidence, and the order they want to be read in, are [PAPA].",
         },
       },
       {
@@ -378,7 +405,40 @@ const spine = [
         /* HONEST v1: a face that says what the object is and what state it is
            in. No plates yet — the scans are Mike's to make — and no
            "coming soon", because a face that describes the artifact is not a
-           promise, it is a catalogue entry. */
+           promise, it is a catalogue entry.
+
+           ==== [B8 2026-08-02] THE MANUAL BECOMES REAL. MIKE'S RULING. =====
+           "The owner's manual must be ACTUAL SCANS/PHOTOGRAPHS of the ACTUAL
+           instruction manual, accessed via microfiche-class technology —
+           immersion, the real deal, NOT 'in the style of'."
+           THE CONSEQUENCE IS A PIPELINE, NOT A STYLESHEET, and it inverts
+           what everyone assumed the generated pages were for. The PDF and the
+           page plates are no longer the artifact; they are THE SOURCE MIKE
+           PRINTS AND PHOTOGRAPHS. The photograph of that print — paper grain,
+           press registration, whatever the light did — is the artifact, and
+           the reason is the same one this face already gives for refusing
+           transcription: the typography is the evidence, and a rendering of
+           typography is a drawing of evidence.
+           WHAT THE VIEWER NEEDS, so the scans are made ONCE and made right:
+             RESOLUTION  ≥ 2400px on the long edge, which is what it takes to
+                         read 6pt corporate small-print at 1:1 in the reader.
+                         Photograph at the highest the camera gives and let
+                         the delivery step downsample; a rescan is a reshoot.
+             FRAMING     the whole page INCLUDING its edges. The margins carry
+                         the technicians' handwriting (§ MARGINS below) and a
+                         page cropped to its type block throws that away.
+             SEQUENCE    reel order = reading order. `plates` is an ordered
+                         array and the reader's transport walks it; a page out
+                         of order is a page nobody will find.
+             PER FRAME   `label` (what the page is) and `date` (the section
+                         mark, e.g. "§ 3") — the reader prints both on its
+                         rail, and a frame with neither is an unlabelled slide.
+             ZOOM        the reader already gives fit ↔ 1:1 with panning, which
+                         is why resolution is the one thing that cannot be
+                         fixed later in code.
+           THE CONTAINER IS BUILT AND THE REEL IS EMPTY, and it says so on the
+           page rather than promising. When the scans land they are `plates`
+           entries in this file and nothing else moves. */
         face: {
           kind: "plate",
           title: "THE OWNER'S MANUAL",
@@ -387,10 +447,22 @@ const spine = [
             "machine explains itself — including the parts it gets wrong. " +
             "Page images, not transcription: the typography is the evidence.",
           lines: [
-            "FORMAT  page plates, original look-and-feel",
-            "NAV     microfiche-style scrub (designed, not built)",
+            "FORMAT  photographs of the printed pages, not a rendering",
+            "NAV     microfiche reader — page-turn, fit and 1:1 magnify",
             "PLATES  not yet imaged",
           ],
+          reel: {
+            label: "MICROFICHE · READER",
+            /* THE SCANS ARRIVE FROM MIKE. Ordered, reading order, one entry
+               per page: { img, label, date }. The shape is the plate wall's
+               shape on purpose — one reader serves both. */
+            plates: [],
+            note:
+              "The reader is built and the reel is empty. These pages will be " +
+              "photographs of the real manual — the printed sheet, its edges " +
+              "and the hands in its margins — and until those exist this is a " +
+              "catalogue entry rather than a promise.",
+          },
           /* THE CONTENTS PAGE, WHICH IS REAL EVEN THOUGH THE PLATES ARE NOT.
              Every section below is attested in the record or in the firmware;
              what is missing is the IMAGE of the page, and each row says so

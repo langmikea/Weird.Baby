@@ -112,16 +112,74 @@ export default function WbHome() {
         .wb-book-label { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; color: #211f1c; display: block; }
         .wb-book-count { font-family: 'Courier Prime', monospace; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: #9b978d; white-space: nowrap; }
 
-        /* ENTRY BOX — name field looks like a physical form entry */
-        .wb-entry-box { border: 1px solid #c6c2b7; border-radius: 1px; padding: 10px 14px 12px; margin-bottom: 10px; background: #faf8f3; transition: border-color 0.25s; }
-        .wb-entry-box:focus-within { border-color: #211f1c; }
-        .wb-entry-box-label { font-family: 'Courier Prime', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #7d7869; margin-bottom: 8px; display: block; }
+        /* ===================================================================
+           [B2 2026-08-02] THE INPUT FIELD TEMPLATE — Mike, site-wide.
+           "Use 'what brought you here' mechanics AND font in BOTH fields —
+           and make that pairing THE TEMPLATE for input fields site-wide."
 
-        .wb-input { width: 100%; background: transparent; border: none; color: #211f1c; font-family: 'DM Serif Display', serif; font-size: 0.95rem; padding: 0; outline: none; caret-color: #211f1c; display: block; transform: scaleY(1.15); transform-origin: left top; }
-        .wb-input::placeholder { color: #a9a59a; font-style: italic; }
-        .wb-textarea { resize: none; height: 60px; border: 1px solid #c6c2b7; padding: 10px 10px; border-radius: 1px; background: #faf8f3; font-size: 0.84rem; transition: border-color 0.25s; margin-bottom: 12px; }
-        .wb-textarea:focus { border-color: #211f1c; }
-        .wb-submit { width: 100%; margin-top: 0; padding: 13px; background: transparent; border: 1px solid #211f1c; color: #211f1c; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s; display: block; transform: scaleY(1.15); transform-origin: center top; }
+           WHAT THE TEMPLATE IS, stated so it can be conformed to rather than
+           guessed at: a bordered box on the page's own paper, the QUESTION
+           living inside the box as its placeholder, one type face and one
+           size across every field in the group, and the border darkening on
+           focus. Nothing above the box, nothing beside it.
+
+           WHAT WAS WRONG. The lobby had two fields that were the same species
+           and looked like two different components. The note asked its
+           question INSIDE itself at 0.84rem; the name asked its question in a
+           0.6rem mono ALL-CAPS caption stacked above a borderless line at
+           0.95rem, inside a box of its own. Two mechanics, two faces, two
+           sizes, for "tell us a thing" and "tell us another thing" — and the
+           heavier furniture sat on the field that asks LESS.
+
+           P13 IS SUPERSEDED, AND IT WAS ARGUED WELL. It chose the caption on
+           the grounds that a question which stays visible while you type
+           beats one that vanishes. That is true in isolation and it is not
+           what a guest book is: the answer here is a name, the shortest and
+           least ambiguous thing a person can be asked for, and it is being
+           asked for beside a button that says Sign. Mike is choosing the
+           lighter of two correct options, and the consistency it buys across
+           the pair is worth more than the reminder.
+
+           ONE CLASS, so "the template" is a thing in the stylesheet and not a
+           habit — a third field is .wb-field and is correct by default.
+           NOTE: the deck's journal composer on /hr (.hr-jnl-handle /
+           .hr-jnl-text) already conforms — placeholder-in-field, one face
+           across both, bordered box, border lights on focus — in ITS wing's
+           register rather than the lobby's. That is the template working as
+           intended: the mechanics are site-wide, the type is the room's.
+           =================================================================== */
+        .wb-field { width: 100%; display: block; font-family: 'DM Serif Display', serif; font-size: 0.84rem; line-height: 1.45; color: #211f1c; background: #faf8f3; border: 1px solid #c6c2b7; border-radius: 1px; padding: 10px 12px; outline: none; caret-color: #211f1c; transition: border-color 0.25s; }
+        .wb-field::placeholder { color: #a9a59a; font-style: italic; }
+        .wb-field:focus { border-color: #211f1c; }
+        .wb-field-note { resize: none; height: 60px; }
+
+        /* THE COMPOSITION Mike specified: the note first at full width, then
+           the name and the button side by side beneath it, each half. The
+           order is the argument — a visitor is asked the interesting question
+           first and the administrative one second, next to the control that
+           uses it.
+           THE ROW IS A GRID, NOT A FLEX ROW, and that is the difference
+           between "about half" and HALF. Two flex children at flex:1 1 0
+           measured 368.67 and 370.67 of a 739.33 line — the form controls
+           carry intrinsic sizes the free-space distribution never fully
+           cancels, so the pair sat 2px off-centre. grid-template-columns:1fr
+           1fr defines two equal TRACKS and the controls fill what they are
+           given; equal is then a property of the layout rather than an
+           outcome of it. */
+        .wb-form { display: flex; flex-direction: column; gap: 10px; }
+        .wb-form-row { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; gap: 10px; }
+        .wb-form-row > * { min-width: 0; width: auto; }
+
+        /* THE SQUASH COMES OFF THE ROW, and this is a fix rather than a
+           preference. transform:scaleY(1.15) is the sheet's typewriter
+           device, and on a full-width block nobody could see that it makes an
+           element PAINT 15% taller than the box it occupies — the 16px gap
+           note below is a previous round paying for exactly that. Two such
+           elements side by side, with different transform origins, paint two
+           different overhangs off one shared row height, and the pair reads
+           as misaligned no matter what the layout says. The row keeps the
+           book's type; it does not keep the illusion. */
+        .wb-submit { margin-top: 0; padding: 13px; background: transparent; border: 1px solid #211f1c; color: #211f1c; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s; display: block; }
         .wb-submit:hover { background: #211f1c; color: #f5f3ec; }
         .wb-confirmed { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 1rem; color: #211f1c; padding: 14px 0 6px; display: block; transform: scaleY(1.15); }
         @keyframes rise { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
@@ -151,11 +209,15 @@ export default function WbHome() {
            gave the CONTENT 7 rows minus the 2px frame — and the seventh row
            came up 28px short, which is a clipped message by a different route.
            Measured, then counted properly. */
-        /* THE 16px IS NOT DECORATION. The submit button carries transform:
-           scaleY(1.15) — the sheet's typewriter squash — so the button PAINTS
-           about 7px taller than the box it occupies. A 4px gap put the first
-           signature under the button's own bottom edge. The gap has to clear
-           the paint, not the layout. */
+        /* THE 16px WAS PAYING FOR A PAINT OVERHANG THAT NO LONGER EXISTS.
+           The submit button used to carry transform: scaleY(1.15) — the
+           sheet's typewriter squash — so it PAINTED about 7px taller than the
+           box it occupied, and a 4px gap put the first signature under the
+           button's own bottom edge. [B2] took the squash off the form row for
+           its own reasons (two side-by-side elements cannot share a row height
+           and paint two different overhangs), which retires the hazard. The
+           16px stays as ordinary separation between the form and the book —
+           it is now a gap that means what it measures. */
         .wb-entries { --gb-row: 30px; margin-top: 16px; max-height: calc(var(--gb-row) * 7 + 2px); overflow-y: auto; scroll-snap-type: y proximity; overscroll-behavior: contain; border: 1px solid #c6c2b7; border-radius: 1px; background: #faf8f3; scrollbar-width: thin; scrollbar-color: #a9a59a transparent; }
         .wb-entries::-webkit-scrollbar { width: 6px; }
         .wb-entries::-webkit-scrollbar-thumb { background: #a9a59a; border-radius: 3px; }
@@ -255,27 +317,33 @@ export default function WbHome() {
 
           {!submitted ? (
             <>
-              {/* [P13 2026-08-02] ONE PROMPT, NOT TWO.
-                  MIKE: "'What should we call you?' and 'sign here' collapse to
-                  just 'What should we call you?'"
-                  The field asked the same question twice in two registers — a
-                  mono caption above and an italic placeholder inside — and the
-                  placeholder's answer ("sign here…") was an instruction, not an
-                  answer to the question above it. The caption is the better of
-                  the two: it is a question, it stays visible while you type,
-                  and it does not disappear the moment you need it. */}
-              <div className="wb-entry-box">
-                <span className="wb-entry-box-label">What should we call you?</span>
-                <input className="wb-input" value={name}
-                  onChange={e => setName(e.target.value)} maxLength={60} />
+              {/* [B2 2026-08-02] THE BOOK ASKS TWO QUESTIONS THE SAME WAY.
+                  Mike's composition: the note at full width, then the name and
+                  the button beneath it on ONE line, each half. P13's caption
+                  above the name field is superseded — the reasoning is on
+                  `.wb-field` in the sheet above.
+                  "SIGN", not "Sign the Guest Book". At half width the long
+                  label wrapped to two lines and the row lost its balance, and
+                  the short one is not a loss: it sits beside the field it acts
+                  on, under a heading that already says Guest Book. Tight,
+                  intuitive, low-demand — which is the whole brief. */}
+              <div className="wb-form">
+                {/* [P13] "(optional)" IS GONE. Mike's call, and it was doing
+                    harm: the only two fields on the page were labelled "answer
+                    this" and "you don't have to", which is an invitation to
+                    skip the half that makes the book worth reading. Nothing
+                    enforces it either way — a blank note has always been
+                    accepted. */}
+                <textarea className="wb-field wb-field-note"
+                  placeholder="what brought you here?" value={note}
+                  onChange={e => setNote(e.target.value)} maxLength={280} />
+                <div className="wb-form-row">
+                  <input className="wb-field" placeholder="what should we call you?"
+                    value={name} onChange={e => setName(e.target.value)}
+                    maxLength={60} />
+                  <button className="wb-submit" onClick={handleSubmit}>Sign</button>
+                </div>
               </div>
-              {/* [P13] "(optional)" IS GONE. Mike's call, and it was doing
-                  harm: the only two fields on the page were labelled "answer
-                  this" and "you don't have to", which is an invitation to skip
-                  the half that makes the book worth reading. Nothing enforces
-                  it either way — a blank note has always been accepted. */}
-              <textarea className="wb-input wb-textarea" placeholder="what brought you here?" value={note} onChange={e => setNote(e.target.value)} maxLength={280} />
-              <button className="wb-submit" onClick={handleSubmit}>Sign the Guest Book</button>
             </>
           ) : (
             <div className="wb-confirmed">You're in the book. Welcome, Founding Visitor.</div>

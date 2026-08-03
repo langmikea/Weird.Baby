@@ -35,11 +35,28 @@
    answer. That is deliberate: a law expressed as three scattered conditionals
    is a law that will be broken again by the next change to the markup.
 
-   THE ONE CASE THE LAW DOES NOT NAME is a visitor who arrives at /shop
-   directly, having exited no exhibit at all. There is no owner, so nobody
-   takes top billing; and since no exhibit was left, the "otherwise" clause has
-   nothing to bite on — this is the shop's own front door rather than someone's
-   exit, so the house is listed. Stated here rather than decided silently.
+   THE ONE CASE THE LAW DID NOT NAME was a visitor who arrives at /shop
+   directly, having exited no exhibit at all. P11 stated a reading rather than
+   deciding silently — nobody takes top billing, and the house is listed — and
+   invited Mike to overrule.
+
+   [B1 2026-08-02] HE RULED, AND HE RULED THE OTHER HALF OF IT: "house gets
+   top billing and ALL get shown — that's the default for the no-exhibit-exit
+   cases." So a direct arrival is not an absence of an owner, it is the HOUSE'S
+   OWN ROOM: Weird.Baby takes the top slot the way any wing's owner does on
+   exit, and the roster beneath is everybody. The clause reads better as his
+   version than as ours — a shop with no one billed at the top opened on a grid
+   and looked like a directory; a shop that bills its own house looks like a
+   shop that belongs to somebody.
+
+   [B1] AND THE VIEW RESETS BEFORE EVERY ENTRY. Mike: "no stale billing from a
+   prior visit." Billing itself has always been derived from the URL and so was
+   never stale — but the SIGHT of it could be, and that is the same complaint:
+   the browser restores the scroll offset of the previous visit, so a visitor
+   who had scrolled to the bottom of the roster and came back through a
+   different exhibit's exit was returned to the middle of the page with the new
+   top billing above their head, unseen. Whoever is billed at the top is the
+   one thing this room has to say, and it is said at the top.
    =========================================================================== */
 
 import React, { useEffect, useMemo, useRef } from "react";
@@ -76,10 +93,13 @@ function billing(fromWing, ownerId) {
     : walEntries;
 
   /* CLAUSE ONE. The owner is the album's artist where the wing said so
-     (`&owner=`), the wing itself where the wing IS an artist (`?from=hr`), and
-     the house where the house owns the wing. */
+     (`&owner=`), the wing itself where the wing IS an artist (`?from=hr`), the
+     house where the house owns the wing — and [B1] the house again where no
+     exhibit was exited at all, because an unowned front door is still the
+     house's front door. */
   const ownerKey = ownerId || (fromWing === "hr" ? "hunter-root"
                              : houseOwns ? "wb"
+                             : direct ? "wb"
                              : null);
   const top = ownerKey ? pool.find((e) => e.id === ownerKey) || null : null;
 
@@ -132,6 +152,20 @@ export default function GiftShop() {
   const ownerId = searchParams.get("owner") || searchParams.get("top");
 
   const { top, rest } = useMemo(() => billing(fromId, ownerId), [fromId, ownerId]);
+
+  /* [B1] THE VIEW RESETS BEFORE EVERY ENTRY — on arrival and on any change of
+     who is billed. `scrollRestoration:"manual"` is the half that browsers do
+     behind your back: without it Chrome re-applies the previous offset AFTER
+     this effect runs, and the scrollTo is silently undone. It is restored on
+     the way out so the rest of the museum keeps the browser's own behaviour,
+     which is the right behaviour everywhere the top of the page is not the
+     whole message. */
+  useEffect(() => {
+    const prev = typeof history !== "undefined" && history.scrollRestoration;
+    try { if (prev) history.scrollRestoration = "manual"; } catch { /* unsupported */ }
+    window.scrollTo(0, 0);
+    return () => { try { if (prev) history.scrollRestoration = prev; } catch { /* unsupported */ } };
+  }, [fromId, ownerId]);
 
   const bellRef = useRef(null);
   useEffect(() => {

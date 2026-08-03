@@ -287,6 +287,36 @@ body:has(.vp-face) .vp-area::before{display:none}
   font-size:var(--fs-micro);letter-spacing:.06em;color:#7d7869;
   margin-top:8px;line-height:1.5}
 .vp-face-papa{border-top:1px dashed #3b3831;padding-top:8px}
+
+/* ==== [B8 2026-08-02] THE REEL — the microfiche container =================
+   Mike's ruling is that the owner's manual is ACTUAL SCANS reached by
+   microfiche-class technology, not a typeset pastiche. The scans are his to
+   make, so what ships today is the container and an honest empty state.
+   It is drawn as a piece of EQUIPMENT rather than as a card: a ruled box, a
+   mono legend, a frame count on the right. That is the register the wing
+   already speaks (`vp-box`, the panel's plate), so a reader arriving in it
+   from the plate wall does not change rooms. */
+.vp-reel{border:1px solid var(--wb-gold-lo);background:var(--wb-ink-soft);
+  padding:11px 13px;display:flex;flex-direction:column;gap:9px;
+  break-inside:avoid}
+.vp-reel-head{display:flex;align-items:baseline;justify-content:space-between;
+  gap:12px;border-bottom:1px solid var(--wb-border);padding-bottom:7px}
+.vp-reel-label{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-small);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--wb-gold)}
+.vp-reel-count{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--wb-gold-lo);white-space:nowrap}
+.vp-reel-note{font-family:'DM Serif Display',Georgia,serif;
+  font-size:var(--fs-body);line-height:1.5;color:var(--wb-gold-lo);margin:0}
+.vp-reel-go{align-self:flex-start;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-small);letter-spacing:.2em;text-transform:uppercase;
+  background:var(--wb-gold);color:var(--wb-ink-card);
+  border:1px solid var(--wb-gold);padding:9px 18px;cursor:pointer;
+  transition:background .2s,color .2s}
+.vp-reel-go:hover,.vp-reel-go:focus-visible{background:transparent;
+  color:var(--wb-gold);outline:none}
 @media (max-width:640px){
   .vp-recipe-row{flex-direction:column}
   .vp-recipe-go{align-self:flex-start}
@@ -1544,3 +1574,74 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 @media (max-width:720px){
   .tl-active{border-left-color:#b8974a;background:rgba(184,151,74,.14)}
 }
+
+/* ===========================================================================
+   [B4 2026-08-02] THE ROBOTS WING IS BLACK AND WHITE. NO EXCEPTIONS.
+   MIKE: "Robots is B&W ONLY — the site-wide photo law applies to the W.B R
+   wing without exception (the plates included; WAL keeps its color, they
+   bring it)."
+   THE STANDING LAW AND ITS EXCEPTION, STATED TOGETHER SO NEITHER IS LOST.
+   The museum's rule has been "brand frames the vessel; content stays vivid" —
+   a B&W shell around vivid art, which is why `.vp-face-still` and
+   `.vp-poster img` were grayscaled (they are chrome) and `.vp-collage-tile
+   img` was not (it is content). WAL proves that rule: the artists bring the
+   colour and the frame gets out of the way.
+   ROBOTS IS THE CASE THE RULE DID NOT ANTICIPATE, because here the museum IS
+   the artist. Every photograph in this wing is ours, of our own 1965 machine,
+   printed by us — there is no guest's colour to protect, and a lone colour
+   plate in a monochrome room reads as a mistake rather than as vibrancy.
+   SCOPED BY WING, NOT BY COMPONENT, and that is the whole point: written per
+   component this is nine rules that the tenth new surface quietly escapes —
+   which is exactly how the plate wall arrived in colour in the first place,
+   inheriting a renderer whose grayscale lived somewhere else. Written as one
+   rule against the wing, a surface added next month is monochrome BY
+   CONSTRUCTION and nobody has to remember.
+   THE FILES ON DISK ARE UNTOUCHED. The law is applied where a plate is SHOWN,
+   so the negatives stay negatives and the day this is revisited it is one
+   selector, not nine re-exports.
+   THE ONE THING DELIBERATELY OUTSIDE IT is the Portal's live twin: an iframe
+   of the machine's own running screen is not a photograph, it is the machine,
+   and the wing's own standing rule is "photos are paper; video is
+   television". FLAGGED for Mike rather than decided here.
+   =========================================================================== */
+.ex-root[data-exhibit="robots"] .vp-collage-tile img,
+.ex-root[data-exhibit="robots"] .vp-qcard-still,
+.ex-root[data-exhibit="robots"] .cf-album img,
+.ex-root[data-exhibit="robots"] .ex-album-banner img,
+.ex-root[data-exhibit="robots"] .vp-face-still,
+.ex-root[data-exhibit="robots"] .vp-poster img{
+  filter:grayscale(1) contrast(1.03)}
+
+/* ===========================================================================
+   [B9 2026-08-02] THE EVIDENCE CLASSES.
+   A class is a WORD the data supplies, so this styles the badge and never the
+   vocabulary — there is no list of permitted classes anywhere in the CSS or
+   the JS, which is what "data-driven, no new species" has to mean if it is to
+   survive the next class Mike invents.
+   =========================================================================== */
+.vp-fe-titlerow{display:flex;align-items:baseline;justify-content:space-between;
+  gap:10px;min-width:0}
+.vp-fe-titlerow .vp-fe-title{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.vp-fe-class{align-self:center;flex-shrink:0;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--wb-gold-lo);border:1px solid var(--wb-border);
+  padding:1px 7px;margin:2px 0;white-space:nowrap}
+.vp-rec-head .vp-fe-class{margin-left:auto}
+/* the wire block is the register's own look, indented as a quotation of the
+   machine rather than as the museum's own voice. */
+.vp-rec-wire{margin-top:10px;border-top:1px solid var(--wb-border)}
+/* PLATES ATTACHED TO A RECORD are a contact sheet, not a wall: small, in a
+   row, and every one a door into the same reader the plate wall opens. The
+   tilt is deliberately absent here — a wall is pinned up, a contact sheet is
+   laid flat. */
+.vp-rec-plates{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.vp-rec-plate{display:flex;flex-direction:column;gap:4px;width:132px;
+  padding:0;border:0;background:none;cursor:pointer;text-align:left;
+  transition:transform .18s}
+.vp-rec-plate:hover,.vp-rec-plate:focus-visible{transform:scale(1.04);outline:none}
+.vp-rec-plate img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;
+  border:1px solid var(--wb-border)}
+.vp-rec-plate-cap{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.06em;line-height:1.35;
+  color:var(--wb-gold-lo)}

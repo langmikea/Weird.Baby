@@ -1163,10 +1163,55 @@ function InstrumentPanel({ decl }) {
    stage. It gets a page of its own and IS ALLOWED TO EXCEED IT - and says so
    in the console rather than clipping silently, because silently cropping is
    the trap coming back wearing a different hat. The fix for a real one is to
-   split it into smaller blocks upstream; the stage refuses to pretend. */
-function Stage({ blocks, deps, footer }) {
+   split it into smaller blocks upstream; the stage refuses to pretend.
+
+   ==== [B5 2026-08-02] A WALL IS NOT A COLUMN. ============================
+   MIKE, with a screenshot: "the plates content is clipped and does not
+   scroll; pages work but page 2 renders BLANK."
+   BOTH SYMPTOMS, ONE CAUSE, MEASURED ON THE LIVE PAGE. The plate wall is a
+   `repeat(auto-fill,minmax(200px,1fr))` grid, and in a 582px column that
+   auto-fills to TWO tiles across - so nine plates stack into five rows and
+   the block measures 1134px against a column that holds 758. The stage did
+   exactly what it promises above: gave it a column of its own, warned, and
+   overran - and `.stg-col{overflow:hidden}` ate 376px, which is three
+   plates, with no scrollbar to reach them. The footer, being the only block
+   left over, then took a page to itself: 17px of type on an otherwise empty
+   sheet. That is the "blank page 2".
+   SPLITTING IT WAS THE WRONG FIX and worth saying so, because it is the fix
+   this component's own error message recommends. Split by tile, each tile
+   becomes a one-child grid that auto-fills to two tracks and sits in the
+   left one - a vertical strip of half-empty rows. The wall stops being a
+   wall to satisfy the packer.
+   SO THE PACKER LEARNED THE OTHER SHAPE INSTEAD. A block marked
+   `data-stage-full` is not packed into a column at all: it takes a PAGE, at
+   the page's full width. The same nine plates auto-fill to five across in
+   1203px and land in two rows - 342px, comfortably inside the sheet. The
+   wall gets the wall, which is what it was always asking for.
+   ORDER IS PRESERVED: blocks before it pack into pages, it takes the next
+   page, blocks after it pack into the pages that follow. A full block is a
+   page break with a picture on it, not a block that jumped the queue.
+
+   AND A WALL TOO BIG FOR ONE PAGE TAKES SEVERAL. Caught by measurement at
+   387px before it could ship: on a phone the sheet is only 223px tall (the
+   carousel, the tracklist and the transport have already spent the screen),
+   and nine plates at two-across are 823px. The full page fixed the desktop
+   and left SIX OF NINE PLATES clipped on a phone — the original defect, at a
+   width nobody had looked at.
+   So a full block is measured AT PAGE WIDTH and, if it overruns, is divided
+   into as many full pages as it needs. The division is arithmetic on a
+   uniform grid — n children spread over ceil(height/page) pages — which is
+   exactly right for a wall of same-shaped tiles and is the only assumption
+   this makes. Each page renders a clone of the container holding its own
+   run, so every page is a real wall with the container's own layout, not a
+   list of orphaned tiles.
+   ON A DESKTOP THIS PATH IS INERT BY CONSTRUCTION: the wall measures 423px
+   into a 758px sheet, one chunk, the identical single page as before. */
+function Stage({ blocks, deps, footer, full, fullMeta }) {
   const wrapRef = useRef(null);
   const measRef = useRef(null);
+  /* the second measuring layer, pinned to the PAGE's width rather than a
+     column's, because that is the width a full block will really have. */
+  const measFullRef = useRef(null);
   /* a page is a LIST OF COLUMNS, each column a [from,to) run of blocks. */
   const [pages, setPages] = useState([[[0, blocks.length]]]);
   const [pg, setPg] = useState(0);
@@ -1175,6 +1220,7 @@ function Stage({ blocks, deps, footer }) {
   /* one measure, run on layout and on any resize of the stage */
   useLayoutEffect(() => {
     const wrap = wrapRef.current, meas = measRef.current;
+    const measFull = measFullRef.current;
     if (!wrap || !meas) return;
     function plan() {
       const box = wrap.getBoundingClientRect();
@@ -1244,33 +1290,122 @@ function Stage({ blocks, deps, footer }) {
          let the LAST page overrun by exactly that much (measured: 30px on a
          3-block page, 82px on a 7-block one). Counted properly now. */
       const gap = parseFloat(getComputedStyle(meas).rowGap || getComputedStyle(meas).gap || 0) || 0;
-      /* ---- pass 1: pack COLUMNS, each of which must hold on its own ---- */
-      const runs = [];
-      let start = 0, run = 0;
-      kids.forEach((el, i) => {
-        const h = el.getBoundingClientRect().height +
-                  parseFloat(getComputedStyle(el).marginBottom || 0) +
-                  (i > start ? gap : 0);
-        if (h > colH && run === 0) {
-          /* taller than a whole column: its own column, and we say so. The
-             stage still refuses to crop silently — it overruns loudly. */
-          runs.push([i, i + 1]);
-          try {
-            console.warn("[stage] block " + i + " is " + Math.round(h) +
-              "px and a column holds " + Math.round(colH) +
-              "px - it gets a column of its own and will overrun. Split it upstream.");
-          } catch (e) { /* console may be absent */ }
-          start = i + 1; run = 0;
-          return;
+      /* ---- pass 1: pack COLUMNS, each of which must hold on its own ----
+         Packing runs over a RANGE rather than over the whole list, because a
+         full-page block splits the document into stretches that pack
+         independently. Within a stretch this is the identical greedy packer
+         it has always been. */
+      function packRange(from, to) {
+        const runs = [];
+        let start = from, run = 0;
+        for (let i = from; i < to; i++) {
+          const el = kids[i];
+          const h = el.getBoundingClientRect().height +
+                    parseFloat(getComputedStyle(el).marginBottom || 0) +
+                    (i > start ? gap : 0);
+          if (h > colH && run === 0) {
+            /* taller than a whole column: its own column, and we say so. The
+               stage still refuses to crop silently — it overruns loudly. */
+            runs.push([i, i + 1]);
+            try {
+              console.warn("[stage] block " + i + " is " + Math.round(h) +
+                "px and a column holds " + Math.round(colH) +
+                "px - it gets a column of its own and will overrun. Split it " +
+                "upstream, or mark it data-stage-full if it wants the page.");
+            } catch (e) { /* console may be absent */ }
+            start = i + 1; run = 0;
+            continue;
+          }
+          if (run + h > colH && i > start) { runs.push([start, i]); start = i; run = h; }
+          else { run += h; }
         }
-        if (run + h > colH && i > start) { runs.push([start, i]); start = i; run = h; }
-        else { run += h; }
-      });
-      if (start < kids.length) runs.push([start, kids.length]);
+        if (start < to) runs.push([start, to]);
+        return runs;
+      }
 
-      /* ---- pass 2: n columns make a page ---- */
+      /* ---- pass 2: n columns make a page, and a FULL block makes its own --
+         The document is walked in order and cut at every full block, so the
+         reading order out is the authoring order in. A full page is recorded
+         as `{full:i}` rather than as a run, which is what lets the renderer
+         draw it at the page's width instead of a column's. */
       const out = [];
-      for (let c = 0; c < runs.length; c += n) out.push(runs.slice(c, c + n));
+      function flush(from, to) {
+        if (to <= from) return;
+        const runs = packRange(from, to);
+        for (let c = 0; c < runs.length; c += n) out.push(runs.slice(c, c + n));
+      }
+      /* HOW MANY TILES A PAGE OF THIS WALL HOLDS, measured at the width it
+         will really have — and measured as ROWS, which is the unit a wall is
+         actually made of.
+         THE OBVIOUS ARITHMETIC IS WRONG AND WAS TRIED FIRST: dividing the
+         wall's height by the page's height says nine plates over 823px need
+         four pages, so three tiles a page — and three tiles across a
+         two-column grid is TWO ROWS, 333px into a 223px sheet. Height does
+         not divide linearly across a grid because a grid quantises to rows,
+         so the number that matters is how many whole rows fit and how many
+         tiles are in a row. Both are read off the layer rather than assumed,
+         so a wall with different tiles, a different grid or a different
+         breakpoint needs nothing here. */
+      const fullH = new Map();
+      if (measFull) {
+        const pw = Math.round(wrap.clientWidth);
+        if (Math.round(measFull.clientWidth) !== pw) {
+          measFull.style.width = pw + "px";
+          void measFull.offsetWidth;
+        }
+        Array.from(measFull.children).forEach((el, i) => {
+          if (!full || !full.has(i)) return;
+          const h = el.getBoundingClientRect().height;
+          const tiles = Array.from(el.children);
+          let per = tiles.length;
+          if (tiles.length > 1) {
+            const t0 = tiles[0].getBoundingClientRect().top;
+            const across = tiles.filter(
+              k => Math.abs(k.getBoundingClientRect().top - t0) < 2).length;
+            const nextRow = tiles.find(
+              k => k.getBoundingClientRect().top - t0 > 2);
+            const rowH = nextRow ? nextRow.getBoundingClientRect().top - t0 : h;
+            const rows = Math.max(1, Math.floor(colH / rowH));
+            per = Math.max(1, across * rows);
+          }
+          fullH.set(i, { h, per });
+        });
+      }
+      let seg = 0;
+      for (let i = 0; i < kids.length; i++) {
+        if (!full || !full.has(i)) continue;
+        flush(seg, i);
+        const meta = fullMeta && fullMeta.get(i);
+        const m = fullH.get(i) || { h: 0, per: 0 };
+        const h = m.h;
+        /* one page unless it genuinely does not fit; a container we cannot
+           divide (no children to split on) keeps the old behaviour and
+           overruns loudly rather than silently. */
+        const per = m.per;
+        const parts = (meta && meta.count > 1 && h > colH && per > 0)
+          ? Math.ceil(meta.count / per) : 1;
+        if (parts > 1) {
+          for (let c = 0; c < parts; c++) {
+            const a = c * per, b = Math.min(meta.count, a + per);
+            if (b > a) out.push({ full: i, from: a, to: b });
+          }
+        } else {
+          if (h > colH) {
+            try {
+              console.warn("[stage] full block " + i + " is " + Math.round(h) +
+                "px against a " + Math.round(colH) + "px page and cannot be " +
+                "divided - it will overrun. Give its container children to " +
+                "split on.");
+              /* optional catch binding — the sibling warn above uses
+                 `catch (e)` and is one of the file's documented pre-existing
+                 lint errors; a new one should not add a second. */
+            } catch { /* console may be absent */ }
+          }
+          out.push({ full: i });
+        }
+        seg = i + 1;
+      }
+      flush(seg, kids.length);
       setPages(out.length ? out : [[[0, kids.length]]]);
     }
     plan();
@@ -1284,7 +1419,10 @@ function Stage({ blocks, deps, footer }) {
   useEffect(() => { setPg(0); }, [deps]);
   const last = pages.length - 1;
   const cur = Math.min(pg, last);
-  const pageCols = pages[cur] || [[0, blocks.length]];
+  const page = pages[cur] || [[0, blocks.length]];
+  /* a page is either a list of column runs or a single full-width block */
+  const fullIdx = Array.isArray(page) ? null : page.full;
+  const pageCols = Array.isArray(page) ? page : [];
 
   /* the transport is the only navigation, and it is absent when there is
      only one page - a single-page document does not need a page control. */
@@ -1330,10 +1468,27 @@ function Stage({ blocks, deps, footer }) {
               nothing to the right of it reads as a fault rather than as a
               column that ran out.
           So the page is padded to `cols` columns and the rule is dropped. */}
+      {/* [B5] A FULL PAGE IS ONE COLUMN THE WIDTH OF THE SHEET. It keeps the
+          `.stg-page` element (and so the measurement geometry) and simply
+          drops the two-column furniture: no `stg-2col`, no divider rule, one
+          `.stg-col` that is the page. */}
       <div ref={wrapRef} className={"stg-page" +
-             (cols > 1 ? " stg-2col" : "") +
-             (pageCols.length < 2 ? " stg-1up" : "")}>
-        {Array.from({ length: Math.max(cols, pageCols.length) }, (_, ci) => {
+             (fullIdx === null && cols > 1 ? " stg-2col" : "") +
+             (fullIdx !== null ? " stg-full" : "") +
+             (fullIdx === null && pageCols.length < 2 ? " stg-1up" : "")}>
+        {fullIdx !== null ? (
+          <div className="stg-col">{(() => {
+            /* a divided wall renders a CLONE of its own container holding
+               this page's run, so each page is a real wall (its grid, its
+               gaps, its tilts) rather than a handful of loose tiles. */
+            const meta = fullMeta && fullMeta.get(fullIdx);
+            if (meta && page.to !== undefined) {
+              return React.cloneElement(meta.el, { key: "f" + page.from },
+                meta.kids.slice(page.from, page.to));
+            }
+            return blocks[fullIdx];
+          })()}</div>
+        ) : Array.from({ length: Math.max(cols, pageCols.length) }, (_, ci) => {
           const r = pageCols[ci];
           return (
             <div className="stg-col" key={ci}>
@@ -1346,6 +1501,9 @@ function Stage({ blocks, deps, footer }) {
           reachable by pointer or by a screen reader. */}
       <div ref={measRef} className={"stg-measure" + (cols > 1 ? " stg-2col" : "")}
            aria-hidden="true">{blocks}</div>
+      {/* the page-width layer. Only full blocks are read off it, but it holds
+          them all so an index into `blocks` means the same thing in both. */}
+      <div ref={measFullRef} className="stg-measure" aria-hidden="true">{blocks}</div>
       {/* ==== [STAGE FIX 2026-08-02, part four] THE TRANSPORT ALWAYS HOLDS ITS
           GROUND, and this is the last of the four and the one that was really
           doing the damage.
@@ -1390,8 +1548,16 @@ function Stage({ blocks, deps, footer }) {
    for splitting is expanded into one block per child, each re-wrapped in a
    clone of its own container so it keeps its element type and its classes.
    That is what lets a long list break across pages by ROW. */
+/* `data-stage-full` IS THE OPPOSITE INSTRUCTION and the two are exclusive by
+   nature: split says "this is many things, break it up", full says "this is
+   one thing and it wants the whole sheet". A wall of plates is the second. */
 function StageChildren({ children, deps, footer }) {
   const blocks = [];
+  const full = new Set();
+  /* what a full block would need to divide itself: its own element (so a
+     page can be a clone of it) and its children (so a page can hold a run).
+     Recorded here because this is the only place that still has them. */
+  const fullMeta = new Map();
   React.Children.toArray(children).forEach((child, i) => {
     const split = child && child.props && child.props["data-stage-split"];
     if (split && child.props.children) {
@@ -1399,10 +1565,16 @@ function StageChildren({ children, deps, footer }) {
         blocks.push(React.cloneElement(child, { key: "s" + i + "-" + j }, row));
       });
     } else {
+      if (child && child.props && child.props["data-stage-full"]) {
+        const kids = React.Children.toArray(child.props.children);
+        fullMeta.set(blocks.length, { el: child, kids, count: kids.length });
+        full.add(blocks.length);
+      }
       blocks.push(child);
     }
   });
-  return <Stage blocks={blocks} deps={deps} footer={footer} />;
+  return <Stage blocks={blocks} deps={deps} footer={footer}
+                full={full} fullMeta={fullMeta} />;
 }
 
 /* [W7 2026-08-02] THE FLAT ALTERNATIVE TO THE STAGE — one column, full
@@ -1947,9 +2119,18 @@ export default function Exhibit({ artist }) {
      `bodyKey`, and the reason the shared engine still knows nothing about what
      any of these doors open. */
   const linkEvent = artist.linkEvent || "wb-wal-open-link";
-  const openLink = useCallback((href) => {
+  /* [B6 2026-08-02] THE DOOR MAY DESCRIBE WHAT IS BEHIND IT.
+     `extra` is merged into the event detail and is OPTIONAL EVERYWHERE: a
+     door that says only "here is an href" behaves exactly as it always did,
+     which is why WAL needed no change. What it buys is that a wall of plates
+     can hand its wing THE WHOLE SET and the tapped index, so the wing can
+     open a viewer that pages rather than a tab that does not. The engine
+     still knows nothing about viewers — it describes the door and dispatches;
+     what opens is the wing's business, exactly as with the twin. */
+  const openLink = useCallback((href, extra) => {
     if (!href) return;
-    window.dispatchEvent(new CustomEvent(linkEvent, { detail: { href } }));
+    window.dispatchEvent(new CustomEvent(linkEvent, {
+      detail: extra ? { href, ...extra } : { href } }));
   }, [linkEvent]);
 
   const thumbTrack = activeTrack !== null ? album.tracks[activeTrack] : album.tracks.find(t => t.videos.length > 0);
@@ -2317,10 +2498,25 @@ export default function Exhibit({ artist }) {
                            flow — no pagination, no internal scrolling; the
                            document is the one thing that scrolls. Same
                            children, different frame; the robots wing keeps
-                           its stage. */
+                           its stage.
+                           [B5 2026-08-02] THE FOOTER RIDES THE TRANSPORT,
+                           WHICH IS THE HOME IT WAS BUILT FOR.
+                           `footer={face.footer ? null : null}` — a ternary
+                           whose two branches are the same value — had
+                           neutered the prop, so `Stage`'s footer slot (it
+                           renders "<footer> · Page 1 of 2") had been fed
+                           nothing since it was written, while the face's
+                           footer stayed a body BLOCK. Being the last block,
+                           it is the one that gets stranded: on the plates
+                           face it took a page to itself, 17px of type on an
+                           empty sheet, which is the "blank page 2" Mike
+                           screenshotted.
+                           A running foot belongs on the page furniture, not
+                           in the page body. Flat wings have no transport, so
+                           there it stays a block exactly as before. */
                         <FaceFlow flat={flatFaces}
                           deps={String(activeTrack) + ":" + String(openEntry)}
-                          footer={face.footer ? null : null}>
+                          footer={face.footer}>
                         {/* [F1 2026-07-31] THE PHOTO IS NOT A BANNER (Mike, doctrine).
                             S7 moved the still INSIDE the viewer, which was right,
                             but it landed as a full-width block across the top —
@@ -2543,7 +2739,20 @@ export default function Exhibit({ artist }) {
                                 <Card key={ci}
                                   className={"vp-qcard" + (c.watch ? " vp-qcard-watch" : "") +
                                              (c.url ? "" : " vp-qcard-flat")}
-                                  style={{ "--tilt": `${((ci * 5) % 5) - 2}deg` }}
+                                  /* [B3 2026-08-02] THE POST-ITS GET THE
+                                     COLLAGE'S OWN TILT VOCABULARY (Mike).
+                                     What was here was `((ci*5)%5)-2`, and a
+                                     multiple of five is never anything but
+                                     zero modulo five: EVERY card in every
+                                     deck was pinned at exactly -2deg. The
+                                     wall it was imitating uses a stride
+                                     coprime with its modulus — `(i*7)%9` walks
+                                     0,7,5,3,1,8,6,4,2 before it repeats — so
+                                     adopting the wall's own numbers is both
+                                     the fix and the instruction: one tilt
+                                     vocabulary, used by everything pinned to
+                                     these walls. */
+                                  style={{ "--tilt": `${((ci * 7) % 9) - 4}deg` }}
                                   onClick={c.url ? () => openLink(c.url) : undefined}>
                                   {c.watch && (
                                     <img className="vp-qcard-still" alt=""
@@ -2580,6 +2789,52 @@ export default function Exhibit({ artist }) {
                             {face.lines.map((l, i) => <li key={i}>{l}</li>)}
                           </ul>
                         )}
+                        {/* ==== [B8 2026-08-02] THE REEL ======================
+                            MIKE'S RULING, recorded where the thing lives: the
+                            owner's manual must be ACTUAL SCANS/PHOTOGRAPHS of
+                            the ACTUAL manual, reached through microfiche-class
+                            technology. Not "in the style of" — the immersion
+                            is the point, and a typeset pastiche of a 1965 page
+                            is a drawing of evidence rather than evidence. The
+                            generated PDF and plates become THE SOURCE MIKE
+                            PRINTS AND PHOTOGRAPHS; the photograph of that
+                            print is the artifact.
+                            SO THE CONTAINER IS BUILT AND THE REEL IS EMPTY,
+                            and it says which. `reel.plates` is the same shape
+                            as a collage tile, which is deliberate: the wing's
+                            viewer already pages and zooms a set of plates, so
+                            when the scans arrive they are DATA in this file
+                            and nothing here changes. An empty reel renders the
+                            honest state instead of a promise — the same rule
+                            the face itself was written under. */}
+                        {face.reel && (() => {
+                          const frames = face.reel.plates || [];
+                          return (
+                            <div className="vp-reel">
+                              <div className="vp-reel-head">
+                                <span className="vp-reel-label">
+                                  {face.reel.label || "MICROFICHE"}
+                                </span>
+                                <span className="vp-reel-count">
+                                  {frames.length
+                                    ? frames.length + (frames.length === 1 ? " frame" : " frames")
+                                    : "reel empty"}
+                                </span>
+                              </div>
+                              {frames.length > 0 ? (
+                                <button className="vp-reel-go"
+                                  onClick={() => openLink(frames[0].img,
+                                    { set: frames, index: 0, setTitle: face.title })}>
+                                  {face.reel.cta || "LOAD REEL"}
+                                </button>
+                              ) : (
+                                face.reel.note && (
+                                  <p className="vp-reel-note">{face.reel.note}</p>
+                                )
+                              )}
+                            </div>
+                          );
+                        })()}
                         {/* [X3 2026-07-30] THE FIRST LAYER. `lines` is a
                             register — a few fixed key/value facts about the
                             object. `entries` is the object's own CONTENTS: the
@@ -2641,7 +2896,26 @@ export default function Exhibit({ artist }) {
                                   <button className="vp-rec-open" onClick={() => setOpenEntry(i)}>
                                     {en.stamp && <span className="vp-fe-stamp">{en.stamp}</span>}
                                     <span className="vp-fe-body">
-                                      <span className="vp-fe-title">{en.title}</span>
+                                      {/* [B9] the class rides the INDEX, which is
+                                          the point of classing at all: a reader
+                                          scanning the register can see that a
+                                          week brought a transmission rather than
+                                          another paragraph, before opening it.
+                                          IT SHARES THE TITLE'S LINE, and that is
+                                          arithmetic rather than taste: measured
+                                          on its own row it added ~20px to each of
+                                          ten rows and pushed the index onto a
+                                          second page — a class badge that costs a
+                                          page of navigation is not paying for
+                                          itself. Beside the title it costs
+                                          nothing and reads as what it is, an
+                                          attribute of the entry. */}
+                                      <span className="vp-fe-titlerow">
+                                        <span className="vp-fe-title">{en.title}</span>
+                                        {en.evidence && (
+                                          <span className="vp-fe-class">{en.evidence}</span>
+                                        )}
+                                      </span>
                                       {en.line && <span className="vp-fe-line vp-rec-peek">{en.line}</span>}
                                     </span>
                                   </button>
@@ -2656,9 +2930,56 @@ export default function Exhibit({ artist }) {
                                       title="close this record">
                                 {en.stamp && <span className="vp-fe-stamp">{en.stamp}</span>}
                                 <span className="vp-rec-title">{en.title}</span>
+                                {en.evidence && (
+                                  <span className="vp-fe-class">{en.evidence}</span>
+                                )}
                               </button>
                               <div className="vp-rec-body">
                                 {en.line && <p className="vp-rec-line">{en.line}</p>}
+                                {/* ==== [B9 2026-08-02] THE RECORD CARRIES
+                                    EVIDENCE, NOT ONLY PARAGRAPHS ============
+                                    MIKE: "The Record needs to carry more than
+                                    plates: photos, electronic data
+                                    transmissions and other evidence classes
+                                    arrive long before units do. Extend the
+                                    content model to accept those classes
+                                    (data-driven, no new species) so the binge
+                                    has material."
+                                    NO NEW SPECIES, LITERALLY. A class is a
+                                    WORD on the entry (`evidence`) — the
+                                    renderer prints it and has no list of
+                                    permitted values, so a class Mike invents
+                                    next month needs no code. A payload is one
+                                    of the two vocabularies this face already
+                                    speaks: `wire` is the register block the
+                                    machine pages already use, and `plates` is
+                                    the same set the plate wall and the
+                                    microfiche reader take — so a photograph
+                                    attached to a Tuesday in 2024 opens in the
+                                    identical reader as a plate off the wall.
+                                    An entry declaring neither renders exactly
+                                    as it did before, which is why the ten
+                                    entries already written did not move. */}
+                                {Array.isArray(en.wire) && en.wire.length > 0 && (
+                                  <ul className="vp-face-lines vp-rec-wire">
+                                    {en.wire.map((l, wi) => <li key={wi}>{l}</li>)}
+                                  </ul>
+                                )}
+                                {Array.isArray(en.plates) && en.plates.length > 0 && (
+                                  <div className="vp-rec-plates">
+                                    {en.plates.map((p, pi) => (
+                                      <button key={pi} className="vp-rec-plate"
+                                        onClick={() => openLink(p.img,
+                                          { set: en.plates, index: pi,
+                                            setTitle: en.title })}>
+                                        <img src={p.img} alt="" />
+                                        {p.label && (
+                                          <span className="vp-rec-plate-cap">{p.label}</span>
+                                        )}
+                                      </button>
+                                    ))}
+                                  </div>
+                                )}
                                 {en.note && <p className="vp-fe-note">{en.note}</p>}
                               </div>
                               {/* THE PAGE ENDS DEFINITIVELY. A reader should never
@@ -2729,12 +3050,27 @@ export default function Exhibit({ artist }) {
                             video through the wing's own link seam. DATA on
                             the face like everything else: a wing that
                             declares no collage renders none. */}
+                        {/* [B5 2026-08-02] `data-stage-full` — THE WALL TAKES
+                            THE PAGE. Measured before the mark went on: 1134px
+                            of wall into a 758px column, three plates clipped
+                            away under `overflow:hidden` with no scrollbar to
+                            reach them. At the page's full width the same grid
+                            auto-fills five across and lands in two rows. The
+                            flat wings (WAL) never enter the stage, so their
+                            collage is untouched by this. */}
                         {Array.isArray(face.collage) && face.collage.length > 0 && (
-                          <div className="vp-collage">
+                          <div className="vp-collage" data-stage-full="1">
                             {face.collage.map((c, i) => (
                               <button key={i} className="vp-collage-tile"
                                 style={{ "--tilt": `${((i * 7) % 9) - 4}deg` }}
-                                onClick={() => openLink(c.href)}>
+                                /* [B6] the tile hands over the WHOLE WALL and
+                                   which tile was tapped. A wing with a viewer
+                                   (robots) opens at that plate and pages
+                                   through the rest; a wing without one (WAL)
+                                   reads `href` and ignores the extras, which
+                                   is why nothing over there had to change. */
+                                onClick={() => openLink(c.href,
+                                  { set: face.collage, index: i, setTitle: face.title })}>
                                 {/* eager, not lazy: the collage IS the page's
                                     payoff and a dozen poster frames are cheap;
                                     a wall that fills in as you watch reads as
@@ -2748,7 +3084,9 @@ export default function Exhibit({ artist }) {
                             ))}
                           </div>
                         )}
-                        {face.footer && (
+                        {/* [B5] staged wings put this on the transport (above);
+                            flat wings have no transport, so it stays here. */}
+                        {face.footer && flatFaces && (
                           <div className="vp-face-footer">{face.footer}</div>
                         )}
                         {/* [O4 2026-07-30] THE PORTAL'S OWN FURNITURE.
