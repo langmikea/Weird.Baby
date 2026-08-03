@@ -60,7 +60,8 @@
    =========================================================================== */
 
 import React, { useEffect, useMemo, useRef } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import MuseumBar from "../../components/MuseumBar.jsx";
 import { wbRoster } from "../../data/wb_roster";
 import { worthAListenArtists } from "../../data/artists/worth-a-listen.js";
 import "./GiftShop.css";
@@ -210,14 +211,11 @@ export default function GiftShop() {
         aria-hidden="true"
       />
 
-      {/* TITLE BAR — museum-standard exhibit format (Mike 2026-07-06):
-          brand left → lobby · room name center · exit right → lobby.
-          Mirrors Exhibit.jsx's ex-nav (brand / artist / Gift Shop). */}
-      <div className="gift-shop__nav">
-        <Link to="/" className="gift-shop__nav-logo">Weird.Baby</Link>
-        <h1 className="gift-shop__nav-sub">Gift Shop</h1>
-        <Link to="/" className="gift-shop__nav-return">Lobby</Link>
-      </div>
+      {/* TITLE BAR — museum-standard format (Mike 2026-07-06): brand left →
+          lobby · room name centre · exit right → lobby.
+          [R2 2026-08-02] It no longer MIRRORS the exhibit's bar, which is what
+          the retired comment here said it did — it IS the exhibit's bar. */}
+      <MuseumBar room="Gift Shop" />
 
       {/* CLAUSE ONE — TOP BILLING. The owner of the exhibit that was exited;
           [B1] the HOUSE on a direct arrival, because an unowned front door is

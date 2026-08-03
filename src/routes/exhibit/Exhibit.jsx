@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, useLayoutEffect, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 import { makeFactCycler, splitFact } from "../../lib/fact-select.js";
+import MuseumBar from "../../components/MuseumBar.jsx";
 import "./Exhibit.css";
 
 // ─── TYPE CONFIG ──────────────────────────────────────────────────────────────
@@ -1621,7 +1621,10 @@ export default function Exhibit({ artist }) {
   const FACTS = artist.facts;
   const ExhibitFlow = artist.exhibitFlow;
 
-  const navigate = useNavigate();
+  /* [R2 2026-08-02] `useNavigate` retired from this component. Its only two
+     callers were the title bar's wordmark and its Gift Shop exit, both of
+     which are now real <Link>s inside <MuseumBar/> — which is the point of
+     the merge: three rooms navigating three ways became one anchor. */
   const [visible, setVisible]           = useState(false);
   const defaultActive = artist.defaultActiveIndex;
   const [active, setActive]             = useState(defaultActive);
@@ -2327,15 +2330,20 @@ export default function Exhibit({ artist }) {
           bigger type; /hr and /wb run twenty rows at 50% and do not. */}
       <div className={`ex-root${visible?" visible":""}`} data-exhibit={artist.exhibitSlug || artist.id} data-stage={artist.stage ? "1" : undefined} data-flat={flatFaces ? "1" : undefined}>
 
-        {/* NAV */}
-        <div className="ex-nav">
-          <button className="ex-nav-logo" onClick={() => navigate(shopHref)}>Weird.Baby</button>
-          <div className="ex-nav-sub" onClick={() => window.scrollTo({ top: 0, behavior: "auto" })}>{artist.name}</div>
-          {/* [one-shop ruling, walk-six] config-driven: the entry stays in the
-              template (present in the DOM) but hides for exhibits that must
-              not advertise a shop — /robots today. */}
-          <button className="ex-nav-return" style={artist.shopEntryHidden ? { display: "none" } : undefined} onClick={() => navigate(shopHref)}>Gift Shop</button>
-        </div>
+        {/* NAV — [R2 2026-08-02] the shared <MuseumBar>. The `.ex-nav-*`
+            family is retired; see src/components/MuseumBar.jsx for what the
+            three copies disagreed about and which reading won.
+            [one-shop ruling, walk-six] the exit stays in the template (present
+            in the DOM) and hides for exhibits that must not advertise a shop —
+            /robots today. That is now `exitHidden`. */}
+        <MuseumBar
+          brandTo={shopHref}
+          room={artist.name}
+          onRoomClick={() => window.scrollTo({ top: 0, behavior: "auto" })}
+          exitTo={shopHref}
+          exitLabel="Gift Shop"
+          exitHidden={artist.shopEntryHidden}
+        />
 
         {/* CAROUSEL */}
         <Coverflow

@@ -81,14 +81,20 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
   /* [O4] the preset rides the src; default is the plain portal. */
   const [twinSrc, setTwinSrc] = useState("/robots/twin.html?user=1");
 
-  /* [L1 2026-07-31] CLOSING ANNOUNCES ITSELF. The Portal track's face runs a
-     live twin and stands down while this overlay holds one — one machine at a
-     time. It cannot know when it may come back unless the close says so, and
-     an event keeps the seam a seam: the flow still tells the engine nothing
-     about twins, it just says the twin is no longer up. */
+  /* [L1 2026-07-31] CLOSING ANNOUNCED ITSELF, to nobody.
+     The rule was: the Portal track's face runs a live twin and stands down
+     while this overlay holds one — one machine at a time — so the close had to
+     say when the face could come back, and an event kept the seam a seam.
+     [R6 2026-08-02] THE LISTENER WENT WITH G1's RETIREMENT OF THE LIVE FACE and
+     the dispatch stayed. B7 grepped the whole tree and found no listener for
+     `wb-robots-twin-closed` anywhere; it survived only because a dispatch into
+     an empty room is silent. It also cost a real minute in the B7 round, when
+     the reader's Escape handling had to establish whether firing it could break
+     anything — an event nobody receives still has to be reasoned about.
+     Removed rather than restored: there is no second machine to stand down, and
+     reviving the announcement is the job of whatever revives the live face. */
   function closeTwin() {
     setTwinOpen(false);
-    try { window.dispatchEvent(new CustomEvent("wb-robots-twin-closed")); } catch { /* no-op */ }
   }
 
   /* gap before the tear (ms), then how tall it is (vh) and how far the

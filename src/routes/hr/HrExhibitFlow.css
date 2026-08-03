@@ -20,7 +20,8 @@
    are unaffected. The deck section overrides --wb-serif and --wb-sans
    below, which ripples through every descendant rule that consumes
    those tokens (pill labels, page title, eyebrow, panel head, etc.). */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@400;500;600;700&display=swap');
+/* [R4 2026-08-02] font @import removed - the union of every face the museum
+   uses is requested once, as a <link> in index.html. */
 
 /* ── Section root ──────────────────────────────────────────────────────── */
 .hr-section {

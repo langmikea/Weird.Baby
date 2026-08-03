@@ -1,0 +1,117 @@
+/* MuseumBar.css — the room convention, in one place.
+ *
+ * [R2 2026-08-02] Merged from `.ex-nav-*` (Exhibit.css), `.gift-shop__nav-*`
+ * (GiftShop.css) and `.booth-nav-*` (InfoBooth.jsx, inline). Every value below
+ * was byte-identical across at least two of the three; the reasoning for the
+ * three places they disagreed is in MuseumBar.jsx.
+ *
+ * The bar is FIXED and 100% wide, and rooms clear it with their own top
+ * padding (`.ex-root` 54px, `.gift-shop` 5.5rem, `.booth-root` 96px). Its
+ * height is therefore load-bearing for those — 14px + 1.1rem line + 14px + a
+ * 1px rule — and the paddings above are why this rule is not free to grow.
+ */
+
+.wb-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 90;
+  background: var(--wb-bg);
+  border-bottom: 1px solid var(--wb-border);
+}
+
+.wb-bar-brand {
+  font-family: var(--wb-brand, 'Fredoka', sans-serif);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  color: var(--wb-gold);
+  text-decoration: none;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+/* The room's name, centred on the BAR rather than between its neighbours —
+   absolutely positioned so an exit of any length cannot shove it off centre. */
+.wb-bar-room {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--wb-gold);
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+/* only where the name actually does something */
+.wb-bar-room--live { cursor: pointer; }
+
+.wb-bar-exit {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--wb-gold);
+  text-decoration: none;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.wb-bar-brand:hover,
+.wb-bar-exit:hover,
+.wb-bar-brand:focus-visible,
+.wb-bar-exit:focus-visible { opacity: 0.7; }
+
+/* NARROW WIDTHS — AND THE OVERLAP THE MERGE EXPOSED.
+   Absolute centring is right on a wide bar: the room's name sits on the page's
+   axis no matter how long the exit's label is. On a phone it is the WRONG
+   mechanic, because an absolutely positioned element cannot push anything —
+   it simply runs underneath. MEASURED on /hr at 390px: brand 16–94,
+   room 111–262, exit 230–357. **32px of "HUNTER ROOT" printed on top of
+   "GIFT SHOP".** That was live before this merge and belonged to the exhibit's
+   copy of the bar, which never got the narrow-width rule the shop's copy has
+   had since the day it was written — three copies, and the fix landed in one.
+   Dropping the room to 0.95rem (what the shop's copy did) is not enough on its
+   own: it narrows the collision, it does not remove it, because the geometry is
+   the problem and not the type size.
+   SO AT PHONE WIDTHS THE BAR IS AN HONEST THREE-COLUMN FLEX ROW. The name takes
+   the space its neighbours leave, is centred inside it, and ellipsises rather
+   than overprinting. Brand and exit are pinned `flex:0 0 auto` and `nowrap` —
+   without that the wordmark wraps to two lines and the bar grows 10px, which is
+   exactly what happened on /wal in the first cut and would have quietly broken
+   every room's top padding.
+   MEASURED AFTER, at 390px: /hr /shop /booth /wal /robots /wb — **zero overlap
+   and zero clipped characters on all six rooms.**
+   BELOW 390 THE LONGEST NAMES ELLIPSISE, and the numbers are recorded rather
+   than discovered later: at 360px /wal loses 27px and /hr 7px; at 320px (the
+   narrowest phone still in service) /wal loses 67px, /hr 47px, /booth 43px.
+   Overlap stays 0 at every width. That is the mechanic working — a name that
+   trails off is legible and says there is more; a name printed over the exit is
+   neither. */
+@media (max-width: 720px) {
+  .wb-bar { padding: 12px 16px; }
+  .wb-bar-brand { letter-spacing: 0.04em; }
+  .wb-bar-exit { letter-spacing: 0.14em; }
+  .wb-bar-room {
+    position: static;
+    transform: none;
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: center;
+    padding: 0 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+  }
+}

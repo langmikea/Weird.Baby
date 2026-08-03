@@ -399,4 +399,175 @@ has now done it twice.
 
 ---
 
-*(Sections for L4–L6 are appended as each is sealed.)*
+---
+
+## L4 · THE ADVERSARIAL REVIEW'S REMAINING FINDINGS
+
+**Ordered:** *"work the review's fix-list (the mechanical drift beyond what B7
+already landed); list judgment items rather than guessing."*
+
+R1 was L3. **R2, R3, R4, R5 and R6 are all done.** What is listed rather than
+taken is named at the end, and it is a short list.
+
+### R2 · The title bar was implemented three times — now once
+
+`.ex-nav-*` (Exhibit.css), `.gift-shop__nav-*` (GiftShop.css, whose own comment
+read *"Mirrors Exhibit.css .ex-nav … re-pinned to paper tones"*) and
+`.booth-nav-*` (InfoBooth.jsx, inline) are retired. One `<MuseumBar>` +
+`MuseumBar.css` in a new `src/components/`, rendered by all three rooms.
+
+**The three copies were compared before merging, not assumed identical.** They
+disagreed in four places, and every one of them is recorded in `MuseumBar.jsx`:
+
+1. **The exhibit's bar had no narrow-width rule at all.** The shop dropped the
+   room name at ≤720px and the booth at ≤680px; the exhibit kept 1.1rem at every
+   width.
+2. The booth's breakpoint was 680px for the same rule as the shop's 720px.
+3. The exhibit navigated with `<button onClick={navigate}>`; the other two used
+   `<Link>`. The merged bar is `<Link>` everywhere — a real anchor
+   middle-clicks, opens in a tab and shows its target.
+4. The room name was a `<div>` on the exhibit and an `<h1>` in the other two.
+   `<h1>` won: it is the page's heading, and no other `<h1>` exists on any of
+   these routes (checked).
+
+**AND THE MERGE FOUND A LIVE DEFECT THE THIRD COPY HAD BEEN HIDING.** Measured
+on `/hr` at 390px before this round: brand 16–94, room 111–262, exit 230–357 —
+**32px of "HUNTER ROOT" printed on top of "GIFT SHOP".** The centred name is
+absolutely positioned, so it cannot push its neighbours; it runs under them. The
+shop's copy of the bar has had a mitigation since the day it was written and the
+exhibit's never got one.
+
+Shrinking the type (what the shop's copy did) narrows the collision without
+removing it — the geometry is the problem. So at ≤720px the bar becomes an
+honest three-column flex row: the name takes the space its neighbours leave, is
+centred in it, and ellipsises. Brand and exit are pinned `flex:0 0 auto` +
+`nowrap`, without which the wordmark wraps to two lines and the bar grows 10px —
+which happened on `/wal` in the first cut and would have quietly broken every
+room's top padding.
+
+**Measured after, at 390px: `/hr` `/shop` `/booth` `/wal` `/robots` `/wb` — zero
+overlap and zero clipped characters on all six.** Below 390 the longest names
+ellipsise and the numbers are on the record (at 320px: `/wal` −67px, `/hr` −47px,
+`/booth` −43px); overlap stays 0 at every width tested.
+
+Bar height unchanged: 46px desktop, 42px at ≤720 — which matters, because three
+rooms clear it with hard-coded top padding.
+
+### R3 · Six overlays, six Escape handlers — now one hook
+
+`src/lib/use-overlay.js`. The six HR overlays (Gallery, Album, YouTube,
+Facebook, Photo, FilterInstrument) each carried their own
+`if (e.key === "Escape") onClose()` and five of them their own body-scroll lock.
+
+**A hook, not the `<Overlay>` wrapper R3 sketched, and the reason is in the
+file.** R3 wanted a primitive owning "ground, z-order, Escape and focus". Three
+of those four are per-overlay by design — a gallery, a video, a Facebook post
+and a filter panel have genuinely different grounds and separately-tuned CSS.
+Wrapping them would either flatten that or make the wrapper a pass-through for
+six class names. What they share is BEHAVIOUR, so behaviour is what was
+extracted. **No markup changed, which is also why this cannot move a pixel.**
+
+What lining the six up next to each other found:
+
+- **`FilterInstrumentOverlay` was the one of six that never locked body scroll**
+  — so the page moved behind the overlay a visitor is most likely to scroll at.
+  Exactly the drift R3 predicted. It locks now.
+- **None of the eight restored focus.** Open, press Escape, and the keyboard was
+  back at the top of the document. The hook remembers the opener and puts focus
+  back — the "focus" R3 named, in one place instead of eight.
+- The old copies re-installed their `keydown` listener on every parent render
+  (`onClose` was a dependency). The hook holds handlers in refs and installs
+  once.
+
+Verified live: the gallery opens, `→` steps 2/16 → 3/16, body locks to `hidden`
+while open, Escape closes and the previous overflow is restored; the filter
+overlay does the same and now locks where it did not.
+
+### R4 · Six font imports — now one `<link>`
+
+Six Google-font `@import`s across five files. **They had already drifted:** Syne
+was requested at `400;600;800` in three rooms and `400;600;700;800` in two, so a
+700 weight rendered synthetic-bold on whichever route loaded the shorter list
+first; Fredoka was asked for at `500;600`, at `600`, and at `400;600`.
+
+The union — Courier Prime · DM Serif Display · Fraunces · Fredoka · Geist · Syne,
+alphabetical as the css2 API requires — is now requested **once**.
+
+**Not where R4 suggested, and the reason is recorded in both places.** It first
+went into `museum-tokens.css`, which is the file the type tokens live in and
+looked like its home. It is not: that file is imported by three stylesheets, so
+the built CSS carried **three identical `@import` lines**. It is now a single
+`<link>` in `index.html`, which is also the faster mechanism by a real margin —
+an `@import` is discovered only after the CSS containing it has been fetched and
+parsed, while a `<link>` is found by the preload scanner on the first pass. Both
+Google hosts get a `preconnect`.
+
+Verified: **0** font requests in the built CSS, **1** stylesheet link in the
+built HTML, and all seven faces present on all seven routes.
+
+### R5 · Two stylesheet mechanisms — now one
+
+`WbHome.css`, `InfoBooth.css`, `WbAdmin.css` are real files. The three inline
+`<style>{…}</style>` template literals are gone.
+
+**This is not only hygiene, and this round is the evidence.** A template literal
+ends at the first backtick, so one backtick in a CSS comment is a build failure
+at parse — **that happened twice in this round alone**, both times while writing
+prose about the file. B7 recorded it happening once. Three times is a mechanism,
+not bad luck.
+
+**The one thing that was not a straight move.** An inline `<style>` is scoped BY
+MOUNT: its `html, body` rules paint while the route is on screen and vanish when
+React unmounts it. A `.css` file is global and permanent, so moving those rules
+verbatim would have painted the operator room's `#050505` ground over the whole
+museum. They are now scoped to `html[data-room="…"]`, set on mount and cleared on
+unmount by `src/lib/use-room.js` — the same lifetime, said declaratively.
+
+Verified: `/admin` black, `/` and `/booth` paper, `/hr` `/shop` `/wal` `/robots`
+carrying no room attribute at all; and the lifetime itself — navigating from
+`/admin` to `/` in-app flips the ground back with no reload.
+
+The three duplicated global resets went too: `src/index.css` already declares it
+and `main.jsx` imports it, so that one is guaranteed rather than bundled by luck.
+
+### R6 · The dead event is deleted
+
+`wb-robots-twin-closed` was dispatched by `RobotsExhibitFlow.closeTwin()` with no
+listener anywhere in the tree — its receiver went with G1's retirement of the
+live face. Removed rather than restored: there is no second machine to stand
+down, and reviving the announcement is the job of whatever revives the live face.
+B7 left it in place because behaviour does not change without a stated reason;
+the reason is that an event nobody receives still has to be reasoned about, and
+it cost that round a real minute deciding whether Escape could safely fire it.
+
+### FOUND WHILE DOING THE ABOVE
+
+- **`src/App.css` was dead.** 180 lines of the Vite starter template
+  (`.hero`, `#next-steps`, `.counter`) imported by nothing. Deleted.
+- **`--ex-true-h` is a variable nothing sets.** `.ex-root`'s `min-height` reads
+  `max(100vh, calc(var(--ex-true-h, 0px) + 64px))`, and a grep of the whole tree
+  finds no writer — so the expression is permanently `max(100vh, 64px)`. Left in
+  place (removing it is a behaviour question about what the root's height should
+  be, not a conformance one) and listed here.
+
+### LISTED, NOT TAKEN — the judgment items
+
+| # | item | why it is Mike's |
+|---|---|---|
+| 1 | **The wordmark points to two different rooms.** On an exhibit it goes to the GIFT SHOP; on the shop and the booth it goes to the LOBBY. The merge made this visible by putting all three in one component. It may be deliberate — an exhibit's wordmark and its exit deliberately landing together — so it is a prop, not a decision. | it is where the museum sends people |
+| 2 | **The five sibling variant-type colours** (`live` green, `lyrics` purple, `cover` blue, `clip`/`audio` brown). J1 named the gold and the gold is gone; these are a whole pre-2026 colour vocabulary and already on Mike's own backlog. | palette |
+| 3 | **163 hand-typed font stacks** (L3's table). Substituting the token changes the FALLBACK chain, so it is not byte-identical and fails the acceptance test this round was given. | a real decision about what happens when Syne does not load |
+| 4 | **`WbAdmin`'s 27 remaining colours** — J4, listed in full in L3 with what each is and what it should probably become. | whether the operator's room joins the museum |
+| 5 | **`--ex-true-h`** — dead variable, above. | what the exhibit root's height should actually be |
+
+### Gates
+
+- **lint 11 errors / 9 warnings** — HEAD baseline, zero new.
+- **vite build green.**
+- Lap: seven routes at 1200px and 390px; bar geometry measured on six rooms at
+  320/360/390/1200; overlay behaviour driven from the keyboard; room-ground
+  lifetime tested across an in-app navigation.
+
+---
+
+*(Sections for L5–L6 are appended as each is sealed.)*

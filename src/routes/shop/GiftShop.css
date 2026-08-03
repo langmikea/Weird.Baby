@@ -15,7 +15,8 @@
  * dependency. A room that reads the palette says so.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;700;800&family=Courier+Prime:wght@400&family=Fredoka:wght@600&display=swap');
+/* [R4 2026-08-02] font @import removed - the union of every face the museum
+   uses is requested once, as a <link> in index.html. */
 @import url('./../../styles/museum-tokens.css');
 
 .gift-shop {
@@ -29,67 +30,13 @@
   position: relative;
 }
 
-/* TITLE BAR — museum-standard exhibit format (Mike 2026-07-06). Mirrors
-   Exhibit.css .ex-nav / -logo / -sub / -return, re-pinned to paper tones. */
-.gift-shop__nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 32px;
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 90;
-  background: var(--wb-bg);
-  border-bottom: 1px solid var(--wb-border);
-}
-
-/* [B7/R2 2026-08-02] THE WORDMARK READS THE TOKEN, like the exhibit's does.
-   --wb-brand is a LIVE trial (STATE: "Brand wordmark trial, nav only"). The
-   exhibit's bar asks for var(--wb-brand, 'Fredoka', …); this one and the
-   booth's asked for the literal — so the day Mike moved the trial forward, one
-   room in three would have changed and a brand trial nobody can see whole is a
-   trial that cannot be judged. Token verified reachable on /shop: the sheets
-   bundle into one document, --wb-brand resolves on every route. */
-.gift-shop__nav-logo {
-  font-family: var(--wb-brand, 'Fredoka', sans-serif);
-  font-weight: 600;
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
-  color: var(--wb-gold);
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-
-.gift-shop__nav-sub {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--wb-gold);
-  margin: 0;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.gift-shop__nav-return {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 0.7rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--wb-gold);
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-
-.gift-shop__nav-logo:hover,
-.gift-shop__nav-return:hover,
-.gift-shop__nav-logo:focus-visible,
-.gift-shop__nav-return:focus-visible {
-  opacity: 0.7;
-}
+/* TITLE BAR — [R2 2026-08-02] THE `.gift-shop__nav*` FAMILY IS RETIRED.
+   Its own comment said it "Mirrors Exhibit.css .ex-nav … re-pinned to paper
+   tones". It no longer mirrors that bar: it IS that bar. The room convention
+   lives once, in src/components/MuseumBar.css, and this page renders
+   <MuseumBar room="Gift Shop" />. B7 closed the wordmark fork here; this
+   closes the copy. The 5.5rem top padding on `.gift-shop` above is what
+   clears the fixed bar and is unchanged. */
 
 /* Sections */
 .gift-shop__section {
@@ -359,12 +306,6 @@
 @media (max-width: 720px) {
   .gift-shop {
     padding: 4.5rem 1rem 4rem;
-  }
-  .gift-shop__nav {
-    padding: 12px 16px;
-  }
-  .gift-shop__nav-sub {
-    font-size: 0.95rem;
   }
   .featured-artist,
   .friends__card,

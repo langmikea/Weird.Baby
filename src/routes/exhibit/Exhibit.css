@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;800&family=Courier+Prime:wght@400&display=swap');
-/* 2026-06-07 B&W rework: brand wordmark face (rounded, akin to the logo's
-   bubble lettering). Trial scope: the nav wordmark only. */
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&display=swap');
+/* [R4 2026-08-02] the two Google-font imports that stood here are gone; the
+   union of every face the museum uses is requested once, as a <link> in
+   index.html. The brand wordmark's Fredoka is in that union. Oswald below
+   stays self-hosted (a vendored woff2, no Google request). */
 /* THE TOKENS THIS FILE DEPENDS ON [R3, 2026-07-29].
    Exhibit.css uses var(--wb-*) 64 times and 63 of those are BARE - no
    fallback - yet it never imported the file that defines them. It works only
@@ -445,16 +445,13 @@ body:has(.vp-face) .vp-area::before{display:none}
    needs targets that TILE, the way /hr's do, not two of them at one end. */
 .ex-root.visible{opacity:1}
 
-/* NAV */
-.ex-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;position:fixed;top:0;left:0;right:0;z-index:90;background:var(--wb-bg);border-bottom:1px solid var(--wb-border)}
-/* B&W rework trial: wordmark in the logo-like rounded face, mixed case
-   ("Weird.Baby", as the logo letters it), tracking relaxed for the bubble
-   forms. Rest of the nav stays Syne pending Mike's read. */
-.ex-nav-logo{font-family:var(--wb-brand,'Fredoka',sans-serif);font-weight:600;font-size:.85rem;letter-spacing:.06em;text-transform:none;color:var(--wb-gold);background:none;border:none;cursor:pointer;transition:opacity .2s}
-.ex-nav-logo:hover{opacity:.7}
-.ex-nav-sub{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:.12em;text-transform:uppercase;color:var(--wb-gold);cursor:pointer;position:absolute;left:50%;transform:translateX(-50%)}
-.ex-nav-return{font-family:'Syne',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--wb-gold);background:none;border:none;cursor:pointer;transition:opacity .2s}
-.ex-nav-return:hover{opacity:.7}
+/* NAV — [R2 2026-08-02] THE `.ex-nav-*` FAMILY IS RETIRED.
+   The room convention (brand left / room name centre / exit right) was
+   implemented three times across three stylesheets. It now lives once, in
+   src/components/MuseumBar.css, and the exhibit renders <MuseumBar/> like
+   the shop and the booth do. The B&W wordmark trial rides the token there.
+   The bar is still 14px + a 1.1rem line + 14px + a rule tall, which is what
+   `.ex-root`'s 54px top padding above is clearing. */
 
 /* COVERFLOW */
 .cf-wrap{display:flex;align-items:center;justify-content:center;position:relative;perspective:900px;perspective-origin:50% 50%;user-select:none;cursor:grab;overflow:hidden;touch-action:pan-y;flex-shrink:0}
@@ -826,7 +823,6 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 @keyframes npb{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
 
 @media(max-width:720px){
-  .ex-nav{padding:12px 16px}
   .cf-dh{padding:0 16px}
   .ex-main-inner{grid-template-columns:1fr !important}
   .vr-dh{display:none}
@@ -1240,7 +1236,8 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 /* STICKY IS THE HALF OF "STOP FROM ANYWHERE" THAT IS NOT THE ESCAPE KEY.
    A stop control that scrolls off the top of an 880px viewer is a stop control
    you have to go and find, which is the complaint. It rides under the fixed
-   `.ex-nav`, so the two never overlap. */
+   `.wb-bar` (the shared title bar; was `.ex-nav` before R2 merged the three
+   copies), so the two never overlap. */
 .ex-banner-console{position:sticky;top:52px;z-index:80;
   background:var(--wb-bg);border-bottom:1px solid var(--wb-border)}
 /* [F2 2026-08-02] THE APRON — the bleed-through, diagnosed and closed.

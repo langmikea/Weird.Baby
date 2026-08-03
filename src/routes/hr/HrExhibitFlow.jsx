@@ -51,6 +51,7 @@ import { eraForRecord, ERA_DISPLAY, ERA_SLUGS } from "./hr_era.js";
 import EXHIBIT from "../../data/exhibits/hunter_root.json";
 import FACTS_PAYLOAD from "../../data/exhibits/hunter_root.facts.json";
 import { makeFactCycler, splitFact } from "../../lib/fact-select.js";
+import { useOverlay } from "../../lib/use-overlay.js";
 import { HR_JOURNAL_PROMPTS } from "../../data/hr_journal_prompts.js";
 
 // FACTSCROLLER_REPLUMB-20260707: the fact pool the living recipe cards draw
@@ -1817,22 +1818,12 @@ function GalleryOverlay({ card, onClose }) {
   const [idx, setIdx] = useState(startIdx === -1 ? 0 : startIdx);
   const go = useCallback((d) => { if (n) setIdx(i => (i + d + n) % n); }, [n]);
 
-  useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === "Escape") onClose();
-      else if (e.key === "ArrowRight") go(1);
-      else if (e.key === "ArrowLeft") go(-1);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose, go]);
-
-  // Lock body scroll while the overlay is open.
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = prev; };
-  }, []);
+  /* [R3] Escape, the scroll lock and focus restoration come from the shared
+     overlay hook; the arrow keys are this overlay's own and ride along. */
+  useOverlay(onClose, (e) => {
+    if (e.key === "ArrowRight") go(1);
+    else if (e.key === "ArrowLeft") go(-1);
+  });
 
   if (!n) return null;
   const cur = items[idx];
@@ -1974,17 +1965,7 @@ function AlbumOverlay({ card, onClose }) {
     return () => el.removeEventListener("ended", onEnded);
   }, [n]);
 
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === "Escape") onClose(); };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
-
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = prev; };
-  }, []);
+  useOverlay(onClose);   /* [R3] Escape + scroll lock + focus restore */
 
   if (!n) return null;
   const cur = curIdx >= 0 ? tracks[curIdx] : null;
@@ -2067,18 +2048,7 @@ function youtubeIdFromUrl(url) {
 function YouTubeOverlay({ card, onClose }) {
   const vid = youtubeIdFromUrl(card && card.source_url);
 
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === "Escape") onClose(); };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
-
-  // Lock body scroll while the overlay is open (mirrors GalleryOverlay).
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = prev; };
-  }, []);
+  useOverlay(onClose);   /* [R3] Escape + scroll lock + focus restore */
 
   const title = card.title || "video";
   // youtube-nocookie reduces initial tracking (scoping doc §3.1). autoplay=1 is
@@ -2324,18 +2294,7 @@ function FacebookOverlay({ card, onClose }) {
   const frameRef = useRef(null);
   const [postedH, setPostedH] = useState(0);
 
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === "Escape") onClose(); };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
-
-  // Lock body scroll while the overlay is open (mirrors YouTubeOverlay).
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = prev; };
-  }, []);
+  useOverlay(onClose);   /* [R3] Escape + scroll lock + focus restore */
 
   // post.php reports its rendered height via postMessage; mirror FbEmbedCard's
   // origin-checked listener so the frame grows to the full post height.
@@ -2429,18 +2388,7 @@ function FacebookOverlay({ card, onClose }) {
 // lightboxes identically; the escape-hatch label derives from source_platform,
 // and the caption falls back to title when description is absent.
 function PhotoOverlay({ card, onClose }) {
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === "Escape") onClose(); };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
-
-  // Lock body scroll while the overlay is open (mirrors YouTubeOverlay).
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = prev; };
-  }, []);
+  useOverlay(onClose);   /* [R3] Escape + scroll lock + focus restore */
 
   const big = (card && card.primary_url) || (card && card.thumbnail_url) || null;
   const title = card.title || "photo";
@@ -2779,12 +2727,12 @@ function FilterInstrumentOverlay({
   const snapshotRef = useRef(null);
   if (snapshotRef.current === null) snapshotRef.current = cloneSelected(selected);
 
-  // Escape closes — parity with the other root overlays (Gallery/YouTube/…).
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === "Escape") onClose(); };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+  /* [R3] Escape closes — parity with the other root overlays, and now the
+     SAME parity they have with each other: this was the one of six that never
+     locked body scroll, so the page moved behind the overlay a visitor is most
+     likely to scroll at. The hook brings the lock and focus restoration with
+     it; lining the six up next to each other is what surfaced the gap. */
+  useOverlay(onClose);
 
   const activeTokens = [];
   HR_DIMENSIONS.forEach(({ key }) => {

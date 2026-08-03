@@ -1,0 +1,72 @@
+/* InfoBooth.css — extracted from the inline <style> block in InfoBooth.jsx.
+ *
+ * [R5 2026-08-02] B7: three surfaces embedded complete stylesheets in
+ * `<style>{`…`}</style>` template literals while every other room used a .css
+ * file. The review called it hygiene. It is not only hygiene:
+ *   · a template literal ENDS AT THE FIRST BACKTICK, so one backtick in a CSS
+ *     comment is a build failure at parse. That happened TWICE in this round
+ *     alone, both times while writing prose about the file;
+ *   · the global reset was re-declared in all three, and src/index.css (which
+ *     main.jsx imports, so it is guaranteed rather than bundled-by-luck) had
+ *     already declared it. Those copies are gone;
+ *   · the rules are now readable by tooling — the token audit, a linter, a
+ *     future codemod — instead of being a string.
+ *
+ * THE ONE THING THAT WAS NOT A STRAIGHT MOVE, and why. An inline <style> is
+ * scoped BY MOUNT: its `html, body` rules apply while this route is on screen
+ * and vanish when it leaves. A .css file is global and permanent, so moving
+ * those rules verbatim would have painted this room's ground over every other
+ * room in the museum. They are now scoped to `html[data-room="booth"]`, an
+ * attribute this component sets on mount and clears on unmount — the same
+ * lifetime the <style> tag had, said declaratively.
+ */
+
+/* [R4 2026-08-02] font @import removed - the union of every face the
+   museum uses is requested once, as a <link> in index.html. */
+html[data-room="booth"], html[data-room="booth"] body { height: 100%; background: var(--wb-bg); color: var(--wb-gold); }
+.booth-root { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 96px 24px 64px; position: relative; }
+.booth-root::after { content: ''; position: fixed; inset: 0; z-index: 950; pointer-events: none; opacity: 0.07; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 240px 240px; }
+
+/* TITLE BAR — [R2 2026-08-02] the .booth-nav-* family is RETIRED.
+   The room convention lives once, in src/components/MuseumBar.css, and
+   this room renders <MuseumBar room="Information Booth" />. The 96px
+   top padding on .booth-root above clears the fixed bar, unchanged.
+   (No backticks: this whole stylesheet is a template literal - R5.) */
+
+/* v3 (Mike 2026-07-06: body read small/weak/squinty, mat space wasted;
+   font constraint lifted). The WORDS are this room's exhibit — billed
+   like it. Credo in brand Fredoka (ties to the Vol 1 cover); body in
+   large full-ink serif; nothing faded, nothing micro. */
+.booth-card { max-width: 720px; width: 100%; text-align: center; background: var(--wb-ink-card); border: 1px solid var(--wb-border); padding: 60px 64px 48px; position: relative; box-shadow: 0 1px 2px rgba(33,31,28,0.12), 0 6px 18px rgba(33,31,28,0.08); }
+/* v4 (Mike 2026-07-06): his words verbatim, short placard. Whole card
+   in the brand face (the top lines were the part that read well) —
+   body Fredoka 400, deliberate one-line beats, no unplanned wraps. */
+.booth-credo { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: clamp(1.55rem, 3vw, 2.1rem); line-height: 1.45; color: var(--wb-gold); margin-bottom: 0.9em; }
+.booth-credo em { font-style: normal; border-bottom: 3px solid var(--wb-gold); }
+.booth-words { font-family: 'Fredoka', sans-serif; font-weight: 400; font-size: clamp(1.2rem, 2vw, 1.5rem); line-height: 1.75; color: var(--wb-gold); }
+.booth-words p { margin-bottom: 0.35em; }
+.booth-words p:last-of-type { margin-bottom: 0; }
+.booth-rule { width: 52px; height: 2px; background: var(--wb-gold); opacity: 0.6; margin: 30px auto 24px; }
+.booth-contact { font-family: 'Fredoka', sans-serif; font-weight: 400; font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--wb-gold); }
+.booth-contact a { color: var(--wb-gold); text-decoration: none; border-bottom: 2px solid var(--wb-gold-lo); }
+.booth-contact a:hover { opacity: 0.7; }
+
+.booth-actions { display: flex; justify-content: space-between; margin-top: 36px; }
+/* Subdued by design (Mike 2026-07-06): readers find these at the end
+   of the card — they don't need to shout. Quiet gray, wakes on hover. */
+.booth-btn { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.66rem; letter-spacing: 0.25em; text-transform: uppercase; color: #6f6b62; background: none; border: 1px solid var(--wb-border); padding: 10px 22px; cursor: pointer; text-decoration: none; transition: color 0.2s, border-color 0.2s; }
+.booth-btn:hover, .booth-btn:focus-visible { color: var(--wb-gold); border-color: var(--wb-gold); background: none; }
+
+/* FAQ — expands the card in place; items are native <details>,
+   collapsed by default. */
+.booth-faq { margin-top: 30px; border-top: 1px solid var(--wb-border); text-align: left; }
+.booth-faq details { border-bottom: 1px solid #d8d4c9; padding: 14px 4px; }
+.booth-faq summary { cursor: pointer; font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 1.08rem; color: var(--wb-gold); list-style: none; display: flex; justify-content: space-between; align-items: baseline; }
+.booth-faq summary::-webkit-details-marker { display: none; }
+.booth-faq summary::after { content: "+"; font-family: 'Courier Prime', monospace; font-size: 1.15rem; color: var(--wb-gold-lo); }
+.booth-faq details[open] summary::after { content: "–"; }
+.booth-faq-a { font-family: 'Fredoka', sans-serif; font-weight: 400; font-size: 1rem; line-height: 1.65; color: #2b2924; padding: 10px 4px 4px; }
+
+@media (max-width: 680px) {
+  .booth-card { padding: 40px 26px 32px; }
+}

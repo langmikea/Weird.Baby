@@ -1,3 +1,13 @@
+/* [R4 2026-08-02] THE FONTS ARE NOT REQUESTED HERE, AND THE REASON IS RECORDED
+ * SO THE NEXT ROUND DOES NOT PUT THEM BACK.
+ * The union of every face the museum uses briefly lived at the top of this
+ * file, which is the file the type tokens (--wb-serif / -sans / -mono) live in
+ * and looked like its home. It is not: this file is imported by three
+ * stylesheets, so the built CSS carried three identical @import lines. The
+ * union now sits as ONE <link> in index.html, where the preload scanner finds
+ * it in the first pass instead of after a stylesheet has been fetched and
+ * parsed. See the comment there. */
+
 /* Museum tokens — canonical palette + typography for Weird.Baby.
  *
  * Source of truth for the museum's visual language.
@@ -15,11 +25,12 @@
  * Both Exhibit.css (carousel/top half) and HrExhibitFlow.css (deck)
  * consume these tokens, so the whole HR page rides one ground.
  *
- * Font loading: the carousel's Exhibit.css already @imports DM Serif
- * Display, Syne, and Courier Prime via Google Fonts. The deck only
- * mounts inside Exhibit.jsx (HrSpine -> Exhibit -> HrExhibitFlow), so
- * those fonts are loaded by the time the deck paints. No duplicate
- * @import here.
+ * Font loading: SUPERSEDED 2026-08-02 (R4). This paragraph used to say the
+ * carousel's Exhibit.css @imports the faces and the deck inherits them by
+ * mount order, so there was "no duplicate @import here". That reasoning held
+ * for two files and then five more rooms were built, each with its own list.
+ * The union is now one <link> in index.html — see the R4 note at the top of
+ * this file.
  */
 
 /* 2026-06-07 brand-aligned B&W rework, PASS 2 (Mike: dark silver read flat

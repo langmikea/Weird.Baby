@@ -1,7 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import "./WbAdmin.css";
+import { useRoom } from "../lib/use-room.js";
 
 export default function WbAdmin() {
+  /* [R5] this room owns the page ground while it is mounted — see
+     src/lib/use-room.js and the header of this route's stylesheet. */
+  useRoom("admin");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -42,57 +47,6 @@ export default function WbAdmin() {
 
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=Courier+Prime:ital,wght@0,400;1,400&display=swap');
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        /* [L3 / J1 2026-08-02] THE OPERATOR'S ROOM, AND EXACTLY HOW FAR THIS
-           ROUND GOES IN IT.
-           B7/R1 measured 38 hard-coded colours here and ZERO matches against any
-           token — the only surface in the museum still fully on the pre-2026
-           dark scheme (#050505 ground, #b8974a accent, #2a2218 rules). J4 asked
-           whether the operator's room joins the museum; that is Mike's call and
-           it is NOT taken here. Ops does not invent palette, so the 27 greys
-           below stay exactly as they are and are LISTED in the round log with
-           what each one is and what it should probably become.
-           WHAT IS TAKEN IS J1, WHICH MIKE RULED: the retired 2025 gold goes,
-           and it went in eleven places on this page. It becomes the accent of
-           THE MUSEUM'S OWN DARK SCOPE — the projection booth, --wb-booth-*,
-           which this round moved out of the player bar's one selector and into
-           the token file precisely so a second dark room could join it instead
-           of copying it. Nothing here is invented: the room adopts a scope that
-           already existed and now has a name.
-           (NO BACKTICKS IN THIS COMMENT. The whole stylesheet is a template
-           literal, so one backtick in prose ends it and the build fails at
-           parse. It just did, writing this. That is R5's argument in one line:
-           a stylesheet that can be broken by punctuation belongs in a .css
-           file.) */
-        .adm { --wb-gold: var(--wb-booth-gold); --wb-gold-hi: var(--wb-booth-gold-hi); --wb-gold-lo: var(--wb-booth-gold-lo); }
-        html, body { background: #050505; color: #d0cbc3; font-family: 'Courier Prime', monospace; min-height: 100vh; }
-        .adm { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
-        .adm-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; border-bottom: 1px solid #1a1a1a; padding-bottom: 20px; }
-        .adm-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--wb-gold); }
-        .adm-sub { font-size: 0.65rem; letter-spacing: 0.12em; color: #333; text-transform: uppercase; margin-top: 4px; } .adm-build { font-size: 0.6rem; letter-spacing: 0.1em; color: #555; font-family: 'Courier Prime', monospace; margin-top: 6px; }
-        .adm-refresh { background: transparent; border: 1px solid #222; color: #555; font-family: 'Courier Prime', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
-        .adm-refresh:hover { border-color: var(--wb-gold); color: var(--wb-gold); }
-        .adm-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 40px; }
-        .adm-stat { background: #0c0c0c; border: 1px solid #161616; padding: 20px 24px; }
-        .adm-stat-val { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2.2rem; color: var(--wb-gold); line-height: 1; }
-        .adm-stat-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: #444; margin-top: 6px; }
-        .adm-section { margin-bottom: 36px; }
-        .adm-section-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--wb-gold); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
-        .adm-badge-new { background: var(--wb-gold); color: #050505; font-size: 0.55rem; padding: 2px 6px; letter-spacing: 0.1em; }
-        .adm-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
-        .adm-table th { text-align: left; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: #333; padding: 6px 12px 10px; border-bottom: 1px solid #141414; font-weight: 400; }
-        .adm-table td { padding: 9px 12px; border-bottom: 1px solid #0f0f0f; color: #aaa; vertical-align: top; }
-        .adm-table tr:hover td { background: #0d0d0d; }
-        .adm-name { color: #e8e4dc; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.82rem; }
-        .adm-note { font-style: italic; color: #555; font-size: 0.72rem; }
-        .adm-founding { font-size: 0.58rem; color: var(--wb-gold); border: 1px solid #2a2218; padding: 1px 5px; letter-spacing: 0.08em; }
-        .adm-empty { color: #2a2a2a; font-style: italic; font-size: 0.8rem; padding: 16px 0; }
-        .adm-back { background: transparent; border: none; color: #2a2a2a; font-family: 'Courier Prime', monospace; font-size: 0.62rem; letter-spacing: 0.1em; cursor: pointer; text-transform: uppercase; transition: color 0.2s; } .adm-jump { background: transparent; border: 1px solid #222; color: #555; font-family: 'Courier Prime', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; cursor: pointer; transition: border-color 0.2s, color 0.2s; text-decoration: none; display: inline-block; } .adm-jump:hover { border-color: var(--wb-gold); color: var(--wb-gold); }
-        .adm-back:hover { color: var(--wb-gold); }
-        .adm-loading { color: #333; font-style: italic; padding: 60px; text-align: center; }
-      `}</style>
 
       <div className="adm">
         <div className="adm-header">
