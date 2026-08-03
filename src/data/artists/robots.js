@@ -738,11 +738,12 @@ export const robotsExhibit = {
      freely from 10% to 82%. */
   splitDefault: 24,
   cfKey: "wb-rb-cfh",
-  /* [X2 2026-07-30] BODY HEIGHT IS THE VISITOR'S. Declaring bodyKey grows the
-     drag handle under the tracklist/viewer block and persists the height, the
-     same way cfKey does for the carousel. /hr and /wb do not declare it and
-     are untouched; adding it there is this one line. */
-  bodyKey: "wb-rb-bodyh",
+  /* [M1 2026-08-03] `bodyKey` RETIRED WITH THE STAGE, for the reason WAL
+     retired it at W7: a fixed body height is the stage's mechanism. Content
+     that runs at its natural length in the page's own flow cannot be put in a
+     box of a chosen height without the box cutting it off — which is the
+     hiding the law forbids, reintroduced by the back door. The X2 drag handle
+     goes with it; there is nothing left for it to resize. */
   visitPath: "/robots",
   /* [P23 2026-08-02] this wing's own door verb — see the listener in
      RobotsExhibitFlow. Declaring it is what makes the plate wall's tiles
@@ -756,10 +757,25 @@ export const robotsExhibit = {
      the shop. It points at the standard W.B gift shop, carrying `from=robots`
      as it always did. */
   shopEntryHidden: false,
-  /* [STAGE 2026-08-02] THE RULED STANDARD, OPTED IN HERE AND NOWHERE ELSE.
-     The viewer becomes a fixed stage that never scrolls; content is fitted
-     and paged. /hr and /wb do not declare this and are untouched. */
-  stage: true,
+  /* [M1 2026-08-03] THE STAGE IS RETIRED HERE. THE NO-HIDDEN-INFORMATION LAW.
+     MIKE: "Card-advance/next-buttons are a sneaky way of adding pages — people
+     will not flick to discover whether something is interesting."
+     `stage: true` made the viewer a fixed frame and cut every face into pages
+     behind a `‹ Back / Next ›` transport. It was well-built and it measured
+     honestly — the packer's own console told the truth about every overrun —
+     but what it was honestly doing was putting the second half of every long
+     face behind a button whose label is "Next", which says nothing about what
+     is behind it. THIS WING WAS THE ONLY PAGER IN THE BUILDING: every button on
+     /wal and /robots was enumerated this round and `.stg-step` appears on
+     /robots and nowhere else.
+     `faceFlow: "flat"` is not a new mechanism — it is W7's, shipped on WAL,
+     where every face has run at full length in the page's own flow since
+     August 2. The Stage's no-scroll law survives in W7's reading, which is the
+     only honest one: no inner scroll traps; the DOCUMENT is the one thing that
+     scrolls, which is ordinary reading.
+     `Stage` and the `.stg-*` rules stay in the tree, mounted by nothing — see
+     the note on the component in Exhibit.jsx. */
+  faceFlow: "flat",
   /* [STAGE] THE PLAYER BAR IS NOT A FIXTURE (Mike's doctrine). This wing has
      no music - its one moving thing is a machine behind a latch - so a
      permanent transport here was a control for something that never plays,

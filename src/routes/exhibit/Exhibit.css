@@ -1621,10 +1621,18 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    THE MAT COSTS THE PACKER 36px OF HEIGHT AND 36px OF WIDTH, which it re-plans
    against on mount like any other geometry — verified face by face, zero
    overflow on all nine, one face gaining a second page. */
-.ex-root[data-stage="1"] .vp-area{background:#e7e3d8;border-color:transparent}
-.ex-root[data-stage="1"] .vp-face:not(.vp-face-portal):not(.vp-face-panel){
+/* [M1 2026-08-03] RE-SCOPED FROM `[data-stage="1"]` TO THE WING ITSELF, because
+   the wing lost its stage and must not lose its sheet. The sheet is a fact about
+   the ROBOTS WING's register — a document wing, printed — and never was a fact
+   about pagination; it only lived on the stage selector because the stage and
+   the wing were the same thing on the day it was written. That is the review's
+   pattern 1 in its other direction: a rule scoped to the machinery in front of
+   you rather than to the reason for it. Pixel-identical for /robots; no other
+   wing declares `data-stage` today, so nothing else can notice. */
+.ex-root[data-exhibit="robots"] .vp-area{background:#e7e3d8;border-color:transparent}
+.ex-root[data-exhibit="robots"] .vp-face:not(.vp-face-portal):not(.vp-face-panel){
   background:#e7e3d8;padding:18px}
-.ex-root[data-stage="1"] .vp-face:not(.vp-face-portal):not(.vp-face-panel)
+.ex-root[data-exhibit="robots"] .vp-face:not(.vp-face-portal):not(.vp-face-panel)
   >.vp-face-body{
   background:var(--wb-ink-card);
   border:1px solid var(--wb-border);
@@ -1642,7 +1650,7 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    is no void, there is a shortage. And a mat is the space a printed page sits
    in — on a phone the page IS the screen and there is no space to sit in. */
 @media (max-width:720px){
-  .ex-root[data-stage="1"] .vp-face:not(.vp-face-portal):not(.vp-face-panel){
+  .ex-root[data-exhibit="robots"] .vp-face:not(.vp-face-portal):not(.vp-face-panel){
     padding:0}
   .ex-contents-plate{display:none}
 }

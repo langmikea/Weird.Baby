@@ -1161,6 +1161,28 @@ function InstrumentPanel({ decl }) {
 }
 
 
+/* ======== MOTHBALLED 2026-08-03 (M1) — NOTHING MOUNTS THIS ================
+   THE NO-HIDDEN-INFORMATION LAW retired the pager. `stage: true` was declared
+   by exactly one wing (/robots) and that wing now declares `faceFlow: "flat"`,
+   so `Stage`, `StageChildren`, every `.stg-*` rule and every
+   `.ex-root[data-stage="1"]` rule below are unreachable from any route.
+
+   KEPT RATHER THAN DELETED, and the reason is narrow: the law is a ruling about
+   what a VISITOR may be shown, not a verdict on the machinery. The packer is
+   two rounds of measured work (B5's page-width division, the four STAGE FIXes,
+   the greedy column packer) and it solves a problem that will exist again the
+   day this museum prints something to a fixed sheet — a real reel, a slideshow,
+   the one exception the law itself names. Deleting it would mean re-deriving it
+   from the comments.
+
+   REVIVAL IS ONE WORD: an artist declaring `stage: true` instead of
+   `faceFlow: "flat"` gets it back exactly as it was; nothing else was touched.
+   The L5 sheet-on-mat rules that used to hang off `[data-stage="1"]` have moved
+   to `[data-exhibit="robots"]`, because those describe the wing and not the
+   machinery — see the note at that rule in Exhibit.css.
+   If a future round finds this still unmounted, that is the round that should
+   delete it.
+   ========================================================================= */
 /* ======== [STAGE 2026-08-02] THE VIEWER NEVER SCROLLS ====================
    Mike's ruling, built. The viewer stops being a box with a scrollbar and
    becomes a STAGE: a fixed frame that content is FITTED to and advanced
