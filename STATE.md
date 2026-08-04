@@ -42,7 +42,79 @@ Current compliance, every face and page, audited on the built page:
 `docs/VISUAL_HOOK_AUDIT-20260803.md`. Five surfaces remain text-only — all in
 the robots wing, none a landing, all ART-pending rather than code-pending.
 
-## SEALED 2026-08-03 — THE CLEANUP ROUND (v41; C1–C4. PUSH + DEPLOY ARE MIKE'S)
+## SEALED 2026-08-03 — THE REVERT (v42; R1–R3. PUSH + DEPLOY ARE MIKE'S)
+
+Autonomous single-agent Code-lane round on Mike's remote-control brief. Full
+round log: `docs/MUSEUM_REVERT_LOG-20260803.md`. Frames:
+`docs/revert-round-20260803/`. **Undoes three items of v41 below and keeps the
+other four** — read this section before the CLEANUP ROUND section, which is now
+history rather than current state.
+
+**MIKE'S RULING — C2/C3 WERE AN OVER-READ.** His words: he said "keep me out of
+the space where I need legal today" meaning **don't incur legal WORK, NOT rename
+the room.** He liked the Foundation version and did not want the "charity"
+version. **The v41 sweep was not defective** — it was clean, complete, caught a
+live-URL break that would have shipped, and measured its own regression on glass.
+It was thorough execution of a scope never granted. **A constraint about what the
+house should SPEND ITS TIME ON was promoted into a constraint about what the
+house should CALL ITSELF**, then defended at length. Thoroughness downstream of a
+wrong premise is not a safeguard; it is what makes the wrong premise expensive to
+undo. **Banked rule: when an operator's sentence can be read as a SCOPE ruling or
+as a NAMING ruling, that is worth exactly one question** — not three names
+considered in a file header. Written into `Foundation.jsx`'s header.
+
+- **R1 THE NAME COMES BACK WHOLE — `THE WEIRD.BABY FOUNDATION` at
+  `/foundation`.** Swept back through every surface C2 swept forward: route, both
+  files (`git mv`, so history follows the file), component, `data-room`,
+  `.mny-`→`.fnd-` (7 classes, cross-checked against 7 CSS selectors), the
+  `useRoom`/`useArrival` keys, title bar ("The Foundation"), directory board
+  ("The Weird.Baby Foundation"). **The board's POSITION did not move** — M8's
+  order is unchanged, the entry still sits between the booth and the shop, and
+  F3's rationale is restored with the name it was written for. **Share tags
+  needed nothing** in either direction (one site-wide set, neither word in it).
+  **THE REDIRECT SURVIVES AND RUNS THE OTHER WAY:** `/money` → `/foundation`,
+  `replace`. Mike's instruction — same courtesy in reverse. **C2's live-site
+  check was re-run rather than inherited:** `git fetch` + `rev-parse origin/main`
+  → **`ecf33c5`**, so v41 IS pushed and `/money` is a real address that is not
+  allowed to die. **ONE RULE DID NOT COME BACK AND ITS ABSENCE IS THE POINT:**
+  C2's scoped `html[data-room="money"] .wb-bar-room` step-down at ≤430px existed
+  because the long name needed 220px in a 196px bar; that defect was caused by
+  the name and dies with it. Re-measured in a genuine 390px frame via
+  `Range.getBoundingClientRect()` — "The Foundation" is **144.7px in a 195.8px
+  bar, 51.1px of headroom, at the standard 12.8px**, no scoped step needed.
+- **R2 Q1 REVERTS TO THE VERSION MIKE LIKED.** "Is this a foundation?" and its
+  v40 answer, word for word. C3's "Is this a charity?" and its
+  registration/charity-number/tax denials are **out**, along with the header
+  block arguing that shipping required them. C3's reasoning was sound in
+  isolation — an unanswered "is this a charity?" gets answered by the visitor's
+  assumptions — but **it answered a question the room's own name had stopped
+  asking**, since C2 had just taken "foundation" off the door. With the name
+  back, the question a stranger arrives with is the one on the door. **The
+  denials were also legal-register work in the room Mike asked to keep out of
+  that space** — the exact thing the original ruling was about. `[PAPA]` tail
+  unchanged and still scrubbed. The tension the name carries is not papered over;
+  it is answered out loud in answer one, which is the version Mike picked.
+- **R3 "THE LEGAL WORK" RETURNS TO THE GIFTED-SERVICES LIST.** Q10 quotes the
+  charter's clause 3 whole again — the design, the code, the shelf, the legal
+  work. C3's subtraction rested on Q1 denying the entity; R2 removes the denial
+  and the argument goes with it. **Gifted legal service was never what Mike ruled
+  out** — what he wants to avoid is legal work the house must pay for and chase.
+  A lawyer donating an hour costs the house what the designer and coder cost it,
+  which is the whole point of the clause being quoted.
+- **KEPT, explicitly:** C1's record-cards removal and the sideboxes-before-
+  entries finding; C4's Hunter Root vault portrait and the letterboxing fix that
+  also cured Jesse Welles; C3's ruling that the room SHIPS (only its two rewrites
+  are undone); the redirect machinery itself.
+
+**Gates:** lint 11 err / 9 warn (= HEAD baseline, zero new), vite build green
+(71 modules, 668.06 kB / 184.78 kB gzip), desktop 1706×900 + genuine 390×740
+iframe lap over nine routes, zero horizontal scroll, zero title truncation, zero
+`[PAPA]` leaks across 12 questions, zero legal-vocabulary matches, zero console
+errors, built bundle carries **0** `mny-` rules and **0** "Where the Money Goes".
+
+---
+
+## SEALED 2026-08-03 — THE CLEANUP ROUND (v41; C1–C4 — C2 AND C3 REVERTED, SEE ABOVE)
 
 Autonomous single-agent Code-lane round on Mike's remote-control brief. Full
 round log: `docs/MUSEUM_CLEANUP_LOG-20260803.md`. Frames:
@@ -65,7 +137,11 @@ round log: `docs/MUSEUM_CLEANUP_LOG-20260803.md`. Frames:
   competes with a column of furniture. **One consumer, checked** — only About the
   Songs declares entry `img`; the robots wing's entry lists are byte-identical.
   Verified 0 boxes / 2 plates / 0 broken images on all four artists.
-- **C2 "FOUNDATION" IS DEAD; THE ROOM IS `WHERE THE MONEY GOES` AT `/money`.**
+- **C2 — ⛔ REVERTED BY R1 (v42, above). NOT CURRENT STATE.** The room is `THE
+  WEIRD.BABY FOUNDATION` at `/foundation` again and the redirect runs `/money` →
+  `/foundation`. Kept below as the record of what was done and why, because R1's
+  live-URL check inherits directly from C2's. **Do not act on this bullet.**
+  ~~"FOUNDATION" IS DEAD; THE ROOM IS `WHERE THE MONEY GOES` AT `/money`.~~
   Mike ruled the word carries a legal expectation the charter refuses. v40 saw
   the same tension and answered it by making "there is no fund" answer one —
   defensible, and the wrong trade: **a name that has to be walked back in its own
@@ -94,7 +170,13 @@ round log: `docs/MUSEUM_CLEANUP_LOG-20260803.md`. Frames:
   320px defence stands); this room takes one further step **alone**, scoped
   `html[data-room="money"]` at ≤430px, 0.7rem/0.04em = 188px. Re-measured: money
   untruncated at 11.2px, five other rooms unchanged at 12.8px.
-- **C3 IT SHIPS, AND IT CLAIMS NOTHING.** Mike: "no one important is going to do
+- **C3 — ⚠️ HALF REVERTED BY R2/R3 (v42, above).** The **ship ruling STANDS**;
+  the **Q1 rewrite and the Q10 subtraction are OUT**. Q1 is "Is this a
+  foundation?" with the v40 answer; Q10 quotes all four gifted services including
+  the legal work. The legal-vocabulary audit method below is still the right
+  method (collapsed `<details>` need `textContent`, not `innerText`) — it was
+  re-run this round and now returns **zero** matches, since C3's own denials were
+  the only two hits. **IT SHIPS, AND IT CLAIMS NOTHING.** Mike: "no one important is going to do
   real research on us right now." DRAFT v0.3 is not a blocker. Audited every
   answer's `textContent` (including collapsed `<details>`, which `innerText` does
   not reach) for `501(c)|non-profit|registered|registration|charity number|tax|

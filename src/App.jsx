@@ -9,7 +9,7 @@ import HrArchive  from "./routes/hr/HrArchive.jsx";
 import HrFanWall  from "./routes/hr/HrFanWall.jsx";
 import WbSpine    from "./routes/wb/WbSpine.jsx";
 import InfoBooth  from "./routes/InfoBooth.jsx";
-import Money      from "./routes/Money.jsx";
+import Foundation from "./routes/Foundation.jsx";
 import GiftShop   from "./routes/shop/GiftShop.jsx";
 import Robots     from "./routes/robots/Robots.jsx";
 import Wal        from "./routes/wal/Wal.jsx";
@@ -66,25 +66,30 @@ export default function App() {
         <Route path="/hr/fan-wall" element={<HrFanWall />} />
         <Route path="/wb" element={<WbSpine />} />
         <Route path="/booth" element={<InfoBooth />} />
-        {/* [F3 2026-08-03] Mike's new directory section. [C2 2026-08-03] it was
-            `/foundation` and is now `/money`: Mike ruled the old name carried a
-            legal expectation the charter refuses. */}
-        <Route path="/money" element={<Money />} />
-        {/* [C2 2026-08-03] AND THE OLD DOOR STILL OPENS, because it is REAL.
-            This redirect was very nearly not written. The reasoning against it
-            was that `/foundation` had only ever existed in one unpushed commit,
-            so no link in the world could point at it — and that reasoning was
-            checked against the live site instead of being trusted, which is the
-            only reason it did not ship as a defect: **Mike pushed AND deployed
-            v40 mid-round**, so `https://weird.baby/foundation` was serving the
-            room while this rename was being written.
-            WITHOUT THIS LINE THE NEXT DEPLOY BREAKS A LIVE URL, and breaks it in
-            the worst available way: there is no catch-all route in this table,
-            so an unmatched path renders the shell and nothing in it — a blank
-            page, not even a 404. `replace` so the dead name does not sit in the
-            visitor's back button.
-            It is the one place the retired word survives on purpose. */}
-        <Route path="/foundation" element={<Navigate to="/money" replace />} />
+        {/* [F3 2026-08-03] Mike's new directory section. [C2] renamed it to
+            `/money`; [R1 2026-08-03] MIKE REVERTED THAT — C2 read "keep me out
+            of the space where I need legal today" as an instruction to rename
+            the room, and it was an instruction not to take on legal WORK. The
+            room is the Foundation again, at the address it was built at. */}
+        <Route path="/foundation" element={<Foundation />} />
+        {/* [C2 2026-08-03 → R1 2026-08-03] THE REDIRECT SURVIVES THE REVERT AND
+            RUNS THE OTHER WAY. This line pointed `/foundation` at `/money` and
+            now points `/money` at `/foundation`, because BOTH names have been
+            real URLs on weird.baby and a live URL is owed the same courtesy in
+            whichever direction the room happens to be moving.
+            C2's own note is worth keeping in one sentence, since it is the only
+            reason this mechanism exists at all: it was very nearly not written,
+            on the reasoning that the retired path had lived in a single unpushed
+            commit — and probing the live site instead of trusting that reasoning
+            is what caught Mike having pushed AND deployed mid-round. The same
+            check applies now and gives the same answer: v41 is pushed, so
+            `/money` is real and is not allowed to become a dead link.
+            IT BREAKS IN THE WORST AVAILABLE WAY IF THIS LINE GOES. There is no
+            catch-all route in this table, so an unmatched path renders the shell
+            and nothing in it — a blank page, not even a 404. `replace`, so the
+            retired name does not sit in the visitor's back button.
+            One retired word survives on purpose. It is just a different one. */}
+        <Route path="/money" element={<Navigate to="/foundation" replace />} />
         <Route path="/shop" element={<GiftShop />} />
         <Route path="/robots" element={<Robots />} />
         <Route path="/wal" element={<Wal />} />
