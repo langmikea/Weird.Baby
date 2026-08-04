@@ -62,6 +62,9 @@
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
+const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday",
+              "Thursday", "Friday", "Saturday"];
+
 /* An ISO date, parsed as a CALENDAR date and not as an instant. `new Date("2024-01-01")`
    is midnight UTC, which is the 31st of December in every timezone west of
    Greenwich — a log that shifts its own dates by a day depending on where it is
@@ -166,7 +169,59 @@ export function docState(doc) {
   return "held";
 }
 
+/* ======== [RC 2026-08-04] THE DATELINE ====================================
+   MIKE'S APPROVED RECORD-ENTRY SHAPE opens with `WEEK n · DAY · Record nnn`,
+   and two of those three are ARITHMETIC ON THE DATE THE ENTRY ALREADY CARRIES.
+   Deriving them is not cleverness, it is the same discipline `entryStamp`
+   already runs under: sixty entries authoring their own week number by hand is
+   sixty chances for a week to disagree with its own date, and the one that
+   disagrees is the one a reader notices.
+
+   THE WEEK NEEDS AN EPOCH AND THE EPOCH IS DECLARED, NOT ASSUMED — the face
+   says which day is day one (`recordEpoch`), because "week 3" is meaningless
+   without saying week three OF WHAT, and inventing an epoch inside a library
+   function is inventing a fact about the story.
+
+   THE RECORD NUMBER IS AUTHORED AND CANNOT BE OTHERWISE. Position in the list
+   is not the number — the volume is a sample of a much longer log, entries are
+   not one per day, and numbering by index would renumber every entry the day a
+   new one is inserted. An entry with no `no` prints no number; that is honest
+   and it is the state the ten existing entries are in. */
+export function entryWeekday(entry) {
+  const dt = entryDate(entry);
+  if (!dt) return "";
+  /* UTC on both sides, for the same reason `entryDate` parses by hand: a
+     weekday that depends on where the page is read is not a weekday. */
+  return DAYS[new Date(Date.UTC(dt.y, dt.m - 1, dt.d)).getUTCDay()];
+}
+
+export function entryWeek(entry, epoch) {
+  const dt = entryDate(entry);
+  const ep = entryDate(typeof epoch === "string" ? { date: epoch } : epoch);
+  if (!dt || !ep) return null;
+  const from = Date.UTC(ep.y, ep.m - 1, ep.d);
+  const to = Date.UTC(dt.y, dt.m - 1, dt.d);
+  if (to < from) return null;            /* before day one is not week zero */
+  return Math.floor((to - from) / 604800000) + 1;
+}
+
+/* The parts, in reading order, with the ones that cannot be derived simply
+   absent. The renderer joins them; it never fills a gap with a guess. */
+export function entryDateline(entry, epoch) {
+  const out = [];
+  const w = entryWeek(entry, epoch);
+  if (w !== null) out.push("Week " + w);
+  const d = entryWeekday(entry);
+  if (d) out.push(d);
+  const n = entry && entry.no;
+  if (typeof n === "number" && Number.isFinite(n)) {
+    out.push("Record " + String(n).padStart(3, "0"));
+  }
+  return out;
+}
+
 export default {
   entryDate, entryStamp, periodKey, periodLabel,
   groupByPeriod, shouldBand, evidenceOf, docState,
+  entryWeekday, entryWeek, entryDateline,
 };

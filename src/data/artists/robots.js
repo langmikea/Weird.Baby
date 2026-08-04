@@ -835,6 +835,14 @@ const spine = [
              shot. */
           still: "/robots/reference/photos/front_full.png",
           stillCaption: "The object the record is about, as received.",
+          /* [RC 2026-08-04] DAY ONE OF THE RECORD, DECLARED RATHER THAN
+             ASSUMED. `WEEK n` in an entry's dateline is arithmetic on the
+             entry's own date — but only once something says which day is day
+             one, and inventing that inside a library function would be
+             inventing a fact about the story. The drop is day one; the first
+             entry in this volume carries that date. See `entryWeek` in
+             `src/lib/record-model.js`. */
+          recordEpoch: "2024-01-01",
           /* [M11] register only. Every claim — the reverse-discovery, the
              writing-as-it-happened, the wrongness — was already here. */
           blurb:
@@ -865,6 +873,158 @@ const spine = [
               line: "Office supplies, personal items and cold-war hardware, " +
                     "no documentation, everything gathered in a rush.",
               note: "ABEAL is “a division of ScrapCo”" },
+            /* ==== [RC 2026-08-04] RECORD 013 — THE PROTOTYPE ENTRY ==========
+               MIKE'S APPROVED DRAFT, built as a real page so the CONTAINER can
+               be reviewed in situ. The other fifty-nine entries of the full
+               Record are NOT written this round: the form gets proven first,
+               and a form proven on one honest entry is worth more than sixty
+               entries poured into a shape nobody has looked at.
+               WHY IT SITS HERE IN THE FILE: the entries stay in the order they
+               happened (the viewer reverses for display, S6), and 17 January
+               2024 falls between the 12th and the 19th. Nothing above or below
+               it moved.
+               WHAT IS DERIVED AND WHAT IS AUTHORED: the stamp, the weekday and
+               the week come off `date` + `recordEpoch` — this entry authors
+               none of the three and they cannot drift from each other. `no` is
+               authored because it cannot be derived: this volume is a SAMPLE of
+               a much longer log, so position in the list is not the record
+               number and numbering by index would renumber the volume every
+               time an entry is inserted. The ten entries around it carry no
+               `no` and print none; that is honest, and closing it is named in
+               the round log as work the full Record needs.
+               THE HOOK IS A PHOTOGRAPH WE ALREADY OWN. Nothing in this entry is
+               photographed — that is the entry's own subject — so the plate is
+               the back of the unit as it was shot on arrival, which is where
+               the cover and the indicator this entry is about actually are. The
+               caption says only what is visible in the frame. The adapter, the
+               port and the second the screen lit are all unphotographed here
+               and every one of them says so on the page rather than in a note
+               nobody reads. */
+            { date: "2024-01-17", no: 13,
+              title: "The one thing that wasn't packed in newspaper",
+              evidence: "object",
+              still: "/robots/reference/photos/rear_power_switch.png",
+              stillCaption: "The back of the unit, photographed the week it " +
+                            "arrived — the indicator, and the catch engraved " +
+                            "OPEN / LOCK. Nothing in this entry has been " +
+                            "photographed yet.",
+              line: "The one modern object in three cartons of 1965, and the " +
+                    "reason the machine is currently drawing power.",
+              lead: "Everything in those three boxes was packed like it was " +
+                    "1965 — newspaper, tape, and the same brittle tan " +
+                    "padding on every side of every object. Everything except " +
+                    "one item, and that item is why the machine is charging.",
+              sections: [
+                { label: "The bag",
+                  body:
+                    "The bag is wrong. Not damaged-wrong — era-wrong. " +
+                    "Three cartons of newsprint and tape and that tan padding " +
+                    "that has gone to powder wherever it was touched, and then, " +
+                    "taped flat against the inside wall of carton two, a modern " +
+                    "sealed pouch: clear film, heat-crimped on all four edges, " +
+                    "the kind of seal that takes a machine to make. Inside it, " +
+                    "one mains adapter. USB-C at the wall end, which is not a " +
+                    "1965 connector by about half a century, and at the other " +
+                    "end a barrel we have not been able to match against " +
+                    "anything on the bench or in the catalogues we have. No " +
+                    "note. No label. No part number. Nothing else in any of the " +
+                    "three boxes was protected that way — not the manual, " +
+                    "not the framed ads[[1]], not the unit itself. Whoever " +
+                    "packed this knew we would need it, and knew we would not " +
+                    "have it.",
+                  doors: [
+                    { kind: "record", to: "2024-01-01",
+                      label: "the drop, three boxes" },
+                  ] },
+                { label: "What it plugs into",
+                  body:
+                    "The barrel goes into a port under the base plate, behind a " +
+                    "cover we had catalogued as a battery door and then left " +
+                    "alone[[1]]. It is not a battery door. Behind it is a " +
+                    "two-pin arrangement and a DC feed we can describe and " +
+                    "would rather not characterise: the pin spacing is not one " +
+                    "of the standards on our bench, and the polarity marking " +
+                    "— if that is what it is — is a single scored " +
+                    "line rather than a symbol. We are deliberately not " +
+                    "publishing voltages. We have numbers off a meter; we are " +
+                    "not confident we are reading the right thing across the " +
+                    "right two points, and a number in a public record is a " +
+                    "number somebody else will act on.",
+                  doors: [
+                    { kind: "archive",
+                      label: "the back of the unit, in the archive",
+                      img: "/robots/reference/photos/rear_power_switch.png",
+                      set: [
+                        { img: "/robots/reference/photos/rear_power_switch.png",
+                          label: "The power switch, round the back", date: "REAR" },
+                        { img: "/robots/reference/photos/unit_new_base.png",
+                          label: "The unit and the base, as catalogued",
+                          date: "BASE" },
+                      ],
+                      index: 0, setTitle: "The back of the unit" },
+                  ] },
+                { label: "A conversation about batteries",
+                  body:
+                    "Which turned into a longer conversation than it deserved " +
+                    "to be, and is the reason nothing was rushed. The " +
+                    "optimistic reading is that whatever is in there is " +
+                    "deep-discharged rather than dead — sixty years at " +
+                    "rest, resting voltage on the floor, and a slow " +
+                    "current-limited charge is precisely the recovery you would " +
+                    "want to give it. The pessimistic reading is that it is a " +
+                    "nickel-cadmium pack from an era with no cell balancing and " +
+                    "no protection circuit, and a deep-discharged NiCd can " +
+                    "develop internal shorts that keep quiet until the moment " +
+                    "you push current through them. The failure modes we " +
+                    "sketched out run from “nothing happens”, which is " +
+                    "the overwhelming favourite, through “a smell we " +
+                    "regret”, to “the building has a bad " +
+                    "afternoon”. So: no bench supply, no dismantling, no " +
+                    "clever ideas about bypassing anything. We are using the " +
+                    "adapter that came in the box, at whatever rate it has " +
+                    "decided on, and we are not hacking it." },
+                { label: "It came on for about a second",
+                  body:
+                    "Yesterday, before the bag turned up and before we knew " +
+                    "there was an adapter to look for, the screen lit. Not an " +
+                    "image — a warm-up glow across the lower third, about a " +
+                    "second of it, then nothing, and nothing since. It is on " +
+                    "video[[1]], because the camera happened to be running for " +
+                    "something else, and it is not much to look at: a dark " +
+                    "rectangle that becomes a slightly less dark rectangle. It " +
+                    "is also the first time anyone here has seen this thing " +
+                    "alive.",
+                  doors: [
+                    { kind: "film", label: "the second it came on",
+                      held: "Not published. The camera was running for " +
+                            "something else, the clip has not been cut, and " +
+                            "this wing has no in-place player to open it in " +
+                            "— so this door says so rather than throwing " +
+                            "you at a file in another window." },
+                  ] },
+                { label: "Charge status",
+                  body:
+                    "On charge since 11:40 this morning. The indicator on the " +
+                    "back has moved once, from nothing to something, and it has " +
+                    "been at something for four hours. There is no gauge, no " +
+                    "percentage and no second lamp — the machine's opinion " +
+                    "of its own state is one bit wide[[1]]. We are looking at " +
+                    "the weekend before we know anything.",
+                  doors: [
+                    { kind: "tv", preset: "record-day",
+                      label: "the machine, as it stands on this day" },
+                  ] },
+                { label: "Also today, briefly",
+                  body:
+                    "Two more of the table entries opened into documentation " +
+                    "folders rather than dead ends. Nothing decisive in either. " +
+                    "One of them refers, in passing and without introduction, to " +
+                    "a “companion unit” — in the tone you would " +
+                    "use for something the reader already owns. We did not, and " +
+                    "do not." },
+              ],
+              tomb: "The adapter is bagged and tagged, the manual is on the " +
+                    "bench, and the machine is drawing power." },
             { date: "2024-01-19", stamp: "19 JAN 24", title: "The One-Page-Ads", evidence: "document",
               line: "The framed ads turn out not to be original: ABEAL " +
                     "retro-fitted other people's ads, with words covered and things taped down.",
@@ -894,8 +1054,14 @@ const spine = [
                     "spy camera, a real telegraph, and a 1960s CEO's day.",
               note: "" },
           ],
-          footer: "First layer only — ten of 436 records. The full entries, " +
-                  "their evidence, and the order they want to be read in, are [PAPA].",
+          /* [RC 2026-08-04] THE FOOTER STOPS SAYING "FIRST LAYER ONLY", because
+             one of these is no longer a first layer and a footer that counts
+             wrong is the first thing a careful reader catches. */
+          footer: "Eleven of 436 records. Ten are first layer — a stamp and " +
+                  "one true sentence each. Record 013 is the first written " +
+                  "whole, and is the prototype of the form the rest will take. " +
+                  "The remaining entries, their evidence, and the order they " +
+                  "want to be read in, are [PAPA].",
         },
       },
       {

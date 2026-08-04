@@ -7,7 +7,7 @@ tree, the live working tree wins — always.
 
 **Read this file FIRST in every session, before STATE.md, before any handoff.**
 
-**Last verified against live tree:** 2026-08-03 (v43 THE EVENING RUN — the `/booth` + `/foundation` file-map row rewritten after the shared sheet was extracted; the routing row gained the catch-all)
+**Last verified against live tree:** 2026-08-04 (v45 RECORD 013 — the file map gained the Record's long-form entry renderer and the three-prefix warning)
 
 ---
 
@@ -102,6 +102,7 @@ The HR exhibit page is **two stacked components**. Mount chain:
 | Logo image (Lobby ONLY; exhibit uses text wordmark) | `public/WeirdBaby_PhotoID.png`, placed `WbHome.jsx:115` |
 | Brand wordmark trial (Fredoka, nav only) | token `--wb-brand`; applied `Exhibit.css:36` |
 | Mothballed Kaleidoscope (never mounted) | `HrExhibitFlow.jsx` :812/:852/:868/:947 + `.hr-kal-*` CSS |
+| **The Record's long-form ENTRY** (headline / dateline / lead / sections with inline door icons / tombstone) | `src/routes/exhibit/RecordEntry.jsx` + the `[RC]` block at the end of `Exhibit.css`. **Mounted from `Exhibit.jsx`'s opened-record branch, and the switch is the DATA: an entry declaring `sections` renders it, an entry that does not renders exactly what it rendered before.** The index, open/close, `wire`/`plates`/`docs` payloads and the ‹ NEWER / OLDER › walk stay in `Exhibit.jsx`. Dateline arithmetic (`entryWeekday`/`entryWeek`/`entryDateline`) is in `src/lib/record-model.js` and needs a `recordEpoch` on the face. **Three near-identical class prefixes live in `Exhibit.css` and mean different objects: `.vp-record-*` is an artist's chart/awards BOARD, `.vp-rec-*` is The Record, `.vp-rec-door` is a door inside a record entry.** |
 | Exhibit data export | `src/data/exhibits/hunter_root.json` via `npm run export-artifacts` |
 | Spine adapter (stable ids) | `src/data/artists/hunter-root-spine.js` |
 | Taxonomy v1 canon (June 9) | `docs/taxonomy/` — TAXONOMY_v1, NORMALIZATION_MAP, COVERAGE_PROOF, RETAG_PLAN |

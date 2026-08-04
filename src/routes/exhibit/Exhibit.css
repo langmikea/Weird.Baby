@@ -3024,3 +3024,193 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
 .vp-rec-doc-note{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-micro);letter-spacing:.07em;line-height:1.5;
   color:var(--wb-gold-lo);opacity:.85;margin:0}
+
+/* ===========================================================================
+   [RC 2026-08-04] THE RECORD ENTRY — Mike's approved long-form container.
+   Renderer + the ruling it was built to: `src/routes/exhibit/RecordEntry.jsx`.
+
+   ⚠ THREE PREFIXES LIVE IN THIS FILE AND THEY ARE NOT THE SAME THING.
+       `.vp-record-*`  the record BOARD — an artist's chart peaks and awards
+       `.vp-rec-*`     THE RECORD — the robots wing's dated log (this block)
+       `.vp-rec-door`  a door INSIDE a record entry (new here)
+   `.vp-rec-door` and `.vp-record-door` are one hyphen apart and mean entirely
+   different objects. Neither cascades into the other — they are distinct
+   classes — but a reader skimming will conflate them, so: the board's door is
+   a marquee button in a row of them, and this one is a glyph inside a
+   sentence. If you are editing one and the type looks wrong, you have the
+   other.
+
+   THE TYPE IS THE EXISTING RAMP AND THE EXISTING FACES. Nothing new is
+   introduced: Syne for labels, DM Serif Display for the headline (the same
+   face `.vp-rec-title` already sets a record's head in), `--wb-read`
+   (Fraunces) for every word that is read rather than scanned, the house mono
+   for register. The whole point of the round is the CONTAINER, and a
+   container that arrives with its own typeface is a second design.
+   =========================================================================== */
+
+/* ---- THE DATELINE. A register line, sitting where the head's title used to,
+   with a middot between its parts drawn by CSS so the data never carries
+   punctuation it would have to get right sixty times. */
+.vp-rec-head--long{align-items:baseline;flex-wrap:wrap;gap:10px 14px}
+.vp-rec-dateline{display:flex;flex-wrap:wrap;align-items:baseline;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.22em;text-transform:uppercase;
+  color:var(--wb-gold-mute)}
+.vp-rec-dateline-part + .vp-rec-dateline-part::before{
+  content:"\00b7";margin:0 .7em;color:var(--wb-border-hi)}
+.vp-rec-head--long .vp-fe-class{margin-left:auto}
+
+/* ---- THE HEADLINE. The day's one thing. `--fs-display` is the ramp's own
+   top step (R5b added it, P7's rule for adding one) — a record entry's
+   headline is the largest thing on its page and should be, because the
+   fifteen-second read is the headings and this is the first of them. */
+.vp-rec-headline{margin:0;font-family:'DM Serif Display',Georgia,serif;
+  font-weight:400;font-size:var(--fs-display);line-height:1.14;
+  letter-spacing:.004em;color:var(--wb-gold);max-width:26ch}
+
+/* ---- THE HOOK. A photograph the museum already owns, and a door into the
+   reader. It floats on a wide frame so the dateline, headline and lead set
+   beside it — the magazine head R1 gave `.vp-face-plate`, one level in. */
+.vp-rec-still{float:right;width:clamp(180px,36%,340px);
+  margin:0 0 var(--rh-block) var(--rh-sect);
+  display:flex;flex-direction:column;gap:6px}
+.vp-rec-still-go{display:block;padding:0;border:0;background:none;
+  cursor:pointer;transition:transform .18s}
+.vp-rec-still-go:hover,.vp-rec-still-go:focus-visible{transform:scale(1.015);
+  outline:none}
+.vp-rec-still-go img{display:block;width:100%;height:auto;
+  border:1px solid var(--wb-border)}
+.vp-rec-still-cap{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.06em;line-height:1.45;
+  color:var(--wb-gold-lo)}
+
+/* ---- THE LEAD. Blockquote weight: a size up from the body, a rule at the
+   left, and a measure short enough that it reads as a standing paragraph
+   rather than as the first of several. */
+.vp-rec-lead{margin:0;padding-left:14px;
+  border-left:2px solid var(--wb-gold-lo);
+  font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-lead);line-height:1.5;letter-spacing:.004em;
+  color:var(--wb-gold);max-width:46ch}
+
+/* ---- THE SECTIONS.
+   NOTHING HERE EQUALISES THEM. No min-height, no grid track, no even gap that
+   would make a four-line section look like an under-filled twelve-line one —
+   Mike's ruling is that weight varies by what happened, so the only vertical
+   rhythm is BETWEEN sections and it is the same ladder the rest of the flat
+   document uses. A long section is long on the page because the day was.
+   NO RULES BETWEEN THEM either: R1 paid for its air by taking the hairlines
+   out, and a label at full ink in Syne with 2.6× above it does not need a
+   line underneath saying the same thing a third time. */
+.vp-rec-sects{list-style:none;margin:0;padding:0}
+.vp-rec-sect + .vp-rec-sect{margin-top:var(--rh-sect)}
+.vp-rec-sect-label{margin:0 0 var(--rh-tight);
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:var(--fs-small);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--wb-gold)}
+.vp-rec-sect-body{margin:0;font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-body);line-height:1.62;letter-spacing:.005em;
+  color:var(--wb-gold-lo);max-width:56ch}
+.vp-rec-sect-body + .vp-rec-sect-body{margin-top:var(--rh-tight)}
+.vp-rec-sect-doors{display:flex;flex-wrap:wrap;gap:10px 16px}
+
+/* ---- THE DOORS.
+   A door sets IN the sentence, so it must not break the line's rhythm: it is
+   inline-flex with baseline alignment, it takes the reading face rather than
+   a control face, and it is marked as a door by its glyph and its underline
+   rather than by a box. A bordered pill here would stop the sentence dead,
+   which is exactly what P10's marquee door is FOR and exactly what M6 ruled
+   against for a pointer that is not leaving the building.
+   THE GLYPH IS `currentColor`, so a door tints as one object on hover — the
+   icon and its word are the same door and never look like two controls. */
+/* THE MARGIN IS ON ONE SIDE ONLY, AND IT WAS CAUGHT ON GLASS. With `.12em`
+   on both sides the sentence "…and then left alone[[1]]. It is not…" printed
+   a visible space between the door and its full stop — punctuation floating
+   off the end of a clause, which reads as a typo rather than as a door. A
+   door needs air on the side it meets a WORD on, and none on the side it
+   meets a comma or a period on, so the left margin stays and the right one
+   goes. Authored text supplies the space after, when there is one. */
+.vp-rec-door{display:inline-flex;align-items:baseline;gap:.34em;
+  margin:0 0 0 .15em;padding:0;border:0;background:none;cursor:pointer;
+  font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:inherit;line-height:inherit;letter-spacing:inherit;
+  color:var(--wb-gold);
+  text-decoration:underline;text-decoration-style:dotted;
+  text-decoration-thickness:1px;text-underline-offset:3px;
+  text-decoration-color:var(--wb-border-hi);
+  transition:color .16s,text-decoration-color .16s}
+.vp-rec-door:hover,.vp-rec-door:focus-visible{
+  color:var(--wb-gold);text-decoration-style:solid;
+  text-decoration-color:var(--wb-gold);outline:none}
+.vp-rec-door-ico{width:1.02em;height:1.02em;flex:0 0 auto;
+  /* baseline-align the glyph to the text it sits in — an SVG's box sits on
+     the baseline and reads as floating a fraction high without this. */
+  transform:translateY(.13em)}
+.vp-rec-door-lbl{text-underline-offset:3px}
+/* A DOOR WITH NOTHING BEHIND IT YET IS STILL A DOOR — it responds, and what
+   it opens is the honest reason. It is marked by being quieter, never by
+   being disabled: a disabled control tells a visitor nothing and cannot be
+   asked. Same discipline as `.vp-rec-doc--held` twenty lines up. */
+.vp-rec-door--held{color:var(--wb-gold-mute);
+  text-decoration-style:dashed;text-decoration-color:var(--wb-border-hi)}
+.vp-rec-door--held:hover,.vp-rec-door--held:focus-visible{
+  color:var(--wb-gold-lo);text-decoration-color:var(--wb-gold-lo)}
+
+/* ---- THE TOMBSTONE. Where things stand when the lights go off: italic, one
+   step quieter than the body, and set apart by air rather than by a rule
+   because the endmark below it is already drawing one. */
+.vp-rec-tomb{margin:0;font-family:var(--wb-read);font-optical-sizing:auto;
+  font-style:italic;font-size:var(--fs-body);line-height:1.55;
+  color:var(--wb-gold-mute);max-width:56ch}
+
+/* ---- THE DOOR'S OVERLAY. It pops ON the page and closes back to exactly
+   where you were, which is the third of Mike's three door laws. So: no
+   full-bleed takeover (that is the portal's job and the portal is a doorway
+   OUT), a wash rather than an opaque ground, and a card sized to its own
+   content so there is never anything to scroll inside it.
+   Z-INDEX SITS UNDER THE WING'S TWO OVERLAYS ON PURPOSE — the portal is 1000
+   and the reader 1001, and both are things this surface OPENS. A peek that
+   could cover them would be a door standing in front of its own destination. */
+.vp-rec-pop{position:fixed;inset:0;z-index:900;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  background:rgba(10,10,9,.62);backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px)}
+.vp-rec-pop-card{width:min(440px,100%);
+  background:var(--wb-ink-card);border:1px solid var(--wb-border-hi);
+  box-shadow:0 22px 48px -18px rgba(0,0,0,.7);
+  padding:20px 22px;display:flex;flex-direction:column;gap:10px}
+.vp-rec-pop-kind{display:flex;align-items:center;gap:8px;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--wb-gold-mute)}
+.vp-rec-pop-kind .vp-rec-door-ico{width:1.25em;height:1.25em;transform:none}
+.vp-rec-pop-title{margin:0;font-family:'Syne',sans-serif;font-weight:800;
+  font-size:var(--fs-lead);line-height:1.2;letter-spacing:.02em;
+  color:var(--wb-gold)}
+.vp-rec-pop-line{margin:0;font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-body);line-height:1.55;color:var(--wb-gold-lo)}
+.vp-rec-pop-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+
+/* ---- THE FLAT DOCUMENT'S RHYTHM LADDER, joined rather than re-invented.
+   These are the same four steps R1 derived from `--face-fs`; the entry's
+   parts simply declare which step each of them is. */
+.vp-flat > .vp-rec-headline{margin-top:var(--rh-tight)}
+.vp-flat > .vp-rec-lead{margin-top:var(--rh-block)}
+.vp-flat > .vp-rec-sects,
+.vp-flat > .vp-rec-tomb{margin-top:var(--rh-sect)}
+.vp-flat > .vp-rec-sects,
+.vp-flat > .vp-rec-tomb,
+.vp-flat > .vp-rec-end{clear:both}
+
+/* ONE COLUMN, ONE ORDER, at the width the head itself stops being two — the
+   same 820px `.vp-face-plate` unfloats at, read off that rule so the page has
+   one threshold rather than two that nearly agree. */
+@media (max-width:820px){
+  .vp-rec-still{float:none;width:100%;margin:0 0 var(--rh-block)}
+  .vp-rec-headline{max-width:none}
+}
+@media (max-width:720px){
+  .vp-rec-head--long .vp-fe-class{margin-left:0}
+  .vp-rec-pop{padding:16px;align-items:flex-end}
+  .vp-rec-pop-card{width:100%}
+}

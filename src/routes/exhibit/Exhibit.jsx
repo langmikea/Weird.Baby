@@ -3,6 +3,7 @@ import { makeFactCycler, splitFact } from "../../lib/fact-select.js";
 import { visitorProse, kept } from "../../lib/visitor-prose.js";
 import { useArrival } from "../../lib/use-arrival.js";
 import MuseumBar from "../../components/MuseumBar.jsx";
+import RecordEntry from "./RecordEntry.jsx";
 import {
   entryStamp, groupByPeriod, shouldBand, evidenceOf, docState,
 } from "../../lib/record-model.js";
@@ -3472,6 +3473,32 @@ export default function Exhibit({ artist }) {
                             </ol>
                           );
                           const en = list[open];
+                          /* ==== [RC 2026-08-04] THE LONG-FORM RECORD ENTRY ===
+                              MIKE'S APPROVED CONTAINER — headline, dateline,
+                              lead, four-to-seven sections with inline door
+                              icons, tombstone. It is a WHOLE BODY rather than
+                              a payload, which is why it is a component and not
+                              another block in the run below.
+                              THE SWITCH IS THE HOUSE'S OWN AND IT IS THE DATA:
+                              an entry that declares `sections` renders it; an
+                              entry that does not is byte-identical to before —
+                              the same rule as `img` (F1), `wire`/`plates` (B9)
+                              and `docs` (L6). No mode flag, no second species
+                              of Record, and the ten entries already written did
+                              not move a byte.
+                              It returns a FRAGMENT, so its parts are still
+                              siblings in this container exactly as L6 requires
+                              — the flat wing's rhythm ladder and the packer's
+                              block list both see the same shape they saw. */
+                          if (Array.isArray(en.sections) && en.sections.length > 0) return (
+                            <RecordEntry
+                              entry={en} list={list} open={open}
+                              epoch={face.recordEpoch}
+                              openLink={openLink}
+                              onOpen={setOpenEntry}
+                              onClose={() => setOpenEntry(null)}
+                              twinEvent={face.twinEvent} />
+                          );
                           return (
                             /* [L6 2026-08-02] AN OPENED RECORD IS A RUN OF
                                 BLOCKS, NOT ONE BLOCK.

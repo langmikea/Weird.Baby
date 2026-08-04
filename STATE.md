@@ -87,6 +87,75 @@ distinction it always rested on, that giving is the other direction and a gift
 made in Weird.Baby's name was never Weird.Baby's money. **If Mike wants the flat
 No back, that is one string.**
 
+## SEALED 2026-08-04 — RECORD 013, THE PROTOTYPE ENTRY (v45; PUSH + DEPLOY ARE MIKE'S)
+
+Autonomous single-agent Code-lane round on Mike's remote-control brief. Full
+round log: `docs/MUSEUM_RECORD_013_LOG-20260804.md`. Frames:
+`docs/record-013-20260804/`. **Scope was ONE entry on purpose** — the container
+gets reviewed in situ before the other fifty-nine are written.
+
+- **THE RECORD-ENTRY CONTAINER, TO MIKE'S APPROVED SHAPE.** Headline · dateline
+  (`WEEK n · DAY · Record nnn`) · blockquote-weight lead · four-to-seven
+  labelled sections · closing italic tombstone. New component
+  `src/routes/exhibit/RecordEntry.jsx`; the switch is the data and it is the
+  house's own — **an entry declaring `sections` renders the long form, an entry
+  that does not is byte-identical to before** (same rule as F1's `img`, B9's
+  `wire`/`plates`, L6's `docs`). Proved on glass: "Three boxes" opened from
+  inside Record 013 renders the LEGACY shape. It returns a FRAGMENT, so L6's
+  siblings-not-one-block ruling survives intact.
+- **WEIGHT VARIES BY WHAT HAPPENED, ENFORCED BY BUILDING NOTHING.** No
+  `min-height`, no grid track, no equalising gap, no cap — Mike's "no formula,
+  no fixed proportions" is only true if no machinery exists that could override
+  it. Longest section eleven lines, shortest four, and the page does not try to
+  fix that.
+- **THE DATELINE IS ARITHMETIC.** `entryWeekday` + `entryWeek` in
+  `record-model.js` derive from the entry's own date plus a `recordEpoch`
+  declared on the face (`2024-01-01`, the drop) — UTC by construction, for the
+  same reason `entryDate` parses by hand. **The record NUMBER is authored and
+  cannot be otherwise**: this volume is a sample of a 436-record log, so
+  position is not the number and numbering by index would renumber the volume
+  every time an entry is inserted. Ten entries carry no number and print none.
+- **THE FOUR DOORS (Mike's set), inline in the sentence via a `[[n]]` marker,
+  never a new window, always an overlay that closes back to exactly where you
+  were.** TV → the existing preset machinery, verified end-to-end: the twin
+  logs `[RECIPE] record-day — weather seeded from 2024-01-17 · install level 2 ·
+  power on`. SAFE → the wing's own reader, two frames, closes back. NEWSPAPER →
+  a peek of the target record with OPEN THIS RECORD / BACK. FILM STRIP →
+  **honest placeholder, and the reason is on the door**: the clip is not cut and
+  this wing has `videos: []` / `playerBar: false`, so there is no in-place
+  player and a browser tab would break two of Mike's three laws. **SAFE was
+  chosen over LIBRARY and the reason is stated**: at one line of running text a
+  library is columns and books, both sub-pixel; a safe is one circle on one
+  rectangle.
+- **RECORD 013 ITSELF**, Mike's approved draft as-is in substance, dated
+  2024-01-17 (Week 3 Wednesday, verified arithmetically) between the existing
+  12 and 19 January entries. The face's footer stops saying "first layer only",
+  because one of these is no longer a first layer.
+- **THE HOOK IS A PLATE THE WING ALREADY OWNED** — the back of the unit as shot
+  on arrival, which is where the cover and the indicator this entry is about
+  actually are, captioned with only what is visible and saying outright that
+  nothing in the entry has been photographed. **That trick does not scale to
+  sixty**; the Record's real answer is still its evidence photographed, and is
+  still ART-pending.
+- **Gates:** lint **11 err / 9 warn = HEAD baseline, zero new** (two errors were
+  introduced and both fixed properly — a module-level regex mutated during
+  render, and a setState-in-effect); build green, 73 modules; desktop lap on the
+  BUILT bundle via `wrangler dev` + genuine 390×740 iframe lap; zero page-level
+  horizontal scroll, **zero inner scrollers**, four doors fired and closed back.
+  No lap harness written to the repo.
+- **Named honestly:** Chrome's screenshot pipeline was unstable this session
+  (stale/blank frames, 30s timeouts). The load-bearing verification was DOM
+  measurement on the built page plus functional door tests, not the JPEGs.
+- **Carry-forward (R5 — what a 60-entry Record needs and one entry cannot
+  expose):** the record-number question above, pagination at scale (`shouldBand`
+  turns on at 14 entries and has never run), a timeline thermometer to replace
+  "8 of 11", index filter/search over the classes already riding the rows, a
+  walk that can skip to the next correction rather than only the next entry,
+  reverse cross-references, a build-time check on the `[[n]]` markers, sixty
+  hooks against a wing that owns eight photographs — and **entry two, which is
+  the real test of the form and should be read before fifty-eight more are
+  written.**
+
 ## SEALED 2026-08-03 — THE EVENING RUN (v43; E1–E5. PUSH + DEPLOY ARE MIKE'S)
 
 Autonomous single-agent Code-lane round on Mike's remote-control brief. Full
