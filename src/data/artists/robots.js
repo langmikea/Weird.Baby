@@ -80,7 +80,12 @@ import RobotsExhibitFlow from "../../routes/robots/RobotsExhibitFlow.jsx";
    track — placeholders earning nothing. R1 took the findings-log album too:
    THE CAROUSEL IS REAL ROBOTS ONLY, plus the purveyor's own album (below).
    Entries come back as data, in this file, when a family earns a photograph
-   and a tracklist. No component changes needed. */
+   and a tracklist. No component changes needed.
+   [V2 2026-08-03] AND ONE HAS: MGK-VIII/MGK-NIAC is back, second in the deck,
+   with eleven plates and four faces off them — as data, in this file, no
+   component changed, exactly as the paragraph above said it would happen. The
+   clause is doing its job rather than being waived; NRU-2000 and the
+   findings-log album are still out and still owe the same rent. */
 /* ===========================================================================
    [M11 2026-08-03] THE FRONT DESK, REWRITTEN TO THE PERSONALITY MAP.
    MIKE: "BURN DOWN AND REBUILD THE COPY — inherited from work not worthy of
@@ -374,6 +379,323 @@ const spine = [
     viewerPoster: "/WeirdBaby_PhotoID.png",
     viewerPosterCaption: "Weird.Baby — purveyors of the weird.",
     tracks: WBR_TRACKS,
+  },
+  /* ═══ [V2 2026-08-03] MGK-VIII REJOINS THE CAROUSEL, WITH THE LENS CAPPED ══
+     MIKE: "MGK-VIII goes on the carousel — build its album using the folder's
+     photographs, but OBFUSCATED: crop to details, partial views, oblique
+     angles. Enough to prove the unit is real and present, NOT enough to spend
+     the reveal."
+
+     WHY IT IS BACK, AND THE NO-COMING-SOON CREDO IS INTACT. R1 took MGK-NIAC
+     off this deck (see the note above the spine) because it was house-logo art
+     plus a single "Coming soon" track — a placeholder earning nothing — and
+     the rule R1 wrote for its return was that an entry comes back "when a
+     family earns a photograph and a tracklist". This family now has TWELVE
+     photographs on file and four faces of real material read off them. It is
+     returning on R1's own terms; no rule is being bent to let it in.
+
+     THE OBFUSCATION IS THE METERED REVELATION, APPLIED TO IMAGERY. It is the
+     same instrument the wing already runs on its prose — show the object,
+     withhold the account — and what is withheld here is one specific thing:
+     THE WHOLE FIGURE. Not one plate on this album contains the unit's full
+     silhouette. Every frame is cut at a joint, a panel or an edge, so a
+     visitor can establish that the machine exists, is built, is powered and
+     was photographed, and still has never seen it stand up.
+
+     THE CROP IS BAKED INTO THE FILE; THE MONOCHROME IS NOT. Two laws, two
+     layers, and they do not belong at the same one. The crop is the RULING and
+     has to survive anyone pointing a new renderer at these files, so it lives
+     on disk. The B&W is the WING'S law, enforced once at the glass
+     (`Exhibit.css` :2923, `[data-exhibit="robots"] img`) — which is where B4
+     deliberately put it so the negative stays the negative. These plates hold
+     their colour on disk exactly as the other eight do, and the day that law
+     is revisited it is still one selector and not twenty re-exports.
+
+     THEY ARE JPEG WHERE THE VIIIp PLATES ARE PNG, on purpose: the sources are
+     camera JPEGs, so PNG here is a lossless wrapper around lossy data — about
+     16 MB of repository for not one visible pixel. The renderer reads a string;
+     nothing anywhere reads the extension.
+
+     PLACED SECOND, AHEAD OF THE VIIIp. The robots repo's family order is
+     "MGK-NIAC, MGK-VIIIp, NRU-2000" and its closed terminology ruling
+     (2026-07-18, markup ruling 4) makes NIAC the ORIGINAL mainframe with
+     "VIII/VIIIp" as ABEAL's 1965 rebrand — so the original stands before the
+     portable. The front desk keeps index 0 and `defaultActiveIndex` is unmoved.
+
+     WHAT THIS ROUND DID NOT DO, because Mike ruled it separately: the folder's
+     five sound files and two videos are INVENTORIED ONLY. Nothing here plays,
+     no `videos` array is populated, and no audio path is referenced anywhere
+     on this album. See the round report for the inventory.
+     ═══════════════════════════════════════════════════════════════════════ */
+  {
+    id: "mgk-viii",
+    title: "MGK-VIII",
+    /* NO YEAR, AND THAT IS A REFUSAL RATHER THAN A GAP. The VIIIp carries 1965
+       because the wing's record puts it there. Nothing in this repository dates
+       THIS unit, and the only dates that are certain — 2013 and 2021 — are the
+       dates of the PHOTOGRAPHS, not of the object. Printing either under the
+       cover would be the museum inventing a provenance it does not hold. The
+       carousel simply prints no year, as it already does for the front desk. */
+    year: null,
+    tags: ["mgk", "viii", "niac", "mainframe", "abeal", "machine", "detail"],
+    art: "/robots/art/mgk-viii-cover.jpg",
+    accent: null,
+    /* THE POSTER IS THE CHEST, AND IT IS DOING DOUBLE DUTY — it is also the
+       second tile of The Plates, named here rather than left unremarked, the
+       way the VIIIp album names the family shot's double duty. It is the one
+       detail on file that reads as A MACHINE THAT STANDS UP without showing
+       the machine standing up: torso, both shoulders, the top of two limbs,
+       cut above and below. `contentsPlate` prints it in the contents column
+       as well, off this same string. */
+    viewerPoster: "/robots/reference/mgk-viii/chest_grille.jpg",
+    viewerPosterCaption:
+      "MGK-VIII at the chest — a detail. The whole frame is shown nowhere.",
+    tracks: [
+      {
+        id: "name",
+        title: "MGK-NIAC",
+        videos: [],
+        tags: ["niac", "name", "abeal", "mainframe", "1965"],
+        face: {
+          kind: "text",
+          title: "MGK-NIAC",
+          subtitle: "THE NAME IT WAS BUILT UNDER",
+          /* the lens, and nothing but the lens. The strongest single detail in
+             the set and the least revealing of the shape it belongs to — you
+             can tell something is looking back and you cannot tell what it is
+             mounted on. */
+          still: "/robots/reference/mgk-viii/head_lens.jpg",
+          stillCaption: "At the lens. One of eleven details on file.",
+          blurb:
+            "The mainframe — the big one, the early one, the one that only " +
+            "answers. Everything the portable does that this does not arrived " +
+            "later and arrived smaller. It has two names and the museum has " +
+            "not decided which of them goes on the door.",
+          lines: [
+            "BUILT AS   MGK-NIAC",
+            "SOLD AS    MGK-VIII — ABEAL's 1965 rebrand",
+            "RUNS       the classic answer set, and a short list beside it",
+            "SUCCESSOR  MGK-VIIIp — portable, later, and far more talkative",
+          ],
+          entries: [
+            { stamp: "NAME", title: "Two names, one machine",
+              line: "It was built as MGK-NIAC and sold as MGK-VIII. ABEAL did " +
+                    "the selling and ABEAL did the renaming, which is exactly " +
+                    "the shape the record already gives them: they did not " +
+                    "start any of this, they were responsible for the looks.",
+              note: "the record's own correction, 26 January 2024" },
+            { stamp: "WHAT", title: "A mainframe, not a portable",
+              line: "It runs the classic answer set and a similarly limited " +
+                    "list of everything else. The adjustable personality, the " +
+                    "named engines and the menu are all the portable's, and " +
+                    "all of them came afterwards.",
+              note: "" },
+            { stamp: "WHEN", title: "The day the first name surfaced",
+              line: "9 February 2024. The original project title comes out of " +
+                    "the material, and Carter Bookman comes out with it — " +
+                    "“his life is a mystery (some may say an Enigma??)”.",
+              note: "the entry is on the VIIIp album, in The Record" },
+            { stamp: "OPEN", title: "Which name goes on the door",
+              line: "This album is filed under the second name because that is " +
+                    "what the folder is called, what the firmware is called and " +
+                    "what the parts are labelled. The record prefers the first. " +
+                    "Both are defensible and only one can be on the cover.",
+              note: "[PAPA] — whether the carousel reads MGK-NIAC or MGK-VIII" },
+          ],
+          entriesMode: "list",
+          footer: "MGK-VIII · MGK-NIAC · v1",
+        },
+      },
+      {
+        /* ==== THE PLATES, AND THE THING THEY ARE BUILT NOT TO SHOW =========
+           This is the VIIIp plate wall's renderer, unchanged, pointed at a set
+           that has been cropped before it ever reached the repository. Same
+           glued-up wall, same tilt, same tap-to-open reader.
+           THE TOMBSTONE SAYS THE QUIET PART. A museum that withholds without
+           saying so is not metering a revelation, it is just short of pictures;
+           the "Frame" row is there so a visitor knows the absence is authored.
+           CAPTIONS ARE WHAT THE PHOTOGRAPH SHOWS, in the wing's own register —
+           the rule the VIIIp wall set. No caption below interprets, dates the
+           OBJECT, or names a donor part. */
+        id: "plates",
+        title: "The Plates",
+        videos: [],
+        tags: ["plates", "photographs", "viii", "reference", "detail"],
+        face: {
+          kind: "text",
+          title: "THE PLATES",
+          subtitle: "MGK-VIII · DETAILS ONLY",
+          blurb:
+            "Eight details of a machine that is never shown whole. Cropped " +
+            "close on purpose and cut at the joints — enough to establish " +
+            "that the thing is built, wired, standing and lit, and nowhere near " +
+            "enough to establish what it looks like.",
+          tombstone: [
+            { k: "Subject", v: "MGK-VIII, on the bench" },
+            { k: "State", v: "Built and powered (2021); under construction (2013)" },
+            { k: "Plates", v: "Eight, cropped from six photographs" },
+            { k: "Frame", v: "Withheld — no plate carries the whole unit" },
+            { k: "Rights", v: "Ours. Photographed here, cropped here." },
+          ],
+          collage: [
+            { img: "/robots/reference/mgk-viii/head_oblique.jpg",
+              href: "/robots/reference/mgk-viii/head_oblique.jpg",
+              label: "The head, three-quarters — a camera body, lens forward",
+              date: "MAR 2021" },
+            { img: "/robots/reference/mgk-viii/chest_grille.jpg",
+              href: "/robots/reference/mgk-viii/chest_grille.jpg",
+              label: "The chest, and the shoulders it hangs from",
+              date: "MAR 2021" },
+            { img: "/robots/reference/mgk-viii/limbs_lower.jpg",
+              href: "/robots/reference/mgk-viii/limbs_lower.jpg",
+              label: "Lower limbs — flexible conduit into cast feet",
+              date: "MAR 2021" },
+            { img: "/robots/reference/mgk-viii/column_lit.jpg",
+              href: "/robots/reference/mgk-viii/column_lit.jpg",
+              label: "A lit column, behind a grille",
+              date: "MAR 2021" },
+            { img: "/robots/reference/mgk-viii/bench_power.jpg",
+              href: "/robots/reference/mgk-viii/bench_power.jpg",
+              label: "The bench — power, a relay board, and two feet",
+              date: "MAR 2021" },
+            { img: "/robots/reference/mgk-viii/torso_unfinished.jpg",
+              href: "/robots/reference/mgk-viii/torso_unfinished.jpg",
+              label: "The same chest, eight years earlier, unpowered",
+              date: "FEB 2013" },
+            { img: "/robots/reference/mgk-viii/feet_plinth.jpg",
+              href: "/robots/reference/mgk-viii/feet_plinth.jpg",
+              label: "Feet, on a plywood plinth",
+              date: "FEB 2013" },
+            { img: "/robots/reference/mgk-viii/slot_mockup.jpg",
+              href: "/robots/reference/mgk-viii/slot_mockup.jpg",
+              label: "A slot cut in a mock-up, with a limb across it",
+              date: "FEB 2013" },
+          ],
+          footer: "Eight plates · details only · Weird.Baby Robots",
+          /* THE MARKER SCRUB CUTS BY SENTENCE, NOT BY STRING (P5), so whatever
+             is written outside the [PAPA] sentence is VISITOR COPY and has to
+             read like it. The first draft left "the uncropped photographs are
+             on file and one line of data would publish any of them" standing on
+             the page — true, and the register of a maintainer talking to
+             another maintainer. The operational half now sits behind the
+             marker; what survives to the wall is the one thing a visitor
+             actually needs to know about the crop. */
+          papa: "[PAPA] — how much of this unit is ever shown whole, and when; " +
+                "the uncropped originals are all on file and any of them can be " +
+                "published from this file alone. The withholding is authored, " +
+                "and it is not a shortage of photographs.",
+        },
+      },
+      {
+        id: "firmware",
+        title: "The Firmware",
+        videos: [],
+        tags: ["firmware", "source", "ino", "bench", "led", "artifact"],
+        face: {
+          kind: "text",
+          title: "THE FIRMWARE",
+          subtitle: "WHAT THE MACHINE IS RUNNING",
+          /* A LIT MATRIX, AND IT IS NOT THE ONE THE NUMBERS BELOW DESCRIBE.
+             This photograph is from February 2013 and the flagship firmware is
+             from February 2026 — thirteen years apart, different board, almost
+             certainly a different matrix. It is used here because it is the one
+             picture in the whole set of SOFTWARE DOING SOMETHING, and the
+             caption dates it rather than letting the proximity imply otherwise.
+             The alternative was a screenshot of a `.ino` file, which is a
+             picture of text sitting above a page of text. */
+          still: "/robots/reference/mgk-viii/matrix_lit.jpg",
+          stillCaption: "An LED matrix, lit on the breadboard — February 2013.",
+          blurb:
+            "Two generations of code are on file and both are real: eight " +
+            "single-subsystem bench sketches, and the flagship that supersedes " +
+            "them. What follows is what the files say about themselves. There " +
+            "is no reading of them here, because nobody has written one.",
+          lines: [
+            "FLAGSHIP   v0.1 · 2026-02-23 · 1,385 lines · Uno R4 WiFi",
+            "STATUS     baseline — pre-thermal-validation",
+            "BENCH      8 single-subsystem sketches, January 2026",
+            "OUTPUTS    2 matrix chains · 2 bar chains · 3 servos",
+          ],
+          entries: [
+            { stamp: "ENFORCES", title: "Five rules, declared in the header",
+              line: "A numerical envelope. A ceiling of eight core states. " +
+                    "Mutual exclusion. A reveal no faster than twelve seconds. " +
+                    "And no adaptive learning — the machine is forbidden, in " +
+                    "writing, from getting to know you.",
+              note: "printed above the first include, before any code" },
+            { stamp: "8 × 16", title: "Only seven rows are visible",
+              line: "The matrix is addressed as eight rows of sixteen and seven " +
+                    "of those rows are all you can ever see on the finished " +
+                    "machine. The eighth is wired, driven, and behind something.",
+              note: "the note is in the sketch, in the builder's own hand" },
+            { stamp: "1 × 64", title: "The bar is one long chain",
+              line: "Sixty-four in a single row, addressed as a line rather " +
+                    "than as a column of anything — whatever it reads as when " +
+                    "it is lit, the code underneath it is one strip.",
+              note: "" },
+            { stamp: "32", title: "The brightness the power supply permits",
+              line: "All-at-once flashes are capped at a quarter of the standard " +
+                    "level, for the least mysterious reason in this entire wing: " +
+                    "“If I make too bright at once the Nano will shut down " +
+                    "due to power draw.”",
+              note: "a bench limit on a bench board — the flagship targets an R4" },
+          ],
+          entriesMode: "list",
+          footer: "MGK-VIII · FIRMWARE · v1",
+        },
+      },
+      {
+        id: "parts",
+        title: "The Parts",
+        videos: [],
+        tags: ["parts", "found", "workshop", "drawer"],
+        face: {
+          kind: "text",
+          title: "THE PARTS",
+          subtitle: "WHAT IT IS MADE OF",
+          /* THE DRAWER IS THE ONLY PLATE IN THE SET THAT NEEDS NO OBFUSCATION,
+             because the unit is not in it. It is included precisely for that:
+             a photograph that gives away nothing about the figure and
+             everything about the method. */
+          still: "/robots/reference/mgk-viii/parts_drawer.jpg",
+          stillCaption: "One drawer — jewelled indicators, bezels, knobs, braid.",
+          blurb:
+            "Read the plates for materials rather than for shape and the method " +
+            "is obvious: nothing here was fabricated to look old. It was found " +
+            "old, sorted into compartments, and then a machine was assembled " +
+            "out of the compartments.",
+          lines: [
+            "HEAD    a camera body, lens forward",
+            "CHEST   a grille, on brass shoulder fittings",
+            "LIMBS   flexible steel conduit",
+            "FEET    cast metal bases",
+          ],
+          entries: [
+            { stamp: "METHOD", title: "Sorted first, assembled second",
+              line: "The drawer is the tell. Compartment after compartment of " +
+                    "indicator jewels, bezels, knobs and switchgear, graded and " +
+                    "kept — a stock of parts held long before there was a " +
+                    "machine that needed any particular one of them.",
+              note: "" },
+            { stamp: "EIGHT YEARS", title: "The same object, twice",
+              line: "Two of the plates are the same chest photographed eight " +
+                    "years apart: once in a workshop, unpowered, against a paper " +
+                    "mock-up, and once on a bench with current in it. Very " +
+                    "little between the two photographs has changed.",
+              note: "" },
+            { stamp: "CAUTION", title: "What the plates do not establish",
+              line: "They establish what the machine is made OF. They establish " +
+                    "nothing whatever about where any single part came from, and " +
+                    "this page does not guess — the four lines above are read " +
+                    "off the photographs and stop exactly where the photographs " +
+                    "stop.",
+              note: "[PAPA] — the donor list, if it is ever published at all" },
+          ],
+          entriesMode: "list",
+          footer: "MGK-VIII · PARTS · v1",
+        },
+      },
+    ],
   },
   {
     id: "mgk-viiip",
