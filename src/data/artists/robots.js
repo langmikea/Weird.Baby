@@ -450,8 +450,8 @@ const spine = [
        way the VIIIp album names the family shot's double duty. It is the one
        detail on file that reads as A MACHINE THAT STANDS UP without showing
        the machine standing up: torso, both shoulders, the top of two limbs,
-       cut above and below. `contentsPlate` prints it in the contents column
-       as well, off this same string. */
+       cut above and below. (It also printed under the contents list until
+       2026-08-04; see the `contentsPlate` note at the foot of this file.) */
     viewerPoster: "/robots/reference/mgk-viii/chest_grille.jpg",
     viewerPosterCaption:
       "MGK-VIII at the chest — a detail. The whole frame is shown nowhere.",
@@ -483,28 +483,38 @@ const spine = [
             "SUCCESSOR  MGK-VIIIp — portable, later, and far more talkative",
           ],
           entries: [
+            /* [HR 2026-08-04] THIS FACE CITED THE RECORD THREE TIMES AND THE
+               RECORD NO LONGER SAYS ANY OF IT. Mike's ruling deleted ten
+               invented Record entries; three lines here were pointers into
+               them and one whole entry was a restatement of one.
+                 · the NAME row's "which is exactly the shape the record
+                   already gives them" and its note "the record's own
+                   correction, 26 January 2024" — both cut. What is left is the
+                   claim this face makes in its own right.
+                 · the WHEN row ("The day the first name surfaced. 9 February
+                   2024 … Carter Bookman") — CUT ENTIRELY. It was the deleted
+                   09 FEB 24 Record entry retold on another face, down to its
+                   date and its quotation, and its note pointed the visitor at
+                   an entry that is gone.
+                 · the OPEN row's "The record prefers the first." — cut. The
+                   record expresses no preference now, and printing one would
+                   be this file inventing the log's opinion of itself. */
             { stamp: "NAME", title: "Two names, one machine",
               line: "It was built as MGK-NIAC and sold as MGK-VIII. ABEAL did " +
-                    "the selling and ABEAL did the renaming, which is exactly " +
-                    "the shape the record already gives them: they did not " +
+                    "the selling and ABEAL did the renaming: they did not " +
                     "start any of this, they were responsible for the looks.",
-              note: "the record's own correction, 26 January 2024" },
+              note: "" },
             { stamp: "WHAT", title: "A mainframe, not a portable",
               line: "It runs the classic answer set and a similarly limited " +
                     "list of everything else. The adjustable personality, the " +
                     "named engines and the menu are all the portable's, and " +
                     "all of them came afterwards.",
               note: "" },
-            { stamp: "WHEN", title: "The day the first name surfaced",
-              line: "9 February 2024. The original project title comes out of " +
-                    "the material, and Carter Bookman comes out with it — " +
-                    "“his life is a mystery (some may say an Enigma??)”.",
-              note: "the entry is on the VIIIp album, in The Record" },
             { stamp: "OPEN", title: "Which name goes on the door",
               line: "This album is filed under the second name because that is " +
                     "what the folder is called, what the firmware is called and " +
-                    "what the parts are labelled. The record prefers the first. " +
-                    "Both are defensible and only one can be on the cover.",
+                    "what the parts are labelled. Both names are defensible and " +
+                    "only one can be on the cover.",
               note: "[PAPA] — whether the carousel reads MGK-NIAC or MGK-VIII" },
           ],
           entriesMode: "list",
@@ -814,7 +824,7 @@ const spine = [
         id: "record",
         title: "The Record",
         videos: [],
-        tags: ["journal", "record", "2024", "provenance"],
+        tags: ["journal", "record", "provenance"],
         face: {
           /* [S6 2026-07-30] THE RECORD OPENS ON ITS MOST RECENT ENTRY.
              A log that opens at the beginning is an archive; a log that opens
@@ -826,277 +836,94 @@ const spine = [
           kind: "text",
           entriesMode: "log",
           title: "THE RECORD",
-          /* [E3 2026-08-03] THE HOOK IS THE THING THE RECORD IS A RECORD OF.
-             The audit named this face the strongest remaining candidate in the
-             building and named what it wants: the EVIDENCE photographed, one
-             picture per dated entry, through the `.vp-fe-plate` slot that
-             already exists. That is still the right answer and it is still
-             ART-pending — nobody has photographed the cartons, the note signed
-             "-W.O.", the retro-fitted ads or the three opened cases, and this
-             round did not invent them.
-             WHAT IT COULD HAVE TODAY IS A HEAD PLATE, and the honest one is the
-             object itself: a log about a machine, opening on the machine as it
-             arrived. `front_full.png` is ours, already in the build as tile two
-             of The Plates, and is not the head plate of any other face — the
-             family shot is the one doing double duty, and it is deliberately
-             not used again here.
-             THE TRADE IS NAMED: this is a weaker hook than ten photographs of
-             ten pieces of evidence would be, and a much stronger one than an
-             index of dates on white paper. One string when the evidence is
-             shot. */
-          still: "/robots/reference/photos/front_full.png",
-          stillCaption: "The object the record is about, as received.",
-          /* [RC 2026-08-04] DAY ONE OF THE RECORD, DECLARED RATHER THAN
-             ASSUMED. `WEEK n` in an entry's dateline is arithmetic on the
-             entry's own date — but only once something says which day is day
-             one, and inventing that inside a library function would be
-             inventing a fact about the story. The drop is day one; the first
-             entry in this volume carries that date. See `entryWeek` in
-             `src/lib/record-model.js`. */
-          recordEpoch: "2024-01-01",
-          /* [CS 2026-08-04] THE BLURB WAS THE ROUND'S EXHIBIT A.
-             It read "A discovery run backwards: the object first, the
-             explanation afterwards … which is emphatically not the order in
-             which any of it makes sense." That is a description OF the writing,
-             printed where the writing goes — the museum standing beside its own
-             log explaining the log's shape to the reader. Mike found it live.
-             THE REPLACEMENT SAYS WHAT THE RECORD IS AND WHAT IS IN IT, which is
-             the same job a catalogue entry does for any other object in the
-             building. No claim is added: the weekly cadence, the corrections and
-             the start date were all already here.
-             Same cut on `lines`: "in repo" is a fact about this repository, not
-             about the collection, and "not as it makes sense" was the blurb's
-             commentary wearing a register line's clothes. */
-          blurb:
-            "The log kept since the cartons arrived: what was found, what was " +
-            "worked out from it, and what was later corrected. Written week by " +
-            "week, as each week happened.",
-          lines: [
-            "SOURCE   436 records, kept since January 2024",
-            "INDEX    date-stamped, log-sheet register",
-            "ORDER    as it happened",
-          ],
-          /* THE FIRST LAYER IS REAL. Ten entries, real dates, and one true
-             sentence each, taken from the blog archive itself — not invented
-             to fill a template. The full bodies are Mike's to place, and the
-             [PAPA] rows are the ones where a summary would be putting words
-             in the narrator's mouth. */
+          /* ==== [HR 2026-08-04] THE HEADER FURNITURE IS GONE. MIKE'S RULING.
+             "Everything between the THE RECORD heading and the first entry's
+             headline — the lead blockquote, the object photo and its caption,
+             and the SOURCE / INDEX / ORDER register block. ALL OF IT WAS
+             INVENTED. Mike has reported this before and it survived. Remove it
+             entirely. The Record opens on its entries."
+             So `blurb`, `still`, `stillCaption` and `lines` are not rewritten,
+             not narrowed and not replaced — they are DELETED, and the face
+             carries a heading and its entries. `recordEpoch` went with them:
+             it declared 1 January 2024 as day one of the log, which was the
+             date of an entry that no longer exists, and `WEEK n` cannot be
+             arithmetic on a day nobody has supplied. `entryDateline` simply
+             prints one fewer part (record-model.js), which is what it was
+             built to do.
+             WHAT THIS COSTS, NAMED RATHER THAN PAPERED OVER: the face's own
+             plate was this surface's VISUAL HOOK, so the closed Record is now
+             a heading and one index row of type. That is a live conflict with
+             the standing Visual Hook Law, and it is Mike's ruling that wins —
+             a hook built out of an invented caption is the thing this round
+             exists to remove. The entry's own plate survives inside it. */
           entries: [
-            { date: "2024-01-01", stamp: "01 JAN 24", title: "Three boxes", evidence: "document",
-              line: "An anonymous drop: three cartons, marked classified and " +
-                    "fragile on every side, with a note taped to them signed “-W.O.”",
-              note: "the note's full text is in the archive" },
-            { date: "2024-01-05", stamp: "05 JAN 24", title: "Who is W.O.?", evidence: "record",
-              line: "The first entry. Three units are named on the boxing, " +
-                    "and ABEAL is assumed — wrongly — to be their creator.",
-              note: "" },
-            { date: "2024-01-12", stamp: "12 JAN 24", title: "Something off about this drop", evidence: "record",
-              line: "Office supplies, personal items and cold-war hardware, " +
-                    "no documentation, everything gathered in a rush.",
-              note: "ABEAL is “a division of ScrapCo”" },
-            /* ==== [RC 2026-08-04] RECORD 013 — THE PROTOTYPE ENTRY ==========
-               MIKE'S APPROVED DRAFT, built as a real page so the CONTAINER can
-               be reviewed in situ. The other fifty-nine entries of the full
-               Record are NOT written this round: the form gets proven first,
-               and a form proven on one honest entry is worth more than sixty
-               entries poured into a shape nobody has looked at.
-               WHY IT SITS HERE IN THE FILE: the entries stay in the order they
-               happened (the viewer reverses for display, S6), and 17 January
-               2024 falls between the 12th and the 19th. Nothing above or below
-               it moved.
-               WHAT IS DERIVED AND WHAT IS AUTHORED: the stamp, the weekday and
-               the week come off `date` + `recordEpoch` — this entry authors
-               none of the three and they cannot drift from each other. `no` is
-               authored because it cannot be derived: this volume is a SAMPLE of
-               a much longer log, so position in the list is not the record
-               number and numbering by index would renumber the volume every
-               time an entry is inserted. The ten entries around it carry no
-               `no` and print none; that is honest, and closing it is named in
-               the round log as work the full Record needs.
-               THE HOOK IS A PHOTOGRAPH WE ALREADY OWN: the back of the unit as
-               it was shot on arrival, which is where the cover and the
-               indicator this entry is about actually are. The caption says only
-               what is visible in the frame.
-
-               ==== [CS 2026-08-04] STRIPPED FLAT. MIKE'S RULING ==============
-               "Too dramatic, too colourful, too screenplay-like. Rewrite it
-               FLAT — plain declarative reporting of what happened, no
-               atmosphere, no rhythm-for-effect, no lines written to land. Same
-               facts, same structure, same doors, all the colour removed. Do not
-               split the difference."
-               WHAT CAME OUT, so the next pass can see the axis rather than
-               guess at it: the three-beat lists built for cadence ("newspaper,
-               tape, and the same brittle tan padding"), the quoted failure
-               modes ("a smell we regret", "the building has a bad afternoon"),
-               the first-person colour ("a longer conversation than it deserved
-               to be", "the first time anyone here has seen this thing alive"),
-               the sentence fragments used as beats ("The bag is wrong. Not
-               damaged-wrong — era-wrong."), and every line whose job was the
-               turn at the end of it.
-               WHAT DID NOT COME OUT: any fact, any section, any door, any
-               marker position, the headline, or the order. The section labels
-               are unchanged. This is the same entry reported rather than
-               performed, which is what Mike asked to read before the voice gets
-               developed.
-               ONE LINE WAS ALSO REMOVED AS META, not as colour — the caption's
-               "Nothing in this entry has been photographed yet." A caption's
-               job is to say what is in the frame, and that sentence was about
-               the museum's photography backlog. The caption still names exactly
-               what the plate shows, so it cannot be mistaken for the adapter. */
-            { date: "2024-01-17", no: 13,
-              title: "The one thing that wasn't packed in newspaper",
+            /* ==== [HR 2026-08-04] RECORD 013, STRIPPED TO WHAT IS KNOWN =====
+               MIKE'S RULING: "the entry is still full of invented specifics
+               (the heat-crimped pouch taped to carton two, the hinged cover,
+               the port location, the charge start time, the indicator
+               movement, the 'companion unit' line, the number of cartons, the
+               dates). Mike supplied the SHAPE of that day — a modern sealed
+               bag holding a USB-C adapter, packed differently from everything
+               else; a conversation about deep-discharge and why they didn't
+               hack it; a brief power-on before the adapter; a slow charge.
+               NOTHING ELSE IS KNOWN."
+               Four facts are all this entry may say, so it says them and it
+               stops. Every gap the strip exposed is a QUESTION FOR MIKE and
+               lives in `docs/RECORD_013_QUESTIONS-20260804.md` — not here, and
+               not filled in with something plausible.
+               WHAT WENT, BY NAME: THE DATE, so the entry carries no `date`, no
+               `stamp` and no weekday and `entryDateline` prints `Record 013`
+               alone — which is exactly what record-model.js was built to do
+               with an undated entry. THE SECTION "What it plugs into",
+               entirely: every sentence in it was a measurement, a location or
+               a fitting nobody has supplied. THE SECTION "Also today,
+               briefly", entirely: the "companion unit" was its only content.
+               ALL FOUR DOORS — the newspaper door pointed at an entry this
+               round deleted, the archive door lived inside a section that is
+               gone, the film door described footage nobody has cut, and the
+               portal door was keyed to the day the entry no longer has.
+               THE PLATE STAYS AND ITS CAPTION SHRINKS to what this same file
+               is already captioned as on the plate wall ("The power switch,
+               round the back"). It is a real photograph of the object the
+               entry is about; it is not evidence of the bag, and the caption
+               no longer implies that it is. */
+            { no: 13,
+              title: "The one thing that wasn't packed like the rest",
               evidence: "object",
               still: "/robots/reference/photos/rear_power_switch.png",
-              stillCaption: "The back of the unit, photographed the week it " +
-                            "arrived: the indicator, and the catch engraved " +
-                            "OPEN / LOCK.",
-              line: "A modern mains adapter, sealed in a bag, in a carton " +
-                    "otherwise packed as 1965. The unit is now on charge.",
-              lead: "Everything in the three cartons was packed the same way: " +
-                    "newspaper, tape, and tan padding on every side of every " +
-                    "object. One item was not. It is a mains adapter, and the " +
-                    "unit is on charge because of it.",
+              stillCaption: "The back of the unit.",
+              line: "A sealed modern bag holding a USB-C adapter, packed " +
+                    "unlike everything else that arrived with it. The unit is " +
+                    "now on charge.",
+              lead: "One item in the delivery was not packed the way the rest " +
+                    "of it was packed. It is a USB-C adapter, sealed in a " +
+                    "modern bag, and the unit is on charge because of it.",
               sections: [
                 { label: "The bag",
                   body:
-                    "Taped flat against the inside wall of carton two was a " +
-                    "sealed pouch: clear film, heat-crimped on all four edges, " +
-                    "a machine-made seal. Inside it was one mains adapter. The " +
-                    "wall end is USB-C. The other end is a barrel connector " +
-                    "that does not match anything on the bench or in the " +
-                    "catalogues held here. There was no note, no label and no " +
-                    "part number with it. Nothing else in the three cartons " +
-                    "was packed that way — not the manual, not the framed " +
-                    "ads[[1]], not the unit. The pouch is the only modern " +
-                    "object in the drop, and it holds a part the unit requires " +
-                    "and this house did not have.",
-                  doors: [
-                    { kind: "record", to: "2024-01-01",
-                      label: "the drop, three boxes" },
-                  ] },
-                { label: "What it plugs into",
+                    "A sealed bag, modern, holding one USB-C adapter. It was " +
+                    "packed differently from everything else that arrived " +
+                    "with it." },
+                { label: "A conversation about the battery",
                   body:
-                    "The barrel fits a port under the base plate, behind a " +
-                    "cover this museum had catalogued as a battery door and " +
-                    "had not opened[[1]]. It is not a battery door. Behind it " +
-                    "are two pins and a DC feed. The pin spacing does not " +
-                    "match any standard on the bench. The polarity marking, if " +
-                    "that is what it is, is a single scored line rather than a " +
-                    "symbol. No voltages are published here. Meter readings " +
-                    "were taken, but it is not certain they were taken across " +
-                    "the correct two points, and a number in a public record " +
-                    "is a number somebody else will act on.",
-                  doors: [
-                    { kind: "archive",
-                      label: "the back of the unit, in the archive",
-                      img: "/robots/reference/photos/rear_power_switch.png",
-                      set: [
-                        { img: "/robots/reference/photos/rear_power_switch.png",
-                          label: "The power switch, round the back", date: "REAR" },
-                        { img: "/robots/reference/photos/unit_new_base.png",
-                          label: "The unit and the base, as catalogued",
-                          date: "BASE" },
-                      ],
-                      index: 0, setTitle: "The back of the unit" },
-                  ] },
-                { label: "A conversation about batteries",
+                    "The cell was discussed before anything was connected: " +
+                    "whether it is deep-discharged rather than dead, and " +
+                    "whether to hack it. It was not hacked. The unit is " +
+                    "charging from the adapter that came in the bag." },
+                { label: "It came on, briefly",
                   body:
-                    "The cell was discussed at length before anything was " +
-                    "connected. The favourable reading is that the pack is " +
-                    "deep-discharged rather than dead: sixty years at rest, " +
-                    "resting voltage on the floor, and a slow current-limited " +
-                    "charge is the correct recovery for that. The unfavourable " +
-                    "reading is that it is a nickel-cadmium pack from a period " +
-                    "with no cell balancing and no protection circuit, and " +
-                    "that a deep-discharged NiCd can develop internal shorts " +
-                    "that give no warning until current is put through them. " +
-                    "The failure modes considered ran from nothing happening, " +
-                    "which is the most likely outcome, through smoke, to a " +
-                    "fire. No bench supply was used, nothing was dismantled " +
-                    "and nothing was bypassed. The unit is charging from the " +
-                    "adapter that came in the carton, at whatever rate that " +
-                    "adapter sets." },
-                { label: "It came on for about a second",
-                  body:
-                    "The screen lit yesterday, before the pouch was found and " +
-                    "before anyone here knew there was an adapter to look for. " +
-                    "It was not an image: a warm-up glow across the lower " +
-                    "third, roughly one second, then nothing. There has been " +
-                    "nothing since. It is on video[[1]], because a camera was " +
-                    "running for another purpose at the time. The footage " +
-                    "shows a dark rectangle becoming a slightly lighter one. " +
-                    "It is the first record of this unit powered.",
-                  doors: [
-                    /* [CS 2026-08-04] the held note said WHY THE DOOR IS BUILT
-                       THE WAY IT IS — "this wing has no in-place player … so
-                       this door says so rather than throwing you at a file in
-                       another window" — which is the renderer explaining its own
-                       design to a visitor. What is left is the holdings fact,
-                       which is the only half a reader needs. */
-                    { kind: "film", label: "the second it came on",
-                      held: "Not published. The camera was running for " +
-                            "another purpose and the clip has not been cut." },
-                  ] },
-                { label: "Charge status",
-                  body:
-                    "On charge since 11:40 this morning. The indicator on the " +
-                    "back has changed state once, from off to on, and has been " +
-                    "on for four hours. There is no gauge, no percentage and " +
-                    "no second lamp: the unit reports its own state with one " +
-                    "indicator[[1]]. Nothing further is expected to be known " +
-                    "before the weekend.",
-                  doors: [
-                    { kind: "tv", preset: "record-day",
-                      label: "the machine, as it stands on this day" },
-                  ] },
-                { label: "Also today, briefly",
-                  body:
-                    "Two more of the table entries opened into documentation " +
-                    "folders rather than dead ends. Neither was decisive. One " +
-                    "of them refers in passing to a “companion " +
-                    "unit”, without introducing the term, as though the " +
-                    "reader would already have one. This house did not have " +
-                    "one and does not." },
+                    "The unit powered on for a short time before the adapter " +
+                    "was used." },
+                { label: "On charge",
+                  body: "The charge is slow." },
               ],
-              tomb: "The adapter is bagged and tagged. The manual is on the " +
-                    "bench. The unit is drawing power." },
-            { date: "2024-01-19", stamp: "19 JAN 24", title: "The One-Page-Ads", evidence: "document",
-              line: "The framed ads turn out not to be original: ABEAL " +
-                    "retro-fitted other people's ads, with words covered and things taped down.",
-              note: "" },
-            { date: "2024-01-26", stamp: "26 JAN 24", title: "But we were wrong", evidence: "correction",
-              line: "The retraction. ABEAL did not start it — they received " +
-                    "the tech from someone else. They were responsible for the looks.",
-              note: "the record correcting itself, in public" },
-            { date: "2024-02-02", stamp: "02 FEB 24", title: "Logos and slogans", evidence: "object",
-              line: "The shirts are made from original elements off the " +
-                    "boxing — which is the first mention that per-unit slogans exist.",
-              note: "[PAPA] — the slogans themselves are unwritten" },
-            { date: "2024-02-09", stamp: "09 FEB 24", title: "MGK-NIAC, and a name", evidence: "record",
-              line: "The original project title surfaces, and with it Carter " +
-                    "Bookman — “his life is a mystery (some may say an Enigma??)”.",
-              note: "" },
-            { date: "2024-02-16", stamp: "16 FEB 24", title: "Ionizers and crushed walnut", evidence: "record",
-              line: "Restoration chemistry: the cases through the electronic " +
-                    "ionizers, the body casings tumbled in crushed walnut.",
-              note: "" },
-            { date: "2024-03-22", stamp: "22 MAR 24", title: "Bias, in 1965", evidence: "firmware",
-              line: "Two engines — Prediction and Answer — both running off a " +
-                    "changeable bias setting built before bias settings were a thing.",
-              note: "" },
-            { date: "2024-04-05", stamp: "05 APR 24", title: "The cases open", evidence: "photograph",
-              line: "Photographs of the three cases and their artifacts: a " +
-                    "spy camera, a real telegraph, and a 1960s CEO's day.",
-              note: "" },
+              tomb: "The unit is drawing power." },
           ],
-          /* [CS 2026-08-04] THE FOOTER STOPS DESCRIBING THE BUILD.
-             It said which entries were "first layer", which was "the first
-             written whole", and that one of them "is the prototype of the form
-             the rest will take" — the museum telling a visitor about its own
-             drafting order. What a footer on a log sheet is for is the count.
-             The [PAPA] sentence went with it rather than being kept: it named
-             work still to be written, which is the same class of statement. */
-          footer: "Eleven of 436 records.",
+          /* [HR 2026-08-04] THE FOOTER GOES WITH THE COUNTS IT WAS MADE OF.
+             It read "Eleven of 436 records." The 436 came from the SOURCE line
+             of the register block Mike ruled invented, and the eleven counted
+             ten entries this round deleted. How large the log actually is is a
+             question for Mike; it is not a number this file may pick. */
         },
       },
       {
@@ -1568,15 +1395,15 @@ export const robotsExhibit = {
      permanent transport here was a control for something that never plays,
      sitting on the stage and lying about its height. */
   playerBar: false,
-  /* [L5 2026-08-02] THE CONTENTS COLUMN PRINTS THE OBJECT.
-     This wing opens its contents column at 24% (S8) because it carries three to
-     six short rows and wanted bigger type for them. The consequence, measured:
-     326 x 878 holding 214px of list — 664px of blank paper, the largest single
-     void in the room, in a wing whose subject is a photographed physical object.
-     `contentsPlate` prints the album's own `viewerPoster` beneath the list, with
-     the caption the album already carries. Nothing is chosen or written by the
-     rule; both come off the data. Declared here and nowhere else — /hr, /wb and
-     /wal run long lists that fill their own column. */
-  contentsPlate: true,
+  /* [HR 2026-08-04] `contentsPlate` IS GONE — MIKE: "remove the photo strip at
+     the bottom of tracklists; it became a standard element at some point and I
+     dislike it. Remove it everywhere it appears, all wings."
+     L5 (2026-08-02) added it to fill the 664px of blank paper this wing's 24%
+     contents column carries. The void it was filling is still there and is
+     named in the round log rather than filled with something Mike did not ask
+     for. The flag, its render block in Exhibit.jsx and its rules in Exhibit.css
+     all went in the same edit; this wing was the only declarant, so /hr, /wb
+     and /wal are byte-identical. `viewerPoster` / `viewerPosterCaption` stay —
+     they are the VIEWER's poster and predate the plate. */
   exhibitFlow: RobotsExhibitFlow,
 };

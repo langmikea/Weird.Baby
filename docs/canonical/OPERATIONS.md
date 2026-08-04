@@ -7,7 +7,7 @@ tree, the live working tree wins — always.
 
 **Read this file FIRST in every session, before STATE.md, before any handoff.**
 
-**Last verified against live tree:** 2026-08-04 (v46 THE CLEAN SLATE ROUND — Doctrine gained the Law of the Visible Line; three `/hr/*` routes and one mockup asset removed)
+**Last verified against live tree:** 2026-08-04 (v47 THE HONEST RECORD ROUND — Doctrine gained #12 OPS DOES NOT INVENT CONTENT; the Record's header furniture and ten invented entries removed; the contents plate removed site-wide)
 
 ---
 
@@ -102,7 +102,7 @@ The HR exhibit page is **two stacked components**. Mount chain:
 | Logo image (Lobby ONLY; exhibit uses text wordmark) | `public/WeirdBaby_PhotoID.png`, placed `WbHome.jsx:115` |
 | Brand wordmark trial (Fredoka, nav only) | token `--wb-brand`; applied `Exhibit.css:36` |
 | Mothballed Kaleidoscope (never mounted) | `HrExhibitFlow.jsx` :812/:852/:868/:947 + `.hr-kal-*` CSS |
-| **The Record's long-form ENTRY** (headline / dateline / lead / sections with inline door icons / tombstone) | `src/routes/exhibit/RecordEntry.jsx` + the `[RC]` block at the end of `Exhibit.css`. **Mounted from `Exhibit.jsx`'s opened-record branch, and the switch is the DATA: an entry declaring `sections` renders it, an entry that does not renders exactly what it rendered before.** The index, open/close, `wire`/`plates`/`docs` payloads and the ‹ NEWER / OLDER › walk stay in `Exhibit.jsx`. Dateline arithmetic (`entryWeekday`/`entryWeek`/`entryDateline`) is in `src/lib/record-model.js` and needs a `recordEpoch` on the face. **Three near-identical class prefixes live in `Exhibit.css` and mean different objects: `.vp-record-*` is an artist's chart/awards BOARD, `.vp-rec-*` is The Record, `.vp-rec-door` is a door inside a record entry.** |
+| **The Record's long-form ENTRY** (headline / dateline / lead / sections with inline door icons / tombstone) | `src/routes/exhibit/RecordEntry.jsx` + the `[RC]` block at the end of `Exhibit.css`. **Mounted from `Exhibit.jsx`'s opened-record branch, and the switch is the DATA: an entry declaring `sections` renders it, an entry that does not renders exactly what it rendered before.** The index, open/close, `wire`/`plates`/`docs` payloads and the ‹ NEWER / OLDER › walk stay in `Exhibit.jsx`. Dateline arithmetic (`entryWeekday`/`entryWeek`/`entryDateline`) is in `src/lib/record-model.js`; `Week n` needs a `recordEpoch` on the face and a `date` on the entry, and **as of v47 the Record declares NEITHER** — Mike ruled the dates invented, so the dateline prints `Record 013` alone and the model's undated path is the live path, not a fallback. **The Record holds exactly ONE entry** (v47/H2): the other ten were fiction and were deleted, and the face has no `blurb`, `still`, `stillCaption`, `lines` or `footer` — it is a heading and its entries, by ruling. Open gaps are questions for Mike in `docs/RECORD_013_QUESTIONS-20260804.md`, never filled in the data (Doctrine 12). **Three near-identical class prefixes live in `Exhibit.css` and mean different objects: `.vp-record-*` is an artist's chart/awards BOARD, `.vp-rec-*` is The Record, `.vp-rec-door` is a door inside a record entry.** |
 | Exhibit data export | `src/data/exhibits/hunter_root.json` via `npm run export-artifacts` |
 | Spine adapter (stable ids) | `src/data/artists/hunter-root-spine.js` |
 | Taxonomy v1 canon (June 9) | `docs/taxonomy/` — TAXONOMY_v1, NORMALIZATION_MAP, COVERAGE_PROOF, RETAG_PLAN |
@@ -200,6 +200,51 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
     removed rather than left standing. If one must stay, the Ops reason is
     stated out loud — silence is not an option. What removal EXPOSES gets
     reported, not papered over.
+
+12. **OPS DOES NOT INVENT CONTENT (Mike, 2026-08-04 — STANDING, site-wide).**
+
+    **Where a fact is missing, Ops ASKS. Ops never fills the gap with
+    plausible detail.**
+
+    This binds every wing, every surface, every round, and it binds the
+    drafting lane hardest — a lane whose job is to write is the lane most able
+    to write something that reads true and is not. The existing rules against
+    invented provenance, invented captions and invented sources are a SUBSET
+    of this one; this is the general form.
+
+    **What counts as invention.** Not only a false claim. Any specific the
+    operator did not supply and the record does not hold: a date, a count, a
+    time of day, a measurement, a material, a room, a colour, a name, a
+    quotation, an ordering, a consequence, a person's reaction. Detail that is
+    *consistent* with what is known is still invention if nobody supplied it —
+    plausibility is the failure mode, not the defence. A round that produced
+    sixty entries where one was supplied produced fifty-nine inventions
+    however well they fit.
+
+    **The one-question format**, which is what makes asking cheap enough to
+    always be the choice:
+    - WHAT IS KNOWN — the fact already in hand, stated back.
+    - WHAT IS MISSING — the single gap, named precisely.
+    - WHY IT MATTERS — what cannot be written, or what would be wrong, until
+      it is answered.
+
+    One gap per question. Questions go in a list Mike can answer one at a
+    time, at his pace, in any order — not a paragraph he has to unpick, and
+    never a blocking gate that stops the rest of the work.
+
+    **What Ops does with the gap in the meantime.** It ships the surface
+    WITHOUT it. A section that cannot survive without invention is CUT and
+    named as cut; a field that cannot be filled honestly is DELETED rather
+    than approximated; an entry with four known facts prints four facts and
+    stops. The question list is the deliverable that replaces the invention —
+    it is never printed on the glass, because a question to the operator is
+    meta by Doctrine 11 and fails the visible-line test.
+
+    Paid for by the Record: ten dated log entries, a 436-record source line, a
+    register block and a header photograph's caption, all invented, all
+    surviving four rounds of review because each was plausible. Mike had to
+    hunt for the one real record in a pile of fictional ones — and the pile
+    had been reported before and survived the report.
 
 ## 8. Known hazards (environment quirks)
 

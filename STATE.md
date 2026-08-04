@@ -118,6 +118,105 @@ or an annotated wireframe at a live address is removed rather than left standing
 If one must stay, the Ops reason is stated out loud. What removal EXPOSES gets
 reported.
 
+## OPS DOES NOT INVENT CONTENT (Mike, 2026-08-04 — STANDING, site-wide)
+
+> **Where a fact is missing, Ops ASKS. Ops never fills the gap with plausible
+> detail.**
+
+Canonical copy with its full reasoning: `docs/canonical/OPERATIONS.md` §7,
+Working Doctrine 12. The short form:
+
+- **Invention is not only a false claim.** It is any specific the operator did
+  not supply and the record does not hold — a date, a count, a time, a
+  measurement, a material, a name, a quotation, an ordering, a consequence.
+  **Plausibility is the failure mode, not the defence.**
+- **The one-question format:** WHAT IS KNOWN · WHAT IS MISSING · WHY IT MATTERS.
+  One gap per question, answerable one at a time, never blocking.
+- **Meanwhile the surface ships without it.** A section that cannot survive
+  without invention is CUT and named as cut; a field that cannot be filled
+  honestly is DELETED, not approximated. The question list replaces the
+  invention and **never goes on the glass** — a question to the operator is meta
+  and fails [the Law of the Visible Line](#the-law-of-the-visible-line-mike-2026-08-04--standing-site-wide).
+
+**Why it exists:** ten dated Record entries, a "436 records" source line, a
+register block and a header caption were all invented and all survived four
+rounds of review *because each was plausible*. Doctrine 11 catches a line whose
+SUBJECT is wrong; it does not catch a line whose subject is correct and whose
+CONTENT was made up. Doctrine 12 closes that hole. The existing
+no-invented-provenance rules are a subset of it.
+
+## SEALED 2026-08-04 — THE HONEST RECORD ROUND (v47; H1–H6. PUSH + DEPLOY ARE MIKE'S)
+
+Autonomous single-agent Code-lane round on Mike's remote-control brief. Full
+round log: `docs/MUSEUM_HONEST_RECORD_LOG-20260804.md`. Companion deliverable
+and the point of the round: `docs/RECORD_013_QUESTIONS-20260804.md`.
+**Read both before the v46 and v45 sections below** — v45 built the Record entry
+and v46 rewrote its copy, and this round deleted most of what both describe.
+
+- **H1 — THE RECORD'S HEADER FURNITURE IS GONE.** `blurb`, `still`,
+  `stillCaption` and `lines` deleted from the record face — the lead
+  blockquote, the object photo captioned *"The object the record is about, as
+  received"*, and the `SOURCE 436 records, kept since January 2024` / `INDEX
+  date-stamped, log-sheet register` / `ORDER as it happened` register block.
+  `recordEpoch` and the footer *"Eleven of 436 records."* went with them: both
+  were arithmetic on things H2 deletes. **Mike had reported this before and it
+  survived** — v46 rewrote the blurb and the footer under Doctrine 11 and left
+  them standing, because "436 records" is a line about the collection and passes
+  the visible-line test cleanly. It is also false. That is the hole Doctrine 12
+  closes.
+- **H2 — ALL TEN INVENTED ENTRIES DELETED. RECORD 013 IS THE ONLY ENTRY.**
+  Three boxes · Who is W.O.? · Something off about this drop · The One-Page-Ads
+  · But we were wrong · Logos and slogans · MGK-NIAC, and a name · Ionizers and
+  crushed walnut · Bias, in 1965 · The cases open. The wing was swept: every
+  other `entries` array is a REGISTER (`Q`, `WHAT`, `PROVENANCE`…), not a log,
+  and the Record's were the only dated entries in the codebase. **Three live
+  cross-references pointed into the deleted entries**, all on the MGK-VIII
+  "MGK-NIAC" face — one whole row (*"The day the first name surfaced. 9 February
+  2024 … Carter Bookman"*) was a deleted entry retold and is **cut entirely**;
+  the *"the record's own correction, 26 January 2024"* note and *"The record
+  prefers the first."* are cut. Nothing was kept on the strength of a citation
+  to fiction.
+- **H3 — THE PHOTO STRIP UNDER THE TRACKLISTS IS GONE, ALL WINGS.**
+  `.ex-contents-plate` (L5, 2026-08-02) removed in three places in one edit —
+  render block in `Exhibit.jsx`, rules + phone stand-down in `Exhibit.css`, and
+  the `contentsPlate` flag in `robots.js` — so no dead flag is left one data line
+  from bringing it back. `/robots` was the only declarant, verified live; every
+  other wing's DOM is byte-identical. `viewerPoster` stays.
+- **H4 — RECORD 013 STRIPPED TO THE FOUR THINGS THAT ARE KNOWN.** A modern
+  sealed bag holding a USB-C adapter, packed differently from everything else; a
+  conversation about deep-discharge and why it wasn't hacked; a brief power-on
+  before the adapter; a slow charge. **Six sections became four** — "What it
+  plugs into" and "Also today, briefly" were CUT WHOLE, because every sentence
+  in them was a location, a measurement or an object nobody supplied. **The date
+  went too**, so the entry carries no `date` and no `stamp` and the dateline
+  prints `Record 013` alone — `record-model.js` documented that path from the
+  start and this is the first time anything used it. **All four inline doors are
+  gone** (one pointed at a deleted entry, one lived in a cut section, one
+  described uncut footage, one was keyed to the missing date), so **the door
+  container approved at v45 is now exercised nowhere.** The plate stays with its
+  caption shrunk to "The back of the unit."
+- **H5 — DOCTRINE 12 RECORDED**, `OPERATIONS.md` §7, mirrored in the section
+  above. §5's Record row brought to truth in the same edit.
+- **H6 — TWENTY-SEVEN QUESTIONS IN EIGHT GROUPS**, one gap apiece, answerable one
+  at a time and in any order, none blocking. Highest value: **D1, why wasn't it
+  hacked** — the human centre of the day, currently a decision on the page with
+  none of the thinking behind it.
+- **Gates:** lint **11 err / 9 warn = HEAD baseline, zero new**; build green,
+  **70 modules** (unchanged); desktop lap `scrollWidth` = `clientWidth`; genuine
+  **390px** iframe lap `scrollWidth` **373**, zero page-level horizontal scroll;
+  27-pattern ban sweep over all authored source with **zero hits in any rendered
+  string**.
+- **Named honestly:** Chrome's screenshot pipeline was unstable again (two CDP
+  timeouts, two frames at the wrong zoom). As at v46 the load-bearing
+  verification is **DOM measurement, not the JPEGs** — every gate figure above is
+  a measured value.
+- **What it exposes**, reported not papered over: the Record holds ONE entry in
+  a room called The Record; its closed face now has no visual hook (a live
+  conflict with the standing Visual Hook Law, resolved in favour of Mike's H1
+  ruling); the v45 door machinery is unused; the Record has no count and no date
+  anywhere on it; the `/robots` contents column is 76% blank paper again. Full
+  list, eight items, in the round log.
+
 ## SEALED 2026-08-04 — THE CLEAN SLATE ROUND (v46; C1–C4. PUSH + DEPLOY ARE MIKE'S)
 
 Autonomous single-agent Code-lane round on Mike's remote-control brief. Full

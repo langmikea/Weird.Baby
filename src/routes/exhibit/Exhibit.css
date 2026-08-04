@@ -808,28 +808,11 @@ body:has(.pb) .ex-left{padding-bottom:76px}
    hit (`tl-track <- pb`, "always one flick from view", four lines up). The
    scroller's own size is now the strip below. */
 body:has(.pb) .ex-root{padding-bottom:88px}
-/* [L5 2026-08-02] THE CONTENTS PLATE — the object, printed under its own
-   contents list. Reasoning and measurements at the render site in Exhibit.jsx.
-   IT IS BUILT FROM THE COLLAGE'S OWN MATERIALS, because the collage is the
-   quality bar this wing is being held to (Mike): warm print stock, a hairline,
-   a real shadow rather than a border pretending to be one, and the caption in
-   the museum's mono at the register's own size. What it does NOT take from the
-   collage is the tilt — a wall of glued-up tiles is tilted because a wall is
-   casual; a single plate filed under a contents list is a document, and a
-   document that is crooked reads as an accident rather than as a choice.
-   The photo law applies here like everywhere else in a monochrome wing; the
-   `[data-exhibit="robots"]` rule further down covers this img by scope, so no
-   filter is repeated here. */
-.ex-contents-plate{margin:22px 20px 26px;display:flex;flex-direction:column;gap:9px}
-.ex-contents-plate img{display:block;width:100%;height:auto;
-  background:var(--wb-ink-card);padding:9px;
-  border:1px solid var(--wb-border);
-  box-shadow:0 1px 2px rgba(33,31,28,.14),0 10px 26px rgba(33,31,28,.13)}
-.ex-contents-plate figcaption{font-family:'Courier Prime','Courier New',monospace;
-  font-size:var(--fs-micro,.66rem);letter-spacing:.06em;line-height:1.5;
-  color:var(--wb-gold-lo)}
-/* the plate is the LAST thing in a scrolled column, so it needs the room the
-   column's own bar-clearance gives the list above it and nothing more. */
+/* [HR 2026-08-04] `.ex-contents-plate` REMOVED — Mike: "remove the photo strip
+   at the bottom of tracklists … everywhere it appears, all wings." L5's rules,
+   its render block in Exhibit.jsx and the `contentsPlate` flag in robots.js all
+   went in one edit. The `@media (max-width:720px)` stand-down that hid it on a
+   phone went with them. */
 .ex-left::-webkit-scrollbar{width:3px}
 .ex-left::-webkit-scrollbar-track{background:transparent}
 .ex-left::-webkit-scrollbar-thumb{background:var(--wb-border-hi);border-radius:2px}
@@ -2216,22 +2199,18 @@ button.vp-bill-act:focus-visible .vp-bill-go{color:var(--wb-gold)}
   background:var(--wb-ink-card);
   border:1px solid var(--wb-border);
   box-shadow:0 1px 2px rgba(33,31,28,.10),0 14px 34px rgba(33,31,28,.11)}
-/* [L5] BOTH OF THIS ROUND'S ADDITIONS STAND DOWN AT STACKED WIDTHS, and the
-   measurement is why. Below 720px the two columns are not columns — they stack
-   inside a body of FIXED height, so anything added to the contents column is
-   taken straight out of the stage's own frame. Measured on /robots at 390px
-   with both in place: **206px of the page clipped**; the plate alone accounted
-   for 144 of it and the mat for 62; with both stood down, zero on all five
-   pages of the wall.
-   That is not a compromise, it is the rule reading its own condition. The plate
-   fills a VOID that exists only when the contents list is a narrow column
-   beside a wide stage; when the list is a full-width band above the stage there
-   is no void, there is a shortage. And a mat is the space a printed page sits
-   in — on a phone the page IS the screen and there is no space to sit in. */
+/* [L5] THE MAT STANDS DOWN AT STACKED WIDTHS, and the measurement is why.
+   Below 720px the two columns are not columns — they stack inside a body of
+   FIXED height, so anything added to the contents column is taken straight out
+   of the stage's own frame. Measured on /robots at 390px with L5's two
+   additions in place: **206px of the page clipped**; with both stood down, zero
+   on all five pages of the wall. A mat is the space a printed page sits in — on
+   a phone the page IS the screen and there is no space to sit in.
+   [HR 2026-08-04] the second stand-down (`.ex-contents-plate{display:none}`)
+   went with the plate itself. */
 @media (max-width:720px){
   .ex-root[data-exhibit="robots"] .vp-face:not(.vp-face-portal):not(.vp-face-panel){
     padding:0}
-  .ex-contents-plate{display:none}
 }
 
 .stg-page.stg-2col.stg-1up{justify-content:center}

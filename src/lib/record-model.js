@@ -30,7 +30,7 @@
 //                             still renders, it just cannot be banded.
 //     stamp?    "01 JAN 24"   what the register prints. Derived from `date`
 //                             when absent, so new entries need only the date.
-//     title     "Three boxes"
+//     title     the day's one thing, stated plainly
 //     evidence? "document"    A WORD. There is NO permitted list, here or in
 //                             the renderer or in the CSS (B9's ruling) — a class
 //                             Mike invents next month needs no code.
@@ -79,8 +79,12 @@ export function entryDate(entry) {
   return { y, m: mo, d };
 }
 
-/* What the register prints. An authored `stamp` always wins — the ten entries
-   already written have theirs and must not move. */
+/* What the register prints. An authored `stamp` always wins over a derived one.
+   [HR 2026-08-04] AND AN ENTRY MAY HAVE NEITHER. The Record's one surviving
+   entry carries no `date` and no `stamp`, because Mike ruled the dates invented
+   and Ops does not supply one (OPERATIONS Doctrine 12). This function returning
+   "" is therefore the LIVE path, not a defensive branch — the register prints
+   no stamp for that row and the dateline prints `Record 013` alone. */
 export function entryStamp(entry) {
   if (entry && typeof entry.stamp === "string" && entry.stamp) return entry.stamp;
   const dt = entryDate(entry);
@@ -185,8 +189,10 @@ export function docState(doc) {
    THE RECORD NUMBER IS AUTHORED AND CANNOT BE OTHERWISE. Position in the list
    is not the number — the volume is a sample of a much longer log, entries are
    not one per day, and numbering by index would renumber every entry the day a
-   new one is inserted. An entry with no `no` prints no number; that is honest
-   and it is the state the ten existing entries are in. */
+   new one is inserted. An entry with no `no` prints no number, which is honest.
+   [HR 2026-08-04] `Week n` needs BOTH a `recordEpoch` on the face and a `date`
+   on the entry, and the Record declares neither today — so the dateline is one
+   part long. That is the function doing its job, not a gap in it. */
 export function entryWeekday(entry) {
   const dt = entryDate(entry);
   if (!dt) return "";

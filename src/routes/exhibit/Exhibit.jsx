@@ -2666,39 +2666,19 @@ export default function Exhibit({ artist }) {
                 onSelect={ti => handleTrackSelect(activeDisplay, ti)}
                 onTagClick={(ti, vi) => handleTagClick(activeDisplay, ti, vi)}
               />
-              {/* [L5 2026-08-02] THE CONTENTS COLUMN GETS THE OBJECT'S PLATE.
-                  MIKE: the robots wing "still lags the WAL quality bar …
-                  raise composition, typography, spacing, imagery presentation
-                  toward the collage standard."
-                  MEASURED on /robots at 1400x900: this column is 326 x 878 and
-                  holds 214px of contents. **664px of it — 76% — is blank
-                  paper**, and it is the largest single void in the wing. A wing
-                  about a physical object was showing the object in exactly one
-                  place: one face's collage.
-                  THE PLATE IS ALREADY CHOSEN AND ALREADY CAPTIONED. Every album
-                  here declares `viewerPoster` + `viewerPosterCaption` — a real
-                  photograph picked on stated grounds (see robots.js E2) and a
-                  caption already written — and on a STAGED wing a face covers
-                  the viewer from the moment the room opens, so the poster is a
-                  photograph nobody ever reaches. It moves to where the room has
-                  a hole. No image is chosen here and no caption is written
-                  here; both are read off the album.
-                  OPT-IN BY CONFIG (`contentsPlate`), like `bodyKey`, `stage`,
-                  `playerBar` and `fitOnEntry` before it — so /hr, /wb and /wal,
-                  whose contents columns are long lists that fill their column,
-                  keep their exact DOM. */}
-              {artist.contentsPlate && (album.viewerPoster || album.art) && (
-                <figure className="ex-contents-plate">
-                  {/* NOT lazy: the plate is part of the room's composition on
-                      entry, not a below-the-fold extra, and it sits inside a
-                      scroll container where a deferred load leaves a 20px
-                      sliver where a photograph belongs (observed). */}
-                  <img src={album.viewerPoster || album.art} alt="" />
-                  {(album.viewerPosterCaption || album.title) && (
-                    <figcaption>{album.viewerPosterCaption || album.title}</figcaption>
-                  )}
-                </figure>
-              )}
+              {/* [HR 2026-08-04] THE CONTENTS PLATE IS REMOVED, NOT GATED.
+                  MIKE: "remove the photo strip at the bottom of tracklists — it
+                  became a standard element at some point and I dislike it.
+                  Remove it everywhere it appears, all wings."
+                  L5 (2026-08-02) put the album's own `viewerPoster` under the
+                  contents list to fill the 664px of blank paper the robots
+                  wing's 24% column carries. The `contentsPlate` flag, this
+                  block and the `.ex-contents-plate` rules in Exhibit.css all
+                  went together — leaving a dead flag behind would be the same
+                  element one data edit from returning. /robots was the only
+                  declarant, so every other wing's DOM is unchanged, and the
+                  void L5 measured is reported in the round log rather than
+                  refilled with something Mike did not ask for. */}
             </div>
 
             {/* VERTICAL DRAG HANDLE */}
