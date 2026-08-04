@@ -42,3 +42,6 @@ backups/
 # scratch: the 390px lap harness (public/, so it is same-origin at the dev
 # server root). Never deployed.
 public/_lap.html
+
+# provenance --emit scratch
+provenance/_undeclared.json

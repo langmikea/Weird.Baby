@@ -385,9 +385,51 @@ building on 2026-08-04 was marker lettering **painted into a JPEG**
 (`public/museum.jpg`, now deleted) labelling four rooms that never existed. It
 took a screenshot to find. Lap the glass, not only the strings.
 
+## THE PROVENANCE GATE (v48, 2026-08-04 — STANDING)
+
+`npm run provenance:gate` runs beside lint and build on **every** packet. It
+fails if any visitor-facing string in `src/` or `index.html` has no row in
+`provenance/register.json`, or any referenced image has no row in
+`provenance/assets.json`.
+
+**If you add content, you add register rows in the same commit.**
+`npm run provenance -- --emit` writes stubs for whatever is undeclared; fill in
+`c` (MIKE | VERIFIED | DERIVED | HOUSE | RESTATED) and `s` or `r`, and move them
+into `register.json`.
+
+**Never re-run `provenance/backfill-20260804.mjs`.** It is the audit record of
+the first classification; its coarse rules would silently absorb anything new
+and the boundary would stop being one.
+
+Read `provenance/README.md` before describing what the gate proves — §4 is the
+hole-list, and the largest hole is that **it cannot verify a declaration is
+true.** It also does not replace THE LAW OF THE VISIBLE LINE below: provenance
+catches invented CONTENT, Doctrine 11 catches a line whose SUBJECT is the work.
+
 ## Recent session log
 
 Maintained here. Newest first.
+
+### 2026-08-04 → MECHANIZE PROVENANCE (v48; P1–P4) — sealed
+- **P1/P2** `tools/provenance-sweep.mjs` + `provenance/` — a hash-keyed register
+  of every visitor-facing string, and a gate that fails on any that is
+  undeclared. Extraction is AST-based and **default-deny** (sixteen named,
+  counted exclusion rules; `--rules` / `--rule-sample` to audit them). CSS
+  `content:` and `index.html` meta are swept too. **Editing a declared string
+  changes its key and fails the gate** — proved on two live tests.
+- **P3** 2,528 strings classified: VERIFIED 1,148 · HOUSE 1,001 · RESTATED 282 ·
+  MIKE 75 · DERIVED 19 · **INVENTION 3** · UNDECLARED 0. Plus 33 images
+  declared with `textInImage` after looking at every one; 18 carry text.
+- **Findings, none fixed** (Doctrine 12: Ops asks) — `docs/PROVENANCE_RULINGS-20260804.md`:
+  the `/robots` unit count says **31½** where its source says **31.4**; the
+  MGK-VIIIp front-glass plate is **mirror-reversed**; the WAL Hunter Root
+  portrait wears another band's name; the Manual's plate is a render;
+  `hr_facts.js` (124 strings, 3 self-flagged unverified) and
+  `hr_journal_prompts.js` (30) are unreachable.
+- Gates: lint 11/9 = baseline; build green 70 modules; provenance gate PASS;
+  desktop + genuine 390px laps, zero horizontal scroll, zero console errors.
+  **No rendered source changed** — `git diff` was `package.json` only.
+- Round log: `docs/MUSEUM_PROVENANCE_LOG-20260804.md`.
 
 ### 2026-08-04 → THE CLEAN SLATE ROUND (v46; C1–C4) — not yet committed
 - **C1** 27 visible meta-copy strings removed across `robots.js`,

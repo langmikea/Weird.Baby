@@ -1,0 +1,129 @@
+#!/usr/bin/env node
+// provenance/assets-declare.mjs — writes provenance/assets.json.
+// ============================================================================
+// THE COMPENSATING CHECK FOR THE THING A TEXT SWEEP CANNOT SEE.
+// ============================================================================
+// The largest placeholder ever found in this building was marker lettering
+// PAINTED INTO A JPEG (`public/museum.jpg`, /hr/home) naming four rooms that
+// never existed. Its page's own DOM text was three words. Every string sweep in
+// the museum's history was blind to it by construction; it took a screenshot.
+//
+// So every image the authored source references is declared here, and the
+// declaration a machine cannot make is the one that matters: `textInImage`,
+// with `text` saying WHAT IT SAYS. `inspected` records how the claim was made.
+// Each entry below was LOOKED AT on 2026-08-04 — contact sheets at 420px per
+// tile, plus a full-resolution crop where the lettering was the point.
+//
+// The distinction the `text` field exists to preserve: lettering that is part
+// of a real object (a maker's plate, a machine's own screen) is EVIDENCE and a
+// museum prints it. Museum copy painted into a picture is the /hr/home failure.
+// Both set textInImage true; only the reader can tell them apart, which is why
+// the field is prose and not a boolean alone.
+//
+//   node provenance/assets-declare.mjs --write
+
+import fs from "node:fs";
+import path from "node:path";
+import crypto from "node:crypto";
+import { fileURLToPath } from "node:url";
+
+const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const INSPECTED = "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop";
+const key = (ref) => crypto.createHash("sha256").update(ref).digest("hex").slice(0, 16);
+
+const PHOTO = "the museum's own photographs of its own unit, held in public/robots/reference/";
+const HOUSE_ART = "the house's own artwork";
+const WAL = "the artist's own public presence; provenance logged per image in docs/WAL_PHOTO_PROVENANCE-20260802.md";
+
+const A = [
+  // ---- the MGK units, photographed here --------------------------------
+  ["/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png", "VERIFIED", PHOTO, true,
+    "The unit's own faceplate: MGK-VIIIp · The Informer · ABEAL. Object lettering, not museum copy."],
+  ["/robots/art/wbr-cover-logo.png", "MIKE", HOUSE_ART, true,
+    "Weird.Baby · ROBOTS · PURVEYORS OF THE WEIRD — the wing's own cover."],
+  ["/WeirdBaby_PhotoID.png", "MIKE", HOUSE_ART, true, "Weird.Baby — the house wordmark."],
+  ["/robots/art/mgk-viii-cover.jpg", "VERIFIED", PHOTO, false, ""],
+  ["/robots/reference/mgk-viii/chest_grille.jpg", "VERIFIED", PHOTO, true,
+    "A small component maker's label on the black housing. Incidental object lettering."],
+  ["/robots/reference/mgk-viii/head_lens.jpg", "VERIFIED", PHOTO, false, ""],
+  ["/robots/reference/mgk-viii/head_oblique.jpg", "VERIFIED", PHOTO, false, ""],
+  ["/robots/reference/mgk-viii/limbs_lower.jpg", "VERIFIED", PHOTO, true,
+    "Printed matter on the workbench behind the subject — partial words, incidental."],
+  ["/robots/reference/mgk-viii/column_lit.jpg", "VERIFIED", PHOTO, false, ""],
+  ["/robots/reference/mgk-viii/bench_power.jpg", "VERIFIED", PHOTO, true,
+    "Component silkscreen on the relay board. Incidental."],
+  ["/robots/reference/mgk-viii/torso_unfinished.jpg", "VERIFIED", PHOTO, true,
+    "A component label reading CLIPPER on the black housing. Incidental object lettering."],
+  ["/robots/reference/mgk-viii/feet_plinth.jpg", "VERIFIED", PHOTO, false, ""],
+  ["/robots/reference/mgk-viii/slot_mockup.jpg", "VERIFIED", PHOTO, false, ""],
+  ["/robots/reference/mgk-viii/matrix_lit.jpg", "VERIFIED", PHOTO, false, ""],
+  ["/robots/reference/mgk-viii/parts_drawer.jpg", "VERIFIED", PHOTO, false, ""],
+  ["/robots/art/viiip.png", "VERIFIED",
+    "the front-view photograph with the twin's own framebuffer composited at the measured aperture; provenance in the robots repo's STATE.md, THE NIGHT RUN",
+    true, "MGK-VIIIp · The Informer · ABEAL on the faceplate, and the front glass carries the BIOS beat."],
+  ["/robots/reference/photos/front_full.png", "VERIFIED", PHOTO, true,
+    "Faceplate MGK-VIIIp · The Informer · ABEAL; the glass reads ABEAL MGK-VIIIp / LOADING SUCCESS."],
+  ["/robots/reference/photos/front_screen.png", "VERIFIED", PHOTO, true,
+    "THE GLASS IS MIRROR-REVERSED IN THIS FILE. It reads right-to-left: '-(A)BEAL MGK-VIIIp )-' / "
+    + "'Please Select:' / 'MGK-VIIIp'. Confirmed at full resolution, not an artefact of the contact "
+    + "sheet. It is captioned 'The front glass, lit' and is one of the nine plates this wing offers "
+    + "as its evidence, so the machine's own words are the thing that is backwards. FOR MIKE: reflect "
+    + "the file, or replace the plate."],
+  ["/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png", "VERIFIED", PHOTO, false, ""],
+  ["/robots/reference/photos/top_monitor.png", "VERIFIED", PHOTO, true,
+    "Cyan screen text on the top monitor, including 'Waiting for User Input'. The machine's own output."],
+  ["/robots/reference/photos/monitor_base.png", "VERIFIED", PHOTO, true,
+    "Faceplate MGK-VIIIp · The Informer · ABEAL."],
+  ["/robots/reference/photos/unit_new_base.png", "VERIFIED", PHOTO, true,
+    "Faceplate MGK-VIIIp · The Informer · ABEAL."],
+  ["/robots/reference/photos/rear_power_switch.png", "VERIFIED", PHOTO, false, ""],
+  ["/robots/manual/working-copy-p1.png", "VERIFIED",
+    "the unit's own operating manual, per B8: the printed working copy is the source; the plate is a photograph of it",
+    true,
+    "THE WHOLE IMAGE IS TEXT — the manual's cover page: MGK-VIIIp / OPERATING AND MAINTENANCE "
+    + "INSTRUCTIONS / PRELIMINARY - WORKING COPY / NOT FOR DISTRIBUTION / ABEAL / A DIVISION OF "
+    + "SCRAPCO / ENGINEERING DEPARTMENT. FOR MIKE: it is clean digital type on white, not a "
+    + "photograph of paper; the face's own caption calls it 'the working copy, printed', and B8's "
+    + "ruling is that the photograph of the print is the plate."],
+
+  // ---- the house's own ---------------------------------------------------
+  ["/images/wb/vol1_cover_v1.png", "MIKE", HOUSE_ART, true,
+    "the making of / The Best of / Weird.Baby / Vol. 1 — the record's own sleeve."],
+  ["/images/wb-merch/sticker.png", "MIKE", "the museum's own shelf item, as listed in its Printful store", true,
+    "Weird.Baby — the wordmark, which is what the sticker is."],
+
+  // ---- Worth A Listen ----------------------------------------------------
+  ["/images/wal/carsie-blanton-cover.jpg", "VERIFIED", WAL, false, ""],
+  ["/images/wal/carsie-blanton-poster.png", "VERIFIED", WAL, true,
+    "CARSIE BLANTON — the artist's own poster lettering."],
+  ["/images/wal/hunter-root-cover.jpg", "VERIFIED", WAL, false, ""],
+  ["/images/wal/hunter-root-plate.jpg", "VERIFIED",
+    "cropped from MediaVault MV-HR-20260405-037, the museum's own vault; the crop is logged in STATE.md v41/C4",
+    true,
+    "The subject's shirt reads CHET VINCENT AND THE MUSIC INDUSTRY across the chest — ANOTHER BAND'S "
+    + "NAME, prominent and legible, on the portrait this wing uses to introduce Hunter Root. Nothing "
+    + "on the page mentions it. FOR MIKE: keep, crop tighter, or replace."],
+  ["/images/wal/jesse-welles-cover.jpg", "VERIFIED", WAL, false, ""],
+  ["/images/wal/jesse-welles-plate.jpg", "VERIFIED", WAL, false, ""],
+  ["/images/wal/mikey-mike-cover.jpg", "VERIFIED", WAL, false, ""],
+];
+
+const entries = {};
+let missing = 0;
+for (const [ref, c, s, textInImage, text] of A) {
+  if (!fs.existsSync(path.join(REPO, "public" + ref))) { console.error("MISSING ON DISK:", ref); missing++; }
+  entries[key(ref)] = { ref, c, s, textInImage, text, inspected: INSPECTED };
+}
+
+const out = {
+  _: "ASSET REGISTER. Every image the authored source references, with where it came from and "
+    + "whether it carries text a string sweep cannot read. See provenance/README.md.",
+  entries,
+};
+
+if (process.argv.includes("--write")) {
+  fs.writeFileSync(path.join(REPO, "provenance", "assets.json"), JSON.stringify(out, null, 1) + "\n");
+  console.log("wrote provenance/assets.json");
+}
+const withText = A.filter((a) => a[3]).length;
+console.log(`${A.length} assets declared · ${withText} carry text in the image · ${missing} missing on disk`);

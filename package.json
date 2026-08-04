@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "preview": "npm run build && wrangler dev",
     "deploy": "npm run build && wrangler deploy",
-    "export-artifacts": "node tools/export-artifacts.mjs"
+    "export-artifacts": "node tools/export-artifacts.mjs",
+    "provenance": "node tools/provenance-sweep.mjs",
+    "provenance:gate": "node tools/provenance-sweep.mjs --gate"
   },
   "dependencies": {
     "react": "^19.2.4",

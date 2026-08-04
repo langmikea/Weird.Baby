@@ -145,6 +145,98 @@ SUBJECT is wrong; it does not catch a line whose subject is correct and whose
 CONTENT was made up. Doctrine 12 closes that hole. The existing
 no-invented-provenance rules are a subset of it.
 
+## EVERY VISIBLE STRING CARRIES ITS ORIGIN (v48, 2026-08-04 — STANDING)
+
+> **`npm run provenance:gate` runs on every packet, beside lint and build. A
+> visitor-facing string that nobody has declared the origin of fails it.**
+
+Canonical copy with its reasoning: `docs/canonical/OPERATIONS.md` §7, Doctrine
+13. The model, the exclusion rules and the honest hole-list:
+`provenance/README.md`.
+
+- **Classes:** MIKE · VERIFIED · DERIVED · HOUSE · RESTATED, plus a **capped**
+  INVENTION holding pen for what has no origin and awaits Mike's ruling.
+  MIKE/VERIFIED/DERIVED need a source; RESTATED needs a reference that RESOLVES
+  and **may not point at its own file**.
+- **A row is keyed by a hash of the string.** Edit a declared line and its
+  declaration stops covering it. Proven: appending *", since 2019"* to an
+  already-sourced booth answer failed the gate.
+- **WHAT IT CANNOT DO, and it must never be described without this:** it cannot
+  verify a declaration is TRUE. Nothing can. It cannot read text inside an
+  image (`assets.json` + a human looking is the compensating check), cannot
+  detect a correctly-cited number going stale, and **does not replace Doctrine
+  11** — a perfectly-sourced line whose subject is the making of the museum
+  still passes it cleanly. Both doctrines are required.
+
+## SEALED 2026-08-04 — MECHANIZE PROVENANCE (v48; P1–P4. PUSH + DEPLOY ARE MIKE'S)
+
+Autonomous single-agent Code-lane round on Mike's remote-control brief. Full
+round log: `docs/MUSEUM_PROVENANCE_LOG-20260804.md`. Companion deliverable and
+the point of the round: **`docs/PROVENANCE_RULINGS-20260804.md`** — five items
+that need his word. **This round fixed a root cause, not instances: no rendered
+source was changed. `git diff` before commit was `package.json` only.**
+
+- **P1 — THE BOUNDARY EXISTS AND IT IS HASH-KEYED.** `tools/provenance-sweep.mjs`
+  enumerates every visitor-facing string in `src/` + `index.html` and requires a
+  row in `provenance/register.json`. **Chosen over a field-on-every-object** (a
+  third of the content is JSX literals with nowhere to hang a field, and CSS
+  `content:` has nowhere at all) **and over a wrapper** (touches every render
+  site in 16,000 lines and buys nothing — nothing stops `M("an invented
+  thing")`). The register wins on the thing neither offers: the key is
+  `sha256(file + " " + string)`, so **a one-time audit becomes a standing
+  check.** Extraction is **default-DENY** — every string is content until a
+  NAMED, COUNTED structural rule proves it machinery, because a heuristic that
+  decides what to LOOK AT reproduces the failure. 6,449 raw nodes → **2,528 on
+  the boundary** through sixteen rules, each sampleable via `--rule-sample`.
+- **THE FIFTH CLASS, `RESTATED`, IS MIKE'S TO STRIKE.** His four are ORIGINS;
+  282 rows are Ops connective prose that originates nothing. Calling it MIKE is
+  false, calling it INVENTION buries the three real findings. **It has teeth:**
+  `r` must resolve to a sourced row or to a repo path **that is not its own
+  file** — and that exclusion is exactly the shape *"436 records, kept since
+  January 2024"* would have taken. **The mechanism was built against its own
+  motivating failure and catches it.** It caught its own author too: 12 rows
+  citing `InfoBooth.jsx` as what `InfoBooth.jsx` restates were rejected.
+- **P2 — IT FAILS, AND IT WAS PROVED FAILING.** Two live tests, both reverted:
+  a new invented line → FAIL exit 1; **an EDIT to an already-declared sourced
+  line → FAIL exit 1** (the load-bearing one). **The image gap is covered by
+  `provenance/assets.json`: 33 images, every one LOOKED AT, `textInImage` +
+  what it says + how the claim was made. 18 carry text.** That check paid for
+  itself immediately — see below.
+- **P3 — 2,528 STRINGS CLASSIFIED, DEFAULT INVENTION.** VERIFIED 1,148 · HOUSE
+  1,001 · RESTATED 282 · MIKE 75 · DERIVED 19 · **INVENTION 3** · UNDECLARED 0.
+  Plus 4 generated files bulk-declared at pipeline level. **The backfill records
+  the provenance the repo already states — it did not re-verify those sources**,
+  and that sentence is in the register's own header.
+- **THE FINDINGS, all live in the shipped bundle, none of them fixed.**
+  **R1: the unit count.** `/robots` prints **thirty-one and a half** on a 132pt
+  card and in the FAQ; the robots repo's canon says **thirty-one point four**,
+  with a `[PAPA]` note reserving the `.4` as the Pi thread. `robots.js`'s own
+  header lists the inherited claim as *"the 31.4"* — in a paragraph whose rule
+  was *"not one new fact."* **R2: the MGK-VIIIp's front glass is
+  MIRROR-REVERSED** in the plate captioned *"The front glass, lit"* — the one
+  plate showing the machine saying something shows it backwards, and no text
+  sweep could ever have seen it. **R3: the WAL portrait of Hunter Root has
+  another band's name across the shirt** (CHET VINCENT AND THE MUSIC INDUSTRY).
+  **R4:** the Manual's plate is a clean digital render where B8's own ruling
+  says a photograph of the print. **R5:** `hr_facts.js` (124 strings, three
+  self-flagged UNVERIFIED since before this round) and `hr_journal_prompts.js`
+  (30) are unreachable — one `import` from the glass.
+- **P4 — WHAT IT STILL CANNOT CATCH**, at length in the round log. Shortest
+  form: **a false declaration passes.** Write MIKE on a line he never said and
+  the gate is green. The register makes the claim reviewable in one place; it
+  does not make it true, and describing it otherwise would be worse than not
+  having it.
+- **Gates:** lint **11 err / 9 warn = HEAD baseline, zero new** (three
+  introduced by the new files, all fixed properly); build green **70 modules**
+  (unchanged); provenance gate **PASS**; 11/11 routes 200; desktop 1440×900 and
+  a genuine **390×740** iframe lap over 10 routes with **zero page-level
+  horizontal scroll** and zero console errors.
+- **Named honestly:** verification was DOM measurement on the built bundle, as
+  at v45–v47. Screenshots were used for exactly one thing — **looking at the 33
+  images** — which is how R2 and R3 were found. Painted-in lettering is
+  invisible to a text sweep by construction, and this round made that a standing
+  check instead of a lesson.
+
 ## SEALED 2026-08-04 — THE HONEST RECORD ROUND (v47; H1–H6. PUSH + DEPLOY ARE MIKE'S)
 
 Autonomous single-agent Code-lane round on Mike's remote-control brief. Full

@@ -7,7 +7,7 @@ tree, the live working tree wins — always.
 
 **Read this file FIRST in every session, before STATE.md, before any handoff.**
 
-**Last verified against live tree:** 2026-08-04 (v47 THE HONEST RECORD ROUND — Doctrine gained #12 OPS DOES NOT INVENT CONTENT; the Record's header furniture and ten invented entries removed; the contents plate removed site-wide)
+**Last verified against live tree:** 2026-08-04 (v48 MECHANIZE PROVENANCE — Doctrine gained #13 EVERY VISIBLE STRING CARRIES ITS ORIGIN; `npm run provenance:gate` joins lint and build on every packet; 2,528 strings and 33 images classified)
 
 ---
 
@@ -103,6 +103,7 @@ The HR exhibit page is **two stacked components**. Mount chain:
 | Brand wordmark trial (Fredoka, nav only) | token `--wb-brand`; applied `Exhibit.css:36` |
 | Mothballed Kaleidoscope (never mounted) | `HrExhibitFlow.jsx` :812/:852/:868/:947 + `.hr-kal-*` CSS |
 | **The Record's long-form ENTRY** (headline / dateline / lead / sections with inline door icons / tombstone) | `src/routes/exhibit/RecordEntry.jsx` + the `[RC]` block at the end of `Exhibit.css`. **Mounted from `Exhibit.jsx`'s opened-record branch, and the switch is the DATA: an entry declaring `sections` renders it, an entry that does not renders exactly what it rendered before.** The index, open/close, `wire`/`plates`/`docs` payloads and the ‹ NEWER / OLDER › walk stay in `Exhibit.jsx`. Dateline arithmetic (`entryWeekday`/`entryWeek`/`entryDateline`) is in `src/lib/record-model.js`; `Week n` needs a `recordEpoch` on the face and a `date` on the entry, and **as of v47 the Record declares NEITHER** — Mike ruled the dates invented, so the dateline prints `Record 013` alone and the model's undated path is the live path, not a fallback. **The Record holds exactly ONE entry** (v47/H2): the other ten were fiction and were deleted, and the face has no `blurb`, `still`, `stillCaption`, `lines` or `footer` — it is a heading and its entries, by ruling. Open gaps are questions for Mike in `docs/RECORD_013_QUESTIONS-20260804.md`, never filled in the data (Doctrine 12). **Three near-identical class prefixes live in `Exhibit.css` and mean different objects: `.vp-record-*` is an artist's chart/awards BOARD, `.vp-rec-*` is The Record, `.vp-rec-door` is a door inside a record entry.** |
+| **Provenance boundary + gate** (Doctrine 13) | `tools/provenance-sweep.mjs`; declarations in `provenance/register.json` (strings) and `provenance/assets.json` (images). `npm run provenance` reports, `npm run provenance:gate` exits 1. `provenance/README.md` is the model AND the honest hole-list. `provenance/backfill-20260804.mjs` is the audit record of the first classification and **must not be re-run** — its rules would silently absorb new content. |
 | Exhibit data export | `src/data/exhibits/hunter_root.json` via `npm run export-artifacts` |
 | Spine adapter (stable ids) | `src/data/artists/hunter-root-spine.js` |
 | Taxonomy v1 canon (June 9) | `docs/taxonomy/` — TAXONOMY_v1, NORMALIZATION_MAP, COVERAGE_PROOF, RETAG_PLAN |
@@ -246,6 +247,40 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
     hunt for the one real record in a pile of fictional ones — and the pile
     had been reported before and survived the report.
 
+    **MECHANIZED 2026-08-04 (v48), and doctrines 11 and 12 are still both
+    required.** See #13.
+
+13. **EVERY VISIBLE STRING CARRIES ITS ORIGIN (v48, 2026-08-04 — STANDING).**
+
+    Doctrines 11 and 12 are rules, and a rule only catches what a reader thinks
+    to look at. "436 records, kept since January 2024" PASSED Doctrine 11 —
+    its subject is the collection, not the making of the museum — and was
+    invented. The structural cause was never any one string: **a string could
+    enter the codebase and nothing at the boundary asked where it came from.**
+
+    **The boundary now asks.** `npm run provenance:gate` enumerates every
+    visitor-facing string in `src/` and `index.html` and fails if any is not
+    declared in `provenance/register.json` with an origin class — MIKE ·
+    VERIFIED · DERIVED · HOUSE · RESTATED, plus a capped INVENTION holding pen
+    for what has no origin and awaits Mike. A row is keyed by a hash of the
+    string, **so editing a declared line invalidates its own declaration** and
+    fails the gate until it is re-declared.
+
+    **It runs on every packet, beside lint and build.** A packet that adds
+    content adds register rows in the same commit.
+
+    **WHAT IT DOES NOT DO, and this must be repeated wherever it is described:
+    it cannot verify that a declaration is TRUE.** Nothing can. It makes the
+    claim reviewable in one file; it does not make it correct. It also cannot
+    read text inside an image (that is `assets.json` plus a human looking),
+    cannot detect a correctly-cited number going stale, and **does not replace
+    Doctrine 11** — a perfectly-sourced line whose subject is the making of the
+    museum still passes it cleanly.
+
+    Full model, the exclusion rules, and the honest hole-list:
+    `provenance/README.md` §4. Round log:
+    `docs/MUSEUM_PROVENANCE_LOG-20260804.md`.
+
 ## 8. Known hazards (environment quirks)
 
 - **Cowork FUSE/sync truncation.** The sandbox has truncated files on
@@ -275,6 +310,9 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 
 ## 9. Session-close ritual
 
+0. **Gates, in this order:** `npm run lint` (baseline, zero new) → `npm run
+   build` (green) → **`npm run provenance:gate` (exit 0)** → the lap. A packet
+   that added visitor-facing content adds its register rows in the same commit.
 1. Commit + push everything durable (explicit paths).
 2. If facts in THIS FILE or STATE.md changed (file map, hazards,
    protocols, closed decisions) — update them in the same session, same
