@@ -1005,6 +1005,14 @@ input.searchbar::placeholder { color: var(--wb-gold-mute); font-style: italic; }
   color: var(--wb-dim);
   line-height: 1.5;
 }
+/* [CS 2026-08-04] the empty feed's one line — see the note on SEED_ENTRIES. */
+.hr-jnl-empty {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.72rem;
+  color: var(--wb-gold-mute);
+  letter-spacing: 0.04em;
+  padding: 4px 0;
+}
 .hr-jnl-entry-actions {
   display: flex;
   gap: 8px;

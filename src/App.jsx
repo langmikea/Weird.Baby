@@ -3,10 +3,7 @@ import { useEffect, useRef } from "react";
 import WbHome     from "./routes/WbHome.jsx";
 import WbAdmin    from "./routes/WbAdmin.jsx";
 import HrSpine    from "./routes/hr/HrSpine.jsx";
-import HrHome     from "./routes/hr/HrHome.jsx";
-import HrMedia    from "./routes/hr/HrMedia.jsx";
 import HrArchive  from "./routes/hr/HrArchive.jsx";
-import HrFanWall  from "./routes/hr/HrFanWall.jsx";
 import WbSpine    from "./routes/wb/WbSpine.jsx";
 import InfoBooth  from "./routes/InfoBooth.jsx";
 import Foundation from "./routes/Foundation.jsx";
@@ -60,10 +57,32 @@ export default function App() {
         <Route path="/" element={<WbHome />} />
         <Route path="/admin" element={<WbAdmin />} />
         <Route path="/hr" element={<HrSpine />} />
-        <Route path="/hr/home" element={<HrHome />} />
-        <Route path="/hr/media" element={<HrMedia />} />
+        {/* [CS 2026-08-04] `/hr/media` AND `/hr/fan-wall` ARE REMOVED, with
+            their components deleted. Each was a one-line file rendering
+            "Media — coming soon." and "Fan Wall — coming soon." on a live
+            address. The house's own NO-COMING-SOON credo (robots.js, Mike
+            2026-07-29) killed exactly this pattern on the robots carousel;
+            these two survived it because nothing on the lobby board points at
+            /hr and nobody walked past them.
+            THEY DO NOT NEED A REPLACEMENT PAGE. E2's catch-all renders the
+            Lobby at any unmatched address — "no dead end, no blank shell, no
+            apology" — so both URLs now land a visitor somewhere real.
+
+            AND `/hr/home` GOES WITH THEM, which was not on the list until the
+            glass showed why. The room was a stock interior photograph
+            (`public/museum.jpg`, 1024×680) with its labels PAINTED INTO THE
+            IMAGE in marker — MUSEUM MENU, SPECIAL ON ROTATION, POSTERS / FAN
+            ART, MEDIA ROOM, ARCHIVES (downstairs), EXIT, BULLITEN (sic), HR.
+            The page's own DOM text was three words, "HUNTER ROOT · HOMESTEAD";
+            everything else a visitor read there was annotation baked into a
+            design mockup. It advertised five rooms of which four have never
+            existed in this application, and misspelled one of them. That is
+            not a room with placeholder content in it — it is a WIREFRAME, live
+            at a public address.
+            The component and the asset are both deleted. Nothing in the tree
+            linked here (checked): /hr is the real exhibit and is untouched,
+            and /hr/archive's own way back already points at /hr. */}
         <Route path="/hr/archive" element={<HrArchive />} />
-        <Route path="/hr/fan-wall" element={<HrFanWall />} />
         <Route path="/wb" element={<WbSpine />} />
         <Route path="/booth" element={<InfoBooth />} />
         {/* [F3 2026-08-03] Mike's new directory section. [C2] renamed it to

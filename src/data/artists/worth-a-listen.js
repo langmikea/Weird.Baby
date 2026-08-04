@@ -133,8 +133,6 @@ const ARTISTS = [
           label: [
             "The list is fascists. She has never been coy about it, and this " +
             "exhibit is not going to be coy about it on her behalf.",
-            "Her politics are quoted from her songs and her own framing, " +
-            "never characterised for her.",
           ],
         } },
     ],
@@ -244,8 +242,7 @@ const ARTISTS = [
       note: "No chart entry and no certification is documented for her in this " +
             "museum's sources. The three unlinked lines are carried from her " +
             "own press page and the biography this card cites; neither has a " +
-            "single readable page to point at, so they are set as plain type " +
-            "rather than borrowing a link that would not prove them.",
+            "single readable page to point at.",
     },
     /* [P16] THE RECORDS THIS ROOM POINTS AT — every slug read off her own
        Bandcamp catalogue page, 2026-08-02. The other thirteen releases are
@@ -427,12 +424,16 @@ const ARTISTS = [
             { k: "Accession", v: "MV-20260523-040" },
             { k: "Note", v: "Filed as “Nothin' Wrong”; supplied as “Nothing Wrong”" },
           ],
+          /* [CS 2026-08-04] both paragraphs were about how this entry was
+             MADE — "needed no open-web guessing at all", "flagged rather than
+             fixed in silence" — printed as the song's interpretive label. The
+             title question is a real fact about the catalogue and stays; the
+             account of our own data handling does not. */
           label: [
             "One of two Hunter Root songs surfaced in this wing, out of " +
-            "seventy-eight on file. He is the only artist here whose media " +
-            "needed no open-web guessing at all: the museum is the source.",
-            "The title discrepancy is flagged rather than fixed in silence. " +
-            "The catalogue says “Nothin'”, and the catalogue is the record.",
+            "seventy-eight in the museum's own vault.",
+            "The catalogue files it as “Nothin' Wrong”, and the " +
+            "catalogue is the record.",
           ],
         } },
     ],
@@ -464,14 +465,30 @@ const ARTISTS = [
         { k: "On record", v: "Crooked Home, Arkansas, Chase The Dragon",
           url: "https://hunterrootmusic.bandcamp.com/music", src: "his own Bandcamp" },
       ],
+      /* [CS 2026-08-04] THE HOUSE ARTIST'S CARD WAS ABOUT THE WEBSITE.
+         Both paragraphs described this software — "his catalogue taught the
+         museum's machinery every pattern the other wings inherited: the
+         coverflow, the tracklist grammar, the player frame, the fact vault",
+         "his entry here is exactly the same shape as everyone else's, which is
+         the point" — on the one card in the wing whose job is to introduce a
+         musician. A visitor who has never heard of him learned about our
+         renderer.
+         THE REPLACEMENT INTRODUCES NO NEW FACT. Seventy-eight songs, nine
+         albums and the April 2026 accession are the tombstone directly above;
+         Nick and the twenty-seven are on the “’94” card and in
+         the marker line; the two-of-nine surfacing is `tracksFor`'s own shape,
+         already stated on the card it replaces. */
       label: [
-        "He is the house artist, and the reason this building works: his " +
-        "catalogue taught the museum's machinery every pattern the other " +
-        "wings inherited — the coverflow, the tracklist grammar, the player " +
-        "frame, the fact vault.",
-        "His entry here is exactly the same shape as everyone else's, which " +
-        "is the point. The difference is that his card can draw on a hundred " +
-        "and nineteen facts from our own vault rather than from the open web.",
+        "The house artist — the one musician in this wing whose catalogue the " +
+        "museum holds itself: seventy-eight songs and nine albums, accessioned " +
+        "from April 2026.",
+        /* on glass the first draft of this paragraph opened "Half of Crooked
+           Home is about his brother Nick", which is the MARKER line printed
+           four inches above it. Same fact twice on one card in two registers is
+           the duplication C1 removed from the song cards. */
+        "Two of those songs are surfaced in this room, both from the vault's " +
+        "own copies. The rest of the catalogue, and the records as objects, " +
+        "are behind the doors at the foot of this card.",
       ],
       /* [P22] the merch list stays — it is a store inventory, not a
          discography, and it is the one place a visitor learns the records
@@ -504,8 +521,7 @@ const ARTISTS = [
             "documented for him in this museum's sources. That is a statement " +
             "about what we hold and not about the work — his record here is " +
             "the catalogue itself: 78 songs and nine albums on file in the " +
-            "museum's own vault, in the register above. He is the house " +
-            "artist, and the house does not get to grade him on a curve.",
+            "museum's own vault, in the register above.",
     },
     /* [P16] slugs read off his own Bandcamp catalogue page, 2026-08-02; years
        from the museum's own era buckets (src/data/era-buckets.json). */
@@ -563,13 +579,11 @@ const ARTISTS = [
           eyebrow: "Off a Mark Twain line",
           url: "https://www.youtube.com/watch?v=zwXHQMsmzQU" },
       ] },
+      /* [CS 2026-08-04] "He is the reason the machinery works" is REMOVED —
+         a card on a musician's wall whose whole subject was this website's
+         renderers, sourced to "The museum's own record". The deck runs with the
+         one card that is about him. */
       { title: "Also", kind: "note", cards: [
-        { title: "He is the reason the machinery works",
-          text: "This building's coverflow, tracklist grammar, player frame " +
-                "and fact vault were all taught by his catalogue first. Every " +
-                "other wing inherited them.",
-          who: "The museum's own record", where: "read 2026",
-          eyebrow: "The house artist" },
         { title: "On the road",
           text: "He was out through July 2026 and said so himself, on his " +
                 "own channel, the week it started.",
@@ -608,17 +622,22 @@ const ARTISTS = [
           tombstone: [
             { k: "Maker", v: "Jesse Welles" },
             { k: "Published by", v: "His own channel, @hellswelles" },
-            { k: "Supplied as", v: "Carsie Blanton's — and it is not" },
             { k: "Verified", v: "oEmbed author_url — the upload itself" },
           ],
+          /* [CS 2026-08-04] BOTH PARAGRAPHS WERE OUR RESEARCH LOG. "found in
+             the very first research pass", "REFUSED for want of proof", "when
+             oEmbed finally answered", "the caution turned out to have been right
+             twice" — an account of how this museum checked an id, printed as the
+             song's interpretive label on a card a visitor reads to learn about
+             the song. The `Supplied as` register row went with it for the same
+             reason: it recorded a mistake in OUR intake, not a fact about the
+             record.
+             WHAT REPLACES IT IS SHORT ON PURPOSE. This museum holds very little
+             about this particular song, and both facts below are already on this
+             page. A short honest label beats a long one about ourselves. */
           label: [
-            "This id was found in the very first research pass, flagged as a " +
-            "candidate for this exact song, and REFUSED for want of proof. " +
-            "When oEmbed finally answered, the caution turned out to have " +
-            "been right twice: right to refuse an unproven id, and right " +
-            "about which song it was.",
-            "It is filed here because the video says so, not because a list " +
-            "did.",
+            "One of two of his in this room. It went up on his own channel, " +
+            "@hellswelles, which is where his songs land first.",
           ],
         } },
       /* [TRANSPOSED] supplied under Carsie Blanton. */
@@ -630,14 +649,11 @@ const ARTISTS = [
             { k: "Published", v: "24 July 2026" },
             { k: "Reach", v: "205,991 views as of 2 August 2026" },
             { k: "Published by", v: "His own channel, @hellswelles" },
-            { k: "Supplied as", v: "Carsie Blanton's — and it is not" },
           ],
           label: [
             "Over two hundred thousand views in nine days, which is what his " +
             "habit looks like from the outside: a song about this week, " +
             "posted this week, gone everywhere by the next one.",
-            "The count is a snapshot and carries its date, because a number " +
-            "without a date is a claim that rots.",
           ],
         } },
     ],
@@ -722,7 +738,11 @@ const ARTISTS = [
       sideboxes: [
         { title: "Two links that are not his",
           lines: ["jessewelles.org", "jessewellestour.com"],
-          note: "Both rank high. Both are ticket-resale and SEO pages. Named here so nobody 'fixes' his link to a worse one." },
+          /* [CS 2026-08-04] the third sentence — "Named here so nobody 'fixes'
+             his link to a worse one" — was a note to the next maintainer,
+             printed in the box. The warning itself is for the visitor and
+             stays. */
+          note: "Both rank high. Both are ticket-resale and SEO pages, and neither is his." },
       ],
     },
     /* ===== [R6 2026-08-03] THE RECORD BOARD ================================
@@ -759,8 +779,7 @@ const ARTISTS = [
       ],
       note: "No certification is documented for him in this museum's sources. " +
             "The Farm Aid billing is carried from the coverage this card " +
-            "cites and has no single readable page to point at, so it is set " +
-            "as plain type.",
+            "cites and has no single readable page to point at.",
     },
     /* [P16] slugs read off his own Bandcamp catalogue page, 2026-08-02. */
     records: {
@@ -939,10 +958,12 @@ const ARTISTS = [
         { k: "Albums", v: "Life on Earth Vol. 1, 2019 · Vol. 2, 2022" },
         { k: "Filed under", v: "Alternative" },
       ],
+      /* [CS 2026-08-04] the opening paragraph was about this wing's own build
+         history — "the thinnest entry in this wing when it opened … that has
+         changed, and this card is what changed" — which tells a visitor about
+         our revisions and nothing about him. The two paragraphs that follow are
+         his, and they now open the card. */
       label: [
-        "He was the thinnest entry in this wing when it opened, and the honest " +
-        "reason was that nothing about him could be verified. That has " +
-        "changed, and this card is what changed.",
         "He co-produced on Rihanna's Unapologetic — an album that also " +
         "carried David Guetta and Stargate — and was signed to Universal's " +
         "publishing arm for years while, in one contemporary account's " +
@@ -1002,7 +1023,7 @@ const ARTISTS = [
       ],
       note: "No chart entry and no certification is documented for him in this " +
             "museum's sources. The London date's source is a print interview " +
-            "with no live page, so it is named rather than linked.",
+            "with no live page.",
     },
     /* [P16] THE ONE ARTIST WITH NO DOOR TO GIVE, AND THE BLOCK SAYS SO.
        Checked this round and all three came back empty-handed:
@@ -1483,12 +1504,16 @@ const HOUSE_ALBUM = {
                    "people through a Canon advert. You have almost certainly " +
                    "heard him without ever learning his name.",
               hue: "#e8b45c" },
+            /* [CS 2026-08-04] his billing on the poster advertised the SITE
+               ("his catalogue taught this museum's machinery every pattern the
+               other wings inherited"). The other three acts are billed on what
+               they have made; he is now billed the same way, from the facts on
+               his own card. */
             { id: "hunter-root",
               what: "Songwriter · the house artist",
-              why: "Ours, and the reason the building works: his catalogue " +
-                   "taught this museum's machinery every pattern the other " +
-                   "wings inherited. He stands in the same row as everyone " +
-                   "else here.",
+              why: "Ours — the one artist here whose whole catalogue this " +
+                   "museum holds: seventy-eight songs across nine records. " +
+                   "Half of Crooked Home is about his brother.",
               hue: "#d8c9a0" },
           ]),
           foot: "Press a name to open that artist's room. Every card in it was " +
@@ -1712,8 +1737,13 @@ export const worthAListenExhibit = {
   exhibitSlug: "wal",
   eraAlias: {},
   spine,
-  /* [R-c 2026-08-02] 321 sourced facts, in the museum's own fact shape,
-     consumed by the shipped selector with no new selection code. */
+  /* [R-c 2026-08-02] sourced facts, in the museum's own fact shape, consumed
+     by the shipped selector with no new selection code. [CS 2026-08-04] the
+     hard-coded count that stood here is gone rather than re-typed: nine facts
+     were removed this round (see the notes in worth-a-listen-facts.js) and a
+     number in a comment that nothing derives is a number that goes wrong the
+     next time the vault changes. `factCounts` at the foot of that file is the
+     derived one. */
   facts: worthAListenFacts,
   defaultActiveIndex: 0,
   splitKey: "wb-wal-split",

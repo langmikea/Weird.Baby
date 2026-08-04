@@ -154,29 +154,18 @@ const s = {
     flexWrap: "wrap",
     gap: "0.5rem",
   },
-  singleChip: (hov) => ({
+  /* [CS 2026-08-04] the hover branch and the `cursor:pointer` went with the
+     button — a label does not respond to the mouse, and pretending to is how
+     the dead control read as a door in the first place. `lyricMapLink` is
+     removed entirely with the link it styled. */
+  singleChip: {
     fontSize: "11px",
-    color: hov ? "#c8a050" : "#5a4820",
-    border: `1px solid ${hov ? "#4a3818" : "#2a2010"}`,
+    color: "#5a4820",
+    border: "1px solid #2a2010",
     padding: "4px 10px",
-    cursor: "pointer",
     fontFamily: "Georgia, serif",
     background: "transparent",
     letterSpacing: "0.05em",
-    transition: "color 0.1s, border-color 0.1s",
-  }),
-  lyricMapLink: {
-    display: "inline-block",
-    marginTop: "1.5rem",
-    fontSize: "11px",
-    color: "#5a4820",
-    letterSpacing: "0.12em",
-    cursor: "pointer",
-    fontFamily: "Georgia, serif",
-    background: "none",
-    border: "none",
-    borderBottom: "1px solid #2a2010",
-    padding: "0 0 1px 0",
   },
 };
 
@@ -184,7 +173,6 @@ export default function HrArchive() {
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(null);
   const [hovTrack, setHovTrack] = useState(null);
-  const [hovSingle, setHovSingle] = useState(null);
 
   const toggle = (title) => setExpanded((v) => v === title ? null : title);
 
@@ -250,29 +238,20 @@ export default function HrArchive() {
 
       <div style={s.singlesSection}>
         <div style={s.singlesLabel}>Singles</div>
+        {/* [CS 2026-08-04] the singles chip was a <button> with
+            `onClick={() => {}}` — a control that highlights on hover, takes the
+            press and does nothing, which is a stand-in for a door. It is a
+            LABEL now, because that is what it always was. */}
         <div style={s.singlesRow}>
           {SINGLES.map((s2) => (
-            <button
-              key={s2}
-              style={s.singleChip(hovSingle === s2)}
-              onMouseEnter={() => setHovSingle(s2)}
-              onMouseLeave={() => setHovSingle(null)}
-              onClick={() => {}}
-            >
-              {s2}
-            </button>
+            <span key={s2} style={s.singleChip}>{s2}</span>
           ))}
         </div>
       </div>
-
-      <div style={{ marginTop: "2rem" }}>
-        <button
-          style={s.lyricMapLink}
-          onClick={() => navigate("/hr/workshop/lyric-map")}
-        >
-          → explore lyrics in the lyric map
-        </button>
-      </div>
+      {/* [CS 2026-08-04] "→ explore lyrics in the lyric map" is REMOVED. It
+          navigated to /hr/workshop/lyric-map, which has never been a route in
+          this application. It was an invitation into a room that does not
+          exist. */}
     </div>
   );
 }

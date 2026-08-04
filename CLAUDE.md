@@ -355,9 +355,65 @@ These have been on `main` since before May 2026 and are deliberately untouched. 
 
 If asked to do "lint cleanup", these are the targets. Don't pretend they're trivial — read the surrounding code first.
 
+## THE LAW OF THE VISIBLE LINE (Mike, 2026-08-04 — STANDING)
+
+> **If a line describes the work rather than doing the work, it does not ship.**
+
+Canonical text + reasoning: `docs/canonical/OPERATIONS.md` §7 Doctrine 11.
+Mirrored in `STATE.md`. **Read it before writing any visitor-facing string.**
+
+The test is the line's SUBJECT, not its tone or its truth. Fails: the drafting,
+the research, the revision history, what a round did, the form a page takes and
+why, the typography, the renderers, unwritten-content plans, any builder named
+on the glass, internal decision codes, `· v1` draft stamps. Ships: the objects,
+the artists, the events in the record, the standing terms, and honest statements
+of what is not held. *"No plate on file"* ships; *"nobody has photographed this
+yet"* does not.
+
+Two things that LOOK like meta and are not: **provenance** (sources lines,
+accession numbers) and **mechanism state** (the Foundation's LIVE / NOT BUILT).
+
+Corollary: **empty and honest beats populated and false.**
+
+**The practical trap this cost a whole round:** the `why` field on a Portal drum
+position, the `held` string on a Record door, and a `note` on a face entry are
+all PRINTED. A "comment-shaped" string in a data file is not a comment. Grep for
+what renders before assuming a field is internal.
+
+**And a text sweep cannot see everything.** The largest placeholder in the
+building on 2026-08-04 was marker lettering **painted into a JPEG**
+(`public/museum.jpg`, now deleted) labelling four rooms that never existed. It
+took a screenshot to find. Lap the glass, not only the strings.
+
 ## Recent session log
 
 Maintained here. Newest first.
+
+### 2026-08-04 → THE CLEAN SLATE ROUND (v46; C1–C4) — not yet committed
+- **C1** 27 visible meta-copy strings removed across `robots.js`,
+  `worth-a-listen.js`, `worth-a-listen-facts.js`, `Foundation.jsx`. Sharpest:
+  the Portal's five drum refusals printed internal decision codes ("held — one
+  entry state (C3)", "held — workshop entry, by URL") under the latch; Hunter
+  Root's WAL artist card was two paragraphs about this website's renderers; nine
+  vault facts were our build narrative served as song facts (one also FALSE
+  since W8). No new fact introduced anywhere — every rewrite uses material
+  already on its own page.
+- **C2** Record 013 rewritten flat per Mike. Same facts/sections/labels/doors/
+  order; cadence, quoted failure modes, first-person colour and beat-fragments
+  removed.
+- **C3** Deleted: `HrHome.jsx` + `public/museum.jpg` (a mockup photo with room
+  labels painted in, incl. "BULLITEN"), `HrFanWall.jsx`, `HrMedia.jsx` (both
+  "— coming soon."), `SEED_ENTRIES` (13 fabricated fan testimonials, verified
+  unreachable), `/hr/archive`'s two dead controls. Routes dropped from `App.jsx`;
+  the E2 catch-all lands all of them on the Lobby.
+- **C4** Eleven exposed gaps listed in the round log — chiefly that `/hr` is now
+  one page plus an unlinked discography, the `/hr` journal is dead machinery
+  with no persistence, and Jesse Welles' "That Can't Be Right" has zero song
+  facts left. Nothing invented to fill any of it.
+- Gates: lint 11/9 = baseline, zero new; build green **70 modules** (was 73);
+  21-pattern ban sweep over every rendered route + every album × track = zero
+  hits; desktop + genuine 390px laps, zero horizontal scroll anywhere.
+- Round log: `docs/MUSEUM_CLEAN_SLATE_LOG-20260804.md`.
 
 ### 2026-05-30 → lint baseline restored (eslint ignores non-source)
 - `eslint.config.js`: added a `globalIgnores` block covering `_cowork/`, `dist`, `dist.pre_*`, `.phase1_retired_files/`, and `*.pre-*`/`*.old_v*`/`*.bak_*` backups. `eslint .` had been sweeping minified vendor backups (`dist.pre_p14_final_2` + `dist.pre_phase1_2` = 117 err each) and `_cowork/` scratch (18 err) — ~252 noise errors burying the real source baseline and making the count useless as a regression tripwire. Now `eslint .` reports `src/` only.

@@ -7,7 +7,7 @@ tree, the live working tree wins — always.
 
 **Read this file FIRST in every session, before STATE.md, before any handoff.**
 
-**Last verified against live tree:** 2026-08-04 (v45 RECORD 013 — the file map gained the Record's long-form entry renderer and the three-prefix warning)
+**Last verified against live tree:** 2026-08-04 (v46 THE CLEAN SLATE ROUND — Doctrine gained the Law of the Visible Line; three `/hr/*` routes and one mockup asset removed)
 
 ---
 
@@ -96,7 +96,7 @@ The HR exhibit page is **two stacked components**. Mount chain:
 | **Artifact deck/grid + controls dock** (tabs, P3Panel :2446, typed cards, presets/journal tab bodies) | `src/routes/hr/HrExhibitFlow.jsx` (~162KB) + `HrExhibitFlow.css`. **Dock is a LEFT RAIL** (relayout 2026-06-09): vertical tab strip on the left edge, peek-on-hover, `ew-resize` drag on the rail's right edge, width persisted `wb-hr-deck-width`; rail lifts above the full-width player bar via `body:has(.pb) .hr-deck{bottom:60px}`. Axis geometry split JS (`S.deck`/`S.panelPos`/`S.tab`/`S.resizeHandle`) + CSS (`.hr-deck`/`.hr-tab-strip`/`.hr-deck-body`). |
 | Canonical palette/typography tokens | `src/styles/museum-tokens.css`. **F0 2026-08-03:** `--wb-gold-mute` re-pinned to `#5f5c53` (the old `#9b978d` failed AA on all five paper grounds); new `--wb-hairline` holds the old value for the drag rules that chose faintness deliberately. JS pair is `src/styles/tokens.js` — change one, change the other, same edit. |
 | **Information Booth** (`/booth`) and **The Weird.Baby Foundation** (`/foundation`) | `src/routes/InfoBooth.jsx` + `InfoBooth.css`; `src/routes/Foundation.jsx` + `Foundation.css` (`.fnd-` prefix, `data-room="foundation"`). **THE SHARED FURNITURE IS `src/styles/sheet.css` (`.sheet-*`) AND BOTH ROOMS IMPORT IT** — root, card, credo, rule, questions, contact, way back. Edits there land on BOTH rooms; that is the point of the file. Each route's own sheet keeps only its page ground and its own objects: the booth's ADMIT ONE ticket (`.booth-ticket*`), the Foundation's account card + register + zero-cost invoice (`.fnd-*`). Before E4 (2026-08-03) all of it lived in `InfoBooth.css`, which /foundation imported — furniture for two rooms named for one, carried as a want in three logs. **Unrelated name collision, do not conflate:** the `--wb-booth-*` tokens in `museum-tokens.css` are the PROJECTION BOOTH (the dark scope used by the player bar and `/admin`), nothing to do with `/booth`. **THE ROOM HAS BEEN RENAMED ONCE AND RENAMED BACK — read this before touching it.** C2 (v41 `ecf33c5`) renamed everything to "Where the Money Goes" at `/money`; **R1 (v42) reverted it whole** on Mike's ruling that C2 read "keep me out of the space where I need legal today" as a naming instruction when it was a workload instruction. **BOTH names have been live URLs, so there is a redirect and it currently runs `/money` → `/foundation`** (`App.jsx`). A third rename must re-point that redirect, not just add another. `/foundation` outside a historical comment is CORRECT; `/money` outside the redirect line or a historical comment is a miss. |
-| **Routing table** | `src/App.jsx`. Order to know: the two named rooms, the `/money` → `/foundation` redirect, `/p/:id` preset landing, then **`path="*"` → `<WbHome />` (E2 2026-08-03)**. The catch-all RENDERS the Lobby at the unmatched address rather than navigating to `/` — Mike's ruling, "no dead end, no blank shell, no apology". Before it existed an unmatched path rendered the shell and nothing in it, and `wrangler.jsonc` sets `not_found_handling: "single-page-application"`, so Cloudflare hands EVERY unknown path to the router. |
+| **Routing table** | `src/App.jsx`. Order to know: the two named rooms, the `/money` → `/foundation` redirect, `/p/:id` preset landing, then **`path="*"` → `<WbHome />` (E2 2026-08-03)**. **[CS 2026-08-04] THREE `/hr/*` ROUTES ARE GONE and their components deleted:** `/hr/media` and `/hr/fan-wall` were one-line "— coming soon." pages; `/hr/home` was a stock interior photo (`public/museum.jpg`, also deleted) with its room labels PAINTED INTO THE IMAGE, advertising four rooms that never existed. All three now land on the Lobby via the catch-all. **`/hr` (the real exhibit) and `/hr/archive` are untouched and still reachable by URL only.** The catch-all RENDERS the Lobby at the unmatched address rather than navigating to `/` — Mike's ruling, "no dead end, no blank shell, no apology". Before it existed an unmatched path rendered the shell and nothing in it, and `wrangler.jsonc` sets `not_found_handling: "single-page-application"`, so Cloudflare hands EVERY unknown path to the router. |
 | JS token mirrors for inline `S.*` styles | `HrExhibitFlow.jsx:104–132`. Drift RESOLVED at `36b2182` — JS constants match the `--hr-*` CSS ramp; still a hand-maintained literal mirror (token edits do NOT auto-propagate to inline `S.*` styles). |
 | Pass-2 aesthetic blocks | `Exhibit.css:13–27` grain (`.ex-root::after`); `HrExhibitFlow.css:1821+` (lightbox dark re-pin :1836, badges :1853, cards :1826); player-bar dark re-pin `Exhibit.css:152` |
 | Logo image (Lobby ONLY; exhibit uses text wordmark) | `public/WeirdBaby_PhotoID.png`, placed `WbHome.jsx:115` |
@@ -162,6 +162,44 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
    batch a day's work uncommitted. Platform embeds verified incognito.
 10. **Understand the problem before acting.** Diagnose, then fix; don't
     chase the latest screenshot.
+11. **THE LAW OF THE VISIBLE LINE (Mike, 2026-08-04 — STANDING, site-wide).**
+    **If a line describes the work rather than doing the work, it does not
+    ship.**
+
+    The test is the line's SUBJECT, not its tone or its truth. Every line
+    removed under this law was accurate; that is what made it survive.
+
+    **A visible line FAILS if its subject is the making of this museum:** the
+    drafting, the research, the revision history, what a round did, the form a
+    page takes and why, the typography, the renderers, the plan for content not
+    yet written, or any person building it named on the glass. Also fails: an
+    internal decision code (`(C3)`, `held — storyline first`), an operator
+    marker outside the scrubber's reach, and a draft-state stamp (`· v1`) on a
+    visitor-facing label.
+
+    **A visible line PASSES if its subject is the collection:** the objects,
+    the artists, the events in the record, the institution's standing terms —
+    **including honest statements of what is not held.** "No plate on file" is
+    a holdings fact and ships. "Nobody has photographed this yet" is a
+    production fact and does not. Same absence, different subject.
+
+    Two adjacent traps, both paid for on 2026-08-04:
+    - **Provenance is not meta.** A sources line, a citation, an accession
+      number, "read at its source" — a museum prints those. What fails is the
+      NARRATIVE of the checking ("the first research pass refused it for want
+      of proof") and the JUSTIFICATION OF A DESIGN CHOICE ("so they are set as
+      plain type", "the withholding is authored").
+    - **Mechanism state is not meta.** The Foundation's LIVE / NOT BUILT
+      column and "not through this page yet" are Mike's own standing rule that
+      nothing may claim a mechanism that isn't built. That is a fact about the
+      museum as an institution, not about the website's backlog.
+
+    **The corollary Mike gave with it: empty and honest beats populated and
+    false.** A placeholder, a sample, a demo entry, a dead control, a door to a
+    room that does not exist, or an annotated wireframe at a live address is
+    removed rather than left standing. If one must stay, the Ops reason is
+    stated out loud — silence is not an option. What removal EXPOSES gets
+    reported, not papered over.
 
 ## 8. Known hazards (environment quirks)
 

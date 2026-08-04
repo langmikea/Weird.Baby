@@ -412,7 +412,11 @@ const FAQ = [
        actually ask. It answers NO for today and says what the yes will look
        like, which is the state column written out in a sentence. */
     q: "Can I send you something you need?",
-    a: "Not through this page yet. The plan is plain and it is Mike's: a " +
+    /* [CS 2026-08-04] "and it is Mike's" is OUT. The keeper of this place is
+       named "Papa Weird.Baby" on every other line of this room and of /booth;
+       this was the operator's real name reaching a visitor through a sentence
+       that did not need a name at all. */
+    a: "Not through this page yet. The plan is plain: a " +
        "public list of exactly what the museum needs — supplies, and hours of " +
        "work — so that a supporter can buy the thing or book the hour and " +
        "have it arrive here directly, with no money ever passing through us. " +

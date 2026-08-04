@@ -3170,47 +3170,34 @@ function PresetsContent({
 // O5: Journal renders as the body of a tab between Deep Tracks and Presets.
 // Layout adapts to the deck body's flexible height (default 480px, resizable).
 // Vertical scroll inside the tab body when entries overflow.
-const SEED_ENTRIES = [
-  { id: 1, date: "2025-11-02", handle: "velvetcassette", ctx: "'Town Rat Heathen'", era: "solo",
-    fact1: "I heard this in a coffee shop in Philly and made the barista tell me what was playing. Went home and listened to the whole catalog that night.",
-    up: 7, dn: 0, voted: null, mine: false, undoTimer: null },
-  { id: 2, date: "2025-12-14", handle: "rootsfan_pa", ctx: "Live at Tellus360", era: "solo",
-    fact1: "Third time seeing him live. The room was maybe 40 people and it felt like he was playing for each one individually.",
-    up: 5, dn: 0, voted: null, mine: false, undoTimer: null },
-  { id: 3, date: "2026-01-08", handle: "lampshade_kid", ctx: "'Homestead'", era: "solo",
-    fact1: "My partner and I listened to this driving through Lancaster County last fall. Now we can't hear it without seeing those fields.",
-    up: 9, dn: 0, voted: null, mine: false, undoTimer: null },
-  { id: 5, date: "2025-09-18", handle: "quiethighway", ctx: "'Reverend'", era: "solo",
-    fact1: "The video for Reverend is the most cinematic thing I've seen from an independent artist. I keep showing it to people who don't believe me when I say this guy is unsigned.",
-    up: 8, dn: 0, voted: null, mine: false, undoTimer: null },
-  { id: 6, date: "2025-10-03", handle: "nick_would_know", ctx: "'My Brother's Bones'", era: "solo",
-    fact1: "I lost my brother two years ago. This song found me at exactly the right time. I don't have words for what it did.",
-    up: 11, dn: 0, voted: null, mine: false, undoTimer: null },
-  { id: 7, date: "2026-01-22", handle: "porchlight_kid", ctx: "'Silver Lining'", era: "solo",
-    fact1: "The reprise at the end of Arkansas hits different after you've been through the whole album. It earns it.",
-    up: 6, dn: 0, voted: null, mine: false, undoTimer: null },
-  { id: 8, date: "2025-06-15", handle: "analog_ears", ctx: "'Nothin' Wrong'", era: "solo",
-    fact1: "Played this for my therapist. She asked me to play it again. That's all I need to say about it.",
-    up: 10, dn: 0, voted: null, mine: false, undoTimer: null },
-  { id: 9, date: "2026-03-01", handle: "crookedhome25", ctx: "'94'", era: "solo",
-    fact1: "Opening Crooked Home with a year as a title ΓÇö that's a statement. You know right away this one is going to cost him something.",
-    up: 5, dn: 0, voted: null, mine: false, undoTimer: null },
-  { id: 10, date: "2025-07-20", handle: "violet_lemke_fan", ctx: "Violet Lemke cover", era: "solo",
-    fact1: "Found Hunter Root through Violet Lemke's cover. Then I found the original and it ruined me. Now I listen to both.",
-    up: 7, dn: 0, voted: null, mine: false, undoTimer: null },
-  { id: 4, date: "2026-02-20", handle: "medusa_og", ctx: "Medusa's Disco", era: "medusas",
-    fact1: "I was at the last Medusa's Disco show. Nobody knew it was the last one until it was. Different energy when you find out later.",
-    up: 6, dn: 0, voted: null, mine: false, undoTimer: null },
-  { id: 11, date: "2025-08-05", handle: "chameleon_regular", ctx: "Chameleon Club", era: "medusas",
-    fact1: "Used to see Medusa's Disco at the Chameleon all the time. I didn't realize what I was watching until it was already over.",
-    up: 4, dn: 0, voted: null, mine: false, undoTimer: null },
-  { id: 12, date: "2026-03-10", handle: "sleepwalking_md", ctx: "Medusa's Disco", era: "medusas",
-    fact1: "The energy at those early shows was something else. Nobody was on their phone. Everyone was just there.",
-    up: 5, dn: 0, voted: null, mine: false, undoTimer: null },
-  { id: 13, date: "2025-12-28", handle: "firstlight", ctx: "Pre-Hunter Root", era: "seeds",
-    fact1: "I knew him before the name. Different songs, same thing in his voice. You could always hear it.",
-    up: 3, dn: 0, voted: null, mine: false, undoTimer: null },
-];
+/* ==== [CS 2026-08-04] THIRTEEN INVENTED VISITORS ARE GONE ==================
+   MIKE: "every placeholder, sample, demo entry and stand-in string a visitor
+   can see — remove it. Empty and honest beats populated and false."
+   WHAT WAS HERE. `SEED_ENTRIES` held thirteen fabricated journal entries with
+   invented handles ("velvetcassette", "nick_would_know"), invented dates,
+   invented vote counts, and invented first-person testimony about a real
+   living musician and his dead brother — "I lost my brother two years ago.
+   This song found me at exactly the right time." Thirteen strangers who do
+   not exist, written to look like people who had stood in this room.
+   HOW LIVE IT WAS, STATED ACCURATELY BECAUSE THE MEASUREMENT WAS TAKEN. It is
+   NOT reachable today. `JournalContent` renders only when `activeTab` is
+   "journal", the tab strip filters that key out (`t.key !== "journal"`, the
+   BAR-DOCK change of 2026-06-16), the two surviving player-bar triggers are
+   Filters and Presets, and `handleTabClick` is the only setter — verified on
+   the built page: the /hr bar offers FILTERS and PRESETS and nothing else. So
+   no visitor has been reading these. They are removed anyway: a fabricated
+   testimonial in the tree is one re-enabled tab away from being a fabricated
+   testimonial on the page, and the law this round banks is about what may
+   ship, not about what happens to be unrouted this week.
+   NOTHING REPLACES THEM. The feed is empty, and it says so.
+   ONE MORE DEFECT DIED WITH THE BLOCK: two entries carried a mojibake em-dash
+   ("ΓÇö") that would have rendered as literal garbage.
+   THE DEEPER GAP IS NAMED IN THE ROUND REPORT AND NOT FIXED HERE: `submitEntry`
+   pushes to component state and nothing else, so even if the tab came back, an
+   entry a visitor left would survive until the page reloaded and no further.
+   The lobby's guest book is a real D1 table; this is not one. That is a
+   feature decision and Mike's to make. */
+const SEED_ENTRIES = [];
 
 function JournalContent({ prompts, eraFilter }) {
   const [entries, setEntries]     = useState(SEED_ENTRIES);
@@ -3351,6 +3338,13 @@ function JournalContent({ prompts, eraFilter }) {
       </div>
 
       <div className="hr-jnl-feed">
+        {/* [CS 2026-08-04] the honest empty state. With the thirteen invented
+            entries removed this feed starts empty, and an empty region with no
+            sentence in it reads as a component that failed to load. One line,
+            stating the fact. */}
+        {entries.length === 0 && (
+          <div className="hr-jnl-empty">Nobody has left a mark yet.</div>
+        )}
         {entries.filter(e => e.undoTimer !== null).map(e => (
           <div key={e.id} className="hr-jnl-entry hr-jnl-entry-new">
             <div className="hr-jnl-entry-head">

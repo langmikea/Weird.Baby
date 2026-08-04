@@ -439,8 +439,12 @@ const mikey = [
             "Snapshot taken 2 August 2026."], { source: ["feed"], topic: ["feed"] }),
   fact(MM, ["Twelve of those fifteen are from 2025.",
             "Three are from the summer of 2026."], { source: ["feed"], topic: ["feed"] }),
-  fact(MM, ["Mike wrote this one down as “I'm Doin' Me”.",
-            "The record appears to be “Doin' Me” — flagged, not corrected in silence."], { source: ["own"], topic: ["records"], song: ["doin_me"] }),
+  /* [CS 2026-08-04] REMOVED: "Mike wrote this one down as “I'm Doin'
+     Me”. The record appears to be “Doin' Me” — flagged, not
+     corrected in silence." The pop-up scroller serves this to a visitor as a
+     fact about the song; it is a fact about our own intake, and it named the
+     operator on the glass. Nothing about the record is lost — the title is
+     stated correctly everywhere else on the page. */
   /* ---- the second pass on the thinnest entry, 2026-08-02 -------------------
      The first pass stopped at thirty-five and the floor for this vault is
      fifty, so it went back out rather than declaring thirty-five to be enough.
@@ -533,10 +537,12 @@ const hunterFeed = [
             "Hunter and his brother Nick."], { source: ["vault"], topic: ["records"], song: ["94"] }),
   fact(HR, ["“Nothin' Wrong” is from Skipping Stones That Sink Before They're Thrown.",
             "Museum catalogue MV-20260523-040."], { source: ["vault"], topic: ["records"], song: ["nothin_wrong"] }),
-  fact(HR, ["Mike wrote that title down as “Nothing Wrong”.",
-            "The catalogue title is “Nothin' Wrong” — flagged, not corrected in silence."], { source: ["own"], topic: ["records"], song: ["nothin_wrong"] }),
-  fact(HR, ["He is the reason this museum works the way it does.",
-            "Every pattern the other wings use was built in his."], { source: ["own"], topic: ["catalogue"] }),
+  /* [CS 2026-08-04] TWO REMOVED, same law both times.
+     · "Mike wrote that title down as “Nothing Wrong”" — our
+       intake, not his record, with the operator named on the glass.
+     · "He is the reason this museum works the way it does. Every pattern the
+       other wings use was built in his." — a fact about this software served
+       in the pop-up as a fact about a musician. */
 ];
 
 /* ===========================================================================
@@ -550,12 +556,18 @@ const wing = [
                "Never ours."], { source: ["own"], topic: ["mission"] }),
   fact("wal", ["The editorial standard is one sentence long.",
                "Someone here thinks they are worth a listen."], { source: ["own"], topic: ["mission"] }),
-  fact("wal", ["The artists are listed alphabetically by the name as billed.",
-               "Read as one whole string, which is the only key that treats a stage name honestly."], { source: ["own"], topic: ["house"] }),
-  fact("wal", ["Every video id in this wing was checked against the video's own metadata.",
-               "Four of the first six supplied were transposed."], { source: ["own"], topic: ["house"] }),
-  fact("wal", ["The covers are typographic on purpose.",
-               "A YouTube thumbnail is a rights gamble wearing a technical disguise."], { source: ["own"], topic: ["house"] }),
+  /* [CS 2026-08-04] THREE REMOVED FROM THE WING TIER.
+     · the alphabetical-sort fact described this page's sort key ("read as one
+       whole string, which is the only key that treats a stage name honestly").
+     · the video-id fact described our own verification pass and the mistakes in
+       the batch we were handed ("four of the first six supplied were
+       transposed").
+     · "The covers are typographic on purpose. A YouTube thumbnail is a rights
+       gamble wearing a technical disguise." — a design decision, explained to
+       the visitor, AND FALSE SINCE W8: the covers are the artists' own
+       photographs. It had been wrong on the glass for two days.
+     The four that remain are all about the deal the room offers, which is the
+     room's own subject. */
   fact("wal", ["Nothing in this room is endorsed by the artist.",
                "Nothing here is sold on their behalf."], { source: ["own"], topic: ["mission"] }),
 ];
@@ -581,14 +593,19 @@ const songTier = [
             "She has never been coy about it."], { source: ["own"], topic: ["records"], song: ["shit_list"] }),
   fact(CB, ["“Shit List” is on Bandcamp as a digital single too.",
             "— her Bandcamp, read 2026"], { source: ["bandcamp"], topic: ["records"], song: ["shit_list"] }),
-  fact(JW, ["“That Can't Be Right” was nearly not shipped here.",
-            "The first research pass found the id and refused it for want of proof."], { source: ["own"], topic: ["records"], song: ["that_cant_be_right"] }),
-  fact(JW, ["The caution about “That Can't Be Right” turned out to be right twice.",
-            "It refused an unproven id, and it had guessed the correct song."], { source: ["own"], topic: ["records"], song: ["that_cant_be_right"] }),
-  fact(JW, ["“That Can't Be Right” was supplied to us labelled as Carsie Blanton's.",
-            "The video's own metadata said otherwise."], { source: ["own"], topic: ["records"], song: ["that_cant_be_right"] }),
-  fact(JW, ["“There's A Hole” was also supplied under the wrong artist.",
-            "Four of the first six ids we were handed were transposed."], { source: ["own"], topic: ["records"], song: ["theres_a_hole"] }),
+  /* [CS 2026-08-04] FOUR REMOVED, and this is the round's largest single
+     subtraction from the vault. All four were our own build narrative served as
+     song facts: "nearly not shipped here", "the first research pass found the
+     id and refused it", "the caution turned out to be right twice", "supplied to
+     us labelled as Carsie Blanton's", "four of the first six ids we were handed
+     were transposed".
+     THE CONSEQUENCE IS NAMED RATHER THAN PAPERED OVER. "That Can't Be Right"
+     had exactly three song-tier facts and all three were of this class, so the
+     song now has NONE and its pop-up climbs to the artist tier, which is the
+     documented behaviour of the climb and not a fault. "There's A Hole" drops
+     from two to one. Both are listed in the round report as content gaps: this
+     museum holds almost nothing about either song that is about the song.
+     NOTHING WAS INVENTED TO FILL THE HOLE. */
   fact(JW, ["“There's A Hole” is one of his fastest-travelling recent uploads.",
             "Over two hundred thousand views in nine days."], { source: ["feed"], topic: ["records"], song: ["theres_a_hole"] }),
   fact(MM, ["“Cooler” is a lyric video on his own channel.",
@@ -605,7 +622,7 @@ const songTier = [
   fact(HR, ["“Nothin' Wrong” is one of two of his songs surfaced in this wing.",
             "The other is ’94."], { source: ["vault"], topic: ["records"], song: ["nothin_wrong"] }),
   fact(HR, ["“Nothin' Wrong” came to this room from our own catalogue.",
-            "It is the one artist here whose media needed no open-web guessing."], { source: ["vault"], topic: ["records"], song: ["nothin_wrong"] }),
+            "Museum accession MV-20260523-040."], { source: ["vault"], topic: ["records"], song: ["nothin_wrong"] }),
 ];
 
 export const worthAListenFacts = [

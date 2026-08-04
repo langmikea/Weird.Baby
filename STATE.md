@@ -87,6 +87,98 @@ distinction it always rested on, that giving is the other direction and a gift
 made in Weird.Baby's name was never Weird.Baby's money. **If Mike wants the flat
 No back, that is one string.**
 
+## THE LAW OF THE VISIBLE LINE (Mike, 2026-08-04 — STANDING, site-wide)
+
+> **If a line describes the work rather than doing the work, it does not ship.**
+
+Canonical copy with its full reasoning: `docs/canonical/OPERATIONS.md` §7,
+Working Doctrine 11. The short form:
+
+**The test is the line's SUBJECT, not its tone or its truth.** Every line removed
+on 2026-08-04 was accurate — that is what let it survive four rounds of review.
+
+- **Fails:** the drafting, the research, the revision history, what a round did,
+  the form a page takes and why, the typography, the renderers, the plan for
+  unwritten content, any builder named on the glass, internal decision codes,
+  draft stamps.
+- **Ships:** the objects, the artists, the events in the record, the standing
+  terms, **and honest statements of what is not held.** *"No plate on file"* is a
+  holdings fact. *"Nobody has photographed this yet"* is a production fact. Same
+  absence, different subject.
+
+**Provenance is not meta** (a sources line, an accession number, "read at its
+source" — a museum prints those; what fails is the NARRATIVE of the checking and
+the JUSTIFICATION of a design choice). **Mechanism state is not meta** — the
+Foundation's LIVE / NOT BUILT column is the standing rule that nothing may claim
+a mechanism that isn't built.
+
+**Corollary, Mike's words: empty and honest beats populated and false.** A
+placeholder, a demo entry, a dead control, a door to a room that does not exist,
+or an annotated wireframe at a live address is removed rather than left standing.
+If one must stay, the Ops reason is stated out loud. What removal EXPOSES gets
+reported.
+
+## SEALED 2026-08-04 — THE CLEAN SLATE ROUND (v46; C1–C4. PUSH + DEPLOY ARE MIKE'S)
+
+Autonomous single-agent Code-lane round on Mike's remote-control brief. Full
+round log: `docs/MUSEUM_CLEAN_SLATE_LOG-20260804.md`. **Read that before the v45
+section below** — v45's Record entry survives, but its copy and its footer were
+rewritten by C1/C2 and the section below still quotes the old ones.
+
+- **C1 — TWENTY-SEVEN VISIBLE META-COPY STRINGS REMOVED, in five files.** Mike
+  found one live (the Record's blurb, "…which is emphatically not the order in
+  which any of it makes sense"). The sweep found twenty-six more. **The sharpest
+  were the Portal's five drum refusals** — `why` is not a comment, it is the
+  line printed under the latch, and it read "held — one entry state (C3)",
+  "held — awaiting a privacy ruling" and "held — workshop entry, by URL": an
+  internal decision code, an unmade ruling, and the existence of an undisclosed
+  URL, shown to anyone who rolled the drum. Also: **Hunter Root's artist card
+  was two paragraphs about this website's renderers**, on the one card whose job
+  is to introduce a musician; **Jesse Welles' song card was our research log**;
+  **nine facts in the WAL vault were our own build narrative served to visitors
+  as facts about songs** — one of which ("the covers are typographic on
+  purpose") had also been FALSE since W8. Rewrites introduced **no new fact
+  anywhere**; every replacement is built from material already on its own page.
+- **C2 — RECORD 013 STRIPPED FLAT, not split.** Same facts, same six sections,
+  same labels, same four doors, same marker positions, same headline, same
+  order. Out came the cadence lists, the quoted failure modes ("a smell we
+  regret"), the first-person colour, the fragments-as-beats, and every sentence
+  whose job was the turn at the end of it. **Mike reads the flat version and
+  then the voice gets developed together.**
+- **C3 — PLACEHOLDERS DIED SITE-WIDE, and the largest was invisible to every
+  text sweep.** `/hr/home` was a stock interior photograph with its room labels
+  **painted into the JPEG** — MUSEUM MENU · SPECIAL ON ROTATION · POSTERS / FAN
+  ART · MEDIA ROOM · ARCHIVES (downstairs) · EXIT · **BULLITEN (sic)** · HR. The
+  page's own DOM text was three words. A design mockup live at a public address,
+  advertising five rooms of which four never existed. Component and asset
+  deleted. With it went `/hr/media` and `/hr/fan-wall` ("— coming soon.", which
+  the house's own NO-COMING-SOON credo killed on the robots carousel a week
+  earlier), thirteen **fabricated fan-journal testimonials** including invented
+  grief about a real musician's dead brother (verified unreachable — the tab is
+  filtered out — but removed anyway), and `/hr/archive`'s two dead controls (a
+  button wired to `() => {}`, and a link into `/hr/workshop/lyric-map`, never a
+  route). **Nothing was kept for an Ops reason.**
+- **C4 — WHAT IT EXPOSES, listed rather than papered over.** The Hunter Root
+  wing is now `/hr` plus an unlinked discography — the four rooms the mockup
+  advertised do not exist and never did. The `/hr` journal is dead machinery
+  (unreachable tab; `submitEntry` writes to component state and nothing else, so
+  an entry would not survive a reload). Jesse Welles' "That Can't Be Right" now
+  has **zero** song-tier facts and a one-sentence card, because all three it had
+  were our research narrative — **nothing was invented to fill the hole.** `/wb`
+  is thin and always was. Full list, eleven items, in the round log.
+- **Gates:** lint **11 err / 9 warn = HEAD baseline, zero new** (two introduced
+  and both fixed properly); build green, **70 modules** (73 → 70); all 13
+  addresses 200 with the five dead ones landing on the Lobby; a 21-pattern ban
+  list run over the full rendered text of every route and every album × track in
+  `/robots` and `/wal` — **zero hits**; desktop 1920×911 and a genuine 390px lap
+  with **zero page-level and zero inner horizontal scroll**; all four of Record
+  013's doors fired and closed back.
+- **Named honestly:** Chrome's screenshot pipeline was unstable again (blank
+  frames, stale zoom, two CDP timeouts, one dead `wrangler dev` serving 404s).
+  The load-bearing verification was DOM measurement, not the JPEGs — **but the
+  single biggest find of the round came from a screenshot**, because painted-in
+  image labels are invisible to a text sweep by construction.
+
 ## SEALED 2026-08-04 — RECORD 013, THE PROTOTYPE ENTRY (v45; PUSH + DEPLOY ARE MIKE'S)
 
 Autonomous single-agent Code-lane round on Mike's remote-control brief. Full

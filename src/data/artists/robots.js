@@ -308,8 +308,13 @@ const WBR_TRACKS = [
                     "was opened.",
               note: "" },
           ],
-          footer: "The answers a visitor gets should be shorter than these. " +
-                  "[PAPA] — the final wording throughout.",
+          /* [CS 2026-08-04] "The answers a visitor gets should be shorter than
+             these." was a note from the builders to the operator, standing
+             OUTSIDE the marker and therefore printing at the foot of the page.
+             It is now inside the marker's sentence, where it was always going;
+             the whole footer scrubs to nothing and no footer renders. */
+          footer: "[PAPA] — the final wording throughout, and the answers " +
+                  "should be shorter than these.",
         },
       },
       {
@@ -503,7 +508,7 @@ const spine = [
               note: "[PAPA] — whether the carousel reads MGK-NIAC or MGK-VIII" },
           ],
           entriesMode: "list",
-          footer: "MGK-VIII · MGK-NIAC · v1",
+          footer: "MGK-VIII · MGK-NIAC",
         },
       },
       {
@@ -580,10 +585,17 @@ const spine = [
              another maintainer. The operational half now sits behind the
              marker; what survives to the wall is the one thing a visitor
              actually needs to know about the crop. */
+          /* [CS 2026-08-04] the survivor printed on the wall was "The
+             withholding is authored, and it is not a shortage of photographs."
+             — the museum annotating its own editorial decision, in the museum's
+             own vocabulary for editorial decisions. The FACT it was defending is
+             already on the tombstone four rows up ("Frame — Withheld: no plate
+             carries the whole unit"), which is a holdings statement and stays.
+             The whole string is now one marked sentence and renders nothing. */
           papa: "[PAPA] — how much of this unit is ever shown whole, and when; " +
-                "the uncropped originals are all on file and any of them can be " +
-                "published from this file alone. The withholding is authored, " +
-                "and it is not a shortage of photographs.",
+                "the uncropped originals are all on file, any of them can be " +
+                "published from this file alone, and the crop is a decision " +
+                "rather than a shortage.",
         },
       },
       {
@@ -608,8 +620,8 @@ const spine = [
           blurb:
             "Two generations of code are on file and both are real: eight " +
             "single-subsystem bench sketches, and the flagship that supersedes " +
-            "them. What follows is what the files say about themselves. There " +
-            "is no reading of them here, because nobody has written one.",
+            "them. What follows is what the files say about themselves. No " +
+            "reading of them is on file.",
           lines: [
             "FLAGSHIP   v0.1 · 2026-02-23 · 1,385 lines · Uno R4 WiFi",
             "STATUS     baseline — pre-thermal-validation",
@@ -641,7 +653,7 @@ const spine = [
               note: "a bench limit on a bench board — the flagship targets an R4" },
           ],
           entriesMode: "list",
-          footer: "MGK-VIII · FIRMWARE · v1",
+          footer: "MGK-VIII · FIRMWARE",
         },
       },
       {
@@ -685,14 +697,13 @@ const spine = [
               note: "" },
             { stamp: "CAUTION", title: "What the plates do not establish",
               line: "They establish what the machine is made OF. They establish " +
-                    "nothing whatever about where any single part came from, and " +
-                    "this page does not guess — the four lines above are read " +
-                    "off the photographs and stop exactly where the photographs " +
-                    "stop.",
+                    "nothing whatever about where any single part came from. " +
+                    "What is listed above is read off the photographs and goes " +
+                    "no further than they do.",
               note: "[PAPA] — the donor list, if it is ever published at all" },
           ],
           entriesMode: "list",
-          footer: "MGK-VIII · PARTS · v1",
+          footer: "MGK-VIII · PARTS",
         },
       },
     ],
@@ -843,17 +854,27 @@ const spine = [
              entry in this volume carries that date. See `entryWeek` in
              `src/lib/record-model.js`. */
           recordEpoch: "2024-01-01",
-          /* [M11] register only. Every claim — the reverse-discovery, the
-             writing-as-it-happened, the wrongness — was already here. */
+          /* [CS 2026-08-04] THE BLURB WAS THE ROUND'S EXHIBIT A.
+             It read "A discovery run backwards: the object first, the
+             explanation afterwards … which is emphatically not the order in
+             which any of it makes sense." That is a description OF the writing,
+             printed where the writing goes — the museum standing beside its own
+             log explaining the log's shape to the reader. Mike found it live.
+             THE REPLACEMENT SAYS WHAT THE RECORD IS AND WHAT IS IN IT, which is
+             the same job a catalogue entry does for any other object in the
+             building. No claim is added: the weekly cadence, the corrections and
+             the start date were all already here.
+             Same cut on `lines`: "in repo" is a fact about this repository, not
+             about the collection, and "not as it makes sense" was the blurb's
+             commentary wearing a register line's clothes. */
           blurb:
-            "A discovery run backwards: the object first, the explanation " +
-            "afterwards, and the explanation changing under us more than once. " +
-            "Written week by week as it happened, which is emphatically not the " +
-            "order in which any of it makes sense.",
+            "The log kept since the cartons arrived: what was found, what was " +
+            "worked out from it, and what was later corrected. Written week by " +
+            "week, as each week happened.",
           lines: [
-            "SOURCE   The Record — 436 paragraph records, in repo",
+            "SOURCE   436 records, kept since January 2024",
             "INDEX    date-stamped, log-sheet register",
-            "ORDER    as it happened, not as it makes sense",
+            "ORDER    as it happened",
           ],
           /* THE FIRST LAYER IS REAL. Ten entries, real dates, and one true
              sentence each, taken from the blog archive itself — not invented
@@ -892,64 +913,79 @@ const spine = [
                time an entry is inserted. The ten entries around it carry no
                `no` and print none; that is honest, and closing it is named in
                the round log as work the full Record needs.
-               THE HOOK IS A PHOTOGRAPH WE ALREADY OWN. Nothing in this entry is
-               photographed — that is the entry's own subject — so the plate is
-               the back of the unit as it was shot on arrival, which is where
-               the cover and the indicator this entry is about actually are. The
-               caption says only what is visible in the frame. The adapter, the
-               port and the second the screen lit are all unphotographed here
-               and every one of them says so on the page rather than in a note
-               nobody reads. */
+               THE HOOK IS A PHOTOGRAPH WE ALREADY OWN: the back of the unit as
+               it was shot on arrival, which is where the cover and the
+               indicator this entry is about actually are. The caption says only
+               what is visible in the frame.
+
+               ==== [CS 2026-08-04] STRIPPED FLAT. MIKE'S RULING ==============
+               "Too dramatic, too colourful, too screenplay-like. Rewrite it
+               FLAT — plain declarative reporting of what happened, no
+               atmosphere, no rhythm-for-effect, no lines written to land. Same
+               facts, same structure, same doors, all the colour removed. Do not
+               split the difference."
+               WHAT CAME OUT, so the next pass can see the axis rather than
+               guess at it: the three-beat lists built for cadence ("newspaper,
+               tape, and the same brittle tan padding"), the quoted failure
+               modes ("a smell we regret", "the building has a bad afternoon"),
+               the first-person colour ("a longer conversation than it deserved
+               to be", "the first time anyone here has seen this thing alive"),
+               the sentence fragments used as beats ("The bag is wrong. Not
+               damaged-wrong — era-wrong."), and every line whose job was the
+               turn at the end of it.
+               WHAT DID NOT COME OUT: any fact, any section, any door, any
+               marker position, the headline, or the order. The section labels
+               are unchanged. This is the same entry reported rather than
+               performed, which is what Mike asked to read before the voice gets
+               developed.
+               ONE LINE WAS ALSO REMOVED AS META, not as colour — the caption's
+               "Nothing in this entry has been photographed yet." A caption's
+               job is to say what is in the frame, and that sentence was about
+               the museum's photography backlog. The caption still names exactly
+               what the plate shows, so it cannot be mistaken for the adapter. */
             { date: "2024-01-17", no: 13,
               title: "The one thing that wasn't packed in newspaper",
               evidence: "object",
               still: "/robots/reference/photos/rear_power_switch.png",
               stillCaption: "The back of the unit, photographed the week it " +
-                            "arrived — the indicator, and the catch engraved " +
-                            "OPEN / LOCK. Nothing in this entry has been " +
-                            "photographed yet.",
-              line: "The one modern object in three cartons of 1965, and the " +
-                    "reason the machine is currently drawing power.",
-              lead: "Everything in those three boxes was packed like it was " +
-                    "1965 — newspaper, tape, and the same brittle tan " +
-                    "padding on every side of every object. Everything except " +
-                    "one item, and that item is why the machine is charging.",
+                            "arrived: the indicator, and the catch engraved " +
+                            "OPEN / LOCK.",
+              line: "A modern mains adapter, sealed in a bag, in a carton " +
+                    "otherwise packed as 1965. The unit is now on charge.",
+              lead: "Everything in the three cartons was packed the same way: " +
+                    "newspaper, tape, and tan padding on every side of every " +
+                    "object. One item was not. It is a mains adapter, and the " +
+                    "unit is on charge because of it.",
               sections: [
                 { label: "The bag",
                   body:
-                    "The bag is wrong. Not damaged-wrong — era-wrong. " +
-                    "Three cartons of newsprint and tape and that tan padding " +
-                    "that has gone to powder wherever it was touched, and then, " +
-                    "taped flat against the inside wall of carton two, a modern " +
+                    "Taped flat against the inside wall of carton two was a " +
                     "sealed pouch: clear film, heat-crimped on all four edges, " +
-                    "the kind of seal that takes a machine to make. Inside it, " +
-                    "one mains adapter. USB-C at the wall end, which is not a " +
-                    "1965 connector by about half a century, and at the other " +
-                    "end a barrel we have not been able to match against " +
-                    "anything on the bench or in the catalogues we have. No " +
-                    "note. No label. No part number. Nothing else in any of the " +
-                    "three boxes was protected that way — not the manual, " +
-                    "not the framed ads[[1]], not the unit itself. Whoever " +
-                    "packed this knew we would need it, and knew we would not " +
-                    "have it.",
+                    "a machine-made seal. Inside it was one mains adapter. The " +
+                    "wall end is USB-C. The other end is a barrel connector " +
+                    "that does not match anything on the bench or in the " +
+                    "catalogues held here. There was no note, no label and no " +
+                    "part number with it. Nothing else in the three cartons " +
+                    "was packed that way — not the manual, not the framed " +
+                    "ads[[1]], not the unit. The pouch is the only modern " +
+                    "object in the drop, and it holds a part the unit requires " +
+                    "and this house did not have.",
                   doors: [
                     { kind: "record", to: "2024-01-01",
                       label: "the drop, three boxes" },
                   ] },
                 { label: "What it plugs into",
                   body:
-                    "The barrel goes into a port under the base plate, behind a " +
-                    "cover we had catalogued as a battery door and then left " +
-                    "alone[[1]]. It is not a battery door. Behind it is a " +
-                    "two-pin arrangement and a DC feed we can describe and " +
-                    "would rather not characterise: the pin spacing is not one " +
-                    "of the standards on our bench, and the polarity marking " +
-                    "— if that is what it is — is a single scored " +
-                    "line rather than a symbol. We are deliberately not " +
-                    "publishing voltages. We have numbers off a meter; we are " +
-                    "not confident we are reading the right thing across the " +
-                    "right two points, and a number in a public record is a " +
-                    "number somebody else will act on.",
+                    "The barrel fits a port under the base plate, behind a " +
+                    "cover this museum had catalogued as a battery door and " +
+                    "had not opened[[1]]. It is not a battery door. Behind it " +
+                    "are two pins and a DC feed. The pin spacing does not " +
+                    "match any standard on the bench. The polarity marking, if " +
+                    "that is what it is, is a single scored line rather than a " +
+                    "symbol. No voltages are published here. Meter readings " +
+                    "were taken, but it is not certain they were taken across " +
+                    "the correct two points, and a number in a public record " +
+                    "is a number somebody else will act on.",
                   doors: [
                     { kind: "archive",
                       label: "the back of the unit, in the archive",
@@ -965,51 +1001,50 @@ const spine = [
                   ] },
                 { label: "A conversation about batteries",
                   body:
-                    "Which turned into a longer conversation than it deserved " +
-                    "to be, and is the reason nothing was rushed. The " +
-                    "optimistic reading is that whatever is in there is " +
-                    "deep-discharged rather than dead — sixty years at " +
-                    "rest, resting voltage on the floor, and a slow " +
-                    "current-limited charge is precisely the recovery you would " +
-                    "want to give it. The pessimistic reading is that it is a " +
-                    "nickel-cadmium pack from an era with no cell balancing and " +
-                    "no protection circuit, and a deep-discharged NiCd can " +
-                    "develop internal shorts that keep quiet until the moment " +
-                    "you push current through them. The failure modes we " +
-                    "sketched out run from “nothing happens”, which is " +
-                    "the overwhelming favourite, through “a smell we " +
-                    "regret”, to “the building has a bad " +
-                    "afternoon”. So: no bench supply, no dismantling, no " +
-                    "clever ideas about bypassing anything. We are using the " +
-                    "adapter that came in the box, at whatever rate it has " +
-                    "decided on, and we are not hacking it." },
+                    "The cell was discussed at length before anything was " +
+                    "connected. The favourable reading is that the pack is " +
+                    "deep-discharged rather than dead: sixty years at rest, " +
+                    "resting voltage on the floor, and a slow current-limited " +
+                    "charge is the correct recovery for that. The unfavourable " +
+                    "reading is that it is a nickel-cadmium pack from a period " +
+                    "with no cell balancing and no protection circuit, and " +
+                    "that a deep-discharged NiCd can develop internal shorts " +
+                    "that give no warning until current is put through them. " +
+                    "The failure modes considered ran from nothing happening, " +
+                    "which is the most likely outcome, through smoke, to a " +
+                    "fire. No bench supply was used, nothing was dismantled " +
+                    "and nothing was bypassed. The unit is charging from the " +
+                    "adapter that came in the carton, at whatever rate that " +
+                    "adapter sets." },
                 { label: "It came on for about a second",
                   body:
-                    "Yesterday, before the bag turned up and before we knew " +
-                    "there was an adapter to look for, the screen lit. Not an " +
-                    "image — a warm-up glow across the lower third, about a " +
-                    "second of it, then nothing, and nothing since. It is on " +
-                    "video[[1]], because the camera happened to be running for " +
-                    "something else, and it is not much to look at: a dark " +
-                    "rectangle that becomes a slightly less dark rectangle. It " +
-                    "is also the first time anyone here has seen this thing " +
-                    "alive.",
+                    "The screen lit yesterday, before the pouch was found and " +
+                    "before anyone here knew there was an adapter to look for. " +
+                    "It was not an image: a warm-up glow across the lower " +
+                    "third, roughly one second, then nothing. There has been " +
+                    "nothing since. It is on video[[1]], because a camera was " +
+                    "running for another purpose at the time. The footage " +
+                    "shows a dark rectangle becoming a slightly lighter one. " +
+                    "It is the first record of this unit powered.",
                   doors: [
+                    /* [CS 2026-08-04] the held note said WHY THE DOOR IS BUILT
+                       THE WAY IT IS — "this wing has no in-place player … so
+                       this door says so rather than throwing you at a file in
+                       another window" — which is the renderer explaining its own
+                       design to a visitor. What is left is the holdings fact,
+                       which is the only half a reader needs. */
                     { kind: "film", label: "the second it came on",
                       held: "Not published. The camera was running for " +
-                            "something else, the clip has not been cut, and " +
-                            "this wing has no in-place player to open it in " +
-                            "— so this door says so rather than throwing " +
-                            "you at a file in another window." },
+                            "another purpose and the clip has not been cut." },
                   ] },
                 { label: "Charge status",
                   body:
                     "On charge since 11:40 this morning. The indicator on the " +
-                    "back has moved once, from nothing to something, and it has " +
-                    "been at something for four hours. There is no gauge, no " +
-                    "percentage and no second lamp — the machine's opinion " +
-                    "of its own state is one bit wide[[1]]. We are looking at " +
-                    "the weekend before we know anything.",
+                    "back has changed state once, from off to on, and has been " +
+                    "on for four hours. There is no gauge, no percentage and " +
+                    "no second lamp: the unit reports its own state with one " +
+                    "indicator[[1]]. Nothing further is expected to be known " +
+                    "before the weekend.",
                   doors: [
                     { kind: "tv", preset: "record-day",
                       label: "the machine, as it stands on this day" },
@@ -1017,14 +1052,14 @@ const spine = [
                 { label: "Also today, briefly",
                   body:
                     "Two more of the table entries opened into documentation " +
-                    "folders rather than dead ends. Nothing decisive in either. " +
-                    "One of them refers, in passing and without introduction, to " +
-                    "a “companion unit” — in the tone you would " +
-                    "use for something the reader already owns. We did not, and " +
-                    "do not." },
+                    "folders rather than dead ends. Neither was decisive. One " +
+                    "of them refers in passing to a “companion " +
+                    "unit”, without introducing the term, as though the " +
+                    "reader would already have one. This house did not have " +
+                    "one and does not." },
               ],
-              tomb: "The adapter is bagged and tagged, the manual is on the " +
-                    "bench, and the machine is drawing power." },
+              tomb: "The adapter is bagged and tagged. The manual is on the " +
+                    "bench. The unit is drawing power." },
             { date: "2024-01-19", stamp: "19 JAN 24", title: "The One-Page-Ads", evidence: "document",
               line: "The framed ads turn out not to be original: ABEAL " +
                     "retro-fitted other people's ads, with words covered and things taped down.",
@@ -1054,14 +1089,14 @@ const spine = [
                     "spy camera, a real telegraph, and a 1960s CEO's day.",
               note: "" },
           ],
-          /* [RC 2026-08-04] THE FOOTER STOPS SAYING "FIRST LAYER ONLY", because
-             one of these is no longer a first layer and a footer that counts
-             wrong is the first thing a careful reader catches. */
-          footer: "Eleven of 436 records. Ten are first layer — a stamp and " +
-                  "one true sentence each. Record 013 is the first written " +
-                  "whole, and is the prototype of the form the rest will take. " +
-                  "The remaining entries, their evidence, and the order they " +
-                  "want to be read in, are [PAPA].",
+          /* [CS 2026-08-04] THE FOOTER STOPS DESCRIBING THE BUILD.
+             It said which entries were "first layer", which was "the first
+             written whole", and that one of them "is the prototype of the form
+             the rest will take" — the museum telling a visitor about its own
+             drafting order. What a footer on a log sheet is for is the count.
+             The [PAPA] sentence went with it rather than being kept: it named
+             work still to be written, which is the same class of statement. */
+          footer: "Eleven of 436 records.",
         },
       },
       {
@@ -1138,9 +1173,14 @@ const spine = [
              cannot reach a sibling repo, so an asset either lives under
              `public/` or does not exist. */
           still: "/robots/manual/working-copy-p1.png",
+          /* [CS 2026-08-04] the caption described the PIPELINE ("it gets
+             printed, then photographed — the photograph is the plate"), which
+             is how this museum makes its plates and not what is in the frame.
+             It now says what the picture is, which the picture also says in its
+             own type. */
           stillCaption:
-            "The working copy. It gets printed, then photographed — the " +
-            "photograph is the plate.",
+            "The working copy, printed with PRELIMINARY — NOT FOR " +
+            "DISTRIBUTION across it.",
           blurb:
             "The unit shipped with a manual, and the manual is where the " +
             "machine explains itself — including the parts it gets wrong. " +
@@ -1148,7 +1188,7 @@ const spine = [
           lines: [
             "FORMAT  photographs of the printed pages, not a rendering",
             "NAV     microfiche reader — page-turn, fit and 1:1 magnify",
-            "PLATES  not yet imaged",
+            "PLATES  none on file",
           ],
           reel: {
             label: "MICROFICHE · READER",
@@ -1156,11 +1196,15 @@ const spine = [
                per page: { img, label, date }. The shape is the plate wall's
                shape on purpose — one reader serves both. */
             plates: [],
+            /* [CS 2026-08-04] "The reader is built and the reel is empty …
+               until those exist this is a catalogue entry rather than a
+               promise" was the page describing its own construction and its own
+               editorial posture. The holdings fact — nothing on file — is the
+               half a visitor needs, and it is the half that is honest without
+               being about us. */
             note:
-              "The reader is built and the reel is empty. These pages will be " +
-              "photographs of the real manual — the printed sheet, its edges " +
-              "and the hands in its margins — and until those exist this is a " +
-              "catalogue entry rather than a promise.",
+              "No pages on file. A plate here is a photograph of the printed " +
+              "sheet, edges and margins included.",
           },
           /* THE CONTENTS PAGE, WHICH IS REAL EVEN THOUGH THE PLATES ARE NOT.
              Every section below is attested in the record or in the firmware;
@@ -1170,30 +1214,32 @@ const spine = [
             { stamp: "§ 1", title: "Start-up procedure",
               line: "One of the two items present in every generic unit's " +
                     "inbox from the moment the OS is installed — never “sent”.",
-              note: "attested · plate not imaged" },
+              note: "attested · no plate on file" },
             { stamp: "§ 2", title: "Operating the answer engine",
               line: "Ask, then shake. The reveal holds until you disturb it; " +
                     "the machine never times your reading out.",
-              note: "attested · plate not imaged" },
+              note: "attested · no plate on file" },
             { stamp: "§ 3", title: "Bias, and what it is for",
               line: "The polarity and clarity registers, described in the " +
                     "manual's own UNIVAC-corporate register.",
-              note: "attested · plate not imaged" },
+              note: "attested · no plate on file" },
             { stamp: "§ 4", title: "BIST and AMMMS maintenance",
               line: "The built-in self test and the maintenance messaging — " +
                     "real lore, and the visual language already exists.",
-              note: "attested · plate not imaged" },
+              note: "attested · no plate on file" },
             { stamp: "APP. 1", title: "The passcode landscape",
               line: "0000 through 80085, the tape, and the grid. A found " +
                     "artifact, not an objective — there is no game.",
-              note: "the strongest candidate to image first" },
+              note: "attested · no plate on file" },
             { stamp: "MARGINS", title: "The hands in the margins",
               line: "Technicians' and owners' handwriting, scanned with the " +
                     "pages during cataloging. The margins are recovered evidence.",
               note: "[PAPA] — which hands, and what they wrote" },
           ],
-          footer: "Page images are Mike's to make. Until they exist this is a " +
-                  "catalogue entry, and it says so.",
+          /* [CS 2026-08-04] the footer named the operator and described the
+             production queue. Every other face in this wing signs off with the
+             unit and the object; this one now does the same. */
+          footer: "MGK-VIIIp · THE OWNER'S MANUAL",
         },
       },
       {
@@ -1248,11 +1294,15 @@ const spine = [
             "FORM     .ino modules \u2014 menu, boot, audio, graphics, input, games",
           ],
           entries: [
-            { stamp: "v1", title: "What this page is, plainly",
-              line: "A first version. The trees are real, checked in, and named " +
-                    "exactly as they sit on disk. What is NOT here is a reading " +
-                    "of them: no walkthrough, no annotated source, no claim " +
-                    "about what any module does beyond what its name says.",
+            /* [CS 2026-08-04] the row was titled "What this page is, plainly"
+               and opened "A first version" — a page introducing itself to the
+               reader as a draft. The same sentence stated as HOLDINGS says
+               everything the visitor needed and nothing about the drafting. */
+            { stamp: "ON FILE", title: "Two trees, named as they sit",
+              line: "Both trees are checked in and named exactly as they are " +
+                    "on disk. What is NOT here is a reading of them: no " +
+                    "walkthrough, no annotated source, no claim about what any " +
+                    "module does beyond what its name says.",
               note: "[PAPA] the artifact slot is Mike's to name \u2014 this is the honest floor, not the ceiling" },
             { stamp: "WHY", title: "Why it sits with the founding documents",
               line: "The Record says what was found. The Manual says what it was " +
@@ -1261,7 +1311,7 @@ const spine = [
               note: "" },
           ],
           entriesMode: "list",
-          footer: "MGK-VIIIp \u00b7 FIRMWARE \u00b7 v1",
+          footer: "MGK-VIIIp \u00b7 FIRMWARE",
         },
       },
       {
@@ -1334,16 +1384,24 @@ const spine = [
                 { id: "standard", label: "STANDARD", arms: true,
                   line: "The unit as it stands: boots and updates complete, " +
                         "powered, waiting at the opening prompt." },
+                /* [CS 2026-08-04] `why` IS PRINTED ON THE PANEL \u2014 it is the
+                   refusal line under the latch (Exhibit.jsx :1089, :1222). These
+                   five read "held \u2014 one entry state (C3)", "held \u2014 awaiting a
+                   privacy ruling" and "held \u2014 workshop entry, by URL": internal
+                   decision codes, an unmade ruling, and the existence of an
+                   undisclosed URL, all shown to whoever rolls the drum. The
+                   instrument now says the one thing an instrument says when a
+                   position will not arm. */
                 { id: "idling-updated", label: "IDLING, UPD", arms: false,
-                  why: "held \u2014 one entry state (C3)" },
+                  why: "This feed is not available." },
                 { id: "boot-playback", label: "BOOT PLAYBK", arms: false,
-                  why: "held \u2014 one entry state (C3)" },
+                  why: "This feed is not available." },
                 { id: "off-first-boot", label: "OFF \u00b7 1ST BOOT", arms: false,
-                  why: "held \u2014 one entry state (C3)" },
+                  why: "This feed is not available." },
                 { id: "last-state", label: "LAST STATE", arms: false,
-                  why: "held \u2014 awaiting a privacy ruling" },
+                  why: "This feed is not available." },
                 { id: "test-bench", label: "TEST BENCH", arms: false,
-                  why: "held \u2014 workshop entry, by URL" },
+                  why: "This feed is not available." },
               ],
             },
             switches: [
@@ -1426,11 +1484,15 @@ const spine = [
                     "The unit itself is a physical object in a room; the twin is " +
                     "how it is met from here.",
               note: "" },
-            { stamp: "Q", title: "Why does it say ERROR so often?",
-              line: "The Manual's own line is the answer \u2014 and the story " +
-                    "around it is Mike's to tell, so it is held rather than " +
-                    "half-told here.",
-              note: "held \u2014 storyline first (C1/C2)" },
+            /* [CS 2026-08-04] "Why does it say ERROR so often?" IS REMOVED, not
+               rewritten. Its answer was "the story around it is Mike's to tell,
+               so it is held rather than half-told here", and its note was "held
+               \u2014 storyline first (C1/C2)": the operator named on the page, and an
+               internal decision code printed under a question. A question whose
+               published answer is that the answer has not been written yet is a
+               stand-in for a question, and three questions that are answered
+               beat four with one placeholder. It comes back as an entry the day
+               there is an answer. */
             { stamp: "Q", title: "Can I buy one?",
               line: "No. The shop carries what the shop carries; the machines " +
                     "are not stock.",
