@@ -39,8 +39,88 @@ a visitor keeps one or two things; this one says they have to stay long enough
 to be handed either.
 
 Current compliance, every face and page, audited on the built page:
-`docs/VISUAL_HOOK_AUDIT-20260803.md`. Five surfaces remain text-only — all in
-the robots wing, none a landing, all ART-pending rather than code-pending.
+`docs/VISUAL_HOOK_AUDIT-20260803.md`. **As of v43 (E3) ZERO surfaces are
+text-only.** The audit named five; there were six — it missed the MGK-VIIIp
+album's own FAQ, which is a different face from the front desk's. All six are
+now hooked from assets already in the repos, and no new rights question was
+opened. What remains ART-pending is the DEPTH of two of them: The Record still
+wants its evidence photographed per entry, and The Manual's microfiche reel is
+still empty by B8's ruling.
+
+## THE CONTRIBUTIONS MODEL (Mike, 2026-08-03 — standing; built at v43/E1)
+
+Recorded here before it was built, on Mike's instruction. The room that carries
+it is `/foundation`; the honest state of each mechanism is printed ON that page,
+per row, in a state column.
+
+**MONEY IN** — merchandise sales · music royalties · QR-code donations (a fixed
+amount or a custom one, given in Weird.Baby's name).
+
+**GOODS AND SERVICES IN** — online gift registries so supporters can DROP-SHIP
+supplies directly; the same mechanism for services. **WE LIST ONLY WHAT WE
+NEED.**
+
+**CONTRIBUTED BY MIKE, VIA ZERO-COST INVOICES**, itemised: AI ($100–200/month),
+domain costs, robot design and development supplies, manufacturing, the extras.
+**Not for tax purposes today** — the point is the ledger being honest and
+public. *(Hook noted, nothing built: an eBay-purchase tally may be added to the
+invoice someday.)*
+
+**THE POSTURE, and it is the room's heart:** *"We still do a fair amount of the
+donating ourselves, and will simply continue until we no longer can."*
+
+**THE CONSTRAINT THAT GOVERNS ALL OF IT:** honest about what exists today vs
+what is planned. **Nothing may claim a mechanism that isn't built** — if the
+registry does not exist yet, the room says so plainly.
+
+**BUILT STATE as of v43:** LIVE = the gift shop, the house's own music.
+NOT BUILT = donations in Weird.Baby's name, the supply registry, the service
+registry. The invoice is real and carries one published figure (the AI line);
+the other four are Papa's to publish.
+
+**THE ONE RECONCILIATION IT FORCED,** flagged for Mike: `/foundation` Q7 ("Can I
+send money?") answered a flat *No*, written when the only money in this building
+was money to RUN it. Three incoming channels make that answer wrong on its own
+page. It was NARROWED, not reversed — every word about the museum's costs
+survives, including "there is no account to fill"; what is added is the
+distinction it always rested on, that giving is the other direction and a gift
+made in Weird.Baby's name was never Weird.Baby's money. **If Mike wants the flat
+No back, that is one string.**
+
+## SEALED 2026-08-03 — THE EVENING RUN (v43; E1–E5. PUSH + DEPLOY ARE MIKE'S)
+
+Autonomous single-agent Code-lane round on Mike's remote-control brief. Full
+round log: `docs/MUSEUM_EVENING_LOG-20260803.md`. Frames:
+`docs/evening-round-20260803/`.
+
+- **E1 — the Foundation gets its substance.** The contributions model above,
+  built into `/foundation` as two new objects under the existing account card:
+  THE LEDGER (two registers, five rows, each row carrying LIVE or NOT BUILT in
+  its own column) and THE ZERO-COST INVOICE (five line items, a column of zeros,
+  TOTAL DUE $0.00, small print saying it is not a tax document), signed with the
+  posture line. Two questions added, Q6 gains one factual clause, Q7 narrowed
+  (above). 12 → 14 questions, zero `[PAPA]` leaks.
+- **E2 — the catch-all.** `<Route path="*" element={<WbHome />} />`. Any
+  unmatched path now RENDERS the Lobby rather than redirecting to it: no
+  rewritten address bar, no apology, no 404 register. Closes the gap carried in
+  three round logs; verified on six junk URLs desktop and phone.
+- **E3 — the last six text-only faces.** Four MGK-VIIIp faces get real
+  photographs the museum already owns; the two front-desk faces get typographic
+  cards (the 31½ tally, the ONE ADDRESS card) built entirely from sentences
+  already on those pages. No renderer change — an inline SVG data URI through
+  the existing `still` key, WAL's `HOUSE_COVER` pattern.
+- **E4 — `InfoBooth.css` generalised.** The shared furniture is now
+  `src/styles/sheet.css` with `.sheet-*` names — the house's own word for it
+  ("L5's sheet-on-mat", in Exhibit.css since June). `InfoBooth.css` keeps the
+  booth's ground and its ticket; `Foundation.css` keeps its ground and its three
+  objects. Both rooms verified byte-identical on glass.
+- **E5 — carry-forward.** E2/E3/E4 close three of the eight carried items. The
+  audit and OPERATIONS.md are reconciled to the tree. What is left needs Mike or
+  a camera and is listed in the round log.
+
+Gates: `npm run lint` 11 err / 9 warn — identical to the HEAD baseline, zero
+new. `npm run build` green (72 modules). Desktop + 390px laps on the BUILT
+bundle via `wrangler dev`.
 
 ## SEALED 2026-08-03 — THE REVERT (v42; R1–R3. PUSH + DEPLOY ARE MIKE'S)
 

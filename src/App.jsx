@@ -94,6 +94,34 @@ export default function App() {
         <Route path="/robots" element={<Robots />} />
         <Route path="/wal" element={<Wal />} />
         <Route path="/p/:id" element={<PresetLanding />} />
+        {/* ==== [E2 2026-08-03] THE CATCH-ALL. MIKE'S RULING ================
+            "Any unmatched path renders THE LOBBY — no dead end, no blank
+            shell, no apology."
+            THIS GAP HAS BEEN CARRIED IN THREE ROUND LOGS AND IT FAILED IN THE
+            WORST AVAILABLE WAY: with no `path="*"` in this table, React Router
+            matched nothing and rendered the shell with nothing in it. Not a
+            404 — a BLANK PAGE. `wrangler.jsonc` sets
+            `not_found_handling: "single-page-application"`, so Cloudflare
+            hands every unknown path to index.html and the router was the last
+            thing standing between a typo and an empty screen.
+            IT RENDERS RATHER THAN REDIRECTS, and that is the ruling read
+            literally. `<Navigate to="/">` would have been the reflex, and it
+            does two things Mike did not ask for: it rewrites the address bar,
+            so a visitor who mistyped is quietly told they were wrong, and it
+            puts a redirect in the history of a URL that was never real. The
+            Lobby is location-independent (it reads no params and keys
+            `useRoom`/`useArrival` on the literal string "lobby"), so it can be
+            served AT the wrong address and every door on it still works.
+            NO APOLOGY IS PART OF THE SPEC. There is deliberately no "page not
+            found" banner, no 404 register, no "did you mean" — a visitor who
+            lands here sees the front door of the museum and nothing telling
+            them they made a mistake.
+            IT MUST STAY LAST. React Router v6 ranks by specificity rather than
+            by order, so this is belt-and-braces — but the two redirects above
+            (`/money`) depend on being matched by their own routes, and a
+            reader scanning this table should see the fallback at the bottom
+            where a fallback belongs. */}
+        <Route path="*" element={<WbHome />} />
       </Routes>
     </BrowserRouter>
   );

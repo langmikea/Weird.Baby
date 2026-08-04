@@ -106,6 +106,80 @@ import RobotsExhibitFlow from "../../routes/robots/RobotsExhibitFlow.jsx";
    than a fact, the [PAPA] marker that was already there stays exactly where it
    was — his list is unchanged in length and in content.
    =========================================================================== */
+/* ═══ [E3 2026-08-03] THE FRONT DESK'S TWO CARDS ════════════════════════════
+   THE VISUAL HOOK LAW, applied to the two faces that had no photograph
+   available and should not have borrowed one.
+
+   MIKE: "land on words alone and the visitor probably walks out. Every surface
+   needs something visually compelling besides written words — NOT NECESSARILY A
+   PHOTO; even words presented in a different FORMAT can be the hook."
+
+   WHY THESE TWO ARE TYPE AND THE OTHER FOUR ARE PHOTOGRAPHS. The four faces on
+   the MGK-VIIIp album are about a physical object, and the museum owns eight
+   real photographs of it — so those faces get a plate. These two are on the
+   FRONT DESK, and their subject is the house: what we are asked, and how to
+   reach us. There is no photograph of a question. Putting a machine on them
+   would have been decoration borrowed from the room next door, which is the
+   thing the law is for rather than the thing it asks for.
+
+   THE PATTERN IS ALREADY IN THE BUILDING, TWICE. The Information Booth's ADMIT
+   ONE ticket and the Foundation's account card are both objects made entirely
+   of a sentence the page was already saying. These are the third and fourth,
+   and they follow the same discipline: NOT ONE WORD ON EITHER CARD IS NEW. The
+   tally's number and its "the fraction is not a typo" are lifted from the
+   answer six lines below it; the correspondence card's whole text is the first
+   sentence of the answer it sits above.
+
+   THE MECHANISM IS `still`, NOT A NEW FACE KEY, and that is deliberate: WAL's
+   house card (`HOUSE_COVER` in worth-a-listen.js) proved that an inline SVG
+   data URI is a picture as far as the renderer is concerned. So a typographic
+   object costs zero renderer changes and inherits the plate's own geometry,
+   its border and — here — the wing's B&W law, which `.vp-face-still` applies as
+   a filter at the glass.
+
+   SYSTEM FACES ONLY. An SVG loaded through <img src="data:…"> cannot fetch the
+   museum's webfonts, so Georgia and Courier New stand in for the serif and the
+   register face. Same substitution WAL's card makes, same reason.
+
+   SIZED 520×420 (5:4-ish) ON PURPOSE. `.vp-face-still` gives a plate
+   `height:min(48cqh,210px)` and `max-width:260px`; at this aspect the card
+   lands at exactly 260×210 and neither cap crops it. A squarer or wider card
+   would have been letterboxed inside its own box — the defect F1 spent three
+   passes killing on the artist plates. */
+const CARD_STOCK = "#e6e2d8";
+const CARD_INK = "#1a1917";
+const CARD_QUIET = "#5a574f";
+
+function deskCard(inner) {
+  return "data:image/svg+xml;utf8," + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="520" height="420">' +
+      '<rect width="520" height="420" fill="' + CARD_STOCK + '"/>' +
+      '<rect x="16" y="16" width="488" height="388" fill="none" stroke="' +
+        CARD_INK + '" stroke-width="2"/>' +
+      inner +
+    "</svg>");
+}
+
+/* the tally. "Thirty-one and a half" is the wing's best line and it is a
+   NUMBER, which is the one kind of sentence that gets stronger the larger it
+   is set — the same reason the Foundation's zero is the biggest thing on its
+   page. */
+const CARD_TALLY = deskCard(
+  '<text x="260" y="86" text-anchor="middle" fill="' + CARD_QUIET + '" font-family="Courier New,monospace" font-size="17" letter-spacing="7">WEIRD.BABY ROBOTS</text>' +
+  '<text x="260" y="238" text-anchor="middle" fill="' + CARD_INK + '" font-family="Georgia,serif" font-size="132">31&#189;</text>' +
+  '<text x="260" y="288" text-anchor="middle" fill="' + CARD_INK + '" font-family="Courier New,monospace" font-size="19" letter-spacing="5">UNITS ON THE RECORD</text>' +
+  '<line x1="120" y1="322" x2="400" y2="322" stroke="' + CARD_INK + '" stroke-width="1"/>' +
+  '<text x="260" y="358" text-anchor="middle" fill="' + CARD_QUIET + '" font-family="Georgia,serif" font-size="21">The fraction is not a typo.</text>');
+
+/* correspondence. The whole card is the answer's own first sentence, broken
+   where the sentence breaks. */
+const CARD_ADDRESS = deskCard(
+  '<text x="260" y="86" text-anchor="middle" fill="' + CARD_QUIET + '" font-family="Courier New,monospace" font-size="17" letter-spacing="7">CORRESPONDENCE</text>' +
+  '<text x="260" y="196" text-anchor="middle" fill="' + CARD_INK + '" font-family="Georgia,serif" font-size="72" letter-spacing="2">ONE</text>' +
+  '<text x="260" y="272" text-anchor="middle" fill="' + CARD_INK + '" font-family="Georgia,serif" font-size="72" letter-spacing="2">ADDRESS</text>' +
+  '<line x1="120" y1="316" x2="400" y2="316" stroke="' + CARD_INK + '" stroke-width="1"/>' +
+  '<text x="260" y="356" text-anchor="middle" fill="' + CARD_QUIET + '" font-family="Courier New,monospace" font-size="19" letter-spacing="4">READ BY ONE PERSON</text>');
+
 /* [S10] the WBR tracks, declared once and referenced by both covers. */
 const WBR_TRACKS = [
       {
@@ -188,6 +262,11 @@ const WBR_TRACKS = [
         face: {
           kind: "text",
           title: "FREQUENTLY ASKED",
+          /* [E3 2026-08-03] the tally card — see the note above WBR_TRACKS.
+             Six questions and no object was the audit's finding on this face;
+             the object is the one number the answers already carry. */
+          still: CARD_TALLY,
+          stillCaption: "Thirty-one and a half.",
           blurb:
             "The questions people actually turn up with, and the answers as far " +
             "as they go. Some of them stop short. Those are the interesting ones.",
@@ -236,6 +315,12 @@ const WBR_TRACKS = [
         face: {
           kind: "text",
           title: "CONTACT",
+          /* [E3 2026-08-03] the correspondence card. The audit called this the
+             smallest surface in the wing and wondered whether a plate was more
+             than it needs — which is exactly why it got the cheapest possible
+             one: four rows of type, made of the sentence in the last row. */
+          still: CARD_ADDRESS,
+          stillCaption: "One address, read by one person.",
           blurb:
             "Four reasons to write, in the order of how much they would help " +
             "us. The first one would help enormously.",
@@ -408,6 +493,26 @@ const spine = [
           kind: "text",
           entriesMode: "log",
           title: "THE RECORD",
+          /* [E3 2026-08-03] THE HOOK IS THE THING THE RECORD IS A RECORD OF.
+             The audit named this face the strongest remaining candidate in the
+             building and named what it wants: the EVIDENCE photographed, one
+             picture per dated entry, through the `.vp-fe-plate` slot that
+             already exists. That is still the right answer and it is still
+             ART-pending — nobody has photographed the cartons, the note signed
+             "-W.O.", the retro-fitted ads or the three opened cases, and this
+             round did not invent them.
+             WHAT IT COULD HAVE TODAY IS A HEAD PLATE, and the honest one is the
+             object itself: a log about a machine, opening on the machine as it
+             arrived. `front_full.png` is ours, already in the build as tile two
+             of The Plates, and is not the head plate of any other face — the
+             family shot is the one doing double duty, and it is deliberately
+             not used again here.
+             THE TRADE IS NAMED: this is a weaker hook than ten photographs of
+             ten pieces of evidence would be, and a much stronger one than an
+             index of dates on white paper. One string when the evidence is
+             shot. */
+          still: "/robots/reference/photos/front_full.png",
+          stillCaption: "The object the record is about, as received.",
           /* [M11] register only. Every claim — the reverse-discovery, the
              writing-as-it-happened, the wrongness — was already here. */
           blurb:
@@ -516,6 +621,38 @@ const spine = [
         face: {
           kind: "plate",
           title: "THE OWNER'S MANUAL",
+          /* ==== [E3 2026-08-03] THE HOOK, AND IT IS NOT A PLATE ============
+             THIS FACE IS BUILT FOR IMAGERY AND ITS ARRAY IS EMPTY — the audit's
+             words, and still true: `reel.plates` is `[]` because B8 ruled that
+             the plates must be PHOTOGRAPHS OF THE PRINTED MANUAL, and nobody
+             has printed and photographed it yet.
+             SO THE HOOK IS THE SOURCE, LABELLED AS THE SOURCE. B8's own ruling
+             says what this file is: "the generated PDF and plates become THE
+             SOURCE MIKE PRINTS AND PHOTOGRAPHS; the photograph of that print is
+             the artifact." That document exists on disk in the robots repo, and
+             its own title page is printed with PRELIMINARY — WORKING COPY / NOT
+             FOR DISTRIBUTION across the middle of it.
+             THAT SELF-LABEL IS WHY THIS IS SAFE AND WHY NOTHING ELSE WAS. The
+             one risk in showing it is a visitor reading "here is the manual",
+             and the picture argues against that in its own type before the
+             caption gets a word in. Between the printed disclaimer, the caption
+             below, and the register line four rows down that still reads
+             "PLATES not yet imaged", the face says three times over that this
+             is not the artifact.
+             THE REEL IS UNTOUCHED AND STILL EMPTY. This is a head plate, not a
+             frame; loading it into `plates` would put a rendering into the
+             microfiche reader, which is precisely the "in the style of" B8
+             forbade. When the photographs arrive they are `plates` entries and
+             this string is the one thing on the face that should probably go.
+             THE FILE IS COPIED, NOT LINKED: `public/robots/manual/
+             working-copy-p1.png`, 21KB, from the robots repo at
+             `robots/mgk-viiip/manual/pages/page-01.png`. The museum's build
+             cannot reach a sibling repo, so an asset either lives under
+             `public/` or does not exist. */
+          still: "/robots/manual/working-copy-p1.png",
+          stillCaption:
+            "The working copy. It gets printed, then photographed — the " +
+            "photograph is the plate.",
           blurb:
             "The unit shipped with a manual, and the manual is where the " +
             "machine explains itself — including the parts it gets wrong. " +
@@ -591,6 +728,26 @@ const spine = [
           kind: "text",
           title: "THE FIRMWARE",
           subtitle: "THE MACHINE'S OWN MIND, ON FILE",
+          /* [E3 2026-08-03] THE FIRMWARE HAS EXACTLY ONE HONEST PORTRAIT AND
+             THE MUSEUM ALREADY OWNS IT: the front glass, lit. Source is a
+             `.ino` tree — there is nothing to photograph in a source tree, and
+             a screenshot of code on this face would be a picture of a text file
+             sitting above a page of text.
+             WHAT THE GLASS IS, THOUGH, IS THE FIRMWARE'S OUTPUT ON THE REAL
+             MACHINE. This face's own claim is that the firmware "cannot be
+             wrong about the machine, because it is the machine"; the lit screen
+             is that sentence with the evidence attached, and it is the only
+             picture in the reference set that shows the software running rather
+             than the box it runs in.
+             CONSIDERED AND REJECTED: the twin's own top-screen render and the
+             screen-treatment contact sheet, both in the robots repo at
+             `docs/assets_twin/`. The render is a synthetic frame of a
+             comparison exercise and the contact sheet is a working document
+             about FONT CHOICE — interesting to us, and inside baseball on a
+             visitor's first read of the wing. A photograph of the real glass
+             beats a render of a proposed one. */
+          still: "/robots/reference/photos/front_screen.png",
+          stillCaption: "The front glass, lit — the firmware, running.",
           blurb:
             "Everything the unit knows how to do is in here \u2014 not a " +
             "description of the machine's behaviour but the behaviour itself, " +
@@ -752,6 +909,21 @@ const spine = [
           kind: "text",
           title: "FAQ",
           subtitle: "ABOUT THIS MACHINE",
+          /* [E3 2026-08-03] THE AUDIT COUNTED FIVE TEXT-ONLY FACES IN THIS WING
+             AND THERE WERE SIX. VISUAL_HOOK_AUDIT-20260803 lists one "FAQ"
+             under Robots; the wing has two — the front desk's, about
+             Weird.Baby, and this one, about the unit. Same shape, different
+             desk (M2's note, three rows up). It was text-only on the same terms
+             as the other five and is fixed on the same terms.
+             THE BEZEL IS THE RIGHT PLATE FOR THIS FACE SPECIFICALLY. Two of its
+             four questions are about whether what you are looking at is the
+             real machine — "Does it still work?", "Is the Portal the real
+             machine?" — and the bezel is the piece of the object a visitor
+             actually meets: the frame around the glass the Portal draws
+             through. It is ours, already in the build as tile four of The
+             Plates, and is the head plate of nothing else. */
+          still: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
+          stillCaption: "The bezel — the frame the Portal is met through.",
           blurb:
             "The questions that actually get asked about the unit, answered as " +
             "plainly as the answers are known \u2014 and marked where they are not.",

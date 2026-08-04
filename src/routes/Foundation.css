@@ -1,23 +1,20 @@
 /* Foundation.css — THE WEIRD.BABY FOUNDATION (/foundation).
  *
- * [F3 2026-08-03] THIS FILE IS DELIBERATELY SHORT, AND THAT IS THE POINT.
+ * [E4 2026-08-03] THIS FILE HOLDS ONLY WHAT IS THIS ROOM'S OWN, and the shared
+ * furniture it used to borrow now has a name of its own.
  *
- * Mike named the Information Booth as this room's template. The strongest form
- * of that instruction is to use the booth's ACTUAL RULES rather than a copy of
- * them: Foundation.jsx imports InfoBooth.css and wears its class names for the
- * sheet, the credo, the rule, the questions, the contact line and the way back.
- * A second stylesheet saying the same things in `fnd-` prefixes would be
- * identical on the day it was written and would have drifted by the next round
- * — which is exactly the fork R2 found in the title bar (three copies of one
- * bar) and B7 found in the palette, and the reason MuseumBar.jsx exists.
+ * F3 built this room on the Information Booth as its template, the strong way:
+ * the component imported InfoBooth.css and wore its class names rather than
+ * keeping a second copy that would drift by Tuesday. That decision stands and
+ * is unchanged — what moved is where the shared rules LIVE. They are in
+ * `src/styles/sheet.css` under `.sheet-*` names, imported by this room and by
+ * /booth, because a file named InfoBooth.css owning the typography of a room
+ * called the Foundation is a name that lies about its job. Read that file's
+ * header for the split rule.
  *
- * So what lives here is ONLY what is new: this room's page ground, and the one
- * object the booth does not have.
- *
- * (Naming note, carried rather than fixed: InfoBooth.css is now furniture for
- * two rooms while still named for one. Renaming it means touching the room Mike
- * calls AWESOME to change nothing a visitor can see, which is not this round's
- * trade. Named in the round log as a want.)
+ * WHAT IS HERE: the page ground, and this room's three objects — the account
+ * card, the register, and the zero-cost invoice. Nothing in this file is used
+ * by any other room, which is the test that decided every line of the split.
  *
  * [R1 2026-08-03] THIS FILE WAS Money.css WITH `mny-` PREFIXES FOR ONE COMMIT.
  * Mike reverted the rename (see the header of Foundation.jsx for why), so the
@@ -44,11 +41,11 @@ html[data-room="foundation"], html[data-room="foundation"] body {
   color: var(--wb-gold);
 }
 
-/* the room reuses `.booth-root` whole; this class exists so the room can be
-   addressed at all without hijacking the booth's selector. */
+/* the room reuses `.sheet-root` whole; this class exists so the room can be
+   addressed at all without hijacking the shared selector. */
 .fnd-root { /* intentionally empty — see the header */ }
 
-/* ── THE ACCOUNT — the room's visual hook ────────────────────────────────────
+/* ── THE ACCOUNT — the room's landing hook ───────────────────────────────────
    See the note at the JSX for WHY. What follows is how, and the two decisions
    in it that are not obvious.
 
@@ -61,9 +58,13 @@ html[data-room="foundation"], html[data-room="foundation"] body {
 
    INVERTED, for the booth ticket's reason: everything else on the sheet is dark
    type on print stock, so the one value inversion on the page is where the eye
-   lands. The two rooms now share a visual grammar — a single inked object at
-   the head of a page of questions — without sharing a component, because the
+   lands. The two rooms share a visual grammar — a single inked object at the
+   head of a page of questions — without sharing a component, because the
    objects say different things.
+   [E1] IT IS STILL THE ONLY INVERSION ON THE PAGE, and the register and the
+   invoice added below deliberately did not become a second one. Two inked
+   blocks on one sheet is two things shouting; the eye then has to choose, and
+   the thing it should land on is the zero.
 
    THE FIGURE IS SET IN THE MONO FACE ON PURPOSE. `Courier Prime` is this
    museum's register face — the one it uses for facts you are meant to be able
@@ -135,6 +136,288 @@ html[data-room="foundation"], html[data-room="foundation"] body {
   letter-spacing: 0.03em;
 }
 
+/* ══ [E1 2026-08-03] THE REGISTER ════════════════════════════════════════════
+   Mike's contributions model, printed as a register.
+
+   THE STATE COLUMN IS THE WHOLE DESIGN. Mike's constraint was that nothing may
+   claim a mechanism that isn't built, and the honest way to satisfy that is not
+   a disclaimer at the bottom of the page — it is a column that a visitor reads
+   down without reading a word of the prose beside it. So the state is set at
+   the same size and in the same face as the museum's other apparatus marks
+   (the `+` on a question, the frame counter on the reader): mono, spaced,
+   small caps, in a box.
+
+   THE TWO STATES ARE DRAWN DIFFERENTLY IN KIND, NOT IN DEGREE — a solid rule
+   for the thing that exists, a DASHED one for the thing that does not. Making
+   them differ only in colour would have put the entire honesty mechanism on a
+   contrast ratio, and a visitor scanning quickly reads line quality faster than
+   they read tone. The dash is also the right metaphor unaided: it is the border
+   of something not finished being drawn.
+
+   BOTH STATES CLEAR AA ON THIS ROOM'S GROUNDS. `--wb-gold` (#211f1c) is the
+   ink; `--wb-gold-mute` (#5f5c53) is the quietest step that passes on all five
+   paper grounds — the value F0 re-pinned it to for exactly this reason. The
+   faint value that used to live in that token now lives in `--wb-hairline` and
+   is used here for the DASH ONLY, never for a glyph. */
+.fnd-reg-wrap { margin: 0 0 40px; }
+
+.fnd-reg + .fnd-reg { margin-top: 34px; }
+
+.fnd-reg-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--wb-gold);
+}
+.fnd-reg-head-what {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.92rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--wb-gold);
+}
+.fnd-reg-head-sub {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--wb-gold-mute);
+  flex-shrink: 0;
+}
+
+.fnd-reg-rows { margin: 0; padding: 0; list-style: none; }
+.fnd-reg-row {
+  padding: 15px 2px 16px;
+  border-bottom: 1px solid var(--wb-border);
+}
+.fnd-reg-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+/* the row's name is a heading and is set as one — the same weight and face the
+   shared sheet gives a question, so the register and the FAQ read as one
+   document rather than as a table pasted above a page. */
+.fnd-reg-what {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 1.02rem;
+  line-height: 1.4;
+  color: var(--wb-gold);
+}
+.fnd-reg-state {
+  flex-shrink: 0;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+.fnd-reg-state[data-state="LIVE"] {
+  color: var(--wb-gold);
+  border: 1px solid var(--wb-gold);
+}
+.fnd-reg-state[data-state="NOT BUILT"] {
+  color: var(--wb-gold-mute);
+  border: 1px dashed var(--wb-hairline);
+}
+/* the row's sentence is reading matter, so it is set as reading matter — the
+   same serif, the same measure and the same rag the answers use. */
+.fnd-reg-line {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--wb-dim);
+  max-width: 62ch;
+  margin: 8px 0 0;
+  hyphens: auto;
+  text-wrap: pretty;
+}
+
+/* MIKE'S RULE, and it is set as a rule rather than as a row: capitalised in his
+   brief, governing both registries, and the one sentence that stops a list of
+   needs from becoming a list of wants. Brand face, centred, because it is
+   signage — the same reasoning that keeps the credo in Fredoka and everything
+   else out of it. */
+.fnd-reg-law {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 1.06rem;
+  line-height: 1.4;
+  color: var(--wb-gold);
+  text-align: center;
+  margin: 20px 0 0;
+}
+
+/* ══ [E1 2026-08-03] THE ZERO-COST INVOICE ═══════════════════════════════════
+   The charter's clause 3 as a document rather than as a sentence.
+
+   IT IS A SECOND SHEET LAID ON THE FIRST, which is why it takes the greyer
+   stock (`--wb-ink-soft`) inside a card that is `--wb-ink-card`: a document
+   placed on a document reads as an enclosure, and an enclosure is exactly what
+   this is — paperwork the keeper filed with the museum. A white-on-white panel
+   with a border would have read as a UI card, which is the one thing no surface
+   in this building is allowed to look like.
+
+   IT IS NOT INVERTED, ON PURPOSE — see the note on the account card. One
+   inversion per page, and the zero has it.
+
+   THE AMOUNT COLUMN IS ALIGNED AND MONO because that is what makes a column of
+   zeros legible AS a column. It is the strongest thing on the object: five real
+   costs, five zeros, one total, no argument. */
+.fnd-inv {
+  background: var(--wb-ink-soft);
+  border: 1px solid var(--wb-border);
+  padding: 24px 26px 22px;
+  margin: 0 0 8px;
+  box-shadow: 0 1px 2px rgba(33, 31, 28, 0.10);
+}
+.fnd-inv-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--wb-gold);
+}
+.fnd-inv-mark {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.08rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--wb-gold);
+}
+.fnd-inv-no {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--wb-gold-mute);
+}
+.fnd-inv-parties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 40px;
+  margin: 14px 0 18px;
+}
+.fnd-inv-parties > div { display: flex; align-items: baseline; gap: 10px; }
+.fnd-inv-parties dt {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--wb-gold-mute);
+}
+.fnd-inv-parties dd {
+  margin: 0;
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--wb-gold);
+}
+.fnd-inv-lines { margin: 0; padding: 0; list-style: none; }
+.fnd-inv-lines li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--wb-border);
+}
+.fnd-inv-what {
+  font-family: 'Syne', sans-serif;
+  font-weight: 500;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  color: var(--wb-gold);
+  min-width: 0;
+}
+/* the one published figure, under the line it belongs to. `display:block` so a
+   rate never sits on the same line as its own description and reads as part of
+   the name. */
+.fnd-inv-rate {
+  display: block;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--wb-gold-mute);
+  margin-top: 3px;
+}
+.fnd-inv-amt {
+  flex-shrink: 0;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--wb-gold);
+  font-variant-numeric: tabular-nums;
+}
+.fnd-inv-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 2px solid var(--wb-gold);
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--wb-gold);
+}
+.fnd-inv-total-amt {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  font-variant-numeric: tabular-nums;
+}
+/* the small print, and it is small print rather than a caption: the mono face
+   at the register size, on the measure a footnote wants. */
+.fnd-inv-note {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.62rem;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+  color: var(--wb-gold-mute);
+  max-width: 66ch;
+  margin: 16px 0 0;
+}
+
+/* THE POSTURE. Mike called it the room's heart, so it is the largest reading
+   type on the page and the only sentence set in the brand face outside the
+   credo. It sits INSIDE the invoice because it is what the invoice means; a
+   pull-quote floating between two objects would have been a decoration, and
+   this is a signature. */
+.fnd-posture {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.06rem, 2vw, 1.24rem);
+  line-height: 1.55;
+  color: var(--wb-gold);
+  max-width: 46ch;
+  margin: 20px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--wb-border);
+  text-wrap: pretty;
+}
+.fnd-posture-sig {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--wb-gold-mute);
+  margin: 10px 0 0;
+}
+
 /* the two ways out sit on one line; the separator is furniture and takes the
    quiet step so it does not read as a third link. */
 .fnd-sep { color: var(--wb-gold-mute); }
@@ -145,4 +428,21 @@ html[data-room="foundation"], html[data-room="foundation"] body {
      line and the value wraps under a half-width label, which reads as a
      mistake. Stacked, each row is a caption over its own answer. */
   .fnd-ledger-rows > div { flex-direction: column; align-items: flex-start; gap: 1px; }
+
+  /* [E1] THE STATE CHIP DROPS UNDER ITS OWN ROW NAME AT PHONE WIDTH, and it is
+     the same geometry finding as the account rows above: at 390px the card's
+     content column is 338px, and "Given in Weird.Baby's name" beside a
+     "NOT BUILT" chip leaves the name about nine characters of room. Stacked,
+     the chip reads as the row's own stamp rather than as a squeezed column —
+     and the state is still the first thing under the name, which is what the
+     column was for. */
+  .fnd-reg-top { flex-direction: column; align-items: flex-start; gap: 7px; }
+  .fnd-reg-head { flex-direction: column; align-items: flex-start; gap: 3px; }
+
+  .fnd-inv { padding: 20px 16px 18px; }
+  /* the amount stays on the row: it is one short mono token and dropping it
+     under its description would break the column of zeros, which is the whole
+     legibility of the object. */
+  .fnd-inv-parties { gap: 6px 24px; }
+  .fnd-inv-total-amt { font-size: 1.3rem; }
 }

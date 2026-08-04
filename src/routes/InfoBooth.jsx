@@ -34,6 +34,13 @@
 // `--wb-*`. Three have no token and are listed in that round's log.
 
 import { Link } from "react-router-dom";
+/* [E4 2026-08-03] TWO SHEETS, AND THE ORDER IS THE POINT. `sheet.css` is the
+   house's document-room furniture — the root, the card, the credo, the rule,
+   the questions, the foot — shared with /foundation. `InfoBooth.css` is now
+   only what is this room's own: its page ground and its ADMIT ONE ticket. The
+   file used to hold both, which meant a file named for one room owned the
+   typography of two. */
+import "../styles/sheet.css";
 import "./InfoBooth.css";
 import { useRoom } from "../lib/use-room.js";
 import { useArrival } from "../lib/use-arrival.js";
@@ -162,13 +169,13 @@ export default function InfoBooth() {
     .filter(({ q, a }) => kept(q) && kept(a));
 
   return (
-    <div className="booth-root">
+    <div className="sheet-root">
       {/* TITLE BAR — museum-standard: brand / room / Lobby.
           [M3] This is the reason the "Lobby" button below it is gone: the exit
           is here, top-right, in every room of the building. */}
       <MuseumBar room="Information Booth" />
 
-      <div className="booth-card">
+      <div className="sheet-card">
         {/* ==== [F1 2026-08-03] THE TICKET =====================================
             THE VISUAL HOOK LAW (Mike, this round): "land on words alone and the
             visitor probably walks out. EVERY surface needs something visually
@@ -216,41 +223,41 @@ export default function InfoBooth() {
             type, each its own element, set on a measure narrow enough that
             they cannot collide. The room now breaks where the reader is, not
             where a tag is. */}
-        <h1 className="booth-credo">
+        <h1 className="sheet-credo">
           <span>The Weird.Baby Museum is free.</span>
           <span>Equally free. <em>Always.</em></span>
         </h1>
-        <div className="booth-words">
+        <div className="sheet-words">
           <p>No tickets, no tiers, no ads.</p>
           <p>The museum owns nothing and takes nothing.</p>
         </div>
 
-        <div className="booth-rule" />
+        <div className="sheet-rule" />
 
         {/* THE FAQ IS THE PAGE. Every question visible; the answer opens under
             the question that asked it. Native <details>, so it works with a
             keyboard, with a screen reader, and with JavaScript having a bad
             day — the platform mechanic rather than a custom one (Doctrine 8). */}
-        <div className="booth-faq">
-          <h2 className="booth-faq-head">Questions</h2>
+        <div className="sheet-faq">
+          <h2 className="sheet-faq-head">Questions</h2>
           {faq.map(({ q, a }) => (
-            <details key={q} className="booth-q">
+            <details key={q} className="sheet-q">
               <summary>{q}</summary>
-              <p className="booth-faq-a">{a}</p>
+              <p className="sheet-faq-a">{a}</p>
             </details>
           ))}
         </div>
 
-        <div className="booth-rule" />
+        <div className="sheet-rule" />
 
-        <p className="booth-contact">
+        <p className="sheet-contact">
           Thank you for coming.{" "}
           <a href="mailto:papa@weird.baby">papa@weird.baby</a>
         </p>
         {/* One quiet way back, in the prose, for a visitor who has read to the
             bottom and does not want to travel back up to the bar. Not a second
             exit competing with the first — a sentence. */}
-        <p className="booth-back">
+        <p className="sheet-back">
           <Link to="/">Back to the lobby</Link>
         </p>
       </div>

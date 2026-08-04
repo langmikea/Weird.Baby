@@ -4,6 +4,43 @@
 opened on the LIVE BUILT bundle (`vite build` → `wrangler dev`), desktop and a
 genuine 390×740 same-origin iframe. Nothing here is read off the source.
 
+> ## CLOSED 2026-08-03 by v43/E3 — and the count was wrong
+>
+> **Every WANT in this document is fixed. Zero surfaces are text-only.**
+>
+> **THIS AUDIT SAID FIVE AND THERE WERE SIX.** The Robots table below lists one
+> "FAQ" row; the wing has two FAQ faces — the front desk's, about Weird.Baby,
+> and the MGK-VIIIp album's, about the unit. Same shape, different desk. The
+> second was text-only on identical terms and was simply never counted. A face
+> that is missing from an audit is invisible to every round that trusts the
+> audit, which is why the miscount is recorded here rather than quietly
+> corrected.
+>
+> | Face | Was | Now |
+> |---|---|---|
+> | The Record | WANT | `front_full.png` — the object the record is about, as received |
+> | The Manual | WANT | the manual's own WORKING COPY title page, labelled as the source that gets printed and photographed. **The reel is still empty and still says so** — B8 is untouched |
+> | The Firmware | WANT | `front_screen.png` — the front glass, lit; the firmware running on the real machine |
+> | FAQ *(front desk)* | WANT | the **31½ TALLY** card — type, built from the answer six lines below it |
+> | Contact | WANT | the **ONE ADDRESS** card — type, built from its own last row |
+> | FAQ *(MGK-VIIIp)* | **not listed** | the bezel — the frame the Portal is met through |
+>
+> Not one new asset was sourced and no rights question was opened: four are
+> photographs the museum already publishes on The Plates, one is a 21KB copy of
+> a document already in the robots repo, and two are inline SVG. The typographic
+> cards use the `still` key through WAL's `HOUSE_COVER` pattern, so the exhibit
+> renderer did not change by a byte.
+>
+> **WHAT IS STILL WANTED IS DEPTH, NOT A HOOK.** The Record's per-entry
+> `evidence:` is still unphotographed and `.vp-fe-plate` is still empty on it;
+> The Manual's microfiche reel is still `plates: []` until somebody prints and
+> photographs the pages. Both are cameras, not code.
+>
+> **ALSO STALE BELOW:** "THE ONE NAMED TRADE" — Hunter Root's card no longer
+> opens on his coverflow cover. v41/C4 found a real portrait in the vault
+> (`/images/wal/hunter-root-plate.jpg`, "On the road, September 2024") and it
+> shipped. That trade is closed.
+
 ---
 
 ## THE LAW (Mike, this round — recorded in STATE.md as standing doctrine)
