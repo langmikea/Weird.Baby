@@ -201,12 +201,36 @@
    "text": "",
    "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
   },
-  "f6034814a1e3fb0d": {
-   "ref": "/robots/manual/working-copy-p1.png",
+  "60b433b17fa548b2": {
+   "ref": "/robots/reference/mgk-viii/core_helical.jpg",
    "c": "VERIFIED",
-   "s": "the unit's own operating manual, per B8: the printed working copy is the source; the plate is a photograph of it",
+   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
+   "textInImage": false,
+   "text": "",
+   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
+  },
+  "f7c9c35eadc6d599": {
+   "ref": "/robots/reference/mgk-viii/output_row.jpg",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
+   "textInImage": false,
+   "text": "",
+   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
+  },
+  "411de443a522e90a": {
+   "ref": "/robots/reference/mgk-viii/core_meltdown.jpg",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
+   "textInImage": false,
+   "text": "",
+   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
+  },
+  "af9f3d66cb9f256f": {
+   "ref": "/robots/manual/structure-issue-p1.png",
+   "c": "VERIFIED",
+   "s": "the unit's own operating manual, per B8: the printed copy is the source; the plate is a photograph of it",
    "textInImage": true,
-   "text": "THE WHOLE IMAGE IS TEXT — the manual's cover page: MGK-VIIIp / OPERATING AND MAINTENANCE INSTRUCTIONS / PRELIMINARY - WORKING COPY / NOT FOR DISTRIBUTION / ABEAL / A DIVISION OF SCRAPCO / ENGINEERING DEPARTMENT. FOR MIKE: it is clean digital type on white, not a photograph of paper; the face's own caption calls it 'the working copy, printed', and B8's ruling is that the photograph of the print is the plate.",
+   "text": "THE WHOLE IMAGE IS TEXT — the manual's title page: MGK-VIIIp / OPERATING AND MAINTENANCE INSTRUCTIONS / STRUCTURE ISSUE / STRUCTURE AND ARRANGEMENT ONLY / TEXT NOT SUPPLIED / ABEAL / A DIVISION OF SCRAPCO / ENGINEERING DEPARTMENT / ABEAL 8P-OMI-1 REV. — / PRELIMINARY. FOR MIKE, AND IT IS THE ONE THING TO LOOK AT: the page's own type reads TEXT NOT SUPPLIED. In the fiction that is a fifth copy-state beside your four — an early issue circulated for arrangement before the text was set — and the caption is written to hold that reading. Read the other way it is the museum saying it has not written the manual yet, which would be Doctrine 11 on the glass. Your call if the reading is too thin. It is a photocopy of a TYPED page rather than clean digital type, which is a long step toward what B8's ruling actually asks for; it is still not a photograph of paper, so M4 stands.",
    "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
   },
   "538a40de4dcdd105": {

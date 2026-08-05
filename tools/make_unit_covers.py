@@ -86,7 +86,22 @@ UNITS = [
     # photographs keep living under the folder the robots repo names them in.
     # Eight glyphs against nine, so set_tracked's per-cover solve absorbs it and
     # no constant below changes.
-    ("MGK-NIAC", "reference/mgk-viii/head_lens.jpg", "mgk-niac-cover.png", 0.48),
+    # [R4 2026-08-05] THE NIAC COVER IS RE-CUT FROM THE CABINET, NOT THE FIGURE.
+    # MIKE: "NIAC IS THE MAINFRAME — the gutted-space-heater computer, the
+    # helical core, the bar-graph output row. It is so complicated they needed a
+    # robot to operate it. The robot is a HUGE EASTER EGG and is not the
+    # subject. ALBUM ART AND ALL NIAC IMAGERY SHOW THE MAINFRAME ONLY."
+    # The badge was `head_lens.jpg` — the robot's camera-body head, lens lit,
+    # square on. It is the best portrait in the set and it is a portrait of the
+    # wrong object: it put the easter egg in the disc on the front of the album.
+    # `core_helical.jpg` is the blue helical core seen through the cage bars,
+    # which is the mainframe's one unmistakable feature. Focal rides HIGH (0.36
+    # against the old 0.48) because the plate is 380x820 and a centre square
+    # would take the core's foot and the cable rather than the coil.
+    # IT ALSO CLOSES M30. The old badge was the same photograph as the still on
+    # the face one press below it; the cover and that face now carry different
+    # plates, and neither carries the robot.
+    ("MGK-NIAC", "reference/mgk-viii/core_helical.jpg", "mgk-niac-cover.png", 0.36),
     ("MGK-VIIIp", "reference/photos/front_full.png", "mgk-viiip-cover.png", 0.44),
 ]
 

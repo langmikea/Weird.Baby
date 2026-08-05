@@ -377,3 +377,82 @@ Moved verbatim from `CLAUDE.md` under that file's own ~600-line rule. Nothing wa
   **Lap ran on localhost, not `weird.baby`.**
 - Round log: `docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md`. **Seven questions for
   Mike, none blocking.**
+
+---
+
+### 2026-08-05 → RECORD MACHINERY (v55; R1–R6) — sealed
+- **A drafting-lane round that touched NOTHING in `src/`.** No component, no
+  stylesheet, no string, no route, no asset. Mike is about to produce the
+  Record's first two weeks in voice sessions; this built the vessels that catch
+  what he says and **invented no contents** (Doctrine 12). No browser lap, and
+  correctly none — nothing on the glass moved.
+- **R1 THE LEDGER IS CUT ONE ROW PER RECORD ENTRY, AND THE ROWS ARE DERIVED.**
+  `reveal/record-entries.mjs` parses the Record out of `robots.js` with acorn +
+  acorn-jsx (that file imports JSX, so node can never import it) and is **split
+  in two on purpose**: `entries()` returns entry numbers and asset paths **and
+  nothing else** and is the only half the ledger builds from, so a headline has
+  no route in; `prose()` **builds nothing** and exists only so the check can
+  police the rule. Sixty entries will make sixty rows with no edit. Today it is
+  `record.013`, **and the cut paid at once: its plate joined the asset table by
+  itself** (11 → 12) **and M18's twenty-seven questions moved off the volume
+  onto the entry that has them**, while M19 stayed on `doc.record` — now **the
+  volume only**. **An unnumbered entry FAILS THE BUILD** rather than being handed
+  an id: minting one is Ops answering M19 with a guess.
+- **The audit's constraint — the ledger must never become a second copy of the
+  Record — is enforced three ways and ALL THREE WERE BROKEN ON PURPOSE.** The
+  generator cannot see the words · `reveal/schema.mjs` refuses the Record's
+  FIELD names · `reveal:check` refuses its SENTENCES (**six consecutive words**
+  of Record prose, or any whole Record line of **four words or more** — six
+  because a restated clause is longer than five words, and below six ordinary
+  English collides). Proved by injecting a lifted clause, a four-word line, a
+  `sections` field and a phantom `record.014`: all four reported, exit 1. **A
+  fourth check makes rows and entries the same set both ways**, which is what
+  finally makes *never hand-edit `ledger.json`* enforced rather than requested.
+- **`reveal/schema.mjs` now holds THE ONE VALIDATOR** — before this the
+  declaration checked five rules as it wrote and `reveal:check` checked four
+  after, and **neither list was a superset of the other**.
+- **R2 THE CUE CARDS ARE BUILT** (audit §8b). `npm run reveal:cards` — an **Ops
+  instrument, never a route**, same shape as `assets:checklist`. **The deck is
+  49 and the first implementation had it at 143, which was wrong:** 93 undated
+  rows are already REVEALED, and asking what day a thing came out when nobody
+  wrote the day down invites an invention. `--spendable` is the twelve that can
+  be released without building anything.
+- **R3 THE MANUAL IS A SUPPLY LINE**, on Mike's ruling that it **arrived in
+  pieces** — only the pages the story reaches for, as Record entries call for
+  them. `manualPageRow()` builds `doc.manual.page.NN` with its own **production
+  arc (needed · printed · photographed · placed)** and a `calledBy` naming real
+  entry rows. **`prod` is NOT `arc`** — `arc` is how the house REVEALS a thing
+  it has, `prod` is whether it HAS it — and **`build` is DERIVED from `prod`**,
+  so a page cannot claim a state the world is not in. It **refuses a page the
+  manual does not have** (range 1–24, source render checked on disk). **Nothing
+  populated (M44)**, and the vessel is proved by `reveal:check` building
+  specimens at all four stages and asserting every refusal — **no page invented
+  to test the container.**
+- **THE SELF-TEST COULD NOT FAIL, and only breaking it on purpose found that.**
+  Its first version compared the vessel's output against `BUILD_FOR_PROD` — the
+  table the vessel derives FROM — so corrupting the mapping corrupted the
+  expectation with it, and a deliberate `photographed → LIVE` break reported
+  PASS. Expectations are literals now and the stage names are asserted too. **A
+  self-test that reads its answer out of the thing under test is not a test.**
+- **R4** the robots repo's `ASSET_REVEAL_CHECKLIST.md` — still recording the
+  Record as **436 entries with 10 surfaced** (both invented, deleted at v47) and
+  still naming "The Firmware" — carries a superseded banner naming **what it is
+  kept for: it is where the four reveal classes were named.** **Body deliberately
+  not rewritten** — a first pass edited to agree with what came after it stops
+  being a record of what was thought at the time.
+- **R5** the fifth class is put as **ONE QUESTION** (M35), and building the cards
+  found **a second case that is not an artifact**: `route.hr` is HELD
+  PERMANENTLY by Mike's own ruling and its card asks what day it comes out.
+  `when: null` carries two meanings it cannot tell apart. Ops adopted nothing.
+- **R6** M32 + M35 rewritten; M44 · C38 · C39 added; §5 renumbered 5a–5e; **five
+  dead register anchors fixed.** Two gaps reported and NOT reconstructed: v54
+  sealed with no closed-this-round section, and **STATE.md's SEALED narrative
+  sections stop at v50** (its standing-law sections are current to v54).
+- Gates: lint **11/9 = baseline**; build green **72 modules**; provenance **PASS**
+  with zero register movement; `reveal:check` **PASS** on four new checks.
+  Ledger **151 → 152**; diff-verified that exactly one row was added, two were
+  deliberately changed, and **all five `channel.*` rows `/foundation` reads are
+  untouched.**
+- Round log: `docs/MUSEUM_RECORD_MACHINERY_LOG-20260805.md`. **Two questions for
+  Mike, neither blocking.**
+

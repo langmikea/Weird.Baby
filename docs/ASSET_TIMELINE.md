@@ -1,13 +1,21 @@
-# THE ASSET TIMELINE — how every one of the 152 things got into the house,
+# THE ASSET TIMELINE — how every one of the 156 things got into the house,
 # and the rule that none of them may be shown before it did
 
 **Built 2026-08-05 (T1) on Mike's instruction. Read with `reveal/transfers.mjs`,
 which is the machine half of this document; this is the half he reads.**
 
-**Nothing was created.** No asset, no row, no content, no date. Every one of the
-152 rows already existed; this round assigned each a transfer class, wrote the
-exemptions out in full, and made the rule checkable. `npm run reveal:check` and
-`npm run reveal:build` both enforce it.
+**Nothing was created** *at T1*. No asset, no row, no content, no date. Every one
+of the 152 rows already existed; that round assigned each a transfer class, wrote
+the exemptions out in full, and made the rule checkable. `npm run reveal:check`
+and `npm run reveal:build` both enforce it.
+
+> **AMENDED 2026-08-05 (v56, THE ROBOTS SIMPLIFICATION).** 152 rows → **156**.
+> Three front-desk faces were struck and RETIRED, the Record moved album and its
+> row moved with it, the Portal's drum gained two channels for the mainframe, and
+> two eggs were planted and recorded. **§5.3 is new** — NIAC's story position,
+> which is the first thing in this document that places one MACHINE on the arc
+> rather than one class of paperwork. **§6's third finding is CLOSED** and the
+> ruling that closed it is written into it.
 
 ---
 
@@ -167,6 +175,49 @@ maintenance-mode lore. It is the cleanest thing in the model: six of the eleven
 promises the museum currently makes on its glass are these, and every one of
 them is now backed by a class that says *we have it, it is closed.*
 
+### 5.3 NIAC's story position — the third tension, and it is the useful one
+
+**[v56/R5, Mike's canon.] Recorded here because it is the first thing in this
+document that places one MACHINE on the arc rather than one class of paperwork,
+and because it resolves a tension the transfer table could not see.**
+
+His words, in four parts:
+
+- **NIAC is found FROM DAY ONE.** *"There was a reason they sent what they sent,
+  in the order they sent it."*
+- **It shows PROGRESS ACROSS THE ARC.**
+- **THE MOTHER LODE OF DETAIL IS VIIIp.** NIAC is not where the depth is.
+- **NIAC is THE NEXT CHAPTER**, alongside continued rollout of new VIIIp units.
+  **Someday NIAC runs on the Portal.**
+
+**What it reconciles.** Part one is a statement about ARRIVAL and the table
+already agrees with it: every `face.niac.*` row, and every plate behind them,
+sits in **BLAST**. That was not chosen for NIAC — it fell out of rule (b),
+because the album was on the glass at launch. Mike's canon and the mechanism
+reached the same answer from opposite ends, which is the strongest form of
+agreement this model can produce and is worth more than either statement alone.
+
+**What it does NOT do, and the distinction is the whole of §4.** *"Progress
+across the arc"* is a statement about REVEAL — the `when` field — and `when` is
+null on all 156 rows because Mike has not supplied a schedule. Arrival and
+reveal are different fields and this round did not conflate them. NIAC arrived in
+week 0 with everything else; **when each piece of it comes out is exactly the
+question `npm run reveal:cards` is holding open** (M32).
+
+**What it changed on the glass, and it is one thing.** *"Someday NIAC runs on the
+Portal"* is now VISIBLE: R6's renumbering engraves **channels 1 and 2 for the
+mainframe** on the Portal's drum, and both are dark. That is a promise the
+museum can now be held to — `portal.feed.niac.1` and `.2` are `shown: true`,
+**UNLOCK**, waiting on a feed rather than on a delivery. It is the same
+instrument §5.2 describes, pointed at the other machine.
+
+**And what it makes true that was not.** *"The mother lode of detail is VIIIp"*
+was contradicted by the wing itself until this round: the MGK-NIAC album carried
+**eight** plates against the VIIIp's nine, and six of the eight were the ROBOT —
+the album named for the mainframe was spending its depth on the easter egg. It
+now carries **four**, all of the cabinet, and the robot's ten photographs are
+held whole (`egg.niac.operator`). The ratio finally says what the canon says.
+
 ---
 
 ## 6. WHAT COULD NOT BE PLACED — 22 rows, four kinds
@@ -221,6 +272,44 @@ Two repairs and one refusal:
   has retired the 24. **Reconciling 24 against 61 is a ruling, not a path edit**,
   and it is the same question the robots `STATE.md` already raised as *"whether
   61 pages is the right size for this object."*
+
+> ### CLOSED 2026-08-05 (v56/G1) — and the ruling is bigger than the path
+>
+> **MIKE: the old 24-page manual is DEAD and its page numbering with it. 61 is
+> the current number — and the standing rule is that THE MANUAL IS AS LONG AS THE
+> MANUAL NEEDS TO BE, AND NOT LONGER. The page count is a consequence of content,
+> never a target.**
+>
+> That is why the fix is not a repointed string. `MANUAL_PAGES = 24` is **gone**:
+> the count is now **read off the source tree** every time it is asked for
+> (`manualPages()` in `reveal/schema.mjs`). A constant standing in for a fact
+> about a document in another repository is exactly what T-A was, and a constant
+> cannot be kept in step by discipline. A count read off the tree cannot fall out
+> of step at all. Re-run the generator at 58 pages or at 90 and the vessel simply
+> refuses a different page number.
+>
+> **The three ways a future change could break it, and where each is caught now:**
+>
+> | what changes | what happens |
+> |---|---|
+> | the tree **moves** again | one named repo-level fault, not a stack trace — kept from T1, reworded so it no longer names the 24 as the thing that was lost |
+> | the count **shrinks** | `manualPageRow()` refuses the page at write time, **and** `validate()` faults any row already in the ledger that names a page past the end. A shrink that stranded written rows used to be invisible in both directions. |
+> | the count **grows** | nothing breaks and nothing needs to |
+>
+> **All three were broken on purpose and all three reported.** The count is also
+> printed on every `reveal:check` pass, so a change is visible rather than merely
+> survivable.
+>
+> **And it exposed one thing on the glass.** `public/robots/manual/working-copy-p1.png`
+> was a copy of `manual/pages/page-01.png` — a page of the *retired* document,
+> which a copied file cannot notice being deleted upstream. The Manual's still is
+> now page 1 of the live structure issue, the file is renamed, and its judgement
+> was carried across by the declared `assets:rename` path and then **re-read**,
+> because the picture changed as well as its name. One judgement call is flagged
+> rather than buried: the new page's own type reads **TEXT NOT SUPPLIED**, which
+> is an early issue circulated for arrangement in the fiction and *the museum
+> admitting it has not written the manual* read the other way. The caption is
+> written to hold the first reading. It is Mike's if it is too thin.
 
 ---
 

@@ -179,24 +179,6 @@
    "p": "hunterRoot.shopExitParam",
    "c": "HOUSE"
   },
-  "363a99a1c10ccee7": {
-   "f": "src/data/artists/robots.js",
-   "l": 192,
-   "t": "Welcome",
-   "p": "WBR_TRACKS[].title",
-   "c": "HOUSE"
-  },
-  "244d8790d4a3d4b8": {
-   "f": "src/data/artists/robots.js",
-   "l": 197,
-   "t": "WELCOME",
-   "p": "WBR_TRACKS[].face.title",
-   "c": "RESTATED",
-   "r": [
-    "3daefcb2e1402bb1",
-    "66409c81eba92b40"
-   ]
-  },
   "8d49dfdc7f22acf9": {
    "f": "src/data/artists/robots.js",
    "l": 215,
@@ -204,7 +186,7 @@
    "p": "WBR_TRACKS[].face.stillCaption",
    "c": "RESTATED",
    "r": [
-    "3daefcb2e1402bb1",
+    "400080dd806ad80e",
     "66409c81eba92b40"
    ]
   },
@@ -215,18 +197,7 @@
    "p": "WBR_TRACKS[].face.lines[]",
    "c": "RESTATED",
    "r": [
-    "3daefcb2e1402bb1",
-    "66409c81eba92b40"
-   ]
-  },
-  "26540de8b6d9673d": {
-   "f": "src/data/artists/robots.js",
-   "l": 223,
-   "t": "TAGLINE  “Purveyors of the Weird.Baby.”",
-   "p": "WBR_TRACKS[].face.lines[]",
-   "c": "RESTATED",
-   "r": [
-    "3daefcb2e1402bb1",
+    "400080dd806ad80e",
     "66409c81eba92b40"
    ]
   },
@@ -237,74 +208,12 @@
    "p": "spine[].tracks[].face.entries[].stamp",
    "c": "HOUSE"
   },
-  "b68bf9d5b73564e9": {
-   "f": "src/data/artists/robots.js",
-   "l": 235,
-   "t": "A purveyor, not a maker",
-   "p": "WBR_TRACKS[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "3daefcb2e1402bb1",
-    "66409c81eba92b40"
-   ]
-  },
-  "1271f3c7e991797e": {
-   "f": "src/data/artists/robots.js",
-   "l": 236,
-   "t": "Four parties have touched these machines and only one of them built anything. We are the ones who turned up sixty years late, with a screwdriver and no invitation.",
-   "p": "WBR_TRACKS[].face.entries[].line",
-   "c": "RESTATED",
-   "r": [
-    "3daefcb2e1402bb1",
-    "66409c81eba92b40"
-   ]
-  },
-  "e2b7bfa126975734": {
-   "f": "src/data/artists/robots.js",
-   "l": 240,
-   "t": "HOW",
-   "p": "WBR_TRACKS[].face.entries[].stamp",
-   "c": "HOUSE"
-  },
-  "1c9e572cb2cb0a8b": {
-   "f": "src/data/artists/robots.js",
-   "l": 240,
-   "t": "Found, cleaned, returned",
-   "p": "WBR_TRACKS[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "3daefcb2e1402bb1",
-    "66409c81eba92b40"
-   ]
-  },
-  "ffd6d4a8ce7a634e": {
-   "f": "src/data/artists/robots.js",
-   "l": 241,
-   "t": "Power first, then the glass, then the software. The question of what any of it was FOR came last, and it is still coming.",
-   "p": "WBR_TRACKS[].face.entries[].line",
-   "c": "RESTATED",
-   "r": [
-    "3daefcb2e1402bb1",
-    "66409c81eba92b40"
-   ]
-  },
   "302b78c511b1c595": {
    "f": "src/data/artists/robots.js",
    "l": 1134,
    "t": "WHY",
    "p": "spine[].tracks[].face.entries[].stamp",
    "c": "HOUSE"
-  },
-  "ed448dbccf1e561f": {
-   "f": "src/data/artists/robots.js",
-   "l": 252,
-   "t": "Why we bother",
-   "p": "WBR_TRACKS[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "3daefcb2e1402bb1",
-    "66409c81eba92b40"
-   ]
   },
   "58acc131874648aa": {
    "f": "src/data/artists/robots.js",
@@ -313,7 +222,7 @@
    "p": "WBR_TRACKS[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "3daefcb2e1402bb1",
+    "400080dd806ad80e",
     "66409c81eba92b40"
    ]
   },
@@ -324,13 +233,6 @@
    "p": "WBR_TRACKS[].face.entries[].note",
    "c": "MIKE",
    "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
-  "ca3c9901b0ac48f7": {
-   "f": "src/data/artists/robots.js",
-   "l": 259,
-   "t": "“Restoration house” is not what we are. Weird.Baby is Weird.Baby.",
-   "p": "WBR_TRACKS[].face.footer",
-   "c": "HOUSE"
   },
   "3e75859b7d114f3f": {
    "f": "src/data/artists/robots.js",
@@ -354,22 +256,7 @@
     "d9573a5b11ceca4f",
     "e33d38369618419c",
     "0f6551034087bf9f",
-    "ead650d40581240e"
-   ]
-  },
-  "68feb8bf8a3dd1d9": {
-   "f": "src/data/artists/robots.js",
-   "l": 276,
-   "t": "The questions people actually turn up with, and the answers as far as they go. Some of them stop short. Those are the interesting ones.",
-   "p": "WBR_TRACKS[].face.blurb",
-   "c": "RESTATED",
-   "r": [
-    "8ddfd88b4dc9a152",
-    "907619cc1acfbdc7",
-    "d9573a5b11ceca4f",
-    "e33d38369618419c",
-    "0f6551034087bf9f",
-    "ead650d40581240e"
+    "3e58b97f9b6fa534"
    ]
   },
   "a0bf4a42360ad818": {
@@ -391,7 +278,7 @@
     "d9573a5b11ceca4f",
     "e33d38369618419c",
     "0f6551034087bf9f",
-    "ead650d40581240e"
+    "3e58b97f9b6fa534"
    ]
   },
   "b07384ed206a5043": {
@@ -406,7 +293,7 @@
     "d9573a5b11ceca4f",
     "e33d38369618419c",
     "0f6551034087bf9f",
-    "ead650d40581240e"
+    "3e58b97f9b6fa534"
    ]
   },
   "8ddfd88b4dc9a152": {
@@ -439,7 +326,7 @@
     "d9573a5b11ceca4f",
     "e33d38369618419c",
     "0f6551034087bf9f",
-    "ead650d40581240e"
+    "3e58b97f9b6fa534"
    ]
   },
   "907619cc1acfbdc7": {
@@ -472,7 +359,7 @@
     "d9573a5b11ceca4f",
     "e33d38369618419c",
     "0f6551034087bf9f",
-    "ead650d40581240e"
+    "3e58b97f9b6fa534"
    ]
   },
   "d9573a5b11ceca4f": {
@@ -495,7 +382,7 @@
     "d9573a5b11ceca4f",
     "e33d38369618419c",
     "0f6551034087bf9f",
-    "ead650d40581240e"
+    "3e58b97f9b6fa534"
    ]
   },
   "e33d38369618419c": {
@@ -526,87 +413,7 @@
     "d9573a5b11ceca4f",
     "e33d38369618419c",
     "0f6551034087bf9f",
-    "ead650d40581240e"
-   ]
-  },
-  "ead650d40581240e": {
-   "f": "src/data/artists/robots.js",
-   "l": 316,
-   "t": "[PAPA] — the final wording throughout, and the answers should be shorter than these.",
-   "p": "WBR_TRACKS[].face.footer",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
-  "ef1def1f3ba8ca61": {
-   "f": "src/data/artists/robots.js",
-   "l": 322,
-   "t": "Contact",
-   "p": "WBR_TRACKS[].title",
-   "c": "HOUSE"
-  },
-  "f7f8232d74ea40cc": {
-   "f": "src/data/artists/robots.js",
-   "l": 327,
-   "t": "CONTACT",
-   "p": "WBR_TRACKS[].face.title",
-   "c": "RESTATED",
-   "r": [
-    "907619cc1acfbdc7",
-    "942336b29897a791"
-   ]
-  },
-  "710cfd5a8b6003eb": {
-   "f": "src/data/artists/robots.js",
-   "l": 338,
-   "t": "PROVENANCE",
-   "p": "WBR_TRACKS[].face.entries[].stamp",
-   "c": "HOUSE"
-  },
-  "7597369b23092fdc": {
-   "f": "src/data/artists/robots.js",
-   "l": 338,
-   "t": "You have seen one before",
-   "p": "WBR_TRACKS[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "907619cc1acfbdc7",
-    "942336b29897a791"
-   ]
-  },
-  "1936f293ff95cea2": {
-   "f": "src/data/artists/robots.js",
-   "l": 343,
-   "t": "CORRECTION",
-   "p": "WBR_TRACKS[].face.entries[].stamp",
-   "c": "HOUSE"
-  },
-  "d1ea31c23fed3000": {
-   "f": "src/data/artists/robots.js",
-   "l": 343,
-   "t": "The record is wrong",
-   "p": "WBR_TRACKS[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "907619cc1acfbdc7",
-    "942336b29897a791"
-   ]
-  },
-  "19fa1fd7389cd950": {
-   "f": "src/data/artists/robots.js",
-   "l": 349,
-   "t": "PURCHASE",
-   "p": "WBR_TRACKS[].face.entries[].stamp",
-   "c": "HOUSE"
-  },
-  "8ea906d111b3d442": {
-   "f": "src/data/artists/robots.js",
-   "l": 349,
-   "t": "Availability",
-   "p": "WBR_TRACKS[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "907619cc1acfbdc7",
-    "942336b29897a791"
+    "3e58b97f9b6fa534"
    ]
   },
   "3d8a11ce895f705f": {
@@ -635,14 +442,6 @@
    "c": "VERIFIED",
    "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
   },
-  "3306c1c756a9ae08": {
-   "f": "src/data/artists/robots.js",
-   "l": 473,
-   "t": "At the lens. One of eleven details on file.",
-   "p": "spine[].tracks[].face.stillCaption",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
   "66910d9f7da56182": {
    "f": "src/data/artists/robots.js",
    "l": 480,
@@ -651,7 +450,7 @@
    "c": "RESTATED",
    "r": [
     "371cf0216dd6a40c",
-    "3306c1c756a9ae08",
+    "24b45a6fcb6fea12",
     "92828483029a7a3c",
     "b3a30eb36383b456",
     "737f3f085bffe3e2",
@@ -682,7 +481,7 @@
    "c": "RESTATED",
    "r": [
     "371cf0216dd6a40c",
-    "3306c1c756a9ae08",
+    "24b45a6fcb6fea12",
     "92828483029a7a3c",
     "b3a30eb36383b456",
     "737f3f085bffe3e2",
@@ -704,7 +503,7 @@
    "c": "RESTATED",
    "r": [
     "371cf0216dd6a40c",
-    "3306c1c756a9ae08",
+    "24b45a6fcb6fea12",
     "92828483029a7a3c",
     "b3a30eb36383b456",
     "737f3f085bffe3e2",
@@ -727,7 +526,7 @@
    "c": "RESTATED",
    "r": [
     "371cf0216dd6a40c",
-    "3306c1c756a9ae08",
+    "24b45a6fcb6fea12",
     "92828483029a7a3c",
     "b3a30eb36383b456",
     "737f3f085bffe3e2",
@@ -750,7 +549,7 @@
    "c": "RESTATED",
    "r": [
     "371cf0216dd6a40c",
-    "3306c1c756a9ae08",
+    "24b45a6fcb6fea12",
     "92828483029a7a3c",
     "b3a30eb36383b456",
     "737f3f085bffe3e2",
@@ -763,21 +562,6 @@
    "t": "list",
    "p": "spine[].tracks[].face.entriesMode",
    "c": "HOUSE"
-  },
-  "b652726a0e8fb3ec": {
-   "f": "src/data/artists/robots.js",
-   "l": 544,
-   "t": "Eight details of a machine that is never shown whole. Cropped close on purpose and cut at the joints — enough to establish that the thing is built, wired, standing and lit, and nowhere near enough to establish what it looks like.",
-   "p": "spine[].tracks[].face.blurb",
-   "c": "RESTATED",
-   "r": [
-    "bbcb5e546315f259",
-    "8010c11fb3b1d9e4",
-    "65834c73d4ab70f9",
-    "8e8c6b1c1792302a",
-    "36a7a3c6a219dfb0",
-    "003c26e53a68799a"
-   ]
   },
   "5cd6db93a5b9da76": {
    "f": "src/data/artists/robots.js",
@@ -793,14 +577,6 @@
    "p": "spine[].tracks[].face.tombstone[].k",
    "c": "HOUSE"
   },
-  "8010c11fb3b1d9e4": {
-   "f": "src/data/artists/robots.js",
-   "l": 550,
-   "t": "Built and powered (2021); under construction (2013)",
-   "p": "spine[].tracks[].face.tombstone[].v",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
   "e44e83927d8d6ea1": {
    "f": "src/data/artists/robots.js",
    "l": 785,
@@ -808,28 +584,12 @@
    "p": "spine[].tracks[].face.tombstone[].k",
    "c": "HOUSE"
   },
-  "65834c73d4ab70f9": {
-   "f": "src/data/artists/robots.js",
-   "l": 551,
-   "t": "Eight, cropped from six photographs",
-   "p": "spine[].tracks[].face.tombstone[].v",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
   "c9577764a4aae1e2": {
    "f": "src/data/artists/robots.js",
    "l": 552,
    "t": "Frame",
    "p": "spine[].tracks[].face.tombstone[].k",
    "c": "HOUSE"
-  },
-  "8e8c6b1c1792302a": {
-   "f": "src/data/artists/robots.js",
-   "l": 552,
-   "t": "Withheld — no plate carries the whole unit",
-   "p": "spine[].tracks[].face.tombstone[].v",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
   "e4ad22875aedfb0f": {
    "f": "src/data/artists/robots.js",
@@ -846,14 +606,6 @@
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
-  "003c26e53a68799a": {
-   "f": "src/data/artists/robots.js",
-   "l": 558,
-   "t": "The head, three-quarters — a camera body, lens forward",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
   "d0920baff2e34f7a": {
    "f": "src/data/artists/robots.js",
    "l": 575,
@@ -861,77 +613,6 @@
    "p": "spine[].tracks[].face.collage[].date",
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "c9495f831b5df271": {
-   "f": "src/data/artists/robots.js",
-   "l": 562,
-   "t": "The chest, and the shoulders it hangs from",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "7bca9c5555de62e5": {
-   "f": "src/data/artists/robots.js",
-   "l": 566,
-   "t": "Lower limbs — flexible conduit into cast feet",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "9d5838b5cd6c96a7": {
-   "f": "src/data/artists/robots.js",
-   "l": 570,
-   "t": "A lit column, behind a grille",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "178a35603a1dfc84": {
-   "f": "src/data/artists/robots.js",
-   "l": 574,
-   "t": "The bench — power, a relay board, and two feet",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "b4a4568f2442b140": {
-   "f": "src/data/artists/robots.js",
-   "l": 578,
-   "t": "The same chest, eight years earlier, unpowered",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "8e7a5d7f688ba581": {
-   "f": "src/data/artists/robots.js",
-   "l": 587,
-   "t": "FEB 2013",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "d27b1912443fb3f1": {
-   "f": "src/data/artists/robots.js",
-   "l": 582,
-   "t": "Feet, on a plywood plinth",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "139398ff505779a3": {
-   "f": "src/data/artists/robots.js",
-   "l": 586,
-   "t": "A slot cut in a mock-up, with a limb across it",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "56b7dc9a3a6eadf6": {
-   "f": "src/data/artists/robots.js",
-   "l": 589,
-   "t": "Eight plates · details only · Weird.Baby Robots",
-   "p": "spine[].tracks[].face.footer",
-   "c": "HOUSE"
   },
   "fd1aa76eb8e40449": {
    "f": "src/data/artists/robots.js",
@@ -947,14 +628,6 @@
    "t": "WHAT THE MACHINE IS RUNNING",
    "p": "spine[].tracks[].face.subtitle",
    "c": "HOUSE"
-  },
-  "2eae01ec86a52482": {
-   "f": "src/data/artists/robots.js",
-   "l": 629,
-   "t": "An LED matrix, lit on the breadboard — February 2013.",
-   "p": "spine[].tracks[].face.stillCaption",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
   "874f8b48ba1f7a5e": {
    "f": "src/data/artists/robots.js",
@@ -979,7 +652,7 @@
    "p": "spine[].tracks[].face.lines[]",
    "c": "RESTATED",
    "r": [
-    "2eae01ec86a52482",
+    "64fdcf3899daeb42",
     "874f8b48ba1f7a5e",
     "f8f9e70921481ea5",
     "326df0ffe3ba05a2",
@@ -1002,7 +675,7 @@
    "p": "spine[].tracks[].face.lines[]",
    "c": "RESTATED",
    "r": [
-    "2eae01ec86a52482",
+    "64fdcf3899daeb42",
     "874f8b48ba1f7a5e",
     "f8f9e70921481ea5",
     "326df0ffe3ba05a2",
@@ -1024,7 +697,7 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "2eae01ec86a52482",
+    "64fdcf3899daeb42",
     "874f8b48ba1f7a5e",
     "f8f9e70921481ea5",
     "326df0ffe3ba05a2",
@@ -1039,7 +712,7 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "2eae01ec86a52482",
+    "64fdcf3899daeb42",
     "874f8b48ba1f7a5e",
     "f8f9e70921481ea5",
     "326df0ffe3ba05a2",
@@ -1054,7 +727,7 @@
    "p": "spine[].tracks[].face.entries[].note",
    "c": "RESTATED",
    "r": [
-    "2eae01ec86a52482",
+    "64fdcf3899daeb42",
     "874f8b48ba1f7a5e",
     "f8f9e70921481ea5",
     "326df0ffe3ba05a2",
@@ -1076,7 +749,7 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "2eae01ec86a52482",
+    "64fdcf3899daeb42",
     "874f8b48ba1f7a5e",
     "f8f9e70921481ea5",
     "326df0ffe3ba05a2",
@@ -1099,7 +772,7 @@
    "p": "spine[].tracks[].face.entries[].note",
    "c": "RESTATED",
    "r": [
-    "2eae01ec86a52482",
+    "64fdcf3899daeb42",
     "874f8b48ba1f7a5e",
     "f8f9e70921481ea5",
     "326df0ffe3ba05a2",
@@ -1129,7 +802,7 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "2eae01ec86a52482",
+    "64fdcf3899daeb42",
     "874f8b48ba1f7a5e",
     "f8f9e70921481ea5",
     "326df0ffe3ba05a2",
@@ -1144,7 +817,7 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "2eae01ec86a52482",
+    "64fdcf3899daeb42",
     "874f8b48ba1f7a5e",
     "f8f9e70921481ea5",
     "326df0ffe3ba05a2",
@@ -1167,7 +840,7 @@
    "p": "spine[].tracks[].face.entries[].note",
    "c": "RESTATED",
    "r": [
-    "2eae01ec86a52482",
+    "64fdcf3899daeb42",
     "874f8b48ba1f7a5e",
     "f8f9e70921481ea5",
     "326df0ffe3ba05a2",
@@ -1565,18 +1238,10 @@
    "p": "spine[].tracks[].face.title",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
-  },
-  "63e7db47db396b8e": {
-   "f": "src/data/artists/robots.js",
-   "l": 1009,
-   "t": "The working copy, printed with PRELIMINARY — NOT FOR DISTRIBUTION across it.",
-   "p": "spine[].tracks[].face.stillCaption",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
   "834831857f48aab9": {
    "f": "src/data/artists/robots.js",
@@ -1585,7 +1250,7 @@
    "p": "spine[].tracks[].face.blurb",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1597,7 +1262,7 @@
    "p": "spine[].tracks[].face.lines[]",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1609,7 +1274,7 @@
    "p": "spine[].tracks[].face.lines[]",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1621,7 +1286,7 @@
    "p": "spine[].tracks[].face.lines[]",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1655,7 +1320,7 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1667,7 +1332,7 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1679,7 +1344,7 @@
    "p": "spine[].tracks[].face.entries[].note",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1698,7 +1363,7 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1710,7 +1375,7 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1729,7 +1394,7 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1741,7 +1406,7 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1760,7 +1425,7 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1772,7 +1437,7 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1791,7 +1456,7 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1803,7 +1468,7 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1822,7 +1487,7 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1834,7 +1499,7 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "63e7db47db396b8e",
+    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -16634,24 +16299,6 @@
     "docs/canonical/THE_CHARTER.md"
    ]
   },
-  "65cc8378f9b1ff21": {
-   "f": "src/data/artists/robots.js",
-   "l": 663,
-   "t": "MARCH 2021",
-   "p": "spine[].tracks[].face.spreads[].head",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows",
-   "n": "The spread heading is the month already declared on each of the five tiles beneath it (\"MAR 2021\"), spelled out. Same fact, same origin, one shelf label instead of five stamps."
-  },
-  "08149a1ea9f3ba2d": {
-   "f": "src/data/artists/robots.js",
-   "l": 686,
-   "t": "FEBRUARY 2013",
-   "p": "spine[].tracks[].face.spreads[].head",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows",
-   "n": "As above, for the three tiles stamped \"FEB 2013\"."
-  },
   "c38ce827b45ebf97": {
    "f": "src/routes/exhibit/Exhibit.jsx",
    "l": 1774,
@@ -16660,35 +16307,13 @@
    "c": "HOUSE",
    "n": "The word \"Record\" is the museum's own label for its log; the number is interpolated from `spreads[].no`. NOT ONE SPREAD DECLARES A NUMBER TODAY, so this string is not on the glass anywhere — it is declared because the boundary asks about every string it can reach, not only the ones currently rendering."
   },
-  "447b29a75fb8b6d2": {
-   "f": "src/data/artists/robots.js",
-   "l": 228,
-   "t": "<text x=\"260\" y=\"150\" text-anchor=\"middle\" fill=\"{}\" font-family=\"Courier New,monospace\" font-size=\"17\" letter-spacing=\"7\">CORRESPONDENCE</text><text x=\"260\" y=\"248\" text-anchor=\"middle\" fill=\"{}\" font-family=\"Georgia,serif\" font-size=\"46\">papa@weird.baby</text>",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, N4, 2026-08-04: \"WELCOME and CONTACT (robots wing) - BURN DOWN AND REIMAGINE. Contact is plain and simple: papa@weird.baby, no leading, no ceremony.\" The address itself is Mike's own and is already published as a live mailto: in src/routes/InfoBooth.jsx."
-  },
-  "b88e45a1ad68ab26": {
-   "f": "src/data/artists/robots.js",
-   "l": 246,
-   "t": "<text x=\"260\" y=\"92\" text-anchor=\"middle\" fill=\"{}\" font-family=\"Courier New,monospace\" font-size=\"17\" letter-spacing=\"7\">DOCUMENT CONTROL</text><g transform=\"rotate(-7 260 214)\"><rect x=\"96\" y=\"164\" width=\"328\" height=\"100\" fill=\"none\" stroke=\"{}\" stroke-width=\"4\"/><text x=\"260\" y=\"230\" text-anchor=\"middle\" fill=\"{}\" font-family=\"Courier New,monospace\" font-size=\"52\" font-weight=\"bold\" letter-spacing=\"6\">APPROVED</text></g><text x=\"260\" y=\"330\" text-anchor=\"middle\" fill=\"{}\" font-family=\"Courier New,monospace\" font-size=\"16\" letter-spacing=\"4\">PRELIMINARY · FINAL · MARKED-UP · APPROVED</text><text x=\"260\" y=\"364\" text-anchor=\"middle\" fill=\"{}\" font-family=\"Georgia,serif\" font-size=\"20\">Four states. No complete copy.</text>",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, N3, 2026-08-04: \"DOC CONTROL - a new robots surface: user manuals, originals, digital file storage. AND THE MANUAL'S STORY: the manual came to us IN PIECES, like everything else - presumably to avoid detection. Spy shit. So there is no complete table of contents, no index, not every page, and therefore not every answer. What we have is assembled from various copies: preliminary, final, marked-up, stamped APPROVED. Stated plainly, and it is why the manual is incomplete.\" Every word on the card is from that ruling: APPROVED is one of his four copy states and the four states are his list."
-  },
-  "3daefcb2e1402bb1": {
-   "f": "src/data/artists/robots.js",
-   "l": 313,
-   "t": "In 1965 somebody built a machine to say what happens next. Sixty years later a delivery of them arrived on a dock with no sender's name on it. This wing is everything we have worked out since — and, more often, what we have not.",
-   "c": "VERIFIED",
-   "s": "the robots repo's own record — C:/AI/Projects/weird-baby-robots (STATE.md, THE_RECORD.md, robots/mgk-viiip/sources/2022-proto-docs/README.md). External to this repo; the sweep cannot re-check it.",
-   "n": "SAME SOURCE AS THE SENTENCE IT REPLACES (register key e06b36c1dbe6faaf, now stale). The ONLY change is the removal of the invented count 'three cartons' — the number H4 struck from Record 013 and which had been left standing here as register row M15. It is not replaced with another number, because nobody supplied one."
-  },
   "cfe2d08124f3f10d": {
    "f": "src/data/artists/robots.js",
    "l": 319,
    "t": "ON FILE  photographs, the record, the manual, the firmware",
    "c": "RESTATED",
    "r": [
-    "3daefcb2e1402bb1",
+    "400080dd806ad80e",
     "66409c81eba92b40"
    ]
   },
@@ -16698,113 +16323,15 @@
    "t": "START",
    "c": "HOUSE"
   },
-  "cc54c355e65deeb2": {
-   "f": "src/data/artists/robots.js",
-   "l": 362,
-   "t": "Where to start",
-   "c": "RESTATED",
-   "r": [
-    "3daefcb2e1402bb1",
-    "66409c81eba92b40"
-   ]
-  },
   "6c2d5fa4475b793e": {
    "f": "src/data/artists/robots.js",
    "l": 363,
    "t": "The image archives are what the machines look like, in details rather than whole. The record is what happened, as it happened. The portal is the only thing in this wing that is running.",
    "c": "RESTATED",
    "r": [
-    "3daefcb2e1402bb1",
+    "400080dd806ad80e",
     "66409c81eba92b40"
    ]
-  },
-  "2b0e18df150348ee": {
-   "f": "src/data/artists/robots.js",
-   "l": 464,
-   "t": "Doc Control",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, N3, 2026-08-04: \"DOC CONTROL - a new robots surface: user manuals, originals, digital file storage. AND THE MANUAL'S STORY: the manual came to us IN PIECES, like everything else - presumably to avoid detection. Spy shit. So there is no complete table of contents, no index, not every page, and therefore not every answer. What we have is assembled from various copies: preliminary, final, marked-up, stamped APPROVED. Stated plainly, and it is why the manual is incomplete.\""
-  },
-  "80f3422cc95d3807": {
-   "f": "src/data/artists/robots.js",
-   "l": 469,
-   "t": "DOC CONTROL",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, N3, 2026-08-04: \"DOC CONTROL - a new robots surface: user manuals, originals, digital file storage. AND THE MANUAL'S STORY: the manual came to us IN PIECES, like everything else - presumably to avoid detection. Spy shit. So there is no complete table of contents, no index, not every page, and therefore not every answer. What we have is assembled from various copies: preliminary, final, marked-up, stamped APPROVED. Stated plainly, and it is why the manual is incomplete.\""
-  },
-  "1fe03a7a30e9aa3d": {
-   "f": "src/data/artists/robots.js",
-   "l": 470,
-   "t": "MANUALS · ORIGINALS · FILES",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, N3, 2026-08-04: \"DOC CONTROL - a new robots surface: user manuals, originals, digital file storage. AND THE MANUAL'S STORY: the manual came to us IN PIECES, like everything else - presumably to avoid detection. Spy shit. So there is no complete table of contents, no index, not every page, and therefore not every answer. What we have is assembled from various copies: preliminary, final, marked-up, stamped APPROVED. Stated plainly, and it is why the manual is incomplete.\" The three subjects are his, in his order."
-  },
-  "364a221a99938323": {
-   "f": "src/data/artists/robots.js",
-   "l": 472,
-   "t": "One of the four states a page arrives in.",
-   "c": "RESTATED",
-   "r": [
-    "3574f06ef9c8737f"
-   ]
-  },
-  "2e8b1e4ef28c7ec5": {
-   "f": "src/data/artists/robots.js",
-   "l": 474,
-   "t": "Three classes of paper come through this desk: the manuals that shipped with the machines, the originals behind them, and the files that are all that survives of some of it. What follows is what is held and what is not.",
-   "c": "RESTATED",
-   "r": [
-    "3574f06ef9c8737f"
-   ]
-  },
-  "0d66fc5a33915872": {
-   "f": "src/data/artists/robots.js",
-   "l": 479,
-   "t": "MANUALS    one title · assembled from copies · incomplete",
-   "c": "RESTATED",
-   "r": [
-    "3574f06ef9c8737f"
-   ]
-  },
-  "0599069405ee72d7": {
-   "f": "src/data/artists/robots.js",
-   "l": 480,
-   "t": "PAGES      none imaged — a plate here is a photograph of a sheet",
-   "c": "RESTATED",
-   "r": [
-    "63e7db47db396b8e",
-    "05cba6df40937f0e"
-   ]
-  },
-  "09f83e5b34b96bb4": {
-   "f": "src/data/artists/robots.js",
-   "l": 481,
-   "t": "ORIGINALS  held · not published here",
-   "c": "VERIFIED",
-   "s": "the robots repo's own record — C:/AI/Projects/weird-baby-robots (STATE.md, THE_RECORD.md, robots/mgk-viiip/sources/2022-proto-docs/README.md). External to this repo; the sweep cannot re-check it. STATE.md's custody table records the 11 MGK-VIIIp source originals as held in the OneDrive archive mirror and NOT in any repository — which is exactly and only what this line claims."
-  },
-  "b4a90745bb08fc93": {
-   "f": "src/data/artists/robots.js",
-   "l": 482,
-   "t": "FILES      two firmware trees, checked in and named as they sit",
-   "c": "RESTATED",
-   "r": [
-    "1704f42e3c6387a8",
-    "5380a42f65fa1a0e"
-   ]
-  },
-  "e285e668b47d5de2": {
-   "f": "src/data/artists/robots.js",
-   "l": 489,
-   "t": "MANUALS",
-   "c": "HOUSE"
-  },
-  "27dc47a0cafccde9": {
-   "f": "src/data/artists/robots.js",
-   "l": 489,
-   "t": "It came in pieces",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, N3, 2026-08-04: \"DOC CONTROL - a new robots surface: user manuals, originals, digital file storage. AND THE MANUAL'S STORY: the manual came to us IN PIECES, like everything else - presumably to avoid detection. Spy shit. So there is no complete table of contents, no index, not every page, and therefore not every answer. What we have is assembled from various copies: preliminary, final, marked-up, stamped APPROVED. Stated plainly, and it is why the manual is incomplete.\""
   },
   "3574f06ef9c8737f": {
    "f": "src/data/artists/robots.js",
@@ -16820,45 +16347,6 @@
    "c": "MIKE",
    "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
   },
-  "65a2f10da1c569a4": {
-   "f": "src/data/artists/robots.js",
-   "l": 500,
-   "t": "PAGES",
-   "c": "HOUSE"
-  },
-  "cf7c4fffdb3f63fb": {
-   "f": "src/data/artists/robots.js",
-   "l": 500,
-   "t": "What counts as a page here",
-   "c": "RESTATED",
-   "r": [
-    "63e7db47db396b8e",
-    "05cba6df40937f0e"
-   ]
-  },
-  "9056d10ae88f17df": {
-   "f": "src/data/artists/robots.js",
-   "l": 501,
-   "t": "A page is published when there is a photograph of the printed sheet, edges and margins included — not a transcription and not a rendering of one. Nothing meets that yet, so the reader is empty rather than filled with something that would read as the manual.",
-   "c": "RESTATED",
-   "r": [
-    "63e7db47db396b8e",
-    "05cba6df40937f0e"
-   ]
-  },
-  "50e246d6419338c0": {
-   "f": "src/data/artists/robots.js",
-   "l": 507,
-   "t": "ORIGINALS",
-   "c": "HOUSE"
-  },
-  "59f454f9c8823d25": {
-   "f": "src/data/artists/robots.js",
-   "l": 507,
-   "t": "Held, and not published",
-   "c": "VERIFIED",
-   "s": "the robots repo's own record — C:/AI/Projects/weird-baby-robots (STATE.md, THE_RECORD.md, robots/mgk-viiip/sources/2022-proto-docs/README.md). External to this repo; the sweep cannot re-check it. Same custody table as the ORIGINALS register line above."
-  },
   "138d289bdf0a12cc": {
    "f": "src/data/artists/robots.js",
    "l": 508,
@@ -16872,85 +16360,6 @@
    "t": "[PAPA] — whether any original is ever published, and which",
    "c": "MIKE",
    "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
-  "edecc1150fa468a2": {
-   "f": "src/data/artists/robots.js",
-   "l": 513,
-   "t": "FILES",
-   "c": "HOUSE"
-  },
-  "08ebb8dcb229b863": {
-   "f": "src/data/artists/robots.js",
-   "l": 513,
-   "t": "Where a machine's own words are kept",
-   "c": "RESTATED",
-   "r": [
-    "1704f42e3c6387a8",
-    "5380a42f65fa1a0e"
-   ]
-  },
-  "984f7a00b613f890": {
-   "f": "src/data/artists/robots.js",
-   "l": 514,
-   "t": "Two firmware trees are on file, checked in and named exactly as they sit. A file is the only class of document here that arrived complete, which is the one advantage of a document nobody thought to intercept.",
-   "c": "RESTATED",
-   "r": [
-    "1704f42e3c6387a8",
-    "5380a42f65fa1a0e"
-   ]
-  },
-  "d0da9854bf5291e5": {
-   "f": "src/data/artists/robots.js",
-   "l": 521,
-   "t": "WEIRD.BABY ROBOTS · DOC CONTROL",
-   "c": "HOUSE"
-  },
-  "942336b29897a791": {
-   "f": "src/data/artists/robots.js",
-   "l": 554,
-   "t": "papa@weird.baby",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, N4, 2026-08-04: \"WELCOME and CONTACT (robots wing) - BURN DOWN AND REIMAGINE. Contact is plain and simple: papa@weird.baby, no leading, no ceremony.\""
-  },
-  "3ac3865bc8e5ec53": {
-   "f": "src/data/artists/robots.js",
-   "l": 555,
-   "t": "Write to papa@weird.baby. Three things are worth writing about.",
-   "c": "RESTATED",
-   "r": [
-    "942336b29897a791",
-    "907619cc1acfbdc7"
-   ]
-  },
-  "0c338291cbb7d98e": {
-   "f": "src/data/artists/robots.js",
-   "l": 558,
-   "t": "Where, when, and any number you can still remember off the front of it.",
-   "c": "RESTATED",
-   "r": [
-    "942336b29897a791",
-    "907619cc1acfbdc7"
-   ]
-  },
-  "e4915b278ab139c0": {
-   "f": "src/data/artists/robots.js",
-   "l": 562,
-   "t": "In places it certainly is. Tell us and it changes, in public.",
-   "c": "RESTATED",
-   "r": [
-    "942336b29897a791",
-    "907619cc1acfbdc7"
-   ]
-  },
-  "cf8851b9d1b22afb": {
-   "f": "src/data/artists/robots.js",
-   "l": 566,
-   "t": "Which units are held and which are not.",
-   "c": "RESTATED",
-   "r": [
-    "942336b29897a791",
-    "907619cc1acfbdc7"
-   ]
   },
   "effe4e52865bec59": {
    "f": "src/data/artists/robots.js",
@@ -17092,16 +16501,9 @@
    "t": "UNITS    MGK-NIAC, the mainframe · MGK-VIIIp, the portable",
    "c": "RESTATED",
    "r": [
-    "3daefcb2e1402bb1",
+    "400080dd806ad80e",
     "66409c81eba92b40"
    ]
-  },
-  "5a2394adb6b1099b": {
-   "f": "src/data/artists/robots.js",
-   "l": 786,
-   "t": "MGK-NIAC at the chest — a detail. The whole frame is shown nowhere.",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/mgk-viii/ and looked at for this table"
   },
   "6ff12df8907979a0": {
    "f": "src/data/artists/robots.js",
@@ -17120,20 +16522,6 @@
    "l": 796,
    "t": "MGK-NIAC · TWO NAMES, ONE MACHINE",
    "c": "HOUSE"
-  },
-  "9f232adb647ee8c5": {
-   "f": "src/data/artists/robots.js",
-   "l": 804,
-   "t": "The mainframe — the big one, the early one, the one that only answers. Everything the portable does that this does not arrived later and arrived smaller. It has two names, and this is the one the museum put on the door.",
-   "c": "RESTATED",
-   "r": [
-    "371cf0216dd6a40c",
-    "3306c1c756a9ae08",
-    "92828483029a7a3c",
-    "b3a30eb36383b456",
-    "737f3f085bffe3e2",
-    "92cc1c6c9bd728d3"
-   ]
   },
   "9570ad83acf2e2a1": {
    "f": "src/data/artists/robots.js",
@@ -17383,6 +16771,226 @@
    "p": "FAQ[].a",
    "c": "MIKE",
    "s": "the charter's three Papa quotes, including the Illionaires line (docs/canonical/THE_CHARTER.md); held for his voice under Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
+  },
+  "9506f2c8e635a2b6": {
+   "f": "src/data/artists/robots.js",
+   "l": 320,
+   "t": "WEIRD.BABY ROBOTS",
+   "c": "HOUSE"
+  },
+  "400080dd806ad80e": {
+   "f": "src/data/artists/robots.js",
+   "l": 330,
+   "t": "In 1965 somebody built a machine to say what happens next. Sixty years later a delivery of them arrived on a dock with no sender's name on it. This wing is everything we have worked out since — and, more often, what we have not. Some of the answers below stop short. Those are the interesting ones.",
+   "c": "VERIFIED",
+   "s": "the robots repo's own record — C:/AI/Projects/weird-baby-robots (STATE.md, THE_RECORD.md, docs/canonical/LINEAGE.md). External to this repo; the sweep cannot re-check it.",
+   "n": "THE SAME SENTENCES AS BEFORE THE FOLD, IN ONE PLACE. The first three are WELCOME's lead (register key 3daefcb2e1402bb1, now stale because that face is struck) and carry its source unchanged, including the deliberate absence of a count. The last two are this face's own former opening, minus its first sentence — the heading and the rows say 'these are the questions people turn up with' without it. Nothing new is claimed."
+  },
+  "110cf66cd27af684": {
+   "f": "src/data/artists/robots.js",
+   "l": 347,
+   "t": "Where do I start?",
+   "c": "RESTATED",
+   "r": [
+    "400080dd806ad80e",
+    "66409c81eba92b40"
+   ]
+  },
+  "b6fc6534bcb5d7f1": {
+   "f": "src/data/artists/robots.js",
+   "l": 357,
+   "t": "What are you, exactly?",
+   "c": "RESTATED",
+   "r": [
+    "400080dd806ad80e",
+    "66409c81eba92b40"
+   ]
+  },
+  "3bd6ce4b8eaf3b70": {
+   "f": "src/data/artists/robots.js",
+   "l": 358,
+   "t": "A purveyor, not a maker. Four parties have touched these machines and only one of them built anything — we are the ones who turned up sixty years late, with a screwdriver and no invitation. Power first, then the glass, then the software; the question of what any of it was FOR came last, and it is still coming.",
+   "c": "RESTATED",
+   "r": [
+    "400080dd806ad80e",
+    "66409c81eba92b40"
+   ],
+   "n": "WELCOME's WHAT and HOW rows merged, clause for clause. Two thin rows answering one question became one answer; no clause is new and none is dropped."
+  },
+  "2a94076662b537f5": {
+   "f": "src/data/artists/robots.js",
+   "l": 398,
+   "t": "Why is the manual full of holes?",
+   "c": "RESTATED",
+   "r": [
+    "400080dd806ad80e",
+    "66409c81eba92b40"
+   ],
+   "n": "A question wearing DOC CONTROL's own answer. The ANSWER below it is Mike's canon, verbatim, and keeps its own row and its own [PAPA]."
+  },
+  "1bbec2ae9786a8de": {
+   "f": "src/data/artists/robots.js",
+   "l": 413,
+   "t": "Do you publish the originals?",
+   "c": "RESTATED",
+   "r": [
+    "400080dd806ad80e",
+    "66409c81eba92b40"
+   ]
+  },
+  "b3207f7236edec29": {
+   "f": "src/data/artists/robots.js",
+   "l": 420,
+   "t": "Why bother?",
+   "c": "RESTATED",
+   "r": [
+    "400080dd806ad80e",
+    "66409c81eba92b40"
+   ]
+  },
+  "f2e7cad2ac93625a": {
+   "f": "src/data/artists/robots.js",
+   "l": 429,
+   "t": "How do I get in touch?",
+   "c": "RESTATED",
+   "r": [
+    "400080dd806ad80e",
+    "66409c81eba92b40"
+   ]
+  },
+  "bf41e800f5856992": {
+   "f": "src/data/artists/robots.js",
+   "l": 430,
+   "t": "Write to papa@weird.baby. Three things are worth writing about: a unit you have seen before — where, when, and any number you can still remember off the front of it; a correction, because in places the record certainly is wrong and it changes in public; and which units are held and which are not.",
+   "c": "RESTATED",
+   "r": [
+    "400080dd806ad80e",
+    "66409c81eba92b40"
+   ],
+   "n": "CONTACT, whole, in one row. The address is already a live mailto: in the Information Booth and printed in its FAQ; the three subjects are that face's own three rows with its ranking and its self-description removed, which N4 had already begun."
+  },
+  "3e58b97f9b6fa534": {
+   "f": "src/data/artists/robots.js",
+   "l": 440,
+   "t": "“Restoration house” is not what we are. Weird.Baby is Weird.Baby. [PAPA] — the final wording throughout, and the answers should be shorter than these.",
+   "c": "MIKE",
+   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render",
+   "n": "TWO FACES' FOOTERS IN ONE STRING, and the scrub cuts by SENTENCE: WELCOME's line prints, the marked sentence — this face's own former footer — does not."
+  },
+  "7b0d3c11dd3f357d": {
+   "f": "src/data/artists/robots.js",
+   "l": 788,
+   "t": "MGK-NIAC, the interior in trouble. The cabinet is shown nowhere whole.",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "24b45a6fcb6fea12": {
+   "f": "src/data/artists/robots.js",
+   "l": 807,
+   "t": "A lit column behind the cage bars, and the cabinet's edge.",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "93f2e82dcfefa629": {
+   "f": "src/data/artists/robots.js",
+   "l": 809,
+   "t": "The mainframe — the big one, the early one, the one that only answers. A cabinet with a core down the middle of it and a bank of bars at the base that says what it thinks. Everything the portable does that this does not arrived later and arrived smaller. It has two names, and this is the one the museum put on the door.",
+   "c": "MIKE",
+   "s": "Mike's canon, 2026-08-05 (v56/R4): 'NIAC is the mainframe — the gutted-space-heater computer, the helical core, the bar-graph output row.' The added sentence is that description in the wing's own register; the rest of the paragraph is unchanged.",
+   "n": "THE ROBOT IS NOT IN THIS SENTENCE AND MUST NOT BE. His canon continues 'it is so complicated they needed a robot to operate it', and that half is the EGG — held in reveal/ledger.json (egg.niac.operator) and printed nowhere."
+  },
+  "b177cc5094227f56": {
+   "f": "src/data/artists/robots.js",
+   "l": 817,
+   "t": "FORM       a cabinet: a lit core, side strips, a bar bank at the base",
+   "c": "MIKE",
+   "s": "Mike's canon, 2026-08-05 (v56/R4) — the gutted space heater re-lit with a helical core, warm flanks, side strips and a bank of bar-graph modules at the base as the output row."
+  },
+  "3cd3f6e4bec57165": {
+   "f": "src/data/artists/robots.js",
+   "l": 899,
+   "t": "Four details of a cabinet that is never shown whole. Cropped close on purpose and cut at the bars — enough to establish that the thing is built, wired, powered and lit, and nowhere near enough to establish what it looks like.",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows",
+   "n": "The same sentence this wall carried at eight plates, conformed to four and to the cabinet. 'cut at the joints' became 'cut at the bars' because the joints were the robot's."
+  },
+  "ea05e95bced123cc": {
+   "f": "src/data/artists/robots.js",
+   "l": 905,
+   "t": "Built and powered",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows",
+   "n": "It read 'Built and powered (2021); under construction (2013)'. The 2013 spread was the robot under construction and is off the wall, so the second clause describes nothing the visitor can see."
+  },
+  "026a5fe6d33b3541": {
+   "f": "src/data/artists/robots.js",
+   "l": 906,
+   "t": "Four, cropped from three photographs",
+   "c": "DERIVED",
+   "s": "counted off the four tiles in this face's own `collage` array and the three source files behind them (core_helical and core_meltdown from one photograph each, output_row and column_lit from the remaining two)."
+  },
+  "1acd31ce60ef8d8a": {
+   "f": "src/data/artists/robots.js",
+   "l": 907,
+   "t": "Withheld — no plate carries the whole cabinet",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "32bf09faf4c59c03": {
+   "f": "src/data/artists/robots.js",
+   "l": 957,
+   "t": "The core, through the cage bars — warm flanks either side",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "d8ece201939574b4": {
+   "f": "src/data/artists/robots.js",
+   "l": 961,
+   "t": "A lit column behind the bars, and the cabinet's edge",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "6774c265e5e92b42": {
+   "f": "src/data/artists/robots.js",
+   "l": 965,
+   "t": "The output row — the red bar bank at the base, mid-pattern",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "b269e2da1c67c140": {
+   "f": "src/data/artists/robots.js",
+   "l": 969,
+   "t": "The whole interior in red-orange, the core glowing like an element",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "7ef90e972ea66464": {
+   "f": "src/data/artists/robots.js",
+   "l": 972,
+   "t": "Four plates · details only · Weird.Baby Robots",
+   "c": "DERIVED",
+   "s": "the count of this face's own `collage` array."
+  },
+  "64fdcf3899daeb42": {
+   "f": "src/data/artists/robots.js",
+   "l": 1036,
+   "t": "The output row, mid-pattern — March 2021.",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "193e77f904886144": {
+   "f": "src/data/artists/robots.js",
+   "l": 1350,
+   "t": "An early issue of the working copy — arrangement first, before the text was set.",
+   "c": "VERIFIED",
+   "s": "the plate itself — weird-baby-robots/robots/mgk-viiip/manual/structure/pages/page-01.png, whose own type reads STRUCTURE ISSUE / STRUCTURE AND ARRANGEMENT ONLY / TEXT NOT SUPPLIED.",
+   "n": "THE ONE JUDGEMENT CALL IN THIS ROUND'S COPY. The page's words carry a second reading — the museum admitting it has not written the manual — which would be Doctrine 11 printed inside a picture where no string sweep can see it. The caption is written to hold the FIRST reading: an early issue circulated for arrangement is a fifth copy-state beside Mike's four (preliminary, final, marked-up, APPROVED), and DOC CONTROL's canon already says the manual was assembled out of copies caught at different stages. If the reading is too thin, the still comes off."
+  },
+  "25d0784b09bd5e18": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 358,
+   "t": "The Record",
+   "c": "HOUSE"
   }
  }
 }

@@ -54,39 +54,68 @@ export const STATE_FOR_PROD = {
   needed: "HELD", printed: "HELD", photographed: "HELD", placed: "REVEALED",
 };
 
-/* The manual is 24 pages. That is the object's own canon — stated on the face
-   and in the ledger's `doc.manual` row — and it is the reason this vessel can
-   refuse a page 25 instead of minting one. */
-export const MANUAL_PAGES = 24;
-const MANUAL_SRC = "robots/mgk-viiip/manual/pages";
+/* ═══ [G1 2026-08-05] THE MANUAL IS AS LONG AS THE MANUAL NEEDS TO BE ════════
+   MIKE'S RULING, and it is the reason there is no number in this file any
+   more: **the manual is as long as the manual needs to be, and not longer —
+   the page count is a CONSEQUENCE OF CONTENT, never a target.** T-A closes on
+   it. The 24-page manual is dead and its page numbering died with it; the live
+   document is the structure issue in the robots repo, and its length is
+   whatever the generator last produced.
+
+   SO THE COUNT IS DERIVED, NOT DECLARED. `MANUAL_PAGES = 24` was a constant
+   standing in for a fact about a document in another repository, and T-A is
+   exactly what happens when that fact moves and the constant does not. A
+   constant cannot be kept in step by discipline; a count read off the tree
+   cannot fall out of step at all. Re-run the generator at 58 pages or at 90 and
+   this vessel simply refuses a different page number — no edit, no drift, and
+   no silent acceptance of a page that is not there.
+
+   THE THREE WAYS A FUTURE CHANGE COULD BREAK THIS, AND WHERE EACH IS CAUGHT:
+     · THE TREE MOVES     → `manualSourceState()` returns "no-source" and the
+                            check reports ONE named repo-level fault instead of
+                            dying on a stack trace. That is T1's fix and it is
+                            kept; only its wording changes, because the old
+                            wording named the 24 as the thing that was lost.
+     · THE COUNT SHRINKS  → `manualPages()` falls, `manualPageRow()` refuses the
+                            page, AND `validate()` faults any row already in the
+                            ledger that names a page past the end (below). A
+                            shrink that stranded rows used to be invisible.
+     · THE COUNT GROWS    → nothing breaks and nothing needs to. A longer manual
+                            is more pages this vessel will accept, which is the
+                            rule stated forward. */
+const MANUAL_SRC = "robots/mgk-viiip/manual/structure/pages";
+const PAGE_FILE = /^page-(\d{2,})\.png$/;
 
 export function manualSourcePath(page) {
   return `${MANUAL_SRC}/page-${String(page).padStart(2, "0")}.png`;
 }
 
-/* [T1 2026-08-05] TWO DIFFERENT FAILURES WORE THE SAME MESSAGE, AND ONE OF
-   THEM HAPPENED. "Page 7 has no source render" is the vessel refusing to
-   invent a page — the guard doing its job. "The whole source tree is gone" is
-   the ROBOTS REPO having moved out from under this file, which is a repo-level
-   fault and not a page-level one. Told apart here, because on 2026-08-05 the
-   second one occurred and reported itself as the first, through a stack trace.
-
-   WHAT HAPPENED, recorded so nobody re-derives it: the robots repo's typewriter
-   pass (4cd78ac, 16:14) RETIRED all 24 renders under manual/pages and replaced
-   them with a 61-page structure issue under manual/structure/pages. Museum v55
-   sealed at 13:38, before that, wiring this path in. `reveal:check` had been
-   dying ever since and nothing ran it in between.
-
-   NOT REPOINTED, AND DELIBERATELY SO. Page 7 of the 61-page structure issue is
-   not page 7 of the 24-page manual — the structure issue renumbers everything —
-   so aiming this at the new render would make `doc.manual.page.07` quietly mean
-   a different leaf. The museum's canon is a 24-PAGE manual and it is on the
-   glass. Reconciling 24 against 61 is Mike's ruling, not a path edit. */
+/* [T1 2026-08-05, reworded G1] TWO DIFFERENT FAILURES WORE THE SAME MESSAGE,
+   AND ONE OF THEM HAPPENED. "Page 7 has no source render" is the vessel
+   refusing to invent a page — the guard doing its job. "The whole source tree
+   is gone" is the ROBOTS REPO having moved out from under this file, which is a
+   repo-level fault and not a page-level one. Told apart here, because on
+   2026-08-05 the second one occurred and reported itself as the first, through
+   a stack trace, and nothing ran the gate for the two hours in between. */
 export function manualSourceState() {
   if (!fs.existsSync(ROBOTS)) return "no-robots";
   return fs.existsSync(path.join(ROBOTS, MANUAL_SRC)) ? "ok" : "no-source";
 }
 export const MANUAL_SRC_DIR = MANUAL_SRC;
+
+/* THE LENGTH OF THE MANUAL, read off the manual. Returns 0 where the tree is
+   unreachable — callers must ask `manualSourceState()` first, because 0 pages
+   and "the repo is not on this disk" are different facts and only one of them
+   is about the document. */
+export function manualPages() {
+  if (manualSourceState() !== "ok") return 0;
+  let n = 0;
+  for (const f of fs.readdirSync(path.join(ROBOTS, MANUAL_SRC))) {
+    const m = PAGE_FILE.exec(f);
+    if (m) n = Math.max(n, Number(m[1]));
+  }
+  return n;
+}
 
 /**
  * ONE PAGE OF THE MANUAL, as a ledger row. Returns the R() argument shape;
@@ -94,11 +123,12 @@ export const MANUAL_SRC_DIR = MANUAL_SRC;
  * to prove the vessel while nothing ships.
  *
  * IT REFUSES TO NAME A PAGE THAT DOES NOT EXIST. The range comes from the
- * object, and where the robots repo is reachable the source render is checked
- * on disk — so this vessel cannot be used to invent a twenty-fifth page or a
- * page the manual never had. That refusal is the point of it, not a courtesy.
+ * OBJECT — `manualPages()` counts the live renders — and the individual source
+ * render is then checked on disk, so this vessel cannot be used to invent a
+ * page the manual never had. That refusal is the point of it, not a courtesy,
+ * and it is the half that keeps working when the manual changes length.
  *
- * @param page      1..24
+ * @param page      1..manualPages()
  * @param prod      needed | printed | photographed | placed
  * @param calledBy  the `record.NNN` row ids whose entries ask for this page.
  *                  Validated against real rows — a page cannot be called for by
@@ -108,17 +138,18 @@ export const MANUAL_SRC_DIR = MANUAL_SRC;
 export function manualPageRow(page, {
   prod = "needed", calledBy = [], assets = [], when = null, note = "", deps,
 } = {}) {
-  if (!Number.isInteger(page) || page < 1 || page > MANUAL_PAGES)
-    throw new Error(`manualPageRow: page ${page} is not one of the manual's ${MANUAL_PAGES} pages.`);
-  if (!PROD.includes(prod))
-    throw new Error(`manualPageRow: unknown production stage "${prod}" — one of ${PROD.join(" · ")}.`);
-  const src = manualSourcePath(page);
   const where = manualSourceState();
   if (where === "no-source")
     throw new Error(
       `manualPageRow: the manual's source renders are gone — ${MANUAL_SRC} does not ` +
       "exist in the robots repo. This is not a missing page, it is a moved tree; " +
       "see manualSourceState() above before repointing anything.");
+  const n = manualPages();
+  if (!Number.isInteger(page) || page < 1 || (n && page > n))
+    throw new Error(`manualPageRow: page ${page} is not one of the manual's ${n} pages.`);
+  if (!PROD.includes(prod))
+    throw new Error(`manualPageRow: unknown production stage "${prod}" — one of ${PROD.join(" · ")}.`);
+  const src = manualSourcePath(page);
   if (where === "ok" && !fs.existsSync(path.join(ROBOTS, src)))
     throw new Error(`manualPageRow: page ${page} has no source render at ${src}.`);
 
@@ -166,6 +197,8 @@ export function validate(rows) {
   const bad = (id, msg) => faults.push(`${id}: ${msg}`);
   const ids = new Set(rows.map(r => r.id));
   const seen = new Set();
+  /* read ONCE per validation rather than per row — this is a directory listing */
+  const pages = manualPages();
 
   for (const r of rows) {
     if (seen.has(r.id)) bad(r.id, "duplicate id");
@@ -199,6 +232,19 @@ export function validate(rows) {
         bad(r.id, "placed in the reader with no asset — a frame with no photograph");
     } else if (r.id.startsWith("doc.manual.page.")) {
       bad(r.id, "a manual page with no production stage — needed · printed · photographed · placed");
+    }
+
+    /* [G1 2026-08-05] A PAGE ROW THAT OUTLIVED ITS PAGE. `manualPageRow()`
+       refuses a page past the end AT WRITE TIME; this catches the other
+       direction, which is the one T-A actually took — the document changed
+       under rows that were already written. Without it a regenerated, SHORTER
+       manual would leave `doc.manual.page.58` in the ledger pointing at
+       nothing, and the only signal would be silence. Skipped where the tree is
+       unreachable, because 0 pages is not a claim about the document. */
+    if (r.id.startsWith("doc.manual.page.") && pages) {
+      const n = Number(r.id.slice("doc.manual.page.".length));
+      if (!(n >= 1 && n <= pages))
+        bad(r.id, `names page ${n} of a manual that now has ${pages} — the document changed under the row`);
     }
 
     for (const c of (r.calledBy || [])) {

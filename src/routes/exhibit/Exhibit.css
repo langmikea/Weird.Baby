@@ -1484,6 +1484,16 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
   color:#5f5b51;   /* UNLIT: legible, and plainly not running */
   transition:color .3s,text-shadow .3s}
 /* THE DRUM IS ILLUMINATED ONLY WHEN ARMED (Mike). */
+/* [R6 2026-08-05] THE CHANNEL NUMBER. Set on the drum face beside the feed's
+   name, smaller and quieter, with a hairline gutter after it — the numbering on
+   a selector drum is stamped, not printed at the size of the legend. It is
+   `position:static` inside a flex row, so it takes part in the same centring
+   the label already gets and a two-digit channel cannot push the name off the
+   slot. It inherits colour, so the armed state lights the number with its
+   legend rather than leaving a dark digit beside a lit word. */
+.ip-drum-ch{font-size:.78em;letter-spacing:.1em;opacity:.72;
+  margin-right:.6em;padding-right:.55em;border-right:1px solid currentColor;
+  line-height:1}
 .ip-armed .ip-drum{background:#17140c;border-color:#6a5c3a}
 .ip-armed .ip-drum-face{color:#f2c879;text-shadow:0 0 9px rgba(242,200,121,.55)}
 /* the slot's own glass: a single raking highlight, no gloss */

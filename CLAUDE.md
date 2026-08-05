@@ -432,6 +432,75 @@ catches invented CONTENT, Doctrine 11 catches a line whose SUBJECT is the work.
 
 Maintained here. Newest first.
 
+### 2026-08-05 → THE ROBOTS SIMPLIFICATION (v56; G1, R1–R7) — sealed
+- **CROSS-REPO, AND IT DELETED MORE THAN IT BUILT:** three front-desk faces, six
+  robot plates, a whole spread, two typographic cards (~90 lines of generator)
+  and a shot from each of two video cuts. Added: four instruments, four cabinet
+  plates, **two eggs nobody can see.** Gates: lint **11/9 = baseline** · build
+  green · provenance **PASS** · `reveal:check` **PASS — it was RED when the
+  round opened** · `parity:gate` **PASS** (new) · lap at desktop and 390px.
+  Ledger **152 → 156**. Full narrative:
+  `docs/MUSEUM_ROBOTS_SIMPLIFICATION_LOG-20260805.md`.
+- **G1 — `MANUAL_PAGES = 24` IS GONE, NOT MOVED, and that is Mike's standing
+  rule: THE MANUAL IS AS LONG AS THE MANUAL NEEDS TO BE, AND NOT LONGER — page
+  count is a consequence of content, never a target.** The count is READ OFF THE
+  SOURCE TREE (`manualPages()`, pointed at `manual/structure/pages`), because
+  a constant here standing in for a fact about a document in the robots repo is
+  exactly what T-A was. **A shrinking manual now faults rows already written past
+  the end** — that direction was invisible. It exposed manual pages falling
+  through the transfer table (PACKAGE **in prose** since T1, enforced by
+  nothing): **one pattern rule in `transfers.mjs`, and only one**, with a fault
+  if a pattern ever overrules a hand-placed row. Closes T-A; leaves **M45**.
+- **R1 — THE RECORD IS ON THE ROBOTS FRONT DESK**, not the MGK-VIIIp album
+  (Mike: *it applies to ALL things robots*). `face.viiip.record` →
+  `face.wbr.record` is **the only ledger id ever renamed.** **`Exhibit.jsx`
+  TAKES AN `open` PROP (a track id) and `/robots/record` IS A ROUTE** —
+  nothing here could be deep-linked to a track before. The lobby board carries
+  **The Record indented under Weird.Baby Robots**, reusing F7's indent rule.
+- **R3 — THE FRONT DESK IS ONE FACE: FAQ, plus the Record.** WELCOME, DOC
+  CONTROL and CONTACT struck; eleven questions where there were four rooms. What
+  was folded and what was deleted are both named in `robots.js`. **M29 closes by
+  INHERITANCE** — the FAQ is the wing's landing now and took Welcome's family
+  shot with Welcome's job; no object was invented. C31 closes by deletion.
+- **R4 — NIAC IS THE MAINFRAME** (the gutted space heater, helical core,
+  bar-graph output row). The album had been naming the mainframe in every
+  sentence and photographing the **ROBOT** in every frame — six of eight plates
+  plus the cover badge; **V2's obfuscation ruling was working perfectly on the
+  wrong object.** Cover, poster, two stills and the wall are all the cabinet now;
+  three plates came in from the robots repo's culled 2021 set. **Seven
+  photographs left the glass and none was deleted** (M9). *"So complicated they
+  needed a robot to operate it"* is **printed nowhere** — `egg.niac.operator`,
+  LIVE · HELD · not shown. Closes M30; worsens C29 (**the only stowed shelf is
+  now exercised by nothing**). **Robots repo: THE REEL IS OUT OF THE DESIGN
+  ENTIRELY** — `LINEAGE.md` had kept the *idiom is canon* half and it is
+  struck; conformed **generator first**, so a shot id nothing maps to fails loudly.
+- **R5 — NIAC IS FOUND FROM DAY ONE, the mother lode of detail is VIIIp, NIAC is
+  the next chapter, and someday it runs on the Portal.** Recorded as
+  `NIAC_STORY_POSITION` + `ASSET_TIMELINE.md` §5.3. **The table already
+  agreed:** every `face.niac.*` row is BLAST, forced by rule (b) rather than
+  chosen. *Progress across the arc* is `when`, still null on all 156 rows.
+- **R6 — THE CHANNEL EGG.** Drum engraved 1…8: **NIAC on 1 and 2, STANDARD on
+  3.** The reason is written **ONCE**, in `egg.channels`, and nowhere else in
+  either repo — no page explains it. NIAC's positions carry the machine's name
+  and **no invented feed title.** M33's five levers untouched. **The lap caught
+  what the data could not:** `useState(0)` opened the Portal NOT ARMED with the
+  latch two rolls away; the drum now opens on the first position that arms.
+- **R2 — `npm run parity` / `parity:gate`** reads both albums out of the AST:
+  **2 shared · 4 declared divergences · 0 undeclared.** Both directions fault,
+  including **a justification for a divergence that no longer exists.** **NOT a
+  packet gate**, on `assets:gate`'s reasoning. Findings: **M47.**
+- **R7 — `npm run surfacing`** re-cuts the ledger and asset table **BY WING**,
+  which is the only cut a person can act on. **13 spendable · 13 promised · 14
+  idle**, ten of the spendable in one wing. Cadence: **one surfacing per packet;
+  the shelf must not grow two packets running.** `--log` appends to
+  `docs/SURFACING_LOG.md` so the number is a trend. **It refuses to count
+  SHORTS and refuses to print a zero for them** — **M46.**
+- **TWO HAZARDS RE-CONFIRMED THE HARD WAY.** `--prune` broke **44 RESTATED
+  chains** (v52's rename-plus-prune hazard); all four dead anchors had successors
+  and every reference was repointed. And **`git checkout --` to undo a
+  deliberate test break reverted the round's own uncommitted work: breakage tests
+  sandbox by FILE COPY, never by git.**
+
 ### 2026-08-05 → THE ASSET TIMELINE (T1) — sealed
 - **A drafting-lane round that created NOTHING.** No asset, no row, no content,
   no date, and nothing in `src/` — the museum's glass did not move, so there was
@@ -507,85 +576,14 @@ Maintained here. Newest first.
 - Document Mike reads: `docs/ASSET_TIMELINE.md`. **Six questions in
   `docs/OPEN_ACTIONS.md` T-A…T-F, none blocking.**
 
-### 2026-08-05 → RECORD MACHINERY (v55; R1–R6) — sealed
-- **A drafting-lane round that touched NOTHING in `src/`.** No component, no
-  stylesheet, no string, no route, no asset. Mike is about to produce the
-  Record's first two weeks in voice sessions; this built the vessels that catch
-  what he says and **invented no contents** (Doctrine 12). No browser lap, and
-  correctly none — nothing on the glass moved.
-- **R1 THE LEDGER IS CUT ONE ROW PER RECORD ENTRY, AND THE ROWS ARE DERIVED.**
-  `reveal/record-entries.mjs` parses the Record out of `robots.js` with acorn +
-  acorn-jsx (that file imports JSX, so node can never import it) and is **split
-  in two on purpose**: `entries()` returns entry numbers and asset paths **and
-  nothing else** and is the only half the ledger builds from, so a headline has
-  no route in; `prose()` **builds nothing** and exists only so the check can
-  police the rule. Sixty entries will make sixty rows with no edit. Today it is
-  `record.013`, **and the cut paid at once: its plate joined the asset table by
-  itself** (11 → 12) **and M18's twenty-seven questions moved off the volume
-  onto the entry that has them**, while M19 stayed on `doc.record` — now **the
-  volume only**. **An unnumbered entry FAILS THE BUILD** rather than being handed
-  an id: minting one is Ops answering M19 with a guess.
-- **The audit's constraint — the ledger must never become a second copy of the
-  Record — is enforced three ways and ALL THREE WERE BROKEN ON PURPOSE.** The
-  generator cannot see the words · `reveal/schema.mjs` refuses the Record's
-  FIELD names · `reveal:check` refuses its SENTENCES (**six consecutive words**
-  of Record prose, or any whole Record line of **four words or more** — six
-  because a restated clause is longer than five words, and below six ordinary
-  English collides). Proved by injecting a lifted clause, a four-word line, a
-  `sections` field and a phantom `record.014`: all four reported, exit 1. **A
-  fourth check makes rows and entries the same set both ways**, which is what
-  finally makes *never hand-edit `ledger.json`* enforced rather than requested.
-- **`reveal/schema.mjs` now holds THE ONE VALIDATOR** — before this the
-  declaration checked five rules as it wrote and `reveal:check` checked four
-  after, and **neither list was a superset of the other**.
-- **R2 THE CUE CARDS ARE BUILT** (audit §8b). `npm run reveal:cards` — an **Ops
-  instrument, never a route**, same shape as `assets:checklist`. **The deck is
-  49 and the first implementation had it at 143, which was wrong:** 93 undated
-  rows are already REVEALED, and asking what day a thing came out when nobody
-  wrote the day down invites an invention. `--spendable` is the twelve that can
-  be released without building anything.
-- **R3 THE MANUAL IS A SUPPLY LINE**, on Mike's ruling that it **arrived in
-  pieces** — only the pages the story reaches for, as Record entries call for
-  them. `manualPageRow()` builds `doc.manual.page.NN` with its own **production
-  arc (needed · printed · photographed · placed)** and a `calledBy` naming real
-  entry rows. **`prod` is NOT `arc`** — `arc` is how the house REVEALS a thing
-  it has, `prod` is whether it HAS it — and **`build` is DERIVED from `prod`**,
-  so a page cannot claim a state the world is not in. It **refuses a page the
-  manual does not have** (range 1–24, source render checked on disk). **Nothing
-  populated (M44)**, and the vessel is proved by `reveal:check` building
-  specimens at all four stages and asserting every refusal — **no page invented
-  to test the container.**
-- **THE SELF-TEST COULD NOT FAIL, and only breaking it on purpose found that.**
-  Its first version compared the vessel's output against `BUILD_FOR_PROD` — the
-  table the vessel derives FROM — so corrupting the mapping corrupted the
-  expectation with it, and a deliberate `photographed → LIVE` break reported
-  PASS. Expectations are literals now and the stage names are asserted too. **A
-  self-test that reads its answer out of the thing under test is not a test.**
-- **R4** the robots repo's `ASSET_REVEAL_CHECKLIST.md` — still recording the
-  Record as **436 entries with 10 surfaced** (both invented, deleted at v47) and
-  still naming "The Firmware" — carries a superseded banner naming **what it is
-  kept for: it is where the four reveal classes were named.** **Body deliberately
-  not rewritten** — a first pass edited to agree with what came after it stops
-  being a record of what was thought at the time.
-- **R5** the fifth class is put as **ONE QUESTION** (M35), and building the cards
-  found **a second case that is not an artifact**: `route.hr` is HELD
-  PERMANENTLY by Mike's own ruling and its card asks what day it comes out.
-  `when: null` carries two meanings it cannot tell apart. Ops adopted nothing.
-- **R6** M32 + M35 rewritten; M44 · C38 · C39 added; §5 renumbered 5a–5e; **five
-  dead register anchors fixed.** Two gaps reported and NOT reconstructed: v54
-  sealed with no closed-this-round section, and **STATE.md's SEALED narrative
-  sections stop at v50** (its standing-law sections are current to v54).
-- Gates: lint **11/9 = baseline**; build green **72 modules**; provenance **PASS**
-  with zero register movement; `reveal:check` **PASS** on four new checks.
-  Ledger **151 → 152**; diff-verified that exactly one row was added, two were
-  deliberately changed, and **all five `channel.*` rows `/foundation` reads are
-  untouched.**
-- Round log: `docs/MUSEUM_RECORD_MACHINERY_LOG-20260805.md`. **Two questions for
-  Mike, neither blocking.**
-
 ### Older entries (2026-05-06 → 2026-08-05) — archived
 Moved to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md`, verbatim, under this file's
-own ≈600-line rule. **2026-08-05 (T1):** v54 THE FOUNDATION COPY, moved whole to
+own ≈600-line rule. **2026-08-05 (v56):** v55 RECORD MACHINERY, moved whole —
+the file was at 621 lines, so one entry left as one arrived. What is still
+load-bearing in it is NOT in the archive: the ledger's one-validator doctrine,
+the manual-page vessel and the Record's derived rows are `OPERATIONS.md` §5 and
+`reveal/README.md`, and its open questions are `docs/OPEN_ACTIONS.md` M32, M35
+and M44. **2026-08-05 (T1):** v54 THE FOUNDATION COPY, moved whole to
 make room for this round — the file was at exactly 600 lines. What was live in it
 is not in the archive: its open questions are `docs/OPEN_ACTIONS.md` M38–M43 and
 its money rule is `/foundation`'s own copy. **2026-08-05 (v55):** v53 THE BOOTH EDIT + THE MISSING LAP,

@@ -9,6 +9,11 @@ import { robotsExhibit } from "../../data/artists/robots.js";
    (kill order executed — not preserved anywhere). Robots-specific surface
    (the twin artifact, the findings log) rides the exhibitFlow seam. */
 
-export default function Robots() {
-  return <Exhibit artist={robotsExhibit} />;
+/* [R1 2026-08-05] `open` IS PASSED STRAIGHT THROUGH AND THIS FILE DECIDES
+   NOTHING. `/robots/record` is one route in App.jsx handing a TRACK ID to the
+   shared exhibit; the mechanism lives in Exhibit.jsx and every wing inherits
+   it, which is same-only-different read forward rather than a robots-shaped
+   exception carved here. */
+export default function Robots({ open = null }) {
+  return <Exhibit artist={robotsExhibit} open={open} />;
 }

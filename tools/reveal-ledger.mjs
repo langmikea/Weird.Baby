@@ -15,7 +15,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
-import { validate, manualPageRow, PROD, MANUAL_PAGES, manualSourceState, MANUAL_SRC_DIR } from "../reveal/schema.mjs";
+import { validate, manualPageRow, PROD, manualPages, manualSourceState, MANUAL_SRC_DIR } from "../reveal/schema.mjs";
 import { entries as recordEntries, prose as recordProse } from "../reveal/record-entries.mjs";
 import { transferFaults, ASSIGN, EXEMPT, TRANSFERS, CLASSES } from "../reveal/transfers.mjs";
 
@@ -83,7 +83,7 @@ function report() {
   console.log(`  with dependencies : ${ROWS.filter(r => r.deps.length).length}`);
   console.log(`  joined to an asset: ${ROWS.filter(r => r.assets.length).length}`);
   console.log(`  Record entries    : ${ROWS.filter(r => /^record\.\d+$/.test(r.id)).length}`);
-  console.log(`  manual pages      : ${ROWS.filter(r => r.prod).length} of ${MANUAL_PAGES}`);
+  console.log(`  manual pages      : ${ROWS.filter(r => r.prod).length} of ${manualPages()}`);
   console.log(`\n  BACK SHELF (built, not revealed)   : ${AUDIT.backShelf.length}`);
   console.log(`  PROMISED, NOT BUILT                : ${AUDIT.promised.length}`);
   console.log(`  NOT BUILT, NOT PROMISED            : ${AUDIT.quiet.length}`);
@@ -272,22 +272,35 @@ function vesselFaults() {
   if (manualSourceState() === "no-source") {
     faults.push(
       `vessel: the manual's source renders are GONE — ${MANUAL_SRC_DIR} no longer\n` +
-      "    exists in the robots repo. The typewriter pass (robots 4cd78ac) retired all 24\n" +
-      "    renders and replaced them with a 61-page STRUCTURE ISSUE at\n" +
-      "    robots/mgk-viiip/manual/structure/pages. Museum v55 sealed at 13:38, before\n" +
-      "    that commit at 16:14, and wired the old path in — so this has failed since.\n" +
-      "    NOT AUTO-REPOINTED: page 7 of the 61 is not page 7 of the 24 (the structure\n" +
-      "    issue renumbers everything) and the museum's canon, on the glass, is a\n" +
-      "    24-PAGE manual. Reconciling 24 against 61 is Mike's ruling, not a path edit.\n" +
-      "    See docs/ASSET_TIMELINE.md §6 and docs/OPEN_ACTIONS.md T-A.");
+      "    exists in the robots repo. This is NOT a missing page; it is the document's\n" +
+      "    whole tree having moved out from under this repository, which is what happened\n" +
+      "    once before (robots 4cd78ac retired manual/pages under a path museum v55 had\n" +
+      "    wired in three hours earlier, and the gate died on a stack trace rather than\n" +
+      "    reporting it). Find where the generator now writes its pages and repoint\n" +
+      "    MANUAL_SRC in reveal/schema.mjs. THE PAGE COUNT NEEDS NO EDIT — it is derived\n" +
+      "    from this directory, by Mike's rule that the manual is as long as the manual\n" +
+      "    needs to be.");
     return faults;
   }
+  if (!manualPages())
+    faults.push(
+      `vessel: ${MANUAL_SRC_DIR} exists and holds no page-NN.png at all. The path is\n` +
+      "    right and the document is empty, which no ledger row can be written against.");
 
+  /* [G1 2026-08-05] `fault` IS PART OF THE EXPECTATION NOW, AND THAT IS THE
+     TRANSFER RULE REACHING THE VESSEL RATHER THAN A DEFECT IN IT. A manual page
+     is PACKAGE (transfers.mjs PATTERNS), PACKAGE has no named arrival week until
+     T-B is answered, and check (b) says a row with no named arrival may not be
+     REVEALED. So a PLACED page — one that is a frame in the reader — cannot
+     validate today, and the honest test is to require exactly that one fault
+     rather than to exempt the specimen from the rule. The day Mike names the
+     four Fridays this expectation flips to null and the vessel is unchanged. */
   const EXPECT = {
-    needed: { build: "NOT_BUILT", state: "HELD", reachable: false },
-    printed: { build: "NOT_BUILT", state: "HELD", reachable: false },
-    photographed: { build: "PARTIAL", state: "HELD", reachable: false },
-    placed: { build: "LIVE", state: "REVEALED", reachable: true },
+    needed: { build: "NOT_BUILT", state: "HELD", reachable: false, fault: null },
+    printed: { build: "NOT_BUILT", state: "HELD", reachable: false, fault: null },
+    photographed: { build: "PARTIAL", state: "HELD", reachable: false, fault: null },
+    placed: { build: "LIVE", state: "REVEALED", reachable: true,
+      fault: "has no named arrival week" },
   };
   if (PROD.join(",") !== Object.keys(EXPECT).join(","))
     faults.push(`vessel: the production stages are ${PROD.join(" · ")}, and this test covers ${Object.keys(EXPECT).join(" · ")}.`);
@@ -319,16 +332,28 @@ function vesselFaults() {
     if (Boolean(row.reach) !== want.reachable)
       faults.push(`vessel: "${prod}" reach is ${row.reach} — only a placed page is reachable`);
     const bad = validate([...ROWS, row]).filter(f => f.startsWith(row.id));
-    if (bad.length) faults.push(`vessel: a valid "${prod}" page fails validation — ${bad[0]}`);
+    if (!want.fault && bad.length)
+      faults.push(`vessel: a valid "${prod}" page fails validation — ${bad[0]}`);
+    if (want.fault && !bad.some(f => f.includes(want.fault)))
+      faults.push(
+        `vessel: a "${prod}" page did NOT fault on "${want.fault}".\n` +
+        "    A page in the reader is a photograph of paper somebody is holding, so it is\n" +
+        "    PACKAGE, and no package has a named arrival week until T-B is answered.");
+    if (want.fault && bad.length > 1)
+      faults.push(`vessel: a "${prod}" page faults on more than the arrival week — ${bad.join(" | ")}`);
   }
+  /* the transfer class really is reaching the vessel's rows */
+  if (validate([...ROWS, flat(manualPageRow(7, {}))])
+    .some(f => f.startsWith("doc.manual.page.07") && f.includes("no transfer class")))
+    faults.push("vessel: a manual page fell through the transfer table — the PACKAGE pattern is not matching.");
 
   /* the refusals */
   const refuses = (what, fn) => {
     try { fn(); faults.push(`vessel: it accepted ${what} — that refusal is the point of it.`); }
     catch { /* refused, as it must */ }
   };
-  refuses(`page ${MANUAL_PAGES + 1}, which the manual does not have`,
-    () => manualPageRow(MANUAL_PAGES + 1, {}));
+  refuses(`page ${manualPages() + 1}, which the manual does not have`,
+    () => manualPageRow(manualPages() + 1, {}));
   refuses("page 0", () => manualPageRow(0, {}));
   refuses("an unknown production stage", () => manualPageRow(7, { prod: "scanned" }));
 
@@ -431,6 +456,7 @@ function check() {
   console.log(`  the ${ROWS.filter(r => /^record\.\d+$/.test(r.id)).length} Record row(s) match the Record's own entries exactly`);
   console.log("  no row holds the Record's words — the ledger is not a second copy of it");
   console.log("  the manual-page vessel builds, derives and refuses correctly at all four stages");
+  console.log(`  the manual is ${manualPages()} pages, read off ${MANUAL_SRC_DIR} rather than declared`);
   process.exit(0);
 }
 

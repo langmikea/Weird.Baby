@@ -1057,7 +1057,25 @@ function InstrumentPanel({ decl }) {
   const dialPos = Array.isArray(D.dial && D.dial.positions) ? D.dial.positions : [];
   const swDecl  = Array.isArray(D.switches) ? D.switches : [];
 
-  const [drumIdx, setDrumIdx] = useState(0);
+  /* [R6 2026-08-05] THE DRUM STARTS ON THE FEED THAT ARMS, NOT ON POSITION 0.
+     FOUND BY LOOKING AT THE PAGE, WHICH IS THE ONLY WAY IT COULD HAVE BEEN
+     FOUND. Renumbering put MGK-NIAC's two dead channels at the top of the drum,
+     and `useState(0)` therefore landed every visitor on a position that will not
+     arm: the Portal — the one thing in the wing that is actually running —
+     greeted them with NOT ARMED and "This feed is not available", with the
+     latch two rolls away. The numbering was right and the landing was wrong.
+     THE FIX IS THE PANEL READING ITS OWN DATA rather than a constant. It opens
+     on the first `arms:true` position, so the instrument presents itself in the
+     state it can actually be used in and the channels above it are found by
+     rolling UP — which is how a selector on a real machine behaves and is also
+     what makes the numbering discoverable at all.
+     A DRUM WITH NO ARMING POSITION FALLS BACK TO 0, unchanged: a panel where
+     nothing arms should show its first legend and say why, which is exactly
+     what it did before this line existed. */
+  const [drumIdx, setDrumIdx] = useState(() => {
+    const i = drumPos.findIndex(p => p.arms);
+    return i >= 0 ? i : 0;
+  });
   const [dialIdx, setDialIdx] = useState(0);
   const [swOn, setSwOn] = useState(() => swDecl.map(w => !!w.on));
 
@@ -1146,6 +1164,13 @@ function InstrumentPanel({ decl }) {
                 {drumPos.map((p, i) => (
                   <div key={p.id || i} className="ip-drum-face"
                        style={{ transform: `rotateX(${-i * STEP}deg) translateZ(${RADIUS}px)` }}>
+                    {/* [R6 2026-08-05] THE CHANNEL NUMBER, engraved on the drum
+                        beside the feed's name. Optional: a position with no `ch`
+                        renders exactly the face it rendered before, so no other
+                        wing can notice this exists. It is a number and nothing
+                        else — nothing on this panel, this face or this wing says
+                        what the numbering means. */}
+                    {p.ch != null && <span className="ip-drum-ch">{p.ch}</span>}
                     {p.label}
                   </div>
                 ))}
@@ -1889,7 +1914,32 @@ function ArchiveWall({ face, openLink }) {
   });
 }
 
-export default function Exhibit({ artist }) {
+/* [R1 2026-08-05] `open` — THE ONE WAY INTO A TRACK FROM OUTSIDE THE DECK.
+   The Record now has a line of its own on the lobby directory, indented under
+   Robots, and a directory line has to LAND on the thing it names. Nothing in
+   this component could be addressed from a URL before: `defaultActiveIndex`
+   picks an ALBUM and the tracklist has always started closed.
+
+   IT IS A TRACK ID AND NOT A ROUTE TABLE. `<Robots open="record" />` finds the
+   first album carrying a track by that id and opens on it; an id nothing
+   matches falls back to the album's own default, silently and correctly, so a
+   renamed track degrades to the wing's front page rather than to a blank.
+
+   IT IS NOT A QUERY PARAMETER, and that is deliberate. v51 retired all three of
+   those (`?subtitle=`, `?hook=`, `?book=`) and the rule it left behind is that
+   no query parameter selects a VARIANT anywhere in the building. This selects a
+   destination, not a variant — but it is a path segment regardless, because a
+   door on the lobby board should look like an address. */
+function openedAt(SPINE, open) {
+  if (!open) return null;
+  for (let ai = 0; ai < SPINE.length; ai++) {
+    const ti = (SPINE[ai].tracks || []).findIndex(t => t.id === open);
+    if (ti >= 0) return { ai, ti };
+  }
+  return null;
+}
+
+export default function Exhibit({ artist, open = null }) {
   const SPINE = artist.spine;
   const FACTS = artist.facts;
   const ExhibitFlow = artist.exhibitFlow;
@@ -1899,12 +1949,17 @@ export default function Exhibit({ artist }) {
      which are now real <Link>s inside <MuseumBar/> — which is the point of
      the merge: three rooms navigating three ways became one anchor. */
   const [visible, setVisible]           = useState(false);
-  const defaultActive = artist.defaultActiveIndex;
+  /* [R1 2026-08-05] the landing is the album `open` names, or the artist's own
+     default. Resolved ONCE, as the initial state, rather than in an effect —
+     an effect would render the front page first and then jump. */
+  const landing = openedAt(SPINE, open);
+  const defaultActive = landing ? landing.ai : artist.defaultActiveIndex;
   const [active, setActive]             = useState(defaultActive);
   const [activeDisplay, setActiveDisplay] = useState(defaultActive);
   const debounceRef = useRef(null);
 
-  const [albumActiveTrack, setAlbumActiveTrack] = useState({});
+  const [albumActiveTrack, setAlbumActiveTrack] =
+    useState(landing ? { [landing.ai]: landing.ti } : {});
   const [albumSelectedVis, setAlbumSelectedVis] = useState({});
 
   const [playingAlbum, setPlayingAlbum] = useState(null);

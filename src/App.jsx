@@ -111,6 +111,17 @@ export default function App() {
         <Route path="/money" element={<Navigate to="/foundation" replace />} />
         <Route path="/shop" element={<GiftShop />} />
         <Route path="/robots" element={<Robots />} />
+        {/* [R1 2026-08-05] THE RECORD GETS AN ADDRESS, because it got a line on
+            the lobby directory. MIKE: the Record applies to ALL things robots,
+            not just the VIIIp — so it moved off the MGK-VIIIp album onto the
+            wing's own front desk, and a directory entry indented under
+            Weird.Baby Robots points here.
+            IT IS THE SAME COMPONENT AND THE SAME WING. `open` names a TRACK
+            (Exhibit.jsx), so this is the robots exhibit landing with the Record
+            selected rather than a second page holding a copy of it. A directory
+            line that dropped a visitor on /robots and left them to find the
+            Record would be a control that does not do what its label says. */}
+        <Route path="/robots/record" element={<Robots open="record" />} />
         <Route path="/wal" element={<Wal />} />
         <Route path="/p/:id" element={<PresetLanding />} />
         {/* ==== [E2 2026-08-03] THE CATCH-ALL. MIKE'S RULING ================

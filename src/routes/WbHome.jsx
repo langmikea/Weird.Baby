@@ -339,6 +339,24 @@ export default function WbHome() {
             <button className="wb-dir-entry" onClick={() => navigate("/robots")}>
               <span>Weird.Baby Robots</span><span className="wb-dir-arrow">→</span>
             </button>
+            {/* [R1 2026-08-05] THE RECORD, INDENTED UNDER ROBOTS. MIKE: it
+                applies to ALL things robots, not just the VIIIp — so it moved
+                off the MGK-VIIIp album onto the wing's own front desk, and it
+                gets DIRECTORY-LEVEL BILLING here.
+                IT REUSES `wb-dir-entry-sub` AND THE REUSE IS THE POINT. F7 built
+                that indent for "Other Music Worth a Listen" to say *and also
+                these*; the same 14px of slack says *and inside that* here, which
+                is the relationship a stranger otherwise has to infer. One rule,
+                two jobs, and the column of arrows down the right edge stays
+                unbroken because only the label moves.
+                IT IS THE ONLY LINE ON THIS BOARD THAT IS NOT A ROOM, and that is
+                deliberate rather than an exception: the Record is the one thing
+                in the wing that keeps happening, and a board that lists rooms
+                only would never say so. It lands ON the Record (App.jsx), not on
+                the wing's front page. */}
+            <button className="wb-dir-entry wb-dir-entry-sub" onClick={() => navigate("/robots/record")}>
+              <span>The Record</span><span className="wb-dir-arrow">&rarr;</span>
+            </button>
             <button className="wb-dir-entry" onClick={() => navigate("/wb")}>
               <span>Weird.Baby Music</span><span className="wb-dir-arrow">→</span>
             </button>

@@ -90,14 +90,39 @@ const A = [
   ["/robots/reference/photos/unit_new_base.png", "VERIFIED", PHOTO, true,
     "Faceplate MGK-VIIIp · The Informer · ABEAL."],
   ["/robots/reference/photos/rear_power_switch.png", "VERIFIED", PHOTO, false, ""],
-  ["/robots/manual/working-copy-p1.png", "VERIFIED",
-    "the unit's own operating manual, per B8: the printed working copy is the source; the plate is a photograph of it",
+  /* [R4 2026-08-05] THE THREE MAINFRAME PLATES, carried across from the robots
+     repo's own culled 2021 set (`robots/mgk-viii/plates/2021-03-19/`, Mike's
+     cull of 2026-08-03) so the MGK-NIAC album can show the machine it is named
+     for instead of the robot that operates it. Same provenance as every other
+     plate on that album — the house's own camera, the house's own bench — and
+     the crops are the robots repo's, taken under its OBFUSCATION_LAW: cut at
+     the cage bars on four sides, no full silhouette, the room cropped out. */
+  ["/robots/reference/mgk-viii/core_helical.jpg", "VERIFIED", PHOTO, false, ""],
+  ["/robots/reference/mgk-viii/output_row.jpg", "VERIFIED", PHOTO, false, ""],
+  ["/robots/reference/mgk-viii/core_meltdown.jpg", "VERIFIED", PHOTO, false, ""],
+  /* [G1 2026-08-05] REPLACES `working-copy-p1.png`, WHICH WAS A PAGE OF A
+     DOCUMENT THAT NO LONGER EXISTS. The museum's copy came from
+     `robots/mgk-viiip/manual/pages/page-01.png`; the robots repo's typewriter
+     pass retired that whole tree and rebuilt the manual as a STRUCTURE ISSUE,
+     so the museum was showing the title page of a retired render. Deleted
+     rather than kept as an orphan — the precedent for keeping a superseded
+     file (parts_drawer, mgk-viii-cover) is that a REAL PHOTOGRAPH the museum
+     owns is not deleted on Ops' word. This was a generated raster whose
+     generator is gone, and its source was deleted upstream first. */
+  ["/robots/manual/structure-issue-p1.png", "VERIFIED",
+    "the unit's own operating manual, per B8: the printed copy is the source; the plate is a photograph of it",
     true,
-    "THE WHOLE IMAGE IS TEXT — the manual's cover page: MGK-VIIIp / OPERATING AND MAINTENANCE "
-    + "INSTRUCTIONS / PRELIMINARY - WORKING COPY / NOT FOR DISTRIBUTION / ABEAL / A DIVISION OF "
-    + "SCRAPCO / ENGINEERING DEPARTMENT. FOR MIKE: it is clean digital type on white, not a "
-    + "photograph of paper; the face's own caption calls it 'the working copy, printed', and B8's "
-    + "ruling is that the photograph of the print is the plate."],
+    "THE WHOLE IMAGE IS TEXT — the manual's title page: MGK-VIIIp / OPERATING AND MAINTENANCE "
+    + "INSTRUCTIONS / STRUCTURE ISSUE / STRUCTURE AND ARRANGEMENT ONLY / TEXT NOT SUPPLIED / "
+    + "ABEAL / A DIVISION OF SCRAPCO / ENGINEERING DEPARTMENT / ABEAL 8P-OMI-1 REV. — / "
+    + "PRELIMINARY. FOR MIKE, AND IT IS THE ONE THING TO LOOK AT: the page's own type reads "
+    + "TEXT NOT SUPPLIED. In the fiction that is a fifth copy-state beside your four — an early "
+    + "issue circulated for arrangement before the text was set — and the caption is written to "
+    + "hold that reading. Read the other way it is the museum saying it has not written the "
+    + "manual yet, which would be Doctrine 11 on the glass. Your call if the reading is too "
+    + "thin. It is a photocopy of a TYPED page rather than clean digital type, which is a long "
+    + "step toward what B8's ruling actually asks for; it is still not a photograph of paper, "
+    + "so M4 stands."],
 
   // ---- the house's own ---------------------------------------------------
   ["/images/wb/vol1_cover_v1.png", "MIKE", HOUSE_ART, true,

@@ -22,7 +22,10 @@
     "reveal:audit": "node tools/reveal-ledger.mjs --audit",
     "reveal:check": "node tools/reveal-ledger.mjs --check",
     "reveal:cards": "node tools/reveal-ledger.mjs --cards",
-    "reveal:build": "node reveal/ledger-declare.mjs --write"
+    "reveal:build": "node reveal/ledger-declare.mjs --write",
+    "parity": "node tools/menu-parity.mjs",
+    "parity:gate": "node tools/menu-parity.mjs --gate",
+    "surfacing": "node tools/surfacing.mjs"
   },
   "dependencies": {
     "react": "^19.2.4",

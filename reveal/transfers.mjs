@@ -140,9 +140,15 @@ const BLAST = [
         the VIIIp) are the first images of the two machines, they were on the
         glass at launch, and the blast is where they came from. Every other face
         rides in behind them at no extra cost. */
-  "face.wbr.about", "face.wbr.faq", "face.wbr.doc-control", "face.wbr.contact",
+  /* [R3/R1 2026-08-05] The front desk is one face now — Welcome, DOC CONTROL
+        and Contact are struck, and their rows are RETIRED and exempt below. THE
+        RECORD moved off the MGK-VIIIp album onto that desk and its row moved
+        with it (`face.viiip.record` → `face.wbr.record`); the CLASS did not
+        change, because where a thing is filed says nothing about how it
+        arrived. */
+  "face.wbr.faq", "face.wbr.record",
   "face.niac.name", "face.niac.plates", "face.niac.firmware",
-  "face.viiip.plates", "face.viiip.record", "face.viiip.manual",
+  "face.viiip.plates", "face.viiip.manual",
   "face.viiip.firmware", "face.viiip.portal", "face.viiip.faq",
 
   /* ── The Portal, and the tension Mike named. THE PORTAL ARRIVED IN THE BLAST
@@ -177,6 +183,16 @@ const BLAST = [
         packages. `doc.charter` is HELD and BLAST — written, in the tree,
         unpublished. */
   "doc.manual", "doc.record", "record.013", "doc.firmware", "doc.charter",
+
+  /* ── [R6/R4 2026-08-05] THE TWO EGGS PLANTED THIS ROUND. `egg.channels` is
+        BLAST because the numbering is engraved on a drum that has been on the
+        glass since launch — an egg arrives with the object it is hidden in.
+        `egg.niac.operator` is BLAST for the same reason and it is the clearest
+        case in the table of the class's second half doing its job: the robot's
+        photographs came in with everything else, and every one of them is held.
+        This is Mike's insight paying out exactly as written — the blast carried
+        MORE than was published, so spending the egg later needs no arrival. */
+  "egg.channels", "egg.niac.operator",
 
   /* ── The machines themselves, as a subject. The UNITS are not the transfer —
         their PHOTOGRAPHS are, and those were in the blast. The unit arriving in
@@ -238,6 +254,12 @@ const UNLOCK = [
   "portal.feed.off-first-boot", "portal.feed.last-state", "portal.feed.test-bench",
   "portal.dial.seeded",
 
+  /* ── [R6 2026-08-05] THE MAINFRAME'S TWO CHANNELS. UNLOCK for the same reason
+        as their five neighbours: the drum is in hand and these positions will
+        not open. What they wait on is not a delivery — it is a FEED, the
+        mainframe running on the Portal, which Mike puts in the next chapter. */
+  "portal.feed.niac.1", "portal.feed.niac.2",
+
   /* ── The eggs behind a mechanism. Each waits on an OPENING — a passcode, a
         question count, a storyline — not on a delivery. */
   "egg.passcode", "egg.cloud-alert", "egg.passcodes-msg", "egg.morse",
@@ -284,6 +306,7 @@ export const EXEMPT = new Map([
       "retired.robots.parts", "retired.robots.tally", "retired.booth.hook",
       "retired.lobby.book.static", "retired.record.fictions",
       "retired.query.variants",
+      "retired.robots.welcome", "retired.robots.doc-control", "retired.robots.contact",
   ].map(id => [id, "WITHDRAWN — struck from the glass; a transfer class describes arrival, not removal."]),
 
   /* (ii) OPS INSTRUMENTS, OUT OF FICTION. The provenance register, the asset
@@ -315,9 +338,32 @@ export const EXEMPT = new Map([
   ].map(id => [id, "AUTHORSHIP — Mike writes it; no transfer class covers a thing that has to be written."]),
 ]);
 
+/* ═══ [G1 2026-08-05] THE ONE PATTERN RULE, AND WHY IT IS THE ONLY ONE ══════
+   A DERIVED FAMILY OF ROWS CANNOT BE LISTED BY HAND. `doc.manual.page.NN` rows
+   are built by a vessel, one page at a time, as the Record calls for them — so
+   their ids do not exist to be typed into PACKAGE above until the moment they
+   are written, and a literal list would be a hole that opens on the first day
+   somebody supplies a page. MANUAL_SPANS_CLASSES has said these pages are
+   PACKAGE since T1; until now it said so in PROSE and nothing enforced it, and
+   the vessel's own self-test found that the moment the gate started running
+   again.
+
+   IT IS DELIBERATELY NOT A GENERAL MECHANISM. One pattern, one family, and a
+   fault if a pattern ever ALSO matches a row placed by hand — quietly
+   overruling a written decision is the thing a pattern layer is otherwise
+   certain to do. `record.NNN` rows are derived too and are NOT here on purpose:
+   which transfer a week's material rode in on is a judgement per entry, and a
+   pattern would erase exactly that judgement.                                */
+const PATTERNS = [
+  { re: /^doc\.manual\.page\.\d+$/, cls: "PACKAGE",
+    why: "a photographed page is a photograph of paper somebody is holding — MANUAL_SPANS_CLASSES" },
+];
+
 /* ═══ APPLYING IT ═══════════════════════════════════════════════════════════ */
 export function transferOf(id) {
-  return ASSIGN.get(id) ?? null;
+  if (ASSIGN.has(id)) return ASSIGN.get(id);
+  const p = PATTERNS.find(x => x.re.test(id));
+  return p ? p.cls : null;
 }
 export function transferWeekOf(id) {
   const c = transferOf(id);
@@ -348,8 +394,14 @@ export function transferFaults(rows) {
   for (const id of EXEMPT.keys())
     if (!ids.has(id)) faults.push(`transfers: "${id}" is exempted and is not a ledger row.`);
 
+  /* [G1] the pattern layer may not silently overrule a hand-written decision */
+  for (const p of PATTERNS) {
+    for (const id of [...ASSIGN.keys(), ...EXEMPT.keys()]) if (p.re.test(id))
+      faults.push(`transfers: "${id}" is placed by hand AND matched by the pattern ${p.re} — a pattern may not overrule a written decision.`);
+  }
+
   for (const r of rows) {
-    const cls = ASSIGN.get(r.id);
+    const cls = transferOf(r.id);
     const exempt = EXEMPT.has(r.id);
 
     /* (a) placed or exempted, in writing — and never both */
@@ -394,6 +446,26 @@ export function transferFaults(rows) {
    Both were named by Mike when he set the round, and both are the model
    working rather than the model failing. They live here as text because a
    future reader will otherwise read them as mistakes and "fix" them.        */
+/* [v56/R5 2026-08-05] MIKE'S CANON FOR THE MAINFRAME'S POSITION IN THE STORY,
+   recorded here because it is the first statement in this file about a MACHINE
+   rather than about a class of paperwork — and because the table and the canon
+   turn out to agree, which is worth writing down before somebody "fixes" one of
+   them to match the other. */
+export const NIAC_STORY_POSITION =
+  "NIAC IS FOUND FROM DAY ONE — 'there was a reason they sent what they sent, in " +
+  "the order they sent it' — and it SHOWS PROGRESS ACROSS THE ARC, but THE MOTHER " +
+  "LODE OF DETAIL IS VIIIp. NIAC is the NEXT CHAPTER, alongside continued rollout " +
+  "of new VIIIp units, and SOMEDAY NIAC RUNS ON THE PORTAL. " +
+  "WHAT THE TABLE ALREADY SAID: every niac row is BLAST, and that was not chosen " +
+  "for it — rule (b) forced it, because the album was on the glass at launch. The " +
+  "canon and the mechanism reached the same answer from opposite ends. " +
+  "WHAT THE TABLE DOES NOT SAY, and must not be read into it: 'progress across the " +
+  "arc' is about REVEAL (`when`), not ARRIVAL (`transferWeek`). Every `when` is " +
+  "still null. NIAC arrived in week 0 with everything else; which piece comes out " +
+  "when is `npm run reveal:cards` and it is Mike's. " +
+  "WHAT IT PUT ON THE GLASS: 'someday' is now engraved — portal.feed.niac.1 and .2, " +
+  "UNLOCK, shown and dark, waiting on a feed rather than on a delivery.";
+
 export const MANUAL_SPANS_CLASSES =
   "THE MANUAL SPANS CLASS 1 AND CLASS 2, AND THAT IS THE NO-SINGLE-COPY FICTION " +
   "WORKING. The volume (`doc.manual`) is BLAST — named and readable from launch, " +
