@@ -1,6 +1,7 @@
 {
  "_": "PROVENANCE REGISTER. Every visitor-facing string in the authored source, with where it came from. Written by provenance/backfill-20260804.mjs; maintained one row at a time thereafter. Read provenance/README.md first — in particular what this cannot see.",
- "inventionCeiling": 3,
+ "inventionCeiling": 0,
+ "_ceiling": "[A5 2026-08-04] 3 -> 0, AND THE PEN IS EMPTY. All three INVENTION rows were the same fact — the unit count, printed as a 132pt card, as that card's caption, and as an FAQ answer. Mike struck the count; the class went to zero with it, and the ceiling follows the count down because a cap that stays above the count is three silent slots. To declare an INVENTION again a round must RAISE this number in the same commit, which is a visible edit and is the point. Register row M1 closes with it.",
  "generated": {
   "src/data/exhibits/hunter_root.json": {
    "c": "VERIFIED",
@@ -177,14 +178,6 @@
    "t": "hr",
    "p": "hunterRoot.shopExitParam",
    "c": "HOUSE"
-  },
-  "9b0c5a9e61b0d10c": {
-   "f": "src/data/artists/robots.js",
-   "l": 173,
-   "t": "<text x=\"260\" y=\"86\" text-anchor=\"middle\" fill=\"{}\" font-family=\"Courier New,monospace\" font-size=\"17\" letter-spacing=\"7\">WEIRD.BABY ROBOTS</text><text x=\"260\" y=\"238\" text-anchor=\"middle\" fill=\"{}\" font-family=\"Georgia,serif\" font-size=\"132\">31&#189;</text><text x=\"260\" y=\"288\" text-anchor=\"middle\" fill=\"{}\" font-family=\"Courier New,monospace\" font-size=\"19\" letter-spacing=\"5\">UNITS ON THE RECORD…",
-   "p": "CARD_TALLY.deskCard()",
-   "c": "INVENTION",
-   "n": "THE UNIT COUNT DISAGREES WITH ITS OWN SOURCE. The robots repo's canon says THIRTY-ONE POINT FOUR (docs/WBR_WORDS_DRAFT.md:185, \"There are thirty-one point four of them somewhere\"), with a [PAPA] note reserving the .4 as the Pi thread — \"no breadcrumbs until a story worthy of it\". robots.js's OWN header (line 107) lists the inherited claim as \"the 31.4\". The glass prints 31½ in two places: the front-desk tally card and the FAQ. Nobody supplied a half. Mike rules: 31.4 back, or 31½ confirmed as the new number and the robots repo corrected to match."
   },
   "363a99a1c10ccee7": {
    "f": "src/data/artists/robots.js",
@@ -364,14 +357,6 @@
     "ead650d40581240e"
    ]
   },
-  "1dbe5be0c7a2091a": {
-   "f": "src/data/artists/robots.js",
-   "l": 274,
-   "t": "Thirty-one and a half.",
-   "p": "WBR_TRACKS[].face.stillCaption",
-   "c": "INVENTION",
-   "n": "THE UNIT COUNT DISAGREES WITH ITS OWN SOURCE. The robots repo's canon says THIRTY-ONE POINT FOUR (docs/WBR_WORDS_DRAFT.md:185, \"There are thirty-one point four of them somewhere\"), with a [PAPA] note reserving the .4 as the Pi thread — \"no breadcrumbs until a story worthy of it\". robots.js's OWN header (line 107) lists the inherited claim as \"the 31.4\". The glass prints 31½ in two places: the front-desk tally card and the FAQ. Nobody supplied a half. Mike rules: 31.4 back, or 31½ confirmed as the new number and the robots repo corrected to match."
-  },
   "68feb8bf8a3dd1d9": {
    "f": "src/data/artists/robots.js",
    "l": 276,
@@ -464,29 +449,6 @@
    "p": "WBR_TRACKS[].face.entries[].note",
    "c": "MIKE",
    "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
-  "6607bbeaae110a37": {
-   "f": "src/data/artists/robots.js",
-   "l": 290,
-   "t": "How many are there?",
-   "p": "WBR_TRACKS[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "8ddfd88b4dc9a152",
-    "907619cc1acfbdc7",
-    "d9573a5b11ceca4f",
-    "e33d38369618419c",
-    "0f6551034087bf9f",
-    "ead650d40581240e"
-   ]
-  },
-  "fd98e20cc99771d3": {
-   "f": "src/data/artists/robots.js",
-   "l": 291,
-   "t": "Thirty-one and a half. The fraction is not a typo and we are not going to explain it.",
-   "p": "WBR_TRACKS[].face.entries[].line",
-   "c": "INVENTION",
-   "n": "THE UNIT COUNT DISAGREES WITH ITS OWN SOURCE. The robots repo's canon says THIRTY-ONE POINT FOUR (docs/WBR_WORDS_DRAFT.md:185, \"There are thirty-one point four of them somewhere\"), with a [PAPA] note reserving the .4 as the Pi thread — \"no breadcrumbs until a story worthy of it\". robots.js's OWN header (line 107) lists the inherited claim as \"the 31.4\". The glass prints 31½ in two places: the front-desk tally card and the FAQ. Nobody supplied a half. Mike rules: 31.4 back, or 31½ confirmed as the new number and the robots repo corrected to match."
   },
   "697785b65bf2c564": {
    "f": "src/data/artists/robots.js",
@@ -16019,34 +15981,6 @@
    "p": "InfoBooth{}.useArrival()",
    "c": "HOUSE"
   },
-  "27536f70ba0fe04e": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 207,
-   "t": "WB",
-   "p": "InfoBooth{}.<div>.<div>.<div>.<div>.<span>",
-   "c": "HOUSE"
-  },
-  "9fa147db1b9066f8": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 208,
-   "t": "No. ∞",
-   "p": "InfoBooth{}.<div>.<div>.<div>.<div>.<span>",
-   "c": "HOUSE"
-  },
-  "6479752c630f1455": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 211,
-   "t": "The Weird.Baby Museum",
-   "p": "InfoBooth{}.<div>.<div>.<div>.<div>.<span>",
-   "c": "HOUSE"
-  },
-  "693dc4bef7689e5a": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 212,
-   "t": "Admit One",
-   "p": "InfoBooth{}.<div>.<div>.<div>.<div>.<span>",
-   "c": "HOUSE"
-  },
   "71f97163c748b6a5": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 227,
@@ -17445,66 +17379,6 @@
    "t": "No. There is no account and nothing to sign in to, and this site sets no cookies at all — not one, not even ours. The lobby and the exhibit rooms each write a single line when they load: which page, the site you came from if there was one, and the time. Those three columns are the whole of what the site records, and none of them is you. Sign the guest book and we keep exactly what you typed, on the page you typed it into. Your browser keeps a few display settings on your own machine — a panel width, whether you have already walked through a room this visit — and none of that is ever sent here. One thing does leave the building, and you should know about it: the typefaces are served by Google, so your browser asks Google for them and Google sees it was asked. That is the only outside party this site touches. There is no analytics, no advertising and no tracking pixel anywhere in it, and if that ever stops being true, this answer changes first.",
    "c": "VERIFIED",
    "s": "read clause by clause this session, and every clause is falsifiable from one file: src/worker.js (no auth on any route; POST /api/visits inserts exactly page + referrer + visited_at; POST /api/guestbook inserts name + note + a fixed badge + a timestamp), index.html (the <link rel=stylesheet> to fonts.googleapis.com and the two preconnects — the ONLY third party, and the clause the previous answer was missing), src/lib/use-arrival.js and src/routes/exhibit/Exhibit.jsx (sessionStorage / localStorage, never transmitted), and the absence of any Set-Cookie in the worker or document.cookie anywhere in src/."
-  },
-  "afe295a17f311053": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 257,
-   "t": "No charge · always",
-   "c": "HOUSE"
-  },
-  "272e09d1e5412960": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 266,
-   "t": "?",
-   "c": "HOUSE"
-  },
-  "252525bdcd981bc6": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 268,
-   "t": "Information",
-   "c": "HOUSE"
-  },
-  "2a88d53e3c98d487": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 286,
-   "t": "hook",
-   "c": "HOUSE"
-  },
-  "41dce02d608410fb": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 286,
-   "t": "sign",
-   "c": "HOUSE"
-  },
-  "1d65f1536386574f": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 286,
-   "t": "ticket",
-   "c": "HOUSE"
-  },
-  "cf17b3389d31bc0e": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 110,
-   "t": "{}s",
-   "c": "HOUSE"
-  },
-  "7e08d340d888dd16": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 138,
-   "t": "book",
-   "c": "HOUSE"
-  },
-  "eb666c1ce6a0be8b": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 138,
-   "t": "scroll",
-   "c": "HOUSE"
-  },
-  "4a1c34bfe692f609": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 138,
-   "t": "list",
-   "c": "HOUSE"
   },
   "56f71c783927ab42": {
    "f": "src/routes/WbHome.jsx",

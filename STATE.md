@@ -38,14 +38,58 @@ deep is still governed, but a face you arrive on is urgent.
 a visitor keeps one or two things; this one says they have to stay long enough
 to be handed either.
 
+**[v51 2026-08-04] THE EXCEPTION, RECORDED ON MIKE'S INSTRUCTION:**
+
+> **A page whose own words are the hook needs no image.**
+
+He gave it while striking BOTH candidate objects at `/booth` — *"THE TITLE IS
+THE GRAB, and the copy already says it plainly. A picture arguing with text
+that already works is clutter."* The failure it names is specific and both
+`/booth` objects had it: **every word on them was already on the page**, so the
+object was a picture OF the sentence, sitting on top of the sentence. Where a
+surface's landing is a short declarative set large — `/booth`'s credo — the
+typography IS the different FORMAT the law asks for.
+
+It is not a licence to stop hooking. It applies where the page's own opening
+words are the compelling thing and an object could only restate them; it does
+not apply to a wall of running text, which is what the law was written against.
+
+**TWO SURFACES NOW SHIP TEXT-ONLY UNDER IT**, and both are named rather than
+quietly excused: `/booth` (register M23a) and the `/robots` FAQ face, whose
+tally card went with the unit count (register M29).
+
 Current compliance, every face and page, audited on the built page:
-`docs/VISUAL_HOOK_AUDIT-20260803.md`. **As of v43 (E3) ZERO surfaces are
-text-only.** The audit named five; there were six — it missed the MGK-VIIIp
+`docs/VISUAL_HOOK_AUDIT-20260803.md`. **As of v43 (E3) ZERO surfaces were
+text-only; as of v51 two are, both under the exception above.** The audit named five; there were six — it missed the MGK-VIIIp
 album's own FAQ, which is a different face from the front desk's. All six are
 now hooked from assets already in the repos, and no new rights question was
 opened. What remains ART-pending is the DEPTH of two of them: The Record still
 wants its evidence photographed per entry, and The Manual's microfiche reel is
 still empty by B8's ruling.
+
+## THE LAW OF SUBTRACTION (Mike, 2026-08-04 — STANDING, site-wide)
+
+> **If it does not help, it hurts. If it does not need to be there, it needs to
+> not be there.**
+
+Given while striking the 31½ tally card, with the reason attached: *"it speaks
+out loud about something not meant to be spoken out loud and dilutes the
+experience."*
+
+**It is not Doctrine 11 again.** Doctrine 11 tests a line's SUBJECT — does it
+describe the work rather than do it. This one tests a line's NECESSITY, and it
+catches things Doctrine 11 passes cleanly. "Thirty-one and a half" is a fact
+about the collection; it passed the visible-line test every time it was read;
+and setting it at 132pt made the loudest object on the front desk out of the one
+number whose entire value is that it is never explained. Nothing was wrong with
+it except that it did not need to be there.
+
+**The neighbours it works with.** Doctrine 11's corollary is *empty and honest
+beats populated and false*; this is the harder version — **empty beats
+unnecessary, even when the unnecessary thing is true.** And it points the same
+way as Doctrine 12: where 11 and 12 say do not INVENT, this says do not KEEP.
+
+Canonical text and reasoning: `docs/canonical/OPERATIONS.md` §7 Doctrine 16.
 
 ## THE CONTRIBUTIONS MODEL (Mike, 2026-08-03 — standing; built at v43/E1)
 

@@ -189,7 +189,7 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
    and paint two different overhangs), which retires the hazard. The
    16px stays as ordinary separation between the form and the book —
    it is now a gap that means what it measures. */
-.wb-entries { --gb-row: 30px; margin-top: 16px; max-height: calc(var(--gb-row) * 7 + 2px); overflow-y: auto; scroll-snap-type: y proximity; overscroll-behavior: contain; border: 1px solid var(--wb-border); border-radius: 1px; background: var(--wb-ink-card); scrollbar-width: thin; scrollbar-color: var(--wb-border-hi) transparent; }
+.wb-entries { --gb-row: 30px; --gb-visible: 3; margin-top: 16px; max-height: calc(var(--gb-row) * var(--gb-visible) + 2px); overflow-y: auto; scroll-snap-type: y proximity; overscroll-behavior: contain; border: 1px solid var(--wb-border); border-radius: 1px; background: var(--wb-ink-card); scrollbar-width: thin; scrollbar-color: var(--wb-border-hi) transparent; }
 .wb-entries::-webkit-scrollbar { width: 6px; }
 .wb-entries::-webkit-scrollbar-thumb { background: var(--wb-border-hi); border-radius: 3px; }
 .wb-entries::-webkit-scrollbar-track { background: transparent; }
@@ -200,48 +200,41 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
 .wb-entry-note { font-family: 'Courier Prime', monospace; font-style: italic; font-size: 0.72rem; color: #6f6b62; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
 .wb-entry-date { font-family: 'Courier Prime', monospace; font-size: 0.62rem; color: var(--wb-gold-mute); white-space: nowrap; }
 
-/* ── [N6 2026-08-04] THE SCROLLING GUEST BOOK — Mike's second version ────────
-   The JSX note above `SCROLL_MIN` carries the reasoning; this is the mechanism.
-   IT REUSES `.wb-entries` WHOLE and adds to it, so the two versions cannot
-   drift apart in anything except the one thing being compared. Same box, same
-   border, same seven-row window, same rows.
-   THE MASK IS WHAT MAKES IT A BOARD RATHER THAN A LIST THAT MOVES. Without it
-   a signature snaps into existence at a hard edge; with it, rows surface and
-   submerge. 14px is one row's half-height at `--gb-row`, so a name is never
-   half-faded while it is the one you are reading.
-   `overflow:hidden` AND NO SNAP: a scroll-snap container fighting an animated
-   transform produces a list that stutters against its own snap points. */
-.wb-entries-scroll {
-  overflow: hidden;
-  scroll-snap-type: none;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+/* ── [M23b 2026-08-04] THE GUEST BOOK, STEPPED ──────────────────────────────
+   The JSX note above `SCROLL_MIN` carries the ruling and the arithmetic; this
+   is the mechanism. N6's continuous keyframe is gone and so is its mask.
+   THE MASK HAD TO GO WITH THE DRIFT, and it is the one non-obvious deletion.
+   N6 faded 14px at the top and bottom so a row surfaced and submerged instead
+   of snapping into existence at a hard edge — correct for something always in
+   motion. A stepped book comes to rest ON row boundaries, so the same gradient
+   would sit permanently across the first and last of the three visible rows and
+   half-dim two of the three signatures a visitor is being given time to read.
+   The whole point of the rest is that what is at rest is fully legible.
+   THE TRANSITION IS DECLARED HERE AND SUSPENDED FROM THE COMPONENT. The bounce
+   is the easing: it overshoots the stop and settles back, which is what a
+   hinged board does and what Mike asked for. The component writes `transition:
+   none` inline for the single frame that carries the wrap.
+   NO SNAP AND NO HAND SCROLLING inside the moving box: a scroll-snap container
+   fighting a transformed track produces a list that stutters against its own
+   snap points. */
+.wb-entries-scroll { overflow: hidden; scroll-snap-type: none; }
+.wb-scroll-track {
+  transition: transform 520ms cubic-bezier(.34, 1.3, .64, 1);
+  will-change: transform;
 }
-.wb-scroll-track { animation: wb-book-drift var(--gb-dur, 30s) linear infinite; }
-/* THE SEAM. `.wb-entry:last-child` drops its rule so the static list does not
+/* THE SEAM. `.wb-entry:last-child` drops its rule so the plain list does not
    print a line above its own bottom border; inside the loop that same rule
-   opens a 1px gap at the join, twice per cycle, exactly where the illusion
-   lives. Each half's last row gets its rule back. */
+   opens a 1px gap at the join, exactly where the illusion lives. Each half's
+   last row gets its rule back. */
 .wb-entries-scroll .wb-entry:last-child { border-bottom: 1px solid var(--wb-ink-soft); }
-/* it stops when a reader arrives — hover for a mouse, focus-within for a
-   keyboard, because a name that catches the eye has to be readable. */
-.wb-entries-scroll:hover .wb-scroll-track,
-.wb-entries-scroll:focus-within .wb-scroll-track { animation-play-state: paused; }
-@keyframes wb-book-drift {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-50%); }
-}
+/* the rise-in is for a row ARRIVING in a freshly-loaded book; inside the moving
+   track it would fire on every re-render and fight the transition. */
+.wb-entries-scroll .wb-entry { animation: none; }
 @media (prefers-reduced-motion: reduce) {
-  /* THE ANSWER TO THE SIGNAL IS "DON'T", NOT "SLOWER". The second copy is
-     hidden and the window goes back to being scrollable by hand, which is
-     precisely the version this one is being compared against. */
-  .wb-scroll-track { animation: none; }
-  .wb-entries-scroll {
-    overflow-y: auto;
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-  .wb-entries-scroll .wb-scroll-half + .wb-scroll-half { display: none; }
+  /* belt and braces: the component already renders the plain list under this
+     signal, so nothing should carry these classes here. If anything ever does,
+     it does not move. */
+  .wb-scroll-track { transition: none; }
 }
 
 /* [F0 2026-08-03] THE COLOPHON WAS THE WORST NUMBER ON THE SITE, and it is the
@@ -267,12 +260,12 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
    it in WHOLE ROWS, because a shorter list of complete signatures is
    the point of P12 and a taller list of sliced ones is what it
    replaced. */
-@media (max-height: 880px) {
-  .wb-entries { max-height: calc(var(--gb-row) * 5 + 2px); }
-}
-@media (max-height: 760px) {
-  .wb-entries { max-height: calc(var(--gb-row) * 3 + 2px); }
-}
+/* [M23b 2026-08-04] THE TWO SHORT-WINDOW CAPS ARE RETIRED. They existed to
+   step a SEVEN-row window down to five and then to three on a short lobby.
+   The window is three rows everywhere now, which is the floor those rules were
+   walking down to, so both of them could only ever have made it TALLER. The
+   comment above them still explains why a book gives ground in whole rows.
+*/
 
 @media (max-width: 680px) {
   html[data-room="lobby"], html[data-room="lobby"] body { overflow: auto; }

@@ -199,16 +199,39 @@ function deskCard(inner) {
     "</svg>");
 }
 
-/* the tally. "Thirty-one and a half" is the wing's best line and it is a
-   NUMBER, which is the one kind of sentence that gets stronger the larger it
-   is set — the same reason the Foundation's zero is the biggest thing on its
-   page. */
-const CARD_TALLY = deskCard(
-  '<text x="260" y="86" text-anchor="middle" fill="' + CARD_QUIET + '" font-family="Courier New,monospace" font-size="17" letter-spacing="7">WEIRD.BABY ROBOTS</text>' +
-  '<text x="260" y="238" text-anchor="middle" fill="' + CARD_INK + '" font-family="Georgia,serif" font-size="132">31&#189;</text>' +
-  '<text x="260" y="288" text-anchor="middle" fill="' + CARD_INK + '" font-family="Courier New,monospace" font-size="19" letter-spacing="5">UNITS ON THE RECORD</text>' +
-  '<line x1="120" y1="322" x2="400" y2="322" stroke="' + CARD_INK + '" stroke-width="1"/>' +
-  '<text x="260" y="358" text-anchor="middle" fill="' + CARD_QUIET + '" font-family="Georgia,serif" font-size="21">The fraction is not a typo.</text>');
+/* ═══ [A5 2026-08-04] THE TALLY CARD IS GONE, AND SO IS THE COUNT ═══════════
+   MIKE, and he asked for the law itself to be recorded: "if it does not help,
+   it hurts; if it does not need to be there, it needs to not be there." Of the
+   31½ card specifically — "it speaks out loud about something not meant to be
+   spoken out loud and dilutes the experience."
+
+   E3 built the card on a reading this ruling overturns. Its argument was that
+   the number is the wing's best line and a number is the one kind of sentence
+   that gets stronger the larger it is set. Both halves were true and the
+   conclusion was still wrong: setting it at 132pt made the fraction the loudest
+   object on the desk, and the fraction's whole value is that it is never
+   explained. A thing withheld cannot also be the headline.
+
+   THE SWEEP MIKE ASKED FOR FOUND THREE PLACES, and all three are gone:
+     · this card,
+     · its caption on the FAQ face ("Thirty-one and a half."),
+     · the FAQ's own "How many are there?" entry, whose answer WAS the count.
+   The entry is REMOVED rather than re-answered, because there is no honest
+   short answer to "how many are there" that does not print the number, and
+   inventing a different one is the thing Doctrine 12 forbids. The FAQ now runs
+   five questions.
+
+   WHAT THIS COSTS, STATED RATHER THAN PAPERED OVER: the FAQ face loses its
+   visual hook and ships as words alone, which is a live conflict with the
+   VISUAL HOOK LAW. Mike ruled the same conflict the same way on /booth in this
+   round — the ruling wins and the exception is recorded — and no replacement
+   object was invented to fill the slot. Register M29.
+
+   IT ALSO CLOSES M1 BY DELETION. Two houses printed two counts of the same
+   machines (31½ here, 31.4 in the robots repo's words draft) and the museum was
+   waiting on Mike to pick one. Nothing on this glass prints a count now, so
+   there is nothing to reconcile HERE — the robots repo still says 31.4 in its
+   own draft and that is that repo's to keep or change. */
 
 /* [N4 2026-08-04] CORRESPONDENCE, AND IT IS NOW JUST THE ADDRESS.
    MIKE: "Contact is plain and simple: papa@weird.baby, no leading, no
@@ -377,11 +400,9 @@ const WBR_TRACKS = [
         face: {
           kind: "text",
           title: "FREQUENTLY ASKED",
-          /* [E3 2026-08-03] the tally card — see the note above WBR_TRACKS.
-             Six questions and no object was the audit's finding on this face;
-             the object is the one number the answers already carry. */
-          still: CARD_TALLY,
-          stillCaption: "Thirty-one and a half.",
+          /* [A5 2026-08-04] NO STILL. E3's tally card stood here and Mike struck
+             it; nothing replaced it, on purpose. See the ruling above
+             `CARD_ADDRESS`, and register M29 for the hook the face now lacks. */
           blurb:
             "The questions people actually turn up with, and the answers as far " +
             "as they go. Some of them stop short. Those are the interesting ones.",
@@ -397,10 +418,10 @@ const WBR_TRACKS = [
                     "it went on doing what it was built to do as though nothing " +
                     "had happened.",
               note: "[PAPA]" },
-            { stamp: "Q", title: "How many are there?",
-              line: "Thirty-one and a half. The fraction is not a typo and we " +
-                    "are not going to explain it.",
-              note: "" },
+            /* [A5 2026-08-04] "How many are there?" IS REMOVED. Its answer was
+               the count and the count is what Mike struck; there is no honest
+               shorter answer, and writing a different one would be inventing.
+               The remaining five questions are untouched. */
             { stamp: "Q", title: "Can I buy one?",
               line: "Some of them. Not all — several are held, and one is " +
                     "patient zero and is going nowhere.",
@@ -702,7 +723,15 @@ const spine = [
        carousel simply prints no year, as it already does for the front desk. */
     year: null,
     tags: ["mgk", "viii", "niac", "mainframe", "abeal", "machine", "detail"],
-    art: "/robots/art/mgk-viii-cover.jpg",
+    /* [A1 2026-08-04] THE COVER IS NOW THE WING'S OWN TEMPLATE — see the note
+       above the MGK-VIIIp album's `art` for the whole ruling. The badge is
+       `head_lens.jpg`, A DETAIL, because this museum holds no photograph of
+       this machine whole; the archive four rows down says so in its own
+       tombstone. The superseded `mgk-viii-cover.jpg` is left on disk and
+       unreferenced, exactly as N1 left `parts_drawer.jpg` — a real photograph
+       this museum owns is not deleted by a cover change, and it is not
+       re-homed onto a wall whose tombstone counts its plates. Register M9. */
+    art: "/robots/art/mgk-viii-cover.png",
     accent: null,
     /* THE POSTER IS THE CHEST, AND IT IS DOING DOUBLE DUTY — it is also the
        second tile of The Plates, named here rather than left unremarked, the
@@ -1027,8 +1056,33 @@ const spine = [
        the renderer — the deck has never shown this machine's top or its base.
        Square, it does. The residual is the ground at the left and right edges,
        which cannot come out with a rectangle: taking it needs a cut-out or a
-       reshoot, and both are Mike's. */
-    art: "/robots/art/viiip.png",
+       reshoot, and both are Mike's.
+       ═══ [A1 2026-08-04] AND NOW IT IS NOT THE COVER AT ALL ═══════════════
+       MIKE (third revision): "use the ROBOTS art as the base — REPLACE the W.B
+       logo with an image of the unit, and REPLACE the word ROBOTS with the
+       model number. Same treatment for both albums so the wing shares one
+       theme."
+       THE COVERS ARE NOW A FAMILY RATHER THAN THREE UNRELATED PICTURES. The
+       front desk's cover has always been paper, a border, a disc and a word;
+       the two machines were a lit grille and a bare unit on a wall. Standing in
+       one deck they read as a house cover followed by two photographs. They now
+       read as one series: same square, same ground, same border at the same
+       inset, the same Georgia setting at the same size and drop, the same rule,
+       the same strapline. The photograph moves INTO the disc the WB mark used
+       to occupy, and the model number takes the place of the word ROBOTS.
+       BUILT BY `tools/make_unit_covers.py`, whose constants are lifted from
+       `make_robots_cover.py` rather than re-chosen — "one theme" is a claim
+       about geometry, and a hand-matched cover drifts the first time either is
+       re-rendered. Two things differ from the base and both are recorded in
+       that file's header: the rule drops 14px on BOTH machine covers so
+       MGK-VIIIp's descender clears it, and the word's tracking is solved per
+       cover so a nine-glyph model number sets inside the same measure a
+       six-glyph one does.
+       `viiip.png` STAYS IN THE BUILD — it is the tenth tile of this album's
+       own Image Archive (below), which is where the composited BIOS beat is
+       shown and captioned. It stopped being the cover; it did not stop being a
+       plate. A8's crop is untouched. */
+    art: "/robots/art/mgk-viiip-cover.png",
     accent: null,
     /* [E2] THE VIEWER'S DEFAULT — the family shot.
        Chosen over the alternatives on honesty: it is a real photograph of the

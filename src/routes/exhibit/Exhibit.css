@@ -146,13 +146,41 @@ body:has(.vp-face) .vp-area::before{display:none}
    property of the ramp rather than of seventeen separate judgements.
    `--face-fs` stays the dial (and the name every existing rule already knows);
    it is now the BODY step rather than a ceiling nothing reached. */
+/* ==== [A4 2026-08-04] THE TOP OF THE RAMP COMES DOWN ========================
+   MIKE: "reduce the large font sizes in the viewer — they overpower and cannot
+   be balanced against the small type they ride with. Bring the top of the scale
+   down until the ramp reads as one system."
+
+   THE SECOND CLAUSE IS THE INSTRUCTION AND IT RULES OUT THE OBVIOUS FIX. The
+   small end cannot come up to meet the big end: `--fs-micro` and `--fs-small`
+   carry rem FLOORS precisely because P7 found the small end unreadable at
+   narrow windows, and raising them would undo that. Nor can `--face-fs` move —
+   it is the dial, and turning it takes the small type with it, which is P7's
+   own stated failure mode read backwards. So the only lever is the three steps
+   ABOVE body, and they are what moves.
+
+   WHAT THE RAMP NOW SAYS. Below body the steps stay WIDE (1.18x each) because
+   that width is what keeps a 12px caption clear of a 15px register line. Above
+   body they close to 1.09x. Measured at a 1706px window, where `--face-fs` is
+   at its 1.28rem ceiling:
+
+     micro 14.75 · small 17.41 · body 20.48 · lead 22.32 · head 24.37 · display 26.62
+                                (was)              23.35        27.03         31.95
+
+   The face's title drops ~10%, the display step ~17%, and the distance from the
+   quietest thing on a face to the loudest falls from 2.17x to 1.80x. Five ranks
+   are still legible as five ranks; none of them shouts.
+
+   P7's LAW IS UNTOUCHED: nothing on a face may set a raw font-size, and a face
+   needing a size the ramp does not have extends the ramp. This edit changed the
+   ramp's ratios and not one call site. */
 .vp-face{
   --face-fs:clamp(1.02rem, min(1.35vw, 4.4cqh), 1.28rem);
   --fs-micro:max(.76rem, calc(var(--face-fs) * .72));
   --fs-small:max(.86rem, calc(var(--face-fs) * .85));
   --fs-body:var(--face-fs);
-  --fs-lead:calc(var(--face-fs) * 1.14);
-  --fs-head:calc(var(--face-fs) * 1.32);
+  --fs-lead:calc(var(--face-fs) * 1.09);
+  --fs-head:calc(var(--face-fs) * 1.19);
   /* [R5b 2026-08-03] A SIXTH STEP, ADDED THE WAY P7 SAYS TO ADD ONE.
      P7's law is "nothing on a face may set a raw font-size again: it picks a
      step" — which means a face that needs a size the ramp does not have must
@@ -160,9 +188,13 @@ body:has(.vp-face) .vp-area::before{display:none}
      on a bill is the largest thing on its panel and `--fs-head` is the size of
      the page's own title, so at head size the four names would tie with the
      heading above them and the bill would have no top rank of its own.
-     1.56 keeps the ramp's ~1.18x progression exactly one step past head. It is
-     used by `.vp-bill-name` and by nothing else. */
-  --fs-display:calc(var(--face-fs) * 1.56)}
+     1.56 kept the ramp's ~1.18x progression exactly one step past head. It is
+     used by `.vp-bill-name` and by nothing else.
+     [A4 2026-08-04] 1.56 -> 1.30, which is the SAME rule applied to the ramp
+     A4 left behind: one step of 1.09 past head. The reason it exists is
+     unchanged — an artist's name on a bill outranks the heading above it — and
+     the rank survives the reduction because every step above body moved. */
+  --fs-display:calc(var(--face-fs) * 1.30)}
 /* [P8 2026-08-02] THE PULL QUOTE LEAVES THE DISPLAY FACE.
    Mike: "KILL the curly display font on the artist pull-quote — it outsizes
    everything and is hard to read. Use the house register."
@@ -907,17 +939,59 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    THE RULE UNDER IT IS NEW AND DELIBERATE. A band that floats over moving text
    with no edge lets the next paragraph slide up and touch the album's name;
    `.ex-banner-console` has carried exactly this border since M-e for exactly
-   this reason. */
+   this reason.
+   ═══ [A2/A3 2026-08-04] THE NAME MOVES TO THE MIDDLE, AND THE BAND GETS
+       SHORTER ══════════════════════════════════════════════════════════════
+   MIKE: "the model number moves: CENTRED, UNDER THE ACTIVE ALBUM, in both the
+   tracklist and the viewer title bar" · "REDUCE WHITESPACE in the title bar".
+
+   WHAT LEFT-ALIGNMENT WAS SAYING BY ACCIDENT. This band spans the WHOLE body —
+   the tracklist column and the viewer column both hang off it — and its title
+   sat 40px from the left edge, which put it above the tracklist and nowhere
+   near the viewer. On the glass it read as the TRACKLIST'S heading rather than
+   as the album's name over both panels, and it was 700px away from the cover it
+   names. The active album is centred in the carousel directly above; centred
+   here, the name lands under it, and it heads the two columns equally because
+   it is over neither of them.
+
+   WHY A GRID AND NOT AN ABSOLUTE CENTRE. `1fr auto 1fr` centres the middle
+   column BY CONSTRUCTION: the two side tracks are equal by definition, so a
+   transport wide enough to need more room widens both and the name stays on the
+   centre line — it just gets narrower and truncates, which it already knows how
+   to do. Absolute centring would have been one line and would have let the name
+   slide UNDER the transport at 390px, where `.bt-title` still holds 11ch. A
+   layout that cannot overlap beats a layout that usually doesn't.
+
+   THE WHITESPACE. Vertical padding 8/7 -> 4/3, so the band is 9px of chrome
+   plus one line box instead of 17px — 39.8px down to 31.8px at 1706px wide, a
+   fifth of the band's height returned to the page. `--ex-banner-h` is the
+   declared number the sticky offsets derive from, so it moves with the padding
+   and nothing has to be hand-copied (its own note, two paragraphs up). */
 .ex-root{--ex-banner-type:clamp(1rem,1.8vw,1.35rem);
-  --ex-banner-h:calc(17px + 1.1 * var(--ex-banner-type));
+  --ex-banner-h:calc(9px + 1.1 * var(--ex-banner-type));
   /* where the pinned furniture ends: the fixed `.wb-bar`'s clearance plus the
      band. Every offset that has to clear both is derived from this one. */
   --ex-band-bottom:calc(52px + var(--ex-banner-h))}
-.ex-album-banner{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:8px 32px 7px;border-top:1px solid var(--wb-border);
+.ex-album-banner{display:grid;grid-template-columns:1fr auto 1fr;
+  align-items:baseline;gap:24px;padding:4px 32px 3px;
+  border-top:1px solid var(--wb-border);
   position:sticky;top:52px;z-index:80;
   background:var(--wb-bg);border-bottom:1px solid var(--wb-border)}
-.ex-album-banner-title{font-family:'Syne',sans-serif;font-weight:700;font-size:var(--ex-banner-type);letter-spacing:.1em;text-transform:uppercase;color:var(--wb-gold);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ex-album-banner-aux{flex:1;min-height:1px}
+.ex-album-banner-title{grid-column:2;justify-self:center;text-align:center;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:var(--ex-banner-type);letter-spacing:.1em;text-transform:uppercase;color:var(--wb-gold);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.ex-album-banner-aux{grid-column:3;justify-self:end;min-height:1px}
+/* NO `min-width:0` ON THE AUX, and that is the whole of what keeps the two
+   from colliding. A grid track sized `1fr` is `minmax(auto,1fr)`, so it
+   refuses to go below its item's MIN-CONTENT width — which is exactly the
+   behaviour wanted here: a transport too wide for its share widens both side
+   tracks equally and the NAME truncates on the centre line. Setting
+   `min-width:0` (which the flex layout needed, and which this rule carried
+   for one draft) told the track the item could be zero wide, and the
+   transport then painted straight across the title. Measured at 386px with a
+   deliberately over-wide transport stub: overflowing to x=-31 inside a bar
+   starting at x=8, over a title at x=86. The transport's OWN parts still
+   shrink — `.bt` keeps its `min-width:0` and `.bt-title` its ellipsis — so a
+   long track title is bounded before it can push the name off centre. */
 /* [M4 2026-08-01] THE NAME IS MGK-VIIIp, AND THE FINAL p IS LOWERCASE.
    `text-transform:uppercase` was rewriting it to MGK-VIIIP everywhere the
    album title appeared - the styling was overruling the data about what the
@@ -1718,7 +1792,10 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    P1's `pointer-events:none` travels with it unchanged; the apron is paint. */
 .ex-album-banner::before{content:"";position:absolute;left:0;right:0;
   bottom:100%;height:16px;background:var(--wb-bg);pointer-events:none}
-.ex-banner-console .ex-album-banner-aux{flex:1;min-width:0;display:flex;
+/* [A2 2026-08-04] `flex:1` is inert now the band is a grid — the aux's width is
+   its own track. `justify-content:flex-end` stays: the transport still packs to
+   the band's right edge, it is simply the right-hand TRACK's edge now. */
+.ex-banner-console .ex-album-banner-aux{display:flex;
   align-items:center;justify-content:flex-end;gap:10px}
 
 .bt{display:flex;align-items:center;gap:8px;min-width:0}
@@ -1746,6 +1823,23 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
   .bt-vol{display:none}
   .bt-title{max-width:11ch}
   .bt-type{display:none}
+  /* [A2 2026-08-04] AND ON A PHONE THE CONSOLE BAR GIVES THE CENTRE BACK.
+     THE ARITHMETIC, MEASURED AT 386px: the band has 242px between its padding
+     and its gaps, and the album's name wants 198 of them. `1fr auto 1fr` makes
+     the two side tracks EQUAL BY DEFINITION, so a transport of width w costs
+     the centre 2w — even the phone transport's floor (bars, play, stop, an
+     11ch title) takes the name below its own width and truncates it. There is
+     no width of transport at 386px for which a centred name survives.
+     SO THE ONE WING WITH A TRANSPORT DROPS TO TWO COLUMNS on a phone: the name
+     left, the transport right, which is where they both were before this round.
+     IT IS SCOPED TO `.ex-banner-console`, so /robots, /hr and /wb keep the
+     centred name at every width; and it does not depend on whether anything is
+     PLAYING, so the bar cannot re-lay itself out under a reader's thumb when a
+     track starts. */
+  .ex-banner-console{grid-template-columns:minmax(0,1fr) auto}
+  .ex-banner-console .ex-album-banner-title{grid-column:1;justify-self:start;
+    text-align:left}
+  .ex-banner-console .ex-album-banner-aux{grid-column:2}
 }
 
 /* [F5 2026-08-02] the vault ?-button and the fact popup (.ex-vaultbtn, .fp*)

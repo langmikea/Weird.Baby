@@ -12,7 +12,7 @@
 // verified, not assumed — but it is also bundling luck rather than a declared
 // dependency, which is R5's point and R5's job (see the round log).
 import { useState, useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./WbHome.css";
 import { useRoom } from "../lib/use-room.js";
 import { useArrival } from "../lib/use-arrival.js";
@@ -33,50 +33,58 @@ import { useArrival } from "../lib/use-arrival.js";
    renders a retired identity. */
 const SUBTITLE = "The Museum";
 
-/* ═══ [N6 2026-08-04] THE GUEST BOOK, TWO WAYS ══════════════════════════════
-   MIKE: "build a SCROLLING-ENTRIES version alongside the current one so Mike
-   can feel it out. Both reachable; he picks."
+/* ═══ [M23b 2026-08-04] THE GUEST BOOK MOVES, AND IT MOVES IN STEPS ═════════
+   MIKE, ruling on the pair N6 built for him to choose between: "the SCROLLING
+   version wins — delete the static list and the ?book= param. Then change its
+   behaviour: THREE ENTRIES VISIBLE, and it BOUNCES to the next stop, PAUSES,
+   bounces to the next stop, pauses — a stepped advance with rests, not a
+   continuous drift. Tune the pause long enough to read three entries."
 
-   WHAT "SCROLLING" HAS TO MEAN HERE, because the obvious reading is already
-   built. `.wb-entries` has been a fixed seven-row window with `overflow-y:auto`
-   and scroll-snap since the book was made — the visitor can already scroll it.
-   A second version that is also a scroll box would not be a choice. So the
-   variant is the book scrolling ITSELF: the signatures drift upward through the
-   window without being touched, the way a lobby board cycles.
+   SO THE VARIABLE THAT WAS BEING COMPARED IS GONE and a different one is set.
+   N6's version drifted: a linear translate running forever, which means every
+   row is in motion at every moment and a reader is always chasing. A STEPPED
+   advance inverts that — the book is STILL almost all of the time, and the
+   motion is a transition between two states of rest rather than the state
+   itself. What a visitor reads is a held page, not a moving list.
 
-   THE SAME WINDOW, DELIBERATELY. Both versions are seven rows at `--gb-row`, in
-   the same box, with the same rows in the same order. The ONLY variable is
-   whether the list moves on its own, because that is the comparison being asked
-   for and anything else that differed would confound it.
+   THE STOP IS A PAGE, NOT A ROW, and that is what makes the pause tunable to
+   Mike's instruction. If it advanced one signature at a time, "long enough to
+   read three entries" would be the wrong unit — two of the three would already
+   have been read at the previous stop. Advancing by the whole window means each
+   rest presents three signatures nobody has seen, and the rest is sized for
+   exactly that: 5.0s of stillness against a 0.52s move, so the book is at rest
+   90% of the time.
 
-   THE LOOP IS TWO COPIES AND A 50% TRAVEL, which is the seamless-marquee
-   pattern: the track holds the entries twice and slides up by exactly one
-   copy's height, so the moment it resets the pixels are identical and there is
-   no visible jump. The second copy is `aria-hidden` — it is the same
-   signatures, and a screen reader announcing the museum's guest book twice
-   would be a defect dressed as an animation.
+   THE BOUNCE IS THE EASING. `cubic-bezier(.34,1.3,.64,1)` overshoots its target
+   and settles back, which is what "bounces to the next stop" describes and what
+   a physical board of hinged rows does. It is one property, in the stylesheet,
+   named where the transition is declared.
 
-   IT STOPS WHEN A READER ARRIVES. `:hover` and `:focus-within` pause it, so a
-   name that catches somebody's eye can be read rather than chased. A moving
-   list nobody can stop is the failure mode of every ticker ever built.
+   THE LOOP IS STILL TWO COPIES, and the wrap is now arithmetic rather than a
+   keyframe: the track advances past the end of the first copy, and the moment
+   the transition finishes the offset drops by one copy's worth WITH TRANSITIONS
+   OFF. The pixels are identical across that swap because the second copy is the
+   first, so nothing is visible. Two copies are sufficient and the proof is a
+   count: the furthest the track ever reaches is `n+2` and the lowest row on
+   screen is `n+4`, against `2n-1` available, which holds for every n >= 5 —
+   which is `SCROLL_MIN`, which is already the floor for running at all.
 
-   AND IT DOES NOT MOVE FOR EVERYONE. `prefers-reduced-motion: reduce` is
-   honoured by falling back to the static list — not by slowing it down. That
-   is the platform's own signal (Doctrine 8) and the answer to it is "don't",
-   not "less".
+   IT STOPS WHEN A READER ARRIVES. Hover and focus-within suspend the timer, so
+   a name that catches somebody's eye stays put. A moving list nobody can stop
+   is the failure mode of every ticker ever built, and a stepped one is not
+   exempt.
 
-   IT ALSO DOES NOT RUN ON A SHORT BOOK. Below `SCROLL_MIN` the entries do not
-   fill the window, so there is nothing to scroll past and the animation would
-   drag a short list through empty space. Under that count the scrolling version
-   renders the static one — same rows, no motion, no explanation needed.
-
-   THE SWITCH IS `?book=scroll` AND IT IS TEMPORARY BY DECLARATION. This file
-   already carries the cautionary tale in the M-ID note above: `?subtitle=` was
-   a shown-then-asked device that outlived the asking and became four dead
-   strings and a live URL rendering a retired identity. The loser here is
-   deleted the day Mike chooses, and that deletion is a row in
-   docs/OPEN_ACTIONS.md rather than a good intention in a comment. */
+   AND IT DOES NOT MOVE FOR EVERYONE. `prefers-reduced-motion: reduce` renders
+   the plain list — the platform's own signal (Doctrine 8), answered with
+   "don't" rather than "slower". THE PLAIN LIST IS NOT THE DELETED VERSION
+   COMING BACK: what Mike struck was the static book as a SHIPPED ALTERNATIVE
+   and the `?book=` switch that offered it. A fallback for a reader who has
+   asked their operating system for no animation, and for a book too short to
+   have a second page, is the winner degrading — not the loser surviving. There
+   is no address that serves it by choice. */
 const SCROLL_MIN = 5;
+const VISIBLE = 3;          /* rows in the window; `--gb-visible` mirrors it */
+const REST_MS = 5000;       /* long enough to read three signatures */
 
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
@@ -95,7 +103,8 @@ function GuestRow({ e }) {
   );
 }
 
-function GuestBookList({ entries }) {
+/* The plain window — the fallback described above, and nothing selects it. */
+function GuestBookPlain({ entries }) {
   return (
     <div className="wb-entries">
       {entries.map((e, i) => <GuestRow e={e} key={i} />)}
@@ -103,17 +112,62 @@ function GuestBookList({ entries }) {
   );
 }
 
-function GuestBookScroll({ entries }) {
-  if (entries.length < SCROLL_MIN) return <GuestBookList entries={entries} />;
-  /* one copy's travel per `entries.length` rows — so the drift reads at the
-     same speed whether the book holds six signatures or sixty. */
-  const dur = `${(entries.length * 2.6).toFixed(1)}s`;
+/* the platform's own signal, read live rather than once: a reader can change
+   the setting without reloading the lobby, and the book should notice. */
+function useReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const read = () => setReduced(mq.matches);
+    read();
+    mq.addEventListener("change", read);
+    return () => mq.removeEventListener("change", read);
+  }, []);
+  return reduced;
+}
+
+function GuestBook({ entries }) {
+  const n = entries.length;
+  const reduced = useReducedMotion();
+  /* `pos` is in ROWS and may run one page past the first copy; `snap` turns the
+     transition off for the single frame that carries the wrap. */
+  const [pos, setPos] = useState(0);
+  const [snap, setSnap] = useState(false);
+  const [held, setHeld] = useState(false);
+  const running = n >= SCROLL_MIN && !reduced;
+
+  useEffect(() => {
+    if (!running || held) return;
+    const t = setTimeout(() => { setSnap(false); setPos(p => p + VISIBLE); },
+      REST_MS);
+    return () => clearTimeout(t);
+  }, [running, held, pos]);
+
+  /* the wrap. Once the move has finished, an offset that has run past the end
+     of the first copy drops back by one copy — same pixels, no transition, so
+     the swap cannot be seen. */
+  function onSettled(e) {
+    /* only the track's own transform — `transitionend` bubbles, and a row that
+       ever grows a transition would otherwise fire the wrap mid-page. */
+    if (e.target !== e.currentTarget || e.propertyName !== "transform") return;
+    if (pos >= n) { setSnap(true); setPos(p => p - n); }
+  }
+
+  if (!running) return <GuestBookPlain entries={entries} />;
+
   return (
-    <div className="wb-entries wb-entries-scroll" style={{ "--gb-dur": dur }}>
-      <div className="wb-scroll-track">
+    <div className="wb-entries wb-entries-scroll"
+      onMouseEnter={() => setHeld(true)} onMouseLeave={() => setHeld(false)}
+      onFocus={() => setHeld(true)} onBlur={() => setHeld(false)}>
+      <div className="wb-scroll-track"
+        style={{ transform: `translateY(calc(var(--gb-row) * -${pos}))`,
+                 transition: snap ? "none" : undefined }}
+        onTransitionEnd={onSettled}>
         <div className="wb-scroll-half">
           {entries.map((e, i) => <GuestRow e={e} key={i} />)}
         </div>
+        {/* the same signatures — announcing the museum's guest book twice would
+            be a defect dressed as an animation. */}
         <div className="wb-scroll-half" aria-hidden="true">
           {entries.map((e, i) => <GuestRow e={e} key={i} />)}
         </div>
@@ -131,11 +185,6 @@ export default function WbHome() {
      room in the museum resets only on the first visit of a session. */
   useArrival("lobby", { always: true });
   const navigate = useNavigate();
-  /* [N6] the guest-book selector — see the note above `SCROLL_MIN`. Anything
-     other than the one recognised value renders the book as it stands today,
-     so a mistyped parameter cannot empty the lobby's right-hand column. */
-  const [params] = useSearchParams();
-  const book = params.get("book") === "scroll" ? "scroll" : "list";
   const [name, setName] = useState("");
   const [note, setNote] = useState("");
   const [entries, setEntries] = useState([]);
@@ -330,12 +379,8 @@ export default function WbHome() {
             <div className="wb-confirmed">You're in the book. Welcome, Founding Visitor.</div>
           )}
 
-          {/* [N6] the two versions — see the note above `SCROLL_MIN`. */}
-          {!loading && entries.length > 0 && (
-            book === "scroll"
-              ? <GuestBookScroll entries={entries} />
-              : <GuestBookList entries={entries} />
-          )}
+          {/* [M23b] one book — see the note above `SCROLL_MIN`. */}
+          {!loading && entries.length > 0 && <GuestBook entries={entries} />}
         </div>
 
         <div className="wb-footer">

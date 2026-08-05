@@ -119,10 +119,27 @@ function scrubFace(face) {
      written into one would print exactly the way the Portal's five drum
      refusals did (v46/C1). A spread whose head is entirely the operator's
      keeps its tiles and loses its label — the wall is the content. */
+  /* [A7 2026-08-04] AND SO IS EVERY TILE'S CAPTION, which A3 left undone and
+     the register has carried as C15 since. The reader prints a tile's `label`
+     and its `date` under the picture and in the lightbox's caption line, so a
+     marker written into either would print exactly the way a spread head's
+     would — the same defect, one element further in.
+     A TILE WHOSE CAPTION IS ENTIRELY THE OPERATOR'S KEEPS ITS PICTURE and loses
+     its words, which is the rule the spread heads already set: the wall is the
+     content. Dropping the tile instead would silently change a count the
+     tombstone above it states out loud. */
+  const scrubTiles = tiles => (tiles || []).map(t => {
+    const label = visitorProse(t.label);
+    const date = visitorProse(t.date);
+    return { ...t, label: kept(label) ? label : null,
+                   date: kept(date) ? date : null };
+  });
+  if (Array.isArray(face.collage)) out.collage = scrubTiles(face.collage);
   if (Array.isArray(face.spreads)) {
     out.spreads = face.spreads.map(s => {
       const head = visitorProse(s.head);
-      return kept(head) ? { ...s, head } : { ...s, head: null };
+      return { ...s, head: kept(head) ? head : null,
+                     tiles: scrubTiles(s.tiles) };
     });
   }
   if (Array.isArray(face.sideboxes)) {
@@ -1803,10 +1820,15 @@ function SpreadTiles({ sp, wall, face, openLink }) {
             {/* eager, not lazy: the wall IS the page's payoff and a wall
                 that fills in as you watch reads as a broken wall. */}
             <img src={c.img} alt="" />
-            <span className="vp-collage-cap">
-              {c.date && <span className="vp-collage-date">{c.date}</span>}
-              <span className="vp-collage-title">{c.label}</span>
-            </span>
+            {/* [A7 2026-08-04] the caption is now conditional on there BEING
+                one — `scrubFace` may have taken both halves (C15), and an empty
+                caption strip under a plate is a gap that looks like a defect. */}
+            {(c.date || c.label) && (
+              <span className="vp-collage-cap">
+                {c.date && <span className="vp-collage-date">{c.date}</span>}
+                {c.label && <span className="vp-collage-title">{c.label}</span>}
+              </span>
+            )}
           </button>
         );
       })}

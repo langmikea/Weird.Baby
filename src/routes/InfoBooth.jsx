@@ -33,7 +33,7 @@
 // [L3 2026-08-02] Token conformance: 22 hard-coded colours here now read their
 // `--wb-*`. Three have no token and are listed in that round's log.
 
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 /* [E4 2026-08-03] TWO SHEETS, AND THE ORDER IS THE POINT. `sheet.css` is the
    house's document-room furniture — the root, the card, the credo, the rule,
    the questions, the foot — shared with /foundation. `InfoBooth.css` is now
@@ -194,93 +194,33 @@ const FAQ = [
   },
 ];
 
-/* ═══ [N5 2026-08-04] THE ROOM'S HOOK — TWO DIRECTIONS, MIKE PICKS ══════════
-   MIKE: "'NO TICKET REQUIRED' written on a ticket image is confusing, and the
-   full-black ticket is jarring. Mike's lean: LOSE the 'no ticket required'
-   framing and use a more realistic ticket (3D-game quality, not a photograph)
-   — OR replace the ticket with a different intriguing related visual. Render
-   both directions for his choice."
+/* ═══ [M23a 2026-08-04] THE HOOK IS THE TITLE. BOTH OBJECTS ARE DELETED ═════
+   MIKE, ruling on the pair N5 built for him to choose between: "the booth image
+   dies — BOTH of them. No ticket, no enamel sign, no replacement visual. THE
+   TITLE IS THE GRAB, and the copy already says it plainly. A picture arguing
+   with text that already works is clutter."
 
-   BOTH FAULTS ARE REAL AND THEY ARE DIFFERENT FAULTS.
-   · THE COPY FAULT. F1's ticket printed "no charge · no ticket required" on a
-     ticket. A visitor reads the object first and the words second, so the
-     object says "here is your ticket" and the words say "there is no ticket",
-     and the reader has to resolve a contradiction to arrive at a fact the page
-     states plainly four lines below. The fact was never in doubt; the device
-     was arguing with itself.
-   · THE VALUE FAULT. It was `--wb-gold` ground — #211f1c, the ramp's ink — so
-     the first object on the museum's lightest page was a near-black slab. F1
-     chose that deliberately ("the one value inversion on the sheet, so the eye
-     lands there first") and it works too well: it lands like a warning, not
-     like an invitation, in the room whose whole register is welcoming.
+   HE STRUCK BOTH CANDIDATES AND THE QUESTION UNDER THEM. F1's premise was that
+   this room was the building's purest failure of the Visual Hook Law — a sheet
+   of paper carrying a credo, eleven questions and an address, with nothing to
+   look at. N5 accepted that premise and argued only about WHICH object. Mike's
+   ruling rejects the premise: the credo IS the object. "The Weird.Baby Museum
+   is free. Equally free. Always." set at display size over four short lines of
+   plain fact is words presented in a different FORMAT, which is the law's own
+   escape clause, and every object N5 or F1 put above it was made out of those
+   same words — a picture of the sentence, sitting on top of the sentence.
 
-   DIRECTION A — THE TICKET, MADE OF PAPER. Ticket stock rather than ink, a
-   guilloche security tint, a real perforation, a punched hole and a slight
-   curl. Every one of those is what makes a printed ticket read as an object
-   you could pick up, which is what "3D-game quality, not a photograph" asks
-   for: modelled, not photographed. The copy loses the contradiction and keeps
-   the fact — ADMIT ONE · NO CHARGE · ALWAYS, all of it already on this page,
-   and "Always" is the credo's own word.
-   DIRECTION B — THE ENAMEL SIGN. A different object CLASS, on purpose: two
-   variations on a ticket would not be a choice worth rendering. This is the
-   vitreous-enamel plate bolted over a booth — the question mark, the room's
-   name, a keyline inset from the edge, four bolt heads. It sets in
-   `--wb-gold-lo`, a full step off the ink, so it is an object with weight
-   without being the slab. Its subtitle is this page's credo, verbatim.
+   THE EXCEPTION IS RECORDED RATHER THAN ARGUED AWAY, on Mike's instruction:
+   **a page whose own words are the hook needs no image.** That now stands
+   beside the Visual Hook Law, and it is the second time this round it has been
+   invoked — /robots' FAQ face lost its tally card under the same reading (see
+   robots.js, A5, and register M29).
 
-   NEITHER ADDS A CLAIM. Every word on both is already printed on this page or
-   is the museum's own name, which is the discipline F1 set and the reason
-   neither needed a [PAPA]. No serial number is invented on the ticket — "No.
-   ∞" survives from F1 precisely because it is a statement rather than a
-   number somebody would have had to make up.
-
-   THE SWITCH IS `?hook=sign`, AND IT IS TEMPORARY BY DECLARATION. `/booth`
-   ships direction A because that is Mike's stated lean; `/booth?hook=sign`
-   shows B. THE LOBBY'S `?subtitle=` IS THE CAUTIONARY TALE and it is recorded
-   in WbHome.jsx: a shown-then-asked device that outlives the asking becomes
-   dead strings and a live URL rendering a retired identity. So the loser is
-   deleted the day he chooses, and that deletion is a row in
-   docs/OPEN_ACTIONS.md rather than an intention in a comment.
-   `aria-hidden` ON BOTH, for F1's reason unchanged: a screen reader gets the
-   credo and the answers, which say all of this in sentences. */
-function BoothTicket() {
-  return (
-    <div className="booth-ticket" aria-hidden="true">
-      <div className="booth-ticket-stub">
-        <span className="booth-ticket-punch" />
-        <span className="booth-ticket-mark">WB</span>
-        <span className="booth-ticket-no">No. &infin;</span>
-      </div>
-      <div className="booth-ticket-main">
-        <span className="booth-ticket-kicker">The Weird.Baby Museum</span>
-        <span className="booth-ticket-big">Admit One</span>
-        <span className="booth-ticket-price">No charge &middot; always</span>
-      </div>
-    </div>
-  );
-}
-
-function BoothSign() {
-  return (
-    <div className="booth-sign" aria-hidden="true">
-      <span className="booth-sign-glyph">?</span>
-      <span className="booth-sign-text">
-        <span className="booth-sign-big">Information</span>
-        {/* [N5] THE SUBTITLE NAMES THE MUSEUM RATHER THAN QUOTING THE CREDO,
-            and that was found by looking at the built page rather than at the
-            source. The first draft set "Equally free. Always." here — the
-            discipline this house uses for every typographic object, which is
-            that not one word on it may be new — and on the glass it lands 120px
-            above the credo saying THE SAME FOUR WORDS at three times the size.
-            The ticket does not have this problem because its own line ("no
-            charge · always") is a different sentence from anything near it.
-            The museum's name is the ticket's kicker, adds no claim, and does
-            not repeat the line under it. */}
-        <span className="booth-sign-sub">The Weird.Baby Museum</span>
-      </span>
-    </div>
-  );
-}
+   WHAT WENT: `BoothTicket`, `BoothSign`, the `?hook=` selector, and all of
+   `.booth-ticket-*` / `.booth-sign-*` in InfoBooth.css. The whole of it, in one
+   commit, because the lobby's retired `?subtitle=` is this file's own recorded
+   lesson about what a shown-then-asked device becomes when it outlives the
+   asking. Register row M23's first half closes. */
 
 export default function InfoBooth() {
   /* [R5] this room owns the page ground while it is mounted — see
@@ -289,11 +229,6 @@ export default function InfoBooth() {
   /* [M2] first visit of the session opens at the top; a return keeps the
      question the visitor had open and the place they were reading. */
   useArrival("booth");
-  /* [N5] the hook selector — see the note above `BoothTicket`. Anything other
-     than the one recognised value falls to Mike's stated lean, so a mistyped
-     parameter cannot render a blank space where the room's hook should be. */
-  const [params] = useSearchParams();
-  const hook = params.get("hook") === "sign" ? "sign" : "ticket";
 
   /* Scrubbed at the render seam, exactly as the exhibit does it: the sentence
      carrying the marker is dropped, the rest of the answer stands. An answer
@@ -311,21 +246,10 @@ export default function InfoBooth() {
       <MuseumBar room="Information Booth" />
 
       <div className="sheet-card">
-        {/* ==== THE ROOM'S HOOK ================================================
-            [F1 2026-08-03] WHY THERE IS AN OBJECT HERE AT ALL, and it is
-            unchanged by this round. THE VISUAL HOOK LAW: "land on words alone
-            and the visitor probably walks out. EVERY surface needs something
-            visually compelling besides written words — not necessarily a photo;
-            even words presented in a different FORMAT can be the hook." This
-            room was the purest failure of it in the building — a sheet of paper
-            carrying a credo, eleven questions and a contact address, a thousand
-            words and not one thing to look at. It is also the room Mike calls
-            AWESOME, which is the point: the writing was never the problem, the
-            LANDING was. The object is made of the page's own sentences, adds no
-            claim, and needed no [PAPA].
-            [N5 2026-08-04] WHICH object is now Mike's open choice — the two
-            candidates and the reasoning are above `BoothTicket`. */}
-        {hook === "sign" ? <BoothSign /> : <BoothTicket />}
+        {/* ==== THE ROOM'S HOOK IS THE NEXT ELEMENT ============================
+            [M23a 2026-08-04] There is no object above the credo any more and
+            there is not meant to be — see the ruling at the head of this file.
+            The credo is the landing. */}
 
         {/* THE PLACARD. Mike's words, unchanged in substance.
             [M3] THE LINE BREAKS ARE GONE. Mike: "the line breaks on this page

@@ -611,7 +611,7 @@ const ARTISTS = [
     name: "Jesse Welles",
     tags: ["wal", "jesse-welles"],
     art: "/images/wal/jesse-welles-cover.jpg",
-    plate: "/images/wal/jesse-welles-plate.jpg",
+    plate: "/images/wal/jesse-welles-plate.webp",
     plateCaption: "From his own site.",
     songs: [
       /* [TRANSPOSED] Mike supplied this id under Carsie Blanton; the

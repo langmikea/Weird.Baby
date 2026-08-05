@@ -385,6 +385,28 @@ building on 2026-08-04 was marker lettering **painted into a JPEG**
 (`public/museum.jpg`, now deleted) labelling four rooms that never existed. It
 took a screenshot to find. Lap the glass, not only the strings.
 
+## THE LAW OF SUBTRACTION (Mike, 2026-08-04 — STANDING)
+
+> **If it does not help, it hurts. If it does not need to be there, it needs to
+> not be there.**
+
+Canonical text + reasoning: `docs/canonical/OPERATIONS.md` §7 Doctrine 16.
+Mirrored in `STATE.md`.
+
+**It is NOT the visible-line law again, and the case that produced it is the
+proof.** Doctrine 11 tests a line's SUBJECT; this tests its NECESSITY. The 31½
+tally card was a fact about the collection, passed the visible-line test on every
+reading, was true, and was still wrong to set at 132pt — nothing was wrong with
+it except that it did not need to be there.
+
+Ask of any object, control, count, caption or badge: **what is lost if it goes?**
+"Nothing a reader would miss" means it goes. Harmless is not passing — harmless
+costs attention.
+
+It is a reason to delete, never a reason to delete QUIETLY: everything struck
+under it is named in the round log and, if it leaves a gap, given a row in
+`docs/OPEN_ACTIONS.md`.
+
 ## THE PROVENANCE GATE (v48, 2026-08-04 — STANDING)
 
 `npm run provenance:gate` runs beside lint and build on **every** packet. It
@@ -409,6 +431,40 @@ catches invented CONTENT, Doctrine 11 catches a line whose SUBJECT is the work.
 ## Recent session log
 
 Maintained here. Newest first.
+
+### 2026-08-04 → M23 RULED + THE ALBUM ROUND (v51; M23a–M23b, A1–A7) — sealed
+- **M23a/M23b** Mike ruled on both pairs v50 built, and both rulings went past
+  "pick one". The booth loses **BOTH** hook candidates with **no replacement** —
+  *"THE TITLE IS THE GRAB"* — and the exception is recorded beside the Visual
+  Hook Law: **a page whose own words are the hook needs no image.** The guest
+  book keeps the scrolling version and then changes it: **three rows, a stepped
+  PAGE advance**, `cubic-bezier(.34,1.3,.64,1)` bounce, 5.0s rest, wrap by
+  arithmetic on `transitionend`. `?hook=` and `?book=` are gone — **no query
+  parameter selects a variant anywhere in the building any more.**
+- **A1** `tools/make_unit_covers.py` — both machine albums on the ROBOTS
+  template, constants LIFTED from `make_robots_cover.py` so a re-render cannot
+  drift. VIIIp gets the unit whole; **MGK-VIII gets a detail because this museum
+  holds no photograph of it whole**, which its own archive says out loud (M30).
+- **A2/A3** the album band is a `1fr auto 1fr` grid — name centred under the
+  active cover (845=845 at 1706px, 185=185 at 386px), band 39.8 → 31.8px.
+  **`.ex-album-banner-aux` must not carry `min-width:0`** or the transport paints
+  across the name; measured overflow to x=−31. At ≤720px the one wing with a
+  transport falls back to two columns, and the arithmetic for why is in the log.
+- **A4** the three ramp steps above body come down (lead 1.14→1.09, head
+  1.32→1.19, display 1.56→1.30). Title 27.03 → 24.37. **Zero call sites
+  changed** — P7's law intact.
+- **A5** the 31½ card struck, and the count with it in all three places; the FAQ's
+  *"How many are there?"* removed rather than re-answered. **It emptied the
+  provenance register's INVENTION class** (3 → 0, ceiling ratcheted to 0) and
+  closed M1 by deletion. Cost, named: the FAQ face now ships with no picture
+  (M29). Mike's law recorded as **Doctrine 16, THE LAW OF SUBTRACTION**.
+- **A7** C14 (a WebP named `.jpg`) and C15 (unscrubbed collage captions, proved
+  live with an injected marker) closed. **C14 exposed C32** — the asset table is
+  keyed by path, so a rename drops every judgement on a file in silence.
+- Gates: lint **11/9 = baseline**; build green **70 modules**; provenance gate
+  **PASS** (0 undeclared, 0 stale, INVENTION 0); asset table **253 rows**;
+  desktop + genuine 386px laps over nine routes, zero horizontal scroll.
+- Round log: `docs/MUSEUM_ALBUM_ROUND_LOG-20260804.md`.
 
 ### 2026-08-04 → THE OVERNIGHT (v50; N1–N9) — sealed
 - **N1** THE MORGUE struck — both walls read **IMAGE ARCHIVE** (closes M6); **The
@@ -508,76 +564,11 @@ Maintained here. Newest first.
 ### 2026-05-30 → broken-preview fallback for gallery/artifact images
 - `HrExhibitFlow.jsx` + `.css`: gallery/artifact images with a null/empty `src` or that 404/fail to load now degrade to a styled placeholder (muted INK/GOLD tile, artifact title + "image unavailable") instead of silent blankness — across the gallery card cover and the lightbox large image + thumb strip. Background-image surfaces (no native `onError`) detect failure via an out-of-band `Image()` probe hook (`useImageFailed`); the lightbox `<img>` uses native `onError` (`FallbackImg`, keyed on `src`). Display-only — no DB/sync/export touch. Addresses the HEIC-incident failure mode (assets fail by path OR format with no front-end signal).
 
-### 2026-05-15 → tier reconciliation + navigation expansion
-- `7f9843d` fix(deep-dive): trimmed `TIER_BY_NAMESPACE` in `hr_dimensions.js` to the canonical seven (`year/album/song/venue/people` at Tier 1; `source/type` at Tier 2). MV-residue namespaces fall to dynamic Tier 3 via the `?? 3` fallback. `CANONICAL_VOCABULARY.md` line 86 follow-up resolved.
-- `386f69e` docs: NAVIGATION.md — added "Current state and what's next" section.
-
-### 2026-05-14 → navigation + architecture critique (`5a89835`)
-- Landed `NAVIGATION.md`, a Phase 2b architecture critique, and vocab migration scripts.
-
-### 2026-05-13 → B-1 plan locked (`5558fb2`)
-- B-1 implementation plan committed; seven operator decisions locked.
-
-### 2026-05-12 → architectural recovery (`b1a632c`)
-- `docs/CANONICAL_VOCABULARY.md` locked from v28_3 prototype; UX/data lifecycle specs and Q-5 follow-up note landed. Flags drift between `b29f9fe`'s `TIER_BY_NAMESPACE` heuristic and the new canonical doc (reconciled 2026-05-15 in `7f9843d`).
-
-### 2026-05-11 → MV-driven artifacts + v4/v5 spec arc (PR #16, `b29f9fe`)
-- `21cf558` docs: end-to-end workflow map (ground truth before architectural pivot).
-- `649f006` docs: `SPEC_DRAFT_v4.md` — corrected architecture, supersedes v3.
-- `669c7e7` docs: `SPEC_DRAFT_v5.md` — strict tag equality, Exhibitor's Badge, loud failures.
-- `79159e3` docs: `SPEC_DRAFT_v5_1.md` — patch addressing v5 design review findings.
-- `08299ee` docs: `SPEC_DRAFT_v5_2.md` — Q-1, Q-5, Q-6 resolved; Path B selected.
-- `b29f9fe` feat(deep-dive): phase v5-3+v5-4 — MV-driven artifacts replace authored card data. Added `TIER_BY_NAMESPACE` heuristic with seven MV-residue namespaces (reconciled to canonical 2026-05-15 in `7f9843d`).
-
-### 2026-05-10 → deep dive phases 1 + 3, export CLI, playbook updates
-- `1ca62ac` tools: yt-ingest CLI for YouTube → MediaVault pipeline (PR #9).
-- `a858a32` docs: deep dive phase 0 audit + status taxonomy research.
-- `3c16a30` docs: stage deep dive review materials (PR #10).
-- `c14267e` cards: add stable `id` field to all source entries (PR #11).
-- `5f1bdee` docs: deep dive verification reports (4, 4B, 4C).
-- `c059141` docs: deep dive spec v3 and v2 review report (PR #12).
-- `bb2c343` feat(deep-dive): phase 1 foundation — vocabulary, prebuild, columns, adapter wiring (PR #13).
-- `860ee05` feat(deep-dive): phase 3 export CLI — MV to museum bridge (PR #14). Added `tools/export-deep-tags.mjs`; later renamed to `tools/export-artifacts.mjs` with `npm run export-artifacts`.
-- `8872ec0` fix(export-deep-tags): drop `archived_at` clause; add `prebuild-install` dev dep.
-- `caf1b01` chore: add `.gitattributes` enforcing LF; renormalize existing files.
-- `53394ff` docs(claude.md): playbook updates from Phase 3 session findings (PR #15).
-
-### 2026-05-09 → FUSE git-init quirk + yt schema close (PR #8, `a208ebd`)
-- Captured FUSE git-init defect in CLAUDE.md cowork-sandbox quirks. Closed yt-ingest schema's `local_asset_path` question.
-
-### 2026-05-08 → yt-ingest design (PR #7, `5702e47`)
-- YouTube ingest design + schema landed; CLI deferred to PR #9.
-
-### 2026-05-08 → exhibit UX round 2 (PR #5, squash `218fe96`)
-- TAB_PEEK 14 → 30 (full label visible)
-- Active tab fontWeight 700 → 800; 1px INK_SOFT cover masks deck-body border under active tab
-- `noneSelected` prop threaded through pills; "all selected" semantics for empty columns
-- `pillCount` color now matches `pill` label in every state
-- Per-tab `✕` always rendered (dim when no clearable selection, bright when clearable)
-
-### 2026-05-08 → exhibit UX tweaks 1 (PR #4, squash `b352ccc`)
-- Tab strip 42 → 30, font kept
-- Tracklist variants now radio (one per track)
-- Tracklist unselected `#4a4a4a` → `#7a7a7a`; deck pill unselected `#b8974a` → `#6a5520`
-- Per-tab `✕` introduced; strip-level "clear all" removed
-- `position: fixed` on deck (vs absolute-in-section) — pins to viewport bottom regardless of section centering
-- Conditional 60px lift via `body:has(.pb)`
-- AuditStrip render-call removed (function preserved)
-- Album art scales with `cfH` panel height
-
-### 2026-05-07 → lint cleanup (PR #3, squash `348c93f`)
-- HrArchive duplicate `borderBottom` removed
-- Exhibit `selectAlbum` declaration moved above the useEffect that uses it
-- HrExhibitFlow `serifDisplay` annotated as preserved-unused
-- Exhibit `usePersist` empty catch documented
-- `__BUILD_TIME__` declared as a global in `eslint.config.js`
-
-### 2026-05-06 → tracks and variants populated (PR #2, squash `e4ea01b`)
-- Variant taxonomy locked: Official / Live / Lyrics / Cover; clips removed
-- Lyric videos re-tagged from `type: "official"` to `type: "lyrics"` on Lampshade, Quicksand Sinking, Friendly Fire
-- Clips dropped from spine: '94 Acoustic Clip, Low Live Clip, Flash in the Pan Live Clip, A Pot Song Official Clip
-- HrArchive `ALBUMS` reconciled: Skipping Stones last track corrected (Run From The Devil → Soul Sucker), Crooked Home appended Cookin' in the Bathroom and A Pot Song
-- HrArchive `SINGLES` deduped (kept Chase The Dragon only)
+### Older entries (2026-05-06 → 2026-05-15) — archived
+Moved to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md` on 2026-08-04, verbatim,
+under this file's own ≈600-line rule. Covers the tier reconciliation, the
+navigation/architecture critique, B-1, the v4/v5 spec arc, the deep-dive phases,
+the FUSE git-init quirk, and the first three exhibit-UX rounds.
 
 ## Conventions for updating this file
 

@@ -7,7 +7,7 @@ tree, the live working tree wins — always.
 
 **Read this file FIRST in every session, before STATE.md, before any handoff.**
 
-**Last verified against live tree:** 2026-08-04 (v50 THE OVERNIGHT — THE MORGUE is struck and both walls read IMAGE ARCHIVE; The Firmware is TECHNICAL SPECIFICATIONS on both faces; The Parts is deleted; DOC CONTROL is a fourth front-desk face; the archive stows its older spreads; the asset table gained a fifth judged field, `revealArc`)
+**Last verified against live tree:** 2026-08-04 (v51 M23 RULED + THE ALBUM ROUND — both of M23's pairs are struck and both losers deleted, so `?hook=` and `?book=` no longer exist; the guest book steps; the two machine albums wear covers built on the ROBOTS template; the album band's title is centred and shorter; the face type ramp's top three steps came down; the 31½ card and the count with it, which emptied the provenance register's INVENTION class)
 
 ---
 
@@ -94,9 +94,10 @@ The HR exhibit page is **two stacked components**. Mount chain:
 | Pop-Up-Video box = `FactScroller` (def :79, mounted :978), `‹ ›` nav :155–156 | `Exhibit.jsx`; facts data: `src/routes/hr/hr_facts.js` (seed content — fill is a separate task) |
 | Player ownership (YT/audio, shuffle/loop state) | `Exhibit.jsx` |
 | **Artifact deck/grid + controls dock** (tabs, P3Panel :2446, typed cards, presets/journal tab bodies) | `src/routes/hr/HrExhibitFlow.jsx` (~162KB) + `HrExhibitFlow.css`. **Dock is a LEFT RAIL** (relayout 2026-06-09): vertical tab strip on the left edge, peek-on-hover, `ew-resize` drag on the rail's right edge, width persisted `wb-hr-deck-width`; rail lifts above the full-width player bar via `body:has(.pb) .hr-deck{bottom:60px}`. Axis geometry split JS (`S.deck`/`S.panelPos`/`S.tab`/`S.resizeHandle`) + CSS (`.hr-deck`/`.hr-tab-strip`/`.hr-deck-body`). |
+| **The album band (`.ex-album-banner`) and the face type ramp** | `src/routes/exhibit/Exhibit.css`. **[A2/A3/A4 2026-08-04]** The band is a **`1fr auto 1fr` grid**, so the album's name is centred BY CONSTRUCTION and lands under the active cover (845=845 at 1706px, 185=185 at 386px); `--ex-banner-h` is `9px + 1.1 × --ex-banner-type` (was 17px) and every sticky offset derives from it. **`.ex-album-banner-aux` must NOT carry `min-width:0`** — a `1fr` track is `minmax(auto,1fr)` and refuses to shrink below its item's min-content, which is the only thing stopping a transport painting across the name; with `min-width:0` it measured overflow to x=−31 over a title at x=86. At **≤720px the ONE wing with a transport (`.ex-banner-console`, /wal) drops to two columns**, name left — equal side tracks make a transport of width w cost the centre 2w and nothing is narrow enough at 386px. The face ramp's three steps ABOVE body are now lead 1.09 / head 1.19 / display 1.30 (were 1.14 / 1.32 / 1.56); micro, small and `--face-fs` are untouched, because the small end's rem floors are P7's answer to unreadable small type and the dial takes the small type with it. |
 | Canonical palette/typography tokens | `src/styles/museum-tokens.css`. **F0 2026-08-03:** `--wb-gold-mute` re-pinned to `#5f5c53` (the old `#9b978d` failed AA on all five paper grounds); new `--wb-hairline` holds the old value for the drag rules that chose faintness deliberately. JS pair is `src/styles/tokens.js` — change one, change the other, same edit. |
-| **Information Booth** (`/booth`) and **The Weird.Baby Foundation** (`/foundation`) | **[N5/N6 2026-08-04] TWO SURFACES CURRENTLY SHIP TWO ALTERNATIVES EACH, BY MIKE'S INSTRUCTION, AND THE LOSER IS DELETED WHEN HE CHOOSES (register row M23):** the booth's hook is a paper ticket at `/booth` and an enamel sign at `/booth?hook=sign` (`BoothTicket` / `BoothSign`); the lobby's guest book is a static list at `/` and a self-scrolling one at `/?book=scroll` (`GuestBookList` / `GuestBookScroll` in `WbHome.jsx`). Both switches fall back to the default on any unrecognised value. `src/routes/InfoBooth.jsx` + `InfoBooth.css`; `src/routes/Foundation.jsx` + `Foundation.css` (`.fnd-` prefix, `data-room="foundation"`). **THE SHARED FURNITURE IS `src/styles/sheet.css` (`.sheet-*`) AND BOTH ROOMS IMPORT IT** — root, card, credo, rule, questions, contact, way back. Edits there land on BOTH rooms; that is the point of the file. Each route's own sheet keeps only its page ground and its own objects: the booth's ADMIT ONE ticket (`.booth-ticket*`), the Foundation's account card + register + zero-cost invoice (`.fnd-*`). Before E4 (2026-08-03) all of it lived in `InfoBooth.css`, which /foundation imported — furniture for two rooms named for one, carried as a want in three logs. **Unrelated name collision, do not conflate:** the `--wb-booth-*` tokens in `museum-tokens.css` are the PROJECTION BOOTH (the dark scope used by the player bar and `/admin`), nothing to do with `/booth`. **THE ROOM HAS BEEN RENAMED ONCE AND RENAMED BACK — read this before touching it.** C2 (v41 `ecf33c5`) renamed everything to "Where the Money Goes" at `/money`; **R1 (v42) reverted it whole** on Mike's ruling that C2 read "keep me out of the space where I need legal today" as a naming instruction when it was a workload instruction. **BOTH names have been live URLs, so there is a redirect and it currently runs `/money` → `/foundation`** (`App.jsx`). A third rename must re-point that redirect, not just add another. `/foundation` outside a historical comment is CORRECT; `/money` outside the redirect line or a historical comment is a miss. |
-| **Routing table** | `src/App.jsx`. Order to know: the two named rooms, the `/money` → `/foundation` redirect, `/p/:id` preset landing, then **`path="*"` → `<WbHome />` (E2 2026-08-03)**. **[CS 2026-08-04] THREE `/hr/*` ROUTES ARE GONE and their components deleted:** `/hr/media` and `/hr/fan-wall` were one-line "— coming soon." pages; `/hr/home` was a stock interior photo (`public/museum.jpg`, also deleted) with its room labels PAINTED INTO THE IMAGE, advertising four rooms that never existed. All three now land on the Lobby via the catch-all. **`/hr` (the real exhibit) and `/hr/archive` are untouched and still reachable by URL only.** The catch-all RENDERS the Lobby at the unmatched address rather than navigating to `/` — Mike's ruling, "no dead end, no blank shell, no apology". Before it existed an unmatched path rendered the shell and nothing in it, and `wrangler.jsonc` sets `not_found_handling: "single-page-application"`, so Cloudflare hands EVERY unknown path to the router. |
+| **Information Booth** (`/booth`) and **The Weird.Baby Foundation** (`/foundation`) | **[M23a/M23b 2026-08-04] BOTH PAIRS ARE STRUCK AND BOTH LOSERS ARE DELETED — DO NOT LOOK FOR `?hook=` OR `?book=`, THEY DO NOT EXIST.** The booth lost BOTH candidates and has no hook object at all (`BoothTicket`, `BoothSign` and ~180 lines of `InfoBooth.css` are gone) — Mike: *"THE TITLE IS THE GRAB"*, and the exception that permits it is recorded in STATE.md under the Visual Hook Law. The lobby keeps the SCROLLING guest book only (`GuestBook` in `WbHome.jsx`), rebuilt as a **stepped** advance: three rows visible, a page at a time, `cubic-bezier(.34,1.3,.64,1)` bounce, 5.0s rest, wrap by arithmetic on `transitionend`. `GuestBookPlain` still exists and **nothing selects it** — it is the fallback for `prefers-reduced-motion` and for a book under `SCROLL_MIN` signatures. `src/routes/InfoBooth.jsx` + `InfoBooth.css`; `src/routes/Foundation.jsx` + `Foundation.css` (`.fnd-` prefix, `data-room="foundation"`). **THE SHARED FURNITURE IS `src/styles/sheet.css` (`.sheet-*`) AND BOTH ROOMS IMPORT IT** — root, card, credo, rule, questions, contact, way back. Edits there land on BOTH rooms; that is the point of the file. Each route's own sheet keeps only its page ground and its own objects: the booth's ADMIT ONE ticket (`.booth-ticket*`), the Foundation's account card + register + zero-cost invoice (`.fnd-*`). Before E4 (2026-08-03) all of it lived in `InfoBooth.css`, which /foundation imported — furniture for two rooms named for one, carried as a want in three logs. **Unrelated name collision, do not conflate:** the `--wb-booth-*` tokens in `museum-tokens.css` are the PROJECTION BOOTH (the dark scope used by the player bar and `/admin`), nothing to do with `/booth`. **THE ROOM HAS BEEN RENAMED ONCE AND RENAMED BACK — read this before touching it.** C2 (v41 `ecf33c5`) renamed everything to "Where the Money Goes" at `/money`; **R1 (v42) reverted it whole** on Mike's ruling that C2 read "keep me out of the space where I need legal today" as a naming instruction when it was a workload instruction. **BOTH names have been live URLs, so there is a redirect and it currently runs `/money` → `/foundation`** (`App.jsx`). A third rename must re-point that redirect, not just add another. `/foundation` outside a historical comment is CORRECT; `/money` outside the redirect line or a historical comment is a miss. |
+| **Routing table** | `src/App.jsx`. Order to know: the two named rooms, the `/money` → `/foundation` redirect, `/p/:id` preset landing, then **`path="*"` → `<WbHome />` (E2 2026-08-03)**. **[v51] NO QUERY PARAMETER SELECTS A VARIANT ANYWHERE IN THE BUILDING.** `?subtitle=`, `?hook=` and `?book=` have all now been retired the same way — shown, asked about, ruled on, deleted — and `useSearchParams` is imported by neither `WbHome.jsx` nor `InfoBooth.jsx` any more. A round that wants to show Mike two of something builds them, gets the ruling, and deletes the loser in the same arc. **[CS 2026-08-04] THREE `/hr/*` ROUTES ARE GONE and their components deleted:** `/hr/media` and `/hr/fan-wall` were one-line "— coming soon." pages; `/hr/home` was a stock interior photo (`public/museum.jpg`, also deleted) with its room labels PAINTED INTO THE IMAGE, advertising four rooms that never existed. All three now land on the Lobby via the catch-all. **`/hr` (the real exhibit) and `/hr/archive` are untouched and still reachable by URL only.** The catch-all RENDERS the Lobby at the unmatched address rather than navigating to `/` — Mike's ruling, "no dead end, no blank shell, no apology". Before it existed an unmatched path rendered the shell and nothing in it, and `wrangler.jsonc` sets `not_found_handling: "single-page-application"`, so Cloudflare hands EVERY unknown path to the router. |
 | JS token mirrors for inline `S.*` styles | `HrExhibitFlow.jsx:104–132`. Drift RESOLVED at `36b2182` — JS constants match the `--hr-*` CSS ramp; still a hand-maintained literal mirror (token edits do NOT auto-propagate to inline `S.*` styles). |
 | Pass-2 aesthetic blocks | `Exhibit.css:13–27` grain (`.ex-root::after`); `HrExhibitFlow.css:1821+` (lightbox dark re-pin :1836, badges :1853, cards :1826); player-bar dark re-pin `Exhibit.css:152` |
 | Logo image (Lobby ONLY; exhibit uses text wordmark) | `public/WeirdBaby_PhotoID.png`, placed `WbHome.jsx:115` |
@@ -342,6 +343,49 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
     inspection was careful. And `provenance/assets.json` is keyed on the PATH,
     so an approved picture can be replaced under its own verdict and nothing
     fails. Both holes are stated in `provenance/README.md` §4.
+
+16. **THE LAW OF SUBTRACTION (Mike, 2026-08-04 — STANDING, site-wide).**
+
+    > **If it does not help, it hurts. If it does not need to be there, it needs
+    > to not be there.**
+
+    Given while striking the `/robots` tally card, with his reason attached:
+    *"it speaks out loud about something not meant to be spoken out loud and
+    dilutes the experience."*
+
+    **IT IS NOT DOCTRINE 11 RESTATED, and the case that produced it is the
+    proof.** Doctrine 11 tests a line's SUBJECT — does it describe the making of
+    the museum rather than the collection. "Thirty-one and a half" is a fact
+    about the collection. It passed the visible-line test on every reading, it
+    was true, it was the wing's best line, and setting it at 132pt still made the
+    loudest object on the front desk out of the one number whose entire value is
+    that it is never explained. **Nothing was wrong with it except that it did
+    not need to be there.** Doctrine 11 could not have caught it; this one is
+    written so the next one gets caught.
+
+    **The test is necessity, and the burden sits on KEEPING.** Ask of any object,
+    control, count, caption, badge or line: what is lost if it goes? If the
+    answer is "nothing a reader would miss", it goes. A thing that is merely
+    harmless is not passing — harmless costs attention, and attention is the only
+    currency a free museum takes.
+
+    **Where it lands hardest:** a device built to show the operator a choice
+    (see §5's routing row — three query-parameter variants have now been
+    retired), a second object saying what the first already said, and any
+    typographic set-piece whose size is doing work its content cannot carry.
+
+    **Its neighbours.** Doctrine 11's corollary is *empty and honest beats
+    populated and false*; this is the harder version — **empty beats
+    unnecessary, even when the unnecessary thing is true.** Where 11 and 12 say
+    do not INVENT, this says do not KEEP.
+
+    **What it does not license.** It is a reason to delete, never a reason to
+    delete QUIETLY. Everything struck under it is named in the round log and,
+    if it leaves a gap, given a row in `docs/OPEN_ACTIONS.md` — the FAQ face lost
+    its only picture to this law on the day it was written, and that is register
+    M29 rather than a silence.
+
+    Mirrored in `STATE.md` as THE LAW OF SUBTRACTION.
 
 ## 8. Known hazards (environment quirks)
 
