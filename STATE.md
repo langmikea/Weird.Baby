@@ -315,6 +315,25 @@ commit (Doctrine 14).
   "what this site records"** — what any machine in between can see is not knowable
   from this repository, and overreaching by one clause is the same defect as
   hiding one.
+  **[v53/B2 2026-08-05] SUPERSEDED, AND THE CLAUSE ABOVE THAT N5b CALLED "THE
+  LOUDEST" WAS ALSO WRONG.** Google was not the only outside party. Measured in a
+  browser with `performance.getEntriesByType('resource')`, nine-second settle,
+  **nothing clicked**: `/robots`, `/wal` and `/wb` each request
+  `www.youtube.com` **three times on load** (`Exhibit.jsx:333` injects
+  `iframe_api` on mount, not on play), and `/hr` requests **`www.facebook.com`
+  sixteen times across seventeen iframes** (`HrExhibitFlow.jsx:2110`). The answer
+  now names **Google, YouTube and Facebook** and says the last two arrive before
+  a visitor presses anything. **THREE VERSIONS OF THIS ONE CLAUSE, TWO OF THEM
+  FALSE, ALL THREE WRITTEN BY PEOPLE WHO MEANT THEM** — and the cause is
+  mechanical rather than careless: a grep of `src/` finds the STRING, and every
+  one of these strings was findable. Only loading the page finds the REQUEST.
+  `provenance:gate` cannot see this class of claim at all. The answer's substance
+  changed with it, on Mike's line — **the machine remembers you and we don't**:
+  the cookie/stored-settings distinction is stated as the mechanism it is, the
+  MGK's record is named for what it holds (name, birth date, install level,
+  condition, best score) with **zero `fetch` and zero `XMLHttpRequest` in the
+  whole twin**, and the purge surface is named on the glass — **Preferences ▸
+  User**. Whether the embeds stay at all is `OPEN_ACTIONS.md` **M37**.
 - **N6 — THE GUEST BOOK, TWO WAYS.** The obvious reading was already built (the
   window has been scrollable since the book was made), so the variant is the book
   scrolling ITSELF: two copies, a 50% travel, **measured seamless — 270px travel

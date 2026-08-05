@@ -49,9 +49,19 @@ import { visitorProse, kept } from "../lib/visitor-prose.js";
 
 /* ─── THE QUESTIONS ─────────────────────────────────────────────────────────
    Ordered the way a stranger meets the building: what is this, what does it
-   cost, who is behind it, how does anything get in, whose is it, what are the
-   rooms, what is the shop, can I use this, is it finished, how do I say
-   something.
+   cost, what does it keep about me, who is behind it, how does anything get
+   in, whose is it, can I use this, is it finished, how do I say something.
+
+   [B3 2026-08-05] TWO QUESTIONS ARE DELETED AND NOT REPLACED. MIKE: "both read
+   as forced." "What are the rooms?" was answered by the DIRECTORY on the front
+   page, which lists every room by name and takes one click; "There is a gift
+   shop. What is it?" was answered by the shop, which is one of those rows. A
+   FAQ that explains what the building already shows a visitor is asking them to
+   read a description of a door they are standing in front of. Struck under THE
+   LAW OF SUBTRACTION — nothing is lost that a reader would miss, and the
+   [PAPA] the shop answer carried (what the house does with what its own shelf
+   earns) is a question about the Foundation rather than about the shop, so it
+   goes with the paragraph rather than moving to another one.
 
    ANSWERED FULLY where the answer is a fact this repository already knows.
    MARKED [PAPA] where the answer is a POSITION rather than a fact — a policy,
@@ -66,69 +76,140 @@ import { visitorProse, kept } from "../lib/visitor-prose.js";
    shop question below asks what the shop IS, which is the answerable half. */
 const FAQ = [
   {
+    /* [B5 2026-08-05] THE TWO SENTENCES SWAPPED PLACES AND NOTHING ELSE
+       CHANGED. It used to say "Some of it is ours" first. Mike's sweep: lead
+       with the artist, not the house. The room built the other way round —
+       Other Music Worth a Listen — is the larger half of what is here and it
+       was reading second in the museum's own first answer. */
     q: "What is this place?",
     a: "A museum. It keeps things worth keeping — records, photographs, " +
        "machines, the paper that came with them — writes cards for them, and " +
-       "puts them where anybody can walk up and look. Some of it is ours. " +
-       "Some of it belongs to people we admire and is here because somebody " +
-       "in this house loves it.",
+       "puts them where anybody can walk up and look. Some of it belongs to " +
+       "people we admire and is here because somebody in this house loves " +
+       "it. Some of it is ours.",
   },
   {
+    /* [B5 2026-08-05] IT OPENED BY RESTATING THE CREDO 400px ABOVE IT. "No
+       ticket, no tier, no ads" is the placard's "No tickets, no tiers, no
+       ads", set again in smaller type — the page explaining what the page
+       already says. What survives is the part the credo does NOT carry: that
+       there is no account, that nothing is walled, and that this is a standing
+       arrangement rather than an offer. */
     q: "Is it really free?",
-    a: "Free. No ticket, no tier, no account, no ads, and nothing behind a " +
-       "wall. There is a guest book you can sign if you feel like it, and " +
+    a: "Yes — and there is no account to make, nothing to unlock, and " +
+       "nothing behind a wall. Sign the guest book if you feel like it; " +
        "nothing anywhere on the site asks you for anything else. That is not " +
        "an introductory offer. It is the arrangement.",
   },
-  /* ==== [N5 2026-08-04] "ARE YOU TRACKING ME?", ANSWERED AGAINST THE CODE ====
-     MIKE: "add ARE YOU TRACKING ME? answered honestly — no login, what cookies
-     do, what we keep (nothing), written against worker.js not against
-     goodwill."
-     THE OLD QUESTION IS REPLACED RATHER THAN JOINED, because it asked the same
+  /* ==== [N5 2026-08-04 · B2 2026-08-05] "ARE YOU TRACKING ME?" =============
+     MIKE (N5): "answered honestly — no login, what cookies do, what we keep
+     (nothing), written against worker.js not against goodwill."
+     THE OLD QUESTION WAS REPLACED RATHER THAN JOINED, because it asked the same
      thing less sharply ("Do I have to sign in? Are you watching me?") and two
      near-identical questions on one list is worse than one good one.
-     AND WRITING IT AGAINST THE CODE CAUGHT THE OLD ANSWER BEING WRONG. It said
-     "That is the whole of it" about the visits row — and it is not. `index.html`
-     ships a `<link rel="stylesheet">` to `fonts.googleapis.com` with
-     preconnects to it and to `fonts.gstatic.com`, so every visitor's browser
-     makes a request to Google before a word of this page is painted. That is a
-     third party, it was not mentioned, and no amount of good faith about our
-     own database made the sentence true. It is now the loudest clause in the
-     answer. THIS IS EXACTLY WHAT "against the code, not against goodwill"
-     BUYS: the previous answer was written by people who meant it.
-     EVERY OTHER CLAUSE WAS CHECKED THE SAME WAY, and each is falsifiable by
-     reading one file:
+
+     ═══ [B2 2026-08-05] IT WAS TRUE AND IT WAS UNDERSELLING THE TRUTH ════════
+     MIKE: "cookies and stored settings are different things — a cookie is SENT
+     TO THE SERVER on every request, which is what makes it tracking;
+     localStorage never leaves the browser unless code ships it, and ours
+     doesn't. Both are true at once: this site sets no cookies AND settings
+     persist between sessions. Say the stronger, truer thing: THE MACHINE
+     REMEMBERS YOU AND WE DON'T."
+
+     N5's answer folded that into eleven words — "a panel width, whether you
+     have already walked through a room this visit" — and filed it under things
+     to reassure the visitor about. It is the most interesting fact on the page:
+     the MGK in the robot wing holds a visitor's NAME and BIRTH DATE, and it
+     holds them somewhere we cannot reach. Reading that as small print made the
+     answer weaker than the architecture it was describing.
+
+     ═══ AND CHECKING IT AGAINST THE CODE FOUND THE ANSWER WRONG. AGAIN. ══════
+     N5 found the previous answer's "that is the whole of it" false, because
+     `index.html` ships a Google Fonts `<link>`. N5's own replacement then said
+     Google was "the only outside party this site touches", and MEASURED IN A
+     BROWSER that is false TWICE OVER. Read off
+     `performance.getEntriesByType('resource')` on every room, each after a
+     nine-second settle, with nothing clicked:
+
+       `/`, `/booth`, `/shop`, `/foundation`, `/hr/archive`
+                                    Google Fonts, and nothing else.
+       `/robots`, `/wal`, `/wb`     + `www.youtube.com` ×3.
+       `/hr`                        + `www.youtube.com` ×3
+                                    + `www.facebook.com` ×16, in 17 iframes.
+
+     YouTube arrives because `Exhibit.jsx:333` injects `iframe_api` and the
+     player mounts an embed with it — ON LOAD, not on play. Facebook arrives
+     because the Hunter Root artifact grid renders `hr-card-fbembed` cards
+     through `HrExhibitFlow.jsx:2110`'s `facebook.com/plugins/` URL, and the
+     wing has seventeen of them.
+
+     THAT IS THE THIRD OUTBOUND CLAUSE THIS ONE ANSWER HAS HAD, AND THE FIRST
+     TWO WERE BOTH WRONG, and all three were written by people who meant them.
+     The reason is mechanical and worth stating once: a grep of `src/` finds
+     the STRING, and every one of these strings was findable. Only loading the
+     page finds the REQUEST. Nothing in the source says "unprompted, on
+     arrival" — that sentence exists only in the network panel.
+
+     EVERY CLAUSE IS FALSIFIABLE BY READING ONE FILE OR RUNNING ONE PROBE:
        · no login — `src/worker.js` has no auth of any kind, on any route.
-       · no cookies — no `Set-Cookie` anywhere in the worker and no
-         `document.cookie` anywhere in `src/`. The site sets none at all.
+       · no cookies — no `Set-Cookie` anywhere in the worker, no
+         `document.cookie` anywhere in `src/`, and none in
+         `public/robots/twin.html` either. The site sets none at all.
        · what is written — `POST /api/visits` inserts `(page, referrer,
-         visited_at)` and nothing else, and it is fired from two components:
-         the lobby and the exhibit shell. `/booth` itself writes nothing.
+         visited_at)` and nothing else, fired from exactly two components: the
+         lobby (`WbHome.jsx:278`) and the exhibit shell (`Exhibit.jsx:2163`).
+         `/booth` itself writes nothing.
        · the guest book — `POST /api/guestbook` inserts name, note, a fixed
          badge string and a timestamp. Exactly what was typed.
-       · the browser's own storage — `sessionStorage` for the per-room arrival
-         flag (`use-arrival.js`) and `localStorage` for splitter and carousel
-         sizes (`Exhibit.jsx`). Neither is ever transmitted.
-     THE SCOPE OF THE CLAIM IS DELIBERATELY "WHAT THIS SITE RECORDS", not "what
-     any machine between you and it can see". The second is not knowable from
-     this repository, and a privacy answer that overreaches by one clause is
-     the same defect as one that hides a clause. */
+       · the machine's record — the twin persists SEVEN localStorage keys
+         (`wbr_user`, `wbr_health`, `wbr_parcel`, `wbr_santa`, `wbr_son_best`,
+         `wbr_bs`, `wbr_boot_level`) and THREE sessionStorage keys, listed in
+         `Rec_Keys_Local` / `Rec_Keys_Session`. It is same-origin with the
+         museum, so those keys sit in weird.baby's own storage — CONFIRMED in
+         the browser, where `wbr_boot_level`, `wbr_health`, `wbr_parcel` and
+         `wbr_son_best` read back off the museum's origin. The twin contains
+         ZERO `fetch` and ZERO `XMLHttpRequest`: it has no way to send them.
+       · the register — `Preferences ▸ User ▸ GO>` in the twin's own menu
+         (`MENU_TABLE_SRC`), five pages of what is held, and a shake on the
+         last one purges every key named above.
+       · the museum's own settings — panel splits, deck sizes and preset slots
+         (`wb-hr-*`, `wb-wal-*`, `wb-wb-*`) in `localStorage`, per-room arrival
+         flags in `sessionStorage`. Read where they sit; never transmitted.
+     THE SCOPE OF THE CLAIM IS STILL DELIBERATELY "WHAT THIS SITE RECORDS", not
+     "what any machine between you and it can see". The second is not knowable
+     from this repository, and a privacy answer that overreaches by one clause
+     is the same defect as one that hides a clause. */
   {
     q: "Are you tracking me?",
-    a: "No. There is no account and nothing to sign in to, and this site sets " +
-       "no cookies at all — not one, not even ours. The lobby and the exhibit " +
-       "rooms each write a single line when they load: which page, the site " +
-       "you came from if there was one, and the time. Those three columns are " +
-       "the whole of what the site records, and none of them is you. Sign the " +
-       "guest book and we keep exactly what you typed, on the page you typed " +
-       "it into. Your browser keeps a few display settings on your own machine " +
-       "— a panel width, whether you have already walked through a room this " +
-       "visit — and none of that is ever sent here. One thing does leave the " +
-       "building, and you should know about it: the typefaces are served by " +
-       "Google, so your browser asks Google for them and Google sees it was " +
-       "asked. That is the only outside party this site touches. There is no " +
-       "analytics, no advertising and no tracking pixel anywhere in it, and if " +
-       "that ever stops being true, this answer changes first.",
+    a: "No — and the better half of the answer is that the machine remembers " +
+       "you and we don't. Cookies first, because they are what people mean: a " +
+       "cookie goes back to the server with every request your browser makes, " +
+       "which is the part that makes it a tracking device. This site sets " +
+       "none. Not one, not even ours. Settings that survive between visits are " +
+       "a different mechanism entirely — they sit in your own browser and are " +
+       "read where they sit, so both of these are true at once: nothing " +
+       "follows you back to us, and the panel you dragged wider is still wider " +
+       "tomorrow. What reaches us is two things. The lobby and the exhibit " +
+       "rooms each write one line when they load — which page, the site you " +
+       "came from if there was one, and the time — and none of those three " +
+       "columns is you. Sign the guest book and we keep exactly what you " +
+       "typed, on the page you typed it into. The MGK keeps far more than we " +
+       "do, and it keeps it on your side of the glass: run it in the robot " +
+       "wing and it will remember your name, your birth date, how far into " +
+       "its install you got, its own condition and your best score — none of " +
+       "which it can send anywhere, because it has no way to reach us at all. " +
+       "It will also show you. Preferences ▸ User is the machine's register of " +
+       "everything it holds about you, page by page, and the last page wipes " +
+       "the lot on the spot. Three things do leave the building, and you " +
+       "should know which. The typefaces are served by Google, so your " +
+       "browser asks Google for them and Google sees it was asked. The rooms " +
+       "with music in them load YouTube's player when the room loads, before " +
+       "you press anything. And one exhibit carries posts embedded from " +
+       "Facebook, which arrive the same way. Google, YouTube and Facebook " +
+       "each know you turned up, and they are the whole of the outside. There " +
+       "is no analytics, no advertising and no tracking pixel anywhere in " +
+       "this site, and if that ever stops being true, this answer changes " +
+       "first.",
   },
   {
     q: "Who keeps this place?",
@@ -154,30 +235,25 @@ const FAQ = [
        "not a home. [PAPA] — the formal statement of that relationship, if " +
        "one is ever needed, is Papa's to write.",
   },
+  /* [B3 2026-08-05] "What are the rooms?" and "There is a gift shop. What is
+     it?" WERE HERE AND ARE DELETED. See the head of this list for the ruling.
+     They are named in the round log and in docs/OPEN_ACTIONS.md rather than
+     removed in silence, which is what the Law of Subtraction requires. */
   {
-    q: "What are the rooms?",
-    a: "Weird.Baby Robots is the machine wing — one unit, photographed, " +
-       "documented, and running. Weird.Baby Music is the house's own " +
-       "recordings. Other Music Worth a Listen is the room built the other " +
-       "way around: nothing in it is ours, and that is the point. This booth " +
-       "is where the house explains itself.",
-  },
-  {
-    q: "There is a gift shop. What is it?",
-    a: "Mostly a set of doors to the artists' own stores, so that if a room " +
-       "made you want to buy a record, the money reaches the person who made " +
-       "it and not us. The museum's own shelf is small and honest — a " +
-       "sticker, at the moment. [PAPA] — what the house does with anything " +
-       "its own shelf earns is Papa's to state.",
-  },
-  {
+    /* [B4 2026-08-05] IT LED WITH OURS. MIKE: "it currently leads with what is
+       OURS, which reads possessive and awkward — lead with THEIRS IS THEIRS,
+       then fold ours in behind, simply and gladly."
+       The old first clause also had to defend itself in the same breath
+       ("ours is not all inclusive"), which is the shape an answer takes when
+       it opens on the wrong subject. Opening on the artists lets the museum's
+       half be one short sentence instead of a qualification. */
     q: "Can I use what is here?",
-    a: "The photographs of our own objects are ours, taken here and printed " +
-       "here, and we are glad to be asked. Everything belonging to the " +
-       "artists belongs to the artists — their music, their pictures, their " +
-       "words — and the doors on their pages go to them. When in doubt, ask; " +
-       "the address is at the bottom of this page. [PAPA] — a plain licence " +
-       "for the museum's own images is Papa's to set.",
+    a: "The artists' work is the artists' — their music, their pictures, " +
+       "their words — and every door on their pages goes to them rather than " +
+       "to us. What is ours is the photographs of our own objects, taken here " +
+       "and printed here, and we are glad to be asked for those. When in " +
+       "doubt, write; the address is at the bottom of this page. [PAPA] — a " +
+       "plain licence for the museum's own images is Papa's to set.",
   },
   {
     q: "Is it finished?",

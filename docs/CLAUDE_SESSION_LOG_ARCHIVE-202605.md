@@ -102,3 +102,54 @@ Moved verbatim from `CLAUDE.md` under that file's own ~600-line rule. Nothing wa
 
 ### 2026-05-30 → broken-preview fallback for gallery/artifact images
 - `HrExhibitFlow.jsx` + `.css`: gallery/artifact images with a null/empty `src` or that 404/fail to load now degrade to a styled placeholder (muted INK/GOLD tile, artifact title + "image unavailable") instead of silent blankness — across the gallery card cover and the lightbox large image + thumb strip. Background-image surfaces (no native `onError`) detect failure via an out-of-band `Image()` probe hook (`useImageFailed`); the lightbox `<img>` uses native `onError` (`FallbackImg`, keyed on `src`). Display-only — no DB/sync/export touch. Addresses the HEIC-incident failure mode (assets fail by path OR format with no front-end signal).
+
+---
+
+## Archived 2026-08-05 (v53) — the two oldest live entries, under CLAUDE.md’s own ~600-line rule
+
+### 2026-08-04 → MECHANIZE PROVENANCE (v48; P1–P4) — sealed
+- **P1/P2** `tools/provenance-sweep.mjs` + `provenance/` — a hash-keyed register
+  of every visitor-facing string, and a gate that fails on any that is
+  undeclared. Extraction is AST-based and **default-deny** (sixteen named,
+  counted exclusion rules; `--rules` / `--rule-sample` to audit them). CSS
+  `content:` and `index.html` meta are swept too. **Editing a declared string
+  changes its key and fails the gate** — proved on two live tests.
+- **P3** 2,528 strings classified: VERIFIED 1,148 · HOUSE 1,001 · RESTATED 282 ·
+  MIKE 75 · DERIVED 19 · **INVENTION 3** · UNDECLARED 0. Plus 33 images
+  declared with `textInImage` after looking at every one; 18 carry text.
+- **Findings, none fixed** (Doctrine 12: Ops asks) — `docs/PROVENANCE_RULINGS-20260804.md`:
+  the `/robots` unit count says **31½** where its source says **31.4**; the
+  MGK-VIIIp front-glass plate is **mirror-reversed**; the WAL Hunter Root
+  portrait wears another band's name; the Manual's plate is a render;
+  `hr_facts.js` (124 strings, 3 self-flagged unverified) and
+  `hr_journal_prompts.js` (30) are unreachable.
+- Gates: lint 11/9 = baseline; build green 70 modules; provenance gate PASS;
+  desktop + genuine 390px laps, zero horizontal scroll, zero console errors.
+  **No rendered source changed** — `git diff` was `package.json` only.
+- Round log: `docs/MUSEUM_PROVENANCE_LOG-20260804.md`.
+
+### 2026-08-04 → THE CLEAN SLATE ROUND (v46; C1–C4) — not yet committed
+- **C1** 27 visible meta-copy strings removed across `robots.js`,
+  `worth-a-listen.js`, `worth-a-listen-facts.js`, `Foundation.jsx`. Sharpest:
+  the Portal's five drum refusals printed internal decision codes ("held — one
+  entry state (C3)", "held — workshop entry, by URL") under the latch; Hunter
+  Root's WAL artist card was two paragraphs about this website's renderers; nine
+  vault facts were our build narrative served as song facts (one also FALSE
+  since W8). No new fact introduced anywhere — every rewrite uses material
+  already on its own page.
+- **C2** Record 013 rewritten flat per Mike. Same facts/sections/labels/doors/
+  order; cadence, quoted failure modes, first-person colour and beat-fragments
+  removed.
+- **C3** Deleted: `HrHome.jsx` + `public/museum.jpg` (a mockup photo with room
+  labels painted in, incl. "BULLITEN"), `HrFanWall.jsx`, `HrMedia.jsx` (both
+  "— coming soon."), `SEED_ENTRIES` (13 fabricated fan testimonials, verified
+  unreachable), `/hr/archive`'s two dead controls. Routes dropped from `App.jsx`;
+  the E2 catch-all lands all of them on the Lobby.
+- **C4** Eleven exposed gaps listed in the round log — chiefly that `/hr` is now
+  one page plus an unlinked discography, the `/hr` journal is dead machinery
+  with no persistence, and Jesse Welles' "That Can't Be Right" has zero song
+  facts left. Nothing invented to fill any of it.
+- Gates: lint 11/9 = baseline, zero new; build green **70 modules** (was 73);
+  21-pattern ban sweep over every rendered route + every album × track = zero
+  hits; desktop + genuine 390px laps, zero horizontal scroll anywhere.
+- Round log: `docs/MUSEUM_CLEAN_SLATE_LOG-20260804.md`.

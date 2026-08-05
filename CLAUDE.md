@@ -432,6 +432,50 @@ catches invented CONTENT, Doctrine 11 catches a line whose SUBJECT is the work.
 
 Maintained here. Newest first.
 
+### 2026-08-05 → THE BOOTH EDIT + THE MISSING LAP (v53; B1–B6) — sealed
+- **B1** The lap v52 sealed without has run — eleven routes, desktop and 390px.
+  **The guest book steps by ONE NAME every 5s and wraps invisibly** (offset
+  1→…→9 showing `Ines·Ada·Bram` on the seam →0 with `snap`), **every sample
+  exactly three rows, `blanks: 0`**. **MGK-NIAC collides nowhere** — the band is
+  centred under its own cover to the pixel at 390px (123 = 123), the new cover
+  renders, the tracklist reads `The Name · Image Archive · Technical
+  Specificatio…`. **Method limits stated, not hidden:** this Chrome window is
+  maximised and bottoms out at a 540px client area, so 390px is a same-origin
+  **390×800 iframe rig** and the content width is **373px — tighter than a real
+  phone**; and the book will not advance while `document.hidden`, which was
+  confirmed FIRST unpatched (40+s at offset 0) before the flag was overridden to
+  watch it move.
+- **THE LAP'S OWN FINDING, and it is the round's largest:** `/hr` requests
+  **`www.facebook.com` ×16 across seventeen iframes on arrival**, and
+  `/robots`, `/wal`, `/wb` each request `www.youtube.com` ×3 — **nothing
+  clicked**. Read off `performance.getEntriesByType('resource')`. A grep of
+  `src/` finds every one of those strings and two rounds of readers still wrote
+  *"the only outside party this site touches"*: **only loading the page finds
+  the REQUEST.** Ruling is M37; the facade is C34.
+- **B2** *"Are you tracking me?"* rewritten to Mike's line — **the machine
+  remembers you and we don't** — with the cookie/storage distinction as
+  mechanism (a cookie travels to the server every request; browser storage is
+  read where it sits; both "no cookies" and "settings persist" are true at
+  once). The MGK's record named for what it is, with **zero `fetch` and zero
+  `XMLHttpRequest` in the whole twin**, and the purge surface named on the
+  glass: **Preferences ▸ User**. **The twin's keys live in the MUSEUM's origin**
+  — `wbr_*` read back off `weird.baby`'s own `localStorage`. Ten keys, not nine
+  (`Rec_Keys_Session` returns three since FR2); **no count is printed**.
+- **B3/B4/B5** Two forced questions deleted (the directory names the rooms, the
+  shop is one click) — eleven → nine. *"Can I use what is here?"* re-led on
+  **theirs is theirs**. The sweep read nine answers, fixed two — *"Is it really
+  free?"* was restating the credo 400px above it; *"What is this place?"* led
+  with ours — and **records why the other seven were left**.
+- Other lap findings: `/wal`'s title bar is down to **6px** of air at 390 (C36),
+  `/admin`'s controls are clipped and unreachable at 390 (C35), `/hr`'s FB cards
+  paint as blank blocks (C12, observed on localhost, **not** marked confirmed),
+  `/wb` prints "Weird.Baby" twice in its bar (C37), and **M30 is confirmed on
+  the glass** for the first time.
+- Gates: lint **11/9 = baseline**; build green **72 modules**; provenance
+  **PASS** (UNDECLARED 0, INVENTION 0, stale 0 — 4 rows added, 8 pruned, no
+  RESTATED chain broken); zero console errors/warnings on eleven routes.
+- Round log: `docs/MUSEUM_BOOTH_EDIT_LOG-20260805.md`.
+
 ### 2026-08-05 → THE REVEAL LEDGER (v52; Q1–Q3, R1–R6) — sealed
 - **Q1** The guest book went blank on the live site, **and the arithmetic was
   never the fault** — it was correct for every length it could reach. The
@@ -543,56 +587,13 @@ Maintained here. Newest first.
   zero horizontal scroll, zero console errors/warnings across 11 routes.
 - Round log: `docs/MUSEUM_OVERNIGHT_LOG-20260804.md`.
 
-### 2026-08-04 → MECHANIZE PROVENANCE (v48; P1–P4) — sealed
-- **P1/P2** `tools/provenance-sweep.mjs` + `provenance/` — a hash-keyed register
-  of every visitor-facing string, and a gate that fails on any that is
-  undeclared. Extraction is AST-based and **default-deny** (sixteen named,
-  counted exclusion rules; `--rules` / `--rule-sample` to audit them). CSS
-  `content:` and `index.html` meta are swept too. **Editing a declared string
-  changes its key and fails the gate** — proved on two live tests.
-- **P3** 2,528 strings classified: VERIFIED 1,148 · HOUSE 1,001 · RESTATED 282 ·
-  MIKE 75 · DERIVED 19 · **INVENTION 3** · UNDECLARED 0. Plus 33 images
-  declared with `textInImage` after looking at every one; 18 carry text.
-- **Findings, none fixed** (Doctrine 12: Ops asks) — `docs/PROVENANCE_RULINGS-20260804.md`:
-  the `/robots` unit count says **31½** where its source says **31.4**; the
-  MGK-VIIIp front-glass plate is **mirror-reversed**; the WAL Hunter Root
-  portrait wears another band's name; the Manual's plate is a render;
-  `hr_facts.js` (124 strings, 3 self-flagged unverified) and
-  `hr_journal_prompts.js` (30) are unreachable.
-- Gates: lint 11/9 = baseline; build green 70 modules; provenance gate PASS;
-  desktop + genuine 390px laps, zero horizontal scroll, zero console errors.
-  **No rendered source changed** — `git diff` was `package.json` only.
-- Round log: `docs/MUSEUM_PROVENANCE_LOG-20260804.md`.
-
-### 2026-08-04 → THE CLEAN SLATE ROUND (v46; C1–C4) — not yet committed
-- **C1** 27 visible meta-copy strings removed across `robots.js`,
-  `worth-a-listen.js`, `worth-a-listen-facts.js`, `Foundation.jsx`. Sharpest:
-  the Portal's five drum refusals printed internal decision codes ("held — one
-  entry state (C3)", "held — workshop entry, by URL") under the latch; Hunter
-  Root's WAL artist card was two paragraphs about this website's renderers; nine
-  vault facts were our build narrative served as song facts (one also FALSE
-  since W8). No new fact introduced anywhere — every rewrite uses material
-  already on its own page.
-- **C2** Record 013 rewritten flat per Mike. Same facts/sections/labels/doors/
-  order; cadence, quoted failure modes, first-person colour and beat-fragments
-  removed.
-- **C3** Deleted: `HrHome.jsx` + `public/museum.jpg` (a mockup photo with room
-  labels painted in, incl. "BULLITEN"), `HrFanWall.jsx`, `HrMedia.jsx` (both
-  "— coming soon."), `SEED_ENTRIES` (13 fabricated fan testimonials, verified
-  unreachable), `/hr/archive`'s two dead controls. Routes dropped from `App.jsx`;
-  the E2 catch-all lands all of them on the Lobby.
-- **C4** Eleven exposed gaps listed in the round log — chiefly that `/hr` is now
-  one page plus an unlinked discography, the `/hr` journal is dead machinery
-  with no persistence, and Jesse Welles' "That Can't Be Right" has zero song
-  facts left. Nothing invented to fill any of it.
-- Gates: lint 11/9 = baseline, zero new; build green **70 modules** (was 73);
-  21-pattern ban sweep over every rendered route + every album × track = zero
-  hits; desktop + genuine 390px laps, zero horizontal scroll anywhere.
-- Round log: `docs/MUSEUM_CLEAN_SLATE_LOG-20260804.md`.
-
-### Older entries (2026-05-06 → 2026-05-30) — archived
+### Older entries (2026-05-06 → 2026-08-04) — archived
 Moved to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md`, verbatim, under this file's
-own ≈600-line rule. **2026-08-04:** the tier reconciliation, the
+own ≈600-line rule. **2026-08-05 (v53):** v48 MECHANIZE PROVENANCE and v46 THE
+CLEAN SLATE ROUND — the two oldest entries still live, moved whole so the doctrine
+they established (the provenance boundary; the first meta-copy sweep) is read from
+`OPERATIONS.md` §7 rather than from a session note. **2026-08-04:** the tier
+reconciliation, the
 navigation/architecture critique, B-1, the v4/v5 spec arc, the deep-dive phases,
 the FUSE git-init quirk, and the first three exhibit-UX rounds (2026-05-06 →
 05-15). **2026-08-05 (v52):** the three 2026-05-30 entries — the eslint-ignore

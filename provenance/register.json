@@ -15721,32 +15721,12 @@
    "p": "FAQ[].q",
    "c": "HOUSE"
   },
-  "eacc1ddacfefcc13": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 70,
-   "t": "A museum. It keeps things worth keeping — records, photographs, machines, the paper that came with them — writes cards for them, and puts them where anybody can walk up and look. Some of it is ours. Some of it belongs to people we admire and is here because somebody in this house loves it.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
   "17b10624ad0eaf64": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 77,
    "t": "Is it really free?",
    "p": "FAQ[].q",
    "c": "HOUSE"
-  },
-  "8baf08cf6428067b": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 78,
-   "t": "Free. No ticket, no tier, no account, no ads, and nothing behind a wall. There is a guest book you can sign if you feel like it, and nothing anywhere on the site asks you for anything else. That is not an introductory offer. It is the arrangement.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
   },
   "94536879b7b9eff7": {
    "f": "src/routes/InfoBooth.jsx",
@@ -15799,56 +15779,12 @@
     "docs/canonical/THE_CHARTER.md"
    ]
   },
-  "f115bc51d20e0605": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 116,
-   "t": "What are the rooms?",
-   "p": "FAQ[].q",
-   "c": "HOUSE"
-  },
-  "816be24f776062c5": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 117,
-   "t": "Weird.Baby Robots is the machine wing — one unit, photographed, documented, and running. Weird.Baby Music is the house's own recordings. Other Music Worth a Listen is the room built the other way around: nothing in it is ours, and that is the point. This booth is where the house explains itself.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
-  "0773dc2491cb9cf2": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 124,
-   "t": "There is a gift shop. What is it?",
-   "p": "FAQ[].q",
-   "c": "HOUSE"
-  },
-  "7355386a3db7b0ab": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 125,
-   "t": "Mostly a set of doors to the artists' own stores, so that if a room made you want to buy a record, the money reaches the person who made it and not us. The museum's own shelf is small and honest — a sticker, at the moment. [PAPA] — what the house does with anything its own shelf earns is Papa's to state.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
   "7c90cd4d63942400": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 132,
    "t": "Can I use what is here?",
    "p": "FAQ[].q",
    "c": "HOUSE"
-  },
-  "2c5061cd165139a9": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 133,
-   "t": "The photographs of our own objects are ours, taken here and printed here, and we are glad to be asked. Everything belonging to the artists belongs to the artists — their music, their pictures, their words — and the doors on their pages go to them. When in doubt, ask; the address is at the bottom of this page. [PAPA] — a plain licence for the museum's own images is Papa's to set.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
   },
   "fc32375a7da41729": {
    "f": "src/routes/InfoBooth.jsx",
@@ -17267,13 +17203,6 @@
    "c": "MIKE",
    "s": "Mike's remote-control brief, N5, 2026-08-04: \"THE INFO BOOTH'S TICKET ... ALSO add ARE YOU TRACKING ME? answered honestly - no login, what cookies do, what we keep (nothing), written against worker.js not against goodwill.\""
   },
-  "2db344c362f1b671": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 118,
-   "t": "No. There is no account and nothing to sign in to, and this site sets no cookies at all — not one, not even ours. The lobby and the exhibit rooms each write a single line when they load: which page, the site you came from if there was one, and the time. Those three columns are the whole of what the site records, and none of them is you. Sign the guest book and we keep exactly what you typed, on the page you typed it into. Your browser keeps a few display settings on your own machine — a panel width, whether you have already walked through a room this visit — and none of that is ever sent here. One thing does leave the building, and you should know about it: the typefaces are served by Google, so your browser asks Google for them and Google sees it was asked. That is the only outside party this site touches. There is no analytics, no advertising and no tracking pixel anywhere in it, and if that ever stops being true, this answer changes first.",
-   "c": "VERIFIED",
-   "s": "read clause by clause this session, and every clause is falsifiable from one file: src/worker.js (no auth on any route; POST /api/visits inserts exactly page + referrer + visited_at; POST /api/guestbook inserts name + note + a fixed badge + a timestamp), index.html (the <link rel=stylesheet> to fonts.googleapis.com and the two preconnects — the ONLY third party, and the clause the previous answer was missing), src/lib/use-arrival.js and src/routes/exhibit/Exhibit.jsx (sessionStorage / localStorage, never transmitted), and the absence of any Set-Cookie in the worker or document.cookie anywhere in src/."
-  },
   "56f71c783927ab42": {
    "f": "src/routes/WbHome.jsx",
    "l": 252,
@@ -17416,6 +17345,44 @@
    "t": "channel.services",
    "c": "HOUSE",
    "s": "[R2 2026-08-05] NOT A VISITOR-FACING STRING. It is a reveal-ledger row id, or one of the ledger enum values src/lib/reveal.js compares against — a KEY passed to a lookup, never rendered. The sweep is default-deny and cannot tell an identifier from a label, which is the correct bias; it is declared rather than excluded, because adding an exclusion rule to absorb it would widen the boundary for everything."
+  },
+  "55deca5e20ae7578": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 85,
+   "t": "A museum. It keeps things worth keeping — records, photographs, machines, the paper that came with them — writes cards for them, and puts them where anybody can walk up and look. Some of it belongs to people we admire and is here because somebody in this house loves it. Some of it is ours.",
+   "p": "FAQ[].a",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ]
+  },
+  "90832457f4759489": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 99,
+   "t": "Yes — and there is no account to make, nothing to unlock, and nothing behind a wall. Sign the guest book if you feel like it; nothing anywhere on the site asks you for anything else. That is not an introductory offer. It is the arrangement.",
+   "p": "FAQ[].a",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ]
+  },
+  "6c16a1197871ca94": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 236,
+   "t": "The artists' work is the artists' — their music, their pictures, their words — and every door on their pages goes to them rather than to us. What is ours is the photographs of our own objects, taken here and printed here, and we are glad to be asked for those. When in doubt, write; the address is at the bottom of this page. [PAPA] — a plain licence for the museum's own images is Papa's to set.",
+   "p": "FAQ[].a",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ]
+  },
+  "4310e72057a60d4a": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 184,
+   "t": "No — and the better half of the answer is that the machine remembers you and we don't. Cookies first, because they are what people mean: a cookie goes back to the server with every request your browser makes, which is the part that makes it a tracking device. This site sets none. Not one, not even ours. Settings that survive between visits are a different mechanism entirely — they sit in your own browser and are read where they sit, so both of these are true at once: nothing follows you back to us, and the panel you dragged wider is still wider tomorrow. What reaches us is two things. The lobby and the exhibit rooms each write one line when they load — which page, the site you came from if there was one, and the time — and none of those three columns is you. Sign the guest book and we keep exactly what you typed, on the page you typed it into. The MGK keeps far more than we do, and it keeps it on your side of the glass: run it in the robot wing and it will remember your name, your birth date, how far into its install you got, its own condition and your best score — none of which it can send anywhere, because it has no way to reach us at all. It will also show you. Preferences ▸ User is the machine's register of everything it holds about you, page by page, and the last page wipes the lot on the spot. Three things do leave the building, and you should know which. The typefaces are served by Google, so your browser asks Google for them and Google sees it was asked. The rooms with music in them load YouTube's player when the room loads, before you press anything. And one exhibit carries posts embedded from Facebook, which arrive the same way. Google, YouTube and Facebook each know you turned up, and they are the whole of the outside. There is no analytics, no advertising and no tracking pixel anywhere in this site, and if that ever stops being true, this answer changes first.",
+   "p": "FAQ[].a",
+   "c": "VERIFIED",
+   "s": "re-read clause by clause AND MEASURED IN A BROWSER this session (B2, 2026-08-05). Falsifiable from: src/worker.js (no auth on any route; POST /api/visits inserts exactly page + referrer + visited_at; POST /api/guestbook inserts name + note + a fixed badge + a timestamp; no Set-Cookie anywhere), src/routes/WbHome.jsx:278 and src/routes/exhibit/Exhibit.jsx:2163 (the only two callers of /api/visits), index.html (the fonts.googleapis.com stylesheet link + two preconnects), and public/robots/twin.html (Rec_Keys_Local = 7 localStorage keys incl. wbr_user and wbr_boot_level, Rec_Keys_Session = 3; the register at Preferences > User in MENU_TABLE_SRC, REC_PAGES = 5, Rec_Purge wipes all ten; ZERO fetch and ZERO XMLHttpRequest in the whole file, and no document.cookie anywhere in it). THE OUTBOUND CLAUSE IS NOT IN ANY FILE — it was read off performance.getEntriesByType('resource') in every room after a nine-second settle, with nothing clicked: /, /booth, /shop, /foundation and /hr/archive request Google Fonts and nothing else; /robots, /wal and /wb add www.youtube.com x3 (Exhibit.jsx:333 injects iframe_api on load); /hr adds www.youtube.com x3 AND www.facebook.com x16 across 17 iframes (HrExhibitFlow.jsx:2110's facebook.com/plugins/ URL). That measurement is the only thing that establishes 'before you press anything', and it is why the clause names three parties rather than the one N5 declared."
   }
  }
 }
