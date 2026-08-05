@@ -81,3 +81,24 @@ and every v46+ round.
 - Clips dropped from spine: '94 Acoustic Clip, Low Live Clip, Flash in the Pan Live Clip, A Pot Song Official Clip
 - HrArchive `ALBUMS` reconciled: Skipping Stones last track corrected (Run From The Devil → Soul Sucker), Crooked Home appended Cookin' in the Bathroom and A Pot Song
 - HrArchive `SINGLES` deduped (kept Chase The Dragon only)
+
+---
+
+## Appended 2026-08-05 (v52) — the three 2026-05-30 entries
+
+Moved verbatim from `CLAUDE.md` under that file's own ~600-line rule. Nothing was edited; the v52 entry took them past the line.
+
+### 2026-05-30 → lint baseline restored (eslint ignores non-source)
+- `eslint.config.js`: added a `globalIgnores` block covering `_cowork/`, `dist`, `dist.pre_*`, `.phase1_retired_files/`, and `*.pre-*`/`*.old_v*`/`*.bak_*` backups. `eslint .` had been sweeping minified vendor backups (`dist.pre_p14_final_2` + `dist.pre_phase1_2` = 117 err each) and `_cowork/` scratch (18 err) — ~252 noise errors burying the real source baseline and making the count useless as a regression tripwire. Now `eslint .` reports `src/` only.
+- **Source baseline confirmed unchanged at 4 errors / 6 warnings** (the documented debt): `WbAdmin.jsx:18` (1 err); `Exhibit.jsx:88/191/517` (3 err + 5 warn); `HrExhibitFlow.jsx` (1 warn). Zero new errors introduced — config + doc change only, no `.jsx`/`.css`/data touched. Reconciled the lint-debt table drift: `Exhibit.jsx:508 → :517` (`advanceQueue` decl `577 → 592`).
+- Sandbox caveat (cost ~real time, banking it): a cowork-sandbox `eslint .` shows **5 err / 5 warn**, not 4/6 — a phantom `Parsing error` in `HrExhibitFlow.jsx:2157` caused by the FUSE truncation quirk (sandbox view 2156L/92KB vs intact 2291L/98KB; eslint chokes at the cutoff). It also suppresses that file's one real warning. Verified the intact git-HEAD copy lints to **0 err / 1 warn**, so on Windows `npm run lint` reports the true 4/6. Don't "fix" the phantom — it's not in the source.
+- `eslint.config.js` + `CLAUDE.md` only. Committed (not pushed).
+
+### 2026-05-30 → content_kind front-end block + -036 triage decision (`9bce017`)
+- `HrExhibitFlow.jsx` + `.css`: added a `content_kind` media-variant block (`ContentKindBadge` / `contentKindOf`) to all five artifact-card feet. Renders the spec §3.5 values (official/live/lyrics/cover) as a gold-bordered uppercase chip in the deck's pill language. Off-spec values (e.g. the `content_kind:other` on the Central-PA gallery container) are ignored; cards with no spec-valid content_kind are byte-identical to before. Display-only, code-only — no export/DB change. Built + deployed; verified live on weird.baby/hr: 39 badges (official 25 / live 11 / lyrics 3), gallery + coverflow unregressed.
+- Step-zero re-verified the `6c1aec1` broken-preview fallback across all three surfaces (gallery card cover, lightbox large image, thumb strip) via uncommitted bogus-URL edits to `hunter_root.json`; reverted to a clean tree.
+- Artifact **-036** (`MV-HR-20260405-036`, `HOMESTEAD_Reboot_Complete.jpg` — a live acoustic shot with a "HOMESTEAD: Reboot complete" overlay): diagnosed as stuck in MV **`inbox`**, not a render bug. It's already export-excluded, so it correctly does not render. Operator opted not to publish it ("image can be deleted"); left in inbox, **no MV write performed**. Optional archive/delete deferred to explicit operator word.
+- ⚠️ The **256 errors / 6 warnings** figure noted here was non-source noise — `eslint .` was sweeping `_cowork/`, `dist.pre_*/`, and other backup trees, not real `src/` regressions. This change added **zero** new. **RECONCILED 2026-05-30** (lint-config session, see top session-log entry): `eslint.config.js` now ignores those trees, so the source baseline is back to the documented **4 errors / 6 warnings**.
+
+### 2026-05-30 → broken-preview fallback for gallery/artifact images
+- `HrExhibitFlow.jsx` + `.css`: gallery/artifact images with a null/empty `src` or that 404/fail to load now degrade to a styled placeholder (muted INK/GOLD tile, artifact title + "image unavailable") instead of silent blankness — across the gallery card cover and the lightbox large image + thumb strip. Background-image surfaces (no native `onError`) detect failure via an out-of-band `Image()` probe hook (`useImageFailed`); the lightbox `<img>` uses native `onError` (`FallbackImg`, keyed on `src`). Display-only — no DB/sync/export touch. Addresses the HEIC-incident failure mode (assets fail by path OR format with no front-end signal).

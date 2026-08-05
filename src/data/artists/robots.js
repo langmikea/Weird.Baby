@@ -338,7 +338,7 @@ const WBR_TRACKS = [
             "name on it. This wing is everything we have worked out since — " +
             "and, more often, what we have not.",
           lines: [
-            "UNITS    MGK-VIII, the mainframe · MGK-VIIIp, the portable",
+            "UNITS    MGK-NIAC, the mainframe · MGK-VIIIp, the portable",
             "ON FILE  photographs, the record, the manual, the firmware",
             "TRADE    we buy strange things and find out what they are",
             "TAGLINE  “Purveyors of the Weird.Baby.”",
@@ -712,9 +712,50 @@ const spine = [
      no `videos` array is populated, and no audio path is referenced anywhere
      on this album. See the round report for the inventory.
      ═══════════════════════════════════════════════════════════════════════ */
+  /* ═══ [Q3 2026-08-05] THE DOOR NOW READS MGK-NIAC ═════════════════════════
+     MIKE: "RENAME the MGK-VIII album art to MGK-NIAC — the wing's own canon:
+     MGK-VIII = MGK-8 = Magic 8, and NIAC is the name in use. Sweep for every
+     place that name appears and conform it."
+
+     THIS ANSWERS A QUESTION THIS FACE WAS PRINTING. The name track's third
+     entry was stamped OPEN, titled "Which name goes on the door", and carried
+     `[PAPA] — whether the carousel reads MGK-NIAC or MGK-VIII`. It is answered,
+     so the marker is gone and the entry states the decision instead of the
+     question. A face that keeps asking after the ruling is a dead control.
+
+     WHAT CONFORMED — everything that LABELS this machine: the album title, the
+     cover file and the lettering rendered into it, the archive's subtitle, the
+     archive tombstone's Subject row, the poster caption, both face footers, the
+     tracklist's first row, and the wing's own contents line on Welcome.
+
+     WHAT DID NOT, AND THIS IS THE WHOLE OF IT: every sentence where MGK-VIII is
+     a FACT OF THE RECORD rather than a label — "SOLD AS MGK-VIII — ABEAL's 1965
+     rebrand", "It was built as MGK-NIAC and sold as MGK-VIII", and the same
+     clause inside the FILED entry. Conforming those would delete the fact the
+     rename is derived FROM and leave the face saying a machine was built as
+     MGK-NIAC and sold as MGK-NIAC. The rename is a decision about the door; it
+     is not a claim that the second name never existed.
+
+     ALSO NOT CONFORMED, DELIBERATELY: `id: "mgk-viii"` below and the eleven
+     photographs under `/robots/reference/mgk-viii/`. The id is a key, not a
+     label — nothing outside this file reads it and nothing prints it — and the
+     folder is shared with the robots repo, where `robots/mgk-viii/plates/`
+     holds the originals under filenames of their own (`MAGIC8-2021-P01-…`).
+     Renaming a directory across two repositories to conform a string nobody
+     sees is the change with all the risk and none of the effect. If Mike wants
+     the paths moved it is a separate, mechanical round, and it is a register row
+     rather than a decision taken here.
+
+     THE FIRST TRACK WAS ALREADY CALLED MGK-NIAC, so the rename collided with
+     it: the band, the tracklist's first row and the face's own heading would all
+     have read MGK-NIAC at once. The track is THE NAME — which is its `id`, its
+     subtitle and its entire subject — and the face heading follows it. That is
+     the one string in this block that is a judgement rather than a substitution,
+     and it is a row in docs/OPEN_ACTIONS.md so it can be put back in one edit.
+     ═══════════════════════════════════════════════════════════════════════ */
   {
     id: "mgk-viii",
-    title: "MGK-VIII",
+    title: "MGK-NIAC",
     /* NO YEAR, AND THAT IS A REFUSAL RATHER THAN A GAP. The VIIIp carries 1965
        because the wing's record puts it there. Nothing in this repository dates
        THIS unit, and the only dates that are certain — 2013 and 2021 — are the
@@ -731,7 +772,7 @@ const spine = [
        unreferenced, exactly as N1 left `parts_drawer.jpg` — a real photograph
        this museum owns is not deleted by a cover change, and it is not
        re-homed onto a wall whose tombstone counts its plates. Register M9. */
-    art: "/robots/art/mgk-viii-cover.png",
+    art: "/robots/art/mgk-niac-cover.png",
     accent: null,
     /* THE POSTER IS THE CHEST, AND IT IS DOING DOUBLE DUTY — it is also the
        second tile of The Plates, named here rather than left unremarked, the
@@ -742,17 +783,17 @@ const spine = [
        2026-08-04; see the `contentsPlate` note at the foot of this file.) */
     viewerPoster: "/robots/reference/mgk-viii/chest_grille.jpg",
     viewerPosterCaption:
-      "MGK-VIII at the chest — a detail. The whole frame is shown nowhere.",
+      "MGK-NIAC at the chest — a detail. The whole frame is shown nowhere.",
     tracks: [
       {
         id: "name",
-        title: "MGK-NIAC",
+        title: "The Name",
         videos: [],
         tags: ["niac", "name", "abeal", "mainframe", "1965"],
         face: {
           kind: "text",
-          title: "MGK-NIAC",
-          subtitle: "THE NAME IT WAS BUILT UNDER",
+          title: "THE NAME",
+          subtitle: "MGK-NIAC · TWO NAMES, ONE MACHINE",
           /* the lens, and nothing but the lens. The strongest single detail in
              the set and the least revealing of the shape it belongs to — you
              can tell something is looking back and you cannot tell what it is
@@ -762,8 +803,8 @@ const spine = [
           blurb:
             "The mainframe — the big one, the early one, the one that only " +
             "answers. Everything the portable does that this does not arrived " +
-            "later and arrived smaller. It has two names and the museum has " +
-            "not decided which of them goes on the door.",
+            "later and arrived smaller. It has two names, and this is the one " +
+            "the museum put on the door.",
           lines: [
             "BUILT AS   MGK-NIAC",
             "SOLD AS    MGK-VIII — ABEAL's 1965 rebrand",
@@ -798,15 +839,21 @@ const spine = [
                     "named engines and the menu are all the portable's, and " +
                     "all of them came afterwards.",
               note: "" },
-            { stamp: "OPEN", title: "Which name goes on the door",
-              line: "This album is filed under the second name because that is " +
-                    "what the folder is called, what the firmware is called and " +
-                    "what the parts are labelled. Both names are defensible and " +
-                    "only one can be on the cover.",
-              note: "[PAPA] — whether the carousel reads MGK-NIAC or MGK-VIII" },
+            /* [Q3 2026-08-05] STAMPED OPEN UNTIL THE DOOR WAS DECIDED, and it
+               was: the album is filed under the first name. The second name's
+               claim is not deleted with the question — the folder, the firmware
+               and the parts still carry it, which is what made this a real
+               choice rather than a preference, and it is why the row survives
+               the answer instead of being struck by Doctrine 16. */
+            { stamp: "FILED", title: "Which name goes on the door",
+              line: "The door reads MGK-NIAC — the name it was built under. The " +
+                    "second name is what the folder is called, what the firmware " +
+                    "is called and what the parts are labelled, so both stay in " +
+                    "use; only one can be on the cover.",
+              note: "" },
           ],
           entriesMode: "list",
-          footer: "MGK-VIII · MGK-NIAC",
+          footer: "MGK-NIAC · THE NAME",
         },
       },
       {
@@ -837,7 +884,7 @@ const spine = [
         face: {
           kind: "text",
           title: "IMAGE ARCHIVE",
-          subtitle: "MGK-VIII · DETAILS ONLY",
+          subtitle: "MGK-NIAC · DETAILS ONLY",
           /* [N2] this wing calls its images plates; the wall itself is generic
              and defaults to "images". Read only for a stowed shelf's count. */
           archiveUnit: { one: "plate", many: "plates" },
@@ -847,7 +894,7 @@ const spine = [
             "that the thing is built, wired, standing and lit, and nowhere near " +
             "enough to establish what it looks like.",
           tombstone: [
-            { k: "Subject", v: "MGK-VIII, on the bench" },
+            { k: "Subject", v: "MGK-NIAC, on the bench" },
             { k: "State", v: "Built and powered (2021); under construction (2013)" },
             { k: "Plates", v: "Eight, cropped from six photographs" },
             { k: "Frame", v: "Withheld — no plate carries the whole unit" },
@@ -1004,7 +1051,7 @@ const spine = [
               note: "a bench limit on a bench board — the flagship targets an R4" },
           ],
           entriesMode: "list",
-          footer: "MGK-VIII · TECHNICAL SPECIFICATIONS",
+          footer: "MGK-NIAC · TECHNICAL SPECIFICATIONS",
         },
       },
       /* [N1 2026-08-04] "THE PARTS" IS REMOVED. Mike's instruction, and it is a

@@ -21,14 +21,46 @@
 
    THE SCAN NEVER OVERWRITES A JUDGEMENT. `--scan` re-walks the trees and
    rewrites only the MEASURED fields (bytes, dimensions, format, usedBy). The
-   four judged fields — `what`, `quality`, `qualityNote`, `verdict` — are
-   carried across from the existing table by `id` and are never touched by a
-   scan. A file that disappears from disk is kept with `missing: true` rather
-   than deleted, because a verdict Mike gave is a record and not a cache.
+   five judged fields — `what`, `quality`, `qualityNote`, `verdict`,
+   `revealArc` — are carried across from the existing table and are never
+   touched by a scan. A file that disappears from disk is kept with
+   `missing: true` rather than deleted, because a verdict Mike gave is a record
+   and not a cache.
+
+   ═══ [C32 2026-08-05] AND UNTIL THIS ROUND, "CARRIED ACROSS" MEANT BY PATH ══
+   Which meant a RENAME dropped every judgement on a file in silence. Found by
+   doing one: v51/A7 renamed `jesse-welles-plate.jpg` to `.webp` and the next
+   scan produced a fresh row with all five judged fields null, while the old row
+   vanished with the old path. Nothing warned. That file's verdict happened to
+   be unset so nothing of Mike's was lost — and the Record Approval Gate would
+   have gone on to report a pass over a row nobody had inspected.
+
+   THE CHOICE, WHICH MIKE LEFT OPEN (content hash, stable id, or both): BOTH,
+   AND A THIRD THING THAT MATTERS MORE THAN EITHER.
+
+     1. A STABLE `uid`, minted once and never rewritten. It is the row's real
+        identity. `id` (repo:path) is now an ADDRESS — the thing that changes —
+        and `uid` is the name. Judgements hang off the name.
+     2. `sha256` OF THE CONTENT, measured every scan. A prior row and a new file
+        that share a hash inside one repo are the SAME FILE MOVED: the scan
+        carries the whole judgement across, keeps the `uid`, and says so.
+     3. AND WHERE NEITHER CAN ANSWER, IT REFUSES TO GUESS AND SAYS SO LOUDLY.
+        A rename that also re-renders the file — which is the ordinary case when
+        a thing is renamed, because the name is usually IN the picture — changes
+        the path AND the hash at once, and no amount of keying can infer that.
+        So a judged row whose file has left the disk is now reported under its
+        own banner, and `--rename` is the explicit human declaration that moves
+        the judgement. Silence was the defect; a hash only shrinks how often it
+        happens, it never removes it.
 
    USAGE
      node tools/asset-table.mjs              report to stdout
      node tools/asset-table.mjs --scan       re-walk both trees, merge, write
+     node tools/asset-table.mjs --rename <old> <new>
+                                            declare a rename the hash cannot
+                                            see; carries the judgement, then
+                                            behaves exactly like --scan
+     node tools/asset-table.mjs --orphans    judged rows whose file is gone
      node tools/asset-table.mjs --unverdicted   list what still needs Mike
      node tools/asset-table.mjs --checklist [--room <slug>]
                                             an inspection checklist, per A6
@@ -38,6 +70,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
+import crypto from "node:crypto";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const MUSEUM = path.resolve(HERE, "..");
@@ -239,10 +272,75 @@ function stripComments(src) {
   return out;
 }
 
-function scan() {
+/* [C32] the content hash. Whole-file, because these are small and a prefix hash
+   would call two covers built from one template the same picture. */
+function sha256(file) {
+  try { return crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex"); }
+  catch { return null; }
+}
+
+/* [C32] the row's real name, minted once. Derived rather than counted so two
+   runs of the same scan on a fresh table agree, and salted with the path it was
+   FIRST seen at so a later file arriving at a freed path cannot inherit a
+   retired row's identity. Once written it is opaque and permanent — the whole
+   point is that nothing about the file can change it. */
+function mintUid(id, hash, taken) {
+  const base = crypto.createHash("sha1").update(`${id} ${hash || ""}`)
+    .digest("hex").slice(0, 10);
+  let uid = `A-${base}`, n = 1;
+  while (taken.has(uid)) uid = `A-${base}-${++n}`;
+  taken.add(uid);
+  return uid;
+}
+
+const JUDGED = ["what", "quality", "qualityNote", "verdict", "revealArc"];
+const isJudged = e => JUDGED.some(k => e && e[k] != null);
+
+function scan(renames = []) {
   const prior = load();
-  const priorById = new Map((prior.entries || []).map(e => [e.id, e]));
+  const priorRows = prior.entries || [];
+  const priorById = new Map(priorRows.map(e => [e.id, e]));
   const srcs = sourceFiles().map(f => ({ f, text: stripComments(safeRead(f)) }));
+
+  /* [C32] declared renames are applied to the PRIOR table before matching, so
+     from here down an explicit rename is indistinguishable from a file that
+     never moved. The judgement travels; every measured field is re-measured. */
+  const declared = [];
+  for (const [from, to] of renames) {
+    const row = priorRows.find(e => e.path === from || e.id === from || e.ref === from);
+    if (!row) { console.error(`! --rename: no row for ${from}`); continue; }
+    priorById.delete(row.id);
+    const moved = { ...row, id: row.id.replace(row.path, to), path: to };
+    /* A target that ALREADY carries a judgement is not overwritten. It happens
+       when an earlier round re-wrote the judgement onto the new path by hand and
+       left the old row stranded — which is exactly what v51/A7 did — so the
+       target is the CURRENT reading and the orphan only fills what is still
+       null. Whichever way it lands is printed. */
+    const at = priorById.get(moved.id);
+    if (at) {
+      for (const k of JUDGED) if (at[k] == null && moved[k] != null) at[k] = moved[k];
+      const kept = JUDGED.filter(k => at[k] != null && at[k] !== moved[k]);
+      declared.push([row.path, to, at.uid ? "merged into an existing row" +
+        (kept.length ? `, which kept its own ${kept.join("/")}` : "") : "merged"]);
+    } else {
+      priorById.set(moved.id, moved);
+      declared.push([row.path, to, "carried whole"]);
+    }
+  }
+
+  const claimed = new Set();          // prior ids consumed by a live file
+  const takenUids = new Set(priorRows.map(e => e.uid).filter(Boolean));
+  const carried = [];                 // renames the hash resolved on its own
+
+  /* [C32] prior rows that carry a judgement, indexed by content — the pool a
+     moved file is matched against when its path no longer finds it. */
+  const byHash = new Map();
+  for (const e of priorRows) {
+    if (!e.sha256 || !isJudged(e)) continue;
+    const k = `${e.repo} ${e.sha256}`;
+    if (!byHash.has(k)) byHash.set(k, []);
+    byHash.get(k).push(e);
+  }
 
   const entries = [];
   for (const repo of REPOS) {
@@ -255,6 +353,7 @@ function scan() {
       const ext = path.extname(abs).toLowerCase();
       const id = `${repo.key}:${rel}`;
       const st = fs.statSync(abs);
+      const hash = sha256(abs);
       /* the public path a browser would ask for, where there is one */
       const ref = repo.key === "museum" && rel.startsWith("public/")
         ? "/" + rel.slice("public/".length) : null;
@@ -262,12 +361,30 @@ function scan() {
         ? srcs.filter(s => s.text.includes(ref.slice(1)))
               .map(s => path.relative(MUSEUM, s.f).split(path.sep).join("/"))
         : [];
-      const p = priorById.get(id) || {};
+      /* [C32] MATCHING, IN ORDER. Address first — the overwhelming case, and
+         the only one that was ever handled. Then content, which resolves a pure
+         move on its own. Whatever neither finds is a new row, and whatever is
+         left over on the prior side is surfaced below rather than dropped. */
+      let p = priorById.get(id);
+      if (p) claimed.add(p.id);
+      else {
+        const pool = byHash.get(`${repo.key} ${hash}`) || [];
+        const moved = pool.find(e => !claimed.has(e.id) && !fs.existsSync(
+          path.join(repo.root, e.path.split("/").join(path.sep))));
+        if (moved) {
+          p = moved; claimed.add(moved.id);
+          carried.push([moved.path, rel]);
+        }
+      }
+      p = p || {};
       entries.push({
         id,
+        /* [C32] the name, as against `id`, which is the address */
+        uid: p.uid || mintUid(id, hash, takenUids),
         repo: repo.key,
         path: rel,
         ref,
+        sha256: hash,
         kind: kindOf(ext),
         format: ext.replace(".", ""),
         bytes: st.size,
@@ -300,10 +417,32 @@ function scan() {
   }
   /* a file that left the disk keeps its row and its verdict */
   const live = new Set(entries.map(e => e.id));
+  const orphaned = [];
   for (const [id, e] of priorById) {
-    if (!live.has(id)) entries.push({ ...e, missing: true });
+    if (live.has(id) || claimed.has(e.id)) continue;
+    entries.push({ ...e, missing: true });
+    if (isJudged(e)) orphaned.push(e);
   }
   entries.sort((a, b) => a.id.localeCompare(b.id));
+
+  /* [C32] THE PART THAT IS NOT A KEYING CHANGE. The two paragraphs above make a
+     silent drop rarer; this is what makes it impossible for one to be silent. */
+  if (declared.length) {
+    console.log(`\n  DECLARED RENAMES — judgement carried by hand (${declared.length}):`);
+    declared.forEach(([a, b, how]) => console.log(`    ${a}\n      -> ${b}   (${how})`));
+  }
+  if (carried.length) {
+    console.log(`\n  RENAMES RESOLVED BY CONTENT — same bytes, new path (${carried.length}):`);
+    carried.forEach(([a, b]) => console.log(`    ${a}\n      -> ${b}`));
+  }
+  if (orphaned.length) {
+    console.log(`\n  !! JUDGED ROWS WHOSE FILE IS GONE (${orphaned.length}) — C32.`);
+    console.log("     The row and its judgement are KEPT with missing:true. If one of these");
+    console.log("     is a rename the content hash could not see (the file was re-rendered as");
+    console.log("     well as moved), declare it:  npm run assets:rename -- <old> <new>");
+    orphaned.forEach(e => console.log(
+      `       ${e.uid || "(no uid)"}  ${e.path}\n         verdict=${e.verdict ?? "null"} quality=${e.quality ?? "null"} arc=${e.revealArc ?? "null"}`));
+  }
   /* [N8] HEADER WINS OVER THE FILE'S OWN HEADER, and that is a fix rather than
      a preference. `{...prior, entries}` meant the underscore keys were whatever
      the table happened to already say, so `_revealArc` — added to HEADER this
@@ -328,6 +467,8 @@ const HEADER = {
   _verdict: "MIKE'S, and unset by default. null = not inspected. Values are his to choose; `pass` and `reject` are what the checklist reads. Ops never writes this field.",
   _revealArc: "THE REVEAL ARC (Mike, 2026-08-04): arrived | understood | partial | online | null. The house's canon for how a thing is revealed — acknowledged when it arrived, status-updated as it was understood, brought online in stages — applied to every asset so a visitor can be given the sequence the house actually lived, test patterns and noise included. `null` means UNSET and is not a stage: it is the honest state of an asset whose arc nobody has established. Ops populates only what the record already attests.",
   _gate: "THE RECORD APPROVAL GATE (Mike, 2026-08-04): final sign-off on a Record is Mike personally inspecting EVERY thing presented in it. `--checklist` is how that inspection is produced; a Record with any presented asset at verdict null has not been signed off.",
+  _uid: "[C32 2026-08-05] THE ROW'S NAME, minted once and never rewritten. `id` is repo:path and is an ADDRESS — it changes when a file moves. `uid` does not, so a judgement hangs off something a rename cannot touch. Other tables may reference a row by uid; nothing may reference it by path and expect that to hold.",
+  _sha256: "[C32 2026-08-05] The content hash, re-measured every scan. A prior row and a new file sharing a hash inside one repo are the same file MOVED: the scan carries the judgement and the uid across and reports it. Where a rename ALSO changed the content — the ordinary case, because the name is usually in the picture — no hash can see it, so the judged row is surfaced under its own banner and `--rename` is the explicit declaration that moves it. The silence was the defect; the hash only makes it rarer.",
 };
 
 /* ---- reports ------------------------------------------------------------- */
@@ -414,14 +555,37 @@ function gate(t, room) {
   console.log("\n  Signed off: every presented asset in scope carries Mike's pass.");
 }
 
+function writeTable(t) {
+  fs.writeFileSync(TABLE, JSON.stringify(t, null, 1) + "\n");
+  console.log(`wrote ${path.relative(MUSEUM, TABLE)} — ${t.entries.length} rows`);
+}
+
 const argv = process.argv.slice(2);
 if (argv.includes("--gate")) {
   const i = argv.indexOf("--room");
   gate(load(), i >= 0 ? argv[i + 1] : null);
+} else if (argv.includes("--rename")) {
+  /* [C32] the escape hatch for a rename no hash can see. It is deliberately a
+     command a person types, not a heuristic: carrying a verdict onto a file
+     whose bytes changed is a claim that the inspection still applies, and only
+     a human can make it. */
+  const i = argv.indexOf("--rename");
+  const from = argv[i + 1], to = argv[i + 2];
+  if (!from || !to) {
+    console.error("usage: --rename <old path|ref|id> <new path>");
+    process.exit(1);
+  }
+  const t = scan([[from, to]]);
+  writeTable(t);
+  report(t);
+} else if (argv.includes("--orphans")) {
+  const e = load().entries.filter(x => x.missing && isJudged(x));
+  console.log(`${e.length} judged rows whose file is no longer on disk:`);
+  e.forEach(x => console.log(
+    `  ${x.uid || "(no uid)"}  ${x.path}\n    ${x.what || "(unwritten)"}\n    verdict=${x.verdict ?? "null"} quality=${x.quality ?? "null"} arc=${x.revealArc ?? "null"}`));
 } else if (argv.includes("--scan")) {
   const t = scan();
-  fs.writeFileSync(TABLE, JSON.stringify(t, null, 1) + "\n");
-  console.log(`wrote ${path.relative(MUSEUM, TABLE)} — ${t.entries.length} rows`);
+  writeTable(t);
   report(t);
 } else if (argv.includes("--json")) {
   console.log(JSON.stringify(load(), null, 1));

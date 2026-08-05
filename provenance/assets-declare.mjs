@@ -50,8 +50,10 @@ const A = [
   // Two origins in one picture and both are named: the disc is the museum's own
   // photograph of its own unit, the furniture around it is the ROBOTS cover's
   // own geometry, and nothing was drawn that was not one of those two.
-  ["/robots/art/mgk-viii-cover.png", "VERIFIED", COVER, true,
-    "MGK-VIII · PURVEYORS OF THE WEIRD — the model number and the house strapline, both set by tools/make_unit_covers.py. The badge photograph carries no lettering."],
+  // [Q3 2026-08-05] renamed with the album: the lettering IN the picture is the
+  // model number, so the file could not keep the retired name.
+  ["/robots/art/mgk-niac-cover.png", "VERIFIED", COVER, true,
+    "MGK-NIAC · PURVEYORS OF THE WEIRD — the model number and the house strapline, both set by tools/make_unit_covers.py. The badge photograph carries no lettering."],
   ["/robots/art/mgk-viiip-cover.png", "VERIFIED", COVER, true,
     "MGK-VIIIp · PURVEYORS OF THE WEIRD set by the tool, and inside the badge the unit's OWN faceplate — MGK-VIIIp · The Informer · ABEAL — with the glass reading ABEAL MGK-VIIIp / LOADING SUCCESS. Object lettering, not museum copy."],
   ["/robots/reference/mgk-viii/chest_grille.jpg", "VERIFIED", PHOTO, true,

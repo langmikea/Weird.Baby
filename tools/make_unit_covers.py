@@ -80,7 +80,13 @@ MEASURE = S * 0.760           # the widest the word may set
 
 UNITS = [
     # (model number, source photograph, output file, focal crop)
-    ("MGK-VIII", "reference/mgk-viii/head_lens.jpg", "mgk-viii-cover.png", 0.48),
+    # [Q3 2026-08-05] MGK-VIII -> MGK-NIAC on Mike's ruling: the wing's canon is
+    # MGK-VIII = MGK-8 = Magic 8, and NIAC is the name in use. The lettering and
+    # the output filename both move; the SOURCE path does not, because the
+    # photographs keep living under the folder the robots repo names them in.
+    # Eight glyphs against nine, so set_tracked's per-cover solve absorbs it and
+    # no constant below changes.
+    ("MGK-NIAC", "reference/mgk-viii/head_lens.jpg", "mgk-niac-cover.png", 0.48),
     ("MGK-VIIIp", "reference/photos/front_full.png", "mgk-viiip-cover.png", 0.44),
 ]
 

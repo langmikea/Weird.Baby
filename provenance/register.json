@@ -627,22 +627,6 @@
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
-  "db895f38b80420f0": {
-   "f": "src/data/artists/robots.js",
-   "l": 437,
-   "t": "MGK-VIII",
-   "p": "spine[].title",
-   "c": "VERIFIED",
-   "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
-  },
-  "2df67e5f41515052": {
-   "f": "src/data/artists/robots.js",
-   "l": 457,
-   "t": "MGK-VIII at the chest — a detail. The whole frame is shown nowhere.",
-   "p": "spine[].viewerPosterCaption",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
   "371cf0216dd6a40c": {
    "f": "src/data/artists/robots.js",
    "l": 466,
@@ -651,13 +635,6 @@
    "c": "VERIFIED",
    "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
   },
-  "a24587af57dead75": {
-   "f": "src/data/artists/robots.js",
-   "l": 467,
-   "t": "THE NAME IT WAS BUILT UNDER",
-   "p": "spine[].tracks[].face.subtitle",
-   "c": "HOUSE"
-  },
   "3306c1c756a9ae08": {
    "f": "src/data/artists/robots.js",
    "l": 473,
@@ -665,21 +642,6 @@
    "p": "spine[].tracks[].face.stillCaption",
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "3f943a4c9689bb4a": {
-   "f": "src/data/artists/robots.js",
-   "l": 475,
-   "t": "The mainframe — the big one, the early one, the one that only answers. Everything the portable does that this does not arrived later and arrived smaller. It has two names and the museum has not decided which of them goes on the door.",
-   "p": "spine[].tracks[].face.blurb",
-   "c": "RESTATED",
-   "r": [
-    "371cf0216dd6a40c",
-    "3306c1c756a9ae08",
-    "92828483029a7a3c",
-    "b3a30eb36383b456",
-    "737f3f085bffe3e2",
-    "92cc1c6c9bd728d3"
-   ]
   },
   "66910d9f7da56182": {
    "f": "src/data/artists/robots.js",
@@ -780,13 +742,6 @@
    "c": "VERIFIED",
    "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
   },
-  "e89a8a5139f29868": {
-   "f": "src/data/artists/robots.js",
-   "l": 513,
-   "t": "OPEN",
-   "p": "spine[].tracks[].face.entries[].stamp",
-   "c": "HOUSE"
-  },
   "35b965377d93fc1e": {
    "f": "src/data/artists/robots.js",
    "l": 513,
@@ -802,48 +757,11 @@
     "92cc1c6c9bd728d3"
    ]
   },
-  "e3a175dc3dc27729": {
-   "f": "src/data/artists/robots.js",
-   "l": 514,
-   "t": "This album is filed under the second name because that is what the folder is called, what the firmware is called and what the parts are labelled. Both names are defensible and only one can be on the cover.",
-   "p": "spine[].tracks[].face.entries[].line",
-   "c": "RESTATED",
-   "r": [
-    "371cf0216dd6a40c",
-    "3306c1c756a9ae08",
-    "92828483029a7a3c",
-    "b3a30eb36383b456",
-    "737f3f085bffe3e2",
-    "92cc1c6c9bd728d3"
-   ]
-  },
-  "16655137868e6b84": {
-   "f": "src/data/artists/robots.js",
-   "l": 518,
-   "t": "[PAPA] — whether the carousel reads MGK-NIAC or MGK-VIII",
-   "p": "spine[].tracks[].face.entries[].note",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
   "b059d69645ac40bf": {
    "f": "src/data/artists/robots.js",
    "l": 1328,
    "t": "list",
    "p": "spine[].tracks[].face.entriesMode",
-   "c": "HOUSE"
-  },
-  "2cf29086b1d17ed5": {
-   "f": "src/data/artists/robots.js",
-   "l": 521,
-   "t": "MGK-VIII · MGK-NIAC",
-   "p": "spine[].tracks[].face.footer",
-   "c": "HOUSE"
-  },
-  "ab9b4481d9ec85ec": {
-   "f": "src/data/artists/robots.js",
-   "l": 542,
-   "t": "MGK-VIII · DETAILS ONLY",
-   "p": "spine[].tracks[].face.subtitle",
    "c": "HOUSE"
   },
   "b652726a0e8fb3ec": {
@@ -853,7 +771,7 @@
    "p": "spine[].tracks[].face.blurb",
    "c": "RESTATED",
    "r": [
-    "bf3a53125b985ca2",
+    "bbcb5e546315f259",
     "8010c11fb3b1d9e4",
     "65834c73d4ab70f9",
     "8e8c6b1c1792302a",
@@ -867,14 +785,6 @@
    "t": "Subject",
    "p": "spine[].tracks[].face.tombstone[].k",
    "c": "HOUSE"
-  },
-  "bf3a53125b985ca2": {
-   "f": "src/data/artists/robots.js",
-   "l": 549,
-   "t": "MGK-VIII, on the bench",
-   "p": "spine[].tracks[].face.tombstone[].v",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
   "43e7c5c9b98951b5": {
    "f": "src/data/artists/robots.js",
@@ -16960,16 +16870,6 @@
    "s": "the robots repo's own record — C:/AI/Projects/weird-baby-robots (STATE.md, THE_RECORD.md, robots/mgk-viiip/sources/2022-proto-docs/README.md). External to this repo; the sweep cannot re-check it.",
    "n": "SAME SOURCE AS THE SENTENCE IT REPLACES (register key e06b36c1dbe6faaf, now stale). The ONLY change is the removal of the invented count 'three cartons' — the number H4 struck from Record 013 and which had been left standing here as register row M15. It is not replaced with another number, because nobody supplied one."
   },
-  "2ee0cd99c5c1892c": {
-   "f": "src/data/artists/robots.js",
-   "l": 318,
-   "t": "UNITS    MGK-VIII, the mainframe · MGK-VIIIp, the portable",
-   "c": "RESTATED",
-   "r": [
-    "3daefcb2e1402bb1",
-    "66409c81eba92b40"
-   ]
-  },
   "cfe2d08124f3f10d": {
    "f": "src/data/artists/robots.js",
    "l": 319,
@@ -17280,12 +17180,6 @@
    "c": "MIKE",
    "s": "Mike's remote-control brief, N1, 2026-08-04: \"The Plates becomes IMAGE ARCHIVE (Mike ruled; retire The Morgue). Robots wing: The Firmware becomes TECHNICAL SPECIFICATIONS; The Parts is REMOVED. Directory loses The: Weird.Baby Robots, Weird.Baby Music, Weird.Baby Foundation.\" Same ruling as the track title."
   },
-  "d142eb6340b37479": {
-   "f": "src/data/artists/robots.js",
-   "l": 978,
-   "t": "MGK-VIII · TECHNICAL SPECIFICATIONS",
-   "c": "HOUSE"
-  },
   "5acaad7a32127b64": {
    "f": "src/data/artists/robots.js",
    "l": 1451,
@@ -17386,6 +17280,142 @@
    "t": "Weird.Baby Foundation",
    "c": "MIKE",
    "s": "Mike's remote-control brief, N1, 2026-08-04: \"The Plates becomes IMAGE ARCHIVE (Mike ruled; retire The Morgue). Robots wing: The Firmware becomes TECHNICAL SPECIFICATIONS; The Parts is REMOVED. Directory loses The: Weird.Baby Robots, Weird.Baby Music, Weird.Baby Foundation.\" Only the DIRECTORY line changed; the room's own name, title bar and heading are untouched."
+  },
+  "4d8b8a918a049651": {
+   "f": "src/data/artists/robots.js",
+   "l": 341,
+   "t": "UNITS    MGK-NIAC, the mainframe · MGK-VIIIp, the portable",
+   "c": "RESTATED",
+   "r": [
+    "3daefcb2e1402bb1",
+    "66409c81eba92b40"
+   ]
+  },
+  "5a2394adb6b1099b": {
+   "f": "src/data/artists/robots.js",
+   "l": 786,
+   "t": "MGK-NIAC at the chest — a detail. The whole frame is shown nowhere.",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/mgk-viii/ and looked at for this table"
+  },
+  "6ff12df8907979a0": {
+   "f": "src/data/artists/robots.js",
+   "l": 790,
+   "t": "The Name",
+   "c": "HOUSE"
+  },
+  "cbb406773ab01bda": {
+   "f": "src/data/artists/robots.js",
+   "l": 795,
+   "t": "THE NAME",
+   "c": "HOUSE"
+  },
+  "ad2cc1dc4a4658cc": {
+   "f": "src/data/artists/robots.js",
+   "l": 796,
+   "t": "MGK-NIAC · TWO NAMES, ONE MACHINE",
+   "c": "HOUSE"
+  },
+  "9f232adb647ee8c5": {
+   "f": "src/data/artists/robots.js",
+   "l": 804,
+   "t": "The mainframe — the big one, the early one, the one that only answers. Everything the portable does that this does not arrived later and arrived smaller. It has two names, and this is the one the museum put on the door.",
+   "c": "RESTATED",
+   "r": [
+    "371cf0216dd6a40c",
+    "3306c1c756a9ae08",
+    "92828483029a7a3c",
+    "b3a30eb36383b456",
+    "737f3f085bffe3e2",
+    "92cc1c6c9bd728d3"
+   ]
+  },
+  "9570ad83acf2e2a1": {
+   "f": "src/data/artists/robots.js",
+   "l": 848,
+   "t": "FILED",
+   "c": "HOUSE"
+  },
+  "d91592c273e386f9": {
+   "f": "src/data/artists/robots.js",
+   "l": 849,
+   "t": "The door reads MGK-NIAC — the name it was built under. The second name is what the folder is called, what the firmware is called and what the parts are labelled, so both stay in use; only one can be on the cover.",
+   "c": "MIKE",
+   "s": "MIKE, 2026-08-05 (Q3): \"RENAME the MGK-VIII album art to MGK-NIAC — the wing's own canon: MGK-VIII = MGK-8 = Magic 8, and NIAC is the name in use.\" The clause about the folder, the firmware and the parts is the previous version of this line, unchanged."
+  },
+  "82d67c5fc9008d9f": {
+   "f": "src/data/artists/robots.js",
+   "l": 856,
+   "t": "MGK-NIAC · THE NAME",
+   "c": "HOUSE"
+  },
+  "89cd064f259785b2": {
+   "f": "src/data/artists/robots.js",
+   "l": 887,
+   "t": "MGK-NIAC · DETAILS ONLY",
+   "c": "HOUSE"
+  },
+  "bbcb5e546315f259": {
+   "f": "src/data/artists/robots.js",
+   "l": 897,
+   "t": "MGK-NIAC, on the bench",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/mgk-viii/ and looked at for this table"
+  },
+  "af191d8957b16fec": {
+   "f": "src/data/artists/robots.js",
+   "l": 1054,
+   "t": "MGK-NIAC · TECHNICAL SPECIFICATIONS",
+   "c": "HOUSE"
+  },
+  "fed990836fb40a2f": {
+   "f": "src/lib/reveal.js",
+   "l": 46,
+   "t": "NOT_BUILT",
+   "c": "HOUSE",
+   "s": "[R2 2026-08-05] NOT A VISITOR-FACING STRING. It is a reveal-ledger row id, or one of the ledger enum values src/lib/reveal.js compares against — a KEY passed to a lookup, never rendered. The sweep is default-deny and cannot tell an identifier from a label, which is the correct bias; it is declared rather than excluded, because adding an exclusion rule to absorb it would widen the boundary for everything."
+  },
+  "d7e097d62d7793df": {
+   "f": "src/lib/reveal.js",
+   "l": 57,
+   "t": "HELD",
+   "c": "HOUSE",
+   "s": "[R2 2026-08-05] NOT A VISITOR-FACING STRING. It is a reveal-ledger row id, or one of the ledger enum values src/lib/reveal.js compares against — a KEY passed to a lookup, never rendered. The sweep is default-deny and cannot tell an identifier from a label, which is the correct bias; it is declared rather than excluded, because adding an exclusion rule to absorb it would widen the boundary for everything."
+  },
+  "37f0f85266267988": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 248,
+   "t": "channel.shop",
+   "c": "HOUSE",
+   "s": "[R2 2026-08-05] NOT A VISITOR-FACING STRING. It is a reveal-ledger row id, or one of the ledger enum values src/lib/reveal.js compares against — a KEY passed to a lookup, never rendered. The sweep is default-deny and cannot tell an identifier from a label, which is the correct bias; it is declared rather than excluded, because adding an exclusion rule to absorb it would widen the boundary for everything."
+  },
+  "01a041d62b087056": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 257,
+   "t": "channel.music",
+   "c": "HOUSE",
+   "s": "[R2 2026-08-05] NOT A VISITOR-FACING STRING. It is a reveal-ledger row id, or one of the ledger enum values src/lib/reveal.js compares against — a KEY passed to a lookup, never rendered. The sweep is default-deny and cannot tell an identifier from a label, which is the correct bias; it is declared rather than excluded, because adding an exclusion rule to absorb it would widen the boundary for everything."
+  },
+  "134d1a6a326057c5": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 270,
+   "t": "channel.qr",
+   "c": "HOUSE",
+   "s": "[R2 2026-08-05] NOT A VISITOR-FACING STRING. It is a reveal-ledger row id, or one of the ledger enum values src/lib/reveal.js compares against — a KEY passed to a lookup, never rendered. The sweep is default-deny and cannot tell an identifier from a label, which is the correct bias; it is declared rather than excluded, because adding an exclusion rule to absorb it would widen the boundary for everything."
+  },
+  "4ba62a7762f017a6": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 285,
+   "t": "channel.supplies",
+   "c": "HOUSE",
+   "s": "[R2 2026-08-05] NOT A VISITOR-FACING STRING. It is a reveal-ledger row id, or one of the ledger enum values src/lib/reveal.js compares against — a KEY passed to a lookup, never rendered. The sweep is default-deny and cannot tell an identifier from a label, which is the correct bias; it is declared rather than excluded, because adding an exclusion rule to absorb it would widen the boundary for everything."
+  },
+  "637109e89d83eba4": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 294,
+   "t": "channel.services",
+   "c": "HOUSE",
+   "s": "[R2 2026-08-05] NOT A VISITOR-FACING STRING. It is a reveal-ledger row id, or one of the ledger enum values src/lib/reveal.js compares against — a KEY passed to a lookup, never rendered. The sweep is default-deny and cannot tell an identifier from a label, which is the correct bias; it is declared rather than excluded, because adding an exclusion rule to absorb it would widen the boundary for everything."
   }
  }
 }

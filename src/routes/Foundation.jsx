@@ -144,6 +144,8 @@ import { useRoom } from "../lib/use-room.js";
 import { useArrival } from "../lib/use-arrival.js";
 import MuseumBar from "../components/MuseumBar.jsx";
 import { visitorProse, kept } from "../lib/visitor-prose.js";
+/* [R5 2026-08-05] the state column's source — see the note above STATE_LABEL. */
+import { isLive } from "../lib/reveal.js";
 
 /* ═══ [E1 2026-08-03] THE LEDGER ═════════════════════════════════════════════
    Mike's contributions model, as the register it is.
@@ -206,6 +208,36 @@ const BY_LABEL = {
 };
 const BY_KIND = { ANONYMOUS: "ANONYMOUS", NONE: "NONE", NA: "NA" };
 
+/* ═══ [R5 2026-08-05] THE STATE COLUMN NOW READS THE REVEAL LEDGER ══════════
+   MIKE: "WIRE ONE CONSUMER as proof — the cheapest honest surface whose
+   visibility already varies reads the table instead of its hard-coded state.
+   Prove it by flipping a row and watching the site change."
+
+   THIS ROOM IS THAT SURFACE, and it is not an arbitrary pick. Its state column
+   IS hard-coded availability — five rows, two of them LIVE and three NOT BUILT,
+   typed into this file. It is also the one page in the building whose entire
+   argument is that the state must be true: Mike's constraint was that nothing
+   may claim a mechanism that isn't built, and the column exists so the tense
+   cannot be softened in prose. A truth about what is built, typed by hand into
+   the page that makes the claim, is exactly the shape the ledger is for.
+
+   THE LEDGER SUPPLIES THE STATE. THIS FILE KEEPS THE WORDS. A row below now
+   carries `reveal: "channel.qr"` instead of `state: "NOT BUILT"`, and the label
+   printed on the glass is still a string literal in `src/` — which is where
+   `provenance:gate` can see it. Moving the letters into a JSON file outside
+   `src/` would have taken them off the provenance boundary in the same round
+   that mechanised it. See the header of `src/lib/reveal.js`.
+
+   TWO STATES OUT OF FOUR, and strictly: `isLive` is true only for a ledger row
+   at `LIVE`. `PARTIAL` and `STUB` print NOT BUILT here, because this register's
+   own rule is that there is no third state for "in progress" — see the note on
+   LEDGER below, which was written before this wiring existed and did not have
+   to change for it. */
+const STATE_LABEL = { LIVE: "LIVE", NOT_BUILT: "NOT BUILT" };
+function stateOfRow(row) {
+  return isLive(row.reveal) ? STATE_LABEL.LIVE : STATE_LABEL.NOT_BUILT;
+}
+
 const LEDGER = [
   {
     head: "What comes in",
@@ -213,7 +245,7 @@ const LEDGER = [
     rows: [
       {
         what: "The gift shop",
-        state: "LIVE",
+        reveal: "channel.shop",
         by: "NA",
         line:
           "The museum's own shelf — a sticker, at the moment. Nearly every " +
@@ -222,7 +254,7 @@ const LEDGER = [
       },
       {
         what: "The house's own music",
-        state: "LIVE",
+        reveal: "channel.music",
         by: "NA",
         line:
           "Weird.Baby Music is Papa's own recordings, published under the " +
@@ -235,7 +267,7 @@ const LEDGER = [
            the mechanism a visitor is most likely to assume already exists on a
            page like this one, so it is the one that most needed a state. */
         what: "Given in Weird.Baby's name",
-        state: "NOT BUILT",
+        reveal: "channel.qr",
         by: "NONE",
         line:
           "A code you scan, an amount already set or one you choose, given in " +
@@ -250,7 +282,7 @@ const LEDGER = [
     rows: [
       {
         what: "A registry of supplies",
-        state: "NOT BUILT",
+        reveal: "channel.supplies",
         by: "NONE",
         line:
           "A public list of what the museum actually needs, the way a wedding " +
@@ -259,7 +291,7 @@ const LEDGER = [
       },
       {
         what: "A registry of services",
-        state: "NOT BUILT",
+        reveal: "channel.services",
         by: "NONE",
         line:
           "The same list for work rather than goods — an hour of design, an " +
@@ -617,7 +649,9 @@ export default function Foundation() {
                 <span className="fnd-reg-head-sub">{sub}</span>
               </div>
               <ul className="fnd-reg-rows">
-                {rows.map(({ what, state, line, by }) => (
+                {rows.map(({ what, reveal, line, by }) => (
+                  /* [R5] `state` is no longer a property of the row; it is
+                     looked up from the ledger by the row's id. */
                   <li className="fnd-reg-row" key={what}>
                     <div className="fnd-reg-top">
                       <span className="fnd-reg-what">{what}</span>
@@ -638,7 +672,10 @@ export default function Foundation() {
                             LEDGER. `data-state` rather than a second class name
                             so the CSS reads as one rule with two cases instead of
                             two rules that have to be kept in step. */}
-                        <span className="fnd-reg-state" data-state={state}>{state}</span>
+                        <span className="fnd-reg-state"
+                          data-state={stateOfRow({ reveal })}>
+                          {stateOfRow({ reveal })}
+                        </span>
                       </span>
                     </div>
                     <p className="fnd-reg-line">{line}</p>

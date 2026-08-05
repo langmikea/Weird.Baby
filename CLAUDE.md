@@ -432,6 +432,47 @@ catches invented CONTENT, Doctrine 11 catches a line whose SUBJECT is the work.
 
 Maintained here. Newest first.
 
+### 2026-08-05 → THE REVEAL LEDGER (v52; Q1–Q3, R1–R6) — sealed
+- **Q1** The guest book went blank on the live site, **and the arithmetic was
+  never the fault** — it was correct for every length it could reach. The
+  advance ran on a `setTimeout` and the wrap on a `transitionend`: **two clocks,
+  and only one of them stops when the page stops being rendered.** A hidden tab
+  throttles timers and SUSPENDS RENDERING, so the offset kept climbing and
+  nothing ever wrapped it back. The fix is **two guarantees that need no event
+  to arrive** — the offset is clamped to `[0, n]` where it is used, and the
+  copy count is derived (`1 + ceil(VISIBLE/n)`) so the track is always long
+  enough for that clamp. Blank is now unreachable at ANY length, proved by
+  exhaustive simulation with every event adversarially dropped (old machine:
+  blank at tick 4, row 119 of a 12-row track). Also pauses on `document.hidden`
+  and the wrap has a timeout backstop.
+- **Q2** `STEP` = 1. Bounce, 5.0s rest, 520ms move, hover pause and
+  reduced-motion fallback all untouched.
+- **Q3** MGK-VIII → **MGK-NIAC** on everything that LABELS the machine; UNCHANGED
+  on every sentence where the old name is a **fact of the record** (*"SOLD AS
+  MGK-VIII — ABEAL's 1965 rebrand"*), because conforming those would delete the
+  fact the rename is derived from. `id: "mgk-viii"` and
+  `/robots/reference/mgk-viii/` deliberately NOT renamed — a key and a
+  cross-repo directory that print nowhere. It closed a `[PAPA]` the face was
+  still printing. One judgement call: the track is now **THE NAME** (M36).
+- **R1/R2** `reveal/ledger.json` — **151 rows, one per REVEALABLE THING** across
+  both repos. The twin's rows are read off **the DISPATCHER** (`Run_EXE`), never
+  the CSVs, on Mike's instruction; the museum's 18 albums / 134 tracks are
+  extracted by script. `when` is null on every row (Doctrine 12).
+- **R3** **C32 CLOSED** — `uid` (minted once, the row's NAME) + `sha256` (resolves
+  a pure move) + **a refusal to guess**: a judged row whose file is gone is now
+  reported under its own banner with `--rename` as the human declaration. It
+  caught v51/A7's own stranded rename on the first run.
+- **R4/R5/R6** `docs/REVEAL_LEDGER_AUDIT.md`, generated not typed. `/foundation`'s
+  LIVE/NOT BUILT column reads the ledger — proved by flipping a row and reading
+  the change out of the built bundle. **The ledger returns STATE, never WORDS**,
+  because `provenance:gate` sweeps only `src/`.
+- Gates: lint **11/9 = baseline**; build green **72 modules**; provenance **PASS**
+  (INVENTION 0); asset table **253 rows, 0 orphaned judgements**; `reveal:check`
+  PASS. **THE BROWSER LAP DID NOT RUN** — the Chrome extension was unavailable
+  all session; every rendered string was verified in the BUILT BUNDLE instead,
+  which cannot catch layout or overflow. Named as a gap in the round log.
+- Round log: `docs/MUSEUM_REVEAL_LEDGER_LOG-20260805.md`.
+
 ### 2026-08-04 → M23 RULED + THE ALBUM ROUND (v51; M23a–M23b, A1–A7) — sealed
 - **M23a/M23b** Mike ruled on both pairs v50 built, and both rulings went past
   "pick one". The booth loses **BOTH** hook candidates with **no replacement** —
@@ -549,26 +590,15 @@ Maintained here. Newest first.
   hits; desktop + genuine 390px laps, zero horizontal scroll anywhere.
 - Round log: `docs/MUSEUM_CLEAN_SLATE_LOG-20260804.md`.
 
-### 2026-05-30 → lint baseline restored (eslint ignores non-source)
-- `eslint.config.js`: added a `globalIgnores` block covering `_cowork/`, `dist`, `dist.pre_*`, `.phase1_retired_files/`, and `*.pre-*`/`*.old_v*`/`*.bak_*` backups. `eslint .` had been sweeping minified vendor backups (`dist.pre_p14_final_2` + `dist.pre_phase1_2` = 117 err each) and `_cowork/` scratch (18 err) — ~252 noise errors burying the real source baseline and making the count useless as a regression tripwire. Now `eslint .` reports `src/` only.
-- **Source baseline confirmed unchanged at 4 errors / 6 warnings** (the documented debt): `WbAdmin.jsx:18` (1 err); `Exhibit.jsx:88/191/517` (3 err + 5 warn); `HrExhibitFlow.jsx` (1 warn). Zero new errors introduced — config + doc change only, no `.jsx`/`.css`/data touched. Reconciled the lint-debt table drift: `Exhibit.jsx:508 → :517` (`advanceQueue` decl `577 → 592`).
-- Sandbox caveat (cost ~real time, banking it): a cowork-sandbox `eslint .` shows **5 err / 5 warn**, not 4/6 — a phantom `Parsing error` in `HrExhibitFlow.jsx:2157` caused by the FUSE truncation quirk (sandbox view 2156L/92KB vs intact 2291L/98KB; eslint chokes at the cutoff). It also suppresses that file's one real warning. Verified the intact git-HEAD copy lints to **0 err / 1 warn**, so on Windows `npm run lint` reports the true 4/6. Don't "fix" the phantom — it's not in the source.
-- `eslint.config.js` + `CLAUDE.md` only. Committed (not pushed).
-
-### 2026-05-30 → content_kind front-end block + -036 triage decision (`9bce017`)
-- `HrExhibitFlow.jsx` + `.css`: added a `content_kind` media-variant block (`ContentKindBadge` / `contentKindOf`) to all five artifact-card feet. Renders the spec §3.5 values (official/live/lyrics/cover) as a gold-bordered uppercase chip in the deck's pill language. Off-spec values (e.g. the `content_kind:other` on the Central-PA gallery container) are ignored; cards with no spec-valid content_kind are byte-identical to before. Display-only, code-only — no export/DB change. Built + deployed; verified live on weird.baby/hr: 39 badges (official 25 / live 11 / lyrics 3), gallery + coverflow unregressed.
-- Step-zero re-verified the `6c1aec1` broken-preview fallback across all three surfaces (gallery card cover, lightbox large image, thumb strip) via uncommitted bogus-URL edits to `hunter_root.json`; reverted to a clean tree.
-- Artifact **-036** (`MV-HR-20260405-036`, `HOMESTEAD_Reboot_Complete.jpg` — a live acoustic shot with a "HOMESTEAD: Reboot complete" overlay): diagnosed as stuck in MV **`inbox`**, not a render bug. It's already export-excluded, so it correctly does not render. Operator opted not to publish it ("image can be deleted"); left in inbox, **no MV write performed**. Optional archive/delete deferred to explicit operator word.
-- ⚠️ The **256 errors / 6 warnings** figure noted here was non-source noise — `eslint .` was sweeping `_cowork/`, `dist.pre_*/`, and other backup trees, not real `src/` regressions. This change added **zero** new. **RECONCILED 2026-05-30** (lint-config session, see top session-log entry): `eslint.config.js` now ignores those trees, so the source baseline is back to the documented **4 errors / 6 warnings**.
-
-### 2026-05-30 → broken-preview fallback for gallery/artifact images
-- `HrExhibitFlow.jsx` + `.css`: gallery/artifact images with a null/empty `src` or that 404/fail to load now degrade to a styled placeholder (muted INK/GOLD tile, artifact title + "image unavailable") instead of silent blankness — across the gallery card cover and the lightbox large image + thumb strip. Background-image surfaces (no native `onError`) detect failure via an out-of-band `Image()` probe hook (`useImageFailed`); the lightbox `<img>` uses native `onError` (`FallbackImg`, keyed on `src`). Display-only — no DB/sync/export touch. Addresses the HEIC-incident failure mode (assets fail by path OR format with no front-end signal).
-
-### Older entries (2026-05-06 → 2026-05-15) — archived
-Moved to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md` on 2026-08-04, verbatim,
-under this file's own ≈600-line rule. Covers the tier reconciliation, the
+### Older entries (2026-05-06 → 2026-05-30) — archived
+Moved to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md`, verbatim, under this file's
+own ≈600-line rule. **2026-08-04:** the tier reconciliation, the
 navigation/architecture critique, B-1, the v4/v5 spec arc, the deep-dive phases,
-the FUSE git-init quirk, and the first three exhibit-UX rounds.
+the FUSE git-init quirk, and the first three exhibit-UX rounds (2026-05-06 →
+05-15). **2026-08-05 (v52):** the three 2026-05-30 entries — the eslint-ignore
+baseline restoration (and the sandbox 5/5 phantom, whose lesson is still live in
+`### Pre-flight before commit` above), the `content_kind` front-end block with
+the -036 triage, and the broken-preview fallback.
 
 ## Conventions for updating this file
 

@@ -47,27 +47,61 @@ const SUBTITLE = "The Museum";
    motion is a transition between two states of rest rather than the state
    itself. What a visitor reads is a held page, not a moving list.
 
-   THE STOP IS A PAGE, NOT A ROW, and that is what makes the pause tunable to
-   Mike's instruction. If it advanced one signature at a time, "long enough to
-   read three entries" would be the wrong unit — two of the three would already
-   have been read at the previous stop. Advancing by the whole window means each
-   rest presents three signatures nobody has seen, and the rest is sized for
-   exactly that: 5.0s of stillness against a 0.52s move, so the book is at rest
-   90% of the time.
+   THE STOP IS ONE SIGNATURE [Q2 2026-08-05]. MIKE: "step by ONE NAME per
+   bounce, not a whole page. Everything else about the rhythm is good — keep the
+   bounce and the rest, just change the stride." So `STEP` is 1 and `REST_MS` is
+   untouched. The previous round argued for a page-sized stop on the grounds
+   that a rest should present three signatures nobody has seen; the ruling
+   replaces that reading, and the argument is not restated here because it is no
+   longer the behaviour. A one-row stride makes the book a ledger being read
+   down rather than a slideshow of pages, and every row gets three rests in the
+   window instead of one.
 
    THE BOUNCE IS THE EASING. `cubic-bezier(.34,1.3,.64,1)` overshoots its target
    and settles back, which is what "bounces to the next stop" describes and what
    a physical board of hinged rows does. It is one property, in the stylesheet,
    named where the transition is declared.
 
-   THE LOOP IS STILL TWO COPIES, and the wrap is now arithmetic rather than a
-   keyframe: the track advances past the end of the first copy, and the moment
-   the transition finishes the offset drops by one copy's worth WITH TRANSITIONS
-   OFF. The pixels are identical across that swap because the second copy is the
-   first, so nothing is visible. Two copies are sufficient and the proof is a
-   count: the furthest the track ever reaches is `n+2` and the lowest row on
-   screen is `n+4`, against `2n-1` available, which holds for every n >= 5 —
-   which is `SCROLL_MIN`, which is already the floor for running at all.
+   ═══ [Q1 2026-08-05] IT WENT BLANK, AND HERE IS WHY ════════════════════════
+   MIKE saw the live book empty out. The cause is not the arithmetic — the
+   arithmetic was right for every list length it could reach. The cause is that
+   THE ADVANCE AND THE WRAP RAN ON TWO DIFFERENT CLOCKS AND ONLY ONE OF THEM
+   STOPS WHEN THE PAGE STOPS BEING LOOKED AT.
+
+   The advance was a `setTimeout`. The wrap was a `transitionend`. In a hidden
+   tab a browser throttles timers but SUSPENDS RENDERING — so the timeouts kept
+   firing and adding to the offset, while no frames were produced, so no
+   transition ever completed and no `transitionend` ever arrived to subtract one
+   copy back off. Leave the lobby open in a background tab for ten minutes and
+   the offset walks hundreds of rows past the end of a twelve-row track. Every
+   visible row index is then past the last row that exists, and what a reader
+   comes back to is an empty box. It recovers only at one net copy per step,
+   which is minutes of blank.
+
+   ═══ THE FIX IS TWO GUARANTEES THAT DO NOT DEPEND ON ANY EVENT ARRIVING ════
+   A scheduling bug fixed by better scheduling is a scheduling bug with a longer
+   fuse. Both of these are properties of the RENDER, so they hold even if every
+   timer misfires and every event is dropped:
+
+   1. THE OFFSET IS CLAMPED WHERE IT IS USED. `offset` is `pos` clamped to
+      [0, n]. No accumulated state can move the track further than one whole
+      copy, whatever the timers did while nobody was watching.
+   2. THE TRACK IS LONG ENOUGH FOR THAT CLAMP BY CONSTRUCTION. `COPIES` is
+      derived from the numbers rather than fixed at two: the lowest row the
+      window can ever show is `n + VISIBLE - 1`, so the track needs
+      `1 + ceil(VISIBLE / n)` copies. At n >= 3 that is the two copies this
+      already had; at n = 2 it is three and at n = 1 it is four. THE BOOK
+      THEREFORE CANNOT SHOW A BLANK ROW AT ANY LIST LENGTH — including lengths
+      shorter than the window, which `SCROLL_MIN` happens to exclude today and
+      which a future change to `SCROLL_MIN` must not be able to break.
+
+   With those two in place the scheduling only has to be RIGHT, not SAFE, and it
+   is fixed too: the book pauses while `document.hidden` (the platform's own
+   signal, Doctrine 8 — and a book nobody is looking at should not be advancing
+   anyway, which is the same reason it stops under the cursor), and the wrap has
+   a timeout backstop beside the `transitionend` so a dropped event costs one
+   frame instead of stranding the track. Both paths run the same idempotent
+   wrap; running it twice does nothing.
 
    IT STOPS WHEN A READER ARRIVES. Hover and focus-within suspend the timer, so
    a name that catches somebody's eye stays put. A moving list nobody can stop
@@ -84,7 +118,13 @@ const SUBTITLE = "The Museum";
    is no address that serves it by choice. */
 const SCROLL_MIN = 5;
 const VISIBLE = 3;          /* rows in the window; `--gb-visible` mirrors it */
+const STEP = 1;             /* [Q2] one signature per bounce */
 const REST_MS = 5000;       /* long enough to read three signatures */
+/* [Q1] the stylesheet owns the move; this is a MIRROR of its duration, used
+   only to size the wrap's backstop. A drift between the two costs slack on a
+   fallback path, never correctness — the clamp is what guarantees correctness. */
+const MOVE_MS = 520;
+const WRAP_SLACK_MS = 260;
 
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
@@ -126,31 +166,71 @@ function useReducedMotion() {
   return reduced;
 }
 
+/* [Q1] the other platform signal this book was ignoring. A hidden tab throttles
+   timers and stops producing frames, which is exactly the asymmetry that emptied
+   the book; it is also, on its own terms, the right answer — a book nobody is
+   looking at has no reason to be advancing. */
+function usePageVisible() {
+  const [shown, setShown] = useState(true);
+  useEffect(() => {
+    const read = () => setShown(!document.hidden);
+    read();
+    document.addEventListener("visibilitychange", read);
+    return () => document.removeEventListener("visibilitychange", read);
+  }, []);
+  return shown;
+}
+
 function GuestBook({ entries }) {
   const n = entries.length;
   const reduced = useReducedMotion();
-  /* `pos` is in ROWS and may run one page past the first copy; `snap` turns the
+  const shown = usePageVisible();
+  /* `pos` is in ROWS and may stand one whole copy past the top; `snap` turns the
      transition off for the single frame that carries the wrap. */
   const [pos, setPos] = useState(0);
   const [snap, setSnap] = useState(false);
   const [held, setHeld] = useState(false);
-  const running = n >= SCROLL_MIN && !reduced;
+  /* `n > VISIBLE` is belt to `SCROLL_MIN`'s braces: a window that already holds
+     the whole book has nothing to travel, and the floor is a tuning number that
+     somebody will move one day. */
+  const running = n >= SCROLL_MIN && n > VISIBLE && !reduced;
 
+  /* GUARANTEE 2 — the track is long enough for the clamp below, at any n. */
+  const copies = n > 0 ? 1 + Math.ceil(VISIBLE / n) : 1;
+  /* GUARANTEE 1 — nothing that happened while the page was not being rendered
+     can move the track past one whole copy. This is the line that makes a blank
+     row unreachable; everything else only makes it unlikely. */
+  const offset = Math.min(Math.max(pos, 0), n);
+
+  /* the rest, then the step. It does not run while a reader is on the book,
+     while the page is hidden, or while the track is standing on the seam
+     waiting to wrap. */
   useEffect(() => {
-    if (!running || held) return;
-    const t = setTimeout(() => { setSnap(false); setPos(p => p + VISIBLE); },
+    if (!running || held || !shown || pos >= n) return;
+    const t = setTimeout(() => { setSnap(false); setPos(p => p + STEP); },
       REST_MS);
     return () => clearTimeout(t);
-  }, [running, held, pos]);
+  }, [running, held, shown, pos, n]);
 
-  /* the wrap. Once the move has finished, an offset that has run past the end
-     of the first copy drops back by one copy — same pixels, no transition, so
-     the swap cannot be seen. */
+  /* the wrap's backstop. `transitionend` is the primary and this is what makes
+     a dropped one cost a frame instead of the whole book. It runs even while
+     `held`, because the seam's pixels are identical to the top's — wrapping
+     under a reader's cursor is invisible, and NOT wrapping is the bug. */
+  useEffect(() => {
+    if (!running || pos < n) return;
+    const t = setTimeout(() => { setSnap(true); setPos(0); },
+      MOVE_MS + WRAP_SLACK_MS);
+    return () => clearTimeout(t);
+  }, [running, pos, n]);
+
+  /* the wrap. Once the move has finished, a track standing on the duplicate of
+     the first row returns to the first row — same pixels, no transition, so the
+     swap cannot be seen. Idempotent: after it, `pos < n`. */
   function onSettled(e) {
     /* only the track's own transform — `transitionend` bubbles, and a row that
-       ever grows a transition would otherwise fire the wrap mid-page. */
+       ever grows a transition would otherwise fire the wrap mid-step. */
     if (e.target !== e.currentTarget || e.propertyName !== "transform") return;
-    if (pos >= n) { setSnap(true); setPos(p => p - n); }
+    if (pos >= n) { setSnap(true); setPos(0); }
   }
 
   if (!running) return <GuestBookPlain entries={entries} />;
@@ -160,17 +240,18 @@ function GuestBook({ entries }) {
       onMouseEnter={() => setHeld(true)} onMouseLeave={() => setHeld(false)}
       onFocus={() => setHeld(true)} onBlur={() => setHeld(false)}>
       <div className="wb-scroll-track"
-        style={{ transform: `translateY(calc(var(--gb-row) * -${pos}))`,
+        style={{ transform: `translateY(calc(var(--gb-row) * -${offset}))`,
                  transition: snap ? "none" : undefined }}
         onTransitionEnd={onSettled}>
-        <div className="wb-scroll-half">
-          {entries.map((e, i) => <GuestRow e={e} key={i} />)}
-        </div>
-        {/* the same signatures — announcing the museum's guest book twice would
-            be a defect dressed as an animation. */}
-        <div className="wb-scroll-half" aria-hidden="true">
-          {entries.map((e, i) => <GuestRow e={e} key={i} />)}
-        </div>
+        {/* the same signatures, as many times as the arithmetic asks for —
+            announcing the museum's guest book twice would be a defect dressed
+            as an animation, so every copy after the first is hidden. */}
+        {Array.from({ length: copies }, (_, c) => (
+          <div className="wb-scroll-half" key={c}
+            aria-hidden={c > 0 ? "true" : undefined}>
+            {entries.map((e, i) => <GuestRow e={e} key={i} />)}
+          </div>
+        ))}
       </div>
     </div>
   );

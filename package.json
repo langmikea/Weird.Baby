@@ -15,7 +15,13 @@
     "assets": "node tools/asset-table.mjs",
     "assets:scan": "node tools/asset-table.mjs --scan",
     "assets:checklist": "node tools/asset-table.mjs --checklist",
-    "assets:gate": "node tools/asset-table.mjs --gate"
+    "assets:gate": "node tools/asset-table.mjs --gate",
+    "assets:rename": "node tools/asset-table.mjs --rename",
+    "assets:orphans": "node tools/asset-table.mjs --orphans",
+    "reveal": "node tools/reveal-ledger.mjs",
+    "reveal:audit": "node tools/reveal-ledger.mjs --audit",
+    "reveal:check": "node tools/reveal-ledger.mjs --check",
+    "reveal:build": "node reveal/ledger-declare.mjs --write"
   },
   "dependencies": {
     "react": "^19.2.4",
