@@ -51,6 +51,7 @@ were deleted, and nothing in this register now gets worse by sitting.
 | 12 | **The Portal's drum has six engraved feeds and five of them will not arm.** The largest concentration of unbuilt-but-visible surface in the building — and the largest concentration of reveal levers, which is the same fact read the other way. | [M33](#m33) |
 | 13 | **Twelve games run in the twin and none of them runs on the machine.** | [M34](#m34) |
 | 14 | **The fifth reveal class, `SEALED`, is still proposed and still not adopted** — and the buffalo nickels have no honest row without it. | [M35](#m35) |
+| 15 | **The giving research is delivered and asks you fourteen questions**, answerable one at a time. Not a museum item and it has no row below — it is here so it does not get lost. | [GIVING_RESEARCH-20260805.md §9](GIVING_RESEARCH-20260805.md#9-the-decisions-he-faces) |
 
 ---
 
