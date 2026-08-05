@@ -164,7 +164,48 @@ import { visitorProse, kept } from "../lib/visitor-prose.js";
    THE ROWS THAT SAY NOT BUILT SAY WHAT WOULD MAKE THEM TRUE, which is the
    difference between an honest gap and an apology. A visitor reading the
    registry row learns the mechanism Mike intends; they simply also learn, in
-   the same glance, that it is not there yet. */
+   the same glance, that it is not there yet.
+
+   ── [N7 2026-08-04] THE DONATED BY COLUMN ──────────────────────────────────
+   MIKE: "add a DONATED BY column, with ANONYMOUS supported as a first-class
+   value."
+
+   FOUR VALUES, AND EVERY ONE OF THEM MEANS SOMETHING DIFFERENT. A donor column
+   whose empty cells all print the same dash cannot tell "nobody has given yet"
+   apart from "this was never a gift", and on a page about where money comes
+   from that is the whole distinction the page exists to draw:
+     · A NAME       — a literal string, printed as given.
+     · `ANONYMOUS`  — Mike's first-class value. A gift whose donor asked not to
+                      be named is RECORDED, not omitted: the ledger says a
+                      person gave this and chose not to be named, which is a
+                      fact about the gift. Omitting the row, or leaving the cell
+                      blank, would lose that and would also make an anonymous
+                      gift look like no gift.
+     · `NONE`       — nothing has come in this way. Not an apology and not a
+                      placeholder: a holdings statement, and the true one for
+                      every giving channel in this house today.
+     · `NA`         — this row is not a gift at all. The shop and the music are
+                      money the museum EARNED, and calling that donated would be
+                      the room flattering itself in its own ledger.
+
+   AND NOT ONE CELL SAYS ANONYMOUS TODAY, which is the point rather than a gap.
+   Three of the five rows are NOT BUILT, so nothing can have arrived through
+   them; the other two are sales. Writing ANONYMOUS into a cell to demonstrate
+   that the column works would be inventing a contribution that never happened —
+   the exact failure Doctrine 12 exists for, on the exact page where it would
+   matter most. The value is SUPPORTED, which is what was asked: declared,
+   styled, documented, and one field away on the day a gift arrives. */
+/* [N7] the three declared values and what each prints. Anything else in a `by`
+   field is a literal donor name and is printed as given — which is why the
+   lookups fall through rather than throwing: the open case is a name, and a
+   name is not a keyword. */
+const BY_LABEL = {
+  ANONYMOUS: "Anonymous",
+  NONE: "Nobody yet",
+  NA: "Not a gift",
+};
+const BY_KIND = { ANONYMOUS: "ANONYMOUS", NONE: "NONE", NA: "NA" };
+
 const LEDGER = [
   {
     head: "What comes in",
@@ -173,6 +214,7 @@ const LEDGER = [
       {
         what: "The gift shop",
         state: "LIVE",
+        by: "NA",
         line:
           "The museum's own shelf — a sticker, at the moment. Nearly every " +
           "other door in that room opens onto an artist's own store, and that " +
@@ -181,6 +223,7 @@ const LEDGER = [
       {
         what: "The house's own music",
         state: "LIVE",
+        by: "NA",
         line:
           "Weird.Baby Music is Papa's own recordings, published under the " +
           "house's own name. Anything they ever earn is money that came in — " +
@@ -193,6 +236,7 @@ const LEDGER = [
            page like this one, so it is the one that most needed a state. */
         what: "Given in Weird.Baby's name",
         state: "NOT BUILT",
+        by: "NONE",
         line:
           "A code you scan, an amount already set or one you choose, given in " +
           "the museum's name and forwarded in it. This row will read LIVE on " +
@@ -207,6 +251,7 @@ const LEDGER = [
       {
         what: "A registry of supplies",
         state: "NOT BUILT",
+        by: "NONE",
         line:
           "A public list of what the museum actually needs, the way a wedding " +
           "carries one, so a supporter can buy the thing and have it shipped " +
@@ -215,6 +260,7 @@ const LEDGER = [
       {
         what: "A registry of services",
         state: "NOT BUILT",
+        by: "NONE",
         line:
           "The same list for work rather than goods — an hour of design, an " +
           "hour of code, an hour of law — arranged directly with the person " +
@@ -571,15 +617,29 @@ export default function Foundation() {
                 <span className="fnd-reg-head-sub">{sub}</span>
               </div>
               <ul className="fnd-reg-rows">
-                {rows.map(({ what, state, line }) => (
+                {rows.map(({ what, state, line, by }) => (
                   <li className="fnd-reg-row" key={what}>
                     <div className="fnd-reg-top">
                       <span className="fnd-reg-what">{what}</span>
-                      {/* the state is the honesty mechanism — see the note on
-                          LEDGER. `data-state` rather than a second class name
-                          so the CSS reads as one rule with two cases instead of
-                          two rules that have to be kept in step. */}
-                      <span className="fnd-reg-state" data-state={state}>{state}</span>
+                      <span className="fnd-reg-meta">
+                        {/* [N7] the donor column. It is LABELLED in every row
+                            rather than headed once at the top of the register,
+                            because the register stacks on a phone and a column
+                            heading that has scrolled away is a column nobody can
+                            read. `data-by` carries the KIND, so the four cases
+                            are one CSS rule rather than four class names that
+                            have to be kept in step — the same reasoning as the
+                            state cell below it. */}
+                        <span className="fnd-reg-by" data-by={BY_KIND[by] || "NAME"}>
+                          <span className="fnd-reg-by-k">Donated by</span>
+                          <span className="fnd-reg-by-v">{BY_LABEL[by] ?? by}</span>
+                        </span>
+                        {/* the state is the honesty mechanism — see the note on
+                            LEDGER. `data-state` rather than a second class name
+                            so the CSS reads as one rule with two cases instead of
+                            two rules that have to be kept in step. */}
+                        <span className="fnd-reg-state" data-state={state}>{state}</span>
+                      </span>
                     </div>
                     <p className="fnd-reg-line">{line}</p>
                   </li>

@@ -200,6 +200,50 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
 .wb-entry-note { font-family: 'Courier Prime', monospace; font-style: italic; font-size: 0.72rem; color: #6f6b62; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
 .wb-entry-date { font-family: 'Courier Prime', monospace; font-size: 0.62rem; color: var(--wb-gold-mute); white-space: nowrap; }
 
+/* ── [N6 2026-08-04] THE SCROLLING GUEST BOOK — Mike's second version ────────
+   The JSX note above `SCROLL_MIN` carries the reasoning; this is the mechanism.
+   IT REUSES `.wb-entries` WHOLE and adds to it, so the two versions cannot
+   drift apart in anything except the one thing being compared. Same box, same
+   border, same seven-row window, same rows.
+   THE MASK IS WHAT MAKES IT A BOARD RATHER THAN A LIST THAT MOVES. Without it
+   a signature snaps into existence at a hard edge; with it, rows surface and
+   submerge. 14px is one row's half-height at `--gb-row`, so a name is never
+   half-faded while it is the one you are reading.
+   `overflow:hidden` AND NO SNAP: a scroll-snap container fighting an animated
+   transform produces a list that stutters against its own snap points. */
+.wb-entries-scroll {
+  overflow: hidden;
+  scroll-snap-type: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+}
+.wb-scroll-track { animation: wb-book-drift var(--gb-dur, 30s) linear infinite; }
+/* THE SEAM. `.wb-entry:last-child` drops its rule so the static list does not
+   print a line above its own bottom border; inside the loop that same rule
+   opens a 1px gap at the join, twice per cycle, exactly where the illusion
+   lives. Each half's last row gets its rule back. */
+.wb-entries-scroll .wb-entry:last-child { border-bottom: 1px solid var(--wb-ink-soft); }
+/* it stops when a reader arrives — hover for a mouse, focus-within for a
+   keyboard, because a name that catches the eye has to be readable. */
+.wb-entries-scroll:hover .wb-scroll-track,
+.wb-entries-scroll:focus-within .wb-scroll-track { animation-play-state: paused; }
+@keyframes wb-book-drift {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* THE ANSWER TO THE SIGNAL IS "DON'T", NOT "SLOWER". The second copy is
+     hidden and the window goes back to being scrollable by hand, which is
+     precisely the version this one is being compared against. */
+  .wb-scroll-track { animation: none; }
+  .wb-entries-scroll {
+    overflow-y: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .wb-entries-scroll .wb-scroll-half + .wb-scroll-half { display: none; }
+}
+
 /* [F0 2026-08-03] THE COLOPHON WAS THE WORST NUMBER ON THE SITE, and it is the
    museum's own name.
    Measured on the live built page: "weird.baby" `#b0aca1` on the mat = 1.55:1,

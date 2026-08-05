@@ -54,20 +54,29 @@
 // entries about boxes, ads and restoration would be inventing provenance.
 // The container is the deliverable; the evidence is Mike's to bring.
 //
-// ---- A3 2026-08-04: THE MORGUE, AND THE TWO SIBLINGS IT IMPLIES -------------
-// The two "The Plates" faces are now THE MORGUE, subtitled IMAGE ARCHIVE.
-// SAME-ONLY-DIFFERENT SAYS THE SIBLINGS ARE THE SAME COMPONENT WITH DIFFERENT
-// DATA, and naming them here is the whole of what this round builds of them:
+// ---- N1/N2 2026-08-04: IMAGE ARCHIVE, AND THE TWO SIBLINGS IT IMPLIES -------
+// MIKE HAS STRUCK ONE OF THE TWO NAMES. A3 put THE MORGUE on the glass as the
+// title with IMAGE ARCHIVE under it as the plain-language subtitle, precisely
+// so he could read both and strike one; he struck THE MORGUE. The face is now
+// titled IMAGE ARCHIVE and the subtitle carries the unit alone. That closes
+// register row M6 and the word "morgue" leaves the building.
 //
-//   THE MORGUE      images   `spreads[].tiles[] = { img, href, label, date }`
+// THE INDIVIDUAL PHOTOGRAPHS ARE STILL CALLED PLATES, exactly as A3 left them:
+// the tombstone rows, the footers, the blurbs and four other faces talk about
+// plates by name. The room was renamed; the objects in it were not.
+//
+// SAME-ONLY-DIFFERENT SAYS THE SIBLINGS ARE THE SAME COMPONENT WITH DIFFERENT
+// DATA, and naming them here is the whole of what this round builds of them.
+// They take the plain family name too — a house that has just retired a piece
+// of trade slang does not keep two more:
+//
+//   IMAGE ARCHIVE   images   `spreads[].tiles[] = { img, href, label, date }`
 //                            LIVE — the two walls below.
-//   THE REEL        video    the identical spread structure; a tile's `img` is
+//   VIDEO ARCHIVE   video    the identical spread structure; a tile's `img` is
 //                            the frame and its `href` is the clip. NOT BUILT:
 //                            every `videos:` array in this wing is empty and
-//                            the museum holds no clip of either unit. The word
-//                            is not invented either — the Manual's face has
-//                            called its own container a reel since B8.
-//   THE TAPE LIBRARY  audio  the identical spread structure; a tile's `img` is
+//                            the museum holds no clip of either unit.
+//   AUDIO ARCHIVE   audio    the identical spread structure; a tile's `img` is
 //                            the sleeve or the label and its `href` is the
 //                            track. NOT BUILT: this wing has no audio at all.
 //                            `/wb` has six tracks and no archive face, which is
@@ -76,7 +85,8 @@
 // NEITHER SIBLING IS SCAFFOLDED. An empty container at a live address is the
 // thing the NO-COMING-SOON credo and Doctrine 11's corollary both kill; the
 // renderer is generic already, so building one on the day there is something
-// to put in it costs a data block and no code.
+// to put in it costs a data block and no code. Mike's own words for this round
+// were "build only what has content", which is the same rule stated forward.
 //
 // `viewerPoster` on the album is what the panel shows when nothing is playing
 // and nothing is selected — see the note on it below.
@@ -200,14 +210,46 @@ const CARD_TALLY = deskCard(
   '<line x1="120" y1="322" x2="400" y2="322" stroke="' + CARD_INK + '" stroke-width="1"/>' +
   '<text x="260" y="358" text-anchor="middle" fill="' + CARD_QUIET + '" font-family="Georgia,serif" font-size="21">The fraction is not a typo.</text>');
 
-/* correspondence. The whole card is the answer's own first sentence, broken
-   where the sentence breaks. */
+/* [N4 2026-08-04] CORRESPONDENCE, AND IT IS NOW JUST THE ADDRESS.
+   MIKE: "Contact is plain and simple: papa@weird.baby, no leading, no
+   ceremony."
+   THE OLD CARD WAS THE CEREMONY. It set ONE / ADDRESS across two lines at 72pt
+   and finished with READ BY ONE PERSON under a rule — three typographic beats
+   arranged to make a fact feel like a promise, on the one face whose whole job
+   is to hand over an email address. The address itself was not on it.
+   SO THE CARD IS THE ADDRESS. One kicker naming what the card is, and the
+   thing itself, set large because it is the only thing on the face a visitor
+   actually needs to take away. Nothing is arranged to land; there is no rule
+   to pause on and no line under it to resolve into. That is the whole edit,
+   and the plainness is the instruction rather than a shortage of ideas.
+   IT PUBLISHES NOTHING NEW: `papa@weird.baby` is already a live `mailto:` in
+   the Information Booth's contact line and is printed in its FAQ. */
 const CARD_ADDRESS = deskCard(
-  '<text x="260" y="86" text-anchor="middle" fill="' + CARD_QUIET + '" font-family="Courier New,monospace" font-size="17" letter-spacing="7">CORRESPONDENCE</text>' +
-  '<text x="260" y="196" text-anchor="middle" fill="' + CARD_INK + '" font-family="Georgia,serif" font-size="72" letter-spacing="2">ONE</text>' +
-  '<text x="260" y="272" text-anchor="middle" fill="' + CARD_INK + '" font-family="Georgia,serif" font-size="72" letter-spacing="2">ADDRESS</text>' +
-  '<line x1="120" y1="316" x2="400" y2="316" stroke="' + CARD_INK + '" stroke-width="1"/>' +
-  '<text x="260" y="356" text-anchor="middle" fill="' + CARD_QUIET + '" font-family="Courier New,monospace" font-size="19" letter-spacing="4">READ BY ONE PERSON</text>');
+  '<text x="260" y="150" text-anchor="middle" fill="' + CARD_QUIET + '" font-family="Courier New,monospace" font-size="17" letter-spacing="7">CORRESPONDENCE</text>' +
+  '<text x="260" y="248" text-anchor="middle" fill="' + CARD_INK + '" font-family="Georgia,serif" font-size="46">papa@weird.baby</text>');
+
+/* [N3 2026-08-04] DOC CONTROL'S CARD — THE STAMP.
+   The face's own subject is a manual assembled out of copies at different
+   stages, one of which is stamped APPROVED. That stamp is the object the face
+   is about, so it is the object on the face: a ruled box with APPROVED set
+   inside it, at the angle a stamp lands at rather than square to the card.
+   NOT ONE WORD ON IT IS NEW — APPROVED is Mike's own word for one of the four
+   copy states, printed six lines below on this same face, and the four state
+   names under it are that same list. The house has now built four of these
+   (the booth's ticket, the Foundation's account card, the tally and the
+   address) and the discipline has not moved: a typographic object made
+   entirely of a sentence the page was already saying.
+   THE BOX IS DRAWN, NOT SET IN A BORDER PROPERTY, because a rubber stamp's
+   frame is part of the impression — and it is rotated with its text as one
+   group so the frame and the word cannot disagree about the angle. */
+const CARD_STAMP = deskCard(
+  '<text x="260" y="92" text-anchor="middle" fill="' + CARD_QUIET + '" font-family="Courier New,monospace" font-size="17" letter-spacing="7">DOCUMENT CONTROL</text>' +
+  '<g transform="rotate(-7 260 214)">' +
+    '<rect x="96" y="164" width="328" height="100" fill="none" stroke="' + CARD_INK + '" stroke-width="4"/>' +
+    '<text x="260" y="230" text-anchor="middle" fill="' + CARD_INK + '" font-family="Courier New,monospace" font-size="52" font-weight="bold" letter-spacing="6">APPROVED</text>' +
+  "</g>" +
+  '<text x="260" y="330" text-anchor="middle" fill="' + CARD_QUIET + '" font-family="Courier New,monospace" font-size="16" letter-spacing="4">PRELIMINARY · FINAL · MARKED-UP · APPROVED</text>' +
+  '<text x="260" y="364" text-anchor="middle" fill="' + CARD_QUIET + '" font-family="Georgia,serif" font-size="20">Four states. No complete copy.</text>');
 
 /* [S10] the WBR tracks, declared once and referenced by both covers. */
 const WBR_TRACKS = [
@@ -237,12 +279,44 @@ const WBR_TRACKS = [
              opened. */
           still: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
           stillCaption: "The units, as they came to us.",
+          /* ==== [N4 2026-08-04] WELCOME, REBUILT AROUND A REASON TO EXIST ====
+             MIKE: "BURN DOWN AND REIMAGINE. Welcome needs a real reason to
+             exist; propose it, build it honest."
+
+             THE PROPOSAL, and it is what the rebuild is organised around:
+             **WELCOME IS THE WING'S ORIENTATION — the only surface that says
+             what is in this building and where.** That job was not being done
+             by anything. /robots opens on this face, and what a stranger got
+             was a paragraph, the house's trade, and three rows of posture; then
+             a tracklist of proper nouns — MGK-NIAC, Image Archive, The Record,
+             The Portal — with nothing anywhere saying which of those is a
+             machine, which is a shelf of photographs and which is the one thing
+             that actually runs. The posture rows are good and they are kept;
+             what was missing is that a visitor could read the whole face and
+             still not know what the wing HOLDS.
+             So the register block stops being a business card and becomes a
+             CONTENTS LIST, and a fourth row says where to start. Both are built
+             out of material already standing on other faces of this wing — the
+             two units' own names and descriptions, the archives, the record,
+             the portal. NOT ONE NEW FACT, which is the same rule M11 held when
+             it rewrote this desk.
+
+             AND THE INVENTED COUNT COMES OUT. It said "three cartons of them
+             arrived on a dock". H4 established that the number of cartons was
+             invented and struck it from Record 013; the same invented number
+             was left standing HERE, in the first sentence a stranger reads on
+             entering the wing, and has been carried as register row M15 since.
+             It is not replaced with a different number — nobody supplied one —
+             so the sentence simply says a delivery arrived. Row M15 closes by
+             deletion, which is the only way Doctrine 12 permits it to close. */
           blurb:
             "In 1965 somebody built a machine to say what happens next. Sixty " +
-            "years later three cartons of them arrived on a dock with no " +
-            "sender's name on them. This wing is everything we have worked out " +
-            "since — and, more often, what we have not.",
+            "years later a delivery of them arrived on a dock with no sender's " +
+            "name on it. This wing is everything we have worked out since — " +
+            "and, more often, what we have not.",
           lines: [
+            "UNITS    MGK-VIII, the mainframe · MGK-VIIIp, the portable",
+            "ON FILE  photographs, the record, the manual, the firmware",
             "TRADE    we buy strange things and find out what they are",
             "TAGLINE  “Purveyors of the Weird.Baby.”",
           ],
@@ -279,6 +353,18 @@ const WBR_TRACKS = [
                     "before anyone here was born. Sixty years is nowhere near " +
                     "long enough for that to stop being worth listening to.",
               note: "[PAPA] — the real answer is Mike's and should stay Mike's" },
+            /* [N4] THE ROW THE FACE WAS MISSING. Every clause names a face
+               that is one press away in this same wing and says what is on it,
+               so a visitor arrives knowing which door is which. It introduces
+               nothing: the archives' own subtitle is DETAILS ONLY, the record
+               is the log, and the portal is the one surface in the building
+               with a running machine behind it. */
+            { stamp: "START", title: "Where to start",
+              line: "The image archives are what the machines look like, in " +
+                    "details rather than whole. The record is what happened, " +
+                    "as it happened. The portal is the only thing in this wing " +
+                    "that is running.",
+              note: "" },
           ],
           footer: "“Restoration house” is not what we are. Weird.Baby is Weird.Baby.",
         },
@@ -342,6 +428,121 @@ const WBR_TRACKS = [
         },
       },
       {
+        /* ==== [N3 2026-08-04] DOC CONTROL ==================================
+           MIKE: "DOC CONTROL — a new robots surface: user manuals, originals,
+           digital file storage. AND THE MANUAL'S STORY (say it out loud on the
+           page for immersion and cover): the manual came to us IN PIECES, like
+           everything else — presumably to avoid detection. Spy shit. So there
+           is no complete table of contents, no index, not every page, and
+           therefore not every answer. What we have is assembled from various
+           copies: preliminary, final, marked-up, stamped APPROVED. Stated
+           plainly, and it is why the manual is incomplete."
+
+           WHY IT IS ON THE FRONT DESK AND NOT ON MGK-VIIIp BESIDE THE MANUAL.
+           Its three subjects — manuals, originals, files — are HOUSE functions
+           that run across every unit, not properties of one machine. The Manual
+           face is a catalogue entry for one object; this is the desk that says
+           how paper is handled here, and the front desk is already where the
+           house explains itself (Welcome, FAQ, Contact).
+
+           WHAT IT IS ALLOWED TO SAY, AND THE LINE IT DOES NOT CROSS. Everything
+           below is either MIKE'S CANON (the paragraph above, in his words) or a
+           HOLDINGS STATEMENT that another face in this wing already carries and
+           can be checked against: the manual has no pages imaged (The Manual's
+           own register line reads "PLATES none on file"), the photographs were
+           taken here and are held here (both Image Archive tombstones), two
+           firmware trees are on file and no reading of them is (Technical
+           Specifications). NOTHING HERE DESCRIBES THIS REPOSITORY, its
+           directories, its verification runs or its backlog — that would be the
+           making of the museum on the glass, which Doctrine 11 forbids however
+           true it is. The incompleteness is stated as a fact about the OBJECT,
+           which is what makes it shippable and, per Mike, the cover.
+
+           IT ANNOUNCES NO MECHANISM IT DOES NOT HAVE. There is no search, no
+           request form and no download, and the face does not imply any. */
+        id: "doc-control",
+        title: "Doc Control",
+        videos: [],
+        tags: ["documents", "manual", "originals", "files", "control"],
+        face: {
+          kind: "text",
+          title: "DOC CONTROL",
+          subtitle: "MANUALS · ORIGINALS · FILES",
+          still: CARD_STAMP,
+          stillCaption: "One of the four states a page arrives in.",
+          blurb:
+            "Three classes of paper come through this desk: the manuals that " +
+            "shipped with the machines, the originals behind them, and the " +
+            "files that are all that survives of some of it. What follows is " +
+            "what is held and what is not.",
+          lines: [
+            "MANUALS    one title · assembled from copies · incomplete",
+            "PAGES      none imaged — a plate here is a photograph of a sheet",
+            "ORIGINALS  held · not published here",
+            "FILES      two firmware trees, checked in and named as they sit",
+          ],
+          entries: [
+            /* MIKE'S CANON, PRINTED. This is the one entry on the face whose
+               content is supplied rather than restated, and the marker is on
+               the WORDING rather than on the substance — the substance is his
+               and is above, in the header, verbatim. */
+            { stamp: "MANUALS", title: "It came in pieces",
+              line: "The manual reached us the way everything else did: in " +
+                    "pieces, and presumably that was the point — a complete " +
+                    "document is a document somebody can be caught holding. " +
+                    "There is no complete table of contents, there is no index, " +
+                    "and there is not every page. What we have is assembled out " +
+                    "of copies caught at different stages — preliminary, final, " +
+                    "marked up by hand, and one stamped APPROVED. That is why " +
+                    "the manual is incomplete, and it is why some questions have " +
+                    "no answer in it.",
+              note: "[PAPA] — the wording of this, which is Mike's account" },
+            { stamp: "PAGES", title: "What counts as a page here",
+              line: "A page is published when there is a photograph of the " +
+                    "printed sheet, edges and margins included — not a " +
+                    "transcription and not a rendering of one. Nothing meets " +
+                    "that yet, so the reader is empty rather than filled with " +
+                    "something that would read as the manual.",
+              note: "" },
+            { stamp: "ORIGINALS", title: "Held, and not published",
+              line: "The originals behind the working copies are kept. None of " +
+                    "them is published on this site, and what is shown here is " +
+                    "never the original — it is a copy, and it says which copy " +
+                    "it is.",
+              note: "[PAPA] — whether any original is ever published, and which" },
+            { stamp: "FILES", title: "Where a machine's own words are kept",
+              line: "Two firmware trees are on file, checked in and named " +
+                    "exactly as they sit. A file is the only class of document " +
+                    "here that arrived complete, which is the one advantage of " +
+                    "a document nobody thought to intercept.",
+              note: "" },
+          ],
+          entriesMode: "list",
+          footer: "WEIRD.BABY ROBOTS · DOC CONTROL",
+        },
+      },
+      {
+        /* ==== [N4 2026-08-04] CONTACT, STRIPPED TO THE ADDRESS =============
+           MIKE: "Contact is plain and simple: papa@weird.baby, no leading, no
+           ceremony."
+           WHAT THE CEREMONY WAS, since it was all well-made and that is why it
+           lasted. The blurb ranked the four reasons to write BY HOW MUCH THEY
+           WOULD HELP US and then told the visitor which one mattered most —
+           leading, in the literal sense, on a face whose job is to hand over an
+           address. The last entry, REACH, was four lines about the address
+           being read by one person and that being why an answer from it is
+           worth having: an argument for its own slowness. The card said ONE /
+           ADDRESS / READ BY ONE PERSON and did not contain the address.
+           WHAT IS LEFT IS THE ADDRESS AND THREE THINGS WORTH WRITING ABOUT,
+           each in one line. The three subjects are the ones that were there —
+           provenance, a correction, availability — with the ranking, the
+           persuasion and the self-description taken out of them. The REACH
+           entry is deleted outright rather than shortened: the address is now
+           the first thing on the face and the picture beside it, so a fourth
+           row about how to reach us is the page saying it twice.
+           IT KEEPS ITS HOOK, and the hook is now the plainest possible one —
+           the address itself, set large. The Visual Hook Law is not waived by
+           an instruction to be plain, and it did not have to be. */
         id: "contact",
         title: "Contact",
         videos: [],
@@ -349,37 +550,21 @@ const WBR_TRACKS = [
         face: {
           kind: "text",
           title: "CONTACT",
-          /* [E3 2026-08-03] the correspondence card. The audit called this the
-             smallest surface in the wing and wondered whether a plate was more
-             than it needs — which is exactly why it got the cheapest possible
-             one: four rows of type, made of the sentence in the last row. */
           still: CARD_ADDRESS,
-          stillCaption: "One address, read by one person.",
-          blurb:
-            "Four reasons to write, in the order of how much they would help " +
-            "us. The first one would help enormously.",
+          stillCaption: "papa@weird.baby",
+          blurb: "Write to papa@weird.baby. Three things are worth writing about.",
           entries: [
             { stamp: "PROVENANCE", title: "You have seen one before",
-              line: "This is the message we most want to receive. An office, a " +
-                    "basement, a photograph in somebody's shoebox — where, when, " +
-                    "and any number you can still remember off the front of it.",
+              line: "Where, when, and any number you can still remember off " +
+                    "the front of it.",
               note: "" },
             { stamp: "CORRECTION", title: "The record is wrong",
-              line: "In places it certainly is. It was written as things " +
-                    "happened, which means some of it was wrong on the day it " +
-                    "was written and has been sitting there being wrong ever " +
-                    "since. Tell us and it changes, in public.",
+              line: "In places it certainly is. Tell us and it changes, in " +
+                    "public.",
               note: "" },
             { stamp: "PURCHASE", title: "Availability",
-              line: "Which units are held, which are not, and what is actually " +
-                    "in a case when it leaves here.",
+              line: "Which units are held and which are not.",
               note: "[PAPA]" },
-            /* [P23/P5] same fix as the Welcome face: a real heading, the
-               marker demoted to the note. */
-            { stamp: "REACH", title: "How to reach us",
-              line: "One address, read by one person. That is slow, and it is " +
-                    "the same reason an answer from it is worth having.",
-              note: "[PAPA] — the address itself, and how much of it to publish" },
           ],
         },
       },
@@ -596,19 +781,16 @@ const spine = [
         },
       },
       {
-        /* ==== THE MORGUE, AND THE THING IT IS BUILT NOT TO SHOW ============
-           [A3 2026-08-04] THE ROOM IS RENAMED AND BOTH NAMES ARE ON THE GLASS.
-           MIKE'S OPTIONS were IMAGE ARCHIVE (clear) or THE MORGUE (what a
-           newspaper or a wire service called its photo archive, which is the
-           period this wing is set in). OPS PROPOSES THE MORGUE and puts IMAGE
-           ARCHIVE under it as the plain-language subtitle — so the visitor is
-           never guessing, and MIKE CAN READ BOTH ON THE PAGE AND STRIKE ONE.
-           Whichever he strikes is one string in this file.
-           THE INDIVIDUAL PHOTOGRAPHS ARE STILL CALLED PLATES, everywhere they
-           were: the tombstone row, the footer, the blurb, the entries on the
-           other faces. A morgue is the room; a plate is the object in it, and
-           renaming the objects was not asked for and would break four faces
-           that talk about plates by name.
+        /* ==== THE IMAGE ARCHIVE, AND THE THING IT IS BUILT NOT TO SHOW =====
+           [N1 2026-08-04] MIKE STRUCK "THE MORGUE". A3 deliberately printed
+           both candidate names — title THE MORGUE, subtitle IMAGE ARCHIVE — so
+           that the choice could be made by looking rather than by describing;
+           it was made. IMAGE ARCHIVE is the title and the subtitle drops back
+           to naming the unit, which is what every other subtitle in this wing
+           does. Register row M6 closes.
+           THE PLATES KEEP THEIR NAME, as A3 already ruled: a plate is the
+           object, the archive is the room, and four other faces refer to
+           plates by name.
 
            This is the VIIIp plate wall's renderer, unchanged, pointed at a set
            that has been cropped before it ever reached the repository. Same
@@ -620,13 +802,16 @@ const spine = [
            the rule the VIIIp wall set. No caption below interprets, dates the
            OBJECT, or names a donor part. */
         id: "plates",
-        title: "The Morgue",
+        title: "Image Archive",
         videos: [],
         tags: ["plates", "photographs", "viii", "reference", "detail"],
         face: {
           kind: "text",
-          title: "THE MORGUE",
-          subtitle: "IMAGE ARCHIVE · MGK-VIII · DETAILS ONLY",
+          title: "IMAGE ARCHIVE",
+          subtitle: "MGK-VIII · DETAILS ONLY",
+          /* [N2] this wing calls its images plates; the wall itself is generic
+             and defaults to "images". Read only for a stowed shelf's count. */
+          archiveUnit: { one: "plate", many: "plates" },
           blurb:
             "Eight details of a machine that is never shown whole. Cropped " +
             "close on purpose and cut at the joints — enough to establish " +
@@ -722,13 +907,27 @@ const spine = [
         },
       },
       {
+        /* [N1 2026-08-04] "THE FIRMWARE" IS NOW "TECHNICAL SPECIFICATIONS".
+           MIKE: "Robots wing: The Firmware becomes TECHNICAL SPECIFICATIONS."
+           TWO FACES CARRIED THAT NAME, not one — this one on MGK-VIII and the
+           artifact-slot face on MGK-VIIIp — so both are renamed. Leaving either
+           would keep the retired name on the glass, which is the one outcome
+           the instruction cannot have meant. The SUBTITLES are what tell them
+           apart and they are untouched: this face is WHAT THE MACHINE IS
+           RUNNING (a board, an envelope, four output chains, a brightness cap),
+           the other is THE MACHINE'S OWN MIND, ON FILE (two source trees, named
+           as they sit). If he meant only one of the two, it is one string back.
+           THE ARTIFACT KEEPS ITS NAME. Only the FACE was renamed — the firmware
+           is still called the firmware in every sentence that talks about it,
+           the same way A3's plates survived the archive being renamed around
+           them. A later sweep should not read this as licence to hunt the word. */
         id: "firmware",
-        title: "The Firmware",
+        title: "Technical Specifications",
         videos: [],
-        tags: ["firmware", "source", "ino", "bench", "led", "artifact"],
+        tags: ["firmware", "source", "ino", "bench", "led", "artifact", "specifications"],
         face: {
           kind: "text",
-          title: "THE FIRMWARE",
+          title: "TECHNICAL SPECIFICATIONS",
           subtitle: "WHAT THE MACHINE IS RUNNING",
           /* A LIT MATRIX, AND IT IS NOT THE ONE THE NUMBERS BELOW DESCRIBE.
              This photograph is from February 2013 and the flagship firmware is
@@ -776,59 +975,29 @@ const spine = [
               note: "a bench limit on a bench board — the flagship targets an R4" },
           ],
           entriesMode: "list",
-          footer: "MGK-VIII · FIRMWARE",
+          footer: "MGK-VIII · TECHNICAL SPECIFICATIONS",
         },
       },
-      {
-        id: "parts",
-        title: "The Parts",
-        videos: [],
-        tags: ["parts", "found", "workshop", "drawer"],
-        face: {
-          kind: "text",
-          title: "THE PARTS",
-          subtitle: "WHAT IT IS MADE OF",
-          /* THE DRAWER IS THE ONLY PLATE IN THE SET THAT NEEDS NO OBFUSCATION,
-             because the unit is not in it. It is included precisely for that:
-             a photograph that gives away nothing about the figure and
-             everything about the method. */
-          still: "/robots/reference/mgk-viii/parts_drawer.jpg",
-          stillCaption: "One drawer — jewelled indicators, bezels, knobs, braid.",
-          blurb:
-            "Read the plates for materials rather than for shape and the method " +
-            "is obvious: nothing here was fabricated to look old. It was found " +
-            "old, sorted into compartments, and then a machine was assembled " +
-            "out of the compartments.",
-          lines: [
-            "HEAD    a camera body, lens forward",
-            "CHEST   a grille, on brass shoulder fittings",
-            "LIMBS   flexible steel conduit",
-            "FEET    cast metal bases",
-          ],
-          entries: [
-            { stamp: "METHOD", title: "Sorted first, assembled second",
-              line: "The drawer is the tell. Compartment after compartment of " +
-                    "indicator jewels, bezels, knobs and switchgear, graded and " +
-                    "kept — a stock of parts held long before there was a " +
-                    "machine that needed any particular one of them.",
-              note: "" },
-            { stamp: "EIGHT YEARS", title: "The same object, twice",
-              line: "Two of the plates are the same chest photographed eight " +
-                    "years apart: once in a workshop, unpowered, against a paper " +
-                    "mock-up, and once on a bench with current in it. Very " +
-                    "little between the two photographs has changed.",
-              note: "" },
-            { stamp: "CAUTION", title: "What the plates do not establish",
-              line: "They establish what the machine is made OF. They establish " +
-                    "nothing whatever about where any single part came from. " +
-                    "What is listed above is read off the photographs and goes " +
-                    "no further than they do.",
-              note: "[PAPA] — the donor list, if it is ever published at all" },
-          ],
-          entriesMode: "list",
-          footer: "MGK-VIII · PARTS",
-        },
-      },
+      /* [N1 2026-08-04] "THE PARTS" IS REMOVED. Mike's instruction, and it is a
+         removal rather than a rewrite: the whole track and its face are gone,
+         so MGK-VIII now runs MGK-NIAC · Image Archive · Technical
+         Specifications.
+         WHAT LEFT WITH IT, NAMED RATHER THAN QUIETLY DROPPED, because two of
+         the three entries were observations read straight off the photographs
+         and are not recoverable from anything else on the wing: the METHOD row
+         (the parts drawer as the tell — a graded stock of indicator jewels and
+         switchgear kept before any machine needed them), the EIGHT YEARS row
+         (two plates are the same chest photographed eight years apart, and very
+         little between them changed), and the CAUTION row, which was the only
+         place in the wing that said the plates establish what the machine is
+         made OF and nothing whatever about where any single part came from.
+         The four-line materials register (head, chest, limbs, feet) went too.
+         AND IT ORPHANS A PHOTOGRAPH. `/robots/reference/mgk-viii/parts_drawer.jpg`
+         is now referenced by nothing — it was this face's plate and appears on
+         no wall. It is a real photograph the museum owns, so it is NOT deleted
+         on Ops' word and it is NOT re-homed onto the Image Archive either, which
+         would be adding a plate nobody asked for to a wall whose tombstone
+         counts them. It is a register row for Mike. */
     ],
   },
   {
@@ -894,13 +1063,14 @@ const spine = [
          ================================================================== */
       {
         id: "plates",
-        title: "The Morgue",
+        title: "Image Archive",
         videos: [],
         tags: ["plates", "photographs", "viiip", "reference"],
         face: {
           kind: "text",
-          title: "THE MORGUE",
-          subtitle: "IMAGE ARCHIVE · MGK-VIIIp",
+          title: "IMAGE ARCHIVE",
+          subtitle: "MGK-VIIIp",
+          archiveUnit: { one: "plate", many: "plates" },
           /* [A4 2026-08-04] AND THIS ONE TAKES NO SPREADS, WHICH IS THE POINT
              OF THE RULE RATHER THAN AN EXCEPTION TO IT. Nine plates, one
              sitting, no record number and NO DATE DECLARED ON ANY OF THEM —
@@ -1219,13 +1389,15 @@ const spine = [
            transliterates — and claims nothing about contents it has not read.
            If Mike means a different artifact for this slot, the track is
            renamed and re-faced here and nothing else moves. */
+        /* [N1 2026-08-04] renamed with its twin on MGK-VIII — see the note on
+           that face for why both moved and what the subtitles are doing. */
         id: "firmware",
-        title: "The Firmware",
+        title: "Technical Specifications",
         videos: [],
-        tags: ["firmware", "artifact", "source", "1965", "ino"],
+        tags: ["firmware", "artifact", "source", "1965", "ino", "specifications"],
         face: {
           kind: "text",
-          title: "THE FIRMWARE",
+          title: "TECHNICAL SPECIFICATIONS",
           subtitle: "THE MACHINE'S OWN MIND, ON FILE",
           /* [E3 2026-08-03] THE FIRMWARE HAS EXACTLY ONE HONEST PORTRAIT AND
              THE MUSEUM ALREADY OWNS IT: the front glass, lit. Source is a
@@ -1276,7 +1448,7 @@ const spine = [
               note: "" },
           ],
           entriesMode: "list",
-          footer: "MGK-VIIIp \u00b7 FIRMWARE",
+          footer: "MGK-VIIIp \u00b7 TECHNICAL SPECIFICATIONS",
         },
       },
       {

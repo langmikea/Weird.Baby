@@ -193,10 +193,56 @@ function sourceFiles() {
   return out.filter(f => fs.existsSync(f));
 }
 
+/* [N8 2026-08-04] A PATH NAMED IN A COMMENT IS NOT A REFERENCE, and until this
+   round the scanner thought it was. `usedBy` is a substring test over the raw
+   text of every source file, so the moment a comment MENTIONED an asset path
+   that asset counted as shipped — and orphan detection is exactly the check
+   that must not be defeatable by prose.
+   IT WAS CAUGHT BY BEING COMMITTED. N1 removed the face that used
+   `parts_drawer.jpg` and wrote a comment naming the newly-orphaned file, in
+   backticks, so that a future session would find it. The next scan reported the
+   file as still shipped, cited by the very file that had just stopped using it.
+   The finding is the mechanism, not the file: any orphan is invisible for as
+   long as anybody has written its name down.
+   A CHARACTER SCANNER RATHER THAN A REGEX, because the two things that break
+   every regex attempt at this are both everywhere in this tree: `//` inside a
+   string (every absolute URL) and `/*` inside one. String literals are walked
+   and KEPT — a path is a reference precisely when it is quoted — and escapes
+   are consumed in pairs so a `\"` cannot end a string early. CSS has no line
+   comments and this is harmless there; JSON has no comments at all. */
+function stripComments(src) {
+  let out = "", i = 0;
+  const n = src.length;
+  while (i < n) {
+    const c = src[i], d = src[i + 1];
+    /* charCodeAt(10) rather than a "\n" literal: this function is edited by
+       scripts often enough that an escape sequence is a liability. */
+    if (c === "/" && d === "/") { while (i < n && src.charCodeAt(i) !== 10) i++; continue; }
+    if (c === "/" && d === "*") {
+      i += 2;
+      while (i < n && !(src[i] === "*" && src[i + 1] === "/")) i++;
+      i += 2;
+      continue;
+    }
+    if (c === '"' || c === "'" || c === "`") {
+      out += c; i++;
+      while (i < n) {
+        if (src[i] === "\\") { out += src[i] + (src[i + 1] ?? ""); i += 2; continue; }
+        out += src[i];
+        if (src[i] === c) { i++; break; }
+        i++;
+      }
+      continue;
+    }
+    out += c; i++;
+  }
+  return out;
+}
+
 function scan() {
   const prior = load();
   const priorById = new Map((prior.entries || []).map(e => [e.id, e]));
-  const srcs = sourceFiles().map(f => ({ f, text: safeRead(f) }));
+  const srcs = sourceFiles().map(f => ({ f, text: stripComments(safeRead(f)) }));
 
   const entries = [];
   for (const repo of REPOS) {
@@ -234,11 +280,21 @@ function scan() {
            source    — in the tree, never served by this site */
         role: ref ? (usedBy.length ? "shipped" : "unreferenced") : "source",
         usedBy,
-        /* --- the four judged fields. A scan carries them, never writes them. */
+        /* --- the five judged fields. A scan carries them, never writes them. */
         what: p.what ?? null,
         quality: p.quality ?? null,
         qualityNote: p.qualityNote ?? null,
         verdict: p.verdict ?? null,
+        /* [N8 2026-08-04] THE REVEAL ARC. Mike's canon, generalised by his own
+           ruling from the Portal to every asset in the building: a thing is
+           acknowledged when it ARRIVES, status-updated as it is UNDERSTOOD,
+           brought online in stages (PARTIAL), and finally ONLINE — and a
+           visitor experiences that sequence exactly as the house did, test
+           patterns and noise included. It is a judged field, not a measured
+           one: no scan can read a stage off a file's bytes, so it is carried
+           across exactly as `verdict` is. `null` means UNSET, which is the
+           honest state of most of this table and is not a stage. */
+        revealArc: p.revealArc ?? null,
       });
     }
   }
@@ -248,7 +304,14 @@ function scan() {
     if (!live.has(id)) entries.push({ ...e, missing: true });
   }
   entries.sort((a, b) => a.id.localeCompare(b.id));
-  return { ...prior, entries };
+  /* [N8] HEADER WINS OVER THE FILE'S OWN HEADER, and that is a fix rather than
+     a preference. `{...prior, entries}` meant the underscore keys were whatever
+     the table happened to already say, so `_revealArc` — added to HEADER this
+     round — never reached the file, and any future correction to the legend
+     would have needed a hand edit to a generated artifact. The legend is
+     DOCUMENTATION and its source is this file; anything else prior carries is
+     still preserved, because prior is spread first. */
+  return { ...prior, ...HEADER, entries };
 }
 
 function safeRead(f) { try { return fs.readFileSync(f, "utf8"); } catch { return ""; } }
@@ -259,10 +322,11 @@ function load() {
 }
 
 const HEADER = {
-  _: "THE ASSET TABLE — every image, video and audio file in both repos. Scanned fields are rewritten by `node tools/asset-table.mjs --scan`; the four judged fields (what · quality · qualityNote · verdict) are hand-written and a scan never touches them.",
+  _: "THE ASSET TABLE — every image, video and audio file in both repos. Scanned fields are rewritten by `node tools/asset-table.mjs --scan`; the five judged fields (what · quality · qualityNote · verdict · revealArc) are hand-written and a scan never touches them.",
   _purpose: "Nothing ships without Mike's personal inspection — and Mike must not have to perfect assets in advance. Slots move, things change, some of these are never needed. This table exists so an inspection can be generated on demand for whatever is actually about to ship, instead of demanding a verdict on everything up front.",
   _quality: "Ops' honest read of the FILE, never of the idea: usable | weak | wrong | placeholder | null. `null` means NOBODY HAS LOOKED, and it is not a passing grade. `wrong` means the file does not show what its slot says it shows.",
   _verdict: "MIKE'S, and unset by default. null = not inspected. Values are his to choose; `pass` and `reject` are what the checklist reads. Ops never writes this field.",
+  _revealArc: "THE REVEAL ARC (Mike, 2026-08-04): arrived | understood | partial | online | null. The house's canon for how a thing is revealed — acknowledged when it arrived, status-updated as it was understood, brought online in stages — applied to every asset so a visitor can be given the sequence the house actually lived, test patterns and noise included. `null` means UNSET and is not a stage: it is the honest state of an asset whose arc nobody has established. Ops populates only what the record already attests.",
   _gate: "THE RECORD APPROVAL GATE (Mike, 2026-08-04): final sign-off on a Record is Mike personally inspecting EVERY thing presented in it. `--checklist` is how that inspection is produced; a Record with any presented asset at verdict null has not been signed off.",
 };
 
@@ -283,6 +347,7 @@ function report(t) {
   console.log("  by role   ", JSON.stringify(by("role")));
   console.log("  quality   ", JSON.stringify(by("quality")));
   console.log("  verdict   ", JSON.stringify(by("verdict")));
+  console.log("  revealArc ", JSON.stringify(by("revealArc")));
   const shipped = e.filter(x => x.role === "shipped");
   console.log(`\n  SHIPPED (referenced by the site): ${shipped.length}`);
   console.log(`    unassessed by Ops : ${shipped.filter(x => !x.quality).length}`);

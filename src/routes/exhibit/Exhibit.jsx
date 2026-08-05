@@ -1761,43 +1761,110 @@ function archiveSpreads(face) {
   return { spreads, wall: spreads.flatMap(s => s.tiles) };
 }
 
+/* [N2 2026-08-04] THE ARCHIVE'S UNIT NOUN, declarable per face.
+   The wall is generic and its contents are not: this wing calls its images
+   PLATES, and a video archive would call its own contents something else. A
+   face may declare `archiveUnit: { one, many }`; the default is the archive's
+   own plain name, which is the one word that cannot be wrong for an image
+   archive. It is only ever read for the stowed-shelf count. */
+const ARCHIVE_UNIT = { one: "image", many: "images" };
+
+function SpreadHead({ sp, unit, count }) {
+  return (
+    <>
+      <span className="vp-spread-head-t">{sp.head}</span>
+      <span className="vp-spread-meta">
+        {sp.no != null && (
+          <span className="vp-spread-no">
+            {`Record ${String(sp.no).padStart(3, "0")}`}
+          </span>
+        )}
+        {count && (
+          <span className="vp-spread-count">
+            {`${sp.tiles.length} ${sp.tiles.length === 1 ? unit.one : unit.many}`}
+          </span>
+        )}
+      </span>
+    </>
+  );
+}
+
+function SpreadTiles({ sp, wall, face, openLink }) {
+  return (
+    /* [B5] `data-stage-full` — the wall takes the page. Unchanged. */
+    <div className="vp-collage" data-stage-full="1">
+      {sp.tiles.map((c, ti) => {
+        const i = sp.base + ti;
+        return (
+          <button key={i} className="vp-collage-tile"
+            style={{ "--tilt": `${((i * 7) % 9) - 4}deg` }}
+            onClick={() => openLink(c.href,
+              { set: wall, index: i, setTitle: face.title })}>
+            {/* eager, not lazy: the wall IS the page's payoff and a wall
+                that fills in as you watch reads as a broken wall. */}
+            <img src={c.img} alt="" />
+            <span className="vp-collage-cap">
+              {c.date && <span className="vp-collage-date">{c.date}</span>}
+              <span className="vp-collage-title">{c.label}</span>
+            </span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 function ArchiveWall({ face, openLink }) {
   const { spreads, wall } = archiveSpreads(face);
   if (!wall.length) return null;
-  return spreads.map((sp, si) => (
-    <Fragment key={si}>
-      {sp.head && (
-        <div className="vp-spread-head">
-          <span className="vp-spread-head-t">{sp.head}</span>
-          {sp.no != null && (
-            <span className="vp-spread-no">
-              {`Record ${String(sp.no).padStart(3, "0")}`}
-            </span>
+  const unit = face?.archiveUnit || ARCHIVE_UNIT;
+  return spreads.map((sp, si) => {
+    /* [N2 2026-08-04] THE NEWEST SPREAD IS OPEN PAPER; EVERYTHING OLDER IS
+       STOWED. MIKE: "latest spread at top, older neatly stowed" — the second
+       half of the sentence A4 built only the first half of. A4 got the ORDER
+       right and then printed every spread at full height, so an archive of a
+       dozen albums would have been a dozen walls of equal weight and the
+       "frictionless newest" it was built for would have been the shortest part
+       of a very long page.
+       WHY THIS IS NOT THE NO-HIDDEN-INFORMATION LAW BEING BROKEN, which is a
+       standing doctrine and beats a convenience every time. That law's
+       complaint is a control whose label says nothing about what is behind it
+       — "Next ›" — because "people will not flick to discover whether
+       something is interesting". A stowed shelf here carries its own DATE and
+       its own COUNT on the closed line: `FEBRUARY 2013 · 3 plates` describes
+       its contents completely before it is touched, which is the same test the
+       booth's question list passes. Nothing is discovered by opening it that
+       was not already stated by it.
+       AND THE FIRST SPREAD IS NEVER STOWED, so a one-spread archive and a
+       plain `collage` face emit the DOM they emitted before. `<details>` is
+       the platform's own disclosure element (Doctrine 8): it opens with a
+       keyboard, it is announced to a screen reader, and it works with
+       JavaScript having a bad day. An unheaded spread is never stowed either,
+       because a shelf with no label on it is the one thing a visitor cannot
+       be asked to choose to open. */
+    const stow = si > 0 && !!sp.head;
+    const tiles = <SpreadTiles sp={sp} wall={wall} face={face} openLink={openLink} />;
+    if (!stow) {
+      return (
+        <Fragment key={si}>
+          {sp.head && (
+            <div className="vp-spread-head">
+              <SpreadHead sp={sp} unit={unit} count={false} />
+            </div>
           )}
-        </div>
-      )}
-      {/* [B5] `data-stage-full` — the wall takes the page. Unchanged. */}
-      <div className="vp-collage" data-stage-full="1">
-        {sp.tiles.map((c, ti) => {
-          const i = sp.base + ti;
-          return (
-            <button key={i} className="vp-collage-tile"
-              style={{ "--tilt": `${((i * 7) % 9) - 4}deg` }}
-              onClick={() => openLink(c.href,
-                { set: wall, index: i, setTitle: face.title })}>
-              {/* eager, not lazy: the wall IS the page's payoff and a wall
-                  that fills in as you watch reads as a broken wall. */}
-              <img src={c.img} alt="" />
-              <span className="vp-collage-cap">
-                {c.date && <span className="vp-collage-date">{c.date}</span>}
-                <span className="vp-collage-title">{c.label}</span>
-              </span>
-            </button>
-          );
-        })}
-      </div>
-    </Fragment>
-  ));
+          {tiles}
+        </Fragment>
+      );
+    }
+    return (
+      <details className="vp-spread-stow" key={si}>
+        <summary className="vp-spread-head">
+          <SpreadHead sp={sp} unit={unit} count />
+        </summary>
+        {tiles}
+      </details>
+    );
+  });
 }
 
 export default function Exhibit({ artist }) {

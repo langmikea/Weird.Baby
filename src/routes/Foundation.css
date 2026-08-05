@@ -209,6 +209,50 @@ html[data-room="foundation"], html[data-room="foundation"] body {
   line-height: 1.4;
   color: var(--wb-gold);
 }
+/* [N7 2026-08-04] THE RIGHT-HAND CELLS — donor, then state.
+   They are grouped so the row is name-on-the-left / register-on-the-right
+   rather than three things competing for one baseline, and so the pair moves
+   as one unit when the row stacks on a phone. */
+.fnd-reg-meta {
+  flex-shrink: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+/* THE DONOR CELL IS LABELLED, ALWAYS. See the JSX note: the register stacks on
+   a phone, so a heading at the top of the table is a heading that has scrolled
+   away by the third row. The label sets a full step quieter than the value, so
+   the column scans as values with a key beside them rather than as two equal
+   words per row. */
+.fnd-reg-by {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+}
+.fnd-reg-by-k {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--wb-gold-mute);
+}
+.fnd-reg-by-v {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--wb-gold);
+  white-space: nowrap;
+}
+/* THE THREE DECLARED CASES, and only one of them is a claim about a person.
+   `ANONYMOUS` is set in the ink and italicised — it is a REAL donor who chose
+   not to be named, and it must not read as an empty cell. The other two are
+   absences and are set at the mute step, because a museum should not make
+   "nobody yet" look like an entry. */
+.fnd-reg-by[data-by="ANONYMOUS"] .fnd-reg-by-v { font-style: italic; }
+.fnd-reg-by[data-by="NONE"] .fnd-reg-by-v,
+.fnd-reg-by[data-by="NA"] .fnd-reg-by-v { color: var(--wb-gold-mute); }
 .fnd-reg-state {
   flex-shrink: 0;
   font-family: 'Courier Prime', 'Courier New', monospace;
@@ -437,6 +481,9 @@ html[data-room="foundation"], html[data-room="foundation"] body {
      and the state is still the first thing under the name, which is what the
      column was for. */
   .fnd-reg-top { flex-direction: column; align-items: flex-start; gap: 7px; }
+  /* [N7] the row stacks, so the donor cell stops hanging off a right edge that
+     is no longer there and reads down the left with everything else. */
+  .fnd-reg-by { align-items: flex-start; text-align: left; }
   .fnd-reg-head { flex-direction: column; align-items: flex-start; gap: 3px; }
 
   .fnd-inv { padding: 20px 16px 18px; }

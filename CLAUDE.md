@@ -410,6 +410,42 @@ catches invented CONTENT, Doctrine 11 catches a line whose SUBJECT is the work.
 
 Maintained here. Newest first.
 
+### 2026-08-04 → THE OVERNIGHT (v50; N1–N9) — sealed
+- **N1** THE MORGUE struck — both walls read **IMAGE ARCHIVE** (closes M6); **The
+  Firmware → TECHNICAL SPECIFICATIONS on BOTH faces** that carried it (scope call
+  flagged as M24; the ARTIFACT keeps its name, only the FACE was renamed);
+  **The Parts deleted whole** — which orphaned `parts_drawer.jpg` (M9) and took
+  three unrecoverable observations with it, named in the round log; directory
+  drops its one article and **the Information Booth moves to the bottom**.
+- **N2** The archive's older spreads **stow** in a native `<details>` whose closed
+  line carries its own date AND count, so it does not trip the
+  no-hidden-information law. First spread and unheaded walls never stow → the
+  VIIIp wall is byte-identical. Measured 21px closed / 258px open. Siblings
+  renamed **VIDEO ARCHIVE / AUDIO ARCHIVE** and deliberately not built.
+- **N3** **DOC CONTROL**, a fourth front-desk face, carrying Mike's manual-in-
+  pieces canon out loud. Nothing on it describes this repository.
+- **N4** Welcome rebuilt around **orientation** (contents list + a WHERE TO START
+  row) and the invented "three cartons" count deleted, not replaced (closes M15).
+  Contact stripped to the address plus three one-line reasons to write.
+- **N5/N6** **Two surfaces ship two alternatives each until Mike picks (M23):**
+  `/booth` vs `/booth?hook=sign`, `/` vs `/?book=scroll`. The loser gets deleted —
+  the lobby's retired `?subtitle=` is this repo's own record of why.
+- **N5b** *"Are you tracking me?"* rewritten against `worker.js` and `index.html`,
+  **and it found the published answer wrong**: the site ships a Google Fonts
+  `<link>`, so the old *"that is the whole of it"* was false.
+- **N7** Foundation ledger gains **DONATED BY**; ANONYMOUS is first-class and
+  **appears nowhere**, because inventing a donor is still inventing (M27).
+- **N8** `revealArc` is the asset table's fifth judged field; populated on 6 of
+  251 and it surfaced M25 (a wall claiming nine plates are "before power" holds
+  one captioned as the firmware running).
+- **Two tool defects fixed:** `usedBy` counted a path named in a **comment** as a
+  reference (so orphans were invisible once anybody wrote their name down), and
+  `--scan` could never add a new header key.
+- Gates: lint **11/9 = baseline**; build green **70 modules**; provenance gate
+  **PASS** (0 undeclared, 0 stale, INVENTION 3); desktop + genuine 390px laps,
+  zero horizontal scroll, zero console errors/warnings across 11 routes.
+- Round log: `docs/MUSEUM_OVERNIGHT_LOG-20260804.md`.
+
 ### 2026-08-04 → MECHANIZE PROVENANCE (v48; P1–P4) — sealed
 - **P1/P2** `tools/provenance-sweep.mjs` + `provenance/` — a hash-keyed register
   of every visitor-facing string, and a gate that fails on any that is

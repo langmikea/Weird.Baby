@@ -12,7 +12,7 @@
 // verified, not assumed — but it is also bundling luck rather than a declared
 // dependency, which is R5's point and R5's job (see the round log).
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "./WbHome.css";
 import { useRoom } from "../lib/use-room.js";
 import { useArrival } from "../lib/use-arrival.js";
@@ -33,6 +33,95 @@ import { useArrival } from "../lib/use-arrival.js";
    renders a retired identity. */
 const SUBTITLE = "The Museum";
 
+/* ═══ [N6 2026-08-04] THE GUEST BOOK, TWO WAYS ══════════════════════════════
+   MIKE: "build a SCROLLING-ENTRIES version alongside the current one so Mike
+   can feel it out. Both reachable; he picks."
+
+   WHAT "SCROLLING" HAS TO MEAN HERE, because the obvious reading is already
+   built. `.wb-entries` has been a fixed seven-row window with `overflow-y:auto`
+   and scroll-snap since the book was made — the visitor can already scroll it.
+   A second version that is also a scroll box would not be a choice. So the
+   variant is the book scrolling ITSELF: the signatures drift upward through the
+   window without being touched, the way a lobby board cycles.
+
+   THE SAME WINDOW, DELIBERATELY. Both versions are seven rows at `--gb-row`, in
+   the same box, with the same rows in the same order. The ONLY variable is
+   whether the list moves on its own, because that is the comparison being asked
+   for and anything else that differed would confound it.
+
+   THE LOOP IS TWO COPIES AND A 50% TRAVEL, which is the seamless-marquee
+   pattern: the track holds the entries twice and slides up by exactly one
+   copy's height, so the moment it resets the pixels are identical and there is
+   no visible jump. The second copy is `aria-hidden` — it is the same
+   signatures, and a screen reader announcing the museum's guest book twice
+   would be a defect dressed as an animation.
+
+   IT STOPS WHEN A READER ARRIVES. `:hover` and `:focus-within` pause it, so a
+   name that catches somebody's eye can be read rather than chased. A moving
+   list nobody can stop is the failure mode of every ticker ever built.
+
+   AND IT DOES NOT MOVE FOR EVERYONE. `prefers-reduced-motion: reduce` is
+   honoured by falling back to the static list — not by slowing it down. That
+   is the platform's own signal (Doctrine 8) and the answer to it is "don't",
+   not "less".
+
+   IT ALSO DOES NOT RUN ON A SHORT BOOK. Below `SCROLL_MIN` the entries do not
+   fill the window, so there is nothing to scroll past and the animation would
+   drag a short list through empty space. Under that count the scrolling version
+   renders the static one — same rows, no motion, no explanation needed.
+
+   THE SWITCH IS `?book=scroll` AND IT IS TEMPORARY BY DECLARATION. This file
+   already carries the cautionary tale in the M-ID note above: `?subtitle=` was
+   a shown-then-asked device that outlived the asking and became four dead
+   strings and a live URL rendering a retired identity. The loser here is
+   deleted the day Mike chooses, and that deletion is a row in
+   docs/OPEN_ACTIONS.md rather than a good intention in a comment. */
+const SCROLL_MIN = 5;
+
+function formatDate(iso) {
+  return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
+
+function GuestRow({ e }) {
+  /* the full note rides `title` — the row is one ledger line by composition,
+     and a long message is still readable on hover rather than being lost with
+     the ellipsis. */
+  return (
+    <div className="wb-entry" title={e.note || undefined}>
+      <span className="wb-entry-name">{e.name}</span>
+      {e.note && <span className="wb-entry-note">{e.note}</span>}
+      <span className="wb-entry-date">{formatDate(e.signed_at)}</span>
+    </div>
+  );
+}
+
+function GuestBookList({ entries }) {
+  return (
+    <div className="wb-entries">
+      {entries.map((e, i) => <GuestRow e={e} key={i} />)}
+    </div>
+  );
+}
+
+function GuestBookScroll({ entries }) {
+  if (entries.length < SCROLL_MIN) return <GuestBookList entries={entries} />;
+  /* one copy's travel per `entries.length` rows — so the drift reads at the
+     same speed whether the book holds six signatures or sixty. */
+  const dur = `${(entries.length * 2.6).toFixed(1)}s`;
+  return (
+    <div className="wb-entries wb-entries-scroll" style={{ "--gb-dur": dur }}>
+      <div className="wb-scroll-track">
+        <div className="wb-scroll-half">
+          {entries.map((e, i) => <GuestRow e={e} key={i} />)}
+        </div>
+        <div className="wb-scroll-half" aria-hidden="true">
+          {entries.map((e, i) => <GuestRow e={e} key={i} />)}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function WbHome() {
   /* [R5] this room owns the page ground while it is mounted — see
      src/lib/use-room.js and the header of this route's stylesheet. */
@@ -42,6 +131,11 @@ export default function WbHome() {
      room in the museum resets only on the first visit of a session. */
   useArrival("lobby", { always: true });
   const navigate = useNavigate();
+  /* [N6] the guest-book selector — see the note above `SCROLL_MIN`. Anything
+     other than the one recognised value renders the book as it stands today,
+     so a mistyped parameter cannot empty the lobby's right-hand column. */
+  const [params] = useSearchParams();
+  const book = params.get("book") === "scroll" ? "scroll" : "list";
   const [name, setName] = useState("");
   const [note, setNote] = useState("");
   const [entries, setEntries] = useState([]);
@@ -74,10 +168,6 @@ export default function WbHome() {
       setEntries(Array.isArray(updated) ? updated : []);
       setSubmitted(true);
     }
-  }
-
-  function formatDate(iso) {
-    return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
   }
 
   return (
@@ -129,9 +219,8 @@ export default function WbHome() {
             <button className="wb-dir-entry" onClick={() => navigate("/wal")}>
               <span>Other Music Worth a Listen</span><span className="wb-dir-arrow">&rarr;</span>
             </button>
-            <button className="wb-dir-entry" onClick={() => navigate("/booth")}>
-              <span>Information Booth</span><span className="wb-dir-arrow">→</span>
-            </button>
+            {/* [N1 2026-08-04] THE BOOTH LEAVES THIS POSITION — see the note at
+                the foot of the board, where it now stands. */}
             {/* [F3 2026-08-03] THE WEIRD.BABY FOUNDATION — Mike's new section.
                 WHY IT SITS HERE AND NOT WITH THE EXHIBITS. M8 fixed this board
                 by making the names say what kind of thing each entry is, and
@@ -149,12 +238,39 @@ export default function WbHome() {
                 COMMIT and is restored. C2 rewrote it on a reading of Mike's
                 words that he has since ruled an over-read — he asked not to
                 incur legal work, not to be given a different room. The name he
-                wrote is the name on the board. */}
+                wrote is the name on the board.
+                [N1 2026-08-04] AND IT LOSES ITS ARTICLE. Mike: "Directory loses
+                'The': Weird.Baby Robots, Weird.Baby Music, Weird.Baby
+                Foundation." Two of the three already read that way — this was
+                the only line on the board carrying an article, and it read as
+                the odd one out precisely because M8's other names do not.
+                THE ROOM'S OWN NAME IS UNTOUCHED. The instruction was about the
+                DIRECTORY, and the Foundation's page, its title bar and its
+                heading still say what they said. A board is a list of where
+                things are; the door still carries the full name. */}
             <button className="wb-dir-entry" onClick={() => navigate("/foundation")}>
-              <span>The Weird.Baby Foundation</span><span className="wb-dir-arrow">→</span>
+              <span>Weird.Baby Foundation</span><span className="wb-dir-arrow">→</span>
             </button>
             <button className="wb-dir-entry" onClick={() => navigate("/shop")}>
               <span>Gift Shop</span><span className="wb-dir-arrow">→</span>
+            </button>
+            {/* [N1 2026-08-04] THE INFORMATION BOOTH TAKES THE BOTTOM OF THE
+                BOARD. MIKE: "INFO BOOTH MOVES TO THE BOTTOM of the directory so
+                it stands out."
+                IT WAS FOURTH OF SIX — the position M8 gave it, reading "ours,
+                ours, theirs, then the desk", with the Foundation and the shop
+                after it. That reading was sound and it had a cost: the one
+                entry on the board that answers "what IS this place?" sat in the
+                middle of a list, wearing the same weight as the rooms either
+                side of it, where a stranger scanning a directory reads the ends.
+                LAST IS THE OTHER END, and on a board this short the last line is
+                as exposed as the first — with the difference that the first
+                belongs to the house's own work, which is what a visitor came
+                for. The desk is where they go when the rooms did not answer it.
+                THE EXHIBIT ORDER IS UNCHANGED under it: ours, ours, theirs,
+                then the Foundation, then the shop. Only the desk moved. */}
+            <button className="wb-dir-entry" onClick={() => navigate("/booth")}>
+              <span>Information Booth</span><span className="wb-dir-arrow">→</span>
             </button>
           </nav>
         </div>
@@ -214,19 +330,11 @@ export default function WbHome() {
             <div className="wb-confirmed">You're in the book. Welcome, Founding Visitor.</div>
           )}
 
+          {/* [N6] the two versions — see the note above `SCROLL_MIN`. */}
           {!loading && entries.length > 0 && (
-            <div className="wb-entries">
-              {entries.map((e, i) => (
-                /* the full note rides `title` — the row is one ledger line by
-                   composition, and a long message is still readable on hover
-                   rather than being lost with the ellipsis. */
-                <div className="wb-entry" key={i} title={e.note || undefined}>
-                  <span className="wb-entry-name">{e.name}</span>
-                  {e.note && <span className="wb-entry-note">{e.note}</span>}
-                  <span className="wb-entry-date">{formatDate(e.signed_at)}</span>
-                </div>
-              ))}
-            </div>
+            book === "scroll"
+              ? <GuestBookScroll entries={entries} />
+              : <GuestBookList entries={entries} />
           )}
         </div>
 

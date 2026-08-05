@@ -247,6 +247,9 @@ body:has(.vp-face) .vp-area::before{display:none}
 .vp-flat > .vp-rec-index,
 .vp-flat > .vp-rec-body,
 .vp-flat > .vp-spread-head,
+/* [N2] a stowed spread is a section in its own right — its heading is inside
+   the <details>, so the wrapper carries the step the heading used to. */
+.vp-flat > .vp-spread-stow,
 .vp-flat > .vp-trail{margin-top:var(--rh-sect)}
 /* [A3/A4] A SPREAD IS ONE OBJECT — its heading and its wall are not two
    sections with a section's distance between them. The heading opens the
@@ -2834,6 +2837,38 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
   letter-spacing:.16em;text-transform:uppercase;color:var(--wb-gold)}
 .vp-spread-no{font-family:'Courier Prime',monospace;font-size:.68rem;
   letter-spacing:.12em;color:var(--wb-gold-mute);white-space:nowrap}
+/* [N2 2026-08-04] THE STOWED SHELF. The right-hand end of a spread heading now
+   holds a GROUP — the record number when one is known, and, on a stowed shelf,
+   the count of what is on it. They sit on one baseline with the same gap the
+   heading uses on the outside, so a shelf carrying both reads as one line
+   rather than as two labels that happened to land together. */
+.vp-spread-meta{display:flex;align-items:baseline;gap:14px;white-space:nowrap}
+.vp-spread-count{font-family:'Courier Prime',monospace;font-size:.68rem;
+  letter-spacing:.12em;color:var(--wb-gold-mute)}
+/* THE SUMMARY IS THE HEADING, so it carries `.vp-spread-head` and inherits
+   every rule above; what is added here is only what makes a <details> stop
+   looking like a browser widget. The native marker is removed on BOTH the
+   modern property and the WebKit pseudo-element — Safari still ships the
+   pseudo-element and `list-style:none` alone leaves the triangle standing. */
+.vp-spread-stow > summary{cursor:pointer;list-style:none}
+.vp-spread-stow > summary::-webkit-details-marker{display:none}
+/* THE AFFORDANCE IS A PLUS THAT BECOMES A MINUS. A chevron would have been the
+   web's own idiom; this archive's idiom is a card index, and a plus/minus is
+   what a drawer label carries. It sets in the caption ramp's floor so it is
+   quieter than the date it sits beside, and it is `aria-hidden` by
+   construction — the <summary> element already announces its own open state,
+   so a screen reader would otherwise hear the state twice. */
+.vp-spread-stow > summary::after{content:'+';font-family:'Courier Prime',monospace;
+  font-size:.86rem;line-height:1;color:var(--wb-gold-mute);margin-left:2px}
+.vp-spread-stow[open] > summary::after{content:'\2212'}
+.vp-spread-stow > summary:hover .vp-spread-head-t,
+.vp-spread-stow > summary:focus-visible .vp-spread-head-t{color:var(--wb-gold-hi)}
+.vp-spread-stow > summary:focus-visible{outline:1px solid var(--wb-gold-lo);
+  outline-offset:2px}
+/* the wall inside a stowed spread closes up under its own label exactly as an
+   open spread's does — the same `--rh-tight` step, stated here because the
+   collage is no longer a direct child of `.vp-flat`. */
+.vp-spread-stow > .vp-collage{margin-top:var(--rh-tight)}
 .vp-collage-tile{position:relative;display:block;border:0;cursor:pointer;
   background:#f3efe6;padding:8px 8px 10px;
   transform:rotate(var(--tilt,0deg));

@@ -203,6 +203,119 @@ have to perfect assets in advance. **What it cannot do:** it records that a
 verdict was given, not that the inspection was careful; and `assets.json` is
 keyed on the PATH, so an approved picture can be swapped under its own verdict.
 
+## SEALED 2026-08-04 — THE OVERNIGHT (v50; N1–N9. PUSH + DEPLOY ARE MIKE'S)
+
+Autonomous single-agent Code-lane round on Mike's remote-control brief. Full
+round log: `docs/MUSEUM_OVERNIGHT_LOG-20260804.md`. Register updated in the same
+commit (Doctrine 14).
+
+- **N1 — THE RENAMES AND THE REMOVALS.** THE MORGUE struck; both walls read
+  **IMAGE ARCHIVE** (closes M6) and the plates keep their name. **The Firmware →
+  TECHNICAL SPECIFICATIONS on BOTH faces that carried it** — renaming one would
+  have left the retired name on the glass; subtitles do the telling-apart, the
+  ARTIFACT keeps its name, and the two-face scope is row M24 for Mike to strike.
+  **The Parts REMOVED whole**, and what left with it is named rather than dropped
+  quietly: the parts-drawer-as-tell observation, the same-chest-eight-years-apart
+  observation, and the only sentence in the wing saying the plates establish what
+  the machine is made OF and nothing about where any part came from. It also
+  **orphaned `parts_drawer.jpg`**, which was neither deleted on Ops' word nor
+  re-homed onto a wall whose tombstone counts its plates (M9). The directory drops
+  its one article (**Weird.Baby Foundation**; the room's own name untouched, M26)
+  and **the Information Booth takes the bottom of the board**, exhibit order under
+  it unchanged.
+- **N2 — THE ARCHIVE STACKS AND THE OLD SPREADS STOW.** A4 built "latest at top"
+  and printed every spread at full height; this is the other half of the sentence.
+  **Why it is not the NO-HIDDEN-INFORMATION law being broken:** that law's
+  complaint is a control whose label says nothing about what is behind it, and a
+  stowed shelf here carries its own DATE and its own COUNT on the closed line
+  (`FEBRUARY 2013 · 3 plates`) — nothing is discovered by opening it that was not
+  already stated by it. Native `<details>`. **First spread and unheaded walls are
+  never stowed**, so the VIIIp wall is byte-identical. Measured **21px closed,
+  258px open**. Siblings renamed to the plain family — **VIDEO ARCHIVE / AUDIO
+  ARCHIVE** — and **not scaffolded**, per Mike's own "build only what has content".
+- **N3 — DOC CONTROL**, a fourth front-desk face: manuals, originals, files.
+  **Mike's canon printed as its own entry** (it came in pieces, presumably to avoid
+  detection; no complete contents, no index, not every page, therefore not every
+  answer; assembled from preliminary, final, marked-up and one stamped APPROVED),
+  with `[PAPA]` on the wording. **Nothing on the face describes this repository** —
+  the incompleteness is stated as a fact about the OBJECT, which is what makes it
+  shippable and, per Mike, the cover. Hook is a rubber-stamp card made only of
+  words already on the face.
+- **N4 — WELCOME AND CONTACT, BURNED DOWN.** Welcome's proposed reason to exist is
+  **ORIENTATION** — the job nothing was doing: `/robots` opens here and a stranger
+  got posture, then a tracklist of proper nouns with nothing saying which is a
+  machine, which is a shelf of photographs and which is the one thing running. The
+  register block becomes a contents list and a WHERE TO START row routes. **The
+  invented "three cartons" count came out and was NOT replaced** (closes M15 by
+  deletion, the only way Doctrine 12 allows). Contact is the address and three
+  things worth writing about, one line each; the ranking, the persuasion and the
+  four-line argument for its own slowness are gone, and the card that said ONE /
+  ADDRESS / READ BY ONE PERSON now contains the address.
+- **N5 — THE BOOTH'S HOOK, BOTH DIRECTIONS LIVE.** Two faults, both real: a ticket
+  printing *"no ticket required"*, and `--wb-gold` (#211f1c) making the first
+  object on the museum's lightest page a near-black slab. `/booth` is a ticket
+  **made of paper** — guilloche security tint, diagonal hatch, real perforation
+  with torn notches, a punch hole lit from above; `/booth?hook=sign` is an
+  **enamel INFORMATION plate** with the keyline inset from the edge. Neither adds
+  a claim; no serial number was invented. **The loser is deleted the day Mike
+  chooses — row M23**, because this file's own `?subtitle=` is the record of what
+  a shown-then-asked device becomes when it outlives the asking.
+- **N5b — "ARE YOU TRACKING ME?", AND WRITING IT AGAINST THE CODE FOUND THE OLD
+  ANSWER WRONG.** `/booth` had said the visits row was *"the whole of it"*, and
+  `index.html` ships a Google Fonts `<link>` plus two preconnects, so every
+  visitor's browser calls Google before the page paints. That is now the loudest
+  clause. Every other clause is falsifiable from one file: no auth anywhere in
+  `worker.js`, **no `Set-Cookie` and no `document.cookie` in the tree**, three
+  columns in the visits row, exactly-what-you-typed in the guest book,
+  session/localStorage never transmitted. **The claim is deliberately scoped to
+  "what this site records"** — what any machine in between can see is not knowable
+  from this repository, and overreaching by one clause is the same defect as
+  hiding one.
+- **N6 — THE GUEST BOOK, TWO WAYS.** The obvious reading was already built (the
+  window has been scrollable since the book was made), so the variant is the book
+  scrolling ITSELF: two copies, a 50% travel, **measured seamless — 270px travel
+  against a 270px half**. Pauses on hover and focus-within; `prefers-reduced-motion`
+  falls back to the **static list**, not a slower one; under five signatures it
+  renders the static list. `/?book=scroll`, and it is half of M23.
+- **N7 — THE FOUNDATION'S DONATED BY COLUMN**, four declared values because a
+  column whose empty cells all print one dash cannot tell *nobody has given yet*
+  from *this was never a gift*. **ANONYMOUS is first-class and appears nowhere** —
+  writing it in to show the column works would have invented a contribution, on
+  the page where that would matter most. Row M27.
+- **N8 — THE REVEAL ARC** is the asset table's **fifth judged field** (`arrived /
+  understood / partial / online / null`), carried by a scan and never written by
+  one, with `null` documented as UNSET and not a stage. **Populated on 6 rows of
+  251** — only where the wing's own tombstone or caption attests the stage — and
+  **it surfaced a contradiction (M25): the tombstone calling all nine VIIIp plates
+  "before power" sits on a wall holding a plate captioned as the firmware running.**
+- **TWO TOOL DEFECTS FIXED, both tripped by this round.** **A path named in a
+  COMMENT counted as a reference**, so any orphan was invisible for as long as
+  anybody had written its name down — caught by committing it, when N1's own
+  removal note made the file it orphaned look still-shipped. `usedBy` now strips
+  comments with a character scanner that KEEPS string literals (a regex cannot:
+  `//` and `/*` both live inside strings all over this tree). Shipped 44 → 43,
+  unreferenced 3 → 4. And **`--scan` could never add a new header key**; `HEADER`
+  now wins for its own keys.
+- **THE BOUNDARY CAUGHT ITS AUTHOR TWICE.** The gate refused all **82** new
+  strings until declared, by a script that names every key explicitly and refuses
+  to run on an unclassified stub. Then **`--prune` broke 14 surviving RESTATED
+  rows** resting on anchors this round deleted or edited — the rule requires EVERY
+  reference to resolve, not one — and they were repointed at what is actually
+  under them now rather than at something plausible.
+- **Gates:** lint **11 err / 9 warn = HEAD baseline, zero new**; build green
+  **70 modules** (unchanged); **provenance gate PASS** (0 undeclared, 0 stale,
+  INVENTION still 3); 13/13 routes 200; desktop 1440x960 and a genuine **390x740**
+  lap over 11 routes with **zero page-level horizontal scroll**; **zero console
+  errors and warnings** across 11 routes, captured with an installed error hook.
+- **Named honestly:** Chrome's screenshot pipeline served stale-scroll frames
+  again, so the load-bearing verification is DOM measurement — but **a screenshot
+  was load-bearing for exactly one thing and paid for itself**, catching the enamel
+  sign repeating the credo verbatim 120px below it. The guest book's animation
+  could not be observed advancing (Chrome freezes animations in a backgrounded
+  tab), so its travel was verified by driving `Animation.currentTime`. The
+  hover-pause was confirmed present in the built CSS, not exercised — a synthetic
+  event does not trigger CSS `:hover`.
+
 ## SEALED 2026-08-04 — THE REGISTER ROUND (v49; A1–A10. PUSH + DEPLOY ARE MIKE'S)
 
 Autonomous single-agent Code-lane round on Mike's remote-control brief. Full

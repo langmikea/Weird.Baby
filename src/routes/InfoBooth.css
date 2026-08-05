@@ -35,27 +35,68 @@ html[data-room="booth"], html[data-room="booth"] body {
   color: var(--wb-gold);
 }
 
-/* ── [F1 2026-08-03] THE TICKET — the room's visual hook ──────────────────────
-   See the note at the JSX for WHY it exists. What follows is how it is built
-   and the two decisions in it that are not obvious.
-   IT IS INVERTED, and that is what makes it an OBJECT. Everything else on this
-   page is dark type on print stock; a ticket in the same key would be another
-   paragraph with a border round it. Ink ground with print-stock type is the one
-   value inversion on the sheet, so the eye lands there first — which is the
-   whole job the law gives it.
-   THE NOTCHES ARE THE SHEET SHOWING THROUGH. Two discs painted in
-   `--wb-ink-card` — the colour of the card behind the ticket — sit half on and
-   half off the perforation line, so the stub reads as torn rather than as a
-   divider. They must track `.sheet-card`'s background and nothing else; if that
-   ground ever changes, these change with it because they name the same token. */
+/* ── THE ROOM'S VISUAL HOOK — TWO DIRECTIONS ─────────────────────────────────
+   [N5 2026-08-04] See the note above `BoothTicket` in the JSX for the two
+   faults being fixed and why there are two candidates. What follows is how each
+   is built and the decisions in them that are not obvious.
+
+   BOTH ARE LIGHTER THAN WHAT THEY REPLACE, and that is the point of half the
+   brief. F1's ticket was `--wb-gold` — #211f1c, the ramp's ink — which is a
+   near-black slab as the first object on the museum's lightest page. Direction
+   A is ticket stock (`--wb-bg`, the mat) on the card, so it reads as paper laid
+   on paper and the contrast that makes it an object comes from its EDGE and its
+   SHADOW instead of from a value inversion. Direction B keeps weight, because
+   an enamel sign that is not heavy is not an enamel sign — but it sits at
+   `--wb-gold-lo` (#57544d), a full step off the ink.
+
+   ── DIRECTION A: THE TICKET ────────────────────────────────────────────────
+   WHAT MAKES IT READ AS A PRINTED OBJECT rather than a box with a border. Four
+   things, all of them true of a real ticket and none of them a photograph:
+     · A GUILLOCHE TINT. The rosette of overlaid rotated ellipses is what
+       security printing puts under ticket copy, and it is the single strongest
+       cue that a rectangle is a ticket. Drawn as an inline SVG so it costs no
+       request, tiled at 120px, and held at .18 stroke opacity — visible as
+       texture at reading distance, never as pattern competing with the words.
+     · A DIAGONAL SECURITY HATCH under it, one hairline every 5px. Two
+       overlaid periods that do not divide into each other is how real tint
+       blocks avoid moiré.
+     · A PERFORATION, not a divider. The dashed rule stays, and the two discs
+       painted in `--wb-ink-card` sit half on and half off it so the stub reads
+       as TORN. They must track `.sheet-card`'s background and nothing else —
+       if that ground changes, these follow it because they name the token.
+     · A PUNCH HOLE in the stub, which is the detail that stops it being a
+       drawing: it is the sheet colour with an inset shadow, so light falls
+       into it from above and the ticket acquires a thickness.
+   THE CURL IS TWO SHADOWS, NOT A TRANSFORM. A contact shadow tight under the
+   edge plus a soft cast shadow further down reads as a sheet resting with its
+   corners slightly off the card. A 3D transform would have done it too and
+   would have cost a compositing layer and a blurry text raster.
+
+   ── DIRECTION B: THE ENAMEL SIGN ───────────────────────────────────────────
+   THE KEYLINE IS THE WHOLE TELL. A vitreous-enamel plate is made by firing
+   colour onto steel, and the signature of the process is a thin light rule set
+   in from the edge — it exists because the border is where the enamel is
+   thinnest. Without it this is a rounded rectangle; with it, it is a sign.
+   THE BOLTS ARE FOUR RADIAL GRADIENTS, not four elements. They are lit from
+   the same direction as the punch hole in direction A, because if this room
+   ever shows both at once the light in it should agree with itself. */
 .booth-ticket {
   display: flex;
   align-items: stretch;
   max-width: 520px;
   margin: 0 auto 38px;
-  background: var(--wb-gold);
-  color: var(--wb-ink-card);
-  box-shadow: 0 2px 4px rgba(33, 31, 28, 0.2), 0 12px 28px rgba(33, 31, 28, 0.16);
+  color: var(--wb-gold);
+  background-color: var(--wb-bg);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='none' stroke='%2357544d' stroke-width='.5' opacity='.18'%3E%3Ccircle cx='60' cy='60' r='52'/%3E%3Ccircle cx='60' cy='60' r='40'/%3E%3Ccircle cx='60' cy='60' r='28'/%3E%3Cellipse cx='60' cy='60' rx='52' ry='20'/%3E%3Cellipse cx='60' cy='60' rx='52' ry='20' transform='rotate(30 60 60)'/%3E%3Cellipse cx='60' cy='60' rx='52' ry='20' transform='rotate(60 60 60)'/%3E%3Cellipse cx='60' cy='60' rx='52' ry='20' transform='rotate(90 60 60)'/%3E%3Cellipse cx='60' cy='60' rx='52' ry='20' transform='rotate(120 60 60)'/%3E%3Cellipse cx='60' cy='60' rx='52' ry='20' transform='rotate(150 60 60)'/%3E%3C/g%3E%3C/svg%3E"),
+    repeating-linear-gradient(45deg,
+      rgba(87, 84, 77, 0.055) 0 1px, rgba(87, 84, 77, 0) 1px 5px);
+  background-size: 120px 120px, auto;
+  border: 1px solid var(--wb-border-hi);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 1px 2px rgba(33, 31, 28, 0.22),
+    0 10px 22px rgba(33, 31, 28, 0.14);
   /* the same slight tilt the collage tiles use elsewhere in the museum — a
      printed thing set down on a sheet, not a component aligned to a grid. */
   transform: rotate(-1.1deg);
@@ -69,7 +110,7 @@ html[data-room="booth"], html[data-room="booth"] body {
   justify-content: center;
   gap: 7px;
   padding: 18px 18px;
-  border-right: 2px dashed var(--wb-ink-card);
+  border-right: 2px dashed var(--wb-border-hi);
 }
 .booth-ticket-stub::before,
 .booth-ticket-stub::after {
@@ -83,6 +124,17 @@ html[data-room="booth"], html[data-room="booth"] body {
 }
 .booth-ticket-stub::before { top: -8px; }
 .booth-ticket-stub::after  { bottom: -8px; }
+/* [N5] the punch. Sheet colour, lit from above, so it is a hole rather than a
+   pale dot — the shadow inside the top edge is the entire illusion. */
+.booth-ticket-punch {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--wb-ink-card);
+  box-shadow:
+    0 1px 2px rgba(33, 31, 28, 0.55) inset,
+    0 1px 0 rgba(255, 255, 255, 0.6);
+}
 .booth-ticket-mark {
   font-family: 'Fredoka', sans-serif;
   font-weight: 600;
@@ -94,7 +146,7 @@ html[data-room="booth"], html[data-room="booth"] body {
   font-family: 'Courier Prime', monospace;
   font-size: 0.54rem;
   letter-spacing: 0.2em;
-  opacity: 0.75;
+  color: var(--wb-gold-lo);
 }
 .booth-ticket-main {
   flex: 1 1 auto;
@@ -111,7 +163,7 @@ html[data-room="booth"], html[data-room="booth"] body {
   font-size: 0.54rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  opacity: 0.72;
+  color: var(--wb-gold-lo);
 }
 .booth-ticket-big {
   font-family: 'Syne', sans-serif;
@@ -126,6 +178,75 @@ html[data-room="booth"], html[data-room="booth"] body {
   font-size: 0.58rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+  color: var(--wb-gold-lo);
+}
+
+/* ── DIRECTION B — the enamel information sign ─────────────────────────────── */
+.booth-sign {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 520px;
+  margin: 0 auto 38px;
+  padding: 20px 26px;
+  border-radius: 10px;
+  background-color: var(--wb-gold-lo);
+  /* the four bolt heads, lit from above like the ticket's punch */
+  background-image:
+    radial-gradient(circle at 14px 14px, rgba(255,255,255,.42) 0 2px, rgba(33,31,28,.42) 2px 4px, transparent 4px),
+    radial-gradient(circle at calc(100% - 14px) 14px, rgba(255,255,255,.42) 0 2px, rgba(33,31,28,.42) 2px 4px, transparent 4px),
+    radial-gradient(circle at 14px calc(100% - 14px), rgba(255,255,255,.42) 0 2px, rgba(33,31,28,.42) 2px 4px, transparent 4px),
+    radial-gradient(circle at calc(100% - 14px) calc(100% - 14px), rgba(255,255,255,.42) 0 2px, rgba(33,31,28,.42) 2px 4px, transparent 4px);
+  color: var(--wb-ink-card);
+  box-shadow:
+    0 1px 2px rgba(33, 31, 28, 0.3),
+    0 12px 26px rgba(33, 31, 28, 0.2);
+  transform: rotate(-0.5deg);
+}
+/* THE KEYLINE — see the note above. Inset from the edge, never on it. */
+.booth-sign::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(250, 248, 243, 0.55);
+  border-radius: 5px;
+  pointer-events: none;
+}
+.booth-sign-glyph {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 2px solid var(--wb-ink-card);
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1;
+}
+.booth-sign-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+.booth-sign-big {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.25rem, 4vw, 1.7rem);
+  letter-spacing: 0.13em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.booth-sign-sub {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  opacity: 0.85;
 }
 
 @media (max-width: 680px) {
@@ -133,8 +254,11 @@ html[data-room="booth"], html[data-room="booth"] body {
      than a taste: a rotated box is wider than its box, and at 390px the card's
      content column is 338px with nothing spare — a 1.1deg tilt on a full-width
      ticket pushes ~4px past each edge and buys the page a horizontal scrollbar
-     to pay for a charm nobody can see at that size. */
+     to pay for a charm nobody can see at that size.
+     [N5] the same arithmetic governs the sign, which is the same width. */
   .booth-ticket { transform: none; margin-bottom: 30px; }
   .booth-ticket-stub { padding: 14px 13px; }
   .booth-ticket-main { padding: 16px 12px; }
+  .booth-sign { transform: none; margin-bottom: 30px; gap: 14px; padding: 16px 16px; }
+  .booth-sign-glyph { width: 46px; height: 46px; font-size: 1.6rem; }
 }

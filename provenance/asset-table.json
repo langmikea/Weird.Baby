@@ -1,5 +1,5 @@
 {
- "_": "THE ASSET TABLE — every image, video and audio file in both repos. Scanned fields are rewritten by `node tools/asset-table.mjs --scan`; the four judged fields (what · quality · qualityNote · verdict) are hand-written and a scan never touches them.",
+ "_": "THE ASSET TABLE — every image, video and audio file in both repos. Scanned fields are rewritten by `node tools/asset-table.mjs --scan`; the five judged fields (what · quality · qualityNote · verdict · revealArc) are hand-written and a scan never touches them.",
  "_purpose": "Nothing ships without Mike's personal inspection — and Mike must not have to perfect assets in advance. Slots move, things change, some of these are never needed. This table exists so an inspection can be generated on demand for whatever is actually about to ship, instead of demanding a verdict on everything up front.",
  "_quality": "Ops' honest read of the FILE, never of the idea: usable | weak | wrong | placeholder | null. `null` means NOBODY HAS LOOKED, and it is not a passing grade. `wrong` means the file does not show what its slot says it shows.",
  "_verdict": "MIKE'S, and unset by default. null = not inspected. Values are his to choose; `pass` and `reject` are what the checklist reads. Ops never writes this field.",
@@ -22,7 +22,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/cleanup-round-20260803/C2-390-title-truncated-BEFORE.jpg",
@@ -41,7 +42,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/cleanup-round-20260803/C2-lobby-directory.jpg",
@@ -60,7 +62,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/cleanup-round-20260803/C2-money-room-desktop.jpg",
@@ -79,7 +82,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/cleanup-round-20260803/C4-hunter-root-portrait.jpg",
@@ -98,7 +102,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/cleanup-round-20260803/lap-390px-about-the-artist.jpg",
@@ -117,7 +122,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/cleanup-round-20260803/lap-390px-about-the-songs.jpg",
@@ -136,7 +142,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/cleanup-round-20260803/lap-390px-money.jpg",
@@ -155,7 +162,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/evening-round-20260803/01-foundation-top-desktop.png",
@@ -175,7 +183,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/evening-round-20260803/02-foundation-register-desktop.png",
@@ -195,7 +204,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/evening-round-20260803/03-foundation-invoice-desktop.png",
@@ -215,7 +225,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/evening-round-20260803/04-robots-faq-tally.png",
@@ -235,7 +246,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/evening-round-20260803/05-robots-contact-card.png",
@@ -255,7 +267,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/evening-round-20260803/06-robots-record-plate.png",
@@ -275,7 +288,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/evening-round-20260803/07-robots-manual-plate.png",
@@ -295,7 +309,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/evening-round-20260803/08-robots-firmware-plate.png",
@@ -315,7 +330,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/evening-round-20260803/09-robots-mgkfaq-plate.png",
@@ -335,7 +351,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/evening-round-20260803/10-catchall-junk-url.png",
@@ -355,7 +372,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/evening-round-20260803/11-booth-unchanged.png",
@@ -375,7 +393,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/evening-round-20260803/20-390-foundation-register.png",
@@ -395,7 +414,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/evening-round-20260803/21-390-foundation-invoice.png",
@@ -415,7 +435,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/evening-round-20260803/22-390-robots-faq.png",
@@ -435,7 +456,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/evening-round-20260803/23-390-catchall.png",
@@ -455,7 +477,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/foundation-round-20260803/F1-about-the-songs-plated.jpg",
@@ -474,7 +497,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/foundation-round-20260803/F1-booth-ticket.jpg",
@@ -493,7 +517,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/foundation-round-20260803/F3-foundation-faq.jpg",
@@ -512,7 +537,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/foundation-round-20260803/F3-foundation-ledger.jpg",
@@ -531,7 +557,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/foundation-round-20260803/F4-carousel-all-five-desktop.jpg",
@@ -550,7 +577,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/foundation-round-20260803/lap-390px-wal-foundation-booth.jpg",
@@ -569,7 +597,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/optometrist-20260803/M4-logo-outline-classified-Baby.png",
@@ -589,7 +618,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/optometrist-20260803/M4-logo-outline-classified-full.png",
@@ -609,7 +639,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/optometrist-20260803/V0-as-it-stands.jpg",
@@ -628,7 +659,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/optometrist-20260803/V1-paper-card-on-the-dark-stage.jpg",
@@ -647,7 +679,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/optometrist-20260803/V2-house-lights-up-one-stop.jpg",
@@ -666,7 +699,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/optometrist-20260803/V3-ink-on-linen.jpg",
@@ -685,7 +719,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/optometrist-20260803/V4-split-register.jpg",
@@ -704,7 +739,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/record-013-20260804/01-desktop-head-dateline-headline.jpg",
@@ -723,7 +759,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/record-013-20260804/02-desktop-lead-and-first-section.jpg",
@@ -742,7 +779,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/record-013-20260804/03-desktop-section-label-and-archive-door.jpg",
@@ -761,7 +799,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/record-013-20260804/04-390px-frame-wing-top.jpg",
@@ -780,7 +819,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/record-013-20260804/05-390px-hook-plate-unfloated.jpg",
@@ -799,7 +839,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/renders/stage-01-record-paged.png",
@@ -819,7 +860,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/renders/stage-02-manual-plate.png",
@@ -839,7 +881,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/renders/stage-03-expand-in-place.png",
@@ -859,7 +902,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/renders/stage-04-measure-columns.png",
@@ -879,7 +923,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/revert-round-20260803/R1-foundation-room-desktop.jpg",
@@ -898,7 +943,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/revert-round-20260803/R1-lobby-directory.jpg",
@@ -917,7 +963,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/revert-round-20260803/R2-390-q1-restored.jpg",
@@ -936,7 +983,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/revert-round-20260803/R3-390-q10-legal-work.jpg",
@@ -955,7 +1003,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/rhythm-20260803/AFTER-390-artist-card.jpg",
@@ -974,7 +1023,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/rhythm-20260803/AFTER-desktop-artist-card.jpg",
@@ -993,7 +1043,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/rhythm-20260803/AFTER-desktop-poster.jpg",
@@ -1012,7 +1063,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/rhythm-20260803/AFTER-desktop-welcome.jpg",
@@ -1031,7 +1083,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/rhythm-20260803/BEFORE-desktop-artist-card.jpg",
@@ -1050,7 +1103,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/v1-round-20260803/A1-ground-desktop-AFTER.jpg",
@@ -1069,7 +1123,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/v1-round-20260803/A2-geometry-desktop-AFTER.jpg",
@@ -1088,7 +1143,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/v1-round-20260803/A3-track-click-marks-AFTER.jpg",
@@ -1107,7 +1163,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/v1-round-20260803/A4-ground-390-AFTER.jpg",
@@ -1126,7 +1183,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/v1-round-20260803/B1-ground-desktop-BEFORE.jpg",
@@ -1145,7 +1203,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/v1-round-20260803/B2-geometry-desktop-BEFORE.jpg",
@@ -1164,7 +1223,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:docs/v1-round-20260803/B3-ground-390-BEFORE.jpg",
@@ -1183,7 +1243,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/audio/wb/01_weird_baby_blues_2026-06-17.mp3",
@@ -1201,7 +1262,8 @@
    "what": "Track from The Best of Weird.Baby Vol. 1 — \"weird baby blues\". The house's own recording.",
    "quality": null,
    "qualityNote": "not assessed — Ops has not listened to it. A bitrate is not a quality read and a guess here would be worth less than the blank.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/audio/wb/02_pull_me_in_closer_blues_2026-06-16.mp3",
@@ -1219,7 +1281,8 @@
    "what": "Track from The Best of Weird.Baby Vol. 1 — \"pull me in closer blues\". The house's own recording.",
    "quality": null,
    "qualityNote": "not assessed — Ops has not listened to it. A bitrate is not a quality read and a guess here would be worth less than the blank.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/audio/wb/03_breakup_breakdown_blues_2026-06-16.mp3",
@@ -1237,7 +1300,8 @@
    "what": "Track from The Best of Weird.Baby Vol. 1 — \"breakup breakdown blues\". The house's own recording.",
    "quality": null,
    "qualityNote": "not assessed — Ops has not listened to it. A bitrate is not a quality read and a guess here would be worth less than the blank.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/audio/wb/04_how_i_saved_the_world_blues_2026-06-17.mp3",
@@ -1255,7 +1319,8 @@
    "what": "Track from The Best of Weird.Baby Vol. 1 — \"how i saved the world blues\". The house's own recording.",
    "quality": null,
    "qualityNote": "not assessed — Ops has not listened to it. A bitrate is not a quality read and a guess here would be worth less than the blank.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/audio/wb/05_ed_yahdah_2026-06-16.mp3",
@@ -1273,7 +1338,8 @@
    "what": "Track from The Best of Weird.Baby Vol. 1 — \"ed yahdah\". The house's own recording.",
    "quality": null,
    "qualityNote": "not assessed — Ops has not listened to it. A bitrate is not a quality read and a guess here would be worth less than the blank.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/audio/wb/06_coconuts_2026-06-17.mp3",
@@ -1291,7 +1357,8 @@
    "what": "Track from The Best of Weird.Baby Vol. 1 — \"coconuts\". The house's own recording.",
    "quality": null,
    "qualityNote": "not assessed — Ops has not listened to it. A bitrate is not a quality read and a guess here would be worth less than the blank.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/favicon-180.png",
@@ -1313,7 +1380,8 @@
    "what": "The iOS home-screen icon.",
    "quality": "usable",
    "qualityNote": "180 square, the size iOS asks for.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/favicon.ico",
@@ -1330,7 +1398,8 @@
    "what": "The browser tab icon, multi-size ICO.",
    "quality": "usable",
    "qualityNote": "Renders at every size the tab bar asks for.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/favicon.svg",
@@ -1350,7 +1419,8 @@
    "what": "The vector tab icon.",
    "quality": "usable",
    "qualityNote": "48x46 viewBox, scales cleanly.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/icons.svg",
@@ -1370,7 +1440,8 @@
    "what": "The UI icon sprite.",
    "quality": "usable",
    "qualityNote": "Interface furniture, not content.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/images/wal/carsie-blanton-cover.jpg",
@@ -1391,7 +1462,8 @@
    "what": "Carsie Blanton's cover on the WAL bill — the artist in a red suit on a fire escape.",
    "quality": "usable",
    "qualityNote": "900 square, sharp, well lit, the artist's own promotional register.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/images/wal/carsie-blanton-poster.png",
@@ -1413,7 +1485,8 @@
    "what": "Her own illustrated logo art, pink ground.",
    "quality": "usable",
    "qualityNote": "1200x630 flat vector-style art; nothing to degrade.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/images/wal/hunter-root-cover.jpg",
@@ -1434,7 +1507,8 @@
    "what": "Hunter Root's cover — the artist with a guitar in front of a scrap pile.",
    "quality": "usable",
    "qualityNote": "1280x720, sharp, a real press-grade frame.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/images/wal/hunter-root-plate.jpg",
@@ -1455,7 +1529,8 @@
    "what": "The portrait that introduces Hunter Root on /wal.",
    "quality": "weak",
    "qualityNote": "TWO PROBLEMS IN ONE FILE. It is a phone SELFIE TAKEN IN A VEHICLE — steering wheel, rear-view mirror and a parking lot through the glass are all in frame — doing the job of an artist's introduction portrait. And the shirt reads CHET VINCENT AND THE MUSIC INDUSTRY across the chest, prominent and legible, which is the standing finding R3. Cropping the second problem out does not fix the first.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/images/wal/jesse-welles-cover.jpg",
@@ -1476,7 +1551,8 @@
    "what": "Jesse Welles' cover — a B&W studio portrait with a guitar.",
    "quality": "usable",
    "qualityNote": "900 square, sharp, properly lit.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/images/wal/jesse-welles-plate.jpg",
@@ -1497,7 +1573,8 @@
    "what": "The portrait that introduces Jesse Welles on /wal — a close B&W head.",
    "quality": "usable",
    "qualityNote": "The picture is strong: 1500x1879, sharp, well exposed. THE FILE IS A WEBP NAMED .jpg. Browsers sniff the bytes so it renders, but the name lies about the container and every tool that trusts extensions reads it wrong — this table's own first pass reported no dimensions for it at all.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/images/wal/mikey-mike-cover.jpg",
@@ -1518,7 +1595,8 @@
    "what": "Mikey Mike's cover on the WAL bill.",
    "quality": "weak",
    "qualityNote": "A hand-held selfie down a cabin passage: the subject is leaning into the lens at close range, the frame is soft, and a child's ride-on toy sits in the middle of it. 73 KB at 900 square is also the least data of any cover in the building.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/images/wb-merch/hunter-root.png",
@@ -1538,7 +1616,8 @@
    "what": "Hunter Root's gift-shop banner image — the Crooked Home sleeve beside a marbled record.",
    "quality": "usable",
    "qualityNote": "The picture is fine. It is REFERENCED BY NOTHING: F7b (2026-08-02) removed his full-width banner per Mike, and 1.7 MB — the largest orphan in public/ — was left behind.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/images/wb-merch/sticker.png",
@@ -1561,7 +1640,8 @@
    "what": "The Weird.Baby sticker, cropped tight — the one object the gift shop sells.",
    "quality": "usable",
    "qualityNote": "422 square on transparent ground, cropped tight as the 2026-06-23 shop pass intended.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/images/wb/vol1_cover_v0.png",
@@ -1581,7 +1661,8 @@
    "what": "The superseded first cut of the Vol. 1 cover.",
    "quality": "weak",
    "qualityNote": "Superseded by v1 and referenced by nothing. Also A JPEG NAMED .png — the bytes start FFD8, not the PNG signature.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/images/wb/vol1_cover_v1.png",
@@ -1603,7 +1684,8 @@
    "what": "The composed cover for The Best of Weird.Baby Vol. 1 — grey field, red 'the making of', the house mark, 'Vol. 1'.",
    "quality": "usable",
    "qualityNote": "2048 square, type and mark only, nothing photographic to go soft.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/art/mgk-viii-cover.jpg",
@@ -1624,7 +1706,8 @@
    "what": "The MGK-VIII album cover — a close frame of the lit grille with the LED bar behind it.",
    "quality": "weak",
    "qualityNote": "A soft hand-held snapshot with a MAINS ADAPTER, a wooden floor and loose cabling in frame, and it is the only colour original among the three covers (the wing's greyscale law hides that at the glass and cannot touch the composition). AND IT CANNOT BE STRAIGHTENED BY ROTATION: the machine's own rectangular aperture measures -1.75 deg on its top edge and +2.48 deg on its bottom, 0.13 deg off plumb on the left and 1.52 deg on the right. That is keystone, not tilt. Sampling the grille bars at four heights gives -2.69, +5.40, +3.58 and +0.12 deg for the same bars. It needs a photograph, not an edit.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/art/viiip.png",
@@ -1646,7 +1729,8 @@
    "what": "The MGK-VIIIp album cover — the unit, front, with the BIOS beat composited into its glass. Also the ninth tile of the VIIIp morgue.",
    "quality": "usable",
    "qualityNote": "Cropped this round to the unit's measured bounding box, 1536 square, 8-bit grey (lossless: the channels were already identical). The residual is a band of the floor at the left and right edges, which no rectangle can remove without cutting the machine.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": "online"
   },
   {
    "id": "museum:public/robots/art/wbr-cover-logo.png",
@@ -1668,7 +1752,8 @@
    "what": "The wing's front-desk cover — house paper, ruled border, the mark, ROBOTS, PURVEYORS OF THE WEIRD. Generated by tools/make_robots_cover.py.",
    "quality": "usable",
    "qualityNote": "1200 square, generated rather than composited by hand, so a re-render cannot drift.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/manual/working-copy-p1.png",
@@ -1690,7 +1775,8 @@
    "what": "The still on The Manual's face — the manual's title page, PRELIMINARY / NOT FOR DISTRIBUTION.",
    "quality": "placeholder",
    "qualityNote": "A clean digital render on white where that face's own ruling (B8) says the printed page is the SOURCE and the PHOTOGRAPH of the print is the plate. 21 KB for a 1275x1650 page is the tell: there is no paper in it. Standing finding R4.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/reference/mgk-viii/bench_power.jpg",
@@ -1711,7 +1797,8 @@
    "what": "The bench — power, a relay board and two feet.",
    "quality": "usable",
    "qualityNote": "1290x725, the largest of the VIII set. Workshop snapshot; the wing's argument is that these are cropped detail, so the framing is the point.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/reference/mgk-viii/chest_grille.jpg",
@@ -1732,7 +1819,8 @@
    "what": "The chest and the shoulders it hangs from.",
    "quality": "usable",
    "qualityNote": "867x542. Sharp enough at tile and reader size; low for a museum plate.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/reference/mgk-viii/column_lit.jpg",
@@ -1753,7 +1841,8 @@
    "what": "A lit column behind a grille.",
    "quality": "usable",
    "qualityNote": "1048x655, the blue LED column reads clearly.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/reference/mgk-viii/feet_plinth.jpg",
@@ -1774,7 +1863,8 @@
    "what": "Two cast feet, captioned 'Feet, on a plywood plinth'.",
    "quality": "weak",
    "qualityNote": "The picture shows the feet on what reads as a WORKBENCH TOP, with a brass table lamp and household clutter beside them. 'Plinth' is doing work the photograph does not support, and it is the smallest frame in the set at 696x435.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/reference/mgk-viii/head_lens.jpg",
@@ -1795,7 +1885,8 @@
    "what": "The head straight on, lens forward, indicator lit.",
    "quality": "usable",
    "qualityNote": "585x472 — the smallest plate in the building. Adequate on a tile, thin in the reader.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/reference/mgk-viii/head_oblique.jpg",
@@ -1816,7 +1907,8 @@
    "what": "The head at three-quarters — a camera body, lens forward.",
    "quality": "usable",
    "qualityNote": "746x466. Same register as head_lens.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/reference/mgk-viii/limbs_lower.jpg",
@@ -1837,7 +1929,8 @@
    "what": "Lower limbs — flexible conduit into cast feet.",
    "quality": "usable",
    "qualityNote": "806x504, workshop ground visible behind, which the crop rule accepts.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/reference/mgk-viii/matrix_lit.jpg",
@@ -1858,7 +1951,8 @@
    "what": "An LED matrix lit on a breadboard, February 2013.",
    "quality": "usable",
    "qualityNote": "640x517. Its own caption dates it and says it is bench work, so it is not pretending to be the finished machine.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/reference/mgk-viii/parts_drawer.jpg",
@@ -1872,14 +1966,13 @@
    "h": 900,
    "w": 1114,
    "components": 3,
-   "role": "shipped",
-   "usedBy": [
-    "src/data/artists/robots.js"
-   ],
+   "role": "unreferenced",
+   "usedBy": [],
    "what": "One drawer — jewelled indicators, bezels, knobs, braid.",
    "quality": "usable",
    "qualityNote": "1114x900, the best-lit frame in the VIII set and the only one with no obfuscation problem.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/reference/mgk-viii/slot_mockup.jpg",
@@ -1900,7 +1993,8 @@
    "what": "A slot cut in a paper mock-up with a limb across it.",
    "quality": "usable",
    "qualityNote": "612x383. Blue masking tape and a cardboard mock-up; honest workshop evidence.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/reference/mgk-viii/torso_unfinished.jpg",
@@ -1921,7 +2015,8 @@
    "what": "The chest in 2013, unpowered, against the mock-up.",
    "quality": "usable",
    "qualityNote": "612x383. Pairs with chest_grille eight years later, which is the point of the plate.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/reference/photos/front_full.png",
@@ -1943,7 +2038,8 @@
    "what": "The front of the unit, whole, as received.",
    "quality": "usable",
    "qualityNote": "1536x2048, sharp, the whole object. Carries a strong magenta cast the wing's greyscale law hides.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": "arrived"
   },
   {
    "id": "museum:public/robots/reference/photos/front_screen.png",
@@ -1965,7 +2061,8 @@
    "what": "The unit's front glass, lit, captioned 'The front glass, lit'.",
    "quality": "wrong",
    "qualityNote": "MIRROR-REVERSED, AND IT IS THE WHOLE PHOTOGRAPH RATHER THAN THE SCREEN. The glass reads '-(A)BEAL MGK-VIIIp )- / Please Select: / MGK-VIIIp' right-to-left, and so does the lettering behind it lower in the frame — so the fix is a horizontal flip of the file, not a re-shoot. This is the ONE plate that shows the machine saying something and it shows it backwards. Standing finding R2; the whole-image diagnosis is new this round.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": "online"
   },
   {
    "id": "museum:public/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
@@ -1987,7 +2084,8 @@
    "what": "Captioned on the wall as 'The bezel around the glass'.",
    "quality": "wrong",
    "qualityNote": "IT IS NOT THE UNIT'S BEZEL AND IT IS NOT A PHOTOGRAPH. It is a CRT/monitor FRAME GRAPHIC with a plain white rectangle where a picture is meant to be dropped — a compositing asset, on a wall whose tombstone says 'Nine, all held by this museum' and whose lead calls them plates of the machine.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
@@ -2009,7 +2107,8 @@
    "what": "The pair — unit front and top viewfinder — captioned 'as received'. Also the robots Welcome face's hook and the VIIIp album's viewer poster.",
    "quality": "usable",
    "qualityNote": "3000x2400 and it reads well at every size. THE CAVEAT: it is a COMPOSITE — two views laid on a grey field inside a white border — not a single frame taken 'as received'. It is built from real photographs of the real objects, so it is honest about the objects and loose about itself.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": "arrived"
   },
   {
    "id": "museum:public/robots/reference/photos/monitor_base.png",
@@ -2031,7 +2130,8 @@
    "what": "Captioned on the wall as 'The base it stands on'.",
    "quality": "wrong",
    "qualityNote": "THERE IS NO BASE IN THE PICTURE. It is the family-shot composite dropped inside the CRT frame graphic above — the same two subjects, in a monitor. The caption describes an object the file does not contain.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/robots/reference/photos/rear_power_switch.png",
@@ -2053,7 +2153,8 @@
    "what": "The power switch round the back of the unit.",
    "quality": "usable",
    "qualityNote": "2048x1536, sharp, a real photograph of the real thing. 3.8 MB is heavy for what it shows.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": "arrived"
   },
   {
    "id": "museum:public/robots/reference/photos/top_monitor.png",
@@ -2075,7 +2176,8 @@
    "what": "The top viewfinder, looking down into the glass.",
    "quality": "usable",
    "qualityNote": "2048x1536, sharp, the small screen legible.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": "arrived"
   },
   {
    "id": "museum:public/robots/reference/photos/unit_new_base.png",
@@ -2097,7 +2199,8 @@
    "what": "Captioned on the wall as 'The unit on its new base'.",
    "quality": "wrong",
    "qualityNote": "AGAIN NO BASE. It is the same pair on plain white with BOTH SCREENS MASKED OUT to blank white shapes — a masking intermediate from the compositing job, not a photograph of a unit on a base.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/share-card.png",
@@ -2119,7 +2222,8 @@
    "what": "The link-preview card — WEIRD.BABY / MUSEUM / PURVEYORS OF THE WEIRD / NO ADS, NO AFFILIATE LINKS, NO CUT, set on house paper in a ruled box.",
    "quality": "usable",
    "qualityNote": "1200x630, the exact size the platforms crop to. Type only; nothing to go soft.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/WeirdBaby_PhotoID_backup.png",
@@ -2140,7 +2244,8 @@
    "what": "A second copy of the house mark, kept as a backup.",
    "quality": "wrong",
    "qualityNote": "THE FILE IS TRUNCATED. The PNG header is valid and the stream never reaches IEND, so a decoder stops part-way (PIL: 'image file is truncated'). 703 KB of broken image sitting in public/ at a public URL. Referenced by nothing.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:public/WeirdBaby_PhotoID.png",
@@ -2163,7 +2268,8 @@
    "what": "The house photo-ID mark — the baby in the ring with the Weird.Baby wordmark. The Lobby's plate and the robots front desk's viewer poster.",
    "quality": "usable",
    "qualityNote": "2048 square, clean edges, transparent ground.",
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:src/assets/hero.png",
@@ -2183,7 +2289,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "museum:src/assets/vite.svg",
@@ -2201,7 +2308,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:assets/audio/WB_electrical-short_v1.wav",
@@ -2216,7 +2324,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:assets/audio/WB_electrical-short_v2.wav",
@@ -2231,7 +2340,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9766__s0.jpg",
@@ -2250,7 +2360,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9766__s1.jpg",
@@ -2269,7 +2380,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9766__s2.jpg",
@@ -2288,7 +2400,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9766__s3.jpg",
@@ -2307,7 +2420,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9766__s4.jpg",
@@ -2326,7 +2440,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9766__s5.jpg",
@@ -2345,7 +2460,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9766__s6.jpg",
@@ -2364,7 +2480,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9766__s7.jpg",
@@ -2383,7 +2500,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9766__s8.jpg",
@@ -2402,7 +2520,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9767__s0.jpg",
@@ -2421,7 +2540,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9767__s1.jpg",
@@ -2440,7 +2560,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9767__s2.jpg",
@@ -2459,7 +2580,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9767__s3.jpg",
@@ -2478,7 +2600,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9767__s4.jpg",
@@ -2497,7 +2620,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9767__s5.jpg",
@@ -2516,7 +2640,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9767__s6.jpg",
@@ -2535,7 +2660,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9767__s7.jpg",
@@ -2554,7 +2680,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9767__s8.jpg",
@@ -2573,7 +2700,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9768__s0.jpg",
@@ -2592,7 +2720,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9768__s1.jpg",
@@ -2611,7 +2740,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9768__s2.jpg",
@@ -2630,7 +2760,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9768__s3.jpg",
@@ -2649,7 +2780,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9768__s4.jpg",
@@ -2668,7 +2800,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9768__s5.jpg",
@@ -2687,7 +2820,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9768__s6.jpg",
@@ -2706,7 +2840,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9768__s7.jpg",
@@ -2725,7 +2860,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/_cal/IMG_9768__s8.jpg",
@@ -2744,7 +2880,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/IMG_9766__first.jpg",
@@ -2763,7 +2900,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/IMG_9766__mid.jpg",
@@ -2782,7 +2920,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/IMG_9766.wav",
@@ -2797,7 +2936,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/IMG_9767__first.jpg",
@@ -2816,7 +2956,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/IMG_9767__mid.jpg",
@@ -2835,7 +2976,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/IMG_9767.wav",
@@ -2850,7 +2992,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/IMG_9768__first.jpg",
@@ -2869,7 +3012,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/IMG_9768__mid.jpg",
@@ -2888,7 +3032,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/derived/IMG_9768.wav",
@@ -2903,7 +3048,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/processed/IMG_9766.MP4",
@@ -2919,7 +3065,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/processed/IMG_9767.MP4",
@@ -2935,7 +3082,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:content/burps/processed/IMG_9768.MP4",
@@ -2951,7 +3099,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:docs/assets_twin/mgk65_reveal_treatments-20260715.png",
@@ -2971,7 +3120,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:docs/assets_twin/twin_top_render-20260715.png",
@@ -2991,7 +3141,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:reference/photos/front_full.png",
@@ -3011,7 +3162,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:reference/photos/front_screen.png",
@@ -3031,7 +3183,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
@@ -3051,7 +3204,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
@@ -3071,7 +3225,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:reference/photos/monitor_base_markers.png",
@@ -3091,7 +3246,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:reference/photos/monitor_base.png",
@@ -3111,7 +3267,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:reference/photos/rear_power_switch.png",
@@ -3131,7 +3288,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:reference/photos/top_monitor.png",
@@ -3151,7 +3309,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:reference/photos/unit_crt_base.webp",
@@ -3169,7 +3328,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:reference/photos/unit_new_base.png",
@@ -3189,7 +3349,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viii/plates/2021-03-19/MAGIC8-2021-P01-the-eye.jpg",
@@ -3208,7 +3369,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viii/plates/2021-03-19/MAGIC8-2021-P02-the-shoulder.jpg",
@@ -3227,7 +3389,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viii/plates/2021-03-19/MAGIC8-2021-P04-the-hand-on-control.jpg",
@@ -3246,7 +3409,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viii/plates/2021-03-19/MAGIC8-2021-P06-the-core.jpg",
@@ -3265,7 +3429,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viii/plates/2021-03-19/MAGIC8-2021-P07-the-output-row.jpg",
@@ -3284,7 +3449,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viii/plates/2021-03-19/MAGIC8-2021-P08-the-meltdown.jpg",
@@ -3303,7 +3469,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/004.mp3",
@@ -3318,7 +3485,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/017.mp3",
@@ -3333,7 +3501,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/030.mp3",
@@ -3348,7 +3517,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/043.mp3",
@@ -3363,7 +3533,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/056.mp3",
@@ -3378,7 +3549,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/069.mp3",
@@ -3393,7 +3565,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/082.mp3",
@@ -3408,7 +3581,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/095.mp3",
@@ -3423,7 +3597,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/108.mp3",
@@ -3438,7 +3613,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/121.mp3",
@@ -3453,7 +3629,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/134.mp3",
@@ -3468,7 +3645,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/147.mp3",
@@ -3483,7 +3661,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/160.mp3",
@@ -3498,7 +3677,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/173.mp3",
@@ -3513,7 +3693,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/186.mp3",
@@ -3528,7 +3709,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/199.mp3",
@@ -3543,7 +3725,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/212.mp3",
@@ -3558,7 +3741,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/225.mp3",
@@ -3573,7 +3757,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/238.mp3",
@@ -3588,7 +3773,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/18/251.mp3",
@@ -3603,7 +3789,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/001.wav",
@@ -3618,7 +3805,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/014.wav",
@@ -3633,7 +3821,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/027.wav",
@@ -3648,7 +3837,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/040.wav",
@@ -3663,7 +3853,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/053.wav",
@@ -3678,7 +3869,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/066.wav",
@@ -3693,7 +3885,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/079.wav",
@@ -3708,7 +3901,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/092.wav",
@@ -3723,7 +3917,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/105.wav",
@@ -3738,7 +3933,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/118.wav",
@@ -3753,7 +3949,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/131.wav",
@@ -3768,7 +3965,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/157.wav",
@@ -3783,7 +3981,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/170.wav",
@@ -3798,7 +3997,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/183.wav",
@@ -3813,7 +4013,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/196.wav",
@@ -3828,7 +4029,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/209.wav",
@@ -3843,7 +4045,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/235.wav",
@@ -3858,7 +4061,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/20/248.wav",
@@ -3873,7 +4077,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/001.wav",
@@ -3888,7 +4093,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/014.wav",
@@ -3903,7 +4109,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/027.wav",
@@ -3918,7 +4125,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/040.wav",
@@ -3933,7 +4141,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/053.wav",
@@ -3948,7 +4157,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/066.wav",
@@ -3963,7 +4173,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/079.wav",
@@ -3978,7 +4189,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/092.wav",
@@ -3993,7 +4205,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/105.wav",
@@ -4008,7 +4221,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/118.wav",
@@ -4023,7 +4237,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/131.wav",
@@ -4038,7 +4253,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/144.wav",
@@ -4053,7 +4269,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/157.wav",
@@ -4068,7 +4285,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/170.wav",
@@ -4083,7 +4301,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/183.wav",
@@ -4098,7 +4317,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/196.wav",
@@ -4113,7 +4333,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/209.wav",
@@ -4128,7 +4349,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/222.wav",
@@ -4143,7 +4365,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/235.wav",
@@ -4158,7 +4381,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/content/build/SD/23/248.wav",
@@ -4173,7 +4397,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-01.png",
@@ -4193,7 +4418,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-02.png",
@@ -4213,7 +4439,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-03.png",
@@ -4233,7 +4460,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-04.png",
@@ -4253,7 +4481,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-05.png",
@@ -4273,7 +4502,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-06.png",
@@ -4293,7 +4523,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-07.png",
@@ -4313,7 +4544,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-08.png",
@@ -4333,7 +4565,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-09.png",
@@ -4353,7 +4586,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-10.png",
@@ -4373,7 +4607,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-11.png",
@@ -4393,7 +4628,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-12.png",
@@ -4413,7 +4649,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-13.png",
@@ -4433,7 +4670,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-14.png",
@@ -4453,7 +4691,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-15.png",
@@ -4473,7 +4712,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-16.png",
@@ -4493,7 +4733,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-17.png",
@@ -4513,7 +4754,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-18.png",
@@ -4533,7 +4775,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-19.png",
@@ -4553,7 +4796,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-20.png",
@@ -4573,7 +4817,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-21.png",
@@ -4593,7 +4838,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-22.png",
@@ -4613,7 +4859,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-23.png",
@@ -4633,7 +4880,8 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   },
   {
    "id": "robots:robots/mgk-viiip/manual/pages/page-24.png",
@@ -4653,7 +4901,9 @@
    "what": null,
    "quality": null,
    "qualityNote": null,
-   "verdict": null
+   "verdict": null,
+   "revealArc": null
   }
- ]
+ ],
+ "_revealArc": "THE REVEAL ARC (Mike, 2026-08-04): arrived | understood | partial | online | null. The house's canon for how a thing is revealed — acknowledged when it arrived, status-updated as it was understood, brought online in stages — applied to every asset so a visitor can be given the sequence the house actually lived, test patterns and noise included. `null` means UNSET and is not a stage: it is the honest state of an asset whose arc nobody has established. Ops populates only what the record already attests."
 }
