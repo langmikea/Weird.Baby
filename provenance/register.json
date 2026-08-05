@@ -17377,6 +17377,64 @@
    "r": [
     "docs/canonical/THE_CHARTER.md"
    ]
+  },
+  "3d06ddb085679af3": {
+   "f": "src/data/artists/robots.js",
+   "l": 897,
+   "t": "The Morgue",
+   "p": "spine[].tracks[].title",
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, A3, 2026-08-04: \"RENAME 'THE PLATES': Mike's options are IMAGE ARCHIVE (clear) or THE MORGUE (the period-true newspaper/wire-service term for a photo archive).\""
+  },
+  "33273ead766dc759": {
+   "f": "src/data/artists/robots.js",
+   "l": 902,
+   "t": "THE MORGUE",
+   "p": "spine[].tracks[].face.title",
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, A3, 2026-08-04 — the same ruling as the track title above. Ops proposed THE MORGUE of his two options; both are printed so he can strike one from the glass."
+  },
+  "d45b1502404da5dd": {
+   "f": "src/data/artists/robots.js",
+   "l": 629,
+   "t": "IMAGE ARCHIVE · MGK-VIII · DETAILS ONLY",
+   "p": "spine[].tracks[].face.subtitle",
+   "c": "MIKE",
+   "s": "\"IMAGE ARCHIVE\" is Mike's second option in the same A3 ruling, printed as the plain-language subtitle so both names are on the glass. The tail is this face's existing subtitle, unchanged."
+  },
+  "59a76e9eb7fd09d9": {
+   "f": "src/data/artists/robots.js",
+   "l": 903,
+   "t": "IMAGE ARCHIVE · MGK-VIIIp",
+   "p": "spine[].tracks[].face.subtitle",
+   "c": "MIKE",
+   "s": "Same A3 ruling as above; the tail is this face's existing subtitle, unchanged."
+  },
+  "65cc8378f9b1ff21": {
+   "f": "src/data/artists/robots.js",
+   "l": 663,
+   "t": "MARCH 2021",
+   "p": "spine[].tracks[].face.spreads[].head",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows",
+   "n": "The spread heading is the month already declared on each of the five tiles beneath it (\"MAR 2021\"), spelled out. Same fact, same origin, one shelf label instead of five stamps."
+  },
+  "08149a1ea9f3ba2d": {
+   "f": "src/data/artists/robots.js",
+   "l": 686,
+   "t": "FEBRUARY 2013",
+   "p": "spine[].tracks[].face.spreads[].head",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows",
+   "n": "As above, for the three tiles stamped \"FEB 2013\"."
+  },
+  "c38ce827b45ebf97": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 1774,
+   "t": "Record {}",
+   "p": "ArchiveWall — the spread's record number",
+   "c": "HOUSE",
+   "n": "The word \"Record\" is the museum's own label for its log; the number is interpolated from `spreads[].no`. NOT ONE SPREAD DECLARES A NUMBER TODAY, so this string is not on the glass anywhere — it is declared because the boundary asks about every string it can reach, not only the ones currently rendering."
   }
  }
 }

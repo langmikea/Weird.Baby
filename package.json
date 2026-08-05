@@ -11,7 +11,11 @@
     "deploy": "npm run build && wrangler deploy",
     "export-artifacts": "node tools/export-artifacts.mjs",
     "provenance": "node tools/provenance-sweep.mjs",
-    "provenance:gate": "node tools/provenance-sweep.mjs --gate"
+    "provenance:gate": "node tools/provenance-sweep.mjs --gate",
+    "assets": "node tools/asset-table.mjs",
+    "assets:scan": "node tools/asset-table.mjs --scan",
+    "assets:checklist": "node tools/asset-table.mjs --checklist",
+    "assets:gate": "node tools/asset-table.mjs --gate"
   },
   "dependencies": {
     "react": "^19.2.4",

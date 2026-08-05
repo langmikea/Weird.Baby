@@ -127,7 +127,8 @@
    "s": "the front-view photograph with the twin's own framebuffer composited at the measured aperture; provenance in the robots repo's STATE.md, THE NIGHT RUN",
    "textInImage": true,
    "text": "MGK-VIIIp · The Informer · ABEAL on the faceplate, and the front glass carries the BIOS beat.",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
+   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop",
+   "n": "[A8 2026-08-04] RE-CROPPED, and the declaration above is unchanged because nothing was added. 1536x2048 -> 1536x1536, cut to the unit's own measured bounding box so the frame holds the machine and not the floor; written as 8-bit grey, which is lossless here because every RGB channel was already identical. No resample, no rotation, no retouch. The lettering listed above is the same lettering."
   },
   "fa9be2e52f108e76": {
    "ref": "/robots/reference/photos/front_full.png",

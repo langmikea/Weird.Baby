@@ -168,6 +168,137 @@ Canonical copy with its reasoning: `docs/canonical/OPERATIONS.md` §7, Doctrine
   11** — a perfectly-sourced line whose subject is the making of the museum
   still passes it cleanly. Both doctrines are required.
 
+## THE OPEN-ACTION REGISTER (Mike, 2026-08-04 — STANDING)
+
+> **`docs/OPEN_ACTIONS.md` is the ONE place open items live, and every round
+> updates it in the commit it seals.**
+
+Canonical copy with its reasoning: `docs/canonical/OPERATIONS.md` §7, Doctrine
+14. Rows carry: what it is in one line · where it came from · status (OPEN /
+IN PROGRESS / RULED-AWAITING-BUILD / DONE) · owner (Mike / Ops / Code) · date
+raised.
+
+**Why it exists:** every round since v40 wrote an honest *"what this exposes"*
+section into a round log nobody re-opens. Mike's own words: *"Mike has no way to
+see what is already reported."* **Reporting is not recording.** The round log
+stays the narrative; the register is the ledger. It is not a priority order —
+everything in it is open and sequencing is Mike's.
+
+## THE RECORD APPROVAL GATE (Mike, 2026-08-04 — STANDING)
+
+> **Final sign-off on a Record is Mike personally inspecting EVERY thing
+> presented in it. Ops ensures nothing escapes that inspection.**
+
+Canonical copy: `OPERATIONS.md` §7, Doctrine 15. Wired to
+`provenance/asset-table.json`'s `verdict` field — **unset by default, never
+written by Ops**. `npm run assets:checklist -- --room <slug>` prints the
+inspection; `npm run assets:gate -- --room <slug>` exits 1 while anything
+presented lacks a `pass`.
+
+**It is NOT a packet gate and must not become one.** lint, build and
+`provenance:gate` check things Ops can fix; this one checks whether MIKE HAS
+LOOKED, and wiring it into the packet would block every commit on an inspection
+nobody has asked for — the opposite of Mike's own condition, that he must not
+have to perfect assets in advance. **What it cannot do:** it records that a
+verdict was given, not that the inspection was careful; and `assets.json` is
+keyed on the PATH, so an approved picture can be swapped under its own verdict.
+
+## SEALED 2026-08-04 — THE REGISTER ROUND (v49; A1–A10. PUSH + DEPLOY ARE MIKE'S)
+
+Autonomous single-agent Code-lane round on Mike's remote-control brief. Full
+round log: `docs/MUSEUM_REGISTER_LOG-20260804.md`. **The round's deliverable is
+`docs/OPEN_ACTIONS.md`** — 60 rows across both repos, and a nine-item short list
+of what is waiting on Mike alone.
+
+- **A1 — THE REGISTER EXISTS AND IT IS DOCTRINE.** Harvested from both STATE
+  files, five round logs' carry-forward sections, the two standing question
+  docs, the visual-hook audit and a count of `[PAPA]` markers in `src/`.
+  **Deliberately NOT harvested: the ~130 historical run reports in `docs/`** —
+  their open items were closed or already carried into STATE, and sweeping them
+  would fill the register with rows nobody can date.
+- **A2 — THE TITLE BAR STAYS PUT, IN EVERY WING.** Mike reported it and it had
+  survived. **Measured before the fix**, `/robots` at 1706×810, scrollY 500: the
+  album band's top at **−132px**, bottom at **−92px** — entirely out of the
+  building. It had been pinned on `/wal` and ONLY there, because M-e made
+  `position:sticky` a property of `.ex-banner-console` — the class that holds
+  the TRANSPORT — and `worth-a-listen.js` is the one config declaring one. The
+  stickiness was never about the transport. Five declarations move onto
+  `.ex-album-banner`; F2's apron and P1's `pointer-events:none` travel with
+  them. **AND IT EXPOSED A SECOND DEFECT IT WOULD HAVE CAUSED:** the flat wing's
+  sticky contents column sits at `top:64px` and the band now occupies 52–91.6,
+  so 27.6px of the tracklist would have printed underneath it. Both offsets now
+  derive from one declared `--ex-band-bottom`, so the type scale and the
+  clearance cannot disagree again.
+- **A3/A4 — THE PLATES IS THE MORGUE, AND THE ARCHIVE STACKS IN SPREADS.** Both
+  names are on the glass (title THE MORGUE, subtitle IMAGE ARCHIVE) **so Mike
+  chooses by looking**; the individual photographs are still called plates,
+  because a morgue is the room and four other faces talk about plates by name.
+  `ArchiveWall` sorts spreads by record number **descending**, and **not one
+  spread carries a number** — the museum holds none and Doctrine 12 forbids
+  inventing one — so the order falls to the authored newest-first and the gap is
+  a register row. The MGK-VIII wall splits into MARCH 2021 (5) over FEBRUARY
+  2013 (3), headings read off the tiles' own declared dates. **The VIIIp wall
+  takes no spreads and that is the rule working, not an exception**: nine plates,
+  one sitting, no dates — nothing to stack them by. The lightbox still walks the
+  whole archive: opening the second spread's first plate reads *Frame 6 of 8*.
+  **The siblings are named and not built** — a video archive and an audio archive,
+  the same component with different data, neither with any content today.
+- **A5/A7 — THE ASSET TABLE, 251 ROWS ACROSS BOTH REPOS**, scanned by
+  `tools/asset-table.mjs`, with what each is · what depends on it · an Ops
+  quality read · **Mike's verdict, unset by default**. The scan rewrites only
+  measured fields and a file that leaves the disk keeps its row, because a
+  verdict is a record and not a cache. **Every shipped image was LOOKED AT: 30
+  usable · 5 weak · 1 placeholder · 5 wrong.** The six audio files are marked
+  *not listened to* rather than graded.
+- **WHAT LOOKING FOUND, and no string sweep or origin declaration could have.**
+  **Three of the nine MGK-VIIIp "plates" do not show what their captions say** —
+  `MGK-TWIN_MONITOR_SCREEN_BEZEL.png` (*"The bezel around the glass"*) is a CRT
+  frame graphic with a blank white screen area; `monitor_base.png` (*"The base it
+  stands on"*) is the family-shot composite dropped inside that frame;
+  `unit_new_base.png` (*"The unit on its new base"*) is the same pair on white
+  with both screens masked out. **Two are compositing assets on a wall whose
+  tombstone says "Nine, all held by this museum."** Plus: `front_screen.png` is
+  mirror-reversed **as a whole photograph**, not just its screen (the lettering
+  behind the unit reads backwards too — so R2's fix is one horizontal flip);
+  the WAL portrait of Hunter Root is **a selfie taken in a vehicle** as well as
+  wearing another band's name; `WeirdBaby_PhotoID_backup.png` is a **truncated
+  PNG** at a public URL; `jesse-welles-plate.jpg` is **a WebP named `.jpg`** and
+  it ships; `vol1_cover_v0.png` is a JPEG; and 2.5 MB in `public/` is referenced
+  by nothing. **Nothing was fixed** — Doctrine 12, and A7 said the table is the
+  deliverable.
+- **A6 — THE RECORD APPROVAL GATE**, recorded above and wired to the verdict
+  field. Deliberately NOT a packet gate; the reasoning is in Doctrine 15.
+- **A8 — THE MGK-VIIIp COVER IS THE MACHINE AND NOTHING ELSE.** Cropped to the
+  unit's measured bounding box, 1536×1536, written 8-bit grey (lossless — every
+  channel was already identical), 2.69 MB → 1.40 MB. **It also fixed something
+  nobody had noticed:** `.cf-album` is a square box with `object-fit:cover`, so
+  the 3:4 file had been centre-cropped by the renderer and the deck had never
+  shown this machine's top or its base. **THE STRAIGHTEN IS REFUSED, WITH
+  NUMBERS:** the MGK-VIII cover's own aperture measures −1.75° on its top edge
+  and +2.48° on its bottom, 0.13° off plumb left and 1.52° right; the grille bars
+  measure −2.69° to +5.40° for the same bars at different heights. **That is
+  keystone, not tilt** — any single rotation levels one edge and tilts three,
+  and the one it would fix is the rail nobody looks at while tilting the LED row
+  that is currently level to 0.17°. It needs a photograph. The discography's
+  common theme and its two templates are written into `robots.js`.
+- **A9/A10 — the five standing rulings are rows M1–M5** rather than a second
+  document to lose, and **the `RESTATED` class stays**, recorded as an Ops ruling
+  under Doctrine 13: it has teeth (its reference must resolve and may not
+  self-reference — the exact shape the false "436 records" line would have taken)
+  and it rejected twelve rows on its first run, including its author's.
+- **One orientation defect fixed on the way past:** `CLAUDE.md` published the
+  lint baseline as **4 errors / 6 warnings** where the live baseline has been
+  **11 / 9** since at least v40. A doc that misstates the tripwire disables it —
+  a session trusting it reads eleven pre-existing errors as seven new ones.
+- **Gates:** lint **11 err / 9 warn = HEAD baseline, zero new**; build green
+  **70 modules**; **provenance gate PASS** (7 new rows declared — the gate caught
+  all nine new strings first, as designed); desktop 1400×900 and a genuine
+  **390×740** lap, zero page-level horizontal scroll, zero console errors.
+- **Named honestly:** the quality pass is **Ops looking at contact sheets at
+  400px/tile with every flagged file re-opened at full resolution.** It is a read
+  of the FILE, never of the idea, and it is not Mike's verdict — 44 shipped
+  assets still carry none.
+
 ## SEALED 2026-08-04 — MECHANIZE PROVENANCE (v48; P1–P4. PUSH + DEPLOY ARE MIKE'S)
 
 Autonomous single-agent Code-lane round on Mike's remote-control brief. Full

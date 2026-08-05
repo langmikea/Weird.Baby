@@ -7,7 +7,7 @@ tree, the live working tree wins — always.
 
 **Read this file FIRST in every session, before STATE.md, before any handoff.**
 
-**Last verified against live tree:** 2026-08-04 (v48 MECHANIZE PROVENANCE — Doctrine gained #13 EVERY VISIBLE STRING CARRIES ITS ORIGIN; `npm run provenance:gate` joins lint and build on every packet; 2,528 strings and 33 images classified)
+**Last verified against live tree:** 2026-08-04 (v49 THE REGISTER ROUND — Doctrine gained #14 THE OPEN-ACTION REGISTER IS MAINTAINED BY EVERY ROUND and #15 THE RECORD APPROVAL GATE; `docs/OPEN_ACTIONS.md` is now the one place open items live; `provenance/asset-table.json` holds all 251 media files in both repos with Mike's verdict field)
 
 ---
 
@@ -104,6 +104,9 @@ The HR exhibit page is **two stacked components**. Mount chain:
 | Mothballed Kaleidoscope (never mounted) | `HrExhibitFlow.jsx` :812/:852/:868/:947 + `.hr-kal-*` CSS |
 | **The Record's long-form ENTRY** (headline / dateline / lead / sections with inline door icons / tombstone) | `src/routes/exhibit/RecordEntry.jsx` + the `[RC]` block at the end of `Exhibit.css`. **Mounted from `Exhibit.jsx`'s opened-record branch, and the switch is the DATA: an entry declaring `sections` renders it, an entry that does not renders exactly what it rendered before.** The index, open/close, `wire`/`plates`/`docs` payloads and the ‹ NEWER / OLDER › walk stay in `Exhibit.jsx`. Dateline arithmetic (`entryWeekday`/`entryWeek`/`entryDateline`) is in `src/lib/record-model.js`; `Week n` needs a `recordEpoch` on the face and a `date` on the entry, and **as of v47 the Record declares NEITHER** — Mike ruled the dates invented, so the dateline prints `Record 013` alone and the model's undated path is the live path, not a fallback. **The Record holds exactly ONE entry** (v47/H2): the other ten were fiction and were deleted, and the face has no `blurb`, `still`, `stillCaption`, `lines` or `footer` — it is a heading and its entries, by ruling. Open gaps are questions for Mike in `docs/RECORD_013_QUESTIONS-20260804.md`, never filled in the data (Doctrine 12). **Three near-identical class prefixes live in `Exhibit.css` and mean different objects: `.vp-record-*` is an artist's chart/awards BOARD, `.vp-rec-*` is The Record, `.vp-rec-door` is a door inside a record entry.** |
 | **Provenance boundary + gate** (Doctrine 13) | `tools/provenance-sweep.mjs`; declarations in `provenance/register.json` (strings) and `provenance/assets.json` (images). `npm run provenance` reports, `npm run provenance:gate` exits 1. `provenance/README.md` is the model AND the honest hole-list. `provenance/backfill-20260804.mjs` is the audit record of the first classification and **must not be re-run** — its rules would silently absorb new content. |
+| **The open-action register** (Doctrine 14) | `docs/OPEN_ACTIONS.md` — every open item in both repos, one place, updated by every round in the commit it seals. |
+| **The asset table + approval gate** (Doctrine 15) | `tools/asset-table.mjs` → `provenance/asset-table.json`. 251 media files across the museum and robots repos with what each is, what depends on it, an Ops quality read and **Mike's verdict, unset by default**. `npm run assets` / `assets:scan` / `assets:checklist` / `assets:gate`. The scan rewrites only measured fields and **never** touches `what` / `quality` / `qualityNote` / `verdict`. NOT a packet gate — see Doctrine 15. |
+| **The archive (THE MORGUE)** | `ArchiveWall` + `archiveSpreads` in `Exhibit.jsx` (module scope, just below `FaceFlow`); `.vp-spread-head` in `Exhibit.css` beside `.vp-collage`. A face declaring `spreads:[{head,no,tiles}]` stacks in headed albums sorted by record number descending; a face declaring only `collage` emits the DOM it always did. Both walls are in `robots.js` (`mgk-viii` and `mgk-viiip`, track id `plates`). |
 | Exhibit data export | `src/data/exhibits/hunter_root.json` via `npm run export-artifacts` |
 | Spine adapter (stable ids) | `src/data/artists/hunter-root-spine.js` |
 | Taxonomy v1 canon (June 9) | `docs/taxonomy/` — TAXONOMY_v1, NORMALIZATION_MAP, COVERAGE_PROOF, RETAG_PLAN |
@@ -281,6 +284,65 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
     `provenance/README.md` §4. Round log:
     `docs/MUSEUM_PROVENANCE_LOG-20260804.md`.
 
+    **OPS RULING, 2026-08-04 (A10): THE `RESTATED` CLASS STAYS.** Mike's four
+    classes are ORIGINS; 282 rows are Ops connective prose that originates
+    nothing, and calling those MIKE would be false while calling them INVENTION
+    would bury the three real findings under 282 non-findings. **It is kept
+    because it has teeth, not because it is convenient:** a `RESTATED` row's `r`
+    must RESOLVE, and it may not point at its own file — which is exactly the
+    shape *"436 records, kept since January 2024"* would have taken, the failure
+    the whole boundary was built against. It caught its own author on the day it
+    was written: twelve rows citing `InfoBooth.jsx` as the thing `InfoBooth.jsx`
+    restates were rejected. A class that rejects its author's own rows on the
+    first run is doing work.
+
+14. **THE OPEN-ACTION REGISTER IS MAINTAINED BY EVERY ROUND (Mike,
+    2026-08-04 — STANDING).**
+
+    **`docs/OPEN_ACTIONS.md` is the ONE place Mike looks for what is open**, and
+    every round updates it in the commit it seals. A round that closes an item
+    flips its status; a round that exposes one adds a row. Rows carry: what it
+    is in one line · where it came from · status (OPEN / IN PROGRESS /
+    RULED-AWAITING-BUILD / DONE) · owner (Mike / Ops / Code) · the date raised.
+
+    **The failure it exists to end:** findings were being reported honestly and
+    then buried. Every round since v40 has written a *"what this exposes"* or
+    *"carry-forward"* section, faithfully, into a round log nobody re-opens —
+    and the operator's own words for the state of it were *"Mike has no way to
+    see what is already reported."* Reporting is not the same as recording. The
+    round log stays the narrative; **the register is the ledger.**
+
+    It is not a priority order and it does not say what to do next. Everything
+    in it is open; sequencing is Mike's.
+
+15. **THE RECORD APPROVAL GATE (Mike, 2026-08-04 — STANDING).**
+
+    **Final sign-off on a Record is Mike personally inspecting EVERY thing
+    presented in it. Ops ensures nothing escapes that inspection.**
+
+    Wired to `provenance/asset-table.json`'s `verdict` field, which is **unset
+    by default and is never written by Ops**:
+
+    - `npm run assets:checklist -- --room <slug>` prints the inspection — every
+      presented asset, what it is, its dimensions, Ops' quality read, and which
+      file shows it.
+    - `npm run assets:gate -- --room <slug>` exits 1 while any presented asset
+      lacks a `pass`. A scope that matches nothing also fails, because a gate
+      that matched nothing has not passed.
+
+    **IT IS NOT A PACKET GATE AND MUST NOT BECOME ONE.** lint, build and
+    `provenance:gate` run on every commit because they check things Ops can fix.
+    This one checks whether MIKE HAS LOOKED, and putting it in the packet would
+    block every commit on an inspection nobody has been asked for — the exact
+    opposite of Mike's own condition, that **he must not have to perfect assets
+    in advance.** Slots move, things change, some assets are never needed. The
+    gate is run against one Record when that Record is being signed off.
+
+    **What it cannot do:** it records that a verdict was given, not that the
+    inspection was careful. And `provenance/assets.json` is keyed on the PATH,
+    so an approved picture can be replaced under its own verdict and nothing
+    fails. Both holes are stated in `provenance/README.md` §4.
+
 ## 8. Known hazards (environment quirks)
 
 - **Cowork FUSE/sync truncation.** The sandbox has truncated files on
@@ -310,10 +372,14 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 
 ## 9. Session-close ritual
 
-0. **Gates, in this order:** `npm run lint` (baseline, zero new) → `npm run
-   build` (green) → **`npm run provenance:gate` (exit 0)** → the lap. A packet
-   that added visitor-facing content adds its register rows in the same commit.
+0. **Gates, in this order:** `npm run lint` (baseline **11 errors / 9
+   warnings**, zero new) → `npm run build` (green) → **`npm run
+   provenance:gate` (exit 0)** → the lap. A packet that added visitor-facing
+   content adds its register rows in the same commit; a packet that added or
+   changed a media file re-runs `npm run assets:scan` in the same commit.
 1. Commit + push everything durable (explicit paths).
+1a. **Update `docs/OPEN_ACTIONS.md`** (Doctrine 14) — statuses flipped for what
+   closed, rows added for what this round exposed. Same commit.
 2. If facts in THIS FILE or STATE.md changed (file map, hazards,
    protocols, closed decisions) — update them in the same session, same
    commit discipline. An orientation doc more than a few days behind

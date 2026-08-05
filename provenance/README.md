@@ -133,6 +133,26 @@ holes, stated plainly.
    a picture; nothing automates it, and a NEW image will fail the gate until
    somebody looks at it and says.
 
+   **AND `assets.json` IS KEYED ON THE PATH, NOT ON THE BYTES** — so a picture
+   can be replaced under a declaration that no longer describes it and nothing
+   fails. The register does the opposite for strings (edit one and its own
+   declaration stops covering it); the asset side does not, and it should not be
+   described as if it did.
+
+   **2b. It says nothing about whether a picture is any good, or shows what its
+   caption says.** That is `provenance/asset-table.json` (A5/A7, 2026-08-04):
+   every image, video and audio file in BOTH repos — referenced or not — with
+   what it is, what depends on it, an Ops quality read, and **Mike's verdict,
+   unset by default**. It is a separate file on purpose: `assets.json` is
+   hand-curated origin, the table is a scan plus judgements, and folding them
+   would put a scanner's output into a file whose value is that a human wrote
+   every row. `ref` is the join key.
+
+   The first pass of that table found things no string sweep and no origin
+   declaration could: a **truncated PNG** in `public/`, a WebP named `.jpg` on
+   the glass, and **three plates whose captions describe an object that is not
+   in the picture**. `npm run assets`.
+
 3. **It cannot detect a sourced number going stale.** *"78 songs on file in the
    museum's own vault"* is a count over MediaVault, correctly cited, and nothing
    here notices the day it stops being 78.

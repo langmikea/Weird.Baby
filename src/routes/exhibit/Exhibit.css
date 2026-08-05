@@ -246,7 +246,12 @@ body:has(.vp-face) .vp-area::before{display:none}
 .vp-flat > .vp-face-entries,
 .vp-flat > .vp-rec-index,
 .vp-flat > .vp-rec-body,
+.vp-flat > .vp-spread-head,
 .vp-flat > .vp-trail{margin-top:var(--rh-sect)}
+/* [A3/A4] A SPREAD IS ONE OBJECT — its heading and its wall are not two
+   sections with a section's distance between them. The heading opens the
+   spread at the section step above; the wall closes up under its own label. */
+.vp-flat > .vp-spread-head + .vp-collage{margin-top:var(--rh-tight)}
 /* SIDEBOXES ARE KIN TO EACH OTHER and a section as a GROUP: the first one
    opens the section, the rest of the run closes up beside it. */
 .vp-flat > :not(.vp-box) + .vp-box{margin-top:var(--rh-sect)}
@@ -877,8 +882,38 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    of it was padding, and it is the band a visitor crosses on every single
    track change. The title's own line-height is the floor; the padding is now
    the smallest gap that still reads as a band rather than as a collision. */
-.ex-album-banner{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:8px 32px 7px;border-top:1px solid var(--wb-border)}
-.ex-album-banner-title{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1rem,1.8vw,1.35rem);letter-spacing:.1em;text-transform:uppercase;color:var(--wb-gold);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* [A2 2026-08-04] THE BAND STAYS PUT, IN EVERY WING.
+   MIKE, reported and unfixed until now: "the tracklist/viewer title bar
+   scrolls off the top."
+   MEASURED before the fix, `/robots` at 1706x810, scrollY 500: the band's top
+   is at **-132px** and its bottom at **-92px** — the album's name is entirely
+   out of the building, and `/hr`'s document is 4208px tall so it leaves even
+   sooner. It was already pinned on `/wal` and ONLY there, because M-e made
+   `position:sticky` a property of `.ex-banner-console` — the class that exists
+   to hold the TRANSPORT — and `worth-a-listen.js` is the one config declaring
+   `transport:"banner"`. The stickiness was never about the transport: M-e's own
+   note says a control you have to go and find is the complaint, and a title you
+   have to go and find is the same complaint about the same band. So the pin
+   moves onto the band itself and the console keeps only the transport's layout.
+   THE HEIGHT IS NOW A DECLARED NUMBER, because two other rules need it and
+   hand-copying it is how a mirror drifts. `--ex-banner-type` is the title's
+   type scale, used BY the title rule, so the height below cannot disagree with
+   the type: border-top 1px + padding 8+7 + one line box at 1.1. Verified
+   against the live measurement — 17 + 1.1x21.6 = 39.76 against a measured
+   39.65 at 1706px wide.
+   THE RULE UNDER IT IS NEW AND DELIBERATE. A band that floats over moving text
+   with no edge lets the next paragraph slide up and touch the album's name;
+   `.ex-banner-console` has carried exactly this border since M-e for exactly
+   this reason. */
+.ex-root{--ex-banner-type:clamp(1rem,1.8vw,1.35rem);
+  --ex-banner-h:calc(17px + 1.1 * var(--ex-banner-type));
+  /* where the pinned furniture ends: the fixed `.wb-bar`'s clearance plus the
+     band. Every offset that has to clear both is derived from this one. */
+  --ex-band-bottom:calc(52px + var(--ex-banner-h))}
+.ex-album-banner{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:8px 32px 7px;border-top:1px solid var(--wb-border);
+  position:sticky;top:52px;z-index:80;
+  background:var(--wb-bg);border-bottom:1px solid var(--wb-border)}
+.ex-album-banner-title{font-family:'Syne',sans-serif;font-weight:700;font-size:var(--ex-banner-type);letter-spacing:.1em;text-transform:uppercase;color:var(--wb-gold);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ex-album-banner-aux{flex:1;min-height:1px}
 /* [M4 2026-08-01] THE NAME IS MGK-VIIIp, AND THE FINAL p IS LOWERCASE.
    `text-transform:uppercase` was rewriting it to MGK-VIIIP everywhere the
@@ -1647,8 +1682,10 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    you have to go and find, which is the complaint. It rides under the fixed
    `.wb-bar` (the shared title bar; was `.ex-nav` before R2 merged the three
    copies), so the two never overlap. */
-.ex-banner-console{position:sticky;top:52px;z-index:80;
-  background:var(--wb-bg);border-bottom:1px solid var(--wb-border)}
+/* [A2 2026-08-04] the five declarations that used to live here — sticky, top,
+   z-index, background, border-bottom — are now on `.ex-album-banner` itself,
+   where every wing gets them. This class is the TRANSPORT's, and what is left
+   below is the transport's layout and nothing else. */
 /* [F2 2026-08-02] THE APRON — the bleed-through, diagnosed and closed.
    MEASURED: the fixed nav is 45px tall on this build (its height is content
    + padding, so it moves with fonts), while the console sticks at a
@@ -1672,7 +1709,11 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    hit-testable, and nothing under it is. `pointer-events:none` keeps the seal
    exactly as F2 built it and gives the handle back — the fix is one property
    because the defect was one property. */
-.ex-banner-console::before{content:"";position:absolute;left:0;right:0;
+/* [A2 2026-08-04] the apron moves with the pin. F2's gap is a fact about the
+   fixed nav's font metrics against a hard-coded `top:52px`, so it opens under
+   EVERY wing's band the moment that band sticks — not only under the console's.
+   P1's `pointer-events:none` travels with it unchanged; the apron is paint. */
+.ex-album-banner::before{content:"";position:absolute;left:0;right:0;
   bottom:100%;height:16px;background:var(--wb-bg);pointer-events:none}
 .ex-banner-console .ex-album-banner-aux{flex:1;min-width:0;display:flex;
   align-items:center;justify-content:flex-end;gap:10px}
@@ -2262,16 +2303,22 @@ button.vp-bill-act:focus-visible .vp-bill-go{color:var(--wb-gold)}
    its own bottom. Bounded, it scrolls inside itself, and the head stays.
    54px is `.ex-root`'s own top padding, which is the clearance the fixed
    `.wb-bar` is given (MuseumBar.css says so in its header note); +10 is one
-   line of air so the first row does not touch the rule under the bar. */
+   line of air so the first row does not touch the rule under the bar.
+   [A2 2026-08-04] AND THE BAND IS NOW PINNED TOO, so 54px is no longer the
+   bottom of the fixed furniture. Measured on `/robots` with the band sticky
+   and this rule left alone: the band occupies 52-91.6 and this column stuck at
+   64 — **27.6px of the contents list printed underneath it**, the band being
+   z-index 80. `--ex-band-bottom` is the band's own arithmetic, so the two
+   cannot disagree the next time the type scale moves. */
 .ex-root[data-flat="1"] .ex-left{align-self:start;position:sticky;
-  top:calc(54px + 10px);
-  max-height:calc(100vh - 54px - 20px);overflow-y:auto}
+  top:calc(var(--ex-band-bottom) + 10px);
+  max-height:calc(100vh - var(--ex-band-bottom) - 20px);overflow-y:auto}
 /* the player bar is fixed over the foot of the window, so a sticky column that
    is allowed to run to 100vh runs UNDER it. Same arithmetic as `.ex-left`'s own
    `padding-bottom:76px` in the two-column frame, applied to the height instead
    of to the padding, because this column's height is now its own. */
 body:has(.pb) .ex-root[data-flat="1"] .ex-left{
-  max-height:calc(100vh - 54px - 20px - 76px)}
+  max-height:calc(100vh - var(--ex-band-bottom) - 20px - 76px)}
 /* A PHONE HAS NO SECOND COLUMN. 720px is the frame's own one-column threshold
    (`.ex-main-inner{grid-template-columns:1fr !important}`, and `.vr-dh` hides
    in the same block) — read off that rule rather than picked, so the two cannot
@@ -2772,6 +2819,21 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    bars off. */
 .vp-collage{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
   gap:20px 16px;padding:12px 6px 8px}
+/* [A3/A4 2026-08-04] THE SPREAD HEADING — the divider between one album of
+   plates and the next. It is a LABEL ON A SHELF, not a section title: the
+   archive's sections are its spreads and there may be a dozen of them, so this
+   sets at the caption strip's own register (Courier, tracked, the ramp's
+   floor) rather than at the face's heading weight, which would make an image
+   archive read as a dozen chapters. The rule under it is the shelf edge.
+   The record number, when one is known, sets on the right — an accession
+   number belongs at the end of the line a museum reads, not in front of the
+   thing it numbers. Today no spread carries one and nothing prints there. */
+.vp-spread-head{display:flex;align-items:baseline;justify-content:space-between;
+  gap:16px;padding:0 6px 6px;border-bottom:1px solid var(--wb-border)}
+.vp-spread-head-t{font-family:'Courier Prime',monospace;font-size:.72rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--wb-gold)}
+.vp-spread-no{font-family:'Courier Prime',monospace;font-size:.68rem;
+  letter-spacing:.12em;color:var(--wb-gold-mute);white-space:nowrap}
 .vp-collage-tile{position:relative;display:block;border:0;cursor:pointer;
   background:#f3efe6;padding:8px 8px 10px;
   transform:rotate(var(--tilt,0deg));

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback, useLayoutEffect, useMemo } from "react";
+import React, { Fragment, useState, useEffect, useRef, useCallback, useLayoutEffect, useMemo } from "react";
 import { makeFactCycler, splitFact } from "../../lib/fact-select.js";
 import { visitorProse, kept } from "../../lib/visitor-prose.js";
 import { useArrival } from "../../lib/use-arrival.js";
@@ -114,6 +114,16 @@ function scrubFace(face) {
       /* an entry whose title AND body were both the operator's is not an
          entry any more — it is a blank row, which is its own kind of leak. */
       .filter(en => kept(en.title) || kept(en.line));
+  }
+  /* [A3 2026-08-04] a spread's HEAD is printed on the shelf, so a marker
+     written into one would print exactly the way the Portal's five drum
+     refusals did (v46/C1). A spread whose head is entirely the operator's
+     keeps its tiles and loses its label — the wall is the content. */
+  if (Array.isArray(face.spreads)) {
+    out.spreads = face.spreads.map(s => {
+      const head = visitorProse(s.head);
+      return kept(head) ? { ...s, head } : { ...s, head: null };
+    });
   }
   if (Array.isArray(face.sideboxes)) {
     out.sideboxes = face.sideboxes
@@ -1704,6 +1714,90 @@ function StageChildren({ children, deps, footer }) {
 function FaceFlow({ flat, children, deps, footer }) {
   if (flat) return <div className="vp-flat">{children}</div>;
   return <StageChildren deps={deps} footer={footer}>{children}</StageChildren>;
+}
+
+/* ===========================================================================
+   [A3/A4 2026-08-04] THE ARCHIVE — W2's collage, stacked in SPREADS
+   ---------------------------------------------------------------------------
+   MIKE: "images stack in albums BY RECORD NUMBER; the LATEST SPREAD DISPLAYS
+   AT TOP (frictionless newest, everything older neatly stowed within reach)."
+
+   THIS IS NOT A SECOND RENDERER. It is W2's collage wall with one thing added
+   — the wall may arrive in more than one piece, each piece headed. A face that
+   declares no `spreads` is fed its `collage` as a single unheaded spread and
+   emits **the same DOM it emitted before**, which is the house's own rule for
+   every optional key on a face (F1's `img`, B9's `wire`/`plates`, L6's `docs`,
+   v45's `sections`).
+
+   THE ORDER IS THE RECORD NUMBER, DESCENDING, and it degrades honestly. A
+   spread declaring `no` sorts above one that does not, highest first; `sort` is
+   stable, so spreads with no number keep the order the file authored them in.
+   **Today not one spread carries a number** — the museum holds no record
+   number for any of these photographs and Ops does not get to invent one
+   (Doctrine 12) — so every spread falls to the authored order, which the data
+   file states is newest-first. The moment a number is known it is one field,
+   and the stack re-orders itself.
+
+   THE LIGHTBOX WALKS THE WHOLE ARCHIVE, NOT ONE SPREAD. B6's contract is that
+   a tile hands over the entire wall and its own index into it; `wall` below is
+   the spreads flattened IN DISPLAY ORDER, so opening the third plate of the
+   second spread and pressing ‹ › walks back into the first. The tilt reads the
+   same flat index, so the glued-up angles do not restart at each heading.
+   =========================================================================== */
+function archiveSpreads(face) {
+  const declared = Array.isArray(face?.spreads) && face.spreads.length
+    ? face.spreads
+    : (Array.isArray(face?.collage) && face.collage.length
+        ? [{ head: null, no: null, tiles: face.collage }]
+        : []);
+  const key = s => (typeof s.no === "number" ? s.no : -1);
+  let n = 0;
+  const spreads = [...declared].sort((a, b) => key(b) - key(a)).map(s => {
+    const tiles = Array.isArray(s.tiles) ? s.tiles : [];
+    const base = n;
+    n += tiles.length;
+    return { head: s.head ?? null, no: key(s) >= 0 ? s.no : null, tiles, base };
+  });
+  return { spreads, wall: spreads.flatMap(s => s.tiles) };
+}
+
+function ArchiveWall({ face, openLink }) {
+  const { spreads, wall } = archiveSpreads(face);
+  if (!wall.length) return null;
+  return spreads.map((sp, si) => (
+    <Fragment key={si}>
+      {sp.head && (
+        <div className="vp-spread-head">
+          <span className="vp-spread-head-t">{sp.head}</span>
+          {sp.no != null && (
+            <span className="vp-spread-no">
+              {`Record ${String(sp.no).padStart(3, "0")}`}
+            </span>
+          )}
+        </div>
+      )}
+      {/* [B5] `data-stage-full` — the wall takes the page. Unchanged. */}
+      <div className="vp-collage" data-stage-full="1">
+        {sp.tiles.map((c, ti) => {
+          const i = sp.base + ti;
+          return (
+            <button key={i} className="vp-collage-tile"
+              style={{ "--tilt": `${((i * 7) % 9) - 4}deg` }}
+              onClick={() => openLink(c.href,
+                { set: wall, index: i, setTitle: face.title })}>
+              {/* eager, not lazy: the wall IS the page's payoff and a wall
+                  that fills in as you watch reads as a broken wall. */}
+              <img src={c.img} alt="" />
+              <span className="vp-collage-cap">
+                {c.date && <span className="vp-collage-date">{c.date}</span>}
+                <span className="vp-collage-title">{c.label}</span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </Fragment>
+  ));
 }
 
 export default function Exhibit({ artist }) {
@@ -3739,32 +3833,15 @@ export default function Exhibit({ artist }) {
                             auto-fills five across and lands in two rows. The
                             flat wings (WAL) never enter the stage, so their
                             collage is untouched by this. */}
-                        {Array.isArray(face.collage) && face.collage.length > 0 && (
-                          <div className="vp-collage" data-stage-full="1">
-                            {face.collage.map((c, i) => (
-                              <button key={i} className="vp-collage-tile"
-                                style={{ "--tilt": `${((i * 7) % 9) - 4}deg` }}
-                                /* [B6] the tile hands over the WHOLE WALL and
-                                   which tile was tapped. A wing with a viewer
-                                   (robots) opens at that plate and pages
-                                   through the rest; a wing without one (WAL)
-                                   reads `href` and ignores the extras, which
-                                   is why nothing over there had to change. */
-                                onClick={() => openLink(c.href,
-                                  { set: face.collage, index: i, setTitle: face.title })}>
-                                {/* eager, not lazy: the collage IS the page's
-                                    payoff and a dozen poster frames are cheap;
-                                    a wall that fills in as you watch reads as
-                                    a broken wall. */}
-                                <img src={c.img} alt="" />
-                                <span className="vp-collage-cap">
-                                  {c.date && <span className="vp-collage-date">{c.date}</span>}
-                                  <span className="vp-collage-title">{c.label}</span>
-                                </span>
-                              </button>
-                            ))}
-                          </div>
-                        )}
+                        {/* [B6] the tile hands over the WHOLE WALL and which
+                            tile was tapped. A wing with a viewer (robots)
+                            opens at that plate and pages through the rest; a
+                            wing without one (WAL) reads `href` and ignores the
+                            extras, which is why nothing over there had to
+                            change. [A3/A4 2026-08-04] the wall may now arrive
+                            in headed spreads — see `ArchiveWall` above; a face
+                            declaring only `collage` emits the same DOM. */}
+                        <ArchiveWall face={face} openLink={openLink} />
                         {/* [B5] staged wings put this on the transport (above);
                             flat wings have no transport, so it stays here. */}
                         {face.footer && flatFaces && (
