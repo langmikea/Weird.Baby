@@ -15,8 +15,9 @@
 import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
-import { validate, manualPageRow, PROD, MANUAL_PAGES } from "../reveal/schema.mjs";
+import { validate, manualPageRow, PROD, MANUAL_PAGES, manualSourceState, MANUAL_SRC_DIR } from "../reveal/schema.mjs";
 import { entries as recordEntries, prose as recordProse } from "../reveal/record-entries.mjs";
+import { transferFaults, ASSIGN, EXEMPT, TRANSFERS, CLASSES } from "../reveal/transfers.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
@@ -260,6 +261,28 @@ function recordParityFaults() {
    rather than silently reducing the loop's coverage. */
 function vesselFaults() {
   const faults = [];
+
+  /* [T1 2026-08-05] THE SOURCE TREE IS CHECKED ONCE, BEFORE ANY SPECIMEN.
+     Without this the function threw on its first UNGUARDED specimen and
+     `reveal:check` reported a Node stack trace instead of a fault — which is
+     exactly what it did, unnoticed, from robots 4cd78ac (16:14) onward. A gate
+     that crashes is not a gate: it cannot tell you the one thing it exists to
+     tell you. With no renders to point at the specimens cannot run at all, so
+     this names the real fault once and stops. */
+  if (manualSourceState() === "no-source") {
+    faults.push(
+      `vessel: the manual's source renders are GONE — ${MANUAL_SRC_DIR} no longer\n` +
+      "    exists in the robots repo. The typewriter pass (robots 4cd78ac) retired all 24\n" +
+      "    renders and replaced them with a 61-page STRUCTURE ISSUE at\n" +
+      "    robots/mgk-viiip/manual/structure/pages. Museum v55 sealed at 13:38, before\n" +
+      "    that commit at 16:14, and wired the old path in — so this has failed since.\n" +
+      "    NOT AUTO-REPOINTED: page 7 of the 61 is not page 7 of the 24 (the structure\n" +
+      "    issue renumbers everything) and the museum's canon, on the glass, is a\n" +
+      "    24-PAGE manual. Reconciling 24 against 61 is Mike's ruling, not a path edit.\n" +
+      "    See docs/ASSET_TIMELINE.md §6 and docs/OPEN_ACTIONS.md T-A.");
+    return faults;
+  }
+
   const EXPECT = {
     needed: { build: "NOT_BUILT", state: "HELD", reachable: false },
     printed: { build: "NOT_BUILT", state: "HELD", reachable: false },
@@ -325,12 +348,69 @@ function vesselFaults() {
   return faults;
 }
 
+/* ═══ T1: THE TRANSFER RULE ACTUALLY REFUSES ═══════════════════════════════
+   The live ledger passes the transfer rule, and a rule that has only ever been
+   run against data that satisfies it has not been tested — that is the lesson
+   the manual-page vessel paid for above, applied to a second guard rather than
+   re-learned. Each of the four refusals is provoked with a synthetic row and
+   asserted to fire. Nothing is written; the specimens are thrown away.
+
+   THE SPECIMENS BORROW REAL IDS ON PURPOSE. Using a made-up id everywhere
+   would only ever test the "unplaced" branch; taking `phys.cases` (a real
+   PACKAGE row) and flipping its state to REVEALED is the failure this rule
+   exists to catch — somebody putting a photograph on the glass before the box
+   arrived. The expectations are literal strings, not values read back out of
+   transfers.mjs, so corrupting the table cannot corrupt the expectation. */
+function transferGuardFaults() {
+  const faults = [];
+  const one = (id, patch) => ({ ...ROWS.find(r => r.id === id), ...patch });
+  const fires = (what, rows, want) => {
+    const hit = transferFaults(rows).some(f => f.includes(want));
+    if (!hit) faults.push(`transfers: ${what} did not fault — that refusal is the point of it.`);
+  };
+
+  /* (a) every row is placed or exempted, in writing */
+  fires("a row with no class and no exemption",
+    [...ROWS, { ...ROWS[0], id: "zz.unplaced", state: "HELD" }],
+    "no transfer class and no exemption");
+
+  /* (b) nothing unarrived is on the glass — the load-bearing one */
+  fires("a PACKAGE row put on the glass",
+    [one("phys.cases", { state: "REVEALED" })],
+    "has no named arrival week");
+  fires("a TRANSMISSION row put on the glass",
+    [one("doc.ads", { state: "REVEALED" })],
+    "has no named arrival week");
+  fires("an EXEMPT row put on the glass",
+    [one("tool.reveal", { state: "REVEALED" })],
+    "exemption covers what is NOT shown");
+
+  /* (c) nothing is shown before it lands */
+  fires("a row revealed in a week before its material arrived",
+    [one("doc.manual", { when: -1 })],
+    "arrival is week 0");
+
+  /* the drift guards, which are what keep the table honest under a rename */
+  if (!transferFaults([]).some(f => f.includes("is assigned a transfer class and is not a ledger row")))
+    faults.push("transfers: an assignment naming a row that does not exist did not fault.");
+  if (!transferFaults([]).some(f => f.includes("is exempted and is not a ledger row")))
+    faults.push("transfers: an exemption naming a row that does not exist did not fault.");
+
+  /* and the live table really is exhaustive: no row falls through */
+  const unplaced = ROWS.filter(r => !ASSIGN.has(r.id) && !EXEMPT.has(r.id));
+  if (unplaced.length)
+    faults.push(`transfers: ${unplaced.length} row(s) fall through the table — ${unplaced.map(r => r.id).join(", ")}`);
+
+  return faults;
+}
+
 function check() {
   const faults = [
     ...validate(ROWS),
     ...recordProseFaults(),
     ...recordParityFaults(),
     ...vesselFaults(),
+    ...transferGuardFaults(),
   ];
 
   /* the join to the asset table, which is the whole reason C32 was fixed */

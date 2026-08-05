@@ -432,6 +432,81 @@ catches invented CONTENT, Doctrine 11 catches a line whose SUBJECT is the work.
 
 Maintained here. Newest first.
 
+### 2026-08-05 → THE ASSET TIMELINE (T1) — sealed
+- **A drafting-lane round that created NOTHING.** No asset, no row, no content,
+  no date, and nothing in `src/` — the museum's glass did not move, so there was
+  no lap and correctly none. All 152 ledger rows already existed; this round
+  assigned each one a TRANSFER CLASS, wrote every exemption out in full, and made
+  the rule checkable at build time and check time.
+- **MIKE'S INSIGHT IS THE FOUNDATION AND IT DOES THREE JOBS AT ONCE:** *the first
+  Record must produce the first images of NIAC and VIIIp so the site has images to
+  post — which means THOSE IMAGES ARRIVED IN THE EMAIL BLAST.* (1) It explains the
+  museum's existence: once the blast is the answer for the two plate archives it is
+  the answer for everything else on the glass, and **94 rows stop needing 94
+  explanations.** (2) It makes foreshadowing free — the blast carried MORE than was
+  published, so a later reveal of built material needs no new arrival. **Class 1 is
+  102 rows: 94 on the glass and 8 deliberately held back.** (3) It sets scope by
+  exclusion: anything NOT in the blast has to arrive some other way.
+- **THE FOUR CLASSES (Ops-designed, recorded in `reveal/transfers.mjs`):** BLAST
+  102 (pre-launch, week 0) · PACKAGE 9 (weeks 3–7, four Fridays, physical — they
+  earn their photographs) · UNLOCK 13 (in hand from week 0, could not be opened) ·
+  TRANSMISSION 6 (months 2–3, because they never stopped) · **22 exempt, in
+  writing, each with a reason.**
+- **THE RULE IS THREE CHECKS, IN `validate()` SO BOTH CALLERS RUN IT.** Every row
+  is placed or exempted in writing (a fall-through **fails the build**) · nothing
+  unarrived is on the glass (no named arrival week ⇒ may not be `REVEALED`, and
+  **an exempt row may not be either**, so exemption cannot become the way round) ·
+  nothing is shown before it lands. **All of them were broken on purpose:**
+  disabling the second makes the guard report two failures; dropping one real row
+  fails the build with `face.niac.plates: no transfer class and no exemption`.
+  `transferGuardFaults()` uses literal expectations, not values read back out of
+  the table it tests — the v55 vessel lesson applied rather than re-learned.
+- **THE ARC FIXES TWO ARRIVAL WEEKS AND NOT FOUR.** BLAST → week 0 (stated).
+  UNLOCK → week 0, **derived by necessity not guessed**: a thing already in hand is
+  in hand because the blast brought it. PACKAGE and TRANSMISSION carry **no week** —
+  weeks 3–7 is FIVE Fridays and Mike named FOUR packages, and which one goes empty
+  is not in the arc. `when` is still null on all 152 rows: the arc supplies
+  ARRIVALS, not REVEALS.
+- **BOTH KNOWN TENSIONS RESOLVED AS THE MODEL WORKING.** The MANUAL spans classes
+  1 and 2 — volume BLAST, pages PACKAGE — and **nobody ever had the whole manual in
+  one piece**, which is the no-single-copy fiction. The PORTAL is class 1 by
+  necessity, so **it arrived complete and mostly dead**: five drum positions and the
+  seeded dial are UNLOCK, engraved where a visitor reads them and inert. Six of the
+  eleven `shown: true` promises are these, and all six now say *we have it, it is
+  closed.*
+- **A LIVE BREAKAGE FOUND, HALF-FIXED, AND HANDED OVER (T-A).** `reveal:check` had
+  been **dead since 16:14 that day** — the robots typewriter pass (`4cd78ac`)
+  retired all 24 manual renders and museum v55 sealed at 13:38 with that path wired
+  in. It did not report a fault; it **died on a Node stack trace**, and nothing ran
+  it in between. Fixed: the check now tells *"this page is missing"* apart from
+  *"the whole source tree moved"* and names the latter once — **a gate that crashes
+  is not a gate.** REFUSED: the path was **not** repointed at the new 61-page
+  structure issue, because page 7 of the 61 is not page 7 of the 24. **The museum's
+  canon on the glass is a 24-page manual and the robots repo now builds 61** — a
+  ruling, not a path edit.
+- **§7 IS THE PART THAT MATTERS: the reckoning has six rows and five are the same
+  thing** (twin stubs reading DATA NOT LOADED, plus unbuilt ad plates). Nothing in
+  152 rows is *about* a reckoning, and the story arc's own Act I thrust — *who was
+  the previous owner* — **has no row at all.** The reveal `arc` field is set on
+  nine rows, exactly one is `understood`, and **all nine are BLAST**: every stage
+  the museum can express is carried by material that arrived before launch.
+- **Week 0 carries 115 of 152 rows (76%), and that is not a flaw to balance** — it
+  is what buys the back half its freedom. The real problem is the other end: nine
+  package rows over four Fridays, of which three may never be publishable
+  (`phys.nickels` is the SEALED gap, Time needs a rights check, the original manuals
+  are a `[PAPA]`). **Week 0 oversupplied, weeks 3–7 thin, weeks 9–12 nearly empty.**
+- **DOCTRINE 12 AND THE ROBOTS REPO'S DRAFTING LAW ARE FLAGGED, NOT MERGED (T-E).**
+  One governs FACTS site-wide, one governs VOICE in the machine's words, **neither
+  contains the other**, and a cross-repo round is governed by whichever file it
+  read. Ops recommends one cross-reference each rather than a merge, and **did not
+  make it.**
+- Gates: lint **11/9 = baseline**; build green; provenance **PASS** with zero
+  register movement (nothing in `src/` was touched); **`reveal:check` RED with ONE
+  fault, named above, pre-existing and cross-repo.** Ledger stays **152** — no row
+  added, no row removed.
+- Document Mike reads: `docs/ASSET_TIMELINE.md`. **Six questions in
+  `docs/OPEN_ACTIONS.md` T-A…T-F, none blocking.**
+
 ### 2026-08-05 → RECORD MACHINERY (v55; R1–R6) — sealed
 - **A drafting-lane round that touched NOTHING in `src/`.** No component, no
   stylesheet, no string, no route, no asset. Mike is about to produce the
@@ -508,67 +583,12 @@ Maintained here. Newest first.
 - Round log: `docs/MUSEUM_RECORD_MACHINERY_LOG-20260805.md`. **Two questions for
   Mike, neither blocking.**
 
-### 2026-08-05 → THE FOUNDATION COPY (v54; F1–F8) — sealed
-- **Mike answered `/foundation`'s questions himself.** Every round before this
-  built that room by DIGGING — charter, dictations, booth, robots repo — and
-  assembling answers from things he had said elsewhere. The instruction with the
-  answers governed everything: **land his phrasing; where he wrote an
-  INSTRUCTION rather than copy, honour it and MARK the gap, never fill it.**
-  **The round is almost entirely subtraction and marking.**
-- **Fourteen questions → twelve in the data → ELEVEN on the glass**, and that
-  last gap is new machinery worth knowing: **the billionaires answer is marked in
-  EVERY sentence, so `visitorProse` empties it and `kept` drops the whole
-  entry.** First answer in the building to take that path to the end — `[PAPA]`
-  had only ever eaten single sentences before. `FAQ.length` is no longer the
-  number a visitor sees. His three ideas (Illionaires · size of the pile · more
-  pie) are preserved verbatim; one Ops sentence (*"Why keep grabbing for
-  more?"*) was deliberately NOT carried into the pile he writes from. Placement
-  is open (M41); voice is M13.
-- **F2's two deletions, and only one was free.** *"So who is actually paying for
-  all this?"* cost nothing — the posture is signed under the invoice, and the
-  argument that it was worth landing twice is exactly what Doctrine 16 was
-  written against. *"Who pays you?"* **cost the page the charter's only list of
-  the four gifts of service** (design, code, shelf, legal work) and the only
-  sentence saying the job pays nothing. Named as a cost, M42. **The legal-work
-  clause inside it has now been removed (v41), restored (v42) and removed again
-  (v54) — do not re-run that argument.**
-- **F5: the rule shipped, the names did not.** His money rule (*spent promptly on
-  that cost, or it goes back; nothing pooled, no slush fund*) is the money
-  section's second law; his mechanism (*a cost carried by somebody other than the
-  keeper takes its own line, in the name of whoever carried it*) is one sentence
-  of invoice small print. **The two real households he supplied are in NO file in
-  this repository** — not `src/`, not the round log — pending consent (M38).
-  Precedent: CS 2026-08-04 took the operator's OWN name off the glass for less.
-- **F6: two doors, no addresses.** *"Can I donate?"* and *"Can I send you
-  something?"* (his titles) each carry `link: {text, reveal}` rendering a named
-  door + the register's `NOT BUILT` stamp and **no `<a>` element at all** — a
-  dead anchor is the dead control Doctrine 11's corollary forbids. State reads
-  `reveal/ledger.json`, so building the channel flips the stamp with no edit here.
-- **`a` may now be a STRING OR AN ARRAY of paragraphs** (Foundation only), because
-  his *"How do I get some of that?"* is two beats with the Pro-Tip on its own and
-  flattening it would edit his line breaks.
-- **F1's judgement call, flagged as one (M43):** *"Where does it actually go?"*
-  was answered *"the ledger, not prose"* — but that register is the INCOMING
-  side, so a bare pointer points at the wrong half. The charter's beneficiary
-  clause stayed as the pointer's destination; the rest went; the outgoing half is
-  declared NOT BUILT. The deleted grant-form argument is not lost — he re-supplied
-  it as the Pro-Tip.
-- **F7** the lobby board indents *Other Music Worth a Listen* — padding on the
-  LABEL, not the button, so the arrow column stays unbroken. **Measured: at a
-  373px content column (tighter than a real phone) the box is 256px against 240px
-  needed — 16px of slack.** A first draft of that comment asserted numbers written
-  before the measurement and wrong in both directions; the lap caught it.
-- Gates: lint **11/9 = baseline**; build green **72 modules**; provenance
-  **PASS** (UNDECLARED 0, INVENTION 0, stale 0 — 14 rows declared, 14 pruned; two
-  RESTATED rows resolve to a register KEY rather than a path); desktop + 373px
-  laps, zero horizontal scroll, zero console errors/warnings, zero `[PAPA]` leak.
-  **Lap ran on localhost, not `weird.baby`.**
-- Round log: `docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md`. **Seven questions for
-  Mike, none blocking.**
-
-### Older entries (2026-05-06 → 2026-08-04) — archived
+### Older entries (2026-05-06 → 2026-08-05) — archived
 Moved to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md`, verbatim, under this file's
-own ≈600-line rule. **2026-08-05 (v55):** v53 THE BOOTH EDIT + THE MISSING LAP,
+own ≈600-line rule. **2026-08-05 (T1):** v54 THE FOUNDATION COPY, moved whole to
+make room for this round — the file was at exactly 600 lines. What was live in it
+is not in the archive: its open questions are `docs/OPEN_ACTIONS.md` M38–M43 and
+its money rule is `/foundation`'s own copy. **2026-08-05 (v55):** v53 THE BOOTH EDIT + THE MISSING LAP,
 v52 THE REVEAL LEDGER and v51 M23 RULED + THE ALBUM ROUND — three at once,
 because the v55 entry is long and the file had reached 711. **What was in them
 that is still load-bearing is NOT in the archive**: v53's measured third-party

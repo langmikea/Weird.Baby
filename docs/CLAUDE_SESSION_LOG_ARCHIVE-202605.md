@@ -317,3 +317,63 @@ Moved verbatim from `CLAUDE.md` under that file's own ~600-line rule. Nothing wa
   21-pattern ban sweep over every rendered route + every album × track = zero
   hits; desktop + genuine 390px laps, zero horizontal scroll anywhere.
 - Round log: `docs/MUSEUM_CLEAN_SLATE_LOG-20260804.md`.
+
+---
+
+### 2026-08-05 → THE FOUNDATION COPY (v54; F1–F8) — sealed
+- **Mike answered `/foundation`'s questions himself.** Every round before this
+  built that room by DIGGING — charter, dictations, booth, robots repo — and
+  assembling answers from things he had said elsewhere. The instruction with the
+  answers governed everything: **land his phrasing; where he wrote an
+  INSTRUCTION rather than copy, honour it and MARK the gap, never fill it.**
+  **The round is almost entirely subtraction and marking.**
+- **Fourteen questions → twelve in the data → ELEVEN on the glass**, and that
+  last gap is new machinery worth knowing: **the billionaires answer is marked in
+  EVERY sentence, so `visitorProse` empties it and `kept` drops the whole
+  entry.** First answer in the building to take that path to the end — `[PAPA]`
+  had only ever eaten single sentences before. `FAQ.length` is no longer the
+  number a visitor sees. His three ideas (Illionaires · size of the pile · more
+  pie) are preserved verbatim; one Ops sentence (*"Why keep grabbing for
+  more?"*) was deliberately NOT carried into the pile he writes from. Placement
+  is open (M41); voice is M13.
+- **F2's two deletions, and only one was free.** *"So who is actually paying for
+  all this?"* cost nothing — the posture is signed under the invoice, and the
+  argument that it was worth landing twice is exactly what Doctrine 16 was
+  written against. *"Who pays you?"* **cost the page the charter's only list of
+  the four gifts of service** (design, code, shelf, legal work) and the only
+  sentence saying the job pays nothing. Named as a cost, M42. **The legal-work
+  clause inside it has now been removed (v41), restored (v42) and removed again
+  (v54) — do not re-run that argument.**
+- **F5: the rule shipped, the names did not.** His money rule (*spent promptly on
+  that cost, or it goes back; nothing pooled, no slush fund*) is the money
+  section's second law; his mechanism (*a cost carried by somebody other than the
+  keeper takes its own line, in the name of whoever carried it*) is one sentence
+  of invoice small print. **The two real households he supplied are in NO file in
+  this repository** — not `src/`, not the round log — pending consent (M38).
+  Precedent: CS 2026-08-04 took the operator's OWN name off the glass for less.
+- **F6: two doors, no addresses.** *"Can I donate?"* and *"Can I send you
+  something?"* (his titles) each carry `link: {text, reveal}` rendering a named
+  door + the register's `NOT BUILT` stamp and **no `<a>` element at all** — a
+  dead anchor is the dead control Doctrine 11's corollary forbids. State reads
+  `reveal/ledger.json`, so building the channel flips the stamp with no edit here.
+- **`a` may now be a STRING OR AN ARRAY of paragraphs** (Foundation only), because
+  his *"How do I get some of that?"* is two beats with the Pro-Tip on its own and
+  flattening it would edit his line breaks.
+- **F1's judgement call, flagged as one (M43):** *"Where does it actually go?"*
+  was answered *"the ledger, not prose"* — but that register is the INCOMING
+  side, so a bare pointer points at the wrong half. The charter's beneficiary
+  clause stayed as the pointer's destination; the rest went; the outgoing half is
+  declared NOT BUILT. The deleted grant-form argument is not lost — he re-supplied
+  it as the Pro-Tip.
+- **F7** the lobby board indents *Other Music Worth a Listen* — padding on the
+  LABEL, not the button, so the arrow column stays unbroken. **Measured: at a
+  373px content column (tighter than a real phone) the box is 256px against 240px
+  needed — 16px of slack.** A first draft of that comment asserted numbers written
+  before the measurement and wrong in both directions; the lap caught it.
+- Gates: lint **11/9 = baseline**; build green **72 modules**; provenance
+  **PASS** (UNDECLARED 0, INVENTION 0, stale 0 — 14 rows declared, 14 pruned; two
+  RESTATED rows resolve to a register KEY rather than a path); desktop + 373px
+  laps, zero horizontal scroll, zero console errors/warnings, zero `[PAPA]` leak.
+  **Lap ran on localhost, not `weird.baby`.**
+- Round log: `docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md`. **Seven questions for
+  Mike, none blocking.**

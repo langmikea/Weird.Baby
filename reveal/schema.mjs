@@ -17,6 +17,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
+import { transferFaults } from "./transfers.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
@@ -63,6 +64,30 @@ export function manualSourcePath(page) {
   return `${MANUAL_SRC}/page-${String(page).padStart(2, "0")}.png`;
 }
 
+/* [T1 2026-08-05] TWO DIFFERENT FAILURES WORE THE SAME MESSAGE, AND ONE OF
+   THEM HAPPENED. "Page 7 has no source render" is the vessel refusing to
+   invent a page — the guard doing its job. "The whole source tree is gone" is
+   the ROBOTS REPO having moved out from under this file, which is a repo-level
+   fault and not a page-level one. Told apart here, because on 2026-08-05 the
+   second one occurred and reported itself as the first, through a stack trace.
+
+   WHAT HAPPENED, recorded so nobody re-derives it: the robots repo's typewriter
+   pass (4cd78ac, 16:14) RETIRED all 24 renders under manual/pages and replaced
+   them with a 61-page structure issue under manual/structure/pages. Museum v55
+   sealed at 13:38, before that, wiring this path in. `reveal:check` had been
+   dying ever since and nothing ran it in between.
+
+   NOT REPOINTED, AND DELIBERATELY SO. Page 7 of the 61-page structure issue is
+   not page 7 of the 24-page manual — the structure issue renumbers everything —
+   so aiming this at the new render would make `doc.manual.page.07` quietly mean
+   a different leaf. The museum's canon is a 24-PAGE manual and it is on the
+   glass. Reconciling 24 against 61 is Mike's ruling, not a path edit. */
+export function manualSourceState() {
+  if (!fs.existsSync(ROBOTS)) return "no-robots";
+  return fs.existsSync(path.join(ROBOTS, MANUAL_SRC)) ? "ok" : "no-source";
+}
+export const MANUAL_SRC_DIR = MANUAL_SRC;
+
 /**
  * ONE PAGE OF THE MANUAL, as a ledger row. Returns the R() argument shape;
  * `ledger-declare.mjs` spreads it, and `reveal:check` builds specimens from it
@@ -88,7 +113,13 @@ export function manualPageRow(page, {
   if (!PROD.includes(prod))
     throw new Error(`manualPageRow: unknown production stage "${prod}" — one of ${PROD.join(" · ")}.`);
   const src = manualSourcePath(page);
-  if (fs.existsSync(ROBOTS) && !fs.existsSync(path.join(ROBOTS, src)))
+  const where = manualSourceState();
+  if (where === "no-source")
+    throw new Error(
+      `manualPageRow: the manual's source renders are gone — ${MANUAL_SRC} does not ` +
+      "exist in the robots repo. This is not a missing page, it is a moved tree; " +
+      "see manualSourceState() above before repointing anything.");
+  if (where === "ok" && !fs.existsSync(path.join(ROBOTS, src)))
     throw new Error(`manualPageRow: page ${page} has no source render at ${src}.`);
 
   const nn = String(page).padStart(2, "0");
@@ -177,5 +208,13 @@ export function validate(rows) {
         bad(r.id, `calledBy "${c}" names a Record entry that does not exist`);
     }
   }
+
+  /* [T1 2026-08-05] THE TRANSFER RULE — an asset may only be SHOWN after it
+     has been TRANSFERRED, and every asset belongs to exactly one class. It
+     lives in reveal/transfers.mjs and is called from here rather than beside
+     the check, so that both the declaration and `reveal:check` enforce it —
+     the one-validator doctrine this file exists for. */
+  faults.push(...transferFaults(rows));
+
   return faults;
 }

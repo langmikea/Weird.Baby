@@ -8,6 +8,7 @@ surfaces read the table."*
 ```
 reveal/ledger-declare.mjs   the authored source — EDIT THIS
 reveal/schema.mjs           the row vessels and THE ONE VALIDATOR
+reveal/transfers.mjs        THE FOUR TRANSFER CLASSES and how every row arrived
 reveal/record-entries.mjs   reads the Record's entries out of the Record
 reveal/ledger.json          the artifact pages read — GENERATED, never edited
 src/lib/reveal.js           the only thing in src/ that reads it
@@ -46,6 +47,8 @@ Most rows have no file at all.
 | `assets` | asset-table `uid`s. |
 | `prod` | the PRODUCTION arc — `needed` · `printed` · `photographed` · `placed`. The manual-page vessel's field and no other row's. |
 | `calledBy` | the `record.NNN` rows whose entries ask for this thing. |
+| `transfer` | [T1] which of the four transfers brought it into the house — `BLAST` · `PACKAGE` · `UNLOCK` · `TRANSMISSION`. `null` = exempted in writing. |
+| `transferWeek` | [T1] the week the material ARRIVED. `0` for BLAST and UNLOCK; `null` for PACKAGE and TRANSMISSION, whose weeks the arc does not name. |
 | `note` | what the fields above cannot hold. |
 
 ### `arc` and `prod` are not the same field and must never be merged
@@ -70,8 +73,41 @@ ledger answers is what is available to SPEND.
 
 ### `when` is null on every row and that is Doctrine 12
 
-Nobody has supplied a schedule. Nothing here invents one. The field exists so
-that the day Mike gives a date it is a field and not a rebuild.
+Nobody has supplied a REVEAL schedule. Nothing here invents one. The field
+exists so that the day Mike gives a date it is a field and not a rebuild.
+
+**[T1 2026-08-05] He has now supplied the ARRIVALS, which is a different
+field.** The arc — twelve weeks; month 1 the arrival, month 2 the turn, month 3
+the reckoning; four Fridays that carry packages — says how material got into the
+house, not what day a visitor gets it. That lives in `transfer` /
+`transferWeek`; `when` is still null on all 152 rows.
+
+### `transfer` — an asset may only be SHOWN after it has been TRANSFERRED
+
+The four classes, the assignment of all 152 rows, the written exemptions and the
+three checks are in **`reveal/transfers.mjs`**. The document Mike reads is
+**`docs/ASSET_TIMELINE.md`**.
+
+| | window | rows |
+|---|---|---|
+| **BLAST** | Friday→Sunday, pre-launch (week 0) | 102 |
+| **PACKAGE** | weeks 3–7, four Fridays | 9 |
+| **UNLOCK** | in hand from week 0, opened later | 13 |
+| **TRANSMISSION** | months 2–3 | 6 |
+| *exempt, in writing* | — | 22 |
+
+Three things enforce it, in `validate()` so both callers run it: **every row is
+placed or exempted in writing** (a fall-through fails the build); **nothing
+unarrived is on the glass** (a row with no named arrival week may not be
+`REVEALED`, and neither may an exempt row); **nothing is shown before it lands**.
+`transferGuardFaults()` in `tools/reveal-ledger.mjs` proves each refusal
+actually refuses.
+
+**The consequence worth holding: all 94 rows a visitor can reach today are
+BLAST**, because the blast is the only transfer that had happened when the doors
+opened. That is Mike's own insight — the first Record had to produce the first
+images of NIAC and VIIIp, so those images arrived in the blast, and that is
+cover for everything else the site already shows.
 
 ### `shown` is a judgement and cannot be derived
 

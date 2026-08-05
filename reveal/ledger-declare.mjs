@@ -88,6 +88,7 @@ import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
 import { validate, manualPageRow } from "./schema.mjs";
+import { applyTransfers, TRANSFERS } from "./transfers.mjs";
 import { entries as recordEntries, RECORD_SOURCE } from "./record-entries.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
@@ -604,7 +605,15 @@ R("channel.services", "Giving channel — a registry of services.", "commerce",
    THE VALIDATION IS `reveal/schema.mjs`'s, not this file's. Until R1 the rules
    lived in two places — five checked here as the file wrote, four checked by
    `reveal:check` afterwards, and the two lists were neither identical nor a
-   superset of each other. They are one function now and both callers run it. */
+   superset of each other. They are one function now and both callers run it.
+
+   [T1 2026-08-05] THE TRANSFER CLASS IS STAMPED ON HERE, NOT AUTHORED PER ROW.
+   `reveal/transfers.mjs` holds the four classes, the assignment and the written
+   exemptions in ONE PLACE, so the timeline can be READ as a timeline instead of
+   being reassembled out of 152 scattered fields. It runs BEFORE validation
+   because `validate()` enforces its rule, and AFTER the Record's derived rows
+   exist because they are subject to that rule like everything else. */
+applyTransfers(ROWS);
 const faults = validate(ROWS);
 if (faults.length) {
   console.error(`THE DECLARATION IS INVALID — ${faults.length} fault(s):`);
@@ -620,7 +629,9 @@ const out = {
   _: "THE REVEAL LEDGER. One row per revealable thing across both repos: what it is, where it lives, what is TRUE TODAY about the build, whether a visitor can reach it, whether it should be reachable yet, when the story lets it out, and what has to happen first. Authored in reveal/ledger-declare.mjs — edit there, never here.",
   _states: "state: HELD (built or part-built and deliberately not reachable) · REVEALED (a visitor can get to it today) · RETIRED (was here, struck, named so nobody rebuilds it). NOT the same axis as `build`.",
   _build: "build: LIVE · PARTIAL · STUB · NOT_BUILT — what is true today, never what is planned.",
-  _when: "when: the story day or week a row becomes available. NULL ON EVERY ROW, by Doctrine 12 — nobody has supplied a schedule and this file does not invent one.",
+  _when: "when: the story day or week a row becomes REVEALED. NULL ON EVERY ROW, by Doctrine 12 — Mike has supplied the arc (twelve weeks; month 1 the arrival, month 2 the turn, month 3 the reckoning) but no reveal dates, and this file does not invent them. NOT the same field as `transferWeek`: that is when the material ARRIVED, this is when a visitor gets it.",
+  _transfer: "transfer: [T1] WHICH OF THE FOUR TRANSFERS BROUGHT THE MATERIAL INTO THE HOUSE — BLAST (Friday–Sunday pre-launch; everything the site already shows, and deliberately more) · PACKAGE (weeks 3–7, physical, four Fridays; earns its photographs) · UNLOCK (in hand from the start, could not be opened; no arrival needed) · TRANSMISSION (months 2–3, because they never stopped). THE RULE: an asset may only be SHOWN after it has been TRANSFERRED, and every row belongs to exactly one class or is exempted IN WRITING with a reason. Null here means exempted, and an exempt row may not be REVEALED. Classes, assignment, exemptions and the three checks: reveal/transfers.mjs. The timeline Mike reads: docs/ASSET_TIMELINE.md.",
+  _transferWeek: "transferWeek: the week the material ARRIVED. 0 for BLAST (stated: pre-launch) and 0 for UNLOCK (derived by necessity — an unlock is of a thing already in hand, and it is in hand because the blast brought it). NULL for PACKAGE and TRANSMISSION, because the arc gives windows (weeks 3–7 on four Fridays; weeks 5–12) and names no week inside them — five weeks and four packages, and which one goes empty nobody has said. A null here means EXACTLY ONE THING: no named arrival, therefore not showable.",
   _arc: "arc: THE REVEAL ARC (Mike, 2026-08-04) — arrived · understood · partial · online · null. Same field, same values, as provenance/asset-table.json. `null` is UNSET and is not a stage.",
   _shown: "shown: true where a VISITOR CAN SEE THE LABEL of something that is not built — an engraved drum position that will not arm, a register row printed NOT BUILT, a document a face names and does not hold. It separates a PROMISE from a private gap. The twin's stub rows are NOT shown, because THE STUB LAW strips them from the menus.",
   _assets: "assets: asset-table `uid`s, resolved from public refs at build time. The uid survives a rename; the path does not — see C32.",
@@ -642,6 +653,12 @@ console.log(`${ROWS.length} rows`);
 console.log("  by state ", JSON.stringify(by("state")));
 console.log("  by build ", JSON.stringify(by("build")));
 console.log("  by class ", JSON.stringify(by("cls")));
+console.log("  by transfer", JSON.stringify(by("transfer")));
+for (const c of Object.keys(TRANSFERS)) {
+  const n = ROWS.filter(r => r.transfer === c).length;
+  console.log(`    ${TRANSFERS[c].n}. ${c.padEnd(12)} ${String(n).padStart(3)}  ${TRANSFERS[c].name}`);
+}
+console.log(`    exempt, in writing ${String(ROWS.filter(r => !r.transfer).length).padStart(3)}`);
 console.log(`  with a story date: ${ROWS.filter(r => r.when).length}`);
 console.log(`  with dependencies: ${ROWS.filter(r => r.deps.length).length}`);
 console.log(`  joined to assets : ${ROWS.filter(r => r.assets.length).length}`);

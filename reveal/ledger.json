@@ -2,7 +2,9 @@
  "_": "THE REVEAL LEDGER. One row per revealable thing across both repos: what it is, where it lives, what is TRUE TODAY about the build, whether a visitor can reach it, whether it should be reachable yet, when the story lets it out, and what has to happen first. Authored in reveal/ledger-declare.mjs — edit there, never here.",
  "_states": "state: HELD (built or part-built and deliberately not reachable) · REVEALED (a visitor can get to it today) · RETIRED (was here, struck, named so nobody rebuilds it). NOT the same axis as `build`.",
  "_build": "build: LIVE · PARTIAL · STUB · NOT_BUILT — what is true today, never what is planned.",
- "_when": "when: the story day or week a row becomes available. NULL ON EVERY ROW, by Doctrine 12 — nobody has supplied a schedule and this file does not invent one.",
+ "_when": "when: the story day or week a row becomes REVEALED. NULL ON EVERY ROW, by Doctrine 12 — Mike has supplied the arc (twelve weeks; month 1 the arrival, month 2 the turn, month 3 the reckoning) but no reveal dates, and this file does not invent them. NOT the same field as `transferWeek`: that is when the material ARRIVED, this is when a visitor gets it.",
+ "_transfer": "transfer: [T1] WHICH OF THE FOUR TRANSFERS BROUGHT THE MATERIAL INTO THE HOUSE — BLAST (Friday–Sunday pre-launch; everything the site already shows, and deliberately more) · PACKAGE (weeks 3–7, physical, four Fridays; earns its photographs) · UNLOCK (in hand from the start, could not be opened; no arrival needed) · TRANSMISSION (months 2–3, because they never stopped). THE RULE: an asset may only be SHOWN after it has been TRANSFERRED, and every row belongs to exactly one class or is exempted IN WRITING with a reason. Null here means exempted, and an exempt row may not be REVEALED. Classes, assignment, exemptions and the three checks: reveal/transfers.mjs. The timeline Mike reads: docs/ASSET_TIMELINE.md.",
+ "_transferWeek": "transferWeek: the week the material ARRIVED. 0 for BLAST (stated: pre-launch) and 0 for UNLOCK (derived by necessity — an unlock is of a thing already in hand, and it is in hand because the blast brought it). NULL for PACKAGE and TRANSMISSION, because the arc gives windows (weeks 3–7 on four Fridays; weeks 5–12) and names no week inside them — five weeks and four packages, and which one goes empty nobody has said. A null here means EXACTLY ONE THING: no named arrival, therefore not showable.",
  "_arc": "arc: THE REVEAL ARC (Mike, 2026-08-04) — arrived · understood · partial · online · null. Same field, same values, as provenance/asset-table.json. `null` is UNSET and is not a stage.",
  "_shown": "shown: true where a VISITOR CAN SEE THE LABEL of something that is not built — an engraved drum position that will not arm, a register row printed NOT BUILT, a document a face names and does not hold. It separates a PROMISE from a private gap. The twin's stub rows are NOT shown, because THE STUB LAW strips them from the menus.",
  "_assets": "assets: asset-table `uid`s, resolved from public refs at build time. The uid survives a rename; the path does not — see C32.",
@@ -29,7 +31,9 @@
    ],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "route.booth",
@@ -46,7 +50,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Carries no image by ruling — M23a, the Visual Hook Law's first recorded exception."
+   "note": "Carries no image by ruling — M23a, the Visual Hook Law's first recorded exception.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "route.foundation",
@@ -63,7 +69,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Its LIVE / NOT BUILT column is the first surface wired to this ledger — see reveal.channel.*."
+   "note": "Its LIVE / NOT BUILT column is the first surface wired to this ledger — see reveal.channel.*.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "route.shop",
@@ -82,7 +90,9 @@
    ],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "route.robots",
@@ -99,7 +109,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "route.wal",
@@ -116,7 +128,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "route.wb",
@@ -135,7 +149,9 @@
    ],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "route.hr",
@@ -152,7 +168,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "HELD PERMANENTLY BY RULING (ASSET_REVEAL_CHECKLIST §E): reachable, never listed. PARTIAL because the deck's journal tab is dead machinery (M17) and the page is one exhibit plus an unlinked discography."
+   "note": "HELD PERMANENTLY BY RULING (ASSET_REVEAL_CHECKLIST §E): reachable, never listed. PARTIAL because the deck's journal tab is dead machinery (M17) and the page is one exhibit plus an unlinked discography.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "route.hr.archive",
@@ -169,7 +187,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "route.admin",
@@ -188,7 +208,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Not linked from anywhere. The return-visitor signal is constrained by /booth's privacy answer."
+   "note": "Not linked from anywhere. The return-visitor signal is constrained by /booth's privacy answer.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "route.preset",
@@ -205,7 +227,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "route.catchall",
@@ -222,7 +246,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "route.money",
@@ -239,7 +265,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Both names have been live URLs. A third rename re-points this, it does not add another."
+   "note": "Both names have been live URLs. A third rename re-points this, it does not add another.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "face.wbr.about",
@@ -256,7 +284,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "face.wbr.faq",
@@ -273,7 +303,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Ships with no picture since the 31½ card was struck — M29."
+   "note": "Ships with no picture since the 31½ card was struck — M29.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "face.wbr.doc-control",
@@ -292,7 +324,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Three of its four rows describe things a visitor cannot reach — C31."
+   "note": "Three of its four rows describe things a visitor cannot reach — C31.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "face.wbr.contact",
@@ -309,7 +343,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "face.niac.name",
@@ -328,7 +364,9 @@
    ],
    "prod": null,
    "calledBy": [],
-   "note": "[Q3] The album took the first name on 2026-08-05; this face is where the two names are reconciled."
+   "note": "[Q3] The album took the first name on 2026-08-05; this face is where the two names are reconciled.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "face.niac.plates",
@@ -345,7 +383,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The newest spread is open paper; older spreads stow in a <details> that states its own count."
+   "note": "The newest spread is open paper; older spreads stow in a <details> that states its own count.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "face.niac.firmware",
@@ -364,7 +404,9 @@
    ],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "face.viiip.plates",
@@ -381,7 +423,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "M7: three of the nine do not show what their captions say. M25: the tombstone says 'before power' and one plate is captioned as the firmware running."
+   "note": "M7: three of the nine do not show what their captions say. M25: the tombstone says 'before power' and one plate is captioned as the firmware running.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "face.viiip.record",
@@ -401,7 +445,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Holds exactly ONE entry. The other ten were fiction and were deleted at v47. The container's pagination (C1), doors (C7) and epoch (C8) are built and unexercised."
+   "note": "Holds exactly ONE entry. The other ten were fiction and were deleted at v47. The container's pagination (C1), doors (C7) and epoch (C8) are built and unexercised.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "face.viiip.manual",
@@ -422,7 +468,9 @@
    ],
    "prod": null,
    "calledBy": [],
-   "note": "`plates: []`. Its one image is a render where B8's own ruling requires a photograph of the print — M4."
+   "note": "`plates: []`. Its one image is a render where B8's own ruling requires a photograph of the print — M4.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "face.viiip.firmware",
@@ -441,7 +489,9 @@
    ],
    "prod": null,
    "calledBy": [],
-   "note": "M2: that plate is mirror-reversed, and the whole photograph is flipped."
+   "note": "M2: that plate is mirror-reversed, and the whole photograph is flipped.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "face.viiip.portal",
@@ -458,7 +508,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The panel is the immersion's first step; the latch opens the twin."
+   "note": "The panel is the immersion's first step; the latch opens the twin.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "face.viiip.faq",
@@ -475,7 +527,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "portal.feed.standard",
@@ -492,7 +546,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "portal.feed.idling-updated",
@@ -511,7 +567,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1."
+   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1.",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
   },
   {
    "id": "portal.feed.boot-playback",
@@ -530,7 +588,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1."
+   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1.",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
   },
   {
    "id": "portal.feed.off-first-boot",
@@ -549,7 +609,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1."
+   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1.",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
   },
   {
    "id": "portal.feed.last-state",
@@ -568,7 +630,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1."
+   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1.",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
   },
   {
    "id": "portal.feed.test-bench",
@@ -587,7 +651,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1."
+   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1.",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
   },
   {
    "id": "portal.switch.maint",
@@ -604,7 +670,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "portal.switch.prompt",
@@ -621,7 +689,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "portal.dial.live",
@@ -638,7 +708,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "portal.dial.seeded",
@@ -657,7 +729,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.answers",
@@ -674,7 +748,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.polarity",
@@ -691,7 +767,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.clarity",
@@ -708,7 +786,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.messages",
@@ -727,7 +807,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Delivery is built; eleven rows carry WORDS PARKED. One row is a tombstone for a message Mike killed."
+   "note": "Delivery is built; eleven rows carry WORDS PARKED. One row is a tombstone for a message Mike killed.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.probabilities",
@@ -744,7 +826,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.detectors",
@@ -761,7 +845,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The Bullshit Detector is the only feature that makes the microphone real."
+   "note": "The Bullshit Detector is the only feature that makes the microphone real.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.advice.panel",
@@ -778,7 +864,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.advice.rest",
@@ -798,7 +886,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Stripped from the menu by THE STUB LAW — a row that leads to 'not built' is a promise, and the menu is not where promises are kept."
+   "note": "Stripped from the menu by THE STUB LAW — a row that leads to 'not built' is a promise, and the menu is not where promises are kept.",
+   "transfer": "TRANSMISSION",
+   "transferWeek": null
   },
   {
    "id": "twin.app.appp",
@@ -815,7 +905,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.radio",
@@ -832,7 +924,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.eliza",
@@ -849,7 +943,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.brain",
@@ -866,7 +962,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.ink",
@@ -883,7 +981,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.tap",
@@ -900,7 +1000,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.maint",
@@ -917,7 +1019,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.calc",
@@ -936,7 +1040,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.note",
@@ -953,7 +1059,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.fortune",
@@ -970,7 +1078,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.horoscope",
@@ -989,7 +1099,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.predictions.rest",
@@ -1008,7 +1120,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "TRANSMISSION",
+   "transferWeek": null
   },
   {
    "id": "twin.app.bs",
@@ -1025,7 +1139,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.voice",
@@ -1042,7 +1158,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The twin sets a slot; the firmware hardcodes 8 and per-engine voices override it (spec s3)."
+   "note": "The twin sets a slot; the firmware hardcodes 8 and per-engine voices override it (spec s3).",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.user.name",
@@ -1059,7 +1177,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "THE ABSENT-NAME LAW: with no name on file every user-reference surface says <NO USER NAME>."
+   "note": "THE ABSENT-NAME LAW: with no name on file every user-reference surface says <NO USER NAME>.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.app.user.security",
@@ -1078,7 +1198,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "READ/RUN passcodes ride all 175 menu rows and are checked nowhere."
+   "note": "READ/RUN passcodes ride all 175 menu rows and are checked nowhere.",
+   "transfer": "TRANSMISSION",
+   "transferWeek": null
   },
   {
    "id": "twin.app.codes",
@@ -1097,7 +1219,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The faux-assembly scroller Code Runner would surface already exists and runs in SYSTEM_MONITOR."
+   "note": "The faux-assembly scroller Code Runner would surface already exists and runs in SYSTEM_MONITOR.",
+   "transfer": "TRANSMISSION",
+   "transferWeek": null
   },
   {
    "id": "twin.app.mgkmodel",
@@ -1116,7 +1240,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "TRANSMISSION",
+   "transferWeek": null
   },
   {
    "id": "twin.game.tilt-drive",
@@ -1133,7 +1259,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.game.gobble",
@@ -1150,7 +1278,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.game.avoidsteroids",
@@ -1167,7 +1297,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.game.snowglobe",
@@ -1184,7 +1316,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Reads as a first cut — drift/settle, snow density and shake response all want work (robots R7)."
+   "note": "Reads as a first cut — drift/settle, snow density and shake response all want work (robots R7).",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.game.tictactoe",
@@ -1201,7 +1335,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.game.slots",
@@ -1218,7 +1354,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.game.craps",
@@ -1235,7 +1373,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.game.blackjack",
@@ -1252,7 +1392,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.game.roulette",
@@ -1269,7 +1411,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.game.mailrun",
@@ -1286,7 +1430,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.game.sniper",
@@ -1303,7 +1449,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.game.stopnum",
@@ -1320,7 +1468,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Its config page uses the old bracket-hint grammar rather than PanelG — the walk-seven gap stands."
+   "note": "Its config page uses the old bracket-hint grammar rather than PanelG — the walk-seven gap stands.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.games.unit",
@@ -1337,7 +1487,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "TWIN DELTA, marked in the dispatcher: the firmware has no handler, so clicking a game does nothing on the machine today."
+   "note": "TWIN DELTA, marked in the dispatcher: the firmware has no handler, so clicking a game does nothing on the machine today.",
+   "transfer": "PACKAGE",
+   "transferWeek": null
   },
   {
    "id": "twin.boot",
@@ -1354,7 +1506,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.monitor",
@@ -1371,7 +1525,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.parcels",
@@ -1388,7 +1544,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Discovery is already how this works."
+   "note": "Discovery is already how this works.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.userrecord",
@@ -1407,7 +1565,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "twin.scaffold",
@@ -1424,7 +1584,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Stub rows are stripped from the menus in the shipped walk, so a visitor never reaches this screen."
+   "note": "Stub rows are stripped from the menus in the shipped walk, so a visitor never reaches this screen.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "doc.manual",
@@ -1441,7 +1603,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "PDF plus 24 rasters from one source; 22 sections, 5 [ART REQUIRED] frames, 9 [PAPA] slots."
+   "note": "PDF plus 24 rasters from one source; 22 sections, 5 [ART REQUIRED] frames, 9 [PAPA] slots.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "doc.manual.plates",
@@ -1460,7 +1624,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "DOC CONTROL and The Manual's own face both name them. THE SET-LEVEL PROMISE LIVES HERE and nowhere else — the individual page rows below are not `shown`, because the museum makes one promise about plates and it is this one."
+   "note": "DOC CONTROL and The Manual's own face both name them. THE SET-LEVEL PROMISE LIVES HERE and nowhere else — the individual page rows below are not `shown`, because the museum makes one promise about plates and it is this one.",
+   "transfer": "PACKAGE",
+   "transferWeek": null
   },
   {
    "id": "doc.record",
@@ -1479,7 +1645,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The volume, not its entries — one `record.NNN` row per entry, derived from the data. PARTIAL because it holds one entry; the 436-record count that used to sit here was invented and is gone."
+   "note": "The volume, not its entries — one `record.NNN` row per entry, derived from the data. PARTIAL because it holds one entry; the 436-record count that used to sit here was invented and is gone.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "record.013",
@@ -1500,7 +1668,9 @@
    ],
    "prod": null,
    "calledBy": [],
-   "note": "The volume's only entry. Stripped at v47 to the four facts Mike supplied; every gap that exposed is a question in M18 rather than a sentence in the data."
+   "note": "The volume's only entry. Stripped at v47 to the four facts Mike supplied; every gap that exposed is a question in M18 rather than a sentence in the data.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "doc.record.evidence",
@@ -1519,7 +1689,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "PACKAGE",
+   "transferWeek": null
   },
   {
    "id": "doc.firmware",
@@ -1536,7 +1708,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Honestly v1: names and form only. No reading of the source is on file."
+   "note": "Honestly v1: names and form only. No reading of the source is on file.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "doc.ads",
@@ -1556,7 +1730,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "TRANSMISSION",
+   "transferWeek": null
   },
   {
    "id": "doc.factlist",
@@ -1575,7 +1751,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Its whole character is DISCOVERED."
+   "note": "Its whole character is DISCOVERED.",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
   },
   {
    "id": "doc.summary",
@@ -1594,7 +1772,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "doc.charter",
@@ -1613,7 +1793,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "doc.credo",
@@ -1632,7 +1814,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "phys.units",
@@ -1649,7 +1833,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "phys.niac.whole",
@@ -1668,7 +1854,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The museum holds none. Its own archive is titled DETAILS ONLY and its tombstone says the frame is withheld, which is why the album's cover wears a detail (M30)."
+   "note": "The museum holds none. Its own archive is titled DETAILS ONLY and its tombstone says the frame is withheld, which is why the album's cover wears a detail (M30).",
+   "transfer": "PACKAGE",
+   "transferWeek": null
   },
   {
    "id": "phys.cases",
@@ -1688,7 +1876,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "PACKAGE",
+   "transferWeek": null
   },
   {
    "id": "phys.nickels",
@@ -1707,7 +1897,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "MIKE: 'Maybe the nickels are hidden inside of the thing so they're not even photographed.' The four reveal classes do not cover this — a fifth, SEALED, is PROPOSED AND NOT ADOPTED, and naming it is Mike's."
+   "note": "MIKE: 'Maybe the nickels are hidden inside of the thing so they're not even photographed.' The four reveal classes do not cover this — a fifth, SEALED, is PROPOSED AND NOT ADOPTED, and naming it is Mike's.",
+   "transfer": "PACKAGE",
+   "transferWeek": null
   },
   {
    "id": "phys.time",
@@ -1726,7 +1918,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "PACKAGE",
+   "transferWeek": null
   },
   {
    "id": "phys.manual.original",
@@ -1745,7 +1939,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "PACKAGE",
+   "transferWeek": null
   },
   {
    "id": "egg.replay",
@@ -1764,7 +1960,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Wired; currently an unexposed recipe."
+   "note": "Wired; currently an unexposed recipe.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "egg.passcode",
@@ -1783,7 +1981,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "EGG-SLOT marks exist in Boot3_Chatter. No eggs invented."
+   "note": "EGG-SLOT marks exist in Boot3_Chatter. No eggs invented.",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
   },
   {
    "id": "egg.name",
@@ -1800,7 +2000,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The reading itself NEVER carries the name — it is written to a sign, not to a person."
+   "note": "The reading itself NEVER carries the name — it is written to a sign, not to a person.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "egg.calculator",
@@ -1817,7 +2019,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "egg.cloud-alert",
@@ -1837,7 +2041,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Delivery is built and triggers on the twentieth question. Under the 50Kft fiction this stops being an accident and becomes evidence the uplink is live."
+   "note": "Delivery is built and triggers on the twentieth question. Under the 50Kft fiction this stops being an accident and becomes evidence the uplink is live.",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
   },
   {
    "id": "egg.passcodes-msg",
@@ -1857,7 +2063,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
   },
   {
    "id": "egg.morse",
@@ -1876,7 +2084,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
   },
   {
    "id": "egg.renamed-games",
@@ -1893,7 +2103,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "egg.matchbook",
@@ -1913,7 +2125,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "RAISED, UNRULED (PROPS_LEDGER-20260804)."
+   "note": "RAISED, UNRULED (PROPS_LEDGER-20260804).",
+   "transfer": "PACKAGE",
+   "transferWeek": null
   },
   {
    "id": "egg.frozen",
@@ -1932,7 +2146,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "WRITTEN, DELIBERATELY UNUSED (C2)."
+   "note": "WRITTEN, DELIBERATELY UNUSED (C2).",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
   },
   {
    "id": "egg.laststate",
@@ -1952,7 +2168,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
   },
   {
    "id": "sound.select",
@@ -1969,7 +2187,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "sound.scroll",
@@ -1986,7 +2206,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "sound.connected",
@@ -2003,7 +2225,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "sound.powermaury",
@@ -2020,7 +2244,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "sound.connectionsuccess",
@@ -2037,7 +2263,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "sound.beepsandboops",
@@ -2054,7 +2282,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "sound.whitenoise",
@@ -2071,7 +2301,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "sound.datatransfer",
@@ -2090,7 +2322,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Zero call sites. The screech reaches the glass only through Boot3_Chatter's direct FX_modem call."
+   "note": "Zero call sites. The screech reaches the glass only through Boot3_Chatter's direct FX_modem call.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "sound.slosh",
@@ -2109,7 +2343,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Mike wrote PlaySlosh in the original firmware and it was never transliterated into the twin at all; the suspension was silent from the day the twin was built until 2026-07-26."
+   "note": "Mike wrote PlaySlosh in the original firmware and it was never transliterated into the twin at all; the suspension was silent from the day the twin was built until 2026-07-26.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "sound.direct.dial90",
@@ -2126,7 +2362,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "sound.direct.modem",
@@ -2143,7 +2381,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "sound.direct.reveal",
@@ -2160,7 +2400,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "sound.direct.cards",
@@ -2177,7 +2419,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "sound.direct.glitch",
@@ -2194,7 +2438,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "sound.direct.snowglobe",
@@ -2211,7 +2457,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "sound.electrical-short",
@@ -2228,7 +2476,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "On file in the robots repo; nothing on the museum's glass plays it."
+   "note": "On file in the robots repo; nothing on the museum's glass plays it.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "wal.carsie-blanton",
@@ -2247,7 +2497,9 @@
    ],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "wal.hunter-root",
@@ -2266,7 +2518,9 @@
    ],
    "prod": null,
    "calledBy": [],
-   "note": "M3: the portrait is a phone selfie in a vehicle wearing another band's name."
+   "note": "M3: the portrait is a phone selfie in a vehicle wearing another band's name.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "wal.jesse-welles",
@@ -2285,7 +2539,9 @@
    ],
    "prod": null,
    "calledBy": [],
-   "note": "M16: 'That Can't Be Right' has ZERO song facts — all three it had were our own research narrative and were struck."
+   "note": "M16: 'That Can't Be Right' has ZERO song facts — all three it had were our own research narrative and were struck.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "wal.mikey-mike",
@@ -2302,7 +2558,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "wal.artifacts",
@@ -2321,7 +2579,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "INTENTIONALLY ABSENT and the absence is on the page. The /hr blocker, not recreated."
+   "note": "INTENTIONALLY ABSENT and the absence is on the page. The /hr blocker, not recreated.",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "wal.banners",
@@ -2340,7 +2600,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Typographic placeholders, flagged for art."
+   "note": "Typographic placeholders, flagged for art.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "shop.sticker",
@@ -2359,7 +2621,9 @@
    ],
    "prod": null,
    "calledBy": [],
-   "note": "M20: the three Printful variants still carry the old low-res print master. The in-shop image is fine."
+   "note": "M20: the three Printful variants still carry the old low-res print master. The in-shop image is fine.",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "shop.shirts",
@@ -2378,7 +2642,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "shop.domain",
@@ -2397,7 +2663,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "shop.mikes",
@@ -2416,7 +2684,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "retired.hr.home",
@@ -2433,7 +2703,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "deleted v46/C3"
+   "note": "deleted v46/C3",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "retired.hr.fanwall",
@@ -2450,7 +2722,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "deleted v46/C3"
+   "note": "deleted v46/C3",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "retired.hr.media",
@@ -2467,7 +2741,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "deleted v46/C3"
+   "note": "deleted v46/C3",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "retired.robots.parts",
@@ -2484,7 +2760,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "deleted v50/N1; orphaned parts_drawer.jpg — M9"
+   "note": "deleted v50/N1; orphaned parts_drawer.jpg — M9",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "retired.robots.tally",
@@ -2501,7 +2779,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "struck v51/A5 under THE LAW OF SUBTRACTION; emptied the provenance register's INVENTION class"
+   "note": "struck v51/A5 under THE LAW OF SUBTRACTION; emptied the provenance register's INVENTION class",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "retired.booth.hook",
@@ -2518,7 +2798,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "struck v51/M23a — 'THE TITLE IS THE GRAB'"
+   "note": "struck v51/M23a — 'THE TITLE IS THE GRAB'",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "retired.lobby.book.static",
@@ -2535,7 +2817,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "struck v51/M23b"
+   "note": "struck v51/M23b",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "retired.record.fictions",
@@ -2552,7 +2836,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "deleted v47/H2 — all invented, all survived four rounds of review"
+   "note": "deleted v47/H2 — all invented, all survived four rounds of review",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "retired.query.variants",
@@ -2569,7 +2855,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "all three retired; no query parameter selects a variant anywhere in the building"
+   "note": "all three retired; no query parameter selects a variant anywhere in the building",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "tool.provenance",
@@ -2586,7 +2874,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "Runs on every packet beside lint and build. INVENTION is 0 and its ceiling is ratcheted to 0."
+   "note": "Runs on every packet beside lint and build. INVENTION is 0 and its ceiling is ratcheted to 0.",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "tool.assettable",
@@ -2603,7 +2893,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "[C32 2026-08-05] re-keyed: `uid` is minted once, `sha256` resolves a pure rename, and a judged row whose file is gone is now reported rather than dropped."
+   "note": "[C32 2026-08-05] re-keyed: `uid` is minted once, `sha256` resolves a pure rename, and a judged row whose file is gone is now reported rather than dropped.",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "tool.reveal",
@@ -2622,7 +2914,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "One consumer is wired (the Foundation's state column). Everything else still hard-codes its own availability."
+   "note": "One consumer is wired (the Foundation's state column). Everything else still hard-codes its own availability.",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "tool.openactions",
@@ -2639,7 +2933,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "channel.shop",
@@ -2656,7 +2952,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "channel.music",
@@ -2673,7 +2971,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
   },
   {
    "id": "channel.qr",
@@ -2692,7 +2992,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "This row will read LIVE on the day that is real, and not one day before."
+   "note": "This row will read LIVE on the day that is real, and not one day before.",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "channel.supplies",
@@ -2711,7 +3013,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "channel.services",
@@ -2730,7 +3034,9 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": ""
+   "note": "",
+   "transfer": null,
+   "transferWeek": null
   }
  ]
 }
