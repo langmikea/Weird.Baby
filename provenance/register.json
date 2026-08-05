@@ -11868,22 +11868,6 @@
     "docs/canonical/THE_CHARTER.md"
    ]
   },
-  "c616ce36eb2d8388": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 269,
-   "t": "Figures are published as they settle; the lines without one are not public yet. This is not a tax document and is not filed anywhere — it exists so the ledger is honest and public.",
-   "p": "INVOICE.note",
-   "c": "MIKE",
-   "s": "Mike's E1 dictation of the contributions model, quoted verbatim in the file header (Foundation.jsx:11-28) and recorded in STATE.md"
-  },
-  "3a25014dec54abb2": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 274,
-   "t": "[PAPA] — the amounts on the four unpublished lines, and whether each is published at all.",
-   "p": "INVOICE.papa",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
   "5f5e601e2800ec82": {
    "f": "src/routes/Foundation.jsx",
    "l": 285,
@@ -11933,16 +11917,6 @@
    "p": "FAQ[].q",
    "c": "HOUSE"
   },
-  "44ea0b6d26aa9ae5": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 334,
-   "t": "Because keeping it was never what any of this was for. Take all you need, not grab all you can — and the museum already has what it needs. So what passes through Weird.Baby's hands goes to humanity: all of it, always, without pause and without pay. It is not a donation drive with a target. It is the direction everything moves.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
   "a31d37baa774d9fc": {
    "f": "src/routes/Foundation.jsx",
    "l": 341,
@@ -11950,32 +11924,12 @@
    "p": "FAQ[].q",
    "c": "HOUSE"
   },
-  "17bb6e57f68e3ce8": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 342,
-   "t": "To established charitable organisations, and to people caught doing conspicuous good. Beneficiaries are chosen, never applied to — there is no application, no pitch meeting and no grant form, because the moment there is one, the people best at filling forms start winning instead of the people doing good. [PAPA] — the named organisations, and whether the list is ever published, are Papa's to state.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
   "38f9befa1fa9f597": {
    "f": "src/routes/Foundation.jsx",
    "l": 350,
    "t": "How do I get some of that?",
    "p": "FAQ[].q",
    "c": "HOUSE"
-  },
-  "3f3d6dfd59233519": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 351,
-   "t": "Honestly: consistently get into the public eye for acting like a complete WeeBee. That is the whole process — we find you being publicly good. Direct contact hurts your chances, and asking is the one thing that has never worked.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
   },
   "6789335f9e5bdea0": {
    "f": "src/routes/Foundation.jsx",
@@ -11988,57 +11942,6 @@
    "f": "src/routes/Foundation.jsx",
    "l": 365,
    "t": "Every cost has a name, a number and a sponsor on the record — the domain, the giveaway guitar, the stickers. Each one has a meter, and when a cost is covered its meter reads full, its door says we're good, thanks, and it closes. No overfilling. No pooling. Not even a generous dollar gets held. Today the sponsor on every line is Papa himself, and the invoice above is the whole of it. [PAPA] — the l…",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
-  "40a2ac03db60a508": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 382,
-   "t": "So who is actually paying for all this?",
-   "p": "FAQ[].q",
-   "c": "HOUSE"
-  },
-  "6335070678bdaad0": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 383,
-   "t": "We are, mostly, and we have been from the start. {} The invoice on this page is the itemised version of that sentence: real costs, borne by the keeper, billed to the museum at nothing. It is not a hardship story and it is not a hint — it is simply where things stand today, printed where anybody can read it.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
-  "6db3a3de89b73783": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 397,
-   "t": "Can I send money?",
-   "p": "FAQ[].q",
-   "c": "HOUSE"
-  },
-  "681f9f5c0168cb29": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 398,
-   "t": "Not to run the place, and that is the load-bearing part. Help with a cost arrives as the thing itself: pay the registrar directly, buy the actual guitar and ship it, pay the store to send the stickers. If your help would arrive as money in Weird.Baby's hands to spend, it is not help we can take, and we will gladly show you the door that is. The proof is structural rather than promised: there is no…",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
-  "1c2f833a1bd10dda": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 414,
-   "t": "Can I send you something you need?",
-   "p": "FAQ[].q",
-   "c": "HOUSE"
-  },
-  "07d96f21a0f8b1f9": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 419,
-   "t": "Not through this page yet. The plan is plain: a public list of exactly what the museum needs — supplies, and hours of work — so that a supporter can buy the thing or book the hour and have it arrive here directly, with no money ever passing through us. We would list only what we need, which is the rule that keeps a list like that from turning into a wish. None of it exists today, so the honest ans…",
    "p": "FAQ[].a",
    "c": "RESTATED",
    "r": [
@@ -12068,33 +11971,6 @@
    "t": "What do you think about billionaires?",
    "p": "FAQ[].q",
    "c": "HOUSE"
-  },
-  "b62b309280ff0d8c": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 440,
-   "t": "We know the names of the people who kept the most for themselves in life. They are the Illionaires — and being remembered for the size of the pile is a strange thing to spend a life earning. The museum is not interested in fighting over the last piece of pie; it would rather make more pie. Why keep grabbing for more? [PAPA] — the credo on this is Papa's own and is his to write or to leave unwritte…",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
-  "f33fcb0d6e3b80dd": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 458,
-   "t": "Who pays you?",
-   "p": "FAQ[].q",
-   "c": "HOUSE"
-  },
-  "20b990ec681af94b": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 459,
-   "t": "Nobody. One person keeps this place and the job pays nothing — not salary, not expenses, not credit taken. The museum never pays to be managed, and only zero-invoice services are accepted: the design, the code, the shelf, the legal work all arrive as gifts of service. That's the deal, and it never changes.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
   },
   "573e94fe38cfd2da": {
    "f": "src/routes/Foundation.jsx",
@@ -17383,6 +17259,130 @@
    "p": "FAQ[].a",
    "c": "VERIFIED",
    "s": "re-read clause by clause AND MEASURED IN A BROWSER this session (B2, 2026-08-05). Falsifiable from: src/worker.js (no auth on any route; POST /api/visits inserts exactly page + referrer + visited_at; POST /api/guestbook inserts name + note + a fixed badge + a timestamp; no Set-Cookie anywhere), src/routes/WbHome.jsx:278 and src/routes/exhibit/Exhibit.jsx:2163 (the only two callers of /api/visits), index.html (the fonts.googleapis.com stylesheet link + two preconnects), and public/robots/twin.html (Rec_Keys_Local = 7 localStorage keys incl. wbr_user and wbr_boot_level, Rec_Keys_Session = 3; the register at Preferences > User in MENU_TABLE_SRC, REC_PAGES = 5, Rec_Purge wipes all ten; ZERO fetch and ZERO XMLHttpRequest in the whole file, and no document.cookie anywhere in it). THE OUTBOUND CLAUSE IS NOT IN ANY FILE — it was read off performance.getEntriesByType('resource') in every room after a nine-second settle, with nothing clicked: /, /booth, /shop, /foundation and /hr/archive request Google Fonts and nothing else; /robots, /wal and /wb add www.youtube.com x3 (Exhibit.jsx:333 injects iframe_api on load); /hr adds www.youtube.com x3 AND www.facebook.com x16 across 17 iframes (HrExhibitFlow.jsx:2110's facebook.com/plugins/ URL). That measurement is the only thing that establishes 'before you press anything', and it is why the clause names three parties rather than the one N5 declared."
+  },
+  "d91bdbe60dd81379": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 325,
+   "t": "Money given for a cost is spent promptly on that cost, or it goes back. Nothing is pooled and there is no slush fund.",
+   "p": "LEDGER[].law",
+   "c": "MIKE",
+   "s": "Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
+  },
+  "381ebd5b827a8383": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 405,
+   "t": "Figures are published as they settle; the lines without one are not public yet. A cost carried by somebody other than the keeper takes its own line here, in the name of whoever carried it. This is not a tax document and is not filed anywhere — it exists so the ledger is honest and public.",
+   "p": "INVOICE.note",
+   "c": "MIKE",
+   "s": "Mike's E1 dictation of the contributions model, quoted verbatim in the file header (Foundation.jsx) and recorded in STATE.md; the carried-cost sentence is Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
+  },
+  "81edf23d6b402268": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 422,
+   "t": "[PAPA] — the amounts on the four unpublished lines, and whether each is published at all. [PAPA] — the two named lines Mike supplied are held until the people named have agreed to be named.",
+   "p": "INVOICE.papa",
+   "c": "MIKE",
+   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render. The consent gate on the two named lines is Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
+  },
+  "d538964bc6dc47c1": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 527,
+   "t": "Take all you need, not grab all you can. Keeping it was never what any of this was for, and the museum already has what it needs — so what passes through Weird.Baby's hands goes to humanity: all of it, always, without pause and without pay. It is not a donation drive with a target. It is the direction everything moves. [PAPA] — the part about the keeper and his own household already having enough is Papa's own and is still to come.",
+   "p": "FAQ[].a",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ]
+  },
+  "39cdeacfaae0fe15": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 554,
+   "t": "To established charitable organisations, and to people caught doing conspicuous good. The ledger on this page carries every channel it moves through, with the state of each one printed beside it; the outgoing half of that ledger is not built. [PAPA] — the named organisations, the named people, and whether either list is ever published, are Papa's to state.",
+   "p": "FAQ[].a",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ]
+  },
+  "7d514409a77226af": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 573,
+   "t": "Consistently get into the public eye for doing good. We'll spot you.",
+   "p": "FAQ[].a[0]",
+   "c": "MIKE",
+   "s": "Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
+  },
+  "ff584c3d0bb160b0": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 574,
+   "t": "Pro-Tip: direct inquiry and petitioning hurt your chances.",
+   "p": "FAQ[].a[1]",
+   "c": "MIKE",
+   "s": "Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
+  },
+  "9de14511b0c90065": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 622,
+   "t": "Can I donate?",
+   "p": "FAQ[].q",
+   "c": "MIKE",
+   "s": "Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
+  },
+  "31288d1c6c577bce": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 645,
+   "t": "Can I send you something?",
+   "p": "FAQ[].q",
+   "c": "MIKE",
+   "s": "Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
+  },
+  "900a7428efe79d22": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 623,
+   "t": "Give in Weird.Baby's name",
+   "p": "FAQ[].link.text",
+   "c": "RESTATED",
+   "r": [
+    "a15a8308510b85a6"
+   ]
+  },
+  "d94fc83e887a3b89": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 646,
+   "t": "The registry of what we need",
+   "p": "FAQ[].link.text",
+   "c": "RESTATED",
+   "r": [
+    "504a430bfef6b5c5"
+   ]
+  },
+  "802bc47f36d2fcc2": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 624,
+   "t": "Not to run the place, and that is the load-bearing part. Help with a cost arrives as the thing itself: pay the registrar directly, buy the actual guitar and ship it, pay the store to send the stickers. If your help would arrive as money in Weird.Baby's hands to spend, it is not help we can take, and we will gladly show you the door that is. The proof is structural rather than promised: there is no account to fill and there never has been one. Giving is the other direction entirely — a gift made in Weird.Baby's name is not the museum's money, it is somebody else's money passing through on the way to someone who needs it. That door is on the ledger above and it is not built yet. [PAPA] — the address that door points at.",
+   "p": "FAQ[].a",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ]
+  },
+  "0a9c19b9ae27602d": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 651,
+   "t": "Not through this page yet. The plan is plain: a public list of exactly what the museum needs — supplies, and hours of work — so that a supporter can buy the thing or book the hour and have it arrive here directly, with no money ever passing through us. We would list only what we need, which is the rule that keeps a list like that from turning into a wish. None of it exists today, so the honest answer is to write to the address at the bottom of this page and say what you have. [PAPA] — the address that door points at.",
+   "p": "FAQ[].a",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ]
+  },
+  "860c7a1d8587f3b3": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 695,
+   "t": "[PAPA] — his raw material, held for his voice: the Illionaires. [PAPA] — being remembered for the size of the pile is a strange thing to spend a life earning. [PAPA] — we would rather make more pie than fight over the last piece.",
+   "p": "FAQ[].a",
+   "c": "MIKE",
+   "s": "the charter's three Papa quotes, including the Illionaires line (docs/canonical/THE_CHARTER.md); held for his voice under Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
   }
  }
 }

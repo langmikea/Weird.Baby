@@ -61,6 +61,26 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
    surface over, on the surface every visitor sees first. */
 .wb-dir-entry:last-child { border-bottom: 1px solid var(--wb-border); }
 .wb-dir-entry:hover { color: var(--wb-gold); }
+/* [F7 2026-08-05] MIKE: INDENT "Other Music Worth a Listen". See the JSX for
+   what the indent is saying — ours, ours, then everybody else's.
+   IT IS PADDING ON THE LABEL, NOT ON THE BUTTON, and that is the whole of the
+   care this rule needs. The button owns the row's rule and holds the arrow
+   against the right edge; indenting IT would pull the hairline in and break the
+   column of arrows, which reads as a misaligned row rather than a nested one.
+   14px is one character of this face at this size — the smallest step that is
+   unmistakably deliberate rather than a rendering wobble.
+   THE ROW IS `nowrap` AND THIS IS THE LONGEST LABEL ON THE BOARD, so the indent
+   is the one edit here that could push a line out of its column — a `nowrap`
+   row that outgrows its box does not wrap, it overhangs.
+   MEASURED, AT THE TIGHTEST WIDTH THE LAP COULD PRODUCE (a 373px content
+   column, tighter than a real 390px phone): the entry's content box is 256px
+   and the indented label plus its arrow needs 240px. It fits, with SIXTEEN
+   PIXELS of slack. At a true 390px the box is 270px and the slack is 30px.
+   Sixteen pixels is not much and the number is recorded rather than rounded up
+   to "fine": a longer label on this line, a larger base size, or a wider indent
+   will break the row before it breaks anything else on the board, and this
+   comment is where the next person finds out why. */
+.wb-dir-entry-sub > span:first-child { padding-left: 14px; }
 .wb-dir-arrow { font-family: 'Courier Prime', monospace; font-size: 0.6rem; color: inherit; }
 
 .wb-right { display: flex; flex-direction: column; justify-content: center; padding: 48px 52px; overflow: hidden; position: relative; }

@@ -8,6 +8,43 @@
 // already dictated on this. Build from what exists; [PAPA] where his voice must
 // land; nothing invented."
 //
+// ─── [F1–F6 2026-08-05] MIKE ANSWERED THE ROOM'S QUESTIONS HIMSELF ───────────
+// AND THAT CHANGES WHAT THIS FILE IS. Every round before this one built the
+// Foundation by DIGGING — reading the charter, the raw dictations, the booth,
+// the robots repo, and assembling answers out of what he had already said
+// somewhere else. This round he sat down and answered the questions. The
+// instruction that came with them is the only one that matters here:
+//
+//   LAND HIS PHRASING. Do not improve it. Do not add a fact he did not give.
+//   Where he wrote an INSTRUCTION rather than copy, honour the instruction and
+//   MARK the gap — never fill it.
+//
+// SO THE INTERESTING WORK IN THIS ROUND WAS ALL SUBTRACTION AND MARKING, and
+// four things left the page:
+//   · TWO QUESTIONS DELETED [F2] — "So who is actually paying for all this?"
+//     (its sentence is signed under the invoice, so nothing went) and "Who pays
+//     you?" (which DID cost the page the enumeration of the four gifts of
+//     service; the cost is named at its site and in the round log, not
+//     swallowed).
+//   · THE BILLIONAIRES ANSWER STOPS PUBLISHING [F3]. He called the raw ideas
+//     good, the voice wrong and the placement wrong. So every sentence carries
+//     the marker, the scrubber empties it, the `kept` filter drops the whole
+//     question, and his three ideas wait in the data for him. This is the first
+//     answer in the building to take that path all the way down.
+//   · TWO REAL HOUSEHOLDS DID NOT REACH THE INVOICE [F5]. He supplied two named
+//     lines against two real costs. They are the strongest rows this object
+//     could carry and they are held, because consent to be named on a public
+//     page is not the museum's to assume on somebody else's behalf. His RULE
+//     and his MECHANISM both shipped; only the names waited.
+//   · A POINTER REPLACED A PARAGRAPH [F1], and where the pointer would have
+//     pointed at the wrong half of the ledger, the charter's own clause stayed.
+//     That is the round's one judgement call and it is flagged as one.
+//
+// WHAT ARRIVED: his "How do I get some of that?" whole, in two beats; Motto #3
+// leading the answer he said carries it; the money section's rule about
+// earmarked money; and two link slots left VISIBLY unresolved [F6], because he
+// marked two links and supplied neither address.
+//
 // ─── [E1 2026-08-03] THE ROOM GETS ITS SUBSTANCE ─────────────────────────────
 // MIKE, this round, dictating the contributions model and calling it the room's
 // build-out. Verbatim in the parts that are doctrine:
@@ -275,6 +312,18 @@ const LEDGER = [
           "the day that is real, and not one day before.",
       },
     ],
+    /* [F5 2026-08-05] MIKE'S RULE FOR MONEY THAT ARRIVES EARMARKED, and it is
+       set as this section's law for the same reason "we list only what we need"
+       is set as the other one's: it governs every row above it rather than
+       describing any single row.
+       IT IS THE HALF OF F5 THAT COULD SHIP. The other half of his instruction
+       named two real households against two real costs, and those names are
+       held — see the note on INVOICE below and the question list in this
+       round's log. The RULE needs no name to be true, and it is the part that
+       tells a visitor what happens to a pound after it arrives. */
+    law:
+      "Money given for a cost is spent promptly on that cost, or it goes " +
+      "back. Nothing is pooled and there is no slush fund.",
   },
   {
     head: "What arrives as the thing",
@@ -342,15 +391,37 @@ const INVOICE = {
   ],
   total: "$0.00",
   /* small print — house voice, no marker, because a scrubbed note would leave
-     an invoice with four blank figures and no explanation of why. */
+     an invoice with four blank figures and no explanation of why.
+     [F5 2026-08-05] ONE SENTENCE ADDED: THE MECHANISM, WITHOUT THE NAMES.
+     Mike's instruction was that the mechanism and the rule publish now and the
+     names wait for consent. The mechanism is that the keeper is not the only
+     person who can carry a cost — somebody else pays the registrar, somebody
+     else pays the sticker printer, and the document records it the same way,
+     at nothing. That is a STANDING RULE of this invoice and is true before it
+     has an instance, exactly as the register's NOT BUILT rows are true before
+     they are built. What would not be true is printing a line with a name on
+     it that its owner has not agreed to. */
   note:
     "Figures are published as they settle; the lines without one are not " +
-    "public yet. This is not a tax document and is not filed anywhere — it " +
-    "exists so the ledger is honest and public.",
-  /* Mike's list, in the data, never on the page. */
+    "public yet. A cost carried by somebody other than the keeper takes its " +
+    "own line here, in the name of whoever carried it. This is not a tax " +
+    "document and is not filed anywhere — it exists so the ledger is honest " +
+    "and public.",
+  /* Mike's list, in the data, never on the page.
+     [F5] THE SECOND MARKER IS A CONSENT GATE, NOT A COPY GAP. Mike supplied two
+     real lines — a household against the domain, a household against the
+     stickers — and they are the strongest rows this object could carry, because
+     a named person carrying a named cost is the whole argument drawn rather
+     than asserted. They are held anyway: this museum has already taken the
+     operator's own name off the glass once (CS 2026-08-04) for reaching a
+     visitor through a sentence that did not need it, and these are other
+     people's names, which is a higher bar and not the museum's to clear alone.
+     The names are in the round log's question list, not here, so that nothing
+     in `src/` carries them until he says. */
   papa:
     "[PAPA] — the amounts on the four unpublished lines, and whether each is " +
-    "published at all.",
+    "published at all. [PAPA] — the two named lines Mike supplied are held " +
+    "until the people named have agreed to be named.",
 };
 
 /* MIKE, verbatim, and he called it the room's heart. It is set under the
@@ -366,20 +437,49 @@ const POSTURE =
 /* ─── THE QUESTIONS ──────────────────────────────────────────────────────────
    Ordered the way a stranger meets the subject, which is the booth's own
    ordering principle: what is this, why, where does it go, can I have some, how
-   do the lights stay on, who is paying today, can I give you money, can I send
-   a thing, what about the shop, what do you think of the people who do the
-   opposite, who pays you, what happens after you.
+   do the lights stay on, can I give you money, can I send a thing, what about
+   the shop, what do you think of the people who do the opposite, do you take a
+   cut, what happens after you.
 
    Mike's three named subjects map onto them like this:
-     why we chose to do this ................ Q2, Q11
-     why we are giving all the money away ... Q3, Q4, Q7
-     what we feel about billionaires ........ Q10
+     why we chose to do this ................ Q2, and the last question
+     why we are giving all the money away ... Q3, Q4, "Can I donate?"
+     what we feel about billionaires ........ held, see [F3] below
 
    [PAPA] MARKS A POSITION, NEVER A FACT. Where the archive records a settled
    clause of the Law, the answer states it. Where the archive records an OPEN
    QUESTION — the legal form, the credo's own wording, what the shop's shelf
    earns — the sentence carrying it is Papa's and the visitor never sees the
-   marker or the sentence. */
+   marker or the sentence.
+
+   ═══ [F1–F6 2026-08-05] MIKE ANSWERED THIS ROOM'S QUESTIONS HIMSELF ══════════
+   And the instruction that came with the answers is the one that governs every
+   line below: LAND HIS PHRASING. Do not improve it, do not smooth it, do not
+   add a fact he did not give. Where he wrote an INSTRUCTION rather than copy,
+   the instruction is honoured and the gap is MARKED — never filled.
+
+   FOURTEEN QUESTIONS BECOME TWELVE, AND ELEVEN RENDER:
+     · "So who is actually paying for all this?" — DROPPED [F2]. It existed to
+       carry the posture, and the posture is signed under the invoice a few
+       inches above it, in the same words. Nothing is lost by the deletion,
+       which is the test Doctrine 16 sets.
+     · "Who pays you?" — DELETED [F2]. This one DOES cost the page something and
+       the cost is named rather than swallowed: it was the only place the four
+       gifts of service (the design, the code, the shelf, the legal work) were
+       listed, and the only sentence saying the job pays nothing. Its argument
+       survives in the invoice and the posture; its ENUMERATION does not. That
+       is his ruling and it is recorded in the round log, not quietly absorbed.
+     · "What do you think about billionaires?" — held [F3], see its own note.
+       It stays in the data and prints nothing.
+     · "Can I send money?" / "Can I send you something you need?" become "Can I
+       donate?" / "Can I send you something?" [F6] — his titles, each with the
+       link he marked and did not supply, left visibly unresolved.
+
+   AN ANSWER MAY NOW BE AN ARRAY OF PARAGRAPHS, and it is for one reason: his
+   "How do I get some of that?" is written as two beats with the Pro-Tip on its
+   own, and flattening it into one paragraph would be editing his line breaks —
+   the exact thing the instruction forbids. A string still works everywhere
+   else, so no existing answer changed shape. */
 const FAQ = [
   {
     /* [R2 2026-08-03] RESTORED, WORD FOR WORD. v41/C3 replaced this with "Is
@@ -408,28 +508,71 @@ const FAQ = [
        "times. What they are done for was written once.",
   },
   {
+    /* [F1 2026-08-05] MIKE: this answer CARRIES MOTTO #3, and the content about
+       him and Mo already having enough is STILL TO COME.
+       SO THE MOTTO LEADS. It was the third sentence of a paragraph and it is
+       the sentence he named, which means it was buried by a lead-in that only
+       existed to arrive at it. Nothing else in the approved answer was
+       contradicted, so nothing else was touched.
+       THE MOTTO IS CARRIED AS TEXT AND NOT AS A NUMBER. He calls it Motto #3;
+       this museum has never published a numbered list of mottos, so printing
+       "motto number three" would name an apparatus a visitor has never seen —
+       an internal designation on the glass, which is Doctrine 11's own example
+       of a line that fails. The words ship; the index does not.
+       AND THE SLOT IS LEFT MARKED. He flagged the Mike-and-Mo half as still to
+       come, so it is a marker and not a paraphrase: the honest gap costs the
+       answer nothing a reader would miss, and a plausible stand-in would have
+       been invention on the one page whose subject is honesty about money. */
     q: "Why give all the money away?",
-    a: "Because keeping it was never what any of this was for. Take all you " +
-       "need, not grab all you can — and the museum already has what it " +
-       "needs. So what passes through Weird.Baby's hands goes to humanity: " +
-       "all of it, always, without pause and without pay. It is not a " +
-       "donation drive with a target. It is the direction everything moves.",
+    a: "Take all you need, not grab all you can. Keeping it was never what " +
+       "any of this was for, and the museum already has what it needs — so " +
+       "what passes through Weird.Baby's hands goes to humanity: all of it, " +
+       "always, without pause and without pay. It is not a donation drive " +
+       "with a target. It is the direction everything moves. [PAPA] — the " +
+       "part about the keeper and his own household already having enough is " +
+       "Papa's own and is still to come.",
   },
   {
+    /* [F1 2026-08-05] MIKE ANSWERED THIS ONE WITH A POINTER RATHER THAN COPY —
+       "the ledger, not prose" — and honouring that literally took one decision
+       that is worth stating, because it is the round's judgement call.
+       A BARE POINTER WOULD HAVE POINTED AT THE WRONG HALF. The register on this
+       page is the INCOMING side: five channels money and goods arrive through.
+       "Where does it go?" answered with "read the ledger" sends a reader to a
+       table that does not contain the answer, and a pointer that points at the
+       wrong thing is worse than a paragraph.
+       SO THE CHARTER'S OWN CLAUSE STAYS AS THE POINTER'S DESTINATION IN WORDS —
+       it is settled law, already published, and deleting a sourced fact was
+       never what "make it a pointer" asked for — and the rest of the paragraph
+       goes. What went is the application-and-grant-form argument, and it is not
+       lost from the page: Mike re-supplied it himself, in his own words, as the
+       Pro-Tip on the next question.
+       THE OUTGOING HALF IS DECLARED NOT BUILT, in the room's own grammar. That
+       is mechanism state, which Doctrine 11 names as the permitted case, not a
+       note about a backlog. */
     q: "Where does it actually go?",
     a: "To established charitable organisations, and to people caught doing " +
-       "conspicuous good. Beneficiaries are chosen, never applied to — there " +
-       "is no application, no pitch meeting and no grant form, because the " +
-       "moment there is one, the people best at filling forms start winning " +
-       "instead of the people doing good. [PAPA] — the named organisations, " +
-       "and whether the list is ever published, are Papa's to state.",
+       "conspicuous good. The ledger on this page carries every channel it " +
+       "moves through, with the state of each one printed beside it; the " +
+       "outgoing half of that ledger is not built. [PAPA] — the named " +
+       "organisations, the named people, and whether either list is ever " +
+       "published, are Papa's to state.",
   },
   {
+    /* [F4 2026-08-05] MIKE'S, AS WRITTEN, AND IT LANDS WHOLE. His line replaces
+       an Ops paraphrase of the same idea that had drifted twice: "acting like a
+       complete WeeBee" was the house's word for it where his own word is
+       plainly "doing good", and "we'll spot you" is the promise the old answer
+       described instead of making.
+       THE PRO-TIP IS ITS OWN PARAGRAPH BECAUSE HE WROTE IT AS ONE. It is the
+       reason the answer field accepts an array at all — see the note above the
+       list. Setting it on the same line as the rest would be Ops editing his
+       emphasis, which is the one thing this round was told not to do. */
     q: "How do I get some of that?",
-    a: "Honestly: consistently get into the public eye for acting like a " +
-       "complete WeeBee. That is the whole process — we find you being " +
-       "publicly good. Direct contact hurts your chances, and asking is the " +
-       "one thing that has never worked.",
+    a: [
+      "Consistently get into the public eye for doing good. We'll spot you.",
+      "Pro-Tip: direct inquiry and petitioning hurt your chances.",
+    ],
   },
   {
     /* [E1 2026-08-03] ONE CLAUSE ADDED, AND IT IS A FACT RATHER THAN A
@@ -449,21 +592,13 @@ const FAQ = [
        "costs, their numbers and their sponsors are Papa's to publish when " +
        "the meters go up.",
   },
-  {
-    /* [E1 2026-08-03] THE POSTURE, AS A QUESTION. Mike called this sentence
-       the room's heart, so it lands twice on purpose: once as the signature
-       under the invoice, where it explains the object, and once here, where a
-       visitor scanning the questions can find it without scrolling back. The
-       repetition is deliberate and it is one sentence, not a restatement in
-       different words — the second copy of a sentence somebody meant is not
-       clutter, and a paraphrase of it would be worse than either. */
-    q: "So who is actually paying for all this?",
-    a: "We are, mostly, and we have been from the start. " + POSTURE + " " +
-       "The invoice on this page is the itemised version of that sentence: " +
-       "real costs, borne by the keeper, billed to the museum at nothing. It " +
-       "is not a hardship story and it is not a hint — it is simply where " +
-       "things stand today, printed where anybody can read it.",
-  },
+  /* [F2 2026-08-05] "So who is actually paying for all this?" WAS HERE AND MIKE
+     DROPPED IT. The reasoning it shipped with — that the posture is worth
+     landing twice, once as a signature and once as a question — is exactly the
+     argument Doctrine 16 was written against: a second object saying what the
+     first already said, defended on the grounds that the sentence is good. The
+     sentence IS good, and it is still on the page, signed, under the object it
+     explains. Nothing a reader would miss went with the question. */
   {
     /* [E1 2026-08-03] NARROWED, NOT REVERSED — see the header of this file for
        the full reasoning. Every word of the old answer's argument about the
@@ -472,7 +607,20 @@ const FAQ = [
        distinction that argument always rested on and never said: money for the
        museum to SPEND is refused; money that is only passing through on its way
        to somebody else was never the museum's to refuse. */
-    q: "Can I send money?",
+    /* [F6 2026-08-05] HIS TITLE, AND THE LINK HE MARKED AND DID NOT SUPPLY.
+       The question was "Can I send money?"; he calls it "Can I donate?", which
+       is the question a willing stranger actually asks, and the narrower old
+       title had the answer's own distinction baked into it before the answer
+       could draw it. The argument underneath is untouched — it is the approved
+       copy and it is the doctrine.
+       THE LINK IS BUILT AND LEFT VISIBLY UNRESOLVED, which is his instruction
+       word for word. It renders as the door's name with the register's own
+       NOT BUILT stamp beside it and NO href, so there is nothing to click and
+       nothing to be disappointed by. That is the room's existing grammar
+       rather than a new device: the same two states, drawn the same way, on the
+       same mechanism the register reads. The address itself is a [PAPA]. */
+    q: "Can I donate?",
+    link: { text: "Give in Weird.Baby's name", reveal: "channel.qr" },
     a: "Not to run the place, and that is the load-bearing part. Help with a " +
        "cost arrives as the thing itself: pay the registrar directly, buy the " +
        "actual guitar and ship it, pay the store to send the stickers. If " +
@@ -483,13 +631,19 @@ const FAQ = [
        "entirely — a gift made in Weird.Baby's name is not the museum's " +
        "money, it is somebody else's money passing through on the way to " +
        "someone who needs it. That door is on the ledger above and it is not " +
-       "built yet.",
+       "built yet. [PAPA] — the address that door points at.",
   },
   {
     /* [E1 2026-08-03] the registry, as the question a willing supporter would
        actually ask. It answers NO for today and says what the yes will look
        like, which is the state column written out in a sentence. */
-    q: "Can I send you something you need?",
+    /* [F6 2026-08-05] HIS TITLE — "Can I send you something?" — and the second
+       marked link, on the registry rather than the giving door. Same treatment,
+       same reason, and the two slots read as one mechanism because they are
+       one: both resolve through the reveal ledger, so the day either channel is
+       built its stamp changes here without this file being edited. */
+    q: "Can I send you something?",
+    link: { text: "The registry of what we need", reveal: "channel.supplies" },
     /* [CS 2026-08-04] "and it is Mike's" is OUT. The keeper of this place is
        named "Papa Weird.Baby" on every other line of this room and of /booth;
        this was the operator's real name reaching a visitor through a sentence
@@ -501,7 +655,7 @@ const FAQ = [
        "We would list only what we need, which is the rule that keeps a list " +
        "like that from turning into a wish. None of it exists today, so the " +
        "honest answer is to write to the address at the bottom of this page " +
-       "and say what you have.",
+       "and say what you have. [PAPA] — the address that door points at.",
   },
   {
     q: "There is a gift shop, though.",
@@ -514,32 +668,49 @@ const FAQ = [
        "with anything its own shelf earns is Papa's to state.",
   },
   {
+    /* [F3 2026-08-05] MIKE READ THIS ANSWER AND RULED ON IT IN THREE PARTS: the
+       raw ideas are GOOD, the VOICE is wrong, and the PLACEMENT is wrong.
+       SO THE ANSWER STOPS PUBLISHING AND THE MATERIAL STAYS. Every sentence
+       below carries the marker, which means `visitorProse` returns an empty
+       string and the `kept` filter drops the whole question off the page. Not
+       one word of it reaches a visitor in Ops voice, which is what "the voice
+       is wrong" has to mean if it means anything — an answer he has told us
+       does not sound like him is not improved by being softened, it is taken
+       down until he writes it.
+       THE THREE IDEAS ARE PRESERVED VERBATIM because they are the part he kept:
+       the ILLIONAIRES coinage, the size-of-the-pile line, and more pie rather
+       than the last piece. They sit here as his raw material, which is exactly
+       what a [PAPA] marker is for — the data keeps the list of what still needs
+       his words, and the visitor never sees one.
+       WHAT WAS DELIBERATELY NOT DONE: the fourth sentence, "Why keep grabbing
+       for more?", is gone rather than marked. It is the one line in the answer
+       with no idea of his under it — a rhetorical question Ops added to close
+       the paragraph — and carrying it forward as raw material would put an Ops
+       sentence into the pile he is being asked to write from.
+       AND THE PLACEMENT IS STILL OPEN. He questioned whether this belongs in
+       this room at all, and nothing was moved: choosing the room would be Ops
+       answering the question he asked. It is a row in OPEN_ACTIONS, not a
+       decision made here. */
     q: "What do you think about billionaires?",
-    a: "We know the names of the people who kept the most for themselves in " +
-       "life. They are the Illionaires — and being remembered for the size of " +
-       "the pile is a strange thing to spend a life earning. The museum is " +
-       "not interested in fighting over the last piece of pie; it would " +
-       "rather make more pie. Why keep grabbing for more? [PAPA] — the credo " +
-       "on this is Papa's own and is his to write or to leave unwritten.",
+    a: "[PAPA] — his raw material, held for his voice: the Illionaires. " +
+       "[PAPA] — being remembered for the size of the pile is a strange thing " +
+       "to spend a life earning. [PAPA] — we would rather make more pie than " +
+       "fight over the last piece.",
   },
-  {
-    /* [R3 2026-08-03] "THE LEGAL WORK" IS BACK IN THE LIST. v41/C3 subtracted
-       it here on the argument that a page denying an entity cannot describe its
-       ongoing legal work — an argument that only existed because C3 had just
-       written the denial into Q1. With Q1 restored the argument goes with it,
-       and the clause is whole again: the charter's clause 3 lists the design,
-       the code, the shelf and the legal work as the four gifts of service, and
-       this room quotes the charter rather than editing it. Gifted legal service
-       is also not the thing Mike ruled out — what he wants to stay out of is
-       legal work the house must PAY FOR AND CHASE. A lawyer who donates an hour
-       costs the house exactly what the designer and the coder cost it. */
-    q: "Who pays you?",
-    a: "Nobody. One person keeps this place and the job pays nothing — not " +
-       "salary, not expenses, not credit taken. The museum never pays to be " +
-       "managed, and only zero-invoice services are accepted: the design, the " +
-       "code, the shelf, the legal work all arrive as gifts of service. " +
-       "That's the deal, and it never changes.",
-  },
+  /* [F2 2026-08-05] "Who pays you?" WAS HERE AND MIKE DELETED IT, and this
+     deletion has a cost that is named rather than absorbed.
+     WHAT GOES WITH IT: the only enumeration in the building of the charter's
+     four gifts of service — the design, the code, the shelf, the legal work —
+     and the only sentence stating that the job pays nothing at all, not salary,
+     not expenses, not credit taken. R3 (2026-08-03) restored the legal-work
+     clause to this list on a careful argument one round after C3 removed it;
+     that argument is not being re-run. He has ruled the question out and the
+     question goes.
+     WHAT SURVIVES ELSEWHERE: the substance is on the page twice over — the
+     invoice IS four costs billed at nothing, and the posture signed under it
+     says who carries them and on what terms. It is the LIST that is gone.
+     If the four gifts should stand somewhere else on this page, that is his
+     call and it is a row in OPEN_ACTIONS, not a re-home Ops chose. */
   {
     q: "Do you make anything from the artists you show?",
     a: "No. Not from the song, not from the play, not from the link. There is " +
@@ -569,11 +740,24 @@ export default function Foundation() {
   useArrival("foundation");
 
   /* Scrubbed at the render seam, exactly as the booth does it. An answer that
-     were ever ENTIRELY a marker would vanish rather than print one — the
-     `kept` filter is what makes that true. */
+     is ENTIRELY a marker vanishes rather than printing one — the `kept` filter
+     is what makes that true, and [F3] is the first answer in this room to
+     actually take that path: the billionaires question is in the data below
+     and reaches no visitor.
+
+     [F1/F4 2026-08-05] AN ANSWER MAY BE A STRING OR AN ARRAY OF PARAGRAPHS.
+     Every paragraph is scrubbed on its own, so a marker takes ITS paragraph and
+     not the ones beside it, and a question survives while any paragraph does.
+     The array exists because Mike wrote one answer as two beats; normalising
+     here rather than at each site keeps every other answer exactly the shape it
+     already was. */
   const faq = FAQ
-    .map(({ q, a }) => ({ q: visitorProse(q), a: visitorProse(a) }))
-    .filter(({ q, a }) => kept(q) && kept(a));
+    .map(({ q, a, link }) => ({
+      q: visitorProse(q),
+      a: (Array.isArray(a) ? a : [a]).map(visitorProse).filter(kept),
+      link,
+    }))
+    .filter(({ q, a }) => kept(q) && a.length > 0);
 
   return (
     <div className="sheet-root fnd-root">
@@ -723,10 +907,28 @@ export default function Foundation() {
 
         <div className="sheet-faq">
           <h2 className="sheet-faq-head">Questions</h2>
-          {faq.map(({ q, a }) => (
+          {faq.map(({ q, a, link }) => (
             <details key={q} className="sheet-q">
               <summary>{q}</summary>
-              <p className="sheet-faq-a">{a}</p>
+              {a.map((para, i) => (
+                <p className="sheet-faq-a" key={i}>{para}</p>
+              ))}
+              {/* [F6 2026-08-05] THE UNRESOLVED LINK, and it is deliberately
+                  NOT AN ANCHOR. Mike marked two links and supplied neither
+                  address, so there is nothing to point at: an `<a>` with no
+                  href, or one pointing at "#", is a dead control, and the
+                  corollary to Doctrine 11 says a dead control is removed rather
+                  than left standing. What ships instead is the door's NAME and
+                  its STATE — the register's own two-state stamp, on the same
+                  reveal-ledger lookup the register uses, so the day the channel
+                  is built this stamp changes with it and no one has to remember
+                  that this line exists. */}
+              {link && (
+                <p className="fnd-q-link" data-state={stateOfRow(link)}>
+                  <span className="fnd-q-link-text">{link.text}</span>
+                  <span className="fnd-q-link-state">{stateOfRow(link)}</span>
+                </p>
+              )}
             </details>
           ))}
         </div>

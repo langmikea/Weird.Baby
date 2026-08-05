@@ -462,6 +462,75 @@ html[data-room="foundation"], html[data-room="foundation"] body {
   margin: 10px 0 0;
 }
 
+/* [F4 2026-08-05] AN ANSWER CAN NOW BE MORE THAN ONE PARAGRAPH, and the shared
+   sheet's `.sheet-faq-a` carries a 20px bottom padding that was sized to be the
+   gap between an answer and the next QUESTION. Repeated inside one answer it
+   sets the two beats of Mike's Pro-Tip further apart than the questions
+   themselves, which reads as two answers rather than one.
+   SO ONLY THE LAST BLOCK IN AN ANSWER KEEPS THE FULL STEP. Everything above it
+   takes a paragraph's gap instead of a section's. Scoped to this room because
+   this room is the only one whose answers take an array; the shared file keeps
+   the rule it was written for. */
+.fnd-root .sheet-q > .sheet-faq-a:not(:last-child) { padding-bottom: 9px; }
+
+/* ══ [F6 2026-08-05] THE UNRESOLVED LINK ═════════════════════════════════════
+   Mike marked two links in his answers and supplied neither address. His
+   instruction was to build the structure and leave them unresolved AND VISIBLE,
+   which is a harder thing to draw than either a working link or nothing.
+
+   IT BORROWS THE REGISTER'S STAMP RATHER THAN INVENTING A SECOND LANGUAGE FOR
+   THE SAME FACT. This page already has one way of saying "this mechanism is not
+   built": a mono, spaced, small-caps chip in a DASHED box, set beside the thing
+   it describes. A second treatment for the identical state would be two
+   vocabularies for one idea on one sheet — so the values are literally the same
+   rules as `.fnd-reg-state`, reached through the same reveal-ledger lookup.
+
+   THE DOOR'S NAME IS SET IN THE MONO FACE, NOT THE SERIF, so it cannot be
+   mistaken for the sentence above it. It is apparatus — the label on a door —
+   and this museum sets apparatus in Courier. It is also NOT underlined and NOT
+   in the link colour, because nothing here is clickable and a thing that looks
+   clickable and is not is worse than no affordance at all.
+
+   IT SITS INSIDE THE OPEN ANSWER, hard against the paragraph it belongs to and
+   inside the answer's own bottom padding, so a closed question shows nothing
+   and an open one shows the door under the words that promised it. */
+.fnd-q-link {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0 2px 20px;
+}
+.fnd-q-link-text {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--wb-gold);
+}
+/* the same stamp as the register's, to the value — see the note above. */
+.fnd-q-link-state {
+  flex-shrink: 0;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+.fnd-q-link[data-state="LIVE"] .fnd-q-link-state {
+  color: var(--wb-gold);
+  border: 1px solid var(--wb-gold);
+}
+.fnd-q-link[data-state="NOT BUILT"] .fnd-q-link-state {
+  color: var(--wb-gold-mute);
+  border: 1px dashed var(--wb-hairline);
+}
+/* a door that is not open reads at the quiet step, so the pair does not shout
+   from inside an answer that is already making the point in sentences. */
+.fnd-q-link[data-state="NOT BUILT"] .fnd-q-link-text { color: var(--wb-gold-mute); }
+
 /* the two ways out sit on one line; the separator is furniture and takes the
    quiet step so it does not read as a third link. */
 .fnd-sep { color: var(--wb-gold-mute); }

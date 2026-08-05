@@ -122,8 +122,29 @@ NOT BUILT = donations in Weird.Baby's name, the supply registry, the service
 registry. The invoice is real and carries one published figure (the AI line);
 the other four are Papa's to publish.
 
-**THE ONE RECONCILIATION IT FORCED,** flagged for Mike: `/foundation` Q7 ("Can I
-send money?") answered a flat *No*, written when the only money in this building
+**[v54/F5 2026-08-05] TWO ADDITIONS FROM MIKE, AND A THIRD HELD.**
+
+- **THE RULE FOR EARMARKED MONEY**, now the money section's second law, set the
+  same way *"We list only what we need"* is set: **"Money given for a cost is
+  spent promptly on that cost, or it goes back. Nothing is pooled and there is
+  no slush fund."**
+- **THE MECHANISM**, one sentence of invoice small print: **a cost carried by
+  somebody other than the keeper takes its own line on the invoice, in the name
+  of whoever carried it.** A standing rule of that document, true before it has
+  an instance — the same way the register's NOT BUILT rows are true before they
+  are built.
+- **HELD: TWO REAL HOUSEHOLDS.** He supplied two zero-cost invoice lines naming
+  real people against real costs (the domain; the stickers). **They are in no
+  file in this repository** — not `src/`, not the round log — because consent to
+  be named on a public page is not the museum's to assume on somebody else's
+  behalf, and this house has already taken a name off the glass once for less
+  (CS 2026-08-04, the operator's own). **The rule and the mechanism needed no
+  name to be true, which is why they shipped and the lines did not.** One word
+  per household unblocks it: `docs/OPEN_ACTIONS.md` M38.
+
+**THE ONE RECONCILIATION IT FORCED,** flagged for Mike: `/foundation` Q7 (**since
+v54/F6 titled "Can I donate?" — his own title; the answer below is unchanged**)
+answered a flat *No*, written when the only money in this building
 was money to RUN it. Three incoming channels make that answer wrong on its own
 page. It was NARROWED, not reversed — every word about the museum's costs
 survives, including "there is no account to fill"; what is added is the

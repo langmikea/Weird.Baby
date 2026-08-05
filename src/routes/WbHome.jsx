@@ -345,8 +345,20 @@ export default function WbHome() {
             {/* [WAL 2026-08-02] listed exactly like the others: same button,
                 same arrow, same navigate call. A new exhibit is one entry here
                 and one route, which is the whole point of the machinery being
-                shared. */}
-            <button className="wb-dir-entry" onClick={() => navigate("/wal")}>
+                shared.
+                [F7 2026-08-05] MIKE: INDENT THIS ONE. It is the only entry on
+                the board that begins with the word "Other", and the word is
+                doing work the flush-left list was flattening: the first two
+                lines are the house's own, this one is everybody else's, and M8
+                built the ORDER to say that while leaving the two kinds sitting
+                on the same margin. An indent is the plainest way a board says
+                "and also these" — it makes the relationship visible at a glance
+                instead of asking a stranger to infer it from a word.
+                THE ARROW STAYS ON THE RIGHT EDGE and only the label moves, so
+                the column of arrows down the board is unbroken. Indenting the
+                whole button would have taken its rule and its arrow with it and
+                read as a broken row rather than a nested one. */}
+            <button className="wb-dir-entry wb-dir-entry-sub" onClick={() => navigate("/wal")}>
               <span>Other Music Worth a Listen</span><span className="wb-dir-arrow">&rarr;</span>
             </button>
             {/* [N1 2026-08-04] THE BOOTH LEAVES THIS POSITION — see the note at
