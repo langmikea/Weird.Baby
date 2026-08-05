@@ -61,6 +61,17 @@
              not a destination, it is a promise, and the menu is not the place to
              keep promises."
      assets  public refs, resolved to asset-table uids at build time.
+     prod    [R3] THE PRODUCTION ARC — needed · printed · photographed · placed.
+             The MANUAL-PAGE VESSEL'S FIELD and no other row's; `null`
+             everywhere else. It is NOT `arc`: `arc` is how the house REVEALS a
+             thing it has, this is whether the house HAS it. `build` derives
+             from it, so a page cannot be written into a state the world is not
+             in. Vessel and rules: reveal/schema.mjs.
+     calledBy[R3] the `record.NNN` rows whose entries ask for this thing. It is
+             the supply line Mike ruled for the manual — pages come one at a
+             time, as the story reaches for them — and it is validated against
+             real rows, so nothing can be called for by an entry that does not
+             exist.
      note    anything a reader needs and the fields above cannot hold.
 
    ═══ WHAT IT CANNOT DO, stated here so nobody has to discover it ═══════════
@@ -76,6 +87,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
+import { validate, manualPageRow } from "./schema.mjs";
+import { entries as recordEntries, RECORD_SOURCE } from "./record-entries.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
@@ -104,6 +117,8 @@ function R(id, name, cls, where, build, reach, state, extra = {}) {
     arc: extra.arc ?? null,
     shown: extra.shown === true,
     assets: resolve(extra.assets),
+    prod: extra.prod ?? null,
+    calledBy: extra.calledBy || [],
     note: extra.note || "",
   });
 }
@@ -298,10 +313,112 @@ R("doc.manual", "The Manual — 24-page 1965 operating & maintenance manual, ABE
 R("doc.manual.plates", "The Manual's microfiche plates — the photographed pages.",
   "document", "src/data/artists/robots.js face.plates", "NOT_BUILT", null, "HELD",
   { deps: ["Mike's camera — P2; ≥2400px long edge, whole page including margins, reel order = reading order"],
-    shown: true, note: "DOC CONTROL and The Manual's own face both name them." });
-R("doc.record", "The Record — the weekly journal of the reverse-discovery.",
+    shown: true, note: "DOC CONTROL and The Manual's own face both name them. THE SET-LEVEL PROMISE LIVES HERE and nowhere else — the individual page rows below are not `shown`, because the museum makes one promise about plates and it is this one." });
+
+/* ═════════ 7b. THE MANUAL'S PAGES — THE VESSEL, EMPTY [R3 2026-08-05] ══════
+   MIKE'S RULING, and it changes what this is FOR: the manual ARRIVED IN PIECES,
+   so the museum needs only the specific pages the story reaches for — printed,
+   marked, photographed, one at a time, as Record entries call for them.
+
+   THAT IS A SUPPLY LINE, NOT A SCANNING PROJECT, and the difference is the
+   whole design. `doc.manual.plates` above is one row for a set of 24 and can
+   only ever read NOT_BUILT until all of it is done; twenty-three photographed
+   pages and one missing would read exactly the same as none. A page that
+   carries its own production stage, and names the entry that asked for it, can
+   be finished on its own.
+
+   THE VESSEL IS `manualPageRow()` IN reveal/schema.mjs. It refuses a page the
+   manual does not have, derives `build` from the production stage so a row
+   cannot claim a state the world is not in, and validates `calledBy` against
+   real `record.NNN` rows so nothing can be called for by an entry that does not
+   exist.
+
+   NOTHING IS POPULATED, BY INSTRUCTION: the story has not asked for a page yet,
+   and a page row written before an entry calls for it would be Ops deciding
+   which page the story reaches for. When one is called for, it is one line:
+
+       MANUAL_PAGE(7, { prod: "needed", calledBy: ["record.013"] })
+
+   THE VESSEL IS PROVED WITHOUT SHIPPING A ROW. `npm run reveal:check` builds a
+   specimen at each of the four stages, runs it through the same validator this
+   file uses, and asserts the derived build/state/reach — then throws it away.
+   An untested container is the shape of C7 (the Record's inline doors, built
+   at v45, still exercised by nothing); this one is exercised on the day it is
+   written and no visitor is shown a page to achieve it. */
+const MANUAL_PAGE = (page, opts) => {
+  const { id, name, cls, where, build, reach, state, extra } = manualPageRow(page, opts);
+  R(id, name, cls, where, build, reach, state, extra);
+};
+/* (no calls — see above) */
+/* [R1 2026-08-05] THIS ROW IS NOW THE VOLUME, AND ONLY THE VOLUME. The entries
+   have their own rows below it. The split is not tidiness: M18's twenty-seven
+   questions are questions about ENTRY 013 and travel with it, while M19 — what
+   a record NUMBER means — is a property of the volume and stays here. Before
+   the split both hung off one row and neither could be answered against
+   anything smaller than "the Record". */
+R("doc.record", "The Record — the volume: the weekly journal of the reverse-discovery.",
   "document", "src/routes/exhibit/RecordEntry.jsx", "PARTIAL", "a track on /robots", "REVEALED",
-  { deps: ["M18", "M19"], note: "ONE entry. The 436-record count that used to sit here was invented and is gone." });
+  { deps: ["M19 — what a record number means"],
+    note: "The volume, not its entries — one `record.NNN` row per entry, derived from the data. PARTIAL because it holds one entry; the 436-record count that used to sit here was invented and is gone." });
+
+/* ═════════ 7a. THE RECORD'S ENTRIES — ONE ROW EACH [R1 2026-08-05] ═════════
+   AUDIT §8a: at sixty entries the Record becomes the museum's largest consumer
+   of assets and every entry will want to name its own. So the granularity moves
+   from one `doc.record` row to one row per entry. The schema does not change,
+   the join does not change, and the C32-safe key does not change — only how
+   finely the table is cut.
+
+   THE ROWS ARE DERIVED, NOT TYPED, and that is the enforcement of §8a's
+   constraint rather than a convenience. `record-entries.mjs` hands this loop
+   ENTRY NUMBERS AND ASSET PATHS and nothing else — it physically cannot pass a
+   headline, a dateline or a section — so a Record entry's words have no route
+   into this file. Sixty entries produce sixty rows with no edit here, and none
+   of them can carry a sentence of the Record.
+
+   WHAT IS AUTHORED is the half a parser cannot know: the schedule, the
+   dependencies, the reveal arc. That is `RECORD_ENTRY` below, keyed by number,
+   and it is empty of everything nobody has supplied.
+
+   REACH AND STATE ARE INHERITED FROM THE FACE, not hard-coded: an entry is
+   reachable exactly when the surface holding it is. Hold the face and every
+   entry goes held with it, in one place. */
+const RECORD_ENTRY = {
+  /* 013 is PARTIAL rather than LIVE and the reason is on the record: it renders
+     completely and it is knowingly incomplete — `docs/RECORD_013_QUESTIONS`
+     lists twenty-seven gaps in it. `build` is what is TRUE TODAY, and what is
+     true today is that this entry is missing content its own question list
+     names. No `arc`: nothing attests one, and M28's discipline is that an
+     unset arc is the honest state rather than a blank to fill. */
+  13: {
+    build: "PARTIAL",
+    deps: ["M18 — twenty-seven open questions on this entry"],
+    note: "The volume's only entry. Stripped at v47 to the four facts Mike supplied; every gap that exposed is a question in M18 rather than a sentence in the data.",
+  },
+};
+{
+  const face = ROWS.find(r => r.id === "face.viiip.record");
+  const revealed = face && face.state === "REVEALED";
+  for (const e of recordEntries()) {
+    if (e.no == null) {
+      /* An unnumbered entry cannot be given an id here. Minting one would be
+         Ops answering M19 — what a record number means — with a guess, on the
+         one surface that has already cost this museum ten invented entries. */
+      console.error(
+        "A Record entry carries no `no`. The ledger cannot mint an id for it:\n" +
+        "  that is M19 (what a record NUMBER means), and it is Mike's to answer.");
+      process.exit(1);
+    }
+    const nnn = String(e.no).padStart(3, "0");
+    const a = RECORD_ENTRY[e.no] || {};
+    R("record." + nnn, `Record ${nnn} — one entry in The Record.`,
+      "document", `${RECORD_SOURCE} face.entries`,
+      a.build || "LIVE",
+      revealed ? "inside THE RECORD, on /robots" : null,
+      revealed ? "REVEALED" : "HELD",
+      { when: a.when ?? null, deps: a.deps || [], arc: a.arc ?? null,
+        assets: e.assets, calledBy: a.calledBy || [], note: a.note || "" });
+  }
+}
 R("doc.record.evidence", "The Record's evidence, photographed. `.vp-fe-plate` is built and empty.",
   "document", "src/routes/exhibit/RecordEntry.jsx", "NOT_BUILT", null, "HELD",
   { deps: ["Mike's camera — P1"] });
@@ -483,23 +600,16 @@ R("channel.services", "Giving channel — a registry of services.", "commerce",
   "src/routes/Foundation.jsx LEDGER", "NOT_BUILT", null, "HELD",
   { deps: ["the same list, for work rather than goods"], shown: true });
 
-/* ═════════ WRITE ═════════════════════════════════════════════════════════ */
-const seen = new Set();
-for (const r of ROWS) {
-  if (seen.has(r.id)) { console.error("DUPLICATE id:", r.id); process.exit(1); }
-  seen.add(r.id);
-  if (!["LIVE", "PARTIAL", "STUB", "NOT_BUILT"].includes(r.build)) {
-    console.error("bad build on", r.id, r.build); process.exit(1);
-  }
-  if (!["HELD", "REVEALED", "RETIRED"].includes(r.state)) {
-    console.error("bad state on", r.id, r.state); process.exit(1);
-  }
-  if (r.state === "REVEALED" && !r.reach) {
-    console.error("REVEALED with no reach:", r.id); process.exit(1);
-  }
-  if (r.state === "HELD" && r.reach && r.build === "NOT_BUILT") {
-    console.error("HELD + NOT_BUILT cannot have a reach:", r.id); process.exit(1);
-  }
+/* ═════════ WRITE ═════════════════════════════════════════════════════════
+   THE VALIDATION IS `reveal/schema.mjs`'s, not this file's. Until R1 the rules
+   lived in two places — five checked here as the file wrote, four checked by
+   `reveal:check` afterwards, and the two lists were neither identical nor a
+   superset of each other. They are one function now and both callers run it. */
+const faults = validate(ROWS);
+if (faults.length) {
+  console.error(`THE DECLARATION IS INVALID — ${faults.length} fault(s):`);
+  faults.forEach(f => console.error("  " + f));
+  process.exit(1);
 }
 if (unresolved.length) {
   console.error("ASSET REFS NOT IN THE ASSET TABLE:", [...new Set(unresolved)]);
@@ -514,6 +624,9 @@ const out = {
   _arc: "arc: THE REVEAL ARC (Mike, 2026-08-04) — arrived · understood · partial · online · null. Same field, same values, as provenance/asset-table.json. `null` is UNSET and is not a stage.",
   _shown: "shown: true where a VISITOR CAN SEE THE LABEL of something that is not built — an engraved drum position that will not arm, a register row printed NOT BUILT, a document a face names and does not hold. It separates a PROMISE from a private gap. The twin's stub rows are NOT shown, because THE STUB LAW strips them from the menus.",
   _assets: "assets: asset-table `uid`s, resolved from public refs at build time. The uid survives a rename; the path does not — see C32.",
+  _prod: "prod: [R3] THE PRODUCTION ARC — needed · printed · photographed · placed. The manual-page vessel's field and no other row's; null everywhere else. NOT the same field as `arc`: `arc` is how the house REVEALS a thing it has, `prod` is whether the house HAS it. `build` is DERIVED from it, so a page cannot claim a state the world is not in.",
+  _calledBy: "calledBy: [R3] the `record.NNN` rows whose entries ask for this thing — Mike's ruling that the manual arrived in pieces, so the museum needs only the pages the story reaches for. Validated against real rows: nothing can be called for by an entry that does not exist.",
+  _record: "record.NNN: [R1] one row per Record ENTRY, DERIVED from src/data/artists/robots.js rather than typed. The reader hands this table entry numbers and asset paths and nothing else, so a Record entry's headline, dateline or sections have no route into the ledger. THE LEDGER MUST NEVER BECOME A SECOND COPY OF THE RECORD (audit §8a) — `reveal:check` fails if any row here holds six consecutive words of the Record's own prose.",
   _join: "provenance/asset-table.json is one row per FILE and stays the authority on files. This is one row per REVEALABLE THING. Neither restates the other; they meet at `assets`.",
   generated: "node reveal/ledger-declare.mjs --write",
   rows: ROWS,

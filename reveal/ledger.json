@@ -6,6 +6,9 @@
  "_arc": "arc: THE REVEAL ARC (Mike, 2026-08-04) — arrived · understood · partial · online · null. Same field, same values, as provenance/asset-table.json. `null` is UNSET and is not a stage.",
  "_shown": "shown: true where a VISITOR CAN SEE THE LABEL of something that is not built — an engraved drum position that will not arm, a register row printed NOT BUILT, a document a face names and does not hold. It separates a PROMISE from a private gap. The twin's stub rows are NOT shown, because THE STUB LAW strips them from the menus.",
  "_assets": "assets: asset-table `uid`s, resolved from public refs at build time. The uid survives a rename; the path does not — see C32.",
+ "_prod": "prod: [R3] THE PRODUCTION ARC — needed · printed · photographed · placed. The manual-page vessel's field and no other row's; null everywhere else. NOT the same field as `arc`: `arc` is how the house REVEALS a thing it has, `prod` is whether the house HAS it. `build` is DERIVED from it, so a page cannot claim a state the world is not in.",
+ "_calledBy": "calledBy: [R3] the `record.NNN` rows whose entries ask for this thing — Mike's ruling that the manual arrived in pieces, so the museum needs only the pages the story reaches for. Validated against real rows: nothing can be called for by an entry that does not exist.",
+ "_record": "record.NNN: [R1] one row per Record ENTRY, DERIVED from src/data/artists/robots.js rather than typed. The reader hands this table entry numbers and asset paths and nothing else, so a Record entry's headline, dateline or sections have no route into the ledger. THE LEDGER MUST NEVER BECOME A SECOND COPY OF THE RECORD (audit §8a) — `reveal:check` fails if any row here holds six consecutive words of the Record's own prose.",
  "_join": "provenance/asset-table.json is one row per FILE and stays the authority on files. This is one row per REVEALABLE THING. Neither restates the other; they meet at `assets`.",
  "generated": "node reveal/ledger-declare.mjs --write",
  "rows": [
@@ -24,6 +27,8 @@
    "assets": [
     "A-e951825925"
    ],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -39,6 +44,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Carries no image by ruling — M23a, the Visual Hook Law's first recorded exception."
   },
   {
@@ -54,6 +61,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Its LIVE / NOT BUILT column is the first surface wired to this ledger — see reveal.channel.*."
   },
   {
@@ -71,6 +80,8 @@
    "assets": [
     "A-3176119348"
    ],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -86,6 +97,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -101,6 +114,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -118,6 +133,8 @@
    "assets": [
     "A-0c23f52c19"
    ],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -133,6 +150,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "HELD PERMANENTLY BY RULING (ASSET_REVEAL_CHECKLIST §E): reachable, never listed. PARTIAL because the deck's journal tab is dead machinery (M17) and the page is one exhibit plus an unlinked discography."
   },
   {
@@ -148,6 +167,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -165,6 +186,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Not linked from anywhere. The return-visitor signal is constrained by /booth's privacy answer."
   },
   {
@@ -180,6 +203,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -195,6 +220,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -210,6 +237,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Both names have been live URLs. A third rename re-points this, it does not add another."
   },
   {
@@ -225,6 +254,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -240,6 +271,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Ships with no picture since the 31½ card was struck — M29."
   },
   {
@@ -257,6 +290,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Three of its four rows describe things a visitor cannot reach — C31."
   },
   {
@@ -272,6 +307,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -289,6 +326,8 @@
    "assets": [
     "A-76f368fad5"
    ],
+   "prod": null,
+   "calledBy": [],
    "note": "[Q3] The album took the first name on 2026-08-05; this face is where the two names are reconciled."
   },
   {
@@ -304,6 +343,8 @@
    "arc": "arrived",
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "The newest spread is open paper; older spreads stow in a <details> that states its own count."
   },
   {
@@ -321,6 +362,8 @@
    "assets": [
     "A-9efabd74e3"
    ],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -336,6 +379,8 @@
    "arc": "arrived",
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "M7: three of the nine do not show what their captions say. M25: the tombstone says 'before power' and one plate is captioned as the firmware running."
   },
   {
@@ -354,6 +399,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Holds exactly ONE entry. The other ten were fiction and were deleted at v47. The container's pagination (C1), doors (C7) and epoch (C8) are built and unexercised."
   },
   {
@@ -373,6 +420,8 @@
    "assets": [
     "A-a0213b3864"
    ],
+   "prod": null,
+   "calledBy": [],
    "note": "`plates: []`. Its one image is a render where B8's own ruling requires a photograph of the print — M4."
   },
   {
@@ -390,6 +439,8 @@
    "assets": [
     "A-8e8e1b8682"
    ],
+   "prod": null,
+   "calledBy": [],
    "note": "M2: that plate is mirror-reversed, and the whole photograph is flipped."
   },
   {
@@ -405,6 +456,8 @@
    "arc": "online",
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "The panel is the immersion's first step; the latch opens the twin."
   },
   {
@@ -420,6 +473,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -435,6 +490,8 @@
    "arc": "online",
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -452,6 +509,8 @@
    "arc": null,
    "shown": true,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1."
   },
   {
@@ -469,6 +528,8 @@
    "arc": null,
    "shown": true,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1."
   },
   {
@@ -486,6 +547,8 @@
    "arc": null,
    "shown": true,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1."
   },
   {
@@ -503,6 +566,8 @@
    "arc": null,
    "shown": true,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1."
   },
   {
@@ -520,6 +585,8 @@
    "arc": null,
    "shown": true,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1."
   },
   {
@@ -535,6 +602,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -550,6 +619,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -565,6 +636,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -582,6 +655,8 @@
    "arc": null,
    "shown": true,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -597,6 +672,8 @@
    "arc": "online",
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -612,6 +689,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -627,6 +706,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -644,6 +725,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Delivery is built; eleven rows carry WORDS PARKED. One row is a tombstone for a message Mike killed."
   },
   {
@@ -659,6 +742,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -674,6 +759,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "The Bullshit Detector is the only feature that makes the microphone real."
   },
   {
@@ -689,6 +776,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -707,6 +796,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Stripped from the menu by THE STUB LAW — a row that leads to 'not built' is a promise, and the menu is not where promises are kept."
   },
   {
@@ -722,6 +813,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -737,6 +830,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -752,6 +847,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -767,6 +864,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -782,6 +881,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -797,6 +898,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -812,6 +915,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -829,6 +934,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -844,6 +951,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -859,6 +968,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -876,6 +987,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -893,6 +1006,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -908,6 +1023,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -923,6 +1040,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "The twin sets a slot; the firmware hardcodes 8 and per-engine voices override it (spec s3)."
   },
   {
@@ -938,6 +1057,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "THE ABSENT-NAME LAW: with no name on file every user-reference surface says <NO USER NAME>."
   },
   {
@@ -955,6 +1076,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "READ/RUN passcodes ride all 175 menu rows and are checked nowhere."
   },
   {
@@ -972,6 +1095,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "The faux-assembly scroller Code Runner would surface already exists and runs in SYSTEM_MONITOR."
   },
   {
@@ -989,6 +1114,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1004,6 +1131,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1019,6 +1148,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1034,6 +1165,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1049,6 +1182,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Reads as a first cut — drift/settle, snow density and shake response all want work (robots R7)."
   },
   {
@@ -1064,6 +1199,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1079,6 +1216,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1094,6 +1233,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1109,6 +1250,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1124,6 +1267,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1139,6 +1284,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1154,6 +1301,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1169,6 +1318,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Its config page uses the old bracket-hint grammar rather than PanelG — the walk-seven gap stands."
   },
   {
@@ -1184,6 +1335,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "TWIN DELTA, marked in the dispatcher: the firmware has no handler, so clicking a game does nothing on the machine today."
   },
   {
@@ -1199,6 +1352,8 @@
    "arc": "online",
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1214,6 +1369,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1229,6 +1386,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Discovery is already how this works."
   },
   {
@@ -1246,6 +1405,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1261,6 +1422,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Stub rows are stripped from the menus in the shipped walk, so a visitor never reaches this screen."
   },
   {
@@ -1276,6 +1439,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "PDF plus 24 rasters from one source; 22 sections, 5 [ART REQUIRED] frames, 9 [PAPA] slots."
   },
   {
@@ -1293,11 +1458,13 @@
    "arc": null,
    "shown": true,
    "assets": [],
-   "note": "DOC CONTROL and The Manual's own face both name them."
+   "prod": null,
+   "calledBy": [],
+   "note": "DOC CONTROL and The Manual's own face both name them. THE SET-LEVEL PROMISE LIVES HERE and nowhere else — the individual page rows below are not `shown`, because the museum makes one promise about plates and it is this one."
   },
   {
    "id": "doc.record",
-   "name": "The Record — the weekly journal of the reverse-discovery.",
+   "name": "The Record — the volume: the weekly journal of the reverse-discovery.",
    "cls": "document",
    "where": "src/routes/exhibit/RecordEntry.jsx",
    "build": "PARTIAL",
@@ -1305,13 +1472,35 @@
    "state": "REVEALED",
    "when": null,
    "deps": [
-    "M18",
-    "M19"
+    "M19 — what a record number means"
    ],
    "arc": null,
    "shown": false,
    "assets": [],
-   "note": "ONE entry. The 436-record count that used to sit here was invented and is gone."
+   "prod": null,
+   "calledBy": [],
+   "note": "The volume, not its entries — one `record.NNN` row per entry, derived from the data. PARTIAL because it holds one entry; the 436-record count that used to sit here was invented and is gone."
+  },
+  {
+   "id": "record.013",
+   "name": "Record 013 — one entry in The Record.",
+   "cls": "document",
+   "where": "src/data/artists/robots.js face.entries",
+   "build": "PARTIAL",
+   "reach": "inside THE RECORD, on /robots",
+   "state": "REVEALED",
+   "when": null,
+   "deps": [
+    "M18 — twenty-seven open questions on this entry"
+   ],
+   "arc": null,
+   "shown": false,
+   "assets": [
+    "A-c5bccbede9"
+   ],
+   "prod": null,
+   "calledBy": [],
+   "note": "The volume's only entry. Stripped at v47 to the four facts Mike supplied; every gap that exposed is a question in M18 rather than a sentence in the data."
   },
   {
    "id": "doc.record.evidence",
@@ -1328,6 +1517,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1343,6 +1534,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Honestly v1: names and form only. No reading of the source is on file."
   },
   {
@@ -1361,6 +1554,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1378,6 +1573,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Its whole character is DISCOVERED."
   },
   {
@@ -1395,6 +1592,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1412,6 +1611,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1429,6 +1630,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1444,6 +1647,8 @@
    "arc": "arrived",
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1461,6 +1666,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "The museum holds none. Its own archive is titled DETAILS ONLY and its tombstone says the frame is withheld, which is why the album's cover wears a detail (M30)."
   },
   {
@@ -1479,6 +1686,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1496,6 +1705,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "MIKE: 'Maybe the nickels are hidden inside of the thing so they're not even photographed.' The four reveal classes do not cover this — a fifth, SEALED, is PROPOSED AND NOT ADOPTED, and naming it is Mike's."
   },
   {
@@ -1513,6 +1724,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1530,6 +1743,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1547,6 +1762,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Wired; currently an unexposed recipe."
   },
   {
@@ -1564,6 +1781,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "EGG-SLOT marks exist in Boot3_Chatter. No eggs invented."
   },
   {
@@ -1579,6 +1798,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "The reading itself NEVER carries the name — it is written to a sign, not to a person."
   },
   {
@@ -1594,6 +1815,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1612,6 +1835,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Delivery is built and triggers on the twentieth question. Under the 50Kft fiction this stops being an accident and becomes evidence the uplink is live."
   },
   {
@@ -1630,6 +1855,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1647,6 +1874,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1662,6 +1891,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1680,6 +1911,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "RAISED, UNRULED (PROPS_LEDGER-20260804)."
   },
   {
@@ -1697,6 +1930,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "WRITTEN, DELIBERATELY UNUSED (C2)."
   },
   {
@@ -1715,6 +1950,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1730,6 +1967,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1745,6 +1984,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1760,6 +2001,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1775,6 +2018,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1790,6 +2035,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1805,6 +2052,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1820,6 +2069,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1837,6 +2088,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Zero call sites. The screech reaches the glass only through Boot3_Chatter's direct FX_modem call."
   },
   {
@@ -1854,6 +2107,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Mike wrote PlaySlosh in the original firmware and it was never transliterated into the twin at all; the suspension was silent from the day the twin was built until 2026-07-26."
   },
   {
@@ -1869,6 +2124,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1884,6 +2141,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1899,6 +2158,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1914,6 +2175,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1929,6 +2192,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1944,6 +2209,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1959,6 +2226,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "On file in the robots repo; nothing on the museum's glass plays it."
   },
   {
@@ -1976,6 +2245,8 @@
    "assets": [
     "A-e9c6cefe39"
    ],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -1993,6 +2264,8 @@
    "assets": [
     "A-c21bb8cd4d"
    ],
+   "prod": null,
+   "calledBy": [],
    "note": "M3: the portrait is a phone selfie in a vehicle wearing another band's name."
   },
   {
@@ -2010,6 +2283,8 @@
    "assets": [
     "A-76b42a030d"
    ],
+   "prod": null,
+   "calledBy": [],
    "note": "M16: 'That Can't Be Right' has ZERO song facts — all three it had were our own research narrative and were struck."
   },
   {
@@ -2025,6 +2300,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -2042,6 +2319,8 @@
    "arc": null,
    "shown": true,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "INTENTIONALLY ABSENT and the absence is on the page. The /hr blocker, not recreated."
   },
   {
@@ -2059,6 +2338,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Typographic placeholders, flagged for art."
   },
   {
@@ -2076,6 +2357,8 @@
    "assets": [
     "A-3176119348"
    ],
+   "prod": null,
+   "calledBy": [],
    "note": "M20: the three Printful variants still carry the old low-res print master. The in-shop image is fine."
   },
   {
@@ -2093,6 +2376,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -2110,6 +2395,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -2127,6 +2414,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -2142,6 +2431,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "deleted v46/C3"
   },
   {
@@ -2157,6 +2448,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "deleted v46/C3"
   },
   {
@@ -2172,6 +2465,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "deleted v46/C3"
   },
   {
@@ -2187,6 +2482,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "deleted v50/N1; orphaned parts_drawer.jpg — M9"
   },
   {
@@ -2202,6 +2499,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "struck v51/A5 under THE LAW OF SUBTRACTION; emptied the provenance register's INVENTION class"
   },
   {
@@ -2217,6 +2516,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "struck v51/M23a — 'THE TITLE IS THE GRAB'"
   },
   {
@@ -2232,6 +2533,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "struck v51/M23b"
   },
   {
@@ -2247,6 +2550,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "deleted v47/H2 — all invented, all survived four rounds of review"
   },
   {
@@ -2262,6 +2567,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "all three retired; no query parameter selects a variant anywhere in the building"
   },
   {
@@ -2277,6 +2584,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "Runs on every packet beside lint and build. INVENTION is 0 and its ceiling is ratcheted to 0."
   },
   {
@@ -2292,6 +2601,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "[C32 2026-08-05] re-keyed: `uid` is minted once, `sha256` resolves a pure rename, and a judged row whose file is gone is now reported rather than dropped."
   },
   {
@@ -2309,6 +2620,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "One consumer is wired (the Foundation's state column). Everything else still hard-codes its own availability."
   },
   {
@@ -2324,6 +2637,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -2339,6 +2654,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -2354,6 +2671,8 @@
    "arc": null,
    "shown": false,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -2371,6 +2690,8 @@
    "arc": null,
    "shown": true,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": "This row will read LIVE on the day that is real, and not one day before."
   },
   {
@@ -2388,6 +2709,8 @@
    "arc": null,
    "shown": true,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   },
   {
@@ -2405,6 +2728,8 @@
    "arc": null,
    "shown": true,
    "assets": [],
+   "prod": null,
+   "calledBy": [],
    "note": ""
   }
  ]

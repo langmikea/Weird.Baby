@@ -21,6 +21,7 @@
     "reveal": "node tools/reveal-ledger.mjs",
     "reveal:audit": "node tools/reveal-ledger.mjs --audit",
     "reveal:check": "node tools/reveal-ledger.mjs --check",
+    "reveal:cards": "node tools/reveal-ledger.mjs --cards",
     "reveal:build": "node reveal/ledger-declare.mjs --write"
   },
   "dependencies": {

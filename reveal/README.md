@@ -7,15 +7,18 @@ surfaces read the table."*
 
 ```
 reveal/ledger-declare.mjs   the authored source — EDIT THIS
+reveal/schema.mjs           the row vessels and THE ONE VALIDATOR
+reveal/record-entries.mjs   reads the Record's entries out of the Record
 reveal/ledger.json          the artifact pages read — GENERATED, never edited
 src/lib/reveal.js           the only thing in src/ that reads it
-tools/reveal-ledger.mjs     report · audit · integrity check
+tools/reveal-ledger.mjs     report · audit · cue cards · integrity check
 ```
 
 ```
 npm run reveal:build    rebuild ledger.json from the declaration
 npm run reveal          the report
 npm run reveal:audit    the five audit sections (docs/REVEAL_LEDGER_AUDIT.md)
+npm run reveal:cards    THE CUE CARDS — the scheduling questions, one per card
 npm run reveal:check    integrity; exits 1 on a fault
 ```
 
@@ -41,7 +44,19 @@ Most rows have no file at all.
 | `arc` | the REVEAL ARC: `arrived` · `understood` · `partial` · `online` · `null`. |
 | `shown` | true where a visitor can READ THE LABEL of something not built. |
 | `assets` | asset-table `uid`s. |
+| `prod` | the PRODUCTION arc — `needed` · `printed` · `photographed` · `placed`. The manual-page vessel's field and no other row's. |
+| `calledBy` | the `record.NNN` rows whose entries ask for this thing. |
 | `note` | what the fields above cannot hold. |
+
+### `arc` and `prod` are not the same field and must never be merged
+
+`arc` is how the house **reveals** a thing it has. `prod` is whether the house
+**has** it. A page can be `photographed` and `null` on the reveal arc, and the
+two would be lying about each other if they shared a column.
+
+`build` is **derived** from `prod`, not authored beside it: `needed` and
+`printed` are `NOT_BUILT`, `photographed` is `PARTIAL`, `placed` is `LIVE`. A
+page row therefore cannot be written into a state the world is not in.
 
 ### `build` and `state` are two different axes, and conflating them is the
 ### first mistake anyone will make
@@ -66,6 +81,55 @@ positions are engraved where a visitor reads them and will not arm — that is
 false`, because THE STUB LAW strips them from the menus: *a row that leads to
 "not built" is not a destination, it is a promise, and the menu is not the
 place to keep promises.*
+
+---
+
+## 1a. THE RECORD IS CUT ONE ROW PER ENTRY, AND THE ROWS ARE DERIVED
+
+`record.013`, `record.014`, … — one row per entry, **read out of
+`src/data/artists/robots.js` rather than typed.** Sixty entries produce sixty
+rows with no edit to the declaration, and each carries its own assets, its own
+dependencies and its own `when`. `doc.record` remains, and is now **the volume
+only**: M19 (what a record NUMBER means) is a property of the volume and stays
+there; M18's twenty-seven questions are about entry 013 and travel with it.
+
+**THE LEDGER MUST NEVER BECOME A SECOND COPY OF THE RECORD.** Audit §8a states
+why: an entry's headline, dateline and sections live in the Record, and the
+moment both files hold the same sentence they can disagree and nobody knows
+which is lying. It is enforced three ways, not asserted once:
+
+1. **The generator cannot see the words.** `record-entries.mjs` is split in
+   two — `entries()` returns numbers and asset paths and nothing else, and it
+   is the only half the ledger builds from. A headline has no route in.
+2. **`reveal/schema.mjs` refuses the Record's FIELD NAMES** on any row —
+   `headline`, `dateline`, `sections`, `lead`, `body`, `tomb`, `still`, …
+3. **`reveal:check` refuses its SENTENCES** — six consecutive words of the
+   Record's own prose, or any whole Record line of four words or more,
+   appearing anywhere in a row's `name`, `note`, `reach`, `where` or `deps`.
+
+An entry the Record has not numbered **fails the build** rather than being
+given an id. Minting one would be Ops answering M19 with a guess.
+
+## 1b. THE MANUAL'S PAGES — A VESSEL, DELIBERATELY EMPTY
+
+Mike's ruling: the manual **arrived in pieces**, so the museum needs only the
+specific pages the story reaches for — printed, marked, photographed, one at a
+time, as Record entries call for them. That is a supply line, not a scanning
+project, and `doc.manual.plates` cannot express it: one row for a set of 24
+reads `NOT_BUILT` whether twenty-three pages are done or none.
+
+So `manualPageRow()` in `reveal/schema.mjs` builds `doc.manual.page.NN`, which
+carries its own `prod` stage and the `calledBy` entry that asked for it. It
+**refuses a page the manual does not have** (the range is the object's own 24,
+and the source render is checked on disk), and it validates `calledBy` against
+real `record.NNN` rows.
+
+**Nothing is populated.** The story has not asked for a page, and writing one
+before it does would be Ops choosing which page the story reaches for. The
+vessel is instead **proved by `reveal:check`**, which builds specimens at all
+four stages, asserts the derived build/state/reach against literals, checks
+each refusal actually refuses, and throws them away. No page is invented to
+prove the container.
 
 ---
 
@@ -129,6 +193,34 @@ own availability, and converting more is a per-surface decision, not a sweep.
 
 ---
 
+## 3a. THE CUE CARDS — how the schedule actually gets filled
+
+`npm run reveal:cards`. **An Ops instrument: not a route, never shipped, prints
+to a terminal.** Same shape and same reasoning as `assets:checklist`, which
+prints Mike's inspection list for the approval gate — a scheduling UI at a live
+address would be a museum surface whose subject is the making of the museum,
+which Doctrine 11 forbids on the glass.
+
+One card per row, in Doctrine 12's own order: what it is · where it stands ·
+what has to happen first · one blank. Answers come back as `when:` values in
+`ledger-declare.mjs`. Nothing about it blocks anything.
+
+```
+npm run reveal:cards                    the 49 HELD rows with no date  ← the deck
+npm run reveal:cards -- --spendable     the back shelf: built, not revealed
+npm run reveal:cards -- --cls egg       one class at a time
+npm run reveal:cards -- --record        Record entries
+npm run reveal:cards -- --revealed      include what is already out
+npm run reveal:cards -- --all           every row, dated or not
+```
+
+**The default deck is HELD rows, not every undated row, and the difference is
+the point.** 143 rows carry no date; 93 of those are REVEALED — already on the
+glass — and asking what day something comes out when it came out months ago has
+no honest answer, because nobody recorded those days and Doctrine 12 forbids
+inventing them. The deck is the 49 the audit's §4 counts: the pile where the
+absence bites.
+
 ## 4. WHAT IT CANNOT DO
 
 Stated in full, because a register that overstates itself is worse than none.
@@ -149,6 +241,16 @@ The same section exists in `provenance/README.md` §4 for the same reason.
    when selecting it starts `SCAFFOLD_PROC`. If the dispatcher and a feature
    ever disagree, this table inherits the dispatcher's answer.
 6. **The physical rows are canon, not inventory.** Nobody counted nickels.
+7. **There is no way to say NEVER, and building the cue cards is what found
+   it.** `when: null` means *nobody has scheduled this*. It has to carry a
+   second meaning it cannot distinguish — *this is deliberately never
+   scheduled* — and at least one row is already in that state on a ruling:
+   `route.hr` is HELD PERMANENTLY, reachable and never listed, so its cue card
+   asks a question Mike has already answered. **This is the same gap the
+   proposed fifth reveal class names for artifacts** (`SEALED`: canon,
+   physically present, deliberately unphotographed, possibly reachable never —
+   `phys.nickels`). Adopting a value here would be Ops adopting that class, so
+   nothing was added. It is one question in `docs/OPEN_ACTIONS.md` M35.
 
 ---
 

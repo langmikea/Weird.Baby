@@ -9,7 +9,135 @@ Nothing was edited on the way out. These are the entries from 2026-05-06 to
 from 2026-05-30 forward — the lint-baseline entry, which is still load-bearing,
 and every v46+ round.
 
+**Appended 2026-08-05 (v55): v53, v52 and v51, verbatim and newest-first above
+v50.** `CLAUDE.md` had reached 711 lines. **Nothing load-bearing left the live
+tree with them** — v53's measured third-party table lives in `OPERATIONS.md` §5
+and its open ruling is register M37; v52's reveal-ledger model is
+`reveal/README.md` and `OPERATIONS.md` §5; v51's two standing laws (Doctrine 16
+THE LAW OF SUBTRACTION, and the Visual Hook Law's second recorded exception) are
+in `OPERATIONS.md` §7 and `STATE.md`. **Read a rule from where the rule lives,
+never from a session note** — which is the reason these can be archived at all.
+
 ---
+
+### 2026-08-05 → THE BOOTH EDIT + THE MISSING LAP (v53; B1–B6) — sealed
+- **B1** The lap v52 sealed without has run — eleven routes, desktop and 390px.
+  **The guest book steps by ONE NAME every 5s and wraps invisibly** (offset
+  1→…→9 showing `Ines·Ada·Bram` on the seam →0 with `snap`), **every sample
+  exactly three rows, `blanks: 0`**. **MGK-NIAC collides nowhere** — the band is
+  centred under its own cover to the pixel at 390px (123 = 123), the new cover
+  renders, the tracklist reads `The Name · Image Archive · Technical
+  Specificatio…`. **Method limits stated, not hidden:** this Chrome window is
+  maximised and bottoms out at a 540px client area, so 390px is a same-origin
+  **390×800 iframe rig** and the content width is **373px — tighter than a real
+  phone**; and the book will not advance while `document.hidden`, which was
+  confirmed FIRST unpatched (40+s at offset 0) before the flag was overridden to
+  watch it move.
+- **THE LAP'S OWN FINDING, and it is the round's largest:** `/hr` requests
+  **`www.facebook.com` ×16 across seventeen iframes on arrival**, and
+  `/robots`, `/wal`, `/wb` each request `www.youtube.com` ×3 — **nothing
+  clicked**. Read off `performance.getEntriesByType('resource')`. A grep of
+  `src/` finds every one of those strings and two rounds of readers still wrote
+  *"the only outside party this site touches"*: **only loading the page finds
+  the REQUEST.** Ruling is M37; the facade is C34.
+- **B2** *"Are you tracking me?"* rewritten to Mike's line — **the machine
+  remembers you and we don't** — with the cookie/storage distinction as
+  mechanism (a cookie travels to the server every request; browser storage is
+  read where it sits; both "no cookies" and "settings persist" are true at
+  once). The MGK's record named for what it is, with **zero `fetch` and zero
+  `XMLHttpRequest` in the whole twin**, and the purge surface named on the
+  glass: **Preferences ▸ User**. **The twin's keys live in the MUSEUM's origin**
+  — `wbr_*` read back off `weird.baby`'s own `localStorage`. Ten keys, not nine
+  (`Rec_Keys_Session` returns three since FR2); **no count is printed**.
+- **B3/B4/B5** Two forced questions deleted (the directory names the rooms, the
+  shop is one click) — eleven → nine. *"Can I use what is here?"* re-led on
+  **theirs is theirs**. The sweep read nine answers, fixed two — *"Is it really
+  free?"* was restating the credo 400px above it; *"What is this place?"* led
+  with ours — and **records why the other seven were left**.
+- Other lap findings: `/wal`'s title bar is down to **6px** of air at 390 (C36),
+  `/admin`'s controls are clipped and unreachable at 390 (C35), `/hr`'s FB cards
+  paint as blank blocks (C12, observed on localhost, **not** marked confirmed),
+  `/wb` prints "Weird.Baby" twice in its bar (C37), and **M30 is confirmed on
+  the glass** for the first time.
+- Gates: lint **11/9 = baseline**; build green **72 modules**; provenance
+  **PASS** (UNDECLARED 0, INVENTION 0, stale 0 — 4 rows added, 8 pruned, no
+  RESTATED chain broken); zero console errors/warnings on eleven routes.
+- Round log: `docs/MUSEUM_BOOTH_EDIT_LOG-20260805.md`.
+
+### 2026-08-05 → THE REVEAL LEDGER (v52; Q1–Q3, R1–R6) — sealed
+- **Q1** The guest book went blank on the live site, **and the arithmetic was
+  never the fault** — it was correct for every length it could reach. The
+  advance ran on a `setTimeout` and the wrap on a `transitionend`: **two clocks,
+  and only one of them stops when the page stops being rendered.** A hidden tab
+  throttles timers and SUSPENDS RENDERING, so the offset kept climbing and
+  nothing ever wrapped it back. The fix is **two guarantees that need no event
+  to arrive** — the offset is clamped to `[0, n]` where it is used, and the
+  copy count is derived (`1 + ceil(VISIBLE/n)`) so the track is always long
+  enough for that clamp. Blank is now unreachable at ANY length, proved by
+  exhaustive simulation with every event adversarially dropped (old machine:
+  blank at tick 4, row 119 of a 12-row track). Also pauses on `document.hidden`
+  and the wrap has a timeout backstop.
+- **Q2** `STEP` = 1. Bounce, 5.0s rest, 520ms move, hover pause and
+  reduced-motion fallback all untouched.
+- **Q3** MGK-VIII → **MGK-NIAC** on everything that LABELS the machine; UNCHANGED
+  on every sentence where the old name is a **fact of the record** (*"SOLD AS
+  MGK-VIII — ABEAL's 1965 rebrand"*), because conforming those would delete the
+  fact the rename is derived from. `id: "mgk-viii"` and
+  `/robots/reference/mgk-viii/` deliberately NOT renamed — a key and a
+  cross-repo directory that print nowhere. It closed a `[PAPA]` the face was
+  still printing. One judgement call: the track is now **THE NAME** (M36).
+- **R1/R2** `reveal/ledger.json` — **151 rows, one per REVEALABLE THING** across
+  both repos. The twin's rows are read off **the DISPATCHER** (`Run_EXE`), never
+  the CSVs, on Mike's instruction; the museum's 18 albums / 134 tracks are
+  extracted by script. `when` is null on every row (Doctrine 12).
+- **R3** **C32 CLOSED** — `uid` (minted once, the row's NAME) + `sha256` (resolves
+  a pure move) + **a refusal to guess**: a judged row whose file is gone is now
+  reported under its own banner with `--rename` as the human declaration. It
+  caught v51/A7's own stranded rename on the first run.
+- **R4/R5/R6** `docs/REVEAL_LEDGER_AUDIT.md`, generated not typed. `/foundation`'s
+  LIVE/NOT BUILT column reads the ledger — proved by flipping a row and reading
+  the change out of the built bundle. **The ledger returns STATE, never WORDS**,
+  because `provenance:gate` sweeps only `src/`.
+- Gates: lint **11/9 = baseline**; build green **72 modules**; provenance **PASS**
+  (INVENTION 0); asset table **253 rows, 0 orphaned judgements**; `reveal:check`
+  PASS. **THE BROWSER LAP DID NOT RUN** — the Chrome extension was unavailable
+  all session; every rendered string was verified in the BUILT BUNDLE instead,
+  which cannot catch layout or overflow. Named as a gap in the round log.
+- Round log: `docs/MUSEUM_REVEAL_LEDGER_LOG-20260805.md`.
+
+### 2026-08-04 → M23 RULED + THE ALBUM ROUND (v51; M23a–M23b, A1–A7) — sealed
+- **M23a/M23b** Mike ruled on both pairs v50 built, and both rulings went past
+  "pick one". The booth loses **BOTH** hook candidates with **no replacement** —
+  *"THE TITLE IS THE GRAB"* — and the exception is recorded beside the Visual
+  Hook Law: **a page whose own words are the hook needs no image.** The guest
+  book keeps the scrolling version and then changes it: **three rows, a stepped
+  PAGE advance**, `cubic-bezier(.34,1.3,.64,1)` bounce, 5.0s rest, wrap by
+  arithmetic on `transitionend`. `?hook=` and `?book=` are gone — **no query
+  parameter selects a variant anywhere in the building any more.**
+- **A1** `tools/make_unit_covers.py` — both machine albums on the ROBOTS
+  template, constants LIFTED from `make_robots_cover.py` so a re-render cannot
+  drift. VIIIp gets the unit whole; **MGK-VIII gets a detail because this museum
+  holds no photograph of it whole**, which its own archive says out loud (M30).
+- **A2/A3** the album band is a `1fr auto 1fr` grid — name centred under the
+  active cover (845=845 at 1706px, 185=185 at 386px), band 39.8 → 31.8px.
+  **`.ex-album-banner-aux` must not carry `min-width:0`** or the transport paints
+  across the name; measured overflow to x=−31. At ≤720px the one wing with a
+  transport falls back to two columns, and the arithmetic for why is in the log.
+- **A4** the three ramp steps above body come down (lead 1.14→1.09, head
+  1.32→1.19, display 1.56→1.30). Title 27.03 → 24.37. **Zero call sites
+  changed** — P7's law intact.
+- **A5** the 31½ card struck, and the count with it in all three places; the FAQ's
+  *"How many are there?"* removed rather than re-answered. **It emptied the
+  provenance register's INVENTION class** (3 → 0, ceiling ratcheted to 0) and
+  closed M1 by deletion. Cost, named: the FAQ face now ships with no picture
+  (M29). Mike's law recorded as **Doctrine 16, THE LAW OF SUBTRACTION**.
+- **A7** C14 (a WebP named `.jpg`) and C15 (unscrubbed collage captions, proved
+  live with an injected marker) closed. **C14 exposed C32** — the asset table is
+  keyed by path, so a rename drops every judgement on a file in silence.
+- Gates: lint **11/9 = baseline**; build green **70 modules**; provenance gate
+  **PASS** (0 undeclared, 0 stale, INVENTION 0); asset table **253 rows**;
+  desktop + genuine 386px laps over nine routes, zero horizontal scroll.
+- Round log: `docs/MUSEUM_ALBUM_ROUND_LOG-20260804.md`.
 
 ### 2026-08-04 → THE OVERNIGHT (v50; N1–N9) — sealed
 - **N1** THE MORGUE struck — both walls read **IMAGE ARCHIVE** (closes M6); **The

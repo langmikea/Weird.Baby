@@ -6,29 +6,49 @@ ledger. Every count and every list below is produced by
 rather than believed. Where a sentence is a judgement rather than a count, it
 says so.
 
+**[v55 2026-08-05] REFRESHED FOR THE RECORD MACHINERY ROUND.** Three things
+below moved and are marked where they moved: the counts (§ the table), the
+fifth-class question (§7, which gained a second case that is not an artifact),
+and §8 — **both of the things it designed are now built**, so it reads as a
+record of the design and a pointer at the thing rather than as a plan.
+
 **The table:** `reveal/ledger.json`, authored in `reveal/ledger-declare.mjs`.
-**151 rows** across both repos.
+**152 rows** across both repos.
 
 | | |
 |---|---|
-| REVEALED — a visitor can reach it today | **93** |
+| REVEALED — a visitor can reach it today | **94** |
 | HELD — built or part-built and deliberately not reachable | **49** |
 | RETIRED — was here, struck, named so nobody rebuilds it | **9** |
-| LIVE / PARTIAL / STUB / NOT_BUILT | **94 / 15 / 6 / 36** |
+| LIVE / PARTIAL / STUB / NOT_BUILT | **94 / 16 / 6 / 36** |
 | carrying a story date | **0** |
-| carrying dependencies | **51** |
-| joined to a file in the asset table | **11** |
+| carrying dependencies | **52** |
+| joined to a file in the asset table | **12** |
+| Record entries, one row each | **1** |
+| manual pages, one row each | **0** of 24 |
+
+**Every one of the five audit sections below is unchanged in count** — 12 / 11 /
+22 / 49 / 58. The round added one row (`record.013`) and moved two dependencies
+between existing rows; it released nothing and promised nothing.
 
 ---
 
 ## THE HEADLINE, BEFORE THE FIVE SECTIONS
 
-**Nothing in this museum has a story placement.** Every one of the 151 rows
+**Nothing in this museum has a story placement.** Every one of the 152 rows
 carries `when: null`. That is not an omission this round could have fixed —
 nobody has supplied a schedule, and Doctrine 12 forbids inventing one — but it
 means the ledger is today a **catalogue of what exists and what is held**, and
 not yet a schedule. The scheduling half of Mike's instruction is built,
 validated, and empty. **One field per row is all it takes to start.**
+
+**[v55] AND THE ASKING IS NOW BUILT.** `npm run reveal:cards` prints the
+question one row at a time — §8b's design, delivered. **49 cards**, one per HELD
+row with no date; `--spendable` narrows to the twelve on the back shelf, which
+are the only rows that can be released without building anything. The deck is
+deliberately not all 143 undated rows: 93 of those are already REVEALED, and
+asking what day a thing came out when nobody wrote the day down is an invitation
+to invent one.
 
 The consequence is worth stating plainly: *"where assets cluster on one day"*
 cannot be answered at all today. That section below is not thin, it is
@@ -139,7 +159,7 @@ is just the biggest thing the twin says that the machine does not.
 
 ## 4. WHAT HAS NO STORY PLACEMENT AT ALL
 
-**Everything. All 151 rows.** See the headline.
+**Everything. All 152 rows.** See the headline.
 
 The 49 HELD rows are the ones where the absence bites, because a held thing
 with no date is a thing with no plan to be released — which is a different
@@ -235,6 +255,12 @@ was itself invented, and it still calls a face "The Firmware", renamed at v50).
 It is kept as the document that named the four reveal classes and raised the
 proposed fifth; it should not be read as current build state.
 
+**[v55/R4] IT NOW SAYS SO ITSELF.** A superseded banner at its head points here
+and at the commands, names what it is kept for, and tabulates its three wrong
+claims against the truth. **Its body is deliberately not rewritten** — a first
+pass edited to agree with what came after it stops being a record of what was
+thought at the time, which is the only thing it is still for.
+
 ---
 
 ## 7. THE FIFTH REVEAL CLASS IS STILL PROPOSED AND STILL NOT ADOPTED
@@ -249,12 +275,32 @@ yet*, and a sealed thing may be reachable **never**.
 *"a reveal class that does not exist yet"*, which is the most honest row the
 table can carry until Mike names it.
 
+**[v55] IT IS NOT ONLY THE NICKELS, AND BUILDING THE CUE CARDS IS WHAT FOUND
+THE SECOND CASE.** `route.hr` — the Hunter Root reference wing — is **HELD
+PERMANENTLY BY MIKE'S OWN RULING**: reachable by URL, never listed, and this
+table has recorded that since it was built. Its cue card asks *what day does
+this come out*, and the answer is **never**, and it was given long ago.
+
+The mechanism underneath both is one field with two meanings it cannot tell
+apart: **`when: null` means *nobody has scheduled this*, and it is also the only
+way to say *this is deliberately never scheduled*.** A held thing with no date
+and a sealed thing with no date are the same row.
+
+That is the argument for a fifth class being a CLASS rather than a note about
+nickels — one missing word covers an artifact inside a machine and a whole wing
+of the museum. It is put to Mike as a single question at `OPEN_ACTIONS.md`
+[M35], and **nothing was adopted**: adding a value here would be Ops naming the
+class he was asked to name. A `no` is equally usable — it means HELD is the
+answer for both and the cards stop asking.
+
 ---
 
 ## 8. WHAT THE TABLE WILL NEED WHEN THE RECORD GOES LIVE (R6)
 
-**Designed here, not built.** Mike's instruction was to note what is needed and
-build only what R5 required. Two things, and one of them is nearly free:
+**Designed here at v52, and BOTH BUILT at v55 (2026-08-05).** The design is left
+standing below because it is the argument for the shape, and the shape did not
+change when it was built; each half is stamped with what it became. A third
+thing was built that this section did not foresee, and it is §8c.
 
 ### 8a. Per-entry asset references
 
@@ -273,6 +319,27 @@ dateline and sections live in the Record; the ledger row holds only what the
 ledger holds anywhere — is it reachable, should it be yet, what does it need
 first. The temptation at sixty entries will be to let the ledger become a second
 copy of the Record, and the moment it does, the two disagree.
+
+> **BUILT [v55/R1].** `record.013` exists and the row is **derived, not typed**:
+> `reveal/record-entries.mjs` parses the Record out of
+> `src/data/artists/robots.js` and is split in two so that the half the ledger
+> builds from returns **entry numbers and asset paths and nothing else.** A
+> headline has no route in. Sixty entries will produce sixty rows with no edit
+> to the declaration.
+>
+> **The constraint above is enforced three ways rather than asserted once:** the
+> generator cannot see the words; `reveal/schema.mjs` refuses a row carrying the
+> Record's field NAMES; and `reveal:check` refuses its SENTENCES — six
+> consecutive words of Record prose, or any whole Record line of four words or
+> more, in a row's `name`, `note`, `reach`, `where` or `deps`. All three were
+> broken on purpose and all three reported. A fourth check came with them: the
+> rows and the entries must be the same set in both directions.
+>
+> **`doc.record` stays and is now the volume only.** M18's twenty-seven
+> questions are about entry 013 and moved onto it; M19 — what a record NUMBER
+> means — is a property of the volume and did not. **An unnumbered entry fails
+> the build** rather than being given an id, because minting one would be Ops
+> answering M19 with a guess.
 
 ### 8b. The cue-card input view
 
@@ -293,6 +360,43 @@ wants, in any order, at his pace, and the answers come back as `when:` values in
 schedule nobody has started is the same mistake as building a menu row that
 leads to "not built".** It is a row in `docs/OPEN_ACTIONS.md`.
 
+> **BUILT [v55/R2].** `npm run reveal:cards`. The form is exactly the one
+> designed above — a printed card per row with its id, its name, its current
+> state, its dependencies and one blank — and it is an Ops instrument that
+> prints to a terminal, never a route.
+>
+> **One thing the design got wrong, and it was wrong in the first
+> implementation too:** "one card per row" is 143 undated rows, and **93 of them
+> are already REVEALED.** A card asking what day a thing comes out, for a thing
+> that came out months ago, has no honest answer — nobody recorded those days,
+> and Doctrine 12 forbids supplying them now. The deck is therefore **the 49
+> HELD rows**, which is §4's own number. `--revealed` and `--all` put the rest
+> back for anyone deliberately backfilling history.
+
+### 8c. WHAT §8 DID NOT FORESEE — the manual is a supply line
+
+**Not designed here at all; ruled by Mike at v55 and built the same round.** The
+manual was one ledger row for one PDF plus one row for the whole set of 24
+plates, and neither can track production. His ruling: **it arrived in pieces**,
+so the museum needs only the specific pages the story reaches for — printed,
+marked, photographed, one at a time, **as Record entries call for them.**
+
+That is a supply line, and it only became expressible because §8a happened
+first: a page is called for BY AN ENTRY, and until this round there were no
+entry rows to be called for by. `manualPageRow()` in `reveal/schema.mjs` builds
+`doc.manual.page.NN` with its own **production arc — needed · printed ·
+photographed · placed** — and a `calledBy` naming real `record.NNN` rows.
+
+**`prod` is not `arc`** and they are deliberately separate columns: `arc` is how
+the house REVEALS a thing it has, `prod` is whether the house HAS it. `build` is
+DERIVED from `prod`, so a page row cannot claim a state the world is not in.
+
+**Nothing is populated** — the story has not asked for a page — and the vessel
+is proved without one: `reveal:check` builds specimens at all four stages,
+asserts the derived states against literals, and asserts that every refusal
+(page 25, page 0, an unknown stage, a caller that does not exist, a placed page
+with no photograph) actually refuses. `docs/OPEN_ACTIONS.md` [M44].
+
 ---
 
 ## WHAT THIS AUDIT CANNOT DO
@@ -312,3 +416,7 @@ Stated in full, because a register that overstates itself is worse than none:
    starts `SCAFFOLD_PROC`. If the dispatcher and a feature ever disagree, this
    table inherits the dispatcher's answer.
 5. **The physical rows are canon, not inventory.** Nobody counted nickels.
+6. **[v55] It cannot say NEVER.** `when: null` means *nobody has scheduled
+   this* and has to double as *this is deliberately never scheduled*. Two rows
+   are already in the second state. See §7 — it is one question for Mike, and
+   nothing was adopted to paper over it.
