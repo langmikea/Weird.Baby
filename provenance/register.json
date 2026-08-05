@@ -1238,7 +1238,6 @@
    "p": "spine[].tracks[].face.title",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1250,7 +1249,6 @@
    "p": "spine[].tracks[].face.blurb",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1262,7 +1260,6 @@
    "p": "spine[].tracks[].face.lines[]",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1274,7 +1271,6 @@
    "p": "spine[].tracks[].face.lines[]",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1286,7 +1282,6 @@
    "p": "spine[].tracks[].face.lines[]",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1320,7 +1315,6 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1332,7 +1326,6 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1344,7 +1337,6 @@
    "p": "spine[].tracks[].face.entries[].note",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1363,7 +1355,6 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1375,7 +1366,6 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1394,7 +1384,6 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1406,7 +1395,6 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1425,7 +1413,6 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1437,7 +1424,6 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1456,7 +1442,6 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1468,7 +1453,6 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1487,7 +1471,6 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -1499,7 +1482,6 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "193e77f904886144",
     "05cba6df40937f0e",
     "c05fd1ad615d53a1"
    ]
@@ -16977,14 +16959,6 @@
    "t": "The output row, mid-pattern — March 2021.",
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "193e77f904886144": {
-   "f": "src/data/artists/robots.js",
-   "l": 1350,
-   "t": "An early issue of the working copy — arrangement first, before the text was set.",
-   "c": "VERIFIED",
-   "s": "the plate itself — weird-baby-robots/robots/mgk-viiip/manual/structure/pages/page-01.png, whose own type reads STRUCTURE ISSUE / STRUCTURE AND ARRANGEMENT ONLY / TEXT NOT SUPPLIED.",
-   "n": "THE ONE JUDGEMENT CALL IN THIS ROUND'S COPY. The page's words carry a second reading — the museum admitting it has not written the manual — which would be Doctrine 11 printed inside a picture where no string sweep can see it. The caption is written to hold the FIRST reading: an early issue circulated for arrangement is a fifth copy-state beside Mike's four (preliminary, final, marked-up, APPROVED), and DOC CONTROL's canon already says the manual was assembled out of copies caught at different stages. If the reading is too thin, the still comes off."
   },
   "25d0784b09bd5e18": {
    "f": "src/routes/WbHome.jsx",

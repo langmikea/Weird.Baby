@@ -47,7 +47,15 @@
 .adm { --wb-gold: var(--wb-booth-gold); --wb-gold-hi: var(--wb-booth-gold-hi); --wb-gold-lo: var(--wb-booth-gold-lo); }
 html[data-room="admin"], html[data-room="admin"] body { background: #050505; color: #d0cbc3; font-family: 'Courier Prime', monospace; min-height: 100vh; }
 .adm { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
-.adm-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; border-bottom: 1px solid #1a1a1a; padding-bottom: 20px; }
+/* [P5/C35 2026-08-05] BOTH ROWS WRAP, AND THAT IS THE WHOLE FIX. This header
+   was `space-between` with no wrap, so at a phone width the control group ran
+   to x=633 in a document that does not scroll horizontally and three of the
+   five buttons could not be reached at all. Wrapping is the answer rather than
+   a media query because the failure is not a width — it is a row of fixed-size
+   controls that is longer than whatever it is put in; `flex-wrap` is true at
+   every width and a breakpoint is only true at the one somebody measured. */
+.adm-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 40px; border-bottom: 1px solid #1a1a1a; padding-bottom: 20px; }
+.adm-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
 .adm-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--wb-gold); }
 .adm-sub { font-size: 0.65rem; letter-spacing: 0.12em; color: #333; text-transform: uppercase; margin-top: 4px; } .adm-build { font-size: 0.6rem; letter-spacing: 0.1em; color: #555; font-family: 'Courier Prime', monospace; margin-top: 6px; }
 .adm-refresh { background: transparent; border: 1px solid #222; color: #555; font-family: 'Courier Prime', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; cursor: pointer; transition: border-color 0.2s, color 0.2s; }

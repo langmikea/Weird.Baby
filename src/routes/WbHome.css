@@ -234,10 +234,36 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
    is the easing: it overshoots the stop and settles back, which is what a
    hinged board does and what Mike asked for. The component writes `transition:
    none` inline for the single frame that carries the wrap.
-   NO SNAP AND NO HAND SCROLLING inside the moving box: a scroll-snap container
-   fighting a transformed track produces a list that stutters against its own
-   snap points. */
-.wb-entries-scroll { overflow: hidden; scroll-snap-type: none; }
+   NO SNAP inside the moving box: a scroll-snap container fighting a transformed
+   track produces a list that stutters against its own snap points. (That
+   sentence used to end "AND NO HAND SCROLLING", which P3 below reverses — what
+   is still true is that the hand does not drive a SCROLLER; it drives the
+   transform, so there are no snap points for it to fight.)
+
+   ── [P3 2026-08-05] THE HAND ────────────────────────────────────────────────
+   Four declarations, and each is load-bearing rather than polish.
+   `cursor: grab` is the only announcement the control gets — the ruling is that
+   a list which moves is its own invitation, so nothing on the glass says "drag
+   me" and this is the whole affordance.
+   `user-select: none` because a drag across type selects the type, and a book
+   being pushed with a blue selection smeared across three signatures is not a
+   book being pushed. It costs the ability to select a name out of the MOVING
+   book only; the plain fallback list is a real scroll box and keeps it.
+   `touch-action: pan-x pinch-zoom` gives the vertical gesture to the book and
+   keeps everything else with the page. Taking the vertical drag is not a
+   liberty: `.wb-entries` is a scroll box and already takes it, so this makes
+   the moving book behave like the still one. PINCH-ZOOM IS NEVER TAKEN, and it
+   is named explicitly because the shorthand `pan-x` alone would have removed it
+   — blocking a reader's zoom to animate a list would be indefensible.
+   The focus ring is the keyboard half of the same control (↑ ↓ walk the book),
+   and it is inset so it lands on the box's own 1px frame instead of painting
+   outside a bordered card. */
+.wb-entries-scroll {
+  overflow: hidden; scroll-snap-type: none;
+  cursor: grab; user-select: none; touch-action: pan-x pinch-zoom;
+}
+.wb-entries-scroll:active { cursor: grabbing; }
+.wb-entries-scroll:focus-visible { outline: 2px solid var(--wb-gold); outline-offset: -2px; }
 .wb-scroll-track {
   transition: transform 520ms cubic-bezier(.34, 1.3, .64, 1);
   will-change: transform;

@@ -328,6 +328,11 @@ export const EXEMPT = new Map([
           fiction over material it was never about. */
   ...["wal.artifacts", "shop.shirts", "shop.domain", "shop.mikes",
       "channel.qr", "channel.supplies", "channel.services",
+      /* [P4 2026-08-05] The poke lives on the house's OWN MARK, on the front
+         page, and has nothing to do with a machine line's paperwork. Nothing
+         arrives; somebody draws a blink. It is HELD and not shown, so check (b)
+         does not bite and the exemption costs the rule nothing. */
+      "egg.lobby.poke",
   ].map(id => [id, "NOT MGK MATERIAL — the house makes or arranges it; nothing arrives."]),
 
   /* (iv) THE HOUSE'S OWN UNWRITTEN WORDS. A summary of the story and the

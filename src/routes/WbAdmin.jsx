@@ -55,7 +55,12 @@ export default function WbAdmin() {
             <div className="adm-sub">Not for public consumption</div>
             <div className="adm-build">built {new Date(__BUILD_TIME__).toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "2-digit", minute: "2-digit" })}</div>
           </div>
-          <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+          {/* [P5/C35 2026-08-05] the inline flex is a class now, and the class
+              wraps. At 390px this row laid out to x=633 inside a document that
+              does not scroll sideways, so /shop, Refresh and Back were CLIPPED
+              OFF THE EDGE AND UNREACHABLE — two of the five controls were the
+              whole dashboard on a phone. */}
+          <div className="adm-controls">
             <button className="adm-jump" onClick={() => navigate("/hr")}>/hr</button>
             <button className="adm-jump" onClick={() => navigate("/cb")}>/cb</button>
             <button className="adm-jump" onClick={() => navigate("/shop")}>/shop</button>

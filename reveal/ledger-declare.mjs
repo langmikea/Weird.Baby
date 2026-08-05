@@ -192,8 +192,8 @@ FACE("niac.firmware", "TECHNICAL SPECIFICATIONS (MGK-NIAC) — what the machine 
 FACE("viiip.plates", "IMAGE ARCHIVE (MGK-VIIIp) — nine plates, as received.", "LIVE", "REVEALED",
   { arc: "arrived", note: "M7: three of the nine do not show what their captions say. M25: the tombstone says 'before power' and one plate is captioned as the firmware running." });
 FACE("viiip.manual", "THE MANUAL — the 1965 operating and maintenance manual.", "PARTIAL", "REVEALED",
-  { deps: ["doc.manual.plates"], assets: ["/robots/manual/structure-issue-p1.png"],
-    note: "`plates: []`. Its one image is a render where B8's own ruling requires a photograph of the print — M4. [G1] That image was a page of the RETIRED manual until this round; it is now page 1 of the live structure issue." });
+  { deps: ["doc.manual.plates"],
+    note: "[P2] THE FACE HAS NO PICTURE, BY RULING. Its one image was a render of a page reading TEXT NOT SUPPLIED, and Mike ruled that the museum admitting it had not written the manual does not get to wear a fiction as cover: either a plate shows a page actually written, or there is no plate. M45 and M4 both close here — M4 by there being no plate left to be a render. `plates: []` is unchanged and still waits on B8's photographs (P2 in the art register)." });
 FACE("viiip.firmware", "TECHNICAL SPECIFICATIONS (MGK-VIIIp) — the machine's own mind, on file.", "LIVE", "REVEALED",
   { assets: ["/robots/reference/photos/front_screen.png"], arc: "online",
     note: "M2: that plate is mirror-reversed, and the whole photograph is flipped." });
@@ -556,6 +556,48 @@ R("egg.niac.operator", "The robot that operates the mainframe — the reason NIA
   null, "HELD",
   { deps: ["Mike's ruling on when it is spent"],
     note: "The material is IN HAND and unpublished: seven plates in this repo (head at the lens, head three-quarters, chest and shoulders, lower limbs, unfinished torso, feet on a plinth, a slot mock-up) and three more in the robots repo's culled set (the eye, the shoulder, the hand on the control). All ten are on disk, none is referenced by the site. Spending it is one data block and no code — which is exactly what makes holding it a decision rather than a shortage." });
+
+/* ═══ [P4 2026-08-05] THE POKE — RAISED, GRADED, AND DELIBERATELY NOT BUILT ══
+   MIKE: "pixel-perfect tap on the Weird.Baby logo's EYE and he BLINKS, as if
+   poked. Three pokes in a row and he wears SAFETY GLASSES for the rest of the
+   session."
+
+   OPS GRADE: A+++++ , and the grade is written down with its reasons rather
+   than as a compliment, because the reasons are the specification.
+     · IT IS FOUND BY DOING SOMETHING NOBODY IS TOLD TO DO. No label, no
+       cursor change, no hint — the only route in is a visitor idly poking a
+       face on a screen, which is a thing people do to faces on screens.
+     · IT COSTS NOTHING ON THE GLASS. Zero words, zero controls, zero pixels of
+       new furniture. Under the Law of Subtraction that is the strongest
+       position an addition can occupy: nothing is lost if a visitor never
+       finds it, and nothing was spent to leave it there.
+     · THE ESCALATION IS THE PART NO OTHER EGG IN THIS TABLE HAS. Every one of
+       the other twelve is a single state — you trip it or you do not. This one
+       ANSWERS BACK on the third try, so the reward is for persistence rather
+       than for luck, and the second reward is a JOKE ABOUT THE FIRST that is
+       only legible to the person who caused it.
+     · IT IS ON THE ONE OBJECT EVERY VISITOR MEETS. The mark is on the front
+       page and nowhere else in the building, so the egg is reachable by
+       everybody and advertised to nobody.
+
+   WHAT IT WAITS ON, AND NEITHER HALF IS CODE: the blink and the safety glasses
+   are ART — a closed-eye state of the mark and a glasses state — and this
+   museum does not invent its own images (M9's whole standing argument). The
+   mechanism after that is a hit region, a counter and a session flag.
+   ONE CONSTRAINT ALREADY CHECKED, so nobody discovers it late: "for the rest of
+   the session" means browser storage, and `/booth`'s privacy answer already
+   covers exactly that shape — the machine remembers you, the museum does not,
+   settings survive, no cookie travels. Building this does not change that
+   answer. Building it with a server round-trip would, and that is the version
+   not to build.
+   `shown` IS FALSE and must stay false: the moment any surface hints at it, it
+   stops being an egg and becomes a debt. */
+R("egg.lobby.poke", "The poke — a pixel-perfect tap on the eye of the Weird.Baby mark, and he blinks. Three in a row and he puts on safety glasses.",
+  "egg", "not built — the mark is placed in src/routes/WbHome.jsx", "NOT_BUILT",
+  null, "HELD",
+  { deps: ["the blink art — a closed-eye state of the mark", "the safety-glasses art",
+           "a hit region on the eye, a three-count, and a session flag"],
+    note: "RAISED BY MIKE AND GRADED A+++++ (P4, 2026-08-05), and deliberately not built in the round that raised it — the reasons are in the block above this row and they are the specification. The two art states are Mike's; the mechanism is small and comes after them. C40." });
 
 /* ═════════ 10. THE SOUNDS — from SOUND_AUDIT-20260726, every trigger fired ═ */
 for (const [slug, name, sites] of [

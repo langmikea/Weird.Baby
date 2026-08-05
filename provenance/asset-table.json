@@ -1987,10 +1987,8 @@
    "h": 1650,
    "depth": 8,
    "colorType": 0,
-   "role": "shipped",
-   "usedBy": [
-    "src/data/artists/robots.js"
-   ],
+   "role": "unreferenced",
+   "usedBy": [],
    "what": "The still on The Manual’s face — the manual’s title page, STRUCTURE ISSUE / TEXT NOT SUPPLIED.",
    "quality": "weak",
    "qualityNote": "[G1 2026-08-05] The judgement carried across a declared rename and had to be re-read, because the FILE CHANGED as well as its name: this is page 1 of the robots repo’s structure issue, not the retired working copy. It is a photocopy of a TYPED page — paper texture, ribbon variation, a copier ink field — where the old one was clean digital type on white, so it is a long step toward what B8’s ruling asks for and no longer a placeholder. It is still a RENDER and not a photograph of a print, so M4 stands. THE THING TO LOOK AT is the page’s own words: TEXT NOT SUPPLIED reads in-fiction as an early issue circulated for arrangement, and read the other way as the museum admitting it has not written the manual. The caption is written to hold the first reading; whether that is enough is Mike’s.",

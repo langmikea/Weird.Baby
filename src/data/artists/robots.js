@@ -1293,62 +1293,40 @@ const spine = [
         face: {
           kind: "plate",
           title: "THE OWNER'S MANUAL",
-          /* ==== [E3 2026-08-03] THE HOOK, AND IT IS NOT A PLATE ============
-             THIS FACE IS BUILT FOR IMAGERY AND ITS ARRAY IS EMPTY — the audit's
-             words, and still true: `reel.plates` is `[]` because B8 ruled that
-             the plates must be PHOTOGRAPHS OF THE PRINTED MANUAL, and nobody
-             has printed and photographed it yet.
-             SO THE HOOK IS THE SOURCE, LABELLED AS THE SOURCE. B8's own ruling
-             says what this file is: "the generated PDF and plates become THE
-             SOURCE MIKE PRINTS AND PHOTOGRAPHS; the photograph of that print is
-             the artifact." That document exists on disk in the robots repo, and
-             its own title page is printed with PRELIMINARY — WORKING COPY / NOT
-             FOR DISTRIBUTION across the middle of it.
-             THAT SELF-LABEL IS WHY THIS IS SAFE AND WHY NOTHING ELSE WAS. The
-             one risk in showing it is a visitor reading "here is the manual",
-             and the picture argues against that in its own type before the
-             caption gets a word in. Between the printed disclaimer, the caption
-             below, and the register line four rows down that still reads
-             "PLATES not yet imaged", the face says three times over that this
-             is not the artifact.
-             THE REEL IS UNTOUCHED AND STILL EMPTY. This is a head plate, not a
-             frame; loading it into `plates` would put a rendering into the
-             microfiche reader, which is precisely the "in the style of" B8
-             forbade. When the photographs arrive they are `plates` entries and
-             this string is the one thing on the face that should probably go.
-             THE FILE IS COPIED, NOT LINKED: the museum's build cannot reach a
-             sibling repo, so an asset either lives under `public/` or does not
-             exist.
-             ═══ [G1 2026-08-05] AND THE COPY WAS OF A DOCUMENT THAT NO LONGER
-             EXISTS. It was `working-copy-p1.png`, taken from the robots repo at
-             `robots/mgk-viiip/manual/pages/page-01.png` — a tree that repo's
-             typewriter pass retired whole, replacing the manual with a STRUCTURE
-             ISSUE under `manual/structure/pages`. Nothing said so, because a
-             copied file cannot notice its source being deleted. The still is now
-             page 1 of the live document.
-             THE NEW PLATE IS A PHOTOCOPY OF A TYPED PAGE rather than clean
-             digital type on white, which is a long step toward what B8's ruling
-             asks for and is still not a photograph of paper — M4 stands.
-             THE CAPTION DOES THE ONE PIECE OF WORK THIS SWAP NEEDS. The page's
-             own type reads STRUCTURE ISSUE · STRUCTURE AND ARRANGEMENT ONLY ·
-             TEXT NOT SUPPLIED, and a visitor could read that as the museum
-             admitting it has not written the manual yet — which would be
-             Doctrine 11 printed inside a picture, where no string sweep can see
-             it. It is captioned as what it is IN THE RECORD: a fifth copy-state
-             beside Mike's four, an issue circulated for arrangement before the
-             text was set. That reading is the object's, it is consistent with
-             DOC CONTROL's own canon that the manual was assembled out of copies
-             caught at different stages, and it is named as a judgement in the
-             round log rather than assumed. */
-          still: "/robots/manual/structure-issue-p1.png",
-          /* [CS 2026-08-04] the caption described the PIPELINE ("it gets
-             printed, then photographed — the photograph is the plate"), which
-             is how this museum makes its plates and not what is in the frame.
-             It says what the picture is, which the picture also says in its
-             own type. */
-          stillCaption:
-            "An early issue of the working copy — arrangement first, before " +
-            "the text was set.",
+          /* ═══ [P2 2026-08-05] MIKE'S RULING: TEXT NOT SUPPLIED DIES ═══════
+             M45 asked whether the plate's own printed words survived a visitor
+             reading them — STRUCTURE ISSUE · STRUCTURE AND ARRANGEMENT ONLY ·
+             TEXT NOT SUPPLIED. THE ANSWER IS NO, and his reason is sharper than
+             the question was: IT WAS THE MUSEUM ADMITTING IT HAD NOT WRITTEN THE
+             MANUAL, WEARING A FICTION AS COVER — Doctrine 11 hiding inside a
+             picture, where no string sweep can ever reach it.
+
+             THE RULE HE GAVE WITH IT, and it is wider than this face: EITHER THE
+             PLATE SHOWS A PAGE ACTUALLY WRITTEN, OR THERE IS NO PLATE UNTIL ONE
+             EXISTS. Not a better caption. The caption was already doing the one
+             piece of work the swap needed, and that is the tell — a caption that
+             has to argue a picture out of its own lettering is a caption losing
+             an argument with a photograph. EMPTY BEATS A PLACEHOLDER IN
+             FICTION'S CLOTHING, which is Doctrine 11's corollary with its harder
+             half named.
+
+             SO THIS FACE HAS NO PICTURE. It is the second face in this wing left
+             without one deliberately; M29 was the first, and it closed by
+             INHERITING a real photograph rather than by inventing an object,
+             which is the order of preference here too.
+             WHAT COMES BACK WHEN A PAGE IS WRITTEN: `still` and `stillCaption`,
+             pointed at a photograph of a printed page that says something.
+             WHAT DOES NOT MOVE: `reel.plates` is still [] and still waits on
+             B8's ruling — photographs of the printed manual, never renderings.
+             The head plate was never a frame in the reader, so striking it does
+             not touch the one promise this face actually makes.
+             HISTORY, SO NOBODY RE-DERIVES IT: E3 put a render here arguing that
+             the page's own PRELIMINARY — WORKING COPY stamp defended it; G1
+             swapped that render for page 1 of the live structure issue when the
+             first document was retired out from under it; P2 rules the defence
+             was never available, because the second page's words were not about
+             the object at all. M4 closes with it — there is no plate left to be
+             a render. */
           blurb:
             "The unit shipped with a manual, and the manual is where the " +
             "machine explains itself — including the parts it gets wrong. " +

@@ -11,7 +11,7 @@
 // resolves here even though this file cannot `@import` anything. That is
 // verified, not assumed — but it is also bundling luck rather than a declared
 // dependency, which is R5's point and R5's job (see the round log).
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./WbHome.css";
 import { useRoom } from "../lib/use-room.js";
@@ -108,6 +108,67 @@ const SUBTITLE = "The Museum";
    is the failure mode of every ticker ever built, and a stepped one is not
    exempt.
 
+   ═══ [P3 2026-08-05] AND A VISITOR CAN DRIVE IT ════════════════════════════
+   MIKE: "THE GUEST LIST SCROLLS BY HAND. Keep the stepped bounce and the rests,
+   but let a visitor drive it manually — drag, wheel, or arrows; pick what fits
+   the register and say why. Manual input pauses the auto-advance and it resumes
+   after a rest."
+
+   DRAG, AND ARROWS BECAUSE DRAG ALONE IS UNREACHABLE. Not two features — one
+   gesture and its keyboard equivalent, which is what any draggable owes.
+
+   WHY DRAG IS THE ONE THAT FITS THE REGISTER. This book is already described,
+   in this file, as a hinged board of paper rows, and its whole ruling is that
+   it is a LEDGER BEING READ DOWN. Paper is moved by pushing it. The gesture is
+   the same on a mouse, a finger and a pen because Pointer Events make it the
+   same, and — the part that matters to the ruling — IT LANDS ON A ROW. The
+   track follows the hand exactly (transition off, so there is no easing between
+   a finger and the thing it is holding), and on release it settles to the
+   NEAREST SIGNATURE with the same 520ms bounce the timer uses. The stepped
+   register is not replaced by free scrolling; it is the thing the hand is
+   allowed to aim.
+
+   WHY NOT THE WHEEL, and this is a refusal rather than an omission. The book is
+   three rows — about 92px — of a page people scroll past. A wheel handler there
+   takes the wheel from the PAGE, and every visitor scrolling the lobby would
+   drag their pointer across a strip that hijacks it. Scroll-jacking to fix a
+   list nobody complained about is a cure worse than the disease, and `/booth`'s
+   whole posture is that this place does not do things to you that you did not
+   ask for. The vertical touch gesture IS taken (`touch-action: pan-x
+   pinch-zoom`) and that is deliberate and different: a scrollable list inside a
+   page takes the vertical drag NATIVELY — the plain fallback list already does,
+   because it is a real scroll box — so the moving book behaves like the still
+   one rather than like an exception. Pinch-zoom is never blocked.
+
+   ARROW KEYS ARE THE SAME QUANTITY AS THE TIMER. One press is `STEP`, which is
+   one signature, so a keyboard reader and the clock are moving the same object
+   in the same unit. ↓ walks forward and wraps; ↑ walks back and STOPS AT THE
+   FIRST SIGNATURE, because a guest book has a beginning and running off the top
+   of it would be a claim about the collection that is not true. The box takes
+   focus (`tabIndex`) and is labelled by the "Guest Book" heading already above
+   it — no new string, and nothing on the glass announces the control, because a
+   list that moves is its own invitation.
+
+   "RESUMES AFTER A REST" IS ONE DEPENDENCY, NOT A SECOND TIMER. Every manual
+   input bumps `nudge`, `nudge` is a dependency of the rest effect, and a
+   dependency changing restarts the effect — so the book waits one full `REST_MS`
+   from the last thing a visitor did. There is no new clock to fall out of step
+   with the old one, which is exactly the failure Q1 was.
+   THE HOVER PAUSE IS UNCHANGED AND IS A DIFFERENT RULE: a reader standing on
+   the book with a mouse, or focused on it with a keyboard, stops it for as long
+   as they are there. So on a desktop the rest visibly restarts once the pointer
+   leaves; on a touch screen it restarts the moment the finger lifts. Hover is
+   now read from `pointerenter`/`pointerleave` GUARDED ON `pointerType ===
+   "mouse"` — mouse events are synthesised after a touch on most mobile
+   browsers, and the old `onMouseEnter` would have frozen the book under a
+   finger that had just dragged it.
+
+   THE CLAMP DID NOT MOVE. A hand puts the track exactly where the timers could
+   — `[0, n]`, the same expression, applied to the drag before it is rendered.
+   Nothing about GUARANTEE 1 or GUARANTEE 2 is weakened by adding a second
+   author of the offset, which is the whole reason those two were written as
+   properties of the render rather than of the scheduling.
+
    AND IT DOES NOT MOVE FOR EVERYONE. `prefers-reduced-motion: reduce` renders
    the plain list — the platform's own signal (Doctrine 8), answered with
    "don't" rather than "slower". THE PLAIN LIST IS NOT THE DELETED VERSION
@@ -190,6 +251,13 @@ function GuestBook({ entries }) {
   const [pos, setPos] = useState(0);
   const [snap, setSnap] = useState(false);
   const [held, setHeld] = useState(false);
+  /* [P3] `drag` is where a HAND is holding the book — fractional rows, and null
+     whenever nobody is touching it. `nudge` counts manual inputs and exists
+     only to be a dependency: bumping it restarts the rest below. */
+  const [drag, setDrag] = useState(null);
+  const [nudge, setNudge] = useState(0);
+  const boxRef = useRef(null);
+  const grip = useRef(null);
   /* `n > VISIBLE` is belt to `SCROLL_MIN`'s braces: a window that already holds
      the whole book has nothing to travel, and the floor is a tuning number that
      somebody will move one day. */
@@ -199,18 +267,29 @@ function GuestBook({ entries }) {
   const copies = n > 0 ? 1 + Math.ceil(VISIBLE / n) : 1;
   /* GUARANTEE 1 — nothing that happened while the page was not being rendered
      can move the track past one whole copy. This is the line that makes a blank
-     row unreachable; everything else only makes it unlikely. */
-  const offset = Math.min(Math.max(pos, 0), n);
+     row unreachable; everything else only makes it unlikely.
+     [P3] A HAND IS THE SECOND AUTHOR OF THIS NUMBER and gets the same clamp,
+     applied in `onHand` before the drag is ever rendered. */
+  const base = Math.min(Math.max(pos, 0), n);
+  /* fixed rather than raw: a fractional offset goes into `calc()`, and a number
+     that reaches exponent notation on its way there is a transform that does
+     not parse. Three places is a twentieth of a pixel at this row height. */
+  const shift = (drag == null ? base : drag).toFixed(3);
 
   /* the rest, then the step. It does not run while a reader is on the book,
-     while the page is hidden, or while the track is standing on the seam
-     waiting to wrap. */
+     while a hand is holding it, while the page is hidden, or while the track is
+     standing on the seam waiting to wrap.
+     [P3] `nudge` is in the dependency list and is read nowhere: a manual input
+     bumps it, the effect tears down and re-arms, and the book waits one full
+     REST_MS from the last thing the visitor did. That is "it resumes after a
+     rest" expressed as a dependency rather than as a second clock — and Q1 is
+     the reason a second clock was not an option. */
   useEffect(() => {
-    if (!running || held || !shown || pos >= n) return;
+    if (!running || held || drag != null || !shown || pos >= n) return;
     const t = setTimeout(() => { setSnap(false); setPos(p => p + STEP); },
       REST_MS);
     return () => clearTimeout(t);
-  }, [running, held, shown, pos, n]);
+  }, [running, held, drag, shown, pos, n, nudge]);
 
   /* the wrap's backstop. `transitionend` is the primary and this is what makes
      a dropped one cost a frame instead of the whole book. It runs even while
@@ -233,15 +312,79 @@ function GuestBook({ entries }) {
     if (pos >= n) { setSnap(true); setPos(0); }
   }
 
+  /* [P3] THE ROW HEIGHT IS READ OFF THE STYLESHEET, never mirrored here. The
+     transform is written in `--gb-row` units, so a drag measured in the same
+     unit tracks the hand exactly BY CONSTRUCTION; a constant in this file would
+     be a second source for the one quantity both halves depend on, and it would
+     be wrong the first time the row's type size changes. Zero means the unit
+     could not be read, and then there is no drag — the book does not guess its
+     own row height. */
+  function rowPx() {
+    if (!boxRef.current) return 0;
+    const v = parseFloat(getComputedStyle(boxRef.current).getPropertyValue("--gb-row"));
+    return Number.isFinite(v) && v > 0 ? v : 0;
+  }
+
+  function onGrab(e) {
+    if (!running || e.button > 0) return;
+    const px = rowPx();
+    if (!px) return;
+    grip.current = { id: e.pointerId, y: e.clientY, from: base, raw: base, px, moved: false };
+    /* capture, so a hand that leaves the 92px box still owns the gesture */
+    try { e.currentTarget.setPointerCapture(e.pointerId); } catch { /* not capturable */ }
+    setDrag(base);
+  }
+  function onHand(e) {
+    const g = grip.current;
+    if (!g || g.id !== e.pointerId) return;
+    /* up is forward — the paper goes the way the hand goes */
+    const rows = (g.y - e.clientY) / g.px;
+    if (Math.abs(rows) > 0.1) g.moved = true;
+    /* GUARANTEE 1, same expression, applied to the hand */
+    g.raw = Math.min(Math.max(g.from + rows, 0), n);
+    setDrag(g.raw);
+  }
+  function onLetGo(e) {
+    const g = grip.current;
+    if (!g || g.id !== e.pointerId) return;
+    grip.current = null;
+    setDrag(null);
+    /* the transition comes back in the same render the target changes in, so
+       the release IS the bounce — the settle to the nearest signature uses the
+       one easing the timer uses, which is what "keep the stepped bounce" means
+       when a hand is doing the stepping. Landing on `n` hands the seam to the
+       wrap machinery that was already there. */
+    setSnap(false);
+    setPos(Math.min(Math.max(Math.round(g.raw), 0), n));
+    if (g.moved) setNudge(k => k + 1);
+  }
+  function onArrow(e) {
+    if (!running) return;
+    const by = e.key === "ArrowDown" ? STEP : e.key === "ArrowUp" ? -STEP : 0;
+    if (!by) return;
+    e.preventDefault();
+    setSnap(false);
+    setPos(Math.min(Math.max(base + by, 0), n));
+    setNudge(k => k + 1);
+  }
+  /* hover pauses for a MOUSE and only a mouse: a touch synthesises enter/leave
+     on most mobile browsers, and a book frozen under the finger that just
+     dragged it is the bug that would have shipped with the old handlers. */
+  function onHover(e, on) { if (e.pointerType === "mouse") setHeld(on); }
+
   if (!running) return <GuestBookPlain entries={entries} />;
 
   return (
-    <div className="wb-entries wb-entries-scroll"
-      onMouseEnter={() => setHeld(true)} onMouseLeave={() => setHeld(false)}
-      onFocus={() => setHeld(true)} onBlur={() => setHeld(false)}>
+    <div className="wb-entries wb-entries-scroll" ref={boxRef}
+      tabIndex={0} role="group" aria-labelledby="wb-book-label"
+      onPointerEnter={e => onHover(e, true)} onPointerLeave={e => onHover(e, false)}
+      onFocus={() => setHeld(true)} onBlur={() => setHeld(false)}
+      onKeyDown={onArrow}
+      onPointerDown={onGrab} onPointerMove={onHand}
+      onPointerUp={onLetGo} onPointerCancel={onLetGo}>
       <div className="wb-scroll-track"
-        style={{ transform: `translateY(calc(var(--gb-row) * -${offset}))`,
-                 transition: snap ? "none" : undefined }}
+        style={{ transform: `translateY(calc(var(--gb-row) * -${shift}))`,
+                 transition: (snap || drag != null) ? "none" : undefined }}
         onTransitionEnd={onSettled}>
         {/* the same signatures, as many times as the arithmetic asks for —
             announcing the museum's guest book twice would be a defect dressed
@@ -448,7 +591,10 @@ export default function WbHome() {
               with the note above (the book already says what early means). */}
           <div className="wb-rule" />
           <div className="wb-book-head">
-            <span className="wb-book-label">Guest Book</span>
+            {/* [P3] the id is the moving book's accessible name — it is
+                labelled by the heading a sighted reader is already using, so
+                the control needs no string of its own. */}
+            <span className="wb-book-label" id="wb-book-label">Guest Book</span>
             {!loading && entries.length > 0 && (
               <span className="wb-book-count">
                 {entries.length} {entries.length === 1 ? "signature" : "signatures"}

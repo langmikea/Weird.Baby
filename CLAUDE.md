@@ -432,6 +432,77 @@ catches invented CONTENT, Doctrine 11 catches a line whose SUBJECT is the work.
 
 Maintained here. Newest first.
 
+### 2026-08-05 → THE PARITY RULING + TRIM (P1–P5) — sealed
+- **TWO RULINGS, ONE BEHAVIOUR, ONE IDEA BANKED, AND A DEFECT THAT TURNED OUT TO
+  BE FOUR.** Gates: lint **11/9 = baseline** · build green · provenance **PASS** ·
+  `reveal:check` **PASS** · `parity:gate` **PASS** · lap at desktop and 390px, run
+  first on the dev server and **re-run whole on the built bundle** when the
+  console showed `@vite/client`. Ledger **156 → 157**. Surfacing logged:
+  **13 spendable · 13 promised · 15 idle.** Full narrative:
+  `docs/MUSEUM_PARITY_RULING_AND_TRIM_LOG-20260805.md`.
+- **P1 — PARITY IS THE DEFAULT AND A HOLDINGS GAP *RESOLVES* A FLAG RATHER THAN
+  OVERRIDING IT.** Mike's ruling on M47: the three divergences are holdings gaps,
+  not design, and forcing parity would print rows leading nowhere — **THE STUB
+  LAW, on exactly those grounds.** R2 had shipped four written reasons with no way
+  to tell *answered* from *excused*, so a justification carries a **`kind`**
+  (HOLDINGS · PROPERTY resolve; **DESIGN stands, and is declared while unused
+  because otherwise the first real preference has two boxes and both say
+  RESOLVED**). And **"it clears itself" is a mechanism now**: a holdings gap must
+  name the LEDGER ROW that would exist and be built if the museum held the
+  material, and `parity:gate` reads `reveal/ledger.json` and **faults the day it
+  does** — `doc.manual.niac` is not a row at all and *that absence is the proof*.
+  Four refusals, each broken on purpose, each fired. **4 resolved · 0 standing.**
+- **P2 — TEXT NOT SUPPLIED DIES.** M45 ruled too thin: the plate was **the museum
+  admitting it had not written the manual, wearing a fiction as cover** — Doctrine
+  11 inside a picture. Either the plate shows a page actually written or **there is
+  no plate**. Not re-captioned, and the tell is that the caption was already doing
+  the work — *a caption that has to argue a picture out of its own lettering is a
+  caption losing an argument with a photograph.* `reel.plates` untouched, so art
+  register P2 is untouched. **M45 and M4 both close** (M4 because there is nothing
+  left to be a render). Confirmed on the glass: zero stills, and the face is
+  BETTER — prose at full width over *PLATES none on file* · **REEL EMPTY**.
+- **P3 — THE GUEST LIST SCROLLS BY HAND: DRAG, with ARROWS as the keyboard half
+  any draggable owes, and THE WHEEL REFUSED WITH A REASON** (92px of a page people
+  scroll cannot take the wheel without stealing it). Drag fits because the book's
+  own file already calls it a hinged board read down and because **it lands on a
+  row** — the track follows the hand with the transition OFF, then settles to the
+  nearest signature with the timer's own bounce. **`↑` stops at the first
+  signature: a guest book has a beginning.** **"Resumes after a rest" is ONE
+  DEPENDENCY, not a second clock — which is exactly what Q1 was.** The clamp did
+  not move. **One hazard caught before it shipped:** hover-pause is guarded on
+  `pointerType === "mouse"`, or a phone's synthetic `mouseenter` freezes the book
+  under the finger that just dragged it. Measured on the built bundle: hand 70px →
+  track −70.0px, settles to offset 2, zero blank rows in 14 samples, zero console
+  errors. **Both method limits stated: the tab was genuinely `document.hidden`
+  (confirmed FIRST, then overridden — v53's own order).**
+- **P4 — THE POKE: LEDGERED, GRADED A+++++, BUILT NOT AT ALL.** `egg.lobby.poke`,
+  NOT_BUILT · HELD · **`shown: false`**. The grade's reasons ARE the spec: found by
+  doing what nobody tells you to do · costs nothing on the glass · **an
+  escalation, which none of the other thirteen eggs has** · on the one object every
+  visitor meets. **What it waits on is ART, not code.** One constraint checked
+  ahead: *"for the rest of the session"* is browser storage, which `/booth`'s
+  privacy answer already covers — **a server round-trip is the version not to
+  build.** C40.
+- **P5 — C39 WAS NEVER ONE FILE: six NUL bytes in four `tools/*.mjs`, one of them
+  `keyOf` in `provenance-sweep.mjs` — the function that hashes every
+  visitor-facing string in the museum.** The row named an INSTANCE of a habit, and
+  the habit had already spread to `menu-parity.mjs`, built one round later. **This
+  round hit the defect twice while working** — a grep returned nothing, then an
+  `Edit` failed on a line it had just read, **because the Read tool renders a NUL
+  as a space.** Proved inert by the strongest test available: `provenance:gate`
+  still passes, which is impossible if one key shifted. **C35 also closed** —
+  `/admin`'s header rows wrap now, and all five controls are reachable at 386px
+  (three were clipped past x=633). What was left is listed with reasons.
+- **TWO THINGS THIS ROUND EXPOSED.** **A prune was refused and the refusal was
+  right:** the one stale register row left by deleting one caption was the anchor
+  of **18 RESTATED chains**; checked first for once, repointed, then pruned, then
+  re-gated — **now a four-step procedure in `OPERATIONS.md` §9.** And **[M49] the
+  surfacing tripwire fired on the opposite of what it was built for**: idle files
+  grew two packets running and **both growths are DELETIONS**, because a file
+  shown-then-struck lands on the same shelf as one built-and-never-shown. Reported,
+  **not adjusted** — a number adjusted to say what a round wants is not a
+  measurement.
+
 ### 2026-08-05 → THE ROBOTS SIMPLIFICATION (v56; G1, R1–R7) — sealed
 - **CROSS-REPO, AND IT DELETED MORE THAN IT BUILT:** three front-desk faces, six
   robot plates, a whole spread, two typographic cards (~90 lines of generator)
@@ -501,114 +572,18 @@ Maintained here. Newest first.
   deliberate test break reverted the round's own uncommitted work: breakage tests
   sandbox by FILE COPY, never by git.**
 
-### 2026-08-05 → THE ASSET TIMELINE (T1) — sealed
-- **A drafting-lane round that created NOTHING.** No asset, no row, no content,
-  no date, and nothing in `src/` — the museum's glass did not move, so there was
-  no lap and correctly none. All 152 ledger rows already existed; this round
-  assigned each one a TRANSFER CLASS, wrote every exemption out in full, and made
-  the rule checkable at build time and check time.
-- **MIKE'S INSIGHT IS THE FOUNDATION AND IT DOES THREE JOBS AT ONCE:** *the first
-  Record must produce the first images of NIAC and VIIIp so the site has images to
-  post — which means THOSE IMAGES ARRIVED IN THE EMAIL BLAST.* (1) It explains the
-  museum's existence: once the blast is the answer for the two plate archives it is
-  the answer for everything else on the glass, and **94 rows stop needing 94
-  explanations.** (2) It makes foreshadowing free — the blast carried MORE than was
-  published, so a later reveal of built material needs no new arrival. **Class 1 is
-  102 rows: 94 on the glass and 8 deliberately held back.** (3) It sets scope by
-  exclusion: anything NOT in the blast has to arrive some other way.
-- **THE FOUR CLASSES (Ops-designed, recorded in `reveal/transfers.mjs`):** BLAST
-  102 (pre-launch, week 0) · PACKAGE 9 (weeks 3–7, four Fridays, physical — they
-  earn their photographs) · UNLOCK 13 (in hand from week 0, could not be opened) ·
-  TRANSMISSION 6 (months 2–3, because they never stopped) · **22 exempt, in
-  writing, each with a reason.**
-- **THE RULE IS THREE CHECKS, IN `validate()` SO BOTH CALLERS RUN IT.** Every row
-  is placed or exempted in writing (a fall-through **fails the build**) · nothing
-  unarrived is on the glass (no named arrival week ⇒ may not be `REVEALED`, and
-  **an exempt row may not be either**, so exemption cannot become the way round) ·
-  nothing is shown before it lands. **All of them were broken on purpose:**
-  disabling the second makes the guard report two failures; dropping one real row
-  fails the build with `face.niac.plates: no transfer class and no exemption`.
-  `transferGuardFaults()` uses literal expectations, not values read back out of
-  the table it tests — the v55 vessel lesson applied rather than re-learned.
-- **THE ARC FIXES TWO ARRIVAL WEEKS AND NOT FOUR.** BLAST → week 0 (stated).
-  UNLOCK → week 0, **derived by necessity not guessed**: a thing already in hand is
-  in hand because the blast brought it. PACKAGE and TRANSMISSION carry **no week** —
-  weeks 3–7 is FIVE Fridays and Mike named FOUR packages, and which one goes empty
-  is not in the arc. `when` is still null on all 152 rows: the arc supplies
-  ARRIVALS, not REVEALS.
-- **BOTH KNOWN TENSIONS RESOLVED AS THE MODEL WORKING.** The MANUAL spans classes
-  1 and 2 — volume BLAST, pages PACKAGE — and **nobody ever had the whole manual in
-  one piece**, which is the no-single-copy fiction. The PORTAL is class 1 by
-  necessity, so **it arrived complete and mostly dead**: five drum positions and the
-  seeded dial are UNLOCK, engraved where a visitor reads them and inert. Six of the
-  eleven `shown: true` promises are these, and all six now say *we have it, it is
-  closed.*
-- **A LIVE BREAKAGE FOUND, HALF-FIXED, AND HANDED OVER (T-A).** `reveal:check` had
-  been **dead since 16:14 that day** — the robots typewriter pass (`4cd78ac`)
-  retired all 24 manual renders and museum v55 sealed at 13:38 with that path wired
-  in. It did not report a fault; it **died on a Node stack trace**, and nothing ran
-  it in between. Fixed: the check now tells *"this page is missing"* apart from
-  *"the whole source tree moved"* and names the latter once — **a gate that crashes
-  is not a gate.** REFUSED: the path was **not** repointed at the new 61-page
-  structure issue, because page 7 of the 61 is not page 7 of the 24. **The museum's
-  canon on the glass is a 24-page manual and the robots repo now builds 61** — a
-  ruling, not a path edit.
-- **§7 IS THE PART THAT MATTERS: the reckoning has six rows and five are the same
-  thing** (twin stubs reading DATA NOT LOADED, plus unbuilt ad plates). Nothing in
-  152 rows is *about* a reckoning, and the story arc's own Act I thrust — *who was
-  the previous owner* — **has no row at all.** The reveal `arc` field is set on
-  nine rows, exactly one is `understood`, and **all nine are BLAST**: every stage
-  the museum can express is carried by material that arrived before launch.
-- **Week 0 carries 115 of 152 rows (76%), and that is not a flaw to balance** — it
-  is what buys the back half its freedom. The real problem is the other end: nine
-  package rows over four Fridays, of which three may never be publishable
-  (`phys.nickels` is the SEALED gap, Time needs a rights check, the original manuals
-  are a `[PAPA]`). **Week 0 oversupplied, weeks 3–7 thin, weeks 9–12 nearly empty.**
-- **DOCTRINE 12 AND THE ROBOTS REPO'S DRAFTING LAW ARE FLAGGED, NOT MERGED (T-E).**
-  One governs FACTS site-wide, one governs VOICE in the machine's words, **neither
-  contains the other**, and a cross-repo round is governed by whichever file it
-  read. Ops recommends one cross-reference each rather than a merge, and **did not
-  make it.**
-- Gates: lint **11/9 = baseline**; build green; provenance **PASS** with zero
-  register movement (nothing in `src/` was touched); **`reveal:check` RED with ONE
-  fault, named above, pre-existing and cross-repo.** Ledger stays **152** — no row
-  added, no row removed.
-- Document Mike reads: `docs/ASSET_TIMELINE.md`. **Six questions in
-  `docs/OPEN_ACTIONS.md` T-A…T-F, none blocking.**
-
 ### Older entries (2026-05-06 → 2026-08-05) — archived
 Moved to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md`, verbatim, under this file's
-own ≈600-line rule. **2026-08-05 (v56):** v55 RECORD MACHINERY, moved whole —
-the file was at 621 lines, so one entry left as one arrived. What is still
-load-bearing in it is NOT in the archive: the ledger's one-validator doctrine,
-the manual-page vessel and the Record's derived rows are `OPERATIONS.md` §5 and
-`reveal/README.md`, and its open questions are `docs/OPEN_ACTIONS.md` M32, M35
-and M44. **2026-08-05 (T1):** v54 THE FOUNDATION COPY, moved whole to
-make room for this round — the file was at exactly 600 lines. What was live in it
-is not in the archive: its open questions are `docs/OPEN_ACTIONS.md` M38–M43 and
-its money rule is `/foundation`'s own copy. **2026-08-05 (v55):** v53 THE BOOTH EDIT + THE MISSING LAP,
-v52 THE REVEAL LEDGER and v51 M23 RULED + THE ALBUM ROUND — three at once,
-because the v55 entry is long and the file had reached 711. **What was in them
-that is still load-bearing is NOT in the archive**: v53's measured third-party
-table is `OPERATIONS.md` §5 and its ruling is register M37; v52's ledger model is
-`reveal/README.md` and `OPERATIONS.md` §5; v51's two standing laws (Doctrine 16,
-and the Visual Hook Law's second exception) are `OPERATIONS.md` §7 and `STATE.md`.
-A session note is where a round is narrated, not where a rule lives.
-**2026-08-05 (v54):** v50 THE OVERNIGHT — the round that
-struck THE MORGUE, built DOC CONTROL, added the Foundation's DONATED BY column
-and found the published privacy answer wrong. Moved whole; its live consequences
-are in `OPERATIONS.md` §5, not in the note. **2026-08-05 (v53):** v48 MECHANIZE
-PROVENANCE and v46 THE
-CLEAN SLATE ROUND — the two oldest entries still live, moved whole so the doctrine
-they established (the provenance boundary; the first meta-copy sweep) is read from
-`OPERATIONS.md` §7 rather than from a session note. **2026-08-04:** the tier
-reconciliation, the
-navigation/architecture critique, B-1, the v4/v5 spec arc, the deep-dive phases,
-the FUSE git-init quirk, and the first three exhibit-UX rounds (2026-05-06 →
-05-15). **2026-08-05 (v52):** the three 2026-05-30 entries — the eslint-ignore
-baseline restoration (and the sandbox 5/5 phantom, whose lesson is still live in
-`### Pre-flight before commit` above), the `content_kind` front-end block with
-the -036 triage, and the broken-preview fallback.
+own ≈600-line rule. **2026-08-05 (P1–P5):** T1 THE ASSET TIMELINE, moved whole —
+the file was at 689. What is still load-bearing in it is NOT in the archive: the
+four transfer classes and their three checks are `reveal/transfers.mjs` and
+`OPERATIONS.md` §5, and its open questions are `docs/OPEN_ACTIONS.md` §4a T-B…T-F
+(T-A closed at v56).
+**Housekeeping, stated because it edits an archive note rather than adding one:**
+the six older notes below were run together into one paragraph. Nothing was
+dropped — every round, every moved entry and every "where the live part lives"
+pointer is still here; the line breaks are gone, which is where the growth was.
+**2026-08-05 (v56):** v55 RECORD MACHINERY, moved whole — the file was at 621 lines, so one entry left as one arrived. What is still load-bearing in it is NOT in the archive: the ledger's one-validator doctrine, the manual-page vessel and the Record's derived rows are `OPERATIONS.md` §5 and `reveal/README.md`, and its open questions are `docs/OPEN_ACTIONS.md` M32, M35 and M44. **2026-08-05 (T1):** v54 THE FOUNDATION COPY, moved whole to make room for this round — the file was at exactly 600 lines. What was live in it is not in the archive: its open questions are `docs/OPEN_ACTIONS.md` M38–M43 and its money rule is `/foundation`'s own copy. **2026-08-05 (v55):** v53 THE BOOTH EDIT + THE MISSING LAP, v52 THE REVEAL LEDGER and v51 M23 RULED + THE ALBUM ROUND — three at once, because the v55 entry is long and the file had reached 711. **What was in them that is still load-bearing is NOT in the archive**: v53's measured third-party table is `OPERATIONS.md` §5 and its ruling is register M37; v52's ledger model is `reveal/README.md` and `OPERATIONS.md` §5; v51's two standing laws (Doctrine 16, and the Visual Hook Law's second exception) are `OPERATIONS.md` §7 and `STATE.md`. A session note is where a round is narrated, not where a rule lives. **2026-08-05 (v54):** v50 THE OVERNIGHT — the round that struck THE MORGUE, built DOC CONTROL, added the Foundation's DONATED BY column and found the published privacy answer wrong. Moved whole; its live consequences are in `OPERATIONS.md` §5, not in the note. **2026-08-05 (v53):** v48 MECHANIZE PROVENANCE and v46 THE CLEAN SLATE ROUND — the two oldest entries still live, moved whole so the doctrine they established (the provenance boundary; the first meta-copy sweep) is read from `OPERATIONS.md` §7 rather than from a session note. **2026-08-04:** the tier reconciliation, the navigation/architecture critique, B-1, the v4/v5 spec arc, the deep-dive phases, the FUSE git-init quirk, and the first three exhibit-UX rounds (2026-05-06 → 05-15). **2026-08-05 (v52):** the three 2026-05-30 entries — the eslint-ignore baseline restoration (and the sandbox 5/5 phantom, whose lesson is still live in `### Pre-flight before commit` above), the `content_kind` front-end block with the -036 triage, and the broken-preview fallback.
 
 ## Conventions for updating this file
 

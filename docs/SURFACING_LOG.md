@@ -15,3 +15,4 @@ adjusted is not a measurement.
 | date | rows | spendable | promised, unbuilt | idle files | by wing |
 |---|---|---|---|---|---|
 | 2026-08-05 | 156 | 13 | 13 | 14 | doors 3 · Robots 10 · Listen 0 · Shop 0 · Foundation 0 |
+| 2026-08-05 | 157 | 13 | 13 | 15 | doors 3 · Robots 10 · Listen 0 · Shop 0 · Foundation 0 |
