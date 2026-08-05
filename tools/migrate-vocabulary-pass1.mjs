@@ -327,7 +327,7 @@ function main() {
     const seenPair = new Set();
     const uniquePairs = [];
     for (const p of pairs) {
-      const k = `${p.category} ${p.slug}`;
+      const k = `${p.category}\0${p.slug}`;
       if (seenPair.has(k)) continue;
       seenPair.add(k);
       uniquePairs.push(p);

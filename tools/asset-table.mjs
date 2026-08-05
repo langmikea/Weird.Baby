@@ -285,7 +285,7 @@ function sha256(file) {
    retired row's identity. Once written it is opaque and permanent — the whole
    point is that nothing about the file can change it. */
 function mintUid(id, hash, taken) {
-  const base = crypto.createHash("sha1").update(`${id} ${hash || ""}`)
+  const base = crypto.createHash("sha1").update(`${id}\0${hash || ""}`)
     .digest("hex").slice(0, 10);
   let uid = `A-${base}`, n = 1;
   while (taken.has(uid)) uid = `A-${base}-${++n}`;
@@ -337,7 +337,7 @@ function scan(renames = []) {
   const byHash = new Map();
   for (const e of priorRows) {
     if (!e.sha256 || !isJudged(e)) continue;
-    const k = `${e.repo} ${e.sha256}`;
+    const k = `${e.repo}\0${e.sha256}`;
     if (!byHash.has(k)) byHash.set(k, []);
     byHash.get(k).push(e);
   }

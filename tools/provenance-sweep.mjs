@@ -217,7 +217,7 @@ function listFiles(dir, out = []) {
 
 const rel = (p) => path.relative(REPO, p).split(path.sep).join("/");
 export function keyOf(file, text) {
-  return crypto.createHash("sha256").update(`${file} ${text}`).digest("hex").slice(0, 16);
+  return crypto.createHash("sha256").update(`${file}\0${text}`).digest("hex").slice(0, 16);
 }
 
 // ---------------------------------------------------------------------------
