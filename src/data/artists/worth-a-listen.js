@@ -1477,10 +1477,13 @@ const HOUSE_ALBUM = {
         blurb: "Four of them. Two songs each, all playable. Every one of them " +
                "is somebody's favourite record and none of them is ours.",
         bill: {
-          standard: "The standard in this room is not chart position and not " +
-                    "how many people already know. It is that somebody in this " +
-                    "house could not stop playing the record and thinks you " +
-                    "should hear it.",
+          /* [W1b 2026-08-05] THE STANDARD LINE IS STRUCK, on Mike's ruling.
+             "The standard in this room is not chart position and not how many
+             people already know. It is that somebody in this house could not
+             stop playing the record and thinks you should hear it." — the
+             museum congratulating itself on its own selection criteria. The
+             render path for `bill.standard` is untouched and conditional; the
+             field is simply not declared. */
           acts: billActs([
             { id: "carsie-blanton",
               what: "Songwriter · Philadelphia",
@@ -1509,25 +1512,73 @@ const HOUSE_ALBUM = {
                other wings inherited"). The other three acts are billed on what
                they have made; he is now billed the same way, from the facts on
                his own card. */
+            /* [W2 2026-08-05] REWRITTEN FROM THE VAULT, NOT FROM THE OLD LINE.
+               Mike: discard it and start from what is TRUE and verifiable, and
+               verify every figure. The old line carried two wrong ones.
+               · "seventy-eight songs" counted the track rows that carry a
+                 `song:` slug. The vault's own tracklists carry NINETY-THREE,
+                 and the fifteen it silently dropped are the whole of Run With
+                 The Hunt, which has no slugs on it.
+               · "nine records" counted the nine album CONTAINERS, of which one
+                 is an EP by its own title (Phone Recordings EP) and one is a
+                 set by its own title (SINGLES & RARITIES). Seven are records.
+               · "whose whole catalogue this museum holds" is contradicted by
+                 this wing's own records note four hundred lines up — sixteen
+                 releases sit on his Bandcamp against nine entries in the vault.
+                 "Whole" is gone; what is held is named instead.
+               · "Half of Crooked Home is about his brother" is NOT here, and
+                 not because it is uninteresting: the vault does not carry the
+                 half. It carries the dedication, the grief, '94 and My
+                 Brother's Bones. The quantity is somebody's paraphrase and it
+                 is still printed on three other faces — reported, not
+                 silently patched from here (OPEN_ACTIONS W-A).
+               COUNTED FROM src/data/exhibits/hunter_root.json, the museum's own
+               export, this round: 9 album containers, 93 track rows, every one
+               of them carrying at least one playable rendition.
+                 records  Run With The Hunt · They Finally Cracked Me · Life
+                          Inside A Wheel · Mimicking the Sun Like Dandelions ·
+                          Skipping Stones That Sink Before They're Thrown ·
+                          Arkansas · Crooked Home
+                 EP       Phone Recordings EP
+                 set      SINGLES & RARITIES
+               Run With The Hunt is a RECORD and not a band, which is the one
+               thing here that had to be looked up rather than assumed: its
+               ReverbNation page reads like a band's, and the vault's own fact
+               MV-HR-20260707-004 settles it — "Run With The Hunt was Hunter's
+               first solo record." His band was SEEDS, which became Medusa's
+               Disco (MV-HR-20260707-003), and no track of theirs is in here. */
             { id: "hunter-root",
               what: "Songwriter · the house artist",
-              why: "Ours — the one artist here whose whole catalogue this " +
-                   "museum holds: seventy-eight songs across nine records. " +
-                   "Half of Crooked Home is about his brother.",
+              why: "The one artist in this room whose records the museum holds " +
+                   "in its own vault: seven of them, an EP and a set of " +
+                   "singles and rarities — ninety-three tracks.",
               hue: "#d8c9a0" },
           ]),
-          foot: "Press a name to open that artist's room. Every card in it was " +
-                "written from sources that were opened and read, every door " +
-                "leads to the artist's own place, and the pictures are their " +
-                "own — logged file by file, and down the day any of them asks.",
+          /* [W1c 2026-08-05] THE FOOT IS STRUCK, on Mike's ruling. "Press a
+             name to open that artist's room. Every card in it was written from
+             sources that were opened and read, every door leads to the
+             artist's own place, and the pictures are their own — logged file
+             by file, and down the day any of them asks." — the first clause
+             explains what the panels already do, the rest congratulates the
+             house on its own research and rights practice.
+             AND THE PER-ACT "Open the room" WENT WITH IT (Exhibit.jsx), which
+             is the same strike and is the one that costs something: it was the
+             panels' only WRITTEN affordance, put there by P6's ruling that
+             what is not readable must be written. The panel is still a
+             <button>, still lifts on hover and still takes a pointer cursor;
+             on touch there is now nothing at all saying press me. Named in the
+             round log and OPEN_ACTIONS W-B rather than replaced with copy
+             nobody asked for. */
         },
-        label: [
-          "They have nothing to do with each other. That is not an accident and " +
-          "it is not a shortage of taste: a room that only holds records which " +
-          "agree is a room with one record in it. What the four have in common " +
-          "is the only thing this museum asks for, which is that somebody here " +
-          "could not stop playing them.",
-        ],
+        /* [W1a 2026-08-05] THE INTERPRETIVE LABEL IS STRUCK, on Mike's ruling.
+           "They have nothing to do with each other. That is not an accident
+           and it is not a shortage of taste: a room that only holds records
+           which agree is a room with one record in it. What the four have in
+           common is the only thing this museum asks for, which is that
+           somebody here could not stop playing them." — the house explaining
+           its own curation and reassuring the visitor it was deliberate. The
+           face declares no `label` at all now; the render is conditional and
+           untouched, so the poster is heading, blurb, four panels, foot rule. */
         /* [R5b] M6's quiet booth pointer MOVED, and moving it is keeping M6
            rather than overriding it. Its ruling was that the link belongs "at
            the end of the paragraph a stranger has just read about who runs this

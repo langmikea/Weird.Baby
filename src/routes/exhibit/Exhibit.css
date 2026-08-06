@@ -2170,15 +2170,14 @@ button.vp-bill-act:hover,button.vp-bill-act:focus-visible{
 .vp-bill-why{font-family:var(--wb-read);font-optical-sizing:auto;
   font-size:var(--fs-small);line-height:1.5;letter-spacing:.005em;
   color:var(--wb-gold-lo);padding:0 18px;max-width:44ch}
-/* the press, named. P6's ruling: what is drawn must be readable, and what is
-   not readable must be written — so the panel's affordance is a WORD, not a
-   chevron a visitor has to interpret. */
-.vp-bill-go{margin-top:auto;padding:11px 18px 0;
-  font-family:'Courier Prime','Courier New',monospace;
-  font-size:var(--fs-micro);letter-spacing:.22em;text-transform:uppercase;
-  color:var(--wb-gold-mute);transition:color .16s}
-button.vp-bill-act:hover .vp-bill-go,
-button.vp-bill-act:focus-visible .vp-bill-go{color:var(--wb-gold)}
+/* [W1c 2026-08-05] `.vp-bill-go` IS GONE, with the span it dressed. It held
+   P6's ruling — "what is drawn must be readable, and what is not readable must
+   be written", so the panel's affordance was a WORD rather than a chevron — and
+   that ruling is now reversed on this one object by Mike's W1(c) strike. The
+   rules are deleted rather than left standing because their only caller was
+   deleted; `.vp-bill-standard` and `.vp-bill-foot` STAY, because their render
+   paths in Exhibit.jsx are untouched and a face may declare either field again.
+   Affordance consequence: OPEN_ACTIONS W-B. */
 .vp-bill-foot{margin:0;max-width:56ch;
   font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-micro);line-height:1.6;color:var(--wb-gold-lo)}

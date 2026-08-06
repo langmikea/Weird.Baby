@@ -432,6 +432,51 @@ catches invented CONTENT, Doctrine 11 catches a line whose SUBJECT is the work.
 
 Maintained here. Newest first.
 
+### 2026-08-05 → THE WAL POSTER EDIT (W1–W4) — sealed
+- **A DELETE-ONLY ROUND WITH ONE SENTENCE REBUILT, AND THE SENTENCE TOOK ALL THE
+  WORK.** Gates: lint **11/9 = baseline** · build green · provenance **PASS** ·
+  `reveal:check` **PASS** · `parity:gate` **PASS** · lap **on the built bundle**
+  at desktop and 386px, zero console messages. Surfacing **13 · 13 · 15,
+  unmoved** — the round struck strings and moved no asset. Register: **M50–M53
+  opened, nothing closed.** Full narrative:
+  `docs/MUSEUM_WAL_POSTER_EDIT_LOG-20260805.md`.
+- **W1 — THREE TRUE PASSAGES STRUCK FROM THE WAL POSTER**, Mike’s fault-finding
+  verbatim: *they explain what the room already does or congratulate the house on
+  its own process.* The curation label, the standard line and the bill’s foot are
+  gone as FIELDS — **no render path was touched**, `bill.standard` and
+  `bill.foot` are still conditional in `Exhibit.jsx` and their CSS still stands,
+  so a later face may declare either again. **The one strike that costs something
+  is the per-act “Open the room” chip**, which carried **P6’s ruling** that what
+  is not readable must be written: striking it **reverses P6 on this one object**
+  and a coarse pointer now gets no cue. Doors verified live — all four panels are
+  still `<button>` and still open their rooms. **M51.**
+- **W2 — HUNTER ROOT’S LINE WAS REBUILT FROM THE VAULT AND EVERY OLD FIGURE IN IT
+  WAS WRONG.** *78 songs* counts only the track rows carrying a `song:` slug —
+  the vault holds **93**, and the fifteen it drops are the whole of Run With The
+  Hunt. *Nine records* counts CONTAINERS; **seven are records**, one is an EP by
+  its own title and one is a set by its own title. *Whole catalogue* is
+  contradicted 400 lines up in the same file (sixteen releases on his Bandcamp).
+  **And the one thing that had to be looked up rather than assumed: Run With The
+  Hunt is a RECORD, not a band** — its ReverbNation page reads like a band’s and
+  `era-buckets.json` files it under *The Band Years*, but vault fact
+  `MV-HR-20260707-004` settles it. Reading the era label would have printed a band
+  that is not there. Ships as one sentence claiming **holdings and nothing else**.
+- **W3/W4 — THE POSTER STANDS BETTER WITHOUT THE 110 WORDS**, and the three
+  things the cuts expose are DESCRIBED SLOTS, not drafts: the panels’ missing
+  affordance (M51) · the blurb’s *“none of them is ours”* now sitting above the
+  panel that says the museum holds his records (M52) · and **a `[PAPA]` marker’s
+  second sentence RENDERING** — *“Every claim about an artist here is already on
+  that artist’s own card, sourced there”* is the last line on the poster and is
+  the claim W1(c) was struck for, because **the scrubber drops only the sentence
+  carrying the marker** (M53). None was rewritten: the instruction was surgical.
+- **THE PRUNE PROCEDURE RAN CLEAN FOR THE FIRST TIME.** Anchors checked BEFORE
+  pruning per `OPERATIONS.md` §9 — the five rows about to go stale anchored
+  **zero** RESTATED chains, so nothing needed repointing. **0 broken references
+  across 2,058 rows** after. **And a register row is not a verified number:**
+  *“78 songs”* was classed VERIFIED with a real citation since v25 and
+  `provenance/README.md` §4 already names that exact string as its example hole.
+  It was never stale — it was never the number it claimed to be.
+
 ### 2026-08-05 → THE PARITY RULING + TRIM (P1–P5) — sealed
 - **TWO RULINGS, ONE BEHAVIOUR, ONE IDEA BANKED, AND A DEFECT THAT TURNED OUT TO
   BE FOUR.** Gates: lint **11/9 = baseline** · build green · provenance **PASS** ·
@@ -503,78 +548,16 @@ Maintained here. Newest first.
   **not adjusted** — a number adjusted to say what a round wants is not a
   measurement.
 
-### 2026-08-05 → THE ROBOTS SIMPLIFICATION (v56; G1, R1–R7) — sealed
-- **CROSS-REPO, AND IT DELETED MORE THAN IT BUILT:** three front-desk faces, six
-  robot plates, a whole spread, two typographic cards (~90 lines of generator)
-  and a shot from each of two video cuts. Added: four instruments, four cabinet
-  plates, **two eggs nobody can see.** Gates: lint **11/9 = baseline** · build
-  green · provenance **PASS** · `reveal:check` **PASS — it was RED when the
-  round opened** · `parity:gate` **PASS** (new) · lap at desktop and 390px.
-  Ledger **152 → 156**. Full narrative:
-  `docs/MUSEUM_ROBOTS_SIMPLIFICATION_LOG-20260805.md`.
-- **G1 — `MANUAL_PAGES = 24` IS GONE, NOT MOVED, and that is Mike's standing
-  rule: THE MANUAL IS AS LONG AS THE MANUAL NEEDS TO BE, AND NOT LONGER — page
-  count is a consequence of content, never a target.** The count is READ OFF THE
-  SOURCE TREE (`manualPages()`, pointed at `manual/structure/pages`), because
-  a constant here standing in for a fact about a document in the robots repo is
-  exactly what T-A was. **A shrinking manual now faults rows already written past
-  the end** — that direction was invisible. It exposed manual pages falling
-  through the transfer table (PACKAGE **in prose** since T1, enforced by
-  nothing): **one pattern rule in `transfers.mjs`, and only one**, with a fault
-  if a pattern ever overrules a hand-placed row. Closes T-A; leaves **M45**.
-- **R1 — THE RECORD IS ON THE ROBOTS FRONT DESK**, not the MGK-VIIIp album
-  (Mike: *it applies to ALL things robots*). `face.viiip.record` →
-  `face.wbr.record` is **the only ledger id ever renamed.** **`Exhibit.jsx`
-  TAKES AN `open` PROP (a track id) and `/robots/record` IS A ROUTE** —
-  nothing here could be deep-linked to a track before. The lobby board carries
-  **The Record indented under Weird.Baby Robots**, reusing F7's indent rule.
-- **R3 — THE FRONT DESK IS ONE FACE: FAQ, plus the Record.** WELCOME, DOC
-  CONTROL and CONTACT struck; eleven questions where there were four rooms. What
-  was folded and what was deleted are both named in `robots.js`. **M29 closes by
-  INHERITANCE** — the FAQ is the wing's landing now and took Welcome's family
-  shot with Welcome's job; no object was invented. C31 closes by deletion.
-- **R4 — NIAC IS THE MAINFRAME** (the gutted space heater, helical core,
-  bar-graph output row). The album had been naming the mainframe in every
-  sentence and photographing the **ROBOT** in every frame — six of eight plates
-  plus the cover badge; **V2's obfuscation ruling was working perfectly on the
-  wrong object.** Cover, poster, two stills and the wall are all the cabinet now;
-  three plates came in from the robots repo's culled 2021 set. **Seven
-  photographs left the glass and none was deleted** (M9). *"So complicated they
-  needed a robot to operate it"* is **printed nowhere** — `egg.niac.operator`,
-  LIVE · HELD · not shown. Closes M30; worsens C29 (**the only stowed shelf is
-  now exercised by nothing**). **Robots repo: THE REEL IS OUT OF THE DESIGN
-  ENTIRELY** — `LINEAGE.md` had kept the *idiom is canon* half and it is
-  struck; conformed **generator first**, so a shot id nothing maps to fails loudly.
-- **R5 — NIAC IS FOUND FROM DAY ONE, the mother lode of detail is VIIIp, NIAC is
-  the next chapter, and someday it runs on the Portal.** Recorded as
-  `NIAC_STORY_POSITION` + `ASSET_TIMELINE.md` §5.3. **The table already
-  agreed:** every `face.niac.*` row is BLAST, forced by rule (b) rather than
-  chosen. *Progress across the arc* is `when`, still null on all 156 rows.
-- **R6 — THE CHANNEL EGG.** Drum engraved 1…8: **NIAC on 1 and 2, STANDARD on
-  3.** The reason is written **ONCE**, in `egg.channels`, and nowhere else in
-  either repo — no page explains it. NIAC's positions carry the machine's name
-  and **no invented feed title.** M33's five levers untouched. **The lap caught
-  what the data could not:** `useState(0)` opened the Portal NOT ARMED with the
-  latch two rolls away; the drum now opens on the first position that arms.
-- **R2 — `npm run parity` / `parity:gate`** reads both albums out of the AST:
-  **2 shared · 4 declared divergences · 0 undeclared.** Both directions fault,
-  including **a justification for a divergence that no longer exists.** **NOT a
-  packet gate**, on `assets:gate`'s reasoning. Findings: **M47.**
-- **R7 — `npm run surfacing`** re-cuts the ledger and asset table **BY WING**,
-  which is the only cut a person can act on. **13 spendable · 13 promised · 14
-  idle**, ten of the spendable in one wing. Cadence: **one surfacing per packet;
-  the shelf must not grow two packets running.** `--log` appends to
-  `docs/SURFACING_LOG.md` so the number is a trend. **It refuses to count
-  SHORTS and refuses to print a zero for them** — **M46.**
-- **TWO HAZARDS RE-CONFIRMED THE HARD WAY.** `--prune` broke **44 RESTATED
-  chains** (v52's rename-plus-prune hazard); all four dead anchors had successors
-  and every reference was repointed. And **`git checkout --` to undo a
-  deliberate test break reverted the round's own uncommitted work: breakage tests
-  sandbox by FILE COPY, never by git.**
-
 ### Older entries (2026-05-06 → 2026-08-05) — archived
 Moved to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md`, verbatim, under this file's
-own ≈600-line rule. **2026-08-05 (P1–P5):** T1 THE ASSET TIMELINE, moved whole —
+own ≈600-line rule. **2026-08-05 (THE WAL POSTER EDIT):** v56 THE ROBOTS
+SIMPLIFICATION, moved whole — the file was at 593 and this round's entry would
+have carried it past the rule. What is still load-bearing in it is NOT in the
+archive: the standing rule that the manual is as long as the manual needs to be
+is `OPERATIONS.md` §5 and register T-A; `npm run parity` and `npm run surfacing`
+are `OPERATIONS.md` §5 and §9; NIAC-is-the-mainframe is the robots repo's canon
+and the ledger's `egg.niac.operator`.
+**2026-08-05 (P1–P5):** T1 THE ASSET TIMELINE, moved whole —
 the file was at 689. What is still load-bearing in it is NOT in the archive: the
 four transfer classes and their three checks are `reveal/transfers.mjs` and
 `OPERATIONS.md` §5, and its open questions are `docs/OPEN_ACTIONS.md` §4a T-B…T-F

@@ -9735,16 +9735,6 @@
     "b8736efb2feb3ae0"
    ]
   },
-  "bd215ba6830e3f9d": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1480,
-   "t": "The standard in this room is not chart position and not how many people already know. It is that somebody in this house could not stop playing the record and thinks you should hear it.",
-   "p": "HOUSE_ALBUM.tracks[].face.bill.standard",
-   "c": "RESTATED",
-   "r": [
-    "b8736efb2feb3ae0"
-   ]
-  },
   "e90fc03a0e36599d": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 1486,
@@ -9810,36 +9800,6 @@
    "l": 1513,
    "t": "Songwriter · the house artist",
    "p": "HOUSE_ALBUM.tracks[].face.bill.acts.billActs()[].what",
-   "c": "RESTATED",
-   "r": [
-    "b8736efb2feb3ae0"
-   ]
-  },
-  "b37d1ef1b893e6b7": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1514,
-   "t": "Ours — the one artist here whose whole catalogue this museum holds: seventy-eight songs across nine records. Half of Crooked Home is about his brother.",
-   "p": "HOUSE_ALBUM.tracks[].face.bill.acts.billActs()[].why",
-   "c": "RESTATED",
-   "r": [
-    "b8736efb2feb3ae0"
-   ]
-  },
-  "6f64a95335378d2f": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1519,
-   "t": "Press a name to open that artist's room. Every card in it was written from sources that were opened and read, every door leads to the artist's own place, and the pictures are their own — logged file by file, and down the day any of them asks.",
-   "p": "HOUSE_ALBUM.tracks[].face.bill.foot",
-   "c": "RESTATED",
-   "r": [
-    "b8736efb2feb3ae0"
-   ]
-  },
-  "acc45aad42fe59f9": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1525,
-   "t": "They have nothing to do with each other. That is not an accident and it is not a shortage of taste: a room that only holds records which agree is a room with one record in it. What the four have in common is the only thing this museum asks for, which is that somebody here could not stop playing them.",
-   "p": "HOUSE_ALBUM.tracks[].face.label[]",
    "c": "RESTATED",
    "r": [
     "b8736efb2feb3ae0"
@@ -11020,13 +10980,6 @@
    "l": 3208,
    "t": "div",
    "p": "Exhibit{}.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<FaceFlow>.<section>.<div>.Card",
-   "c": "HOUSE"
-  },
-  "dce0149d3a56fd30": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 2994,
-   "t": "Open the room",
-   "p": "Exhibit{}.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<FaceFlow>.<div>.<div>.<Tag>.<span>",
    "c": "HOUSE"
   },
   "e8b52c143c50953d": {
@@ -16965,6 +16918,14 @@
    "l": 358,
    "t": "The Record",
    "c": "HOUSE"
+  },
+  "c1f76542d9661eac": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1552,
+   "t": "The one artist in this room whose records the museum holds in its own vault: seven of them, an EP and a set of singles and rarities — ninety-three tracks.",
+   "p": "HOUSE_ALBUM.tracks[].face.bill.acts.billActs()[].why",
+   "c": "VERIFIED",
+   "s": "src/data/exhibits/hunter_root.json — the museum's own MediaVault export, counted this round: 9 album containers under the ids configured in src/data/artists/hunter-root.js, 93 track rows across them, every row carrying at least one rendition. Seven of the nine are records; Phone Recordings EP and SINGLES & RARITIES are an EP and a set by their own titles. Run With The Hunt is a record and not a band per vault fact MV-HR-20260707-004. Holdings-only claim: it does NOT say this is his whole catalogue — sixteen releases sit on his own Bandcamp."
   }
  }
 }

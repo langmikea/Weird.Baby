@@ -3228,9 +3228,16 @@ export default function Exhibit({ artist, open = null }) {
                                     {act.why && (
                                       <span className="vp-bill-why">{act.why}</span>
                                     )}
-                                    {at >= 0 && (
-                                      <span className="vp-bill-go">Open the room</span>
-                                    )}
+                                    {/* [W1c 2026-08-05] "Open the room" IS
+                                        STRUCK — Mike named the string in the
+                                        same passage as the bill's foot. It was
+                                        the panel's only written affordance
+                                        (P6: "what is not readable must be
+                                        written"), so this reverses P6 on this
+                                        one object. The panel is still a
+                                        <button> with `cursor:pointer` and a
+                                        hover lift; a coarse pointer now gets
+                                        no written cue. OPEN_ACTIONS W-B. */}
                                   </Tag>
                                 );
                               })}

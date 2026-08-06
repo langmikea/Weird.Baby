@@ -18,6 +18,88 @@ THE LAW OF SUBTRACTION, and the Visual Hook Law's second recorded exception) are
 in `OPERATIONS.md` §7 and `STATE.md`. **Read a rule from where the rule lives,
 never from a session note** — which is the reason these can be archived at all.
 
+
+**Appended 2026-08-05 (THE WAL POSTER EDIT): v56 THE ROBOTS SIMPLIFICATION,
+verbatim and newest-first above v53.** `CLAUDE.md` had reached 593 lines and the
+incoming entry would have carried it past its own 600-line rule. **Nothing
+load-bearing left the live tree with it** — v56’s standing rule that the
+manual is as long as the manual needs to be is `OPERATIONS.md` §5 and register
+T-A; `npm run parity` and `npm run surfacing` are documented in `OPERATIONS.md`
+§5 and §9; NIAC-is-the-mainframe is the robots repo’s own canon and the
+ledger’s `egg.niac.operator`. A session note is where a round is narrated, not
+where a rule lives.
+
+---
+
+### 2026-08-05 → THE ROBOTS SIMPLIFICATION (v56; G1, R1–R7) — sealed
+- **CROSS-REPO, AND IT DELETED MORE THAN IT BUILT:** three front-desk faces, six
+  robot plates, a whole spread, two typographic cards (~90 lines of generator)
+  and a shot from each of two video cuts. Added: four instruments, four cabinet
+  plates, **two eggs nobody can see.** Gates: lint **11/9 = baseline** · build
+  green · provenance **PASS** · `reveal:check` **PASS — it was RED when the
+  round opened** · `parity:gate` **PASS** (new) · lap at desktop and 390px.
+  Ledger **152 → 156**. Full narrative:
+  `docs/MUSEUM_ROBOTS_SIMPLIFICATION_LOG-20260805.md`.
+- **G1 — `MANUAL_PAGES = 24` IS GONE, NOT MOVED, and that is Mike's standing
+  rule: THE MANUAL IS AS LONG AS THE MANUAL NEEDS TO BE, AND NOT LONGER — page
+  count is a consequence of content, never a target.** The count is READ OFF THE
+  SOURCE TREE (`manualPages()`, pointed at `manual/structure/pages`), because
+  a constant here standing in for a fact about a document in the robots repo is
+  exactly what T-A was. **A shrinking manual now faults rows already written past
+  the end** — that direction was invisible. It exposed manual pages falling
+  through the transfer table (PACKAGE **in prose** since T1, enforced by
+  nothing): **one pattern rule in `transfers.mjs`, and only one**, with a fault
+  if a pattern ever overrules a hand-placed row. Closes T-A; leaves **M45**.
+- **R1 — THE RECORD IS ON THE ROBOTS FRONT DESK**, not the MGK-VIIIp album
+  (Mike: *it applies to ALL things robots*). `face.viiip.record` →
+  `face.wbr.record` is **the only ledger id ever renamed.** **`Exhibit.jsx`
+  TAKES AN `open` PROP (a track id) and `/robots/record` IS A ROUTE** —
+  nothing here could be deep-linked to a track before. The lobby board carries
+  **The Record indented under Weird.Baby Robots**, reusing F7's indent rule.
+- **R3 — THE FRONT DESK IS ONE FACE: FAQ, plus the Record.** WELCOME, DOC
+  CONTROL and CONTACT struck; eleven questions where there were four rooms. What
+  was folded and what was deleted are both named in `robots.js`. **M29 closes by
+  INHERITANCE** — the FAQ is the wing's landing now and took Welcome's family
+  shot with Welcome's job; no object was invented. C31 closes by deletion.
+- **R4 — NIAC IS THE MAINFRAME** (the gutted space heater, helical core,
+  bar-graph output row). The album had been naming the mainframe in every
+  sentence and photographing the **ROBOT** in every frame — six of eight plates
+  plus the cover badge; **V2's obfuscation ruling was working perfectly on the
+  wrong object.** Cover, poster, two stills and the wall are all the cabinet now;
+  three plates came in from the robots repo's culled 2021 set. **Seven
+  photographs left the glass and none was deleted** (M9). *"So complicated they
+  needed a robot to operate it"* is **printed nowhere** — `egg.niac.operator`,
+  LIVE · HELD · not shown. Closes M30; worsens C29 (**the only stowed shelf is
+  now exercised by nothing**). **Robots repo: THE REEL IS OUT OF THE DESIGN
+  ENTIRELY** — `LINEAGE.md` had kept the *idiom is canon* half and it is
+  struck; conformed **generator first**, so a shot id nothing maps to fails loudly.
+- **R5 — NIAC IS FOUND FROM DAY ONE, the mother lode of detail is VIIIp, NIAC is
+  the next chapter, and someday it runs on the Portal.** Recorded as
+  `NIAC_STORY_POSITION` + `ASSET_TIMELINE.md` §5.3. **The table already
+  agreed:** every `face.niac.*` row is BLAST, forced by rule (b) rather than
+  chosen. *Progress across the arc* is `when`, still null on all 156 rows.
+- **R6 — THE CHANNEL EGG.** Drum engraved 1…8: **NIAC on 1 and 2, STANDARD on
+  3.** The reason is written **ONCE**, in `egg.channels`, and nowhere else in
+  either repo — no page explains it. NIAC's positions carry the machine's name
+  and **no invented feed title.** M33's five levers untouched. **The lap caught
+  what the data could not:** `useState(0)` opened the Portal NOT ARMED with the
+  latch two rolls away; the drum now opens on the first position that arms.
+- **R2 — `npm run parity` / `parity:gate`** reads both albums out of the AST:
+  **2 shared · 4 declared divergences · 0 undeclared.** Both directions fault,
+  including **a justification for a divergence that no longer exists.** **NOT a
+  packet gate**, on `assets:gate`'s reasoning. Findings: **M47.**
+- **R7 — `npm run surfacing`** re-cuts the ledger and asset table **BY WING**,
+  which is the only cut a person can act on. **13 spendable · 13 promised · 14
+  idle**, ten of the spendable in one wing. Cadence: **one surfacing per packet;
+  the shelf must not grow two packets running.** `--log` appends to
+  `docs/SURFACING_LOG.md` so the number is a trend. **It refuses to count
+  SHORTS and refuses to print a zero for them** — **M46.**
+- **TWO HAZARDS RE-CONFIRMED THE HARD WAY.** `--prune` broke **44 RESTATED
+  chains** (v52's rename-plus-prune hazard); all four dead anchors had successors
+  and every reference was repointed. And **`git checkout --` to undo a
+  deliberate test break reverted the round's own uncommitted work: breakage tests
+  sandbox by FILE COPY, never by git.**
+
 ---
 
 ### 2026-08-05 → THE BOOTH EDIT + THE MISSING LAP (v53; B1–B6) — sealed
