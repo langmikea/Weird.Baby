@@ -1,9 +1,19 @@
 import { BrowserRouter, Routes, Route, Navigate, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, lazy } from "react";
 import WbHome     from "./routes/WbHome.jsx";
 import WbAdmin    from "./routes/WbAdmin.jsx";
-import HrSpine    from "./routes/hr/HrSpine.jsx";
-import HrArchive  from "./routes/hr/HrArchive.jsx";
+/* [H1 2026-08-06] HUNTER ROOT'S WING IS HELD. Mike: he does not want /hr
+   public; he does want it online and reachable by him and by Ops. The two
+   routes below are the ONLY two in this table that are lazy, and the reason is
+   not page weight — it is that a static import would put the wing's catalogue,
+   deck and artifacts into the public bundle, where a password checked in React
+   would not stop anybody reading them. `lazy` gives the wing its own chunks,
+   vite.config.js parks them under /assets/held/, and src/worker.js refuses that
+   directory without the cookie the admin page's password mints.
+   Read src/routes/HeldWing.jsx before changing either line. */
+import HeldWing   from "./routes/HeldWing.jsx";
+const HrSpine   = lazy(() => import("./routes/hr/HrSpine.jsx"));
+const HrArchive = lazy(() => import("./routes/hr/HrArchive.jsx"));
 import WbSpine    from "./routes/wb/WbSpine.jsx";
 import InfoBooth  from "./routes/InfoBooth.jsx";
 /* [D7 2026-08-06] M62: the Foundation is a WING now, not a sheet page. */
@@ -57,7 +67,10 @@ export default function App() {
       <Routes>
         <Route path="/" element={<WbHome />} />
         <Route path="/admin" element={<WbAdmin />} />
-        <Route path="/hr" element={<HrSpine />} />
+        {/* [H1 2026-08-06] Both HR routes render THE LOBBY unless the wing has
+            been opened on /admin — the same thing an unmatched address renders,
+            so /hr looks like nothing rather than like something locked. */}
+        <Route path="/hr" element={<HeldWing><HrSpine /></HeldWing>} />
         {/* [CS 2026-08-04] `/hr/media` AND `/hr/fan-wall` ARE REMOVED, with
             their components deleted. Each was a one-line file rendering
             "Media — coming soon." and "Fan Wall — coming soon." on a live
@@ -83,7 +96,7 @@ export default function App() {
             The component and the asset are both deleted. Nothing in the tree
             linked here (checked): /hr is the real exhibit and is untouched,
             and /hr/archive's own way back already points at /hr. */}
-        <Route path="/hr/archive" element={<HrArchive />} />
+        <Route path="/hr/archive" element={<HeldWing><HrArchive /></HeldWing>} />
         <Route path="/wb" element={<WbSpine />} />
         <Route path="/booth" element={<InfoBooth />} />
         {/* [F3 2026-08-03] Mike's new directory section. [C2] renamed it to

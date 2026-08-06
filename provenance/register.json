@@ -13858,13 +13858,6 @@
    "p": "WbAdmin{}.<div>.<div>.<div>.<button>",
    "c": "HOUSE"
   },
-  "9676cc5a40515e82": {
-   "f": "src/routes/WbAdmin.jsx",
-   "l": 60,
-   "t": "/cb",
-   "p": "WbAdmin{}.<div>.<div>.<div>.<button>",
-   "c": "HOUSE"
-  },
   "c833e04cd3a121b8": {
    "f": "src/routes/WbAdmin.jsx",
    "l": 61,
@@ -16100,6 +16093,147 @@
    "t": "Songwriter · Lancaster, Pennsylvania",
    "c": "VERIFIED",
    "s": "https://hunterrootmusic.bandcamp.com/ — his own Bandcamp artist bio, read 2026-08-06 (R7): \"Solo artist/musician from Lancaster, PA\""
+  },
+  "a0702fc8a536bd78": {
+   "f": "src/lib/held.js",
+   "l": 16,
+   "t": "wb-held-open",
+   "p": "held-wing",
+   "c": "HOUSE"
+  },
+  "6d24f3fc3e833097": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 58,
+   "t": "Could not open",
+   "p": "held-wing",
+   "c": "HOUSE"
+  },
+  "110f53d25db56a9d": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 73,
+   "t": "Hunter Root — held",
+   "p": "held-wing",
+   "c": "HOUSE"
+  },
+  "ae5f3701bf966b04": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 78,
+   "t": "The wing at",
+   "p": "held-wing",
+   "c": "HOUSE"
+  },
+  "f7302cf525b92a4f": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 79,
+   "t": "is the museum’s Hunter Root exhibit — his\n        catalogue, the artifact deck and the filter columns. It is complete, and it is kept\n        online because it is the reference copy Ops works from.",
+   "p": "held-wing",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/OPERATIONS.md",
+    "src/data/artists/hunter-root-catalogue.js"
+   ]
+  },
+  "1daf9d8f1be86461": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 83,
+   "t": "It is not open to the public. The museum does not have his permission to show his material,\n        and until it does the wing is held rather than published — the same rule that stopped the\n        site serving his audio. The address renders the Lobby to anybody who has not opened this\n        door, and the exhibit’s files are refused at the server, not merely hidden in the page.",
+   "p": "held-wing",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/OPERATIONS.md",
+    "src/data/exhibits/vault-audio.js"
+   ]
+  },
+  "09097a56906ba508": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 92,
+   "t": "/hr/archive",
+   "p": "held-wing",
+   "c": "HOUSE"
+  },
+  "5c44eb06c82e3f89": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 93,
+   "t": "Close for this tab",
+   "p": "held-wing",
+   "c": "HOUSE"
+  },
+  "57ac8b5f36ed1505": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 102,
+   "t": "Key",
+   "p": "held-wing",
+   "c": "HOUSE"
+  },
+  "0c5f67f69ccca2dc": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 105,
+   "t": "Open",
+   "p": "held-wing",
+   "c": "HOUSE"
+  },
+  "8be4c5dc1df732dc": {
+   "f": "src/worker.js",
+   "l": 36,
+   "t": "wb_held",
+   "p": "held-wing",
+   "c": "HOUSE"
+  },
+  "9ffb354b913a01b8": {
+   "f": "src/worker.js",
+   "l": 37,
+   "t": "/assets/held/",
+   "p": "held-wing",
+   "c": "HOUSE"
+  },
+  "93848b8a9036fb43": {
+   "f": "src/worker.js",
+   "l": 43,
+   "t": "No key is set on this deployment. Run: npx wrangler secret put HR_KEY",
+   "p": "held-wing",
+   "c": "HOUSE"
+  },
+  "15152249f35f7f7c": {
+   "f": "src/worker.js",
+   "l": 46,
+   "t": "SHA-256",
+   "p": "held-wing",
+   "c": "HOUSE"
+  },
+  "68de8dc18c9785e2": {
+   "f": "src/worker.js",
+   "l": 50,
+   "t": "wb-held-v1:{}",
+   "p": "held-wing",
+   "c": "HOUSE"
+  },
+  "bc9969b08510e943": {
+   "f": "src/worker.js",
+   "l": 53,
+   "t": "Cookie",
+   "p": "held-wing",
+   "c": "HOUSE"
+  },
+  "9f39f3edeb0312be": {
+   "f": "src/worker.js",
+   "l": 105,
+   "t": "Bad request",
+   "p": "held-wing",
+   "c": "HOUSE"
+  },
+  "3d1bd4751633d7f4": {
+   "f": "src/worker.js",
+   "l": 107,
+   "t": "Wrong key",
+   "p": "held-wing",
+   "c": "HOUSE"
+  },
+  "da7a3e8513ca54fb": {
+   "f": "src/worker.js",
+   "l": 109,
+   "t": "{}={}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age={}",
+   "p": "held-wing",
+   "c": "HOUSE"
   }
  }
 }

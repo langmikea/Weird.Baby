@@ -18,7 +18,17 @@ Before any work that touches museum tag vocabulary, pill columns, or artifact ca
 
 Weird.Baby Museum — a Vite + React + React Router site, deployed via Cloudflare Workers. The frontend is a "museum" with multiple artists/sections. Hunter Root (HR) is the primary artist content currently built out.
 
-The "exhibit" surface (album coverflow + tracklist + video player + filter deck) lives at `/hr` and is the most active area for UX work.
+The "exhibit" surface (album coverflow + tracklist + video player + filter deck) lives at `/hr`.
+
+**[H1 2026-08-06] `/hr` IS NOT PUBLIC AND YOU CANNOT JUST OPEN IT.** Mike ruled the
+Hunter Root wing HELD: online for him and for Ops, behind a password on `/admin`,
+enforced by `src/worker.js` refusing `/assets/held/*` without a cookie. Typing
+`/hr` in a browser renders the Lobby. To work on it: open `/admin`, enter the key
+(`env.HR_KEY`, a wrangler secret — **there is no default**, so `npx wrangler
+secret put HR_KEY` must have been run on that environment), then `/hr`. Read the
+**THE HELD WING** row in `docs/canonical/OPERATIONS.md` §5 before changing
+anything in that chain — in particular `assets.run_worker_first` in
+`wrangler.jsonc`, which is load-bearing for the API routes as well as the lock.
 
 MediaVault is now under local-only git at `C:\AI\Platform\MediaVault\.git` (initialized 2026-05-08). Three commits as of init, branch `master`, no remote ever planned. See MediaVault's `STATE.md` "Version control" section and `CHANGELOG.md` for current state.
 
@@ -431,6 +441,50 @@ catches invented CONTENT, Doctrine 11 catches a line whose SUBJECT is the work.
 ## Recent session log
 
 Maintained here. Newest first.
+
+### 2026-08-06 -> THE PRE-COMMENTARY ROUND (H1-H8) - sealed
+- **EIGHT INSTRUCTIONS, ALL EIGHT LANDED, AND THE VERIFICATION OF THE HEADLINE
+  ONE CAUGHT AN OUTAGE THAT WOULD HAVE TAKEN THE WHOLE BACK END DOWN IN
+  SILENCE.** Gates: lint **11/9 = baseline** - build green - provenance **PASS**
+  (0 undeclared - 0 stale - 0 invention) - `reveal:check` **PASS** -
+  `parity:gate` **PASS, 4 shared - 0 divergences** - lap **on the built bundle
+  under `wrangler dev`**, ten routes plus an unmatched path, desktop and 390px,
+  no horizontal overflow, no console errors. Surfacing **13 - 13 - 15,
+  unmoved**. Full narrative: `docs/MUSEUM_PRE_COMMENTARY_LOG-20260806.md`.
+- **H1 - `/hr` IS PRIVATE AND THE LOCK IS THE WORKER, NOT REACT.** Lazy chunks
+  under `assets/held/`, refused by `src/worker.js` without a cookie the `/admin`
+  password mints against `env.HR_KEY` (a wrangler secret with **no default** -
+  M85 is the one command Mike must run or the wing is shut to him too).
+  **The reason it is not a browser gate is R5, one round old**: a filter that
+  stops the render still ships the material. Public JS 724.8 KB -> **536.6 KB**;
+  vault image URLs in the public bundle **107 -> 0**. `/hr` renders the LOBBY to
+  anyone without the door open - no login box, because a login box at a public
+  URL announces the room. **`robots.txt` is deliberately NOT written**: a
+  `Disallow` line is a public list of what you are hiding.
+- **THE OUTAGE IS THE MOST USEFUL FINDING.** `assets.run_worker_first` is a list
+  with a default on the other side of it: naming only the held directory made
+  every API route asset-first, and the SPA fallback answered `/api/admin`,
+  `/api/guestbook`, `/api/visits` and `/api/presets` with **index.html and a
+  200**. Nothing errors - the site just stops having a back end. Now in
+  `OPERATIONS.md` §8 as a hazard, with the symptom to look for.
+- **H2 - THE PERMISSION AUDIT FOUND THE ITEM NOBODY HAD NAMED:** the 49
+  artifacts carry **his own post text verbatim** as museum data (M80), which an
+  embed licence does not cover and which **survived every remedy so far**. And
+  the sentence that stops "/hr is private" being read as "his material is off
+  the site": **all 97 vault facts ship publicly in `/wal`'s chunk** (M81) and two
+  of his images are served from the museum's own origin (M82). **No lyrics exist
+  anywhere in this repository.** `docs/HR_PERMISSION_AUDIT-20260806.md`.
+- **DOCTRINE 17 WAS APPLIED TO THIS ROUND'S OWN NEW CODE, TWICE, WITHIN THE HOUR
+  IT WAS WRITTEN** - the no-key sentence and "Wrong key" were both typed into two
+  files before the gate ran. A hand-typed count ("nine containers, ninety-three
+  track rows") was written into the admin paragraph and removed before it
+  shipped, for the reason W1 and D3c both paid for.
+- **THE SHARE DESCRIPTIONS ARE DRAFTED AND NOT SHIPPED** (H4, M83): one sentence
+  in three lengths, the search line a **prefix** of the social one rather than a
+  second wording, printed verbatim in the round log for Mike. `index.html` is
+  untouched. **THE ART PULLS ARE AT `C:\AI\_art-pulls\20260806-niac-and-portal\`**
+  (H5) - and the mainframe has **exactly one** full-body photograph, because
+  `IMG_1526.MOV` is not on this machine.
 
 ### 2026-08-06 -> THE PORCH RULINGS (R1-R8) - sealed
 - **SIX RULINGS, ONE RESEARCH MAP, ONE REGISTER PASS - AND THE ONE HE CALLED

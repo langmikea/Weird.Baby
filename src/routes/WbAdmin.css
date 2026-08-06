@@ -78,3 +78,21 @@ html[data-room="admin"], html[data-room="admin"] body { background: #050505; col
 .adm-back { background: transparent; border: none; color: #2a2a2a; font-family: 'Courier Prime', monospace; font-size: 0.62rem; letter-spacing: 0.1em; cursor: pointer; text-transform: uppercase; transition: color 0.2s; } .adm-jump { background: transparent; border: 1px solid #222; color: #555; font-family: 'Courier Prime', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; cursor: pointer; transition: border-color 0.2s, color 0.2s; text-decoration: none; display: inline-block; } .adm-jump:hover { border-color: var(--wb-gold); color: var(--wb-gold); }
 .adm-back:hover { color: var(--wb-gold); }
 .adm-loading { color: #333; font-style: italic; padding: 60px; text-align: center; }
+
+/* ── [H1 2026-08-06] THE HELD WING'S DOOR ────────────────────────────────────
+   Mike ruled /hr private: online for him and for Ops, behind a password
+   entered on this page. The block carries the explanation as well as the
+   control, because this is the one room in the museum where the account of a
+   held wing can be written down without a visitor reading it. Styled off the
+   room's existing furniture — nothing new is introduced but the input. */
+.adm-held { border: 1px solid #1a1a1a; padding: 20px 22px 22px; margin-bottom: 36px; }
+.adm-held-note { color: #6b6b6b; font-size: 0.82rem; line-height: 1.55; max-width: 62ch; margin: 0 0 10px; }
+.adm-held-note code { font-family: 'Courier Prime', monospace; color: #8a8a8a; }
+.adm-held-row { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+.adm-held-key { background: #0b0b0b; border: 1px solid #222; color: #c9c4bb; font-family: 'Courier Prime', monospace; font-size: 0.7rem; letter-spacing: 0.14em; padding: 7px 12px; width: 220px; max-width: 100%; }
+.adm-held-key:focus { outline: none; border-color: var(--wb-gold); }
+.adm-jump[disabled] { opacity: 0.35; cursor: default; }
+.adm-jump[disabled]:hover { border-color: #222; color: #555; }
+.adm-held-close { background: transparent; border: none; color: #2a2a2a; font-family: 'Courier Prime', monospace; font-size: 0.62rem; letter-spacing: 0.1em; cursor: pointer; text-transform: uppercase; transition: color 0.2s; }
+.adm-held-close:hover { color: var(--wb-gold); }
+.adm-held-msg { color: #8a6a4a; font-family: 'Courier Prime', monospace; font-size: 0.72rem; margin-top: 12px; }

@@ -8,7 +8,29 @@
   "main": "src/worker.js",
   "assets": {
     "not_found_handling": "single-page-application",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    // [H1 2026-08-06] LOAD-BEARING, AND `/api/*` IS HALF OF WHY.
+    //
+    // Workers Assets serves a matching static file BEFORE it invokes the
+    // Worker. The held wing's chunks live under /assets/held/ and
+    // src/worker.js refuses them without the cookie — so without a rule here
+    // the Worker is never asked and the wing is public again, silently.
+    //
+    // BUT DECLARING THIS LIST AT ALL CHANGES THE DEFAULT FOR EVERYTHING NOT
+    // IN IT, and that cost this round a real outage in test: with only the
+    // held directory listed, `/api/admin`, `/api/guestbook`, `/api/visits`
+    // and `/api/presets` all stopped reaching the Worker and were answered by
+    // the asset store, which — because `not_found_handling` is
+    // single-page-application — returned index.html with a 200 to every one
+    // of them. The guest book would have posted into an HTML page and the
+    // admin dashboard would have parsed a document as JSON. Nothing errors;
+    // the site just quietly stops having a back end.
+    //
+    // So `/api/*` is named here explicitly. It was implicit before and it is
+    // not any more. Verified on `wrangler dev` against the built bundle: all
+    // four endpoints answer as JSON, the held chunk 404s without the cookie
+    // and 200s with it.
+    "run_worker_first": ["/api/*", "/assets/held/*"]
   },
   "compatibility_flags": [
     "nodejs_compat"

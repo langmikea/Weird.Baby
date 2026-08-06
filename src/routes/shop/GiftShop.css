@@ -414,3 +414,27 @@
 .featured-artist--dead:hover{transform:none;box-shadow:none}
 .featured-artist__note{font-family:'Courier Prime','Courier New',monospace;
   font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+
+/* ═══ [H7 2026-08-06] TEST — THE SHOP'S TITLE BAR IN THE WEIRD.BABY FACE ═════
+   Mike is balancing this page and called this a test that may be reverted.
+
+   HOW TO REVERT: delete this block. Nothing else in the museum changed and no
+   other file was touched — that is the whole reason it is a rule scoped to
+   `.gift-shop` at the end of the shop's own stylesheet instead of a prop, an
+   attribute or an edit to MuseumBar. `.wb-bar` is rendered INSIDE
+   `<div class="gift-shop">` (GiftShop.jsx:268/281), so the descendant selector
+   reaches it on this route and cannot reach it anywhere else. Every other room
+   keeps Syne, untouched and unaware.
+
+   `--wb-brand` IS THE MUSEUM'S OWN BRAND TOKEN — the face the wordmark on the
+   left of this same bar already wears (MuseumBar.css:27), so the test is the
+   room's name joining the house's name rather than a new typeface arriving.
+
+   THE WEIGHT COMES DOWN 700 -> 600 AND THAT IS NOT A STYLE CHOICE. index.html
+   requests Fredoka at 400;500;600 only. Leaving the 700 would have the browser
+   SYNTHESISE the bold — the exact defect R4 wrote that font list to end, and it
+   would have made the test a comparison of a real face against a smeared one. */
+.gift-shop .wb-bar-room {
+  font-family: var(--wb-brand, 'Fredoka', sans-serif);
+  font-weight: 600;
+}
