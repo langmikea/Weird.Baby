@@ -155,7 +155,15 @@ export default {
         }
         await env.weird_baby_db.prepare(
           "INSERT INTO guestbook (name, note, badge, signed_at) VALUES (?, ?, 'Founding Visitor', datetime('now'))"
-        ).bind(name.trim(), (note || "").trim()).run();
+        /* [L1 2026-08-06] THE BUDGETS ARE ENFORCED HERE TOO, and this is the
+           half that actually holds: `maxLength` in WbHome.jsx is an instruction
+           to a text box and anybody can POST past it. The two numbers are the
+           same numbers and their derivation is written down once, at
+           `NOTE_MAX` / `NAME_MAX` in src/routes/WbHome.jsx — they are the
+           narrowest display's own capacity, and a row longer than that is a row
+           the lobby cannot draw without clipping. Truncating here rather than
+           refusing keeps a signature rather than losing one. */
+        ).bind(name.trim().slice(0, 32), (note || "").trim().slice(0, 88)).run();
         return new Response(JSON.stringify({ ok: true }), { headers: { ...cors, "Content-Type": "application/json" } });
       } catch (e) {
         return new Response(JSON.stringify({ error: e.message }), { status: 500, headers: cors });

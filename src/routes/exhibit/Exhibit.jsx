@@ -102,7 +102,10 @@ function scrubFace(face) {
      sentence like any other and a `papa` marker written into one must take it,
      for the reason M53 and D3a both paid for: a field that is not a comment
      prints, and "comment-shaped" is not a property the renderer can see. */
-  ["title", "subtitle", "blurb", "footer", "papa", "docsEmpty"].forEach(k => {
+  /* [F5 2026-08-06] `logEmpty` joins them for the same reason `docsEmpty` did:
+     it is a printed sentence, and a marker written into one must take it. */
+  ["title", "subtitle", "blurb", "footer", "papa", "docsEmpty",
+   "logEmpty"].forEach(k => {
     const v = visitorProse(face[k]);
     if (kept(v)) out[k] = v; else delete out[k];
   });
@@ -162,6 +165,48 @@ function scrubFace(face) {
         if (declaredBody && !keptBody) return false;
         return kept(en.title) || keptBody;
       });
+  }
+  /* [W1 2026-08-06] THE PROFILE'S CATEGORIES. A category whose BODY is entirely
+     the operator's is dropped WHOLE — label and all — which is the opposite of
+     the rule for a plate (A3/A7 keep the picture and lose the caption) and the
+     same as the rule for a preset (N9 drops a button with no name). The reason
+     is the same in both directions: what is left has to be a thing. A plate with
+     no caption is still a photograph; a heading with nothing under it is the
+     published silence D7's lap caught on /foundation, and this face is built to
+     have five of them on its first day. */
+  if (Array.isArray(face.profile)) {
+    out.profile = face.profile
+      .map(c => ({ ...c, label: visitorProse(c.label),
+                         body: visitorProse(c.body) }))
+      .filter(c => kept(c.label) && kept(c.body));
+  }
+  /* [V2 2026-08-06] THE BILL'S ACTS ARE SCRUBBED, AND THEY WERE NOT.
+     An act's `what`, `why` and `pick` are all PRINTED, so a marker written into
+     one printed — which is the practical trap Doctrine 11 names by hand ("a
+     `comment-shaped` string in a data file is not a comment") and the exact
+     defect M53 paid for on this same face. V2 puts a MARKED SENTENCE on every
+     act (`pick`, Mike's own slot), so this stops being a latent hole and becomes
+     the thing the field depends on.
+     THE ACT IS NOT DROPPED WHEN ITS PROSE GOES. Its name, its picture and its
+     door are read off `ARTISTS` by `billActs` and are not text a marker can be
+     written into; a poster that lost an act because nobody had written one
+     sentence yet would advertise a show the room is not putting on. */
+  if (face.bill && Array.isArray(face.bill.acts)) {
+    out.bill = {
+      ...face.bill,
+      standard: visitorProse(face.bill.standard),
+      foot: visitorProse(face.bill.foot),
+      acts: face.bill.acts.map(a => {
+        const what = visitorProse(a.what);
+        const why  = visitorProse(a.why);
+        const pick = visitorProse(a.pick);
+        return { ...a, what: kept(what) ? what : null,
+                       why:  kept(why)  ? why  : null,
+                       pick: kept(pick) ? pick : null };
+      }),
+    };
+    if (!kept(out.bill.standard)) delete out.bill.standard;
+    if (!kept(out.bill.foot)) delete out.bill.foot;
   }
   /* [D7] the three Foundation objects. Only their PROSE is scrubbed — the
      figures, the states and the keys are not text a marker can be written into,
@@ -558,6 +603,40 @@ function tidyDesc(title, v) {
 }
 
 const CF_MIN    = 160; const CF_MAX    = 440;
+/* [D3 2026-08-06] AND THE RACK OPENS LOW.
+   MIKE: "THE CAROUSEL DEFAULTS to A STEP OR TWO ABOVE MINIMUM height. Full range
+   stays reachable; every new session resets to default."
+   The stored default was 300 — the middle of the 160…440 range — and the fit
+   was allowed to GROW it to 440 whenever a screen had height going spare, so on
+   a tall window the first thing in the room was a 440px rack of covers with the
+   album's own tracks below the fold. `CF_DEF` is the default AND the fit's
+   ceiling now: the fit may still bring the rack DOWN to `CF_MIN` when the room
+   is tight, and the drag still reaches `CF_MAX` in one gesture, but nothing
+   raises it on the visitor's behalf. Two steps is 40px, which is the same
+   distance `CF_MIN` sits from it. */
+const CF_DEF    = 200;
+/* [D1/D2 2026-08-06] THE TRACKLIST IS MEASURED, NOT GUESSED, AND THESE ARE ITS
+   TWO STOPS.
+   MIKE, D2: "THE TRACKLIST IS NO LONGER HALF THE SCREEN by default." D1: "…
+   JUSTIFY THE VIEWER'S FIXED EDGE AGAINST THE TRACKLIST — that establishes the
+   default for every track on the album."
+   A tracklist is a COLUMN OF TITLES and its right width is the width of the
+   longest one. 50 was never a measurement — it was the number a two-column
+   layout starts at — and on /wb it granted 832px to six song titles that need
+   under 450, then handed the viewer the same 832 and let it run 739px tall past
+   the bottom of the window. So the default is taken off the widest row the album
+   actually holds, once, on arrival.
+   `TL_MAX` is D2 stated as a number: whatever the measurement says, the
+   tracklist may not take half. `TL_MIN` stops the opposite failure — a wing
+   whose longest track is "FAQ" would otherwise hand the viewer 94% and leave the
+   contents list a stripe. 22 is just inside the two authored splits this
+   replaces (/robots 24, /wal 26), which were hand-fits of this same
+   measurement. */
+const TL_MIN    = 22;  const TL_MAX    = 46;
+/* the air between the longest title and the drag handle. One row's own left
+   padding, mirrored on the right, so the column reads as a column and not as
+   text jammed against a rule. */
+const TL_SLACK  = 22;
 /* [X2 2026-07-30] THE BODY HEIGHT DRAG — same-only-different to the carousel's.
    `.ex-main` is `flex:1` inside `.ex-root`, so the tracklist/viewer block has
    always taken whatever height the viewport had left: the page FORCED it and
@@ -624,7 +703,7 @@ function usePersist(key, def, scope) {
    the far covers deck up against the edge the way a real rack of records does
    instead of marching off the page.
    MEASURED ON THE BUILT PAGE, AT THE SIZE THE ROOM ACTUALLY OPENS AT. F3's
-   `fitOnEntry` computes the carousel's height on arrival and overrides the
+   the fit computes the carousel's height on arrival and overrides the
    persisted one, so the honest number is the one the fit produces rather than
    the stored default: in a true 1706x900 viewport it sets cfH=160, and at full-
    left scroll the five covers land at 64 / 166 / 254 / 319 / 363px from centre
@@ -2415,7 +2494,7 @@ export default function Exhibit({ artist, open = null }) {
      the note at HrExhibitFlow's PRESETS_STORAGE_KEY. So does the Record's read
      register (src/lib/record-read.js). */
   const [split, setSplit] = usePersist(artist.splitKey, artist.splitDefault ?? 50, "session");
-  const [cfH,   setCfH]   = usePersist(artist.cfKey,    300, "session");
+  const [cfH,   setCfH]   = usePersist(artist.cfKey,    CF_DEF, "session");
   /* [X2] Hooks cannot be conditional, so the state always exists; the KEY is
      what is conditional. An artist without `bodyKey` gets an inert slot that
      nothing reads and nothing renders. */
@@ -2506,10 +2585,83 @@ export default function Exhibit({ artist, open = null }) {
      where they put it, and a fresh visit re-fits for whatever window it
      finds. A preset can drive the same sizes by writing the session keys —
      they are ordinary state behind ordinary setters, which is the seam.
-     Wings that do not declare `fitOnEntry` never run any of this. */
+
+     ══ [D1/D2/D3 2026-08-06] THREE CHANGES, AND ONE OF THEM REVERSES THIS
+     BLOCK'S OWN RULING IN THE OPEN ═══════════════════════════════════════════
+     (1) EVERY WING FITS ITSELF NOW. `fitOnEntry` was declared by /wal and by
+         nothing else, so /hr, /wb, /robots and /foundation opened at a flat
+         50/50 (or an authored guess) and a 300px rack no matter what window
+         they were in. Mike's DEFAULTS AND SIZING block is headed "applies
+         everywhere". The flag is deleted rather than left true on one wing.
+     (2) THE SPLIT IS A FIT LEVER, AND THIS FILE SAID IT WAS NOT. The note at
+         lever 2 below reads "the split is not a fit lever; it stays where the
+         visitor (or the wing default) put it", and it was written after an
+         earlier draft NARROWED the viewer column and "dutifully produced a
+         62%-wide tracklist that was mostly empty paper". That finding stands —
+         and it is the finding, not the rule. What was wrong was the DIRECTION:
+         solving for the viewer's height by taking width off the viewer. Mike's
+         D1 turns the same lever the other way and anchors it to something real
+         — "JUSTIFY THE VIEWER'S FIXED EDGE AGAINST THE TRACKLIST" — so the
+         tracklist takes the width of its own longest row and the viewer's edge
+         sits on it. The failure case that produced the old rule cannot recur,
+         because the split is no longer solving for height at all.
+     (3) THE CAROUSEL IS NEVER GROWN. Lever 1 used to run up to `CF_MAX`
+         whenever a window had height going spare; it is capped at `CF_DEF`
+         (D3) and may still come down to `CF_MIN`.
+     THE TRACKLIST MEASUREMENT IS A REAL MEASUREMENT, taken by asking the grid
+     for `max-content` and reading the column back. A tracklist row is a flex
+     line inside a `minmax(0, Nfr)` track, so its `offsetWidth` is the width it
+     was GRANTED and tells you nothing about the width it wants; the only honest
+     way to ask is to let the track size to its content for one synchronous
+     moment. It happens inside `useLayoutEffect`, so no frame is painted in
+     between and the swap is invisible. */
+  /* ── [D1/D2 2026-08-06] THE CONTENTS COLUMN'S OWN WIDTH ───────────────────
+     Ask the grid to size the column to `max-content`, read it back, put the
+     column where it was. Synchronous and only ever called from a layout effect,
+     so no frame is painted at the intermediate size.
+     IT RUNS AGAIN ON EVERY ALBUM, AND IT ONLY EVER GROWS. Only the ACTIVE
+     album's rows are in the document, so one measurement on arrival fits the
+     landing album and clips the next one along — measured on /wb, where a
+     one-row "About the Artist" produced a 366px column and "Weird Baby Blues"
+     arrived as "Weird Baby …". A tracklist that truncates its own titles is the
+     defect R3 spent a round deleting from the Record's index, turning up in a
+     different room. Growing-only is what makes re-measuring safe: the column
+     settles at the widest album the visitor has actually opened and never
+     shrinks under them, so there is no oscillation and nothing they have read
+     moves backwards.
+     A DRAG ENDS IT. Once the visitor has taken hold of the divider the width is
+     theirs for the session, and no album change may argue with it.
+     Extrapolating instead — measuring the longest TITLE across the spine in the
+     live font — was built first and is not exact: a row's width is its title
+     PLUS its descriptor, and the landing album's rows may carry no descriptor at
+     all (a face track has no renditions), so the estimate was 483px of row
+     reported as 343. A measurement that is available is better than an
+     arithmetic that is nearly right. */
+  const splitDraggedRef = useRef(false);
+  const measureSplit = useCallback((growOnly) => {
+    const inner = bodyRef.current;
+    const rootEl = mainRef.current ? mainRef.current.closest(".ex-root") : null;
+    if (!inner || !rootEl || splitDraggedRef.current) return split;
+    const restore = inner.style.gridTemplateColumns;
+    inner.style.gridTemplateColumns = "max-content 10px minmax(0,1fr)";
+    const leftEl = rootEl.querySelector(".ex-left");
+    const wantW = leftEl ? leftEl.getBoundingClientRect().width : 0;
+    inner.style.gridTemplateColumns = restore;
+    const fullW = inner.getBoundingClientRect().width;
+    if (!(wantW > 0 && fullW > 0)) return split;
+    const pct = ((wantW + TL_SLACK) / fullW) * 100;
+    const next = Math.round(Math.min(TL_MAX, Math.max(TL_MIN, pct)));
+    /* the ARRIVAL call sets the default outright — that is the whole of D2, and
+       it is nearly always a shrink, from a 50 nobody measured. Every later call
+       may only grow. */
+    if (growOnly && next <= split) return split;
+    if (next !== split) setSplit(next);
+    return next;
+  }, [split, setSplit]);
+
   const fitDoneRef = useRef(false);
   useLayoutEffect(() => {
-    if (!artist.fitOnEntry || fitDoneRef.current) return;
+    if (fitDoneRef.current) return;
     fitDoneRef.current = true;
     const main = mainRef.current, inner = bodyRef.current;
     const rootEl = main ? main.closest(".ex-root") : null;
@@ -2523,6 +2675,12 @@ export default function Exhibit({ artist, open = null }) {
     } catch { /* private mode */ }
     if (storedCap) rootEl.style.setProperty("--fit-area-max", storedCap + "px");
     if (stored) return;         /* this session already chose its sizes */
+
+    /* ── [D1/D2] THE TRACKLIST'S OWN WIDTH ────────────────────────────────
+       Ask the grid to size the contents column to `max-content`, read it, put
+       the column back. Synchronous and inside a layout effect, so nothing is
+       painted at the intermediate size. */
+    const nextSplit = measureSplit(false);
     /* [M0c 2026-08-03] THE SCROLLER'S ROOM IS RESERVED, NOT MEASURED.
        This line used to be `fsEl ? fsEl.getBoundingClientRect().height : 0`,
        and on this wing the `: 0` branch is the one that ALWAYS ran: the fit
@@ -2550,26 +2708,67 @@ export default function Exhibit({ artist, open = null }) {
     const topBase = main.getBoundingClientRect().top + window.scrollY - cfH;
     const avail = window.innerHeight - topBase - padB - 8;  /* rounding slack */
     const innerW = inner.getBoundingClientRect().width;
-    const areaNatural = ((innerW - 10) * (100 - split) / 100) * (9 / 16);
-    const mainNatural = Math.max(areaNatural + fsH, leftH);
-    /* lever 1: the carousel gives up height, down to its floor. */
-    let ch = Math.min(CF_MAX, Math.max(CF_MIN, avail - mainNatural));
-    if (ch + mainNatural > avail) {
-      /* lever 2: cap the VIDEO AREA's height and let the player letterbox —
-         on the dark stage the bars are black on near-black. This keeps the
-         column widths the visitor expects: the earlier draft narrowed the
-         viewer column instead, and the arithmetic dutifully produced a
-         62%-wide tracklist that was mostly empty paper — a fit that
-         technically fit and read as a mistake. The split is not a fit lever;
-         it stays where the visitor (or the wing default) put it. */
+    /* [D3 2026-08-06] A DOCUMENT IS NOT A PICTURE AND MUST NOT BE FITTED LIKE
+       ONE. On a flat wing landing on a face, the viewer is STOWED — there is no
+       16:9 frame on the screen at all — and yet `areaNatural` below was
+       computing one and finding it did not fit, every time, on every window. The
+       consequence was invisible while the carousel's default was 300 and the fit
+       was allowed to raise it; with D3's lower default it is the difference
+       between the rack opening at 200 and the rack being pinned to its floor in
+       four wings out of five, forever, for a picture nobody is looking at.
+       A stowed face runs full length in the page's own flow and SCROLLS, by
+       W7's ruling. There is nothing to fit it to, so it asks for nothing, and
+       the carousel opens at its default. Read off the live DOM rather than off
+       a render flag, which is the same discipline as every other measurement in
+       this effect. */
+    const stowed = !!rootEl.querySelector(".vp-area-stowed");
+    /* [D1] the split this pass just decided, not the one in state — `setSplit`
+       is asynchronous and the arithmetic below has to read the column the room
+       is about to open at, not the one it opened at last time. */
+    const areaNatural = ((innerW - 10) * (100 - nextSplit) / 100) * (9 / 16);
+    /* what the room is asking for RIGHT NOW — which on a stowed face is the
+       contents column alone, because there is no picture on the screen. */
+    const mainNatural = stowed ? leftH : Math.max(areaNatural + fsH, leftH);
+    /* lever 1: the carousel gives up height, down to its floor. [D3] and it is
+       never raised above the default on the visitor's behalf. */
+    let ch = Math.min(CF_DEF, Math.max(CF_MIN, avail - mainNatural));
+    if (!stowed && ch + mainNatural > avail) {
+      /* lever 2: cap the VIDEO AREA's height and let the picture take the
+         width its height allows. [D1 2026-08-06] The bars this note used to
+         call invisible are gone with the dark stage (A1), and the picture is
+         no longer centred in the slack — it is justified LEFT, against the
+         tracklist, which is Mike's own instruction and is a rule in
+         Exhibit.css rather than arithmetic here. See the block at the head of
+         this effect for why the split is now a lever and this note's old
+         claim that it is not was the wrong half of a real finding. */
       ch = CF_MIN;
-      const cap = Math.max(160, Math.round(avail - ch - fsH));
+    }
+    /* [D3 2026-08-06] AND THE CAP IS COMPUTED WHETHER OR NOT A PICTURE IS ON
+       SCREEN TODAY. `--fit-area-max` governs the frame the visitor will see the
+       MOMENT THEY PICK A SONG, and on a wing that lands on a face that moment is
+       always later than this effect. Computing it only in the branch that fired
+       when a picture was already showing meant a wing landing on a document had
+       no cap at all, so the first song opened a plain 16:9 frame at the full
+       column width and pushed the scroller off the bottom of the window —
+       exactly the failure M0c measured, arriving by a different door. */
+    const cap = Math.max(160, Math.round(avail - ch - fsH));
+    if (areaNatural > cap) {
       rootEl.style.setProperty("--fit-area-max", cap + "px");
       try { sessionStorage.setItem(artist.cfKey + "-cap", cap); } catch { /* private mode */ }
     }
     if (Math.round(ch) !== Math.round(cfH)) setCfH(Math.round(ch));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  /* [D1] a new album is a new set of rows, so the column is asked again. Layout
+     effect, not effect: the re-measure swaps the grid template for one
+     synchronous moment and a paint in between would show the column at
+     max-content. */
+  useLayoutEffect(() => {
+    if (!fitDoneRef.current) return;
+    measureSplit(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeDisplay]);
 
   const ytDivRef = useRef(null);
   const yt = useYTPlayer({
@@ -3132,6 +3331,11 @@ export default function Exhibit({ artist, open = null }) {
   function makeSplitDrag(e, containerRef) {
     e.preventDefault();
     e.currentTarget.setPointerCapture(e.pointerId);
+    /* [D1] the width is the visitor's from here on. The album-change
+       re-measure grows the contents column to fit rows it has not seen yet, and
+       that is exactly the wrong thing to do to a column somebody has just set
+       by hand — see the note at `measureSplit`. */
+    splitDraggedRef.current = true;
     const rootEl = mainRef.current ? mainRef.current.closest(".ex-root") : null;
     const hasCap = !!rootEl && !Number.isNaN(parseFloat(
       getComputedStyle(rootEl).getPropertyValue("--fit-area-max")));
@@ -3174,17 +3378,23 @@ export default function Exhibit({ artist, open = null }) {
        "the viewer gives up 80". Total height is preserved, the room still
        fits, and the lever is real. Read once at pointerdown so the ceiling
        cannot drift under the visitor's own drag (the same discipline as the
-       body drag's measured ceiling). Wings without `fitOnEntry` have no cap
-       and this whole block is inert for them. */
+       body drag's measured ceiling). [D1] The `fitOnEntry` flag is gone —
+       every wing fits itself now — so the condition is simply whether the fit
+       set a cap at all, which is the thing this block actually depends on. A
+       room the fit did not have to cap has no cap to trade against, and the
+       block is inert for it exactly as before. */
     const rootEl = mainRef.current ? mainRef.current.closest(".ex-root") : null;
     const startCap = rootEl
       ? parseFloat(getComputedStyle(rootEl).getPropertyValue("--fit-area-max"))
       : NaN;
-    const tradeCap = artist.fitOnEntry && rootEl && !Number.isNaN(startCap);
+    const tradeCap = !!rootEl && !Number.isNaN(startCap);
 
     function onMove(ev) {
       let h = startH + (ev.clientY - startY);
-      if (Math.abs(h - 300) < 12) h = 300;
+      /* [D3] snap to the DEFAULT, which moved. The literal 300 here was the old
+         default typed a second time and would have snapped a dragged rack to a
+         height nothing else in the file uses any more. */
+      if (Math.abs(h - CF_DEF) < 12) h = CF_DEF;
       const next = Math.max(CF_MIN, Math.min(CF_MAX, Math.round(h)));
       setCfH(next);
       if (tradeCap) {
@@ -3272,13 +3482,20 @@ export default function Exhibit({ artist, open = null }) {
             [one-shop ruling, walk-six] the exit stays in the template (present
             in the DOM) and hides for exhibits that must not advertise a shop —
             /robots today. That is now `exitHidden`. */}
+        {/* [F1 2026-08-06] THE EXIT SLOT IS PER-WING CONFIG NOW. An exhibit's
+            exit has always been the Gift Shop and has always been hideable;
+            what it could not be was SOMETHING ELSE. /foundation must not
+            advertise a shop (D7, the TONE RULING) and must not be a room with
+            no way out (F1), and those two facts have one answer only if the
+            wing gets to say where its door goes. Wings declaring no `exit` are
+            byte-identical. */}
         <MuseumBar
           brandTo={shopHref}
           room={artist.name}
           onRoomClick={() => window.scrollTo({ top: 0, behavior: "auto" })}
-          exitTo={shopHref}
-          exitLabel="Gift Shop"
-          exitHidden={artist.shopEntryHidden}
+          exitTo={artist.exit ? artist.exit.to : shopHref}
+          exitLabel={artist.exit ? artist.exit.label : "Gift Shop"}
+          exitHidden={artist.shopEntryHidden && !artist.exit}
         />
 
         {/* CAROUSEL */}
@@ -3657,11 +3874,88 @@ export default function Exhibit({ artist, open = null }) {
                             value per act (`hue`) is a DESIGN choice and is
                             declared as one in the data; it is not a fact about
                             anybody. */}
+                        {/* ══ [W1 2026-08-06] THE PROFILE — A FEW RICH ITEMS
+                            ═══════════════════════════════════════════════════
+                            MIKE: "SMALL, CONSISTENT, FLEXIBLE CATEGORIES that
+                            can be filled for ANY artist — interesting,
+                            user-engaging, aesthetically present. A FEW RICH
+                            ITEMS BEAT LISTS."
+                            SO IT IS NOT A LIST, AND THAT IS THE ONE THING THE
+                            markup has to get right. `entries`/`lines` — what
+                            this face used to be — are ROWS, and rows are read in
+                            order at one weight, which is exactly the register he
+                            called useless. Cards are read in any order, at a
+                            glance, and a card that is not there leaves no gap in
+                            a sequence. Which is what makes the whole set safe to
+                            declare and mostly leave marked: a wall of six
+                            categories with one filled is a wall with one card on
+                            it, not a list with five holes.
+                            THE SET IS DATA AND THE RENDERER KNOWS NO CATEGORY
+                            NAMES, so a wing declaring different slots renders
+                            without a code change — which is "can be filled for
+                            ANY artist" as a mechanism rather than as an
+                            intention. */}
+                        {Array.isArray(face.profile) && face.profile.length > 0 && (
+                          <div className="vp-prof" data-stage-split="row">
+                            {face.profile.map((c, i) => (
+                              <div className="vp-prof-card" key={i}>
+                                <div className="vp-prof-label">{c.label}</div>
+                                <p className="vp-prof-body">{c.body}</p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
                         {face.bill && Array.isArray(face.bill.acts) && (
                           <div className="vp-bill" data-stage-split="row">
                             {face.bill.standard && (
                               <p className="vp-bill-standard">{face.bill.standard}</p>
                             )}
+                            {/* ══ [V2 2026-08-06] THE POSTER IS TWO REGISTERS NOW,
+                                AND THAT IS THE INSTRUCTION ══════════════════
+                                MIKE: "RESTRUCTURE THE POSTER: all four artists
+                                in ONE HORIZONTAL ROW, fitted to the viewer.
+                                BELOW that, each artist again but LARGER,
+                                carrying a 'why they are here' note."
+                                R5b's 2x2 grid gave every act the same rank at
+                                the same size, which is a CONTACT SHEET rather
+                                than a bill — a poster's grammar is that the same
+                                names appear TWICE at two scales, once as the
+                                line-up and once with the copy. So the acts
+                                render twice off ONE array: the row is the
+                                line-up, the blocks below are the billing.
+                                FOUR ACROSS, EXPLICITLY, for the reason R5b gave
+                                for two: a poster's running order is a decision
+                                and a decision does not change because a window
+                                did. It stacks below 820px, where four columns
+                                are four slivers.
+                                BOTH REGISTERS ARE THE SAME DOOR. Pressing a
+                                name in either opens that artist's room; the row
+                                is not a table of contents for the blocks under
+                                it, it is the same press twice.
+                                [W1c 2026-08-05] "Open the room" IS STILL STRUCK
+                                — Mike named the string in the same passage as
+                                the bill's foot, it was the panel's only written
+                                affordance (P6), and the strike is untouched by
+                                this restructure. OPEN_ACTIONS W-B. */}
+                            <div className="vp-bill-row">
+                              {face.bill.acts.map((act, i) => {
+                                const at = SPINE.findIndex(al => al.id === act.album);
+                                const Tag = at >= 0 ? "button" : "div";
+                                return (
+                                  <Tag className="vp-bill-lineup" key={i}
+                                    style={act.hue ? { "--act": act.hue } : undefined}
+                                    onClick={at >= 0 ? () => selectAlbum(at, true) : undefined}>
+                                    {act.art && (
+                                      <img className="vp-bill-art" src={act.art} alt="" />
+                                    )}
+                                    <span className="vp-bill-name">{act.name}</span>
+                                    {act.what && (
+                                      <span className="vp-bill-what">{act.what}</span>
+                                    )}
+                                  </Tag>
+                                );
+                              })}
+                            </div>
                             <div className="vp-bill-acts">
                               {face.bill.acts.map((act, i) => {
                                 const at = SPINE.findIndex(al => al.id === act.album);
@@ -3673,23 +3967,26 @@ export default function Exhibit({ artist, open = null }) {
                                     {act.art && (
                                       <img className="vp-bill-art" src={act.art} alt="" />
                                     )}
-                                    <span className="vp-bill-name">{act.name}</span>
-                                    {act.what && (
-                                      <span className="vp-bill-what">{act.what}</span>
-                                    )}
-                                    {act.why && (
-                                      <span className="vp-bill-why">{act.why}</span>
-                                    )}
-                                    {/* [W1c 2026-08-05] "Open the room" IS
-                                        STRUCK — Mike named the string in the
-                                        same passage as the bill's foot. It was
-                                        the panel's only written affordance
-                                        (P6: "what is not readable must be
-                                        written"), so this reverses P6 on this
-                                        one object. The panel is still a
-                                        <button> with `cursor:pointer` and a
-                                        hover lift; a coarse pointer now gets
-                                        no written cue. OPEN_ACTIONS W-B. */}
+                                    <span className="vp-bill-body">
+                                      <span className="vp-bill-name">{act.name}</span>
+                                      {act.what && (
+                                        <span className="vp-bill-what">{act.what}</span>
+                                      )}
+                                      {act.why && (
+                                        <span className="vp-bill-why">{act.why}</span>
+                                      )}
+                                      {/* [V2] the fourth line is Mike's and is
+                                          marked in its only sentence, so it
+                                          prints nothing until he writes it.
+                                          There is deliberately no placeholder:
+                                          an empty slot on the glass is what
+                                          Doctrine 11's corollary forbids, and
+                                          `scrubFace` has already emptied the
+                                          field by the time this renders. */}
+                                      {act.pick && (
+                                        <span className="vp-bill-pick">{act.pick}</span>
+                                      )}
+                                    </span>
                                   </Tag>
                                 );
                               })}
@@ -4052,6 +4349,24 @@ export default function Exhibit({ artist, open = null }) {
                             record, which is the thing a reader actually wants
                             and the old index could not do: it could only put
                             you back at the top. */}
+                        {/* ══ [F5 2026-08-06] AN EMPTY VOLUME SAYS SO ═══════
+                            A `log` face with no entries rendered NOTHING — the
+                            heading, then the footer, then the bottom of the
+                            page. That was invisible while the only log in the
+                            museum held a record; the Foundation's "Happening
+                            now!" is a volume built before its first entry, so
+                            it is visible now.
+                            IT IS THE SAME OBJECT AS `docsEmpty` AND IS BUILT AS
+                            ONE — an honest empty shelf, declared in the data,
+                            scrubbed like any printed scalar, and drawn in the
+                            same rules. What it may NOT say is that nobody has
+                            written one yet: that is a production fact and fails
+                            Doctrine 11. What it says is what the volume holds
+                            and what will be in it, which is a holdings fact and
+                            ships. */}
+                        {face.logEmpty && (!Array.isArray(face.entries) || face.entries.length === 0) && (
+                          <p className="vp-face-docs-empty" data-stage-split="row">{face.logEmpty}</p>
+                        )}
                         {Array.isArray(face.entries) && face.entries.length > 0 && (() => {
                           const isLog = face.entriesMode === "log";
                           const isFaq = face.entriesMode === "faq";

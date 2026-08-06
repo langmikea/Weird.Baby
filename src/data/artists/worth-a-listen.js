@@ -1352,71 +1352,24 @@ function doorsFor(a) {
   return trail.length ? trail : undefined;
 }
 
-/* [W10] ABOUT THE SONGS — the per-song museum cards, merged onto one page.
-   The interpretive labels run as entries, stamped with the track numbers.
-
-   [C1 2026-08-03] THE RECORD CARDS ARE GONE FROM THE WALL, NOT FROM THE FILE.
-   MIKE: "the per-song provenance cards (MAKER / MEDIUM / PUBLISHED BY / ALSO
-   AT / VERIFIED / FROM / RELEASED AS / PRODUCED BY / SOURCE) are OUR audit
-   trail dressed as content — useless to a visitor, without direction or
-   purpose, and redundant against the numbered paragraph that follows for the
-   same song."
-   He is right on all three counts, and the third is the one that settles it.
-   The register printed "FROM  Skipping Stones That Sink Before They're Thrown"
-   and "MEDIUM  Official music video" directly above a paragraph that says what
-   the song is and why it is here — so a visitor read the same fact twice, in
-   the weaker order, and the weaker one came FIRST: the sideboxes rendered
-   ABOVE the entries (Exhibit.jsx draws `sideboxes` before `entries`), which
-   put two grey boxes of accession numbers between the visitor and every word
-   written for them. On a two-song face that is the whole first screen.
-   WHAT IS DELETED IS ONE `sideboxes:` KEY. Every `card.tombstone` below is
-   untouched, and that is deliberate: the tombstones are the verification
-   record — the accession ids, the oEmbed author_url checks, the transposition
-   ledger that caught two swapped artist-pairs. That discipline is unchanged.
-   It simply stops being furniture in a public room. The file is the ledger;
-   the wall is for the visitor.
-   (This does NOT generalise to `aboutArtistTrack`. Its sideboxes are the
-   artist's own material — awards, catalogue, billing — which is content a
-   visitor came for, not a record of how we checked it.) */
-function aboutSongsTrack(a) {
-  const withCards = a.songs.filter(s => s.card);
-  if (!withCards.length) return null;
-  return {
-    id: a.id + "-about-songs",
-    unnumbered: true,      /* a category, not a track — consumes no number */
-    title: "About the Songs",
-    tags: [...a.tags, "card"],
-    videos: [],
-    face: {
-      kind: "text",
-      title: "ABOUT THE SONGS",
-      subtitle: a.name.toUpperCase(),
-      /* [F1 2026-08-03] THE SONGS' CARDS GET THE SONGS' PICTURES.
-         THE VISUAL HOOK LAW: every surface needs something visually compelling
-         besides written words. This face had nothing — it was the one page in
-         the wing that was pure type, and it sat directly beneath a tracklist of
-         songs each of which already ships with a picture.
-         THE PICTURE IS THE ONE THE EMBED WOULD SHOW, which is why it needs no
-         new rights ruling: W3 settled that a video's own poster surface,
-         hotlinked from YouTube's CDN, is part of the embed's function, and
-         "What they are up to" has been drawing exactly this URL per tile since
-         it was built. A song with no `ytId` renders no plate and no gap — the
-         entry simply has no `img`. */
-      entries: withCards.map((s, i) => ({
-        stamp: String(i + 1).padStart(2, "0"),
-        title: s.title,
-        line: s.card.label.join(" "),
-        img: s.ytId ? "https://i.ytimg.com/vi/" + s.ytId + "/hqdefault.jpg" : undefined,
-      })),
-      entriesMode: "list",
-      /* [C1] no `sideboxes` — see the header. `s.card.tombstone` is still read
-         by nothing on this face and still kept by every song, which is the
-         point of the change rather than an oversight in it. */
-      footer: "WORTH A LISTEN · " + a.name,
-      papa: "[PAPA] — the words for the songs' cards.",
-    },
-  };
-}
+/* ═══ [C4 2026-08-06] "ABOUT THE SONGS" IS BURNED DOWN ══════════════════════
+   MIKE: "'ABOUT THE SONGS' IS REPETITIVE - burn it down, discard."
+   He is describing the face's own shape rather than its writing. It printed one
+   numbered paragraph per song under the song's own YouTube poster — beneath a
+   tracklist in which those same two songs are the first two rows, each already
+   carrying its title and its rendition, and beside an ABOUT THE ARTIST card that
+   says what the artist does. Two songs is not enough material for a page about
+   the songs; it is a second listing of the tracklist with a sentence attached.
+   `aboutSongsTrack` and its call are DELETED. The builder is gone rather than
+   left uncalled, because an uncalled builder is one data edit from returning.
+   WHAT THIS COSTS, NAMED RATHER THAN ABSORBED: each song's `card.label` — the
+   authored paragraph about that song — is now rendered by nothing. The DATA
+   stays where it is, because those paragraphs are written work and deleting
+   them is Mike's call rather than a consequence of deleting a container; the
+   `card.tombstone`s stay for the reason this file already gives (they are the
+   verification record — the accession ids and the oEmbed checks — and were
+   never furniture). Both are register row V-B: re-home the song copy, or strike
+   it. Until he rules, nothing in `src/` prints it. */
 
 /* ABOUT THE ARTIST — the museum card: tombstone (the factual register),
    interpretive label (what they are doing here), sideboxes, and the TWO
@@ -1427,7 +1380,8 @@ function aboutArtistTrack(a) {
   return {
     id: a.id + "-about-artist",
     unnumbered: true,      /* a category, not a track — consumes no number */
-    title: "About the Artist",
+    /* [C1 2026-08-06] sentence case, with the rest of the category rows. */
+    title: "About the artist",
     tags: [...a.tags, "about", "faq"],
     videos: [],
     face: {
@@ -1518,12 +1472,22 @@ function upToTrack(a) {
   return {
     id: a.id + "-up-to",
     unnumbered: true,      /* a category, not a track — consumes no number */
-    title: "What they are up to",
+    /* [C1 2026-08-06] IT IS A QUESTION NOW, AND THE ROW TITLES TAKE ONE CASE.
+       MIKE: "'What they are up to' becomes 'WHAT ARE THEY UP TO?' — and fix the
+       sentence case in every place that pattern appears."
+       THE SECOND HALF IS THE STRUCTURAL ONE. An artist album's category rows
+       read "About the Songs", "About the Artist", "What they are up to" — two
+       Title Case and one sentence case, in a column three rows deep where a
+       visitor sees all three at once. The house's own rooms are sentence case
+       already (/wal "About our current artists", "The deal"; /foundation "The
+       account", "The ledger", "The register"), so sentence case is the
+       convention and Title Case was the drift. */
+    title: "What are they up to?",
     tags: [...a.tags, "feed"],
     videos: [],
     face: {
       kind: "text",
-      title: "WHAT THEY ARE UP TO",
+      title: "WHAT ARE THEY UP TO?",
       subtitle: a.name.toUpperCase(),
       collage: a.feed.map(f => ({
         img: "https://i.ytimg.com/vi/" + f.id + "/hqdefault.jpg",
@@ -1535,14 +1499,26 @@ function upToTrack(a) {
         ? [{ label: a.tickets.label, url: a.tickets.url,
              scent: "They play constantly. This is where it is real." }]
         : undefined,
+      /* [C2 2026-08-06] REDUCED TO THE WALL. Mike: "REDUCE THE PAGE TO THE
+         TILES."
+         WHAT WENT: the "Showing" row, which counted the tiles printed
+         underneath it — the page is that count, and a page that states its own
+         length is the class of line Doctrine 16 exists for.
+         WHAT STAYED, AND WHY IT IS NOT THE SAME KIND OF THING: the SOURCE row.
+         A dated snapshot of somebody else's feed is provenance, and provenance
+         is the thing Doctrine 11 names explicitly as passing — "a sources line,
+         a citation, an accession number: a museum prints those". It is also the
+         only line on the page that stops an undated wall reading as live.
+         AND THE TOUR DOOR STAYED. It is a door to the artist's own place, which
+         is this wing's whole posture ("every door leads out"), and it is the one
+         thing on this page that is not a YouTube tile — see C2's own question,
+         answered in the round log: every tile in every wall on every artist page
+         in this wing is a YouTube thumbnail opening a YouTube watch page. There
+         are no others. */
       tombstone: [
         { k: "Source", v: "Their own channel feed, read 2 August 2026" },
-        { k: "Showing", v: a.feed.length + " of the most recent" },
       ],
       footer: "WORTH A LISTEN · " + a.name,
-      /* [F1] the interpretation flag came down: Mike kept this category. */
-      papa: "[PAPA] — the collage caption wording, and whether any upload " +
-            "earns a row of its own.",
     },
   };
 }
@@ -1551,7 +1527,7 @@ function upToTrack(a) {
 function tracksFor(a) {
   const out = [];
   a.songs.forEach(s => out.push(songTrack(a, s)));
-  out.push(aboutSongsTrack(a));
+  /* [C4] `aboutSongsTrack(a)` was here. */
   out.push(aboutArtistTrack(a));
   out.push(upToTrack(a));
   return out.filter(Boolean);
@@ -1568,12 +1544,25 @@ function tracksFor(a) {
    an artist is a content defect and should not be discovered by a visitor.
    The running order is the ORDER GIVEN, not the array's: a poster's order is a
    billing decision, and this one is Mike's. */
+/* [V2 2026-08-06] AND EACH ACT NOW CARRIES A `pick` — ONE SENTENCE, MIKE'S.
+   His instruction: "each artist again but LARGER, carrying a 'why they are
+   here' note: 2-3 sentences of substance (Ops writes, from verified facts) and
+   ONE SENTENCE on why Mike picked them ([PAPA] - Mike writes, leave the slot)."
+   `why` IS ALREADY THE FIRST HALF and not one word of it is new: two sourced
+   sentences per act, every clause carried on that artist's own card, which is
+   what "from verified facts" asks for and what this file's own notes document
+   claim by claim. Writing a third sentence to reach "2-3" would be Doctrine 12
+   with a word count as its excuse.
+   `pick` IS THE SECOND HALF AND IT IS A SLOT. It is marked in its only
+   sentence, so `scrubBill` empties it and the poster prints nothing where it
+   sits — there is no placeholder, no dash, no "coming". The four sentences are
+   his and the museum does not guess at why he picked anybody. */
 function billActs(copy) {
   return copy.map(c => {
     const a = ARTISTS.find(x => x.id === c.id);
     if (!a) throw new Error("billActs: no artist with id " + c.id);
     return { album: a.id, name: a.name, art: a.art,
-             what: c.what, why: c.why, hue: c.hue };
+             what: c.what, why: c.why, pick: c.pick, hue: c.hue };
   });
 }
 
@@ -1586,16 +1575,19 @@ function billActs(copy) {
    THE COVER IS THE HOUSE'S OWN and deliberately not an artist photo: the
    frame may introduce itself in the frame's voice — paper ground, house
    type — precisely because everywhere else the artists bring the color. */
-const HOUSE_COVER = "data:image/svg+xml;utf8," + encodeURIComponent(
-  '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600">' +
-    '<rect width="600" height="600" fill="#d9d5ca"/>' +
-    '<rect x="26" y="26" width="548" height="548" fill="none" stroke="#211f1c" stroke-width="2"/>' +
-    '<text x="300" y="235" text-anchor="middle" fill="#211f1c" font-family="Georgia,serif" font-size="64" letter-spacing="3">WORTH</text>' +
-    '<text x="300" y="317" text-anchor="middle" fill="#211f1c" font-family="Georgia,serif" font-size="64" letter-spacing="3">A</text>' +
-    '<text x="300" y="399" text-anchor="middle" fill="#211f1c" font-family="Georgia,serif" font-size="64" letter-spacing="3">LISTEN</text>' +
-    '<line x1="150" y1="440" x2="450" y2="440" stroke="#211f1c" stroke-width="2"/>' +
-    '<text x="300" y="482" text-anchor="middle" fill="#57544d" font-family="Courier New,monospace" font-size="19" letter-spacing="5">WEIRD.BABY</text>' +
-  "</svg>");
+/* [A3 2026-08-06] THE HOUSE CARD IS A REAL COVER NOW, ON THE ROBOTS TEMPLATE.
+   MIKE: "make the robots gray album art the Weird.Baby gray album standard and
+   replace every equivalent … and anywhere else carrying Weird.Baby's own art."
+   This was an inline SVG data URI drawing WORTH / A / LISTEN on the museum's
+   paper — and the museum's paper is `--wb-bg`, which is also the carousel's own
+   ground, so the card had nothing to show but its keyline and dissolved at the
+   rack's edge. It is `tools/make_house_covers.py`'s output now: same square,
+   same border, same Georgia setting, same rule, same strapline, and the mark,
+   which is the thing that fills it with ink.
+   ITS OTHER JOB IS UNCHANGED. F1 put this card on THE DEAL as that face's
+   visual hook ("the one piece of imagery in this wing the house made rather
+   than borrowed"), and it is still that — a better one. */
+const HOUSE_COVER = "/images/wal/worth-a-listen-cover.png";
 
 const HOUSE_ALBUM = {
   id: "worth-a-listen",
@@ -1661,8 +1653,23 @@ const HOUSE_ALBUM = {
         kind: "text",
         title: "ABOUT OUR CURRENT ARTISTS",
         subtitle: "WORTH A LISTEN",
-        blurb: "Four of them. Two songs each, all playable. Every one of them " +
-               "is somebody's favourite record and none of them is ours.",
+        /* [V1 2026-08-06] THE BLURB IS STRUCK, on Mike's ruling. "Four of them.
+           Two songs each, all playable. Every one of them is somebody's
+           favourite record and none of them is ours." — the third clause is the
+           room's own curation posture stated out loud, which is the sentence
+           W1a struck from the label on this same face and the one M52 flagged
+           for sitting above a panel that says the museum holds his records; the
+           first two are a COUNT of what is on the page, which the page itself
+           is. The render path for `blurb` is untouched and conditional; the
+           field is simply not declared, the way `standard`, `foot` and `label`
+           are not. The poster opens on the acts, which is what a poster does.
+           MIKE'S SECOND STRIKE IS NOT IN THIS REPOSITORY. "Artists that command
+           Weird.Baby's respect and deserve your awareness." appears nowhere in
+           `src/` or `index.html` — searched for the whole sentence and for
+           "respect", "deserve" and "awareness" separately. It is not struck
+           here because there is nothing here to strike, and the honest report is
+           that rather than a nearby sentence removed and reported as his.
+           OPEN_ACTIONS V-A. */
         bill: {
           /* [W1b 2026-08-05] THE STANDARD LINE IS STRUCK, on Mike's ruling.
              "The standard in this room is not chart position and not how many
@@ -1681,18 +1688,21 @@ const HOUSE_ALBUM = {
               why: "Twenty years of touring, twelve records and every one of " +
                    "them independent, and an Artist of the Year award she tied " +
                    "for in 2026. She writes protest songs you can dance to.",
+              pick: "[PAPA] — one sentence on why Mike picked this artist.",
               hue: "#f79ac4" },
             { id: "jesse-welles",
               what: "Songwriter · Arkansas",
               why: "A song about this week, written this week, posted most " +
                    "weeks — usually a man, a guitar and a field. Four Grammy " +
                    "nominations at the 68th for doing exactly that.",
+              pick: "[PAPA] — one sentence on why Mike picked this artist.",
               hue: "#9ccf7a" },
             { id: "mikey-mike",
               what: "Songwriter and producer · Los Angeles",
               why: "A debut single produced by Rick Rubin that reached most " +
                    "people through a Canon advert. You have almost certainly " +
                    "heard him without ever learning his name.",
+              pick: "[PAPA] — one sentence on why Mike picked this artist.",
               hue: "#e8b45c" },
             /* [CS 2026-08-04] his billing on the poster advertised the SITE
                ("his catalogue taught this museum's machinery every pattern the
@@ -1767,6 +1777,7 @@ const HOUSE_ALBUM = {
                    "Half of Crooked Home is about his brother Nick, who was " +
                    "gone at twenty-seven, and he says “’94” is the heart of it " +
                    "all.",
+              pick: "[PAPA] — one sentence on why Mike picked this artist.",
               hue: "#d8c9a0" },
           ]),
           /* [W1c 2026-08-05] THE FOOT IS STRUCK, on Mike's ruling. "Press a
@@ -2024,6 +2035,11 @@ export const worthAListenExhibit = {
   facts: worthAListenFacts,
   defaultActiveIndex: 0,
   splitKey: "wb-wal-split",
+  /* [D2 2026-08-06] `splitDefault: 26` was a hand-fit of the measurement the
+     room now takes for itself — the widest row in this wing's contents list,
+     expressed as a percentage of a window nobody had measured. It is kept as
+     the FALLBACK for the case the measurement cannot run (a contents column
+     with no rows in it), and it is no longer what the room opens at. */
   splitDefault: 26,
   cfKey: "wb-wal-cfh",
   visitPath: "/wal",
@@ -2045,10 +2061,13 @@ export const worthAListenExhibit = {
   /* [W3 2026-08-02] the cued song's poster is the VIDEO'S own thumbnail, not
      the house cover — the artists' imagery carries the page. */
   thumbFromVideo: true,
-  /* [F3 2026-08-02] on entry the room fits itself to the screen — tracklist,
-     viewer and scroller all visible at once, computed from measurement; the
-     visitor's own adjustments hold for the session. */
-  fitOnEntry: true,
+  /* [D1 2026-08-06] `fitOnEntry` IS DELETED AND THE BEHAVIOUR IS NOT. Mike's
+     DEFAULTS AND SIZING block is headed "applies everywhere", so every wing
+     fits itself on entry now and there is nothing left for a per-wing opt-in to
+     say. F3's own sentence for what it did stands, in Exhibit.jsx, where the
+     fit is: on entry the room fits itself to the screen — tracklist, viewer and
+     scroller all visible at once, computed from measurement; the visitor's own
+     adjustments hold for the session. */
   /* [M-e 2026-08-02] the transport stows into the artist-name bar, and the
      fixed 68px player bar stands down with it. */
   transport: "banner",

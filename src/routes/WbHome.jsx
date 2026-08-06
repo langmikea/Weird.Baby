@@ -205,18 +205,59 @@ const REST_MS = 5000;       /* long enough to read three signatures */
 const MOVE_MS = 520;
 const WRAP_SLACK_MS = 260;
 
+/* ── [L1 2026-08-06] THE TWO BUDGETS, AND HOW THEY WERE ARRIVED AT ──────────
+   Both are measured against the NARROWEST display the lobby supports, because
+   that is the one that decides — a limit set at desktop is a limit that clips
+   on a phone, which is the defect these numbers exist to end.
+   At a 390px viewport `.wb-right` pads to 334 and the row pads to 310. The
+   note gets that whole width on its own two lines there (see the ≤680px rule in
+   WbHome.css), and Courier Prime at 0.72rem advances 6.907px, so a line holds
+   44 characters and the block holds 88.
+   THE NAME'S LIMIT IS PART OF THE SAME ARITHMETIC and was the thing nobody had
+   checked: at 390px the name shares line one with the date, the longest date
+   this formatter produces is "Sep 30, 2026" at 71px, and 60 characters of Syne
+   at 0.78rem is roughly 420px inside a 310px row. 32 is what fits with the date
+   beside it. Existing signatures are well inside both.
+   ENFORCED IN TWO PLACES ON PURPOSE — `maxLength` here and a `slice` in
+   src/worker.js — because an attribute is a courtesy to the browser and the
+   database is where a row actually becomes permanent. */
+const NOTE_MAX = 88;
+const NAME_MAX = 32;
+
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
+/* ═══ [L1 2026-08-06] THE ROW IS TWO LINES AND THE NOTE MAY FILL BOTH ════════
+   MIKE: "THE PEOPLE ENTRIES are character-limited to fit the display — give
+   them BOTH LINES to fill, enforced at entry rather than truncated after.
+   Currently top-justified and cut at the wrap."
+
+   IT IS THE SAME MECHANISM R3 BUILT FOR THE RECORD'S INDEX ONE ROUND AGO, and
+   it is worth naming as such because it is now the house's answer to this whole
+   class of problem: DELETE THE TRUNCATION so a too-long string cannot lie, and
+   REFUSE THE STRING AT THE INPUT so there is never a too-long one. Take either
+   half away and "it fits" is a promise again. What was here was the opposite
+   arrangement — `white-space:nowrap` plus `text-overflow:ellipsis` plus a 280
+   character limit, so a visitor could type 280 characters into a box that
+   displays about 88 of them and nothing anywhere said so.
+
+   `title` GOES WITH THE ELLIPSIS. It carried the full note on hover, which was
+   the honest patch on a lossy row; there is nothing hidden to reveal now, and a
+   tooltip that duplicates the text under it is the thing Doctrine 16 asks about.
+   It was also the half a touch device could not use.
+
+   THE ROWS STAY UNIFORM BY CONSTRUCTION, which is what P12 measured the box in
+   rows for and what the stepped scroller translates by. Two lines is a
+   composition rather than a consequence: the note is a two-line block whatever
+   it holds, and `--gb-row` is read live off the stylesheet by both the CSS cap
+   and the drag, so the narrow-width row can be a different height without a
+   second author of the number. */
 function GuestRow({ e }) {
-  /* the full note rides `title` — the row is one ledger line by composition,
-     and a long message is still readable on hover rather than being lost with
-     the ellipsis. */
   return (
-    <div className="wb-entry" title={e.note || undefined}>
+    <div className="wb-entry">
       <span className="wb-entry-name">{e.name}</span>
-      {e.note && <span className="wb-entry-note">{e.note}</span>}
+      <span className="wb-entry-note">{e.note}</span>
       <span className="wb-entry-date">{formatDate(e.signed_at)}</span>
     </div>
   );
@@ -635,11 +676,11 @@ export default function WbHome() {
                     accepted. */}
                 <textarea className="wb-field wb-field-note"
                   placeholder="what brought you here?" value={note}
-                  onChange={e => setNote(e.target.value)} maxLength={280} />
+                  onChange={e => setNote(e.target.value)} maxLength={NOTE_MAX} />
                 <div className="wb-form-row">
                   <input className="wb-field" placeholder="what should we call you?"
                     value={name} onChange={e => setName(e.target.value)}
-                    maxLength={60} />
+                    maxLength={NAME_MAX} />
                   <button className="wb-submit" onClick={handleSubmit}>Sign</button>
                 </div>
               </div>

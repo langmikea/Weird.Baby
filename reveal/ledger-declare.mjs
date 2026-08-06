@@ -143,7 +143,9 @@ R("route.wal", "Worth A Listen — four artists the house wants heard.",
   "surface", "/wal", "LIVE", "linked from the directory", "REVEALED");
 R("route.wb", "Weird.Baby Music — the house's own record.",
   "surface", "/wb", "LIVE", "linked from the directory", "REVEALED",
-  { assets: ["/images/wb/vol1_cover_v1.png"] });
+  { assets: ["/images/wb/vol1-cover.png"] });   /* [A3 2026-08-06] the sleeve was
+     rebuilt on the robots template and the old file is deleted; the ledger meets
+     the asset table at `assets: [uid]`, so a repointed FILE is a repointed row. */
 R("route.hr", "The Hunter Root reference wing — 8 albums, 93 tracks, the deepest thing in the museum about any artist.",
   "surface", "/hr", "PARTIAL", "by URL only — deliberately unlisted", "HELD",
   { note: "HELD PERMANENTLY BY RULING (ASSET_REVEAL_CHECKLIST §E): reachable, never listed. PARTIAL because the deck's journal tab is dead machinery (M17) and the page is one exhibit plus an unlinked discography." });

@@ -20,12 +20,13 @@
 // only when present ({ExhibitFlow && ...}, Exhibit.jsx:1065 — verified
 // 2026-07-06). The WB exhibit is player-only for v0; holes are by design.
 
-/* [D1 2026-08-06] THE KEEPER'S ANSWER IS THE HOUSE'S, AND IT IS NOW READ RATHER
-   THAN RETYPED. P9 copied the Information Booth's answer onto the register
-   below, verbatim and deliberately — and a verbatim copy is still a copy: the
-   booth could be edited and this room would go on saying the old thing. It is
-   one declaration in src/data/house-copy.js now, imported by both. */
-import { KEEPER } from "../house-copy.js";
+/* [W1 2026-08-06] THE KEEPER'S ANSWER LEAVES THIS ROOM AND THE IMPORT GOES WITH
+   IT. D1 hoisted it into src/data/house-copy.js so the booth and this card could
+   not drift apart; W1 takes it off this card altogether, because it is an answer
+   about the HOUSE printed under an ARTIST's name. The hoist was not wasted — it
+   is why removing it here is one deleted line rather than a decision about which
+   of two copies was the real one — and `KEEPER` still stands in house-copy.js
+   with /booth reading it. */
 
 const REC_LABEL = "Recording — 2026-06";
 
@@ -57,13 +58,59 @@ const spine = [
     id: "about",
     title: "About the Artist",
     year: null,
-    art: "/WeirdBaby_PhotoID.png",
+    /* [A3 2026-08-06] THE HOUSE SLEEVE, NOT THE BARE MARK. Mike ruled the robots
+       gray album art the standard for everything carrying Weird.Baby's own art
+       and named this wing. This album was showing the MARK ITSELF as its cover —
+       the only album in the museum with no sleeve at all — so it now carries one
+       built by `tools/make_house_covers.py` on that template: same square, same
+       paper, same border, same Georgia setting, same rule, same strapline. */
+    art: "/images/wb/about-cover.png",
     accent: null,
     tracks: [
       {
         id: "about-artist",
-        title: "About the Artist",
+        /* [C1 2026-08-06] sentence case, with every other category row in the
+           museum — see the note at /wal's `upToTrack`. The FACE title (all
+           caps) and the album's own name are untouched. */
+        title: "About the artist",
         videos: [],
+        /* ═══ [W1 2026-08-06] BURNED DOWN AND REBUILT AS CATEGORIES ══════════
+           MIKE: "ABOUT THE ARTIST - the current viewer content is useless. BURN
+           IT DOWN. Rebuild as SMALL, CONSISTENT, FLEXIBLE CATEGORIES that can be
+           filled for ANY artist - interesting, user-engaging, aesthetically
+           present. A FEW RICH ITEMS BEAT LISTS AND RECORD FILES THAT DO NOT
+           BELONG HERE. Build the categories; fill only what is true, [PAPA] the
+           rest."
+
+           WHAT WAS HERE AND WHY IT WAS USELESS, ITEM BY ITEM, because three of
+           the four were put here deliberately and two of them are good writing.
+             · The RELEASE / TRACKS / PORTRAIT register is the "record file that
+               does not belong here" in his sentence, exactly: three lines of
+               accession data set as a monospace block, telling a visitor the
+               number of tracks on an album whose tracks are listed six inches to
+               the left.
+             · "Who keeps this place?" is the booth's answer and it is one of the
+               best passages in the building — and it is about the HOUSE, on a
+               card headed with an ARTIST's name. It is not deleted from the
+               museum; it is at /booth, which is its room, and D1 left it one
+               import away if it is ever wanted back.
+             · "What the museum holds" survives, as a category, because it is the
+               one thing on the old card that was about this artist and true.
+             · The blurb survives for the same reason.
+
+           THE CATEGORIES ARE THE DELIVERABLE, NOT THIS PAGE'S CONTENT. Six slots
+           that any artist in any wing can be described by, in the order a
+           stranger meets somebody: where they are from, what they sound like,
+           their own voice, where to start, what the museum has, and what they are
+           doing now. Each is one RICH item and not a list — a sentence or two,
+           set as a card — which is the "few rich items" half of the ruling given
+           a shape.
+           FIVE OF THE SIX ARE MARKED AND PRINT NOTHING, and that is the ruling
+           working rather than the page failing. Doctrine 12 forbids the obvious
+           alternative: nobody has told Ops where this artist is from or what he
+           sounds like, and a plausible paragraph about a musician nobody has
+           described is invention however well it fits. The slots are in the data
+           where he can fill them one at a time. */
         face: {
           kind: "text",
           title: "ABOUT THE ARTIST",
@@ -71,33 +118,24 @@ const spine = [
           blurb:
             "The house's own music. What this room holds of the artist is the " +
             "recordings; what it holds of the person is his name.",
-          lines: [
-            "RELEASE   The Making of BoWB V1 — 2026",
-            "TRACKS    six, recorded June 2026",
-            "PORTRAIT  none on file",
+          profile: [
+            { label: "Where he is from",
+              body: "[PAPA] — where Weird.Baby is from." },
+            { label: "What he sounds like",
+              body: "[PAPA] — what the recordings sound like, in his words." },
+            { label: "In his own words",
+              body: "[PAPA] — one thing he has said about the music." },
+            { label: "Start with",
+              body: "[PAPA] — one track to play first, and why that one." },
+            /* the one category this artist can fill today, and the only claim
+               on the old card that was about him and checkable: the six files
+               in public/audio/wb/ and the release they belong to. */
+            { label: "What the museum holds",
+              body: "Six recordings, made in June 2026, and one release: The " +
+                    "Making of BoWB V1. They play in this room." },
+            { label: "What he is doing now",
+              body: "[PAPA] — what he is working on." },
           ],
-          entries: [
-            /* [P9] THE SLOT, MARKED IN BOTH FIELDS SO IT RENDERS NOTHING —
-               the same mechanism the robots FAQ uses for its own unwritten
-               answer, and for the same reason: `scrubFace` keeps an entry whose
-               TITLE survives even when its line does not. */
-            { stamp: "Q", title: "[PAPA] Who is Weird.Baby?",
-              line: "[PAPA] the artist's own account of himself, which is " +
-                    "Mike's to write and nobody else's.",
-              note: "" },
-            /* THE INFORMATION BOOTH'S OWN ANSWER. It is the one published
-               statement about the person behind this name, and it was only
-               reachable from a room in a different part of the building.
-               [D1] It is the SAME STRING as the booth's now, not a copy of it. */
-            { stamp: "WHO", title: "Who keeps this place?",
-              line: KEEPER,
-              note: "" },
-            { stamp: "ON FILE", title: "What the museum holds",
-              line: "Six recordings, made in June 2026, and one release: The " +
-                    "Making of BoWB V1. They play in this room.",
-              note: "" },
-          ],
-          entriesMode: "list",
           footer: "WEIRD.BABY · ABOUT THE ARTIST",
         },
       },
@@ -107,7 +145,14 @@ const spine = [
     id: "vol1",
     title: "The Making of BoWB V1", // display title per Mike 2026-07-06 (registration title: Best of Weird.Baby — Vol 1)
     year: 2026,
-    art: "/images/wb/vol1_cover_v1.png", // composed cover (Mike 2026-07-06): gray field, red "the making of" (pop), white "The Best of" / logo / white "Vol. 1", smaller photo larger text
+    /* [A3 2026-08-06] THE COMPOSED COVER IS REPLACED, AND IT IS THE ONE THIS
+       INSTRUCTION IS MOST ABOUT. W2: "the wing's albums are LESS CONSISTENT in
+       look and feel than Robots and WAL — conform them." The 2026-07-06 cover
+       was a gray field with red display type, a white sub-line and a small
+       photo; it is the only object in the museum using red, and it sat in the
+       same rack as a cover built on the house template. Replaced on that
+       template. The old file is deleted rather than left beside it. */
+    art: "/images/wb/vol1-cover.png",
     accent: null,
     tracks: [
       {

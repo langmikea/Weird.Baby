@@ -1017,3 +1017,111 @@ the pointer in CLAUDE.md's "Older entries" note.*
 - **THE PRUNE PROCEDURE WAS RUN FORWARDS FOR THE FIRST TIME.** Five chains were
   repointed BEFORE the prune, so the gate named **zero** broken chains against
   16 stale rows.
+
+---
+
+### 2026-08-06 -> THE PRE-COMMENTARY ROUND (H1-H8) - sealed
+- **EIGHT INSTRUCTIONS, ALL EIGHT LANDED, AND THE VERIFICATION OF THE HEADLINE
+  ONE CAUGHT AN OUTAGE THAT WOULD HAVE TAKEN THE WHOLE BACK END DOWN IN
+  SILENCE.** Gates: lint **11/9 = baseline** - build green - provenance **PASS**
+  (0 undeclared - 0 stale - 0 invention) - `reveal:check` **PASS** -
+  `parity:gate` **PASS, 4 shared - 0 divergences** - lap **on the built bundle
+  under `wrangler dev`**, ten routes plus an unmatched path, desktop and 390px,
+  no horizontal overflow, no console errors. Surfacing **13 - 13 - 15,
+  unmoved**. Full narrative: `docs/MUSEUM_PRE_COMMENTARY_LOG-20260806.md`.
+- **H1 - `/hr` IS PRIVATE AND THE LOCK IS THE WORKER, NOT REACT.** Lazy chunks
+  under `assets/held/`, refused by `src/worker.js` without a cookie the `/admin`
+  password mints against `env.HR_KEY` (a wrangler secret with **no default** -
+  M85 is the one command Mike must run or the wing is shut to him too).
+  **The reason it is not a browser gate is R5, one round old**: a filter that
+  stops the render still ships the material. Public JS 724.8 KB -> **536.6 KB**;
+  vault image URLs in the public bundle **107 -> 0**. `/hr` renders the LOBBY to
+  anyone without the door open - no login box, because a login box at a public
+  URL announces the room. **`robots.txt` is deliberately NOT written**: a
+  `Disallow` line is a public list of what you are hiding.
+- **THE OUTAGE IS THE MOST USEFUL FINDING.** `assets.run_worker_first` is a list
+  with a default on the other side of it: naming only the held directory made
+  every API route asset-first, and the SPA fallback answered `/api/admin`,
+  `/api/guestbook`, `/api/visits` and `/api/presets` with **index.html and a
+  200**. Nothing errors - the site just stops having a back end. Now in
+  `OPERATIONS.md` §8 as a hazard, with the symptom to look for.
+- **H2 - THE PERMISSION AUDIT FOUND THE ITEM NOBODY HAD NAMED:** the 49
+  artifacts carry **his own post text verbatim** as museum data (M80), which an
+  embed licence does not cover and which **survived every remedy so far**. And
+  the sentence that stops "/hr is private" being read as "his material is off
+  the site": **all 97 vault facts ship publicly in `/wal`'s chunk** (M81) and two
+  of his images are served from the museum's own origin (M82). **No lyrics exist
+  anywhere in this repository.** `docs/HR_PERMISSION_AUDIT-20260806.md`.
+- **DOCTRINE 17 WAS APPLIED TO THIS ROUND'S OWN NEW CODE, TWICE, WITHIN THE HOUR
+  IT WAS WRITTEN** - the no-key sentence and "Wrong key" were both typed into two
+  files before the gate ran. A hand-typed count ("nine containers, ninety-three
+  track rows") was written into the admin paragraph and removed before it
+  shipped, for the reason W1 and D3c both paid for.
+- **THE SHARE DESCRIPTIONS ARE DRAFTED AND NOT SHIPPED** (H4, M83): one sentence
+  in three lengths, the search line a **prefix** of the social one rather than a
+  second wording, printed verbatim in the round log for Mike. `index.html` is
+  untouched. **THE ART PULLS ARE AT `C:\AI\_art-pulls\20260806-niac-and-portal\`**
+  (H5) - and the mainframe has **exactly one** full-body photograph, because
+  `IMG_1526.MOV` is not on this machine.
+
+---
+
+### 2026-08-06 -> MIKE'S PAGE-BY-PAGE (L1 - R1-R7 - P1-P6 - N1-N11 - X1) - sealed
+- **TWENTY-SIX INSTRUCTIONS, ALL TWENTY-SIX ANSWERED, AND THE MOST USEFUL
+  FINDING IN THE ROUND IS A MEASUREMENT THAT KILLED THE THING IT MEASURED.**
+  Gates: lint **11/9 = baseline** - build green - provenance **PASS** (0
+  undeclared - 0 stale - 0 invention) - `reveal:check` **PASS** - `parity:gate`
+  **PASS, 4 shared - 0 divergences** - lap **on the built bundle under `wrangler
+  dev`**. Surfacing **13 - 13 - 15**, ledger 159 -> 160. Full narrative:
+  `docs/MUSEUM_PAGE_BY_PAGE_LOG-20260806.md`.
+- **R4 - TWO COLUMNS WAS BUILT, MEASURED AT THIRTY-THREE CHARACTERS A COLUMN,
+  AND REMOVED.** He asked whether there is a flatter better way than a capped
+  line with pane to spare. The pane is ~76% of the viewport; split in two it is
+  ~430px a side; after the mark rail and the gutter each column is **324px
+  against a band of 65-75**. It becomes right past ~1650px of viewport and his
+  screen tops out at 1228. **What shipped instead is the direction nobody
+  expected:** the entry body was set at **56ch, BELOW the band** - paying a
+  narrow measure's costs and collecting none of its benefits - and is 68ch now.
+  The index row is capped at the same measure and **the slack on the right is
+  deliberate**: a list of fixed-height cards is SCANNED, and filling the pane
+  was always the one wrong answer.
+- **R3 - "THAT FAILURE DISAPPEARS BY CONSTRUCTION" IS A MECHANISM AND IT TAKES
+  TWO HALVES.** Every truncation in the Record index is DELETED, so a too-long
+  string overflows visibly instead of lying; and `reveal:check` now carries
+  **RECORD BUDGETS** and refuses a headline past 62 characters or a summary past
+  130. Proved by breaking it. **R1's far-left mark is the RECORD NUMBER, not a
+  date** - the dates were invented and Mike deleted them, so a date rail would
+  be empty today and invented tomorrow; the date sits under the number the
+  moment an entry has one.
+- **R7 CONFORMED EVERY WING FAQ TO THE BOOTH'S AND REVERSED AN OPS RULING IN THE
+  OPEN.** D7 flattened `/foundation`'s accordion during the port, recorded it as
+  a judgement and put it to him as M70; he ruled it for every wing at once, so
+  four faces moved and **M70 closes**. It is not M1 being bent - a question is
+  the description of its own answer, which is `/booth`'s own reasoning.
+- **N3 BUILT NO NEW MACHINERY, BECAUSE HE SAID TO CHECK FIRST AND THE TEMPLATE
+  EXISTED.** L6's Record document card already WAS a documentation template, so
+  it was **lifted out of that renderer into one shared `DocList`** with one field
+  added. **A document with no pages is NOT a button.** The largest deletion in
+  the round went with it - six attested manual sections including one of Mike's
+  own `[PAPA]` slots (M89).
+- **R5 COULD NOT BE MADE TO SERVE AND THAT IS STRUCTURAL:** the "object" badge
+  printed a word with nothing behind it, and B9's model has no permitted class
+  list and no object registry - giving it something to open would have been
+  Doctrine 12 with a button on it. Struck in all three places it drew;
+  `.vp-fe-class` deleted rather than orphaned.
+- **N9's GROUPINGS EACH CARRY THEIR OWN COUNT**, which is what keeps a curated
+  archive inside the no-hidden-information law, and **the egg consequence he
+  named is ledgered and not built** (`egg.presets`, HELD, `shown:false`).
+  **X1's honest answer: the ledger held every egg and nobody could ask it** -
+  `npm run reveal:eggs`, and it names `OPEN_ACTIONS.md` as the other half rather
+  than pretending to hold it.
+- **P1's "INSTRUMENT DIV." WAS THE SECOND GROWTH OF A DRIFT HE STRUCK A
+  FORTNIGHT EARLIER**, on a different object. **P5's three engravings were the
+  `id`s truncated until they fitted** - STANDBY, COLD START, FIRST RUN now, with
+  every `id` unmoved so M33's five levers are unchanged, and **three ledger row
+  names had to travel with them.** **N7 FLAGGED TWO PROBLEMS, NOT ONE:** nine of
+  fourteen frame "dates" are slot labels, and the five that are dates say MAR
+  2021 on a wing whose story is a delivery that has just arrived (M93).
+- **WHAT DID NOT RUN, SAID PLAINLY: the 390px half of the lap.** The window
+  would not resize below 1228 CSS px and Chrome refused `resizeTo` - M97, rather
+  than a silence.

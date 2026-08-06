@@ -554,6 +554,7 @@ const FAQ = [
        OWN DOOR, and it gives that answer first — which is also why this is Q1
        and not Q7. Do not "improve" it into legal vocabulary again. */
     q: "Is this a foundation?",
+    on: "foundation",
     a: "Not the kind with a building and an endowment. There is no fund here, " +
        "no account, and nothing set aside — that is not modesty, it is the " +
        "arrangement: money does not stop at Weird.Baby, so there is never a " +
@@ -564,6 +565,7 @@ const FAQ = [
   },
   {
     q: "Why do this at all?",
+    on: "foundation",
     a: "To make the world demonstrably better, and it starts with music: the " +
        "artists who deserve depth, and the people who love them. Everything " +
        "else — the rooms, the cards, the rules on this page — exists to " +
@@ -587,6 +589,7 @@ const FAQ = [
        answer nothing a reader would miss, and a plausible stand-in would have
        been invention on the one page whose subject is honesty about money. */
     q: "Why give all the money away?",
+    on: "foundation",
     a: "Take all you need, not grab all you can. Keeping it was never what " +
        "any of this was for, and the museum already has what it needs — so " +
        "what passes through Weird.Baby's hands goes to humanity: all of it, " +
@@ -614,6 +617,7 @@ const FAQ = [
        is mechanism state, which Doctrine 11 names as the permitted case, not a
        note about a backlog. */
     q: "Where does it actually go?",
+    on: "ledger",
     a: "To established charitable organisations, and to people caught doing " +
        "conspicuous good. The ledger on this page carries every channel it " +
        "moves through, with the state of each one printed beside it; the " +
@@ -632,6 +636,7 @@ const FAQ = [
        list. Setting it on the same line as the rest would be Ops editing his
        emphasis, which is the one thing this round was told not to do. */
     q: "How do I get some of that?",
+    on: "ledger",
     a: [
       "Consistently get into the public eye for doing good. We'll spot you.",
       "Pro-Tip: direct inquiry and petitioning hurt your chances.",
@@ -646,6 +651,7 @@ const FAQ = [
        is Papa, which is what the invoice says and what the posture says. The
        [PAPA] tail is untouched. */
     q: "Then how do the lights stay on?",
+    on: "ledger",
     a: "Every cost has a name, a number and a sponsor on the record — the " +
        "domain, the giveaway guitar, the stickers. Each one has a meter, and " +
        "when a cost is covered its meter reads full, its door says we're " +
@@ -683,6 +689,7 @@ const FAQ = [
        rather than a new device: the same two states, drawn the same way, on the
        same mechanism the register reads. The address itself is a [PAPA]. */
     q: "Can I donate?",
+    on: "ledger",
     link: { text: "Give in Weird.Baby's name", reveal: "channel.qr" },
     a: "Not to run the place, and that is the load-bearing part. Help with a " +
        "cost arrives as the thing itself: pay the registrar directly, buy the " +
@@ -710,6 +717,7 @@ const FAQ = [
        one: both resolve through the reveal ledger, so the day either channel is
        built its stamp changes here without this file being edited. */
     q: "Can I send you something?",
+    on: "ledger",
     link: { text: "The registry of what we need", reveal: "channel.supplies" },
     /* [CS 2026-08-04] "and it is Mike's" is OUT. The keeper of this place is
        named "Papa Weird.Baby" on every other line of this room and of /booth;
@@ -726,6 +734,7 @@ const FAQ = [
   },
   {
     q: "There is a gift shop, though.",
+    on: "ledger",
     a: "There is, and it is the only place in the building where anything is " +
        "bought or sold. Nearly all of it is doors to the artists' own stores, " +
        "so that if a room made you want a record the money reaches the person " +
@@ -759,6 +768,7 @@ const FAQ = [
        answering the question he asked. It is a row in OPEN_ACTIONS, not a
        decision made here. */
     q: "What do you think about billionaires?",
+    on: "foundation",
     a: "[PAPA] — his raw material, held for his voice: the Illionaires. " +
        "[PAPA] — being remembered for the size of the pile is a strange thing " +
        "to spend a life earning. [PAPA] — we would rather make more pie than " +
@@ -780,6 +790,7 @@ const FAQ = [
      call and it is a row in OPEN_ACTIONS, not a re-home Ops chose. */
   {
     q: "Do you make anything from the artists you show?",
+    on: "ledger",
     a: "No. Not from the song, not from the play, not from the link. There is " +
        "no ad on any page here, no affiliate code in any link, and no cut of " +
        "anything you buy from an artist. Every commercial door in this " +
@@ -789,6 +800,7 @@ const FAQ = [
   },
   {
     q: "What happens when you stop?",
+    on: "foundation",
     a: "One person takes it on — chosen, not elected; willing, not paid — on " +
        "exactly these terms: own nothing, take nothing, keep the place, pass " +
        "it on. There is no committee, no board and no team. And if humanity " +
@@ -798,24 +810,122 @@ const FAQ = [
   },
 ];
 
-/* ═══ [D7] THE SPINE ═══════════════════════════════════════════════════════
-   Three albums, Mike's names and Mike's order. Every face below is a container
-   for objects that already existed; not one string in this file is new. */
+/* ═══ [F4 2026-08-06] THE SPINE — MIKE'S THREE ALBUMS ════════════════════════
+   His structure, verbatim, and it is the whole of F4:
+
+     ALBUM: THE FOUNDATION   Executive Summary · Happening Now! · FAQ
+     ALBUM: THE LEDGER       Money in, out · Where, why, etc. · FAQ
+     ALBUM: CONTRIBUTE       Just help a little · Financial help · Operational help
+
+   WHAT THIS REPLACES: D7's port, which made three albums out of the three
+   OBJECTS the sheet happened to carry (Ledger · FAQ · Contribute) and put the
+   $0.00 account card and the invoice on one of them because they were both
+   about money. That is a filing system, not a reading order. Mike's is a reading
+   order: what this is, then what it costs and where it goes, then how to help.
+
+   ═══ F7 — WHERE THE THREE MECHANISMS LANDED, STATED PLAINLY ═════════════════
+   His instruction was to preserve them through the restructure and say where
+   each went, so:
+     · THE $0.00 ACCOUNT CARD  →  The Foundation · Executive summary.
+       It is the room's own hook and its first argument; an executive summary
+       whose headline figure is zero is the summary.
+     · THE REGISTER, whose LIVE / NOT BUILT column reads live off
+       `reveal/ledger.json`  →  The Ledger · Where, why, etc.
+       It moved OFF Contribute, which F6 empties. The reveal wiring crossed
+       untouched: flipping `channel.qr` to LIVE still changes this wing and no
+       other file.
+     · THE LEDGER OBJECT (the zero-total invoice)  →  The Ledger · Money in, out.
+
+   ═══ F2 — AND ONE THING TRAVELLED WITH IT THAT HIS WORDS DID NOT NAME ═══════
+   F2 says BURN DOWN the old "The ledger" TRACK — discard, do not port — and F7
+   says preserve the ledger OBJECT, so the track's framing burns and the document
+   survives. The track also carried `POSTURE`: Mike's own sentence, recorded by
+   P10 as the room's heart, and the thing that says WHO IS CARRYING the costs the
+   invoice lists at zero. It is kept, beside the object it explains, and this is
+   Ops reading past the letter of an instruction — flagged as such rather than
+   done quietly. If he meant the posture to go with the track it is one line.
+   Register M98.
+
+   ═══ F5 — THE CADENCE, AND WHAT IS BUILT FOR IT ════════════════════════════
+   His shape: regular updates saying where we said we were going, where we got
+   to, and where we are going — ANNUAL MAJOR REVIEWS plus more frequent,
+   on-demand, one-shot; and "not everything chronologically on one page; possibly
+   a track per update."
+   THE PROPOSAL, AND IT IS THE ONE THIS MUSEUM HAS ALREADY BUILT ONCE: not a
+   track per update, but the ROBOTS RECORD's own machinery — `entriesMode:"log"`.
+   A track per update is right for the first four and wrong for the twelfth: the
+   tracklist is the wing's menu, and a menu that grows a row every month stops
+   being a menu. The log is an INDEX of numbered entries that stands until one is
+   chosen, and then that entry fills the frame with nothing else competing —
+   which is "not everything chronologically on one page" exactly, with a
+   navigation that does not grow. An annual review and a one-shot note are the
+   same object at two lengths; the index shows both and the reader picks.
+   IT IS BUILT AND IT IS EMPTY. Nothing has been published here, so `entries` is
+   `[]` and the face says so in the register's own vocabulary. Writing a specimen
+   update would be Doctrine 12 on the one page in the building whose subject is
+   honesty about money.
+
+   ═══ F6 — CONTRIBUTE IS BURNED DOWN AND NOT REBUILT ════════════════════════
+   His words: "it waits on a Mike prompt. Leave the album and its three tracks
+   empty and honest." So the three tracks exist, are named as he named them, and
+   each says the one true thing there is to say — in the register's own words,
+   because "nothing may claim a mechanism that isn't built" is this room's
+   standing rule and Doctrine 11 names mechanism state explicitly as passing.
+   ONE SENTENCE, DECLARED ONCE (Doctrine 17). Three tracks saying the same thing
+   in three slightly different wordings is the defect that doctrine exists for,
+   on the day it is written rather than a month later. */
+
+/* the one true thing there is to say on a contribution channel that does not
+   exist yet. It is not "coming soon" and it is not an apology: it is the same
+   statement the register's NOT BUILT column makes, in a sentence. */
+const NOT_BUILT_YET =
+  "There is no way to do this through the museum yet. When there is, it will " +
+  "appear on the register in The Ledger, and not one day before.";
+
+const faqFor = where => FAQ
+  .filter(f => f.on === where)
+  .map(({ q, a, link }) => ({
+    title: q,
+    lines: Array.isArray(a) ? a : [a],
+    link,
+  }));
+
+/* [R7 2026-08-06] THE ACCORDION, ON BOTH FAQ TRACKS. Mike ruled it for every
+   wing at once — "the Information Booth IS an FAQ under a better name… CONFORM
+   EVERY WING FAQ TO THE BOOTH'S FORMAT" — and splitting one FAQ across two
+   albums does not change what an FAQ is. The "Q" stamps are still gone with the
+   flat list, `lines` still carries the multi-paragraph answers F1 wrote as two
+   beats, and `link` still carries the two marked doors F6 supplied no address
+   for. */
+const faqTrack = (id, where) => ({
+  id,
+  title: "FAQ",
+  videos: [],
+  face: {
+    kind: "text",
+    title: "FAQ",
+    subtitle: "THE WEIRD.BABY FOUNDATION",
+    entries: faqFor(where),
+    entriesMode: "faq",
+    footer: "THE WEIRD.BABY FOUNDATION · FAQ",
+  },
+});
+
 const spine = [
   {
-    id: "ledger",
-    title: "Ledger",
+    id: "foundation",
+    title: "The Foundation",
     year: null,
-    art: "/images/foundation/ledger-cover.png",
+    art: "/images/foundation/foundation-cover.png",
     accent: null,
     tracks: [
       {
-        id: "the-account",
-        title: "The account",
+        id: "executive-summary",
+        title: "Executive summary",
         videos: [],
         face: {
           kind: "text",
-          title: "THE ACCOUNT",
+          title: "EXECUTIVE SUMMARY",
           subtitle: "THE WEIRD.BABY FOUNDATION",
           /* THE CREDO — the charter's own opening sentence and its two short
              ones, carried off the sheet's `.sheet-credo` / `.sheet-words`. */
@@ -825,67 +935,56 @@ const spine = [
         },
       },
       {
-        id: "the-ledger",
-        title: "The ledger",
+        id: "happening-now",
+        /* his exclamation mark, his words. */
+        title: "Happening now!",
         videos: [],
         face: {
           kind: "text",
-          title: "THE LEDGER",
+          title: "HAPPENING NOW!",
+          subtitle: "THE WEIRD.BABY FOUNDATION",
+          entriesMode: "log",
+          entries: [],
+          logEmpty:
+            "Nothing has been published here yet. When it is, each update " +
+            "will say where we said we were going, where we got to, and " +
+            "where we are going next.",
+        },
+      },
+      faqTrack("questions-foundation", "foundation"),
+    ],
+  },
+  {
+    id: "ledger",
+    title: "The Ledger",
+    year: null,
+    art: "/images/foundation/ledger-cover.png",
+    accent: null,
+    tracks: [
+      {
+        id: "money-in-out",
+        title: "Money in, out",
+        videos: [],
+        face: {
+          kind: "text",
+          title: "MONEY IN, OUT",
           subtitle: "WHAT THE MUSEUM COSTS, AND WHO CARRIED IT",
           ledger: INVOICE,
           posture: POSTURE,
         },
       },
-    ],
-  },
-  {
-    id: "faq",
-    title: "FAQ",
-    year: null,
-    art: "/images/foundation/faq-cover.png",
-    accent: null,
-    tracks: [
       {
-        id: "questions",
-        title: "Questions",
+        id: "where-why",
+        title: "Where, why, etc.",
         videos: [],
         face: {
           kind: "text",
-          title: "QUESTIONS",
-          subtitle: "THE WEIRD.BABY FOUNDATION",
-          /* ═══ [R7 2026-08-06] THE ACCORDION IS BACK, AND D7 IS REVERSED IN
-             THE OPEN ═══════════════════════════════════════════════════════
-             MIKE: "the Information Booth IS an FAQ under a better name and
-             keeps that name for UX value. Sub-exhibits carry their own FAQs — a
-             visitor must never have to run back to the lobby. CONFORM EVERY
-             WING FAQ TO THE BOOTH'S FORMAT."
-             D7 FLATTENED THIS ONE DURING THE PORT, on Ops' reading that a list
-             with every answer open was the stronger form under the
-             no-hidden-information law (M1). That was a judgement call, it was
-             recorded as such, and it was put to him as M70 — *"one line: it
-             stays open, or the wing wants a collapsing question somewhere"*. He
-             has answered it for every wing at once, so the flattening is UNDONE
-             rather than defended and M70 closes.
-             M1 IS NOT BEING BENT. The booth's own recorded reasoning is that a
-             QUESTION IS THE DESCRIPTION OF ITS OWN ANSWER — nothing is
-             discovered by opening one that the closed row did not state. That
-             is why the booth's accordion has always been allowed to stand, and
-             it is the same page's rule applying to the same object.
-             `lines` STILL CARRIES the multi-paragraph answers F1 wrote as two
-             beats, and `link` still carries the two marked doors F6 supplied no
-             address for: the door's NAME and the register's own state stamp,
-             and no <a>. Both render inside the opened answer.
-             THE "Q" STAMP GOES. The booth prints none, and this list is under a
-             heading reading QUESTIONS. */
-          entries: FAQ.map(({ q, a, link }) => ({
-            title: q,
-            lines: Array.isArray(a) ? a : [a],
-            link,
-          })),
-          entriesMode: "faq",
-          footer: "THE WEIRD.BABY FOUNDATION · QUESTIONS",
+          title: "WHERE, WHY, ETC.",
+          subtitle: "WHAT COMES IN, AND WHAT IS BUILT",
+          register: LEDGER,
         },
       },
+      faqTrack("questions-ledger", "ledger"),
     ],
   },
   {
@@ -895,17 +994,18 @@ const spine = [
     art: "/images/foundation/contribute-cover.png",
     accent: null,
     tracks: [
-      {
-        id: "the-register",
-        title: "The register",
-        videos: [],
-        face: {
-          kind: "text",
-          title: "THE REGISTER",
-          subtitle: "WHAT COMES IN, AND WHAT IS BUILT",
-          register: LEDGER,
-        },
-      },
+      { id: "help-a-little", title: "Just help a little", videos: [],
+        face: { kind: "text", title: "JUST HELP A LITTLE",
+                subtitle: "THE WEIRD.BABY FOUNDATION",
+                blurb: NOT_BUILT_YET } },
+      { id: "financial-help", title: "Financial help", videos: [],
+        face: { kind: "text", title: "FINANCIAL HELP",
+                subtitle: "THE WEIRD.BABY FOUNDATION",
+                blurb: NOT_BUILT_YET } },
+      { id: "operational-help", title: "Operational help", videos: [],
+        face: { kind: "text", title: "OPERATIONAL HELP",
+                subtitle: "THE WEIRD.BABY FOUNDATION",
+                blurb: NOT_BUILT_YET } },
     ],
   },
 ];
@@ -939,6 +1039,19 @@ export const foundation = {
      this room's CONTENT — it is the first row of the register, named as an
      incoming channel, which is where it belongs. */
   shopEntryHidden: true,
+  /* ═══ [F1 2026-08-06] AND IN ITS PLACE, AN EXIT TO THE LOBBY ═══════════════
+     MIKE: "Add an EXIT TO THE LOBBY, matching every other wing."
+     What every other wing has in the top right is a DOOR OUT; this room had a
+     hole, because D7 hid the shop exit (correctly — a commercial door in the
+     title bar of the money room fails the first of the TONE RULING's four
+     tests) and put nothing there. Hiding a door and giving the room no way out
+     are two different decisions and only one of them was made.
+     THE SHOP EXIT IS NOT UN-HIDDEN. `shopEntryHidden` stands, and this is a
+     different door with a different destination — the exit slot is per-wing
+     config now (`exit`), the way `playerBar` and `shopEntryHidden` already
+     are, so the wing declares where its way out goes instead of the component
+     knowing about rooms. */
+  exit: { to: "/", label: "Lobby" },
   /* [D7] AND NO PLAYER BAR, FOR THE SAME REASON /robots DECLARES NONE. This wing
      holds no music and no video — every track on it is a face — so a fixed 68px
      transport at the foot of the room is five controls for something that never

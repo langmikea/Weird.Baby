@@ -209,16 +209,32 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
    and paint two different overhangs), which retires the hazard. The
    16px stays as ordinary separation between the form and the book —
    it is now a gap that means what it measures. */
-.wb-entries { --gb-row: 30px; --gb-visible: 3; margin-top: 16px; max-height: calc(var(--gb-row) * var(--gb-visible) + 2px); overflow-y: auto; scroll-snap-type: y proximity; overscroll-behavior: contain; border: 1px solid var(--wb-border); border-radius: 1px; background: var(--wb-ink-card); scrollbar-width: thin; scrollbar-color: var(--wb-border-hi) transparent; }
+/* [L1 2026-08-06] --gb-row IS 52px AT DESKTOP AND 74px WHEN THE LOBBY STACKS,
+   and both numbers are the row's own composition rather than a taste: one line
+   of the ledger type plus a two-line note plus the padding and the rule. P12's
+   arithmetic is untouched and is the reason this can change at all — the cap is
+   a whole multiple of --gb-row, the drag reads --gb-row off this stylesheet at
+   pointerdown, and neither has the number written down anywhere else. */
+.wb-entries { --gb-row: 52px; --gb-visible: 3; margin-top: 16px; max-height: calc(var(--gb-row) * var(--gb-visible) + 2px); overflow-y: auto; scroll-snap-type: y proximity; overscroll-behavior: contain; border: 1px solid var(--wb-border); border-radius: 1px; background: var(--wb-ink-card); scrollbar-width: thin; scrollbar-color: var(--wb-border-hi) transparent; }
 .wb-entries::-webkit-scrollbar { width: 6px; }
 .wb-entries::-webkit-scrollbar-thumb { background: var(--wb-border-hi); border-radius: 3px; }
 .wb-entries::-webkit-scrollbar-track { background: transparent; }
-.wb-entry { display: flex; align-items: baseline; gap: 12px; height: var(--gb-row); padding: 0 12px; border-bottom: 1px solid var(--wb-ink-soft); scroll-snap-align: start; animation: rise 0.4s ease; }
+/* THE NOTE SPANS BOTH LINES OF THE ROW, which is the instruction stated as a
+   grid: the name and the date hold the first line at the outer edges and the
+   note runs down the middle column through both. `align-items:baseline` is gone
+   with the flex line — a two-line block has no single baseline to hang the name
+   and the date off, and hanging them off its FIRST line is what `start` does. */
+.wb-entry { display: grid; column-gap: 12px; height: var(--gb-row); padding: 5px 12px 0; border-bottom: 1px solid var(--wb-ink-soft); scroll-snap-align: start; animation: rise 0.4s ease;
+  grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: auto auto; align-items: start; }
 .wb-entry:last-child { border-bottom: 0; }
 .wb-entry:hover { background: #f2efe6; }
-.wb-entry-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.02em; color: var(--wb-gold); white-space: nowrap; }
-.wb-entry-note { font-family: 'Courier Prime', monospace; font-style: italic; font-size: 0.72rem; color: #6f6b62; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
-.wb-entry-date { font-family: 'Courier Prime', monospace; font-size: 0.62rem; color: var(--wb-gold-mute); white-space: nowrap; }
+.wb-entry-name { grid-column: 1; grid-row: 1; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.02em; color: var(--wb-gold); white-space: nowrap; }
+/* NO `text-overflow`, NO `nowrap`, AND THAT IS THE MECHANISM RATHER THAN AN
+   OMISSION — see the note at `GuestRow`. The render cannot clip, so a note that
+   is somehow too long OVERFLOWS visibly instead of lying about its own length,
+   and `NOTE_MAX` is what stops one existing. */
+.wb-entry-note { grid-column: 2; grid-row: 1 / span 2; font-family: 'Courier Prime', monospace; font-style: italic; font-size: 0.72rem; line-height: 1.35; color: #6f6b62; min-width: 0; overflow-wrap: anywhere; }
+.wb-entry-date { grid-column: 3; grid-row: 1; font-family: 'Courier Prime', monospace; font-size: 0.62rem; color: var(--wb-gold-mute); white-space: nowrap; }
 
 /* ── [M23b 2026-08-04] THE GUEST BOOK, STEPPED ──────────────────────────────
    The JSX note above `SCROLL_MIN` carries the ruling and the arithmetic; this
@@ -314,6 +330,16 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
 */
 
 @media (max-width: 680px) {
+  /* [L1] WHEN THE LOBBY STACKS THE NOTE TAKES THE WHOLE ROW. At 310px of row
+     the middle column is what is left after a name and a date, which is not a
+     measure — it is a gap. So the ledger line keeps the first row of the grid
+     and the note drops under it, across all three columns, where its budget of
+     88 characters was measured. The row grows by one line and `--gb-row` says
+     so; nothing else has to know. */
+  .wb-entry { --gb-row: 74px; grid-template-rows: auto auto auto; }
+  .wb-entry-name { grid-column: 1 / 3; }
+  .wb-entry-date { grid-column: 3; }
+  .wb-entry-note { grid-column: 1 / 4; grid-row: 2 / span 2; }
   html[data-room="lobby"], html[data-room="lobby"] body { overflow: auto; }
   .wb-root { height: auto; min-height: 100vh; grid-template-columns: 1fr; overflow: auto; }
   .wb-left { padding: 48px 24px 32px; border-right: none; border-bottom: 1px solid var(--wb-border); }

@@ -8324,27 +8324,6 @@
    "p": "doorsFor{}.scent",
    "c": "HOUSE"
   },
-  "e8da1424149c0e50": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1198,
-   "t": "{}-about-songs",
-   "p": "aboutSongsTrack{}.id",
-   "c": "HOUSE"
-  },
-  "1482bd4ed192da86": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1200,
-   "t": "About the Songs",
-   "p": "aboutSongsTrack{}.title",
-   "c": "HOUSE"
-  },
-  "eefc8fe8c4cbe7b5": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1205,
-   "t": "ABOUT THE SONGS",
-   "p": "aboutSongsTrack{}.face.title",
-   "c": "HOUSE"
-  },
   "55d26b6b1ef21587": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 1308,
@@ -8359,26 +8338,11 @@
    "p": "upToTrack{}.face.footer",
    "c": "HOUSE"
   },
-  "fa486b4abd80f1aa": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1229,
-   "t": "[PAPA] — the words for the songs' cards.",
-   "p": "aboutSongsTrack{}.face.papa",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
   "c4ee2aefdac8bc72": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 1241,
    "t": "{}-about-artist",
    "p": "aboutArtistTrack{}.id",
-   "c": "HOUSE"
-  },
-  "caff44b3beb7b16b": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1243,
-   "t": "About the Artist",
-   "p": "aboutArtistTrack{}.title",
    "c": "HOUSE"
   },
   "d9811e062c259eb3": {
@@ -8417,20 +8381,6 @@
    "p": "upToTrack{}.id",
    "c": "HOUSE"
   },
-  "02c92667aaccea0c": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1334,
-   "t": "What they are up to",
-   "p": "upToTrack{}.title",
-   "c": "HOUSE"
-  },
-  "99104a983052c5bc": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1339,
-   "t": "WHAT THEY ARE UP TO",
-   "p": "upToTrack{}.face.title",
-   "c": "HOUSE"
-  },
   "89a199cd79ac727d": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 1349,
@@ -8438,9 +8388,7 @@
    "p": "upToTrack{}.face.trail[].scent",
    "c": "RESTATED",
    "r": [
-    "d9e23e948ce64f95",
-    "9138cf43223f785d",
-    "a8980e0cf7640f13"
+    "d9e23e948ce64f95"
    ]
   },
   "d9e23e948ce64f95": {
@@ -8450,29 +8398,6 @@
    "p": "upToTrack{}.face.tombstone[].v",
    "c": "VERIFIED",
    "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "630255121d07c054": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1353,
-   "t": "Showing",
-   "p": "upToTrack{}.face.tombstone[].k",
-   "c": "HOUSE"
-  },
-  "9138cf43223f785d": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1353,
-   "t": "{} of the most recent",
-   "p": "upToTrack{}.face.tombstone[].v",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "a8980e0cf7640f13": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1357,
-   "t": "[PAPA] — the collage caption wording, and whether any upload earns a row of its own.",
-   "p": "upToTrack{}.face.papa",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
   },
   "36ca57fa628c1986": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -8522,19 +8447,6 @@
     "4c97b1543dbd79a5",
     "19b8d2d5c826694b",
     "9f182e46b1202543"
-   ]
-  },
-  "791fe6c252eb23a7": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1477,
-   "t": "Four of them. Two songs each, all playable. Every one of them is somebody's favourite record and none of them is ours.",
-   "p": "HOUSE_ALBUM.tracks[].face.blurb",
-   "c": "RESTATED",
-   "r": [
-    "906aa5944a24e3af",
-    "d4b948d21a10192d",
-    "b4d536756eea1dc7",
-    "181b7b8f2fc8eba2"
    ]
   },
   "e90fc03a0e36599d": {
@@ -14097,68 +14009,6 @@
    "t": "The house's own music. What this room holds of the artist is the recordings; what it holds of the person is his name.",
    "c": "HOUSE"
   },
-  "6a6eaaab2bda17f2": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 68,
-   "t": "RELEASE   The Making of BoWB V1 — 2026",
-   "c": "DERIVED",
-   "s": "counted off the /wb spine in the same file — one release, six tracks, each carrying a June 2026 recording."
-  },
-  "e18453aa535b2b5a": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 69,
-   "t": "TRACKS    six, recorded June 2026",
-   "c": "DERIVED",
-   "s": "counted off the /wb spine in the same file — one release, six tracks, each carrying a June 2026 recording."
-  },
-  "87f8b9c3a4554e7e": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 70,
-   "t": "PORTRAIT  none on file",
-   "c": "DERIVED",
-   "s": "this face declares no `still` and no portrait of this artist exists in public/ — a holdings fact, checked against the tree."
-  },
-  "23fd9c178d3198ea": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 77,
-   "t": "Q",
-   "c": "HOUSE"
-  },
-  "f3f89c26d4fa68f2": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 77,
-   "t": "[PAPA] Who is Weird.Baby?",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
-  "44d9c1fb6eb95925": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 78,
-   "t": "[PAPA] the artist's own account of himself, which is Mike's to write and nobody else's.",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
-  "ac9fa43b82e8b85c": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 84,
-   "t": "WHO",
-   "c": "HOUSE"
-  },
-  "919de12afab94795": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 84,
-   "t": "Who keeps this place?",
-   "c": "RESTATED",
-   "r": [
-    "src/routes/InfoBooth.jsx"
-   ]
-  },
-  "f649c2b8a643918d": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 90,
-   "t": "ON FILE",
-   "c": "HOUSE"
-  },
   "357c58e834cfb90f": {
    "f": "src/data/artists/weird-baby.js",
    "l": 90,
@@ -14171,12 +14021,6 @@
    "t": "Six recordings, made in June 2026, and one release: The Making of BoWB V1. They play in this room.",
    "c": "DERIVED",
    "s": "counted off the /wb spine in the same file — one release, six tracks, each carrying a June 2026 recording."
-  },
-  "908dfaca4b57182d": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 95,
-   "t": "list",
-   "c": "HOUSE"
   },
   "f6e60cf26ade15e8": {
    "f": "src/data/artists/weird-baby.js",
@@ -14867,27 +14711,6 @@
     "docs/canonical/THE_CHARTER.md"
    ]
   },
-  "b40f92c62ea97596": {
-   "f": "src/data/artists/foundation.js",
-   "l": 801,
-   "t": "Ledger",
-   "c": "HOUSE",
-   "p": "spine[].title"
-  },
-  "635840a6415b51cd": {
-   "f": "src/data/artists/foundation.js",
-   "l": 844,
-   "t": "Questions",
-   "p": "spine[].tracks[].title",
-   "c": "HOUSE"
-  },
-  "6419e39fb3bdb527": {
-   "f": "src/data/artists/foundation.js",
-   "l": 875,
-   "t": "The register",
-   "c": "HOUSE",
-   "p": "spine[].tracks[].title"
-  },
   "e68fcf83264cedd5": {
    "f": "src/data/artists/foundation.js",
    "l": 891,
@@ -15088,29 +14911,9 @@
    "c": "MIKE",
    "s": "docs/canonical/THE_CHARTER.md — the house's soul document, Papa's own"
   },
-  "922f7d516e5d4f60": {
-   "f": "src/data/artists/foundation.js",
-   "t": "The account",
-   "c": "HOUSE"
-  },
-  "69fa273ce8a08533": {
-   "f": "src/data/artists/foundation.js",
-   "t": "THE ACCOUNT",
-   "c": "HOUSE"
-  },
   "e23f21c8cf1cefd8": {
    "f": "src/data/artists/foundation.js",
    "t": "THE WEIRD.BABY FOUNDATION",
-   "c": "HOUSE"
-  },
-  "876e63959fc1ab69": {
-   "f": "src/data/artists/foundation.js",
-   "t": "The ledger",
-   "c": "HOUSE"
-  },
-  "dcb1c68856a2d95c": {
-   "f": "src/data/artists/foundation.js",
-   "t": "THE LEDGER",
    "c": "HOUSE"
   },
   "5657e88724a01363": {
@@ -15123,24 +14926,9 @@
    "t": "FAQ",
    "c": "HOUSE"
   },
-  "bbfa6b05b082df5f": {
-   "f": "src/data/artists/foundation.js",
-   "t": "QUESTIONS",
-   "c": "HOUSE"
-  },
-  "b63a563fded717f3": {
-   "f": "src/data/artists/foundation.js",
-   "t": "THE WEIRD.BABY FOUNDATION · QUESTIONS",
-   "c": "HOUSE"
-  },
   "68583a5af95e514b": {
    "f": "src/data/artists/foundation.js",
    "t": "Contribute",
-   "c": "HOUSE"
-  },
-  "cc6c9d9421770a8a": {
-   "f": "src/data/artists/foundation.js",
-   "t": "THE REGISTER",
    "c": "HOUSE"
   },
   "577e511daed96df6": {
@@ -15794,6 +15582,276 @@
    "f": "src/routes/robots/RobotsExhibitFlow.jsx",
    "l": 472,
    "t": "Zoom in",
+   "c": "HOUSE"
+  },
+  "0c8abf5a032fd59f": {
+   "f": "src/data/artists/foundation.js",
+   "l": 987,
+   "t": "ledger",
+   "c": "HOUSE"
+  },
+  "f16acc6cb65a2464": {
+   "f": "src/data/artists/foundation.js",
+   "l": 882,
+   "t": "There is no way to do this through the museum yet. When there is, it will appear on the register in The Ledger, and not one day before.",
+   "c": "HOUSE"
+  },
+  "c743dade47d0a6b9": {
+   "f": "src/data/artists/foundation.js",
+   "l": 910,
+   "t": "THE WEIRD.BABY FOUNDATION · FAQ",
+   "c": "HOUSE"
+  },
+  "77b0c5b0be05bded": {
+   "f": "src/data/artists/foundation.js",
+   "l": 924,
+   "t": "Executive summary",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
+  },
+  "24769ff94e86eefc": {
+   "f": "src/data/artists/foundation.js",
+   "l": 928,
+   "t": "EXECUTIVE SUMMARY",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
+  },
+  "02f074a65ea084ca": {
+   "f": "src/data/artists/foundation.js",
+   "l": 940,
+   "t": "Happening now!",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
+  },
+  "abb543298770fe6d": {
+   "f": "src/data/artists/foundation.js",
+   "l": 944,
+   "t": "HAPPENING NOW!",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
+  },
+  "fe9bb66b050df66c": {
+   "f": "src/data/artists/foundation.js",
+   "l": 946,
+   "t": "log",
+   "c": "HOUSE"
+  },
+  "dfedac8d5f1f93f6": {
+   "f": "src/data/artists/foundation.js",
+   "l": 949,
+   "t": "Nothing has been published here yet. When it is, each update will say where we said we were going, where we got to, and where we are going next.",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF F5 (2026-08-06) — \"regular updates saying where we said we were going, where we got to, and where we are going\""
+  },
+  "748132c4d75ddb7f": {
+   "f": "src/data/artists/foundation.js",
+   "l": 954,
+   "t": "questions-foundation",
+   "c": "HOUSE"
+  },
+  "84d98998f4b1ecb1": {
+   "f": "src/data/artists/foundation.js",
+   "l": 959,
+   "t": "The Ledger",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
+  },
+  "783dda80ec941113": {
+   "f": "src/data/artists/foundation.js",
+   "l": 966,
+   "t": "Money in, out",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
+  },
+  "74bd06d02f212795": {
+   "f": "src/data/artists/foundation.js",
+   "l": 970,
+   "t": "MONEY IN, OUT",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
+  },
+  "c1ddcd62cfc56bbd": {
+   "f": "src/data/artists/foundation.js",
+   "l": 978,
+   "t": "Where, why, etc.",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
+  },
+  "17cff0c7d1ffac46": {
+   "f": "src/data/artists/foundation.js",
+   "l": 982,
+   "t": "WHERE, WHY, ETC.",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
+  },
+  "6eef31ea40d8389c": {
+   "f": "src/data/artists/foundation.js",
+   "l": 987,
+   "t": "questions-ledger",
+   "c": "HOUSE"
+  },
+  "b7314d1cf4929baa": {
+   "f": "src/data/artists/foundation.js",
+   "l": 997,
+   "t": "Just help a little",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
+  },
+  "57350650333172cb": {
+   "f": "src/data/artists/foundation.js",
+   "l": 998,
+   "t": "JUST HELP A LITTLE",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
+  },
+  "19c49f5676e446d8": {
+   "f": "src/data/artists/foundation.js",
+   "l": 1001,
+   "t": "Financial help",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
+  },
+  "9c14a1eab48208f8": {
+   "f": "src/data/artists/foundation.js",
+   "l": 1002,
+   "t": "FINANCIAL HELP",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
+  },
+  "9992027107aee4c3": {
+   "f": "src/data/artists/foundation.js",
+   "l": 1005,
+   "t": "Operational help",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
+  },
+  "4adeec08c1d1b408": {
+   "f": "src/data/artists/foundation.js",
+   "l": 1006,
+   "t": "OPERATIONAL HELP",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
+  },
+  "933c854accfe6886": {
+   "f": "src/data/artists/foundation.js",
+   "l": 1054,
+   "t": "/",
+   "c": "HOUSE"
+  },
+  "b958a7a66e030d60": {
+   "f": "src/data/artists/foundation.js",
+   "l": 1054,
+   "t": "Lobby",
+   "c": "HOUSE"
+  },
+  "bde5b222367b8a11": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 75,
+   "t": "About the artist",
+   "c": "HOUSE"
+  },
+  "4c70dbebc6ee62f0": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 122,
+   "t": "Where he is from",
+   "c": "HOUSE"
+  },
+  "058b18ab5649e29c": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 123,
+   "t": "[PAPA] — where Weird.Baby is from.",
+   "c": "MIKE",
+   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
+  },
+  "077b6afd0f5334ad": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 124,
+   "t": "What he sounds like",
+   "c": "HOUSE"
+  },
+  "b5d7f74de81c4ba7": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 125,
+   "t": "[PAPA] — what the recordings sound like, in his words.",
+   "c": "MIKE",
+   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
+  },
+  "ab3044028bbe7ebb": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 126,
+   "t": "In his own words",
+   "c": "HOUSE"
+  },
+  "fab0514601c4b404": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 127,
+   "t": "[PAPA] — one thing he has said about the music.",
+   "c": "MIKE",
+   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
+  },
+  "5a3fdc10e676cedf": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 128,
+   "t": "Start with",
+   "c": "HOUSE"
+  },
+  "dfadf27446e62119": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 129,
+   "t": "[PAPA] — one track to play first, and why that one.",
+   "c": "MIKE",
+   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
+  },
+  "450a2c166daca343": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 136,
+   "t": "What he is doing now",
+   "c": "HOUSE"
+  },
+  "dbf0a456870274ef": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 137,
+   "t": "[PAPA] — what he is working on.",
+   "c": "MIKE",
+   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
+  },
+  "c8505d0ae2e47530": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1384,
+   "t": "About the artist",
+   "c": "HOUSE"
+  },
+  "d19dd7f57ff5089f": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1485,
+   "t": "What are they up to?",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF C1 (2026-08-06) — \"'What they are up to' becomes 'WHAT ARE THEY UP TO?'\""
+  },
+  "a1ff2070193c1419": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1490,
+   "t": "WHAT ARE THEY UP TO?",
+   "c": "MIKE",
+   "s": "Mike, THE COMBINED BRIEF C1 (2026-08-06) — \"'What they are up to' becomes 'WHAT ARE THEY UP TO?'\""
+  },
+  "c2ddfc9929473e4a": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1777,
+   "t": "[PAPA] — one sentence on why Mike picked this artist.",
+   "c": "MIKE",
+   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
+  },
+  "35f90f3e2122f779": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 108,
+   "t": "logEmpty",
+   "c": "HOUSE"
+  },
+  "0d3039c529f3ca40": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 2646,
+   "t": "max-content 10px minmax(0,1fr)",
    "c": "HOUSE"
   }
  }
