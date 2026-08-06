@@ -882,3 +882,81 @@ and the NUL-byte defect class are `OPERATIONS.md` §9.
   *“78 songs”* was classed VERIFIED with a real citation since v25 and
   `provenance/README.md` §4 already names that exact string as its example hole.
   It was never stale — it was never the number it claimed to be.
+
+### 2026-08-06 → CLEAR THE DECK (D1–D9) — sealed
+- **NINE INSTRUCTIONS, ALL NINE LANDED, AND THE BIGGEST OF THEM WAS FOUND BY
+  LOOKING FOR SOMETHING ELSE.** Gates: lint **11/9 = baseline** · build green ·
+  provenance **PASS** (0 undeclared · 0 stale · 0 invention) · `reveal:check`
+  **PASS** · `parity:gate` **PASS, 4 shared · 0 divergences** · lap **on the
+  built bundle**, eleven routes, no horizontal overflow anywhere, no console
+  messages. Surfacing **13 · 13 · 15, unmoved** — three files added and all
+  three referenced. Full narrative:
+  `docs/MUSEUM_CLEAR_THE_DECK_LOG-20260806.md`.
+- **D1 — THE DUPLICATE MAP IS NOT A GREP, AND THAT IS WHY IT FOUND ANYTHING.**
+  It was built by calling `provenance-sweep`'s OWN extractor, so the population
+  is exactly the population the gate polices, then grouped on normalised text
+  and again on token overlap — because the copies that matter most are the ones
+  that have already drifted. **Three exact cross-file duplicates hoisted:** the
+  keeper's answer into `src/data/house-copy.js`, and — inside `robots.js` — the
+  manual reader's FORMAT/NAV lines, the empty reel's note and the shop answer,
+  **all four typed twice because parity is absolute and `npm run parity` polices
+  the menu ITEMS and cannot see the words inside them.** **FOUR DIVERGED PAIRS
+  ARE REPORTED AND NOT MERGED** (M66–M69), which is what his instruction says to
+  do. Repeated source citations were left alone: 54 of *"— Wikipedia, read
+  2026"* is one citation per fact, not one passage in 54 places. **It is
+  Doctrine 17 now**, and the reason is his last clause — *that is the defect,
+  not his memory*: a duplicated passage does not fail when it is written, it
+  fails when somebody edits one, **and the defect is that the tree gives an
+  editor no way to tell.**
+- **D3c — `/hr/archive` WAS NOT CARRYING A STALE FIGURE. IT WAS CARRYING A
+  DIFFERENT CATALOGUE.** A hand-typed ALBUMS array — six containers against the
+  vault's nine, Run With The Hunt and the Phone Recordings EP missing entirely,
+  SINGLES & RARITIES reduced to a one-title "Singles" strip with four of its
+  seven tracks filed under three other records, two They Finally Cracked Me
+  titles that are not on it, and a header reading *"6 albums · 71 songs · 2018 –
+  2025"*. **It is DELETED, not corrected** — it drifted through six museum-wide
+  figure sweeps unnoticed, and a corrected mirror is a mirror that will drift
+  again. The page reads the spine. **W1 reported closing "all six sites" and
+  there was a seventh; that is named as a miss.** **AND W1's OWN FIX CARRIED THE
+  DEFECT IT WAS CURING** — *"out of ninety-three"* counts TRACK ROWS and prints
+  as a count of SONGS, the same unit swap as *78 songs*, one round later, by the
+  round that named the class. **91 distinct titles, because Brain Cell and Same
+  Page each sit on two records.** The unit is fixed; no second number entered
+  the building.
+- **D3a — M53's "rule question rather than one string" WAS THE RIGHT QUESTION.**
+  A sweep of every `[PAPA]` string against the scrubber found the same defect
+  live on the MGK-NIAC plates wall, **under a comment that claimed the whole
+  string was one marked sentence.** A later edit had split it and marked only the
+  first half. **A `papa` field is not a comment.**
+- **D7 — THE FOUNDATION IS A WING, AND THE LAP CAUGHT THREE THINGS NO GATE
+  COULD.** Option A: `face.account`, `face.register`, `face.ledger`, mounted on
+  the presence of a field; `FoundationObjects.jsx` is **the sheet's own markup
+  and stylesheet MOVED rather than rewritten**, which is the cheapest guarantee
+  available that nothing was lost. **The billionaires question was printing with
+  silence under it** — the face model's entry filter is an OR (which /robots'
+  FAQ depends on) where the sheet's was an AND, so an answer F3 held whole came
+  back as a published question with nothing beneath it, **on the one page whose
+  subject is honesty.** Also: a player bar on a wing with nothing to play, and
+  the objects drawing above their own heading. `src/routes/Foundation.jsx` is
+  deleted; the address did not move.
+- **D5 — THE MARK WAS NOT BEING COPIED PROPERLY, WHICH IS THE FINDING.** In the
+  WB logo the ring is BEHIND the baby; every unit badge was masked INTO the disc
+  — the opposite arrangement wearing the same circle. The ring is drawn first
+  now. **The two machines get two treatments and it is the SOURCE's doing:** the
+  VIIIp is a hard-edged dark body on a light counter and gets a real silhouette;
+  **the mainframe's frame was cut at the cabinet's own bounding box, so there is
+  no background in it to remove** — three mattes were rendered and each damaged
+  the object, and the crop that composes best throws the feet away, which is the
+  instruction's other half.
+- **D4 — THE THIRD SETTING OF ONE LAW, AND IT SEPARATES THE HALVES.** P11/B1/J3
+  said who LEADS; S1 said nobody is BIG; what was left is that leading looked
+  like nothing. **`--gs-cols` is the whole mechanism** — `auto-fit` is
+  unimprovable until you have to ask it how wide one column is. Measured: five
+  tiles, **445×298 every one**, billed tile centred to half a pixel.
+- **AND A PRUNE PLUS A *MOVE* IS THE SAME HAZARD AS A PRUNE PLUS A RENAME.** 106
+  register rows changed file without changing a character; they were **CARRIED,
+  matched on exact text from the exact file they left**, never re-decided.
+  Then, per §9: prune against a copy and let the gate name the breaks. **It named
+  eleven exactly.** Nine were repointed onto the artist-card rows that actually
+  carry each claim — **a better chain than the one that broke**, because the old
+  anchor merely asserted that the sourcing existed.

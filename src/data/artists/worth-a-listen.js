@@ -401,10 +401,32 @@ const ARTISTS = [
         note: "Official music video. Museum catalogue MV-20260523-001, " +
               "album Crooked Home.",
         card: {
+          /* ═══ [R5 2026-08-06] THE TWO ROWS THE OTHER THREE CARRY ARE ADDED,
+             AND THE ACCESSION ROW STAYS. Mike's posture ruling — "switch them
+             to embeds of his own official uploads, the same posture as the
+             other three" — is about what the page SAYS it is doing as much as
+             what it does, and this card said only that the museum had catalogued
+             the video. Carsie's and Jesse's cards say whose channel published
+             theirs and what check proves it; his now says the same.
+             VERIFIED THIS ROUND RATHER THAN ASSUMED, because the whole ruling
+             turns on it: YouTube oEmbed for vPW49GU38Ng returns author_name
+             "Hunter Root", author_url youtube.com/@hunterrootmusic. The embed on
+             this page is his own upload and always was — which is the correction
+             to Mike's premise, not a compliance with it.
+             THE ACCESSION ROW WAS DRAFTED FOR DELETION AND PUT BACK, and the
+             reason is worth one line because it is Doctrine 11 catching Ops in
+             the act: an accession number is PROVENANCE and a museum prints
+             those, and this one is the on-glass anchor for two other passages
+             on this card — the vault quote below it and the “’94” label — whose
+             provenance rows point at it and nothing else. Deleting a citation to
+             make a card symmetrical would have cost this page the only thing
+             saying where its quotes came from. */
           tombstone: [
             { k: "Maker", v: "Hunter Root" },
             { k: "From", v: "Crooked Home" },
             { k: "Medium", v: "Official music video" },
+            { k: "Published by", v: "His own channel, @hunterrootmusic" },
+            { k: "Verified", v: "oEmbed author_url — the upload itself" },
             { k: "Accession", v: "MV-20260523-001" },
             { k: "Sleeve", v: "A childhood photo of Hunter and his brother Nick" },
             { k: "Also", v: "There is a Back in 94' tee in his own store" },
@@ -422,10 +444,16 @@ const ARTISTS = [
               "Skipping Stones That Sink Before They're Thrown. Mike wrote " +
               "“Nothing Wrong”; the catalogue title is “Nothin' Wrong”.",
         card: {
+          /* [R5 2026-08-06] same two rows added as on “’94” above, same reason,
+             same check: oEmbed for Wv0_mujJUQU returns "Hunter Root" /
+             youtube.com/@hunterrootmusic. The accession stays for the same
+             reason it stays there — it is this card's provenance anchor. */
           tombstone: [
             { k: "Maker", v: "Hunter Root" },
             { k: "From", v: "Skipping Stones That Sink Before They're Thrown" },
             { k: "Medium", v: "Official music video" },
+            { k: "Published by", v: "His own channel, @hunterrootmusic" },
+            { k: "Verified", v: "oEmbed author_url — the upload itself" },
             { k: "Accession", v: "MV-20260523-040" },
             { k: "Note", v: "Filed as “Nothin' Wrong”; supplied as “Nothing Wrong”" },
           ],
@@ -434,24 +462,20 @@ const ARTISTS = [
              fixed in silence" — printed as the song's interpretive label. The
              title question is a real fact about the catalogue and stays; the
              account of our own data handling does not. */
+          /* [R4 2026-08-06] THE HOLDINGS SENTENCE IS STRUCK FROM THIS CARD.
+             It read "One of two Hunter Root songs surfaced in this wing, out of
+             the ninety-three tracks on file in the museum's own vault." MIKE:
+             "nobody asked for a holdings announcement; it exists only because
+             it was typed for Hunter. A visitor presses play and it plays. The
+             fact stays in the vault; the bragging leaves the page."
+             THE FIGURE IS NOT CORRECTED, IT IS GONE — which finally ends the
+             arc W1 and D3c were both inside: 78 was a count of `song:` slugs
+             printed as songs, 93 was a count of track rows printed as songs,
+             and each fix moved the same claim one step. No number about this
+             museum's holding is printed on this card any more, so there is
+             nothing left here to go stale.
+             The title fact stays: it is about the record, not about us. */
           label: [
-            /* [W1 2026-08-05] "seventy-eight" -> "ninety-three". See the block
-               over the tombstone below: 78 was the count of track rows carrying
-               a `song:` slug and it dropped the whole of Run With The Hunt.
-               [D3c 2026-08-06] AND W1's OWN FIX CARRIED THE DEFECT IT WAS
-               CURING ONE LAYER DOWN. This sentence says SONGS and prints 93,
-               and 93 is a count of TRACK ROWS — the same unit swap as "78
-               songs", made by the round that struck it. Counted this round off
-               the museum's own export: 93 track rows, 91 DISTINCT titles.
-               "Brain Cell" and "Same Page" each sit on two records — a 2016
-               ReverbNation recording on Run With The Hunt and a 2019 Bandcamp
-               studio recording on Life Inside A Wheel. Two files, two years,
-               one song, counted twice.
-               NO SECOND NUMBER ENTERS THE BUILDING. The fix is the UNIT, not
-               the figure: the line now names tracks, in the tombstone's own
-               words, so the whole card says one thing. */
-            "One of two Hunter Root songs surfaced in this wing, out of the " +
-            "ninety-three tracks on file in the museum's own vault.",
             "The catalogue files it as “Nothin' Wrong”, and the " +
             "catalogue is the record.",
           ],
@@ -514,46 +538,56 @@ const ARTISTS = [
          his own record, tagged to `crooked_home`, and it stays on all three
          faces that print it. A search that missed it is not an absence.
          ════════════════════════════════════════════════════════════════════ */
+      /* [R4 2026-08-06] TWO ROWS ARE STRUCK AND THEY ARE THE TWO NO OTHER
+         ARTIST HAS. "Catalogue — 93 tracks on file in the museum's own vault"
+         is the holdings announcement in register form; "Surfaced here — Two" is
+         a fact about this room's own presentation rather than about him.
+         MIKE: "all four artists become identical — name, songs, cards, doors.
+         Same only the data." Carsie's register is Born / Based / Before that /
+         Working since / Records / Latest / Honour: seven rows, every one of them
+         about HER. His now carries only rows of the same kind.
+         "RECORDS" STAYS AND THAT IS A DELIBERATE LINE, not an oversight. Seven
+         records, an EP and a set is a count of what he has MADE — the same claim
+         Carsie's "Twelve, every one of them independent" makes — and it names
+         neither the museum nor the vault. The row that had to go is the one
+         whose subject was us. */
       tombstone: [
-        { k: "Catalogue", v: "93 tracks on file in the museum's own vault" },
         { k: "Records", v: "Seven, plus an EP and a set of singles and rarities" },
-        { k: "Surfaced here", v: "Two" },
         { k: "His own site", v: "hunterroot.com — Merch, Tour, Tunes, Bio, Contact",
           url: "https://www.hunterroot.com/", src: "his own site" },
         { k: "On record", v: "Crooked Home, Arkansas, Chase The Dragon",
           url: "https://hunterrootmusic.bandcamp.com/music", src: "his own Bandcamp" },
       ],
-      /* [CS 2026-08-04] THE HOUSE ARTIST'S CARD WAS ABOUT THE WEBSITE.
-         Both paragraphs described this software — "his catalogue taught the
-         museum's machinery every pattern the other wings inherited: the
-         coverflow, the tracklist grammar, the player frame, the fact vault",
-         "his entry here is exactly the same shape as everyone else's, which is
-         the point" — on the one card in the wing whose job is to introduce a
-         musician. A visitor who has never heard of him learned about our
-         renderer.
-         THE REPLACEMENT INTRODUCES NO NEW FACT. The holdings figures and the
-         April 2026 accession are the tombstone directly above; Nick and the
-         twenty-seven are on the “’94” card and in the marker line; the
-         two-of-nine surfacing is `tracksFor`'s own shape, already stated on the
-         card it replaces.
-         [W1 2026-08-05] this paragraph used to quote the figures back —
-         "Seventy-eight songs, nine albums" — and both were wrong, so the
-         comment asserting nothing new was introduced was itself carrying the
-         error forward in a second place. It names the tombstone now instead of
-         copying it. */
-      label: [
-        "The house artist — the one musician in this wing whose records the " +
-        "museum holds in its own vault: seven of them, an EP and a set of " +
-        "singles and rarities, ninety-three tracks in all, accessioned from " +
-        "April 2026.",
-        /* on glass the first draft of this paragraph opened "Half of Crooked
-           Home is about his brother Nick", which is the MARKER line printed
-           four inches above it. Same fact twice on one card in two registers is
-           the duplication C1 removed from the song cards. */
-        "Two of those songs are surfaced in this room, both from the vault's " +
-        "own copies. The rest of the catalogue, and the records as objects, " +
-        "are behind the doors at the foot of this card.",
-      ],
+      /* ═══ [R4 2026-08-06] THIS CARD HAS NO INTERPRETIVE LABEL, AND THAT IS
+         THE HONEST RESULT OF THE RULING RATHER THAN A GAP SOMEBODY MISSED.
+         MIKE: "delete the holdings sentence entirely, everywhere… all four
+         artists become identical — name, songs, cards, doors. Same only the
+         data."
+         BOTH PARAGRAPHS WERE THE HOLDINGS ANNOUNCEMENT. The first was it
+         outright — "the house artist — the one musician in this wing whose
+         records the museum holds in its own vault: seven of them, an EP and a
+         set of singles and rarities, ninety-three tracks in all, accessioned
+         from April 2026." The second was its continuation plus a pointer at the
+         doors four inches below it — "Two of those songs are surfaced in this
+         room, both from the vault's own copies. The rest of the catalogue, and
+         the records as objects, are behind the doors at the foot of this card."
+         Strike the announcement and there is nothing left of either.
+         THE HISTORY IS WORTH ONE LINE BECAUSE IT IS THE SAME SLOT FAILING
+         TWICE. Before CS struck them, these two paragraphs were about this
+         WEBSITE — "his catalogue taught the museum's machinery every pattern
+         the other wings inherited". CS replaced the museum's software with the
+         museum's holdings; both times the card whose job is to introduce a
+         musician was talking about the house. It is empty now, which is the
+         first time it has been about nothing rather than about us.
+         OPS DOES NOT WRITE THE REPLACEMENT (Doctrine 12). The other three carry
+         three paragraphs of life and work; nothing in this repository holds the
+         equivalent for him except vault quotes already printed on this card's
+         own decks. `face.label` is conditional at Exhibit.jsx:3379, so the block
+         is not drawn empty — the card runs plate, marker, register, records,
+         decks, doors. Named as a gap in docs/OPEN_ACTIONS.md, with the one
+         sourced life fact this museum does hold (MV-HR-20260707-035, his own
+         words to Whiskey Riff, 2023) put to Mike as a question rather than
+         drafted into prose nobody asked for. */
       /* [P22] the merch list stays — it is a store inventory, not a
          discography, and it is the one place a visitor learns the records
          exist as OBJECTS. The "lately, in his own words" list graduated into
@@ -580,12 +614,20 @@ const ARTISTS = [
        above, where catalogue facts belong. P16's ruling, third application:
        a missing shelf reads as an oversight; a shelf with a note on it reads
        as the truth. */
+    /* [R4 2026-08-06] THE NOTE LOSES ITS SECOND HALF AND KEEPS ITS FIRST, and
+       the split is exactly Doctrine 11's. "No chart entry, certification,
+       festival billing or sync is documented for him in this museum's sources"
+       is an honest statement of what is NOT held — a holdings fact, which
+       ships. What followed it was the holdings announcement wearing a
+       consolation prize: "his record here is the catalogue itself: 93 tracks
+       across seven records, an EP and a set, on file in the museum's own vault,
+       in the register above." That sentence answered an empty board by
+       bragging, and the register it pointed at no longer carries the row.
+       Carsie's note is one sentence of the same shape and stops there. */
     metrics: {
       note: "No chart entry, certification, festival billing or sync is " +
             "documented for him in this museum's sources. That is a statement " +
-            "about what we hold and not about the work — his record here is " +
-            "the catalogue itself: 93 tracks across seven records, an EP and a " +
-            "set, on file in the museum's own vault, in the register above.",
+            "about what we hold and not about the work.",
     },
     /* [P16] slugs read off his own Bandcamp catalogue page, 2026-08-02; years
        from the museum's own era buckets (src/data/era-buckets.json). */
@@ -634,9 +676,12 @@ const ARTISTS = [
          2026-08-05: sixteen releases, three of them albums and the rest
          singles. This is the line that has been quietly contradicting the
          card's "holds itself" for as long as both have been on the glass. */
-      note: "Sixteen releases sit on his own Bandcamp; seven records, an EP " +
-            "and a set of singles and rarities are on file in this museum's " +
-            "vault.",
+      /* [R4 2026-08-06] the second clause was the holdings announcement again,
+         and this was the copy W1 kept because it was the one CONTRADICTING the
+         card's "holds itself". With the card's claim struck there is nothing
+         left for it to correct, and what remains is the fact a visitor came for:
+         where the rest of the records are. Carsie's note opens the same way. */
+      note: "Sixteen releases sit on his own Bandcamp.",
     },
     decks: [
       { title: "Said about him", kind: "quote", cards: [
@@ -679,7 +724,13 @@ const ARTISTS = [
           url: "https://www.hunterroot.com/hunterroottour" },
       ] },
     ],
-    aboutNote: "Sourced from the museum's own foundation export and his own words in it - he is our artist and this is our record of him. The store and the recent uploads were read directly off his own site and his own channel feed, 2026-08-02.",
+    /* [R4 2026-08-06] "he is our artist and this is our record of him" is
+       struck. A sources line is provenance and ships (Doctrine 11); a
+       possessive claim inside one is the holdings announcement hiding in the
+       one place on the card nobody reads as content. The other three name
+       Wikipedia, Bandcamp, a press outlet — where the facts came from, and
+       nothing about whose artist anybody is. */
+    aboutNote: "Sourced from the museum's own foundation export and his own words in it. The store and the recent uploads were read directly off his own site and his own channel feed, 2026-08-02.",
     feed: [
       { d: "2026-07-29", t: "Lonesome had an only child", v: "8,385", id: "8J-cunYqb7w" },
       { d: "2026-07-23", t: "“I Tried” — live in studio, guitar and vocals", v: "5,604", id: "yez2aoLYVnw" },
@@ -1683,11 +1734,39 @@ const HOUSE_ALBUM = {
                MV-HR-20260707-004 settles it — "Run With The Hunt was Hunter's
                first solo record." His band was SEEDS, which became Medusa's
                Disco (MV-HR-20260707-003), and no track of theirs is in here. */
+            /* ═══ [R4 2026-08-06] BILLED LIKE THE OTHER THREE, WHICH IS THE
+               WHOLE OF THE INSTRUCTION. Mike: "delete the holdings sentence
+               entirely, everywhere… all four artists become identical."
+               WHAT WENT. `what` read "Songwriter · the house artist" against
+               "Songwriter · Philadelphia", "Songwriter · Arkansas",
+               "Songwriter and producer · Los Angeles" — three roles-and-places
+               and one STATUS. `why` was the holdings sentence in its second
+               wording, which is the M69 pair: strike the announcement and the
+               pair resolves by there being one sentence left, not two.
+               THE PLACE IS HIS OWN BANDCAMP'S, AND IT TOOK THE R7 RESEARCH TO
+               FIND IT. `what` was drafted as bare "Songwriter" because the only
+               location fact in this repository is his own words to Whiskey Riff
+               (MV-HR-20260707-035) — "I am Pennsylvania raised but I was born in
+               Fayetteville, Arkansas" — and RAISED is not BASED, while printing
+               "Arkansas" would put the same word under two of the four acts.
+               Reading hunterrootmusic.bandcamp.com for R7 settled it in one
+               line: his own artist bio there says "Solo artist/musician from
+               Lancaster, PA". That is the same class of source Carsie's
+               "Philadelphia" and Jesse's "Arkansas" stand on, and it is his own
+               page rather than a third party's.
+               THE NEW `why` INTRODUCES NO FACT TO THIS WING. Both halves are
+               already on the glass of the card this poster bills: the records
+               figure is the register's own "Records" row, and the Nick sentence
+               is his `marker` (printed at the head of ABOUT THE ARTIST) plus the
+               "’94" card's own "who was gone at twenty-seven". Carsie's bill is
+               built the same way — output count, then the one line that says
+               what the work is. */
             { id: "hunter-root",
-              what: "Songwriter · the house artist",
-              why: "The one artist in this room whose records the museum holds " +
-                   "in its own vault: seven of them, an EP and a set of " +
-                   "singles and rarities — ninety-three tracks.",
+              what: "Songwriter · Lancaster, Pennsylvania",
+              why: "Seven records, an EP and a set of singles and rarities. " +
+                   "Half of Crooked Home is about his brother Nick, who was " +
+                   "gone at twenty-seven, and he says “’94” is the heart of it " +
+                   "all.",
               hue: "#d8c9a0" },
           ]),
           /* [W1c 2026-08-05] THE FOOT IS STRUCK, on Mike's ruling. "Press a

@@ -149,6 +149,24 @@ const FAQ = [
      through `HrExhibitFlow.jsx:2110`'s `facebook.com/plugins/` URL, and the
      wing has seventeen of them.
 
+     ═══ [R6 2026-08-06] M37 IS RULED — OPTION A, DISCLOSE — AND THE FOURTH
+     MEASUREMENT CORRECTED THE THIRD CLAUSE. ══════════════════════════════════
+     MIKE: "the FAQ states plainly that YouTube (and any other embed host) is
+     contacted when those pages load. Disclosed, not deferred, not
+     click-to-load." So this answer IS the remedy, which makes its accuracy the
+     whole of the remedy — and re-measuring it on the built bundle this round
+     found the Facebook half slightly wrong AGAIN, in the museum's own favour.
+     `/hr` ON ARRIVAL, nine seconds, nothing clicked, nothing scrolled:
+     Google Fonts, `www.youtube.com` ×3, and FACEBOOK ZERO. The sixteen plugin
+     frames carry `loading="lazy"` (HrExhibitFlow.jsx:2240) and the cards sit
+     below the fold, so they arrive when a visitor SCROLLS the room — which is
+     still nothing they pressed, but it is not "the same way" as the player and
+     this answer said it was. Scrolled to the bottom: `www.facebook.com` ×16, 17
+     iframes, exactly as v53 recorded. v53's own reading was taken with the deck
+     already open, which is why it read as arrival.
+     THE CLAUSE NOW SAYS WHEN. It is a weaker-sounding sentence and a truer one,
+     and the direction of the error is the reason it is worth a note: three of
+     the four versions of this clause have understated what leaves the building.
      THAT IS THE THIRD OUTBOUND CLAUSE THIS ONE ANSWER HAS HAD, AND THE FIRST
      TWO WERE BOTH WRONG, and all three were written by people who meant them.
      The reason is mechanical and worth stating once: a grep of `src/` finds
@@ -224,7 +242,8 @@ const FAQ = [
        "browser asks Google for them and Google sees it was asked. The rooms " +
        "with music in them load YouTube's player when the room loads, before " +
        "you press anything. And one exhibit carries posts embedded from " +
-       "Facebook, which arrive the same way. Google, YouTube and Facebook " +
+       "Facebook, which arrive as they scroll into view — later than the " +
+       "player, and still nothing you pressed. Google, YouTube and Facebook " +
        "each know you turned up, and they are the whole of the outside. There " +
        "is no analytics, no advertising and no tracking pixel anywhere in " +
        "this site, and if that ever stops being true, this answer changes " +

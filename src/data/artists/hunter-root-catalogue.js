@@ -56,7 +56,13 @@
 // EP and a set". Parsing it out of the title string would be a guess dressed as
 // a derivation.
 
-import EXHIBIT from "../exhibits/hunter_root.json";
+/* [R5 2026-08-06] THE EXPORT IS READ THROUGH THE SERVED BOUNDARY, NOT RAW.
+   Mike ruled that this museum does not have Hunter Root's permission and must
+   stop serving his material from its own vault. `hunter-root-served.js` strips
+   every vault-hosted audio URL out of the export once, so neither this spine
+   nor the deck can hand one to a browser. Read its header before changing
+   anything here — it also records what it deliberately does NOT strip. */
+import EXHIBIT from "../exhibits/hunter-root-served.js";
 import { buildSpineFromArtifacts } from "./hunter-root-spine.js";
 
 /* Presentation config — coverflow order, short album ids (hr_facts albumIds key

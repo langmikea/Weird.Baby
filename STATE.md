@@ -92,6 +92,42 @@ Doctrine 17. Paid for by a hand-typed mirror of Hunter Root's whole catalogue at
 `/hr/archive` that survived six museum-wide figure sweeps, because a sweep looks
 for FIGURES and this was a second COPY.
 
+## WE DO NOT SERVE WHAT WE WERE NOT GIVEN (Mike, 2026-08-06 — STANDING)
+
+> **"WE DO NOT HAVE HIS PERMISSION. He was never reached, the ask was never
+> answered, therefore it is not granted — and that is precisely why WAL is a
+> sample platter instead of a single-artist wing. The vault keeps the material;
+> the site stops serving it."**
+
+**SILENCE IS NOT CONSENT, AND THAT IS THE WHOLE OF IT.** An ask that went
+unanswered is an ask that was refused for every purpose the museum has. The vault
+may hold anything the museum lawfully acquired; **the SITE may only serve what the
+artist put out themselves.** Where the museum wants to surface an artist's music,
+it EMBEDS the artist's own upload — a reference, not a copy — which is the posture
+Carsie Blanton, Jesse Welles and Mikey Mike have always stood in and which Hunter
+Root now stands in too.
+
+**IT IS A POSTURE ABOUT SERVING, NOT ABOUT HOLDING.** Nothing leaves MediaVault.
+The catalogue is still listed, the tracks are still named, the accessions are
+still cited — a museum prints its provenance. What stops is the streaming.
+
+**MECHANISM, so this is a rule with a gate rather than a rule with a memory:**
+`src/data/exhibits/vault-audio.js` → `stripVaultAudio`, called at BUILD (the
+`hr-vault-audio` plugin in `vite.config.js`) and at RUNTIME
+(`hunter-root-served.js`). Both passes are required and neither is decorative —
+**a runtime filter stops the requests and still ships the addresses**, and the
+first build after the filter went in carried 153 vault mp3 URLs in plain readable
+text.
+
+**WHAT IT COST, because a rule whose price is hidden gets quietly reversed:** 60
+of Hunter Root's 93 tracks have no official upload anywhere and are now unplayable
+on `/hr`, including the whole of Run With The Hunt and the Phone Recordings EP.
+`docs/OPEN_ACTIONS.md` **M71**. His images are still served off the museum's host
+and are the same question, unruled — **M73**.
+
+Canonical mechanism notes: `docs/canonical/OPERATIONS.md` §5, THE VAULT-AUDIO
+BOUNDARY. Round log: `docs/MUSEUM_PORCH_RULINGS_LOG-20260806.md`.
+
 ## THE LAW OF SUBTRACTION (Mike, 2026-08-04 — STANDING, site-wide)
 
 > **If it does not help, it hurts. If it does not need to be there, it needs to

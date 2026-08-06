@@ -37,13 +37,14 @@
 // fall off the boundary silently, which is a worse defect than the duplication
 // it would be curing.
 //
-// ═══ ONE KNOWN COPY IS DELIBERATELY NOT WIRED IN HERE ═══════════════════════
-// `robots.js`'s front-desk FAQ answers "How do I get in touch?" with the bare
-// address and nothing else. It is a DIVERGENT copy of CONTACT below, and it is
-// left alone on purpose: every answer on that face is Mike's, word for word
-// (P3), so folding it into this file would be Ops rewriting his content under
-// cover of a refactor. It is reported for his ruling instead — docs/OPEN_ACTIONS
-// M66. The day he says yes, it is one import.
+// ═══ THE ONE KNOWN DIVERGENT COPY IS NOW WIRED IN ═══════════════════════════
+// `robots.js`'s front-desk FAQ answered "How do I get in touch?" with the bare
+// address and nothing else. D1 left it alone on purpose — every answer on that
+// face is Mike's, word for word (P3), so folding it in under cover of a refactor
+// is the thing D1 forbids — and reported it as M66 instead.
+// [R1 2026-08-06] HE RULED IT: both rooms carry `CONTACT`, no follow-on
+// sentences. It was one import, which is what M66 said it would be. There is no
+// longer any known unlinked copy of a passage in this file.
 
 /* WHO KEEPS THE PLACE.
    Written for the Information Booth and, since P9, printed on /wb's ABOUT THE

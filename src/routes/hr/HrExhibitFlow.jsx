@@ -48,7 +48,11 @@ import { createPortal } from "react-dom";
 import "./HrExhibitFlow.css";
 import { buildDimensions } from "./hr_dimensions.js";
 import { eraForRecord, ERA_DISPLAY, ERA_SLUGS } from "./hr_era.js";
-import EXHIBIT from "../../data/exhibits/hunter_root.json";
+/* [R5 2026-08-06] READ THROUGH THE SERVED BOUNDARY, NOT THE RAW EXPORT — the
+   deck's album overlay was streaming sixty vault mp3s off `primary_url`.
+   See the header of hunter-root-served.js for the ruling and for what it
+   deliberately leaves alone. */
+import EXHIBIT from "../../data/exhibits/hunter-root-served.js";
 import FACTS_PAYLOAD from "../../data/exhibits/hunter_root.facts.json";
 import { makeFactCycler, splitFact } from "../../lib/fact-select.js";
 import { useOverlay } from "../../lib/use-overlay.js";

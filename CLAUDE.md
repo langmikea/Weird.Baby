@@ -432,87 +432,67 @@ catches invented CONTENT, Doctrine 11 catches a line whose SUBJECT is the work.
 
 Maintained here. Newest first.
 
-### 2026-08-06 → CLEAR THE DECK (D1–D9) — sealed
-- **NINE INSTRUCTIONS, ALL NINE LANDED, AND THE BIGGEST OF THEM WAS FOUND BY
-  LOOKING FOR SOMETHING ELSE.** Gates: lint **11/9 = baseline** · build green ·
-  provenance **PASS** (0 undeclared · 0 stale · 0 invention) · `reveal:check`
-  **PASS** · `parity:gate` **PASS, 4 shared · 0 divergences** · lap **on the
-  built bundle**, eleven routes, no horizontal overflow anywhere, no console
-  messages. Surfacing **13 · 13 · 15, unmoved** — three files added and all
-  three referenced. Full narrative:
-  `docs/MUSEUM_CLEAR_THE_DECK_LOG-20260806.md`.
-- **D1 — THE DUPLICATE MAP IS NOT A GREP, AND THAT IS WHY IT FOUND ANYTHING.**
-  It was built by calling `provenance-sweep`'s OWN extractor, so the population
-  is exactly the population the gate polices, then grouped on normalised text
-  and again on token overlap — because the copies that matter most are the ones
-  that have already drifted. **Three exact cross-file duplicates hoisted:** the
-  keeper's answer into `src/data/house-copy.js`, and — inside `robots.js` — the
-  manual reader's FORMAT/NAV lines, the empty reel's note and the shop answer,
-  **all four typed twice because parity is absolute and `npm run parity` polices
-  the menu ITEMS and cannot see the words inside them.** **FOUR DIVERGED PAIRS
-  ARE REPORTED AND NOT MERGED** (M66–M69), which is what his instruction says to
-  do. Repeated source citations were left alone: 54 of *"— Wikipedia, read
-  2026"* is one citation per fact, not one passage in 54 places. **It is
-  Doctrine 17 now**, and the reason is his last clause — *that is the defect,
-  not his memory*: a duplicated passage does not fail when it is written, it
-  fails when somebody edits one, **and the defect is that the tree gives an
-  editor no way to tell.**
-- **D3c — `/hr/archive` WAS NOT CARRYING A STALE FIGURE. IT WAS CARRYING A
-  DIFFERENT CATALOGUE.** A hand-typed ALBUMS array — six containers against the
-  vault's nine, Run With The Hunt and the Phone Recordings EP missing entirely,
-  SINGLES & RARITIES reduced to a one-title "Singles" strip with four of its
-  seven tracks filed under three other records, two They Finally Cracked Me
-  titles that are not on it, and a header reading *"6 albums · 71 songs · 2018 –
-  2025"*. **It is DELETED, not corrected** — it drifted through six museum-wide
-  figure sweeps unnoticed, and a corrected mirror is a mirror that will drift
-  again. The page reads the spine. **W1 reported closing "all six sites" and
-  there was a seventh; that is named as a miss.** **AND W1's OWN FIX CARRIED THE
-  DEFECT IT WAS CURING** — *"out of ninety-three"* counts TRACK ROWS and prints
-  as a count of SONGS, the same unit swap as *78 songs*, one round later, by the
-  round that named the class. **91 distinct titles, because Brain Cell and Same
-  Page each sit on two records.** The unit is fixed; no second number entered
-  the building.
-- **D3a — M53's "rule question rather than one string" WAS THE RIGHT QUESTION.**
-  A sweep of every `[PAPA]` string against the scrubber found the same defect
-  live on the MGK-NIAC plates wall, **under a comment that claimed the whole
-  string was one marked sentence.** A later edit had split it and marked only the
-  first half. **A `papa` field is not a comment.**
-- **D7 — THE FOUNDATION IS A WING, AND THE LAP CAUGHT THREE THINGS NO GATE
-  COULD.** Option A: `face.account`, `face.register`, `face.ledger`, mounted on
-  the presence of a field; `FoundationObjects.jsx` is **the sheet's own markup
-  and stylesheet MOVED rather than rewritten**, which is the cheapest guarantee
-  available that nothing was lost. **The billionaires question was printing with
-  silence under it** — the face model's entry filter is an OR (which /robots'
-  FAQ depends on) where the sheet's was an AND, so an answer F3 held whole came
-  back as a published question with nothing beneath it, **on the one page whose
-  subject is honesty.** Also: a player bar on a wing with nothing to play, and
-  the objects drawing above their own heading. `src/routes/Foundation.jsx` is
-  deleted; the address did not move.
-- **D5 — THE MARK WAS NOT BEING COPIED PROPERLY, WHICH IS THE FINDING.** In the
-  WB logo the ring is BEHIND the baby; every unit badge was masked INTO the disc
-  — the opposite arrangement wearing the same circle. The ring is drawn first
-  now. **The two machines get two treatments and it is the SOURCE's doing:** the
-  VIIIp is a hard-edged dark body on a light counter and gets a real silhouette;
-  **the mainframe's frame was cut at the cabinet's own bounding box, so there is
-  no background in it to remove** — three mattes were rendered and each damaged
-  the object, and the crop that composes best throws the feet away, which is the
-  instruction's other half.
-- **D4 — THE THIRD SETTING OF ONE LAW, AND IT SEPARATES THE HALVES.** P11/B1/J3
-  said who LEADS; S1 said nobody is BIG; what was left is that leading looked
-  like nothing. **`--gs-cols` is the whole mechanism** — `auto-fit` is
-  unimprovable until you have to ask it how wide one column is. Measured: five
-  tiles, **445×298 every one**, billed tile centred to half a pixel.
-- **AND A PRUNE PLUS A *MOVE* IS THE SAME HAZARD AS A PRUNE PLUS A RENAME.** 106
-  register rows changed file without changing a character; they were **CARRIED,
-  matched on exact text from the exact file they left**, never re-decided.
-  Then, per §9: prune against a copy and let the gate name the breaks. **It named
-  eleven exactly.** Nine were repointed onto the artist-card rows that actually
-  carry each claim — **a better chain than the one that broke**, because the old
-  anchor merely asserted that the sourcing existed.
+### 2026-08-06 -> THE PORCH RULINGS (R1-R8) - sealed
+- **SIX RULINGS, ONE RESEARCH MAP, ONE REGISTER PASS - AND THE ONE HE CALLED
+  CRITICAL AND LIVE WAS AIMED AT THE WRONG PAGE.** Gates: lint **11/9 =
+  baseline** - build green - provenance **PASS** (0 undeclared - 0 stale - 0
+  invention) - `reveal:check` **PASS** - `parity:gate` **PASS, 4 shared - 0
+  divergences** - lap **on the built bundle**, eleven routes, no horizontal
+  overflow, no console messages. Surfacing **13 - 13 - 15, unmoved**: this round
+  subtracted and surfaced nothing, said plainly rather than dressed up. Full
+  narrative: `docs/MUSEUM_PORCH_RULINGS_LOG-20260806.md`.
+- **R5 - HIS PREMISE WAS INVERTED, AND CORRECTING IT MADE THE PROBLEM FORTY-SIX
+  TIMES BIGGER.** He ruled that the museum does not have Hunter Root's
+  permission and named *"his two songs"* on `/wal` - which were **YouTube
+  embeds of his own channel and always had been** (oEmbed on both ids returns
+  `youtube.com/@hunterrootmusic`, checked rather than assumed). The
+  verification he asked for found **`/hr` serving ninety-three**: every track
+  carries an `assets.weird.baby` mp3 and sixty also sit on the album containers
+  as `primary_url` for the deck's own `<audio>`. **THE RULE IS WRITTEN ONCE AND
+  ENFORCED TWICE AND THE SECOND TIME IS THE POINT** - a runtime filter stops
+  the REQUESTS and still ships the ADDRESSES, and the first build carried
+  **153 vault mp3 URLs in plain text**. Now zero, 22 KB smaller. **The cost is
+  60 of 93 tracks with nothing playable**, drawn through `.tl-novid` and the
+  overlay's *unavailable*, **both pre-existing; no render path was invented.**
+  What `/hr` should look like instead is M71 and is his.
+- **R4 - SEVEN SITES STRUCK, AND ONE DELETION WAS DRAFTED, REVERSED, AND THE
+  REVERSAL IS THE MORE USEFUL FINDING.** Striking the song cards' `Accession`
+  rows for symmetry would have broken the only on-glass anchor two other
+  passages on that card point at - **a citation is not a decoration.** The row
+  went back with *Published by* and *Verified* added beside it. **His card now
+  has no biography** because both its paragraphs WERE the announcement (M72),
+  the second time that slot has failed the same way. The poster's place under
+  his name came out of R7: **"Solo artist/musician from Lancaster, PA"**, his
+  own Bandcamp bio.
+- **R2 - HE DID NOT PICK A WORDING, HE STRUCK BOTH**, and `/booth` and
+  `/foundation` were checked rather than assumed: neither has an FAQ intro
+  blurb, because **a heading is not a blurb**.
+- **R6 - M37 RULED A, AND THE DISCLOSURE WAS WRONG FOR THE THIRD TIME IN THE
+  MUSEUM'S OWN FAVOUR.** The plugin frames are `loading="lazy"`, so `/hr` on
+  arrival requests Facebook **zero** times and sixteen only on scroll. `C34`
+  closes ruled-against.
+- **R7 - THE KNOB IS THIRTEEN TRACKS, NOT NINETY-THREE.** Bandcamp adds 13 over
+  YouTube for Hunter Root and **47 of his 93 are reachable through nothing**,
+  while Carsie Blanton (16 releases) and Jesse Welles (7 albums) are whole
+  catalogues the wing shows two songs of. Mikey Mike has none, and two
+  candidate SoundCloud accounts were **not adopted** because they could not be
+  tied to him from his own pages. Map:
+  `docs/AD_FREE_PLAYBACK_RESEARCH-20260806.md`.
+- **THE PRUNE PROCEDURE WAS RUN FORWARDS FOR THE FIRST TIME.** Five chains were
+  repointed BEFORE the prune, so the gate named **zero** broken chains against
+  16 stale rows.
 
-### Older entries (2026-05-06 → 2026-08-05) — archived
+### Older entries (2026-05-06 → 2026-08-06) — archived
 Moved to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md`, verbatim, under this file's
-own ≈600-line rule. **2026-08-06 (CLEAR THE DECK):** TWO AT ONCE — THE REMOTE-CONTROL
+own ≈600-line rule. **2026-08-06 (THE PORCH RULINGS):** CLEAR THE DECK (D1–D9),
+moved whole — the file was at 566 and this round's entry would have carried it
+past the rule. What is still load-bearing in it is NOT in the archive: **D1's
+one-passage-one-declaration ruling is `OPERATIONS.md` §7 Doctrine 17** and
+`src/data/house-copy.js`; **its four reported divergences are M66–M69, and all
+four are now RULED — three closed this round and M68 printed verbatim for him**;
+D3c's deletion of the `/hr/archive` mirror is `hunter-root-catalogue.js`'s own
+header and the §5 file map; D7's Foundation port is the §5 `/booth` + `/foundation`
+row; D4's `--gs-cols` mechanism is the §5 Gift Shop row. **2026-08-06 (CLEAR THE DECK):** TWO AT ONCE — THE REMOTE-CONTROL
 ROUND (P1–P11) and MIKE'S READING PASS — ROUND ONE
 (L1·L2·S1·S2·M1·F1·F2·W1), both moved whole. The file was at 610 before this
 round's entry and would have finished at 631 with one moved; two brings it to

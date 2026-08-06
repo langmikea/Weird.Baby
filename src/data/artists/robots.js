@@ -107,6 +107,13 @@
 // opa, across every album") is a QUERY over this field. It is not built.
 
 import RobotsExhibitFlow from "../../routes/robots/RobotsExhibitFlow.jsx";
+/* [R1 2026-08-06] M66 CLOSED — MIKE RULED THE FOLD-IN. The front desk answered
+   "How do I get in touch?" with the bare address; D1 reported the divergence
+   rather than merging it, because every answer on that face is his word for
+   word (P3) and rewriting one under cover of a refactor is the thing D1
+   forbids. He has now said it: both rooms carry his own D2 wording, and no
+   follow-on sentences. One import, exactly as M66 predicted. */
+import { CONTACT } from "../house-copy.js";
 
 /* ---- NO-COMING-SOON [Mike 2026-07-29 / R1 2026-07-30] ---------------------
    MGK-NIAC, NRU-2000 and the "Robots" findings-log album are all REMOVED from
@@ -547,8 +554,10 @@ const WBR_TRACKS = [
                     "when we do, the answer is yes: available online, free to " +
                     "all to partake.",
               note: "" },
+            /* [R1 2026-08-06] the house's own passage, imported — see the head
+               of this file. The bare address that stood here is gone. */
             { stamp: "Q", title: "How do I get in touch?",
-              line: "papa@weird.baby",
+              line: CONTACT,
               note: "" },
           ],
           /* WELCOME's footer, and the FAQ's own [PAPA] behind it. The scrub
@@ -630,7 +639,14 @@ const WBR_TRACKS = [
      · "Does it still work?" (the portable's answer carries a second sentence
        about the Portal that the mainframe has no equivalent for)
    Their wording differences ARE reported for Mike's ruling — OPEN_ACTIONS M67 —
-   rather than merged here. */
+   rather than merged here.
+
+   [R2 2026-08-06] M67 IS RULED AND THE FIRST OF THOSE TWO IS GONE. Mike struck
+   both FAQ blurbs outright rather than choosing a wording, so the divergence is
+   resolved by subtraction and there is no third constant to declare here. The
+   second — "Does it still work?" — stands exactly as described above; he ruled
+   on the blurb and said nothing about it, and D1's reading that the portable's
+   Portal sentence has no mainframe equivalent is untouched. */
 const MANUAL_FORMAT = "FORMAT  photographs of the printed pages, not a rendering";
 const MANUAL_NAV = "NAV     microfiche reader — page-turn, fit and 1:1 magnify";
 const REEL_EMPTY_NOTE =
@@ -1361,9 +1377,16 @@ const spine = [
           subtitle: "ABOUT THIS MACHINE",
           still: "/robots/reference/mgk-viii/column_lit.jpg",
           stillCaption: "A lit column behind the cage bars.",
-          blurb:
-            "The questions that get asked about the cabinet, answered as " +
-            "plainly as the answers are known — and marked where they are not.",
+          /* [R2 2026-08-06] M67 CLOSED BY DELETION, NOT BY MERGE. Mike:
+             "BOTH FAQ intro blurbs are DELETED. A line introducing a list of
+             questions is the page explaining what the page is." The divergence
+             D1 reported (this face said "the cabinet", the portable's said
+             "the unit" and also said "actually") is resolved by there being no
+             sentence left to diverge — the stronger form, because two matching
+             blurbs would still have been two copies to keep in step.
+             THE FACE IS TITLE, PLATE AND QUESTIONS NOW. Nothing is lost that a
+             reader would miss: "the questions that get asked" is what a list of
+             questions under the heading FAQ already is. Law of Subtraction. */
           entries: [
             { stamp: "Q", title: "Does it still work?",
               line: "Yes. Both units power on and run their own firmware.",
@@ -1807,9 +1830,9 @@ const spine = [
              Plates, and is the head plate of nothing else. */
           still: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
           stillCaption: "The bezel — the frame the Portal is met through.",
-          blurb:
-            "The questions that actually get asked about the unit, answered as " +
-            "plainly as the answers are known \u2014 and marked where they are not.",
+          /* [R2 2026-08-06] STRUCK WITH ITS TWIN \u2014 see the mainframe's FAQ face
+             above for the ruling. This was the copy carrying "actually", the
+             one word in the pair that was not a noun and that nothing explained. */
           entries: [
             { stamp: "Q", title: "Does it still work?",
               line: "Yes. Both units power on and run their own firmware. The " +
