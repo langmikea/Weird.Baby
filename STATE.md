@@ -128,6 +128,81 @@ and are the same question, unruled — **M73**.
 Canonical mechanism notes: `docs/canonical/OPERATIONS.md` §5, THE VAULT-AUDIO
 BOUNDARY. Round log: `docs/MUSEUM_PORCH_RULINGS_LOG-20260806.md`.
 
+## THE PULL-BACK RULE (Mike, 2026-08-06 — STANDING)
+
+> **"NOTHING PUBLISHES UNTIL THE RECORD DELIVERS IT. Every asset stays held
+> until a Record entry brings it into the story, at which point it is placed
+> according to that entry. The archive and the viewer stay built; they are
+> simply empty until the story fills them."**
+
+**HE GAVE THE INSTRUCTION AND THE FORM OF THE INSTRUCTION IN THE SAME BREATH:**
+*"this applies to images, the manual, and probably more — so state it once
+rather than listing categories."* So the rule is one sentence and the boundary
+is one idea:
+
+> **A picture of the objects does not appear on any public surface until a
+> Record entry delivers it.**
+
+The Record is the log of these machines arriving and being opened. A photograph
+of one of them cannot honestly be on the site before the entry that brings it in
+— **that is not a policy about images, it is what the Record IS.** Anything else
+the museum owns falls under the same sentence the moment the Record becomes its
+delivery mechanism, which is why the sentence does not name images.
+
+**THE ONE EXCEPTION IS SIGNAGE AND IT IS DECLARED PER FILE, WITH A REASON.** The
+museum's own wordmark on its own sleeve is delivered by nobody: nothing arrived,
+nothing was opened, and there is no entry that could ever bring it in. **There is
+no fall-through in either direction** — a governed file that is neither delivered
+nor signed-off FAILS, and so does a DELIVERED file still sitting behind the door,
+because the rule runs both ways.
+
+**THE FILES MOVE; THEY ARE NOT MERELY UNREFERENCED.** Taking a picture off a page
+does not take it off the server, and an unlinked address is still an address.
+Everything pulled back went under `public/held/`, which `src/worker.js` refuses.
+
+**WHAT IT COST ON THE DAY IT WAS WRITTEN, because a rule whose price is hidden
+gets quietly reversed:** nine groupings and fourteen photographs off the two
+Image Archives, both machine album covers, both viewer posters and their
+captions, four face stills and the manual's one page — **26 pictures dark and
+ONE left on the whole wing**, the power switch round the back, on Record 013,
+which is the entry that delivers it. Register **H-a**, **H-c**.
+
+**MECHANISM:** `reveal/delivery.mjs`, called from `validate()` in
+`reveal/schema.mjs` so both the declaration and `reveal:check` run it. Canonical
+notes: `docs/canonical/OPERATIONS.md` §5, THE PULL-BACK RULE. Round log:
+`docs/MUSEUM_PORTAL_HOLD_LOG-20260806.md`.
+
+## A HELD THING MUST BE UNREACHABLE (Mike, 2026-08-06 — STANDING)
+
+> **"A held thing must be UNREACHABLE BY A VISITOR — and the gate must FAIL if
+> that stops being true."**
+
+**THE SECOND CLAUSE IS THE RULING.** `state: "HELD"` had been in the reveal
+ledger since v52 and it was a WORD: a row said it, and nothing anywhere re-asked
+the tree whether it was still so. A wing could be un-lazied, a picture moved out
+of the held tree, a routing rule dropped from `wrangler.jsonc` — and the row
+would go on saying HELD, truthfully at the moment it was written and falsely from
+then on. **A claim that nothing re-checks is a claim that expires quietly**, and
+that is the shape of every failure this repository has paid for: R5's 153 mp3
+URLs, H1's `run_worker_first` outage, `MANUAL_PAGES = 24`.
+
+**SO NOTHING IN THE GATE READS A ROW'S OPINION OF ITSELF EXCEPT TO CONTRADICT
+IT.** It reads the worker's refusal list, the routing rules, vite's held-chunk
+list, the module graph's own literals, the files on disk, the router's wrapping,
+and the ledger's own projection into the browser. Run against the live tree on
+the day it was written it found **seven things that were already untrue.**
+
+**WHAT IT DOES NOT PROVE, stated here because a gate described as proof becomes
+one:** it cannot tell you a held thing is SECRET. The worker is the lock; this
+checks that the lock is still wired to the door. It cannot see a photograph's
+contents, so a held picture composited into a published one is invisible to it.
+And it reads SOURCE — the build's own `heldChunkGuard` proves the chunking, and
+neither replaces the other.
+
+**MECHANISM:** `reveal/reachability.mjs`, eight checks, called from `validate()`.
+Canonical notes: `docs/canonical/OPERATIONS.md` §5, A HELD THING MUST BE
+UNREACHABLE. Round log: `docs/MUSEUM_PORTAL_HOLD_LOG-20260806.md`.
+
 ## THE LAW OF SUBTRACTION (Mike, 2026-08-04 — STANDING, site-wide)
 
 > **If it does not help, it hurts. If it does not need to be there, it needs to

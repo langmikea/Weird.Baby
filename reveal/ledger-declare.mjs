@@ -137,7 +137,12 @@ R("route.foundation", "The Weird.Baby Foundation — where the money goes.",
 R("route.shop", "The Gift Shop — the house's own shelf plus each artist's own store.",
   "surface", "/shop", "LIVE", "linked from the directory", "REVEALED",
   { assets: ["/images/wb-merch/sticker.png"] });
-R("route.robots", "The Robots wing — the machines, their archive and the Portal.",
+/* [H1/H2 2026-08-06] THE NAME LOST TWO OF ITS THREE NOUNS AND THAT IS THE
+   ROUND, STATED IN ONE ROW. The Portal is held from launch and left this wing's
+   public deck; the archives are still built and are empty until the Record
+   delivers a photograph. What a visitor reaches at /robots today is the front
+   desk, the Record and two catalogued machines. */
+R("route.robots", "The Robots wing — the front desk, the Record, and two machines whose pictures the Record has not delivered yet.",
   "surface", "/robots", "LIVE", "linked from the directory", "REVEALED");
 R("route.wal", "Worth A Listen — four artists the house wants heard.",
   "surface", "/wal", "LIVE", "linked from the directory", "REVEALED");
@@ -147,14 +152,28 @@ R("route.wb", "Weird.Baby Music — the house's own record.",
      rebuilt on the robots template and the old file is deleted; the ledger meets
      the asset table at `assets: [uid]`, so a repointed FILE is a repointed row. */
 R("route.hr", "The Hunter Root reference wing — 8 albums, 93 tracks, the deepest thing in the museum about any artist.",
-  "surface", "/hr", "PARTIAL", "by URL only — deliberately unlisted", "HELD",
-  { note: "HELD PERMANENTLY BY RULING (ASSET_REVEAL_CHECKLIST §E): reachable, never listed. PARTIAL because the deck's journal tab is dead machinery (M17) and the page is one exhibit plus an unlinked discography." });
+  "surface", "/hr", "PARTIAL", null, "HELD",
+  { note: "HELD PERMANENTLY BY RULING (ASSET_REVEAL_CHECKLIST §E). [H1 2026-08-06] THE REACH IS NULL NOW AND IT WAS STALE FOR A ROUND: it read 'by URL only — deliberately unlisted', which was true until the previous round put the wing behind a password on /admin and made /hr render the Lobby. A visitor cannot get here. The reachability check is what noticed. PARTIAL because the deck's journal tab is dead machinery (M17) and the page is one exhibit plus an unlinked discography." });
 R("route.hr.archive", "The Hunter Root discography — the archive route.",
-  "surface", "/hr/archive", "LIVE", "by URL only — nothing links to it", "HELD");
+  "surface", "/hr/archive", "LIVE", null, "HELD",
+  { note: "[H1 2026-08-06] Reach nulled with route.hr and for the same reason — both routes are wrapped in <HeldWing> and both chunks are refused by the worker." });
+/* ═══ [H1 2026-08-06] /admin IS NOT HELD, AND THE CHECK IS WHAT SETTLED IT ══
+   It carried `state: "HELD"` with `reach: "by URL only"` — a row saying in one
+   breath that a visitor cannot get there and how they do. Under Mike's rule
+   ("a held thing must be UNREACHABLE BY A VISITOR") only one of those can
+   stand, and it is not the state: `/admin` is a real page at a real address
+   that anybody who types it opens in full, and it has to stay that way, because
+   it is the door the held wings are opened THROUGH.
+   SO IT IS REVEALED AND `shown` STAYS FALSE, which is the distinction the two
+   axes exist for: REVEALED is "a visitor can reach it", `shown` is "the museum
+   points at it". Nothing on any page names this address. It is the one row in
+   the table whose state changed without anything on the glass changing, and it
+   is recorded rather than absorbed — OPEN_ACTIONS P-c, in case Mike wants the
+   dashboard itself put behind the same password the wings are. */
 R("route.admin", "The admin dashboard — visits, the guest book, page breakdown.",
-  "surface", "/admin", "PARTIAL", "by URL only", "HELD",
+  "surface", "/admin", "PARTIAL", "by URL only — nothing links to it", "REVEALED",
   { deps: ["C33 — exclude the house's own hits, a return-visitor signal, a week of logbook"],
-    note: "Not linked from anywhere. The return-visitor signal is constrained by /booth's privacy answer." });
+    note: "Not linked from anywhere. The return-visitor signal is constrained by /booth's privacy answer. [H1] It also carries the held wings' door." });
 R("route.preset", "Preset landing — a shared exhibit state, by short id.",
   "surface", "/p/:id", "LIVE", "only by a link somebody was given", "REVEALED");
 R("route.catchall", "The catch-all — every unmatched address renders the Lobby where it stands.",
@@ -190,43 +209,66 @@ R("room.slow", "WHEN THINGS GET SLOW — old photographs of Mike, from birth onw
     note: "MIKE, F2: post old photos of himself, from birth onward, funny stuff — the room to open when there is nothing new. THE SOURCE FOLDER IS RECORDED AND WAS NOT TOUCHED THIS ROUND, by instruction: C:\\Users\\macun\\OneDrive\\OneDrive MAJEL_01 (Archived Photos)\\ARCHIVED - Digital Negatives\\Sets (NOT GUARANTEED TO BE BACKED UP ELSEWHERE)\\Karen Mike Ken\\Mike and Mo. Two things a future round must hold before it opens that folder. THE FOLDER'S OWN NAME SAYS IT IS NOT GUARANTEED TO BE BACKED UP ANYWHERE ELSE — so the first act on it is a copy, never a move, and never an edit in place. AND IT IS A FAMILY SET, not a Mike set: the path names two other people, so which frames may be published is his call and nobody else's, the same consent rule that kept two real households off /foundation's invoice (M38)." });
 
 /* ═════════ 2. THE ROBOTS WING'S FACES — derived from src/data/artists/robots.js */
-const FACE = (id, name, build, state, extra) =>
-  R("face." + id, name, "surface", "src/data/artists/robots.js", build,
-    state === "REVEALED" ? "a track on /robots" : null, state, extra);
+/* [H1 2026-08-06] `where` IS OVERRIDABLE NOW, because a face left the file this
+   helper hard-coded. Every robots face lives in `robots.js` except the Portal's,
+   which is held and therefore lives in its own module — and the reachability
+   check reads this field to decide whether a built, held row is actually behind
+   a door, so a helper that answers "robots.js" for all of them would have made
+   that check answer the wrong question quietly. */
+const FACE = (id, name, build, state, extra) => {
+  const { where, ...rest } = extra || {};
+  return R("face." + id, name, "surface", where || "src/data/artists/robots.js", build,
+    state === "REVEALED" ? "a track on /robots" : null, state, rest);
+};
 /* [R3 2026-08-05] THE FRONT DESK IS ONE FACE. Welcome, DOC CONTROL and Contact
    are struck on Mike's instruction and their rows are RETIRED in §13 — a face
    that is gone does not stay LIVE here because the ledger is easier to leave
    alone than to correct. What survived each of them is folded into the FAQ,
    which is why that row's note is now the longest on this table. */
 FACE("wbr.faq", "FAQ — the robots wing's whole front desk: what this is, the machines, the paper, and how to reach us.", "LIVE", "REVEALED",
-  { assets: ["/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png"],
-    note: "[R3] Absorbed Welcome, DOC CONTROL and Contact — eleven questions where there were four faces. M29 CLOSES: it inherited Welcome's family shot along with Welcome's job as the wing's landing, so the face that had no picture has one, and no object was invented for the slot. C31 closes with DOC CONTROL." });
+  { note: "[H2 2026-08-06] PULLED BACK — no Record entry delivers this picture, so the face no longer shows one and the file is behind the door under public/held/. M29 REOPENS BY CONSEQUENCE — the face that had no picture has none again (OPEN_ACTIONS H-a). [R3] Absorbed Welcome, DOC CONTROL and Contact — eleven questions where there were four faces. M29 CLOSES: it inherited Welcome's family shot along with Welcome's job as the wing's landing, so the face that had no picture has one, and no object was invented for the slot. C31 closes with DOC CONTROL." });
 FACE("wbr.record", "THE RECORD — the journal of the reverse-discovery, and it is about all things robots.", "PARTIAL", "REVEALED",
   { deps: ["M18 — twenty-seven open questions on entry 013", "M19 — what a record number means"],
     note: "[R1] MOVED HERE FROM THE MGK-VIIIp ALBUM on Mike's ruling that it applies to all things robots, not just the VIIIp — and this row was `face.viiip.record` until then. It is the ONE id this table has ever renamed; nothing outside reveal/ reads it, and leaving it on a wing it no longer sits in would have been the ledger keeping a filing decision the museum reversed. Reachable at its own address, /robots/record, because the lobby directory now carries a line for it indented under Weird.Baby Robots. Holds exactly ONE entry; the container's pagination (C1), doors (C7) and epoch (C8) are built and unexercised." });
 FACE("niac.name", "THE NAME — built as MGK-NIAC, sold as MGK-VIII.", "LIVE", "REVEALED",
-  { assets: ["/robots/reference/mgk-viii/column_lit.jpg"], arc: "understood",
-    note: "[Q3] The album took the first name on 2026-08-05; this face is where the two names are reconciled. [R4] Its still was the robot's head at the lens and is now the cabinet's lit column — the mainframe is the subject." });
+  { arc: "understood",
+    note: "[H2 2026-08-06] PULLED BACK — no Record entry delivers this picture, so the face no longer shows one and the file is behind the door under public/held/. [Q3] The album took the first name on 2026-08-05; this face is where the two names are reconciled. [R4] Its still was the robot's head at the lens and is now the cabinet's lit column — the mainframe is the subject." });
 FACE("niac.plates", "IMAGE ARCHIVE (MGK-NIAC) — four details of a cabinet never shown whole.", "LIVE", "REVEALED",
-  { arc: "arrived",
-    assets: ["/robots/reference/mgk-viii/core_helical.jpg",
-             "/robots/reference/mgk-viii/output_row.jpg",
-             "/robots/reference/mgk-viii/core_meltdown.jpg",
-             "/robots/reference/mgk-viii/column_lit.jpg"],
-    note: "[R4] EIGHT PLATES TO FOUR. Six were the robot and one was a bench shot with its feet in it; all seven are off the wall and none is deleted from disk (M9). Three came the other way out of the robots repo's own culled 2021 set — the core, the output row, the meltdown. It also lost the February 2013 spread and with it the museum's ONLY stowed shelf, so N2's <details> mechanism is now exercised nowhere — C29." });
+  { note: "[H2 2026-08-06] THE WALL IS EMPTY AND THE WALL IS STILL BUILT. Four plates came off it under THE PULL-BACK RULE and the face carries `archiveEmpty` instead — the groupings, the unit noun and the reader are untouched, and a Record entry that delivers a plate puts it back with no code. [R4] EIGHT PLATES TO FOUR. Six were the robot and one was a bench shot with its feet in it; all seven are off the wall and none is deleted from disk (M9). Three came the other way out of the robots repo's own culled 2021 set — the core, the output row, the meltdown. It also lost the February 2013 spread and with it the museum's ONLY stowed shelf, so N2's <details> mechanism is now exercised nowhere — C29." });
 FACE("niac.firmware", "TECHNICAL SPECIFICATIONS (MGK-NIAC) — what the machine is running.", "LIVE", "REVEALED",
-  { assets: ["/robots/reference/mgk-viii/output_row.jpg"],
-    note: "[R4] Its still was a breadboard on a bench and is now the cabinet's own bar bank, which is both the mainframe and the literal subject of the face's 1 × 64 entry. `matrix_lit.jpg` is orphaned by the swap — M9." });
+  { note: "[H2 2026-08-06] PULLED BACK — no Record entry delivers this picture, so the face no longer shows one and the file is behind the door under public/held/. [R4] Its still was a breadboard on a bench and is now the cabinet's own bar bank, which is both the mainframe and the literal subject of the face's 1 × 64 entry. `matrix_lit.jpg` is orphaned by the swap — M9." });
 FACE("viiip.plates", "IMAGE ARCHIVE (MGK-VIIIp) — nine plates, as received.", "LIVE", "REVEALED",
-  { arc: "arrived", note: "M7: three of the nine do not show what their captions say. M25: the tombstone says 'before power' and one plate is captioned as the firmware running." });
+  { note: "[H2 2026-08-06] THE WALL IS EMPTY AND THE WALL IS STILL BUILT — nine plates off under THE PULL-BACK RULE, `archiveEmpty` in their place. M7 and M25 are both moot while nothing is on the wall and both come back with the plates. One of the nine, the power switch round the back, IS delivered by Record 013 and is on that entry." });
 FACE("viiip.manual", "THE MANUAL — the 1965 operating and maintenance manual.", "PARTIAL", "REVEALED",
   { deps: ["doc.manual.plates"],
     note: "[P2] THE FACE HAS NO PICTURE, BY RULING. Its one image was a render of a page reading TEXT NOT SUPPLIED, and Mike ruled that the museum admitting it had not written the manual does not get to wear a fiction as cover: either a plate shows a page actually written, or there is no plate. M45 and M4 both close here — M4 by there being no plate left to be a render. `plates: []` is unchanged and still waits on B8's photographs (P2 in the art register)." });
 FACE("viiip.firmware", "TECHNICAL SPECIFICATIONS (MGK-VIIIp) — the machine's own mind, on file.", "LIVE", "REVEALED",
-  { assets: ["/robots/reference/photos/front_screen.png"], arc: "online",
-    note: "M2: that plate is mirror-reversed, and the whole photograph is flipped." });
-FACE("viiip.portal", "THE PORTAL — the feed-control panel: drum, two bat switches, a rotary dial, a latch.", "LIVE", "REVEALED",
-  { arc: "online", note: "The panel is the immersion's first step; the latch opens the twin." });
+  { arc: "online",
+    note: "[H2 2026-08-06] PULLED BACK — no Record entry delivers this picture, so the face no longer shows one and the file is behind the door under public/held/. M2: that plate is mirror-reversed, and the whole photograph is flipped." });
+/* ═══ [H1 2026-08-06] THE PORTAL IS HELD FROM LAUNCH ════════════════════════
+   MIKE: "THE PORTAL IS HELD FROM LAUNCH but development continues... a held
+   thing must be UNREACHABLE BY A VISITOR and the gate must FAIL if that stops
+   being true. Development access stays — same posture as /hr, reached through
+   admin."
+   THREE ROWS ARE HELD RATHER THAN ONE, because the album, its instrument and
+   its door are three things and only the middle one had a row. Their `where` is
+   `src/data/artists/portal.js` — a module `vite.config.js` parks under
+   `assets/held/` and `src/worker.js` refuses — and the reachability check reads
+   BOTH of those lists back, so this hold cannot be undone by an edit that
+   forgets a ledger row. The `arc` comes off all three: an arc is how the house
+   REVEALS a thing, and nothing here is being revealed today. */
+R("portal.album", "THE PORTAL — the album: the door, the feed controller, and the questions about it.",
+  "surface", "src/data/artists/portal.js", "LIVE", null, "HELD",
+  { deps: ["Mike's ruling on when the Portal opens"],
+    assets: ["/held/robots/art/portal-cover.png", "/held/robots/art/viiip.png"],
+    note: "Held from launch. The album is a dynamic import Robots.jsx asks for only behind the password on /admin; the deck closes up to four albums without it, and the splice index is PORTAL_AT so the position Mike gave it survives the hold." });
+R("portal.door", "THE PORTAL — the first track, and the way in.",
+  "surface", "src/data/artists/portal.js", "LIVE", null, "HELD",
+  { deps: ["Mike's ruling on when the Portal opens"],
+    note: "[H3c] Mike named three tracks and did not say what stands behind the first. A row called PORTAL that opens nothing is a dead control, so it is the door — the portal as it stands, no feed selected. Named as Ops' judgement at OPEN_ACTIONS P-b." });
+FACE("viiip.portal", "THE PORTAL — the feed-control panel: drum, two bat switches, a rotary dial, a latch.", "LIVE", "HELD",
+  { where: "src/data/artists/portal.js",
+    note: "The panel is the immersion's first step; the latch opens the twin. [H1 2026-08-06] HELD — it left robots.js with the album." });
 FACE("viiip.faq", "FAQ — questions about the machine.", "LIVE", "REVEALED");
 
 /* ═════════ 3. THE PORTAL'S OWN CONTROLS — availability that already varies ═
@@ -237,13 +279,13 @@ FACE("viiip.faq", "FAQ — questions about the machine.", "LIVE", "REVEALED");
    written down. Nothing in `src/` says it. */
 for (const n of [1, 2]) {
   R(`portal.feed.niac.${n}`, `FEED · CHANNEL ${n} — MGK-NIAC, engraved on the drum and inert.`,
-    "machine", "src/data/artists/robots.js panel.drum", "NOT_BUILT", null, "HELD",
+    "machine", "src/data/artists/portal.js panel.drum", "NOT_BUILT", null, "HELD",
     { deps: ["a NIAC feed — the mainframe does not run on the Portal yet"], shown: true,
       note: "[R5] Mike's canon is that the mainframe runs on the Portal SOMEDAY. These two channels are that someday, engraved where a visitor reads them and dark — the same instrument M33 describes, pointed at the other machine. They carry the machine's name and NO feed title: naming a state the mainframe has never been in would be inventing the thing the arc is for." });
 }
 R("portal.feed.standard", "FEED · CHANNEL 3 · STANDARD — the unit as it stands, at the opening prompt.",
-  "machine", "src/data/artists/robots.js panel.drum", "LIVE", "roll the drum, throw the latch", "REVEALED",
-  { arc: "online", note: "[R6] The one feed that arms, and it is channel 3." });
+  "machine", "src/data/artists/portal.js panel.drum", "LIVE", null, "HELD",
+  { note: "[R6] The one feed that arms, and it is channel 3. [H1] Held with the album — the drum it is engraved on is behind the door." });
 /* [P5 2026-08-06] THREE ENGRAVINGS CHANGED AND THESE NAMES CHANGE WITH THEM.
    Mike struck "IDLING, UPD", "BOOT PLAYBK" and "OFF · 1ST BOOT" — one of them
    wrapped on the drum and none of the three was in either permitted register
@@ -262,18 +304,18 @@ for (const [slug, ch, label, why] of [
   ["test-bench", 8, "TEST BENCH", "workshop entry; no public feed"],
 ]) {
   R("portal.feed." + slug, `FEED · CHANNEL ${ch} · ${label} — engraved on the drum and inert.`,
-    "machine", "src/data/artists/robots.js panel.drum", "NOT_BUILT", null, "HELD",
+    "machine", "src/data/artists/portal.js panel.drum", "NOT_BUILT", null, "HELD",
     { deps: [why], shown: true,
       note: "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1. [R6] Renumbered; the position, the id and the lever are unchanged. [P5] Re-engraved; the id and the lever are unchanged again." });
 }
 R("portal.switch.maint", "AUTO MAINT — the C1 fortnight as an instrument. Thrown up, the latch goes dark.",
-  "machine", "src/data/artists/robots.js panel.switches", "LIVE", "the panel", "REVEALED");
+  "machine", "src/data/artists/portal.js panel.switches", "LIVE", null, "HELD");
 R("portal.switch.prompt", "AT PROMPT — the entry state as an instrument.",
-  "machine", "src/data/artists/robots.js panel.switches", "LIVE", "the panel", "REVEALED");
+  "machine", "src/data/artists/portal.js panel.switches", "LIVE", null, "HELD");
 R("portal.dial.live", "SOURCE · LIVE — the dial position that arms.",
-  "machine", "src/data/artists/robots.js panel.dial", "LIVE", "the panel", "REVEALED");
+  "machine", "src/data/artists/portal.js panel.dial", "LIVE", null, "HELD");
 R("portal.dial.seeded", "SOURCE · SEEDED — a seeded feed the lamps would read.",
-  "machine", "src/data/artists/robots.js panel.dial", "NOT_BUILT", null, "HELD",
+  "machine", "src/data/artists/portal.js panel.dial", "NOT_BUILT", null, "HELD",
   { deps: ["a seeded feed on file"], shown: true });
 
 /* ═════════ 4. THE TWIN — apps, from the DISPATCHER (Run_EXE), not the CSVs ══
@@ -360,8 +402,8 @@ R("twin.userrecord", "The user record / house register — the privacy doctrine 
   "machine", TWIN, "LIVE", "inside the twin", "REVEALED",
   { deps: ["[PAPA] legends"] });
 R("twin.scaffold", "The honest scaffold screen — says what a row WILL be and admits it is a stub.",
-  "machine", TWIN, "LIVE", "dev only: 'Show stubs' puts the stub rows back", "HELD",
-  { note: "Stub rows are stripped from the menus in the shipped walk, so a visitor never reaches this screen." });
+  "machine", TWIN, "LIVE", null, "HELD",
+  { note: "Stub rows are stripped from the menus in the shipped walk, so a visitor never reaches this screen. [H1 2026-08-06] THE REACH WAS 'dev only: Show stubs puts the stub rows back', WHICH IS NOT A REACH — `reach` is how a VISITOR gets somewhere, and a developer flag is the opposite of one. It was the row's own note wearing the wrong field, and the reachability check is what told the two apart." });
 
 /* ═════════ 7. THE DOCUMENTS ══════════════════════════════════════════════ */
 /* [G1 2026-08-05] NO PAGE COUNT IN THE NAME, AND THE COUNT IN THE NOTE IS READ
@@ -529,8 +571,9 @@ R("phys.time", "Time (the magazine) — the period artifact.",
   "artifact", "the physical world", "NOT_BUILT", null, "HELD",
   { deps: ["a rights check before any scan is published"] });
 R("phys.manual.original", "The original printed manuals — held, not published.",
-  "artifact", "the physical world", "LIVE", "stated in the wing's FAQ; not shown", "HELD",
-  { deps: ["[PAPA] — whether an original is ever published"] });
+  "artifact", "the physical world", "LIVE", null, "HELD",
+  { deps: ["[PAPA] — whether an original is ever published"],
+    note: "[H1 2026-08-06] THE REACH READ 'stated in the wing's FAQ; not shown' AND BEING MENTIONED IS NOT BEING REACHABLE. It is a stack of paper in a room; no visitor is getting to it by any route the museum could write down, and the FAQ saying the museum has it is the museum saying what it holds — which is a holdings fact and ships (Doctrine 11), not a way in." });
 
 /* ═════════ 9. THE EGGS ═══════════════════════════════════════════════════ */
 R("egg.replay", "The sandbox replay — the install, step by step, as an egg-hosting surface.",
@@ -573,10 +616,9 @@ R("egg.laststate", "LAST STATE — resume across visits.", "egg", TWIN, "NOT_BUI
    visitor can see is a numbered drum, and no label anywhere promises a meaning
    behind it. That is the whole difference between an egg and a debt. */
 R("egg.channels", "The Portal's channel numbering — the mainframe on 1 and 2, the portable starting at 3.",
-  "egg", "src/data/artists/robots.js panel.drum", "LIVE",
-  "roll the drum and read the numbers", "REVEALED",
-  { arc: "online",
-    note: "THE EGG, IN FULL, AND IT IS WRITTEN NOWHERE ELSE: a 1970s home device fed a television through an RF modulator and you tuned the SET to channel 3 or 4. The MGK-VIIIp is the portable, the consumer object, the one you take home — so it starts at 3, exactly where a machine like that has always started. And the numbering carries a second thing for free: NIAC holds 1 and 2 because NIAC came first, which is the true development order. Neither fact is stated on any face, in any caption, or in any label; the drum is engraved with numbers and nothing else. Explaining it on the glass would spend it in the same commit that planted it." });
+  "egg", "src/data/artists/portal.js panel.drum", "LIVE",
+  null, "HELD",
+  { note: "[H1 2026-08-06] THE EGG WENT BACK IN THE DRAWER WITH THE DRUM IT IS CUT INTO. It had been SPENT — planted where a visitor rolls a selector and finds numbers — and holding the Portal un-spends it, which is a thing worth noticing about eggs: one planted on a held surface is not planted at all. THE EGG, IN FULL, AND IT IS WRITTEN NOWHERE ELSE: a 1970s home device fed a television through an RF modulator and you tuned the SET to channel 3 or 4. The MGK-VIIIp is the portable, the consumer object, the one you take home — so it starts at 3, exactly where a machine like that has always started. And the numbering carries a second thing for free: NIAC holds 1 and 2 because NIAC came first, which is the true development order. Neither fact is stated on any face, in any caption, or in any label; the drum is engraved with numbers and nothing else. Explaining it on the glass would spend it in the same commit that planted it." });
 
 /* ═══ [R4 2026-08-05] THE ROBOT — CANON, HELD, AND OFF EVERY FRAME ══════════
    MIKE: "NIAC is so complicated THEY NEEDED A ROBOT TO OPERATE IT. The robot —
@@ -590,7 +632,7 @@ R("egg.channels", "The Portal's channel numbering — the mainframe on 1 and 2, 
    the glass; `shown` is FALSE because nothing anywhere hints at it, which is
    the difference between an egg and a promise. */
 R("egg.niac.operator", "The robot that operates the mainframe — the reason NIAC needs one at all.",
-  "egg", "the physical world; plates in weird-baby-robots and public/robots/reference/mgk-viii", "LIVE",
+  "egg", "the physical world; plates in weird-baby-robots and public/held/robots/reference/mgk-viii", "LIVE",
   null, "HELD",
   { deps: ["Mike's ruling on when it is spent"],
     note: "The material is IN HAND and unpublished: seven plates in this repo (head at the lens, head three-quarters, chest and shoulders, lower limbs, unfinished torso, feet on a plinth, a slot mock-up) and three more in the robots repo's culled set (the eye, the shoulder, the hand on the control). All ten are on disk, none is referenced by the site. Spending it is one data block and no code — which is exactly what makes holding it a decision rather than a shortage." });

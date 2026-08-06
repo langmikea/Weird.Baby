@@ -31,6 +31,72 @@ where a rule lives.
 
 ---
 
+### 2026-08-06 -> THE COMBINED BRIEF (D1-D3 - A1-A3 - L1 - F1-F8 - W1-W2 - V1-V2 - C1-C4) - sealed
+- **TWENTY-TWO INSTRUCTIONS. TWENTY-ONE BUILT, ONE ANSWERED AS THE PROPOSAL IT
+  ASKED FOR, AND ONE STRUCK STRING DOES NOT EXIST IN THIS REPOSITORY.** Gates:
+  lint **11/9 = baseline** - build green - provenance **PASS** (0 undeclared - 0
+  stale - 0 invention) - `reveal:check` **PASS** - `parity:gate` **PASS, 4 shared
+  - 0 divergences** - `assets:orphans` **0** - lap **on the built bundle under
+  `wrangler dev`**, eleven routes, **desktop only**. Full narrative:
+  `docs/MUSEUM_COMBINED_BRIEF_LOG-20260806.md`.
+- **A1 DELETED ABOUT FORTY DECLARATIONS AND CHANGED NOTHING A VISITOR READS, AND
+  MIKE'S OWN DIAGNOSIS IS THE FINDING.** The black poster border came from V1's
+  "paper card on a dark stage", which answered a DIFFERENT problem - text
+  unreadable on black - and the wing kept the scaffolding after the cause was
+  gone. **The file records the arc and it ate its own premise:** W6 dropped the
+  house lights, P9 and R0 spent two rounds moving that dark ground a stop at a
+  time because TEXT ON IT GLARED, and V1 answered the glare properly by taking
+  the text off the dark entirely - **at which moment the dark ground had nothing
+  left to do except be the border round the card.** The stage re-pin, M0b's
+  compensating ring, the mat and twelve re-pinned tokens are gone; what replaces
+  them is the three declarations /robots has had since L5, re-scoped from a wing
+  to `[data-flat="1"]`, **which is A2 stated as a selector**. `[data-exhibit=
+  "wal"]` is now four lines in `Exhibit.css` and two of them are comments.
+- **FIVE FOLDED VALUES ALSO FIX /robots, WHICH V1's OWN NOTE PREDICTED AND COULD
+  NOT REACH** - it named the identical literals under the robots sheet and said
+  they were "not this round's to change". Under A2 they are, because a rule
+  scoped to a wing was the only reason there were two of them.
+- **D1-D3 PUT THE ROOM ON ONE SCREEN AND THE MEASUREMENT IS THE ANSWER.** /wb
+  opened at **1229px inside an 810px window**, with a **832px contents column
+  holding six song titles**; it is **810 = the window** now, at **521px**, with
+  the picture's left edge on the divider. The column is MEASURED (`max-content`,
+  read back, restored inside a layout effect) because a row's `offsetWidth` is
+  the width it was GRANTED. **IT REVERSES THIS FILE'S OWN "THE SPLIT IS NOT A FIT
+  LEVER" IN THE OPEN** - the finding under that rule stands and the DIRECTION was
+  what was wrong. Two things the measurement itself caught: **a STOWED document
+  was being fitted like a picture** (harmless at a 300px default, fatal at 200),
+  and **the first cut clipped its own titles**, because only the active album's
+  rows are in the document.
+- **A3's THIRD CLAUSE IS THE DIAGNOSIS:** the covers it replaces are typographic
+  on the museum's paper, and the museum's paper is `--wb-bg`, **which is also the
+  carousel's ground** - so they had nothing to show but a keyline.
+  `tools/make_house_covers.py` **proves** it is the robots geometry by
+  re-rendering that cover and comparing pixel for pixel, and **it FAILED on its
+  first run in the strapline row alone**, because the Foundation's generator had
+  silently tightened the line it had copied. It reverses that generator's stated
+  "one departure" - a house sleeve is supposed to repeat.
+- **THE FOUNDATION IS THREE ALBUMS BY READING ORDER** (F4), F7's three mechanisms
+  are stated where they landed, and **F5's cadence is PROPOSED as the Record's
+  own machinery rather than a track per update** - a menu that grows a row every
+  month stops being a menu. Built and empty; `logEmpty` exists because an empty
+  log rendered nothing at all. **F1's exit is per-wing config and
+  `shopEntryHidden` stands**: hiding a shop door and giving a room no way out are
+  two decisions and only the first had been made.
+- **WHAT DID NOT GO QUIETLY.** V1's second strike is **not in this repository**
+  (M100) - searched whole and by keyword, and the live pages checked; nothing was
+  struck in its place. C3's presets are **proposed and not built**: the whole wing
+  holds one award video and four live ones across four artists (M101). C4's
+  deletion leaves eight authored song paragraphs rendered by nothing (M102). And
+  **F2's "discard, do not port" was read past once, on purpose**: the POSTURE
+  travelled with the ledger object it explains (M98).
+- **AND `assets-declare.mjs` HAD DRIFTED FROM THE FILE IT WRITES** - five rows
+  existed in `assets.json` that the declarer did not know about, and the next
+  `--write` would have deleted all five in silence. Now `OPERATIONS.md` section 8's
+  own hazard row (M99). **THE 390px HALF OF THE LAP DID NOT RUN AGAIN** - M97
+  re-confirmed, said plainly rather than left as a silence.
+
+---
+
 ### 2026-08-05 → THE REMOTE-CONTROL ROUND (P1–P11) — sealed
 - **ELEVEN INSTRUCTIONS DOWN THE WIRE, TEN BUILT, AND THE ONE HANDED BACK IS
   BLOCKED BY HIS OWN RULING FROM THE ROUND BEFORE.** Gates: lint **11/9 =

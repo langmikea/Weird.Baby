@@ -1386,7 +1386,7 @@ function aboutArtistTrack(a) {
     videos: [],
     face: {
       kind: "text",
-      title: "ABOUT THE ARTIST",
+      title: "About the artist",
       subtitle: a.name.toUpperCase(),
       /* [TRAIL-MARKER LAW] the blurb is the ONE thing about this artist worth
          carrying out of the building - not a summary of them. */
@@ -1487,7 +1487,7 @@ function upToTrack(a) {
     videos: [],
     face: {
       kind: "text",
-      title: "WHAT ARE THEY UP TO?",
+      title: "What are they up to?",
       subtitle: a.name.toUpperCase(),
       collage: a.feed.map(f => ({
         img: "https://i.ytimg.com/vi/" + f.id + "/hqdefault.jpg",
@@ -1646,12 +1646,12 @@ const HOUSE_ALBUM = {
          they are, why they are here, and the house accent — is authored, and
          every claim in it is already carried, sourced, on that artist's own
          card. NOT ONE NEW FACT ABOUT ANY OF THEM ENTERS THE BUILDING HERE. */
-      title: "About our current artists",
+      title: "About the Artists",
       tags: ["wal", "house", "about"],
       videos: [],
       face: {
         kind: "text",
-        title: "ABOUT OUR CURRENT ARTISTS",
+        title: "About the Artists",
         subtitle: "WORTH A LISTEN",
         /* [V1 2026-08-06] THE BLURB IS STRUCK, on Mike's ruling. "Four of them.
            Two songs each, all playable. Every one of them is somebody's
@@ -1882,7 +1882,7 @@ const HOUSE_ALBUM = {
       videos: [],
       face: {
         kind: "text",
-        title: "THE DEAL",
+        title: "The deal",
         subtitle: "WORTH A LISTEN",
         /* [F1 2026-08-03] THE HOUSE CARD IS THE HOOK, AND IT IS WORDS IN A
            DIFFERENT FORMAT — which the law explicitly allows: "not necessarily

@@ -70,7 +70,7 @@ function HeldDoor() {
 
   return (
     <div className="adm-section adm-held">
-      <div className="adm-section-title">Hunter Root — held</div>
+      <div className="adm-section-title">The held rooms</div>
       {/* NO COUNT IS TYPED HERE, DELIBERATELY. "nine containers, ninety-three
           track rows" was in the first draft of this paragraph and came out: a
           figure typed onto a page is the defect W1 and D3c both paid for, and
@@ -86,10 +86,27 @@ function HeldDoor() {
         site serving his audio. The address renders the Lobby to anybody who has not opened this
         door, and the exhibit&rsquo;s files are refused at the server, not merely hidden in the page.
       </p>
+      {/* ═══ [H1 2026-08-06] THE DOOR OPENS TWO ROOMS NOW, AND THE SECOND ONE HAS
+          NO ADDRESS OF ITS OWN — which is why it needs a sentence here rather
+          than a button. Mike held the Portal from launch on the same posture as
+          the wing: online for him and for Ops, reached through this page. But
+          the Portal is an ALBUM inside a public wing, so opening this door does
+          not take you anywhere; it makes `/robots` a deck of four instead of
+          three. Without this paragraph the only way to know that is to notice
+          an album appear.
+          THE LOCK IS THE SAME LOCK. One cookie, one worker refusal, two held
+          directories — the wing's built chunks under `/assets/held/` and the
+          Portal's own files under `/held/`. Closing this door closes both. */}
+      <p className="adm-held-note">
+        The Portal is held on the same terms and has no address of its own: it is the second
+        album on <code>/robots</code>, and it is simply not in the deck until this door is open.
+        Its cover, its poster and the twin itself are refused at the server like the wing&rsquo;s.
+      </p>
       {state.open ? (
         <div className="adm-held-row">
           <button className="adm-jump" onClick={() => navigate("/hr")}>/hr</button>
           <button className="adm-jump" onClick={() => navigate("/hr/archive")}>/hr/archive</button>
+          <button className="adm-jump" onClick={() => navigate("/robots")}>/robots</button>
           <button className="adm-held-close" onClick={close}>Close for this tab</button>
         </div>
       ) : (

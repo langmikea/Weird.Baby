@@ -113,7 +113,7 @@ const spine = [
            where he can fill them one at a time. */
         face: {
           kind: "text",
-          title: "ABOUT THE ARTIST",
+          title: "About the artist",
           subtitle: "WEIRD.BABY",
           blurb:
             "The house's own music. What this room holds of the artist is the " +

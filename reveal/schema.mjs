@@ -18,6 +18,8 @@ import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
 import { transferFaults } from "./transfers.mjs";
+import { reachabilityFaults } from "./reachability.mjs";
+import { deliveryFaults } from "./delivery.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
@@ -214,8 +216,12 @@ export function validate(rows) {
       bad(r.id, "RETIRED but still reachable");
     if (r.build === "NOT_BUILT" && r.state === "REVEALED")
       bad(r.id, "NOT_BUILT and REVEALED — a visitor is being shown something that does not exist");
-    if (r.state === "HELD" && r.reach && r.build === "NOT_BUILT")
-      bad(r.id, "HELD + NOT_BUILT cannot have a reach");
+    /* [H1 2026-08-06] THE NARROW VERSION OF THIS RULE IS GONE AND THE GENERAL
+       ONE IS IN reachability.mjs. It used to fault HELD + a reach only when the
+       row was ALSO `NOT_BUILT`, which caught the one case where the row is
+       obviously incoherent and permitted the case that matters: a thing that IS
+       built, IS held, and names how a visitor gets to it. Five rows were sitting
+       in exactly that state the day the check was written. */
 
     for (const f of RECORD_FIELDS)
       if (Object.prototype.hasOwnProperty.call(r, f))
@@ -261,6 +267,19 @@ export function validate(rows) {
      the check, so that both the declaration and `reveal:check` enforce it —
      the one-validator doctrine this file exists for. */
   faults.push(...transferFaults(rows));
+
+  /* [H1 2026-08-06] THE REACHABILITY RULE — a held thing must be unreachable by
+     a visitor, and the tree is asked rather than the row. Called from here for
+     the same reason `transferFaults` is: the declaration and `reveal:check` are
+     the two callers and a rule enforced by one of them is enforced at whichever
+     moment the author happens to run. See reveal/reachability.mjs. */
+  faults.push(...reachabilityFaults(rows));
+
+  /* [H2 2026-08-06] THE PULL-BACK RULE — nothing publishes until the Record
+     delivers it. It takes no rows: it reads the Record and the picture tree,
+     which is the whole point of it, and it is called from here so the one
+     validator really is one. See reveal/delivery.mjs. */
+  faults.push(...deliveryFaults());
 
   return faults;
 }

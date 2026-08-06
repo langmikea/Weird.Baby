@@ -30,6 +30,17 @@
    thing this house has spent five rounds refusing to make. Any surface that
    genuinely wants three states asks `buildOf()` and decides for itself.
    =========================================================================== */
+/* ═══ [H1 2026-08-06] THIS IMPORT IS FOUR FIELDS WIDE, AND IT WAS NOT ══════
+   The paragraph above is right about WORDS and was enforced by the wrong thing.
+   `stateOf()` returning a state stops a PAGE printing a note; it does nothing
+   about the BUNDLE, and this line was shipping all 162 rows — every `name`,
+   `where`, `dep` and `note` — into a chunk every visitor downloads. Measured on
+   the built bundle the day the Portal was held: its engravings, the twin's
+   address 67 times, and both of the eggs whose ONLY written form is that file.
+   `reveal/public-view.mjs` is the strip and `vite.config.js` applies it at
+   `enforce:"pre"`, so what arrives here is `{id, build, state, shown}` and
+   nothing else. Reading any other field off a row will now read `undefined`,
+   which is the correct answer to asking a public module a private question. */
 import LEDGER from "../../reveal/ledger.json";
 
 const BY_ID = new Map((LEDGER.rows || []).map(r => [r.id, r]));

@@ -83,15 +83,6 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
    the composition Mike approved does not move.
    The grayscale filter also goes: this is the machine's own render, and a
    render of a monochrome machine does not need to be told to be monochrome. */
-.vp-face-portal .vp-face-still{height:calc(min(48cqh,210px) * var(--face-zoom));width:auto;
-  max-width:none;max-height:none;   /* [A2] the house rule's second maximum has
-     to be released too, or the height this rule sets is clamped by it. */
-  filter:none;border:1px solid #3b3831;background:#0b0b0a}
-.vp-face-door{display:block;padding:0;border:0;background:transparent;cursor:pointer;
-  transition:box-shadow .18s,filter .18s}
-.vp-face-door:hover .vp-face-still,.vp-face-door:focus-visible .vp-face-still{
-  filter:brightness(1.10);border-color:rgba(232,228,216,.55)}
-.vp-face-door:focus-visible{outline:none}
 
 .vp-face-platecap{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-micro);letter-spacing:.07em;
@@ -145,17 +136,45 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
      TOO BOLD   800 -> 600. Syne at 800 is a display weight and this is a label.
      TOO DARK   `--wb-gold` #211f1c -> `--wb-gold-lo` #57544d, 5.15:1 on the
                 paper — a clear step quieter, and still above AA for body text
-                let alone for 22px uppercase. THE TWO DARK-GROUND FACES OVERRIDE
-                IT ALREADY (`.vp-face-portal`, `.vp-face-panel`), so the Portal
-                and the panel are untouched by the colour change.
+                let alone for 22px uppercase. [H3b 2026-08-06] THIS PARAGRAPH
+                USED TO NAME TWO DARK-GROUND FACES THAT OVERRODE IT — and one of
+                them (`.vp-face-portal`) was already a class nothing carried, and
+                the other (`.vp-face-panel`) took the house frame this round.
+                Every face in the museum reads this colour now.
      TOO TRACKED  .22em -> .15em. Not one of his four words, and it belongs to
                 "eats space": at .22em "TECHNICAL SPECIFICATIONS" sets 5.4px of
                 air between every glyph and the line runs a third wider than the
                 letters in it.
    The padding is a separate rule — see `.vp-face-body` below. */
+/* ═══ [H6 2026-08-06] THE HEADING STOPS SHOUTING ═══════════════════════
+   MIKE: "'ABOUT OUR CURRENT ARTISTS' becomes 'About the Artists' — and sweep for
+   the same shouty-caps pattern elsewhere, consistent with 'What are they up
+   to?'."
+
+   THE SWEEP FOUND THE PATTERN AND IT IS EXACTLY TEN PAIRS, ALL THE SAME SHAPE:
+   a tracklist ROW in sentence case and its own FACE heading holding the
+   identical words SHOUTED — The Record / THE RECORD, Image Archive / IMAGE
+   ARCHIVE, Executive summary / EXECUTIVE SUMMARY, and so on across four wings.
+   C1 (2026-08-06) ruled the ROWS into one case a fortnight ago and the faces
+   were never brought along.
+
+   AND THE DATA WAS ONLY HALF OF IT. `text-transform:uppercase` on this rule
+   meant a title written in sentence case still SET in capitals, so rewriting
+   the strings alone would have changed nothing a visitor sees — which is the
+   Law of the Visible Line's own test applied to an edit rather than to a line.
+   Both halves move together: the literals are written in the case they are
+   meant to be read in, and this stops overriding them.
+
+   `.vp-face-sub` KEEPS ITS UPPERCASE AND THAT IS NOT AN INCONSISTENCY. It is a
+   tracked micro label under the heading — a different object doing a different
+   job, at a size where caps are a label rather than a raised voice. The one
+   thing that was shouting is the 22px heading, which is the one thing he named.
+
+   ONE HEADING IN THE MUSEUM IS STILL IN CAPITALS: the Portal's `PORTAL`, and
+   `FEED CONTROL` on the nameplate beside it, which are lettering ON A MACHINE.
+   That is CONTENT, which A2 says may differ; the chrome that sets it does not. */
 .vp-face-title{font-family:'Syne',sans-serif;font-weight:600;
-  font-size:var(--fs-lead);letter-spacing:.15em;
-  text-transform:uppercase;color:var(--wb-gold-lo)}
+  font-size:var(--fs-lead);letter-spacing:.15em;color:var(--wb-gold-lo)}
 /* [O3a 2026-07-30] THE CONTENT SCALES WITH THE PANEL.
    THE DIAGNOSIS: `.vp-area` is locked to 16:9 by a `padding-top:56.25%`
    spacer, which is derived from WIDTH. Dragging the body taller therefore
@@ -361,7 +380,6 @@ body:has(.vp-face) .vp-area::before{display:none}
                             the section step like the deck and the wall do. */
 .vp-flat > .vp-collage,
 .vp-flat > .vp-reel,
-.vp-flat > .vp-recipes,
 .vp-flat > .vp-face-lines,
 .vp-flat > .vp-face-entries,
 .vp-flat > .vp-rec-jump,
@@ -377,6 +395,7 @@ body:has(.vp-face) .vp-area::before{display:none}
 .vp-flat > .vp-faq,
 .vp-flat > .vp-face-docs,
 .vp-flat > .vp-face-docs-empty,
+.vp-flat > .vp-face-arch-empty,
 .vp-flat > .vp-arch-picks,
 .vp-flat > .vp-trail{margin-top:var(--rh-sect)}
 /* [N9] the groupings and the wall they cut are ONE object, the same way a
@@ -532,96 +551,29 @@ body:has(.vp-face) .vp-area::before{display:none}
   background:var(--wb-ink-card);
   border:1px solid var(--wb-border);
   box-shadow:0 2px 8px rgba(0,0,0,.14)}
-/* ======== O4 2026-07-30: THE PORTAL FACE ==============================
-   IT MUST NOT READ AS PAPER. The manual and the record are documents and they
-   wear the museum's print stock. The Portal is a DOORWAY to a running machine,
-   and Mike's note is the spec: it should feel like a transition point, heading
-   down tunnels and corridors to a completely different thing.
-   So the register changes materially at this one face: the projection-booth
-   ground the twin's own overlay uses, the mono face throughout, and controls
-   that read as channel selections rather than as buttons on a card. The two
-   dark values are the SAME PAIR RobotsExhibitFlow names as the projection
-   booth - they are deliberately not museum tokens, and this is the second
-   place the exception is taken, on purpose and for the same reason. */
-.vp-face-portal{background:#0b0b0a;color:#cfcbc0}
-/* [G1] the portal's grayscale/contrast treatment retired with the placed
-   photo - see THE FROZEN PORTAL IS A SCREEN above. */
-.vp-face-portal .vp-face-title{color:#e8e4d8;letter-spacing:.30em}
-/* [F0 2026-08-03] V1'S CARRY-FORWARD, CLOSED AT THE BASE INSTEAD OF BY REACH.
-   V1 found `.vp-face-sub` at #8a857a — 3.46:1 — and fixed it only inside the
-   WAL card, naming the reason it stopped there: "the same literals sit under
-   /robots' sheet at the same numbers … two of these rules also serve the
-   PORTAL, whose ground is #0b0b0a, where a darkened grey would be the same
-   defect inverted." Confirmed live this round on /robots, The Plates: 3.46:1,
-   still.
-   THE LITERAL WAS A DARK-GROUND VALUE SITTING IN A GROUND-AGNOSTIC RULE, which
-   is why it could not be fixed in place. So the base rule now reads the RAMP —
-   `--wb-gold-mute`, which every dark scope in the building already re-pins for
-   itself (the WAL stage to #b0a68e, the player bar to #8e8e8e) and which the
-   paper rooms get at this round's measured value. One declaration, correct on
-   both kinds of ground, because it stopped naming a colour and started naming a
-   ROLE.
-   THE PORTAL KEEPS #8a857a EXPLICITLY, one rule below. It is the one dark scope
-   that does NOT re-pin the ramp — its palette is a set of literals — so it is
-   the one place the token would resolve to a paper value on a near-black
-   ground. Naming it costs one selector and preserves that face byte-for-byte,
-   which is exactly the inversion V1 refused to risk by reach. */
+/* ═══ [H3b 2026-08-06] `kind:"portal"` IS DECLARED BY NOTHING, AND HAS NOT
+   BEEN FOR A FORTNIGHT — THIRTEEN RULES DELETED ══════════════════════════
+   P2 (2026-08-02) replaced the Portal track's face with the instrument panel
+   and `kind:"panel"` with it. Every `.vp-face-portal` rule below this line has
+   been styling a class no element has carried since — its own dark ground, its
+   title, its sub, its blurb, its lines, its action button's whole non-sticky
+   arrangement, and its `papa` order. They were still being reasoned about: F0
+   spent a paragraph in 2026-08-03 preserving `.vp-face-portal .vp-face-sub` at
+   #8a857a "byte-for-byte" on a face that did not exist, and A1's own note three
+   days ago named the selector as one of two dark-ground faces that "override it
+   already". Dead CSS does not announce itself; it gets cited.
+   THE TWO `:not(.vp-face-portal)` EXCLUSIONS GO WITH IT, further down, which is
+   the half that actually simplifies something: the flat wing's mat rule stops
+   having to name a face kind nobody declares. */
 .vp-face-sub{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-small);letter-spacing:.14em;text-transform:uppercase;
   color:var(--wb-gold-mute);margin-top:-6px}
-.vp-face-portal .vp-face-sub{color:#8a857a}
-.vp-face-portal .vp-face-blurb{color:#b8b3a6;max-width:56ch}
-.vp-face-portal .vp-face-lines{border-top:1px solid #3b3831}
-.vp-face-portal .vp-face-lines li{color:#9b968a}
-/* [O5 2026-07-30] ON THE PORTAL, THE DOOR IS NOT A FOOTER.
-   `.vp-face-action` is sticky-bottom everywhere else, and that is right for a
-   face whose control is a secondary afterthought. Here the control IS the
-   track: sticky put it over the preset rack at every scroll position, and
-   reserving padding only fixed the end of the scroll, not the middle.
-   So on this one face it stops floating and takes its place in the column,
-   directly under the register block and ABOVE the presets - which is also the
-   right reading order: you are told what this is, you are given the door, and
-   THEN you are offered the ways of walking through it. */
-.vp-face-portal .vp-face-action{position:static;margin-top:2px;
-  order:0;align-self:flex-start;
-  background:#cfcbc0;color:#0b0b0a;border:1px solid #cfcbc0;box-shadow:none;
-  font-size:var(--fs-small);padding:9px 18px;letter-spacing:.24em}
-.vp-face-portal .vp-face-action:hover{background:transparent;color:#e8e4d8;
-  border-color:#e8e4d8}
-.vp-face-portal .vp-recipes{order:1}
-.vp-face-portal .vp-face-papa{order:2}
-
-/* [L2 2026-07-31] THE RECIPE SELECTOR. Period-true: a labelled field and one
-   verb, set in the mono register the rest of the instrument panel speaks. The
-   old rack's styles are retired with it — a preset is no longer a button. */
-.vp-recipes{border-top:1px solid #3b3831;padding-top:12px;
-  display:flex;flex-direction:column;gap:8px}
-.vp-recipes-head{font-family:'Courier Prime','Courier New',monospace;
-  font-size:var(--fs-small);letter-spacing:.26em;color:#8a857a}
-.vp-recipe-row{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap}
-.vp-recipe-sel{flex:1 1 22ch;min-width:0;
-  font-family:'Courier Prime','Courier New',monospace;
-  font-size:var(--fs-small);letter-spacing:.10em;text-transform:uppercase;
-  color:#e8e4d8;background:#141312;border:1px solid #57544d;border-radius:0;
-  padding:7px 10px;cursor:pointer;appearance:none;
-  background-image:linear-gradient(45deg,transparent 50%,#8a857a 50%),
-                   linear-gradient(135deg,#8a857a 50%,transparent 50%);
-  background-position:calc(100% - 16px) 55%,calc(100% - 11px) 55%;
-  background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:30px}
-.vp-recipe-sel:focus{outline:none;border-color:#e8e4d8}
-.vp-recipe-sel option{background:#141312;color:#e8e4d8}
-.vp-recipe-sel option:disabled{color:#6b6659}
-.vp-recipe-go{flex:0 0 auto;
-  font-family:'Courier Prime','Courier New',monospace;
-  font-size:var(--fs-small);letter-spacing:.24em;text-transform:uppercase;
-  background:#cfcbc0;color:#0b0b0a;border:1px solid #cfcbc0;padding:7px 20px;
-  cursor:pointer;transition:background .16s,color .16s}
-.vp-recipe-go:hover:not(:disabled){background:transparent;color:#e8e4d8;border-color:#e8e4d8}
-.vp-recipe-go:disabled{opacity:.35;cursor:default}
-/* [R2] reading matter — what the selected recipe does, in a sentence. */
-.vp-recipe-line{font-family:var(--wb-read);font-optical-sizing:auto;
-  font-size:var(--fs-body);line-height:1.55;letter-spacing:.005em;
-  color:#a5a094;max-width:56ch}
+/* [H1 2026-08-06] THE RECIPE SELECTOR'S RULES GO WITH THE SELECTOR. L2's
+   `ARRIVE AS` control read `face.presets`, N9's archive groupings took the same
+   field, and the block was drawing on both Image Archive faces — see the note
+   in Exhibit.jsx where the markup stood. `.vp-recipes`, `.vp-recipes-head`,
+   `.vp-recipe-row`, `.vp-recipe-sel`, `.vp-recipe-go` and `.vp-recipe-line` had
+   exactly one caller between them and it is deleted. */
 
 /* [A1 2026-08-06] TWO DARK-GROUND LITERALS, TAKEN OFF THE HEX AND PUT ON THE
    RAMP. Both were picked while every face in the building stood on charcoal;
@@ -664,11 +616,6 @@ body:has(.vp-face) .vp-area::before{display:none}
   transition:background .2s,color .2s}
 .vp-reel-go:hover,.vp-reel-go:focus-visible{background:transparent;
   color:var(--wb-gold);outline:none}
-@media (max-width:640px){
-  .vp-recipe-row{flex-direction:column}
-  .vp-recipe-go{align-self:flex-start}
-}
-
 /* [S6 2026-07-30] THE LOG'S INDEX — a bound volume's date list, not a pager.
    Ruled rows, stamps in the mono face, and one verb to open the volume. The
    container proposal asked for "a date-index that reads period-true, like a
@@ -844,20 +791,16 @@ body:has(.vp-face) .vp-area::before{display:none}
 .cf-album{position:absolute;width:240px;height:240px;border-radius:2px;overflow:hidden;cursor:pointer;transition:transform .5s cubic-bezier(.25,.46,.45,.94),opacity .5s,box-shadow .5s;transform-style:preserve-3d}
 .cf-album img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
 .cf-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;border:1px solid;gap:12px}
+/* [H2 2026-08-06] the ink is unchanged and the GROUND is what moved — see
+   `placeholderTile` in Exhibit.jsx. `--wb-gold` is #211f1c on the card: 13.9:1.
+   The year drops to `--wb-gold-lo` rather than to an opacity, because an
+   opacity on ink over a gradient is a contrast nobody can state. */
 .cf-ph-title{font-family:'DM Serif Display',Georgia,serif;font-size:1rem;line-height:1.25;color:var(--wb-gold);letter-spacing:.01em}
-.cf-ph-year{font-family:'Courier Prime',monospace;font-size:.65rem;letter-spacing:.18em;color:var(--wb-gold);opacity:.7}
-.cf-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 50%);opacity:0;transition:opacity .3s}
-.cf-active .cf-overlay{opacity:1}
-/* [W6 QA 2026-08-02] THE YEAR HAD NO GROUND TO STAND ON. `.cf-year` is white
-   at 80% laid directly over whatever the cover happens to be, so its contrast
-   is the cover's business rather than the design's - measured at 1.47:1 on
-   /hr and /wb, which is invisible. Fixed by giving it a ground instead of a
-   different colour: a dark shadow under the glyphs works on a pale cover and
-   a light one, and on the covers where it was already legible it changes
-   nothing perceptible. Colour-shifting would have fixed one cover and broken
-   another. */
-.cf-year{position:absolute;bottom:10px;left:12px;font-family:'Courier Prime',monospace;font-size:.65rem;letter-spacing:.12em;color:rgba(255,255,255,.92);opacity:0;transition:opacity .3s;text-shadow:0 1px 2px rgba(0,0,0,.9),0 0 6px rgba(0,0,0,.7)}
-.cf-active .cf-year{opacity:1}
+.cf-ph-year{font-family:'Courier Prime',monospace;font-size:.65rem;letter-spacing:.18em;color:var(--wb-gold-lo)}
+/* [H5 2026-08-06] `.cf-overlay`, `.cf-active .cf-overlay`, `.cf-year` and
+   `.cf-active .cf-year` are deleted — the year overlay on Mike's instruction,
+   and the gradient because it was the year's ground and nothing else. The
+   markup and the reasoning are in Exhibit.jsx where the elements stood. */
 .cf-arrow{position:absolute;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--wb-gold-mute);font-size:2rem;cursor:pointer;padding:12px;transition:color .2s,opacity .2s;z-index:20;line-height:1;font-family:monospace}
 .cf-arrow:hover{color:var(--wb-gold)}
 .cf-l{left:8px}.cf-r{right:8px}
@@ -1654,11 +1597,35 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    steel console is an object floating on it rather than a section of a page.
    That is the same relationship Fork A just gave the portal, one level out:
    a thing on a surface, in both places, deliberately. */
-.vp-face-panel{background:#000}
-.vp-face-panel .vp-face-body{padding:0}
-.vp-face-panel .vp-face-head{padding:clamp(14px,2vw,26px) clamp(14px,2.2vw,30px) 0}
-.vp-face-panel .vp-face-title{color:#d8d3c6;letter-spacing:.30em}
-.vp-face-panel .vp-face-sub{color:#7e7869}
+/* ═══ [H3b 2026-08-06] THE PANEL FLOATS INSIDE ITS WINDOW ═══════════════
+   MIKE: "the instrument panel FLOATS inside its window — not gray edge to edge.
+   Currently it has no elegance or immersion and clashes with the museum page
+   unnecessarily."
+
+   FOUR DECLARATIONS ARE DELETED AND ONE IS ADDED, AND THE DELETIONS ARE THE
+   FIX. The face painted itself `#000`, zeroed its body padding and re-coloured
+   its heading for a dark ground — so the steel ran to all four edges of the
+   pane with a slab of pure black behind the head, hard against the museum's
+   paper. That arrangement was written when the panel was meant to stand on "the
+   same black the portal view stands on" (Fork B), and the portal view it was
+   matching is `kind:"portal"`, which nothing has declared since P2. It was
+   matching a room that is not there.
+
+   SO IT SIMPLY TAKES THE HOUSE FRAME. `[data-flat="1"]` already puts every
+   document face on a mat with a card inside it — the three declarations A2
+   reduced the whole museum to — and the panel was the one face excluded from
+   them by name. Excluded, it had to bring its own everything; included, the
+   instrument is an OBJECT MOUNTED IN A CASE: paper mat, card, and a steel plate
+   floating on the card with its own drop shadow, which is what N2's note said
+   this was supposed to be from the day it was written ("a thing on a surface").
+   It is also A2 stated one more time: the frame is the house's, the content is
+   the wing's, and a face that is a machine is CONTENT.
+
+   THE ONE ADDED DECLARATION IS THE FLOAT ITSELF — the panel is capped and
+   centred so it does not stretch to the card's edges on a wide pane. A panel
+   that fills its container is a background; a panel with air round it is an
+   object somebody mounted. */
+.vp-face-panel .ip{max-width:min(100%,780px);margin:0 auto}
 
 /* [N2 2026-08-02] WINDOW DRESSING: THE PANEL IS AN OBJECT, NOT A DIV.
    It read flat-on-a-webpage because it had exactly two edges (a light hairline
@@ -1730,69 +1697,119 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 .ip-screw-tl{left:11px;top:11px} .ip-screw-tr{right:11px;top:11px}
 .ip-screw-bl{left:11px;bottom:11px} .ip-screw-br{right:11px;bottom:11px}
 
-/* ═══ [P2 2026-08-06] THE MAKER'S PLATE IS A NAMEPLATE ═══════════════════════
-   MIKE: "the placard must LOOK LIKE WHAT IT IS. Right now it is unclear whether
-   it is to be read, understood, changed or scrolled." His reference: a BRIGHT
-   METAL nameplate with BLACK INK laid over it — the ink printing the letters —
-   with a space where a serial number is HAND-STAMPED.
-   WHAT WAS WRONG IS THAT IT WAS THE SAME OBJECT AS EVERYTHING AROUND IT. It
-   was engraved steel: dark ground, light letters, one hairline border — which
-   is exactly how the drum legend, the switch legends and the dial legend are
-   drawn. Six things in the same material and the same value, and the one that
-   is a fixed maker's plate looked like the five that are controls. That is the
-   whole of his "unclear whether it is to be read or changed": nothing said it
-   was a different KIND of thing.
-   SO IT INVERTS. Bright rolled aluminium, dark ink, and it is the only light
-   object on a dark panel — which is what a data plate is on a real machine and
-   is also, usefully, unmistakably not a control.
-   FOUR THINGS, EACH DOING ONE JOB:
-     the metal   a light plate with a cross-brushed grain and a bright top lip,
-                 raised OFF the panel rather than cut into it (the shadow falls
-                 outside now, where before it fell inside)
-     the ink     near-black at the plate's own tracking, with a whisper of
-                 lift on the lower edge of each stroke — printed ON, not cut IN
-     the rivets  one at each end, because a plate is fastened and every real one
-                 shows how
-     the stamp   a debossed field at the right end for the serial: recessed,
-                 with the digits struck slightly off-square and off-baseline,
-                 because a hand-stamp is a hand
-   THE STAMP FIELD HOLDS ITS WIDTH WHETHER OR NOT IT IS FILLED. Today it is
-   empty — nobody has supplied a serial and Ops may not mint one (Doctrine 12)
-   — and an unstamped plate is a thing that exists. The space is the
-   instruction; the number is Mike's. */
-.ip-plate{align-self:flex-start;position:relative;
-  display:flex;align-items:stretch;gap:0;
-  border:1px solid #7e7c71;border-radius:2px;
+/* ═══ [H3a 2026-08-06] THE NAMEPLATE IS A BADGE BOLTED TO A MACHINE ════════
+   MIKE, with UNIVAC references in hand: "a raised chrome bezel; a black field
+   with brushed-metal letterforms sitting PROUD of it; stamped-in-place fields
+   (MODEL NO., SER. NO., DATE) with values struck into a lighter recess; an
+   accent panel beside the wordmark. It must be unmistakably a BADGE bolted to a
+   machine — not a label, not a caption."
+
+   IT REVERSES P2's PLATE, WHICH REVERSED THE ONE BEFORE IT, AND EACH REVERSAL
+   ANSWERED A DIFFERENT COMPLAINT. The first plate was engraved steel and read as
+   a sixth control. P2 inverted it to bright metal with black ink, which is a
+   DATA PLATE and is unmistakably not a control — that complaint is answered and
+   stays answered. What it still was not is a MAKER'S BADGE, and the difference
+   is not colour, it is DEPTH. A data plate is printed: everything on it is at
+   one level. A badge is assembled, and every element on it is at a different
+   one.
+
+   FOUR LEVELS, FROM THE MACHINE OUTWARD, AND EACH IS ONE JOB:
+     the bezel    a formed chrome surround, bright at the top lip and dark at
+                  the bottom, sitting PROUD of the panel and casting onto it —
+                  this is the "bolted to" and it is why the badge has a rim
+                  rather than a border
+     the field    black, and DEEPER than the bezel: an inset shadow all round,
+                  so the eye reads a recess with the letters standing up in it
+     the mark     brushed-metal letterforms in RELIEF. Cut with
+                  `background-clip:text` off a real brushed gradient rather than
+                  a flat silver, with a dark drop under the baseline and a bright
+                  lip over the top of each stroke — which is what makes a cast
+                  letter read as cast and not as light-grey type
+     the data     struck INTO a lighter recess: the field lightens where the
+                  stamps are, and each value is knocked in dark, off-square and
+                  off-baseline by a fraction, because a hand-stamp is a hand
+
+   THE ACCENT PANEL IS THE ONE COLOUR ON THE OBJECT, and it is the wing's own
+   gold rather than a new hue — A2 permits content colour and forbids a wing
+   inventing chrome, and this is a plate on an instrument the museum built.
+
+   THE STAMPED FIELDS HOLD THEIR WIDTH EMPTY. Two of the three carry nothing
+   today and will until Mike supplies them (Doctrine 12, OPEN_ACTIONS P-a); an
+   unstamped field is a thing that exists, and dropping it would quietly turn
+   three fields into one. */
+.ip-np{align-self:flex-start;max-width:100%}
+.ip-np-bezel{position:relative;display:inline-block;padding:4px;
+  border-radius:4px;
   background:
-    linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0) 38%),
-    repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 1px,transparent 1px 3px),
-    repeating-linear-gradient(4deg,rgba(255,255,255,.05) 0 2px,transparent 2px 5px),
-    linear-gradient(168deg,#dcdad0 0%,#bcbab0 52%,#d2d0c6 100%);
+    linear-gradient(157deg,#f4f3ee 0%,#a9a79c 16%,#e8e6de 34%,#7e7c72 52%,
+                    #d8d6cd 70%,#8f8d83 86%,#efeee8 100%);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.85),
-    inset 0 -1px 0 rgba(0,0,0,.30),
-    0 1px 0 rgba(255,255,255,.06),
-    0 3px 6px -2px rgba(0,0,0,.75)}
-/* the two fixings. Small, dark-cored, bright-lipped — the plate is screwed on */
-.ip-plate::before,.ip-plate::after{content:"";position:absolute;top:50%;
-  width:5px;height:5px;margin-top:-2.5px;border-radius:50%;
-  background:radial-gradient(circle at 38% 32%,#f2f0e8,#6d6b62 78%);
-  box-shadow:0 0 0 1px rgba(0,0,0,.35),inset 0 -1px 1px rgba(0,0,0,.4)}
-.ip-plate::before{left:5px} .ip-plate::after{right:5px}
-.ip-plate-ink{padding:6px 18px 6px 17px;font-size:var(--fs-micro);
-  letter-spacing:.22em;color:#191a14;
-  text-shadow:0 1px 0 rgba(255,255,255,.45)}
-/* the struck field: a shallow well in the metal, with the digits knocked in */
-.ip-plate-ser{display:flex;align-items:baseline;gap:7px;
-  margin:4px 15px 4px 0;padding:2px 8px;
-  border-left:1px solid rgba(0,0,0,.28);
-  background:linear-gradient(180deg,rgba(0,0,0,.13),rgba(255,255,255,.16));
-  box-shadow:inset 0 1px 2px rgba(0,0,0,.35),inset 0 -1px 0 rgba(255,255,255,.5)}
-.ip-plate-ser-k{font-size:var(--fs-micro);letter-spacing:.16em;color:#4a4941}
-.ip-plate-ser-v{min-width:7ch;font-size:var(--fs-micro);letter-spacing:.3em;
-  color:#111208;font-weight:700;
-  transform:rotate(-.7deg) translateY(.5px);transform-origin:left center;
-  text-shadow:0 1px 0 rgba(255,255,255,.55)}
+    inset 0 1px 0 rgba(255,255,255,.95),      /* the formed top lip */
+    inset 0 -1px 0 rgba(0,0,0,.55),           /* and the bottom one */
+    0 1px 0 rgba(255,255,255,.10),
+    0 4px 9px -2px rgba(0,0,0,.85),           /* it stands off the panel */
+    0 1px 2px rgba(0,0,0,.6)}
+/* the four fixings. Not decoration: a badge that is bolted shows the bolts, and
+   two would read as a hinge. */
+.ip-np-bezel::before,.ip-np-bezel::after{content:"";position:absolute;
+  top:5px;bottom:5px;width:4px;
+  background:
+    radial-gradient(circle at 50% 5px,#fbfaf6 0 1.6px,rgba(0,0,0,.45) 2.1px,transparent 2.6px),
+    radial-gradient(circle at 50% calc(100% - 5px),#fbfaf6 0 1.6px,rgba(0,0,0,.45) 2.1px,transparent 2.6px);
+  pointer-events:none;z-index:2}
+.ip-np-bezel::before{left:6px} .ip-np-bezel::after{right:6px}
+.ip-np-field{display:flex;align-items:stretch;gap:0;
+  padding:7px 20px;border-radius:2px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0) 30%),
+    linear-gradient(178deg,#151614,#0a0b09 60%,#131412);
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,.95),          /* the field is BELOW the bezel */
+    inset 0 -1px 0 rgba(255,255,255,.07)}
+/* THE WORDMARK, IN RELIEF. `background-clip:text` puts a brushed metal INSIDE
+   the letterforms; the two shadows put them above the field. */
+.ip-np-mark{align-self:center;
+  font-size:calc(var(--fs-small) * 1.06);font-weight:700;letter-spacing:.34em;
+  padding-right:.34em;                        /* the tracking's last gap */
+  background:linear-gradient(172deg,#ffffff 0%,#b9b7ad 22%,#f2f0e9 44%,
+                             #8b897f 63%,#e6e4dc 82%,#a8a69c 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 1px 0 rgba(0,0,0,.95))
+         drop-shadow(0 -1px 0 rgba(255,255,255,.22))}
+/* THE ACCENT PANEL beside it — its own piece of stock, seated in the field. */
+.ip-np-accent{display:flex;align-items:center;margin:-1px 16px -1px 18px;
+  padding:0 13px;border-radius:1px;
+  background:linear-gradient(180deg,#8a6f34,#6a5426 58%,#7d6430);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.30),
+             inset 0 -1px 0 rgba(0,0,0,.55),
+             0 0 0 1px rgba(0,0,0,.55)}
+.ip-np-accent > span{font-size:var(--fs-micro);letter-spacing:.24em;
+  color:#151107;text-shadow:0 1px 0 rgba(255,255,255,.28)}
+/* THE STRUCK DATA. The recess is LIGHTER than the field — Mike's own word —
+   because a stamp displaces metal and the exposed face catches the room. */
+.ip-np-data{display:flex;align-items:stretch;gap:1px}
+.ip-np-cell{display:flex;flex-direction:column;justify-content:center;gap:2px;
+  padding:3px 11px;
+  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.055));
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.75),
+             inset 0 -1px 0 rgba(255,255,255,.16)}
+.ip-np-cell:first-child{border-radius:1px 0 0 1px}
+.ip-np-cell:last-child{border-radius:0 1px 1px 0}
+.ip-np-k{font-size:calc(var(--fs-micro) * .86);letter-spacing:.14em;
+  color:#a8a69b;text-shadow:0 1px 0 rgba(0,0,0,.6)}
+.ip-np-v{min-width:6ch;font-size:var(--fs-micro);letter-spacing:.22em;
+  font-weight:700;color:#e6e4da;
+  /* the hand: off-square and half a pixel off the baseline */
+  transform:rotate(-.8deg) translateY(.5px);transform-origin:left center;
+  text-shadow:0 1px 0 rgba(0,0,0,.85)}
+/* an empty field is a field — it keeps its height with nothing in it, and it
+   does it with a MEASURE rather than with an inserted glyph. The first cut of
+   this rule was `content:"\00a0"` on an `:empty::before`, and writing that
+   escape through a patch script put a LITERAL NUL BYTE in this stylesheet —
+   the defect class P5 found six of in tools/*.mjs, which makes every grep over
+   the file report "binary file matches" and nothing else. A height needs no
+   character in it. */
+.ip-np-v{display:block;min-height:1.15em}
 
 .ip-deck{display:flex;flex-wrap:wrap;gap:clamp(18px,3vw,44px);align-items:flex-start}
 .ip-bay{display:flex;flex-direction:column;gap:9px;min-width:0}
@@ -1942,8 +1959,14 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
   .ip-dial{height:104px}
   .ip-latchbay{padding-top:10px;gap:12px}
   .ip-latch{padding:10px 24px}
-  .ip-plate-ink{padding:4px 13px 4px 12px}
-  .ip-plate-ser{margin:3px 11px 3px 0;padding:2px 6px}
+  /* [H3a 2026-08-06] THE BADGE TIGHTENS AND KEEPS ALL FOUR OF ITS LEVELS. What
+     it does NOT do is drop a stamped field: three fields with nothing in two of
+     them is the plate's own truth, and a plate that sheds fields on a phone is
+     a different plate. It wraps instead. */
+  .ip-np-field{padding:5px 12px;flex-wrap:wrap;gap:6px 0}
+  .ip-np-accent{margin:0 10px 0 12px;padding:0 9px}
+  .ip-np-cell{padding:2px 8px}
+  .ip-np-v{min-width:5ch}
   /* [P4 2026-08-06] THE FIXINGS COME BACK ON A SMALL PANEL, SMALLER. They used
      to be `display:none` here on the reasoning that fixings are the first thing
      a small plate loses — which is true of a plate that is trying to fit, and
@@ -2805,10 +2828,8 @@ button.vp-bill-act:hover,button.vp-bill-act:focus-visible{
    dark stage gone, /wal's card IS this card, by the same three declarations,
    and there is nothing left for a per-wing copy of them to say. */
 .ex-root[data-flat="1"] .vp-area{background:#e7e3d8;border-color:transparent}
-.ex-root[data-flat="1"] .vp-face:not(.vp-face-portal):not(.vp-face-panel){
-  background:#e7e3d8;padding:18px}
-.ex-root[data-flat="1"] .vp-face:not(.vp-face-portal):not(.vp-face-panel)
-  >.vp-face-body{
+.ex-root[data-flat="1"] .vp-face{background:#e7e3d8;padding:18px}
+.ex-root[data-flat="1"] .vp-face>.vp-face-body{
   background:var(--wb-ink-card);
   border:1px solid var(--wb-border);
   box-shadow:0 1px 2px rgba(33,31,28,.10),0 14px 34px rgba(33,31,28,.11)}
@@ -2824,8 +2845,7 @@ button.vp-bill-act:hover,button.vp-bill-act:focus-visible{
    [A2] /wal's own copy of this stand-down, at the same breakpoint and for the
    same stated reason, is deleted with the block it belonged to. */
 @media (max-width:720px){
-  .ex-root[data-flat="1"] .vp-face:not(.vp-face-portal):not(.vp-face-panel){
-    padding:0}
+  .ex-root[data-flat="1"] .vp-face{padding:0}
 }
 
 .stg-page.stg-2col.stg-1up{justify-content:center}
@@ -3610,7 +3630,10 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
 .vp-face-docs .vp-rec-doc-note{max-width:68ch}
 /* an empty shelf, said out loud. Register voice, because it is a holdings
    statement and not reading matter. */
-.vp-face-docs-empty{margin:0;
+/* [H2 2026-08-06] `.vp-face-arch-empty` is the same object one shelf over — an
+   empty PLATE WALL rather than an empty document shelf — so it takes the same
+   rule rather than a second one that would drift from it. */
+.vp-face-docs-empty,.vp-face-arch-empty{margin:0;
   font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-small);line-height:1.55;letter-spacing:.04em;
   color:var(--wb-gold-lo);max-width:62ch;

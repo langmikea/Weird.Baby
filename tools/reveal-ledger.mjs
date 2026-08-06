@@ -20,6 +20,7 @@ import { validate, manualPageRow, PROD, manualPages, manualSourceState, MANUAL_S
 import { entries as recordEntries, prose as recordProse,
          summaries as recordSummaries } from "../reveal/record-entries.mjs";
 import { transferFaults, ASSIGN, EXEMPT, TRANSFERS, CLASSES } from "../reveal/transfers.mjs";
+import { HELD_PREFIXES } from "../reveal/reachability.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
@@ -581,6 +582,12 @@ function check() {
   console.log(`  the ${ROWS.filter(r => /^record\.\d+$/.test(r.id)).length} Record row(s) match the Record's own entries exactly`);
   console.log("  no row holds the Record's words — the ledger is not a second copy of it");
   console.log(`  every Record headline fits ${RECORD_TITLE_MAX} characters and every summary ${RECORD_LINE_MAX} — the index cannot truncate, so it must not overflow`);
+  /* [H1/H2 2026-08-06] A PASS THAT DOES NOT SAY WHAT IT PROVED IS A PASS
+     NOBODY RE-READS. The two rules added this round are both about the tree
+     rather than the table, so they are the two a future session is most likely
+     to assume are still running. */
+  console.log(`  every HELD row is unreachable — no reach, no public file, and the ${HELD_PREFIXES.length} held prefixes are still refused by the worker and routed to it`);
+  console.log("  nothing publishes until the Record delivers it — every picture of the objects is delivered or behind the door, in writing");
   console.log("  the manual-page vessel builds, derives and refuses correctly at all four stages");
   console.log(`  the manual is ${manualPages()} pages, read off ${MANUAL_SRC_DIR} rather than declared`);
   process.exit(0);

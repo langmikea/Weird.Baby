@@ -925,7 +925,7 @@ const spine = [
         videos: [],
         face: {
           kind: "text",
-          title: "EXECUTIVE SUMMARY",
+          title: "Executive summary",
           subtitle: "THE WEIRD.BABY FOUNDATION",
           /* THE CREDO — the charter's own opening sentence and its two short
              ones, carried off the sheet's `.sheet-credo` / `.sheet-words`. */
@@ -941,7 +941,7 @@ const spine = [
         videos: [],
         face: {
           kind: "text",
-          title: "HAPPENING NOW!",
+          title: "Happening now!",
           subtitle: "THE WEIRD.BABY FOUNDATION",
           entriesMode: "log",
           entries: [],
@@ -967,7 +967,7 @@ const spine = [
         videos: [],
         face: {
           kind: "text",
-          title: "MONEY IN, OUT",
+          title: "Money in, out",
           subtitle: "WHAT THE MUSEUM COSTS, AND WHO CARRIED IT",
           ledger: INVOICE,
           posture: POSTURE,
@@ -979,7 +979,7 @@ const spine = [
         videos: [],
         face: {
           kind: "text",
-          title: "WHERE, WHY, ETC.",
+          title: "Where, why, etc.",
           subtitle: "WHAT COMES IN, AND WHAT IS BUILT",
           register: LEDGER,
         },
@@ -995,15 +995,15 @@ const spine = [
     accent: null,
     tracks: [
       { id: "help-a-little", title: "Just help a little", videos: [],
-        face: { kind: "text", title: "JUST HELP A LITTLE",
+        face: { kind: "text", title: "Just help a little",
                 subtitle: "THE WEIRD.BABY FOUNDATION",
                 blurb: NOT_BUILT_YET } },
       { id: "financial-help", title: "Financial help", videos: [],
-        face: { kind: "text", title: "FINANCIAL HELP",
+        face: { kind: "text", title: "Financial help",
                 subtitle: "THE WEIRD.BABY FOUNDATION",
                 blurb: NOT_BUILT_YET } },
       { id: "operational-help", title: "Operational help", videos: [],
-        face: { kind: "text", title: "OPERATIONAL HELP",
+        face: { kind: "text", title: "Operational help",
                 subtitle: "THE WEIRD.BABY FOUNDATION",
                 blurb: NOT_BUILT_YET } },
     ],

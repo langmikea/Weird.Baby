@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { cloudflare } from "@cloudflare/vite-plugin";
 import { stripVaultAudio } from "./src/data/exhibits/vault-audio.js";
+import { publicLedger } from "./reveal/public-view.mjs";
 
 /* [R5 2026-08-06] HUNTER ROOT'S VAULT AUDIO DOES NOT ENTER THE BUNDLE.
    Mike: "we do not have his permission… the vault keeps the material; the site
@@ -21,6 +22,25 @@ const hrVaultAudio = {
   transform(code, id) {
     if (!id.replace(/\\/g, "/").endsWith("/src/data/exhibits/hunter_root.json")) return null;
     return { code: JSON.stringify(stripVaultAudio(JSON.parse(code))), map: null };
+  },
+};
+
+/* [H1 2026-08-06] THE REVEAL LEDGER GOES OUT FOUR FIELDS WIDE.
+   `src/lib/reveal.js` imports the whole of `reveal/ledger.json` for one LIVE /
+   NOT BUILT column, and the whole of it is the museum's private record of what
+   it holds and does not show — including two eggs whose only written form is
+   that file. Measured on the built bundle: the Portal's engravings, the twin's
+   address 67 times, and both eggs, in a chunk every visitor downloads.
+   THE RULE IS NOT HERE. It is `publicLedger` in reveal/public-view.mjs, which
+   `reveal:check` also calls — one rule, two callers, the same arrangement (and
+   the same reason) as `stripVaultAudio` above. `enforce: "pre"` so it sees the
+   raw JSON before vite's own json plugin turns it into a module. */
+const revealPublic = {
+  name: "reveal-ledger-public",
+  enforce: "pre",
+  transform(code, id) {
+    if (!id.replace(/\\/g, "/").endsWith("/reveal/ledger.json")) return null;
+    return { code: JSON.stringify(publicLedger(JSON.parse(code))), map: null };
   },
 };
 
@@ -53,12 +73,19 @@ const hrVaultAudio = {
    the build if any held module lands outside `assets/held/`. A naming rule that
    silently stops matching is the failure mode this whole mechanism was built
    against — R5 shipped 153 mp3 URLs that way. */
+/* [H1 2026-08-06, THE PORTAL HOLD] `portal.js` JOINS THE LIST, AND IT IS THE
+   FIRST ENTRY HERE THAT IS NOT HUNTER ROOT'S. The list stops being "his
+   material" and becomes "the museum's held material", which is what the guard
+   below has always actually enforced. Mike held the Portal from launch: the
+   album is its own module, `Robots.jsx` asks for it only behind the password,
+   and this parks the chunk where `src/worker.js` refuses it. */
 const HELD_PATHS = [
   "/src/routes/hr/",
   "/src/data/artists/hunter-root",
   "/src/data/exhibits/hunter-root-served.js",
   "/src/data/exhibits/hunter_root.json",
   "/src/data/hr_journal_prompts.js",
+  "/src/data/artists/portal.js",
 ];
 const HELD_COMPANIONS = [
   "/src/lib/use-overlay.js",
@@ -105,7 +132,7 @@ export default defineConfig({
   define: {
     __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
   },
-  plugins: [hrVaultAudio, heldChunkGuard, react(), cloudflare()],
+  plugins: [hrVaultAudio, revealPublic, heldChunkGuard, react(), cloudflare()],
   build: {
     rollupOptions: {
       output: {

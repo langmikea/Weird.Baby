@@ -199,8 +199,41 @@ const out = {
   entries,
 };
 
+/* ═══ [H2 2026-08-06] M99 IS A MECHANISM NOW, AND IT WAS FIVE ROWS AND IS
+   FORTY-FIVE ══════════════════════════════════════════════════════════
+   A3 (2026-08-06) found five rows in `assets.json` that this file's array did
+   not know about, and that the next `--write` would delete all five in silence.
+   It was recorded as a HAZARD in OPERATIONS §8 and left as one — "nothing runs
+   the diff that finds it; it is ten lines".
+   THE HAZARD GREW. This round moved 28 pictures behind the door and declared
+   them in the JSON directly, and the drift is now FORTY-FIVE rows: every artist
+   cover, every Foundation sleeve, the house mark and every held plate. A
+   `--write` today would have deleted almost the whole asset register.
+   SO THE DIFF IS RUN HERE, BY THE THING THAT WOULD DO THE DAMAGE, AND IT
+   REFUSES. That is the fix, and it is the difference between a note a future
+   session might read and a script that cannot do what the note warns about.
+   Repairing the DRIFT — folding those 45 declarations back into the array, or
+   retiring this generator in favour of the JSON — is a decision about which of
+   the two is the source, and that is Mike's: OPEN_ACTIONS H-b. */
 if (process.argv.includes("--write")) {
-  fs.writeFileSync(path.join(REPO, "provenance", "assets.json"), JSON.stringify(out, null, 1) + "\n");
+  const at = path.join(REPO, "provenance", "assets.json");
+  if (fs.existsSync(at)) {
+    const live = JSON.parse(fs.readFileSync(at, "utf8")).entries || {};
+    const declared = new Set(Object.values(entries).map((e) => e.ref));
+    const lost = Object.values(live).map((e) => e.ref).filter((r) => !declared.has(r));
+    if (lost.length) {
+      console.error(
+        "\nREFUSED — writing would delete " + lost.length + " declaration(s) that exist" + 
+        "\nin provenance/assets.json and are NOT in this file's array. That is M99, and" + 
+        "\nit is what this guard exists for: the declarer has drifted from the file it" + 
+        "\nwrites, so a --write is a silent deletion rather than a regeneration.\n\n" +
+        lost.map((r) => "  " + r).join("\n") +
+        "\n\nEither add them to A above, or decide assets.json is the source and retire" + 
+        "\nthis generator. See OPEN_ACTIONS H-b.");
+      process.exit(1);
+    }
+  }
+  fs.writeFileSync(at, JSON.stringify(out, null, 1) + "\n");
   console.log("wrote provenance/assets.json");
 }
 const withText = A.filter((a) => a[3]).length;

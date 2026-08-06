@@ -32,9 +32,23 @@
    (3) `run_worker_first` IN wrangler.jsonc IS LOAD-BEARING. Workers Assets
        serves a matching static file BEFORE invoking this worker. Without
        `"/assets/held/*"` in that list the gate is never asked and the chunk is
-       public. If that line goes, this file stops working silently. */
+       public. If that line goes, this file stops working silently.
+
+   ═══ [H1 2026-08-06, THE PORTAL HOLD] THERE ARE TWO HELD DIRECTORIES NOW ═════
+   Mike held the Portal from launch, and holding it needed something the Hunter
+   Root wing did not: `/assets/held/` catches BUILT chunks, and the Portal's
+   material is not all built — the twin is a 620 KB hand-written HTML file and
+   the album's cover and poster are PNGs, all of them served straight off the
+   asset store at addresses a visitor can type. A code-only door leaves the
+   pictures on the street.
+   SO `/held/` IS THE SECOND DOOR AND IT IS THE PUBLIC TREE'S OWN: anything
+   under `public/held/` ships to the same directory and is refused by the same
+   cookie. Both prefixes must be in `run_worker_first` or the worker is never
+   asked; `reveal:check`'s reachability pass reads THIS LIST and that one and
+   faults if either loses an entry, which is the only reason the arrangement
+   cannot rot silently. */
 const HELD_COOKIE = "wb_held";
-const HELD_DIR = "/assets/held/";
+export const HELD_DIRS = ["/assets/held/", "/held/"];
 const HELD_MAX_AGE = 60 * 60 * 24 * 30;
 /* ONE PASSAGE, ONE DECLARATION (Doctrine 17), applied to this round's own new
    code. The admin page carried an identical copy of this sentence for its
@@ -87,7 +101,7 @@ export default {
        branch can accidentally fall through to ASSETS with the wing in it.
        A refusal is a plain 404, not a 403: a 403 confirms there is something
        there to be forbidden. */
-    if (url.pathname.startsWith(HELD_DIR)) {
+    if (HELD_DIRS.some(d => url.pathname.startsWith(d))) {
       if (!await heldOpen(request, env)) {
         return new Response("Not found", { status: 404 });
       }

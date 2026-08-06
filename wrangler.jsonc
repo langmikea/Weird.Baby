@@ -30,7 +30,14 @@
     // not any more. Verified on `wrangler dev` against the built bundle: all
     // four endpoints answer as JSON, the held chunk 404s without the cookie
     // and 200s with it.
-    "run_worker_first": ["/api/*", "/assets/held/*"]
+    //
+    // [H1 2026-08-06, THE PORTAL HOLD] `/held/*` IS THE SECOND DOOR. Holding
+    // the Portal needed a prefix for held FILES as well as held CHUNKS — the
+    // twin is a hand-written HTML page and the album's cover and poster are
+    // PNGs, none of them built by vite and all of them typeable addresses.
+    // Anything under `public/held/` ships there. Both entries are read back by
+    // `reveal:check`'s reachability pass, which faults if either goes.
+    "run_worker_first": ["/api/*", "/assets/held/*", "/held/*"]
   },
   "compatibility_flags": [
     "nodejs_compat"

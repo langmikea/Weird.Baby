@@ -20,6 +20,19 @@ Weird.Baby Museum — a Vite + React + React Router site, deployed via Cloudflar
 
 The "exhibit" surface (album coverflow + tracklist + video player + filter deck) lives at `/hr`.
 
+**[H1 2026-08-06, THE PORTAL HOLD] AND THE PORTAL IS HELD ON THE SAME DOOR.**
+Mike held it from launch. It is an ALBUM inside a public wing, so it has no
+address of its own: `src/data/artists/portal.js` is a module nothing public
+imports, `Robots.jsx` asks for it with a dynamic `import()` only when the flag is
+set, and `/robots` is a deck of three until the door is open and four after.
+**THERE ARE TWO HELD PREFIXES NOW** — `/assets/held/` for built chunks and
+`/held/` for the public tree (`public/held/`), because the twin is a
+hand-written HTML page and the covers are PNGs that vite never touches. Both are
+in `src/worker.js` and both in `wrangler.jsonc`'s `run_worker_first`, and
+`reveal/reachability.mjs` reads both files back — **it fails the gate if either
+loses an entry.** Read the **A HELD THING MUST BE UNREACHABLE** row in
+`docs/canonical/OPERATIONS.md` §5 before touching any of it.
+
 **[H1 2026-08-06] `/hr` IS NOT PUBLIC AND YOU CANNOT JUST OPEN IT.** Mike ruled the
 Hunter Root wing HELD: online for him and for Ops, behind a password on `/admin`,
 enforced by `src/worker.js` refusing `/assets/held/*` without a cookie. Typing
@@ -442,73 +455,82 @@ catches invented CONTENT, Doctrine 11 catches a line whose SUBJECT is the work.
 
 Maintained here. Newest first.
 
-### 2026-08-06 -> THE COMBINED BRIEF (D1-D3 - A1-A3 - L1 - F1-F8 - W1-W2 - V1-V2 - C1-C4) - sealed
-- **TWENTY-TWO INSTRUCTIONS. TWENTY-ONE BUILT, ONE ANSWERED AS THE PROPOSAL IT
-  ASKED FOR, AND ONE STRUCK STRING DOES NOT EXIST IN THIS REPOSITORY.** Gates:
-  lint **11/9 = baseline** - build green - provenance **PASS** (0 undeclared - 0
-  stale - 0 invention) - `reveal:check` **PASS** - `parity:gate` **PASS, 4 shared
-  - 0 divergences** - `assets:orphans` **0** - lap **on the built bundle under
-  `wrangler dev`**, eleven routes, **desktop only**. Full narrative:
-  `docs/MUSEUM_COMBINED_BRIEF_LOG-20260806.md`.
-- **A1 DELETED ABOUT FORTY DECLARATIONS AND CHANGED NOTHING A VISITOR READS, AND
-  MIKE'S OWN DIAGNOSIS IS THE FINDING.** The black poster border came from V1's
-  "paper card on a dark stage", which answered a DIFFERENT problem - text
-  unreadable on black - and the wing kept the scaffolding after the cause was
-  gone. **The file records the arc and it ate its own premise:** W6 dropped the
-  house lights, P9 and R0 spent two rounds moving that dark ground a stop at a
-  time because TEXT ON IT GLARED, and V1 answered the glare properly by taking
-  the text off the dark entirely - **at which moment the dark ground had nothing
-  left to do except be the border round the card.** The stage re-pin, M0b's
-  compensating ring, the mat and twelve re-pinned tokens are gone; what replaces
-  them is the three declarations /robots has had since L5, re-scoped from a wing
-  to `[data-flat="1"]`, **which is A2 stated as a selector**. `[data-exhibit=
-  "wal"]` is now four lines in `Exhibit.css` and two of them are comments.
-- **FIVE FOLDED VALUES ALSO FIX /robots, WHICH V1's OWN NOTE PREDICTED AND COULD
-  NOT REACH** - it named the identical literals under the robots sheet and said
-  they were "not this round's to change". Under A2 they are, because a rule
-  scoped to a wing was the only reason there were two of them.
-- **D1-D3 PUT THE ROOM ON ONE SCREEN AND THE MEASUREMENT IS THE ANSWER.** /wb
-  opened at **1229px inside an 810px window**, with a **832px contents column
-  holding six song titles**; it is **810 = the window** now, at **521px**, with
-  the picture's left edge on the divider. The column is MEASURED (`max-content`,
-  read back, restored inside a layout effect) because a row's `offsetWidth` is
-  the width it was GRANTED. **IT REVERSES THIS FILE'S OWN "THE SPLIT IS NOT A FIT
-  LEVER" IN THE OPEN** - the finding under that rule stands and the DIRECTION was
-  what was wrong. Two things the measurement itself caught: **a STOWED document
-  was being fitted like a picture** (harmless at a 300px default, fatal at 200),
-  and **the first cut clipped its own titles**, because only the active album's
-  rows are in the document.
-- **A3's THIRD CLAUSE IS THE DIAGNOSIS:** the covers it replaces are typographic
-  on the museum's paper, and the museum's paper is `--wb-bg`, **which is also the
-  carousel's ground** - so they had nothing to show but a keyline.
-  `tools/make_house_covers.py` **proves** it is the robots geometry by
-  re-rendering that cover and comparing pixel for pixel, and **it FAILED on its
-  first run in the strapline row alone**, because the Foundation's generator had
-  silently tightened the line it had copied. It reverses that generator's stated
-  "one departure" - a house sleeve is supposed to repeat.
-- **THE FOUNDATION IS THREE ALBUMS BY READING ORDER** (F4), F7's three mechanisms
-  are stated where they landed, and **F5's cadence is PROPOSED as the Record's
-  own machinery rather than a track per update** - a menu that grows a row every
-  month stops being a menu. Built and empty; `logEmpty` exists because an empty
-  log rendered nothing at all. **F1's exit is per-wing config and
-  `shopEntryHidden` stands**: hiding a shop door and giving a room no way out are
-  two decisions and only the first had been made.
-- **WHAT DID NOT GO QUIETLY.** V1's second strike is **not in this repository**
-  (M100) - searched whole and by keyword, and the live pages checked; nothing was
-  struck in its place. C3's presets are **proposed and not built**: the whole wing
-  holds one award video and four live ones across four artists (M101). C4's
-  deletion leaves eight authored song paragraphs rendered by nothing (M102). And
-  **F2's "discard, do not port" was read past once, on purpose**: the POSTURE
-  travelled with the ledger object it explains (M98).
-- **AND `assets-declare.mjs` HAD DRIFTED FROM THE FILE IT WRITES** - five rows
-  existed in `assets.json` that the declarer did not know about, and the next
-  `--write` would have deleted all five in silence. Now `OPERATIONS.md` section 8's
-  own hazard row (M99). **THE 390px HALF OF THE LAP DID NOT RUN AGAIN** - M97
-  re-confirmed, said plainly rather than left as a silence.
+### 2026-08-06 -> THE PORTAL HOLD + THE PULL-BACK (H1-H8) - sealed
+- **EIGHT INSTRUCTIONS, ALL EIGHT BUILT, AND THE LARGEST FINDING IS A CONSEQUENCE
+  OF TRYING TO PROVE THE FIRST ONE.** Gates: lint **11/9 = baseline** - build
+  green - provenance **PASS** (0 undeclared - 0 stale - 0 invention) -
+  `reveal:check` **PASS** - `parity:gate` **PASS, 4 shared - 0 divergences** -
+  `assets:orphans` **0** - lap on the built bundle under `wrangler dev`,
+  **desktop only**. Full narrative: `docs/MUSEUM_PORTAL_HOLD_LOG-20260806.md`.
+- **H1 ASKED FOR A GATE THAT FAILS WHEN A HELD THING BECOMES REACHABLE. BUILDING
+  IT MEANT READING THE BUILT BUNDLE, WHICH WAS SHIPPING THE WHOLE REVEAL
+  LEDGER** - 162 rows, every `name`, `where`, `dep` and `note`, out of one JSON
+  import in `src/lib/reveal.js` that exists to draw a single LIVE / NOT BUILT
+  column. **That is the file where this house writes down what it holds and does
+  not show**, and it included both eggs whose ONLY written form is that table.
+  64 KB in a chunk every visitor downloads. **Its own header says in capitals
+  that the ledger returns STATE and never WORDS - and the enforcement was the
+  FUNCTION SIGNATURE. A bundle does not ship signatures; it ships the file.**
+  `reveal/public-view.mjs` is a four-field allowlist at `enforce:"pre"`; shared
+  chunk **184.57 KB -> 120.84 KB**.
+- **THE CHECK FOUND SEVEN THINGS THAT WERE ALREADY UNTRUE**, which is the answer
+  to whether it was worth building: `route.hr` and `route.hr.archive` still
+  saying *"by URL only"* a round after the password went on; `route.admin`
+  saying HELD **and** how to reach it in one row (it is REVEALED with
+  `shown:false` now - **P-c**); `twin.scaffold` wearing a developer flag in the
+  `reach` field; `phys.manual.original` treating BEING MENTIONED as reachable.
+  **Nine deliberate breaches, nine caught**, every specimen on a copy.
+- **H2 IS ONE SENTENCE WITH ONE WRITTEN EXCEPTION AND NO FALL-THROUGH.** *A
+  picture of the objects does not appear until a Record entry delivers it.*
+  **26 pictures went dark and one stayed** - the power switch, on the entry that
+  delivers it - and **the FILES MOVED under `public/held/`**, because taking a
+  picture off a page does not take it off the server. The archives stay built:
+  `ArchiveWall` returned `null` on an empty wall, so the shelf VANISHED rather
+  than emptying, which is the defect `logEmpty` was built for one round earlier.
+- **THE COVERLESS-SLEEVE PLACEHOLDER HAD NEVER ONCE BEEN ON SCREEN.** Every album
+  carried art, so `placeholderTile()` was correct in 2026-06 and untested since:
+  ground `#0c0c0c`, title `--wb-gold` = `#211f1c`. **Two black rectangles**, and
+  **only the lap could have found it** - the A1 shape exactly.
+- **THIRTEEN `.vp-face-portal` RULES WERE STYLING A CLASS NO ELEMENT HAS CARRIED
+  SINCE P2**, and were still being cited: F0 spent a paragraph preserving one of
+  them "byte-for-byte" on a face that did not exist. **Dead CSS does not announce
+  itself; it gets cited.** H3b's panel float is four DELETED declarations - the
+  panel takes the house frame every document face already has.
+- **`face.presets` IS READ BY TWO LIVE RENDERERS** - L2's `ARRIVE AS` selector
+  and N9's archive groupings, same field name, different objects - so each Image
+  Archive face was drawing a dropdown of photograph groupings wired to open the
+  twin, and its still was a portal door. Nothing declared it and neither round
+  knew. Deleted.
+- **AND C32's CONTENT-MOVE CARRY HAD NEVER ONCE FIRED**: `tools/asset-table.mjs`
+  keyed its pool `repo`+NUL+`sha` and read it back with a SPACE, eighteen lines
+  apart. **Invisible because its failure mode is the one it was built to fix** -
+  a moved file reads as a lost judgement. 26 judged rows moved this round and
+  every one came up missing, which is what made it big enough to look at.
+- **H6's DATA WAS HALF OF IT**: ten pairs, all one shape (a row in sentence case,
+  its face heading holding the same words shouted), and `.vp-face-title` carried
+  `text-transform:uppercase` - so rewriting the strings alone would have changed
+  nothing a visitor sees. Both halves moved together. **H5's year overlay was
+  printing on two covers in the whole public museum**, and `.cf-overlay` went
+  with it because it was the year's ground.
+- **H7:** `npm run contact-sheet` -> `docs/CONTACT_SHEET.html`. 257 images, both
+  repos, 85.6 MB of source in 906 KB of one file, 0 carrying a verdict.
+- **M99 IS A MECHANISM INSTEAD OF A NOTE** and the drift is **45 rows**;
+  `assets-declare.mjs --write` refuses and names what it would delete (H-b).
+  **THE NUL-BYTE CLASS CAUGHT A SEVENTH AND AN EIGHTH**, both in this round's own
+  patches. **THE 390px HALF OF THE LAP DID NOT RUN FOR THE THIRD ROUND RUNNING**
+  - `window.innerWidth` reads 1228 and will not go below it (**M97**).
 
 ### Older entries (2026-05-06 → 2026-08-06) — archived
 Moved to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md`, verbatim, under this file's
-own ≈600-line rule. **2026-08-06 (THE COMBINED BRIEF):** TWO AT ONCE — MIKE'S
+own ≈600-line rule. **2026-08-06 (THE PORTAL HOLD):** THE COMBINED BRIEF
+(D1–D3 · A1–A3 · L1 · F1–F8 · W1–W2 · V1–V2 · C1–C4), moved whole. What is still
+load-bearing in it is NOT in the archive: **A1's one-frame ruling and A2's
+one-permitted-difference are `OPERATIONS.md` §5's THE HOUSE'S ONE FRAME row**,
+and this round extended that row's own scope by deleting the last per-face
+exception under it; D1–D3's opening sizes are the §5 THE ROOM'S OPENING SIZES
+row; A3's house sleeves are `tools/make_house_covers.py` and its `--verify`;
+F1–F8's Foundation albums are the §5 row of that name; **and its `assets-declare`
+hazard (M99) is no longer a hazard but a refusal — see §8**. **2026-08-06 (THE COMBINED BRIEF):** TWO AT ONCE — MIKE'S
 PAGE-BY-PAGE (L1 · R1–R7 · P1–P6 · N1–N11 · X1) and THE PRE-COMMENTARY ROUND
 (H1–H8). The file was at 610 before this round's entry and would have finished at
 637 with one moved; two brings it to 594. What is still load-bearing in the

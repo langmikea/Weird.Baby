@@ -54,11 +54,26 @@ const TYPE_META = {
    ground is near-black, and the ramp's photo-black end would tint nothing.
    Alpha is expressed with `color-mix` because a `var()` cannot take a hex alpha
    suffix — the old `${accent}33` only ever worked on a literal. */
+/* ═══ [H2 2026-08-06] THE COVERLESS SLEEVE, AND THE LAP IS WHAT FOUND IT ═══
+   This function had never once been on screen: every album in the museum
+   carried art, so the carousel's placeholder was code that had been correct in
+   2026-06 and untested since. THE PULL-BACK put two albums on it in one round
+   and the built bundle showed two BLACK RECTANGLES — the ground is `#0c0c0c →
+   #050505` and `.cf-ph-title` is `--wb-gold`, which was a pale gold when this
+   was written and has been `#211f1c` since the house lights went up. Near-black
+   ink on a near-black tile. The album's name was there and unreadable.
+   It is the A1 shape exactly: a dark-ground component left standing after the
+   ground stopped being dark, invisible because nothing exercised it.
+   SO IT IS A SLEEVE WITH NO ART ON IT, in the museum's own card and ink — which
+   is what the object is. `accent` still tints the keyline where an album
+   declares one; where none does, the border is the house hairline. Nothing on
+   it says "no cover": the absence of a picture is the statement (Doctrine 16),
+   and the title and year are the two things a sleeve carries anyway. */
 function placeholderTile(accent) {
-  const a = accent || "var(--wb-gold-mute)";
+  const a = accent || "var(--wb-border)";
   return {
-    background: `linear-gradient(135deg, color-mix(in srgb, ${a} 20%, transparent) 0%, #0c0c0c 60%, #050505 100%)`,
-    borderColor: `color-mix(in srgb, ${a} 33%, transparent)`,
+    background: `linear-gradient(150deg, var(--wb-ink-card) 0%, color-mix(in srgb, ${a} 12%, var(--wb-ink-card)) 100%)`,
+    borderColor: `color-mix(in srgb, ${a} 62%, transparent)`,
   };
 }
 function normalizeType(t) { return (t==="hr_cover"||t==="fan_cover") ? "cover" : t; }
@@ -104,8 +119,12 @@ function scrubFace(face) {
      prints, and "comment-shaped" is not a property the renderer can see. */
   /* [F5 2026-08-06] `logEmpty` joins them for the same reason `docsEmpty` did:
      it is a printed sentence, and a marker written into one must take it. */
+  /* [H2 2026-08-06] `archiveEmpty` joins them, third of the same kind. The
+     pull-back left two plate walls with nothing on them and `ArchiveWall`
+     returned null — the wall vanished rather than saying it was empty, which is
+     the same defect `logEmpty` was built for one round earlier. */
   ["title", "subtitle", "blurb", "footer", "papa", "docsEmpty",
-   "logEmpty"].forEach(k => {
+   "logEmpty", "archiveEmpty"].forEach(k => {
     const v = visitorProse(face[k]);
     if (kept(v)) out[k] = v; else delete out[k];
   });
@@ -806,9 +825,32 @@ function Coverflow({ spine, active, cfH, onSelect, onSelectClick }) {
             }}
             onClick={()=>{ if(!did){ isActive ? onSelectClick(i) : onSelect(i); } }}
           >
+            {/* ═══ [H5 2026-08-06] THE YEAR OVERLAY IS STRUCK, AND THE GRADIENT
+                UNDER IT GOES WITH IT ═══════════════════════════════════
+                MIKE, naming the cover he was looking at: "the VIIIp album art —
+                strip the YEAR overlay. It is an overlay, so it comes off without
+                touching the art beneath." It was: the art carries no lettering
+                but its own, and 1965 was `.cf-year`, drawn in white over the
+                bottom-left corner of whatever the active cover happens to be.
+                IT WAS PRINTING ON TWO COVERS IN THE WHOLE PUBLIC MUSEUM. Every
+                /wal and /foundation album declares `year: null`, three of four
+                robots albums do, and /hr is held — so this element existed to put
+                a number on the VIIIp's sleeve and on Weird.Baby Vol. 1's, and
+                nowhere else. It was also the only chrome in the building that
+                laid type over an artist's artwork.
+                THE GRADIENT GOES BECAUSE IT WAS THE YEAR'S GROUND. `.cf-overlay`
+                is an empty div whose whole job was to darken the foot of the
+                active cover so the year had something to sit on — W6/QA's own
+                note records the fix being a text-shadow rather than that
+                gradient, which left it doing nothing but shading. Deleting the
+                thing and keeping what compensated for it is A1's exact mistake,
+                one round old.
+                WHAT IT COSTS, NAMED: an album's year is no longer printed on the
+                carousel. It is still declared, still a fact of the record, and
+                still printed by the PLACEHOLDER cover for an album with no art —
+                which is where it informs rather than defaces, because there is no
+                picture to lay it over. */}
             <AlbumCover album={a} />
-            <div className="cf-overlay" />
-            <div className="cf-year">{a.year}</div>
           </div>
         );
       })}
@@ -1230,6 +1272,10 @@ function InstrumentPanel({ decl }) {
     if (ro) { ro.observe(el.parentElement); ro.observe(el); }
     return () => { if (ro) ro.disconnect(); };
   }, []);
+  /* [H3a] the nameplate's declaration, read once. A panel that declares none
+     draws none — the badge is an object the face asks for, not furniture. */
+  const NP = D.nameplate || null;
+  const npFields = Array.isArray(NP && NP.fields) ? NP.fields : [];
   const drumPos = Array.isArray(D.drum && D.drum.positions) ? D.drum.positions : [];
   const dialPos = Array.isArray(D.dial && D.dial.positions) ? D.dial.positions : [];
   const swDecl  = Array.isArray(D.switches) ? D.switches : [];
@@ -1328,24 +1374,50 @@ function InstrumentPanel({ decl }) {
       <i className="ip-screw ip-screw-tr" aria-hidden="true" style={{ "--turn": "-42deg" }} />
       <i className="ip-screw ip-screw-bl" aria-hidden="true" style={{ "--turn": "71deg" }} />
       <i className="ip-screw ip-screw-br" aria-hidden="true" style={{ "--turn": "-7deg" }} />
-      {/* [P2 2026-08-06] THE PLATE IS A NAMEPLATE, AND IT HAS TWO REGIONS —
-          the INK (what the maker printed, the same for every unit off the line)
-          and the STAMP (what a hand knocked in afterwards, unique to this one).
-          They are two elements because they are two processes; the stylesheet
-          draws the second as a shallow struck well in the metal.
-          THE STAMP FIELD RENDERS WHENEVER IT IS DECLARED, FILLED OR NOT. A
-          nameplate with an empty serial box is an unstamped plate; a nameplate
-          with no box at all is a different plate. Ops does not put a number in
-          it (Doctrine 12) and does not quietly drop the field either. */}
-      {(D.plate || D.serialLabel) && (
-        <div className="ip-plate">
-          {D.plate && <span className="ip-plate-ink">{D.plate}</span>}
-          {D.serialLabel && (
-            <span className="ip-plate-ser">
-              <span className="ip-plate-ser-k">{D.serialLabel}</span>
-              <span className="ip-plate-ser-v">{D.serial || ""}</span>
-            </span>
-          )}
+      {/* ═══ [H3a 2026-08-06] THE NAMEPLATE — A BADGE BOLTED TO A MACHINE ══════
+          MIKE, with UNIVAC references in hand: "a raised chrome bezel; a black
+          field with brushed-metal letterforms sitting PROUD of it;
+          stamped-in-place fields (MODEL NO., SER. NO., DATE) with values struck
+          into a lighter recess; an accent panel beside the wordmark. It must be
+          unmistakably a BADGE bolted to a machine — not a label, not a caption."
+
+          FOUR REGIONS, AND EACH ONE IS A DIFFERENT MANUFACTURING PROCESS. That
+          is the whole reason this is four elements rather than a styled string:
+          the bezel is FORMED, the wordmark is CAST AND RAISED, the accent panel
+          is a separate piece of stock, and the data is STRUCK. P2's plate had
+          two of the four and drew the maker's line as printed ink, which is a
+          data plate — right for a data plate and wrong for the badge that says
+          whose machine this is.
+
+          THE FIELDS RENDER WHETHER OR NOT THEY CARRY A VALUE, which is P2's own
+          rule kept and widened to three. An unstamped field is what an unstamped
+          plate looks like; a missing field is a different plate. Ops does not
+          strike a serial or a date into one (Doctrine 12).
+
+          THE OLD `plate` / `serialLabel` / `serial` SHAPE IS GONE, not deprecated
+          — one face in the museum declares a panel and it is this one, so a
+          compatibility branch would be a second code path with no second
+          caller. */}
+      {NP && (
+        <div className="ip-np">
+          <div className="ip-np-bezel">
+            <div className="ip-np-field">
+              {NP.maker && <span className="ip-np-mark">{NP.maker}</span>}
+              {NP.unit && (
+                <span className="ip-np-accent"><span>{NP.unit}</span></span>
+              )}
+              {npFields.length > 0 && (
+                <span className="ip-np-data">
+                  {npFields.map((f, i) => (
+                    <span className="ip-np-cell" key={f.k || i}>
+                      <span className="ip-np-k">{f.k}</span>
+                      <span className="ip-np-v">{f.v || ""}</span>
+                    </span>
+                  ))}
+                </span>
+              )}
+            </div>
+          </div>
         </div>
       )}
 
@@ -1450,9 +1522,16 @@ function InstrumentPanel({ decl }) {
         <button className="ip-latch" disabled={!armed}
                 onClick={() => {
                   if (!armed) return;
+                  /* [H1 2026-08-06] THE DOOR'S ADDRESS RIDES THE EVENT. The
+                     latch used to dispatch a preset id and nothing else, and
+                     the listener supplied the address from a literal in a
+                     public file. A held thing's address may not live there, so
+                     the panel that IS held carries it and the engine still
+                     learns nothing about what opens. */
+                  const L = D.latch || {};
                   window.dispatchEvent(new CustomEvent(
-                    (D.latch && D.latch.event) || "wb-robots-open-twin",
-                    { detail: { preset: drum.id } }
+                    L.event || "wb-robots-open-twin",
+                    { detail: { preset: drum.id, src: L.src, frameTitle: L.frameTitle } }
                   ));
                 }}>
           <span className="ip-latch-face">{(D.latch && D.latch.label) || "LATCH"}</span>
@@ -2257,7 +2336,19 @@ function ArchiveWall({ face, openLink }) {
     return <ArchivePresets face={face} openLink={openLink} />;
   }
   const { spreads, wall } = archiveSpreads(face);
-  if (!wall.length) return null;
+  /* ═══ [H2 2026-08-06] AN EMPTY WALL SAYS SO ══════════════════════════════
+     Returning null was right while every archive had photographs on it: a face
+     that declares no wall should draw no wall. Under THE PULL-BACK RULE two
+     walls went empty in one round, and a shelf that disappears when it empties
+     tells a visitor the room has one fewer thing in it rather than that this
+     thing is waiting. Same shape and same reasoning as `docsEmpty` (N3) and
+     `logEmpty` (F5); a face declaring neither tiles nor `archiveEmpty` still
+     renders exactly nothing. */
+  if (!wall.length) {
+    return face?.archiveEmpty
+      ? <p className="vp-face-arch-empty">{face.archiveEmpty}</p>
+      : null;
+  }
   const unit = face?.archiveUnit || ARCHIVE_UNIT;
   return spreads.map((sp, si) => {
     /* [N2 2026-08-04] THE NEWEST SPREAD IS OPEN PAPER; EVERYTHING OLDER IS
@@ -2512,8 +2603,6 @@ export default function Exhibit({ artist, open = null }) {
      and it is short: an unread marker that forgets overnight is not one. */
   const recordReadKey = readKeyFor(artist.exhibitSlug || artist.id);
   const [readRecords, setReadRecords] = useState(() => readSet(recordReadKey));
-  /* [L2] which recipe is selected; index, reset when the track changes. */
-  const [recipeIdx, setRecipeIdx] = useState(0);
   const bodyResizable = !!artist.bodyKey;
   const mainRef = useRef(null);
 
@@ -2938,7 +3027,6 @@ export default function Exhibit({ artist, open = null }) {
          one of them. stopPlayback() remains the one definition of stopping
          (M-e), invoked only by controls that mean it. */
       setOpenEntry(null);         /* [M5] a new track opens on its index */
-      setRecipeIdx(0);            /* [L2] and its selector at the top entry */
       /* [F6 2026-08-02] ON A PHONE, THE TAP MUST VISIBLY DO SOMETHING.
          At narrow widths the columns stack and the viewer sits BELOW the
          tracklist — selecting a card changed a region the visitor could not
@@ -2989,7 +3077,6 @@ export default function Exhibit({ artist, open = null }) {
     if (somethingPlaying && !alreadySelected) {
       setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));
       setOpenEntry(null);         /* [M5] a newly armed track opens on its index */
-      setRecipeIdx(0);            /* [L2] and its selector at the top entry */
       return;
     }
     setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));
@@ -3155,6 +3242,37 @@ export default function Exhibit({ artist, open = null }) {
   const activeTrack = albumActiveTrack[activeDisplay] ?? null;
   const selVis      = albumSelectedVis[activeDisplay] ?? {};
 
+  /* ═══ [H4 2026-08-06] THE SELECTED TRACK IS HIGHLIGHTED ON ENTRY ════════════
+     MIKE: "the selected track is highlighted on entry — everywhere, every wing."
+
+     THE ROOM HAS ALWAYS OPENED ON A TRACK AND HAS NEVER SAID WHICH. `activeTrack`
+     is null until somebody clicks, while the viewer beside it is already drawing
+     something — the first playable song's poster, or, failing that, the album's
+     first face. So a visitor arrives looking at one track's content next to a
+     tracklist with nothing marked in it, and the row that is on screen is
+     indistinguishable from the eleven that are not.
+
+     IT IS DERIVED, NOT SET, AND THAT IS THE WHOLE OF THE CARE HERE. Writing a
+     default INTO `albumActiveTrack` would mean the room had made a selection the
+     visitor did not, and every downstream reader — `thumbTrack`, `rawSelFace`,
+     the flat wing's `face` gate — would change what it draws. This changes what
+     the tracklist DRAWS and nothing else: state stays null until a click, and the
+     highlight simply falls where the viewer already is.
+
+     THE FALLBACK CHAIN IS THE VIEWER'S OWN, READ OFF IT RATHER THAN GUESSED. A
+     playable track wins over a face on BOTH kinds of wing — staged wings gate
+     `showFace` on `!thumbVid`, flat wings gate `face` on the same thing — so the
+     two branches collapse into one rule: the first track with a video, and
+     failing that the first track with a face. An album with neither highlights
+     nothing, which is correct: nothing is on screen. */
+  const entryTrack = useMemo(() => {
+    const t = album.tracks || [];
+    const vid = t.findIndex(x => x.videos && x.videos.length > 0);
+    if (vid >= 0) return vid;
+    const fac = t.findIndex(x => x.face);
+    return fac >= 0 ? fac : null;
+  }, [album]);
+
   const playingThisAlbum = playingAlbum === activeDisplay;
   const curVideo = playingAlbum !== null && playingTrack !== null && playingVideo !== null
     ? SPINE[playingAlbum].tracks[playingTrack].videos[playingVideo]
@@ -3285,19 +3403,6 @@ export default function Exhibit({ artist, open = null }) {
      land on the song's poster and never hit this branch. */
   const face = flatFaces ? (selFace ?? (!thumbVid ? fallbackFace : null)) : fallbackFace;
   const showFace = flatFaces ? !!face : (!hasVideo && !thumbVid && !!fallbackFace);
-
-  /* [G1 2026-07-31] ONE DOOR, TWO HANDLES. The frozen face IS the standard
-     view, so clicking the picture and pressing ENTER must go to the same
-     place with the same recipe — one function, not two copies that can
-     drift. Held recipes open nothing from either handle. */
-  function enterRecipe() {
-    const p = face?.presets?.[recipeIdx];
-    if (face?.presets && (!p || p.state === "held")) return;
-    window.dispatchEvent(new CustomEvent(
-      face?.action ? face.action.event : "wb-robots-open-twin",
-      { detail: { album: album.id, preset: p ? p.id : null, day: p ? p.day : undefined } }
-    ));
-  }
 
   // ── Drag handles ──────────────────────────────────────────────────────────
   /* [V2a 2026-08-03] THE WIDTH DRAG CARRIES THE HEIGHT WITH IT.
@@ -3551,7 +3656,7 @@ export default function Exhibit({ artist, open = null }) {
               <TrackList
                 album={album}
                 playingTrackIdx={playingAlbum === activeDisplay ? playingTrack : null}
-                activeTrack={activeTrack}
+                activeTrack={activeTrack ?? entryTrack}
                 selectedVis={selVis}
                 onSelect={ti => handleTrackSelect(activeDisplay, ti)}
                 onTagClick={(ti, vi) => handleTagClick(activeDisplay, ti, vi)}
@@ -3768,20 +3873,14 @@ export default function Exhibit({ artist, open = null }) {
                               better home than an unused branch in this file. */}
                           {face.still && (
                             <figure className="vp-face-plate">
-                              {face.presets ? (
-                                /* [G1] the frozen portal is still the door. The
-                                   live face was clickable through a transparent
-                                   hit layer, because an iframe swallows clicks;
-                                   a still does not, so the picture can simply BE
-                                   the button and the hit layer retires with the
-                                   iframe. Same destination as ENTER. */
-                                <button className="vp-face-door" onClick={enterRecipe}
-                                        aria-label="Open the portal">
-                                  <img className="vp-face-still" src={face.still} alt="" />
-                                </button>
-                              ) : (
-                                <img className="vp-face-still" src={face.still} alt="" />
-                              )}
+                              {/* [H1 2026-08-06] THE DOOR BRANCH IS GONE WITH
+                                  `enterRecipe`. It read `face.presets`, which
+                                  N9 re-used for the archive's groupings, so
+                                  after that round it meant "an Image Archive
+                                  face's still is a portal door" — which is not
+                                  a thing anybody wrote. See the note where the
+                                  ARRIVE AS block stood. */}
+                              <img className="vp-face-still" src={face.still} alt="" />
                               {face.stillCaption && (
                                 <figcaption className="vp-face-platecap">{face.stillCaption}</figcaption>
                               )}
@@ -4884,49 +4983,32 @@ export default function Exhibit({ artist, open = null }) {
                         {face.footer && flatFaces && (
                           <div className="vp-face-footer">{face.footer}</div>
                         )}
-                        {/* [O4 2026-07-30] THE PORTAL'S OWN FURNITURE.
-                            Presets and cross-references are DATA and stay
-                            data: the engine dispatches an id and a track name
-                            and learns nothing about twins or machines. A face
-                            without them renders exactly as before. */}
-                        {/* [L2 2026-07-31] A SELECTOR, NOT A BUTTON SEA.
-                            Four doors side by side made the visitor compare
-                            before entering. A named selector asks one
-                            question — how do you want to arrive — and the
-                            answer is one line of type in the machine's own
-                            register. Entries marked `held` render disabled
-                            with their reason visible, because a menu that
-                            hides what it is not offering is lying about the
-                            size of the room. */}
-                        {Array.isArray(face.presets) && face.presets.length > 0 && (
-                          <div className="vp-recipes">
-                            <label className="vp-recipes-head" htmlFor="vp-recipe-sel">
-                              {face.presetsLabel || "ARRIVE AS"}
-                            </label>
-                            <div className="vp-recipe-row">
-                              <select
-                                id="vp-recipe-sel"
-                                className="vp-recipe-sel"
-                                value={recipeIdx}
-                                onChange={e => setRecipeIdx(Number(e.target.value))}
-                              >
-                                {face.presets.map((p, i) => (
-                                  <option key={i} value={i} disabled={p.state === "held"}>
-                                    {p.label}{p.state === "held" && p.why ? `  — ${p.why}` : ""}
-                                  </option>
-                                ))}
-                              </select>
-                              <button
-                                className="vp-recipe-go"
-                                disabled={face.presets[recipeIdx]?.state === "held"}
-                                onClick={enterRecipe}
-                              >ENTER</button>
-                            </div>
-                            {face.presets[recipeIdx]?.line && (
-                              <div className="vp-recipe-line">{face.presets[recipeIdx].line}</div>
-                            )}
-                          </div>
-                        )}
+                        {/* ═══ [H1 2026-08-06] THE "ARRIVE AS" SELECTOR IS
+                            DELETED, AND IT WAS DRAWING ON A PAGE NOBODY MEANT
+                            IT TO ═════════════════════════════════════════════
+                            L2 (2026-07-31) built a selector for the Portal's
+                            arrival recipes and read them off `face.presets`.
+                            N9 (2026-08-06) built the Image Archive's groupings
+                            and took the SAME FIELD NAME on a different object.
+                            Both renderers were live and both were unconditional,
+                            so each of the two archive faces was drawing its
+                            grouping strip AND, below the wall, a control reading
+                            `ARRIVE AS · The whole cabinet [ENTER]` — a dropdown
+                            of photograph groupings wired to open the twin with
+                            `preset: "whole"`. Nothing in the tree declared it
+                            and nothing in either round's notes knew about it.
+                            THE RECIPES HAVE HAD NO DECLARING FACE SINCE P2
+                            replaced the Portal's face with the instrument panel,
+                            so this is not a choice between two owners of a
+                            field: one of them has been carrying nothing for a
+                            fortnight. It goes, with `recipeIdx`, `enterRecipe`
+                            and the `.vp-face-door` branch that read the same
+                            field to turn a still into a portal door. The
+                            groupings keep the name because they are the only
+                            thing using it.
+                            A FACE THAT WANTS A DOOR DECLARES `action`, which is
+                            rendered below and is what the Portal's own first
+                            track uses. */}
                         {/* [L3 2026-07-31] THE SEE-ALSO RENDERER WENT WITH ITS DATA.
                             F2 removed the Portal's cross-references; no face
                             declares `links` now, so the code that drew them
@@ -4953,12 +5035,20 @@ export default function Exhibit({ artist, open = null }) {
                             href now rides the detail; listeners that ignore
                             it (robots' twin-opener) see one extra field and
                             no change. */}
-                        {face.action && !face.presets && (
+                        {/* [H1 2026-08-06] `!face.presets` IS GONE WITH THE
+                            RECIPE SELECTOR — see the note where that block
+                            stood. `src`/`frameTitle` ride the detail for the
+                            same reason the latch's do: a held door declares its
+                            own address and this file learns nothing. */}
+                        {face.action && (
                           <button
                             className="vp-face-action"
                             onClick={() => window.dispatchEvent(
-                              new CustomEvent(face.action.event,
-                                { detail: { album: album.id, href: face.action.href } })
+                              new CustomEvent(face.action.event, { detail: {
+                                album: album.id, href: face.action.href,
+                                src: face.action.src,
+                                frameTitle: face.action.frameTitle,
+                              } })
                             )}
                           >{face.action.label}</button>
                         )}

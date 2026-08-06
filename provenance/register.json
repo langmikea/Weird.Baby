@@ -116,14 +116,6 @@
    "p": "hunterRoot.shopExitParam",
    "c": "HOUSE"
   },
-  "8d49dfdc7f22acf9": {
-   "f": "src/data/artists/robots.js",
-   "l": 215,
-   "t": "The units, as they came to us.",
-   "p": "WBR_TRACKS[].face.stillCaption",
-   "c": "VERIFIED",
-   "s": "the museum's own photograph of its own units, public/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png — the caption states what the plate shows"
-  },
   "05868f8002ee1c1a": {
    "f": "src/data/artists/robots.js",
    "l": 222,
@@ -144,16 +136,7 @@
    "t": "FAQ",
    "p": "spine[].tracks[].face.title",
    "c": "RESTATED",
-   "r": [
-    "23c7dca6e93292f9"
-   ]
-  },
-  "ac88e5f9ff5252b9": {
-   "f": "src/data/artists/robots.js",
-   "l": 269,
-   "t": "FREQUENTLY ASKED",
-   "p": "WBR_TRACKS[].face.title",
-   "c": "HOUSE"
+   "r": "10648bfbff65354d"
   },
   "77e2ff02a0d15e7d": {
    "f": "src/data/artists/robots.js",
@@ -161,9 +144,7 @@
    "t": "Does it still work?",
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
-   "r": [
-    "23c7dca6e93292f9"
-   ]
+   "r": "10648bfbff65354d"
   },
   "697785b65bf2c564": {
    "f": "src/data/artists/robots.js",
@@ -171,9 +152,7 @@
    "t": "Can I buy one?",
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
-   "r": [
-    "23c7dca6e93292f9"
-   ]
+   "r": "10648bfbff65354d"
   },
   "3d8a11ce895f705f": {
    "f": "src/data/artists/robots.js",
@@ -208,14 +187,6 @@
    "p": "spine[].tracks[].face.entriesMode",
    "c": "HOUSE"
   },
-  "d0920baff2e34f7a": {
-   "f": "src/data/artists/robots.js",
-   "l": 575,
-   "t": "MAR 2021",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
   "23fd272433b3427e": {
    "f": "src/data/artists/robots.js",
    "l": 773,
@@ -223,160 +194,13 @@
    "p": "spine[].tracks[].face.subtitle",
    "c": "HOUSE"
   },
-  "511539bd34abed18": {
-   "f": "src/data/artists/robots.js",
-   "l": 743,
-   "t": "MGK-VIIIp −02 “The Informer”, front and top, as received.",
-   "p": "spine[].viewerPosterCaption",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "4cd3bc51dcab8a81": {
-   "f": "src/data/artists/robots.js",
-   "l": 791,
-   "t": "The pair, front and top, as received",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "40559651162956cd": {
-   "f": "src/data/artists/robots.js",
-   "l": 791,
-   "t": "FAMILY SHOT",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "2dc5d44b5984ecea": {
-   "f": "src/data/artists/robots.js",
-   "l": 794,
-   "t": "The front, whole",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "d6a0a1937375c3b5": {
-   "f": "src/data/artists/robots.js",
-   "l": 794,
-   "t": "FRONT",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "c640a473cd18da85": {
-   "f": "src/data/artists/robots.js",
-   "l": 797,
-   "t": "The front glass, lit",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "de48ba46a6682386": {
-   "f": "src/data/artists/robots.js",
-   "l": 797,
-   "t": "SCREEN",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "08d22aa1d90dd42e": {
-   "f": "src/data/artists/robots.js",
-   "l": 800,
-   "t": "The bezel around the glass",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "4333c6dc703c9ac4": {
-   "f": "src/data/artists/robots.js",
-   "l": 800,
-   "t": "BEZEL",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "4df914f5042d7d50": {
-   "f": "src/data/artists/robots.js",
-   "l": 803,
-   "t": "The top monitor",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "0b2fff14a6726c57": {
-   "f": "src/data/artists/robots.js",
-   "l": 803,
-   "t": "TOP",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "aab2ee9eb94c32d3": {
-   "f": "src/data/artists/robots.js",
-   "l": 806,
-   "t": "The base it stands on",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "208d25e81a64a25f": {
-   "f": "src/data/artists/robots.js",
-   "l": 806,
-   "t": "BASE",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "b2390afe30723854": {
-   "f": "src/data/artists/robots.js",
-   "l": 809,
-   "t": "The unit on its new base",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "2f73148fe1d82ab3": {
-   "f": "src/data/artists/robots.js",
-   "l": 809,
-   "t": "BASE, NEW",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "b2a5d959014467a6": {
-   "f": "src/data/artists/robots.js",
-   "l": 812,
-   "t": "The power switch, round the back",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "fd63bc1ae1d364db": {
-   "f": "src/data/artists/robots.js",
-   "l": 812,
-   "t": "REAR",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "d5b8ba90d7a64c01": {
-   "f": "src/data/artists/robots.js",
-   "l": 816,
-   "t": "COVER",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
   "13ef6b3bd5b13101": {
    "f": "src/data/artists/robots.js",
    "l": 825,
    "t": "The Record",
    "p": "spine[].tracks[].title",
    "c": "RESTATED",
-   "r": [
-    "23fd272433b3427e",
-    "511539bd34abed18"
-   ]
+   "r": "23fd272433b3427e"
   },
   "5470eb87a7f130f6": {
    "f": "src/data/artists/robots.js",
@@ -384,16 +208,6 @@
    "t": "log",
    "p": "spine[].tracks[].face.entriesMode",
    "c": "HOUSE"
-  },
-  "7d7907f4662e24c1": {
-   "f": "src/data/artists/robots.js",
-   "l": 838,
-   "t": "THE RECORD",
-   "p": "spine[].tracks[].face.title",
-   "c": "RESTATED",
-   "r": [
-    "dd510c70d0c4960e"
-   ]
   },
   "087c2b7d72cae40b": {
    "f": "src/data/artists/robots.js",
@@ -518,27 +332,6 @@
    "p": "spine[].tracks[].face.subtitle",
    "c": "HOUSE"
   },
-  "b65d04f94f792c09": {
-   "f": "src/data/artists/robots.js",
-   "l": 1111,
-   "t": "The front glass, lit — the firmware, running.",
-   "p": "spine[].tracks[].face.stillCaption",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "bd1bca554c854aaa": {
-   "f": "src/data/artists/robots.js",
-   "l": 1113,
-   "t": "Everything the unit knows how to do is in here — not a description of the machine's behaviour but the behaviour itself, in the form the machine reads it. The twin in the Portal track is a transliteration of the first tree, bugs preserved and badged.",
-   "p": "spine[].tracks[].face.blurb",
-   "c": "RESTATED",
-   "r": [
-    "b65d04f94f792c09",
-    "1704f42e3c6387a8",
-    "5380a42f65fa1a0e",
-    "bc88cf64c7fc1a6c"
-   ]
-  },
   "2c3a36e58df2627d": {
    "f": "src/data/artists/robots.js",
    "l": 1118,
@@ -546,7 +339,6 @@
    "p": "spine[].tracks[].face.lines[]",
    "c": "RESTATED",
    "r": [
-    "b65d04f94f792c09",
     "1704f42e3c6387a8",
     "5380a42f65fa1a0e",
     "bc88cf64c7fc1a6c"
@@ -575,7 +367,6 @@
    "p": "spine[].tracks[].face.lines[]",
    "c": "RESTATED",
    "r": [
-    "b65d04f94f792c09",
     "1704f42e3c6387a8",
     "5380a42f65fa1a0e",
     "bc88cf64c7fc1a6c"
@@ -595,7 +386,6 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "b65d04f94f792c09",
     "1704f42e3c6387a8",
     "5380a42f65fa1a0e",
     "bc88cf64c7fc1a6c"
@@ -608,7 +398,6 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "b65d04f94f792c09",
     "1704f42e3c6387a8",
     "5380a42f65fa1a0e",
     "bc88cf64c7fc1a6c"
@@ -629,7 +418,6 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "b65d04f94f792c09",
     "1704f42e3c6387a8",
     "5380a42f65fa1a0e",
     "bc88cf64c7fc1a6c"
@@ -642,186 +430,10 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "b65d04f94f792c09",
     "1704f42e3c6387a8",
     "5380a42f65fa1a0e",
     "bc88cf64c7fc1a6c"
    ]
-  },
-  "c888df3f9b547447": {
-   "f": "src/data/artists/robots.js",
-   "l": 1146,
-   "t": "The Portal",
-   "p": "spine[].tracks[].title",
-   "c": "RESTATED",
-   "r": [
-    "23fd272433b3427e",
-    "511539bd34abed18"
-   ]
-  },
-  "72a32c7086eb3ec2": {
-   "f": "src/data/artists/robots.js",
-   "l": 1206,
-   "t": "FEED",
-   "p": "spine[].tracks[].face.panel.drum.label",
-   "c": "HOUSE"
-  },
-  "c3be78e4fd550974": {
-   "f": "src/data/artists/robots.js",
-   "l": 1211,
-   "t": "STANDARD",
-   "p": "spine[].tracks[].face.panel.drum.positions[].label",
-   "c": "HOUSE"
-  },
-  "ad90046c9f6b129c": {
-   "f": "src/data/artists/robots.js",
-   "l": 1231,
-   "t": "This feed is not available.",
-   "p": "spine[].tracks[].face.panel.drum.positions[].why",
-   "c": "RESTATED",
-   "r": [
-    "7970b638f52bff8f",
-    "59088dcaf31bb9b5"
-   ]
-  },
-  "a164c4948b598cae": {
-   "f": "src/data/artists/robots.js",
-   "l": 1228,
-   "t": "LAST STATE",
-   "p": "spine[].tracks[].face.panel.drum.positions[].label",
-   "c": "HOUSE"
-  },
-  "ab0c8f3cc2a8d7cb": {
-   "f": "src/data/artists/robots.js",
-   "l": 1230,
-   "t": "TEST BENCH",
-   "p": "spine[].tracks[].face.panel.drum.positions[].label",
-   "c": "HOUSE"
-  },
-  "1bb64b378fa29cac": {
-   "f": "src/data/artists/robots.js",
-   "l": 1239,
-   "t": "AUTO MAINT",
-   "p": "spine[].tracks[].face.panel.switches[].label",
-   "c": "HOUSE"
-  },
-  "837ed1a8f39e4c16": {
-   "f": "src/data/artists/robots.js",
-   "l": 1239,
-   "t": "NON-INTERRUPTIBLE",
-   "p": "spine[].tracks[].face.panel.switches[].sub",
-   "c": "HOUSE"
-  },
-  "b0c946089a6d95f7": {
-   "f": "src/data/artists/robots.js",
-   "l": 1241,
-   "t": "Maintenance is running. The machine will not be hurried.",
-   "p": "spine[].tracks[].face.panel.switches[].held",
-   "c": "RESTATED",
-   "r": [
-    "7970b638f52bff8f",
-    "59088dcaf31bb9b5"
-   ]
-  },
-  "4b7a0b1e078bb575": {
-   "f": "src/data/artists/robots.js",
-   "l": 1242,
-   "t": "amber",
-   "p": "spine[].tracks[].face.panel.switches[].lamp",
-   "c": "HOUSE"
-  },
-  "4599e9321b84fcdc": {
-   "f": "src/data/artists/robots.js",
-   "l": 1244,
-   "t": "AT PROMPT",
-   "p": "spine[].tracks[].face.panel.switches[].label",
-   "c": "HOUSE"
-  },
-  "7f69029a20a034fe": {
-   "f": "src/data/artists/robots.js",
-   "l": 1244,
-   "t": "BOOTS + UPDATES DONE",
-   "p": "spine[].tracks[].face.panel.switches[].sub",
-   "c": "HOUSE"
-  },
-  "c3df144a4060b054": {
-   "f": "src/data/artists/robots.js",
-   "l": 1246,
-   "t": "The unit is not at its prompt.",
-   "p": "spine[].tracks[].face.panel.switches[].held",
-   "c": "RESTATED",
-   "r": [
-    "7970b638f52bff8f",
-    "59088dcaf31bb9b5"
-   ]
-  },
-  "9b6b0171f1eba55c": {
-   "f": "src/data/artists/robots.js",
-   "l": 1247,
-   "t": "warm",
-   "p": "spine[].tracks[].face.panel.switches[].lamp",
-   "c": "HOUSE"
-  },
-  "eedea944570f095e": {
-   "f": "src/data/artists/robots.js",
-   "l": 1250,
-   "t": "SOURCE",
-   "p": "spine[].tracks[].face.panel.dial.label",
-   "c": "HOUSE"
-  },
-  "bfddfc881ff6d483": {
-   "f": "src/data/artists/robots.js",
-   "l": 1252,
-   "t": "LIVE",
-   "p": "spine[].tracks[].face.panel.dial.positions[].label",
-   "c": "HOUSE"
-  },
-  "48b4e33137b0d8ea": {
-   "f": "src/data/artists/robots.js",
-   "l": 1253,
-   "t": "SEEDED",
-   "p": "spine[].tracks[].face.panel.dial.positions[].label",
-   "c": "HOUSE"
-  },
-  "8d43d7a28642bc09": {
-   "f": "src/data/artists/robots.js",
-   "l": 1254,
-   "t": "no seeded feed on file — the lamps read the seed, and there is nothing to read",
-   "p": "spine[].tracks[].face.panel.dial.positions[].why",
-   "c": "RESTATED",
-   "r": [
-    "7970b638f52bff8f",
-    "59088dcaf31bb9b5"
-   ]
-  },
-  "644a24c8d3791c65": {
-   "f": "src/data/artists/robots.js",
-   "l": 1259,
-   "t": "LATCH",
-   "p": "spine[].tracks[].face.panel.latch.label",
-   "c": "HOUSE"
-  },
-  "4fe3da37a66ddb8b": {
-   "f": "src/data/artists/robots.js",
-   "l": 1260,
-   "t": "FEED ARMED",
-   "p": "spine[].tracks[].face.panel.latch.armed",
-   "c": "HOUSE"
-  },
-  "4bbe818f74ad21c2": {
-   "f": "src/data/artists/robots.js",
-   "l": 1261,
-   "t": "NOT ARMED",
-   "p": "spine[].tracks[].face.panel.latch.idle",
-   "c": "HOUSE"
-  },
-  "59088dcaf31bb9b5": {
-   "f": "src/data/artists/robots.js",
-   "l": 1268,
-   "t": "[PAPA] — the engraved legends: plate wording, switch names, and what the panel says when it refuses to arm.",
-   "p": "spine[].tracks[].face.papa",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
   },
   "0d4d0884705572c2": {
    "f": "src/data/artists/robots.js",
@@ -830,53 +442,13 @@
    "p": "spine[].tracks[].face.subtitle",
    "c": "HOUSE"
   },
-  "23c7dca6e93292f9": {
-   "f": "src/data/artists/robots.js",
-   "l": 1299,
-   "t": "The bezel — the frame the Portal is met through.",
-   "p": "spine[].tracks[].face.stillCaption",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "99bbc2cafc23f396": {
-   "f": "src/data/artists/robots.js",
-   "l": 1305,
-   "t": "Yes. Both units power on and run their own firmware. The Portal track is not a simulation of that claim; it is the firmware running.",
-   "p": "spine[].tracks[].face.entries[].line",
-   "c": "RESTATED",
-   "r": [
-    "23c7dca6e93292f9"
-   ]
-  },
-  "cfdad08fa5aa1c1d": {
-   "f": "src/data/artists/robots.js",
-   "l": 1309,
-   "t": "Is the Portal the real machine?",
-   "p": "spine[].tracks[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "23c7dca6e93292f9"
-   ]
-  },
-  "109c24e538f73bef": {
-   "f": "src/data/artists/robots.js",
-   "l": 1310,
-   "t": "It is the real firmware on shimmed hardware — the twin. The unit itself is a physical object in a room; the twin is how it is met from here.",
-   "p": "spine[].tracks[].face.entries[].line",
-   "c": "RESTATED",
-   "r": [
-    "23c7dca6e93292f9"
-   ]
-  },
   "7a2d917ba705ef5f": {
    "f": "src/data/artists/robots.js",
    "l": 1324,
    "t": "No. The shop carries what the shop carries; the machines are not stock.",
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
-   "r": [
-    "23c7dca6e93292f9"
-   ]
+   "r": "10648bfbff65354d"
   },
   "59cd17675c6a73e5": {
    "f": "src/data/artists/robots.js",
@@ -8345,13 +7917,6 @@
    "p": "aboutArtistTrack{}.id",
    "c": "HOUSE"
   },
-  "d9811e062c259eb3": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1248,
-   "t": "ABOUT THE ARTIST",
-   "p": "aboutArtistTrack{}.face.title",
-   "c": "HOUSE"
-  },
   "309727508d708854": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 1312,
@@ -8418,20 +7983,6 @@
    "l": 1416,
    "t": "worth_a_listen",
    "p": "HOUSE_ALBUM.tag",
-   "c": "HOUSE"
-  },
-  "49291dbf7e2880c9": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1470,
-   "t": "About our current artists",
-   "p": "HOUSE_ALBUM.tracks[].title",
-   "c": "HOUSE"
-  },
-  "ecaa9313662917ec": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1475,
-   "t": "ABOUT OUR CURRENT ARTISTS",
-   "p": "HOUSE_ALBUM.tracks[].face.title",
    "c": "HOUSE"
   },
   "27c48cb4257cb24f": {
@@ -8532,21 +8083,6 @@
    "t": "The deal",
    "p": "HOUSE_ALBUM.tracks[].title",
    "c": "HOUSE"
-  },
-  "0c76807d76515dd1": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1597,
-   "t": "THE DEAL",
-   "p": "HOUSE_ALBUM.tracks[].face.title",
-   "c": "RESTATED",
-   "r": [
-    "e2263a8c7a2b8807",
-    "f1820c622543de01",
-    "2ec447b815e06a0b",
-    "4c97b1543dbd79a5",
-    "19b8d2d5c826694b",
-    "9f182e46b1202543"
-   ]
   },
   "17f21c09e0f92b84": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -9659,13 +9195,6 @@
    "p": "Exhibit{}.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<span>",
    "c": "HOUSE"
   },
-  "842f77a2abeea1a6": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 2889,
-   "t": "Open the portal",
-   "p": "Exhibit{}.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<FaceFlow>.<div>.<figure>.<button>.@aria-label",
-   "c": "HOUSE"
-  },
   "bb6f6746cb5b8feb": {
    "f": "src/routes/exhibit/Exhibit.jsx",
    "l": 3208,
@@ -9792,27 +9321,6 @@
    "l": 3717,
    "t": "{} ",
    "p": "Exhibit{}.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<FaceFlow>.<p>.<span>",
-   "c": "HOUSE"
-  },
-  "32a6773173abcaa8": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 3790,
-   "t": "ARRIVE AS",
-   "p": "Exhibit{}.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<FaceFlow>.<div>.<label>",
-   "c": "HOUSE"
-  },
-  "ed91854e376ae4e2": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 3801,
-   "t": "  — {}",
-   "p": "Exhibit{}.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<FaceFlow>.<div>.<div>.<select>.<option>",
-   "c": "HOUSE"
-  },
-  "dbbf0c3093fb725c": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 3809,
-   "t": "ENTER",
-   "p": "Exhibit{}.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<FaceFlow>.<div>.<div>.<button>",
    "c": "HOUSE"
   },
   "786811cf6abf2758": {
@@ -12795,13 +12303,6 @@
    "p": "InfoBooth{}.<div>.<div>.<p>.<Link>",
    "c": "HOUSE"
   },
-  "0519c2edfaac23b9": {
-   "f": "src/routes/robots/RobotsExhibitFlow.jsx",
-   "l": 82,
-   "t": "/robots/twin.html?user=1",
-   "p": "RobotsExhibitFlow{}.useState()",
-   "c": "HOUSE"
-  },
   "568472da643a85d1": {
    "f": "src/routes/robots/RobotsExhibitFlow.jsx",
    "l": 193,
@@ -12814,13 +12315,6 @@
    "l": 194,
    "t": "day",
    "p": "RobotsExhibitFlow{}.useEffect().open{}",
-   "c": "HOUSE"
-  },
-  "da4cb629de27ea73": {
-   "f": "src/routes/robots/RobotsExhibitFlow.jsx",
-   "l": 195,
-   "t": "/robots/twin.html?{}",
-   "p": "RobotsExhibitFlow{}.useEffect().open{}.setTwinSrc()",
    "c": "HOUSE"
   },
   "844b90e2f6e0be94": {
@@ -12863,13 +12357,6 @@
    "l": 297,
    "t": "zoom-in",
    "p": "RobotsExhibitFlow{}.S.glass.cursor",
-   "c": "HOUSE"
-  },
-  "f7afae04875bcf88": {
-   "f": "src/routes/robots/RobotsExhibitFlow.jsx",
-   "l": 378,
-   "t": "MGK-VIIIp digital twin — the Portal",
-   "p": "RobotsExhibitFlow{}.<div>.<iframe>.@title",
    "c": "HOUSE"
   },
   "7c191fbb7fa46bb5": {
@@ -13617,26 +13104,12 @@
    "c": "MIKE",
    "s": "Mike's remote-control brief, N1, 2026-08-04: \"The Plates becomes IMAGE ARCHIVE (Mike ruled; retire The Morgue). Robots wing: The Firmware becomes TECHNICAL SPECIFICATIONS; The Parts is REMOVED. Directory loses The: Weird.Baby Robots, Weird.Baby Music, Weird.Baby Foundation.\" This closes register row M6: A3 printed both candidate names so the choice could be made by looking, and it was."
   },
-  "b226f38f2927301f": {
-   "f": "src/data/artists/robots.js",
-   "l": 1071,
-   "t": "IMAGE ARCHIVE",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, N1, 2026-08-04: \"The Plates becomes IMAGE ARCHIVE (Mike ruled; retire The Morgue). Robots wing: The Firmware becomes TECHNICAL SPECIFICATIONS; The Parts is REMOVED. Directory loses The: Weird.Baby Robots, Weird.Baby Music, Weird.Baby Foundation.\" Same ruling as the track title."
-  },
   "45ccbd1ce53edf83": {
    "f": "src/data/artists/robots.js",
    "l": 1395,
    "t": "Technical Specifications",
    "c": "MIKE",
    "s": "Mike's remote-control brief, N1, 2026-08-04: \"The Plates becomes IMAGE ARCHIVE (Mike ruled; retire The Morgue). Robots wing: The Firmware becomes TECHNICAL SPECIFICATIONS; The Parts is REMOVED. Directory loses The: Weird.Baby Robots, Weird.Baby Music, Weird.Baby Foundation.\" Applied to BOTH faces carrying the retired name — see the note on the MGK-VIII face for why one would have been worse."
-  },
-  "732b964dcc8bd3a7": {
-   "f": "src/data/artists/robots.js",
-   "l": 1400,
-   "t": "TECHNICAL SPECIFICATIONS",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, N1, 2026-08-04: \"The Plates becomes IMAGE ARCHIVE (Mike ruled; retire The Morgue). Robots wing: The Firmware becomes TECHNICAL SPECIFICATIONS; The Parts is REMOVED. Directory loses The: Weird.Baby Robots, Weird.Baby Music, Weird.Baby Foundation.\" Same ruling as the track title."
   },
   "5acaad7a32127b64": {
    "f": "src/data/artists/robots.js",
@@ -13781,34 +13254,6 @@
    "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render",
    "n": "TWO FACES' FOOTERS IN ONE STRING, and the scrub cuts by SENTENCE: WELCOME's line prints, the marked sentence — this face's own former footer — does not."
   },
-  "32bf09faf4c59c03": {
-   "f": "src/data/artists/robots.js",
-   "l": 957,
-   "t": "The core, through the cage bars — warm flanks either side",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "d8ece201939574b4": {
-   "f": "src/data/artists/robots.js",
-   "l": 961,
-   "t": "A lit column behind the bars, and the cabinet's edge",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "6774c265e5e92b42": {
-   "f": "src/data/artists/robots.js",
-   "l": 965,
-   "t": "The output row — the red bar bank at the base, mid-pattern",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "b269e2da1c67c140": {
-   "f": "src/data/artists/robots.js",
-   "l": 969,
-   "t": "The whole interior in red-orange, the core glowing like an element",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
   "af7b060da919a68b": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 507,
@@ -13917,67 +13362,12 @@
    "c": "MIKE",
    "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
   },
-  "823647bdc8372325": {
-   "f": "src/data/artists/robots.js",
-   "l": 672,
-   "t": "MGK-VIIIp — the glass carrying the machine's own opening beat.",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "e9ed54fd26b22e73": {
-   "f": "src/data/artists/robots.js",
-   "l": 676,
-   "t": "Feed Control",
-   "c": "HOUSE"
-  },
-  "d619498703d9651b": {
-   "f": "src/data/artists/robots.js",
-   "l": 735,
-   "t": "FEED CONTROL",
-   "c": "HOUSE"
-  },
-  "f9199b6488f01197": {
-   "f": "src/data/artists/robots.js",
-   "l": 995,
-   "t": "MGK-NIAC, the interior in trouble.",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "40832085bb42b22b": {
-   "f": "src/data/artists/robots.js",
-   "l": 1111,
-   "t": "The cabinet, whole — lit core, bar bank, both feet",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "16a2cdfd3112566f": {
-   "f": "src/data/artists/robots.js",
-   "l": 1321,
-   "t": "A lit column behind the cage bars.",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
   "97d6b5c147f11ff6": {
    "f": "src/data/artists/robots.js",
    "l": 1327,
    "t": "Yes. Both units power on and run their own firmware.",
    "c": "RESTATED",
-   "r": [
-    "23c7dca6e93292f9"
-   ]
-  },
-  "69ae0543f23afe22": {
-   "f": "src/data/artists/robots.js",
-   "l": 1329,
-   "t": "Is the mainframe on the Portal?",
-   "c": "HOUSE"
-  },
-  "0766627176a8d65f": {
-   "f": "src/data/artists/robots.js",
-   "l": 1330,
-   "t": "Not yet. Two channels are engraved for it on the feed drum and neither of them arms.",
-   "c": "DERIVED",
-   "s": "read off the Portal face's own drum in the same file: two positions carry ch 1 and 2 labelled MGK-NIAC and both declare `arms: false`."
+   "r": "10648bfbff65354d"
   },
   "9a7219bf5e6108e3": {
    "f": "src/data/artists/robots.js",
@@ -13989,12 +13379,6 @@
    "f": "src/data/artists/weird-baby.js",
    "l": 58,
    "t": "About the Artist",
-   "c": "HOUSE"
-  },
-  "fc223dc7bcd11653": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 62,
-   "t": "ABOUT THE ARTIST",
    "c": "HOUSE"
   },
   "29422d30c2a1dd59": {
@@ -15104,13 +14488,6 @@
    "p": "held-wing",
    "c": "HOUSE"
   },
-  "110f53d25db56a9d": {
-   "f": "src/routes/WbAdmin.jsx",
-   "l": 73,
-   "t": "Hunter Root — held",
-   "p": "held-wing",
-   "c": "HOUSE"
-  },
   "ae5f3701bf966b04": {
    "f": "src/routes/WbAdmin.jsx",
    "l": 78,
@@ -15243,37 +14620,6 @@
    "t": "faq",
    "c": "HOUSE"
   },
-  "7970b638f52bff8f": {
-   "f": "src/data/artists/robots.js",
-   "l": 853,
-   "t": "ABEAL · FEED CONTROL · TYPE 8p",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, P1, 2026-08-06: \"THE NAMEPLATE: 'ABEAL' is correct canon (a division of ScrapCo) — but 'INSTRUMENT DIVISION' IS DRIFT. Mike struck 'ABEAL Instrument Company' from the manual cover on 08-05 and it has regrown here in a new costume. Remove it; ABEAL alone unless canon says otherwise.\""
-  },
-  "bb326fbc68dd93e5": {
-   "f": "src/data/artists/robots.js",
-   "l": 863,
-   "t": "SER. No.",
-   "c": "HOUSE"
-  },
-  "f8a1e5aeace8fd9f": {
-   "f": "src/data/artists/robots.js",
-   "l": 941,
-   "t": "STANDBY",
-   "c": "HOUSE"
-  },
-  "666f03a8477c44fd": {
-   "f": "src/data/artists/robots.js",
-   "l": 943,
-   "t": "COLD START",
-   "c": "HOUSE"
-  },
-  "ccc6be36602500e9": {
-   "f": "src/data/artists/robots.js",
-   "l": 945,
-   "t": "FIRST RUN",
-   "c": "HOUSE"
-  },
   "5b08f7aa4afc384a": {
    "f": "src/data/artists/robots.js",
    "l": 1227,
@@ -15384,30 +14730,6 @@
    "t": "photographs",
    "c": "HOUSE"
   },
-  "36888a8ee597f787": {
-   "f": "src/data/artists/robots.js",
-   "l": 1332,
-   "t": "The whole cabinet",
-   "c": "HOUSE"
-  },
-  "55fd6f2cf27a1146": {
-   "f": "src/data/artists/robots.js",
-   "l": 1338,
-   "t": "Through the bars",
-   "c": "HOUSE"
-  },
-  "d76bfa03017d7fc0": {
-   "f": "src/data/artists/robots.js",
-   "l": 1348,
-   "t": "Running, and in trouble",
-   "c": "HOUSE"
-  },
-  "d1dc930e902ca1a1": {
-   "f": "src/data/artists/robots.js",
-   "l": 1715,
-   "t": "Every photograph",
-   "c": "HOUSE"
-  },
   "c78a66fbc51fdd58": {
    "f": "src/data/artists/robots.js",
    "l": 1381,
@@ -15418,13 +14740,6 @@
    "f": "src/data/artists/robots.js",
    "l": 1790,
    "t": "Documentation",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, N3, 2026-08-06: \"'THE MANUAL' BECOMES 'DOCUMENTATION' — a viewer free to display any document. The manual appears inside it as a SELECTABLE ENTITY that opens on the screen when clicked.\""
-  },
-  "899f607849265b8a": {
-   "f": "src/data/artists/robots.js",
-   "l": 1795,
-   "t": "DOCUMENTATION",
    "c": "MIKE",
    "s": "Mike's remote-control brief, N3, 2026-08-06: \"'THE MANUAL' BECOMES 'DOCUMENTATION' — a viewer free to display any document. The manual appears inside it as a SELECTABLE ENTITY that opens on the screen when clicked.\""
   },
@@ -15439,31 +14754,6 @@
    "f": "src/data/artists/robots.js",
    "l": 1437,
    "t": "MGK-NIAC · DOCUMENTATION",
-   "c": "HOUSE"
-  },
-  "5975d59bb7dd36cb": {
-   "f": "src/data/artists/robots.js",
-   "l": 1681,
-   "t": "As they arrived",
-   "c": "HOUSE"
-  },
-  "b11589004f95a045": {
-   "f": "src/data/artists/robots.js",
-   "l": 1692,
-   "t": "The glass",
-   "c": "HOUSE"
-  },
-  "dc59da5a83aa5f88": {
-   "f": "src/data/artists/robots.js",
-   "l": 1742,
-   "t": "The cover image — the glass carries the BIOS beat",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the photograph shows"
-  },
-  "22406e10b63b50f1": {
-   "f": "src/data/artists/robots.js",
-   "l": 1704,
-   "t": "Above and below",
    "c": "HOUSE"
   },
   "9299df4969fad477": {
@@ -15609,24 +14899,10 @@
    "c": "MIKE",
    "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
   },
-  "24769ff94e86eefc": {
-   "f": "src/data/artists/foundation.js",
-   "l": 928,
-   "t": "EXECUTIVE SUMMARY",
-   "c": "MIKE",
-   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
-  },
   "02f074a65ea084ca": {
    "f": "src/data/artists/foundation.js",
    "l": 940,
    "t": "Happening now!",
-   "c": "MIKE",
-   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
-  },
-  "abb543298770fe6d": {
-   "f": "src/data/artists/foundation.js",
-   "l": 944,
-   "t": "HAPPENING NOW!",
    "c": "MIKE",
    "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
   },
@@ -15663,24 +14939,10 @@
    "c": "MIKE",
    "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
   },
-  "74bd06d02f212795": {
-   "f": "src/data/artists/foundation.js",
-   "l": 970,
-   "t": "MONEY IN, OUT",
-   "c": "MIKE",
-   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
-  },
   "c1ddcd62cfc56bbd": {
    "f": "src/data/artists/foundation.js",
    "l": 978,
    "t": "Where, why, etc.",
-   "c": "MIKE",
-   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
-  },
-  "17cff0c7d1ffac46": {
-   "f": "src/data/artists/foundation.js",
-   "l": 982,
-   "t": "WHERE, WHY, ETC.",
    "c": "MIKE",
    "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
   },
@@ -15697,13 +14959,6 @@
    "c": "MIKE",
    "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
   },
-  "57350650333172cb": {
-   "f": "src/data/artists/foundation.js",
-   "l": 998,
-   "t": "JUST HELP A LITTLE",
-   "c": "MIKE",
-   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
-  },
   "19c49f5676e446d8": {
    "f": "src/data/artists/foundation.js",
    "l": 1001,
@@ -15711,24 +14966,10 @@
    "c": "MIKE",
    "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
   },
-  "9c14a1eab48208f8": {
-   "f": "src/data/artists/foundation.js",
-   "l": 1002,
-   "t": "FINANCIAL HELP",
-   "c": "MIKE",
-   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
-  },
   "9992027107aee4c3": {
    "f": "src/data/artists/foundation.js",
    "l": 1005,
    "t": "Operational help",
-   "c": "MIKE",
-   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
-  },
-  "4adeec08c1d1b408": {
-   "f": "src/data/artists/foundation.js",
-   "l": 1006,
-   "t": "OPERATIONAL HELP",
    "c": "MIKE",
    "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
   },
@@ -15828,13 +15069,6 @@
    "c": "MIKE",
    "s": "Mike, THE COMBINED BRIEF C1 (2026-08-06) — \"'What they are up to' becomes 'WHAT ARE THEY UP TO?'\""
   },
-  "a1ff2070193c1419": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1490,
-   "t": "WHAT ARE THEY UP TO?",
-   "c": "MIKE",
-   "s": "Mike, THE COMBINED BRIEF C1 (2026-08-06) — \"'What they are up to' becomes 'WHAT ARE THEY UP TO?'\""
-  },
   "c2ddfc9929473e4a": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 1777,
@@ -15853,6 +15087,387 @@
    "l": 2646,
    "t": "max-content 10px minmax(0,1fr)",
    "c": "HOUSE"
+  },
+  "c32d20c559675340": {
+   "c": "RESTATED",
+   "f": "src/data/artists/portal.js",
+   "l": 85,
+   "t": "The Portal",
+   "r": "23fd272433b3427e"
+  },
+  "4e522d0189713c4e": {
+   "c": "VERIFIED",
+   "f": "src/data/artists/portal.js",
+   "l": 92,
+   "t": "MGK-VIIIp — the glass carrying the machine's own opening beat.",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "8cdb4fca77866b42": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 192,
+   "t": "MGK-VIIIp"
+  },
+  "9ab6c6fe7f9bace3": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 233,
+   "t": "FEED CONTROL"
+  },
+  "22185ac737e8b1d6": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 241,
+   "t": "FEED"
+  },
+  "0854d5f9fe3b931b": {
+   "c": "VERIFIED",
+   "f": "src/data/artists/portal.js",
+   "l": 275,
+   "t": "MGK-NIAC",
+   "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
+  },
+  "fa0396f287283fc7": {
+   "c": "RESTATED",
+   "f": "src/data/artists/portal.js",
+   "l": 324,
+   "t": "This feed is not available.",
+   "r": "9fc9ae5a62f96e60"
+  },
+  "b020879ac0a5f4bd": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 288,
+   "t": "STANDARD"
+  },
+  "10af0363550025bc": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 315,
+   "t": "STANDBY"
+  },
+  "49b882d7399b6cf8": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 317,
+   "t": "COLD START"
+  },
+  "cecb9d76d6a59c37": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 319,
+   "t": "FIRST RUN"
+  },
+  "8922b2fabb8a0609": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 321,
+   "t": "LAST STATE"
+  },
+  "875973f849c25513": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 323,
+   "t": "TEST BENCH"
+  },
+  "63aeabbfdd8dc162": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 332,
+   "t": "AUTO MAINT"
+  },
+  "8d6fdcfddaacd24b": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 332,
+   "t": "NON-INTERRUPTIBLE"
+  },
+  "2d0c73b5a8f5429b": {
+   "c": "RESTATED",
+   "f": "src/data/artists/portal.js",
+   "l": 334,
+   "t": "Maintenance is running. The machine will not be hurried.",
+   "r": "9fc9ae5a62f96e60"
+  },
+  "fe2adc695a854444": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 335,
+   "t": "amber"
+  },
+  "122a1ff7df2002cc": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 337,
+   "t": "AT PROMPT"
+  },
+  "1dcb136402a6214a": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 337,
+   "t": "BOOTS + UPDATES DONE"
+  },
+  "cf3fd7cf33f710d8": {
+   "c": "RESTATED",
+   "f": "src/data/artists/portal.js",
+   "l": 339,
+   "t": "The unit is not at its prompt.",
+   "r": "9fc9ae5a62f96e60"
+  },
+  "f55d6f652d17c9ea": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 340,
+   "t": "warm"
+  },
+  "2e20a162812101f0": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 343,
+   "t": "SOURCE"
+  },
+  "f00df545ea59c5db": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 345,
+   "t": "LIVE"
+  },
+  "850a2cacb6ede013": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 346,
+   "t": "SEEDED"
+  },
+  "8446742df0540cf6": {
+   "c": "RESTATED",
+   "f": "src/data/artists/portal.js",
+   "l": 347,
+   "t": "no seeded feed on file — the lamps read the seed, and there is nothing to read",
+   "r": "9fc9ae5a62f96e60"
+  },
+  "d9d733d809dde841": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 352,
+   "t": "LATCH"
+  },
+  "29dfa170d950e18c": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 353,
+   "t": "FEED ARMED"
+  },
+  "0e67bdb0fd2dcb0e": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 354,
+   "t": "NOT ARMED"
+  },
+  "9fc9ae5a62f96e60": {
+   "c": "MIKE",
+   "f": "src/data/artists/portal.js",
+   "l": 363,
+   "t": "[PAPA] — the engraved legends: plate wording, switch names, and what the panel says when it refuses to arm.",
+   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
+  },
+  "9f7f76cfdf724634": {
+   "c": "RESTATED",
+   "f": "src/data/artists/portal.js",
+   "l": 378,
+   "t": "FAQ",
+   "r": "10648bfbff65354d"
+  },
+  "7bc97efdee706f53": {
+   "c": "RESTATED",
+   "f": "src/data/artists/portal.js",
+   "l": 381,
+   "t": "Is the Portal the real machine?",
+   "r": "10648bfbff65354d"
+  },
+  "af0a001d249f4e68": {
+   "c": "RESTATED",
+   "f": "src/data/artists/portal.js",
+   "l": 382,
+   "t": "It is the real firmware on shimmed hardware — the twin. The unit itself is a physical object in a room; the twin is how it is met from here.",
+   "r": "10648bfbff65354d"
+  },
+  "3a4b1f152d3aa036": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 386,
+   "t": "Is the mainframe on the Portal?"
+  },
+  "1f75f59c425a42cd": {
+   "c": "DERIVED",
+   "f": "src/data/artists/portal.js",
+   "l": 387,
+   "t": "Not yet. Two channels are engraved for it on the feed drum and neither of them arms.",
+   "s": "read off the Portal face's own drum in the same file: two positions carry ch 1 and 2 labelled MGK-NIAC and both declare `arms: false`."
+  },
+  "9eb2efdcf5bf875e": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 391,
+   "t": "faq"
+  },
+  "22486c91a12e1af4": {
+   "c": "HOUSE",
+   "f": "src/data/artists/robots.js",
+   "l": 520,
+   "t": "Frequently asked"
+  },
+  "9b665a5f5d804433": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 75,
+   "t": "/held/robots/twin.html"
+  },
+  "5cd50fcf05606b90": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 76,
+   "t": "MGK-VIIIp digital twin — the Portal"
+  },
+  "96a0abf5cdd448c6": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 112,
+   "t": "Portal"
+  },
+  "de35e6e942bd3a86": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 115,
+   "t": "OPEN THE PORTAL"
+  },
+  "45849fd292daced6": {
+   "c": "MIKE",
+   "f": "src/data/artists/portal.js",
+   "l": 124,
+   "t": "Portal Feed Controller",
+   "s": "THE PORTAL HOLD + THE PULL-BACK, H3c: \"THE PORTAL'S TRACKS: PORTAL · Portal Feed Controller · FAQ.\""
+  },
+  "b3eb0a64e5d5c349": {
+   "c": "MIKE",
+   "f": "src/data/artists/portal.js",
+   "l": 232,
+   "t": "ABEAL",
+   "s": "P1 2026-08-06: \"ABEAL is correct canon — a division of ScrapCo — but INSTRUMENT DIVISION is DRIFT.\" The wing's own canon spells it ABEAL."
+  },
+  "b59c037706101dba": {
+   "c": "MIKE",
+   "f": "src/data/artists/portal.js",
+   "l": 235,
+   "t": "MODEL NO.",
+   "s": "THE PORTAL HOLD + THE PULL-BACK, H3a: \"stamped-in-place fields (MODEL NO., SER. NO., DATE) with values struck into a lighter recess.\""
+  },
+  "aee683befd4473a8": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 235,
+   "t": "TYPE 8p"
+  },
+  "d44c7b5865875018": {
+   "c": "MIKE",
+   "f": "src/data/artists/portal.js",
+   "l": 236,
+   "t": "SER. NO.",
+   "s": "THE PORTAL HOLD + THE PULL-BACK, H3a: \"stamped-in-place fields (MODEL NO., SER. NO., DATE) with values struck into a lighter recess.\""
+  },
+  "8b6062cddd4806e9": {
+   "c": "MIKE",
+   "f": "src/data/artists/portal.js",
+   "l": 237,
+   "t": "DATE",
+   "s": "THE PORTAL HOLD + THE PULL-BACK, H3a: \"stamped-in-place fields (MODEL NO., SER. NO., DATE) with values struck into a lighter recess.\""
+  },
+  "31b92658dc16d1bf": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 379,
+   "t": "ABOUT THE PORTAL"
+  },
+  "037260cd227d4cc7": {
+   "c": "HOUSE",
+   "f": "src/data/artists/portal.js",
+   "l": 392,
+   "t": "THE PORTAL · FAQ"
+  },
+  "95ad2a528296d073": {
+   "c": "VERIFIED",
+   "f": "src/data/artists/robots.js",
+   "l": 1130,
+   "t": "No photograph of the mainframe is on the wall. The museum holds images of this machine and the Record has not brought any of them into the story yet.",
+   "s": "provenance/asset-table.json — fifteen photographs of the mainframe are on disk at public/held/robots/reference/mgk-viii/, and reveal/record-entries.mjs returns one delivered asset for the whole Record and it is not one of them."
+  },
+  "2f270536b32d6b8e": {
+   "c": "VERIFIED",
+   "f": "src/data/artists/robots.js",
+   "l": 1441,
+   "t": "No photograph of the portable is on the wall. One picture of this machine is on the Record, with the entry that brought it in.",
+   "s": "provenance/asset-table.json plus reveal/record-entries.mjs — Record 013 names /robots/reference/photos/rear_power_switch.png and nothing else; the other seven plates of the portable are at public/held/robots/reference/photos/."
+  },
+  "36affcedd23e71be": {
+   "c": "MIKE",
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1654,
+   "t": "About the Artists",
+   "s": "THE PORTAL HOLD + THE PULL-BACK, H6: \"'ABOUT OUR CURRENT ARTISTS' becomes 'About the Artists'.\""
+  },
+  "e51e83951a9cd9bd": {
+   "c": "HOUSE",
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 112,
+   "t": "archiveEmpty"
+  },
+  "972c67d2170ba602": {
+   "c": "HOUSE",
+   "f": "src/routes/robots/RobotsExhibitFlow.jsx",
+   "l": 205,
+   "t": "{}?{}"
+  },
+  "4e34bcdbcc7db7df": {
+   "c": "HOUSE",
+   "f": "src/worker.js",
+   "l": 51,
+   "t": "/held/"
+  },
+  "745b654d1a76bbba": {
+   "c": "RESTATED",
+   "f": "src/data/artists/robots.js",
+   "l": 1358,
+   "t": "Everything the unit knows how to do is in here — not a description of the machine's behaviour but the behaviour itself, in the form the machine reads it.",
+   "r": [
+    "1704f42e3c6387a8",
+    "5380a42f65fa1a0e",
+    "bc88cf64c7fc1a6c"
+   ]
+  },
+  "2f702058b1bfeeb3": {
+   "c": "HOUSE",
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 73,
+   "t": "The held rooms"
+  },
+  "ffd185c9c049138b": {
+   "c": "VERIFIED",
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 100,
+   "t": "The Portal is held on the same terms and has no address of its own: it is the second\n        album on",
+   "s": "src/worker.js HELD_DIRS + wrangler.jsonc run_worker_first — measured on the built bundle under `wrangler dev`: /held/robots/twin.html, /held/robots/art/portal-cover.png and the held chunk all 404 without the cookie and 200 with it."
+  },
+  "5280b4f7f7ff2a1b": {
+   "c": "HOUSE",
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 109,
+   "t": "/robots"
+  },
+  "782afac8be2f8336": {
+   "c": "VERIFIED",
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 102,
+   "t": ", and it is simply not in the deck until this door is open.\n        Its cover, its poster and the twin itself are refused at the server like the wing’s.",
+   "s": "src/worker.js HELD_DIRS + wrangler.jsonc run_worker_first — measured on the built bundle under `wrangler dev`: /held/robots/twin.html, /held/robots/art/portal-cover.png and the held chunk all 404 without the cookie and 200 with it."
   }
  }
 }

@@ -158,6 +158,13 @@ const BLAST = [
         maintenance-mode lore expressed as two classes rather than asserted. */
   "portal.feed.standard", "portal.switch.maint", "portal.switch.prompt",
   "portal.dial.live",
+  /* [H1 2026-08-06] THE ALBUM AND ITS DOOR RIDE THE SAME BLAST, AND HOLDING THE
+     PORTAL DOES NOT MOVE THEM. A transfer class says when material ARRIVED; it
+     is not the same axis as whether the museum has shown it, which is exactly
+     the `build`/`state` distinction one file over. The Portal arrived complete
+     and mostly dead in week 0 and it is now also unpublished — three facts, one
+     object, and the day Mike opens it not one line here changes. */
+  "portal.album", "portal.door",
 
   /* ── The twin's working apps. The whole simulator came in the blast. */
   "twin.app.answers", "twin.app.polarity", "twin.app.clarity", "twin.app.messages",

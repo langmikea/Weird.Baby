@@ -334,10 +334,27 @@ function scan(renames = []) {
 
   /* [C32] prior rows that carry a judgement, indexed by content — the pool a
      moved file is matched against when its path no longer finds it. */
+  /* ═══ [H2 2026-08-06] THE KEY IS ONE FUNCTION NOW, AND C32 HAD NEVER FIRED ══
+     The pool was keyed on a NUL between repo and hash and read back with a
+     SPACE between them, in two lines eighteen apart — so the content-move carry
+     this whole mechanism exists for could not match anything, ever. It was
+     invisible because its failure mode is the one it was built to fix: a moved
+     file appears as a LOST JUDGEMENT, which is exactly what the C32 banner
+     reports and exactly what everybody has read as "declare the rename by
+     hand". This round moved 26 judged files at once and every one came up
+     missing, which is the first time the shortfall was big enough to look twice
+     at. One function, both callers — the same fix and the same reason as
+     `reveal/schema.mjs`'s one validator. */
+  /* the separator is written as the two-character escape and not as a literal
+     NUL, because a literal one makes every grep over this file report "binary
+     file matches" and nothing else — the defect class P5 found six of in
+     tools/*.mjs, and this patch put a seventh in before the same grep caught
+     it. Same value to JavaScript, plain text to everything else. */
+  const hashKey = (repo, sha) => repo + "\u0000" + sha;
   const byHash = new Map();
   for (const e of priorRows) {
     if (!e.sha256 || !isJudged(e)) continue;
-    const k = `${e.repo}\0${e.sha256}`;
+    const k = hashKey(e.repo, e.sha256);
     if (!byHash.has(k)) byHash.set(k, []);
     byHash.get(k).push(e);
   }
@@ -368,7 +385,7 @@ function scan(renames = []) {
       let p = priorById.get(id);
       if (p) claimed.add(p.id);
       else {
-        const pool = byHash.get(`${repo.key} ${hash}`) || [];
+        const pool = byHash.get(hashKey(repo.key, hash)) || [];
         const moved = pool.find(e => !claimed.has(e.id) && !fs.existsSync(
           path.join(repo.root, e.path.split("/").join(path.sep))));
         if (moved) {

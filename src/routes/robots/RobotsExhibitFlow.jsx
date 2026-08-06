@@ -78,8 +78,17 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
      it a scripted event rather than noise - and it is RARE by design, tens of
      seconds apart, because a tear that happens often is a texture. */
   const [tear, setTear] = useState(null);
-  /* [O4] the preset rides the src; default is the plain portal. */
-  const [twinSrc, setTwinSrc] = useState("/robots/twin.html?user=1");
+  /* [O4] the preset rides the src; the door supplies the address.
+     ═══ [H1 2026-08-06] THE ADDRESS IS NOT DECLARED IN THIS FILE ANY MORE ════
+     It used to default to `/robots/twin.html?user=1`, which put a held thing's
+     address — and the words naming it — in a chunk the public fetches on every
+     visit to `/robots`. The Portal is held from launch, so the door now hands
+     its own `src` and its own frame title across in the event detail
+     (`src/data/artists/portal.js`), and this listener opens what it is given.
+     WITH NO `src` IN THE DETAIL, NOTHING OPENS. That is the honest failure: the
+     only thing in this museum that can open the twin is the held album, and if
+     the held album is not loaded there is no twin to open. */
+  const [twin, setTwin] = useState(null);   /* { src, title } | null */
 
   /* [L1 2026-07-31] CLOSING ANNOUNCED ITSELF, to nobody.
      The rule was: the Portal track's face runs a live twin and stands down
@@ -162,7 +171,7 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
      museum-side button — a control floating outside the frame was the "lame
      close button" and it is gone.
      The origin is not checked because the twin is same-origin by
-     construction (`/robots/twin.html`), and the only thing this listener can
+     construction (`/held/robots/twin.html`), and the only thing this listener can
      do is close a panel the visitor opened. */
   useEffect(() => {
     function onMsg(e) {
@@ -189,10 +198,11 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
   useEffect(() => {
     function open(e) {
       const d = (e && e.detail) || {};
+      if (!d.src) return;                 /* [H1] no address, no door */
       const q = new URLSearchParams({ user: "1" });
       if (d.preset) q.set("preset", String(d.preset));
       if (d.day) q.set("day", String(d.day));
-      setTwinSrc(`/robots/twin.html?${q.toString()}`);
+      setTwin({ src: `${d.src}?${q.toString()}`, title: d.frameTitle || "" });
       setTwinOpen(true);
     }
     window.addEventListener("wb-robots-open-twin", open);
@@ -372,7 +382,7 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
                 W2 asked for and which costs nothing. */}
           <iframe
             style={tear ? { ...S.iframe, transform: `translateX(${tear.slip}px)` } : S.iframe}
-            src={twinSrc} title="MGK-VIIIp digital twin — the Portal" />
+            src={twin ? twin.src : undefined} title={twin ? twin.title : ""} />
           {/* the rip itself: a bright hairline with a smeared band under it,
               sitting OVER the whole view. The picture slips sideways for the
               same 130ms, so the band reads as the seam the slip happened at

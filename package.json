@@ -18,6 +18,7 @@
     "assets:gate": "node tools/asset-table.mjs --gate",
     "assets:rename": "node tools/asset-table.mjs --rename",
     "assets:orphans": "node tools/asset-table.mjs --orphans",
+    "contact-sheet": "node tools/contact-sheet.mjs",
     "reveal": "node tools/reveal-ledger.mjs",
     "reveal:audit": "node tools/reveal-ledger.mjs --audit",
     "reveal:check": "node tools/reveal-ledger.mjs --check",
