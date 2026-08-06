@@ -31,7 +31,25 @@ import { useArrival } from "../lib/use-arrival.js";
    asked device that outlives the asking becomes four dead strings and a query
    parameter nobody will ever type again — and, worse, a live URL that still
    renders a retired identity. */
-const SUBTITLE = "The Museum";
+/* [L1 2026-08-05] AND IT NOW CARRIES THE HOUSE NAME. MIKE, reading the lobby:
+   "'The Museum' becomes 'WEIRD.BABY MUSEUM' — it must match the Robots / Music
+   / Foundation branding."
+   THIS DOES NOT REVERSE M-ID ABOVE, and a future session must not read it as a
+   reversal. M-ID struck four candidates that each named a CLASS OF ARTIST and
+   so fenced the building in; the ruling was that the name may not narrow. A
+   house name narrows nothing — it says WHOSE museum this is, which is the one
+   fact every other line on the board already carries and this one did not.
+   Read the directory four inches below it: WEIRD.BABY ROBOTS · WEIRD.BABY
+   MUSIC · WEIRD.BABY FOUNDATION. The line under the wordmark was the only
+   place in the building still calling it something else — a sweep of `src/`
+   and `index.html` found the share tags, the booth's credo and the
+   Foundation's invoice already saying "Weird.Baby Museum", so this string was
+   the last holdout rather than one of many.
+   IT IS WRITTEN IN TITLE CASE AND RENDERS IN CAPS. `.wb-subtitle` carries
+   `text-transform: uppercase`, so the glass says WEIRD.BABY MUSEUM the way
+   Mike wrote it, while the source matches the casing every other house name in
+   the data is stored in. Do not "fix" it to a capitalised literal. */
+const SUBTITLE = "Weird.Baby Museum";
 
 /* ═══ [M23b 2026-08-04] THE GUEST BOOK MOVES, AND IT MOVES IN STEPS ═════════
    MIKE, ruling on the pair N6 built for him to choose between: "the SCROLLING
@@ -640,9 +658,25 @@ export default function WbHome() {
           {!loading && entries.length > 0 && <GuestBook entries={entries} />}
         </div>
 
+        {/* [L2 2026-08-05] THE WATERMARK. MIKE: "THE WATERMARK text becomes
+            'Weird.Baby'." This corner stamp — the floating WB monogram and the
+            wordmark beside it, bottom-right, 0.56rem, gold-mute — is the only
+            object in either room he read that answers to the word. M10
+            (2026-08-03) was closed CANNOT REPRODUCE for want of a room; it has
+            a room now.
+            IT WAS SET IN LOWERCASE, which is a third spelling of the house
+            name in a building that already spells it two ways for two reasons:
+            WEIRD.BABY in caps wherever the signage shouts, Weird.Baby in title
+            case wherever it is spoken. `weird.baby` is neither — it is the
+            DOMAIN, and a domain is what you type, not what a museum stamps in
+            the corner of its own paper.
+            THE MONOGRAM IS LEFT ALONE deliberately. Mike named the TEXT; the
+            WB in the circle is the mark. It has said the same thing as the
+            wordmark since the day it was drawn, so the pairing is not new and
+            striking it was not asked for. */}
         <div className="wb-footer">
           <span className="wb-mark">WB</span>
-          <span>weird.baby</span>
+          <span>Weird.Baby</span>
         </div>
       </div>
     </>

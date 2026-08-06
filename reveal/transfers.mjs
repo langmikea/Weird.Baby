@@ -340,6 +340,15 @@ export const EXEMPT = new Map([
          WRITTEN, by Mike, and no class covers authorship. This is the model's
          honest hole and it is named in the timeline's §6. */
   ...["doc.summary", "doc.credo",
+      /* [F1/F2 2026-08-05] The two rooms Mike named. BEHIND THE CURTAIN is a
+         room whose entire content is him speaking out of character, and WHEN
+         THINGS GET SLOW is his own family's photographs — one has to be
+         written and the other has to be chosen, and neither arrives from
+         anywhere. Both are HELD and `shown: false`, so check (b) does not
+         bite. They are the clearest case this table has for kind (iv): the
+         exemption is not that the fiction is silent about them, it is that
+         AUTHORSHIP AND CONSENT are not transfers. */
+      "room.curtain", "room.slow",
   ].map(id => [id, "AUTHORSHIP — Mike writes it; no transfer class covers a thing that has to be written."]),
 ]);
 

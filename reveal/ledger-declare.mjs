@@ -161,6 +161,32 @@ R("route.money", "The /money redirect — the Foundation's retired address.",
   "surface", "/money", "LIVE", "an old link", "REVEALED",
   { note: "Both names have been live URLs. A third rename re-points this, it does not add another." });
 
+/* ═══ [F1/F2 2026-08-05] TWO ROOMS MIKE NAMED, AND NOTHING IS BUILT ═════════
+   His instruction was the whole scope: "LEDGER (build nothing, record as
+   future work)". So they are rows and they are not pages — no route, no
+   component, no stub, and `shown: false` on both, because a room a visitor can
+   read the name of and not enter is a debt rather than a plan.
+
+   THEY GO IN THIS TABLE AND IN `docs/OPEN_ACTIONS.md`, which is the same pair
+   the poke got at P4 and for the same division of labour: the register is
+   where Mike looks for what is open, and the ledger is what makes an unbuilt
+   thing COUNTABLE — `npm run surfacing` reads this file, so a room that sits
+   here unbuilt for months shows up in the number instead of in nobody's
+   memory. Neither row invents a word of their content: what is written below
+   is what he said and the deps are what is missing.                          */
+R("room.curtain", "BEHIND THE CURTAIN — where Mike says the real thing, out of character.",
+  "surface", "not built — no route, no component", "NOT_BUILT",
+  null, "HELD",
+  { deps: ["Mike's word on where it lives and what it looks like",
+           "the first thing he actually wants to say in it"],
+    note: "MIKE, F1: a place where he tells the real truth about things — why he really builds robots, or anything else that is not in character. HIS OWN CONSTRAINT AND IT IS THE HARDEST PART OF THE SPEC: \"NOT a clearing house — a room used only when it is needed.\" A room with a standing appetite for content fills itself with filler, which is the failure mode this museum has already paid for once in the Record's ten invented entries. So it cannot be built and then fed; the first entry has to exist before the room does. THE ONE THING IT COLLIDES WITH IS DOCTRINE 11, and the collision is only apparent: a line whose subject is the MAKING of the museum fails the visible-line test, and \"why I really build robots\" is a line about the man and the machines, not about the drafting of a website. The distinction is thin enough that it is worth naming here rather than discovering it mid-write." });
+R("room.slow", "WHEN THINGS GET SLOW — old photographs of Mike, from birth onward.",
+  "surface", "not built — no route, no component", "NOT_BUILT",
+  null, "HELD",
+  { deps: ["Mike's selection from the source folder — nothing is taken from it by Ops",
+           "his ruling on where they hang and whether they are captioned"],
+    note: "MIKE, F2: post old photos of himself, from birth onward, funny stuff — the room to open when there is nothing new. THE SOURCE FOLDER IS RECORDED AND WAS NOT TOUCHED THIS ROUND, by instruction: C:\\Users\\macun\\OneDrive\\OneDrive MAJEL_01 (Archived Photos)\\ARCHIVED - Digital Negatives\\Sets (NOT GUARANTEED TO BE BACKED UP ELSEWHERE)\\Karen Mike Ken\\Mike and Mo. Two things a future round must hold before it opens that folder. THE FOLDER'S OWN NAME SAYS IT IS NOT GUARANTEED TO BE BACKED UP ANYWHERE ELSE — so the first act on it is a copy, never a move, and never an edit in place. AND IT IS A FAMILY SET, not a Mike set: the path names two other people, so which frames may be published is his call and nobody else's, the same consent rule that kept two real households off /foundation's invoice (M38)." });
+
 /* ═════════ 2. THE ROBOTS WING'S FACES — derived from src/data/artists/robots.js */
 const FACE = (id, name, build, state, extra) =>
   R("face." + id, name, "surface", "src/data/artists/robots.js", build,
@@ -591,13 +617,30 @@ R("egg.niac.operator", "The robot that operates the mainframe — the reason NIA
    answer. Building it with a server round-trip would, and that is the version
    not to build.
    `shown` IS FALSE and must stay false: the moment any surface hints at it, it
-   stops being an egg and becomes a debt. */
+   stops being an egg and becomes a debt.
+
+   [M1 2026-08-05] AND MIKE HAS SET A PRECONDITION ON WHAT COMES AFTER IT:
+   "do not bother with a next-level egg until this one at least catches on."
+   Recorded here because it is a rule about this table and not about this row —
+   THE POKE IS THE GATE ON EVERY FUTURE EGG, and anyone reading the A+++++ as
+   an invitation to design its sequel has read it backwards. Two things follow
+   that are worth stating rather than inferring.
+   FIRST, IT IS A CONDITION ON A THING THAT DOES NOT EXIST YET, so it cannot be
+   met by building the poke — it is met by the poke being FOUND, by somebody
+   who was not told. SECOND, AND THIS IS THE PART WITH A COST: the museum has
+   no way to know that today. `/admin` counts visits and the guest book; no
+   egg in this table reports being tripped, and `egg.replay` — the one a
+   visitor can already trip — has never been instrumented either. So "catches
+   on" is currently unmeasurable, and the honest reading is that the next egg
+   waits on Mike saying so rather than on a number. Naming that is not a
+   proposal to build analytics; /booth's privacy answer is the reason it would
+   be a bigger decision than it looks. */
 R("egg.lobby.poke", "The poke — a pixel-perfect tap on the eye of the Weird.Baby mark, and he blinks. Three in a row and he puts on safety glasses.",
   "egg", "not built — the mark is placed in src/routes/WbHome.jsx", "NOT_BUILT",
   null, "HELD",
   { deps: ["the blink art — a closed-eye state of the mark", "the safety-glasses art",
            "a hit region on the eye, a three-count, and a session flag"],
-    note: "RAISED BY MIKE AND GRADED A+++++ (P4, 2026-08-05), and deliberately not built in the round that raised it — the reasons are in the block above this row and they are the specification. The two art states are Mike's; the mechanism is small and comes after them. C40." });
+    note: "RAISED BY MIKE AND GRADED A+++++ (P4, 2026-08-05), and deliberately not built in the round that raised it — the reasons are in the block above this row and they are the specification. The two art states are Mike's; the mechanism is small and comes after them. [M1 2026-08-05] IT IS ALSO THE GATE ON EVERY FUTURE EGG — Mike: do not bother with a next-level egg until this one at least catches on. Nothing in this museum reports an egg being tripped, so that condition is met by his word and not by a number. C40." });
 
 /* ═════════ 10. THE SOUNDS — from SOUND_AUDIT-20260726, every trigger fired ═ */
 for (const [slug, name, sites] of [

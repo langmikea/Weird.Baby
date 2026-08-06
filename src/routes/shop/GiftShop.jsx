@@ -72,6 +72,38 @@ import "./GiftShop.css";
    and is precisely why Mike caught W.B on the page. */
 const HOUSE_WINGS = ["wb", "robots"];
 
+/* ===========================================================================
+   [S2 2026-08-05] THE TILE GOES TO THE ARTIST'S OWN FRONT DOOR.
+
+   MIKE supplied four addresses and the instruction: "wire each artist's shop
+   tile to their own place." `shopExit` on the artist entry is that address, and
+   it is read FIRST — ahead of the three-step fallback below, which stays for
+   anyone who has no declared exit.
+
+   WHAT THE FALLBACK WAS DOING, artist by artist, and why a declaration beats a
+   better-ordered guess:
+     · Hunter Root — `shop: null`, so it fell to Bandcamp. His own site opens on
+       "Official Merch Store". The shop was routing past the shop.
+     · Jesse Welles — went straight to jessewelles.redstarmerch.com, the merch
+       VENDOR. Same stock, but the visitor never sees whose it is.
+     · Carsie Blanton — went to her /shop/ subpage rather than her home page.
+     · Mikey Mike — `shop: null` and no Bandcamp, so it fell to his YouTube
+       channel: a gift shop tile that opened a video feed.
+   Reordering the fallback to prefer `site` fixes none of it — Mikey Mike's
+   `site` IS the video channel, and the day an artist's `site` field changes for
+   an unrelated reason the shop's exits change with it silently. Four addresses
+   Mike gave get four fields he can read.
+
+   EVERY ONE WAS OPENED AND READ, 2026-08-05, before it was wired. That is not
+   ceremony: this wing already refused findmikeymike.com for a compromised page
+   body, and the museum's own standing on outbound links is that a door is
+   checked before it is hung. Notes sit on each artist's `shopExit`.
+
+   THE TILE NO LONGER CLAIMS A STORE. It used to be labelled "Visit X's store"
+   because it always resolved to something selling something; three of these
+   four front doors carry a shop one click in and weekendatmikeys.com does not.
+   The label states the destination it actually has.
+   =========================================================================== */
 function billing(fromWing, ownerId) {
   /* the shop speaks ONE shape, whoever the entry came from */
   const walEntries = worthAListenArtists.map((a) => ({
@@ -79,7 +111,8 @@ function billing(fromWing, ownerId) {
     name: a.name,
     since: a.since || "9999-12-31",   /* undated sorts last, visibly */
     image: a.art || null,
-    storeUrl: (a.shop && a.shop.url) ||
+    storeUrl: a.shopExit ||
+              (a.shop && a.shop.url) ||
               (a.listen && a.listen.url) ||
               (a.site && a.site.startsWith("http") ? a.site : null),
   }));
@@ -154,14 +187,17 @@ function billing(fromWing, ownerId) {
   return { top, rest, walSetFallback };
 }
 
-function Banner({ entry, half }) {
+/* [S1 2026-08-05] ONE TILE, ONE SIZE. The `half` prop is gone — see the block
+   over the grid below. [S2] and the label names the destination the tile has
+   rather than the one it used to be able to assume. */
+function Banner({ entry }) {
   return (
     <a
-      className={"featured-artist" + (half ? " featured-artist--half" : "")}
+      className="featured-artist"
       href={entry.storeUrl}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Visit ${entry.name}'s store — opens in a new tab`}
+      aria-label={`Visit ${entry.name} — opens in a new tab`}
     >
       <div className="featured-artist__image-wrap">
         {entry.image ? (
@@ -193,6 +229,11 @@ export default function GiftShop() {
   const ownerId = searchParams.get("owner") || searchParams.get("top");
 
   const { top, rest, walSetFallback } = useMemo(() => billing(fromId, ownerId), [fromId, ownerId]);
+
+  /* [S1] The billed entry leads the grid; everyone else follows in the order
+     `billing()` sorted them. The law decides the SEQUENCE, the stylesheet
+     decides the size, and neither is allowed to do the other's job. */
+  const all = useMemo(() => (top ? [top, ...rest] : rest), [top, rest]);
 
   /* [B1] THE VIEW RESETS BEFORE EVERY ENTRY — on arrival and on any change of
      who is billed. `scrollRestoration:"manual"` is the half that browsers do
@@ -239,33 +280,47 @@ export default function GiftShop() {
           the retired comment here said it did — it IS the exhibit's bar. */}
       <MuseumBar room="Gift Shop" />
 
-      {/* CLAUSE ONE — TOP BILLING. The owner of the exhibit that was exited;
-          [B1] the HOUSE on a direct arrival, because an unowned front door is
-          still the house's own room; and [J3] NOBODY on a WAL exit that
-          resolves no individual owner, where the set of four below IS the
-          answer and promoting one of them would invent a billing the exit did
-          not name. */}
-      {top && (
-        <section className="gift-shop__section gift-shop__featured">
-          <Banner entry={top} />
-        </section>
-      )}
+      {/* ═══ [S1 2026-08-05] ONE GRID, AND NO TILE IS LARGER THAN ANOTHER ════
+          MIKE, reading the room: "ALL GIFT SHOP TILES THE SAME SIZE, including
+          Weird.Baby's own. No tile is larger than another."
 
-      {/* CLAUSE TWO — EVERYONE ELSE, EARLIEST FIRST.
-          [F7b] One template, data only: every tile is one row of the pool,
-          and a fifth artist is a data entry and nothing else. Tiles are
-          DOUBLE HEIGHT per Mike — the grid runs two-up so each plate doubles
-          its edge, and the artist's own face (W8) fills it. A tile with no
-          confirmed destination still renders DEAD rather than pretending to
-          be a link. */}
-      {rest.length > 0 && (
-        <section className="gift-shop__section gift-shop__wal">
-          <div className="wal-banners__grid">
-            {rest.map((entry) => (
+          WHAT HE WAS LOOKING AT. Top billing rendered a FULL-WIDTH banner with
+          a 2rem name in its own section, and everybody else rendered half-tiles
+          two-up beneath it. On a direct arrival the house takes top billing
+          (B1), so the shop's own front door opened on a Weird.Baby plate at
+          roughly four times the area of Carsie Blanton's and Hunter Root's —
+          the house, in the room whose entire job is other people's stores,
+          shouting over its guests. J3 had already ruled the guests "a set,
+          sized as a set"; this extends the same reading to everyone in it.
+
+          THE BILLING LAW IS NOT REPEALED — IT IS RE-EXPRESSED AS ORDER. All
+          three clauses still run in `billing()` above, `data-billing` still
+          reports which branch answered, and whoever is billed is still the
+          FIRST tile a visitor reads. What top billing loses is SIZE, which was
+          never the thing the law asked for: it says who leads, not who is big.
+          The J3 no-owner case is unchanged and still visible — nobody leads,
+          the set simply starts the grid.
+
+          SO THERE IS ONE SECTION AND ONE GRID. Two sections holding tiles of
+          one size would draw a line across the room that means nothing, and a
+          lone tile above a grid at the same size reads as an accident rather
+          than as billing. The grid is `auto-fit` at a 420px floor, so five
+          tiles run 2 · 2 · 1 and the fifth sits in a column, not across the
+          row. A sixth artist is still a data entry and nothing else (F7b). */}
+      {all.length > 0 && (
+        <section className="gift-shop__section gift-shop__tiles">
+          <div className="gift-shop__grid">
+            {all.map((entry) => (
               entry.storeUrl
-                ? <Banner key={entry.id} entry={entry} half />
+                ? <Banner key={entry.id} entry={entry} />
                 : (
-                  <div key={entry.id} className="featured-artist featured-artist--half featured-artist--dead">
+                  /* A tile with no confirmed destination renders DEAD rather
+                     than pretending to be a link — same shape, no hover, no
+                     pointer. Unreachable today: all four guests carry an
+                     address Mike verified (S2) and the house carries its own
+                     store. Kept because the day a fifth artist arrives without
+                     one, this is the honest way to show them. */
+                  <div key={entry.id} className="featured-artist featured-artist--dead">
                     <div className="featured-artist__image-wrap">
                       <div className="featured-artist__image-fallback" aria-hidden="true">
                         <div className="featured-artist__image-fallback-name">{entry.name}</div>
@@ -273,7 +328,7 @@ export default function GiftShop() {
                     </div>
                     <div className="featured-artist__meta">
                       <div className="featured-artist__name">{entry.name}</div>
-                      <div className="featured-artist__note">no store on file</div>
+                      <div className="featured-artist__note">no address on file</div>
                     </div>
                   </div>
                 )

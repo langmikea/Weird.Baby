@@ -4645,14 +4645,6 @@
    "c": "VERIFIED",
    "s": "each fact's own `source:` tag — wiki | bc | yt | press | vault; legend at worth-a-listen-facts.js:50-58"
   },
-  "4c063c9e7d1ea73a": {
-   "f": "src/data/artists/worth-a-listen-facts.js",
-   "l": 532,
-   "t": "Seventy-eight of his songs are on file in this museum's vault.",
-   "p": "hunterFeed[].fact()[]",
-   "c": "VERIFIED",
-   "s": "each fact's own `source:` tag — wiki | bc | yt | press | vault; legend at worth-a-listen-facts.js:50-58"
-  },
   "851dc85bc5341d58": {
    "f": "src/data/artists/worth-a-listen-facts.js",
    "l": 533,
@@ -6617,20 +6609,6 @@
    "c": "VERIFIED",
    "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
   },
-  "54a80d577deeecb1": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 433,
-   "t": "One of two Hunter Root songs surfaced in this wing, out of seventy-eight in the museum's own vault.",
-   "p": "ARTISTS[].songs[].card.label[]",
-   "c": "RESTATED",
-   "r": [
-    "d4b948d21a10192d",
-    "8c2477c1ea33088b",
-    "8602625f217b49d9",
-    "07a666fd66d1928e",
-    "f69e050206eaaea3"
-   ]
-  },
   "a3de1d2cc4787181": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 435,
@@ -6712,28 +6690,12 @@
     "526491c8466fc092"
    ]
   },
-  "d50e8c8f62dba6ba": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 460,
-   "t": "78 songs on file in the museum's own vault",
-   "p": "ARTISTS[].card.tombstone[].v",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
   "2afc0b692d2f61c8": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 958,
    "t": "Albums",
    "p": "ARTISTS[].card.tombstone[].k",
    "c": "HOUSE"
-  },
-  "3e6175a3719b6475": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 461,
-   "t": "Nine",
-   "p": "ARTISTS[].card.tombstone[].v",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
   },
   "3eb11794bd576868": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -6795,21 +6757,6 @@
    "c": "VERIFIED",
    "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
   },
-  "28f9a7cf09b1388c": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 482,
-   "t": "The house artist — the one musician in this wing whose catalogue the museum holds itself: seventy-eight songs and nine albums, accessioned from April 2026.",
-   "p": "ARTISTS[].card.label[]",
-   "c": "RESTATED",
-   "r": [
-    "d50e8c8f62dba6ba",
-    "3e6175a3719b6475",
-    "ed3ef40073fbc445",
-    "d7c18c209d58f7b8",
-    "28ba57c480891697",
-    "2eb647922e2b4cbc"
-   ]
-  },
   "7d50be265d84e07f": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 489,
@@ -6817,8 +6764,8 @@
    "p": "ARTISTS[].card.label[]",
    "c": "RESTATED",
    "r": [
-    "d50e8c8f62dba6ba",
-    "3e6175a3719b6475",
+    "2bbbecde0b300573",
+    "af7b060da919a68b",
     "ed3ef40073fbc445",
     "d7c18c209d58f7b8",
     "28ba57c480891697",
@@ -6832,8 +6779,8 @@
    "p": "ARTISTS[].card.sideboxes[].title",
    "c": "RESTATED",
    "r": [
-    "d50e8c8f62dba6ba",
-    "3e6175a3719b6475",
+    "2bbbecde0b300573",
+    "af7b060da919a68b",
     "ed3ef40073fbc445",
     "d7c18c209d58f7b8",
     "28ba57c480891697",
@@ -6887,21 +6834,6 @@
    "p": "ARTISTS[].card.sideboxes[].note",
    "c": "VERIFIED",
    "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "de4042205202de88": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 520,
-   "t": "No chart entry, certification, festival billing or sync is documented for him in this museum's sources. That is a statement about what we hold and not about the work — his record here is the catalogue itself: 78 songs and nine albums on file in the museum's own vault, in the register above.",
-   "p": "ARTISTS[].metrics.note",
-   "c": "RESTATED",
-   "r": [
-    "d4b948d21a10192d",
-    "dada16cec63c1904",
-    "ed97b5fb16e82928",
-    "437a049f5cee126e",
-    "7ac07af7c5e1a3dd",
-    "526491c8466fc092"
-   ]
   },
   "7acffc8ce200a788": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -6976,21 +6908,6 @@
    "l": 545,
    "t": "A 7-inch, and a single.",
    "p": "ARTISTS[].records.items[].why",
-   "c": "RESTATED",
-   "r": [
-    "d4b948d21a10192d",
-    "dada16cec63c1904",
-    "ed97b5fb16e82928",
-    "437a049f5cee126e",
-    "7ac07af7c5e1a3dd",
-    "526491c8466fc092"
-   ]
-  },
-  "2257e5f341deee88": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 551,
-   "t": "Sixteen releases sit on his own Bandcamp; nine albums are on file in this museum's vault.",
-   "p": "ARTISTS[].records.note",
    "c": "RESTATED",
    "r": [
     "d4b948d21a10192d",
@@ -15567,13 +15484,6 @@
    "p": "billing{}.ownerKey",
    "c": "HOUSE"
   },
-  "be8ca7af5fba8526": {
-   "f": "src/routes/shop/GiftShop.jsx",
-   "l": 164,
-   "t": "Visit {}'s store — opens in a new tab",
-   "p": "Banner{}.<a>.@aria-label",
-   "c": "HOUSE"
-  },
   "cb17a40717808b37": {
    "f": "src/routes/shop/GiftShop.jsx",
    "l": 189,
@@ -15600,13 +15510,6 @@
    "l": 206,
    "t": "manual",
    "p": "GiftShop{}.useEffect()",
-   "c": "HOUSE"
-  },
-  "aba731b66f87cfe7": {
-   "f": "src/routes/shop/GiftShop.jsx",
-   "l": 276,
-   "t": "no store on file",
-   "p": "GiftShop{}.<div>.<section>.<div>.<div>.<div>.<div>",
    "c": "HOUSE"
   },
   "aebb0a15f0619491": {
@@ -15854,13 +15757,6 @@
    "p": "WbAdmin{}.<div>.<div>.<div>",
    "c": "HOUSE"
   },
-  "70fd2a0f818f668c": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 34,
-   "t": "The Museum",
-   "p": "SUBTITLE",
-   "c": "HOUSE"
-  },
   "0258217d2c9dccd7": {
    "f": "src/routes/WbHome.jsx",
    "l": 43,
@@ -16054,13 +15950,6 @@
    "f": "src/routes/WbHome.jsx",
    "l": 234,
    "t": "WB",
-   "p": "WbHome{}.<div>.<div>.<span>",
-   "c": "HOUSE"
-  },
-  "7c5a294687ada3a5": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 235,
-   "t": "weird.baby",
    "p": "WbHome{}.<div>.<div>.<span>",
    "c": "HOUSE"
   },
@@ -16926,6 +16815,114 @@
    "p": "HOUSE_ALBUM.tracks[].face.bill.acts.billActs()[].why",
    "c": "VERIFIED",
    "s": "src/data/exhibits/hunter_root.json — the museum's own MediaVault export, counted this round: 9 album containers under the ids configured in src/data/artists/hunter-root.js, 93 track rows across them, every row carrying at least one rendition. Seven of the nine are records; Phone Recordings EP and SINGLES & RARITIES are an EP and a set by their own titles. Run With The Hunt is a record and not a band per vault fact MV-HR-20260707-004. Holdings-only claim: it does NOT say this is his whole catalogue — sixteen releases sit on his own Bandcamp."
+  },
+  "2bbbecde0b300573": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 506,
+   "t": "93 tracks on file in the museum's own vault",
+   "p": "ARTISTS[].card.tombstone[].v",
+   "c": "VERIFIED",
+   "s": "counted this round from the museum's own export, src/data/exhibits/hunter_root.json, through buildSpineFromArtifacts: 9 album containers, 93 track rows, 78 of them carrying a `song:` slug and the 15 without being exactly Run With The Hunt. Container kinds are each container's own title — seven records, Phone Recordings EP, SINGLES & RARITIES. Supersedes the '78 songs' citation, which counted the slugs and reported the songs (W1, 2026-08-05)."
+  },
+  "af7b060da919a68b": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 507,
+   "t": "Seven, plus an EP and a set of singles and rarities",
+   "p": "ARTISTS[].card.tombstone[].v",
+   "c": "VERIFIED",
+   "s": "counted this round from the museum's own export, src/data/exhibits/hunter_root.json, through buildSpineFromArtifacts: 9 album containers, 93 track rows, 78 of them carrying a `song:` slug and the 15 without being exactly Run With The Hunt. Container kinds are each container's own title — seven records, Phone Recordings EP, SINGLES & RARITIES. Supersedes the '78 songs' citation, which counted the slugs and reported the songs (W1, 2026-08-05)."
+  },
+  "2663f212d5711670": {
+   "f": "src/data/artists/worth-a-listen-facts.js",
+   "l": 535,
+   "t": "Ninety-three of his tracks are on file in this museum's vault.",
+   "p": "hunterFeed[].fact()[]",
+   "c": "VERIFIED",
+   "s": "counted this round from the museum's own export, src/data/exhibits/hunter_root.json, through buildSpineFromArtifacts: 9 album containers, 93 track rows, 78 of them carrying a `song:` slug and the 15 without being exactly Run With The Hunt. Container kinds are each container's own title — seven records, Phone Recordings EP, SINGLES & RARITIES. Supersedes the '78 songs' citation, which counted the slugs and reported the songs (W1, 2026-08-05)."
+  },
+  "fe827749d5855e93": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 441,
+   "t": "One of two Hunter Root songs surfaced in this wing, out of ninety-three in the museum's own vault.",
+   "p": "ARTISTS[].songs[].card.label[]",
+   "c": "RESTATED",
+   "r": [
+    "d4b948d21a10192d",
+    "8c2477c1ea33088b",
+    "8602625f217b49d9",
+    "07a666fd66d1928e",
+    "f69e050206eaaea3",
+    "2bbbecde0b300573"
+   ]
+  },
+  "7fa37ee36ed62644": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 533,
+   "t": "The house artist — the one musician in this wing whose records the museum holds in its own vault: seven of them, an EP and a set of singles and rarities, ninety-three tracks in all, accessioned from April 2026.",
+   "p": "ARTISTS[].card.label[]",
+   "c": "RESTATED",
+   "r": [
+    "2bbbecde0b300573",
+    "af7b060da919a68b",
+    "ed3ef40073fbc445",
+    "d7c18c209d58f7b8",
+    "28ba57c480891697",
+    "2eb647922e2b4cbc"
+   ]
+  },
+  "3fd4ec5839603623": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 572,
+   "t": "No chart entry, certification, festival billing or sync is documented for him in this museum's sources. That is a statement about what we hold and not about the work — his record here is the catalogue itself: 93 tracks across seven records, an EP and a set, on file in the museum's own vault, in the register above.",
+   "p": "ARTISTS[].metrics.note",
+   "c": "RESTATED",
+   "r": [
+    "d4b948d21a10192d",
+    "dada16cec63c1904",
+    "ed97b5fb16e82928",
+    "437a049f5cee126e",
+    "7ac07af7c5e1a3dd",
+    "526491c8466fc092",
+    "2bbbecde0b300573"
+   ]
+  },
+  "a8f744e8df1511e4": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 625,
+   "t": "Sixteen releases sit on his own Bandcamp; seven records, an EP and a set of singles and rarities are on file in this museum's vault.",
+   "p": "ARTISTS[].records.note",
+   "c": "RESTATED",
+   "r": [
+    "d4b948d21a10192d",
+    "dada16cec63c1904",
+    "ed97b5fb16e82928",
+    "437a049f5cee126e",
+    "7ac07af7c5e1a3dd",
+    "526491c8466fc092",
+    "af7b060da919a68b"
+   ]
+  },
+  "9d014999d7e23c98": {
+   "f": "src/routes/shop/GiftShop.jsx",
+   "l": 200,
+   "t": "Visit {} — opens in a new tab",
+   "p": "Banner{}.<a>.@aria-label",
+   "c": "HOUSE"
+  },
+  "25c688eade060519": {
+   "f": "src/routes/shop/GiftShop.jsx",
+   "l": 331,
+   "t": "no address on file",
+   "p": "GiftShop{}.<div>.<section>.<div>.<div>.<div>.<div>",
+   "c": "HOUSE"
+  },
+  "88c467143e5c4c32": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 52,
+   "t": "Weird.Baby Museum",
+   "p": "SUBTITLE",
+   "c": "MIKE",
+   "s": "docs/canonical/THE_CHARTER.md — the house's soul document, Papa's own"
   }
  }
 }

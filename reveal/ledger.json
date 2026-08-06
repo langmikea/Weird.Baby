@@ -270,6 +270,50 @@
    "transferWeek": 0
   },
   {
+   "id": "room.curtain",
+   "name": "BEHIND THE CURTAIN — where Mike says the real thing, out of character.",
+   "cls": "surface",
+   "where": "not built — no route, no component",
+   "build": "NOT_BUILT",
+   "reach": null,
+   "state": "HELD",
+   "when": null,
+   "deps": [
+    "Mike's word on where it lives and what it looks like",
+    "the first thing he actually wants to say in it"
+   ],
+   "arc": null,
+   "shown": false,
+   "assets": [],
+   "prod": null,
+   "calledBy": [],
+   "note": "MIKE, F1: a place where he tells the real truth about things — why he really builds robots, or anything else that is not in character. HIS OWN CONSTRAINT AND IT IS THE HARDEST PART OF THE SPEC: \"NOT a clearing house — a room used only when it is needed.\" A room with a standing appetite for content fills itself with filler, which is the failure mode this museum has already paid for once in the Record's ten invented entries. So it cannot be built and then fed; the first entry has to exist before the room does. THE ONE THING IT COLLIDES WITH IS DOCTRINE 11, and the collision is only apparent: a line whose subject is the MAKING of the museum fails the visible-line test, and \"why I really build robots\" is a line about the man and the machines, not about the drafting of a website. The distinction is thin enough that it is worth naming here rather than discovering it mid-write.",
+   "transfer": null,
+   "transferWeek": null
+  },
+  {
+   "id": "room.slow",
+   "name": "WHEN THINGS GET SLOW — old photographs of Mike, from birth onward.",
+   "cls": "surface",
+   "where": "not built — no route, no component",
+   "build": "NOT_BUILT",
+   "reach": null,
+   "state": "HELD",
+   "when": null,
+   "deps": [
+    "Mike's selection from the source folder — nothing is taken from it by Ops",
+    "his ruling on where they hang and whether they are captioned"
+   ],
+   "arc": null,
+   "shown": false,
+   "assets": [],
+   "prod": null,
+   "calledBy": [],
+   "note": "MIKE, F2: post old photos of himself, from birth onward, funny stuff — the room to open when there is nothing new. THE SOURCE FOLDER IS RECORDED AND WAS NOT TOUCHED THIS ROUND, by instruction: C:\\Users\\macun\\OneDrive\\OneDrive MAJEL_01 (Archived Photos)\\ARCHIVED - Digital Negatives\\Sets (NOT GUARANTEED TO BE BACKED UP ELSEWHERE)\\Karen Mike Ken\\Mike and Mo. Two things a future round must hold before it opens that folder. THE FOLDER'S OWN NAME SAYS IT IS NOT GUARANTEED TO BE BACKED UP ANYWHERE ELSE — so the first act on it is a copy, never a move, and never an edit in place. AND IT IS A FAMILY SET, not a Mike set: the path names two other people, so which frames may be published is his call and nobody else's, the same consent rule that kept two real households off /foundation's invoice (M38).",
+   "transfer": null,
+   "transferWeek": null
+  },
+  {
    "id": "face.wbr.faq",
    "name": "FAQ — the robots wing's whole front desk: what this is, the machines, the paper, and how to reach us.",
    "cls": "surface",
@@ -2219,7 +2263,7 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "RAISED BY MIKE AND GRADED A+++++ (P4, 2026-08-05), and deliberately not built in the round that raised it — the reasons are in the block above this row and they are the specification. The two art states are Mike's; the mechanism is small and comes after them. C40.",
+   "note": "RAISED BY MIKE AND GRADED A+++++ (P4, 2026-08-05), and deliberately not built in the round that raised it — the reasons are in the block above this row and they are the specification. The two art states are Mike's; the mechanism is small and comes after them. [M1 2026-08-05] IT IS ALSO THE GATE ON EVERY FUTURE EGG — Mike: do not bother with a next-level egg until this one at least catches on. Nothing in this museum reports an egg being tripped, so that condition is met by his word and not by a number. C40.",
    "transfer": null,
    "transferWeek": null
   },

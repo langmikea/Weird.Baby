@@ -144,6 +144,11 @@ const ARTISTS = [
     shop: { label: "Her own shop", url: "https://www.carsieblanton.com/shop/",
       fn: "Shop and tours",
       scent: "Records and merch sold by her, with the tour dates one page over." },
+    /* [S2 2026-08-05] THE GIFT SHOP TILE'S ADDRESS — Mike's, verified. The rule
+       and its reasoning are in GiftShop.jsx's `billing()`; this field is the
+       declaration. Her front door rather than `shop.url`'s /shop/ subpage; Shop
+       is one of three items in her own nav, read directly 2026-08-05. */
+    shopExit: "https://www.carsieblanton.com/",
     /* [L1] the verified channel (oEmbed author_url of her own BE GOOD lyric
        video) rather than the search-found playlist. */
     channel: "https://www.youtube.com/@CarsieBlanton",
@@ -430,8 +435,11 @@ const ARTISTS = [
              title question is a real fact about the catalogue and stays; the
              account of our own data handling does not. */
           label: [
+            /* [W1 2026-08-05] "seventy-eight" -> "ninety-three". See the block
+               over the tombstone below: 78 was the count of track rows carrying
+               a `song:` slug and it dropped the whole of Run With The Hunt. */
             "One of two Hunter Root songs surfaced in this wing, out of " +
-            "seventy-eight in the museum's own vault.",
+            "ninety-three in the museum's own vault.",
             "The catalogue files it as “Nothin' Wrong”, and the " +
             "catalogue is the record.",
           ],
@@ -454,11 +462,49 @@ const ARTISTS = [
              "singles, free to play." },
     tickets: { label: "His tour page", url: "https://www.hunterroot.com/hunterroottour" },
     shop: null,
+    /* [S2 2026-08-05] THE GIFT SHOP TILE'S ADDRESS — Mike's, verified. Rule in
+       GiftShop.jsx's `billing()`. His tile used to fall through `shop: null` to
+       Bandcamp; his own site opens on "Official Merch Store" with Merch first
+       in the nav, read directly 2026-08-05, so the shop was sending people past
+       the shop. */
+    shopExit: "https://www.hunterroot.com/",
     marker: "Half of Crooked Home is about his brother Nick. He says ’94 is the heart of it all.",
     card: {
+      /* ═══ [W1 2026-08-05] THE FIGURES ARE REBUILT FROM THE VAULT ═══════════
+         MIKE: correct them the same way W2 did the poster. M50 named six sites
+         on this card and three of them were classed VERIFIED with a real
+         citation, which is exactly the hole `provenance/README.md` §4 names —
+         the boundary can prove a number was declared; it cannot prove it is
+         the number it claims to be.
+
+         COUNTED THIS ROUND, INDEPENDENTLY, off the museum's own export
+         (src/data/exhibits/hunter_root.json, via buildSpineFromArtifacts):
+           9 album containers · 93 track rows · 78 of those rows carry a
+           `song:` slug and the 15 that do not are, exactly, Run With The Hunt.
+         So "78 songs" was never stale. It was a count of the SLUGS and it was
+         reported as a count of the SONGS, and it silently dropped a whole
+         record. And "Nine albums" counted CONTAINERS: seven are records, one
+         is an EP by its own title (Phone Recordings EP) and one is a set by
+         its own title (SINGLES & RARITIES).
+
+         "WHOSE CATALOGUE THE MUSEUM HOLDS ITSELF" also goes, in the label
+         below. The wing's own records note four hundred lines down says
+         sixteen releases sit on his Bandcamp against nine in the vault. The
+         line did not say "whole", but a reader takes "holds itself" for all of
+         it, and W2 struck the same claim off the poster for the same reason.
+
+         WHAT DID NOT CHANGE, AND THIS IS A CORRECTION TO M50 RATHER THAN A
+         COMPLIANCE WITH IT: "Half of Crooked Home is about his brother." M50
+         recorded that the vault does not carry the half. IT DOES — vault fact
+         MV-HR-20260707-068, in Hunter's own words to Americana Highways in
+         2025: "Half the songs ended up being about my brother… '94' was almost
+         the album title. It's the heart of it all." It is his sentence about
+         his own record, tagged to `crooked_home`, and it stays on all three
+         faces that print it. A search that missed it is not an absence.
+         ════════════════════════════════════════════════════════════════════ */
       tombstone: [
-        { k: "Catalogue", v: "78 songs on file in the museum's own vault" },
-        { k: "Albums", v: "Nine" },
+        { k: "Catalogue", v: "93 tracks on file in the museum's own vault" },
+        { k: "Records", v: "Seven, plus an EP and a set of singles and rarities" },
         { k: "Surfaced here", v: "Two" },
         { k: "His own site", v: "hunterroot.com — Merch, Tour, Tunes, Bio, Contact",
           url: "https://www.hunterroot.com/", src: "his own site" },
@@ -473,15 +519,21 @@ const ARTISTS = [
          the point" — on the one card in the wing whose job is to introduce a
          musician. A visitor who has never heard of him learned about our
          renderer.
-         THE REPLACEMENT INTRODUCES NO NEW FACT. Seventy-eight songs, nine
-         albums and the April 2026 accession are the tombstone directly above;
-         Nick and the twenty-seven are on the “’94” card and in
-         the marker line; the two-of-nine surfacing is `tracksFor`'s own shape,
-         already stated on the card it replaces. */
+         THE REPLACEMENT INTRODUCES NO NEW FACT. The holdings figures and the
+         April 2026 accession are the tombstone directly above; Nick and the
+         twenty-seven are on the “’94” card and in the marker line; the
+         two-of-nine surfacing is `tracksFor`'s own shape, already stated on the
+         card it replaces.
+         [W1 2026-08-05] this paragraph used to quote the figures back —
+         "Seventy-eight songs, nine albums" — and both were wrong, so the
+         comment asserting nothing new was introduced was itself carrying the
+         error forward in a second place. It names the tombstone now instead of
+         copying it. */
       label: [
-        "The house artist — the one musician in this wing whose catalogue the " +
-        "museum holds itself: seventy-eight songs and nine albums, accessioned " +
-        "from April 2026.",
+        "The house artist — the one musician in this wing whose records the " +
+        "museum holds in its own vault: seven of them, an EP and a set of " +
+        "singles and rarities, ninety-three tracks in all, accessioned from " +
+        "April 2026.",
         /* on glass the first draft of this paragraph opened "Half of Crooked
            Home is about his brother Nick", which is the MARKER line printed
            four inches above it. Same fact twice on one card in two registers is
@@ -520,15 +572,32 @@ const ARTISTS = [
       note: "No chart entry, certification, festival billing or sync is " +
             "documented for him in this museum's sources. That is a statement " +
             "about what we hold and not about the work — his record here is " +
-            "the catalogue itself: 78 songs and nine albums on file in the " +
-            "museum's own vault, in the register above.",
+            "the catalogue itself: 93 tracks across seven records, an EP and a " +
+            "set, on file in the museum's own vault, in the register above.",
     },
     /* [P16] slugs read off his own Bandcamp catalogue page, 2026-08-02; years
        from the museum's own era buckets (src/data/era-buckets.json). */
+    /* ═══ [W1 2026-08-05] TWO YEARS ON THIS BOARD WERE WRONG, AND THE COMMENT
+       ABOVE IS THE CONFESSION OF HOW. `era-buckets.json` holds RANGES, not
+       release dates: "The Arkansas Era" starts 2022 and "Crooked Home" starts
+       2024, and each bucket's START YEAR was printed as its record's year.
+       An era is a span of time that a record OPENS; it is not the day it came
+       out, and the two are only ever equal by accident.
+         Crooked Home  2024 -> 2025.  Vault MV-HR-20260707-053: "released
+                       October 17, 2025 via Tolok". His own Bandcamp album page
+                       says "released October 17, 2025", read 2026-08-05.
+         Arkansas      2022 -> 2023.  His own Bandcamp: "released June 30,
+                       2023", read 2026-08-05. The vault's Arkansas material is
+                       all 2023 press and MV-HR-20260707-041 dates the record's
+                       viral single to January 2023.
+       Both corrected years also match the spine's own display years in
+       hunter-root.js, which disagreed with this board for as long as both have
+       existed. Skipping Stones (2021) agreed with the spine and is untouched;
+       Chase The Dragon carries no year here and none was invented for it. */
     records: {
       title: "The records, and where to get them",
       items: [
-        { year: "2024", title: "Crooked Home", why: "“’94” is the heart of it, in his own words.",
+        { year: "2025", title: "Crooked Home", why: "“’94” is the heart of it, in his own words.",
           links: [{ name: "Bandcamp", mark: "BC",
                     url: "https://hunterrootmusic.bandcamp.com/album/crooked-home" },
                   { name: "His own store", mark: "ST",
@@ -537,7 +606,7 @@ const ARTISTS = [
           why: "“Nothin' Wrong” is from this one.",
           links: [{ name: "Bandcamp", mark: "BC",
                     url: "https://hunterrootmusic.bandcamp.com/album/skipping-stones-that-sink-before-theyre-thrown" }] },
-        { year: "2022", title: "Arkansas",
+        { year: "2023", title: "Arkansas",
           links: [{ name: "Bandcamp", mark: "BC",
                     url: "https://hunterrootmusic.bandcamp.com/album/arkansas" },
                   { name: "His own store", mark: "ST",
@@ -548,8 +617,14 @@ const ARTISTS = [
                   { name: "His own store", mark: "ST",
                     url: "https://www.hunterroot.com/" }] },
       ],
-      note: "Sixteen releases sit on his own Bandcamp; nine albums are on file " +
-            "in this museum's vault.",
+      /* [W1] "nine albums" -> what the nine containers actually are. The
+         sixteen is unchanged and was re-counted on his Bandcamp catalogue page
+         2026-08-05: sixteen releases, three of them albums and the rest
+         singles. This is the line that has been quietly contradicting the
+         card's "holds itself" for as long as both have been on the glass. */
+      note: "Sixteen releases sit on his own Bandcamp; seven records, an EP " +
+            "and a set of singles and rarities are on file in this museum's " +
+            "vault.",
     },
     decks: [
       { title: "Said about him", kind: "quote", cards: [
@@ -671,6 +746,13 @@ const ARTISTS = [
     shop: { label: "Red Star Merch", url: "https://jessewelles.redstarmerch.com/",
       fn: "Shop",
       scent: "The store his own site sends you to." },
+    /* [S2 2026-08-05] THE GIFT SHOP TILE'S ADDRESS — Mike's, verified. Rule in
+       GiftShop.jsx's `billing()`. His tile used to go straight to Red Star, the
+       merch vendor; his own site carries SHOP in its nav and that is where it
+       points, read directly 2026-08-05. Same destination, one door earlier, and
+       the door is his. `shop` above is untouched — the artist card still names
+       Red Star for what it is. */
+    shopExit: "https://www.wellesmusic.com/",
     /* [P16 2026-08-02] HE HAS A BANDCAMP, AND NOBODY HAD LOOKED. Read
        directly this round: jessewelles.bandcamp.com carries seven records
        under his own name. It is now the wing's music-library door for him,
@@ -947,6 +1029,26 @@ const ARTISTS = [
     siteNote: "He does own findmikeymike.com, and it is currently serving " +
               "injected spam — so it is named in the ledger and linked nowhere.",
     shop: null,
+    /* ***** [S2 2026-08-05] HE HAS A CLEAN DOMAIN NOW, AND IT IS NOT THE ONE
+       R-a REFUSED. Mike supplied weekendatmikeys.com. READ IT AS A DIFFERENT
+       ADDRESS, because it is one: R-a's refusal above stands, unchanged and
+       unreversed, and findmikeymike.com is still linked from nowhere.
+       WHAT WAS CHECKED BEFORE WIRING IT, 2026-08-05:
+         · it resolves, and it is HIS — the site is "The Family Ranch", the
+           heading is STEP INTO THE WORLD OF MIKEY MIKE, Nashville TN;
+         · the identity ties back to the one surface this wing had already
+           verified the unfakeable way: the site's Instagram is @findmikeymike,
+           which is the handle of the YouTube channel L1 confirmed by oEmbed
+           from his own upload;
+         · it is named as his in the music press independently of the site;
+         · and the thing that shut the other door — NO injected link farm. The
+           page body was read directly for it; there are no gambling domains and
+           no unrelated restaurant or veterinary sites.
+       IT IS DECLARED ONLY FOR THE GIFT SHOP TILE, which is what Mike named.
+       `site` below is still the video channel and his artist card still reads
+       the same; whether the card's front door should move too is his call and
+       is on the open register. ***** */
+    shopExit: "https://weekendatmikeys.com/",
     marker: "You have almost certainly heard him without knowing it - and he made the record with Rick Rubin.",
     card: {
       tombstone: [

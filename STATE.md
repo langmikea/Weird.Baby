@@ -1360,6 +1360,20 @@ and the `?subtitle=` preview are retired with it — a shown-then-asked device
 that outlives the asking is four dead strings plus a live URL that still
 renders a retired identity.
 
+**[L1 2026-08-05] AMENDED, NOT REVERSED — it reads "Weird.Baby Museum" now.**
+Mike, reading the Lobby: *"'The Museum' becomes 'WEIRD.BABY MUSEUM' — it must
+match the Robots / Music / Foundation branding."* **M-ID's ruling stands in
+full**: it struck four candidates because each named a CLASS OF ARTIST and so
+fenced the building in, and a name that has to shrink to stay accurate is the
+wrong name. **A house name shrinks nothing** — it says whose museum this is,
+which is the one fact the rest of the lobby board already carried and this line
+did not. The string is stored in title case and `.wb-subtitle` uppercases it, so
+the glass says WEIRD.BABY MUSEUM and the data matches every other house name.
+The sweep found this was the **last** place in the building still saying
+anything else; the share tags, the booth's credo and the Foundation's invoice
+were already correct. **The corner watermark went with it** — `weird.baby` was
+the DOMAIN and now reads `Weird.Baby`.
+
 ## THE PERSONALITY MAP (Mike, 2026-08-03 — standing, governs voice everywhere)
 
 Each surface has its own register. Copy, imagery and tone answer to the room

@@ -529,7 +529,10 @@ const hunterFeed = [
             "— his own store, read 2026"], { source: ["own"], topic: ["business"] }),
   fact(HR, ["There is a Back in 94' tee.",
             "The song is on the shirt."], { source: ["own"], topic: ["business"], song: ["94"] }),
-  fact(HR, ["Seventy-eight of his songs are on file in this museum's vault.",
+  /* [W1 2026-08-05] "Seventy-eight" -> "Ninety-three". The scroller was the
+     sixth site printing the slug count as the song count; the reasoning is on
+     Hunter Root's tombstone in worth-a-listen.js. */
+  fact(HR, ["Ninety-three of his tracks are on file in this museum's vault.",
             "Two of them are surfaced in this wing."], { source: ["vault"], topic: ["catalogue"] }),
   fact(HR, ["’94 is the one he calls the heart of it all.",
             "“almost the album title. It's the heart of it all.”"], { source: ["vault"], topic: ["records"], song: ["94"] }),

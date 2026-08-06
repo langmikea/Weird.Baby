@@ -351,6 +351,90 @@ Moved verbatim from `CLAUDE.md` under that file's own ~600-line rule. Nothing wa
 
 ---
 
+## Archived 2026-08-05 (READING PASS ROUND ONE) — THE PARITY RULING + TRIM
+
+**Appended 2026-08-05 (MIKE'S READING PASS — ROUND ONE): THE PARITY RULING +
+TRIM (P1–P5), moved whole.** `CLAUDE.md` was at 576 and this round's entry would
+have carried it past the ~600-line rule. **What is still load-bearing in it is
+NOT in the archive:** P1's ruling that a holdings gap RESOLVES a parity flag is
+`OPERATIONS.md` §5 and the `kind`/`holding` fields in `tools/menu-parity.mjs`;
+P3's four guest-book rules are `OPERATIONS.md` §5; the poke and its precondition
+are `reveal/ledger-declare.mjs` and register C40; the four-step prune procedure
+and the NUL-byte defect class are `OPERATIONS.md` §9.
+
+### 2026-08-05 → THE PARITY RULING + TRIM (P1–P5) — sealed
+- **TWO RULINGS, ONE BEHAVIOUR, ONE IDEA BANKED, AND A DEFECT THAT TURNED OUT TO
+  BE FOUR.** Gates: lint **11/9 = baseline** · build green · provenance **PASS** ·
+  `reveal:check` **PASS** · `parity:gate` **PASS** · lap at desktop and 390px, run
+  first on the dev server and **re-run whole on the built bundle** when the
+  console showed `@vite/client`. Ledger **156 → 157**. Surfacing logged:
+  **13 spendable · 13 promised · 15 idle.** Full narrative:
+  `docs/MUSEUM_PARITY_RULING_AND_TRIM_LOG-20260805.md`.
+- **P1 — PARITY IS THE DEFAULT AND A HOLDINGS GAP *RESOLVES* A FLAG RATHER THAN
+  OVERRIDING IT.** Mike's ruling on M47: the three divergences are holdings gaps,
+  not design, and forcing parity would print rows leading nowhere — **THE STUB
+  LAW, on exactly those grounds.** R2 had shipped four written reasons with no way
+  to tell *answered* from *excused*, so a justification carries a **`kind`**
+  (HOLDINGS · PROPERTY resolve; **DESIGN stands, and is declared while unused
+  because otherwise the first real preference has two boxes and both say
+  RESOLVED**). And **"it clears itself" is a mechanism now**: a holdings gap must
+  name the LEDGER ROW that would exist and be built if the museum held the
+  material, and `parity:gate` reads `reveal/ledger.json` and **faults the day it
+  does** — `doc.manual.niac` is not a row at all and *that absence is the proof*.
+  Four refusals, each broken on purpose, each fired. **4 resolved · 0 standing.**
+- **P2 — TEXT NOT SUPPLIED DIES.** M45 ruled too thin: the plate was **the museum
+  admitting it had not written the manual, wearing a fiction as cover** — Doctrine
+  11 inside a picture. Either the plate shows a page actually written or **there is
+  no plate**. Not re-captioned, and the tell is that the caption was already doing
+  the work — *a caption that has to argue a picture out of its own lettering is a
+  caption losing an argument with a photograph.* `reel.plates` untouched, so art
+  register P2 is untouched. **M45 and M4 both close** (M4 because there is nothing
+  left to be a render). Confirmed on the glass: zero stills, and the face is
+  BETTER — prose at full width over *PLATES none on file* · **REEL EMPTY**.
+- **P3 — THE GUEST LIST SCROLLS BY HAND: DRAG, with ARROWS as the keyboard half
+  any draggable owes, and THE WHEEL REFUSED WITH A REASON** (92px of a page people
+  scroll cannot take the wheel without stealing it). Drag fits because the book's
+  own file already calls it a hinged board read down and because **it lands on a
+  row** — the track follows the hand with the transition OFF, then settles to the
+  nearest signature with the timer's own bounce. **`↑` stops at the first
+  signature: a guest book has a beginning.** **"Resumes after a rest" is ONE
+  DEPENDENCY, not a second clock — which is exactly what Q1 was.** The clamp did
+  not move. **One hazard caught before it shipped:** hover-pause is guarded on
+  `pointerType === "mouse"`, or a phone's synthetic `mouseenter` freezes the book
+  under the finger that just dragged it. Measured on the built bundle: hand 70px →
+  track −70.0px, settles to offset 2, zero blank rows in 14 samples, zero console
+  errors. **Both method limits stated: the tab was genuinely `document.hidden`
+  (confirmed FIRST, then overridden — v53's own order).**
+- **P4 — THE POKE: LEDGERED, GRADED A+++++, BUILT NOT AT ALL.** `egg.lobby.poke`,
+  NOT_BUILT · HELD · **`shown: false`**. The grade's reasons ARE the spec: found by
+  doing what nobody tells you to do · costs nothing on the glass · **an
+  escalation, which none of the other thirteen eggs has** · on the one object every
+  visitor meets. **What it waits on is ART, not code.** One constraint checked
+  ahead: *"for the rest of the session"* is browser storage, which `/booth`'s
+  privacy answer already covers — **a server round-trip is the version not to
+  build.** C40.
+- **P5 — C39 WAS NEVER ONE FILE: six NUL bytes in four `tools/*.mjs`, one of them
+  `keyOf` in `provenance-sweep.mjs` — the function that hashes every
+  visitor-facing string in the museum.** The row named an INSTANCE of a habit, and
+  the habit had already spread to `menu-parity.mjs`, built one round later. **This
+  round hit the defect twice while working** — a grep returned nothing, then an
+  `Edit` failed on a line it had just read, **because the Read tool renders a NUL
+  as a space.** Proved inert by the strongest test available: `provenance:gate`
+  still passes, which is impossible if one key shifted. **C35 also closed** —
+  `/admin`'s header rows wrap now, and all five controls are reachable at 386px
+  (three were clipped past x=633). What was left is listed with reasons.
+- **TWO THINGS THIS ROUND EXPOSED.** **A prune was refused and the refusal was
+  right:** the one stale register row left by deleting one caption was the anchor
+  of **18 RESTATED chains**; checked first for once, repointed, then pruned, then
+  re-gated — **now a four-step procedure in `OPERATIONS.md` §9.** And **[M49] the
+  surfacing tripwire fired on the opposite of what it was built for**: idle files
+  grew two packets running and **both growths are DELETIONS**, because a file
+  shown-then-struck lands on the same shelf as one built-and-never-shown. Reported,
+  **not adjusted** — a number adjusted to say what a round wants is not a
+  measurement.
+
+---
+
 ## Archived 2026-08-05 (v53) — the two oldest live entries, under CLAUDE.md’s own ~600-line rule
 
 ### 2026-08-04 → MECHANIZE PROVENANCE (v48; P1–P4) — sealed

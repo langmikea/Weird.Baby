@@ -96,9 +96,12 @@
   line-height: 1.2;
 }
 
+/* [S1 2026-08-05] 2rem -> 1.05rem. This was the top-billed banner's size and
+   `.featured-artist--half` overrode it to 1.05rem for everyone else; with one
+   tile size there is one name size, and it is the tile's. */
 .featured-artist__name {
   font-family: 'DM Serif Display', Georgia, serif;
-  font-size: 2rem;
+  font-size: 1.05rem;
   color: var(--wb-gold);
   margin-bottom: 0.6rem;
   line-height: 1.1;
@@ -113,14 +116,10 @@
   max-width: 42ch;
 }
 
-.featured-artist__cta {
-  font-family: 'Syne', sans-serif;
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--wb-gold);
-}
+/* [S1 2026-08-05] `.featured-artist__cta` IS DELETED. Zero callers — the tile
+   has never rendered a call-to-action element; it was written for a design that
+   did and outlived it. Struck under the Law of Subtraction while this file was
+   open on the tiles anyway, and named here rather than removed in silence. */
 
 /* ─── WEIRD.BABY MERCH ─────────────────────────────────────────────── */
 .wb-merch__grid {
@@ -314,7 +313,11 @@
     gap: 1.25rem;
     padding: 1.25rem;
   }
-  .featured-artist__name,
+  /* [S1 2026-08-05] `.featured-artist__name` LEAVES THIS RULE. It set 1.6rem on
+     narrow screens, which was smaller than the 2rem banner and BIGGER than the
+     1.05rem tile — harmless while only one tile on the page could reach it, and
+     a phone full of oversized names the moment every tile is a tile. The two
+     objects still in the rule are unaffected: neither is a shop tile. */
   .friends__name,
   .wb-merch__title {
     font-size: 1.6rem;
@@ -356,10 +359,17 @@
    sized by its column, so doubling the tile means halving the column count —
    two-up where four fit before, each plate roughly twice the edge. More
    artists never change this rule; they just wrap onto more rows. */
-.wal-banners__grid{display:grid;gap:22px;
+/* [S1 2026-08-05] RENAMED `.wal-banners__grid` -> `.gift-shop__grid`, AND THE
+   RENAME IS THE POINT. It is no longer the WAL banners' grid: it is the shop's
+   only grid, and Weird.Baby's own tile is in it at the same size as everybody
+   else's. A class that names four of the five things it holds would send the
+   next reader looking for the other container.
+   `--half` GOES WITH IT. Its two rules were the tile's true dimensions all
+   along — the image well's 1/1 already matches `.featured-artist__image-wrap`'s
+   base rule, and the 1.05rem name is now the base too. A modifier that every
+   instance carries is not a modifier. */
+.gift-shop__grid{display:grid;gap:22px;
   grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))}
-.featured-artist--half .featured-artist__image-wrap{aspect-ratio:1/1}
-.featured-artist--half .featured-artist__name{font-size:1.05rem}
 .featured-artist--dead{cursor:default;opacity:.72}
 .featured-artist--dead:hover{transform:none;box-shadow:none}
 .featured-artist__note{font-family:'Courier Prime','Courier New',monospace;
