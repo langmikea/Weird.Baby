@@ -432,6 +432,77 @@ catches invented CONTENT, Doctrine 11 catches a line whose SUBJECT is the work.
 
 Maintained here. Newest first.
 
+### 2026-08-05 → THE REMOTE-CONTROL ROUND (P1–P11) — sealed
+- **ELEVEN INSTRUCTIONS DOWN THE WIRE, TEN BUILT, AND THE ONE HANDED BACK IS
+  BLOCKED BY HIS OWN RULING FROM THE ROUND BEFORE.** Gates: lint **11/9 =
+  baseline** · build green · provenance **PASS** (72 strings + 2 assets declared,
+  61 stale rows pruned, 0 dangling) · `reveal:check` **PASS** · `parity:gate`
+  **PASS, proved by breaking it** · lap **on the built bundle**, eleven routes,
+  **zero console messages**, no horizontal overflow. Surfacing **13 · 13 · 15,
+  unmoved** — two files added and both referenced, none orphaned. Full narrative:
+  `docs/MUSEUM_REMOTE_CONTROL_LOG-20260805.md`.
+- **P1 — PARITY IS ABSOLUTE, AND IT REVERSES THE PREVIOUS ROUND'S OPS RULING IN
+  THE OPEN.** That ruling (a holdings gap RESOLVES a divergence) was airtight
+  about the holdings AS THEY ARE and blind to the only thing that mattered: **the
+  material is coming.** `menu-parity.mjs` now fails on ANY divergence; the
+  `JUSTIFIED` table, its `kind` column and **the ledger read that faulted the day
+  a named holding arrived** are deleted — the best mechanism in the old file,
+  mourned in its header with its commit named, because under an absolute rule it
+  has nothing left to guard. **It is a PACKET GATE now**, and that change of
+  status is the ruling: it used to report a judgement and now reports a fact.
+  The mainframe gained The Manual and FAQ; **the STUB LAW is overridden for those
+  two rows and only those two**, and Doctrine 12 is untouched inside them — the
+  manual row says what is NOT held and invents no section list. **The FAQ row
+  needed no exception at all:** every answer on it was already asserted in this
+  file about BOTH machines and was printing on only one of them.
+- **P7 — THE FIRST PHOTOGRAPH OF THE MAINFRAME WHOLE WAS 58 SECONDS INTO A VIDEO
+  THIS REPO HAS BEEN CITING FOR TWO DAYS.** Three true sentences — the
+  tombstone's *Withheld*, the blurb's *never shown whole*, the poster's *shown
+  nowhere whole* — stopped being true the moment somebody scrubbed the source the
+  six existing plates came from. **What was withheld was never the cabinet; it
+  was the ROBOT, and the robot is out of every frame in this wing.** The badge
+  FITS rather than crops (a square cut of an 858×1438 cabinet throws away two
+  fifths of it) and the disc does not move.
+- **P9 — ADDING ONE FACE TO /wb DROPPED THE MUSEUM'S LAST PAGER OUT OF IT.** M1's
+  no-hidden-information law was applied to /robots and /wal and not to /wb — for
+  the honest reason that **/wb had never declared a face**, so the wing looked
+  compliant by having no content. ABOUT THE ARTIST came up as *"Page 1 of 4"*.
+  `faceFlow: "flat"`; **the Stage is now mounted by nothing anywhere.**
+- **P5 — THE SIZE HALF OF "SESSION DEFAULTS" HAD BEEN BUILT FOR ONE WING IN
+  FOUR SINCE 2026-08-02.** F3 gave `usePersist` a session scope and handed it
+  only to wings declaring `fitOnEntry` — /wal — so /hr, /wb and /robots were
+  restoring a dragged split across months and machines, which is F3's own stated
+  failure left true in three rooms. **The booth's privacy answer changed first**,
+  because *"the panel you dragged wider is still wider tomorrow"* is a sentence
+  this round made false.
+- **P4 — THE RECORD'S NAVIGATION IS BUILT AND RENDERS NOTHING**, because the
+  volume holds one entry and three buttons pointing at the record you are already
+  reading are three dead controls. **So is the old ‹ NEWER / OLDER › walk, which
+  has been drawing two disabled halves and a count reading "1 of 1" since M5.**
+  Both gate at two; the keyboard does not. **The coverflow yields ← → to an open
+  record** — a real cost, stated. Verified against three records on a file copy.
+- **P8 — NOT SHIPPED, AND THE VIEWER IS BUILT.** The reader pages, wraps, counts
+  frames and toggles Fit ↔ Magnify. **The only manual document on file is the
+  61-page structure issue, every page of which reads `[ TEXT REQUIRED ]`** — and
+  P2 struck ONE page of that same document from that same face the round before.
+  Publishing 61 is that ruling reversed at 61× the scale. **M61 is the question.**
+- **P10 — TWO OF THREE. The invoice is a LEDGER because an invoice is a DEMAND
+  and this document demands nothing;** its own small print already said *"so the
+  ledger is honest and public"*. The incoming table takes back its own name, **The
+  register**, and two prose pointers that named the wrong object were repointed.
+  *"held, ever"* deleted. **The tone ruling is recorded as standing with four
+  tests, and the audit says the wing already passes** — written down because a
+  ruling that changed nothing on day one gets assumed decorative. The albums and
+  tracklist are **M62**: a straight port deletes the account card, the register
+  and the ledger, two of which are mechanisms Mike specified himself.
+- **AND THE PRUNE PROCEDURE IS CORRECTED BY ITS OWN FAILURE.** §9 says check
+  anchors first; the check could not enumerate the stale set (154 reported
+  against the sweep's 61). **The register was copied, pruned, and re-gated, and
+  the gate named all eleven broken chains exactly** — because the gate is the
+  thing that DEFINES "resolves". **Prune against a copy and let the gate find
+  them.** It also exposed a mis-class nobody would have found: five rows were
+  RESTATED for a coincidence of wording, and two of them are Mike's own words.
+
 ### 2026-08-05 → MIKE'S READING PASS — ROUND ONE (L1·L2·S1·S2·M1·F1·F2·W1) — sealed
 - **HE READ TWO ROOMS AND EVERY FINDING WAS REAL.** Gates: lint **11/9 =
   baseline** · build green · provenance **PASS** (0 undeclared · 0 stale · 0
@@ -497,57 +568,19 @@ Maintained here. Newest first.
   **deliberately not fixed inside a round that was reading the tool**, whose own
   header says a measurement somebody adjusted is not a measurement.
 
-### 2026-08-05 → THE WAL POSTER EDIT (W1–W4) — sealed
-- **A DELETE-ONLY ROUND WITH ONE SENTENCE REBUILT, AND THE SENTENCE TOOK ALL THE
-  WORK.** Gates: lint **11/9 = baseline** · build green · provenance **PASS** ·
-  `reveal:check` **PASS** · `parity:gate` **PASS** · lap **on the built bundle**
-  at desktop and 386px, zero console messages. Surfacing **13 · 13 · 15,
-  unmoved** — the round struck strings and moved no asset. Register: **M50–M53
-  opened, nothing closed.** Full narrative:
-  `docs/MUSEUM_WAL_POSTER_EDIT_LOG-20260805.md`.
-- **W1 — THREE TRUE PASSAGES STRUCK FROM THE WAL POSTER**, Mike’s fault-finding
-  verbatim: *they explain what the room already does or congratulate the house on
-  its own process.* The curation label, the standard line and the bill’s foot are
-  gone as FIELDS — **no render path was touched**, `bill.standard` and
-  `bill.foot` are still conditional in `Exhibit.jsx` and their CSS still stands,
-  so a later face may declare either again. **The one strike that costs something
-  is the per-act “Open the room” chip**, which carried **P6’s ruling** that what
-  is not readable must be written: striking it **reverses P6 on this one object**
-  and a coarse pointer now gets no cue. Doors verified live — all four panels are
-  still `<button>` and still open their rooms. **M51.**
-- **W2 — HUNTER ROOT’S LINE WAS REBUILT FROM THE VAULT AND EVERY OLD FIGURE IN IT
-  WAS WRONG.** *78 songs* counts only the track rows carrying a `song:` slug —
-  the vault holds **93**, and the fifteen it drops are the whole of Run With The
-  Hunt. *Nine records* counts CONTAINERS; **seven are records**, one is an EP by
-  its own title and one is a set by its own title. *Whole catalogue* is
-  contradicted 400 lines up in the same file (sixteen releases on his Bandcamp).
-  **And the one thing that had to be looked up rather than assumed: Run With The
-  Hunt is a RECORD, not a band** — its ReverbNation page reads like a band’s and
-  `era-buckets.json` files it under *The Band Years*, but vault fact
-  `MV-HR-20260707-004` settles it. Reading the era label would have printed a band
-  that is not there. Ships as one sentence claiming **holdings and nothing else**.
-- **W3/W4 — THE POSTER STANDS BETTER WITHOUT THE 110 WORDS**, and the three
-  things the cuts expose are DESCRIBED SLOTS, not drafts: the panels’ missing
-  affordance (M51) · the blurb’s *“none of them is ours”* now sitting above the
-  panel that says the museum holds his records (M52) · and **a `[PAPA]` marker’s
-  second sentence RENDERING** — *“Every claim about an artist here is already on
-  that artist’s own card, sourced there”* is the last line on the poster and is
-  the claim W1(c) was struck for, because **the scrubber drops only the sentence
-  carrying the marker** (M53). None was rewritten: the instruction was surgical.
-- **THE PRUNE PROCEDURE RAN CLEAN FOR THE FIRST TIME.** Anchors checked BEFORE
-  pruning per `OPERATIONS.md` §9 — the five rows about to go stale anchored
-  **zero** RESTATED chains, so nothing needed repointing. **0 broken references
-  across 2,058 rows** after. **And a register row is not a verified number:**
-  *“78 songs”* was classed VERIFIED with a real citation since v25 and
-  `provenance/README.md` §4 already names that exact string as its example hole.
-  It was never stale — it was never the number it claimed to be.
-
 ### Older entries (2026-05-06 → 2026-08-05) — archived
 Moved to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md`, verbatim, under this file's
-own ≈600-line rule. **2026-08-05 (READING PASS ROUND ONE):** THE PARITY RULING +
+own ≈600-line rule. **2026-08-05 (THE REMOTE-CONTROL ROUND):** THE WAL POSTER
+EDIT (W1–W4), moved whole — the file was at 577 and this round's entry would have
+carried it past the rule. What is still load-bearing in it is NOT in the archive:
+the strike of the per-act *"Open the room"* chip is register M51, the poster's
+rebuilt Hunter Root line is in `worth-a-listen.js` beside the count that produced
+it, and the `[PAPA]`-second-sentence defect is M53. **2026-08-05 (READING PASS ROUND ONE):** THE PARITY RULING +
 TRIM (P1–P5), moved whole — the file was at 576 and this round's entry would have
 carried it past the rule. What is still load-bearing in it is NOT in the archive:
-P1's holdings-gap ruling is `OPERATIONS.md` §5 and `tools/menu-parity.mjs`; P3's
+P1's holdings-gap ruling **has since been REVERSED by Mike** (the
+remote-control round, P1) — parity is absolute and `tools/menu-parity.mjs`
+no longer accepts a written reason at all; P3's
 four guest-book rules are `OPERATIONS.md` §5; the poke and its precondition are
 `reveal/ledger-declare.mjs` and register C40; the four-step prune procedure and
 the NUL-byte defect class are `OPERATIONS.md` §9.

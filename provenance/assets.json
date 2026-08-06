@@ -304,6 +304,22 @@
    "textInImage": false,
    "text": "",
    "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
+  },
+  "7b5f79cef7f944e3": {
+   "ref": "/robots/reference/mgk-viii/cabinet_whole.jpg",
+   "c": "VERIFIED",
+   "s": "the museum's own photograph of its own unit, cut from IMG_1526.MOV (the 2021 build video in the CSR archive, SHA-256 20069C47...D97FED) at 00:58.0, cropped to the cabinet's own bounding box 108,142 -> 966,1580 of the rotated 1080x1920 frame. A re-encode, so the source file's GPS tag does not travel.",
+   "textInImage": false,
+   "text": "",
+   "inspected": "2026-08-05 - P7, full frame and final crop, at 1:1"
+  },
+  "ffb8ce34a119c0dc": {
+   "ref": "/robots/art/portal-cover.png",
+   "c": "MIKE",
+   "s": "the house's own artwork - tools/make_unit_covers.py, on the ROBOTS cover's template. Its badge is a crop of art/viiip.png, which is the museum's own front-view photograph with the twin's own framebuffer composited into the measured portal aperture.",
+   "textInImage": true,
+   "text": "PORTAL - PURVEYORS OF THE WEIRD - the album's own cover. The badge carries the machine's own opening beat: MGK-VIIIp BIOS, in the unit's own screen font, reading correctly.",
+   "inspected": "2026-08-05 - P2, rendered and read at 1200px"
   }
  }
 }

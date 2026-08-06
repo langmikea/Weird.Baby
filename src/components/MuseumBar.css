@@ -38,10 +38,21 @@
 
 /* The room's name, centred on the BAR rather than between its neighbours —
    absolutely positioned so an exit of any length cannot shove it off centre. */
+/* [P6 2026-08-05] AND THE PAGE NAME GOES SLIGHTLY BIGGER. Mike gave this in the
+   same breath as bringing the face title down, and they are one instruction:
+   the identity of the room was being out-shouted by the heading of one panel
+   inside it. This H1 is THE ARTIST NAME on an artist wing and THE PAGE NAME
+   everywhere else — one element, every room, which is what makes "slightly
+   bigger" a single edit. 1.1rem -> 1.2rem (17.6px -> 19.2px).
+   THE ≤720px BRANCH IS DELIBERATELY NOT TOUCHED. It sets its own 0.8rem, and
+   the overlap arithmetic recorded against it — measured at 320px and 360px,
+   overlap 0 at every width — was done at that size. Raising the desktop step
+   cannot reach it, and raising the phone step would invalidate a measurement
+   without re-taking it. */
 .wb-bar-room {
   font-family: 'Syne', sans-serif;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--wb-gold);

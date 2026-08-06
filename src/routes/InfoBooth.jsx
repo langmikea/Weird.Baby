@@ -172,9 +172,19 @@ const FAQ = [
        · the register — `Preferences ▸ User ▸ GO>` in the twin's own menu
          (`MENU_TABLE_SRC`), five pages of what is held, and a shake on the
          last one purges every key named above.
-       · the museum's own settings — panel splits, deck sizes and preset slots
-         (`wb-hr-*`, `wb-wal-*`, `wb-wb-*`) in `localStorage`, per-room arrival
-         flags in `sessionStorage`. Read where they sit; never transmitted.
+       · the museum's own settings — **[P5 2026-08-05] AND THIS CLAUSE WAS
+         REWRITTEN BECAUSE THE CODE UNDER IT MOVED, WHICH IS THE RULE THIS
+         ANSWER LIVES BY.** Mike's site-wide ruling makes every VIEW setting
+         last the session and no longer: panel splits (`wb-*-split`), carousel
+         and viewer heights (`wb-*-cfh`, `wb-*-body`), /hr's deck width
+         (`wb-hr-deck-width`) and the per-room arrival flags (`wb-arrived:*`)
+         are ALL `sessionStorage` now. Two things are deliberately still
+         `localStorage` and the answer names both rather than rounding down:
+         `wb-hr-presets`, the slots a visitor saved themselves, and
+         `wb-read-<wing>`, which records of ours they have opened — the register
+         behind the Record's UNREAD button (src/lib/record-read.js). Read where
+         they sit; never transmitted. Verified by grep: `localStorage` appears
+         in `src/` at exactly those two call sites.
      THE SCOPE OF THE CLAIM IS STILL DELIBERATELY "WHAT THIS SITE RECORDS", not
      "what any machine between you and it can see". The second is not knowable
      from this repository, and a privacy answer that overreaches by one clause
@@ -185,11 +195,14 @@ const FAQ = [
        "you and we don't. Cookies first, because they are what people mean: a " +
        "cookie goes back to the server with every request your browser makes, " +
        "which is the part that makes it a tracking device. This site sets " +
-       "none. Not one, not even ours. Settings that survive between visits are " +
-       "a different mechanism entirely — they sit in your own browser and are " +
-       "read where they sit, so both of these are true at once: nothing " +
-       "follows you back to us, and the panel you dragged wider is still wider " +
-       "tomorrow. What reaches us is two things. The lobby and the exhibit " +
+       "none. Not one, not even ours. Settings are a different mechanism " +
+       "entirely — they sit in your own browser and are read where they sit, " +
+       "so both of these are true at once: nothing follows you back to us, and " +
+       "the panel you dragged wider is still wider when you come back to the " +
+       "room. Most of them last the visit and go when the tab closes. Two " +
+       "outlast it, and they are the two that would be useless otherwise: the " +
+       "presets you saved yourself, and which records of ours you have already " +
+       "opened. What reaches us is two things. The lobby and the exhibit " +
        "rooms each write one line when they load — which page, the site you " +
        "came from if there was one, and the time — and none of those three " +
        "columns is you. Sign the guest book and we keep exactly what you " +

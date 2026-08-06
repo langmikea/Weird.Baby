@@ -1856,10 +1856,10 @@
    "repo": "museum",
    "path": "public/robots/art/mgk-niac-cover.png",
    "ref": "/robots/art/mgk-niac-cover.png",
-   "sha256": "8f599e6b395c5fb9e713bd27a22a24b98f6135a4cada0635302c7b760f8ba24e",
+   "sha256": "549678335467112b4052be78df2af0d8c74eaed5adb568f3ae2217bcbf0f8468",
    "kind": "image",
    "format": "png",
-   "bytes": 203081,
+   "bytes": 206662,
    "container": "png",
    "w": 1200,
    "h": 1200,
@@ -1919,6 +1919,31 @@
    "what": "The MGK-VIIIp album cover — the house ROBOTS template with the whole unit in the disc and the model number below it.",
    "quality": "usable",
    "qualityNote": "This is the instruction met exactly: front_full.png is the unit, square on, whole, sharp, and the disc crop takes it without cutting the machine. The faceplate and the lit glass are legible inside the badge at full size, which is a bonus rather than the point — at deck size it reads as an object. Two departures from the base cover, both deliberate and both applied to BOTH machine covers so the pair cannot drift: the rule sits 14px lower so this name's descender clears it, and the letter-tracking is solved per cover so nine glyphs set inside the measure six do. The word still runs wider than the rule beneath it, which the six-glyph cover does not — the one place the pair is visibly unequal.",
+   "verdict": null,
+   "revealArc": null
+  },
+  {
+   "id": "museum:public/robots/art/portal-cover.png",
+   "uid": "A-fb535d0721",
+   "repo": "museum",
+   "path": "public/robots/art/portal-cover.png",
+   "ref": "/robots/art/portal-cover.png",
+   "sha256": "9fffb10a9ea4414edf276e19de2bfb9f579cb517ebea1a044d1def63790bcd2b",
+   "kind": "image",
+   "format": "png",
+   "bytes": 246283,
+   "container": "png",
+   "w": 1200,
+   "h": 1200,
+   "depth": 8,
+   "colorType": 2,
+   "role": "shipped",
+   "usedBy": [
+    "src/data/artists/robots.js"
+   ],
+   "what": null,
+   "quality": null,
+   "qualityNote": null,
    "verdict": null,
    "revealArc": null
   },
@@ -2014,6 +2039,30 @@
    "what": "The bench — power, a relay board and two feet.",
    "quality": "usable",
    "qualityNote": "1290x725, the largest of the VIII set. Workshop snapshot; the wing's argument is that these are cropped detail, so the framing is the point.",
+   "verdict": null,
+   "revealArc": null
+  },
+  {
+   "id": "museum:public/robots/reference/mgk-viii/cabinet_whole.jpg",
+   "uid": "A-c08e2c5217",
+   "repo": "museum",
+   "path": "public/robots/reference/mgk-viii/cabinet_whole.jpg",
+   "ref": "/robots/reference/mgk-viii/cabinet_whole.jpg",
+   "sha256": "c33c5f99c5ec98a422ff647df8060d63903a3333584ef842cdda7e23765083d5",
+   "kind": "image",
+   "format": "jpg",
+   "bytes": 311304,
+   "container": "jpg",
+   "h": 1438,
+   "w": 858,
+   "components": 3,
+   "role": "shipped",
+   "usedBy": [
+    "src/data/artists/robots.js"
+   ],
+   "what": null,
+   "quality": null,
+   "qualityNote": null,
    "verdict": null,
    "revealArc": null
   },
@@ -2578,6 +2627,7 @@
    "role": "shipped",
    "usedBy": [
     "src/data/artists/robots.js",
+    "src/data/artists/weird-baby.js",
     "src/routes/WbHome.jsx"
    ],
    "what": "The house photo-ID mark — the baby in the ring with the Weird.Baby wordmark. The Lobby's plate and the robots front desk's viewer poster.",

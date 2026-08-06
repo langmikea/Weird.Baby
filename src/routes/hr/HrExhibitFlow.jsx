@@ -3648,9 +3648,17 @@ export default function HrExhibitFlow({
   };
   const [activeTab, setActiveTab] = useState(null);
   const [hoverPeek, setHoverPeek] = useState(false);
+  /* [P5 2026-08-05] THE DECK'S WIDTH IS A VIEW SETTING AND IS NOW SESSION-
+     SCOPED. Mike's site-wide ruling: a page presents the DEFAULT VIEW the first
+     time it is seen in a session, and the visitor's adjustments stick FOR THAT
+     SESSION. A rail dragged to 62% of a 2560px monitor was being restored months
+     later onto a laptop. The key name is unchanged on purpose — an old value
+     sitting in `localStorage` is simply never read again, and nothing has to
+     migrate. THE PRESET SLOTS BELOW STAY IN `localStorage`: a preset is saved
+     work the visitor made, not a size they dragged. */
   const [deckWidth, setDeckWidth] = useState(() => {
     try {
-      const raw = typeof localStorage !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
+      const raw = typeof sessionStorage !== "undefined" ? sessionStorage.getItem(STORAGE_KEY) : null;
       if (raw) {
         const n = parseInt(raw, 10);
         if (!isNaN(n) && n >= DECK_MIN_H) return n;
@@ -3673,8 +3681,8 @@ export default function HrExhibitFlow({
 
   useEffect(() => {
     try {
-      if (typeof localStorage !== "undefined") {
-        localStorage.setItem(STORAGE_KEY, String(deckWidth));
+      if (typeof sessionStorage !== "undefined") {
+        sessionStorage.setItem(STORAGE_KEY, String(deckWidth));
       }
     } catch { /* ignore */ }
   }, [deckWidth]);

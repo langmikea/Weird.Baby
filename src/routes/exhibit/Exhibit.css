@@ -92,6 +92,14 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
   .vp-face-still{height:min(40cqh,200px)}
 }
 .vp-face-body{flex:1;min-width:0;padding:clamp(14px,2.2vw,30px);
+  /* [P6 2026-08-05] "TOO PADDED TOP AND BOTTOM" — the fourth adjective, and it
+     is the one that is not on `.vp-face-title` at all. The face body pads 30px
+     all round at desktop and the heading sits in the top of it, so the title
+     block opened with 30px of paper above it before a single letter. The top
+     comes down to ~18px; the sides and the floor are untouched, because they
+     are the measure the reading column is set in and narrowing those would be
+     a different change than the one he asked for. */
+  padding-top:clamp(10px,1.3vw,18px);
   display:flex;flex-direction:column;gap:12px;overflow-y:auto}
 /* [O5 2026-07-30] THE STICKY CONTROL MUST NOT SIT ON THE CONTENT.
    E5 made `.vp-face-action` sticky so it could not scroll out of reach at
@@ -103,9 +111,37 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
    go: the scroll box now reserves the control's own height, so the rack can
    always be scrolled clear of it. */
 .vp-face-body:has(.vp-face-action){padding-bottom:64px}
-.vp-face-title{font-family:'Syne',sans-serif;font-weight:800;
-  font-size:var(--fs-head);letter-spacing:.22em;
-  text-transform:uppercase;color:var(--wb-gold)}
+/* ==== [P6 2026-08-05] THE TITLE BLOCK COMES DOWN, EVERYWHERE ================
+   MIKE, reading THE RECORD in the viewer: "the title block is TOO PROMINENT —
+   too dark, too big, too bold, too padded top and bottom; it eats space and
+   attention beyond its worth. THIS IS A COMMON PROBLEM IN THAT POSITION ACROSS
+   PAGES — fix it everywhere, not just here."
+
+   IT IS ONE RULE AND IT IS ALREADY EVERYWHERE, which is why the instruction is
+   cheap to obey exactly: `.vp-face-title` is the heading at the top of EVERY
+   face in EVERY wing — /hr, /wal, /wb and /robots — so the four adjectives are
+   four properties on one selector, and nothing needs hunting.
+
+   FOUR CHANGES, ONE PER ADJECTIVE, measured at a 1568px window on /robots/record
+   where he was reading:
+     TOO BIG    `--fs-head` -> `--fs-lead`, 24.4px -> 22.3px. It picks a STEP on
+                P7's ramp rather than a number, which is that ramp's own law; and
+                it drops the face's own heading BELOW the pull quote it used to
+                out-rank, which was the thing P7 was built to stop.
+     TOO BOLD   800 -> 600. Syne at 800 is a display weight and this is a label.
+     TOO DARK   `--wb-gold` #211f1c -> `--wb-gold-lo` #57544d, 5.15:1 on the
+                paper — a clear step quieter, and still above AA for body text
+                let alone for 22px uppercase. THE TWO DARK-GROUND FACES OVERRIDE
+                IT ALREADY (`.vp-face-portal`, `.vp-face-panel`), so the Portal
+                and the panel are untouched by the colour change.
+     TOO TRACKED  .22em -> .15em. Not one of his four words, and it belongs to
+                "eats space": at .22em "TECHNICAL SPECIFICATIONS" sets 5.4px of
+                air between every glyph and the line runs a third wider than the
+                letters in it.
+   The padding is a separate rule — see `.vp-face-body` below. */
+.vp-face-title{font-family:'Syne',sans-serif;font-weight:600;
+  font-size:var(--fs-lead);letter-spacing:.15em;
+  text-transform:uppercase;color:var(--wb-gold-lo)}
 /* [O3a 2026-07-30] THE CONTENT SCALES WITH THE PANEL.
    THE DIAGNOSIS: `.vp-area` is locked to 16:9 by a `padding-top:56.25%`
    spacer, which is derived from WIDTH. Dragging the body taller therefore
@@ -276,6 +312,7 @@ body:has(.vp-face) .vp-area::before{display:none}
 .vp-flat > .vp-recipes,
 .vp-flat > .vp-face-lines,
 .vp-flat > .vp-face-entries,
+.vp-flat > .vp-rec-jump,
 .vp-flat > .vp-rec-index,
 .vp-flat > .vp-rec-body,
 .vp-flat > .vp-spread-head,
@@ -287,6 +324,18 @@ body:has(.vp-face) .vp-area::before{display:none}
    sections with a section's distance between them. The heading opens the
    spread at the section step above; the wall closes up under its own label. */
 .vp-flat > .vp-spread-head + .vp-collage{margin-top:var(--rh-tight)}
+/* [P6 2026-08-05] AND THE HEAD IS NOT A SECTION THE NEXT ONE HAS TO BE PUSHED
+   AWAY FROM. Mike: the title block is "too padded top and bottom". The top was
+   `.vp-face-body`'s own padding; THIS is the bottom, and it was 53px — the full
+   section step — under a 22px heading on any face with no blurb between the two.
+   Measured on /robots/record, where THE RECORD's own blurb was deleted at HR and
+   the index sits straight under the heading.
+   The section step is right BETWEEN two sections, which is what it was written
+   for; a heading and the first thing under it are one movement, so the first
+   block opens at the BLOCK step. Faces that DO carry a blurb are excluded and
+   keep the tight lead the ladder already gives them — the exclusion is the whole
+   reason this is a separate rule rather than a smaller `--rh-sect`. */
+.vp-flat > .vp-face-head + :not(.vp-face-blurb){margin-top:var(--rh-block)}
 /* SIDEBOXES ARE KIN TO EACH OTHER and a section as a GROUP: the first one
    opens the section, the rest of the run closes up beside it. */
 .vp-flat > :not(.vp-box) + .vp-box{margin-top:var(--rh-sect)}
@@ -1380,6 +1429,59 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 .vp-rec-step:disabled{opacity:.3;cursor:default}
 .vp-rec-count{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-small);letter-spacing:.12em;color:var(--wb-gold-mute)}
+
+/* ══ [P4 2026-08-05] THE FAST ACCESS BAR ═══════════════════════════════════
+   MIKE: "FAST-ACCESS BUTTONS — OLDEST / NEWEST / UNREAD (first unread)."
+   It sits at the TOP of the Record, above the index and above an open record,
+   because it is the thing you reach for before you start reading rather than
+   after you have finished. The in-record ‹ NEWER / OLDER › walk stays at the
+   foot, where it belongs: that one is the next step, and the next step is what
+   you want when you reach the end of a page.
+   IT BORROWS `.vp-rec-step`'s furniture rather than inventing a second button
+   language — same mono, same tracking, same hairline box, same disabled state.
+   The only thing it adds is a smaller step, because a jump bar of four is
+   navigation and the walk of two is the reading control. */
+.vp-rec-jump{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.vp-rec-jumpbtn{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.16em;text-transform:uppercase;
+  background:none;border:1px solid var(--wb-border);color:var(--wb-gold-lo);
+  padding:5px 11px;cursor:pointer;transition:border-color .18s,color .18s}
+.vp-rec-jumpbtn:hover:not(:disabled),.vp-rec-jumpbtn:focus-visible:not(:disabled){
+  border-color:var(--wb-gold-lo);color:var(--wb-gold);outline:none}
+.vp-rec-jumpbtn:disabled{opacity:.32;cursor:default}
+/* INDEX is the way OUT of a record and sits apart from the three that move you
+   within it. */
+.vp-rec-jumpbtn--index{margin-left:auto}
+
+/* AN UNREAD RECORD IS MARKED ON ITS OWN ROW. A rule down the left edge rather
+   than a dot: the index is a register of ruled rows and a dot would be the one
+   round thing on the page, and a rule reads at a glance down a column of sixty
+   without being counted. `--wb-gold-lo` because it is a fact about the row and
+   not an alarm. */
+.vp-rec-row--unread > .vp-rec-open{position:relative}
+.vp-rec-row--unread > .vp-rec-open::before{content:"";position:absolute;
+  left:0;top:6px;bottom:6px;width:2px;background:var(--wb-gold-lo)}
+
+/* ══ [P4] AND A RECORD ARRIVES RATHER THAN APPEARING ═══════════════════════
+   Mike asked for the walk to be DELIGHTFUL. This is the whole of the moving
+   part: the headline, the lead and the sections rise 6px and fade in, a beat
+   apart, over a third of a second. It runs on MOUNT, which the walk now is
+   (`key={open}`), so stepping reads as a page turning rather than as text being
+   swapped underneath you.
+   NOTHING MOVES FOR A VISITOR WHO HAS ASKED FOR STILLNESS. The whole block is
+   inside `prefers-reduced-motion: no-preference`, so reduced motion is the
+   ABSENCE of these rules rather than an override of them — there is no state
+   in which a half-applied animation can leave an element at opacity 0. */
+@media (prefers-reduced-motion:no-preference){
+  .vp-rec-headline,.vp-rec-lead,.vp-rec-sects,.vp-rec-still{
+    animation:vp-rec-arrive .34s cubic-bezier(.22,.9,.3,1) both}
+  .vp-rec-lead{animation-delay:.05s}
+  .vp-rec-sects{animation-delay:.10s}
+}
+@keyframes vp-rec-arrive{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:none}
+}
 
 /* ================= [P2 2026-08-02] THE CONTROL ROOM =======================
    Period instrument register: panel steel, engraved-plate legends, the house

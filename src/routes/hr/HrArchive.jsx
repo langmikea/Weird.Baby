@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useArrival } from "../../lib/use-arrival.js";
 
 const ALBUMS = [
   {
@@ -170,6 +171,12 @@ const s = {
 };
 
 export default function HrArchive() {
+  /* [P5 2026-08-05] "This applies to ALL pages." It did not apply to this one:
+     the archive was one of two routes in the building that never called
+     `useArrival`, so a visitor returning to it landed wherever the browser had
+     remembered. Its own room key, not the exhibit's — /hr and /hr/archive are
+     two rooms a visitor arrives at separately. */
+  useArrival("hr-archive");
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(null);
   const [hovTrack, setHovTrack] = useState(null);

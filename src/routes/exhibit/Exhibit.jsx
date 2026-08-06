@@ -7,6 +7,9 @@ import RecordEntry from "./RecordEntry.jsx";
 import {
   entryStamp, groupByPeriod, shouldBand, evidenceOf, docState,
 } from "../../lib/record-model.js";
+import {
+  readKeyFor, readSet, markRead, firstUnread, isUnread,
+} from "../../lib/record-read.js";
 import "./Exhibit.css";
 
 // ─── TYPE CONFIG ──────────────────────────────────────────────────────────────
@@ -488,8 +491,14 @@ const BODY_MIN  = 260; const BODY_MAX  = 1600; const BODY_DEF = 880;
 /* [F3 2026-08-02] A SETTING CAN BE SESSION-SCOPED. Wings that fit themselves
    on entry (WAL) keep the visitor's adjustments for THE SESSION and re-fit
    fresh next visit — a sticky-forever localStorage number would quietly
-   overrule tomorrow's better fit on a different window size. Wings that
-   declare nothing keep localStorage exactly as before. */
+   overrule tomorrow's better fit on a different window size.
+   [P5 2026-08-05] AND NOW EVERY CALLER PASSES "session", so the local branch of
+   this helper has no live caller in the building. It is kept rather than
+   simplified away for one reason: the distinction it encodes — a VIEW setting
+   expires with the visit, a thing the visitor MADE does not — is the ruling
+   itself, and a helper that can only do one of the two would make the other
+   look like an oversight the next time somebody needs it. See the note at the
+   `split` / `cfH` call site. */
 function usePersist(key, def, scope) {
   /* a primitive, not a helper closure: a per-render function in the deps
      defeats the compiler's memoization (it flagged exactly that). */
@@ -1930,6 +1939,85 @@ function ArchiveWall({ face, openLink }) {
    no query parameter selects a VARIANT anywhere in the building. This selects a
    destination, not a variant — but it is a path segment regardless, because a
    door on the lobby board should look like an address. */
+/* ═══ [P4 2026-08-05] THE RECORD'S FAST ACCESS, AND ITS KEYBOARD ═════════════
+   MIKE: "The Record's navigation (it will be 60+ entries in three months and may
+   repeat for NIAC): FAST-ACCESS BUTTONS — OLDEST / NEWEST / UNREAD (first
+   unread). Once INSIDE a record, advancing and retreating must be painless,
+   graceful, easy and DELIGHTFUL — propose the mechanism (cursor keys, buttons,
+   both) and build it."
+
+   THE PROPOSAL, AND IT IS BOTH. Buttons are the discoverable half — a visitor
+   who has never met this surface can see what it does — and the cursor keys are
+   the half that makes a binge painless, because forty records is forty reaches
+   for a mouse otherwise. Neither can be dropped: keys alone are invisible, and
+   buttons alone are the reach.
+
+     ← / →      the record before / the record after
+     Home/End   the newest / the oldest
+     Escape     back to the index
+
+   AND THE ARROWS ARE ALREADY TAKEN, which is the one thing that made this more
+   than a listener: `Exhibit.jsx`'s coverflow moves ALBUMS on ← and →. It now
+   yields while a record is open, because a reader inside a record is reading and
+   not browsing the rack. That is a real cost, stated: with a record open, the
+   arrows will not walk the carousel. The carousel is on screen above and takes a
+   click; the record is what the visitor is looking at.
+
+   ═══ WHY THIS RENDERS NOTHING ON A ONE-RECORD VOLUME ════════════════════════
+   The Record holds ONE entry today. Three buttons that all point at the record
+   you are already reading are three dead controls, and Doctrine 11's corollary
+   removes those rather than leaving them standing. So the bar appears at TWO,
+   and the in-record ‹ NEWER / OLDER › walk — which has been rendering both
+   halves permanently disabled since M5 — is gated the same way and by the same
+   argument. THE KEYBOARD IS NOT GATED: Escape closes a record whatever the
+   volume holds, and a key that does nothing costs no attention.
+   The mechanism is built, and it is not visible today. That is the honest state
+   of a navigation for sixty entries built while there is one. */
+function RecordJump({ list, open, read, onOpen, onClose }) {
+  useEffect(() => {
+    function onKey(e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const t = e.target;
+      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+      if (e.key === "Escape") { if (open !== null) onClose(); return; }
+      if (open === null) return;
+      if (e.key === "ArrowLeft"  && open > 0)              { e.preventDefault(); onOpen(open - 1); }
+      if (e.key === "ArrowRight" && open < list.length - 1) { e.preventDefault(); onOpen(open + 1); }
+      if (e.key === "Home") { e.preventDefault(); onOpen(0); }
+      if (e.key === "End")  { e.preventDefault(); onOpen(list.length - 1); }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [list.length, open, onOpen, onClose]);
+
+  if (list.length < 2) return null;
+
+  const unread = firstUnread(list, read);
+  return (
+    <nav className="vp-rec-jump" aria-label="Move through the record">
+      <button type="button" className="vp-rec-jumpbtn"
+              disabled={open === 0}
+              onClick={() => onOpen(0)}>NEWEST</button>
+      <button type="button" className="vp-rec-jumpbtn"
+              disabled={open === list.length - 1}
+              onClick={() => onOpen(list.length - 1)}>OLDEST</button>
+      {/* THE ONE CONTROL THAT KNOWS SOMETHING THE PAGE DOES NOT: where this
+          visitor stopped. Disabled — rather than hidden — once everything has
+          been read, because a control that vanishes when you finish is a
+          control you cannot learn the meaning of. */}
+      <button type="button" className="vp-rec-jumpbtn vp-rec-jumpbtn--unread"
+              disabled={unread === null || unread === open}
+              title={unread === null ? "every record has been read"
+                                     : "the oldest record you have not opened"}
+              onClick={() => unread !== null && onOpen(unread)}>UNREAD</button>
+      {open !== null && (
+        <button type="button" className="vp-rec-jumpbtn vp-rec-jumpbtn--index"
+                onClick={onClose}>INDEX</button>
+      )}
+    </nav>
+  );
+}
+
 function openedAt(SPINE, open) {
   if (!open) return null;
   for (let ai = 0; ai < SPINE.length; ai++) {
@@ -1999,19 +2087,46 @@ export default function Exhibit({ artist, open = null }) {
      tracks, so half the screen was a column with nine-tenths of it empty —
      the horizontal half of the dead-space complaint. An artist may now state
      its own opening split; without one, 50 as before. */
-  const sizingScope = artist.fitOnEntry ? "session" : undefined;
-  const [split, setSplit] = usePersist(artist.splitKey, artist.splitDefault ?? 50, sizingScope);
-  const [cfH,   setCfH]   = usePersist(artist.cfKey,    300, sizingScope);
+  /* ══ [P5 2026-08-05] EVERY SIZE IS SESSION-SCOPED NOW, IN EVERY WING ══════
+     MIKE: "SESSION DEFAULTS, SITE-WIDE: the FIRST time a page is viewed in a
+     session it presents DEFAULT VIEW — scrolled to top, everything
+     default-sized. Any changes the visitor makes are sticky FOR THAT SESSION.
+     This applies to ALL pages."
+
+     THE SCROLL HALF WAS ALREADY BUILT (M2's `useArrival`) AND THE SIZE HALF WAS
+     BUILT FOR ONE WING. F3 gave `usePersist` a session scope and then handed it
+     out only to wings that declare `fitOnEntry` — which is /wal and nothing
+     else — so /hr, /wb and /robots have been carrying a dragged split and a
+     dragged carousel height FOREVER, across visits, across months, across a
+     different window on a different machine. That is precisely the failure F3's
+     own note describes ("a sticky-forever localStorage number would quietly
+     overrule tomorrow's better fit") and it was left true in three rooms out of
+     four. The scope is now unconditional and `fitOnEntry` goes back to meaning
+     only what its name says: whether the wing measures itself on arrival.
+     WHAT DOES NOT MOVE, and the distinction is the ruling's own: a SETTING is
+     session-scoped; a thing the VISITOR MADE is not. /hr's preset slots stay in
+     `localStorage`, because a preset is saved work and not a view state — see
+     the note at HrExhibitFlow's PRESETS_STORAGE_KEY. So does the Record's read
+     register (src/lib/record-read.js). */
+  const [split, setSplit] = usePersist(artist.splitKey, artist.splitDefault ?? 50, "session");
+  const [cfH,   setCfH]   = usePersist(artist.cfKey,    300, "session");
   /* [X2] Hooks cannot be conditional, so the state always exists; the KEY is
      what is conditional. An artist without `bodyKey` gets an inert slot that
      nothing reads and nothing renders. */
-  const [bodyH, setBodyH] = usePersist(artist.bodyKey || "wb-body-off", BODY_DEF);
+  const [bodyH, setBodyH] = usePersist(artist.bodyKey || "wb-body-off", BODY_DEF, "session");
   /* [M5 2026-08-01] ONE RECORD AT A TIME, BY INDEX — not a volume that is
      open or shut. S6's model was a single boolean driving two buttons
      ("EARLIER ENTRIES" / "CLOSE THE VOLUME") that operated on the whole log;
      Mike killed both. A record now opens on its own, fills the frame, and
      closes by the same control that opened it. null = the index is showing. */
   const [openEntry, setOpenEntry] = useState(null);
+  /* [P4 2026-08-05] WHAT THIS VISITOR HAS ALREADY READ — the register the
+     UNREAD button reads and the index marks its rows from. Keyed on the wing,
+     lives in the visitor's own browser, never transmitted; the reasoning for it
+     being the one setting NOT scoped to the session is in src/lib/record-read.js
+     and it is short: an unread marker that forgets overnight is not one. */
+  const recordReadKey = readKeyFor(artist.exhibitSlug || artist.id);
+  const [readRecords, setReadRecords] = useState(() => readSet(recordReadKey));
   /* [L2] which recipe is selected; index, reset when the track changes. */
   const [recipeIdx, setRecipeIdx] = useState(0);
   const bodyResizable = !!artist.bodyKey;
@@ -2041,7 +2156,13 @@ export default function Exhibit({ artist, open = null }) {
   useEffect(() => {
     if (!bodyResizable) return;
     let stored = null;
-    try { stored = localStorage.getItem(artist.bodyKey); } catch { /* private mode */ }
+    /* [P5 2026-08-05] `sessionStorage`, because that is where the height it is
+       asking about now lives. This read is the one that decides whether the
+       visitor has ALREADY CHOSEN a height, and it was still looking in the old
+       store — which would have made the fit fire over a height dragged five
+       minutes earlier in the same visit. A store move is two edits, and this is
+       the second one. */
+    try { stored = sessionStorage.getItem(artist.bodyKey); } catch { /* private mode */ }
     if (stored) return;
     const el = mainRef.current;
     if (!el) return;
@@ -2229,13 +2350,21 @@ export default function Exhibit({ artist, open = null }) {
   // Arrow keys
   useEffect(() => {
     function onKey(e) {
+      /* [P4 2026-08-05] THE CAROUSEL YIELDS THE ARROWS TO AN OPEN RECORD.
+         A visitor with a record open is reading it, and ← / → there mean the
+         record before and the record after (RecordJump). Two listeners on
+         `document` in the same phase cannot be ordered reliably, so the
+         priority is expressed as a guard rather than as a race. Enter is left
+         alone: it selects the album under the cursor and means nothing inside
+         a record. */
+      if (openEntry !== null && (e.key === "ArrowLeft" || e.key === "ArrowRight")) return;
       if (e.key==="ArrowLeft")  { e.preventDefault(); selectAlbum(Math.max(0,active-1),false); }
       if (e.key==="ArrowRight") { e.preventDefault(); selectAlbum(Math.min(SPINE.length-1,active+1),false); }
       if (e.key==="Enter")      { e.preventDefault(); selectAlbum(active,true); }
     }
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [active]);
+  }, [active, openEntry]);
 
   /* ── [M-e 2026-08-02] STOP — THE FLOOR OF THE TRANSPORT ───────────────────
      THE ONE CONTROL THE WING DID NOT HAVE. The bar could play, pause, skip and
@@ -3624,6 +3753,23 @@ export default function Exhibit({ artist, open = null }) {
                             </ol>
                           );
                           const open = openEntry !== null && list[openEntry] ? openEntry : null;
+                          /* [P4 2026-08-05] OPENING A RECORD IS WHAT MARKS IT
+                              READ, and it is done here rather than in an effect
+                              because here is where the list is in scope and the
+                              moment is known. Every path into a record goes
+                              through `openAt` — the index row, the jump bar, the
+                              cursor keys and the in-record walk — which is the
+                              only way a register like this stays true. */
+                          const openAt = (i) => {
+                            setOpenEntry(i);
+                            if (list[i]) setReadRecords(r => markRead(recordReadKey, list[i], r));
+                          };
+                          const closeRec = () => setOpenEntry(null);
+                          const jump = (
+                            <RecordJump key="jump" list={list} open={open}
+                                        read={readRecords}
+                                        onOpen={openAt} onClose={closeRec} />
+                          );
                           /* [L6 2026-08-02] THE INDEX IS BANDED WHEN IT IS LONG
                               ENOUGH TO NEED IT — binge prep, D-BINGE.
                               "A Record of ten entries and a Record of four
@@ -3640,6 +3786,8 @@ export default function Exhibit({ artist, open = null }) {
                               before and the furniture arrives with the volume
                               that needs it. */
                           if (open === null) return (
+                            <>
+                            {jump}
                             <ol className="vp-face-entries vp-rec-index" data-stage-split="row">
                               {(shouldBand(list) ? groupByPeriod(list) : list.map((entry, index) => ({ entry, index })))
                                 .map((row) => row.band !== undefined ? (
@@ -3647,8 +3795,19 @@ export default function Exhibit({ artist, open = null }) {
                                     {row.label}
                                   </li>
                                 ) : (() => { const en = row.entry, i = row.index; return (
-                                <li key={i} className="vp-fe vp-rec-row">
-                                  <button className="vp-rec-open" onClick={() => setOpenEntry(i)}>
+                                /* [P4] AND THE INDEX SAYS WHICH ONES ARE STILL
+                                    UNREAD. This is the half of Mike's ask that
+                                    makes "an approximate point in the story"
+                                    findable at sixty entries — a reader scanning
+                                    back does not have to remember where they
+                                    stopped, the register does. Marked only on a
+                                    volume with more than one record, for the
+                                    same reason the jump bar is: with one entry
+                                    the mark is a badge on the only row there is. */
+                                <li key={i} className={"vp-fe vp-rec-row"
+                                      + (list.length > 1 && isUnread(en, readRecords)
+                                         ? " vp-rec-row--unread" : "")}>
+                                  <button className="vp-rec-open" onClick={() => openAt(i)}>
                                     {entryStamp(en) && <span className="vp-fe-stamp">{entryStamp(en)}</span>}
                                     <span className="vp-fe-body">
                                       {/* [B9] the class rides the INDEX, which is
@@ -3696,6 +3855,7 @@ export default function Exhibit({ artist, open = null }) {
                                 </li>
                               ); })())}
                             </ol>
+                            </>
                           );
                           const en = list[open];
                           /* ==== [RC 2026-08-04] THE LONG-FORM RECORD ENTRY ===
@@ -3716,13 +3876,28 @@ export default function Exhibit({ artist, open = null }) {
                               — the flat wing's rhythm ladder and the packer's
                               block list both see the same shape they saw. */
                           if (Array.isArray(en.sections) && en.sections.length > 0) return (
+                            <>
+                            {jump}
+                            {/* [P4 2026-08-05] `key={open}` REMOUNTS ON EVERY
+                                WALK, AND THAT IS THE DELIGHT HALF OF MIKE'S ASK
+                                RATHER THAN AN ACCIDENT. Two things need the
+                                mount: the entrance the CSS gives a new record —
+                                an animation on a live element does not re-run
+                                when its props change — and the scroll that puts
+                                the new headline where the old one was, which
+                                RecordEntry does once on mount. Nothing is lost
+                                by remounting: this component's only state is an
+                                open door's overlay, and `walk` already cleared
+                                that before the props changed. */}
                             <RecordEntry
+                              key={"rec-" + open}
                               entry={en} list={list} open={open}
                               epoch={face.recordEpoch}
                               openLink={openLink}
-                              onOpen={setOpenEntry}
-                              onClose={() => setOpenEntry(null)}
+                              onOpen={openAt}
+                              onClose={closeRec}
                               twinEvent={face.twinEvent} />
+                            </>
                           );
                           return (
                             /* [L6 2026-08-02] AN OPENED RECORD IS A RUN OF
@@ -3745,7 +3920,8 @@ export default function Exhibit({ artist, open = null }) {
                                 the parts, so the flat wing (whose container has
                                 no gap at all) reads identically. */
                             [
-                              <button key="head" className="vp-rec-head" onClick={() => setOpenEntry(null)}
+                              jump,
+                              <button key="head" className="vp-rec-head" onClick={closeRec}
                                       title="close this record">
                                 {entryStamp(en) && <span className="vp-fe-stamp">{entryStamp(en)}</span>}
                                 <span className="vp-rec-title">{en.title}</span>
@@ -3877,13 +4053,19 @@ export default function Exhibit({ artist, open = null }) {
                                  fold; the mark says the record is finished, the
                                  way a set proof closes with a tombstone. */
                               <div key="end" className="vp-rec-end" aria-hidden="true"><i /></div>,
+                              /* [P4] THE WALK IS GATED ON THERE BEING SOMEWHERE
+                                 TO WALK. On a one-record volume both halves have
+                                 been rendering permanently disabled since M5,
+                                 which is two dead controls and a count that
+                                 reads "1 of 1". */
+                              list.length > 1 ? (
                               <nav key="nav" className="vp-rec-nav">
                                 <button className="vp-rec-step" disabled={open === 0}
-                                        onClick={() => setOpenEntry(open - 1)}>‹ NEWER</button>
+                                        onClick={() => openAt(open - 1)}>‹ NEWER</button>
                                 <span className="vp-rec-count">{open + 1} of {list.length}</span>
                                 <button className="vp-rec-step" disabled={open === list.length - 1}
-                                        onClick={() => setOpenEntry(open + 1)}>OLDER ›</button>
-                              </nav>,
+                                        onClick={() => openAt(open + 1)}>OLDER ›</button>
+                              </nav>) : null,
                             ].filter(Boolean)
                           );
                         })()}

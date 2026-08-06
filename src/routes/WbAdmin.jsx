@@ -2,11 +2,15 @@ import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import "./WbAdmin.css";
 import { useRoom } from "../lib/use-room.js";
+import { useArrival } from "../lib/use-arrival.js";
 
 export default function WbAdmin() {
   /* [R5] this room owns the page ground while it is mounted — see
      src/lib/use-room.js and the header of this route's stylesheet. */
   useRoom("admin");
+  /* [P5 2026-08-05] the second of the two routes that never called it. Mike's
+     ruling says ALL pages and does not carve out the ones only he sees. */
+  useArrival("admin");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

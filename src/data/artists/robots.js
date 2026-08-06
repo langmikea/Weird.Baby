@@ -251,197 +251,14 @@ import RobotsExhibitFlow from "../../routes/robots/RobotsExhibitFlow.jsx";
 
 /* [S10] the WBR tracks, declared once and referenced by both covers. */
 const WBR_TRACKS = [
-      {
-        /* ==== [R3 2026-08-05] THE FAQ ABSORBS THE FRONT DESK ==============
-           MIKE: "FAQ is the most important and most encompassing surface — the
-           comparison matrix I started imagining is itself a FAQ ANSWER, not a
-           room. Fold anything worth keeping from the three removed surfaces
-           into the FAQ; delete the rest per the Law of Subtraction."
-
-           WHY A FAQ CAN ABSORB THREE FACES WHEN NO ROOM COULD ABSORB A FAQ.
-           Each of the three deleted faces existed to answer a question a
-           visitor turns up with — what is this place, why is the manual full of
-           holes, how do I reach you — and each answered it in the register of a
-           DEPARTMENT rather than of an answer. A question is the smallest unit
-           a front desk has. Three of them are three rows here; as rooms they
-           cost three tracklist entries and three page-loads to say the same
-           things.
-
-           WHAT CAME ACROSS AND FROM WHERE, so the next reader can check the
-           fold rather than trust it:
-             WELCOME     the lead paragraph (now this face's blurb), the
-                         contents register (now `lines`), WHERE TO START, the
-                         purveyor posture, the method, WHY WE BOTHER with its
-                         [PAPA] intact, the family shot with its caption, and
-                         the footer.
-             DOC CONTROL Mike's own canon that the manual came in pieces, which
-                         is the single most load-bearing sentence that face
-                         carried, and the holdings statement that the originals
-                         are held and not published, with its [PAPA] intact.
-             CONTACT     the address and the three things worth writing about,
-                         compressed from three rows into one answer.
-
-           WHAT WAS DELETED OUTRIGHT, NAMED RATHER THAN ABSORBED. The Law of
-           Subtraction's test is what is lost, and for each of these the answer
-           is nothing a reader would miss, because a face they can already reach
-           says it:
-             · DOC CONTROL's FILES row. Both Technical Specifications faces name
-               the two firmware trees, in more detail than this did.
-             · DOC CONTROL's PAGES row. The Manual's own face says "photographs
-               of the printed pages, not a rendering" and "PLATES none on file".
-             · WELCOME's TAGLINE line. "Purveyors of the Weird" is set into the
-               album cover a visitor is looking at while they read this.
-             · CONTACT's ranking of the three reasons to write by how much each
-               would help us — the last of the ceremony N4 started removing.
-           The two typographic cards went with their faces; see the note above
-           the spine for what they were.
-
-           THE STILL IS WELCOME'S, AND IT IS THE ONLY THING THIS FACE INHERITS
-           THAT IS NOT WORDS. M29 records that the FAQ has shipped with no
-           picture since the 31½ card was struck, held under Mike's own
-           exception that a page whose words are the hook needs no image — and
-           that exception was granted to a face in the middle of a wing. THIS
-           FACE IS NOW THE WING'S LANDING: /robots opens on this album and this
-           track, so F1's argument is the one that applies, and it was that the
-           wing whose whole subject is a physical object should not introduce
-           itself in prose. The family shot comes across with the job it was
-           doing. Nothing new is sourced — the file is already in the build
-           twice — and no object is invented for the slot, which is the half of
-           A5's ruling that still binds.
-           ================================================================= */
-        id: "faq",
-        title: "FAQ",
-        videos: [],
-        tags: ["faq", "questions", "about", "house", "purveyor", "buying",
-               "documents", "manual", "originals", "contact"],
-        face: {
-          kind: "text",
-          title: "FREQUENTLY ASKED",
-          subtitle: "WEIRD.BABY ROBOTS",
-          still: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
-          stillCaption: "The units, as they came to us.",
-          /* WELCOME'S LEAD, WITH THE FAQ'S OWN LAST TWO SENTENCES BEHIND IT.
-             Not one clause is new: the first three are the orientation the
-             landing needs, the last two are what this face has always said
-             about its own answers. The FAQ's opening sentence — "the questions
-             people actually turn up with" — went, because the heading and the
-             rows say it. */
-          blurb:
-            "In 1965 somebody built a machine to say what happens next. Sixty " +
-            "years later a delivery of them arrived on a dock with no sender's " +
-            "name on it. This wing is everything we have worked out since — " +
-            "and, more often, what we have not. Some of the answers below stop " +
-            "short. Those are the interesting ones.",
-          /* WELCOME'S CONTENTS REGISTER. It stopped being a business card at N4
-             and became a list of what the wing HOLDS; that job did not go away
-             when the face did. The TAGLINE row is not here — see above. */
-          lines: [
-            "UNITS    MGK-NIAC, the mainframe · MGK-VIIIp, the portable",
-            "ON FILE  photographs, the record, the manual, the firmware",
-            "TRADE    we buy strange things and find out what they are",
-          ],
-          entries: [
-            /* WELCOME's START row, verbatim, wearing a question for its title
-               because that is what a row on this face is. It is the only thing
-               in the wing that says which door is which. */
-            { stamp: "START", title: "Where do I start?",
-              line: "The image archives are what the machines look like, in " +
-                    "details rather than whole. The record is what happened, " +
-                    "as it happened. The portal is the only thing in this wing " +
-                    "that is running.",
-              note: "" },
-            /* WELCOME's WHAT and HOW, merged. Two thin rows saying who we are
-               and in what order we work are one answer to one question; the
-               merge is the Law of Subtraction applied inside the fold rather
-               than only to it. Every clause is theirs. */
-            { stamp: "Q", title: "What are you, exactly?",
-              line: "A purveyor, not a maker. Four parties have touched these " +
-                    "machines and only one of them built anything — we are the " +
-                    "ones who turned up sixty years late, with a screwdriver " +
-                    "and no invitation. Power first, then the glass, then the " +
-                    "software; the question of what any of it was FOR came " +
-                    "last, and it is still coming.",
-              note: "" },
-            { stamp: "Q", title: "Is it real?",
-              line: "The hardware is — you can hold it, and it is heavier than " +
-                    "you expect. Everything the machine says about where it came " +
-                    "from is the machine's own account, and we print it as that.",
-              note: "[PAPA] — how straight to play this" },
-            { stamp: "Q", title: "Does it still work?",
-              line: "It does. Power was the hard part and power was solved; the " +
-                    "batteries came back, the software woke up behind them, and " +
-                    "it went on doing what it was built to do as though nothing " +
-                    "had happened.",
-              note: "[PAPA]" },
-            /* [A5 2026-08-04] "How many are there?" IS REMOVED. Its answer was
-               the count and the count is what Mike struck; there is no honest
-               shorter answer, and writing a different one would be inventing. */
-            { stamp: "Q", title: "Can I buy one?",
-              line: "Some of them. Not all — several are held, and one is " +
-                    "patient zero and is going nowhere.",
-              note: "[PAPA] — what to say about availability" },
-            { stamp: "Q", title: "Why does it know that?",
-              line: "It does not know anything. It runs a calculation against a " +
-                    "model somebody prescribed for it in 1965, and it has never " +
-                    "once pretended otherwise. Whether that is a comfort is a " +
-                    "matter for the visitor.",
-              note: "" },
-            { stamp: "Q", title: "Who is W.O.?",
-              line: "Nobody knows. That is not a deflection and it is not a " +
-                    "tease — it is the honest state of the record, and it has " +
-                    "been the honest state of the record since the first box " +
-                    "was opened.",
-              note: "" },
-            /* DOC CONTROL's MANUALS row — MIKE'S CANON, verbatim, and the one
-               thing on that face that could not be lost with it. The marker is
-               on the WORDING rather than the substance; the substance is his. */
-            { stamp: "Q", title: "Why is the manual full of holes?",
-              line: "The manual reached us the way everything else did: in " +
-                    "pieces, and presumably that was the point — a complete " +
-                    "document is a document somebody can be caught holding. " +
-                    "There is no complete table of contents, there is no index, " +
-                    "and there is not every page. What we have is assembled out " +
-                    "of copies caught at different stages — preliminary, final, " +
-                    "marked up by hand, and one stamped APPROVED. That is why " +
-                    "the manual is incomplete, and it is why some questions have " +
-                    "no answer in it.",
-              note: "[PAPA] — the wording of this, which is Mike's account" },
-            /* DOC CONTROL's ORIGINALS row, verbatim with its marker. It is the
-               only statement in the wing about what is held and not shown, and
-               `phys.manual.original` in the reveal ledger is reachable through
-               this sentence and no other. */
-            { stamp: "Q", title: "Do you publish the originals?",
-              line: "The originals behind the working copies are kept. None of " +
-                    "them is published on this site, and what is shown here is " +
-                    "never the original — it is a copy, and it says which copy " +
-                    "it is.",
-              note: "[PAPA] — whether any original is ever published, and which" },
-            /* WELCOME's WHY row, verbatim. The best line the front desk had. */
-            { stamp: "Q", title: "Why bother?",
-              line: "Because a machine that still runs is a machine still " +
-                    "saying something, to nobody, in a language it was given " +
-                    "before anyone here was born. Sixty years is nowhere near " +
-                    "long enough for that to stop being worth listening to.",
-              note: "[PAPA] — the real answer is Mike's and should stay Mike's" },
-            /* CONTACT, whole, in one row. N4 had already cut the ceremony down
-               to an address and three subjects; three subjects that are one
-               line each are a list, and a list of three is a sentence. */
-            { stamp: "Q", title: "How do I get in touch?",
-              line: "Write to papa@weird.baby. Three things are worth writing " +
-                    "about: a unit you have seen before — where, when, and any " +
-                    "number you can still remember off the front of it; a " +
-                    "correction, because in places the record certainly is " +
-                    "wrong and it changes in public; and which units are held " +
-                    "and which are not.",
-              note: "[PAPA]" },
-          ],
-          /* WELCOME's footer, and the FAQ's own [PAPA] behind it. The scrub
-             cuts by SENTENCE, so the marked one drops and the line prints. */
-          footer: "“Restoration house” is not what we are. Weird.Baby is " +
-                  "Weird.Baby. [PAPA] — the final wording throughout, and the " +
-                  "answers should be shorter than these.",
-        },
-      },
+      /* ═══ [P2 2026-08-05] THE RECORD SITS ABOVE THE FAQ ═════════════════
+         MIKE: "THE ROBOTS PAGE ORDER: THE RECORD sits above FAQ."
+         The two tracks are the same objects at swapped positions — not one
+         character inside either changed with the move. What DID change is which
+         face this album's first row opens, and the FAQ's own new first answer
+         is written for it: "Finish the FAQ, then follow The Record" sends a
+         visitor UP the list on purpose, because the FAQ is where you start and
+         the Record is where you go next. */
       /* ==== [R1 2026-08-05] THE RECORD MOVED HERE FROM MGK-VIIIp ========
          MIKE: "the Record applies to ALL things robots, not just the VIIIp."
          It sat as the second track of the MGK-VIIIp album, which made the log
@@ -561,6 +378,186 @@ const WBR_TRACKS = [
              question for Mike; it is not a number this file may pick. */
         },
       },
+      {
+        /* ==== [R3 2026-08-05] THE FAQ ABSORBS THE FRONT DESK ==============
+           MIKE: "FAQ is the most important and most encompassing surface — the
+           comparison matrix I started imagining is itself a FAQ ANSWER, not a
+           room. Fold anything worth keeping from the three removed surfaces
+           into the FAQ; delete the rest per the Law of Subtraction."
+
+           WHY A FAQ CAN ABSORB THREE FACES WHEN NO ROOM COULD ABSORB A FAQ.
+           Each of the three deleted faces existed to answer a question a
+           visitor turns up with — what is this place, why is the manual full of
+           holes, how do I reach you — and each answered it in the register of a
+           DEPARTMENT rather than of an answer. A question is the smallest unit
+           a front desk has. Three of them are three rows here; as rooms they
+           cost three tracklist entries and three page-loads to say the same
+           things.
+
+           WHAT CAME ACROSS AND FROM WHERE, so the next reader can check the
+           fold rather than trust it:
+             WELCOME     the lead paragraph (now this face's blurb), the
+                         contents register (now `lines`), WHERE TO START, the
+                         purveyor posture, the method, WHY WE BOTHER with its
+                         [PAPA] intact, the family shot with its caption, and
+                         the footer.
+             DOC CONTROL Mike's own canon that the manual came in pieces, which
+                         is the single most load-bearing sentence that face
+                         carried, and the holdings statement that the originals
+                         are held and not published, with its [PAPA] intact.
+             CONTACT     the address and the three things worth writing about,
+                         compressed from three rows into one answer.
+
+           WHAT WAS DELETED OUTRIGHT, NAMED RATHER THAN ABSORBED. The Law of
+           Subtraction's test is what is lost, and for each of these the answer
+           is nothing a reader would miss, because a face they can already reach
+           says it:
+             · DOC CONTROL's FILES row. Both Technical Specifications faces name
+               the two firmware trees, in more detail than this did.
+             · DOC CONTROL's PAGES row. The Manual's own face says "photographs
+               of the printed pages, not a rendering" and "PLATES none on file".
+             · WELCOME's TAGLINE line. "Purveyors of the Weird" is set into the
+               album cover a visitor is looking at while they read this.
+             · CONTACT's ranking of the three reasons to write by how much each
+               would help us — the last of the ceremony N4 started removing.
+           The two typographic cards went with their faces; see the note above
+           the spine for what they were.
+
+           THE STILL IS WELCOME'S, AND IT IS THE ONLY THING THIS FACE INHERITS
+           THAT IS NOT WORDS. M29 records that the FAQ has shipped with no
+           picture since the 31½ card was struck, held under Mike's own
+           exception that a page whose words are the hook needs no image — and
+           that exception was granted to a face in the middle of a wing. THIS
+           FACE WAS THE WING'S LANDING AND IS NOT ANY MORE. [P2 2026-08-05] The
+           viewer opens on the FIRST TRACK of the landing album, measured on the
+           built bundle, and the Record is the first row now — so /robots opens
+           on THE RECORD and this face is one click away. That is a consequence
+           of his ordering rather than a separate decision, and it is register
+           row M65 rather than a silent change of what the wing introduces
+           itself with. F1's argument is still the one that applies, and it was
+           that the
+           wing whose whole subject is a physical object should not introduce
+           itself in prose. The family shot comes across with the job it was
+           doing. Nothing new is sourced — the file is already in the build
+           twice — and no object is invented for the slot, which is the half of
+           A5's ruling that still binds.
+           ================================================================= */
+        id: "faq",
+        title: "FAQ",
+        videos: [],
+        tags: ["faq", "questions", "about", "house", "purveyor", "buying",
+               "documents", "manual", "originals", "contact"],
+        face: {
+          kind: "text",
+          title: "FREQUENTLY ASKED",
+          subtitle: "WEIRD.BABY ROBOTS",
+          still: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
+          stillCaption: "The units, as they came to us.",
+          /* WELCOME'S LEAD, WITH THE FAQ'S OWN LAST TWO SENTENCES BEHIND IT.
+             Not one clause is new: the first three are the orientation the
+             landing needs, the last two are what this face has always said
+             about its own answers. The FAQ's opening sentence — "the questions
+             people actually turn up with" — went, because the heading and the
+             rows say it. */
+          blurb:
+            "In 1965 somebody built a machine to say what happens next. Sixty " +
+            "years later a delivery of them arrived on a dock with no sender's " +
+            "name on it. This wing is everything we have worked out since — " +
+            "and, more often, what we have not. Some of the answers below stop " +
+            "short. Those are the interesting ones.",
+          /* WELCOME'S CONTENTS REGISTER. It stopped being a business card at N4
+             and became a list of what the wing HOLDS; that job did not go away
+             when the face did. The TAGLINE row is not here — see above. */
+          lines: [
+            "UNITS    MGK-NIAC, the mainframe · MGK-VIIIp, the portable",
+            "ON FILE  photographs, the record, the manual, the firmware",
+            "TRADE    we buy strange things and find out what they are",
+          ],
+          /* ==== [P3 2026-08-05] THE QUESTIONS ARE MIKE'S ==================
+             MIKE: "THE ROBOTS FAQ — replace with the FAQ template and Mike's
+             content, verbatim where given."
+             SO EVERY ANSWER BELOW IS HIS, WORD FOR WORD, and the rows this face
+             used to carry in its own voice went with the questions that held
+             them: the purveyor posture, the order of work, the prescribed model,
+             W.O., the manual's holes, the originals, and why we bother. THAT IS
+             A LOT OF REAL COPY. It is named here rather than mourned — the
+             wing's account of itself is not lost, it is on the faces whose
+             subject it is, and the front desk stops being the place that says
+             everything.
+             WHAT IS LOST AND HAS NOWHERE ELSE TO GO, stated because the Law of
+             Subtraction is a reason to delete and never a reason to delete
+             quietly: the old START row was the only line in the wing that said
+             which door is which, and Mike's replacement sends the visitor
+             through one door rather than naming three. Register M58. */
+          entries: [
+            { stamp: "START", title: "Where do I start?",
+              line: "Finish the FAQ, then follow The Record.",
+              note: "" },
+            /* [P3] THE SLOT IS HELD AND NOTHING IS WRITTEN IN IT. Mike: "Mike
+               will vibe this; the only seed is 'Purveyors of the Weird.Baby'.
+               Backlog it, do not write it."
+               BOTH FIELDS CARRY THE MARKER, AND THAT IS A MECHANISM RATHER THAN
+               A FLOURISH. `scrubFace` keeps an entry whose TITLE survives even
+               when its line does not (Exhibit.jsx :116) — so marking the answer
+               alone would print this question with nothing under it, which is a
+               question whose published answer is that the answer has not been
+               written, which is the exact row this wing deleted at CS. Marked in
+               both, the entry renders NOTHING and the slot stays in the data,
+               where Mike's list of what he owes actually lives. Same path
+               /foundation's billionaires answer takes to the same end. M57. */
+            { stamp: "Q",
+              title: "[PAPA] What is Weird.Baby Robots?",
+              line: "[PAPA] Mike will vibe this; the only seed is " +
+                    "“Purveyors of the Weird.Baby”.",
+              note: "" },
+            /* [P3] HIS FIRST SENTENCE SHIPS; HIS SECOND IS A DESCRIBED SLOT.
+               "Leave the slot, describe it, write nothing" — so the marker sits
+               INSIDE the sentence that names what is missing, and the scrubber
+               takes the whole clause. A visitor reads the hardware answer and
+               stops. What goes in the slot is preserved for Mike and printed
+               nowhere. */
+            { stamp: "Q", title: "Is this stuff real?",
+              line: "The hardware is — you can hold it at least, and it is " +
+                    "heavier than you expect. [PAPA] Everything else — " +
+                    "historical accounts, technical specifications, people " +
+                    "involved — wants words that SOUND favourable and are not: " +
+                    "the house's usefully-useless humour.",
+              note: "" },
+            { stamp: "Q", title: "Does it work?",
+              line: "See “Is this stuff real?”",
+              note: "" },
+            /* [P3] THE TRACKING WARNING IS MIKE'S OWN CONDITION ON THIS ANSWER,
+               and it is written to agree with the booth's privacy answer clause
+               for clause: those platforms know you turned up, this site sets no
+               cookie and carries no pixel, and a door out of the building is a
+               door out of the building. If that answer changes, this changes
+               with it.
+               AND THE HOUSE HAS NO HANDLE ON FILE. Nothing in this repository
+               names a Weird.Baby account on any platform, so the sentence is
+               his instruction and the address is his to supply. It is not
+               invented here and it is not quietly dropped either — M60. */
+            { stamp: "Q", title: "Can I buy one?",
+              line: "Monitor the website for availability. Follow us on social " +
+                    "media — those platforms track you, this site does not, and " +
+                    "following one out of here is leaving the building.",
+              note: "" },
+            { stamp: "Q", title: "Can I try one?",
+              line: "We need to construct a dynamic virtual interface to the " +
+                    "MGK System Portal before we can even consider it — but " +
+                    "when we do, the answer is yes: available online, free to " +
+                    "all to partake.",
+              note: "" },
+            { stamp: "Q", title: "How do I get in touch?",
+              line: "papa@weird.baby",
+              note: "" },
+          ],
+          /* WELCOME's footer, and the FAQ's own [PAPA] behind it. The scrub
+             cuts by SENTENCE, so the marked one drops and the line prints. */
+          footer: "“Restoration house” is not what we are. Weird.Baby is " +
+                  "Weird.Baby. [PAPA] — the final wording throughout, and the " +
+                  "answers should be shorter than these.",
+        },
+      },
 ];
 
 /* ═══ [A8 2026-08-04] THE DISCOGRAPHY'S COMMON THEME ══════════════════════════
@@ -636,6 +633,212 @@ const spine = [
     viewerPoster: "/WeirdBaby_PhotoID.png",
     viewerPosterCaption: "Weird.Baby — purveyors of the weird.",
     tracks: WBR_TRACKS,
+  },
+  /* ═══ [P2 2026-08-05] THE PORTAL IS ITS OWN ALBUM ══════════════════════════
+     MIKE: "THE PORTAL becomes ITS OWN ALBUM — it is very important and this
+     keeps it top-shelf visible."
+
+     WHY SECOND AND NOT LAST. The deck lands on the front desk at index 0 and
+     the carousel's ramp closes up as it goes (F4), so an album past the third
+     position is a cover decking against the edge. Second is the only position
+     that is both top-shelf and not the landing. The two machines keep their
+     canon order behind it — the original mainframe, then the portable.
+
+     THE ONE THING IN THIS WING THAT IS RUNNING, which is what the front desk
+     has said about it since the FAQ absorbed WELCOME, and it was the fourth row
+     of a five-row tracklist on one of two machines.
+
+     THE COVER IS THE WING'S OWN TEMPLATE, third of four, and its badge is THE
+     APERTURE ITSELF: the round glass on the front of the portable carrying the
+     machine's own opening beat, cropped out of `art/viiip.png` — the composite
+     this wing already shows as the ninth plate of the portable's Image Archive.
+     A lit round door with the machine's words in it, sitting inside the cover's
+     own ring. Built by `tools/make_unit_covers.py`, so it cannot drift from the
+     other three.
+     TWO BADGES WERE BUILT FOR THIS SLOT BEFORE IT AND BOTH WERE REJECTED, which
+     is recorded because both read as obvious choices from a file listing. The
+     front glass lit (`front_screen.png`) is the plate M2 says is MIRRORED —
+     every word on the screen backwards, and at badge size the lettering is the
+     only thing in the disc. The bezel is not a photograph of the object at all
+     but a COMPOSITING ASSET with a knocked-out white rectangle where the screen
+     goes, which is M7's own finding about it. The reasons live in that tool's
+     header beside the line that skips them.
+     ═══════════════════════════════════════════════════════════════════════ */
+  {
+    id: "portal",
+    title: "The Portal",
+    year: null,
+    tags: ["portal", "twin", "firmware", "interactive", "mgk", "viiip"],
+    art: "/robots/art/portal-cover.png",
+    accent: null,
+    viewerPoster: "/robots/art/viiip.png",
+    viewerPosterCaption:
+      "MGK-VIIIp — the glass carrying the machine's own opening beat.",
+    tracks: [
+      {
+        id: "portal",
+        title: "Feed Control",
+        videos: [],
+        tags: ["portal", "twin", "firmware", "1965", "interactive"],
+        /* ---- O4 2026-07-30: THE PORTAL IS A TRACK, NOT A BUTTON ----------
+           Mike's ruling. "Run the machine" was a verb on a shelf of nouns,
+           and the thing behind it is not a demonstration — it is a DOORWAY.
+           THE NAME IS THE REVELATION: the p in MGK-VIIIp meant PORTAL all
+           along (CANON 2026-07-29), so the track does not need a name
+           invented for it. It had one.
+           THE FACE IS DELIBERATELY NOT A LOG SHEET. The manual and the record
+           are paper, and they read as paper. This is a transition point —
+           down the tunnel to something that behaves differently — so it wears
+           the instrument register instead: dark ground, the SOURCE/GLASS/STATE
+           block, presets like channel selections. A visitor should be able to
+           feel the change of material before they read a word of it. */
+        face: {
+          /* ======== [P2 2026-08-02] THE CONTROL ROOM ======================
+             Mike's ruling: the Portal track's face becomes the immersion's
+             FIRST STEP — a dark, non-descript control page, half portal-esque
+             itself. Everything that used to be here (the frozen plate, the
+             register block, the ARRIVE AS dropdown, the prose) is replaced by
+             an INSTRUMENT PANEL: you set the machine up, then you throw the
+             latch, and the portal comes up.
+
+             THE PANEL IS DATA, LIKE EVERY OTHER FACE. `kind:"panel"` adds a
+             renderer that knows how to draw a drum, a bat switch, a lamp, a
+             dial and a latch — and knows nothing about MGK, portals or
+             maintenance. Every word, every position and every arming rule is
+             declared here. /hr and /wb declare no faces at all, so they
+             cannot notice this exists.
+
+             THE CONTROLS TELL THE STORY; THEY ARE NOT THE STORY (Mike).
+             C1 says the portal spends its first fortnight in automated,
+             NON-INTERRUPTIBLE maintenance. C3 says the entry state today is
+             one state: boots and updates complete, powered, sitting at the
+             prompt. The SAME TWO LAMPS say both — AUTO MAINT lit + AT PROMPT
+             dark is the launch fortnight; AUTO MAINT dark + AT PROMPT lit is
+             today. Nothing about the fortnight is built; the panel is simply
+             an instrument capable of reporting it, set to today.
+             C2 is respected by omission: the frozen state is not referenced
+             anywhere on this page, because it has no storyline yet.
+
+             THE COMPOSITION, per C3's one-entry-state hold:
+               DRUM      six positions, ONE of which arms (STANDARD). The
+                         other five are engraved on the drum and roll past —
+                         they exist, they are legible, and they do not arm.
+                         That is the fine-dining hold made mechanical: the
+                         menu shows the size of the room without pretending
+                         every door is open.
+               SWITCHES  two, because two is what the story needs and the
+                         brief says no more controls than needed.
+               DIAL      LIVE / SEEDED. LIVE arms. SEEDED re-reads the lamps
+                         and does not arm — there is no seeded feed yet.
+               LATCH     throws only when the panel is armed. */
+          kind: "panel",
+          /* [P2] THE FACE STOPPED REPEATING THE ALBUM. The band above it
+             now reads THE PORTAL, so a heading saying it again is the
+             second object saying what the first already said. The
+             instrument names itself and the machine it belongs to. */
+          title: "FEED CONTROL",
+          subtitle: "MGK-VIIIp",
+          panel: {
+            plate: "A-BEAL INSTRUMENT DIV. \u00b7 FEED CONTROL \u00b7 TYPE 8p",
+            drum: {
+              label: "FEED",
+              sub: "SELECT \u00b7 ONE ARMED",
+              /* positions are read in drum order, top to bottom. `arms:true`
+                 is the only one that lights the drum and permits the latch.
+
+                 \u2550\u2550\u2550 [R6 2026-08-05] THE FEEDS CARRY CHANNEL NUMBERS, AND THE
+                 REASON IS NOT ON THIS PAGE. Mike's instruction: the Portal's
+                 feed positions renumber \u2014 MGK-NIAC takes channels 1 and 2 and
+                 MGK-VIIIp moves to 3 and 4 \u2014 and *the reason is the egg and it
+                 must not be explained on the glass.*
+                 SO NOTHING HERE EXPLAINS IT. Not the drum's legend, not its
+                 sub, not a caption, not a note on the face. The engraving is a
+                 number. A visitor who knows why 3 is where a machine like this
+                 starts has been given something; a visitor who does not has
+                 been given a numbered drum, which is what a numbered drum looks
+                 like. Writing the reason down here would spend it in the same
+                 commit that planted it. It is recorded once, in
+                 `reveal/ledger.json`, which is where this house keeps things it
+                 holds and does not show.
+                 THE NIAC POSITIONS ARE NOT INVENTED FEEDS. Two channels are
+                 engraved for the mainframe and each carries the machine's name
+                 and nothing else \u2014 no state, no mode, no feed title, because
+                 nobody has supplied one and a plausible one is Doctrine 12's
+                 exact failure. Neither arms: the mainframe does not run on the
+                 Portal, and the day it does is a ruling and a feed, not a
+                 label. That NIAC comes first is the true development order and
+                 it needed no argument to place.
+                 THE VIIIp KEEPS ALL SIX OF ITS POSITIONS. M33 records that five
+                 of them are engraved reveal levers; renumbering must not quietly
+                 destroy five levers, so it does not. STANDARD \u2014 the one feed
+                 that arms \u2014 is channel 3. */
+              positions: [
+                { id: "niac-1", ch: 1, label: "MGK-NIAC", arms: false,
+                  why: "This feed is not available." },
+                { id: "niac-2", ch: 2, label: "MGK-NIAC", arms: false,
+                  why: "This feed is not available." },
+                { id: "standard", ch: 3, label: "STANDARD", arms: true,
+                  line: "The unit as it stands: boots and updates complete, " +
+                        "powered, waiting at the opening prompt." },
+                /* [CS 2026-08-04] `why` IS PRINTED ON THE PANEL \u2014 it is the
+                   refusal line under the latch (Exhibit.jsx :1089, :1222). These
+                   five read "held \u2014 one entry state (C3)", "held \u2014 awaiting a
+                   privacy ruling" and "held \u2014 workshop entry, by URL": internal
+                   decision codes, an unmade ruling, and the existence of an
+                   undisclosed URL, all shown to whoever rolls the drum. The
+                   instrument now says the one thing an instrument says when a
+                   position will not arm. */
+                { id: "idling-updated", ch: 4, label: "IDLING, UPD", arms: false,
+                  why: "This feed is not available." },
+                { id: "boot-playback", ch: 5, label: "BOOT PLAYBK", arms: false,
+                  why: "This feed is not available." },
+                { id: "off-first-boot", ch: 6, label: "OFF \u00b7 1ST BOOT", arms: false,
+                  why: "This feed is not available." },
+                { id: "last-state", ch: 7, label: "LAST STATE", arms: false,
+                  why: "This feed is not available." },
+                { id: "test-bench", ch: 8, label: "TEST BENCH", arms: false,
+                  why: "This feed is not available." },
+              ],
+            },
+            switches: [
+              /* [C1] the fortnight, as an instrument. Thrown UP the machine is
+                 in automated maintenance and will not be interrupted — the
+                 latch goes dark and says why. Thrown DOWN, maintenance is
+                 complete, which is where C3 leaves it today. */
+              { id: "maint", label: "AUTO MAINT", sub: "NON-INTERRUPTIBLE",
+                on: false, armsWhen: false,
+                held: "Maintenance is running. The machine will not be hurried.",
+                lamp: "amber" },
+              /* [C3] the entry state, as an instrument. */
+              { id: "prompt", label: "AT PROMPT", sub: "BOOTS + UPDATES DONE",
+                on: true, armsWhen: true,
+                held: "The unit is not at its prompt.",
+                lamp: "warm" },
+            ],
+            dial: {
+              label: "SOURCE",
+              positions: [
+                { id: "live", label: "LIVE", arms: true },
+                { id: "seeded", label: "SEEDED", arms: false,
+                  why: "no seeded feed on file \u2014 the lamps read the seed, " +
+                       "and there is nothing to read" },
+              ],
+            },
+            latch: {
+              label: "LATCH",
+              armed: "FEED ARMED",
+              idle: "NOT ARMED",
+              event: "wb-robots-open-twin",
+            },
+          },
+          /* [PAPA] every engraved word on this panel is a plain-words draft:
+             the plate, the switch legends, the held reasons. The instrument
+             layout is the deliverable; the legends are Mike's. */
+          papa: "[PAPA] \u2014 the engraved legends: plate wording, switch " +
+                "names, and what the panel says when it refuses to arm.",
+        },
+      },
+    ],
   },
   /* ═══ [V2 2026-08-03] MGK-VIII REJOINS THE CAROUSEL, WITH THE LENS CAPPED ══
      MIKE: "MGK-VIII goes on the carousel — build its album using the folder's
@@ -719,11 +922,12 @@ const spine = [
      rather than a decision taken here.
 
      THE FIRST TRACK WAS ALREADY CALLED MGK-NIAC, so the rename collided with
-     it: the band, the tracklist's first row and the face's own heading would all
-     have read MGK-NIAC at once. The track is THE NAME — which is its `id`, its
-     subtitle and its entire subject — and the face heading follows it. That is
-     the one string in this block that is a judgement rather than a substitution,
-     and it is a row in docs/OPEN_ACTIONS.md so it can be put back in one edit.
+     it, and Q3 resolved the collision by calling that track THE NAME. [P2
+     2026-08-05] THAT TRACK IS NOW DELETED IN TOTAL on Mike's instruction — see
+     the note where it stood — so the collision is gone and so is the judgement
+     Q3 had to make about it. The rename itself stands: everything that LABELS
+     this machine reads MGK-NIAC, and every sentence where MGK-VIII is a fact of
+     the record still says MGK-VIII.
      ═══════════════════════════════════════════════════════════════════════ */
   {
     id: "mgk-viii",
@@ -756,8 +960,15 @@ const spine = [
 
        WHAT IT SHOWS NOW: the cabinet. The core through the cage bars, the
        lit column and the cabinet's edge, the red bar bank at the base, and the
-       whole interior in trouble. Four plates, all of one machine, none of them
-       the robot.
+       whole interior in trouble. All of one machine, none of them the robot.
+
+       [P7 2026-08-05] AND THE CABINET IS NOW SHOWN WHOLE. MIKE: "capture THE
+       ENTIRE MAINFRAME (the heater) — the whole cabinet in frame, the robot
+       still out of it." A fifth plate leads the wall and the album cover is
+       built on it. THAT SPENDS THE WITHHOLDING ON THIS OBJECT and the wall's
+       own tombstone says so where it used to say the opposite. R4's canon is
+       untouched by it: the withholding that mattered was always THE FIGURE, and
+       the figure is still out of every frame in this wing.
 
        THE CLAIM ABOUT THE ROBOT IS NOT ON THE GLASS ANYWHERE, and that is the
        point rather than an omission: "so complicated they needed a robot to
@@ -785,84 +996,25 @@ const spine = [
        the family shot's double duty. */
     viewerPoster: "/robots/reference/mgk-viii/core_meltdown.jpg",
     viewerPosterCaption:
-      "MGK-NIAC, the interior in trouble. The cabinet is shown nowhere whole.",
+      "MGK-NIAC, the interior in trouble.",
     tracks: [
-      {
-        id: "name",
-        title: "The Name",
-        videos: [],
-        tags: ["niac", "name", "abeal", "mainframe", "1965"],
-        face: {
-          kind: "text",
-          title: "THE NAME",
-          subtitle: "MGK-NIAC · TWO NAMES, ONE MACHINE",
-          /* [R4 2026-08-05] THE STILL WAS THE LENS — the robot's camera-body
-             head, square on and lit. It was the strongest single frame in the
-             set and it was a portrait of the easter egg, on the face that
-             introduces the machine. It is now the lit column behind the cage
-             bars, with the cabinet's own edge in frame: the same job (something
-             is running in there and you cannot see what it is mounted in) done
-             by the object the face is actually about. */
-          still: "/robots/reference/mgk-viii/column_lit.jpg",
-          stillCaption: "A lit column behind the cage bars, and the cabinet's edge.",
-          blurb:
-            "The mainframe — the big one, the early one, the one that only " +
-            "answers. A cabinet with a core down the middle of it and a bank of " +
-            "bars at the base that says what it thinks. Everything the portable " +
-            "does that this does not arrived later and arrived smaller. It has " +
-            "two names, and this is the one the museum put on the door.",
-          lines: [
-            "BUILT AS   MGK-NIAC",
-            "SOLD AS    MGK-VIII — ABEAL's 1965 rebrand",
-            "FORM       a cabinet: a lit core, side strips, a bar bank at the base",
-            "RUNS       the classic answer set, and a short list beside it",
-            "SUCCESSOR  MGK-VIIIp — portable, later, and far more talkative",
-          ],
-          entries: [
-            /* [HR 2026-08-04] THIS FACE CITED THE RECORD THREE TIMES AND THE
-               RECORD NO LONGER SAYS ANY OF IT. Mike's ruling deleted ten
-               invented Record entries; three lines here were pointers into
-               them and one whole entry was a restatement of one.
-                 · the NAME row's "which is exactly the shape the record
-                   already gives them" and its note "the record's own
-                   correction, 26 January 2024" — both cut. What is left is the
-                   claim this face makes in its own right.
-                 · the WHEN row ("The day the first name surfaced. 9 February
-                   2024 … Carter Bookman") — CUT ENTIRELY. It was the deleted
-                   09 FEB 24 Record entry retold on another face, down to its
-                   date and its quotation, and its note pointed the visitor at
-                   an entry that is gone.
-                 · the OPEN row's "The record prefers the first." — cut. The
-                   record expresses no preference now, and printing one would
-                   be this file inventing the log's opinion of itself. */
-            { stamp: "NAME", title: "Two names, one machine",
-              line: "It was built as MGK-NIAC and sold as MGK-VIII. ABEAL did " +
-                    "the selling and ABEAL did the renaming: they did not " +
-                    "start any of this, they were responsible for the looks.",
-              note: "" },
-            { stamp: "WHAT", title: "A mainframe, not a portable",
-              line: "It runs the classic answer set and a similarly limited " +
-                    "list of everything else. The adjustable personality, the " +
-                    "named engines and the menu are all the portable's, and " +
-                    "all of them came afterwards.",
-              note: "" },
-            /* [Q3 2026-08-05] STAMPED OPEN UNTIL THE DOOR WAS DECIDED, and it
-               was: the album is filed under the first name. The second name's
-               claim is not deleted with the question — the folder, the firmware
-               and the parts still carry it, which is what made this a real
-               choice rather than a preference, and it is why the row survives
-               the answer instead of being struck by Doctrine 16. */
-            { stamp: "FILED", title: "Which name goes on the door",
-              line: "The door reads MGK-NIAC — the name it was built under. The " +
-                    "second name is what the folder is called, what the firmware " +
-                    "is called and what the parts are labelled, so both stay in " +
-                    "use; only one can be on the cover.",
-              note: "" },
-          ],
-          entriesMode: "list",
-          footer: "MGK-NIAC · THE NAME",
-        },
-      },
+      /* ═══ [P2 2026-08-05] THE NAME IS DELETED IN TOTAL ══════════════════
+         MIKE'S INSTRUCTION, IN THOSE WORDS, and it is a deletion rather than a
+         fold: the track, its face, its five-row register and its three entries
+         are gone, and nothing was carried onto another face.
+         WHAT WENT WITH IT, NAMED RATHER THAN QUIETLY DROPPED. The two-names
+         reconciliation — built as MGK-NIAC, sold as MGK-VIII, ABEAL did the
+         selling and ABEAL did the renaming — is stated nowhere in this wing
+         now. Neither is the mainframe-against-portable comparison (the classic
+         answer set here; the adjustable personality, the named engines and the
+         menu there, all of them later and all of them the portable's), nor the
+         FILED row that answered Q3's own question about which name goes on the
+         door. That question is still ANSWERED, by the album being called
+         MGK-NIAC. It is no longer EXPLAINED.
+         AND IT CLOSES A PARITY DIVERGENCE BY SUBTRACTION. "The Name" was the
+         one menu item the mainframe had and the portable did not, and the
+         justification table's only PROPERTY-class entry was written about it.
+         Both are gone. Register M59. */
       {
         /* ==== THE IMAGE ARCHIVE, AND THE THING IT IS BUILT NOT TO SHOW =====
            [N1 2026-08-04] MIKE STRUCK "THE MORGUE". A3 deliberately printed
@@ -891,20 +1043,19 @@ const spine = [
         face: {
           kind: "text",
           title: "IMAGE ARCHIVE",
-          subtitle: "MGK-NIAC · DETAILS ONLY",
+          subtitle: "MGK-NIAC",
           /* [N2] this wing calls its images plates; the wall itself is generic
              and defaults to "images". Read only for a stowed shelf's count. */
           archiveUnit: { one: "plate", many: "plates" },
           blurb:
-            "Four details of a cabinet that is never shown whole. Cropped close " +
-            "on purpose and cut at the bars — enough to establish that the " +
-            "thing is built, wired, powered and lit, and nowhere near enough to " +
-            "establish what it looks like.",
+            "Five plates of the mainframe: the machine entire, and four " +
+            "details cut at the bars — the core, a lit column, the output row " +
+            "at the base, and the whole interior in trouble.",
           tombstone: [
             { k: "Subject", v: "MGK-NIAC, on the bench" },
             { k: "State", v: "Built and powered" },
-            { k: "Plates", v: "Four, cropped from three photographs" },
-            { k: "Frame", v: "Withheld — no plate carries the whole cabinet" },
+            { k: "Plates", v: "Five, cropped from four photographs" },
+            { k: "Frame", v: "One plate carries the whole cabinet; four are cut at the bars" },
             { k: "Rights", v: "Ours. Photographed here, cropped here." },
           ],
           /* [A4 2026-08-04] THE ARCHIVE STACKS IN SPREADS, NEWEST AT THE TOP.
@@ -952,6 +1103,17 @@ const spine = [
              THE HEAD GOES TOO. One spread with a shelf label is furniture, and
              every tile already carries the same date on its own print. */
           collage: [
+            /* [P7 2026-08-05] THE FIRST PHOTOGRAPH OF THIS MACHINE WHOLE, and
+               the wall leads with it. MIKE: "capture THE ENTIRE MAINFRAME (the
+               heater) — the whole cabinet in frame, the robot still out of it."
+               Cut from the same 2021 source the other four come from, at the
+               cabinet's own bounding box. The robot is on the same bench and is
+               not in this frame: the obfuscation law's subject was always the
+               figure, and it is untouched. */
+            { img: "/robots/reference/mgk-viii/cabinet_whole.jpg",
+              href: "/robots/reference/mgk-viii/cabinet_whole.jpg",
+              label: "The cabinet, whole — lit core, bar bank, both feet",
+              date: "MAR 2021" },
             { img: "/robots/reference/mgk-viii/core_helical.jpg",
               href: "/robots/reference/mgk-viii/core_helical.jpg",
               label: "The core, through the cage bars — warm flanks either side",
@@ -969,7 +1131,7 @@ const spine = [
               label: "The whole interior in red-orange, the core glowing like an element",
               date: "MAR 2021" },
           ],
-          footer: "Four plates · details only · Weird.Baby Robots",
+          footer: "Five plates · Weird.Baby Robots",
           /* THE MARKER SCRUB CUTS BY SENTENCE, NOT BY STRING (P5), so whatever
              is written outside the [PAPA] sentence is VISITOR COPY and has to
              read like it. The first draft left "the uncropped photographs are
@@ -985,10 +1147,70 @@ const spine = [
              already on the tombstone four rows up ("Frame — Withheld: no plate
              carries the whole unit"), which is a holdings statement and stays.
              The whole string is now one marked sentence and renders nothing. */
-          papa: "[PAPA] — how much of this unit is ever shown whole, and when; " +
-                "the uncropped originals are all on file, any of them can be " +
-                "published from this file alone, and the crop is a decision " +
-                "rather than a shortage.",
+          papa: "[PAPA] — the cabinet is shown whole now and the robot is " +
+                "not; how much further that goes, and when. The uncropped " +
+                "originals are all on file and any of them can be published " +
+                "from this file alone.",
+        },
+      },
+      {
+        /* ═══ [P1 2026-08-05] PARITY IS ABSOLUTE, AND THIS IS THE ROW THAT
+           COSTS SOMETHING ═════════════════════════════════════════════════
+           MIKE OVERRULES THE OPS RULING OF THE PREVIOUS ROUND, and the reversal
+           is recorded plainly rather than absorbed. P1 (the parity ruling,
+           2026-08-05) held that a HOLDINGS GAP RESOLVES a divergence — "NIAC's
+           menu shows what NIAC has", and forcing parity would print a manual
+           face with no manual behind it. THAT IS REVERSED. The two machines
+           carry THE SAME MENU ITEMS, no more and no less; a divergence is now a
+           FAILURE and the holdings-gap justification no longer resolves one.
+
+           HIS REASON IS ALSO THE EXCEPTION'S REASON. NIAC will run on the
+           Portal on channels 1 and 2, and it will have a manual. These rows are
+           not doors onto rooms nobody intends to build — they are the shelf the
+           material lands on. So THE STUB LAW IS OVERRIDDEN HERE AND ONLY HERE,
+           for the mainframe's Manual and FAQ rows, and the reason is his: A ROW
+           IS A PROMISE ONLY WHEN NOTHING IS COMING, AND THESE ARE COMING.
+
+           WHAT THE EXCEPTION DOES NOT LICENSE, because an exception with no
+           edge is a repeal. DOCTRINE 12 STILL BINDS EVERY WORD BELOW. The row
+           says what is NOT held. It states no date, no section list, no page
+           count, no schedule and no promise, because none of those was supplied
+           and a plausible one is the failure Doctrine 12 exists for. "Say
+           plainly what is not there yet" is the whole permission. */
+        id: "manual",
+        title: "The Manual",
+        videos: [],
+        tags: ["manual", "niac", "mainframe", "opa"],
+        face: {
+          kind: "plate",
+          title: "THE OWNER'S MANUAL",
+          subtitle: "MGK-NIAC",
+          blurb:
+            "No manual for the mainframe is held here. The portable arrived " +
+            "with one — ABEAL 8P-OMI-1, incomplete, assembled out of copies " +
+            "caught at different stages — and nothing of the kind has reached " +
+            "this museum for the cabinet.",
+          lines: [
+            "FORMAT  photographs of the printed pages, not a rendering",
+            "NAV     microfiche reader — page-turn, fit and 1:1 magnify",
+            "PLATES  none on file",
+          ],
+          /* THE READER IS THE SAME READER. `reel` is the microfiche transport
+             the portable's manual face already declares; an empty reel prints
+             its note and nothing else, which is exactly what this row is for.
+             THE FACE CARRIES NO `entries`, and that is the difference between
+             this row and the portable's: that one has a contents page because
+             its sections are attested. This one has none, and inventing six
+             section headings to fill the shape would be the thing the exception
+             above explicitly does not permit. */
+          reel: {
+            label: "MICROFICHE · READER",
+            plates: [],
+            note:
+              "No pages on file. A plate here is a photograph of the printed " +
+              "sheet, edges and margins included.",
+          },
+          footer: "MGK-NIAC · THE OWNER'S MANUAL",
         },
       },
       {
@@ -1071,6 +1293,54 @@ const spine = [
           ],
           entriesMode: "list",
           footer: "MGK-NIAC · TECHNICAL SPECIFICATIONS",
+        },
+      },
+      {
+        /* ═══ [P1 2026-08-05] THE MAINFRAME'S OWN FAQ ══════════════════════
+           The second of the two rows parity requires, and unlike the Manual it
+           did NOT need the stub-law exception in the end: every answer below
+           was already asserted in this file about these machines, so nothing
+           here is written to fill a shape.
+             · "Does it still work?" is the portable FAQ's own answer, which
+               says BOTH units power on and run their own firmware — a claim
+               about the pair, printed until now on only one of them.
+             · "Is the mainframe on the Portal?" is read off the feed drum,
+               where two channels are engraved for this machine and neither
+               arms. A visitor can check it in the next album.
+             · "Can I buy one?" is the portable FAQ's answer verbatim; it was
+               written about the machines, plural, from the day it shipped.
+           THE STILL IS `column_lit.jpg`, WHICH THE NAME'S DELETION FREED. It
+           was that face's plate and would otherwise have become the wing's
+           fourth orphaned photograph this round; it is still a tile on the wall
+           above, the same double duty the bezel does on the portable. */
+        id: "niac-faq",
+        title: "FAQ",
+        videos: [],
+        tags: ["faq", "questions", "niac", "mainframe"],
+        face: {
+          kind: "text",
+          title: "FAQ",
+          subtitle: "ABOUT THIS MACHINE",
+          still: "/robots/reference/mgk-viii/column_lit.jpg",
+          stillCaption: "A lit column behind the cage bars.",
+          blurb:
+            "The questions that get asked about the cabinet, answered as " +
+            "plainly as the answers are known — and marked where they are not.",
+          entries: [
+            { stamp: "Q", title: "Does it still work?",
+              line: "Yes. Both units power on and run their own firmware.",
+              note: "" },
+            { stamp: "Q", title: "Is the mainframe on the Portal?",
+              line: "Not yet. Two channels are engraved for it on the feed " +
+                    "drum and neither of them arms.",
+              note: "" },
+            { stamp: "Q", title: "Can I buy one?",
+              line: "No. The shop carries what the shop carries; the machines " +
+                    "are not stock.",
+              note: "" },
+          ],
+          entriesMode: "list",
+          footer: "MGK-NIAC · FAQ",
         },
       },
       /* [N1 2026-08-04] "THE PARTS" IS REMOVED. Mike's instruction, and it is a
@@ -1462,165 +1732,18 @@ const spine = [
           footer: "MGK-VIIIp \u00b7 TECHNICAL SPECIFICATIONS",
         },
       },
-      {
-        id: "portal",
-        title: "The Portal",
-        videos: [],
-        tags: ["portal", "twin", "firmware", "1965", "interactive"],
-        /* ---- O4 2026-07-30: THE PORTAL IS A TRACK, NOT A BUTTON ----------
-           Mike's ruling. "Run the machine" was a verb on a shelf of nouns,
-           and the thing behind it is not a demonstration — it is a DOORWAY.
-           THE NAME IS THE REVELATION: the p in MGK-VIIIp meant PORTAL all
-           along (CANON 2026-07-29), so the track does not need a name
-           invented for it. It had one.
-           THE FACE IS DELIBERATELY NOT A LOG SHEET. The manual and the record
-           are paper, and they read as paper. This is a transition point —
-           down the tunnel to something that behaves differently — so it wears
-           the instrument register instead: dark ground, the SOURCE/GLASS/STATE
-           block, presets like channel selections. A visitor should be able to
-           feel the change of material before they read a word of it. */
-        face: {
-          /* ======== [P2 2026-08-02] THE CONTROL ROOM ======================
-             Mike's ruling: the Portal track's face becomes the immersion's
-             FIRST STEP — a dark, non-descript control page, half portal-esque
-             itself. Everything that used to be here (the frozen plate, the
-             register block, the ARRIVE AS dropdown, the prose) is replaced by
-             an INSTRUMENT PANEL: you set the machine up, then you throw the
-             latch, and the portal comes up.
-
-             THE PANEL IS DATA, LIKE EVERY OTHER FACE. `kind:"panel"` adds a
-             renderer that knows how to draw a drum, a bat switch, a lamp, a
-             dial and a latch — and knows nothing about MGK, portals or
-             maintenance. Every word, every position and every arming rule is
-             declared here. /hr and /wb declare no faces at all, so they
-             cannot notice this exists.
-
-             THE CONTROLS TELL THE STORY; THEY ARE NOT THE STORY (Mike).
-             C1 says the portal spends its first fortnight in automated,
-             NON-INTERRUPTIBLE maintenance. C3 says the entry state today is
-             one state: boots and updates complete, powered, sitting at the
-             prompt. The SAME TWO LAMPS say both — AUTO MAINT lit + AT PROMPT
-             dark is the launch fortnight; AUTO MAINT dark + AT PROMPT lit is
-             today. Nothing about the fortnight is built; the panel is simply
-             an instrument capable of reporting it, set to today.
-             C2 is respected by omission: the frozen state is not referenced
-             anywhere on this page, because it has no storyline yet.
-
-             THE COMPOSITION, per C3's one-entry-state hold:
-               DRUM      six positions, ONE of which arms (STANDARD). The
-                         other five are engraved on the drum and roll past —
-                         they exist, they are legible, and they do not arm.
-                         That is the fine-dining hold made mechanical: the
-                         menu shows the size of the room without pretending
-                         every door is open.
-               SWITCHES  two, because two is what the story needs and the
-                         brief says no more controls than needed.
-               DIAL      LIVE / SEEDED. LIVE arms. SEEDED re-reads the lamps
-                         and does not arm — there is no seeded feed yet.
-               LATCH     throws only when the panel is armed. */
-          kind: "panel",
-          title: "THE PORTAL",
-          subtitle: "FEED CONTROL \u00b7 MGK-VIIIp",
-          panel: {
-            plate: "A-BEAL INSTRUMENT DIV. \u00b7 FEED CONTROL \u00b7 TYPE 8p",
-            drum: {
-              label: "FEED",
-              sub: "SELECT \u00b7 ONE ARMED",
-              /* positions are read in drum order, top to bottom. `arms:true`
-                 is the only one that lights the drum and permits the latch.
-
-                 \u2550\u2550\u2550 [R6 2026-08-05] THE FEEDS CARRY CHANNEL NUMBERS, AND THE
-                 REASON IS NOT ON THIS PAGE. Mike's instruction: the Portal's
-                 feed positions renumber \u2014 MGK-NIAC takes channels 1 and 2 and
-                 MGK-VIIIp moves to 3 and 4 \u2014 and *the reason is the egg and it
-                 must not be explained on the glass.*
-                 SO NOTHING HERE EXPLAINS IT. Not the drum's legend, not its
-                 sub, not a caption, not a note on the face. The engraving is a
-                 number. A visitor who knows why 3 is where a machine like this
-                 starts has been given something; a visitor who does not has
-                 been given a numbered drum, which is what a numbered drum looks
-                 like. Writing the reason down here would spend it in the same
-                 commit that planted it. It is recorded once, in
-                 `reveal/ledger.json`, which is where this house keeps things it
-                 holds and does not show.
-                 THE NIAC POSITIONS ARE NOT INVENTED FEEDS. Two channels are
-                 engraved for the mainframe and each carries the machine's name
-                 and nothing else \u2014 no state, no mode, no feed title, because
-                 nobody has supplied one and a plausible one is Doctrine 12's
-                 exact failure. Neither arms: the mainframe does not run on the
-                 Portal, and the day it does is a ruling and a feed, not a
-                 label. That NIAC comes first is the true development order and
-                 it needed no argument to place.
-                 THE VIIIp KEEPS ALL SIX OF ITS POSITIONS. M33 records that five
-                 of them are engraved reveal levers; renumbering must not quietly
-                 destroy five levers, so it does not. STANDARD \u2014 the one feed
-                 that arms \u2014 is channel 3. */
-              positions: [
-                { id: "niac-1", ch: 1, label: "MGK-NIAC", arms: false,
-                  why: "This feed is not available." },
-                { id: "niac-2", ch: 2, label: "MGK-NIAC", arms: false,
-                  why: "This feed is not available." },
-                { id: "standard", ch: 3, label: "STANDARD", arms: true,
-                  line: "The unit as it stands: boots and updates complete, " +
-                        "powered, waiting at the opening prompt." },
-                /* [CS 2026-08-04] `why` IS PRINTED ON THE PANEL \u2014 it is the
-                   refusal line under the latch (Exhibit.jsx :1089, :1222). These
-                   five read "held \u2014 one entry state (C3)", "held \u2014 awaiting a
-                   privacy ruling" and "held \u2014 workshop entry, by URL": internal
-                   decision codes, an unmade ruling, and the existence of an
-                   undisclosed URL, all shown to whoever rolls the drum. The
-                   instrument now says the one thing an instrument says when a
-                   position will not arm. */
-                { id: "idling-updated", ch: 4, label: "IDLING, UPD", arms: false,
-                  why: "This feed is not available." },
-                { id: "boot-playback", ch: 5, label: "BOOT PLAYBK", arms: false,
-                  why: "This feed is not available." },
-                { id: "off-first-boot", ch: 6, label: "OFF \u00b7 1ST BOOT", arms: false,
-                  why: "This feed is not available." },
-                { id: "last-state", ch: 7, label: "LAST STATE", arms: false,
-                  why: "This feed is not available." },
-                { id: "test-bench", ch: 8, label: "TEST BENCH", arms: false,
-                  why: "This feed is not available." },
-              ],
-            },
-            switches: [
-              /* [C1] the fortnight, as an instrument. Thrown UP the machine is
-                 in automated maintenance and will not be interrupted — the
-                 latch goes dark and says why. Thrown DOWN, maintenance is
-                 complete, which is where C3 leaves it today. */
-              { id: "maint", label: "AUTO MAINT", sub: "NON-INTERRUPTIBLE",
-                on: false, armsWhen: false,
-                held: "Maintenance is running. The machine will not be hurried.",
-                lamp: "amber" },
-              /* [C3] the entry state, as an instrument. */
-              { id: "prompt", label: "AT PROMPT", sub: "BOOTS + UPDATES DONE",
-                on: true, armsWhen: true,
-                held: "The unit is not at its prompt.",
-                lamp: "warm" },
-            ],
-            dial: {
-              label: "SOURCE",
-              positions: [
-                { id: "live", label: "LIVE", arms: true },
-                { id: "seeded", label: "SEEDED", arms: false,
-                  why: "no seeded feed on file \u2014 the lamps read the seed, " +
-                       "and there is nothing to read" },
-              ],
-            },
-            latch: {
-              label: "LATCH",
-              armed: "FEED ARMED",
-              idle: "NOT ARMED",
-              event: "wb-robots-open-twin",
-            },
-          },
-          /* [PAPA] every engraved word on this panel is a plain-words draft:
-             the plate, the switch legends, the held reasons. The instrument
-             layout is the deliverable; the legends are Mike's. */
-          papa: "[PAPA] \u2014 the engraved legends: plate wording, switch " +
-                "names, and what the panel says when it refuses to arm.",
-        },
-      },
+      /* ═══ [P2 2026-08-05] THE PORTAL LEFT THIS ALBUM ════════════════════
+         MIKE: "THE PORTAL becomes ITS OWN ALBUM — it is very important and this
+         keeps it top-shelf visible." It is the second album in the wing now,
+         ahead of both machines; see the block above the spine's `portal` entry.
+         NOT ONE THING INSIDE IT CHANGED except its own name. The drum, its eight
+         engraved channels, the two switches, the dial, the latch and every held
+         reason are the block that stood here, moved whole rather than retyped.
+         WHAT MOVING IT COSTS, STATED: the p in MGK-VIIIp means PORTAL, so this
+         album is where the object's own name argued for it to live. It is a
+         property of the portable that now sits outside the portable's covers,
+         and a visitor reading MGK-VIIIp top to bottom no longer meets it. That
+         is Mike's call and the visibility is what he bought with it. */
       {
         /* [M2 2026-08-01] THE MACHINE'S OWN FAQ — added per Mike, and kept
            distinct from the house FAQ on the front desk: that one answers

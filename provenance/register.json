@@ -184,28 +184,14 @@
    "l": 215,
    "t": "The units, as they came to us.",
    "p": "WBR_TRACKS[].face.stillCaption",
-   "c": "RESTATED",
-   "r": [
-    "400080dd806ad80e",
-    "66409c81eba92b40"
-   ]
+   "c": "VERIFIED",
+   "s": "the museum's own photograph of its own units, public/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png — the caption states what the plate shows"
   },
   "05868f8002ee1c1a": {
    "f": "src/data/artists/robots.js",
    "l": 222,
    "t": "TRADE    we buy strange things and find out what they are",
    "p": "WBR_TRACKS[].face.lines[]",
-   "c": "RESTATED",
-   "r": [
-    "400080dd806ad80e",
-    "66409c81eba92b40"
-   ]
-  },
-  "c5a0533060cd8646": {
-   "f": "src/data/artists/robots.js",
-   "l": 507,
-   "t": "WHAT",
-   "p": "spine[].tracks[].face.entries[].stamp",
    "c": "HOUSE"
   },
   "302b78c511b1c595": {
@@ -214,25 +200,6 @@
    "t": "WHY",
    "p": "spine[].tracks[].face.entries[].stamp",
    "c": "HOUSE"
-  },
-  "58acc131874648aa": {
-   "f": "src/data/artists/robots.js",
-   "l": 253,
-   "t": "Because a machine that still runs is a machine still saying something, to nobody, in a language it was given before anyone here was born. Sixty years is nowhere near long enough for that to stop being worth listening to.",
-   "p": "WBR_TRACKS[].face.entries[].line",
-   "c": "RESTATED",
-   "r": [
-    "400080dd806ad80e",
-    "66409c81eba92b40"
-   ]
-  },
-  "66409c81eba92b40": {
-   "f": "src/data/artists/robots.js",
-   "l": 257,
-   "t": "[PAPA] — the real answer is Mike's and should stay Mike's",
-   "p": "WBR_TRACKS[].face.entries[].note",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
   },
   "3e75859b7d114f3f": {
    "f": "src/data/artists/robots.js",
@@ -249,15 +216,7 @@
    "l": 269,
    "t": "FREQUENTLY ASKED",
    "p": "WBR_TRACKS[].face.title",
-   "c": "RESTATED",
-   "r": [
-    "8ddfd88b4dc9a152",
-    "907619cc1acfbdc7",
-    "d9573a5b11ceca4f",
-    "e33d38369618419c",
-    "0f6551034087bf9f",
-    "3e58b97f9b6fa534"
-   ]
+   "c": "HOUSE"
   },
   "a0bf4a42360ad818": {
    "f": "src/data/artists/robots.js",
@@ -265,44 +224,6 @@
    "t": "Q",
    "p": "spine[].tracks[].face.entries[].stamp",
    "c": "HOUSE"
-  },
-  "edb02647143265d6": {
-   "f": "src/data/artists/robots.js",
-   "l": 279,
-   "t": "Is it real?",
-   "p": "WBR_TRACKS[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "8ddfd88b4dc9a152",
-    "907619cc1acfbdc7",
-    "d9573a5b11ceca4f",
-    "e33d38369618419c",
-    "0f6551034087bf9f",
-    "3e58b97f9b6fa534"
-   ]
-  },
-  "b07384ed206a5043": {
-   "f": "src/data/artists/robots.js",
-   "l": 280,
-   "t": "The hardware is — you can hold it, and it is heavier than you expect. Everything the machine says about where it came from is the machine's own account, and we print it as that.",
-   "p": "WBR_TRACKS[].face.entries[].line",
-   "c": "RESTATED",
-   "r": [
-    "8ddfd88b4dc9a152",
-    "907619cc1acfbdc7",
-    "d9573a5b11ceca4f",
-    "e33d38369618419c",
-    "0f6551034087bf9f",
-    "3e58b97f9b6fa534"
-   ]
-  },
-  "8ddfd88b4dc9a152": {
-   "f": "src/data/artists/robots.js",
-   "l": 283,
-   "t": "[PAPA] — how straight to play this",
-   "p": "WBR_TRACKS[].face.entries[].note",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
   },
   "77e2ff02a0d15e7d": {
    "f": "src/data/artists/robots.js",
@@ -314,29 +235,6 @@
     "23c7dca6e93292f9"
    ]
   },
-  "5f9f41c4a8589253": {
-   "f": "src/data/artists/robots.js",
-   "l": 285,
-   "t": "It does. Power was the hard part and power was solved; the batteries came back, the software woke up behind them, and it went on doing what it was built to do as though nothing had happened.",
-   "p": "WBR_TRACKS[].face.entries[].line",
-   "c": "RESTATED",
-   "r": [
-    "8ddfd88b4dc9a152",
-    "907619cc1acfbdc7",
-    "d9573a5b11ceca4f",
-    "e33d38369618419c",
-    "0f6551034087bf9f",
-    "3e58b97f9b6fa534"
-   ]
-  },
-  "907619cc1acfbdc7": {
-   "f": "src/data/artists/robots.js",
-   "l": 352,
-   "t": "[PAPA]",
-   "p": "WBR_TRACKS[].face.entries[].note",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
   "697785b65bf2c564": {
    "f": "src/data/artists/robots.js",
    "l": 1323,
@@ -345,75 +243,6 @@
    "c": "RESTATED",
    "r": [
     "23c7dca6e93292f9"
-   ]
-  },
-  "edfddd084ebf3a79": {
-   "f": "src/data/artists/robots.js",
-   "l": 295,
-   "t": "Some of them. Not all — several are held, and one is patient zero and is going nowhere.",
-   "p": "WBR_TRACKS[].face.entries[].line",
-   "c": "RESTATED",
-   "r": [
-    "8ddfd88b4dc9a152",
-    "907619cc1acfbdc7",
-    "d9573a5b11ceca4f",
-    "e33d38369618419c",
-    "0f6551034087bf9f",
-    "3e58b97f9b6fa534"
-   ]
-  },
-  "d9573a5b11ceca4f": {
-   "f": "src/data/artists/robots.js",
-   "l": 297,
-   "t": "[PAPA] — what to say about availability",
-   "p": "WBR_TRACKS[].face.entries[].note",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
-  "a6ed57f5e41b6488": {
-   "f": "src/data/artists/robots.js",
-   "l": 298,
-   "t": "Why does it know that?",
-   "p": "WBR_TRACKS[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "8ddfd88b4dc9a152",
-    "907619cc1acfbdc7",
-    "d9573a5b11ceca4f",
-    "e33d38369618419c",
-    "0f6551034087bf9f",
-    "3e58b97f9b6fa534"
-   ]
-  },
-  "e33d38369618419c": {
-   "f": "src/data/artists/robots.js",
-   "l": 299,
-   "t": "It does not know anything. It runs a calculation against a model somebody prescribed for it in 1965, and it has never once pretended otherwise. Whether that is a comfort is a matter for the visitor.",
-   "p": "WBR_TRACKS[].face.entries[].line",
-   "c": "VERIFIED",
-   "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
-  },
-  "0f6551034087bf9f": {
-   "f": "src/data/artists/robots.js",
-   "l": 304,
-   "t": "Who is W.O.?",
-   "p": "WBR_TRACKS[].face.entries[].title",
-   "c": "VERIFIED",
-   "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
-  },
-  "5cbac0573e91a088": {
-   "f": "src/data/artists/robots.js",
-   "l": 305,
-   "t": "Nobody knows. That is not a deflection and it is not a tease — it is the honest state of the record, and it has been the honest state of the record since the first box was opened.",
-   "p": "WBR_TRACKS[].face.entries[].line",
-   "c": "RESTATED",
-   "r": [
-    "8ddfd88b4dc9a152",
-    "907619cc1acfbdc7",
-    "d9573a5b11ceca4f",
-    "e33d38369618419c",
-    "0f6551034087bf9f",
-    "3e58b97f9b6fa534"
    ]
   },
   "3d8a11ce895f705f": {
@@ -441,120 +270,6 @@
    "p": "spine[].tracks[].face.title",
    "c": "VERIFIED",
    "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
-  },
-  "66910d9f7da56182": {
-   "f": "src/data/artists/robots.js",
-   "l": 480,
-   "t": "BUILT AS   MGK-NIAC",
-   "p": "spine[].tracks[].face.lines[]",
-   "c": "RESTATED",
-   "r": [
-    "371cf0216dd6a40c",
-    "24b45a6fcb6fea12",
-    "92828483029a7a3c",
-    "b3a30eb36383b456",
-    "737f3f085bffe3e2",
-    "92cc1c6c9bd728d3"
-   ]
-  },
-  "92828483029a7a3c": {
-   "f": "src/data/artists/robots.js",
-   "l": 481,
-   "t": "SOLD AS    MGK-VIII — ABEAL's 1965 rebrand",
-   "p": "spine[].tracks[].face.lines[]",
-   "c": "VERIFIED",
-   "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
-  },
-  "b3a30eb36383b456": {
-   "f": "src/data/artists/robots.js",
-   "l": 482,
-   "t": "RUNS       the classic answer set, and a short list beside it",
-   "p": "spine[].tracks[].face.lines[]",
-   "c": "VERIFIED",
-   "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
-  },
-  "357464573a3a7ca2": {
-   "f": "src/data/artists/robots.js",
-   "l": 483,
-   "t": "SUCCESSOR  MGK-VIIIp — portable, later, and far more talkative",
-   "p": "spine[].tracks[].face.lines[]",
-   "c": "RESTATED",
-   "r": [
-    "371cf0216dd6a40c",
-    "24b45a6fcb6fea12",
-    "92828483029a7a3c",
-    "b3a30eb36383b456",
-    "737f3f085bffe3e2",
-    "92cc1c6c9bd728d3"
-   ]
-  },
-  "3c9b8ccf2617fe88": {
-   "f": "src/data/artists/robots.js",
-   "l": 502,
-   "t": "NAME",
-   "p": "spine[].tracks[].face.entries[].stamp",
-   "c": "HOUSE"
-  },
-  "d57edac022a4ef04": {
-   "f": "src/data/artists/robots.js",
-   "l": 502,
-   "t": "Two names, one machine",
-   "p": "spine[].tracks[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "371cf0216dd6a40c",
-    "24b45a6fcb6fea12",
-    "92828483029a7a3c",
-    "b3a30eb36383b456",
-    "737f3f085bffe3e2",
-    "92cc1c6c9bd728d3"
-   ]
-  },
-  "737f3f085bffe3e2": {
-   "f": "src/data/artists/robots.js",
-   "l": 503,
-   "t": "It was built as MGK-NIAC and sold as MGK-VIII. ABEAL did the selling and ABEAL did the renaming: they did not start any of this, they were responsible for the looks.",
-   "p": "spine[].tracks[].face.entries[].line",
-   "c": "VERIFIED",
-   "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
-  },
-  "4ac714a0686ec918": {
-   "f": "src/data/artists/robots.js",
-   "l": 507,
-   "t": "A mainframe, not a portable",
-   "p": "spine[].tracks[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "371cf0216dd6a40c",
-    "24b45a6fcb6fea12",
-    "92828483029a7a3c",
-    "b3a30eb36383b456",
-    "737f3f085bffe3e2",
-    "92cc1c6c9bd728d3"
-   ]
-  },
-  "92cc1c6c9bd728d3": {
-   "f": "src/data/artists/robots.js",
-   "l": 508,
-   "t": "It runs the classic answer set and a similarly limited list of everything else. The adjustable personality, the named engines and the menu are all the portable's, and all of them came afterwards.",
-   "p": "spine[].tracks[].face.entries[].line",
-   "c": "VERIFIED",
-   "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
-  },
-  "35b965377d93fc1e": {
-   "f": "src/data/artists/robots.js",
-   "l": 513,
-   "t": "Which name goes on the door",
-   "p": "spine[].tracks[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "371cf0216dd6a40c",
-    "24b45a6fcb6fea12",
-    "92828483029a7a3c",
-    "b3a30eb36383b456",
-    "737f3f085bffe3e2",
-    "92cc1c6c9bd728d3"
-   ]
   },
   "b059d69645ac40bf": {
    "f": "src/data/artists/robots.js",
@@ -613,14 +328,6 @@
    "p": "spine[].tracks[].face.collage[].date",
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "fd1aa76eb8e40449": {
-   "f": "src/data/artists/robots.js",
-   "l": 605,
-   "t": "[PAPA] — how much of this unit is ever shown whole, and when; the uncropped originals are all on file, any of them can be published from this file alone, and the crop is a decision rather than a shortage.",
-   "p": "spine[].tracks[].face.papa",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
   },
   "c4494f6560bf18de": {
    "f": "src/data/artists/robots.js",
@@ -1648,24 +1355,6 @@
     "23fd272433b3427e",
     "511539bd34abed18"
    ]
-  },
-  "d2d4941eb85ab4fb": {
-   "f": "src/data/artists/robots.js",
-   "l": 1201,
-   "t": "THE PORTAL",
-   "p": "spine[].tracks[].face.title",
-   "c": "RESTATED",
-   "r": [
-    "717117b59d2f401b",
-    "59088dcaf31bb9b5"
-   ]
-  },
-  "4afe8afa9724cff9": {
-   "f": "src/data/artists/robots.js",
-   "l": 1202,
-   "t": "FEED CONTROL · MGK-VIIIp",
-   "p": "spine[].tracks[].face.subtitle",
-   "c": "HOUSE"
   },
   "717117b59d2f401b": {
    "f": "src/data/artists/robots.js",
@@ -8648,21 +8337,6 @@
    "p": "doorsFor{}.fn",
    "c": "HOUSE"
   },
-  "2fe50c6f0660b48d": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 934,
-   "t": "The only surface confirmed to be his — verified from the upload itself, not from a search ranking. Everything he puts out lands here first.",
-   "p": "ARTISTS[].siteScent",
-   "c": "RESTATED",
-   "r": [
-    "181b7b8f2fc8eba2",
-    "aaaae49769c9dc56",
-    "f3059bd0c69cb66e",
-    "e989753523c355e6",
-    "54e0f90b05dc8dbf",
-    "13d55d4628291d5c"
-   ]
-  },
   "55d4cfbf72a6d2ef": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 947,
@@ -11455,16 +11129,6 @@
    "p": "FAQ[].q",
    "c": "HOUSE"
   },
-  "33d686cdeda3ca52": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 365,
-   "t": "Every cost has a name, a number and a sponsor on the record — the domain, the giveaway guitar, the stickers. Each one has a meter, and when a cost is covered its meter reads full, its door says we're good, thanks, and it closes. No overfilling. No pooling. Not even a generous dollar gets held. Today the sponsor on every line is Papa himself, and the invoice above is the whole of it. [PAPA] — the l…",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
   "2d26844d7d4bc9dc": {
    "f": "src/routes/Foundation.jsx",
    "l": 429,
@@ -11536,16 +11200,6 @@
    "t": "Weird.Baby — the account",
    "p": "Foundation{}.<div>.<div>.<div>.<div>",
    "c": "HOUSE"
-  },
-  "e5268e79eb83df1b": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 533,
-   "t": "held, ever",
-   "p": "Foundation{}.<div>.<div>.<div>.<div>",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
   },
   "b4eb245736fef1b9": {
    "f": "src/routes/Foundation.jsx",
@@ -11647,27 +11301,6 @@
    "r": [
     "docs/canonical/THE_CHARTER.md"
    ]
-  },
-  "e9a38da7edbf91e7": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 566,
-   "t": "The ledger",
-   "p": "Foundation{}.<div>.<div>.<section>.<h2>",
-   "c": "HOUSE"
-  },
-  "2f06465cfeea5b91": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 594,
-   "t": "A zero-cost invoice from the keeper to the museum",
-   "p": "Foundation{}.<div>.<div>.<section>.@aria-label",
-   "c": "HOUSE"
-  },
-  "9ee688e983fed530": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 596,
-   "t": "Invoice",
-   "p": "Foundation{}.<div>.<div>.<section>.<div>.<span>",
-   "c": "HOUSE"
   },
   "75f35add897af00b": {
    "f": "src/routes/Foundation.jsx",
@@ -16135,55 +15768,14 @@
    "f": "src/data/artists/robots.js",
    "l": 319,
    "t": "ON FILE  photographs, the record, the manual, the firmware",
-   "c": "RESTATED",
-   "r": [
-    "400080dd806ad80e",
-    "66409c81eba92b40"
-   ]
+   "c": "DERIVED",
+   "s": "read off the wing's own faces in the same file: the Image Archives, The Record, The Manual and Technical Specifications."
   },
   "ade774db78c696dc": {
    "f": "src/data/artists/robots.js",
    "l": 362,
    "t": "START",
    "c": "HOUSE"
-  },
-  "6c2d5fa4475b793e": {
-   "f": "src/data/artists/robots.js",
-   "l": 363,
-   "t": "The image archives are what the machines look like, in details rather than whole. The record is what happened, as it happened. The portal is the only thing in this wing that is running.",
-   "c": "RESTATED",
-   "r": [
-    "400080dd806ad80e",
-    "66409c81eba92b40"
-   ]
-  },
-  "3574f06ef9c8737f": {
-   "f": "src/data/artists/robots.js",
-   "l": 490,
-   "t": "The manual reached us the way everything else did: in pieces, and presumably that was the point — a complete document is a document somebody can be caught holding. There is no complete table of contents, there is no index, and there is not every page. What we have is assembled out of copies caught at different stages — preliminary, final, marked up by hand, and one stamped APPROVED. That is why the manual is incomplete, and it is why some questions have no answer in it.",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, N3, 2026-08-04: \"DOC CONTROL - a new robots surface: user manuals, originals, digital file storage. AND THE MANUAL'S STORY: the manual came to us IN PIECES, like everything else - presumably to avoid detection. Spy shit. So there is no complete table of contents, no index, not every page, and therefore not every answer. What we have is assembled from various copies: preliminary, final, marked-up, stamped APPROVED. Stated plainly, and it is why the manual is incomplete.\" This row IS that ruling, written out. It is the one entry on the face whose content is supplied rather than restated."
-  },
-  "5aa09bc82c8b6aff": {
-   "f": "src/data/artists/robots.js",
-   "l": 499,
-   "t": "[PAPA] — the wording of this, which is Mike's account",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
-  "138d289bdf0a12cc": {
-   "f": "src/data/artists/robots.js",
-   "l": 508,
-   "t": "The originals behind the working copies are kept. None of them is published on this site, and what is shown here is never the original — it is a copy, and it says which copy it is.",
-   "c": "VERIFIED",
-   "s": "the robots repo's own record — C:/AI/Projects/weird-baby-robots (STATE.md, THE_RECORD.md, robots/mgk-viiip/sources/2022-proto-docs/README.md). External to this repo; the sweep cannot re-check it. Same custody table. The second half — that what is shown here is a copy and says which copy — is the museum's own published state: The Manual's plate is captioned as the working copy."
-  },
-  "6c3ee158fff36b76": {
-   "f": "src/data/artists/robots.js",
-   "l": 512,
-   "t": "[PAPA] — whether any original is ever published, and which",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
   },
   "effe4e52865bec59": {
    "f": "src/data/artists/robots.js",
@@ -16323,54 +15915,8 @@
    "f": "src/data/artists/robots.js",
    "l": 341,
    "t": "UNITS    MGK-NIAC, the mainframe · MGK-VIIIp, the portable",
-   "c": "RESTATED",
-   "r": [
-    "400080dd806ad80e",
-    "66409c81eba92b40"
-   ]
-  },
-  "6ff12df8907979a0": {
-   "f": "src/data/artists/robots.js",
-   "l": 790,
-   "t": "The Name",
-   "c": "HOUSE"
-  },
-  "cbb406773ab01bda": {
-   "f": "src/data/artists/robots.js",
-   "l": 795,
-   "t": "THE NAME",
-   "c": "HOUSE"
-  },
-  "ad2cc1dc4a4658cc": {
-   "f": "src/data/artists/robots.js",
-   "l": 796,
-   "t": "MGK-NIAC · TWO NAMES, ONE MACHINE",
-   "c": "HOUSE"
-  },
-  "9570ad83acf2e2a1": {
-   "f": "src/data/artists/robots.js",
-   "l": 848,
-   "t": "FILED",
-   "c": "HOUSE"
-  },
-  "d91592c273e386f9": {
-   "f": "src/data/artists/robots.js",
-   "l": 849,
-   "t": "The door reads MGK-NIAC — the name it was built under. The second name is what the folder is called, what the firmware is called and what the parts are labelled, so both stay in use; only one can be on the cover.",
-   "c": "MIKE",
-   "s": "MIKE, 2026-08-05 (Q3): \"RENAME the MGK-VIII album art to MGK-NIAC — the wing's own canon: MGK-VIII = MGK-8 = Magic 8, and NIAC is the name in use.\" The clause about the folder, the firmware and the parts is the previous version of this line, unchanged."
-  },
-  "82d67c5fc9008d9f": {
-   "f": "src/data/artists/robots.js",
-   "l": 856,
-   "t": "MGK-NIAC · THE NAME",
-   "c": "HOUSE"
-  },
-  "89cd064f259785b2": {
-   "f": "src/data/artists/robots.js",
-   "l": 887,
-   "t": "MGK-NIAC · DETAILS ONLY",
-   "c": "HOUSE"
+   "c": "DERIVED",
+   "s": "read off the robots spine in the same file: two machine albums, MGK-NIAC and MGK-VIIIp."
   },
   "bbcb5e546315f259": {
    "f": "src/data/artists/robots.js",
@@ -16463,14 +16009,6 @@
    "r": [
     "docs/canonical/THE_CHARTER.md"
    ]
-  },
-  "4310e72057a60d4a": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 184,
-   "t": "No — and the better half of the answer is that the machine remembers you and we don't. Cookies first, because they are what people mean: a cookie goes back to the server with every request your browser makes, which is the part that makes it a tracking device. This site sets none. Not one, not even ours. Settings that survive between visits are a different mechanism entirely — they sit in your own browser and are read where they sit, so both of these are true at once: nothing follows you back to us, and the panel you dragged wider is still wider tomorrow. What reaches us is two things. The lobby and the exhibit rooms each write one line when they load — which page, the site you came from if there was one, and the time — and none of those three columns is you. Sign the guest book and we keep exactly what you typed, on the page you typed it into. The MGK keeps far more than we do, and it keeps it on your side of the glass: run it in the robot wing and it will remember your name, your birth date, how far into its install you got, its own condition and your best score — none of which it can send anywhere, because it has no way to reach us at all. It will also show you. Preferences ▸ User is the machine's register of everything it holds about you, page by page, and the last page wipes the lot on the spot. Three things do leave the building, and you should know which. The typefaces are served by Google, so your browser asks Google for them and Google sees it was asked. The rooms with music in them load YouTube's player when the room loads, before you press anything. And one exhibit carries posts embedded from Facebook, which arrive the same way. Google, YouTube and Facebook each know you turned up, and they are the whole of the outside. There is no analytics, no advertising and no tracking pixel anywhere in this site, and if that ever stops being true, this answer changes first.",
-   "p": "FAQ[].a",
-   "c": "VERIFIED",
-   "s": "re-read clause by clause AND MEASURED IN A BROWSER this session (B2, 2026-08-05). Falsifiable from: src/worker.js (no auth on any route; POST /api/visits inserts exactly page + referrer + visited_at; POST /api/guestbook inserts name + note + a fixed badge + a timestamp; no Set-Cookie anywhere), src/routes/WbHome.jsx:278 and src/routes/exhibit/Exhibit.jsx:2163 (the only two callers of /api/visits), index.html (the fonts.googleapis.com stylesheet link + two preconnects), and public/robots/twin.html (Rec_Keys_Local = 7 localStorage keys incl. wbr_user and wbr_boot_level, Rec_Keys_Session = 3; the register at Preferences > User in MENU_TABLE_SRC, REC_PAGES = 5, Rec_Purge wipes all ten; ZERO fetch and ZERO XMLHttpRequest in the whole file, and no document.cookie anywhere in it). THE OUTBOUND CLAUSE IS NOT IN ANY FILE — it was read off performance.getEntriesByType('resource') in every room after a nine-second settle, with nothing clicked: /, /booth, /shop, /foundation and /hr/archive request Google Fonts and nothing else; /robots, /wal and /wb add www.youtube.com x3 (Exhibit.jsx:333 injects iframe_api on load); /hr adds www.youtube.com x3 AND www.facebook.com x16 across 17 iframes (HrExhibitFlow.jsx:2110's facebook.com/plugins/ URL). That measurement is the only thing that establishes 'before you press anything', and it is why the clause names three parties rather than the one N5 declared."
   },
   "d91bdbe60dd81379": {
    "f": "src/routes/Foundation.jsx",
@@ -16568,16 +16106,6 @@
     "504a430bfef6b5c5"
    ]
   },
-  "802bc47f36d2fcc2": {
-   "f": "src/routes/Foundation.jsx",
-   "l": 624,
-   "t": "Not to run the place, and that is the load-bearing part. Help with a cost arrives as the thing itself: pay the registrar directly, buy the actual guitar and ship it, pay the store to send the stickers. If your help would arrive as money in Weird.Baby's hands to spend, it is not help we can take, and we will gladly show you the door that is. The proof is structural rather than promised: there is no account to fill and there never has been one. Giving is the other direction entirely — a gift made in Weird.Baby's name is not the museum's money, it is somebody else's money passing through on the way to someone who needs it. That door is on the ledger above and it is not built yet. [PAPA] — the address that door points at.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
   "0a9c19b9ae27602d": {
    "f": "src/routes/Foundation.jsx",
    "l": 651,
@@ -16614,84 +16142,15 @@
    "f": "src/data/artists/robots.js",
    "l": 347,
    "t": "Where do I start?",
-   "c": "RESTATED",
-   "r": [
-    "400080dd806ad80e",
-    "66409c81eba92b40"
-   ]
-  },
-  "b6fc6534bcb5d7f1": {
-   "f": "src/data/artists/robots.js",
-   "l": 357,
-   "t": "What are you, exactly?",
-   "c": "RESTATED",
-   "r": [
-    "400080dd806ad80e",
-    "66409c81eba92b40"
-   ]
-  },
-  "3bd6ce4b8eaf3b70": {
-   "f": "src/data/artists/robots.js",
-   "l": 358,
-   "t": "A purveyor, not a maker. Four parties have touched these machines and only one of them built anything — we are the ones who turned up sixty years late, with a screwdriver and no invitation. Power first, then the glass, then the software; the question of what any of it was FOR came last, and it is still coming.",
-   "c": "RESTATED",
-   "r": [
-    "400080dd806ad80e",
-    "66409c81eba92b40"
-   ],
-   "n": "WELCOME's WHAT and HOW rows merged, clause for clause. Two thin rows answering one question became one answer; no clause is new and none is dropped."
-  },
-  "2a94076662b537f5": {
-   "f": "src/data/artists/robots.js",
-   "l": 398,
-   "t": "Why is the manual full of holes?",
-   "c": "RESTATED",
-   "r": [
-    "400080dd806ad80e",
-    "66409c81eba92b40"
-   ],
-   "n": "A question wearing DOC CONTROL's own answer. The ANSWER below it is Mike's canon, verbatim, and keeps its own row and its own [PAPA]."
-  },
-  "1bbec2ae9786a8de": {
-   "f": "src/data/artists/robots.js",
-   "l": 413,
-   "t": "Do you publish the originals?",
-   "c": "RESTATED",
-   "r": [
-    "400080dd806ad80e",
-    "66409c81eba92b40"
-   ]
-  },
-  "b3207f7236edec29": {
-   "f": "src/data/artists/robots.js",
-   "l": 420,
-   "t": "Why bother?",
-   "c": "RESTATED",
-   "r": [
-    "400080dd806ad80e",
-    "66409c81eba92b40"
-   ]
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
   },
   "f2e7cad2ac93625a": {
    "f": "src/data/artists/robots.js",
    "l": 429,
    "t": "How do I get in touch?",
-   "c": "RESTATED",
-   "r": [
-    "400080dd806ad80e",
-    "66409c81eba92b40"
-   ]
-  },
-  "bf41e800f5856992": {
-   "f": "src/data/artists/robots.js",
-   "l": 430,
-   "t": "Write to papa@weird.baby. Three things are worth writing about: a unit you have seen before — where, when, and any number you can still remember off the front of it; a correction, because in places the record certainly is wrong and it changes in public; and which units are held and which are not.",
-   "c": "RESTATED",
-   "r": [
-    "400080dd806ad80e",
-    "66409c81eba92b40"
-   ],
-   "n": "CONTACT, whole, in one row. The address is already a live mailto: in the Information Booth and printed in its FAQ; the three subjects are that face's own three rows with its ranking and its self-description removed, which N4 had already begun."
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
   },
   "3e58b97f9b6fa534": {
    "f": "src/data/artists/robots.js",
@@ -16701,43 +16160,6 @@
    "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render",
    "n": "TWO FACES' FOOTERS IN ONE STRING, and the scrub cuts by SENTENCE: WELCOME's line prints, the marked sentence — this face's own former footer — does not."
   },
-  "7b0d3c11dd3f357d": {
-   "f": "src/data/artists/robots.js",
-   "l": 788,
-   "t": "MGK-NIAC, the interior in trouble. The cabinet is shown nowhere whole.",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "24b45a6fcb6fea12": {
-   "f": "src/data/artists/robots.js",
-   "l": 807,
-   "t": "A lit column behind the cage bars, and the cabinet's edge.",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "93f2e82dcfefa629": {
-   "f": "src/data/artists/robots.js",
-   "l": 809,
-   "t": "The mainframe — the big one, the early one, the one that only answers. A cabinet with a core down the middle of it and a bank of bars at the base that says what it thinks. Everything the portable does that this does not arrived later and arrived smaller. It has two names, and this is the one the museum put on the door.",
-   "c": "MIKE",
-   "s": "Mike's canon, 2026-08-05 (v56/R4): 'NIAC is the mainframe — the gutted-space-heater computer, the helical core, the bar-graph output row.' The added sentence is that description in the wing's own register; the rest of the paragraph is unchanged.",
-   "n": "THE ROBOT IS NOT IN THIS SENTENCE AND MUST NOT BE. His canon continues 'it is so complicated they needed a robot to operate it', and that half is the EGG — held in reveal/ledger.json (egg.niac.operator) and printed nowhere."
-  },
-  "b177cc5094227f56": {
-   "f": "src/data/artists/robots.js",
-   "l": 817,
-   "t": "FORM       a cabinet: a lit core, side strips, a bar bank at the base",
-   "c": "MIKE",
-   "s": "Mike's canon, 2026-08-05 (v56/R4) — the gutted space heater re-lit with a helical core, warm flanks, side strips and a bank of bar-graph modules at the base as the output row."
-  },
-  "3cd3f6e4bec57165": {
-   "f": "src/data/artists/robots.js",
-   "l": 899,
-   "t": "Four details of a cabinet that is never shown whole. Cropped close on purpose and cut at the bars — enough to establish that the thing is built, wired, powered and lit, and nowhere near enough to establish what it looks like.",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows",
-   "n": "The same sentence this wall carried at eight plates, conformed to four and to the cabinet. 'cut at the joints' became 'cut at the bars' because the joints were the robot's."
-  },
   "ea05e95bced123cc": {
    "f": "src/data/artists/robots.js",
    "l": 905,
@@ -16745,20 +16167,6 @@
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows",
    "n": "It read 'Built and powered (2021); under construction (2013)'. The 2013 spread was the robot under construction and is off the wall, so the second clause describes nothing the visitor can see."
-  },
-  "026a5fe6d33b3541": {
-   "f": "src/data/artists/robots.js",
-   "l": 906,
-   "t": "Four, cropped from three photographs",
-   "c": "DERIVED",
-   "s": "counted off the four tiles in this face's own `collage` array and the three source files behind them (core_helical and core_meltdown from one photograph each, output_row and column_lit from the remaining two)."
-  },
-  "1acd31ce60ef8d8a": {
-   "f": "src/data/artists/robots.js",
-   "l": 907,
-   "t": "Withheld — no plate carries the whole cabinet",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
   "32bf09faf4c59c03": {
    "f": "src/data/artists/robots.js",
@@ -16787,13 +16195,6 @@
    "t": "The whole interior in red-orange, the core glowing like an element",
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "7ef90e972ea66464": {
-   "f": "src/data/artists/robots.js",
-   "l": 972,
-   "t": "Four plates · details only · Weird.Baby Robots",
-   "c": "DERIVED",
-   "s": "the count of this face's own `collage` array."
   },
   "64fdcf3899daeb42": {
    "f": "src/data/artists/robots.js",
@@ -16923,6 +16324,484 @@
    "p": "SUBTITLE",
    "c": "MIKE",
    "s": "docs/canonical/THE_CHARTER.md — the house's soul document, Papa's own"
+  },
+  "10648bfbff65354d": {
+   "f": "src/data/artists/robots.js",
+   "l": 490,
+   "t": "Finish the FAQ, then follow The Record.",
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
+  },
+  "ab56b4af9ee20ed0": {
+   "f": "src/data/artists/robots.js",
+   "l": 505,
+   "t": "[PAPA] What is Weird.Baby Robots?",
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
+  },
+  "dc8c2f128d5cd5f9": {
+   "f": "src/data/artists/robots.js",
+   "l": 506,
+   "t": "[PAPA] Mike will vibe this; the only seed is “Purveyors of the Weird.Baby”.",
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
+  },
+  "b4e501fdf4ada350": {
+   "f": "src/data/artists/robots.js",
+   "l": 515,
+   "t": "Is this stuff real?",
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
+  },
+  "3c57b3005510f1ad": {
+   "f": "src/data/artists/robots.js",
+   "l": 516,
+   "t": "The hardware is — you can hold it at least, and it is heavier than you expect. [PAPA] Everything else — historical accounts, technical specifications, people involved — wants words that SOUND favourable and are not: the house's usefully-useless humour.",
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
+  },
+  "7b9b451285e32f44": {
+   "f": "src/data/artists/robots.js",
+   "l": 522,
+   "t": "Does it work?",
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
+  },
+  "bbaaca853461fa85": {
+   "f": "src/data/artists/robots.js",
+   "l": 523,
+   "t": "See “Is this stuff real?”",
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
+  },
+  "cb4a77a36753ddcf": {
+   "f": "src/data/artists/robots.js",
+   "l": 536,
+   "t": "Monitor the website for availability. Follow us on social media — those platforms track you, this site does not, and following one out of here is leaving the building.",
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
+  },
+  "757bf395e5182560": {
+   "f": "src/data/artists/robots.js",
+   "l": 540,
+   "t": "Can I try one?",
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
+  },
+  "7087dfa9c45b0bde": {
+   "f": "src/data/artists/robots.js",
+   "l": 541,
+   "t": "We need to construct a dynamic virtual interface to the MGK System Portal before we can even consider it — but when we do, the answer is yes: available online, free to all to partake.",
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
+  },
+  "942336b29897a791": {
+   "f": "src/data/artists/robots.js",
+   "l": 547,
+   "t": "papa@weird.baby",
+   "c": "HOUSE"
+  },
+  "823647bdc8372325": {
+   "f": "src/data/artists/robots.js",
+   "l": 672,
+   "t": "MGK-VIIIp — the glass carrying the machine's own opening beat.",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "e9ed54fd26b22e73": {
+   "f": "src/data/artists/robots.js",
+   "l": 676,
+   "t": "Feed Control",
+   "c": "HOUSE"
+  },
+  "d619498703d9651b": {
+   "f": "src/data/artists/robots.js",
+   "l": 735,
+   "t": "FEED CONTROL",
+   "c": "HOUSE"
+  },
+  "f9199b6488f01197": {
+   "f": "src/data/artists/robots.js",
+   "l": 995,
+   "t": "MGK-NIAC, the interior in trouble.",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "82b1a60e4b1560b9": {
+   "f": "src/data/artists/robots.js",
+   "l": 1047,
+   "t": "Five plates of the mainframe: the machine entire, and four details cut at the bars — the core, a lit column, the output row at the base, and the whole interior in trouble.",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "e4ff142d49541e7b": {
+   "f": "src/data/artists/robots.js",
+   "l": 1053,
+   "t": "Five, cropped from four photographs",
+   "c": "DERIVED",
+   "s": "counted off the five tiles in this face's own `collage` array."
+  },
+  "e79995fa33b825b6": {
+   "f": "src/data/artists/robots.js",
+   "l": 1054,
+   "t": "One plate carries the whole cabinet; four are cut at the bars",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "40832085bb42b22b": {
+   "f": "src/data/artists/robots.js",
+   "l": 1111,
+   "t": "The cabinet, whole — lit core, bar bank, both feet",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "c3fc236fd25d32af": {
+   "f": "src/data/artists/robots.js",
+   "l": 1130,
+   "t": "Five plates · Weird.Baby Robots",
+   "c": "DERIVED",
+   "s": "counted off the five tiles in this face's own `collage` array."
+  },
+  "4674611330475925": {
+   "f": "src/data/artists/robots.js",
+   "l": 1146,
+   "t": "[PAPA] — the cabinet is shown whole now and the robot is not; how much further that goes, and when. The uncropped originals are all on file and any of them can be published from this file alone.",
+   "c": "MIKE",
+   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
+  },
+  "a5ca8ba167108915": {
+   "f": "src/data/artists/robots.js",
+   "l": 1185,
+   "t": "No manual for the mainframe is held here. The portable arrived with one — ABEAL 8P-OMI-1, incomplete, assembled out of copies caught at different stages — and nothing of the kind has reached this museum for the cabinet.",
+   "c": "VERIFIED",
+   "s": "the portable's own manual, ABEAL 8P-OMI-1, held by this museum and not published — see the wing FAQ's answer on the originals. The mainframe's absence is a holdings fact about this collection."
+  },
+  "b81d68c8182eafc4": {
+   "f": "src/data/artists/robots.js",
+   "l": 1209,
+   "t": "MGK-NIAC · THE OWNER'S MANUAL",
+   "c": "HOUSE"
+  },
+  "16a2cdfd3112566f": {
+   "f": "src/data/artists/robots.js",
+   "l": 1321,
+   "t": "A lit column behind the cage bars.",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "bcf9084f23f4262e": {
+   "f": "src/data/artists/robots.js",
+   "l": 1323,
+   "t": "The questions that get asked about the cabinet, answered as plainly as the answers are known — and marked where they are not.",
+   "c": "HOUSE"
+  },
+  "97d6b5c147f11ff6": {
+   "f": "src/data/artists/robots.js",
+   "l": 1327,
+   "t": "Yes. Both units power on and run their own firmware.",
+   "c": "RESTATED",
+   "r": [
+    "23c7dca6e93292f9"
+   ]
+  },
+  "69ae0543f23afe22": {
+   "f": "src/data/artists/robots.js",
+   "l": 1329,
+   "t": "Is the mainframe on the Portal?",
+   "c": "HOUSE"
+  },
+  "0766627176a8d65f": {
+   "f": "src/data/artists/robots.js",
+   "l": 1330,
+   "t": "Not yet. Two channels are engraved for it on the feed drum and neither of them arms.",
+   "c": "DERIVED",
+   "s": "read off the Portal face's own drum in the same file: two positions carry ch 1 and 2 labelled MGK-NIAC and both declare `arms: false`."
+  },
+  "9a7219bf5e6108e3": {
+   "f": "src/data/artists/robots.js",
+   "l": 1339,
+   "t": "MGK-NIAC · FAQ",
+   "c": "HOUSE"
+  },
+  "d75737a3390e9530": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 58,
+   "t": "About the Artist",
+   "c": "HOUSE"
+  },
+  "fc223dc7bcd11653": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 62,
+   "t": "ABOUT THE ARTIST",
+   "c": "HOUSE"
+  },
+  "29422d30c2a1dd59": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 63,
+   "t": "WEIRD.BABY",
+   "c": "HOUSE"
+  },
+  "0d260582ccd3fdd6": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 65,
+   "t": "The house's own music. What this room holds of the artist is the recordings; what it holds of the person is his name.",
+   "c": "HOUSE"
+  },
+  "6a6eaaab2bda17f2": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 68,
+   "t": "RELEASE   The Making of BoWB V1 — 2026",
+   "c": "DERIVED",
+   "s": "counted off the /wb spine in the same file — one release, six tracks, each carrying a June 2026 recording."
+  },
+  "e18453aa535b2b5a": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 69,
+   "t": "TRACKS    six, recorded June 2026",
+   "c": "DERIVED",
+   "s": "counted off the /wb spine in the same file — one release, six tracks, each carrying a June 2026 recording."
+  },
+  "87f8b9c3a4554e7e": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 70,
+   "t": "PORTRAIT  none on file",
+   "c": "DERIVED",
+   "s": "this face declares no `still` and no portrait of this artist exists in public/ — a holdings fact, checked against the tree."
+  },
+  "23fd9c178d3198ea": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 77,
+   "t": "Q",
+   "c": "HOUSE"
+  },
+  "f3f89c26d4fa68f2": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 77,
+   "t": "[PAPA] Who is Weird.Baby?",
+   "c": "MIKE",
+   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
+  },
+  "44d9c1fb6eb95925": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 78,
+   "t": "[PAPA] the artist's own account of himself, which is Mike's to write and nobody else's.",
+   "c": "MIKE",
+   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
+  },
+  "ac9fa43b82e8b85c": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 84,
+   "t": "WHO",
+   "c": "HOUSE"
+  },
+  "919de12afab94795": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 84,
+   "t": "Who keeps this place?",
+   "c": "RESTATED",
+   "r": [
+    "src/routes/InfoBooth.jsx"
+   ]
+  },
+  "97c97906d88a8614": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 85,
+   "t": "One person — Papa Weird.Baby. The job pays nothing, the museum never pays to be managed, and only zero-invoice services are accepted. That's the deal, and it never changes.",
+   "c": "RESTATED",
+   "r": [
+    "src/routes/InfoBooth.jsx"
+   ]
+  },
+  "f649c2b8a643918d": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 90,
+   "t": "ON FILE",
+   "c": "HOUSE"
+  },
+  "357c58e834cfb90f": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 90,
+   "t": "What the museum holds",
+   "c": "HOUSE"
+  },
+  "d655b06a64577512": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 91,
+   "t": "Six recordings, made in June 2026, and one release: The Making of BoWB V1. They play in this room.",
+   "c": "DERIVED",
+   "s": "counted off the /wb spine in the same file — one release, six tracks, each carrying a June 2026 recording."
+  },
+  "908dfaca4b57182d": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 95,
+   "t": "list",
+   "c": "HOUSE"
+  },
+  "f6e60cf26ade15e8": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 96,
+   "t": "WEIRD.BABY · ABOUT THE ARTIST",
+   "c": "HOUSE"
+  },
+  "1145c644dfebffdb": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 204,
+   "t": "flat",
+   "c": "HOUSE"
+  },
+  "6741ba89f083ffa8": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1031,
+   "t": "weekendatmikeys.com",
+   "c": "VERIFIED",
+   "s": "weekendatmikeys.com, read directly 2026-08-05 before it was linked from anywhere in this museum: the site is The Family Ranch, the heading is STEP INTO THE WORLD OF MIKEY MIKE, Nashville TN, and its Instagram is @findmikeymike — the handle L1 verified by oEmbed from his own upload."
+  },
+  "6d41d040829e1d70": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1033,
+   "t": "His own place — The Family Ranch, out of Nashville. Read directly before it was linked from anywhere in this museum.",
+   "c": "VERIFIED",
+   "s": "weekendatmikeys.com, read directly 2026-08-05 before it was linked from anywhere in this museum: the site is The Family Ranch, the heading is STEP INTO THE WORLD OF MIKEY MIKE, Nashville TN, and its Instagram is @findmikeymike — the handle L1 verified by oEmbed from his own upload."
+  },
+  "110a7e67c9842012": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1037,
+   "t": "Verified from the upload itself rather than from a search ranking, which matters more for him than for anyone else here — several unrelated acts share the name. Everything he puts out lands here first.",
+   "c": "VERIFIED",
+   "s": "YouTube oEmbed on his own upload (L1, 2026-08-02): the channel that posted \"Mikey Mike - Doin' Me (Official Video)\" is @findmikeymike. Verified from the upload rather than from a search ranking."
+  },
+  "2bb42f78a2f46f0d": {
+   "f": "src/lib/record-read.js",
+   "l": 25,
+   "t": "wb-read-",
+   "c": "HOUSE"
+  },
+  "2f0d025447f0c2ad": {
+   "f": "src/lib/record-read.js",
+   "l": 32,
+   "t": "n{}",
+   "c": "HOUSE"
+  },
+  "eaf10ac0b3e90990": {
+   "f": "src/lib/record-read.js",
+   "l": 33,
+   "t": "d{}",
+   "c": "HOUSE"
+  },
+  "29707cdbbe8be48b": {
+   "f": "src/lib/record-read.js",
+   "l": 34,
+   "t": "t{}",
+   "c": "HOUSE"
+  },
+  "4bacccd062cd1f21": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 1997,
+   "t": "Move through the record",
+   "c": "HOUSE"
+  },
+  "38146242d8a3e20a": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 2000,
+   "t": "NEWEST",
+   "c": "HOUSE"
+  },
+  "053ea19b9e7e2bca": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 2003,
+   "t": "OLDEST",
+   "c": "HOUSE"
+  },
+  "296197e85b3d0a4f": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 2010,
+   "t": "every record has been read",
+   "c": "HOUSE"
+  },
+  "c9b7582c10026b28": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 2011,
+   "t": "the oldest record you have not opened",
+   "c": "HOUSE"
+  },
+  "411c41231fda763f": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 2012,
+   "t": "UNREAD",
+   "c": "HOUSE"
+  },
+  "c715260971964697": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 2015,
+   "t": "INDEX",
+   "c": "HOUSE"
+  },
+  "03b8aa0f50eaf8c2": {
+   "f": "src/routes/exhibit/RecordEntry.jsx",
+   "l": 254,
+   "t": "auto",
+   "c": "HOUSE"
+  },
+  "2f48ee1c4a8ea708": {
+   "f": "src/routes/exhibit/RecordEntry.jsx",
+   "l": 254,
+   "t": "smooth",
+   "c": "HOUSE"
+  },
+  "bec715fade577a3b": {
+   "f": "src/routes/exhibit/RecordEntry.jsx",
+   "l": 254,
+   "t": "start",
+   "c": "HOUSE"
+  },
+  "2ac851b1b96ef143": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 622,
+   "t": "Every cost has a name, a number and a sponsor on the record — the domain, the giveaway guitar, the stickers. Each one has a meter, and when a cost is covered its meter reads full, its door says we're good, thanks, and it closes. No overfilling. No pooling. Not even a generous dollar gets held. Today the sponsor on every line is Papa himself, and the ledger above is the whole of it. [PAPA] — the live costs, their numbers and their sponsors are Papa's to publish when the meters go up.",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ]
+  },
+  "6eb59fd59571a8d8": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 660,
+   "t": "Not to run the place, and that is the load-bearing part. Help with a cost arrives as the thing itself: pay the registrar directly, buy the actual guitar and ship it, pay the store to send the stickers. If your help would arrive as money in Weird.Baby's hands to spend, it is not help we can take, and we will gladly show you the door that is. The proof is structural rather than promised: there is no account to fill and there never has been one. Giving is the other direction entirely — a gift made in Weird.Baby's name is not the museum's money, it is somebody else's money passing through on the way to someone who needs it. That door is on the register above and it is not built yet. [PAPA] — the address that door points at.",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ]
+  },
+  "ff2560f7e324f3c4": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 881,
+   "t": "The register",
+   "c": "HOUSE"
+  },
+  "18fa33f87ba3761a": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 942,
+   "t": "A zero-cost ledger kept by the keeper for the museum",
+   "c": "HOUSE"
+  },
+  "faf2e3717d4ee8ec": {
+   "f": "src/routes/Foundation.jsx",
+   "l": 944,
+   "t": "Ledger",
+   "c": "HOUSE"
+  },
+  "2f5d925f854629a0": {
+   "f": "src/routes/hr/HrArchive.jsx",
+   "l": 179,
+   "t": "hr-archive",
+   "c": "HOUSE"
+  },
+  "9f770eff55995b65": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 194,
+   "t": "No — and the better half of the answer is that the machine remembers you and we don't. Cookies first, because they are what people mean: a cookie goes back to the server with every request your browser makes, which is the part that makes it a tracking device. This site sets none. Not one, not even ours. Settings are a different mechanism entirely — they sit in your own browser and are read where they sit, so both of these are true at once: nothing follows you back to us, and the panel you dragged wider is still wider when you come back to the room. Most of them last the visit and go when the tab closes. Two outlast it, and they are the two that would be useless otherwise: the presets you saved yourself, and which records of ours you have already opened. What reaches us is two things. The lobby and the exhibit rooms each write one line when they load — which page, the site you came from if there was one, and the time — and none of those three columns is you. Sign the guest book and we keep exactly what you typed, on the page you typed it into. The MGK keeps far more than we do, and it keeps it on your side of the glass: run it in the robot wing and it will remember your name, your birth date, how far into its install you got, its own condition and your best score — none of which it can send anywhere, because it has no way to reach us at all. It will also show you. Preferences ▸ User is the machine's register of everything it holds about you, page by page, and the last page wipes the lot on the spot. Three things do leave the building, and you should know which. The typefaces are served by Google, so your browser asks Google for them and Google sees it was asked. The rooms with music in them load YouTube's player when the room loads, before you press anything. And one exhibit carries posts embedded from Facebook, which arrive the same way. Google, YouTube and Facebook each know you turned up, and they are the whole of the outside. There is no analytics, no advertising and no tracking pixel anywhere in this site, and if that ever stops being true, this answer changes first.",
+   "c": "VERIFIED",
+   "s": "re-read clause by clause AND MEASURED IN A BROWSER (B2, 2026-08-05); the storage clause re-verified by grep at P5, 2026-08-05, when every view setting moved to sessionStorage."
   }
  }
 }

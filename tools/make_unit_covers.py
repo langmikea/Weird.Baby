@@ -55,6 +55,7 @@ accommodate its own name would be the only one in the deck that did.
 
     python tools/make_unit_covers.py
 """
+import math
 import os
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
@@ -101,8 +102,52 @@ UNITS = [
     # IT ALSO CLOSES M30. The old badge was the same photograph as the still on
     # the face one press below it; the cover and that face now carry different
     # plates, and neither carries the robot.
-    ("MGK-NIAC", "reference/mgk-viii/core_helical.jpg", "mgk-niac-cover.png", 0.36),
+    # [P7 2026-08-05] AND NOW IT IS THE WHOLE CABINET, WHICH IS A DIFFERENT
+    # BADGE TREATMENT AND NOT ONLY A DIFFERENT FILE.
+    # MIKE: "NIAC ALBUM ART: capture THE ENTIRE MAINFRAME (the heater) — the
+    # whole cabinet in frame, the robot still out of it."
+    # `focal = None` MEANS FIT RATHER THAN CROP. Every badge before this one
+    # was a square cut out of a photograph and scaled to FILL the disc, which
+    # is right for a detail and cannot be right here: the cabinet is 858x1438,
+    # so any square crop of it throws away two fifths of the machine — the
+    # exact thing the instruction forbids. In fit mode the photograph is scaled
+    # whole into the disc's inscribed box and the paper shows in the disc's
+    # corners. THE DISC ITSELF DOES NOT MOVE: same diameter, same top, same
+    # ring stroke, so the two covers still put the same circle in the same
+    # place and the theme claim survives the change.
+    # THE PLATE IS NEW AND IT IS THE FIRST PHOTOGRAPH OF THIS MACHINE WHOLE.
+    # Cut from the 2021 build video (`IMG_1526.MOV`, 00:58.0, the source the
+    # robots repo's own plate set comes from) at the cabinet's own bounding
+    # box, 108,142 -> 966,1580 of the rotated 1080x1920 frame. No resample, no
+    # retouch; a re-encode, so the source file's GPS tag does not travel.
+    # THE ROBOT IS STILL OUT OF FRAME — it is on the same bench and it is not
+    # in this shot, so the obfuscation law's real subject is untouched.
+    ("MGK-NIAC", "reference/mgk-viii/cabinet_whole.jpg", "mgk-niac-cover.png", None),
     ("MGK-VIIIp", "reference/photos/front_full.png", "mgk-viiip-cover.png", 0.44),
+    # [P2 2026-08-05] THE PORTAL IS AN ALBUM NOW AND ALBUMS HAVE COVERS.
+    # It is not a unit, so Template A does not govern it — but it is a door into
+    # a unit, and a cover built by any other hand would be the one album in the
+    # wing that did not share the theme.
+    # THE BADGE IS THE APERTURE ITSELF — the round glass on the front of the
+    # portable, carrying the machine's own opening beat. `art/viiip.png` is the
+    # composite this wing already shows as the ninth plate of the portable's
+    # Image Archive: the framebuffer sampled at the labelled beat "the mark
+    # lands" and placed into the front-view photograph at the measured portal
+    # aperture. Cropped to the glass, it is a lit round door with the machine's
+    # own words in it, inside the cover's own ring. Nothing about it is new.
+    # TWO OTHER PLATES WERE RENDERED FOR THIS SLOT AND BOTH WERE REJECTED, which
+    # is worth writing down because both look right in a file listing:
+    #   · `front_screen.png`, the front glass lit — the firmware actually
+    #     running. It is the plate OPEN_ACTIONS M2 flags as MIRRORED: the whole
+    #     photograph is flipped, so every word on the screen reads backwards. At
+    #     badge size that lettering is the only thing in the disc. The flip is
+    #     one operation and it is M2, which is Mike's.
+    #   · `MGK-TWIN_MONITOR_SCREEN_BEZEL.png`, the frame the Portal is met
+    #     through. It is not a photograph of the object at all — it is a
+    #     COMPOSITING ASSET, a bezel around a knocked-out white rectangle, which
+    #     is exactly what OPEN_ACTIONS M7 says about it. In a disc it reads as a
+    #     white square on black.
+    ("PORTAL", "art/viiip.png", "portal-cover.png", (570, 365, 1030, 825)),
 ]
 
 
@@ -111,18 +156,43 @@ def font(name, size):
 
 
 def circle_badge(src_path, focal):
-    """The photograph, greyed, square-cropped about `focal` and masked to the
-    ring's inner disc. Grey rather than colour because the base cover greys the
-    mark and the wing's own law is B&W at the glass — a cover that arrives in
-    colour and is filtered on the page is two answers to one question."""
-    im = Image.open(src_path).convert("RGB")
-    side = min(im.size)
-    # crop a square about the focal band: 0.5 is centre, lower values ride high
-    left = (im.width - side) // 2
-    top = max(0, min(im.height - side, round(im.height * focal - side / 2)))
-    im = im.crop((left, top, left + side, top + side))
-    im = ImageOps.grayscale(im).convert("RGB")
-    im = im.resize((BADGE_D, BADGE_D), Image.LANCZOS)
+    """The photograph, greyed, fitted to the ring's inner disc and masked to
+    it. Grey rather than colour because the base cover greys the mark and the
+    wing's own law is B&W at the glass — a cover that arrives in colour and is
+    filtered on the page is two answers to one question.
+
+    `focal` is a number to CROP a square about that band (0.5 is centre, lower
+    rides high) and `None` to FIT the whole photograph inside the disc. Crop
+    fills the circle and is right for a detail; fit shows the object entire and
+    leaves paper in the disc's corners. [P7] The mainframe is the one badge in
+    the wing whose instruction is the object whole, so it is the one that
+    fits."""
+    im = ImageOps.grayscale(Image.open(src_path).convert("RGB")).convert("RGB")
+
+    if focal is None:
+        # the largest box of the photograph's own aspect that sits inside a
+        # circle of diameter BADGE_D — its four corners land ON the arc, which
+        # is the most of the machine the ring can hold and the least paper the
+        # disc can show
+        r = im.width / im.height
+        h = BADGE_D / math.sqrt(1 + r * r)
+        w = h * r
+        plate = im.resize((round(w), round(h)), Image.LANCZOS)
+        im = Image.new("RGB", (BADGE_D, BADGE_D), PAPER)
+        im.paste(plate, ((BADGE_D - plate.width) // 2,
+                         (BADGE_D - plate.height) // 2))
+    elif isinstance(focal, tuple):
+        # [P2] an explicit box in SOURCE pixels, for the one badge whose subject
+        # is smaller than any band of the plate: a square crop about a focal
+        # band can only ever take a full-width slice, and the Portal's subject
+        # is a 400px aperture in a 1536px picture of the whole machine.
+        im = im.crop(focal).resize((BADGE_D, BADGE_D), Image.LANCZOS)
+    else:
+        side = min(im.size)
+        left = (im.width - side) // 2
+        top = max(0, min(im.height - side, round(im.height * focal - side / 2)))
+        im = im.crop((left, top, left + side, top + side))
+        im = im.resize((BADGE_D, BADGE_D), Image.LANCZOS)
 
     mask = Image.new("L", (BADGE_D * 4, BADGE_D * 4), 0)
     ImageDraw.Draw(mask).ellipse([0, 0, BADGE_D * 4 - 1, BADGE_D * 4 - 1], fill=255)

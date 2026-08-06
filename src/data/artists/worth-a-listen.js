@@ -1010,12 +1010,34 @@ const ARTISTS = [
        uploader of "Mikey Mike - Doin' Me (Official Video)" is
        @findmikeymike. That is the channel verified BY THE UPLOAD rather than
        by a search ranking. */
-    site: "https://www.youtube.com/@findmikeymike",
-    siteLabel: "@findmikeymike",
-    siteFn: "Video channel",
-    siteScent: "The only surface confirmed to be his — verified from the " +
-               "upload itself, not from a search ranking. Everything he puts " +
-               "out lands here first.",
+    /* ***** [P11 2026-08-05] M54 CLOSES: THE DOMAIN IS ON THE CARD.
+       MIKE: "Mikey Mike's verified domain (weekendatmikeys.com) is wired in the
+       shop but not on his card; put it on the card."
+       AND IT IS DONE BY ADDING A DOOR RATHER THAN BY MOVING ONE. The template
+       already carries both kinds — `site` is the artist's own place and
+       `channel` is their video channel, and `doorsFor` has drawn them as two
+       doors since P15. He was the one artist in this wing whose HOMEPAGE door
+       was a YouTube channel, which is why the gift shop tile had to be fixed
+       separately at S2 and why this row was left open rather than absorbed.
+       SO THE CHANNEL KEEPS ITS PLACE AND KEEPS ITS PROVENANCE. The oEmbed
+       verification (L1) is the unfakeable anchor for BOTH doors — it is what
+       ties @findmikeymike to him, and weekendatmikeys.com's own Instagram is
+       that same handle, which is how S2 identified the site. Neither claim is
+       weakened by the other; the card now shows the two surfaces it has always
+       been able to prove.
+       R-A'S REFUSAL OF findmikeymike.com IS UNTOUCHED. Different address, and
+       `siteNote` below still says so. ***** */
+    site: "https://weekendatmikeys.com/",
+    siteLabel: "weekendatmikeys.com",
+    siteFn: "Homepage",
+    siteScent: "His own place — The Family Ranch, out of Nashville. Read " +
+               "directly before it was linked from anywhere in this museum.",
+    channel: "https://www.youtube.com/@findmikeymike",
+    channelLabel: "@findmikeymike",
+    channelScent: "Verified from the upload itself rather than from a search " +
+                  "ranking, which matters more for him than for anyone else " +
+                  "here — several unrelated acts share the name. Everything he " +
+                  "puts out lands here first.",
     /* ***** [R-a 2026-08-02] THE LEAD WAS RIGHT AND THE LINK IS STILL REFUSED.
        findmikeymike.com resolves, and it IS his (98 mentions of his name, his
        Spotify, his socials, a MERCH and TOUR nav).
@@ -1044,10 +1066,10 @@ const ARTISTS = [
          · and the thing that shut the other door — NO injected link farm. The
            page body was read directly for it; there are no gambling domains and
            no unrelated restaurant or veterinary sites.
-       IT IS DECLARED ONLY FOR THE GIFT SHOP TILE, which is what Mike named.
-       `site` below is still the video channel and his artist card still reads
-       the same; whether the card's front door should move too is his call and
-       is on the open register. ***** */
+       IT WAS DECLARED ONLY FOR THE GIFT SHOP TILE, which is what Mike named at
+       the time. [P11 2026-08-05] HE HAS SINCE RULED THAT IT GOES ON THE CARD
+       TOO — see the `site` block above, where it is now the homepage door and
+       the video channel keeps a door of its own. M54 closes. ***** */
     shopExit: "https://weekendatmikeys.com/",
     marker: "You have almost certainly heard him without knowing it - and he made the record with Rick Rubin.",
     card: {

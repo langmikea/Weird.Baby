@@ -1,5 +1,41 @@
 // src/routes/Foundation.jsx — THE WEIRD.BABY FOUNDATION (/foundation).
 //
+// ═══ [P10 2026-08-05] THE TONE RULING — STANDING, AND IT GOVERNS THE WHOLE WING
+//
+//   MIKE: "This is NOT asking people to dig deep and give a little. It is
+//   looking for the LIKE-MINDED — people who would prefer not to hoard more
+//   wealth. All are welcome, but this is not Oprah asking her fans to donate
+//   while she is rich herself."
+//
+// IT IS A RULING ABOUT WHO IS BEING ADDRESSED, which is why it cannot be
+// satisfied by softening an ask. An appeal — however gentle, however
+// well-argued — casts the reader as a giver and the house as a recipient, and
+// the second half of his sentence says why that is the wrong shape here: the
+// house is not standing on the other side of the counter with its hand out. The
+// room is a STATEMENT OF TERMS, published so that people who already think this
+// way can recognise it, and everyone else can read it and walk on.
+//
+// FOUR TESTS TO PUT ANY FUTURE LINE IN THIS WING THROUGH:
+//   · Does it ask? An imperative aimed at the reader's wallet fails, and so
+//     does a rhetorical question that is one wearing a coat.
+//   · Does it flatter the giver, or thank them in advance? Both are the
+//     appeal's own furniture.
+//   · Does it argue the house's NEED? Need is leverage. The register says what
+//     a thing costs and who carried it; it never says what would happen if
+//     nobody did.
+//   · Would it read differently if the reader were richer than the house? If
+//     yes, it is the Oprah sentence and it goes.
+//
+// AUDITED AGAINST THE LIVE COPY, 2026-08-05, and the wing already passes —
+// which is worth writing down, because a ruling that changed nothing on its
+// first day is a ruling somebody will assume was decorative. "Can I donate?"
+// opens "Not to run the place, and that is the load-bearing part" and spends
+// its length refusing money rather than requesting it; "Then how do the lights
+// stay on?" answers with meters that CLOSE when a cost is covered ("No
+// overfilling. No pooling"); the posture is the keeper saying he pays and will
+// continue until he cannot. Nothing was rewritten under this ruling. What it
+// does is bind the next line, and the line after that.
+//
 // [F3 2026-08-03] MIKE: "THE WEIRD.BABY FOUNDATION (new directory section): add
 // it to the directory. Use the INFORMATION BOOTH as the template driving its
 // FAQ — Mike called the booth AWESOME, so the pattern is proven. Subject
@@ -588,7 +624,7 @@ const FAQ = [
        "when a cost is covered its meter reads full, its door says we're " +
        "good, thanks, and it closes. No overfilling. No pooling. Not even a " +
        "generous dollar gets held. Today the sponsor on every line is Papa " +
-       "himself, and the invoice above is the whole of it. [PAPA] — the live " +
+       "himself, and the ledger above is the whole of it. [PAPA] — the live " +
        "costs, their numbers and their sponsors are Papa's to publish when " +
        "the meters go up.",
   },
@@ -630,7 +666,11 @@ const FAQ = [
        "fill and there never has been one. Giving is the other direction " +
        "entirely — a gift made in Weird.Baby's name is not the museum's " +
        "money, it is somebody else's money passing through on the way to " +
-       "someone who needs it. That door is on the ledger above and it is not " +
+       /* [P10 2026-08-05] "on the ledger above" -> "on the register above".
+          The row this sentence points at (`channel.qr`) is in the REGISTER, and
+          the word ledger has just moved to the document below it. A pointer that
+          survives a rename by luck is a pointer that will be wrong next time. */
+       "someone who needs it. That door is on the register above and it is not " +
        "built yet. [PAPA] — the address that door points at.",
   },
   {
@@ -789,10 +829,15 @@ export default function Foundation() {
             all four facts in sentences, and a screen reader hearing "$0.00
             HELD, EVER" as a fragment ahead of them is served worse, not
             better. */}
+        {/* [P10 2026-08-05] "REMOVE 'held, ever'." Mike's correction, and the
+            caption is DELETED rather than reworded — the three rows under the
+            figure already say what is owned, what is kept and what is passed
+            on, so the caption was the second object saying what the first said,
+            in the one register (ever) that reads as an argument being pressed.
+            The figure and its rows are untouched. */}
         <div className="fnd-ledger" aria-hidden="true">
           <div className="fnd-ledger-head">Weird.Baby &mdash; the account</div>
           <div className="fnd-ledger-figure">$0.00</div>
-          <div className="fnd-ledger-caption">held, ever</div>
           <dl className="fnd-ledger-rows">
             <div><dt>Owned</dt><dd>nothing</dd></div>
             <div><dt>Kept by the keeper</dt><dd>nothing</dd></div>
@@ -824,8 +869,16 @@ export default function Foundation() {
             description of the row rather than a column of the register, and
             the whole point is that a visitor can read the state column down
             the page without reading a word of the prose. */}
+        {/* [P10 2026-08-05] AND THIS HEADING MOVES BECAUSE THE OTHER ONE DID.
+            Mike's correction is about the object below — "the INVOICE TITLE IS
+            WRONG, that object is a LEDGER, name it so" — and the museum cannot
+            carry two things called the ledger on one page. THIS is the register:
+            two columns of what arrives, one side money and one side the thing
+            itself, with a state stamp down the edge. `fnd-reg` is what the code
+            has called it since E1 built it, so the glass now agrees with the
+            classes rather than with a heading nobody re-read. */}
         <section className="fnd-reg-wrap">
-          <h2 className="sheet-faq-head">The ledger</h2>
+          <h2 className="sheet-faq-head">The register</h2>
           {LEDGER.map(({ head, sub, rows, law }) => (
             <div className="fnd-reg" key={head}>
               <div className="fnd-reg-head">
@@ -872,9 +925,23 @@ export default function Foundation() {
         </section>
 
         {/* ==== [E1 2026-08-03] THE INVOICE ================================= */}
-        <section className="fnd-inv" aria-label="A zero-cost invoice from the keeper to the museum">
+        {/* [P10 2026-08-05] IT IS A LEDGER AND IT SAYS SO NOW. MIKE: "the
+            INVOICE TITLE IS WRONG — that object is a LEDGER, name it so."
+            He is right about the object rather than about the word: an invoice
+            is a DEMAND, addressed to somebody who then owes you something, and
+            this document demands nothing and never has — its total is $0.00 by
+            construction. What it actually does is keep an itemised account of
+            what the museum costs and who carried it, which is a ledger.
+            THE CLASS NAMES AND THE CONSTANT STAY `inv`, deliberately, on exactly
+            the reasoning that kept `id: "mgk-viii"` after that album was renamed:
+            they are keys, nothing outside this file reads them, and nothing
+            prints them. The strings a visitor meets are what changed — the mark,
+            and the accessible name of the section. Its own small print already
+            said "so the ledger is honest and public", which is the tell that the
+            document knew what it was before its title did. */}
+        <section className="fnd-inv" aria-label="A zero-cost ledger kept by the keeper for the museum">
           <div className="fnd-inv-top">
-            <span className="fnd-inv-mark">Invoice</span>
+            <span className="fnd-inv-mark">Ledger</span>
             <span className="fnd-inv-no">{INVOICE.no}</span>
           </div>
           <dl className="fnd-inv-parties">

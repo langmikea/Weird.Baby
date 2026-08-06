@@ -698,3 +698,51 @@ and the NUL-byte defect class are `OPERATIONS.md` §9.
   added, no row removed.
 - Document Mike reads: `docs/ASSET_TIMELINE.md`. **Six questions in
   `docs/OPEN_ACTIONS.md` T-A…T-F, none blocking.**
+
+<!-- moved from CLAUDE.md 2026-08-05 by the REMOTE-CONTROL round (P1-P11),
+     under that file's own ~600-line rule. Verbatim. -->
+
+### 2026-08-05 → THE WAL POSTER EDIT (W1–W4) — sealed
+- **A DELETE-ONLY ROUND WITH ONE SENTENCE REBUILT, AND THE SENTENCE TOOK ALL THE
+  WORK.** Gates: lint **11/9 = baseline** · build green · provenance **PASS** ·
+  `reveal:check` **PASS** · `parity:gate` **PASS** · lap **on the built bundle**
+  at desktop and 386px, zero console messages. Surfacing **13 · 13 · 15,
+  unmoved** — the round struck strings and moved no asset. Register: **M50–M53
+  opened, nothing closed.** Full narrative:
+  `docs/MUSEUM_WAL_POSTER_EDIT_LOG-20260805.md`.
+- **W1 — THREE TRUE PASSAGES STRUCK FROM THE WAL POSTER**, Mike’s fault-finding
+  verbatim: *they explain what the room already does or congratulate the house on
+  its own process.* The curation label, the standard line and the bill’s foot are
+  gone as FIELDS — **no render path was touched**, `bill.standard` and
+  `bill.foot` are still conditional in `Exhibit.jsx` and their CSS still stands,
+  so a later face may declare either again. **The one strike that costs something
+  is the per-act “Open the room” chip**, which carried **P6’s ruling** that what
+  is not readable must be written: striking it **reverses P6 on this one object**
+  and a coarse pointer now gets no cue. Doors verified live — all four panels are
+  still `<button>` and still open their rooms. **M51.**
+- **W2 — HUNTER ROOT’S LINE WAS REBUILT FROM THE VAULT AND EVERY OLD FIGURE IN IT
+  WAS WRONG.** *78 songs* counts only the track rows carrying a `song:` slug —
+  the vault holds **93**, and the fifteen it drops are the whole of Run With The
+  Hunt. *Nine records* counts CONTAINERS; **seven are records**, one is an EP by
+  its own title and one is a set by its own title. *Whole catalogue* is
+  contradicted 400 lines up in the same file (sixteen releases on his Bandcamp).
+  **And the one thing that had to be looked up rather than assumed: Run With The
+  Hunt is a RECORD, not a band** — its ReverbNation page reads like a band’s and
+  `era-buckets.json` files it under *The Band Years*, but vault fact
+  `MV-HR-20260707-004` settles it. Reading the era label would have printed a band
+  that is not there. Ships as one sentence claiming **holdings and nothing else**.
+- **W3/W4 — THE POSTER STANDS BETTER WITHOUT THE 110 WORDS**, and the three
+  things the cuts expose are DESCRIBED SLOTS, not drafts: the panels’ missing
+  affordance (M51) · the blurb’s *“none of them is ours”* now sitting above the
+  panel that says the museum holds his records (M52) · and **a `[PAPA]` marker’s
+  second sentence RENDERING** — *“Every claim about an artist here is already on
+  that artist’s own card, sourced there”* is the last line on the poster and is
+  the claim W1(c) was struck for, because **the scrubber drops only the sentence
+  carrying the marker** (M53). None was rewritten: the instruction was surgical.
+- **THE PRUNE PROCEDURE RAN CLEAN FOR THE FIRST TIME.** Anchors checked BEFORE
+  pruning per `OPERATIONS.md` §9 — the five rows about to go stale anchored
+  **zero** RESTATED chains, so nothing needed repointing. **0 broken references
+  across 2,058 rows** after. **And a register row is not a verified number:**
+  *“78 songs”* was classed VERIFIED with a real citation since v25 and
+  `provenance/README.md` §4 already names that exact string as its example hole.
+  It was never stale — it was never the number it claimed to be.

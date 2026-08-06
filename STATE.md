@@ -91,6 +91,55 @@ way as Doctrine 12: where 11 and 12 say do not INVENT, this says do not KEEP.
 
 Canonical text and reasoning: `docs/canonical/OPERATIONS.md` §7 Doctrine 16.
 
+## THE FOUNDATION'S TONE RULING (Mike, 2026-08-05 — STANDING, the whole wing)
+
+> **This is NOT asking people to dig deep and give a little. It is looking for
+> the LIKE-MINDED — people who would prefer not to hoard more wealth. All are
+> welcome, but this is not Oprah asking her fans to donate while she is rich
+> herself.**
+
+Canonical text + the four tests: the header of `src/routes/Foundation.jsx`.
+
+**It is a ruling about WHO IS BEING ADDRESSED**, which is why it cannot be
+satisfied by softening an ask. An appeal — however gentle, however well-argued —
+casts the reader as a giver and the house as a recipient, and the second half of
+his sentence says why that is the wrong shape: the house is not standing on the
+other side of the counter with its hand out. The room is a STATEMENT OF TERMS,
+published so that people who already think this way can recognise it.
+
+**The four tests.** Does it ask? · Does it flatter the giver, or thank them in
+advance? · Does it argue the house's NEED — need is leverage? · **Would it read
+differently if the reader were richer than the house?** If yes, it is the Oprah
+sentence and it goes.
+
+**Audited against the live copy on the day it was given: the wing already
+passes, and nothing was rewritten under it.** That is recorded because a ruling
+that changed nothing on its first day gets assumed decorative. What it does is
+bind the next line.
+
+## PARITY IS ABSOLUTE (Mike, 2026-08-05 — STANDING; REVERSES AN OPS RULING)
+
+> **NIAC and VIIIp carry THE SAME MENU ITEMS, no more, no less.** The gaps are
+> TEMPORARY HOLDINGS, not design — NIAC will run on the Portal on channels 1/2
+> and it will have a manual. **So NIAC's rows exist and say plainly what is not
+> there yet.**
+
+**It overrules the Ops ruling of the previous round**, which held that a holdings
+gap RESOLVES a menu divergence. That argument was THE STUB LAW's own and it was
+airtight about the holdings AS THEY ARE — and blind to the one thing that
+mattered: **the material is coming.** A row is a promise only when nothing is
+behind it and nothing is on the way; a menu that hides a shelf until the day it
+fills rearranges itself under a returning visitor.
+
+**THE STUB LAW IS OVERRIDDEN FOR THE MAINFRAME'S MANUAL AND FAQ ROWS AND FOR
+NOTHING ELSE.** Mike's reason is the exception's edge, and it is written where
+the rows are: *a row is a promise only when nothing is coming, and these are
+coming.* **Doctrine 12 is not suspended inside them** — a row says what is NOT
+held and invents no section list, no date, no page count and no schedule.
+
+Enforced by `npm run parity:gate`, which is **a packet gate now**: it used to
+report a judgement and it now reports a fact with one right answer.
+
 ## THE CONTRIBUTIONS MODEL (Mike, 2026-08-03 — standing; built at v43/E1)
 
 Recorded here before it was built, on Mike's instruction. The room that carries

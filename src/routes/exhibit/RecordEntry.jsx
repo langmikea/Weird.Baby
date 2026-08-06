@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { entryStamp, entryDateline } from "../../lib/record-model.js";
 
 /* ===========================================================================
@@ -231,6 +231,29 @@ export default function RecordEntry({
     return () => window.removeEventListener("keydown", onKey);
   }, [pop]);
 
+  /* ── [P4 2026-08-05] THE NEW RECORD ARRIVES WHERE YOUR EYES ALREADY ARE ────
+     Mike's word for the walk was DELIGHTFUL, and the thing that makes stepping
+     through a log miserable is not the click — it is landing at the top of a
+     page you are already scrolled past, or two thirds of the way down a record
+     that started above you. This component is remounted on every walk
+     (`key={open}` at the call site), so a mount effect IS the walk.
+
+     IT ONLY MOVES THE PAGE WHEN IT HAS TO. If the head is already comfortably
+     on screen — which is the case the first time a record is opened from the
+     index — nothing scrolls, because a page that jumps when it did not need to
+     is the opposite of graceful. `smooth` is dropped under
+     `prefers-reduced-motion`, where the same instruction still has to work. */
+  const headRef = useRef(null);
+  useEffect(() => {
+    const el = headRef.current;
+    if (!el || typeof window === "undefined") return;
+    const top = el.getBoundingClientRect().top;
+    if (top >= 0 && top < window.innerHeight * 0.5) return;
+    const still = window.matchMedia
+      && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "start" });
+  }, []);
+
   const dateline = entryDateline(entry, epoch);
   const sections = entry.sections || [];
 
@@ -285,7 +308,7 @@ export default function RecordEntry({
       {/* THE HEAD IS THE CONTROL, unchanged from M5: the thing that opened
           this record closes it, and there is no second shut button. What is
           new is what it carries — a stamp, the dateline, and the class. */}
-      <button key="head" className="vp-rec-head vp-rec-head--long"
+      <button key="head" ref={headRef} className="vp-rec-head vp-rec-head--long"
               onClick={onClose} title="close this record">
         {entryStamp(entry) && <span className="vp-fe-stamp">{entryStamp(entry)}</span>}
         <span className="vp-rec-dateline">
@@ -344,13 +367,19 @@ export default function RecordEntry({
 
       <div key="end" className="vp-rec-end" aria-hidden="true"><i /></div>
 
+      {/* [P4 2026-08-05] THE WALK APPEARS WHEN THERE IS SOMEWHERE TO WALK. On a
+          one-record volume both halves render permanently disabled and the count
+          reads "1 of 1" — three objects saying the same nothing. The cursor keys
+          (RecordJump, Exhibit.jsx) are the same walk and are not gated, because a
+          key that does nothing costs no attention and Escape still closes. */}
+      {list.length > 1 && (
       <nav key="nav" className="vp-rec-nav">
         <button className="vp-rec-step" disabled={open === 0}
                 onClick={() => walk(open - 1)}>&lsaquo; NEWER</button>
         <span className="vp-rec-count">{open + 1} of {list.length}</span>
         <button className="vp-rec-step" disabled={open === list.length - 1}
                 onClick={() => walk(open + 1)}>OLDER &rsaquo;</button>
-      </nav>
+      </nav>)}
 
       {/* ==== THE DOOR'S OWN OVERLAY ======================================
           It pops on the page and closes back to exactly where you were —
