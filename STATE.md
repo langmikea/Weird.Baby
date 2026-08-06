@@ -67,6 +67,31 @@ opened. What remains ART-pending is the DEPTH of two of them: The Record still
 wants its evidence photographed per entry, and The Manual's microfiche reel is
 still empty by B8's ruling.
 
+## ONE PASSAGE, ONE DECLARATION (Mike, 2026-08-06 — STANDING, site-wide)
+
+> **If the same passage is in two rooms, one of them is the source and the other
+> one references it.**
+
+His reason is the doctrine: *"he edited the contact answer once and it survived
+elsewhere; that is the defect, not his memory."* A duplicated passage does not
+fail on the day it is written — both copies are true then. It fails on the day
+somebody edits one, and it lands on that person as a doubt about whether they
+remembered to do the other. **The defect is not the drift; it is that the tree
+gives an editor no way to tell.**
+
+An import, not a copy: `src/data/house-copy.js` for a passage more than one room
+must say, a module constant for twins inside one file, and **derivation where the
+second copy is a mirror of data** — the strongest form, because it deletes the
+copy rather than linking it. The hoisted string stays a plain literal, or it
+falls off the provenance boundary in silence. **Where two copies have DIVERGED
+they are REPORTED and not merged**, because choosing between two live wordings is
+a decision about what the museum says.
+
+Canonical text + the four constraints: `docs/canonical/OPERATIONS.md` §7
+Doctrine 17. Paid for by a hand-typed mirror of Hunter Root's whole catalogue at
+`/hr/archive` that survived six museum-wide figure sweeps, because a sweep looks
+for FIGURES and this was a second COPY.
+
 ## THE LAW OF SUBTRACTION (Mike, 2026-08-04 — STANDING, site-wide)
 
 > **If it does not help, it hurts. If it does not need to be there, it needs to

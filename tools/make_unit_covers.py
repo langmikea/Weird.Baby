@@ -14,20 +14,34 @@ from that file rather than re-chosen, because "one theme" is a claim about
 geometry and a hand-matched cover drifts the first time either is re-rendered.
 
 THE TWO SUBSTITUTIONS
-  · THE BADGE. The base composites the WB mark — a photograph inside a drawn
-    ring — onto the paper. Here the photograph is the UNIT and the ring is drawn
-    around it, at the mark's own measured diameter, so the two covers put the
-    same disc in the same place.
+  · THE BADGE. The base composites the WB mark onto the paper.
+    [D5 2026-08-06] AND THE MARK IS NOW BEING COPIED PROPERLY, WHICH IT WAS NOT.
+    MIKE: "let the unit spill out of the oval, the way the Weird.Baby logo does."
+    Look at the mark and the difference is the whole composition: the ring is
+    BEHIND the baby, and the head comes out of the top of it and the hands out of
+    the bottom. Every unit badge until now was masked INTO the disc — a porthole
+    with a machine inside it, which is the opposite arrangement wearing the same
+    circle. So the ring is drawn FIRST and the unit stands over it, at the mark's
+    own measured diameter and in the mark's own place. The disc did not move; the
+    order did.
   · THE WORD. "ROBOTS" becomes the model number, set from the same font at the
     same size, and the tracking is solved per-cover so the word lands on the
     same centre and inside the same measure. Georgia's caps are wide; MGK-VIIIp
     is nine glyphs against six, so a fixed track would have run it into the
     border. The RULE below it does not move.
 
-WHICH PHOTOGRAPH, AND THE ONE THAT IS NOT WHAT MIKE ASKED FOR
+WHICH PHOTOGRAPH — and the two treatments, which are named in the UNITS table
   · MGK-VIIIp gets `front_full.png` — the whole unit, square on, already the
-    plate the wing shows first. This is exactly "an image of the unit".
-  · MGK-VIII gets `head_lens.jpg`, WHICH IS A DETAIL, because this museum holds
+    plate the wing shows first. It is cut out of its counter and stands on the
+    paper as its own silhouette.
+  · MGK-NIAC gets `cabinet_whole.jpg` — the whole cabinet, and it rides over the
+    ring AS A PLATE. Its frame is cropped to the machine's own bounding box, so
+    there is no background in it to remove; three mattes were rendered and each
+    one damaged the object. The instruction's other half — the ENTIRE mainframe —
+    is what rules out the composition that would have cut cleanest.
+
+HISTORICAL, kept because it explains a plate the wing no longer uses:
+  · MGK-VIII once got `head_lens.jpg`, WHICH IS A DETAIL, because this museum held
     no photograph of that machine whole: its own archive is titled "DETAILS
     ONLY" and its tombstone says "Frame — Withheld: no plate carries the whole
     unit" (V2's metered-revelation ruling, and register rows M8/P4). The head
@@ -57,7 +71,10 @@ accommodate its own name would be the only one in the deck that did.
 """
 import math
 import os
-from PIL import Image, ImageDraw, ImageFont, ImageOps
+
+import numpy as np
+from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
+from scipy import ndimage
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
@@ -78,6 +95,25 @@ WORD_SZ = round(S * 0.132)
 RULE_Y = WORD_Y + round(S * 0.152) + 14   # +14: clears MGK-VIIIp's descender
 STRAP_Y = RULE_Y + round(S * 0.034)
 MEASURE = S * 0.760           # the widest the word may set
+
+# [D5 2026-08-06] THE SPILL. Mike: "let the unit spill out of the oval, the way
+# the Weird.Baby logo does." The mark it names does exactly one thing: the ring
+# is DRAWN FIRST and the subject sits OVER it, bigger than the disc, so the ring
+# reads as two arcs behind a machine rather than as a porthole with a machine
+# inside. Every badge before this one was masked INTO the disc, which is the
+# opposite composition.
+# THE TWO NUMBERS ARE SET BY THE WORD, NOT BY TASTE. `SPILL_FOOT` is where the
+# unit's bottom lands, 28px clear of the model number's own box at WORD_Y — the
+# lettering is the one thing on this cover that may not be crossed, because it
+# is what tells the two machines apart. `SPILL_K` is then the largest height
+# that still leaves the ring visible above the unit's shoulder. Together they
+# put the unit through the top of the ring and a little past its foot, which is
+# where the baby's head and hands sit on the mark.
+# NOTHING ELSE MOVED. Same square, same paper, same border, same ring at the
+# same diameter and the same top, same setting, same rule, same strapline. The
+# theme claim is a claim about geometry and the geometry is untouched.
+SPILL_K = 1.25                # the unit's height, as a multiple of the disc
+SPILL_FOOT = WORD_Y - 28      # where its bottom edge lands
 
 UNITS = [
     # (model number, source photograph, output file, focal crop)
@@ -122,8 +158,27 @@ UNITS = [
     # retouch; a re-encode, so the source file's GPS tag does not travel.
     # THE ROBOT IS STILL OUT OF FRAME — it is on the same bench and it is not
     # in this shot, so the obfuscation law's real subject is untouched.
+    # [D5 2026-08-06] THE MAINFRAME IS A PLATE, NOT A CUT-OUT, AND THE REASON IS
+    # THE SOURCE. Mike's spill instruction wants the machine's own silhouette over
+    # the ring; that needs the object separated from its room, and this frame has
+    # no room in it to separate — P7 cut it AT THE CABINET'S OWN BOUNDING BOX, so
+    # every edge of the file is already machine. Three mattes were rendered and
+    # all three damaged the object: a luminance cut ate half the cabinet (the
+    # grille and the wall are the same tone), a chroma cut took the red output row
+    # with the wooden floor, and a per-column floor-line cut clipped the LED bank
+    # and left the mains adapter hanging. So the whole plate rides over the ring
+    # as a plate. IT IS STILL THE ENTIRE MAINFRAME, which is the half of the
+    # instruction a crop would have broken: cropping to the cabinet body above the
+    # feet composes better and throws the feet away, and "the entire mainframe" is
+    # not a thing Ops gets to trade for a nicer edge. A true cut-out here wants a
+    # frame with air around the machine — one photograph, and it is Mike's.
     ("MGK-NIAC", "reference/mgk-viii/cabinet_whole.jpg", "mgk-niac-cover.png", None),
-    ("MGK-VIIIp", "reference/photos/front_full.png", "mgk-viiip-cover.png", 0.44),
+    # [D5] the portable IS separable — a hard-edged dark body on a light counter —
+    # so it gets a real photographic silhouette. `70` is the luminance below which
+    # a pixel is the machine: the cast shadow on the counter bottoms out at 66, so
+    # the cut takes the object and leaves the shadow, and the bright ABEAL plate
+    # comes back as a filled hole rather than as a threshold exception.
+    ("MGK-VIIIp", "reference/photos/front_full.png", "mgk-viiip-cover.png", 70),
     # [P2 2026-08-05] THE PORTAL IS AN ALBUM NOW AND ALBUMS HAVE COVERS.
     # It is not a unit, so Template A does not govern it — but it is a door into
     # a unit, and a cover built by any other hand would be the one album in the
@@ -161,31 +216,18 @@ def circle_badge(src_path, focal):
     wing's own law is B&W at the glass — a cover that arrives in colour and is
     filtered on the page is two answers to one question.
 
-    `focal` is a number to CROP a square about that band (0.5 is centre, lower
-    rides high) and `None` to FIT the whole photograph inside the disc. Crop
-    fills the circle and is right for a detail; fit shows the object entire and
-    leaves paper in the disc's corners. [P7] The mainframe is the one badge in
-    the wing whose instruction is the object whole, so it is the one that
-    fits."""
+    [D5 2026-08-06] THIS IS NOW THE PORTAL'S TREATMENT AND NOTHING ELSE'S. The
+    two MACHINES spill over the ring (see `spilled_unit`); the Portal is not a
+    machine, it is a door into one, and its badge's whole subject is a round lit
+    aperture — a round thing masked to a round hole is the composition, not a
+    compromise with one. `focal` is a tuple here, an explicit box in source
+    pixels, for the one badge whose subject is smaller than any band of its
+    plate: a square crop about a focal band can only ever take a full-width
+    slice, and the Portal's subject is a 400px aperture in a 1536px picture of
+    the whole machine."""
     im = ImageOps.grayscale(Image.open(src_path).convert("RGB")).convert("RGB")
 
-    if focal is None:
-        # the largest box of the photograph's own aspect that sits inside a
-        # circle of diameter BADGE_D — its four corners land ON the arc, which
-        # is the most of the machine the ring can hold and the least paper the
-        # disc can show
-        r = im.width / im.height
-        h = BADGE_D / math.sqrt(1 + r * r)
-        w = h * r
-        plate = im.resize((round(w), round(h)), Image.LANCZOS)
-        im = Image.new("RGB", (BADGE_D, BADGE_D), PAPER)
-        im.paste(plate, ((BADGE_D - plate.width) // 2,
-                         (BADGE_D - plate.height) // 2))
-    elif isinstance(focal, tuple):
-        # [P2] an explicit box in SOURCE pixels, for the one badge whose subject
-        # is smaller than any band of the plate: a square crop about a focal
-        # band can only ever take a full-width slice, and the Portal's subject
-        # is a 400px aperture in a 1536px picture of the whole machine.
+    if isinstance(focal, tuple):
         im = im.crop(focal).resize((BADGE_D, BADGE_D), Image.LANCZOS)
     else:
         side = min(im.size)
@@ -198,6 +240,55 @@ def circle_badge(src_path, focal):
     ImageDraw.Draw(mask).ellipse([0, 0, BADGE_D * 4 - 1, BADGE_D * 4 - 1], fill=255)
     im.putalpha(mask.resize((BADGE_D, BADGE_D), Image.LANCZOS))
     return im
+
+
+def silhouette(im, thresh):
+    """The machine's own outline, as alpha. `thresh` is the luminance below
+    which a pixel is the object.
+
+    IT IS A SEQUENCE OF FOUR OPERATIONS AND EACH ONE IS DOING A NAMED JOB, so
+    that a future edit knows what it is deleting:
+      CLOSE      welds the grille, the knurling and the strap catches into one
+                 body instead of leaving a fringe of specks around the edge.
+      FILL       returns the bright ABEAL plate, the lit glass and the lens
+                 rings — every one of them is an interior HOLE in a dark body,
+                 which is why one threshold can hold a machine whose front is
+                 the lightest thing in the frame.
+      LARGEST    drops whatever else in the room happens to be dark.
+      OPEN       severs the cast shadow where it touches the base. The shadow
+                 bottoms out at 66 against a 205 counter, so it survives the
+                 threshold; it is a soft wide region and does not survive an
+                 erosion the hard-edged body walks through.
+    The 1.6px blur at the end is the antialiased edge. Without it the cut reads
+    as a sticker, which is the exact failure the museum objects to in a
+    composite."""
+    g = np.asarray(im.convert("L").filter(ImageFilter.GaussianBlur(2)),
+                   dtype=np.float32)
+    m = ndimage.binary_closing(g < thresh, np.ones((13, 13)))
+    m = ndimage.binary_fill_holes(m)
+    lab, n = ndimage.label(m)
+    if n:
+        sizes = ndimage.sum(m, lab, range(1, n + 1))
+        m = lab == (int(np.argmax(sizes)) + 1)
+    m = ndimage.binary_fill_holes(ndimage.binary_opening(m, np.ones((9, 9))))
+    a = (ndimage.gaussian_filter(m.astype(np.float32), 1.6) * 255)
+    ys, xs = np.where(m)
+    box = (int(xs.min()), int(ys.min()), int(xs.max()) + 1, int(ys.max()) + 1)
+    return Image.fromarray(a.clip(0, 255).astype(np.uint8)), box
+
+
+def spilled_unit(src_path, thresh):
+    """The unit, greyed, at spill size, on transparency. `thresh` cuts the
+    object out of its background; `None` keeps the plate whole — see the UNITS
+    table for which machine takes which and why."""
+    src = Image.open(src_path).convert("RGB")
+    sub = ImageOps.grayscale(src).convert("RGBA")
+    if thresh is not None:
+        alpha, box = silhouette(src, thresh)
+        sub.putalpha(alpha)
+        sub = sub.crop(box)          # the unit's own bounds, not the frame's
+    h = round(BADGE_D * SPILL_K)
+    return sub.resize((round(sub.width * h / sub.height), h), Image.LANCZOS)
 
 
 def set_tracked(d, text, f, y, fill, measure):
@@ -223,11 +314,21 @@ def build(model, src_rel, out_name, focal):
     inset = round(26 / 600 * S)
     d.rectangle([inset, inset, S - inset - 1, S - inset - 1], outline=INK, width=4)
 
-    badge = circle_badge(os.path.join(ART, "..", src_rel), focal)
+    src = os.path.join(ART, "..", src_rel)
     bx = (S - BADGE_D) // 2
-    canvas.paste(badge, (bx, BADGE_Y), badge)
-    d.ellipse([bx, BADGE_Y, bx + BADGE_D - 1, BADGE_Y + BADGE_D - 1],
-              outline=INK, width=RING_W)
+    if isinstance(focal, tuple):
+        # the Portal: the photograph goes INSIDE the disc and the ring is drawn
+        # around it, which is the treatment every badge in this wing had until D5
+        badge = circle_badge(src, focal)
+        canvas.paste(badge, (bx, BADGE_Y), badge)
+        d.ellipse([bx, BADGE_Y, bx + BADGE_D - 1, BADGE_Y + BADGE_D - 1],
+                  outline=INK, width=RING_W)
+    else:
+        # [D5] a MACHINE: the ring goes down first and the unit stands over it
+        d.ellipse([bx, BADGE_Y, bx + BADGE_D - 1, BADGE_Y + BADGE_D - 1],
+                  outline=INK, width=RING_W)
+        unit = spilled_unit(src, focal)
+        canvas.paste(unit, ((S - unit.width) // 2, SPILL_FOOT - unit.height), unit)
 
     set_tracked(d, model, font("georgia.ttf", WORD_SZ), WORD_Y, INK, MEASURE)
 

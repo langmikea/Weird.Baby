@@ -41,7 +41,12 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
    said what it has to say.
    `:has()` gates the two-column form on there actually being a picture, so
    every face without one is a single column and untouched. */
-.vp-face-head{display:grid;grid-template-columns:1fr;gap:clamp(12px,1.6vw,22px);
+/* [D3b 2026-08-06] the head's gap, the plate's height and the body's padding
+   are the face's only three measured sizes — everything else is a ratio of the
+   type ramp — so they carry `--face-zoom` too. "Everything in the viewer" is
+   not only type. */
+.vp-face-head{display:grid;grid-template-columns:1fr;
+  gap:calc(clamp(12px,1.6vw,22px) * var(--face-zoom));
   align-items:start}
 /* [F1 v2] THE COLUMN IS SIZED BY THE PICTURE, NOT THE OTHER WAY ROUND.
    v1 gave the plate a 34% column and a height cap, and the cap won: a
@@ -54,7 +59,7 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 .vp-face-head:has(.vp-face-plate){grid-template-columns:1fr auto}
 .vp-face-headtext{display:flex;flex-direction:column;gap:10px;min-width:0}
 .vp-face-plate{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
-.vp-face-still{display:block;height:min(48cqh,210px);width:auto;
+.vp-face-still{display:block;height:calc(min(48cqh,210px) * var(--face-zoom));width:auto;
   /* [F1] sized to sit WITH the text, not to tower over it: at 58cqh the
      plate ran taller than the blurb and opened a dead band above the
      register. The head should read as one band, not as a picture with a
@@ -74,7 +79,7 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
    the composition Mike approved does not move.
    The grayscale filter also goes: this is the machine's own render, and a
    render of a monochrome machine does not need to be told to be monochrome. */
-.vp-face-portal .vp-face-still{height:min(48cqh,210px);width:auto;max-width:none;
+.vp-face-portal .vp-face-still{height:calc(min(48cqh,210px) * var(--face-zoom));width:auto;max-width:none;
   filter:none;border:1px solid #3b3831;background:#0b0b0a}
 .vp-face-door{display:block;padding:0;border:0;background:transparent;cursor:pointer;
   transition:box-shadow .18s,filter .18s}
@@ -89,9 +94,9 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 @media (max-width:820px){
   .vp-face-head:has(.vp-face-plate){grid-template-columns:1fr}
   .vp-face-plate{justify-self:start}
-  .vp-face-still{height:min(40cqh,200px)}
+  .vp-face-still{height:calc(min(40cqh,200px) * var(--face-zoom))}
 }
-.vp-face-body{flex:1;min-width:0;padding:clamp(14px,2.2vw,30px);
+.vp-face-body{flex:1;min-width:0;padding:calc(clamp(14px,2.2vw,30px) * var(--face-zoom));
   /* [P6 2026-08-05] "TOO PADDED TOP AND BOTTOM" — the fourth adjective, and it
      is the one that is not on `.vp-face-title` at all. The face body pads 30px
      all round at desktop and the heading sits in the top of it, so the title
@@ -99,7 +104,7 @@ html{scroll-snap-type:y proximity;scroll-behavior:smooth}
      comes down to ~18px; the sides and the floor are untouched, because they
      are the measure the reading column is set in and narrowing those would be
      a different change than the one he asked for. */
-  padding-top:clamp(10px,1.3vw,18px);
+  padding-top:calc(clamp(10px,1.3vw,18px) * var(--face-zoom));
   display:flex;flex-direction:column;gap:12px;overflow-y:auto}
 /* [O5 2026-07-30] THE STICKY CONTROL MUST NOT SIT ON THE CONTENT.
    E5 made `.vp-face-action` sticky so it could not scroll out of reach at
@@ -210,10 +215,46 @@ body:has(.vp-face) .vp-area::before{display:none}
    P7's LAW IS UNTOUCHED: nothing on a face may set a raw font-size, and a face
    needing a size the ramp does not have extends the ramp. This edit changed the
    ramp's ratios and not one call site. */
+/* ==== [D3b 2026-08-06] EVERYTHING IN THE VIEWER COMES DOWN, AS ONE ==========
+   MIKE, reading /wal: "everything in the viewer zooms out slightly — it is out
+   of proportion with the rest of the page."
+
+   THE WORD THAT DECIDES THE MECHANISM IS "EVERYTHING". A4 was the last
+   instruction on this panel and it named the LARGE sizes, so it moved the three
+   steps above body and left the rest where they were — which is why the panel
+   still reads heavy beside the tracklist and the coverflow it sits next to. This
+   one is not about rank inside the face; it is about the face against the page.
+   Compressing the ramp again would change the face's internal proportions,
+   which is the opposite of what he asked for: he wants the same face, smaller.
+
+   SO IT IS ONE MULTIPLIER, AND IT IS ON THE FLOORS TOO. `--face-zoom` scales the
+   dial AND the two rem floors under `--fs-micro` and `--fs-small`. Scaling only
+   the dial would leave the floors standing, the small end would refuse to move
+   at narrow windows and the ramp would flatten rather than shrink — P7's failure
+   mode read backwards, exactly the thing A4 declared it could not do. The floors
+   still DO their job; they are simply set in the same money as everything else.
+
+   AND IT IS NOT ONLY TYPE, because "everything" is not only type. The face's own
+   three measured sizes — the body's padding, the head's gap and the plate's
+   height — carry the multiplier as well. Everything else on a face is already a
+   ratio of the ramp, by P7's law that nothing on a face may set a raw
+   font-size, so those three were the whole of the remainder.
+
+   Measured at a 1706px window, where the dial is at its ceiling:
+     micro 13.87 · small 16.37 · body 19.25 · lead 20.98 · head 22.91 · display 25.02
+     (was) 14.75        17.41         20.48        22.32        24.37          26.62
+   Six per cent, uniform: every ratio in the ramp is what A4 left it.
+
+   IT IS ONE DIAL AND IT IS GLOBAL, which is the same footing `--face-fs` has
+   always had. `.vp-face` is the face renderer for /wal, /robots and /wb alike,
+   and both previous instructions on this ramp (P7's and A4's) were given while
+   reading one wing and applied to all three — a panel out of proportion with its
+   page is out of proportion wherever it draws. Turning it back is one number. */
 .vp-face{
-  --face-fs:clamp(1.02rem, min(1.35vw, 4.4cqh), 1.28rem);
-  --fs-micro:max(.76rem, calc(var(--face-fs) * .72));
-  --fs-small:max(.86rem, calc(var(--face-fs) * .85));
+  --face-zoom:.94;
+  --face-fs:calc(clamp(1.02rem, min(1.35vw, 4.4cqh), 1.28rem) * var(--face-zoom));
+  --fs-micro:max(calc(.76rem * var(--face-zoom)), calc(var(--face-fs) * .72));
+  --fs-small:max(calc(.86rem * var(--face-zoom)), calc(var(--face-fs) * .85));
   --fs-body:var(--face-fs);
   --fs-lead:calc(var(--face-fs) * 1.09);
   --fs-head:calc(var(--face-fs) * 1.19);
@@ -3495,3 +3536,67 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
   .vp-rec-pop{padding:16px;align-items:flex-end}
   .vp-rec-pop-card{width:100%}
 }
+
+/* ═══ [D7 2026-08-06] MOVED HERE FROM Foundation.css ════════════════════════
+   A MARKED DOOR WITH NO ADDRESS IS A FACE-MODEL FEATURE NOW (`en.link`), so
+   its rules live with the face rather than with the one wing that declares
+   one. The selectors are `.vp-fe-*` for the same reason. Not a value moved.
+   Its original note follows, unedited except for the two class names. */
+/* ══ [F6 2026-08-05 · MOVED D7 2026-08-06] THE UNRESOLVED LINK ═════════════════════════════════════
+   Mike marked two links in his answers and supplied neither address. His
+   instruction was to build the structure and leave them unresolved AND VISIBLE,
+   which is a harder thing to draw than either a working link or nothing.
+
+   IT BORROWS THE REGISTER'S STAMP RATHER THAN INVENTING A SECOND LANGUAGE FOR
+   THE SAME FACT. The Foundation already has one way of saying "this mechanism is not
+   built": a mono, spaced, small-caps chip in a DASHED box, set beside the thing
+   it describes. A second treatment for the identical state would be two
+   vocabularies for one idea in one wing — so the values are literally the same
+   rules as `.fnd-reg-state`, reached through the same reveal-ledger lookup.
+
+   THE DOOR'S NAME IS SET IN THE MONO FACE, NOT THE SERIF, so it cannot be
+   mistaken for the sentence above it. It is apparatus — the label on a door —
+   and this museum sets apparatus in Courier. It is also NOT underlined and NOT
+   in the link colour, because nothing here is clickable and a thing that looks
+   clickable and is not is worse than no affordance at all.
+
+   IT SITS INSIDE THE OPEN ANSWER, hard against the paragraph it belongs to and
+   inside the answer's own bottom padding, so a closed question shows nothing
+   and an open one shows the door under the words that promised it. */
+.vp-fe-link {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0 2px 20px;
+}
+.vp-fe-link-text {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--wb-gold);
+}
+/* the same stamp as the register's, to the value — see the note above. */
+.vp-fe-link-state {
+  flex-shrink: 0;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+.vp-fe-link[data-state="LIVE"] .vp-fe-link-state {
+  color: var(--wb-gold);
+  border: 1px solid var(--wb-gold);
+}
+.vp-fe-link[data-state="NOT BUILT"] .vp-fe-link-state {
+  color: var(--wb-gold-mute);
+  border: 1px dashed var(--wb-hairline);
+}
+/* a door that is not open reads at the quiet step, so the pair does not shout
+   from inside an answer that is already making the point in sentences. */
+.vp-fe-link[data-state="NOT BUILT"] .vp-fe-link-text { color: var(--wb-gold-mute); }
+

@@ -12,9 +12,21 @@
  * called the Foundation is a name that lies about its job. Read that file's
  * header for the split rule.
  *
- * WHAT IS HERE: the page ground, and this room's three objects — the account
- * card, the register, and the zero-cost invoice. Nothing in this file is used
- * by any other room, which is the test that decided every line of the split.
+ * WHAT IS HERE: this wing's three objects — the account card, the register, and
+ * the zero-cost ledger. Nothing in this file is used by any other room, which is
+ * the test that decided every line of the split.
+ *
+ * [D7 2026-08-06] AND THE PAGE GROUND IS GONE, BECAUSE THE PAGE IS. M62 was
+ * ruled and the room is an exhibit WING; the sheet is deleted and this file is
+ * read by `src/routes/exhibit/FoundationObjects.jsx`, which renders the same
+ * three objects with the same markup and the same class names inside the
+ * viewer. **That is why nothing below this line was restyled:** if a rule still
+ * matches, the object still looks like itself, which is the cheapest guarantee
+ * available that the port lost nothing. Four rules WERE struck, each because the
+ * thing it addressed no longer exists — the `html[data-room="foundation"]`
+ * ground, `.fnd-root`, `.fnd-sep`, and the accordion's array-answer padding —
+ * and one moved: the unresolved link's stamp is a face-model feature now and its
+ * rules are in `Exhibit.css` as `.vp-fe-link*`.
  *
  * [R1 2026-08-03] THIS FILE WAS Money.css WITH `mny-` PREFIXES FOR ONE COMMIT.
  * Mike reverted the rename (see the header of Foundation.jsx for why), so the
@@ -35,15 +47,13 @@
  * stylesheet is global and permanent where a mounted `<style>` tag was not.
  */
 
-html[data-room="foundation"], html[data-room="foundation"] body {
-  height: 100%;
-  background: var(--wb-bg);
-  color: var(--wb-gold);
-}
-
-/* the room reuses `.sheet-root` whole; this class exists so the room can be
-   addressed at all without hijacking the shared selector. */
-.fnd-root { /* intentionally empty — see the header */ }
+/* [D7 2026-08-06] THE PAGE GROUND AND `.fnd-root` ARE DELETED. They were the
+   SHEET's — `useRoom("foundation")` set `html[data-room="foundation"]` on mount
+   and the ground rules hung off it. The wing has the exhibit's ground now
+   (`.ex-root`, keyed on `data-exhibit`), and nothing sets that attribute or
+   wears that class any more. Struck rather than left standing, because a
+   stylesheet is global and permanent: a ground rule for a room that no longer
+   exists is a trap for whoever next declares `data-room="foundation"`. */
 
 /* ── THE ACCOUNT — the room's landing hook ───────────────────────────────────
    See the note at the JSX for WHY. What follows is how, and the two decisions
@@ -471,69 +481,15 @@ html[data-room="foundation"], html[data-room="foundation"] body {
    takes a paragraph's gap instead of a section's. Scoped to this room because
    this room is the only one whose answers take an array; the shared file keeps
    the rule it was written for. */
-.fnd-root .sheet-q > .sheet-faq-a:not(:last-child) { padding-bottom: 9px; }
+/* [D7 2026-08-06] AND THE RULE IS DELETED WITH THE ACCORDION IT SPACED.
+   `.fnd-root .sheet-q > .sheet-faq-a` addressed a <details> answer on the sheet;
+   the answers are entry-list paragraphs now and take the face's own rhythm. The
+   finding it was written for is not lost — it is why `en.lines` exists at all,
+   and that note is in `scrubFace`. */
 
-/* ══ [F6 2026-08-05] THE UNRESOLVED LINK ═════════════════════════════════════
-   Mike marked two links in his answers and supplied neither address. His
-   instruction was to build the structure and leave them unresolved AND VISIBLE,
-   which is a harder thing to draw than either a working link or nothing.
-
-   IT BORROWS THE REGISTER'S STAMP RATHER THAN INVENTING A SECOND LANGUAGE FOR
-   THE SAME FACT. This page already has one way of saying "this mechanism is not
-   built": a mono, spaced, small-caps chip in a DASHED box, set beside the thing
-   it describes. A second treatment for the identical state would be two
-   vocabularies for one idea on one sheet — so the values are literally the same
-   rules as `.fnd-reg-state`, reached through the same reveal-ledger lookup.
-
-   THE DOOR'S NAME IS SET IN THE MONO FACE, NOT THE SERIF, so it cannot be
-   mistaken for the sentence above it. It is apparatus — the label on a door —
-   and this museum sets apparatus in Courier. It is also NOT underlined and NOT
-   in the link colour, because nothing here is clickable and a thing that looks
-   clickable and is not is worse than no affordance at all.
-
-   IT SITS INSIDE THE OPEN ANSWER, hard against the paragraph it belongs to and
-   inside the answer's own bottom padding, so a closed question shows nothing
-   and an open one shows the door under the words that promised it. */
-.fnd-q-link {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 0;
-  padding: 0 2px 20px;
-}
-.fnd-q-link-text {
-  font-family: 'Courier Prime', 'Courier New', monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--wb-gold);
-}
-/* the same stamp as the register's, to the value — see the note above. */
-.fnd-q-link-state {
-  flex-shrink: 0;
-  font-family: 'Courier Prime', 'Courier New', monospace;
-  font-size: 0.56rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  padding: 4px 8px;
-  white-space: nowrap;
-}
-.fnd-q-link[data-state="LIVE"] .fnd-q-link-state {
-  color: var(--wb-gold);
-  border: 1px solid var(--wb-gold);
-}
-.fnd-q-link[data-state="NOT BUILT"] .fnd-q-link-state {
-  color: var(--wb-gold-mute);
-  border: 1px dashed var(--wb-hairline);
-}
-/* a door that is not open reads at the quiet step, so the pair does not shout
-   from inside an answer that is already making the point in sentences. */
-.fnd-q-link[data-state="NOT BUILT"] .fnd-q-link-text { color: var(--wb-gold-mute); }
-
-/* the two ways out sit on one line; the separator is furniture and takes the
-   quiet step so it does not read as a third link. */
-.fnd-sep { color: var(--wb-gold-mute); }
+/* [D7 2026-08-06] `.fnd-sep` IS DELETED. It separated the sheet's two ways out
+   — the booth and the lobby — and the sheet is gone; the wing's way out is the
+   title bar every room in the building carries. Zero callers. */
 
 @media (max-width: 680px) {
   .fnd-ledger { padding: 22px 20px 18px; margin-bottom: 32px; }

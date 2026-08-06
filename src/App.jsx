@@ -6,7 +6,8 @@ import HrSpine    from "./routes/hr/HrSpine.jsx";
 import HrArchive  from "./routes/hr/HrArchive.jsx";
 import WbSpine    from "./routes/wb/WbSpine.jsx";
 import InfoBooth  from "./routes/InfoBooth.jsx";
-import Foundation from "./routes/Foundation.jsx";
+/* [D7 2026-08-06] M62: the Foundation is a WING now, not a sheet page. */
+import FoundationSpine from "./routes/foundation/FoundationSpine.jsx";
 import GiftShop   from "./routes/shop/GiftShop.jsx";
 import Robots     from "./routes/robots/Robots.jsx";
 import Wal        from "./routes/wal/Wal.jsx";
@@ -90,7 +91,13 @@ export default function App() {
             of the space where I need legal today" as an instruction to rename
             the room, and it was an instruction not to take on legal WORK. The
             room is the Foundation again, at the address it was built at. */}
-        <Route path="/foundation" element={<Foundation />} />
+        {/* [D7 2026-08-06] AND M62 IS BUILT: the room is an exhibit wing with
+            three albums (Ledger, FAQ, Contribute) and a tracklist. THE
+            ADDRESS DOES NOT MOVE — it is the same URL, the same room and the
+            same words; what changed is the container, so nothing that has
+            ever been shared or linked breaks. The `/money` redirect below is
+            untouched and still correct for the same reason. */}
+        <Route path="/foundation" element={<FoundationSpine />} />
         {/* [C2 2026-08-03 → R1 2026-08-03] THE REDIRECT SURVIVES THE REVERT AND
             RUNS THE OTHER WAY. This line pointed `/foundation` at `/money` and
             now points `/money` at `/foundation`, because BOTH names have been

@@ -31,6 +31,142 @@ where a rule lives.
 
 ---
 
+### 2026-08-05 → THE REMOTE-CONTROL ROUND (P1–P11) — sealed
+- **ELEVEN INSTRUCTIONS DOWN THE WIRE, TEN BUILT, AND THE ONE HANDED BACK IS
+  BLOCKED BY HIS OWN RULING FROM THE ROUND BEFORE.** Gates: lint **11/9 =
+  baseline** · build green · provenance **PASS** (72 strings + 2 assets declared,
+  61 stale rows pruned, 0 dangling) · `reveal:check` **PASS** · `parity:gate`
+  **PASS, proved by breaking it** · lap **on the built bundle**, eleven routes,
+  **zero console messages**, no horizontal overflow. Surfacing **13 · 13 · 15,
+  unmoved** — two files added and both referenced, none orphaned. Full narrative:
+  `docs/MUSEUM_REMOTE_CONTROL_LOG-20260805.md`.
+- **P1 — PARITY IS ABSOLUTE, AND IT REVERSES THE PREVIOUS ROUND'S OPS RULING IN
+  THE OPEN.** That ruling (a holdings gap RESOLVES a divergence) was airtight
+  about the holdings AS THEY ARE and blind to the only thing that mattered: **the
+  material is coming.** `menu-parity.mjs` now fails on ANY divergence; the
+  `JUSTIFIED` table, its `kind` column and **the ledger read that faulted the day
+  a named holding arrived** are deleted — the best mechanism in the old file,
+  mourned in its header with its commit named, because under an absolute rule it
+  has nothing left to guard. **It is a PACKET GATE now**, and that change of
+  status is the ruling: it used to report a judgement and now reports a fact.
+  The mainframe gained The Manual and FAQ; **the STUB LAW is overridden for those
+  two rows and only those two**, and Doctrine 12 is untouched inside them — the
+  manual row says what is NOT held and invents no section list. **The FAQ row
+  needed no exception at all:** every answer on it was already asserted in this
+  file about BOTH machines and was printing on only one of them.
+- **P7 — THE FIRST PHOTOGRAPH OF THE MAINFRAME WHOLE WAS 58 SECONDS INTO A VIDEO
+  THIS REPO HAS BEEN CITING FOR TWO DAYS.** Three true sentences — the
+  tombstone's *Withheld*, the blurb's *never shown whole*, the poster's *shown
+  nowhere whole* — stopped being true the moment somebody scrubbed the source the
+  six existing plates came from. **What was withheld was never the cabinet; it
+  was the ROBOT, and the robot is out of every frame in this wing.** The badge
+  FITS rather than crops (a square cut of an 858×1438 cabinet throws away two
+  fifths of it) and the disc does not move.
+- **P9 — ADDING ONE FACE TO /wb DROPPED THE MUSEUM'S LAST PAGER OUT OF IT.** M1's
+  no-hidden-information law was applied to /robots and /wal and not to /wb — for
+  the honest reason that **/wb had never declared a face**, so the wing looked
+  compliant by having no content. ABOUT THE ARTIST came up as *"Page 1 of 4"*.
+  `faceFlow: "flat"`; **the Stage is now mounted by nothing anywhere.**
+- **P5 — THE SIZE HALF OF "SESSION DEFAULTS" HAD BEEN BUILT FOR ONE WING IN
+  FOUR SINCE 2026-08-02.** F3 gave `usePersist` a session scope and handed it
+  only to wings declaring `fitOnEntry` — /wal — so /hr, /wb and /robots were
+  restoring a dragged split across months and machines, which is F3's own stated
+  failure left true in three rooms. **The booth's privacy answer changed first**,
+  because *"the panel you dragged wider is still wider tomorrow"* is a sentence
+  this round made false.
+- **P4 — THE RECORD'S NAVIGATION IS BUILT AND RENDERS NOTHING**, because the
+  volume holds one entry and three buttons pointing at the record you are already
+  reading are three dead controls. **So is the old ‹ NEWER / OLDER › walk, which
+  has been drawing two disabled halves and a count reading "1 of 1" since M5.**
+  Both gate at two; the keyboard does not. **The coverflow yields ← → to an open
+  record** — a real cost, stated. Verified against three records on a file copy.
+- **P8 — NOT SHIPPED, AND THE VIEWER IS BUILT.** The reader pages, wraps, counts
+  frames and toggles Fit ↔ Magnify. **The only manual document on file is the
+  61-page structure issue, every page of which reads `[ TEXT REQUIRED ]`** — and
+  P2 struck ONE page of that same document from that same face the round before.
+  Publishing 61 is that ruling reversed at 61× the scale. **M61 is the question.**
+- **P10 — TWO OF THREE. The invoice is a LEDGER because an invoice is a DEMAND
+  and this document demands nothing;** its own small print already said *"so the
+  ledger is honest and public"*. The incoming table takes back its own name, **The
+  register**, and two prose pointers that named the wrong object were repointed.
+  *"held, ever"* deleted. **The tone ruling is recorded as standing with four
+  tests, and the audit says the wing already passes** — written down because a
+  ruling that changed nothing on day one gets assumed decorative. The albums and
+  tracklist are **M62**: a straight port deletes the account card, the register
+  and the ledger, two of which are mechanisms Mike specified himself.
+- **AND THE PRUNE PROCEDURE IS CORRECTED BY ITS OWN FAILURE.** §9 says check
+  anchors first; the check could not enumerate the stale set (154 reported
+  against the sweep's 61). **The register was copied, pruned, and re-gated, and
+  the gate named all eleven broken chains exactly** — because the gate is the
+  thing that DEFINES "resolves". **Prune against a copy and let the gate find
+  them.** It also exposed a mis-class nobody would have found: five rows were
+  RESTATED for a coincidence of wording, and two of them are Mike's own words.
+
+### 2026-08-05 → MIKE'S READING PASS — ROUND ONE (L1·L2·S1·S2·M1·F1·F2·W1) — sealed
+- **HE READ TWO ROOMS AND EVERY FINDING WAS REAL.** Gates: lint **11/9 =
+  baseline** · build green · provenance **PASS** (0 undeclared · 0 stale · 0
+  invention) · `reveal:check` **PASS** · `parity:gate` **PASS** · lap **on the
+  built bundle** at desktop and 386px, zero console messages, no horizontal
+  overflow. Ledger **157 → 159**. Surfacing **13 · 13 · 15, unmoved** — both new
+  rows are NOT_BUILT and unshown, so the shelf did not grow. Full narrative:
+  `docs/MUSEUM_READING_PASS_ROUND_ONE_LOG-20260805.md`.
+- **L1/L2 — THE LOBBY WAS THE LAST PLACE IN THE BUILDING CALLING IT SOMETHING
+  ELSE, AND THE SWEEP IS WHAT PROVES IT.** *"The Museum"* → **`Weird.Baby
+  Museum`** (title case in source, uppercased by `.wb-subtitle`, so the glass
+  reads WEIRD.BABY MUSEUM and the data matches every other house name). The sweep
+  Mike asked for returned **one** instance — the share tags, the booth's credo
+  and the Foundation's invoice already said it. **IT DOES NOT REVERSE M-ID:**
+  that ruling struck four names that each fenced the museum to a CLASS OF ARTIST;
+  a house name narrows nothing. The watermark reads **`Weird.Baby`** —
+  `weird.baby` was a third spelling and it is the DOMAIN, what you type rather
+  than what a museum stamps on its own paper. **It also answers the morning rip's
+  own M10**, closed CANNOT REPRODUCE on 2026-08-03 for want of a room. **Two M10s
+  now exist in two namespaces** and this is the first round it mattered.
+- **S1 — THE BILLING LAW DECIDES ORDER; THE STYLESHEET DECIDES SIZE.** The house
+  tile was ~4× the guests' because top billing rendered a full-width banner, and
+  on a direct arrival the house takes top billing — **the house shouting over its
+  guests in the room whose whole job is other people's stores.** One grid now,
+  measured **445×298 desktop / 338×386 at 386px, identical across all four
+  billing branches**; `data-billing` still reports which clause answered and the
+  billed entry is still first. **The law is not repealed: it says who LEADS and
+  never said who is BIG.** `--half` and `.featured-artist__cta` deleted (zero
+  callers), `.wal-banners__grid` → `.gift-shop__grid`.
+- **S2 — EVERY ARTIST TILE WAS POINTING SOMEWHERE THAT WAS NOT THE ARTIST'S OWN
+  FRONT DOOR.** Hunter Root fell through `shop: null` to Bandcamp **while his own
+  site opens on *Official Merch Store***; Jesse Welles went to the merch VENDOR;
+  Carsie to a subpage; **Mikey Mike to a YouTube channel — a gift shop tile that
+  opened a video feed.** `shopExit` is read first. **`weekendatmikeys.com` was
+  read directly before it was wired** — it is his, its Instagram is
+  **@findmikeymike** (the handle of the channel oEmbed already verified), and it
+  carries **no injected link farm**, which is the thing that shut the other door.
+  **R-a's refusal of findmikeymike.com stands, unreversed.** The tile stopped
+  claiming a store, because one of the four front doors has none.
+- **W1 — M50 CLOSED, AND ONE OF M50'S OWN CLAIMS WAS WRONG.** Count re-derived
+  rather than carried: **9 containers · 93 rows · 78 with a `song:` slug, the 15
+  without being exactly Run With The Hunt.** Six sites rebuilt. **Two years were
+  wrong too and the mechanism is named:** the records board printed
+  `era-buckets.json` **bucket START years** as release dates — Crooked Home
+  2024→**2025** (vault `MV-HR-20260707-053` + his own Bandcamp) and Arkansas
+  2022→**2023** (his own Bandcamp). **But *"half of Crooked Home is about his
+  brother"* IS in the vault** — `MV-HR-20260707-068`, his own words to Americana
+  Highways — and stays on all three faces. **A search that missed it is not an
+  absence, and a register row is a claim like any other.**
+- **M1/F1/F2 — THE POKE IS THE GATE ON EVERY FUTURE EGG**, Mike's condition,
+  written above the row because it is a rule about the whole table. **Its cost is
+  stated:** nothing in this museum reports an egg being tripped, so *"catches
+  on"* is unmeasurable and the condition is met by his word — **not a proposal to
+  build analytics.** `room.curtain` and `room.slow` ledgered NOT_BUILT · HELD ·
+  `shown: false`, exempt under AUTHORSHIP because **one has to be written and the
+  other has to be chosen.** The photo folder was **not opened**; its own name
+  says it is not backed up elsewhere and its path names two other people.
+- **THE PRUNE PROCEDURE, RUN IN ORDER, WITH TWO ANCHORS THIS TIME.** *"78 songs
+  on file…"* and *"Nine"* each carried three RESTATED chains; one chain was
+  itself stale, the two survivors were repointed **before** the prune. 10 added ·
+  11 pruned · gate green. **And [C41] `SURFACING_LOG.md` stamps its rows in UTC**
+  — this reading was taken 2026-08-05 and logged as 2026-08-06. Reported and
+  **deliberately not fixed inside a round that was reading the tool**, whose own
+  header says a measurement somebody adjusted is not a measurement.
+
 ### 2026-08-05 → THE ROBOTS SIMPLIFICATION (v56; G1, R1–R7) — sealed
 - **CROSS-REPO, AND IT DELETED MORE THAN IT BUILT:** three front-desk faces, six
   robot plates, a whole spread, two typographic cards (~90 lines of generator)

@@ -437,9 +437,21 @@ const ARTISTS = [
           label: [
             /* [W1 2026-08-05] "seventy-eight" -> "ninety-three". See the block
                over the tombstone below: 78 was the count of track rows carrying
-               a `song:` slug and it dropped the whole of Run With The Hunt. */
-            "One of two Hunter Root songs surfaced in this wing, out of " +
-            "ninety-three in the museum's own vault.",
+               a `song:` slug and it dropped the whole of Run With The Hunt.
+               [D3c 2026-08-06] AND W1's OWN FIX CARRIED THE DEFECT IT WAS
+               CURING ONE LAYER DOWN. This sentence says SONGS and prints 93,
+               and 93 is a count of TRACK ROWS — the same unit swap as "78
+               songs", made by the round that struck it. Counted this round off
+               the museum's own export: 93 track rows, 91 DISTINCT titles.
+               "Brain Cell" and "Same Page" each sit on two records — a 2016
+               ReverbNation recording on Run With The Hunt and a 2019 Bandcamp
+               studio recording on Life Inside A Wheel. Two files, two years,
+               one song, counted twice.
+               NO SECOND NUMBER ENTERS THE BUILDING. The fix is the UNIT, not
+               the figure: the line now names tracks, in the tombstone's own
+               words, so the whole card says one thing. */
+            "One of two Hunter Root songs surfaced in this wing, out of the " +
+            "ninety-three tracks on file in the museum's own vault.",
             "The catalogue files it as “Nothin' Wrong”, and the " +
             "catalogue is the record.",
           ],
@@ -1712,9 +1724,20 @@ const HOUSE_ALBUM = {
            reason has walked away is the kind of orphan every round of this
            project has had to go back and remove. */
         footer: "WORTH A LISTEN · WEIRD.BABY",
+        /* [D3a 2026-08-06] M53 CLOSED, ON MIKE'S STRIKE, AND THE SCRUBBER IS
+           UNTOUCHED. The second sentence — "Every claim about an artist here is
+           already on that artist's own card, sourced there." — carried no
+           marker, so `visitorProse` (which cuts by SENTENCE, on purpose, and
+           must not be "fixed") printed it as the last line on the poster. It
+           was the museum vouching for its own sourcing practice on the glass:
+           the same subject W1c struck out of the bill's foot four inches above
+           it, surviving in the field nobody reads as visitor-facing.
+           THE LESSON IS THE ONE M53 NAMED AND IT IS WIDER THAN THIS FACE: a
+           `papa` string is not a comment. Write the whole note inside ONE
+           marked sentence, or expect the rest on the glass. This field is now
+           one sentence and it carries the marker. */
         papa: "[PAPA] — the promotional copy, the running order and the four " +
-              "house accents. Every claim about an artist here is already on " +
-              "that artist's own card, sourced there.",
+              "house accents.",
       },
     },
     {

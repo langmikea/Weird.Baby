@@ -1,4 +1,10 @@
-// src/routes/Foundation.jsx — THE WEIRD.BABY FOUNDATION (/foundation).
+// src/data/artists/foundation.js — THE WEIRD.BABY FOUNDATION (/foundation).
+//
+// [D7 2026-08-06] THIS FILE WAS `src/routes/Foundation.jsx` UNTIL M62 WAS RULED.
+// The room is a WING now and its data lives with the other artists; the header
+// below is the sheet's, carried whole, because every ruling in it still binds
+// the copy — what changed is the container, not a word of what a visitor reads.
+// The account of the port itself is the D7 block further down.
 //
 // ═══ [P10 2026-08-05] THE TONE RULING — STANDING, AND IT GOVERNS THE WHOLE WING
 //
@@ -207,18 +213,46 @@
 // Foundation.css is only what is THIS room's: its page ground, and its three
 // objects.
 
-import { Link } from "react-router-dom";
-/* [E4 2026-08-03] the shared sheet, then this room's own. Was
-   `import "./InfoBooth.css"` — furniture for two rooms while named for one,
-   carried as a want in three round logs. See the header of sheet.css. */
-import "../styles/sheet.css";
-import "./Foundation.css";
-import { useRoom } from "../lib/use-room.js";
-import { useArrival } from "../lib/use-arrival.js";
-import MuseumBar from "../components/MuseumBar.jsx";
-import { visitorProse, kept } from "../lib/visitor-prose.js";
-/* [R5 2026-08-05] the state column's source — see the note above STATE_LABEL. */
-import { isLive } from "../lib/reveal.js";
+// ═══ [D7 2026-08-06] M62 IS RULED AND THIS ROOM IS A WING NOW ════════════════
+//
+//   MIKE: "it needs ALBUMS (Ledger, FAQ, Contribute) and a TRACKLIST, like every
+//   other wing." Then, on the reason it was handed back: "OPTION A — TEACH THE
+//   ALBUM SHAPE to carry the Foundation's three bespoke objects. Nothing of
+//   Mike's specified machinery is lost to the port."
+//
+// WHAT WAS AT STAKE, WHICH IS WHY M62 EXISTED RATHER THAN BEING BUILT ON THE
+// DAY. /foundation was a SHEET — a document page, not a `face` wing — carrying
+// three objects the face model had no equivalent for, and two of the three are
+// mechanisms Mike specified himself:
+//   · THE ACCOUNT CARD — the $0.00 figure and its three rows. This room's only
+//     visual hook, and a TYPOGRAPHIC object rather than a picture.
+//   · THE REGISTER — the two-sided table of what comes in, whose LIVE / NOT
+//     BUILT column is read live off `reveal/ledger.json` (R5). The room's
+//     honesty mechanism.
+//   · THE LEDGER — the zero-cost itemised account, its total, and the posture
+//     signed under it.
+// A straight port to `blurb` / `lines` / `entries` deletes all three. So the
+// face model learned them instead: `face.account`, `face.register` and
+// `face.ledger` are three new object kinds in `Exhibit.jsx`, declared on the
+// faces below, rendered by `src/routes/exhibit/FoundationObjects.jsx` — WHICH IS
+// THE SHEET'S OWN MARKUP AND THE SHEET'S OWN STYLESHEET, moved rather than
+// rewritten. The reveal-ledger lookup came across untouched; flipping
+// `channel.qr` to LIVE still changes this wing and no other file.
+//
+// WHAT THE PORT COSTS, STATED RATHER THAN GLOSSED. The FAQ was an ACCORDION —
+// native <details>, every question visible, its answer opening in place. The
+// face model has no accordion, so the questions render as an ENTRY LIST with
+// every answer open. That is MORE readable rather than less by the museum's own
+// no-hidden-information law (M1), and it is what /robots' FAQ face already does,
+// which is the whole of "like every other wing". The sheet furniture — the
+// credo, the rule, the way back — is the exhibit's furniture now.
+//
+// THE ORDER OF THE ALBUMS IS HIS, AND IT IS ALSO THE ARGUMENT: the Ledger says
+// what the house holds (nothing) and what it costs (nothing), the FAQ answers
+// the questions that raises, and Contribute is last because it is the only one
+// that asks the reader for anything — and, per the TONE RULING above, it does
+// not ask.
+
 
 /* ═══ [E1 2026-08-03] THE LEDGER ═════════════════════════════════════════════
    Mike's contributions model, as the register it is.
@@ -270,46 +304,39 @@ import { isLive } from "../lib/reveal.js";
    the exact failure Doctrine 12 exists for, on the exact page where it would
    matter most. The value is SUPPORTED, which is what was asked: declared,
    styled, documented, and one field away on the day a gift arrives. */
-/* [N7] the three declared values and what each prints. Anything else in a `by`
-   field is a literal donor name and is printed as given — which is why the
-   lookups fall through rather than throwing: the open case is a name, and a
-   name is not a keyword. */
-const BY_LABEL = {
-  ANONYMOUS: "Anonymous",
-  NONE: "Nobody yet",
-  NA: "Not a gift",
+/* ═══ [F1/F3 2026-08-03] THE ACCOUNT ═════════════════════════════════════════
+   THE VISUAL HOOK LAW, and this room needed it more than any other in the
+   building: a page about money with no picture available to it and no picture
+   that would be honest if we had one.
+   SO THE HOOK IS THE NUMBER. The charter's proof is structural — "there is no
+   account to fill. There has never been one. There never will be." — and a
+   structural proof rendered as a paragraph is a claim, while the same proof
+   rendered as a ledger with a zero on it is an object a visitor can read in one
+   second and remember on the way out.
+   EVERY FIGURE ON IT IS A CLAUSE OF THE LAW, not a statistic: held / owned /
+   kept by the keeper / passed on are clauses 4, 3, 2 and 4 again. Nothing here
+   is measured, so nothing here can go out of date — which is the difference
+   between this and a live counter.
+   [E1] IT SURVIVES THE BUILD-OUT UNCHANGED: the wing carries an incoming-money
+   register on its own album, and the card is still true. $0.00 is not a claim
+   that nothing arrives — it is a claim that nothing STAYS, which is precisely
+   what the register demonstrates line by line.
+   [P10 2026-08-05] "REMOVE 'held, ever'." Mike's correction, and the caption was
+   DELETED rather than reworded — the three rows under the figure already say
+   what is owned, what is kept and what is passed on.
+   [D7 2026-08-06] IT IS DATA NOW RATHER THAN HARD-CODED MARKUP. It was written
+   into the sheet's JSX; a face declares its objects, so the three rows and the
+   figure are declared here and `face.account` carries them. Not a character of
+   what a visitor reads has changed. */
+export const ACCOUNT = {
+  head: "Weird.Baby — the account",
+  figure: "$0.00",
+  rows: [
+    { k: "Owned", v: "nothing" },
+    { k: "Kept by the keeper", v: "nothing" },
+    { k: "Passed on", v: "all of it" },
+  ],
 };
-const BY_KIND = { ANONYMOUS: "ANONYMOUS", NONE: "NONE", NA: "NA" };
-
-/* ═══ [R5 2026-08-05] THE STATE COLUMN NOW READS THE REVEAL LEDGER ══════════
-   MIKE: "WIRE ONE CONSUMER as proof — the cheapest honest surface whose
-   visibility already varies reads the table instead of its hard-coded state.
-   Prove it by flipping a row and watching the site change."
-
-   THIS ROOM IS THAT SURFACE, and it is not an arbitrary pick. Its state column
-   IS hard-coded availability — five rows, two of them LIVE and three NOT BUILT,
-   typed into this file. It is also the one page in the building whose entire
-   argument is that the state must be true: Mike's constraint was that nothing
-   may claim a mechanism that isn't built, and the column exists so the tense
-   cannot be softened in prose. A truth about what is built, typed by hand into
-   the page that makes the claim, is exactly the shape the ledger is for.
-
-   THE LEDGER SUPPLIES THE STATE. THIS FILE KEEPS THE WORDS. A row below now
-   carries `reveal: "channel.qr"` instead of `state: "NOT BUILT"`, and the label
-   printed on the glass is still a string literal in `src/` — which is where
-   `provenance:gate` can see it. Moving the letters into a JSON file outside
-   `src/` would have taken them off the provenance boundary in the same round
-   that mechanised it. See the header of `src/lib/reveal.js`.
-
-   TWO STATES OUT OF FOUR, and strictly: `isLive` is true only for a ledger row
-   at `LIVE`. `PARTIAL` and `STUB` print NOT BUILT here, because this register's
-   own rule is that there is no third state for "in progress" — see the note on
-   LEDGER below, which was written before this wiring existed and did not have
-   to change for it. */
-const STATE_LABEL = { LIVE: "LIVE", NOT_BUILT: "NOT BUILT" };
-function stateOfRow(row) {
-  return isLive(row.reveal) ? STATE_LABEL.LIVE : STATE_LABEL.NOT_BUILT;
-}
 
 const LEDGER = [
   {
@@ -771,251 +798,136 @@ const FAQ = [
   },
 ];
 
-export default function Foundation() {
-  /* [R5] this room owns the page ground while it is mounted — see
-     src/lib/use-room.js and the header of this route's stylesheet. */
-  useRoom("foundation");
-  /* [M2] first visit of the session opens at the top; a return keeps the
-     question the visitor had open and the place they were reading. */
-  useArrival("foundation");
+/* ═══ [D7] THE SPINE ═══════════════════════════════════════════════════════
+   Three albums, Mike's names and Mike's order. Every face below is a container
+   for objects that already existed; not one string in this file is new. */
+const spine = [
+  {
+    id: "ledger",
+    title: "Ledger",
+    year: null,
+    art: "/images/foundation/ledger-cover.png",
+    accent: null,
+    tracks: [
+      {
+        id: "the-account",
+        title: "The account",
+        videos: [],
+        face: {
+          kind: "text",
+          title: "THE ACCOUNT",
+          subtitle: "THE WEIRD.BABY FOUNDATION",
+          /* THE CREDO — the charter's own opening sentence and its two short
+             ones, carried off the sheet's `.sheet-credo` / `.sheet-words`. */
+          blurb: "Built from gifts. Gives everything away. Nothing is bought, " +
+                 "nothing is kept, and money never stops here.",
+          account: ACCOUNT,
+        },
+      },
+      {
+        id: "the-ledger",
+        title: "The ledger",
+        videos: [],
+        face: {
+          kind: "text",
+          title: "THE LEDGER",
+          subtitle: "WHAT THE MUSEUM COSTS, AND WHO CARRIED IT",
+          ledger: INVOICE,
+          posture: POSTURE,
+        },
+      },
+    ],
+  },
+  {
+    id: "faq",
+    title: "FAQ",
+    year: null,
+    art: "/images/foundation/faq-cover.png",
+    accent: null,
+    tracks: [
+      {
+        id: "questions",
+        title: "Questions",
+        videos: [],
+        face: {
+          kind: "text",
+          title: "QUESTIONS",
+          subtitle: "THE WEIRD.BABY FOUNDATION",
+          /* [D7] the accordion becomes an entry list — see the header. `lines`
+             carries the multi-paragraph answers F1 wrote as two beats, and
+             `link` carries the two marked doors F6 supplied no address for:
+             the door's NAME and the register's own state stamp, and no <a>. */
+          entries: FAQ.map(({ q, a, link }) => ({
+            stamp: "Q",
+            title: q,
+            lines: Array.isArray(a) ? a : [a],
+            link,
+          })),
+          entriesMode: "list",
+          footer: "THE WEIRD.BABY FOUNDATION · QUESTIONS",
+        },
+      },
+    ],
+  },
+  {
+    id: "contribute",
+    title: "Contribute",
+    year: null,
+    art: "/images/foundation/contribute-cover.png",
+    accent: null,
+    tracks: [
+      {
+        id: "the-register",
+        title: "The register",
+        videos: [],
+        face: {
+          kind: "text",
+          title: "THE REGISTER",
+          subtitle: "WHAT COMES IN, AND WHAT IS BUILT",
+          register: LEDGER,
+        },
+      },
+    ],
+  },
+];
 
-  /* Scrubbed at the render seam, exactly as the booth does it. An answer that
-     is ENTIRELY a marker vanishes rather than printing one — the `kept` filter
-     is what makes that true, and [F3] is the first answer in this room to
-     actually take that path: the billionaires question is in the data below
-     and reaches no visitor.
-
-     [F1/F4 2026-08-05] AN ANSWER MAY BE A STRING OR AN ARRAY OF PARAGRAPHS.
-     Every paragraph is scrubbed on its own, so a marker takes ITS paragraph and
-     not the ones beside it, and a question survives while any paragraph does.
-     The array exists because Mike wrote one answer as two beats; normalising
-     here rather than at each site keeps every other answer exactly the shape it
-     already was. */
-  const faq = FAQ
-    .map(({ q, a, link }) => ({
-      q: visitorProse(q),
-      a: (Array.isArray(a) ? a : [a]).map(visitorProse).filter(kept),
-      link,
-    }))
-    .filter(({ q, a }) => kept(q) && a.length > 0);
-
-  return (
-    <div className="sheet-root fnd-root">
-      <MuseumBar room="The Foundation" />
-
-      <div className="sheet-card">
-        {/* ==== [F1/F3 2026-08-03] THE ACCOUNT ==============================
-            THE VISUAL HOOK LAW, and this room needed it more than any other in
-            the building: a page about money with no picture available to it and
-            no picture that would be honest if we had one.
-            SO THE HOOK IS THE NUMBER. The charter's proof is structural — "the
-            proof is structural: there is no account to fill. There has never
-            been one. There never will be." — and a structural proof rendered as
-            a paragraph is a claim, while the same proof rendered as a LEDGER
-            with a zero on it is an object a visitor can read in one second and
-            remember on the way out. That is the trail-marker law and the visual
-            hook law asking for the same thing.
-            EVERY FIGURE ON IT IS A CLAUSE OF THE LAW, not a statistic: held /
-            owned / kept by the keeper / passed on are clauses 4, 3, 2 and 4
-            again. Nothing here is measured, so nothing here can go out of date
-            — which is the difference between this and a live counter, and the
-            reason it is a ledger rather than a dashboard.
-            [E1] IT SURVIVES THE BUILD-OUT UNCHANGED, and that is worth stating:
-            the room now carries an incoming-money register a few inches below
-            this card, and the card is still true. $0.00 HELD is not a claim
-            that nothing arrives — it is a claim that nothing STAYS, which is
-            precisely what the register underneath demonstrates line by line.
-            `aria-hidden`, for the booth ticket's reason: the answers below say
-            all four facts in sentences, and a screen reader hearing "$0.00
-            HELD, EVER" as a fragment ahead of them is served worse, not
-            better. */}
-        {/* [P10 2026-08-05] "REMOVE 'held, ever'." Mike's correction, and the
-            caption is DELETED rather than reworded — the three rows under the
-            figure already say what is owned, what is kept and what is passed
-            on, so the caption was the second object saying what the first said,
-            in the one register (ever) that reads as an argument being pressed.
-            The figure and its rows are untouched. */}
-        <div className="fnd-ledger" aria-hidden="true">
-          <div className="fnd-ledger-head">Weird.Baby &mdash; the account</div>
-          <div className="fnd-ledger-figure">$0.00</div>
-          <dl className="fnd-ledger-rows">
-            <div><dt>Owned</dt><dd>nothing</dd></div>
-            <div><dt>Kept by the keeper</dt><dd>nothing</dd></div>
-            <div><dt>Passed on</dt><dd>all of it</dd></div>
-          </dl>
-        </div>
-
-        {/* THE PLACARD — the charter's own opening sentence, and its own two
-            short ones under it. Same furniture as the booth's credo, because
-            it is the same kind of object: signage, in the brand face, on a
-            measure it cannot outrun. */}
-        <h1 className="sheet-credo">
-          <span>Built from gifts.</span>
-          <span>Gives <em>everything</em> away.</span>
-        </h1>
-        <div className="sheet-words">
-          <p>Nothing is bought. Nothing is kept.</p>
-          <p>Money never stops here.</p>
-        </div>
-
-        <div className="sheet-rule" />
-
-        {/* ==== [E1 2026-08-03] THE REGISTER ================================
-            Mike's contributions model, printed as the two-sided register it
-            is: what comes in as money, and what arrives as the thing itself.
-            IT IS A TABLE AND IT IS BUILT AS ONE, not as a styled list. The
-            state of each row is DATA about that row, so it sits in a cell
-            beside it — a `<dl>` of what/state/line would have made the state a
-            description of the row rather than a column of the register, and
-            the whole point is that a visitor can read the state column down
-            the page without reading a word of the prose. */}
-        {/* [P10 2026-08-05] AND THIS HEADING MOVES BECAUSE THE OTHER ONE DID.
-            Mike's correction is about the object below — "the INVOICE TITLE IS
-            WRONG, that object is a LEDGER, name it so" — and the museum cannot
-            carry two things called the ledger on one page. THIS is the register:
-            two columns of what arrives, one side money and one side the thing
-            itself, with a state stamp down the edge. `fnd-reg` is what the code
-            has called it since E1 built it, so the glass now agrees with the
-            classes rather than with a heading nobody re-read. */}
-        <section className="fnd-reg-wrap">
-          <h2 className="sheet-faq-head">The register</h2>
-          {LEDGER.map(({ head, sub, rows, law }) => (
-            <div className="fnd-reg" key={head}>
-              <div className="fnd-reg-head">
-                <span className="fnd-reg-head-what">{head}</span>
-                <span className="fnd-reg-head-sub">{sub}</span>
-              </div>
-              <ul className="fnd-reg-rows">
-                {rows.map(({ what, reveal, line, by }) => (
-                  /* [R5] `state` is no longer a property of the row; it is
-                     looked up from the ledger by the row's id. */
-                  <li className="fnd-reg-row" key={what}>
-                    <div className="fnd-reg-top">
-                      <span className="fnd-reg-what">{what}</span>
-                      <span className="fnd-reg-meta">
-                        {/* [N7] the donor column. It is LABELLED in every row
-                            rather than headed once at the top of the register,
-                            because the register stacks on a phone and a column
-                            heading that has scrolled away is a column nobody can
-                            read. `data-by` carries the KIND, so the four cases
-                            are one CSS rule rather than four class names that
-                            have to be kept in step — the same reasoning as the
-                            state cell below it. */}
-                        <span className="fnd-reg-by" data-by={BY_KIND[by] || "NAME"}>
-                          <span className="fnd-reg-by-k">Donated by</span>
-                          <span className="fnd-reg-by-v">{BY_LABEL[by] ?? by}</span>
-                        </span>
-                        {/* the state is the honesty mechanism — see the note on
-                            LEDGER. `data-state` rather than a second class name
-                            so the CSS reads as one rule with two cases instead of
-                            two rules that have to be kept in step. */}
-                        <span className="fnd-reg-state"
-                          data-state={stateOfRow({ reveal })}>
-                          {stateOfRow({ reveal })}
-                        </span>
-                      </span>
-                    </div>
-                    <p className="fnd-reg-line">{line}</p>
-                  </li>
-                ))}
-              </ul>
-              {law && <p className="fnd-reg-law">{law}</p>}
-            </div>
-          ))}
-        </section>
-
-        {/* ==== [E1 2026-08-03] THE INVOICE ================================= */}
-        {/* [P10 2026-08-05] IT IS A LEDGER AND IT SAYS SO NOW. MIKE: "the
-            INVOICE TITLE IS WRONG — that object is a LEDGER, name it so."
-            He is right about the object rather than about the word: an invoice
-            is a DEMAND, addressed to somebody who then owes you something, and
-            this document demands nothing and never has — its total is $0.00 by
-            construction. What it actually does is keep an itemised account of
-            what the museum costs and who carried it, which is a ledger.
-            THE CLASS NAMES AND THE CONSTANT STAY `inv`, deliberately, on exactly
-            the reasoning that kept `id: "mgk-viii"` after that album was renamed:
-            they are keys, nothing outside this file reads them, and nothing
-            prints them. The strings a visitor meets are what changed — the mark,
-            and the accessible name of the section. Its own small print already
-            said "so the ledger is honest and public", which is the tell that the
-            document knew what it was before its title did. */}
-        <section className="fnd-inv" aria-label="A zero-cost ledger kept by the keeper for the museum">
-          <div className="fnd-inv-top">
-            <span className="fnd-inv-mark">Ledger</span>
-            <span className="fnd-inv-no">{INVOICE.no}</span>
-          </div>
-          <dl className="fnd-inv-parties">
-            <div><dt>From</dt><dd>{INVOICE.from}</dd></div>
-            <div><dt>Bill to</dt><dd>{INVOICE.billTo}</dd></div>
-          </dl>
-          <ul className="fnd-inv-lines">
-            {INVOICE.lines.map(({ what, rate }) => (
-              <li key={what}>
-                <span className="fnd-inv-what">
-                  {what}
-                  {rate && <span className="fnd-inv-rate">{rate}</span>}
-                </span>
-                <span className="fnd-inv-amt">$0.00</span>
-              </li>
-            ))}
-          </ul>
-          <div className="fnd-inv-total">
-            <span>Total due</span>
-            <span className="fnd-inv-total-amt">{INVOICE.total}</span>
-          </div>
-          <p className="fnd-inv-note">{INVOICE.note}</p>
-          {/* THE POSTURE, signed. See the note on POSTURE — it is placed here
-              because it is what the object above it means. */}
-          <p className="fnd-posture">{POSTURE}</p>
-          <p className="fnd-posture-sig">Papa Weird.Baby</p>
-        </section>
-
-        <div className="sheet-rule" />
-
-        <div className="sheet-faq">
-          <h2 className="sheet-faq-head">Questions</h2>
-          {faq.map(({ q, a, link }) => (
-            <details key={q} className="sheet-q">
-              <summary>{q}</summary>
-              {a.map((para, i) => (
-                <p className="sheet-faq-a" key={i}>{para}</p>
-              ))}
-              {/* [F6 2026-08-05] THE UNRESOLVED LINK, and it is deliberately
-                  NOT AN ANCHOR. Mike marked two links and supplied neither
-                  address, so there is nothing to point at: an `<a>` with no
-                  href, or one pointing at "#", is a dead control, and the
-                  corollary to Doctrine 11 says a dead control is removed rather
-                  than left standing. What ships instead is the door's NAME and
-                  its STATE — the register's own two-state stamp, on the same
-                  reveal-ledger lookup the register uses, so the day the channel
-                  is built this stamp changes with it and no one has to remember
-                  that this line exists. */}
-              {link && (
-                <p className="fnd-q-link" data-state={stateOfRow(link)}>
-                  <span className="fnd-q-link-text">{link.text}</span>
-                  <span className="fnd-q-link-state">{stateOfRow(link)}</span>
-                </p>
-              )}
-            </details>
-          ))}
-        </div>
-
-        <div className="sheet-rule" />
-
-        <p className="sheet-contact">
-          Corrections and offers of service:{" "}
-          <a href="mailto:papa@weird.baby">papa@weird.baby</a>
-        </p>
-        {/* The booth is the other half of this room's subject — this page is
-            the money and the reason; that one is the place and the people. One
-            quiet sentence between them, in the prose, the way M6 ruled a
-            pointer should read. */}
-        <p className="sheet-back">
-          <Link to="/booth">The Information Booth</Link>
-          <span className="fnd-sep"> &middot; </span>
-          <Link to="/">Back to the lobby</Link>
-        </p>
-      </div>
-    </div>
-  );
-}
+export const foundation = {
+  id: "foundation",
+  /* [D7] THE BAR CARRIES THE SHORT NAME, WHICH IS THE SHEET'S OWN CHOICE
+     CARRIED ACROSS RATHER THAN A NEW ONE. The sheet's `<MuseumBar room="The
+     Foundation">` said this; the full name is on every face's subtitle, where a
+     door carries the full name and a bar carries the room (M26's own reading).
+     It is also the difference between fitting and not: C36 measured `Other
+     Music Worth A Listen` at 26 characters with SIX PIXELS of slack either side
+     at 390px, and it is the longest name the bar holds. "The Weird.Baby
+     Foundation" is 25 and would have joined it on the floor. */
+  name: "The Foundation",
+  exhibitSlug: "foundation",
+  eraAlias: {},
+  spine,
+  facts: [],
+  defaultActiveIndex: 0,
+  splitKey: "wb-fnd-split",
+  cfKey: "wb-fnd-cfh",
+  visitPath: "/foundation",
+  shopExitParam: "foundation",
+  /* [D7] THE GIFT SHOP EXIT IS HIDDEN, AND IT IS THE PORT BEING FAITHFUL RATHER
+     THAN A NEW RULING. The sheet had no shop link anywhere on it; the wing's bar
+     would have added one, and a commercial door in the title bar of the room
+     whose entire subject is that money does not stop here fails the first of the
+     TONE RULING's four tests at the head of this file. /robots already sets the
+     precedent for hiding it (`shopEntryHidden`), and the shop is not hidden from
+     this room's CONTENT — it is the first row of the register, named as an
+     incoming channel, which is where it belongs. */
+  shopEntryHidden: true,
+  /* [D7] AND NO PLAYER BAR, FOR THE SAME REASON /robots DECLARES NONE. This wing
+     holds no music and no video — every track on it is a face — so a fixed 68px
+     transport at the foot of the room is five controls for something that never
+     plays. The lap caught it: the port had brought the bar in with the album
+     shape and the museum's own STAGE doctrine forbids exactly that ("a transport
+     appears only where the setting has purpose for it"). Opt-out by config, not
+     by route sniffing, which is the mechanism that doctrine already built. */
+  playerBar: false,
+  /* [P9/P5] no pager anywhere in the museum, and no wing declares one. */
+  faceFlow: "flat",
+};

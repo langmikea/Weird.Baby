@@ -46,6 +46,12 @@ import { useRoom } from "../lib/use-room.js";
 import { useArrival } from "../lib/use-arrival.js";
 import MuseumBar from "../components/MuseumBar.jsx";
 import { visitorProse, kept } from "../lib/visitor-prose.js";
+/* [D1 2026-08-06] TWO OF THIS ROOM'S ANSWERS ARE THE HOUSE'S, NOT THE BOOTH'S.
+   "Who keeps this place?" was retyped onto /wb's ABOUT THE ARTIST register at
+   P9, so one sentence about the keeper existed in two rooms with no link
+   between the copies. Both now read `KEEPER`. `CONTACT` is declared beside it
+   for the same reason — see src/data/house-copy.js. */
+import { KEEPER, CONTACT } from "../data/house-copy.js";
 
 /* ─── THE QUESTIONS ─────────────────────────────────────────────────────────
    Ordered the way a stranger meets the building: what is this, what does it
@@ -226,9 +232,7 @@ const FAQ = [
   },
   {
     q: "Who keeps this place?",
-    a: "One person — Papa Weird.Baby. The job pays nothing, the museum never " +
-       "pays to be managed, and only zero-invoice services are accepted. " +
-       "That's the deal, and it never changes.",
+    a: KEEPER,
   },
   {
     q: "How does something get in here?",
@@ -276,10 +280,19 @@ const FAQ = [
        "new work lands, and whether that is a promise, is Papa's to say.",
   },
   {
+    /* [D2 2026-08-06] MIKE'S OWN WORDING, RULED, AND THE TWO SENTENCES BEHIND
+       IT ARE STRUCK. "It is read by the person who keeps the place" restated
+       the keeper answer four rows up — the page explaining what the page
+       already said, which is the shape B5 struck twice on this same list. And
+       "Corrections are especially welcome — if we have got something wrong
+       about a record, a date, or a person, we would rather know" was the museum
+       advertising its own diligence, which is the subject Doctrine 11 keeps off
+       the glass and which the WAL poster's foot was struck for one round ago.
+       He asked for plain and no ceremony; the answer is now one line and the
+       address is the whole of it. Declared in house-copy.js, not here — see
+       the import at the head of this file. */
     q: "How do I reach you?",
-    a: "Write to papa@weird.baby. It is read by the person who keeps the " +
-       "place. Corrections are especially welcome — if we have got something " +
-       "wrong about a record, a date, or a person, we would rather know.",
+    a: CONTACT,
   },
 ];
 

@@ -20,6 +20,13 @@
 // only when present ({ExhibitFlow && ...}, Exhibit.jsx:1065 — verified
 // 2026-07-06). The WB exhibit is player-only for v0; holes are by design.
 
+/* [D1 2026-08-06] THE KEEPER'S ANSWER IS THE HOUSE'S, AND IT IS NOW READ RATHER
+   THAN RETYPED. P9 copied the Information Booth's answer onto the register
+   below, verbatim and deliberately — and a verbatim copy is still a copy: the
+   booth could be edited and this room would go on saying the old thing. It is
+   one declaration in src/data/house-copy.js now, imported by both. */
+import { KEEPER } from "../house-copy.js";
+
 const REC_LABEL = "Recording — 2026-06";
 
 /* ═══ [P9 2026-08-05] ABOUT THE ARTIST, FIRST IN THE WING ════════════════════
@@ -78,14 +85,12 @@ const spine = [
               line: "[PAPA] the artist's own account of himself, which is " +
                     "Mike's to write and nobody else's.",
               note: "" },
-            /* THE INFORMATION BOOTH'S OWN ANSWER, verbatim. It is the one
-               published statement about the person behind this name, and it was
-               only reachable from a room in a different part of the building. */
+            /* THE INFORMATION BOOTH'S OWN ANSWER. It is the one published
+               statement about the person behind this name, and it was only
+               reachable from a room in a different part of the building.
+               [D1] It is the SAME STRING as the booth's now, not a copy of it. */
             { stamp: "WHO", title: "Who keeps this place?",
-              line: "One person — Papa Weird.Baby. The job pays nothing, the " +
-                    "museum never pays to be managed, and only zero-invoice " +
-                    "services are accepted. That's the deal, and it never " +
-                    "changes.",
+              line: KEEPER,
               note: "" },
             { stamp: "ON FILE", title: "What the museum holds",
               line: "Six recordings, made in June 2026, and one release: The " +

@@ -610,6 +610,36 @@ const WBR_TRACKS = [
    the picture a visitor actually reads. **So nothing was rotated.** It is an
    art ask, logged as A8 in docs/OPEN_ACTIONS.md.
    ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ═══ [D1 2026-08-06] THE PASSAGES BOTH MACHINES SAY, SAID ONCE ══════════════
+   MIKE: "the same content exists in multiple rooms with no link between the
+   copies, so fixing one never fixes the other."
+
+   PARITY IS ABSOLUTE IN THIS WING (P1), which means the two machines carry the
+   same menu items — and that guarantees a supply of passages BOTH albums have
+   to say. Until now each was typed twice: the manual reader's format and
+   transport, the empty reel's note, and the shop answer. `npm run parity`
+   polices the menu ITEMS and cannot see the words inside them, so a divergence
+   here would have been invisible to the one tool built to catch divergence.
+
+   THREE PASSAGES ARE HOISTED AND NOTHING ELSE IS. Two more read almost the same
+   on both faces and are DELIBERATELY LEFT ALONE, because they are not one
+   passage — they are two passages about two different objects, and folding them
+   would be Ops inventing a shared house line out of a coincidence of wording:
+     · each FAQ's blurb ("about the cabinet" / "about the unit")
+     · "Does it still work?" (the portable's answer carries a second sentence
+       about the Portal that the mainframe has no equivalent for)
+   Their wording differences ARE reported for Mike's ruling — OPEN_ACTIONS M67 —
+   rather than merged here. */
+const MANUAL_FORMAT = "FORMAT  photographs of the printed pages, not a rendering";
+const MANUAL_NAV = "NAV     microfiche reader — page-turn, fit and 1:1 magnify";
+const REEL_EMPTY_NOTE =
+  "No pages on file. A plate here is a photograph of the printed " +
+  "sheet, edges and margins included.";
+const FAQ_BUY_ONE =
+  "No. The shop carries what the shop carries; the machines " +
+  "are not stock.";
+
 const spine = [
   /* ---- S10 2026-07-30: THE COVER VARIANT, FAR LEFT ---------------------
      Mike's ruling: duplicate the Robots cover with the "Weird.Baby" wordmark
@@ -1147,10 +1177,20 @@ const spine = [
              already on the tombstone four rows up ("Frame — Withheld: no plate
              carries the whole unit"), which is a holdings statement and stays.
              The whole string is now one marked sentence and renders nothing. */
+          /* [D3a 2026-08-06] AND THAT LAST LINE HAD STOPPED BEING TRUE, WHICH IS
+             M53's OWN POINT ARRIVING ON A SECOND FACE. A later edit split the
+             note into two sentences and put the marker in only the first, so
+             the scrubber kept the second and the wall printed "The uncropped
+             originals are all on file and any of them can be published from
+             this file alone." — a maintainer talking to another maintainer,
+             which is the exact register the comment above says was removed.
+             Mike struck the WAL poster's twin of this today; the rule he was
+             applying is the rule, so it is applied here in the same pass.
+             ONE MARKED SENTENCE. A `papa` field is not a comment. */
           papa: "[PAPA] — the cabinet is shown whole now and the robot is " +
-                "not; how much further that goes, and when. The uncropped " +
-                "originals are all on file and any of them can be published " +
-                "from this file alone.",
+                "not, how much further that goes and when, and that the " +
+                "uncropped originals are all on file and any of them can be " +
+                "published from this file alone.",
         },
       },
       {
@@ -1191,8 +1231,8 @@ const spine = [
             "caught at different stages — and nothing of the kind has reached " +
             "this museum for the cabinet.",
           lines: [
-            "FORMAT  photographs of the printed pages, not a rendering",
-            "NAV     microfiche reader — page-turn, fit and 1:1 magnify",
+            MANUAL_FORMAT,
+            MANUAL_NAV,
             "PLATES  none on file",
           ],
           /* THE READER IS THE SAME READER. `reel` is the microfiche transport
@@ -1206,9 +1246,7 @@ const spine = [
           reel: {
             label: "MICROFICHE · READER",
             plates: [],
-            note:
-              "No pages on file. A plate here is a photograph of the printed " +
-              "sheet, edges and margins included.",
+            note: REEL_EMPTY_NOTE,
           },
           footer: "MGK-NIAC · THE OWNER'S MANUAL",
         },
@@ -1335,8 +1373,7 @@ const spine = [
                     "drum and neither of them arms.",
               note: "" },
             { stamp: "Q", title: "Can I buy one?",
-              line: "No. The shop carries what the shop carries; the machines " +
-                    "are not stock.",
+              line: FAQ_BUY_ONE,
               note: "" },
           ],
           entriesMode: "list",
@@ -1602,8 +1639,8 @@ const spine = [
             "machine explains itself — including the parts it gets wrong. " +
             "Page images, not transcription: the typography is the evidence.",
           lines: [
-            "FORMAT  photographs of the printed pages, not a rendering",
-            "NAV     microfiche reader — page-turn, fit and 1:1 magnify",
+            MANUAL_FORMAT,
+            MANUAL_NAV,
             "PLATES  none on file",
           ],
           reel: {
@@ -1618,9 +1655,7 @@ const spine = [
                editorial posture. The holdings fact — nothing on file — is the
                half a visitor needs, and it is the half that is honest without
                being about us. */
-            note:
-              "No pages on file. A plate here is a photograph of the printed " +
-              "sheet, edges and margins included.",
+            note: REEL_EMPTY_NOTE,
           },
           /* THE CONTENTS PAGE, WHICH IS REAL EVEN THOUGH THE PLATES ARE NOT.
              Every section below is attested in the record or in the firmware;
@@ -1796,8 +1831,7 @@ const spine = [
                beat four with one placeholder. It comes back as an entry the day
                there is an answer. */
             { stamp: "Q", title: "Can I buy one?",
-              line: "No. The shop carries what the shop carries; the machines " +
-                    "are not stock.",
+              line: FAQ_BUY_ONE,
               note: "" },
           ],
           entriesMode: "list",

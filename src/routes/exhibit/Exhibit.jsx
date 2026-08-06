@@ -4,6 +4,14 @@ import { visitorProse, kept } from "../../lib/visitor-prose.js";
 import { useArrival } from "../../lib/use-arrival.js";
 import MuseumBar from "../../components/MuseumBar.jsx";
 import RecordEntry from "./RecordEntry.jsx";
+/* [D7 2026-08-06] M62, OPTION A. The Foundation is a `face` wing now, and
+   three of its objects have no equivalent in the face model — the $0.00
+   account card, the LIVE / NOT BUILT register that reads the reveal ledger,
+   and the zero-cost ledger. They are mounted on the presence of a field,
+   exactly the way `InstrumentPanel` is: a wing that declares none renders
+   none, and this file learns no wing-specific content. */
+import { AccountCard, RegisterTable, LedgerSheet } from "./FoundationObjects.jsx";
+import { stateOfRow as fndState } from "../../lib/foundation-state.js";
 import {
   entryStamp, groupByPeriod, shouldBand, evidenceOf, docState,
 } from "../../lib/record-model.js";
@@ -112,11 +120,61 @@ function scrubFace(face) {
         stamp: visitorProse(en.stamp),
         title: visitorProse(en.title),
         line: visitorProse(en.line),
+        /* [D7 2026-08-06] AN ENTRY'S BODY MAY BE SEVERAL PARAGRAPHS. The
+           Foundation's answers are the reason — Mike wrote one of them as two
+           beats with the Pro-Tip on its own line, and flattening it into `line`
+           would edit his line breaks. Each paragraph is scrubbed on its own, so
+           a marker takes ITS paragraph and not the ones beside it, which is the
+           rule the sheet already ran on. An entry declaring no `lines` renders
+           exactly the markup it rendered before. */
+        lines: Array.isArray(en.lines)
+          ? en.lines.map(visitorProse).filter(kept)
+          : undefined,
         note: visitorProse(en.note),
       }))
       /* an entry whose title AND body were both the operator's is not an
          entry any more — it is a blank row, which is its own kind of leak. */
-      .filter(en => kept(en.title) || kept(en.line));
+      /* ═══ [D7 2026-08-06] AND AN ENTRY THAT HAD A BODY AND LOST ALL OF IT
+         GOES TOO, WHICH THE LAP CAUGHT AS A LIVE DEFECT. ═══════════════════
+         The rule above is an OR on purpose — /robots' FAQ relies on a title
+         surviving its own line (M57) — and porting the Foundation's answers
+         onto it published "What do you think about billionaires?" WITH NOTHING
+         UNDER IT. That answer is marked in EVERY sentence, deliberately: F3
+         held it whole on Mike's ruling that the ideas are good and the voice is
+         his to write, and the sheet's own filter required BOTH the question and
+         an answer to survive, so /foundation stopped asking about billionaires
+         at all. The face model's looser rule turned a held answer into a
+         published silence, on the one page whose entire subject is honesty.
+         SO THE TEST IS WHETHER THE ENTRY EVER HAD A BODY. A title-only entry
+         (robots' START rows, the register lines) is untouched — it never
+         declared one. An entry that declared a line or a set of lines and kept
+         none of them is dropped whole, which is what "held" has to mean if it
+         is to mean anything. */
+      .filter((en, i) => {
+        const raw = face.entries[i];
+        const declaredBody = kept(raw.line)
+          || (Array.isArray(raw.lines) && raw.lines.some(kept));
+        const keptBody = kept(en.line) || (en.lines?.length > 0);
+        if (declaredBody && !keptBody) return false;
+        return kept(en.title) || keptBody;
+      });
+  }
+  /* [D7] the three Foundation objects. Only their PROSE is scrubbed — the
+     figures, the states and the keys are not text a marker can be written into,
+     and `stateOfRow` reads the reveal ledger rather than this face. */
+  if (face.register) {
+    out.register = face.register.map(sec => ({
+      ...sec,
+      rows: (sec.rows || []).map(r => ({ ...r, line: visitorProse(r.line) })),
+      law: visitorProse(sec.law),
+    }));
+  }
+  if (face.ledger) {
+    out.ledger = { ...face.ledger, note: visitorProse(face.ledger.note) };
+  }
+  {
+    const p = visitorProse(face.posture);
+    if (kept(p)) out.posture = p; else delete out.posture;
   }
   /* [A3 2026-08-04] a spread's HEAD is printed on the shelf, so a marker
      written into one would print exactly the way the Portal's five drum
@@ -3268,6 +3326,23 @@ export default function Exhibit({ artist, open = null }) {
                         {/* [L5] the LEAD, now a block of its own — see the note
                             above the head. */}
                         {face.blurb && <p className="vp-face-blurb">{face.blurb}</p>}
+                        {/* ═══ [D7 2026-08-06] THE FOUNDATION'S THREE OBJECTS ══
+                            Mounted the way `InstrumentPanel` is — on the
+                            presence of a field, so a wing that declares none
+                            renders none and this file learns no content.
+                            THEY SIT HERE, UNDER THE HEAD, AND THE LAP IS WHY.
+                            The first placement was above `face.panel`, which is
+                            OUTSIDE the stage/flat frame — so the register drew
+                            at the top of the viewer and the face's own heading
+                            came out a thousand pixels BELOW it. An object is
+                            content and content goes under the title, next to
+                            `bill` and `tombstone`, which are the two things in
+                            this file it is most like. */}
+                        {face.account && <AccountCard decl={face.account} />}
+                        {face.register && <RegisterTable decl={face.register} />}
+                        {face.ledger && (
+                          <LedgerSheet decl={face.ledger} posture={face.posture} />
+                        )}
                         {/* ==== [C-b/C-c 2026-08-02] THE MUSEUM CARD ==========
                             R-a's finding, built. A museum has TWO labels for an
                             object and they are not interchangeable:
@@ -3746,6 +3821,31 @@ export default function Exhibit({ artist, open = null }) {
                                         taken out. */}
                                     {en.title && <span className="vp-fe-title">{en.title}</span>}
                                     {en.line && <span className="vp-fe-line">{en.line}</span>}
+                                    {/* [D7 2026-08-06] a multi-paragraph body —
+                                        see the note in `scrubFace`. */}
+                                    {en.lines?.map((para, pi) => (
+                                      <span className="vp-fe-line" key={pi}>{para}</span>
+                                    ))}
+                                    {/* [F6 2026-08-05, carried at D7] A MARKED
+                                        DOOR WITH NO ADDRESS, AND IT IS
+                                        DELIBERATELY NOT AN ANCHOR. Mike marked
+                                        two links on the Foundation's answers and
+                                        supplied neither URL, so there is nothing
+                                        to point at: an <a> with no href, or one
+                                        pointing at "#", is the dead control
+                                        Doctrine 11's corollary says to remove.
+                                        What ships is the door's NAME and its
+                                        STATE, read off `reveal/ledger.json`, so
+                                        the day the channel is built the stamp
+                                        changes and nobody has to remember this
+                                        line exists. */}
+                                    {en.link && (
+                                      <span className="vp-fe-link"
+                                        data-state={fndState(en.link)}>
+                                        <span className="vp-fe-link-text">{en.link.text}</span>
+                                        <span className="vp-fe-link-state">{fndState(en.link)}</span>
+                                      </span>
+                                    )}
                                     {en.note && <span className="vp-fe-note">{en.note}</span>}
                                   </span>
                                 </li>

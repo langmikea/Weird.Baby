@@ -1,47 +1,48 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useArrival } from "../../lib/use-arrival.js";
+/* ═══ [D3c 2026-08-06] THE HAND-TYPED CATALOGUE IS DELETED ═══════════════════
+   MIKE: "Hunter Root's text is still incorrect — find every surface carrying his
+   figures, verify each against the vault, and fix them all in one pass rather
+   than the one that was reported."
 
-const ALBUMS = [
-  {
-    title: "They Finally Cracked Me",
-    year: 2018,
-    color: "#9a6a3a",
-    tracks: ["Cheap Wine","Straitlaced","So Sick","Identity","Hook Or The Worm","Television Head","Let The Rhythm","Silly Situation","Moving With The Storm","Soul Sucker","The Shade"],
-  },
-  {
-    title: "Life Inside A Wheel",
-    year: 2019,
-    color: "#4a8a4a",
-    tracks: ["Same Page","Talker With A Broken Jaw","People Are Programs","Killer To Killer","Brain Cell","Fix My Head","Free To Roam The Cage","With Great Pleasure","The Water","Music On My Mind","What I Felt","Greek Fire","Shapeshifter"],
-  },
-  {
-    title: "Mimicking the Sun Like Dandelions",
-    year: 2020,
-    color: "#3a7a9a",
-    tracks: ["Lampshade","Favorite Friend","Little Red Riding Hood","Homestead","Undertow","Family Tree","Tongue In Cheek","Norma Jean","Impossible Itch","Upper Hand","Wildfire"],
-  },
-  {
-    title: "Skipping Stones That Sink Before They're Thrown",
-    year: 2021,
-    color: "#8a3a8a",
-    tracks: ["Don't Blame The Breeze","Nothin' Wrong","Cusp Of The Mend","Cocoon","Patience In The Dark","Just For Kicks","Echo Calls Her Name","The Shade","Shake It Off Of Me","Soul Sucker"],
-  },
-  {
-    title: "Arkansas",
-    year: 2023,
-    color: "#ba5a2a",
-    tracks: ["Silver Lining","Quicksand Sinking","Town Rat Heathen","Reverend","Grain Of Rice","Can't Outshine The Truth","California Sober","Good On Paper","Few Steps Back","Run From The Devil","Silver Lining (Reprise)"],
-  },
-  {
-    title: "Crooked Home",
-    year: 2025,
-    color: "#3a5aaa",
-    tracks: ["'94","Low","String Up a Necklace","Hand in the Fire","Flash in the Pan","Friendly Fire","The Devil is the Culprit","If the Body is a Temple","The Keeper","Out of my Hands","Bad Sign","My Brother's Bones","Cookin' in the Bathroom","A Pot Song"],
-  },
-];
+   THIS WAS THE SURFACE NOBODY HAD LOOKED AT. Where the six sites W1 corrected
+   were carrying stale FIGURES, this page was carrying a stale CATALOGUE: a
+   hand-typed ALBUMS array of six records where the vault holds nine, missing Run
+   With The Hunt and the Phone Recordings EP entirely, filing four SINGLES &
+   RARITIES tracks under three other records, naming two They Finally Cracked Me
+   tracks that are not on it, and heading the page "6 albums · 71 songs · 2018 –
+   2025". Every figure on the page was a count of the mirror.
 
-const SINGLES = ["Chase The Dragon"];
+   IT IS NOT CORRECTED. A corrected mirror is a mirror that will drift again —
+   this one drifted through six museum-wide figure sweeps without anybody
+   noticing, because nothing links a copy to its source. The array is gone and
+   the page reads the spine: MediaVault -> the export -> buildSpineFromArtifacts
+   -> here. Full account of what the mirror printed: the header of
+   src/data/artists/hunter-root-catalogue.js. */
+import { HR_SPINE, HR_KIND, HR_RECORDS, HR_EXTRAS, HR_TRACKS }
+  from "../../data/artists/hunter-root-catalogue.js";
+
+/* THE CARD ACCENTS ARE DECORATION AND ARE DECLARED AS SUCH, keyed on the
+   album's stable id rather than on its title — a title is content and can be
+   re-read off the vault; an id is ours. Six of these are the colours this page
+   has always used, carried across unchanged. THREE ARE NEW, for the three
+   containers the page never showed: they are spaced into the gaps in the six
+   existing hues (yellow-olive, teal, violet) and they are a design choice about
+   a border, not a claim about a record — the same footing the WAL poster's
+   `hue` is declared on. An album with no entry gets the neutral rule. */
+const ACCENT = {
+  rwth:       "#8a8a3a",
+  phone:      "#3a8a7a",
+  cracked:    "#9a6a3a",
+  wheel:      "#4a8a4a",
+  dandelions: "#3a7a9a",
+  skipping:   "#8a3a8a",
+  arkansas:   "#ba5a2a",
+  crooked:    "#3a5aaa",
+  rarities:   "#6a4aaa",
+};
+const NEUTRAL = "#5a4820";
 
 const s = {
   page: {
@@ -139,35 +140,10 @@ const s = {
     letterSpacing: "0.04em",
     transition: "color 0.1s",
   }),
-  singlesSection: {
-    borderTop: "1px solid #1e1808",
-    paddingTop: "1.5rem",
-  },
-  singlesLabel: {
-    fontSize: "9px",
-    letterSpacing: "0.2em",
-    color: "#3a2e10",
-    textTransform: "uppercase",
-    marginBottom: "0.75rem",
-  },
-  singlesRow: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "0.5rem",
-  },
-  /* [CS 2026-08-04] the hover branch and the `cursor:pointer` went with the
-     button — a label does not respond to the mouse, and pretending to is how
-     the dead control read as a door in the first place. `lyricMapLink` is
-     removed entirely with the link it styled. */
-  singleChip: {
-    fontSize: "11px",
-    color: "#5a4820",
-    border: "1px solid #2a2010",
-    padding: "4px 10px",
-    fontFamily: "Georgia, serif",
-    background: "transparent",
-    letterSpacing: "0.05em",
-  },
+  /* [D3c 2026-08-06] `singlesSection`, `singlesLabel`, `singlesRow` and
+     `singleChip` are DELETED with the strip they styled — see the note where
+     the strip used to render. `lyricMapLink` went at CS 2026-08-04 with the
+     link it styled. */
 };
 
 export default function HrArchive() {
@@ -181,9 +157,7 @@ export default function HrArchive() {
   const [expanded, setExpanded] = useState(null);
   const [hovTrack, setHovTrack] = useState(null);
 
-  const toggle = (title) => setExpanded((v) => v === title ? null : title);
-
-  const totalSongs = ALBUMS.reduce((a, b) => a + b.tracks.length, 0) + SINGLES.length;
+  const toggle = (id) => setExpanded((v) => v === id ? null : id);
 
   return (
     <div style={s.page}>
@@ -191,8 +165,26 @@ export default function HrArchive() {
         <div>
           <div style={s.eyebrow}>Hunter Root · Archive</div>
           <h1 style={s.title}>Discography</h1>
+          {/* [D3c] EVERY FIGURE ON THIS LINE IS COUNTED OFF THE SPINE. It used
+              to read "6 albums · 71 songs · 2018 – 2025" and all three were
+              counts of the hand-typed mirror.
+              "ALBUMS" IS GONE AS THE NOUN, because nine containers are not nine
+              albums — seven are records, one is an EP and one is a set, which is
+              the correction M50 made everywhere else and which this page had
+              never had applied to it.
+              "SONGS" IS GONE TOO, and for the reason W1's own fix missed:
+              ninety-three is a count of TRACK ROWS. Two songs sit on two records
+              each, so the vault holds 93 tracks and 91 distinct titles, and a
+              line that says "songs" and prints 93 is the unit swap this museum
+              has now made twice.
+              AND THE YEAR RANGE IS STRUCK RATHER THAN CORRECTED. It was wrong at
+              both ends — the EP is 2017 — but the reason it goes is that TWO of
+              the nine containers carry no year at all, so any flat span is a
+              claim about holdings the museum cannot date. Each card prints its
+              own year, and the two undated ones print an em dash, which is what
+              the WAL records board already does for Chase The Dragon. */}
           <div style={s.subtitle}>
-            {ALBUMS.length} albums · {totalSongs} songs · 2018 – 2025
+            {HR_RECORDS} records, plus {HR_EXTRAS.join(" and ")} · {HR_TRACKS} tracks on file
           </div>
         </div>
         <button style={s.backBtn} onClick={() => navigate("/hr")}>
@@ -201,20 +193,25 @@ export default function HrArchive() {
       </div>
 
       <div style={s.grid}>
-        {ALBUMS.map((album) => {
-          const open = expanded === album.title;
+        {HR_SPINE.map((album) => {
+          const open = expanded === album.id;
+          const color = ACCENT[album.id] || NEUTRAL;
           return (
             <div
-              key={album.title}
-              style={s.card(album.color, open)}
-              onClick={() => toggle(album.title)}
+              key={album.id}
+              style={s.card(color, open)}
+              onClick={() => toggle(album.id)}
               onMouseEnter={(e) => { if (!open) e.currentTarget.style.borderColor = "#3a2e14"; }}
               onMouseLeave={(e) => { if (!open) e.currentTarget.style.borderColor = "#2a2010"; }}
             >
-              <div style={s.cardHeader(album.color)}>
+              <div style={s.cardHeader(color)}>
                 <div>
                   <div style={s.cardTitle}>{album.title}</div>
-                  <div style={s.cardYear}>{album.year}</div>
+                  {/* [D3c] two of the nine containers carry no year in the
+                      vault, and the mirror simply did not list them. An em dash
+                      says the museum does not hold the date; a year invented to
+                      fill the slot would say it does. */}
+                  <div style={s.cardYear}>{album.year ?? "—"}</div>
                 </div>
                 <div style={s.cardCount}>
                   {album.tracks.length} tracks {open ? "▴" : "▾"}
@@ -225,15 +222,15 @@ export default function HrArchive() {
                 <div style={s.tracklist} onClick={(e) => e.stopPropagation()}>
                   {album.tracks.map((track, i) => (
                     <div
-                      key={track}
-                      style={s.track(hovTrack === `${album.title}-${i}`)}
-                      onMouseEnter={() => setHovTrack(`${album.title}-${i}`)}
+                      key={track.id}
+                      style={s.track(hovTrack === `${album.id}-${i}`)}
+                      onMouseEnter={() => setHovTrack(`${album.id}-${i}`)}
                       onMouseLeave={() => setHovTrack(null)}
                     >
                       <span style={{ color: "#2a2010", marginRight: "8px", fontSize: "10px" }}>
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      {track}
+                      {track.title}
                     </div>
                   ))}
                 </div>
@@ -243,22 +240,21 @@ export default function HrArchive() {
         })}
       </div>
 
-      <div style={s.singlesSection}>
-        <div style={s.singlesLabel}>Singles</div>
-        {/* [CS 2026-08-04] the singles chip was a <button> with
-            `onClick={() => {}}` — a control that highlights on hover, takes the
-            press and does nothing, which is a stand-in for a door. It is a
-            LABEL now, because that is what it always was. */}
-        <div style={s.singlesRow}>
-          {SINGLES.map((s2) => (
-            <span key={s2} style={s.singleChip}>{s2}</span>
-          ))}
-        </div>
-      </div>
-      {/* [CS 2026-08-04] "→ explore lyrics in the lyric map" is REMOVED. It
-          navigated to /hr/workshop/lyric-map, which has never been a route in
-          this application. It was an invitation into a room that does not
-          exist. */}
+      {/* ═══ [D3c 2026-08-06] THE "SINGLES" STRIP IS DELETED ═══════════════
+          It was a hand-typed list of ONE title — Chase The Dragon — standing in
+          for the vault's SINGLES & RARITIES container, which holds seven:
+          Shapeshifter, Sleight of Hand, Chase The Dragon, Cookin' in the
+          Bathroom, Wildfire, A Pot Song, Weathervane. Four of those seven were
+          also being printed on the wrong records above it.
+          That container is now a card in the grid like every other, so the strip
+          was a second, worse copy of a thing already on the page — struck under
+          THE LAW OF SUBTRACTION, and nothing is lost: every title it held is
+          above, under the record the vault files it on.
+          `s.singlesSection`, `s.singlesLabel`, `s.singlesRow` and
+          `s.singleChip` went with it; they had no other caller.
+          [CS 2026-08-04, kept] "→ explore lyrics in the lyric map" was removed
+          before this — it navigated to /hr/workshop/lyric-map, which has never
+          been a route in this application. */}
     </div>
   );
 }

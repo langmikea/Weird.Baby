@@ -176,7 +176,20 @@ const total = tally.reduce((a, t) => ({ sp: a.sp + t.sp, pr: a.pr + t.pr }), { s
 console.log(`  TODAY: ${total.sp} spendable · ${total.pr} promised and unbuilt · ${idle.length} idle files`);
 
 if (process.argv.includes("--log")) {
-  const stamp = new Date().toISOString().slice(0, 10);
+  /* [C41 CLOSED, D8 2026-08-06] THE STAMP IS LOCAL, NOT UTC.
+     `toISOString()` renders in UTC, so a reading taken at 21:2x local on
+     2026-08-05 was written into this file as 2026-08-06. This is a TREND file
+     whose whole value is that its rows line up with the packets that produced
+     them, and a row a day ahead of its own commit will be read as a different
+     day's reading. It was found by the round that was USING the tool and
+     deliberately not fixed there — the file's own header says a measurement
+     somebody adjusted is not a measurement, and quietly re-stamping a date
+     while running the thing is the shape of exactly that. THE ROWS ALREADY
+     WRITTEN ARE NOT TOUCHED, for the same reason: the two UTC rows stand as
+     they were recorded, and this line is why the ones after them differ.
+     `sv` gives ISO's YYYY-MM-DD ordering off the LOCAL clock, which is the one
+     every other date in this repository is kept on. */
+  const stamp = new Date().toLocaleDateString("sv-SE");
   const line = `| ${stamp} | ${rows.length} | ${total.sp} | ${total.pr} | ${idle.length} | `
     + tally.map(t => `${t.w.split(" ").pop()} ${t.sp}`).join(" · ") + " |\n";
   if (!fs.existsSync(LOG)) {

@@ -190,10 +190,10 @@ function billing(fromWing, ownerId) {
 /* [S1 2026-08-05] ONE TILE, ONE SIZE. The `half` prop is gone — see the block
    over the grid below. [S2] and the label names the destination the tile has
    rather than the one it used to be able to assume. */
-function Banner({ entry }) {
+function Banner({ entry, billed }) {
   return (
     <a
-      className="featured-artist"
+      className={"featured-artist" + (billed ? " gift-shop__billed" : "")}
       href={entry.storeUrl}
       target="_blank"
       rel="noopener noreferrer"
@@ -306,13 +306,28 @@ export default function GiftShop() {
           lone tile above a grid at the same size reads as an accident rather
           than as billing. The grid is `auto-fit` at a 420px floor, so five
           tiles run 2 · 2 · 1 and the fifth sits in a column, not across the
-          row. A sixth artist is still a data entry and nothing else (F7b). */}
+          row. A sixth artist is still a data entry and nothing else (F7b).
+
+          ═══ [D4 2026-08-06] AND THE BILLED TILE NOW OWNS THAT FIRST ROW ═════
+          MIKE: "the top-billed tile OWNS THE TOP ROW, centered. All tiles stay
+          the same size."
+          S1 took SIZE away from top billing and left it with nothing but
+          sequence, which on a five-tile page reads as alphabetical order rather
+          than as billing. `gift-shop__billed` spans the row and takes one
+          column's width back, so the tile leads without growing — the
+          arithmetic is in the stylesheet and the reason is with it.
+          IT IS STILL ONE GRID AND STILL ONE SECTION. The billed tile is a cell
+          with a modifier, not a second container, which is what keeps `all`
+          (and therefore the reading order, and therefore the billing law) a
+          single list. `walSetFallback` bills nobody, so on that branch nothing
+          carries the class and the grid is unchanged — J3's "the set is the
+          fallback" is untouched and still visible in `data-billing`. */}
       {all.length > 0 && (
         <section className="gift-shop__section gift-shop__tiles">
           <div className="gift-shop__grid">
             {all.map((entry) => (
               entry.storeUrl
-                ? <Banner key={entry.id} entry={entry} />
+                ? <Banner key={entry.id} entry={entry} billed={!!top && entry.id === top.id} />
                 : (
                   /* A tile with no confirmed destination renders DEAD rather
                      than pretending to be a link — same shape, no hover, no

@@ -368,8 +368,48 @@
    along — the image well's 1/1 already matches `.featured-artist__image-wrap`'s
    base rule, and the 1.05rem name is now the base too. A modifier that every
    instance carries is not a modifier. */
-.gift-shop__grid{display:grid;gap:22px;
-  grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))}
+/* ═══ [D4 2026-08-06] THE BILLED TILE OWNS THE TOP ROW, CENTRED ═════════════
+   MIKE: "the top-billed tile OWNS THE TOP ROW, centered. All tiles stay the
+   same size."
+
+   THIS IS THE THIRD SETTING OF THE SAME LAW AND IT IS THE ONE THAT SEPARATES
+   ITS TWO HALVES CLEANLY. P11/B1/J3 said who LEADS. S1 said nobody is BIG. What
+   was left over was that leading looked like nothing at all — the billed tile
+   was simply the first cell of a two-up grid, which on a five-tile page is
+   indistinguishable from alphabetical order. A row of its own says LEAD without
+   saying LARGER.
+
+   THE COLUMN COUNT IS NOW EXPLICIT, AND THAT IS THE WHOLE MECHANISM. It was
+   `repeat(auto-fit, minmax(min(420px,100%), 1fr))`, which is unimprovable until
+   you have to ask it HOW WIDE ONE COLUMN IS — and centring a tile at exactly one
+   column's width is that question. `--gs-cols` answers it in CSS, so the billed
+   tile can span the row and then take one column's width back:
+
+     width = (row - (cols - 1) x gap) / cols
+
+   AT ONE COLUMN THAT IS 100%, so the rule needs no mobile branch: the billed
+   tile is exactly as wide as every tile under it, which is what "all tiles stay
+   the same size" means on a phone.
+
+   THE BREAKPOINT IS NOT A NEW DECISION. `.gift-shop` is max-width 960 with 1.5rem
+   of side padding, so two 420px floors plus the 22px gap need 862px of content
+   and therefore 910px of viewport — the exact width `auto-fit` was already
+   switching at. The layout at every width is what it was; only the first tile
+   moved. */
+.gift-shop__grid{
+  --gs-gap:22px;
+  --gs-cols:1;
+  display:grid;
+  gap:var(--gs-gap);
+  grid-template-columns:repeat(var(--gs-cols),minmax(0,1fr));
+}
+@media (min-width:910px){ .gift-shop__grid{--gs-cols:2} }
+
+.gift-shop__grid > .gift-shop__billed{
+  grid-column:1 / -1;
+  justify-self:center;
+  width:calc((100% - (var(--gs-cols) - 1) * var(--gs-gap)) / var(--gs-cols));
+}
 .featured-artist--dead{cursor:default;opacity:.72}
 .featured-artist--dead:hover{transform:none;box-shadow:none}
 .featured-artist__note{font-family:'Courier Prime','Courier New',monospace;

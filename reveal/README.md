@@ -211,7 +211,11 @@ somewhere nothing asks where it came from, in the same round that mechanised
 asking.
 
 So: the ledger says `LIVE` / `NOT_BUILT`, the page keeps its own labels in its
-own file. `src/routes/Foundation.jsx` is the worked example.
+own file. `src/data/artists/foundation.js` is the worked example — its
+register rows carry `reveal:` ids and `src/lib/foundation-state.js` turns them
+into the LIVE / NOT BUILT stamp. [D7 2026-08-06] It used to be
+`src/routes/Foundation.jsx`; the room became a wing and the wiring moved with
+it unchanged, which is the point of the example.
 
 ```js
 import { isLive } from "../lib/reveal.js";

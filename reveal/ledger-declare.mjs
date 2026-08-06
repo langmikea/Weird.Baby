@@ -496,7 +496,7 @@ R("doc.summary", "Summary — the current state of the whole story, one page.",
 R("doc.charter", "THE_CHARTER.md — still DRAFT v0.3, not published.",
   "document", "docs/", "PARTIAL", null, "HELD", { deps: ["M12 — Mike"] });
 R("doc.credo", "The Billionaire's Credo — unwritten; /foundation Q10 carries a [PAPA] and the scrubber drops it.",
-  "document", "src/routes/Foundation.jsx", "NOT_BUILT", null, "HELD", { deps: ["M13 — Mike's words"] });
+  "document", "src/data/artists/foundation.js", "NOT_BUILT", null, "HELD", { deps: ["M13 — Mike's words"] });
 
 /* ═════════ 8. THE ARTIFACTS AND THE PHYSICAL WORLD ═══════════════════════ */
 R("phys.units", "The physical MGK units — the actual machines, in a room.",
@@ -746,18 +746,18 @@ R("tool.openactions", "The open-action register — every open item in both repo
 
 /* ═════════ 15. THE ROWS THE FOUNDATION READS — R5's proof ════════════════ */
 R("channel.shop", "Giving channel — the gift shop.", "commerce",
-  "src/routes/Foundation.jsx LEDGER", "LIVE", "the shop", "REVEALED");
+  "src/data/artists/foundation.js LEDGER", "LIVE", "the shop", "REVEALED");
 R("channel.music", "Giving channel — the house's own music.", "commerce",
-  "src/routes/Foundation.jsx LEDGER", "LIVE", "/wb", "REVEALED");
+  "src/data/artists/foundation.js LEDGER", "LIVE", "/wb", "REVEALED");
 R("channel.qr", "Giving channel — given in Weird.Baby's name, by a code you scan.", "commerce",
-  "src/routes/Foundation.jsx LEDGER", "NOT_BUILT", null, "HELD",
+  "src/data/artists/foundation.js LEDGER", "NOT_BUILT", null, "HELD",
   { deps: ["a payment mechanism nobody has built"], shown: true,
     note: "This row will read LIVE on the day that is real, and not one day before." });
 R("channel.supplies", "Giving channel — a registry of supplies.", "commerce",
-  "src/routes/Foundation.jsx LEDGER", "NOT_BUILT", null, "HELD",
+  "src/data/artists/foundation.js LEDGER", "NOT_BUILT", null, "HELD",
   { deps: ["a public list of what the museum actually needs"], shown: true });
 R("channel.services", "Giving channel — a registry of services.", "commerce",
-  "src/routes/Foundation.jsx LEDGER", "NOT_BUILT", null, "HELD",
+  "src/data/artists/foundation.js LEDGER", "NOT_BUILT", null, "HELD",
   { deps: ["the same list, for work rather than goods"], shown: true });
 
 /* ═════════ WRITE ═════════════════════════════════════════════════════════
