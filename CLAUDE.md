@@ -442,6 +442,66 @@ catches invented CONTENT, Doctrine 11 catches a line whose SUBJECT is the work.
 
 Maintained here. Newest first.
 
+### 2026-08-06 -> MIKE'S PAGE-BY-PAGE (L1 - R1-R7 - P1-P6 - N1-N11 - X1) - sealed
+- **TWENTY-SIX INSTRUCTIONS, ALL TWENTY-SIX ANSWERED, AND THE MOST USEFUL
+  FINDING IN THE ROUND IS A MEASUREMENT THAT KILLED THE THING IT MEASURED.**
+  Gates: lint **11/9 = baseline** - build green - provenance **PASS** (0
+  undeclared - 0 stale - 0 invention) - `reveal:check` **PASS** - `parity:gate`
+  **PASS, 4 shared - 0 divergences** - lap **on the built bundle under `wrangler
+  dev`**. Surfacing **13 - 13 - 15**, ledger 159 -> 160. Full narrative:
+  `docs/MUSEUM_PAGE_BY_PAGE_LOG-20260806.md`.
+- **R4 - TWO COLUMNS WAS BUILT, MEASURED AT THIRTY-THREE CHARACTERS A COLUMN,
+  AND REMOVED.** He asked whether there is a flatter better way than a capped
+  line with pane to spare. The pane is ~76% of the viewport; split in two it is
+  ~430px a side; after the mark rail and the gutter each column is **324px
+  against a band of 65-75**. It becomes right past ~1650px of viewport and his
+  screen tops out at 1228. **What shipped instead is the direction nobody
+  expected:** the entry body was set at **56ch, BELOW the band** - paying a
+  narrow measure's costs and collecting none of its benefits - and is 68ch now.
+  The index row is capped at the same measure and **the slack on the right is
+  deliberate**: a list of fixed-height cards is SCANNED, and filling the pane
+  was always the one wrong answer.
+- **R3 - "THAT FAILURE DISAPPEARS BY CONSTRUCTION" IS A MECHANISM AND IT TAKES
+  TWO HALVES.** Every truncation in the Record index is DELETED, so a too-long
+  string overflows visibly instead of lying; and `reveal:check` now carries
+  **RECORD BUDGETS** and refuses a headline past 62 characters or a summary past
+  130. Proved by breaking it. **R1's far-left mark is the RECORD NUMBER, not a
+  date** - the dates were invented and Mike deleted them, so a date rail would
+  be empty today and invented tomorrow; the date sits under the number the
+  moment an entry has one.
+- **R7 CONFORMED EVERY WING FAQ TO THE BOOTH'S AND REVERSED AN OPS RULING IN THE
+  OPEN.** D7 flattened `/foundation`'s accordion during the port, recorded it as
+  a judgement and put it to him as M70; he ruled it for every wing at once, so
+  four faces moved and **M70 closes**. It is not M1 being bent - a question is
+  the description of its own answer, which is `/booth`'s own reasoning.
+- **N3 BUILT NO NEW MACHINERY, BECAUSE HE SAID TO CHECK FIRST AND THE TEMPLATE
+  EXISTED.** L6's Record document card already WAS a documentation template, so
+  it was **lifted out of that renderer into one shared `DocList`** with one field
+  added. **A document with no pages is NOT a button.** The largest deletion in
+  the round went with it - six attested manual sections including one of Mike's
+  own `[PAPA]` slots (M89).
+- **R5 COULD NOT BE MADE TO SERVE AND THAT IS STRUCTURAL:** the "object" badge
+  printed a word with nothing behind it, and B9's model has no permitted class
+  list and no object registry - giving it something to open would have been
+  Doctrine 12 with a button on it. Struck in all three places it drew;
+  `.vp-fe-class` deleted rather than orphaned.
+- **N9's GROUPINGS EACH CARRY THEIR OWN COUNT**, which is what keeps a curated
+  archive inside the no-hidden-information law, and **the egg consequence he
+  named is ledgered and not built** (`egg.presets`, HELD, `shown:false`).
+  **X1's honest answer: the ledger held every egg and nobody could ask it** -
+  `npm run reveal:eggs`, and it names `OPEN_ACTIONS.md` as the other half rather
+  than pretending to hold it.
+- **P1's "INSTRUMENT DIV." WAS THE SECOND GROWTH OF A DRIFT HE STRUCK A
+  FORTNIGHT EARLIER**, on a different object. **P5's three engravings were the
+  `id`s truncated until they fitted** - STANDBY, COLD START, FIRST RUN now, with
+  every `id` unmoved so M33's five levers are unchanged, and **three ledger row
+  names had to travel with them.** **N7 FLAGGED TWO PROBLEMS, NOT ONE:** nine of
+  fourteen frame "dates" are slot labels, and the five that are dates say MAR
+  2021 on a wing whose story is a delivery that has just arrived (M93).
+- **WHAT DID NOT RUN, SAID PLAINLY: the 390px half of the lap.** The window
+  would not resize below 1228 CSS px and Chrome refused `resizeTo` - M97, rather
+  than a silence.
+
 ### 2026-08-06 -> THE PRE-COMMENTARY ROUND (H1-H8) - sealed
 - **EIGHT INSTRUCTIONS, ALL EIGHT LANDED, AND THE VERIFICATION OF THE HEADLINE
   ONE CAUGHT AN OUTAGE THAT WOULD HAVE TAKEN THE WHOLE BACK END DOWN IN
@@ -486,59 +546,9 @@ Maintained here. Newest first.
   (H5) - and the mainframe has **exactly one** full-body photograph, because
   `IMG_1526.MOV` is not on this machine.
 
-### 2026-08-06 -> THE PORCH RULINGS (R1-R8) - sealed
-- **SIX RULINGS, ONE RESEARCH MAP, ONE REGISTER PASS - AND THE ONE HE CALLED
-  CRITICAL AND LIVE WAS AIMED AT THE WRONG PAGE.** Gates: lint **11/9 =
-  baseline** - build green - provenance **PASS** (0 undeclared - 0 stale - 0
-  invention) - `reveal:check` **PASS** - `parity:gate` **PASS, 4 shared - 0
-  divergences** - lap **on the built bundle**, eleven routes, no horizontal
-  overflow, no console messages. Surfacing **13 - 13 - 15, unmoved**: this round
-  subtracted and surfaced nothing, said plainly rather than dressed up. Full
-  narrative: `docs/MUSEUM_PORCH_RULINGS_LOG-20260806.md`.
-- **R5 - HIS PREMISE WAS INVERTED, AND CORRECTING IT MADE THE PROBLEM FORTY-SIX
-  TIMES BIGGER.** He ruled that the museum does not have Hunter Root's
-  permission and named *"his two songs"* on `/wal` - which were **YouTube
-  embeds of his own channel and always had been** (oEmbed on both ids returns
-  `youtube.com/@hunterrootmusic`, checked rather than assumed). The
-  verification he asked for found **`/hr` serving ninety-three**: every track
-  carries an `assets.weird.baby` mp3 and sixty also sit on the album containers
-  as `primary_url` for the deck's own `<audio>`. **THE RULE IS WRITTEN ONCE AND
-  ENFORCED TWICE AND THE SECOND TIME IS THE POINT** - a runtime filter stops
-  the REQUESTS and still ships the ADDRESSES, and the first build carried
-  **153 vault mp3 URLs in plain text**. Now zero, 22 KB smaller. **The cost is
-  60 of 93 tracks with nothing playable**, drawn through `.tl-novid` and the
-  overlay's *unavailable*, **both pre-existing; no render path was invented.**
-  What `/hr` should look like instead is M71 and is his.
-- **R4 - SEVEN SITES STRUCK, AND ONE DELETION WAS DRAFTED, REVERSED, AND THE
-  REVERSAL IS THE MORE USEFUL FINDING.** Striking the song cards' `Accession`
-  rows for symmetry would have broken the only on-glass anchor two other
-  passages on that card point at - **a citation is not a decoration.** The row
-  went back with *Published by* and *Verified* added beside it. **His card now
-  has no biography** because both its paragraphs WERE the announcement (M72),
-  the second time that slot has failed the same way. The poster's place under
-  his name came out of R7: **"Solo artist/musician from Lancaster, PA"**, his
-  own Bandcamp bio.
-- **R2 - HE DID NOT PICK A WORDING, HE STRUCK BOTH**, and `/booth` and
-  `/foundation` were checked rather than assumed: neither has an FAQ intro
-  blurb, because **a heading is not a blurb**.
-- **R6 - M37 RULED A, AND THE DISCLOSURE WAS WRONG FOR THE THIRD TIME IN THE
-  MUSEUM'S OWN FAVOUR.** The plugin frames are `loading="lazy"`, so `/hr` on
-  arrival requests Facebook **zero** times and sixteen only on scroll. `C34`
-  closes ruled-against.
-- **R7 - THE KNOB IS THIRTEEN TRACKS, NOT NINETY-THREE.** Bandcamp adds 13 over
-  YouTube for Hunter Root and **47 of his 93 are reachable through nothing**,
-  while Carsie Blanton (16 releases) and Jesse Welles (7 albums) are whole
-  catalogues the wing shows two songs of. Mikey Mike has none, and two
-  candidate SoundCloud accounts were **not adopted** because they could not be
-  tied to him from his own pages. Map:
-  `docs/AD_FREE_PLAYBACK_RESEARCH-20260806.md`.
-- **THE PRUNE PROCEDURE WAS RUN FORWARDS FOR THE FIRST TIME.** Five chains were
-  repointed BEFORE the prune, so the gate named **zero** broken chains against
-  16 stale rows.
-
 ### Older entries (2026-05-06 → 2026-08-06) — archived
 Moved to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md`, verbatim, under this file's
-own ≈600-line rule. **2026-08-06 (THE PORCH RULINGS):** CLEAR THE DECK (D1–D9),
+own ≈600-line rule. **2026-08-06 (MIKE'S PAGE-BY-PAGE):** THE PORCH RULINGS (R1–R8), moved whole — the file was at exactly 600 and this round's entry would have carried it past the rule. What is still load-bearing in it is NOT in the archive: **R5's vault-audio boundary is `OPERATIONS.md` §5 and `src/data/exhibits/vault-audio.js`**, and the rule that it is written once and enforced TWICE (runtime and build) is the half a future session will be tempted to delete; R4's seven strike sites are the artist cards themselves and its reversal — *a citation is not a decoration* — is why the song cards still carry `Accession` rows; R6's ruling on M37 is the booth's privacy answer and the measured third-party table in §5; R7's research is `docs/AD_FREE_PLAYBACK_RESEARCH-20260806.md`. **And its prune-forwards note is superseded rather than archived:** this round ran the procedure the OTHER way — prune against a copy and let the gate name the breaks — and the gate named ten chains exactly, all pointing at one struck row. **2026-08-06 (THE PORCH RULINGS):** CLEAR THE DECK (D1–D9),
 moved whole — the file was at 566 and this round's entry would have carried it
 past the rule. What is still load-bearing in it is NOT in the archive: **D1's
 one-passage-one-declaration ruling is `OPERATIONS.md` §7 Doctrine 17** and

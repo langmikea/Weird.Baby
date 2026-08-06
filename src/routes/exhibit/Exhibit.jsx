@@ -98,7 +98,11 @@ function typeColor(t) { return TYPE_META[t]?.color ?? "#888"; }
 function scrubFace(face) {
   if (!face) return face;
   const out = { ...face };
-  ["title", "subtitle", "blurb", "footer", "papa"].forEach(k => {
+  /* [N3 2026-08-06] `docsEmpty` JOINS THE SCRUBBED SCALARS. It is a printed
+     sentence like any other and a `papa` marker written into one must take it,
+     for the reason M53 and D3a both paid for: a field that is not a comment
+     prints, and "comment-shaped" is not a property the renderer can see. */
+  ["title", "subtitle", "blurb", "footer", "papa", "docsEmpty"].forEach(k => {
     const v = visitorProse(face[k]);
     if (kept(v)) out[k] = v; else delete out[k];
   });
@@ -195,7 +199,34 @@ function scrubFace(face) {
     return { ...t, label: kept(label) ? label : null,
                    date: kept(date) ? date : null };
   });
+  /* [N3 2026-08-06] A DOCUMENT'S OWN PROSE IS SCRUBBED THE SAME WAY. Title,
+     provenance and note all print; a document's PAGES are tiles and go through
+     the tile scrubber, because the reader shows a page's label exactly as it
+     shows a plate's. */
+  if (Array.isArray(face.docs)) {
+    out.docs = face.docs
+      .map(d => ({
+        ...d,
+        title: visitorProse(d.title),
+        source: visitorProse(d.source),
+        note: visitorProse(d.note),
+        extract: visitorProse(d.extract),
+        plates: Array.isArray(d.plates) ? scrubTiles(d.plates) : undefined,
+      }))
+      .filter(d => kept(d.title));
+  }
   if (Array.isArray(face.collage)) out.collage = scrubTiles(face.collage);
+  /* [N9 2026-08-06] AND SO IS EVERY PRESET'S LABEL, for the reason A3 and A7
+     both established: a preset's name is printed on a button and a marker
+     written into one would print. A preset whose label is entirely the
+     operator's is DROPPED — unlike a tile, which keeps its picture, a control
+     with no name is a control nobody can choose. */
+  if (Array.isArray(face.presets)) {
+    out.presets = face.presets
+      .map(p => ({ ...p, label: visitorProse(p.label),
+                         tiles: scrubTiles(p.tiles) }))
+      .filter(p => kept(p.label));
+  }
   if (Array.isArray(face.spreads)) {
     out.spreads = face.spreads.map(s => {
       const head = visitorProse(s.head);
@@ -1218,7 +1249,26 @@ function InstrumentPanel({ decl }) {
       <i className="ip-screw ip-screw-tr" aria-hidden="true" style={{ "--turn": "-42deg" }} />
       <i className="ip-screw ip-screw-bl" aria-hidden="true" style={{ "--turn": "71deg" }} />
       <i className="ip-screw ip-screw-br" aria-hidden="true" style={{ "--turn": "-7deg" }} />
-      {D.plate && <div className="ip-plate">{D.plate}</div>}
+      {/* [P2 2026-08-06] THE PLATE IS A NAMEPLATE, AND IT HAS TWO REGIONS —
+          the INK (what the maker printed, the same for every unit off the line)
+          and the STAMP (what a hand knocked in afterwards, unique to this one).
+          They are two elements because they are two processes; the stylesheet
+          draws the second as a shallow struck well in the metal.
+          THE STAMP FIELD RENDERS WHENEVER IT IS DECLARED, FILLED OR NOT. A
+          nameplate with an empty serial box is an unstamped plate; a nameplate
+          with no box at all is a different plate. Ops does not put a number in
+          it (Doctrine 12) and does not quietly drop the field either. */}
+      {(D.plate || D.serialLabel) && (
+        <div className="ip-plate">
+          {D.plate && <span className="ip-plate-ink">{D.plate}</span>}
+          {D.serialLabel && (
+            <span className="ip-plate-ser">
+              <span className="ip-plate-ser-k">{D.serialLabel}</span>
+              <span className="ip-plate-ser-v">{D.serial || ""}</span>
+            </span>
+          )}
+        </div>
+      )}
 
       <div className="ip-deck">
         {/* ---- THE DRUM ---- */}
@@ -1853,6 +1903,135 @@ function FaceFlow({ flat, children, deps, footer }) {
    second spread and pressing ‹ › walks back into the first. The tilt reads the
    same flat index, so the glued-up angles do not restart at each heading.
    =========================================================================== */
+/* ═══ [R7 2026-08-06] EVERY WING'S FAQ IS THE BOOTH'S FAQ ════════════════════
+   MIKE: "the FAQ fails the established format. The Information Booth IS an FAQ
+   under a better name and keeps that name for UX value. Sub-exhibits carry
+   their own FAQs — a visitor must never have to run back to the lobby. Conform
+   every wing FAQ to the booth's format."
+
+   THE FORMAT IS ONE SENTENCE: every question is on the page at once, and
+   clicking a question opens its answer under it. `/booth` has done that since
+   M3; four faces in three wings were doing something else — a flat entry list
+   with a "Q" stamp in front of every row — and a visitor moving between them
+   met two different objects called the same thing.
+
+   IT IS `<details>`, WHICH IS THE BOOTH'S OWN CHOICE AND FOR THE BOOTH'S OWN
+   REASONS (Doctrine 8): it opens with a keyboard, it is announced to a screen
+   reader, and it works with JavaScript having a bad day.
+
+   ═══ AND IT IS NOT THE NO-HIDDEN-INFORMATION LAW BEING BROKEN ═══════════════
+   That law (M1) is a standing doctrine and beats a convenience every time. Its
+   complaint is a control whose label says nothing about what is behind it —
+   "Next ›" — because people will not flick to discover whether something is
+   interesting. A QUESTION IS THE DESCRIPTION OF ITS OWN ANSWER, which is the
+   booth's own recorded reasoning and the reason its accordion has always been
+   allowed to stand. Nothing is discovered by opening one that the closed row
+   did not already state.
+   THIS REVERSES D7 ON `/foundation`, IN THE OPEN. That round flattened the
+   Foundation's accordion during the port, on the reading that the flat list was
+   the stronger form under M1 — Ops' call, recorded as M70 and put to Mike. He
+   has now ruled the other way for every wing at once, so the flattening is
+   undone rather than defended, and M70 closes.
+
+   THE "Q" STAMPS GO WITH IT. A list of questions under a heading that says FAQ
+   does not need every row prefixed with the letter Q — the booth prints none
+   and reads better for it. `stamp` is still supported by the flat list; it is
+   simply not drawn here.
+   A `note` STILL PRINTS, inside the opened answer where a footnote belongs. */
+function FaqEntries({ entries, state }) {
+  return (
+    <div className="vp-faq" data-stage-split="row">
+      {entries.map((en, i) => (
+        <details className="vp-faq-q" key={en.title || i}>
+          <summary>{en.title}</summary>
+          <div className="vp-faq-a">
+            {en.line && <p>{en.line}</p>}
+            {en.lines?.map((para, pi) => <p key={pi}>{para}</p>)}
+            {/* the marked door with no address — F6's shape, unchanged: a name
+                and a state, and deliberately no <a> to a URL nobody supplied. */}
+            {en.link && (
+              <span className="vp-fe-link" data-state={state(en.link)}>
+                <span className="vp-fe-link-text">{en.link.text}</span>
+                <span className="vp-fe-link-state">{state(en.link)}</span>
+              </span>
+            )}
+            {en.note && <p className="vp-faq-note">{en.note}</p>}
+          </div>
+        </details>
+      ))}
+    </div>
+  );
+}
+
+/* ═══ [N3 2026-08-06] THE DOCUMENT LIST — ONE RENDERER, TWO CALLERS ══════════
+   MIKE: "THE MANUAL becomes DOCUMENTATION — a viewer free to display any
+   document, with the manual inside it as a SELECTABLE ENTITY that opens on the
+   screen when clicked. THE FORMAT MUST BE A TEMPLATE and every documentation
+   page must look the same. CHECK FIRST whether an existing template already
+   serves this; do not create new machinery we do not need."
+
+   IT DID, AND THIS IS IT. L6 built a document payload for a Record entry —
+   title, provenance (source · date · pages), a STATE, and a scan that opens in
+   the wing's own reader — and that is a documentation template with a different
+   name on it. So the block is LIFTED OUT OF THE RECORD's renderer rather than
+   copied beside it: the Record calls it with an entry's `docs`, a face calls it
+   with its own, and there is exactly one markup, one state vocabulary and one
+   look. Two renderers for one object is the defect Doctrine 17 is named for,
+   and building the second one on the day the first was pointed at would have
+   been Ops doing it to itself.
+
+   THE ONE EXTENSION IS `plates`, AND IT IS THE HOUSE'S OWN WORD. A document
+   with more than one page needs an ordered set of page images, and the museum
+   already has that shape — the plate wall's shape and the microfiche reader's
+   shape, `{ img, label, date }` — so a document's pages open in the identical
+   reader as a photograph off the wall. (`pages` was already taken, as a COUNT.)
+   `scan` still works and is the one-page case.
+
+   WHAT IT REFUSES TO DO: a document with no page images is NOT a button. It
+   prints its provenance and its state and stops, because a control that opens
+   nothing is the dead control Doctrine 11's corollary removes. That is the
+   whole of why the manual is listed and not clickable today. */
+function DocList({ docs, setTitle, openLink, className }) {
+  const list = Array.isArray(docs) ? docs : [];
+  if (!list.length) return null;
+  return (
+    <ul className={"vp-rec-docs" + (className ? " " + className : "")}
+        data-stage-split="row">
+      {list.map((doc, di) => {
+        const state = docState(doc);
+        const plates = Array.isArray(doc.plates) && doc.plates.length
+          ? doc.plates
+          : (doc.scan ? [{ img: doc.scan, label: doc.title, date: doc.date }] : []);
+        return (
+          <li key={di} className={"vp-rec-doc vp-rec-doc--" + state}>
+            <div className="vp-rec-doc-head">
+              <span className="vp-rec-doc-title">{doc.title}</span>
+              <span className="vp-rec-doc-state">{state}</span>
+            </div>
+            {(doc.source || doc.date || doc.pages) && (
+              <div className="vp-rec-doc-prov">
+                {[doc.source, doc.date, doc.pages ? doc.pages + "pp" : null]
+                  .filter(Boolean).join("  ·  ")}
+              </div>
+            )}
+            {state === "imaged" && plates.length > 0 && (
+              <button className="vp-rec-plate vp-rec-doc-scan"
+                onClick={() => openLink(plates[0].img,
+                  { set: plates, index: 0, setTitle: doc.title || setTitle })}>
+                <img src={plates[0].img} alt="" />
+              </button>
+            )}
+            {state === "quoted" && (
+              <blockquote className="vp-rec-doc-extract">{doc.extract}</blockquote>
+            )}
+            {doc.note && <p className="vp-rec-doc-note">{doc.note}</p>}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
 function archiveSpreads(face) {
   const declared = Array.isArray(face?.spreads) && face.spreads.length
     ? face.spreads
@@ -1928,7 +2107,76 @@ function SpreadTiles({ sp, wall, face, openLink }) {
   );
 }
 
+/* ═══ [N9 2026-08-06] THE ARCHIVE IS CURATED, NOT POURED ═════════════════════
+   MIKE, and he called it the biggest item in the round: "splashing every image
+   in chronologically tells no story. Nobody enjoys hundreds of pictures that
+   were part of a story but do not tell one. BUILD PRESETS that filter the list
+   into groupings which, viewed together and IN THAT ORDER, give a sense of
+   satisfaction — not literal stories, and Mike will not be writing them. The
+   last few presets chunk it coarsely for completists; THE VALUE IS IN THE
+   CURATED ONES."
+
+   WHAT A PRESET IS: a named, ordered subset of this wall's own photographs.
+   `presets: [{ id, label, tiles: [...] }]`, authored in the artist config
+   beside the wall it cuts, and the LAST one is the coarse everything. The wall
+   draws one preset at a time and opens on the first.
+
+   THREE THINGS THAT ARE DECISIONS RATHER THAN DETAILS.
+     · EVERY BUTTON CARRIES ITS COUNT. That is what keeps this inside the
+       no-hidden-information law (M1): a control whose label says nothing about
+       what is behind it is the thing that law forbids, and "Through the bars ·
+       2" states its contents before it is touched — the same test the stowed
+       shelf and the booth's question list both pass.
+     · THE READER WALKS THE PRESET, NOT THE WALL. Opening a photograph from a
+       grouping and pressing NEXT stays inside the grouping, because the
+       grouping IS the order Mike asked for and a reader that escaped it would
+       be back to chronological pouring one level down.
+     · A WALL WITH ONE PRESET DRAWS NO STRIP. One button is not a choice, and a
+       control with a single option is furniture that costs attention
+       (Doctrine 16). A wall declaring no presets renders the exact DOM it
+       rendered before — spreads, stows and all — so no other wing is touched.
+
+   AND THE CONSEQUENCE MIKE NAMED IS LEDGERED RATHER THAN BUILT: a preset is a
+   good way to HIDE an egg, to REVEAL one, and to make certain things SPELL
+   SOMETHING OUT when they come together. That is `egg.presets` in
+   `reveal/ledger.json` — held, shown nowhere, and not spent by being described
+   on a page. */
+function ArchivePresets({ face, openLink }) {
+  const sets = face.presets;
+  const [pick, setPick] = useState(0);
+  const active = sets[Math.min(pick, sets.length - 1)];
+  const tiles = Array.isArray(active?.tiles) ? active.tiles : [];
+  const unit = face?.archiveUnit || ARCHIVE_UNIT;
+  return (
+    <>
+      <div className="vp-arch-picks" role="group"
+           aria-label={(face.title || "Archive") + " — groupings"}
+           data-stage-split="row">
+        {sets.map((p, i) => (
+          <button key={p.id || i} type="button"
+                  className={"vp-arch-pick" + (i === pick ? " vp-on" : "")}
+                  aria-pressed={i === pick}
+                  onClick={() => setPick(i)}>
+            <span className="vp-arch-pick-l">{p.label}</span>
+            <i className="vp-arch-pick-n">
+              {(p.tiles || []).length}
+              <span className="vp-arch-pick-u">
+                {" " + ((p.tiles || []).length === 1 ? unit.one : unit.many)}
+              </span>
+            </i>
+          </button>
+        ))}
+      </div>
+      <SpreadTiles sp={{ tiles, base: 0 }} wall={tiles} face={face}
+                   openLink={openLink} />
+    </>
+  );
+}
+
 function ArchiveWall({ face, openLink }) {
+  if (Array.isArray(face?.presets) && face.presets.length > 1) {
+    return <ArchivePresets face={face} openLink={openLink} />;
+  }
   const { spreads, wall } = archiveSpreads(face);
   if (!wall.length) return null;
   const unit = face?.archiveUnit || ARCHIVE_UNIT;
@@ -3709,6 +3957,25 @@ export default function Exhibit({ artist, open = null }) {
                             {face.lines.map((l, i) => <li key={i}>{l}</li>)}
                           </ul>
                         )}
+                        {/* [N3 2026-08-06] A FACE MAY BE A DOCUMENT LIST. The
+                            same renderer the Record's `docs` payload uses — see
+                            `DocList` above. A face declaring none renders none,
+                            so no other wing can notice this exists.
+                            A HELD DOCUMENT WITH NO PAGES SAYS SO AND IS NOT A
+                            CONTROL, which is the whole reason the manual can be
+                            listed in the Documentation face today. */}
+                        {Array.isArray(face.docs) && face.docs.length > 0 && (
+                          <DocList docs={face.docs} setTitle={face.title}
+                                   openLink={openLink} className="vp-face-docs" />
+                        )}
+                        {/* [N3] AND A FACE MAY SAY IT HOLDS NOTHING. An empty
+                            documentation shelf is a real state and the museum
+                            says it rather than rendering an empty container —
+                            the same discipline as B8's reel note, which this
+                            replaces on both machine albums. */}
+                        {face.docsEmpty && (
+                          <p className="vp-face-docs-empty">{face.docsEmpty}</p>
+                        )}
                         {/* ==== [B8 2026-08-02] THE REEL ======================
                             MIKE'S RULING, recorded where the thing lives: the
                             owner's manual must be ACTUAL SCANS/PHOTOGRAPHS of
@@ -3787,9 +4054,17 @@ export default function Exhibit({ artist, open = null }) {
                             you back at the top. */}
                         {Array.isArray(face.entries) && face.entries.length > 0 && (() => {
                           const isLog = face.entriesMode === "log";
+                          const isFaq = face.entriesMode === "faq";
                           /* reversal happens HERE, not in the data: the entries
                              stay in the order they happened. */
                           const list = isLog ? [...face.entries].reverse() : face.entries;
+                          /* [R7 2026-08-06] A THIRD MODE, AND IT IS THE BOOTH'S.
+                             See `FaqEntries` above the component for the ruling
+                             and for why an accordion is not the hidden
+                             information M1 forbids. */
+                          if (isFaq) return (
+                            <FaqEntries entries={list} state={fndState} />
+                          );
                           if (!isLog) return (
                             <ol className="vp-face-entries" data-stage-split="row">
                               {list.map((en, i) => (
@@ -3908,7 +4183,43 @@ export default function Exhibit({ artist, open = null }) {
                                       + (list.length > 1 && isUnread(en, readRecords)
                                          ? " vp-rec-row--unread" : "")}>
                                   <button className="vp-rec-open" onClick={() => openAt(i)}>
-                                    {entryStamp(en) && <span className="vp-fe-stamp">{entryStamp(en)}</span>}
+                                    {/* ═══ [R1 2026-08-06] THE MARK, FAR LEFT ══
+                                        MIKE: "each entry needs a DATE and/or a
+                                        DAY NUMBER — or something better — set to
+                                        the FAR LEFT of the entry. Propose the
+                                        form; he is open."
+                                        THE PROPOSAL IS THE RECORD NUMBER, and it
+                                        is chosen over a date for a reason this
+                                        volume has already paid for: THE DATES
+                                        WERE INVENTED AND MIKE DELETED THEM. The
+                                        one surviving entry carries no `date` and
+                                        no `stamp` by his own ruling, so a rail
+                                        built on a date would be an empty rail
+                                        today and an invented one tomorrow.
+                                        THE NUMBER IS AUTHORED, HELD AND STABLE.
+                                        It is what a bound volume actually files
+                                        by; it does not renumber when an entry is
+                                        inserted the way an index position does;
+                                        and the entry's own dateline already
+                                        prints `Record 013` inside, so the rail
+                                        and the record agree by construction.
+                                        THE DATE IS NOT DROPPED — it sits under
+                                        the number the moment an entry carries
+                                        one, derived by `entryStamp` exactly as
+                                        before. An entry with both shows both; an
+                                        entry with neither shows an empty rail
+                                        that still holds the column, so the rows
+                                        stay aligned either way. */}
+                                    <span className="vp-rec-mark" aria-hidden="true">
+                                      {typeof en.no === "number" && (
+                                        <b className="vp-rec-mark-no">
+                                          {String(en.no).padStart(3, "0")}
+                                        </b>
+                                      )}
+                                      {entryStamp(en) && (
+                                        <i className="vp-rec-mark-day">{entryStamp(en)}</i>
+                                      )}
+                                    </span>
                                     <span className="vp-fe-body">
                                       {/* [B9] the class rides the INDEX, which is
                                           the point of classing at all: a reader
@@ -3926,9 +4237,12 @@ export default function Exhibit({ artist, open = null }) {
                                           attribute of the entry. */}
                                       <span className="vp-fe-titlerow">
                                         <span className="vp-fe-title">{en.title}</span>
-                                        {en.evidence && (
-                                          <span className="vp-fe-class">{en.evidence}</span>
-                                        )}
+                                        {/* [R5 2026-08-06] THE CLASS BADGE IS
+                                            STRUCK FROM THE INDEX — see the note
+                                            on the entry in robots.js. It printed
+                                            a word ("object") that opened
+                                            nothing, beside a count that means
+                                            something. The count stays. */}
                                         {/* [L6] WHAT THE WEEK ACTUALLY BROUGHT,
                                             counted, on the row. B9 put the CLASS
                                             on the index so a reader could see a
@@ -3949,7 +4263,17 @@ export default function Exhibit({ artist, open = null }) {
                                           </span>
                                         ))}
                                       </span>
-                                      {en.line && <span className="vp-fe-line vp-rec-peek">{en.line}</span>}
+                                      {/* [R3 2026-08-06] THE SUMMARY, WHOLE.
+                                          `vp-rec-peek` was a one-line clamp with
+                                          an ellipsis — the "half-sentence teaser"
+                                          Mike struck. The class is gone rather
+                                          than widened: a two-line clamp is the
+                                          same failure with a longer fuse. The row
+                                          is a fixed height and the summary is
+                                          budgeted to fit it (gate: RECORD
+                                          BUDGETS in tools/reveal-ledger.mjs), so
+                                          nothing here can truncate. */}
+                                      {en.line && <span className="vp-fe-line vp-rec-sum">{en.line}</span>}
                                     </span>
                                   </button>
                                 </li>
@@ -4025,9 +4349,12 @@ export default function Exhibit({ artist, open = null }) {
                                       title="close this record">
                                 {entryStamp(en) && <span className="vp-fe-stamp">{entryStamp(en)}</span>}
                                 <span className="vp-rec-title">{en.title}</span>
-                                {en.evidence && (
-                                  <span className="vp-fe-class">{en.evidence}</span>
-                                )}
+                                {/* [R5 2026-08-06] the class badge is struck
+                                    here too. It was one word in two places and
+                                    the ruling was about the word, not about the
+                                    place it stood — leaving the open record's
+                                    copy would be the "fixing one never fixes the
+                                    other" defect Doctrine 17 is named for. */}
                               </button>,
                               en.line ? <p key="line" className="vp-rec-line">{en.line}</p> : null,
                               /* ==== [B9 2026-08-02] THE RECORD CARRIES
@@ -4106,46 +4433,8 @@ export default function Exhibit({ artist, open = null }) {
                                     identical reader as a plate off the wall,
                                  because a document's pages ARE a reel. */
                               Array.isArray(en.docs) && en.docs.length > 0 ? (
-                                <ul key="docs" className="vp-rec-docs" data-stage-split="row">
-                                    {en.docs.map((doc, di) => {
-                                      const state = docState(doc);
-                                      const scans = en.docs
-                                        .filter(x => x && x.scan)
-                                        .map(x => ({ img: x.scan, label: x.title, date: x.date }));
-                                      const si = scans.findIndex(x => x.img === doc.scan);
-                                      return (
-                                        <li key={di} className={"vp-rec-doc vp-rec-doc--" + state}>
-                                          <div className="vp-rec-doc-head">
-                                            <span className="vp-rec-doc-title">{doc.title}</span>
-                                            <span className="vp-rec-doc-state">{state}</span>
-                                          </div>
-                                          {(doc.source || doc.date || doc.pages) && (
-                                            <div className="vp-rec-doc-prov">
-                                              {[doc.source, doc.date,
-                                                doc.pages ? doc.pages + "pp" : null]
-                                                .filter(Boolean).join("  ·  ")}
-                                            </div>
-                                          )}
-                                          {state === "imaged" && (
-                                            <button className="vp-rec-plate vp-rec-doc-scan"
-                                              onClick={() => openLink(doc.scan,
-                                                { set: scans, index: si < 0 ? 0 : si,
-                                                  setTitle: doc.title || en.title })}>
-                                              <img src={doc.scan} alt="" />
-                                            </button>
-                                          )}
-                                          {state === "quoted" && (
-                                            <blockquote className="vp-rec-doc-extract">
-                                              {doc.extract}
-                                            </blockquote>
-                                          )}
-                                          {doc.note && (
-                                            <p className="vp-rec-doc-note">{doc.note}</p>
-                                          )}
-                                        </li>
-                                      );
-                                  })}
-                                </ul>
+                                <DocList key="docs" docs={en.docs}
+                                         setTitle={en.title} openLink={openLink} />
                               ) : null,
                               en.note ? <p key="note" className="vp-fe-note">{en.note}</p> : null,
                               /* THE PAGE ENDS DEFINITIVELY. A reader should never

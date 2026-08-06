@@ -22,6 +22,7 @@
     "reveal:audit": "node tools/reveal-ledger.mjs --audit",
     "reveal:check": "node tools/reveal-ledger.mjs --check",
     "reveal:cards": "node tools/reveal-ledger.mjs --cards",
+    "reveal:eggs": "node tools/reveal-ledger.mjs --eggs",
     "reveal:build": "node reveal/ledger-declare.mjs --write",
     "parity": "node tools/menu-parity.mjs",
     "parity:gate": "node tools/menu-parity.mjs --gate",

@@ -360,7 +360,18 @@ body:has(.vp-face) .vp-area::before{display:none}
 /* [N2] a stowed spread is a section in its own right — its heading is inside
    the <details>, so the wrapper carries the step the heading used to. */
 .vp-flat > .vp-spread-stow,
+/* [R7/N3/N9 2026-08-06] three new kinds of object, on the same ladder: a
+   question list, a shelf of documents (and its empty-shelf statement), and the
+   archive's groupings. Each is a section, so each opens at the section step. */
+.vp-flat > .vp-faq,
+.vp-flat > .vp-face-docs,
+.vp-flat > .vp-face-docs-empty,
+.vp-flat > .vp-arch-picks,
 .vp-flat > .vp-trail{margin-top:var(--rh-sect)}
+/* [N9] the groupings and the wall they cut are ONE object, the same way a
+   spread head and its wall are: the strip opens the section, the wall closes up
+   under it. */
+.vp-flat > .vp-arch-picks + .vp-collage{margin-top:var(--rh-tight)}
 /* [A3/A4] A SPREAD IS ONE OBJECT — its heading and its wall are not two
    sections with a section's distance between them. The heading opens the
    spread at the section step above; the wall closes up under its own label. */
@@ -1416,17 +1427,96 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    The index stands until a record is chosen; the chosen record fills the
    frame. No volume-wide open/close buttons - the head of the record is the
    control, and it toggles the one page you are looking at. */
+/* ═══ [R3/R1/R4 2026-08-06] THE INDEX IS A HEADLINE AND AN EXECUTIVE SUMMARY ══
+   MIKE: "the index level serves two things: the HEADLINE and what an
+   engineering organisation would call the EXECUTIVE SUMMARY — which is exactly
+   the right term here, because that is how such an organisation would do this
+   work. Every index row gets a headline and a summary beneath it, ALL
+   CONSTRAINED TO THE SAME HEIGHT, and THE ENTIRE SUMMARY MUST FIT IN IT. NO
+   MORE half-sentence teasers ending in an ellipsis; that failure disappears by
+   construction."
+
+   THREE THINGS, AND THE THIRD IS THE ONE THAT MAKES IT TRUE.
+     · FIXED HEIGHT. `--rec-row-h` is the row, and it is arithmetic rather than
+       a chosen number: one line of headline plus two of summary plus the
+       padding, expressed in the two line-heights that draw them. Change either
+       and the row follows.
+     · NO TRUNCATION ANYWHERE. `-webkit-line-clamp` is gone, `text-overflow` is
+       gone from the headline, and NOTHING in this block clips. That is
+       deliberate and it is the opposite of defensive: if a summary ever
+       overran, it would show, and a visible overrun is a defect somebody fixes.
+     · THE BUDGET IS ENFORCED AT THE DATA END. `tools/reveal-ledger.mjs`
+       (RECORD BUDGETS) fails the gate on a `title` or a `line` too long to fit
+       the box above. THAT is "by construction": the render cannot truncate and
+       the data cannot overflow, so there is no third state.
+
+   ═══ [R4] THE MEASURE, AND THE HONEST ANSWER TO "IS THERE A FLATTER BETTER WAY"
+   Mike saw a capped line with pane to spare and asked. The answer has two
+   halves and the first is a correction:
+     1. THE READABLE LIMIT IS 65–75 CHARACTERS and this page was set at 56ch
+        (`.vp-rec-sect-body`), which is UNDER the band, not over it. So the
+        first move is to widen the reading measure toward the band — 68ch — not
+        to narrow anything. FILLING THE PANE IS THE ONE WRONG ANSWER: a 140ch
+        line loses the reader's eye on the carriage return, which is why every
+        newspaper on earth sets in columns and not across the sheet.
+     2. HIS THREE OPTIONS, ALL THREE ANSWERED, AND THE SECOND ONE WAS BUILT AND
+        MEASURED BEFORE IT WAS REJECTED — which is the only way to answer a
+        question about a measure.
+          · TWO COLUMNS — BUILT, MEASURED, REMOVED. An index of fixed-height
+            cards is exactly what columns are for and it halves the walk at
+            sixty entries, so it shipped at `@media (min-width:1100px)` and was
+            then read on the glass: **each column came out at THIRTY-THREE
+            CHARACTERS.** The pane is ~76% of the viewport, the index splits it
+            in two, each half loses the mark rail and the gutter, and a
+            1228px screen is left with 324px of measure — half the band, on the
+            one element whose whole job is to be read at a glance. It becomes
+            right somewhere past 1650px of VIEWPORT, which is not a width this
+            museum's operator has. So it is gone, and the number is why.
+          · A NARROWER PANE — refused, with a reason. The pane is the visitor's:
+            they drag the splitter and the width is remembered for the session
+            (P5). A page that shrinks its own container takes back a control
+            somebody gave them.
+          · THE SPACE CARRYING SOMETHING ELSE — SHIPPED, and it is R1. The left
+            of the row now carries the record's own MARK in a fixed rail, which
+            is furniture a bound volume actually has, and the reading matter
+            beside it is capped at the band. The slack on the RIGHT is left
+            empty on purpose: a list of fixed-height cards is scanned rather
+            than read, and air down one edge is what makes the column of
+            headlines a column. Filling it was the one wrong answer. */
 .vp-rec-index{list-style:none;margin:0;padding:0}
-.vp-rec-row{padding:0}
-.vp-rec-open{display:flex;gap:14px;width:100%;text-align:left;background:none;
-  border:0;border-top:1px solid var(--wb-border);padding:10px 2px;cursor:pointer;
-  color:inherit;font:inherit;transition:background .15s}
+.vp-rec-row{padding:0;break-inside:avoid}
+.vp-rec-open{display:flex;gap:16px;width:100%;text-align:left;background:none;
+  border:0;border-top:1px solid var(--wb-border);padding:12px 2px;cursor:pointer;
+  color:inherit;font:inherit;transition:background .15s;
+  /* one headline line + two summary lines + the padding above and below */
+  min-height:calc(1.25em + 2 * 1.5 * var(--fs-small) + 24px);
+  align-items:flex-start}
 .vp-rec-open:hover,.vp-rec-open:focus-visible{background:rgba(232,228,216,.05);outline:none}
 .vp-rec-index .vp-rec-row:last-child .vp-rec-open{border-bottom:1px solid var(--wb-border)}
-/* the peek is one line: enough to recognise the entry, not enough to read it
-   instead of opening it. */
-.vp-rec-peek{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;
-  overflow:hidden;opacity:.72}
+
+/* ---- [R1] THE MARK. A fixed column at the far left, so every row's headline
+   starts on one vertical however much or little the mark holds. The number is
+   the object; the date, when there is one, is its subordinate. */
+.vp-rec-mark{flex:0 0 auto;width:5.5ch;display:flex;flex-direction:column;
+  gap:2px;padding-top:1px}
+.vp-rec-mark-no{font-family:'Courier Prime','Courier New',monospace;
+  font-weight:700;font-size:var(--fs-lead);line-height:1.05;
+  letter-spacing:.02em;color:var(--wb-gold-lo);font-variant-numeric:tabular-nums}
+.vp-rec-mark-day{font-family:'Courier Prime','Courier New',monospace;
+  font-style:normal;font-size:var(--fs-micro);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--wb-gold-mute)}
+.vp-rec-open:hover .vp-rec-mark-no,
+.vp-rec-open:focus-visible .vp-rec-mark-no{color:var(--wb-gold)}
+
+/* ---- [R3] THE SUMMARY. Two lines, whole, no clamp. `-webkit-line-clamp:1`
+   stood here and cut every entry mid-clause; the fit is the data's job now. */
+.vp-rec-sum{opacity:.72}
+
+/* ---- [R4] THE ROW'S READING MATTER IS CAPPED AT THE BAND, and the slack on
+   the right is deliberate. 68ch is the same measure the entry body takes, so a
+   reader meets one column width in the index and the same one inside the
+   record. The RAIL is outside the cap — it is furniture, not reading. */
+.vp-rec-open > .vp-fe-body{max-width:68ch}
 
 /* [L6 2026-08-02] `.vp-rec` AND `.vp-rec-body` ARE RETIRED — an opened record
    is a RUN of blocks so the stage can page it (see Exhibit.jsx). The 14px and
@@ -1586,24 +1676,101 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
   font-family:'Courier Prime','Courier New',monospace}
 
 /* MOUNTING SCREWS. A slotted head, seated in a countersunk dish, each turned
-   to its own angle by the renderer. */
-.ip-screw{position:absolute;width:11px;height:11px;border-radius:50%;
+   to its own angle by the renderer.
+   [P4 2026-08-06] BIGGER, AND THE SIZE IS THE SMALLER HALF OF WHY. MIKE: "more
+   obvious, more immersive, probably larger." At 11px the head was a grey dot:
+   the slot was 2px of a 41–59% band and the countersink had nowhere to fall,
+   so what read at arm's length was a speck, not a fastener. 18px is where the
+   slot becomes a slot.
+   WHAT ACTUALLY MAKES IT READ AS A FIXING is the DISH AROUND IT, which did not
+   exist before. A screw in a panel sits in a countersunk well — a dark ring
+   with a bright lower lip, because the light in this room comes from above and
+   the far wall of a well catches it. That is one extra shadow layer and it is
+   the difference between a disc printed on steel and a hole with metal in it.
+   The slot is cut deeper (a black band with a bright leading edge, so it has a
+   near side and a far side) and each head keeps its own angle from the
+   renderer — a screw that lines up with its neighbours is a logo. */
+.ip-screw{position:absolute;width:18px;height:18px;border-radius:50%;
   background:
-    linear-gradient(var(--turn,0deg),transparent 0 41%,#151614 41% 59%,transparent 59% 100%),
-    radial-gradient(circle at 38% 33%,#5a5b54,#26272400 72%),
-    radial-gradient(circle at 50% 50%,#3a3b37,#212220);
-  box-shadow:inset 0 1px 1px rgba(255,255,255,.22),inset 0 -1px 1px rgba(0,0,0,.5),
-             0 1px 1px rgba(0,0,0,.45);
+    linear-gradient(var(--turn,0deg),
+      transparent 0 43%,rgba(255,255,255,.16) 43% 45%,
+      #0c0d0b 45% 57%,transparent 57% 100%),
+    radial-gradient(circle at 36% 30%,#6e6f66,rgba(38,39,36,0) 66%),
+    radial-gradient(circle at 62% 74%,#191a18,rgba(25,26,24,0) 58%),
+    radial-gradient(circle at 50% 50%,#43443f,#232420);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.30),
+    inset 0 -1px 1px rgba(0,0,0,.60),
+    0 0 0 1px rgba(0,0,0,.55),                 /* the well's wall */
+    0 0 0 2px rgba(255,255,255,.055),          /* its lower lip, catching light */
+    0 2px 3px rgba(0,0,0,.55);
   pointer-events:none}
-.ip-screw-tl{left:9px;top:9px} .ip-screw-tr{right:9px;top:9px}
-.ip-screw-bl{left:9px;bottom:9px} .ip-screw-br{right:9px;bottom:9px}
+.ip-screw-tl{left:11px;top:11px} .ip-screw-tr{right:11px;top:11px}
+.ip-screw-bl{left:11px;bottom:11px} .ip-screw-br{right:11px;bottom:11px}
 
-/* the engraved maker's plate: cut into the steel, so the light sits BELOW */
-.ip-plate{align-self:flex-start;font-size:var(--fs-micro);
-  letter-spacing:.22em;color:var(--engrave);
-  text-shadow:0 1px 0 rgba(255,255,255,.10);
-  border:1px solid #3a3b38;background:linear-gradient(180deg,#232422,#2c2d2b);
-  padding:5px 12px}
+/* ═══ [P2 2026-08-06] THE MAKER'S PLATE IS A NAMEPLATE ═══════════════════════
+   MIKE: "the placard must LOOK LIKE WHAT IT IS. Right now it is unclear whether
+   it is to be read, understood, changed or scrolled." His reference: a BRIGHT
+   METAL nameplate with BLACK INK laid over it — the ink printing the letters —
+   with a space where a serial number is HAND-STAMPED.
+   WHAT WAS WRONG IS THAT IT WAS THE SAME OBJECT AS EVERYTHING AROUND IT. It
+   was engraved steel: dark ground, light letters, one hairline border — which
+   is exactly how the drum legend, the switch legends and the dial legend are
+   drawn. Six things in the same material and the same value, and the one that
+   is a fixed maker's plate looked like the five that are controls. That is the
+   whole of his "unclear whether it is to be read or changed": nothing said it
+   was a different KIND of thing.
+   SO IT INVERTS. Bright rolled aluminium, dark ink, and it is the only light
+   object on a dark panel — which is what a data plate is on a real machine and
+   is also, usefully, unmistakably not a control.
+   FOUR THINGS, EACH DOING ONE JOB:
+     the metal   a light plate with a cross-brushed grain and a bright top lip,
+                 raised OFF the panel rather than cut into it (the shadow falls
+                 outside now, where before it fell inside)
+     the ink     near-black at the plate's own tracking, with a whisper of
+                 lift on the lower edge of each stroke — printed ON, not cut IN
+     the rivets  one at each end, because a plate is fastened and every real one
+                 shows how
+     the stamp   a debossed field at the right end for the serial: recessed,
+                 with the digits struck slightly off-square and off-baseline,
+                 because a hand-stamp is a hand
+   THE STAMP FIELD HOLDS ITS WIDTH WHETHER OR NOT IT IS FILLED. Today it is
+   empty — nobody has supplied a serial and Ops may not mint one (Doctrine 12)
+   — and an unstamped plate is a thing that exists. The space is the
+   instruction; the number is Mike's. */
+.ip-plate{align-self:flex-start;position:relative;
+  display:flex;align-items:stretch;gap:0;
+  border:1px solid #7e7c71;border-radius:2px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0) 38%),
+    repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 1px,transparent 1px 3px),
+    repeating-linear-gradient(4deg,rgba(255,255,255,.05) 0 2px,transparent 2px 5px),
+    linear-gradient(168deg,#dcdad0 0%,#bcbab0 52%,#d2d0c6 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.85),
+    inset 0 -1px 0 rgba(0,0,0,.30),
+    0 1px 0 rgba(255,255,255,.06),
+    0 3px 6px -2px rgba(0,0,0,.75)}
+/* the two fixings. Small, dark-cored, bright-lipped — the plate is screwed on */
+.ip-plate::before,.ip-plate::after{content:"";position:absolute;top:50%;
+  width:5px;height:5px;margin-top:-2.5px;border-radius:50%;
+  background:radial-gradient(circle at 38% 32%,#f2f0e8,#6d6b62 78%);
+  box-shadow:0 0 0 1px rgba(0,0,0,.35),inset 0 -1px 1px rgba(0,0,0,.4)}
+.ip-plate::before{left:5px} .ip-plate::after{right:5px}
+.ip-plate-ink{padding:6px 18px 6px 17px;font-size:var(--fs-micro);
+  letter-spacing:.22em;color:#191a14;
+  text-shadow:0 1px 0 rgba(255,255,255,.45)}
+/* the struck field: a shallow well in the metal, with the digits knocked in */
+.ip-plate-ser{display:flex;align-items:baseline;gap:7px;
+  margin:4px 15px 4px 0;padding:2px 8px;
+  border-left:1px solid rgba(0,0,0,.28);
+  background:linear-gradient(180deg,rgba(0,0,0,.13),rgba(255,255,255,.16));
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.35),inset 0 -1px 0 rgba(255,255,255,.5)}
+.ip-plate-ser-k{font-size:var(--fs-micro);letter-spacing:.16em;color:#4a4941}
+.ip-plate-ser-v{min-width:7ch;font-size:var(--fs-micro);letter-spacing:.3em;
+  color:#111208;font-weight:700;
+  transform:rotate(-.7deg) translateY(.5px);transform-origin:left center;
+  text-shadow:0 1px 0 rgba(255,255,255,.55)}
 
 .ip-deck{display:flex;flex-wrap:wrap;gap:clamp(18px,3vw,44px);align-items:flex-start}
 .ip-bay{display:flex;flex-direction:column;gap:9px;min-width:0}
@@ -1753,8 +1920,18 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
   .ip-dial{height:104px}
   .ip-latchbay{padding-top:10px;gap:12px}
   .ip-latch{padding:10px 24px}
-  .ip-plate{padding:4px 9px}
-  .ip-screw{display:none}   /* the fixings are the first thing a small plate loses */
+  .ip-plate-ink{padding:4px 13px 4px 12px}
+  .ip-plate-ser{margin:3px 11px 3px 0;padding:2px 6px}
+  /* [P4 2026-08-06] THE FIXINGS COME BACK ON A SMALL PANEL, SMALLER. They used
+     to be `display:none` here on the reasoning that fixings are the first thing
+     a small plate loses — which is true of a plate that is trying to fit, and
+     this one is not: the panel is SCALED to its frame (`fit` in
+     InstrumentPanel), so nothing below is competing with the screws for room.
+     Mike's instruction is that they be more present, and a phone is where the
+     panel is most obviously a picture of a machine and most needs to not be. */
+  .ip-screw{width:13px;height:13px}
+  .ip-screw-tl{left:8px;top:8px} .ip-screw-tr{right:8px;top:8px}
+  .ip-screw-bl{left:8px;bottom:8px} .ip-screw-br{right:8px;bottom:8px}
   .ip-bat{height:36px} .ip-bat-lever{height:15px;top:16px} .ip-bat-up .ip-bat-lever{top:5px}
   .ip-knob{width:40px;height:40px;margin-top:-20px}
   .ip-refusal,.ip-readout{line-height:1.45;padding-left:10px}
@@ -3115,6 +3292,33 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    open spread's does — the same `--rh-tight` step, stated here because the
    collage is no longer a direct child of `.vp-flat`. */
 .vp-spread-stow > .vp-collage{margin-top:var(--rh-tight)}
+
+/* ═══ [N9 2026-08-06] THE ARCHIVE'S GROUPINGS ════════════════════════════════
+   A row of named cuts through the wall. Drawn in the museum's own control
+   register — mono, tracked, hairline — rather than as buttons, because these
+   are the labels on a set of drawers and not commands.
+   EVERY ONE CARRIES ITS COUNT, and the count is the reason this is not the
+   hidden information M1 forbids: a drawer labelled with its contents and its
+   size is fully described before it is opened. The unit noun is the wall's own
+   (`archiveUnit`), so a video archive would count clips. */
+.vp-arch-picks{display:flex;flex-wrap:wrap;gap:8px 10px;margin-bottom:var(--rh-tight)}
+.vp-arch-pick{display:inline-flex;align-items:baseline;gap:9px;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-micro);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--wb-gold-lo);background:none;
+  border:1px solid var(--wb-border);padding:7px 13px;cursor:pointer;
+  transition:color .15s,border-color .15s,background .15s}
+.vp-arch-pick:hover,.vp-arch-pick:focus-visible{color:var(--wb-gold-hi);
+  border-color:var(--wb-border-hi);outline:none}
+.vp-arch-pick.vp-on{color:var(--wb-gold);border-color:var(--wb-gold-lo);
+  background:rgba(232,228,216,.06)}
+.vp-arch-pick-n{font-style:normal;font-weight:700;color:var(--wb-gold-mute);
+  font-variant-numeric:tabular-nums}
+.vp-arch-pick.vp-on .vp-arch-pick-n{color:var(--wb-gold-lo)}
+/* the noun rides with the number and drops out where the row would wrap — the
+   figure is the fact, the word is the courtesy. */
+.vp-arch-pick-u{letter-spacing:.1em}
+@media (max-width:620px){ .vp-arch-pick-u{display:none} }
 .vp-collage-tile{position:relative;display:block;border:0;cursor:pointer;
   background:#f3efe6;padding:8px 8px 10px;
   transform:rotate(var(--tilt,0deg));
@@ -3248,20 +3452,22 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
 
 /* ===========================================================================
    [B9 2026-08-02] THE EVIDENCE CLASSES.
-   A class is a WORD the data supplies, so this styles the badge and never the
-   vocabulary — there is no list of permitted classes anywhere in the CSS or
-   the JS, which is what "data-driven, no new species" has to mean if it is to
-   survive the next class Mike invents.
+   [R5 2026-08-06] `.vp-fe-class` IS DELETED, NOT ORPHANED. Mike struck the
+   badge — "I see no richness in it" — and both of its two render sites went
+   with it, so the rule had zero callers the moment the JSX changed. A styled
+   class nothing draws is the thing a later audit spends an hour proving is
+   dead; B9's model survives where it belongs, in `record-model.js`, with a note
+   saying plainly that nothing renders it.
    =========================================================================== */
 .vp-fe-titlerow{display:flex;align-items:baseline;justify-content:space-between;
   gap:10px;min-width:0}
 .vp-fe-titlerow .vp-fe-title{min-width:0;overflow:hidden;text-overflow:ellipsis}
-.vp-fe-class{align-self:center;flex-shrink:0;
-  font-family:'Courier Prime','Courier New',monospace;
-  font-size:var(--fs-micro);letter-spacing:.18em;text-transform:uppercase;
-  color:var(--wb-gold-lo);border:1px solid var(--wb-border);
-  padding:1px 7px;margin:2px 0;white-space:nowrap}
-.vp-rec-head .vp-fe-class{margin-left:auto}
+/* [R3 2026-08-06] AND THE RECORD'S INDEX OPTS OUT OF THE ELLIPSIS. The rule
+   above serves faces whose titles sit beside a badge on one line; a Record
+   headline is the row's own subject and a clipped headline is the same defect
+   as a clipped summary, one line up. It wraps and the budget keeps it to one
+   line — see the RECORD BUDGETS block at the head of the index rules. */
+.vp-rec-index .vp-fe-titlerow .vp-fe-title{overflow:visible;text-overflow:clip}
 /* the wire block is the register's own look, indented as a quotation of the
    machine rather than as the museum's own voice. */
 .vp-rec-wire{margin-top:10px;border-top:1px solid var(--wb-border)}
@@ -3334,6 +3540,64 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
   font-size:var(--fs-micro);letter-spacing:.08em;color:var(--wb-gold-lo)}
 .vp-rec-doc-scan{width:100%;max-width:220px}
 .vp-rec-doc-scan img{aspect-ratio:3/4}
+/* [N3 2026-08-06] THE SAME CARDS, STANDING ON A FACE OF THEIR OWN. The
+   Documentation face is a document list and nothing else, so the stack gets the
+   face's own block rhythm above it and a wider card — a Record entry's
+   documents are an aside inside a story, and these are the exhibit. Nothing
+   about the CARD changes, which is the point of one renderer. */
+/* the top margin is the FLAT LADDER's, not this rule's — see the
+   `.vp-flat > …` block at the head of this file. `.vp-rec-docs` sets its own
+   12px for the Record's in-story case; this resets it so the ladder governs. */
+.vp-face-docs{margin-top:0;gap:14px}
+.vp-face-docs .vp-rec-doc{padding:13px 15px}
+/* the card's own note takes a reading measure on a face, and only on a face.
+   Inside a Record entry the card is already narrow; standing on a wing's own
+   surface it is as wide as the pane, and 782px of mono ran the note at ~110
+   characters — half again past the band. Measured on the built bundle. */
+.vp-face-docs .vp-rec-doc-note{max-width:68ch}
+/* an empty shelf, said out loud. Register voice, because it is a holdings
+   statement and not reading matter. */
+.vp-face-docs-empty{margin:0;
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-small);line-height:1.55;letter-spacing:.04em;
+  color:var(--wb-gold-lo);max-width:62ch;
+  border-left:2px solid var(--wb-border-hi);padding-left:14px}
+
+/* ═══ [R7 2026-08-06] THE WING'S FAQ, IN THE BOOTH'S FORMAT ══════════════════
+   Every question on the page at once; clicking one opens its answer under it.
+   The BEHAVIOUR is the booth's, element for element — native `<details>`, the
+   marker reset, a "+" that ROTATES rather than swapping to a "–" (two glyphs of
+   different widths make the row twitch; one glyph turned 45° is the same ink in
+   the same place). The TYPE is this surface's own ramp rather than the sheet's
+   fixed rems, because a face inside an exhibit sits in a pane the visitor can
+   resize and the sheet does not. Same object, same rules, drawn at the size of
+   the room it is standing in. */
+.vp-faq{text-align:left}
+.vp-faq-q{border-top:1px solid var(--wb-border)}
+.vp-faq-q:last-of-type{border-bottom:1px solid var(--wb-border)}
+.vp-faq-q > summary{cursor:pointer;list-style:none;
+  display:flex;justify-content:space-between;align-items:baseline;gap:20px;
+  padding:15px 2px;
+  font-family:'Syne',sans-serif;font-weight:600;
+  font-size:var(--fs-lead);line-height:1.4;letter-spacing:.005em;
+  color:var(--wb-gold);transition:color .15s}
+.vp-faq-q > summary::-webkit-details-marker{display:none}
+.vp-faq-q > summary:hover{color:var(--wb-gold-hi)}
+.vp-faq-q > summary:focus-visible{outline:1px solid var(--wb-gold);
+  outline-offset:2px}
+.vp-faq-q > summary::after{content:"+";
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-lead);line-height:1;color:var(--wb-gold-mute);
+  flex-shrink:0;transition:transform .18s ease,color .15s}
+.vp-faq-q[open] > summary::after{transform:rotate(45deg);color:var(--wb-gold)}
+.vp-faq-q[open] > summary{color:var(--wb-gold-hi)}
+.vp-faq-a{padding:0 2px 18px}
+.vp-faq-a p{margin:0;font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-body);line-height:1.62;letter-spacing:.005em;
+  color:var(--wb-gold-lo);max-width:68ch;hyphens:auto;text-wrap:pretty}
+.vp-faq-a p + p{margin-top:var(--rh-tight)}
+.vp-faq-note{color:var(--wb-gold-mute)}
+.vp-faq-a .vp-fe-link{margin-top:8px}
 /* words taken OUT of a document are a quotation of the document, so they are
    set as one: the museum's serif, a rule at the left, and no quote marks
    (the rule is the quote mark). */
@@ -3380,7 +3644,6 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
   color:var(--wb-gold-mute)}
 .vp-rec-dateline-part + .vp-rec-dateline-part::before{
   content:"\00b7";margin:0 .7em;color:var(--wb-border-hi)}
-.vp-rec-head--long .vp-fe-class{margin-left:auto}
 
 /* ---- THE HEADLINE. The day's one thing. `--fs-display` is the ramp's own
    top step (R5b added it, P7's rule for adding one) — a record entry's
@@ -3430,9 +3693,20 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
   font-family:'Syne',sans-serif;font-weight:800;
   font-size:var(--fs-small);letter-spacing:.16em;text-transform:uppercase;
   color:var(--wb-gold)}
+/* [R4 2026-08-06] 56ch → 68ch, AND THE DIRECTION OF THE CHANGE IS THE FINDING.
+   Mike saw a capped line with pane to spare and asked whether there is a
+   flatter better way. Measured, this body was set at FIFTY-SIX characters —
+   below the 65–75 band a reader is comfortable in, not above it — so the page
+   was paying the cost of a narrow measure (more carriage returns, more
+   hyphenation pressure, a taller column) and getting none of its benefit.
+   68ch sits inside the band with room at both ends of the type ramp.
+   IT IS NOT "FILL THE PANE", WHICH IS THE ONE WRONG ANSWER. A line that runs
+   the width of a desktop pane is 130–150 characters and the eye loses the
+   return; every newspaper sets in columns for exactly this reason. What the
+   leftover carries instead is written at the head of the index rules. */
 .vp-rec-sect-body{margin:0;font-family:var(--wb-read);font-optical-sizing:auto;
   font-size:var(--fs-body);line-height:1.62;letter-spacing:.005em;
-  color:var(--wb-gold-lo);max-width:56ch}
+  color:var(--wb-gold-lo);max-width:68ch}
 .vp-rec-sect-body + .vp-rec-sect-body{margin-top:var(--rh-tight)}
 .vp-rec-sect-doors{display:flex;flex-wrap:wrap;gap:10px 16px}
 
@@ -3532,7 +3806,6 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
   .vp-rec-headline{max-width:none}
 }
 @media (max-width:720px){
-  .vp-rec-head--long .vp-fe-class{margin-left:0}
   .vp-rec-pop{padding:16px;align-items:flex-end}
   .vp-rec-pop-card{width:100%}
 }

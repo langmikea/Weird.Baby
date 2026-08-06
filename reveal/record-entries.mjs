@@ -156,3 +156,53 @@ export function entries() { return read().entries.map(e => ({ ...e })); }
 /** EVERY SENTENCE IN THE RECORD. Nothing builds from this; `reveal:check` uses
  *  it to prove no ledger row is holding any of them. */
 export function prose() { return [...read().prose]; }
+
+/* ═══ [R3 2026-08-06] THE INDEX ROW, AND IT IS A THIRD READER ════════════════
+   MIKE: "every index row gets a headline and a summary beneath it, ALL
+   CONSTRAINED TO THE SAME HEIGHT, and THE ENTIRE SUMMARY MUST FIT IN IT. No
+   more half-sentence teasers ending in an ellipsis; THAT FAILURE DISAPPEARS BY
+   CONSTRUCTION."
+   "By construction" is a mechanism or it is a promise, and this is the
+   mechanism's data half: the renderer can no longer truncate (the clamp is
+   gone), so the only way a row can break is a string too long for the box —
+   which `reveal:check` now refuses. See RECORD BUDGETS in
+   tools/reveal-ledger.mjs for the numbers and how they were measured.
+
+   IT DOES NOT BREACH THIS FILE'S OWN SPLIT, AND THE SPLIT IS WORTH RESTATING.
+   `entries()` sees numbers and asset paths and NO WORDS AT ALL, and it is the
+   only half the ledger builds from — that is what stops a headline having a
+   route into `ledger.json`. This reader sees two fields and builds NOTHING; it
+   exists so a check can police a rule, which is exactly what `prose()` above is
+   for. A third reader that FEEDS something would be the breach. */
+export function summaries() {
+  const file = path.join(REPO, RECORD_SOURCE);
+  const src = fs.readFileSync(file, "utf8");
+  const ast = Parser.parse(src, { ecmaVersion: "latest", sourceType: "module" });
+  let track = null;
+  (function visit(n) {
+    if (!n || typeof n !== "object" || track) return;
+    if (Array.isArray(n)) { n.forEach(visit); return; }
+    if (n.type === "ObjectExpression") {
+      const id = strOf(propOf(n, "id"));
+      if (id === RECORD_TRACK_ID && propOf(n, "face")) { track = n; return; }
+    }
+    for (const k of Object.keys(n)) {
+      if (k === "type" || k === "start" || k === "end" || k === "loc") continue;
+      visit(n[k]);
+    }
+  })(ast);
+  if (!track) return [];
+  const entriesNode = propOf(propOf(track, "face"), "entries");
+  if (!entriesNode || entriesNode.type !== "ArrayExpression") return [];
+  return entriesNode.elements
+    .filter(el => el && el.type === "ObjectExpression")
+    .map(el => {
+      const noNode = propOf(el, "no");
+      return {
+        no: noNode && noNode.type === "Literal" && typeof noNode.value === "number"
+          ? noNode.value : null,
+        title: strOf(propOf(el, "title")),
+        line: strOf(propOf(el, "line")),
+      };
+    });
+}

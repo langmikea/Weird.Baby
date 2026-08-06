@@ -346,11 +346,42 @@ const WBR_TRACKS = [
                round the back"). It is a real photograph of the object the
                entry is about; it is not evidence of the bag, and the caption
                no longer implies that it is. */
+            /* [R5 2026-08-06] `evidence: "object"` IS STRUCK, AND THE FIELD
+               WITH IT ON THIS ENTRY. MIKE, on the badge it printed: "I see no
+               richness in it. If it is decoration it GOES. If it can genuinely
+               serve the UX — opening the object, or popping the object list
+               beside it — propose that; otherwise strike it."
+               IT COULD NOT BE MADE TO SERVE, AND THE REASON IS STRUCTURAL. The
+               badge printed a WORD with nothing behind it: B9's model has no
+               permitted list of classes and no registry of objects, so there is
+               no object to open and no list to pop — an "object list" would
+               have to be invented to give the control something to do, which is
+               Doctrine 12 with a button on it. The thing that DOES tell a
+               reader what a week brought is `evidenceOf` — the counted
+               wire/plates/docs badges — and it is a different mechanism, still
+               rendered, absent here because this entry carries no payloads.
+               THE MODEL KEEPS THE FIELD (record-model.js) and nothing renders
+               it. It is Mike's own B9 vocabulary and it comes back the day it
+               points at something — a filter over a long Record is the obvious
+               day, and that is the same mechanism as N9's archive presets. */
             { no: 13,
               title: "The one thing that wasn't packed like the rest",
-              evidence: "object",
               still: "/robots/reference/photos/rear_power_switch.png",
               stillCaption: "The back of the unit.",
+              /* [R3 2026-08-06] `line` IS THE EXECUTIVE SUMMARY, AND IT IS
+                 BUDGETED. MIKE: the index level serves the HEADLINE and what an
+                 engineering organisation would call the EXECUTIVE SUMMARY —
+                 every row gets both, all rows the same height, and THE ENTIRE
+                 SUMMARY MUST FIT.
+                 SO THERE IS NO TRUNCATION ANYWHERE IN THE INDEX ANY MORE and
+                 the fit is guaranteed at the DATA end instead: `title` and
+                 `line` on a Record entry carry hard character budgets
+                 (`tools/reveal-ledger.mjs`, RECORD BUDGETS) and a row that
+                 exceeds one FAILS THE GATE. That is what makes "the failure
+                 disappears by construction" a mechanism rather than a promise —
+                 the old `-webkit-line-clamp:1` cut this very sentence at "packed
+                 unlike everything else that arrived with…", which is the half
+                 sentence he is describing. */
               line: "A sealed modern bag holding a USB-C adapter, packed " +
                     "unlike everything else that arrived with it. The unit is " +
                     "now on charge.",
@@ -497,7 +528,7 @@ const WBR_TRACKS = [
              which door is which, and Mike's replacement sends the visitor
              through one door rather than naming three. Register M58. */
           entries: [
-            { stamp: "START", title: "Where do I start?",
+            { title: "Where do I start?",
               line: "Finish the FAQ, then follow The Record.",
               note: "" },
             /* [P3] THE SLOT IS HELD AND NOTHING IS WRITTEN IN IT. Mike: "Mike
@@ -512,8 +543,7 @@ const WBR_TRACKS = [
                both, the entry renders NOTHING and the slot stays in the data,
                where Mike's list of what he owes actually lives. Same path
                /foundation's billionaires answer takes to the same end. M57. */
-            { stamp: "Q",
-              title: "[PAPA] What is Weird.Baby Robots?",
+            { title: "[PAPA] What is Weird.Baby Robots?",
               line: "[PAPA] Mike will vibe this; the only seed is " +
                     "“Purveyors of the Weird.Baby”.",
               note: "" },
@@ -523,14 +553,14 @@ const WBR_TRACKS = [
                takes the whole clause. A visitor reads the hardware answer and
                stops. What goes in the slot is preserved for Mike and printed
                nowhere. */
-            { stamp: "Q", title: "Is this stuff real?",
+            { title: "Is this stuff real?",
               line: "The hardware is — you can hold it at least, and it is " +
                     "heavier than you expect. [PAPA] Everything else — " +
                     "historical accounts, technical specifications, people " +
                     "involved — wants words that SOUND favourable and are not: " +
                     "the house's usefully-useless humour.",
               note: "" },
-            { stamp: "Q", title: "Does it work?",
+            { title: "Does it work?",
               line: "See “Is this stuff real?”",
               note: "" },
             /* [P3] THE TRACKING WARNING IS MIKE'S OWN CONDITION ON THIS ANSWER,
@@ -543,12 +573,12 @@ const WBR_TRACKS = [
                names a Weird.Baby account on any platform, so the sentence is
                his instruction and the address is his to supply. It is not
                invented here and it is not quietly dropped either — M60. */
-            { stamp: "Q", title: "Can I buy one?",
+            { title: "Can I buy one?",
               line: "Monitor the website for availability. Follow us on social " +
                     "media — those platforms track you, this site does not, and " +
                     "following one out of here is leaving the building.",
               note: "" },
-            { stamp: "Q", title: "Can I try one?",
+            { title: "Can I try one?",
               line: "We need to construct a dynamic virtual interface to the " +
                     "MGK System Portal before we can even consider it — but " +
                     "when we do, the answer is yes: available online, free to " +
@@ -556,10 +586,28 @@ const WBR_TRACKS = [
               note: "" },
             /* [R1 2026-08-06] the house's own passage, imported — see the head
                of this file. The bare address that stood here is gone. */
-            { stamp: "Q", title: "How do I get in touch?",
+            { title: "How do I get in touch?",
               line: CONTACT,
               note: "" },
           ],
+          /* ═══ [R7 2026-08-06] THE HOUSE FAQ TAKES THE BOOTH'S FORMAT ════════
+             MIKE: "the Information Booth IS an FAQ under a better name and
+             keeps that name for UX value. Sub-exhibits carry their own FAQs — a
+             visitor must never have to run back to the lobby. Conform every wing
+             FAQ to the booth's format."
+             SO EVERY QUESTION IS ON THE PAGE AND CLICKING ONE OPENS ITS ANSWER,
+             which is what `/booth` has done since M3 and what four faces in
+             three wings were doing differently.
+             THE "Q" AND "START" STAMPS WENT WITH THE FLAT LIST. A list of
+             questions under a heading reading FREQUENTLY ASKED does not need
+             every row prefixed with the letter Q; the booth prints none.
+             M57's MECHANISM IS UNTOUCHED AND STILL LOAD-BEARING: the held slot
+             below carries the marker in BOTH its title and its line, so
+             `scrubFace` drops the entry whole rather than publishing a question
+             with nothing under it. An accordion makes that MORE important, not
+             less — a question that opens onto silence is worse than one printed
+             above silence. */
+          entriesMode: "faq",
           /* WELCOME's footer, and the FAQ's own [PAPA] behind it. The scrub
              cuts by SENTENCE, so the marked one drops and the line prints. */
           footer: "“Restoration house” is not what we are. Weird.Baby is " +
@@ -646,12 +694,18 @@ const WBR_TRACKS = [
    resolved by subtraction and there is no third constant to declare here. The
    second — "Does it still work?" — stands exactly as described above; he ruled
    on the blurb and said nothing about it, and D1's reading that the portable's
-   Portal sentence has no mainframe equivalent is untouched. */
-const MANUAL_FORMAT = "FORMAT  photographs of the printed pages, not a rendering";
-const MANUAL_NAV = "NAV     microfiche reader — page-turn, fit and 1:1 magnify";
-const REEL_EMPTY_NOTE =
-  "No pages on file. A plate here is a photograph of the printed " +
-  "sheet, edges and margins included.";
+   Portal sentence has no mainframe equivalent is untouched.
+
+   [N3 2026-08-06] AND THREE OF THE FOUR ARE NOW ONE. `MANUAL_FORMAT`,
+   `MANUAL_NAV` and `REEL_EMPTY_NOTE` are DELETED with the faces that said them:
+   the two machine Manual faces became DOCUMENTATION and the document card says
+   the holdings fact in the template's own vocabulary. `MANUAL_NAV` is worth one
+   line on the way out — "microfiche reader — page-turn, fit and 1:1 magnify"
+   described THE RENDERER, which is a subject Doctrine 11 names explicitly, and
+   it survived a doctrine sweep in both rooms at once precisely because hoisting
+   it had made it one string instead of two. A hoist collapses N register rows
+   into one; it does not make the passage right.
+   `FAQ_BUY_ONE` STANDS and is still typed once for both machines. */
 const FAQ_BUY_ONE =
   "No. The shop carries what the shop carries; the machines " +
   "are not stock.";
@@ -785,7 +839,29 @@ const spine = [
           title: "FEED CONTROL",
           subtitle: "MGK-VIIIp",
           panel: {
-            plate: "A-BEAL INSTRUMENT DIV. \u00b7 FEED CONTROL \u00b7 TYPE 8p",
+            /* \u2550\u2550\u2550 [P1 2026-08-06] "INSTRUMENT DIV." IS STRUCK. MIKE: ABEAL is
+               correct canon \u2014 a division of ScrapCo \u2014 but INSTRUMENT DIVISION
+               is DRIFT, and it is the SECOND time the same drift has grown.
+               He struck "ABEAL Instrument Company" off the manual cover on
+               2026-08-05 and it regrew here in a new costume, on a different
+               object, inside a fortnight. A name a maker never had is not a
+               small error on a nameplate: a nameplate is the one object on a
+               machine whose whole job is to say who made it.
+               ABEAL ALONE, unless canon says otherwise. The hyphen went with
+               it \u2014 the wing's own canon spells it ABEAL, and "A-BEAL" was this
+               file's spelling and nowhere else's. */
+            plate: "ABEAL \u00b7 FEED CONTROL \u00b7 TYPE 8p",
+            /* [P2 2026-08-06] THE STAMPED FIELD, AND IT IS EMPTY BECAUSE
+               NOBODY HAS SUPPLIED A NUMBER. Mike's reference for this placard
+               is a bright metal nameplate with black ink laid over it and a
+               space where a serial is HAND-STAMPED \u2014 so the space is his
+               instruction and it is built. What may not happen is Ops striking
+               a number into it: a serial is a specific nobody supplied and a
+               plausible one is Doctrine 12's exact failure. The plate renders
+               the stamped field blank, which is what an unstamped plate looks
+               like, and the number is one line from Mike (OPEN_ACTIONS P-a). */
+            serialLabel: "SER. No.",
+            serial: null,
             drum: {
               label: "FEED",
               sub: "SELECT \u00b7 ONE ARMED",
@@ -823,9 +899,18 @@ const spine = [
                   why: "This feed is not available." },
                 { id: "niac-2", ch: 2, label: "MGK-NIAC", arms: false,
                   why: "This feed is not available." },
-                { id: "standard", ch: 3, label: "STANDARD", arms: true,
-                  line: "The unit as it stands: boots and updates complete, " +
-                        "powered, waiting at the opening prompt." },
+                /* [P3 2026-08-06] THE READOUT IS STRUCK. MIKE, naming the
+                   sentence: "the unit as it stands: boots and updates complete,
+                   powered, waiting at the opening prompt."
+                   It was the panel narrating what the panel already shows —
+                   AT PROMPT is lit, BOOTS + UPDATES DONE is engraved under it,
+                   and the latch says FEED ARMED. Three instruments reporting a
+                   state and then a sentence reporting the three instruments.
+                   Law of Subtraction: nothing is lost that a reader would miss.
+                   `drum.line` IS STILL RENDERED (Exhibit.jsx's `ip-readout`) —
+                   the field is undeclared, not removed, so a future feed that
+                   genuinely needs a readout can declare one. */
+                { id: "standard", ch: 3, label: "STANDARD", arms: true },
                 /* [CS 2026-08-04] `why` IS PRINTED ON THE PANEL \u2014 it is the
                    refusal line under the latch (Exhibit.jsx :1089, :1222). These
                    five read "held \u2014 one entry state (C3)", "held \u2014 awaiting a
@@ -834,11 +919,30 @@ const spine = [
                    undisclosed URL, all shown to whoever rolls the drum. The
                    instrument now says the one thing an instrument says when a
                    position will not arm. */
-                { id: "idling-updated", ch: 4, label: "IDLING, UPD", arms: false,
+                /* \u2550\u2550\u2550 [P5 2026-08-06] THE ENGRAVINGS ARE ENGRAVINGS NOW \u2550\u2550\u2550\u2550\u2550\u2550\u2550
+                   MIKE: one entry WRAPS ("off, first boot") and it ruins the
+                   effect \u2014 and that label makes no sense to a human either.
+                   Every position must be DELIBERATELY OBFUSCATED or DRESSED IN
+                   PERIOD GARB. Nothing merely awkward.
+                   THE DIAGNOSIS IS THAT THREE OF THEM WERE NEITHER. "IDLING,
+                   UPD", "BOOT PLAYBK" and "OFF \u00b7 1ST BOOT" are not engravings
+                   in either register \u2014 they are the `id`s below them, truncated
+                   until they fitted, which is what a filename looks like and
+                   not what a drum looks like. A 1965 selector engraves terse
+                   state words, and it engraves them whole.
+                   THE MEANING DID NOT MOVE, AND THAT IS THE CONSTRAINT. The
+                   `id` is the key the twin reads (`preset` in the URL) and no
+                   id changed, so M33's five engraved reveal levers are exactly
+                   the five levers they were. What changed is the word cut into
+                   the brass: STANDBY is a machine idling after its updates,
+                   COLD START is a boot from cold, FIRST RUN is the unit's first
+                   one. Each is the period term for the state its id names, and
+                   each fits the drum face at one line. */
+                { id: "idling-updated", ch: 4, label: "STANDBY", arms: false,
                   why: "This feed is not available." },
-                { id: "boot-playback", ch: 5, label: "BOOT PLAYBK", arms: false,
+                { id: "boot-playback", ch: 5, label: "COLD START", arms: false,
                   why: "This feed is not available." },
-                { id: "off-first-boot", ch: 6, label: "OFF \u00b7 1ST BOOT", arms: false,
+                { id: "off-first-boot", ch: 6, label: "FIRST RUN", arms: false,
                   why: "This feed is not available." },
                 { id: "last-state", ch: 7, label: "LAST STATE", arms: false,
                   why: "This feed is not available." },
@@ -1061,6 +1165,83 @@ const spine = [
          one menu item the mainframe had and the portable did not, and the
          justification table's only PROPERTY-class entry was written about it.
          Both are gone. Register M59. */
+      /* ═══ [N1/N10 2026-08-06] THE MENU IS RE-ORDERED, ON BOTH MACHINES ═════
+         MIKE: "TECHNICAL SPECIFICATIONS moves to the TOP of the menu" and "the
+         FAQ goes to the BOTTOM."
+         BOTH ALBUMS MOVE, AND THAT IS PARITY DOING ITS JOB RATHER THAN OPS
+         OVERREACHING. `tools/menu-parity.mjs` sets the two machines' track
+         titles against each other AND compares their ORDER; under the absolute
+         rule (REMOTE CONTROL P1) a difference in either is a failure with no
+         written reason available. His instruction is under the MGK-NIAC
+         heading; obeying it on one album alone would fail the gate on the next
+         commit, so the order is one order:
+             TECHNICAL SPECIFICATIONS · IMAGE ARCHIVE · DOCUMENTATION · FAQ
+         THE MIDDLE TWO KEEP THEIR RELATIVE ORDER. He moved the ends; nothing
+         about the middle was ruled on, so nothing about it was decided here. */
+      {
+        id: "firmware",
+        title: "Technical Specifications",
+        videos: [],
+        tags: ["firmware", "source", "ino", "bench", "led", "artifact", "specifications"],
+        /* ═══ [N2 2026-08-06] THIS FACE IS THE ONE SHEET ═══════════════════════
+           MIKE: "remove what the machine is running, the two-generations-of-code
+           note, the no-reading-on-file line, and the output-row picture beside
+           them. THE REST BECOMES A PERIOD-ACCURATE TECHNICAL SPECIFICATION — not
+           the completeness of the manual, but THE ONE SHEET: the thing you grab
+           when you ask what it does technically."
+
+           WHAT WENT, BY NAME, so nothing is quietly absorbed:
+             · the subtitle WHAT THE MACHINE IS RUNNING. The face now takes the
+               unit's name, which is what every other subtitle in this wing does.
+             · the blurb — "two generations of code are on file and both are
+               real… what follows is what the files say about themselves. No
+               reading of them is on file." Three of his four strikes are in
+               that one paragraph.
+             · `output_row.jpg` and its caption. A spec sheet is not illustrated;
+               that is most of what makes it a spec sheet. The photograph is not
+               deleted from anywhere — it is a tile on the wall one row down.
+             · THE FOUR PROSE ENTRIES, which are the shape this is being
+               converted OUT of. Every FACT in them survives as a row below; what
+               does not survive is the builder's own line about the power draw
+               ("If I make too bright at once the Nano will shut down") — a real
+               quotation and the best sentence on the old face, with no row on a
+               spec sheet to live in. It is named in OPEN_ACTIONS (N-b) rather
+               than lost, because the Law of Subtraction is a reason to delete
+               and never a reason to delete quietly.
+
+           NOT ONE FACT BELOW IS NEW. Every figure, rule and caveat was already
+           on this face; the change is FORM. In particular the brightness cap
+           keeps the caveat it arrived with — 32 is a limit measured on a BENCH
+           board and the flagship targets an R4 — because dropping the caveat
+           while keeping the number is how a spec sheet starts lying.
+
+           AND IT HAS NO PICTURE, which is a live conflict with the standing
+           Visual Hook Law and is his own instruction. It is the third face in
+           this wing left without one deliberately (M29, M48 are the others) and
+           it is register row N-c rather than a silence. */
+        face: {
+          kind: "text",
+          title: "TECHNICAL SPECIFICATIONS",
+          subtitle: "MGK-NIAC",
+          lines: [
+            "BOARD    Uno R4 WiFi",
+            "PROGRAM  v0.1 · 2026-02-23 · 1,385 lines",
+            "STATUS   baseline — pre-thermal-validation",
+            "BENCH    8 single-subsystem sketches, January 2026",
+            "MATRIX   8 × 16 — seven rows visible, the eighth wired, driven and behind something",
+            "BAR      1 × 64, addressed as a single chain",
+            "OUTPUTS  2 matrix chains · 2 bar chains · 3 servos",
+            "LAMPS    all-at-once flashes capped at 32, a quarter of standard — a bench limit on a bench board",
+            "DECLARED five rules, in the header, above the first include",
+            "RULE 1   a numerical envelope",
+            "RULE 2   a ceiling of eight core states",
+            "RULE 3   mutual exclusion",
+            "RULE 4   a reveal no faster than twelve seconds",
+            "RULE 5   no adaptive learning — the machine is forbidden, in writing, from getting to know you",
+          ],
+          footer: "MGK-NIAC · TECHNICAL SPECIFICATIONS",
+        },
+      },
       {
         /* ==== THE IMAGE ARCHIVE, AND THE THING IT IS BUILT NOT TO SHOW =====
            [N1 2026-08-04] MIKE STRUCK "THE MORGUE". A3 deliberately printed
@@ -1069,19 +1250,58 @@ const spine = [
            it was made. IMAGE ARCHIVE is the title and the subtitle drops back
            to naming the unit, which is what every other subtitle in this wing
            does. Register row M6 closes.
-           THE PLATES KEEP THEIR NAME, as A3 already ruled: a plate is the
-           object, the archive is the room, and four other faces refer to
-           plates by name.
 
            This is the VIIIp plate wall's renderer, unchanged, pointed at a set
            that has been cropped before it ever reached the repository. Same
            glued-up wall, same tilt, same tap-to-open reader.
-           THE TOMBSTONE SAYS THE QUIET PART. A museum that withholds without
-           saying so is not metering a revelation, it is just short of pictures;
-           the "Frame" row is there so a visitor knows the absence is authored.
            CAPTIONS ARE WHAT THE PHOTOGRAPH SHOWS, in the wing's own register —
            the rule the VIIIp wall set. No caption below interprets, dates the
-           OBJECT, or names a donor part. */
+           OBJECT, or names a donor part.
+
+           ═══ [N4 2026-08-06] THE LEAD-IN AND THE TOMBSTONE ARE BOTH STRUCK ═══
+           MIKE: "strike the 'five plates of the mainframe' block and the
+           SUBJECT / STATE / PLATES / FRAME register beside the images. THE FORM
+           HAS MERIT but it does not belong here. A very simple lead-in to what
+           is in the archive is welcome IF ONE IS GENUINELY NEEDED."
+           THERE IS NO LEAD-IN, AND THAT IS THE ANSWER TO HIS "IF". A wall of
+           photographs under a heading reading IMAGE ARCHIVE, with a row of named
+           groupings above it each carrying its own count, has already said what
+           is in the archive — twice. A sentence saying it a third time is the
+           second object saying what the first already said (Doctrine 16).
+           THE TOMBSTONE COST SOMETHING AND IT IS NAMED: its `Frame` row was the
+           only place that told a visitor the withholding was AUTHORED, and its
+           `Rights` row was the only statement on this wall that the photographs
+           are ours. Both are register rows (N-d) rather than silences. Its
+           `Plates` row was a COUNT, which the groupings above now carry live —
+           a hand-typed count beside a wall is the defect class W1 and D3c both
+           paid for, so that one is not a loss at all.
+           THE TWIN ON THE PORTABLE'S WALL WENT IN THE SAME EDIT. One face type,
+           appearing twice; striking one copy is how the same object ends up in
+           two forms in two rooms, which is the defect Doctrine 17 is named for.
+           And it closes M25 by subtraction — the "before power" claim that
+           contradicted a lit plate was a tombstone row.
+
+           ═══ [N8 2026-08-06] THE UNIT NOUN IS THE PHOTOGRAPH ═════════════════
+           MIKE: "PLATES becomes PHOTOGRAPHS or IMAGES — propose and use the
+           best." IT IS PHOTOGRAPHS, for three reasons and the third is the one
+           that decides it.
+             · PLATE IS TRADE SLANG, and this wing has retired a piece of trade
+               slang before on exactly this reasoning: THE MORGUE went at N1 and
+               "a house that has just retired one piece of trade slang does not
+               keep two more" is this file's own sentence about it.
+             · IMAGES IS TAUTOLOGICAL HERE. "Five images" in the IMAGE ARCHIVE
+               is the room's name counted back at you; it carries no information
+               the heading has not already given.
+             · PHOTOGRAPH SAYS WHAT THE OBJECT IS. These are photographs — not
+               scans, not renders, not drawings — and the distinction is
+               load-bearing everywhere in this wing (B8's whole ruling on the
+               manual is photographs-not-renderings, and P2 struck a plate for
+               being a render). A word that keeps that distinction alive is
+               worth more than one that blurs it.
+           THE FOOTER TAKES THE WING'S STANDARD SIGN-OFF. It read "Five plates ·
+           Weird.Baby Robots" — a count and a house name, which Mike called not
+           useful and which was also a second hand-typed count. Every other face
+           in this wing signs off UNIT · OBJECT, so this one does too. */
         id: "plates",
         title: "Image Archive",
         videos: [],
@@ -1090,119 +1310,78 @@ const spine = [
           kind: "text",
           title: "IMAGE ARCHIVE",
           subtitle: "MGK-NIAC",
-          /* [N2] this wing calls its images plates; the wall itself is generic
-             and defaults to "images". Read only for a stowed shelf's count. */
-          archiveUnit: { one: "plate", many: "plates" },
-          blurb:
-            "Five plates of the mainframe: the machine entire, and four " +
-            "details cut at the bars — the core, a lit column, the output row " +
-            "at the base, and the whole interior in trouble.",
-          tombstone: [
-            { k: "Subject", v: "MGK-NIAC, on the bench" },
-            { k: "State", v: "Built and powered" },
-            { k: "Plates", v: "Five, cropped from four photographs" },
-            { k: "Frame", v: "One plate carries the whole cabinet; four are cut at the bars" },
-            { k: "Rights", v: "Ours. Photographed here, cropped here." },
+          archiveUnit: { one: "photograph", many: "photographs" },
+          /* ═══ [N9 2026-08-06] THE GROUPINGS ═════════════════════════════════
+             MIKE: "build presets that filter the list into groupings which,
+             viewed together and IN THAT ORDER, give a sense of satisfaction —
+             not literal stories, and Mike will not be writing them. The last few
+             presets chunk it coarsely for completists; the VALUE is in the
+             curated ones."
+             THE ORDER IS THE ARC AND IT IS THE ONLY THING AUTHORED HERE: walk up
+             to the machine, then go into the cage, then watch it run and then
+             watch it go wrong. Every grouping is a subset of the wall below and
+             every LABEL is read off the tiles' own captions — the curation is
+             the CUT and the SEQUENCE, not a new claim about any photograph.
+             THE COARSE ONE IS LAST, per his instruction, and it is this wall's
+             own everything. IT IS NOT "all NIAC, all VIIIp, everything": those
+             three would span both machines, and this album's archive is the
+             mainframe's. Whether the wing's two archives should become one room
+             with one set of groupings is a design call and it is his —
+             OPEN_ACTIONS N-e. */
+          presets: [
+            { id: "whole", label: "The whole cabinet", tiles: [
+              { img: "/robots/reference/mgk-viii/cabinet_whole.jpg",
+                href: "/robots/reference/mgk-viii/cabinet_whole.jpg",
+                label: "The cabinet, whole — lit core, bar bank, both feet",
+                date: "MAR 2021" },
+            ] },
+            { id: "bars", label: "Through the bars", tiles: [
+              { img: "/robots/reference/mgk-viii/core_helical.jpg",
+                href: "/robots/reference/mgk-viii/core_helical.jpg",
+                label: "The core, through the cage bars — warm flanks either side",
+                date: "MAR 2021" },
+              { img: "/robots/reference/mgk-viii/column_lit.jpg",
+                href: "/robots/reference/mgk-viii/column_lit.jpg",
+                label: "A lit column behind the bars, and the cabinet's edge",
+                date: "MAR 2021" },
+            ] },
+            { id: "running", label: "Running, and in trouble", tiles: [
+              { img: "/robots/reference/mgk-viii/output_row.jpg",
+                href: "/robots/reference/mgk-viii/output_row.jpg",
+                label: "The output row — the red bar bank at the base, mid-pattern",
+                date: "MAR 2021" },
+              { img: "/robots/reference/mgk-viii/core_meltdown.jpg",
+                href: "/robots/reference/mgk-viii/core_meltdown.jpg",
+                label: "The whole interior in red-orange, the core glowing like an element",
+                date: "MAR 2021" },
+            ] },
+            { id: "all", label: "Every photograph", tiles: [
+              { img: "/robots/reference/mgk-viii/cabinet_whole.jpg",
+                href: "/robots/reference/mgk-viii/cabinet_whole.jpg",
+                label: "The cabinet, whole — lit core, bar bank, both feet",
+                date: "MAR 2021" },
+              { img: "/robots/reference/mgk-viii/core_helical.jpg",
+                href: "/robots/reference/mgk-viii/core_helical.jpg",
+                label: "The core, through the cage bars — warm flanks either side",
+                date: "MAR 2021" },
+              { img: "/robots/reference/mgk-viii/column_lit.jpg",
+                href: "/robots/reference/mgk-viii/column_lit.jpg",
+                label: "A lit column behind the bars, and the cabinet's edge",
+                date: "MAR 2021" },
+              { img: "/robots/reference/mgk-viii/output_row.jpg",
+                href: "/robots/reference/mgk-viii/output_row.jpg",
+                label: "The output row — the red bar bank at the base, mid-pattern",
+                date: "MAR 2021" },
+              { img: "/robots/reference/mgk-viii/core_meltdown.jpg",
+                href: "/robots/reference/mgk-viii/core_meltdown.jpg",
+                label: "The whole interior in red-orange, the core glowing like an element",
+                date: "MAR 2021" },
+            ] },
           ],
-          /* [A4 2026-08-04] THE ARCHIVE STACKS IN SPREADS, NEWEST AT THE TOP.
-             MIKE: "images stack in albums BY RECORD NUMBER; the LATEST SPREAD
-             DISPLAYS AT TOP (frictionless newest, everything older neatly
-             stowed within reach)."
-             NO RECORD NUMBER IS DECLARED ON EITHER SPREAD, and that is not an
-             oversight — THIS MUSEUM DOES NOT HOLD A RECORD NUMBER FOR ANY OF
-             THESE PHOTOGRAPHS. Assigning one would be a specific nobody
-             supplied (Doctrine 12), so the `no` field is simply absent and the
-             renderer prints nothing where it would go. The order therefore
-             falls to the order authored here, which is newest first; the day a
-             number is known it is one field per spread and the stack sorts
-             itself. The gap is question A4 in docs/OPEN_ACTIONS.md.
-             THE HEADINGS ARE THE TILES' OWN DATES and nothing else — no "on the
-             bench", no "in the workshop". Those phrases are in this file, but
-             they describe SOME of the plates in each group and applying them to
-             all of a group would be a claim about photographs nobody made.
-             THE DATE IS PRINTED TWICE ON PURPOSE — once on the shelf, once on
-             each print. The tile keeps its `date` because the READER shows it
-             (RobotsExhibitFlow's caption line is `title · date · frame n of m`)
-             and a print that leaves the shelf has to carry its own date.
-
-             ═══ [R4 2026-08-05] AND THIS WALL IS NOW ONE UNHEADED SPREAD.
-             Six of the eight plates were the ROBOT and every one of them is off
-             the wall under Mike's canon — the mainframe is the subject and the
-             figure stays out of frame. What went, by name: `head_oblique`,
-             `chest_grille`, `limbs_lower`, `torso_unfinished`, `feet_plinth`,
-             `slot_mockup`, plus `bench_power`, which is a bench shot with the
-             robot's own feet standing in it. All seven are REAL PHOTOGRAPHS
-             THIS MUSEUM OWNS and none is deleted from disk — the same call N1
-             made on `parts_drawer.jpg` — but they are unreferenced now and
-             that is a register row, not a silence.
-             THREE PLATES CAME THE OTHER WAY, from the robots repo's own culled
-             set at `robots/mgk-viii/plates/2021-03-19/`: the core, the output
-             row and the meltdown. Mike culled that set himself in August 2026
-             and their crops are governed by the same obfuscation law. Their
-             labels below are the robots repo's own reading of what each frame
-             shows, carried across rather than re-written here.
-             THE FEBRUARY 2013 SPREAD IS GONE WITH ITS THREE PLATES, and it took
-             the only stowed shelf in the museum with it — this was the one wall
-             anywhere with more than one spread, so the mechanism N2 built is
-             now exercised by nothing. That is C29 getting worse, and it is a
-             register row rather than a thing absorbed here.
-             THE HEAD GOES TOO. One spread with a shelf label is furniture, and
-             every tile already carries the same date on its own print. */
-          collage: [
-            /* [P7 2026-08-05] THE FIRST PHOTOGRAPH OF THIS MACHINE WHOLE, and
-               the wall leads with it. MIKE: "capture THE ENTIRE MAINFRAME (the
-               heater) — the whole cabinet in frame, the robot still out of it."
-               Cut from the same 2021 source the other four come from, at the
-               cabinet's own bounding box. The robot is on the same bench and is
-               not in this frame: the obfuscation law's subject was always the
-               figure, and it is untouched. */
-            { img: "/robots/reference/mgk-viii/cabinet_whole.jpg",
-              href: "/robots/reference/mgk-viii/cabinet_whole.jpg",
-              label: "The cabinet, whole — lit core, bar bank, both feet",
-              date: "MAR 2021" },
-            { img: "/robots/reference/mgk-viii/core_helical.jpg",
-              href: "/robots/reference/mgk-viii/core_helical.jpg",
-              label: "The core, through the cage bars — warm flanks either side",
-              date: "MAR 2021" },
-            { img: "/robots/reference/mgk-viii/column_lit.jpg",
-              href: "/robots/reference/mgk-viii/column_lit.jpg",
-              label: "A lit column behind the bars, and the cabinet's edge",
-              date: "MAR 2021" },
-            { img: "/robots/reference/mgk-viii/output_row.jpg",
-              href: "/robots/reference/mgk-viii/output_row.jpg",
-              label: "The output row — the red bar bank at the base, mid-pattern",
-              date: "MAR 2021" },
-            { img: "/robots/reference/mgk-viii/core_meltdown.jpg",
-              href: "/robots/reference/mgk-viii/core_meltdown.jpg",
-              label: "The whole interior in red-orange, the core glowing like an element",
-              date: "MAR 2021" },
-          ],
-          footer: "Five plates · Weird.Baby Robots",
-          /* THE MARKER SCRUB CUTS BY SENTENCE, NOT BY STRING (P5), so whatever
-             is written outside the [PAPA] sentence is VISITOR COPY and has to
-             read like it. The first draft left "the uncropped photographs are
-             on file and one line of data would publish any of them" standing on
-             the page — true, and the register of a maintainer talking to
-             another maintainer. The operational half now sits behind the
-             marker; what survives to the wall is the one thing a visitor
-             actually needs to know about the crop. */
-          /* [CS 2026-08-04] the survivor printed on the wall was "The
-             withholding is authored, and it is not a shortage of photographs."
-             — the museum annotating its own editorial decision, in the museum's
-             own vocabulary for editorial decisions. The FACT it was defending is
-             already on the tombstone four rows up ("Frame — Withheld: no plate
-             carries the whole unit"), which is a holdings statement and stays.
-             The whole string is now one marked sentence and renders nothing. */
-          /* [D3a 2026-08-06] AND THAT LAST LINE HAD STOPPED BEING TRUE, WHICH IS
-             M53's OWN POINT ARRIVING ON A SECOND FACE. A later edit split the
-             note into two sentences and put the marker in only the first, so
-             the scrubber kept the second and the wall printed "The uncropped
-             originals are all on file and any of them can be published from
-             this file alone." — a maintainer talking to another maintainer,
-             which is the exact register the comment above says was removed.
-             Mike struck the WAL poster's twin of this today; the rule he was
-             applying is the rule, so it is applied here in the same pass.
-             ONE MARKED SENTENCE. A `papa` field is not a comment. */
+          footer: "MGK-NIAC · IMAGE ARCHIVE",
+          /* [D3a 2026-08-06] ONE MARKED SENTENCE. A `papa` field is not a
+             comment — an earlier edit split this note in two and put the marker
+             in only the first half, and the wall printed the second. */
           papa: "[PAPA] — the cabinet is shown whole now and the robot is " +
                 "not, how much further that goes and when, and that the " +
                 "uncropped originals are all on file and any of them can be " +
@@ -1212,161 +1391,65 @@ const spine = [
       {
         /* ═══ [P1 2026-08-05] PARITY IS ABSOLUTE, AND THIS IS THE ROW THAT
            COSTS SOMETHING ═════════════════════════════════════════════════
-           MIKE OVERRULES THE OPS RULING OF THE PREVIOUS ROUND, and the reversal
-           is recorded plainly rather than absorbed. P1 (the parity ruling,
-           2026-08-05) held that a HOLDINGS GAP RESOLVES a divergence — "NIAC's
-           menu shows what NIAC has", and forcing parity would print a manual
-           face with no manual behind it. THAT IS REVERSED. The two machines
-           carry THE SAME MENU ITEMS, no more and no less; a divergence is now a
-           FAILURE and the holdings-gap justification no longer resolves one.
-
-           HIS REASON IS ALSO THE EXCEPTION'S REASON. NIAC will run on the
-           Portal on channels 1 and 2, and it will have a manual. These rows are
-           not doors onto rooms nobody intends to build — they are the shelf the
+           MIKE OVERRULED THE OPS RULING OF THE PREVIOUS ROUND: the two machines
+           carry THE SAME MENU ITEMS, no more and no less; a divergence is a
+           FAILURE and a holdings gap no longer resolves one.
+           HIS REASON IS ALSO THE EXCEPTION'S REASON. NIAC will run on the Portal
+           on channels 1 and 2, and it will have documents. These rows are not
+           doors onto rooms nobody intends to build — they are the shelf the
            material lands on. So THE STUB LAW IS OVERRIDDEN HERE AND ONLY HERE,
-           for the mainframe's Manual and FAQ rows, and the reason is his: A ROW
-           IS A PROMISE ONLY WHEN NOTHING IS COMING, AND THESE ARE COMING.
+           and the reason is his: A ROW IS A PROMISE ONLY WHEN NOTHING IS COMING,
+           AND THESE ARE COMING.
+           WHAT THE EXCEPTION DOES NOT LICENSE: DOCTRINE 12 STILL BINDS EVERY
+           WORD BELOW. The row says what is NOT held. It states no date, no
+           section list, no page count and no schedule.
 
-           WHAT THE EXCEPTION DOES NOT LICENSE, because an exception with no
-           edge is a repeal. DOCTRINE 12 STILL BINDS EVERY WORD BELOW. The row
-           says what is NOT held. It states no date, no section list, no page
-           count, no schedule and no promise, because none of those was supplied
-           and a plausible one is the failure Doctrine 12 exists for. "Say
-           plainly what is not there yet" is the whole permission. */
+           ═══ [N3 2026-08-06] "THE MANUAL" IS NOW "DOCUMENTATION" ═════════════
+           MIKE: "a viewer free to display any document, with the manual inside
+           it as a SELECTABLE ENTITY that opens on the screen when clicked.
+           Strike everything currently on that face except what we are actually
+           holding. THE FORMAT MUST BE A TEMPLATE and every documentation page
+           must look the same — check first whether an existing template already
+           serves this; do not create new machinery we do not need."
+           IT DID, AND NOTHING NEW WAS BUILT. L6's document card — title,
+           provenance, a STATE, and a scan that opens in this wing's own reader —
+           is a documentation template with another name on it. It was LIFTED OUT
+           of the Record's renderer into `DocList` and is now called from two
+           places with one markup (Exhibit.jsx). One field was added, `plates`,
+           because a document with more than one page needs an ordered set of
+           page images and the museum already has that shape.
+           THE MAINFRAME HOLDS NO DOCUMENTS AT ALL, so this face carries no list
+           and says so in one sentence. That is the whole face, and it is the
+           honest state of a shelf with nothing on it. */
         id: "manual",
-        title: "The Manual",
+        title: "Documentation",
         videos: [],
-        tags: ["manual", "niac", "mainframe", "opa"],
+        tags: ["manual", "documentation", "niac", "mainframe", "opa"],
         face: {
           kind: "plate",
-          title: "THE OWNER'S MANUAL",
+          title: "DOCUMENTATION",
           subtitle: "MGK-NIAC",
-          blurb:
-            "No manual for the mainframe is held here. The portable arrived " +
-            "with one — ABEAL 8P-OMI-1, incomplete, assembled out of copies " +
-            "caught at different stages — and nothing of the kind has reached " +
-            "this museum for the cabinet.",
-          lines: [
-            MANUAL_FORMAT,
-            MANUAL_NAV,
-            "PLATES  none on file",
-          ],
-          /* THE READER IS THE SAME READER. `reel` is the microfiche transport
-             the portable's manual face already declares; an empty reel prints
-             its note and nothing else, which is exactly what this row is for.
-             THE FACE CARRIES NO `entries`, and that is the difference between
-             this row and the portable's: that one has a contents page because
-             its sections are attested. This one has none, and inventing six
-             section headings to fill the shape would be the thing the exception
-             above explicitly does not permit. */
-          reel: {
-            label: "MICROFICHE · READER",
-            plates: [],
-            note: REEL_EMPTY_NOTE,
-          },
-          footer: "MGK-NIAC · THE OWNER'S MANUAL",
-        },
-      },
-      {
-        /* [N1 2026-08-04] "THE FIRMWARE" IS NOW "TECHNICAL SPECIFICATIONS".
-           MIKE: "Robots wing: The Firmware becomes TECHNICAL SPECIFICATIONS."
-           TWO FACES CARRIED THAT NAME, not one — this one on MGK-VIII and the
-           artifact-slot face on MGK-VIIIp — so both are renamed. Leaving either
-           would keep the retired name on the glass, which is the one outcome
-           the instruction cannot have meant. The SUBTITLES are what tell them
-           apart and they are untouched: this face is WHAT THE MACHINE IS
-           RUNNING (a board, an envelope, four output chains, a brightness cap),
-           the other is THE MACHINE'S OWN MIND, ON FILE (two source trees, named
-           as they sit). If he meant only one of the two, it is one string back.
-           THE ARTIFACT KEEPS ITS NAME. Only the FACE was renamed — the firmware
-           is still called the firmware in every sentence that talks about it,
-           the same way A3's plates survived the archive being renamed around
-           them. A later sweep should not read this as licence to hunt the word. */
-        id: "firmware",
-        title: "Technical Specifications",
-        videos: [],
-        tags: ["firmware", "source", "ino", "bench", "led", "artifact", "specifications"],
-        face: {
-          kind: "text",
-          title: "TECHNICAL SPECIFICATIONS",
-          subtitle: "WHAT THE MACHINE IS RUNNING",
-          /* [R4 2026-08-05] THE OUTPUT ROW, AND IT REPLACES A BREADBOARD.
-             The still was `matrix_lit.jpg` — a green LED matrix lit on a
-             breadboard, February 2013 — chosen because it was the one picture
-             in the set of SOFTWARE DOING SOMETHING. It is not the mainframe. It
-             does not leak the robot either, so it broke no rule until Mike's
-             canon made this album's imagery the CABINET, at which point a
-             breadboard on a bench is neither the machine nor the egg.
-             The bar bank at the cabinet's base is both: it is the mainframe's
-             own output device and it is caught mid-pattern, which is software
-             running on the object this face is about. It is also literally the
-             subject of the 1 × 64 entry three rows down, which the breadboard
-             never was.
-             THE DATE CAVEAT SURVIVES THE SWAP AND IS STILL STATED IN THE
-             CAPTION: this frame is March 2021 and the flagship firmware below
-             is February 2026, so the caption dates the photograph rather than
-             letting the proximity imply it is the same code.
-             `matrix_lit.jpg` is now referenced by nothing — a real photograph,
-             kept on disk, added to the orphan register. */
-          still: "/robots/reference/mgk-viii/output_row.jpg",
-          stillCaption: "The output row, mid-pattern — March 2021.",
-          blurb:
-            "Two generations of code are on file and both are real: eight " +
-            "single-subsystem bench sketches, and the flagship that supersedes " +
-            "them. What follows is what the files say about themselves. No " +
-            "reading of them is on file.",
-          lines: [
-            "FLAGSHIP   v0.1 · 2026-02-23 · 1,385 lines · Uno R4 WiFi",
-            "STATUS     baseline — pre-thermal-validation",
-            "BENCH      8 single-subsystem sketches, January 2026",
-            "OUTPUTS    2 matrix chains · 2 bar chains · 3 servos",
-          ],
-          entries: [
-            { stamp: "ENFORCES", title: "Five rules, declared in the header",
-              line: "A numerical envelope. A ceiling of eight core states. " +
-                    "Mutual exclusion. A reveal no faster than twelve seconds. " +
-                    "And no adaptive learning — the machine is forbidden, in " +
-                    "writing, from getting to know you.",
-              note: "printed above the first include, before any code" },
-            { stamp: "8 × 16", title: "Only seven rows are visible",
-              line: "The matrix is addressed as eight rows of sixteen and seven " +
-                    "of those rows are all you can ever see on the finished " +
-                    "machine. The eighth is wired, driven, and behind something.",
-              note: "the note is in the sketch, in the builder's own hand" },
-            { stamp: "1 × 64", title: "The bar is one long chain",
-              line: "Sixty-four in a single row, addressed as a line rather " +
-                    "than as a column of anything — whatever it reads as when " +
-                    "it is lit, the code underneath it is one strip.",
-              note: "" },
-            { stamp: "32", title: "The brightness the power supply permits",
-              line: "All-at-once flashes are capped at a quarter of the standard " +
-                    "level, for the least mysterious reason in this entire wing: " +
-                    "“If I make too bright at once the Nano will shut down " +
-                    "due to power draw.”",
-              note: "a bench limit on a bench board — the flagship targets an R4" },
-          ],
-          entriesMode: "list",
-          footer: "MGK-NIAC · TECHNICAL SPECIFICATIONS",
+          docsEmpty:
+            "No document for the mainframe is held here. The portable arrived " +
+            "with a manual — ABEAL 8P-OMI-1, incomplete, assembled out of " +
+            "copies caught at different stages — and nothing of the kind has " +
+            "reached this museum for the cabinet.",
+          footer: "MGK-NIAC · DOCUMENTATION",
         },
       },
       {
         /* ═══ [P1 2026-08-05] THE MAINFRAME'S OWN FAQ ══════════════════════
-           The second of the two rows parity requires, and unlike the Manual it
-           did NOT need the stub-law exception in the end: every answer below
-           was already asserted in this file about these machines, so nothing
-           here is written to fill a shape.
-             · "Does it still work?" is the portable FAQ's own answer, which
-               says BOTH units power on and run their own firmware — a claim
-               about the pair, printed until now on only one of them.
-             · "Is the mainframe on the Portal?" is read off the feed drum,
-               where two channels are engraved for this machine and neither
-               arms. A visitor can check it in the next album.
-             · "Can I buy one?" is the portable FAQ's answer verbatim; it was
-               written about the machines, plural, from the day it shipped.
-           THE STILL IS `column_lit.jpg`, WHICH THE NAME'S DELETION FREED. It
-           was that face's plate and would otherwise have become the wing's
-           fourth orphaned photograph this round; it is still a tile on the wall
-           above, the same double duty the bezel does on the portable. */
+           The second of the two rows parity requires, and unlike Documentation
+           it did NOT need the stub-law exception: every answer below was already
+           asserted in this file about these machines.
+           THE STILL IS `column_lit.jpg`, which the deletion of THE NAME freed.
+           It is still a tile on the wall above — the same double duty the bezel
+           does on the portable.
+           [R7/N10 2026-08-06] IT IS AN ACCORDION NOW AND IT SITS AT THE BOTTOM
+           OF THE MENU. Both are Mike's, and the format is the Information
+           Booth's, which he ruled is the established one. The "Q" stamps went
+           with the flat list: a list of questions under a heading reading FAQ
+           does not need every row prefixed with the letter Q. */
         id: "niac-faq",
         title: "FAQ",
         videos: [],
@@ -1377,36 +1460,24 @@ const spine = [
           subtitle: "ABOUT THIS MACHINE",
           still: "/robots/reference/mgk-viii/column_lit.jpg",
           stillCaption: "A lit column behind the cage bars.",
-          /* [R2 2026-08-06] M67 CLOSED BY DELETION, NOT BY MERGE. Mike:
-             "BOTH FAQ intro blurbs are DELETED. A line introducing a list of
-             questions is the page explaining what the page is." The divergence
-             D1 reported (this face said "the cabinet", the portable's said
-             "the unit" and also said "actually") is resolved by there being no
-             sentence left to diverge — the stronger form, because two matching
-             blurbs would still have been two copies to keep in step.
-             THE FACE IS TITLE, PLATE AND QUESTIONS NOW. Nothing is lost that a
-             reader would miss: "the questions that get asked" is what a list of
-             questions under the heading FAQ already is. Law of Subtraction. */
           entries: [
-            { stamp: "Q", title: "Does it still work?",
+            { title: "Does it still work?",
               line: "Yes. Both units power on and run their own firmware.",
               note: "" },
-            { stamp: "Q", title: "Is the mainframe on the Portal?",
+            { title: "Is the mainframe on the Portal?",
               line: "Not yet. Two channels are engraved for it on the feed " +
                     "drum and neither of them arms.",
               note: "" },
-            { stamp: "Q", title: "Can I buy one?",
+            { title: "Can I buy one?",
               line: FAQ_BUY_ONE,
               note: "" },
           ],
-          entriesMode: "list",
+          entriesMode: "faq",
           footer: "MGK-NIAC · FAQ",
         },
       },
       /* [N1 2026-08-04] "THE PARTS" IS REMOVED. Mike's instruction, and it is a
-         removal rather than a rewrite: the whole track and its face are gone,
-         so MGK-VIII now runs MGK-NIAC · Image Archive · Technical
-         Specifications.
+         removal rather than a rewrite: the whole track and its face are gone.
          WHAT LEFT WITH IT, NAMED RATHER THAN QUIETLY DROPPED, because two of
          the three entries were observations read straight off the photographs
          and are not recoverable from anything else on the wing: the METHOD row
@@ -1421,8 +1492,8 @@ const spine = [
          is now referenced by nothing — it was this face's plate and appears on
          no wall. It is a real photograph the museum owns, so it is NOT deleted
          on Ops' word and it is NOT re-homed onto the Image Archive either, which
-         would be adding a plate nobody asked for to a wall whose tombstone
-         counts them. It is a register row for Mike. */
+         would be adding a photograph nobody asked for to a wall whose groupings
+         count them. It is a register row for Mike. */
     ],
   },
   {
@@ -1491,231 +1562,10 @@ const spine = [
     viewerPosterCaption:
       "MGK-VIIIp −02 “The Informer”, front and top, as received.",
     tracks: [
-      /* ==== [P23 2026-08-02] THE PLATE WALL ==================================
-         MIKE: "All Weird.Baby ROBOTS pages need beautification and better text
-         — a pass raising them toward the WAL/collage quality bar (structure and
-         visuals)."
-         THE WING'S PROBLEM WAS NEVER ITS WRITING. It was that a wing about a
-         PHYSICAL OBJECT was made entirely of words: three faces of register
-         lines and log entries, and eight real photographs of the machine
-         sitting unused in `public/robots/reference/photos` — one of them
-         serving as a poster nobody sees unless they land on the album with
-         nothing selected.
-         SO THE PHOTOGRAPHS COME OUT OF THE DRAWER. This is the WAL collage
-         renderer, unchanged, pointed at the museum's own plates instead of at
-         YouTube posters: the same glued-up wall, the same tilt, the same
-         shadow, the same tap-to-open — which is exactly what "belongs beside
-         the collage wall" means when the bar is set by that wall.
-         THEY ARE OUR OWN IMAGES on our own origin, so there is no rights
-         question here at all — the one that governs WAL's tiles does not
-         arise. Captions are what the photograph SHOWS, in the wing's own
-         register; the interpretation stays on the faces that already carry it.
-         ================================================================== */
-      {
-        id: "plates",
-        title: "Image Archive",
-        videos: [],
-        tags: ["plates", "photographs", "viiip", "reference"],
-        face: {
-          kind: "text",
-          title: "IMAGE ARCHIVE",
-          subtitle: "MGK-VIIIp",
-          archiveUnit: { one: "plate", many: "plates" },
-          /* [A4 2026-08-04] AND THIS ONE TAKES NO SPREADS, WHICH IS THE POINT
-             OF THE RULE RATHER THAN AN EXCEPTION TO IT. Nine plates, one
-             sitting, no record number and NO DATE DECLARED ON ANY OF THEM —
-             the `date` field on these tiles carries a slot label (FRONT,
-             SCREEN, BEZEL) because that is what was known when they were
-             written. There is nothing to stack them BY, so they stay one
-             unheaded wall and render exactly the DOM they rendered before.
-             A shelf label on a one-shelf archive is furniture. */
-          /* [M11] register, not facts: the nine plates and what each shows are
-             unchanged; what changed is that the sentence now says why the
-             photographs were taken before anything was touched. */
-          blurb:
-            "Photographed the way you photograph something before you are " +
-            "allowed to touch it — front, glass, base, the switch round the " +
-            "back, and the pair of them side by side. Nine plates of a machine " +
-            "that had been sitting in the dark since before the moon landing.",
-          tombstone: [
-            { k: "Subject", v: "MGK-VIIIp −02 “The Informer”, and its twin" },
-            { k: "State", v: "As received — before cleaning, before power" },
-            { k: "Plates", v: "Nine, all held by this museum" },
-            { k: "Rights", v: "Ours. Photographed here, printed here." },
-          ],
-          collage: [
-            { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
-              href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
-              label: "The pair, front and top, as received", date: "FAMILY SHOT" },
-            { img: "/robots/reference/photos/front_full.png",
-              href: "/robots/reference/photos/front_full.png",
-              label: "The front, whole", date: "FRONT" },
-            { img: "/robots/reference/photos/front_screen.png",
-              href: "/robots/reference/photos/front_screen.png",
-              label: "The front glass, lit", date: "SCREEN" },
-            { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
-              href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
-              label: "The bezel around the glass", date: "BEZEL" },
-            { img: "/robots/reference/photos/top_monitor.png",
-              href: "/robots/reference/photos/top_monitor.png",
-              label: "The top monitor", date: "TOP" },
-            { img: "/robots/reference/photos/monitor_base.png",
-              href: "/robots/reference/photos/monitor_base.png",
-              label: "The base it stands on", date: "BASE" },
-            { img: "/robots/reference/photos/unit_new_base.png",
-              href: "/robots/reference/photos/unit_new_base.png",
-              label: "The unit on its new base", date: "BASE, NEW" },
-            { img: "/robots/reference/photos/rear_power_switch.png",
-              href: "/robots/reference/photos/rear_power_switch.png",
-              label: "The power switch, round the back", date: "REAR" },
-            { img: "/robots/art/viiip.png",
-              href: "/robots/art/viiip.png",
-              label: "The cover plate — the glass carries the BIOS beat",
-              date: "COVER" },
-          ],
-          footer: "Nine plates · Weird.Baby Robots",
-          papa: "[PAPA] — the caption wording, and whether any plate earns a " +
-                "face of its own.",
-        },
-      },
-      {
-        id: "manual",
-        title: "The Manual",
-        videos: [],
-        tags: ["manual", "plate", "1965", "scan", "opa"],
-        /* HONEST v1: a face that says what the object is and what state it is
-           in. No plates yet — the scans are Mike's to make — and no
-           "coming soon", because a face that describes the artifact is not a
-           promise, it is a catalogue entry.
-
-           ==== [B8 2026-08-02] THE MANUAL BECOMES REAL. MIKE'S RULING. =====
-           "The owner's manual must be ACTUAL SCANS/PHOTOGRAPHS of the ACTUAL
-           instruction manual, accessed via microfiche-class technology —
-           immersion, the real deal, NOT 'in the style of'."
-           THE CONSEQUENCE IS A PIPELINE, NOT A STYLESHEET, and it inverts
-           what everyone assumed the generated pages were for. The PDF and the
-           page plates are no longer the artifact; they are THE SOURCE MIKE
-           PRINTS AND PHOTOGRAPHS. The photograph of that print — paper grain,
-           press registration, whatever the light did — is the artifact, and
-           the reason is the same one this face already gives for refusing
-           transcription: the typography is the evidence, and a rendering of
-           typography is a drawing of evidence.
-           WHAT THE VIEWER NEEDS, so the scans are made ONCE and made right:
-             RESOLUTION  ≥ 2400px on the long edge, which is what it takes to
-                         read 6pt corporate small-print at 1:1 in the reader.
-                         Photograph at the highest the camera gives and let
-                         the delivery step downsample; a rescan is a reshoot.
-             FRAMING     the whole page INCLUDING its edges. The margins carry
-                         the technicians' handwriting (§ MARGINS below) and a
-                         page cropped to its type block throws that away.
-             SEQUENCE    reel order = reading order. `plates` is an ordered
-                         array and the reader's transport walks it; a page out
-                         of order is a page nobody will find.
-             PER FRAME   `label` (what the page is) and `date` (the section
-                         mark, e.g. "§ 3") — the reader prints both on its
-                         rail, and a frame with neither is an unlabelled slide.
-             ZOOM        the reader already gives fit ↔ 1:1 with panning, which
-                         is why resolution is the one thing that cannot be
-                         fixed later in code.
-           THE CONTAINER IS BUILT AND THE REEL IS EMPTY, and it says so on the
-           page rather than promising. When the scans land they are `plates`
-           entries in this file and nothing else moves. */
-        face: {
-          kind: "plate",
-          title: "THE OWNER'S MANUAL",
-          /* ═══ [P2 2026-08-05] MIKE'S RULING: TEXT NOT SUPPLIED DIES ═══════
-             M45 asked whether the plate's own printed words survived a visitor
-             reading them — STRUCTURE ISSUE · STRUCTURE AND ARRANGEMENT ONLY ·
-             TEXT NOT SUPPLIED. THE ANSWER IS NO, and his reason is sharper than
-             the question was: IT WAS THE MUSEUM ADMITTING IT HAD NOT WRITTEN THE
-             MANUAL, WEARING A FICTION AS COVER — Doctrine 11 hiding inside a
-             picture, where no string sweep can ever reach it.
-
-             THE RULE HE GAVE WITH IT, and it is wider than this face: EITHER THE
-             PLATE SHOWS A PAGE ACTUALLY WRITTEN, OR THERE IS NO PLATE UNTIL ONE
-             EXISTS. Not a better caption. The caption was already doing the one
-             piece of work the swap needed, and that is the tell — a caption that
-             has to argue a picture out of its own lettering is a caption losing
-             an argument with a photograph. EMPTY BEATS A PLACEHOLDER IN
-             FICTION'S CLOTHING, which is Doctrine 11's corollary with its harder
-             half named.
-
-             SO THIS FACE HAS NO PICTURE. It is the second face in this wing left
-             without one deliberately; M29 was the first, and it closed by
-             INHERITING a real photograph rather than by inventing an object,
-             which is the order of preference here too.
-             WHAT COMES BACK WHEN A PAGE IS WRITTEN: `still` and `stillCaption`,
-             pointed at a photograph of a printed page that says something.
-             WHAT DOES NOT MOVE: `reel.plates` is still [] and still waits on
-             B8's ruling — photographs of the printed manual, never renderings.
-             The head plate was never a frame in the reader, so striking it does
-             not touch the one promise this face actually makes.
-             HISTORY, SO NOBODY RE-DERIVES IT: E3 put a render here arguing that
-             the page's own PRELIMINARY — WORKING COPY stamp defended it; G1
-             swapped that render for page 1 of the live structure issue when the
-             first document was retired out from under it; P2 rules the defence
-             was never available, because the second page's words were not about
-             the object at all. M4 closes with it — there is no plate left to be
-             a render. */
-          blurb:
-            "The unit shipped with a manual, and the manual is where the " +
-            "machine explains itself — including the parts it gets wrong. " +
-            "Page images, not transcription: the typography is the evidence.",
-          lines: [
-            MANUAL_FORMAT,
-            MANUAL_NAV,
-            "PLATES  none on file",
-          ],
-          reel: {
-            label: "MICROFICHE · READER",
-            /* THE SCANS ARRIVE FROM MIKE. Ordered, reading order, one entry
-               per page: { img, label, date }. The shape is the plate wall's
-               shape on purpose — one reader serves both. */
-            plates: [],
-            /* [CS 2026-08-04] "The reader is built and the reel is empty …
-               until those exist this is a catalogue entry rather than a
-               promise" was the page describing its own construction and its own
-               editorial posture. The holdings fact — nothing on file — is the
-               half a visitor needs, and it is the half that is honest without
-               being about us. */
-            note: REEL_EMPTY_NOTE,
-          },
-          /* THE CONTENTS PAGE, WHICH IS REAL EVEN THOUGH THE PLATES ARE NOT.
-             Every section below is attested in the record or in the firmware;
-             what is missing is the IMAGE of the page, and each row says so
-             rather than pretending otherwise. */
-          entries: [
-            { stamp: "§ 1", title: "Start-up procedure",
-              line: "One of the two items present in every generic unit's " +
-                    "inbox from the moment the OS is installed — never “sent”.",
-              note: "attested · no plate on file" },
-            { stamp: "§ 2", title: "Operating the answer engine",
-              line: "Ask, then shake. The reveal holds until you disturb it; " +
-                    "the machine never times your reading out.",
-              note: "attested · no plate on file" },
-            { stamp: "§ 3", title: "Bias, and what it is for",
-              line: "The polarity and clarity registers, described in the " +
-                    "manual's own UNIVAC-corporate register.",
-              note: "attested · no plate on file" },
-            { stamp: "§ 4", title: "BIST and AMMMS maintenance",
-              line: "The built-in self test and the maintenance messaging — " +
-                    "real lore, and the visual language already exists.",
-              note: "attested · no plate on file" },
-            { stamp: "APP. 1", title: "The passcode landscape",
-              line: "0000 through 80085, the tape, and the grid. A found " +
-                    "artifact, not an objective — there is no game.",
-              note: "attested · no plate on file" },
-            { stamp: "MARGINS", title: "The hands in the margins",
-              line: "Technicians' and owners' handwriting, scanned with the " +
-                    "pages during cataloging. The margins are recovered evidence.",
-              note: "[PAPA] — which hands, and what they wrote" },
-          ],
-          /* [CS 2026-08-04] the footer named the operator and described the
-             production queue. Every other face in this wing signs off with the
-             unit and the object; this one now does the same. */
-          footer: "MGK-VIIIp · THE OWNER'S MANUAL",
-        },
-      },
+      /* [N1/N10 2026-08-06] SAME ORDER AS THE MAINFRAME, and it is the parity
+         gate that makes that a fact rather than a courtesy — `menu-parity.mjs`
+         compares the two menus' ORDER as well as their contents. See the note
+         at the head of the mainframe's tracklist. */
       {
         /* [C4 / M2 2026-08-01] THE FIRST-LEVEL ARTIFACT SLOT.
            Mike's doctrine ordered the tracks Record, Manual, [artifact],
@@ -1723,13 +1573,15 @@ const spine = [
            either". The slot was left unnamed, so it is filled with the one
            first-level artifact that is REAL AND IN HAND TODAY: the firmware
            itself. Two trees are on file and both are checked in.
-           THIS FACE IS HONESTLY v1 AND SAYS SO. It carries what can be
-           verified by looking — the tree names, the form, which one the twin
-           transliterates — and claims nothing about contents it has not read.
-           If Mike means a different artifact for this slot, the track is
-           renamed and re-faced here and nothing else moves. */
-        /* [N1 2026-08-04] renamed with its twin on MGK-VIII — see the note on
-           that face for why both moved and what the subtitles are doing. */
+           [N1 2026-08-04] renamed with its twin on the mainframe.
+           [N2 2026-08-06] AND IT IS DELIBERATELY NOT RE-CUT AS A ONE SHEET.
+           Mike's spec-sheet instruction is written under the MGK-NIAC heading
+           and is about that face's four named contents; this face is a different
+           subject (two source trees, named as they sit) and he did not read it
+           this round. Conforming it anyway would be Ops extending a ruling past
+           what was ruled — and leaving the two Technical Specifications faces in
+           two FORMS is a real inconsistency, so it is reported rather than
+           quietly resolved either way: OPEN_ACTIONS N-f. */
         id: "firmware",
         title: "Technical Specifications",
         videos: [],
@@ -1746,40 +1598,27 @@ const spine = [
              WHAT THE GLASS IS, THOUGH, IS THE FIRMWARE'S OUTPUT ON THE REAL
              MACHINE. This face's own claim is that the firmware "cannot be
              wrong about the machine, because it is the machine"; the lit screen
-             is that sentence with the evidence attached, and it is the only
-             picture in the reference set that shows the software running rather
-             than the box it runs in.
-             CONSIDERED AND REJECTED: the twin's own top-screen render and the
-             screen-treatment contact sheet, both in the robots repo at
-             `docs/assets_twin/`. The render is a synthetic frame of a
-             comparison exercise and the contact sheet is a working document
-             about FONT CHOICE — interesting to us, and inside baseball on a
-             visitor's first read of the wing. A photograph of the real glass
-             beats a render of a proposed one. */
+             is that sentence with the evidence attached. */
           still: "/robots/reference/photos/front_screen.png",
           stillCaption: "The front glass, lit — the firmware, running.",
           blurb:
-            "Everything the unit knows how to do is in here \u2014 not a " +
+            "Everything the unit knows how to do is in here — not a " +
             "description of the machine's behaviour but the behaviour itself, " +
             "in the form the machine reads it. The twin in the Portal track is " +
             "a transliteration of the first tree, bugs preserved and badged.",
           lines: [
             "TREES    2 on file",
-            "PRIMARY  MGK_VIIIp_01__20240721_WORKS \u2014 the tree the twin follows",
+            "PRIMARY  MGK_VIIIp_01__20240721_WORKS — the tree the twin follows",
             "SECOND   MGK_VIIIp_02__20260724_AUDIT",
-            "FORM     .ino modules \u2014 menu, boot, audio, graphics, input, games",
+            "FORM     .ino modules — menu, boot, audio, graphics, input, games",
           ],
           entries: [
-            /* [CS 2026-08-04] the row was titled "What this page is, plainly"
-               and opened "A first version" — a page introducing itself to the
-               reader as a draft. The same sentence stated as HOLDINGS says
-               everything the visitor needed and nothing about the drafting. */
             { stamp: "ON FILE", title: "Two trees, named as they sit",
               line: "Both trees are checked in and named exactly as they are " +
                     "on disk. What is NOT here is a reading of them: no " +
                     "walkthrough, no annotated source, no claim about what any " +
                     "module does beyond what its name says.",
-              note: "[PAPA] the artifact slot is Mike's to name \u2014 this is the honest floor, not the ceiling" },
+              note: "[PAPA] the artifact slot is Mike's to name — this is the honest floor, not the ceiling" },
             { stamp: "WHY", title: "Why it sits with the founding documents",
               line: "The Record says what was found. The Manual says what it was " +
                     "sold as. The firmware is the only one of the three that " +
@@ -1787,26 +1626,207 @@ const spine = [
               note: "" },
           ],
           entriesMode: "list",
-          footer: "MGK-VIIIp \u00b7 TECHNICAL SPECIFICATIONS",
+          footer: "MGK-VIIIp · TECHNICAL SPECIFICATIONS",
+        },
+      },
+      /* ==== [P23 2026-08-02] THE PLATE WALL ==================================
+         MIKE: "All Weird.Baby ROBOTS pages need beautification and better text
+         — a pass raising them toward the WAL/collage quality bar (structure and
+         visuals)."
+         THE WING'S PROBLEM WAS NEVER ITS WRITING. It was that a wing about a
+         PHYSICAL OBJECT was made entirely of words: three faces of register
+         lines and log entries, and eight real photographs of the machine
+         sitting unused in `public/robots/reference/photos` — one of them
+         serving as a poster nobody sees unless they land on the album with
+         nothing selected.
+         SO THE PHOTOGRAPHS COME OUT OF THE DRAWER. This is the WAL collage
+         renderer, unchanged, pointed at the museum's own photographs instead of
+         at YouTube posters: the same glued-up wall, the same tilt, the same
+         shadow, the same tap-to-open — which is exactly what "belongs beside
+         the collage wall" means when the bar is set by that wall.
+         THEY ARE OUR OWN IMAGES on our own origin, so there is no rights
+         question here at all — the one that governs WAL's tiles does not
+         arise. Captions are what the photograph SHOWS, in the wing's own
+         register; the interpretation stays on the faces that already carry it.
+         ================================================================== */
+      {
+        /* [N4/N8/N9 2026-08-06] THE TWIN OF THE MAINFRAME'S WALL, AND IT TOOK
+           THE SAME THREE EDITS IN THE SAME PASS — the lead-in and the tombstone
+           struck, the unit noun changed to PHOTOGRAPHS, the footer taken back to
+           the wing's standard sign-off, and groupings added above the wall. The
+           reasoning for each is written once, on the mainframe's archive face.
+           WHAT STRIKING THIS TOMBSTONE COSTS, NAMED: its `State` row was the
+           "As received — before cleaning, before power" claim that M25 exists
+           because one plate on this very wall contradicts (the glass, lit). M25
+           CLOSES BY SUBTRACTION — there is no sentence left to contradict. Its
+           `Plates` row was the count M7's answer was supposed to move; the
+           groupings carry a live count now, so that half of M7 is moot and the
+           caption half stands untouched. And its `Rights` row was this wall's
+           only statement that the photographs are ours (register N-d, with the
+           mainframe's). */
+        id: "plates",
+        title: "Image Archive",
+        videos: [],
+        tags: ["plates", "photographs", "viiip", "reference"],
+        face: {
+          kind: "text",
+          title: "IMAGE ARCHIVE",
+          subtitle: "MGK-VIIIp",
+          archiveUnit: { one: "photograph", many: "photographs" },
+          /* [N9] THE ARC: what arrived, then the glass it is met through, then
+             what stands above and below it. The order is the curation; every
+             label is read off the tiles' own captions. The coarse everything is
+             last, per Mike's instruction. */
+          presets: [
+            { id: "arrived", label: "As they arrived", tiles: [
+              { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
+                href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
+                label: "The pair, front and top, as received", date: "FAMILY SHOT" },
+              { img: "/robots/reference/photos/front_full.png",
+                href: "/robots/reference/photos/front_full.png",
+                label: "The front, whole", date: "FRONT" },
+              { img: "/robots/reference/photos/rear_power_switch.png",
+                href: "/robots/reference/photos/rear_power_switch.png",
+                label: "The power switch, round the back", date: "REAR" },
+            ] },
+            { id: "glass", label: "The glass", tiles: [
+              { img: "/robots/reference/photos/front_screen.png",
+                href: "/robots/reference/photos/front_screen.png",
+                label: "The front glass, lit", date: "SCREEN" },
+              { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
+                href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
+                label: "The bezel around the glass", date: "BEZEL" },
+              { img: "/robots/art/viiip.png",
+                href: "/robots/art/viiip.png",
+                label: "The cover image — the glass carries the BIOS beat",
+                date: "COVER" },
+            ] },
+            { id: "stand", label: "Above and below", tiles: [
+              { img: "/robots/reference/photos/top_monitor.png",
+                href: "/robots/reference/photos/top_monitor.png",
+                label: "The top monitor", date: "TOP" },
+              { img: "/robots/reference/photos/monitor_base.png",
+                href: "/robots/reference/photos/monitor_base.png",
+                label: "The base it stands on", date: "BASE" },
+              { img: "/robots/reference/photos/unit_new_base.png",
+                href: "/robots/reference/photos/unit_new_base.png",
+                label: "The unit on its new base", date: "BASE, NEW" },
+            ] },
+            { id: "all", label: "Every photograph", tiles: [
+              { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
+                href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
+                label: "The pair, front and top, as received", date: "FAMILY SHOT" },
+              { img: "/robots/reference/photos/front_full.png",
+                href: "/robots/reference/photos/front_full.png",
+                label: "The front, whole", date: "FRONT" },
+              { img: "/robots/reference/photos/front_screen.png",
+                href: "/robots/reference/photos/front_screen.png",
+                label: "The front glass, lit", date: "SCREEN" },
+              { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
+                href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
+                label: "The bezel around the glass", date: "BEZEL" },
+              { img: "/robots/reference/photos/top_monitor.png",
+                href: "/robots/reference/photos/top_monitor.png",
+                label: "The top monitor", date: "TOP" },
+              { img: "/robots/reference/photos/monitor_base.png",
+                href: "/robots/reference/photos/monitor_base.png",
+                label: "The base it stands on", date: "BASE" },
+              { img: "/robots/reference/photos/unit_new_base.png",
+                href: "/robots/reference/photos/unit_new_base.png",
+                label: "The unit on its new base", date: "BASE, NEW" },
+              { img: "/robots/reference/photos/rear_power_switch.png",
+                href: "/robots/reference/photos/rear_power_switch.png",
+                label: "The power switch, round the back", date: "REAR" },
+              { img: "/robots/art/viiip.png",
+                href: "/robots/art/viiip.png",
+                label: "The cover image — the glass carries the BIOS beat",
+                date: "COVER" },
+            ] },
+          ],
+          footer: "MGK-VIIIp · IMAGE ARCHIVE",
+          papa: "[PAPA] — the caption wording, and whether any photograph earns " +
+                "a face of its own.",
+        },
+      },
+      {
+        /* ═══ [N3 2026-08-06] "THE MANUAL" IS NOW "DOCUMENTATION" ════════════
+           MIKE: "a viewer free to display any document. The manual appears
+           inside it as a SELECTABLE ENTITY that opens on the screen when
+           clicked. STRIKE EVERYTHING CURRENTLY ON THAT FACE EXCEPT WHAT WE ARE
+           ACTUALLY HOLDING."
+
+           WHAT WE ARE ACTUALLY HOLDING IS ONE DOCUMENT AND NO PAGES OF IT. So
+           the shelf has one card on it, in the state the model calls `held`:
+           title, provenance, and a note saying plainly that no page images are
+           on file. IT IS NOT A BUTTON, and that is the template working rather
+           than a limitation — a control that opens nothing is the dead control
+           Doctrine 11's corollary removes. The day the photographs land they are
+           a `plates` array on this card and the card becomes selectable; nothing
+           else moves. M61 is untouched: the manual stays offline until real
+           pages exist.
+
+           WHAT WAS STRUCK, NAMED RATHER THAN ABSORBED — this is the largest
+           deletion in the round and every item is recoverable from git:
+             · THE BLURB. "Page images, not transcription: the typography is the
+               evidence" is the museum explaining its own method, which is what
+               Doctrine 11 tests for, and it survived because it is TRUE.
+             · THE FORMAT AND NAV LINES (`MANUAL_FORMAT`, `MANUAL_NAV`). NAV
+               described THE RENDERER — "microfiche reader — page-turn, fit and
+               1:1 magnify" — which Doctrine 11 names explicitly as a failing
+               subject. Both constants are deleted; they had no third caller.
+             · THE EMPTY REEL and its note (`REEL_EMPTY_NOTE`). The document card
+               says the same holdings fact in the template's own vocabulary, and
+               two objects saying it is the thing Doctrine 16 strikes. **THE REEL
+               RENDERER IS UNTOUCHED IN `Exhibit.jsx` and now has no caller** —
+               kept for the same reason M61 kept the viewer built.
+             · THE CONTENTS PAGE — six attested sections (§1–§4, APP. 1,
+               MARGINS). Every one was real and each said "attested · no plate on
+               file". They are the biggest single loss in this round and MARGINS
+               carried one of Mike's own `[PAPA]` slots ("which hands, and what
+               they wrote"), so that slot is now recorded nowhere on the glass.
+               OPEN_ACTIONS N-g, with the git hash, because a marked slot that
+               vanishes is exactly the thing his register exists to catch. */
+        id: "manual",
+        title: "Documentation",
+        videos: [],
+        tags: ["manual", "documentation", "plate", "1965", "scan", "opa"],
+        face: {
+          kind: "plate",
+          title: "DOCUMENTATION",
+          subtitle: "MGK-VIIIp",
+          docs: [
+            { title: "The owner's manual",
+              source: "ABEAL 8P-OMI-1",
+              note: "Held. Incomplete, assembled out of copies caught at " +
+                    "different stages. No page images on file — when they are " +
+                    "made they are photographs of the printed sheet, edges and " +
+                    "margins included.",
+              /* [B8 2026-08-02] THE SCANS ARRIVE FROM MIKE, ordered, reading
+                 order, one entry per page: { img, label, date }. The shape is
+                 the plate wall's shape on purpose — one reader serves both. */
+              plates: [] },
+          ],
+          footer: "MGK-VIIIp · DOCUMENTATION",
         },
       },
       /* ═══ [P2 2026-08-05] THE PORTAL LEFT THIS ALBUM ════════════════════
          MIKE: "THE PORTAL becomes ITS OWN ALBUM — it is very important and this
          keeps it top-shelf visible." It is the second album in the wing now,
-         ahead of both machines; see the block above the spine's `portal` entry.
+         ahead of both machines.
          NOT ONE THING INSIDE IT CHANGED except its own name. The drum, its eight
          engraved channels, the two switches, the dial, the latch and every held
          reason are the block that stood here, moved whole rather than retyped.
          WHAT MOVING IT COSTS, STATED: the p in MGK-VIIIp means PORTAL, so this
-         album is where the object's own name argued for it to live. It is a
-         property of the portable that now sits outside the portable's covers,
-         and a visitor reading MGK-VIIIp top to bottom no longer meets it. That
-         is Mike's call and the visibility is what he bought with it. */
+         album is where the object's own name argued for it to live. */
       {
-        /* [M2 2026-08-01] THE MACHINE'S OWN FAQ — added per Mike, and kept
-           distinct from the house FAQ on the front desk: that one answers
-           questions about Weird.Baby, this one answers questions about the
-           unit. Same shape, different desk. */
+        /* [M2 2026-08-01] THE MACHINE'S OWN FAQ — kept distinct from the house
+           FAQ on the front desk: that one answers questions about Weird.Baby,
+           this one answers questions about the unit. Same shape, different desk.
+           [R7/N10 2026-08-06] AND "SAME SHAPE" IS NOW TRUE OF THE BOOTH TOO. It
+           is an accordion in the Information Booth's format, at the bottom of
+           the menu, on Mike's ruling that the booth's is the established one and
+           that a sub-exhibit must never send a visitor back to the lobby to find
+           a question answered. */
         id: "mgk-faq",
         title: "FAQ",
         videos: [],
@@ -1815,50 +1835,34 @@ const spine = [
           kind: "text",
           title: "FAQ",
           subtitle: "ABOUT THIS MACHINE",
-          /* [E3 2026-08-03] THE AUDIT COUNTED FIVE TEXT-ONLY FACES IN THIS WING
-             AND THERE WERE SIX. VISUAL_HOOK_AUDIT-20260803 lists one "FAQ"
-             under Robots; the wing has two — the front desk's, about
-             Weird.Baby, and this one, about the unit. Same shape, different
-             desk (M2's note, three rows up). It was text-only on the same terms
-             as the other five and is fixed on the same terms.
-             THE BEZEL IS THE RIGHT PLATE FOR THIS FACE SPECIFICALLY. Two of its
-             four questions are about whether what you are looking at is the
-             real machine — "Does it still work?", "Is the Portal the real
-             machine?" — and the bezel is the piece of the object a visitor
-             actually meets: the frame around the glass the Portal draws
-             through. It is ours, already in the build as tile four of The
-             Plates, and is the head plate of nothing else. */
+          /* [E3 2026-08-03] THE BEZEL IS THE RIGHT PLATE FOR THIS FACE
+             SPECIFICALLY. Two of its questions are about whether what you are
+             looking at is the real machine, and the bezel is the piece of the
+             object a visitor actually meets: the frame around the glass the
+             Portal draws through. */
           still: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
           stillCaption: "The bezel — the frame the Portal is met through.",
-          /* [R2 2026-08-06] STRUCK WITH ITS TWIN \u2014 see the mainframe's FAQ face
-             above for the ruling. This was the copy carrying "actually", the
-             one word in the pair that was not a noun and that nothing explained. */
           entries: [
-            { stamp: "Q", title: "Does it still work?",
+            { title: "Does it still work?",
               line: "Yes. Both units power on and run their own firmware. The " +
                     "Portal track is not a simulation of that claim; it is the " +
                     "firmware running.",
               note: "" },
-            { stamp: "Q", title: "Is the Portal the real machine?",
-              line: "It is the real firmware on shimmed hardware \u2014 the twin. " +
+            { title: "Is the Portal the real machine?",
+              line: "It is the real firmware on shimmed hardware — the twin. " +
                     "The unit itself is a physical object in a room; the twin is " +
                     "how it is met from here.",
               note: "" },
             /* [CS 2026-08-04] "Why does it say ERROR so often?" IS REMOVED, not
-               rewritten. Its answer was "the story around it is Mike's to tell,
-               so it is held rather than half-told here", and its note was "held
-               \u2014 storyline first (C1/C2)": the operator named on the page, and an
-               internal decision code printed under a question. A question whose
-               published answer is that the answer has not been written yet is a
-               stand-in for a question, and three questions that are answered
-               beat four with one placeholder. It comes back as an entry the day
-               there is an answer. */
-            { stamp: "Q", title: "Can I buy one?",
+               rewritten — a question whose published answer is that the answer
+               has not been written yet is a stand-in for a question. It comes
+               back as an entry the day there is an answer. */
+            { title: "Can I buy one?",
               line: FAQ_BUY_ONE,
               note: "" },
           ],
-          entriesMode: "list",
-          footer: "MGK-VIIIp \u00b7 FAQ",
+          entriesMode: "faq",
+          footer: "MGK-VIIIp · FAQ",
         },
       },
     ],

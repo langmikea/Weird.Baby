@@ -960,3 +960,60 @@ and the NUL-byte defect class are `OPERATIONS.md` §9.
   eleven exactly.** Nine were repointed onto the artist-card rows that actually
   carry each claim — **a better chain than the one that broke**, because the old
   anchor merely asserted that the sourcing existed.
+
+---
+
+## 2026-08-06 -> THE PORCH RULINGS (R1-R8)
+*Moved here whole by MIKE'S PAGE-BY-PAGE, 2026-08-06, under CLAUDE.md's own
+~600-line rule. What is still load-bearing in it is NOT in this archive — see
+the pointer in CLAUDE.md's "Older entries" note.*
+
+### 2026-08-06 -> THE PORCH RULINGS (R1-R8) - sealed
+- **SIX RULINGS, ONE RESEARCH MAP, ONE REGISTER PASS - AND THE ONE HE CALLED
+  CRITICAL AND LIVE WAS AIMED AT THE WRONG PAGE.** Gates: lint **11/9 =
+  baseline** - build green - provenance **PASS** (0 undeclared - 0 stale - 0
+  invention) - `reveal:check` **PASS** - `parity:gate` **PASS, 4 shared - 0
+  divergences** - lap **on the built bundle**, eleven routes, no horizontal
+  overflow, no console messages. Surfacing **13 - 13 - 15, unmoved**: this round
+  subtracted and surfaced nothing, said plainly rather than dressed up. Full
+  narrative: `docs/MUSEUM_PORCH_RULINGS_LOG-20260806.md`.
+- **R5 - HIS PREMISE WAS INVERTED, AND CORRECTING IT MADE THE PROBLEM FORTY-SIX
+  TIMES BIGGER.** He ruled that the museum does not have Hunter Root's
+  permission and named *"his two songs"* on `/wal` - which were **YouTube
+  embeds of his own channel and always had been** (oEmbed on both ids returns
+  `youtube.com/@hunterrootmusic`, checked rather than assumed). The
+  verification he asked for found **`/hr` serving ninety-three**: every track
+  carries an `assets.weird.baby` mp3 and sixty also sit on the album containers
+  as `primary_url` for the deck's own `<audio>`. **THE RULE IS WRITTEN ONCE AND
+  ENFORCED TWICE AND THE SECOND TIME IS THE POINT** - a runtime filter stops
+  the REQUESTS and still ships the ADDRESSES, and the first build carried
+  **153 vault mp3 URLs in plain text**. Now zero, 22 KB smaller. **The cost is
+  60 of 93 tracks with nothing playable**, drawn through `.tl-novid` and the
+  overlay's *unavailable*, **both pre-existing; no render path was invented.**
+  What `/hr` should look like instead is M71 and is his.
+- **R4 - SEVEN SITES STRUCK, AND ONE DELETION WAS DRAFTED, REVERSED, AND THE
+  REVERSAL IS THE MORE USEFUL FINDING.** Striking the song cards' `Accession`
+  rows for symmetry would have broken the only on-glass anchor two other
+  passages on that card point at - **a citation is not a decoration.** The row
+  went back with *Published by* and *Verified* added beside it. **His card now
+  has no biography** because both its paragraphs WERE the announcement (M72),
+  the second time that slot has failed the same way. The poster's place under
+  his name came out of R7: **"Solo artist/musician from Lancaster, PA"**, his
+  own Bandcamp bio.
+- **R2 - HE DID NOT PICK A WORDING, HE STRUCK BOTH**, and `/booth` and
+  `/foundation` were checked rather than assumed: neither has an FAQ intro
+  blurb, because **a heading is not a blurb**.
+- **R6 - M37 RULED A, AND THE DISCLOSURE WAS WRONG FOR THE THIRD TIME IN THE
+  MUSEUM'S OWN FAVOUR.** The plugin frames are `loading="lazy"`, so `/hr` on
+  arrival requests Facebook **zero** times and sixteen only on scroll. `C34`
+  closes ruled-against.
+- **R7 - THE KNOB IS THIRTEEN TRACKS, NOT NINETY-THREE.** Bandcamp adds 13 over
+  YouTube for Hunter Root and **47 of his 93 are reachable through nothing**,
+  while Carsie Blanton (16 releases) and Jesse Welles (7 albums) are whole
+  catalogues the wing shows two songs of. Mikey Mike has none, and two
+  candidate SoundCloud accounts were **not adopted** because they could not be
+  tied to him from his own pages. Map:
+  `docs/AD_FREE_PLAYBACK_RESEARCH-20260806.md`.
+- **THE PRUNE PROCEDURE WAS RUN FORWARDS FOR THE FIRST TIME.** Five chains were
+  repointed BEFORE the prune, so the gate named **zero** broken chains against
+  16 stale rows.

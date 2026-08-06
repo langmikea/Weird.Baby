@@ -242,17 +242,27 @@ for (const n of [1, 2]) {
 R("portal.feed.standard", "FEED · CHANNEL 3 · STANDARD — the unit as it stands, at the opening prompt.",
   "machine", "src/data/artists/robots.js panel.drum", "LIVE", "roll the drum, throw the latch", "REVEALED",
   { arc: "online", note: "[R6] The one feed that arms, and it is channel 3." });
+/* [P5 2026-08-06] THREE ENGRAVINGS CHANGED AND THESE NAMES CHANGE WITH THEM.
+   Mike struck "IDLING, UPD", "BOOT PLAYBK" and "OFF · 1ST BOOT" — one of them
+   wrapped on the drum and none of the three was in either permitted register
+   (deliberately obfuscated, or dressed in period garb); they were the `slug`s
+   below, truncated until they fitted. THE SLUG IS THE ROW'S IDENTITY AND DID
+   NOT MOVE, which is the whole reason a relabelling is safe here: `id`,
+   channel, lever and dependency are untouched, and it is only the word cut into
+   the brass that is different. A ledger row's `name` restates the glass, so a
+   ledger that kept the old engravings would be the "fixing one never fixes the
+   other" defect Doctrine 17 is named for, one file out. */
 for (const [slug, ch, label, why] of [
-  ["idling-updated", 4, "IDLING, UPD", "no feed on file"],
-  ["boot-playback", 5, "BOOT PLAYBK", "no feed on file"],
-  ["off-first-boot", 6, "OFF · 1ST BOOT", "no feed on file"],
+  ["idling-updated", 4, "STANDBY", "no feed on file"],
+  ["boot-playback", 5, "COLD START", "no feed on file"],
+  ["off-first-boot", 6, "FIRST RUN", "no feed on file"],
   ["last-state", 7, "LAST STATE", "awaiting a privacy ruling — LAST STATE resumes across visits"],
   ["test-bench", 8, "TEST BENCH", "workshop entry; no public feed"],
 ]) {
   R("portal.feed." + slug, `FEED · CHANNEL ${ch} · ${label} — engraved on the drum and inert.`,
     "machine", "src/data/artists/robots.js panel.drum", "NOT_BUILT", null, "HELD",
     { deps: [why], shown: true,
-      note: "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1. [R6] Renumbered; the position, the id and the lever are unchanged." });
+      note: "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1. [R6] Renumbered; the position, the id and the lever are unchanged. [P5] Re-engraved; the id and the lever are unchanged again." });
 }
 R("portal.switch.maint", "AUTO MAINT — the C1 fortnight as an instrument. Thrown up, the latch goes dark.",
   "machine", "src/data/artists/robots.js panel.switches", "LIVE", "the panel", "REVEALED");
@@ -582,6 +592,42 @@ R("egg.niac.operator", "The robot that operates the mainframe — the reason NIA
   null, "HELD",
   { deps: ["Mike's ruling on when it is spent"],
     note: "The material is IN HAND and unpublished: seven plates in this repo (head at the lens, head three-quarters, chest and shoulders, lower limbs, unfinished torso, feet on a plinth, a slot mock-up) and three more in the robots repo's culled set (the eye, the shoulder, the hand on the control). All ten are on disk, none is referenced by the site. Spending it is one data block and no code — which is exactly what makes holding it a decision rather than a shortage." });
+
+/* ═══ [N9 2026-08-06] THE PRESET AS AN EGG SURFACE — MIKE'S OWN CONSEQUENCE ══
+   He gave the archive's groupings as a curation instruction and then named the
+   thing they are ALSO good for, in the same breath: *"presets are a good way to
+   hide an egg, to reveal one, and to make certain things spell something out
+   when they come together."* His instruction was to LEDGER that consequence,
+   not to build against it, and the two halves of that are why this row exists
+   and why it is `NOT_BUILT`.
+
+   THE THREE MECHANISMS ARE DIFFERENT AND THE THIRD IS THE ONE NOTHING ELSE IN
+   THIS TABLE CAN DO.
+     HIDE     a photograph that belongs to no named grouping is on the wall only
+              under the coarse everything, which is the preset a casual visitor
+              never presses. It is held in plain sight by being filed last.
+     REVEAL   a grouping that APPEARS — one more button than there was last
+              month — is a reveal that costs no page, no route and no words. The
+              wall is the same wall; the drawer is new.
+     SPELL    and this is the one worth holding: a grouping's MEMBERS, read in
+              its own order, can carry something none of them carries alone. An
+              acrostic down the captions. A sequence of lit panels that reads as
+              digits. A set whose count is the answer to something asked
+              elsewhere. The order is authored, so the order can mean.
+
+   WHY IT IS NOT BUILT AND MUST NOT BE BUILT QUIETLY. Every one of the three
+   spends a photograph, an ordering or a caption, and all three of those are
+   Mike's — Doctrine 12 puts the CONTENT of an egg with him even where the
+   MECHANISM is Ops'. What this round shipped is the mechanism, empty: seven
+   groupings across two walls, every one of them an honest cut with no second
+   reading in it. `shown: false` because nothing on any page hints that a
+   grouping could be anything other than a grouping, which is the whole
+   difference between an egg and a debt. */
+R("egg.presets", "The archive's groupings as an egg surface — hide, reveal, or spell something out in the order.",
+  "egg", "src/data/artists/robots.js face.presets", "NOT_BUILT",
+  null, "HELD",
+  { deps: ["Mike's photographs, orderings or captions — the content is his"],
+    note: "THE MECHANISM SHIPPED AND THE EGG DID NOT, and the row exists so the second half is not lost with the round log. N9 built `face.presets` on both machine archives (Exhibit.jsx `ArchivePresets`): a named, ordered subset of a wall, with its own count on its own button. Nothing about it is egg-specific and that is the point — a grouping that hides, reveals or spells is the SAME data shape as the four honest ones now shipping, so planting one costs a data block and no code, and nobody can tell from the machinery which kind is present. Mike's own words for the consequence: presets are a good way to hide an egg, to reveal one, and to make certain things spell something out when they come together." });
 
 /* ═══ [P4 2026-08-05] THE POKE — RAISED, GRADED, AND DELIBERATELY NOT BUILT ══
    MIKE: "pixel-perfect tap on the Weird.Baby logo's EYE and he BLINKS, as if

@@ -307,7 +307,12 @@ export default function RecordEntry({
     <>
       {/* THE HEAD IS THE CONTROL, unchanged from M5: the thing that opened
           this record closes it, and there is no second shut button. What is
-          new is what it carries — a stamp, the dateline, and the class. */}
+          new is what it carries — a stamp and the dateline.
+          [R5 2026-08-06] THE CLASS BADGE WAS THE THIRD THING IT CARRIED AND IT
+          IS STRUCK, with its twins on the index and on the short head. Mike:
+          "I see no richness in it." It could not be made to serve — the word
+          opened nothing and there is no object list behind it — and one badge
+          in three places is one ruling in three places. */}
       <button key="head" ref={headRef} className="vp-rec-head vp-rec-head--long"
               onClick={onClose} title="close this record">
         {entryStamp(entry) && <span className="vp-fe-stamp">{entryStamp(entry)}</span>}
@@ -316,7 +321,6 @@ export default function RecordEntry({
             <span key={i} className="vp-rec-dateline-part">{p}</span>
           ))}
         </span>
-        {entry.evidence && <span className="vp-fe-class">{entry.evidence}</span>}
       </button>
 
       {/* THE VISUAL HOOK (Mike's standing law), and it is a photograph we

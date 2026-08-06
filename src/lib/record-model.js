@@ -34,6 +34,17 @@
 //     evidence? "document"    A WORD. There is NO permitted list, here or in
 //                             the renderer or in the CSS (B9's ruling) — a class
 //                             Mike invents next month needs no code.
+//                             [R5 2026-08-06] NOTHING RENDERS IT TODAY. Mike
+//                             struck the badge it printed — "I see no richness
+//                             in it" — and it could not be made to serve,
+//                             because the word had nothing behind it: no
+//                             registry of objects to open, no list to pop, and
+//                             inventing one would be Doctrine 12 with a button
+//                             on it. The FIELD survives here because it is his
+//                             own model and it costs a line; it comes back on
+//                             the glass the day it points at something, and a
+//                             FILTER over a long Record is the obvious day.
+//                             Do not read its presence as evidence it is drawn.
 //     line?     one true sentence · note? a quieter aside
 //
 //     — the payloads, any combination, all optional —
@@ -166,8 +177,15 @@ export function evidenceOf(entry) {
    `quoted`   — no image yet, but words have been taken out of it
    `held`     — its provenance is recorded and nothing else has arrived
    The renderer prints the state; it never guesses one. */
+/* [N3 2026-08-06] `plates` COUNTS AS IMAGED, and it is the multi-page case.
+   A document with one photograph declares `scan`; a document with a REEL of
+   them declares `plates` — the plate wall's own shape, so a manual's pages open
+   in the identical reader as a photograph off the wall. `pages` is NOT that
+   field and never was: it is a COUNT on the catalogue card, which is a thing a
+   librarian knows before anybody has photographed anything. */
 export function docState(doc) {
   if (!doc || typeof doc !== "object") return "held";
+  if (Array.isArray(doc.plates) && doc.plates.length) return "imaged";
   if (doc.scan) return "imaged";
   if (doc.extract) return "quoted";
   return "held";

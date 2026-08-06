@@ -584,7 +584,7 @@
   },
   {
    "id": "portal.feed.idling-updated",
-   "name": "FEED · CHANNEL 4 · IDLING, UPD — engraved on the drum and inert.",
+   "name": "FEED · CHANNEL 4 · STANDBY — engraved on the drum and inert.",
    "cls": "machine",
    "where": "src/data/artists/robots.js panel.drum",
    "build": "NOT_BUILT",
@@ -599,13 +599,13 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1. [R6] Renumbered; the position, the id and the lever are unchanged.",
+   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1. [R6] Renumbered; the position, the id and the lever are unchanged. [P5] Re-engraved; the id and the lever are unchanged again.",
    "transfer": "UNLOCK",
    "transferWeek": 0
   },
   {
    "id": "portal.feed.boot-playback",
-   "name": "FEED · CHANNEL 5 · BOOT PLAYBK — engraved on the drum and inert.",
+   "name": "FEED · CHANNEL 5 · COLD START — engraved on the drum and inert.",
    "cls": "machine",
    "where": "src/data/artists/robots.js panel.drum",
    "build": "NOT_BUILT",
@@ -620,13 +620,13 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1. [R6] Renumbered; the position, the id and the lever are unchanged.",
+   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1. [R6] Renumbered; the position, the id and the lever are unchanged. [P5] Re-engraved; the id and the lever are unchanged again.",
    "transfer": "UNLOCK",
    "transferWeek": 0
   },
   {
    "id": "portal.feed.off-first-boot",
-   "name": "FEED · CHANNEL 6 · OFF · 1ST BOOT — engraved on the drum and inert.",
+   "name": "FEED · CHANNEL 6 · FIRST RUN — engraved on the drum and inert.",
    "cls": "machine",
    "where": "src/data/artists/robots.js panel.drum",
    "build": "NOT_BUILT",
@@ -641,7 +641,7 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1. [R6] Renumbered; the position, the id and the lever are unchanged.",
+   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1. [R6] Renumbered; the position, the id and the lever are unchanged. [P5] Re-engraved; the id and the lever are unchanged again.",
    "transfer": "UNLOCK",
    "transferWeek": 0
   },
@@ -662,7 +662,7 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1. [R6] Renumbered; the position, the id and the lever are unchanged.",
+   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1. [R6] Renumbered; the position, the id and the lever are unchanged. [P5] Re-engraved; the id and the lever are unchanged again.",
    "transfer": "UNLOCK",
    "transferWeek": 0
   },
@@ -683,7 +683,7 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1. [R6] Renumbered; the position, the id and the lever are unchanged.",
+   "note": "The panel says only 'This feed is not available.' — the internal reason came off the glass at v46/C1. [R6] Renumbered; the position, the id and the lever are unchanged. [P5] Re-engraved; the id and the lever are unchanged again.",
    "transfer": "UNLOCK",
    "transferWeek": 0
   },
@@ -2243,6 +2243,27 @@
    "note": "The material is IN HAND and unpublished: seven plates in this repo (head at the lens, head three-quarters, chest and shoulders, lower limbs, unfinished torso, feet on a plinth, a slot mock-up) and three more in the robots repo's culled set (the eye, the shoulder, the hand on the control). All ten are on disk, none is referenced by the site. Spending it is one data block and no code — which is exactly what makes holding it a decision rather than a shortage.",
    "transfer": "BLAST",
    "transferWeek": 0
+  },
+  {
+   "id": "egg.presets",
+   "name": "The archive's groupings as an egg surface — hide, reveal, or spell something out in the order.",
+   "cls": "egg",
+   "where": "src/data/artists/robots.js face.presets",
+   "build": "NOT_BUILT",
+   "reach": null,
+   "state": "HELD",
+   "when": null,
+   "deps": [
+    "Mike's photographs, orderings or captions — the content is his"
+   ],
+   "arc": null,
+   "shown": false,
+   "assets": [],
+   "prod": null,
+   "calledBy": [],
+   "note": "THE MECHANISM SHIPPED AND THE EGG DID NOT, and the row exists so the second half is not lost with the round log. N9 built `face.presets` on both machine archives (Exhibit.jsx `ArchivePresets`): a named, ordered subset of a wall, with its own count on its own button. Nothing about it is egg-specific and that is the point — a grouping that hides, reveals or spells is the SAME data shape as the four honest ones now shipping, so planting one costs a data block and no code, and nobody can tell from the machinery which kind is present. Mike's own words for the consequence: presets are a good way to hide an egg, to reveal one, and to make certain things spell something out when they come together.",
+   "transfer": null,
+   "transferWeek": null
   },
   {
    "id": "egg.lobby.poke",

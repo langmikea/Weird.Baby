@@ -334,7 +334,20 @@ def build(model, src_rel, out_name, focal):
 
     d.line([(S * 0.25, RULE_Y), (S * 0.75, RULE_Y)], fill=INK, width=4)
 
-    set_tracked(d, "PURVEYORS OF THE WEIRD", font("cour.ttf", round(S * 0.0345)),
+    # [R6 2026-08-06] THE SUB-LINE IS THE WING, NOT THE STRAPLINE. MIKE:
+    # "'Purveyors of the Weird' belongs ONLY on the first album, where it
+    # literally applies. Every other album in the wing reads 'Weird.Baby
+    # Robots' as its sub-line."
+    # HE IS DESCRIBING A CATEGORY ERROR, not a preference. The strapline is the
+    # HOUSE's line about itself, and the base cover it was lifted from IS the
+    # house — the front desk, first in the deck, where "purveyors of the weird"
+    # is a claim its own album is making. Copied onto a photograph of a 1965
+    # mainframe it stops being a claim and becomes a caption, and it captions
+    # the machine as the weird thing purveyed. Three covers were saying it.
+    # THE REPLACEMENT IS WHAT A SUB-LINE ON AN ALBUM IS FOR: whose wing this is.
+    # Same font, same size, same tracking solve, same ink, same baseline — the
+    # geometry claim this whole file rests on is untouched, one string moved.
+    set_tracked(d, "WEIRD.BABY ROBOTS", font("cour.ttf", round(S * 0.0345)),
                 STRAP_Y, DIM, S * 0.66)
 
     out = os.path.join(ART, out_name)

@@ -853,17 +853,36 @@ const spine = [
           kind: "text",
           title: "QUESTIONS",
           subtitle: "THE WEIRD.BABY FOUNDATION",
-          /* [D7] the accordion becomes an entry list — see the header. `lines`
-             carries the multi-paragraph answers F1 wrote as two beats, and
-             `link` carries the two marked doors F6 supplied no address for:
-             the door's NAME and the register's own state stamp, and no <a>. */
+          /* ═══ [R7 2026-08-06] THE ACCORDION IS BACK, AND D7 IS REVERSED IN
+             THE OPEN ═══════════════════════════════════════════════════════
+             MIKE: "the Information Booth IS an FAQ under a better name and
+             keeps that name for UX value. Sub-exhibits carry their own FAQs — a
+             visitor must never have to run back to the lobby. CONFORM EVERY
+             WING FAQ TO THE BOOTH'S FORMAT."
+             D7 FLATTENED THIS ONE DURING THE PORT, on Ops' reading that a list
+             with every answer open was the stronger form under the
+             no-hidden-information law (M1). That was a judgement call, it was
+             recorded as such, and it was put to him as M70 — *"one line: it
+             stays open, or the wing wants a collapsing question somewhere"*. He
+             has answered it for every wing at once, so the flattening is UNDONE
+             rather than defended and M70 closes.
+             M1 IS NOT BEING BENT. The booth's own recorded reasoning is that a
+             QUESTION IS THE DESCRIPTION OF ITS OWN ANSWER — nothing is
+             discovered by opening one that the closed row did not state. That
+             is why the booth's accordion has always been allowed to stand, and
+             it is the same page's rule applying to the same object.
+             `lines` STILL CARRIES the multi-paragraph answers F1 wrote as two
+             beats, and `link` still carries the two marked doors F6 supplied no
+             address for: the door's NAME and the register's own state stamp,
+             and no <a>. Both render inside the opened answer.
+             THE "Q" STAMP GOES. The booth prints none, and this list is under a
+             heading reading QUESTIONS. */
           entries: FAQ.map(({ q, a, link }) => ({
-            stamp: "Q",
             title: q,
             lines: Array.isArray(a) ? a : [a],
             link,
           })),
-          entriesMode: "list",
+          entriesMode: "faq",
           footer: "THE WEIRD.BABY FOUNDATION · QUESTIONS",
         },
       },

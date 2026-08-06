@@ -10,13 +10,15 @@
      node tools/reveal-ledger.mjs                the report
      node tools/reveal-ledger.mjs --audit        R4: the five audit sections
      node tools/reveal-ledger.mjs --cards        R2: the cue-card checklist
+     node tools/reveal-ledger.mjs --eggs         X1: what is planted, spent, waiting
      node tools/reveal-ledger.mjs --check        integrity; exits 1 on a fault
    =========================================================================== */
 import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
 import { validate, manualPageRow, PROD, manualPages, manualSourceState, MANUAL_SRC_DIR } from "../reveal/schema.mjs";
-import { entries as recordEntries, prose as recordProse } from "../reveal/record-entries.mjs";
+import { entries as recordEntries, prose as recordProse,
+         summaries as recordSummaries } from "../reveal/record-entries.mjs";
 import { transferFaults, ASSIGN, EXEMPT, TRANSFERS, CLASSES } from "../reveal/transfers.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
@@ -111,6 +113,75 @@ function audit() {
   AUDIT.clusters.forEach(([d, v]) => console.log(`  ${d}: ${v.length} — ${v.map(r => r.id).join(", ")}`));
   console.log("\n=== DEPENDENCY CHAINS THAT CANNOT RESOLVE ===");
   AUDIT.chains.forEach(c => console.log(`  ${c.from.id.padEnd(26)} needs: ${c.dep}\n${" ".repeat(30)}(${c.why})`));
+}
+
+/* ═══ [X1 2026-08-06] THE EGG SHEET ══════════════════════════════════════════
+   MIKE: "make sure every egg and future idea is captured in a form we can
+   consult later — I want to be able to ask WHAT DO WE HAVE SET UP FOR EGGS, and
+   WHAT NEW IDEAS ARE WAITING. Verify the ledger already serves this and say so,
+   or make it serve it."
+
+   THE HONEST ANSWER IS: HALF, AND THE MISSING HALF WAS THE ASKING. Every egg in
+   both repositories has been a row in `reveal/ledger.json` since v52 — fifteen
+   of them now, each with what it is, whether it is BUILT, whether it is SHOWN,
+   what it waits on, and for two of them THE EGG ITSELF, written down in the
+   `note` and printed on no page anywhere. Nothing was missing from the table.
+   What was missing is exactly what the surfacing report's own diagnosis was:
+   `reveal`, `reveal:audit` and `reveal:cards` all already knew, and **none of
+   them was ASKED**. An egg appeared in the audit's back shelf between a route
+   and a sound effect, filed by whether it was revealed rather than by what it
+   is, and there was no way to put his question to the tree in his own words.
+
+   SO THIS COMPUTES NOTHING NEW. It re-cuts the same table by the one axis his
+   question has — is this an egg, is it planted, is it spent — and it names, in
+   the same breath, THE PLACE THE OTHER HALF OF HIS QUESTION LIVES: an idea that
+   is not a revealable thing (a wording, a ruling, a photograph he owes, a room
+   nobody has argued for yet) is not in this table and must not be dragged into
+   it. That is `docs/OPEN_ACTIONS.md`, and the two together are the whole
+   answer. A tool that quietly implied it held both would be worse than one that
+   holds half and says so.
+
+   THREE STATES, AND THE DIFFERENCE BETWEEN THE FIRST TWO IS THE WHOLE MODEL:
+     PLANTED   built and HELD — it is there, right now, and nobody is told.
+     SPENT     REVEALED — it is on the glass; whoever finds it, finds it.
+     WAITING   not built — an idea with a row, which is what stops it becoming
+               a thing somebody remembers hearing once.
+   `shown` is printed beside each because it is the line between an egg and a
+   debt: a thing whose LABEL a visitor can read is a promise, and an egg that is
+   promised is not one. Every row in this table today is `shown: false`. */
+function eggs() {
+  const all = ROWS.filter(r => r.cls === "egg" && r.state !== "RETIRED");
+  const planted = all.filter(r => r.state === "HELD" && r.build !== "NOT_BUILT");
+  const spent = all.filter(r => r.state === "REVEALED");
+  const waiting = all.filter(r => r.state === "HELD" && r.build === "NOT_BUILT");
+  const show = (title, rows, gloss) => {
+    console.log(`\n=== ${title} — ${rows.length} ===`);
+    if (gloss) console.log("  " + gloss);
+    rows.forEach(r => {
+      console.log(`  ${r.id.padEnd(22)} ${String(r.build).padEnd(10)} ${r.shown ? "SHOWN " : "unshown"}  ${r.name}`);
+      if (r.deps && r.deps.length) console.log(`${" ".repeat(24)}waits on: ${r.deps.join("; ")}`);
+    });
+    if (!rows.length) console.log("  (none)");
+  };
+  console.log("=== THE EGGS ===");
+  console.log(`  ${all.length} rows in reveal/ledger.json, class "egg".`);
+  show("PLANTED — built, held, nobody told", planted,
+       "These exist in the tree today. Finding one is the visitor's job.");
+  show("SPENT — on the glass", spent,
+       "Out. Whoever finds them, finds them; nothing here is recoverable.");
+  show("WAITING — an idea with a row, not built", waiting,
+       "Ledgered so it is not a thing somebody remembers hearing once.");
+  const held = all.filter(r => (r.note || "").length > 240);
+  console.log(`\n=== EGGS WHOSE ONLY WRITTEN FORM IS THIS TABLE — ${held.length} ===`);
+  console.log("  The `note` IS the egg. It is printed on no page, in either repository.");
+  held.forEach(r => console.log(`  ${r.id.padEnd(22)} ${r.name}`));
+  console.log("\n=== AND THE OTHER HALF OF THE QUESTION ===");
+  console.log("  NEW IDEAS THAT ARE NOT REVEALABLE THINGS — a wording, a ruling, a");
+  console.log("  photograph owed, a room nobody has argued for yet — are NOT in this");
+  console.log("  table and are not going to be. They are in docs/OPEN_ACTIONS.md,");
+  console.log("  §0 for what is waiting on Mike and §1–§4 for everything else.");
+  console.log("  Two registers, one question: this one holds things the museum HAS");
+  console.log("  and has not shown; that one holds decisions and work nobody has done.");
 }
 
 /* ═══ R2: THE CUE-CARD CHECKLIST ═══════════════════════════════════════════
@@ -429,11 +500,65 @@ function transferGuardFaults() {
   return faults;
 }
 
+/* ═══ RECORD BUDGETS [R3 2026-08-06] ═════════════════════════════════════════
+   MIKE: "every index row gets a headline and a summary beneath it, ALL
+   CONSTRAINED TO THE SAME HEIGHT, and THE ENTIRE SUMMARY MUST FIT IN IT — that
+   is the point of a summary. NO MORE half-sentence teasers ending in an
+   ellipsis; that failure disappears by construction."
+
+   THE CONSTRUCTION IS TWO HALVES AND NEITHER WORKS ALONE.
+     RENDER  the index row is a fixed height and there is no truncation left in
+             it at all — `-webkit-line-clamp` and the headline's `text-overflow`
+             are both gone (Exhibit.css). A row cannot clip, so it cannot lie.
+     DATA    which means a string too long for the box would OVERFLOW instead,
+             and the only place to stop that is here, before it ships.
+   Take either half away and you are back to a promise.
+
+   THE NUMBERS, AND HOW THEY WERE ARRIVED AT RATHER THAN CHOSEN. The row gives
+   the headline ONE line and the summary TWO, at the index measure. Measured on
+   the built bundle at the wing's default split, that column runs ~70 characters
+   at `--fs-small`; the budgets take the conservative end of the band the
+   summary is set in and leave a character of slack at the narrowest desktop
+   width the two-column index switches at.
+     TITLE  62   one line
+     LINE  130   two lines
+   THEY ARE FLOORS ON THE LAYOUT, NOT TASTE. If the type ramp, the measure or
+   the row height is ever changed, these move with it in the same commit — and
+   a round that widens the box without widening the budget has only made the
+   gate stricter than the glass, which is the safe direction.
+
+   IT POLICES THE RECORD AND ONLY THE RECORD. Other faces render entry lists
+   that are not indexes, are not fixed-height, and were never asked to fit. */
+const RECORD_TITLE_MAX = 62;
+const RECORD_LINE_MAX = 130;
+
+function recordBudgetFaults() {
+  const out = [];
+  for (const e of recordSummaries()) {
+    const who = "Record " + (e.no == null ? "(unnumbered)" : String(e.no).padStart(3, "0"));
+    if (typeof e.title === "string" && e.title.length > RECORD_TITLE_MAX) {
+      out.push(`${who}: headline is ${e.title.length} characters and the index row `
+        + `holds ${RECORD_TITLE_MAX} on one line — shorten it. `
+        + `Nothing truncates any more, so it would overflow the row.`);
+    }
+    if (typeof e.line === "string" && e.line.length > RECORD_LINE_MAX) {
+      out.push(`${who}: executive summary is ${e.line.length} characters and the index row `
+        + `holds ${RECORD_LINE_MAX} on two lines — shorten it. `
+        + `A summary that does not fit is not a summary (Mike, R3).`);
+    }
+    if (typeof e.title !== "string" || !e.title.trim()) {
+      out.push(`${who}: no headline. Every index row gets one.`);
+    }
+  }
+  return out;
+}
+
 function check() {
   const faults = [
     ...validate(ROWS),
     ...recordProseFaults(),
     ...recordParityFaults(),
+    ...recordBudgetFaults(),
     ...vesselFaults(),
     ...transferGuardFaults(),
   ];
@@ -455,6 +580,7 @@ function check() {
   console.log("  every asset uid resolves in the asset table");
   console.log(`  the ${ROWS.filter(r => /^record\.\d+$/.test(r.id)).length} Record row(s) match the Record's own entries exactly`);
   console.log("  no row holds the Record's words — the ledger is not a second copy of it");
+  console.log(`  every Record headline fits ${RECORD_TITLE_MAX} characters and every summary ${RECORD_LINE_MAX} — the index cannot truncate, so it must not overflow`);
   console.log("  the manual-page vessel builds, derives and refuses correctly at all four stages");
   console.log(`  the manual is ${manualPages()} pages, read off ${MANUAL_SRC_DIR} rather than declared`);
   process.exit(0);
@@ -465,6 +591,7 @@ const flag = n => argv.includes("--" + n);
 const opt = n => { const i = argv.indexOf("--" + n); return i >= 0 ? argv[i + 1] : null; };
 if (flag("check")) check();
 else if (flag("audit")) audit();
+else if (flag("eggs")) eggs();
 else if (flag("cards")) cards({
   all: flag("all"), revealed: flag("revealed"), spendable: flag("spendable"),
   record: flag("record"), cls: opt("cls"),

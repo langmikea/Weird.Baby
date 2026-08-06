@@ -349,6 +349,17 @@ export const EXEMPT = new Map([
          exemption is not that the fiction is silent about them, it is that
          AUTHORSHIP AND CONSENT are not transfers. */
       "room.curtain", "room.slow",
+      /* [N9 2026-08-06] THE PRESET EGG, AND IT IS KIND (iv) FOR AN EXACT
+         REASON RATHER THAN A CONVENIENT ONE. Its MECHANISM shipped this round
+         and needed no arrival — a grouping is a cut through photographs the
+         museum already has and already shows, every one of which arrived in
+         the BLAST with the rest of the wall. What has NOT arrived is the
+         CONTENT: an ordering that spells something, a caption that carries an
+         acrostic, a photograph filed last on purpose. Those are written and
+         chosen, exactly like the two rooms above, and no transfer class covers
+         authorship. It is HELD and `shown: false`, so check (b) does not bite
+         and the exemption costs the rule nothing. */
+      "egg.presets",
   ].map(id => [id, "AUTHORSHIP — Mike writes it; no transfer class covers a thing that has to be written."]),
 ]);
 

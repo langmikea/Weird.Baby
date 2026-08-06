@@ -315,10 +315,6 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
       fontFamily: "'Courier Prime','Courier New',monospace",
     },
     cap: { flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: "2px" },
-    capTitle: {
-      fontSize: ".8rem", color: "#e8e6e0", letterSpacing: ".02em",
-      overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
-    },
     capMeta: {
       fontSize: ".62rem", color: "#8a877f", letterSpacing: ".16em",
       textTransform: "uppercase",
@@ -330,12 +326,13 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
       color: "#e8e6e0", background: "transparent",
       border: "1px solid #3a3a3a", padding: "7px 12px", cursor: "pointer",
     },
-    btnOn: {
-      fontFamily: "'Courier Prime','Courier New',monospace",
-      fontSize: ".62rem", letterSpacing: ".16em", textTransform: "uppercase",
-      color: "#0a0a0a", background: "#e8e6e0",
-      border: "1px solid #e8e6e0", padding: "7px 12px", cursor: "pointer",
-    },
+    /* [N6/N5 2026-08-06] `capTitle` AND `btnOn` ARE BOTH DELETED, and each
+       lost its one caller in this round rather than being left declared.
+       `capTitle` set the image description Mike struck off the rail; `btnOn`
+       was the lit fill on a control that turned out not to be a toggle. A style
+       key with no reader is the thing a later audit spends an hour proving is
+       dead — and the second one would have been worse than dead, because it
+       would have looked like the reader still HAS a pressed state. */
     /* [S4 2026-07-30] THE CLOSE CONTROL IS GONE FROM HERE. Its style keys
        and hover state went with it; the way out is [X] on the digit strip,
        inside the picture.
@@ -411,14 +408,31 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
         const f = reel.set[reel.i];
         const many = reel.set.length > 1;
         return (
+          /* [N8 2026-08-06] the reader's fallback noun follows the wing's word
+             change, PLATE → IMAGE — it is the accessible name when a set
+             arrives with no title of its own. */
           <div style={S.reader} role="dialog" aria-modal="true"
-               aria-label={(reel.title || "Plate") + " — reader"}>
+               aria-label={(reel.title || "Image") + " — reader"}>
             <div style={S.glass(zoom)} onClick={() => setZoom(z => !z)}>
               <img src={f.img} alt={f.label || ""} style={S.plate(zoom)} />
             </div>
             <div style={S.rail}>
+              {/* ══ [N6 2026-08-06] THE DESCRIPTION IS OFF THE RAIL ══════════
+                  MIKE: "the image descriptions in the viewer are POOR — remove
+                  them all. They return judiciously, later, when Mike pulls each
+                  image into the story and knows what it needs to say."
+                  SO THE RAIL CARRIES IDENTITY AND POSITION AND NOTHING ELSE:
+                  which archive you are in, the frame's own date, and which
+                  frame of how many. That is what a microfiche reader's rail
+                  says; the interpretation was the part he is striking.
+                  THE STRIKE IS SCOPED TO THE VIEWER, WHICH IS WHERE HE READ IT
+                  AND WHAT HE NAMED. The same `label` still captions the tile on
+                  the wall, where it is how a visitor CHOOSES which photograph to
+                  open — a wall of unlabelled pictures is a different instruction
+                  from the one he gave. That the two surfaces now disagree about
+                  whether a description is worth printing is reported rather than
+                  resolved by Ops: OPEN_ACTIONS N-a. */}
               <span style={S.cap}>
-                <span style={S.capTitle}>{f.label || reel.title}</span>
                 <span style={S.capMeta}>
                   {[reel.title, f.date,
                     "Frame " + (reel.i + 1) + " of " + reel.set.length]
@@ -434,10 +448,28 @@ export default function RobotsExhibitFlow({ activeAlbumId }) {
                   <button style={S.btn} onClick={() => step(1)}
                           aria-label="Next frame">Next &rsaquo;</button>
                 )}
-                <button style={zoom ? S.btnOn : S.btn}
+                {/* ══ [N5 2026-08-06] THE CONTROL ACTS; IT NO LONGER REPORTS ══
+                    MIKE: "FIT vs MAGNIFY is confusing and the button appears
+                    not to work — it follows state rather than acting. Make it
+                    ZOOM IN / ZOOM OUT and make the button act."
+                    HE IS DESCRIBING A REAL AMBIGUITY AND IT WAS BUILT IN THREE
+                    WAYS AT ONCE. The label said the action ("Fit" while
+                    magnified) while `aria-pressed` and the inverted fill said
+                    the STATE — so the same control was answering "what will
+                    happen" and "where am I" in the same instant, in opposite
+                    directions. Pressing it changed the picture and flipped the
+                    word, which reads exactly like a button that did nothing
+                    except rename itself.
+                    SO IT IS ONE THING NOW: an ACTION. ZOOM IN when the plate is
+                    fitted, ZOOM OUT when it is magnified, drawn the same way in
+                    both states, with no `aria-pressed` and no lit fill, because
+                    neither belongs on a control that is not a toggle. The
+                    zoom-in / zoom-out CURSOR on the glass already says which
+                    state you are in and it always did. */}
+                <button style={S.btn}
                         onClick={() => setZoom(z => !z)}
-                        aria-pressed={zoom}>
-                  {zoom ? "Fit" : "Magnify"}
+                        aria-label={zoom ? "Zoom out to fit" : "Zoom in to full size"}>
+                  {zoom ? "Zoom out" : "Zoom in"}
                 </button>
                 <button style={S.btn}
                         onClick={() => { setReel(null); setZoom(false); }}
