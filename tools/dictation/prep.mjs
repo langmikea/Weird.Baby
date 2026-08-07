@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /* ===========================================================================
-   THE DICTATION PREP — four documents Mike reads while he talks, and an index.
-   [K2–K6 2026-08-07]
+   THE DICTATION PREP — the documents Mike reads and writes in while he talks.
+   [K2–K6 2026-08-07 · W1–W8 2026-08-07]
    ---------------------------------------------------------------------------
    MIKE is about to dictate the Record's first two weeks. This builds what he
-   reads while doing it: the in-story spec source (K2), the artifact tracker
-   (K3), the egg tracker (K4) and the week-one outline (K5), under one index
-   (K6).
+   uses while doing it: the worksheet he writes in, the reference page behind
+   it, the in-story spec source (K2), the artifact tracker (K3) and the egg
+   tracker (K4), under one index (K6).
 
    ═══ IT COMPUTES ALMOST NOTHING, WHICH IS THE POINT ════════════════════════
    Exactly the arrangement `tools/contact-sheet.mjs` carries and for exactly its
@@ -31,25 +31,25 @@
    under `docs/` and are never served. They are also deliberately NOT written
    into `public/`, which `npm run lap`'s own clean step exists to police.
 
-   ═══ THE WEEK-ONE PAGE HAS A BLUE HALF NOW, AND THE GOLD HALF IS STILL EMPTY ══
-   K5 asks for "week 1 as it stands" and marks the hardest constraint in the
-   brief: *he must never mistake Ops scaffolding for his own material.* Its
-   first cut therefore wrote NO headlines at all, because no authored outline
-   existed in either repository (K-b).
+   ═══ [W1–W8 2026-08-07] THE CUE CARD IS A WORKSHEET NOW, AND THE PAGE IT
+       REPLACES IS THE ARGUMENT FOR THE SPLIT ═════════════════════════════════
+   `week1.html` was a good document and a bad instrument. It explained the rail
+   scheme, the provenance model, the transfer classes, the bouncy ball law and
+   five collisions BEFORE it showed a single headline, and then it had nowhere
+   for Mike to write. Mike's ruling: *"If it is reference, write it as such. If
+   it is the firehose I have to drink from to do anything, thanks, pass."*
 
-   [W1 2026-08-07] ONE NOW EXISTS AND IT IS OPS', NOT HIS. Mike spoke the week's
-   shape aloud on 2026-08-02; Ops structured it into `reveal/week-one.mjs` and
-   this page renders it ON THE BLUE RAIL, every row attributed, nothing quoted.
-   THE GOLD RAIL IS STILL EMPTY ON EVERY DAY — that is the whole point of having
-   two rails, and the moment a paraphrase renders in gold there is no way, a week
-   later, to tell it from something he said. Where he named a RULE as a rule (the
-   Friday formula, the standing Record rules, the bouncy ball law) it is marked
-   MIKE-NAMED and still renders blue: the rule is his, the sentence is Ops'.
+   So it is two files, both in `./worksheet.mjs`:
 
-   The page also prints the outline's COLLISIONS with the tree — five checks
-   against the transfer classes, the ledger and the one Record entry that
-   exists — named and not resolved, because resolving one is authoring.
-   Doctrine 12: assemble what exists, invent nothing.
+     worksheet.html   THE INSTRUMENT — Ops on the left, an input on the right,
+                      in his reading order, saving as he types, gathering into
+                      plain text on one button.
+     reference.html   EVERYTHING THAT EXPLAINS THE MACHINE — linked, never
+                      inline, and carrying the ten collision checks.
+
+   `week1.html` is PRUNED by name at the bottom of this file rather than left
+   orphaned, and this index lost its own briefing for the same reason the
+   worksheet lost its preamble.
 
    ═══ [B1/B2 2026-08-07] TWO RULINGS, AND ONE OF THEM VOIDED A NUMBER THIS
        FILE WAS PRINTING ═══════════════════════════════════════════════════════
@@ -57,15 +57,16 @@
    dividing a count of PHOTOGRAPHS by that ceiling and printing "16 pictures =
    6–8 days of material". Every input was a real measurement and the arithmetic
    was sound; the UNIT was wrong, which is why nothing caught it. The law, the
-   two buckets and the two runways are `reveal/focus.mjs`; `runwayBlock()` below
-   only draws them, and it will not print a runway for the DUMP bucket however
-   symmetrical that would look — a bucket with no ceiling divides into nothing.
-   The bucket is a JUDGED field on the asset table beside `verdict`, it is unset
-   on all 315 rows, and Ops does not derive it: a heuristic there would make
-   these pages look answered while nothing had been answered.
+   two buckets and the two runways are `reveal/focus.mjs`; `runwayBlock()` in
+   `./shell.mjs` only draws them, and it will not print a runway for the DUMP
+   bucket however symmetrical that would look — a bucket with no ceiling divides
+   into nothing. The bucket is a JUDGED field on the asset table beside
+   `verdict`, it is unset on all 315 rows, and Ops does not derive it: a
+   heuristic there would make these pages look answered while nothing had been
+   answered.
 
    B2 — RECORD 013 IS THE PROTOTYPE. Not day one, no re-dating, no defending;
-   the real Record starts at 001 when Mike dictates it. Every page here says so.
+   the real Record starts at 001 when Mike dictates it. These pages say so.
    NOTHING ON THE GLASS DOES, and that is Doctrine 11 rather than an oversight —
    "this entry was a prototype" is a line whose subject is the making of the
    museum. These pages are the right place for it because they are Ops
@@ -82,220 +83,26 @@ import { TRANSFERS, CLASSES } from "../../reveal/transfers.mjs";
 import { delivered, SIGNAGE } from "../../reveal/delivery.mjs";
 import { entries as recordEntries } from "../../reveal/record-entries.mjs";
 import { GOVERNED_PREFIX, STAGE_PREFIX } from "../../reveal/placement.mjs";
-import { ORIGIN as W1_ORIGIN, WEEK, PRELUDE, DAYS, FRIDAY_FORMULA, RECORD_RULES, COLLISIONS }
-  from "../../reveal/week-one.mjs";
-import { LAW, BUCKETS, ORIGIN as FOCUS_ORIGIN, runways, bucketOf, VOIDED }
-  from "../../reveal/focus.mjs";
+import { ORIGIN as FOCUS_ORIGIN, runways, bucketOf } from "../../reveal/focus.mjs";
+import { STAMP, esc, rich, runwayBlock, OPS_CSS, TYPED_CSS, page, BACK } from "./shell.mjs";
+import { buildWorksheet, buildReference } from "./worksheet.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..", "..");
 const argv = process.argv.slice(2);
 const optOf = (n, d) => { const i = argv.indexOf("--" + n); return i >= 0 ? argv[i + 1] : d; };
 const OUT = path.resolve(REPO, optOf("out", "docs/dictation-20260807"));
-const STAMP = "2026-08-07";
 
 const LEDGER = JSON.parse(fs.readFileSync(path.join(REPO, "reveal/ledger.json"), "utf8"));
 const TABLE = JSON.parse(fs.readFileSync(path.join(REPO, "provenance/asset-table.json"), "utf8"));
 
-const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-/* `~text~` marks a code span in the source strings so the data files stay free
-   of markup. Nothing else in them is interpreted. */
-const rich = s => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/\*([^*]+)\*/g, "<i>$1</i>");
-
 /* [B2 2026-08-07] the day Mike ruled on the two collisions this page carries */
 const W1_RULED_ON = FOCUS_ORIGIN.correctedOn;
 
-/* ═══ [B1 2026-08-07] THE TWO RUNWAYS, RENDERED ONCE AND USED ON TWO PAGES ═══
-   THE BLOCK THIS REPLACES IS THE REASON IT EXISTS. The week-one page divided a
-   count of PHOTOGRAPHS by the bouncy ball ceiling and printed "16 pictures =
-   6–8 days of material". Mike voided it: the law caps POINTS OF FOCUS, not
-   assets, and it does not mean the museum may not show more pictures.
-
-   So the arithmetic is done in `reveal/focus.mjs` and this only draws it, and
-   the two numbers are drawn DIFFERENTLY ON PURPOSE. Precious has a ceiling over
-   it, so it divides into weeks and the weeks mean something. Dump has no
-   ceiling, so it divides into nothing and this block will not print a runway for
-   it however much a symmetrical layout wants one — printing weeks for the dump
-   would re-commit the original error in the other bucket.
-
-   AND THE THIRD NUMBER IS THE ONE THAT IS TRUE TODAY. Nothing is assigned, so
-   the precious runway is a BOUND rather than a figure, and it says so. */
-function runwayBlock(r, ofWhat) {
-  const P = BUCKETS.precious, D = BUCKETS.dump;
-  const wk = w => w ? (w.min === w.max ? `${w.min} week${w.min === 1 ? "" : "s"}`
-    : `${w.min}&ndash;${w.max} weeks`) : null;
-  const bound = wk(r.bound.ceilWeeks);
-  return `<div class="note" style="margin-bottom:14px">
-<p class="k" style="margin:0 0 8px;font-size:11px;letter-spacing:.13em;text-transform:uppercase">
-Against the bouncy ball law <span class="rail m">his rule &middot; Ops wording</span></p>
-<p style="margin:0 0 10px"><b>${esc(LAW.statement)}</b> ${esc(LAW.because)}
-<i>${esc(LAW.doesNotMean)}</i></p>
-<div class="tw"><table>
-<thead><tr><th style="width:26%">bucket</th><th>ceiling</th><th style="width:16%">assigned</th><th style="width:26%">runway</th></tr></thead>
-<tbody>
-<tr><td><b>${esc(P.name)}</b><div class="k" style="font-size:11.5px;margin-top:3px">${esc(P.holds)}</div></td>
-    <td>${esc(P.ceiling)}</td>
-    <td><span class="tag ${r.precious.n ? "y" : ""}">${r.precious.n}</span></td>
-    <td>${r.precious.weeks ? `<b>${wk(r.precious.weeks)}</b>` : "<i class=\"k\">nothing assigned &mdash; no runway to compute</i>"}</td></tr>
-<tr><td><b>${esc(D.name)}</b><div class="k" style="font-size:11.5px;margin-top:3px">${esc(D.holds)}</div></td>
-    <td>${esc(D.ceiling)}</td>
-    <td><span class="tag ${r.dump.n ? "y" : ""}">${r.dump.n}</span></td>
-    <td><i class="k">no ceiling, so no runway. A pile size, and a batch of any size is one point of focus.</i></td></tr>
-<tr><td><b>UNASSIGNED</b><div class="k" style="font-size:11.5px;margin-top:3px">Nobody has said which bucket these are in.</div></td>
-    <td><i class="k">&mdash;</i></td>
-    <td><span class="tag ${r.unassigned.n ? "n" : ""}">${r.unassigned.n}</span></td>
-    <td><i class="k">the honest state today</i></td></tr>
-</tbody></table></div>
-<p class="ask" style="margin:10px 0 0"><b>SO THE RUNWAY IS A BOUND AND NOT A
-NUMBER, AND THAT IS THE ONE HONEST THING THIS TABLE CAN SAY.</b> Of ${esc(ofWhat)},
-<b>${r.bound.atLeast}</b> are assigned precious and <b>${r.bound.atMost}</b> could be
-&mdash; so the precious runway runs from <b>${r.precious.weeks ? wk(r.precious.weeks) : "nothing at all"}</b>
-to <b>${bound || "nothing at all"}</b>, and the whole of that gap is a judgement
-nobody has made. <b>The bucket is yours</b> &mdash; it sits beside <code>verdict</code>
-in the asset table, unset, and Ops will not derive it: a rule that called every
-machine photograph precious would make this table look answered while nothing had
-been answered.</p>
-<p class="k" style="margin:8px 0 0;font-size:12px"><b>THE FIGURE THIS REPLACES IS
-VOID:</b> &ldquo;${esc(VOIDED.figure)}&rdquo;. ${esc(VOIDED.why)}</p>
-</div>`;
-}
-
-/* ── SHARED SHELL ──────────────────────────────────────────────────────── */
-const OPS_CSS = `
-:root{color-scheme:light dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
- --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;--redfg:#f0c9c4;
- --grn:#7fa86a;--blu:#8fa8c4;--amb:#e08a5a}
-*{box-sizing:border-box}
-body{margin:0;padding:28px 26px 110px;background:var(--bg);color:var(--fg);
- font:15px/1.55 -apple-system,"Segoe UI",system-ui,sans-serif}
-.wrap{max-width:1180px;margin:0 auto}
-a{color:var(--blu)}
-h1{font-size:21px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
-.sub{color:var(--dim);font-size:13px;margin:0 0 8px}
-.back{font-size:12px;color:var(--dim2);margin:0 0 22px}
-h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
- margin:34px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
-h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:22px 0 8px}
-.note{border:1px solid #3a3630;background:var(--panel);padding:15px 17px;margin:0 0 26px;border-radius:3px}
-.note p{margin:0 0 10px}.note p:last-child{margin:0}
-.note b{color:var(--gold)}
-.ask{border-left:3px solid var(--red);padding-left:12px;color:var(--redfg)}
-.ops{border-left:3px solid var(--blu);padding-left:12px}
-code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc}
-/* A five-column table cannot fit a phone and must not be made to try. The
-   TABLE scrolls inside its own box; the PAGE never scrolls sideways. */
-.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.tw table{min-width:760px}
-table{border-collapse:collapse;width:100%;font-size:13px}
-th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
- font-weight:600;border-bottom:1px solid var(--line);padding:6px 9px 6px 0;position:sticky;top:0;background:var(--bg)}
-td{border-bottom:1px solid var(--line2);padding:8px 9px 8px 0;vertical-align:top}
-tr.hide{display:none}
-.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
- border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
-.tag.y{border-color:#4a6a3a;color:var(--grn)}
-.tag.n{border-color:#6a3a30;color:var(--amb)}
-.tag.g{border-color:#7a5a20;color:var(--gold)}
-.tag.b{border-color:#3a5570;color:var(--blu)}
-.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:14px}
-.bar input{background:var(--panel);border:1px solid var(--line);color:var(--fg);padding:6px 10px;
- border-radius:3px;font:13px/1.4 inherit;width:280px}
-.bar button{background:transparent;border:1px solid var(--line);color:var(--dim);padding:5px 11px;
- border-radius:3px;font:11px/1.3 inherit;letter-spacing:.09em;text-transform:uppercase;cursor:pointer;margin-left:5px}
-.bar button[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
-.count{font-size:12px;color:var(--dim2);margin-left:12px}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
-.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:14px 15px}
-.card h4{margin:0 0 4px;font-size:14px;color:var(--fg)}
-.card .id{font-family:ui-monospace,Consolas,monospace;font-size:11px;color:var(--blu);margin:0 0 8px}
-.card p{margin:0 0 8px;font-size:13px}
-.card .meta{font-size:12px;color:var(--dim);margin:0}
-.k{color:var(--dim2)}
-.day{border:1px solid var(--line);border-radius:3px;margin:0 0 18px;overflow:hidden}
-.day > .hd{background:var(--panel);padding:12px 15px;border-bottom:1px solid var(--line)}
-.day > .hd .n{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim2)}
-.day > .hd .slot{display:block;margin-top:5px;font-size:16px;color:var(--red);font-style:italic}
-.day > .bd{padding:13px 15px}
-.mine{border-left:3px solid var(--gold);padding-left:11px;margin:0 0 12px}
-.mine .lbl,.scaf .lbl{font-size:10px;letter-spacing:.13em;text-transform:uppercase;display:block;margin-bottom:4px}
-.mine .lbl{color:var(--gold)}
-.scaf{border-left:3px solid var(--blu);padding-left:11px;margin:0 0 12px}
-.scaf .lbl{color:var(--blu)}
-/* The attribution marker. NOT gold — gold is reserved for material that is
-   Mike's own words, and a paraphrase wearing gold is the whole hazard. */
-.rail{display:inline-block;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;
- border:1px solid #3a5570;color:var(--blu);padding:0 5px;border-radius:2px;white-space:nowrap;
- vertical-align:1px;margin-left:4px}
-.rail.m{border-color:#7a5540;color:var(--amb);margin-left:0}
-.tl{list-style:none;padding:0;margin:0}
-.tl li{display:grid;grid-template-columns:19ch 1fr;gap:0 14px;padding:7px 0;
- border-bottom:1px dotted var(--line2);margin:0}
-.tl li:last-child{border-bottom:0}
-.tl .at{color:var(--dim2);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding-top:2px}
-@media (max-width:620px){.tl li{grid-template-columns:1fr}.tl .at{margin-bottom:2px}}
-ul{margin:0 0 10px;padding-left:19px}li{margin:0 0 5px}
-footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--dim2);font-size:12px}
-@media (max-width:720px){body{padding:20px 14px 80px}.bar input{width:100%}}
-`;
-
-const TYPED_CSS = `
-:root{color-scheme:light dark;--paper:#e7e2d6;--ink:#2b2622;--ink2:#5a5148;--rule:#8d8478;--flag:#8c2f22}
-*{box-sizing:border-box}
-body{margin:0;padding:0;background:#2a2825;color:var(--ink);
- font:15px/1.5 "Courier New",Courier,ui-monospace,monospace}
-.sheet{max-width:82ch;margin:0 auto;background:var(--paper);padding:44px 5ch 90px;
- box-shadow:0 0 44px rgba(0,0,0,.5)}
-.back{font-size:12px;color:#9b978e;max-width:82ch;margin:0 auto;padding:14px 5ch 0}
-.back a{color:#8fa8c4}
-h1,h2,h3{font-weight:400;font-family:inherit}
-h1{font-size:16px;letter-spacing:.1em;text-align:center;margin:0 0 2px;text-transform:uppercase}
-.hd2{text-align:center;font-size:13px;letter-spacing:.06em;margin:0;text-transform:uppercase}
-.hd3{text-align:center;font-size:12px;color:var(--ink2);margin:0 0 4px}
-.rule{border:0;border-top:1px solid var(--ink);margin:12px 0}
-.rule.t{border-top-style:dashed;border-color:var(--rule)}
-h2{font-size:14px;text-transform:uppercase;letter-spacing:.05em;margin:30px 0 3px;
- text-decoration:underline;text-underline-offset:3px}
-h2 .at{display:block;text-decoration:none;font-size:11px;letter-spacing:0;color:var(--ink2);
- text-transform:none;margin-top:3px}
-.row{display:grid;grid-template-columns:19ch 1fr;gap:0 1ch;padding:7px 0;border-bottom:1px dotted #b9b0a2}
-.row:last-child{border-bottom:0}
-.row .k{text-transform:uppercase;font-size:13px;letter-spacing:.02em}
-.row .v{font-size:14px}
-.st{display:inline-block;font-size:10px;letter-spacing:.09em;border:1px solid var(--ink2);
- padding:0 5px;margin-right:6px;white-space:nowrap;vertical-align:2px}
-.st.CONTRADICTED{border-color:var(--flag);color:var(--flag)}
-.st.ABSENT{border-style:dashed}
-.st.IMPLIED{border-style:dotted}
-.fw{display:inline-block;font-size:10px;letter-spacing:.06em;background:var(--flag);color:var(--paper);
- padding:0 5px;margin-right:6px;vertical-align:2px}
-.alt{margin:6px 0 0 0;padding-left:2ch;border-left:2px solid var(--flag)}
-.alt div{margin:0 0 4px;font-size:13px}
-.alt .lbl{font-size:10px;letter-spacing:.09em;color:var(--flag)}
-.n{margin:6px 0 0;font-size:12.5px;color:var(--ink2)}
-.src{font-size:11px;color:var(--ink2);letter-spacing:.03em}
-.pre{white-space:pre-wrap;font-size:13px}
-.box{border:1px solid var(--ink);padding:12px 2ch;margin:22px 0}
-.box p{margin:0 0 9px}.box p:last-child{margin:0}
-b{font-weight:400;text-decoration:underline;text-underline-offset:2px}
-i{font-style:italic}
-code{font:inherit;background:rgba(0,0,0,.06);padding:0 2px}
-ol,ul{padding-left:3ch}
-li{margin:0 0 6px;font-size:13.5px}
-@media (max-width:700px){.sheet{padding:26px 3ch 70px}.row{grid-template-columns:1fr}.row .k{color:var(--ink2);margin-bottom:2px}}
-`;
-
-function page({ title, css, body, favi = "📄" }) {
-  return `<!doctype html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(title)}</title>
-<style>${css}</style></head><body>
-${body}
-</body></html>
-`;
-}
-
-const BACK = `<p class="back"><a href="index.html">&larr; the dictation prep</a> &middot; Ops&#8209;to&#8209;Mike, ${STAMP} &middot; not part of the museum</p>`;
+/* THE SHARED SHELL — `esc`, `rich`, `runwayBlock`, `OPS_CSS`, `TYPED_CSS`,
+   `page` and `BACK` were MOVED to ./shell.mjs, unchanged, when the worksheet
+   became a second generator file that needs all seven. The move was proved by
+   regenerating the three unchanged pages and diffing them byte for byte. */
 
 /* ═══════════════════════════════════════════════════════════════════════════
    K2 — THE IN-STORY SPEC SHEET
@@ -765,365 +572,96 @@ Nothing here is written back.</footer>
   return { html: page({ title: `THE EGG TRACKER — ${STAMP}`, css: OPS_CSS, body }), n: eggs.length, planted: planted.length, waiting: waiting.length };
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   K5 — THE WEEK-ONE OUTLINE
-   ═══════════════════════════════════════════════════════════════════════════ */
-function buildWeek1(artifactCounts, eggCounts) {
-  /* [B2 2026-08-07] a check can now be OPEN, RULED or an agreement */
-  const nOpen = COLLISIONS.filter(c => c.open).length;
-  const nRuled = COLLISIONS.filter(c => !c.open && c.ruled).length;
-
-  /* what has ARRIVED by week one, off the transfer rule and nothing else */
-  const arrived = LEDGER.rows.filter(r => r.transfer === "BLAST" || r.transfer === "UNLOCK");
-  const notYet = LEDGER.rows.filter(r => r.transfer === "PACKAGE" || r.transfer === "TRANSMISSION");
-  const heldArrived = arrived.filter(r => r.state === "HELD" && r.cls !== "egg");
-  const eggsArrived = LEDGER.rows.filter(r => r.cls === "egg" && (r.transfer === "BLAST" || r.transfer === "UNLOCK") && r.state === "HELD");
-
-  /* A day's `reach` is a transfer class, so it is checked against the transfer
-     table rather than asserted — and a class whose week is 0 is in hand. */
-  const reachLine = d => d.reach.map(c => {
-    const t = TRANSFERS[c];
-    const n = LEDGER.rows.filter(r => r.transfer === c).length;
-    return `<b>${esc(c)}</b> &mdash; ${esc(t.name)} ${n} rows, `
-      + `<span class="tag ${t.week === 0 ? "y" : "n"}">${t.week === 0 ? "IN HAND" : "NOT ARRIVED"}</span>`;
-  }).join(" &middot; ");
-
-  const dayBlock = d => `<div class="day">
-  <div class="hd">
-    <span class="n">Week 1 &middot; Day ${d.n} &middot; ${esc(d.dow)}</span>
-    <span class="slot">&mdash; your headline for this day is not written, and nothing on this page will write it &mdash;</span>
-  </div>
-  <div class="bd">
-    <div class="mine"><span class="lbl">yours &middot; the day's headline, in your words</span>
-      <p class="k" style="margin:0"><i>empty, and it stays empty until you dictate into it.
-      Everything below this line is Ops&rsquo;.</i></p></div>
-    <div class="scaf"><span class="lbl">Ops &middot; the day as structured <span class="rail">blue rail</span></span>
-      <p style="margin:0 0 7px;font-size:16px"><b style="color:var(--fg)">${esc(d.headline)}</b></p>
-      <p style="margin:0 0 8px">${esc(d.shape)}</p>
-      <p class="k" style="margin:0 0 4px;font-size:11px;letter-spacing:.13em;text-transform:uppercase">Topics</p>
-      <ul style="margin:0 0 8px">${d.topics.map(t => `<li>${esc(t)}</li>`).join("")}</ul>
-      <p class="k" style="margin:0;font-size:12.5px">What this day reaches for: ${reachLine(d)}.
-      Which of the ${heldArrived.length} held-and-arrived things it actually shows is an
-      authoring decision and is not derivable &mdash;
-      <a href="artifacts.html">the artifact tracker</a> &middot;
-      <a href="eggs.html">the egg tracker</a>.</p></div>
-  </div>
-</div>`;
-
-  const body = `<div class="wrap">
-${BACK}
-<h1>The story outline &middot; week one, days 1&ndash;5</h1>
-<p class="sub">${esc(WEEK.headline)} &mdash; structured by Ops from what you said on ${esc(W1_ORIGIN.spokenOn)}, and not in your words</p>
-
-<div class="note">
-<p class="ask"><b>READ THIS BEFORE YOU READ A SINGLE HEADLINE BELOW, BECAUSE IT
-IS THE ONLY THING THAT KEEPS THEM USEFUL.</b> <b>NOTHING ON THIS PAGE IS QUOTED.
-NOT ONE LINE.</b> You spoke the week's shape aloud on ${esc(W1_ORIGIN.spokenOn)};
-Ops structured it into a headline, five days, topics and standing rules and wrote
-every sentence of it. So the whole outline sits on the
-<b style="color:var(--blu)">blue</b> rail &mdash; the shape is yours, the words are
-Ops&rsquo;. A paraphrase rendered in gold is indistinguishable a week from now from
-something you actually said, and that is the exact failure this page was built to
-avoid.</p>
-
-<p><b>THE GOLD RAIL IS STILL EMPTY ON EVERY DAY, DELIBERATELY.</b> Every day below
-has an empty gold slot above its blue one. That slot is where your own headline
-goes when you dictate it. There is still <b>no authored day-by-day outline in
-either repository</b> &mdash; no week headline, no day headlines, no topic list,
-no <code>weight</code> field on anything story-shaped. That finding (K&#8209;b) has
-not been closed by this page; it has been given a working draft to argue with.</p>
-
-<p><b>ONE MARKER YOU WILL SEE AND SHOULD TRUST:</b>
-<span class="rail m">his rule &middot; Ops wording</span> means you named that RULE
-as a rule &mdash; the Friday formula, the standing Record rules, the bouncy ball
-law. The rule is yours; the sentence is still Ops&rsquo;, so it renders blue like
-everything else. Nothing on this page is unlabelled.</p>
-
-<p><b>THE OUTLINE WAS RUN AGAINST THE TREE AND YOU HAVE SINCE RULED ON TWO OF THE
-CHECKS.</b> ${COLLISIONS.length} checks against what the repository actually holds
-&mdash; the transfer classes, the ledger, the one Record entry that exists.
-<b>${nOpen} unresolved</b>, <b>${nRuled} ruled by you on ${esc(W1_RULED_ON)}</b>
-(<a href="#collisions">the prototype, and the bouncy ball law</a>), the rest
-agreements. A ruled check is kept on this page rather than deleted, because the
-collision was real and it is why the ruling was needed.</p>
-
-<p><b>AND ONE OF THOSE RULINGS CHANGES DAY 1 BELOW.</b> Record 013 is a
-<b>prototype</b> &mdash; not day one, no re-dating, no defending &mdash; and the real
-Record starts at <b>001</b> when you dictate it. So day 1's entry is 001 and does not
-exist yet; the entry sitting in the tree is not in that sequence.</p>
-</div>
-
-<h2>What week one is, as a fact about arrivals</h2>
-<div class="tw"><table>
-<thead><tr><th>class</th><th>window</th><th>what it carries</th><th>rows</th><th>in hand by week 1</th></tr></thead>
-<tbody>
-${CLASSES.map(c => {
-  const t = TRANSFERS[c];
-  const n = LEDGER.rows.filter(r => r.transfer === c).length;
-  const inHand = t.week === 0;
-  return `<tr><td><b>${esc(c)}</b></td><td>${esc(t.name)}</td><td>${esc(t.holds)}</td><td>${n}</td>
-  <td><span class="tag ${inHand ? "y" : "n"}">${inHand ? "YES" : "NO"}</span></td></tr>`;
-}).join("\n")}
-</tbody></table></div>
-<p class="k" style="font-size:12.5px;margin-top:10px"><b>${arrived.length} things
-have arrived and ${notYet.length} have not.</b> The rule is absolute and checked:
-an asset may only be SHOWN after it has been TRANSFERRED. A week-one entry that
-reaches for a PACKAGE row is reaching for something the story does not yet
-have &mdash; and the packages are what <i>earn</i> their photographs.</p>
-
-<h2>The week</h2>
-<div class="day"><div class="hd">
-  <span class="n">Week 1 &middot; the week's own headline</span>
-  <span class="slot">&mdash; yours is not written &mdash;</span>
-</div><div class="bd">
-  <div class="mine"><span class="lbl">yours</span>
-    <p class="k" style="margin:0"><i>empty.</i></p></div>
-  <div class="scaf"><span class="lbl">Ops &middot; the week as structured <span class="rail">blue rail</span></span>
-    <p style="margin:0 0 7px;font-size:19px"><b style="color:var(--fg)">${esc(WEEK.headline)}</b></p>
-    <p style="margin:0 0 6px">${WEEK.days} days, ${esc(WEEK.span)}. ${esc(WEEK.spanRule)}</p>
-    <p class="k" style="margin:0;font-size:12.5px">${esc(W1_ORIGIN.rule)}</p></div>
-  <div class="scaf"><span class="lbl">Ops &middot; the one thing week one is already committed to</span>
-    <p style="margin:0">The asset timeline's own founding sentence, and it is
-    <b>the only verbatim sentence anywhere on this page</b> &mdash; it is carried from
-    <code>reveal/transfers.mjs</code>, where it has been in writing since 5 August with
-    its source named:
-    <b>“the first Record must produce the first images of NIAC and VIIIp so the site has
-    images to post — which means those images arrived in the email blast.”</b>
-    A constraint about <i>what the week must produce</i> rather than about what any day says.</p></div>
-</div></div>
-
-<h2>The weekend the week is named after</h2>
-<div class="note" style="margin-bottom:14px"><p>Not a day of week one &mdash; it is
-what happened before the museum opened, and four of the five days point back at it.
-<b>The transfer model already calls this window “Friday to Sunday, pre-launch”</b>
-and was written on 5 August from the asset timeline, without reference to this
-outline. They agree on the weekend independently; see
-<a href="#collisions">W&#8209;2</a>.</p></div>
-<div class="scaf" style="margin-bottom:26px">
-  <span class="lbl">Ops &middot; the prelude, structured <span class="rail">blue rail</span></span>
-  <ul class="tl">
-${PRELUDE.map(p => `    <li><span class="at">${esc(p.at)}</span><span>${esc(p.what)}</span></li>`).join("\n")}
-  </ul>
-</div>
-
-${DAYS.map(dayBlock).join("\n")}
-
-<h2>The Friday formula</h2>
-<div class="scaf" style="margin-bottom:26px">
-  <span class="lbl">${esc(FRIDAY_FORMULA.name)} <span class="rail m">his rule &middot; Ops wording</span></span>
-  <p style="margin:0 0 8px">${esc(FRIDAY_FORMULA.claim)}</p>
-  <ul style="margin:0">${FRIDAY_FORMULA.body.map(b => `<li>${esc(b)}</li>`).join("")}</ul>
-</div>
-
-<h2>Standing rules for the Record</h2>
-<div class="note" style="margin-bottom:14px"><p>Not week-one rules &mdash; the
-Record's own form. They are here because <b>four of the five change what a week-one
-day is allowed to be</b>, and the bearing of each is spelled out rather than left
-for the reader to work out at dictation speed.</p></div>
-<div class="tw"><table>
-<thead><tr><th style="width:44%">the rule</th><th>what it does to week one</th></tr></thead>
-<tbody>
-${RECORD_RULES.map(r => `<tr>
-  <td><span class="rail m">his rule &middot; Ops wording</span><div style="margin-top:5px">${esc(r.rule)}</div></td>
-  <td>${esc(r.bearing)}</td></tr>`).join("\n")}
-</tbody></table></div>
-
-<h2>What each day could reach for &mdash; the whole eligible set, once</h2>
-<div class="note" style="margin-bottom:14px"><p>Printed once rather than five
-times, because it is the same set every day and repeating it would imply a
-distribution nobody has authored.</p></div>
-
-<h3>Pictures &mdash; ${artifactCounts.waiting} of the machines are behind the door and one entry away</h3>
-<p style="margin:0 0 6px">Every one is a real file the museum owns, already
-judged in the asset table, with no code between it and a wall. <b>One picture
-has ever been delivered</b> &mdash; the power switch round the back, by Record
-013, which is the prototype. <a href="artifacts.html">The full table, filterable
-&rarr;</a></p>
-${runwayBlock(artifactCounts.runways, "these " + artifactCounts.waiting + " pictures")}
-
-<h3>Eggs &mdash; ${eggsArrived.length} are planted, arrived, and could be spent</h3>
-<p style="margin:0 0 6px">Spending an egg is a Record entry that explains it, and
-it is one-way. ${eggCounts.waiting} more are ledgered and unbuilt, so a week-one
-entry cannot reach them. <a href="eggs.html">The full table &rarr;</a></p>
-
-<h3>Specification &mdash; two faces are honest and thin</h3>
-<p style="margin:0 0 6px">Both Technical Specifications faces lost their
-real-build registers and <b>nothing was written to replace what went</b>. The
-MGK-VIIIp face now carries no specifications at all. Everything the fiction has
-ever asserted about either machine is assembled on
-<a href="specsheet.html">the spec sheet &rarr;</a>, marked asserted, implied or
-contradicted, with every conflict shown both ways.</p>
-
-<h3>Things week one must not reach for</h3>
-<ul>
-<li>Any <b>PACKAGE</b> row &mdash; the units, the cases, the objects and the manual
-pieces arrive on four Fridays in weeks 3&ndash;7, and they earn their photographs.</li>
-<li>Any <b>LATER TRANSMISSION</b> &mdash; months 2&ndash;3.</li>
-<li>Anything with <b>no named arrival week</b>, which means exactly one thing: not
-showable, because nobody has said it got here.</li>
-</ul>
-
-<h2 id="collisions">Where the outline meets the tree &mdash; ${COLLISIONS.length} checks</h2>
-<div class="note" style="margin-bottom:14px"><p>Each of these is a claim the
-outline makes, run against what the repository actually holds. <b>${nOpen}
-of the ${COLLISIONS.length} is still unresolved</b>${nOpen ? " and is drawn in red" : ""}.
-<b>${nRuled} you ruled on today</b> &mdash; those carry your ruling in gold, because
-the ruling is yours and it is quoted from what you said. The rest are agreements,
-and two of them are worth knowing about because nobody arranged them.</p>
-${nRuled ? `<p class="ask"><b>A RULED CHECK IS NOT DELETED FROM THIS PAGE.</b> The
-collision was real, it is why the ruling was needed, and a page that quietly drops
-what it used to say cannot be checked against itself a week later.</p>` : ""}</div>
-${COLLISIONS.map(c => `<div class="day"><div class="hd">
-  <span class="n">${esc(c.id)} &middot; ${c.open ? "unresolved" : c.ruled ? "RULED" : "agrees"}</span>
-  <span class="slot" style="color:${c.open ? "var(--red)" : c.ruled ? "var(--gold)" : "var(--grn)"};font-size:15px;font-style:normal">${esc(c.title)}</span>
-</div><div class="bd">
-  <div class="scaf"><span class="lbl">the check <span class="rail">blue rail</span></span>
-    <p style="margin:0 0 6px">${esc(c.check)}</p>
-    <p class="k" style="margin:0;font-size:12px">Settled by <code>${esc(c.derivedFrom)}</code></p></div>
-${c.ruled ? `  <div class="mine"><span class="lbl">yours &middot; the ruling, ${esc(W1_RULED_ON)}</span>
-    <p style="margin:0 0 6px">${esc(c.ruled)}</p>
-    ${c.also ? `<p class="k" style="margin:0;font-size:12.5px">${esc(c.also)}</p>` : ""}</div>` : ""}
-${c.open ? `  <div class="mine"><span class="lbl">yours &middot; the decision</span>
-    <p style="margin:0 0 6px">${esc(c.open)}</p>
-    ${c.also && !c.ruled ? `<p class="k" style="margin:0;font-size:12.5px">${esc(c.also)}</p>` : ""}</div>` : ""}
-</div></div>`).join("\n")}
-
-<footer>Days are a frame, not a schedule &mdash; and the standing rules say the day
-count is not the entry count. The outline is Ops&rsquo; structuring of what you said on
-${esc(W1_ORIGIN.spokenOn)} and lives in <code>reveal/week-one.mjs</code>; the checks
-against it are built from <code>reveal/transfers.mjs</code>,
-<code>reveal/record-entries.mjs</code> and <code>reveal/ledger.json</code>. Every gold
-slot on this page is still empty, which is the one thing about it that has not
-changed.</footer>
-</div>`;
-  return page({ title: `THE STORY OUTLINE — WEEK ONE — ${STAMP}`, css: OPS_CSS, body });
-}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    K6 — THE INDEX
+   [W1–W8 2026-08-07] IT IS A DOOR NOW AND NOT A BRIEFING. Everything it used
+   to explain — the rail scheme, the two rulings, what changed in the tree — is
+   on `reference.html`, for the same reason the worksheet lost its preamble:
+   a page that spends attention describing the machine spends it before the
+   machine gets used. What is left is one paragraph and five doors, with the
+   one Mike opens first at the top and twice the size of the others.
    ═══════════════════════════════════════════════════════════════════════════ */
 function buildIndex(a, e) {
   const body = `<div class="wrap">
 <h1>The dictation prep</h1>
-<p class="sub">Weird.Baby Museum &middot; assembled ${STAMP} &middot; four documents and this index &middot; Ops&#8209;to&#8209;Mike, and not part of the museum</p>
+<p class="sub">Weird.Baby Museum &middot; ${STAMP} &middot; Ops&#8209;to&#8209;Mike, and not part of the museum</p>
 
 <div class="note">
-<p>You are about to dictate the Record's first two weeks. These are the four
-things to have open while you do it. <b>Nothing in any of them was invented</b>
-&mdash; every figure, file, egg and conflict is carried from somewhere in one of
-the two repositories, with its source named, and every gap is printed as a gap.
-<b>The one thing not carried from a repository is the week-one outline</b>, which
-is Ops&rsquo; structuring of what you said aloud on ${esc(W1_ORIGIN.spokenOn)}; it
-now lives in <code>reveal/week-one.mjs</code>, it is labelled as Ops&rsquo; on every
-row, and none of it is quoted.</p>
-<p class="ask"><b>ONE RULE ACROSS ALL FOUR PAGES:</b> gold means the material is
-yours, blue means Ops derived or structured it and the rule is named, and a red
-slot means the thing is not written. A third marker appears only on the outline
-&mdash; <span class="rail m">his rule &middot; Ops wording</span> &mdash; and means
-you named the RULE but the sentence is still Ops&rsquo;. You should never have to
-guess which you are reading.</p>
+<p><b>You are about to dictate the Record's first two weeks. Start on the
+worksheet.</b> Everything else here answers a question you may not have yet.
+<b>Nothing on any of these pages was invented</b> &mdash; every figure, file, egg
+and conflict is carried from one of the two repositories with its source named,
+and every gap is printed as a gap.</p>
+</div>
+
+<div class="cards" style="grid-template-columns:1fr;margin-bottom:14px">
+<div class="card" style="border-color:#6b5426">
+  <h4 style="font-size:17px"><a href="worksheet.html">The worksheet &rarr;</a></h4>
+  <p class="id">where the writing happens</p>
+  <p>Two weeks and ten days. <b>Ops on the left, an input on the right</b>, in
+  reading order: the headline of headlines first, then the map of all ten days,
+  then a block for each day with a headline, an executive summary and a notes
+  field. It saves as you type and gathers everything you have written into plain
+  text on one button.</p>
+  <p class="meta">Week two carries <b>your own words in gold</b> &mdash; the headline
+  and six beats, character for character. Week one carries none, because you spoke
+  it and it was written down from the shape rather than quoted.</p>
+</div>
 </div>
 
 <div class="cards">
 <div class="card">
-  <h4><a href="specsheet.html">The in-story spec sheet</a></h4>
-  <p class="id">K2 &middot; the thing to author from</p>
-  <p>Every piece of story-generated technical data about both machines, from both
-  repositories, set as a period one-sheet in the typed-page register. Marked
-  <b>asserted</b>, <b>implied</b>, <b>contradicted</b> or <b>absent</b>; where two
-  sources disagree, both readings print and the conflict is named.</p>
-  <p class="meta">The manual's twelve-section structure was the candidate grouping and
-  <b>it does not serve a one-sheet</b> &mdash; the page says so and says why, and every
-  heading still carries its manual position so an authored row lands in the right place.
-  Closes the missing item in <code>N-g</code> and <code>N-h</code>.</p>
+  <h4><a href="reference.html">Reference</a></h4>
+  <p class="id">why the left-hand column says what it says</p>
+  <p>The three marks and what each promises, where the two weeks came from, the
+  transfer classes, the standing rules for the Record, the Friday formula, the
+  bouncy ball law and the two runways, and the ten checks the outlines were run
+  against &mdash; <b>one unresolved</b>.</p>
+  <p class="meta">All of this used to be printed above the work. It is here so it
+  is reachable, not unavoidable.</p>
 </div>
 
 <div class="card">
   <h4><a href="artifacts.html">The artifact tracker</a></h4>
-  <p class="id">K3 &middot; what you can reach for today</p>
+  <p class="id">what you can reach for today</p>
   <p>${a.addressed} addressable files joined to ${LEDGER.rows.length} revealable
-  things, filterable like the contact sheet. Every row carries its judgement, its
-  use, and the one verdict that matters while dictating: <b>can an entry show
-  this today?</b></p>
+  things, filterable. Every row carries its judgement, its use, and the one verdict
+  that matters while dictating: <b>can an entry show this today?</b></p>
   <p class="meta"><b>${a.waiting} pictures of the machines are behind the stage door
   right now</b>, each one entry away from a wall. Exactly one file has ever been
-  delivered. <b>The two runways are on it</b> &mdash; precious reveals remaining and
-  what is in the dump &mdash; and all ${a.runways.unassigned.n} are unassigned, so
-  the precious runway is a bound and not a number.</p>
+  delivered, and all ${a.runways.unassigned.n} assets are unassigned to a bucket.</p>
 </div>
 
 <div class="card">
   <h4><a href="eggs.html">The egg tracker</a></h4>
-  <p class="id">K4 &middot; what is hidden, and what is only an idea</p>
+  <p class="id">what is hidden, and what is only an idea</p>
   <p>${e.n} ledgered eggs &mdash; ${e.planted} planted, ${e.waiting} waiting &mdash;
   each with its mechanism, what it needs before it can be planted, and where it
-  stands. Plus the three you named that are <b>not</b> in the egg table, each with
-  the reason it is not.</p>
+  stands. Plus the three you named that are <b>not</b> in the egg table.</p>
   <p class="meta">Four eggs have no written form anywhere but their ledger row.
   Nothing in this museum reports an egg being tripped.</p>
 </div>
 
 <div class="card">
-  <h4><a href="week1.html">The story outline &middot; week one</a></h4>
-  <p class="id">K5 &middot; W1 &middot; the cue card</p>
-  <p><b>${esc(WEEK.headline)}</b> &mdash; the week headline, the weekend it is named
-  after, ${DAYS.length} days with their topics, the Friday formula and
-  ${RECORD_RULES.length} standing rules for the Record, each with what it does to
-  week one.</p>
-  <p class="meta"><b>ALL OF IT IS ON THE BLUE RAIL AND NONE OF IT IS QUOTED.</b> You
-  spoke the week's shape on ${esc(W1_ORIGIN.spokenOn)}; Ops structured it and wrote
-  every sentence. <b>Every gold slot is still empty</b> &mdash; that is where your own
-  words go. ${COLLISIONS.length} checks were run against the tree;
-  <b>${COLLISIONS.filter(c => c.open).length} are unresolved</b> and
-  <b>${COLLISIONS.filter(c => !c.open && c.ruled).length} you ruled on
-  ${esc(W1_RULED_ON)}</b> &mdash; the prototype and the bouncy ball law.</p>
+  <h4><a href="specsheet.html">The in-story spec sheet</a></h4>
+  <p class="id">the thing to author from</p>
+  <p>Every piece of story-generated technical data about both machines, set as a
+  period one-sheet. Marked <b>asserted</b>, <b>implied</b>, <b>contradicted</b> or
+  <b>absent</b>; where two sources disagree, both readings print and the conflict
+  is named.</p>
+  <p class="meta">Only the in-story specs count &mdash; the real board and the real
+  filenames are the provenance of a prop, and a spec sheet is not a provenance record.</p>
 </div>
-</div>
-
-<h2>Your two rulings of ${esc(W1_RULED_ON)}, and what they moved</h2>
-<div class="note">
-<p><b>THE BOUNCY BALL LAW CAPS POINTS OF FOCUS, NOT ASSETS.</b> Humans remember
-one or two things; ten things reduces the odds they keep the one that matters
-&mdash; and it does <i>not</i> mean the museum may not show more pictures.
-<b>Two buckets:</b> the <b>precious</b> one is two or three genuine reveals a
-<i>week</i> and those are what a reader remembers; the <b>dump</b> is everything
-else, fun to look at, part of the story, part of the pile, and it has <b>no
-ceiling</b>. Ten manual pages arriving is ONE point of focus. <b>The trackers were
-counting the wrong thing and are fixed:</b> &ldquo;${esc(VOIDED.figure)}&rdquo; is
-void, and what replaces it is two separate runways with a <b>bucket</b> field on
-every asset &mdash; yours, unset, and Ops will not guess it.</p>
-
-<p><b>RECORD 013 WAS A PROTOTYPE AND IS CLEARED OUT OF THE WAY.</b> It was chosen
-because it was interesting enough to find the structure, and it did; it is not day
-one and it needs no re-dating and no defending. <b>The real Record starts at
-001</b>, when you dictate it. It is <b>kept rather than retired</b>, on your own
-criterion &mdash; whichever keeps the Record honest <i>and</i> the machinery
-exercised. It is the only thing in the museum exercising the entry renderer, the
-index budgets, the per-entry ledger derivation and the one delivered picture, and
-retiring it would have parked all four until 001 lands. <b>It is marked as the
-prototype in these pages and in the ledger and NOWHERE ON THE GLASS</b>, because a
-line whose subject is the making of the museum does not ship. <b>The one thing left
-is its number</b> &mdash; under your own ruling the volume counts from 001, which
-makes 013 a number in a sequence that has not started. It is untouched and it is one
-word from you.</p>
-</div>
-
-<h2>What changed in the tree yesterday, beside these four</h2>
-<div class="note">
-<p><b>THE ELEVEN HELD PHOTOGRAPHS ARE DELETED</b>, on your ruling. Ten operator
-plates and the manual's title page are off disk, out of the asset table and out
-of the provenance register. <b>What the robot egg is left with:</b> three plates,
-all of them upstream in the robots repo's culled 2021 set &mdash; the eye, the
-shoulder, the hand on the control &mdash; and all three regenerable from the
-source video, whose crop rectangles are recorded. The manual's title page cost
-nothing at all: it was byte-identical to page 1 of the sixty-one the robots repo
-generates. The ledger row says all of this in writing.</p>
 </div>
 
 <footer>Regenerate with <code>npm run dictation</code>. These pages read
 <code>provenance/asset-table.json</code>, <code>reveal/ledger.json</code>,
-<code>reveal/transfers.mjs</code>, <code>reveal/delivery.mjs</code> and
-<code>tools/dictation/spec-source.mjs</code>, and write nothing back to any of them.</footer>
+<code>reveal/transfers.mjs</code>, <code>reveal/delivery.mjs</code>,
+<code>reveal/week-one.mjs</code>, <code>reveal/week-two.mjs</code> and
+<code>tools/dictation/spec-source.mjs</code>, and write nothing back to any of them.
+<b>Regenerating does not touch anything you have typed into the worksheet</b> &mdash;
+your responses live in the browser, never in the file.</footer>
 </div>`;
   return page({ title: `THE DICTATION PREP — ${STAMP}`, css: OPS_CSS, body });
 }
@@ -1136,13 +674,26 @@ const files = [
   ["specsheet.html", buildSpecsheet()],
   ["artifacts.html", art.html],
   ["eggs.html", egg.html],
-  ["week1.html", buildWeek1(art, egg)],
+  ["worksheet.html", buildWorksheet()],
+  ["reference.html", buildReference({ ledger: LEDGER, artifacts: art, eggs: egg, ruledOn: W1_RULED_ON })],
   ["index.html", buildIndex(art, egg)],
 ];
 for (const [n, html] of files) {
   fs.writeFileSync(path.join(OUT, n), html);
   console.log(`  ${String(Math.round(Buffer.byteLength(html) / 1024)).padStart(4)} KB  ${path.relative(REPO, path.join(OUT, n))}`);
 }
+
+/* A GENERATOR THAT STOPS WRITING A FILE DOES NOT UNWRITE IT, AND A STALE PAGE
+   IN THIS FOLDER IS WORSE THAN NO PAGE — every other document here links to
+   `index.html`, so an orphaned `week1.html` stays reachable by history, by a
+   bookmark and by anything that ever pasted its path. It is named rather than
+   globbed: this prunes what THIS round replaced and nothing else. */
+const REPLACED = ["week1.html"];
+for (const n of REPLACED) {
+  const p = path.join(OUT, n);
+  if (fs.existsSync(p)) { fs.unlinkSync(p); console.log(`     -    removed  ${path.relative(REPO, p)}  (replaced by worksheet.html + reference.html)`); }
+}
+
 console.log(`\nTHE DICTATION PREP — ${files.length} files`);
 console.log(`  record entries        ${recordEntries().length}`);
 console.log(`  addressable files     ${art.addressed}`);

@@ -164,6 +164,49 @@ and the pull-back rule's single delivered picture. **The prototype mark is in
 that line's subject is the making of the museum (Doctrine 11), and the entry's
 own text asserts nothing false. **Its NUMBER is untouched and open: `B-b`.**
 
+## THE THREE MARKS, AND THE VERBATIM RULE (W1–W8, 2026-08-07 — STANDING)
+
+> **A `beat` may be DELETED but never REWORDED.**
+
+Canonical text + reasoning: `docs/canonical/OPERATIONS.md` §5, *THE STORY
+OUTLINES, AND THE VERBATIM RULE*. The outlines are `reveal/week-one.mjs` and
+`reveal/week-two.mjs`; the pages are `npm run dictation`.
+
+Three marks, and **both errors cost the same**:
+
+| mark | means | promise |
+|---|---|---|
+| `Ops` (blue) | Ops wrote the sentence | the shape is Mike's, the words are not |
+| **`your words` (gold)** | **verbatim, character for character** | **never reworded** |
+| `your rule · Ops wording` (amber) | he named the rule | rule his, sentence Ops' |
+
+**A paraphrase rendered in gold** is indistinguishable a week later from
+something he said. **His own sentence left in blue** gets quietly "improved" by
+the next round and nothing can tell it was ever his. Week one was **spoken** and
+written down from the framing, so its gold rail is empty as a FACT rather than a
+policy; week two arrived **in writing**, so it carries a gold seam.
+
+**Ops divides and does not invent.** A `COLLISIONS` check is named and not
+resolved — resolving one is authoring. No `weight` field was invented (K-b) for
+the same reason no `bucket` is derived (B-a): a made-up ranking makes a page read
+as answered while nothing has been answered.
+
+## REFERENCE AND WORK DO NOT SHARE A PAGE (Mike, 2026-08-07 — STANDING)
+
+> **"If it is reference, write it as such. If it is the firehose I have to drink
+> from to do anything, thanks, pass."**
+
+`docs/dictation-20260807/worksheet.html` is the instrument — 32 slots across two
+weeks and ten days, Ops on the left and an input on the right, saving to browser
+storage as he types, with one button that gathers every response into plain text.
+`reference.html` holds everything that explains the machine. **The page they
+replace failed on neither accuracy nor tone: it spent his attention describing
+the machine before he could use it, and then had nowhere for him to write.**
+
+**An instrument must degrade honestly:** a refused `localStorage` raises a red
+banner rather than losing an hour of typing on a reload, and a refused clipboard
+leaves the assembled text selected with a line saying so.
+
 ## NOTES TO MIKE ARE NOT PART OF THE UX, EVER (Mike, 2026-08-06 — STANDING)
 
 > **Notes to Mike render in red (or an equally unmistakable treatment) meaning

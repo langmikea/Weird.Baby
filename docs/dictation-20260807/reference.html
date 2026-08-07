@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>REFERENCE — THE WORKSHEET — 2026-08-07</title>
+<style>
+:root{color-scheme:light dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;--redfg:#f0c9c4;
+ --grn:#7fa86a;--blu:#8fa8c4;--amb:#e08a5a}
+*{box-sizing:border-box}
+body{margin:0;padding:28px 26px 110px;background:var(--bg);color:var(--fg);
+ font:15px/1.55 -apple-system,"Segoe UI",system-ui,sans-serif}
+.wrap{max-width:1180px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:21px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 8px}
+.back{font-size:12px;color:var(--dim2);margin:0 0 22px}
+h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:34px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:22px 0 8px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:15px 17px;margin:0 0 26px;border-radius:3px}
+.note p{margin:0 0 10px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+.ask{border-left:3px solid var(--red);padding-left:12px;color:var(--redfg)}
+.ops{border-left:3px solid var(--blu);padding-left:12px}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc}
+/* A five-column table cannot fit a phone and must not be made to try. The
+   TABLE scrolls inside its own box; the PAGE never scrolls sideways. */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tw table{min-width:760px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:6px 9px 6px 0;position:sticky;top:0;background:var(--bg)}
+td{border-bottom:1px solid var(--line2);padding:8px 9px 8px 0;vertical-align:top}
+tr.hide{display:none}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.y{border-color:#4a6a3a;color:var(--grn)}
+.tag.n{border-color:#6a3a30;color:var(--amb)}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.b{border-color:#3a5570;color:var(--blu)}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.bar input{background:var(--panel);border:1px solid var(--line);color:var(--fg);padding:6px 10px;
+ border-radius:3px;font:13px/1.4 inherit;width:280px}
+.bar button{background:transparent;border:1px solid var(--line);color:var(--dim);padding:5px 11px;
+ border-radius:3px;font:11px/1.3 inherit;letter-spacing:.09em;text-transform:uppercase;cursor:pointer;margin-left:5px}
+.bar button[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.count{font-size:12px;color:var(--dim2);margin-left:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:14px 15px}
+.card h4{margin:0 0 4px;font-size:14px;color:var(--fg)}
+.card .id{font-family:ui-monospace,Consolas,monospace;font-size:11px;color:var(--blu);margin:0 0 8px}
+.card p{margin:0 0 8px;font-size:13px}
+.card .meta{font-size:12px;color:var(--dim);margin:0}
+.k{color:var(--dim2)}
+.day{border:1px solid var(--line);border-radius:3px;margin:0 0 18px;overflow:hidden}
+.day > .hd{background:var(--panel);padding:12px 15px;border-bottom:1px solid var(--line)}
+.day > .hd .n{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim2)}
+.day > .hd .slot{display:block;margin-top:5px;font-size:16px;color:var(--red);font-style:italic}
+.day > .bd{padding:13px 15px}
+.mine{border-left:3px solid var(--gold);padding-left:11px;margin:0 0 12px}
+.mine .lbl,.scaf .lbl{font-size:10px;letter-spacing:.13em;text-transform:uppercase;display:block;margin-bottom:4px}
+.mine .lbl{color:var(--gold)}
+.scaf{border-left:3px solid var(--blu);padding-left:11px;margin:0 0 12px}
+.scaf .lbl{color:var(--blu)}
+/* The attribution marker. NOT gold — gold is reserved for material that is
+   Mike's own words, and a paraphrase wearing gold is the whole hazard. */
+.rail{display:inline-block;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;
+ border:1px solid #3a5570;color:var(--blu);padding:0 5px;border-radius:2px;white-space:nowrap;
+ vertical-align:1px;margin-left:4px}
+.rail.m{border-color:#7a5540;color:var(--amb);margin-left:0}
+.tl{list-style:none;padding:0;margin:0}
+.tl li{display:grid;grid-template-columns:19ch 1fr;gap:0 14px;padding:7px 0;
+ border-bottom:1px dotted var(--line2);margin:0}
+.tl li:last-child{border-bottom:0}
+.tl .at{color:var(--dim2);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding-top:2px}
+@media (max-width:620px){.tl li{grid-template-columns:1fr}.tl .at{margin-bottom:2px}}
+ul{margin:0 0 10px;padding-left:19px}li{margin:0 0 5px}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--dim2);font-size:12px}
+@media (max-width:720px){body{padding:20px 14px 80px}.bar input{width:100%}}
+</style></head><body>
+<div class="wrap">
+<p class="back"><a href="worksheet.html">&larr; back to the worksheet</a> &middot;
+<a href="index.html">the dictation prep</a> &middot; Ops&#8209;to&#8209;Mike, 2026-08-07 &middot; not part of the museum</p>
+
+<h1>Reference</h1>
+<p class="sub">Everything that explains the machine, off the worksheet and in one place</p>
+
+<div class="note">
+<p><b>THIS PAGE EXISTS BECAUSE THE LAST ONE PUT ALL OF IT IN FRONT OF THE WORK.</b>
+Nothing here is needed to write a headline. It is here for when you want to know why
+a left-hand column says what it says, or what the museum will and will not let a day
+reach for. <a href="worksheet.html">The worksheet is where the writing happens &rarr;</a></p>
+</div>
+
+<h2>The three marks, and what each one promises</h2>
+<div class="tw"><table>
+<thead><tr><th style="width:22%">mark</th><th style="width:26%">means</th><th>the promise it makes</th></tr></thead>
+<tbody>
+<tr><td><span class="rail">Ops</span></td><td>Ops wrote this sentence.</td>
+    <td>The <i>shape</i> is yours; the words are not. Change anything. It is a draft to argue with, and arguing with a draft is faster than starting from a blank line &mdash; which is the only reason it exists.</td></tr>
+<tr><td><span class="rail g">your words</span></td><td>Verbatim, character for character.</td>
+    <td><b>Nothing marked gold has been reworded, ever.</b> Only week two has any: you wrote its headline and six beats down, so they could be carried exactly. A gold string in the data files may be deleted but never edited &mdash; if it needs different words it stops being yours and moves to a blue field.</td></tr>
+<tr><td><span class="rail m">your rule &middot; Ops wording</span></td><td>You named the rule; Ops wrote the sentence.</td>
+    <td>The Friday formula, the standing Record rules, the bouncy ball law. The rule is yours and the sentence is not, which is why it is amber and not gold.</td></tr>
+</tbody></table></div>
+<p class="k" style="font-size:12.5px;margin-top:10px"><b>The inverse error matters as
+much as the obvious one.</b> A paraphrase in gold becomes indistinguishable from
+something you said; but your own sentence left in blue gets quietly &ldquo;improved&rdquo;
+by the next round. That is why week two carries a gold seam and week one carries none.</p>
+
+<h2>Where the two weeks came from</h2>
+<div class="tw"><table>
+<thead><tr><th style="width:14%">week</th><th style="width:22%">how it reached Ops</th><th>what that makes quotable</th></tr></thead>
+<tbody>
+<tr><td><b>Week 1</b><div class="k">THE WEEKEND THAT WASN'T SUPPOSED TO HAPPEN</div></td>
+    <td>Spoken aloud, 2026-08-02.</td>
+    <td><b>Nothing.</b> Ops structured it from the framing and wrote every sentence, including the week headline. Mike spoke the week's shape; Ops structured it into a headline, five days, topics and standing rules. Nothing here is quoted and nothing here is his wording. Where he named a rule as a rule it is marked MIKE-NAMED — the rule is his, the sentence is still Ops'.</td></tr>
+<tr><td><b>Week 2</b><div class="k">THE PASSWORD WAS IN THE ROOM THE WHOLE TIME</div></td>
+    <td>In writing, 2026-08-07.</td>
+    <td><b>The headline and six beats.</b> Mike gave the week's headline and six beats in writing on 2026-08-07. Those exact strings are carried in the `beat` field and in `WEEK.headline`, character for character, and are marked as his. Ops divided the beats into five days — one merge, named in the header — and wrote every other sentence on this page.</td></tr>
+</tbody></table></div>
+<p class="k" style="font-size:12.5px;margin-top:10px"><b>ONE STRUCTURING DECISION WAS
+MADE AND IT IS THE ONLY ONE WORTH ARGUING WITH.</b> Six beats, five days, Friday fixed
+by the sixth &mdash; so exactly one merge was needed. Day 4 holds two of your beats,
+<i>the unlabeled table holding more codes</i> and <i>the codes that fail when typed
+directly</i>, because they are one object and its property. Days 1&ndash;3 and 5 are
+your own sequence in your own order.</p>
+
+<h2>The weekend week one is named after</h2>
+<div class="note" style="margin-bottom:14px"><p>Not a day of week one &mdash; it is what
+happened before the museum opened, and four of the five days point back at it.
+<b>The transfer model already calls this window &ldquo;Friday to Sunday, pre-launch&rdquo;</b>
+and was written on 5 August from the asset timeline, without reference to this outline.
+They agree on the weekend independently; see <a href="#collisions">W&#8209;2</a>.</p></div>
+<div class="scaf" style="margin-bottom:26px">
+  <span class="lbl">Ops &middot; the prelude, structured <span class="rail">Ops</span></span>
+  <ul class="tl">
+    <li><span class="at">Friday, 2pm</span><span>The email address goes live — one of the last things done before opening.</span></li>
+    <li><span class="at">Friday, 4pm</span><span>The first manifesto arrives, written like someone who had been planning a while.</span></li>
+    <li><span class="at">Friday night to Sunday</span><span>The whole weekend burns. Hourly transmissions, forty-eight hours, gigabytes.</span></li>
+    <li><span class="at">Friday night to Sunday</span><span>What it carries: hex, zips, photographs of old equipment on a tray, shot by someone in white gloves.</span></li>
+    <li><span class="at">Friday night to Sunday</span><span>None of it addressed to anyone. Headers spoofed. The sender does not resolve.</span></li>
+    <li><span class="at">Sunday night</span><span>The decision: bring it to them in real time. Weird.Baby Robots is created.</span></li>
+    <li><span class="at">Monday</span><span>The museum opens with one entry, because that is true.</span></li>
+  </ul>
+</div>
+
+<h2>What a week is allowed to reach for</h2>
+<div class="tw"><table>
+<thead><tr><th>class</th><th>window</th><th>what it carries</th><th>rows</th><th>in hand by week 1</th></tr></thead>
+<tbody>
+<tr><td><b>BLAST</b></td><td>THE BLAST — Friday to Sunday, pre-launch.</td><td>Everything the site already shows, and deliberately more than was published.</td><td>103</td>
+  <td><span class="tag y">YES</span></td></tr>
+<tr><td><b>PACKAGE</b></td><td>THE PACKAGES — weeks 3–7, physical, on four Fridays.</td><td>Units, cases, objects, manual pieces. They earn their photographs.</td><td>9</td>
+  <td><span class="tag n">NO</span></td></tr>
+<tr><td><b>UNLOCK</b></td><td>THE UNLOCKS — throughout; in hand from the start.</td><td>Things already held that could not be opened. No arrival needed.</td><td>15</td>
+  <td><span class="tag y">YES</span></td></tr>
+<tr><td><b>TRANSMISSION</b></td><td>THE LATER TRANSMISSIONS — months 2–3, because they never stopped.</td><td>The back half's knock at the door.</td><td>6</td>
+  <td><span class="tag n">NO</span></td></tr>
+</tbody></table></div>
+<p class="k" style="font-size:12.5px;margin-top:10px"><b>118 things have arrived
+and 44 have not.</b> The rule is absolute and checked: an asset may only be SHOWN
+after it has been TRANSFERRED. Week one is all BLAST and one UNLOCK; week two is four
+UNLOCKs and <b>one PACKAGE that lands a week early</b> &mdash; the only beat in either
+week outside its own window, and the only thing on this page that needs a decision from
+you (<a href="#collisions">X&#8209;1</a>).</p>
+
+<h2>The Friday formula</h2>
+<div class="scaf" style="margin-bottom:26px">
+  <span class="lbl">THE FRIDAY FORMULA <span class="rail m">your rule &middot; Ops wording</span></span>
+  <p style="margin:0 0 8px">It is a form, not a one-off. Fridays are built this way.</p>
+  <ul style="margin:0"><li>The entry summarises the day the way any other day's entry would.</li><li>Then four o'clock happens INSIDE it — not after it, not next week.</li><li>It is never “to be continued.” That is only making people wait.</li><li>The reader got everything they came for, and then the floor moves.</li></ul>
+  <p class="k" style="margin:8px 0 0;font-size:12.5px">Both weeks end on it: a password
+  short enough, then a box on a porch at four o'clock. Two Fridays is the first evidence
+  the form holds &mdash; see <a href="#collisions">X&#8209;4</a>.</p>
+</div>
+
+<h2>Standing rules for the Record</h2>
+<div class="note" style="margin-bottom:14px"><p>Not week-one rules &mdash; the Record's
+own form. They are here because <b>four of the five change what a day is allowed to
+be</b>, and the bearing of each is spelled out rather than left to be worked out at
+dictation speed.</p></div>
+<div class="tw"><table>
+<thead><tr><th style="width:44%">the rule</th><th>what it does to a week</th></tr></thead>
+<tbody>
+<tr>
+  <td><span class="rail m">your rule &middot; Ops wording</span><div style="margin-top:5px">The Record is an end-of-day summary, published in the afternoon.</div></td>
+  <td>It is written from a day that has already happened. A day's entry can know how the day ended.</td></tr>
+<tr>
+  <td><span class="rail m">your rule &middot; Ops wording</span><div style="margin-top:5px">It rests on weekends. The team never does.</div></td>
+  <td>Week one is five entries at most, not seven — and work continues across the gap, so Monday can inherit a weekend.</td></tr>
+<tr>
+  <td><span class="rail m">your rule &middot; Ops wording</span><div style="margin-top:5px">Any daily record may run across multiple days.</div></td>
+  <td>THE DAY COUNT IS NOT THE ENTRY COUNT. The five-day frame is a frame of days; it does not promise five entries.</td></tr>
+<tr>
+  <td><span class="rail m">your rule &middot; Ops wording</span><div style="margin-top:5px">Status can be reported through the box — what has been found, the percentage remaining, that there is a folder and a fuzzy thing in the corner.</div></td>
+  <td>A day can be substantial without opening anything. This is what makes day 4 a day rather than a wait.</td></tr>
+<tr>
+  <td><span class="rail m">your rule &middot; Ops wording</span><div style="margin-top:5px">THE BOUNCY BALL LAW: never more than two or three POINTS OF FOCUS — and the precious ones are two or three A WEEK.</div></td>
+  <td>It caps ATTENTION, not pictures. A day may show ten manual pages and spend one point of focus doing it — we got more of the manual. What the ceiling governs is the PRECIOUS bucket: the genuine reveals a reader remembers. Everything else is the dump, and the dump has no ceiling.</td></tr>
+</tbody></table></div>
+
+<h2>The bouncy ball law, and the two runways</h2>
+<div class="note" style="margin-bottom:14px">
+<p class="k" style="margin:0 0 8px;font-size:11px;letter-spacing:.13em;text-transform:uppercase">
+Against the bouncy ball law <span class="rail m">his rule &middot; Ops wording</span></p>
+<p style="margin:0 0 10px"><b>Never more than two or three points of focus. The law caps what a reader is asked to hold, not what the museum is allowed to show.</b> Humans remember one or two things. Ten things reduces the odds they keep the one that matters.
+<i>It does not mean we may not show more pictures. Ten manual pages arriving is ONE point of focus — we got more of the manual — not ten.</i></p>
+<div class="tw"><table>
+<thead><tr><th style="width:26%">bucket</th><th>ceiling</th><th style="width:16%">assigned</th><th style="width:26%">runway</th></tr></thead>
+<tbody>
+<tr><td><b>THE PRECIOUS BUCKET</b><div class="k" style="font-size:11.5px;margin-top:3px">Genuine reveals. These are what a reader remembers.</div></td>
+    <td>Two or three a week.</td>
+    <td><span class="tag ">0</span></td>
+    <td><i class="k">nothing assigned &mdash; no runway to compute</i></td></tr>
+<tr><td><b>THE DUMP BUCKET</b><div class="k" style="font-size:11.5px;margin-top:3px">Everything else. Fun to look at, part of the story, part of the pile.</div></td>
+    <td>No ceiling. A batch of any size is one point of focus.</td>
+    <td><span class="tag ">0</span></td>
+    <td><i class="k">no ceiling, so no runway. A pile size, and a batch of any size is one point of focus.</i></td></tr>
+<tr><td><b>UNASSIGNED</b><div class="k" style="font-size:11.5px;margin-top:3px">Nobody has said which bucket these are in.</div></td>
+    <td><i class="k">&mdash;</i></td>
+    <td><span class="tag n">16</span></td>
+    <td><i class="k">the honest state today</i></td></tr>
+</tbody></table></div>
+<p class="ask" style="margin:10px 0 0"><b>SO THE RUNWAY IS A BOUND AND NOT A
+NUMBER, AND THAT IS THE ONE HONEST THING THIS TABLE CAN SAY.</b> Of the 16 pictures an entry can reach for today,
+<b>0</b> are assigned precious and <b>16</b> could be
+&mdash; so the precious runway runs from <b>nothing at all</b>
+to <b>6&ndash;8 weeks</b>, and the whole of that gap is a judgement
+nobody has made. <b>The bucket is yours</b> &mdash; it sits beside <code>verdict</code>
+in the asset table, unset, and Ops will not derive it: a rule that called every
+machine photograph precious would make this table look answered while nothing had
+been answered.</p>
+<p class="k" style="margin:8px 0 0;font-size:12px"><b>THE FIGURE THIS REPLACES IS
+VOID:</b> &ldquo;16 pictures = 6–8 days of material (1.1–1.6 five-day weeks)&rdquo;. It counted ASSETS against a ceiling on POINTS OF FOCUS, and it used the day rather than the week. Sixteen photographs released in four batches are four points of focus, not sixteen — and if the batches are dump they may not be points of focus at all. The arithmetic was sound and the unit was wrong, which is why nothing caught it: every input was a real measurement.</p>
+</div>
+
+<h2 id="collisions">Where the outlines meet the tree &mdash; 10 checks</h2>
+<div class="note" style="margin-bottom:14px"><p>Each of these is a claim an outline
+makes, run against what the repository actually holds. <b>1 of the
+10 is unresolved</b> and is drawn in red; <b>2 you have already
+ruled on</b>, and those carry your ruling in gold. The rest are agreements &mdash; and
+three of them are worth knowing about, because nobody arranged them.</p>
+<p class="ask"><b>A RULED CHECK IS NOT DELETED FROM THIS PAGE.</b> The collision was
+real, it is why the ruling was needed, and a page that quietly drops what it used to
+say cannot be checked against itself a week later.</p></div>
+<div class="day"><div class="hd">
+  <span class="n">W-1 &middot; week 1 &middot; RULED</span>
+  <span class="slot" style="color:var(--gold);font-size:15px;font-style:normal">The one entry that exists is not about the transmissions — and it was never meant to be day one.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">Day 1 says the wing opens holding one entry, and that is true of the tree today — the Record holds exactly one. But it is entry 013 and its subject is a physical delivery: a sealed modern bag, a USB-C adapter, a unit on charge. Nothing in it touches a transmission, a manifesto or a weekend.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/record-entries.mjs · reveal/ledger.json (record.013)</code></p></div>
+  <div class="mine"><span class="lbl">yours &middot; the ruling, 2026-08-07</span>
+    <p style="margin:0 0 6px">Mike, 2026-08-07: Record 013 was a PROTOTYPE. It was chosen because it was interesting enough to find the structure, and it did. It is NOT day one, and it needs no re-dating and no defending. THE REAL RECORD STARTS AT 001, when he dictates it. So day 1's entry is 001 and does not exist yet; the entry in the tree is not in that sequence and no longer collides with the outline.</p>
+    <p class="k" style="margin:0;font-size:12.5px">M19 — what a record number means — closes with it: the numbers are THIS VOLUME'S OWN and they begin at 001. The prototype keeps its number on the glass and is marked as the prototype in Ops' instruments only, never on the glass, because a line whose subject is the making of the museum does not ship (Doctrine 11). What the number itself should be is B-b, and it is one word.</p></div>
+
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">W-2 &middot; week 1 &middot; agrees</span>
+  <span class="slot" style="color:var(--grn);font-size:15px;font-style:normal">The prelude and the BLAST window are the same weekend, independently.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">The transfer model calls class 1 “THE BLAST — Friday to Sunday, pre-launch,” written on 2026-08-05 off the asset timeline. The prelude above puts the address live on Friday at 2pm and the museum open on Monday. They agree on the window without either having been written from the other.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/transfers.mjs (TRANSFERS.BLAST)</code></p></div>
+
+
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">W-3 &middot; week 1 &middot; agrees</span>
+  <span class="slot" style="color:var(--grn);font-size:15px;font-style:normal">Friday's payoff needs no arrival, and the model already says so.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">“One password was short enough” is an UNLOCK by the transfer model's own definition — “things already held that could not be opened. No arrival needed.” The UNLOCK window opens at week 0, so day 5 sits inside it and the week's biggest moment costs the story nothing new.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/transfers.mjs (TRANSFERS.UNLOCK)</code></p></div>
+
+
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">W-4 &middot; week 1 &middot; RULED</span>
+  <span class="slot" style="color:var(--gold);font-size:15px;font-style:normal">The bouncy ball law is the only rule here a tracker can measure — and the tracker was measuring it in the wrong unit.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">The law caps POINTS OF FOCUS, not assets, and the precious ones are two or three A WEEK. The tracker was dividing a count of PHOTOGRAPHS by a ceiling on ATTENTION and printing a runway in days — 16 pictures = 6–8 days. That figure is VOID (`reveal/focus.mjs` VOIDED). What replaces it is two runways: precious reveals remaining, which divides into weeks because it has a ceiling over it, and what is in the dump, which is a pile size and divides into nothing.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/focus.mjs · provenance/asset-table.json · reveal/delivery.mjs</code></p></div>
+  <div class="mine"><span class="lbl">yours &middot; the ruling, 2026-08-07</span>
+    <p style="margin:0 0 6px">Mike, 2026-08-07: the law caps points of focus, not assets. It does not mean we may not show more pictures. Every asset is UNASSIGNED to a bucket today, so the precious runway is printed as a bound rather than a number.</p>
+    </div>
+
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">W-5 &middot; week 1 &middot; agrees</span>
+  <span class="slot" style="color:var(--grn);font-size:15px;font-style:normal">Nothing in week one reaches a PACKAGE, and the outline never asks it to.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">Every topic on days 1–4 is weekend material (BLAST) and day 5 opens something already held (UNLOCK). The units, cases, objects and manual pieces arrive on four Fridays in weeks 3–7. The outline and the transfer rule do not fight.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/transfers.mjs (TRANSFERS.PACKAGE)</code></p></div>
+
+
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">X-1 &middot; week 2 &middot; UNRESOLVED</span>
+  <span class="slot" style="color:var(--red);font-size:15px;font-style:normal">The porch box arrives a week before the packages start.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">Friday of week two is a physical arrival — a box, on a porch. The transfer model puts every physical arrival in class PACKAGE and opens that window at WEEK 3, closing at 7, on four Fridays; a box holding a unit is `phys.cases` / `phys.niac.whole` by the model's own note. So week 2 day 5 sits one week outside the window, and it is the only beat in either week that does. Everything else in week two is UNLOCK, which needs no arrival.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/transfers.mjs (TRANSFERS.PACKAGE.opens = 3)</code></p></div>
+
+  <div class="mine"><span class="lbl">yours &middot; the decision</span>
+    <p style="margin:0 0 6px">Three ways out and all three are yours: move the box to week 3 and let week 2 end on the codes; open the PACKAGE window at week 2 and make it five Fridays instead of four; or rule that this box is not a package — an unlabelled box on a porch has no carrier and no manifest, and the model's classes are about how material REACHED the museum, not about cardboard.</p>
+    <p class="k" style="margin:0;font-size:12.5px">The third reading is the cheapest and probably the truest to what you wrote: 'no shipping label' is the sentence that makes it not a delivery. But it is a change to the transfer model's own boundary and Ops will not make one of those on an inference.</p></div>
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">X-2 &middot; week 2 &middot; agrees</span>
+  <span class="slot" style="color:var(--grn);font-size:15px;font-style:normal">Week two's spine is UNLOCK, and UNLOCK needs no arrival at all.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">Days 1 to 4 are all about opening, reading and failing to read things that are already in the building. The transfer model defines UNLOCK as “things already held that could not be opened. No arrival needed,” with its window open from week 0. Four of the five days therefore cost the story nothing new, which is what makes a whole week of them affordable.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/transfers.mjs (TRANSFERS.UNLOCK)</code></p></div>
+
+
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">X-3 &middot; week 2 &middot; agrees</span>
+  <span class="slot" style="color:var(--grn);font-size:15px;font-style:normal">The week's headline is the UNLOCK class stated as a sentence.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">“The password was in the room the whole time” and “things already held that could not be opened” are the same claim in two registers — one written by Mike for the story, one written by Ops for the ledger on 5 August, neither from the other. The agreement is not arranged and it is worth knowing about, because it means the week's title does not need defending against the model.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/transfers.mjs (TRANSFERS.UNLOCK) · this file's WEEK.headline</code></p></div>
+
+
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">X-4 &middot; week 2 &middot; agrees</span>
+  <span class="slot" style="color:var(--grn);font-size:15px;font-style:normal">Two Fridays, two payoffs, and the standing rule already said so.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">Week one ends on a password that was short enough; week two ends at four o'clock on a porch. That is the Friday formula twice, and the rule Mike named says explicitly that it is a FORM and not a one-off: the entry summarises the day, then four o'clock happens inside it, and it is never “to be continued.” Two weeks is the first evidence the form holds.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/week-one.mjs (FRIDAY_FORMULA)</code></p></div>
+
+
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">X-5 &middot; week 2 &middot; agrees</span>
+  <span class="slot" style="color:var(--grn);font-size:15px;font-style:normal">Week two is where a genuine reveal would be spent, and no asset is assigned to a bucket.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">Day 2 is the first day in either week whose subject is things to LOOK at. The bouncy ball law caps the PRECIOUS bucket at two or three a week — and `bucket` is null on all 315 rows of the asset table, so nothing in the museum knows which of its files is a genuine reveal and which is dump. This is not a defect in the outline; it is the outline reaching the one open question that would tell it what it may show.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/focus.mjs · provenance/asset-table.json</code></p></div>
+
+
+</div></div>
+
+<h2>The three trackers</h2>
+<div class="note" style="margin-bottom:14px"><p>Deliberately <b>not</b> on the worksheet.
+They answer <i>what may I reach for</i>, which is a different question from <i>what does
+this day say</i>, and putting them beside the writing was most of what made the last page
+unusable. They are here, and they are one click away when you want them.</p></div>
+<div class="cards">
+<div class="card">
+  <h4><a href="artifacts.html">The artifact tracker</a></h4>
+  <p class="id">what you can reach for today</p>
+  <p>47 addressable files joined to 162 revealable
+  things, filterable. <b>16 pictures of the machines are behind the
+  stage door</b>, each one entry away from a wall; exactly one file has ever been
+  delivered.</p>
+  <p class="meta">All 16 assets are unassigned to a
+  bucket, so the precious runway is a bound and not a number.</p>
+</div>
+<div class="card">
+  <h4><a href="eggs.html">The egg tracker</a></h4>
+  <p class="id">what is hidden, and what is only an idea</p>
+  <p>15 ledgered eggs &mdash; 7 planted, 5 waiting &mdash;
+  each with its mechanism, what it needs before it can be planted, and where it stands.</p>
+  <p class="meta">Four eggs have no written form anywhere but their ledger row. Nothing
+  in this museum reports an egg being tripped.</p>
+</div>
+<div class="card">
+  <h4><a href="specsheet.html">The in-story spec sheet</a></h4>
+  <p class="id">the thing to author from</p>
+  <p>Every piece of story-generated technical data about both machines, from both
+  repositories, set as a period one-sheet. Marked <b>asserted</b>, <b>implied</b>,
+  <b>contradicted</b> or <b>absent</b>; where two sources disagree, both readings print.</p>
+  <p class="meta">Only the in-story specs count. The real board, the real filenames and
+  the real dates are the provenance of a prop, and a spec sheet is not a provenance record.</p>
+</div>
+</div>
+
+<h2>Two rulings of 2026-08-07, and what they moved</h2>
+<div class="note">
+<p><b>THE BOUNCY BALL LAW CAPS POINTS OF FOCUS, NOT ASSETS.</b> Humans remember one or
+two things; ten things reduces the odds they keep the one that matters &mdash; and it
+does <i>not</i> mean the museum may not show more pictures. <b>Two buckets:</b> the
+<b>precious</b> one is two or three genuine reveals a <i>week</i>; the <b>dump</b> is
+everything else, and it has <b>no ceiling</b>. Ten manual pages arriving is ONE point of
+focus. <b>The bucket is a field on every asset, it is yours, and Ops will not guess it.</b></p>
+<p><b>RECORD 013 WAS A PROTOTYPE.</b> Not day one, no re-dating, no defending; the real
+Record starts at <b>001</b>, when you dictate it. It is <b>kept rather than retired</b>,
+on your own criterion &mdash; it is the only thing exercising the entry renderer, the
+index budgets, the per-entry ledger derivation and the one delivered picture. It is
+marked as the prototype here and in the ledger and <b>nowhere on the glass</b>. The one
+thing left is its number.</p>
+</div>
+
+<h2>How the worksheet keeps what you type</h2>
+<div class="note">
+<p><b>In the browser, on your machine, and nowhere else.</b> Your responses live in this
+browser's local storage under one key, so a reload &mdash; or closing the tab and coming
+back &mdash; finds them where you left them. They are never written into the repository,
+which is also why <code>npm run dictation</code> can regenerate the left-hand column
+without touching a word of yours.</p>
+<p><b>The consequence, stated because it is the one that could cost you an hour:</b> a
+different browser, a different machine, or a cleared cache is a different worksheet.
+<b>Press <i>copy everything</i> and paste it somewhere before you switch.</b> If the
+browser refuses storage at all, the worksheet says so in red at the top rather than
+letting the typing evaporate quietly.</p>
+</div>
+
+<footer>Built from <code>reveal/week-one.mjs</code>, <code>reveal/week-two.mjs</code>,
+<code>reveal/transfers.mjs</code>, <code>reveal/focus.mjs</code>,
+<code>reveal/ledger.json</code> and <code>provenance/asset-table.json</code>; regenerate
+with <code>npm run dictation</code>. Nothing on this page was invented &mdash; every
+figure, class and check is carried from one of those files with its source named.</footer>
+</div>
+</body></html>

@@ -29,7 +29,15 @@ T-A; `npm run parity` and `npm run surfacing` are documented in `OPERATIONS.md`
 ledger’s `egg.niac.operator`. A session note is where a round is narrated, not
 where a rule lives.
 
+
+**Appended 2026-08-07 (THE WORKSHEET): THE WEEK ONE OUTLINE (W1), verbatim,
+newest-first below.** `CLAUDE.md` had reached 735 lines. **Nothing load-bearing
+left the live tree with it** — the outline itself is `reveal/week-one.mjs`, its
+rail scheme is the live THE THREE MARKS section, and its five collision checks
+still print on the reference page beside week two's five.
+
 ---
+
 
 **Appended 2026-08-07 (W1): THE DICTATION PREP (K1–K6), verbatim.** `CLAUDE.md`
 had reached 622 lines. **Nothing load-bearing left the live tree with it** — the
@@ -38,6 +46,43 @@ registers K-a, K-b, K-c and K-d in `docs/OPEN_ACTIONS.md`; the eleven-photograph
 deletion is a row in the reveal ledger. Read a rule from where the rule lives.
 
 ---
+
+### 2026-08-07 -> THE WEEK ONE OUTLINE (W1) - sealed
+- **K5 REFUSED TO INVENT THE OUTLINE AND WAS RIGHT; THIS ROUND SUPPLIED IT FROM
+  OPS, WHOSE MATERIAL IT IS.** Mike spoke the week's shape aloud on 2026-08-02;
+  Ops structured it into **`reveal/week-one.mjs`** and `tools/dictation/prep.mjs`
+  renders it. **BLUE RAIL THROUGHOUT, NOTHING QUOTED, EVERY GOLD SLOT STILL
+  EMPTY.** Gates: lint **11/9 = baseline** - build green - provenance **PASS** -
+  `reveal:check` **PASS** - `parity:gate` **PASS** - `instory:gate` **PASS** -
+  `assets:orphans` **0** - all five pages lapped at **389px and 1233px**, zero
+  page overflow, zero console errors. Log:
+  `docs/MUSEUM_WEEK_ONE_OUTLINE_LOG-20260807.md`. Path unchanged:
+  `docs/dictation-20260807/index.html`, rebuilt with `npm run dictation`.
+- **THE ROUND'S ONE DESIGN DECISION IS A THIRD MARKER, AND IT IS DELIBERATELY NOT
+  GOLD.** The instruction said BLUE RAIL *and* "nothing here is his verbatim
+  except where marked", which asked two grades of attribution to share one rail.
+  `OPS` is the default; **`MIKE-NAMED`** (the Friday formula, the five standing
+  Record rules, the bouncy ball law) renders blue with an **amber** *his rule ·
+  Ops wording* tag. **A paraphrase wearing gold is indistinguishable a week later
+  from something he said** — which is the exact failure K5 refused to create, so
+  gold stays empty. The one genuinely verbatim sentence on the page is the asset
+  timeline's founding line, carried from `reveal/transfers.mjs`, and the page now
+  labels it as the only one.
+- **THE OUTLINE WAS RUN AGAINST THE TREE AND FOUR OF FIVE CHECKS AGREE. THE FIFTH
+  IS THE ROUND'S FINDING (W-1).** Day 1 says the wing opens holding one entry and
+  that is true — but it is **entry 013 and its subject is a physical delivery**, a
+  sealed bag and a USB-C adapter and a unit on charge. Three readings, all Mike's,
+  **named and not resolved**; `M19 — what a record number means` is the same
+  question. **W-2 and W-3 are agreements nobody arranged:** the prelude's Friday-to-
+  Sunday and `TRANSFERS.BLAST`'s window match without either being written from the
+  other, and *"one password was short enough"* is an UNLOCK by the model's own
+  definition, so the week's biggest moment costs the story no new arrival.
+- **K-b IS `IN PROGRESS`, NOT CLOSED.** There is still nothing authored by Mike in
+  either repository and still no `weight` field, so the topics are lists and not a
+  ranking. What K-b has now is a working draft to argue with. **Surfacing is
+  unmoved at 20 spendable and this is the second packet running that took nothing
+  off the shelf** — recorded, per the cadence, so the next round's number means
+  something.
 
 ### 2026-08-07 -> THE DICTATION PREP (K1-K6) - archived
 - **SIX INSTRUCTIONS, ALL SIX ANSWERED, AND THE ROUND'S LARGEST FINDING IS THAT

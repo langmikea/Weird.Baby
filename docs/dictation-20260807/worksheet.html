@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE WORKSHEET — WEEKS ONE AND TWO — 2026-08-07</title>
+<style>
+:root{color-scheme:light dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;--redfg:#f0c9c4;
+ --grn:#7fa86a;--blu:#8fa8c4;--amb:#e08a5a}
+*{box-sizing:border-box}
+body{margin:0;padding:28px 26px 110px;background:var(--bg);color:var(--fg);
+ font:15px/1.55 -apple-system,"Segoe UI",system-ui,sans-serif}
+.wrap{max-width:1180px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:21px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 8px}
+.back{font-size:12px;color:var(--dim2);margin:0 0 22px}
+h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:34px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:22px 0 8px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:15px 17px;margin:0 0 26px;border-radius:3px}
+.note p{margin:0 0 10px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+.ask{border-left:3px solid var(--red);padding-left:12px;color:var(--redfg)}
+.ops{border-left:3px solid var(--blu);padding-left:12px}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc}
+/* A five-column table cannot fit a phone and must not be made to try. The
+   TABLE scrolls inside its own box; the PAGE never scrolls sideways. */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tw table{min-width:760px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:6px 9px 6px 0;position:sticky;top:0;background:var(--bg)}
+td{border-bottom:1px solid var(--line2);padding:8px 9px 8px 0;vertical-align:top}
+tr.hide{display:none}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.y{border-color:#4a6a3a;color:var(--grn)}
+.tag.n{border-color:#6a3a30;color:var(--amb)}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.b{border-color:#3a5570;color:var(--blu)}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.bar input{background:var(--panel);border:1px solid var(--line);color:var(--fg);padding:6px 10px;
+ border-radius:3px;font:13px/1.4 inherit;width:280px}
+.bar button{background:transparent;border:1px solid var(--line);color:var(--dim);padding:5px 11px;
+ border-radius:3px;font:11px/1.3 inherit;letter-spacing:.09em;text-transform:uppercase;cursor:pointer;margin-left:5px}
+.bar button[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.count{font-size:12px;color:var(--dim2);margin-left:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:14px 15px}
+.card h4{margin:0 0 4px;font-size:14px;color:var(--fg)}
+.card .id{font-family:ui-monospace,Consolas,monospace;font-size:11px;color:var(--blu);margin:0 0 8px}
+.card p{margin:0 0 8px;font-size:13px}
+.card .meta{font-size:12px;color:var(--dim);margin:0}
+.k{color:var(--dim2)}
+.day{border:1px solid var(--line);border-radius:3px;margin:0 0 18px;overflow:hidden}
+.day > .hd{background:var(--panel);padding:12px 15px;border-bottom:1px solid var(--line)}
+.day > .hd .n{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim2)}
+.day > .hd .slot{display:block;margin-top:5px;font-size:16px;color:var(--red);font-style:italic}
+.day > .bd{padding:13px 15px}
+.mine{border-left:3px solid var(--gold);padding-left:11px;margin:0 0 12px}
+.mine .lbl,.scaf .lbl{font-size:10px;letter-spacing:.13em;text-transform:uppercase;display:block;margin-bottom:4px}
+.mine .lbl{color:var(--gold)}
+.scaf{border-left:3px solid var(--blu);padding-left:11px;margin:0 0 12px}
+.scaf .lbl{color:var(--blu)}
+/* The attribution marker. NOT gold — gold is reserved for material that is
+   Mike's own words, and a paraphrase wearing gold is the whole hazard. */
+.rail{display:inline-block;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;
+ border:1px solid #3a5570;color:var(--blu);padding:0 5px;border-radius:2px;white-space:nowrap;
+ vertical-align:1px;margin-left:4px}
+.rail.m{border-color:#7a5540;color:var(--amb);margin-left:0}
+.tl{list-style:none;padding:0;margin:0}
+.tl li{display:grid;grid-template-columns:19ch 1fr;gap:0 14px;padding:7px 0;
+ border-bottom:1px dotted var(--line2);margin:0}
+.tl li:last-child{border-bottom:0}
+.tl .at{color:var(--dim2);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding-top:2px}
+@media (max-width:620px){.tl li{grid-template-columns:1fr}.tl .at{margin-bottom:2px}}
+ul{margin:0 0 10px;padding-left:19px}li{margin:0 0 5px}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--dim2);font-size:12px}
+@media (max-width:720px){body{padding:20px 14px 80px}.bar input{width:100%}}
+
+body{padding-bottom:96px}
+.mast{margin:0 0 26px}
+.mast .lead{color:var(--dim);font-size:13.5px;margin:0 0 6px;max-width:74ch}
+.mast .lead b{color:var(--fg)}
+.warn{border:1px solid #6a3028;background:#241a19;color:var(--redfg);padding:11px 14px;
+ border-radius:3px;margin:0 0 20px;font-size:13.5px;display:none}
+.warn.on{display:block}
+h2{margin-top:40px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:0 20px;align-items:start}
+.c{border-left:2px solid var(--line);padding:0 0 0 11px;min-width:0}
+.c.ops{border-left-color:#33465a}
+.c.yours{border-left-color:#6b5426}
+.ml{display:block;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+ color:var(--dim2);margin:0 0 5px}
+.ml.y{color:#9a7f43}
+.c p{margin:0 0 7px;font-size:14px}
+.c p:last-child{margin:0}
+.c ul{margin:0;padding-left:17px}
+.c li{font-size:13.5px;margin:0 0 4px}
+.c .hl{font-size:16px;color:var(--fg)}
+/* THE FAMILY IS WRITTEN OUT AND THE REASON IS A REAL BUG THIS ROUND HIT:
+   `font: 14px/1.5 inherit` is INVALID — the font shorthand takes a family, and
+   `inherit` is only legal as the whole value. Chrome drops the declaration
+   entirely, so the textareas came up in the UA's monospace at the UA's size,
+   on the one page whose whole job is writing. The shorthand is used with an
+   `inherit` family in three places in the shared OPS_CSS and has the same
+   defect there; those are the tracker pages' filter controls, they are not
+   this round's to change, and they are noted here so the next reader knows the
+   pattern is a bug and not a house style. */
+textarea{display:block;width:100%;background:#191820;border:1px solid var(--line);
+ color:var(--fg);border-radius:3px;padding:9px 11px;resize:vertical;
+ font:14px/1.55 -apple-system,"Segoe UI",system-ui,sans-serif;
+ overflow:hidden;min-height:52px}
+textarea:focus{outline:0;border-color:var(--gold)}
+textarea.has{border-color:#5c4a22;background:#1c1a1a}
+.fld{margin:0 0 18px}
+.fld:last-child{margin:0}
+.fh{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim2);
+ border-bottom:1px solid var(--line2);padding-bottom:4px;margin:0 0 9px}
+.day{border:1px solid var(--line);border-radius:3px;margin:0 0 20px;overflow:hidden}
+.day .hd{background:var(--panel);padding:11px 15px;border-bottom:1px solid var(--line)}
+.day .hd .n{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim2)}
+.day .bd{padding:15px}
+.beat{margin-top:6px;font-size:15px;color:var(--gold);font-style:italic}
+.rail.g{border-color:#7a5a20;color:var(--gold);font-style:normal;margin-left:6px}
+.flag{margin:0 0 15px;padding:9px 12px;border-left:3px solid var(--amb);background:#201c19;
+ font-size:13px;color:var(--dim)}
+.flag b{color:var(--amb)}
+.wk{border:1px solid var(--line);border-radius:3px;padding:15px;margin:0 0 16px;background:var(--panel)}
+.wk .n{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim2);display:block;margin:0 0 9px}
+.wk .c .hl{font-size:19px;letter-spacing:.03em}
+.map{border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:0 0 16px}
+.map .mh{background:var(--panel);padding:9px 14px;font-size:11px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--dim2);border-bottom:1px solid var(--line)}
+.map .mr{display:grid;grid-template-columns:9ch 1fr 1fr;gap:0 16px;padding:9px 14px;
+ border-bottom:1px solid var(--line2);align-items:baseline}
+.map .mr:last-child{border-bottom:0}
+.map .d{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2)}
+.map .o{font-size:14px}
+.map .m{font-size:13.5px;color:var(--gold);white-space:pre-wrap;min-width:0;overflow-wrap:anywhere}
+.map .m:empty::before{content:"—";color:var(--dim2)}
+.map a.j{color:var(--dim2);font-size:11px;text-decoration:none;margin-left:6px}
+.map a.j:hover{color:var(--blu)}
+.cbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#101015;
+ border-top:1px solid var(--line);padding:9px 26px;display:flex;gap:14px;align-items:center;
+ justify-content:space-between;flex-wrap:wrap}
+.cbar .st{font-size:12px;color:var(--dim2)}
+.cbar .st b{color:var(--fg)}
+.cbar button,button.cta{background:var(--gold);border:0;color:#17150f;padding:9px 18px;border-radius:3px;
+ font:600 11.5px/1.3 -apple-system,"Segoe UI",system-ui,sans-serif;
+ letter-spacing:.13em;text-transform:uppercase;cursor:pointer}
+.cbar button:active{transform:translateY(1px)}
+.cbar .sec{background:transparent;border:1px solid var(--line);color:var(--dim)}
+#out{width:100%;min-height:190px;background:#131218;border:1px solid var(--line);color:var(--dim);
+ border-radius:3px;padding:11px 13px;font:12.5px/1.5 ui-monospace,Consolas,monospace;
+ resize:vertical;white-space:pre;overflow:auto}
+@media (max-width:900px){
+ .pair{grid-template-columns:1fr;gap:14px 0}
+ .c.yours{margin-top:2px}
+ .map .mr{grid-template-columns:1fr;gap:4px 0}
+ .map .d{margin-bottom:2px}
+ .cbar{padding:8px 14px}
+}
+</style></head><body>
+<div class="wrap">
+
+<div class="mast">
+<h1>The worksheet</h1>
+<p class="lead"><b>Left column is Ops&rsquo;. Right column is yours, and it saves as you
+type.</b> Two weeks, ten days. Start at the top and go down as far as you want &mdash;
+every level is complete on its own. When you want to send it back, press
+<b>copy everything</b> in the bar at the bottom.</p>
+<p class="lead">Everything that explains how any of this works &mdash; the rails, the
+transfer classes, the standing rules, the ten checks against the tree, the three
+trackers &mdash; is on <a href="reference.html">the reference page</a>, and none of it
+is on this one.</p>
+</div>
+
+<div class="warn" id="warn"><b>This browser will not let the page save.</b> Nothing you
+type here will survive a reload. Press <b>copy everything</b> and paste it somewhere
+safe before you close the tab.</div>
+
+<h2>The headline of headlines &mdash; the two weeks</h2>
+<div class="wk" id="W1">
+<span class="n">Week 1 &middot; the week's own summary headline</span>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="hl">THE WEEKEND THAT WASN'T SUPPOSED TO HAPPEN</p><p class="k" style="font-size:12px;margin-top:7px">Ops&rsquo; sentence, from the shape you spoke
+       on 2026-08-02.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.SUM" rows="2"
+    placeholder="your headline for the week" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="wk" id="W2">
+<span class="n">Week 2 &middot; the week's own summary headline</span>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="hl">THE PASSWORD WAS IN THE ROOM THE WHOLE TIME</p><p class="k" style="font-size:12px;margin-top:7px">Carried from what you wrote, word for word
+       <span class="rail g">your words</span></p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.SUM" rows="2"
+    placeholder="your headline for the week" spellcheck="true"></textarea></div>
+</div>
+</div>
+
+<h2>The map &mdash; every day, both weeks</h2>
+<p class="lead" style="margin-bottom:14px">The whole shape in ten lines. <b>You do not
+write here</b> &mdash; the right column fills itself in from the blocks below as you
+go, so this is where you check that two weeks hang together. The arrow jumps to
+the block.</p>
+<div class="map">
+<div class="mh">Week 1 &middot; THE WEEKEND THAT WASN'T SUPPOSED TO HAPPEN</div>
+<div class="mr">
+  <span class="d">Day 1 &middot; MON</span>
+  <span class="o">The museum opens.<a class="j" href="#W1-D1" title="go to the block">&darr;</a></span>
+  <span class="m" data-mirror="W1.D1.HEAD"></span>
+</div>
+<div class="mr">
+  <span class="d">Day 2 &middot; TUE</span>
+  <span class="o">Hors d'oeuvres, and the announcement of this evening's entrees.<a class="j" href="#W1-D2" title="go to the block">&darr;</a></span>
+  <span class="m" data-mirror="W1.D2.HEAD"></span>
+</div>
+<div class="mr">
+  <span class="d">Day 3 &middot; WED</span>
+  <span class="o">The start of the transmissions: what came, what form, what is unreadable.<a class="j" href="#W1-D3" title="go to the block">&darr;</a></span>
+  <span class="m" data-mirror="W1.D3.HEAD"></span>
+</div>
+<div class="mr">
+  <span class="d">Day 4 &middot; THU</span>
+  <span class="o">What we can see from outside the box.<a class="j" href="#W1-D4" title="go to the block">&darr;</a></span>
+  <span class="m" data-mirror="W1.D4.HEAD"></span>
+</div>
+<div class="mr">
+  <span class="d">Day 5 &middot; FRI</span>
+  <span class="o">One password was short enough.<a class="j" href="#W1-D5" title="go to the block">&darr;</a></span>
+  <span class="m" data-mirror="W1.D5.HEAD"></span>
+</div>
+</div>
+<div class="map">
+<div class="mh">Week 2 &middot; THE PASSWORD WAS IN THE ROOM THE WHOLE TIME</div>
+<div class="mr">
+  <span class="d">Day 1 &middot; MON</span>
+  <span class="o">What was actually in it.<a class="j" href="#W2-D1" title="go to the block">&darr;</a></span>
+  <span class="m" data-mirror="W2.D1.HEAD"></span>
+</div>
+<div class="mr">
+  <span class="d">Day 2 &middot; TUE</span>
+  <span class="o">The things in it that are objects, not data.<a class="j" href="#W2-D2" title="go to the block">&darr;</a></span>
+  <span class="m" data-mirror="W2.D2.HEAD"></span>
+</div>
+<div class="mr">
+  <span class="d">Day 3 &middot; WED</span>
+  <span class="o">What looked like the way in, and is not.<a class="j" href="#W2-D3" title="go to the block">&darr;</a></span>
+  <span class="m" data-mirror="W2.D3.HEAD"></span>
+</div>
+<div class="mr">
+  <span class="d">Day 4 &middot; THU</span>
+  <span class="o">A table of codes, and every one of them refuses.<a class="j" href="#W2-D4" title="go to the block">&darr;</a></span>
+  <span class="m" data-mirror="W2.D4.HEAD"></span>
+</div>
+<div class="mr">
+  <span class="d">Day 5 &middot; FRI</span>
+  <span class="o">Four o'clock, and it is on the porch.<a class="j" href="#W2-D5" title="go to the block">&darr;</a></span>
+  <span class="m" data-mirror="W2.D5.HEAD"></span>
+</div>
+</div>
+
+<h2>Week 1 &mdash; the five days</h2>
+<section class="day" id="W1-D1">
+<div class="hd">
+  <span class="n">Week 1 &middot; Day 1 &middot; MON</span>
+  
+</div>
+<div class="bd">
+
+<div class="fld"><div class="fh">Headline</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="hl">The museum opens.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D1.HEAD" rows="2"
+    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Executive summary</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p>The Robots wing opened two hours ago and this is its first entry — Record 001, which you have not dictated yet. Weird enough to warrant an exhibit is the claim the day has to carry, and it is the only claim it has to carry.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D1.EXEC" rows="5"
+    placeholder="the paragraph a reader gets if they read nothing else" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><ul><li>The transmissions named but not described.</li><li>Why it warranted an exhibit.</li><li>What the museum is.</li></ul></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D1.NOTES" rows="5"
+    placeholder="sections, order, what to include, what to cut" spellcheck="true"></textarea></div>
+</div>
+</div>
+</div>
+</section>
+<section class="day" id="W1-D2">
+<div class="hd">
+  <span class="n">Week 1 &middot; Day 2 &middot; TUE</span>
+  
+</div>
+<div class="bd">
+
+<div class="fld"><div class="fh">Headline</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="hl">Hors d'oeuvres, and the announcement of this evening's entrees.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D2.HEAD" rows="2"
+    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Executive summary</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p>A fraction of the weekend, deliberately. The volume is the story and the volume is also the reason not to serve it all at once.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D2.EXEC" rows="5"
+    placeholder="the paragraph a reader gets if they read nothing else" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><ul><li>The manifesto, and first contact.</li><li>The volume — hourly, forty-eight hours, gigabytes.</li><li>Headers spoofed, the sender untraceable.</li></ul></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D2.NOTES" rows="5"
+    placeholder="sections, order, what to include, what to cut" spellcheck="true"></textarea></div>
+</div>
+</div>
+</div>
+</section>
+<section class="day" id="W1-D3">
+<div class="hd">
+  <span class="n">Week 1 &middot; Day 3 &middot; WED</span>
+  
+</div>
+<div class="bd">
+
+<div class="fld"><div class="fh">Headline</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="hl">The start of the transmissions: what came, what form, what is unreadable.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D3.HEAD" rows="2"
+    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Executive summary</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p>The first day that is about the material rather than about the event. It ends with work starting: cracking software goes on everything tonight.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D3.EXEC" rows="5"
+    placeholder="the paragraph a reader gets if they read nothing else" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><ul><li>Formats — hex, zips, photographs.</li><li>The white gloves and the tray.</li><li>Cracking begins.</li></ul></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D3.NOTES" rows="5"
+    placeholder="sections, order, what to include, what to cut" spellcheck="true"></textarea></div>
+</div>
+</div>
+</div>
+</section>
+<section class="day" id="W1-D4">
+<div class="hd">
+  <span class="n">Week 1 &middot; Day 4 &middot; THU</span>
+  
+</div>
+<div class="bd">
+
+<div class="fld"><div class="fh">Headline</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="hl">What we can see from outside the box.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D4.HEAD" rows="2"
+    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Executive summary</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p>A status day, and the standing rule below is what makes a status day possible without opening anything: the box can be reported on from outside.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D4.EXEC" rows="5"
+    placeholder="the paragraph a reader gets if they read nothing else" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><ul><li>Status — opened, unopened, unreadable.</li><li>The math: four days or four years.</li><li>A folder, an envelope, a fuzzy thing in the corner.</li></ul></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D4.NOTES" rows="5"
+    placeholder="sections, order, what to include, what to cut" spellcheck="true"></textarea></div>
+</div>
+</div>
+</div>
+</section>
+<section class="day" id="W1-D5">
+<div class="hd">
+  <span class="n">Week 1 &middot; Day 5 &middot; FRI</span>
+  
+</div>
+<div class="bd">
+
+<div class="fld"><div class="fh">Headline</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="hl">One password was short enough.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D5.HEAD" rows="2"
+    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Executive summary</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p>The week's payoff, and it is built to a form he named — see THE FRIDAY FORMULA below. The entry summarises the day, and then four o'clock happens inside the same entry.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D5.EXEC" rows="5"
+    placeholder="the paragraph a reader gets if they read nothing else" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><ul><li>The day's work.</li><li>Four o'clock: the first zip opens.</li></ul></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D5.NOTES" rows="5"
+    placeholder="sections, order, what to include, what to cut" spellcheck="true"></textarea></div>
+</div>
+</div>
+</div>
+</section>
+
+<h2>Week 2 &mdash; the five days</h2>
+<p class="lead" style="margin-bottom:16px">Each of these blocks opens with <b>your own
+words</b> in gold &mdash; the beat you wrote for that day, carried across character for
+character. Week one has none, because you spoke it and it was written down from the
+shape rather than quoted. Everything under the gold line is Ops&rsquo;.</p>
+<section class="day" id="W2-D1">
+<div class="hd">
+  <span class="n">Week 2 &middot; Day 1 &middot; MON</span>
+  <div class="beat">&ldquo;inside the zip&rdquo;
+       <span class="rail g">your words</span></div>
+</div>
+<div class="bd">
+
+<div class="fld"><div class="fh">Headline</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="hl">What was actually in it.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D1.HEAD" rows="2"
+    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Executive summary</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p>Friday ended with one zip open and nothing said about what was in it. This is the day that says. It is a contents day and it does not have to explain anything yet — knowing what is in the box is a different thing from knowing what the box is for.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D1.EXEC" rows="5"
+    placeholder="the paragraph a reader gets if they read nothing else" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><ul><li>The contents, listed.</li><li>What opened it, and why that password and not the others.</li><li>What is readable and what is not.</li></ul></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D1.NOTES" rows="5"
+    placeholder="sections, order, what to include, what to cut" spellcheck="true"></textarea></div>
+</div>
+</div>
+</div>
+</section>
+<section class="day" id="W2-D2">
+<div class="hd">
+  <span class="n">Week 2 &middot; Day 2 &middot; TUE</span>
+  <div class="beat">&ldquo;the artifacts&rdquo;
+       <span class="rail g">your words</span></div>
+</div>
+<div class="bd">
+
+<div class="fld"><div class="fh">Headline</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="hl">The things in it that are objects, not data.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D2.HEAD" rows="2"
+    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Executive summary</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p>The half of the contents that is not a file — the things that were photographed, scanned or shipped as pictures of something somebody was holding. This is the first day of week two with anything to LOOK at, which makes it the first day a genuine reveal could be spent.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D2.EXEC" rows="5"
+    placeholder="the paragraph a reader gets if they read nothing else" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><ul><li>What the artifacts are.</li><li>What they are of.</li><li>Which of them raise a question the week then has to carry.</li></ul></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D2.NOTES" rows="5"
+    placeholder="sections, order, what to include, what to cut" spellcheck="true"></textarea></div>
+</div>
+</div>
+</div>
+</section>
+<section class="day" id="W2-D3">
+<div class="hd">
+  <span class="n">Week 2 &middot; Day 3 &middot; WED</span>
+  <div class="beat">&ldquo;the red herrings&rdquo;
+       <span class="rail g">your words</span></div>
+</div>
+<div class="bd">
+
+<div class="fld"><div class="fh">Headline</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="hl">What looked like the way in, and is not.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D3.HEAD" rows="2"
+    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Executive summary</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p>A subtraction day, and the standing status rule is what makes it a day rather than a wait: a reader can be told what has been RULED OUT and come away with more than they had. It also buys the week its honesty — a search that never reports a dead end is not a search.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D3.EXEC" rows="5"
+    placeholder="the paragraph a reader gets if they read nothing else" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><ul><li>What was tried.</li><li>What it looked like it would be.</li><li>What it turned out to be instead.</li></ul></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D3.NOTES" rows="5"
+    placeholder="sections, order, what to include, what to cut" spellcheck="true"></textarea></div>
+</div>
+</div>
+</div>
+</section>
+<section class="day" id="W2-D4">
+<div class="hd">
+  <span class="n">Week 2 &middot; Day 4 &middot; THU</span>
+  <div class="beat">&ldquo;the unlabeled table holding more codes&rdquo; &nbsp;+&nbsp; &ldquo;the codes that fail when typed directly&rdquo;
+       <span class="rail g">your words</span></div>
+</div>
+<div class="bd">
+
+<div class="fld"><div class="fh">Headline</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="hl">A table of codes, and every one of them refuses.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D4.HEAD" rows="2"
+    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Executive summary</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p>The object and its property, in one day, because they are one object: a table nobody labelled, full of codes, and the codes do not work when they are typed in. That refusal is the day's whole content — it means there is a step nobody has found yet, and saying so is a status report, not a cliffhanger.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D4.EXEC" rows="5"
+    placeholder="the paragraph a reader gets if they read nothing else" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><ul><li>The table: where it was, and what makes it unlabelled.</li><li>The codes: how many, what shape.</li><li>The refusal: what happens when one is typed straight in.</li></ul></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D4.NOTES" rows="5"
+    placeholder="sections, order, what to include, what to cut" spellcheck="true"></textarea></div>
+</div>
+</div>
+</div>
+</section>
+<section class="day" id="W2-D5">
+<div class="hd">
+  <span class="n">Week 2 &middot; Day 5 &middot; FRI</span>
+  <div class="beat">&ldquo;Friday 4pm: a box on the porch with no shipping label&rdquo;
+       <span class="rail g">your words</span></div>
+</div>
+<div class="bd">
+<p class="flag">One thing before you write this one: <b>X-1</b> &mdash;
+       this day is the only beat in either week that lands outside the transfer model's
+       own window. <a href="reference.html#collisions">what that means, and the three ways out &rarr;</a></p>
+<div class="fld"><div class="fh">Headline</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="hl">Four o'clock, and it is on the porch.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D5.HEAD" rows="2"
+    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Executive summary</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p>Built to the Friday formula he named: the entry summarises the week's last day the way any other day's entry would, and then four o'clock happens INSIDE the same entry. Not a trailer and not a to-be-continued. This is also the week's one arrival — everything before it was already in the building.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D5.EXEC" rows="5"
+    placeholder="the paragraph a reader gets if they read nothing else" spellcheck="true"></textarea></div>
+</div>
+</div>
+<div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><ul><li>The day's work, summarised as any day's would be.</li><li>Four o'clock: the box.</li><li>No shipping label — what that is and is not evidence of.</li></ul></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D5.NOTES" rows="5"
+    placeholder="sections, order, what to include, what to cut" spellcheck="true"></textarea></div>
+</div>
+</div>
+</div>
+</section>
+
+<h2 id="collector">Everything you have written</h2>
+<p class="lead" style="margin-bottom:14px">One press gathers every response into plain
+text and puts it on the clipboard. <b>Ops&rsquo; paragraphs are not in it</b> &mdash; only
+what you wrote, under a key for each slot, so it is short enough to read and paste.
+If the clipboard is refused, the text is selected below and Ctrl+C takes it.</p>
+<p style="margin:0 0 12px"><button class="cta" data-gather="here">Copy everything</button>
+<span id="says" class="k" style="margin-left:12px;font-size:12.5px"></span></p>
+<textarea id="out" readonly spellcheck="false"
+ placeholder="press copy everything and your responses appear here"></textarea>
+
+<footer>Ops&rsquo; half of this page is built from <code>reveal/week-one.mjs</code> and
+<code>reveal/week-two.mjs</code> and is regenerated with <code>npm run dictation</code>
+&mdash; <b>which will not touch anything you have typed</b>, because your responses live
+in the browser and never in the file. The reference page carries where every left-hand
+line came from. Ops&#8209;to&#8209;Mike, 2026-08-07; not part of the museum.</footer>
+</div>
+
+<div class="cbar">
+ <span class="st" id="stat"></span>
+ <span>
+  <a href="reference.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">reference &rarr;</a>
+  <button data-gather="jump">Copy everything</button>
+ </span>
+</div>
+<script>
+(function(){
+ "use strict";
+ var SLOTS = [{"id":"W1.SUM","where":"WEEK 1 — summary headline","ops":"THE WEEKEND THAT WASN'T SUPPOSED TO HAPPEN"},{"id":"W1.D1.HEAD","where":"WEEK 1 — day 1 MON — headline","ops":"The museum opens."},{"id":"W1.D1.EXEC","where":"WEEK 1 — day 1 MON — executive summary","ops":null},{"id":"W1.D1.NOTES","where":"WEEK 1 — day 1 MON — detailed sections, notes, etc.","ops":null},{"id":"W1.D2.HEAD","where":"WEEK 1 — day 2 TUE — headline","ops":"Hors d'oeuvres, and the announcement of this evening's entrees."},{"id":"W1.D2.EXEC","where":"WEEK 1 — day 2 TUE — executive summary","ops":null},{"id":"W1.D2.NOTES","where":"WEEK 1 — day 2 TUE — detailed sections, notes, etc.","ops":null},{"id":"W1.D3.HEAD","where":"WEEK 1 — day 3 WED — headline","ops":"The start of the transmissions: what came, what form, what is unreadable."},{"id":"W1.D3.EXEC","where":"WEEK 1 — day 3 WED — executive summary","ops":null},{"id":"W1.D3.NOTES","where":"WEEK 1 — day 3 WED — detailed sections, notes, etc.","ops":null},{"id":"W1.D4.HEAD","where":"WEEK 1 — day 4 THU — headline","ops":"What we can see from outside the box."},{"id":"W1.D4.EXEC","where":"WEEK 1 — day 4 THU — executive summary","ops":null},{"id":"W1.D4.NOTES","where":"WEEK 1 — day 4 THU — detailed sections, notes, etc.","ops":null},{"id":"W1.D5.HEAD","where":"WEEK 1 — day 5 FRI — headline","ops":"One password was short enough."},{"id":"W1.D5.EXEC","where":"WEEK 1 — day 5 FRI — executive summary","ops":null},{"id":"W1.D5.NOTES","where":"WEEK 1 — day 5 FRI — detailed sections, notes, etc.","ops":null},{"id":"W2.SUM","where":"WEEK 2 — summary headline","ops":"THE PASSWORD WAS IN THE ROOM THE WHOLE TIME"},{"id":"W2.D1.HEAD","where":"WEEK 2 — day 1 MON — headline","ops":"What was actually in it."},{"id":"W2.D1.EXEC","where":"WEEK 2 — day 1 MON — executive summary","ops":null},{"id":"W2.D1.NOTES","where":"WEEK 2 — day 1 MON — detailed sections, notes, etc.","ops":null},{"id":"W2.D2.HEAD","where":"WEEK 2 — day 2 TUE — headline","ops":"The things in it that are objects, not data."},{"id":"W2.D2.EXEC","where":"WEEK 2 — day 2 TUE — executive summary","ops":null},{"id":"W2.D2.NOTES","where":"WEEK 2 — day 2 TUE — detailed sections, notes, etc.","ops":null},{"id":"W2.D3.HEAD","where":"WEEK 2 — day 3 WED — headline","ops":"What looked like the way in, and is not."},{"id":"W2.D3.EXEC","where":"WEEK 2 — day 3 WED — executive summary","ops":null},{"id":"W2.D3.NOTES","where":"WEEK 2 — day 3 WED — detailed sections, notes, etc.","ops":null},{"id":"W2.D4.HEAD","where":"WEEK 2 — day 4 THU — headline","ops":"A table of codes, and every one of them refuses."},{"id":"W2.D4.EXEC","where":"WEEK 2 — day 4 THU — executive summary","ops":null},{"id":"W2.D4.NOTES","where":"WEEK 2 — day 4 THU — detailed sections, notes, etc.","ops":null},{"id":"W2.D5.HEAD","where":"WEEK 2 — day 5 FRI — headline","ops":"Four o'clock, and it is on the porch."},{"id":"W2.D5.EXEC","where":"WEEK 2 — day 5 FRI — executive summary","ops":null},{"id":"W2.D5.NOTES","where":"WEEK 2 — day 5 FRI — detailed sections, notes, etc.","ops":null}];
+ var KEY = "wb.worksheet.2026-08-07";
+ var store = null;
+ try { window.localStorage.setItem("wb.probe","1"); window.localStorage.removeItem("wb.probe");
+       store = window.localStorage; } catch (e) { store = null; }
+
+ var warn = document.getElementById("warn");
+ if (!store) { warn.className = "warn on"; }
+
+ var areas = Array.prototype.slice.call(document.querySelectorAll("textarea[data-slot]"));
+ var byId = {};
+ areas.forEach(function(t){ byId[t.getAttribute("data-slot")] = t; });
+
+ function grow(t){ t.style.height = "auto"; t.style.height = (t.scrollHeight + 2) + "px"; }
+
+ function read(){
+  if (!store) return {};
+  try { return JSON.parse(store.getItem(KEY) || "{}"); } catch (e) { return {}; }
+ }
+ function values(){
+  var v = {};
+  areas.forEach(function(t){ var s = t.value.replace(/\s+$/,""); if (s) v[t.getAttribute("data-slot")] = s; });
+  return v;
+ }
+
+ var saveTimer = null, statEl = document.getElementById("stat");
+ function two(n){ return (n < 10 ? "0" : "") + n; }
+ function clock(){ var d = new Date(); return two(d.getHours()) + ":" + two(d.getMinutes()); }
+
+ function stat(saved){
+  var n = Object.keys(values()).length;
+  var msg = "<b>" + n + "</b> of " + SLOTS.length + " filled";
+  if (!store) msg += " \u00b7 <b>not saved</b> \u2014 this browser refused storage";
+  else if (saved) msg += " \u00b7 saved " + clock();
+  statEl.innerHTML = msg;
+ }
+
+ function save(){
+  if (store) { try { store.setItem(KEY, JSON.stringify(values())); } catch (e) {
+   warn.className = "warn on"; store = null; } }
+  stat(true);
+ }
+
+ function mirror(id){
+  var m = document.querySelector('[data-mirror="' + id + '"]');
+  if (m) m.textContent = byId[id] ? byId[id].value.replace(/\s+$/,"") : "";
+ }
+
+ var saved = read();
+ areas.forEach(function(t){
+  var id = t.getAttribute("data-slot");
+  if (saved[id]) t.value = saved[id];
+  if (t.value) t.className = "has";
+  grow(t); mirror(id);
+  t.addEventListener("input", function(){
+   t.className = t.value.replace(/\s+$/,"") ? "has" : "";
+   grow(t); mirror(id); stat(false);
+   if (saveTimer) clearTimeout(saveTimer);
+   saveTimer = setTimeout(save, 400);
+  });
+  t.addEventListener("blur", save);
+ });
+ stat(false);
+
+ /* ---- THE COLLECTOR ---------------------------------------------------- */
+ function collect(){
+  var v = values(), lines = [], empty = [], n = 0;
+  var d = new Date();
+  lines.push("WEIRD.BABY MUSEUM - DICTATION WORKSHEET - MIKE'S RESPONSES");
+  SLOTS.forEach(function(s){ if (v[s.id]) n++; else empty.push(s.id); });
+  lines.push("captured " + d.getFullYear() + "-" + two(d.getMonth()+1) + "-" + two(d.getDate())
+   + " " + clock() + "  -  " + n + " of " + SLOTS.length + " slots filled");
+  lines.push("Ops' own paragraphs are not repeated here. Slot keys match the worksheet.");
+  lines.push("");
+  SLOTS.forEach(function(s){
+   if (!v[s.id]) return;
+   lines.push("[" + s.id + "] " + s.where);
+   if (s.ops) lines.push("  ops: " + s.ops);
+   if (v[s.id].indexOf("\n") < 0) lines.push("  mike: " + v[s.id]);
+   else { lines.push("  mike:"); lines.push(v[s.id]); }
+   lines.push("");
+  });
+  if (empty.length) {
+   lines.push("LEFT EMPTY (" + empty.length + "): " + empty.join(", "));
+   lines.push("");
+  }
+  return lines.join("\n");
+ }
+
+ var out = document.getElementById("out");
+ var says = document.getElementById("says");
+ function tell(msg){ says.textContent = msg; }
+
+ function gather(){
+  var text = collect();
+  out.value = text;
+  out.scrollTop = 0;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+   navigator.clipboard.writeText(text).then(function(){
+    tell("Copied \u2014 " + text.length + " characters on the clipboard. Paste it to Ops.");
+   }, function(){ legacy(text); });
+  } else { legacy(text); }
+ }
+ function legacy(text){
+  out.focus(); out.select();
+  var ok = false;
+  try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+  tell(ok ? "Copied \u2014 " + text.length + " characters on the clipboard. Paste it to Ops."
+          : "The browser refused the clipboard. The text is selected below \u2014 press Ctrl+C.");
+ }
+
+ Array.prototype.slice.call(document.querySelectorAll("[data-gather]")).forEach(function(b){
+  b.addEventListener("click", function(e){
+   e.preventDefault();
+   gather();
+   if (b.getAttribute("data-gather") === "jump") {
+    document.getElementById("collector").scrollIntoView({ block: "start" });
+   }
+  });
+ });
+})();
+</script>
+</body></html>

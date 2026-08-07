@@ -514,9 +514,84 @@ ledger derivation and the pull-back rule's one delivered picture. **The prototyp
 mark is in `reveal/ledger-declare.mjs` and the dictation pages and NOWHERE ON THE
 GLASS** — Doctrine 11. **Its number is untouched and open: `B-b`.**
 
+## TWO STANDING RULES ADDED 2026-08-07 (THE WORKSHEET)
+
+**REFERENCE AND WORK DO NOT SHARE A PAGE** — *"If it is reference, write it as
+such. If it is the firehose I have to drink from to do anything, thanks, pass."*
+Mirrored in `STATE.md`; the mechanism is the §5 **THE OPS INSTRUMENTS THAT RENDER
+TO `docs/`** row. `week1.html` explained the rails, the transfer classes and five
+collisions **before it showed a headline**, and had nowhere for Mike to write. It
+is **`worksheet.html`** (the instrument: 32 slots, Ops left / input right,
+`localStorage` autosave, one COPY EVERYTHING button) plus **`reference.html`**
+(everything that explains the machine), and `prep.mjs` **prunes `week1.html` by
+name** — a generator that stops writing a file does not unwrite it. **An
+instrument must degrade honestly:** refused storage raises a red banner rather
+than losing an hour of typing; a refused clipboard leaves the text selected.
+
+**THE THREE MARKS, AND A `beat` MAY BE DELETED BUT NEVER REWORDED** —
+`OPERATIONS.md` §5 *THE STORY OUTLINES, AND THE VERBATIM RULE*, mirrored in
+`STATE.md`. `Ops` blue = Ops' sentence · **`your words` gold = VERBATIM** ·
+`your rule · Ops wording` amber = his rule, Ops' sentence. **BOTH ERRORS COST THE
+SAME:** a paraphrase in gold is indistinguishable a week later from something he
+said, and **his own sentence left in blue gets quietly "improved" by the next
+round.** Week one was SPOKEN (gold empty as a fact, not a policy); week two
+arrived IN WRITING (`reveal/week-two.mjs`, six beats carried exactly). **Ops
+divides and does not invent** — the one merge in week two is named in the file
+header, and no `weight` was invented for the same reason no `bucket` is derived.
+
 ## Recent session log
 
 Maintained here. Newest first.
+
+### 2026-08-07 -> THE WORKSHEET (W1-W8) - sealed
+- **THE PRIOR PAGE FAILED ON NEITHER ACCURACY NOR TONE, WHICH IS WHY NOTHING
+  CAUGHT IT.** `week1.html` explained the rail scheme, the provenance model, the
+  transfer classes, the bouncy ball law and five collisions **before it showed a
+  single headline**, and then had nowhere for Mike to write - *"if it is the
+  firehose I have to drink from to do anything, thanks, pass."* It is two files
+  now: **`worksheet.html`** (32 slots across two weeks and ten days, Ops left /
+  input right, `localStorage` autosave surviving a reload, one button that
+  gathers everything into plain text) and **`reference.html`**. The generator
+  **prunes `week1.html` by name** rather than leave an orphan every other page
+  still links past. Gates: lint **11/9 = baseline** - build green - provenance
+  **PASS** - `reveal:check` **PASS** - `parity:gate` **PASS** - `instory:gate`
+  **PASS** - `assets:orphans` **0** - **the lap RAN, six pages, 390px and
+  1228px**, zero sideways scroll, zero console errors. Log:
+  `docs/MUSEUM_WORKSHEET_LOG-20260807.md`.
+- **WEEK TWO ARRIVED IN WRITING, WHICH MAKES IT QUOTABLE, AND THE OLD RAIL SCHEME
+  HAD NO WAY TO SAY SO.** W1's rule was built for a week Mike SPOKE, so
+  gold-empty was a fact about week one rather than a policy. Carrying six written
+  beats on the blue rail would have been the **inverse** of the error the rails
+  exist to prevent: **his own sentence left in blue gets quietly "improved" by
+  the next round and nothing can tell it was ever his.** `reveal/week-two.mjs`
+  carries a `beat` field that **may be deleted but never reworded**. Ops divided
+  six beats into five days and **the one merge is named** - *the unlabeled table
+  holding more codes* + *the codes that fail when typed directly*, one object -
+  and **no `weight` was invented** (K-b), for the same reason no `bucket` is
+  derived (B-a).
+- **THE OUTLINE PRODUCED EXACTLY ONE COLLISION AND IT IS THE ROUND'S OPEN ITEM
+  (X-1).** Week two's Friday is a box on a porch; `TRANSFERS.PACKAGE.opens` is
+  **3**; that beat is the only one in either week outside its own window. Three
+  ways out, all Mike's, and **the cheapest - rule that an unlabelled box is not a
+  package - is a change to the transfer model's own boundary, which Ops does not
+  make on an inference.** Where it is surfaced is half the answer: one amber line
+  on the day-5 block, the argument on the reference page. Four other checks agree,
+  two of them unarranged.
+- **THE SHELL WAS MOVED AND THE MOVE WAS PROVED.** Seven declarations left
+  `prep.mjs` for `tools/dictation/shell.mjs`; the three pages that did not change
+  came out **byte-identical** to copies taken before the split. **AND THE LAP
+  FOUND A BUG NO GATE HERE CAN SEE:** `font: 14px/1.5 inherit` is invalid - the
+  shorthand takes a family - so Chrome dropped it and every writing field came up
+  in the UA's monospace, **on the one page whose job is writing**. The same
+  construction is in the shared `OPS_CSS` three times, noted rather than changed.
+- **ONE THING IS UNMEASURED AND IS SAID PLAINLY.** Whether `clipboard.writeText`
+  succeeds under a genuine user click: real mouse input stopped reaching the page
+  mid-session, so every test click was synthetic and carried no user activation.
+  The fallback (select the text, say so) was observed working and the button is
+  useful either way. **Also: never call `navigator.clipboard.readText()` from the
+  driver** - it raises a tab-modal permission prompt that froze the renderer and
+  timed out CDP. **Nothing in `src/` changed.** **Surfacing unmoved at 20
+  spendable - the FOURTH packet running.**
 
 ### 2026-08-07 -> THE TWO BUCKETS + 013 (B1-B3) - sealed
 - **THE BOUNCY BALL LAW CAPS POINTS OF FOCUS, NOT ASSETS, AND THE OLD SENTENCE WAS
@@ -565,42 +640,14 @@ Maintained here. Newest first.
   a measurement, and it is not being called one.** Surfacing unmoved at **20
   spendable - the third packet running** with nothing off the back shelf.
 
-### 2026-08-07 -> THE WEEK ONE OUTLINE (W1) - sealed
-- **K5 REFUSED TO INVENT THE OUTLINE AND WAS RIGHT; THIS ROUND SUPPLIED IT FROM
-  OPS, WHOSE MATERIAL IT IS.** Mike spoke the week's shape aloud on 2026-08-02;
-  Ops structured it into **`reveal/week-one.mjs`** and `tools/dictation/prep.mjs`
-  renders it. **BLUE RAIL THROUGHOUT, NOTHING QUOTED, EVERY GOLD SLOT STILL
-  EMPTY.** Gates: lint **11/9 = baseline** - build green - provenance **PASS** -
-  `reveal:check` **PASS** - `parity:gate` **PASS** - `instory:gate` **PASS** -
-  `assets:orphans` **0** - all five pages lapped at **389px and 1233px**, zero
-  page overflow, zero console errors. Log:
-  `docs/MUSEUM_WEEK_ONE_OUTLINE_LOG-20260807.md`. Path unchanged:
-  `docs/dictation-20260807/index.html`, rebuilt with `npm run dictation`.
-- **THE ROUND'S ONE DESIGN DECISION IS A THIRD MARKER, AND IT IS DELIBERATELY NOT
-  GOLD.** The instruction said BLUE RAIL *and* "nothing here is his verbatim
-  except where marked", which asked two grades of attribution to share one rail.
-  `OPS` is the default; **`MIKE-NAMED`** (the Friday formula, the five standing
-  Record rules, the bouncy ball law) renders blue with an **amber** *his rule ·
-  Ops wording* tag. **A paraphrase wearing gold is indistinguishable a week later
-  from something he said** — which is the exact failure K5 refused to create, so
-  gold stays empty. The one genuinely verbatim sentence on the page is the asset
-  timeline's founding line, carried from `reveal/transfers.mjs`, and the page now
-  labels it as the only one.
-- **THE OUTLINE WAS RUN AGAINST THE TREE AND FOUR OF FIVE CHECKS AGREE. THE FIFTH
-  IS THE ROUND'S FINDING (W-1).** Day 1 says the wing opens holding one entry and
-  that is true — but it is **entry 013 and its subject is a physical delivery**, a
-  sealed bag and a USB-C adapter and a unit on charge. Three readings, all Mike's,
-  **named and not resolved**; `M19 — what a record number means` is the same
-  question. **W-2 and W-3 are agreements nobody arranged:** the prelude's Friday-to-
-  Sunday and `TRANSFERS.BLAST`'s window match without either being written from the
-  other, and *"one password was short enough"* is an UNLOCK by the model's own
-  definition, so the week's biggest moment costs the story no new arrival.
-- **K-b IS `IN PROGRESS`, NOT CLOSED.** There is still nothing authored by Mike in
-  either repository and still no `weight` field, so the topics are lists and not a
-  ranking. What K-b has now is a working draft to argue with. **Surfacing is
-  unmoved at 20 spendable and this is the second packet running that took nothing
-  off the shelf** — recorded, per the cadence, so the next round's number means
-  something.
+### 2026-08-07 -> THE WEEK ONE OUTLINE (W1) - archived
+Moved verbatim to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md` under this file's
+own ~600-line rule. **What is still load-bearing in it is NOT in the archive:**
+the outline is `reveal/week-one.mjs` and its rail scheme is now the THREE MARKS
+section above; its `MIKE-NAMED` marker is the amber *your rule - Ops wording*
+tag; and **W-1 was closed by B2** (013 is a prototype), with **W-4 closed by B1**
+and **W-2, W-3, W-5 standing as agreements** - all five still print, beside week
+two's five, on `docs/dictation-20260807/reference.html`.
 
 ### 2026-08-07 -> THE DICTATION PREP (K1-K6) - archived
 Moved verbatim to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md` under this file's
