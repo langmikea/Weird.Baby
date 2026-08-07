@@ -62,6 +62,18 @@ tr.hide{display:none}
 .mine .lbl{color:var(--gold)}
 .scaf{border-left:3px solid var(--blu);padding-left:11px;margin:0 0 12px}
 .scaf .lbl{color:var(--blu)}
+/* The attribution marker. NOT gold — gold is reserved for material that is
+   Mike's own words, and a paraphrase wearing gold is the whole hazard. */
+.rail{display:inline-block;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;
+ border:1px solid #3a5570;color:var(--blu);padding:0 5px;border-radius:2px;white-space:nowrap;
+ vertical-align:1px;margin-left:4px}
+.rail.m{border-color:#7a5540;color:var(--amb);margin-left:0}
+.tl{list-style:none;padding:0;margin:0}
+.tl li{display:grid;grid-template-columns:19ch 1fr;gap:0 14px;padding:7px 0;
+ border-bottom:1px dotted var(--line2);margin:0}
+.tl li:last-child{border-bottom:0}
+.tl .at{color:var(--dim2);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding-top:2px}
+@media (max-width:620px){.tl li{grid-template-columns:1fr}.tl .at{margin-bottom:2px}}
 ul{margin:0 0 10px;padding-left:19px}li{margin:0 0 5px}
 footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--dim2);font-size:12px}
 @media (max-width:720px){body{padding:20px 14px 80px}.bar input{width:100%}}
@@ -69,27 +81,37 @@ footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:v
 <div class="wrap">
 <p class="back"><a href="index.html">&larr; the dictation prep</a> &middot; Ops&#8209;to&#8209;Mike, 2026-08-07 &middot; not part of the museum</p>
 <h1>The story outline &middot; week one, days 1&ndash;5</h1>
-<p class="sub">the cue card made real &mdash; and the honest half of it is how much of the card is blank</p>
+<p class="sub">THE WEEKEND THAT WASN'T SUPPOSED TO HAPPEN &mdash; structured by Ops from what you said on 2026-08-02, and not in your words</p>
 
 <div class="note">
-<p class="ask"><b>THE FINDING FIRST, BECAUSE IT CHANGES WHAT THIS PAGE COULD BE.</b>
-The brief says <i>week 1 as it stands</i> &mdash; the week's headline, each day's
-headline, each day's topics with their weights. <b>None of that exists.</b> Both
-repositories were searched for a day-by-day story outline, a week headline, a
-topic list and a weighting: there is no such document, no such data file, and no
-such field. What exists is the transfer arc (which is weekly and about how
-material ARRIVED, not about what a day is <i>about</i>), the three-act story arc
-(which is about the whole product and names no days), and one Record entry.</p>
+<p class="ask"><b>READ THIS BEFORE YOU READ A SINGLE HEADLINE BELOW, BECAUSE IT
+IS THE ONLY THING THAT KEEPS THEM USEFUL.</b> <b>NOTHING ON THIS PAGE IS QUOTED.
+NOT ONE LINE.</b> You spoke the week's shape aloud on 2026-08-02;
+Ops structured it into a headline, five days, topics and standing rules and wrote
+every sentence of it. So the whole outline sits on the
+<b style="color:var(--blu)">blue</b> rail &mdash; the shape is yours, the words are
+Ops&rsquo;. A paraphrase rendered in gold is indistinguishable a week from now from
+something you actually said, and that is the exact failure this page was built to
+avoid.</p>
 
-<p><b>SO THE FRAME IS BUILT AND THE CONTENT IS NOT.</b> Doctrine 12 puts the
-content of the story with you, and writing five plausible day headlines would
-have been the exact failure mode the brief guards against &mdash; you would have
-read them back tomorrow and had no way to tell which of them you had said.</p>
+<p><b>THE GOLD RAIL IS STILL EMPTY ON EVERY DAY, DELIBERATELY.</b> Every day below
+has an empty gold slot above its blue one. That slot is where your own headline
+goes when you dictate it. There is still <b>no authored day-by-day outline in
+either repository</b> &mdash; no week headline, no day headlines, no topic list,
+no <code>weight</code> field on anything story-shaped. That finding (K&#8209;b) has
+not been closed by this page; it has been given a working draft to argue with.</p>
 
-<p><b>HOW TO READ THE COLOURS, AND IT IS THE ONLY RULE ON THE PAGE:</b>
-a <b style="color:var(--gold)">gold</b> rail means the material is YOURS &mdash;
-today every gold rail is empty. A <b style="color:var(--blu)">blue</b> rail means
-Ops derived it from a rule, and the rule is named. Nothing is unlabelled.</p>
+<p><b>ONE MARKER YOU WILL SEE AND SHOULD TRUST:</b>
+<span class="rail m">his rule &middot; Ops wording</span> means you named that RULE
+as a rule &mdash; the Friday formula, the standing Record rules, the bouncy ball
+law. The rule is yours; the sentence is still Ops&rsquo;, so it renders blue like
+everything else. Nothing on this page is unlabelled.</p>
+
+<p><b>AND THE OUTLINE COLLIDES WITH THE TREE IN ONE PLACE.</b> Five checks were run
+against what the repository actually holds &mdash; the transfer classes, the ledger,
+the one Record entry that exists. Four agree. <a href="#collisions">One does not</a>,
+and it is named and left unresolved at the foot of this page, because resolving it
+is authoring and authoring is yours.</p>
 </div>
 
 <h2>What week one is, as a fact about arrivals</h2>
@@ -114,118 +136,181 @@ have &mdash; and the packages are what <i>earn</i> their photographs.</p>
 <h2>The week</h2>
 <div class="day"><div class="hd">
   <span class="n">Week 1 &middot; the week's own headline</span>
-  <span class="slot">&mdash; not written &mdash;</span>
+  <span class="slot">&mdash; yours is not written &mdash;</span>
 </div><div class="bd">
   <div class="mine"><span class="lbl">yours</span>
     <p class="k" style="margin:0"><i>empty.</i></p></div>
+  <div class="scaf"><span class="lbl">Ops &middot; the week as structured <span class="rail">blue rail</span></span>
+    <p style="margin:0 0 7px;font-size:19px"><b style="color:var(--fg)">THE WEEKEND THAT WASN'T SUPPOSED TO HAPPEN</b></p>
+    <p style="margin:0 0 6px">5 days, Monday to Friday. Five, because the Record rests on weekends. The team does not; the Record does.</p>
+    <p class="k" style="margin:0;font-size:12.5px">Mike spoke the week's shape; Ops structured it into a headline, five days, topics and standing rules. Nothing here is quoted and nothing here is his wording. Where he named a rule as a rule it is marked MIKE-NAMED — the rule is his, the sentence is still Ops'.</p></div>
   <div class="scaf"><span class="lbl">Ops &middot; the one thing week one is already committed to</span>
-    <p style="margin:0">The asset timeline's own founding sentence, in your words:
+    <p style="margin:0">The asset timeline's own founding sentence, and it is
+    <b>the only verbatim sentence anywhere on this page</b> &mdash; it is carried from
+    <code>reveal/transfers.mjs</code>, where it has been in writing since 5 August with
+    its source named:
     <b>“the first Record must produce the first images of NIAC and VIIIp so the site has
     images to post — which means those images arrived in the email blast.”</b>
-    That is the only constraint on week one that already exists in writing, and it is
-    a constraint about <i>what the week must produce</i> rather than about what any day says.</p></div>
+    A constraint about <i>what the week must produce</i> rather than about what any day says.</p></div>
 </div></div>
+
+<h2>The weekend the week is named after</h2>
+<div class="note" style="margin-bottom:14px"><p>Not a day of week one &mdash; it is
+what happened before the museum opened, and four of the five days point back at it.
+<b>The transfer model already calls this window “Friday to Sunday, pre-launch”</b>
+and was written on 5 August from the asset timeline, without reference to this
+outline. They agree on the weekend independently; see
+<a href="#collisions">W&#8209;2</a>.</p></div>
+<div class="scaf" style="margin-bottom:26px">
+  <span class="lbl">Ops &middot; the prelude, structured <span class="rail">blue rail</span></span>
+  <ul class="tl">
+    <li><span class="at">Friday, 2pm</span><span>The email address goes live — one of the last things done before opening.</span></li>
+    <li><span class="at">Friday, 4pm</span><span>The first manifesto arrives, written like someone who had been planning a while.</span></li>
+    <li><span class="at">Friday night to Sunday</span><span>The whole weekend burns. Hourly transmissions, forty-eight hours, gigabytes.</span></li>
+    <li><span class="at">Friday night to Sunday</span><span>What it carries: hex, zips, photographs of old equipment on a tray, shot by someone in white gloves.</span></li>
+    <li><span class="at">Friday night to Sunday</span><span>None of it addressed to anyone. Headers spoofed. The sender does not resolve.</span></li>
+    <li><span class="at">Sunday night</span><span>The decision: bring it to them in real time. Weird.Baby Robots is created.</span></li>
+    <li><span class="at">Monday</span><span>The museum opens with one entry, because that is true.</span></li>
+  </ul>
+</div>
 
 <div class="day">
   <div class="hd">
-    <span class="n">Week 1 &middot; Day 1</span>
+    <span class="n">Week 1 &middot; Day 1 &middot; MON</span>
     <span class="slot">&mdash; your headline for this day is not written, and nothing on this page will write it &mdash;</span>
   </div>
   <div class="bd">
-    <div class="mine"><span class="lbl">yours &middot; the day's headline and its topics</span>
-      <p class="k" style="margin:0"><i>empty. There is no authored day-by-day outline in either repository &mdash;
-      no week headline, no day headlines, no topics and no weights. This slot is the shape
-      of the thing, not a draft of it.</i></p></div>
-    <div class="scaf"><span class="lbl">Ops scaffolding &middot; what is eligible on this day, derived</span>
-      <p style="margin:0 0 6px">Identical on all five days, because the transfer arc is weekly and not daily:
-      everything in <b>THE BLAST</b> and <b>THE UNLOCKS</b> is in hand from week 0, and nothing
-      in <b>THE PACKAGES</b> or <b>THE LATER TRANSMISSIONS</b> has arrived. Which of the
-      22 held-and-arrived things a given day reaches for is the
-      authoring decision, and it is not derivable.</p>
-      <p style="margin:0" class="k">Full lists: <a href="artifacts.html">the artifact tracker</a> &middot;
+    <div class="mine"><span class="lbl">yours &middot; the day's headline, in your words</span>
+      <p class="k" style="margin:0"><i>empty, and it stays empty until you dictate into it.
+      Everything below this line is Ops&rsquo;.</i></p></div>
+    <div class="scaf"><span class="lbl">Ops &middot; the day as structured <span class="rail">blue rail</span></span>
+      <p style="margin:0 0 7px;font-size:16px"><b style="color:var(--fg)">The museum opens.</b></p>
+      <p style="margin:0 0 8px">The Robots wing opened two hours ago and holds one entry. Weird enough to warrant an exhibit — that is the claim the day has to carry, and it is the only claim it has to carry.</p>
+      <p class="k" style="margin:0 0 4px;font-size:11px;letter-spacing:.13em;text-transform:uppercase">Topics</p>
+      <ul style="margin:0 0 8px"><li>The transmissions named but not described.</li><li>Why it warranted an exhibit.</li><li>What the museum is.</li></ul>
+      <p class="k" style="margin:0;font-size:12.5px">What this day reaches for: <b>BLAST</b> &mdash; THE BLAST — Friday to Sunday, pre-launch. 103 rows, <span class="tag y">IN HAND</span>.
+      Which of the 22 held-and-arrived things it actually shows is an
+      authoring decision and is not derivable &mdash;
+      <a href="artifacts.html">the artifact tracker</a> &middot;
       <a href="eggs.html">the egg tracker</a>.</p></div>
   </div>
 </div>
 <div class="day">
   <div class="hd">
-    <span class="n">Week 1 &middot; Day 2</span>
+    <span class="n">Week 1 &middot; Day 2 &middot; TUE</span>
     <span class="slot">&mdash; your headline for this day is not written, and nothing on this page will write it &mdash;</span>
   </div>
   <div class="bd">
-    <div class="mine"><span class="lbl">yours &middot; the day's headline and its topics</span>
-      <p class="k" style="margin:0"><i>empty. There is no authored day-by-day outline in either repository &mdash;
-      no week headline, no day headlines, no topics and no weights. This slot is the shape
-      of the thing, not a draft of it.</i></p></div>
-    <div class="scaf"><span class="lbl">Ops scaffolding &middot; what is eligible on this day, derived</span>
-      <p style="margin:0 0 6px">Identical on all five days, because the transfer arc is weekly and not daily:
-      everything in <b>THE BLAST</b> and <b>THE UNLOCKS</b> is in hand from week 0, and nothing
-      in <b>THE PACKAGES</b> or <b>THE LATER TRANSMISSIONS</b> has arrived. Which of the
-      22 held-and-arrived things a given day reaches for is the
-      authoring decision, and it is not derivable.</p>
-      <p style="margin:0" class="k">Full lists: <a href="artifacts.html">the artifact tracker</a> &middot;
+    <div class="mine"><span class="lbl">yours &middot; the day's headline, in your words</span>
+      <p class="k" style="margin:0"><i>empty, and it stays empty until you dictate into it.
+      Everything below this line is Ops&rsquo;.</i></p></div>
+    <div class="scaf"><span class="lbl">Ops &middot; the day as structured <span class="rail">blue rail</span></span>
+      <p style="margin:0 0 7px;font-size:16px"><b style="color:var(--fg)">Hors d'oeuvres, and the announcement of this evening's entrees.</b></p>
+      <p style="margin:0 0 8px">A fraction of the weekend, deliberately. The volume is the story and the volume is also the reason not to serve it all at once.</p>
+      <p class="k" style="margin:0 0 4px;font-size:11px;letter-spacing:.13em;text-transform:uppercase">Topics</p>
+      <ul style="margin:0 0 8px"><li>The manifesto, and first contact.</li><li>The volume — hourly, forty-eight hours, gigabytes.</li><li>Headers spoofed, the sender untraceable.</li></ul>
+      <p class="k" style="margin:0;font-size:12.5px">What this day reaches for: <b>BLAST</b> &mdash; THE BLAST — Friday to Sunday, pre-launch. 103 rows, <span class="tag y">IN HAND</span>.
+      Which of the 22 held-and-arrived things it actually shows is an
+      authoring decision and is not derivable &mdash;
+      <a href="artifacts.html">the artifact tracker</a> &middot;
       <a href="eggs.html">the egg tracker</a>.</p></div>
   </div>
 </div>
 <div class="day">
   <div class="hd">
-    <span class="n">Week 1 &middot; Day 3</span>
+    <span class="n">Week 1 &middot; Day 3 &middot; WED</span>
     <span class="slot">&mdash; your headline for this day is not written, and nothing on this page will write it &mdash;</span>
   </div>
   <div class="bd">
-    <div class="mine"><span class="lbl">yours &middot; the day's headline and its topics</span>
-      <p class="k" style="margin:0"><i>empty. There is no authored day-by-day outline in either repository &mdash;
-      no week headline, no day headlines, no topics and no weights. This slot is the shape
-      of the thing, not a draft of it.</i></p></div>
-    <div class="scaf"><span class="lbl">Ops scaffolding &middot; what is eligible on this day, derived</span>
-      <p style="margin:0 0 6px">Identical on all five days, because the transfer arc is weekly and not daily:
-      everything in <b>THE BLAST</b> and <b>THE UNLOCKS</b> is in hand from week 0, and nothing
-      in <b>THE PACKAGES</b> or <b>THE LATER TRANSMISSIONS</b> has arrived. Which of the
-      22 held-and-arrived things a given day reaches for is the
-      authoring decision, and it is not derivable.</p>
-      <p style="margin:0" class="k">Full lists: <a href="artifacts.html">the artifact tracker</a> &middot;
+    <div class="mine"><span class="lbl">yours &middot; the day's headline, in your words</span>
+      <p class="k" style="margin:0"><i>empty, and it stays empty until you dictate into it.
+      Everything below this line is Ops&rsquo;.</i></p></div>
+    <div class="scaf"><span class="lbl">Ops &middot; the day as structured <span class="rail">blue rail</span></span>
+      <p style="margin:0 0 7px;font-size:16px"><b style="color:var(--fg)">The start of the transmissions: what came, what form, what is unreadable.</b></p>
+      <p style="margin:0 0 8px">The first day that is about the material rather than about the event. It ends with work starting: cracking software goes on everything tonight.</p>
+      <p class="k" style="margin:0 0 4px;font-size:11px;letter-spacing:.13em;text-transform:uppercase">Topics</p>
+      <ul style="margin:0 0 8px"><li>Formats — hex, zips, photographs.</li><li>The white gloves and the tray.</li><li>Cracking begins.</li></ul>
+      <p class="k" style="margin:0;font-size:12.5px">What this day reaches for: <b>BLAST</b> &mdash; THE BLAST — Friday to Sunday, pre-launch. 103 rows, <span class="tag y">IN HAND</span>.
+      Which of the 22 held-and-arrived things it actually shows is an
+      authoring decision and is not derivable &mdash;
+      <a href="artifacts.html">the artifact tracker</a> &middot;
       <a href="eggs.html">the egg tracker</a>.</p></div>
   </div>
 </div>
 <div class="day">
   <div class="hd">
-    <span class="n">Week 1 &middot; Day 4</span>
+    <span class="n">Week 1 &middot; Day 4 &middot; THU</span>
     <span class="slot">&mdash; your headline for this day is not written, and nothing on this page will write it &mdash;</span>
   </div>
   <div class="bd">
-    <div class="mine"><span class="lbl">yours &middot; the day's headline and its topics</span>
-      <p class="k" style="margin:0"><i>empty. There is no authored day-by-day outline in either repository &mdash;
-      no week headline, no day headlines, no topics and no weights. This slot is the shape
-      of the thing, not a draft of it.</i></p></div>
-    <div class="scaf"><span class="lbl">Ops scaffolding &middot; what is eligible on this day, derived</span>
-      <p style="margin:0 0 6px">Identical on all five days, because the transfer arc is weekly and not daily:
-      everything in <b>THE BLAST</b> and <b>THE UNLOCKS</b> is in hand from week 0, and nothing
-      in <b>THE PACKAGES</b> or <b>THE LATER TRANSMISSIONS</b> has arrived. Which of the
-      22 held-and-arrived things a given day reaches for is the
-      authoring decision, and it is not derivable.</p>
-      <p style="margin:0" class="k">Full lists: <a href="artifacts.html">the artifact tracker</a> &middot;
+    <div class="mine"><span class="lbl">yours &middot; the day's headline, in your words</span>
+      <p class="k" style="margin:0"><i>empty, and it stays empty until you dictate into it.
+      Everything below this line is Ops&rsquo;.</i></p></div>
+    <div class="scaf"><span class="lbl">Ops &middot; the day as structured <span class="rail">blue rail</span></span>
+      <p style="margin:0 0 7px;font-size:16px"><b style="color:var(--fg)">What we can see from outside the box.</b></p>
+      <p style="margin:0 0 8px">A status day, and the standing rule below is what makes a status day possible without opening anything: the box can be reported on from outside.</p>
+      <p class="k" style="margin:0 0 4px;font-size:11px;letter-spacing:.13em;text-transform:uppercase">Topics</p>
+      <ul style="margin:0 0 8px"><li>Status — opened, unopened, unreadable.</li><li>The math: four days or four years.</li><li>A folder, an envelope, a fuzzy thing in the corner.</li></ul>
+      <p class="k" style="margin:0;font-size:12.5px">What this day reaches for: <b>BLAST</b> &mdash; THE BLAST — Friday to Sunday, pre-launch. 103 rows, <span class="tag y">IN HAND</span>.
+      Which of the 22 held-and-arrived things it actually shows is an
+      authoring decision and is not derivable &mdash;
+      <a href="artifacts.html">the artifact tracker</a> &middot;
       <a href="eggs.html">the egg tracker</a>.</p></div>
   </div>
 </div>
 <div class="day">
   <div class="hd">
-    <span class="n">Week 1 &middot; Day 5</span>
+    <span class="n">Week 1 &middot; Day 5 &middot; FRI</span>
     <span class="slot">&mdash; your headline for this day is not written, and nothing on this page will write it &mdash;</span>
   </div>
   <div class="bd">
-    <div class="mine"><span class="lbl">yours &middot; the day's headline and its topics</span>
-      <p class="k" style="margin:0"><i>empty. There is no authored day-by-day outline in either repository &mdash;
-      no week headline, no day headlines, no topics and no weights. This slot is the shape
-      of the thing, not a draft of it.</i></p></div>
-    <div class="scaf"><span class="lbl">Ops scaffolding &middot; what is eligible on this day, derived</span>
-      <p style="margin:0 0 6px">Identical on all five days, because the transfer arc is weekly and not daily:
-      everything in <b>THE BLAST</b> and <b>THE UNLOCKS</b> is in hand from week 0, and nothing
-      in <b>THE PACKAGES</b> or <b>THE LATER TRANSMISSIONS</b> has arrived. Which of the
-      22 held-and-arrived things a given day reaches for is the
-      authoring decision, and it is not derivable.</p>
-      <p style="margin:0" class="k">Full lists: <a href="artifacts.html">the artifact tracker</a> &middot;
+    <div class="mine"><span class="lbl">yours &middot; the day's headline, in your words</span>
+      <p class="k" style="margin:0"><i>empty, and it stays empty until you dictate into it.
+      Everything below this line is Ops&rsquo;.</i></p></div>
+    <div class="scaf"><span class="lbl">Ops &middot; the day as structured <span class="rail">blue rail</span></span>
+      <p style="margin:0 0 7px;font-size:16px"><b style="color:var(--fg)">One password was short enough.</b></p>
+      <p style="margin:0 0 8px">The week's payoff, and it is built to a form he named — see THE FRIDAY FORMULA below. The entry summarises the day, and then four o'clock happens inside the same entry.</p>
+      <p class="k" style="margin:0 0 4px;font-size:11px;letter-spacing:.13em;text-transform:uppercase">Topics</p>
+      <ul style="margin:0 0 8px"><li>The day's work.</li><li>Four o'clock: the first zip opens.</li></ul>
+      <p class="k" style="margin:0;font-size:12.5px">What this day reaches for: <b>UNLOCK</b> &mdash; THE UNLOCKS — throughout; in hand from the start. 15 rows, <span class="tag y">IN HAND</span>.
+      Which of the 22 held-and-arrived things it actually shows is an
+      authoring decision and is not derivable &mdash;
+      <a href="artifacts.html">the artifact tracker</a> &middot;
       <a href="eggs.html">the egg tracker</a>.</p></div>
   </div>
 </div>
+
+<h2>The Friday formula</h2>
+<div class="scaf" style="margin-bottom:26px">
+  <span class="lbl">THE FRIDAY FORMULA <span class="rail m">his rule &middot; Ops wording</span></span>
+  <p style="margin:0 0 8px">It is a form, not a one-off. Fridays are built this way.</p>
+  <ul style="margin:0"><li>The entry summarises the day the way any other day's entry would.</li><li>Then four o'clock happens INSIDE it — not after it, not next week.</li><li>It is never “to be continued.” That is only making people wait.</li><li>The reader got everything they came for, and then the floor moves.</li></ul>
+</div>
+
+<h2>Standing rules for the Record</h2>
+<div class="note" style="margin-bottom:14px"><p>Not week-one rules &mdash; the
+Record's own form. They are here because <b>four of the five change what a week-one
+day is allowed to be</b>, and the bearing of each is spelled out rather than left
+for the reader to work out at dictation speed.</p></div>
+<div class="tw"><table>
+<thead><tr><th style="width:44%">the rule</th><th>what it does to week one</th></tr></thead>
+<tbody>
+<tr>
+  <td><span class="rail m">his rule &middot; Ops wording</span><div style="margin-top:5px">The Record is an end-of-day summary, published in the afternoon.</div></td>
+  <td>It is written from a day that has already happened. A day's entry can know how the day ended.</td></tr>
+<tr>
+  <td><span class="rail m">his rule &middot; Ops wording</span><div style="margin-top:5px">It rests on weekends. The team never does.</div></td>
+  <td>Week one is five entries at most, not seven — and work continues across the gap, so Monday can inherit a weekend.</td></tr>
+<tr>
+  <td><span class="rail m">his rule &middot; Ops wording</span><div style="margin-top:5px">Any daily record may run across multiple days.</div></td>
+  <td>THE DAY COUNT IS NOT THE ENTRY COUNT. The five-day frame is a frame of days; it does not promise five entries.</td></tr>
+<tr>
+  <td><span class="rail m">his rule &middot; Ops wording</span><div style="margin-top:5px">Status can be reported through the box — what has been found, the percentage remaining, that there is a folder and a fuzzy thing in the corner.</div></td>
+  <td>A day can be substantial without opening anything. This is what makes day 4 a day rather than a wait.</td></tr>
+<tr>
+  <td><span class="rail m">his rule &middot; Ops wording</span><div style="margin-top:5px">THE BOUNCY BALL LAW: never more than two or three offerings in a day.</div></td>
+  <td>A hard ceiling on what any single entry may put in front of a reader, and it is the only rule here that the trackers can be measured against.</td></tr>
+</tbody></table></div>
 
 <h2>What each day could reach for &mdash; the whole eligible set, once</h2>
 <div class="note" style="margin-bottom:14px"><p>Printed once rather than five
@@ -237,6 +322,16 @@ distribution nobody has authored.</p></div>
 judged in the asset table, with no code between it and a wall. <b>One picture
 has ever been delivered</b> &mdash; the power switch round the back, by Record
 013. <a href="artifacts.html">The full table, filterable &rarr;</a></p>
+<p style="margin:0 0 6px" class="k"><b>Against the bouncy ball law</b>
+(<span class="rail m">his rule</span> never more than two or three offerings in a
+day): 16 pictures at three a day is
+6 days of material, at two a day
+8 days &mdash; so between
+6 and 8
+days, or 1.1&ndash;1.6
+five-day weeks, <i>if every offering were a photograph</i> &mdash; and they are not,
+so read it as a ceiling on the picture supply and nothing more. It is the only rule
+in the outline a tracker can actually measure.</p>
 
 <h3>Eggs &mdash; 9 are planted, arrived, and could be spent</h3>
 <p style="margin:0 0 6px">Spending an egg is a Record entry that explains it, and
@@ -260,8 +355,68 @@ pieces arrive on four Fridays in weeks 3&ndash;7, and they earn their photograph
 showable, because nobody has said it got here.</li>
 </ul>
 
-<footer>Days are a frame, not a schedule. Built from
-<code>reveal/transfers.mjs</code> and <code>reveal/ledger.json</code>; the empty
-slots are empty because nothing in either repository fills them.</footer>
+<h2 id="collisions">Where the outline meets the tree &mdash; 5 checks, named and not resolved</h2>
+<div class="note" style="margin-bottom:14px"><p>Each of these is a claim the
+outline makes, run against what the repository actually holds. <b>1
+of the 5 does not agree with the tree</b> and is drawn in red.
+It is named and left open on purpose: choosing between the readings is authoring,
+and authoring is yours. The other 4 are
+agreements, and two of them are worth knowing about because nobody arranged
+them.</p></div>
+<div class="day"><div class="hd">
+  <span class="n">W-1 &middot; unresolved</span>
+  <span class="slot" style="color:var(--red);font-size:15px;font-style:normal">The one entry that exists is not about the transmissions.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">blue rail</span></span>
+    <p style="margin:0 0 6px">Day 1 says the wing opens holding one entry, and that is true of the tree today — the Record holds exactly one. But it is entry 013 and its subject is a physical delivery: a sealed modern bag, a USB-C adapter, a unit on charge. Nothing in it touches a transmission, a manifesto or a weekend.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/record-entries.mjs · reveal/ledger.json (record.013)</code></p></div>
+  <div class="mine"><span class="lbl">yours &middot; the decision</span>
+    <p style="margin:0 0 6px">Whether day 1 opens with the entry that is there, or the entry that is there is re-dated, or day 1 adds one. Three different weeks; all three are yours.</p>
+    <p class="k" style="margin:0;font-size:12.5px">M19 — what a record number means — is open, and 'opens with one entry' numbered 013 is exactly the question M19 asks.</p></div>
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">W-2 &middot; agrees</span>
+  <span class="slot" style="color:var(--grn);font-size:15px;font-style:normal">The prelude and the BLAST window are the same weekend, independently.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">blue rail</span></span>
+    <p style="margin:0 0 6px">The transfer model calls class 1 “THE BLAST — Friday to Sunday, pre-launch,” written on 2026-08-05 off the asset timeline. The prelude above puts the address live on Friday at 2pm and the museum open on Monday. They agree on the window without either having been written from the other.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/transfers.mjs (TRANSFERS.BLAST)</code></p></div>
+
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">W-3 &middot; agrees</span>
+  <span class="slot" style="color:var(--grn);font-size:15px;font-style:normal">Friday's payoff needs no arrival, and the model already says so.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">blue rail</span></span>
+    <p style="margin:0 0 6px">“One password was short enough” is an UNLOCK by the transfer model's own definition — “things already held that could not be opened. No arrival needed.” The UNLOCK window opens at week 0, so day 5 sits inside it and the week's biggest moment costs the story nothing new.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/transfers.mjs (TRANSFERS.UNLOCK)</code></p></div>
+
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">W-4 &middot; agrees</span>
+  <span class="slot" style="color:var(--grn);font-size:15px;font-style:normal">The bouncy ball law is the only rule here a tracker can measure.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">blue rail</span></span>
+    <p style="margin:0 0 6px">Two or three offerings a day is a ceiling, and the artifact tracker knows how much material is behind the stage door one entry away. The arithmetic is printed on the page from the live count rather than stated here, because the count moves.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>provenance/asset-table.json · reveal/delivery.mjs</code></p></div>
+
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">W-5 &middot; agrees</span>
+  <span class="slot" style="color:var(--grn);font-size:15px;font-style:normal">Nothing in week one reaches a PACKAGE, and the outline never asks it to.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">blue rail</span></span>
+    <p style="margin:0 0 6px">Every topic on days 1–4 is weekend material (BLAST) and day 5 opens something already held (UNLOCK). The units, cases, objects and manual pieces arrive on four Fridays in weeks 3–7. The outline and the transfer rule do not fight.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/transfers.mjs (TRANSFERS.PACKAGE)</code></p></div>
+
+</div></div>
+
+<footer>Days are a frame, not a schedule &mdash; and the standing rules say the day
+count is not the entry count. The outline is Ops&rsquo; structuring of what you said on
+2026-08-02 and lives in <code>reveal/week-one.mjs</code>; the checks
+against it are built from <code>reveal/transfers.mjs</code>,
+<code>reveal/record-entries.mjs</code> and <code>reveal/ledger.json</code>. Every gold
+slot on this page is still empty, which is the one thing about it that has not
+changed.</footer>
 </div>
 </body></html>

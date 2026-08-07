@@ -31,16 +31,25 @@
    under `docs/` and are never served. They are also deliberately NOT written
    into `public/`, which `npm run lap`'s own clean step exists to police.
 
-   ═══ AND THE WEEK-ONE PAGE IS MOSTLY EMPTY ON PURPOSE ══════════════════════
+   ═══ THE WEEK-ONE PAGE HAS A BLUE HALF NOW, AND THE GOLD HALF IS STILL EMPTY ══
    K5 asks for "week 1 as it stands" and marks the hardest constraint in the
-   brief: *he must never mistake Ops scaffolding for his own material.* SO IT
-   DOES NOT WRITE HEADLINES. No authored day-by-day outline exists in either
-   repository — checked, and the finding is printed on the page rather than
-   papered over — so what this builds is the FRAME with the day slots empty and,
-   under each, the material that is genuinely eligible on that day, derived from
-   the transfer rules. Every empty slot is drawn as a rule and every derived
-   list is boxed and labelled OPS. Doctrine 12: assemble what exists, invent
-   nothing.
+   brief: *he must never mistake Ops scaffolding for his own material.* Its
+   first cut therefore wrote NO headlines at all, because no authored outline
+   existed in either repository (K-b).
+
+   [W1 2026-08-07] ONE NOW EXISTS AND IT IS OPS', NOT HIS. Mike spoke the week's
+   shape aloud on 2026-08-02; Ops structured it into `reveal/week-one.mjs` and
+   this page renders it ON THE BLUE RAIL, every row attributed, nothing quoted.
+   THE GOLD RAIL IS STILL EMPTY ON EVERY DAY — that is the whole point of having
+   two rails, and the moment a paraphrase renders in gold there is no way, a week
+   later, to tell it from something he said. Where he named a RULE as a rule (the
+   Friday formula, the standing Record rules, the bouncy ball law) it is marked
+   MIKE-NAMED and still renders blue: the rule is his, the sentence is Ops'.
+
+   The page also prints the outline's COLLISIONS with the tree — five checks
+   against the transfer classes, the ledger and the one Record entry that
+   exists — named and not resolved, because resolving one is authoring.
+   Doctrine 12: assemble what exists, invent nothing.
 
      node tools/dictation/prep.mjs            write docs/dictation-20260807/
      node tools/dictation/prep.mjs --out DIR  somewhere else
@@ -53,6 +62,8 @@ import { TRANSFERS, CLASSES } from "../../reveal/transfers.mjs";
 import { delivered, SIGNAGE } from "../../reveal/delivery.mjs";
 import { entries as recordEntries } from "../../reveal/record-entries.mjs";
 import { GOVERNED_PREFIX, STAGE_PREFIX } from "../../reveal/placement.mjs";
+import { ORIGIN as W1_ORIGIN, WEEK, PRELUDE, DAYS, FRIDAY_FORMULA, RECORD_RULES, COLLISIONS }
+  from "../../reveal/week-one.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..", "..");
@@ -130,6 +141,18 @@ tr.hide{display:none}
 .mine .lbl{color:var(--gold)}
 .scaf{border-left:3px solid var(--blu);padding-left:11px;margin:0 0 12px}
 .scaf .lbl{color:var(--blu)}
+/* The attribution marker. NOT gold — gold is reserved for material that is
+   Mike's own words, and a paraphrase wearing gold is the whole hazard. */
+.rail{display:inline-block;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;
+ border:1px solid #3a5570;color:var(--blu);padding:0 5px;border-radius:2px;white-space:nowrap;
+ vertical-align:1px;margin-left:4px}
+.rail.m{border-color:#7a5540;color:var(--amb);margin-left:0}
+.tl{list-style:none;padding:0;margin:0}
+.tl li{display:grid;grid-template-columns:19ch 1fr;gap:0 14px;padding:7px 0;
+ border-bottom:1px dotted var(--line2);margin:0}
+.tl li:last-child{border-bottom:0}
+.tl .at{color:var(--dim2);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding-top:2px}
+@media (max-width:620px){.tl li{grid-template-columns:1fr}.tl .at{margin-bottom:2px}}
 ul{margin:0 0 10px;padding-left:19px}li{margin:0 0 5px}
 footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--dim2);font-size:12px}
 @media (max-width:720px){body{padding:20px 14px 80px}.bar input{width:100%}}
@@ -643,24 +666,33 @@ function buildWeek1(artifactCounts, eggCounts) {
   const heldArrived = arrived.filter(r => r.state === "HELD" && r.cls !== "egg");
   const eggsArrived = LEDGER.rows.filter(r => r.cls === "egg" && (r.transfer === "BLAST" || r.transfer === "UNLOCK") && r.state === "HELD");
 
-  const days = [1, 2, 3, 4, 5];
-  const dayBlock = n => `<div class="day">
+  /* A day's `reach` is a transfer class, so it is checked against the transfer
+     table rather than asserted — and a class whose week is 0 is in hand. */
+  const reachLine = d => d.reach.map(c => {
+    const t = TRANSFERS[c];
+    const n = LEDGER.rows.filter(r => r.transfer === c).length;
+    return `<b>${esc(c)}</b> &mdash; ${esc(t.name)} ${n} rows, `
+      + `<span class="tag ${t.week === 0 ? "y" : "n"}">${t.week === 0 ? "IN HAND" : "NOT ARRIVED"}</span>`;
+  }).join(" &middot; ");
+
+  const dayBlock = d => `<div class="day">
   <div class="hd">
-    <span class="n">Week 1 &middot; Day ${n}</span>
+    <span class="n">Week 1 &middot; Day ${d.n} &middot; ${esc(d.dow)}</span>
     <span class="slot">&mdash; your headline for this day is not written, and nothing on this page will write it &mdash;</span>
   </div>
   <div class="bd">
-    <div class="mine"><span class="lbl">yours &middot; the day's headline and its topics</span>
-      <p class="k" style="margin:0"><i>empty. There is no authored day-by-day outline in either repository &mdash;
-      no week headline, no day headlines, no topics and no weights. This slot is the shape
-      of the thing, not a draft of it.</i></p></div>
-    <div class="scaf"><span class="lbl">Ops scaffolding &middot; what is eligible on this day, derived</span>
-      <p style="margin:0 0 6px">Identical on all five days, because the transfer arc is weekly and not daily:
-      everything in <b>THE BLAST</b> and <b>THE UNLOCKS</b> is in hand from week 0, and nothing
-      in <b>THE PACKAGES</b> or <b>THE LATER TRANSMISSIONS</b> has arrived. Which of the
-      ${heldArrived.length} held-and-arrived things a given day reaches for is the
-      authoring decision, and it is not derivable.</p>
-      <p style="margin:0" class="k">Full lists: <a href="artifacts.html">the artifact tracker</a> &middot;
+    <div class="mine"><span class="lbl">yours &middot; the day's headline, in your words</span>
+      <p class="k" style="margin:0"><i>empty, and it stays empty until you dictate into it.
+      Everything below this line is Ops&rsquo;.</i></p></div>
+    <div class="scaf"><span class="lbl">Ops &middot; the day as structured <span class="rail">blue rail</span></span>
+      <p style="margin:0 0 7px;font-size:16px"><b style="color:var(--fg)">${esc(d.headline)}</b></p>
+      <p style="margin:0 0 8px">${esc(d.shape)}</p>
+      <p class="k" style="margin:0 0 4px;font-size:11px;letter-spacing:.13em;text-transform:uppercase">Topics</p>
+      <ul style="margin:0 0 8px">${d.topics.map(t => `<li>${esc(t)}</li>`).join("")}</ul>
+      <p class="k" style="margin:0;font-size:12.5px">What this day reaches for: ${reachLine(d)}.
+      Which of the ${heldArrived.length} held-and-arrived things it actually shows is an
+      authoring decision and is not derivable &mdash;
+      <a href="artifacts.html">the artifact tracker</a> &middot;
       <a href="eggs.html">the egg tracker</a>.</p></div>
   </div>
 </div>`;
@@ -668,27 +700,37 @@ function buildWeek1(artifactCounts, eggCounts) {
   const body = `<div class="wrap">
 ${BACK}
 <h1>The story outline &middot; week one, days 1&ndash;5</h1>
-<p class="sub">the cue card made real &mdash; and the honest half of it is how much of the card is blank</p>
+<p class="sub">${esc(WEEK.headline)} &mdash; structured by Ops from what you said on ${esc(W1_ORIGIN.spokenOn)}, and not in your words</p>
 
 <div class="note">
-<p class="ask"><b>THE FINDING FIRST, BECAUSE IT CHANGES WHAT THIS PAGE COULD BE.</b>
-The brief says <i>week 1 as it stands</i> &mdash; the week's headline, each day's
-headline, each day's topics with their weights. <b>None of that exists.</b> Both
-repositories were searched for a day-by-day story outline, a week headline, a
-topic list and a weighting: there is no such document, no such data file, and no
-such field. What exists is the transfer arc (which is weekly and about how
-material ARRIVED, not about what a day is <i>about</i>), the three-act story arc
-(which is about the whole product and names no days), and one Record entry.</p>
+<p class="ask"><b>READ THIS BEFORE YOU READ A SINGLE HEADLINE BELOW, BECAUSE IT
+IS THE ONLY THING THAT KEEPS THEM USEFUL.</b> <b>NOTHING ON THIS PAGE IS QUOTED.
+NOT ONE LINE.</b> You spoke the week's shape aloud on ${esc(W1_ORIGIN.spokenOn)};
+Ops structured it into a headline, five days, topics and standing rules and wrote
+every sentence of it. So the whole outline sits on the
+<b style="color:var(--blu)">blue</b> rail &mdash; the shape is yours, the words are
+Ops&rsquo;. A paraphrase rendered in gold is indistinguishable a week from now from
+something you actually said, and that is the exact failure this page was built to
+avoid.</p>
 
-<p><b>SO THE FRAME IS BUILT AND THE CONTENT IS NOT.</b> Doctrine 12 puts the
-content of the story with you, and writing five plausible day headlines would
-have been the exact failure mode the brief guards against &mdash; you would have
-read them back tomorrow and had no way to tell which of them you had said.</p>
+<p><b>THE GOLD RAIL IS STILL EMPTY ON EVERY DAY, DELIBERATELY.</b> Every day below
+has an empty gold slot above its blue one. That slot is where your own headline
+goes when you dictate it. There is still <b>no authored day-by-day outline in
+either repository</b> &mdash; no week headline, no day headlines, no topic list,
+no <code>weight</code> field on anything story-shaped. That finding (K&#8209;b) has
+not been closed by this page; it has been given a working draft to argue with.</p>
 
-<p><b>HOW TO READ THE COLOURS, AND IT IS THE ONLY RULE ON THE PAGE:</b>
-a <b style="color:var(--gold)">gold</b> rail means the material is YOURS &mdash;
-today every gold rail is empty. A <b style="color:var(--blu)">blue</b> rail means
-Ops derived it from a rule, and the rule is named. Nothing is unlabelled.</p>
+<p><b>ONE MARKER YOU WILL SEE AND SHOULD TRUST:</b>
+<span class="rail m">his rule &middot; Ops wording</span> means you named that RULE
+as a rule &mdash; the Friday formula, the standing Record rules, the bouncy ball
+law. The rule is yours; the sentence is still Ops&rsquo;, so it renders blue like
+everything else. Nothing on this page is unlabelled.</p>
+
+<p><b>AND THE OUTLINE COLLIDES WITH THE TREE IN ONE PLACE.</b> Five checks were run
+against what the repository actually holds &mdash; the transfer classes, the ledger,
+the one Record entry that exists. Four agree. <a href="#collisions">One does not</a>,
+and it is named and left unresolved at the foot of this page, because resolving it
+is authoring and authoring is yours.</p>
 </div>
 
 <h2>What week one is, as a fact about arrivals</h2>
@@ -712,19 +754,59 @@ have &mdash; and the packages are what <i>earn</i> their photographs.</p>
 <h2>The week</h2>
 <div class="day"><div class="hd">
   <span class="n">Week 1 &middot; the week's own headline</span>
-  <span class="slot">&mdash; not written &mdash;</span>
+  <span class="slot">&mdash; yours is not written &mdash;</span>
 </div><div class="bd">
   <div class="mine"><span class="lbl">yours</span>
     <p class="k" style="margin:0"><i>empty.</i></p></div>
+  <div class="scaf"><span class="lbl">Ops &middot; the week as structured <span class="rail">blue rail</span></span>
+    <p style="margin:0 0 7px;font-size:19px"><b style="color:var(--fg)">${esc(WEEK.headline)}</b></p>
+    <p style="margin:0 0 6px">${WEEK.days} days, ${esc(WEEK.span)}. ${esc(WEEK.spanRule)}</p>
+    <p class="k" style="margin:0;font-size:12.5px">${esc(W1_ORIGIN.rule)}</p></div>
   <div class="scaf"><span class="lbl">Ops &middot; the one thing week one is already committed to</span>
-    <p style="margin:0">The asset timeline's own founding sentence, in your words:
+    <p style="margin:0">The asset timeline's own founding sentence, and it is
+    <b>the only verbatim sentence anywhere on this page</b> &mdash; it is carried from
+    <code>reveal/transfers.mjs</code>, where it has been in writing since 5 August with
+    its source named:
     <b>“the first Record must produce the first images of NIAC and VIIIp so the site has
     images to post — which means those images arrived in the email blast.”</b>
-    That is the only constraint on week one that already exists in writing, and it is
-    a constraint about <i>what the week must produce</i> rather than about what any day says.</p></div>
+    A constraint about <i>what the week must produce</i> rather than about what any day says.</p></div>
 </div></div>
 
-${days.map(dayBlock).join("\n")}
+<h2>The weekend the week is named after</h2>
+<div class="note" style="margin-bottom:14px"><p>Not a day of week one &mdash; it is
+what happened before the museum opened, and four of the five days point back at it.
+<b>The transfer model already calls this window “Friday to Sunday, pre-launch”</b>
+and was written on 5 August from the asset timeline, without reference to this
+outline. They agree on the weekend independently; see
+<a href="#collisions">W&#8209;2</a>.</p></div>
+<div class="scaf" style="margin-bottom:26px">
+  <span class="lbl">Ops &middot; the prelude, structured <span class="rail">blue rail</span></span>
+  <ul class="tl">
+${PRELUDE.map(p => `    <li><span class="at">${esc(p.at)}</span><span>${esc(p.what)}</span></li>`).join("\n")}
+  </ul>
+</div>
+
+${DAYS.map(dayBlock).join("\n")}
+
+<h2>The Friday formula</h2>
+<div class="scaf" style="margin-bottom:26px">
+  <span class="lbl">${esc(FRIDAY_FORMULA.name)} <span class="rail m">his rule &middot; Ops wording</span></span>
+  <p style="margin:0 0 8px">${esc(FRIDAY_FORMULA.claim)}</p>
+  <ul style="margin:0">${FRIDAY_FORMULA.body.map(b => `<li>${esc(b)}</li>`).join("")}</ul>
+</div>
+
+<h2>Standing rules for the Record</h2>
+<div class="note" style="margin-bottom:14px"><p>Not week-one rules &mdash; the
+Record's own form. They are here because <b>four of the five change what a week-one
+day is allowed to be</b>, and the bearing of each is spelled out rather than left
+for the reader to work out at dictation speed.</p></div>
+<div class="tw"><table>
+<thead><tr><th style="width:44%">the rule</th><th>what it does to week one</th></tr></thead>
+<tbody>
+${RECORD_RULES.map(r => `<tr>
+  <td><span class="rail m">his rule &middot; Ops wording</span><div style="margin-top:5px">${esc(r.rule)}</div></td>
+  <td>${esc(r.bearing)}</td></tr>`).join("\n")}
+</tbody></table></div>
 
 <h2>What each day could reach for &mdash; the whole eligible set, once</h2>
 <div class="note" style="margin-bottom:14px"><p>Printed once rather than five
@@ -736,6 +818,16 @@ distribution nobody has authored.</p></div>
 judged in the asset table, with no code between it and a wall. <b>One picture
 has ever been delivered</b> &mdash; the power switch round the back, by Record
 013. <a href="artifacts.html">The full table, filterable &rarr;</a></p>
+<p style="margin:0 0 6px" class="k"><b>Against the bouncy ball law</b>
+(<span class="rail m">his rule</span> never more than two or three offerings in a
+day): ${artifactCounts.waiting} pictures at three a day is
+${Math.ceil(artifactCounts.waiting / 3)} days of material, at two a day
+${Math.ceil(artifactCounts.waiting / 2)} days &mdash; so between
+${Math.ceil(artifactCounts.waiting / 3)} and ${Math.ceil(artifactCounts.waiting / 2)}
+days, or ${(artifactCounts.waiting / 15).toFixed(1)}&ndash;${(artifactCounts.waiting / 10).toFixed(1)}
+five-day weeks, <i>if every offering were a photograph</i> &mdash; and they are not,
+so read it as a ceiling on the picture supply and nothing more. It is the only rule
+in the outline a tracker can actually measure.</p>
 
 <h3>Eggs &mdash; ${eggsArrived.length} are planted, arrived, and could be spent</h3>
 <p style="margin:0 0 6px">Spending an egg is a Record entry that explains it, and
@@ -759,9 +851,33 @@ pieces arrive on four Fridays in weeks 3&ndash;7, and they earn their photograph
 showable, because nobody has said it got here.</li>
 </ul>
 
-<footer>Days are a frame, not a schedule. Built from
-<code>reveal/transfers.mjs</code> and <code>reveal/ledger.json</code>; the empty
-slots are empty because nothing in either repository fills them.</footer>
+<h2 id="collisions">Where the outline meets the tree &mdash; ${COLLISIONS.length} checks, named and not resolved</h2>
+<div class="note" style="margin-bottom:14px"><p>Each of these is a claim the
+outline makes, run against what the repository actually holds. <b>${COLLISIONS.filter(c => c.open).length}
+of the ${COLLISIONS.length} does not agree with the tree</b> and is drawn in red.
+It is named and left open on purpose: choosing between the readings is authoring,
+and authoring is yours. The other ${COLLISIONS.filter(c => !c.open).length} are
+agreements, and two of them are worth knowing about because nobody arranged
+them.</p></div>
+${COLLISIONS.map(c => `<div class="day"><div class="hd">
+  <span class="n">${esc(c.id)} &middot; ${c.open ? "unresolved" : "agrees"}</span>
+  <span class="slot" style="color:${c.open ? "var(--red)" : "var(--grn)"};font-size:15px;font-style:normal">${esc(c.title)}</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">blue rail</span></span>
+    <p style="margin:0 0 6px">${esc(c.check)}</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>${esc(c.derivedFrom)}</code></p></div>
+${c.open ? `  <div class="mine"><span class="lbl">yours &middot; the decision</span>
+    <p style="margin:0 0 6px">${esc(c.open)}</p>
+    ${c.also ? `<p class="k" style="margin:0;font-size:12.5px">${esc(c.also)}</p>` : ""}</div>` : ""}
+</div></div>`).join("\n")}
+
+<footer>Days are a frame, not a schedule &mdash; and the standing rules say the day
+count is not the entry count. The outline is Ops&rsquo; structuring of what you said on
+${esc(W1_ORIGIN.spokenOn)} and lives in <code>reveal/week-one.mjs</code>; the checks
+against it are built from <code>reveal/transfers.mjs</code>,
+<code>reveal/record-entries.mjs</code> and <code>reveal/ledger.json</code>. Every gold
+slot on this page is still empty, which is the one thing about it that has not
+changed.</footer>
 </div>`;
   return page({ title: `THE STORY OUTLINE — WEEK ONE — ${STAMP}`, css: OPS_CSS, body });
 }
@@ -778,10 +894,17 @@ function buildIndex(a, e) {
 <p>You are about to dictate the Record's first two weeks. These are the four
 things to have open while you do it. <b>Nothing in any of them was invented</b>
 &mdash; every figure, file, egg and conflict is carried from somewhere in one of
-the two repositories, with its source named, and every gap is printed as a gap.</p>
+the two repositories, with its source named, and every gap is printed as a gap.
+<b>The one thing not carried from a repository is the week-one outline</b>, which
+is Ops&rsquo; structuring of what you said aloud on ${esc(W1_ORIGIN.spokenOn)}; it
+now lives in <code>reveal/week-one.mjs</code>, it is labelled as Ops&rsquo; on every
+row, and none of it is quoted.</p>
 <p class="ask"><b>ONE RULE ACROSS ALL FOUR PAGES:</b> gold means the material is
-yours, blue means Ops derived it and the rule is named, and a red slot means the
-thing is not written. You should never have to guess which you are reading.</p>
+yours, blue means Ops derived or structured it and the rule is named, and a red
+slot means the thing is not written. A third marker appears only on the outline
+&mdash; <span class="rail m">his rule &middot; Ops wording</span> &mdash; and means
+you named the RULE but the sentence is still Ops&rsquo;. You should never have to
+guess which you are reading.</p>
 </div>
 
 <div class="cards">
@@ -823,13 +946,17 @@ thing is not written. You should never have to guess which you are reading.</p>
 
 <div class="card">
   <h4><a href="week1.html">The story outline &middot; week one</a></h4>
-  <p class="id">K5 &middot; the cue card</p>
-  <p>The five-day frame, with what is eligible under each day derived from the
-  transfer rules, and the two trackers joined in.</p>
-  <p class="meta"><b>Read the finding at the top first.</b> There is no authored
-  day-by-day outline in either repository &mdash; no week headline, no day headlines,
-  no topics, no weights. The frame is built and every content slot is empty, because
-  filling one would have been Ops writing your story in your own voice.</p>
+  <p class="id">K5 &middot; W1 &middot; the cue card</p>
+  <p><b>${esc(WEEK.headline)}</b> &mdash; the week headline, the weekend it is named
+  after, ${DAYS.length} days with their topics, the Friday formula and
+  ${RECORD_RULES.length} standing rules for the Record, each with what it does to
+  week one.</p>
+  <p class="meta"><b>ALL OF IT IS ON THE BLUE RAIL AND NONE OF IT IS QUOTED.</b> You
+  spoke the week's shape on ${esc(W1_ORIGIN.spokenOn)}; Ops structured it and wrote
+  every sentence. <b>Every gold slot is still empty</b> &mdash; that is where your own
+  words go. ${COLLISIONS.length} checks were run against the tree and
+  <b>${COLLISIONS.filter(c => c.open).length} does not agree</b>: the one entry the
+  Record holds is not about the transmissions.</p>
 </div>
 </div>
 

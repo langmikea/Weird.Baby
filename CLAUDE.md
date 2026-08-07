@@ -494,48 +494,52 @@ anything in `public/` is one `npm run deploy` from being published.
 
 Maintained here. Newest first.
 
-### 2026-08-07 -> THE DICTATION PREP (K1-K6) - sealed
-- **SIX INSTRUCTIONS, ALL SIX ANSWERED, AND THE ROUND'S LARGEST FINDING IS THAT
-  ONE INSTRUCTION'S OWN PREMISE WAS WRONG.** Gates: lint **11/9 = baseline** -
-  build green - provenance **PASS** (0 undeclared - 0 stale - 0 invention) -
-  `reveal:check` **PASS** - `parity:gate` **PASS, 4 shared - 0 divergences** -
-  `instory:gate` **PASS** - `assets:orphans` **0** - the four new pages lapped at
-  **390px AND 1228px**, zero page scroll, zero console errors. Full narrative:
-  `docs/MUSEUM_DICTATION_PREP_LOG-20260807.md`. **The path Mike opens:**
-  `docs/dictation-20260807/index.html`, rebuilt with **`npm run dictation`**.
-- **K5 ASKED FOR "WEEK 1 AS IT STANDS" AND NONE OF IT EXISTS.** No day-by-day
-  outline, no week headline, no topic list, no `weight` field, in either
-  repository. **So the frame is built and every content slot is empty**, with the
-  finding printed at the top of the page rather than buried: five plausible day
-  headlines would have been unmistakable tomorrow and unattributable next week,
-  which is the one failure mode the instruction itself named. **Gold rail = his,
-  blue rail = Ops derived it and the rule is named, red slot = not written**;
-  nothing on that page is unlabelled. Register K-b.
-- **THE ELEVEN PHOTOGRAPHS ARE KILLED AND THE PRECEDENT THEY SET IS NOT
-  REVERSED** (K1). N1's rule reads *"a real photograph this museum owns is not
-  deleted on OPS' word"* — unchanged, exactly as written; C-a put the
-  irreversibility to Mike and he answered. **What `egg.niac.operator` is left
-  with is three plates, all upstream and all regenerable** from `IMG_1526.MOV`
-  under the robots repo's own crop table; **the museum now holds nothing of the
-  robot**, and the ledger row says so. **The manual's title page cost nothing at
-  all** — byte-identical to page 1 of the sixty-one the robots repo generates, so
-  the delete removed a duplicate. Three stale claims went with the files and one
-  had been false since P7.
-- **THE NEW TRACKER FOUND A HOLE IN AN OLD ONE ON ITS FIRST RUN (K-a), AND IT IS
-  §8's TWO-ADDRESSES HAZARD IN ITS QUIETEST FORM.** `assets:orphans` reports 0
-  while three rows carry `missing:true` — correct by its own definition, which
-  counts `missing && isJudged`. Two of the three are the **public-side twins** of
-  pictures that moved behind the stage door, so the same photograph is in the
-  table twice, once at each address. **The tracker's first cut counted them as
-  reachable and said 18; the true number is 16.**
-- **K2 IS THE MISSING ITEM IN N-g AND N-h AND IT IS ASSEMBLED, NOT WRITTEN.**
-  163 rows across both machines — **18 CONTRADICTED with both readings printed,
-  20 ABSENT, 8 flagged REAL-BUILD SOURCE** under Doctrine 18, which is N-i's
-  finding made visible on the sheet Mike authors from. **The manual's own
-  twelve-section structure was the named candidate and does not serve a
-  one-sheet** — ten of the twelve are procedures — so the grouping is the period
-  specification's own and every heading carries its manual position instead
-  (K-d).
+### 2026-08-07 -> THE WEEK ONE OUTLINE (W1) - sealed
+- **K5 REFUSED TO INVENT THE OUTLINE AND WAS RIGHT; THIS ROUND SUPPLIED IT FROM
+  OPS, WHOSE MATERIAL IT IS.** Mike spoke the week's shape aloud on 2026-08-02;
+  Ops structured it into **`reveal/week-one.mjs`** and `tools/dictation/prep.mjs`
+  renders it. **BLUE RAIL THROUGHOUT, NOTHING QUOTED, EVERY GOLD SLOT STILL
+  EMPTY.** Gates: lint **11/9 = baseline** - build green - provenance **PASS** -
+  `reveal:check` **PASS** - `parity:gate` **PASS** - `instory:gate` **PASS** -
+  `assets:orphans` **0** - all five pages lapped at **389px and 1233px**, zero
+  page overflow, zero console errors. Log:
+  `docs/MUSEUM_WEEK_ONE_OUTLINE_LOG-20260807.md`. Path unchanged:
+  `docs/dictation-20260807/index.html`, rebuilt with `npm run dictation`.
+- **THE ROUND'S ONE DESIGN DECISION IS A THIRD MARKER, AND IT IS DELIBERATELY NOT
+  GOLD.** The instruction said BLUE RAIL *and* "nothing here is his verbatim
+  except where marked", which asked two grades of attribution to share one rail.
+  `OPS` is the default; **`MIKE-NAMED`** (the Friday formula, the five standing
+  Record rules, the bouncy ball law) renders blue with an **amber** *his rule ·
+  Ops wording* tag. **A paraphrase wearing gold is indistinguishable a week later
+  from something he said** — which is the exact failure K5 refused to create, so
+  gold stays empty. The one genuinely verbatim sentence on the page is the asset
+  timeline's founding line, carried from `reveal/transfers.mjs`, and the page now
+  labels it as the only one.
+- **THE OUTLINE WAS RUN AGAINST THE TREE AND FOUR OF FIVE CHECKS AGREE. THE FIFTH
+  IS THE ROUND'S FINDING (W-1).** Day 1 says the wing opens holding one entry and
+  that is true — but it is **entry 013 and its subject is a physical delivery**, a
+  sealed bag and a USB-C adapter and a unit on charge. Three readings, all Mike's,
+  **named and not resolved**; `M19 — what a record number means` is the same
+  question. **W-2 and W-3 are agreements nobody arranged:** the prelude's Friday-to-
+  Sunday and `TRANSFERS.BLAST`'s window match without either being written from the
+  other, and *"one password was short enough"* is an UNLOCK by the model's own
+  definition, so the week's biggest moment costs the story no new arrival.
+- **K-b IS `IN PROGRESS`, NOT CLOSED.** There is still nothing authored by Mike in
+  either repository and still no `weight` field, so the topics are lists and not a
+  ranking. What K-b has now is a working draft to argue with. **Surfacing is
+  unmoved at 20 spendable and this is the second packet running that took nothing
+  off the shelf** — recorded, per the cadence, so the next round's number means
+  something.
+
+### 2026-08-07 -> THE DICTATION PREP (K1-K6) - archived
+Moved verbatim to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md` under this file's
+own ~600-line rule. **What is still load-bearing in it is NOT in the archive:**
+the four pages are `npm run dictation` and `tools/dictation/prep.mjs`; its
+findings are registers **K-a** (an orphan check cannot see an unjudged orphan,
+and §8's two-addresses hazard holds the same picture as two rows), **K-b** (no
+authored week-one outline — now IN PROGRESS, see W1 above), **K-c** and **K-d** in
+`docs/OPEN_ACTIONS.md`; and **the eleven photographs are deleted on Mike's
+ruling**, with what the robot egg is left with written into the ledger row.
 
 ### 2026-08-06 -> THE NIGHT ROUND (N1-N6) - archived
 Moved verbatim to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md` under this file's
