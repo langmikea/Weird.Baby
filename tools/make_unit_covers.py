@@ -40,7 +40,13 @@ WHICH PHOTOGRAPH — and the two treatments, which are named in the UNITS table
     one damaged the object. The instruction's other half — the ENTIRE mainframe —
     is what rules out the composition that would have cut cleanest.
 
-HISTORICAL, kept because it explains a plate the wing no longer uses:
+HISTORICAL, AND THE PLATES IT EXPLAINS NO LONGER EXIST:
+  [K1 2026-08-07] Mike killed `head_lens.jpg` and `head_oblique.jpg` with the
+  other eight operator plates — *"none are very good, and if that view is ever
+  needed it gets reshot."* The paragraph below is kept because it records WHY
+  the badge moved off a portrait of the robot, which is R4's canon and is still
+  load-bearing; it is no longer a recipe. Neither file is on disk, so nothing
+  here can be re-rendered from it, and the alternative it names is gone too.
   · MGK-VIII once got `head_lens.jpg`, WHICH IS A DETAIL, because this museum held
     no photograph of that machine whole: its own archive is titled "DETAILS
     ONLY" and its tombstone says "Frame — Withheld: no plate carries the whole

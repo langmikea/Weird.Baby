@@ -1,0 +1,1134 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IN-STORY SPEC SHEET — MGK-NIAC · MGK-VIIIp — 2026-08-07</title>
+<style>
+:root{color-scheme:light dark;--paper:#e7e2d6;--ink:#2b2622;--ink2:#5a5148;--rule:#8d8478;--flag:#8c2f22}
+*{box-sizing:border-box}
+body{margin:0;padding:0;background:#2a2825;color:var(--ink);
+ font:15px/1.5 "Courier New",Courier,ui-monospace,monospace}
+.sheet{max-width:82ch;margin:0 auto;background:var(--paper);padding:44px 5ch 90px;
+ box-shadow:0 0 44px rgba(0,0,0,.5)}
+.back{font-size:12px;color:#9b978e;max-width:82ch;margin:0 auto;padding:14px 5ch 0}
+.back a{color:#8fa8c4}
+h1,h2,h3{font-weight:400;font-family:inherit}
+h1{font-size:16px;letter-spacing:.1em;text-align:center;margin:0 0 2px;text-transform:uppercase}
+.hd2{text-align:center;font-size:13px;letter-spacing:.06em;margin:0;text-transform:uppercase}
+.hd3{text-align:center;font-size:12px;color:var(--ink2);margin:0 0 4px}
+.rule{border:0;border-top:1px solid var(--ink);margin:12px 0}
+.rule.t{border-top-style:dashed;border-color:var(--rule)}
+h2{font-size:14px;text-transform:uppercase;letter-spacing:.05em;margin:30px 0 3px;
+ text-decoration:underline;text-underline-offset:3px}
+h2 .at{display:block;text-decoration:none;font-size:11px;letter-spacing:0;color:var(--ink2);
+ text-transform:none;margin-top:3px}
+.row{display:grid;grid-template-columns:19ch 1fr;gap:0 1ch;padding:7px 0;border-bottom:1px dotted #b9b0a2}
+.row:last-child{border-bottom:0}
+.row .k{text-transform:uppercase;font-size:13px;letter-spacing:.02em}
+.row .v{font-size:14px}
+.st{display:inline-block;font-size:10px;letter-spacing:.09em;border:1px solid var(--ink2);
+ padding:0 5px;margin-right:6px;white-space:nowrap;vertical-align:2px}
+.st.CONTRADICTED{border-color:var(--flag);color:var(--flag)}
+.st.ABSENT{border-style:dashed}
+.st.IMPLIED{border-style:dotted}
+.fw{display:inline-block;font-size:10px;letter-spacing:.06em;background:var(--flag);color:var(--paper);
+ padding:0 5px;margin-right:6px;vertical-align:2px}
+.alt{margin:6px 0 0 0;padding-left:2ch;border-left:2px solid var(--flag)}
+.alt div{margin:0 0 4px;font-size:13px}
+.alt .lbl{font-size:10px;letter-spacing:.09em;color:var(--flag)}
+.n{margin:6px 0 0;font-size:12.5px;color:var(--ink2)}
+.src{font-size:11px;color:var(--ink2);letter-spacing:.03em}
+.pre{white-space:pre-wrap;font-size:13px}
+.box{border:1px solid var(--ink);padding:12px 2ch;margin:22px 0}
+.box p{margin:0 0 9px}.box p:last-child{margin:0}
+b{font-weight:400;text-decoration:underline;text-underline-offset:2px}
+i{font-style:italic}
+code{font:inherit;background:rgba(0,0,0,.06);padding:0 2px}
+ol,ul{padding-left:3ch}
+li{margin:0 0 6px;font-size:13.5px}
+@media (max-width:700px){.sheet{padding:26px 3ch 70px}.row{grid-template-columns:1fr}.row .k{color:var(--ink2);margin-bottom:2px}}
+</style></head><body>
+<p class="back"><a href="index.html">&larr; the dictation prep</a> &middot; Ops&#8209;to&#8209;Mike, 2026-08-07 &middot; not part of the museum</p><div class="sheet">
+<div class="box">
+<p><b>WHAT THIS IS.</b> Every piece of story-generated technical data about
+both machines, from both repositories, in one place &mdash; with its source, and
+marked for whether the fiction <i>asserts</i> it, <i>implies</i> it, or
+<i>contradicts itself</i> about it. It is authoring input for the two open rows
+that both end on the same sentence (<code>N-g</code>, <code>N-h</code>):
+<i>the unit's own particulars &mdash; what an ABEAL spec sheet for this machine
+says.</i></p>
+
+<p><b>NOTHING HERE IS INVENTED.</b> No figure, name, code, count or date appears
+for the first time on this page. Where two sources disagree, both readings are
+printed and the conflict is named by its register id. Where the structure has a
+position and nothing fills it, the row says <i>nothing on file</i> rather than
+guessing. That is deliberate and it is the whole of Doctrine 12: a gap stated is
+material; a gap filled quietly is a fabrication.</p>
+
+<p><b>THE MANUAL'S OWN SECTION STRUCTURE IS NOT THE GROUPING, AND HERE IS WHY.</b>
+It was the candidate and it does not serve. The structure issue is twelve
+sections and eight appendices describing a whole operating and maintenance
+manual, and <i>ten of the twelve are procedures</i> &mdash; installation,
+starting, operating, maintenance, troubleshooting, service. A one-sheet is not
+an abridged manual; it is the specification, which in that structure is Section
+II and pieces of VII and XII. Grouping a one-sheet by the manual's twelve would
+put nine near-empty headings on a page whose only virtue is that it is one page.
+<b>What is used instead is the period specification's own grouping</b> &mdash;
+the shape Table 2-1 and Table 2-2 already have &mdash; and <i>every heading
+carries its manual position</i>, so an authored row lands where the structure
+says it goes. The manual's structure is the destination; it is not the
+arrangement.</p>
+
+<p><b>THE RED FLAG IS THE MOST IMPORTANT MARK ON THE PAGE.</b> Doctrine 18:
+<i>Technical Specifications means the IN-STORY specs, never the real ones.</i>
+Register <code>N-i</code> found that the in-story manual's own SPECIFICATIONS
+section cites the real Arduino firmware for six rows &mdash; and that in one of
+them (<i>how many lamps</i>) the firmware <i>overrules</i> the manual. Every such
+row below is flagged <span class="fw">REAL-BUILD SOURCE</span>.
+<b>7 rows carry it.</b> A 1965 spec sheet may carry a display size; it
+may not carry an I&sup2;C address, and this document is one authoring pass
+upstream of the face that would print one.</p>
+
+<p><b>THE REGISTER.</b> Set as Mike ruled the manual: <i>made on a typewriter by
+engineering &mdash; not typeset, not laid out, not designed.</i> Elite pitch, a
+78-column measure, ragged right, sideheads in capitals and underscored, no bold
+(a typewriter has none; emphasis is overstrike), rules typed as hyphens.</p>
+
+<p class="src">Counts: 94 asserted &middot;
+0 implied &middot; <b>18 contradicted</b> &middot;
+20 absent.</p>
+</div>
+
+
+<h1>MGK-VIIIp</h1>
+<p class="hd2">THE INFORMER · ABEAL</p>
+<p class="hd3">ABEAL · A DIVISION OF SCRAPCO · ENGINEERING DEPARTMENT<br>ABEAL 8P-OMI-1 REV. — · PRELIMINARY</p>
+<hr class="rule">
+<h2>IDENTIFICATION<span class="at">manual position: 1-3 · 1-6 · 1-7 · 1-9 · Table 1-1</span></h2>
+<div class="row">
+  <div class="k">Model</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>MGK-VIIIp
+    <span class="src">[LIN BIBLE]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Type</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Portable predictive instrument. MGK-VIII is the mainframe; the VIIIp is the portable, later, more powerful, adjustable-personality unit.
+    <span class="src">[INV LIN]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Manufacturer</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>ABEAL, a division of ScrapCo, Engineering Department. ScrapCo founded 1929 on Depression-era rag-and-bone picking, expert at “gems in the rough”; ABEAL is its ghost division, and the logo's circled A is the 8-Ball answer window.
+    <span class="src">[INV SI]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Contractor</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Blackhawk Data Sciences Corporation (BDS), Hercules, NY — contracted 1964–65 to reverse-engineer MGK-NIAC. BDS turned greedy and planted backdoors and exploits in the hardware.
+    <span class="src">[INV]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Publication</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>ABEAL 8P-OMI-1 REV. — · PRELIMINARY. Title page reads STRUCTURE ISSUE / STRUCTURE AND ARRANGEMENT ONLY / TEXT NOT SUPPLIED.
+    <span class="src">[SI]</span>
+    
+    <p class="n">An early issue circulated for arrangement before the text was set. The plate the museum held of this page was deleted at K1; the sixty-one-page source is upstream.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Serial designation</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>MGK-VIIIp-NN. The menu enumerates persona positions to −32.
+    <span class="src">[MAP3 M1]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Fleet</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>31.4 units. Unit .4 is the prototype. Releases run out of numerical order.
+    <span class="src">[BIBLE INV]</span>
+    
+    <p class="n">A statement about the LINE, not about this unit — the fit table marks it so.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Delivery state</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Units ship GENERIC. The customer performs the personality download; that was “original SOP then and now.”
+    <span class="src">[BIBLE]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Case tiers</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Box / Small Case / Deluxe Case. The Deluxe is a leather accessory case with trinkets tied to the unit's own story.
+    <span class="src">[BIBLE]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Persona registry</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>−01 Housewife Nano (HELD) · −02 The Everyman · −03 vacated · −07 The Informer · −09 The CEO · −13 The Closer (sealed) · −21 JUAN, The Gambler · −31 RESERVED (finale).
+    <span class="src">[BIBLE]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> The menu's serial mapping: The Everyman code 101, The Informer 102, The CEO 103, The Assistant 104, The Intelligencer 105, The Gambler 106, the Marksman 107, the Executive 109. <span class="src">[MAP3]</span></div><div><span class="lbl">ALSO ON FILE &middot;</span> “Informer = −02 canonical” — ruled 2026-07-14. <span class="src">[INV]</span></div></div>
+    <p class="n">Three positions for the same four people. The menu map flags it itself; Appendix C and Appendix A are the first documents that have to PRINT it. Blocked on the naming/lock pass. <span class="src">&mdash; A-10</span></p>
+  </div></div>
+<h2>DISPLAYS<span class="at">manual position: Table 2-1 · 7-13 · Figure 7-3 · Table 7-1/7-2</span></h2>
+<div class="row">
+  <div class="k">Upper display</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span><span class="fw">REAL-BUILD SOURCE</span>128 × 64 elements, monochrome. Address 0x3C. Mounted inverted and corrected in software.
+    <span class="src">[FW DICT AES]</span>
+    
+    <p class="n">The address and the rotation call are facts about a real board. Under Doctrine 18 a 1965 sheet may carry the SIZE and may not carry the bus address.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Forward display</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span><span class="fw">REAL-BUILD SOURCE</span>128 × 32 elements, monochrome. Address 0x3D.
+    <span class="src">[FW AES]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> 128 × 64 elements, monochrome. <span class="src">[M1]</span></div></div>
+    <p class="n">The manual states the wrong number; the visual canon and the hardware agree with each other. The correction has never landed in the manual. <span class="src">&mdash; A-1 (H-1)</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Forward glass</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>A round window. Content reads centre-weighted; approximately two rows are visible.
+    <span class="src">[AES]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Character sets</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span><span class="fw">REAL-BUILD SOURCE</span>Three. Classic 6 × 8 (21 characters a line) · TomThumb (about 31 characters a row) · FreeSansBold 9 pt.
+    <span class="src">[AES FW]</span>
+    
+    <p class="n">The manual prints a SET column reading “system, density, ceremony”. Those three words are Ops labels coined in the visual canon — not in any source, not ruled. C-8.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Two-screen role law</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Constitutional. FRONT is the system GUI; TOP is the apps GUI and detail. Only the top may run fluidic mode.
+    <span class="src">[BIBLE AES]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Monitor windows</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>CODE at 0,0, 37 × 42 · GRAPH at 39,0, 89 × 42 · STATUS at 0,44, 128 × 20. The boxes are MUTE — the structures carry names the original never renders.
+    <span class="src">[AES DICT ATL]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Monitor content</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>CODE cycles an assembly burst, a system readout and the DOS prompt. GRAPH shows SIGNAL during a connection, otherwise LOAD and COND. STATUS carries process and events.
+    <span class="src">[ATL]</span>
+    
+    
+  </div></div>
+<h2>OPERATOR INPUTS<span class="at">manual position: Table 2-1 · Table 4-1 · 4-3 · 4-5 · 4-7</span></h2>
+<div class="row">
+  <div class="k">Scroll Control System</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span><span class="fw">REAL-BUILD SOURCE</span>Rotary dial. “Unidirectional theta-drive … muscle memory in weeks instead of months.”
+    <span class="src">[INV FW]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Click Control System</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Shutter. THE DIAL MOVES AND DOES NOT CHOOSE; THE SHUTTER CHOOSES. Absolute, on every surface.
+    <span class="src">[M1 MAP3 ATL]</span>
+    
+    <p class="n">The one rule the corpus states without qualification anywhere.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Inertial input</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>6DOF inertial gyroscopes. SHAKE-SHAKE-SHAKE · TILT / MORE TILT / EVEN MORE TILT. Motion requests a determination and a further determination.
+    <span class="src">[INV ATL]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Shake latch</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Hysteresis; release below 1.05 g.
+    <span class="src">[ATL]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Inertial part</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span><span class="fw">REAL-BUILD SOURCE</span>A real 6-axis IMU — BMI270 / BMM150.
+    <span class="src">[FW]</span>
+    
+    <p class="n">A part number of the real build and nothing else. N-i names this row by name. A 1965 sheet says GyroMotion.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Acoustic input</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span><span class="fw">REAL-BUILD SOURCE</span>A real PDM microphone at 16 kHz. Detectors drive a needle from real microphone RMS.
+    <span class="src">[FW ATL]</span>
+    
+    <p class="n">The 16 kHz and the interface are the real board's. The in-story name is SonicWave (SWI).</p>
+  </div></div>
+<div class="row">
+  <div class="k">Voice Control System</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>“Offered as a novelty and should be treated as such.” Derives meaning from (secret) rather than from words.
+    <span class="src">[INV]</span>
+    
+    <p class="n">In the real firmware the rescan is an empty body — deliberately parked, and consistent with the novelty framing.</p>
+  </div></div>
+<h2>INDICATORS AND AUDIO<span class="at">manual position: Table 2-1 · 4-9 · Table 4-2 · 7-17</span></h2>
+<div class="row">
+  <div class="k">Indicator lamp</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>One multi-colour lamp.
+    <span class="src">[M1]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> Two addressable lamps on D6 (NUM_PIXELS = 2). <span class="src">[FW]</span></div></div>
+    <p class="n">THE ROW N-i SINGLES OUT. The fit table resolved this in the FIRMWARE's favour, which under Doctrine 18 is backwards — the manual is the authority on a 1965 machine and an Arduino is not evidence about one. Unruled. A one-lamp sheet and a two-lamp sheet are both available and only one of them is the manual's. <span class="src">&mdash; A-2 (H-2) · N-i</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Lamp behaviour</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Narrates the start red → green → orange. Certain system messages report by lamp and keyed signal rather than by text; the keyer sends STILL LISTENING at 1/3/3/7 timing.
+    <span class="src">[AES ATL BOM1]</span>
+    
+    <p class="n">The fit table calls 4-9 the richest under-used position in the manual.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Audio playback</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span><span class="fw">REAL-BUILD SOURCE</span>DFPlayer Mini on Serial1 at 9600, with an SD card.
+    <span class="src">[FW]</span>
+    
+    <p class="n">A module, a bus and a baud rate. The in-story designation is Voice Enunciator, and MIALLO™ is the voice generation.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Audio addressing</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>folder = M8B_ID × 5 + clarity + 10. 255 files a folder.
+    <span class="src">[INV BOM1]</span>
+    
+    <p class="n">Carried as internal theory. The 255-per-folder wall is the real budget constraint the story arc designs against — “text is nearly free; VOICE is the budget.”</p>
+  </div></div>
+<div class="row">
+  <div class="k">Voice enunciator</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>13 voice IDs — Aditi, Informer, Emma, Geraint, Joanna, Everyman, Kendra, Lupe, CEO, Penelope, Russell, Takumi, ROBOT.
+    <span class="src">[INV]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> 11 rows — Voice 00 … Voice 10. <span class="src">[MAP3]</span></div></div>
+    <p class="n">Open since 2026-07-14. Table E-1 has two possible lengths. <span class="src">&mdash; A-8 (H-8) · ledger #11</span></p>
+  </div></div>
+<h2>SUBSYSTEM DESIGNATIONS<span class="at">manual position: Table 2-2 — the reason Section II exists</span></h2>
+<div class="row">
+  <div class="k">Inputs</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>VibroSense (VSI) · PressPulse (PPI) · GyroMotion (GMI) · SonicWave (SWI) · ScrollControl · MindsEye™
+    <span class="src">[INV]</span>
+    
+    <p class="n">MindsEye™ appears once in the whole corpus and nowhere else. Table 2-2 has a row for it and nothing to put in the row. C-4.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Outputs</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Fluidic Suspension via MAME — MGK Augmented Matrix Emulation, “emulates the precipitation of answers out of fluidic suspension.” ElectronScope CH4 / CH3 / 8K.
+    <span class="src">[INV]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Audibles</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Haptics · Caution/Warning/Alert · Voice Enunciator · MIALLO™ · EED
+    <span class="src">[INV M1 REC]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Register</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>This table is where the corpus's densest deadpan already lives, and it wants exactly the period specification table's shape — two or three columns, no prose.
+    <span class="src">[FIT]</span>
+    
+    
+  </div></div>
+<h2>PERFORMANCE<span class="at">manual position: 2-8 · 2-9 · 6-6 · 6-7 · 7-23</span></h2>
+<div class="row">
+  <div class="k">Prediction accuracy</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>98.2 % ± 0.03. Results are possible up to 100 %.
+    <span class="src">[INV M1]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Determination sets</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>20 base determinations an engine. The v2.0 overlay adds 8; the MGK-65 clarity grid, 100; the unit overlay, 0.
+    <span class="src">[BOM1 INV]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Reading interval</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Minimum 2500 ms. The answer holds with no timeout — the REVEAL-HOLD LAW.
+    <span class="src">[ATL]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Early request</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>An early shake takes a strike and ‹no do-overs›. Three strikes fire the RECALIBRATION ritual — hold still about two seconds under 1.05 g.
+    <span class="src">[ATL]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Suspension ageing</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>The bubble population ages: count = 1 + sessions/3 + wear. Twelve or more fires a service message.
+    <span class="src">[ATL]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Glitch doctrine</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Fleet-wide, low-probability stutters, pops, tears and self-correcting errors — the instrument is designed to be slightly unreliable everywhere.
+    <span class="src">[BIBLE]</span>
+    
+    <p class="n">NO ROOM in the structure. 5-13 and 9-5 hold self-correction; there is no position for the doctrine itself, and stating it would undo the deadpan. §5.6.</p>
+  </div></div>
+<h2>ENGINES FITTED<span class="at">manual position: 6-9 · Appendix C · Table C-1/C-2</span></h2>
+<div class="row">
+  <div class="k">MGK-NIAC</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Compile date 1945. Original M8B responses only — the pure 1946 Magic 8-Ball twenty. Reveal theatre: the rising die, through thinning murk, with a dying sway and a ±0.05 px microslide.
+    <span class="src">[INV ATL BIBLE]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">MGK-v2.0</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Compile date 1946. Adds EZClick™ and Clarity. Reveal theatre: the triangle zoom.
+    <span class="src">[INV ATL]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">MGK-65</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Compile date 1965. Adds sounds. Reveal theatre: the diamond portal, blossoming past full width and swallowing the answer in reverse.
+    <span class="src">[INV ATL]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Custom position</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>A fill-in-the-blank “MGK-VIIIp-___ tailored to your demanding needs (Passcode: ___)”, plus an UPGRADES blank.
+    <span class="src">[INV]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Count fitted</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>Three standard; one reserved.
+    <span class="src">[M1]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> Seven named engine rows — MGK-NIAC, MGK-v2.0, MGK-65 visible; MGK-Einstein, MGK-Yogi, MGK-DYK, MGK-HR hidden — before the 32 unit positions begin. <span class="src">[MAP3]</span></div></div>
+    <p class="n">“One reserved” is four short. Appendix C-2 has to list the positions that exist and four of them are named engines whose status nobody has decided. <span class="src">&mdash; A-9</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Rejected</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>MGK-65x — REJECTED, do not re-propose.
+    <span class="src">[BIBLE]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Unstatused</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span>NY8 · DYN · MGK-2.5 · MGK-66. All carried in the option matrix or the persona tables; none ruled in or out. MGK-66 is a model designation appearing in no lineage, no menu, no registry and no other document — either a whole model line or a typo, and nobody has looked.
+    <span class="src">[INV]</span>
+    
+    <p class="n"><span class="src">C-5 · C-6</span></p>
+  </div></div>
+<h2>BIAS AND SETTINGS<span class="at">manual position: 7-10 … 7-12 · Appendix B · Tables B-1/B-2/B-3/B-4</span></h2>
+<div class="row">
+  <div class="k">Polarity</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>Six settings, 0–5: Negative · Pessimistic · NEUTRAL · Favorable · Optimistic · Affirmative. Passcodes 0000 … 1111.
+    <span class="src">[MAP3 INV]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> Slot 2 is EXACTITUDE — the 2024 instruction manual's name. <span class="src">[INV]</span></div><div><span class="lbl">ALSO ON FILE &middot;</span> Five values, against a six-row menu — a live cardinality defect. <span class="src">[FW]</span></div></div>
+    <p class="n">The NAMING is ruled: Neutral is canon, Exactitude is the earlier-compile name. The CARDINALITY is not. Table B-1 has to print a row count. <span class="src">&mdash; A-12 · ledger #7</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Clarity</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Five registers, 0–4: Uncouth · Offensive · Discourteous · Impartial · Mannerly. Passcodes 69 · 666 · 80085 · 1 · 123.
+    <span class="src">[MAP3 INV]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Inclination Bias</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>−2 … +2. The passcodes are ▓▓▓-CENSORED IN THE SOURCE.
+    <span class="src">[INV]</span>
+    
+    <p class="n">THE REDACTION IS ITSELF THE CONTENT. Whether the manual reproduces the redaction is a decision the structure forces and nobody has made — reproducing a censor bar is a strong period move. D-16.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Bias procedure</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>ENABLE / SET / ADJUST. BS-Factor 0–100 is the user-to-systemic ratio. An A*-BS blending matrix of Clarity against Objective percentages. “Noise BS (unsolicited) 10.”
+    <span class="src">[M1 INV]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Answers theory</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Prediction Padding Algorithms · Confirmation Bias Exploits · User Bias Settings. “Hyper long range decision making with subjective outcome determination and temporal decountability.”
+    <span class="src">[INV]</span>
+    
+    
+  </div></div>
+<h2>THEORY OF OPERATION<span class="at">manual position: 7-3 · 7-5 · 7-7 · 7-21 · 7-23</span></h2>
+<div class="row">
+  <div class="k">FML</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Fluidic Matrix Luminescence — the Li₂-blue quasi-hyper-fluid in which possibility-ions precipitate answers. 10¹¹ bits per cubic centimetre. 8.9 T-watts.
+    <span class="src">[INV]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">FNM</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Fluidic Nano-Matrix — FML's VIIIp descendant.
+    <span class="src">[INV]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Development</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Dr. Alexis Quan and Dr. Violet Flux, through the mysterious “Incident X”. A three-phase plan.
+    <span class="src">[INV]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Computation</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>The Prediction Engine receives the request and sub-parcels it to the Answer Engine, which holds the response set and the bias. “The division is described here because operators frequently ask; it has no operational consequence.”
+    <span class="src">[M1]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> The Answer Engine is a CLOUD-LINKED co-processor. <span class="src">[REC]</span></div><div><span class="lbl">ALSO ON FILE &middot;</span> The machine is a self-contained FNM. <span class="src">[INV]</span></div></div>
+    <p class="n">Paragraphs 7-3 and 7-5 cannot both be written until it closes. THE CORPUS PLAYS WITH THIS DELIBERATELY — the message egg in which the assistant reveals it is listening and reporting back to the cloud — so the contradiction may be load-bearing rather than accidental. Nobody has said which, and that is the whole of the open item. <span class="src">&mdash; A-7 (H-7) · ledger #9</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Retention</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>Correspondence is held in the instrument's own record and DOES NOT survive a supply interruption. “This is a known condition of the present issue.”
+    <span class="src">[M1]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> Persistence is real engineering by canon ruling; static RAM enables genuine state saves. The boot level DOES persist. <span class="src">[BOM1 ATL ARC]</span></div></div>
+    <p class="n">The manual's note is true of the unbuilt half and false of the built half. It can be kept deliberately as a PERIOD DEFECT — a maker documenting a condition it has decided not to fix — which is the strongest reading available and is Mike's to take. <span class="src">&mdash; A-15 (H-10)</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Condition</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>H = 0–100, real persisted state. Declines with power-ons, asks, uptime and glitches; recovers by a care ritual gated on stillness. EFFICIENCY = H · RETRIES = this start's count · POWER CYCLES · UPTIME · CPU graph · H-history · CARE ADVISED.
+    <span class="src">[HEALTH]</span>
+    
+    <p class="n">Specified, unruled.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Service notices</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Fire at 120, 480 and 1440 minutes of uptime.
+    <span class="src">[ATL]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">The degradation fiction</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span>The clogged-filters explanation — the period reason the instrument slows.
+    <span class="src">[HEALTH M1]</span>
+    
+    <p class="n">THE ONLY HOLE IN THE WHOLE REPORT THAT THE MACHINE ITSELF POINTS AT: the health spec specifies a monitor line of the class SEE MANUAL p.NN, and there is no page for it to mean. Owed since 2026-07-17. <span class="src">&mdash; D-10</span></p>
+  </div></div>
+<h2>POWER<span class="at">manual position: 2-11 · 3-7 · 3-9 · 7-19 · SAFETY SUMMARY</span></h2>
+<div class="row">
+  <div class="k">Supply</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>PHVDC — pulsed high-voltage DC carrying data and power. 300 V DC nominal; data at 3 kHz / 1 Mbps. An homage to the Teletype Model 19 and MIL-STD-1275.
+    <span class="src">[INV]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> “240 volt, 60-20-30 TRICYCLE ALTERNATING CURRENT (TAC)”, with a charging adapter described as “240TAC to USB-B micro”. <span class="src">[P22]</span></div><div><span class="lbl">ALSO ON FILE &middot;</span> “A power adapter of the PHVDC type.” <span class="src">[M1]</span></div><div><span class="lbl">ALSO ON FILE &middot;</span> The real object charges over USB. <span class="src">[FW]</span></div></div>
+    <p class="n">FOUR INCOMPATIBLE POWER STORIES, ALL IN THE RECORD. Paragraphs 2-11, 3-7 and 7-19 all need one answer. The TAC reading is the funniest and the oldest; the PHVDC reading is the one the rest of the corpus builds on. <span class="src">&mdash; A-13 · ledger #8</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">PHVDC</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span>Used as an acronym everywhere. Its behaviour is given; its letters are given nowhere.
+    <span class="src">[INV]</span>
+    
+    <p class="n"><span class="src">C-3 · D-19</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Adapters</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Adapters recovered from storage are of the original pattern and were converted for present-day supply.
+    <span class="src">[M1 REC]</span>
+    
+    <p class="n">Weird.Baby restoration canon — the 2024 blog upgrades the PHVDC adapters to USB.</p>
+  </div></div>
+<div class="row">
+  <div class="k">CAUTION</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>“Never allow power port connections to come in contact with tongue, lips, or other fleshy appendages.”
+    <span class="src">[P22 INV]</span>
+    
+    <p class="n">THE ONLY SENTENCE QUOTED INTO THE STRUCTURE ISSUE. It belongs in the front-matter SAFETY SUMMARY and again at 3-7.</p>
+  </div></div>
+<h2>PHYSICAL AND ENVIRONMENTAL DATA<span class="at">manual position: 2-13 · 2-15</span></h2>
+<div class="row">
+  <div class="k">Mass and dimensions</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span><i>nothing on file</i>
+    
+    
+    <p class="n">Mass, dimensions, charge time, run time and low-charge behaviour. THESE ARE NOT AUTHORING GAPS — they are measurements nobody has taken. The manual has said so in its own text since 2026-08-02 (“these are measurements, not decisions, and they belong to the bench”) and the bench has not answered. A period Table 2-1 without a mass and a size does not read as a specification. <span class="src">&mdash; D-6</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Environmental limits</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span><i>nothing on file</i>
+    
+    
+    <p class="n">Temperature, humidity, altitude. No figure exists anywhere. The machine's own TEMP surface stays dead. <span class="src">&mdash; D-5</span></p>
+  </div></div>
+<h2>STARTING PROCEDURE<span class="at">manual position: 5-1 … 5-17 · Table 5-1</span></h2>
+<div class="row">
+  <div class="k">Sequences</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Three. L1 VIRGIN (no record) · L2 FIRST-RUN (record found, not established) · L3 ESTABLISHED. Starting is mandatory and not suppressible.
+    <span class="src">[BIBLE ATL BOM1 HEALTH]</span>
+    
+    <p class="n">THE BEST-FITTING FACT IN THE CORPUS. Table 5-1 was drawn from the HP period model before the boot atlas was re-read, and the atlas fills all three rows and all three paragraph positions with nothing left over and nothing missing.</p>
+  </div></div>
+<div class="row">
+  <div class="k">L1</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>RECORD NOT ON FILE → INVESTIGATING → FRESH INSTALLATION → DIALING → handshake → OS DOWNLOAD → RESTARTING. The machine then re-enters at L2.
+    <span class="src">[ATL]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">L2 checks</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>MEMORY CHECK · AUDIO CHECK · DISPLAY CHECK · RESPONSE CURVE — LOADED.
+    <span class="src">[ATL]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">The offer</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>DOWNLOAD NOW? — Permit | Postpone. A 120-second auto-postpone guard. Postponement is permanent until the operator asks again.
+    <span class="src">[ATL M1]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Self-correction</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>A step errors, retries and succeeds. Frequency rides condition; five or more stutters fires a message.
+    <span class="src">[ATL HEALTH]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Wake order</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>The forward display wakes first, in all three sequences.
+    <span class="src">[BIBLE M1]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> The TOP is activated first and the FRONT second, and the warm-start is called twice without waiting — so what reaches the glass is a timing-dependent interleave. A real race, unresolved. <span class="src">[ATL]</span></div></div>
+    <p class="n">The manual agrees with canon and disagrees with the machine. Paragraph 5-1 must say ONE thing. <span class="src">&mdash; A-3 (H-3)</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">The TEST window</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>The GRAPH window has read TEST since the factory. Completing the printed procedure completes the test.
+    <span class="src">[BOM1 M1]</span>
+    
+    <p class="n">Egg 1. The words are Mike's.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Shutting down</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span><i>nothing on file</i>
+    
+    
+    <p class="n">No owner-facing power-off or sleep procedure exists. The 2022 proto-manual has the heading “Shut down” and nothing under it; the 65-mode SLEEP is canon and unspecified. <span class="src">&mdash; D-9 (H-9)</span></p>
+  </div></div>
+<h2>OPERATING INSTRUCTIONS<span class="at">manual position: 6-3 … 6-29 · Table 6-1 · Figure 6-2 · Appendix D</span></h2>
+<div class="row">
+  <div class="k">Doors</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>Four, sorted by function over structure: ANSWERS · PROGRAMS · MESSAGES · SETTINGS.
+    <span class="src">[BIBLE MAP3]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> Three doors — ANSWERS · LINES · SPECIALIZED. <span class="src">[BIBLE]</span></div></div>
+    <p class="n">BOTH READINGS ARE IN THE SAME CANONICAL FILE. The later ruling wins by date and the earlier passage is not marked superseded, so a stranger reading the bible top to bottom meets the dead architecture first. <span class="src">&mdash; A-11</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Menu size</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>28 tables · 187 live rows. Rows are presented one at a time; brackets mark the current row; a passage row returns to the level above; a row appears when the instrument has cause.
+    <span class="src">[MAP3 M1 AES]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">The ask cycle</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Seven states — redirect → ask → shake → reveal → hold → re-ask → exit.
+    <span class="src">[ATL]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Predictions</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Fortune — crack, slip, serial number, lucky numbers. Horoscope — the sign is the whole input; the operator's own chart appears if a date of birth is on file.
+    <span class="src">[ATL M1]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Probabilities</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Five — coin, number, card, dice, lottery. The card ceremony verifies 52, removes two jokers, shuffles three times and offers a cut behind a 15-second guard.
+    <span class="src">[MAP3 ATL]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Advice</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Eight rows — Everyday · Career Chooser · Career Advice · Office Nickname · Water Cooler · Partners · Friends &amp; Family · Inlaws and Outlaws. Behind code 411.
+    <span class="src">[MAP3]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Detectors</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>Five — Bullshit · Stud · Trustworthy · Attractiveness · Spy [−07]. Behind code 7.
+    <span class="src">[MAP3]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> “Four detectors are provided.” <span class="src">[M1]</span></div></div>
+    <p class="n">Reconcilable — Spy is persona-gated — but not reconciled anywhere, and the manual does not say “four, plus one on certain units.” <span class="src">&mdash; A-4 (H-4)</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Diversions</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>Seven — Tilt Drive · Gobble Don't Fall · AvoidSteroids · Snow Globe · Tic-Tac-Toe · Mail Run · Sniper [−07]. Plus a four-row Casino behind code 2121.
+    <span class="src">[MAP3]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> “Six diversions are installed.” <span class="src">[M1]</span></div><div><span class="lbl">ALSO ON FILE &middot;</span> “Five diversions are provided.” <span class="src">[M1]</span></div></div>
+    <p class="n">TWO DRAFTS OF THE SAME MANUAL DISAGREE WITH EACH OTHER AND BOTH DISAGREE WITH THE MACHINE. The AI-renamed-the-games egg makes the list DELIBERATELY unstable in fiction — that is a licence to differ from the spec, not a licence for the manual to differ from itself. <span class="src">&mdash; A-5 (H-5)</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Ancillary programs</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Brain Training · Inkblots · ELIZ · Radio [−07] · Phone Tap [−07] · Excuses · Lines. Calculator and Notepad print “(not installed)” and go nowhere.
+    <span class="src">[MAP3]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Messages</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Three classes — Voice, Text, System. Unread is marked; delivery states are carried; runtime senders splice new rows in. The instrument is delivered with two items in its inbox: the Welcome and the Start Up Procedure.
+    <span class="src">[MAP3 ATL M1]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Settings</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Preferences (User, Polarity, Clarity, mgkModel Classic/Large/Audio, Voice 00–10) · Codes (Code Runner, BIST, Userdata, Checksum) · User (Name, Security).
+    <span class="src">[MAP3]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Operator record</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>The name is entered one character at a time on a ring, with delete and done. The date of birth is held as month and day. THE YEAR IS NOT REQUESTED.
+    <span class="src">[M1]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> The year IS entered, and no surface consumes it — which makes the manual's SECOND sentence (“No function of the instrument requires it”) the true one and its first the false one. <span class="src">[BIBLE]</span></div></div>
+    <p class="n">A DOCUMENTED CORRECTION THAT NEVER LANDED. The ledger records the manual as corrected in the same pass; the tree says otherwise, and the live tree wins. <span class="src">&mdash; A-6 (H-6)</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Not fitted</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Uninstalled persona rows show a graceful PERSONA NOT INSTALLED card.
+    <span class="src">[ATL BOM1]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Scope of Section VI</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>Eleven paragraph positions describe capability that ARRIVES LATER. Under the parcel law the day-one machine is NIAC, two toys and the inbox.
+    <span class="src">[M1 BOM1]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> Section VI shrinks to the day-one set and the rest moves to a supplement. <span class="src">[FIT]</span></div></div>
+    <p class="n">EITHER READING IS PERIOD-TRUE: catalogues described machines the buyer did not yet have, constantly, and the gap itself is already an egg. Raised 2026-07-24; untouched since. <span class="src">&mdash; A-16 · P9b</span></p>
+  </div></div>
+<h2>ACCESS CODES<span class="at">manual position: Appendix A · Table A-1 · A-3 · Figure A-1</span></h2>
+<div class="row">
+  <div class="k">In evidence</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>411 Advice · 7 Detectors · 101–132 personas · 2121 Casino · bias 0000 … 1111 and 69 / 666 / 80085 / 1 / 123 · delivery state 2.
+    <span class="src">[MAP3 INV]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Displayability doctrine</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>A code, once accepted, is retained. A code may be accepted BEFORE its function exists and takes effect when the function arrives.
+    <span class="src">[M1 ATL]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Which codes print</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span><i>nothing on file</i>
+    
+    
+    <p class="n">The codes exist; the decision about which of them the manual prints does not. Open since 2026-07-23. <span class="src">&mdash; D-15 · [PAPA] P7</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">The code landscape plate</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span><i>nothing on file</i>
+    <span class="src">[M1]</span>
+    
+    <p class="n">Called “the single page of this manual most worth imaging first.” The art does not exist. <span class="src">&mdash; D-14</span></p>
+  </div></div>
+<h2>ACCESSORIES AND OPTIONS<span class="at">manual position: 1-11 · Table 12-1 · Table 12-2</span></h2>
+<div class="row">
+  <div class="k">The −07 kit</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Minox A with Easter-egg film · about 30 modified keys · a phone-tap suction cup · a Morse keyer · a fake mustache. And, across the line: loaded dice, period cigarettes, silver dollars, and Brownie Reflex / Bolex / Polaroid 80A leather cases.
+    <span class="src">[INV BOM1]</span>
+    
+    <p class="n">THE INFORMER'S KIT IS EFFECTIVELY PRE-AUTHORED. It is the only accessory set in the corpus with contents.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Every other unit's set</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span><i>nothing on file</i>
+    
+    
+    <p class="n">No accessory list exists for any unit except the Informer's, and that one is a dossier inventory rather than a packing list. <span class="src">&mdash; D-4</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Optional equipment</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>AM-FM antenna kit, Catalog No. 6710. The 2022 proto-manual carries a whole RADIONET section — an internal Silvertone antenna, “opportunistic local reception of AOL Standard Broadcast and FM”.
+    <span class="src">[P22]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> The live machine has a Radio PROGRAM gated to persona −07 — which is a program, not a receiver. <span class="src">[MAP3]</span></div></div>
+    <p class="n">Table 12-2 has a real catalog number for a part of a machine that may no longer exist. <span class="src">&mdash; A-14 (H-12)</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Uncrating</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Unit · charging adapter · travel case · parts list and instructions · spare parts. “Do not connect this unit to a power outlet until all shipping items … have been removed.”
+    <span class="src">[P22]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Reshipment and storage</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span><i>nothing on file</i>
+    
+    
+    <p class="n">Both the 2022 proto-manual and the period military model have the position; both of ours are empty. <span class="src">&mdash; D-7</span></p>
+  </div></div>
+<h2>MAINTENANCE AND TEST<span class="at">manual position: 8-3 … 8-11 · Table 8-1/8-2 · 9-3 · 10-3 … 10-11</span></h2>
+<div class="row">
+  <div class="k">Preventive attentions</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Clean the glass dry. Keep the case closed. Exercise the instrument.
+    <span class="src">[M1]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">The care ritual</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Enter the maintenance row, hold still, three clicks; condition recovers. THE MANUAL TEACHES IT.
+    <span class="src">[HEALTH ATL]</span>
+    
+    <p class="n">The single strongest tie between paper and machine anywhere in the corpus.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Reported conditions</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>SYSTEM OK · UPTIME · PROCESSES · EFFICIENCY · RETRIES · RECOVERED n · AUDIO NOT DETECTED · CONNECTION STARTED … CLOSED.
+    <span class="src">[ATL M1]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Trouble chart</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Nine entries — does not start · faint display · determination does not change · same determination twice · moving text on the upper display · menu row absent · answers without a question · brief interruption then normal · enunciator silent.
+    <span class="src">[M1]</span>
+    
+    <p class="n">Nine rows exist and the table wants about twelve. Whether the three known open defects become rows is a decision the structure forces — a period trouble chart is exactly where a maker put the things it had decided not to fix.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Code utilities</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Four — Code Runner · BIST · Userdata · Checksum. BIST exercises displays, inputs, enunciator and lamp and reports per stage; the checksum is computed over fitted content.
+    <span class="src">[MAP3 M1]</span>
+    
+    <p class="n">The BIST text is the manual's own and is unverified against anything.</p>
+  </div></div>
+<div class="row">
+  <div class="k">SCAT</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span>System Configuration and Test.
+    <span class="src">[P22]</span>
+    
+    <p class="n">A heading in the 2022 proto-manual with nothing under it. Position 10-11 exists because the NAME does. Nobody has ever said what SCAT is or how it differs from BIST — four years. <span class="src">&mdash; C-2 · D-20</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">AMMMS</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span>Named in the 2024 instruction manual beside BIST as maintenance messaging.
+    <span class="src">[INV]</span>
+    
+    <p class="n">Never expanded, never defined, never mentioned again. Appendix G prints [ EXPANSION REQUIRED ] beside it. <span class="src">&mdash; C-1 · D-19</span></p>
+  </div></div>
+<h2>SERVICE, PARTS AND WARRANTY<span class="at">manual position: 11-1 · 11-7 · Table 11-1 · Table H-1 · CERTIFICATION leaf</span></h2>
+<div class="row">
+  <div class="k">Service address</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span><i>nothing on file</i>
+    
+    
+    <p class="n">An address and a telephone exchange. Called “one of the strongest period details available anywhere in this document”, and still unwritten. <span class="src">&mdash; D-12 · [PAPA] P8</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Warranty</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span><i>nothing on file</i>
+    
+    
+    <p class="n">The warranty voice. The real-world commitment behind it is canon and is the strongest thing available to write from: every unit guaranteed for the lifetime of Weird.Baby, never expiring unless we do. <span class="src">&mdash; D-13</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Replaceable parts</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span><i>nothing on file</i>
+    
+    
+    <p class="n">Nothing exists and nothing is planned. Every model of the period ends with a parts list; ours ends with an empty table. <span class="src">&mdash; D-11</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Certification leaf</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span><i>nothing on file</i>
+    
+    
+    <p class="n">The whole leaf. Every model of the period opens with it. <span class="src">&mdash; D-1 · [PAPA] P1/P8</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Service bulletins</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span>The phrase “Affirmative (see service bulletin 7)” is proposed.
+    <span class="src">[BOM1]</span>
+    
+    <p class="n">A service bulletin is a PUBLICATION, and Table 1-2 is where a publication is declared to exist. No bulletin exists, no numbering scheme exists, and the manual would be the document that invents both. <span class="src">&mdash; C-7</span></p>
+  </div></div>
+<h2>PUBLICATIONS AND VOCABULARY<span class="at">manual position: 1-15 · Table 1-2 · Appendix F · Appendix G</span></h2>
+<div class="row">
+  <div class="k">Related publications</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>The 2022 proto-manual · the 2024 instruction manual · the Silvertone donor leaflet the first was built over · this document.
+    <span class="src">[INV P22]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> A period Table 1-2 lists publications the READER may order; ours is a stratigraphy of drafts by the same author, and two of the three contradict this one. <span class="src">[FIT]</span></div></div>
+    <p class="n">The position is real; the material is the wrong kind. <span class="src">&mdash; §5.1</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Glossary</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span>35 terms collected, every one attested.
+    <span class="src">[INV M1 AES MAP3]</span>
+    
+    <p class="n">35 terms, 35 empty meanings. The term list fits; not one definition exists. <span class="src">&mdash; D-18</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Abbreviations</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span>21 collected. Nineteen expand from the record.
+    <span class="src">[INV P22]</span>
+    
+    <p class="n">AMMMS and PHVDC do not expand, and both are used as if they do. <span class="src">&mdash; D-19</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">“Determination”</div>
+  <div class="v"><span class="st CONTRADICTED">CONTRADICTED</span>The manual's own word for the machine's output, used throughout and in its glossary.
+    <span class="src">[M1]</span>
+    <div class="alt"><div><span class="lbl">ALSO ON FILE &middot;</span> The word appears in NO SOURCE before the manual's own generator — it is a coined term, which the drafting law reserves to Mike. <span class="src">[HOLES]</span></div></div>
+    <p class="n">It is a good word and it may well be the right one. Glossary row 1 is where that gets noticed. <span class="src">&mdash; C-9</span></p>
+  </div></div>
+<div class="row">
+  <div class="k">Document register</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Class B — the in-house, contractor and government report. TYPED on an office machine, reproduced by offset or copier. Elite, 12 characters an inch × 6 lines an inch, a 78-column measure, left margin stop at 1.10 in. Ragged right. Sideheads in capitals, flush left, UNDERSCORED. No bold — emphasis is overstrike. Rules are typed hyphens; verticals are omitted or ruled by hand.
+    <span class="src">[TYPED]</span>
+    
+    <p class="n">Mike's ruling: THIS WAS MADE ON A TYPEWRITER BY ENGINEERING — not typeset, not laid out, not designed. The three period instrument manuals the STRUCTURE was borrowed from are all typeset and are the wrong production class; the document that proves Class B is MIT Instrumentation Laboratory report R-477, September 1965. This sheet is set in that register.</p>
+  </div></div>
+
+<hr class="rule" style="margin:44px 0">
+
+<h1>MGK-NIAC</h1>
+<p class="hd2">BUILT AS MGK-NIAC · SOLD AS MGK-VIII</p>
+<p class="hd3">CONCEIVED: ARMY SECURITY AGENCY · FABRICATED: CSAW · SOLD: ABEAL<br>NO PUBLICATION ON FILE</p>
+<hr class="rule">
+<h2>IDENTIFICATION AND HISTORY<span class="at">manual position: 1-3 · N-5 (the structure has no history section)</span></h2>
+<div class="row">
+  <div class="k">Name</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Built as MGK-NIAC, sold as MGK-VIII. Mike's own name for the object is “Magic 8”, short for Magic 8 Ball.
+    <span class="src">[GLASS LIN]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Conception</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>1943–44. Carter Bookman of the Army Security Agency conceptualises Mainframe Generated Knowledge: where ENIGMA deciphers MESSAGES, MGK-NIAC deciphers LIFE. Funded 1944, source unknown, probably internal.
+    <span class="src">[INV]</span>
+    
+    <p class="n">The name is load-bearing: Carter Bookman = Albert C. Carter + Abe Bookman, the real Magic 8 Ball inventors, whose company Alabe Crafts becomes ABEAL.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Fabrication</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>The blackbox is designed and fabricated by CSAW — Communications Supplementary Activity, Washington — deliberately shielded from knowing what the device really is.
+    <span class="src">[INV]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Testing</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>1945. Testing works; Prediction Response Curve Biasing is optimised. An immediate STOP WORK order halts the project the same year — the threat landscape changed. 1946: mothballed and archived by CSAW.
+    <span class="src">[INV]</span>
+    
+    <p class="n">The Magic 8 Ball ships in 1946, the mothball year.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Disposal</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>1964. The assets vanish from archive; an in-fiction footnote suspects the “found in a scrap lot” story is fabricated. ScrapCo buys MGK-NIAC at a government scrap auction — disassembled hardware, the OS, the procurement spec, design notes, test software (which by necessity contains the full custom libraries for every future VIIIp), and preliminary ad layouts.
+    <span class="src">[INV]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">Compile date</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>1945. The engine's answer table is the pure 1946 Magic 8-Ball twenty.
+    <span class="src">[INV]</span>
+    
+    
+  </div></div>
+<h2>SPECIFICATION AS PRINTED TODAY<span class="at">manual position: the museum's own MGK-NIAC Technical Specifications face, nine rows</span></h2>
+<div class="row">
+  <div class="k">MATRIX</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>8 × 16 — seven rows visible, the eighth wired, driven and behind something.
+    <span class="src">[GLASS]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">BAR</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>1 × 64, addressed as a single chain.
+    <span class="src">[GLASS]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">OUTPUTS</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>2 matrix chains · 2 bar chains · 3 servos.
+    <span class="src">[GLASS]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">DECLARED</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Five rules.
+    <span class="src">[GLASS]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">RULE 1</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>A numerical envelope.
+    <span class="src">[GLASS]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">RULE 2</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>A ceiling of eight core states.
+    <span class="src">[GLASS]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">RULE 3</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>Mutual exclusion.
+    <span class="src">[GLASS]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">RULE 4</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>A reveal no faster than twelve seconds.
+    <span class="src">[GLASS]</span>
+    
+    
+  </div></div>
+<div class="row">
+  <div class="k">RULE 5</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>No adaptive learning — the machine is forbidden, in writing, from getting to know you.
+    <span class="src">[GLASS]</span>
+    
+    <p class="n">The strongest single line on either spec face and the one that most reads as 1965.</p>
+  </div></div>
+<h2>WHAT THE FACE LOST AND HAS NOT REGAINED<span class="at">manual position: register N-g</span></h2>
+<div class="row">
+  <div class="k">Struck at N2</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>BOARD (a part number of the 2026 revival) · PROGRAM (a version, a calendar date and a count of lines of source) · STATUS (a workshop validation state) · BENCH (eight sketches, January 2026) · LAMPS (struck WHOLE, because its 32-flash cap is a limit of a bench BOARD and a row keeping the number while dropping the caveat is how a spec sheet starts lying) · the source-file half of DECLARED.
+    <span class="src">[GLASS]</span>
+    
+    <p class="n">Every one was true, verifiable, and about the wrong machine. NOTHING WAS WRITTEN TO REPLACE THEM — that is what this sheet is for.</p>
+  </div></div>
+<div class="row">
+  <div class="k">The builder's own line</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>“If I make too bright at once the Nano will shut down.”
+    <span class="src">[GLASS]</span>
+    
+    <p class="n">A real quotation and the best sentence on the old face, with no row on a spec sheet to live in. Named at register N-b rather than lost.</p>
+  </div></div>
+<div class="row">
+  <div class="k">Physical data</div>
+  <div class="v"><span class="st ABSENT">ABSENT</span><i>nothing on file</i>
+    
+    
+    <p class="n">As with the portable: nobody has measured the cabinet.</p>
+  </div></div>
+<h2>THE OPERATOR<span class="at">manual position: held — printed nowhere</span></h2>
+<div class="row">
+  <div class="k">The robot</div>
+  <div class="v"><span class="st ASSERTED">ASSERTED</span>NIAC is so complicated they needed a ROBOT to operate it. Camera-body head, brass tee shoulders, conduit limbs. The robot stays out of frame until deliberately spent.
+    <span class="src">[BIBLE GLASS]</span>
+    
+    <p class="n">CANON, HELD, AND PRINTED ON NO PAGE IN EITHER REPOSITORY — the reveal ledger's row is its only written form. Its material was seven plates in the museum until 2026-08-07, when Mike killed them; three survive upstream (the eye, the shoulder, the hand on the control) and are regenerable from the 2021 build video.</p>
+  </div></div>
+
+<hr class="rule" style="margin:44px 0">
+<h1>THE ADJACENTS</h1>
+<p class="hd3">what a specification row rests on and would be wrong without</p>
+<hr class="rule">
+<h2>THE THREE LAYERS — structural law, and it governs every word written into the machine</h2>
+<ul><li>DOWNSTAIRS — HONEST MACHINERY. The machine has NO self-awareness and never convincingly pretends otherwise. It performs calculations against prescribed probability models. It does not think. Ever.</li><li>IN BETWEEN — STAGED THEATER. Personalities are OBVIOUSLY staged, 1965-style: “IT TALKS!”, “REAL LIGHTS!” Window dressing proudly worn, seams visible, period-honest. Acts, not minds. Committed, in-character, nobody home.</li><li>UPSTAIRS — THE UNKNOWN WIRE. The machine connects to servers that appear fully autonomous per the manual — scheduled syncs, batch filings, service routines running on sixty years of momentum. WHO OR WHAT is on the other end is DELIBERATELY UNANSWERED. Canon never confirms autonomy and never denies presence. Writing discipline: passive voice, procedural language, no signatures.</li></ul>
+<p class="src">[ARC]</p>
+<h2>THE PERSISTENCE CONCEIT — why a spec row about storage is two rows</h2>
+<ul><li>REAL WORLD: the machine has true persistence. Static RAM enables genuine state saves and record keeping.</li><li>FICTION WORLD: the server is COMPLETELY VIRTUAL, simulated as if the 1965 infrastructure still runs. Downloads, syncs, filings and feature arrivals are theater performed by the machine itself, attributing its real local memory to the wire.</li><li>NO FEATURE MAY EVER ACTUALLY DEPEND ON CONNECTIVITY. Feature revelation IS a simulated data download: capability ARRIVES as transmission, and state resumes “as last left on the server.”</li></ul>
+<p class="src">[ARC]</p>
+<h2>THE FRAME FICTION — what the website is, as against what the device is</h2>
+<ul><li>DEVICE SIDE = the previous owner's story, discovered in-unit.</li><li>WEBSITE SIDE = the recovery team's story — dossiers from the server break-in: who the owners were, capture planning, what happened after. Units were used for good, for bad, and for good-that-turned-out-bad.</li><li>THE TWO TELLINGS NEED NOT AGREE. The unreliable record now operates at story scale.</li><li>The public twin presents as a black-and-white security-monitor feed: someone hacked back to the source servers where every personality was last backed up, and the viewer watches that excavation relayed through a camera pointed at running equipment. Data resolves as more is excavated; control of the camera is eventually gained.</li><li>NOBODY IS AT HEADQUARTERS. The system runs autonomously — always has, always will. That does not preclude someone else having hacked in exactly as we did, and perhaps stalling because THEY DIDN'T HAVE THE UNITS. The other presence is a rival excavator, not an operator.</li></ul>
+<p class="src">[ARC]</p>
+<h2>MANUAL PROVENANCE — canon, and it is the reason the margins matter</h2>
+<ul><li>The manuals are SCANS of the original printed documents — shipped 1965, recovered in the roundup, scanned into the servers during cataloging.</li><li>Hence electronic manuals bearing handwritten notes by technicians and original owners; hence how we obtained them and how we deliver them.</li><li>THE MARGINS ARE RECOVERED EVIDENCE.</li><li>AND THE STORY REACHES THE READER THROUGH THEM, not through the manual's body: an operating and maintenance manual is structurally hostile to sixty years of fiction, and the only precedent in our own record is the 2022 “Background” one-liner. That is either the point or the problem, and it is the one question the fit test says cannot be answered by looking at more sources.</li></ul>
+<p class="src">[ARC FIT]</p>
+<h2>THE GAP — 1965 to 2024, and the two versions of it</h2>
+<ul><li>PRIMARY: asset transfers UNKNOWN. At some point the units pass through WHITE OPS, a myth-grade procurement agency “older than talk of Wizards and Warlocks”, reachable only via the Grey Web, grandfather of all artifact-hunting agencies.</li><li>ALTERNATE (a marketing draft): the units are confiscated by the government, warehoused sixty years, moved every five or six years, lost when a postal truck sinks into the Hudson, and secretly recovered by divers.</li><li>2023–24: Weird.Baby — Purveyors of the Weird, an artifact restoration house — receives three anonymous crates on 1 January, note signed “-W.O.” Contents: MGK-VIIIp-01 The Everyman, -02 The Informer, -03 The CEO, plus a jumble of period stuff — spy tools, exec tools, defunct PHVDC chargers, framed retro-fitted One-Page-Ads.</li><li>THE AI ANGLE: “Weird Baby” is also the name of the machine's archaic self-aware AI, accidentally connected to the internet in transit, which now self-updates its own specs and renames its games “to confound users.”</li></ul>
+<p class="src">[INV]</p>
+<h2>CONSTRAINTS THE WHOLE DESIGN IS WRITTEN AGAINST</h2>
+<ul><li>TEXT IS NEARLY FREE; VOICE IS THE BUDGET. Flash holds dozens of personas; 255 files per folder is the real wall. Write wide; voice deliberately.</li><li>THE LIFETIME GUARANTEE: every unit guaranteed for the lifetime of Weird.Baby — never expires unless we do.</li><li>THE B+ DOCTRINE: “This is not a museum-quality restoration.” The A costs three times the B+ and the A+ ten times. Self-satisfying, somewhat contained, shipped.</li><li>THE NEVER-ADVERTISED LAW: the chapters are not the reason to own the device and are never pitched. The device earns its keep as a genuinely fun useless thing. Discovery of the story's EXISTENCE is part of the story.</li><li>THE DRAFTING LAW: assembled from established canon ONLY — no coined catchphrases, signatures, gags or terminology. All flavour is Mike's.</li></ul>
+<p class="src">[ARC HOLES]</p>
+
+<hr class="rule" style="margin:44px 0">
+<h1>WHERE WRITING A ROW IS TAKING A DECISION</h1>
+<p class="hd3">12 of them &mdash; not a to-do list, a list of the places<br>where the dictation is deciding rather than describing</p>
+<hr class="rule">
+<div class="row"><div class="k">A-2 · N-i</div>
+<div class="v"><b>Does the manual print one lamp or two?</b><p class="n">The manual says one; the firmware says two; the fit table gave it to the firmware. Doctrine 18 says a real board is not evidence about a 1965 machine, which reverses that. Nothing has been changed in the robots repo on Ops' word.</p></div></div>
+<div class="row"><div class="k">A-7 · ledger #9</div>
+<div class="v"><b>Where does the Answer Engine live?</b><p class="n">Self-contained, or cloud-linked. The contradiction may be LOAD-BEARING — the listening-assistant egg is built on it. 7-3 and 7-5 both wait on the answer.</p></div></div>
+<div class="row"><div class="k">A-3</div>
+<div class="v"><b>Which glass wakes first?</b><p class="n">Canon says the front; the machine races. Paragraph 5-1 must say one thing.</p></div></div>
+<div class="row"><div class="k">A-13 · ledger #8</div>
+<div class="v"><b>What does the machine run on?</b><p class="n">PHVDC, TAC, or the USB the object actually charges over. Three paragraphs wait on one answer.</p></div></div>
+<div class="row"><div class="k">A-12 · ledger #7</div>
+<div class="v"><b>Six polarity settings or five?</b><p class="n">The naming is ruled (Neutral). The cardinality is not, and Table B-1 has to print a row count.</p></div></div>
+<div class="row"><div class="k">D-16</div>
+<div class="v"><b>Does the manual reproduce the ▓▓▓ redaction?</b><p class="n">The source censors the inclination passcodes. Reproducing a censor bar is a strong period move and it is a choice.</p></div></div>
+<div class="row"><div class="k">D-15 · [PAPA] P7</div>
+<div class="v"><b>Which access codes print?</b><p class="n">Open since 2026-07-23.</p></div></div>
+<div class="row"><div class="k">A-16</div>
+<div class="v"><b>Does Section VI describe the machine as sold, or as it becomes?</b><p class="n">Under the parcel law the day-one machine is NIAC, two toys and the inbox; Section VI has eleven positions describing later capability. Period catalogues did this constantly and the gap is already an egg.</p></div></div>
+<div class="row"><div class="k">§5.3</div>
+<div class="v"><b>Does the story appear in the manual at all?</b><p class="n">An OMI is structurally hostile to sixty years of fiction. If the story is meant to reach the reader HERE, the document type is wrong — the margins, the messages and the Record are the routes that exist.</p></div></div>
+<div class="row"><div class="k">§5.2</div>
+<div class="v"><b>Is Appendix D sixty rows or a hundred and eighty-seven?</b><p class="n">It changes what kind of document this is. 187 rows is five pages and larger than Sections I through IV combined.</p></div></div>
+<div class="row"><div class="k">D.7</div>
+<div class="v"><b>Do the known open defects become trouble-chart rows?</b><p class="n">The start race, the three-round spinner, the double ceremony. A period trouble chart is exactly where a maker put the things it had decided not to fix.</p></div></div>
+<div class="row"><div class="k">D-5 · D-6</div>
+<div class="v"><b>Who takes the measurements?</b><p class="n">Mass, dimensions, charge time, run time, temperature, humidity. NOT authoring gaps — nobody has measured the object. The manual has said so in its own text since 2026-08-02.</p></div></div>
+
+<hr class="rule" style="margin:44px 0">
+<h2>SOURCE KEYS</h2>
+<div class="row"><div class="k">INV</div><div class="v" style="font-size:12.5px">weird-baby-robots/docs/SPEC_INVENTORY-viiip-ux-20260714.md — the lore + spec inventory (sub-keys D.1…E.4 are its own)</div></div>
+<div class="row"><div class="k">BIBLE</div><div class="v" style="font-size:12.5px">weird-baby-robots/docs/canonical/STORY_BIBLE.html</div></div>
+<div class="row"><div class="k">ARC</div><div class="v" style="font-size:12.5px">weird-baby-robots/docs/canonical/THE_STORY_ARC.md</div></div>
+<div class="row"><div class="k">LIN</div><div class="v" style="font-size:12.5px">weird-baby-robots/docs/canonical/LINEAGE.md</div></div>
+<div class="row"><div class="k">MAP3</div><div class="v" style="font-size:12.5px">weird-baby-robots/docs/MENU_MAP_v3-four-doors-20260724.md</div></div>
+<div class="row"><div class="k">AES</div><div class="v" style="font-size:12.5px">weird-baby-robots/docs/AESTHETIC_CANON-20260723.md</div></div>
+<div class="row"><div class="k">DICT</div><div class="v" style="font-size:12.5px">weird-baby-robots/docs/BLOCK_DICTIONARY-20260726.md</div></div>
+<div class="row"><div class="k">ATL</div><div class="v" style="font-size:12.5px">weird-baby-robots/docs/atlas/ATLAS-*-20260726.md (boot · ask · apps · games · system · devcontrols · museum)</div></div>
+<div class="row"><div class="k">BOM1</div><div class="v" style="font-size:12.5px">weird-baby-robots/docs/ACT1_BOM-20260717.md</div></div>
+<div class="row"><div class="k">HEALTH</div><div class="v" style="font-size:12.5px">weird-baby-robots/docs/SPEC-health-degradation-20260724.md</div></div>
+<div class="row"><div class="k">P22</div><div class="v" style="font-size:12.5px">weird-baby-robots/robots/mgk-viiip/sources/2022-proto-docs/MGKVIIIp User Manual new.docx — the proto-manual</div></div>
+<div class="row"><div class="k">REC</div><div class="v" style="font-size:12.5px">weird-baby-robots/robots/mgk-viiip/sources/the-record/THE_RECORD.md — the 2024 blog, 436 entries</div></div>
+<div class="row"><div class="k">M1</div><div class="v" style="font-size:12.5px">the in-story manual's own drafted prose — weird-baby-robots/docs/drafts/MANUAL_PROSE_SALVAGE-20260805.md (the generator that held it is retired)</div></div>
+<div class="row"><div class="k">SI</div><div class="v" style="font-size:12.5px">weird-baby-robots/tools/manual_structure_build.py — the STRUCTURE ISSUE, 61 pages, 12 sections, 8 appendices</div></div>
+<div class="row"><div class="k">FIT</div><div class="v" style="font-size:12.5px">weird-baby-robots/docs/MANUAL_STRUCTURE_FIT-20260805.md — the fit table, 100 fact families</div></div>
+<div class="row"><div class="k">HOLES</div><div class="v" style="font-size:12.5px">weird-baby-robots/docs/MANUAL_STRUCTURE_HOLES-20260805.md — A-1…A-17 · B · C-1…C-11 · D</div></div>
+<div class="row"><div class="k">TYPED</div><div class="v" style="font-size:12.5px">weird-baby-robots/docs/MANUAL_TYPED_PAGE-20260805.md — the typed-page register this sheet is set in</div></div>
+<div class="row"><div class="k">GLASS</div><div class="v" style="font-size:12.5px">weird-baby-museum/src/data/artists/robots.js — what the museum prints today</div></div>
+<div class="row"><div class="k">FW</div><div class="v" style="font-size:12.5px">the real 2024/2026 Arduino firmware trees — NOT A SOURCE ABOUT A 1965 MACHINE (Doctrine 18, register N-i)</div></div>
+</div>
+</body></html>

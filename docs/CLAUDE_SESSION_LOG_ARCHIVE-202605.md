@@ -1337,3 +1337,53 @@ load-bearing in it is NOT here — it is the two-stages paragraph at the head of
 - **THE 390px HALF OF THE LAP DID NOT RUN FOR THE FOURTH ROUND RUNNING** (M97):
   `window.innerWidth` reads 1228 and `resizeTo` is refused silently.
 
+---
+
+### 2026-08-06 -> THE NIGHT ROUND (N1-N6) - sealed
+- **SIX INSTRUCTIONS, ALL SIX ANSWERED, AND TWO OF THEM TURNED OUT TO BE THE SAME
+  DEFECT IN TWO COSTUMES: something true, verifiable and wrong, that no amount of
+  reading source could find.** Gates: lint **11/9 = baseline** - build green -
+  provenance **PASS** (0 undeclared - **0 stale** - 0 invention) - `reveal:check`
+  **PASS** - `parity:gate` **PASS, 4 shared - 0 divergences** - `assets:orphans`
+  **0** - **`instory:gate` PASS (new)** - **the lap ran at 390px AND 1228px for
+  the first time in five rounds.** Full narrative:
+  `docs/MUSEUM_NIGHT_ROUND_LOG-20260806.md`.
+- **THE PROVENANCE REGISTER WAS THE EVIDENCE FOR N2's DEFECT, NOT THE DEFENCE
+  AGAINST IT.** Every spec row struck this round was classed `VERIFIED` with the
+  source *"the unit's own `.ino` trees, read off the files"* — the boundary was
+  working perfectly and recording, in writing, that a 1965 machine's spec sheet
+  was sourced from an Arduino. **Doctrine 13 asks whether a string HAS an origin;
+  it cannot ask whether the origin belongs to the fiction.** Ten rows struck
+  across the two faces; nine survive on the mainframe and every one describes the
+  object; **nothing was written to replace what went** (N-g, N-h). And **the
+  supply line is contaminated at the same seam** — six rows of the in-story
+  manual's own SPECIFICATIONS section cite the real firmware, and one lets
+  `NUM_PIXELS = 2` overrule the manual's *"one lamp"* (N-i).
+- **N4's RULE WAS BEING BROKEN ON THE AXIS NOBODY WOULD HAVE LOOKED AT.** Every
+  `<details>` in the museum is honest vertically — 0 of 24 above it in the booth,
+  0 of 47 in the wing FAQs. What moved was **everything, sideways**: opening
+  Record 013 takes the document 780 → 1347px, the scrollbar appears, the viewport
+  goes 403 → 390 and **18 elements above the change shift left**, including the
+  title bar's exit and all four covers. **Nothing in the museum's code is doing
+  it**, which is why four rounds of reading never found it. One declaration on
+  the root fixes it for every expander at once.
+- **A RUNTIME FILTER SHIPS THE MATERIAL — FOUR FOR FOUR (N3).** 35 `[PAPA]`
+  markers were sitting in the public bundle, including the Foundation's four
+  unpublished ledger figures, while `visitorProse` faithfully cut them at the
+  render seam. The launch strip is an **AST pass and not a regex**, because
+  marker sentences straddle concatenated literals and a per-literal rule would
+  ship copy Mike never approved. **Launch bundle: one marker, and it is the regex
+  that removes them.**
+- **M97 IS CLOSED AFTER FOUR ROUNDS AND THE RECIPE IS COMMITTED THIS TIME.** v50
+  solved the 390px lap with a same-origin iframe and lost the fix with a
+  gitignored scratch file. Eleven routes at 390px: **zero page-level horizontal
+  scroll, zero console errors**, and the four rounds of unverified phone rules
+  **held**. The one thing the lap found is on `/hr` — `div.pb-track` has
+  `clientWidth: 0`, so the player bar's track name is not narrow, it is absent
+  (N-j).
+- **TWO FALSE ALARMS WERE CAUGHT BEFORE THEY REACHED THE LOG**, and both are
+  worth knowing: `img.complete` read across a frame boundary reports loaded
+  images as broken, and **`document.cookie` cannot see the HttpOnly `wb_held`
+  cookie**, which made `/hr` rendering in a browser that holds one look exactly
+  like a permission hold that had failed. `curl` with no cookie gets 404 on all
+  three locked chunks. The door works.

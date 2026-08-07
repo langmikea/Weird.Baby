@@ -41,88 +41,8 @@
    "text": "MGK-VIIIp · PURVEYORS OF THE WEIRD set by the tool, and inside the badge the unit's OWN faceplate — MGK-VIIIp · The Informer · ABEAL — with the glass reading ABEAL MGK-VIIIp / LOADING SUCCESS. Object lettering, not museum copy.",
    "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
   },
-  "33b113f8dc0a7ea0": {
-   "ref": "/robots/reference/mgk-viii/chest_grille.jpg",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
-   "textInImage": true,
-   "text": "A small component maker's label on the black housing. Incidental object lettering.",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
-  "bdefcbf1e0c152d4": {
-   "ref": "/robots/reference/mgk-viii/head_lens.jpg",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
-   "textInImage": false,
-   "text": "",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
-  "697638fba348695c": {
-   "ref": "/robots/reference/mgk-viii/head_oblique.jpg",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
-   "textInImage": false,
-   "text": "",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
-  "214b3f500ebcbf7b": {
-   "ref": "/robots/reference/mgk-viii/limbs_lower.jpg",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
-   "textInImage": true,
-   "text": "Printed matter on the workbench behind the subject — partial words, incidental.",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
   "a8eb6f9b543bd6d2": {
    "ref": "/robots/reference/mgk-viii/column_lit.jpg",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
-   "textInImage": false,
-   "text": "",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
-  "e8b7a7b95da3778c": {
-   "ref": "/robots/reference/mgk-viii/bench_power.jpg",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
-   "textInImage": true,
-   "text": "Component silkscreen on the relay board. Incidental.",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
-  "f661da2f9eab4619": {
-   "ref": "/robots/reference/mgk-viii/torso_unfinished.jpg",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
-   "textInImage": true,
-   "text": "A component label reading CLIPPER on the black housing. Incidental object lettering.",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
-  "63731cc7309d1f3a": {
-   "ref": "/robots/reference/mgk-viii/feet_plinth.jpg",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
-   "textInImage": false,
-   "text": "",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
-  "b0bff08cf617f971": {
-   "ref": "/robots/reference/mgk-viii/slot_mockup.jpg",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
-   "textInImage": false,
-   "text": "",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
-  "6a896246567bfa12": {
-   "ref": "/robots/reference/mgk-viii/matrix_lit.jpg",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
-   "textInImage": false,
-   "text": "",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
-  "a52aa945a52341a2": {
-   "ref": "/robots/reference/mgk-viii/parts_drawer.jpg",
    "c": "VERIFIED",
    "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
    "textInImage": false,
@@ -215,14 +135,6 @@
    "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
    "textInImage": false,
    "text": "",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
-  "af9f3d66cb9f256f": {
-   "ref": "/robots/manual/structure-issue-p1.png",
-   "c": "VERIFIED",
-   "s": "the unit's own operating manual, per B8: the printed copy is the source; the plate is a photograph of it",
-   "textInImage": true,
-   "text": "THE WHOLE IMAGE IS TEXT — the manual's title page: MGK-VIIIp / OPERATING AND MAINTENANCE INSTRUCTIONS / STRUCTURE ISSUE / STRUCTURE AND ARRANGEMENT ONLY / TEXT NOT SUPPLIED / ABEAL / A DIVISION OF SCRAPCO / ENGINEERING DEPARTMENT / ABEAL 8P-OMI-1 REV. — / PRELIMINARY. FOR MIKE, AND IT IS THE ONE THING TO LOOK AT: the page's own type reads TEXT NOT SUPPLIED. In the fiction that is a fifth copy-state beside your four — an early issue circulated for arrangement before the text was set — and the caption is written to hold that reading. Read the other way it is the museum saying it has not written the manual yet, which would be Doctrine 11 on the glass. Your call if the reading is too thin. It is a photocopy of a TYPED page rather than clean digital type, which is a long step toward what B8's ruling actually asks for; it is still not a photograph of paper, so M4 stands.",
    "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
   },
   "1daeffcddc8bf65c": {

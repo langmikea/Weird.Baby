@@ -599,7 +599,11 @@ commit (Doctrine 14).
   observation, and the only sentence in the wing saying the plates establish what
   the machine is made OF and nothing about where any part came from. It also
   **orphaned `parts_drawer.jpg`**, which was neither deleted on Ops' word nor
-  re-homed onto a wall whose tombstone counts its plates (M9). The directory drops
+  re-homed onto a wall whose tombstone counts its plates (M9). **[K1 2026-08-07]
+  MIKE ANSWERED IT AND THE ANSWER IS KILL** — *"none are very good, and if that
+  view is ever needed it gets reshot"* — so that file and nine other operator
+  plates are off disk. The rule the sentence above states is UNCHANGED and was
+  never overridden: *not deleted on OPS' word.* This was his. The directory drops
   its one article (**Weird.Baby Foundation**; the room's own name untouched, M26)
   and **the Information Booth takes the bottom of the board**, exhibit order under
   it unchanged.

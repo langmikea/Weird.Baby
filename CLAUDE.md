@@ -494,54 +494,59 @@ anything in `public/` is one `npm run deploy` from being published.
 
 Maintained here. Newest first.
 
-### 2026-08-06 -> THE NIGHT ROUND (N1-N6) - sealed
-- **SIX INSTRUCTIONS, ALL SIX ANSWERED, AND TWO OF THEM TURNED OUT TO BE THE SAME
-  DEFECT IN TWO COSTUMES: something true, verifiable and wrong, that no amount of
-  reading source could find.** Gates: lint **11/9 = baseline** - build green -
-  provenance **PASS** (0 undeclared - **0 stale** - 0 invention) - `reveal:check`
-  **PASS** - `parity:gate` **PASS, 4 shared - 0 divergences** - `assets:orphans`
-  **0** - **`instory:gate` PASS (new)** - **the lap ran at 390px AND 1228px for
-  the first time in five rounds.** Full narrative:
-  `docs/MUSEUM_NIGHT_ROUND_LOG-20260806.md`.
-- **THE PROVENANCE REGISTER WAS THE EVIDENCE FOR N2's DEFECT, NOT THE DEFENCE
-  AGAINST IT.** Every spec row struck this round was classed `VERIFIED` with the
-  source *"the unit's own `.ino` trees, read off the files"* — the boundary was
-  working perfectly and recording, in writing, that a 1965 machine's spec sheet
-  was sourced from an Arduino. **Doctrine 13 asks whether a string HAS an origin;
-  it cannot ask whether the origin belongs to the fiction.** Ten rows struck
-  across the two faces; nine survive on the mainframe and every one describes the
-  object; **nothing was written to replace what went** (N-g, N-h). And **the
-  supply line is contaminated at the same seam** — six rows of the in-story
-  manual's own SPECIFICATIONS section cite the real firmware, and one lets
-  `NUM_PIXELS = 2` overrule the manual's *"one lamp"* (N-i).
-- **N4's RULE WAS BEING BROKEN ON THE AXIS NOBODY WOULD HAVE LOOKED AT.** Every
-  `<details>` in the museum is honest vertically — 0 of 24 above it in the booth,
-  0 of 47 in the wing FAQs. What moved was **everything, sideways**: opening
-  Record 013 takes the document 780 → 1347px, the scrollbar appears, the viewport
-  goes 403 → 390 and **18 elements above the change shift left**, including the
-  title bar's exit and all four covers. **Nothing in the museum's code is doing
-  it**, which is why four rounds of reading never found it. One declaration on
-  the root fixes it for every expander at once.
-- **A RUNTIME FILTER SHIPS THE MATERIAL — FOUR FOR FOUR (N3).** 35 `[PAPA]`
-  markers were sitting in the public bundle, including the Foundation's four
-  unpublished ledger figures, while `visitorProse` faithfully cut them at the
-  render seam. The launch strip is an **AST pass and not a regex**, because
-  marker sentences straddle concatenated literals and a per-literal rule would
-  ship copy Mike never approved. **Launch bundle: one marker, and it is the regex
-  that removes them.**
-- **M97 IS CLOSED AFTER FOUR ROUNDS AND THE RECIPE IS COMMITTED THIS TIME.** v50
-  solved the 390px lap with a same-origin iframe and lost the fix with a
-  gitignored scratch file. Eleven routes at 390px: **zero page-level horizontal
-  scroll, zero console errors**, and the four rounds of unverified phone rules
-  **held**. The one thing the lap found is on `/hr` — `div.pb-track` has
-  `clientWidth: 0`, so the player bar's track name is not narrow, it is absent
-  (N-j).
-- **TWO FALSE ALARMS WERE CAUGHT BEFORE THEY REACHED THE LOG**, and both are
-  worth knowing: `img.complete` read across a frame boundary reports loaded
-  images as broken, and **`document.cookie` cannot see the HttpOnly `wb_held`
-  cookie**, which made `/hr` rendering in a browser that holds one look exactly
-  like a permission hold that had failed. `curl` with no cookie gets 404 on all
-  three locked chunks. The door works.
+### 2026-08-07 -> THE DICTATION PREP (K1-K6) - sealed
+- **SIX INSTRUCTIONS, ALL SIX ANSWERED, AND THE ROUND'S LARGEST FINDING IS THAT
+  ONE INSTRUCTION'S OWN PREMISE WAS WRONG.** Gates: lint **11/9 = baseline** -
+  build green - provenance **PASS** (0 undeclared - 0 stale - 0 invention) -
+  `reveal:check` **PASS** - `parity:gate` **PASS, 4 shared - 0 divergences** -
+  `instory:gate` **PASS** - `assets:orphans` **0** - the four new pages lapped at
+  **390px AND 1228px**, zero page scroll, zero console errors. Full narrative:
+  `docs/MUSEUM_DICTATION_PREP_LOG-20260807.md`. **The path Mike opens:**
+  `docs/dictation-20260807/index.html`, rebuilt with **`npm run dictation`**.
+- **K5 ASKED FOR "WEEK 1 AS IT STANDS" AND NONE OF IT EXISTS.** No day-by-day
+  outline, no week headline, no topic list, no `weight` field, in either
+  repository. **So the frame is built and every content slot is empty**, with the
+  finding printed at the top of the page rather than buried: five plausible day
+  headlines would have been unmistakable tomorrow and unattributable next week,
+  which is the one failure mode the instruction itself named. **Gold rail = his,
+  blue rail = Ops derived it and the rule is named, red slot = not written**;
+  nothing on that page is unlabelled. Register K-b.
+- **THE ELEVEN PHOTOGRAPHS ARE KILLED AND THE PRECEDENT THEY SET IS NOT
+  REVERSED** (K1). N1's rule reads *"a real photograph this museum owns is not
+  deleted on OPS' word"* — unchanged, exactly as written; C-a put the
+  irreversibility to Mike and he answered. **What `egg.niac.operator` is left
+  with is three plates, all upstream and all regenerable** from `IMG_1526.MOV`
+  under the robots repo's own crop table; **the museum now holds nothing of the
+  robot**, and the ledger row says so. **The manual's title page cost nothing at
+  all** — byte-identical to page 1 of the sixty-one the robots repo generates, so
+  the delete removed a duplicate. Three stale claims went with the files and one
+  had been false since P7.
+- **THE NEW TRACKER FOUND A HOLE IN AN OLD ONE ON ITS FIRST RUN (K-a), AND IT IS
+  §8's TWO-ADDRESSES HAZARD IN ITS QUIETEST FORM.** `assets:orphans` reports 0
+  while three rows carry `missing:true` — correct by its own definition, which
+  counts `missing && isJudged`. Two of the three are the **public-side twins** of
+  pictures that moved behind the stage door, so the same photograph is in the
+  table twice, once at each address. **The tracker's first cut counted them as
+  reachable and said 18; the true number is 16.**
+- **K2 IS THE MISSING ITEM IN N-g AND N-h AND IT IS ASSEMBLED, NOT WRITTEN.**
+  163 rows across both machines — **18 CONTRADICTED with both readings printed,
+  20 ABSENT, 8 flagged REAL-BUILD SOURCE** under Doctrine 18, which is N-i's
+  finding made visible on the sheet Mike authors from. **The manual's own
+  twelve-section structure was the named candidate and does not serve a
+  one-sheet** — ten of the twelve are procedures — so the grouping is the period
+  specification's own and every heading carries its manual position instead
+  (K-d).
+
+### 2026-08-06 -> THE NIGHT ROUND (N1-N6) - archived
+Moved verbatim to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md` under this file's
+own ~600-line rule. **What is still load-bearing in it is NOT in the archive:**
+N2's Doctrine 18 is `npm run instory:gate` and the THREE STANDING RULES section
+above; N4's expander rule is `scrollbar-gutter: stable` in `src/index.css` and is
+that section too; N3's `[PAPA]` strip is `wb-ops-notes` in `vite.config.js` with
+`visitorProse` unchanged to the character; and **N5's 390px recipe is
+`tools/lap/harness.html` and `npm run lap`** — a 403px same-origin iframe, which
+is what this round's own four pages were lapped with. **N-j is still open** and
+is the one thing that lap found on `/hr`.
 
 ### 2026-08-06 -> THE VISIBILITY RULE + FORMAT CONFORMANCE (V1-C1) - archived
 Moved verbatim to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md` under this file's
@@ -557,45 +562,20 @@ the 390px lap not running; N5 closed it.**
 
 
 ### Older entries (2026-05-06 → 2026-08-06) — archived
-Moved to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md`, verbatim, under this file's own
-≈600-line rule. **2026-08-06 (THE VISIBILITY RULE):** THE PORTAL HOLD + THE PULL-BACK
-(H1–H8), moved whole. What is still load-bearing in it is NOT in the archive: **H1's
-two doors are now FOUR in two pairs and are the paragraph at the top of this file plus
-`OPERATIONS.md` §5's THE STAGE and A HELD THING MUST BE UNREACHABLE rows**; H2's
-pull-back sentence is unchanged and is scoped by THE VISIBILITY RULE in `STATE.md`;
-its `run_worker_first` outage is §8's own hazard row and now guards four entries
-rather than two; H7's contact sheet is `npm run contact-sheet` and is what made this
-round's cull findable; and **M99 is CLOSED** — the drift it guarded was H2's own hand
-edit, and V1 decided which file is the source. **2026-08-06 (THE PORTAL HOLD):** THE COMBINED BRIEF (D1–D3 · A1–A3 · L1 · F1–F8
-· W1–W2 · V1–V2 · C1–C4), moved whole. What is still load-bearing in it is NOT in the
-archive: **A1's one-frame ruling and A2's one-permitted-difference are `OPERATIONS.md`
-§5's THE HOUSE'S ONE FRAME row**, and this round extended that row's own scope by
-deleting the last per-face exception under it; D1–D3's opening sizes are the §5 THE
-ROOM'S OPENING SIZES row; A3's house sleeves are `tools/make_house_covers.py` and its
-`--verify`; F1–F8's Foundation albums are the §5 row of that name; **and its
-`assets-declare` hazard (M99) is no longer a hazard but a refusal — see §8**.
-**2026-08-06 (THE COMBINED BRIEF):** TWO AT ONCE — MIKE'S PAGE-BY-PAGE (L1 · R1–R7 ·
-P1–P6 · N1–N11 · X1) and THE PRE-COMMENTARY ROUND (H1–H8). The file was at 610 before
-this round's entry and would have finished at 637 with one moved; two brings it to
-594. What is still load-bearing in the PAGE-BY-PAGE entry is NOT in the archive:
-**R3's Record budgets are `OPERATIONS.md` §5 and `tools/reveal-ledger.mjs`**, and its
-two halves — no truncation in the render, no over-long string in the data — are the
-mechanism THIS round applied a second time, to the guest book; R4's 68ch measure and
-its *slack on the right is deliberate* is what D1's left-justified viewer inherits;
-R7's accordion is the §5 FAQ FORMAT row and survived F3's split of the Foundation's
-questions into two tracks; N3's `DocList` and N9's `ArchivePresets` are the same row,
-and `face.presets` is the mechanism C3 proposes and does not build; **M97 is the 390px
-lap and it did not run again this round.** And the PRE-COMMENTARY entry: **H1's lock
-is `OPERATIONS.md` §5 THE HELD WING and the `/hr` paragraph at the top of this file**,
-its `run_worker_first` outage is §8's own hazard row — the one a future session will
-trip by adding a path to that list — and H2's audit is
-`docs/HR_PERMISSION_AUDIT-20260806.md` with M80 as its unnamed item. **The older notes
-— 2026-08-06 (MIKE'S PAGE-BY-PAGE) back through 2026-08-05 (v53) — are in the archive
-file with the rounds they point at.** They were a chain of "moved whole, and here is
-where the live part lives" pointers, and every live part they name is a row in
-`docs/canonical/OPERATIONS.md` §5, which is where a session should be reading anyway.
-Moved rather than deleted, under this file's own ≈600-line rule; the round entries
-themselves were already there.
+Moved verbatim to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md` under this file's own
+≈600-line rule: THE PORTAL HOLD + THE PULL-BACK (H1–H8) · THE COMBINED BRIEF (D1–D3 ·
+A1–A3 · L1 · F1–F8 · W1–W2 · V1–V2 · C1–C4) · MIKE'S PAGE-BY-PAGE (L1 · R1–R7 · P1–P6 ·
+N1–N11 · X1) · THE PRE-COMMENTARY ROUND (H1–H8), and everything back to 2026-05-06.
+
+**[K1 2026-08-07] THIS BLOCK WAS FORTY LINES OF POINTER-CHAIN AND IS NOW FIVE, ON ITS
+OWN FINAL SENTENCE.** It said, of every archived round in turn, *here is where the live
+part lives* — and then closed by saying that **every live part it names is a row in
+`docs/canonical/OPERATIONS.md` §5, which is where a session should be reading anyway.**
+That sentence made the other thirty-five redundant the moment it was written; the Law of
+Subtraction says what is redundant goes. **Nothing was lost:** the round entries are in
+the archive file whole, and each live mechanism is a §5 row, a §8 hazard row, or a
+paragraph at the head of THIS file. If you need to know what an archived round decided,
+read §5 first and the archive second.
 
 ## Conventions for updating this file
 

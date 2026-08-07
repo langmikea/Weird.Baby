@@ -236,7 +236,7 @@ FACE("niac.name", "THE NAME — built as MGK-NIAC, sold as MGK-VIII.", "LIVE", "
 FACE("niac.plates", "IMAGE ARCHIVE (MGK-NIAC) — four details of a cabinet never shown whole.", "LIVE", "REVEALED",
   { note: "[H2 2026-08-06] THE WALL IS EMPTY AND THE WALL IS STILL BUILT. Four plates came off it under THE PULL-BACK RULE and the face carries `archiveEmpty` instead — the groupings, the unit noun and the reader are untouched, and a Record entry that delivers a plate puts it back with no code. [R4] EIGHT PLATES TO FOUR. Six were the robot and one was a bench shot with its feet in it; all seven are off the wall and none is deleted from disk (M9). Three came the other way out of the robots repo's own culled 2021 set — the core, the output row, the meltdown. It also lost the February 2013 spread and with it the museum's ONLY stowed shelf, so N2's <details> mechanism is now exercised nowhere — C29." });
 FACE("niac.firmware", "TECHNICAL SPECIFICATIONS (MGK-NIAC) — what the machine is running.", "LIVE", "REVEALED",
-  { note: "[H2 2026-08-06] PULLED BACK — no Record entry delivers this picture, so the face no longer shows one and the file is behind the door under public/held/. [R4] Its still was a breadboard on a bench and is now the cabinet's own bar bank, which is both the mainframe and the literal subject of the face's 1 × 64 entry. `matrix_lit.jpg` is orphaned by the swap — M9." });
+  { note: "[H2 2026-08-06] PULLED BACK — no Record entry delivers this picture, so the face no longer shows one and the file is behind the door under public/held/. [R4] Its still was a breadboard on a bench and is now the cabinet's own bar bank, which is both the mainframe and the literal subject of the face's 1 × 64 entry. [K1 2026-08-07] The breadboard plate `matrix_lit.jpg` was orphaned by that swap and carried as M9 for three rounds; Mike killed it with the other ten and M9's robot half closes with them." });
 FACE("viiip.plates", "IMAGE ARCHIVE (MGK-VIIIp) — nine plates, as received.", "LIVE", "REVEALED",
   { note: "[H2 2026-08-06] THE WALL IS EMPTY AND THE WALL IS STILL BUILT — nine plates off under THE PULL-BACK RULE, `archiveEmpty` in their place. M7 and M25 are both moot while nothing is on the wall and both come back with the plates. One of the nine, the power switch round the back, IS delivered by Record 013 and is on that entry." });
 FACE("viiip.manual", "THE MANUAL — the 1965 operating and maintenance manual.", "PARTIAL", "REVEALED",
@@ -632,10 +632,10 @@ R("egg.channels", "The Portal's channel numbering — the mainframe on 1 and 2, 
    the glass; `shown` is FALSE because nothing anywhere hints at it, which is
    the difference between an egg and a promise. */
 R("egg.niac.operator", "The robot that operates the mainframe — the reason NIAC needs one at all.",
-  "egg", "the physical world; plates in weird-baby-robots and public/held/robots/reference/mgk-viii", "LIVE",
+  "egg", "the physical world; three plates in weird-baby-robots/robots/mgk-viii/plates/2021-03-19", "LIVE",
   null, "HELD",
-  { deps: ["Mike's ruling on when it is spent"],
-    note: "The material is IN HAND and unpublished: seven plates in this repo (head at the lens, head three-quarters, chest and shoulders, lower limbs, unfinished torso, feet on a plinth, a slot mock-up) and three more in the robots repo's culled set (the eye, the shoulder, the hand on the control). All ten are on disk, none is referenced by the site. Spending it is one data block and no code — which is exactly what makes holding it a decision rather than a shortage." });
+  { deps: ["Mike's ruling on when it is spent", "a photograph, if the egg is ever to be spent on the glass"],
+    note: "[K1 2026-08-07] THE MUSEUM'S SEVEN PLATES ARE DELETED AND THIS ROW IS WHAT THAT COST, WRITTEN DOWN. Mike ruled the eleven held photographs killed — *\"none are very good, and if that view is ever needed it gets reshot\"* — and seven of them were this egg's only material in this repository (head at the lens, head three-quarters, chest and shoulders, lower limbs, unfinished torso, feet on a plinth, a slot mock-up). They are off disk and out of both provenance files. **THE EGG SURVIVES AND ITS MATERIAL IS NOW THREE PLATES, ALL OF THEM UPSTREAM AND ALL OF THEM REGENERABLE**: `MAGIC8-2021-P01-the-eye.jpg`, `P02-the-shoulder.jpg` and `P04-the-hand-on-control.jpg` in the robots repo's culled 2021 set — the eye, the shoulder, the hand on the control — cut from `IMG_1526.MOV` under that repo's OBFUSCATION_LAW, with the crop rectangles recorded so any of them can be rebuilt from the source video. `build` stays LIVE because the material still exists; what changed is that it exists in ONE repository instead of two, and none of it is here. Spending it is still one data block and no code, and now it is also one file copy." });
 
 /* ═══ [N9 2026-08-06] THE PRESET AS AN EGG SURFACE — MIKE'S OWN CONSEQUENCE ══
    He gave the archive's groupings as a curation instruction and then named the
@@ -804,7 +804,7 @@ const RET = (id, name, when) =>
 RET("hr.home", "/hr/home — a stock interior photo with four room names painted into the JPEG.", "deleted v46/C3");
 RET("hr.fanwall", "/hr/fan-wall — thirteen fabricated fan testimonials.", "deleted v46/C3");
 RET("hr.media", "/hr/media — one line reading '— coming soon.'", "deleted v46/C3");
-RET("robots.parts", "THE PARTS — a whole face on the MGK-NIAC album.", "deleted v50/N1; orphaned parts_drawer.jpg — M9");
+RET("robots.parts", "THE PARTS — a whole face on the MGK-NIAC album.", "deleted v50/N1; orphaned parts_drawer.jpg, which Mike killed at K1 2026-08-07 — M9 closes");
 /* [R3 2026-08-05] THE THREE FRONT-DESK FACES. Struck on Mike's instruction to
    simplify the robots homepage; what survived each is folded into the FAQ, and
    what was deleted outright is named in robots.js above the FAQ rather than

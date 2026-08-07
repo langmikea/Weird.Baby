@@ -947,15 +947,20 @@ const spine = [
        recorded in `reveal/ledger.json` where the house keeps things it holds
        and does not show. ══════════════════════════════════════════════════ */
     /* [A1 2026-08-04, re-cut R4] THE COVER IS THE WING'S OWN TEMPLATE — see the
-       note above the MGK-VIIIp album's `art` for the whole ruling. The badge is
-       `core_helical.jpg`, still A DETAIL, because this museum holds no
-       photograph of this machine whole; the archive below says so in its own
-       tombstone. It closes register M30: the badge used to be the same
-       photograph as the still on the face one press down, and the two now
-       carry different plates. The superseded `mgk-viii-cover.jpg` is left on
-       disk and unreferenced, exactly as N1 left `parts_drawer.jpg` — a real
-       photograph this museum owns is not deleted by a cover change, and it is
-       not re-homed onto a wall whose tombstone counts its plates. Register M9. */
+       note above the MGK-VIIIp album's `art` for the whole ruling. It closes
+       register M30: the badge used to be the same photograph as the still on
+       the face one press down, and the two now carry different plates.
+       [K1 2026-08-07] TWO SENTENCES OF THIS NOTE WERE FALSE AND ONE OF THEM
+       HAD BEEN FALSE SINCE P7. It said the badge is `core_helical.jpg` and
+       still a DETAIL because the museum holds no photograph of the machine
+       whole — P7 replaced it with `cabinet_whole.jpg`, which IS that
+       photograph, cut from the 2021 build video at the cabinet's own bounding
+       box, and D5 made it ride the ring whole rather than as a crop. It also
+       cited `parts_drawer.jpg` as the standing precedent for keeping a
+       superseded photograph on disk. Mike killed that file, and nine more,
+       and the manual's title page. THE PRECEDENT IS NOT REVERSED — *a real
+       photograph this museum owns is not deleted on OPS' word* is exactly
+       what it always said, and this was not Ops' word. Register M9 closes. */
     /* [H2 2026-08-06] PULLED BACK — the cover and the poster are both
        photographs of the object and no Record entry has delivered one.
        [V1 2026-08-06] AND THE PULL-BACK IS A LAUNCH-STATE RULE NOW, so this is
@@ -1366,12 +1371,16 @@ const spine = [
          place in the wing that said the plates establish what the machine is
          made OF and nothing whatever about where any single part came from.
          The four-line materials register (head, chest, limbs, feet) went too.
-         AND IT ORPHANS A PHOTOGRAPH. `/robots/reference/mgk-viii/parts_drawer.jpg`
-         is now referenced by nothing — it was this face's plate and appears on
-         no wall. It is a real photograph the museum owns, so it is NOT deleted
-         on Ops' word and it is NOT re-homed onto the Image Archive either, which
-         would be adding a photograph nobody asked for to a wall whose groupings
-         count them. It is a register row for Mike. */
+         AND IT ORPHANED A PHOTOGRAPH, WHICH IS NOW ANSWERED.
+         `/robots/reference/mgk-viii/parts_drawer.jpg` was referenced by nothing
+         after this face left — a real photograph the museum owned, so N1 would
+         not delete it on Ops' word, would not re-home it onto a wall whose
+         groupings count their plates, and made it a register row for Mike
+         instead (C-a). [K1 2026-08-07] HE ANSWERED IT, AND THE ANSWER IS KILL:
+         *"none are very good, and if that view is ever needed it gets
+         reshot."* The file is gone with the other nine operator plates. What
+         the face itself took with it when it went is still named above, and
+         that half is still not recoverable from anything else in the wing. */
     ],
   },
   {

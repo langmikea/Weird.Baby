@@ -66,21 +66,18 @@ const A = [
     "MGK-NIAC · PURVEYORS OF THE WEIRD — the model number and the house strapline, both set by tools/make_unit_covers.py. The badge photograph carries no lettering."],
   ["/robots/art/mgk-viiip-cover.png", "VERIFIED", COVER, true,
     "MGK-VIIIp · PURVEYORS OF THE WEIRD set by the tool, and inside the badge the unit's OWN faceplate — MGK-VIIIp · The Informer · ABEAL — with the glass reading ABEAL MGK-VIIIp / LOADING SUCCESS. Object lettering, not museum copy."],
-  ["/robots/reference/mgk-viii/chest_grille.jpg", "VERIFIED", PHOTO, true,
-    "A small component maker's label on the black housing. Incidental object lettering."],
-  ["/robots/reference/mgk-viii/head_lens.jpg", "VERIFIED", PHOTO, false, ""],
-  ["/robots/reference/mgk-viii/head_oblique.jpg", "VERIFIED", PHOTO, false, ""],
-  ["/robots/reference/mgk-viii/limbs_lower.jpg", "VERIFIED", PHOTO, true,
-    "Printed matter on the workbench behind the subject — partial words, incidental."],
+  /* [K1 2026-08-07] THE TEN OPERATOR PLATES ARE DELETED, ON MIKE'S RULING —
+     *"none are very good, and if that view is ever needed it gets reshot."*
+     C-a put the decision to him with the irreversibility stated (the museum
+     held the only copies of these ten files) and he answered it. `bench_power`,
+     `chest_grille`, `feet_plinth`, `head_lens`, `head_oblique`, `limbs_lower`,
+     `matrix_lit`, `parts_drawer`, `slot_mockup`, `torso_unfinished` are off
+     disk, out of `asset-table.json` and out of `assets.json`. THE PRECEDENT
+     THEY SET IS REVERSED WITH THEM — *"a real photograph the museum owns is
+     not deleted on Ops' word"* stands exactly as written; this is not Ops'
+     word. `column_lit.jpg` survives because it is a MAINFRAME plate and is on
+     the Image Archive wall. */
   ["/robots/reference/mgk-viii/column_lit.jpg", "VERIFIED", PHOTO, false, ""],
-  ["/robots/reference/mgk-viii/bench_power.jpg", "VERIFIED", PHOTO, true,
-    "Component silkscreen on the relay board. Incidental."],
-  ["/robots/reference/mgk-viii/torso_unfinished.jpg", "VERIFIED", PHOTO, true,
-    "A component label reading CLIPPER on the black housing. Incidental object lettering."],
-  ["/robots/reference/mgk-viii/feet_plinth.jpg", "VERIFIED", PHOTO, false, ""],
-  ["/robots/reference/mgk-viii/slot_mockup.jpg", "VERIFIED", PHOTO, false, ""],
-  ["/robots/reference/mgk-viii/matrix_lit.jpg", "VERIFIED", PHOTO, false, ""],
-  ["/robots/reference/mgk-viii/parts_drawer.jpg", "VERIFIED", PHOTO, false, ""],
   ["/robots/art/viiip.png", "VERIFIED",
     "the front-view photograph with the twin's own framebuffer composited at the measured aperture; provenance in the robots repo's STATE.md, THE NIGHT RUN",
     true, "MGK-VIIIp · The Informer · ABEAL on the faceplate, and the front glass carries the BIOS beat."],
@@ -110,29 +107,17 @@ const A = [
   ["/robots/reference/mgk-viii/core_helical.jpg", "VERIFIED", PHOTO, false, ""],
   ["/robots/reference/mgk-viii/output_row.jpg", "VERIFIED", PHOTO, false, ""],
   ["/robots/reference/mgk-viii/core_meltdown.jpg", "VERIFIED", PHOTO, false, ""],
-  /* [G1 2026-08-05] REPLACES `working-copy-p1.png`, WHICH WAS A PAGE OF A
-     DOCUMENT THAT NO LONGER EXISTS. The museum's copy came from
-     `robots/mgk-viiip/manual/pages/page-01.png`; the robots repo's typewriter
-     pass retired that whole tree and rebuilt the manual as a STRUCTURE ISSUE,
-     so the museum was showing the title page of a retired render. Deleted
-     rather than kept as an orphan — the precedent for keeping a superseded
-     file (parts_drawer, mgk-viii-cover) is that a REAL PHOTOGRAPH the museum
-     owns is not deleted on Ops' word. This was a generated raster whose
-     generator is gone, and its source was deleted upstream first. */
-  ["/robots/manual/structure-issue-p1.png", "VERIFIED",
-    "the unit's own operating manual, per B8: the printed copy is the source; the plate is a photograph of it",
-    true,
-    "THE WHOLE IMAGE IS TEXT — the manual's title page: MGK-VIIIp / OPERATING AND MAINTENANCE "
-    + "INSTRUCTIONS / STRUCTURE ISSUE / STRUCTURE AND ARRANGEMENT ONLY / TEXT NOT SUPPLIED / "
-    + "ABEAL / A DIVISION OF SCRAPCO / ENGINEERING DEPARTMENT / ABEAL 8P-OMI-1 REV. — / "
-    + "PRELIMINARY. FOR MIKE, AND IT IS THE ONE THING TO LOOK AT: the page's own type reads "
-    + "TEXT NOT SUPPLIED. In the fiction that is a fifth copy-state beside your four — an early "
-    + "issue circulated for arrangement before the text was set — and the caption is written to "
-    + "hold that reading. Read the other way it is the museum saying it has not written the "
-    + "manual yet, which would be Doctrine 11 on the glass. Your call if the reading is too "
-    + "thin. It is a photocopy of a TYPED page rather than clean digital type, which is a long "
-    + "step toward what B8's ruling actually asks for; it is still not a photograph of paper, "
-    + "so M4 stands."],
+  /* [K1 2026-08-07] AND THE MANUAL'S TITLE PAGE GOES WITH THEM, on the same
+     ruling and with one difference worth writing down: THIS ONE COSTS NOTHING.
+     `structure-issue-p1.png` was byte-identical to
+     `weird-baby-robots/robots/mgk-viiip/manual/structure/pages/page-01.png`
+     (sha256 cfac1d3b…, 100,077 B) — one of sixty-one pages that repo generates
+     from `tools/manual_structure_build.py`. The museum was holding a COPY of a
+     page whose source is upstream and regenerable, so the delete removes a
+     duplicate rather than an original. G1's note below this line used to
+     record the file's arrival and the open question its own type raised (M4 —
+     it is a render, not a photograph of a print); the question is upstream's,
+     and it stays upstream. */
 
   // ---- the house's own ---------------------------------------------------
   // [A3 2026-08-06] THE HOUSE SLEEVES, ON THE ROBOTS COVER'S OWN GEOMETRY.

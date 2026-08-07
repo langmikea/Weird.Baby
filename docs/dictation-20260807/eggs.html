@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE EGG TRACKER — 2026-08-07</title>
+<style>
+:root{color-scheme:light dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;--redfg:#f0c9c4;
+ --grn:#7fa86a;--blu:#8fa8c4;--amb:#e08a5a}
+*{box-sizing:border-box}
+body{margin:0;padding:28px 26px 110px;background:var(--bg);color:var(--fg);
+ font:15px/1.55 -apple-system,"Segoe UI",system-ui,sans-serif}
+.wrap{max-width:1180px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:21px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 8px}
+.back{font-size:12px;color:var(--dim2);margin:0 0 22px}
+h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:34px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:22px 0 8px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:15px 17px;margin:0 0 26px;border-radius:3px}
+.note p{margin:0 0 10px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+.ask{border-left:3px solid var(--red);padding-left:12px;color:var(--redfg)}
+.ops{border-left:3px solid var(--blu);padding-left:12px}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc}
+/* A five-column table cannot fit a phone and must not be made to try. The
+   TABLE scrolls inside its own box; the PAGE never scrolls sideways. */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tw table{min-width:760px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:6px 9px 6px 0;position:sticky;top:0;background:var(--bg)}
+td{border-bottom:1px solid var(--line2);padding:8px 9px 8px 0;vertical-align:top}
+tr.hide{display:none}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.y{border-color:#4a6a3a;color:var(--grn)}
+.tag.n{border-color:#6a3a30;color:var(--amb)}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.b{border-color:#3a5570;color:var(--blu)}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.bar input{background:var(--panel);border:1px solid var(--line);color:var(--fg);padding:6px 10px;
+ border-radius:3px;font:13px/1.4 inherit;width:280px}
+.bar button{background:transparent;border:1px solid var(--line);color:var(--dim);padding:5px 11px;
+ border-radius:3px;font:11px/1.3 inherit;letter-spacing:.09em;text-transform:uppercase;cursor:pointer;margin-left:5px}
+.bar button[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.count{font-size:12px;color:var(--dim2);margin-left:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:14px 15px}
+.card h4{margin:0 0 4px;font-size:14px;color:var(--fg)}
+.card .id{font-family:ui-monospace,Consolas,monospace;font-size:11px;color:var(--blu);margin:0 0 8px}
+.card p{margin:0 0 8px;font-size:13px}
+.card .meta{font-size:12px;color:var(--dim);margin:0}
+.k{color:var(--dim2)}
+.day{border:1px solid var(--line);border-radius:3px;margin:0 0 18px;overflow:hidden}
+.day > .hd{background:var(--panel);padding:12px 15px;border-bottom:1px solid var(--line)}
+.day > .hd .n{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim2)}
+.day > .hd .slot{display:block;margin-top:5px;font-size:16px;color:var(--red);font-style:italic}
+.day > .bd{padding:13px 15px}
+.mine{border-left:3px solid var(--gold);padding-left:11px;margin:0 0 12px}
+.mine .lbl,.scaf .lbl{font-size:10px;letter-spacing:.13em;text-transform:uppercase;display:block;margin-bottom:4px}
+.mine .lbl{color:var(--gold)}
+.scaf{border-left:3px solid var(--blu);padding-left:11px;margin:0 0 12px}
+.scaf .lbl{color:var(--blu)}
+ul{margin:0 0 10px;padding-left:19px}li{margin:0 0 5px}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--dim2);font-size:12px}
+@media (max-width:720px){body{padding:20px 14px 80px}.bar input{width:100%}}
+</style></head><body>
+<div class="wrap">
+<p class="back"><a href="index.html">&larr; the dictation prep</a> &middot; Ops&#8209;to&#8209;Mike, 2026-08-07 &middot; not part of the museum</p>
+<h1>The egg tracker</h1>
+<p class="sub">15 rows in the ledger &middot; 7 planted &middot; 3 spent &middot; 5 waiting &middot; and 3 that are not in the table at all</p>
+
+<div class="note">
+<p><b>PLANTED</b> means built, held, and nobody told &mdash; it exists in the tree
+today and finding it is the visitor's job. <b>SPENT</b> means it is on the glass;
+whoever finds it, finds it, and nothing there is recoverable. <b>WAITING</b>
+means an idea with a row and no build, ledgered so it is not a thing somebody
+remembers hearing once.</p>
+
+<p><b>4 EGGS HAVE NO WRITTEN FORM ANYWHERE BUT THEIR LEDGER
+ROW.</b> The <code>note</code> field IS the egg &mdash; it is printed on no page,
+in either repository, by Mike's own instruction that the reason must not be
+explained on the glass. Explaining one on a face would spend it in the same
+commit that planted it.</p>
+
+<p class="ask"><b>AND NOTHING IN THIS MUSEUM REPORTS AN EGG BEING TRIPPED.</b>
+So <i>planted</i> is a statement about the tree and never about a visitor. The
+poke is the standing gate on every future egg by your own ruling &mdash;
+<i>do not bother with a next-level egg until this one at least catches on</i>
+&mdash; and that condition is met by your word, not by a number.</p>
+</div>
+
+<div class="bar">
+  <input id="q" placeholder="filter — name, mechanism, dependency, note&hellip;">
+  <button data-f="all" aria-pressed="true">all</button>
+  <button data-f="planted">planted</button>
+  <button data-f="spent">spent</button>
+  <button data-f="waiting">waiting</button>
+  <span class="count" id="c"></span>
+</div>
+<div class="cards" id="grid">
+<div class="card" data-t="egg.replay the sandbox replay — the install, step by step, as an egg-hosting surface. weird-baby-robots/tools/viiip_twin.html a reason to tempt someone with it wired; currently an unexposed recipe."
+   data-s="planted">
+  <h4>The sandbox replay — the install, step by step, as an egg-hosting surface.</h4>
+  <p class="id">egg.replay</p>
+  <p><span class="tag g">HELD</span>
+     <span class="tag">build LIVE</span>
+     <span class="tag ">nothing hints at it</span></p>
+  <p class="meta"><span class="k">mechanism &middot;</span> <code>weird-baby-robots/tools/viiip_twin.html</code>
+     </p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span>
+     a reason to tempt someone with it</p>
+  <p class="meta" style="margin-top:9px;border-top:1px solid var(--line2);padding-top:8px">Wired; currently an unexposed recipe.</p>
+</div>
+<div class="card" data-t="egg.passcode the passcode kicker — reserved egg real estate in the boot chatter. weird-baby-robots/tools/viiip_twin.html mike writing the egg egg-slot marks exist in boot3_chatter. no eggs invented."
+   data-s="planted">
+  <h4>The passcode kicker — reserved egg real estate in the boot chatter.</h4>
+  <p class="id">egg.passcode</p>
+  <p><span class="tag g">HELD</span>
+     <span class="tag">build STUB</span>
+     <span class="tag ">nothing hints at it</span></p>
+  <p class="meta"><span class="k">mechanism &middot;</span> <code>weird-baby-robots/tools/viiip_twin.html</code>
+     </p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span>
+     Mike writing the egg</p>
+  <p class="meta" style="margin-top:9px;border-top:1px solid var(--line2);padding-top:8px">EGG-SLOT marks exist in Boot3_Chatter. No eggs invented.</p>
+</div>
+<div class="card" data-t="egg.name the name egg — with a name and birthdate on file the horoscope menu grows a row wearing the user's name. weird-baby-robots/tools/viiip_twin.html  the reading itself never carries the name — it is written to a sign, not to a person."
+   data-s="spent">
+  <h4>The name egg — with a name and birthdate on file the Horoscope menu grows a row wearing the user's name.</h4>
+  <p class="id">egg.name</p>
+  <p><span class="tag y">REVEALED</span>
+     <span class="tag">build LIVE</span>
+     <span class="tag ">nothing hints at it</span></p>
+  <p class="meta"><span class="k">mechanism &middot;</span> <code>weird-baby-robots/tools/viiip_twin.html</code>
+     <br><span class="k">reached by &middot;</span> give the machine a name and a birthdate</p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span>
+     <i>nothing — it is where it is by choice</i></p>
+  <p class="meta" style="margin-top:9px;border-top:1px solid var(--line2);padding-top:8px">The reading itself NEVER carries the name — it is written to a sign, not to a person.</p>
+</div>
+<div class="card" data-t="egg.calculator the calculator egg class — 80085 / 07734. weird-baby-robots/tools/viiip_twin.html  "
+   data-s="spent">
+  <h4>The calculator egg class — 80085 / 07734.</h4>
+  <p class="id">egg.calculator</p>
+  <p><span class="tag y">REVEALED</span>
+     <span class="tag">build LIVE</span>
+     <span class="tag ">nothing hints at it</span></p>
+  <p class="meta"><span class="k">mechanism &middot;</span> <code>weird-baby-robots/tools/viiip_twin.html</code>
+     <br><span class="k">reached by &middot;</span> type it</p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span>
+     <i>nothing — it is where it is by choice</i></p>
+  
+</div>
+<div class="card" data-t="egg.cloud-alert the alert — the assistant accidentally reveals it is listening and reporting back. ledger #9. weird-baby-robots/tools/viiip_twin.html ask_count_20 message wording ([papa]) delivery is built and triggers on the twentieth question. under the 50kft fiction this stops being an accident and becomes evidence the uplink is live."
+   data-s="planted">
+  <h4>The ALERT — the assistant accidentally reveals it is listening and reporting back. Ledger #9.</h4>
+  <p class="id">egg.cloud-alert</p>
+  <p><span class="tag g">HELD</span>
+     <span class="tag">build PARTIAL</span>
+     <span class="tag ">nothing hints at it</span></p>
+  <p class="meta"><span class="k">mechanism &middot;</span> <code>weird-baby-robots/tools/viiip_twin.html</code>
+     </p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span>
+     ask_count_20; message wording ([PAPA])</p>
+  <p class="meta" style="margin-top:9px;border-top:1px solid var(--line2);padding-top:8px">Delivery is built and triggers on the twentieth question. Under the 50Kft fiction this stops being an accident and becomes evidence the uplink is live.</p>
+</div>
+<div class="card" data-t="egg.passcodes-msg pass codes — a recording of unknown origin reading 0000, 69, 80085. the in-fiction path to learning a passcode. weird-baby-robots/tools/viiip_twin.html ask_count_40 the audio asset is unconfirmed "
+   data-s="planted">
+  <h4>PASS CODES — a recording of unknown origin reading 0000, 69, 80085. The in-fiction path to learning a passcode.</h4>
+  <p class="id">egg.passcodes-msg</p>
+  <p><span class="tag g">HELD</span>
+     <span class="tag">build PARTIAL</span>
+     <span class="tag ">nothing hints at it</span></p>
+  <p class="meta"><span class="k">mechanism &middot;</span> <code>weird-baby-robots/tools/viiip_twin.html</code>
+     </p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span>
+     ask_count_40; the audio asset is unconfirmed</p>
+  
+</div>
+<div class="card" data-t="egg.morse still listening — a system message the machine keys in morse. weird-baby-robots/tools/viiip_twin.html ask_count_60 "
+   data-s="planted">
+  <h4>STILL LISTENING — a system message the machine keys in Morse.</h4>
+  <p class="id">egg.morse</p>
+  <p><span class="tag g">HELD</span>
+     <span class="tag">build PARTIAL</span>
+     <span class="tag ">nothing hints at it</span></p>
+  <p class="meta"><span class="k">mechanism &middot;</span> <code>weird-baby-robots/tools/viiip_twin.html</code>
+     </p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span>
+     ask_count_60</p>
+  
+</div>
+<div class="card" data-t="egg.renamed-games the ai renamed the games. ledger #10, in-fiction load-bearing. weird-baby-robots/tools/viiip_twin.html  "
+   data-s="spent">
+  <h4>The AI renamed the games. Ledger #10, in-fiction load-bearing.</h4>
+  <p class="id">egg.renamed-games</p>
+  <p><span class="tag y">REVEALED</span>
+     <span class="tag">build LIVE</span>
+     <span class="tag ">nothing hints at it</span></p>
+  <p class="meta"><span class="k">mechanism &middot;</span> <code>weird-baby-robots/tools/viiip_twin.html</code>
+     <br><span class="k">reached by &middot;</span> notice the names</p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span>
+     <i>nothing — it is where it is by choice</i></p>
+  
+</div>
+<div class="card" data-t="egg.matchbook the matchbook carrying mike's own surname lang, with an offer to write a number into the back of it. the physical world what number whether the museum plants its own artifacts in its own props — mike's call raised, unruled (props_ledger-20260804)."
+   data-s="waiting">
+  <h4>The matchbook carrying Mike's own surname LANG, with an offer to write a number into the back of it.</h4>
+  <p class="id">egg.matchbook</p>
+  <p><span class="tag g">HELD</span>
+     <span class="tag">build NOT_BUILT</span>
+     <span class="tag ">nothing hints at it</span></p>
+  <p class="meta"><span class="k">mechanism &middot;</span> <code>the physical world</code>
+     </p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span>
+     what number; whether the museum plants its own artifacts in its own props — Mike's call</p>
+  <p class="meta" style="margin-top:9px;border-top:1px solid var(--line2);padding-top:8px">RAISED, UNRULED (PROPS_LEDGER-20260804).</p>
+</div>
+<div class="card" data-t="egg.frozen the frozen state — paused to frozen; the fluidic heaters weren't running; −31.4 °f. written, unused a storyline first written, deliberately unused (c2)."
+   data-s="waiting">
+  <h4>The frozen state — paused to frozen; the fluidic heaters weren't running; −31.4 °F.</h4>
+  <p class="id">egg.frozen</p>
+  <p><span class="tag g">HELD</span>
+     <span class="tag">build NOT_BUILT</span>
+     <span class="tag ">nothing hints at it</span></p>
+  <p class="meta"><span class="k">mechanism &middot;</span> <code>written, unused</code>
+     </p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span>
+     a storyline first</p>
+  <p class="meta" style="margin-top:9px;border-top:1px solid var(--line2);padding-top:8px">WRITTEN, DELIBERATELY UNUSED (C2).</p>
+</div>
+<div class="card" data-t="egg.laststate last state — resume across visits. weird-baby-robots/tools/viiip_twin.html portal.feed.last-state a privacy ruling from mike "
+   data-s="waiting">
+  <h4>LAST STATE — resume across visits.</h4>
+  <p class="id">egg.laststate</p>
+  <p><span class="tag g">HELD</span>
+     <span class="tag">build NOT_BUILT</span>
+     <span class="tag ">nothing hints at it</span></p>
+  <p class="meta"><span class="k">mechanism &middot;</span> <code>weird-baby-robots/tools/viiip_twin.html</code>
+     </p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span>
+     portal.feed.last-state; a privacy ruling from Mike</p>
+  
+</div>
+<div class="card" data-t="egg.channels the portal's channel numbering — the mainframe on 1 and 2, the portable starting at 3. src/data/artists/portal.js panel.drum  [h1 2026-08-06] the egg went back in the drawer with the drum it is cut into. it had been spent — planted where a visitor rolls a selector and finds numbers — and holding the portal un-spends it, which is a thing worth noticing about eggs: one planted on a held surface is not planted at all. the egg, in full, and it is written nowhere else: a 1970s home device fed a television through an rf modulator and you tuned the set to channel 3 or 4. the mgk-viiip is the portable, the consumer object, the one you take home — so it starts at 3, exactly where a machine like that has always started. and the numbering carries a second thing for free: niac holds 1 and 2 because niac came first, which is the true development order. neither fact is stated on any face, in any caption, or in any label; the drum is engraved with numbers and nothing else. explaining it on the glass would spend it in the same commit that planted it."
+   data-s="planted">
+  <h4>The Portal's channel numbering — the mainframe on 1 and 2, the portable starting at 3.</h4>
+  <p class="id">egg.channels</p>
+  <p><span class="tag g">HELD</span>
+     <span class="tag">build LIVE</span>
+     <span class="tag ">nothing hints at it</span></p>
+  <p class="meta"><span class="k">mechanism &middot;</span> <code>src/data/artists/portal.js panel.drum</code>
+     </p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span>
+     <i>nothing — it is where it is by choice</i></p>
+  <p class="meta" style="margin-top:9px;border-top:1px solid var(--line2);padding-top:8px">[H1 2026-08-06] THE EGG WENT BACK IN THE DRAWER WITH THE DRUM IT IS CUT INTO. It had been SPENT — planted where a visitor rolls a selector and finds numbers — and holding the Portal un-spends it, which is a thing worth noticing about eggs: one planted on a held surface is not planted at all. THE EGG, IN FULL, AND IT IS WRITTEN NOWHERE ELSE: a 1970s home device fed a television through an RF modulator and you tuned the SET to channel 3 or 4. The MGK-VIIIp is the portable, the consumer object, the one you take home — so it starts at 3, exactly where a machine like that has always started. And the numbering carries a second thing for free: NIAC holds 1 and 2 because NIAC came first, which is the true development order. Neither fact is stated on any face, in any caption, or in any label; the drum is engraved with numbers and nothing else. Explaining it on the glass would spend it in the same commit that planted it.</p>
+</div>
+<div class="card" data-t="egg.niac.operator the robot that operates the mainframe — the reason niac needs one at all. the physical world; three plates in weird-baby-robots/robots/mgk-viii/plates/2021-03-19 mike's ruling on when it is spent a photograph, if the egg is ever to be spent on the glass [k1 2026-08-07] the museum's seven plates are deleted and this row is what that cost, written down. mike ruled the eleven held photographs killed — *&quot;none are very good, and if that view is ever needed it gets reshot&quot;* — and seven of them were this egg's only material in this repository (head at the lens, head three-quarters, chest and shoulders, lower limbs, unfinished torso, feet on a plinth, a slot mock-up). they are off disk and out of both provenance files. **the egg survives and its material is now three plates, all of them upstream and all of them regenerable**: `magic8-2021-p01-the-eye.jpg`, `p02-the-shoulder.jpg` and `p04-the-hand-on-control.jpg` in the robots repo's culled 2021 set — the eye, the shoulder, the hand on the control — cut from `img_1526.mov` under that repo's obfuscation_law, with the crop rectangles recorded so any of them can be rebuilt from the source video. `build` stays live because the material still exists; what changed is that it exists in one repository instead of two, and none of it is here. spending it is still one data block and no code, and now it is also one file copy."
+   data-s="planted">
+  <h4>The robot that operates the mainframe — the reason NIAC needs one at all.</h4>
+  <p class="id">egg.niac.operator</p>
+  <p><span class="tag g">HELD</span>
+     <span class="tag">build LIVE</span>
+     <span class="tag ">nothing hints at it</span></p>
+  <p class="meta"><span class="k">mechanism &middot;</span> <code>the physical world; three plates in weird-baby-robots/robots/mgk-viii/plates/2021-03-19</code>
+     </p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span>
+     Mike's ruling on when it is spent; a photograph, if the egg is ever to be spent on the glass</p>
+  <p class="meta" style="margin-top:9px;border-top:1px solid var(--line2);padding-top:8px">[K1 2026-08-07] THE MUSEUM'S SEVEN PLATES ARE DELETED AND THIS ROW IS WHAT THAT COST, WRITTEN DOWN. Mike ruled the eleven held photographs killed — *&quot;none are very good, and if that view is ever needed it gets reshot&quot;* — and seven of them were this egg's only material in this repository (head at the lens, head three-quarters, chest and shoulders, lower limbs, unfinished torso, feet on a plinth, a slot mock-up). They are off disk and out of both provenance files. **THE EGG SURVIVES AND ITS MATERIAL IS NOW THREE PLATES, ALL OF THEM UPSTREAM AND ALL OF THEM REGENERABLE**: `MAGIC8-2021-P01-the-eye.jpg`, `P02-the-shoulder.jpg` and `P04-the-hand-on-control.jpg` in the robots repo's culled 2021 set — the eye, the shoulder, the hand on the control — cut from `IMG_1526.MOV` under that repo's OBFUSCATION_LAW, with the crop rectangles recorded so any of them can be rebuilt from the source video. `build` stays LIVE because the material still exists; what changed is that it exists in ONE repository instead of two, and none of it is here. Spending it is still one data block and no code, and now it is also one file copy.</p>
+</div>
+<div class="card" data-t="egg.presets the archive's groupings as an egg surface — hide, reveal, or spell something out in the order. src/data/artists/robots.js face.presets mike's photographs, orderings or captions — the content is his the mechanism shipped and the egg did not, and the row exists so the second half is not lost with the round log. n9 built `face.presets` on both machine archives (exhibit.jsx `archivepresets`): a named, ordered subset of a wall, with its own count on its own button. nothing about it is egg-specific and that is the point — a grouping that hides, reveals or spells is the same data shape as the four honest ones now shipping, so planting one costs a data block and no code, and nobody can tell from the machinery which kind is present. mike's own words for the consequence: presets are a good way to hide an egg, to reveal one, and to make certain things spell something out when they come together."
+   data-s="waiting">
+  <h4>The archive's groupings as an egg surface — hide, reveal, or spell something out in the order.</h4>
+  <p class="id">egg.presets</p>
+  <p><span class="tag g">HELD</span>
+     <span class="tag">build NOT_BUILT</span>
+     <span class="tag ">nothing hints at it</span></p>
+  <p class="meta"><span class="k">mechanism &middot;</span> <code>src/data/artists/robots.js face.presets</code>
+     </p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span>
+     Mike's photographs, orderings or captions — the content is his</p>
+  <p class="meta" style="margin-top:9px;border-top:1px solid var(--line2);padding-top:8px">THE MECHANISM SHIPPED AND THE EGG DID NOT, and the row exists so the second half is not lost with the round log. N9 built `face.presets` on both machine archives (Exhibit.jsx `ArchivePresets`): a named, ordered subset of a wall, with its own count on its own button. Nothing about it is egg-specific and that is the point — a grouping that hides, reveals or spells is the SAME data shape as the four honest ones now shipping, so planting one costs a data block and no code, and nobody can tell from the machinery which kind is present. Mike's own words for the consequence: presets are a good way to hide an egg, to reveal one, and to make certain things spell something out when they come together.</p>
+</div>
+<div class="card" data-t="egg.lobby.poke the poke — a pixel-perfect tap on the eye of the weird.baby mark, and he blinks. three in a row and he puts on safety glasses. not built — the mark is placed in src/routes/wbhome.jsx the blink art — a closed-eye state of the mark the safety-glasses art a hit region on the eye, a three-count, and a session flag raised by mike and graded a+++++ (p4, 2026-08-05), and deliberately not built in the round that raised it — the reasons are in the block above this row and they are the specification. the two art states are mike's; the mechanism is small and comes after them. [m1 2026-08-05] it is also the gate on every future egg — mike: do not bother with a next-level egg until this one at least catches on. nothing in this museum reports an egg being tripped, so that condition is met by his word and not by a number. c40."
+   data-s="waiting">
+  <h4>The poke — a pixel-perfect tap on the eye of the Weird.Baby mark, and he blinks. Three in a row and he puts on safety glasses.</h4>
+  <p class="id">egg.lobby.poke</p>
+  <p><span class="tag g">HELD</span>
+     <span class="tag">build NOT_BUILT</span>
+     <span class="tag ">nothing hints at it</span></p>
+  <p class="meta"><span class="k">mechanism &middot;</span> <code>not built — the mark is placed in src/routes/WbHome.jsx</code>
+     </p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span>
+     the blink art — a closed-eye state of the mark; the safety-glasses art; a hit region on the eye, a three-count, and a session flag</p>
+  <p class="meta" style="margin-top:9px;border-top:1px solid var(--line2);padding-top:8px">RAISED BY MIKE AND GRADED A+++++ (P4, 2026-08-05), and deliberately not built in the round that raised it — the reasons are in the block above this row and they are the specification. The two art states are Mike's; the mechanism is small and comes after them. [M1 2026-08-05] IT IS ALSO THE GATE ON EVERY FUTURE EGG — Mike: do not bother with a next-level egg until this one at least catches on. Nothing in this museum reports an egg being tripped, so that condition is met by his word and not by a number. C40.</p>
+</div>
+</div>
+
+<h2>Named in the brief, and not in the egg table &mdash; with the reason</h2>
+<div class="note" style="margin-bottom:14px"><p>Three of the things Mike named
+are not <code>egg.*</code> rows. Two are somewhere else on purpose and one is in
+the other repository. <b>Why a thing is not in the egg table is itself an
+answer</b>, so each carries it.</p></div>
+<div class="cards">
+<div class="card">
+  <h4>The buffalo nickels — canon, physically present, deliberately unphotographed.</h4>
+  <p class="id">phys.nickels &mdash; reveal/ledger.json — class `artifact`, not `egg`</p>
+  <p class="meta"><span class="k">mechanism &middot;</span> There is no mechanism, and that is the proposal. Mike: <i>“Maybe the nickels are hidden inside of the thing so they're not even photographed. There's no photograph of the nickels, so nobody knows anybody's getting nickels.”</i> A thing nobody can know about until they hold it.</p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span> A REVEAL CLASS THAT DOES NOT EXIST YET. The four classes are ANNOUNCED · HINTED · DISCOVERED · HELD, and HELD means <i>not yet</i>. A sealed thing may be reachable <i>never</i>, and the table cannot tell those apart. A fifth class — <code>SEALED</code> — is PROPOSED AND NOT ADOPTED; naming it is Mike's. Register M35.</p>
+  <p class="meta" style="margin-top:7px"><span class="k">where it stands &middot;</span> In the ledger as an artifact, transfer PACKAGE, no named arrival week. The persona work adds a second demand: the sports fanatic and the magician are two named personas with no case, <b>and both will need a buffalo nickel</b>.</p>
+  <p class="meta" style="margin-top:9px;border-top:1px solid var(--line2);padding-top:8px">It is not filed under eggs because it is not one yet: an egg is planted where somebody could find it, and nothing about this is placed anywhere.</p>
+</div>
+<div class="card">
+  <h4>The album-art screen egg — hide something in the screen of the unit.</h4>
+  <p class="id">M78 &mdash; docs/OPEN_ACTIONS.md — deliberately NOT a ledger row</p>
+  <p class="meta"><span class="k">mechanism &middot;</span> The unit's own front glass appears inside the album covers. Something is hidden in the screen.</p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span> Whether to do it, on which covers, and what is in the screen. All three are Mike's.</p>
+  <p class="meta" style="margin-top:7px"><span class="k">where it stands &middot;</span> GRADED HIGH, BY MIKE'S OWN REASONING: <i>once a visitor finds one, they will check every cover forever — and every time the art changes.</i> That is the only mechanism proposed for this building that turns a static asset into a recurring reason to look.</p>
+  <p class="meta" style="margin-top:9px;border-top:1px solid var(--line2);padding-top:8px"><b>IT IS DELIBERATELY NOT A LEDGER ROW, AND THE REASON IS THE RULE:</b> a ledger row is a claim that a thing EXISTS. Nothing was built and no art was touched. Mike's own constraint is recorded with the grade and is the harder half — <i>this does not mean eggs everywhere</i>. The failure mode of a good egg is a house that starts hiding things by habit.</p>
+</div>
+<div class="card">
+  <h4>Five blue glass dice in a chrome shaker — the gambler's case.</h4>
+  <p class="id">the glass dice &mdash; weird-baby-robots/docs/PROPS_LEDGER-20260804.md — a prop, in the other repository</p>
+  <p class="meta"><span class="k">mechanism &middot;</span> None built and none proposed. What exists is a research finding with an egg's shape.</p>
+  <p class="meta" style="margin-top:7px"><span class="k">needs first &middot;</span> A photograph of the vessel — both halves, the base, any stamping — before anything can be said about maker or date. Mike's instruction was answered as far as the footage allows; the rest needs the object, not the internet.</p>
+  <p class="meta" style="margin-top:7px"><span class="k">where it stands &middot;</span> MEASURED AND IDENTIFIED. Five dice is diagnostic: it is the poker family, and the container is the container rather than the point. Each die is about 9.5 mm — miniature, against 19 mm casino stock. <b>AND THE MATERIAL IS THE STORY POINT:</b> glass has been the wrong material for working dice for two thousand years, so these are novelty. <b>A glass die cannot be loaded</b> — you cannot hide mass inside clear glass. Against a marked deck, a sleeve clamp and a copy of <i>Marked Cards and Loaded Dice</i>, <b>five transparent dice are the one object in that case that is provably honest.</b></p>
+  <p class="meta" style="margin-top:9px;border-top:1px solid var(--line2);padding-top:8px">A character detail that came from the material rather than from the identity. It is not in the egg table because nobody has proposed planting it; it is here because it is the best unplanted thing in either repository.</p>
+</div>
+</div>
+
+<footer>Built from <code>reveal/ledger.json</code> (class <code>egg</code>) plus
+the three rows above, which are read out of <code>docs/OPEN_ACTIONS.md</code> and
+the robots repo's props ledger. Same population as <code>npm run reveal:eggs</code>.
+Nothing here is written back.</footer>
+</div>
+<script>
+(function(){
+ var q=document.getElementById('q'),c=document.getElementById('c'),g=document.getElementById('grid');
+ var btns=[].slice.call(document.querySelectorAll('[data-f]')),mode='all';
+ function apply(){var s=q.value.trim().toLowerCase(),n=0;
+  [].forEach.call(g.children,function(el){
+   var ok=(mode==='all'||el.getAttribute('data-s')===mode)&&(!s||el.getAttribute('data-t').indexOf(s)>=0);
+   el.style.display=ok?'':'none'; if(ok)n++;});
+  c.textContent=n+' shown';}
+ btns.forEach(function(b){b.addEventListener('click',function(){mode=b.getAttribute('data-f');
+  btns.forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});apply();});});
+ q.addEventListener('input',apply);apply();
+})();
+</script>
+</body></html>

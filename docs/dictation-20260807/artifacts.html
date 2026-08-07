@@ -1,0 +1,2276 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE ARTIFACT TRACKER — 2026-08-07</title>
+<style>
+:root{color-scheme:light dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;--redfg:#f0c9c4;
+ --grn:#7fa86a;--blu:#8fa8c4;--amb:#e08a5a}
+*{box-sizing:border-box}
+body{margin:0;padding:28px 26px 110px;background:var(--bg);color:var(--fg);
+ font:15px/1.55 -apple-system,"Segoe UI",system-ui,sans-serif}
+.wrap{max-width:1180px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:21px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 8px}
+.back{font-size:12px;color:var(--dim2);margin:0 0 22px}
+h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:34px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:22px 0 8px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:15px 17px;margin:0 0 26px;border-radius:3px}
+.note p{margin:0 0 10px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+.ask{border-left:3px solid var(--red);padding-left:12px;color:var(--redfg)}
+.ops{border-left:3px solid var(--blu);padding-left:12px}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc}
+/* A five-column table cannot fit a phone and must not be made to try. The
+   TABLE scrolls inside its own box; the PAGE never scrolls sideways. */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tw table{min-width:760px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:6px 9px 6px 0;position:sticky;top:0;background:var(--bg)}
+td{border-bottom:1px solid var(--line2);padding:8px 9px 8px 0;vertical-align:top}
+tr.hide{display:none}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.y{border-color:#4a6a3a;color:var(--grn)}
+.tag.n{border-color:#6a3a30;color:var(--amb)}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.b{border-color:#3a5570;color:var(--blu)}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.bar input{background:var(--panel);border:1px solid var(--line);color:var(--fg);padding:6px 10px;
+ border-radius:3px;font:13px/1.4 inherit;width:280px}
+.bar button{background:transparent;border:1px solid var(--line);color:var(--dim);padding:5px 11px;
+ border-radius:3px;font:11px/1.3 inherit;letter-spacing:.09em;text-transform:uppercase;cursor:pointer;margin-left:5px}
+.bar button[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.count{font-size:12px;color:var(--dim2);margin-left:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:14px 15px}
+.card h4{margin:0 0 4px;font-size:14px;color:var(--fg)}
+.card .id{font-family:ui-monospace,Consolas,monospace;font-size:11px;color:var(--blu);margin:0 0 8px}
+.card p{margin:0 0 8px;font-size:13px}
+.card .meta{font-size:12px;color:var(--dim);margin:0}
+.k{color:var(--dim2)}
+.day{border:1px solid var(--line);border-radius:3px;margin:0 0 18px;overflow:hidden}
+.day > .hd{background:var(--panel);padding:12px 15px;border-bottom:1px solid var(--line)}
+.day > .hd .n{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim2)}
+.day > .hd .slot{display:block;margin-top:5px;font-size:16px;color:var(--red);font-style:italic}
+.day > .bd{padding:13px 15px}
+.mine{border-left:3px solid var(--gold);padding-left:11px;margin:0 0 12px}
+.mine .lbl,.scaf .lbl{font-size:10px;letter-spacing:.13em;text-transform:uppercase;display:block;margin-bottom:4px}
+.mine .lbl{color:var(--gold)}
+.scaf{border-left:3px solid var(--blu);padding-left:11px;margin:0 0 12px}
+.scaf .lbl{color:var(--blu)}
+ul{margin:0 0 10px;padding-left:19px}li{margin:0 0 5px}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--dim2);font-size:12px}
+@media (max-width:720px){body{padding:20px 14px 80px}.bar input{width:100%}}
+</style></head><body>
+<div class="wrap">
+<p class="back"><a href="index.html">&larr; the dictation prep</a> &middot; Ops&#8209;to&#8209;Mike, 2026-08-07 &middot; not part of the museum</p>
+<h1>The artifact tracker</h1>
+<p class="sub">315 files &middot; 162 revealable things &middot; what is available, what is held, what is spent</p>
+
+<div class="note">
+<p><b>THE ONE QUESTION THIS PAGE ANSWERS:</b> can you reach for this in a Record
+entry today? For a picture of the machines the answer is almost always
+<i>yes, and it takes one entry and no code</i> &mdash; <b>16 governed
+pictures are sitting behind the stage door right now</b>, and naming a file in an
+entry's assets is the entire mechanism that puts it on a wall.</p>
+
+<p><b>ONE FILE HAS EVER BEEN DELIVERED.</b> <code>rear_power_switch.png</code>, by
+Record 013. Everything else the museum owns of these machines has never been
+brought into the story by anybody.</p>
+
+<p class="ops"><b>AND 3 ROWS HAVE NO FILE, WHICH IS A DIFFERENT THING
+FROM AN ERROR.</b> The asset table keeps a row after its file goes so that a
+verdict Mike gave survives a rename &mdash; and two of these three are the
+<i>public-side twins</i> of pictures that moved behind the stage door, so the same
+photograph is in this table twice, once at each of its two addresses. They are
+drawn <span class="tag n">no file</span> and excluded from every reach count,
+because telling you three more pictures were an entry away would have been the
+two-addresses hazard doing its trick on a brand-new instrument.</p>
+
+<p class="ops"><b>THE JOIN IS NINE ROWS DEEP AND THAT IS NOT A DEFECT.</b>
+<code>provenance/asset-table.json</code> is the authority on FILES;
+<code>reveal/ledger.json</code> is the authority on REVEALABLE THINGS; the ledger's
+own header says the two meet at <code>assets</code> and neither restates the other.
+Nine ledger rows carry an asset uid, so nine files are marked
+<span class="tag b">ledgered</span> below. <b>Transfer class, reveal arc and
+dependencies are properties of a revealable thing, not of a file</b> &mdash; so
+they are in the second table rather than faked into the first. A tracker that
+quietly implied a full join would be lying about its own coverage.</p>
+</div>
+
+<h2>Every addressable file &middot; 47 rows</h2>
+<div class="bar">
+  <input id="q1" placeholder="filter — path, description, quality, use&hellip;">
+  <button data-f1="all" aria-pressed="true">all</button>
+  <button data-f1="gov">the machines</button>
+  <button data-f1="wait">waiting on an entry</button>
+  <button data-f1="done">delivered</button>
+  <button data-f1="weak">weak / wrong</button>
+  <button data-f1="gone">no file</button>
+  <span class="count" id="c1"></span>
+</div>
+<div class="tw"><table id="t1"><thead><tr><th>file</th><th>what it shows</th><th>judgement</th><th>reach today</th><th>used by</th></tr></thead>
+<tbody><tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
+   data-t="public/audio/wb/01_weird_baby_blues_2026-06-17.mp3 track from the best of weird.baby vol. 1 — &quot;weird baby blues&quot;. the house's own recording.  outside the rule src/data/artists/weird-baby.js">
+  <td><code>/audio/wb/01_weird_baby_blues_2026-06-17.mp3</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px"> · 2212 KB · <code>A-3352cc58f1</code></div></td>
+  <td>Track from The Best of Weird.Baby Vol. 1 — &quot;weird baby blues&quot;. The house's own recording.</td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/weird-baby.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
+   data-t="public/audio/wb/02_pull_me_in_closer_blues_2026-06-16.mp3 track from the best of weird.baby vol. 1 — &quot;pull me in closer blues&quot;. the house's own recording.  outside the rule src/data/artists/weird-baby.js">
+  <td><code>/audio/wb/02_pull_me_in_closer_blues_2026-06-16.mp3</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px"> · 3979 KB · <code>A-969ea99a7c</code></div></td>
+  <td>Track from The Best of Weird.Baby Vol. 1 — &quot;pull me in closer blues&quot;. The house's own recording.</td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/weird-baby.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
+   data-t="public/audio/wb/03_breakup_breakdown_blues_2026-06-16.mp3 track from the best of weird.baby vol. 1 — &quot;breakup breakdown blues&quot;. the house's own recording.  outside the rule src/data/artists/weird-baby.js">
+  <td><code>/audio/wb/03_breakup_breakdown_blues_2026-06-16.mp3</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px"> · 4259 KB · <code>A-866d1ea212</code></div></td>
+  <td>Track from The Best of Weird.Baby Vol. 1 — &quot;breakup breakdown blues&quot;. The house's own recording.</td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/weird-baby.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
+   data-t="public/audio/wb/04_how_i_saved_the_world_blues_2026-06-17.mp3 track from the best of weird.baby vol. 1 — &quot;how i saved the world blues&quot;. the house's own recording.  outside the rule src/data/artists/weird-baby.js">
+  <td><code>/audio/wb/04_how_i_saved_the_world_blues_2026-06-17.mp3</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px"> · 2549 KB · <code>A-74e7c776c5</code></div></td>
+  <td>Track from The Best of Weird.Baby Vol. 1 — &quot;how i saved the world blues&quot;. The house's own recording.</td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/weird-baby.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
+   data-t="public/audio/wb/05_ed_yahdah_2026-06-16.mp3 track from the best of weird.baby vol. 1 — &quot;ed yahdah&quot;. the house's own recording.  outside the rule src/data/artists/weird-baby.js">
+  <td><code>/audio/wb/05_ed_yahdah_2026-06-16.mp3</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px"> · 5839 KB · <code>A-dc766cb8ff</code></div></td>
+  <td>Track from The Best of Weird.Baby Vol. 1 — &quot;ed yahdah&quot;. The house's own recording.</td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/weird-baby.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
+   data-t="public/audio/wb/06_coconuts_2026-06-17.mp3 track from the best of weird.baby vol. 1 — &quot;coconuts&quot;. the house's own recording.  outside the rule src/data/artists/weird-baby.js">
+  <td><code>/audio/wb/06_coconuts_2026-06-17.mp3</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px"> · 2860 KB · <code>A-4468e7b10c</code></div></td>
+  <td>Track from The Best of Weird.Baby Vol. 1 — &quot;coconuts&quot;. The house's own recording.</td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/weird-baby.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
+   data-t="public/favicon-180.png the ios home-screen icon. usable outside the rule index.html">
+  <td><code>/favicon-180.png</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">180×180 · 32 KB · <code>A-f6b080d4fe</code></div></td>
+  <td>The iOS home-screen icon.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>index.html</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
+   data-t="public/favicon.ico the browser tab icon, multi-size ico. usable outside the rule index.html">
+  <td><code>/favicon.ico</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px"> · 9 KB · <code>A-edefd2eacc</code></div></td>
+  <td>The browser tab icon, multi-size ICO.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>index.html</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
+   data-t="public/favicon.svg the vector tab icon. usable outside the rule public/_routes.json">
+  <td><code>/favicon.svg</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">48×46 · 9 KB · <code>A-514af33ae9</code></div></td>
+  <td>The vector tab icon.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>public/_routes.json</code></td>
+</tr>
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
+   data-t="public/held/robots/art/mgk-niac-cover.png the mgk-niac album cover — the house robots template with the machine's own head, lens forward, set into the disc the wb mark used to occupy, and the model number where the word robots was. usable yes — one entry src/data/artists/robots.js">
+  <td><code>/robots/art/mgk-niac-cover.png</code> <span class="tag g">held</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 337 KB · <code>A-4f45f7a39e</code></div></td>
+  <td>The MGK-NIAC album cover — the house ROBOTS template with the machine's own head, lens forward, set into the disc the WB mark used to occupy, and the model number where the word ROBOTS was.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag g">YES — ONE ENTRY</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
+   data-t="public/held/robots/art/mgk-viiip-cover.png the mgk-viiip album cover — the house robots template with the whole unit in the disc and the model number below it. usable yes — one entry src/data/artists/robots.js">
+  <td><code>/robots/art/mgk-viiip-cover.png</code> <span class="tag g">held</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 363 KB · <code>A-ae718e7ac8</code></div></td>
+  <td>The MGK-VIIIp album cover — the house ROBOTS template with the whole unit in the disc and the model number below it.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag g">YES — ONE ENTRY</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="unjudged" data-m="0"
+   data-t="public/held/robots/art/portal-cover.png   yes — one entry src/data/artists/portal.js">
+  <td><code>/robots/art/portal-cover.png</code> <span class="tag g">held</span>
+       <span class="tag b">ledgered</span>
+      <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 240 KB · <code>A-42f6b255e5</code></div></td>
+  <td><i class="k">nobody has written what this is</i></td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag g">YES — ONE ENTRY</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/portal.js</code></td>
+</tr>
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
+   data-t="public/held/robots/art/viiip.png the mgk-viiip album cover — the unit, front, with the bios beat composited into its glass. also the ninth tile of the viiip morgue. usable yes — one entry src/data/artists/portal.js src/data/artists/robots.js">
+  <td><code>/robots/art/viiip.png</code> <span class="tag g">held</span>
+       <span class="tag b">ledgered</span>
+      <div class="k" style="font-size:11px;margin-top:3px">1536×1536 · 1367 KB · <code>A-d1ce909419</code></div></td>
+  <td>The MGK-VIIIp album cover — the unit, front, with the BIOS beat composited into its glass. Also the ninth tile of the VIIIp morgue.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: online</div></td>
+  <td><span class="tag g">YES — ONE ENTRY</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/portal.js</code><br><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="unjudged" data-m="0"
+   data-t="public/held/robots/reference/mgk-viii/cabinet_whole.jpg   yes — one entry src/data/artists/robots.js">
+  <td><code>/robots/reference/mgk-viii/cabinet_whole.jpg</code> <span class="tag g">held</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">858×1438 · 304 KB · <code>A-b9ac48464b</code></div></td>
+  <td><i class="k">nobody has written what this is</i></td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag g">YES — ONE ENTRY</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
+   data-t="public/held/robots/reference/mgk-viii/column_lit.jpg a lit column behind a grille. usable yes — one entry src/data/artists/robots.js">
+  <td><code>/robots/reference/mgk-viii/column_lit.jpg</code> <span class="tag g">held</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">1048×655 · 211 KB · <code>A-043cdbb68e</code></div></td>
+  <td>A lit column behind a grille.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag g">YES — ONE ENTRY</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
+   data-t="public/held/robots/reference/mgk-viii/core_helical.jpg mgk-niac plate 1 of 4, and the album cover's badge — the helical core through the cage bars. usable yes — one entry src/data/artists/robots.js">
+  <td><code>/robots/reference/mgk-viii/core_helical.jpg</code> <span class="tag g">held</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">380×820 · 92 KB · <code>A-5eed4e1dbd</code></div></td>
+  <td>MGK-NIAC plate 1 of 4, and the album cover's badge — the helical core through the cage bars.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag g">YES — ONE ENTRY</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
+   data-t="public/held/robots/reference/mgk-viii/core_meltdown.jpg mgk-niac plate 4 of 4, and the album's viewer poster — the interior flooded red-orange. usable yes — one entry src/data/artists/robots.js">
+  <td><code>/robots/reference/mgk-viii/core_meltdown.jpg</code> <span class="tag g">held</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">560×740 · 135 KB · <code>A-4fe31c3315</code></div></td>
+  <td>MGK-NIAC plate 4 of 4, and the album's viewer poster — the interior flooded red-orange.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag g">YES — ONE ENTRY</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
+   data-t="public/held/robots/reference/mgk-viii/output_row.jpg mgk-niac plate 3 of 4, and the still on technical specifications — the bar bank at the cabinet's base. usable yes — one entry src/data/artists/robots.js">
+  <td><code>/robots/reference/mgk-viii/output_row.jpg</code> <span class="tag g">held</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">690×240 · 37 KB · <code>A-4b804e7aed</code></div></td>
+  <td>MGK-NIAC plate 3 of 4, and the still on TECHNICAL SPECIFICATIONS — the bar bank at the cabinet's base.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag g">YES — ONE ENTRY</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
+   data-t="public/held/robots/reference/photos/front_full.png the front of the unit, whole, as received. usable yes — one entry src/data/artists/robots.js">
+  <td><code>/robots/reference/photos/front_full.png</code> <span class="tag g">held</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">1536×2048 · 3192 KB · <code>A-4273395ff9</code></div></td>
+  <td>The front of the unit, whole, as received.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: arrived</div></td>
+  <td><span class="tag g">YES — ONE ENTRY</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="wrong" data-m="0"
+   data-t="public/held/robots/reference/photos/front_screen.png the unit's front glass, lit, captioned 'the front glass, lit'. wrong yes — one entry src/data/artists/robots.js">
+  <td><code>/robots/reference/photos/front_screen.png</code> <span class="tag g">held</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">2048×1536 · 1442 KB · <code>A-8e8e1b8682</code></div></td>
+  <td>The unit's front glass, lit, captioned 'The front glass, lit'.</td>
+  <td><span class="tag n">wrong</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: online</div></td>
+  <td><span class="tag g">YES — ONE ENTRY</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="wrong" data-m="0"
+   data-t="public/held/robots/reference/photos/mgk-twin_monitor_screen_bezel.png captioned on the wall as 'the bezel around the glass'. wrong yes — one entry src/data/artists/robots.js">
+  <td><code>/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png</code> <span class="tag g">held</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">3000×2400 · 530 KB · <code>A-5c095a577b</code></div></td>
+  <td>Captioned on the wall as 'The bezel around the glass'.</td>
+  <td><span class="tag n">wrong</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag g">YES — ONE ENTRY</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
+   data-t="public/held/robots/reference/photos/mgk-twin_monitor_screens_family_shot.png the pair — unit front and top viewfinder — captioned 'as received'. also the robots welcome face's hook and the viiip album's viewer poster. usable yes — one entry src/data/artists/robots.js">
+  <td><code>/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png</code> <span class="tag g">held</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">3000×2400 · 4804 KB · <code>A-1772e692a3</code></div></td>
+  <td>The pair — unit front and top viewfinder — captioned 'as received'. Also the robots Welcome face's hook and the VIIIp album's viewer poster.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: arrived</div></td>
+  <td><span class="tag g">YES — ONE ENTRY</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="wrong" data-m="0"
+   data-t="public/held/robots/reference/photos/monitor_base.png captioned on the wall as 'the base it stands on'. wrong yes — one entry src/data/artists/robots.js">
+  <td><code>/robots/reference/photos/monitor_base.png</code> <span class="tag g">held</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">3000×2400 · 4752 KB · <code>A-c60b62b55e</code></div></td>
+  <td>Captioned on the wall as 'The base it stands on'.</td>
+  <td><span class="tag n">wrong</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag g">YES — ONE ENTRY</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
+   data-t="public/held/robots/reference/photos/top_monitor.png the top viewfinder, looking down into the glass. usable yes — one entry src/data/artists/robots.js">
+  <td><code>/robots/reference/photos/top_monitor.png</code> <span class="tag g">held</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">2048×1536 · 1993 KB · <code>A-a6c7d3b062</code></div></td>
+  <td>The top viewfinder, looking down into the glass.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: arrived</div></td>
+  <td><span class="tag g">YES — ONE ENTRY</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="wrong" data-m="0"
+   data-t="public/held/robots/reference/photos/unit_new_base.png captioned on the wall as 'the unit on its new base'. wrong yes — one entry src/data/artists/robots.js">
+  <td><code>/robots/reference/photos/unit_new_base.png</code> <span class="tag g">held</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">2867×2048 · 1807 KB · <code>A-26ed5e4d2d</code></div></td>
+  <td>Captioned on the wall as 'The unit on its new base'.</td>
+  <td><span class="tag n">wrong</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag g">YES — ONE ENTRY</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
+   data-t="public/icons.svg the ui icon sprite. usable outside the rule public/_routes.json">
+  <td><code>/icons.svg</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">16×17 · 5 KB · <code>A-0fb0434977</code></div></td>
+  <td>The UI icon sprite.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>public/_routes.json</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
+   data-t="public/images/foundation/contribute-cover.png   outside the rule src/data/artists/foundation.js">
+  <td><code>/images/foundation/contribute-cover.png</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 268 KB · <code>A-32250113b5</code></div></td>
+  <td><i class="k">nobody has written what this is</i></td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/foundation.js</code></td>
+</tr>
+<tr data-g="out" data-r="NO FILE" data-q="unjudged" data-m="1"
+   data-t="public/images/foundation/faq-cover.png   no file src/data/artists/foundation.js">
+  <td><code>/images/foundation/faq-cover.png</code> <span class="tag n">no file</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 21 KB · <code>A-216b789865</code></div></td>
+  <td><i class="k">nobody has written what this is</i></td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">NO FILE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">The row is kept so a judgement survives, and the file is gone. Two of these are the public-side twins of pictures that moved behind the stage door — the same photograph, already in this table at its held address.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/foundation.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
+   data-t="public/images/foundation/foundation-cover.png   outside the rule src/data/artists/foundation.js">
+  <td><code>/images/foundation/foundation-cover.png</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 195 KB · <code>A-284d0cd92e</code></div></td>
+  <td><i class="k">nobody has written what this is</i></td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/foundation.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
+   data-t="public/images/foundation/ledger-cover.png   outside the rule src/data/artists/foundation.js">
+  <td><code>/images/foundation/ledger-cover.png</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 261 KB · <code>A-ca76b12a24</code></div></td>
+  <td><i class="k">nobody has written what this is</i></td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/foundation.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
+   data-t="public/images/wal/carsie-blanton-cover.jpg carsie blanton's cover on the wal bill — the artist in a red suit on a fire escape. usable outside the rule src/data/artists/worth-a-listen.js">
+  <td><code>/images/wal/carsie-blanton-cover.jpg</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">900×900 · 264 KB · <code>A-f818d7a8a7</code></div></td>
+  <td>Carsie Blanton's cover on the WAL bill — the artist in a red suit on a fire escape.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/worth-a-listen.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
+   data-t="public/images/wal/carsie-blanton-poster.png her own illustrated logo art, pink ground. usable outside the rule src/data/artists/worth-a-listen.js">
+  <td><code>/images/wal/carsie-blanton-poster.png</code>
+       <span class="tag b">ledgered</span>
+      <div class="k" style="font-size:11px;margin-top:3px">1200×630 · 159 KB · <code>A-e9c6cefe39</code></div></td>
+  <td>Her own illustrated logo art, pink ground.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/worth-a-listen.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
+   data-t="public/images/wal/hunter-root-cover.jpg hunter root's cover — the artist with a guitar in front of a scrap pile. usable outside the rule src/data/artists/worth-a-listen.js">
+  <td><code>/images/wal/hunter-root-cover.jpg</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">1280×720 · 233 KB · <code>A-6d5b72704a</code></div></td>
+  <td>Hunter Root's cover — the artist with a guitar in front of a scrap pile.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/worth-a-listen.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="weak" data-m="0"
+   data-t="public/images/wal/hunter-root-plate.jpg the portrait that introduces hunter root on /wal. weak outside the rule src/data/artists/worth-a-listen.js">
+  <td><code>/images/wal/hunter-root-plate.jpg</code>
+       <span class="tag b">ledgered</span>
+      <div class="k" style="font-size:11px;margin-top:3px">1100×1377 · 352 KB · <code>A-c21bb8cd4d</code></div></td>
+  <td>The portrait that introduces Hunter Root on /wal.</td>
+  <td><span class="tag ">weak</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/worth-a-listen.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
+   data-t="public/images/wal/jesse-welles-cover.jpg jesse welles' cover — a b&amp;w studio portrait with a guitar. usable outside the rule src/data/artists/worth-a-listen.js">
+  <td><code>/images/wal/jesse-welles-cover.jpg</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">900×900 · 161 KB · <code>A-c80c36274b</code></div></td>
+  <td>Jesse Welles' cover — a B&amp;W studio portrait with a guitar.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/worth-a-listen.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
+   data-t="public/images/wal/jesse-welles-plate.webp the portrait that introduces jesse welles on /wal — a close b&amp;w head. usable outside the rule src/data/artists/worth-a-listen.js">
+  <td><code>/images/wal/jesse-welles-plate.webp</code>
+       <span class="tag b">ledgered</span>
+      <div class="k" style="font-size:11px;margin-top:3px">1500×1879 · 349 KB · <code>A-76b42a030d</code></div></td>
+  <td>The portrait that introduces Jesse Welles on /wal — a close B&amp;W head.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/worth-a-listen.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="weak" data-m="0"
+   data-t="public/images/wal/mikey-mike-cover.jpg mikey mike's cover on the wal bill. weak outside the rule src/data/artists/worth-a-listen.js">
+  <td><code>/images/wal/mikey-mike-cover.jpg</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">900×900 · 73 KB · <code>A-27778d871b</code></div></td>
+  <td>Mikey Mike's cover on the WAL bill.</td>
+  <td><span class="tag ">weak</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/worth-a-listen.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
+   data-t="public/images/wal/worth-a-listen-cover.png   outside the rule src/data/artists/worth-a-listen.js">
+  <td><code>/images/wal/worth-a-listen-cover.png</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 199 KB · <code>A-6f24a3cf95</code></div></td>
+  <td><i class="k">nobody has written what this is</i></td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/worth-a-listen.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
+   data-t="public/images/wb-merch/sticker.png the weird.baby sticker, cropped tight — the one object the gift shop sells. usable outside the rule src/data/wb_merch.js src/data/wb_roster.js">
+  <td><code>/images/wb-merch/sticker.png</code>
+       <span class="tag b">ledgered</span>
+      <div class="k" style="font-size:11px;margin-top:3px">422×422 · 97 KB · <code>A-3176119348</code></div></td>
+  <td>The Weird.Baby sticker, cropped tight — the one object the gift shop sells.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/wb_merch.js</code><br><code>src/data/wb_roster.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
+   data-t="public/images/wb/about-cover.png   outside the rule src/data/artists/weird-baby.js">
+  <td><code>/images/wb/about-cover.png</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 200 KB · <code>A-f68cbdbaf8</code></div></td>
+  <td><i class="k">nobody has written what this is</i></td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/weird-baby.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
+   data-t="public/images/wb/vol1-cover.png   outside the rule src/data/artists/weird-baby.js">
+  <td><code>/images/wb/vol1-cover.png</code>
+       <span class="tag b">ledgered</span>
+      <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 209 KB · <code>A-a84312d188</code></div></td>
+  <td><i class="k">nobody has written what this is</i></td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/weird-baby.js</code></td>
+</tr>
+<tr data-g="gov" data-r="NO FILE" data-q="unjudged" data-m="1"
+   data-t="public/robots/art/portal-cover.png   no file src/data/artists/robots.js">
+  <td><code>/robots/art/portal-cover.png</code> <span class="tag n">no file</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 240 KB · <code>A-fb535d0721</code></div></td>
+  <td><i class="k">nobody has written what this is</i></td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">NO FILE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">The row is kept so a judgement survives, and the file is gone. Two of these are the public-side twins of pictures that moved behind the stage door — the same photograph, already in this table at its held address.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="SIGNAGE" data-q="usable" data-m="0"
+   data-t="public/robots/art/wbr-cover-logo.png the wing's front-desk cover — house paper, ruled border, the mark, robots, purveyors of the weird. generated by tools/make_robots_cover.py. usable signage src/data/artists/robots.js">
+  <td><code>/robots/art/wbr-cover-logo.png</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 262 KB · <code>A-287cf47d17</code></div></td>
+  <td>The wing's front-desk cover — house paper, ruled border, the mark, ROBOTS, PURVEYORS OF THE WEIRD. Generated by tools/make_robots_cover.py.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">SIGNAGE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Exempt in writing. Nothing arrived and nothing was opened, so no entry could ever deliver it.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="NO FILE" data-q="unjudged" data-m="1"
+   data-t="public/robots/reference/mgk-viii/cabinet_whole.jpg   no file src/data/artists/robots.js">
+  <td><code>/robots/reference/mgk-viii/cabinet_whole.jpg</code> <span class="tag n">no file</span>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">858×1438 · 304 KB · <code>A-c08e2c5217</code></div></td>
+  <td><i class="k">nobody has written what this is</i></td>
+  <td><span class="tag ">unjudged</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">NO FILE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">The row is kept so a judgement survives, and the file is gone. Two of these are the public-side twins of pictures that moved behind the stage door — the same photograph, already in this table at its held address.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="gov" data-r="ALREADY DELIVERED" data-q="usable" data-m="0"
+   data-t="public/robots/reference/photos/rear_power_switch.png the power switch round the back of the unit. usable already delivered src/data/artists/robots.js">
+  <td><code>/robots/reference/photos/rear_power_switch.png</code>
+       <span class="tag b">ledgered</span>
+      <div class="k" style="font-size:11px;margin-top:3px">2048×1536 · 3821 KB · <code>A-c5bccbede9</code></div></td>
+  <td>The power switch round the back of the unit.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: arrived</div></td>
+  <td><span class="tag y">ALREADY DELIVERED</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">A Record entry names this file, so it is on the wall. Reusing it costs nothing.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
+   data-t="public/share-card.png the link-preview card — weird.baby / museum / purveyors of the weird / no ads, no affiliate links, no cut, set on house paper in a ruled box. usable outside the rule index.html">
+  <td><code>/share-card.png</code>
+      
+      <div class="k" style="font-size:11px;margin-top:3px">1200×630 · 27 KB · <code>A-b675b62d27</code></div></td>
+  <td>The link-preview card — WEIRD.BABY / MUSEUM / PURVEYORS OF THE WEIRD / NO ADS, NO AFFILIATE LINKS, NO CUT, set on house paper in a ruled box.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>index.html</code></td>
+</tr>
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
+   data-t="public/weirdbaby_photoid.png the house photo-id mark — the baby in the ring with the weird.baby wordmark. the lobby's plate and the robots front desk's viewer poster. usable outside the rule src/data/artists/robots.js src/routes/wbhome.jsx">
+  <td><code>/WeirdBaby_PhotoID.png</code>
+       <span class="tag b">ledgered</span>
+      <div class="k" style="font-size:11px;margin-top:3px">2048×2048 · 722 KB · <code>A-e951825925</code></div></td>
+  <td>The house photo-ID mark — the baby in the ring with the Weird.Baby wordmark. The Lobby's plate and the robots front desk's viewer poster.</td>
+  <td><span class="tag y">usable</span>
+      <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag b">OUTSIDE THE RULE</span>
+      <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
+  <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code><br><code>src/routes/WbHome.jsx</code></td>
+</tr></tbody></table></div>
+
+<h2>Revealable things &middot; transfer class, arc and dependencies &middot; 135 rows</h2>
+<div class="note" style="margin-bottom:14px">
+<p>The transfer classes are how a thing GOT here, never how it is shown.
+<b>Only 2 of the four have
+arrived by week one</b> &mdash;
+<b>BLAST</b> (week 0, in hand) &middot; <b>PACKAGE</b> (not yet) &middot; <b>UNLOCK</b> (week 0, in hand) &middot; <b>TRANSMISSION</b> (not yet)
+&mdash; so a week-one entry that reaches for a PACKAGE or TRANSMISSION row is
+reaching for something the story has not received. Eggs are on their own page.</p>
+</div>
+<div class="bar">
+  <input id="q2" placeholder="filter — id, name, where, dependency&hellip;">
+  <button data-f2="all" aria-pressed="true">all</button>
+  <button data-f2="held">held</button>
+  <button data-f2="week0">arrived (week 0)</button>
+  <button data-f2="later">not yet arrived</button>
+  <button data-f2="deps">has dependencies</button>
+  <span class="count" id="c2"></span>
+</div>
+<div class="tw"><table id="t2"><thead><tr><th>id</th><th>what</th><th>state</th><th>transfer</th><th>waits on</th></tr></thead>
+<tbody><tr data-s="REVEALED" data-c="BLAST"
+   data-t="route.lobby the lobby — the museum's front page and the guest book. / ">
+  <td><code>route.lobby</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>The Lobby — the museum's front page and the guest book.<div class="k" style="font-size:11px;margin-top:3px"><code>/</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="route.booth the information booth — what this place is, in its own words. /booth ">
+  <td><code>route.booth</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>The Information Booth — what this place is, in its own words.<div class="k" style="font-size:11px;margin-top:3px"><code>/booth</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="route.foundation the weird.baby foundation — where the money goes. /foundation ">
+  <td><code>route.foundation</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>The Weird.Baby Foundation — where the money goes.<div class="k" style="font-size:11px;margin-top:3px"><code>/foundation</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="route.shop the gift shop — the house's own shelf plus each artist's own store. /shop ">
+  <td><code>route.shop</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>The Gift Shop — the house's own shelf plus each artist's own store.<div class="k" style="font-size:11px;margin-top:3px"><code>/shop</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="route.robots the robots wing — the front desk, the record, and two machines whose pictures the record has not delivered yet. /robots ">
+  <td><code>route.robots</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>The Robots wing — the front desk, the Record, and two machines whose pictures the Record has not delivered yet.<div class="k" style="font-size:11px;margin-top:3px"><code>/robots</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="route.wal worth a listen — four artists the house wants heard. /wal ">
+  <td><code>route.wal</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>Worth A Listen — four artists the house wants heard.<div class="k" style="font-size:11px;margin-top:3px"><code>/wal</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="route.wb weird.baby music — the house's own record. /wb ">
+  <td><code>route.wb</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>Weird.Baby Music — the house's own record.<div class="k" style="font-size:11px;margin-top:3px"><code>/wb</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="BLAST"
+   data-t="route.hr the hunter root reference wing — 8 albums, 93 tracks, the deepest thing in the museum about any artist. /hr ">
+  <td><code>route.hr</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>The Hunter Root reference wing — 8 albums, 93 tracks, the deepest thing in the museum about any artist.<div class="k" style="font-size:11px;margin-top:3px"><code>/hr</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build PARTIAL</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="BLAST"
+   data-t="route.hr.archive the hunter root discography — the archive route. /hr/archive ">
+  <td><code>route.hr.archive</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>The Hunter Root discography — the archive route.<div class="k" style="font-size:11px;margin-top:3px"><code>/hr/archive</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="route.admin the admin dashboard — visits, the guest book, page breakdown. /admin c33 — exclude the house's own hits, a return-visitor signal, a week of logbook">
+  <td><code>route.admin</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>The admin dashboard — visits, the guest book, page breakdown.<div class="k" style="font-size:11px;margin-top:3px"><code>/admin</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build PARTIAL</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">C33 — exclude the house's own hits, a return-visitor signal, a week of logbook</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="route.preset preset landing — a shared exhibit state, by short id. /p/:id ">
+  <td><code>route.preset</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>Preset landing — a shared exhibit state, by short id.<div class="k" style="font-size:11px;margin-top:3px"><code>/p/:id</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="route.catchall the catch-all — every unmatched address renders the lobby where it stands. src/app.jsx path=&quot;*&quot; ">
+  <td><code>route.catchall</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>The catch-all — every unmatched address renders the Lobby where it stands.<div class="k" style="font-size:11px;margin-top:3px"><code>src/App.jsx path=&quot;*&quot;</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="route.money the /money redirect — the foundation's retired address. /money ">
+  <td><code>route.money</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>The /money redirect — the Foundation's retired address.<div class="k" style="font-size:11px;margin-top:3px"><code>/money</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="EXEMPT"
+   data-t="room.curtain behind the curtain — where mike says the real thing, out of character. not built — no route, no component mike's word on where it lives and what it looks like the first thing he actually wants to say in it">
+  <td><code>room.curtain</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>BEHIND THE CURTAIN — where Mike says the real thing, out of character.<div class="k" style="font-size:11px;margin-top:3px"><code>not built — no route, no component</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag ">exempt</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">Mike's word on where it lives and what it looks like<br>the first thing he actually wants to say in it</td>
+</tr>
+<tr data-s="HELD" data-c="EXEMPT"
+   data-t="room.slow when things get slow — old photographs of mike, from birth onward. not built — no route, no component mike's selection from the source folder — nothing is taken from it by ops his ruling on where they hang and whether they are captioned">
+  <td><code>room.slow</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>WHEN THINGS GET SLOW — old photographs of Mike, from birth onward.<div class="k" style="font-size:11px;margin-top:3px"><code>not built — no route, no component</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag ">exempt</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">Mike's selection from the source folder — nothing is taken from it by Ops<br>his ruling on where they hang and whether they are captioned</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="face.wbr.faq faq — the robots wing's whole front desk: what this is, the machines, the paper, and how to reach us. src/data/artists/robots.js ">
+  <td><code>face.wbr.faq</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>FAQ — the robots wing's whole front desk: what this is, the machines, the paper, and how to reach us.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/robots.js</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="face.wbr.record the record — the journal of the reverse-discovery, and it is about all things robots. src/data/artists/robots.js m18 — twenty-seven open questions on entry 013 m19 — what a record number means">
+  <td><code>face.wbr.record</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>THE RECORD — the journal of the reverse-discovery, and it is about all things robots.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/robots.js</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build PARTIAL</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">M18 — twenty-seven open questions on entry 013<br>M19 — what a record number means</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="face.niac.name the name — built as mgk-niac, sold as mgk-viii. src/data/artists/robots.js ">
+  <td><code>face.niac.name</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>THE NAME — built as MGK-NIAC, sold as MGK-VIII.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/robots.js</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: understood</div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="face.niac.plates image archive (mgk-niac) — four details of a cabinet never shown whole. src/data/artists/robots.js ">
+  <td><code>face.niac.plates</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>IMAGE ARCHIVE (MGK-NIAC) — four details of a cabinet never shown whole.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/robots.js</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="face.niac.firmware technical specifications (mgk-niac) — what the machine is running. src/data/artists/robots.js ">
+  <td><code>face.niac.firmware</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>TECHNICAL SPECIFICATIONS (MGK-NIAC) — what the machine is running.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/robots.js</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="face.viiip.plates image archive (mgk-viiip) — nine plates, as received. src/data/artists/robots.js ">
+  <td><code>face.viiip.plates</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>IMAGE ARCHIVE (MGK-VIIIp) — nine plates, as received.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/robots.js</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="face.viiip.manual the manual — the 1965 operating and maintenance manual. src/data/artists/robots.js doc.manual.plates">
+  <td><code>face.viiip.manual</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>THE MANUAL — the 1965 operating and maintenance manual.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/robots.js</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build PARTIAL</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">doc.manual.plates</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="face.viiip.firmware technical specifications (mgk-viiip) — the machine's own mind, on file. src/data/artists/robots.js ">
+  <td><code>face.viiip.firmware</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>TECHNICAL SPECIFICATIONS (MGK-VIIIp) — the machine's own mind, on file.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/robots.js</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: online</div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="BLAST"
+   data-t="portal.album the portal — the album: the door, the feed controller, and the questions about it. src/data/artists/portal.js mike's ruling on when the portal opens">
+  <td><code>portal.album</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>THE PORTAL — the album: the door, the feed controller, and the questions about it.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/portal.js</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">Mike's ruling on when the Portal opens</td>
+</tr>
+<tr data-s="HELD" data-c="BLAST"
+   data-t="portal.door the portal — the first track, and the way in. src/data/artists/portal.js mike's ruling on when the portal opens">
+  <td><code>portal.door</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>THE PORTAL — the first track, and the way in.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/portal.js</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">Mike's ruling on when the Portal opens</td>
+</tr>
+<tr data-s="HELD" data-c="BLAST"
+   data-t="face.viiip.portal the portal — the feed-control panel: drum, two bat switches, a rotary dial, a latch. src/data/artists/portal.js ">
+  <td><code>face.viiip.portal</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>THE PORTAL — the feed-control panel: drum, two bat switches, a rotary dial, a latch.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/portal.js</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="face.viiip.faq faq — questions about the machine. src/data/artists/robots.js ">
+  <td><code>face.viiip.faq</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>FAQ — questions about the machine.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/robots.js</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="UNLOCK"
+   data-t="portal.feed.niac.1 feed · channel 1 — mgk-niac, engraved on the drum and inert. src/data/artists/portal.js panel.drum a niac feed — the mainframe does not run on the portal yet">
+  <td><code>portal.feed.niac.1</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>FEED · CHANNEL 1 — MGK-NIAC, engraved on the drum and inert.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/portal.js panel.drum</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">UNLOCK</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">a NIAC feed — the mainframe does not run on the Portal yet</td>
+</tr>
+<tr data-s="HELD" data-c="UNLOCK"
+   data-t="portal.feed.niac.2 feed · channel 2 — mgk-niac, engraved on the drum and inert. src/data/artists/portal.js panel.drum a niac feed — the mainframe does not run on the portal yet">
+  <td><code>portal.feed.niac.2</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>FEED · CHANNEL 2 — MGK-NIAC, engraved on the drum and inert.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/portal.js panel.drum</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">UNLOCK</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">a NIAC feed — the mainframe does not run on the Portal yet</td>
+</tr>
+<tr data-s="HELD" data-c="BLAST"
+   data-t="portal.feed.standard feed · channel 3 · standard — the unit as it stands, at the opening prompt. src/data/artists/portal.js panel.drum ">
+  <td><code>portal.feed.standard</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>FEED · CHANNEL 3 · STANDARD — the unit as it stands, at the opening prompt.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/portal.js panel.drum</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="UNLOCK"
+   data-t="portal.feed.idling-updated feed · channel 4 · standby — engraved on the drum and inert. src/data/artists/portal.js panel.drum no feed on file">
+  <td><code>portal.feed.idling-updated</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>FEED · CHANNEL 4 · STANDBY — engraved on the drum and inert.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/portal.js panel.drum</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">UNLOCK</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">no feed on file</td>
+</tr>
+<tr data-s="HELD" data-c="UNLOCK"
+   data-t="portal.feed.boot-playback feed · channel 5 · cold start — engraved on the drum and inert. src/data/artists/portal.js panel.drum no feed on file">
+  <td><code>portal.feed.boot-playback</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>FEED · CHANNEL 5 · COLD START — engraved on the drum and inert.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/portal.js panel.drum</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">UNLOCK</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">no feed on file</td>
+</tr>
+<tr data-s="HELD" data-c="UNLOCK"
+   data-t="portal.feed.off-first-boot feed · channel 6 · first run — engraved on the drum and inert. src/data/artists/portal.js panel.drum no feed on file">
+  <td><code>portal.feed.off-first-boot</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>FEED · CHANNEL 6 · FIRST RUN — engraved on the drum and inert.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/portal.js panel.drum</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">UNLOCK</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">no feed on file</td>
+</tr>
+<tr data-s="HELD" data-c="UNLOCK"
+   data-t="portal.feed.last-state feed · channel 7 · last state — engraved on the drum and inert. src/data/artists/portal.js panel.drum awaiting a privacy ruling — last state resumes across visits">
+  <td><code>portal.feed.last-state</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>FEED · CHANNEL 7 · LAST STATE — engraved on the drum and inert.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/portal.js panel.drum</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">UNLOCK</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">awaiting a privacy ruling — LAST STATE resumes across visits</td>
+</tr>
+<tr data-s="HELD" data-c="UNLOCK"
+   data-t="portal.feed.test-bench feed · channel 8 · test bench — engraved on the drum and inert. src/data/artists/portal.js panel.drum workshop entry; no public feed">
+  <td><code>portal.feed.test-bench</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>FEED · CHANNEL 8 · TEST BENCH — engraved on the drum and inert.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/portal.js panel.drum</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">UNLOCK</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">workshop entry; no public feed</td>
+</tr>
+<tr data-s="HELD" data-c="BLAST"
+   data-t="portal.switch.maint auto maint — the c1 fortnight as an instrument. thrown up, the latch goes dark. src/data/artists/portal.js panel.switches ">
+  <td><code>portal.switch.maint</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>AUTO MAINT — the C1 fortnight as an instrument. Thrown up, the latch goes dark.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/portal.js panel.switches</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="BLAST"
+   data-t="portal.switch.prompt at prompt — the entry state as an instrument. src/data/artists/portal.js panel.switches ">
+  <td><code>portal.switch.prompt</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>AT PROMPT — the entry state as an instrument.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/portal.js panel.switches</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="BLAST"
+   data-t="portal.dial.live source · live — the dial position that arms. src/data/artists/portal.js panel.dial ">
+  <td><code>portal.dial.live</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>SOURCE · LIVE — the dial position that arms.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/portal.js panel.dial</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="UNLOCK"
+   data-t="portal.dial.seeded source · seeded — a seeded feed the lamps would read. src/data/artists/portal.js panel.dial a seeded feed on file">
+  <td><code>portal.dial.seeded</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>SOURCE · SEEDED — a seeded feed the lamps would read.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/portal.js panel.dial</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">UNLOCK</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">a seeded feed on file</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.answers ask mgk — the answer engine. the thing the machine is for. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.answers</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>ASK MGK — the answer engine. The thing the machine is for.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: online</div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.polarity polarity — how positive or negative the machine is willing to be. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.polarity</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Polarity — how positive or negative the machine is willing to be.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.clarity clarity — how plainly it will say it, down to offensive. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.clarity</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Clarity — how plainly it will say it, down to Offensive.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.messages the inbox — voice, text and system messages, list → open → read. weird-baby-robots/tools/viiip_twin.html message wording is parked ([papa])">
+  <td><code>twin.app.messages</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>The inbox — voice, text and system messages, list → open → read.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build PARTIAL</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">message wording is parked ([PAPA])</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.probabilities probabilities — coin flip, pick a number, pick a card, roll dice, lottery numbers. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.probabilities</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Probabilities — Coin Flip, Pick a number, Pick a card, Roll Dice, Lottery Numbers.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.detectors detectors — bullshit, stud, trustworthy, attractiveness. one needle, four verdict tables. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.detectors</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Detectors — Bullshit, Stud, Trustworthy, Attractiveness. One needle, four verdict tables.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.advice.panel advice rows 0–2 — everyday, career chooser, career advice. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.advice.panel</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Advice rows 0–2 — Everyday, Career Chooser, Career Advice.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="TRANSMISSION"
+   data-t="twin.app.advice.rest advice rows 3–7 — office nickname, water cooler, partners, friends &amp; family, inlaws and outlaws. weird-baby-robots/tools/viiip_twin.html a vulgar-mode ruling against the clarity registers (office nickname) content nobody has authored (the rest)">
+  <td><code>twin.app.advice.rest</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Advice rows 3–7 — Office Nickname, Water Cooler, Partners, Friends &amp; Family, Inlaws and Outlaws.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build STUB</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">TRANSMISSION</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">a vulgar-mode ruling against the Clarity registers (Office Nickname)<br>content nobody has authored (the rest)</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.appp the app-pattern engine — excuses and lines. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.appp</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>The app-pattern engine — Excuses and Lines.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.radio radio [−07]. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.radio</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Radio [−07].<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.eliza eliza [psych −02]. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.eliza</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Eliza [PSYCH −02].<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.brain brain [psych −02]. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.brain</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Brain [PSYCH −02].<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.ink ink blot [psych −02]. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.ink</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Ink blot [PSYCH −02].<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.tap phone tap [−07]. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.tap</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Phone Tap [−07].<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.maint maintenance — the care ritual. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.maint</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Maintenance — the care ritual.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.calc calculator — and the 80085/07734 egg class is the reason it exists. weird-baby-robots/tools/viiip_twin.html egg.calculator">
+  <td><code>twin.app.calc</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Calculator — and the 80085/07734 egg class is the reason it exists.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">egg.calculator</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.note notepad. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.note</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Notepad.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.fortune fortune — 40 fortunes across 5 registers. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.fortune</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Fortune — 40 fortunes across 5 registers.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.horoscope horoscope — sign chosen by menu every use, sticky to last used. weird-baby-robots/tools/viiip_twin.html egg.name">
+  <td><code>twin.app.horoscope</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Horoscope — sign chosen by menu every use, sticky to last used.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">egg.name</td>
+</tr>
+<tr data-s="HELD" data-c="TRANSMISSION"
+   data-t="twin.app.predictions.rest predictions rows 2+ — beyond fortune and horoscope. weird-baby-robots/tools/viiip_twin.html content">
+  <td><code>twin.app.predictions.rest</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Predictions rows 2+ — beyond Fortune and Horoscope.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build STUB</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">TRANSMISSION</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">content</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.bs the bs process [b4]. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.bs</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>The BS process [B4].<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.voice voice — eleven slots; one line sets the current one. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.voice</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Voice — eleven slots; one line sets the current one.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build PARTIAL</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.app.user.name preferences › user › name — the user station: name and birthdate, spelled on a letter ring. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.app.user.name</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Preferences › User › Name — the user station: name and birthdate, spelled on a letter ring.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="TRANSMISSION"
+   data-t="twin.app.user.security preferences › user › security — passcodes exist and are checked nowhere. weird-baby-robots/tools/viiip_twin.html a ruling on what a passcode gates">
+  <td><code>twin.app.user.security</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Preferences › User › Security — passcodes exist and are checked nowhere.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build STUB</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">TRANSMISSION</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">a ruling on what a passcode gates</td>
+</tr>
+<tr data-s="HELD" data-c="TRANSMISSION"
+   data-t="twin.app.codes codes — code runner, bist, userdata, checksum. all four scaffold. weird-baby-robots/tools/viiip_twin.html content and a design ruling">
+  <td><code>twin.app.codes</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>Codes — Code Runner, BIST, Userdata, Checksum. All four scaffold.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build STUB</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">TRANSMISSION</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">content and a design ruling</td>
+</tr>
+<tr data-s="HELD" data-c="TRANSMISSION"
+   data-t="twin.app.mgkmodel mgk model — classic, large, audio. three output personalities. weird-baby-robots/tools/viiip_twin.html a design ruling on what the three modes are">
+  <td><code>twin.app.mgkmodel</code><div class="k" style="font-size:11px;margin-top:3px">app</div></td>
+  <td>MGK Model — Classic, Large, Audio. Three output personalities.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build STUB</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">TRANSMISSION</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">a design ruling on what the three modes ARE</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.game.tilt-drive tilt drive weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.game.tilt-drive</code><div class="k" style="font-size:11px;margin-top:3px">game</div></td>
+  <td>Tilt Drive<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.game.gobble gobble weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.game.gobble</code><div class="k" style="font-size:11px;margin-top:3px">game</div></td>
+  <td>Gobble<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.game.avoidsteroids avoidsteroids — revived from 346 commented-out lines weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.game.avoidsteroids</code><div class="k" style="font-size:11px;margin-top:3px">game</div></td>
+  <td>AvoidSteroids — revived from 346 commented-out lines<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.game.snowglobe snow globe — the one game redirected to the fluidic display weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.game.snowglobe</code><div class="k" style="font-size:11px;margin-top:3px">game</div></td>
+  <td>Snow Globe — the one game redirected to the FLUIDIC display<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.game.tictactoe tic tac toe — the panel-dance seed weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.game.tictactoe</code><div class="k" style="font-size:11px;margin-top:3px">game</div></td>
+  <td>Tic Tac Toe — the panel-dance seed<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.game.slots slots weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.game.slots</code><div class="k" style="font-size:11px;margin-top:3px">game</div></td>
+  <td>Slots<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.game.craps craps weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.game.craps</code><div class="k" style="font-size:11px;margin-top:3px">game</div></td>
+  <td>Craps<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.game.blackjack blackjack weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.game.blackjack</code><div class="k" style="font-size:11px;margin-top:3px">game</div></td>
+  <td>Blackjack<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.game.roulette roulette weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.game.roulette</code><div class="k" style="font-size:11px;margin-top:3px">game</div></td>
+  <td>Roulette<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.game.mailrun mail run weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.game.mailrun</code><div class="k" style="font-size:11px;margin-top:3px">game</div></td>
+  <td>Mail Run<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.game.sniper sniper [−07] weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.game.sniper</code><div class="k" style="font-size:11px;margin-top:3px">game</div></td>
+  <td>Sniper [−07]<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.game.stopnum stop on a number weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.game.stopnum</code><div class="k" style="font-size:11px;margin-top:3px">game</div></td>
+  <td>Stop On A Number<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="PACKAGE"
+   data-t="twin.games.unit the games on the actual unit. mgk-viiip firmware ">
+  <td><code>twin.games.unit</code><div class="k" style="font-size:11px;margin-top:3px">game</div></td>
+  <td>The games on the ACTUAL UNIT.<div class="k" style="font-size:11px;margin-top:3px"><code>MGK-VIIIp firmware</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">PACKAGE</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.boot the boot sequence — chatter, modem screech, the monitor windows. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.boot</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>The boot sequence — chatter, modem screech, the monitor windows.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: online</div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.monitor system monitor — the top screen, and the faux-assembly scroller. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.monitor</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>SYSTEM MONITOR — the top screen, and the faux-assembly scroller.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.parcels the parcels — in-machine deliveries that unlock menu rows. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.parcels</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>The parcels — in-machine deliveries that unlock menu rows.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="twin.userrecord the user record / house register — the privacy doctrine as a machine surface, 5 pages, amend and purge. weird-baby-robots/tools/viiip_twin.html [papa] legends">
+  <td><code>twin.userrecord</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>The user record / house register — the privacy doctrine as a machine surface, 5 pages, amend and purge.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">[PAPA] legends</td>
+</tr>
+<tr data-s="HELD" data-c="BLAST"
+   data-t="twin.scaffold the honest scaffold screen — says what a row will be and admits it is a stub. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>twin.scaffold</code><div class="k" style="font-size:11px;margin-top:3px">machine</div></td>
+  <td>The honest scaffold screen — says what a row WILL be and admits it is a stub.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="doc.manual the manual — the 1965 operating &amp; maintenance manual, abeal / a division of scrapco. weird-baby-robots/robots/mgk-viiip/manual ">
+  <td><code>doc.manual</code><div class="k" style="font-size:11px;margin-top:3px">document</div></td>
+  <td>The Manual — the 1965 operating &amp; maintenance manual, ABEAL / a division of ScrapCo.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/robots/mgk-viiip/manual</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="PACKAGE"
+   data-t="doc.manual.plates the manual's microfiche plates — the photographed pages. src/data/artists/robots.js face.plates mike's camera — p2; ≥2400px long edge, whole page including margins, reel order = reading order">
+  <td><code>doc.manual.plates</code><div class="k" style="font-size:11px;margin-top:3px">document</div></td>
+  <td>The Manual's microfiche plates — the photographed pages.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/robots.js face.plates</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">PACKAGE</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">Mike's camera — P2; ≥2400px long edge, whole page including margins, reel order = reading order</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="doc.record the record — the volume: the weekly journal of the reverse-discovery. src/routes/exhibit/recordentry.jsx m19 — what a record number means">
+  <td><code>doc.record</code><div class="k" style="font-size:11px;margin-top:3px">document</div></td>
+  <td>The Record — the volume: the weekly journal of the reverse-discovery.<div class="k" style="font-size:11px;margin-top:3px"><code>src/routes/exhibit/RecordEntry.jsx</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build PARTIAL</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">M19 — what a record number means</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="record.013 record 013 — one entry in the record. src/data/artists/robots.js face.entries m18 — twenty-seven open questions on this entry">
+  <td><code>record.013</code><div class="k" style="font-size:11px;margin-top:3px">document</div></td>
+  <td>Record 013 — one entry in The Record.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/robots.js face.entries</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build PARTIAL</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">M18 — twenty-seven open questions on this entry</td>
+</tr>
+<tr data-s="HELD" data-c="PACKAGE"
+   data-t="doc.record.evidence the record's evidence, photographed. `.vp-fe-plate` is built and empty. src/routes/exhibit/recordentry.jsx mike's camera — p1">
+  <td><code>doc.record.evidence</code><div class="k" style="font-size:11px;margin-top:3px">document</div></td>
+  <td>The Record's evidence, photographed. `.vp-fe-plate` is built and empty.<div class="k" style="font-size:11px;margin-top:3px"><code>src/routes/exhibit/RecordEntry.jsx</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">PACKAGE</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">Mike's camera — P1</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="doc.firmware the firmware — two source trees, checked in. weird-baby-robots/robots/mgk-viiip/sources ">
+  <td><code>doc.firmware</code><div class="k" style="font-size:11px;margin-top:3px">document</div></td>
+  <td>The firmware — two source trees, checked in.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/robots/mgk-viiip/sources</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="TRANSMISSION"
+   data-t="doc.ads one page ads — period advertising plates. — art the viewer standard's plate idiom">
+  <td><code>doc.ads</code><div class="k" style="font-size:11px;margin-top:3px">document</div></td>
+  <td>One Page Ads — period advertising plates.<div class="k" style="font-size:11px;margin-top:3px"><code>—</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">TRANSMISSION</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">art<br>the viewer standard's plate idiom</td>
+</tr>
+<tr data-s="HELD" data-c="UNLOCK"
+   data-t="doc.factlist fact list — a dynamic peephole, one fact at a time, no library. — the stage's peephole kind">
+  <td><code>doc.factlist</code><div class="k" style="font-size:11px;margin-top:3px">document</div></td>
+  <td>Fact List — a dynamic peephole, one fact at a time, no library.<div class="k" style="font-size:11px;margin-top:3px"><code>—</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">UNLOCK</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">the Stage's peephole kind</td>
+</tr>
+<tr data-s="HELD" data-c="EXEMPT"
+   data-t="doc.summary summary — the current state of the whole story, one page. — the arc existing at all">
+  <td><code>doc.summary</code><div class="k" style="font-size:11px;margin-top:3px">document</div></td>
+  <td>Summary — the current state of the whole story, one page.<div class="k" style="font-size:11px;margin-top:3px"><code>—</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag ">exempt</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">the arc existing at all</td>
+</tr>
+<tr data-s="HELD" data-c="BLAST"
+   data-t="doc.charter the_charter.md — still draft v0.3, not published. docs/ m12 — mike">
+  <td><code>doc.charter</code><div class="k" style="font-size:11px;margin-top:3px">document</div></td>
+  <td>THE_CHARTER.md — still DRAFT v0.3, not published.<div class="k" style="font-size:11px;margin-top:3px"><code>docs/</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build PARTIAL</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">M12 — Mike</td>
+</tr>
+<tr data-s="HELD" data-c="EXEMPT"
+   data-t="doc.credo the billionaire's credo — unwritten; /foundation q10 carries a [papa] and the scrubber drops it. src/data/artists/foundation.js m13 — mike's words">
+  <td><code>doc.credo</code><div class="k" style="font-size:11px;margin-top:3px">document</div></td>
+  <td>The Billionaire's Credo — unwritten; /foundation Q10 carries a [PAPA] and the scrubber drops it.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/foundation.js</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag ">exempt</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">M13 — Mike's words</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="phys.units the physical mgk units — the actual machines, in a room. the physical world ">
+  <td><code>phys.units</code><div class="k" style="font-size:11px;margin-top:3px">prop</div></td>
+  <td>The physical MGK units — the actual machines, in a room.<div class="k" style="font-size:11px;margin-top:3px"><code>the physical world</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: arrived</div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="PACKAGE"
+   data-t="phys.niac.whole a photograph of the mgk-niac cabinet, whole. the physical world mike's camera — p4">
+  <td><code>phys.niac.whole</code><div class="k" style="font-size:11px;margin-top:3px">prop</div></td>
+  <td>A photograph of the MGK-NIAC CABINET, whole.<div class="k" style="font-size:11px;margin-top:3px"><code>the physical world</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">PACKAGE</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">Mike's camera — P4</td>
+</tr>
+<tr data-s="HELD" data-c="PACKAGE"
+   data-t="phys.cases the cases and the case objects — chips, cards, the things in the boxes. the physical world photography which are real and which are referenced">
+  <td><code>phys.cases</code><div class="k" style="font-size:11px;margin-top:3px">artifact</div></td>
+  <td>The cases and the case objects — chips, cards, the things in the boxes.<div class="k" style="font-size:11px;margin-top:3px"><code>the physical world</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">PACKAGE</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">photography<br>which are real and which are referenced</td>
+</tr>
+<tr data-s="HELD" data-c="PACKAGE"
+   data-t="phys.nickels the buffalo nickels — canon, physically present, deliberately unphotographed. the physical world a reveal class that does not exist yet">
+  <td><code>phys.nickels</code><div class="k" style="font-size:11px;margin-top:3px">artifact</div></td>
+  <td>The buffalo nickels — canon, physically present, deliberately unphotographed.<div class="k" style="font-size:11px;margin-top:3px"><code>the physical world</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">PACKAGE</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">a reveal class that does not exist yet</td>
+</tr>
+<tr data-s="HELD" data-c="PACKAGE"
+   data-t="phys.time time (the magazine) — the period artifact. the physical world a rights check before any scan is published">
+  <td><code>phys.time</code><div class="k" style="font-size:11px;margin-top:3px">artifact</div></td>
+  <td>Time (the magazine) — the period artifact.<div class="k" style="font-size:11px;margin-top:3px"><code>the physical world</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">PACKAGE</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">a rights check before any scan is published</td>
+</tr>
+<tr data-s="HELD" data-c="PACKAGE"
+   data-t="phys.manual.original the original printed manuals — held, not published. the physical world [papa] — whether an original is ever published">
+  <td><code>phys.manual.original</code><div class="k" style="font-size:11px;margin-top:3px">artifact</div></td>
+  <td>The original printed manuals — held, not published.<div class="k" style="font-size:11px;margin-top:3px"><code>the physical world</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag n">PACKAGE</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">[PAPA] — whether an original is ever published</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="sound.select select — through the throat, 23 call sites. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>sound.select</code><div class="k" style="font-size:11px;margin-top:3px">sound</div></td>
+  <td>Select — through the throat, 23 call sites.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="sound.scroll scroll — through the throat, 12 call sites. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>sound.scroll</code><div class="k" style="font-size:11px;margin-top:3px">sound</div></td>
+  <td>Scroll — through the throat, 12 call sites.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="sound.connected connected — through the throat, 12 call sites. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>sound.connected</code><div class="k" style="font-size:11px;margin-top:3px">sound</div></td>
+  <td>Connected — through the throat, 12 call sites.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="sound.powermaury powermaury — through the throat, 11 call sites. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>sound.powermaury</code><div class="k" style="font-size:11px;margin-top:3px">sound</div></td>
+  <td>PowerMaury — through the throat, 11 call sites.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="sound.connectionsuccess connectionsuccess — through the throat, 11 call sites. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>sound.connectionsuccess</code><div class="k" style="font-size:11px;margin-top:3px">sound</div></td>
+  <td>ConnectionSuccess — through the throat, 11 call sites.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="sound.beepsandboops beepsandboops — through the throat, 6 call sites. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>sound.beepsandboops</code><div class="k" style="font-size:11px;margin-top:3px">sound</div></td>
+  <td>BeepsAndBoops — through the throat, 6 call sites.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="sound.whitenoise whitenoise — through the throat, 5 call sites. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>sound.whitenoise</code><div class="k" style="font-size:11px;margin-top:3px">sound</div></td>
+  <td>WhiteNoise — through the throat, 5 call sites.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="BLAST"
+   data-t="sound.datatransfer datatransfer — the modem screech. mapped, fires correctly, and nothing calls it. weird-baby-robots/tools/viiip_twin.html a ruling on where a data-transfer sound belongs">
+  <td><code>sound.datatransfer</code><div class="k" style="font-size:11px;margin-top:3px">sound</div></td>
+  <td>DataTransfer — the modem screech. Mapped, fires correctly, and NOTHING CALLS IT.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build PARTIAL</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">a ruling on where a data-transfer sound belongs</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="sound.slosh slosh 0–4 — the five liquid variants of the fluidic suspension. weird-baby-robots/tools/viiip_twin.html a ruling on when each of the other four plays — shake? bubble merge? reveal? settle?">
+  <td><code>sound.slosh</code><div class="k" style="font-size:11px;margin-top:3px">sound</div></td>
+  <td>Slosh 0–4 — the five liquid variants of the fluidic suspension.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build PARTIAL</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">a ruling on when each of the other four plays — shake? bubble merge? reveal? settle?</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="sound.direct.dial90 dial_handshake / fx_dial90 — the 90s dial. bypasses the throat by design. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>sound.direct.dial90</code><div class="k" style="font-size:11px;margin-top:3px">sound</div></td>
+  <td>Dial_Handshake / FX_dial90 — the 90s dial. Bypasses the throat by design.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="sound.direct.modem boot3_chatter / fx_modem — the download screech. bypasses the throat by design. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>sound.direct.modem</code><div class="k" style="font-size:11px;margin-top:3px">sound</div></td>
+  <td>Boot3_Chatter / FX_modem — the download screech. Bypasses the throat by design.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="sound.direct.reveal niac_die_reveal / fx_reveal — thunk and settle. bypasses the throat by design. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>sound.direct.reveal</code><div class="k" style="font-size:11px;margin-top:3px">sound</div></td>
+  <td>NIAC_Die_Reveal / FX_reveal — thunk and settle. Bypasses the throat by design.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="sound.direct.cards card_ceremony — the riffles. bypasses the throat by design. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>sound.direct.cards</code><div class="k" style="font-size:11px;margin-top:3px">sound</div></td>
+  <td>Card_Ceremony — the riffles. Bypasses the throat by design.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="sound.direct.glitch glitch_tick — the glitch layer. bypasses the throat by design. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>sound.direct.glitch</code><div class="k" style="font-size:11px;margin-top:3px">sound</div></td>
+  <td>Glitch_Tick — the glitch layer. Bypasses the throat by design.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="sound.direct.snowglobe sg_step — the snow globe's song. bypasses the throat by design. weird-baby-robots/tools/viiip_twin.html ">
+  <td><code>sound.direct.snowglobe</code><div class="k" style="font-size:11px;margin-top:3px">sound</div></td>
+  <td>SG_step — the snow globe's song. Bypasses the throat by design.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/tools/viiip_twin.html</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="BLAST"
+   data-t="sound.electrical-short wb_electrical-short v1/v2 — the house's own recorded effect. weird-baby-robots/assets/audio ">
+  <td><code>sound.electrical-short</code><div class="k" style="font-size:11px;margin-top:3px">sound</div></td>
+  <td>WB_electrical-short v1/v2 — the house's own recorded effect.<div class="k" style="font-size:11px;margin-top:3px"><code>weird-baby-robots/assets/audio</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="wal.carsie-blanton carsie blanton on worth a listen — two songs, about the songs, about the artist, what they are up to. src/data/artists/worth-a-listen.js ">
+  <td><code>wal.carsie-blanton</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>Carsie Blanton on Worth A Listen — two songs, About the Songs, About the Artist, What they are up to.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/worth-a-listen.js</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="wal.hunter-root hunter root on worth a listen — two songs, about the songs, about the artist, what they are up to. src/data/artists/worth-a-listen.js ">
+  <td><code>wal.hunter-root</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>Hunter Root on Worth A Listen — two songs, About the Songs, About the Artist, What they are up to.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/worth-a-listen.js</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="wal.jesse-welles jesse welles on worth a listen — two songs, about the songs, about the artist, what they are up to. src/data/artists/worth-a-listen.js ">
+  <td><code>wal.jesse-welles</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>Jesse Welles on Worth A Listen — two songs, About the Songs, About the Artist, What they are up to.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/worth-a-listen.js</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="wal.mikey-mike mikey mike on worth a listen — two songs, about the songs, about the artist, what they are up to. src/data/artists/worth-a-listen.js ">
+  <td><code>wal.mikey-mike</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>Mikey Mike on Worth A Listen — two songs, About the Songs, About the Artist, What they are up to.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/worth-a-listen.js</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="EXEMPT"
+   data-t="wal.artifacts wal artifacts, below the line — deliberately empty. src/data/artists/worth-a-listen.js an artist earning one">
+  <td><code>wal.artifacts</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
+  <td>WAL artifacts, below the line — deliberately empty.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/worth-a-listen.js</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag ">exempt</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">an artist earning one</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="wal.banners the double-height banner per wal artist, in the gift shop. src/data/wb_roster.js mike's art">
+  <td><code>wal.banners</code><div class="k" style="font-size:11px;margin-top:3px">commerce</div></td>
+  <td>The double-height banner per WAL artist, in the gift shop.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/wb_roster.js</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build PARTIAL</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px">Mike's art</td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="shop.sticker the house's own shelf item — a sticker. src/data/wb_merch.js ">
+  <td><code>shop.sticker</code><div class="k" style="font-size:11px;margin-top:3px">commerce</div></td>
+  <td>The house's own shelf item — a sticker.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/wb_merch.js</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="EXEMPT"
+   data-t="shop.shirts shirts and hats. — c19 — mike">
+  <td><code>shop.shirts</code><div class="k" style="font-size:11px;margin-top:3px">commerce</div></td>
+  <td>Shirts and hats.<div class="k" style="font-size:11px;margin-top:3px"><code>—</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag ">exempt</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">C19 — Mike</td>
+</tr>
+<tr data-s="HELD" data-c="EXEMPT"
+   data-t="shop.domain shop.weird.baby — the custom domain. — big cartel platinum — c20">
+  <td><code>shop.domain</code><div class="k" style="font-size:11px;margin-top:3px">commerce</div></td>
+  <td>shop.weird.baby — the custom domain.<div class="k" style="font-size:11px;margin-top:3px"><code>—</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag ">exempt</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">Big Cartel Platinum — C20</td>
+</tr>
+<tr data-s="HELD" data-c="EXEMPT"
+   data-t="shop.mikes mike's own gift shop. — mike bringing source — c18">
+  <td><code>shop.mikes</code><div class="k" style="font-size:11px;margin-top:3px">commerce</div></td>
+  <td>Mike's own gift shop.<div class="k" style="font-size:11px;margin-top:3px"><code>—</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag ">exempt</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">Mike bringing source — C18</td>
+</tr>
+<tr data-s="HELD" data-c="EXEMPT"
+   data-t="tool.provenance the provenance boundary and gate — every visitor-facing string carries its origin. tools/provenance-sweep.mjs ">
+  <td><code>tool.provenance</code><div class="k" style="font-size:11px;margin-top:3px">tool</div></td>
+  <td>The provenance boundary and gate — every visitor-facing string carries its origin.<div class="k" style="font-size:11px;margin-top:3px"><code>tools/provenance-sweep.mjs</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag ">exempt</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="EXEMPT"
+   data-t="tool.assettable the asset table — 253 media files with what each is, what depends on it, a quality read, mike's verdict and the reveal arc. tools/asset-table.mjs ">
+  <td><code>tool.assettable</code><div class="k" style="font-size:11px;margin-top:3px">tool</div></td>
+  <td>The asset table — 253 media files with what each is, what depends on it, a quality read, Mike's verdict and the reveal arc.<div class="k" style="font-size:11px;margin-top:3px"><code>tools/asset-table.mjs</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag ">exempt</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="EXEMPT"
+   data-t="tool.reveal this ledger. reveal/ledger-declare.mjs mike's story schedule — every `when` is null">
+  <td><code>tool.reveal</code><div class="k" style="font-size:11px;margin-top:3px">tool</div></td>
+  <td>This ledger.<div class="k" style="font-size:11px;margin-top:3px"><code>reveal/ledger-declare.mjs</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build PARTIAL</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag ">exempt</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">Mike's story schedule — every `when` is null</td>
+</tr>
+<tr data-s="HELD" data-c="EXEMPT"
+   data-t="tool.openactions the open-action register — every open item in both repos, one place. docs/open_actions.md ">
+  <td><code>tool.openactions</code><div class="k" style="font-size:11px;margin-top:3px">tool</div></td>
+  <td>The open-action register — every open item in both repos, one place.<div class="k" style="font-size:11px;margin-top:3px"><code>docs/OPEN_ACTIONS.md</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag ">exempt</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="channel.shop giving channel — the gift shop. src/data/artists/foundation.js ledger ">
+  <td><code>channel.shop</code><div class="k" style="font-size:11px;margin-top:3px">commerce</div></td>
+  <td>Giving channel — the gift shop.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/foundation.js LEDGER</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="REVEALED" data-c="BLAST"
+   data-t="channel.music giving channel — the house's own music. src/data/artists/foundation.js ledger ">
+  <td><code>channel.music</code><div class="k" style="font-size:11px;margin-top:3px">commerce</div></td>
+  <td>Giving channel — the house's own music.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/foundation.js LEDGER</code></div></td>
+  <td><span class="tag y">REVEALED</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build LIVE</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag y">BLAST</span>
+      <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
+</tr>
+<tr data-s="HELD" data-c="EXEMPT"
+   data-t="channel.qr giving channel — given in weird.baby's name, by a code you scan. src/data/artists/foundation.js ledger a payment mechanism nobody has built">
+  <td><code>channel.qr</code><div class="k" style="font-size:11px;margin-top:3px">commerce</div></td>
+  <td>Giving channel — given in Weird.Baby's name, by a code you scan.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/foundation.js LEDGER</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag ">exempt</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">a payment mechanism nobody has built</td>
+</tr>
+<tr data-s="HELD" data-c="EXEMPT"
+   data-t="channel.supplies giving channel — a registry of supplies. src/data/artists/foundation.js ledger a public list of what the museum actually needs">
+  <td><code>channel.supplies</code><div class="k" style="font-size:11px;margin-top:3px">commerce</div></td>
+  <td>Giving channel — a registry of supplies.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/foundation.js LEDGER</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag ">exempt</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">a public list of what the museum actually needs</td>
+</tr>
+<tr data-s="HELD" data-c="EXEMPT"
+   data-t="channel.services giving channel — a registry of services. src/data/artists/foundation.js ledger the same list, for work rather than goods">
+  <td><code>channel.services</code><div class="k" style="font-size:11px;margin-top:3px">commerce</div></td>
+  <td>Giving channel — a registry of services.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/foundation.js LEDGER</code></div></td>
+  <td><span class="tag g">HELD</span>
+      <div class="k" style="font-size:11px;margin-top:4px">build NOT_BUILT</div>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+  <td><span class="tag ">exempt</span>
+      <div class="k" style="font-size:11px;margin-top:4px"><i>no named arrival</i></div></td>
+  <td class="k" style="font-size:11.5px">the same list, for work rather than goods</td>
+</tr></tbody></table></div>
+
+<footer>Built by <code>node tools/dictation/prep.mjs</code> from
+<code>provenance/asset-table.json</code>, <code>reveal/ledger.json</code>,
+<code>reveal/delivery.mjs</code> and <code>reveal/transfers.mjs</code>. It writes
+nothing back. <code>verdict</code> is Mike's field and Ops never sets it.</footer>
+</div>
+<script>
+(function(){
+ function wire(tid,qid,cid,attr,tests){
+  var t=document.getElementById(tid),q=document.getElementById(qid),c=document.getElementById(cid);
+  var btns=[].slice.call(document.querySelectorAll('[data-'+attr+']'));
+  var mode='all';
+  function apply(){
+   var s=q.value.trim().toLowerCase(),n=0;
+   [].forEach.call(t.tBodies[0].rows,function(r){
+    var ok=tests[mode](r)&&(!s||r.getAttribute('data-t').indexOf(s)>=0);
+    r.className=ok?'':'hide'; if(ok)n++;
+   });
+   c.textContent=n+' shown';
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){
+   mode=b.getAttribute('data-'+attr);
+   btns.forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});
+   apply();});});
+  q.addEventListener('input',apply); apply();
+ }
+ wire('t1','q1','c1','f1',{
+  all:function(){return true;},
+  gov:function(r){return r.getAttribute('data-g')==='gov';},
+  wait:function(r){return r.getAttribute('data-r').indexOf('YES')===0;},
+  done:function(r){return r.getAttribute('data-r').indexOf('ALREADY')===0;},
+  weak:function(r){var q=r.getAttribute('data-q');return q==='weak'||q==='wrong'||q==='placeholder'||q==='unjudged';},
+  gone:function(r){return r.getAttribute('data-m')==='1';}
+ });
+ wire('t2','q2','c2','f2',{
+  all:function(){return true;},
+  held:function(r){return r.getAttribute('data-s')==='HELD';},
+  week0:function(r){var c=r.getAttribute('data-c');return c==='BLAST'||c==='UNLOCK';},
+  later:function(r){var c=r.getAttribute('data-c');return c==='PACKAGE'||c==='TRANSMISSION';},
+  deps:function(r){return r.cells[4].textContent.indexOf('nothing')<0;}
+ });
+})();
+</script>
+</body></html>
