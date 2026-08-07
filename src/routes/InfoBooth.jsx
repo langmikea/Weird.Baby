@@ -51,7 +51,10 @@ import { visitorProse, kept } from "../lib/visitor-prose.js";
    P9, so one sentence about the keeper existed in two rooms with no link
    between the copies. Both now read `KEEPER`. `CONTACT` is declared beside it
    for the same reason — see src/data/house-copy.js. */
-import { KEEPER, CONTACT } from "../data/house-copy.js";
+import { KEEPER, CONTACT, AFFILIATION, USE_RIGHTS } from "../data/house-copy.js";
+/* [F1 2026-08-06] the two fixed ends of the FAQ format, which this room is the
+   original of and which four wing FAQs now print too — see faq-face.js. */
+import { FAQ_HEAD, SIGN_OFF, ADDRESS } from "../data/faq-face.js";
 
 /* ─── THE QUESTIONS ─────────────────────────────────────────────────────────
    Ordered the way a stranger meets the building: what is this, what does it
@@ -263,13 +266,10 @@ const FAQ = [
        "settled.",
   },
   {
+    /* [F2 2026-08-06] DECLARED IN house-copy.js — `/wal`'s own FAQ asks the
+       same question in the room it is actually asked in. */
     q: "Are you affiliated with the artists you show?",
-    a: "No. The artists in Other Music Worth a Listen are not partners, " +
-       "clients, or signings — they are people whose records we think you " +
-       "should hear. Every door on their page leads to their own site, their " +
-       "own store, their own channel, because the exhibit is a pointer and " +
-       "not a home. [PAPA] — the formal statement of that relationship, if " +
-       "one is ever needed, is Papa's to write.",
+    a: AFFILIATION,
   },
   /* [B3 2026-08-05] "What are the rooms?" and "There is a gift shop. What is
      it?" WERE HERE AND ARE DELETED. See the head of this list for the ruling.
@@ -284,12 +284,10 @@ const FAQ = [
        it opens on the wrong subject. Opening on the artists lets the museum's
        half be one short sentence instead of a qualification. */
     q: "Can I use what is here?",
-    a: "The artists' work is the artists' — their music, their pictures, " +
-       "their words — and every door on their pages goes to them rather than " +
-       "to us. What is ours is the photographs of our own objects, taken here " +
-       "and printed here, and we are glad to be asked for those. When in " +
-       "doubt, write; the address is at the bottom of this page. [PAPA] — a " +
-       "plain licence for the museum's own images is Papa's to set.",
+    /* [F2 2026-08-06] DECLARED IN house-copy.js — see the note two questions
+       up. Its "the address is at the bottom of this page" is true in both
+       rooms: F1 put the booth's own sign-off under every wing FAQ. */
+    a: USE_RIGHTS,
   },
   {
     q: "Is it finished?",
@@ -396,8 +394,13 @@ export default function InfoBooth() {
             the question that asked it. Native <details>, so it works with a
             keyboard, with a screen reader, and with JavaScript having a bad
             day — the platform mechanic rather than a custom one (Doctrine 8). */}
+        {/* [F1 2026-08-06] THE HEADING IS THE SAME DECLARATION EVERY WING'S FAQ
+            PRINTS. It was typed here and typed nowhere else, because nowhere
+            else printed it; four wing FAQs print it now, so it is one string in
+            `src/data/faq-face.js` and this room reads it — Doctrine 17 applied
+            the moment a passage stopped belonging to one room. */}
         <div className="sheet-faq">
-          <h2 className="sheet-faq-head">Questions</h2>
+          <h2 className="sheet-faq-head">{FAQ_HEAD}</h2>
           {faq.map(({ q, a }) => (
             <details key={q} className="sheet-q">
               <summary>{q}</summary>
@@ -408,9 +411,10 @@ export default function InfoBooth() {
 
         <div className="sheet-rule" />
 
+        {/* [F1 2026-08-06] and the sign-off, for the same reason. */}
         <p className="sheet-contact">
-          Thank you for coming.{" "}
-          <a href="mailto:papa@weird.baby">papa@weird.baby</a>
+          {SIGN_OFF}{" "}
+          <a href={"mailto:" + ADDRESS}>{ADDRESS}</a>
         </p>
         {/* One quiet way back, in the prose, for a visitor who has read to the
             bottom and does not want to travel back up to the bar. Not a second

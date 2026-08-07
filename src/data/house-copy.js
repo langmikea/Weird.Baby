@@ -65,3 +65,42 @@ export const KEEPER =
    instruction, no follow-on sentences. */
 export const CONTACT =
   "Write to the guy running the place: papa@weird.baby.";
+
+/* WHAT THE HOUSE IS TO THE ARTISTS IT SHOWS.
+   [F2 2026-08-06] Written for the booth and now printed in `/wal`'s own FAQ as
+   well, because that is the room the question is asked in. It is the same
+   passage rather than a second one for exactly the reason this file exists: a
+   statement about the museum's relationship to the people in it is a STANDING
+   TERM, and a standing term stated twice is two terms that will disagree.
+   R7's rule is what puts it in two places at once — *"a visitor must never have
+   to run back to the lobby"* — and D1's rule is what stops that costing a
+   divergence. */
+export const AFFILIATION =
+  "No. The artists in Other Music Worth a Listen are not partners, " +
+  "clients, or signings — they are people whose records we think you " +
+  "should hear. Every door on their page leads to their own site, their " +
+  "own store, their own channel, because the exhibit is a pointer and " +
+  "not a home. [PAPA] — the formal statement of that relationship, if " +
+  "one is ever needed, is Papa's to write.";
+
+/* WHOSE THE MATERIAL IS, AND WHAT MAY BE DONE WITH IT. Same reasoning. */
+export const USE_RIGHTS =
+  "The artists' work is the artists' — their music, their pictures, " +
+  "their words — and every door on their pages goes to them rather than " +
+  "to us. What is ours is the photographs of our own objects, taken here " +
+  "and printed here, and we are glad to be asked for those. When in " +
+  "doubt, write; the address is at the bottom of this page. [PAPA] — a " +
+  "plain licence for the museum's own images is Papa's to set.";
+
+/* THE SIGN-OFF THAT CLOSES AN FAQ.
+   [F1 2026-08-06] MIKE, ruling the FAQ format for the third time: "the booth's
+   shape is a short credo block, the word Questions, the question list, A
+   SIGN-OFF LINE WITH THE ADDRESS, and the exit. Nothing else." The booth typed
+   these two words inline; every wing FAQ now closes the same way, so they are
+   declared here with the passages they belong beside.
+   TWO LITERALS RATHER THAN ONE ASSEMBLED FROM THE OTHER, deliberately — see
+   this file's own boundary note above. A passage built by interpolation falls
+   off the provenance sweep silently, which is a worse defect than the address
+   appearing in two sentences that both have to say it. */
+export const SIGN_OFF = "Thank you for coming.";
+export const ADDRESS = "papa@weird.baby";

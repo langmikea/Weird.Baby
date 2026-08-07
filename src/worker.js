@@ -34,21 +34,45 @@
        `"/assets/held/*"` in that list the gate is never asked and the chunk is
        public. If that line goes, this file stops working silently.
 
-   ═══ [H1 2026-08-06, THE PORTAL HOLD] THERE ARE TWO HELD DIRECTORIES NOW ═════
-   Mike held the Portal from launch, and holding it needed something the Hunter
-   Root wing did not: `/assets/held/` catches BUILT chunks, and the Portal's
-   material is not all built — the twin is a 620 KB hand-written HTML file and
-   the album's cover and poster are PNGs, all of them served straight off the
-   asset store at addresses a visitor can type. A code-only door leaves the
-   pictures on the street.
-   SO `/held/` IS THE SECOND DOOR AND IT IS THE PUBLIC TREE'S OWN: anything
-   under `public/held/` ships to the same directory and is refused by the same
-   cookie. Both prefixes must be in `run_worker_first` or the worker is never
-   asked; `reveal:check`'s reachability pass reads THIS LIST and that one and
-   faults if either loses an entry, which is the only reason the arrangement
-   cannot rot silently. */
+   ═══ [H1 2026-08-06, THE PORTAL HOLD] A CODE DOOR IS ONLY HALF A DOOR ════════
+   Holding the Portal needed something the Hunter Root wing did not: a code
+   directory catches BUILT chunks, and the Portal's material is not all built —
+   the twin is a 620 KB hand-written HTML file and the album's cover and poster
+   are PNGs, all of them served straight off the asset store at addresses a
+   visitor can type. A code-only door leaves the pictures on the street. So each
+   door is a PAIR: a directory under `assets/` for chunks and one in the public
+   tree for files.
+
+   ═══ [V1 2026-08-06] AND THE PAIRS ARE NAMED FOR THEIR REASONS, NOT FOR THEIR
+   MECHANISM — WHICH IS THE WHOLE OF WHY THE STAGE SWITCH IS SAFE ═════════════
+   Mike reversed the pull-back for development: *"show everything that is
+   placed, until asked to filter."* The moment a switch exists that opens a
+   door, it matters enormously WHICH door, because this file was guarding two
+   completely different things behind one name:
+
+     LOCKED_DIRS   THE PERMISSION HOLD. `/hr`. The museum does not have Hunter
+                   Root's permission (R5), and a permission hold does not expire
+                   when a museum opens — it expires when the permission arrives.
+                   **Refused without the cookie in EVERY stage.** No flag, no
+                   env var and no build reaches it.
+     STAGE_DIRS    THE STAGE HOLD. The Portal and the machines' own photographs,
+                   held until launch (H1/H2). Open in DEVELOPMENT; refused
+                   without the cookie at LAUNCH.
+
+   Had these stayed one list, the one word that lets Mike see his own building
+   would also have republished ninety-three of Hunter Root's tracks and a
+   hundred and seven vault image URLs. All four prefixes must be in
+   `run_worker_first` or the worker is never asked; `reveal:check`'s
+   reachability pass reads THIS FILE and that one and faults if either loses an
+   entry, which is the only reason the arrangement cannot rot silently.
+
+   `__WB_STAGE__` IS INJECTED BY vite (`define` in vite.config.js), so it is a
+   literal in the built worker rather than a runtime lookup — there is no
+   environment variable on the deployed Worker that can move it, and the only
+   way to change stage is to build again. */
 const HELD_COOKIE = "wb_held";
-export const HELD_DIRS = ["/assets/held/", "/held/"];
+export const LOCKED_DIRS = ["/assets/locked/", "/locked/"];
+export const STAGE_DIRS = ["/assets/held/", "/held/"];
 const HELD_MAX_AGE = 60 * 60 * 24 * 30;
 /* ONE PASSAGE, ONE DECLARATION (Doctrine 17), applied to this round's own new
    code. The admin page carried an identical copy of this sentence for its
@@ -97,12 +121,22 @@ export default {
       return new Response(null, { status: 204, headers: cors });
     }
 
-    /* THE HELD DIRECTORY. Answered before anything else so that no later
-       branch can accidentally fall through to ASSETS with the wing in it.
+    /* THE SHUT DIRECTORIES. Answered before anything else so that no later
+       branch can accidentally fall through to ASSETS with a wing in it.
        A refusal is a plain 404, not a 403: a 403 confirms there is something
-       there to be forbidden. */
-    if (HELD_DIRS.some(d => url.pathname.startsWith(d))) {
+       there to be forbidden.
+       [V1] THE PERMISSION DOOR IS TESTED FIRST AND ITS BRANCH DOES NOT MENTION
+       THE STAGE. Written in this order on purpose: a future edit that widens
+       the stage condition cannot widen it onto `/hr`, because control never
+       reaches the stage branch with a locked path in hand. */
+    if (LOCKED_DIRS.some(d => url.pathname.startsWith(d))) {
       if (!await heldOpen(request, env)) {
+        return new Response("Not found", { status: 404 });
+      }
+      return env.ASSETS.fetch(request);
+    }
+    if (STAGE_DIRS.some(d => url.pathname.startsWith(d))) {
+      if (__WB_STAGE__ === "launch" && !await heldOpen(request, env)) {
         return new Response("Not found", { status: 404 });
       }
       return env.ASSETS.fetch(request);
@@ -132,6 +166,13 @@ export default {
         open: await heldOpen(request, env),
         configured: !!env.HR_KEY,
         note: env.HR_KEY ? null : NO_KEY_NOTE,
+        /* [V1 2026-08-06] THE STAGE IS REPORTED BY THE THING THAT ENFORCES IT.
+           Mike asked for the two states to be UNAMBIGUOUS, and the honest place
+           to answer that is the server: a page can only say what it was
+           compiled believing, while this branch is the same literal the refusal
+           above reads. `/admin` prints it. Nothing on a public surface does —
+           what stage a museum is at is a fact about the work (Doctrine 11). */
+        stage: __WB_STAGE__,
       }), { headers: { ...cors, "Content-Type": "application/json" } });
     }
 

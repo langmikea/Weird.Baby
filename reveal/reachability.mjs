@@ -29,6 +29,15 @@
      6  A PUBLIC ADDRESS     a held row naming a file outside the held tree
      7  THE ROUTE            a held route must be wrapped on the router
      8  THE PROJECTION       this table itself does not travel to the browser
+     9  THE STAGE            the launch state, tested from outside it
+
+   [V1 2026-08-06] THE NINTH IS THE ANSWER TO "MAKE THE GATE CHECK THE LAUNCH
+   STATE RATHER THAN THE CURRENT VIEW." The first eight already did, and by
+   construction rather than by a branch — they read source and the tree, and
+   neither moves when the stage does. What the ninth adds is the one thing that
+   DOES move: it calls the placement rule with a LAUNCH configuration and
+   asserts the answer is nothing, and it asserts that the permission door's
+   branch in the worker does not mention the stage at all.
 
    THE EIGHTH WAS NOT IN THE DESIGN. It exists because proving the first seven
    meant reading the built bundle, and the bundle turned out to be carrying THIS
@@ -49,37 +58,55 @@ import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
 import { publicLedger, PUBLIC_FIELDS } from "./public-view.mjs";
+import { placeRule, STAGE_PREFIX, GOVERNED_PREFIX } from "./placement.mjs";
+import { DEFAULT_STAGE, DEVELOPMENT, LAUNCH, STAGES as STAGES_OK } from "./stage.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
 const R = p => fs.readFileSync(path.join(REPO, p), "utf8");
 
-/* THE TWO HELD PREFIXES. Declared here, asserted against the worker and the
-   routing rules below rather than trusted — this constant is the thing under
-   test as much as it is the thing testing. */
-export const HELD_PREFIXES = ["/assets/held/", "/held/"];
+/* ═══ THE FOUR SHUT PREFIXES, IN TWO PAIRS. [V1 2026-08-06] ═════════════════
+   Declared here, asserted against the worker and the routing rules below
+   rather than trusted — these constants are the thing under test as much as
+   they are the thing testing.
+   THE PAIRS ARE NAMED FOR THEIR REASONS AND THE DISTINCTION IS LOAD-BEARING:
+   `LOCKED` is the PERMISSION hold (`/hr`), refused in every stage; `STAGE` is
+   the hold that ends at launch (the Portal, the machines' photographs), open
+   in DEVELOPMENT. Every check below treats them identically — a held thing is
+   a held thing — and only check 9 knows there is a difference. */
+export const LOCKED_PREFIXES = ["/assets/locked/", "/locked/"];
+export const STAGE_PREFIXES = ["/assets/held/", "/held/"];
+export const HELD_PREFIXES = [...LOCKED_PREFIXES, ...STAGE_PREFIXES];
 
-/* The public tree's held directory, in repo terms. */
-const HELD_PUBLIC_DIR = "public/held/";
+/* The public tree's shut directories, in repo terms. */
+const HELD_PUBLIC_DIRS = ["public/held/", "public/locked/"];
 
-/* THE FILES THAT ARE ALLOWED TO NAME A HELD PREFIX, because they ARE the door.
-   Everything else in `src/` and `public/` naming one is check 4's fault. */
+/* THE FILES THAT ARE ALLOWED TO NAME A SHUT PREFIX, because they ARE the door.
+   Everything else in `src/` and `public/` naming one is check 4's fault.
+   [V1] `src/lib/placement.js` joins the list and it is the only ADDITION `src/`
+   has ever needed: it computes the stage prefix so that no data file has to
+   carry one, which is what keeps check 4 able to mean something at all. */
 const DOOR_FILES = new Set([
   "src/worker.js",          // the refusal
   "vite.config.js",         // the chunk parking
+  "src/lib/placement.js",   // the stage prefix, computed once
   "reveal/reachability.mjs",
 ]);
 
-/* ── the held module list, READ OFF vite.config.js ─────────────────────────
-   Doctrine 17: one declaration. `HELD_PATHS` is what actually decides which
-   modules land behind the door, so it is also what decides which modules this
-   file treats as held. A second list here would be a second thing to keep in
+/* ── the shut module list, READ OFF vite.config.js ─────────────────────────
+   Doctrine 17: one declaration. Those two arrays are what actually decide which
+   modules land behind a door, so they are also what decide which modules this
+   file treats as shut. A second list here would be a second thing to keep in
    step and one of them would eventually be wrong. */
 export function heldModulePrefixes() {
   const src = R("vite.config.js");
-  const m = /const HELD_PATHS = \[([\s\S]*?)\];/.exec(src);
-  if (!m) return null;
-  return [...m[1].matchAll(/"([^"]+)"/g)].map(x => x[1]);
+  const out = [];
+  for (const name of ["LOCKED_PATHS", "HELD_PATHS"]) {
+    const m = new RegExp(`const ${name} = \\[([\\s\\S]*?)\\];`).exec(src);
+    if (!m) return null;
+    out.push(...[...m[1].matchAll(/"([^"]+)"/g)].map(x => x[1]));
+  }
+  return out;
 }
 
 const norm = s => String(s).replace(/\\/g, "/");
@@ -161,7 +188,7 @@ export function reachabilityFaults(rows) {
       "held-module list is derived from it (Doctrine 17), so a rename there " +
       "silently empties every module check below. Repoint `heldModulePrefixes()`.");
   } else if (!prefixes.length) {
-    faults.push("doors: `HELD_PATHS` in vite.config.js is empty — nothing is parked behind the door.");
+    faults.push("doors: `LOCKED_PATHS` + `HELD_PATHS` in vite.config.js are empty — nothing is parked behind a door.");
   }
 
   const worker = R("src/worker.js");
@@ -196,7 +223,7 @@ export function reachabilityFaults(rows) {
     const where = norm(r.where || "");
     const m = where.match(/public\/[\w./-]+/g) || [];
     for (const hit of m) {
-      if (!hit.startsWith(HELD_PUBLIC_DIR)) {
+      if (!HELD_PUBLIC_DIRS.some(d => hit.startsWith(d))) {
         bad(r.id, `HELD and names \`${hit}\`, which ships to a public address. ` +
           "Anything under `public/` outside `public/held/` is fetchable by anyone " +
           "who types the path — taking a picture off a page does not take it off " +
@@ -231,7 +258,7 @@ export function reachabilityFaults(rows) {
     for (const f of [...files, ...pub, "index.html"]) {
       if (DOOR_FILES.has(f)) continue;
       if (isHeldModule(f, prefixes)) continue;
-      if (norm(f).startsWith(HELD_PUBLIC_DIR)) continue;
+      if (HELD_PUBLIC_DIRS.some(d => norm(f).startsWith(d))) continue;
       if (!fs.existsSync(path.join(REPO, f))) continue;
       const body = stripComments(R(f));
       for (const p of HELD_PREFIXES) {
@@ -318,6 +345,80 @@ export function reachabilityFaults(rows) {
         `ledger: publicLedger() is passing ${[...leaked].join(", ")} through to ` +
         "the browser. The allowlist in reveal/public-view.mjs is the whole of " +
         "that rule — a field that is not in it does not travel.");
+    }
+  }
+
+  /* ---- 9. THE STAGE [V1 2026-08-06] --------------------------------------
+     MIKE: "make the two states switchable and unambiguous, and make the gate
+     check the LAUNCH state rather than the current view."
+
+     EVERYTHING ABOVE ALREADY DOES, BY CONSTRUCTION RATHER THAN BY A BRANCH.
+     Checks 1–8 read source and the tree, and neither moves when the stage
+     does: `HELD_PATHS` parks the Portal's chunk behind the door in both
+     stages, the photographs sit under `public/held/` in both, the ledger says
+     HELD in both. That is not an accident of the design; it IS the design, and
+     it is what makes a development build's gate a statement about launch.
+
+     WHAT IS LEFT IS THE ONE THING THAT DOES MOVE — what `placed()` returns —
+     and the only way to test a state you are not in is to CALL the rule with
+     that state's configuration. Which is why the rule is a pure function in
+     `reveal/placement.mjs` rather than a branch inside the browser module: a
+     stage switch whose launch behaviour can only be observed by launching is a
+     switch nobody can check.
+
+     AND THE THIRD ASSERTION IS THE ONE THAT WOULD ACTUALLY GET BROKEN. The
+     permission door and the stage door are two prefixes in one file, and the
+     obvious future edit — "make the stage condition a bit more general" — is
+     the edit that hands `/hr` to a build flag. So the worker's LOCKED branch is
+     asserted to be free of the stage entirely. */
+  {
+    if (!STAGES_OK.includes(DEFAULT_STAGE)) {
+      faults.push(
+        `stage: DEFAULT_STAGE is "${DEFAULT_STAGE}", which is not a stage. The ` +
+        "default decides what an ordinary `npm run build` publishes.");
+    }
+
+    /* the rule, at launch, on a governed picture nothing delivers */
+    const specimen = GOVERNED_PREFIX + "reference/photos/a-picture-nothing-delivers.png";
+    const atLaunch = placeRule(specimen, { stage: LAUNCH, publicPaths: new Set() });
+    if (atLaunch !== null) {
+      faults.push(
+        `stage: at LAUNCH, placeRule() answered \`${atLaunch}\` for an undelivered ` +
+        "picture of the objects. It must answer nothing at all — an address the " +
+        "renderer declines to use is still an address in the bundle, which is " +
+        "R5's 153 mp3 URLs with a different file extension.");
+    }
+    const atDev = placeRule(specimen, { stage: DEVELOPMENT, publicPaths: new Set() });
+    if (atDev !== STAGE_PREFIX + specimen) {
+      faults.push(
+        "stage: in DEVELOPMENT, placeRule() did not put an undelivered picture " +
+        `behind the stage door — it answered \`${atDev}\`. Mike's whole ruling is ` +
+        "that everything PLACED renders while the museum is being built.");
+    }
+    /* a delivered picture is public in BOTH stages: the rule runs both ways, as
+       `deliveryFaults()` check 2 says it must. */
+    for (const stage of [DEVELOPMENT, LAUNCH]) {
+      const got = placeRule(specimen, { stage, publicPaths: new Set([specimen]) });
+      if (got !== specimen) {
+        faults.push(
+          `stage: a DELIVERED picture did not resolve to its public address at ` +
+          `${stage} — placeRule() answered \`${got}\`.`);
+      }
+    }
+
+    const worker = R("src/worker.js");
+    const lockedBranch = /if \(LOCKED_DIRS\.some[\s\S]*?\n    \}/.exec(worker);
+    if (!lockedBranch) {
+      faults.push(
+        "stage: src/worker.js has no `LOCKED_DIRS` branch this file can read. The " +
+        "permission hold is the one door no build flag may open, and this is what " +
+        "asserts it.");
+    } else if (/__WB_STAGE__/.test(lockedBranch[0])) {
+      faults.push(
+        "stage: the worker's LOCKED_DIRS branch mentions `__WB_STAGE__`. That door " +
+        "is the PERMISSION hold — Hunter Root's wing — and it is refused in every " +
+        "stage. A stage condition on it means one word republishes ninety-three of " +
+        "his tracks. Read the [V1] header in src/worker.js.");
     }
   }
 

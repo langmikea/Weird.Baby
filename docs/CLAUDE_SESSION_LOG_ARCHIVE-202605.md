@@ -1191,3 +1191,80 @@ the pointer in CLAUDE.md's "Older entries" note.*
 - **WHAT DID NOT RUN, SAID PLAINLY: the 390px half of the lap.** The window
   would not resize below 1228 CSS px and Chrome refused `resizeTo` - M97, rather
   than a silence.
+
+---
+
+### 2026-08-06 -> THE PORTAL HOLD + THE PULL-BACK (H1-H8) - sealed
+- **EIGHT INSTRUCTIONS, ALL EIGHT BUILT, AND THE LARGEST FINDING IS A CONSEQUENCE
+  OF TRYING TO PROVE THE FIRST ONE.** Gates: lint **11/9 = baseline** - build
+  green - provenance **PASS** (0 undeclared - 0 stale - 0 invention) -
+  `reveal:check` **PASS** - `parity:gate` **PASS, 4 shared - 0 divergences** -
+  `assets:orphans` **0** - lap on the built bundle under `wrangler dev`,
+  **desktop only**. Full narrative: `docs/MUSEUM_PORTAL_HOLD_LOG-20260806.md`.
+- **H1 ASKED FOR A GATE THAT FAILS WHEN A HELD THING BECOMES REACHABLE. BUILDING
+  IT MEANT READING THE BUILT BUNDLE, WHICH WAS SHIPPING THE WHOLE REVEAL
+  LEDGER** - 162 rows, every `name`, `where`, `dep` and `note`, out of one JSON
+  import in `src/lib/reveal.js` that exists to draw a single LIVE / NOT BUILT
+  column. **That is the file where this house writes down what it holds and does
+  not show**, and it included both eggs whose ONLY written form is that table.
+  64 KB in a chunk every visitor downloads. **Its own header says in capitals
+  that the ledger returns STATE and never WORDS - and the enforcement was the
+  FUNCTION SIGNATURE. A bundle does not ship signatures; it ships the file.**
+  `reveal/public-view.mjs` is a four-field allowlist at `enforce:"pre"`; shared
+  chunk **184.57 KB -> 120.84 KB**.
+- **THE CHECK FOUND SEVEN THINGS THAT WERE ALREADY UNTRUE**, which is the answer
+  to whether it was worth building: `route.hr` and `route.hr.archive` still
+  saying *"by URL only"* a round after the password went on; `route.admin`
+  saying HELD **and** how to reach it in one row (it is REVEALED with
+  `shown:false` now - **P-c**); `twin.scaffold` wearing a developer flag in the
+  `reach` field; `phys.manual.original` treating BEING MENTIONED as reachable.
+  **Nine deliberate breaches, nine caught**, every specimen on a copy.
+- **H2 IS ONE SENTENCE WITH ONE WRITTEN EXCEPTION AND NO FALL-THROUGH.** *A
+  picture of the objects does not appear until a Record entry delivers it.*
+  **26 pictures went dark and one stayed** - the power switch, on the entry that
+  delivers it - and **the FILES MOVED under `public/held/`**, because taking a
+  picture off a page does not take it off the server. The archives stay built:
+  `ArchiveWall` returned `null` on an empty wall, so the shelf VANISHED rather
+  than emptying, which is the defect `logEmpty` was built for one round earlier.
+- **THE COVERLESS-SLEEVE PLACEHOLDER HAD NEVER ONCE BEEN ON SCREEN.** Every album
+  carried art, so `placeholderTile()` was correct in 2026-06 and untested since:
+  ground `#0c0c0c`, title `--wb-gold` = `#211f1c`. **Two black rectangles**, and
+  **only the lap could have found it** - the A1 shape exactly.
+- **THIRTEEN `.vp-face-portal` RULES WERE STYLING A CLASS NO ELEMENT HAS CARRIED
+  SINCE P2**, and were still being cited: F0 spent a paragraph preserving one of
+  them "byte-for-byte" on a face that did not exist. **Dead CSS does not announce
+  itself; it gets cited.** H3b's panel float is four DELETED declarations - the
+  panel takes the house frame every document face already has.
+- **`face.presets` IS READ BY TWO LIVE RENDERERS** - L2's `ARRIVE AS` selector
+  and N9's archive groupings, same field name, different objects - so each Image
+  Archive face was drawing a dropdown of photograph groupings wired to open the
+  twin, and its still was a portal door. Nothing declared it and neither round
+  knew. Deleted.
+- **AND C32's CONTENT-MOVE CARRY HAD NEVER ONCE FIRED**: `tools/asset-table.mjs`
+  keyed its pool `repo`+NUL+`sha` and read it back with a SPACE, eighteen lines
+  apart. **Invisible because its failure mode is the one it was built to fix** -
+  a moved file reads as a lost judgement. 26 judged rows moved this round and
+  every one came up missing, which is what made it big enough to look at.
+- **H6's DATA WAS HALF OF IT**: ten pairs, all one shape (a row in sentence case,
+  its face heading holding the same words shouted), and `.vp-face-title` carried
+  `text-transform:uppercase` - so rewriting the strings alone would have changed
+  nothing a visitor sees. Both halves moved together. **H5's year overlay was
+  printing on two covers in the whole public museum**, and `.cf-overlay` went
+  with it because it was the year's ground.
+- **H7:** `npm run contact-sheet` -> `docs/CONTACT_SHEET.html`. 257 images, both
+  repos, 85.6 MB of source in 906 KB of one file, 0 carrying a verdict.
+- **M99 IS A MECHANISM INSTEAD OF A NOTE** and the drift is **45 rows**;
+  `assets-declare.mjs --write` refuses and names what it would delete (H-b).
+  **THE NUL-BYTE CLASS CAUGHT A SEVENTH AND AN EIGHTH**, both in this round's own
+  patches. **THE 390px HALF OF THE LAP DID NOT RUN FOR THE THIRD ROUND RUNNING**
+  - `window.innerWidth` reads 1228 and will not go below it (**M97**).
+
+---
+
+## Archive notes carried out of CLAUDE.md (2026-08-06, THE VISIBILITY RULE)
+
+These are the "where the live part lives" pointers that sat under **Older
+entries** in `CLAUDE.md` until that file reached its own ≈600-line ceiling.
+Nothing was dropped; they are here beside the rounds they point at.
+
+**2026-08-06 (MIKE'S PAGE-BY-PAGE):** THE PORCH RULINGS (R1–R8), moved whole — the file was at exactly 600 and this round's entry would have carried it past the rule. What is still load-bearing in it is NOT in the archive: **R5's vault-audio boundary is `OPERATIONS.md` §5 and `src/data/exhibits/vault-audio.js`**, and the rule that it is written once and enforced TWICE (runtime and build) is the half a future session will be tempted to delete; R4's seven strike sites are the artist cards themselves and its reversal — *a citation is not a decoration* — is why the song cards still carry `Accession` rows; R6's ruling on M37 is the booth's privacy answer and the measured third-party table in §5; R7's research is `docs/AD_FREE_PLAYBACK_RESEARCH-20260806.md`. **And its prune-forwards note is superseded rather than archived:** this round ran the procedure the OTHER way — prune against a copy and let the gate name the breaks — and the gate named ten chains exactly, all pointing at one struck row. **2026-08-06 (THE PORCH RULINGS):** CLEAR THE DECK (D1–D9), moved whole — the file was at 566 and this round's entry would have carried it past the rule. What is still load-bearing in it is NOT in the archive: **D1's one-passage-one-declaration ruling is `OPERATIONS.md` §7 Doctrine 17** and `src/data/house-copy.js`; **its four reported divergences are M66–M69, and all four are now RULED — three closed this round and M68 printed verbatim for him**; D3c's deletion of the `/hr/archive` mirror is `hunter-root-catalogue.js`'s own header and the §5 file map; D7's Foundation port is the §5 `/booth` + `/foundation` row; D4's `--gs-cols` mechanism is the §5 Gift Shop row. **2026-08-06 (CLEAR THE DECK):** TWO AT ONCE — THE REMOTE-CONTROL ROUND (P1–P11) and MIKE'S READING PASS — ROUND ONE (L1·L2·S1·S2·M1·F1·F2·W1), both moved whole. The file was at 610 before this round's entry and would have finished at 631 with one moved; two brings it to 560. What is still load-bearing in the REMOTE-CONTROL entry is NOT in the archive: **P1's absolute-parity ruling is `OPERATIONS.md` §5 and `parity:gate` itself**, which now fails on any divergence and is a PACKET GATE; P4's Record navigation and P5's session-scoped view settings are `OPERATIONS.md` §5; P8's manual question is register M61 and **was ruled this round** (it stays offline); P10's Foundation ruling is M62 and **was built this round**. What is still load-bearing in it is NOT in the archive: **W1's own "all six sites" claim is corrected in this round's entry above** (there was a seventh, and it was `/hr/archive`); S1's one-grid ruling is `OPERATIONS.md` §5 and was extended by D4; S2's four verified shop addresses are on the `shopExit` fields themselves; the poke's precondition is register C40. **2026-08-05 (THE REMOTE-CONTROL ROUND):** THE WAL POSTER EDIT (W1–W4), moved whole — the file was at 577 and this round's entry would have carried it past the rule. What is still load-bearing in it is NOT in the archive: the strike of the per-act *"Open the room"* chip is register M51, the poster's rebuilt Hunter Root line is in `worth-a-listen.js` beside the count that produced it, and the `[PAPA]`-second-sentence defect is M53. **2026-08-05 (READING PASS ROUND ONE):** THE PARITY RULING + TRIM (P1–P5), moved whole — the file was at 576 and this round's entry would have carried it past the rule. What is still load-bearing in it is NOT in the archive: P1's holdings-gap ruling **has since been REVERSED by Mike** (the remote-control round, P1) — parity is absolute and `tools/menu-parity.mjs` no longer accepts a written reason at all; P3's four guest-book rules are `OPERATIONS.md` §5; the poke and its precondition are `reveal/ledger-declare.mjs` and register C40; the four-step prune procedure and the NUL-byte defect class are `OPERATIONS.md` §9. **2026-08-05 (THE WAL POSTER EDIT):** v56 THE ROBOTS SIMPLIFICATION, moved whole — the file was at 593 and this round's entry would have carried it past the rule. What is still load-bearing in it is NOT in the archive: the standing rule that the manual is as long as the manual needs to be is `OPERATIONS.md` §5 and register T-A; `npm run parity` and `npm run surfacing` are `OPERATIONS.md` §5 and §9; NIAC-is-the-mainframe is the robots repo's canon and the ledger's `egg.niac.operator`. **2026-08-05 (P1–P5):** T1 THE ASSET TIMELINE, moved whole — the file was at 689. What is still load-bearing in it is NOT in the archive: the four transfer classes and their three checks are `reveal/transfers.mjs` and `OPERATIONS.md` §5, and its open questions are `docs/OPEN_ACTIONS.md` §4a T-B…T-F (T-A closed at v56). **Housekeeping, stated because it edits an archive note rather than adding one:** the six older notes below were run together into one paragraph. Nothing was dropped — every round, every moved entry and every "where the live part lives" pointer is still here; the line breaks are gone, which is where the growth was. **2026-08-05 (v56):** v55 RECORD MACHINERY, moved whole — the file was at 621 lines, so one entry left as one arrived. What is still load-bearing in it is NOT in the archive: the ledger's one-validator doctrine, the manual-page vessel and the Record's derived rows are `OPERATIONS.md` §5 and `reveal/README.md`, and its open questions are `docs/OPEN_ACTIONS.md` M32, M35 and M44. **2026-08-05 (T1):** v54 THE FOUNDATION COPY, moved whole to make room for this round — the file was at exactly 600 lines. What was live in it is not in the archive: its open questions are `docs/OPEN_ACTIONS.md` M38–M43 and its money rule is `/foundation`'s own copy. **2026-08-05 (v55):** v53 THE BOOTH EDIT + THE MISSING LAP, v52 THE REVEAL LEDGER and v51 M23 RULED + THE ALBUM ROUND — three at once, because the v55 entry is long and the file had reached 711. **What was in them that is still load-bearing is NOT in the archive**: v53's measured third-party table is `OPERATIONS.md` §5 and its ruling is register M37; v52's ledger model is `reveal/README.md` and `OPERATIONS.md` §5; v51's two standing laws (Doctrine 16, and the Visual Hook Law's second exception) are `OPERATIONS.md` §7 and `STATE.md`. A session note is where a round is narrated, not where a rule lives. **2026-08-05 (v54):** v50 THE OVERNIGHT — the round that struck THE MORGUE, built DOC CONTROL, added the Foundation's DONATED BY column and found the published privacy answer wrong. Moved whole; its live consequences are in `OPERATIONS.md` §5, not in the note. **2026-08-05 (v53):** v48 MECHANIZE PROVENANCE and v46 THE CLEAN SLATE ROUND — the two oldest entries still live, moved whole so the doctrine they established (the provenance boundary; the first meta-copy sweep) is read from `OPERATIONS.md` §7 rather than from a session note. **2026-08-04:** the tier reconciliation, the navigation/architecture critique, B-1, the v4/v5 spec arc, the deep-dive phases, the FUSE git-init quirk, and the first three exhibit-UX rounds (2026-05-06 → 05-15). **2026-08-05 (v52):** the three 2026-05-30 entries — the eslint-ignore baseline restoration (and the sandbox 5/5 phantom, whose lesson is still live in `### Pre-flight before commit` above), the `content_kind` front-end block with the -036 triage, and the broken-preview fallback.

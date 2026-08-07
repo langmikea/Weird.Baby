@@ -328,6 +328,9 @@
    into the sheet's JSX; a face declares its objects, so the three rows and the
    figure are declared here and `face.account` carries them. Not a character of
    what a visitor reads has changed. */
+/* [F1 2026-08-06] the house's FAQ factory — see src/data/faq-face.js. */
+import { faqFace } from "../faq-face.js";
+
 export const ACCOUNT = {
   head: "Weird.Baby — the account",
   figure: "$0.00",
@@ -897,18 +900,18 @@ const faqFor = where => FAQ
    flat list, `lines` still carries the multi-paragraph answers F1 wrote as two
    beats, and `link` still carries the two marked doors F6 supplied no address
    for. */
+/* [F1 2026-08-06] AND THE FACE IS BUILT BY THE HOUSE'S OWN FACTORY NOW. Mike
+   ruled the format a third time and asked for the booth's shape exactly; the
+   footer this track used to sign off with — the wing's name and the word FAQ —
+   is where the booth puts its address, so it is struck. Nothing else on these
+   two tracks changes: `faqFor` still splits the questions between the albums
+   and `lines`/`link` still carry F1's two-beat answers and F6's marked doors.
+   See src/data/faq-face.js. */
 const faqTrack = (id, where) => ({
   id,
   title: "FAQ",
   videos: [],
-  face: {
-    kind: "text",
-    title: "FAQ",
-    subtitle: "THE WEIRD.BABY FOUNDATION",
-    entries: faqFor(where),
-    entriesMode: "faq",
-    footer: "THE WEIRD.BABY FOUNDATION · FAQ",
-  },
+  face: faqFace("THE WEIRD.BABY FOUNDATION", faqFor(where)),
 });
 
 const spine = [

@@ -46,15 +46,21 @@ import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
 import { entries as recordEntries } from "./record-entries.mjs";
+import { GOVERNED_PREFIX, STAGE_PREFIX } from "./placement.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
 
 /* THE GOVERNED TREE — the machines' own pictures, wherever they are parked.
    Both halves are named because the rule is about the ADDRESS, and the same
-   photograph is governed whether it is public or behind the door. */
-const PUBLIC_TREE = "public/robots";
-const HELD_TREE = "public/held/robots";
+   photograph is governed whether it is public or behind the door.
+   [V1 2026-08-06] BOTH ARE DERIVED FROM `placement.mjs` RATHER THAN TYPED.
+   The renderer decides where to LOOK from those two constants and this file
+   decides where the file must LIVE; typed twice they would eventually disagree,
+   and the symptom would be a picture that is correctly held and correctly
+   drawn at an address nothing serves. */
+const PUBLIC_TREE = "public" + GOVERNED_PREFIX.replace(/\/$/, "");
+const HELD_TREE = "public" + STAGE_PREFIX + GOVERNED_PREFIX.replace(/\/$/, "");
 
 /* Files under the governed tree that are the museum's own lettering rather than
    a picture of the objects. Each row carries the reason it is here; a row with
@@ -87,6 +93,27 @@ function walk(dir, out = []) {
 export function delivered() {
   const out = new Set();
   for (const e of recordEntries()) for (const a of (e.assets || [])) out.add(a);
+  return out;
+}
+
+/* ═══ [V1 2026-08-06] THE PUBLIC SET — WHAT THE BROWSER IS TOLD ═════════════
+   The only thing `placeRule` needs to answer its question, and it is the
+   POSITIVE half on purpose: the governed paths that are already at a public
+   address, which is delivered ∪ signage. The negative half — what is behind
+   the door — is never handed to the browser, in either stage, because at
+   LAUNCH that list would be a directory of exactly what the museum is holding
+   back, shipped in the chunk that is holding it back.
+   A delivered path may be written either way round in the Record (`/robots/…`
+   before delivery is authored, `/held/robots/…` while it is still behind the
+   door), so both forms normalise to the public one here — the Record says WHAT
+   arrived, not where the file is parked this week. */
+export function publicPlacements() {
+  const out = new Set();
+  for (const a of delivered()) {
+    if (a.startsWith(STAGE_PREFIX + GOVERNED_PREFIX)) out.add(a.slice(STAGE_PREFIX.length));
+    else if (a.startsWith(GOVERNED_PREFIX)) out.add(a);
+  }
+  for (const k of Object.keys(SIGNAGE)) out.add(GOVERNED_PREFIX + k);
   return out;
 }
 

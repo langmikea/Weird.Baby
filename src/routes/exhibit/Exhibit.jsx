@@ -12,6 +12,8 @@ import RecordEntry from "./RecordEntry.jsx";
    none, and this file learns no wing-specific content. */
 import { AccountCard, RegisterTable, LedgerSheet } from "./FoundationObjects.jsx";
 import { stateOfRow as fndState } from "../../lib/foundation-state.js";
+/* [F1 2026-08-06] the FAQ format's two fixed ends — see src/data/faq-face.js */
+import { FAQ_HEAD, SIGN_OFF, ADDRESS } from "../../data/faq-face.js";
 import {
   entryStamp, groupByPeriod, shouldBand, evidenceOf, docState,
 } from "../../lib/record-model.js";
@@ -2095,10 +2097,26 @@ function FaceFlow({ flat, children, deps, footer }) {
    does not need every row prefixed with the letter Q — the booth prints none
    and reads better for it. `stamp` is still supported by the flat list; it is
    simply not drawn here.
-   A `note` STILL PRINTS, inside the opened answer where a footnote belongs. */
+   A `note` STILL PRINTS, inside the opened answer where a footnote belongs.
+
+   ═══ [F1 2026-08-06] THE WHOLE SHAPE, NOT JUST THE ACCORDION ════════════════
+   MIKE, ruling the format for the third time: *"the booth's shape is a short
+   credo block, THE WORD 'Questions', the question list, A SIGN-OFF LINE WITH
+   THE ADDRESS, and the exit. Nothing else."*
+   R7 built the middle third of that and left the two ends to the data, which is
+   why the robots front desk could carry a 1965 paragraph, a three-row register
+   and a footer while still being "in the booth's format". The heading and the
+   sign-off are printed HERE now, by the one component every wing's FAQ goes
+   through, and `src/data/faq-face.js` is what stops a face declaring anything
+   else — read its header before adding a field.
+   THE ADDRESS IS A REAL `mailto:`, exactly as the booth's is. That is not a
+   contradiction of F6's marked door with no anchor: F6's rule is that a door
+   with no address supplied is not made into an `<a>`. Here the address IS the
+   sentence. */
 function FaqEntries({ entries, state }) {
   return (
     <div className="vp-faq" data-stage-split="row">
+      <h2 className="vp-faq-head" data-stage-split="row">{FAQ_HEAD}</h2>
       {entries.map((en, i) => (
         <details className="vp-faq-q" key={en.title || i}>
           <summary>{en.title}</summary>
@@ -2117,6 +2135,10 @@ function FaqEntries({ entries, state }) {
           </div>
         </details>
       ))}
+      <p className="vp-faq-signoff" data-stage-split="row">
+        {SIGN_OFF}{" "}
+        <a href={"mailto:" + ADDRESS}>{ADDRESS}</a>
+      </p>
     </div>
   );
 }

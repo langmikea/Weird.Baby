@@ -22,7 +22,7 @@ import { markHeldOpen } from "../lib/held.js";
    a wrong password and must never be collapsed into one. */
 function HeldDoor() {
   const navigate = useNavigate();
-  const [state, setState] = useState({ open: false, configured: true, note: null, checked: false });
+  const [state, setState] = useState({ open: false, configured: true, note: null, checked: false, stage: null });
   const [key, setKey] = useState("");
   const [msg, setMsg] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -33,7 +33,7 @@ function HeldDoor() {
       .then(r => r.json())
       .then(d => {
         if (gone) return;
-        setState({ open: !!d.open, configured: !!d.configured, note: d.note || null, checked: true });
+        setState({ open: !!d.open, configured: !!d.configured, note: d.note || null, checked: true, stage: d.stage || null });
         markHeldOpen(!!d.open);
       })
       .catch(() => { if (!gone) setState(s => ({ ...s, checked: true })); });
@@ -94,14 +94,43 @@ function HeldDoor() {
           not take you anywhere; it makes `/robots` a deck of four instead of
           three. Without this paragraph the only way to know that is to notice
           an album appear.
-          THE LOCK IS THE SAME LOCK. One cookie, one worker refusal, two held
-          directories — the wing's built chunks under `/assets/held/` and the
-          Portal's own files under `/held/`. Closing this door closes both. */}
-      <p className="adm-held-note">
-        The Portal is held on the same terms and has no address of its own: it is the second
-        album on <code>/robots</code>, and it is simply not in the deck until this door is open.
-        Its cover, its poster and the twin itself are refused at the server like the wing&rsquo;s.
-      </p>
+
+          ═══ [V1 2026-08-06] AND THE DOORS ARE TWO DOORS NOW, WHICH IS WHY THIS
+          PARAGRAPH IS CONDITIONAL AND THE ONE ABOVE IT IS NOT. `/hr` is held
+          for a PERMISSION reason and the password is the only key to it in
+          every stage. The Portal and the machines' photographs are held until
+          LAUNCH, and during development they are simply on the glass. Printing
+          the launch sentence in the development state would be this page
+          telling the operator his own building is doing something it is not —
+          which is the class of defect the reveal ledger exists to end. */}
+      {state.stage === "launch" ? (
+        <p className="adm-held-note">
+          The Portal is held on the same terms and has no address of its own: it is the second
+          album on <code>/robots</code>, and it is simply not in the deck until this door is open.
+          Its cover, its poster and the twin itself are refused at the server like the wing&rsquo;s.
+        </p>
+      ) : (
+        <p className="adm-held-note">
+          The Portal and the machines&rsquo; photographs are held until the museum opens, not held
+          from you: while the building is being made they are on the glass for everybody, and the
+          record of what has been delivered is kept and enforced all the same. This door is not
+          what is showing them.
+        </p>
+      )}
+      {/* THE STAGE, REPORTED BY THE THING THAT ENFORCES IT — `/api/held` reads
+          the same literal the worker's own refusal reads, so this cannot say one
+          thing while the server does another. It is here and on no public
+          surface: what stage a museum is at is a fact about the WORK
+          (Doctrine 11), and this is the one room in the building written for
+          the person doing it. */}
+      {state.checked && state.stage && (
+        <p className="adm-held-stage">
+          <span className="adm-held-stage-k">Showing</span>
+          <span className="adm-held-stage-v">
+            {state.stage === "launch" ? "The launch state" : "Everything placed"}
+          </span>
+        </p>
+      )}
       {state.open ? (
         <div className="adm-held-row">
           <button className="adm-jump" onClick={() => navigate("/hr")}>/hr</button>

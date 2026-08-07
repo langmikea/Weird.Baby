@@ -32,6 +32,8 @@ export default defineConfig([
       globals: {
         ...globals.browser,
         __BUILD_TIME__: 'readonly', // injected by vite.config.js define{}
+        __WB_STAGE__: 'readonly',      // [V1] the stage — see reveal/stage.mjs
+        __WB_PLACEMENT__: 'readonly',  // [V1] stage + the public placement set
       },
       parserOptions: {
         ecmaVersion: 'latest',
@@ -42,5 +44,15 @@ export default defineConfig([
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
+  },
+  // [V1 2026-08-06] vite.config.js runs in NODE, not in a browser. It reads
+  // `process.env.WB_STAGE` to pick the stage (reveal/stage.mjs), and the
+  // browser-globals block above made that one `no-undef` error — a new error in
+  // a count whose whole job is to be a regression tripwire. The tool files under
+  // `reveal/` and `tools/` are `.mjs` and are not swept at all; this block is
+  // the two config files that are.
+  {
+    files: ['vite.config.js', 'eslint.config.js'],
+    languageOptions: { globals: { ...globals.node } },
   },
 ])

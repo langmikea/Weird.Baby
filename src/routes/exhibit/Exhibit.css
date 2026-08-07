@@ -3648,7 +3648,23 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    fixed rems, because a face inside an exhibit sits in a pane the visitor can
    resize and the sheet does not. Same object, same rules, drawn at the size of
    the room it is standing in. */
+/* [F1 2026-08-06] THE TWO FIXED ENDS OF THE FORMAT — the booth's own word above
+   the list and the booth's own sign-off under it. Both take the sheet's
+   composition (centred, the standing head in micro-caps, the address in the
+   room's warm serif) at THIS surface's type ramp, which is the same trade the
+   accordion above already makes and for the same reason: a face sits in a pane
+   the visitor can resize and a sheet does not. */
 .vp-faq{text-align:left}
+.vp-faq-head{margin:0 0 22px;text-align:center;
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:var(--fs-micro);letter-spacing:.34em;text-transform:uppercase;
+  color:var(--wb-gold-mute)}
+.vp-faq-signoff{margin:26px 0 0;text-align:center;
+  font-family:'Fredoka',sans-serif;font-weight:400;
+  font-size:var(--fs-lead);color:var(--wb-gold)}
+.vp-faq-signoff a{color:var(--wb-gold);text-decoration:none;
+  border-bottom:2px solid var(--wb-gold-lo);transition:border-color .2s}
+.vp-faq-signoff a:hover,.vp-faq-signoff a:focus-visible{border-bottom-color:var(--wb-gold)}
 .vp-faq-q{border-top:1px solid var(--wb-border)}
 .vp-faq-q:last-of-type{border-bottom:1px solid var(--wb-border)}
 .vp-faq-q > summary{cursor:pointer;list-style:none;

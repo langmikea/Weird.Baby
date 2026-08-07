@@ -56,6 +56,8 @@ import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import * as acorn from "acorn";
 import jsxPlugin from "acorn-jsx";
+/* [C1 2026-08-06] the stage door's prefix — see the note at `seenAssets`. */
+import { STAGE_PREFIX } from "../reveal/placement.mjs";
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const Parser = acorn.Parser.extend(jsxPlugin());
@@ -588,11 +590,31 @@ export function evaluate() {
 
   // Assets: every referenced image must be declared, including whether it
   // carries text a string sweep cannot read.
+  /* [C1 2026-08-06] A GOVERNED PICTURE HAS TWO ADDRESSES AND ONE DECLARATION.
+     V1 made the pull-back a launch-state rule: a picture of the machines is
+     DECLARED at its public address — the one it will have when the Record
+     delivers it — while the file may be parked behind the stage door, and
+     `src/lib/placement.js` computes the prefix. Public modules therefore name
+     the public address and this matches directly.
+     THE ONE PLACE THAT NAMES THE HELD ADDRESS IS A HELD MODULE. The Portal's
+     album lives behind the door and its cover and poster ARE at `/held/…` for
+     everybody who can see them, so `portal.js` writes that address literally and
+     correctly — routing it through the resolver would blank the Portal's own
+     sleeve for the one person allowed to look at it.
+     So the key falls back to the public twin. This is the FOURTH instrument to
+     need this rule in one round — the others are `usedBy` in
+     tools/asset-table.mjs, and the disk check and the drift guard in
+     provenance/assets-declare.mjs — and the cause is one sentence: **a picture
+     has two addresses now, and anything that matches on one of them is wrong.** */
   const seenAssets = new Map();
   for (const a of s.assetRefs) {
     if (a.kind === "url") continue;
     if (!/\.(jpg|jpeg|png|webp|gif|svg|avif)$/i.test(a.ref)) continue;
-    const k = assetKeyOf(a.ref);
+    let k = assetKeyOf(a.ref);
+    if (!assetReg.entries[k] && a.ref.startsWith(STAGE_PREFIX + "/")) {
+      const twin = assetKeyOf(a.ref.slice(STAGE_PREFIX.length));
+      if (assetReg.entries[twin]) k = twin;
+    }
     if (!seenAssets.has(k)) seenAssets.set(k, { ...a, key: k });
   }
   const undeclaredAssets = [...seenAssets.values()].filter((a) => !assetReg.entries[a.key]);

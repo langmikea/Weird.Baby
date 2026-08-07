@@ -116,13 +116,6 @@
    "p": "hunterRoot.shopExitParam",
    "c": "HOUSE"
   },
-  "05868f8002ee1c1a": {
-   "f": "src/data/artists/robots.js",
-   "l": 222,
-   "t": "TRADE    we buy strange things and find out what they are",
-   "p": "WBR_TRACKS[].face.lines[]",
-   "c": "HOUSE"
-  },
   "302b78c511b1c595": {
    "f": "src/data/artists/robots.js",
    "l": 1134,
@@ -435,13 +428,6 @@
     "bc88cf64c7fc1a6c"
    ]
   },
-  "0d4d0884705572c2": {
-   "f": "src/data/artists/robots.js",
-   "l": 1284,
-   "t": "ABOUT THIS MACHINE",
-   "p": "spine[].tracks[].face.subtitle",
-   "c": "HOUSE"
-  },
   "7a2d917ba705ef5f": {
    "f": "src/data/artists/robots.js",
    "l": 1324,
@@ -449,13 +435,6 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": "10648bfbff65354d"
-  },
-  "59cd17675c6a73e5": {
-   "f": "src/data/artists/robots.js",
-   "l": 1329,
-   "t": "MGK-VIIIp · FAQ",
-   "p": "spine[].tracks[].face.footer",
-   "c": "HOUSE"
   },
   "360512d3a8c35a47": {
    "f": "src/data/artists/robots.js",
@@ -7990,15 +7969,7 @@
    "l": 1598,
    "t": "WORTH A LISTEN",
    "p": "HOUSE_ALBUM.tracks[].face.subtitle",
-   "c": "RESTATED",
-   "r": [
-    "e2263a8c7a2b8807",
-    "f1820c622543de01",
-    "2ec447b815e06a0b",
-    "4c97b1543dbd79a5",
-    "19b8d2d5c826694b",
-    "9f182e46b1202543"
-   ]
+   "c": "HOUSE"
   },
   "e90fc03a0e36599d": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -8067,270 +8038,7 @@
    "l": 1707,
    "t": "WORTH A LISTEN · WEIRD.BABY",
    "p": "HOUSE_ALBUM.tracks[].face.footer",
-   "c": "RESTATED",
-   "r": [
-    "e2263a8c7a2b8807",
-    "f1820c622543de01",
-    "2ec447b815e06a0b",
-    "4c97b1543dbd79a5",
-    "19b8d2d5c826694b",
-    "9f182e46b1202543"
-   ]
-  },
-  "3b5f7554abbb47be": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1592,
-   "t": "The deal",
-   "p": "HOUSE_ALBUM.tracks[].title",
    "c": "HOUSE"
-  },
-  "17f21c09e0f92b84": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1610,
-   "t": "The room's own card.",
-   "p": "HOUSE_ALBUM.tracks[].face.stillCaption",
-   "c": "RESTATED",
-   "r": [
-    "e2263a8c7a2b8807",
-    "f1820c622543de01",
-    "2ec447b815e06a0b",
-    "4c97b1543dbd79a5",
-    "19b8d2d5c826694b",
-    "9f182e46b1202543"
-   ]
-  },
-  "79228bff8ea5b777": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1656,
-   "t": "Four artists somebody in this house could not stop playing. Eight songs, all of them one press away.",
-   "p": "HOUSE_ALBUM.tracks[].face.blurb",
-   "c": "RESTATED",
-   "r": [
-    "e2263a8c7a2b8807",
-    "f1820c622543de01",
-    "2ec447b815e06a0b",
-    "4c97b1543dbd79a5",
-    "19b8d2d5c826694b",
-    "9f182e46b1202543"
-   ]
-  },
-  "e18a3c5caa524c8d": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1659,
-   "t": "Every album in the carousel above is an artist, and every artist gets the same four pages: their songs, playable right here; a sheet about the songs; a card about them; and a wall of what they have been up to lately, in their own pictures.",
-   "p": "HOUSE_ALBUM.tracks[].face.label[]",
-   "c": "RESTATED",
-   "r": [
-    "e2263a8c7a2b8807",
-    "f1820c622543de01",
-    "2ec447b815e06a0b",
-    "4c97b1543dbd79a5",
-    "19b8d2d5c826694b",
-    "9f182e46b1202543"
-   ]
-  },
-  "90166c0251014fa0": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1663,
-   "t": "The standard is not chart position and it is not how many people already know. It is that somebody here could not stop playing the record and thinks you should hear it. That is the whole test, and it is why this room can hold a man posting a song about this week, a songwriter you have already heard in an advert without learning his name, and our own house artist, without ranking them against each …",
-   "p": "HOUSE_ALBUM.tracks[].face.label[]",
-   "c": "RESTATED",
-   "r": [
-    "e2263a8c7a2b8807",
-    "f1820c622543de01",
-    "2ec447b815e06a0b",
-    "4c97b1543dbd79a5",
-    "19b8d2d5c826694b",
-    "9f182e46b1202543"
-   ]
-  },
-  "d8135431bd672fa8": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1670,
-   "t": "We are not their label, their agent, or their critic. We are one more person in the room who thinks you should hear this. So every door leads out — their site, their store, their channel, their tour dates — and there is nothing here to sign up for and no account to make. The room happens to be ours. The night belongs to them.",
-   "p": "HOUSE_ALBUM.tracks[].face.label[]",
-   "c": "RESTATED",
-   "r": [
-    "e2263a8c7a2b8807",
-    "f1820c622543de01",
-    "2ec447b815e06a0b",
-    "4c97b1543dbd79a5",
-    "19b8d2d5c826694b",
-    "9f182e46b1202543"
-   ]
-  },
-  "95e9281f3846a5d9": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1675,
-   "t": "What is written on these cards was read at its source. Every quotation was opened where it was said, and one that could not be checked is not on the wall; where an artist has no honest door to give, the card says so rather than sending you somewhere we have not read. The pictures are the artists' own public imagery, logged file by file with where it came from, and they come down the day any of the…",
-   "p": "HOUSE_ALBUM.tracks[].face.label[]",
-   "c": "RESTATED",
-   "r": [
-    "e2263a8c7a2b8807",
-    "f1820c622543de01",
-    "2ec447b815e06a0b",
-    "4c97b1543dbd79a5",
-    "19b8d2d5c826694b",
-    "9f182e46b1202543"
-   ]
-  },
-  "b8b83287503051f9": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1684,
-   "t": "In this room",
-   "p": "HOUSE_ALBUM.tracks[].face.tombstone[].k",
-   "c": "HOUSE"
-  },
-  "e2263a8c7a2b8807": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1684,
-   "t": "Four artists · eight songs, all playable",
-   "p": "HOUSE_ALBUM.tracks[].face.tombstone[].v",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "fe5d0298907b8145": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1685,
-   "t": "Every artist gets",
-   "p": "HOUSE_ALBUM.tracks[].face.tombstone[].k",
-   "c": "HOUSE"
-  },
-  "f1820c622543de01": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1685,
-   "t": "Their songs · a sheet · a card · a wall",
-   "p": "HOUSE_ALBUM.tracks[].face.tombstone[].v",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "8191c76e04bc1174": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1686,
-   "t": "The standard",
-   "p": "HOUSE_ALBUM.tracks[].face.tombstone[].k",
-   "c": "HOUSE"
-  },
-  "2ec447b815e06a0b": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1686,
-   "t": "Someone here could not stop playing it",
-   "p": "HOUSE_ALBUM.tracks[].face.tombstone[].v",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "6b28df4d75f4088d": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1687,
-   "t": "The doors",
-   "p": "HOUSE_ALBUM.tracks[].face.tombstone[].k",
-   "c": "HOUSE"
-  },
-  "4c97b1543dbd79a5": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1687,
-   "t": "All of them lead to the artist's own place",
-   "p": "HOUSE_ALBUM.tracks[].face.tombstone[].v",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "ae0524fda490951b": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1688,
-   "t": "What we keep",
-   "p": "HOUSE_ALBUM.tracks[].face.tombstone[].k",
-   "c": "HOUSE"
-  },
-  "19b8d2d5c826694b": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1688,
-   "t": "A page name and a timestamp. No accounts, no profiles.",
-   "p": "HOUSE_ALBUM.tracks[].face.tombstone[].v",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "a2396497aa70e9a0": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1689,
-   "t": "The pictures",
-   "p": "HOUSE_ALBUM.tracks[].face.tombstone[].k",
-   "c": "HOUSE"
-  },
-  "9f182e46b1202543": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1689,
-   "t": "Their own, logged file by file, down on request",
-   "p": "HOUSE_ALBUM.tracks[].face.tombstone[].v",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "ed0688506213dd56": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1690,
-   "t": "The quotes",
-   "p": "HOUSE_ALBUM.tracks[].face.tombstone[].k",
-   "c": "HOUSE"
-  },
-  "20dca656994211ff": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1690,
-   "t": "Read at the source, or not printed",
-   "p": "HOUSE_ALBUM.tracks[].face.tombstone[].v",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "c2f5d844d1a7a93e": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1704,
-   "t": "the Information Booth",
-   "p": "HOUSE_ALBUM.tracks[].face.trail[].label",
-   "c": "RESTATED",
-   "r": [
-    "e2263a8c7a2b8807",
-    "f1820c622543de01",
-    "2ec447b815e06a0b",
-    "4c97b1543dbd79a5",
-    "19b8d2d5c826694b",
-    "9f182e46b1202543"
-   ]
-  },
-  "6d9244007c9461dc": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1704,
-   "t": "/booth",
-   "p": "HOUSE_ALBUM.tracks[].face.trail[].url",
-   "c": "RESTATED",
-   "r": [
-    "e2263a8c7a2b8807",
-    "f1820c622543de01",
-    "2ec447b815e06a0b",
-    "4c97b1543dbd79a5",
-    "19b8d2d5c826694b",
-    "9f182e46b1202543"
-   ]
-  },
-  "3e1456b05e7a03fc": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1705,
-   "t": "Who runs this place, and how to reach them:",
-   "p": "HOUSE_ALBUM.tracks[].face.trail[].scent",
-   "c": "RESTATED",
-   "r": [
-    "e2263a8c7a2b8807",
-    "f1820c622543de01",
-    "2ec447b815e06a0b",
-    "4c97b1543dbd79a5",
-    "19b8d2d5c826694b",
-    "9f182e46b1202543"
-   ]
-  },
-  "f93c6dc303a50d82": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1708,
-   "t": "[PAPA] — the room's own words, every line of them.",
-   "p": "HOUSE_ALBUM.tracks[].face.papa",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
   },
   "617343a2df0bde49": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -12180,16 +11888,6 @@
    "p": "FAQ[].q",
    "c": "HOUSE"
   },
-  "9c0c4161476499de": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 108,
-   "t": "No. The artists in Other Music Worth a Listen are not partners, clients, or signings — they are people whose records we think you should hear. Every door on their page leads to their own site, their own store, their own channel, because the exhibit is a pointer and not a home. [PAPA] — the formal statement of that relationship, if one is ever needed, is Papa's to write.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
   "7c90cd4d63942400": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 132,
@@ -12274,27 +11972,6 @@
    "r": [
     "docs/canonical/THE_CHARTER.md"
    ]
-  },
-  "3699671e8a8eafb7": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 242,
-   "t": "Questions",
-   "p": "InfoBooth{}.<div>.<div>.<div>.<h2>",
-   "c": "HOUSE"
-  },
-  "0113f4dcc764fcac": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 253,
-   "t": "Thank you for coming.",
-   "p": "InfoBooth{}.<div>.<div>.<p>",
-   "c": "HOUSE"
-  },
-  "1331e264f32dc86f": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 255,
-   "t": "papa@weird.baby",
-   "p": "InfoBooth{}.<div>.<div>.<p>.<a>",
-   "c": "HOUSE"
   },
   "62de9c5083a4916f": {
    "f": "src/routes/InfoBooth.jsx",
@@ -13090,13 +12767,6 @@
    "c": "HOUSE",
    "n": "The word \"Record\" is the museum's own label for its log; the number is interpolated from `spreads[].no`. NOT ONE SPREAD DECLARES A NUMBER TODAY, so this string is not on the glass anywhere — it is declared because the boundary asks about every string it can reach, not only the ones currently rendering."
   },
-  "cfe2d08124f3f10d": {
-   "f": "src/data/artists/robots.js",
-   "l": 319,
-   "t": "ON FILE  photographs, the record, the manual, the firmware",
-   "c": "DERIVED",
-   "s": "read off the wing's own faces in the same file: the Image Archives, The Record, The Manual and Technical Specifications."
-  },
   "effe4e52865bec59": {
    "f": "src/data/artists/robots.js",
    "l": 1066,
@@ -13161,13 +12831,6 @@
    "c": "MIKE",
    "s": "Mike's remote-control brief, N1, 2026-08-04: \"The Plates becomes IMAGE ARCHIVE (Mike ruled; retire The Morgue). Robots wing: The Firmware becomes TECHNICAL SPECIFICATIONS; The Parts is REMOVED. Directory loses The: Weird.Baby Robots, Weird.Baby Music, Weird.Baby Foundation.\" Only the DIRECTORY line changed; the room's own name, title bar and heading are untouched."
   },
-  "4d8b8a918a049651": {
-   "f": "src/data/artists/robots.js",
-   "l": 341,
-   "t": "UNITS    MGK-NIAC, the mainframe · MGK-VIIIp, the portable",
-   "c": "DERIVED",
-   "s": "read off the robots spine in the same file: two machine albums, MGK-NIAC and MGK-VIIIp."
-  },
   "af191d8957b16fec": {
    "f": "src/data/artists/robots.js",
    "l": 1054,
@@ -13208,29 +12871,11 @@
     "docs/canonical/THE_CHARTER.md"
    ]
   },
-  "6c16a1197871ca94": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 236,
-   "t": "The artists' work is the artists' — their music, their pictures, their words — and every door on their pages goes to them rather than to us. What is ours is the photographs of our own objects, taken here and printed here, and we are glad to be asked for those. When in doubt, write; the address is at the bottom of this page. [PAPA] — a plain licence for the museum's own images is Papa's to set.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
   "9506f2c8e635a2b6": {
    "f": "src/data/artists/robots.js",
    "l": 320,
    "t": "WEIRD.BABY ROBOTS",
    "c": "HOUSE"
-  },
-  "400080dd806ad80e": {
-   "f": "src/data/artists/robots.js",
-   "l": 330,
-   "t": "In 1965 somebody built a machine to say what happens next. Sixty years later a delivery of them arrived on a dock with no sender's name on it. This wing is everything we have worked out since — and, more often, what we have not. Some of the answers below stop short. Those are the interesting ones.",
-   "c": "VERIFIED",
-   "s": "the robots repo's own record — C:/AI/Projects/weird-baby-robots (STATE.md, THE_RECORD.md, docs/canonical/LINEAGE.md). External to this repo; the sweep cannot re-check it.",
-   "n": "THE SAME SENTENCES AS BEFORE THE FOLD, IN ONE PLACE. The first three are WELCOME's lead (register key 3daefcb2e1402bb1, now stale because that face is struck) and carry its source unchanged, including the deliberate absence of a count. The last two are this face's own former opening, minus its first sentence — the heading and the rows say 'these are the questions people turn up with' without it. Nothing new is claimed."
   },
   "110cf66cd27af684": {
    "f": "src/data/artists/robots.js",
@@ -13245,14 +12890,6 @@
    "t": "How do I get in touch?",
    "c": "MIKE",
    "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
-  },
-  "3e58b97f9b6fa534": {
-   "f": "src/data/artists/robots.js",
-   "l": 440,
-   "t": "“Restoration house” is not what we are. Weird.Baby is Weird.Baby. [PAPA] — the final wording throughout, and the answers should be shorter than these.",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render",
-   "n": "TWO FACES' FOOTERS IN ONE STRING, and the scrub cuts by SENTENCE: WELCOME's line prints, the marked sentence — this face's own former footer — does not."
   },
   "af7b060da919a68b": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -13368,12 +13005,6 @@
    "t": "Yes. Both units power on and run their own firmware.",
    "c": "RESTATED",
    "r": "10648bfbff65354d"
-  },
-  "9a7219bf5e6108e3": {
-   "f": "src/data/artists/robots.js",
-   "l": 1339,
-   "t": "MGK-NIAC · FAQ",
-   "c": "HOUSE"
   },
   "d75737a3390e9530": {
    "f": "src/data/artists/weird-baby.js",
@@ -14608,18 +14239,6 @@
    "p": "held-wing",
    "c": "HOUSE"
   },
-  "bc3844ebc19c421f": {
-   "f": "src/data/artists/foundation.js",
-   "l": 885,
-   "t": "faq",
-   "c": "HOUSE"
-  },
-  "6637e5cd8fb8f196": {
-   "f": "src/data/artists/robots.js",
-   "l": 1864,
-   "t": "faq",
-   "c": "HOUSE"
-  },
   "5b08f7aa4afc384a": {
    "f": "src/data/artists/robots.js",
    "l": 1227,
@@ -14884,12 +14503,6 @@
    "f": "src/data/artists/foundation.js",
    "l": 882,
    "t": "There is no way to do this through the museum yet. When there is, it will appear on the register in The Ledger, and not one day before.",
-   "c": "HOUSE"
-  },
-  "c743dade47d0a6b9": {
-   "f": "src/data/artists/foundation.js",
-   "l": 910,
-   "t": "THE WEIRD.BABY FOUNDATION · FAQ",
    "c": "HOUSE"
   },
   "77b0c5b0be05bded": {
@@ -15304,18 +14917,6 @@
    "t": "Not yet. Two channels are engraved for it on the feed drum and neither of them arms.",
    "s": "read off the Portal face's own drum in the same file: two positions carry ch 1 and 2 labelled MGK-NIAC and both declare `arms: false`."
   },
-  "9eb2efdcf5bf875e": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 391,
-   "t": "faq"
-  },
-  "22486c91a12e1af4": {
-   "c": "HOUSE",
-   "f": "src/data/artists/robots.js",
-   "l": 520,
-   "t": "Frequently asked"
-  },
   "9b665a5f5d804433": {
    "c": "HOUSE",
    "f": "src/data/artists/portal.js",
@@ -15381,18 +14982,6 @@
    "t": "DATE",
    "s": "THE PORTAL HOLD + THE PULL-BACK, H3a: \"stamped-in-place fields (MODEL NO., SER. NO., DATE) with values struck into a lighter recess.\""
   },
-  "31b92658dc16d1bf": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 379,
-   "t": "ABOUT THE PORTAL"
-  },
-  "037260cd227d4cc7": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 392,
-   "t": "THE PORTAL · FAQ"
-  },
   "95ad2a528296d073": {
    "c": "VERIFIED",
    "f": "src/data/artists/robots.js",
@@ -15449,25 +15038,411 @@
    "l": 73,
    "t": "The held rooms"
   },
-  "ffd185c9c049138b": {
-   "c": "VERIFIED",
-   "f": "src/routes/WbAdmin.jsx",
-   "l": 100,
-   "t": "The Portal is held on the same terms and has no address of its own: it is the second\n        album on",
-   "s": "src/worker.js HELD_DIRS + wrangler.jsonc run_worker_first — measured on the built bundle under `wrangler dev`: /held/robots/twin.html, /held/robots/art/portal-cover.png and the held chunk all 404 without the cookie and 200 with it."
-  },
   "5280b4f7f7ff2a1b": {
    "c": "HOUSE",
    "f": "src/routes/WbAdmin.jsx",
    "l": 109,
    "t": "/robots"
   },
-  "782afac8be2f8336": {
+  "b510a515c89de53e": {
+   "f": "src/data/artists/portal.js",
+   "l": 388,
+   "t": "THE PORTAL",
+   "c": "HOUSE"
+  },
+  "f9199b6488f01197": {
+   "f": "src/data/artists/robots.js",
+   "l": 995,
+   "t": "MGK-NIAC, the interior in trouble.",
    "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "36888a8ee597f787": {
+   "f": "src/data/artists/robots.js",
+   "l": 1332,
+   "t": "The whole cabinet",
+   "c": "HOUSE"
+  },
+  "40832085bb42b22b": {
+   "f": "src/data/artists/robots.js",
+   "l": 1111,
+   "t": "The cabinet, whole — lit core, bar bank, both feet",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "d0920baff2e34f7a": {
+   "f": "src/data/artists/robots.js",
+   "l": 575,
+   "t": "MAR 2021",
+   "p": "spine[].tracks[].face.collage[].date",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "55fd6f2cf27a1146": {
+   "f": "src/data/artists/robots.js",
+   "l": 1338,
+   "t": "Through the bars",
+   "c": "HOUSE"
+  },
+  "32bf09faf4c59c03": {
+   "f": "src/data/artists/robots.js",
+   "l": 957,
+   "t": "The core, through the cage bars — warm flanks either side",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "d8ece201939574b4": {
+   "f": "src/data/artists/robots.js",
+   "l": 961,
+   "t": "A lit column behind the bars, and the cabinet's edge",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "d76bfa03017d7fc0": {
+   "f": "src/data/artists/robots.js",
+   "l": 1348,
+   "t": "Running, and in trouble",
+   "c": "HOUSE"
+  },
+  "6774c265e5e92b42": {
+   "f": "src/data/artists/robots.js",
+   "l": 965,
+   "t": "The output row — the red bar bank at the base, mid-pattern",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "b269e2da1c67c140": {
+   "f": "src/data/artists/robots.js",
+   "l": 969,
+   "t": "The whole interior in red-orange, the core glowing like an element",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "d1dc930e902ca1a1": {
+   "f": "src/data/artists/robots.js",
+   "l": 1715,
+   "t": "Every photograph",
+   "c": "HOUSE"
+  },
+  "511539bd34abed18": {
+   "f": "src/data/artists/robots.js",
+   "l": 743,
+   "t": "MGK-VIIIp −02 “The Informer”, front and top, as received.",
+   "p": "spine[].viewerPosterCaption",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "b65d04f94f792c09": {
+   "f": "src/data/artists/robots.js",
+   "l": 1111,
+   "t": "The front glass, lit — the firmware, running.",
+   "p": "spine[].tracks[].face.stillCaption",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "5975d59bb7dd36cb": {
+   "f": "src/data/artists/robots.js",
+   "l": 1681,
+   "t": "As they arrived",
+   "c": "HOUSE"
+  },
+  "4cd3bc51dcab8a81": {
+   "f": "src/data/artists/robots.js",
+   "l": 791,
+   "t": "The pair, front and top, as received",
+   "p": "spine[].tracks[].face.collage[].label",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "40559651162956cd": {
+   "f": "src/data/artists/robots.js",
+   "l": 791,
+   "t": "FAMILY SHOT",
+   "p": "spine[].tracks[].face.collage[].date",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "2dc5d44b5984ecea": {
+   "f": "src/data/artists/robots.js",
+   "l": 794,
+   "t": "The front, whole",
+   "p": "spine[].tracks[].face.collage[].label",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "d6a0a1937375c3b5": {
+   "f": "src/data/artists/robots.js",
+   "l": 794,
+   "t": "FRONT",
+   "p": "spine[].tracks[].face.collage[].date",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "b2a5d959014467a6": {
+   "f": "src/data/artists/robots.js",
+   "l": 812,
+   "t": "The power switch, round the back",
+   "p": "spine[].tracks[].face.collage[].label",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "fd63bc1ae1d364db": {
+   "f": "src/data/artists/robots.js",
+   "l": 812,
+   "t": "REAR",
+   "p": "spine[].tracks[].face.collage[].date",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "b11589004f95a045": {
+   "f": "src/data/artists/robots.js",
+   "l": 1692,
+   "t": "The glass",
+   "c": "HOUSE"
+  },
+  "c640a473cd18da85": {
+   "f": "src/data/artists/robots.js",
+   "l": 797,
+   "t": "The front glass, lit",
+   "p": "spine[].tracks[].face.collage[].label",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "de48ba46a6682386": {
+   "f": "src/data/artists/robots.js",
+   "l": 797,
+   "t": "SCREEN",
+   "p": "spine[].tracks[].face.collage[].date",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "08d22aa1d90dd42e": {
+   "f": "src/data/artists/robots.js",
+   "l": 800,
+   "t": "The bezel around the glass",
+   "p": "spine[].tracks[].face.collage[].label",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "4333c6dc703c9ac4": {
+   "f": "src/data/artists/robots.js",
+   "l": 800,
+   "t": "BEZEL",
+   "p": "spine[].tracks[].face.collage[].date",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "dc59da5a83aa5f88": {
+   "f": "src/data/artists/robots.js",
+   "l": 1742,
+   "t": "The cover image — the glass carries the BIOS beat",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the photograph shows"
+  },
+  "d5b8ba90d7a64c01": {
+   "f": "src/data/artists/robots.js",
+   "l": 816,
+   "t": "COVER",
+   "p": "spine[].tracks[].face.collage[].date",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "22406e10b63b50f1": {
+   "f": "src/data/artists/robots.js",
+   "l": 1704,
+   "t": "Above and below",
+   "c": "HOUSE"
+  },
+  "4df914f5042d7d50": {
+   "f": "src/data/artists/robots.js",
+   "l": 803,
+   "t": "The top monitor",
+   "p": "spine[].tracks[].face.collage[].label",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "0b2fff14a6726c57": {
+   "f": "src/data/artists/robots.js",
+   "l": 803,
+   "t": "TOP",
+   "p": "spine[].tracks[].face.collage[].date",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "aab2ee9eb94c32d3": {
+   "f": "src/data/artists/robots.js",
+   "l": 806,
+   "t": "The base it stands on",
+   "p": "spine[].tracks[].face.collage[].label",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "208d25e81a64a25f": {
+   "f": "src/data/artists/robots.js",
+   "l": 806,
+   "t": "BASE",
+   "p": "spine[].tracks[].face.collage[].date",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "b2390afe30723854": {
+   "f": "src/data/artists/robots.js",
+   "l": 809,
+   "t": "The unit on its new base",
+   "p": "spine[].tracks[].face.collage[].label",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "2f73148fe1d82ab3": {
+   "f": "src/data/artists/robots.js",
+   "l": 809,
+   "t": "BASE, NEW",
+   "p": "spine[].tracks[].face.collage[].date",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "812b9d8e13b49864": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1875,
+   "t": "FAQ",
+   "c": "HOUSE"
+  },
+  "51d03ebbf5019317": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1879,
+   "t": "Are you affiliated with the artists you show?",
+   "c": "HOUSE"
+  },
+  "c637bd90392038b4": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1881,
+   "t": "Can I use what is here?",
+   "c": "HOUSE"
+  },
+  "96ac0296f5d1ef89": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1883,
+   "t": "Whose pictures are these?",
+   "c": "HOUSE"
+  },
+  "cbbbeb79d415c2fa": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1884,
+   "t": "The pictures are the artists' own public imagery, logged file by file with where it came from, and they come down the day any of them asks.",
+   "c": "RESTATED",
+   "r": "docs/WAL_PHOTO_PROVENANCE-20260802.md"
+  },
+  "ea61f0727b47d2e5": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1887,
+   "t": "How do I get in touch?",
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
+  },
+  "84aa2a9ad70c710b": {
+   "f": "src/data/faq-face.js",
+   "l": 58,
+   "t": "Questions",
+   "c": "HOUSE"
+  },
+  "ef31a8bb3ca682ef": {
+   "f": "src/data/faq-face.js",
+   "l": 69,
+   "t": "FAQ",
+   "c": "HOUSE"
+  },
+  "644364e88b42ee76": {
+   "f": "src/data/faq-face.js",
+   "l": 72,
+   "t": "faq",
+   "c": "HOUSE"
+  },
+  "e40d7465956ef528": {
+   "f": "src/data/house-copy.js",
+   "l": 79,
+   "t": "No. The artists in Other Music Worth a Listen are not partners, clients, or signings — they are people whose records we think you should hear. Every door on their page leads to their own site, their own store, their own channel, because the exhibit is a pointer and not a home. [PAPA] — the formal statement of that relationship, if one is ever needed, is Papa's to write.",
+   "c": "HOUSE"
+  },
+  "bb88ceb3cb84910e": {
+   "f": "src/data/house-copy.js",
+   "l": 88,
+   "t": "The artists' work is the artists' — their music, their pictures, their words — and every door on their pages goes to them rather than to us. What is ours is the photographs of our own objects, taken here and printed here, and we are glad to be asked for those. When in doubt, write; the address is at the bottom of this page. [PAPA] — a plain licence for the museum's own images is Papa's to set.",
+   "c": "HOUSE"
+  },
+  "d29ec367d1b70600": {
+   "f": "src/data/house-copy.js",
+   "l": 105,
+   "t": "Thank you for coming.",
+   "c": "HOUSE"
+  },
+  "7dec4da601665c3c": {
+   "f": "src/data/house-copy.js",
+   "l": 106,
+   "t": "papa@weird.baby",
+   "c": "HOUSE"
+  },
+  "669717c4f42b1730": {
    "f": "src/routes/WbAdmin.jsx",
-   "l": 102,
-   "t": ", and it is simply not in the deck until this door is open.\n        Its cover, its poster and the twin itself are refused at the server like the wing’s.",
-   "s": "src/worker.js HELD_DIRS + wrangler.jsonc run_worker_first — measured on the built bundle under `wrangler dev`: /held/robots/twin.html, /held/robots/art/portal-cover.png and the held chunk all 404 without the cookie and 200 with it."
+   "l": 107,
+   "t": "The Portal is held on the same terms and has no address of its own: it is the second\n          album on",
+   "c": "VERIFIED",
+   "s": "src/worker.js LOCKED_DIRS + STAGE_DIRS + wrangler.jsonc run_worker_first — measured on the built bundle under `wrangler dev` on 2026-08-06: /assets/locked/* 404s without the cookie in both stages, and the stage door (/held/*, /assets/held/*) serves in DEVELOPMENT and 404s without the cookie at LAUNCH."
+  },
+  "696d3d028bce3a37": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 109,
+   "t": ", and it is simply not in the deck until this door is open.\n          Its cover, its poster and the twin itself are refused at the server like the wing’s.",
+   "c": "VERIFIED",
+   "s": "src/worker.js LOCKED_DIRS + STAGE_DIRS + wrangler.jsonc run_worker_first — measured on the built bundle under `wrangler dev` on 2026-08-06: /assets/locked/* 404s without the cookie in both stages, and the stage door (/held/*, /assets/held/*) serves in DEVELOPMENT and 404s without the cookie at LAUNCH."
+  },
+  "209ca66991cbda58": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 113,
+   "t": "The Portal and the machines’ photographs are held until the museum opens, not held\n          from you: while the building is being made they are on the glass for everybody, and the\n          record of what has been delivered is kept and enforced all the same. This door is not\n          what is showing them.",
+   "c": "VERIFIED",
+   "s": "src/worker.js LOCKED_DIRS + STAGE_DIRS + wrangler.jsonc run_worker_first — measured on the built bundle under `wrangler dev` on 2026-08-06: /assets/locked/* 404s without the cookie in both stages, and the stage door (/held/*, /assets/held/*) serves in DEVELOPMENT and 404s without the cookie at LAUNCH."
+  },
+  "ee39572180da641e": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 128,
+   "t": "Showing",
+   "c": "HOUSE"
+  },
+  "0b9486cdea62c1e4": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 130,
+   "t": "The launch state",
+   "c": "HOUSE"
+  },
+  "312ad43a4fad9075": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 130,
+   "t": "Everything placed",
+   "c": "HOUSE"
+  },
+  "cab1d8c103925d6a": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 343,
+   "t": "auto",
+   "c": "HOUSE"
+  },
+  "2d848e134aef614f": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 357,
+   "t": "px",
+   "c": "HOUSE"
+  },
+  "66b8aa5fdc9890c8": {
+   "f": "src/worker.js",
+   "l": 74,
+   "t": "/assets/locked/",
+   "c": "HOUSE"
+  },
+  "60e4c4a5ad3b5baf": {
+   "f": "src/worker.js",
+   "l": 74,
+   "t": "/locked/",
+   "c": "HOUSE"
   }
  }
 }

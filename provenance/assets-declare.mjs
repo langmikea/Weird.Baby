@@ -26,6 +26,8 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
+/* [C1 2026-08-06] the stage door's prefix — see the note at the disk check. */
+import { STAGE_PREFIX } from "../reveal/placement.mjs";
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const INSPECTED = "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop";
@@ -46,7 +48,14 @@ const A = [
   ["/WeirdBaby_PhotoID.png", "MIKE", HOUSE_ART, true, "Weird.Baby — the house wordmark."],
   // [A1 2026-08-04] SUPERSEDED AS THE COVER and left on disk unreferenced —
   // register M9. The declaration stays because the file still ships to the edge.
-  ["/robots/art/mgk-viii-cover.jpg", "VERIFIED", PHOTO, false, ""],
+  // [C1 2026-08-06] `/robots/art/mgk-viii-cover.jpg` WAS HERE AND THE FILE IS
+  // DELETED. Mike's standing cull: if we are not using it, get rid of it. It was
+  // the SUPERSEDED MGK-NIAC cover, carrying a name the wing retired on
+  // 2026-08-05 and replaced by mgk-niac-cover.png. M9 kept it on the reading
+  // that "a real photograph is not deleted by a cover change" — which protects
+  // the PLATE it was cut from (`core_helical.jpg`, still on disk and still the
+  // album's badge), not the derived cover itself, which is house artwork the
+  // house no longer uses.
   // ---- [A1 2026-08-04] the two machine covers, on the house template -------
   // Two origins in one picture and both are named: the disc is the museum's own
   // photograph of its own unit, the furniture around it is the ROBOTS cover's
@@ -189,7 +198,19 @@ const A = [
 const entries = {};
 let missing = 0;
 for (const [ref, c, s, textInImage, text] of A) {
-  if (!fs.existsSync(path.join(REPO, "public" + ref))) { console.error("MISSING ON DISK:", ref); missing++; }
+  /* [C1 2026-08-06] A GOVERNED PICTURE IS DECLARED AT ITS PUBLIC ADDRESS AND
+     MAY BE PARKED BEHIND THE STAGE DOOR. V1 made the pull-back a launch-state
+     rule: the data declares `/robots/…` and `src/lib/placement.js` computes the
+     held prefix, so the FILE for an undelivered picture is under
+     `public/held/robots/…` while its DECLARATION stays public — which is what
+     keeps this file, `provenance/assets.json` and the source in agreement.
+     Checking only the public path reported 28 of these as missing and the next
+     `--write` would have declared a tree that does not exist. Both addresses are
+     tried, and the prefix is imported rather than typed. */
+  if (!fs.existsSync(path.join(REPO, "public" + ref))
+    && !fs.existsSync(path.join(REPO, "public" + STAGE_PREFIX + ref))) {
+    console.error("MISSING ON DISK:", ref); missing++;
+  }
   entries[key(ref)] = { ref, c, s, textInImage, text, inspected: INSPECTED };
 }
 
@@ -214,13 +235,35 @@ const out = {
    session might read and a script that cannot do what the note warns about.
    Repairing the DRIFT — folding those 45 declarations back into the array, or
    retiring this generator in favour of the JSON — is a decision about which of
-   the two is the source, and that is Mike's: OPEN_ACTIONS H-b. */
+   the two is the source, and that is Mike's: OPEN_ACTIONS H-b.
+
+   ═══ [C1 2026-08-06] H-b IS ANSWERED, AND BY THE ROUND RATHER THAN BY A
+   PREFERENCE. THIS FILE IS THE SOURCE. ══════════════════════════════════════
+   V1 settled it: the pull-back is a launch-state rule now, the DATA declares a
+   governed picture at its PUBLIC address and `src/lib/placement.js` computes the
+   stage door's prefix. So the public address is what the sweep sees, what the
+   asset table keys on and what this array has said all along — and H2's 28
+   hand-edited `/held/…` rows were the drift rather than the record. Folding them
+   back means deleting nothing: they are the same twenty-eight pictures at the
+   other address.
+   AND THAT IS WHY THE REFUSAL BELOW HAD TO LEARN THE SAME RULE THE OTHER TWO
+   DID. It compared raw refs, so it read 27 twins as 27 losses and refused a
+   regeneration that would have lost exactly ONE row — the culled
+   `mgk-viii-cover.jpg`, whose file this round deleted. Three instruments broke
+   on one cause in one round: this guard, the disk check thirty lines up, and
+   `usedBy` in tools/asset-table.mjs, which would have condemned twenty-six
+   photographs as unreferenced. **A picture has two addresses now, and anything
+   that matches on one of them is wrong.** The guard itself is untouched in
+   substance and still refuses a genuine deletion. */
 if (process.argv.includes("--write")) {
   const at = path.join(REPO, "provenance", "assets.json");
   if (fs.existsSync(at)) {
     const live = JSON.parse(fs.readFileSync(at, "utf8")).entries || {};
     const declared = new Set(Object.values(entries).map((e) => e.ref));
-    const lost = Object.values(live).map((e) => e.ref).filter((r) => !declared.has(r));
+    /* the public address of a ref that may be written either way round */
+    const pub = (r) => r.startsWith(STAGE_PREFIX + "/") ? r.slice(STAGE_PREFIX.length) : r;
+    const lost = Object.values(live).map((e) => e.ref)
+      .filter((r) => !declared.has(r) && !declared.has(pub(r)));
     if (lost.length) {
       console.error(
         "\nREFUSED — writing would delete " + lost.length + " declaration(s) that exist" + 

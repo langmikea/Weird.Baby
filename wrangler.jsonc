@@ -31,13 +31,23 @@
     // four endpoints answer as JSON, the held chunk 404s without the cookie
     // and 200s with it.
     //
-    // [H1 2026-08-06, THE PORTAL HOLD] `/held/*` IS THE SECOND DOOR. Holding
-    // the Portal needed a prefix for held FILES as well as held CHUNKS — the
-    // twin is a hand-written HTML page and the album's cover and poster are
-    // PNGs, none of them built by vite and all of them typeable addresses.
-    // Anything under `public/held/` ships there. Both entries are read back by
-    // `reveal:check`'s reachability pass, which faults if either goes.
-    "run_worker_first": ["/api/*", "/assets/held/*", "/held/*"]
+    // [H1 2026-08-06, THE PORTAL HOLD] EACH DOOR IS A PAIR. Holding a wing
+    // needs a prefix for FILES as well as for CHUNKS — the twin is a
+    // hand-written HTML page and the album's cover and poster are PNGs, none of
+    // them built by vite and all of them typeable addresses.
+    //
+    // [V1 2026-08-06] AND THERE ARE TWO PAIRS, NAMED FOR THEIR REASONS.
+    // `/assets/locked/*` + `/locked/*` are the PERMISSION hold (`/hr`) and are
+    // refused in every stage. `/assets/held/*` + `/held/*` are the STAGE hold
+    // (the Portal, the machines' photographs) and open in DEVELOPMENT. All four
+    // are read back by `reveal:check`'s reachability pass, which faults if any
+    // of them goes — see the [V1] header in src/worker.js for why the two holds
+    // must never share a list.
+    "run_worker_first": [
+      "/api/*",
+      "/assets/locked/*", "/locked/*",
+      "/assets/held/*", "/held/*"
+    ]
   },
   "compatibility_flags": [
     "nodejs_compat"

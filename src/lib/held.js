@@ -5,10 +5,15 @@
 // `src/lib/foundation-state.js` exists beside FoundationObjects.jsx.
 //
 // THIS IS NOT THE LOCK AND MUST NEVER BE MISTAKEN FOR ONE. The lock is
-// `src/worker.js`, which refuses `/assets/held/*` without a cookie the password
-// mints. This flag only decides whether the router bothers to ASK for the
-// wing's chunks. Forging it in a console buys a request the server refuses and
-// a render of the Lobby.
+// `src/worker.js`, which refuses the shut directories without a cookie the
+// password mints. This flag only decides whether the router bothers to ASK for
+// a wing's chunks. Forging it in a console buys a request the server refuses
+// and a render of the Lobby.
+//
+// [V1 2026-08-06] IT IS STILL THE ONLY KEY TO THE PERMISSION HOLD. The stage
+// switch opens the STAGE door (the Portal, the machines' photographs) during
+// development and does not touch `/hr`, which is held for a permission reason
+// that no build flag may answer. See the [V1] header in src/worker.js.
 //
 // SESSION-SCOPED (P5): a view setting expires with the visit. The cookie behind
 // it is thirty days, so a new tab costs one click on /admin, not the key again.

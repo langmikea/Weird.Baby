@@ -128,7 +128,47 @@ and are the same question, unruled — **M73**.
 Canonical mechanism notes: `docs/canonical/OPERATIONS.md` §5, THE VAULT-AUDIO
 BOUNDARY. Round log: `docs/MUSEUM_PORCH_RULINGS_LOG-20260806.md`.
 
-## THE PULL-BACK RULE (Mike, 2026-08-06 — STANDING)
+## THE VISIBILITY RULE (Mike, 2026-08-06 — STANDING; SCOPES THE RULE BELOW)
+
+> **"DURING DEVELOPMENT, SHOW EVERYTHING THAT IS PLACED, until asked to filter.
+> The pull-back rule is a LAUNCH-STATE rule, not a development-state one. Mike
+> cannot direct what he cannot see. THE PORTAL COMES BACK IMMEDIATELY."**
+
+**THIS DOES NOT REPEAL THE RULE BELOW AND THE MECHANISM IS THE PROOF.** Its
+sentence stands word for word, the photographs still sit under `public/held/`,
+`reveal/delivery.mjs` still fails a build that puts an undelivered picture at a
+public address in either direction, and the ledger still says HELD. **What was
+wrong is that the rule had only ONE state, so the only way to obey it was to be
+in it.** A museum that has not opened is not publishing; it is BUILDING, and the
+person building it has to be able to see the room — the lobby says *"We're not
+open yet"* on its own glass.
+
+**TWO STAGES, ONE WORD (`WB_STAGE`), DEFAULT DEVELOPMENT.**
+
+| | |
+|---|---|
+| **DEVELOPMENT** | everything PLACED renders. The held/delivered state is unchanged in the data and in the ledger; it is simply not applied to the view. |
+| **LAUNCH** | the pull-back is applied. An undelivered picture has **no address in the bundle at all** — not a hidden one, not a 404ing one, none. |
+
+**THE DEFAULT'S COST IS STATED RATHER THAN LEFT TO BE FOUND:** while it is
+DEVELOPMENT, a deploy publishes the Portal and the twenty-six photographs to
+anybody who visits weird.baby. That is the instruction. It is one word to
+reverse — `npm run deploy:launch` — and it is **not** something a future session
+may quietly flip by editing a default.
+
+**AND THE TWO HOLDS ARE TWO DOORS, NAMED FOR THEIR REASONS.** `/hr` is held for a
+PERMISSION reason, and a permission hold does not expire when a museum opens; it
+expires when the permission arrives. `/assets/locked/` + `/locked/` is refused in
+**every** stage; `/assets/held/` + `/held/` is the stage hold. One list guarding
+both would have handed ninety-three of Hunter Root's tracks to a build flag.
+
+**MECHANISM:** `reveal/stage.mjs` (the declaration and the ruling) ·
+`reveal/placement.mjs` (`placeRule`, pure) · `src/lib/placement.js` ·
+`vite.config.js`'s `wb-placement` plugin · `reveal/reachability.mjs` check 9.
+Canonical notes: `docs/canonical/OPERATIONS.md` §5, THE STAGE. Round log:
+`docs/MUSEUM_VISIBILITY_RULE_LOG-20260806.md`.
+
+## THE PULL-BACK RULE (Mike, 2026-08-06 — STANDING; APPLIED AT LAUNCH)
 
 > **"NOTHING PUBLISHES UNTIL THE RECORD DELIVERS IT. Every asset stays held
 > until a Record entry brings it into the story, at which point it is placed
@@ -171,6 +211,10 @@ which is the entry that delivers it. Register **H-a**, **H-c**.
 `reveal/schema.mjs` so both the declaration and `reveal:check` run it. Canonical
 notes: `docs/canonical/OPERATIONS.md` §5, THE PULL-BACK RULE. Round log:
 `docs/MUSEUM_PORTAL_HOLD_LOG-20260806.md`.
+
+**[V1 2026-08-06] AND THE PARAGRAPH ABOVE IS NOT A LIST OF WHAT WAS LOST — IT IS
+WHAT THIS WING LOOKS LIKE AT LAUNCH.** See THE VISIBILITY RULE above; the price
+is still the price, it is simply paid on opening day rather than today.
 
 ## A HELD THING MUST BE UNREACHABLE (Mike, 2026-08-06 — STANDING)
 

@@ -215,6 +215,15 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
    arithmetic is untouched and is the reason this can change at all — the cap is
    a whole multiple of --gb-row, the drag reads --gb-row off this stylesheet at
    pointerdown, and neither has the number written down anywhere else. */
+/* [G1 2026-08-06] AND BOTH NUMBERS ARE NOW THE CEILING RATHER THAN THE ANSWER.
+   `useRowHeight` in WbHome.jsx measures the tallest row in the book and writes
+   `--gb-row` on this element; these two are what the book uses before that
+   measurement lands and if scripting is off. They are deliberately NOT tightened
+   to the composed worst case (37.11px and 67.66px, measured): a ceiling with
+   slack in it can never clip a signature on the way to being right, and clipping
+   is the defect P12 exists to prevent. Read the block above `useRowHeight` for
+   the measurement, the two numbers Mike asked for, and what measuring the
+   stacked case found out about L1's own 88-character budget. */
 .wb-entries { --gb-row: 52px; --gb-visible: 3; margin-top: 16px; max-height: calc(var(--gb-row) * var(--gb-visible) + 2px); overflow-y: auto; scroll-snap-type: y proximity; overscroll-behavior: contain; border: 1px solid var(--wb-border); border-radius: 1px; background: var(--wb-ink-card); scrollbar-width: thin; scrollbar-color: var(--wb-border-hi) transparent; }
 .wb-entries::-webkit-scrollbar { width: 6px; }
 .wb-entries::-webkit-scrollbar-thumb { background: var(--wb-border-hi); border-radius: 3px; }

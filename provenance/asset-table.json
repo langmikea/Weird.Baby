@@ -1577,33 +1577,13 @@
    "h": 1200,
    "depth": 8,
    "colorType": 2,
-   "role": "unreferenced",
-   "usedBy": [],
+   "role": "shipped",
+   "usedBy": [
+    "src/data/artists/robots.js"
+   ],
    "what": "The MGK-NIAC album cover — the house ROBOTS template with the machine's own head, lens forward, set into the disc the WB mark used to occupy, and the model number where the word ROBOTS was.",
    "quality": "usable",
    "qualityNote": "THE FURNITURE IS EXACT AND THE PICTURE IS A DETAIL, and only the second is a compromise. Every constant is lifted from tools/make_robots_cover.py, so the ground, the border, the setting, the rule and the strapline are the front desk's own to the pixel. The badge is head_lens.jpg because THIS MUSEUM HOLDS NO PHOTOGRAPH OF THE MGK-VIII WHOLE — its archive is titled DETAILS ONLY and its own tombstone says the frame is withheld — so where the VIIIp cover shows a machine, this one shows a machine's face. It is the strongest reading in the set at disc size and it is still not what Mike's instruction asked for. The source is a soft hand-held frame; at 1200px the disc is upscaled from a 466px square and the grain shows on close inspection, though not at deck size. Register P4 is the photograph that would close this.",
-   "verdict": null,
-   "revealArc": null
-  },
-  {
-   "id": "museum:public/held/robots/art/mgk-viii-cover.jpg",
-   "uid": "A-1b740adfd9",
-   "repo": "museum",
-   "path": "public/held/robots/art/mgk-viii-cover.jpg",
-   "ref": "/held/robots/art/mgk-viii-cover.jpg",
-   "sha256": "a37ad8a3616313e01c50018ac4f25719c650ea0b3aa49690f0d8a43e30aa1639",
-   "kind": "image",
-   "format": "jpg",
-   "bytes": 278160,
-   "container": "jpg",
-   "h": 928,
-   "w": 927,
-   "components": 3,
-   "role": "unreferenced",
-   "usedBy": [],
-   "what": "The superseded MGK-NIAC album cover — a close frame of the lit grille with the LED bar behind it. Carried the name MGK-VIII, which the wing retired on 2026-08-05.",
-   "quality": "weak",
-   "qualityNote": "A soft hand-held snapshot with a MAINS ADAPTER, a wooden floor and loose cabling in frame, and it is the only colour original among the three covers (the wing's greyscale law hides that at the glass and cannot touch the composition). AND IT CANNOT BE STRAIGHTENED BY ROTATION: the machine's own rectangular aperture measures -1.75 deg on its top edge and +2.48 deg on its bottom, 0.13 deg off plumb on the left and 1.52 deg on the right. That is keystone, not tilt. Sampling the grille bars at four heights gives -2.69, +5.40, +3.58 and +0.12 deg for the same bars. It needs a photograph, not an edit.",
    "verdict": null,
    "revealArc": null
   },
@@ -1622,8 +1602,10 @@
    "h": 1200,
    "depth": 8,
    "colorType": 2,
-   "role": "unreferenced",
-   "usedBy": [],
+   "role": "shipped",
+   "usedBy": [
+    "src/data/artists/robots.js"
+   ],
    "what": "The MGK-VIIIp album cover — the house ROBOTS template with the whole unit in the disc and the model number below it.",
    "quality": "usable",
    "qualityNote": "This is the instruction met exactly: front_full.png is the unit, square on, whole, sharp, and the disc crop takes it without cutting the machine. The faceplate and the lit glass are legible inside the badge at full size, which is a bonus rather than the point — at deck size it reads as an object. Two departures from the base cover, both deliberate and both applied to BOTH machine covers so the pair cannot drift: the rule sits 14px lower so this name's descender clears it, and the letter-tracking is solved per cover so nine glyphs set inside the measure six do. The word still runs wider than the rule beneath it, which the six-glyph cover does not — the one place the pair is visibly unequal.",
@@ -1672,7 +1654,8 @@
    "colorType": 0,
    "role": "shipped",
    "usedBy": [
-    "src/data/artists/portal.js"
+    "src/data/artists/portal.js",
+    "src/data/artists/robots.js"
    ],
    "what": "The MGK-VIIIp album cover — the unit, front, with the BIOS beat composited into its glass. Also the ninth tile of the VIIIp morgue.",
    "quality": "usable",
@@ -1739,8 +1722,10 @@
    "h": 1438,
    "w": 858,
    "components": 3,
-   "role": "unreferenced",
-   "usedBy": [],
+   "role": "shipped",
+   "usedBy": [
+    "src/data/artists/robots.js"
+   ],
    "what": null,
    "quality": null,
    "qualityNote": null,
@@ -1783,8 +1768,10 @@
    "h": 655,
    "w": 1048,
    "components": 3,
-   "role": "unreferenced",
-   "usedBy": [],
+   "role": "shipped",
+   "usedBy": [
+    "src/data/artists/robots.js"
+   ],
    "what": "A lit column behind a grille.",
    "quality": "usable",
    "qualityNote": "1048x655, the blue LED column reads clearly.",
@@ -1805,8 +1792,10 @@
    "h": 820,
    "w": 380,
    "components": 3,
-   "role": "unreferenced",
-   "usedBy": [],
+   "role": "shipped",
+   "usedBy": [
+    "src/data/artists/robots.js"
+   ],
    "what": "MGK-NIAC plate 1 of 4, and the album cover's badge — the helical core through the cage bars.",
    "quality": "usable",
    "qualityNote": "THE ONE UNMISTAKABLE FEATURE OF THE MAINFRAME, and the reason it is the cover: a blue coil down the middle of a cabinet, read through a grid of bars, with the element's warm flanks either side of it. 380x820, so it is a TALL frame and the cover's circular badge takes a square out of it — the crop rides high (focal 0.36) so the disc holds coil rather than the core's foot and the loose cable. Soft, as every frame lifted from 2021 phone video is; at badge size that reads as depth rather than as blur. FOR MIKE: the blue is the whole of what makes this frame, and the wing's B&W law takes it at the glass — the file keeps its colour on disk.",
@@ -1827,8 +1816,10 @@
    "h": 740,
    "w": 560,
    "components": 3,
-   "role": "unreferenced",
-   "usedBy": [],
+   "role": "shipped",
+   "usedBy": [
+    "src/data/artists/robots.js"
+   ],
    "what": "MGK-NIAC plate 4 of 4, and the album's viewer poster — the interior flooded red-orange.",
    "quality": "usable",
    "qualityNote": "THE MOST DRAMATIC FRAME IN THE SET and the one that most looks like a 1965 machine in trouble: the whole cage red, the element glowing through it, the core's helix still legible as a separate blue-white line. 560x740. FOR MIKE, AND IT IS A QUESTION RATHER THAN A DEFECT: the robots repo's own record of this frame calls it the meltdown and quotes you on tape saying so, but nothing in the MUSEUM's fiction says this machine has ever been in trouble. The caption states what the frame shows and stops there. If a fault is part of NIAC's story, this plate is where it starts.",
@@ -1959,8 +1950,10 @@
    "h": 240,
    "w": 690,
    "components": 3,
-   "role": "unreferenced",
-   "usedBy": [],
+   "role": "shipped",
+   "usedBy": [
+    "src/data/artists/robots.js"
+   ],
    "what": "MGK-NIAC plate 3 of 4, and the still on TECHNICAL SPECIFICATIONS — the bar bank at the cabinet's base.",
    "quality": "usable",
    "qualityNote": "THE OUTPUT ROW, MID-PATTERN, which is the only frame in either repository showing this machine SAYING something. Two banks of red bar-graph modules behind the bars with a dark square aperture between them; the lit segments are uneven across the banks, which is what makes it read as a readout rather than as a lamp test. 690x240 — a wide letterbox, so it will sit in a collage tile with generous mat above and below and it is the wrong shape for any square slot. It carries the TECHNICAL SPECIFICATIONS face's own 1 x 64 entry as a picture.",
@@ -2048,8 +2041,10 @@
    "h": 2048,
    "depth": 8,
    "colorType": 6,
-   "role": "unreferenced",
-   "usedBy": [],
+   "role": "shipped",
+   "usedBy": [
+    "src/data/artists/robots.js"
+   ],
    "what": "The front of the unit, whole, as received.",
    "quality": "usable",
    "qualityNote": "1536x2048, sharp, the whole object. Carries a strong magenta cast the wing's greyscale law hides.",
@@ -2071,8 +2066,10 @@
    "h": 1536,
    "depth": 8,
    "colorType": 6,
-   "role": "unreferenced",
-   "usedBy": [],
+   "role": "shipped",
+   "usedBy": [
+    "src/data/artists/robots.js"
+   ],
    "what": "The unit's front glass, lit, captioned 'The front glass, lit'.",
    "quality": "wrong",
    "qualityNote": "MIRROR-REVERSED, AND IT IS THE WHOLE PHOTOGRAPH RATHER THAN THE SCREEN. The glass reads '-(A)BEAL MGK-VIIIp )- / Please Select: / MGK-VIIIp' right-to-left, and so does the lettering behind it lower in the frame — so the fix is a horizontal flip of the file, not a re-shoot. This is the ONE plate that shows the machine saying something and it shows it backwards. Standing finding R2; the whole-image diagnosis is new this round.",
@@ -2094,8 +2091,10 @@
    "h": 2400,
    "depth": 8,
    "colorType": 6,
-   "role": "unreferenced",
-   "usedBy": [],
+   "role": "shipped",
+   "usedBy": [
+    "src/data/artists/robots.js"
+   ],
    "what": "Captioned on the wall as 'The bezel around the glass'.",
    "quality": "wrong",
    "qualityNote": "IT IS NOT THE UNIT'S BEZEL AND IT IS NOT A PHOTOGRAPH. It is a CRT/monitor FRAME GRAPHIC with a plain white rectangle where a picture is meant to be dropped — a compositing asset, on a wall whose tombstone says 'Nine, all held by this museum' and whose lead calls them plates of the machine.",
@@ -2117,8 +2116,10 @@
    "h": 2400,
    "depth": 8,
    "colorType": 6,
-   "role": "unreferenced",
-   "usedBy": [],
+   "role": "shipped",
+   "usedBy": [
+    "src/data/artists/robots.js"
+   ],
    "what": "The pair — unit front and top viewfinder — captioned 'as received'. Also the robots Welcome face's hook and the VIIIp album's viewer poster.",
    "quality": "usable",
    "qualityNote": "3000x2400 and it reads well at every size. THE CAVEAT: it is a COMPOSITE — two views laid on a grey field inside a white border — not a single frame taken 'as received'. It is built from real photographs of the real objects, so it is honest about the objects and loose about itself.",
@@ -2140,8 +2141,10 @@
    "h": 2400,
    "depth": 8,
    "colorType": 6,
-   "role": "unreferenced",
-   "usedBy": [],
+   "role": "shipped",
+   "usedBy": [
+    "src/data/artists/robots.js"
+   ],
    "what": "Captioned on the wall as 'The base it stands on'.",
    "quality": "wrong",
    "qualityNote": "THERE IS NO BASE IN THE PICTURE. It is the family-shot composite dropped inside the CRT frame graphic above — the same two subjects, in a monitor. The caption describes an object the file does not contain.",
@@ -2163,8 +2166,10 @@
    "h": 1536,
    "depth": 8,
    "colorType": 6,
-   "role": "unreferenced",
-   "usedBy": [],
+   "role": "shipped",
+   "usedBy": [
+    "src/data/artists/robots.js"
+   ],
    "what": "The top viewfinder, looking down into the glass.",
    "quality": "usable",
    "qualityNote": "2048x1536, sharp, the small screen legible.",
@@ -2186,8 +2191,10 @@
    "h": 2048,
    "depth": 8,
    "colorType": 6,
-   "role": "unreferenced",
-   "usedBy": [],
+   "role": "shipped",
+   "usedBy": [
+    "src/data/artists/robots.js"
+   ],
    "what": "Captioned on the wall as 'The unit on its new base'.",
    "quality": "wrong",
    "qualityNote": "AGAIN NO BASE. It is the same pair on plain white with BOTH SCREENS MASKED OUT to blank white shapes — a masking intermediate from the compositing job, not a photograph of a unit on a base.",
@@ -2512,29 +2519,6 @@
    "revealArc": null
   },
   {
-   "id": "museum:public/images/wb-merch/hunter-root.png",
-   "uid": "A-ae563a60ed",
-   "repo": "museum",
-   "path": "public/images/wb-merch/hunter-root.png",
-   "ref": "/images/wb-merch/hunter-root.png",
-   "sha256": "0ae0f1970e1a1ff1db44385e079e1af3d43cd2a04057e7acae1ab4301ef3f8e6",
-   "kind": "image",
-   "format": "png",
-   "bytes": 1803030,
-   "container": "png",
-   "w": 1536,
-   "h": 1024,
-   "depth": 8,
-   "colorType": 2,
-   "role": "unreferenced",
-   "usedBy": [],
-   "what": "Hunter Root's gift-shop banner image — the Crooked Home sleeve beside a marbled record.",
-   "quality": "usable",
-   "qualityNote": "The picture is fine. It is REFERENCED BY NOTHING: F7b (2026-08-02) removed his full-width banner per Mike, and 1.7 MB — the largest orphan in public/ — was left behind.",
-   "verdict": null,
-   "revealArc": null
-  },
-  {
    "id": "museum:public/images/wb-merch/sticker.png",
    "uid": "A-3176119348",
    "repo": "museum",
@@ -2733,30 +2717,6 @@
    "what": "The link-preview card — WEIRD.BABY / MUSEUM / PURVEYORS OF THE WEIRD / NO ADS, NO AFFILIATE LINKS, NO CUT, set on house paper in a ruled box.",
    "quality": "usable",
    "qualityNote": "1200x630, the exact size the platforms crop to. Type only; nothing to go soft.",
-   "verdict": null,
-   "revealArc": null
-  },
-  {
-   "id": "museum:public/WeirdBaby_PhotoID_backup.png",
-   "uid": "A-8514bae32e",
-   "repo": "museum",
-   "path": "public/WeirdBaby_PhotoID_backup.png",
-   "ref": "/WeirdBaby_PhotoID_backup.png",
-   "sha256": "06cc7d3b22252efe561ced4c7c3d5549eab2274b6ebba6b9cd3e42066230b6e3",
-   "kind": "image",
-   "format": "png",
-   "bytes": 719463,
-   "container": "png",
-   "truncated": true,
-   "w": 2048,
-   "h": 2048,
-   "depth": 8,
-   "colorType": 6,
-   "role": "unreferenced",
-   "usedBy": [],
-   "what": "A second copy of the house mark, kept as a backup.",
-   "quality": "wrong",
-   "qualityNote": "THE FILE IS TRUNCATED. The PNG header is valid and the stream never reaches IEND, so a decoder stops part-way (PIL: 'image file is truncated'). 703 KB of broken image sitting in public/ at a public URL. Referenced by nothing.",
    "verdict": null,
    "revealArc": null
   },

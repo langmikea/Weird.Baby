@@ -11,7 +11,7 @@
 // resolves here even though this file cannot `@import` anything. That is
 // verified, not assumed — but it is also bundling luck rather than a declared
 // dependency, which is R5's point and R5's job (see the round log).
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./WbHome.css";
 import { useRoom } from "../lib/use-room.js";
@@ -263,10 +263,121 @@ function GuestRow({ e }) {
   );
 }
 
+/* ═══ [G1 2026-08-06] THE ROW IS AS TALL AS THE TALLEST SIGNATURE, MEASURED ═══
+   MIKE: **"THE GUESTBOOK ROWS ARE TOO TALL. I would accept a few pixels; this is
+   far more. Can the wrap be kept at the OLD height? If not, BY HOW MUCH are the
+   current entries missing a no-wrap fit today — state the number. Then fix to
+   the tightest honest option."**
+
+   THE TWO ANSWERS, MEASURED ON THE BUILT BUNDLE AT 1920px:
+     · CAN THE WRAP BE KEPT AT THE OLD 30px? NO. A genuinely two-line row is
+       37.11px composed — 5px of padding, two 15.552px line boxes, a 1px rule —
+       so 30px is 7.11px short of one.
+     · BY HOW MUCH ARE THE CURRENT ENTRIES MISSING A NO-WRAP FIT? **They are not.
+       The longest signature in the book — James E, 89 characters — sets in
+       614.77px inside a 677.77px column. It clears one line by 63.00px**, about
+       nine characters. Not one of the six wraps at desktop.
+   SO THE QUESTION DOES NOT BIND, AND THE 52px ROW IS RESERVING A SECOND LINE
+   NOTHING IS USING. A one-line row composes at 21.55px. That is 30.45px of air
+   per signature and 91px across the three-row window, which is the thing he is
+   looking at.
+
+   WHY NOT JUST SET A SMALLER NUMBER. Because the second line is not wrong, it is
+   unused — L1's ruling stands, and a visitor may still type 88 characters and
+   fill it. A hand-set 38px would be right today and would be a hand-set number
+   again the moment the type ramp or the budget moves, which is how this file got
+   a 52 and a 74 in it.
+
+   SO THE NUMBER IS READ OFF THE BOOK. Every row takes the height of the TALLEST
+   row in the book: today that is one line, so the rows are 22px — tighter than
+   the 30px he remembers — and the day somebody writes a long one every row
+   becomes 38px together. P12's arithmetic is untouched and is the reason this
+   can change at all: rows stay uniform BY CONSTRUCTION, so the cap is still a
+   whole multiple of `--gb-row` and the stepped scroller still translates in it.
+   `rowPx()` reads the property off the element, so the drag follows for free.
+
+   IT IS D1's MECHANISM, SECOND USE. The /wb contents column is measured the same
+   way and for the same reason — a row's granted height is not its natural one —
+   and the same three rules apply: release, read back, restore inside a layout
+   effect so nothing unmeasured is ever painted.
+
+   THE STYLESHEET'S 52 AND 74 STAY, AS THE CEILING. They are the no-JS value and
+   the value before the first measurement, and both are ABOVE the worst case
+   (37.11 and 67.66), so the book never clips on the way to being right.
+
+   AND MEASURING THE STACKED CASE FOUND L1's OWN BUDGET DERIVED WRONG. Its note
+   says 88 characters is "44 characters a line and the block holds 88" — two
+   lines at a 310px row. Composed offscreen at 310px, **88 characters take
+   THREE**, for every word length tried and for the real 89-character note: text
+   wraps at word boundaries, not at column 44. The row is 67.66px, the hard-coded
+   74 covers it, and nothing has ever clipped — the number was right by luck
+   rather than by the arithmetic that produced it. Measured, it is right by
+   construction. (M97 stands: the window would not go below 1228 CSS px, so the
+   stacked figures are composed offscreen at the same 310px row rather than read
+   off a 390px viewport.) */
+/* THE EFFECT OWNS THE PROPERTY OUTRIGHT — IT IS NOT REACT STATE, AND THE FIRST
+   CUT MADE IT STATE AND WAS WRONG IN A WAY WORTH RECORDING. Written as
+   `useState` + a `style` prop, the measurement wrote `--gb-row` through React
+   and then the NEXT measurement released it with `removeProperty`, which wipes
+   React's own inline value; the re-measure produced the same number, `setState`
+   bailed out on an unchanged value, React never re-rendered, and the property
+   stayed gone. The book silently fell back to the stylesheet's 52px ceiling —
+   correct-looking, never clipping, and doing nothing. It survived a build and a
+   page load and was caught by reading `element.style` on the glass.
+   THE RULE IT LEAVES BEHIND: a DOM property that an effect RELEASES cannot also
+   be owned by React. One writer. */
+function useRowHeight(deps) {
+  const ref = useRef(null);
+
+  useLayoutEffect(() => {
+    if (!ref.current) return undefined;
+    let live = true;
+
+    const measure = () => {
+      const el = ref.current;
+      if (!live || !el) return;
+      /* RELEASE — `--gb-row: auto` makes `.wb-entry`'s `height` auto, so each
+         row reports what it actually needs. The cap's `calc()` goes invalid and
+         `max-height` falls back to none for the same instant, which is why this
+         is a LAYOUT effect: nothing between release and reading is painted. */
+      el.style.setProperty("--gb-row", "auto");
+      let tallest = 0;
+      for (const r of el.querySelectorAll(".wb-entry")) {
+        tallest = Math.max(tallest, r.getBoundingClientRect().height);
+      }
+      /* +1 FOR THE RULE, AND IT IS A CEILING RATHER THAN A CALCULATION. A row's
+         1px bottom border is inside its box, except on `:last-child`, which
+         drops it — so if the tallest row happens to be the last one the reading
+         is 1px short. Adding it unconditionally costs at most one pixel of slack
+         on a book whose tallest row is not last, and the safe direction here is
+         the one that cannot clip a signature.
+         A reading of zero hands the row back to the stylesheet's ceiling rather
+         than collapsing the book: the measurement failing must cost slack, never
+         a signature. */
+      if (tallest > 0) el.style.setProperty("--gb-row", Math.ceil(tallest) + 1 + "px");
+      else el.style.removeProperty("--gb-row");
+    };
+
+    measure();
+    /* the type is a web font, and a row measured before it lands is a row
+       measured in the fallback's metrics. `fonts.ready` is the platform's own
+       signal (Doctrine 8). */
+    if (document.fonts?.ready) document.fonts.ready.then(measure).catch(() => {});
+    /* the note column is `1fr`, so its width — and therefore its line count —
+       is a function of the window. */
+    window.addEventListener("resize", measure);
+    return () => { live = false; window.removeEventListener("resize", measure); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
+
+  return ref;
+}
+
 /* The plain window — the fallback described above, and nothing selects it. */
 function GuestBookPlain({ entries }) {
+  const ref = useRowHeight([entries]);
   return (
-    <div className="wb-entries">
+    <div className="wb-entries" ref={ref}>
       {entries.map((e, i) => <GuestRow e={e} key={i} />)}
     </div>
   );
@@ -315,7 +426,11 @@ function GuestBook({ entries }) {
      only to be a dependency: bumping it restarts the rest below. */
   const [drag, setDrag] = useState(null);
   const [nudge, setNudge] = useState(0);
-  const boxRef = useRef(null);
+  /* [G1 2026-08-06] the measured row height — see `useRowHeight`. `boxRef` is
+     the hook's ref now rather than a second one: `rowPx()` below reads
+     `--gb-row` off this same element, so the drag inherits the measurement with
+     no second author of the number, which is what P3's note insists on. */
+  const boxRef = useRowHeight([entries]);
   const grip = useRef(null);
   /* `n > VISIBLE` is belt to `SCROLL_MIN`'s braces: a window that already holds
      the whole book has nothing to travel, and the floor is a tuning number that

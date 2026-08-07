@@ -78,6 +78,12 @@ const TWIN = {
 };
 
 /* Where the album sits in the deck when the door is open (see the P2 note). */
+/* [F1 2026-08-06] the house's FAQ factory — see src/data/faq-face.js. It is a
+   PUBLIC module and importing it from here is safe in the direction that
+   matters: this file names it, not the other way round, so nothing public
+   reaches the Portal through it. `heldChunkGuard` proves that at every build. */
+import { faqFace } from "../faq-face.js";
+
 export const PORTAL_AT = 1;
 
 export const PORTAL_ALBUM = {
@@ -373,24 +379,23 @@ export const PORTAL_ALBUM = {
       title: "FAQ",
       videos: [],
       tags: ["faq", "questions", "portal"],
-      face: {
-        kind: "text",
-        title: "FAQ",
-        subtitle: "ABOUT THE PORTAL",
-        entries: [
-          { title: "Is the Portal the real machine?",
-            line: "It is the real firmware on shimmed hardware — the twin. " +
-                  "The unit itself is a physical object in a room; the twin is " +
-                  "how it is met from here.",
-            note: "" },
-          { title: "Is the mainframe on the Portal?",
-            line: "Not yet. Two channels are engraved for it on the feed " +
-                  "drum and neither of them arms.",
-            note: "" },
-        ],
-        entriesMode: "faq",
-        footer: "THE PORTAL · FAQ",
-      },
+      /* [F1 2026-08-06] BUILT BY `faqFace()` LIKE EVERY OTHER FAQ IN THE
+         BUILDING, and this one matters more than the four public ones: a held
+         album is the easiest place in the museum for a format to drift, because
+         nobody laps it. The factory is what makes that impossible rather than
+         unlikely — see src/data/faq-face.js. The "THE PORTAL · FAQ" footer is
+         struck with the other four. */
+      face: faqFace("THE PORTAL", [
+        { title: "Is the Portal the real machine?",
+          line: "It is the real firmware on shimmed hardware — the twin. " +
+                "The unit itself is a physical object in a room; the twin is " +
+                "how it is met from here.",
+          note: "" },
+        { title: "Is the mainframe on the Portal?",
+          line: "Not yet. Two channels are engraved for it on the feed " +
+                "drum and neither of them arms.",
+          note: "" },
+      ]),
     },
   ],
 };

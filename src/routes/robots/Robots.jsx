@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import Exhibit from "../exhibit/Exhibit.jsx";
 import { robotsExhibit } from "../../data/artists/robots.js";
 import { heldOpen } from "../../lib/held.js";
+import { launched } from "../../lib/placement.js";
 
 /* /robots — walk-six structural rebuild (2026-07-25, STAGED ONLY):
    Robots IS the museum's shared exhibit machinery now — an artist config
@@ -23,20 +24,32 @@ import { heldOpen } from "../../lib/held.js";
    `/hr`.
    THIS FILE IS NOT THE LOCK AND MUST NEVER BE MISTAKEN FOR ONE, exactly as
    `HeldWing.jsx` says of itself. The lock is `src/worker.js`, which refuses
-   `/assets/held/*` and `/held/*` without the cookie the password mints. The
-   flag below only decides whether the wing bothers to ASK for the chunk;
+   `/assets/held/*` and `/held/*` at LAUNCH without the cookie the password
+   mints. The flag below only decides whether the wing bothers to ASK for it;
    forging it in a console buys a request the server refuses and a `catch` that
    leaves the deck at its four public albums.
    THE IMPORT IS DYNAMIC BECAUSE THAT IS WHAT PUTS THE MATERIAL BEHIND THE
    DOOR. A static import would land the album's eight engravings, its refusal
    lines and the twin's address in the public robots chunk, which is the whole
    defect H1 exists to prevent; `heldChunkGuard` in vite.config.js fails the
-   build if that ever happens by accident. */
+   build if that ever happens by accident.
+
+   ═══ [V1 2026-08-06] AND IN DEVELOPMENT IT IS ASKED FOR WITHOUT THE PASSWORD ══
+   MIKE: **"THE PORTAL COMES BACK IMMEDIATELY; he said he needs to see it."**
+   NOTHING ABOUT THE ARRANGEMENT ABOVE CHANGES — the album is still its own
+   module, the chunk still lands under `assets/held/`, the guard still fails a
+   build that lets it escape. The only thing the stage moves is whether
+   `src/worker.js` opens that directory, and this line is the browser noticing
+   that it will. At LAUNCH the condition falls back to exactly what H1 built:
+   the session flag, minted by the password on `/admin`.
+   THE `catch` IS STILL THE WHOLE ERROR PATH and it still matters more than it
+   looks: a forged flag at LAUNCH buys a request the server refuses and a deck
+   of four public albums, which is the same place a flat tyre lands. */
 export default function Robots({ open = null }) {
   const [portal, setPortal] = useState(null);
 
   useEffect(() => {
-    if (!heldOpen()) return undefined;
+    if (launched() && !heldOpen()) return undefined;
     let live = true;
     import("../../data/artists/portal.js")
       .then(m => { if (live) setPortal(m); })

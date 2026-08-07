@@ -96,3 +96,11 @@ html[data-room="admin"], html[data-room="admin"] body { background: #050505; col
 .adm-held-close { background: transparent; border: none; color: #2a2a2a; font-family: 'Courier Prime', monospace; font-size: 0.62rem; letter-spacing: 0.1em; cursor: pointer; text-transform: uppercase; transition: color 0.2s; }
 .adm-held-close:hover { color: var(--wb-gold); }
 .adm-held-msg { color: #8a6a4a; font-family: 'Courier Prime', monospace; font-size: 0.72rem; margin-top: 12px; }
+/* [V1 2026-08-06] THE STAGE READOUT. The room's own register vocabulary — a
+   dim key and a lit value, the shape every stamped pair on this page already
+   takes — because the stage is a mechanism state and mechanism states in this
+   museum are printed, never announced. No colour codes one stage as wrong:
+   both are states the building is legitimately in. */
+.adm-held-stage { display: flex; align-items: baseline; gap: 12px; margin: 14px 0 0; }
+.adm-held-stage-k { color: #555; font-family: 'Courier Prime', monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.adm-held-stage-v { color: var(--wb-gold); font-family: 'Courier Prime', monospace; font-size: 0.72rem; letter-spacing: 0.06em; }

@@ -57,6 +57,25 @@
 // page does not take it off the server and an unlinked address is still an
 // address.
 //
+// ═══ [V1 2026-08-06] AND THE RULE IS A LAUNCH-STATE RULE ════════════════════
+//
+// MIKE, reversing the round before and giving the reason: **"DURING
+// DEVELOPMENT, SHOW EVERYTHING THAT IS PLACED, until asked to filter. The
+// pull-back rule is a LAUNCH-STATE rule, not a development-state one. Mike
+// cannot direct what he cannot see."**
+//
+// THE SENTENCE ABOVE IS UNCHANGED AND SO IS EVERYTHING THAT ENFORCES IT. The
+// files are still under `public/held/`; `reveal/delivery.mjs` still fails a
+// build that puts an undelivered picture at a public address; the ledger still
+// says HELD. What changed is that the rule now has a STAGE to be applied in,
+// and every governed picture in this file goes through `placed()`
+// (src/lib/placement.js), which hands it back during development and answers
+// NOTHING at launch — not a hidden address, none at all.
+//
+// SO THE PARAGRAPH ABOVE IS NOT A LIST OF WHAT WAS LOST. It is the list of what
+// this file looks like at LAUNCH, which is one word away and which
+// `npm run reveal:check` tests without having to be in it.
+//
 // ---- B9 2026-08-02: THE RECORD CARRIES EVIDENCE CLASSES ---------------------
 // MIKE: "The Record needs to carry more than plates: photos, 'electronic data
 // transmissions' and other evidence classes arrive long before units do.
@@ -144,6 +163,15 @@ import RobotsExhibitFlow from "../../routes/robots/RobotsExhibitFlow.jsx";
    forbids. He has now said it: both rooms carry his own D2 wording, and no
    follow-on sentences. One import, exactly as M66 predicted. */
 import { CONTACT } from "../house-copy.js";
+/* [V1 2026-08-06] EVERY GOVERNED PICTURE IN THIS FILE GOES THROUGH `placed()`.
+   The addresses below are the PUBLIC ones — the address each picture will have
+   the day the Record delivers it — and the resolver computes the stage door's
+   prefix when the museum is still being built. Read src/lib/placement.js before
+   changing a path here, and reveal/stage.mjs for what the two stages are. */
+import { placed, placedPresets } from "../../lib/placement.js";
+/* [F1 2026-08-06] all three FAQ faces in this wing are built by one function —
+   see src/data/faq-face.js for why they cannot carry a blurb or a footer. */
+import { faqFace } from "../faq-face.js";
 
 /* ---- NO-COMING-SOON [Mike 2026-07-29 / R1 2026-07-30] ---------------------
    MGK-NIAC, NRU-2000 and the "Robots" findings-log album are all REMOVED from
@@ -396,7 +424,12 @@ const WBR_TRACKS = [
                day, and that is the same mechanism as N9's archive presets. */
             { no: 13,
               title: "The one thing that wasn't packed like the rest",
-              still: "/robots/reference/photos/rear_power_switch.png",
+              /* THE ONE DELIVERED PICTURE IN THE WING, on the entry that
+                 delivers it. It goes through `placed()` like every other — the
+                 resolver hands a delivered path straight back, in BOTH stages,
+                 and a governed picture that skips the resolver is the hole the
+                 resolver exists to close. */
+              still: placed("/robots/reference/photos/rear_power_switch.png"),
               stillCaption: "The back of the unit.",
               /* [R3 2026-08-06] `line` IS THE EXECUTIVE SUMMARY, AND IT IS
                  BUDGETED. MIKE: the index level serves the HEADLINE and what an
@@ -515,32 +548,37 @@ const WBR_TRACKS = [
         videos: [],
         tags: ["faq", "questions", "about", "house", "purveyor", "buying",
                "documents", "manual", "originals", "contact"],
-        face: {
-          kind: "text",
-          title: "Frequently asked",
-          subtitle: "WEIRD.BABY ROBOTS",
-          /* [H2 2026-08-06] PULLED BACK — see THE PULL-BACK RULE at the head
-             of this file. Nothing publishes until the Record delivers it. */
-          /* WELCOME'S LEAD, WITH THE FAQ'S OWN LAST TWO SENTENCES BEHIND IT.
-             Not one clause is new: the first three are the orientation the
-             landing needs, the last two are what this face has always said
-             about its own answers. The FAQ's opening sentence — "the questions
-             people actually turn up with" — went, because the heading and the
-             rows say it. */
-          blurb:
-            "In 1965 somebody built a machine to say what happens next. Sixty " +
-            "years later a delivery of them arrived on a dock with no sender's " +
-            "name on it. This wing is everything we have worked out since — " +
-            "and, more often, what we have not. Some of the answers below stop " +
-            "short. Those are the interesting ones.",
-          /* WELCOME'S CONTENTS REGISTER. It stopped being a business card at N4
-             and became a list of what the wing HOLDS; that job did not go away
-             when the face did. The TAGLINE row is not here — see above. */
-          lines: [
-            "UNITS    MGK-NIAC, the mainframe · MGK-VIIIp, the portable",
-            "ON FILE  photographs, the record, the manual, the firmware",
-            "TRADE    we buy strange things and find out what they are",
-          ],
+        /* ═══ [F1 2026-08-06] FOUR THINGS ARE STRUCK AND NAMED ══════════════
+           MIKE: *"the robots FAQ uses the Information Booth's layout and format,
+           EXACTLY. Today it has a different title format, extra text above the
+           table, and a footer that does not belong. STRIP ALL OF IT."*
+           WHAT WENT, under the Law of Subtraction, which is a reason to delete
+           and never a reason to delete quietly:
+             · THE TITLE. "Frequently asked" — the only FAQ face in the museum
+               not called FAQ. Two objects with one job and two names.
+             · THE 1965 BLURB. Welcome's lead, folded in at R3 when this face
+               absorbed the front desk. It was true, and it was three sentences
+               of orientation above a list of questions whose first row is
+               "Where do I start?". The wing's arrival story is what THE RECORD
+               is; R3's own note says the FAQ "stops being the place that says
+               everything" and this was the last thing left saying it.
+             · THE UNITS / ON FILE / TRADE REGISTER. Welcome's contents list. Its
+               three rows are the tracklist beside it (both machines are albums),
+               the wing's own faces (photographs, the Record, the manual, the
+               firmware — four rows a visitor is looking at), and a posture
+               sentence that is answered at length by "What is Weird.Baby
+               Robots?" two questions down.
+             · THE FOOTER. "'Restoration house' is not what we are…" — the
+               house's own voice signing off its own answers, where the booth
+               signs off with the address. The [PAPA] clause it carried (final
+               wording throughout, and that the answers should be shorter) is
+               Mike's own note to himself and is preserved in OPEN_ACTIONS
+               rather than in a field nothing prints.
+           WHAT IS LOST AND HAS NOWHERE ELSE TO GO, stated plainly: nothing. Each
+           of the four is said better by an object the visitor can already reach.
+           The face is built by `faqFace()` now — see src/data/faq-face.js for
+           why the fields are absent rather than merely unset. */
+        face: faqFace("WEIRD.BABY ROBOTS", [
           /* ==== [P3 2026-08-05] THE QUESTIONS ARE MIKE'S ==================
              MIKE: "THE ROBOTS FAQ — replace with the FAQ template and Mike's
              content, verbatim where given."
@@ -557,7 +595,6 @@ const WBR_TRACKS = [
              quietly: the old START row was the only line in the wing that said
              which door is which, and Mike's replacement sends the visitor
              through one door rather than naming three. Register M58. */
-          entries: [
             { title: "Where do I start?",
               line: "Finish the FAQ, then follow The Record.",
               note: "" },
@@ -619,31 +656,22 @@ const WBR_TRACKS = [
             { title: "How do I get in touch?",
               line: CONTACT,
               note: "" },
-          ],
           /* ═══ [R7 2026-08-06] THE HOUSE FAQ TAKES THE BOOTH'S FORMAT ════════
              MIKE: "the Information Booth IS an FAQ under a better name and
              keeps that name for UX value. Sub-exhibits carry their own FAQs — a
              visitor must never have to run back to the lobby. Conform every wing
              FAQ to the booth's format."
              SO EVERY QUESTION IS ON THE PAGE AND CLICKING ONE OPENS ITS ANSWER,
-             which is what `/booth` has done since M3 and what four faces in
-             three wings were doing differently.
-             THE "Q" AND "START" STAMPS WENT WITH THE FLAT LIST. A list of
-             questions under a heading reading FREQUENTLY ASKED does not need
-             every row prefixed with the letter Q; the booth prints none.
+             which is what `/booth` has done since M3.
+             THE "Q" AND "START" STAMPS WENT WITH THE FLAT LIST — the booth
+             prints none.
              M57's MECHANISM IS UNTOUCHED AND STILL LOAD-BEARING: the held slot
-             below carries the marker in BOTH its title and its line, so
+             above carries the marker in BOTH its title and its line, so
              `scrubFace` drops the entry whole rather than publishing a question
              with nothing under it. An accordion makes that MORE important, not
              less — a question that opens onto silence is worse than one printed
              above silence. */
-          entriesMode: "faq",
-          /* WELCOME's footer, and the FAQ's own [PAPA] behind it. The scrub
-             cuts by SENTENCE, so the marked one drops and the line prints. */
-          footer: "“Restoration house” is not what we are. Weird.Baby is " +
-                  "Weird.Baby. [PAPA] — the final wording throughout, and the " +
-                  "answers should be shorter than these.",
-        },
+        ]),
       },
 ];
 
@@ -758,8 +786,13 @@ const spine = [
     title: "Weird.Baby Robots",
     year: null,
     tags: ["wbr", "house", "front-desk", "cover-variant"],
-    art: "/robots/art/wbr-cover-logo.png",
+    /* THE WING'S OWN SLEEVE — declared SIGNAGE in reveal/delivery.mjs, so
+       `placed()` hands it back unchanged in both stages. It goes through the
+       resolver anyway: a governed path that skips it is a path nobody is
+       checking, and the one that skipped it would be the one that mattered. */
+    art: placed("/robots/art/wbr-cover-logo.png"),
     accent: null,
+    /* not governed — the house's own photo ID, outside `/robots/`. */
     viewerPoster: "/WeirdBaby_PhotoID.png",
     viewerPosterCaption: "Weird.Baby — purveyors of the weird.",
     tracks: WBR_TRACKS,
@@ -924,9 +957,13 @@ const spine = [
        photograph this museum owns is not deleted by a cover change, and it is
        not re-homed onto a wall whose tombstone counts its plates. Register M9. */
     /* [H2 2026-08-06] PULLED BACK — the cover and the poster are both
-       photographs of the object and no Record entry has delivered one. The
-       carousel draws its own placeholder (title + year), which is built and
-       honest; the files are behind the door under public/held/. */
+       photographs of the object and no Record entry has delivered one.
+       [V1 2026-08-06] AND THE PULL-BACK IS A LAUNCH-STATE RULE NOW, so this is
+       one line rather than a deletion: `placed()` hands the cover back during
+       development and answers nothing at launch, where the carousel draws its
+       own sleeve. Nothing about what is DELIVERED changed — the file is still
+       under `public/held/` and `reveal:check` still says so. */
+    art: placed("/robots/art/mgk-niac-cover.png"),
     accent: null,
     /* [R4] THE POSTER WAS THE CHEST — torso, both shoulders, the top of two
        limbs. That is the robot, so it is gone from here. The poster is the
@@ -935,6 +972,9 @@ const spine = [
        an operator doing it. It is also the fourth tile of the archive below,
        named here rather than left unremarked, the way the VIIIp album names
        the family shot's double duty. */
+    viewerPoster: placed("/robots/reference/mgk-viii/core_meltdown.jpg"),
+    viewerPosterCaption:
+      "MGK-NIAC, the interior in trouble.",
     tracks: [
       /* ═══ [P2 2026-08-05] THE NAME IS DELETED IN TOTAL ══════════════════
          MIKE'S INSTRUCTION, IN THOSE WORDS, and it is a deletion rather than a
@@ -1119,13 +1159,65 @@ const spine = [
           /* ═══ [H2 2026-08-06] THE WALL IS EMPTY, AND THE WALL IS STILL HERE ══
              MIKE: "the Image Archive pulls back... the archive and the viewer
              stay built; they are simply empty until the story fills them."
-             FIVE GROUPINGS AND FIVE PHOTOGRAPHS CAME OFF THIS FACE and every
-             one of them is recoverable from git — The whole cabinet, Through
-             the bars (2), Running and in trouble (2), and the coarse Every
-             photograph. The `presets` mechanism, the `archiveUnit` noun, the
-             grouping strip and the reader are untouched: the day a Record entry
-             delivers a plate it is a `presets` array here and nothing else
-             moves. */
+             ═══ [V1 2026-08-06] AND THE WALL IS FULL AGAIN UNTIL LAUNCH ════════
+             H2's own last sentence said the day a Record entry delivers a plate
+             it is "a `presets` array here and nothing else moves". That is what
+             this is — the same array, restored from git word for word, with
+             every address through `placedPresets()`. At LAUNCH each tile
+             resolves to nothing, the groupings empty, `presets` goes undefined
+             and `archiveEmpty` below prints exactly the sentence it printed for
+             the whole of H2. The empty state is not deleted; it is the OTHER
+             stage, and it is one word away. */
+          presets: placedPresets([
+            { id: "whole", label: "The whole cabinet", tiles: [
+              { img: "/robots/reference/mgk-viii/cabinet_whole.jpg",
+                href: "/robots/reference/mgk-viii/cabinet_whole.jpg",
+                label: "The cabinet, whole — lit core, bar bank, both feet",
+                date: "MAR 2021" },
+            ] },
+            { id: "bars", label: "Through the bars", tiles: [
+              { img: "/robots/reference/mgk-viii/core_helical.jpg",
+                href: "/robots/reference/mgk-viii/core_helical.jpg",
+                label: "The core, through the cage bars — warm flanks either side",
+                date: "MAR 2021" },
+              { img: "/robots/reference/mgk-viii/column_lit.jpg",
+                href: "/robots/reference/mgk-viii/column_lit.jpg",
+                label: "A lit column behind the bars, and the cabinet's edge",
+                date: "MAR 2021" },
+            ] },
+            { id: "running", label: "Running, and in trouble", tiles: [
+              { img: "/robots/reference/mgk-viii/output_row.jpg",
+                href: "/robots/reference/mgk-viii/output_row.jpg",
+                label: "The output row — the red bar bank at the base, mid-pattern",
+                date: "MAR 2021" },
+              { img: "/robots/reference/mgk-viii/core_meltdown.jpg",
+                href: "/robots/reference/mgk-viii/core_meltdown.jpg",
+                label: "The whole interior in red-orange, the core glowing like an element",
+                date: "MAR 2021" },
+            ] },
+            { id: "all", label: "Every photograph", tiles: [
+              { img: "/robots/reference/mgk-viii/cabinet_whole.jpg",
+                href: "/robots/reference/mgk-viii/cabinet_whole.jpg",
+                label: "The cabinet, whole — lit core, bar bank, both feet",
+                date: "MAR 2021" },
+              { img: "/robots/reference/mgk-viii/core_helical.jpg",
+                href: "/robots/reference/mgk-viii/core_helical.jpg",
+                label: "The core, through the cage bars — warm flanks either side",
+                date: "MAR 2021" },
+              { img: "/robots/reference/mgk-viii/column_lit.jpg",
+                href: "/robots/reference/mgk-viii/column_lit.jpg",
+                label: "A lit column behind the bars, and the cabinet's edge",
+                date: "MAR 2021" },
+              { img: "/robots/reference/mgk-viii/output_row.jpg",
+                href: "/robots/reference/mgk-viii/output_row.jpg",
+                label: "The output row — the red bar bank at the base, mid-pattern",
+                date: "MAR 2021" },
+              { img: "/robots/reference/mgk-viii/core_meltdown.jpg",
+                href: "/robots/reference/mgk-viii/core_meltdown.jpg",
+                label: "The whole interior in red-orange, the core glowing like an element",
+                date: "MAR 2021" },
+            ] },
+          ]),
           archiveEmpty:
             "No photograph of the mainframe is on the wall. The museum holds " +
             "images of this machine and the Record has not brought any of " +
@@ -1206,28 +1298,24 @@ const spine = [
         title: "FAQ",
         videos: [],
         tags: ["faq", "questions", "niac", "mainframe"],
-        face: {
-          kind: "text",
-          title: "FAQ",
-          subtitle: "ABOUT THIS MACHINE",
-          /* [H2 2026-08-06] PULLED BACK — see THE PULL-BACK RULE at the head
-             of this file. Nothing publishes until the Record delivers it. */
-          entries: [
-            { title: "Does it still work?",
-              line: "Yes. Both units power on and run their own firmware.",
-              note: "" },
-            /* [H1 2026-08-06] THE PORTAL QUESTION MOVED WITH THE PORTAL.
-               It is answered word for word on the held album's own FAQ
-               (src/data/artists/portal.js). A public page answering questions
-               about a held room is a listing of that room, which is the one
-               thing the hold has to prevent. */
-            { title: "Can I buy one?",
-              line: FAQ_BUY_ONE,
-              note: "" },
-          ],
-          entriesMode: "faq",
-          footer: "MGK-NIAC · FAQ",
-        },
+        /* [F1 2026-08-06] BUILT BY `faqFace()`. The still that used to sit here
+           (`column_lit.jpg`) and the "MGK-NIAC · FAQ" footer are both struck —
+           the booth's shape has neither, and the plate is still a tile on this
+           album's own Image Archive, which is where it was already doing its
+           second job. */
+        face: faqFace("MGK-NIAC", [
+          { title: "Does it still work?",
+            line: "Yes. Both units power on and run their own firmware.",
+            note: "" },
+          /* [H1 2026-08-06] THE PORTAL QUESTION MOVED WITH THE PORTAL.
+             It is answered word for word on the held album's own FAQ
+             (src/data/artists/portal.js). A public page answering questions
+             about a held room is a listing of that room, which is the one
+             thing the hold has to prevent. */
+          { title: "Can I buy one?",
+            line: FAQ_BUY_ONE,
+            note: "" },
+        ]),
       },
       /* [N1 2026-08-04] "THE PARTS" IS REMOVED. Mike's instruction, and it is a
          removal rather than a rewrite: the whole track and its face are gone.
@@ -1303,9 +1391,10 @@ const spine = [
        shown and captioned. It stopped being the cover; it did not stop being a
        plate. A8's crop is untouched. */
     /* [H2 2026-08-06] PULLED BACK — the cover and the poster are both
-       photographs of the object and no Record entry has delivered one. The
-       carousel draws its own placeholder (title + year), which is built and
-       honest; the files are behind the door under public/held/. */
+       photographs of the object and no Record entry has delivered one.
+       [V1 2026-08-06] See the mainframe's album above: the rule is unchanged
+       and is APPLIED at launch rather than always. */
+    art: placed("/robots/art/mgk-viiip-cover.png"),
     accent: null,
     /* [E2] THE VIEWER'S DEFAULT — the family shot.
        Chosen over the alternatives on honesty: it is a real photograph of the
@@ -1314,6 +1403,9 @@ const spine = [
        loses for being redundant (it is six inches to the left in the deck);
        a findings-log face loses because the log is words, and words are not a
        compelling thing to LAND on. */
+    viewerPoster: placed("/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png"),
+    viewerPosterCaption:
+      "MGK-VIIIp −02 “The Informer”, front and top, as received.",
     tracks: [
       /* [N1/N10 2026-08-06] SAME ORDER AS THE MAINFRAME, and it is the parity
          gate that makes that a fact rather than a courtesy — `menu-parity.mjs`
@@ -1353,7 +1445,9 @@ const spine = [
              wrong about the machine, because it is the machine"; the lit screen
              is that sentence with the evidence attached. */
           /* [H2 2026-08-06] PULLED BACK — see THE PULL-BACK RULE at the head
-             of this file. Nothing publishes until the Record delivers it. */
+             of this file. [V1 2026-08-06] Applied at LAUNCH, not always. */
+          still: placed("/robots/reference/photos/front_screen.png"),
+          stillCaption: "The front glass, lit — the firmware, running.",
           blurb:
             "Everything the unit knows how to do is in here — not a " +
             "description of the machine's behaviour but the behaviour itself, " +
@@ -1441,7 +1535,80 @@ const spine = [
              (3), and the coarse Every photograph — of which ONE, the power
              switch round the back, is the single picture in this wing a Record
              entry HAS delivered. It is on that entry, where the rule puts it,
-             and not on a wall of nine. */
+             and not on a wall of nine.
+             [V1 2026-08-06] RESTORED THROUGH `placedPresets()` — see the
+             mainframe's wall. AND THIS WALL IS THE ONE THAT PROVES THE RESOLVER
+             RUNS PER TILE RATHER THAN PER FACE: the power switch is DELIVERED
+             and the other eight are not, so at launch this wall does not empty
+             evenly — "As they arrived" comes back with one tile of three and the
+             coarse grouping with one of nine, which is the honest answer and is
+             what `placedTiles` filtering per tile buys. */
+          presets: placedPresets([
+            { id: "arrived", label: "As they arrived", tiles: [
+              { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
+                href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
+                label: "The pair, front and top, as received", date: "FAMILY SHOT" },
+              { img: "/robots/reference/photos/front_full.png",
+                href: "/robots/reference/photos/front_full.png",
+                label: "The front, whole", date: "FRONT" },
+              { img: "/robots/reference/photos/rear_power_switch.png",
+                href: "/robots/reference/photos/rear_power_switch.png",
+                label: "The power switch, round the back", date: "REAR" },
+            ] },
+            { id: "glass", label: "The glass", tiles: [
+              { img: "/robots/reference/photos/front_screen.png",
+                href: "/robots/reference/photos/front_screen.png",
+                label: "The front glass, lit", date: "SCREEN" },
+              { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
+                href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
+                label: "The bezel around the glass", date: "BEZEL" },
+              { img: "/robots/art/viiip.png",
+                href: "/robots/art/viiip.png",
+                label: "The cover image — the glass carries the BIOS beat",
+                date: "COVER" },
+            ] },
+            { id: "stand", label: "Above and below", tiles: [
+              { img: "/robots/reference/photos/top_monitor.png",
+                href: "/robots/reference/photos/top_monitor.png",
+                label: "The top monitor", date: "TOP" },
+              { img: "/robots/reference/photos/monitor_base.png",
+                href: "/robots/reference/photos/monitor_base.png",
+                label: "The base it stands on", date: "BASE" },
+              { img: "/robots/reference/photos/unit_new_base.png",
+                href: "/robots/reference/photos/unit_new_base.png",
+                label: "The unit on its new base", date: "BASE, NEW" },
+            ] },
+            { id: "all", label: "Every photograph", tiles: [
+              { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
+                href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
+                label: "The pair, front and top, as received", date: "FAMILY SHOT" },
+              { img: "/robots/reference/photos/front_full.png",
+                href: "/robots/reference/photos/front_full.png",
+                label: "The front, whole", date: "FRONT" },
+              { img: "/robots/reference/photos/front_screen.png",
+                href: "/robots/reference/photos/front_screen.png",
+                label: "The front glass, lit", date: "SCREEN" },
+              { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
+                href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
+                label: "The bezel around the glass", date: "BEZEL" },
+              { img: "/robots/reference/photos/top_monitor.png",
+                href: "/robots/reference/photos/top_monitor.png",
+                label: "The top monitor", date: "TOP" },
+              { img: "/robots/reference/photos/monitor_base.png",
+                href: "/robots/reference/photos/monitor_base.png",
+                label: "The base it stands on", date: "BASE" },
+              { img: "/robots/reference/photos/unit_new_base.png",
+                href: "/robots/reference/photos/unit_new_base.png",
+                label: "The unit on its new base", date: "BASE, NEW" },
+              { img: "/robots/reference/photos/rear_power_switch.png",
+                href: "/robots/reference/photos/rear_power_switch.png",
+                label: "The power switch, round the back", date: "REAR" },
+              { img: "/robots/art/viiip.png",
+                href: "/robots/art/viiip.png",
+                label: "The cover image — the glass carries the BIOS beat",
+                date: "COVER" },
+            ] },
+          ]),
           archiveEmpty:
             "No photograph of the portable is on the wall. One picture of " +
             "this machine is on the Record, with the entry that brought it in.",
@@ -1533,43 +1700,32 @@ const spine = [
         title: "FAQ",
         videos: [],
         tags: ["faq", "questions", "mgk"],
-        face: {
-          kind: "text",
-          title: "FAQ",
-          subtitle: "ABOUT THIS MACHINE",
-          /* [E3 2026-08-03] THE BEZEL IS THE RIGHT PLATE FOR THIS FACE
-             SPECIFICALLY. Two of its questions are about whether what you are
-             looking at is the real machine, and the bezel is the piece of the
-             object a visitor actually meets: the frame around the glass the
-             Portal draws through. */
-          /* [H2 2026-08-06] PULLED BACK — see THE PULL-BACK RULE at the head
-             of this file. Nothing publishes until the Record delivers it. */
-          entries: [
-            /* [H1 2026-08-06] THE SECOND AND THIRD SENTENCES ARE STRUCK, AND
-               ONLY THEY. "Both units power on and run their own firmware" is a
-               fact about the machines and stays — it is the same answer the
-               mainframe's own FAQ gives, word for word. What went with the hold
-               is the clause that told a visitor there is a Portal track to go
-               and look at. */
-            { title: "Does it still work?",
-              line: "Yes. Both units power on and run their own firmware.",
-              note: "" },
-            /* [H1 2026-08-06] THE PORTAL QUESTION MOVED WITH THE PORTAL.
-               It is answered word for word on the held album's own FAQ
-               (src/data/artists/portal.js). A public page answering questions
-               about a held room is a listing of that room, which is the one
-               thing the hold has to prevent. */
-            /* [CS 2026-08-04] "Why does it say ERROR so often?" IS REMOVED, not
-               rewritten — a question whose published answer is that the answer
-               has not been written yet is a stand-in for a question. It comes
-               back as an entry the day there is an answer. */
-            { title: "Can I buy one?",
-              line: FAQ_BUY_ONE,
-              note: "" },
-          ],
-          entriesMode: "faq",
-          footer: "MGK-VIIIp · FAQ",
-        },
+        /* [F1 2026-08-06] BUILT BY `faqFace()`. The bezel plate E3 chose for
+           this face and the "MGK-VIIIp · FAQ" footer are both struck: the
+           booth's shape has neither. E3's argument for the bezel — that two of
+           these questions are about whether the machine is real, and the bezel
+           is the piece a visitor actually meets — was a good one and it survives
+           where the plate does, on this album's Image Archive under THE GLASS. */
+        face: faqFace("MGK-VIIIp", [
+          /* [H1 2026-08-06] THE SECOND AND THIRD SENTENCES ARE STRUCK, AND
+             ONLY THEY. "Both units power on and run their own firmware" is a
+             fact about the machines and stays — it is the same answer the
+             mainframe's own FAQ gives, word for word. What went with the hold
+             is the clause that told a visitor there is a Portal track to go
+             and look at. */
+          { title: "Does it still work?",
+            line: "Yes. Both units power on and run their own firmware.",
+            note: "" },
+          /* [H1 2026-08-06] THE PORTAL QUESTION MOVED WITH THE PORTAL.
+             It is answered word for word on the held album's own FAQ
+             (src/data/artists/portal.js).
+             [CS 2026-08-04] "Why does it say ERROR so often?" IS REMOVED, not
+             rewritten — a question whose published answer is that the answer
+             has not been written yet is a stand-in for a question. */
+          { title: "Can I buy one?",
+            line: FAQ_BUY_ONE,
+            note: "" },
+        ]),
       },
     ],
   },

@@ -71,6 +71,9 @@ import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
 import crypto from "node:crypto";
+/* [C1 2026-08-06] the stage door's prefix, imported rather than typed — see the
+   note at `usedBy` below and reveal/placement.mjs. */
+import { STAGE_PREFIX } from "../reveal/placement.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const MUSEUM = path.resolve(HERE, "..");
@@ -374,8 +377,28 @@ function scan(renames = []) {
       /* the public path a browser would ask for, where there is one */
       const ref = repo.key === "museum" && rel.startsWith("public/")
         ? "/" + rel.slice("public/".length) : null;
-      const usedBy = ref
-        ? srcs.filter(s => s.text.includes(ref.slice(1)))
+      /* ═══ [C1 2026-08-06] A HELD FILE IS NAMED BY ITS PUBLIC ADDRESS ════════
+         AND THIS SCANNER WOULD HAVE CONDEMNED TWENTY-SIX PHOTOGRAPHS ON THE DAY
+         MIKE ASKED TO SEE THEM. V1 made the pull-back a launch-state rule: the
+         data declares `/robots/…`, the address a picture will have when the
+         Record delivers it, and `src/lib/placement.js` computes the stage door's
+         prefix. So a file sitting at `public/held/robots/x.png` has
+         `ref = /held/robots/x.png` and NOTHING in `src/` contains that string —
+         by design, because a held address in a public chunk is the leak the
+         whole boundary exists to stop.
+         The consequence lands here, on the one instrument whose output is a
+         DELETION LIST. `--orphans` and `role: "unreferenced"` are what the cull
+         reads, and they would have named every held photograph. Caught by
+         running the cull against the round that created the condition; it is the
+         same shape as C32's carry — a mechanism whose failure mode looks exactly
+         like the thing it reports.
+         So a reference is tested at BOTH addresses, and the rule that maps one
+         to the other is imported rather than retyped. */
+      const refs = ref
+        ? [...new Set([ref, ref.startsWith(STAGE_PREFIX + "/") ? ref.slice(STAGE_PREFIX.length) : ref])]
+        : [];
+      const usedBy = refs.length
+        ? srcs.filter(s => refs.some(r => s.text.includes(r.slice(1))))
               .map(s => path.relative(MUSEUM, s.f).split(path.sep).join("/"))
         : [];
       /* [C32] MATCHING, IN ORDER. Address first — the overwhelming case, and
@@ -595,6 +618,48 @@ if (argv.includes("--gate")) {
   const t = scan([[from, to]]);
   writeTable(t);
   report(t);
+} else if (argv.includes("--cull")) {
+  /* ═══ [C1 2026-08-06] THE DELIBERATE COUNTERPART OF `--rename` ═════════════
+     MIKE'S STANDING RULE: *"if we are not using it, get rid of it."* So a cull
+     is a thing this repository will do again, and until now there was no way to
+     tell this table that a file is gone ON PURPOSE. C32 keeps a judged row whose
+     file has vanished and REPORTS it, which is exactly right for a loss — a
+     verdict is an inspection somebody did and it must not evaporate with a bad
+     `git mv`. But it means every deliberate deletion leaves a permanent row in
+     `--orphans`, and an orphan report that is never zero is a tripwire nobody
+     reads. That is the disease this file's own baseline caught in CLAUDE.md.
+     IT IS A COMMAND A PERSON TYPES, for the same reason `--rename` is: dropping
+     a judged row drops an inspection, and only a person can say that the
+     inspection is not wanted any more.
+     IT REFUSES A FILE THAT IS STILL THERE. Culling a row whose file exists would
+     make the table lie about the tree, and the tree is what this instrument is
+     for.  Read the register row for what was culled and why — this only forgets
+     the bookkeeping. */
+  const i = argv.indexOf("--cull");
+  const names = argv.slice(i + 1).filter(a => !a.startsWith("--"));
+  if (!names.length) {
+    console.error("usage: --cull <path|ref|uid> [more…]   (the file must already be deleted)");
+    process.exit(1);
+  }
+  const t = load();
+  const keep = [], dropped = [], refused = [];
+  for (const e of t.entries) {
+    const hit = names.some(n => n === e.uid || n === e.id || n === e.path || n === e.ref);
+    if (!hit) { keep.push(e); continue; }
+    const root = e.repo === "museum" ? MUSEUM : ROBOTS;
+    if (fs.existsSync(path.join(root, e.path.split("/").join(path.sep)))) {
+      refused.push(e.path); keep.push(e);
+    } else dropped.push(e.path);
+  }
+  const unknown = names.filter(n => ![...dropped, ...refused].some(p => p.endsWith(n) || n.endsWith(p)));
+  if (refused.length) {
+    console.error("REFUSED — still on disk:\n  " + refused.join("\n  "));
+    process.exit(1);
+  }
+  t.entries = keep;
+  writeTable(t);
+  console.log(`culled ${dropped.length} row(s):\n  ` + dropped.join("\n  "));
+  if (unknown.length) console.error("not found in the table: " + unknown.join(", "));
 } else if (argv.includes("--orphans")) {
   const e = load().entries.filter(x => x.missing && isJudged(x));
   console.log(`${e.length} judged rows whose file is no longer on disk:`);
