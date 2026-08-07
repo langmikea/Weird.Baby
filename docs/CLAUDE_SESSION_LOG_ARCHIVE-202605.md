@@ -1268,3 +1268,72 @@ entries** in `CLAUDE.md` until that file reached its own ≈600-line ceiling.
 Nothing was dropped; they are here beside the rounds they point at.
 
 **2026-08-06 (MIKE'S PAGE-BY-PAGE):** THE PORCH RULINGS (R1–R8), moved whole — the file was at exactly 600 and this round's entry would have carried it past the rule. What is still load-bearing in it is NOT in the archive: **R5's vault-audio boundary is `OPERATIONS.md` §5 and `src/data/exhibits/vault-audio.js`**, and the rule that it is written once and enforced TWICE (runtime and build) is the half a future session will be tempted to delete; R4's seven strike sites are the artist cards themselves and its reversal — *a citation is not a decoration* — is why the song cards still carry `Accession` rows; R6's ruling on M37 is the booth's privacy answer and the measured third-party table in §5; R7's research is `docs/AD_FREE_PLAYBACK_RESEARCH-20260806.md`. **And its prune-forwards note is superseded rather than archived:** this round ran the procedure the OTHER way — prune against a copy and let the gate name the breaks — and the gate named ten chains exactly, all pointing at one struck row. **2026-08-06 (THE PORCH RULINGS):** CLEAR THE DECK (D1–D9), moved whole — the file was at 566 and this round's entry would have carried it past the rule. What is still load-bearing in it is NOT in the archive: **D1's one-passage-one-declaration ruling is `OPERATIONS.md` §7 Doctrine 17** and `src/data/house-copy.js`; **its four reported divergences are M66–M69, and all four are now RULED — three closed this round and M68 printed verbatim for him**; D3c's deletion of the `/hr/archive` mirror is `hunter-root-catalogue.js`'s own header and the §5 file map; D7's Foundation port is the §5 `/booth` + `/foundation` row; D4's `--gs-cols` mechanism is the §5 Gift Shop row. **2026-08-06 (CLEAR THE DECK):** TWO AT ONCE — THE REMOTE-CONTROL ROUND (P1–P11) and MIKE'S READING PASS — ROUND ONE (L1·L2·S1·S2·M1·F1·F2·W1), both moved whole. The file was at 610 before this round's entry and would have finished at 631 with one moved; two brings it to 560. What is still load-bearing in the REMOTE-CONTROL entry is NOT in the archive: **P1's absolute-parity ruling is `OPERATIONS.md` §5 and `parity:gate` itself**, which now fails on any divergence and is a PACKET GATE; P4's Record navigation and P5's session-scoped view settings are `OPERATIONS.md` §5; P8's manual question is register M61 and **was ruled this round** (it stays offline); P10's Foundation ruling is M62 and **was built this round**. What is still load-bearing in it is NOT in the archive: **W1's own "all six sites" claim is corrected in this round's entry above** (there was a seventh, and it was `/hr/archive`); S1's one-grid ruling is `OPERATIONS.md` §5 and was extended by D4; S2's four verified shop addresses are on the `shopExit` fields themselves; the poke's precondition is register C40. **2026-08-05 (THE REMOTE-CONTROL ROUND):** THE WAL POSTER EDIT (W1–W4), moved whole — the file was at 577 and this round's entry would have carried it past the rule. What is still load-bearing in it is NOT in the archive: the strike of the per-act *"Open the room"* chip is register M51, the poster's rebuilt Hunter Root line is in `worth-a-listen.js` beside the count that produced it, and the `[PAPA]`-second-sentence defect is M53. **2026-08-05 (READING PASS ROUND ONE):** THE PARITY RULING + TRIM (P1–P5), moved whole — the file was at 576 and this round's entry would have carried it past the rule. What is still load-bearing in it is NOT in the archive: P1's holdings-gap ruling **has since been REVERSED by Mike** (the remote-control round, P1) — parity is absolute and `tools/menu-parity.mjs` no longer accepts a written reason at all; P3's four guest-book rules are `OPERATIONS.md` §5; the poke and its precondition are `reveal/ledger-declare.mjs` and register C40; the four-step prune procedure and the NUL-byte defect class are `OPERATIONS.md` §9. **2026-08-05 (THE WAL POSTER EDIT):** v56 THE ROBOTS SIMPLIFICATION, moved whole — the file was at 593 and this round's entry would have carried it past the rule. What is still load-bearing in it is NOT in the archive: the standing rule that the manual is as long as the manual needs to be is `OPERATIONS.md` §5 and register T-A; `npm run parity` and `npm run surfacing` are `OPERATIONS.md` §5 and §9; NIAC-is-the-mainframe is the robots repo's canon and the ledger's `egg.niac.operator`. **2026-08-05 (P1–P5):** T1 THE ASSET TIMELINE, moved whole — the file was at 689. What is still load-bearing in it is NOT in the archive: the four transfer classes and their three checks are `reveal/transfers.mjs` and `OPERATIONS.md` §5, and its open questions are `docs/OPEN_ACTIONS.md` §4a T-B…T-F (T-A closed at v56). **Housekeeping, stated because it edits an archive note rather than adding one:** the six older notes below were run together into one paragraph. Nothing was dropped — every round, every moved entry and every "where the live part lives" pointer is still here; the line breaks are gone, which is where the growth was. **2026-08-05 (v56):** v55 RECORD MACHINERY, moved whole — the file was at 621 lines, so one entry left as one arrived. What is still load-bearing in it is NOT in the archive: the ledger's one-validator doctrine, the manual-page vessel and the Record's derived rows are `OPERATIONS.md` §5 and `reveal/README.md`, and its open questions are `docs/OPEN_ACTIONS.md` M32, M35 and M44. **2026-08-05 (T1):** v54 THE FOUNDATION COPY, moved whole to make room for this round — the file was at exactly 600 lines. What was live in it is not in the archive: its open questions are `docs/OPEN_ACTIONS.md` M38–M43 and its money rule is `/foundation`'s own copy. **2026-08-05 (v55):** v53 THE BOOTH EDIT + THE MISSING LAP, v52 THE REVEAL LEDGER and v51 M23 RULED + THE ALBUM ROUND — three at once, because the v55 entry is long and the file had reached 711. **What was in them that is still load-bearing is NOT in the archive**: v53's measured third-party table is `OPERATIONS.md` §5 and its ruling is register M37; v52's ledger model is `reveal/README.md` and `OPERATIONS.md` §5; v51's two standing laws (Doctrine 16, and the Visual Hook Law's second exception) are `OPERATIONS.md` §7 and `STATE.md`. A session note is where a round is narrated, not where a rule lives. **2026-08-05 (v54):** v50 THE OVERNIGHT — the round that struck THE MORGUE, built DOC CONTROL, added the Foundation's DONATED BY column and found the published privacy answer wrong. Moved whole; its live consequences are in `OPERATIONS.md` §5, not in the note. **2026-08-05 (v53):** v48 MECHANIZE PROVENANCE and v46 THE CLEAN SLATE ROUND — the two oldest entries still live, moved whole so the doctrine they established (the provenance boundary; the first meta-copy sweep) is read from `OPERATIONS.md` §7 rather than from a session note. **2026-08-04:** the tier reconciliation, the navigation/architecture critique, B-1, the v4/v5 spec arc, the deep-dive phases, the FUSE git-init quirk, and the first three exhibit-UX rounds (2026-05-06 → 05-15). **2026-08-05 (v52):** the three 2026-05-30 entries — the eslint-ignore baseline restoration (and the sandbox 5/5 phantom, whose lesson is still live in `### Pre-flight before commit` above), the `content_kind` front-end block with the -036 triage, and the broken-preview fallback.
+
+---
+
+**Appended 2026-08-06 (THE NIGHT ROUND): THE VISIBILITY RULE + FORMAT
+CONFORMANCE (V1-C1), verbatim and unedited, under `CLAUDE.md`'s own ≈600-line
+rule. It had reached 651 with the night round's entry added. What is still
+load-bearing in it is NOT here — it is the two-stages paragraph at the head of
+`CLAUDE.md` and the THE STAGE / A HELD THING MUST BE UNREACHABLE rows in
+`docs/canonical/OPERATIONS.md` §5.**
+
+### 2026-08-06 -> THE VISIBILITY RULE + FORMAT CONFORMANCE (V1-C1) - sealed
+- **FIVE INSTRUCTIONS, ALL FIVE BUILT, AND THE LARGEST FINDING IS THAT THE LAUNCH
+  BUILD WAS BUILDING HALF THE APPLICATION.** Gates: lint **11/9 = baseline** -
+  build green - provenance **PASS** (0 undeclared - 0 stale - 0 invention) -
+  `reveal:check` **PASS** - `parity:gate` **PASS, 4 shared - 0 divergences** -
+  `assets:orphans` **0** - lap on the built bundle under `wrangler dev`, **in
+  BOTH stages**, desktop only. Full narrative:
+  `docs/MUSEUM_VISIBILITY_RULE_LOG-20260806.md`.
+- **V1 REVERSES H2 FOR DEVELOPMENT AND REPEALS NOTHING.** Mike: *"the pull-back
+  rule is a LAUNCH-STATE rule, not a development-state one. Mike cannot direct
+  what he cannot see."* H2's sentence stands word for word and every mechanism
+  enforcing it is untouched — the files are still under `public/held/`,
+  `delivery.mjs` still faults both directions, the ledger still says HELD.
+  **What was wrong is that the rule had only ONE state, so the only way to obey
+  it was to be in it** — on a site whose own lobby says *"We're not open yet"*.
+- **THE TWO HOLDS ARE TWO DOORS NOW AND THAT IS THE LOAD-BEARING HALF.**
+  `/hr` is held for PERMISSION and the Portal for STAGE, and they were behind one
+  prefix; the moment a switch exists that opens a door, one list would have
+  handed ninety-three of Hunter Root's tracks and 107 vault image URLs to a build
+  flag. `/assets/locked/` + `/locked/` is refused in every stage, the worker
+  tests it FIRST, and **check 9 asserts its branch never mentions the stage.**
+- **THE RUNTIME RESOLVER ALONE WAS NOT ENOUGH, FOR THE THIRD TIME IN THIS
+  REPOSITORY.** `placed()` returns null at launch and the first launch build
+  still carried **the public address of all twenty-six withheld photographs in
+  plain text** — a string the renderer declines to use is a string the bundle
+  shipped. R5's 153 mp3 URLs and H1's whole reveal ledger are the other two.
+  `wb-placement` resolves the literals at `enforce:"pre"`.
+- **AND `npm run build:launch` BUILT ONLY THE CLIENT.** Vite's node `build()`
+  API drives one of this project's two environments, so the client came out in
+  the LAUNCH state while `dist/weird_baby/index.js` was left over from the
+  previous DEVELOPMENT build: **both stage doors open on a launched museum, one
+  word in `/api/held` the only symptom.** Caught on the wire, not the console.
+- **F1's THIRD RULING OF THE FAQ FORMAT IS THE FINDING, NOT THE INSTRUCTION.**
+  R7 conformed the ACCORDION and stopped there, leaving every face free to
+  declare a blurb, a register, a still and a footer — the robots front desk had
+  all four. **A format enforced by a round lasts until the next round**, so it is
+  a FACTORY now (`faqFace()`) and the fields are ABSENT rather than unset. Six
+  faces conform; `/booth` reads the same two declarations rather than typing them.
+- **G1's MEASURED QUESTION DOES NOT BIND.** The old 30px cannot hold a wrap (a
+  two-line row is 37.11px composed) — but **no current entry needs one**: the
+  longest signature, 89 characters, clears a single line by **63.00px**. So the
+  row is MEASURED off the tallest signature in the book: **23px today**, below
+  the 30px he remembers, two-line capability intact, P12's arithmetic untouched.
+  Its first cut owned `--gb-row` through React state and silently did nothing —
+  **a DOM property an effect RELEASES cannot also be owned by React.** And
+  measuring the stacked case found **L1's own 88-character budget derived wrong**:
+  88 characters take THREE lines at 310px, not two, because text wraps at word
+  boundaries and not at column 44.
+- **C1's CULL WOULD HAVE CONDEMNED THE PHOTOGRAPHS V1 HAD JUST RESTORED.** Four
+  instruments broke on one cause — **a picture has two addresses now, and
+  anything that matches on one of them is wrong.** Three files deleted (2.7 MB,
+  one of them a TRUNCATED PNG at a public URL); **eleven kept with reasons on the
+  record**, including ten robot plates the museum holds the ONLY copies of while
+  the ledger claims otherwise (C-a, C-b). Robots repo: **0 unreferenced.**
+  `docs/`: **61 of 61 cited.** `npm run assets:cull` is the deliberate
+  counterpart of `--rename`; **H-b is answered** — the generator is the source.
+- **THE 390px HALF OF THE LAP DID NOT RUN FOR THE FOURTH ROUND RUNNING** (M97):
+  `window.innerWidth` reads 1228 and `resizeTo` is refused silently.
+

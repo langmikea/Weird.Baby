@@ -460,68 +460,101 @@ hole-list, and the largest hole is that **it cannot verify a declaration is
 true.** It also does not replace THE LAW OF THE VISIBLE LINE below: provenance
 catches invented CONTENT, Doctrine 11 catches a line whose SUBJECT is the work.
 
+## THREE STANDING RULES ADDED 2026-08-06 (THE NIGHT ROUND)
+
+**IN-STORY TECHNICAL SPECIFICATIONS** — *"Technical Specifications" means THE
+IN-STORY SPECS, NEVER THE REAL ONES.* `OPERATIONS.md` §7 Doctrine 18, mirrored in
+`STATE.md`. **`npm run instory:gate` runs on every packet.** The board part
+number, the source-tree filenames, the line count and the real build's dates are
+all TRUE and are the provenance of a prop; a spec sheet is not a provenance
+record. **The Record is exempt and must stay modern** — it is the house's log of
+receiving the object this year. **Read Doctrine 18 before adding a fact to any
+face whose subject is what a machine IS.**
+
+**THE EXPANDER RULE** — *opening or closing a record moves what is beneath it;
+the persistent part stays exactly as it is.* §7 Doctrine 19. Two mechanisms:
+`html { scrollbar-gutter: stable }` in `src/index.css` (the scrollbar appearing
+was moving 18 elements sideways) and `grid-template-rows: max-content 1fr` in the
+stacked exhibit frame. **Test any new expander with `anchorTest` in
+`tools/lap/harness.html`; zero above is the rule.**
+
+**NOTES TO MIKE ARE NOT PART OF THE UX** — `[PAPA]` markers now render in a red
+`.wb-ops-notes` block in DEVELOPMENT and are deleted from the SOURCE at LAUNCH by
+`wb-ops-notes` in `vite.config.js`. **`visitorProse` is unchanged to the
+character and must stay that way** — the body copy is identical in both stages,
+which is what makes the page Mike reads the page that ships.
+
+**AND THE 390px LAP WORKS NOW — `npm run lap`.** M97 is closed after four rounds.
+A 403px same-origin iframe (`tools/lap/harness.html`) gives `innerWidth: 390`
+exactly; the window's size was never the museum's viewport. **`npm run lap:clean`
+before you seal** — the harness has to live in `public/` to be same-origin, and
+anything in `public/` is one `npm run deploy` from being published.
+
 ## Recent session log
 
 Maintained here. Newest first.
 
-### 2026-08-06 -> THE VISIBILITY RULE + FORMAT CONFORMANCE (V1-C1) - sealed
-- **FIVE INSTRUCTIONS, ALL FIVE BUILT, AND THE LARGEST FINDING IS THAT THE LAUNCH
-  BUILD WAS BUILDING HALF THE APPLICATION.** Gates: lint **11/9 = baseline** -
-  build green - provenance **PASS** (0 undeclared - 0 stale - 0 invention) -
-  `reveal:check` **PASS** - `parity:gate` **PASS, 4 shared - 0 divergences** -
-  `assets:orphans` **0** - lap on the built bundle under `wrangler dev`, **in
-  BOTH stages**, desktop only. Full narrative:
-  `docs/MUSEUM_VISIBILITY_RULE_LOG-20260806.md`.
-- **V1 REVERSES H2 FOR DEVELOPMENT AND REPEALS NOTHING.** Mike: *"the pull-back
-  rule is a LAUNCH-STATE rule, not a development-state one. Mike cannot direct
-  what he cannot see."* H2's sentence stands word for word and every mechanism
-  enforcing it is untouched — the files are still under `public/held/`,
-  `delivery.mjs` still faults both directions, the ledger still says HELD.
-  **What was wrong is that the rule had only ONE state, so the only way to obey
-  it was to be in it** — on a site whose own lobby says *"We're not open yet"*.
-- **THE TWO HOLDS ARE TWO DOORS NOW AND THAT IS THE LOAD-BEARING HALF.**
-  `/hr` is held for PERMISSION and the Portal for STAGE, and they were behind one
-  prefix; the moment a switch exists that opens a door, one list would have
-  handed ninety-three of Hunter Root's tracks and 107 vault image URLs to a build
-  flag. `/assets/locked/` + `/locked/` is refused in every stage, the worker
-  tests it FIRST, and **check 9 asserts its branch never mentions the stage.**
-- **THE RUNTIME RESOLVER ALONE WAS NOT ENOUGH, FOR THE THIRD TIME IN THIS
-  REPOSITORY.** `placed()` returns null at launch and the first launch build
-  still carried **the public address of all twenty-six withheld photographs in
-  plain text** — a string the renderer declines to use is a string the bundle
-  shipped. R5's 153 mp3 URLs and H1's whole reveal ledger are the other two.
-  `wb-placement` resolves the literals at `enforce:"pre"`.
-- **AND `npm run build:launch` BUILT ONLY THE CLIENT.** Vite's node `build()`
-  API drives one of this project's two environments, so the client came out in
-  the LAUNCH state while `dist/weird_baby/index.js` was left over from the
-  previous DEVELOPMENT build: **both stage doors open on a launched museum, one
-  word in `/api/held` the only symptom.** Caught on the wire, not the console.
-- **F1's THIRD RULING OF THE FAQ FORMAT IS THE FINDING, NOT THE INSTRUCTION.**
-  R7 conformed the ACCORDION and stopped there, leaving every face free to
-  declare a blurb, a register, a still and a footer — the robots front desk had
-  all four. **A format enforced by a round lasts until the next round**, so it is
-  a FACTORY now (`faqFace()`) and the fields are ABSENT rather than unset. Six
-  faces conform; `/booth` reads the same two declarations rather than typing them.
-- **G1's MEASURED QUESTION DOES NOT BIND.** The old 30px cannot hold a wrap (a
-  two-line row is 37.11px composed) — but **no current entry needs one**: the
-  longest signature, 89 characters, clears a single line by **63.00px**. So the
-  row is MEASURED off the tallest signature in the book: **23px today**, below
-  the 30px he remembers, two-line capability intact, P12's arithmetic untouched.
-  Its first cut owned `--gb-row` through React state and silently did nothing —
-  **a DOM property an effect RELEASES cannot also be owned by React.** And
-  measuring the stacked case found **L1's own 88-character budget derived wrong**:
-  88 characters take THREE lines at 310px, not two, because text wraps at word
-  boundaries and not at column 44.
-- **C1's CULL WOULD HAVE CONDEMNED THE PHOTOGRAPHS V1 HAD JUST RESTORED.** Four
-  instruments broke on one cause — **a picture has two addresses now, and
-  anything that matches on one of them is wrong.** Three files deleted (2.7 MB,
-  one of them a TRUNCATED PNG at a public URL); **eleven kept with reasons on the
-  record**, including ten robot plates the museum holds the ONLY copies of while
-  the ledger claims otherwise (C-a, C-b). Robots repo: **0 unreferenced.**
-  `docs/`: **61 of 61 cited.** `npm run assets:cull` is the deliberate
-  counterpart of `--rename`; **H-b is answered** — the generator is the source.
-- **THE 390px HALF OF THE LAP DID NOT RUN FOR THE FOURTH ROUND RUNNING** (M97):
-  `window.innerWidth` reads 1228 and `resizeTo` is refused silently.
+### 2026-08-06 -> THE NIGHT ROUND (N1-N6) - sealed
+- **SIX INSTRUCTIONS, ALL SIX ANSWERED, AND TWO OF THEM TURNED OUT TO BE THE SAME
+  DEFECT IN TWO COSTUMES: something true, verifiable and wrong, that no amount of
+  reading source could find.** Gates: lint **11/9 = baseline** - build green -
+  provenance **PASS** (0 undeclared - **0 stale** - 0 invention) - `reveal:check`
+  **PASS** - `parity:gate` **PASS, 4 shared - 0 divergences** - `assets:orphans`
+  **0** - **`instory:gate` PASS (new)** - **the lap ran at 390px AND 1228px for
+  the first time in five rounds.** Full narrative:
+  `docs/MUSEUM_NIGHT_ROUND_LOG-20260806.md`.
+- **THE PROVENANCE REGISTER WAS THE EVIDENCE FOR N2's DEFECT, NOT THE DEFENCE
+  AGAINST IT.** Every spec row struck this round was classed `VERIFIED` with the
+  source *"the unit's own `.ino` trees, read off the files"* — the boundary was
+  working perfectly and recording, in writing, that a 1965 machine's spec sheet
+  was sourced from an Arduino. **Doctrine 13 asks whether a string HAS an origin;
+  it cannot ask whether the origin belongs to the fiction.** Ten rows struck
+  across the two faces; nine survive on the mainframe and every one describes the
+  object; **nothing was written to replace what went** (N-g, N-h). And **the
+  supply line is contaminated at the same seam** — six rows of the in-story
+  manual's own SPECIFICATIONS section cite the real firmware, and one lets
+  `NUM_PIXELS = 2` overrule the manual's *"one lamp"* (N-i).
+- **N4's RULE WAS BEING BROKEN ON THE AXIS NOBODY WOULD HAVE LOOKED AT.** Every
+  `<details>` in the museum is honest vertically — 0 of 24 above it in the booth,
+  0 of 47 in the wing FAQs. What moved was **everything, sideways**: opening
+  Record 013 takes the document 780 → 1347px, the scrollbar appears, the viewport
+  goes 403 → 390 and **18 elements above the change shift left**, including the
+  title bar's exit and all four covers. **Nothing in the museum's code is doing
+  it**, which is why four rounds of reading never found it. One declaration on
+  the root fixes it for every expander at once.
+- **A RUNTIME FILTER SHIPS THE MATERIAL — FOUR FOR FOUR (N3).** 35 `[PAPA]`
+  markers were sitting in the public bundle, including the Foundation's four
+  unpublished ledger figures, while `visitorProse` faithfully cut them at the
+  render seam. The launch strip is an **AST pass and not a regex**, because
+  marker sentences straddle concatenated literals and a per-literal rule would
+  ship copy Mike never approved. **Launch bundle: one marker, and it is the regex
+  that removes them.**
+- **M97 IS CLOSED AFTER FOUR ROUNDS AND THE RECIPE IS COMMITTED THIS TIME.** v50
+  solved the 390px lap with a same-origin iframe and lost the fix with a
+  gitignored scratch file. Eleven routes at 390px: **zero page-level horizontal
+  scroll, zero console errors**, and the four rounds of unverified phone rules
+  **held**. The one thing the lap found is on `/hr` — `div.pb-track` has
+  `clientWidth: 0`, so the player bar's track name is not narrow, it is absent
+  (N-j).
+- **TWO FALSE ALARMS WERE CAUGHT BEFORE THEY REACHED THE LOG**, and both are
+  worth knowing: `img.complete` read across a frame boundary reports loaded
+  images as broken, and **`document.cookie` cannot see the HttpOnly `wb_held`
+  cookie**, which made `/hr` rendering in a browser that holds one look exactly
+  like a permission hold that had failed. `curl` with no cookie gets 404 on all
+  three locked chunks. The door works.
+
+### 2026-08-06 -> THE VISIBILITY RULE + FORMAT CONFORMANCE (V1-C1) - archived
+Moved verbatim to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md` under this file's
+own ~600-line rule. **What is still load-bearing in it is NOT in the archive:**
+V1's two stages and four shut prefixes are the paragraph at the head of this
+file and `OPERATIONS.md` §5's THE STAGE and A HELD THING MUST BE UNREACHABLE
+rows; **its "a picture has two addresses" hazard is §8's own row** and is the
+thing that broke four instruments in one round; F1's FAQ factory is the §5 FAQ
+FORMAT row; G1's measured guest-book row is `--gb-row`, 23px, measured off the
+tallest signature; and C1's cull is the eleven kept photographs, which N1 has
+now put in a folder Mike can open. **M97 was its fourth consecutive record of
+the 390px lap not running; N5 closed it.**
+
 
 ### Older entries (2026-05-06 → 2026-08-06) — archived
 Moved to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md`, verbatim, under this file's own

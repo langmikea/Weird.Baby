@@ -45,7 +45,8 @@ import "./InfoBooth.css";
 import { useRoom } from "../lib/use-room.js";
 import { useArrival } from "../lib/use-arrival.js";
 import MuseumBar from "../components/MuseumBar.jsx";
-import { visitorProse, kept } from "../lib/visitor-prose.js";
+import { visitorProse, kept, opsNotesOf, OPS_NOTES_HEAD } from "../lib/visitor-prose.js";
+import { launched } from "../lib/placement.js";
 /* [D1 2026-08-06] TWO OF THIS ROOM'S ANSWERS ARE THE HOUSE'S, NOT THE BOOTH'S.
    "Who keeps this place?" was retyped onto /wb's ABOUT THE ARTIST register at
    P9, so one sentence about the keeper existed in two rooms with no link
@@ -357,6 +358,19 @@ export default function InfoBooth() {
     .map(({ q, a }) => ({ q: visitorProse(q), a: visitorProse(a) }))
     .filter(({ q, a }) => kept(q) && kept(a));
 
+  /* [N3 2026-08-06] THE NOTES COME BACK FOR MIKE, IN RED, AND THE FILTER ABOVE
+     IS NOT RELAXED TO DO IT. The scrub and the `kept` filter are untouched, so
+     the FAQ a visitor would read is character-for-character the FAQ Mike reads
+     — and the notes are lifted into one block at the foot of the room instead
+     of back into the answers.
+
+     THE WALK IS OVER `FAQ`, NOT OVER `faq`, WHICH IS THE WHOLE VALUE OF DOING
+     IT THIS WAY. A question whose answer is ENTIRELY a marker disappears from
+     the room by design, and it is exactly the one Mike most needs to be told
+     about; reading the scrubbed list would have shown him every note except
+     the ones that cost a whole question. */
+  const opsNotes = launched() ? [] : opsNotesOf(FAQ);
+
   return (
     <div className="sheet-root">
       {/* TITLE BAR — museum-standard: brand / room / Lobby.
@@ -422,6 +436,16 @@ export default function InfoBooth() {
         <p className="sheet-back">
           <Link to="/">Back to the lobby</Link>
         </p>
+        {/* [N3 2026-08-06] NOT PART OF THE UX — development stage only, and
+            deleted from the source by `wb-ops-notes` before a launch bundle is
+            written. Below the exit deliberately: it is not the last thing the
+            room says, it is a sheet of paper left on top of it. */}
+        {opsNotes.length > 0 && (
+          <div className="wb-ops-notes" data-not-ux="1">
+            <div className="wb-ops-notes-head">{OPS_NOTES_HEAD}</div>
+            {opsNotes.map((n, i) => <p className="wb-ops-note" key={i}>{n}</p>)}
+          </div>
+        )}
       </div>
     </div>
   );

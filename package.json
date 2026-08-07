@@ -30,6 +30,11 @@
     "reveal:build": "node reveal/ledger-declare.mjs --write",
     "parity": "node tools/menu-parity.mjs",
     "parity:gate": "node tools/menu-parity.mjs --gate",
+    "instory": "node tools/instory-specs.mjs",
+    "instory:gate": "node tools/instory-specs.mjs --gate",
+    "instory:all": "node tools/instory-specs.mjs --all",
+    "lap": "node tools/lap.mjs",
+    "lap:clean": "node tools/lap.mjs --clean",
     "surfacing": "node tools/surfacing.mjs"
   },
   "dependencies": {

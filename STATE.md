@@ -67,6 +67,92 @@ opened. What remains ART-pending is the DEPTH of two of them: The Record still
 wants its evidence photographed per entry, and The Manual's microfiche reel is
 still empty by B8's ruling.
 
+## IN-STORY TECHNICAL SPECIFICATIONS (Mike, 2026-08-06 — STANDING, site-wide)
+
+> **"Technical Specifications" means THE IN-STORY SPECS, NEVER THE REAL ONES.**
+
+Canonical text + reasoning: `docs/canonical/OPERATIONS.md` §7 Doctrine 18.
+Gate: **`npm run instory:gate`, on every packet.** Audit: `npm run instory:all`.
+
+A specification surface describes THE OBJECT THE FICTION HOLDS — an ABEAL engine
+carrying a compile date of 1945, 1946 or 1965. Off it, always: the board's part
+number, the source-tree filenames, the module list, the bench sketch count, the
+count of lines of source, the I²C addresses, the pin numbers, the workshop's
+validation state, and any calendar date of the real build. **Those facts are all
+TRUE and they are the provenance of a prop; a spec sheet is not a provenance
+record.**
+
+**NOT COVERED, and the distinction is the whole of it:** the Record is this
+house's log of receiving the object THIS YEAR — a sealed modern bag, a USB-C
+adapter, a slow charge — and it is right to say so. The booth answers as the
+house. Accession numbers and sources lines are provenance, which Doctrine 11
+ships. **The rule is about which machine a spec sheet is describing, not about
+banning the present tense.**
+
+**WHY IT DRIFTS BACK, in Mike's own forecast and with the mechanism named:** the
+real facts are the ones Ops can VERIFY, so a session looking for something true
+to put on a spec sheet reaches for the firmware tree every time — and **the
+provenance register recorded exactly that, in writing, for a year.** Every row
+struck under this doctrine was classed `VERIFIED` with the source *"the unit's
+own `.ino` trees, read off the files."* Doctrine 13 asks whether a string HAS an
+origin. It cannot ask whether the origin belongs to the fiction.
+
+## THE EXPANDER RULE (Mike, 2026-08-06 — STANDING, site-wide)
+
+> **Opening or closing a record MOVES WHAT IS BENEATH IT; THE PERSISTENT PART
+> STAYS EXACTLY AS IT IS — no shift, no reflow, no scroll jump above the
+> change.** Everywhere a surface expands, not just the Record.
+
+Canonical text + reasoning: `docs/canonical/OPERATIONS.md` §7 Doctrine 19.
+Instrument: `anchorTest` in `tools/lap/harness.html` — **zero above is the rule,
+and movement below is the correct answer.**
+
+**THE VERTICAL AXIS WAS ALREADY HONEST AND THE HORIZONTAL ONE WAS NOT.** Native
+`<details>` moved 0 of 24 elements above it in the booth and 0 of 47 in the wing
+FAQs. What moved was every element on the page, sideways: opening a Record entry
+takes the document past the window's height, the scrollbar appears, and the
+viewport goes 403 → 390. `html { scrollbar-gutter: stable }` in `src/index.css`
+ends it for every expander at once, because the defect belongs to the viewport
+and not to any expander. A stacked grid row sharing slack with the thing being
+opened was the second half (`grid-template-rows: max-content 1fr`).
+
+**The cost is stated:** a page short enough not to scroll is ~13px narrower. A
+constant 13px nobody can see beats an intermittent 13px that moves the furniture.
+
+## NOTES TO MIKE ARE NOT PART OF THE UX, EVER (Mike, 2026-08-06 — STANDING)
+
+> **Notes to Mike render in red (or an equally unmistakable treatment) meaning
+> NOT PART OF THE UX, EVER — so a note can never be mistaken for content. None
+> of them can reach a visitor in the LAUNCH stage.**
+
+**IT DOES NOT REVERSE P5; IT ENFORCES P5 TWICE.** P5's sentence — *they must
+never be visible to visitors* — is untouched. What was wrong is what was wrong
+with the pull-back rule before THE VISIBILITY RULE: the scrub had only ONE state,
+so the only way to obey it was for Mike to be unable to see his own list either.
+
+**THREE PARTS, AND THE THIRD IS THE ONE THIS HOUSE KEEPS PAYING FOR.**
+1. `opsSentences` / `opsNotesOf` in `src/lib/visitor-prose.js` lift the marker
+   sentences OUT of the prose. **`visitorProse` is unchanged to the character**,
+   so the body copy is identical in both stages and the page Mike reads is
+   exactly the page that ships.
+2. The two render seams (`Exhibit.jsx`, `InfoBooth.jsx`) print them in
+   `.wb-ops-notes` — red, dashed, monospace, `data-not-ux="1"`, and styled with
+   **no `--wb-*` token**, so it can never come to look like the museum. Present
+   in DEVELOPMENT only.
+3. `wb-ops-notes` in `vite.config.js` deletes the sentences from the SOURCE at
+   LAUNCH. **35 markers in the built bundle → 1, and the one is `PAPA_MARK`, the
+   regex that removes them.** It is an AST pass, not a regex over literals,
+   because marker sentences straddle concatenated literals and a per-literal rule
+   would ship copy Mike never approved.
+
+Part 3 exists because parts 1 and 2 are a runtime filter, and **a runtime filter
+stops the RENDER while still shipping the MATERIAL** — R5's 153 mp3 URLs, H1's
+whole reveal ledger, V1's twenty-six withheld addresses, and now this.
+
+**What it cannot reach:** `public/held/robots/twin.html` prints 76 operator slots
+on its own glass and is not a module. Unreachable at launch only because the
+stage door refuses `/held/`. Register row N-k.
+
 ## ONE PASSAGE, ONE DECLARATION (Mike, 2026-08-06 — STANDING, site-wide)
 
 > **If the same passage is in two rooms, one of them is the source and the other

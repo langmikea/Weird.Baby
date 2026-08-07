@@ -1373,7 +1373,32 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
      start eating the ACTIVE cover, which is the one thing the edge treatment
      must never touch. 34px a side is 18% and still reads as a dissolve. */
   .cf-rack{--cf-haze:34px}
-  .ex-main-inner{grid-template-columns:1fr !important}
+  /* ═══ [N4 2026-08-06] THE CONTENTS ROW TAKES ITS OWN HEIGHT AND NOTHING
+         ELSE'S ═══════════════════════════════════════════════════════════
+     MIKE: "opening or closing a record MOVES WHAT IS BENEATH IT; THE PERSISTENT
+     PART STAYS EXACTLY AS IT IS — no shift, no reflow, no scroll jump above the
+     change."
+
+     STACKED, THE TWO GRID ROWS WERE SHARING SLACK, AND THE SLACK IS A FUNCTION
+     OF THE THING BEING OPENED. Measured on `/robots/record` at 390px, opening
+     entry 013: the viewer's content goes 280 → 907px, the grid runs out of
+     leftover space, and **`.ex-left` collapses 140 → 80px** — its own natural
+     height, having been padded out by the 60px nobody else wanted. Everything
+     under it comes up 60px with it, so the face's own HEADING, which is above
+     the change and did not change, **jumps up sixty pixels the moment the entry
+     opens.** Four elements measured moving; consistent at scrollY 0, 200 and
+     400, so it is layout and not scroll.
+
+     `max-content 1fr` ENDS THE SHARING. The contents row is its content's
+     height in every state, so the viewer's top is a constant; the viewer takes
+     whatever is left and grows DOWNWARD, which is the direction the rule asks
+     for. The wing still fills a short window — `1fr` is what does that — so
+     nothing is given up to get it.
+
+     IT IS THE STACKED FRAME ONLY, on purpose: side by side the two columns do
+     not share an axis and the defect cannot arise. */
+  .ex-main-inner{grid-template-columns:1fr !important;
+    grid-template-rows:max-content 1fr}
   .vr-dh{display:none}
   .ex-right{border-top:1px solid var(--wb-border)}
   .pb{padding:0 12px}

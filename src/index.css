@@ -4,3 +4,79 @@ body { margin: 0; }
 #root { min-height: 100vh; }
 html, body { width: 100%; min-height: 100%; margin: 0; padding: 0; }
 #root { width: 100%; }
+
+/* ═══ [N4 2026-08-06] THE EXPANDER RULE, AND IT IS ONE DECLARATION ═══════════
+   MIKE, as a global standard: **"opening or closing a record MOVES WHAT IS
+   BENEATH IT; THE PERSISTENT PART STAYS EXACTLY AS IT IS — no shift, no reflow,
+   no scroll jump above the change. Apply everywhere a surface expands, not just
+   the Record."**
+
+   THE RULE WAS BEING BROKEN, AND NOT IN THE DIRECTION ANYBODY WOULD HAVE
+   LOOKED. Every expander in this museum is honest about the VERTICAL axis —
+   native `<details>` pushes what is below it and touches nothing above, and the
+   Record's own open/close was measured at **dy = 0 for all 35 elements above
+   it**. What moved was the HORIZONTAL axis, on every one of them at once.
+
+   MEASURED on `/robots/record` at a 403px viewport: opening entry 013 takes the
+   document from **780px to 1347px**, which crosses the viewport height, so the
+   vertical scrollbar APPEARS — and the viewport goes **403 → 390**. Everything
+   the page had centred shifts left by 6.1px and everything anchored to the
+   right edge shifts left by 12.2px. **Eighteen elements above the change
+   moved**, among them the title bar's GIFT SHOP exit, both coverflow arrows and
+   all four covers. The reader watches the whole room slide sideways to read one
+   entry, and nothing in the museum's own code is doing it.
+
+   `scrollbar-gutter: stable` RESERVES THE GUTTER WHETHER OR NOT THE BAR IS
+   THERE, so the viewport width stops being a function of the document height.
+   It is the platform's own mechanic for exactly this (Doctrine 8), it is one
+   declaration, and it is on the ROOT because the defect is a property of the
+   viewport rather than of any expander — which is what makes it satisfy
+   "everywhere a surface expands" without a single expander knowing about it.
+
+   THE COST IS STATED: on a page short enough not to scroll, the museum is
+   ~13px narrower than it was. That is the trade the rule asks for — a constant
+   13px nobody can see beats an intermittent 13px that moves the furniture. */
+html { scrollbar-gutter: stable; }
+
+/* ═══ [N3 2026-08-06] NOTES TO MIKE — NOT PART OF THE UX, EVER ══════════════
+   MIKE: "NOTES TO MIKE RENDER IN RED (or an equally unmistakable treatment)
+   meaning NOT PART OF THE UX, EVER … so a note can never be mistaken for
+   content."
+
+   IT LIVES IN THE GLOBAL SHEET AND NOT IN A ROUTE'S, AND THAT IS THE SAME
+   RULING M3 MADE ABOUT THE SCRUBBER ITSELF: a treatment scoped to the file that
+   first needed it is a treatment the next room does not get. Two rooms print
+   this block today and any room may tomorrow.
+
+   IT USES NO `--wb-*` OR `--hr-*` TOKEN, ON PURPOSE. Every colour, face and
+   rule in this block is a literal, because a note that is styled out of the
+   museum's own palette is a note that will one day LOOK like the museum. The
+   design tokens are the museum's voice; this thing is not the museum speaking.
+   That is also why it does not obey the paper/dark grounds: it is the same
+   scarlet on both, and it is meant to be the loudest object on the page.
+
+   `data-not-ux="1"` IS THE MACHINE-READABLE HALF. A lap, a screenshot diff or a
+   future gate can ask the DOM whether any of these are present without knowing
+   what class name this round happened to choose — and at LAUNCH the honest
+   answer must be zero. */
+.wb-ops-notes {
+  margin: 28px 0 8px;
+  padding: 10px 12px 12px;
+  border: 2px dashed #d21c1c;
+  background: rgba(210, 28, 28, .07);
+  color: #d21c1c;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+}
+.wb-ops-notes-head {
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: 10px;
+  margin-bottom: 6px;
+  color: #d21c1c;
+}
+.wb-ops-note { margin: 0 0 6px; color: #d21c1c; }
+.wb-ops-note:last-child { margin-bottom: 0; }

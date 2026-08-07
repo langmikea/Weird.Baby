@@ -1,7 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { cloudflare } from "@cloudflare/vite-plugin";
+import * as acorn from "acorn";
+import jsxPlugin from "acorn-jsx";
 import { stripVaultAudio } from "./src/data/exhibits/vault-audio.js";
+import { visitorProse, PAPA_MARK } from "./src/lib/visitor-prose.js";
 import { publicLedger } from "./reveal/public-view.mjs";
 import { readStage } from "./reveal/stage.mjs";
 import { publicPlacements } from "./reveal/delivery.mjs";
@@ -90,6 +93,106 @@ const wbPlacement = {
       return r === null ? "null" : JSON.stringify(r);
     });
     return touched ? { code: out, map: null } : null;
+  },
+};
+
+/* ═══ [N3 2026-08-06] THE OPERATOR'S NOTES LEAVE THE BUNDLE AT LAUNCH ════════
+   MIKE: "verify none of them can reach a visitor in the LAUNCH stage."
+
+   THEY COULD, AND THEY HAVE SINCE P5. `visitorProse` cuts the marker sentence
+   at the RENDER SEAM, so no visitor has ever READ one — and every one of them
+   has been sitting in a JS chunk any visitor can fetch the whole time.
+   Measured on the built bundle: **35 markers**, among them the four unpublished
+   figures on the Foundation's ledger and the wording of several answers Mike
+   has not written yet. This is the fourth time this file has had to say it:
+   **a filter that stops the RENDER still ships the MATERIAL.**
+
+   AFTER THE STRIP A LAUNCH BUNDLE CARRIES ONE `[PAPA]`, AND IT IS THE RULE
+   ITSELF — `PAPA_MARK`, in `visitor-prose.js`, which cannot remove itself. That
+   is the whole of the residue and it is a regex, not a note.
+
+   WHAT THIS PASS CANNOT REACH, said plainly rather than left to be assumed:
+   `public/held/robots/twin.html` is a 620 KB standalone machine emulator that
+   is not a module, is not built, and prints **76 operator slots on its own
+   glass** — `[PAPA - ARIES]`, `[PAPA slot 1 - traffic]` and so on, by its own
+   declared content law. It is unreachable at LAUNCH for a different reason (the
+   stage door refuses `/held/`) and it is register row **N-k**.
+
+   THE RULE IS NOT HERE. It is `visitorProse` in src/lib/visitor-prose.js, which
+   the two render seams call as well — one rule, three callers, the same
+   arrangement (and the same reason) as `stripVaultAudio`.
+
+   IT IS AN AST PASS AND NOT A REGEX, FOR ONE REASON THAT DECIDES IT. The data
+   files break long passages across concatenated literals for line length, and a
+   marker sentence routinely STRADDLES the break:
+
+       "…the outgoing half of that ledger is not built. [PAPA] — the named " +
+       "lines Mike supplied are held until he says otherwise."
+
+   Stripping literal-by-literal would apply the sentence rule to half-sentences
+   and could take a sentence the runtime keeps, or keep one it takes — which
+   would mean **the copy Mike approved in development is not the copy that
+   ships**, a worse defect than the one being cured. So the pass folds each `+`
+   chain of literals into the one string the runtime actually sees, runs the same
+   `visitorProse` over it, and writes back a single literal. What the visitor
+   downloads is then byte-for-byte what the visitor would have been shown.
+
+   DEVELOPMENT IS UNTOUCHED: at that stage the notes are the point (N3), and the
+   plugin returns null before it parses anything. */
+const opsNotesStrip = {
+  name: "wb-ops-notes",
+  enforce: "pre",
+  transform(code, id) {
+    if (STAGE !== "launch") return null;
+    const f = String(id).replace(/\\/g, "/");
+    if (!/\/src\//.test(f) || !/\.(js|jsx)$/.test(f)) return null;
+    if (!PAPA_MARK.test(code)) return null;
+
+    let ast;
+    try {
+      ast = acorn.Parser.extend(jsxPlugin()).parse(code, {
+        ecmaVersion: "latest", sourceType: "module", locations: false,
+      });
+    } catch (e) {
+      /* A FILE THIS PASS CANNOT PARSE IS A FILE IT CANNOT CLEAN, and a marker
+         left in a launch bundle is the whole defect. Fail the build. */
+      this.error(`wb-ops-notes could not parse ${f}: ${e.message}`);
+      return null;
+    }
+
+    /* fold a literal, or a chain of `+`-joined literals, to its string value */
+    const fold = (n) => {
+      if (n.type === "Literal" && typeof n.value === "string") return n.value;
+      if (n.type === "BinaryExpression" && n.operator === "+") {
+        const l = fold(n.left), r = fold(n.right);
+        return l === null || r === null ? null : l + r;
+      }
+      return null;
+    };
+
+    const edits = [];
+    const walk = (n) => {
+      if (!n || typeof n !== "object") return;
+      if (Array.isArray(n)) { n.forEach(walk); return; }
+      if (!n.type) return;
+      const s = fold(n);
+      if (s !== null && PAPA_MARK.test(s)) {
+        edits.push({ start: n.start, end: n.end, text: JSON.stringify(visitorProse(s)) });
+        return;                       // do not descend into a node being replaced
+      }
+      for (const k of Object.keys(n)) {
+        if (k === "start" || k === "end" || k === "type" || k === "loc" || k === "range") continue;
+        walk(n[k]);
+      }
+    };
+    walk(ast);
+    if (!edits.length) return null;
+
+    let out = code;
+    for (const e of edits.sort((a, b) => b.start - a.start)) {
+      out = out.slice(0, e.start) + e.text + out.slice(e.end);
+    }
+    return { code: out, map: null };
   },
 };
 
@@ -212,7 +315,7 @@ export default defineConfig({
       publicPaths: [...publicPlacements()].sort(),
     }),
   },
-  plugins: [hrVaultAudio, revealPublic, wbPlacement, heldChunkGuard, react(), cloudflare()],
+  plugins: [hrVaultAudio, revealPublic, wbPlacement, opsNotesStrip, heldChunkGuard, react(), cloudflare()],
   build: {
     rollupOptions: {
       output: {

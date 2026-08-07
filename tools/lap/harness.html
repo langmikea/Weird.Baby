@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>390px lap harness</title>
+<style>
+  html,body{margin:0;background:#222;font:12px/1.4 monospace;color:#ddd}
+  #bar{padding:6px 10px}
+  #f{display:block;border:0;background:#fff}
+</style>
+</head>
+<body>
+<div id="bar">route: <span id="r">—</span> · clientWidth: <span id="w">—</span></div>
+<!-- 405px so the classic scrollbar leaves a 390px viewport; the driver asserts
+     the real clientWidth rather than trusting the arithmetic. -->
+<iframe id="f" src="about:blank" width="405" height="740"></iframe>
+<script>
+const f = document.getElementById("f");
+
+window.__lap = {
+  errors: [],
+
+  /* navigate the frame and resolve once it has loaded AND settled */
+  go(route, settleMs = 1200) {
+    window.__lap.errors = [];
+    return new Promise((resolve) => {
+      f.onload = () => {
+        const w = f.contentWindow;
+        w.addEventListener("error", e => window.__lap.errors.push("error: " + e.message));
+        w.addEventListener("unhandledrejection", e => window.__lap.errors.push("reject: " + e.reason));
+        const ce = w.console.error, cw = w.console.warn;
+        w.console.error = (...a) => { window.__lap.errors.push("console.error: " + a.join(" ")); ce.apply(w.console, a); };
+        w.console.warn  = (...a) => { window.__lap.errors.push("console.warn: "  + a.join(" ")); cw.apply(w.console, a); };
+        setTimeout(() => {
+          document.getElementById("r").textContent = route;
+          document.getElementById("w").textContent = w.document.documentElement.clientWidth;
+          resolve(true);
+        }, settleMs);
+      };
+      f.src = route;
+    });
+  },
+
+  doc() { return f.contentWindow.document; },
+
+  /* the page-level and inner horizontal-overflow census */
+  overflow() {
+    const w = f.contentWindow, d = w.document, de = d.documentElement;
+    const inner = [];
+    for (const el of d.querySelectorAll("*")) {
+      if (el === de || el === d.body) continue;
+      if (el.scrollWidth - el.clientWidth <= 1) continue;
+      const st = w.getComputedStyle(el);
+      if (st.overflowX === "visible") continue;          // not a scroller, just paints wide
+      inner.push({
+        sel: el.tagName.toLowerCase() + (el.className && typeof el.className === "string" ? "." + el.className.trim().split(/\s+/).join(".") : ""),
+        scrollWidth: el.scrollWidth, clientWidth: el.clientWidth, overflowX: st.overflowX,
+      });
+    }
+    /* anything painting past the right edge of the viewport */
+    const vw = de.clientWidth, wide = [];
+    for (const el of d.querySelectorAll("body *")) {
+      const r = el.getBoundingClientRect();
+      if (r.width === 0 || r.height === 0) continue;
+      if (r.right > vw + 1 || r.left < -1) {
+        wide.push({ sel: el.tagName.toLowerCase() + (typeof el.className === "string" && el.className ? "." + el.className.trim().split(/\s+/)[0] : ""),
+                    left: Math.round(r.left), right: Math.round(r.right) });
+      }
+    }
+    return {
+      clientWidth: vw,
+      pageScrollWidth: de.scrollWidth,
+      pageOverflow: de.scrollWidth - vw,
+      innerScrollers: inner,
+      paintingPastEdge: wide.slice(0, 12),
+      paintingPastEdgeCount: wide.length,
+      brokenImages: [...d.images].filter(i => i.complete && i.naturalWidth === 0).map(i => i.getAttribute("src")),
+      notUxBlocks: d.querySelectorAll("[data-not-ux]").length,
+      errors: window.__lap.errors.slice(),
+    };
+  },
+
+  /* ── N4: THE ANCHOR TEST ──────────────────────────────────────────────────
+     Mike: opening or closing a record MOVES WHAT IS BENEATH IT; THE PERSISTENT
+     PART STAYS EXACTLY AS IT IS.
+     So the measurement is: pick the expander, record the viewport-relative top
+     of every element ABOVE it and the scroll position, toggle, and re-read.
+     Anything above that moved, or a scrollY that changed, is a failure. Below
+     it, movement is the correct answer and is reported rather than judged. */
+  anchorTest(selector, index = 0) {
+    const w = f.contentWindow, d = w.document;
+    const all = [...d.querySelectorAll(selector)];
+    const el = all[index];
+    if (!el) return { error: "no " + selector + " [" + index + "]" };
+
+    const anchorTop = el.getBoundingClientRect().top;
+    const above = [], below = [];
+    for (const n of d.querySelectorAll("body *")) {
+      if (n.contains(el) || el.contains(n)) continue;
+      const r = n.getBoundingClientRect();
+      if (r.width === 0 && r.height === 0) continue;
+      (r.top < anchorTop ? above : below).push([n, r.top, r.left]);
+    }
+    const scrollBefore = { y: w.scrollY, x: w.scrollX };
+    const selfBefore = el.getBoundingClientRect().top;
+
+    if ("open" in el) el.open = !el.open; else el.click();
+
+    return new Promise(res => setTimeout(() => {
+      const moved = [];
+      for (const [n, t, l] of above) {
+        const r = n.getBoundingClientRect();
+        if (Math.abs(r.top - t) > 0.5 || Math.abs(r.left - l) > 0.5) {
+          moved.push({ sel: n.tagName.toLowerCase() + (typeof n.className === "string" && n.className ? "." + n.className.trim().split(/\s+/)[0] : ""),
+                       dy: +(r.top - t).toFixed(1), dx: +(r.left - l).toFixed(1) });
+        }
+      }
+      let belowMoved = 0;
+      for (const [n, t] of below) if (Math.abs(n.getBoundingClientRect().top - t) > 0.5) belowMoved++;
+      res({
+        selector, index, opened: "open" in el ? el.open : null,
+        scrollDelta: { y: w.scrollY - scrollBefore.y, x: w.scrollX - scrollBefore.x },
+        anchorSelfDelta: +(el.getBoundingClientRect().top - selfBefore).toFixed(1),
+        aboveCount: above.length, movedAbove: moved.slice(0, 10), movedAboveCount: moved.length,
+        belowCount: below.length, movedBelow: belowMoved,
+      });
+    }, 260));
+  },
+
+  count(sel) { return f.contentWindow.document.querySelectorAll(sel).length; },
+  text(sel) { const n = f.contentWindow.document.querySelector(sel); return n ? n.textContent.trim().slice(0, 400) : null; },
+  scrollTo(y) { f.contentWindow.scrollTo(0, y); return f.contentWindow.scrollY; },
+  size(w, h) { f.width = w; f.height = h; return [f.width, f.height]; },
+};
+</script>
+</body>
+</html>

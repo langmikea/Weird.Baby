@@ -7,7 +7,36 @@ tree, the live working tree wins — always.
 
 **Read this file FIRST in every session, before STATE.md, before any handoff.**
 
-**Last verified against live tree:** 2026-08-06 (THE VISIBILITY RULE + FORMAT
+**Last verified against live tree:** 2026-08-06 (THE NIGHT ROUND — six
+instructions, all six answered, and **two of them turned out to be the same
+defect in two costumes: something true, verifiable and wrong, that no amount of
+reading source could find.** Gates: lint **11/9 = baseline** · build green ·
+provenance **PASS** (0 undeclared · **0 stale** · 0 invention) · `reveal:check`
+**PASS** · `parity:gate` **PASS, 4 shared · 0 divergences** · `assets:orphans`
+**0** · **`instory:gate` PASS (new)** · **the lap ran at 390px AND at 1228px, on
+the built bundle under `wrangler dev`, for the first time in five rounds.**
+**THE PROVENANCE REGISTER WAS THE EVIDENCE FOR N2's DEFECT RATHER THAN THE
+DEFENCE AGAINST IT** — every spec row struck this round was classed `VERIFIED`
+with the source *"the unit's own `.ino` trees, read off the files"*, so the
+boundary was working perfectly and recording in writing that a 1965 machine's
+spec sheet came from an Arduino. **Doctrine 13 asks whether a string HAS an
+origin; it cannot ask whether the origin belongs to the fiction** — that gap is
+Doctrine 18 with `npm run instory:gate` under it. **N4's RULE WAS BEING BROKEN ON
+THE AXIS NOBODY WOULD HAVE LOOKED AT:** every `<details>` in the museum is honest
+vertically (0 of 24 above it in the booth, 0 of 47 in the wing FAQs) and what
+moved was everything, SIDEWAYS — opening Record 013 grows the document past the
+window, the scrollbar appears, the viewport goes 403 → 390 and **18 elements
+above the change shift**, which nothing in the museum's code is doing. **A
+RUNTIME FILTER SHIPS THE MATERIAL, FOUR FOR FOUR:** 35 `[PAPA]` markers were in
+the public bundle including the Foundation's four unpublished ledger figures, and
+the launch strip is an AST pass rather than a regex **because marker sentences
+straddle concatenated literals and a per-literal rule would ship copy Mike never
+approved**. **M97 IS CLOSED AFTER FOUR ROUNDS** — the window's size was never the
+museum's viewport; a 403px same-origin iframe gives `innerWidth: 390` exactly,
+and the recipe is COMMITTED this time because v50 solved it once and lost it with
+a gitignored scratch file. Round log:
+`docs/MUSEUM_NIGHT_ROUND_LOG-20260806.md`.)
+Previously 2026-08-06 (THE VISIBILITY RULE + FORMAT
 CONFORMANCE — five instructions, all five built, and **the round's largest
 finding is that the launch build was building half the application and saying it
 had finished.** Gates: lint **11/9 = baseline** · build green · provenance
@@ -850,6 +879,107 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
     second COPY. It was deleted rather than corrected: **a corrected mirror is a
     mirror that will drift again.**
 
+18. **IN-STORY TECHNICAL SPECIFICATIONS (Mike, 2026-08-06 — STANDING, site-wide).**
+
+    > **"Technical Specifications" means THE IN-STORY SPECS, NEVER THE REAL
+    > ONES.**
+
+    Given as a global standard with the instruction to record it as law, and
+    with his own forecast attached: ***"this drifts back easily."***
+
+    **WHAT A SPECIFICATION SURFACE IS.** Any surface whose subject is *what the
+    machine is* — its particulars, its capacities, its declared behaviour. Today
+    that is the two `Technical Specifications` faces in `/robots` and the
+    manual's Section II in the robots repo. It is defined by SUBJECT, not by
+    heading: a face that starts listing the machine's components becomes one the
+    moment it does, whatever it is called.
+
+    **WHAT MAY NOT BE ON ONE.** The board's part number, the source-tree
+    filenames, the module list, the bench sketch count, the count of lines of
+    source, the I²C addresses, the pin numbers, the validation state of the
+    workshop, and any calendar date of the real build. These are all TRUE. They
+    are the provenance of a prop, and **a spec sheet is not a provenance
+    record** — the museum has three other places that carry provenance properly
+    (the asset table, the register, the accession lines) and every one of them
+    is the right home for a fact this rule evicts.
+
+    **WHAT IS NOT COVERED, AND THE DISTINCTION IS THE WHOLE OF IT.** The Record
+    is this house's log of receiving the object THIS YEAR: a sealed modern bag,
+    a USB-C adapter, a slow charge. All modern, all correct, all on a surface
+    whose subject is *now*. The booth answers as the house. Accession numbers
+    and sources lines are provenance, which Doctrine 11 explicitly ships. **The
+    rule is about which machine a spec sheet is describing, not about banning
+    the present tense.**
+
+    **WHY IT DRIFTS BACK, WHICH IS THE PART WORTH KNOWING.** The real facts are
+    the ones Ops can VERIFY. A session looking for something true to put on a
+    spec sheet reaches for the firmware tree every time, because the firmware
+    tree is the thing it can read — and it will feel like diligence while it
+    does it. The face this rule was given about had a comment on it saying *"not
+    one fact below is new"*, written in good faith, one round before the rule.
+    **Recording the law does not stop it; a gate does.**
+
+    **THE GATE.** `npm run instory:gate` (`tools/instory-specs.mjs`) reads the
+    spec surfaces out of the album data — by walking it, not by grepping a file,
+    so a face that moves file keeps its scope — and fails on seven classes of
+    real-build tell. `npm run instory:all` widens the same scan to every face in
+    the fiction and is an AUDIT, never a gate, for the reason above. The escape
+    hatch is a declaration with a written reason per entry, the same arrangement
+    as `reveal/delivery.mjs`'s signage carve-out; **an allow with no reason fails
+    the gate.**
+
+    **AND THE SUPPLY LINE IS CONTAMINATED AT THE SAME SEAM**, which is the
+    finding the audit produced rather than the instruction. Six rows of the
+    in-story manual's own SPECIFICATIONS section are marked `FITS` in
+    `weird-baby-robots/docs/MANUAL_STRUCTURE_FIT-20260805.md` with the real
+    Arduino firmware cited as their source — and one of them lets the firmware
+    WIN a contradiction against the in-story manual (`NUM_PIXELS = 2` over the
+    manual's *"one lamp"*). Under this doctrine that is backwards: the in-story
+    manual is the authority for the in-story spec, and the real firmware is not
+    evidence about a 1965 machine at all. Nothing in that repo was changed on
+    Ops' word; it is register row **N-i**.
+
+    Paid for by a spec sheet that answered *what does it do technically* with
+    `BOARD Uno R4 WiFi` and `PROGRAM v0.1 · 2026-02-23 · 1,385 lines`, under a
+    heading reading MGK-NIAC, on a machine the same wing dates to 1945.
+
+19. **THE EXPANDER RULE (Mike, 2026-08-06 — STANDING, site-wide).**
+
+    > **Opening or closing a record MOVES WHAT IS BENEATH IT; THE PERSISTENT
+    > PART STAYS EXACTLY AS IT IS — no shift, no reflow, no scroll jump above
+    > the change.** Apply everywhere a surface expands, not just the Record.
+
+    **THE VERTICAL AXIS WAS ALREADY HONEST AND THE HORIZONTAL ONE WAS NOT**,
+    which is the whole finding. Native `<details>` pushes what is below it and
+    touches nothing above; the booth's accordion measured **0 of 24** elements
+    above it moving, the wing FAQs **0 of 47**, open and closed. Two things were
+    breaking it, both invisible to a reading and both found by measuring:
+
+    - **The scrollbar.** Opening Record 013 takes the document from 780px to
+      1347px, which crosses the viewport height, so the vertical scrollbar
+      appears and the viewport goes **403 → 390**. Every centred thing shifts
+      left 6.1px and every right-anchored thing 12.2px: **18 elements above the
+      change**, including the title bar's exit and all four covers. Fixed by
+      `html { scrollbar-gutter: stable }` in `src/index.css` — the platform's own
+      mechanic (Doctrine 8), on the ROOT, because the defect belongs to the
+      viewport and not to any expander. That is what makes it satisfy
+      *"everywhere a surface expands"* without a single expander knowing.
+    - **A shared grid row.** Stacked at ≤720px the exhibit's two rows shared
+      slack, so when the viewer's content grew past the window the tracklist
+      collapsed **140 → 80px** and everything under it — including the face's own
+      heading — came up 60px. Fixed by `grid-template-rows: max-content 1fr`.
+
+    **THE INSTRUMENT IS THE POINT, because this rule cannot be read off source.**
+    `anchorTest` in `tools/lap/harness.html` records the position of every
+    element above an expander, toggles it, and reports what moved. Run it on any
+    new expander; **zero above is the rule, and movement below is the correct
+    answer** rather than a second failure. After the two fixes: 0 of 35 above at
+    scrollY 0, 200 and 400, open and closed, at 390px and at 1228px.
+
+    **The cost is stated rather than absorbed:** a page short enough not to
+    scroll is now ~13px narrower. A constant 13px nobody can see beats an
+    intermittent 13px that moves the furniture.
+
 
 ## 8. Known hazards (environment quirks)
 
@@ -893,7 +1023,22 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
    ledger changed — [R3 2026-08-06] OR IF THE RECORD DID, because it now
    carries `RECORD BUDGETS` and a Record edit that never touches the ledger is
    exactly the edit that can overflow an index row** → **[v56] `npm run parity:gate` (exit 0) if either machine
-   album changed** → the lap. A packet that added visitor-facing
+   album changed** → **[N2 2026-08-06] `npm run instory:gate` (exit 0) on EVERY
+   packet, not conditionally — a spec surface drifts back when somebody adds a
+   true fact to it, and "did I touch a spec face" is exactly the question a
+   session that just added one answers wrongly (Doctrine 18)** → the lap.
+
+   **[N5 2026-08-06] AND THE LAP HAS BOTH HALVES AGAIN — `npm run lap`.** M97
+   recorded four consecutive rounds in which the 390px half did not run, because
+   the operator's window will not go below 1228 CSS px and Chrome refuses
+   `window.resizeTo`. **The window's size was never the museum's viewport.** A
+   403px same-origin iframe gives a document whose `innerWidth` is 390 exactly,
+   and same-origin means the driver takes real measurements instead of reading
+   pixels off a screenshot. The harness is committed at `tools/lap/harness.html`;
+   `npm run lap` copies it into `public/` for the run and `npm run lap:clean`
+   takes it out, because anything left in `public/` is in `dist/client` and one
+   `npm run deploy` would publish it. **`npm run lap:clean` before the seal is
+   part of the ritual, not an afterthought.** A packet that added visitor-facing
    content adds its register rows in the same commit; a packet that added or
    changed a media file re-runs `npm run assets:scan` in the same commit.
 

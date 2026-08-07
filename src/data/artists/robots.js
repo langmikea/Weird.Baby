@@ -1046,21 +1046,58 @@ const spine = [
            AND IT HAS NO PICTURE, which is a live conflict with the standing
            Visual Hook Law and is his own instruction. It is the third face in
            this wing left without one deliberately (M29, M48 are the others) and
-           it is register row N-c rather than a silence. */
+           it is register row N-c rather than a silence.
+
+           ═══ [N2 2026-08-06] AND THE SHEET WAS A SPEC SHEET FOR THE WRONG
+               MACHINE ══════════════════════════════════════════════════════
+           MIKE, as a global standard: **"Technical Specifications means THE
+           IN-STORY SPECS, NEVER THE REAL ONES."** Doctrine 18.
+
+           THE PARAGRAPH ABOVE IS THE CONFESSION, WRITTEN BEFORE ANYBODY ASKED.
+           *"Every figure, rule and caveat was already on this face; the change
+           is FORM"* — true, and the form it was converted INTO is the one that
+           made the problem legible. Set as prose, `Uno R4 WiFi` and
+           `2026-02-23` read as the museum talking about the prop it built. Set
+           as a SPEC SHEET under a heading reading MGK-NIAC, they read as the
+           machine's own particulars — and the machine's own particulars, in
+           this fiction, are an ABEAL engine carrying a compile date of 1945.
+           A one-sheet is the thing you grab when you ask what it does
+           technically, and this one answered for an Arduino.
+
+           STRUCK, BY NAME:
+             · BOARD    — a part number of the 2026 flagship revival.
+             · PROGRAM  — a version, a calendar date and a count of LINES OF
+                          SOURCE. Three real-build facts in one row.
+             · STATUS   — `pre-thermal-validation` is a state of a workshop.
+             · BENCH    — eight sketches in January 2026. The bench is real and
+                          it is not in the story.
+             · LAMPS    — struck WHOLE rather than stripped of its caveat, and
+                          the note above is the reason: the 32-flash cap is a
+                          limit of the bench BOARD, so a row keeping the number
+                          and dropping *"a bench limit on a bench board"* is
+                          precisely *how a spec sheet starts lying*. The caveat
+                          could not be saved without the fact it qualifies, and
+                          the fact is not this machine's.
+             · DECLARED — keeps the five rules and loses *"in the header, above
+                          the first include"*, which is a fact about a FILE.
+
+           WHAT SURVIVES IS NINE ROWS AND EVERY ONE OF THEM DESCRIBES THE
+           OBJECT: two displays, an output census, and five declared rules of
+           behaviour a 1965 selector could have been sold with. NOTHING WAS
+           WRITTEN TO REPLACE WHAT WENT — the in-story specification for this
+           unit exists (the robots repo's manual work, Section II) and porting
+           it is authoring, which is not Ops'. Register row N-g.
+
+           `npm run instory` is the gate, and it fails on any of the six. */
         face: {
           kind: "text",
           title: "Technical Specifications",
           subtitle: "MGK-NIAC",
           lines: [
-            "BOARD    Uno R4 WiFi",
-            "PROGRAM  v0.1 · 2026-02-23 · 1,385 lines",
-            "STATUS   baseline — pre-thermal-validation",
-            "BENCH    8 single-subsystem sketches, January 2026",
             "MATRIX   8 × 16 — seven rows visible, the eighth wired, driven and behind something",
             "BAR      1 × 64, addressed as a single chain",
             "OUTPUTS  2 matrix chains · 2 bar chains · 3 servos",
-            "LAMPS    all-at-once flashes capped at 32, a quarter of standard — a bench limit on a bench board",
-            "DECLARED five rules, in the header, above the first include",
+            "DECLARED five rules",
             "RULE 1   a numerical envelope",
             "RULE 2   a ceiling of eight core states",
             "RULE 3   mutual exclusion",
@@ -1457,19 +1494,45 @@ const spine = [
                the firmware and is now stated where the twin is — behind the
                door, on the held album's FAQ. */
             "in the form the machine reads it.",
-          lines: [
-            "TREES    2 on file",
-            "PRIMARY  MGK_VIIIp_01__20240721_WORKS — the tree the twin follows",
-            "SECOND   MGK_VIIIp_02__20260724_AUDIT",
-            "FORM     .ino modules — menu, boot, audio, graphics, input, games",
-          ],
+          /* ═══ [N2 2026-08-06] THE REGISTER AND THE ON FILE ENTRY ARE STRUCK,
+                 AND THIS FACE IS THE HARDER HALF OF THE RULING ══════════════
+             MIKE, as a global standard: **"Technical Specifications means THE
+             IN-STORY SPECS, NEVER THE REAL ONES."** Doctrine 18.
+
+             THE PREVIOUS ROUND LEFT THIS FACE ALONE ON A SCOPE ARGUMENT — the
+             note above says so in its own words, *"he did not read it this
+             round"*, and reported the two faces' divergence as M92/N-f rather
+             than resolving it. **The standard is global, so the scope argument
+             is spent** and the divergence resolves in the direction nobody
+             chose: BOTH faces lose their real-build register.
+
+             WHAT WENT, BY NAME:
+               · the four register lines — TREES, PRIMARY, SECOND, FORM. Two of
+                 them are literal source-tree FILENAMES carrying the real dates
+                 2024-07-21 and 2026-07-24, and a third names `.ino` modules.
+                 There is no version of these rows that is about a 1965 unit.
+               · the ON FILE entry, whole. Its subject is a repository — *"both
+                 trees are checked in and named exactly as they are on disk"* —
+                 and its honest half (*what is NOT here is a reading of them*)
+                 is a statement about Ops' work, which Doctrine 11 does not ship
+                 either. It failed two laws at once and only one of them is new.
+
+             WHAT SURVIVES IS THE SUBJECT, WHICH WAS NEVER THE PROBLEM: the
+             blurb, the lit glass, and the WHY entry — none of which names a
+             file, a board or a year. **AND THE FACE NOW CARRIES NO
+             SPECIFICATIONS AT ALL**, which is the true state and is register
+             row N-h rather than a silence: the in-story specification for this
+             unit is drafted (the robots repo's Section II, two tables' worth)
+             and **six of its rows are sourced from the real firmware**, so the
+             supply is contaminated at the same seam. Porting it is authoring
+             and it is not Ops'.
+
+             THE `[PAPA]` MOVES RATHER THAN DYING WITH ITS ENTRY. It marks a
+             POSITION — the artifact slot is Mike's to name — and the position
+             outlived the sentence it was attached to, so it is `face.papa`,
+             which is the field built for exactly that. Under N3 it now prints
+             in red on this face during development. */
           entries: [
-            { stamp: "ON FILE", title: "Two trees, named as they sit",
-              line: "Both trees are checked in and named exactly as they are " +
-                    "on disk. What is NOT here is a reading of them: no " +
-                    "walkthrough, no annotated source, no claim about what any " +
-                    "module does beyond what its name says.",
-              note: "[PAPA] the artifact slot is Mike's to name — this is the honest floor, not the ceiling" },
             { stamp: "WHY", title: "Why it sits with the founding documents",
               line: "The Record says what was found. The Manual says what it was " +
                     "sold as. The firmware is the only one of the three that " +
@@ -1477,6 +1540,8 @@ const spine = [
               note: "" },
           ],
           entriesMode: "list",
+          papa: "[PAPA] — the artifact slot is Mike's to name, and the unit's " +
+                "own particulars: what an ABEAL spec sheet for this machine says.",
           footer: "MGK-VIIIp · TECHNICAL SPECIFICATIONS",
         },
       },

@@ -325,85 +325,6 @@
    "p": "spine[].tracks[].face.subtitle",
    "c": "HOUSE"
   },
-  "2c3a36e58df2627d": {
-   "f": "src/data/artists/robots.js",
-   "l": 1118,
-   "t": "TREES    2 on file",
-   "p": "spine[].tracks[].face.lines[]",
-   "c": "RESTATED",
-   "r": [
-    "1704f42e3c6387a8",
-    "5380a42f65fa1a0e",
-    "bc88cf64c7fc1a6c"
-   ]
-  },
-  "1704f42e3c6387a8": {
-   "f": "src/data/artists/robots.js",
-   "l": 1119,
-   "t": "PRIMARY  MGK_VIIIp_01__20240721_WORKS — the tree the twin follows",
-   "p": "spine[].tracks[].face.lines[]",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files; the quoted line is the builder's own"
-  },
-  "5380a42f65fa1a0e": {
-   "f": "src/data/artists/robots.js",
-   "l": 1120,
-   "t": "SECOND   MGK_VIIIp_02__20260724_AUDIT",
-   "p": "spine[].tracks[].face.lines[]",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files; the quoted line is the builder's own"
-  },
-  "c81ea5f96ed99665": {
-   "f": "src/data/artists/robots.js",
-   "l": 1121,
-   "t": "FORM     .ino modules — menu, boot, audio, graphics, input, games",
-   "p": "spine[].tracks[].face.lines[]",
-   "c": "RESTATED",
-   "r": [
-    "1704f42e3c6387a8",
-    "5380a42f65fa1a0e",
-    "bc88cf64c7fc1a6c"
-   ]
-  },
-  "da5bf9a9cf83954a": {
-   "f": "src/data/artists/robots.js",
-   "l": 1128,
-   "t": "ON FILE",
-   "p": "spine[].tracks[].face.entries[].stamp",
-   "c": "HOUSE"
-  },
-  "70086783b9119e56": {
-   "f": "src/data/artists/robots.js",
-   "l": 1128,
-   "t": "Two trees, named as they sit",
-   "p": "spine[].tracks[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "1704f42e3c6387a8",
-    "5380a42f65fa1a0e",
-    "bc88cf64c7fc1a6c"
-   ]
-  },
-  "cf6c69e2a8fff6db": {
-   "f": "src/data/artists/robots.js",
-   "l": 1129,
-   "t": "Both trees are checked in and named exactly as they are on disk. What is NOT here is a reading of them: no walkthrough, no annotated source, no claim about what any module does beyond what its name says.",
-   "p": "spine[].tracks[].face.entries[].line",
-   "c": "RESTATED",
-   "r": [
-    "1704f42e3c6387a8",
-    "5380a42f65fa1a0e",
-    "bc88cf64c7fc1a6c"
-   ]
-  },
-  "bc88cf64c7fc1a6c": {
-   "f": "src/data/artists/robots.js",
-   "l": 1133,
-   "t": "[PAPA] the artifact slot is Mike's to name — this is the honest floor, not the ceiling",
-   "p": "spine[].tracks[].face.entries[].note",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
   "0da6fab1f7facbd4": {
    "f": "src/data/artists/robots.js",
    "l": 1134,
@@ -411,9 +332,8 @@
    "p": "spine[].tracks[].face.entries[].title",
    "c": "RESTATED",
    "r": [
-    "1704f42e3c6387a8",
-    "5380a42f65fa1a0e",
-    "bc88cf64c7fc1a6c"
+    "b65d04f94f792c09",
+    "40bf733f0f6cdfb8"
    ]
   },
   "843672429b842776": {
@@ -423,9 +343,8 @@
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
    "r": [
-    "1704f42e3c6387a8",
-    "5380a42f65fa1a0e",
-    "bc88cf64c7fc1a6c"
+    "b65d04f94f792c09",
+    "40bf733f0f6cdfb8"
    ]
   },
   "7a2d917ba705ef5f": {
@@ -14239,34 +14158,6 @@
    "p": "held-wing",
    "c": "HOUSE"
   },
-  "5b08f7aa4afc384a": {
-   "f": "src/data/artists/robots.js",
-   "l": 1227,
-   "t": "BOARD    Uno R4 WiFi",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
-  },
-  "7cb78b45aa8a6b62": {
-   "f": "src/data/artists/robots.js",
-   "l": 1228,
-   "t": "PROGRAM  v0.1 · 2026-02-23 · 1,385 lines",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
-  },
-  "0e0528f931b4a710": {
-   "f": "src/data/artists/robots.js",
-   "l": 1229,
-   "t": "STATUS   baseline — pre-thermal-validation",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
-  },
-  "a412f1afebcf343a": {
-   "f": "src/data/artists/robots.js",
-   "l": 1230,
-   "t": "BENCH    8 single-subsystem sketches, January 2026",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
-  },
   "2ecbfb8d2eab38ee": {
    "f": "src/data/artists/robots.js",
    "l": 1231,
@@ -14285,20 +14176,6 @@
    "f": "src/data/artists/robots.js",
    "l": 1233,
    "t": "OUTPUTS  2 matrix chains · 2 bar chains · 3 servos",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
-  },
-  "b72c92829a07f2c9": {
-   "f": "src/data/artists/robots.js",
-   "l": 1234,
-   "t": "LAMPS    all-at-once flashes capped at 32, a quarter of standard — a bench limit on a bench board",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
-  },
-  "60c7a57ff57a7d63": {
-   "f": "src/data/artists/robots.js",
-   "l": 1235,
-   "t": "DECLARED five rules, in the header, above the first include",
    "c": "VERIFIED",
    "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
   },
@@ -15027,9 +14904,8 @@
    "l": 1358,
    "t": "Everything the unit knows how to do is in here — not a description of the machine's behaviour but the behaviour itself, in the form the machine reads it.",
    "r": [
-    "1704f42e3c6387a8",
-    "5380a42f65fa1a0e",
-    "bc88cf64c7fc1a6c"
+    "b65d04f94f792c09",
+    "40bf733f0f6cdfb8"
    ]
   },
   "2f702058b1bfeeb3": {
@@ -15442,6 +15318,29 @@
    "f": "src/worker.js",
    "l": 74,
    "t": "/locked/",
+   "c": "HOUSE"
+  },
+  "232f12eb7c15b07f": {
+   "f": "src/data/artists/robots.js",
+   "l": 1100,
+   "t": "DECLARED five rules",
+   "p": "spine[].tracks[].face.lines[]",
+   "c": "VERIFIED",
+   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares five rules. [N2 2026-08-06] THE ROW LOST ITS SECOND HALF AND KEPT ITS SOURCE, and the distinction is Doctrine 18's: 'in the header, above the first include' is a fact about a FILE and cannot stand on a 1965 machine's spec sheet; that five rules are declared is a fact about the MACHINE'S BEHAVIOUR, which the firmware happens to be the way to verify. External to this repo; the sweep cannot re-check it."
+  },
+  "40bf733f0f6cdfb8": {
+   "f": "src/data/artists/robots.js",
+   "l": 1543,
+   "t": "[PAPA] — the artifact slot is Mike's to name, and the unit's own particulars: what an ABEAL spec sheet for this machine says.",
+   "p": "spine[].tracks[].face.papa",
+   "c": "MIKE",
+   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render. [N2/N3 2026-08-06] carried from the ON FILE entry this round struck, because the marker names a POSITION that outlived the sentence it was attached to, with the second clause added for the specification Doctrine 18 leaves this face without."
+  },
+  "b003064c38fb63ab": {
+   "f": "src/lib/visitor-prose.js",
+   "l": 77,
+   "t": "Not part of the UX · notes to Mike",
+   "p": "OPS_NOTES_HEAD",
    "c": "HOUSE"
   }
  }
