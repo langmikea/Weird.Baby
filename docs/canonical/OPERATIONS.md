@@ -7,7 +7,43 @@ tree, the live working tree wins — always.
 
 **Read this file FIRST in every session, before STATE.md, before any handoff.**
 
-**Last verified against live tree:** 2026-08-07 (THE DICTATION PREP — six
+**Last verified against live tree:** 2026-08-07 (THE TWO BUCKETS + 013 — two
+rulings and a register pass, and **the larger of the two corrected a rule this
+repository had been measuring against for five days without anything being able
+to notice.** Gates: lint **11/9 = baseline** · build green · provenance **PASS** ·
+`reveal:check` **PASS** · `parity:gate` **PASS, 4 shared · 0 divergences** ·
+`instory:gate` **PASS** · `assets:orphans` **0** · **the lap DID NOT RUN — the
+Chrome extension is not connected in this session, said plainly rather than left
+as a silence.** **THE BOUNCY BALL LAW CAPS POINTS OF FOCUS, NOT ASSETS**, and the
+sentence it was carried as — *"never more than two or three offerings in a day"* —
+**was never false.** Ops supplied the wrong UNIT twice: in the rule's own bearing
+line, and in the tracker, which divided a count of PHOTOGRAPHS by a ceiling on
+ATTENTION and printed **"16 pictures = 6–8 days of material"**. Every input was a
+real measurement and the arithmetic was sound, which is exactly why a round of
+review walked past it. **THE ASYMMETRY IS THE MECHANISM:** PRECIOUS has a ceiling
+(two or three **a week** — the period moved with the unit) so it divides into
+weeks; **DUMP has none, so it divides into nothing**, and `runways()` in
+`reveal/focus.mjs` is structurally unable to print one for it, because a
+symmetrical table would re-commit the original error in the other bucket.
+**`bucket` is the sixth JUDGED field on the asset table, null on all 315 rows, and
+OPS DOES NOT DERIVE IT** — a heuristic calling every machine photograph precious
+would make every tracker read as ANSWERED while nothing had been answered, which
+is the void figure's own defect with better manners. So the 16 pictures behind the
+stage door are **between nothing at all and 6–8 WEEKS**: the number survived and
+the unit moved. **RECORD 013 IS THE PROTOTYPE AND IS KEPT, ON MIKE'S OWN
+CRITERION** — he offered retire-or-mark and one test, *honest AND the machinery
+exercised*, and retiring empties the volume: the entry renderer never mounts, the
+index budgets police no string, the per-entry derivation loops over nothing, and
+`delivered()` goes empty, **leaving the pull-back rule with no positive case
+anywhere in the museum.** The mark is in the ledger and the dictation pages and
+**nowhere on the glass**, because that line's subject is the making of the museum.
+**W-1 CLOSED WITH A FOURTH ANSWER THAT WAS NOT ON ITS OWN LIST** — all three
+readings assumed the entry in the tree and day one's entry had to be the same
+entry, and Mike dissolved the premise. **M19 CLOSED, AND CLOSING IT EXPOSED THAT
+C8's STATED BLOCKER WAS THE WRONG ONE**: `recordEpoch` is a DATE, not a number, so
+C8 waits on Record 001's date and always did. Nothing in `src/` changed. Round
+log: `docs/MUSEUM_TWO_BUCKETS_LOG-20260807.md`.)
+Previously 2026-08-07 (THE DICTATION PREP — six
 instructions, all six answered, and **the round's largest finding is that one
 instruction's own premise was wrong.** Gates: lint **11/9 = baseline** · build
 green · provenance **PASS** (0 undeclared · 0 stale · 0 invention) ·
@@ -548,6 +584,8 @@ The HR exhibit page is **two stacked components**. Mount chain:
 | **The asset table + approval gate** (Doctrine 15) | `tools/asset-table.mjs` → `provenance/asset-table.json`. 251 media files across the museum and robots repos with what each is, what depends on it, an Ops quality read, **Mike's verdict, unset by default**, and **[N8 2026-08-04] `revealArc`** — `arrived / understood / partial / online / null`, Mike's canon for how a thing is revealed, where `null` means UNSET and is NOT a stage (populated on 6 rows, unset on 245). `npm run assets` / `assets:scan` / `assets:checklist` / `assets:gate`. The scan rewrites only measured fields and **never** touches the five judged ones (`what` / `quality` / `qualityNote` / `verdict` / `revealArc`). **[C32 CLOSED v52] IT IS NO LONGER KEYED BY PATH.** Every row carries a **`uid` minted once and never rewritten** — that is the row's NAME, and `id` (repo:path) is demoted to an ADDRESS — plus a **`sha256`** re-measured each scan. Matching goes address → content → nothing: a prior row and a new file sharing a hash inside one repo are the same file MOVED and the judgement travels automatically. Where a rename ALSO re-rendered the file (the ordinary case, because the name is usually IN the picture) **no keying can infer it, so the scan REFUSES TO GUESS and reports the judged row under its own banner**; `npm run assets:rename -- <old> <new>` is the explicit human declaration, and `assets:orphans` lists them. **The silence was the defect; the hash only makes it rarer.** The first run caught v51/A7's own stranded `jesse-welles-plate.jpg` alongside this round's cover rename. **`usedBy` MATCHES AGAINST SOURCE WITH COMMENTS STRIPPED** (N8) — before that a path merely NAMED in a comment counted as a reference, so any orphan was invisible for as long as anybody had written its name down. NOT a packet gate — see Doctrine 15. |
 | **The archive (IMAGE ARCHIVE)** | `ArchiveWall` + `archiveSpreads` + `SpreadHead` + `SpreadTiles` in `Exhibit.jsx` (module scope, just below `FaceFlow`); `.vp-spread-head` / `.vp-spread-stow` in `Exhibit.css` beside `.vp-collage`. A face declaring `spreads:[{head,no,tiles}]` stacks in headed albums sorted by record number descending; a face declaring only `collage` emits the DOM it always did. **[N2 2026-08-04] THE FIRST SPREAD IS OPEN AND EVERY LATER HEADED SPREAD IS STOWED** in a native `<details>` whose closed line carries its own head, its record number if any, and its COUNT — which is why it does not trip the no-hidden-information law. An unheaded spread is never stowed. `face.archiveUnit = {one,many}` names the count's noun (default `image/images`; the robots wing says `plate/plates`). Both walls are in `robots.js` (`mgk-viii` and `mgk-viiip`, track id `plates`). **[v56/R4] THE MGK-NIAC WALL IS NO LONGER ONE OF THE SPREAD-STACKING CASES, AND THAT MATTERS TO WHOEVER TOUCHES THIS COMPONENT NEXT.** Mike's canon made the mainframe the subject and the camera-body robot an easter egg, so six robot plates and a bench shot came off the wall and **the FEBRUARY 2013 spread went with them** — it was three plates of the figure. The wall is four cabinet plates in one unheaded `collage` now. **THAT WAS THE ONLY WALL IN THE MUSEUM WITH MORE THAN ONE SPREAD, so `SpreadHead` / `.vp-spread-stow` and the whole stowed-shelf mechanism have ZERO live callers** — do not read the code's presence as evidence it is exercised (register C29). **THE ROOM WAS CALLED THE MORGUE FOR ONE ROUND** (v49/A3 printed both candidate names so Mike could strike one) — he struck it at v50/N1, and `morgue` outside a historical comment is now a miss. Its two siblings, VIDEO ARCHIVE and AUDIO ARCHIVE, are named in `robots.js`'s header and deliberately NOT built. |
 | **THE OPS INSTRUMENTS THAT RENDER TO `docs/`** (K2–K6, 2026-08-07) | `tools/dictation/prep.mjs` + `tools/dictation/spec-source.mjs` → `docs/dictation-20260807/` (`npm run dictation`); the same shape as `tools/contact-sheet.mjs` → `docs/CONTACT_SHEET.html`, `reveal:cards` and `assets:checklist`. **THREE THINGS A FUTURE SESSION MUST HOLD.** **(1) THEY MUST NEVER BECOME ROUTES.** A page whose subject is the museum's own housekeeping is meta under Doctrine 11 and fails the visible-line test at any live address. They render to files under `docs/` and are deliberately NOT written into `public/` — which is the same trap `npm run lap:clean` exists to police, since anything left in `public/` is one `npm run deploy` from being published. **(2) THEY READ AND NEVER WRITE.** `provenance/asset-table.json` is the authority on FILES and `reveal/ledger.json` on REVEALABLE THINGS; an instrument that computes a third answer is a third copy. `verdict` is Mike's field and Ops never sets it (Doctrine 15). **(3) A JOIN THAT IS PARTIAL SAYS SO ON THE PAGE.** The two tables meet at `assets` and that is NINE ROWS in a 162-row ledger against a 315-row asset table. Drawing the unjoined rows as joined would be an instrument lying about its own coverage — so transfer class, reveal arc and dependencies live in the ledger's own table rather than being faked into the file table. **And they get lapped like anything else:** a five-column table cannot fit 390px and must not be made to try — the TABLE scrolls inside its own `overflow-x` box and the PAGE never scrolls sideways. |
+| **THE BOUNCY BALL LAW AND THE TWO BUCKETS** (B1, 2026-08-07 — Doctrine 20) | `reveal/focus.mjs` — `LAW`, `BUCKETS`, `bucketOf`, `split`, `runways`, `VOIDED`. The judged field is `bucket` on `provenance/asset-table.json` (declared in `JUDGED` and `_bucket` in `tools/asset-table.mjs`, printed by `npm run assets`); the renderer is `runwayBlock()` in `tools/dictation/prep.mjs`, used on the week-one page and the artifact tracker. **THREE THINGS A FUTURE SESSION MUST HOLD.** **(1) THE LAW CAPS POINTS OF FOCUS AND EVERY INSTRUMENT THAT COUNTS ASSETS AGAINST IT IS WRONG.** That is not a subtlety — it is the defect this file was written to correct, and it survived because the sentence it came from was true and the arithmetic under it was sound. **(2) THE DUMP BUCKET HAS NO RUNWAY AND `runways()` WILL NOT PRODUCE ONE.** A bucket with no ceiling divides into nothing; a symmetrical table that printed weeks for it would be the same error in the other bucket. **(3) `bucket` IS MIKE'S AND UNSET ON ALL 315 ROWS, SO EVERY RUNWAY IS A BOUND.** Ops does not derive it and must not: the derivation would make every tracker read as answered. Open row `B-a`. |
+| **THE RECORD'S PROTOTYPE ENTRY, AND WHY IT IS NOT RETIRED** (B2, 2026-08-07) | `reveal/ledger-declare.mjs` — `RECORD_ENTRY[13]`, plus the notes on `doc.record` and `face.wbr.record`; the dictation pages; `W-1` in `reveal/week-one.mjs`. **MIKE: “RECORD 013 WAS A PROTOTYPE — it was chosen because it was interesting enough to find the structure, and it did. It is NOT day one and needs no re-dating or defending. THE REAL RECORD STARTS AT 001 when Mike dictates it.”** **FOUR THINGS A FUTURE SESSION MUST HOLD.** **(1) M19 IS CLOSED BY IT** — a record number is a number in THIS VOLUME'S own sequence, beginning at 001, and the 436-record numbering was deleted at v47 for having been invented. **(2) IT IS KEPT RATHER THAN RETIRED, ON HIS OWN CRITERION** — *whichever keeps the Record honest and the machinery exercised.* Retiring it empties the volume, and an empty volume exercises nothing: `RecordEntry.jsx` never mounts, `RECORD_TITLE_MAX`/`RECORD_LINE_MAX` police no string, the per-entry `record.NNN` derivation loops over nothing, and `delivered()` returns the empty set — which pulls `rear_power_switch.png` back behind the stage door and leaves the pull-back rule with no positive case anywhere in the museum. **(3) THE PROTOTYPE MARK IS IN OPS' INSTRUMENTS AND NOWHERE ON THE GLASS.** *“This entry was a prototype”* is a line whose subject is the making of the museum — Doctrine 11 refuses it at any live address. The entry's own text asserts nothing false, so the glass needs no correction. **(4) THE NUMBER IS THE ONE PIECE LEFT AND IT WAS DELIBERATELY NOT TOUCHED** — open row `B-b`. `no` is what `record.NNN`, `delivered()`, the ledger parity check and the budgets are keyed on, and `ledger-declare.mjs` hard-exits on `no: null` rather than mint an id, a refusal written while M19 was open. |
 | Exhibit data export | `src/data/exhibits/hunter_root.json` via `npm run export-artifacts` |
 | Spine adapter (stable ids) | `src/data/artists/hunter-root-spine.js` |
 | Taxonomy v1 canon (June 9) | `docs/taxonomy/` — TAXONOMY_v1, NORMALIZATION_MAP, COVERAGE_PROOF, RETAG_PLAN |
@@ -1014,6 +1052,50 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
     **The cost is stated rather than absorbed:** a page short enough not to
     scroll is now ~13px narrower. A constant 13px nobody can see beats an
     intermittent 13px that moves the furniture.
+
+20. **THE BOUNCY BALL LAW (Mike, named 2026-08-02 — CORRECTED 2026-08-07 —
+    STANDING, site-wide).**
+
+    > **It caps POINTS OF FOCUS, not ASSETS.** Humans remember one or two
+    > things; ten things reduces the odds they keep the one that matters.
+    > **IT DOES NOT MEAN WE MAY NOT SHOW MORE PICTURES.**
+
+    **TWO BUCKETS, AND THEY ARE A PARTITION.** Everything the museum can put in
+    front of a reader is in exactly one:
+
+    - **THE PRECIOUS BUCKET** — genuine reveals, **two or three A WEEK**. These
+      are what a reader remembers, and the ceiling is on THEM.
+    - **THE DUMP BUCKET** — everything else. Fun to look at, part of the story,
+      part of the pile. **NO CEILING.** Ten manual pages arriving is **ONE**
+      point of focus — *we got more of the manual* — not ten.
+
+    **THE CORRECTION IS A CHANGE OF UNIT AND OF PERIOD, AND THE ORIGINAL
+    SENTENCE WAS NOT FALSE — WHICH IS WHY NOTHING CAUGHT IT.** The law was
+    carried as *"never more than two or three offerings in a day"*. Ops supplied
+    the wrong unit twice: once in the rule's own bearing line, and once in the
+    tracker, which divided a count of **photographs** by a ceiling on
+    **attention** and printed **"16 pictures = 6–8 days of material"**. Every
+    input was a real measurement and the arithmetic was sound. **That figure is
+    VOID** and is kept, with its cause, in `reveal/focus.mjs` `VOIDED` — a
+    superseded number that is merely deleted comes back the next time somebody
+    does the obvious arithmetic.
+
+    **WHAT A TRACKER MAY SAY, AND THE ASYMMETRY IS THE MECHANISM.** Precious has
+    a ceiling over it, so it divides into **weeks** and the weeks mean
+    something. Dump has no ceiling, so it divides into **nothing** — it is a pile
+    size. `runways()` in `reveal/focus.mjs` is structurally unable to print a
+    runway for the dump bucket, because printing one would re-commit the
+    original error in the other bucket.
+
+    **AND THE BUCKET IS MIKE'S, UNSET, AND OPS DOES NOT DERIVE IT.** `bucket`
+    (`precious` | `dump` | `null`) is the sixth JUDGED field on
+    `provenance/asset-table.json`, beside `verdict` and `revealArc`, carried
+    across a scan and never written by a scan. It is null on all 315 rows, so
+    every runway today is a **bound** rather than a number and says so. A
+    heuristic — *a machine photograph is precious, a manual page is dump* —
+    would make every tracker read as answered while nothing had been answered,
+    which is the same class of defect as the void figure with better manners.
+    Doctrine 12 governs it: the gap prints as a gap. Open row: `B-a`.
 
 
 ## 8. Known hazards (environment quirks)

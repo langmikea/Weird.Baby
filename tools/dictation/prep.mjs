@@ -51,6 +51,26 @@
    exists — named and not resolved, because resolving one is authoring.
    Doctrine 12: assemble what exists, invent nothing.
 
+   ═══ [B1/B2 2026-08-07] TWO RULINGS, AND ONE OF THEM VOIDED A NUMBER THIS
+       FILE WAS PRINTING ═══════════════════════════════════════════════════════
+   B1 — THE BOUNCY BALL LAW CAPS POINTS OF FOCUS, NOT ASSETS. This file was
+   dividing a count of PHOTOGRAPHS by that ceiling and printing "16 pictures =
+   6–8 days of material". Every input was a real measurement and the arithmetic
+   was sound; the UNIT was wrong, which is why nothing caught it. The law, the
+   two buckets and the two runways are `reveal/focus.mjs`; `runwayBlock()` below
+   only draws them, and it will not print a runway for the DUMP bucket however
+   symmetrical that would look — a bucket with no ceiling divides into nothing.
+   The bucket is a JUDGED field on the asset table beside `verdict`, it is unset
+   on all 315 rows, and Ops does not derive it: a heuristic there would make
+   these pages look answered while nothing had been answered.
+
+   B2 — RECORD 013 IS THE PROTOTYPE. Not day one, no re-dating, no defending;
+   the real Record starts at 001 when Mike dictates it. Every page here says so.
+   NOTHING ON THE GLASS DOES, and that is Doctrine 11 rather than an oversight —
+   "this entry was a prototype" is a line whose subject is the making of the
+   museum. These pages are the right place for it because they are Ops
+   instruments and are never served.
+
      node tools/dictation/prep.mjs            write docs/dictation-20260807/
      node tools/dictation/prep.mjs --out DIR  somewhere else
    =========================================================================== */
@@ -64,6 +84,8 @@ import { entries as recordEntries } from "../../reveal/record-entries.mjs";
 import { GOVERNED_PREFIX, STAGE_PREFIX } from "../../reveal/placement.mjs";
 import { ORIGIN as W1_ORIGIN, WEEK, PRELUDE, DAYS, FRIDAY_FORMULA, RECORD_RULES, COLLISIONS }
   from "../../reveal/week-one.mjs";
+import { LAW, BUCKETS, ORIGIN as FOCUS_ORIGIN, runways, bucketOf, VOIDED }
+  from "../../reveal/focus.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..", "..");
@@ -79,6 +101,64 @@ const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").re
 /* `~text~` marks a code span in the source strings so the data files stay free
    of markup. Nothing else in them is interpreted. */
 const rich = s => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/\*([^*]+)\*/g, "<i>$1</i>");
+
+/* [B2 2026-08-07] the day Mike ruled on the two collisions this page carries */
+const W1_RULED_ON = FOCUS_ORIGIN.correctedOn;
+
+/* ═══ [B1 2026-08-07] THE TWO RUNWAYS, RENDERED ONCE AND USED ON TWO PAGES ═══
+   THE BLOCK THIS REPLACES IS THE REASON IT EXISTS. The week-one page divided a
+   count of PHOTOGRAPHS by the bouncy ball ceiling and printed "16 pictures =
+   6–8 days of material". Mike voided it: the law caps POINTS OF FOCUS, not
+   assets, and it does not mean the museum may not show more pictures.
+
+   So the arithmetic is done in `reveal/focus.mjs` and this only draws it, and
+   the two numbers are drawn DIFFERENTLY ON PURPOSE. Precious has a ceiling over
+   it, so it divides into weeks and the weeks mean something. Dump has no
+   ceiling, so it divides into nothing and this block will not print a runway for
+   it however much a symmetrical layout wants one — printing weeks for the dump
+   would re-commit the original error in the other bucket.
+
+   AND THE THIRD NUMBER IS THE ONE THAT IS TRUE TODAY. Nothing is assigned, so
+   the precious runway is a BOUND rather than a figure, and it says so. */
+function runwayBlock(r, ofWhat) {
+  const P = BUCKETS.precious, D = BUCKETS.dump;
+  const wk = w => w ? (w.min === w.max ? `${w.min} week${w.min === 1 ? "" : "s"}`
+    : `${w.min}&ndash;${w.max} weeks`) : null;
+  const bound = wk(r.bound.ceilWeeks);
+  return `<div class="note" style="margin-bottom:14px">
+<p class="k" style="margin:0 0 8px;font-size:11px;letter-spacing:.13em;text-transform:uppercase">
+Against the bouncy ball law <span class="rail m">his rule &middot; Ops wording</span></p>
+<p style="margin:0 0 10px"><b>${esc(LAW.statement)}</b> ${esc(LAW.because)}
+<i>${esc(LAW.doesNotMean)}</i></p>
+<div class="tw"><table>
+<thead><tr><th style="width:26%">bucket</th><th>ceiling</th><th style="width:16%">assigned</th><th style="width:26%">runway</th></tr></thead>
+<tbody>
+<tr><td><b>${esc(P.name)}</b><div class="k" style="font-size:11.5px;margin-top:3px">${esc(P.holds)}</div></td>
+    <td>${esc(P.ceiling)}</td>
+    <td><span class="tag ${r.precious.n ? "y" : ""}">${r.precious.n}</span></td>
+    <td>${r.precious.weeks ? `<b>${wk(r.precious.weeks)}</b>` : "<i class=\"k\">nothing assigned &mdash; no runway to compute</i>"}</td></tr>
+<tr><td><b>${esc(D.name)}</b><div class="k" style="font-size:11.5px;margin-top:3px">${esc(D.holds)}</div></td>
+    <td>${esc(D.ceiling)}</td>
+    <td><span class="tag ${r.dump.n ? "y" : ""}">${r.dump.n}</span></td>
+    <td><i class="k">no ceiling, so no runway. A pile size, and a batch of any size is one point of focus.</i></td></tr>
+<tr><td><b>UNASSIGNED</b><div class="k" style="font-size:11.5px;margin-top:3px">Nobody has said which bucket these are in.</div></td>
+    <td><i class="k">&mdash;</i></td>
+    <td><span class="tag ${r.unassigned.n ? "n" : ""}">${r.unassigned.n}</span></td>
+    <td><i class="k">the honest state today</i></td></tr>
+</tbody></table></div>
+<p class="ask" style="margin:10px 0 0"><b>SO THE RUNWAY IS A BOUND AND NOT A
+NUMBER, AND THAT IS THE ONE HONEST THING THIS TABLE CAN SAY.</b> Of ${esc(ofWhat)},
+<b>${r.bound.atLeast}</b> are assigned precious and <b>${r.bound.atMost}</b> could be
+&mdash; so the precious runway runs from <b>${r.precious.weeks ? wk(r.precious.weeks) : "nothing at all"}</b>
+to <b>${bound || "nothing at all"}</b>, and the whole of that gap is a judgement
+nobody has made. <b>The bucket is yours</b> &mdash; it sits beside <code>verdict</code>
+in the asset table, unset, and Ops will not derive it: a rule that called every
+machine photograph precious would make this table look answered while nothing had
+been answered.</p>
+<p class="k" style="margin:8px 0 0;font-size:12px"><b>THE FIGURE THIS REPLACES IS
+VOID:</b> &ldquo;${esc(VOIDED.figure)}&rdquo;. ${esc(VOIDED.why)}</p>
+</div>`;
+}
 
 /* ── SHARED SHELL ──────────────────────────────────────────────────────── */
 const OPS_CSS = `
@@ -373,6 +453,8 @@ function buildArtifacts() {
       role: e.role, usedBy: e.usedBy || [], kind: e.kind, missing: !!e.missing,
       dims: e.w && e.h ? `${e.w}×${e.h}` : "", bytes: e.bytes, reach,
       governed: isGoverned(pub),
+      /* [B1 2026-08-07] Mike's bouncy ball bucket — read, never derived */
+      bucket: bucketOf(e),
     };
   });
 
@@ -381,16 +463,21 @@ function buildArtifacts() {
   const governed = addressed.filter(r => r.governed);
   const waiting = governed.filter(r => r.reach.k === "YES — ONE ENTRY");
   const joinedUids = new Set(LEDGER.rows.flatMap(r => r.assets || []));
+  /* [B1 2026-08-07] the two runways, over the set this page is about: the files
+     an entry can reach for today. Not the whole table — a runway computed over
+     source files and working copies would be a number about the disk. */
+  const runwayOfWaiting = runways(waiting);
 
-  const tr = r => `<tr data-g="${r.governed ? "gov" : "out"}" data-r="${esc(r.reach.k)}" data-q="${esc(r.quality || "unjudged")}" data-m="${r.missing ? "1" : "0"}"
-   data-t="${esc([r.path, r.what, r.quality, r.reach.k, r.usedBy.join(" ")].join(" ").toLowerCase())}">
+  const tr = r => `<tr data-g="${r.governed ? "gov" : "out"}" data-r="${esc(r.reach.k)}" data-q="${esc(r.quality || "unjudged")}" data-m="${r.missing ? "1" : "0"}" data-b="${esc(r.bucket || "unassigned")}"
+   data-t="${esc([r.path, r.what, r.quality, r.reach.k, r.bucket || "unassigned", r.usedBy.join(" ")].join(" ").toLowerCase())}">
   <td><code>${esc(r.pub || r.path)}</code>${r.held ? ' <span class="tag g">held</span>' : ""}${r.missing ? ' <span class="tag n">no file</span>' : ""}
       ${joinedUids.has(r.uid) ? ' <span class="tag b">ledgered</span>' : ""}
       <div class="k" style="font-size:11px;margin-top:3px">${esc(r.dims)}${r.bytes ? ` · ${Math.round(r.bytes / 1024)} KB` : ""} · <code>${esc(r.uid)}</code></div></td>
   <td>${esc(r.what || "")}${r.what ? "" : '<i class="k">nobody has written what this is</i>'}</td>
   <td><span class="tag ${r.quality === "usable" ? "y" : r.quality === "wrong" || r.quality === "placeholder" ? "n" : ""}">${esc(r.quality || "unjudged")}</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: ${r.verdict ? esc(r.verdict) : "<i>not inspected</i>"}</div>
-      <div class="k" style="font-size:11px">arc: ${r.arc ? esc(r.arc) : "<i>unset</i>"}</div></td>
+      <div class="k" style="font-size:11px">arc: ${r.arc ? esc(r.arc) : "<i>unset</i>"}</div>
+      <div class="k" style="font-size:11px">bucket: ${r.bucket ? `<b>${esc(r.bucket)}</b>` : "<i>unassigned</i>"}</div></td>
   <td><span class="tag ${r.reach.c}">${esc(r.reach.k)}</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">${esc(r.reach.w)}</div></td>
   <td class="k" style="font-size:11px">${r.usedBy.length ? r.usedBy.map(u => `<code>${esc(u)}</code>`).join("<br>") : "<i>nothing</i>"}</td>
@@ -424,8 +511,12 @@ pictures are sitting behind the stage door right now</b>, and naming a file in a
 entry's assets is the entire mechanism that puts it on a wall.</p>
 
 <p><b>ONE FILE HAS EVER BEEN DELIVERED.</b> <code>rear_power_switch.png</code>, by
-Record 013. Everything else the museum owns of these machines has never been
-brought into the story by anybody.</p>
+Record 013 &mdash; <b>the prototype entry</b>, which you ruled on
+${esc(FOCUS_ORIGIN.correctedOn)} is not day one and is not in the volume's sequence.
+It is kept precisely because it is the only thing exercising this machinery: strike
+it and the delivered set is empty, the pull-back rule has no positive case anywhere
+in the museum, and this column has nothing to be right about. Everything else the
+museum owns of these machines has never been brought into the story by anybody.</p>
 
 <p class="ops"><b>AND ${gone.length} ROWS HAVE NO FILE, WHICH IS A DIFFERENT THING
 FROM AN ERROR.</b> The asset table keeps a row after its file goes so that a
@@ -445,7 +536,18 @@ Nine ledger rows carry an asset uid, so nine files are marked
 dependencies are properties of a revealable thing, not of a file</b> &mdash; so
 they are in the second table rather than faked into the first. A tracker that
 quietly implied a full join would be lying about its own coverage.</p>
+
+<p class="ops"><b>[B1] AND THIS PAGE NO LONGER COUNTS PICTURES AGAINST THE BOUNCY
+BALL LAW, BECAUSE THAT IS NOT WHAT THE LAW COUNTS.</b> You corrected it on
+${esc(FOCUS_ORIGIN.correctedOn)}: it caps <b>points of focus</b>, not assets, and it
+does not mean the museum may not show more pictures. Ten manual pages arriving is
+ONE point of focus. So every row below carries a <b>bucket</b> &mdash;
+<b>precious</b> or <b>dump</b> &mdash; and it is <b>yours</b>, unset, sitting beside
+<code>verdict</code> in the asset table. Ops will not guess it.</p>
 </div>
+
+<h2>The two runways</h2>
+${runwayBlock(runwayOfWaiting, "the " + waiting.length + " pictures an entry can reach for today")}
 
 <h2>Every addressable file &middot; ${addressed.length} rows</h2>
 <div class="bar">
@@ -456,6 +558,9 @@ quietly implied a full join would be lying about its own coverage.</p>
   <button data-f1="done">delivered</button>
   <button data-f1="weak">weak / wrong</button>
   <button data-f1="gone">no file</button>
+  <button data-f1="precious">precious</button>
+  <button data-f1="dump">dump</button>
+  <button data-f1="nobucket">no bucket yet</button>
   <span class="count" id="c1"></span>
 </div>
 <div class="tw"><table id="t1"><thead><tr><th>file</th><th>what it shows</th><th>judgement</th><th>reach today</th><th>used by</th></tr></thead>
@@ -513,7 +618,10 @@ nothing back. <code>verdict</code> is Mike's field and Ops never sets it.</foote
   wait:function(r){return r.getAttribute('data-r').indexOf('YES')===0;},
   done:function(r){return r.getAttribute('data-r').indexOf('ALREADY')===0;},
   weak:function(r){var q=r.getAttribute('data-q');return q==='weak'||q==='wrong'||q==='placeholder'||q==='unjudged';},
-  gone:function(r){return r.getAttribute('data-m')==='1';}
+  gone:function(r){return r.getAttribute('data-m')==='1';},
+  precious:function(r){return r.getAttribute('data-b')==='precious';},
+  dump:function(r){return r.getAttribute('data-b')==='dump';},
+  nobucket:function(r){return r.getAttribute('data-b')==='unassigned';}
  });
  wire('t2','q2','c2','f2',{
   all:function(){return true;},
@@ -524,7 +632,8 @@ nothing back. <code>verdict</code> is Mike's field and Ops never sets it.</foote
  });
 })();
 </script>`;
-  return { html: page({ title: `THE ARTIFACT TRACKER — ${STAMP}`, css: OPS_CSS, body }), waiting: waiting.length, addressed: addressed.length };
+  return { html: page({ title: `THE ARTIFACT TRACKER — ${STAMP}`, css: OPS_CSS, body }),
+    waiting: waiting.length, addressed: addressed.length, runways: runwayOfWaiting };
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -660,6 +769,10 @@ Nothing here is written back.</footer>
    K5 — THE WEEK-ONE OUTLINE
    ═══════════════════════════════════════════════════════════════════════════ */
 function buildWeek1(artifactCounts, eggCounts) {
+  /* [B2 2026-08-07] a check can now be OPEN, RULED or an agreement */
+  const nOpen = COLLISIONS.filter(c => c.open).length;
+  const nRuled = COLLISIONS.filter(c => !c.open && c.ruled).length;
+
   /* what has ARRIVED by week one, off the transfer rule and nothing else */
   const arrived = LEDGER.rows.filter(r => r.transfer === "BLAST" || r.transfer === "UNLOCK");
   const notYet = LEDGER.rows.filter(r => r.transfer === "PACKAGE" || r.transfer === "TRANSMISSION");
@@ -726,11 +839,18 @@ as a rule &mdash; the Friday formula, the standing Record rules, the bouncy ball
 law. The rule is yours; the sentence is still Ops&rsquo;, so it renders blue like
 everything else. Nothing on this page is unlabelled.</p>
 
-<p><b>AND THE OUTLINE COLLIDES WITH THE TREE IN ONE PLACE.</b> Five checks were run
-against what the repository actually holds &mdash; the transfer classes, the ledger,
-the one Record entry that exists. Four agree. <a href="#collisions">One does not</a>,
-and it is named and left unresolved at the foot of this page, because resolving it
-is authoring and authoring is yours.</p>
+<p><b>THE OUTLINE WAS RUN AGAINST THE TREE AND YOU HAVE SINCE RULED ON TWO OF THE
+CHECKS.</b> ${COLLISIONS.length} checks against what the repository actually holds
+&mdash; the transfer classes, the ledger, the one Record entry that exists.
+<b>${nOpen} unresolved</b>, <b>${nRuled} ruled by you on ${esc(W1_RULED_ON)}</b>
+(<a href="#collisions">the prototype, and the bouncy ball law</a>), the rest
+agreements. A ruled check is kept on this page rather than deleted, because the
+collision was real and it is why the ruling was needed.</p>
+
+<p><b>AND ONE OF THOSE RULINGS CHANGES DAY 1 BELOW.</b> Record 013 is a
+<b>prototype</b> &mdash; not day one, no re-dating, no defending &mdash; and the real
+Record starts at <b>001</b> when you dictate it. So day 1's entry is 001 and does not
+exist yet; the entry sitting in the tree is not in that sequence.</p>
 </div>
 
 <h2>What week one is, as a fact about arrivals</h2>
@@ -817,17 +937,9 @@ distribution nobody has authored.</p></div>
 <p style="margin:0 0 6px">Every one is a real file the museum owns, already
 judged in the asset table, with no code between it and a wall. <b>One picture
 has ever been delivered</b> &mdash; the power switch round the back, by Record
-013. <a href="artifacts.html">The full table, filterable &rarr;</a></p>
-<p style="margin:0 0 6px" class="k"><b>Against the bouncy ball law</b>
-(<span class="rail m">his rule</span> never more than two or three offerings in a
-day): ${artifactCounts.waiting} pictures at three a day is
-${Math.ceil(artifactCounts.waiting / 3)} days of material, at two a day
-${Math.ceil(artifactCounts.waiting / 2)} days &mdash; so between
-${Math.ceil(artifactCounts.waiting / 3)} and ${Math.ceil(artifactCounts.waiting / 2)}
-days, or ${(artifactCounts.waiting / 15).toFixed(1)}&ndash;${(artifactCounts.waiting / 10).toFixed(1)}
-five-day weeks, <i>if every offering were a photograph</i> &mdash; and they are not,
-so read it as a ceiling on the picture supply and nothing more. It is the only rule
-in the outline a tracker can actually measure.</p>
+013, which is the prototype. <a href="artifacts.html">The full table, filterable
+&rarr;</a></p>
+${runwayBlock(artifactCounts.runways, "these " + artifactCounts.waiting + " pictures")}
 
 <h3>Eggs &mdash; ${eggsArrived.length} are planted, arrived, and could be spent</h3>
 <p style="margin:0 0 6px">Spending an egg is a Record entry that explains it, and
@@ -851,24 +963,29 @@ pieces arrive on four Fridays in weeks 3&ndash;7, and they earn their photograph
 showable, because nobody has said it got here.</li>
 </ul>
 
-<h2 id="collisions">Where the outline meets the tree &mdash; ${COLLISIONS.length} checks, named and not resolved</h2>
+<h2 id="collisions">Where the outline meets the tree &mdash; ${COLLISIONS.length} checks</h2>
 <div class="note" style="margin-bottom:14px"><p>Each of these is a claim the
-outline makes, run against what the repository actually holds. <b>${COLLISIONS.filter(c => c.open).length}
-of the ${COLLISIONS.length} does not agree with the tree</b> and is drawn in red.
-It is named and left open on purpose: choosing between the readings is authoring,
-and authoring is yours. The other ${COLLISIONS.filter(c => !c.open).length} are
-agreements, and two of them are worth knowing about because nobody arranged
-them.</p></div>
+outline makes, run against what the repository actually holds. <b>${nOpen}
+of the ${COLLISIONS.length} is still unresolved</b>${nOpen ? " and is drawn in red" : ""}.
+<b>${nRuled} you ruled on today</b> &mdash; those carry your ruling in gold, because
+the ruling is yours and it is quoted from what you said. The rest are agreements,
+and two of them are worth knowing about because nobody arranged them.</p>
+${nRuled ? `<p class="ask"><b>A RULED CHECK IS NOT DELETED FROM THIS PAGE.</b> The
+collision was real, it is why the ruling was needed, and a page that quietly drops
+what it used to say cannot be checked against itself a week later.</p>` : ""}</div>
 ${COLLISIONS.map(c => `<div class="day"><div class="hd">
-  <span class="n">${esc(c.id)} &middot; ${c.open ? "unresolved" : "agrees"}</span>
-  <span class="slot" style="color:${c.open ? "var(--red)" : "var(--grn)"};font-size:15px;font-style:normal">${esc(c.title)}</span>
+  <span class="n">${esc(c.id)} &middot; ${c.open ? "unresolved" : c.ruled ? "RULED" : "agrees"}</span>
+  <span class="slot" style="color:${c.open ? "var(--red)" : c.ruled ? "var(--gold)" : "var(--grn)"};font-size:15px;font-style:normal">${esc(c.title)}</span>
 </div><div class="bd">
   <div class="scaf"><span class="lbl">the check <span class="rail">blue rail</span></span>
     <p style="margin:0 0 6px">${esc(c.check)}</p>
     <p class="k" style="margin:0;font-size:12px">Settled by <code>${esc(c.derivedFrom)}</code></p></div>
+${c.ruled ? `  <div class="mine"><span class="lbl">yours &middot; the ruling, ${esc(W1_RULED_ON)}</span>
+    <p style="margin:0 0 6px">${esc(c.ruled)}</p>
+    ${c.also ? `<p class="k" style="margin:0;font-size:12.5px">${esc(c.also)}</p>` : ""}</div>` : ""}
 ${c.open ? `  <div class="mine"><span class="lbl">yours &middot; the decision</span>
     <p style="margin:0 0 6px">${esc(c.open)}</p>
-    ${c.also ? `<p class="k" style="margin:0;font-size:12.5px">${esc(c.also)}</p>` : ""}</div>` : ""}
+    ${c.also && !c.ruled ? `<p class="k" style="margin:0;font-size:12.5px">${esc(c.also)}</p>` : ""}</div>` : ""}
 </div></div>`).join("\n")}
 
 <footer>Days are a frame, not a schedule &mdash; and the standing rules say the day
@@ -930,7 +1047,9 @@ guess which you are reading.</p>
   this today?</b></p>
   <p class="meta"><b>${a.waiting} pictures of the machines are behind the stage door
   right now</b>, each one entry away from a wall. Exactly one file has ever been
-  delivered.</p>
+  delivered. <b>The two runways are on it</b> &mdash; precious reveals remaining and
+  what is in the dump &mdash; and all ${a.runways.unassigned.n} are unassigned, so
+  the precious runway is a bound and not a number.</p>
 </div>
 
 <div class="card">
@@ -954,13 +1073,42 @@ guess which you are reading.</p>
   <p class="meta"><b>ALL OF IT IS ON THE BLUE RAIL AND NONE OF IT IS QUOTED.</b> You
   spoke the week's shape on ${esc(W1_ORIGIN.spokenOn)}; Ops structured it and wrote
   every sentence. <b>Every gold slot is still empty</b> &mdash; that is where your own
-  words go. ${COLLISIONS.length} checks were run against the tree and
-  <b>${COLLISIONS.filter(c => c.open).length} does not agree</b>: the one entry the
-  Record holds is not about the transmissions.</p>
+  words go. ${COLLISIONS.length} checks were run against the tree;
+  <b>${COLLISIONS.filter(c => c.open).length} are unresolved</b> and
+  <b>${COLLISIONS.filter(c => !c.open && c.ruled).length} you ruled on
+  ${esc(W1_RULED_ON)}</b> &mdash; the prototype and the bouncy ball law.</p>
 </div>
 </div>
 
-<h2>What changed in the tree today, beside these four</h2>
+<h2>Your two rulings of ${esc(W1_RULED_ON)}, and what they moved</h2>
+<div class="note">
+<p><b>THE BOUNCY BALL LAW CAPS POINTS OF FOCUS, NOT ASSETS.</b> Humans remember
+one or two things; ten things reduces the odds they keep the one that matters
+&mdash; and it does <i>not</i> mean the museum may not show more pictures.
+<b>Two buckets:</b> the <b>precious</b> one is two or three genuine reveals a
+<i>week</i> and those are what a reader remembers; the <b>dump</b> is everything
+else, fun to look at, part of the story, part of the pile, and it has <b>no
+ceiling</b>. Ten manual pages arriving is ONE point of focus. <b>The trackers were
+counting the wrong thing and are fixed:</b> &ldquo;${esc(VOIDED.figure)}&rdquo; is
+void, and what replaces it is two separate runways with a <b>bucket</b> field on
+every asset &mdash; yours, unset, and Ops will not guess it.</p>
+
+<p><b>RECORD 013 WAS A PROTOTYPE AND IS CLEARED OUT OF THE WAY.</b> It was chosen
+because it was interesting enough to find the structure, and it did; it is not day
+one and it needs no re-dating and no defending. <b>The real Record starts at
+001</b>, when you dictate it. It is <b>kept rather than retired</b>, on your own
+criterion &mdash; whichever keeps the Record honest <i>and</i> the machinery
+exercised. It is the only thing in the museum exercising the entry renderer, the
+index budgets, the per-entry ledger derivation and the one delivered picture, and
+retiring it would have parked all four until 001 lands. <b>It is marked as the
+prototype in these pages and in the ledger and NOWHERE ON THE GLASS</b>, because a
+line whose subject is the making of the museum does not ship. <b>The one thing left
+is its number</b> &mdash; under your own ruling the volume counts from 001, which
+makes 013 a number in a sequence that has not started. It is untouched and it is one
+word from you.</p>
+</div>
+
+<h2>What changed in the tree yesterday, beside these four</h2>
 <div class="note">
 <p><b>THE ELEVEN HELD PHOTOGRAPHS ARE DELETED</b>, on your ruling. Ten operator
 plates and the manual's title page are off disk, out of the asset table and out

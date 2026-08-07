@@ -342,15 +342,14 @@
    "state": "REVEALED",
    "when": null,
    "deps": [
-    "M18 — twenty-seven open questions on entry 013",
-    "M19 — what a record number means"
+    "M18 — twenty-seven open questions on entry 013"
    ],
    "arc": null,
    "shown": false,
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "[R1] MOVED HERE FROM THE MGK-VIIIp ALBUM on Mike's ruling that it applies to all things robots, not just the VIIIp — and this row was `face.viiip.record` until then. It is the ONE id this table has ever renamed; nothing outside reveal/ reads it, and leaving it on a wing it no longer sits in would have been the ledger keeping a filing decision the museum reversed. Reachable at its own address, /robots/record, because the lobby directory now carries a line for it indented under Weird.Baby Robots. Holds exactly ONE entry; the container's pagination (C1), doors (C7) and epoch (C8) are built and unexercised.",
+   "note": "[B2 2026-08-07] M19 IS ANSWERED AND OFF THIS ROW'S DEPS. Mike ruled that THE REAL RECORD STARTS AT 001 when he dictates it, which settles what a record number means: the numbers are THIS VOLUME'S OWN and they begin at 001, not the 436-record numbering that was deleted at v47. The volume therefore holds ZERO entries of its own sequence today — the one entry on the glass is the PROTOTYPE (record.013 below) and is not in it. THE FACE STAYS PARTIAL AND REVEALED for exactly that reason: it renders, it is reachable, and the sequence it is a container for has not started. [R1] MOVED HERE FROM THE MGK-VIIIp ALBUM on Mike's ruling that it applies to all things robots, not just the VIIIp — and this row was `face.viiip.record` until then. It is the ONE id this table has ever renamed; nothing outside reveal/ reads it, and leaving it on a wing it no longer sits in would have been the ledger keeping a filing decision the museum reversed. Reachable at its own address, /robots/record, because the lobby directory now carries a line for it indented under Weird.Baby Robots. Holds exactly ONE entry; the container's pagination (C1), doors (C7) and epoch (C8) are built and unexercised.",
    "transfer": "BLAST",
    "transferWeek": 0
   },
@@ -1701,15 +1700,13 @@
    "reach": "a track on /robots",
    "state": "REVEALED",
    "when": null,
-   "deps": [
-    "M19 — what a record number means"
-   ],
+   "deps": [],
    "arc": null,
    "shown": false,
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The volume, not its entries — one `record.NNN` row per entry, derived from the data. PARTIAL because it holds one entry; the 436-record count that used to sit here was invented and is gone.",
+   "note": "[B2 2026-08-07] M19 CLOSES ON THIS ROW, WHICH IS WHERE IT WAS ALWAYS FILED. Mike: THE REAL RECORD STARTS AT 001 when he dictates it — so a record number is a number in THIS VOLUME'S OWN sequence, beginning at 001, and it is not the 436-record numbering v47 deleted for having been invented. The volume's sequence has not started: the single entry on the glass is a PROTOTYPE that took a number out of a numbering it does not belong to, and clearing it out of the way is B2. STILL PARTIAL, and now for a sharper reason than 'it holds one entry' — it holds one entry that is not in its own sequence. The volume, not its entries: one `record.NNN` row per entry, derived from the data.",
    "transfer": "BLAST",
    "transferWeek": 0
   },
@@ -1732,7 +1729,7 @@
    ],
    "prod": null,
    "calledBy": [],
-   "note": "The volume's only entry. Stripped at v47 to the four facts Mike supplied; every gap that exposed is a question in M18 rather than a sentence in the data.",
+   "note": "THE PROTOTYPE. Mike, 2026-08-07: chosen because it was interesting enough to find the Record's structure, and it did — it is NOT day one, needs no re-dating and no defending, and the real Record starts at 001 when he dictates it. It is therefore NOT in the volume's sequence, and every Ops instrument that reasons about the story says so; nothing on the glass does, because that line's subject would be the making of the museum (Doctrine 11). Kept rather than retired on his own criterion — it is the only thing exercising RecordEntry.jsx, the index budgets, the per-entry derivation and the pull-back rule's single delivered picture. Stripped at v47 to the four facts he supplied; every gap that exposed is a question in M18 rather than a sentence in the data. Its NUMBER is the one open piece — B-b.",
    "transfer": "BLAST",
    "transferWeek": 0
   },

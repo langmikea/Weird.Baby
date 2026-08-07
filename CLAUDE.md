@@ -490,9 +490,80 @@ exactly; the window's size was never the museum's viewport. **`npm run lap:clean
 before you seal** — the harness has to live in `public/` to be same-origin, and
 anything in `public/` is one `npm run deploy` from being published.
 
+## TWO STANDING RULES ADDED 2026-08-07 (THE TWO BUCKETS + 013)
+
+**THE BOUNCY BALL LAW CAPS POINTS OF FOCUS, NOT ASSETS** — *"humans remember one
+or two things; ten things reduces the odds they keep the one that matters."*
+`OPERATIONS.md` §7 **Doctrine 20**, mirrored in `STATE.md`. **IT DOES NOT MEAN WE
+MAY NOT SHOW MORE PICTURES.** Two buckets: **PRECIOUS** — genuine reveals, two or
+three **a week**, the ceiling is on these — and **DUMP** — everything else, **no
+ceiling**, because ten manual pages arriving is ONE point of focus. The law and
+both runways are **`reveal/focus.mjs`**; the judged field is **`bucket`** on
+`provenance/asset-table.json`, **Mike's, null on all 315 rows, and Ops does not
+derive it**. **PRECIOUS divides into weeks; DUMP divides into nothing** — the old
+tracker divided PHOTOGRAPHS by a ceiling on ATTENTION and printed *"16 pictures =
+6–8 days"*, which is **VOID** and kept with its cause in `focus.mjs` `VOIDED`.
+**Before writing any instrument that counts what the museum can show, read
+Doctrine 20.**
+
+**RECORD 013 IS A PROTOTYPE AND THE REAL RECORD STARTS AT 001** — Mike, 2026-08-07.
+Not day one, no re-dating, no defending. **M19 closes with it** (a record number
+is this volume's own, from 001). It is **kept rather than retired** because it is
+the only thing exercising `RecordEntry.jsx`, the index budgets, the per-entry
+ledger derivation and the pull-back rule's one delivered picture. **The prototype
+mark is in `reveal/ledger-declare.mjs` and the dictation pages and NOWHERE ON THE
+GLASS** — Doctrine 11. **Its number is untouched and open: `B-b`.**
+
 ## Recent session log
 
 Maintained here. Newest first.
+
+### 2026-08-07 -> THE TWO BUCKETS + 013 (B1-B3) - sealed
+- **THE BOUNCY BALL LAW CAPS POINTS OF FOCUS, NOT ASSETS, AND THE OLD SENTENCE WAS
+  NOT FALSE - WHICH IS WHY NOTHING CAUGHT IT.** It was carried as *"never more than
+  two or three offerings in a day"*, and Ops supplied the wrong UNIT twice: in the
+  rule's own bearing line, and in the tracker, which divided a count of PHOTOGRAPHS
+  by a ceiling on ATTENTION and printed **"16 pictures = 6-8 days of material"**.
+  Every input was a real measurement and the arithmetic was sound. **VOID.** The law,
+  the two buckets and the two runways are **`reveal/focus.mjs`** (Doctrine 20);
+  `VOIDED` keeps the dead figure with its cause, because a superseded number that is
+  merely deleted comes back the next time somebody does the obvious arithmetic. Gates:
+  lint **11/9 = baseline** - build green - provenance **PASS** - `reveal:check`
+  **PASS** - `parity:gate` **PASS** - `instory:gate` **PASS** - `assets:orphans`
+  **0** - **the lap DID NOT RUN**, said plainly below. Log:
+  `docs/MUSEUM_TWO_BUCKETS_LOG-20260807.md`.
+- **THE ASYMMETRY IS THE MECHANISM AND THE THIRD NUMBER IS THE HONEST ONE.** PRECIOUS
+  has a ceiling (two or three A WEEK - the period moved with the unit), so it divides
+  into weeks; **DUMP has none, so it divides into nothing** and `runways()` is
+  structurally unable to print one for it - a symmetrical table would re-commit the
+  original error in the other bucket. **`bucket` is the sixth JUDGED field on the
+  asset table** beside `verdict`, carried across a scan, **null on all 315 rows**, and
+  **Ops does not derive it**: a heuristic calling every machine photograph precious
+  would make every tracker read as answered while nothing had been answered. So the
+  16 pictures behind the door are **between nothing at all and 6-8 WEEKS** - the
+  number survived, the unit moved - and the whole gap is **B-a**.
+- **RECORD 013 IS THE PROTOTYPE AND IS KEPT, ON MIKE'S OWN CRITERION.** He offered
+  retire-or-mark and one test - *honest AND the machinery exercised* - and retiring
+  empties the volume: `RecordEntry.jsx` never mounts, the index budgets police no
+  string, the per-entry derivation loops over nothing, and `delivered()` goes empty,
+  **leaving the pull-back rule with no positive case anywhere in the museum**. **The
+  mark is in the ledger and the dictation pages and NOWHERE ON THE GLASS** - that
+  line's subject is the making of the museum (Doctrine 11), and the entry's own text
+  asserts nothing false. **Nothing in `src/` changed this round at all.**
+- **W-1 CLOSES WITH A FOURTH ANSWER THAT WAS NOT ON THE LIST** - all three readings
+  assumed the entry in the tree and day one's entry were the same entry; Mike
+  dissolved the premise, so day 1's entry is **001 and does not exist yet**. **M19
+  closes**: a record number is THIS VOLUME'S own, from 001. **And closing M19 exposed
+  that C8's stated blocker was the wrong one** - `recordEpoch` is a DATE, not a
+  number, so C8 waits on Record 001's date and always did. **013's NUMBER is
+  deliberately untouched (B-b)** - he said it needs no re-dating, and `no` is the
+  field the whole ledger is keyed on.
+- **THE LAP DID NOT RUN: the Chrome extension is not connected in this session.** No
+  `src/` file changed, so the glass is byte-identical to yesterday's 389px/1233px
+  measurement, and a static structural check cleared all five pages (every table
+  inside a `.tw` scroller, no new hard widths, no images). **That is mitigation, not
+  a measurement, and it is not being called one.** Surfacing unmoved at **20
+  spendable - the third packet running** with nothing off the back shelf.
 
 ### 2026-08-07 -> THE WEEK ONE OUTLINE (W1) - sealed
 - **K5 REFUSED TO INVENT THE OUTLINE AND WAS RIGHT; THIS ROUND SUPPLIED IT FROM

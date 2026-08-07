@@ -91,8 +91,12 @@ pictures are sitting behind the stage door right now</b>, and naming a file in a
 entry's assets is the entire mechanism that puts it on a wall.</p>
 
 <p><b>ONE FILE HAS EVER BEEN DELIVERED.</b> <code>rear_power_switch.png</code>, by
-Record 013. Everything else the museum owns of these machines has never been
-brought into the story by anybody.</p>
+Record 013 &mdash; <b>the prototype entry</b>, which you ruled on
+2026-08-07 is not day one and is not in the volume's sequence.
+It is kept precisely because it is the only thing exercising this machinery: strike
+it and the delivered set is empty, the pull-back rule has no positive case anywhere
+in the museum, and this column has nothing to be right about. Everything else the
+museum owns of these machines has never been brought into the story by anybody.</p>
 
 <p class="ops"><b>AND 3 ROWS HAVE NO FILE, WHICH IS A DIFFERENT THING
 FROM AN ERROR.</b> The asset table keeps a row after its file goes so that a
@@ -112,6 +116,49 @@ Nine ledger rows carry an asset uid, so nine files are marked
 dependencies are properties of a revealable thing, not of a file</b> &mdash; so
 they are in the second table rather than faked into the first. A tracker that
 quietly implied a full join would be lying about its own coverage.</p>
+
+<p class="ops"><b>[B1] AND THIS PAGE NO LONGER COUNTS PICTURES AGAINST THE BOUNCY
+BALL LAW, BECAUSE THAT IS NOT WHAT THE LAW COUNTS.</b> You corrected it on
+2026-08-07: it caps <b>points of focus</b>, not assets, and it
+does not mean the museum may not show more pictures. Ten manual pages arriving is
+ONE point of focus. So every row below carries a <b>bucket</b> &mdash;
+<b>precious</b> or <b>dump</b> &mdash; and it is <b>yours</b>, unset, sitting beside
+<code>verdict</code> in the asset table. Ops will not guess it.</p>
+</div>
+
+<h2>The two runways</h2>
+<div class="note" style="margin-bottom:14px">
+<p class="k" style="margin:0 0 8px;font-size:11px;letter-spacing:.13em;text-transform:uppercase">
+Against the bouncy ball law <span class="rail m">his rule &middot; Ops wording</span></p>
+<p style="margin:0 0 10px"><b>Never more than two or three points of focus. The law caps what a reader is asked to hold, not what the museum is allowed to show.</b> Humans remember one or two things. Ten things reduces the odds they keep the one that matters.
+<i>It does not mean we may not show more pictures. Ten manual pages arriving is ONE point of focus — we got more of the manual — not ten.</i></p>
+<div class="tw"><table>
+<thead><tr><th style="width:26%">bucket</th><th>ceiling</th><th style="width:16%">assigned</th><th style="width:26%">runway</th></tr></thead>
+<tbody>
+<tr><td><b>THE PRECIOUS BUCKET</b><div class="k" style="font-size:11.5px;margin-top:3px">Genuine reveals. These are what a reader remembers.</div></td>
+    <td>Two or three a week.</td>
+    <td><span class="tag ">0</span></td>
+    <td><i class="k">nothing assigned &mdash; no runway to compute</i></td></tr>
+<tr><td><b>THE DUMP BUCKET</b><div class="k" style="font-size:11.5px;margin-top:3px">Everything else. Fun to look at, part of the story, part of the pile.</div></td>
+    <td>No ceiling. A batch of any size is one point of focus.</td>
+    <td><span class="tag ">0</span></td>
+    <td><i class="k">no ceiling, so no runway. A pile size, and a batch of any size is one point of focus.</i></td></tr>
+<tr><td><b>UNASSIGNED</b><div class="k" style="font-size:11.5px;margin-top:3px">Nobody has said which bucket these are in.</div></td>
+    <td><i class="k">&mdash;</i></td>
+    <td><span class="tag n">16</span></td>
+    <td><i class="k">the honest state today</i></td></tr>
+</tbody></table></div>
+<p class="ask" style="margin:10px 0 0"><b>SO THE RUNWAY IS A BOUND AND NOT A
+NUMBER, AND THAT IS THE ONE HONEST THING THIS TABLE CAN SAY.</b> Of the 16 pictures an entry can reach for today,
+<b>0</b> are assigned precious and <b>16</b> could be
+&mdash; so the precious runway runs from <b>nothing at all</b>
+to <b>6&ndash;8 weeks</b>, and the whole of that gap is a judgement
+nobody has made. <b>The bucket is yours</b> &mdash; it sits beside <code>verdict</code>
+in the asset table, unset, and Ops will not derive it: a rule that called every
+machine photograph precious would make this table look answered while nothing had
+been answered.</p>
+<p class="k" style="margin:8px 0 0;font-size:12px"><b>THE FIGURE THIS REPLACES IS
+VOID:</b> &ldquo;16 pictures = 6–8 days of material (1.1–1.6 five-day weeks)&rdquo;. It counted ASSETS against a ceiling on POINTS OF FOCUS, and it used the day rather than the week. Sixteen photographs released in four batches are four points of focus, not sixteen — and if the batches are dump they may not be points of focus at all. The arithmetic was sound and the unit was wrong, which is why nothing caught it: every input was a real measurement.</p>
 </div>
 
 <h2>Every addressable file &middot; 47 rows</h2>
@@ -123,616 +170,666 @@ quietly implied a full join would be lying about its own coverage.</p>
   <button data-f1="done">delivered</button>
   <button data-f1="weak">weak / wrong</button>
   <button data-f1="gone">no file</button>
+  <button data-f1="precious">precious</button>
+  <button data-f1="dump">dump</button>
+  <button data-f1="nobucket">no bucket yet</button>
   <span class="count" id="c1"></span>
 </div>
 <div class="tw"><table id="t1"><thead><tr><th>file</th><th>what it shows</th><th>judgement</th><th>reach today</th><th>used by</th></tr></thead>
-<tbody><tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
-   data-t="public/audio/wb/01_weird_baby_blues_2026-06-17.mp3 track from the best of weird.baby vol. 1 — &quot;weird baby blues&quot;. the house's own recording.  outside the rule src/data/artists/weird-baby.js">
+<tbody><tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0" data-b="unassigned"
+   data-t="public/audio/wb/01_weird_baby_blues_2026-06-17.mp3 track from the best of weird.baby vol. 1 — &quot;weird baby blues&quot;. the house's own recording.  outside the rule unassigned src/data/artists/weird-baby.js">
   <td><code>/audio/wb/01_weird_baby_blues_2026-06-17.mp3</code>
       
       <div class="k" style="font-size:11px;margin-top:3px"> · 2212 KB · <code>A-3352cc58f1</code></div></td>
   <td>Track from The Best of Weird.Baby Vol. 1 — &quot;weird baby blues&quot;. The house's own recording.</td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/weird-baby.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
-   data-t="public/audio/wb/02_pull_me_in_closer_blues_2026-06-16.mp3 track from the best of weird.baby vol. 1 — &quot;pull me in closer blues&quot;. the house's own recording.  outside the rule src/data/artists/weird-baby.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0" data-b="unassigned"
+   data-t="public/audio/wb/02_pull_me_in_closer_blues_2026-06-16.mp3 track from the best of weird.baby vol. 1 — &quot;pull me in closer blues&quot;. the house's own recording.  outside the rule unassigned src/data/artists/weird-baby.js">
   <td><code>/audio/wb/02_pull_me_in_closer_blues_2026-06-16.mp3</code>
       
       <div class="k" style="font-size:11px;margin-top:3px"> · 3979 KB · <code>A-969ea99a7c</code></div></td>
   <td>Track from The Best of Weird.Baby Vol. 1 — &quot;pull me in closer blues&quot;. The house's own recording.</td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/weird-baby.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
-   data-t="public/audio/wb/03_breakup_breakdown_blues_2026-06-16.mp3 track from the best of weird.baby vol. 1 — &quot;breakup breakdown blues&quot;. the house's own recording.  outside the rule src/data/artists/weird-baby.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0" data-b="unassigned"
+   data-t="public/audio/wb/03_breakup_breakdown_blues_2026-06-16.mp3 track from the best of weird.baby vol. 1 — &quot;breakup breakdown blues&quot;. the house's own recording.  outside the rule unassigned src/data/artists/weird-baby.js">
   <td><code>/audio/wb/03_breakup_breakdown_blues_2026-06-16.mp3</code>
       
       <div class="k" style="font-size:11px;margin-top:3px"> · 4259 KB · <code>A-866d1ea212</code></div></td>
   <td>Track from The Best of Weird.Baby Vol. 1 — &quot;breakup breakdown blues&quot;. The house's own recording.</td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/weird-baby.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
-   data-t="public/audio/wb/04_how_i_saved_the_world_blues_2026-06-17.mp3 track from the best of weird.baby vol. 1 — &quot;how i saved the world blues&quot;. the house's own recording.  outside the rule src/data/artists/weird-baby.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0" data-b="unassigned"
+   data-t="public/audio/wb/04_how_i_saved_the_world_blues_2026-06-17.mp3 track from the best of weird.baby vol. 1 — &quot;how i saved the world blues&quot;. the house's own recording.  outside the rule unassigned src/data/artists/weird-baby.js">
   <td><code>/audio/wb/04_how_i_saved_the_world_blues_2026-06-17.mp3</code>
       
       <div class="k" style="font-size:11px;margin-top:3px"> · 2549 KB · <code>A-74e7c776c5</code></div></td>
   <td>Track from The Best of Weird.Baby Vol. 1 — &quot;how i saved the world blues&quot;. The house's own recording.</td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/weird-baby.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
-   data-t="public/audio/wb/05_ed_yahdah_2026-06-16.mp3 track from the best of weird.baby vol. 1 — &quot;ed yahdah&quot;. the house's own recording.  outside the rule src/data/artists/weird-baby.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0" data-b="unassigned"
+   data-t="public/audio/wb/05_ed_yahdah_2026-06-16.mp3 track from the best of weird.baby vol. 1 — &quot;ed yahdah&quot;. the house's own recording.  outside the rule unassigned src/data/artists/weird-baby.js">
   <td><code>/audio/wb/05_ed_yahdah_2026-06-16.mp3</code>
       
       <div class="k" style="font-size:11px;margin-top:3px"> · 5839 KB · <code>A-dc766cb8ff</code></div></td>
   <td>Track from The Best of Weird.Baby Vol. 1 — &quot;ed yahdah&quot;. The house's own recording.</td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/weird-baby.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
-   data-t="public/audio/wb/06_coconuts_2026-06-17.mp3 track from the best of weird.baby vol. 1 — &quot;coconuts&quot;. the house's own recording.  outside the rule src/data/artists/weird-baby.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0" data-b="unassigned"
+   data-t="public/audio/wb/06_coconuts_2026-06-17.mp3 track from the best of weird.baby vol. 1 — &quot;coconuts&quot;. the house's own recording.  outside the rule unassigned src/data/artists/weird-baby.js">
   <td><code>/audio/wb/06_coconuts_2026-06-17.mp3</code>
       
       <div class="k" style="font-size:11px;margin-top:3px"> · 2860 KB · <code>A-4468e7b10c</code></div></td>
   <td>Track from The Best of Weird.Baby Vol. 1 — &quot;coconuts&quot;. The house's own recording.</td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/weird-baby.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
-   data-t="public/favicon-180.png the ios home-screen icon. usable outside the rule index.html">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/favicon-180.png the ios home-screen icon. usable outside the rule unassigned index.html">
   <td><code>/favicon-180.png</code>
       
       <div class="k" style="font-size:11px;margin-top:3px">180×180 · 32 KB · <code>A-f6b080d4fe</code></div></td>
   <td>The iOS home-screen icon.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>index.html</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
-   data-t="public/favicon.ico the browser tab icon, multi-size ico. usable outside the rule index.html">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/favicon.ico the browser tab icon, multi-size ico. usable outside the rule unassigned index.html">
   <td><code>/favicon.ico</code>
       
       <div class="k" style="font-size:11px;margin-top:3px"> · 9 KB · <code>A-edefd2eacc</code></div></td>
   <td>The browser tab icon, multi-size ICO.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>index.html</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
-   data-t="public/favicon.svg the vector tab icon. usable outside the rule public/_routes.json">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/favicon.svg the vector tab icon. usable outside the rule unassigned public/_routes.json">
   <td><code>/favicon.svg</code>
       
       <div class="k" style="font-size:11px;margin-top:3px">48×46 · 9 KB · <code>A-514af33ae9</code></div></td>
   <td>The vector tab icon.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>public/_routes.json</code></td>
 </tr>
-<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
-   data-t="public/held/robots/art/mgk-niac-cover.png the mgk-niac album cover — the house robots template with the machine's own head, lens forward, set into the disc the wb mark used to occupy, and the model number where the word robots was. usable yes — one entry src/data/artists/robots.js">
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/held/robots/art/mgk-niac-cover.png the mgk-niac album cover — the house robots template with the machine's own head, lens forward, set into the disc the wb mark used to occupy, and the model number where the word robots was. usable yes — one entry unassigned src/data/artists/robots.js">
   <td><code>/robots/art/mgk-niac-cover.png</code> <span class="tag g">held</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 337 KB · <code>A-4f45f7a39e</code></div></td>
   <td>The MGK-NIAC album cover — the house ROBOTS template with the machine's own head, lens forward, set into the disc the WB mark used to occupy, and the model number where the word ROBOTS was.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag g">YES — ONE ENTRY</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
-   data-t="public/held/robots/art/mgk-viiip-cover.png the mgk-viiip album cover — the house robots template with the whole unit in the disc and the model number below it. usable yes — one entry src/data/artists/robots.js">
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/held/robots/art/mgk-viiip-cover.png the mgk-viiip album cover — the house robots template with the whole unit in the disc and the model number below it. usable yes — one entry unassigned src/data/artists/robots.js">
   <td><code>/robots/art/mgk-viiip-cover.png</code> <span class="tag g">held</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 363 KB · <code>A-ae718e7ac8</code></div></td>
   <td>The MGK-VIIIp album cover — the house ROBOTS template with the whole unit in the disc and the model number below it.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag g">YES — ONE ENTRY</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="unjudged" data-m="0"
-   data-t="public/held/robots/art/portal-cover.png   yes — one entry src/data/artists/portal.js">
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="unjudged" data-m="0" data-b="unassigned"
+   data-t="public/held/robots/art/portal-cover.png   yes — one entry unassigned src/data/artists/portal.js">
   <td><code>/robots/art/portal-cover.png</code> <span class="tag g">held</span>
        <span class="tag b">ledgered</span>
       <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 240 KB · <code>A-42f6b255e5</code></div></td>
   <td><i class="k">nobody has written what this is</i></td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag g">YES — ONE ENTRY</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/portal.js</code></td>
 </tr>
-<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
-   data-t="public/held/robots/art/viiip.png the mgk-viiip album cover — the unit, front, with the bios beat composited into its glass. also the ninth tile of the viiip morgue. usable yes — one entry src/data/artists/portal.js src/data/artists/robots.js">
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/held/robots/art/viiip.png the mgk-viiip album cover — the unit, front, with the bios beat composited into its glass. also the ninth tile of the viiip morgue. usable yes — one entry unassigned src/data/artists/portal.js src/data/artists/robots.js">
   <td><code>/robots/art/viiip.png</code> <span class="tag g">held</span>
        <span class="tag b">ledgered</span>
       <div class="k" style="font-size:11px;margin-top:3px">1536×1536 · 1367 KB · <code>A-d1ce909419</code></div></td>
   <td>The MGK-VIIIp album cover — the unit, front, with the BIOS beat composited into its glass. Also the ninth tile of the VIIIp morgue.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: online</div></td>
+      <div class="k" style="font-size:11px">arc: online</div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag g">YES — ONE ENTRY</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/portal.js</code><br><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="unjudged" data-m="0"
-   data-t="public/held/robots/reference/mgk-viii/cabinet_whole.jpg   yes — one entry src/data/artists/robots.js">
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="unjudged" data-m="0" data-b="unassigned"
+   data-t="public/held/robots/reference/mgk-viii/cabinet_whole.jpg   yes — one entry unassigned src/data/artists/robots.js">
   <td><code>/robots/reference/mgk-viii/cabinet_whole.jpg</code> <span class="tag g">held</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">858×1438 · 304 KB · <code>A-b9ac48464b</code></div></td>
   <td><i class="k">nobody has written what this is</i></td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag g">YES — ONE ENTRY</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
-   data-t="public/held/robots/reference/mgk-viii/column_lit.jpg a lit column behind a grille. usable yes — one entry src/data/artists/robots.js">
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/held/robots/reference/mgk-viii/column_lit.jpg a lit column behind a grille. usable yes — one entry unassigned src/data/artists/robots.js">
   <td><code>/robots/reference/mgk-viii/column_lit.jpg</code> <span class="tag g">held</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">1048×655 · 211 KB · <code>A-043cdbb68e</code></div></td>
   <td>A lit column behind a grille.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag g">YES — ONE ENTRY</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
-   data-t="public/held/robots/reference/mgk-viii/core_helical.jpg mgk-niac plate 1 of 4, and the album cover's badge — the helical core through the cage bars. usable yes — one entry src/data/artists/robots.js">
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/held/robots/reference/mgk-viii/core_helical.jpg mgk-niac plate 1 of 4, and the album cover's badge — the helical core through the cage bars. usable yes — one entry unassigned src/data/artists/robots.js">
   <td><code>/robots/reference/mgk-viii/core_helical.jpg</code> <span class="tag g">held</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">380×820 · 92 KB · <code>A-5eed4e1dbd</code></div></td>
   <td>MGK-NIAC plate 1 of 4, and the album cover's badge — the helical core through the cage bars.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag g">YES — ONE ENTRY</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
-   data-t="public/held/robots/reference/mgk-viii/core_meltdown.jpg mgk-niac plate 4 of 4, and the album's viewer poster — the interior flooded red-orange. usable yes — one entry src/data/artists/robots.js">
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/held/robots/reference/mgk-viii/core_meltdown.jpg mgk-niac plate 4 of 4, and the album's viewer poster — the interior flooded red-orange. usable yes — one entry unassigned src/data/artists/robots.js">
   <td><code>/robots/reference/mgk-viii/core_meltdown.jpg</code> <span class="tag g">held</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">560×740 · 135 KB · <code>A-4fe31c3315</code></div></td>
   <td>MGK-NIAC plate 4 of 4, and the album's viewer poster — the interior flooded red-orange.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag g">YES — ONE ENTRY</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
-   data-t="public/held/robots/reference/mgk-viii/output_row.jpg mgk-niac plate 3 of 4, and the still on technical specifications — the bar bank at the cabinet's base. usable yes — one entry src/data/artists/robots.js">
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/held/robots/reference/mgk-viii/output_row.jpg mgk-niac plate 3 of 4, and the still on technical specifications — the bar bank at the cabinet's base. usable yes — one entry unassigned src/data/artists/robots.js">
   <td><code>/robots/reference/mgk-viii/output_row.jpg</code> <span class="tag g">held</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">690×240 · 37 KB · <code>A-4b804e7aed</code></div></td>
   <td>MGK-NIAC plate 3 of 4, and the still on TECHNICAL SPECIFICATIONS — the bar bank at the cabinet's base.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag g">YES — ONE ENTRY</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
-   data-t="public/held/robots/reference/photos/front_full.png the front of the unit, whole, as received. usable yes — one entry src/data/artists/robots.js">
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/held/robots/reference/photos/front_full.png the front of the unit, whole, as received. usable yes — one entry unassigned src/data/artists/robots.js">
   <td><code>/robots/reference/photos/front_full.png</code> <span class="tag g">held</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">1536×2048 · 3192 KB · <code>A-4273395ff9</code></div></td>
   <td>The front of the unit, whole, as received.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: arrived</div></td>
+      <div class="k" style="font-size:11px">arc: arrived</div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag g">YES — ONE ENTRY</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="wrong" data-m="0"
-   data-t="public/held/robots/reference/photos/front_screen.png the unit's front glass, lit, captioned 'the front glass, lit'. wrong yes — one entry src/data/artists/robots.js">
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="wrong" data-m="0" data-b="unassigned"
+   data-t="public/held/robots/reference/photos/front_screen.png the unit's front glass, lit, captioned 'the front glass, lit'. wrong yes — one entry unassigned src/data/artists/robots.js">
   <td><code>/robots/reference/photos/front_screen.png</code> <span class="tag g">held</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">2048×1536 · 1442 KB · <code>A-8e8e1b8682</code></div></td>
   <td>The unit's front glass, lit, captioned 'The front glass, lit'.</td>
   <td><span class="tag n">wrong</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: online</div></td>
+      <div class="k" style="font-size:11px">arc: online</div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag g">YES — ONE ENTRY</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="wrong" data-m="0"
-   data-t="public/held/robots/reference/photos/mgk-twin_monitor_screen_bezel.png captioned on the wall as 'the bezel around the glass'. wrong yes — one entry src/data/artists/robots.js">
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="wrong" data-m="0" data-b="unassigned"
+   data-t="public/held/robots/reference/photos/mgk-twin_monitor_screen_bezel.png captioned on the wall as 'the bezel around the glass'. wrong yes — one entry unassigned src/data/artists/robots.js">
   <td><code>/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png</code> <span class="tag g">held</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">3000×2400 · 530 KB · <code>A-5c095a577b</code></div></td>
   <td>Captioned on the wall as 'The bezel around the glass'.</td>
   <td><span class="tag n">wrong</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag g">YES — ONE ENTRY</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
-   data-t="public/held/robots/reference/photos/mgk-twin_monitor_screens_family_shot.png the pair — unit front and top viewfinder — captioned 'as received'. also the robots welcome face's hook and the viiip album's viewer poster. usable yes — one entry src/data/artists/robots.js">
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/held/robots/reference/photos/mgk-twin_monitor_screens_family_shot.png the pair — unit front and top viewfinder — captioned 'as received'. also the robots welcome face's hook and the viiip album's viewer poster. usable yes — one entry unassigned src/data/artists/robots.js">
   <td><code>/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png</code> <span class="tag g">held</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">3000×2400 · 4804 KB · <code>A-1772e692a3</code></div></td>
   <td>The pair — unit front and top viewfinder — captioned 'as received'. Also the robots Welcome face's hook and the VIIIp album's viewer poster.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: arrived</div></td>
+      <div class="k" style="font-size:11px">arc: arrived</div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag g">YES — ONE ENTRY</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="wrong" data-m="0"
-   data-t="public/held/robots/reference/photos/monitor_base.png captioned on the wall as 'the base it stands on'. wrong yes — one entry src/data/artists/robots.js">
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="wrong" data-m="0" data-b="unassigned"
+   data-t="public/held/robots/reference/photos/monitor_base.png captioned on the wall as 'the base it stands on'. wrong yes — one entry unassigned src/data/artists/robots.js">
   <td><code>/robots/reference/photos/monitor_base.png</code> <span class="tag g">held</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">3000×2400 · 4752 KB · <code>A-c60b62b55e</code></div></td>
   <td>Captioned on the wall as 'The base it stands on'.</td>
   <td><span class="tag n">wrong</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag g">YES — ONE ENTRY</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0"
-   data-t="public/held/robots/reference/photos/top_monitor.png the top viewfinder, looking down into the glass. usable yes — one entry src/data/artists/robots.js">
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/held/robots/reference/photos/top_monitor.png the top viewfinder, looking down into the glass. usable yes — one entry unassigned src/data/artists/robots.js">
   <td><code>/robots/reference/photos/top_monitor.png</code> <span class="tag g">held</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">2048×1536 · 1993 KB · <code>A-a6c7d3b062</code></div></td>
   <td>The top viewfinder, looking down into the glass.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: arrived</div></td>
+      <div class="k" style="font-size:11px">arc: arrived</div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag g">YES — ONE ENTRY</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="wrong" data-m="0"
-   data-t="public/held/robots/reference/photos/unit_new_base.png captioned on the wall as 'the unit on its new base'. wrong yes — one entry src/data/artists/robots.js">
+<tr data-g="gov" data-r="YES — ONE ENTRY" data-q="wrong" data-m="0" data-b="unassigned"
+   data-t="public/held/robots/reference/photos/unit_new_base.png captioned on the wall as 'the unit on its new base'. wrong yes — one entry unassigned src/data/artists/robots.js">
   <td><code>/robots/reference/photos/unit_new_base.png</code> <span class="tag g">held</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">2867×2048 · 1807 KB · <code>A-26ed5e4d2d</code></div></td>
   <td>Captioned on the wall as 'The unit on its new base'.</td>
   <td><span class="tag n">wrong</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag g">YES — ONE ENTRY</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
-   data-t="public/icons.svg the ui icon sprite. usable outside the rule public/_routes.json">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/icons.svg the ui icon sprite. usable outside the rule unassigned public/_routes.json">
   <td><code>/icons.svg</code>
       
       <div class="k" style="font-size:11px;margin-top:3px">16×17 · 5 KB · <code>A-0fb0434977</code></div></td>
   <td>The UI icon sprite.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>public/_routes.json</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
-   data-t="public/images/foundation/contribute-cover.png   outside the rule src/data/artists/foundation.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0" data-b="unassigned"
+   data-t="public/images/foundation/contribute-cover.png   outside the rule unassigned src/data/artists/foundation.js">
   <td><code>/images/foundation/contribute-cover.png</code>
       
       <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 268 KB · <code>A-32250113b5</code></div></td>
   <td><i class="k">nobody has written what this is</i></td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/foundation.js</code></td>
 </tr>
-<tr data-g="out" data-r="NO FILE" data-q="unjudged" data-m="1"
-   data-t="public/images/foundation/faq-cover.png   no file src/data/artists/foundation.js">
+<tr data-g="out" data-r="NO FILE" data-q="unjudged" data-m="1" data-b="unassigned"
+   data-t="public/images/foundation/faq-cover.png   no file unassigned src/data/artists/foundation.js">
   <td><code>/images/foundation/faq-cover.png</code> <span class="tag n">no file</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 21 KB · <code>A-216b789865</code></div></td>
   <td><i class="k">nobody has written what this is</i></td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag n">NO FILE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">The row is kept so a judgement survives, and the file is gone. Two of these are the public-side twins of pictures that moved behind the stage door — the same photograph, already in this table at its held address.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/foundation.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
-   data-t="public/images/foundation/foundation-cover.png   outside the rule src/data/artists/foundation.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0" data-b="unassigned"
+   data-t="public/images/foundation/foundation-cover.png   outside the rule unassigned src/data/artists/foundation.js">
   <td><code>/images/foundation/foundation-cover.png</code>
       
       <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 195 KB · <code>A-284d0cd92e</code></div></td>
   <td><i class="k">nobody has written what this is</i></td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/foundation.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
-   data-t="public/images/foundation/ledger-cover.png   outside the rule src/data/artists/foundation.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0" data-b="unassigned"
+   data-t="public/images/foundation/ledger-cover.png   outside the rule unassigned src/data/artists/foundation.js">
   <td><code>/images/foundation/ledger-cover.png</code>
       
       <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 261 KB · <code>A-ca76b12a24</code></div></td>
   <td><i class="k">nobody has written what this is</i></td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/foundation.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
-   data-t="public/images/wal/carsie-blanton-cover.jpg carsie blanton's cover on the wal bill — the artist in a red suit on a fire escape. usable outside the rule src/data/artists/worth-a-listen.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/images/wal/carsie-blanton-cover.jpg carsie blanton's cover on the wal bill — the artist in a red suit on a fire escape. usable outside the rule unassigned src/data/artists/worth-a-listen.js">
   <td><code>/images/wal/carsie-blanton-cover.jpg</code>
       
       <div class="k" style="font-size:11px;margin-top:3px">900×900 · 264 KB · <code>A-f818d7a8a7</code></div></td>
   <td>Carsie Blanton's cover on the WAL bill — the artist in a red suit on a fire escape.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/worth-a-listen.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
-   data-t="public/images/wal/carsie-blanton-poster.png her own illustrated logo art, pink ground. usable outside the rule src/data/artists/worth-a-listen.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/images/wal/carsie-blanton-poster.png her own illustrated logo art, pink ground. usable outside the rule unassigned src/data/artists/worth-a-listen.js">
   <td><code>/images/wal/carsie-blanton-poster.png</code>
        <span class="tag b">ledgered</span>
       <div class="k" style="font-size:11px;margin-top:3px">1200×630 · 159 KB · <code>A-e9c6cefe39</code></div></td>
   <td>Her own illustrated logo art, pink ground.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/worth-a-listen.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
-   data-t="public/images/wal/hunter-root-cover.jpg hunter root's cover — the artist with a guitar in front of a scrap pile. usable outside the rule src/data/artists/worth-a-listen.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/images/wal/hunter-root-cover.jpg hunter root's cover — the artist with a guitar in front of a scrap pile. usable outside the rule unassigned src/data/artists/worth-a-listen.js">
   <td><code>/images/wal/hunter-root-cover.jpg</code>
       
       <div class="k" style="font-size:11px;margin-top:3px">1280×720 · 233 KB · <code>A-6d5b72704a</code></div></td>
   <td>Hunter Root's cover — the artist with a guitar in front of a scrap pile.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/worth-a-listen.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="weak" data-m="0"
-   data-t="public/images/wal/hunter-root-plate.jpg the portrait that introduces hunter root on /wal. weak outside the rule src/data/artists/worth-a-listen.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="weak" data-m="0" data-b="unassigned"
+   data-t="public/images/wal/hunter-root-plate.jpg the portrait that introduces hunter root on /wal. weak outside the rule unassigned src/data/artists/worth-a-listen.js">
   <td><code>/images/wal/hunter-root-plate.jpg</code>
        <span class="tag b">ledgered</span>
       <div class="k" style="font-size:11px;margin-top:3px">1100×1377 · 352 KB · <code>A-c21bb8cd4d</code></div></td>
   <td>The portrait that introduces Hunter Root on /wal.</td>
   <td><span class="tag ">weak</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/worth-a-listen.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
-   data-t="public/images/wal/jesse-welles-cover.jpg jesse welles' cover — a b&amp;w studio portrait with a guitar. usable outside the rule src/data/artists/worth-a-listen.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/images/wal/jesse-welles-cover.jpg jesse welles' cover — a b&amp;w studio portrait with a guitar. usable outside the rule unassigned src/data/artists/worth-a-listen.js">
   <td><code>/images/wal/jesse-welles-cover.jpg</code>
       
       <div class="k" style="font-size:11px;margin-top:3px">900×900 · 161 KB · <code>A-c80c36274b</code></div></td>
   <td>Jesse Welles' cover — a B&amp;W studio portrait with a guitar.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/worth-a-listen.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
-   data-t="public/images/wal/jesse-welles-plate.webp the portrait that introduces jesse welles on /wal — a close b&amp;w head. usable outside the rule src/data/artists/worth-a-listen.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/images/wal/jesse-welles-plate.webp the portrait that introduces jesse welles on /wal — a close b&amp;w head. usable outside the rule unassigned src/data/artists/worth-a-listen.js">
   <td><code>/images/wal/jesse-welles-plate.webp</code>
        <span class="tag b">ledgered</span>
       <div class="k" style="font-size:11px;margin-top:3px">1500×1879 · 349 KB · <code>A-76b42a030d</code></div></td>
   <td>The portrait that introduces Jesse Welles on /wal — a close B&amp;W head.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/worth-a-listen.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="weak" data-m="0"
-   data-t="public/images/wal/mikey-mike-cover.jpg mikey mike's cover on the wal bill. weak outside the rule src/data/artists/worth-a-listen.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="weak" data-m="0" data-b="unassigned"
+   data-t="public/images/wal/mikey-mike-cover.jpg mikey mike's cover on the wal bill. weak outside the rule unassigned src/data/artists/worth-a-listen.js">
   <td><code>/images/wal/mikey-mike-cover.jpg</code>
       
       <div class="k" style="font-size:11px;margin-top:3px">900×900 · 73 KB · <code>A-27778d871b</code></div></td>
   <td>Mikey Mike's cover on the WAL bill.</td>
   <td><span class="tag ">weak</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/worth-a-listen.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
-   data-t="public/images/wal/worth-a-listen-cover.png   outside the rule src/data/artists/worth-a-listen.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0" data-b="unassigned"
+   data-t="public/images/wal/worth-a-listen-cover.png   outside the rule unassigned src/data/artists/worth-a-listen.js">
   <td><code>/images/wal/worth-a-listen-cover.png</code>
       
       <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 199 KB · <code>A-6f24a3cf95</code></div></td>
   <td><i class="k">nobody has written what this is</i></td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/worth-a-listen.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
-   data-t="public/images/wb-merch/sticker.png the weird.baby sticker, cropped tight — the one object the gift shop sells. usable outside the rule src/data/wb_merch.js src/data/wb_roster.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/images/wb-merch/sticker.png the weird.baby sticker, cropped tight — the one object the gift shop sells. usable outside the rule unassigned src/data/wb_merch.js src/data/wb_roster.js">
   <td><code>/images/wb-merch/sticker.png</code>
        <span class="tag b">ledgered</span>
       <div class="k" style="font-size:11px;margin-top:3px">422×422 · 97 KB · <code>A-3176119348</code></div></td>
   <td>The Weird.Baby sticker, cropped tight — the one object the gift shop sells.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/wb_merch.js</code><br><code>src/data/wb_roster.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
-   data-t="public/images/wb/about-cover.png   outside the rule src/data/artists/weird-baby.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0" data-b="unassigned"
+   data-t="public/images/wb/about-cover.png   outside the rule unassigned src/data/artists/weird-baby.js">
   <td><code>/images/wb/about-cover.png</code>
       
       <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 200 KB · <code>A-f68cbdbaf8</code></div></td>
   <td><i class="k">nobody has written what this is</i></td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/weird-baby.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0"
-   data-t="public/images/wb/vol1-cover.png   outside the rule src/data/artists/weird-baby.js">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="unjudged" data-m="0" data-b="unassigned"
+   data-t="public/images/wb/vol1-cover.png   outside the rule unassigned src/data/artists/weird-baby.js">
   <td><code>/images/wb/vol1-cover.png</code>
        <span class="tag b">ledgered</span>
       <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 209 KB · <code>A-a84312d188</code></div></td>
   <td><i class="k">nobody has written what this is</i></td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/weird-baby.js</code></td>
 </tr>
-<tr data-g="gov" data-r="NO FILE" data-q="unjudged" data-m="1"
-   data-t="public/robots/art/portal-cover.png   no file src/data/artists/robots.js">
+<tr data-g="gov" data-r="NO FILE" data-q="unjudged" data-m="1" data-b="unassigned"
+   data-t="public/robots/art/portal-cover.png   no file unassigned src/data/artists/robots.js">
   <td><code>/robots/art/portal-cover.png</code> <span class="tag n">no file</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 240 KB · <code>A-fb535d0721</code></div></td>
   <td><i class="k">nobody has written what this is</i></td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag n">NO FILE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">The row is kept so a judgement survives, and the file is gone. Two of these are the public-side twins of pictures that moved behind the stage door — the same photograph, already in this table at its held address.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="SIGNAGE" data-q="usable" data-m="0"
-   data-t="public/robots/art/wbr-cover-logo.png the wing's front-desk cover — house paper, ruled border, the mark, robots, purveyors of the weird. generated by tools/make_robots_cover.py. usable signage src/data/artists/robots.js">
+<tr data-g="gov" data-r="SIGNAGE" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/robots/art/wbr-cover-logo.png the wing's front-desk cover — house paper, ruled border, the mark, robots, purveyors of the weird. generated by tools/make_robots_cover.py. usable signage unassigned src/data/artists/robots.js">
   <td><code>/robots/art/wbr-cover-logo.png</code>
       
       <div class="k" style="font-size:11px;margin-top:3px">1200×1200 · 262 KB · <code>A-287cf47d17</code></div></td>
   <td>The wing's front-desk cover — house paper, ruled border, the mark, ROBOTS, PURVEYORS OF THE WEIRD. Generated by tools/make_robots_cover.py.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">SIGNAGE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Exempt in writing. Nothing arrived and nothing was opened, so no entry could ever deliver it.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="NO FILE" data-q="unjudged" data-m="1"
-   data-t="public/robots/reference/mgk-viii/cabinet_whole.jpg   no file src/data/artists/robots.js">
+<tr data-g="gov" data-r="NO FILE" data-q="unjudged" data-m="1" data-b="unassigned"
+   data-t="public/robots/reference/mgk-viii/cabinet_whole.jpg   no file unassigned src/data/artists/robots.js">
   <td><code>/robots/reference/mgk-viii/cabinet_whole.jpg</code> <span class="tag n">no file</span>
       
       <div class="k" style="font-size:11px;margin-top:3px">858×1438 · 304 KB · <code>A-c08e2c5217</code></div></td>
   <td><i class="k">nobody has written what this is</i></td>
   <td><span class="tag ">unjudged</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag n">NO FILE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">The row is kept so a judgement survives, and the file is gone. Two of these are the public-side twins of pictures that moved behind the stage door — the same photograph, already in this table at its held address.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="gov" data-r="ALREADY DELIVERED" data-q="usable" data-m="0"
-   data-t="public/robots/reference/photos/rear_power_switch.png the power switch round the back of the unit. usable already delivered src/data/artists/robots.js">
+<tr data-g="gov" data-r="ALREADY DELIVERED" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/robots/reference/photos/rear_power_switch.png the power switch round the back of the unit. usable already delivered unassigned src/data/artists/robots.js">
   <td><code>/robots/reference/photos/rear_power_switch.png</code>
        <span class="tag b">ledgered</span>
       <div class="k" style="font-size:11px;margin-top:3px">2048×1536 · 3821 KB · <code>A-c5bccbede9</code></div></td>
   <td>The power switch round the back of the unit.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: arrived</div></td>
+      <div class="k" style="font-size:11px">arc: arrived</div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag y">ALREADY DELIVERED</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">A Record entry names this file, so it is on the wall. Reusing it costs nothing.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
-   data-t="public/share-card.png the link-preview card — weird.baby / museum / purveyors of the weird / no ads, no affiliate links, no cut, set on house paper in a ruled box. usable outside the rule index.html">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/share-card.png the link-preview card — weird.baby / museum / purveyors of the weird / no ads, no affiliate links, no cut, set on house paper in a ruled box. usable outside the rule unassigned index.html">
   <td><code>/share-card.png</code>
       
       <div class="k" style="font-size:11px;margin-top:3px">1200×630 · 27 KB · <code>A-b675b62d27</code></div></td>
   <td>The link-preview card — WEIRD.BABY / MUSEUM / PURVEYORS OF THE WEIRD / NO ADS, NO AFFILIATE LINKS, NO CUT, set on house paper in a ruled box.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>index.html</code></td>
 </tr>
-<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0"
-   data-t="public/weirdbaby_photoid.png the house photo-id mark — the baby in the ring with the weird.baby wordmark. the lobby's plate and the robots front desk's viewer poster. usable outside the rule src/data/artists/robots.js src/routes/wbhome.jsx">
+<tr data-g="out" data-r="OUTSIDE THE RULE" data-q="usable" data-m="0" data-b="unassigned"
+   data-t="public/weirdbaby_photoid.png the house photo-id mark — the baby in the ring with the weird.baby wordmark. the lobby's plate and the robots front desk's viewer poster. usable outside the rule unassigned src/data/artists/robots.js src/routes/wbhome.jsx">
   <td><code>/WeirdBaby_PhotoID.png</code>
        <span class="tag b">ledgered</span>
       <div class="k" style="font-size:11px;margin-top:3px">2048×2048 · 722 KB · <code>A-e951825925</code></div></td>
   <td>The house photo-ID mark — the baby in the ring with the Weird.Baby wordmark. The Lobby's plate and the robots front desk's viewer poster.</td>
   <td><span class="tag y">usable</span>
       <div class="k" style="font-size:11px;margin-top:4px">verdict: <i>not inspected</i></div>
-      <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
+      <div class="k" style="font-size:11px">arc: <i>unset</i></div>
+      <div class="k" style="font-size:11px">bucket: <i>unassigned</i></div></td>
   <td><span class="tag b">OUTSIDE THE RULE</span>
       <div class="k" style="font-size:11.5px;margin-top:4px">Not a picture of the machines. The pull-back rule does not reach it; it is already public and stays public.</div></td>
   <td class="k" style="font-size:11px"><code>src/data/artists/robots.js</code><br><code>src/routes/WbHome.jsx</code></td>
@@ -934,7 +1031,7 @@ reaching for something the story has not received. Eggs are on their own page.</
   <td class="k" style="font-size:11.5px"><i>nothing</i></td>
 </tr>
 <tr data-s="REVEALED" data-c="BLAST"
-   data-t="face.wbr.record the record — the journal of the reverse-discovery, and it is about all things robots. src/data/artists/robots.js m18 — twenty-seven open questions on entry 013 m19 — what a record number means">
+   data-t="face.wbr.record the record — the journal of the reverse-discovery, and it is about all things robots. src/data/artists/robots.js m18 — twenty-seven open questions on entry 013">
   <td><code>face.wbr.record</code><div class="k" style="font-size:11px;margin-top:3px">surface</div></td>
   <td>THE RECORD — the journal of the reverse-discovery, and it is about all things robots.<div class="k" style="font-size:11px;margin-top:3px"><code>src/data/artists/robots.js</code></div></td>
   <td><span class="tag y">REVEALED</span>
@@ -942,7 +1039,7 @@ reaching for something the story has not received. Eggs are on their own page.</
       <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
   <td><span class="tag y">BLAST</span>
       <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
-  <td class="k" style="font-size:11.5px">M18 — twenty-seven open questions on entry 013<br>M19 — what a record number means</td>
+  <td class="k" style="font-size:11.5px">M18 — twenty-seven open questions on entry 013</td>
 </tr>
 <tr data-s="REVEALED" data-c="BLAST"
    data-t="face.niac.name the name — built as mgk-niac, sold as mgk-viii. src/data/artists/robots.js ">
@@ -1693,7 +1790,7 @@ reaching for something the story has not received. Eggs are on their own page.</
   <td class="k" style="font-size:11.5px">Mike's camera — P2; ≥2400px long edge, whole page including margins, reel order = reading order</td>
 </tr>
 <tr data-s="REVEALED" data-c="BLAST"
-   data-t="doc.record the record — the volume: the weekly journal of the reverse-discovery. src/routes/exhibit/recordentry.jsx m19 — what a record number means">
+   data-t="doc.record the record — the volume: the weekly journal of the reverse-discovery. src/routes/exhibit/recordentry.jsx ">
   <td><code>doc.record</code><div class="k" style="font-size:11px;margin-top:3px">document</div></td>
   <td>The Record — the volume: the weekly journal of the reverse-discovery.<div class="k" style="font-size:11px;margin-top:3px"><code>src/routes/exhibit/RecordEntry.jsx</code></div></td>
   <td><span class="tag y">REVEALED</span>
@@ -1701,7 +1798,7 @@ reaching for something the story has not received. Eggs are on their own page.</
       <div class="k" style="font-size:11px">arc: <i>unset</i></div></td>
   <td><span class="tag y">BLAST</span>
       <div class="k" style="font-size:11px;margin-top:4px">arrived week 0</div></td>
-  <td class="k" style="font-size:11.5px">M19 — what a record number means</td>
+  <td class="k" style="font-size:11.5px"><i>nothing</i></td>
 </tr>
 <tr data-s="REVEALED" data-c="BLAST"
    data-t="record.013 record 013 — one entry in the record. src/data/artists/robots.js face.entries m18 — twenty-seven open questions on this entry">
@@ -2274,7 +2371,10 @@ nothing back. <code>verdict</code> is Mike's field and Ops never sets it.</foote
   wait:function(r){return r.getAttribute('data-r').indexOf('YES')===0;},
   done:function(r){return r.getAttribute('data-r').indexOf('ALREADY')===0;},
   weak:function(r){var q=r.getAttribute('data-q');return q==='weak'||q==='wrong'||q==='placeholder'||q==='unjudged';},
-  gone:function(r){return r.getAttribute('data-m')==='1';}
+  gone:function(r){return r.getAttribute('data-m')==='1';},
+  precious:function(r){return r.getAttribute('data-b')==='precious';},
+  dump:function(r){return r.getAttribute('data-b')==='dump';},
+  nobucket:function(r){return r.getAttribute('data-b')==='unassigned';}
  });
  wire('t2','q2','c2','f2',{
   all:function(){return true;},

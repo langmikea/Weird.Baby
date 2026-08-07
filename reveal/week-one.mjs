@@ -113,10 +113,14 @@ export const DAYS = [
   {
     n: 1, dow: "MON", attr: "OPS",
     headline: "The museum opens.",
+    /* [B2 2026-08-07] THIS USED TO SAY "and holds one entry", WHICH READ AS A
+       CLAIM ABOUT THE ENTRY IN THE TREE. Mike ruled 013 a prototype and not day
+       one, so day 1's entry is 001 and is unwritten. The day's shape is
+       unchanged; what is struck is the implication that it already exists. */
     shape:
-      "The Robots wing opened two hours ago and holds one entry. Weird enough to "
-      + "warrant an exhibit — that is the claim the day has to carry, and it is the "
-      + "only claim it has to carry.",
+      "The Robots wing opened two hours ago and this is its first entry — Record 001, "
+      + "which you have not dictated yet. Weird enough to warrant an exhibit is the "
+      + "claim the day has to carry, and it is the only claim it has to carry.",
     topics: [
       "The transmissions named but not described.",
       "Why it warranted an exhibit.",
@@ -220,11 +224,21 @@ export const RECORD_RULES = [
     bearing: "A day can be substantial without opening anything. This is what makes "
       + "day 4 a day rather than a wait.",
   },
+  /* [B1 2026-08-07] CORRECTED BY MIKE, AND THE CORRECTION IS A CHANGE OF UNIT.
+     This row used to read "never more than two or three offerings in a day" and
+     carried a `bearing` calling it "a hard ceiling on what any single entry may
+     put in front of a reader" — which is the ASSET reading, and it is wrong. The
+     law caps POINTS OF FOCUS. The full statement, the two buckets and the two
+     runways are `reveal/focus.mjs`; this row is the story-side pointer at it so
+     the outline's own rule list stays complete. */
   {
-    rule: "THE BOUNCY BALL LAW: never more than two or three offerings in a day.",
+    rule: "THE BOUNCY BALL LAW: never more than two or three POINTS OF FOCUS — "
+      + "and the precious ones are two or three A WEEK.",
     attr: "MIKE-NAMED",
-    bearing: "A hard ceiling on what any single entry may put in front of a reader, "
-      + "and it is the only rule here that the trackers can be measured against.",
+    bearing: "It caps ATTENTION, not pictures. A day may show ten manual pages and "
+      + "spend one point of focus doing it — we got more of the manual. What the "
+      + "ceiling governs is the PRECIOUS bucket: the genuine reveals a reader "
+      + "remembers. Everything else is the dump, and the dump has no ceiling.",
   },
 ];
 
@@ -232,19 +246,35 @@ export const RECORD_RULES = [
    Each `check` is a claim this file makes about the repository. `derivedFrom`
    names the file that settles it, so a reader can go and disagree. */
 export const COLLISIONS = [
+  /* [B2 2026-08-07] CLOSED BY MIKE, WITH AN ANSWER THAT WAS NOT ON THE LIST.
+     W-1 offered three readings and every one of them assumed the entry in the
+     tree and day one's entry had to be the same entry. Mike answered by
+     dissolving that premise: 013 is a PROTOTYPE. The check is kept rather than
+     deleted because a collision that was real and got ruled on is worth more
+     on the page than a silence, and because W-1's third sentence is still the
+     reason the ruling was needed. */
   {
     id: "W-1",
-    title: "The one entry that exists is not about the transmissions.",
+    title: "The one entry that exists is not about the transmissions — and it was "
+      + "never meant to be day one.",
     check:
       "Day 1 says the wing opens holding one entry, and that is true of the tree today "
       + "— the Record holds exactly one. But it is entry 013 and its subject is a "
       + "physical delivery: a sealed modern bag, a USB-C adapter, a unit on charge. "
       + "Nothing in it touches a transmission, a manifesto or a weekend.",
     derivedFrom: "reveal/record-entries.mjs · reveal/ledger.json (record.013)",
-    open: "Whether day 1 opens with the entry that is there, or the entry that is "
-      + "there is re-dated, or day 1 adds one. Three different weeks; all three are yours.",
-    also: "M19 — what a record number means — is open, and 'opens with one entry' "
-      + "numbered 013 is exactly the question M19 asks.",
+    open: null,
+    ruled:
+      "Mike, 2026-08-07: Record 013 was a PROTOTYPE. It was chosen because it was "
+      + "interesting enough to find the structure, and it did. It is NOT day one, and "
+      + "it needs no re-dating and no defending. THE REAL RECORD STARTS AT 001, when he "
+      + "dictates it. So day 1's entry is 001 and does not exist yet; the entry in the "
+      + "tree is not in that sequence and no longer collides with the outline.",
+    also: "M19 — what a record number means — closes with it: the numbers are THIS "
+      + "VOLUME'S OWN and they begin at 001. The prototype keeps its number on the "
+      + "glass and is marked as the prototype in Ops' instruments only, never on the "
+      + "glass, because a line whose subject is the making of the museum does not ship "
+      + "(Doctrine 11). What the number itself should be is B-b, and it is one word.",
   },
   {
     id: "W-2",
@@ -270,13 +300,20 @@ export const COLLISIONS = [
   },
   {
     id: "W-4",
-    title: "The bouncy ball law is the only rule here a tracker can measure.",
+    title: "The bouncy ball law is the only rule here a tracker can measure — and the "
+      + "tracker was measuring it in the wrong unit.",
     check:
-      "Two or three offerings a day is a ceiling, and the artifact tracker knows how much "
-      + "material is behind the stage door one entry away. The arithmetic is printed on "
-      + "the page from the live count rather than stated here, because the count moves.",
-    derivedFrom: "provenance/asset-table.json · reveal/delivery.mjs",
+      "The law caps POINTS OF FOCUS, not assets, and the precious ones are two or three "
+      + "A WEEK. The tracker was dividing a count of PHOTOGRAPHS by a ceiling on "
+      + "ATTENTION and printing a runway in days — 16 pictures = 6–8 days. That figure "
+      + "is VOID (`reveal/focus.mjs` VOIDED). What replaces it is two runways: precious "
+      + "reveals remaining, which divides into weeks because it has a ceiling over it, "
+      + "and what is in the dump, which is a pile size and divides into nothing.",
+    derivedFrom: "reveal/focus.mjs · provenance/asset-table.json · reveal/delivery.mjs",
     open: null,
+    ruled: "Mike, 2026-08-07: the law caps points of focus, not assets. It does not mean "
+      + "we may not show more pictures. Every asset is UNASSIGNED to a bucket today, so "
+      + "the precious runway is printed as a bound rather than a number.",
   },
   {
     id: "W-5",

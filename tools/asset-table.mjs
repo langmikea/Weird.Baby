@@ -296,7 +296,15 @@ function mintUid(id, hash, taken) {
   return uid;
 }
 
-const JUDGED = ["what", "quality", "qualityNote", "verdict", "revealArc"];
+/* [B1 2026-08-07] `bucket` JOINS THE JUDGED SET AND IT IS THE SIXTH, NOT A
+   MEASURED SIXTH. Mike corrected the bouncy ball law — it caps POINTS OF FOCUS,
+   not assets — and split what the museum can show into a PRECIOUS bucket with a
+   ceiling of two or three a WEEK and a DUMP bucket with no ceiling at all
+   (`reveal/focus.mjs`). Which bucket a given file is in is a judgement about
+   whether a reader will remember it, so it is carried across a scan exactly as
+   `verdict` is and Ops never writes it. `null` means UNASSIGNED, which is the
+   state of every row in this table today and is not a third bucket. */
+const JUDGED = ["what", "quality", "qualityNote", "verdict", "revealArc", "bucket"];
 const isJudged = e => JUDGED.some(k => e && e[k] != null);
 
 function scan(renames = []) {
@@ -437,7 +445,7 @@ function scan(renames = []) {
            source    — in the tree, never served by this site */
         role: ref ? (usedBy.length ? "shipped" : "unreferenced") : "source",
         usedBy,
-        /* --- the five judged fields. A scan carries them, never writes them. */
+        /* --- the six judged fields. A scan carries them, never writes them. */
         what: p.what ?? null,
         quality: p.quality ?? null,
         qualityNote: p.qualityNote ?? null,
@@ -452,6 +460,13 @@ function scan(renames = []) {
            across exactly as `verdict` is. `null` means UNSET, which is the
            honest state of most of this table and is not a stage. */
         revealArc: p.revealArc ?? null,
+        /* [B1 2026-08-07] THE BOUNCY BALL BUCKET: "precious" | "dump" | null.
+           See `reveal/focus.mjs` for the law and the two runways it feeds. A
+           scan cannot read this off bytes any more than it can read a verdict,
+           and DERIVING it would be worse than leaving it null — a heuristic
+           that called every machine photograph precious would make the runway
+           report look answered while nobody had answered anything. */
+        bucket: p.bucket ?? null,
       });
     }
   }
@@ -501,11 +516,12 @@ function load() {
 }
 
 const HEADER = {
-  _: "THE ASSET TABLE — every image, video and audio file in both repos. Scanned fields are rewritten by `node tools/asset-table.mjs --scan`; the five judged fields (what · quality · qualityNote · verdict · revealArc) are hand-written and a scan never touches them.",
+  _: "THE ASSET TABLE — every image, video and audio file in both repos. Scanned fields are rewritten by `node tools/asset-table.mjs --scan`; the six judged fields (what · quality · qualityNote · verdict · revealArc · bucket) are hand-written and a scan never touches them.",
   _purpose: "Nothing ships without Mike's personal inspection — and Mike must not have to perfect assets in advance. Slots move, things change, some of these are never needed. This table exists so an inspection can be generated on demand for whatever is actually about to ship, instead of demanding a verdict on everything up front.",
   _quality: "Ops' honest read of the FILE, never of the idea: usable | weak | wrong | placeholder | null. `null` means NOBODY HAS LOOKED, and it is not a passing grade. `wrong` means the file does not show what its slot says it shows.",
   _verdict: "MIKE'S, and unset by default. null = not inspected. Values are his to choose; `pass` and `reject` are what the checklist reads. Ops never writes this field.",
   _revealArc: "THE REVEAL ARC (Mike, 2026-08-04): arrived | understood | partial | online | null. The house's canon for how a thing is revealed — acknowledged when it arrived, status-updated as it was understood, brought online in stages — applied to every asset so a visitor can be given the sequence the house actually lived, test patterns and noise included. `null` means UNSET and is not a stage: it is the honest state of an asset whose arc nobody has established. Ops populates only what the record already attests.",
+  _bucket: "THE BOUNCY BALL BUCKET (Mike, 2026-08-07): precious | dump | null. The law caps POINTS OF FOCUS, not assets — humans remember one or two things, and ten things reduces the odds they keep the one that matters. PRECIOUS is a genuine reveal, two or three A WEEK, and those are what a reader remembers. DUMP is everything else: fun to look at, part of the story, part of the pile, and there is NO CEILING on it — ten manual pages arriving is one point of focus, not ten. `null` means UNASSIGNED and is not a third bucket. Ops never writes this field, and deliberately does not derive it: a heuristic here would make the runway report look answered when nothing had been answered. The law and the two runways live in `reveal/focus.mjs`.",
   _gate: "THE RECORD APPROVAL GATE (Mike, 2026-08-04): final sign-off on a Record is Mike personally inspecting EVERY thing presented in it. `--checklist` is how that inspection is produced; a Record with any presented asset at verdict null has not been signed off.",
   _uid: "[C32 2026-08-05] THE ROW'S NAME, minted once and never rewritten. `id` is repo:path and is an ADDRESS — it changes when a file moves. `uid` does not, so a judgement hangs off something a rename cannot touch. Other tables may reference a row by uid; nothing may reference it by path and expect that to hold.",
   _sha256: "[C32 2026-08-05] The content hash, re-measured every scan. A prior row and a new file sharing a hash inside one repo are the same file MOVED: the scan carries the judgement and the uid across and reports it. Where a rename ALSO changed the content — the ordinary case, because the name is usually in the picture — no hash can see it, so the judged row is surfaced under its own banner and `--rename` is the explicit declaration that moves it. The silence was the defect; the hash only makes it rarer.",
@@ -529,6 +545,10 @@ function report(t) {
   console.log("  quality   ", JSON.stringify(by("quality")));
   console.log("  verdict   ", JSON.stringify(by("verdict")));
   console.log("  revealArc ", JSON.stringify(by("revealArc")));
+  /* [B1 2026-08-07] the bouncy ball bucket. `—` is UNASSIGNED, and while it is
+     the whole table that is the report: the two runways cannot be computed from
+     an unassigned population, only bounded. See `reveal/focus.mjs`. */
+  console.log("  bucket    ", JSON.stringify(by("bucket")));
   const shipped = e.filter(x => x.role === "shipped");
   console.log(`\n  SHIPPED (referenced by the site): ${shipped.length}`);
   console.log(`    unassessed by Ops : ${shipped.filter(x => !x.quality).length}`);

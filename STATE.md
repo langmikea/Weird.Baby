@@ -119,6 +119,51 @@ opened was the second half (`grid-template-rows: max-content 1fr`).
 **The cost is stated:** a page short enough not to scroll is ~13px narrower. A
 constant 13px nobody can see beats an intermittent 13px that moves the furniture.
 
+## THE BOUNCY BALL LAW (Mike, named 2026-08-02 — CORRECTED 2026-08-07 — STANDING)
+
+> **It caps POINTS OF FOCUS, not ASSETS.** Humans remember one or two things;
+> ten things reduces the odds they keep the one that matters. **IT DOES NOT MEAN
+> WE MAY NOT SHOW MORE PICTURES.**
+
+Canonical text + reasoning: `docs/canonical/OPERATIONS.md` §7 Doctrine 20.
+Mechanism: `reveal/focus.mjs`. Judged field: `bucket` on
+`provenance/asset-table.json`, **Mike's, unset on all 315 rows.**
+
+**TWO BUCKETS, AND THEY ARE A PARTITION.** **PRECIOUS** — genuine reveals, **two
+or three A WEEK**, what a reader remembers, and the ceiling is on these.
+**DUMP** — everything else; fun to look at, part of the story, part of the pile,
+**no ceiling.** Ten manual pages arriving is ONE point of focus, not ten.
+
+**THE CORRECTION IS A CHANGE OF UNIT AND OF PERIOD, AND THE ORIGINAL SENTENCE
+WAS NOT FALSE — WHICH IS WHY NOTHING CAUGHT IT.** The law was carried as *"never
+more than two or three offerings in a day"*, and the tracker divided a count of
+**photographs** by a ceiling on **attention**: **"16 pictures = 6–8 days of
+material"**. Every input was a real measurement. That figure is **VOID** and is
+kept with its cause in `reveal/focus.mjs` `VOIDED`, because a superseded number
+that is merely deleted comes back the next time somebody does the arithmetic.
+
+**PRECIOUS DIVIDES INTO WEEKS; DUMP DIVIDES INTO NOTHING.** `runways()` is
+structurally unable to print a runway for a bucket with no ceiling. And because
+nothing is assigned, **every runway today is a bound, not a number** — the 16
+pictures behind the stage door are between nothing at all and 6–8 weeks of
+precious runway. **Ops does not derive the bucket** (`B-a`): a heuristic would
+make every tracker read as answered while nothing had been answered.
+
+## THE RECORD'S ONE ENTRY IS A PROTOTYPE (Mike, 2026-08-07 — STANDING)
+
+> **Record 013 was a PROTOTYPE. It was chosen because it was interesting enough
+> to find the structure, and it did. It is NOT day one and needs no re-dating or
+> defending. THE REAL RECORD STARTS AT 001 when Mike dictates it.**
+
+**M19 closes with it** — a record number is a number in THIS VOLUME'S own
+sequence, beginning at 001. **It is kept rather than retired, on his own
+criterion** (*honest and the machinery exercised*): it is the only thing
+exercising `RecordEntry.jsx`, the index budgets, the per-entry ledger derivation
+and the pull-back rule's single delivered picture. **The prototype mark is in
+`reveal/ledger-declare.mjs` and the dictation pages and NOWHERE ON THE GLASS** —
+that line's subject is the making of the museum (Doctrine 11), and the entry's
+own text asserts nothing false. **Its NUMBER is untouched and open: `B-b`.**
+
 ## NOTES TO MIKE ARE NOT PART OF THE UX, EVER (Mike, 2026-08-06 — STANDING)
 
 > **Notes to Mike render in red (or an equally unmistakable treatment) meaning

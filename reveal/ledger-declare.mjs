@@ -228,8 +228,8 @@ const FACE = (id, name, build, state, extra) => {
 FACE("wbr.faq", "FAQ — the robots wing's whole front desk: what this is, the machines, the paper, and how to reach us.", "LIVE", "REVEALED",
   { note: "[H2 2026-08-06] PULLED BACK — no Record entry delivers this picture, so the face no longer shows one and the file is behind the door under public/held/. M29 REOPENS BY CONSEQUENCE — the face that had no picture has none again (OPEN_ACTIONS H-a). [R3] Absorbed Welcome, DOC CONTROL and Contact — eleven questions where there were four faces. M29 CLOSES: it inherited Welcome's family shot along with Welcome's job as the wing's landing, so the face that had no picture has one, and no object was invented for the slot. C31 closes with DOC CONTROL." });
 FACE("wbr.record", "THE RECORD — the journal of the reverse-discovery, and it is about all things robots.", "PARTIAL", "REVEALED",
-  { deps: ["M18 — twenty-seven open questions on entry 013", "M19 — what a record number means"],
-    note: "[R1] MOVED HERE FROM THE MGK-VIIIp ALBUM on Mike's ruling that it applies to all things robots, not just the VIIIp — and this row was `face.viiip.record` until then. It is the ONE id this table has ever renamed; nothing outside reveal/ reads it, and leaving it on a wing it no longer sits in would have been the ledger keeping a filing decision the museum reversed. Reachable at its own address, /robots/record, because the lobby directory now carries a line for it indented under Weird.Baby Robots. Holds exactly ONE entry; the container's pagination (C1), doors (C7) and epoch (C8) are built and unexercised." });
+  { deps: ["M18 — twenty-seven open questions on entry 013"],
+    note: "[B2 2026-08-07] M19 IS ANSWERED AND OFF THIS ROW'S DEPS. Mike ruled that THE REAL RECORD STARTS AT 001 when he dictates it, which settles what a record number means: the numbers are THIS VOLUME'S OWN and they begin at 001, not the 436-record numbering that was deleted at v47. The volume therefore holds ZERO entries of its own sequence today — the one entry on the glass is the PROTOTYPE (record.013 below) and is not in it. THE FACE STAYS PARTIAL AND REVEALED for exactly that reason: it renders, it is reachable, and the sequence it is a container for has not started. [R1] MOVED HERE FROM THE MGK-VIIIp ALBUM on Mike's ruling that it applies to all things robots, not just the VIIIp — and this row was `face.viiip.record` until then. It is the ONE id this table has ever renamed; nothing outside reveal/ reads it, and leaving it on a wing it no longer sits in would have been the ledger keeping a filing decision the museum reversed. Reachable at its own address, /robots/record, because the lobby directory now carries a line for it indented under Weird.Baby Robots. Holds exactly ONE entry; the container's pagination (C1), doors (C7) and epoch (C8) are built and unexercised." });
 FACE("niac.name", "THE NAME — built as MGK-NIAC, sold as MGK-VIII.", "LIVE", "REVEALED",
   { arc: "understood",
     note: "[H2 2026-08-06] PULLED BACK — no Record entry delivers this picture, so the face no longer shows one and the file is behind the door under public/held/. [Q3] The album took the first name on 2026-08-05; this face is where the two names are reconciled. [R4] Its still was the robot's head at the lens and is now the cabinet's lit column — the mainframe is the subject." });
@@ -471,8 +471,8 @@ const MANUAL_PAGE = (page, opts) => {
    anything smaller than "the Record". */
 R("doc.record", "The Record — the volume: the weekly journal of the reverse-discovery.",
   "document", "src/routes/exhibit/RecordEntry.jsx", "PARTIAL", "a track on /robots", "REVEALED",
-  { deps: ["M19 — what a record number means"],
-    note: "The volume, not its entries — one `record.NNN` row per entry, derived from the data. PARTIAL because it holds one entry; the 436-record count that used to sit here was invented and is gone." });
+  { deps: [],
+    note: "[B2 2026-08-07] M19 CLOSES ON THIS ROW, WHICH IS WHERE IT WAS ALWAYS FILED. Mike: THE REAL RECORD STARTS AT 001 when he dictates it — so a record number is a number in THIS VOLUME'S OWN sequence, beginning at 001, and it is not the 436-record numbering v47 deleted for having been invented. The volume's sequence has not started: the single entry on the glass is a PROTOTYPE that took a number out of a numbering it does not belong to, and clearing it out of the way is B2. STILL PARTIAL, and now for a sharper reason than 'it holds one entry' — it holds one entry that is not in its own sequence. The volume, not its entries: one `record.NNN` row per entry, derived from the data." });
 
 /* ═════════ 7a. THE RECORD'S ENTRIES — ONE ROW EACH [R1 2026-08-05] ═════════
    AUDIT §8a: at sixty entries the Record becomes the museum's largest consumer
@@ -502,10 +502,35 @@ const RECORD_ENTRY = {
      true today is that this entry is missing content its own question list
      names. No `arc`: nothing attests one, and M28's discipline is that an
      unset arc is the honest state rather than a blank to fill. */
+  /* [B2 2026-08-07] 013 IS THE PROTOTYPE, AND THIS ROW IS WHERE THAT IS
+     RECORDED — not on the glass. MIKE: "it was chosen because it was
+     interesting enough to find the structure, and it did. It is NOT day one and
+     needs no re-dating or defending. THE REAL RECORD STARTS AT 001."
+     HE GAVE TWO WAYS TO CLEAR IT OUT OF THE WAY — retire it, or leave it
+     clearly marked as the prototype it was — and ONE CRITERION: whichever keeps
+     the Record honest AND THE MACHINERY EXERCISED. The criterion picks the
+     second, and the arithmetic is not close. Retiring it empties the volume, and
+     an empty volume exercises nothing: RecordEntry.jsx never mounts, the index
+     budgets (RECORD_TITLE_MAX / RECORD_LINE_MAX) police no string, the per-entry
+     `record.NNN` derivation loops over nothing, and `delivered()` returns the
+     empty set — which pulls `rear_power_switch.png` back behind the stage door
+     and leaves the pull-back rule with no positive case anywhere in the museum.
+     Every one of those is a mechanism that would rot silently until 001 lands.
+     AND THE MARK GOES HERE BECAUSE DOCTRINE 11 SAYS IT CANNOT GO ON THE GLASS.
+     "This entry was a prototype" is a line whose subject is the making of the
+     museum. The entry's own text asserts nothing false — it is four facts Mike
+     supplied about a real object, with a real photograph of it — so the glass
+     needs no correction, only the instruments that reason about the story do.
+     THE ONE THING NOT SETTLED IS THE NUMBER. Under Mike's own ruling the volume
+     numbers from 001, which makes 013 a number in a sequence that has not
+     started. It is left ALONE, deliberately: he said the entry needs no
+     re-dating or defending, `no` is the field this whole table is keyed on, and
+     changing it is his word rather than Ops' inference. It is OPEN_ACTIONS B-b
+     and it is one word. */
   13: {
     build: "PARTIAL",
     deps: ["M18 — twenty-seven open questions on this entry"],
-    note: "The volume's only entry. Stripped at v47 to the four facts Mike supplied; every gap that exposed is a question in M18 rather than a sentence in the data.",
+    note: "THE PROTOTYPE. Mike, 2026-08-07: chosen because it was interesting enough to find the Record's structure, and it did — it is NOT day one, needs no re-dating and no defending, and the real Record starts at 001 when he dictates it. It is therefore NOT in the volume's sequence, and every Ops instrument that reasons about the story says so; nothing on the glass does, because that line's subject would be the making of the museum (Doctrine 11). Kept rather than retired on his own criterion — it is the only thing exercising RecordEntry.jsx, the index budgets, the per-entry derivation and the pull-back rule's single delivered picture. Stripped at v47 to the four facts he supplied; every gap that exposed is a question in M18 rather than a sentence in the data. Its NUMBER is the one open piece — B-b.",
   },
 };
 {
