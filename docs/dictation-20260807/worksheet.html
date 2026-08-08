@@ -170,8 +170,12 @@ textarea.has{border-color:#5c4a22;background:#1c1a1a}
 type.</b> Two weeks, ten days. Start at the top and go down as far as you want &mdash;
 every level is complete on its own. When you want to send it back, press
 <b>copy everything</b> in the bar at the bottom.</p>
+<p class="lead"><b>The weekly headlines are not on this page any more.</b> They are all
+twelve together on <a href="arc.html">the twelve-week table</a> &mdash; asking for week
+one&rsquo;s headline here and again there would be one question with two answers, in two
+browser stores, neither able to see the other. This page is the ten <i>days</i>.</p>
 <p class="lead">Everything that explains how any of this works &mdash; the rails, the
-transfer classes, the standing rules, the ten checks against the tree, the three
+transfer classes, the standing rules, the checks against the tree, the three
 trackers &mdash; is on <a href="reference.html">the reference page</a>, and none of it
 is on this one.</p>
 </div>
@@ -179,26 +183,6 @@ is on this one.</p>
 <div class="warn" id="warn"><b>This browser will not let the page save.</b> Nothing you
 type here will survive a reload. Press <b>copy everything</b> and paste it somewhere
 safe before you close the tab.</div>
-
-<h2>The headline of headlines &mdash; the two weeks</h2>
-<div class="wk" id="W1">
-<span class="n">Week 1 &middot; the week's own summary headline</span>
-<div class="pair">
-  <div class="c ops"><span class="ml">Ops</span><p class="hl">THE WEEKEND THAT WASN'T SUPPOSED TO HAPPEN</p><p class="k" style="font-size:12px;margin-top:7px">Ops&rsquo; sentence, from the shape you spoke
-       on 2026-08-02.</p></div>
-  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.SUM" rows="2"
-    placeholder="your headline for the week" spellcheck="true"></textarea></div>
-</div>
-</div>
-<div class="wk" id="W2">
-<span class="n">Week 2 &middot; the week's own summary headline</span>
-<div class="pair">
-  <div class="c ops"><span class="ml">Ops</span><p class="hl">THE PASSWORD WAS IN THE ROOM THE WHOLE TIME</p><p class="k" style="font-size:12px;margin-top:7px">Carried from what you wrote, word for word
-       <span class="rail g">your words</span></p></div>
-  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.SUM" rows="2"
-    placeholder="your headline for the week" spellcheck="true"></textarea></div>
-</div>
-</div>
 
 <h2>The map &mdash; every day, both weeks</h2>
 <p class="lead" style="margin-bottom:14px">The whole shape in ten lines. <b>You do not
@@ -597,6 +581,7 @@ line came from. Ops&#8209;to&#8209;Mike, 2026-08-07; not part of the museum.</fo
 <div class="cbar">
  <span class="st" id="stat"></span>
  <span>
+  <a href="arc.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">the twelve weeks &rarr;</a>
   <a href="reference.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">reference &rarr;</a>
   <button data-gather="jump">Copy everything</button>
  </span>
@@ -604,8 +589,9 @@ line came from. Ops&#8209;to&#8209;Mike, 2026-08-07; not part of the museum.</fo
 <script>
 (function(){
  "use strict";
- var SLOTS = [{"id":"W1.SUM","where":"WEEK 1 — summary headline","ops":"THE WEEKEND THAT WASN'T SUPPOSED TO HAPPEN"},{"id":"W1.D1.HEAD","where":"WEEK 1 — day 1 MON — headline","ops":"The museum opens."},{"id":"W1.D1.EXEC","where":"WEEK 1 — day 1 MON — executive summary","ops":null},{"id":"W1.D1.NOTES","where":"WEEK 1 — day 1 MON — detailed sections, notes, etc.","ops":null},{"id":"W1.D2.HEAD","where":"WEEK 1 — day 2 TUE — headline","ops":"Hors d'oeuvres, and the announcement of this evening's entrees."},{"id":"W1.D2.EXEC","where":"WEEK 1 — day 2 TUE — executive summary","ops":null},{"id":"W1.D2.NOTES","where":"WEEK 1 — day 2 TUE — detailed sections, notes, etc.","ops":null},{"id":"W1.D3.HEAD","where":"WEEK 1 — day 3 WED — headline","ops":"The start of the transmissions: what came, what form, what is unreadable."},{"id":"W1.D3.EXEC","where":"WEEK 1 — day 3 WED — executive summary","ops":null},{"id":"W1.D3.NOTES","where":"WEEK 1 — day 3 WED — detailed sections, notes, etc.","ops":null},{"id":"W1.D4.HEAD","where":"WEEK 1 — day 4 THU — headline","ops":"What we can see from outside the box."},{"id":"W1.D4.EXEC","where":"WEEK 1 — day 4 THU — executive summary","ops":null},{"id":"W1.D4.NOTES","where":"WEEK 1 — day 4 THU — detailed sections, notes, etc.","ops":null},{"id":"W1.D5.HEAD","where":"WEEK 1 — day 5 FRI — headline","ops":"One password was short enough."},{"id":"W1.D5.EXEC","where":"WEEK 1 — day 5 FRI — executive summary","ops":null},{"id":"W1.D5.NOTES","where":"WEEK 1 — day 5 FRI — detailed sections, notes, etc.","ops":null},{"id":"W2.SUM","where":"WEEK 2 — summary headline","ops":"THE PASSWORD WAS IN THE ROOM THE WHOLE TIME"},{"id":"W2.D1.HEAD","where":"WEEK 2 — day 1 MON — headline","ops":"What was actually in it."},{"id":"W2.D1.EXEC","where":"WEEK 2 — day 1 MON — executive summary","ops":null},{"id":"W2.D1.NOTES","where":"WEEK 2 — day 1 MON — detailed sections, notes, etc.","ops":null},{"id":"W2.D2.HEAD","where":"WEEK 2 — day 2 TUE — headline","ops":"The things in it that are objects, not data."},{"id":"W2.D2.EXEC","where":"WEEK 2 — day 2 TUE — executive summary","ops":null},{"id":"W2.D2.NOTES","where":"WEEK 2 — day 2 TUE — detailed sections, notes, etc.","ops":null},{"id":"W2.D3.HEAD","where":"WEEK 2 — day 3 WED — headline","ops":"What looked like the way in, and is not."},{"id":"W2.D3.EXEC","where":"WEEK 2 — day 3 WED — executive summary","ops":null},{"id":"W2.D3.NOTES","where":"WEEK 2 — day 3 WED — detailed sections, notes, etc.","ops":null},{"id":"W2.D4.HEAD","where":"WEEK 2 — day 4 THU — headline","ops":"A table of codes, and every one of them refuses."},{"id":"W2.D4.EXEC","where":"WEEK 2 — day 4 THU — executive summary","ops":null},{"id":"W2.D4.NOTES","where":"WEEK 2 — day 4 THU — detailed sections, notes, etc.","ops":null},{"id":"W2.D5.HEAD","where":"WEEK 2 — day 5 FRI — headline","ops":"Four o'clock, and it is on the porch."},{"id":"W2.D5.EXEC","where":"WEEK 2 — day 5 FRI — executive summary","ops":null},{"id":"W2.D5.NOTES","where":"WEEK 2 — day 5 FRI — detailed sections, notes, etc.","ops":null}];
+ var SLOTS = [{"id":"W1.D1.HEAD","where":"WEEK 1 — day 1 MON — headline","ops":"The museum opens."},{"id":"W1.D1.EXEC","where":"WEEK 1 — day 1 MON — executive summary","ops":null},{"id":"W1.D1.NOTES","where":"WEEK 1 — day 1 MON — detailed sections, notes, etc.","ops":null},{"id":"W1.D2.HEAD","where":"WEEK 1 — day 2 TUE — headline","ops":"Hors d'oeuvres, and the announcement of this evening's entrees."},{"id":"W1.D2.EXEC","where":"WEEK 1 — day 2 TUE — executive summary","ops":null},{"id":"W1.D2.NOTES","where":"WEEK 1 — day 2 TUE — detailed sections, notes, etc.","ops":null},{"id":"W1.D3.HEAD","where":"WEEK 1 — day 3 WED — headline","ops":"The start of the transmissions: what came, what form, what is unreadable."},{"id":"W1.D3.EXEC","where":"WEEK 1 — day 3 WED — executive summary","ops":null},{"id":"W1.D3.NOTES","where":"WEEK 1 — day 3 WED — detailed sections, notes, etc.","ops":null},{"id":"W1.D4.HEAD","where":"WEEK 1 — day 4 THU — headline","ops":"What we can see from outside the box."},{"id":"W1.D4.EXEC","where":"WEEK 1 — day 4 THU — executive summary","ops":null},{"id":"W1.D4.NOTES","where":"WEEK 1 — day 4 THU — detailed sections, notes, etc.","ops":null},{"id":"W1.D5.HEAD","where":"WEEK 1 — day 5 FRI — headline","ops":"One password was short enough."},{"id":"W1.D5.EXEC","where":"WEEK 1 — day 5 FRI — executive summary","ops":null},{"id":"W1.D5.NOTES","where":"WEEK 1 — day 5 FRI — detailed sections, notes, etc.","ops":null},{"id":"W2.D1.HEAD","where":"WEEK 2 — day 1 MON — headline","ops":"What was actually in it."},{"id":"W2.D1.EXEC","where":"WEEK 2 — day 1 MON — executive summary","ops":null},{"id":"W2.D1.NOTES","where":"WEEK 2 — day 1 MON — detailed sections, notes, etc.","ops":null},{"id":"W2.D2.HEAD","where":"WEEK 2 — day 2 TUE — headline","ops":"The things in it that are objects, not data."},{"id":"W2.D2.EXEC","where":"WEEK 2 — day 2 TUE — executive summary","ops":null},{"id":"W2.D2.NOTES","where":"WEEK 2 — day 2 TUE — detailed sections, notes, etc.","ops":null},{"id":"W2.D3.HEAD","where":"WEEK 2 — day 3 WED — headline","ops":"What looked like the way in, and is not."},{"id":"W2.D3.EXEC","where":"WEEK 2 — day 3 WED — executive summary","ops":null},{"id":"W2.D3.NOTES","where":"WEEK 2 — day 3 WED — detailed sections, notes, etc.","ops":null},{"id":"W2.D4.HEAD","where":"WEEK 2 — day 4 THU — headline","ops":"A table of codes, and every one of them refuses."},{"id":"W2.D4.EXEC","where":"WEEK 2 — day 4 THU — executive summary","ops":null},{"id":"W2.D4.NOTES","where":"WEEK 2 — day 4 THU — detailed sections, notes, etc.","ops":null},{"id":"W2.D5.HEAD","where":"WEEK 2 — day 5 FRI — headline","ops":"Four o'clock, and it is on the porch."},{"id":"W2.D5.EXEC","where":"WEEK 2 — day 5 FRI — executive summary","ops":null},{"id":"W2.D5.NOTES","where":"WEEK 2 — day 5 FRI — detailed sections, notes, etc.","ops":null}];
  var KEY = "wb.worksheet.2026-08-07";
+ var CARRY = null;
  var store = null;
  try { window.localStorage.setItem("wb.probe","1"); window.localStorage.removeItem("wb.probe");
        store = window.localStorage; } catch (e) { store = null; }
@@ -641,8 +627,24 @@ line came from. Ops&#8209;to&#8209;Mike, 2026-08-07; not part of the museum.</fo
   statEl.innerHTML = msg;
  }
 
+ /* THIS PAGE OWNS ITS OWN SLOTS AND DESTROYS NOTHING ELSE IN ITS STORE, AND
+    THAT IS A REAL LOSS PATH RATHER THAN TIDINESS. The round that moved the two
+    week-headline slots off the worksheet would, with a plain overwrite, have
+    silently deleted whatever had been typed into them the moment the page was
+    next opened and blurred: `values()` only sees textareas that still exist,
+    so a retired slot's answer vanishes at the first save. A generator may
+    remove a field; it may not remove the answer that was in it. */
+ var OWNED = {};
+ SLOTS.forEach(function(s){ OWNED[s.id] = 1; });
+
  function save(){
-  if (store) { try { store.setItem(KEY, JSON.stringify(values())); } catch (e) {
+  if (store) { try {
+   var prev = read(), out = {}, k;
+   for (k in prev) if (!OWNED[k]) out[k] = prev[k];
+   var v = values();
+   for (k in v) out[k] = v[k];
+   store.setItem(KEY, JSON.stringify(out));
+  } catch (e) {
    warn.className = "warn on"; store = null; } }
   stat(true);
  }
@@ -653,6 +655,26 @@ line came from. Ops&#8209;to&#8209;Mike, 2026-08-07; not part of the museum.</fo
  }
 
  var saved = read();
+
+ /* THE CARRY. When a slot moves between pages its answer does not move with
+    it — two pages, two stores, and the reader would simply find an empty box
+    where they had written something. So a page may declare that one of its
+    slots INHERITS from a named slot in another page's store, and it fills
+    only when its own is empty and it SAYS SO ON THE ROW. A silent pre-fill
+    would be indistinguishable from something they had typed here. */
+ if (store && CARRY) {
+  var from = {};
+  try { from = JSON.parse(store.getItem(CARRY.fromKey) || "{}"); } catch (e) { from = {}; }
+  for (var mine in CARRY.map) {
+   var theirs = CARRY.map[mine];
+   if (!saved[mine] && from[theirs]) {
+    saved[mine] = from[theirs];
+    var flag = document.querySelector('[data-carried="' + mine + '"]');
+    if (flag) { flag.textContent = CARRY.note; flag.className = "carried on"; }
+   }
+  }
+ }
+
  areas.forEach(function(t){
   var id = t.getAttribute("data-slot");
   if (saved[id]) t.value = saved[id];

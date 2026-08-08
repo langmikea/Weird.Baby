@@ -70,11 +70,24 @@ import {
   ORIGIN as W2_ORIGIN, WEEK as WEEK2, DAYS as DAYS2, COLLISIONS as COLL2,
 } from "../../reveal/week-two.mjs";
 import { TRANSFERS, CLASSES } from "../../reveal/transfers.mjs";
+import {
+  WEEKS as ARC, MONTHS, BANDS, CHECKS as ARC_CHECKS, ORIGIN as ARC_ORIGIN,
+  monthOf, preciousBudget,
+} from "../../reveal/arc-twelve.mjs";
 
 /* ── THE SLOT MODEL ──────────────────────────────────────────────────────
    One flat list, built once, used by the page, the map's mirrors and the
    collector. Its ids are what Mike pastes back to Ops, so they are stable,
-   short and readable: W1.SUM, W1.D3.EXEC, W2.D5.NOTES. */
+   short and readable: W1.D3.EXEC, W2.D5.NOTES, ARC.W7.
+
+   [T1 2026-08-07] THE TWO WEEK-SUMMARY SLOTS ARE GONE FROM HERE AND THAT IS A
+   SUBTRACTION, NOT A MOVE OF CONVENIENCE. `W1.SUM` and `W2.SUM` asked for the
+   headline of weeks one and two; the twelve-week page asks for the headline of
+   all twelve, including those two. **A question asked on two pages gets two
+   answers**, and it is worse than that here — each page has its own
+   `localStorage` key, so neither can see the other's and nothing on either
+   would say they disagree. The week headlines live on `arc.html` now, both
+   pages say so, and this one is thirty slots of DAYS. */
 const FIELDS = [
   { k: "HEAD", label: "Headline", hint: "one line" },
   { k: "EXEC", label: "Executive summary", hint: "the paragraph a reader gets if they read nothing else" },
@@ -89,7 +102,6 @@ const WEEKS = [
 function slotList() {
   const out = [];
   for (const { w, days, id } of WEEKS) {
-    out.push({ id: `${id}.SUM`, where: `WEEK ${w.n} — summary headline`, ops: w.headline });
     for (const d of days) {
       for (const f of FIELDS) {
         out.push({
@@ -243,12 +255,13 @@ textarea.has{border-color:#5c4a22;background:#1c1a1a}
    generator's string somewhere in the middle of Mike's instrument. Written in
    ES5-flavoured plain script for the same reason the tracker pages are — it
    runs off `file://` with no build step between it and him. */
-function clientScript(slots) {
+function clientScript(slots, { key, banner, carry = null }) {
   return `<script>
 (function(){
  "use strict";
  var SLOTS = ${JSON.stringify(slots)};
- var KEY = "wb.worksheet.${STAMP}";
+ var KEY = ${JSON.stringify(key)};
+ var CARRY = ${JSON.stringify(carry)};
  var store = null;
  try { window.localStorage.setItem("wb.probe","1"); window.localStorage.removeItem("wb.probe");
        store = window.localStorage; } catch (e) { store = null; }
@@ -284,8 +297,24 @@ function clientScript(slots) {
   statEl.innerHTML = msg;
  }
 
+ /* THIS PAGE OWNS ITS OWN SLOTS AND DESTROYS NOTHING ELSE IN ITS STORE, AND
+    THAT IS A REAL LOSS PATH RATHER THAN TIDINESS. The round that moved the two
+    week-headline slots off the worksheet would, with a plain overwrite, have
+    silently deleted whatever had been typed into them the moment the page was
+    next opened and blurred: \`values()\` only sees textareas that still exist,
+    so a retired slot's answer vanishes at the first save. A generator may
+    remove a field; it may not remove the answer that was in it. */
+ var OWNED = {};
+ SLOTS.forEach(function(s){ OWNED[s.id] = 1; });
+
  function save(){
-  if (store) { try { store.setItem(KEY, JSON.stringify(values())); } catch (e) {
+  if (store) { try {
+   var prev = read(), out = {}, k;
+   for (k in prev) if (!OWNED[k]) out[k] = prev[k];
+   var v = values();
+   for (k in v) out[k] = v[k];
+   store.setItem(KEY, JSON.stringify(out));
+  } catch (e) {
    warn.className = "warn on"; store = null; } }
   stat(true);
  }
@@ -296,6 +325,26 @@ function clientScript(slots) {
  }
 
  var saved = read();
+
+ /* THE CARRY. When a slot moves between pages its answer does not move with
+    it — two pages, two stores, and the reader would simply find an empty box
+    where they had written something. So a page may declare that one of its
+    slots INHERITS from a named slot in another page's store, and it fills
+    only when its own is empty and it SAYS SO ON THE ROW. A silent pre-fill
+    would be indistinguishable from something they had typed here. */
+ if (store && CARRY) {
+  var from = {};
+  try { from = JSON.parse(store.getItem(CARRY.fromKey) || "{}"); } catch (e) { from = {}; }
+  for (var mine in CARRY.map) {
+   var theirs = CARRY.map[mine];
+   if (!saved[mine] && from[theirs]) {
+    saved[mine] = from[theirs];
+    var flag = document.querySelector('[data-carried="' + mine + '"]');
+    if (flag) { flag.textContent = CARRY.note; flag.className = "carried on"; }
+   }
+  }
+ }
+
  areas.forEach(function(t){
   var id = t.getAttribute("data-slot");
   if (saved[id]) t.value = saved[id];
@@ -315,7 +364,7 @@ function clientScript(slots) {
  function collect(){
   var v = values(), lines = [], empty = [], n = 0;
   var d = new Date();
-  lines.push("WEIRD.BABY MUSEUM - DICTATION WORKSHEET - MIKE'S RESPONSES");
+  lines.push(${JSON.stringify(banner)});
   SLOTS.forEach(function(s){ if (v[s.id]) n++; else empty.push(s.id); });
   lines.push("captured " + d.getFullYear() + "-" + two(d.getMonth()+1) + "-" + two(d.getDate())
    + " " + clock() + "  -  " + n + " of " + SLOTS.length + " slots filled");
@@ -377,16 +426,6 @@ function clientScript(slots) {
 export function buildWorksheet() {
   const slots = slotList();
 
-  const weekBlock = ({ w, id }) => `<div class="wk" id="${id}">
-<span class="n">Week ${w.n} &middot; the week's own summary headline</span>
-${pair(`${id}.SUM`, `<p class="hl">${esc(w.headline)}</p>${w.headlineVerbatim
-    ? `<p class="k" style="font-size:12px;margin-top:7px">Carried from what you wrote, word for word
-       <span class="rail g">your words</span></p>`
-    : `<p class="k" style="font-size:12px;margin-top:7px">Ops&rsquo; sentence, from the shape you spoke
-       on ${esc(W1_ORIGIN.spokenOn)}.</p>`}`,
-  { rows: 2, ph: "your headline for the week" })}
-</div>`;
-
   const mapRow = (id, w, d) => `<div class="mr">
   <span class="d">Day ${d.n} &middot; ${esc(d.dow)}</span>
   <span class="o">${esc(d.headline)}<a class="j" href="#${id}-D${d.n}" title="go to the block">&darr;</a></span>
@@ -401,8 +440,12 @@ ${pair(`${id}.SUM`, `<p class="hl">${esc(w.headline)}</p>${w.headlineVerbatim
 type.</b> Two weeks, ten days. Start at the top and go down as far as you want &mdash;
 every level is complete on its own. When you want to send it back, press
 <b>copy everything</b> in the bar at the bottom.</p>
+<p class="lead"><b>The weekly headlines are not on this page any more.</b> They are all
+twelve together on <a href="arc.html">the twelve-week table</a> &mdash; asking for week
+one&rsquo;s headline here and again there would be one question with two answers, in two
+browser stores, neither able to see the other. This page is the ten <i>days</i>.</p>
 <p class="lead">Everything that explains how any of this works &mdash; the rails, the
-transfer classes, the standing rules, the ten checks against the tree, the three
+transfer classes, the standing rules, the checks against the tree, the three
 trackers &mdash; is on <a href="reference.html">the reference page</a>, and none of it
 is on this one.</p>
 </div>
@@ -410,9 +453,6 @@ is on this one.</p>
 <div class="warn" id="warn"><b>This browser will not let the page save.</b> Nothing you
 type here will survive a reload. Press <b>copy everything</b> and paste it somewhere
 safe before you close the tab.</div>
-
-<h2>The headline of headlines &mdash; the two weeks</h2>
-${WEEKS.map(weekBlock).join("\n")}
 
 <h2>The map &mdash; every day, both weeks</h2>
 <p class="lead" style="margin-bottom:14px">The whole shape in ten lines. <b>You do not
@@ -454,11 +494,15 @@ line came from. Ops&#8209;to&#8209;Mike, ${STAMP}; not part of the museum.</foot
 <div class="cbar">
  <span class="st" id="stat"></span>
  <span>
+  <a href="arc.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">the twelve weeks &rarr;</a>
   <a href="reference.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">reference &rarr;</a>
   <button data-gather="jump">Copy everything</button>
  </span>
 </div>
-${clientScript(slots)}`;
+${clientScript(slots, {
+    key: `wb.worksheet.${STAMP}`,
+    banner: "WEIRD.BABY MUSEUM - DICTATION WORKSHEET - MIKE'S RESPONSES",
+  })}`;
 
   return page({
     title: `THE WORKSHEET — WEEKS ONE AND TWO — ${STAMP}`,
@@ -466,6 +510,205 @@ ${clientScript(slots)}`;
     body,
   });
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   T1 — THE TWELVE-WEEK HEADLINE TABLE
+   ---------------------------------------------------------------------------
+   MIKE: *"one browser page, the same worksheet form and the same collector, but
+   ONLY the weekly headlines — twelve rows, left Ops / right Mike."*
+
+   THE SAME FORM AND THE SAME COLLECTOR IS LITERAL, NOT A RESEMBLANCE. This
+   builds from `pair()`, `SHEET_CSS` and `clientScript()` — the same three
+   declarations the worksheet uses, in the same file, so a fix to the form
+   lands on both pages and cannot land on one. The only two things that differ
+   are the `localStorage` key and the export's banner line, which is why those
+   became parameters this round rather than a second copy of the script.
+
+   ONE INPUT PER ROW AND NOTHING ELSE. He asked for the headlines only; the
+   Law of Subtraction agrees, and twelve rows on one screen is the whole point
+   of a page that exists to be worked all at once. The executive summary and
+   the notes field stay on the day blocks, where there is something to write
+   them about.
+   ═══════════════════════════════════════════════════════════════════════════ */
+const bandTag = w => {
+  const b = BANDS[w.band];
+  const cls = w.band === "DICTATED" ? "y" : w.invented ? "n" : "";
+  return `<span class="tag ${cls}">${esc(b.label)}</span>${w.invented
+    ? ` <span class="tag n">${esc(BANDS.INVENTED.label)}</span>` : ""}`;
+};
+
+/* THE RAIL IS THE COLUMN'S OWN LABEL HERE, AND THAT IS A CORRECTION THE LAP
+   FOUND RATHER THAN A STYLE CHOICE. The first cut printed the shared `Ops`
+   column label above the headline AND a rail tag beside the band — which read
+   as "OPS" twice on eleven rows, and, worse, put the word OPS at the head of
+   the one column that on week 2 contains MIKE'S OWN SENTENCE. One mark, in the
+   place the reader already looks, and it cannot mislabel the row it sits on. */
+const railLabel = w => w.rail === "VERBATIM"
+  ? `<span class="ml g">your words</span>`
+  : `<span class="ml">Ops</span>`;
+
+export function buildArc() {
+  const slots = ARC.map(w => ({
+    id: `ARC.W${w.n}`,
+    where: `WEEK ${w.n} — the week's headline (month ${monthOf(w.n).n}, ${BANDS[w.band].label})`,
+    ops: w.headline,
+  }));
+  const budget = preciousBudget();
+
+  const row = w => `<div class="arow" id="ARC-W${w.n}">
+<div class="an"><b>Week ${w.n}</b><div class="k">Month ${monthOf(w.n).n}</div></div>
+<div class="c ops">${railLabel(w)}
+  <p class="hl">${esc(w.headline)}</p>
+  <p class="bnd">${bandTag(w)}</p>
+  <p class="carried" data-carried="ARC.W${w.n}"></p>
+  ${w.from ? `<p class="k" style="font-size:11.5px;margin:5px 0 0">Carried from <code>${esc(w.from)}</code>${
+    w.days ? ` &middot; ${w.days} days outlined &mdash; <a href="worksheet.html#W${w.n}-D1">write them &rarr;</a>` : ""}</p>` : ""}
+  ${w.note ? `<p class="k" style="font-size:11.5px;margin:5px 0 0">${esc(w.note)}</p>` : ""}
+</div>
+<div class="c yours"><span class="ml y">yours</span><textarea data-slot="ARC.W${w.n}" rows="2"
+  placeholder="your headline for week ${w.n}" spellcheck="true"></textarea></div>
+</div>`;
+
+  const monthBlock = m => `<h2>Month ${m.n} &mdash; ${esc(m.name)} <span class="k"
+ style="text-transform:none;letter-spacing:0;font-size:12px">weeks ${m.weeks[0]}&ndash;${m.weeks[1]}</span></h2>
+${ARC.filter(w => monthOf(w.n).n === m.n).map(row).join("\n")}`;
+
+  const checkRow = c => `<div class="day"><div class="hd">
+  <span class="n">${esc(c.id)} &middot; ${c.open ? "UNRESOLVED" : "agrees"}</span>
+  <span class="slot" style="color:${c.open ? "var(--red)" : "var(--grn)"};font-size:15px;font-style:normal">${esc(c.title)}</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">${esc(c.check)}</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>${esc(c.derivedFrom)}</code></p></div>
+${c.open ? `  <div class="mine"><span class="lbl">yours &middot; the decision</span>
+    <p style="margin:0 0 6px">${esc(c.open)}</p></div>` : ""}
+${c.also ? `  <p class="k" style="margin:0;font-size:12.5px">${esc(c.also)}</p>` : ""}
+</div></div>`;
+
+  const body = `<div class="wrap">
+
+<div class="mast">
+<h1>The twelve weeks</h1>
+<p class="lead"><b>Twelve rows. Ops&rsquo; headline on the left, yours on the right, and
+it saves as you type.</b> This is the whole arc on one screen, which is the only
+reason it is its own page &mdash; you asked to work all twelve at once.</p>
+<p class="lead"><b>Read the two marks separately, because they answer different
+questions.</b> The label at the head of the left column &mdash; <b>Ops</b>, or
+<b class="gld">your words</b> &mdash; says <i>whose sentence this is</i>. The band under
+the headline says <i>whether there is anything of yours underneath it</i>. Week one is
+Ops&rsquo; sentence with your material under it; week two is <b>your sentence, carried
+word for word</b>, and it is the only one. Everything from week four on has nothing of
+yours under it at all.</p>
+<p class="lead">The ten <i>days</i> of weeks one and two are on
+<a href="worksheet.html">the worksheet</a>; how any of this works is on
+<a href="reference.html">the reference page</a>.</p>
+</div>
+
+<div class="warn" id="warn"><b>This browser will not let the page save.</b> Nothing you
+type here will survive a reload. Press <b>copy everything</b> and paste it somewhere
+safe before you close the tab.</div>
+
+<div class="note">
+<p><b>WHAT THE BANDS MEAN, ONCE.</b></p>
+<p><span class="tag y">${esc(BANDS.DICTATED.label)}</span> &nbsp;${esc(BANDS.DICTATED.means)}</p>
+<p><span class="tag">${esc(BANDS.SCAFFOLD.label)}</span> &nbsp;${esc(BANDS.SCAFFOLD.means)}</p>
+<p><span class="tag n">${esc(BANDS.INVENTED.label)}</span> &nbsp;${esc(BANDS.INVENTED.means)}</p>
+<p class="k" style="font-size:12.5px">${esc(ARC_ORIGIN.rule)}</p>
+</div>
+
+${MONTHS.map(monthBlock).join("\n")}
+
+<h2>What the twelve were checked against</h2>
+<p class="lead" style="margin-bottom:14px">Six claims about this repository, each
+settled by a named file. <b>${ARC_CHECKS.filter(c => c.open).length} are unresolved and
+they are yours</b>; the rest agree and are printed because an agreement nobody writes
+down gets argued again. <b>Nothing here was resolved by Ops</b> &mdash; resolving one is
+authoring.</p>
+${ARC_CHECKS.map(checkRow).join("\n")}
+
+<div class="note">
+<p><b>AND ONE NUMBER THE TWELVE-WEEK VIEW CAN PRODUCE THAT NO SHORTER ONE COULD.</b>
+The precious bucket&rsquo;s ceiling is two or three a ${esc(budget.per)}. Over
+${budget.weeks} weeks that is <b>${budget.min} to ${budget.max} genuine reveals in the
+whole arc</b> &mdash; the total the story has to spend.</p>
+<p class="k" style="font-size:12.5px"><b>This is not the voided arithmetic.</b> It
+multiplies a <i>ceiling</i> by a <i>period</i> and never touches an asset count. The
+figure Mike voided divided a count of photographs by a ceiling on attention. And
+nothing is priced against this one yet: <code>bucket</code> is unset on all 315 rows of
+the asset table.</p>
+</div>
+
+<h2 id="collector">Everything you have written</h2>
+<p class="lead" style="margin-bottom:14px">One press gathers all twelve into plain text
+and puts it on the clipboard. <b>This page has its own store</b> &mdash; it does not
+gather the worksheet&rsquo;s days, and the worksheet does not gather these. If the
+clipboard is refused, the text is selected below and Ctrl+C takes it.</p>
+<p style="margin:0 0 12px"><button class="cta" data-gather="here">Copy everything</button>
+<span id="says" class="k" style="margin-left:12px;font-size:12.5px"></span></p>
+<textarea id="out" readonly spellcheck="false"
+ placeholder="press copy everything and your twelve headlines appear here"></textarea>
+
+<footer>Ops&rsquo; half of this page is built from <code>reveal/arc-twelve.mjs</code>,
+which imports weeks one and two from <code>reveal/week-one.mjs</code> and
+<code>reveal/week-two.mjs</code> rather than restating them. Regenerated with
+<code>npm run dictation</code> &mdash; <b>which will not touch anything you have
+typed</b>. Ops&#8209;to&#8209;Mike, ${STAMP}; not part of the museum.</footer>
+</div>
+
+<div class="cbar">
+ <span class="st" id="stat"></span>
+ <span>
+  <a href="worksheet.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">the ten days &rarr;</a>
+  <a href="reference.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">reference &rarr;</a>
+  <button data-gather="jump">Copy everything</button>
+ </span>
+</div>
+${clientScript(slots, {
+    key: `wb.arc12.${STAMP}`,
+    banner: "WEIRD.BABY MUSEUM - THE TWELVE WEEKS - MIKE'S HEADLINES",
+    /* WEEKS ONE AND TWO WERE ASKED FOR ON THE WORKSHEET UNTIL TODAY. If
+       anything was typed into those two slots before they moved here, it is
+       still in the worksheet's store, and this is the only thing that would
+       ever go and look. It fills only an empty box and it marks the row. */
+    carry: {
+      fromKey: `wb.worksheet.${STAMP}`,
+      map: { "ARC.W1": "W1.SUM", "ARC.W2": "W2.SUM" },
+      note: "Carried over from what you had already typed on the worksheet, "
+        + "where this question used to be asked. Edit it freely — it lives here now.",
+    },
+  })}`;
+
+  return page({
+    title: `THE TWELVE WEEKS — ${STAMP}`,
+    css: OPS_CSS + SHEET_CSS + ARC_CSS,
+    body,
+  });
+}
+
+/* The three-column row. Same two-column pair as the worksheet with a week
+   stub in front of it, and it collapses to one column at the same width the
+   worksheet's pairs do — a twelve-row table is the one shape on these pages
+   that a phone can actually hold, and it must not be the one that scrolls. */
+const ARC_CSS = `
+.arow{display:grid;grid-template-columns:8ch 1fr 1fr;gap:0 20px;align-items:start;
+ padding:13px 0;border-bottom:1px solid var(--line2)}
+.arow:last-child{border-bottom:0}
+.an{font-size:13px}
+.an b{color:var(--fg)}
+.an .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.arow .c .hl{font-size:16px;color:var(--fg);margin:0}
+.bnd{margin:6px 0 0!important;font-size:11px}
+.note .tag{margin-right:4px}
+.gld{color:var(--gold)}
+.carried{display:none}
+.carried.on{display:block;margin:6px 0 0!important;font-size:11.5px;color:var(--amb);
+ border-left:3px solid var(--amb);padding-left:9px}
+@media (max-width:900px){
+ .arow{grid-template-columns:1fr;gap:8px 0}
+ .an{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2)}
+ .an .k{display:inline;margin-left:6px}
+}
+`;
 
 /* ═══════════════════════════════════════════════════════════════════════════
    W5/W8 — THE REFERENCE PAGE
@@ -603,12 +846,16 @@ ${RECORD_RULES.map(r => `<tr>
 <h2>The bouncy ball law, and the two runways</h2>
 ${runwayBlock(artifacts.runways, "the " + artifacts.waiting + " pictures an entry can reach for today")}
 
-<h2 id="collisions">Where the outlines meet the tree &mdash; ${ALL_COLL.length} checks</h2>
+<h2 id="collisions">Where the DAY outlines meet the tree &mdash; ${ALL_COLL.length} checks</h2>
 <div class="note" style="margin-bottom:14px"><p>Each of these is a claim an outline
 makes, run against what the repository actually holds. <b>${nOpen} of the
 ${ALL_COLL.length} is unresolved</b> and is drawn in red; <b>${nRuled} you have already
 ruled on</b>, and those carry your ruling in gold. The rest are agreements &mdash; and
 three of them are worth knowing about, because nobody arranged them.</p>
+<p><b>THESE ${ALL_COLL.length} ARE THE DAY OUTLINES ONLY &mdash; WEEKS ONE AND TWO.</b>
+The twelve-week arc has ${ARC_CHECKS.length} checks of its own, one of them unresolved,
+and they are printed on <a href="arc.html#collector">the twelve-week table</a> rather
+than copied here. Two pages, two populations; neither is a subset of the other.</p>
 <p class="ask"><b>A RULED CHECK IS NOT DELETED FROM THIS PAGE.</b> The collision was
 real, it is why the ruling was needed, and a page that quietly drops what it used to
 say cannot be checked against itself a week later.</p></div>

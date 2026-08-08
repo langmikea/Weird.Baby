@@ -1484,3 +1484,108 @@ load-bearing in it is NOT here — it is the two-stages paragraph at the head of
   cookie**, which made `/hr` rendering in a browser that holds one look exactly
   like a permission hold that had failed. `curl` with no cookie gets 404 on all
   three locked chunks. The door works.
+
+---
+
+**Appended 2026-08-07 (THE REVEAL MECHANISM): THE TWO BUCKETS + 013, verbatim, under CLAUDE.md's own ~600-line rule. It had reached 707.**
+
+### 2026-08-07 -> THE TWO BUCKETS + 013 (B1-B3) - sealed
+- **THE BOUNCY BALL LAW CAPS POINTS OF FOCUS, NOT ASSETS, AND THE OLD SENTENCE WAS
+  NOT FALSE - WHICH IS WHY NOTHING CAUGHT IT.** It was carried as *"never more than
+  two or three offerings in a day"*, and Ops supplied the wrong UNIT twice: in the
+  rule's own bearing line, and in the tracker, which divided a count of PHOTOGRAPHS
+  by a ceiling on ATTENTION and printed **"16 pictures = 6-8 days of material"**.
+  Every input was a real measurement and the arithmetic was sound. **VOID.** The law,
+  the two buckets and the two runways are **`reveal/focus.mjs`** (Doctrine 20);
+  `VOIDED` keeps the dead figure with its cause, because a superseded number that is
+  merely deleted comes back the next time somebody does the obvious arithmetic. Gates:
+  lint **11/9 = baseline** - build green - provenance **PASS** - `reveal:check`
+  **PASS** - `parity:gate` **PASS** - `instory:gate` **PASS** - `assets:orphans`
+  **0** - **the lap DID NOT RUN**, said plainly below. Log:
+  `docs/MUSEUM_TWO_BUCKETS_LOG-20260807.md`.
+- **THE ASYMMETRY IS THE MECHANISM AND THE THIRD NUMBER IS THE HONEST ONE.** PRECIOUS
+  has a ceiling (two or three A WEEK - the period moved with the unit), so it divides
+  into weeks; **DUMP has none, so it divides into nothing** and `runways()` is
+  structurally unable to print one for it - a symmetrical table would re-commit the
+  original error in the other bucket. **`bucket` is the sixth JUDGED field on the
+  asset table** beside `verdict`, carried across a scan, **null on all 315 rows**, and
+  **Ops does not derive it**: a heuristic calling every machine photograph precious
+  would make every tracker read as answered while nothing had been answered. So the
+  16 pictures behind the door are **between nothing at all and 6-8 WEEKS** - the
+  number survived, the unit moved - and the whole gap is **B-a**.
+- **RECORD 013 IS THE PROTOTYPE AND IS KEPT, ON MIKE'S OWN CRITERION.** He offered
+  retire-or-mark and one test - *honest AND the machinery exercised* - and retiring
+  empties the volume: `RecordEntry.jsx` never mounts, the index budgets police no
+  string, the per-entry derivation loops over nothing, and `delivered()` goes empty,
+  **leaving the pull-back rule with no positive case anywhere in the museum**. **The
+  mark is in the ledger and the dictation pages and NOWHERE ON THE GLASS** - that
+  line's subject is the making of the museum (Doctrine 11), and the entry's own text
+  asserts nothing false. **Nothing in `src/` changed this round at all.**
+- **W-1 CLOSES WITH A FOURTH ANSWER THAT WAS NOT ON THE LIST** - all three readings
+  assumed the entry in the tree and day one's entry were the same entry; Mike
+  dissolved the premise, so day 1's entry is **001 and does not exist yet**. **M19
+  closes**: a record number is THIS VOLUME'S own, from 001. **And closing M19 exposed
+  that C8's stated blocker was the wrong one** - `recordEpoch` is a DATE, not a
+  number, so C8 waits on Record 001's date and always did. **013's NUMBER is
+  deliberately untouched (B-b)** - he said it needs no re-dating, and `no` is the
+  field the whole ledger is keyed on.
+- **THE LAP DID NOT RUN: the Chrome extension is not connected in this session.** No
+  `src/` file changed, so the glass is byte-identical to yesterday's 389px/1233px
+  measurement, and a static structural check cleared all five pages (every table
+  inside a `.tw` scroller, no new hard widths, no images). **That is mitigation, not
+  a measurement, and it is not being called one.** Surfacing unmoved at **20
+  spendable - the third packet running** with nothing off the back shelf.
+
+---
+
+**Appended 2026-08-07 (THE REVEAL MECHANISM): THE WORKSHEET, verbatim, same rule.**
+
+### 2026-08-07 -> THE WORKSHEET (W1-W8) - sealed
+- **THE PRIOR PAGE FAILED ON NEITHER ACCURACY NOR TONE, WHICH IS WHY NOTHING
+  CAUGHT IT.** `week1.html` explained the rail scheme, the provenance model, the
+  transfer classes, the bouncy ball law and five collisions **before it showed a
+  single headline**, and then had nowhere for Mike to write - *"if it is the
+  firehose I have to drink from to do anything, thanks, pass."* It is two files
+  now: **`worksheet.html`** (32 slots across two weeks and ten days, Ops left /
+  input right, `localStorage` autosave surviving a reload, one button that
+  gathers everything into plain text) and **`reference.html`**. The generator
+  **prunes `week1.html` by name** rather than leave an orphan every other page
+  still links past. Gates: lint **11/9 = baseline** - build green - provenance
+  **PASS** - `reveal:check` **PASS** - `parity:gate` **PASS** - `instory:gate`
+  **PASS** - `assets:orphans` **0** - **the lap RAN, six pages, 390px and
+  1228px**, zero sideways scroll, zero console errors. Log:
+  `docs/MUSEUM_WORKSHEET_LOG-20260807.md`.
+- **WEEK TWO ARRIVED IN WRITING, WHICH MAKES IT QUOTABLE, AND THE OLD RAIL SCHEME
+  HAD NO WAY TO SAY SO.** W1's rule was built for a week Mike SPOKE, so
+  gold-empty was a fact about week one rather than a policy. Carrying six written
+  beats on the blue rail would have been the **inverse** of the error the rails
+  exist to prevent: **his own sentence left in blue gets quietly "improved" by
+  the next round and nothing can tell it was ever his.** `reveal/week-two.mjs`
+  carries a `beat` field that **may be deleted but never reworded**. Ops divided
+  six beats into five days and **the one merge is named** - *the unlabeled table
+  holding more codes* + *the codes that fail when typed directly*, one object -
+  and **no `weight` was invented** (K-b), for the same reason no `bucket` is
+  derived (B-a).
+- **THE OUTLINE PRODUCED EXACTLY ONE COLLISION AND IT IS THE ROUND'S OPEN ITEM
+  (X-1).** Week two's Friday is a box on a porch; `TRANSFERS.PACKAGE.opens` is
+  **3**; that beat is the only one in either week outside its own window. Three
+  ways out, all Mike's, and **the cheapest - rule that an unlabelled box is not a
+  package - is a change to the transfer model's own boundary, which Ops does not
+  make on an inference.** Where it is surfaced is half the answer: one amber line
+  on the day-5 block, the argument on the reference page. Four other checks agree,
+  two of them unarranged.
+- **THE SHELL WAS MOVED AND THE MOVE WAS PROVED.** Seven declarations left
+  `prep.mjs` for `tools/dictation/shell.mjs`; the three pages that did not change
+  came out **byte-identical** to copies taken before the split. **AND THE LAP
+  FOUND A BUG NO GATE HERE CAN SEE:** `font: 14px/1.5 inherit` is invalid - the
+  shorthand takes a family - so Chrome dropped it and every writing field came up
+  in the UA's monospace, **on the one page whose job is writing**. The same
+  construction is in the shared `OPS_CSS` three times, noted rather than changed.
+- **ONE THING IS UNMEASURED AND IS SAID PLAINLY.** Whether `clipboard.writeText`
+  succeeds under a genuine user click: real mouse input stopped reaching the page
+  mid-session, so every test click was synthetic and carried no user activation.
+  The fallback (select the text, say so) was observed working and the button is
+  useful either way. **Also: never call `navigator.clipboard.readText()` from the
+  driver** - it raises a tab-modal permission prompt that froze the renderer and
+  timed out CDP. **Nothing in `src/` changed.** **Surfacing unmoved at 20
+  spendable - the FOURTH packet running.**

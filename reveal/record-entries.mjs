@@ -96,10 +96,15 @@ function stringsUnder(node, out = []) {
 /* ---- the walk ------------------------------------------------------------ */
 let CACHE = null;
 
-function read() {
-  if (CACHE) return CACHE;
-  const file = path.join(REPO, RECORD_SOURCE);
-  const src = fs.readFileSync(file, "utf8");
+/* [R2 2026-08-07] THE PARSE IS SEPARATED FROM THE READ, AND THAT IS THE WHOLE
+   OF THE CHANGE. `reveal/day.mjs` has to answer "what does today's Record
+   deliver that YESTERDAY'S did not", and yesterday's Record is a blob in git,
+   not a file on disk. Everything below is the previous `read()` body verbatim
+   with the source handed in rather than opened; the split adds no rule and
+   removes none. The file's own split is untouched: this still returns numbers
+   and asset paths, and the caller that can see words is still the one that
+   forbids them. */
+export function parseRecord(src) {
   const ast = Parser.parse(src, { ecmaVersion: "latest", sourceType: "module" });
 
   /* Find the track object whose `id` is "record" AND which carries a `face`.
@@ -144,7 +149,12 @@ function read() {
     entries.push({ no, assets: [...new Set(assets)] });
   }
 
-  CACHE = { entries, prose };
+  return { entries, prose };
+}
+
+function read() {
+  if (CACHE) return CACHE;
+  CACHE = parseRecord(fs.readFileSync(path.join(REPO, RECORD_SOURCE), "utf8"));
   return CACHE;
 }
 

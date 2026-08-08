@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE TWELVE WEEKS — 2026-08-07</title>
+<style>
+:root{color-scheme:light dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;--redfg:#f0c9c4;
+ --grn:#7fa86a;--blu:#8fa8c4;--amb:#e08a5a}
+*{box-sizing:border-box}
+body{margin:0;padding:28px 26px 110px;background:var(--bg);color:var(--fg);
+ font:15px/1.55 -apple-system,"Segoe UI",system-ui,sans-serif}
+.wrap{max-width:1180px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:21px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 8px}
+.back{font-size:12px;color:var(--dim2);margin:0 0 22px}
+h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:34px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:22px 0 8px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:15px 17px;margin:0 0 26px;border-radius:3px}
+.note p{margin:0 0 10px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+.ask{border-left:3px solid var(--red);padding-left:12px;color:var(--redfg)}
+.ops{border-left:3px solid var(--blu);padding-left:12px}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc}
+/* A five-column table cannot fit a phone and must not be made to try. The
+   TABLE scrolls inside its own box; the PAGE never scrolls sideways. */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tw table{min-width:760px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:6px 9px 6px 0;position:sticky;top:0;background:var(--bg)}
+td{border-bottom:1px solid var(--line2);padding:8px 9px 8px 0;vertical-align:top}
+tr.hide{display:none}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.y{border-color:#4a6a3a;color:var(--grn)}
+.tag.n{border-color:#6a3a30;color:var(--amb)}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.b{border-color:#3a5570;color:var(--blu)}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.bar input{background:var(--panel);border:1px solid var(--line);color:var(--fg);padding:6px 10px;
+ border-radius:3px;font:13px/1.4 inherit;width:280px}
+.bar button{background:transparent;border:1px solid var(--line);color:var(--dim);padding:5px 11px;
+ border-radius:3px;font:11px/1.3 inherit;letter-spacing:.09em;text-transform:uppercase;cursor:pointer;margin-left:5px}
+.bar button[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.count{font-size:12px;color:var(--dim2);margin-left:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:14px 15px}
+.card h4{margin:0 0 4px;font-size:14px;color:var(--fg)}
+.card .id{font-family:ui-monospace,Consolas,monospace;font-size:11px;color:var(--blu);margin:0 0 8px}
+.card p{margin:0 0 8px;font-size:13px}
+.card .meta{font-size:12px;color:var(--dim);margin:0}
+.k{color:var(--dim2)}
+.day{border:1px solid var(--line);border-radius:3px;margin:0 0 18px;overflow:hidden}
+.day > .hd{background:var(--panel);padding:12px 15px;border-bottom:1px solid var(--line)}
+.day > .hd .n{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim2)}
+.day > .hd .slot{display:block;margin-top:5px;font-size:16px;color:var(--red);font-style:italic}
+.day > .bd{padding:13px 15px}
+.mine{border-left:3px solid var(--gold);padding-left:11px;margin:0 0 12px}
+.mine .lbl,.scaf .lbl{font-size:10px;letter-spacing:.13em;text-transform:uppercase;display:block;margin-bottom:4px}
+.mine .lbl{color:var(--gold)}
+.scaf{border-left:3px solid var(--blu);padding-left:11px;margin:0 0 12px}
+.scaf .lbl{color:var(--blu)}
+/* The attribution marker. NOT gold — gold is reserved for material that is
+   Mike's own words, and a paraphrase wearing gold is the whole hazard. */
+.rail{display:inline-block;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;
+ border:1px solid #3a5570;color:var(--blu);padding:0 5px;border-radius:2px;white-space:nowrap;
+ vertical-align:1px;margin-left:4px}
+.rail.m{border-color:#7a5540;color:var(--amb);margin-left:0}
+.tl{list-style:none;padding:0;margin:0}
+.tl li{display:grid;grid-template-columns:19ch 1fr;gap:0 14px;padding:7px 0;
+ border-bottom:1px dotted var(--line2);margin:0}
+.tl li:last-child{border-bottom:0}
+.tl .at{color:var(--dim2);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding-top:2px}
+@media (max-width:620px){.tl li{grid-template-columns:1fr}.tl .at{margin-bottom:2px}}
+ul{margin:0 0 10px;padding-left:19px}li{margin:0 0 5px}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--dim2);font-size:12px}
+@media (max-width:720px){body{padding:20px 14px 80px}.bar input{width:100%}}
+
+body{padding-bottom:96px}
+.mast{margin:0 0 26px}
+.mast .lead{color:var(--dim);font-size:13.5px;margin:0 0 6px;max-width:74ch}
+.mast .lead b{color:var(--fg)}
+.warn{border:1px solid #6a3028;background:#241a19;color:var(--redfg);padding:11px 14px;
+ border-radius:3px;margin:0 0 20px;font-size:13.5px;display:none}
+.warn.on{display:block}
+h2{margin-top:40px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:0 20px;align-items:start}
+.c{border-left:2px solid var(--line);padding:0 0 0 11px;min-width:0}
+.c.ops{border-left-color:#33465a}
+.c.yours{border-left-color:#6b5426}
+.ml{display:block;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+ color:var(--dim2);margin:0 0 5px}
+.ml.y{color:#9a7f43}
+.c p{margin:0 0 7px;font-size:14px}
+.c p:last-child{margin:0}
+.c ul{margin:0;padding-left:17px}
+.c li{font-size:13.5px;margin:0 0 4px}
+.c .hl{font-size:16px;color:var(--fg)}
+/* THE FAMILY IS WRITTEN OUT AND THE REASON IS A REAL BUG THIS ROUND HIT:
+   `font: 14px/1.5 inherit` is INVALID — the font shorthand takes a family, and
+   `inherit` is only legal as the whole value. Chrome drops the declaration
+   entirely, so the textareas came up in the UA's monospace at the UA's size,
+   on the one page whose whole job is writing. The shorthand is used with an
+   `inherit` family in three places in the shared OPS_CSS and has the same
+   defect there; those are the tracker pages' filter controls, they are not
+   this round's to change, and they are noted here so the next reader knows the
+   pattern is a bug and not a house style. */
+textarea{display:block;width:100%;background:#191820;border:1px solid var(--line);
+ color:var(--fg);border-radius:3px;padding:9px 11px;resize:vertical;
+ font:14px/1.55 -apple-system,"Segoe UI",system-ui,sans-serif;
+ overflow:hidden;min-height:52px}
+textarea:focus{outline:0;border-color:var(--gold)}
+textarea.has{border-color:#5c4a22;background:#1c1a1a}
+.fld{margin:0 0 18px}
+.fld:last-child{margin:0}
+.fh{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim2);
+ border-bottom:1px solid var(--line2);padding-bottom:4px;margin:0 0 9px}
+.day{border:1px solid var(--line);border-radius:3px;margin:0 0 20px;overflow:hidden}
+.day .hd{background:var(--panel);padding:11px 15px;border-bottom:1px solid var(--line)}
+.day .hd .n{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim2)}
+.day .bd{padding:15px}
+.beat{margin-top:6px;font-size:15px;color:var(--gold);font-style:italic}
+.rail.g{border-color:#7a5a20;color:var(--gold);font-style:normal;margin-left:6px}
+.flag{margin:0 0 15px;padding:9px 12px;border-left:3px solid var(--amb);background:#201c19;
+ font-size:13px;color:var(--dim)}
+.flag b{color:var(--amb)}
+.wk{border:1px solid var(--line);border-radius:3px;padding:15px;margin:0 0 16px;background:var(--panel)}
+.wk .n{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim2);display:block;margin:0 0 9px}
+.wk .c .hl{font-size:19px;letter-spacing:.03em}
+.map{border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:0 0 16px}
+.map .mh{background:var(--panel);padding:9px 14px;font-size:11px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--dim2);border-bottom:1px solid var(--line)}
+.map .mr{display:grid;grid-template-columns:9ch 1fr 1fr;gap:0 16px;padding:9px 14px;
+ border-bottom:1px solid var(--line2);align-items:baseline}
+.map .mr:last-child{border-bottom:0}
+.map .d{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2)}
+.map .o{font-size:14px}
+.map .m{font-size:13.5px;color:var(--gold);white-space:pre-wrap;min-width:0;overflow-wrap:anywhere}
+.map .m:empty::before{content:"—";color:var(--dim2)}
+.map a.j{color:var(--dim2);font-size:11px;text-decoration:none;margin-left:6px}
+.map a.j:hover{color:var(--blu)}
+.cbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#101015;
+ border-top:1px solid var(--line);padding:9px 26px;display:flex;gap:14px;align-items:center;
+ justify-content:space-between;flex-wrap:wrap}
+.cbar .st{font-size:12px;color:var(--dim2)}
+.cbar .st b{color:var(--fg)}
+.cbar button,button.cta{background:var(--gold);border:0;color:#17150f;padding:9px 18px;border-radius:3px;
+ font:600 11.5px/1.3 -apple-system,"Segoe UI",system-ui,sans-serif;
+ letter-spacing:.13em;text-transform:uppercase;cursor:pointer}
+.cbar button:active{transform:translateY(1px)}
+.cbar .sec{background:transparent;border:1px solid var(--line);color:var(--dim)}
+#out{width:100%;min-height:190px;background:#131218;border:1px solid var(--line);color:var(--dim);
+ border-radius:3px;padding:11px 13px;font:12.5px/1.5 ui-monospace,Consolas,monospace;
+ resize:vertical;white-space:pre;overflow:auto}
+@media (max-width:900px){
+ .pair{grid-template-columns:1fr;gap:14px 0}
+ .c.yours{margin-top:2px}
+ .map .mr{grid-template-columns:1fr;gap:4px 0}
+ .map .d{margin-bottom:2px}
+ .cbar{padding:8px 14px}
+}
+
+.arow{display:grid;grid-template-columns:8ch 1fr 1fr;gap:0 20px;align-items:start;
+ padding:13px 0;border-bottom:1px solid var(--line2)}
+.arow:last-child{border-bottom:0}
+.an{font-size:13px}
+.an b{color:var(--fg)}
+.an .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.arow .c .hl{font-size:16px;color:var(--fg);margin:0}
+.bnd{margin:6px 0 0!important;font-size:11px}
+.note .tag{margin-right:4px}
+.gld{color:var(--gold)}
+.carried{display:none}
+.carried.on{display:block;margin:6px 0 0!important;font-size:11.5px;color:var(--amb);
+ border-left:3px solid var(--amb);padding-left:9px}
+@media (max-width:900px){
+ .arow{grid-template-columns:1fr;gap:8px 0}
+ .an{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2)}
+ .an .k{display:inline;margin-left:6px}
+}
+</style></head><body>
+<div class="wrap">
+
+<div class="mast">
+<h1>The twelve weeks</h1>
+<p class="lead"><b>Twelve rows. Ops&rsquo; headline on the left, yours on the right, and
+it saves as you type.</b> This is the whole arc on one screen, which is the only
+reason it is its own page &mdash; you asked to work all twelve at once.</p>
+<p class="lead"><b>Read the two marks separately, because they answer different
+questions.</b> The label at the head of the left column &mdash; <b>Ops</b>, or
+<b class="gld">your words</b> &mdash; says <i>whose sentence this is</i>. The band under
+the headline says <i>whether there is anything of yours underneath it</i>. Week one is
+Ops&rsquo; sentence with your material under it; week two is <b>your sentence, carried
+word for word</b>, and it is the only one. Everything from week four on has nothing of
+yours under it at all.</p>
+<p class="lead">The ten <i>days</i> of weeks one and two are on
+<a href="worksheet.html">the worksheet</a>; how any of this works is on
+<a href="reference.html">the reference page</a>.</p>
+</div>
+
+<div class="warn" id="warn"><b>This browser will not let the page save.</b> Nothing you
+type here will survive a reload. Press <b>copy everything</b> and paste it somewhere
+safe before you close the tab.</div>
+
+<div class="note">
+<p><b>WHAT THE BANDS MEAN, ONCE.</b></p>
+<p><span class="tag y">derives from your own dictation</span> &nbsp;There is material of yours behind this week — spoken on 2026-08-02 or written on 2026-08-07. It does not mean the sentence is yours; see the rail beside it.</p>
+<p><span class="tag">Ops scaffolding</span> &nbsp;Nothing of yours is under this week. The headline is a shape to argue with, and arguing with a draft is faster than starting from a blank line — which is the only reason it exists.</p>
+<p><span class="tag n">invented structure awaiting your story</span> &nbsp;Month 3 especially. These four are not even a shape you gave — they are the shape a three-act arc has, with your subject not yet in it.</p>
+<p class="k" style="font-size:12.5px">Mike supplied all twelve headlines in the round instruction of 2026-08-07 and described them as Ops' left column, from the arc as it stands. He marked weeks 1–3 as deriving from his own dictation and weeks 4–12 as Ops scaffolding, month 3 especially. Week 2's headline is the one string here carried as VERBATIM, and that is inherited from reveal/week-two.mjs rather than decided here.</p>
+</div>
+
+<h2>Month 1 &mdash; THE ARRIVAL <span class="k"
+ style="text-transform:none;letter-spacing:0;font-size:12px">weeks 1&ndash;4</span></h2>
+<div class="arow" id="ARC-W1">
+<div class="an"><b>Week 1</b><div class="k">Month 1</div></div>
+<div class="c ops"><span class="ml">Ops</span>
+  <p class="hl">THE WEEKEND THAT WASN'T SUPPOSED TO HAPPEN</p>
+  <p class="bnd"><span class="tag y">derives from your own dictation</span></p>
+  <p class="carried" data-carried="ARC.W1"></p>
+  <p class="k" style="font-size:11.5px;margin:5px 0 0">Carried from <code>reveal/week-one.mjs</code> &middot; 5 days outlined &mdash; <a href="worksheet.html#W1-D1">write them &rarr;</a></p>
+  
+</div>
+<div class="c yours"><span class="ml y">yours</span><textarea data-slot="ARC.W1" rows="2"
+  placeholder="your headline for week 1" spellcheck="true"></textarea></div>
+</div>
+<div class="arow" id="ARC-W2">
+<div class="an"><b>Week 2</b><div class="k">Month 1</div></div>
+<div class="c ops"><span class="ml g">your words</span>
+  <p class="hl">THE PASSWORD WAS IN THE ROOM THE WHOLE TIME</p>
+  <p class="bnd"><span class="tag y">derives from your own dictation</span></p>
+  <p class="carried" data-carried="ARC.W2"></p>
+  <p class="k" style="font-size:11.5px;margin:5px 0 0">Carried from <code>reveal/week-two.mjs</code> &middot; 5 days outlined &mdash; <a href="worksheet.html#W2-D1">write them &rarr;</a></p>
+  
+</div>
+<div class="c yours"><span class="ml y">yours</span><textarea data-slot="ARC.W2" rows="2"
+  placeholder="your headline for week 2" spellcheck="true"></textarea></div>
+</div>
+<div class="arow" id="ARC-W3">
+<div class="an"><b>Week 3</b><div class="k">Month 1</div></div>
+<div class="c ops"><span class="ml">Ops</span>
+  <p class="hl">IT IS BEAUTIFUL AND IT DOES NOTHING</p>
+  <p class="bnd"><span class="tag y">derives from your own dictation</span></p>
+  <p class="carried" data-carried="ARC.W3"></p>
+  
+  <p class="k" style="font-size:11.5px;margin:5px 0 0">The first week whose subject is an object rather than a file.</p>
+</div>
+<div class="c yours"><span class="ml y">yours</span><textarea data-slot="ARC.W3" rows="2"
+  placeholder="your headline for week 3" spellcheck="true"></textarea></div>
+</div>
+<div class="arow" id="ARC-W4">
+<div class="an"><b>Week 4</b><div class="k">Month 1</div></div>
+<div class="c ops"><span class="ml">Ops</span>
+  <p class="hl">IT BOOTS, AND IT HAS OPINIONS</p>
+  <p class="bnd"><span class="tag ">Ops scaffolding</span></p>
+  <p class="carried" data-carried="ARC.W4"></p>
+  
+  
+</div>
+<div class="c yours"><span class="ml y">yours</span><textarea data-slot="ARC.W4" rows="2"
+  placeholder="your headline for week 4" spellcheck="true"></textarea></div>
+</div>
+<h2>Month 2 &mdash; THE TURN — the units get understood and stop being the point <span class="k"
+ style="text-transform:none;letter-spacing:0;font-size:12px">weeks 5&ndash;8</span></h2>
+<div class="arow" id="ARC-W5">
+<div class="an"><b>Week 5</b><div class="k">Month 2</div></div>
+<div class="c ops"><span class="ml">Ops</span>
+  <p class="hl">THE SECOND UNIT IS A DIFFERENT PERSON</p>
+  <p class="bnd"><span class="tag ">Ops scaffolding</span></p>
+  <p class="carried" data-carried="ARC.W5"></p>
+  
+  
+</div>
+<div class="c yours"><span class="ml y">yours</span><textarea data-slot="ARC.W5" rows="2"
+  placeholder="your headline for week 5" spellcheck="true"></textarea></div>
+</div>
+<div class="arow" id="ARC-W6">
+<div class="an"><b>Week 6</b><div class="k">Month 2</div></div>
+<div class="c ops"><span class="ml">Ops</span>
+  <p class="hl">THE FOURTH BOX IS ALREADY IN THE HALLWAY</p>
+  <p class="bnd"><span class="tag ">Ops scaffolding</span></p>
+  <p class="carried" data-carried="ARC.W6"></p>
+  
+  <p class="k" style="font-size:11.5px;margin:5px 0 0">Names a FOURTH box inside the package window — see A-1.</p>
+</div>
+<div class="c yours"><span class="ml y">yours</span><textarea data-slot="ARC.W6" rows="2"
+  placeholder="your headline for week 6" spellcheck="true"></textarea></div>
+</div>
+<div class="arow" id="ARC-W7">
+<div class="an"><b>Week 7</b><div class="k">Month 2</div></div>
+<div class="c ops"><span class="ml">Ops</span>
+  <p class="hl">THE FOURTH ONE FINISHES SOMETHING</p>
+  <p class="bnd"><span class="tag ">Ops scaffolding</span></p>
+  <p class="carried" data-carried="ARC.W7"></p>
+  
+  <p class="k" style="font-size:11.5px;margin:5px 0 0">The last Friday of the package window — see A-1.</p>
+</div>
+<div class="c yours"><span class="ml y">yours</span><textarea data-slot="ARC.W7" rows="2"
+  placeholder="your headline for week 7" spellcheck="true"></textarea></div>
+</div>
+<div class="arow" id="ARC-W8">
+<div class="an"><b>Week 8</b><div class="k">Month 2</div></div>
+<div class="c ops"><span class="ml">Ops</span>
+  <p class="hl">HE HAS BEEN WATCHING THE WHOLE TIME</p>
+  <p class="bnd"><span class="tag ">Ops scaffolding</span></p>
+  <p class="carried" data-carried="ARC.W8"></p>
+  
+  
+</div>
+<div class="c yours"><span class="ml y">yours</span><textarea data-slot="ARC.W8" rows="2"
+  placeholder="your headline for week 8" spellcheck="true"></textarea></div>
+</div>
+<h2>Month 3 &mdash; THE RECKONING <span class="k"
+ style="text-transform:none;letter-spacing:0;font-size:12px">weeks 9&ndash;12</span></h2>
+<div class="arow" id="ARC-W9">
+<div class="an"><b>Week 9</b><div class="k">Month 3</div></div>
+<div class="c ops"><span class="ml">Ops</span>
+  <p class="hl">THE MACHINES KNOW EACH OTHER</p>
+  <p class="bnd"><span class="tag n">Ops scaffolding</span> <span class="tag n">invented structure awaiting your story</span></p>
+  <p class="carried" data-carried="ARC.W9"></p>
+  
+  
+</div>
+<div class="c yours"><span class="ml y">yours</span><textarea data-slot="ARC.W9" rows="2"
+  placeholder="your headline for week 9" spellcheck="true"></textarea></div>
+</div>
+<div class="arow" id="ARC-W10">
+<div class="an"><b>Week 10</b><div class="k">Month 3</div></div>
+<div class="c ops"><span class="ml">Ops</span>
+  <p class="hl">THE PEOPLE IN THE CASES</p>
+  <p class="bnd"><span class="tag n">Ops scaffolding</span> <span class="tag n">invented structure awaiting your story</span></p>
+  <p class="carried" data-carried="ARC.W10"></p>
+  
+  
+</div>
+<div class="c yours"><span class="ml y">yours</span><textarea data-slot="ARC.W10" rows="2"
+  placeholder="your headline for week 10" spellcheck="true"></textarea></div>
+</div>
+<div class="arow" id="ARC-W11">
+<div class="an"><b>Week 11</b><div class="k">Month 3</div></div>
+<div class="c ops"><span class="ml">Ops</span>
+  <p class="hl">WHAT THIS WAS FOR</p>
+  <p class="bnd"><span class="tag n">Ops scaffolding</span> <span class="tag n">invented structure awaiting your story</span></p>
+  <p class="carried" data-carried="ARC.W11"></p>
+  
+  
+</div>
+<div class="c yours"><span class="ml y">yours</span><textarea data-slot="ARC.W11" rows="2"
+  placeholder="your headline for week 11" spellcheck="true"></textarea></div>
+</div>
+<div class="arow" id="ARC-W12">
+<div class="an"><b>Week 12</b><div class="k">Month 3</div></div>
+<div class="c ops"><span class="ml">Ops</span>
+  <p class="hl">WHAT WE STILL DON'T KNOW</p>
+  <p class="bnd"><span class="tag n">Ops scaffolding</span> <span class="tag n">invented structure awaiting your story</span></p>
+  <p class="carried" data-carried="ARC.W12"></p>
+  
+  
+</div>
+<div class="c yours"><span class="ml y">yours</span><textarea data-slot="ARC.W12" rows="2"
+  placeholder="your headline for week 12" spellcheck="true"></textarea></div>
+</div>
+
+<h2>What the twelve were checked against</h2>
+<p class="lead" style="margin-bottom:14px">Six claims about this repository, each
+settled by a named file. <b>2 are unresolved and
+they are yours</b>; the rest agree and are printed because an agreement nobody writes
+down gets argued again. <b>Nothing here was resolved by Ops</b> &mdash; resolving one is
+authoring.</p>
+<div class="day"><div class="hd">
+  <span class="n">A-1 &middot; UNRESOLVED</span>
+  <span class="slot" style="color:var(--red);font-size:15px;font-style:normal">The headlines answer a question the transfer model says is not in the arc.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">PACKAGE opens at week 3 and closes at week 7 — FIVE weeks carrying FOUR Fridays — and `transfers.mjs` states in its own header that WHICH WEEK GOES EMPTY IS NOT IN THE ARC, so no package row carries a week. But week 6 says the FOURTH box is already in the hallway and week 7 says the fourth one finishes something. Read straight, that puts the four arrivals on the Fridays of weeks 3, 4, 5 and 6, and makes WEEK 7 THE EMPTY ONE — an answer to a question the model deliberately left open.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/transfers.mjs (TRANSFERS.PACKAGE.opens = 3, closes = 7)</code></p></div>
+  <div class="mine"><span class="lbl">yours &middot; the decision</span>
+    <p style="margin:0 0 6px">Is that the reading? If it is, four package rows can carry a week and check (b) of the transfer rule stops being blocked for them. If it is not — if the fourth box arrives at week 7 and week 6 is a week of waiting for it — then week 3 or week 4 is the empty one instead. Ops will not pick: it is a fact about your story, and `transferWeek` is the field the whole show-before-it-lands check is built on.</p></div>
+
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">A-2 &middot; UNRESOLVED</span>
+  <span class="slot" style="color:var(--red);font-size:15px;font-style:normal">Week 3 is about a thing you already have, which is an argument for X-1's third answer.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">X-1 is open: week two's Friday is a box on a porch and PACKAGE does not open until week 3. Seen across twelve weeks the tension reads differently — week 3's whole subject is an object that is beautiful and does nothing, which is a thing you are LOOKING AT, so it was in the building before week 3 began. That is X-1's third reading (an unlabelled box on a porch is not a package) arriving from a second direction.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/week-two.mjs (COLLISIONS X-1) · this file's week 3</code></p></div>
+  <div class="mine"><span class="lbl">yours &middot; the decision</span>
+    <p style="margin:0 0 6px">X-1's three ways out are unchanged and still yours. This adds no fourth; it says the third one now has two arguments for it instead of one.</p></div>
+
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">A-3 &middot; agrees</span>
+  <span class="slot" style="color:var(--grn);font-size:15px;font-style:normal">Twelve weeks is the first period long enough to give the bouncy ball law an arc figure.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">The PRECIOUS bucket's ceiling is two or three a WEEK. Over twelve weeks that is 24 TO 36 GENUINE REVEALS IN THE WHOLE ARC — the total the story has to spend, before anything is assigned. READ THE ARITHMETIC CAREFULLY, BECAUSE IT IS NOT THE VOIDED ONE: this multiplies a CEILING by a PERIOD and never touches an asset count. The void figure divided a count of PHOTOGRAPHS by a ceiling on ATTENTION, which is the error, and it is the reason `runways()` refuses to produce a runway for the dump bucket at all.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/focus.mjs (BUCKETS.precious.min/max, per: week)</code></p></div>
+
+  <p class="k" style="margin:0;font-size:12.5px">And nothing is assigned: `bucket` is null on all 315 rows of the asset table (B-a). So the arc has a spending limit and no inventory priced against it.</p>
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">A-4 &middot; agrees</span>
+  <span class="slot" style="color:var(--grn);font-size:15px;font-style:normal">Week 8 is transmission-shaped and sits inside the transmission window.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">TRANSMISSION opens at week 5 and closes at 12 — *the back half's knock at the door* — and week 8, HE HAS BEEN WATCHING THE WHOLE TIME, is the first headline in the twelve whose subject is a sender rather than an object. It lands four weeks inside the window. Unlike X-1 nothing has to move.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/transfers.mjs (TRANSFERS.TRANSMISSION.opens = 5)</code></p></div>
+
+
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">A-5 &middot; agrees</span>
+  <span class="slot" style="color:var(--grn);font-size:15px;font-style:normal">Two of the twelve weeks have days under them and ten do not.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">`week-one.mjs` and `week-two.mjs` carry five days each — ten day blocks, thirty slots on the worksheet. WEEKS 3 TO 12 HAVE NO DAY-LEVEL OUTLINE IN EITHER REPOSITORY, which is why this page asks only for headlines: asking for fifty more days would be asking you to fill in a form Ops built out of nothing.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/week-one.mjs · reveal/week-two.mjs</code></p></div>
+
+
+</div></div>
+<div class="day"><div class="hd">
+  <span class="n">A-6 &middot; agrees</span>
+  <span class="slot" style="color:var(--grn);font-size:15px;font-style:normal">The twelve-week list and the two week files agree exactly, and that could have failed.</span>
+</div><div class="bd">
+  <div class="scaf"><span class="lbl">the check <span class="rail">Ops</span></span>
+    <p style="margin:0 0 6px">The headlines for weeks 1 and 2 in the round instruction were compared character for character against `WEEK.headline` in `week-one.mjs` and `week-two.mjs`. Both match — including the apostrophe in WASN'T. So the twelve-week view has not quietly re-worded two weeks that already existed, and this file IMPORTS both rather than restating them, so it cannot start to.</p>
+    <p class="k" style="margin:0;font-size:12px">Settled by <code>reveal/week-one.mjs · reveal/week-two.mjs · this file's imports</code></p></div>
+
+
+</div></div>
+
+<div class="note">
+<p><b>AND ONE NUMBER THE TWELVE-WEEK VIEW CAN PRODUCE THAT NO SHORTER ONE COULD.</b>
+The precious bucket&rsquo;s ceiling is two or three a week. Over
+12 weeks that is <b>24 to 36 genuine reveals in the
+whole arc</b> &mdash; the total the story has to spend.</p>
+<p class="k" style="font-size:12.5px"><b>This is not the voided arithmetic.</b> It
+multiplies a <i>ceiling</i> by a <i>period</i> and never touches an asset count. The
+figure Mike voided divided a count of photographs by a ceiling on attention. And
+nothing is priced against this one yet: <code>bucket</code> is unset on all 315 rows of
+the asset table.</p>
+</div>
+
+<h2 id="collector">Everything you have written</h2>
+<p class="lead" style="margin-bottom:14px">One press gathers all twelve into plain text
+and puts it on the clipboard. <b>This page has its own store</b> &mdash; it does not
+gather the worksheet&rsquo;s days, and the worksheet does not gather these. If the
+clipboard is refused, the text is selected below and Ctrl+C takes it.</p>
+<p style="margin:0 0 12px"><button class="cta" data-gather="here">Copy everything</button>
+<span id="says" class="k" style="margin-left:12px;font-size:12.5px"></span></p>
+<textarea id="out" readonly spellcheck="false"
+ placeholder="press copy everything and your twelve headlines appear here"></textarea>
+
+<footer>Ops&rsquo; half of this page is built from <code>reveal/arc-twelve.mjs</code>,
+which imports weeks one and two from <code>reveal/week-one.mjs</code> and
+<code>reveal/week-two.mjs</code> rather than restating them. Regenerated with
+<code>npm run dictation</code> &mdash; <b>which will not touch anything you have
+typed</b>. Ops&#8209;to&#8209;Mike, 2026-08-07; not part of the museum.</footer>
+</div>
+
+<div class="cbar">
+ <span class="st" id="stat"></span>
+ <span>
+  <a href="worksheet.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">the ten days &rarr;</a>
+  <a href="reference.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">reference &rarr;</a>
+  <button data-gather="jump">Copy everything</button>
+ </span>
+</div>
+<script>
+(function(){
+ "use strict";
+ var SLOTS = [{"id":"ARC.W1","where":"WEEK 1 — the week's headline (month 1, derives from your own dictation)","ops":"THE WEEKEND THAT WASN'T SUPPOSED TO HAPPEN"},{"id":"ARC.W2","where":"WEEK 2 — the week's headline (month 1, derives from your own dictation)","ops":"THE PASSWORD WAS IN THE ROOM THE WHOLE TIME"},{"id":"ARC.W3","where":"WEEK 3 — the week's headline (month 1, derives from your own dictation)","ops":"IT IS BEAUTIFUL AND IT DOES NOTHING"},{"id":"ARC.W4","where":"WEEK 4 — the week's headline (month 1, Ops scaffolding)","ops":"IT BOOTS, AND IT HAS OPINIONS"},{"id":"ARC.W5","where":"WEEK 5 — the week's headline (month 2, Ops scaffolding)","ops":"THE SECOND UNIT IS A DIFFERENT PERSON"},{"id":"ARC.W6","where":"WEEK 6 — the week's headline (month 2, Ops scaffolding)","ops":"THE FOURTH BOX IS ALREADY IN THE HALLWAY"},{"id":"ARC.W7","where":"WEEK 7 — the week's headline (month 2, Ops scaffolding)","ops":"THE FOURTH ONE FINISHES SOMETHING"},{"id":"ARC.W8","where":"WEEK 8 — the week's headline (month 2, Ops scaffolding)","ops":"HE HAS BEEN WATCHING THE WHOLE TIME"},{"id":"ARC.W9","where":"WEEK 9 — the week's headline (month 3, Ops scaffolding)","ops":"THE MACHINES KNOW EACH OTHER"},{"id":"ARC.W10","where":"WEEK 10 — the week's headline (month 3, Ops scaffolding)","ops":"THE PEOPLE IN THE CASES"},{"id":"ARC.W11","where":"WEEK 11 — the week's headline (month 3, Ops scaffolding)","ops":"WHAT THIS WAS FOR"},{"id":"ARC.W12","where":"WEEK 12 — the week's headline (month 3, Ops scaffolding)","ops":"WHAT WE STILL DON'T KNOW"}];
+ var KEY = "wb.arc12.2026-08-07";
+ var CARRY = {"fromKey":"wb.worksheet.2026-08-07","map":{"ARC.W1":"W1.SUM","ARC.W2":"W2.SUM"},"note":"Carried over from what you had already typed on the worksheet, where this question used to be asked. Edit it freely — it lives here now."};
+ var store = null;
+ try { window.localStorage.setItem("wb.probe","1"); window.localStorage.removeItem("wb.probe");
+       store = window.localStorage; } catch (e) { store = null; }
+
+ var warn = document.getElementById("warn");
+ if (!store) { warn.className = "warn on"; }
+
+ var areas = Array.prototype.slice.call(document.querySelectorAll("textarea[data-slot]"));
+ var byId = {};
+ areas.forEach(function(t){ byId[t.getAttribute("data-slot")] = t; });
+
+ function grow(t){ t.style.height = "auto"; t.style.height = (t.scrollHeight + 2) + "px"; }
+
+ function read(){
+  if (!store) return {};
+  try { return JSON.parse(store.getItem(KEY) || "{}"); } catch (e) { return {}; }
+ }
+ function values(){
+  var v = {};
+  areas.forEach(function(t){ var s = t.value.replace(/\s+$/,""); if (s) v[t.getAttribute("data-slot")] = s; });
+  return v;
+ }
+
+ var saveTimer = null, statEl = document.getElementById("stat");
+ function two(n){ return (n < 10 ? "0" : "") + n; }
+ function clock(){ var d = new Date(); return two(d.getHours()) + ":" + two(d.getMinutes()); }
+
+ function stat(saved){
+  var n = Object.keys(values()).length;
+  var msg = "<b>" + n + "</b> of " + SLOTS.length + " filled";
+  if (!store) msg += " \u00b7 <b>not saved</b> \u2014 this browser refused storage";
+  else if (saved) msg += " \u00b7 saved " + clock();
+  statEl.innerHTML = msg;
+ }
+
+ /* THIS PAGE OWNS ITS OWN SLOTS AND DESTROYS NOTHING ELSE IN ITS STORE, AND
+    THAT IS A REAL LOSS PATH RATHER THAN TIDINESS. The round that moved the two
+    week-headline slots off the worksheet would, with a plain overwrite, have
+    silently deleted whatever had been typed into them the moment the page was
+    next opened and blurred: `values()` only sees textareas that still exist,
+    so a retired slot's answer vanishes at the first save. A generator may
+    remove a field; it may not remove the answer that was in it. */
+ var OWNED = {};
+ SLOTS.forEach(function(s){ OWNED[s.id] = 1; });
+
+ function save(){
+  if (store) { try {
+   var prev = read(), out = {}, k;
+   for (k in prev) if (!OWNED[k]) out[k] = prev[k];
+   var v = values();
+   for (k in v) out[k] = v[k];
+   store.setItem(KEY, JSON.stringify(out));
+  } catch (e) {
+   warn.className = "warn on"; store = null; } }
+  stat(true);
+ }
+
+ function mirror(id){
+  var m = document.querySelector('[data-mirror="' + id + '"]');
+  if (m) m.textContent = byId[id] ? byId[id].value.replace(/\s+$/,"") : "";
+ }
+
+ var saved = read();
+
+ /* THE CARRY. When a slot moves between pages its answer does not move with
+    it — two pages, two stores, and the reader would simply find an empty box
+    where they had written something. So a page may declare that one of its
+    slots INHERITS from a named slot in another page's store, and it fills
+    only when its own is empty and it SAYS SO ON THE ROW. A silent pre-fill
+    would be indistinguishable from something they had typed here. */
+ if (store && CARRY) {
+  var from = {};
+  try { from = JSON.parse(store.getItem(CARRY.fromKey) || "{}"); } catch (e) { from = {}; }
+  for (var mine in CARRY.map) {
+   var theirs = CARRY.map[mine];
+   if (!saved[mine] && from[theirs]) {
+    saved[mine] = from[theirs];
+    var flag = document.querySelector('[data-carried="' + mine + '"]');
+    if (flag) { flag.textContent = CARRY.note; flag.className = "carried on"; }
+   }
+  }
+ }
+
+ areas.forEach(function(t){
+  var id = t.getAttribute("data-slot");
+  if (saved[id]) t.value = saved[id];
+  if (t.value) t.className = "has";
+  grow(t); mirror(id);
+  t.addEventListener("input", function(){
+   t.className = t.value.replace(/\s+$/,"") ? "has" : "";
+   grow(t); mirror(id); stat(false);
+   if (saveTimer) clearTimeout(saveTimer);
+   saveTimer = setTimeout(save, 400);
+  });
+  t.addEventListener("blur", save);
+ });
+ stat(false);
+
+ /* ---- THE COLLECTOR ---------------------------------------------------- */
+ function collect(){
+  var v = values(), lines = [], empty = [], n = 0;
+  var d = new Date();
+  lines.push("WEIRD.BABY MUSEUM - THE TWELVE WEEKS - MIKE'S HEADLINES");
+  SLOTS.forEach(function(s){ if (v[s.id]) n++; else empty.push(s.id); });
+  lines.push("captured " + d.getFullYear() + "-" + two(d.getMonth()+1) + "-" + two(d.getDate())
+   + " " + clock() + "  -  " + n + " of " + SLOTS.length + " slots filled");
+  lines.push("Ops' own paragraphs are not repeated here. Slot keys match the worksheet.");
+  lines.push("");
+  SLOTS.forEach(function(s){
+   if (!v[s.id]) return;
+   lines.push("[" + s.id + "] " + s.where);
+   if (s.ops) lines.push("  ops: " + s.ops);
+   if (v[s.id].indexOf("\n") < 0) lines.push("  mike: " + v[s.id]);
+   else { lines.push("  mike:"); lines.push(v[s.id]); }
+   lines.push("");
+  });
+  if (empty.length) {
+   lines.push("LEFT EMPTY (" + empty.length + "): " + empty.join(", "));
+   lines.push("");
+  }
+  return lines.join("\n");
+ }
+
+ var out = document.getElementById("out");
+ var says = document.getElementById("says");
+ function tell(msg){ says.textContent = msg; }
+
+ function gather(){
+  var text = collect();
+  out.value = text;
+  out.scrollTop = 0;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+   navigator.clipboard.writeText(text).then(function(){
+    tell("Copied \u2014 " + text.length + " characters on the clipboard. Paste it to Ops.");
+   }, function(){ legacy(text); });
+  } else { legacy(text); }
+ }
+ function legacy(text){
+  out.focus(); out.select();
+  var ok = false;
+  try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+  tell(ok ? "Copied \u2014 " + text.length + " characters on the clipboard. Paste it to Ops."
+          : "The browser refused the clipboard. The text is selected below \u2014 press Ctrl+C.");
+ }
+
+ Array.prototype.slice.call(document.querySelectorAll("[data-gather]")).forEach(function(b){
+  b.addEventListener("click", function(e){
+   e.preventDefault();
+   gather();
+   if (b.getAttribute("data-gather") === "jump") {
+    document.getElementById("collector").scrollIntoView({ block: "start" });
+   }
+  });
+ });
+})();
+</script>
+</body></html>

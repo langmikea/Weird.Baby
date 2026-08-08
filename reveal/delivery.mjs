@@ -26,13 +26,24 @@
    has no fall-through: a default is a hole, and the hole would be exactly where
    the next photograph lands.
 
-   THREE CHECKS, AND THE SECOND IS THE ONE A FUTURE ROUND WILL TRIP.
+   FOUR CHECKS, AND THE SECOND IS THE ONE A FUTURE ROUND WILL TRIP.
      1  UNDELIVERED AND PUBLIC    a governed file at an address anybody can type
      2  DELIVERED AND HELD        the converse — an entry brought it in and the
                                   museum is still sitting on it, which is the
                                   rule applied backwards and is just as wrong
      3  NO FALL-THROUGH           every file in the tree is one or the other, in
                                   writing
+     4  DELIVERED AND ABSENT      [R2 2026-08-07] an entry names a governed
+                                  picture that is at NEITHER address, so the
+                                  Record promises a thing the museum does not
+                                  have. Checks 1–3 walk FILES and this one walks
+                                  the ENTRY, which is why none of them could see
+                                  it: a path with no file behind it is not in
+                                  any tree to be walked. It has zero instances
+                                  today and is written for the ninety daily
+                                  steps, where the failure is silent — the entry
+                                  publishes, the wall shows nothing, and every
+                                  gate in this directory passes.
 
    WHAT IT CANNOT DO. It reads FILES, so a held photograph composited into a
    published one is invisible to it — the two machine covers were exactly that
@@ -106,10 +117,13 @@ export function delivered() {
    A delivered path may be written either way round in the Record (`/robots/…`
    before delivery is authored, `/held/robots/…` while it is still behind the
    door), so both forms normalise to the public one here — the Record says WHAT
-   arrived, not where the file is parked this week. */
-export function publicPlacements() {
+   arrived, not where the file is parked this week.
+   [R2 2026-08-07] `given` is a parameter so `reveal/day.mjs` can ask the same
+   question of YESTERDAY'S Record without a second copy of this normalisation.
+   The default is today's, so every existing caller is unchanged. */
+export function publicPlacements(given = delivered()) {
   const out = new Set();
-  for (const a of delivered()) {
+  for (const a of given) {
     if (a.startsWith(STAGE_PREFIX + GOVERNED_PREFIX)) out.add(a.slice(STAGE_PREFIX.length));
     else if (a.startsWith(GOVERNED_PREFIX)) out.add(a);
   }
@@ -177,6 +191,25 @@ export function deliveryFaults() {
   for (const k of Object.keys(SIGNAGE)) {
     if (!have.has(k)) {
       faults.push(`delivery: SIGNAGE names \`${k}\`, which is not in the tree.`);
+    }
+  }
+
+  /* 4. DELIVERED AND ABSENT — see the header. Only GOVERNED paths are tested:
+     an entry may name a picture the pull-back does not govern (the house's own
+     artwork, an artist's image) and that is somebody else's business. */
+  for (const a of given) {
+    const base = a.startsWith(STAGE_PREFIX + GOVERNED_PREFIX)
+      ? a.slice((STAGE_PREFIX + GOVERNED_PREFIX).length)
+      : a.startsWith(GOVERNED_PREFIX) ? a.slice(GOVERNED_PREFIX.length) : null;
+    if (base === null) continue;
+    if (!have.has(base)) {
+      faults.push(
+        `delivery: a Record entry delivers \`${a}\`, and there is no such file ` +
+        `at either address — not \`${PUBLIC_TREE}/${base}\` and not ` +
+        `\`${HELD_TREE}/${base}\`. The entry brings a picture into the story and ` +
+        "the museum does not have it. Either the path is wrong or the file was " +
+        "never added; nothing here can tell which, and guessing would put a " +
+        "different photograph on the wall than the entry describes.");
     }
   }
 

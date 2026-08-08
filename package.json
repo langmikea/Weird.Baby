@@ -29,6 +29,7 @@
     "reveal:cards": "node tools/reveal-ledger.mjs --cards",
     "reveal:eggs": "node tools/reveal-ledger.mjs --eggs",
     "reveal:build": "node reveal/ledger-declare.mjs --write",
+    "reveal:day": "node reveal/day.mjs",
     "parity": "node tools/menu-parity.mjs",
     "parity:gate": "node tools/menu-parity.mjs --gate",
     "instory": "node tools/instory-specs.mjs",

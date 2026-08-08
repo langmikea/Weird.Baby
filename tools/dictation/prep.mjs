@@ -45,7 +45,8 @@
                       in his reading order, saving as he types, gathering into
                       plain text on one button.
      reference.html   EVERYTHING THAT EXPLAINS THE MACHINE — linked, never
-                      inline, and carrying the ten collision checks.
+                      inline, and carrying the day outlines' ten collision
+                      checks. The twelve-week arc's six live on `arc.html`.
 
    `week1.html` is PRUNED by name at the bottom of this file rather than left
    orphaned, and this index lost its own briefing for the same reason the
@@ -85,7 +86,7 @@ import { entries as recordEntries } from "../../reveal/record-entries.mjs";
 import { GOVERNED_PREFIX, STAGE_PREFIX } from "../../reveal/placement.mjs";
 import { ORIGIN as FOCUS_ORIGIN, runways, bucketOf } from "../../reveal/focus.mjs";
 import { STAMP, esc, rich, runwayBlock, OPS_CSS, TYPED_CSS, page, BACK } from "./shell.mjs";
-import { buildWorksheet, buildReference } from "./worksheet.mjs";
+import { buildWorksheet, buildReference, buildArc } from "./worksheet.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..", "..");
@@ -588,8 +589,8 @@ function buildIndex(a, e) {
 <p class="sub">Weird.Baby Museum &middot; ${STAMP} &middot; Ops&#8209;to&#8209;Mike, and not part of the museum</p>
 
 <div class="note">
-<p><b>You are about to dictate the Record's first two weeks. Start on the
-worksheet.</b> Everything else here answers a question you may not have yet.
+<p><b>You are about to dictate the Record. Start with the twelve weeks, then the
+ten days.</b> Everything else here answers a question you may not have yet.
 <b>Nothing on any of these pages was invented</b> &mdash; every figure, file, egg
 and conflict is carried from one of the two repositories with its source named,
 and every gap is printed as a gap.</p>
@@ -597,13 +598,28 @@ and every gap is printed as a gap.</p>
 
 <div class="cards" style="grid-template-columns:1fr;margin-bottom:14px">
 <div class="card" style="border-color:#6b5426">
+  <h4 style="font-size:17px"><a href="arc.html">The twelve weeks &rarr;</a></h4>
+  <p class="id">the whole arc on one screen &mdash; start here</p>
+  <p>Twelve rows and one input each: <b>the headline of every week</b>, Ops on the
+  left and you on the right. Each row is marked twice &mdash; <b>whose sentence it
+  is</b>, and <b>whether there is anything of yours under it</b>. Weeks 1&ndash;3
+  derive from your own dictation; 4&ndash;12 are Ops scaffolding, and month 3 is
+  invented structure waiting for your story.</p>
+  <p class="meta">Six checks against the tree are printed under the table, one of
+  them unresolved: <b>the headlines answer a question the transfer model says is
+  not in the arc</b> &mdash; which of the five package weeks goes empty.</p>
+</div>
+</div>
+
+<div class="cards" style="grid-template-columns:1fr;margin-bottom:14px">
+<div class="card" style="border-color:#6b5426">
   <h4 style="font-size:17px"><a href="worksheet.html">The worksheet &rarr;</a></h4>
-  <p class="id">where the writing happens</p>
-  <p>Two weeks and ten days. <b>Ops on the left, an input on the right</b>, in
-  reading order: the headline of headlines first, then the map of all ten days,
-  then a block for each day with a headline, an executive summary and a notes
-  field. It saves as you type and gathers everything you have written into plain
-  text on one button.</p>
+  <p class="id">the ten days of weeks one and two</p>
+  <p>Ten day blocks, three fields each &mdash; a headline, an executive summary and
+  a notes field &mdash; with a map of all ten at the top that fills itself in as you
+  write. It saves as you type and gathers everything into plain text on one button.
+  <b>The weekly headlines are not on it</b>; they are all twelve together on the
+  page above.</p>
   <p class="meta">Week two carries <b>your own words in gold</b> &mdash; the headline
   and six beats, character for character. Week one carries none, because you spoke
   it and it was written down from the shape rather than quoted.</p>
@@ -616,8 +632,9 @@ and every gap is printed as a gap.</p>
   <p class="id">why the left-hand column says what it says</p>
   <p>The three marks and what each promises, where the two weeks came from, the
   transfer classes, the standing rules for the Record, the Friday formula, the
-  bouncy ball law and the two runways, and the ten checks the outlines were run
-  against &mdash; <b>one unresolved</b>.</p>
+  bouncy ball law and the two runways, and the ten checks the day outlines were
+  run against &mdash; <b>one unresolved</b>. The twelve-week arc&rsquo;s own six
+  checks are on its page, not here.</p>
   <p class="meta">All of this used to be printed above the work. It is here so it
   is reachable, not unavoidable.</p>
 </div>
@@ -674,6 +691,7 @@ const files = [
   ["specsheet.html", buildSpecsheet()],
   ["artifacts.html", art.html],
   ["eggs.html", egg.html],
+  ["arc.html", buildArc()],
   ["worksheet.html", buildWorksheet()],
   ["reference.html", buildReference({ ledger: LEDGER, artifacts: art, eggs: egg, ruledOn: W1_RULED_ON })],
   ["index.html", buildIndex(art, egg)],
