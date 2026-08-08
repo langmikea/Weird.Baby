@@ -21,6 +21,9 @@ import { entries as recordEntries, prose as recordProse,
          summaries as recordSummaries } from "../reveal/record-entries.mjs";
 import { transferFaults, ASSIGN, EXEMPT, TRANSFERS, CLASSES } from "../reveal/transfers.mjs";
 import { HELD_PREFIXES } from "../reveal/reachability.mjs";
+/* [I2 2026-08-08] The two index-row budgets, declared once so the gate and the
+   page Mike writes on read the same number. See RECORD BUDGETS below. */
+import { RECORD_TITLE_MAX, RECORD_LINE_MAX } from "../reveal/record-shape.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
@@ -502,36 +505,19 @@ function transferGuardFaults() {
 }
 
 /* ═══ RECORD BUDGETS [R3 2026-08-06] ═════════════════════════════════════════
-   MIKE: "every index row gets a headline and a summary beneath it, ALL
-   CONSTRAINED TO THE SAME HEIGHT, and THE ENTIRE SUMMARY MUST FIT IN IT — that
-   is the point of a summary. NO MORE half-sentence teasers ending in an
-   ellipsis; that failure disappears by construction."
+   THE NUMBERS AND THE WHOLE OF THEIR REASONING MOVED TO `reveal/record-shape.mjs`
+   ON 2026-08-08 AND THIS IS A POINTER, NOT A SUMMARY OF THEM. [I2] They were
+   module-private constants here, which meant the page Mike WRITES the strings
+   on could not read them — it had to retype them or say nothing, and it said
+   nothing, so he composed a 477-character executive summary against a
+   130-character row and found out three rounds later from a gate.
 
-   THE CONSTRUCTION IS TWO HALVES AND NEITHER WORKS ALONE.
-     RENDER  the index row is a fixed height and there is no truncation left in
-             it at all — `-webkit-line-clamp` and the headline's `text-overflow`
-             are both gone (Exhibit.css). A row cannot clip, so it cannot lie.
-     DATA    which means a string too long for the box would OVERFLOW instead,
-             and the only place to stop that is here, before it ships.
-   Take either half away and you are back to a promise.
-
-   THE NUMBERS, AND HOW THEY WERE ARRIVED AT RATHER THAN CHOSEN. The row gives
-   the headline ONE line and the summary TWO, at the index measure. Measured on
-   the built bundle at the wing's default split, that column runs ~70 characters
-   at `--fs-small`; the budgets take the conservative end of the band the
-   summary is set in and leave a character of slack at the narrowest desktop
-   width the two-column index switches at.
-     TITLE  62   one line
-     LINE  130   two lines
-   THEY ARE FLOORS ON THE LAYOUT, NOT TASTE. If the type ramp, the measure or
-   the row height is ever changed, these move with it in the same commit — and
-   a round that widens the box without widening the budget has only made the
-   gate stricter than the glass, which is the safe direction.
-
-   IT POLICES THE RECORD AND ONLY THE RECORD. Other faces render entry lists
-   that are not indexes, are not fixed-height, and were never asked to fit. */
-const RECORD_TITLE_MAX = 62;
-const RECORD_LINE_MAX = 130;
+   Two halves enforced a budget after the writing (a row that cannot truncate,
+   and this check, which refuses one that would overflow). The third half is the
+   counter on the worksheet, and a counter that carries its own copy of a number
+   is a budget that quietly stops agreeing with its gate. One declaration, three
+   readers. Read that file for how 62 and 130 were measured. The import is at
+   the head of this file with the others. */
 
 function recordBudgetFaults() {
   const out = [];

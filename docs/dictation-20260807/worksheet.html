@@ -113,6 +113,32 @@ textarea{display:block;width:100%;background:#191820;border:1px solid var(--line
  overflow:hidden;min-height:52px}
 textarea:focus{outline:0;border-color:var(--gold)}
 textarea.has{border-color:#5c4a22;background:#1c1a1a}
+/* [I2 2026-08-08] THE LIVE COUNTER AND ITS WARNING.
+   Three states and they are legible without the colour, because a counter that
+   only says "over" in red says nothing to a colour-blind reader and nothing at
+   all on a printed page: the number itself changes to "14 OVER" and the
+   sentence below appears. Colour is the second signal, never the only one. */
+.lim{margin:5px 0 0;font-size:11.5px;color:var(--dim2);letter-spacing:.02em}
+.lim .cnt{color:var(--dim);font-variant-numeric:tabular-nums}
+.lim.near .cnt{color:var(--amb)}
+.lim.over{color:var(--redfg)}
+.lim.over .cnt{color:var(--redfg);font-weight:700}
+.lim.ok .cnt{color:var(--grn)}
+/* [I2 2026-08-08] THE WARNING'S CLASS IS `limwarn` AND NOT `over`, AND THE LAP
+   IS WHY. `.over{display:none}` was written for this paragraph and matched the
+   COUNTER as well the moment the counter took its `over` state — so the live
+   count vanished at exactly the instant it had something to say, which is the
+   one failure this whole feature exists to prevent. Two elements, two names. */
+.limwarn{display:none}
+.limwarn.on{display:block;margin:7px 0 0;padding:8px 11px;border-left:3px solid var(--red);
+ background:#241a19;color:var(--redfg);font-size:12.5px;line-height:1.5}
+.limwarn.on b{color:#ffb4a6}
+textarea.bad{border-color:#8a3b2e;background:#1e1717}
+.fnote{margin:0 0 9px;font-size:12.5px;color:var(--dim);line-height:1.55;max-width:78ch}
+.fnote b{color:var(--fg)}
+.c .none{color:var(--dim2);font-style:italic;font-size:13px}
+.cbar .ovr{display:none}
+.cbar .ovr.on{display:inline;color:var(--redfg);font-weight:700}
 .fld{margin:0 0 18px}
 .fld:last-child{margin:0}
 .fh{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim2);
@@ -174,6 +200,14 @@ every level is complete on its own. When you want to send it back, press
 twelve together on <a href="arc.html">the twelve-week table</a> &mdash; asking for week
 one&rsquo;s headline here and again there would be one question with two answers, in two
 browser stores, neither able to see the other. This page is the ten <i>days</i>.</p>
+<p class="lead"><b>Two of the four boxes on every day have a limit, and they now count as
+you type.</b> The headline gets 62 characters and the index sentence
+gets 130, because the index row cannot truncate &mdash; so a string too
+long for it overflows instead of clipping, and the packet is refused. <b>Nothing stops
+you typing past a limit</b>; the counter turns and tells you by how much. The other two
+boxes have no limit at all, and where there is no counter there is nothing to fit &mdash;
+that absence is deliberate, not an oversight. <a href="reference.html#entry-shape">every
+limit a Record entry has, and where each comes from &rarr;</a></p>
 <p class="lead">Everything that explains how any of this works &mdash; the rails, the
 transfer classes, the standing rules, the checks against the tree, the three
 trackers &mdash; is on <a href="reference.html">the reference page</a>, and none of it
@@ -183,6 +217,30 @@ is on this one.</p>
 <div class="warn" id="warn"><b>This browser will not let the page save.</b> Nothing you
 type here will survive a reload. Press <b>copy everything</b> and paste it somewhere
 safe before you close the tab.</div>
+
+<h2>Day one&rsquo;s date</h2>
+<p class="lead" style="margin-bottom:14px">One box, and it is the only thing two standing
+questions have ever waited on. <b>Every other date follows from it</b> &mdash; the week
+number on each entry, the month bands in a long index, and any door that points at
+another record are all counted from the day the Record starts, so asking ten times would
+only be nine chances for two answers to disagree.</p>
+<div class="day"><div class="hd"><span class="n">Record &middot; day one</span></div>
+<div class="bd">
+<div class="fld"><div class="fh">The calendar date</div>
+<p class="fnote"><b>It has an exact format and nothing complains when it is wrong.</b>
+four digits, a hyphen, two digits, a hyphen, two digits — 2026-08-10 &mdash; anything else parses to nothing at all, and the entry
+still renders: it just quietly has no dateline, no week number and no month band. That
+silence is why this box checks the shape while you type.</p>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="none">No Ops draft, and there cannot be one &mdash; a date is a fact and
+   Ops does not supply one. Record 001&rsquo;s own text has &ldquo;Monday morning&rdquo;
+   and &ldquo;FRIDAY DAY (-3)&rdquo;, which orders the report and does not date it.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="REC.EPOCH" rows="1"
+    placeholder="2026-08-10" spellcheck="true"></textarea><div class="lim" data-lim="REC.EPOCH"><b class="cnt"></b><span class="of"> four digits, a hyphen, two digits, a hyphen, two digits — 2026-08-10</span></div>
+<p class="limwarn" data-over="REC.EPOCH"></p></div>
+</div>
+</div>
+</div></div>
 
 <h2>The map &mdash; every day, both weeks</h2>
 <p class="lead" style="margin-bottom:14px">The whole shape in ten lines. <b>You do not
@@ -255,13 +313,27 @@ the block.</p>
 <div class="bd">
 
 <div class="fld"><div class="fh">Headline</div>
+
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p class="hl">The museum opens.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D1.HEAD" rows="2"
-    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+    placeholder="your headline for this day" spellcheck="true"></textarea><div class="lim" data-lim="W1.D1.HEAD"><b class="cnt"></b><span class="of"> / 62 characters</span></div>
+<p class="limwarn" data-over="W1.D1.HEAD"></p></div>
+</div>
+</div>
+<div class="fld"><div class="fh">The one sentence under it, in the index</div>
+<p class="fnote">This is the field that was missing. It is the summary printed under the headline in the Record's index, it is the WHOLE summary (there is no ellipsis and no “more”), and with no separate lead on the entry it also draws as the opening paragraph when the record is opened. One sentence that can stand alone.</p>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="none">No Ops draft. The day&rsquo;s shape and its topics are in the two
+  boxes below; neither of them is a sentence, and turning one into a sentence for you is
+  the edit this field exists to avoid.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D1.LINE" rows="2"
+    placeholder="one sentence — this is the whole summary in the index, not a teaser" spellcheck="true"></textarea><div class="lim" data-lim="W1.D1.LINE"><b class="cnt"></b><span class="of"> / 130 characters</span></div>
+<p class="limwarn" data-over="W1.D1.LINE"></p></div>
 </div>
 </div>
 <div class="fld"><div class="fh">Executive summary</div>
+<p class="fnote">No limit, and that is not an oversight — this lands in a section of the entry, where the length of a section is a fact about the day. Write as much as the day is worth. It is <b>not</b> what the index row prints; that is the one sentence above.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p>The Robots wing opened two hours ago and this is its first entry — Record 001, which you have not dictated yet. Weird enough to warrant an exhibit is the claim the day has to carry, and it is the only claim it has to carry.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D1.EXEC" rows="5"
@@ -269,6 +341,7 @@ the block.</p>
 </div>
 </div>
 <div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<p class="fnote">No limit. Two shapes worth knowing while you write it: your approved container is <b>four to seven sections</b>, each holding one thought under a short all-caps label — and an entry built that way cannot currently draw a transmission, a photograph set or a document alongside them (they are silently dropped), so say it in a section or say it is a picture.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><ul><li>The transmissions named but not described.</li><li>Why it warranted an exhibit.</li><li>What the museum is.</li></ul></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D1.NOTES" rows="5"
@@ -285,13 +358,27 @@ the block.</p>
 <div class="bd">
 
 <div class="fld"><div class="fh">Headline</div>
+
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p class="hl">Hors d'oeuvres, and the announcement of this evening's entrees.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D2.HEAD" rows="2"
-    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+    placeholder="your headline for this day" spellcheck="true"></textarea><div class="lim" data-lim="W1.D2.HEAD"><b class="cnt"></b><span class="of"> / 62 characters</span></div>
+<p class="limwarn" data-over="W1.D2.HEAD"></p></div>
+</div>
+</div>
+<div class="fld"><div class="fh">The one sentence under it, in the index</div>
+<p class="fnote">This is the field that was missing. It is the summary printed under the headline in the Record's index, it is the WHOLE summary (there is no ellipsis and no “more”), and with no separate lead on the entry it also draws as the opening paragraph when the record is opened. One sentence that can stand alone.</p>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="none">No Ops draft. The day&rsquo;s shape and its topics are in the two
+  boxes below; neither of them is a sentence, and turning one into a sentence for you is
+  the edit this field exists to avoid.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D2.LINE" rows="2"
+    placeholder="one sentence — this is the whole summary in the index, not a teaser" spellcheck="true"></textarea><div class="lim" data-lim="W1.D2.LINE"><b class="cnt"></b><span class="of"> / 130 characters</span></div>
+<p class="limwarn" data-over="W1.D2.LINE"></p></div>
 </div>
 </div>
 <div class="fld"><div class="fh">Executive summary</div>
+<p class="fnote">No limit, and that is not an oversight — this lands in a section of the entry, where the length of a section is a fact about the day. Write as much as the day is worth. It is <b>not</b> what the index row prints; that is the one sentence above.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p>A fraction of the weekend, deliberately. The volume is the story and the volume is also the reason not to serve it all at once.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D2.EXEC" rows="5"
@@ -299,6 +386,7 @@ the block.</p>
 </div>
 </div>
 <div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<p class="fnote">No limit. Two shapes worth knowing while you write it: your approved container is <b>four to seven sections</b>, each holding one thought under a short all-caps label — and an entry built that way cannot currently draw a transmission, a photograph set or a document alongside them (they are silently dropped), so say it in a section or say it is a picture.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><ul><li>The manifesto, and first contact.</li><li>The volume — hourly, forty-eight hours, gigabytes.</li><li>Headers spoofed, the sender untraceable.</li></ul></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D2.NOTES" rows="5"
@@ -315,13 +403,27 @@ the block.</p>
 <div class="bd">
 
 <div class="fld"><div class="fh">Headline</div>
+
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p class="hl">The start of the transmissions: what came, what form, what is unreadable.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D3.HEAD" rows="2"
-    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+    placeholder="your headline for this day" spellcheck="true"></textarea><div class="lim" data-lim="W1.D3.HEAD"><b class="cnt"></b><span class="of"> / 62 characters</span></div>
+<p class="limwarn" data-over="W1.D3.HEAD"></p></div>
+</div>
+</div>
+<div class="fld"><div class="fh">The one sentence under it, in the index</div>
+<p class="fnote">This is the field that was missing. It is the summary printed under the headline in the Record's index, it is the WHOLE summary (there is no ellipsis and no “more”), and with no separate lead on the entry it also draws as the opening paragraph when the record is opened. One sentence that can stand alone.</p>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="none">No Ops draft. The day&rsquo;s shape and its topics are in the two
+  boxes below; neither of them is a sentence, and turning one into a sentence for you is
+  the edit this field exists to avoid.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D3.LINE" rows="2"
+    placeholder="one sentence — this is the whole summary in the index, not a teaser" spellcheck="true"></textarea><div class="lim" data-lim="W1.D3.LINE"><b class="cnt"></b><span class="of"> / 130 characters</span></div>
+<p class="limwarn" data-over="W1.D3.LINE"></p></div>
 </div>
 </div>
 <div class="fld"><div class="fh">Executive summary</div>
+<p class="fnote">No limit, and that is not an oversight — this lands in a section of the entry, where the length of a section is a fact about the day. Write as much as the day is worth. It is <b>not</b> what the index row prints; that is the one sentence above.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p>The first day that is about the material rather than about the event. It ends with work starting: cracking software goes on everything tonight.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D3.EXEC" rows="5"
@@ -329,6 +431,7 @@ the block.</p>
 </div>
 </div>
 <div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<p class="fnote">No limit. Two shapes worth knowing while you write it: your approved container is <b>four to seven sections</b>, each holding one thought under a short all-caps label — and an entry built that way cannot currently draw a transmission, a photograph set or a document alongside them (they are silently dropped), so say it in a section or say it is a picture.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><ul><li>Formats — hex, zips, photographs.</li><li>The white gloves and the tray.</li><li>Cracking begins.</li></ul></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D3.NOTES" rows="5"
@@ -345,13 +448,27 @@ the block.</p>
 <div class="bd">
 
 <div class="fld"><div class="fh">Headline</div>
+
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p class="hl">What we can see from outside the box.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D4.HEAD" rows="2"
-    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+    placeholder="your headline for this day" spellcheck="true"></textarea><div class="lim" data-lim="W1.D4.HEAD"><b class="cnt"></b><span class="of"> / 62 characters</span></div>
+<p class="limwarn" data-over="W1.D4.HEAD"></p></div>
+</div>
+</div>
+<div class="fld"><div class="fh">The one sentence under it, in the index</div>
+<p class="fnote">This is the field that was missing. It is the summary printed under the headline in the Record's index, it is the WHOLE summary (there is no ellipsis and no “more”), and with no separate lead on the entry it also draws as the opening paragraph when the record is opened. One sentence that can stand alone.</p>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="none">No Ops draft. The day&rsquo;s shape and its topics are in the two
+  boxes below; neither of them is a sentence, and turning one into a sentence for you is
+  the edit this field exists to avoid.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D4.LINE" rows="2"
+    placeholder="one sentence — this is the whole summary in the index, not a teaser" spellcheck="true"></textarea><div class="lim" data-lim="W1.D4.LINE"><b class="cnt"></b><span class="of"> / 130 characters</span></div>
+<p class="limwarn" data-over="W1.D4.LINE"></p></div>
 </div>
 </div>
 <div class="fld"><div class="fh">Executive summary</div>
+<p class="fnote">No limit, and that is not an oversight — this lands in a section of the entry, where the length of a section is a fact about the day. Write as much as the day is worth. It is <b>not</b> what the index row prints; that is the one sentence above.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p>A status day, and the standing rule below is what makes a status day possible without opening anything: the box can be reported on from outside.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D4.EXEC" rows="5"
@@ -359,6 +476,7 @@ the block.</p>
 </div>
 </div>
 <div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<p class="fnote">No limit. Two shapes worth knowing while you write it: your approved container is <b>four to seven sections</b>, each holding one thought under a short all-caps label — and an entry built that way cannot currently draw a transmission, a photograph set or a document alongside them (they are silently dropped), so say it in a section or say it is a picture.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><ul><li>Status — opened, unopened, unreadable.</li><li>The math: four days or four years.</li><li>A folder, an envelope, a fuzzy thing in the corner.</li></ul></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D4.NOTES" rows="5"
@@ -375,13 +493,27 @@ the block.</p>
 <div class="bd">
 
 <div class="fld"><div class="fh">Headline</div>
+
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p class="hl">One password was short enough.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D5.HEAD" rows="2"
-    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+    placeholder="your headline for this day" spellcheck="true"></textarea><div class="lim" data-lim="W1.D5.HEAD"><b class="cnt"></b><span class="of"> / 62 characters</span></div>
+<p class="limwarn" data-over="W1.D5.HEAD"></p></div>
+</div>
+</div>
+<div class="fld"><div class="fh">The one sentence under it, in the index</div>
+<p class="fnote">This is the field that was missing. It is the summary printed under the headline in the Record's index, it is the WHOLE summary (there is no ellipsis and no “more”), and with no separate lead on the entry it also draws as the opening paragraph when the record is opened. One sentence that can stand alone.</p>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="none">No Ops draft. The day&rsquo;s shape and its topics are in the two
+  boxes below; neither of them is a sentence, and turning one into a sentence for you is
+  the edit this field exists to avoid.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D5.LINE" rows="2"
+    placeholder="one sentence — this is the whole summary in the index, not a teaser" spellcheck="true"></textarea><div class="lim" data-lim="W1.D5.LINE"><b class="cnt"></b><span class="of"> / 130 characters</span></div>
+<p class="limwarn" data-over="W1.D5.LINE"></p></div>
 </div>
 </div>
 <div class="fld"><div class="fh">Executive summary</div>
+<p class="fnote">No limit, and that is not an oversight — this lands in a section of the entry, where the length of a section is a fact about the day. Write as much as the day is worth. It is <b>not</b> what the index row prints; that is the one sentence above.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p>The week's payoff, and it is built to a form he named — see THE FRIDAY FORMULA below. The entry summarises the day, and then four o'clock happens inside the same entry.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D5.EXEC" rows="5"
@@ -389,6 +521,7 @@ the block.</p>
 </div>
 </div>
 <div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<p class="fnote">No limit. Two shapes worth knowing while you write it: your approved container is <b>four to seven sections</b>, each holding one thought under a short all-caps label — and an entry built that way cannot currently draw a transmission, a photograph set or a document alongside them (they are silently dropped), so say it in a section or say it is a picture.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><ul><li>The day's work.</li><li>Four o'clock: the first zip opens.</li></ul></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W1.D5.NOTES" rows="5"
@@ -412,13 +545,27 @@ shape rather than quoted. Everything under the gold line is Ops&rsquo;.</p>
 <div class="bd">
 
 <div class="fld"><div class="fh">Headline</div>
+
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p class="hl">What was actually in it.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D1.HEAD" rows="2"
-    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+    placeholder="your headline for this day" spellcheck="true"></textarea><div class="lim" data-lim="W2.D1.HEAD"><b class="cnt"></b><span class="of"> / 62 characters</span></div>
+<p class="limwarn" data-over="W2.D1.HEAD"></p></div>
+</div>
+</div>
+<div class="fld"><div class="fh">The one sentence under it, in the index</div>
+<p class="fnote">This is the field that was missing. It is the summary printed under the headline in the Record's index, it is the WHOLE summary (there is no ellipsis and no “more”), and with no separate lead on the entry it also draws as the opening paragraph when the record is opened. One sentence that can stand alone.</p>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="none">No Ops draft. The day&rsquo;s shape and its topics are in the two
+  boxes below; neither of them is a sentence, and turning one into a sentence for you is
+  the edit this field exists to avoid.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D1.LINE" rows="2"
+    placeholder="one sentence — this is the whole summary in the index, not a teaser" spellcheck="true"></textarea><div class="lim" data-lim="W2.D1.LINE"><b class="cnt"></b><span class="of"> / 130 characters</span></div>
+<p class="limwarn" data-over="W2.D1.LINE"></p></div>
 </div>
 </div>
 <div class="fld"><div class="fh">Executive summary</div>
+<p class="fnote">No limit, and that is not an oversight — this lands in a section of the entry, where the length of a section is a fact about the day. Write as much as the day is worth. It is <b>not</b> what the index row prints; that is the one sentence above.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p>Friday ended with one zip open and nothing said about what was in it. This is the day that says. It is a contents day and it does not have to explain anything yet — knowing what is in the box is a different thing from knowing what the box is for.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D1.EXEC" rows="5"
@@ -426,6 +573,7 @@ shape rather than quoted. Everything under the gold line is Ops&rsquo;.</p>
 </div>
 </div>
 <div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<p class="fnote">No limit. Two shapes worth knowing while you write it: your approved container is <b>four to seven sections</b>, each holding one thought under a short all-caps label — and an entry built that way cannot currently draw a transmission, a photograph set or a document alongside them (they are silently dropped), so say it in a section or say it is a picture.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><ul><li>The contents, listed.</li><li>What opened it, and why that password and not the others.</li><li>What is readable and what is not.</li></ul></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D1.NOTES" rows="5"
@@ -443,13 +591,27 @@ shape rather than quoted. Everything under the gold line is Ops&rsquo;.</p>
 <div class="bd">
 
 <div class="fld"><div class="fh">Headline</div>
+
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p class="hl">The things in it that are objects, not data.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D2.HEAD" rows="2"
-    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+    placeholder="your headline for this day" spellcheck="true"></textarea><div class="lim" data-lim="W2.D2.HEAD"><b class="cnt"></b><span class="of"> / 62 characters</span></div>
+<p class="limwarn" data-over="W2.D2.HEAD"></p></div>
+</div>
+</div>
+<div class="fld"><div class="fh">The one sentence under it, in the index</div>
+<p class="fnote">This is the field that was missing. It is the summary printed under the headline in the Record's index, it is the WHOLE summary (there is no ellipsis and no “more”), and with no separate lead on the entry it also draws as the opening paragraph when the record is opened. One sentence that can stand alone.</p>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="none">No Ops draft. The day&rsquo;s shape and its topics are in the two
+  boxes below; neither of them is a sentence, and turning one into a sentence for you is
+  the edit this field exists to avoid.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D2.LINE" rows="2"
+    placeholder="one sentence — this is the whole summary in the index, not a teaser" spellcheck="true"></textarea><div class="lim" data-lim="W2.D2.LINE"><b class="cnt"></b><span class="of"> / 130 characters</span></div>
+<p class="limwarn" data-over="W2.D2.LINE"></p></div>
 </div>
 </div>
 <div class="fld"><div class="fh">Executive summary</div>
+<p class="fnote">No limit, and that is not an oversight — this lands in a section of the entry, where the length of a section is a fact about the day. Write as much as the day is worth. It is <b>not</b> what the index row prints; that is the one sentence above.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p>The half of the contents that is not a file — the things that were photographed, scanned or shipped as pictures of something somebody was holding. This is the first day of week two with anything to LOOK at, which makes it the first day a genuine reveal could be spent.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D2.EXEC" rows="5"
@@ -457,6 +619,7 @@ shape rather than quoted. Everything under the gold line is Ops&rsquo;.</p>
 </div>
 </div>
 <div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<p class="fnote">No limit. Two shapes worth knowing while you write it: your approved container is <b>four to seven sections</b>, each holding one thought under a short all-caps label — and an entry built that way cannot currently draw a transmission, a photograph set or a document alongside them (they are silently dropped), so say it in a section or say it is a picture.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><ul><li>What the artifacts are.</li><li>What they are of.</li><li>Which of them raise a question the week then has to carry.</li></ul></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D2.NOTES" rows="5"
@@ -474,13 +637,27 @@ shape rather than quoted. Everything under the gold line is Ops&rsquo;.</p>
 <div class="bd">
 
 <div class="fld"><div class="fh">Headline</div>
+
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p class="hl">What looked like the way in, and is not.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D3.HEAD" rows="2"
-    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+    placeholder="your headline for this day" spellcheck="true"></textarea><div class="lim" data-lim="W2.D3.HEAD"><b class="cnt"></b><span class="of"> / 62 characters</span></div>
+<p class="limwarn" data-over="W2.D3.HEAD"></p></div>
+</div>
+</div>
+<div class="fld"><div class="fh">The one sentence under it, in the index</div>
+<p class="fnote">This is the field that was missing. It is the summary printed under the headline in the Record's index, it is the WHOLE summary (there is no ellipsis and no “more”), and with no separate lead on the entry it also draws as the opening paragraph when the record is opened. One sentence that can stand alone.</p>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="none">No Ops draft. The day&rsquo;s shape and its topics are in the two
+  boxes below; neither of them is a sentence, and turning one into a sentence for you is
+  the edit this field exists to avoid.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D3.LINE" rows="2"
+    placeholder="one sentence — this is the whole summary in the index, not a teaser" spellcheck="true"></textarea><div class="lim" data-lim="W2.D3.LINE"><b class="cnt"></b><span class="of"> / 130 characters</span></div>
+<p class="limwarn" data-over="W2.D3.LINE"></p></div>
 </div>
 </div>
 <div class="fld"><div class="fh">Executive summary</div>
+<p class="fnote">No limit, and that is not an oversight — this lands in a section of the entry, where the length of a section is a fact about the day. Write as much as the day is worth. It is <b>not</b> what the index row prints; that is the one sentence above.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p>A subtraction day, and the standing status rule is what makes it a day rather than a wait: a reader can be told what has been RULED OUT and come away with more than they had. It also buys the week its honesty — a search that never reports a dead end is not a search.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D3.EXEC" rows="5"
@@ -488,6 +665,7 @@ shape rather than quoted. Everything under the gold line is Ops&rsquo;.</p>
 </div>
 </div>
 <div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<p class="fnote">No limit. Two shapes worth knowing while you write it: your approved container is <b>four to seven sections</b>, each holding one thought under a short all-caps label — and an entry built that way cannot currently draw a transmission, a photograph set or a document alongside them (they are silently dropped), so say it in a section or say it is a picture.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><ul><li>What was tried.</li><li>What it looked like it would be.</li><li>What it turned out to be instead.</li></ul></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D3.NOTES" rows="5"
@@ -505,13 +683,27 @@ shape rather than quoted. Everything under the gold line is Ops&rsquo;.</p>
 <div class="bd">
 
 <div class="fld"><div class="fh">Headline</div>
+
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p class="hl">A table of codes, and every one of them refuses.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D4.HEAD" rows="2"
-    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+    placeholder="your headline for this day" spellcheck="true"></textarea><div class="lim" data-lim="W2.D4.HEAD"><b class="cnt"></b><span class="of"> / 62 characters</span></div>
+<p class="limwarn" data-over="W2.D4.HEAD"></p></div>
+</div>
+</div>
+<div class="fld"><div class="fh">The one sentence under it, in the index</div>
+<p class="fnote">This is the field that was missing. It is the summary printed under the headline in the Record's index, it is the WHOLE summary (there is no ellipsis and no “more”), and with no separate lead on the entry it also draws as the opening paragraph when the record is opened. One sentence that can stand alone.</p>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="none">No Ops draft. The day&rsquo;s shape and its topics are in the two
+  boxes below; neither of them is a sentence, and turning one into a sentence for you is
+  the edit this field exists to avoid.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D4.LINE" rows="2"
+    placeholder="one sentence — this is the whole summary in the index, not a teaser" spellcheck="true"></textarea><div class="lim" data-lim="W2.D4.LINE"><b class="cnt"></b><span class="of"> / 130 characters</span></div>
+<p class="limwarn" data-over="W2.D4.LINE"></p></div>
 </div>
 </div>
 <div class="fld"><div class="fh">Executive summary</div>
+<p class="fnote">No limit, and that is not an oversight — this lands in a section of the entry, where the length of a section is a fact about the day. Write as much as the day is worth. It is <b>not</b> what the index row prints; that is the one sentence above.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p>The object and its property, in one day, because they are one object: a table nobody labelled, full of codes, and the codes do not work when they are typed in. That refusal is the day's whole content — it means there is a step nobody has found yet, and saying so is a status report, not a cliffhanger.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D4.EXEC" rows="5"
@@ -519,6 +711,7 @@ shape rather than quoted. Everything under the gold line is Ops&rsquo;.</p>
 </div>
 </div>
 <div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<p class="fnote">No limit. Two shapes worth knowing while you write it: your approved container is <b>four to seven sections</b>, each holding one thought under a short all-caps label — and an entry built that way cannot currently draw a transmission, a photograph set or a document alongside them (they are silently dropped), so say it in a section or say it is a picture.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><ul><li>The table: where it was, and what makes it unlabelled.</li><li>The codes: how many, what shape.</li><li>The refusal: what happens when one is typed straight in.</li></ul></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D4.NOTES" rows="5"
@@ -538,13 +731,27 @@ shape rather than quoted. Everything under the gold line is Ops&rsquo;.</p>
        this day is the only beat in either week that lands outside the transfer model's
        own window. <a href="reference.html#collisions">what that means, and the three ways out &rarr;</a></p>
 <div class="fld"><div class="fh">Headline</div>
+
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p class="hl">Four o'clock, and it is on the porch.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D5.HEAD" rows="2"
-    placeholder="your headline for this day" spellcheck="true"></textarea></div>
+    placeholder="your headline for this day" spellcheck="true"></textarea><div class="lim" data-lim="W2.D5.HEAD"><b class="cnt"></b><span class="of"> / 62 characters</span></div>
+<p class="limwarn" data-over="W2.D5.HEAD"></p></div>
+</div>
+</div>
+<div class="fld"><div class="fh">The one sentence under it, in the index</div>
+<p class="fnote">This is the field that was missing. It is the summary printed under the headline in the Record's index, it is the WHOLE summary (there is no ellipsis and no “more”), and with no separate lead on the entry it also draws as the opening paragraph when the record is opened. One sentence that can stand alone.</p>
+<div class="pair">
+  <div class="c ops"><span class="ml">Ops</span><p class="none">No Ops draft. The day&rsquo;s shape and its topics are in the two
+  boxes below; neither of them is a sentence, and turning one into a sentence for you is
+  the edit this field exists to avoid.</p></div>
+  <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D5.LINE" rows="2"
+    placeholder="one sentence — this is the whole summary in the index, not a teaser" spellcheck="true"></textarea><div class="lim" data-lim="W2.D5.LINE"><b class="cnt"></b><span class="of"> / 130 characters</span></div>
+<p class="limwarn" data-over="W2.D5.LINE"></p></div>
 </div>
 </div>
 <div class="fld"><div class="fh">Executive summary</div>
+<p class="fnote">No limit, and that is not an oversight — this lands in a section of the entry, where the length of a section is a fact about the day. Write as much as the day is worth. It is <b>not</b> what the index row prints; that is the one sentence above.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><p>Built to the Friday formula he named: the entry summarises the week's last day the way any other day's entry would, and then four o'clock happens INSIDE the same entry. Not a trailer and not a to-be-continued. This is also the week's one arrival — everything before it was already in the building.</p></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D5.EXEC" rows="5"
@@ -552,6 +759,7 @@ shape rather than quoted. Everything under the gold line is Ops&rsquo;.</p>
 </div>
 </div>
 <div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
+<p class="fnote">No limit. Two shapes worth knowing while you write it: your approved container is <b>four to seven sections</b>, each holding one thought under a short all-caps label — and an entry built that way cannot currently draw a transmission, a photograph set or a document alongside them (they are silently dropped), so say it in a section or say it is a picture.</p>
 <div class="pair">
   <div class="c ops"><span class="ml">Ops</span><ul><li>The day's work, summarised as any day's would be.</li><li>Four o'clock: the box.</li><li>No shipping label — what that is and is not evidence of.</li></ul></div>
   <div class="c yours"><span class="ml y">yours</span><textarea data-slot="W2.D5.NOTES" rows="5"
@@ -579,7 +787,7 @@ line came from. Ops&#8209;to&#8209;Mike, 2026-08-07; not part of the museum.</fo
 </div>
 
 <div class="cbar">
- <span class="st" id="stat"></span>
+ <span class="st"><span id="stat"></span><span class="ovr" id="ovr"></span></span>
  <span>
   <a href="arc.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">the twelve weeks &rarr;</a>
   <a href="reference.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">reference &rarr;</a>
@@ -589,7 +797,7 @@ line came from. Ops&#8209;to&#8209;Mike, 2026-08-07; not part of the museum.</fo
 <script>
 (function(){
  "use strict";
- var SLOTS = [{"id":"W1.D1.HEAD","where":"WEEK 1 — day 1 MON — headline","ops":"The museum opens."},{"id":"W1.D1.EXEC","where":"WEEK 1 — day 1 MON — executive summary","ops":null},{"id":"W1.D1.NOTES","where":"WEEK 1 — day 1 MON — detailed sections, notes, etc.","ops":null},{"id":"W1.D2.HEAD","where":"WEEK 1 — day 2 TUE — headline","ops":"Hors d'oeuvres, and the announcement of this evening's entrees."},{"id":"W1.D2.EXEC","where":"WEEK 1 — day 2 TUE — executive summary","ops":null},{"id":"W1.D2.NOTES","where":"WEEK 1 — day 2 TUE — detailed sections, notes, etc.","ops":null},{"id":"W1.D3.HEAD","where":"WEEK 1 — day 3 WED — headline","ops":"The start of the transmissions: what came, what form, what is unreadable."},{"id":"W1.D3.EXEC","where":"WEEK 1 — day 3 WED — executive summary","ops":null},{"id":"W1.D3.NOTES","where":"WEEK 1 — day 3 WED — detailed sections, notes, etc.","ops":null},{"id":"W1.D4.HEAD","where":"WEEK 1 — day 4 THU — headline","ops":"What we can see from outside the box."},{"id":"W1.D4.EXEC","where":"WEEK 1 — day 4 THU — executive summary","ops":null},{"id":"W1.D4.NOTES","where":"WEEK 1 — day 4 THU — detailed sections, notes, etc.","ops":null},{"id":"W1.D5.HEAD","where":"WEEK 1 — day 5 FRI — headline","ops":"One password was short enough."},{"id":"W1.D5.EXEC","where":"WEEK 1 — day 5 FRI — executive summary","ops":null},{"id":"W1.D5.NOTES","where":"WEEK 1 — day 5 FRI — detailed sections, notes, etc.","ops":null},{"id":"W2.D1.HEAD","where":"WEEK 2 — day 1 MON — headline","ops":"What was actually in it."},{"id":"W2.D1.EXEC","where":"WEEK 2 — day 1 MON — executive summary","ops":null},{"id":"W2.D1.NOTES","where":"WEEK 2 — day 1 MON — detailed sections, notes, etc.","ops":null},{"id":"W2.D2.HEAD","where":"WEEK 2 — day 2 TUE — headline","ops":"The things in it that are objects, not data."},{"id":"W2.D2.EXEC","where":"WEEK 2 — day 2 TUE — executive summary","ops":null},{"id":"W2.D2.NOTES","where":"WEEK 2 — day 2 TUE — detailed sections, notes, etc.","ops":null},{"id":"W2.D3.HEAD","where":"WEEK 2 — day 3 WED — headline","ops":"What looked like the way in, and is not."},{"id":"W2.D3.EXEC","where":"WEEK 2 — day 3 WED — executive summary","ops":null},{"id":"W2.D3.NOTES","where":"WEEK 2 — day 3 WED — detailed sections, notes, etc.","ops":null},{"id":"W2.D4.HEAD","where":"WEEK 2 — day 4 THU — headline","ops":"A table of codes, and every one of them refuses."},{"id":"W2.D4.EXEC","where":"WEEK 2 — day 4 THU — executive summary","ops":null},{"id":"W2.D4.NOTES","where":"WEEK 2 — day 4 THU — detailed sections, notes, etc.","ops":null},{"id":"W2.D5.HEAD","where":"WEEK 2 — day 5 FRI — headline","ops":"Four o'clock, and it is on the porch."},{"id":"W2.D5.EXEC","where":"WEEK 2 — day 5 FRI — executive summary","ops":null},{"id":"W2.D5.NOTES","where":"WEEK 2 — day 5 FRI — detailed sections, notes, etc.","ops":null}];
+ var SLOTS = [{"id":"REC.EPOCH","where":"DAY ONE — the calendar date the Record starts on (recordEpoch)","ops":null,"lim":{"re":"^\\d{4}-\\d{2}-\\d{2}$","says":"four digits, a hyphen, two digits, a hyphen, two digits — 2026-08-10","why":"Anything else parses to nothing and the entry silently loses its dateline, its week number and its month band. No error is printed."}},{"id":"W1.D1.HEAD","where":"WEEK 1 — day 1 MON — headline","ops":"The museum opens.","lim":{"max":62,"says":"The index row gives the headline ONE line and nothing truncates any more, so a longer one overflows the row rather than clipping.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W1.D1.LINE","where":"WEEK 1 — day 1 MON — the one sentence under it, in the index","ops":null,"lim":{"max":130,"says":"Your own rule: THE ENTIRE SUMMARY MUST FIT. The row holds two lines and nothing truncates, so a longer summary overflows it.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W1.D1.EXEC","where":"WEEK 1 — day 1 MON — executive summary","ops":null,"lim":null},{"id":"W1.D1.NOTES","where":"WEEK 1 — day 1 MON — detailed sections, notes, etc.","ops":null,"lim":null},{"id":"W1.D2.HEAD","where":"WEEK 1 — day 2 TUE — headline","ops":"Hors d'oeuvres, and the announcement of this evening's entrees.","lim":{"max":62,"says":"The index row gives the headline ONE line and nothing truncates any more, so a longer one overflows the row rather than clipping.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W1.D2.LINE","where":"WEEK 1 — day 2 TUE — the one sentence under it, in the index","ops":null,"lim":{"max":130,"says":"Your own rule: THE ENTIRE SUMMARY MUST FIT. The row holds two lines and nothing truncates, so a longer summary overflows it.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W1.D2.EXEC","where":"WEEK 1 — day 2 TUE — executive summary","ops":null,"lim":null},{"id":"W1.D2.NOTES","where":"WEEK 1 — day 2 TUE — detailed sections, notes, etc.","ops":null,"lim":null},{"id":"W1.D3.HEAD","where":"WEEK 1 — day 3 WED — headline","ops":"The start of the transmissions: what came, what form, what is unreadable.","lim":{"max":62,"says":"The index row gives the headline ONE line and nothing truncates any more, so a longer one overflows the row rather than clipping.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W1.D3.LINE","where":"WEEK 1 — day 3 WED — the one sentence under it, in the index","ops":null,"lim":{"max":130,"says":"Your own rule: THE ENTIRE SUMMARY MUST FIT. The row holds two lines and nothing truncates, so a longer summary overflows it.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W1.D3.EXEC","where":"WEEK 1 — day 3 WED — executive summary","ops":null,"lim":null},{"id":"W1.D3.NOTES","where":"WEEK 1 — day 3 WED — detailed sections, notes, etc.","ops":null,"lim":null},{"id":"W1.D4.HEAD","where":"WEEK 1 — day 4 THU — headline","ops":"What we can see from outside the box.","lim":{"max":62,"says":"The index row gives the headline ONE line and nothing truncates any more, so a longer one overflows the row rather than clipping.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W1.D4.LINE","where":"WEEK 1 — day 4 THU — the one sentence under it, in the index","ops":null,"lim":{"max":130,"says":"Your own rule: THE ENTIRE SUMMARY MUST FIT. The row holds two lines and nothing truncates, so a longer summary overflows it.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W1.D4.EXEC","where":"WEEK 1 — day 4 THU — executive summary","ops":null,"lim":null},{"id":"W1.D4.NOTES","where":"WEEK 1 — day 4 THU — detailed sections, notes, etc.","ops":null,"lim":null},{"id":"W1.D5.HEAD","where":"WEEK 1 — day 5 FRI — headline","ops":"One password was short enough.","lim":{"max":62,"says":"The index row gives the headline ONE line and nothing truncates any more, so a longer one overflows the row rather than clipping.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W1.D5.LINE","where":"WEEK 1 — day 5 FRI — the one sentence under it, in the index","ops":null,"lim":{"max":130,"says":"Your own rule: THE ENTIRE SUMMARY MUST FIT. The row holds two lines and nothing truncates, so a longer summary overflows it.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W1.D5.EXEC","where":"WEEK 1 — day 5 FRI — executive summary","ops":null,"lim":null},{"id":"W1.D5.NOTES","where":"WEEK 1 — day 5 FRI — detailed sections, notes, etc.","ops":null,"lim":null},{"id":"W2.D1.HEAD","where":"WEEK 2 — day 1 MON — headline","ops":"What was actually in it.","lim":{"max":62,"says":"The index row gives the headline ONE line and nothing truncates any more, so a longer one overflows the row rather than clipping.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W2.D1.LINE","where":"WEEK 2 — day 1 MON — the one sentence under it, in the index","ops":null,"lim":{"max":130,"says":"Your own rule: THE ENTIRE SUMMARY MUST FIT. The row holds two lines and nothing truncates, so a longer summary overflows it.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W2.D1.EXEC","where":"WEEK 2 — day 1 MON — executive summary","ops":null,"lim":null},{"id":"W2.D1.NOTES","where":"WEEK 2 — day 1 MON — detailed sections, notes, etc.","ops":null,"lim":null},{"id":"W2.D2.HEAD","where":"WEEK 2 — day 2 TUE — headline","ops":"The things in it that are objects, not data.","lim":{"max":62,"says":"The index row gives the headline ONE line and nothing truncates any more, so a longer one overflows the row rather than clipping.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W2.D2.LINE","where":"WEEK 2 — day 2 TUE — the one sentence under it, in the index","ops":null,"lim":{"max":130,"says":"Your own rule: THE ENTIRE SUMMARY MUST FIT. The row holds two lines and nothing truncates, so a longer summary overflows it.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W2.D2.EXEC","where":"WEEK 2 — day 2 TUE — executive summary","ops":null,"lim":null},{"id":"W2.D2.NOTES","where":"WEEK 2 — day 2 TUE — detailed sections, notes, etc.","ops":null,"lim":null},{"id":"W2.D3.HEAD","where":"WEEK 2 — day 3 WED — headline","ops":"What looked like the way in, and is not.","lim":{"max":62,"says":"The index row gives the headline ONE line and nothing truncates any more, so a longer one overflows the row rather than clipping.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W2.D3.LINE","where":"WEEK 2 — day 3 WED — the one sentence under it, in the index","ops":null,"lim":{"max":130,"says":"Your own rule: THE ENTIRE SUMMARY MUST FIT. The row holds two lines and nothing truncates, so a longer summary overflows it.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W2.D3.EXEC","where":"WEEK 2 — day 3 WED — executive summary","ops":null,"lim":null},{"id":"W2.D3.NOTES","where":"WEEK 2 — day 3 WED — detailed sections, notes, etc.","ops":null,"lim":null},{"id":"W2.D4.HEAD","where":"WEEK 2 — day 4 THU — headline","ops":"A table of codes, and every one of them refuses.","lim":{"max":62,"says":"The index row gives the headline ONE line and nothing truncates any more, so a longer one overflows the row rather than clipping.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W2.D4.LINE","where":"WEEK 2 — day 4 THU — the one sentence under it, in the index","ops":null,"lim":{"max":130,"says":"Your own rule: THE ENTIRE SUMMARY MUST FIT. The row holds two lines and nothing truncates, so a longer summary overflows it.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W2.D4.EXEC","where":"WEEK 2 — day 4 THU — executive summary","ops":null,"lim":null},{"id":"W2.D4.NOTES","where":"WEEK 2 — day 4 THU — detailed sections, notes, etc.","ops":null,"lim":null},{"id":"W2.D5.HEAD","where":"WEEK 2 — day 5 FRI — headline","ops":"Four o'clock, and it is on the porch.","lim":{"max":62,"says":"The index row gives the headline ONE line and nothing truncates any more, so a longer one overflows the row rather than clipping.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W2.D5.LINE","where":"WEEK 2 — day 5 FRI — the one sentence under it, in the index","ops":null,"lim":{"max":130,"says":"Your own rule: THE ENTIRE SUMMARY MUST FIT. The row holds two lines and nothing truncates, so a longer summary overflows it.","gate":"npm run reveal:check — it refuses the packet"}},{"id":"W2.D5.EXEC","where":"WEEK 2 — day 5 FRI — executive summary","ops":null,"lim":null},{"id":"W2.D5.NOTES","where":"WEEK 2 — day 5 FRI — detailed sections, notes, etc.","ops":null,"lim":null}];
  var KEY = "wb.worksheet.2026-08-07";
  var CARRY = null;
  var store = null;
@@ -616,8 +824,61 @@ line came from. Ops&#8209;to&#8209;Mike, 2026-08-07; not part of the museum.</fo
  }
 
  var saveTimer = null, statEl = document.getElementById("stat");
+ var ovrEl = document.getElementById("ovr");
  function two(n){ return (n < 10 ? "0" : "") + n; }
  function clock(){ var d = new Date(); return two(d.getHours()) + ":" + two(d.getMinutes()); }
+
+ /* ---- THE LIMITS -------------------------------------------------------
+    MIKE, 2026-08-08: "he must never again discover a limit from a report."
+    A slot that feeds a constrained field declares `lim` and this is the whole
+    of the mechanism: count what he has typed, against the SAME number the gate
+    will use (imported, never retyped), and say so while he is typing rather
+    than three rounds later.
+
+    IT COUNTS WHAT WOULD BE SAVED, NOT WHAT IS IN THE BOX. `values()` strips
+    trailing whitespace before it stores anything, so counting the raw value
+    would report a character the packet never sees and put a field one over its
+    budget for pressing the space bar. The two must agree or the meter is
+    lying in the safest-looking direction. */
+ var LIM = {};
+ SLOTS.forEach(function(s){ if (s.lim) LIM[s.id] = s.lim; });
+ var over = {};
+
+ function limit(id, raw){
+  var lim = LIM[id]; if (!lim) return;
+  var box = document.querySelector('[data-lim="' + id + '"]');
+  var say = document.querySelector('[data-over="' + id + '"]');
+  var t = byId[id];
+  var v = String(raw == null ? "" : raw).replace(/\s+$/,"");
+  var bad = false, cnt = "", msg = "", cls = "lim";
+
+  if (lim.max) {
+   var n = v.length, past = n - lim.max;
+   bad = past > 0;
+   cnt = bad ? (past + " OVER") : String(n);
+   if (bad) cls = "lim over";
+   else if (n > lim.max - 15 && n > 0) cls = "lim near";
+   if (bad) {
+    msg = "<b>" + past + " character" + (past === 1 ? "" : "s") + " too many.</b> "
+        + LIM_SAYS(lim) + " <i>" + LIM_GATE(lim) + "</i>";
+   }
+  } else if (lim.re) {
+   if (v) {
+    bad = !(new RegExp(lim.re)).test(v);
+    cnt = bad ? "NOT A DATE" : "reads as a date";
+    cls = bad ? "lim over" : "lim ok";
+    if (bad) msg = "<b>That is not the format.</b> " + LIM_SAYS(lim) + " " + LIM_WHY(lim);
+   } else { cnt = ""; }
+  }
+
+  if (box) { box.className = cls; box.querySelector(".cnt").textContent = cnt; }
+  if (say) { say.innerHTML = msg; say.className = msg ? "limwarn on" : "limwarn"; }
+  if (t) { t.className = (t.className.replace(/\s*bad/, "")) + (bad ? " bad" : ""); }
+  if (bad) over[id] = 1; else delete over[id];
+ }
+ function LIM_SAYS(l){ return l.says || ""; }
+ function LIM_GATE(l){ return l.gate ? ("Caught by: " + l.gate + ".") : ""; }
+ function LIM_WHY(l){ return l.why || ""; }
 
  function stat(saved){
   var n = Object.keys(values()).length;
@@ -625,6 +886,15 @@ line came from. Ops&#8209;to&#8209;Mike, 2026-08-07; not part of the museum.</fo
   if (!store) msg += " \u00b7 <b>not saved</b> \u2014 this browser refused storage";
   else if (saved) msg += " \u00b7 saved " + clock();
   statEl.innerHTML = msg;
+  /* THE OVER-COUNT IS IN THE FIXED BAR AND NOT ONLY BESIDE THE FIELD, because
+     the field he broke is usually three screens above the one he is typing in
+     by the time he stops. It is the same number, in the one place that is
+     always on screen. */
+  var k = Object.keys(over).length;
+  if (ovrEl) {
+   ovrEl.textContent = k ? (" \u00b7 " + k + " over the limit") : "";
+   ovrEl.className = k ? "ovr on" : "ovr";
+  }
  }
 
  /* THIS PAGE OWNS ITS OWN SLOTS AND DESTROYS NOTHING ELSE IN ITS STORE, AND
@@ -679,10 +949,12 @@ line came from. Ops&#8209;to&#8209;Mike, 2026-08-07; not part of the museum.</fo
   var id = t.getAttribute("data-slot");
   if (saved[id]) t.value = saved[id];
   if (t.value) t.className = "has";
-  grow(t); mirror(id);
+  grow(t); mirror(id); limit(id, t.value);
   t.addEventListener("input", function(){
    t.className = t.value.replace(/\s+$/,"") ? "has" : "";
-   grow(t); mirror(id); stat(false);
+   /* limit() AFTER the className above, which overwrites it — the "bad" mark
+      is a second class on the same element and the order is load-bearing. */
+   grow(t); mirror(id); limit(id, t.value); stat(false);
    if (saveTimer) clearTimeout(saveTimer);
    saveTimer = setTimeout(save, 400);
   });
@@ -699,10 +971,21 @@ line came from. Ops&#8209;to&#8209;Mike, 2026-08-07; not part of the museum.</fo
   lines.push("captured " + d.getFullYear() + "-" + two(d.getMonth()+1) + "-" + two(d.getDate())
    + " " + clock() + "  -  " + n + " of " + SLOTS.length + " slots filled");
   lines.push("Ops' own paragraphs are not repeated here. Slot keys match the worksheet.");
+  var nOver = Object.keys(over).length;
+  if (nOver) lines.push("!! " + nOver + " answer(s) are over their limit and are marked below.");
   lines.push("");
   SLOTS.forEach(function(s){
    if (!v[s.id]) return;
    lines.push("[" + s.id + "] " + s.where);
+   /* AN OVER-LIMIT ANSWER TRAVELS WITH ITS OWN NUMBER ON IT. The paste is what
+      Ops reads; a length problem that is only visible in his browser is a
+      length problem Ops discovers at landing time, which is the same failure
+      one step later. */
+   if (over[s.id] && s.lim && s.lim.max) {
+    lines.push("  !! OVER LIMIT: " + v[s.id].length + " characters, budget " + s.lim.max);
+   } else if (over[s.id]) {
+    lines.push("  !! WRONG FORMAT: expected " + s.lim.says);
+   }
    if (s.ops) lines.push("  ops: " + s.ops);
    if (v[s.id].indexOf("\n") < 0) lines.push("  mike: " + v[s.id]);
    else { lines.push("  mike:"); lines.push(v[s.id]); }

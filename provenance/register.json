@@ -15351,6 +15351,15 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
   },
+  "9bc06a08f1257070": {
+   "f": "src/data/artists/robots.js",
+   "l": 470,
+   "t": "Weird.Baby launched on schedule. The email server took an onslaught of unexplained data starting Friday.",
+   "p": "spine[].tracks[].face.entries[].line",
+   "c": "RESTATED",
+   "r": ["f6a32ef902e54edf", "21eff46d69225dde"],
+   "n": "OPS-DRAFTED, MIKE-APPROVED, AND FILED AS RESTATED RATHER THAN MIKE ON PURPOSE. It is the index row's summary for Record 001 and it is the only string in that entry that is not his: he approved this exact sentence on 2026-08-08 (docs/MUSEUM_INDEX_LINE_LOG-20260808.md §0), and approving a sentence is not writing one. It adds no specific — 'launched on schedule', 'the email server', 'an onslaught', 'Friday' are all in the two MIKE rows named in `r`, which are his own paragraphs two fields below it. Marking it MIKE would make an Ops paraphrase indistinguishable from his words a week later, which is the exact failure the three-mark rule exists to prevent."
+  },
   "b7d268f83c5b7ea7": {
    "f": "src/data/artists/robots.js",
    "l": 453,

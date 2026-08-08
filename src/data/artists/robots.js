@@ -412,18 +412,35 @@ const WBR_TRACKS = [
                Nothing else was touched: not the hyphens standing in for dashes,
                not "50x", not the order, not the paragraphing.
 
+               THE `line` LANDED ON 2026-08-08 AND IT IS THE ONE STRING IN THIS
+               ENTRY THAT IS NOT HIS. Everything else here is verbatim; this is
+               not, and it is marked so in three places rather than one — here,
+               in the provenance register (RESTATED, resolving to the two MIKE
+               rows it restates), and in the round log. The previous round left
+               the row empty because his executive summary is 477 characters
+               against a 130-character budget and PICKING one of his sentences
+               would have been an edit. Ops did not pick one; Ops drafted a
+               sentence and Mike approved it, which is a different act and is
+               the only one that was ever available. 104 characters, inside
+               RECORD_LINE_MAX. **Do not let a later round re-mark this MIKE**:
+               a paraphrase filed as his words is indistinguishable, a week
+               later, from something he said.
+
+               AND IT DRAWS IN TWO PLACES, WHICH IS THE HOUSE'S OWN MODEL AND IS
+               NAMED HERE BECAUSE IT WAS NOT ASKED FOR. `RecordEntry.jsx` renders
+               `entry.lead || entry.line` as the lead paragraph, so this sentence
+               is both the index row's summary AND the lead above his EXECUTIVE
+               SUMMARY heading. That is what a lead is for — the one paragraph
+               that survives being read alone — and it condenses his three rather
+               than competing with them, so nothing was built to suppress it.
+               One word from him reverses it either way. OPEN_ACTIONS I-a.
+
                WHAT IS STILL ABSENT, AND WHY IT IS NOT OPS PROSE:
-                 · no `line` — the index row's summary is budgeted at 130
-                   characters (RECORD_LINE_MAX, tools/reveal-ledger.mjs) because
-                   Mike's own R3 rule is that THE ENTIRE SUMMARY MUST FIT. His
-                   executive summary is 477 characters in three paragraphs. It
-                   is carried WHOLE in the entry below and it cannot be carried
-                   in the row, and choosing which of his sentences becomes the
-                   summary is an edit — so the row still has no line and the ask
-                   is one sentence from him. OPEN_ACTIONS S-b.
                  · no `lead` — `lead` renders one paragraph. His summary is
                    three, and flattening them is the same edit by another route.
-                   The section keeps all three, in order.
+                   The section keeps all three, in order. (The `line` above now
+                   occupies that slot on the glass; it is one sentence and not a
+                   flattening of his.)
                  · no `tomb` — he wrote no closing line and Ops will not invent
                    the place the lights go off.
                  · no `date` — "Monday morning" and "FRIDAY DAY (-3)" are in his
@@ -449,6 +466,9 @@ const WBR_TRACKS = [
                choice and therefore the right one. */
             { no: 1,
               title: "Weird.Baby Initial Launch Report",
+              /* OPS' SENTENCE, MIKE'S APPROVAL. See the block above. */
+              line: "Weird.Baby launched on schedule. The email server took " +
+                    "an onslaught of unexplained data starting Friday.",
               sections: [
                 { label: "EXECUTIVE SUMMARY",
                   body: [

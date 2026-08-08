@@ -186,15 +186,50 @@ in the data and not on the glass:** measured, `=  86%` and `= 86%` draw at
 `white-space: pre-wrap` on every record body or an `&nbsp;` in place of his
 character, and both are his ruling.
 
-**`S-a` IS CLOSED AND `S-b` IS NARROWED TO ONE SENTENCE.** S-a's answer became
-Doctrine 21 below. S-b: two of its three parts landed — the sections and the
-lead-weight summary are in the entry — and **the index row still has no `line`,
-because his executive summary is 477 characters against a 130-character slot and
-choosing which of his sentences becomes the summary is an edit.** Measured again
-this round at 390px: **013's row 157px, 001's row 84px, unchanged.** The residual
-ask is one sentence, ≤130 characters, in his words. `C8` still waits on the same
-missing field — his text has *Monday morning* and *FRIDAY DAY (-3)*, no calendar
-date.
+**`S-a` AND `S-b` ARE BOTH CLOSED.** S-a's answer became Doctrine 21 below.
+**S-b closed on 2026-08-08 by the one act that was available: Ops drafted a
+sentence and Mike approved it** — *"Weird.Baby launched on schedule. The email
+server took an onslaught of unexplained data starting Friday."*, 104 characters,
+landed as `line`. **It is filed RESTATED and not MIKE**, resolving to the two of
+his own paragraphs it restates: approval is not authorship, and a paraphrase in
+his class is indistinguishable from his words a week later. **The measurement is
+now the other way round** — at the 1247px measure the budgets were taken at, 013
+and 001 are **94.39px each, 0.00px apart**, which is R3's rule satisfied exactly;
+at 390px they are 24.24px apart, one line of wrap, down from 73px (`I-b`). **The
+sentence draws twice** (`entry.lead || entry.line`), so it is also the entry's
+lead above his EXECUTIVE SUMMARY heading — shipped, not suppressed (`I-a`). `C8`
+is now the whole of what is left and **the worksheet finally asks for it**, in
+one format-checked box.
+
+## A LIMIT IS SHOWN WHERE THE STRING IS WRITTEN (Mike, 2026-08-08 — STANDING)
+
+> **"He must never again discover a limit from a report."**
+
+Canonical text + reasoning: `docs/canonical/OPERATIONS.md` §7 Doctrine 22.
+
+The case: he composed a **477-character** executive summary against a
+**130-character** index row and found out **three rounds later** from a gate.
+Every part worked as designed — the row cannot truncate, the gate refuses the
+overflow, the number is correct and documented. **None of them reached the person
+writing the string while he was writing it.** So a constraint has three halves
+now: a render that cannot lie, a gate that refuses, **and a live count on the
+field.**
+
+**ONE DECLARATION, EVERY READER** — `reveal/record-shape.mjs`, imported by the
+gate, the instrument and the page that documents it. A counter with its own copy
+of a number is a budget that quietly stops agreeing with its gate; a constant
+that cannot be imported because it lives in a script **is the defect, and gets
+moved.** **WARN, NEVER BLOCK** — no `maxlength`; an input that refuses the next
+character has decided for him mid-sentence. **COUNT WHAT WOULD BE SAVED.** **SAY
+WHERE THERE IS NO LIMIT**, so an absent counter reads as *nothing to fit*. **THE
+WARNING TRAVELS** into whatever leaves the instrument.
+
+**AND THE AUDIT IS OF EVERY SLOT, NOT THE ONE THAT BIT** — which is how the real
+defect surfaced: **the constrained field had never been asked for at all.** A
+meter on the executive summary would have policed something unbounded and still
+never asked for the thing with a limit. Seventeen constraints are declared;
+**six are `silent: true`** — no error anywhere when broken — and the worst is the
+date format.
 
 ## EVERYTHING IN THE FORM IS STORY (Mike, 2026-08-08 — STANDING)
 

@@ -627,9 +627,78 @@ so `line` is still empty and 001's row is still 84px against 013's 157px (`S-b`)
 collapses it, and making it visible costs `white-space: pre-wrap` on every record
 body (`S-e`). Full rules: `OPERATIONS.md` §5's RECORD 001 row.
 
+## ONE STANDING RULE ADDED 2026-08-08 (THE INDEX LINE + THE WARNING)
+
+**A LIMIT IS SHOWN WHERE THE STRING IS WRITTEN** — *"he must never again discover
+a limit from a report."* `OPERATIONS.md` §7 **Doctrine 22**, mirrored in
+`STATE.md`. A 477-character summary was composed against a 130-character row and
+surfaced three rounds later from a gate; **every part worked as designed and none
+of them reached the writer while he was writing.** A constraint has three halves
+now: a render that cannot lie, a gate that refuses, **and a live count on the
+field.** **ONE DECLARATION, EVERY READER** — `reveal/record-shape.mjs`, imported
+by the gate, the instrument and the page that documents it; a constant that
+cannot be imported because it lives in a script **is the defect, and gets moved.**
+**WARN, NEVER BLOCK** (no `maxlength`) · **count what would be SAVED, not the raw
+field** · **say where there is NO limit** · **the warning travels into the paste.**
+**AND THE AUDIT IS OF EVERY SLOT** — which is how the real defect surfaced: the
+constrained field had never been asked for at all, and a meter on the wrong field
+would have policed something unbounded. Seventeen constraints declared, **six
+`silent: true`.** **Before adding any field Mike fills in, read Doctrine 22.**
+
+**AND `line` DRAWS TWICE.** `RecordEntry.jsx` renders `entry.lead || entry.line`,
+so an entry with no `lead` prints its index summary as the lead paragraph too.
+Record 001's approved sentence is **filed RESTATED, not MIKE** — approval is not
+authorship — and **must never be re-marked**: a paraphrase in his class is
+indistinguishable from his words a week later.
+
 ## Recent session log
 
 Maintained here. Newest first.
+
+### 2026-08-08 -> THE INDEX LINE + THE WARNING (I1-I3) - sealed
+- **THE ROW THAT HAS BEEN EMPTY FOR THREE ROUNDS IS FILLED, AND THE HONEST PART
+  IS THE CLASS IT IS FILED UNDER.** Mike approved an Ops-drafted sentence (104
+  characters, not the 105 the brief said - measured), and it is **RESTATED**
+  resolving to the two of his own paragraphs it restates, not MIKE. **Approval is
+  not authorship**, and the other fifteen rows on that entry are genuinely
+  verbatim. **THE MEASUREMENT S-b CARRIED FOR THREE ROUNDS IS NOW THE OTHER WAY
+  ROUND:** at the 1247px measure the budgets were taken at, 013 and 001 are
+  **94.39px each, 0.00px apart** - R3's *"all constrained to the same height"*
+  satisfied exactly; at 390px they are 24.24px apart, **one line of wrap**, down
+  from 73px, and that residual is arithmetic rather than a defect (`I-b`). Gates:
+  lint **11/9 = baseline** - build green - provenance **PASS** - `reveal:check`
+  **PASS** - `parity:gate` **PASS** - `instory:gate` **PASS** - `assets:orphans`
+  **0** - `reveal:day` **nothing to move** - **the lap RAN at 390px**, `/robots`
+  and all four Ops pages, page overflow **0** and **0 uncontained** past the edge,
+  zero console errors. Log: `docs/MUSEUM_INDEX_LINE_LOG-20260808.md`.
+- **I2's DEFECT WAS A MISSING QUESTION AND NOT ONLY A MISSING COUNTER, WHICH IS
+  WHY THE INSTRUCTION TO AUDIT EVERY SLOT WAS THE LOAD-BEARING HALF.** `EXEC`
+  asks for the paragraph a reader gets if they read nothing else - **unbounded
+  and correct**, it lands in a section. The constrained field is the index row's
+  `line` and **the worksheet never asked for it at all.** A 130-character meter
+  on `EXEC` would have policed a field with no limit and still never asked for
+  the one that has one. Ten `LINE` slots exist now, plus one `REC.EPOCH` (30 -> 41
+  slots), and **the two numbers are IMPORTED** from `reveal/record-shape.mjs`
+  rather than retyped - they were module-private constants in a script that
+  dispatches on `process.argv`, so the page he writes on could not read them.
+- **THE LAP CAUGHT A BUG THAT WOULD HAVE MADE THE WHOLE FEATURE INVISIBLE AT THE
+  ONE MOMENT IT MATTERED.** The counter takes the state class `over`; the warning
+  paragraph was written `.over{display:none}`. **Same selector.** The live count
+  computed to `display:none` **exactly when it went over budget.** Both
+  declarations are correct alone and the collision exists only in the cascade -
+  found by reading `getComputedStyle` after a screenshot showed the number
+  missing, not by reading source. It is `.limwarn` now.
+- **I3 IS SEVENTEEN CONSTRAINTS AND SIX OF THEM ARE SILENT.** The worst is the
+  date: anything but `YYYY-MM-DD` parses to nothing and **the entry renders and
+  quietly loses its dateline, its week number and its month band, with no error
+  anywhere.** It is one slot and not ten - `entryWeek()` counts from a declared
+  epoch, so asking ten times is nine chances for two answers to disagree - and it
+  is the last thing `C8` waits on. Section count (4-7) and the `sections` payload
+  drop (`S-c`) are said on the NOTES slot; asset paths stay Ops' work.
+- **SURFACING UNMOVED AT 20 SPENDABLE - THE SEVENTH PACKET RUNNING.** This packet
+  landed one approved sentence and rebuilt an instrument; it took nothing off the
+  back shelf. Said plainly because the packet is the only clock this repository
+  has.
 
 ### 2026-08-08 -> RECORD 001: MIKE'S WORDS - sealed
 - **THE WHOLE ROUND IS THIRTEEN STRINGS AND NOT ONE OF THEM IS OPS'.** His

@@ -149,7 +149,7 @@ They agree on the weekend independently; see <a href="#collisions">W&#8209;2</a>
 <div class="tw"><table>
 <thead><tr><th>class</th><th>window</th><th>what it carries</th><th>rows</th><th>in hand by week 1</th></tr></thead>
 <tbody>
-<tr><td><b>BLAST</b></td><td>THE BLAST — Friday to Sunday, pre-launch.</td><td>Everything the site already shows, and deliberately more than was published.</td><td>103</td>
+<tr><td><b>BLAST</b></td><td>THE BLAST — Friday to Sunday, pre-launch.</td><td>Everything the site already shows, and deliberately more than was published.</td><td>104</td>
   <td><span class="tag y">YES</span></td></tr>
 <tr><td><b>PACKAGE</b></td><td>THE PACKAGES — weeks 3–7, physical, on four Fridays.</td><td>Units, cases, objects, manual pieces. They earn their photographs.</td><td>9</td>
   <td><span class="tag n">NO</span></td></tr>
@@ -158,7 +158,7 @@ They agree on the weekend independently; see <a href="#collisions">W&#8209;2</a>
 <tr><td><b>TRANSMISSION</b></td><td>THE LATER TRANSMISSIONS — months 2–3, because they never stopped.</td><td>The back half's knock at the door.</td><td>6</td>
   <td><span class="tag n">NO</span></td></tr>
 </tbody></table></div>
-<p class="k" style="font-size:12.5px;margin-top:10px"><b>118 things have arrived
+<p class="k" style="font-size:12.5px;margin-top:10px"><b>119 things have arrived
 and 44 have not.</b> The rule is absolute and checked: an asset may only be SHOWN
 after it has been TRANSFERRED. Week one is all BLAST and one UNLOCK; week two is four
 UNLOCKs and <b>one PACKAGE that lands a week early</b> &mdash; the only beat in either
@@ -199,6 +199,121 @@ dictation speed.</p></div>
   <td><span class="rail m">your rule &middot; Ops wording</span><div style="margin-top:5px">THE BOUNCY BALL LAW: never more than two or three POINTS OF FOCUS — and the precious ones are two or three A WEEK.</div></td>
   <td>It caps ATTENTION, not pictures. A day may show ten manual pages and spend one point of focus doing it — we got more of the manual. What the ceiling governs is the PRECIOUS bucket: the genuine reveals a reader remembers. Everything else is the dump, and the dump has no ceiling.</td></tr>
 </tbody></table></div>
+
+<h2 id="entry-shape">Everything a Record entry is checked against &mdash; 17 constraints</h2>
+<div class="note" style="margin-bottom:14px">
+<p><b>THIS LIST EXISTS BECAUSE ONE OF ITS ROWS COST THREE ROUNDS.</b> The index row holds
+130 characters; the worksheet did not say so and did not even ask for the
+field, so Record 001&rsquo;s executive summary was written at 477 characters and the row is
+still empty. Your ruling was that the instrument must warn, and that <b>every other slot
+be audited for the same defect</b>. This is the audit, whole, whether or not the
+worksheet asks for the field.</p>
+<p><b>The column that matters is the last one.</b> A constraint marked
+<span class="tag n">SILENT</span> produces <i>no error anywhere</i> when it is broken
+&mdash; the entry renders and quietly loses something. Those are the expensive ones, and
+6 of the 17 are like that.
+The rest are caught by a named gate before anything ships.</p>
+<p class="k" style="font-size:12.5px">Declared once in <code>reveal/record-shape.mjs</code>
+and read by three things: the gate that enforces the two budgets, the worksheet&rsquo;s
+counters, and this table. Nothing here retypes a number.</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th style="width:13%">field</th><th style="width:47%">what it has to obey</th>
+<th style="width:22%">what catches it</th><th>asked for on the worksheet</th></tr></thead>
+<tbody>
+<tr>
+  <td><code>title</code></td>
+  <td>Required, and at most 62 characters.</td>
+  <td class="k" style="font-size:12.5px">npm run reveal:check (recordBudgetFaults)</td>
+  <td class="k" style="font-size:12.5px">the HEADLINE slot, with a live counter</td></tr>
+<tr>
+  <td><code>line</code></td>
+  <td>At most 130 characters. It is the whole summary under the headline in the index; there is no teaser and no ellipsis.</td>
+  <td class="k" style="font-size:12.5px">npm run reveal:check (recordBudgetFaults)</td>
+  <td class="k" style="font-size:12.5px">the INDEX SUMMARY slot, with a live counter</td></tr>
+<tr>
+  <td><code>line</code> <span class="tag n">SILENT</span></td>
+  <td>It draws TWICE. With no `lead` on the entry it is also the lead paragraph at the top of the opened record.</td>
+  <td class="k" style="font-size:12.5px">RecordEntry.jsx — `entry.lead || entry.line`</td>
+  <td class="k" style="font-size:12.5px">said on the slot, because it changes what the sentence has to do</td></tr>
+<tr>
+  <td><code>lead</code> <span class="tag n">SILENT</span></td>
+  <td>One paragraph. It is a string, not a list — two paragraphs in it set as one run-on.</td>
+  <td class="k" style="font-size:12.5px">nothing</td>
+  <td class="k" style="font-size:12.5px">not asked; the executive summary goes into a section instead</td></tr>
+<tr>
+  <td><code>sections</code> <span class="tag n">SILENT</span></td>
+  <td>Your approved container is FOUR TO SEVEN sections, each holding one thought, each with a short all-caps label. Weight is deliberately not equalised: the day's main event gets the room.</td>
+  <td class="k" style="font-size:12.5px">nothing — the renderer draws whatever it is given</td>
+  <td class="k" style="font-size:12.5px">said on the NOTES slot</td></tr>
+<tr>
+  <td><code>sections</code> <span class="tag n">SILENT</span></td>
+  <td>An entry that declares `sections` renders the long-form container, which draws NO `wire`, NO `plates` and NO `docs` and reports nothing.</td>
+  <td class="k" style="font-size:12.5px">nothing — OPEN_ACTIONS S-c</td>
+  <td class="k" style="font-size:12.5px">said on the NOTES slot</td></tr>
+<tr>
+  <td><code>sections[].body</code></td>
+  <td>`[[1]]` in a body is door one of that section's own list, set into the sentence where the marker stands. A door that is declared and never placed still renders at the end of the section, so a typo cannot swallow one.</td>
+  <td class="k" style="font-size:12.5px">RecordEntry.jsx (SectionBody)</td>
+  <td class="k" style="font-size:12.5px">not asked; doors are wired by Ops from what the notes describe</td></tr>
+<tr>
+  <td><code>date</code> <span class="tag n">SILENT</span></td>
+  <td>Exactly `YYYY-MM-DD`. Anything else is not a date and nothing says so.</td>
+  <td class="k" style="font-size:12.5px">nothing</td>
+  <td class="k" style="font-size:12.5px">one slot, for day one only — every other date follows from it</td></tr>
+<tr>
+  <td><code>date</code> <span class="tag n">SILENT</span></td>
+  <td>Three separate things wait on it: the `Week n` in the dateline (which also needs `recordEpoch` on the face), the month bands in a long index, and any NEWSPAPER door, whose target is a DATE and never a position in the list.</td>
+  <td class="k" style="font-size:12.5px">record-model.js; OPEN_ACTIONS C8 and C1</td>
+  <td class="k" style="font-size:12.5px">the same one slot</td></tr>
+<tr>
+  <td><code>no</code></td>
+  <td>Authored, never derived from position — the volume is a sample of a longer log and numbering by index would renumber every entry the day one is inserted. It must also agree with the ledger's own `record.NNN` row.</td>
+  <td class="k" style="font-size:12.5px">npm run reveal:check (recordParityFaults)</td>
+  <td class="k" style="font-size:12.5px">not asked; Ops assigns it and the gate checks it</td></tr>
+<tr>
+  <td><code>assets</code></td>
+  <td>Every path-shaped string anywhere in the entry IS the day's publish manifest. A governed picture named by an entry must exist at one of its two addresses, and must have a row in the asset table.</td>
+  <td class="k" style="font-size:12.5px">npm run reveal:check (deliveryFaults, check 4) and npm run reveal:day</td>
+  <td class="k" style="font-size:12.5px">not asked as a path; describe the picture in the notes and Ops resolves it</td></tr>
+<tr>
+  <td><code>still</code></td>
+  <td>The entry's one photograph. It needs a row in `provenance/assets.json` saying whether there is text in the picture and how somebody checked.</td>
+  <td class="k" style="font-size:12.5px">npm run provenance:gate</td>
+  <td class="k" style="font-size:12.5px">not asked; it is a picture, not a sentence</td></tr>
+<tr>
+  <td><code>(every string)</code></td>
+  <td>Every visitor-facing string in the entry needs a provenance row, keyed on its exact text. Edit one character and its declaration stops covering it.</td>
+  <td class="k" style="font-size:12.5px">npm run provenance:gate</td>
+  <td class="k" style="font-size:12.5px">nothing to ask — it is Ops' work at landing time</td></tr>
+<tr>
+  <td><code>(the ledger)</code></td>
+  <td>No ledger row may hold six consecutive words of the Record. The ledger says what is reachable; the Record holds the words, and the moment both hold the same ones they can disagree.</td>
+  <td class="k" style="font-size:12.5px">npm run reveal:check (recordProseFaults)</td>
+  <td class="k" style="font-size:12.5px">nothing to ask</td></tr>
+<tr>
+  <td><code>(the entry)</code></td>
+  <td>It needs a transfer class — how the material reached the museum. There is no fall-through: an unclassed entry fails the build.</td>
+  <td class="k" style="font-size:12.5px">reveal/transfers.mjs</td>
+  <td class="k" style="font-size:12.5px">the notes; the class follows from what the day describes</td></tr>
+<tr>
+  <td><code>(the entry)</code></td>
+  <td>Doctrine 18 does NOT apply. A spec face must carry in-story specifications; the Record is the house's modern log of receiving these objects and stays modern.</td>
+  <td class="k" style="font-size:12.5px">npm run instory:gate — the Record is exempt by name</td>
+  <td class="k" style="font-size:12.5px">nothing to ask</td></tr>
+<tr>
+  <td><code>(the entry)</code></td>
+  <td>Doctrine 11 is satisfied at the instrument: everything arriving through these forms is in-story by construction (Doctrine 21). It does NOT exempt Ops' own prose inside an entry.</td>
+  <td class="k" style="font-size:12.5px">read at landing time, by a person</td>
+  <td class="k" style="font-size:12.5px">nothing to ask</td></tr>
+</tbody></table></div>
+<p class="k" style="font-size:12.5px;margin-top:10px"><b>Two numbers and one format, and
+where they come from.</b> the headline &mdash; <b>62</b>,
+one line of the index row. the index summary &mdash; <b>130</b>,
+two lines of the index row. Both were measured off the built index row rather than chosen,
+and both are floors on the layout: if the type ramp or the row height ever changes, they
+move in the same commit. The date is <b>four digits, a hyphen, two digits, a hyphen, two digits — 2026-08-10</b>, and it is the one
+of the three that nothing checks &mdash; Anything else parses to nothing and the entry silently loses its dateline, its week number and its month band. No error is printed.</p>
 
 <h2>The bouncy ball law, and the two runways</h2>
 <div class="note" style="margin-bottom:14px">
@@ -364,7 +479,7 @@ unusable. They are here, and they are one click away when you want them.</p></di
 <div class="card">
   <h4><a href="artifacts.html">The artifact tracker</a></h4>
   <p class="id">what you can reach for today</p>
-  <p>47 addressable files joined to 162 revealable
+  <p>47 addressable files joined to 163 revealable
   things, filterable. <b>16 pictures of the machines are behind the
   stage door</b>, each one entry away from a wall; exactly one file has ever been
   delivered.</p>

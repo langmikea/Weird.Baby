@@ -74,6 +74,7 @@ import {
   WEEKS as ARC, MONTHS, BANDS, CHECKS as ARC_CHECKS, ORIGIN as ARC_ORIGIN,
   monthOf, preciousBudget,
 } from "../../reveal/arc-twelve.mjs";
+import { BUDGETS, FORMATS, CONSTRAINTS } from "../../reveal/record-shape.mjs";
 
 /* ── THE SLOT MODEL ──────────────────────────────────────────────────────
    One flat list, built once, used by the page, the map's mirrors and the
@@ -88,10 +89,68 @@ import {
    `localStorage` key, so neither can see the other's and nothing on either
    would say they disagree. The week headlines live on `arc.html` now, both
    pages say so, and this one is thirty slots of DAYS. */
+/* [I2 2026-08-08] A SLOT NOW DECLARES WHAT ITS ANSWER HAS TO FIT, AND THE
+   NUMBER IS IMPORTED RATHER THAN TYPED.
+   MIKE: *the tool let him write a 477-character executive summary against a
+   130-character index budget and said nothing until a gate caught it three
+   rounds later. He must never again discover a limit from a report.*
+
+   THE DEFECT WAS NOT ONLY A MISSING COUNTER — IT WAS A MISSING QUESTION.
+   `EXEC` asks for *the paragraph a reader gets if they read nothing else*,
+   which is unbounded and correct: it lands in a section of the entry and no
+   gate has an opinion about its length. The constrained field is a DIFFERENT
+   one — the index row's `line`, at most 130 characters — and the worksheet
+   never asked for it at all. So he wrote the paragraph, Ops had nothing to put
+   in the row, and the row is still empty three rounds later. Putting a
+   130-character meter on `EXEC` would have been the wrong fix twice over: it
+   would police a field that has no limit and still never ask for the field that
+   does. `LINE` is the fix; the meter is the other half.
+
+   THE ORDER IS THE READING ORDER AND IT IS DELIBERATE. Headline, then the one
+   sentence under it in the index, then the paragraph, then the sections —
+   shortest first, each one a longer version of the one above it, so the two
+   short constrained answers are written before the long unconstrained one
+   rather than distilled out of it afterwards.
+
+   `lim` IS EITHER A CEILING OR A SHAPE. `{max}` counts characters against an
+   imported budget; `{re}` matches a format. A field with no `lim` shows no
+   meter, and BOTH pages say that in one line so an absent counter reads as
+   "nothing to fit" rather than as an oversight. */
 const FIELDS = [
-  { k: "HEAD", label: "Headline", hint: "one line" },
-  { k: "EXEC", label: "Executive summary", hint: "the paragraph a reader gets if they read nothing else" },
-  { k: "NOTES", label: "Detailed sections, notes, etc.", hint: "anything: sections, order, what to include, what to cut" },
+  { k: "HEAD", label: "Headline", rows: 2,
+    ph: "your headline for this day",
+    lim: { max: BUDGETS.title.max,
+      says: "The index row gives the headline ONE line and nothing truncates "
+          + "any more, so a longer one overflows the row rather than clipping.",
+      gate: BUDGETS.title.enforcedBy } },
+
+  { k: "LINE", label: "The one sentence under it, in the index", rows: 2,
+    ph: "one sentence — this is the whole summary in the index, not a teaser",
+    note: "This is the field that was missing. It is the summary printed under "
+        + "the headline in the Record's index, it is the WHOLE summary (there "
+        + "is no ellipsis and no “more”), and with no separate lead on the "
+        + "entry it also draws as the opening paragraph when the record is "
+        + "opened. One sentence that can stand alone.",
+    lim: { max: BUDGETS.line.max,
+      says: "Your own rule: THE ENTIRE SUMMARY MUST FIT. The row holds two "
+          + "lines and nothing truncates, so a longer summary overflows it.",
+      gate: BUDGETS.line.enforcedBy } },
+
+  { k: "EXEC", label: "Executive summary", rows: 5,
+    ph: "the paragraph a reader gets if they read nothing else",
+    note: "No limit, and that is not an oversight — this lands in a section of "
+        + "the entry, where the length of a section is a fact about the day. "
+        + "Write as much as the day is worth. It is <b>not</b> what the index "
+        + "row prints; that is the one sentence above." },
+
+  { k: "NOTES", label: "Detailed sections, notes, etc.", rows: 5,
+    ph: "sections, order, what to include, what to cut",
+    note: "No limit. Two shapes worth knowing while you write it: your approved "
+        + "container is <b>four to seven sections</b>, each holding one thought "
+        + "under a short all-caps label — and an entry built that way cannot "
+        + "currently draw a transmission, a photograph set or a document "
+        + "alongside them (they are silently dropped), so say it in a section "
+        + "or say it is a picture." },
 ];
 
 const WEEKS = [
@@ -99,8 +158,27 @@ const WEEKS = [
   { w: WEEK2, days: DAYS2, origin: W2_ORIGIN, id: "W2" },
 ];
 
+/* [I3 2026-08-08] ONE SLOT THAT IS NOT A DAY, AND IT IS THE OTHER SHAPE OF
+   CONSTRAINT. Every other question on this page is answered in prose; this one
+   has an exact format (`YYYY-MM-DD`) and breaking it produces NO ERROR — the
+   entry renders, and silently has no dateline, no week number, no month band
+   and no target for a newspaper door. `entryDate()` returns null and nobody
+   reports it.
+
+   IT IS ONE SLOT AND NOT TEN. Ten days do not need ten dates: `entryWeek()`
+   counts from a declared epoch, so day one's calendar date derives every other
+   one, and asking ten times is nine chances for two of them to disagree with
+   each other. It is also the missing field in two standing rows (C8, and half
+   of S-b) — the only thing either has ever waited on. */
+const EPOCH_SLOT = {
+  id: "REC.EPOCH",
+  where: "DAY ONE — the calendar date the Record starts on (recordEpoch)",
+  ops: null,
+  lim: { re: FORMATS.date.pattern, says: FORMATS.date.says, why: FORMATS.date.why },
+};
+
 function slotList() {
-  const out = [];
+  const out = [EPOCH_SLOT];
   for (const { w, days, id } of WEEKS) {
     for (const d of days) {
       for (const f of FIELDS) {
@@ -109,6 +187,7 @@ function slotList() {
           where: `WEEK ${w.n} — day ${d.n} ${d.dow} — ${f.label.toLowerCase()}`,
           /* only the one-line headline travels into the export; see the header */
           ops: f.k === "HEAD" ? d.headline : null,
+          lim: f.lim || null,
         });
       }
     }
@@ -120,11 +199,51 @@ function slotList() {
 const opsMark = `<span class="ml">Ops</span>`;
 const yoursMark = `<span class="ml y">yours</span>`;
 
-function pair(slotId, opsHtml, { rows = 2, ph = "" } = {}) {
+/* THE METER, AND WHY IT DOES NOT USE `maxlength`.
+   An input that refuses the 131st character is a tool that has made the
+   decision for him mid-sentence and thrown the rest of the thought away. He
+   asked to be WARNED when he crosses a limit, which is a different instrument:
+   the text is always his, the count is always visible, and the moment it goes
+   over, the field turns and says by how much and what will refuse it. A limit
+   you can see is a constraint; a limit that eats your keystrokes is a bug.
+
+   `data-lim` is the live counter and `data-over` is the sentence that appears
+   only when it matters. Both are addressed by slot id, so one function in the
+   client script serves every page built from this file. */
+function meter(slotId, lim) {
+  if (!lim) return "";
+  const tail = lim.max
+    ? `<span class="of"> / ${lim.max} characters</span>`
+    : `<span class="of"> ${esc(lim.says)}</span>`;
+  return `<div class="lim" data-lim="${esc(slotId)}"><b class="cnt"></b>${tail}</div>
+<p class="limwarn" data-over="${esc(slotId)}"></p>`;
+}
+
+function pair(slotId, opsHtml, { rows = 2, ph = "", lim = null } = {}) {
   return `<div class="pair">
   <div class="c ops">${opsMark}${opsHtml}</div>
   <div class="c yours">${yoursMark}<textarea data-slot="${esc(slotId)}" rows="${rows}"
-    placeholder="${esc(ph)}" spellcheck="true"></textarea></div>
+    placeholder="${esc(ph)}" spellcheck="true"></textarea>${meter(slotId, lim)}</div>
+</div>`;
+}
+
+/* Ops' left-hand column, per field. THE `LINE` COLUMN IS EMPTY ON PURPOSE and
+   says so: Ops has a shape for the day and a list of topics, and neither is a
+   one-sentence summary. Drafting one would be picking his words for him, which
+   is the exact act the empty index row on Record 001 exists to refuse. */
+function opsColumn(f, d) {
+  if (f.k === "HEAD") return `<p class="hl">${esc(d.headline)}</p>`;
+  if (f.k === "EXEC") return `<p>${esc(d.shape)}</p>`;
+  if (f.k === "NOTES") return `<ul>${d.topics.map(t => `<li>${esc(t)}</li>`).join("")}</ul>`;
+  return `<p class="none">No Ops draft. The day&rsquo;s shape and its topics are in the two
+  boxes below; neither of them is a sentence, and turning one into a sentence for you is
+  the edit this field exists to avoid.</p>`;
+}
+
+function fieldBlock(slotId, f, d) {
+  return `<div class="fld"><div class="fh">${esc(f.label)}</div>
+${f.note ? `<p class="fnote">${f.note}</p>` : ""}
+${pair(slotId, opsColumn(f, d), { rows: f.rows, ph: f.ph, lim: f.lim })}
 </div>`;
 }
 
@@ -145,17 +264,7 @@ function dayBlock(weekId, w, d) {
 </div>
 <div class="bd">
 ${collide}
-<div class="fld"><div class="fh">Headline</div>
-${pair(`${weekId}.D${d.n}.HEAD`, `<p class="hl">${esc(d.headline)}</p>`, { rows: 2, ph: "your headline for this day" })}
-</div>
-<div class="fld"><div class="fh">Executive summary</div>
-${pair(`${weekId}.D${d.n}.EXEC`, `<p>${esc(d.shape)}</p>`, { rows: 5, ph: "the paragraph a reader gets if they read nothing else" })}
-</div>
-<div class="fld"><div class="fh">Detailed sections, notes, etc.</div>
-${pair(`${weekId}.D${d.n}.NOTES`,
-    `<ul>${d.topics.map(t => `<li>${esc(t)}</li>`).join("")}</ul>`,
-    { rows: 5, ph: "sections, order, what to include, what to cut" })}
-</div>
+${FIELDS.map(f => fieldBlock(`${weekId}.D${d.n}.${f.k}`, f, d)).join("\n")}
 </div>
 </section>`;
 }
@@ -199,6 +308,32 @@ textarea{display:block;width:100%;background:#191820;border:1px solid var(--line
  overflow:hidden;min-height:52px}
 textarea:focus{outline:0;border-color:var(--gold)}
 textarea.has{border-color:#5c4a22;background:#1c1a1a}
+/* [I2 2026-08-08] THE LIVE COUNTER AND ITS WARNING.
+   Three states and they are legible without the colour, because a counter that
+   only says "over" in red says nothing to a colour-blind reader and nothing at
+   all on a printed page: the number itself changes to "14 OVER" and the
+   sentence below appears. Colour is the second signal, never the only one. */
+.lim{margin:5px 0 0;font-size:11.5px;color:var(--dim2);letter-spacing:.02em}
+.lim .cnt{color:var(--dim);font-variant-numeric:tabular-nums}
+.lim.near .cnt{color:var(--amb)}
+.lim.over{color:var(--redfg)}
+.lim.over .cnt{color:var(--redfg);font-weight:700}
+.lim.ok .cnt{color:var(--grn)}
+/* [I2 2026-08-08] THE WARNING'S CLASS IS \`limwarn\` AND NOT \`over\`, AND THE LAP
+   IS WHY. \`.over{display:none}\` was written for this paragraph and matched the
+   COUNTER as well the moment the counter took its \`over\` state — so the live
+   count vanished at exactly the instant it had something to say, which is the
+   one failure this whole feature exists to prevent. Two elements, two names. */
+.limwarn{display:none}
+.limwarn.on{display:block;margin:7px 0 0;padding:8px 11px;border-left:3px solid var(--red);
+ background:#241a19;color:var(--redfg);font-size:12.5px;line-height:1.5}
+.limwarn.on b{color:#ffb4a6}
+textarea.bad{border-color:#8a3b2e;background:#1e1717}
+.fnote{margin:0 0 9px;font-size:12.5px;color:var(--dim);line-height:1.55;max-width:78ch}
+.fnote b{color:var(--fg)}
+.c .none{color:var(--dim2);font-style:italic;font-size:13px}
+.cbar .ovr{display:none}
+.cbar .ovr.on{display:inline;color:var(--redfg);font-weight:700}
 .fld{margin:0 0 18px}
 .fld:last-child{margin:0}
 .fh{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim2);
@@ -286,8 +421,61 @@ function clientScript(slots, { key, banner, carry = null }) {
  }
 
  var saveTimer = null, statEl = document.getElementById("stat");
+ var ovrEl = document.getElementById("ovr");
  function two(n){ return (n < 10 ? "0" : "") + n; }
  function clock(){ var d = new Date(); return two(d.getHours()) + ":" + two(d.getMinutes()); }
+
+ /* ---- THE LIMITS -------------------------------------------------------
+    MIKE, 2026-08-08: "he must never again discover a limit from a report."
+    A slot that feeds a constrained field declares \`lim\` and this is the whole
+    of the mechanism: count what he has typed, against the SAME number the gate
+    will use (imported, never retyped), and say so while he is typing rather
+    than three rounds later.
+
+    IT COUNTS WHAT WOULD BE SAVED, NOT WHAT IS IN THE BOX. \`values()\` strips
+    trailing whitespace before it stores anything, so counting the raw value
+    would report a character the packet never sees and put a field one over its
+    budget for pressing the space bar. The two must agree or the meter is
+    lying in the safest-looking direction. */
+ var LIM = {};
+ SLOTS.forEach(function(s){ if (s.lim) LIM[s.id] = s.lim; });
+ var over = {};
+
+ function limit(id, raw){
+  var lim = LIM[id]; if (!lim) return;
+  var box = document.querySelector('[data-lim="' + id + '"]');
+  var say = document.querySelector('[data-over="' + id + '"]');
+  var t = byId[id];
+  var v = String(raw == null ? "" : raw).replace(/\\s+$/,"");
+  var bad = false, cnt = "", msg = "", cls = "lim";
+
+  if (lim.max) {
+   var n = v.length, past = n - lim.max;
+   bad = past > 0;
+   cnt = bad ? (past + " OVER") : String(n);
+   if (bad) cls = "lim over";
+   else if (n > lim.max - 15 && n > 0) cls = "lim near";
+   if (bad) {
+    msg = "<b>" + past + " character" + (past === 1 ? "" : "s") + " too many.</b> "
+        + LIM_SAYS(lim) + " <i>" + LIM_GATE(lim) + "</i>";
+   }
+  } else if (lim.re) {
+   if (v) {
+    bad = !(new RegExp(lim.re)).test(v);
+    cnt = bad ? "NOT A DATE" : "reads as a date";
+    cls = bad ? "lim over" : "lim ok";
+    if (bad) msg = "<b>That is not the format.</b> " + LIM_SAYS(lim) + " " + LIM_WHY(lim);
+   } else { cnt = ""; }
+  }
+
+  if (box) { box.className = cls; box.querySelector(".cnt").textContent = cnt; }
+  if (say) { say.innerHTML = msg; say.className = msg ? "limwarn on" : "limwarn"; }
+  if (t) { t.className = (t.className.replace(/\\s*bad/, "")) + (bad ? " bad" : ""); }
+  if (bad) over[id] = 1; else delete over[id];
+ }
+ function LIM_SAYS(l){ return l.says || ""; }
+ function LIM_GATE(l){ return l.gate ? ("Caught by: " + l.gate + ".") : ""; }
+ function LIM_WHY(l){ return l.why || ""; }
 
  function stat(saved){
   var n = Object.keys(values()).length;
@@ -295,6 +483,15 @@ function clientScript(slots, { key, banner, carry = null }) {
   if (!store) msg += " \\u00b7 <b>not saved</b> \\u2014 this browser refused storage";
   else if (saved) msg += " \\u00b7 saved " + clock();
   statEl.innerHTML = msg;
+  /* THE OVER-COUNT IS IN THE FIXED BAR AND NOT ONLY BESIDE THE FIELD, because
+     the field he broke is usually three screens above the one he is typing in
+     by the time he stops. It is the same number, in the one place that is
+     always on screen. */
+  var k = Object.keys(over).length;
+  if (ovrEl) {
+   ovrEl.textContent = k ? (" \\u00b7 " + k + " over the limit") : "";
+   ovrEl.className = k ? "ovr on" : "ovr";
+  }
  }
 
  /* THIS PAGE OWNS ITS OWN SLOTS AND DESTROYS NOTHING ELSE IN ITS STORE, AND
@@ -349,10 +546,12 @@ function clientScript(slots, { key, banner, carry = null }) {
   var id = t.getAttribute("data-slot");
   if (saved[id]) t.value = saved[id];
   if (t.value) t.className = "has";
-  grow(t); mirror(id);
+  grow(t); mirror(id); limit(id, t.value);
   t.addEventListener("input", function(){
    t.className = t.value.replace(/\\s+$/,"") ? "has" : "";
-   grow(t); mirror(id); stat(false);
+   /* limit() AFTER the className above, which overwrites it — the "bad" mark
+      is a second class on the same element and the order is load-bearing. */
+   grow(t); mirror(id); limit(id, t.value); stat(false);
    if (saveTimer) clearTimeout(saveTimer);
    saveTimer = setTimeout(save, 400);
   });
@@ -369,10 +568,21 @@ function clientScript(slots, { key, banner, carry = null }) {
   lines.push("captured " + d.getFullYear() + "-" + two(d.getMonth()+1) + "-" + two(d.getDate())
    + " " + clock() + "  -  " + n + " of " + SLOTS.length + " slots filled");
   lines.push("Ops' own paragraphs are not repeated here. Slot keys match the worksheet.");
+  var nOver = Object.keys(over).length;
+  if (nOver) lines.push("!! " + nOver + " answer(s) are over their limit and are marked below.");
   lines.push("");
   SLOTS.forEach(function(s){
    if (!v[s.id]) return;
    lines.push("[" + s.id + "] " + s.where);
+   /* AN OVER-LIMIT ANSWER TRAVELS WITH ITS OWN NUMBER ON IT. The paste is what
+      Ops reads; a length problem that is only visible in his browser is a
+      length problem Ops discovers at landing time, which is the same failure
+      one step later. */
+   if (over[s.id] && s.lim && s.lim.max) {
+    lines.push("  !! OVER LIMIT: " + v[s.id].length + " characters, budget " + s.lim.max);
+   } else if (over[s.id]) {
+    lines.push("  !! WRONG FORMAT: expected " + s.lim.says);
+   }
    if (s.ops) lines.push("  ops: " + s.ops);
    if (v[s.id].indexOf("\\n") < 0) lines.push("  mike: " + v[s.id]);
    else { lines.push("  mike:"); lines.push(v[s.id]); }
@@ -444,6 +654,14 @@ every level is complete on its own. When you want to send it back, press
 twelve together on <a href="arc.html">the twelve-week table</a> &mdash; asking for week
 one&rsquo;s headline here and again there would be one question with two answers, in two
 browser stores, neither able to see the other. This page is the ten <i>days</i>.</p>
+<p class="lead"><b>Two of the four boxes on every day have a limit, and they now count as
+you type.</b> The headline gets ${BUDGETS.title.max} characters and the index sentence
+gets ${BUDGETS.line.max}, because the index row cannot truncate &mdash; so a string too
+long for it overflows instead of clipping, and the packet is refused. <b>Nothing stops
+you typing past a limit</b>; the counter turns and tells you by how much. The other two
+boxes have no limit at all, and where there is no counter there is nothing to fit &mdash;
+that absence is deliberate, not an oversight. <a href="reference.html#entry-shape">every
+limit a Record entry has, and where each comes from &rarr;</a></p>
 <p class="lead">Everything that explains how any of this works &mdash; the rails, the
 transfer classes, the standing rules, the checks against the tree, the three
 trackers &mdash; is on <a href="reference.html">the reference page</a>, and none of it
@@ -453,6 +671,27 @@ is on this one.</p>
 <div class="warn" id="warn"><b>This browser will not let the page save.</b> Nothing you
 type here will survive a reload. Press <b>copy everything</b> and paste it somewhere
 safe before you close the tab.</div>
+
+<h2>Day one&rsquo;s date</h2>
+<p class="lead" style="margin-bottom:14px">One box, and it is the only thing two standing
+questions have ever waited on. <b>Every other date follows from it</b> &mdash; the week
+number on each entry, the month bands in a long index, and any door that points at
+another record are all counted from the day the Record starts, so asking ten times would
+only be nine chances for two answers to disagree.</p>
+<div class="day"><div class="hd"><span class="n">Record &middot; day one</span></div>
+<div class="bd">
+<div class="fld"><div class="fh">The calendar date</div>
+<p class="fnote"><b>It has an exact format and nothing complains when it is wrong.</b>
+${esc(FORMATS.date.says)} &mdash; anything else parses to nothing at all, and the entry
+still renders: it just quietly has no dateline, no week number and no month band. That
+silence is why this box checks the shape while you type.</p>
+${pair("REC.EPOCH",
+  `<p class="none">No Ops draft, and there cannot be one &mdash; a date is a fact and
+   Ops does not supply one. Record 001&rsquo;s own text has &ldquo;Monday morning&rdquo;
+   and &ldquo;FRIDAY DAY (-3)&rdquo;, which orders the report and does not date it.</p>`,
+  { rows: 1, ph: "2026-08-10", lim: EPOCH_SLOT.lim })}
+</div>
+</div></div>
 
 <h2>The map &mdash; every day, both weeks</h2>
 <p class="lead" style="margin-bottom:14px">The whole shape in ten lines. <b>You do not
@@ -492,7 +731,7 @@ line came from. Ops&#8209;to&#8209;Mike, ${STAMP}; not part of the museum.</foot
 </div>
 
 <div class="cbar">
- <span class="st" id="stat"></span>
+ <span class="st"><span id="stat"></span><span class="ovr" id="ovr"></span></span>
  <span>
   <a href="arc.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">the twelve weeks &rarr;</a>
   <a href="reference.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">reference &rarr;</a>
@@ -548,10 +787,19 @@ const railLabel = w => w.rail === "VERBATIM"
   : `<span class="ml">Ops</span>`;
 
 export function buildArc() {
+  /* [I2 2026-08-08] NO `lim` ON ANY OF THE TWELVE, AND IT IS A FINDING RATHER
+     THAN AN OMISSION. The audit that put counters on the worksheet asked the
+     same question here: a week headline is a heading on THESE pages and on no
+     other. `reveal/arc-twelve.mjs` is imported by this file and by nothing in
+     `src/` — checked, not assumed — so none of these twelve is ever a `title`,
+     a `line` or any other field the museum measures. The page says so once, in
+     one sentence, because an absent counter has to read as "nothing to fit"
+     rather than as the defect this round was called to fix. */
   const slots = ARC.map(w => ({
     id: `ARC.W${w.n}`,
     where: `WEEK ${w.n} — the week's headline (month ${monthOf(w.n).n}, ${BANDS[w.band].label})`,
     ops: w.headline,
+    lim: null,
   }));
   const budget = preciousBudget();
 
@@ -599,6 +847,11 @@ the headline says <i>whether there is anything of yours underneath it</i>. Week 
 Ops&rsquo; sentence with your material under it; week two is <b>your sentence, carried
 word for word</b>, and it is the only one. Everything from week four on has nothing of
 yours under it at all.</p>
+<p class="lead"><b>None of these twelve has a limit, and there are no counters on this
+page for that reason.</b> A week headline is a heading on these pages and never becomes a
+field in the museum &mdash; it is not a Record entry&rsquo;s headline, which does have a
+budget and does count as you type on the worksheet. Where a box has something to fit, it
+says so; where it says nothing, there is nothing to fit.</p>
 <p class="lead">The ten <i>days</i> of weeks one and two are on
 <a href="worksheet.html">the worksheet</a>; how any of this works is on
 <a href="reference.html">the reference page</a>.</p>
@@ -656,7 +909,7 @@ typed</b>. Ops&#8209;to&#8209;Mike, ${STAMP}; not part of the museum.</footer>
 </div>
 
 <div class="cbar">
- <span class="st" id="stat"></span>
+ <span class="st"><span id="stat"></span><span class="ovr" id="ovr"></span></span>
  <span>
   <a href="worksheet.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">the ten days &rarr;</a>
   <a href="reference.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">reference &rarr;</a>
@@ -842,6 +1095,41 @@ ${RECORD_RULES.map(r => `<tr>
   <td><span class="rail m">your rule &middot; Ops wording</span><div style="margin-top:5px">${esc(r.rule)}</div></td>
   <td>${esc(r.bearing)}</td></tr>`).join("\n")}
 </tbody></table></div>
+
+<h2 id="entry-shape">Everything a Record entry is checked against &mdash; ${CONSTRAINTS.length} constraints</h2>
+<div class="note" style="margin-bottom:14px">
+<p><b>THIS LIST EXISTS BECAUSE ONE OF ITS ROWS COST THREE ROUNDS.</b> The index row holds
+${BUDGETS.line.max} characters; the worksheet did not say so and did not even ask for the
+field, so Record 001&rsquo;s executive summary was written at 477 characters and the row is
+still empty. Your ruling was that the instrument must warn, and that <b>every other slot
+be audited for the same defect</b>. This is the audit, whole, whether or not the
+worksheet asks for the field.</p>
+<p><b>The column that matters is the last one.</b> A constraint marked
+<span class="tag n">SILENT</span> produces <i>no error anywhere</i> when it is broken
+&mdash; the entry renders and quietly loses something. Those are the expensive ones, and
+${CONSTRAINTS.filter(c => c.silent).length} of the ${CONSTRAINTS.length} are like that.
+The rest are caught by a named gate before anything ships.</p>
+<p class="k" style="font-size:12.5px">Declared once in <code>reveal/record-shape.mjs</code>
+and read by three things: the gate that enforces the two budgets, the worksheet&rsquo;s
+counters, and this table. Nothing here retypes a number.</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th style="width:13%">field</th><th style="width:47%">what it has to obey</th>
+<th style="width:22%">what catches it</th><th>asked for on the worksheet</th></tr></thead>
+<tbody>
+${CONSTRAINTS.map(c => `<tr>
+  <td><code>${esc(c.field)}</code>${c.silent ? ` <span class="tag n">SILENT</span>` : ""}</td>
+  <td>${esc(c.rule)}</td>
+  <td class="k" style="font-size:12.5px">${esc(c.enforcedBy)}</td>
+  <td class="k" style="font-size:12.5px">${esc(c.asked)}</td></tr>`).join("\n")}
+</tbody></table></div>
+<p class="k" style="font-size:12.5px;margin-top:10px"><b>Two numbers and one format, and
+where they come from.</b> ${esc(BUDGETS.title.name)} &mdash; <b>${BUDGETS.title.max}</b>,
+${esc(BUDGETS.title.holds)}. ${esc(BUDGETS.line.name)} &mdash; <b>${BUDGETS.line.max}</b>,
+${esc(BUDGETS.line.holds)}. Both were measured off the built index row rather than chosen,
+and both are floors on the layout: if the type ramp or the row height ever changes, they
+move in the same commit. The date is <b>${esc(FORMATS.date.says)}</b>, and it is the one
+of the three that nothing checks &mdash; ${esc(FORMATS.date.why)}</p>
 
 <h2>The bouncy ball law, and the two runways</h2>
 ${runwayBlock(artifacts.runways, "the " + artifacts.waiting + " pictures an entry can reach for today")}

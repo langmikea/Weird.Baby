@@ -7,7 +7,39 @@ tree, the live working tree wins — always.
 
 **Read this file FIRST in every session, before STATE.md, before any handoff.**
 
-**Last verified against live tree:** 2026-08-07 (THE NIGHT DESK — four
+**Last verified against live tree:** 2026-08-08 (THE INDEX LINE + THE WARNING —
+three instructions, all three answered. Gates: lint **11/9 = baseline** · build
+green · provenance **PASS** · `reveal:check` **PASS** · `parity:gate` **PASS, 4
+shared · 0 divergences** · `instory:gate` **PASS** · `assets:orphans` **0** ·
+`reveal:day` **nothing to move** · **the lap RAN at 390px** on `/robots` and on
+all four Ops pages, page overflow **0** everywhere and **0 uncontained** painting
+past the edge, zero console errors. **RECORD 001's INDEX ROW HAS A SUMMARY AND
+IT IS FILED RESTATED RATHER THAN MIKE, WHICH IS THE WHOLE OF I1'S HONESTY.** His
+approval is not his authorship: every specific in the sentence is in two of his
+own paragraphs two fields below it, so it resolves to them, and **a paraphrase
+filed as his words is indistinguishable from something he said a week later.**
+**THE MEASUREMENT S-b CARRIED FOR THREE ROUNDS IS NOW THE OTHER WAY ROUND** — at
+the 1247px measure the budgets were taken at, 013 and 001 are **94.39px each,
+0.00px apart**, which is R3's rule satisfied exactly; at 390px they are 24.24px
+apart, one line of wrap, down from 73px, and **that residual is arithmetic
+rather than a defect** (a budget makes a string fit a measure; it cannot
+equalise two lengths at a narrower one — `I-b`). **I2's DEFECT WAS A MISSING
+QUESTION AND NOT ONLY A MISSING COUNTER:** `EXEC` is unbounded and correct, the
+constrained field is the index row's `line`, and **the worksheet never asked for
+it at all** — so he wrote a 477-character paragraph, Ops had nothing to put in
+the row, and a meter on `EXEC` would have policed a field with no limit while
+still never asking for the one that has one. **THE NUMBERS ARE IMPORTED NOW** —
+`reveal/record-shape.mjs`, three readers, no retyped copy — and the instrument
+**warns without blocking**, with the over-limit number travelling into the paste.
+**I3 IS SEVENTEEN CONSTRAINTS AND SIX OF THEM ARE SILENT**, the worst being the
+date format, which now has its own format-checked slot and is the last thing
+`C8` waits on. **AND THE LAP CAUGHT A BUG THAT WOULD HAVE MADE THE WHOLE FEATURE
+INVISIBLE AT THE ONE MOMENT IT MATTERED** — the warning's class `over` was the
+counter's own state class, so `.over{display:none}` hid the live count exactly
+when it went over budget. Two correct declarations; the collision exists only in
+the cascade. **Nothing was deployed.** Round log:
+`docs/MUSEUM_INDEX_LINE_LOG-20260808.md`.)
+Previously 2026-08-07 (THE NIGHT DESK — four
 instructions, all four answered, and **the headline one asked for text that does
 not exist anywhere this session can reach.** Gates: lint **11/9 = baseline** ·
 build green · provenance **PASS** · `reveal:check` **PASS** · `parity:gate`
@@ -718,7 +750,8 @@ The HR exhibit page is **two stacked components**. Mount chain:
 | **THE DAY'S STEP — HOW THE NINETY DAYS ARE RUN** (R1/R2, 2026-08-07) | `reveal/day.mjs` → `npm run reveal:day` (`-- --place`, `-- --since <ref>`); the fourth check in `reveal/delivery.mjs`; `parseRecord()` in `reveal/record-entries.mjs`; `publicPlacements(given)`. **MIKE: *"during the first 90 days an asset appears ONLY AFTER the story has called for it. ONE-TIME, REAL-TIME. We never go backwards. DAILY IS ENOUGH. THE DECISION IS OPS'; the only hard requirement is that it IMPACTS MIKE MINIMALLY."*** **SIX THINGS A FUTURE SESSION MUST HOLD.** **(1) THE MECHANISM WAS ALREADY BUILT AND THE FINDING IS SAYING SO.** *An asset appears only after the story has called for it* is H2's pull-back rule word for word. The ninety days need **no new rule, no new stage and no schedule** — they need the LAUNCH stage and one step a day, and **the step was the only thing missing.** **(2) THE RECORD IS THE MANIFEST — MECHANISM (b) — AND IT COSTS MIKE ZERO ACTIONS.** An entry's `assets` array is the day's publish list; the day the entry lands is the day the pictures land. **A dated manifest (a) was rejected on DUPLICATION rather than on the clock:** it is a second source of truth about what is public, sitting beside the Record and free to disagree with it, and this repository has paid for that shape four times. **Hand-edited state (c) is (b) with the linkage broken**, and the only one of the three that can reveal early by typo. **(3) A MISSED DAY IS THE MODEL'S STRONGEST PROPERTY.** Nothing happens — no entry, no publish, no gap to explain, no state to repair. A missed day looks like a day with no entry because it is one. **A WRONG DAY** is two mechanical edits (strike the path, `--place`). **A PULL-BACK AFTER SHOWING** works against this museum and nobody else: the site stops serving it provably, and caches, crawlers, archives and disks are outside this repository's reach. **(4) IT COMPUTES NOTHING NEW AND IS NOT A GATE.** It reads `delivered()` and the governed tree — the same two things `deliveryFaults()` reads — and turns that gate's two faults into the two MOVES that clear them. `reveal:check` is still the gate; this exits non-zero so it can sit in front of a deploy. **It deliberately draws NO transfer class**, because that join is nine rows in a 162-row ledger against a 315-row asset table and a blank column reads as *unclassified* when it means *not joined*. **(5) `deliveryFaults()` HAS FOUR CHECKS NOW AND THE NEW ONE WALKS THE ENTRY.** Checks 1–3 all walk FILES, so an entry naming a governed picture that is at NEITHER address was invisible — the entry publishes, the wall shows nothing, and every gate in `reveal/` passes. **Zero instances today, written for day 40, proved by breaking it on purpose.** **(6) IT PRINTS THE STAGE FIRST AND NEVER MOVES IT.** In DEVELOPMENT the whole plan is moot: everything PLACED renders and `npm run deploy` publishes the Portal and the sixteen held photographs. **The performance is `npm run deploy:launch`, and the day it starts, `DEFAULT_STAGE` moves — which is Mike's word, not an inference.** Register: [R-a]. |
 | **THE TWELVE-WEEK ARC, AND THE TWO AXES** (T1, 2026-08-07) | `reveal/arc-twelve.mjs` (`WEEKS`, `MONTHS`, `BANDS`, `CHECKS`, `preciousBudget`) → `buildArc()` in `tools/dictation/worksheet.mjs` → `docs/dictation-20260807/arc.html`. **FIVE THINGS A FUTURE SESSION MUST HOLD.** **(1) THERE ARE TWO MARKS AND THEY ANSWER DIFFERENT QUESTIONS.** `rail` says WHOSE SENTENCE (the standing three-mark scheme); `band` is Mike's own marking this round and says WHETHER THERE IS ANYTHING OF HIS UNDER IT — DICTATED (weeks 1–3) · SCAFFOLD (4–12) · plus INVENTED on month 3. **Week 1 is blue and DICTATED at once**, which is why one mark could not carry both. **(2) WEEK 2 IS THE ONLY GOLD ROW AND THAT IS INHERITED, NOT DECIDED.** Its headline is `headlineVerbatim` in `week-two.mjs`; demoting it because a later instruction listed all twelve under a blue heading would be the inverse error the rails exist to prevent. **Week 3 is the one Ops cannot settle — R-c, one word.** **(3) WEEKS 1 AND 2 ARE IMPORTED, NOT RETYPED** (Doctrine 17), and the strings in Mike's instruction were compared to those two files character for character, apostrophe included (check `A-6`). **(4) TWELVE WEEKS IS THE FIRST PERIOD LONG ENOUGH TO GIVE THE BOUNCY BALL LAW AN ARC FIGURE: 24–36 genuine reveals in the whole arc.** **That is NOT the voided arithmetic** — it multiplies a CEILING by a PERIOD and never touches an asset count. **(5) ONE CHECK IS OPEN AND IT IS THE USEFUL ONE:** weeks 6 and 7 both name a FOURTH box, which answers *which of the five package weeks goes empty* — a question `transfers.mjs` states is not in the arc. Ops does not pick; `transferWeek` is what the whole show-before-it-lands check is built on. Register: [R-c], [R-d]. |
 | **THE HIDDEN LINKS — SCOPED, NOT BUILT** (R3, 2026-08-07) | `docs/HIDDEN_LINKS_SCOPING-20260807.md`. **NO CODE EXISTS FOR ANY OF IT** and the scoping was the deliverable. **FOUR THINGS TO READ BEFORE BUILDING ANY OF IT.** **(1) THERE ARE THREE GRADES OF SECRET, NOT TWO.** GRADE A genuinely secret (server-held; only `src/worker.js` can supply it) · **GRADE B sealed in the open** — the material IS on the visitor's machine and is useless without a key that was never published, needing **no server, no state and no daily step** · GRADE C theatrical (a check in the bundle; ceremony only, never a reveal). **B is what most of this story actually wants and nothing in the museum uses it.** **(2) THE RULE THAT DECIDES MOST OF THE DESIGN:** anything decrypted client-side needs a passphrase strong enough to survive an OFFLINE attack; anything the worker checks may be short, because the worker can rate-limit and a shipped ciphertext cannot. **(3) A STORY LOCK IS A THIRD REASON AND NEEDS A THIRD DOOR PAIR.** `/assets/locked/` + `/locked/` is PERMISSION and `/assets/held/` + `/held/` is STAGE; collapsing a puzzle into either would put it on the same switch as ninety-three of Hunter Root's tracks. Any new pair is four edits (`worker.js`, `wrangler.jsonc`, `vite.config.js`, `reachability.mjs` check 3) and §8's `run_worker_first` hazard applies. **(4) ONLY THE COMMUNITY-PROPERTY FLIP NEEDS STATE**, it must be one-way, and **it must not cache its open set** — a Worker isolate's lifetime is unbounded and per-PoP, and a mechanism whose staleness window cannot be named should not guard a reveal. Register: [R-b]. |
-| **RECORD 001, AND WHAT A VERBATIM LANDING COSTS** (2026-08-08 — Doctrine 21) | `src/data/artists/robots.js` — the Record track's `face.entries[]`, entry `no: 1`, two sections (`EXECUTIVE SUMMARY`, `DETAILED REPORT`) holding thirteen strings; the source is `docs/MUSEUM_RECORD_001_LOG-20260808.md` §0 and all fifteen new register rows (thirteen bodies + two labels) cite it. **FOUR THINGS A FUTURE SESSION MUST HOLD.** **(1) EVERY STRING IN THE ENTRY IS HIS AND THREE OF THEM LOOK LIKE TYPOS.** `was made made`, `=  86%` with two spaces, and `auto containment. and auto alerts`. They are kept, they are named in the file's own comment and in the log's §2, and **a round that "tidies" one has broken the instruction that put them there.** **(2) THE OPS PARAPHRASE WAS DELETED, NOT KEPT BESIDE HIS.** S2's eight register-voice beats (`15:00 · SERVER PUBLIC` …) and their Ops label `Timeline` are gone from the file and pruned from the register — two accounts of one afternoon on one page is a reconciliation problem handed to the reader. **(3) THE INDEX ROW STILL HAS NO `line`, AND THAT IS A MEASURED REFUSAL RATHER THAN AN OVERSIGHT.** His executive summary is 477 characters against `RECORD_LINE_MAX` = 130; only `Congratulations!` (16) fits, and picking which of his sentences becomes the summary is an edit. Residual ask: one sentence, ≤130 characters. Open row `S-b`. **(4) THE DOUBLE SPACE SURVIVES IN THE DATA AND NOT ON THE GLASS** — HTML collapses whitespace runs; making it visible costs either `white-space: pre-wrap` on every record body or an `&nbsp;` in place of his character, and both are his ruling, not Ops'. |
+| **RECORD 001, AND WHAT A VERBATIM LANDING COSTS** (2026-08-08 — Doctrine 21) | `src/data/artists/robots.js` — the Record track's `face.entries[]`, entry `no: 1`, two sections (`EXECUTIVE SUMMARY`, `DETAILED REPORT`) holding thirteen strings; the source is `docs/MUSEUM_RECORD_001_LOG-20260808.md` §0 and all fifteen new register rows (thirteen bodies + two labels) cite it. **FOUR THINGS A FUTURE SESSION MUST HOLD.** **(1) EVERY STRING IN THE ENTRY IS HIS AND THREE OF THEM LOOK LIKE TYPOS.** `was made made`, `=  86%` with two spaces, and `auto containment. and auto alerts`. They are kept, they are named in the file's own comment and in the log's §2, and **a round that "tidies" one has broken the instruction that put them there.** **(2) THE OPS PARAPHRASE WAS DELETED, NOT KEPT BESIDE HIS.** S2's eight register-voice beats (`15:00 · SERVER PUBLIC` …) and their Ops label `Timeline` are gone from the file and pruned from the register — two accounts of one afternoon on one page is a reconciliation problem handed to the reader. **(3) THE INDEX ROW HAS A `line` SINCE 2026-08-08 AND IT IS THE ONE STRING IN THE ENTRY THAT IS NOT HIS.** For three rounds it was empty as a measured refusal — his summary is 477 characters against `RECORD_LINE_MAX` = 130, and picking which of his sentences becomes the summary is an edit. **What closed it was the act that was actually available: Ops drafted a sentence and Mike approved it**, which is not the same as Ops selecting one of his. It is therefore filed **RESTATED**, resolving to the two of his paragraphs it restates, and **must never be re-marked MIKE** — approval is not authorship, and a paraphrase in his class is indistinguishable from his words a week later. **It draws TWICE** (`entry.lead || entry.line`), so it is also the entry's lead above his own EXECUTIVE SUMMARY heading; shipped rather than suppressed, open row `I-a`. `S-b` **CLOSED**; the date is still `C8`. **(4) THE DOUBLE SPACE SURVIVES IN THE DATA AND NOT ON THE GLASS** — HTML collapses whitespace runs; making it visible costs either `white-space: pre-wrap` on every record body or an `&nbsp;` in place of his character, and both are his ruling, not Ops'. |
+| **WHAT A RECORD ENTRY IS CHECKED AGAINST, AND THE INSTRUMENT THAT SAYS SO WHILE HE TYPES** (I2/I3, 2026-08-08) | `reveal/record-shape.mjs` — `RECORD_TITLE_MAX` (62), `RECORD_LINE_MAX` (130), `BUDGETS`, `FORMATS`, `CONSTRAINTS` (17 rows). Read by `tools/reveal-ledger.mjs` (the gate), `tools/dictation/worksheet.mjs` (the counters) and `reference.html#entry-shape` (the table). **MIKE'S RULING: *"the tool let him write a 477-character executive summary against a 130-character index budget and said nothing until a gate caught it three rounds later. He must never again discover a limit from a report."*** **FIVE THINGS A FUTURE SESSION MUST HOLD.** **(1) THE NUMBERS ARE IMPORTED, NEVER RETYPED.** They were module-private constants in a *script* that dispatches on `process.argv`, so the page he writes on could not read them — it retyped, imported side effects, or said nothing, and it said nothing. A counter carrying its own copy of a budget is a budget that quietly stops agreeing with its gate. **(2) THE DEFECT WAS A MISSING QUESTION, NOT ONLY A MISSING COUNTER.** `EXEC` is unbounded and correct; the constrained field is the index row's `line` and **the worksheet never asked for it at all.** A 130-character meter on `EXEC` would have policed a field with no limit and still never asked for the one that has one. **(3) IT WARNS; IT DOES NOT BLOCK.** No `maxlength` — an input that refuses the 131st character has made the decision for him mid-sentence. Counter, red sentence naming the command that will refuse the packet, a count in the fixed bar, and the over-limit number travels into the *copy everything* export. **(4) IT COUNTS WHAT WOULD BE SAVED**, not the raw value — `values()` strips trailing whitespace, and a meter that disagrees with the gate lies in the safest-looking direction. **(5) SIX OF THE SEVENTEEN CONSTRAINTS ARE `silent: true`** — breaking them produces no error anywhere. The worst is the date: anything but `YYYY-MM-DD` parses to nothing and the entry quietly loses its dateline, its week and its band. **`.limwarn` is NOT `.over`**: the warning's first class collided with the counter's own state class and hid the counter at exactly the moment it went over budget — found by the lap, not by reading source. |
 | Exhibit data export | `src/data/exhibits/hunter_root.json` via `npm run export-artifacts` |
 | Spine adapter (stable ids) | `src/data/artists/hunter-root-spine.js` |
 | Taxonomy v1 canon (June 9) | `docs/taxonomy/` — TAXONOMY_v1, NORMALIZATION_MAP, COVERAGE_PROOF, RETAG_PLAN |
@@ -1263,6 +1296,54 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
     against a round log that quotes the dictation in full, because a class that
     says *this is story* would otherwise be a licence to write story. First
     application: `docs/MUSEUM_RECORD_001_LOG-20260808.md` §0.
+
+22. **A LIMIT IS SHOWN WHERE THE STRING IS WRITTEN (Mike, 2026-08-08 —
+    STANDING, every instrument).**
+
+    > **"He must never again discover a limit from a report."**
+
+    The case: the worksheet let him compose a **477-character** executive
+    summary against a **130-character** index row, said nothing, and the
+    mismatch surfaced **three rounds later** from a gate. Every part of that
+    worked as designed. The row could not truncate, the gate refused the
+    overflow, the number was correct and documented. **What none of them did was
+    reach the person writing the string, at the time he was writing it.**
+
+    **SO A CONSTRAINT NOW HAS THREE HALVES AND THE THIRD IS NEW.** A render that
+    cannot lie; a gate that refuses; **and a live count on the field, at the
+    moment of writing.** The first two both fire after the writing is finished,
+    and two mechanisms that both fire late cost a rewrite.
+
+    **THE HARD RULES.**
+
+    - **ONE DECLARATION, EVERY READER.** A budget lives in one module and is
+      IMPORTED by the gate, by the instrument and by any page that documents it
+      (`reveal/record-shape.mjs`). A counter carrying its own copy of a number is
+      a budget that quietly stops agreeing with its gate. If a constant cannot be
+      imported because it lives in a script, **that is the defect** — move it.
+    - **WARN, NEVER BLOCK.** No `maxlength`. An input that refuses the next
+      character has made the decision for him mid-sentence and thrown the rest of
+      the thought away. Show the count, show by how much, name the command that
+      will refuse it.
+    - **COUNT WHAT WOULD BE SAVED**, not the raw field. A meter that disagrees
+      with the gate lies in the safest-looking direction.
+    - **SAY WHERE THERE IS NO LIMIT.** An absent counter must read as *nothing to
+      fit*, not as the oversight this doctrine exists to fix — one sentence per
+      page is enough.
+    - **THE WARNING TRAVELS.** An over-limit answer carries its own number into
+      whatever leaves the instrument. A length problem visible only in his
+      browser is the same failure one step later.
+    - **AND THE AUDIT IS OF EVERY SLOT, NOT THE ONE THAT BIT.** His instruction
+      said so explicitly. The audit that followed found the real defect was not a
+      missing counter at all: **the constrained field had never been asked for.**
+      A meter on the wrong field would have policed something unbounded and still
+      never asked for the thing with a limit.
+
+    Mechanism: `reveal/record-shape.mjs` (`BUDGETS`, `FORMATS`, `CONSTRAINTS`),
+    the counters in `tools/dictation/worksheet.mjs`, the table at
+    `reference.html#entry-shape`. **A constraint that no gate catches is marked
+    `silent: true`** — six of the seventeen — because those are the expensive
+    ones. Round log: `docs/MUSEUM_INDEX_LINE_LOG-20260808.md`.
 
 
 ## 8. Known hazards (environment quirks)
