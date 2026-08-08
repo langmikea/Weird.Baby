@@ -11,14 +11,38 @@
 </head>
 <body>
 <div id="bar">route: <span id="r">—</span> · clientWidth: <span id="w">—</span></div>
-<!-- 405px so the classic scrollbar leaves a 390px viewport; the driver asserts
-     the real clientWidth rather than trusting the arithmetic. -->
+<!-- 405px is the STARTING width, not the answer. `fit()` below corrects it to a
+     real 390px viewport; the driver asserts the resulting clientWidth rather
+     than trusting any arithmetic about scrollbars. -->
 <iframe id="f" src="about:blank" width="405" height="740"></iframe>
 <script>
 const f = document.getElementById("f");
 
 window.__lap = {
   errors: [],
+
+  /* ── [2026-08-08] THE FRAME IS SIZED TO THE VIEWPORT IT PRODUCES ──────────
+     405px was chosen because the classic scrollbar is 15px wide. IT IS NOT
+     ALWAYS 15px. On the operator's Chrome this round a 405px frame produced a
+     386px viewport — a 19px scrollbar — and the lap would have run at 386px
+     while every report of it said 390. The harness always PRINTED the true
+     clientWidth, so nothing was ever false; it was simply the wrong width,
+     silently, and only reading the number caught it.
+     So the frame is no longer sized by arithmetic about scrollbars. It is
+     adjusted until the viewport IS the target, and if it cannot reach it the
+     real number is returned and the caller reports that instead. A gate whose
+     one job is to measure at a width must be the thing that establishes the
+     width, not a thing that assumes it. */
+  fit(target = 390, tries = 8) {
+    const w = f.contentWindow;
+    if (!w || !w.document || !w.document.documentElement) return null;
+    for (let i = 0; i < tries; i++) {
+      const cw = w.document.documentElement.clientWidth;
+      if (cw === target) return cw;
+      f.width = String(Number(f.width) + (target - cw));
+    }
+    return w.document.documentElement.clientWidth;
+  },
 
   /* navigate the frame and resolve once it has loaded AND settled */
   go(route, settleMs = 1200) {
@@ -32,8 +56,9 @@ window.__lap = {
         w.console.error = (...a) => { window.__lap.errors.push("console.error: " + a.join(" ")); ce.apply(w.console, a); };
         w.console.warn  = (...a) => { window.__lap.errors.push("console.warn: "  + a.join(" ")); cw.apply(w.console, a); };
         setTimeout(() => {
+          const cw = window.__lap.fit();
           document.getElementById("r").textContent = route;
-          document.getElementById("w").textContent = w.document.documentElement.clientWidth;
+          document.getElementById("w").textContent = cw;
           resolve(true);
         }, settleMs);
       };

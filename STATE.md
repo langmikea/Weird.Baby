@@ -164,19 +164,58 @@ and the pull-back rule's single delivered picture. **The prototype mark is in
 that line's subject is the making of the museum (Doctrine 11), and the entry's
 own text asserts nothing false. **Its NUMBER is untouched and open: `B-b`.**
 
-**[S2 2026-08-07] AND THE VOLUME HAS TWO ENTRIES NOW — 001 EXISTS.** Mike's
-day-one material went in as `no: 1`: the headline **"Weird.Baby Initial Launch
-Report"** and an eight-beat timeline, and **nothing else** — no `line`, no
-`lead`, no `tomb`, no `date`. **That is not a partial build, it is the whole of
-what was supplied:** the executive summary and the detailed report he wrote are
-not in this repository or the robots one, so writing them would be Ops writing
-his report for him. It sits **above 013 in the array and below it on the page**
-(the lower number is the earlier entry; `entriesMode:"log"` reverses at render),
-and **nothing about 013 moved.** Two rows are open on it and both are one word:
-**`S-a`** — is the launch report in-story, or a real report about deploying this
-website? Doctrine 11 refuses the second at any live address. **`S-b`** — the
-executive summary, which his own R3 rule requires on every index row and which is
-absent, measured at **157px against 84px** on the two rows at 390px.
+**[2026-08-08] 001 IS DICTATED, AND EVERY WORD IN IT IS HIS.** It sits **above
+013 in the array and below it on the page** (the lower number is the earlier
+entry; `entriesMode:"log"` reverses at render), and **nothing about 013 moved.**
+Two sections in his own headings — `EXECUTIVE SUMMARY` (three paragraphs) and
+`DETAILED REPORT` (`FRIDAY DAY (-3)`, eight beats, his closing sentence) —
+thirteen strings, all declared **MIKE** against
+`docs/MUSEUM_RECORD_001_LOG-20260808.md` §0, which quotes the dictation in full.
+
+**S2's EIGHT OPS BEATS ARE DELETED, NOT KEPT BESIDE HIS.** `15:00 · SERVER
+PUBLIC` and its seven siblings were built from a parenthetical summary of a
+timeline nobody had sent; his own text supersedes them and their nine register
+rows are pruned. Two accounts of one afternoon on one page is a reconciliation
+problem handed to the reader.
+
+**THREE THINGS IN IT LOOK LIKE TYPOS AND ARE KEPT** — `was made made`, `=  86%`
+with two spaces, `auto containment. and auto alerts`. Named in the file's own
+comment and in the log's §2 so no later round tidies one. **The double space is
+in the data and not on the glass:** measured, `=  86%` and `= 86%` draw at
+385.16px each, because HTML collapses whitespace runs; making it visible costs
+`white-space: pre-wrap` on every record body or an `&nbsp;` in place of his
+character, and both are his ruling.
+
+**`S-a` IS CLOSED AND `S-b` IS NARROWED TO ONE SENTENCE.** S-a's answer became
+Doctrine 21 below. S-b: two of its three parts landed — the sections and the
+lead-weight summary are in the entry — and **the index row still has no `line`,
+because his executive summary is 477 characters against a 130-character slot and
+choosing which of his sentences becomes the summary is an edit.** Measured again
+this round at 390px: **013's row 157px, 001's row 84px, unchanged.** The residual
+ask is one sentence, ≤130 characters, in his words. `C8` still waits on the same
+missing field — his text has *Monday morning* and *FRIDAY DAY (-3)*, no calendar
+date.
+
+## EVERYTHING IN THE FORM IS STORY (Mike, 2026-08-08 — STANDING)
+
+> **"EVERYTHING IN THE FORM IS STORY. The worksheet is a story instrument, not a
+> project log — in-story always."**
+
+Canonical text + reasoning: `docs/canonical/OPERATIONS.md` §7 Doctrine 21.
+
+**IT IS A RULE ABOUT THE INSTRUMENT, NOT A RULING ON ONE ENTRY.** Asked as one
+word about Record 001 (`S-a`), answered one level up: material arriving through
+the dictation instruments is in-story by construction, so **Doctrine 11 is
+satisfied at the instrument and is not re-adjudicated at each entry.** S-a was
+going to recur on every dictation — a launch, a server, a 23:30 decision all read
+two ways from the text alone — and under a per-entry test each one sits on the
+glass while Ops waits for a word.
+
+**IT DOES NOT EXEMPT OPS' OWN PROSE, ANYWHERE, INCLUDING INSIDE A RECORD ENTRY**
+— a line whose subject is the drafting, the round, the renderer or the register
+still fails Doctrine 11 at any visible address. **And it does not lower the
+provenance bar one step:** in-story is not unsourced, and every string through a
+form is still declared `MIKE` against a log that quotes the dictation in full.
 
 ## THE OPS DESK — ONE PAGE, EVERY INSTRUMENT (S1, 2026-08-07 — STANDING)
 

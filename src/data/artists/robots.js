@@ -374,10 +374,12 @@ const WBR_TRACKS = [
              a hook built out of an invented caption is the thing this round
              exists to remove. The entry's own plate survives inside it. */
           entries: [
-            /* ==== [S2 2026-08-07] RECORD 001 — THE VOLUME'S FIRST ENTRY =====
+            /* ==== [S2 2026-08-07 · REBUILT 2026-08-08] RECORD 001 ===========
                B2 ruled the volume: "013 was a PROTOTYPE ... It is NOT day one
                and needs no re-dating or defending. THE REAL RECORD STARTS AT
-               001 when Mike dictates it." This is 001.
+               001 when Mike dictates it." This is 001, and on 2026-08-08 he
+               dictated it — the executive summary and the detailed report that
+               S2 could not find in any tree.
 
                IT SITS ABOVE 013 IN THE ARRAY AND BELOW IT ON THE PAGE, and that
                is one decision rather than two. The entries stay in the order
@@ -386,49 +388,106 @@ const WBR_TRACKS = [
                and the Record still opens on the most recent thing in it.
                Nothing about 013 moved — not its number, not a word of it.
 
-               WHAT IS HERE IS EVERYTHING THAT WAS SUPPLIED, AND WHAT IS ABSENT
-               IS ABSENT ON PURPOSE. Mike supplied a HEADLINE and a TIMELINE.
-               He also has an executive summary and a detailed report, and
-               NEITHER IS IN THIS REPOSITORY — they exist as text he pasted into
-               a session, and a summary of the timeline is all that reached Ops.
-               So this entry carries the headline and the eight beats and it
-               STOPS: no `line`, no `lead`, no `tomb`, no `date`.
-                 · no `line` — the index row's executive summary is his, and
-                   Mike's own R3 rule asks for one on every row. That rule is
-                   being broken here rather than satisfied with Ops prose,
-                   because a plausible summary of a report nobody has read is
-                   exactly the shape of the 436-records line. OPEN_ACTIONS S-b.
-                 · no `date` — none was supplied. `entryDateline` prints
-                   `Record 001` alone, which is what record-model.js is built to
-                   do with an undated entry, and it is why C8 (recordEpoch) is
-                   still waiting.
-               The eight lines below are the eight beats as they arrived — a
-               time, a separator, and the beat's own words. No beat gained a
-               fact and none lost one. Their source is recorded in
-               `docs/MUSEUM_NIGHT_DESK_LOG-20260807.md` §0 and they are declared
-               MIKE in `provenance/register.json` against it.
+               ==== EVERY WORD BELOW IS HIS, AND THE PARAPHRASE IT REPLACES IS
+               GONE RATHER THAN KEPT BESIDE IT ==================================
+               S2 shipped eight beats in Ops' register voice — "15:00 · SERVER
+               PUBLIC", "16:13 · REACT CONVENED" — built from a parenthetical
+               summary of a timeline nobody had sent. His own text arrived on
+               2026-08-08 and SUPERSEDES them: the eight Ops strings are deleted
+               from this file and pruned from the register, because printing
+               both would put two accounts of one afternoon on one page and
+               invite a reader to reconcile them.
 
-               ONE QUESTION IS OPEN AND IT DECIDES WHETHER THIS ENTRY STAYS
-               (OPEN_ACTIONS S-a): whether the launch report is IN-STORY or is a
-               real infrastructure report about deploying this website. The
-               first is an event in the record and ships; the second is a line
-               whose subject is the making of the museum and Doctrine 11 refuses
-               it however true it is. Built on the first reading, in the
-               DEVELOPMENT stage, on an undeployed tree — so a wrong reading
-               costs one deletion and no visitor meets it in between. */
+               VERBATIM MEANS VERBATIM, AND THREE THINGS IN IT LOOK LIKE ERRORS
+               AND ARE KEPT. They are named here so no later round "tidies" one:
+                 · "a clean hand-off was made made" — his doubled word, kept on
+                   his explicit instruction.
+                 · "Incoming data =  86% vs threshold" — TWO spaces after the
+                   equals sign, his, kept in the data. HTML collapses runs of
+                   whitespace, so the glass shows one; that is the renderer, not
+                   an edit, and it is reported rather than papered over.
+                 · "auto containment. and auto alerts" — a full stop mid-clause
+                   followed by a lower-case "and". His. Flagged to him, not
+                   fixed.
+               Nothing else was touched: not the hyphens standing in for dashes,
+               not "50x", not the order, not the paragraphing.
+
+               WHAT IS STILL ABSENT, AND WHY IT IS NOT OPS PROSE:
+                 · no `line` — the index row's summary is budgeted at 130
+                   characters (RECORD_LINE_MAX, tools/reveal-ledger.mjs) because
+                   Mike's own R3 rule is that THE ENTIRE SUMMARY MUST FIT. His
+                   executive summary is 477 characters in three paragraphs. It
+                   is carried WHOLE in the entry below and it cannot be carried
+                   in the row, and choosing which of his sentences becomes the
+                   summary is an edit — so the row still has no line and the ask
+                   is one sentence from him. OPEN_ACTIONS S-b.
+                 · no `lead` — `lead` renders one paragraph. His summary is
+                   three, and flattening them is the same edit by another route.
+                   The section keeps all three, in order.
+                 · no `tomb` — he wrote no closing line and Ops will not invent
+                   the place the lights go off.
+                 · no `date` — "Monday morning" and "FRIDAY DAY (-3)" are in his
+                   text; a calendar date is not. `entryDateline` prints
+                   `Record 001` alone, which is what record-model.js is built to
+                   do with an undated entry, and C8 (recordEpoch) still waits on
+                   the same missing field.
+
+               DOCTRINE 11 IS SETTLED HERE AND NOT RE-ASKED. S-a asked whether
+               this report is an event in the story or a real report about
+               building this website. MIKE RULED IT AS A GENERAL RULE, not as an
+               answer about one entry: "EVERYTHING IN THE FORM IS STORY. The
+               worksheet is a story instrument, not a project log — in-story
+               always." That is OPERATIONS.md §7 Doctrine 21; no future entry
+               arriving through the dictation instruments needs this question
+               asked again. Source for every MIKE row below:
+               `docs/MUSEUM_RECORD_001_LOG-20260808.md` §0, which quotes the
+               dictation in full.
+
+               THE TWO LABELS ARE HIS OWN HEADINGS, stored in his capitals.
+               `.vp-rec-sect-label` is `text-transform:uppercase`, so the glass
+               is identical whichever case sits here — which makes his the free
+               choice and therefore the right one. */
             { no: 1,
               title: "Weird.Baby Initial Launch Report",
               sections: [
-                { label: "Timeline",
+                { label: "EXECUTIVE SUMMARY",
                   body: [
-                    "15:00 · SERVER PUBLIC",
-                    "15:01 · BIST PASS",
-                    "15:14 · FIRST PACKET",
-                    "15:58 · SECOND PACKET",
-                    "16:00 · ONSLAUGHT — 86% AGAINST THRESHOLD",
-                    "16:10 · AUTO-SHUTDOWN AND CONTAINMENT",
-                    "16:13 · REACT CONVENED",
-                    "23:30 · RULING — RESTART WITH 50× RESOURCES, STRESS TEST",
+                    "Congratulations!",
+                    "Weird.Baby launched to the world at 12:00 am Monday " +
+                    "morning, on schedule and on spec; the Weird.Baby website " +
+                    "is live, a clean hand-off was made made, and Operations " +
+                    "has the ball.",
+                    "Reportable Incident - The Weird.Baby email server has " +
+                    "been subject to an onslaught of data that would appear " +
+                    "to be unrelated to our primary mission. Full containment " +
+                    "was made to prevent disruptions of service prior to " +
+                    "turning on the Weird.Baby website. Data continues to be " +
+                    "received.",
+                  ] },
+                /* HIS SECOND HEADING CARRIES A THIRD LEVEL — "FRIDAY DAY (-3)"
+                   sits under DETAILED REPORT and above the beats — and this
+                   container has exactly two levels (a label and a body). So the
+                   day heading is the section's FIRST PARAGRAPH: his words at
+                   their own position, one level of hierarchy flattened, nothing
+                   added and nothing dropped. It is the one structural decision
+                   in this entry and it is named rather than assumed. */
+                { label: "DETAILED REPORT",
+                  body: [
+                    "FRIDAY DAY (-3)",
+                    "15:00 - Weird.Baby email server goes public (scheduled " +
+                    "early auto start)",
+                    "15:01 - Weird.Baby email server BIST - PASS",
+                    "15:14 - First data packet received",
+                    "15:58 - Second data packet received",
+                    "16:00 - Onslaught - Incoming data =  86% vs threshold",
+                    "16:10 - Server auto-shutdown, auto containment. and auto " +
+                    "alerts",
+                    "16:13 - REACT - Team is convened",
+                    "23:30 - REACT - RULING - Restart with 50x resources. " +
+                    "Stress test.",
+                    "The decision to resume was determined to be low risk, " +
+                    "reversible, and we still did not know exactly what the " +
+                    "data meant.",
                   ] },
               ] },
             /* ==== [HR 2026-08-04] RECORD 013, STRIPPED TO WHAT IS KNOWN =====

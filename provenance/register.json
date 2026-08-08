@@ -15351,76 +15351,125 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
   },
-  "4f46c6684d905eac": {
+  "b7d268f83c5b7ea7": {
    "f": "src/data/artists/robots.js",
-   "l": 422,
-   "t": "Timeline",
+   "l": 453,
+   "t": "EXECUTIVE SUMMARY",
    "p": "spine[].tracks[].face.entries[].sections[].label",
-   "c": "HOUSE"
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
   },
-  "3e9f578c7d22d579": {
+  "e9e23c54aba840d2": {
    "f": "src/data/artists/robots.js",
-   "l": 424,
-   "t": "15:00 · SERVER PUBLIC",
+   "l": 455,
+   "t": "Congratulations!",
    "p": "spine[].tracks[].face.entries[].sections[].body",
    "c": "MIKE",
-   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
   },
-  "e3cee62e09748ae5": {
+  "f6a32ef902e54edf": {
    "f": "src/data/artists/robots.js",
-   "l": 425,
-   "t": "15:01 · BIST PASS",
+   "l": 456,
+   "t": "Weird.Baby launched to the world at 12:00 am Monday morning, on schedule and on spec; the Weird.Baby website is live, a clean hand-off was made made, and Operations has the ball.",
    "p": "spine[].tracks[].face.entries[].sections[].body",
    "c": "MIKE",
-   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
   },
-  "e7cc714bb51d689d": {
+  "21eff46d69225dde": {
    "f": "src/data/artists/robots.js",
-   "l": 426,
-   "t": "15:14 · FIRST PACKET",
+   "l": 460,
+   "t": "Reportable Incident - The Weird.Baby email server has been subject to an onslaught of data that would appear to be unrelated to our primary mission. Full containment was made to prevent disruptions of service prior to turning on the Weird.Baby website. Data continues to be received.",
    "p": "spine[].tracks[].face.entries[].sections[].body",
    "c": "MIKE",
-   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
   },
-  "20f4d3390b1477de": {
+  "e035f2d3befd7a0b": {
    "f": "src/data/artists/robots.js",
-   "l": 427,
-   "t": "15:58 · SECOND PACKET",
+   "l": 474,
+   "t": "DETAILED REPORT",
+   "p": "spine[].tracks[].face.entries[].sections[].label",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
+  },
+  "1392775ee60bfeba": {
+   "f": "src/data/artists/robots.js",
+   "l": 476,
+   "t": "FRIDAY DAY (-3)",
    "p": "spine[].tracks[].face.entries[].sections[].body",
    "c": "MIKE",
-   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
   },
-  "81f08459875510ca": {
+  "80d524eaf73bb1c5": {
    "f": "src/data/artists/robots.js",
-   "l": 428,
-   "t": "16:00 · ONSLAUGHT — 86% AGAINST THRESHOLD",
+   "l": 477,
+   "t": "15:00 - Weird.Baby email server goes public (scheduled early auto start)",
    "p": "spine[].tracks[].face.entries[].sections[].body",
    "c": "MIKE",
-   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
   },
-  "dd7b54068e2e22a7": {
+  "6e26f581ec33fc62": {
    "f": "src/data/artists/robots.js",
-   "l": 429,
-   "t": "16:10 · AUTO-SHUTDOWN AND CONTAINMENT",
+   "l": 479,
+   "t": "15:01 - Weird.Baby email server BIST - PASS",
    "p": "spine[].tracks[].face.entries[].sections[].body",
    "c": "MIKE",
-   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
   },
-  "0cf2007eef882baa": {
+  "8c8e371dfd57cda8": {
    "f": "src/data/artists/robots.js",
-   "l": 430,
-   "t": "16:13 · REACT CONVENED",
+   "l": 480,
+   "t": "15:14 - First data packet received",
    "p": "spine[].tracks[].face.entries[].sections[].body",
    "c": "MIKE",
-   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
   },
-  "e85d478f61193fa2": {
+  "18e78245369dc649": {
    "f": "src/data/artists/robots.js",
-   "l": 431,
-   "t": "23:30 · RULING — RESTART WITH 50× RESOURCES, STRESS TEST",
+   "l": 481,
+   "t": "15:58 - Second data packet received",
    "p": "spine[].tracks[].face.entries[].sections[].body",
    "c": "MIKE",
-   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
+  },
+  "c40138d6245ee882": {
+   "f": "src/data/artists/robots.js",
+   "l": 482,
+   "t": "16:00 - Onslaught - Incoming data =  86% vs threshold",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
+  },
+  "6b7b754a16ab785c": {
+   "f": "src/data/artists/robots.js",
+   "l": 483,
+   "t": "16:10 - Server auto-shutdown, auto containment. and auto alerts",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
+  },
+  "2fdc64457aa72ad8": {
+   "f": "src/data/artists/robots.js",
+   "l": 485,
+   "t": "16:13 - REACT - Team is convened",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
+  },
+  "3cd95b6430a6d84a": {
+   "f": "src/data/artists/robots.js",
+   "l": 486,
+   "t": "23:30 - REACT - RULING - Restart with 50x resources. Stress test.",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
+  },
+  "d4919cadd7c44bd5": {
+   "f": "src/data/artists/robots.js",
+   "l": 488,
+   "t": "The decision to resume was determined to be low risk, reversible, and we still did not know exactly what the data meant.",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
   }
  }
 }
