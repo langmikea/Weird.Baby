@@ -578,9 +578,85 @@ worker does not, because it can rate-limit.** And `/assets/locked/` is PERMISSIO
 and `/assets/held/` is STAGE, **named for their reasons** - a puzzle is a THIRD
 reason and must never share either pair.
 
+## TWO STANDING RULES ADDED 2026-08-07 (THE NIGHT DESK)
+
+**AN INSTRUCTION THAT ASSUMES ITS OWN MATERIAL IS IN THE TREE IS A KICKOFF
+ANCHOR, AND §7's RULE 7 APPLIES TO CONTENT AS WELL AS TO PATHS.** S2 said Mike's
+day-one launch report *"exists only as text he pasted to Ops"* and asked for it
+**verbatim, no editing, no smoothing** — and only a parenthetical summary of its
+timeline reached this session. `Initial Launch Report` returns **zero hits across
+`C:\AI\Projects`**. **Doctrine 12 is not suspended by an instruction that assumes
+the content is in hand**, so Record 001 carries his headline and his eight
+timeline beats and **nothing else**: no `line`, no `lead`, no `tomb`, no `date`.
+**It breaks Mike's own R3 rule (every index row gets a summary) ON PURPOSE and
+the breakage is measured rather than asserted** — 013's row is 157px, 001's is
+84px at 390px on the built bundle. Registers **`S-a`** (is the report in-story or
+real — Doctrine 11 turns on the answer) and **`S-b`** (the summary he wrote).
+
+**A LAUNCHER MUST NOT DRAW A LINK TO A FILE THAT IS NOT ON DISK.** `npm run desk`
+→ `docs/OPS_DESK.html`, eight instruments behind one desktop shortcut
+(`Weird.Baby Ops`), plus `docs/OPEN_ACTIONS.html` rendered from the register's
+markdown. **A dead link on a launcher is worse than an absent one** — a 404 reads
+as *the tool is broken* when the truth is *a generator has not been run* — so
+every card is `fs.statSync`'d and a missing file gets a red card and no link.
+**"Current" is a property of the generator behind each page, never of the
+launcher**, so each card prints its own mtime and its own `npm run …`. Rules:
+`OPERATIONS.md` §5 **THE OPS DESK** row. **And its own first lap measured a 404
+page and reported a clean zero** — check `document.title` and a node count before
+believing an overflow reading.
+
 ## Recent session log
 
 Maintained here. Newest first.
+
+### 2026-08-07 -> THE NIGHT DESK (S1-S4) - sealed
+- **S2 ASKED FOR TEXT THAT IS NOT IN ANY TREE THIS SESSION CAN REACH, AND SAYING
+  SO IS HALF THE DELIVERABLE.** The instruction named an executive summary and a
+  detailed report *"as he wrote them"* and carried only a parenthetical of the
+  timeline; the prose is in neither repository nor anywhere under
+  `C:\AI\Projects`. **RECORD 001 IS BUILT AND IT IS EXACTLY WHAT WAS SUPPLIED** -
+  the headline `Weird.Baby Initial Launch Report` (31 chars, inside the 62-char
+  budget) and eight timeline beats set as a register, in one `Timeline` section,
+  **with no `line`, no `lead`, no `tomb` and no `date`.** Nine strings, declared
+  **MIKE** against the round log's §0, which quotes the kickoff in full. Gates:
+  lint **11/9 = baseline** - build green - provenance **PASS** - `reveal:check`
+  **PASS** - `parity:gate` **PASS** - `instory:gate` **PASS** -
+  `assets:orphans` **0** - `reveal:day` **nothing to move** - **the lap RAN at
+  390px**, `/robots` and both new Ops pages, zero page-level sideways scroll and
+  zero console errors. Log: `docs/MUSEUM_NIGHT_DESK_LOG-20260807.md`.
+- **THE SECOND ENTRY TURNED ON THREE CONTROLS THAT HAVE NEVER DRAWN, AND ONLY THE
+  LAP COULD HAVE SEEN IT.** `RecordJump`'s NEWEST / OLDEST / UNREAD bar, the
+  `‹ NEWER / OLDER ›` walk and the `2 of 2` count are all gated on
+  `list.length > 1` and have rendered nothing since M5. **`transfers.mjs` refused
+  the entry until it was placed** - a fall-through fails the build, which is the
+  table working - and it is **BLAST beside `record.013`**, on the plainest reading
+  in the file: the entry's own subject is the day the server went public, which
+  IS week 0. **An exemption was not available and that is the model too:** an
+  exempt row may not be REVEALED, and this entry is on the glass.
+- **ONE FINDING NOBODY ASKED FOR AND IT IS A SILENT DROP.** A Record entry that
+  declares `sections` goes to `RecordEntry.jsx`, **which renders no `wire`, no
+  `plates` and no `docs` and reports nothing** - the same shape as the first
+  three `deliveryFaults()` checks, which all walked FILES. Register **`S-c`**,
+  **not fixed on purpose**: where a payload sits against four-to-seven authored
+  sections is a layout ruling and it is Mike's. It did not bite - the timeline is
+  a section body.
+- **S1's DESK REFUSES TO LINK PAST A MISSING FILE, AND ITS OWN LAP CAUGHT ITSELF
+  MEASURING A 404.** Eight instruments, one page, one `.lnk`, verified by an
+  actual double-click. **Measured at 390px: page overflow 0, nothing past the
+  edge, all 23 register tables inside their own `overflow-x:auto` boxes** - and
+  the first run of that measurement returned a clean zero **because the throwaway
+  static server's path guard compared a forward-slash root against a `path.join`
+  backslash path and 404'd everything.** Two renderer bugs went with it: a
+  non-lazy bold pattern cannot cross a nested italic, and **a blank line between
+  two pipe rows is not the end of a table** - THE SHORT LIST has one, and nine
+  rows became paragraphs full of pipe characters.
+- **AND §8's NUL-BYTE HAZARD FIRED ON A FILE WRITTEN THIS ROUND, THROUGH THE
+  WRITE TOOL RATHER THAN A PATCH SCRIPT.** Four literal NULs landed in
+  `tools/ops-desk.mjs` where template-literal spaces were written; the tell was
+  `sed | od -c` after an `Edit` failed to match a line that read correctly.
+  Stripped, and the file now builds its one placeholder pair from `\uE000` /
+  `\uE001` escapes with the reason written above it. **Nothing was deployed** -
+  S3's seal is one command and it is Mike's.
 
 ### 2026-08-07 -> THE REVEAL MECHANISM + THE 12-WEEK TABLE (R1-R3 + T1) - sealed
 - **R1 ASKED FOR A MECHANISM THAT ALREADY EXISTED, AND SAYING SO IS THE ANSWER.**

@@ -374,6 +374,63 @@ const WBR_TRACKS = [
              a hook built out of an invented caption is the thing this round
              exists to remove. The entry's own plate survives inside it. */
           entries: [
+            /* ==== [S2 2026-08-07] RECORD 001 — THE VOLUME'S FIRST ENTRY =====
+               B2 ruled the volume: "013 was a PROTOTYPE ... It is NOT day one
+               and needs no re-dating or defending. THE REAL RECORD STARTS AT
+               001 when Mike dictates it." This is 001.
+
+               IT SITS ABOVE 013 IN THE ARRAY AND BELOW IT ON THE PAGE, and that
+               is one decision rather than two. The entries stay in the order
+               they happened (see `entriesMode:"log"` above, which reverses at
+               render), 001 is the lower number and therefore the earlier entry,
+               and the Record still opens on the most recent thing in it.
+               Nothing about 013 moved — not its number, not a word of it.
+
+               WHAT IS HERE IS EVERYTHING THAT WAS SUPPLIED, AND WHAT IS ABSENT
+               IS ABSENT ON PURPOSE. Mike supplied a HEADLINE and a TIMELINE.
+               He also has an executive summary and a detailed report, and
+               NEITHER IS IN THIS REPOSITORY — they exist as text he pasted into
+               a session, and a summary of the timeline is all that reached Ops.
+               So this entry carries the headline and the eight beats and it
+               STOPS: no `line`, no `lead`, no `tomb`, no `date`.
+                 · no `line` — the index row's executive summary is his, and
+                   Mike's own R3 rule asks for one on every row. That rule is
+                   being broken here rather than satisfied with Ops prose,
+                   because a plausible summary of a report nobody has read is
+                   exactly the shape of the 436-records line. OPEN_ACTIONS S-b.
+                 · no `date` — none was supplied. `entryDateline` prints
+                   `Record 001` alone, which is what record-model.js is built to
+                   do with an undated entry, and it is why C8 (recordEpoch) is
+                   still waiting.
+               The eight lines below are the eight beats as they arrived — a
+               time, a separator, and the beat's own words. No beat gained a
+               fact and none lost one. Their source is recorded in
+               `docs/MUSEUM_NIGHT_DESK_LOG-20260807.md` §0 and they are declared
+               MIKE in `provenance/register.json` against it.
+
+               ONE QUESTION IS OPEN AND IT DECIDES WHETHER THIS ENTRY STAYS
+               (OPEN_ACTIONS S-a): whether the launch report is IN-STORY or is a
+               real infrastructure report about deploying this website. The
+               first is an event in the record and ships; the second is a line
+               whose subject is the making of the museum and Doctrine 11 refuses
+               it however true it is. Built on the first reading, in the
+               DEVELOPMENT stage, on an undeployed tree — so a wrong reading
+               costs one deletion and no visitor meets it in between. */
+            { no: 1,
+              title: "Weird.Baby Initial Launch Report",
+              sections: [
+                { label: "Timeline",
+                  body: [
+                    "15:00 · SERVER PUBLIC",
+                    "15:01 · BIST PASS",
+                    "15:14 · FIRST PACKET",
+                    "15:58 · SECOND PACKET",
+                    "16:00 · ONSLAUGHT — 86% AGAINST THRESHOLD",
+                    "16:10 · AUTO-SHUTDOWN AND CONTAINMENT",
+                    "16:13 · REACT CONVENED",
+                    "23:30 · RULING — RESTART WITH 50× RESOURCES, STRESS TEST",
+                  ] },
+              ] },
             /* ==== [HR 2026-08-04] RECORD 013, STRIPPED TO WHAT IS KNOWN =====
                MIKE'S RULING: "the entry is still full of invented specifics
                (the heat-crimped pouch taped to carton two, the hinged cover,

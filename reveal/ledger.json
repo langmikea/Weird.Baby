@@ -1711,6 +1711,25 @@
    "transferWeek": 0
   },
   {
+   "id": "record.001",
+   "name": "Record 001 — one entry in The Record.",
+   "cls": "document",
+   "where": "src/data/artists/robots.js face.entries",
+   "build": "LIVE",
+   "reach": "inside THE RECORD, on /robots",
+   "state": "REVEALED",
+   "when": null,
+   "deps": [],
+   "arc": null,
+   "shown": false,
+   "assets": [],
+   "prod": null,
+   "calledBy": [],
+   "note": "",
+   "transfer": "BLAST",
+   "transferWeek": 0
+  },
+  {
    "id": "record.013",
    "name": "Record 013 — one entry in The Record.",
    "cls": "document",

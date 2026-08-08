@@ -189,7 +189,17 @@ const BLAST = [
         and readable from launch, and the pages that prove it arrive later, in
         packages. `doc.charter` is HELD and BLAST — written, in the tree,
         unpublished. */
-  "doc.manual", "doc.record", "record.013", "doc.firmware", "doc.charter",
+  /* [S2 2026-08-07] `record.001` JOINS ITS SIBLING AND THE READING IS THE
+     PLAINEST ONE IN THE TABLE: the entry's own subject is the day the server
+     went public, which IS week 0, and BLAST is week 0. It is also what
+     `record.013` and the Record surface itself already carry, so a different
+     class here would be one Record entry arriving by a route the surface
+     holding it did not.
+     IT COULD NOT HAVE BEEN EXEMPTED, AND THAT IS THE MODEL WORKING: an exempt
+     row may not be REVEALED (see `validate()`), and this entry is on the glass.
+     The choice was a class or nothing, and nothing fails the build — which is
+     exactly the fall-through the table was built to refuse. */
+  "doc.manual", "doc.record", "record.001", "record.013", "doc.firmware", "doc.charter",
 
   /* ── [R6/R4 2026-08-05] THE TWO EGGS PLANTED THIS ROUND. `egg.channels` is
         BLAST because the numbering is engraved on a drum that has been on the

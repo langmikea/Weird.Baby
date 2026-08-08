@@ -1,0 +1,421 @@
+/* ===========================================================================
+   THE OPS DESK — one page, every instrument. [S1 2026-08-07, THE NIGHT DESK]
+   ---------------------------------------------------------------------------
+   MIKE: "assemble every Ops instrument Mike uses — the worksheet, the
+   twelve-week table, the artifact tracker, the egg tracker, the spec sheet, the
+   contact sheet, the reference page, the open-actions register — behind ONE
+   desktop shortcut that opens them so he can switch back and forth. Simplest
+   honest mechanism. Name it plainly."
+
+     node tools/ops-desk.mjs         →  docs/OPS_DESK.html + docs/OPEN_ACTIONS.html
+     npm run desk                       the same
+
+   ═══ FOUR THINGS A FUTURE SESSION MUST HOLD ════════════════════════════════
+
+   (1) IT IS AN OPS INSTRUMENT AND MUST NEVER BECOME A ROUTE. Same §5 row as
+       `tools/dictation/prep.mjs` and `tools/contact-sheet.mjs`: a page whose
+       subject is the museum's own housekeeping is meta under Doctrine 11 and
+       fails the visible-line test at any live address. It renders to `docs/`
+       and never to `public/` — anything left in `public/` is one
+       `npm run deploy` from being published, which is the trap `npm run
+       lap:clean` exists to police.
+
+   (2) IT REPORTS WHAT IS MISSING RATHER THAN LINKING PAST IT. Every card is
+       `fs.statSync`'d at generation time. A file that is not on disk gets a red
+       card that says so and carries NO LINK. **A dead link on a launcher is
+       worse than an absent one**, because a launcher is the thing you trust
+       once you have stopped checking — a 404 in a browser reads as "the tool is
+       broken", and the truth is usually "a generator has not been run".
+
+   (3) "CURRENT" IS NOT A PROPERTY OF A LAUNCHER. It is a property of the last
+       time the generator BEHIND each page ran. So every card prints its own
+       file's mtime and the exact `npm run …` that rebuilds it, and this file
+       claims nothing about freshness that it did not read off the disk.
+
+   (4) THE MARKDOWN RENDERER IS DELIBERATELY SMALL AND SAYS SO. `docs/
+       OPEN_ACTIONS.md` is the one document it renders and that document is its
+       whole specification: headings, tables, lists, blockquotes, rules, links,
+       anchors, `code`, **bold**, *italic*, and `~~strike~~`. It is NOT a
+       Markdown implementation and must not grow into one — the moment it needs
+       a feature the register does not use, the register is being written for
+       the renderer instead of for Mike.
+
+   ═══ WHY THE REGISTER IS RENDERED AND THE OTHER SEVEN ARE LINKED ═══════════
+   Seven of the eight instruments are already HTML written by their own
+   generators, and re-rendering them here would be a second copy of each — the
+   exact shape §5 forbids. The register is the one that is markdown, and a
+   browser handed a `.md` file either downloads it or draws 760 lines of pipe
+   characters. So it gets a rendering, and the rendering is REGENERATED from the
+   markdown on every run rather than maintained: `OPEN_ACTIONS.md` stays the
+   source, and the day this file stops running the HTML goes stale visibly (its
+   own card prints its age) rather than silently.
+   =========================================================================== */
+import fs from "node:fs";
+import path from "node:path";
+import url from "node:url";
+
+const HERE = path.dirname(url.fileURLToPath(import.meta.url));
+const REPO = path.resolve(HERE, "..");
+const DOCS = path.join(REPO, "docs");
+
+/* ── THE EIGHT ─────────────────────────────────────────────────────────────
+   `rebuild` is the command that regenerates that page. It is printed on the
+   card so a stale instrument carries its own fix. `null` means the file is
+   authored rather than generated. */
+const INSTRUMENTS = [
+  { name: "The worksheet",
+    file: "dictation-20260807/worksheet.html",
+    what: "32 slots, Ops on the left and your writing on the right. Saves as you type; one button copies the lot back to Ops.",
+    rebuild: "npm run dictation",
+    lead: true },
+  { name: "The twelve-week table",
+    file: "dictation-20260807/arc.html",
+    what: "The whole arc, week by week. Two marks per row — whose sentence it is, and whether there is anything of yours under it.",
+    rebuild: "npm run dictation" },
+  { name: "The artifact tracker",
+    file: "dictation-20260807/artifacts.html",
+    what: "Every governed picture and where it stands. Filters for precious / dump / no bucket yet.",
+    rebuild: "npm run dictation" },
+  { name: "The egg tracker",
+    file: "dictation-20260807/eggs.html",
+    what: "Every egg in the ledger — what it is, whether it is built, and whether anybody can trip it.",
+    rebuild: "npm run dictation" },
+  { name: "The spec sheet",
+    file: "dictation-20260807/specsheet.html",
+    what: "163 rows of the period specification, with the contradicted ones printed both ways.",
+    rebuild: "npm run dictation" },
+  { name: "The reference page",
+    file: "dictation-20260807/reference.html",
+    what: "Everything that explains the machine — the rails, the transfer classes, the collisions. Read it when you want it, not to get started.",
+    rebuild: "npm run dictation" },
+  { name: "The contact sheet",
+    file: "CONTACT_SHEET.html",
+    what: "Every media file in the museum on one page, at thumbnail size.",
+    rebuild: "npm run contact-sheet" },
+  { name: "The open-actions register",
+    file: "OPEN_ACTIONS.html",
+    what: "Every open item across both repos, one place. THE SHORT LIST at the top is what is waiting on you and exactly what each costs.",
+    rebuild: "npm run desk",
+    source: "OPEN_ACTIONS.md" },
+];
+
+/* ── the escaper. Same one the dictation shell uses; copied rather than
+      imported because that shell carries a stylesheet and a page frame this
+      file does not want, and a four-line function is not a second copy of
+      anything worth sharing. ── */
+const esc = s => String(s ?? "")
+  .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+  .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+/* ═══ THE SMALL MARKDOWN RENDERER ═══════════════════════════════════════════
+   See (4) in the header. Inline first, then blocks. Everything is escaped
+   BEFORE any markup is introduced, so a `<` in the register can never become a
+   tag — the register is full of `<a id="...">` anchors and code spans holding
+   angle brackets, and an escaper applied afterwards would eat the markup this
+   function just wrote. */
+/* THE CODE-SPAN PLACEHOLDER IS A PRIVATE-USE PAIR AND NOT A DIGIT IN SPACES.
+   The first cut parked each span as a digit between two spaces and restored
+   them with a / (digits) / pattern -- which also matches a real number
+   standing alone in the prose, and this register is full of them ("on 4
+   rows", "at 16 pictures"). U+E000 and U+E001 cannot occur in the source and
+   cannot be produced by the escaper, so the restore is exact.
+   THEY ARE NOT NUL BYTES, AND THIS FILE IS WHY THAT IS WRITTEN DOWN: its
+   first write put two literal NULs here (Section 8's own hazard row -- a NUL
+   makes every grep report "binary file matches" and the Read tool draws it
+   as a space, so the line looks correct in every reader). Built as escapes. */
+const CO = "\uE000", CC = "\uE001";
+
+function inline(s) {
+  let t = esc(s);
+  /* code first: nothing inside a code span is interpreted */
+  const spans = [];
+  t = t.replace(/`([^`]+)`/g, (_, c) => CO + (spans.push("<code>" + c + "</code>") - 1) + CC);
+  t = t.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, txt, href) =>
+    "<a href=\"" + esc(href) + "\">" + txt + "</a>");
+  t = t.replace(/~~([\s\S]+?)~~/g, "<s>$1</s>");
+  /* BOLD IS LAZY AND ALLOWS AN ASTERISK INSIDE IT, AND THAT IS A FIX RATHER
+     THAN A STYLE. The register writes bold spans that WRAP an italic --
+     **Built ... on Mike's instruction: *"the round's spine"* ... he looks.** --
+     and a greedy-free bold pattern cannot cross the inner asterisks, so eight
+     of them shipped as literal ** on the page. Bold runs first and lazily;
+     italic runs after and can no longer meet a ** because there are none left. */
+  t = t.replace(/\*\*([\s\S]+?)\*\*/g, "<b>$1</b>");
+  t = t.replace(/\*([^*]+?)\*/g, "<i>$1</i>");
+  /* the register writes its own anchors as raw HTML; they were escaped above
+     and are put back, because they are what the SHORT LIST's links point at */
+  t = t.replace(/&lt;a id=&quot;([\w.-]+)&quot;&gt;&lt;\/a&gt;/g, "<a id=\"$1\"></a>");
+  /* The register also writes <br> and named entities (&mdash;, &rsquo;, &nbsp;)
+     directly into its cells. The escaper above turned those into &amp;lt;br&amp;gt;
+     and &amp;amp;mdash;, which print as themselves. Both are put back, and the
+     list is CLOSED on purpose: an anchor, a line break and a named entity. Any
+     other raw HTML in the register stays escaped and is meant to. */
+  t = t.replace(/&lt;br\s*\/?&gt;/g, "<br>");
+  t = t.replace(/&amp;(#\d+|[a-zA-Z]+);/g, "&$1;");
+  t = t.replace(new RegExp(CO + "(\\d+)" + CC, "g"), (_, i) => spans[Number(i)]);
+  return t;
+}
+
+function renderMarkdown(md) {
+  const lines = md.replace(/\r\n/g, "\n").split("\n");
+  const out = [];
+  let i = 0, para = [];
+
+  const flush = () => {
+    if (para.length) { out.push(`<p>${inline(para.join(" "))}</p>`); para = []; }
+  };
+
+  while (i < lines.length) {
+    const raw = lines[i];
+    const line = raw.replace(/\s+$/, "");
+
+    if (!line.trim()) { flush(); i++; continue; }
+
+    /* a rule */
+    if (/^-{3,}$/.test(line.trim())) { flush(); out.push("<hr>"); i++; continue; }
+
+    /* a heading. The id is the slug the register's own links use. */
+    const h = /^(#{1,6})\s+(.*)$/.exec(line);
+    if (h) {
+      flush();
+      const lvl = h[1].length;
+      const id = h[2].toLowerCase().replace(/[^\w]+/g, "-").replace(/^-|-$/g, "");
+      out.push(`<h${lvl} id="${esc(id)}">${inline(h[2])}</h${lvl}>`);
+      i++; continue;
+    }
+
+    /* a table: a pipe row followed by a separator row */
+    if (line.trim().startsWith("|") && /^\s*\|[\s:|-]+\|\s*$/.test(lines[i + 1] || "")) {
+      flush();
+      const cells = r => r.trim().replace(/^\||\|$/g, "").split("|").map(c => c.trim());
+      const head = cells(line);
+      i += 2;
+      const body = [];
+      /* A BLANK LINE BETWEEN TWO PIPE ROWS DOES NOT END THE TABLE. The register
+         has one -- THE SHORT LIST breaks between row 57 and row 58 -- and the
+         first cut stopped there, dropping nine rows out of the table and
+         printing them as paragraphs full of pipe characters. Blanks are
+         swallowed only when a pipe row follows; anything else ends the table. */
+      while (i < lines.length) {
+        if (lines[i].trim().startsWith("|")) { body.push(cells(lines[i])); i++; continue; }
+        if (!lines[i].trim()) {
+          let j = i;
+          while (j < lines.length && !lines[j].trim()) j++;
+          if (j < lines.length && lines[j].trim().startsWith("|")) { i = j; continue; }
+        }
+        break;
+      }
+      out.push(
+        `<div class="tw"><table><thead><tr>${head.map(c => `<th>${inline(c)}</th>`).join("")}</tr></thead>` +
+        `<tbody>${body.map(r => `<tr>${r.map(c => `<td>${inline(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`);
+      continue;
+    }
+
+    /* a blockquote — the register uses them for standing doctrine, so they are
+       drawn as a block rather than as an indent */
+    if (/^>\s?/.test(line)) {
+      flush();
+      const buf = [];
+      while (i < lines.length && /^>\s?/.test(lines[i])) { buf.push(lines[i].replace(/^>\s?/, "")); i++; }
+      out.push(`<blockquote>${renderMarkdown(buf.join("\n"))}</blockquote>`);
+      continue;
+    }
+
+    /* a list. Continuation lines are indented and join the item they follow. */
+    const li = /^(\s*)([-*+]|\d+\.)\s+(.*)$/.exec(line);
+    if (li) {
+      flush();
+      const ordered = /\d/.test(li[2]);
+      const items = [];
+      while (i < lines.length) {
+        const m = /^(\s*)([-*+]|\d+\.)\s+(.*)$/.exec(lines[i].replace(/\s+$/, ""));
+        if (m) { items.push(m[3]); i++; continue; }
+        if (/^\s+\S/.test(lines[i]) && items.length) { items[items.length - 1] += " " + lines[i].trim(); i++; continue; }
+        break;
+      }
+      const tag = ordered ? "ol" : "ul";
+      out.push(`<${tag}>${items.map(t => `<li>${inline(t)}</li>`).join("")}</${tag}>`);
+      continue;
+    }
+
+    para.push(line.trim());
+    i++;
+  }
+  flush();
+  return out.join("\n");
+}
+
+/* ── age, said in words a person reads rather than in a timestamp ────────── */
+function age(ms) {
+  const mins = Math.round((Date.now() - ms) / 60000);
+  if (mins < 2) return "just now";
+  if (mins < 90) return `${mins} minutes ago`;
+  const hrs = Math.round(mins / 60);
+  if (hrs < 36) return `${hrs} hour${hrs === 1 ? "" : "s"} ago`;
+  const days = Math.round(hrs / 24);
+  return `${days} day${days === 1 ? "" : "s"} ago`;
+}
+
+const stamp = d => d.toISOString().slice(0, 16).replace("T", " ") + " UTC";
+
+/* ═══ THE STYLESHEET ════════════════════════════════════════════════════════
+   Its own, not the dictation shell's, and the reason is that the shell's page
+   frame is a DOCUMENT (a max-width column of running prose) and this is a
+   BOARD. Both are dark, both are theme-fixed, and neither is the museum.
+   NOTE for whoever edits it: `font: <size>/<height> inherit` is INVALID — the
+   font shorthand requires a family and `inherit` is legal only as the whole
+   value — and Chrome drops the entire declaration. That bug shipped on the
+   worksheet (W1–W8) and every field came up in the UA monospace. Longhand
+   only, here and anywhere else. */
+const CSS = `
+:root{color-scheme:dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;
+ --redfg:#f0c9c4;--blu:#8fa8c4;--grn:#7fa86a}
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{margin:0;padding:26px 22px 90px;background:var(--bg);color:var(--fg);
+ font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 4px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:14px 16px;margin:20px 0 26px;border-radius:3px}
+.note p{margin:0 0 9px;font-size:13.5px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:15px 16px;
+ display:flex;flex-direction:column}
+.card.lead{border-color:#7a5a20}
+.card.gone{border-color:#6a3a30}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card h3 a{text-decoration:none;color:var(--gold)}
+.card h3 a:hover{text-decoration:underline}
+.card.gone h3{color:var(--redfg)}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--fg)}
+.card .meta{margin:auto 0 0;font-size:11.5px;color:var(--dim2);line-height:1.6}
+.card .meta b{color:var(--dim);font-weight:600}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;word-break:break-word}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.n{border-color:#6a3a30;color:var(--redfg)}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
+.foot code{color:var(--dim)}
+@media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
+`;
+
+/* the register's rendering shares the board's palette and adds document rules */
+const DOC_CSS = CSS + `
+.wrap{max-width:900px}
+h1{font-size:20px;margin-bottom:14px}
+h2{font-size:14px;letter-spacing:.1em;color:var(--gold);text-transform:none;margin:34px 0 10px}
+h3{font-size:13px;letter-spacing:.06em;color:var(--fg);margin:24px 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+li{margin:0 0 7px;font-size:14px}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:68ch}
+blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:2px 0 2px 14px;color:var(--dim)}
+blockquote p{margin:0 0 8px}
+blockquote h2,blockquote h3{margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+.tw table{min-width:640px;border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:bottom}
+td{border-bottom:1px solid var(--line2);padding:9px 10px 9px 0;vertical-align:top}
+s{color:var(--dim2)}
+`;
+
+function page({ title, css, body, favi }) {
+  return `<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${esc(title)}</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${favi}</text></svg>">
+<style>${css}</style></head><body>
+${body}
+</body></html>
+`;
+}
+
+/* ═══ RUN ═══════════════════════════════════════════════════════════════════ */
+
+/* the register's rendering FIRST, so its own card can stat the file this run
+   has just written rather than the one the last run left */
+const oaMd = path.join(DOCS, "OPEN_ACTIONS.md");
+let oaWrote = false;
+if (fs.existsSync(oaMd)) {
+  const md = fs.readFileSync(oaMd, "utf8");
+  const src = stamp(fs.statSync(oaMd).mtime);
+  const body = `<div class="wrap">
+<p class="sub"><a href="OPS_DESK.html">&larr; the Ops desk</a></p>
+<div class="note"><p><b>This is a rendering of <code>docs/OPEN_ACTIONS.md</code>, not the register itself.</b>
+The markdown is the source and it was last written <b>${esc(src)}</b>. Rebuild this page with <code>npm run desk</code>.</p></div>
+${renderMarkdown(md)}
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code>. Ops instrument &mdash; not part of the museum, and never at a live address.</p>
+</div>`;
+  fs.writeFileSync(path.join(DOCS, "OPEN_ACTIONS.html"),
+    page({ title: "OPEN ACTIONS — the standing register", css: DOC_CSS, body, favi: "📋" }));
+  oaWrote = true;
+}
+
+const cards = INSTRUMENTS.map(it => {
+  const abs = path.join(DOCS, it.file);
+  const there = fs.existsSync(abs);
+  const cls = "card" + (it.lead ? " lead" : "") + (there ? "" : " gone");
+  const head = there
+    ? `<h3><a href="${esc(it.file)}">${esc(it.name)}</a></h3>`
+    : `<h3>${esc(it.name)}</h3>`;
+  const meta = there
+    ? (() => {
+        const st = fs.statSync(abs);
+        return `<div class="meta"><b>${esc(age(st.mtime.getTime()))}</b> &middot; ${esc(stamp(st.mtime))}<br>`
+          + `<code>docs/${esc(it.file)}</code><br>`
+          + (it.rebuild ? `refresh with <code>${esc(it.rebuild)}</code>` : "authored by hand")
+          + (it.source ? ` &middot; source <code>docs/${esc(it.source)}</code>` : "")
+          + `</div>`;
+      })()
+    : `<div class="meta"><span class="tag n">not on disk</span><br><code>docs/${esc(it.file)}</code><br>`
+      + (it.rebuild ? `run <code>${esc(it.rebuild)}</code> to build it` : "this file is authored and is missing")
+      + `</div>`;
+  return `<div class="${cls}">${head}<p>${esc(it.what)}</p>${meta}</div>`;
+}).join("\n");
+
+const missing = INSTRUMENTS.filter(it => !fs.existsSync(path.join(DOCS, it.file)));
+
+const body = `<div class="wrap">
+<h1>Weird.Baby &mdash; the Ops desk</h1>
+<p class="sub">Every instrument, one page. Generated ${esc(stamp(new Date()))} by <code>tools/ops-desk.mjs</code>.</p>
+
+<div class="note">
+<p><b>Everything here is Ops&rsquo; housekeeping, and none of it is the museum.</b>
+These pages live under <code>docs/</code> on your machine and have no address on
+the web &mdash; a page whose subject is the making of the museum cannot stand at a
+live one.</p>
+<p><b>Each card carries its own age.</b> A launcher cannot make a tool current;
+only the generator behind that tool can. If a page looks out of date, the command
+that rebuilds it is on the card.</p>
+<p><b>Rebuild everything:</b> <code>npm run dictation &amp;&amp; npm run contact-sheet &amp;&amp; npm run desk</code></p>
+</div>
+
+<h2>The instruments</h2>
+<div class="cards">
+${cards}
+</div>
+
+<p class="foot">
+Desktop shortcut: <code>Weird.Baby Ops</code> &rarr; <code>docs/OPS_DESK.html</code>.
+Re-create it any time with <code>powershell -ExecutionPolicy Bypass -File tools\\ops-desk-shortcut.ps1</code>.<br>
+This page is regenerated by <code>npm run desk</code>. It reads and never writes anything but itself and <code>docs/OPEN_ACTIONS.html</code>.
+</p>
+</div>`;
+
+fs.writeFileSync(path.join(DOCS, "OPS_DESK.html"),
+  page({ title: "Weird.Baby — the Ops desk", css: CSS, body, favi: "🗂" }));
+
+console.log(`wrote docs/OPS_DESK.html — ${INSTRUMENTS.length} instruments, ${INSTRUMENTS.length - missing.length} on disk`);
+if (oaWrote) console.log("wrote docs/OPEN_ACTIONS.html — rendered from docs/OPEN_ACTIONS.md");
+if (missing.length) {
+  console.log(`\n${missing.length} instrument(s) NOT on disk — the desk says so on the card rather than linking past it:`);
+  for (const m of missing) console.log(`  ${m.name}  docs/${m.file}${m.rebuild ? `  →  ${m.rebuild}` : ""}`);
+}

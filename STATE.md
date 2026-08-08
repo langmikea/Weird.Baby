@@ -164,6 +164,36 @@ and the pull-back rule's single delivered picture. **The prototype mark is in
 that line's subject is the making of the museum (Doctrine 11), and the entry's
 own text asserts nothing false. **Its NUMBER is untouched and open: `B-b`.**
 
+**[S2 2026-08-07] AND THE VOLUME HAS TWO ENTRIES NOW — 001 EXISTS.** Mike's
+day-one material went in as `no: 1`: the headline **"Weird.Baby Initial Launch
+Report"** and an eight-beat timeline, and **nothing else** — no `line`, no
+`lead`, no `tomb`, no `date`. **That is not a partial build, it is the whole of
+what was supplied:** the executive summary and the detailed report he wrote are
+not in this repository or the robots one, so writing them would be Ops writing
+his report for him. It sits **above 013 in the array and below it on the page**
+(the lower number is the earlier entry; `entriesMode:"log"` reverses at render),
+and **nothing about 013 moved.** Two rows are open on it and both are one word:
+**`S-a`** — is the launch report in-story, or a real report about deploying this
+website? Doctrine 11 refuses the second at any live address. **`S-b`** — the
+executive summary, which his own R3 rule requires on every index row and which is
+absent, measured at **157px against 84px** on the two rows at 390px.
+
+## THE OPS DESK — ONE PAGE, EVERY INSTRUMENT (S1, 2026-08-07 — STANDING)
+
+> **A launcher must not draw a link to a file that is not on disk.**
+
+`npm run desk` → `docs/OPS_DESK.html` (eight instruments, one page) and
+`docs/OPEN_ACTIONS.html` (the register, rendered from its markdown). The desktop
+shortcut is `Weird.Baby Ops`, re-creatable with
+`tools/ops-desk-shortcut.ps1`. **A dead link on a launcher is worse than an
+absent one** — a 404 reads as *the tool is broken* when the truth is *a generator
+has not been run* — so every card is stat'd and a missing file gets a red card
+and no link. **"Current" is a property of the generator behind each page, never
+of the launcher**, so each card prints its own mtime and its own rebuild command.
+**It is phone-LEGIBLE and not phone-REACHABLE, and that is stated rather than
+solved** (`S-d`): these pages' subject is the museum's own housekeeping, which
+Doctrine 11 refuses at a live address. Full rules: `OPERATIONS.md` §5.
+
 ## THE THREE MARKS, AND THE VERBATIM RULE (W1–W8, 2026-08-07 — STANDING)
 
 > **A `beat` may be DELETED but never REWORDED.**

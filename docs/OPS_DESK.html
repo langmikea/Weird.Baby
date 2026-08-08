@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Weird.Baby — the Ops desk</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗂</text></svg>">
+<style>
+:root{color-scheme:dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;
+ --redfg:#f0c9c4;--blu:#8fa8c4;--grn:#7fa86a}
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{margin:0;padding:26px 22px 90px;background:var(--bg);color:var(--fg);
+ font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 4px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:14px 16px;margin:20px 0 26px;border-radius:3px}
+.note p{margin:0 0 9px;font-size:13.5px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:15px 16px;
+ display:flex;flex-direction:column}
+.card.lead{border-color:#7a5a20}
+.card.gone{border-color:#6a3a30}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card h3 a{text-decoration:none;color:var(--gold)}
+.card h3 a:hover{text-decoration:underline}
+.card.gone h3{color:var(--redfg)}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--fg)}
+.card .meta{margin:auto 0 0;font-size:11.5px;color:var(--dim2);line-height:1.6}
+.card .meta b{color:var(--dim);font-weight:600}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;word-break:break-word}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.n{border-color:#6a3a30;color:var(--redfg)}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
+.foot code{color:var(--dim)}
+@media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
+</style></head><body>
+<div class="wrap">
+<h1>Weird.Baby &mdash; the Ops desk</h1>
+<p class="sub">Every instrument, one page. Generated 2026-08-08 01:38 UTC by <code>tools/ops-desk.mjs</code>.</p>
+
+<div class="note">
+<p><b>Everything here is Ops&rsquo; housekeeping, and none of it is the museum.</b>
+These pages live under <code>docs/</code> on your machine and have no address on
+the web &mdash; a page whose subject is the making of the museum cannot stand at a
+live one.</p>
+<p><b>Each card carries its own age.</b> A launcher cannot make a tool current;
+only the generator behind that tool can. If a page looks out of date, the command
+that rebuilds it is on the card.</p>
+<p><b>Rebuild everything:</b> <code>npm run dictation &amp;&amp; npm run contact-sheet &amp;&amp; npm run desk</code></p>
+</div>
+
+<h2>The instruments</h2>
+<div class="cards">
+<div class="card lead"><h3><a href="dictation-20260807/worksheet.html">The worksheet</a></h3><p>32 slots, Ops on the left and your writing on the right. Saves as you type; one button copies the lot back to Ops.</p><div class="meta"><b>56 minutes ago</b> &middot; 2026-08-08 00:42 UTC<br><code>docs/dictation-20260807/worksheet.html</code><br>refresh with <code>npm run dictation</code></div></div>
+<div class="card"><h3><a href="dictation-20260807/arc.html">The twelve-week table</a></h3><p>The whole arc, week by week. Two marks per row — whose sentence it is, and whether there is anything of yours under it.</p><div class="meta"><b>56 minutes ago</b> &middot; 2026-08-08 00:42 UTC<br><code>docs/dictation-20260807/arc.html</code><br>refresh with <code>npm run dictation</code></div></div>
+<div class="card"><h3><a href="dictation-20260807/artifacts.html">The artifact tracker</a></h3><p>Every governed picture and where it stands. Filters for precious / dump / no bucket yet.</p><div class="meta"><b>56 minutes ago</b> &middot; 2026-08-08 00:42 UTC<br><code>docs/dictation-20260807/artifacts.html</code><br>refresh with <code>npm run dictation</code></div></div>
+<div class="card"><h3><a href="dictation-20260807/eggs.html">The egg tracker</a></h3><p>Every egg in the ledger — what it is, whether it is built, and whether anybody can trip it.</p><div class="meta"><b>56 minutes ago</b> &middot; 2026-08-08 00:42 UTC<br><code>docs/dictation-20260807/eggs.html</code><br>refresh with <code>npm run dictation</code></div></div>
+<div class="card"><h3><a href="dictation-20260807/specsheet.html">The spec sheet</a></h3><p>163 rows of the period specification, with the contradicted ones printed both ways.</p><div class="meta"><b>56 minutes ago</b> &middot; 2026-08-08 00:42 UTC<br><code>docs/dictation-20260807/specsheet.html</code><br>refresh with <code>npm run dictation</code></div></div>
+<div class="card"><h3><a href="dictation-20260807/reference.html">The reference page</a></h3><p>Everything that explains the machine — the rails, the transfer classes, the collisions. Read it when you want it, not to get started.</p><div class="meta"><b>56 minutes ago</b> &middot; 2026-08-08 00:42 UTC<br><code>docs/dictation-20260807/reference.html</code><br>refresh with <code>npm run dictation</code></div></div>
+<div class="card"><h3><a href="CONTACT_SHEET.html">The contact sheet</a></h3><p>Every media file in the museum on one page, at thumbnail size.</p><div class="meta"><b>27 hours ago</b> &middot; 2026-08-06 22:26 UTC<br><code>docs/CONTACT_SHEET.html</code><br>refresh with <code>npm run contact-sheet</code></div></div>
+<div class="card"><h3><a href="OPEN_ACTIONS.html">The open-actions register</a></h3><p>Every open item across both repos, one place. THE SHORT LIST at the top is what is waiting on you and exactly what each costs.</p><div class="meta"><b>just now</b> &middot; 2026-08-08 01:38 UTC<br><code>docs/OPEN_ACTIONS.html</code><br>refresh with <code>npm run desk</code> &middot; source <code>docs/OPEN_ACTIONS.md</code></div></div>
+</div>
+
+<p class="foot">
+Desktop shortcut: <code>Weird.Baby Ops</code> &rarr; <code>docs/OPS_DESK.html</code>.
+Re-create it any time with <code>powershell -ExecutionPolicy Bypass -File tools\ops-desk-shortcut.ps1</code>.<br>
+This page is regenerated by <code>npm run desk</code>. It reads and never writes anything but itself and <code>docs/OPEN_ACTIONS.html</code>.
+</p>
+</div>
+</body></html>

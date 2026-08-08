@@ -15342,6 +15342,85 @@
    "t": "Not part of the UX · notes to Mike",
    "p": "OPS_NOTES_HEAD",
    "c": "HOUSE"
+  },
+  "ee6a672f79829ca1": {
+   "f": "src/data/artists/robots.js",
+   "l": 420,
+   "t": "Weird.Baby Initial Launch Report",
+   "p": "spine[].tracks[].face.entries[].title",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
+  },
+  "4f46c6684d905eac": {
+   "f": "src/data/artists/robots.js",
+   "l": 422,
+   "t": "Timeline",
+   "p": "spine[].tracks[].face.entries[].sections[].label",
+   "c": "HOUSE"
+  },
+  "3e9f578c7d22d579": {
+   "f": "src/data/artists/robots.js",
+   "l": 424,
+   "t": "15:00 · SERVER PUBLIC",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
+  },
+  "e3cee62e09748ae5": {
+   "f": "src/data/artists/robots.js",
+   "l": 425,
+   "t": "15:01 · BIST PASS",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
+  },
+  "e7cc714bb51d689d": {
+   "f": "src/data/artists/robots.js",
+   "l": 426,
+   "t": "15:14 · FIRST PACKET",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
+  },
+  "20f4d3390b1477de": {
+   "f": "src/data/artists/robots.js",
+   "l": 427,
+   "t": "15:58 · SECOND PACKET",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
+  },
+  "81f08459875510ca": {
+   "f": "src/data/artists/robots.js",
+   "l": 428,
+   "t": "16:00 · ONSLAUGHT — 86% AGAINST THRESHOLD",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
+  },
+  "dd7b54068e2e22a7": {
+   "f": "src/data/artists/robots.js",
+   "l": 429,
+   "t": "16:10 · AUTO-SHUTDOWN AND CONTAINMENT",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
+  },
+  "0cf2007eef882baa": {
+   "f": "src/data/artists/robots.js",
+   "l": 430,
+   "t": "16:13 · REACT CONVENED",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
+  },
+  "e85d478f61193fa2": {
+   "f": "src/data/artists/robots.js",
+   "l": 431,
+   "t": "23:30 · RULING — RESTART WITH 50× RESOURCES, STRESS TEST",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
   }
  }
 }

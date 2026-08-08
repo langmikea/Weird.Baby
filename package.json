@@ -23,6 +23,7 @@
     "assets:cull": "node tools/asset-table.mjs --cull",
     "contact-sheet": "node tools/contact-sheet.mjs",
     "dictation": "node tools/dictation/prep.mjs",
+    "desk": "node tools/ops-desk.mjs",
     "reveal": "node tools/reveal-ledger.mjs",
     "reveal:audit": "node tools/reveal-ledger.mjs --audit",
     "reveal:check": "node tools/reveal-ledger.mjs --check",
