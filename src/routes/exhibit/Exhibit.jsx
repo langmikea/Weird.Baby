@@ -5,6 +5,7 @@ import { launched } from "../../lib/placement.js";
 import { useArrival } from "../../lib/use-arrival.js";
 import MuseumBar from "../../components/MuseumBar.jsx";
 import RecordEntry from "./RecordEntry.jsx";
+import RecordIndexRow from "./RecordIndexRow.jsx";
 /* [D7 2026-08-06] M62, OPTION A. The Foundation is a `face` wing now, and
    three of its objects have no equivalent in the face model — the $0.00
    account card, the LIVE / NOT BUILT register that reads the reveal ledger,
@@ -16,7 +17,7 @@ import { stateOfRow as fndState } from "../../lib/foundation-state.js";
 /* [F1 2026-08-06] the FAQ format's two fixed ends — see src/data/faq-face.js */
 import { FAQ_HEAD, SIGN_OFF, ADDRESS } from "../../data/faq-face.js";
 import {
-  entryStamp, groupByPeriod, shouldBand, evidenceOf, docState,
+  entryStamp, groupByPeriod, shouldBand, docState,
 } from "../../lib/record-model.js";
 import {
   readKeyFor, readSet, markRead, firstUnread, isUnread,
@@ -4629,7 +4630,7 @@ export default function Exhibit({ artist, open = null }) {
                                   <li key={"b" + row.band} className="vp-rec-band" aria-hidden="true">
                                     {row.label}
                                   </li>
-                                ) : (() => { const en = row.entry, i = row.index; return (
+                                ) : (
                                 /* [P4] AND THE INDEX SAYS WHICH ONES ARE STILL
                                     UNREAD. This is the half of Mike's ask that
                                     makes "an approximate point in the story"
@@ -4638,106 +4639,23 @@ export default function Exhibit({ artist, open = null }) {
                                     stopped, the register does. Marked only on a
                                     volume with more than one record, for the
                                     same reason the jump bar is: with one entry
-                                    the mark is a badge on the only row there is. */
-                                <li key={i} className={"vp-fe vp-rec-row"
-                                      + (list.length > 1 && isUnread(en, readRecords)
-                                         ? " vp-rec-row--unread" : "")}>
-                                  <button className="vp-rec-open" onClick={() => openAt(i)}>
-                                    {/* ═══ [R1 2026-08-06] THE MARK, FAR LEFT ══
-                                        MIKE: "each entry needs a DATE and/or a
-                                        DAY NUMBER — or something better — set to
-                                        the FAR LEFT of the entry. Propose the
-                                        form; he is open."
-                                        THE PROPOSAL IS THE RECORD NUMBER, and it
-                                        is chosen over a date for a reason this
-                                        volume has already paid for: THE DATES
-                                        WERE INVENTED AND MIKE DELETED THEM. The
-                                        one surviving entry carries no `date` and
-                                        no `stamp` by his own ruling, so a rail
-                                        built on a date would be an empty rail
-                                        today and an invented one tomorrow.
-                                        THE NUMBER IS AUTHORED, HELD AND STABLE.
-                                        It is what a bound volume actually files
-                                        by; it does not renumber when an entry is
-                                        inserted the way an index position does;
-                                        and the entry's own dateline already
-                                        prints `Record 013` inside, so the rail
-                                        and the record agree by construction.
-                                        THE DATE IS NOT DROPPED — it sits under
-                                        the number the moment an entry carries
-                                        one, derived by `entryStamp` exactly as
-                                        before. An entry with both shows both; an
-                                        entry with neither shows an empty rail
-                                        that still holds the column, so the rows
-                                        stay aligned either way. */}
-                                    <span className="vp-rec-mark" aria-hidden="true">
-                                      {typeof en.no === "number" && (
-                                        <b className="vp-rec-mark-no">
-                                          {String(en.no).padStart(3, "0")}
-                                        </b>
-                                      )}
-                                      {entryStamp(en) && (
-                                        <i className="vp-rec-mark-day">{entryStamp(en)}</i>
-                                      )}
-                                    </span>
-                                    <span className="vp-fe-body">
-                                      {/* [B9] the class rides the INDEX, which is
-                                          the point of classing at all: a reader
-                                          scanning the register can see that a
-                                          week brought a transmission rather than
-                                          another paragraph, before opening it.
-                                          IT SHARES THE TITLE'S LINE, and that is
-                                          arithmetic rather than taste: measured
-                                          on its own row it added ~20px to each of
-                                          ten rows and pushed the index onto a
-                                          second page — a class badge that costs a
-                                          page of navigation is not paying for
-                                          itself. Beside the title it costs
-                                          nothing and reads as what it is, an
-                                          attribute of the entry. */}
-                                      <span className="vp-fe-titlerow">
-                                        <span className="vp-fe-title">{en.title}</span>
-                                        {/* [R5 2026-08-06] THE CLASS BADGE IS
-                                            STRUCK FROM THE INDEX — see the note
-                                            on the entry in robots.js. It printed
-                                            a word ("object") that opened
-                                            nothing, beside a count that means
-                                            something. The count stays. */}
-                                        {/* [L6] WHAT THE WEEK ACTUALLY BROUGHT,
-                                            counted, on the row. B9 put the CLASS
-                                            on the index so a reader could see a
-                                            week brought a transmission rather
-                                            than another paragraph. The count is
-                                            the other half: three photographs and
-                                            a transmission is a different Tuesday
-                                            from one photograph, and at binge
-                                            volume that difference is the whole
-                                            navigation. Absent entirely on an
-                                            entry with no payloads, which is
-                                            every entry written so far — the
-                                            index does not move until the
-                                            evidence does. */}
-                                        {evidenceOf(en).map(ev => (
-                                          <span key={ev.kind} className="vp-fe-load">
-                                            {ev.kind}<i>{ev.count}</i>
-                                          </span>
-                                        ))}
-                                      </span>
-                                      {/* [R3 2026-08-06] THE SUMMARY, WHOLE.
-                                          `vp-rec-peek` was a one-line clamp with
-                                          an ellipsis — the "half-sentence teaser"
-                                          Mike struck. The class is gone rather
-                                          than widened: a two-line clamp is the
-                                          same failure with a longer fuse. The row
-                                          is a fixed height and the summary is
-                                          budgeted to fit it (gate: RECORD
-                                          BUDGETS in tools/reveal-ledger.mjs), so
-                                          nothing here can truncate. */}
-                                      {en.line && <span className="vp-fe-line vp-rec-sum">{en.line}</span>}
-                                    </span>
-                                  </button>
-                                </li>
-                              ); })())}
+                                    the mark is a badge on the only row there is.
+                                    [D4 2026-08-08] THE ROW ITSELF IS NOW
+                                    `RecordIndexRow.jsx`, AND IT MOVED FOR ONE
+                                    REASON: the dictation worksheet's live
+                                    preview has to draw the same row Mike will
+                                    see, and a copy of this markup would drift
+                                    the first time anybody edited it — silently,
+                                    into a preview he has been told to trust.
+                                    Nothing about the row changed in the move;
+                                    what stayed here is what is about the LIST
+                                    rather than the row. */
+                                <RecordIndexRow
+                                  key={row.index}
+                                  entry={row.entry}
+                                  unread={list.length > 1 && isUnread(row.entry, readRecords)}
+                                  onOpen={() => openAt(row.index)} />
+                              ))}
                             </ol>
                             </>
                           );

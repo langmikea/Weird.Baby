@@ -346,9 +346,36 @@ export default function RecordEntry({
 
       {/* THE LEAD. Blockquote weight because it is the one paragraph that has
           to survive being read alone — in the index, in a share, or by a
-          visitor who reads exactly one thing on the page. */}
-      {(entry.lead || entry.line) && (
-        <p key="lead" className="vp-rec-lead">{entry.lead || entry.line}</p>
+          visitor who reads exactly one thing on the page.
+
+          [D2 2026-08-08] IT IS `lead` AND ONLY `lead`. THE `|| entry.line`
+          FALLBACK IS GONE, ON MIKE'S RULING: **the index sentence prints once,
+          in the index.**
+
+          WHY THE FALLBACK LOOKED RIGHT AND WAS NOT. `line` is *one true
+          sentence* and a lead is *the one paragraph that survives being read
+          alone*, so for one round the two looked like the same field seen from
+          two places. They are not. `line` is written to a 130-character budget
+          measured off the INDEX ROW; a lead is written for the top of the
+          document. On Record 001 the difference was the whole of the problem —
+          the fallback set an Ops-drafted summary in blockquote weight directly
+          above Mike's own EXECUTIVE SUMMARY heading, which is two summaries of
+          one report stacked, and the smaller one first.
+
+          NOTHING MOVED ON RECORD 013, AND THAT WAS THE CONSTRAINT RATHER THAN
+          THE LUCK. 013 declares BOTH `lead` and `line`, so it took the
+          left-hand side of the fallback and never the right; removing the
+          right-hand side cannot reach it. Measured before and after — see the
+          round log's §2, which diffs the rendered entry.
+
+          THE PEEK BELOW KEEPS `lead || line` AND THE ASYMMETRY IS DELIBERATE.
+          A newspaper door pops another record's HEAD — stamp, headline, one
+          line — which is an index row in a card, and the index row is exactly
+          where the summary belongs. The rule Mike gave is about the LEAD
+          PARAGRAPH of an opened entry; a card that is an index row is the one
+          other place `line` is at home. */}
+      {entry.lead && (
+        <p key="lead" className="vp-rec-lead">{entry.lead}</p>
       )}
 
       {/* THE SECTIONS. `data-stage-split` because a run of sections is a LIST,

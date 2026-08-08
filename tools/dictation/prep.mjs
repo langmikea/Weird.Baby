@@ -79,6 +79,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
+import { spawnSync } from "node:child_process";
 import { UNIT, MAINFRAME, ADJACENTS, FORCED, SOURCES } from "./spec-source.mjs";
 import { TRANSFERS, CLASSES } from "../../reveal/transfers.mjs";
 import { delivered, SIGNAGE } from "../../reveal/delivery.mjs";
@@ -685,6 +686,47 @@ your responses live in the browser, never in the file.</footer>
 
 /* ── WRITE ─────────────────────────────────────────────────────────────── */
 fs.mkdirSync(OUT, { recursive: true });
+
+/* ── THE LIVE PREVIEW'S BUNDLE [D4 2026-08-08] ────────────────────────────
+   The worksheet's preview renders the museum's OWN components, so it needs
+   them built. It is a second vite build (see the reason in
+   `preview/vite.config.mjs`) and it is SPAWNED rather than called: OPERATIONS
+   §8 — anything that needs to build spawns `vite build`, never `build()`.
+
+   IT FAILS THE GENERATOR IF IT FAILS. A worksheet whose preview pane is a blank
+   iframe is worse than one with no preview at all, because the blank reads as
+   "nothing written yet". If the components cannot be built, nothing should be
+   claiming to show them. */
+const PREVIEW_OUT = path.join(OUT, "_preview");
+{
+  /* `node node_modules/vite/bin/vite.js`, not `npx`. The first cut spawned
+     `npx.cmd` and came back `EINVAL` with status `null` — the process never
+     started, which is a LAUNCH failure wearing a build failure's clothes, and
+     the two need telling apart in the message. Vite's own bin is a file in this
+     repo; running it with the interpreter already in hand needs no shell, no
+     quoting and no PATH. */
+  const cfg = path.join(HERE, "preview", "vite.config.mjs");
+  const bin = path.join(REPO, "node_modules", "vite", "bin", "vite.js");
+  const r = spawnSync(process.execPath, [bin, "build", "-c", cfg],
+    { cwd: REPO, encoding: "utf8" });
+  if (r.error || r.status !== 0) {
+    console.error(r.stdout || "");
+    console.error(r.stderr || "");
+    throw new Error(`the live preview bundle failed to build `
+      + `(${r.error ? r.error.message : "vite exit " + r.status}). No page is written, `
+      + `because a preview that cannot draw the real components must not ship looking `
+      + `like one that can.`);
+  }
+  /* the frame is a committed static file, copied AFTER the build — vite's
+     `emptyOutDir` clears this folder every run. */
+  fs.copyFileSync(path.join(HERE, "preview", "frame.html"), path.join(PREVIEW_OUT, "frame.html"));
+  for (const n of ["preview.js", "preview.css", "frame.html"]) {
+    const p = path.join(PREVIEW_OUT, n);
+    if (!fs.existsSync(p)) throw new Error(`the preview bundle is missing ${n}`);
+    console.log(`  ${String(Math.round(fs.statSync(p).size / 1024)).padStart(4)} KB  ${path.relative(REPO, p)}`);
+  }
+}
+
 const art = buildArtifacts();
 const egg = buildEggs();
 const files = [

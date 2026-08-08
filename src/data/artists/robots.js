@@ -314,6 +314,40 @@ import { faqFace } from "../faq-face.js";
    there is nothing to reconcile HERE — the robots repo still says 31.4 in its
    own draft and that is that repo's to keep or change. */
 
+/* ═══ [D1 2026-08-08] THE STORY PLAYS OUT IN REAL TIME, ON REAL DATES ════════
+   MIKE, and it is the rule ABOVE the date rather than a note about one entry:
+
+     **AN ENTRY'S DATE IS THE ACTUAL CALENDAR DAY IT IS PUBLISHED, NOT A
+     FICTIONAL OFFSET.**
+
+   There is no story clock running beside the real one. A Record entry dated the
+   seventeenth of August went on the glass on the seventeenth of August, and
+   everything the museum derives from a date — the register stamp, the weekday,
+   the week number, the month band — is arithmetic on a day that actually
+   happened. It is why `entryDate()` has always parsed a CALENDAR date rather
+   than an instant: a log whose dates shift by a timezone is not a log.
+
+   ONE FIELD, AND THIS CONSTANT IS THAT FIELD. Mike's condition on supplying the
+   date was that if the launch slips, one field moves and everything follows.
+   Day one is used TWICE — as Record 001's own `date` and as the face's
+   `recordEpoch`, which is the day `entryWeek()` counts from — and two literals
+   holding one day is two fields. The one that gets forgotten is whichever a slip
+   does not make obviously wrong: a stale entry date reads wrong the moment
+   anybody looks at it; a week number that is one out reads fine forever.
+
+   SO A SLIP IS THIS LINE AND NOTHING ELSE. It is verified rather than asserted —
+   `docs/MUSEUM_DATE_PREVIEW_LOG-20260808.md` §1 moves it to a different day and
+   records what followed.
+
+   THE DATE IS PENDING THE LAUNCH ACTUALLY HAPPENING THAT DAY, which is his own
+   qualification and is the reason this is a constant and not a decision.
+
+   AND IT AGREES WITH HIS OWN TEXT, which was checked rather than assumed:
+   2026-08-17 is a **Monday** — his report says the site went live *"at 12:00 am
+   Monday morning"* — and his `FRIDAY DAY (-3)` heading lands on 2026-08-14,
+   which is a **Friday**. Nothing was adjusted to make that true. */
+const RECORD_EPOCH = "2026-08-17";
+
 /* [S10] the WBR tracks, declared once and referenced by both covers. */
 const WBR_TRACKS = [
       /* ═══ [P2 2026-08-05] THE RECORD SITS ABOVE THE FAQ ═════════════════
@@ -353,6 +387,15 @@ const WBR_TRACKS = [
           kind: "text",
           entriesMode: "log",
           title: "The Record",
+          /* [D1 2026-08-08] DAY ONE. It is `RECORD_EPOCH` and not a second
+             literal, because Mike's own condition on the date was that if the
+             launch slips, ONE FIELD MOVES AND EVERYTHING FOLLOWS. Two literals
+             saying the same day is two fields, and the one that gets forgotten
+             is whichever a slip does not make obviously wrong — an entry with
+             yesterday's date reads wrong immediately; a week number that is one
+             out reads fine forever. See the constant's own note at the head of
+             this file. */
+          recordEpoch: RECORD_EPOCH,
           /* ==== [HR 2026-08-04] THE HEADER FURNITURE IS GONE. MIKE'S RULING.
              "Everything between the THE RECORD heading and the first entry's
              headline — the lead blockquote, the object photo and its caption,
@@ -438,16 +481,27 @@ const WBR_TRACKS = [
                WHAT IS STILL ABSENT, AND WHY IT IS NOT OPS PROSE:
                  · no `lead` — `lead` renders one paragraph. His summary is
                    three, and flattening them is the same edit by another route.
-                   The section keeps all three, in order. (The `line` above now
-                   occupies that slot on the glass; it is one sentence and not a
-                   flattening of his.)
+                   The section keeps all three, in order. **[D2 2026-08-08] AND
+                   THE `line` NO LONGER STANDS IN FOR IT.** For one round the
+                   renderer's `lead || line` fallback printed the index sentence
+                   as this entry's opening paragraph, above his own EXECUTIVE
+                   SUMMARY heading. Mike ruled it out — *the index sentence
+                   prints once, in the index* — so `RecordEntry.jsx` renders
+                   `lead` and only `lead`. This entry therefore opens on his own
+                   heading, which is what it should always have done. I-a.
                  · no `tomb` — he wrote no closing line and Ops will not invent
                    the place the lights go off.
-                 · no `date` — "Monday morning" and "FRIDAY DAY (-3)" are in his
-                   text; a calendar date is not. `entryDateline` prints
-                   `Record 001` alone, which is what record-model.js is built to
-                   do with an undated entry, and C8 (recordEpoch) still waits on
-                   the same missing field.
+
+               **[D1 2026-08-08] IT HAS A DATE NOW AND IT IS A REAL ONE.**
+               `date: RECORD_EPOCH` — 2026-08-17, Mike's, pending the launch
+               happening that day. The rule above it is the standing one, at the
+               head of this file: *an entry's date is the actual calendar day it
+               is published, not a fictional offset.* What it turns on, measured
+               rather than assumed (round log §1): the register stamp prints
+               `17 AUG 26`, the dateline becomes `Week 1 · Monday · Record 001`,
+               and `C8` closes. What it does NOT turn on is the month band —
+               `shouldBand` needs fourteen entries across more than one month and
+               this volume holds two, so `C1` is unmoved and says so.
 
                DOCTRINE 11 IS SETTLED HERE AND NOT RE-ASKED. S-a asked whether
                this report is an event in the story or a real report about
@@ -465,6 +519,10 @@ const WBR_TRACKS = [
                is identical whichever case sits here — which makes his the free
                choice and therefore the right one. */
             { no: 1,
+              /* [D1 2026-08-08] DAY ONE, AND THE SAME CONSTANT THE FACE'S
+                 `recordEpoch` USES. See its note at the head of this file:
+                 the story runs on real dates, and a slip is one line. */
+              date: RECORD_EPOCH,
               title: "Weird.Baby Initial Launch Report",
               /* OPS' SENTENCE, MIKE'S APPROVAL. See the block above. */
               line: "Weird.Baby launched on schedule. The email server took " +

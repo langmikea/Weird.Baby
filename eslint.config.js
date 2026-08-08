@@ -19,6 +19,13 @@ export default defineConfig([
     '**/*.pre-*',
     '**/*.old_v*',
     '**/*.bak_*',
+    // [D4 2026-08-08] THE LIVE PREVIEW'S BUILT BUNDLE, which is `dist` by
+    // another name. `npm run dictation` writes a minified IIFE with React
+    // inside it to `docs/dictation-20260807/_preview/`; leaving it swept took
+    // the count from 11 errors to 116 in one generator run and would have
+    // buried the src/ baseline the same way `dist.pre_*` once did. The SOURCE
+    // it is built from (`tools/dictation/preview/entry.jsx`) is still linted.
+    'docs/**/_preview',
   ]),
   {
     files: ['**/*.{js,jsx}'],

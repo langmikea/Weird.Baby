@@ -15351,6 +15351,15 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
   },
+  "b724eda0bf113741": {
+   "f": "src/data/artists/robots.js",
+   "l": 349,
+   "t": "2026-08-17",
+   "p": "RECORD_EPOCH — Record 001's `date` and the face's `recordEpoch`",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DATE_PREVIEW_LOG-20260808.md §0 — Mike, 2026-08-08: \"RECORD 001 IS DATED 2026-08-17 (pending launch happening that day)\", with the standing rule above it that an entry's date is the actual calendar day it is published, not a fictional offset",
+   "n": "IT IS THE DATE ITSELF AND NOT A STRING ON THE GLASS. Nothing prints these ten characters: the register stamp derives `17 AUG 26` and the dateline derives `Week 1 · Monday`, both by arithmetic in src/lib/record-model.js. It is declared MIKE because it is his fact, and it is the one field a launch slip moves."
+  },
   "9bc06a08f1257070": {
    "f": "src/data/artists/robots.js",
    "l": 470,

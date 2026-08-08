@@ -627,6 +627,37 @@ so `line` is still empty and 001's row is still 84px against 013's 157px (`S-b`)
 collapses it, and making it visible costs `white-space: pre-wrap` on every record
 body (`S-e`). Full rules: `OPERATIONS.md` §5's RECORD 001 row.
 
+## TWO STANDING RULES ADDED 2026-08-08 (THE DATE + THE LIVE PREVIEW)
+
+**THE STORY PLAYS OUT IN REAL TIME, ON REAL DATES** — *"an entry's date is the
+actual calendar day it is published, not a fictional offset."* Mirrored in
+`STATE.md`; the mechanism is `OPERATIONS.md` §5's THE STORY RUNS ON REAL DATES
+row. Day one is **2026-08-17** and it is **ONE CONSTANT**, `RECORD_EPOCH` in
+`src/data/artists/robots.js`, read by Record 001's `date`, the face's
+`recordEpoch` and (via `recordEpoch()` in `reveal/record-entries.mjs`) every day
+of the worksheet's outline. **A slip is one line — proved, not assumed:** one
+date-shaped literal in the file, both consumers identifier references, and the
+half-updated two-literal case prints *"Week 2 · Monday · Record 001"* on day one
+with nothing reporting it. **`C8` closes; the month band did NOT turn on** and
+`C1` says so (14 entries across >1 month; the volume holds two). **The worksheet
+generator refuses to build if a derived weekday disagrees with the outline's
+declared `MON…FRI`.**
+
+**A PREVIEW OF THE MUSEUM RENDERS THE MUSEUM'S OWN COMPONENTS, AT THE MUSEUM'S
+OWN VIEWPORT** — §5's THE LIVE PREVIEW row. The ramp is
+`clamp(1.02rem, min(1.35vw, 4.4cqh), 1.28rem)`, **a function of BOTH viewport
+axes**, so *nothing may reduce the preview frame's width or its height* — a bar
+and an editor stacked around it left 368px of height, `4.4cqh` fell under
+`1.35vw`, the clamp hit its floor and the body drew **15.3408px against the live
+15.4031px**. That is also why the preview is **two views and not a pane**: a pane
+beside the form is a different `vw` and therefore a different measure and wrap.
+**`RecordIndexRow.jsx` was extracted for it and must not drift back inline.**
+**Two build traps are load-bearing in `tools/dictation/preview/vite.config.mjs`:**
+`publicDir:false` (without it vite copies `public/held/` into `docs/`) and
+`define: process.env.NODE_ENV` (vite does not substitute it for a LIBRARY build,
+so the bundle carried both copies of React and would have thrown on first
+render). Fidelity note: `tools/dictation/preview/README-fidelity.md`.
+
 ## ONE STANDING RULE ADDED 2026-08-08 (THE INDEX LINE + THE WARNING)
 
 **A LIMIT IS SHOWN WHERE THE STRING IS WRITTEN** — *"he must never again discover
@@ -654,6 +685,55 @@ indistinguishable from his words a week later.
 ## Recent session log
 
 Maintained here. Newest first.
+
+### 2026-08-08 -> THE DATE + THE LIVE PREVIEW (D1-D6) - sealed
+- **THE DATE IS ONE LINE AND THE ONE-LINE CLAIM WAS PROVED RATHER THAN REPEATED.**
+  `RECORD_EPOCH = "2026-08-17"`, used by Record 001's `date` and the face's
+  `recordEpoch`; acorn says **one date-shaped literal in the whole file** and both
+  consumers are identifier references. **The demonstration is the useful half:**
+  with two literals, updating one prints *"Week 2 - Monday - Record 001"* on day
+  one and nothing anywhere reports it. **C8 closes** after three rounds of being
+  sharpened without moving. **The month band did NOT turn on and that is said
+  plainly** - 2 entries against `shouldBand`'s 14, one month against >1 (C1).
+  **His own text checks out:** the 17th is a Monday, and `FRIDAY DAY (-3)` lands
+  on Friday the 14th. Gates: lint **11/9 = baseline** - build green - provenance
+  **PASS** - `reveal:check` **PASS** - `parity:gate` **PASS** - `instory:gate`
+  **PASS** - `assets:orphans` **0** - `reveal:day` **nothing to move** - **the lap
+  RAN at 390px and 1228px**, four routes and four Ops pages, page overflow 0,
+  uncontained past the edge 0, console errors 0. Log:
+  `docs/MUSEUM_DATE_PREVIEW_LOG-20260808.md`.
+- **D2 REMOVED `lead || line` AND 013 COULD NOT BE REACHED BY IT.** 013 declares
+  BOTH fields, so it always took the left-hand side - measured after: its lead
+  still draws at 100.32px with four sections and its tombstone, while 001 opens
+  on Mike's own EXECUTIVE SUMMARY heading. **The newspaper door's peek keeps the
+  fallback on purpose:** it is an index row in a card, and that is where the
+  summary belongs.
+- **THE PREVIEW IS TWO VIEWS BECAUSE OF ARITHMETIC, NOT TASTE.** `--face-fs` is
+  `clamp(1.02rem, min(1.35vw, 4.4cqh), 1.28rem)` and every measure is in `ch` of
+  it, so a preview is exact only at the viewport the museum would have. **It
+  renders `RecordEntry` and `RecordIndexRow` themselves** - measured identical to
+  the live page in the same window on eleven computed values, `.vp-flat` 838.66px
+  both sides, and all 117 `.vp-rec-*` selectors present in the built CSS.
+  **`RecordIndexRow.jsx` was extracted for it** and must not drift back inline.
+- **AND IT WAS 0.4% WRONG UNTIL THE LAP MEASURED IT - THE RAMP READS HEIGHT TOO.**
+  A bar above and an editor below left the frame **368px** tall, `4.4cqh` fell to
+  16.192 under `1.35vw`'s 16.386, the clamp hit its 1.02rem floor and the body
+  drew **15.3408px against 15.4031px**. Invisible, wrong, and exactly the "nearly
+  right" Mike ruled out. Frame is full-window now; the strips float.
+- **D6's PREMISE DOES NOT HOLD AND SAYING SO IS THE ANSWER.** There was no
+  legibility round: `a652340` touched no stylesheet and no type token, and
+  `Exhibit.css` was last edited two rounds earlier. The substance is answered by
+  the MECHANISM - the preview is built from `Exhibit.css`, so A4's `.94` and R4's
+  68ch are both measured present and any future change arrives free.
+- **TWO FINDINGS NOBODY ASKED FOR, AND ONE PUT HELD MATERIAL AT A SECOND
+  ADDRESS.** The preview's first build config copied the whole of `public/` -
+  **including `public/held/`, the sixteen withheld photographs** - into `docs/`;
+  §8's two-addresses hazard produced by a build config, and `docs/` never being
+  served is luck rather than a mechanism. The other: vite does not substitute
+  `process.env.NODE_ENV` for a LIBRARY build, so the bundle carried both copies
+  of React (588 KB) and would have thrown `process is not defined` on the first
+  render - caught by reading the bundle, not by opening the page.
+- **SURFACING UNMOVED AT 20 SPENDABLE - THE EIGHTH PACKET RUNNING.**
 
 ### 2026-08-08 -> THE INDEX LINE + THE WARNING (I1-I3) - sealed
 - **THE ROW THAT HAS BEEN EMPTY FOR THREE ROUNDS IS FILLED, AND THE HONEST PART

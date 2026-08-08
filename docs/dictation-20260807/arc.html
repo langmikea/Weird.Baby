@@ -139,6 +139,65 @@ textarea.bad{border-color:#8a3b2e;background:#1e1717}
 .c .none{color:var(--dim2);font-style:italic;font-size:13px}
 .cbar .ovr{display:none}
 .cbar .ovr.on{display:inline;color:var(--redfg);font-weight:700}
+/* ── [D4 2026-08-08] THE LIVE PREVIEW ───────────────────────────────────
+   THE OVERLAY IS FULL-BLEED AND THE BODY STOPS SCROLLING BEHIND IT, AND THAT
+   IS ARITHMETIC RATHER THAN DRAMA. The museum's whole type ramp is
+   `clamp(1.02rem, min(1.35vw, 4.4cqh), 1.28rem)` — a function of the VIEWPORT
+   — and every measure on the page is in `ch` of it. The frame is therefore
+   only exact at the width the museum itself would have, which is this window.
+   `overflow:hidden` on the body removes the worksheet's own scrollbar, so
+   100vw IS the window and the iframe is laid out at the museum's own width to
+   the pixel. A pane sharing the page would be a different size, a different
+   measure and a different wrap.
+   HEIGHT IS NOT FREE EITHER, AND THE FIRST CUT GOT THAT WRONG. The clamp's
+   middle term is `min(1.35vw, 4.4cqh)` — the ramp reads the viewport's HEIGHT
+   as well as its width. A bar and an editor stacked above and below the frame
+   left it 368px tall, `4.4cqh` fell to 16.192px, the clamp dropped to its
+   1.02rem floor, and the preview drew its body at **15.3408px against the live
+   page's 15.4031px**. Four tenths of one per cent — invisible, wrong, and
+   exactly the "nearly right" Mike ruled out. So the frame is the WHOLE window
+   and the two strips FLOAT OVER IT. He loses a band of the preview to the
+   editor and can scroll it; he does not lose the type. */
+.pv{position:fixed;inset:0;z-index:60;display:none;background:#0d0d11}
+.pv.on{display:block}
+body.previewing{overflow:hidden}
+.pvbar{position:absolute;left:0;right:0;top:0;z-index:2;
+ display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;
+ padding:8px 14px;background:#15141ae8;border-bottom:1px solid var(--line)}
+.pvwho{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.pvnote{font-size:11.5px;color:var(--dim2);flex:1 1 240px;min-width:0}
+.pvbar button{background:transparent;border:1px solid var(--line);color:var(--dim);
+ padding:4px 10px;border-radius:3px;cursor:pointer;
+ font:600 10.5px/1.3 -apple-system,"Segoe UI",system-ui,sans-serif;
+ letter-spacing:.12em;text-transform:uppercase}
+.pvbar button:hover{border-color:var(--gold);color:var(--gold)}
+.pvbar button[disabled]{opacity:.35;cursor:default}
+/* THE FRAME IS THE VIEWPORT. Absolute, inset 0, no border — its layout
+   viewport is the browser's, in both dimensions, which is the whole mechanism
+   above. Nothing may be added that reduces it. */
+.pvframe{position:absolute;inset:0;width:100%;height:100%;border:0;
+ background:#fff;display:block;z-index:1}
+.pvfail{display:none;position:absolute;left:0;right:0;top:44px;z-index:3;
+ padding:18px;color:var(--redfg);background:#241a19;font-size:13.5px}
+.pvfail.on{display:block}
+.pvedit{position:absolute;left:0;right:0;bottom:0;z-index:2;
+ background:#15141af2;border-top:1px solid var(--line);padding:9px 14px 11px}
+.pvtabs{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 7px}
+.pvtabs button{background:transparent;border:1px solid var(--line);color:var(--dim2);
+ padding:3px 9px;border-radius:3px;cursor:pointer;
+ font:600 10.5px/1.3 -apple-system,"Segoe UI",system-ui,sans-serif;
+ letter-spacing:.1em;text-transform:uppercase}
+.pvtabs button[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.pvedit textarea{display:block;width:100%;height:88px;resize:vertical;
+ background:#191820;border:1px solid var(--line);color:var(--fg);border-radius:3px;
+ padding:8px 10px;font:14px/1.55 -apple-system,"Segoe UI",system-ui,sans-serif}
+.pvedit textarea:focus{outline:0;border-color:var(--gold)}
+.pvedit textarea.bad{border-color:#8a3b2e;background:#1e1717}
+.pvgo{margin-left:12px;background:transparent;border:1px solid var(--line);color:var(--dim2);
+ padding:3px 9px;border-radius:3px;cursor:pointer;
+ font:600 10px/1.3 -apple-system,"Segoe UI",system-ui,sans-serif;
+ letter-spacing:.1em;text-transform:uppercase}
+.pvgo:hover{border-color:var(--gold);color:var(--gold)}
 .fld{margin:0 0 18px}
 .fld:last-child{margin:0}
 .fh{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim2);
@@ -506,6 +565,7 @@ typed</b>. Ops&#8209;to&#8209;Mike, 2026-08-07; not part of the museum.</footer>
  var SLOTS = [{"id":"ARC.W1","where":"WEEK 1 — the week's headline (month 1, derives from your own dictation)","ops":"THE WEEKEND THAT WASN'T SUPPOSED TO HAPPEN","lim":null},{"id":"ARC.W2","where":"WEEK 2 — the week's headline (month 1, derives from your own dictation)","ops":"THE PASSWORD WAS IN THE ROOM THE WHOLE TIME","lim":null},{"id":"ARC.W3","where":"WEEK 3 — the week's headline (month 1, derives from your own dictation)","ops":"IT IS BEAUTIFUL AND IT DOES NOTHING","lim":null},{"id":"ARC.W4","where":"WEEK 4 — the week's headline (month 1, Ops scaffolding)","ops":"IT BOOTS, AND IT HAS OPINIONS","lim":null},{"id":"ARC.W5","where":"WEEK 5 — the week's headline (month 2, Ops scaffolding)","ops":"THE SECOND UNIT IS A DIFFERENT PERSON","lim":null},{"id":"ARC.W6","where":"WEEK 6 — the week's headline (month 2, Ops scaffolding)","ops":"THE FOURTH BOX IS ALREADY IN THE HALLWAY","lim":null},{"id":"ARC.W7","where":"WEEK 7 — the week's headline (month 2, Ops scaffolding)","ops":"THE FOURTH ONE FINISHES SOMETHING","lim":null},{"id":"ARC.W8","where":"WEEK 8 — the week's headline (month 2, Ops scaffolding)","ops":"HE HAS BEEN WATCHING THE WHOLE TIME","lim":null},{"id":"ARC.W9","where":"WEEK 9 — the week's headline (month 3, Ops scaffolding)","ops":"THE MACHINES KNOW EACH OTHER","lim":null},{"id":"ARC.W10","where":"WEEK 10 — the week's headline (month 3, Ops scaffolding)","ops":"THE PEOPLE IN THE CASES","lim":null},{"id":"ARC.W11","where":"WEEK 11 — the week's headline (month 3, Ops scaffolding)","ops":"WHAT THIS WAS FOR","lim":null},{"id":"ARC.W12","where":"WEEK 12 — the week's headline (month 3, Ops scaffolding)","ops":"WHAT WE STILL DON'T KNOW","lim":null}];
  var KEY = "wb.arc12.2026-08-07";
  var CARRY = {"fromKey":"wb.worksheet.2026-08-07","map":{"ARC.W1":"W1.SUM","ARC.W2":"W2.SUM"},"note":"Carried over from what you had already typed on the worksheet, where this question used to be asked. Edit it freely — it lives here now."};
+ var PV = null;
  var store = null;
  try { window.localStorage.setItem("wb.probe","1"); window.localStorage.removeItem("wb.probe");
        store = window.localStorage; } catch (e) { store = null; }
@@ -735,6 +795,165 @@ typed</b>. Ops&#8209;to&#8209;Mike, 2026-08-07; not part of the museum.</footer>
    }
   });
  });
+
+ /* ═══ [D4/D5 2026-08-08] THE LIVE PREVIEW ══════════════════════════════════
+    MIKE: *"while he writes, he must see EXACTLY WHAT THE RECORD WILL LOOK LIKE
+    ON THE PAGE, in real time."*
+
+    THE FRAME DRAWS IT. Nothing in this function knows what a Record entry looks
+    like — it assembles an ENTRY OBJECT out of the four boxes and posts it to an
+    iframe that renders `RecordIndexRow` and `RecordEntry`, the museum's own
+    components, against the museum's own stylesheets. Every question of type,
+    scale, measure and wrapping is answered over there, by the same code the
+    site runs. This half answers only: what entry is he writing?
+
+    THE ONE JUDGEMENT IT MAKES IS SECTIONS, AND IT IS A CONVENTION HE CONTROLS
+    RATHER THAN A GUESS. A line on its own in CAPITALS starts a section and is
+    its label; everything under it is that section's paragraphs. It is how he
+    dictated Record 001 — EXECUTIVE SUMMARY, then DETAILED REPORT — so it is the
+    format he already writes in, and it is printed on the page above the boxes.
+    Text before any capitals line becomes a section with no label, which
+    `RecordEntry` renders as plain paragraphs. Nothing is invented and nothing
+    is dropped.
+
+    THE EDITOR UNDER THE FRAME IS A PROXY, NOT A SECOND FIELD. It writes THROUGH
+    to the real textarea and fires its `input` event, so saving, the counters,
+    the over-budget bar and the map mirrors all run down the one path they
+    already ran down. A duplicate input with its own value is the "one question,
+    two answers" defect that cost this instrument a round; there is exactly one
+    place any answer lives. */
+ if (PV) (function(){
+  var pane = document.getElementById("pv");
+  var frame = document.getElementById("pvframe");
+  var who = document.getElementById("pvwho");
+  var fail = document.getElementById("pvfail");
+  var tabs = document.getElementById("pvtabs");
+  var ta = document.getElementById("pvta");
+  var prevB = document.getElementById("pvprev"), nextB = document.getElementById("pvnext");
+  var cur = -1, field = PV.fields[0].k, ready = false, pending = null;
+
+  function slotId(i, k){ return PV.days[i].id + "." + k; }
+
+  /* CAPITALS ON THEIR OWN LINE START A SECTION. `letters` guards against a line
+     of digits or punctuation ("16:10 - ...") being read as a heading — it must
+     contain letters and all of them must already be upper case. */
+  function chunk(text, out){
+   String(text == null ? "" : text).split(/\n+/).forEach(function(raw){
+    var t = raw.trim(); if (!t) return;
+    var letters = t.replace(/[^A-Za-z]/g, "");
+    if (letters && t === t.toUpperCase() && t.length <= 62) { out.push({ label: t, body: [] }); return; }
+    if (!out.length) out.push({ body: [] });
+    out[out.length - 1].body.push(t);
+   });
+   return out;
+  }
+
+  function entryOf(i){
+   var d = PV.days[i], v = values();
+   var sections = chunk(v[slotId(i,"EXEC")], []);
+   chunk(v[slotId(i,"NOTES")], sections);
+   var e = { title: v[slotId(i,"HEAD")] || "", sections: sections };
+   if (v[slotId(i,"LINE")]) e.line = v[slotId(i,"LINE")];
+   if (d.date) e.date = d.date;
+   return e;
+  }
+
+  function push(){
+   if (cur < 0) return;
+   var msg = { kind: "wb-preview", entry: entryOf(cur), epoch: PV.epoch };
+   if (!ready) { pending = msg; return; }
+   frame.contentWindow.postMessage(msg, "*");
+  }
+
+  window.addEventListener("message", function(ev){
+   if (!ev.data || ev.data.kind !== "wb-preview-ready") return;
+   ready = true;
+   if (fail) fail.className = "pvfail";
+   if (pending) { frame.contentWindow.postMessage(pending, "*"); pending = null; }
+  });
+
+  /* A FRAME THAT NEVER ANSWERS SAYS SO. A blank preview reads as "nothing
+     written yet", which is the one thing it must never be mistaken for. */
+  setTimeout(function(){
+   if (!ready && fail) fail.className = "pvfail on";
+  }, 4000);
+
+  function drawTabs(){
+   tabs.innerHTML = "";
+   PV.fields.forEach(function(f){
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = f.label;
+    b.setAttribute("aria-pressed", f.k === field ? "true" : "false");
+    b.addEventListener("click", function(){ field = f.k; drawTabs(); loadField(); ta.focus(); });
+    tabs.appendChild(b);
+   });
+  }
+
+  /* mirror the real field's own meter into the proxy's, rather than compute a
+     second one — two counters that could disagree is two budgets again. */
+  function syncMeter(id){
+   var a = document.querySelector('[data-lim="' + id + '"]');
+   var b = document.querySelector('[data-lim="__pv"]');
+   var aw = document.querySelector('[data-over="' + id + '"]');
+   var bw = document.querySelector('[data-over="__pv"]');
+   if (b) { b.className = a ? a.className : "lim";
+            b.innerHTML = a ? a.innerHTML : ""; }
+   if (bw) { bw.className = aw ? aw.className : "limwarn";
+             bw.innerHTML = aw ? aw.innerHTML : ""; }
+   ta.className = (byId[id] && /\bbad\b/.test(byId[id].className)) ? "bad" : "";
+  }
+
+  function loadField(){
+   var id = slotId(cur, field), real = byId[id];
+   ta.value = real ? real.value : "";
+   ta.placeholder = real ? (real.getAttribute("placeholder") || "") : "";
+   syncMeter(id);
+  }
+
+  function open(i){
+   cur = i;
+   who.textContent = PV.days[i].where;
+   prevB.disabled = i === 0; nextB.disabled = i === PV.days.length - 1;
+   pane.className = "pv on";
+   document.body.className = "previewing";
+   drawTabs(); loadField(); push();
+  }
+  function close(){
+   pane.className = "pv"; document.body.className = "";
+   var real = byId[slotId(cur, field)];
+   cur = -1;
+   if (real) real.focus();
+  }
+
+  ta.addEventListener("input", function(){
+   var id = slotId(cur, field), real = byId[id];
+   if (!real) return;
+   real.value = ta.value;
+   real.dispatchEvent(new Event("input", { bubbles: true }));
+   syncMeter(id);
+   push();
+  });
+
+  /* and typing in the PAGE's own field updates the frame too, so the two are
+     never out of step whichever one he is using. */
+  areas.forEach(function(t){
+   t.addEventListener("input", function(){ if (cur >= 0) push(); });
+  });
+
+  prevB.addEventListener("click", function(){ if (cur > 0) open(cur - 1); });
+  nextB.addEventListener("click", function(){ if (cur < PV.days.length - 1) open(cur + 1); });
+  document.getElementById("pvx").addEventListener("click", close);
+  document.addEventListener("keydown", function(e){
+   if (e.key === "Escape" && cur >= 0) { e.preventDefault(); close(); }
+  });
+
+  Array.prototype.slice.call(document.querySelectorAll("[data-pv]")).forEach(function(b){
+   b.addEventListener("click", function(){
+    var id = b.getAttribute("data-pv");
+    for (var i = 0; i < PV.days.length; i++) if (PV.days[i].id === id) { open(i); return; }
+   });
+  });
+ })();
 })();
 </script>
 </body></html>

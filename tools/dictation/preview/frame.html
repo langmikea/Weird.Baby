@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Record preview frame</title>
+<!-- ===========================================================================
+     THE PREVIEW FRAME. [D4 2026-08-08]
+     It is an IFRAME and that is the load-bearing decision, not a convenience.
+
+     THE MUSEUM'S TYPE SCALE IS A FUNCTION OF THE VIEWPORT:
+       --face-fs: calc(clamp(1.02rem, min(1.35vw, 4.4cqh), 1.28rem) * .94)
+     Every size on a face is a ratio of that, and every measure is in `ch` of
+     it — 68ch of body, 46ch of lead, 26ch of headline. So a preview is only
+     EXACT if it is laid out at the same viewport width the museum would have.
+     A pane sharing a page with the form is at some other width, which means a
+     different font-size, a different measure and different wrapping: the three
+     things Mike named. An iframe at the full window width has the museum's own
+     `vw`, and `1.35vw` resolves to the same number inside it.
+
+     THE CHAIN BELOW WAS READ OFF THE LIVE PAGE, NOT GUESSED. It is the eleven
+     elements `Exhibit.jsx` puts between `<body>` and an entry on the flat wing,
+     with the two inline styles the component sets — the default 22/78 split on
+     `.ex-main-inner` and `--fit-area-max` on `.ex-root`. Measured on the built
+     bundle at a 1280px viewport: `.ex-right` 963.3 · `.vp-face-body` 925.3 ·
+     `.vp-flat` 870.99. **This is the one part of the preview that is a copy and
+     can therefore drift**, so it is the part the lap measures against the real
+     page rather than the part it trusts. See `README-fidelity.md`.
+
+     `preview.css` is `src/index.css` + `src/routes/exhibit/Exhibit.css`
+     (which itself imports the tokens), built from those files — not a copy.
+     The Google Fonts link is the identical one in the museum's `index.html`;
+     without it Fraunces, Syne, DM Serif Display and Courier Prime all fall
+     back and the preview would be a lie about the one thing it is for.
+     =========================================================================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;1,400&amp;family=DM+Serif+Display:ital@0;1&amp;family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&amp;family=Fredoka:wght@400;500;600&amp;family=Geist:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="preview.css">
+<style>
+  /* The only rules that are NOT the museum's, and there are four.
+     Two make the frame a page (the wing's own background comes from the
+     museum's tokens on `.ex-root`, but the iframe's html/body need it too so a
+     short entry does not sit on white). One draws the hairline between the
+     index and the opened entry, which on the real page is the fact that they
+     are never on screen at the same time — here they are, stacked, and an
+     unmarked join would read as one surface. One is the empty state. */
+  html, body { background: var(--wb-bg, #f2efe6); }
+  .wbp-rule { height: 1px; background: var(--wb-border);
+              margin: calc(var(--face-fs, 18px) * 2.6) 0; }
+  .wbp-empty { font: 13px/1.6 -apple-system, "Segoe UI", system-ui, sans-serif;
+               color: #8a8478; padding: 26px; }
+</style>
+</head>
+<body>
+<!-- The wing, exactly as Exhibit.jsx builds it above an entry. -->
+<div id="root">
+  <div class="ex-root visible" data-exhibit="robots" data-flat="1" style="--fit-area-max: 430px;">
+    <div class="ex-main">
+      <div class="ex-main-inner" style="grid-template-columns: minmax(0px, 22fr) 10px minmax(0px, 78fr);">
+        <!-- THE TRACKLIST COLUMN IS PRESENT AND EMPTY, ON PURPOSE. It is a grid
+             track: without an element in the first column the browser still
+             sizes the track, but `.ex-left`'s own padding and min-width are the
+             thing that decides where column three starts. An absent left column
+             is a different `.ex-right` width, which is a different measure. -->
+        <div class="ex-left" aria-hidden="true"></div>
+        <div class="vr-dh" aria-hidden="true"></div>
+        <div class="ex-right">
+          <div class="vp-area vp-area-flat vp-area-stowed">
+            <div class="vp-inner">
+              <div class="vp-face vp-face-text">
+                <div class="vp-face-body">
+                  <div class="vp-flat" id="mount">
+                    <p class="wbp-empty">Nothing written for this day yet.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="preview.js"></script>
+<script>
+/* THE FRAME OWNS NO STATE AND MAKES NO DECISIONS. The worksheet posts a whole
+   entry object; this renders it. Everything about what an entry IS — how his
+   two prose boxes become sections, what date a day falls on — is decided once,
+   on the worksheet, so there is no second place for it to be decided
+   differently. */
+(function () {
+  var mount = document.getElementById("mount");
+  window.addEventListener("message", function (ev) {
+    var m = ev.data;
+    if (!m || m.kind !== "wb-preview") return;
+    window.WBPreview.render(mount, m.entry, m.epoch);
+  });
+  /* tell the parent the frame is ready, so a post that arrives before load is
+     not simply lost — the parent re-sends on this. */
+  if (window.parent !== window) window.parent.postMessage({ kind: "wb-preview-ready" }, "*");
+})();
+</script>
+</body>
+</html>

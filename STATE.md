@@ -201,6 +201,32 @@ lead above his EXECUTIVE SUMMARY heading — shipped, not suppressed (`I-a`). `C
 is now the whole of what is left and **the worksheet finally asks for it**, in
 one format-checked box.
 
+## THE STORY PLAYS OUT IN REAL TIME, ON REAL DATES (Mike, 2026-08-08 — STANDING)
+
+> **"An entry's date is the actual calendar day it is published, not a fictional
+> offset."**
+
+Canonical: `docs/canonical/OPERATIONS.md` §5, THE STORY RUNS ON REAL DATES row.
+
+Day one is **2026-08-17**, pending the launch happening that day, and it is
+**one constant** — `RECORD_EPOCH` in `src/data/artists/robots.js` — read by
+Record 001's `date`, by the face's `recordEpoch`, and by the worksheet's outline
+through `recordEpoch()`. **A slip is that one line and nothing else, and it was
+proved rather than assumed:** one date-shaped literal in the file, both consumers
+identifier references, and the half-updated two-literal case prints *"Week 2 ·
+Monday · Record 001"* on day one with nothing reporting it.
+
+**What it turned on:** the register stamp `17 AUG 26`, the weekday, the week
+number, and a dateline of `Week 1 · Monday · Record 001` where one part printed
+before. **What it did not:** the month band — `shouldBand` wants fourteen entries
+across more than one month and the volume holds two (`C1`). **His own text checks
+out:** the 17th is a Monday, and his `FRIDAY DAY (-3)` lands on a Friday.
+`C8` closes. 013 stays undated, per B2.
+
+**And the outline's ten days now derive their dates from it**, checked against
+their own declared `MON…FRI` — the worksheet generator **fails the build** if
+they disagree, because every day headline is written for a named weekday.
+
 ## A LIMIT IS SHOWN WHERE THE STRING IS WRITTEN (Mike, 2026-08-08 — STANDING)
 
 > **"He must never again discover a limit from a report."**

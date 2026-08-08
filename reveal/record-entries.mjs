@@ -167,6 +167,58 @@ export function entries() { return read().entries.map(e => ({ ...e })); }
  *  it to prove no ledger row is holding any of them. */
 export function prose() { return [...read().prose]; }
 
+/* ═══ [D4 2026-08-08] DAY ONE, READ OUT OF THE RECORD ════════════════════════
+   D1 made the museum's story run on real dates and put day one in ONE place —
+   `RECORD_EPOCH` in `src/data/artists/robots.js`, referenced by Record 001's
+   `date` and by the face's `recordEpoch`, so that a launch slip is one line.
+   The dictation worksheet needs the same day: every outline day derives its
+   calendar date from it, which is the only reason its preview can print a real
+   stamp and a real week number instead of inventing one.
+
+   IT RESOLVES THE IDENTIFIER RATHER THAN RE-DECLARING THE DAY. A second literal
+   in a tool would be the exact thing D1's one-field rule exists to prevent — and
+   it would be the worse kind, because a worksheet showing last month's date
+   looks like a worksheet.
+
+   IT DOES NOT WIDEN `strOf`. Teaching the shared folder to resolve identifiers
+   would change what `entries()` and `prose()` see across the whole file, on a
+   round that needs one constant; this reads the one declaration it needs and
+   says so if it is not there. `null` is a real answer — the Record carried no
+   epoch at all until 2026-08-08 — and callers must handle it. */
+export function recordEpoch(src) {
+  const text = src ?? fs.readFileSync(path.join(REPO, RECORD_SOURCE), "utf8");
+  const ast = Parser.parse(text, { ecmaVersion: "latest", sourceType: "module" });
+
+  /* module-level `const NAME = "…"` declarations, by name */
+  const consts = new Map();
+  for (const node of ast.body) {
+    if (node.type !== "VariableDeclaration") continue;
+    for (const d of node.declarations) {
+      if (d.id.type !== "Identifier") continue;
+      const v = strOf(d.init);
+      if (v !== null) consts.set(d.id.name, v);
+    }
+  }
+
+  let found = null;
+  (function visit(n) {
+    if (!n || typeof n !== "object" || found) return;
+    if (Array.isArray(n)) { n.forEach(visit); return; }
+    if (n.type === "Property" && !n.computed
+        && (n.key.name === "recordEpoch" || n.key.value === "recordEpoch")) {
+      const v = n.value;
+      found = v.type === "Identifier" ? (consts.get(v.name) ?? null) : strOf(v);
+      if (found) return;
+    }
+    for (const k of Object.keys(n)) {
+      if (k === "type" || k === "start" || k === "end" || k === "loc") continue;
+      visit(n[k]);
+    }
+  })(ast);
+
+  return found && /^\d{4}-\d{2}-\d{2}$/.test(found) ? found : null;
+}
+
 /* ═══ [R3 2026-08-06] THE INDEX ROW, AND IT IS A THIRD READER ════════════════
    MIKE: "every index row gets a headline and a summary beneath it, ALL
    CONSTRAINED TO THE SAME HEIGHT, and THE ENTIRE SUMMARY MUST FIT IN IT. No

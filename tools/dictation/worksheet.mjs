@@ -75,6 +75,52 @@ import {
   monthOf, preciousBudget,
 } from "../../reveal/arc-twelve.mjs";
 import { BUDGETS, FORMATS, CONSTRAINTS } from "../../reveal/record-shape.mjs";
+import { recordEpoch } from "../../reveal/record-entries.mjs";
+
+/* ═══ [D4/D5 2026-08-08] EVERY DAY GETS A REAL CALENDAR DATE ═════════════════
+   D1's rule is that the story runs on real dates: an entry's date is the actual
+   day it is published. Day one is `RECORD_EPOCH` in the Record itself, read out
+   of it rather than restated (`recordEpoch()`), and every outline day follows
+   by arithmetic — week 1 day 1 is the epoch, and each day after it is one day
+   later. That is what lets the preview print a REAL register stamp and a REAL
+   `Week n · Weekday` dateline instead of a placeholder, on days that have not
+   been written yet as well as on the ones that have.
+
+   THE ARITHMETIC IS CHECKED AGAINST THE OUTLINE'S OWN `dow`, and it fails the
+   build if they disagree. Both weeks declare MON…FRI; if the epoch ever moves
+   to a day that is not a Monday, day 1 stops being a Monday and every headline
+   written for "the Friday" lands on a Wednesday. That is precisely the failure
+   a slip would cause and precisely the one nothing would otherwise report.
+
+   AND THE RECORD NUMBER IS NOT DERIVED. `no` is authored (M19) and Ops does not
+   mint one, so the preview passes none: `RecordIndexRow` prints an empty mark
+   rail that still holds its column, which is the component's own honest state
+   and exactly what a reader sees today on Record 013. */
+const DOW3 = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+const EPOCH = recordEpoch();
+
+function dayDate(weekN, dayN) {
+  if (!EPOCH) return null;
+  const [y, m, d] = EPOCH.split("-").map(Number);
+  const t = Date.UTC(y, m - 1, d) + ((weekN - 1) * 7 + (dayN - 1)) * 86400000;
+  const dt = new Date(t);
+  const iso = dt.toISOString().slice(0, 10);
+  return { iso, dow: DOW3[dt.getUTCDay()] };
+}
+
+function checkOutlineDates() {
+  if (!EPOCH) return ["the Record declares no `recordEpoch`, so no day can carry a date"];
+  const bad = [];
+  for (const { w, days } of WEEKS) {
+    for (const d of days) {
+      const got = dayDate(w.n, d.n);
+      if (got.dow !== String(d.dow).toUpperCase()) {
+        bad.push(`week ${w.n} day ${d.n} is written as ${d.dow} and ${got.iso} is a ${got.dow}`);
+      }
+    }
+  }
+  return bad;
+}
 
 /* ── THE SLOT MODEL ──────────────────────────────────────────────────────
    One flat list, built once, used by the page, the map's mirrors and the
@@ -247,6 +293,17 @@ ${pair(slotId, opsColumn(f, d), { rows: f.rows, ph: f.ph, lim: f.lim })}
 </div>`;
 }
 
+/* THE PREVIEW BUTTON ON A DAY. It says what it will show rather than "preview",
+   because the thing worth knowing before pressing it is that this is not an
+   impression of the Record — it is the Record's own components at this window's
+   width. */
+function previewButton(weekId, w, d) {
+  const dt = dayDate(w.n, d.n);
+  return `<button type="button" class="pvgo" data-pv="${weekId}.D${d.n}"
+    title="see this day drawn by the museum's own components">See it on the page${
+    dt ? ` &middot; ${esc(dt.iso)}` : ""}</button>`;
+}
+
 function dayBlock(weekId, w, d) {
   const beat = d.beat
     ? `<div class="beat">&ldquo;${esc(d.beat)}&rdquo;${d.beat2 ? ` &nbsp;+&nbsp; &ldquo;${esc(d.beat2)}&rdquo;` : ""}
@@ -260,6 +317,7 @@ function dayBlock(weekId, w, d) {
   return `<section class="day" id="${weekId}-D${d.n}">
 <div class="hd">
   <span class="n">Week ${w.n} &middot; Day ${d.n} &middot; ${esc(d.dow)}</span>
+  ${previewButton(weekId, w, d)}
   ${beat}
 </div>
 <div class="bd">
@@ -334,6 +392,65 @@ textarea.bad{border-color:#8a3b2e;background:#1e1717}
 .c .none{color:var(--dim2);font-style:italic;font-size:13px}
 .cbar .ovr{display:none}
 .cbar .ovr.on{display:inline;color:var(--redfg);font-weight:700}
+/* ── [D4 2026-08-08] THE LIVE PREVIEW ───────────────────────────────────
+   THE OVERLAY IS FULL-BLEED AND THE BODY STOPS SCROLLING BEHIND IT, AND THAT
+   IS ARITHMETIC RATHER THAN DRAMA. The museum's whole type ramp is
+   \`clamp(1.02rem, min(1.35vw, 4.4cqh), 1.28rem)\` — a function of the VIEWPORT
+   — and every measure on the page is in \`ch\` of it. The frame is therefore
+   only exact at the width the museum itself would have, which is this window.
+   \`overflow:hidden\` on the body removes the worksheet's own scrollbar, so
+   100vw IS the window and the iframe is laid out at the museum's own width to
+   the pixel. A pane sharing the page would be a different size, a different
+   measure and a different wrap.
+   HEIGHT IS NOT FREE EITHER, AND THE FIRST CUT GOT THAT WRONG. The clamp's
+   middle term is \`min(1.35vw, 4.4cqh)\` — the ramp reads the viewport's HEIGHT
+   as well as its width. A bar and an editor stacked above and below the frame
+   left it 368px tall, \`4.4cqh\` fell to 16.192px, the clamp dropped to its
+   1.02rem floor, and the preview drew its body at **15.3408px against the live
+   page's 15.4031px**. Four tenths of one per cent — invisible, wrong, and
+   exactly the "nearly right" Mike ruled out. So the frame is the WHOLE window
+   and the two strips FLOAT OVER IT. He loses a band of the preview to the
+   editor and can scroll it; he does not lose the type. */
+.pv{position:fixed;inset:0;z-index:60;display:none;background:#0d0d11}
+.pv.on{display:block}
+body.previewing{overflow:hidden}
+.pvbar{position:absolute;left:0;right:0;top:0;z-index:2;
+ display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;
+ padding:8px 14px;background:#15141ae8;border-bottom:1px solid var(--line)}
+.pvwho{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.pvnote{font-size:11.5px;color:var(--dim2);flex:1 1 240px;min-width:0}
+.pvbar button{background:transparent;border:1px solid var(--line);color:var(--dim);
+ padding:4px 10px;border-radius:3px;cursor:pointer;
+ font:600 10.5px/1.3 -apple-system,"Segoe UI",system-ui,sans-serif;
+ letter-spacing:.12em;text-transform:uppercase}
+.pvbar button:hover{border-color:var(--gold);color:var(--gold)}
+.pvbar button[disabled]{opacity:.35;cursor:default}
+/* THE FRAME IS THE VIEWPORT. Absolute, inset 0, no border — its layout
+   viewport is the browser's, in both dimensions, which is the whole mechanism
+   above. Nothing may be added that reduces it. */
+.pvframe{position:absolute;inset:0;width:100%;height:100%;border:0;
+ background:#fff;display:block;z-index:1}
+.pvfail{display:none;position:absolute;left:0;right:0;top:44px;z-index:3;
+ padding:18px;color:var(--redfg);background:#241a19;font-size:13.5px}
+.pvfail.on{display:block}
+.pvedit{position:absolute;left:0;right:0;bottom:0;z-index:2;
+ background:#15141af2;border-top:1px solid var(--line);padding:9px 14px 11px}
+.pvtabs{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 7px}
+.pvtabs button{background:transparent;border:1px solid var(--line);color:var(--dim2);
+ padding:3px 9px;border-radius:3px;cursor:pointer;
+ font:600 10.5px/1.3 -apple-system,"Segoe UI",system-ui,sans-serif;
+ letter-spacing:.1em;text-transform:uppercase}
+.pvtabs button[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.pvedit textarea{display:block;width:100%;height:88px;resize:vertical;
+ background:#191820;border:1px solid var(--line);color:var(--fg);border-radius:3px;
+ padding:8px 10px;font:14px/1.55 -apple-system,"Segoe UI",system-ui,sans-serif}
+.pvedit textarea:focus{outline:0;border-color:var(--gold)}
+.pvedit textarea.bad{border-color:#8a3b2e;background:#1e1717}
+.pvgo{margin-left:12px;background:transparent;border:1px solid var(--line);color:var(--dim2);
+ padding:3px 9px;border-radius:3px;cursor:pointer;
+ font:600 10px/1.3 -apple-system,"Segoe UI",system-ui,sans-serif;
+ letter-spacing:.1em;text-transform:uppercase}
+.pvgo:hover{border-color:var(--gold);color:var(--gold)}
 .fld{margin:0 0 18px}
 .fld:last-child{margin:0}
 .fh{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim2);
@@ -390,13 +507,14 @@ textarea.bad{border-color:#8a3b2e;background:#1e1717}
    generator's string somewhere in the middle of Mike's instrument. Written in
    ES5-flavoured plain script for the same reason the tracker pages are — it
    runs off `file://` with no build step between it and him. */
-function clientScript(slots, { key, banner, carry = null }) {
+function clientScript(slots, { key, banner, carry = null, preview = null }) {
   return `<script>
 (function(){
  "use strict";
  var SLOTS = ${JSON.stringify(slots)};
  var KEY = ${JSON.stringify(key)};
  var CARRY = ${JSON.stringify(carry)};
+ var PV = ${JSON.stringify(preview)};
  var store = null;
  try { window.localStorage.setItem("wb.probe","1"); window.localStorage.removeItem("wb.probe");
        store = window.localStorage; } catch (e) { store = null; }
@@ -626,6 +744,165 @@ function clientScript(slots, { key, banner, carry = null }) {
    }
   });
  });
+
+ /* ═══ [D4/D5 2026-08-08] THE LIVE PREVIEW ══════════════════════════════════
+    MIKE: *"while he writes, he must see EXACTLY WHAT THE RECORD WILL LOOK LIKE
+    ON THE PAGE, in real time."*
+
+    THE FRAME DRAWS IT. Nothing in this function knows what a Record entry looks
+    like — it assembles an ENTRY OBJECT out of the four boxes and posts it to an
+    iframe that renders \`RecordIndexRow\` and \`RecordEntry\`, the museum's own
+    components, against the museum's own stylesheets. Every question of type,
+    scale, measure and wrapping is answered over there, by the same code the
+    site runs. This half answers only: what entry is he writing?
+
+    THE ONE JUDGEMENT IT MAKES IS SECTIONS, AND IT IS A CONVENTION HE CONTROLS
+    RATHER THAN A GUESS. A line on its own in CAPITALS starts a section and is
+    its label; everything under it is that section's paragraphs. It is how he
+    dictated Record 001 — EXECUTIVE SUMMARY, then DETAILED REPORT — so it is the
+    format he already writes in, and it is printed on the page above the boxes.
+    Text before any capitals line becomes a section with no label, which
+    \`RecordEntry\` renders as plain paragraphs. Nothing is invented and nothing
+    is dropped.
+
+    THE EDITOR UNDER THE FRAME IS A PROXY, NOT A SECOND FIELD. It writes THROUGH
+    to the real textarea and fires its \`input\` event, so saving, the counters,
+    the over-budget bar and the map mirrors all run down the one path they
+    already ran down. A duplicate input with its own value is the "one question,
+    two answers" defect that cost this instrument a round; there is exactly one
+    place any answer lives. */
+ if (PV) (function(){
+  var pane = document.getElementById("pv");
+  var frame = document.getElementById("pvframe");
+  var who = document.getElementById("pvwho");
+  var fail = document.getElementById("pvfail");
+  var tabs = document.getElementById("pvtabs");
+  var ta = document.getElementById("pvta");
+  var prevB = document.getElementById("pvprev"), nextB = document.getElementById("pvnext");
+  var cur = -1, field = PV.fields[0].k, ready = false, pending = null;
+
+  function slotId(i, k){ return PV.days[i].id + "." + k; }
+
+  /* CAPITALS ON THEIR OWN LINE START A SECTION. \`letters\` guards against a line
+     of digits or punctuation ("16:10 - ...") being read as a heading — it must
+     contain letters and all of them must already be upper case. */
+  function chunk(text, out){
+   String(text == null ? "" : text).split(/\\n+/).forEach(function(raw){
+    var t = raw.trim(); if (!t) return;
+    var letters = t.replace(/[^A-Za-z]/g, "");
+    if (letters && t === t.toUpperCase() && t.length <= 62) { out.push({ label: t, body: [] }); return; }
+    if (!out.length) out.push({ body: [] });
+    out[out.length - 1].body.push(t);
+   });
+   return out;
+  }
+
+  function entryOf(i){
+   var d = PV.days[i], v = values();
+   var sections = chunk(v[slotId(i,"EXEC")], []);
+   chunk(v[slotId(i,"NOTES")], sections);
+   var e = { title: v[slotId(i,"HEAD")] || "", sections: sections };
+   if (v[slotId(i,"LINE")]) e.line = v[slotId(i,"LINE")];
+   if (d.date) e.date = d.date;
+   return e;
+  }
+
+  function push(){
+   if (cur < 0) return;
+   var msg = { kind: "wb-preview", entry: entryOf(cur), epoch: PV.epoch };
+   if (!ready) { pending = msg; return; }
+   frame.contentWindow.postMessage(msg, "*");
+  }
+
+  window.addEventListener("message", function(ev){
+   if (!ev.data || ev.data.kind !== "wb-preview-ready") return;
+   ready = true;
+   if (fail) fail.className = "pvfail";
+   if (pending) { frame.contentWindow.postMessage(pending, "*"); pending = null; }
+  });
+
+  /* A FRAME THAT NEVER ANSWERS SAYS SO. A blank preview reads as "nothing
+     written yet", which is the one thing it must never be mistaken for. */
+  setTimeout(function(){
+   if (!ready && fail) fail.className = "pvfail on";
+  }, 4000);
+
+  function drawTabs(){
+   tabs.innerHTML = "";
+   PV.fields.forEach(function(f){
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = f.label;
+    b.setAttribute("aria-pressed", f.k === field ? "true" : "false");
+    b.addEventListener("click", function(){ field = f.k; drawTabs(); loadField(); ta.focus(); });
+    tabs.appendChild(b);
+   });
+  }
+
+  /* mirror the real field's own meter into the proxy's, rather than compute a
+     second one — two counters that could disagree is two budgets again. */
+  function syncMeter(id){
+   var a = document.querySelector('[data-lim="' + id + '"]');
+   var b = document.querySelector('[data-lim="__pv"]');
+   var aw = document.querySelector('[data-over="' + id + '"]');
+   var bw = document.querySelector('[data-over="__pv"]');
+   if (b) { b.className = a ? a.className : "lim";
+            b.innerHTML = a ? a.innerHTML : ""; }
+   if (bw) { bw.className = aw ? aw.className : "limwarn";
+             bw.innerHTML = aw ? aw.innerHTML : ""; }
+   ta.className = (byId[id] && /\\bbad\\b/.test(byId[id].className)) ? "bad" : "";
+  }
+
+  function loadField(){
+   var id = slotId(cur, field), real = byId[id];
+   ta.value = real ? real.value : "";
+   ta.placeholder = real ? (real.getAttribute("placeholder") || "") : "";
+   syncMeter(id);
+  }
+
+  function open(i){
+   cur = i;
+   who.textContent = PV.days[i].where;
+   prevB.disabled = i === 0; nextB.disabled = i === PV.days.length - 1;
+   pane.className = "pv on";
+   document.body.className = "previewing";
+   drawTabs(); loadField(); push();
+  }
+  function close(){
+   pane.className = "pv"; document.body.className = "";
+   var real = byId[slotId(cur, field)];
+   cur = -1;
+   if (real) real.focus();
+  }
+
+  ta.addEventListener("input", function(){
+   var id = slotId(cur, field), real = byId[id];
+   if (!real) return;
+   real.value = ta.value;
+   real.dispatchEvent(new Event("input", { bubbles: true }));
+   syncMeter(id);
+   push();
+  });
+
+  /* and typing in the PAGE's own field updates the frame too, so the two are
+     never out of step whichever one he is using. */
+  areas.forEach(function(t){
+   t.addEventListener("input", function(){ if (cur >= 0) push(); });
+  });
+
+  prevB.addEventListener("click", function(){ if (cur > 0) open(cur - 1); });
+  nextB.addEventListener("click", function(){ if (cur < PV.days.length - 1) open(cur + 1); });
+  document.getElementById("pvx").addEventListener("click", close);
+  document.addEventListener("keydown", function(e){
+   if (e.key === "Escape" && cur >= 0) { e.preventDefault(); close(); }
+  });
+
+  Array.prototype.slice.call(document.querySelectorAll("[data-pv]")).forEach(function(b){
+   b.addEventListener("click", function(){
+    var id = b.getAttribute("data-pv");
+    for (var i = 0; i < PV.days.length; i++) if (PV.days[i].id === id) { open(i); return; }
+   });
+  });
+ })();
 })();
 </script>`;
 }
@@ -633,8 +910,50 @@ function clientScript(slots, { key, banner, carry = null }) {
 /* ═══════════════════════════════════════════════════════════════════════════
    W1–W7 — THE WORKSHEET
    ═══════════════════════════════════════════════════════════════════════════ */
+/* THE OVERLAY. Bar, frame, editor — in that order, because the frame is the
+   thing and the two strips are furniture around it. */
+const PREVIEW_PANE = `<div class="pv" id="pv">
+ <div class="pvbar">
+  <span class="pvwho" id="pvwho"></span>
+  <span class="pvnote">The index row, then the opened entry. Esc closes.</span>
+  <button type="button" id="pvprev">&lsaquo; Day</button>
+  <button type="button" id="pvnext">Day &rsaquo;</button>
+  <button type="button" id="pvx">Close &#10005;</button>
+ </div>
+ <p class="pvfail" id="pvfail"><b>The preview frame did not load.</b> It needs
+  <code>_preview/frame.html</code>, <code>_preview/preview.js</code> and
+  <code>_preview/preview.css</code> beside this page &mdash; run <code>npm run dictation</code>.
+  <b>Nothing you have typed is affected.</b></p>
+ <iframe class="pvframe" id="pvframe" src="_preview/frame.html"
+         title="the Record entry as it will draw"></iframe>
+ <div class="pvedit">
+  <div class="pvtabs" id="pvtabs"></div>
+  <textarea id="pvta" spellcheck="true"></textarea>
+  <div class="lim" data-lim="__pv"></div>
+  <p class="limwarn" data-over="__pv"></p>
+ </div>
+</div>`;
+
 export function buildWorksheet() {
   const slots = slotList();
+  const dateFaults = checkOutlineDates();
+  if (dateFaults.length) {
+    throw new Error("the outline's weekdays and the Record's epoch disagree:\n  "
+      + dateFaults.join("\n  ")
+      + "\nEvery day headline is written for a named weekday. Fix the epoch or the "
+      + "outline before this page tells Mike a Friday is a Wednesday.");
+  }
+  const previewDays = [];
+  for (const { w, days, id } of WEEKS) {
+    for (const d of days) {
+      const dt = dayDate(w.n, d.n);
+      previewDays.push({
+        id: `${id}.D${d.n}`,
+        where: `Week ${w.n} · Day ${d.n} · ${d.dow}${dt ? " · " + dt.iso : ""}`,
+        date: dt ? dt.iso : null,
+      });
+    }
+  }
 
   const mapRow = (id, w, d) => `<div class="mr">
   <span class="d">Day ${d.n} &middot; ${esc(d.dow)}</span>
@@ -662,6 +981,21 @@ you typing past a limit</b>; the counter turns and tells you by how much. The ot
 boxes have no limit at all, and where there is no counter there is nothing to fit &mdash;
 that absence is deliberate, not an oversight. <a href="reference.html#entry-shape">every
 limit a Record entry has, and where each comes from &rarr;</a></p>
+<p class="lead"><b>Every day has a <i>See it on the page</i> button, and it is the real
+thing rather than an impression of it.</b> It draws your day using the museum&rsquo;s own
+components and the museum&rsquo;s own stylesheets, at this window&rsquo;s width &mdash; the
+same type, the same measure, the same wrapping, the index row and the opened entry.
+<b>You can keep writing inside it</b>: the box under the frame is the same box as the
+one on this page, so what you type there is saved here. <b>It takes the whole window
+on purpose</b> &mdash; the museum sizes its type from the width of the window, so a
+preview squeezed beside the form would be the wrong size and would wrap in the wrong
+places, and a preview that is nearly right is the one thing worse than none.</p>
+<p class="lead"><b>How your two prose boxes become sections, so the preview and the
+finished entry agree:</b> <b>a line on its own in CAPITALS starts a new section and is
+its heading</b>; everything under it is that section&rsquo;s paragraphs. It is exactly
+how you dictated Record 001 &mdash; <i>EXECUTIVE SUMMARY</i>, then <i>DETAILED
+REPORT</i>. Write no capitals line and it draws as one run of paragraphs, which is also
+honest.</p>
 <p class="lead">Everything that explains how any of this works &mdash; the rails, the
 transfer classes, the standing rules, the checks against the tree, the three
 trackers &mdash; is on <a href="reference.html">the reference page</a>, and none of it
@@ -738,9 +1072,15 @@ line came from. Ops&#8209;to&#8209;Mike, ${STAMP}; not part of the museum.</foot
   <button data-gather="jump">Copy everything</button>
  </span>
 </div>
+${PREVIEW_PANE}
 ${clientScript(slots, {
     key: `wb.worksheet.${STAMP}`,
     banner: "WEIRD.BABY MUSEUM - DICTATION WORKSHEET - MIKE'S RESPONSES",
+    preview: {
+      epoch: EPOCH,
+      days: previewDays,
+      fields: FIELDS.map(f => ({ k: f.k, label: f.label })),
+    },
   })}`;
 
   return page({
