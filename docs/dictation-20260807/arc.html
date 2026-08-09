@@ -837,9 +837,19 @@ typed</b>. Ops&#8209;to&#8209;Mike, 2026-08-07; not part of the museum.</footer>
   /* CAPITALS ON THEIR OWN LINE START A SECTION. `letters` guards against a line
      of digits or punctuation ("16:10 - ...") being read as a heading — it must
      contain letters and all of them must already be upper case. */
-  function chunk(text, out){
+  /* AND ONE LINE FORM ON TOP OF IT, FOR THE ATTACHMENTS. [A1 2026-08-08]
+     Mike ruled that payloads sit at the foot of an entry, below the writing, and
+     the preview renders the real component - so it can show them the moment the
+     entry object has any. It cannot invent one. `ATTACH: <name>` on its own line
+     says he wants something attached there, and it becomes a document with no
+     scan, which is `docState`'s HELD: a glyph, the name, and "not here yet".
+     THAT IS THE TRUTH UNTIL OPS SUPPLIES THE FILE, and it is what the finished
+     entry will show until then too. Nothing is faked to fill the row. */
+  function chunk(text, out, att){
    String(text == null ? "" : text).split(/\n+/).forEach(function(raw){
     var t = raw.trim(); if (!t) return;
+    var m = /^ATTACH\s*:\s*(.+)$/i.exec(t);
+    if (m) { att.push({ title: m[1].trim() }); return; }
     var letters = t.replace(/[^A-Za-z]/g, "");
     if (letters && t === t.toUpperCase() && t.length <= 62) { out.push({ label: t, body: [] }); return; }
     if (!out.length) out.push({ body: [] });
@@ -849,12 +859,13 @@ typed</b>. Ops&#8209;to&#8209;Mike, 2026-08-07; not part of the museum.</footer>
   }
 
   function entryOf(i){
-   var d = PV.days[i], v = values();
-   var sections = chunk(v[slotId(i,"EXEC")], []);
-   chunk(v[slotId(i,"NOTES")], sections);
+   var d = PV.days[i], v = values(), att = [];
+   var sections = chunk(v[slotId(i,"EXEC")], [], att);
+   chunk(v[slotId(i,"NOTES")], sections, att);
    var e = { title: v[slotId(i,"HEAD")] || "", sections: sections };
    if (v[slotId(i,"LINE")]) e.line = v[slotId(i,"LINE")];
    if (d.date) e.date = d.date;
+   if (att.length) e.docs = att;
    return e;
   }
 

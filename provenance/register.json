@@ -15351,6 +15351,90 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
   },
+  "02f5b0f10c7709b6": {
+   "f": "src/lib/record-model.js",
+   "l": 213,
+   "t": "Transmission",
+   "c": "HOUSE",
+   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+  },
+  "dc73d39aa40bf25b": {
+   "f": "src/lib/record-model.js",
+   "l": 214,
+   "t": " line",
+   "c": "HOUSE",
+   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+  },
+  "308fa1373b5f5c58": {
+   "f": "src/lib/record-model.js",
+   "l": 214,
+   "t": " lines",
+   "c": "HOUSE",
+   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+  },
+  "64d85164875214e2": {
+   "f": "src/lib/record-model.js",
+   "l": 227,
+   "t": "Photograph",
+   "c": "HOUSE",
+   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+  },
+  "6afd1cce5ab7fd11": {
+   "f": "src/lib/record-model.js",
+   "l": 246,
+   "t": " page",
+   "c": "HOUSE",
+   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+  },
+  "d051c9b628feba03": {
+   "f": "src/lib/record-model.js",
+   "l": 246,
+   "t": " pages",
+   "c": "HOUSE",
+   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+  },
+  "786b9600ab925363": {
+   "f": "src/lib/record-model.js",
+   "l": 250,
+   "t": "not here yet",
+   "c": "HOUSE",
+   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+  },
+  "fb4677aa02ec54c6": {
+   "f": "src/lib/record-model.js",
+   "l": 253,
+   "t": "Document",
+   "c": "HOUSE",
+   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+  },
+  "01874a587ca649f5": {
+   "f": "src/lib/record-model.js",
+   "l": 254,
+   "t": " \u00b7 ",
+   "c": "HOUSE",
+   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+  },
+  "ff18204046c6d4cb": {
+   "f": "src/routes/exhibit/RecordAttachments.jsx",
+   "l": 113,
+   "t": "Attachments",
+   "c": "HOUSE",
+   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+  },
+  "403911bc0720dc0f": {
+   "f": "src/routes/exhibit/RecordAttachments.jsx",
+   "l": 119,
+   "t": "open {} in the reader",
+   "c": "HOUSE",
+   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+  },
+  "8d73a659b2467ce1": {
+   "f": "src/routes/exhibit/RecordAttachments.jsx",
+   "l": 131,
+   "t": " \u00b7 {}",
+   "c": "HOUSE",
+   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+  },
   "b724eda0bf113741": {
    "f": "src/data/artists/robots.js",
    "l": 349,

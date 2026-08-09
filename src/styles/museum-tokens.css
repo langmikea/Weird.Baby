@@ -154,6 +154,30 @@
      reading matter — see Exhibit.css). Nothing that reads --wb-serif moves. */
   --wb-read: 'Fraunces', 'Source Serif 4', Georgia, serif;
 
+  /* ═══ [A3 2026-08-08] THE RECORD'S REGISTER — AND IT IS A THIRD FACE, NOT A
+     REPLACEMENT FOR EITHER OF THE OTHER TWO ═════════════════════════════════
+     MIKE, as law: *"it is modern times inside the story, so the writing may
+     look modern — but the aesthetic is a SMOOTH TRANSITION FROM THE 1960s WORLD
+     by way of being EXTREMELY SIMPLE. Plain Arial-class sans, BOLD AT MOST, no
+     display faces, no ornament, no editorial typography. It should read like an
+     engineer writing a progress report or keeping a log."*
+
+     THERE IS NO WEBFONT HERE AND THAT IS THE POINT. Arial first, literally,
+     because he said Arial-class and Arial is the thing that is already on the
+     machine; the rest of the stack is the same neutral grotesque under another
+     name on whatever the reader is using. A designed face — even a plain one,
+     even one this museum already loads — would be a choice, and *extremely
+     simple* is the instruction.
+
+     IT COSTS NOTHING TO LOAD, which is the second reason: the Record is the
+     surface that will grow to hundreds of entries, and the one register on the
+     site that asks for no font file is the right one to put under them.
+
+     SCOPE: the Record's reading matter only — `Exhibit.css`'s `.vp-rec-*` and
+     the index row inside `.vp-rec-index`. `--wb-read` and `--wb-serif` are
+     untouched and every other face reads exactly as it did. */
+  --wb-plain: Arial, 'Helvetica Neue', Helvetica, 'Segoe UI', system-ui, sans-serif;
+
   /* ---- B11 2026-07-30: THE ALIASES ARE RETIRED ------------------
      R7 kept fifteen --hr-* aliases so the migration could stay lazy.
      It finished instead: a sweep of src/ and public/ finds ZERO live

@@ -17,6 +17,7 @@ import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
 import { validate, manualPageRow, PROD, manualPages, manualSourceState, MANUAL_SRC_DIR } from "../reveal/schema.mjs";
+import { entryFields as recordFields } from "../reveal/record-entries.mjs";
 import { entries as recordEntries, prose as recordProse,
          summaries as recordSummaries } from "../reveal/record-entries.mjs";
 import { transferFaults, ASSIGN, EXEMPT, TRANSFERS, CLASSES } from "../reveal/transfers.mjs";
@@ -540,12 +541,57 @@ function recordBudgetFaults() {
   return out;
 }
 
+/* ═══ [A1 2026-08-08] NOTHING DROPS SILENTLY EVER AGAIN ═════════════════════
+   Mike's ruling on D-b, made structural. S-c was three payload fields the
+   long-form renderer did not draw and did not report; the fields are drawn now
+   (`RecordAttachments.jsx`), and this is the half that survives the next field
+   somebody adds.
+
+   THE LIST IS OF WHAT IS DRAWN, NOT OF WHAT IS ALLOWED. Every name below is
+   read by a renderer today, and the two that are not are marked with the reason
+   they are exempt. Add a field to an entry without teaching something to draw
+   it and the packet is refused, by name.
+
+   IT DOES NOT KNOW WHERE A FIELD DRAWS, only that something does — a gate that
+   tried to prove placement would be a second renderer. */
+const DRAWN_ENTRY_FIELDS = new Set([
+  /* the head */
+  "no", "date", "stamp", "title", "line", "lead",
+  /* the body */
+  "sections", "tomb", "note",
+  /* the hook */
+  "still", "stillCaption",
+  /* the payloads — attachments, at the foot, since A1 */
+  "wire", "plates", "docs",
+  /* DECLARED AND DELIBERATELY UNDRAWN, each with its ruling:
+     `evidence` — R5, Mike struck the badge it printed ("I see no richness in
+     it"); the field survives in his own model and comes back the day it points
+     at something. record-model.js says so at length. */
+  "evidence",
+]);
+
+function recordFieldFaults() {
+  const out = [];
+  for (const e of recordFields()) {
+    const who = "Record " + (e.no == null ? "(unnumbered)" : String(e.no).padStart(3, "0"));
+    for (const k of e.keys) {
+      if (DRAWN_ENTRY_FIELDS.has(k)) continue;
+      out.push(`${who}: declares \`${k}\`, and nothing renders it. `
+        + `Either draw it (RecordEntry.jsx / RecordAttachments.jsx) or, if it is `
+        + `deliberately undrawn, add it to DRAWN_ENTRY_FIELDS with the ruling. `
+        + `"Nothing drops silently ever again" (Mike, 2026-08-08).`);
+    }
+  }
+  return out;
+}
+
 function check() {
   const faults = [
     ...validate(ROWS),
     ...recordProseFaults(),
     ...recordParityFaults(),
     ...recordBudgetFaults(),
+    ...recordFieldFaults(),
     ...vesselFaults(),
     ...transferGuardFaults(),
   ];
@@ -574,6 +620,7 @@ function check() {
      to assume are still running. */
   console.log(`  every HELD row is unreachable — no reach, no public file, and the ${HELD_PREFIXES.length} held prefixes are still refused by the worker and routed to it`);
   console.log("  nothing publishes until the Record delivers it — every picture of the objects is delivered or behind the door, in writing");
+  console.log("  every field a Record entry declares is drawn by something — nothing drops silently");
   console.log("  the manual-page vessel builds, derives and refuses correctly at all four stages");
   console.log(`  the manual is ${manualPages()} pages, read off ${MANUAL_SRC_DIR} rather than declared`);
   process.exit(0);

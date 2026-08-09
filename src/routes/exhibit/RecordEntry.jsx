@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { entryStamp, entryDateline } from "../../lib/record-model.js";
+import RecordAttachments from "./RecordAttachments.jsx";
 
 /* ===========================================================================
    [RC 2026-08-04] THE RECORD ENTRY — MIKE'S APPROVED CONTAINER, BUILT ONCE.
@@ -390,6 +391,17 @@ export default function RecordEntry({
           </li>
         ))}
       </ol>
+
+      {/* [A1 2026-08-08] THE ATTACHMENTS, BELOW THE WRITING. Mike's ruling on
+          D-b: an entry may carry both authored sections and payloads, and the
+          payloads sit at the BOTTOM, after the writing. Until today this
+          renderer drew `wire`, `plates` and `docs` NOWHERE and said nothing
+          about it (S-c).
+          IT IS ABOVE THE TOMBSTONE ON PURPOSE. The tombstone is where things
+          stand when the lights go off — it is the last sentence of the day, and
+          a list of files after it would be furniture after a closing line. The
+          attachments are part of the record; the tombstone ends it. */}
+      <RecordAttachments key="att" entry={entry} openLink={openLink} />
 
       {/* THE TOMBSTONE: where things stand when the lights go off. */}
       {entry.tomb && <p key="tomb" className="vp-rec-tomb">{entry.tomb}</p>}

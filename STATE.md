@@ -201,6 +201,43 @@ lead above his EXECUTIVE SUMMARY heading — shipped, not suppressed (`I-a`). `C
 is now the whole of what is left and **the worksheet finally asks for it**, in
 one format-checked box.
 
+## THE RECORD IS EMAIL-LIKE, NOT AN EMAIL PROGRAM (Mike, 2026-08-08 — STANDING)
+
+> **"Do NOT build mail chrome — no From, no To, no Subject line, no reply
+> affordances, no inbox, no message headers, no envelope furniture of any kind.
+> What is borrowed is the REGISTER ONLY: the plainness and the
+> attachments-at-the-bottom convention. Everything else stays what it is."**
+
+> **"Plain Arial-class sans, BOLD AT MOST, no display faces, no ornament, no
+> editorial typography. It should read like an engineer writing a progress
+> report or keeping a log."**
+
+Canonical text + reasoning: `docs/canonical/OPERATIONS.md` §7 Doctrine 23.
+
+**THE BOUNDARY IS THE LOAD-BEARING HALF.** Two things were reached for while
+building and refused: a count beside the ATTACHMENTS label, and a per-row open
+control. Neither is wrong as UI; both are a mail client. **The test is not *is it
+useful* — it is *would a mail program have it*.**
+
+**THE FACE LOADS NOTHING.** `--wb-plain` is a system stack, Arial first,
+literally. `--wb-read` and `--wb-serif` are untouched. **Scope is the Record
+only** — every rule sits inside `.vp-rec-index` or targets `.vp-rec-*`, because
+the index row is built from the SHARED `.vp-fe-*` classes and restyling those
+bare retypes four faces to serve one. The check is a cascade probe: the same
+class inside and outside a Record index must compute different families.
+
+**PAYLOADS ARE ATTACHMENTS, AT THE FOOT, ONE SHAPE** — a small preview icon, a
+name, a line of detail, and the payload's own words printed *inside* the row. A
+glyph is not a failure state. **And "nothing drops silently ever again" is a
+gate**: `reveal:check` refuses any entry field nothing renders.
+
+**MEASURED:** +11.1% lines per screen at 1228px and 390px, the opened entry
+−6.8% / −10.3%, index rows −4.9% / −16.6%, and **characters per line unchanged
+at 70.8** — R4's 68ch survives because `ch` is relative to the face. The leading
+went 1.62 → 1.45 and that is the one thing that moved against readability; it is
+one number and it is open (`A-a`), along with Courier Prime surviving on the
+dateline, the stamp and the mark rail.
+
 ## THE STORY PLAYS OUT IN REAL TIME, ON REAL DATES (Mike, 2026-08-08 — STANDING)
 
 > **"An entry's date is the actual calendar day it is published, not a fictional

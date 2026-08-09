@@ -1502,6 +1502,38 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    stood here and cut every entry mid-clause; the fit is the data's job now. */
 .vp-rec-sum{opacity:.72}
 
+/* ═══ [A3/A4 2026-08-08] THE INDEX ROW TAKES THE RECORD'S REGISTER, AND THE
+   SCOPING IS THE WHOLE OF A4's ANSWER ══════════════════════════════════════
+   Mike's complaint was that the Record is *hard to read AND too big for its
+   area*, and half of the Record a reader meets is the INDEX — so the row moves
+   with the entry or the wing has two registers for one object.
+
+   BUT THE ROW IS BUILT OUT OF `.vp-fe-*`, WHICH IS NOT THE RECORD'S. `.vp-fe`,
+   `.vp-fe-title` and `.vp-fe-line` are the SHARED entry-list furniture: the
+   robots FAQ (`entriesMode:"faq"`), Worth A Listen's list and every other face
+   that prints entries use the same three classes. Restyling them bare would
+   have retyped four faces to serve one, which is A4's *do not break a
+   neighbour* exactly. So every rule here is scoped inside `.vp-rec-index`,
+   which only an `entriesMode:"log"` face gets.
+
+   AND ONE NEIGHBOUR IS INSIDE THE SCOPE, WHICH IS SAID RATHER THAN DISCOVERED:
+   the Foundation's *Happening now!* face is also `entriesMode:"log"`, so it
+   would inherit this register. It declares `entries: []` — nothing renders
+   there today and nothing changes today — and inheriting is the right answer
+   when it does: one component, one register. If the Foundation is ever meant to
+   read as a different kind of log, that is a ruling and not a defect. */
+.vp-rec-index .vp-fe-title{font-family:var(--wb-plain);font-weight:700;
+  letter-spacing:.04em}
+.vp-rec-index .vp-fe-line{font-family:var(--wb-plain);
+  line-height:1.45;letter-spacing:0;max-width:68ch}
+/* AND NO PADDING RULE HERE, WHICH IS A CORRECTION THE MEASUREMENT MADE. The
+   first cut of this block set `.vp-rec-index .vp-fe{padding:7px 0}` reaching for
+   density, and it did the opposite: `.vp-rec-row{padding:0}` already zeroes the
+   shared list's 9px, and a two-class selector outranks it — so a rule written to
+   make rows shorter ADDED FOURTEEN PIXELS to every one of them. Measured at
+   1228px: 93.13px before the round, 102.6px with the rule, 88.66px without it.
+   The row's spacing is the button's own padding and it was already right. */
+
 /* ---- [R4] THE ROW'S READING MATTER IS CAPPED AT THE BAND, and the slack on
    the right is deliberate. 68ch is the same measure the entry body takes, so a
    reader meets one column width in the index and the same one inside the
@@ -3766,9 +3798,9 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    top step (R5b added it, P7's rule for adding one) — a record entry's
    headline is the largest thing on its page and should be, because the
    fifteen-second read is the headings and this is the first of them. */
-.vp-rec-headline{margin:0;font-family:'DM Serif Display',Georgia,serif;
-  font-weight:400;font-size:var(--fs-display);line-height:1.14;
-  letter-spacing:.004em;color:var(--wb-gold);max-width:26ch}
+.vp-rec-headline{margin:0;font-family:var(--wb-plain);
+  font-weight:700;font-size:var(--fs-head);line-height:1.2;
+  letter-spacing:-.006em;color:var(--wb-gold);max-width:34ch}
 
 /* ---- THE HOOK. A photograph the museum already owns, and a door into the
    reader. It floats on a wide frame so the dateline, headline and lead set
@@ -3791,9 +3823,9 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    rather than as the first of several. */
 .vp-rec-lead{margin:0;padding-left:14px;
   border-left:2px solid var(--wb-gold-lo);
-  font-family:var(--wb-read);font-optical-sizing:auto;
-  font-size:var(--fs-lead);line-height:1.5;letter-spacing:.004em;
-  color:var(--wb-gold);max-width:46ch}
+  font-family:var(--wb-plain);
+  font-size:var(--fs-body);line-height:1.5;letter-spacing:0;
+  color:var(--wb-gold);max-width:60ch}
 
 /* ---- THE SECTIONS.
    NOTHING HERE EQUALISES THEM. No min-height, no grid track, no even gap that
@@ -3807,8 +3839,8 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
 .vp-rec-sects{list-style:none;margin:0;padding:0}
 .vp-rec-sect + .vp-rec-sect{margin-top:var(--rh-sect)}
 .vp-rec-sect-label{margin:0 0 var(--rh-tight);
-  font-family:'Syne',sans-serif;font-weight:800;
-  font-size:var(--fs-small);letter-spacing:.16em;text-transform:uppercase;
+  font-family:var(--wb-plain);font-weight:700;
+  font-size:var(--fs-small);letter-spacing:.06em;text-transform:uppercase;
   color:var(--wb-gold)}
 /* [R4 2026-08-06] 56ch → 68ch, AND THE DIRECTION OF THE CHANGE IS THE FINDING.
    Mike saw a capped line with pane to spare and asked whether there is a
@@ -3821,8 +3853,8 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    the width of a desktop pane is 130–150 characters and the eye loses the
    return; every newspaper sets in columns for exactly this reason. What the
    leftover carries instead is written at the head of the index rules. */
-.vp-rec-sect-body{margin:0;font-family:var(--wb-read);font-optical-sizing:auto;
-  font-size:var(--fs-body);line-height:1.62;letter-spacing:.005em;
+.vp-rec-sect-body{margin:0;font-family:var(--wb-plain);
+  font-size:var(--fs-body);line-height:1.45;letter-spacing:0;
   color:var(--wb-gold-lo);max-width:68ch}
 .vp-rec-sect-body + .vp-rec-sect-body{margin-top:var(--rh-tight)}
 .vp-rec-sect-doors{display:flex;flex-wrap:wrap;gap:10px 16px}
@@ -3845,7 +3877,7 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    goes. Authored text supplies the space after, when there is one. */
 .vp-rec-door{display:inline-flex;align-items:baseline;gap:.34em;
   margin:0 0 0 .15em;padding:0;border:0;background:none;cursor:pointer;
-  font-family:var(--wb-read);font-optical-sizing:auto;
+  font-family:inherit;
   font-size:inherit;line-height:inherit;letter-spacing:inherit;
   color:var(--wb-gold);
   text-decoration:underline;text-decoration-style:dotted;
@@ -3872,9 +3904,59 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
 /* ---- THE TOMBSTONE. Where things stand when the lights go off: italic, one
    step quieter than the body, and set apart by air rather than by a rule
    because the endmark below it is already drawing one. */
-.vp-rec-tomb{margin:0;font-family:var(--wb-read);font-optical-sizing:auto;
-  font-style:italic;font-size:var(--fs-body);line-height:1.55;
-  color:var(--wb-gold-mute);max-width:56ch}
+.vp-rec-tomb{margin:0;font-family:var(--wb-plain);
+  font-size:var(--fs-body);line-height:1.45;
+  color:var(--wb-gold-mute);max-width:68ch}
+
+/* ═══ [A1/A2 2026-08-08] THE ATTACHMENTS ════════════════════════════════════
+   MIKE: *"THE RECORD IS EMAIL-LIKE. IT IS NOT AN EMAIL PROGRAM."* What is
+   borrowed is the register and the attachments-at-the-bottom convention, and
+   NOTHING ELSE — there is no sender, no subject, no reply, no envelope in this
+   block, and a future round that adds one has crossed the line.
+
+   *"Not fancy, not sleek, not a modern gallery: a plain list with small preview
+   thumbnails."* So the thumbnail is a FIXED SQUARE and the list is a LIST. No
+   grid, no aspect-ratio dance, no hover reveal, no caption under the picture.
+   The square is 3.4em of the reading size, which keeps it in proportion at both
+   ends of the ramp without a second measurement.
+
+   THE RULE ABOVE IT IS THE ONLY ORNAMENT AND IT IS DOING WORK: the attachments
+   are the one part of an entry that is not the writing, and *below the line* is
+   Mike's own phrase for where they go. */
+.vp-rec-att{margin:0}
+.vp-flat > .vp-rec-att{margin-top:var(--rh-sect);clear:both}
+.vp-rec-att-head{margin:0 0 var(--rh-tight);padding-top:var(--rh-tight);
+  border-top:1px solid var(--wb-border);
+  font-family:var(--wb-plain);font-weight:700;font-size:var(--fs-small);
+  letter-spacing:.06em;text-transform:uppercase;color:var(--wb-gold-mute)}
+.vp-rec-att-list{list-style:none;margin:0;padding:0;display:flex;
+  flex-direction:column;gap:var(--rh-block)}
+.vp-rec-att-item{display:flex;gap:14px;align-items:flex-start}
+
+/* THE PREVIEW ICON — the one modern convenience, kept small on purpose. */
+.vp-rec-att-thumb{flex:0 0 auto;width:3.4em;height:3.4em;padding:0;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--wb-border);background:none;overflow:hidden}
+button.vp-rec-att-thumb{cursor:pointer;transition:border-color .16s}
+button.vp-rec-att-thumb:hover,button.vp-rec-att-thumb:focus-visible{
+  border-color:var(--wb-gold-lo);outline:none}
+.vp-rec-att-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.vp-rec-att-glyph{width:1.5em;height:1.5em;color:var(--wb-gold-mute)}
+
+.vp-rec-att-body{display:flex;flex-direction:column;gap:2px;min-width:0;
+  font-family:var(--wb-plain)}
+.vp-rec-att-name{font-weight:700;font-size:var(--fs-body);line-height:1.35;
+  color:var(--wb-gold);overflow-wrap:anywhere}
+.vp-rec-att-meta{font-size:var(--fs-micro);letter-spacing:.06em;
+  text-transform:uppercase;color:var(--wb-gold-mute)}
+/* the payload's own words, in the row and never behind it (R4) */
+.vp-rec-att-lines{list-style:none;margin:var(--rh-tight) 0 0;padding:0;
+  font-size:var(--fs-small);line-height:1.5;color:var(--wb-gold-lo);
+  font-variant-numeric:tabular-nums;max-width:68ch}
+.vp-rec-att-extract,.vp-rec-att-note{margin:var(--rh-tight) 0 0;
+  font-size:var(--fs-body);line-height:1.45;color:var(--wb-gold-lo);
+  max-width:68ch}
+.vp-rec-att-note{font-size:var(--fs-small);color:var(--wb-gold-mute)}
 
 /* ---- THE DOOR'S OVERLAY. It pops ON the page and closes back to exactly
    where you were, which is the third of Mike's three door laws. So: no
@@ -3897,11 +3979,11 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
   font-size:var(--fs-micro);letter-spacing:.2em;text-transform:uppercase;
   color:var(--wb-gold-mute)}
 .vp-rec-pop-kind .vp-rec-door-ico{width:1.25em;height:1.25em;transform:none}
-.vp-rec-pop-title{margin:0;font-family:'Syne',sans-serif;font-weight:800;
-  font-size:var(--fs-lead);line-height:1.2;letter-spacing:.02em;
+.vp-rec-pop-title{margin:0;font-family:var(--wb-plain);font-weight:700;
+  font-size:var(--fs-lead);line-height:1.2;letter-spacing:-.004em;
   color:var(--wb-gold)}
-.vp-rec-pop-line{margin:0;font-family:var(--wb-read);font-optical-sizing:auto;
-  font-size:var(--fs-body);line-height:1.55;color:var(--wb-gold-lo)}
+.vp-rec-pop-line{margin:0;font-family:var(--wb-plain);
+  font-size:var(--fs-body);line-height:1.45;color:var(--wb-gold-lo)}
 .vp-rec-pop-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
 
 /* ---- THE FLAT DOCUMENT'S RHYTHM LADDER, joined rather than re-invented.

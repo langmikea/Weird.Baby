@@ -786,9 +786,19 @@ function clientScript(slots, { key, banner, carry = null, preview = null }) {
   /* CAPITALS ON THEIR OWN LINE START A SECTION. \`letters\` guards against a line
      of digits or punctuation ("16:10 - ...") being read as a heading — it must
      contain letters and all of them must already be upper case. */
-  function chunk(text, out){
+  /* AND ONE LINE FORM ON TOP OF IT, FOR THE ATTACHMENTS. [A1 2026-08-08]
+     Mike ruled that payloads sit at the foot of an entry, below the writing, and
+     the preview renders the real component - so it can show them the moment the
+     entry object has any. It cannot invent one. \`ATTACH: <name>\` on its own line
+     says he wants something attached there, and it becomes a document with no
+     scan, which is \`docState\`'s HELD: a glyph, the name, and "not here yet".
+     THAT IS THE TRUTH UNTIL OPS SUPPLIES THE FILE, and it is what the finished
+     entry will show until then too. Nothing is faked to fill the row. */
+  function chunk(text, out, att){
    String(text == null ? "" : text).split(/\\n+/).forEach(function(raw){
     var t = raw.trim(); if (!t) return;
+    var m = /^ATTACH\\s*:\\s*(.+)$/i.exec(t);
+    if (m) { att.push({ title: m[1].trim() }); return; }
     var letters = t.replace(/[^A-Za-z]/g, "");
     if (letters && t === t.toUpperCase() && t.length <= 62) { out.push({ label: t, body: [] }); return; }
     if (!out.length) out.push({ body: [] });
@@ -798,12 +808,13 @@ function clientScript(slots, { key, banner, carry = null, preview = null }) {
   }
 
   function entryOf(i){
-   var d = PV.days[i], v = values();
-   var sections = chunk(v[slotId(i,"EXEC")], []);
-   chunk(v[slotId(i,"NOTES")], sections);
+   var d = PV.days[i], v = values(), att = [];
+   var sections = chunk(v[slotId(i,"EXEC")], [], att);
+   chunk(v[slotId(i,"NOTES")], sections, att);
    var e = { title: v[slotId(i,"HEAD")] || "", sections: sections };
    if (v[slotId(i,"LINE")]) e.line = v[slotId(i,"LINE")];
    if (d.date) e.date = d.date;
+   if (att.length) e.docs = att;
    return e;
   }
 
@@ -996,6 +1007,13 @@ its heading</b>; everything under it is that section&rsquo;s paragraphs. It is e
 how you dictated Record 001 &mdash; <i>EXECUTIVE SUMMARY</i>, then <i>DETAILED
 REPORT</i>. Write no capitals line and it draws as one run of paragraphs, which is also
 honest.</p>
+<p class="lead"><b>And one more line form, for the things that are not writing.</b> A line
+reading <b><code>ATTACH: what it is</code></b> puts an attachment at the foot of the entry,
+below the writing, where they belong. Photographs, documents and transmissions all draw as
+the same row &mdash; a small preview, a name, a line of detail &mdash; so you can see exactly
+how much room they take. <b>Until Ops has the actual file the row says &ldquo;not here
+yet&rdquo; and shows an outline instead of a picture</b>, which is what the finished entry
+will show until then as well. Nothing is drawn in to fill the space.</p>
 <p class="lead">Everything that explains how any of this works &mdash; the rails, the
 transfer classes, the standing rules, the checks against the tree, the three
 trackers &mdash; is on <a href="reference.html">the reference page</a>, and none of it

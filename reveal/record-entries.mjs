@@ -167,6 +167,58 @@ export function entries() { return read().entries.map(e => ({ ...e })); }
  *  it to prove no ledger row is holding any of them. */
 export function prose() { return [...read().prose]; }
 
+/* ═══ [A1 2026-08-08] EVERY FIELD AN ENTRY DECLARES, BY NAME ═════════════════
+   MIKE, ruling D-b: **"Nothing drops silently ever again."**
+
+   That is a sentence or it is a mechanism. The defect it closes (S-c) was not a
+   bug in a renderer — it was a renderer that did not know about three fields
+   and had no way to say so, and an author who got silence. A round can fix the
+   three fields it knows about today; it cannot fix the fourth one somebody adds
+   in November. So the check is inverted: the gate holds the list of fields the
+   renderers DRAW, this returns the fields the Record actually DECLARES, and any
+   entry carrying a field nobody draws **fails the packet**.
+
+   IT RETURNS NAMES AND NOTHING ELSE, which keeps this module's own split
+   intact: `entries()` sees numbers and asset paths, `prose()` sees words, and
+   this sees neither — it cannot leak a headline into the ledger because it
+   never reads one. */
+export function entryFields() {
+  return read2().map(e => ({ no: e.no, keys: e.keys }));
+}
+
+let KEYCACHE = null;
+function read2() {
+  if (KEYCACHE) return KEYCACHE;
+  const src = fs.readFileSync(path.join(REPO, RECORD_SOURCE), "utf8");
+  const ast = Parser.parse(src, { ecmaVersion: "latest", sourceType: "module" });
+  let track = null;
+  (function visit(n) {
+    if (!n || typeof n !== "object" || track) return;
+    if (Array.isArray(n)) { n.forEach(visit); return; }
+    if (n.type === "ObjectExpression") {
+      const id = strOf(propOf(n, "id"));
+      if (id === RECORD_TRACK_ID && propOf(n, "face")) { track = n; return; }
+    }
+    for (const k of Object.keys(n)) {
+      if (k === "type" || k === "start" || k === "end" || k === "loc") continue;
+      visit(n[k]);
+    }
+  })(ast);
+  const el = track ? propOf(propOf(track, "face"), "entries") : null;
+  KEYCACHE = (!el || el.type !== "ArrayExpression" ? [] : el.elements)
+    .filter(x => x && x.type === "ObjectExpression")
+    .map(x => {
+      const noNode = propOf(x, "no");
+      return {
+        no: noNode && noNode.type === "Literal" ? noNode.value : null,
+        keys: x.properties
+          .filter(p => p.type === "Property" && !p.computed)
+          .map(p => p.key.name || p.key.value),
+      };
+    });
+  return KEYCACHE;
+}
+
 /* ═══ [D4 2026-08-08] DAY ONE, READ OUT OF THE RECORD ════════════════════════
    D1 made the museum's story run on real dates and put day one in ONE place —
    `RECORD_EPOCH` in `src/data/artists/robots.js`, referenced by Record 001's

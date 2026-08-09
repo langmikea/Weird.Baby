@@ -627,6 +627,25 @@ so `line` is still empty and 001's row is still 84px against 013's 157px (`S-b`)
 collapses it, and making it visible costs `white-space: pre-wrap` on every record
 body (`S-e`). Full rules: `OPERATIONS.md` §5's RECORD 001 row.
 
+## ONE STANDING RULE ADDED 2026-08-08 (ATTACHMENTS + THE EMAIL-LIKE REGISTER)
+
+**THE RECORD IS EMAIL-LIKE, NOT AN EMAIL PROGRAM** - *"no From, no To, no Subject
+line, no reply affordances, no inbox, no message headers, no envelope furniture
+of any kind. What is borrowed is the REGISTER ONLY: the plainness and the
+attachments-at-the-bottom convention."* `OPERATIONS.md` §7 **Doctrine 23**,
+mirrored in `STATE.md`. **THE TEST IS NOT *is it useful* - IT IS *would a mail
+program have it*:** a count beside the ATTACHMENTS label and a per-row open
+control were both reached for and refused. The face is **`--wb-plain`, a system
+stack, Arial first, loading nothing**; bold at most, no italic, no display step.
+**SCOPE IS THE RECORD ONLY** - every rule sits inside `.vp-rec-index` or targets
+`.vp-rec-*`, because the index row is built from the SHARED `.vp-fe-*` classes
+and restyling those bare retypes the FAQ, Worth A Listen and every other entry
+list. **Check it with a cascade probe:** the same class inside and outside a
+Record index must compute different families. **PAYLOADS ARE ATTACHMENTS at the
+foot, one shape for all three kinds, with the payload's own words INSIDE the row
+(R4).** And **"nothing drops silently ever again" is a GATE** - `reveal:check`
+refuses any entry field nothing renders (`DRAWN_ENTRY_FIELDS`).
+
 ## TWO STANDING RULES ADDED 2026-08-08 (THE DATE + THE LIVE PREVIEW)
 
 **THE STORY PLAYS OUT IN REAL TIME, ON REAL DATES** — *"an entry's date is the
@@ -685,6 +704,43 @@ indistinguishable from his words a week later.
 ## Recent session log
 
 Maintained here. Newest first.
+
+### 2026-08-08 -> ATTACHMENTS + THE EMAIL-LIKE REGISTER (A0-A6) - sealed
+- **THE BOUNDARY WAS THE INSTRUCTION THAT DID THE MOST WORK, AND IT WORKED BY
+  SUBTRACTION.** A0 governed two decisions the rest of the brief would have
+  pushed the other way: a count badge on the ATTACHMENTS label and a per-row
+  open control, both refused as mail chrome. **S-c and D-b close** - `wire`,
+  `plates` and `docs` draw as ONE shape at the foot of a long-form entry, with a
+  transmission's lines and a document's extract printed INSIDE their rows because
+  R4 binds this surface too. Gates: lint **11/9 = baseline** - build green -
+  provenance **PASS** - `reveal:check` **PASS** - `parity:gate` **PASS** -
+  `instory:gate` **PASS** - `assets:orphans` **0** - `reveal:day` **nothing to
+  move** - **the lap RAN at 390px and 1228px**, five routes, 0 overflow, 0
+  errors. Log: `docs/MUSEUM_ATTACHMENTS_LOG-20260808.md`.
+- **"NOTHING DROPS SILENTLY EVER AGAIN" IS A GATE, NOT A SENTENCE.** S-c was not
+  a broken renderer - it was a renderer that did not know about three fields and
+  **had no way to say so**, and fixing three does not fix the fourth somebody
+  adds in November. `DRAWN_ENTRY_FIELDS` in `tools/reveal-ledger.mjs` fails the
+  packet by name on any entry field nothing renders; **proved by breaking it on
+  purpose** and restoring the source byte-identically.
+- **THE DENSITY IS MEASURED AND IT ANSWERS ONE HALF WITH NUMBERS AND THE OTHER
+  WITH HIS OWN CHOICE OF FACE.** +11.1% lines per screen at both widths; the
+  opened entry **-6.8% at 1228px and -10.3% at 390px**; index rows -4.9% and
+  -16.6%; **characters per line UNCHANGED at 70.8**, because R4's 68ch is 68
+  characters whatever the face. *Hard to read* is his judgement, and **the one
+  thing that moved against it is named**: leading 1.62 -> 1.45, which is where
+  most of the saving came from (`A-a`).
+- **A4's ANSWER IS THE SCOPING, AND IT WAS PROVED IN THE LIVE CASCADE.** The
+  index row is built from the SHARED `.vp-fe-*` classes; every new rule is inside
+  `.vp-rec-index`. A probe injecting the same classes inside and outside a Record
+  index reads **Arial inside, Syne/Fraunces outside**. One neighbour IS in scope
+  and is named rather than discovered: the Foundation's *Happening now!* is also
+  `entriesMode:"log"` and will inherit - it has `entries: []` today.
+- **AND THE FIRST CUT MADE THE INDEX WORSE.** A padding rule reaching for density
+  outranked `.vp-rec-row{padding:0}` and **added fourteen pixels to every row**:
+  93.13 -> 102.6 -> 88.66. Only the before/after measurement could have caught a
+  density change that reduced density.
+- **SURFACING UNMOVED AT 20 SPENDABLE - THE NINTH PACKET RUNNING.**
 
 ### 2026-08-08 -> THE DATE + THE LIVE PREVIEW (D1-D6) - sealed
 - **THE DATE IS ONE LINE AND THE ONE-LINE CLAIM WAS PROVED RATHER THAN REPEATED.**

@@ -7,7 +7,39 @@ tree, the live working tree wins — always.
 
 **Read this file FIRST in every session, before STATE.md, before any handoff.**
 
-**Last verified against live tree:** 2026-08-08 (THE DATE + THE LIVE PREVIEW —
+**Last verified against live tree:** 2026-08-08 (ATTACHMENTS + THE EMAIL-LIKE
+REGISTER — seven instructions, all answered, and **the first one is a boundary
+that governed two decisions the rest of the brief would have pushed the other
+way.** Gates: lint **11/9 = baseline** · build green · provenance **PASS** ·
+`reveal:check` **PASS** · `parity:gate` **PASS, 4 shared · 0 divergences** ·
+`instory:gate` **PASS** · `assets:orphans` **0** · `reveal:day` **nothing to
+move** · **the lap RAN at 390px and 1228px** on five routes, page overflow 0,
+uncontained past the edge 0, console errors 0. **THE RECORD IS EMAIL-LIKE AND IS
+NOT AN EMAIL PROGRAM** — Mike's own boundary, and what is borrowed is the
+register and the attachments-at-the-bottom convention and nothing else; a count
+badge and a per-row open control were both considered and refused as mail chrome.
+**S-c AND D-b CLOSE:** `wire`, `plates` and `docs` draw as ONE shape at the foot
+of a long-form entry — a small preview icon, a name, a line of detail — with the
+payload's own words (a transmission's lines, a document's extract) **inside** the
+row rather than behind it, because R4 binds this surface too. **AND "nothing
+drops silently ever again" IS A GATE:** `reveal:check` fails the packet by name
+on any entry field nothing renders, proved by breaking it. **A3 IS LAW —
+Doctrine 23** — plain Arial-class sans, bold at most, no display faces, no
+ornament; `--wb-plain` is a system stack and loads no font. **THE DENSITY IS
+MEASURED AND IT ANSWERS ONE HALF OF HIS COMPLAINT WITH NUMBERS AND THE OTHER WITH
+HIS OWN CHOICE OF FACE:** +11.1% lines per screen at both widths, the opened
+entry −6.8% at 1228px and −10.3% at 390px, index rows −4.9% to −16.6%, and
+**characters per line UNCHANGED at 70.8** — R4's 68ch survives by construction
+because `ch` is relative to the face. The one thing that moved against
+readability is the leading (1.62 → 1.45) and it is named, not buried (`A-a`).
+**A4's ANSWER IS THE SCOPING:** the index row is built from the SHARED
+`.vp-fe-*` classes, so every new rule sits inside `.vp-rec-index` and the bare
+rules are untouched — proved with a cascade probe in the live document (inside:
+Arial; outside: Syne and Fraunces, unmoved). **AND THE FIRST CUT MADE THE INDEX
+WORSE**: a padding rule reaching for density outranked `.vp-rec-row{padding:0}`
+and added fourteen pixels to every row (93.13 → 102.6 → 88.66). **Nothing was
+deployed.** Round log: `docs/MUSEUM_ATTACHMENTS_LOG-20260808.md`.)
+Previously 2026-08-08 (THE DATE + THE LIVE PREVIEW —
 six instructions, all six answered, and **one of them rests on a premise that is
 not true of this tree.** Gates: lint **11/9 = baseline** · build green ·
 provenance **PASS** · `reveal:check` **PASS** · `parity:gate` **PASS, 4 shared ·
@@ -796,6 +828,7 @@ The HR exhibit page is **two stacked components**. Mount chain:
 | **WHAT A RECORD ENTRY IS CHECKED AGAINST, AND THE INSTRUMENT THAT SAYS SO WHILE HE TYPES** (I2/I3, 2026-08-08) | `reveal/record-shape.mjs` — `RECORD_TITLE_MAX` (62), `RECORD_LINE_MAX` (130), `BUDGETS`, `FORMATS`, `CONSTRAINTS` (17 rows). Read by `tools/reveal-ledger.mjs` (the gate), `tools/dictation/worksheet.mjs` (the counters) and `reference.html#entry-shape` (the table). **MIKE'S RULING: *"the tool let him write a 477-character executive summary against a 130-character index budget and said nothing until a gate caught it three rounds later. He must never again discover a limit from a report."*** **FIVE THINGS A FUTURE SESSION MUST HOLD.** **(1) THE NUMBERS ARE IMPORTED, NEVER RETYPED.** They were module-private constants in a *script* that dispatches on `process.argv`, so the page he writes on could not read them — it retyped, imported side effects, or said nothing, and it said nothing. A counter carrying its own copy of a budget is a budget that quietly stops agreeing with its gate. **(2) THE DEFECT WAS A MISSING QUESTION, NOT ONLY A MISSING COUNTER.** `EXEC` is unbounded and correct; the constrained field is the index row's `line` and **the worksheet never asked for it at all.** A 130-character meter on `EXEC` would have policed a field with no limit and still never asked for the one that has one. **(3) IT WARNS; IT DOES NOT BLOCK.** No `maxlength` — an input that refuses the 131st character has made the decision for him mid-sentence. Counter, red sentence naming the command that will refuse the packet, a count in the fixed bar, and the over-limit number travels into the *copy everything* export. **(4) IT COUNTS WHAT WOULD BE SAVED**, not the raw value — `values()` strips trailing whitespace, and a meter that disagrees with the gate lies in the safest-looking direction. **(5) SIX OF THE SEVENTEEN CONSTRAINTS ARE `silent: true`** — breaking them produces no error anywhere. The worst is the date: anything but `YYYY-MM-DD` parses to nothing and the entry quietly loses its dateline, its week and its band. **`.limwarn` is NOT `.over`**: the warning's first class collided with the counter's own state class and hid the counter at exactly the moment it went over budget — found by the lap, not by reading source. |
 | **THE STORY RUNS ON REAL DATES, AND DAY ONE IS ONE CONSTANT** (D1, 2026-08-08) | `RECORD_EPOCH` in `src/data/artists/robots.js` (module scope, above `WBR_TRACKS`), read by Record 001's `date`, by the Record face's `recordEpoch`, and by `recordEpoch()` in `reveal/record-entries.mjs` for the worksheet's outline. **MIKE'S RULE, ABOVE THE DATE: *"THE STORY PLAYS OUT IN REAL TIME ON REAL DATES — an entry's date is the actual calendar day it is published, not a fictional offset."*** **FOUR THINGS A FUTURE SESSION MUST HOLD.** **(1) A SLIP IS ONE LINE, AND THAT IS A MECHANISM RATHER THAN A HABIT.** Day one is used twice; two literals holding one day is two fields, and the one that gets forgotten is whichever a slip does not make obviously wrong — a stale entry date reads wrong instantly, a week number that is one out reads fine forever. Proved: one date-shaped literal in the file, both consumers identifier references, and the half-updated case prints *"Week 2 · Monday · Record 001"* on day one with nothing reporting it. **(2) THE DATE IS PENDING THE LAUNCH** (`D-a`), and the worksheet generator **refuses to build** if the derived weekday disagrees with the outline's declared `MON…FRI` — ten day headlines are written for named weekdays, so a slip off Monday must be loud. **(3) WHAT IT TURNED ON:** the register stamp, the weekday, the week number and a three-part dateline. **WHAT IT DID NOT:** the month band — `shouldBand` wants fourteen entries across more than one month and the volume holds two (`C1`), so do not report banding as live. **(4) 013 IS STILL UNDATED BY B2's RULING** and prints `Record 013` alone; that is correct, not an omission. |
 | **THE LIVE PREVIEW — THE WORKSHEET DRAWS THE RECORD WITH THE RECORD'S OWN COMPONENTS** (D4–D6, 2026-08-08) | `tools/dictation/preview/` — `entry.jsx` (imports `RecordEntry.jsx`, `RecordIndexRow.jsx`, `src/index.css`, `src/routes/exhibit/Exhibit.css`), `vite.config.mjs`, `frame.html`, `README-fidelity.md`; built into `docs/dictation-20260807/_preview/` by `npm run dictation`, which **spawns** `node node_modules/vite/bin/vite.js` (§8: never `build()`). **MIKE: *"THE REQUIREMENT IS FIDELITY … a preview that approximates is worse than none, because he will trust it. If true fidelity means rendering the actual component, do that rather than reimplementing its look."*** **SIX THINGS A FUTURE SESSION MUST HOLD.** **(1) NOTHING MAY REDUCE THE FRAME'S WIDTH *OR* ITS HEIGHT.** The ramp is `clamp(1.02rem, min(1.35vw, **4.4cqh**), 1.28rem)` — it reads both axes. A bar above and an editor below left the frame 368px tall and the body drew at **15.3408px against the live 15.4031px**; the frame is now the whole window and both strips float over it. **(2) THAT IS ALSO WHY IT IS TWO VIEWS AND NOT A PANE** — a preview beside the form is at a different `vw`, hence a different size, measure and wrap. The choice is arithmetic, not taste. **(3) `RecordIndexRow.jsx` EXISTS ONLY FOR THIS** and must not drift back inline: half of what Mike writes lands in the index row, and a copy of that markup would go stale silently inside a preview he has been told to trust. **(4) THE ANCESTOR CHAIN IN `frame.html` IS THE ONE COPY** — eleven wrappers plus the default 22/78 split, read off the live page. It is what the fidelity note measures. **(5) THE EDITOR IS A PROXY**, writing through to the real textarea and firing its `input` event; a duplicate input with its own value is the *one question, two answers* defect that already cost this instrument a round. **(6) TWO BUILD TRAPS, BOTH LIVE.** `publicDir: false` is load-bearing — without it vite copies `public/held/`, the stage door's sixteen photographs, into `docs/`. And `define: {"process.env.NODE_ENV"}` is load-bearing — vite does not substitute it for a LIBRARY build, so the bundle carried both copies of React and would have thrown `process is not defined` on first render. |
+| **THE ATTACHMENTS, AND THE FIELD GATE UNDER THEM** (A1/A2, 2026-08-08 — Doctrine 23) | `attachmentsOf()` in `src/lib/record-model.js`; `src/routes/exhibit/RecordAttachments.jsx`; rendered by `RecordEntry.jsx` after the sections and **above** the tombstone; `.vp-rec-att-*` in `Exhibit.css`; `DRAWN_ENTRY_FIELDS` + `recordFieldFaults()` in `tools/reveal-ledger.mjs` and `entryFields()` in `reveal/record-entries.mjs`. **FIVE THINGS A FUTURE SESSION MUST HOLD.** **(1) ONE SHAPE, THREE KINDS** — a small preview icon, a name, a line of detail; the kind picks the glyph and nothing else. A transmission is ONE row (it is one printout on several lines), photographs are one row each. **(2) THE PAYLOAD'S OWN WORDS PRINT INSIDE THE ROW.** R4's no-hidden-information law binds this surface: a row that hid a transmission's lines behind itself is the half-sentence teaser Mike struck from the index, one level down. **(3) A GLYPH IS NOT A FAILURE STATE** — a document with no photograph of its page shows an outline and says *not here yet*, which is `docState`'s empty-and-honest discipline drawn. **(4) THE GATE IS THE HALF THAT SURVIVES THE NEXT FIELD.** `reveal:check` fails, by name, on any entry field nothing renders — because S-c was not a broken renderer, it was a renderer that could not SAY it did not know about three fields. Adding a field means teaching something to draw it or allow-listing it **with the ruling**; `evidence` is the one exemption and carries R5's. **(5) THE SHORT-FORM PATH STILL HAS ITS OLD SHAPES** and was deliberately not unified: it has zero payload instances, and `DocList` is also the face-level document renderer, so touching it reaches a neighbour. |
 | Exhibit data export | `src/data/exhibits/hunter_root.json` via `npm run export-artifacts` |
 | Spine adapter (stable ids) | `src/data/artists/hunter-root-spine.js` |
 | Taxonomy v1 canon (June 9) | `docs/taxonomy/` — TAXONOMY_v1, NORMALIZATION_MAP, COVERAGE_PROOF, RETAG_PLAN |
@@ -1388,6 +1421,57 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
     `reference.html#entry-shape`. **A constraint that no gate catches is marked
     `silent: true`** — six of the seventeen — because those are the expensive
     ones. Round log: `docs/MUSEUM_INDEX_LINE_LOG-20260808.md`.
+
+23. **THE RECORD'S REGISTER — EMAIL-LIKE, NOT AN EMAIL PROGRAM (Mike,
+    2026-08-08 — STANDING, the Record and anything that inherits it).**
+
+    > **"THE RECORD IS EMAIL-LIKE. IT IS NOT AN EMAIL PROGRAM. Do NOT build mail
+    > chrome — no From, no To, no Subject line, no reply affordances, no inbox,
+    > no message headers, no envelope furniture of any kind. What is borrowed is
+    > the REGISTER ONLY: the plainness and the attachments-at-the-bottom
+    > convention. Everything else stays what it is."**
+
+    > **"It is modern times inside the story, so the writing may look modern —
+    > but the aesthetic is a SMOOTH TRANSITION FROM THE 1960s WORLD by way of
+    > being EXTREMELY SIMPLE. Plain Arial-class sans, BOLD AT MOST, no display
+    > faces, no ornament, no editorial typography. It should read like an
+    > engineer writing a progress report or keeping a log."**
+
+    **THE BOUNDARY IS THE LOAD-BEARING HALF AND IT IS FIRST FOR THAT REASON.**
+    Two things were reached for while building the attachments and refused as
+    mail chrome: a count beside the ATTACHMENTS label, and a per-row open
+    control separate from the thumbnail. Neither is wrong as UI; both are a mail
+    client. The test is not *is it useful* — it is *would a mail program have
+    it*.
+
+    **THE FACE IS A SYSTEM STACK AND LOADS NOTHING.** `--wb-plain` in
+    `museum-tokens.css`: Arial first, literally. A designed face — even a plain
+    one this museum already loads — is a choice, and *extremely simple* is the
+    instruction. `--wb-read` and `--wb-serif` are untouched; every other surface
+    reads as it did.
+
+    **BOLD AT MOST IS A CEILING ON WEIGHT AND ON EVERYTHING ELSE.** No italic
+    (the tombstone lost its), no display step, no tracking beyond what stops
+    all-caps labels closing up.
+
+    **SCOPE, AND THIS IS THE PART A FUTURE ROUND WILL GET WRONG.** The Record's
+    index row is built from `.vp-fe`, `.vp-fe-title` and `.vp-fe-line`, which are
+    the **shared** entry-list classes — the FAQ, Worth A Listen and every face
+    that prints entries use them. **Every rule of this register is scoped inside
+    `.vp-rec-index` or targets a `.vp-rec-*` class.** Restyling a bare `.vp-fe-*`
+    rule retypes four faces to serve one. The check is a cascade probe: the same
+    class inside and outside a Record index must compute different families.
+
+    **AND THE MUSEUM'S CHROME IS NOT IN SCOPE.** The paper ground, the border,
+    the wing furniture and the register lines that are DATA rather than prose
+    (the dateline, the stamp, the index mark rail — still Courier Prime) were
+    left alone. When in doubt, change less; the boundary says everything else
+    stays what it is. The two open calls are `A-a`.
+
+    Mechanism: `--wb-plain`; the `.vp-rec-*` block and the `.vp-rec-index` block
+    in `Exhibit.css`; `RecordAttachments.jsx` + `attachmentsOf()`;
+    `DRAWN_ENTRY_FIELDS` in `tools/reveal-ledger.mjs`. Round log:
+    `docs/MUSEUM_ATTACHMENTS_LOG-20260808.md`.
 
 
 ## 8. Known hazards (environment quirks)

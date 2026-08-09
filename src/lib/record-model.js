@@ -172,6 +172,106 @@ export function evidenceOf(entry) {
   return out;
 }
 
+/* ======== [A1/A2 2026-08-08] THE ATTACHMENTS ==============================
+   MIKE'S RULING, and the boundary above it is the more important half:
+   **"THE RECORD IS EMAIL-LIKE. IT IS NOT AN EMAIL PROGRAM."** No From, no To,
+   no Subject, no reply, no inbox, no message headers. What is borrowed is the
+   REGISTER ONLY — the plainness, and the attachments-at-the-bottom convention.
+
+   So: **an entry may carry both authored sections and payloads, and the
+   payloads sit at the BOTTOM, after the writing.** Until today a long-form
+   entry drew `wire`, `plates` and `docs` nowhere at all and reported nothing
+   (S-c/D-b). This is the flattening that makes one list out of three fields.
+
+   ONE SHAPE, THREE KINDS, AND THE DATA IS THE ONLY DIFFERENCE — his words. A
+   photograph, a document and a transmission all become the same row: a small
+   preview, a name, a line of detail, and whatever text the payload itself
+   carries. The kind decides the glyph and nothing else.
+
+   WHY A TRANSMISSION IS ONE ROW AND NOT N. `wire` is a register of lines — it
+   is one object that happens to be written on several lines, the way a printout
+   is one printout. Ten plates are ten photographs; ten wire lines are one
+   transmission.
+
+   AND ITS LINES TRAVEL WITH IT RATHER THAN BEING HIDDEN BEHIND IT. R4's
+   no-hidden-information law binds this surface: nothing here collapses, pages,
+   truncates or hides behind a "more". A transmission's lines and a document's
+   extract are TEXT, so they print inside the row. An attachment row that
+   swallowed its own words to look tidy would be the teaser Mike struck from the
+   index, one level down.
+
+   `openable` IS COMPUTED HERE AND NOT GUESSED IN THE RENDERER, because "can
+   this be opened in the reader" is a fact about the payload (is there an image
+   on file), not a rendering choice. */
+export function attachmentsOf(entry) {
+  const out = [];
+  const e = entry || {};
+
+  if (Array.isArray(e.wire) && e.wire.length) {
+    out.push({
+      kind: "transmission",
+      name: "Transmission",
+      meta: e.wire.length + (e.wire.length === 1 ? " line" : " lines"),
+      lines: e.wire.slice(),
+      openable: false,
+    });
+  }
+
+  if (Array.isArray(e.plates)) {
+    e.plates.forEach((p, i) => {
+      if (!p) return;
+      out.push({
+        kind: "photograph",
+        /* the label if it has one; otherwise the file's own name, which is a
+           fact rather than a caption Ops made up for the row. */
+        name: p.label || fileNameOf(p.img) || "Photograph",
+        meta: p.date || "",
+        img: p.img || null,
+        openable: !!p.img,
+        set: e.plates,
+        index: i,
+      });
+    });
+  }
+
+  if (Array.isArray(e.docs)) {
+    e.docs.forEach((doc) => {
+      if (!doc) return;
+      const state = docState(doc);
+      const img = doc.scan
+        || (Array.isArray(doc.plates) && doc.plates.length ? doc.plates[0].img : null);
+      const bits = [];
+      if (doc.source) bits.push(doc.source);
+      if (doc.date) bits.push(doc.date);
+      if (doc.pages) bits.push(doc.pages + (doc.pages === 1 ? " page" : " pages"));
+      /* THE STATE IS ON THE ROW WHEN THERE IS NOTHING TO OPEN, and only then.
+         "held" beside a document you can open is noise; "held" beside one you
+         cannot is the whole of what the reader needs to know. */
+      if (state === "held") bits.push("not here yet");
+      out.push({
+        kind: "document",
+        name: doc.title || "Document",
+        meta: bits.join(" · "),
+        img,
+        openable: !!img,
+        extract: doc.extract || null,
+        note: doc.note || null,
+        set: Array.isArray(doc.plates) && doc.plates.length
+          ? doc.plates : (img ? [{ img, label: doc.title }] : null),
+        index: 0,
+      });
+    });
+  }
+
+  return out;
+}
+
+function fileNameOf(p) {
+  if (typeof p !== "string") return null;
+  const last = p.split("/").pop() || "";
+  return last || null;
+}
+
 /* A document's state, which is the honest half of "empty-and-honest".
    `imaged`   — there is a photograph of the page; it opens in the reader
    `quoted`   — no image yet, but words have been taken out of it
@@ -246,6 +346,6 @@ export function entryDateline(entry, epoch) {
 
 export default {
   entryDate, entryStamp, periodKey, periodLabel,
-  groupByPeriod, shouldBand, evidenceOf, docState,
+  groupByPeriod, shouldBand, evidenceOf, docState, attachmentsOf,
   entryWeekday, entryWeek, entryDateline,
 };
