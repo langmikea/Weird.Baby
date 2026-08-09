@@ -298,6 +298,36 @@ function recordProseFaults() {
   return faults;
 }
 
+/* ═══ [E2 2026-08-09] A NOTE TO OPS IS NOT STORY, AND IT IS REFUSED HERE ════
+   MIKE: *"Anything inside { } is a note to Ops, not story. They are written
+   inline where he writes them, they stay in his working copy, and OPS ACTS ON
+   THEM when it picks up the package. They must never reach a visitor."*
+
+   THIS IS THE HALF THAT RUNS ON EVERY PACKET. The other half is
+   `wb-ops-braces` in `vite.config.js`, which refuses a LAUNCH build on a brace
+   in any string literal under `src/`. This one is narrower and earlier: it walks
+   the RECORD, which is the one surface his notes are actually written on, and it
+   fails the packet rather than waiting for a launch that may be months away. A
+   note carried into `robots.js` by mistake is caught the same day.
+
+   `prose()` is the right reader for it: it already sees every sentence in the
+   Record, with `+` concatenations folded, and folding matters — a note split
+   across two source lines would be invisible to a plain grep for `{`. */
+function recordNoteFaults() {
+  const faults = [];
+  for (const s of recordProse()) {
+    for (const m of s.match(/\{[^{}]*\}/g) || []) {
+      faults.push(
+        `the Record carries a note to Ops in the data: ${m}\n` +
+        `    in: "${s.length > 120 ? s.slice(0, 117) + "…" : s}"\n` +
+        "    Curly braces are Mike writing to Ops, never story. Act on the note and\n" +
+        "    take it out of the entry; it stays in his working copy\n" +
+        "    (docs/dictation-20260807/record-draft.json), which is where he wrote it.");
+    }
+  }
+  return faults;
+}
+
 /* ═══ R1: THE ROWS AND THE ENTRIES ARE THE SAME SET ════════════════════════
    The rows are derived, so they cannot drift — unless somebody hand-edits
    ledger.json, which the README forbids and nothing enforced until now. It
@@ -601,6 +631,7 @@ function check() {
   const faults = [
     ...validate(ROWS),
     ...recordProseFaults(),
+    ...recordNoteFaults(),
     ...recordParityFaults(),
     ...recordBudgetFaults(),
     ...recordFieldFaults(),

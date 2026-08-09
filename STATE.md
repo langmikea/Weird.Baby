@@ -201,6 +201,54 @@ lead above his EXECUTIVE SUMMARY heading — shipped, not suppressed (`I-a`). `C
 is now the whole of what is left and **the worksheet finally asks for it**, in
 one format-checked box.
 
+## HE WRITES IN THE RECORD ITSELF (Mike, 2026-08-09 — STANDING)
+
+> **"The two-column worksheet is retired as his writing surface. HE EDITS THE
+> RECORD ITSELF, DIRECTLY — every part of it: headline, index line, executive
+> summary, sections, notes. NOT side by side. He must feel he is IN THE REAL
+> THING as much as feasible… it must be live, it must be the Record, and there
+> must still be a COPY BUTTON that hands the whole thing back to Ops in one
+> click."**
+
+Canonical: `docs/canonical/OPERATIONS.md` §5, THE RECORD EDITOR row.
+The page is `docs/dictation-20260807/record.html` (`npm run record`).
+
+**THERE IS NO EDITOR WIDGET.** It draws the museum's own `RecordEntry` and
+`RecordIndexRow` and makes the museum's own paragraphs `contenteditable`, so
+**there is no second copy of his text anywhere on the page** — which is the only
+thing that makes a copy button honest. **THE FIDELITY IS MEASURED, NOT ASSERTED:**
+at 390px the museum and the editor both compute `.vp-flat` **344.56px** and a body
+of **15.3408px**. **Nothing in the editor's own stylesheet may change the size or
+position of anything the museum draws** — the type ramp reads both viewport axes,
+so every control floats and the only box-model property applied to a museum
+element is `outline`.
+
+## NOTES TO OPS LIVE IN CURLY BRACES (Mike, 2026-08-09 — STANDING)
+
+> **"Anything inside { } is a note to Ops, not story. They are written inline
+> where he writes them, they stay in his working copy, and OPS ACTS ON THEM when
+> it picks up the package. They must never reach a visitor — the launch gate
+> fails on any brace that survives. The red/blue inline answers in the published
+> entry are retired; that was Ops answering in the wrong place."**
+
+Canonical: `OPS_BRACE` in `src/lib/visitor-prose.js`.
+
+**TWO GATES, BOTH PROVED BY BREAKING THEM:** `npm run reveal:check` on **every
+packet**, over every string in the Record; and `wb-ops-braces` on **every launch
+build**, over every string literal under `src/`. **The launch gate reads the
+SOURCE and not the bundle, and that is forced rather than chosen** — compiled
+JavaScript is made of braces — so what it cannot see is stated in the code rather
+than papered over. Measured the day it was written: `src/` holds **0** string
+literals containing `{…}`, so there is no exception list, and if one is ever
+needed that is a reason to change the mark rather than weaken the gate.
+
+**THE `[MIKE-NOTE]`/`[OPS]` SCHEME IS DELETED, NOT LEFT DORMANT** — the renderer
+branch, the two marks, four CSS rules, the source-emptying pass and the bundle
+grep written for it (Doctrine 16, Doctrine 24). **`[PAPA]` is untouched**: a
+different mechanism for a different thing. **His eight notes left `robots.js`
+whole and verbatim** and are in his working copy in braces, at the paragraph they
+followed.
+
 ## LEAD WITH WHAT HE MUST DO OR DECIDE (Mike, 2026-08-09 — STANDING)
 
 > **"Lead with what he must do or decide. Everything else is omitted unless it

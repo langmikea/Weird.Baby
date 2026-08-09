@@ -15593,59 +15593,10 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
   },
-  "eac794011caf50b8": {
-   "f": "src/data/artists/robots.js",
-   "l": 587,
-   "t": "[MIKE-NOTE] Robot, portal, ??, ??  (Claude - Get me some examples from the manual, etc)",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "d00b153e24a10628": {
-   "f": "src/data/artists/robots.js",
-   "l": 603,
-   "t": "[OPS] The manual is 61 pages of structure; every position reads [ TEXT REQUIRED ]. There are no examples yet. Ops is writing it; Mike reviews and edits.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — Ops' three answers, supplied in Mike's own round instruction of 2026-08-09 and carried word for word. They are Ops' knowledge in his relay; they render only in DEVELOPMENT and are stripped from a launch bundle by wb-ops-notes and wb-dev-mark-guard."
-  },
   "7a9356d413a858db": {
    "f": "src/data/artists/robots.js",
    "l": 593,
    "t": "Also, not \"words\", but suspiciously frequent text strings include:",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "545c0b2e932c0f3a": {
-   "f": "src/data/artists/robots.js",
-   "l": 595,
-   "t": "[MIKE-NOTE] MGK, PI,  (Claude - Get me some examples from the manual, etc)",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "c3746286129d02d2": {
-   "f": "src/data/artists/robots.js",
-   "l": 674,
-   "t": "[OPS] From the firmware and the twin's own screens: PORTAL, FEED, LATCH, ARM, BOOT, POST, BIST, SEG, CHECKSUM, ACK, SYN, AUX LINK, MEM TEST, VIDEO, NOMINAL, LISTENING, ERROR, READY, STANDBY, SANDBOX.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — Ops' three answers, supplied in Mike's own round instruction of 2026-08-09 and carried word for word. They are Ops' knowledge in his relay; they render only in DEVELOPMENT and are stripped from a launch bundle by wb-ops-notes and wb-dev-mark-guard."
-  },
-  "8859e4feb9f796fb": {
-   "f": "src/data/artists/robots.js",
-   "l": 601,
-   "t": "[MIKE-NOTE] RE:  (Claude - Get me some examples from the manual, etc)",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "ee2a0c1e51210d39": {
-   "f": "src/data/artists/robots.js",
-   "l": 607,
-   "t": "[MIKE-NOTE] Look for what we really do use a lot.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "2279599e73d3d6bb": {
-   "f": "src/data/artists/robots.js",
-   "l": 608,
-   "t": "[MIKE-NOTE] Look for sections of the documents that are \"true\", but not \"juicy\". It all has to come out at some point. Start dumping.",
    "c": "MIKE",
    "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
   },
@@ -15775,20 +15726,6 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
   },
-  "e3f7ed7ea185796e": {
-   "f": "src/data/artists/robots.js",
-   "l": 661,
-   "t": "[MIKE-NOTE] IMAGE - Device marked 'MGK-VIIIp' and '(need name of device)'",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "117aa1e9738e29be": {
-   "f": "src/data/artists/robots.js",
-   "l": 663,
-   "t": "[OPS] The first four devices HAVE NO NAMES YET. What exists: the personas (CEO, Informer, Gambler, Everyman) and unit numbers (-02, -07, -09). Whether the personas ARE the four units, or the units carry their own names, is unruled and is Mike's call.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — Ops' three answers, supplied in Mike's own round instruction of 2026-08-09 and carried word for word. They are Ops' knowledge in his relay; they render only in DEVELOPMENT and are stripped from a launch bundle by wb-ops-notes and wb-dev-mark-guard."
-  },
   "8e604439dd5d5ddf": {
    "f": "src/data/artists/robots.js",
    "l": 668,
@@ -15796,24 +15733,10 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
   },
-  "fa4f7c1d3c8f25d9": {
-   "f": "src/data/artists/robots.js",
-   "l": 670,
-   "t": "[MIKE-NOTE] ASCII - (Give me a list of the most common words Robots expects to use, pick the juicy ones - A more compete list  and analysis to be printed below in detail section.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
   "9065c862ef58b67c": {
    "f": "src/data/artists/robots.js",
    "l": 678,
    "t": "A new Volume has been created: /Robots/MGK-VIIIp",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "db63616cfb8d76ea": {
-   "f": "src/data/artists/robots.js",
-   "l": 679,
-   "t": "[MIKE-NOTE] containing the files referenced above. (That is how we get the album art and set up the Manual link)",
    "c": "MIKE",
    "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
   },
@@ -15830,18 +15753,6 @@
    "t": "/Robots - The data can be assembled to produce a heavily compressed file that is  password protected.",
    "c": "MIKE",
    "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "4cd53eca06958fd2": {
-   "f": "src/routes/exhibit/RecordEntry.jsx",
-   "l": 223,
-   "t": "OPS",
-   "c": "HOUSE"
-  },
-  "1877bc5a85dcac72": {
-   "f": "src/routes/exhibit/RecordEntry.jsx",
-   "l": 223,
-   "t": "NOTE TO MIKE",
-   "c": "HOUSE"
   }
  }
 }

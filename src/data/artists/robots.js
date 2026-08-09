@@ -584,30 +584,31 @@ const WBR_TRACKS = [
                     + "inspect the contents. No known Opcode library produced "
                     + "any favorable results, but we were able to read a few "
                     + "snippets of ASCII, including:",
-                    "[MIKE-NOTE] Robot, portal, ??, ??  (Claude - Get me "
-                    + "some examples from the manual, etc)",
-                    "[OPS] The manual is 61 pages of structure; every "
-                    + "position reads [ TEXT REQUIRED ]. There are no "
-                    + "examples yet. Ops is writing it; Mike reviews and "
-                    + "edits.",
                     "Also, not \"words\", but suspiciously frequent text "
                     + "strings include:",
-                    "[MIKE-NOTE] MGK, PI,  (Claude - Get me some examples "
-                    + "from the manual, etc)",
-                    "[OPS] From the firmware and the twin's own screens: "
-                    + "PORTAL, FEED, LATCH, ARM, BOOT, POST, BIST, SEG, "
-                    + "CHECKSUM, ACK, SYN, AUX LINK, MEM TEST, VIDEO, "
-                    + "NOMINAL, LISTENING, ERROR, READY, STANDBY, SANDBOX.",
-                    "[MIKE-NOTE] RE:  (Claude - Get me some examples from "
-                    + "the manual, etc)",
-                    "[OPS] The manual is 61 pages of structure; every "
-                    + "position reads [ TEXT REQUIRED ]. There are no "
-                    + "examples yet. Ops is writing it; Mike reviews and "
-                    + "edits.",
-                    "[MIKE-NOTE] Look for what we really do use a lot.",
-                    "[MIKE-NOTE] Look for sections of the documents that "
-                    + "are \"true\", but not \"juicy\". It all has to come out at "
-                    + "some point. Start dumping.",
+                    /* [E2 2026-08-09] FIVE OF HIS PARAGRAPHS AND THREE OF OPS'
+                       ANSWERS STOOD BETWEEN THESE TWO LINES AND THE ONE BELOW,
+                       AND THEY ARE OUT OF THE MUSEUM'S DATA ALTOGETHER.
+                       MIKE: notes to Ops live in curly braces, in his working
+                       copy, and "the red/blue inline answers in the published
+                       entry are retired; that was Ops answering in the wrong
+                       place."
+                       HIS FIVE MOVED WHOLE AND VERBATIM — not cut at a
+                       parenthesis, not split into a story half and a note half,
+                       not reworded — into `record-draft.json`, in the exact
+                       position he wrote them, each wrapped in the braces the new
+                       scheme uses. `tools/dictation/record-edit.mjs` carries
+                       them and he meets them again on the page he now writes on.
+                       WHAT IT COSTS IS SAID RATHER THAN HIDDEN: two of his own
+                       sentences above now end in a colon with nothing after
+                       them. That is the true state of this report — the examples
+                       he asked for do not exist yet — and inventing three lines
+                       to close a colon is the exact act Doctrine 12 refuses.
+                       OPS' THREE ANSWERS ARE NOT CARRIED ANYWHERE ON THE GLASS.
+                       They are quoted once in the round log that removed them,
+                       and the one of them that is genuinely his to rule on (what
+                       the first four devices are called) is a row in
+                       `docs/OPEN_ACTIONS.md`, not a paragraph in his report. */
                     "MONDAY DAY(0) - Weird.Baby Go-Live!",
                     "00:00 - The Go-Live went off without a hitch.",
                     "00:02 - Data stream ended",
@@ -658,27 +659,14 @@ const WBR_TRACKS = [
                   body: [
                     "Data has been extracted from weekend dump",
                     "IMAGE - Engineering Manual - Assorted pages",
-                    "[MIKE-NOTE] IMAGE - Device marked 'MGK-VIIIp' and "
-                    + "'(need name of device)'",
-                    "[OPS] The first four devices HAVE NO NAMES YET. What "
-                    + "exists: the personas (CEO, Informer, Gambler, "
-                    + "Everyman) and unit numbers (-02, -07, -09). Whether "
-                    + "the personas ARE the four units, or the units carry "
-                    + "their own names, is unruled and is Mike's call.",
                     "IMAGE - Assorted Evidence Based photos - Unknown "
                     + "Importance",
-                    "[MIKE-NOTE] ASCII - (Give me a list of the most common "
-                    + "words Robots expects to use, pick the juicy ones - A "
-                    + "more compete list  and analysis to be printed below in "
-                    + "detail section.",
-                    "[OPS] From the firmware and the twin's own screens: "
-                    + "PORTAL, FEED, LATCH, ARM, BOOT, POST, BIST, SEG, "
-                    + "CHECKSUM, ACK, SYN, AUX LINK, MEM TEST, VIDEO, "
-                    + "NOMINAL, LISTENING, ERROR, READY, STANDBY, SANDBOX.",
                     "A new Volume has been created: /Robots/MGK-VIIIp",
-                    "[MIKE-NOTE] containing the files referenced above. "
-                    + "(That is how we get the album art and set up the "
-                    + "Manual link)",
+                    /* [E2 2026-08-09] THREE OF HIS NOTES AND TWO OF OPS'
+                       ANSWERS CAME OUT OF THIS SECTION — same ruling and same
+                       treatment as Record 001's DETAILED REPORT above; read the
+                       note there for the whole of it. His three moved whole and
+                       verbatim into his working copy, in place, in braces. */
                   ] },
               ] },
             { no: 4,

@@ -4,7 +4,7 @@ import { cloudflare } from "@cloudflare/vite-plugin";
 import * as acorn from "acorn";
 import jsxPlugin from "acorn-jsx";
 import { stripVaultAudio } from "./src/data/exhibits/vault-audio.js";
-import { visitorProse, PAPA_MARK, DEV_MARK } from "./src/lib/visitor-prose.js";
+import { visitorProse, PAPA_MARK, OPS_BRACE } from "./src/lib/visitor-prose.js";
 import { publicLedger } from "./reveal/public-view.mjs";
 import { readStage } from "./reveal/stage.mjs";
 import { publicPlacements } from "./reveal/delivery.mjs";
@@ -146,9 +146,13 @@ const opsNotesStrip = {
     if (STAGE !== "launch") return null;
     const f = String(id).replace(/\\/g, "/");
     if (!/\/src\//.test(f) || !/\.(js|jsx)$/.test(f)) return null;
-    /* [L5 2026-08-09] the dev marks join the same pass, for the same reason:
-       a runtime filter stops the RENDER and still ships the MATERIAL. */
-    if (!PAPA_MARK.test(code) && !/\[(MIKE-NOTE|OPS)\]/.test(code)) return null;
+    /* [E2 2026-08-09] THE DEV MARKS ARE GONE FROM THIS PASS. They were folded in
+       here for one round; Mike retired the scheme, so the pass is back to the
+       one marker it was built for. A brace note is not stripped — it is
+       REFUSED, by `opsBraceGuard` below, because a brace in `src/` means Ops
+       carried a note into the museum's data by mistake and quietly deleting it
+       would hide that mistake. */
+    if (!PAPA_MARK.test(code)) return null;
 
     let ast;
     try {
@@ -178,7 +182,7 @@ const opsNotesStrip = {
       if (Array.isArray(n)) { n.forEach(walk); return; }
       if (!n.type) return;
       const s = fold(n);
-      if (s !== null && (PAPA_MARK.test(s) || DEV_MARK.test(s))) {
+      if (s !== null && PAPA_MARK.test(s)) {
         edits.push({ start: n.start, end: n.end, text: JSON.stringify(visitorProse(s)) });
         return;                       // do not descend into a node being replaced
       }
@@ -302,45 +306,86 @@ const heldChunkGuard = {
   },
 };
 
-/* ═══ [L5 2026-08-09] THE DEV MARKS DO NOT SURVIVE A LAUNCH BUILD, AND THIS IS
-       THE MECHANISM THAT CANNOT BE REASONED WRONG ══════════════════════════
-   MIKE: "THE COLOURED MARKERS MUST BE UNMISSABLE and must never survive to
-   launch - development-only, and the launch gate fails if any of it can reach a
-   visitor."
+/* ═══ [E2 2026-08-09] THE LAUNCH GATE FAILS ON ANY BRACE THAT SURVIVES ══════
+   MIKE: "Anything inside { } is a note to Ops, not story… They must never reach
+   a visitor — the launch gate fails on any brace that survives."
 
-   There are already two mechanisms — `RecordEntry.jsx` does not render a marked
-   paragraph at launch, and `wb-ops-notes` empties the literal in the source.
-   BOTH ARE THINGS SOMEBODY WROTE, and this house has shipped past that exact
-   pair four times: a runtime filter that stopped the render and shipped the
-   material (R5's 153 vault URLs, H1's ledger, V1's twenty-six addresses, N3's
-   35 markers). So the launch build READS ITS OWN OUTPUT and fails on a hit.
+   ═══ IT READS THE SOURCE AND NOT THE BUNDLE, AND THAT IS FORCED ════════════
+   The mark it replaces (`[MIKE-NOTE]`) was a string nothing else in a JavaScript
+   bundle could produce, so the guard written for it could grep the built chunks
+   — the strongest possible check, because it read the artefact itself. A CURLY
+   BRACE CANNOT BE CHECKED THAT WAY: compiled JavaScript is made of braces, and a
+   grep over `dist/` would match every function body in the museum. So this reads
+   what a brace note actually is — a STRING LITERAL under `src/` containing
+   `{…}` — off the parsed source, which is the only layer where the question is
+   answerable at all.
+   WHAT THAT COSTS, STATED: a note that reached a visitor-facing string through
+   some path other than a source literal (an interpolation, a JSON import) is not
+   seen here. `npm run reveal:check` covers the Record itself on EVERY packet,
+   which is the surface his notes are actually written on, and the two together
+   are the honest span. Neither is a bundle grep and neither pretends to be.
 
-   IT IS NOT A SEPARATE GATE ON PURPOSE. A gate somebody has to remember to run
-   is a gate that does not run; this is inside the one command that produces the
-   thing being checked, so a launch bundle carrying a marker cannot come into
-   existence. In DEVELOPMENT it does nothing — the marks are the point there. */
+   ZERO FALSE POSITIVES, MEASURED RATHER THAN HOPED. The day this was written,
+   `src/` held **0** string literals containing `{…}` — so there is no exception
+   list, and if one is ever genuinely needed that is a reason to change the mark
+   rather than to weaken the gate.
+
+   IT WALKS THE TREE FROM DISK IN `buildStart` rather than per-module, so it sees
+   a file even when nothing imports it: a note sitting in a module the bundler
+   tree-shook away is still a note somebody has to act on. */
 /* a real newline, built rather than escaped: this file has been broken twice by
    a patch script writing a two-character escape as one character (OPERATIONS §8) */
 const NL = String.fromCharCode(10);
-const devMarkGuard = {
-  name: "wb-dev-mark-guard",
-  generateBundle(_opts, bundle) {
+const opsBraceGuard = {
+  name: "wb-ops-braces",
+  async buildStart() {
     if (STAGE !== "launch") return;
-    const hits = [];
-    for (const [fileName, out] of Object.entries(bundle)) {
-      const text = out.type === "chunk" ? out.code
-        : typeof out.source === "string" ? out.source : null;
-      if (text === null) continue;
-      for (const m of text.matchAll(/\[(MIKE-NOTE|OPS)\]/g)) {
-        hits.push(`${fileName}  ${m[0]}  …${text.slice(Math.max(0, m.index - 40), m.index + 60).replace(/\s+/g, " ")}…`);
+    const fs = await import("node:fs");
+    const path = await import("node:path");
+    const root = path.join(process.cwd(), "src");
+    const files = [];
+    (function walk(d) {
+      for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+        const p = path.join(d, e.name);
+        if (e.isDirectory()) walk(p);
+        else if (/\.(js|jsx)$/.test(e.name)) files.push(p);
       }
+    })(root);
+
+    const hits = [];
+    for (const f of files) {
+      const code = fs.readFileSync(f, "utf8");
+      let ast;
+      try {
+        ast = acorn.Parser.extend(jsxPlugin()).parse(code, {
+          ecmaVersion: "latest", sourceType: "module", locations: true,
+        });
+      } catch (e) {
+        /* a file this pass cannot parse is a file it cannot clear */
+        this.error(`wb-ops-braces could not parse ${f}: ${e.message}`);
+        return;
+      }
+      (function visit(n) {
+        if (!n || typeof n !== "object") return;
+        if (Array.isArray(n)) { n.forEach(visit); return; }
+        if (!n.type) return;
+        if (n.type === "Literal" && typeof n.value === "string" && OPS_BRACE.test(n.value)) {
+          hits.push(`${path.relative(process.cwd(), f)}:${n.loc.start.line}  ${JSON.stringify(n.value).slice(0, 160)}`);
+          return;
+        }
+        for (const k of Object.keys(n)) {
+          if (k === "start" || k === "end" || k === "type" || k === "loc" || k === "range") continue;
+          visit(n[k]);
+        }
+      })(ast);
     }
     if (hits.length) {
       this.error(
-        "DEVELOPMENT MARKERS IN A LAUNCH BUNDLE — " + hits.length + " hit(s). "
-        + "These are Mike's notes to Ops and Ops' answers to him; neither may "
-        + "reach a visitor. Read the [L2/L5] headers in src/lib/visitor-prose.js "
-        + "and src/routes/exhibit/RecordEntry.jsx." + NL + "  " + hits.join(NL + "  ")
+        "A NOTE TO OPS IS IN THE LAUNCH BUILD — " + hits.length + " string literal(s) "
+        + "under src/ contain a curly-brace note. Anything inside { } is Mike writing "
+        + "to Ops, never story, and it must not reach a visitor: act on the note and "
+        + "take it out of the data. Read OPS_BRACE in src/lib/visitor-prose.js."
+        + NL + "  " + hits.join(NL + "  ")
       );
     }
   },
@@ -361,7 +406,7 @@ export default defineConfig({
       publicPaths: [...publicPlacements()].sort(),
     }),
   },
-  plugins: [hrVaultAudio, revealPublic, wbPlacement, opsNotesStrip, heldChunkGuard, devMarkGuard, react(), cloudflare()],
+  plugins: [hrVaultAudio, revealPublic, wbPlacement, opsNotesStrip, heldChunkGuard, opsBraceGuard, react(), cloudflare()],
   build: {
     rollupOptions: {
       output: {

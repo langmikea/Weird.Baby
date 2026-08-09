@@ -81,53 +81,10 @@ html { scrollbar-gutter: stable; }
 .wb-ops-note { margin: 0 0 6px; color: #d21c1c; }
 .wb-ops-note:last-child { margin-bottom: 0; }
 
-/* ═══ [L2/L5 2026-08-09] THE INLINE PAIR: HIS NOTE, THEN OPS' ANSWER ════════
-   MIKE: "his notes in red; Ops' answers in a second colour, clearly not his
-   voice. Both are development-only and neither may ever reach a visitor."
-
-   SAME REASONING AS THE BLOCK ABOVE AND THE SAME LITERALS. These sit INSIDE a
-   Record entry rather than beneath it — that is what "inline, so he can read
-   question and answer together" asks for — so they have to be even louder than
-   the block: the surrounding paragraphs are the museum's own voice at the
-   museum's own measure, and a quiet tint would read as an aside he wrote.
-   A left bar, a dashed edge, a tag, monospace, and a colour the palette does
-   not contain anywhere.
-
-   RED IS HIS AND ONLY HIS. Ops answers in BLUE, because the one thing that must
-   never happen is Ops' sentence being read next year as something Mike wrote —
-   the same failure the gold/blue rails on the dictation pages exist to prevent,
-   one surface further in.
-
-   `data-not-ux="1"` on both, so a lap can count them without knowing a class
-   name, and at LAUNCH the honest answer is zero. */
-.wb-dev-note {
-  position: relative;
-  margin: 10px 0;
-  padding: 8px 10px 8px 12px;
-  border: 1px dashed;
-  border-left-width: 4px;
-  border-left-style: solid;
-  font-family: 'Courier Prime', 'Courier New', monospace;
-  font-size: 12.5px;
-  line-height: 1.55;
-  white-space: pre-wrap;
-}
-.wb-dev-tag {
-  display: block;
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  margin-bottom: 4px;
-  opacity: .85;
-}
-.wb-dev-mike {
-  border-color: #d21c1c;
-  background: rgba(210, 28, 28, .07);
-  color: #d21c1c;
-}
-.wb-dev-ops {
-  border-color: #1668d2;
-  background: rgba(22, 104, 210, .08);
-  color: #1668d2;
-}
+/* [E2 2026-08-09] THE RED/BLUE INLINE PAIR IS RETIRED AND ITS FOUR RULES ARE
+   DELETED RATHER THAN LEFT DORMANT. Mike struck the arrangement — *"that was
+   Ops answering in the wrong place"* — and a stylesheet keeping a treatment
+   nothing renders is the museum carrying a ruling it has already lost
+   (Doctrine 16, Doctrine 24). His notes are curly braces in his working copy
+   now; see `src/lib/visitor-prose.js`, OPS_BRACE. The `[PAPA]` block above is
+   UNTOUCHED and is a different mechanism for a different thing. */

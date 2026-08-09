@@ -12,7 +12,7 @@
 
    So the material split in two and the split is the whole design:
 
-     worksheet.html   THE INSTRUMENT. Ops on the left, an input on the right,
+     [retired 2026-08-09]  worksheet.html WAS THE INSTRUMENT. Ops on the left, an input on the right,
                       in his reading order — the headline of headlines first,
                       then the map, then ten day blocks. It saves as he types
                       and gathers itself into plain text on one button.
@@ -118,7 +118,14 @@ function dayDate(weekN, dayN) {
   return { iso, dow: DOW3[dt.getUTCDay()] };
 }
 
-function checkOutlineDates() {
+/* THE TWO WEEKS THE OUTLINE DECLARES. It was a four-field row per week when
+   the worksheet built day blocks out of it; the guard below is its only reader
+   now, and a guard needs the week number and the days. */
+const WEEKS = [
+  { w: WEEK1, days: DAYS1 },
+  { w: WEEK2, days: DAYS2 },
+];
+export function checkOutlineDates() {
   if (!EPOCH) return ["the Record declares no `recordEpoch`, so no day can carry a date"];
   const bad = [];
   for (const { w, days } of WEEKS) {
@@ -132,138 +139,21 @@ function checkOutlineDates() {
   return bad;
 }
 
-/* ── THE SLOT MODEL ──────────────────────────────────────────────────────
-   One flat list, built once, used by the page, the map's mirrors and the
-   collector. Its ids are what Mike pastes back to Ops, so they are stable,
-   short and readable: W1.D3.EXEC, W2.D5.NOTES, ARC.W7.
-
-   [T1 2026-08-07] THE TWO WEEK-SUMMARY SLOTS ARE GONE FROM HERE AND THAT IS A
-   SUBTRACTION, NOT A MOVE OF CONVENIENCE. `W1.SUM` and `W2.SUM` asked for the
-   headline of weeks one and two; the twelve-week page asks for the headline of
-   all twelve, including those two. **A question asked on two pages gets two
-   answers**, and it is worse than that here — each page has its own
-   `localStorage` key, so neither can see the other's and nothing on either
-   would say they disagree. The week headlines live on `arc.html` now, both
-   pages say so, and this one is thirty slots of DAYS. */
-/* [I2 2026-08-08] A SLOT NOW DECLARES WHAT ITS ANSWER HAS TO FIT, AND THE
-   NUMBER IS IMPORTED RATHER THAN TYPED.
-   MIKE: *the tool let him write a 477-character executive summary against a
-   130-character index budget and said nothing until a gate caught it three
-   rounds later. He must never again discover a limit from a report.*
-
-   THE DEFECT WAS NOT ONLY A MISSING COUNTER — IT WAS A MISSING QUESTION.
-   `EXEC` asks for *the paragraph a reader gets if they read nothing else*,
-   which is unbounded and correct: it lands in a section of the entry and no
-   gate has an opinion about its length. The constrained field is a DIFFERENT
-   one — the index row's `line`, at most 130 characters — and the worksheet
-   never asked for it at all. So he wrote the paragraph, Ops had nothing to put
-   in the row, and the row is still empty three rounds later. Putting a
-   130-character meter on `EXEC` would have been the wrong fix twice over: it
-   would police a field that has no limit and still never ask for the field that
-   does. `LINE` is the fix; the meter is the other half.
-
-   THE ORDER IS THE READING ORDER AND IT IS DELIBERATE. Headline, then the one
-   sentence under it in the index, then the paragraph, then the sections —
-   shortest first, each one a longer version of the one above it, so the two
-   short constrained answers are written before the long unconstrained one
-   rather than distilled out of it afterwards.
-
-   `lim` IS EITHER A CEILING OR A SHAPE. `{max}` counts characters against an
-   imported budget; `{re}` matches a format. A field with no `lim` shows no
-   meter, and BOTH pages say that in one line so an absent counter reads as
-   "nothing to fit" rather than as an oversight. */
-const FIELDS = [
-  { k: "HEAD", label: "Headline", rows: 2,
-    ph: "your headline for this day",
-    lim: { max: BUDGETS.title.max,
-      says: "The index row gives the headline ONE line and nothing truncates "
-          + "any more, so a longer one overflows the row rather than clipping.",
-      gate: BUDGETS.title.enforcedBy } },
-
-  { k: "LINE", label: "The one sentence under it, in the index", rows: 2,
-    ph: "one sentence — this is the whole summary in the index, not a teaser",
-    note: "This is the field that was missing. It is the summary printed under "
-        + "the headline in the Record's index, it is the WHOLE summary (there "
-        + "is no ellipsis and no “more”), and with no separate lead on the "
-        + "entry it also draws as the opening paragraph when the record is "
-        + "opened. One sentence that can stand alone.",
-    lim: { max: BUDGETS.line.max,
-      says: "Your own rule: THE ENTIRE SUMMARY MUST FIT. The row holds two "
-          + "lines and nothing truncates, so a longer summary overflows it.",
-      gate: BUDGETS.line.enforcedBy } },
-
-  { k: "EXEC", label: "Executive summary", rows: 5,
-    ph: "the paragraph a reader gets if they read nothing else",
-    /* [L3 2026-08-08] THE CAPITALS RULE MOVED HERE OFF THE MASTHEAD. It is a
-       syntax he cannot discover from the box, so it belongs on the box — and
-       the seven paragraphs it used to sit inside were the thing he said he
-       never reads. Doctrine 25. */
-    note: "No limit, and that is not an oversight — this lands in a section of "
-        + "the entry, where the length of a section is a fact about the day. "
-        + "Write as much as the day is worth. It is <b>not</b> what the index "
-        + "row prints; that is the one sentence above. <b>A line on its own in "
-        + "CAPITALS starts a new section and becomes its heading</b>, exactly "
-        + "as you dictated Record 001 — <i>EXECUTIVE SUMMARY</i>, then "
-        + "<i>DETAILED REPORT</i>. No capitals line draws one run of paragraphs." },
-
-  { k: "NOTES", label: "Detailed sections, notes, etc.", rows: 5,
-    ph: "sections, order, what to include, what to cut",
-    /* [L3 2026-08-08] THE `ATTACH:` LINE MOVED HERE OFF THE MASTHEAD — same
-       reason as EXEC's capitals rule. AND THE OLD SECOND HALF WAS STALE: it
-       still said a payload beside sections is "silently dropped", which A0–A6
-       fixed on 2026-08-08. A note that describes a defect somebody repaired is
-       worse than no note. */
-    note: "No limit. Your approved container is <b>four to seven sections</b>, "
-        + "each holding one thought under a short all-caps label. <b>A line "
-        + "reading <code>ATTACH: what it is</code> puts an attachment at the "
-        + "foot of the entry</b>, under the writing — a photograph, a document "
-        + "and a transmission all draw as the same row, so you can see the room "
-        + "they take. Until Ops has the file the row says <i>not here yet</i> "
-        + "and draws an outline rather than inventing a picture." },
-];
-
-const WEEKS = [
-  { w: WEEK1, days: DAYS1, origin: W1_ORIGIN, id: "W1" },
-  { w: WEEK2, days: DAYS2, origin: W2_ORIGIN, id: "W2" },
-];
-
-/* [I3 2026-08-08] ONE SLOT THAT IS NOT A DAY, AND IT IS THE OTHER SHAPE OF
-   CONSTRAINT. Every other question on this page is answered in prose; this one
-   has an exact format (`YYYY-MM-DD`) and breaking it produces NO ERROR — the
-   entry renders, and silently has no dateline, no week number, no month band
-   and no target for a newspaper door. `entryDate()` returns null and nobody
-   reports it.
-
-   IT IS ONE SLOT AND NOT TEN. Ten days do not need ten dates: `entryWeek()`
-   counts from a declared epoch, so day one's calendar date derives every other
-   one, and asking ten times is nine chances for two of them to disagree with
-   each other. It is also the missing field in two standing rows (C8, and half
-   of S-b) — the only thing either has ever waited on. */
-const EPOCH_SLOT = {
-  id: "REC.EPOCH",
-  where: "DAY ONE — the calendar date the Record starts on (recordEpoch)",
-  ops: null,
-  lim: { re: FORMATS.date.pattern, says: FORMATS.date.says, why: FORMATS.date.why },
-};
-
-function slotList() {
-  const out = [EPOCH_SLOT];
-  for (const { w, days, id } of WEEKS) {
-    for (const d of days) {
-      for (const f of FIELDS) {
-        out.push({
-          id: `${id}.D${d.n}.${f.k}`,
-          where: `WEEK ${w.n} — day ${d.n} ${d.dow} — ${f.label.toLowerCase()}`,
-          /* only the one-line headline travels into the export; see the header */
-          ops: f.k === "HEAD" ? d.headline : null,
-          lim: f.lim || null,
-        });
-      }
-    }
-  }
-  return out;
-}
-
+/* [E1 2026-08-09] THE SLOT MODEL IS GONE, AND WITH IT FIFTY LINES DESCRIBING
+   IT. `FIELDS`, `EPOCH_SLOT` and `slotList()` were the four questions a day —
+   headline, the one sentence under it in the index, the executive summary, the
+   notes — plus day one's date, expressed as textarea slots on a two-column
+   page. Mike retired that page: he writes those four in the ENTRY now, so the
+   questions did not go away, THE BOXES DID, and `record.html` asks each one
+   where its answer lands. The live counters there read the same imported
+   `reveal/record-shape.mjs` these slots read, so the number he is warned
+   against is still the number the gate refuses.
+   TWO THINGS THE DELETED BLOCK SAID THAT ARE STILL TRUE AND STILL BIND:
+   a question asked on two pages gets two answers, in two stores, neither able
+   to see the other (T1) — which is why the week headlines are on `arc.html`
+   alone and the Record's fields are on `record.html` alone; and a limit is
+   WARNED, never blocked, because an input that eats the 131st character has
+   thrown away the rest of the thought (Doctrine 22). */
 /* ── PIECES ─────────────────────────────────────────────────────────────── */
 const opsMark = `<span class="ml">Ops</span>`;
 const yoursMark = `<span class="ml y">yours</span>`;
@@ -296,60 +186,12 @@ function pair(slotId, opsHtml, { rows = 2, ph = "", lim = null } = {}) {
 </div>`;
 }
 
-/* Ops' left-hand column, per field. THE `LINE` COLUMN IS EMPTY ON PURPOSE and
-   says so: Ops has a shape for the day and a list of topics, and neither is a
-   one-sentence summary. Drafting one would be picking his words for him, which
-   is the exact act the empty index row on Record 001 exists to refuse. */
-function opsColumn(f, d) {
-  if (f.k === "HEAD") return `<p class="hl">${esc(d.headline)}</p>`;
-  if (f.k === "EXEC") return `<p>${esc(d.shape)}</p>`;
-  if (f.k === "NOTES") return `<ul>${d.topics.map(t => `<li>${esc(t)}</li>`).join("")}</ul>`;
-  return `<p class="none">No Ops draft. The day&rsquo;s shape and its topics are in the two
-  boxes below; neither of them is a sentence, and turning one into a sentence for you is
-  the edit this field exists to avoid.</p>`;
-}
-
-function fieldBlock(slotId, f, d) {
-  return `<div class="fld"><div class="fh">${esc(f.label)}</div>
-${f.note ? `<p class="fnote">${f.note}</p>` : ""}
-${pair(slotId, opsColumn(f, d), { rows: f.rows, ph: f.ph, lim: f.lim })}
-</div>`;
-}
-
-/* THE PREVIEW BUTTON ON A DAY. It says what it will show rather than "preview",
-   because the thing worth knowing before pressing it is that this is not an
-   impression of the Record — it is the Record's own components at this window's
-   width. */
-function previewButton(weekId, w, d) {
-  const dt = dayDate(w.n, d.n);
-  return `<button type="button" class="pvgo" data-pv="${weekId}.D${d.n}"
-    title="see this day drawn by the museum's own components">See it on the page${
-    dt ? ` &middot; ${esc(dt.iso)}` : ""}</button>`;
-}
-
-function dayBlock(weekId, w, d) {
-  const beat = d.beat
-    ? `<div class="beat">&ldquo;${esc(d.beat)}&rdquo;${d.beat2 ? ` &nbsp;+&nbsp; &ldquo;${esc(d.beat2)}&rdquo;` : ""}
-       <span class="rail g">your words</span></div>`
-    : "";
-  const collide = d.collides
-    ? `<p class="flag">One thing before you write this one: <b>${esc(d.collides)}</b> &mdash;
-       this day is the only beat in either week that lands outside the transfer model's
-       own window. <a href="reference.html#collisions">what that means, and the three ways out &rarr;</a></p>`
-    : "";
-  return `<section class="day" id="${weekId}-D${d.n}">
-<div class="hd">
-  <span class="n">Week ${w.n} &middot; Day ${d.n} &middot; ${esc(d.dow)}</span>
-  ${previewButton(weekId, w, d)}
-  ${beat}
-</div>
-<div class="bd">
-${collide}
-${FIELDS.map(f => fieldBlock(`${weekId}.D${d.n}.${f.k}`, f, d)).join("\n")}
-</div>
-</section>`;
-}
-
+/* [E1 2026-08-09] `opsColumn()`, `fieldBlock()`, `previewButton()` and
+   `dayBlock()` ARE DELETED. They built one day of the retired two-column page:
+   Ops' draft on the left, a box on the right, and a button that opened the
+   preview overlay. The overlay is the page now — `record.html` renders the
+   museum's own components and lets him type into them — so a control that says
+   *see it on the page* has nothing left to mean. */
 /* ── THE WORKSHEET'S OWN STYLESHEET ──────────────────────────────────────
    Appended to OPS_CSS so the two pages are one family. Everything here is
    about the two-column form and nothing here restyles the shared shell. */
@@ -1121,192 +963,42 @@ function clientScript(slots, { key, banner, carry = null, preview = null, baked 
 /* ═══════════════════════════════════════════════════════════════════════════
    W1–W7 — THE WORKSHEET
    ═══════════════════════════════════════════════════════════════════════════ */
-/* THE OVERLAY. Bar, frame, editor — in that order, because the frame is the
-   thing and the two strips are furniture around it. */
-const PREVIEW_PANE = `<div class="pv" id="pv">
- <div class="pvbar">
-  <span class="pvwho" id="pvwho"></span>
-  <span class="pvnote">The index row, then the opened entry. Esc closes.</span>
-  <button type="button" id="pvprev">&lsaquo; Day</button>
-  <button type="button" id="pvnext">Day &rsaquo;</button>
-  <button type="button" id="pvx">Close &#10005;</button>
- </div>
- <p class="pvfail" id="pvfail"><b>The preview frame did not load.</b> It needs
-  <code>_preview/frame.html</code>, <code>_preview/preview.js</code> and
-  <code>_preview/preview.css</code> beside this page &mdash; run <code>npm run dictation</code>.
-  <b>Nothing you have typed is affected.</b></p>
- <iframe class="pvframe" id="pvframe" src="_preview/frame.html"
-         title="the Record entry as it will draw"></iframe>
- <div class="pvedit">
-  <div class="pvtabs" id="pvtabs"></div>
-  <textarea id="pvta" spellcheck="true"></textarea>
-  <div class="lim" data-lim="__pv"></div>
-  <p class="limwarn" data-over="__pv"></p>
- </div>
-</div>`;
+/* [E1 2026-08-09] `PREVIEW_PANE`, `readAnswers()` and `assertSlotsMatchPage()`
+   ARE DELETED WITH IT, and the two mechanisms are not lost — they are rebuilt
+   where the writing now happens, which is the only place they were ever doing
+   any work:
+     the PREVIEW OVERLAY became the page. `record.html` is the museum's own
+       chain with the museum's own components in it; there is no pane and no
+       iframe-inside-a-form left to open.
+     `readAnswers()` — baking his durable copy into the page so a wiped browser
+       still opens on his words — is `record-edit.mjs`'s seed, which reads the
+       LIVE Record rather than a JSON snapshot of it.
+     `assertSlotsMatchPage()` — OPERATIONS §8's rule that a generated page and
+       the list its script walks must be PROVED the same set — is the id check
+       at the foot of `record-edit.mjs`'s `build()`, which refuses to write a
+       page whose editor script addresses a control that is not on it.
+   Keeping a second dormant copy of either would be two answers to one
+   question, which is the defect these instruments keep paying for. */
+/* [E1 2026-08-09] `buildWorksheet()` IS DELETED, NOT LEFT DORMANT.
+   Mike retired the two-column worksheet as his writing surface: *"HE EDITS THE
+   RECORD ITSELF, DIRECTLY … NOT side by side."* Doctrine 24 — once it is ruled
+   gone it is gone from his view — and Doctrine 16 — a generator that still
+   builds a page nobody opens is a page somebody will open by accident.
 
-/* [U5 2026-08-09] THE DURABLE COPY OF HIS ANSWERS, IF THERE IS ONE.
-   Written by the worksheet's SAVE TO THE REPO button, or by
-   `node tools/dictation/rescue-import.mjs`. Absent is the normal state and is
-   not an error — the page simply has nothing to fall back on. It is READ ONLY
-   here: this generator never writes it, so a rebuild cannot damage it. */
-function readAnswers() {
-  const f = path.join(OUT_DIR, "answers.json");
-  try {
-    const j = JSON.parse(fs.readFileSync(f, "utf8"));
-    const a = j.answers && typeof j.answers === "object" ? j.answers : {};
-    const n = Object.keys(a).length;
-    if (n) console.log(`  baked ${n} answer(s) from ${path.relative(REPO_DIR, f)} into the worksheet`);
-    return a;
-  } catch { return {}; }
-}
+   WHAT SURVIVES IN THIS FILE IS EVERYTHING THE OTHER TWO PAGES USE. `pair()`,
+   `meter()`, `SHEET_CSS` and `clientScript()` are the arc table's as much as
+   they were the worksheet's, and `buildReference()` is untouched. So are the
+   two things that were the worksheet's alone and are worth keeping as
+   MECHANISMS rather than as pages — `assertSlotsMatchPage()`, which proved a
+   generated page and the list its script walks are the same set (OPERATIONS
+   §8), and `readAnswers()`, which bakes his durable copy into a page so a
+   wiped browser still opens on his words. `record-edit.mjs` does both jobs its
+   own way; these stay because the arc table is next in line for them.
 
-/* [U3 2026-08-09] THE EXPORT AND THE PAGE ARE THE SAME SET, PROVED AT BUILD.
-   Mike's report was an export of three slots from a page showing far more. The
-   two lists come off one generator and agreed even then — but nothing checked,
-   and "they happen to agree" is not a property, it is a coincidence that ends
-   the first time a round retires a field. This reads the rendered HTML back and
-   REFUSES to write a page whose textareas and whose SLOTS array are not the
-   same set, in both directions, with duplicates caught too. */
-function assertSlotsMatchPage(html, slots, who) {
-  const rendered = [...html.matchAll(/data-slot="([^"]+)"/g)].map(m => m[1]);
-  const declared = slots.map(s => s.id);
-  const missing = declared.filter(id => !rendered.includes(id));
-  const extra = rendered.filter(id => !declared.includes(id));
-  const dupes = rendered.filter((id, i) => rendered.indexOf(id) !== i);
-  const nl = String.fromCharCode(10);
-  if (missing.length || extra.length || dupes.length) {
-    throw new Error(
-      who + ": the export list and the rendered page disagree, so the copy "
-      + "button would export a different set from the one he is looking at." + nl
-      + (missing.length ? "  declared but not rendered: " + missing.join(", ") + nl : "")
-      + (extra.length ? "  rendered but not declared: " + extra.join(", ") + nl : "")
-      + (dupes.length ? "  rendered twice: " + dupes.join(", ") + nl : ""));
-  }
-  return rendered.length;
-}
-
-export function buildWorksheet() {
-  const slots = slotList();
-  const dateFaults = checkOutlineDates();
-  if (dateFaults.length) {
-    throw new Error("the outline's weekdays and the Record's epoch disagree:\n  "
-      + dateFaults.join("\n  ")
-      + "\nEvery day headline is written for a named weekday. Fix the epoch or the "
-      + "outline before this page tells Mike a Friday is a Wednesday.");
-  }
-  const previewDays = [];
-  for (const { w, days, id } of WEEKS) {
-    for (const d of days) {
-      const dt = dayDate(w.n, d.n);
-      previewDays.push({
-        id: `${id}.D${d.n}`,
-        where: `Week ${w.n} · Day ${d.n} · ${d.dow}${dt ? " · " + dt.iso : ""}`,
-        date: dt ? dt.iso : null,
-      });
-    }
-  }
-
-  const mapRow = (id, w, d) => `<div class="mr">
-  <span class="d">Day ${d.n} &middot; ${esc(d.dow)}</span>
-  <span class="o">${esc(d.headline)}<a class="j" href="#${id}-D${d.n}" title="go to the block">&darr;</a></span>
-  <span class="m" data-mirror="${id}.D${d.n}.HEAD"></span>
-</div>`;
-
-  const body = `<div class="wrap">
-
-<div class="mast">
-<h1>The worksheet</h1>
-<p class="lead"><b>Ops on the left, you on the right, and it saves as you type.</b>
-Ten days &mdash; start at the top and go as far as you want. <b>Copy everything</b> is
-in the bar at the bottom. <a href="reference.html">How any of this works &rarr;</a></p>
-</div>
-
-<div class="warn" id="warn"><b>This browser will not let the page save.</b> Nothing you
-type here will survive a reload. Press <b>copy everything</b> and paste it somewhere
-safe before you close the tab.</div>
-
-<h2>Day one&rsquo;s date</h2>
-<div class="day"><div class="hd"><span class="n">Record &middot; day one</span></div>
-<div class="bd">
-<div class="fld"><div class="fh">The calendar date</div>
-<p class="fnote"><b>It has an exact format and nothing complains when it is wrong.</b>
-${esc(FORMATS.date.says)} &mdash; anything else parses to nothing at all, and the entry
-still renders: it just quietly has no dateline, no week number and no month band. That
-silence is why this box checks the shape while you type.</p>
-${pair("REC.EPOCH",
-  `<p class="none">No Ops draft, and there cannot be one &mdash; a date is a fact and
-   Ops does not supply one. Record 001&rsquo;s own text has &ldquo;Monday morning&rdquo;
-   and &ldquo;FRIDAY DAY (-3)&rdquo;, which orders the report and does not date it.</p>`,
-  { rows: 1, ph: "2026-08-10", lim: EPOCH_SLOT.lim })}
-</div>
-</div></div>
-
-<h2>The map &mdash; every day, both weeks</h2>
-<p class="lead" style="margin-bottom:14px">Fills itself in from the blocks below. The
-arrow jumps to one.</p>
-${WEEKS.map(({ w, days, id }) => `<div class="map">
-<div class="mh">Week ${w.n} &middot; ${esc(w.headline)}</div>
-${days.map(d => mapRow(id, w, d)).join("\n")}
-</div>`).join("\n")}
-
-<h2>Week 1 &mdash; the five days</h2>
-${DAYS1.map(d => dayBlock("W1", WEEK1, d)).join("\n")}
-
-<h2>Week 2 &mdash; the five days</h2>
-<p class="lead" style="margin-bottom:16px">Each of these blocks opens with <b>your own
-words</b> in gold &mdash; the beat you wrote for that day, carried across character for
-character. Week one has none, because you spoke it and it was written down from the
-shape rather than quoted. Everything under the gold line is Ops&rsquo;.</p>
-${DAYS2.map(d => dayBlock("W2", WEEK2, d)).join("\n")}
-
-<h2 id="collector">Everything you have written</h2>
-<p class="lead" style="margin-bottom:14px">One press gathers every response into plain
-text and puts it on the clipboard. <b>Ops&rsquo; paragraphs are not in it</b> &mdash; only
-what you wrote, under a key for each slot, so it is short enough to read and paste.
-If the clipboard is refused, the text is selected below and Ctrl+C takes it.</p>
-<p style="margin:0 0 12px"><button class="cta" data-save="here">Save to the repo</button>
-<button class="cta alt" data-gather="here">Copy everything</button>
-<span id="says" class="k" style="margin-left:12px;font-size:12.5px"></span></p>
-<textarea id="out" readonly spellcheck="false"
- placeholder="press copy everything and your responses appear here"></textarea>
-
-<footer>Ops&rsquo; half of this page is built from <code>reveal/week-one.mjs</code> and
-<code>reveal/week-two.mjs</code> and is regenerated with <code>npm run dictation</code>
-&mdash; <b>which will not touch anything you have typed</b>, because your responses live
-in the browser and never in the file. The reference page carries where every left-hand
-line came from. Ops&#8209;to&#8209;Mike, ${STAMP}; not part of the museum.</footer>
-</div>
-
-<div class="cbar">
- <span class="st"><span id="stat"></span><span class="ovr" id="ovr"></span></span>
- <span>
-  <a href="arc.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">the twelve weeks &rarr;</a>
-  <a href="reference.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">reference &rarr;</a>
-  <button data-save="jump">Save to the repo</button>
-  <button data-gather="jump">Copy everything</button>
- </span>
-</div>
-${PREVIEW_PANE}
-${clientScript(slots, {
-    key: `wb.worksheet.${STAMP}`,
-    banner: "WEIRD.BABY MUSEUM - DICTATION WORKSHEET - MIKE'S RESPONSES",
-    baked: readAnswers(),
-    preview: {
-      epoch: EPOCH,
-      days: previewDays,
-      fields: FIELDS.map(f => ({ k: f.k, label: f.label })),
-    },
-  })}`;
-
-  const html = page({
-    title: `THE WORKSHEET — WEEKS ONE AND TWO — ${STAMP}`,
-    css: OPS_CSS + SHEET_CSS,
-    body,
-  });
-  assertSlotsMatchPage(html, slots, "the worksheet");
-  return html;
-}
+   THE FOUR QUESTIONS THE WORKSHEET ASKED are asked on `record.html` now — in
+   the entry itself, at the museum's own measure. `tools/dictation/prep.mjs`
+   prunes the emitted `worksheet.html` by name, because a generator that stops
+   writing a file does not unwrite it. */
 
 /* ═══════════════════════════════════════════════════════════════════════════
    T1 — THE TWELVE-WEEK HEADLINE TABLE
@@ -1368,7 +1060,7 @@ export function buildArc() {
   <p class="bnd">${bandTag(w)}</p>
   <p class="carried" data-carried="ARC.W${w.n}"></p>
   ${w.from ? `<p class="k" style="font-size:11.5px;margin:5px 0 0">Carried from <code>${esc(w.from)}</code>${
-    w.days ? ` &middot; ${w.days} days outlined &mdash; <a href="worksheet.html#W${w.n}-D1">write them &rarr;</a>` : ""}</p>` : ""}
+    w.days ? ` &middot; ${w.days} days outlined &mdash; <a href="record.html">write them &rarr;</a>` : ""}</p>` : ""}
   ${w.note ? `<p class="k" style="font-size:11.5px;margin:5px 0 0">${esc(w.note)}</p>` : ""}
 </div>
 <div class="c yours"><span class="ml y">yours</span><textarea data-slot="ARC.W${w.n}" rows="2"
@@ -1398,7 +1090,7 @@ ${c.also ? `  <p class="k" style="margin:0;font-size:12.5px">${esc(c.also)}</p>`
 <p class="lead"><b>Ops&rsquo; headline on the left, yours on the right, and it saves as you
 type. None of the twelve has a length limit</b> &mdash; a week headline is a heading on
 these pages and never becomes a field in the museum.
-<a href="worksheet.html">the ten days &rarr;</a> &middot;
+<a href="record.html">write the Record &rarr;</a> &middot;
 <a href="reference.html">how any of this works &rarr;</a></p>
 </div>
 
@@ -1453,7 +1145,7 @@ typed</b>. Ops&#8209;to&#8209;Mike, ${STAMP}; not part of the museum.</footer>
 <div class="cbar">
  <span class="st"><span id="stat"></span><span class="ovr" id="ovr"></span></span>
  <span>
-  <a href="worksheet.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">the ten days &rarr;</a>
+  <a href="record.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">write the Record &rarr;</a>
   <a href="reference.html" style="font-size:11.5px;color:var(--dim2);margin-right:14px">reference &rarr;</a>
   <button data-gather="jump">Copy everything</button>
  </span>
@@ -1537,7 +1229,7 @@ ${c.open ? `  <div class="mine"><span class="lbl">yours &middot; the decision</s
 </div></div>`;
 
   const body = `<div class="wrap">
-<p class="back"><a href="worksheet.html">&larr; back to the worksheet</a> &middot;
+<p class="back"><a href="record.html">&larr; back to the Record</a> &middot;
 <a href="index.html">the dictation prep</a> &middot; Ops&#8209;to&#8209;Mike, ${STAMP} &middot; not part of the museum</p>
 
 <h1>Reference</h1>

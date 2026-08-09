@@ -63,9 +63,15 @@ const DOCS = path.join(REPO, "docs");
    card so a stale instrument carries its own fix. `null` means the file is
    authored rather than generated. */
 const INSTRUMENTS = [
-  { name: "The worksheet",
-    file: "dictation-20260807/worksheet.html",
-    what: "32 slots, Ops on the left and your writing on the right. Saves as you type; one button copies the lot back to Ops.",
+  /* [E1 2026-08-09] THE WORKSHEET'S CARD IS THE RECORD'S CARD NOW. Mike retired
+     the two-column page as his writing surface — he edits the Record itself —
+     and Doctrine 24 says a thing he has ruled gone leaves the places he meets
+     it, the desk included. The file it pointed at is deleted by
+     `tools/dictation/prep.mjs`, and this desk refuses to draw a link to a file
+     that is not on disk, so leaving the card would have printed a red one. */
+  { name: "The Record",
+    file: "dictation-20260807/record.html",
+    what: "Write it in the Record itself — the museum's own page, your words in place, every part editable where it sits. { curly braces } are notes to Ops. One button hands the whole volume back.",
     rebuild: "npm run dictation",
     lead: true },
   { name: "The twelve-week table",

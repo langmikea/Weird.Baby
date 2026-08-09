@@ -1,11 +1,21 @@
 # RESCUE — get everything out of the browser and onto disk, now
 
-**Run this before anything else touches the worksheet.** It reads. It writes
+**Run this before anything else touches your writing.** It reads. It writes
 nothing, deletes nothing and changes nothing on the page.
+
+> **[E1 2026-08-09] The worksheet is retired and this snippet is not.** It takes
+> EVERY key in the browser store without filtering — which is the whole point of
+> a rescue — so it lifts the retired worksheet's answers (`wb.worksheet.…`), the
+> Record editor's own working copy (`wb.record.…`) and the twelve-week table's
+> (`wb.arc12.…`) in one press. Run it from **any** page in
+> `docs/dictation-20260807/`: on a `file://` page every local file shares one
+> storage origin, so they all see the same store.
+> **The ordinary road is now `Save to the repo` on the Record page**, which
+> writes `record-draft.json` directly. This is the road for when that fails.
 
 ## What to do
 
-1. Open **`docs/dictation-20260807/worksheet.html`** — the same window you have
+1. Open **`docs/dictation-20260807/record.html`** — the same window you have
    been writing in, on the same machine and the same browser.
 2. Press **F12**, click **Console**.
 3. Paste the block below and press Enter.

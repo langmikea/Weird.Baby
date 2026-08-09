@@ -1,36 +1,35 @@
 #!/usr/bin/env node
 /* ===========================================================================
-   EMIT-RECORD-ENTRIES — turn Mike's worksheet answers into Record entry source.
-   [L1-L4 2026-08-09]
+   EMIT-RECORD-ENTRIES — turn Mike's working copy of the Record into entry
+   source. [L1–L4 2026-08-09 · rewritten for the Record editor, E1 2026-08-09]
    ---------------------------------------------------------------------------
    THE ENTRIES ARE GENERATED RATHER THAN RETYPED, and that is the whole reason
-   this file exists. Record 001's landing proved its verbatim claim by slicing
-   the block back out of the source and comparing it to the dictation string by
-   string. This does the same thing one step earlier: the JS literals ARE the
-   rescued strings, cut into paragraphs by a rule, so there is no transcription
-   step for a character to go missing in.
+   this file exists. The literals it prints ARE the strings he typed, so there is
+   no transcription step for a character to go missing in — and `--verify`
+   proves it by reading the emitted source back and comparing, string by string,
+   to the draft it came from.
 
-   THE RULE FOR CUTTING A BOX INTO A SECTION, which is the worksheet's own
-   documented convention and not a new one:
-     · a line on its own in CAPITALS (with or without a trailing colon) starts a
-       section and is its LABEL;
-     · every non-empty line under it is one paragraph, in order;
-     · leading indentation is dropped, because HTML collapses it and Record 001
-       landed the same timeline without it — the alternative is inventing a
-       `white-space` rule for every record body (register S-e).
+   ═══ WHAT CHANGED, AND IT IS THE INPUT RATHER THAN THE IDEA ════════════════
+   It used to read `answers.json` — four textareas a day off the two-column
+   worksheet — and CUT each box into sections by the capitals rule, guessing
+   structure out of prose. Mike retired that page: he writes in the Record
+   itself now, so **the structure arrives already made.** A section is a section
+   because he made one, a paragraph is a paragraph because he pressed Enter, and
+   the whole cutting rule is gone from this file. It lives in
+   `reveal/record-shape.mjs`, where the editor's own migration still needs it
+   for text coming out of the old form.
 
-   HIS NOTES TO OPS TRAVEL, AND SO DO OPS' ANSWERS. Mike, 2026-08-09: "he needs
-   it all in one place... his bracketed notes and ?? placeholders go WITH them."
-   A paragraph that is one of his notes keeps every character and gains a
-   PREFIX — `[MIKE-NOTE] ` — and Ops' answer follows as its own paragraph
-   prefixed `[OPS] `. Both prefixes are markers for the renderer, not text: they
-   are stripped before drawing, coloured differently, shown ONLY in the
-   development stage, and deleted from the source at launch by `wb-ops-notes`.
-   **The characters after the prefix are byte-identical to what he wrote**, and
-   `--verify` proves it.
+   THE `[MIKE-NOTE]` / `[OPS]` MARKING IS GONE TOO. It prefixed his notes and
+   printed Ops' answers beneath them, in red and blue, in the published entry.
+   He struck the arrangement — *"that was Ops answering in the wrong place"* —
+   so a note is a curly brace in his working copy and this tool REFUSES to emit
+   one: braces are for Ops to act on before an entry lands, and an entry that
+   ships with one would fail `npm run reveal:check` and the launch build anyway.
+   Better to be told here, with the note quoted, than by a gate two steps later.
 
-     node tools/dictation/emit-record-entries.mjs           print the source
-     node tools/dictation/emit-record-entries.mjs --verify  prove it round-trips
+     npm run record:land                      print the source
+     npm run record:land -- --verify          prove it round-trips
+     npm run record:land -- --no <n>          just one record
    =========================================================================== */
 import fs from "node:fs";
 import path from "node:path";
@@ -38,121 +37,60 @@ import url from "node:url";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..", "..");
-const ANSWERS = path.join(REPO, "docs", "dictation-20260807", "answers.json");
+const DRAFT = path.join(REPO, "docs", "dictation-20260807", "record-draft.json");
 
-const A = JSON.parse(fs.readFileSync(ANSWERS, "utf8")).answers;
+const argv = process.argv.slice(2);
+const only = (() => { const i = argv.indexOf("--no"); return i >= 0 ? Number(argv[i + 1]) : null; })();
 
-/* ── OPS' ANSWERS, SUPPLIED BY MIKE IN THE ROUND INSTRUCTION ────────────────
-   Verbatim from the brief. Each is keyed by the exact question of his it
-   answers, so an answer can never drift onto the wrong ask. */
-const OPS_ANSWERS = {
-  manual:
-    "The manual is 61 pages of structure; every position reads [ TEXT REQUIRED ]. "
-    + "There are no examples yet. Ops is writing it; Mike reviews and edits.",
-  device:
-    "The first four devices HAVE NO NAMES YET. What exists: the personas (CEO, "
-    + "Informer, Gambler, Everyman) and unit numbers (-02, -07, -09). Whether the "
-    + "personas ARE the four units, or the units carry their own names, is unruled "
-    + "and is Mike's call.",
-  words:
-    "From the firmware and the twin's own screens: PORTAL, FEED, LATCH, ARM, BOOT, "
-    + "POST, BIST, SEG, CHECKSUM, ACK, SYN, AUX LINK, MEM TEST, VIDEO, NOMINAL, "
-    + "LISTENING, ERROR, READY, STANDBY, SANDBOX.",
-};
+if (!fs.existsSync(DRAFT)) {
+  console.error(`No working copy at ${path.relative(REPO, DRAFT)}.`);
+  console.error("");
+  console.error("It is written by the Save to the repo button on");
+  console.error("docs/dictation-20260807/record.html. If Mike has been writing and the");
+  console.error("file is not here, his words are in the browser store and");
+  console.error("tools/dictation/RESCUE.md is how they come out.");
+  process.exit(1);
+}
 
-/* WHICH OF HIS LINES IS A NOTE, AND WHICH ANSWER SITS UNDER IT.
-   Matched on an exact substring of his own line rather than on a pattern: a
-   heuristic that decided what counts as "a note to Ops" would eventually mark a
-   sentence of his story, and over-marking his prose is the one failure this
-   whole treatment exists to prevent. Every entry here was read off his text. */
-const NOTES = [
-  { has: "(Claude - Get me some examples from the manual, etc)", answer: "manual" },
-  { has: "(need name of device)", answer: "device" },
-  { has: "(Give me a list of the most common words Robots expects to use", answer: "words" },
-  { has: "Look for what we really do use a lot.", answer: null },
-  { has: 'Look for sections of the documents that are "true", but not "juicy".', answer: null },
-  { has: "(That is how we get the album art and set up the Manual link)", answer: null },
-];
-/* his second "examples" ask is a list of frequent STRINGS, so the word list is
-   what answers it — named here rather than resolved by order */
-const WORDS_INSTEAD = "MGK, PI,";
+const draft = JSON.parse(fs.readFileSync(DRAFT, "utf8"));
+const all = Array.isArray(draft.entries) ? draft.entries : [];
+const entries = only == null ? all : all.filter(e => e.no === only);
+if (!entries.length) { console.error(`nothing to emit${only == null ? "" : ` for record ${only}`}`); process.exit(1); }
 
-const isCapsLine = (l) => {
-  const t = l.trim().replace(/:$/, "");
-  return t.length > 2 && t === t.toUpperCase() && /[A-Z]/.test(t) && !/^\d/.test(t);
-};
-
-/** cut one worksheet box into sections */
-function sectionsOf(text) {
+/* ── EVERY STRING IN AN ENTRY, IN READING ORDER ───────────────────────────── */
+function strings(e) {
   const out = [];
-  let cur = null;
-  for (const raw of text.split(/\r?\n/)) {
-    const line = raw.replace(/\s+$/, "");
-    if (!line.trim()) continue;
-    if (isCapsLine(line) && !cur) { cur = { label: line.trim().replace(/:$/, ""), body: [] }; continue; }
-    if (!cur) cur = { label: null, body: [] };
-    cur.body.push(line.replace(/^\s+/, ""));
-  }
-  if (cur) out.push(cur);
+  for (const k of ["title", "line", "lead", "tomb", "stillCaption"]) if (e[k]) out.push([k, e[k]]);
+  (e.sections || []).forEach((s, i) => {
+    if (s.label) out.push([`section ${i + 1} heading`, s.label]);
+    (s.body || []).forEach((p, j) => out.push([`section ${i + 1}, paragraph ${j + 1}`, p]));
+  });
   return out;
 }
 
-/** mark his notes and drop Ops' answers in beside them */
-function annotate(body) {
-  const out = [];
-  for (const p of body) {
-    const hit = NOTES.find(n => p.includes(n.has));
-    if (!hit) { out.push(p); continue; }
-    out.push("[MIKE-NOTE] " + p);
-    let key = hit.answer;
-    if (key === "manual" && p.includes(WORDS_INSTEAD)) key = "words";
-    if (key) out.push("[OPS] " + OPS_ANSWERS[key]);
-  }
-  return out;
-}
-
-const DAYS = [1, 2, 3, 4, 5];
-const entries = [];
-for (const n of DAYS) {
-  const k = (f) => A[`W1.D${n}.${f}`];
-  const secs = [];
-  if (k("EXEC")) secs.push(...sectionsOf(k("EXEC")));
-  if (k("NOTES")) secs.push(...sectionsOf(k("NOTES")));
-  for (const s of secs) s.body = annotate(s.body);
-  entries.push({ no: n, day: n, title: k("HEAD") || null, line: k("LINE") || null, sections: secs });
-}
-
-if (process.argv.includes("--verify")) {
-  /* THE PROOF: strip the markers and the paragraphing back out and compare to
-     the rescued string, character for character. */
-  let bad = 0;
-  for (const e of entries) {
-    for (const f of ["EXEC", "NOTES"]) {
-      const src = A[`W1.D${e.day}.${f}`];
-      if (!src) continue;
-      const want = src.split(/\r?\n/).map(l => l.replace(/\s+$/, "").replace(/^\s+/, ""))
-        .filter(l => l.trim()).join("\n");
-      const secs = sectionsOf(src);
-      for (const s of secs) s.body = annotate(s.body);
-      const got = secs.flatMap(s => [
-        ...(s.label ? [s.label] : []),
-        ...s.body.filter(p => !p.startsWith("[OPS] ")).map(p => p.replace(/^\[MIKE-NOTE\] /, "")),
-      ]).join("\n");
-      /* his labels lose only a trailing colon, which the section renders as a
-         heading rather than as prose — recorded, not hidden */
-      const wantNoColon = want.split("\n").map((l, i) => i === 0 ? l.replace(/:$/, "") : l).join("\n");
-      const ok = got === wantNoColon;
-      if (!ok) { bad++; console.log(`MISMATCH W1.D${e.day}.${f}`); console.log("want:", JSON.stringify(wantNoColon).slice(0, 400)); console.log("got :", JSON.stringify(got).slice(0, 400)); }
-      else console.log(`  ok  W1.D${e.day}.${f}  ${src.length} chars -> ${secs.length} section(s), ${secs.reduce((a, s) => a + s.body.length, 0)} paragraph(s)`);
+/* ── THE NOTES ARE REFUSED, WITH THE NOTE QUOTED ─────────────────────────── */
+const notes = [];
+for (const e of entries) {
+  for (const [where, s] of strings(e)) {
+    for (const m of s.match(/\{[^{}]*\}/g) || []) {
+      notes.push(`Record ${String(e.no).padStart(3, "0")} · ${where}\n    ${m}`);
     }
-    if (e.title) console.log(`  ok  W1.D${e.day}.HEAD  ${JSON.stringify(e.title)}`);
-    if (e.line) console.log(`  ok  W1.D${e.day}.LINE  ${e.line.length} chars`);
   }
-  console.log(bad ? `\n${bad} MISMATCH(ES)` : "\nEVERY BOX ROUND-TRIPS: his characters are unchanged.");
-  process.exit(bad ? 1 : 0);
+}
+if (notes.length && !argv.includes("--with-notes") && !argv.includes("--verify")) {
+  console.error(`${notes.length} note(s) to Ops are still in this draft. Act on each one and`);
+  console.error("take it out of the entry before landing it — a curly brace is Mike writing");
+  console.error("to Ops, never story, and it must not reach the museum's data.\n");
+  for (const n of notes) console.error("  " + n);
+  console.error("\n(--with-notes emits anyway, and the packet gate will refuse it.)");
+  process.exit(1);
 }
 
-/* ── emit ─────────────────────────────────────────────────────────────────── */
+/* NOTE: --verify is a CHECK and not a landing, so it runs even with notes
+   still in the draft — the whole point of it is to prove the strings survive
+   the trip, and a draft with notes in it is the ordinary state of a draft. */
+
+/* ── VERIFY ──────────────────────────────────────────────────────────────── */
 const q = (s) => JSON.stringify(s);
 const wrap = (s, indent) => {
   /* one literal per paragraph, broken across lines only where a space allows,
@@ -168,19 +106,63 @@ const wrap = (s, indent) => {
   return parts.map(q).join("\n" + " ".repeat(indent) + "+ ");
 };
 
+/* THE PROOF, AND IT TESTS THE THING THAT CAN ACTUALLY GO WRONG. The risk in
+   this file is `wrap()`: it breaks a long string into a `+` chain, and a chain
+   that loses or doubles a space is a silent edit of his words. So the check
+   EVALUATES the emitted literal — `JSON.parse` on each piece, joined the way
+   JavaScript would join them — and compares to the source string. */
+function unwrap(text) {
+  const pieces = [];
+  const re = /"(?:[^"\\]|\\.)*"/g;
+  let m;
+  while ((m = re.exec(text))) pieces.push(JSON.parse(m[0]));
+  return pieces.join("");
+}
+
+if (argv.includes("--verify")) {
+  let bad = 0, n = 0;
+  for (const e of entries) {
+    for (const [where, s] of strings(e)) {
+      const got = unwrap(wrap(s, 20));
+      n++;
+      if (got !== s) {
+        bad++;
+        console.log(`MISMATCH Record ${e.no} ${where}`);
+        console.log("  want:", q(s).slice(0, 300));
+        console.log("  got :", q(got).slice(0, 300));
+      }
+    }
+    console.log(`  ok  Record ${String(e.no).padStart(3, "0")}  `
+      + `${(e.sections || []).length} section(s), `
+      + `${(e.sections || []).reduce((a, s) => a + (s.body || []).length, 0)} paragraph(s), `
+      + `${strings(e).length} string(s)`);
+  }
+  console.log(bad ? `\n${bad} of ${n} MISMATCHED` : `\nALL ${n} STRINGS ROUND-TRIP: his characters are unchanged.`);
+  process.exit(bad ? 1 : 0);
+}
+
+/* ── EMIT ────────────────────────────────────────────────────────────────── */
 const out = [];
 for (const e of entries) {
   out.push(`            { no: ${e.no},`);
-  out.push(`              date: recordDay(${e.day}),`);
-  if (e.title) out.push(`              title: ${q(e.title)},`);
+  /* the date is emitted as `recordDay(n)` and never as a literal — D1's
+     one-field rule: if the launch slips, ONE line moves and everything follows */
+  if (e.date) out.push(`              date: recordDay(${e.no}),`);
+  if (e.title) out.push(`              title: ${wrap(e.title, 20)},`);
   if (e.line) out.push(`              line: ${wrap(e.line, 20)},`);
+  if (e.lead) out.push(`              lead: ${wrap(e.lead, 20)},`);
+  if (e.still) out.push(`              still: placed(${q(e.still)}),`);
+  if (e.stillCaption) out.push(`              stillCaption: ${wrap(e.stillCaption, 20)},`);
   out.push(`              sections: [`);
-  for (const s of e.sections) {
+  for (const s of e.sections || []) {
     out.push(`                { ${s.label ? `label: ${q(s.label)},` : "label: null,"}`);
     out.push(`                  body: [`);
-    for (const p of s.body) out.push(`                    ${wrap(p, 20)},`);
+    for (const p of s.body || []) out.push(`                    ${wrap(p, 20)},`);
     out.push(`                  ] },`);
   }
-  out.push(`              ] },`);
+  out.push(`              ],`);
+  /* the tombstone closes the entry on the page, so it closes the object here */
+  if (e.tomb) out.push(`              tomb: ${wrap(e.tomb, 20)},`);
+  out.push(`            },`);
 }
 console.log(out.join("\n"));

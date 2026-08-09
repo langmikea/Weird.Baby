@@ -95,7 +95,8 @@ import { entries as recordEntries } from "../../reveal/record-entries.mjs";
 import { GOVERNED_PREFIX, STAGE_PREFIX } from "../../reveal/placement.mjs";
 import { ORIGIN as FOCUS_ORIGIN, runways, bucketOf } from "../../reveal/focus.mjs";
 import { STAMP, esc, rich, runwayBlock, OPS_CSS, TYPED_CSS, page, BACK } from "./shell.mjs";
-import { buildWorksheet, buildReference, buildArc } from "./worksheet.mjs";
+import { buildReference, buildArc, checkOutlineDates } from "./worksheet.mjs";
+import { buildRecordEditor } from "./record-edit.mjs";
 import { thumbnails, lightTable, LIGHT_CSS } from "./lighttable.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
@@ -496,16 +497,16 @@ function buildIndex(a, e) {
 
 <div class="cards" style="grid-template-columns:1fr;margin-bottom:14px">
 <div class="card" style="border-color:#6b5426">
-  <h4 style="font-size:17px"><a href="worksheet.html">The worksheet &rarr;</a></h4>
-  <p class="id">the ten days of weeks one and two</p>
-  <p>Ten day blocks, three fields each &mdash; a headline, an executive summary and
-  a notes field &mdash; with a map of all ten at the top that fills itself in as you
-  write. It saves as you type and gathers everything into plain text on one button.
-  <b>The weekly headlines are not on it</b>; they are all twelve together on the
-  page above.</p>
-  <p class="meta">Week two carries <b>your own words in gold</b> &mdash; the headline
-  and six beats, character for character. Week one carries none, because you spoke
-  it and it was written down from the shape rather than quoted.</p>
+  <h4 style="font-size:17px"><a href="record.html">The Record &rarr;</a></h4>
+  <p class="id">write it in the Record itself</p>
+  <p>The museum&rsquo;s own page, drawn by the museum&rsquo;s own components, with every
+  part of it editable where it sits &mdash; the headline, the index line, the lead, every
+  section heading and every paragraph, the tombstone. It saves as you type, and one
+  button hands the whole volume back to Ops.</p>
+  <p class="meta">Anything you write inside <b>{ curly braces }</b> is a note to Ops
+  rather than story. It stays in your copy, Ops acts on it, and the launch gate refuses
+  to ship one. <b>The two-column worksheet is retired</b>; everything it asked is asked
+  here, in the entry.</p>
 </div>
 </div>
 
@@ -560,14 +561,31 @@ function buildIndex(a, e) {
 <code>reveal/transfers.mjs</code>, <code>reveal/delivery.mjs</code>,
 <code>reveal/week-one.mjs</code>, <code>reveal/week-two.mjs</code> and
 <code>tools/dictation/spec-source.mjs</code>, and write nothing back to any of them.
-<b>Regenerating does not touch anything you have typed into the worksheet</b> &mdash;
-your responses live in the browser, never in the file.</footer>
+<b>Regenerating does not touch anything you have written in the Record</b> &mdash;
+your words live in the browser and in <code>record-draft.json</code>, never in the page.</footer>
 </div>`;
   return page({ title: `THE DICTATION PREP — ${STAMP}`, css: OPS_CSS, body });
 }
 
 /* ── WRITE ─────────────────────────────────────────────────────────────── */
 fs.mkdirSync(OUT, { recursive: true });
+
+/* [D5 2026-08-08, MOVED HERE E1 2026-08-09] THE WEEKDAY GUARD RUNS BEFORE
+   ANYTHING IS WRITTEN. Every day headline in the outline is written for a NAMED
+   weekday, and every date on these pages is arithmetic on the Record's own
+   epoch — so if the epoch moves and the outline does not, a page tells Mike a
+   Friday is a Wednesday and nothing else reports it. It used to live inside
+   `buildWorksheet()`; that page is retired, and a gate belongs at the top of the
+   run rather than inside one builder that might be the next thing deleted. */
+{
+  const dateFaults = checkOutlineDates();
+  if (dateFaults.length) {
+    throw new Error("the outline's weekdays and the Record's epoch disagree:\n  "
+      + dateFaults.join("\n  ")
+      + "\nEvery day headline is written for a named weekday. Fix the epoch or the "
+      + "outline before these pages tell Mike a Friday is a Wednesday.");
+  }
+}
 
 /* ── THE LIVE PREVIEW'S BUNDLE [D4 2026-08-08] ────────────────────────────
    The worksheet's preview renders the museum's OWN components, so it needs
@@ -616,7 +634,6 @@ const files = [
   ["artifacts.html", art.html],
   ["eggs.html", egg.html],
   ["arc.html", buildArc()],
-  ["worksheet.html", buildWorksheet()],
   ["reference.html", buildReference({ ledger: LEDGER, artifacts: art, eggs: egg, ruledOn: W1_RULED_ON })],
   ["index.html", buildIndex(art, egg)],
 ];
@@ -625,15 +642,32 @@ for (const [n, html] of files) {
   console.log(`  ${String(Math.round(Buffer.byteLength(html) / 1024)).padStart(4)} KB  ${path.relative(REPO, path.join(OUT, n))}`);
 }
 
+/* [E1 2026-08-09] THE RECORD EDITOR. It is written after the preview bundle
+   because it USES that bundle — it is the museum's own components with the
+   museum's own paragraphs made editable — and it is built here rather than only
+   by `npm run record` so that one command still refreshes everything Mike
+   opens. */
+buildRecordEditor();
+
 /* A GENERATOR THAT STOPS WRITING A FILE DOES NOT UNWRITE IT, AND A STALE PAGE
    IN THIS FOLDER IS WORSE THAN NO PAGE — every other document here links to
-   `index.html`, so an orphaned `week1.html` stays reachable by history, by a
-   bookmark and by anything that ever pasted its path. It is named rather than
-   globbed: this prunes what THIS round replaced and nothing else. */
-const REPLACED = ["week1.html"];
+   `index.html`, so an orphaned page stays reachable by history, by a bookmark
+   and by anything that ever pasted its path. It is named rather than globbed:
+   this prunes what a round REPLACED and nothing else.
+
+   [E1 2026-08-09] `worksheet.html` JOINS THE LIST. Mike retired it as his
+   writing surface — *"HE EDITS THE RECORD ITSELF, DIRECTLY… NOT side by side"*
+   — and Doctrine 24 says a thing he has ruled gone does not stay where he will
+   meet it again. Every question it asked is a field of a Record entry and is
+   asked on `record.html` now, in the entry itself; the one answer that was not
+   (`W1.SUM`, the week's own headline) has been on `arc.html` since the R round
+   and is carried there by that page's own CARRY. **His answers are not in the
+   page and were never in it** — they are in the browser store and in
+   `answers.json`, both of which the editor reads. */
+const REPLACED = ["week1.html", "worksheet.html"];
 for (const n of REPLACED) {
   const p = path.join(OUT, n);
-  if (fs.existsSync(p)) { fs.unlinkSync(p); console.log(`     -    removed  ${path.relative(REPO, p)}  (replaced by worksheet.html + reference.html)`); }
+  if (fs.existsSync(p)) { fs.unlinkSync(p); console.log(`     -    removed  ${path.relative(REPO, p)}  (replaced by record.html + reference.html)`); }
 }
 
 console.log(`\nTHE DICTATION PREP — ${files.length} files`);

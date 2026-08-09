@@ -71,39 +71,43 @@
 
 export const PAPA_MARK = /\[PAPA\]/;
 
-/* ═══ [L2/L5 2026-08-09] THE TWO INLINE MARKS, AND WHY THEY ARE NOT `[PAPA]` ══
-   MIKE: "where he asked Ops a question in the text, OPS' ANSWER GOES INLINE
-   beside it, in a distinct colour from his own note, so he can read question and
-   answer together. His notes in red; Ops' answers in a second colour, clearly
-   not his voice. Both are development-only and neither may ever reach a
-   visitor."
+/* ═══ [E2 2026-08-09] A NOTE TO OPS IS WRITTEN IN CURLY BRACES ═══════════════
+   MIKE: "Anything inside { } is a note to Ops, not story. They are written
+   inline where he writes them, they stay in his working copy, and OPS ACTS ON
+   THEM when it picks up the package. They must never reach a visitor — the
+   launch gate fails on any brace that survives."
 
-   `[PAPA]` CANNOT DO THIS AND THAT IS THE WHOLE REASON THERE ARE TWO SCHEMES.
-   A `[PAPA]` sentence is LIFTED OUT of the copy and printed in a block beneath
-   the surface (N3), because a note that is never inside the copy cannot be
-   mistaken for copy. These must stay exactly where he wrote them — his question
-   and Ops' answer, next to each other, in the middle of his own report — which
-   is the opposite arrangement and needs its own mark.
+   ═══ IT REPLACES THE `[MIKE-NOTE]` / `[OPS]` PAIR, WHICH IS RETIRED ═════════
+   For one round his notes drew in RED inside the published entry and Ops
+   answered beside them in BLUE. He struck it: *"that was Ops answering in the
+   wrong place."* An answer belongs in the package Ops picks up, not on the
+   museum's own glass — so the two marks, the two colours, the renderer branch
+   that drew them, the source-emptying pass and the bundle grep written for them
+   are all GONE rather than kept beside this (Doctrine 16, Doctrine 24). What
+   they were is recorded once, in the round log that removed them.
 
-   THEY ARE WHOLE-PARAGRAPH MARKS, NOT SENTENCE MARKS. A Record body is an array
-   of paragraphs; a marked paragraph is entirely a note or entirely an answer, so
-   there is no half-sentence question about what to cut. At LAUNCH the paragraph
-   does not render and the literal does not exist:
-     1. `RecordEntry.jsx` drops a marked paragraph when `launched()`.
-     2. `wb-ops-notes` in vite.config.js replaces the literal with "" at launch.
-     3. the launch build then greps its own chunks and FAILS if a mark survives.
-   Three mechanisms because parts 1 and 2 are the pair this house has shipped
-   past four times, and part 3 is the one that cannot be reasoned wrong. */
-export const DEV_MARK = /^\[(MIKE-NOTE|OPS)\]\s?/;
+   ═══ WHY THERE IS NO RUNTIME SCRUB HERE, AND IT IS THE WHOLE DESIGN ═════════
+   `[PAPA]` is a mark inside DATA THAT SHIPS, so it needs a render-seam filter.
+   A brace note is not in the data at all: it lives in Mike's working copy in
+   `docs/dictation-20260807/record-draft.json`, Ops reads it when it lands the
+   entry, and Ops takes it out. So this constant is not a scrubber — it is what
+   the two GATES match on, and its whole job is to make sure a brace that got
+   carried into `src/` by accident cannot ship:
+     1. `npm run reveal:check` fails the packet on a brace in any Record string.
+     2. `wb-ops-braces` in vite.config.js fails a LAUNCH build on a brace in any
+        string literal under `src/`.
+   Measured on this tree the day the rule was written: **zero** string literals
+   in `src/` contain `{…}`, so the gate has no false positive to tolerate and
+   never needs an exception list. If one is ever needed, that is a signal to
+   change the mark, not to weaken the gate.
 
-/** "MIKE-NOTE" | "OPS" | null — what kind of development-only mark this is */
-export const devMark = (s) => {
-  const m = typeof s === "string" ? DEV_MARK.exec(s) : null;
-  return m ? m[1] : null;
-};
+   NON-GREEDY AND BRACE-FREE INSIDE, so `{a} and {b}` is two notes rather than
+   one note swallowing the prose between them. */
+export const OPS_BRACE = /\{[^{}]*\}/;
 
-/** the paragraph without its mark. Byte-identical to what Mike typed. */
-export const devBody = (s) => typeof s === "string" ? s.replace(DEV_MARK, "") : s;
+/** every brace note in a string, in order — what Ops has to act on */
+export const opsBraces = (s) =>
+  typeof s === "string" ? (s.match(/\{[^{}]*\}/g) || []) : [];
 
 /** the block's own label, declared ONCE because two rooms print it (Doctrine
  *  17) — and a plain literal, because `provenance:gate` sweeps literals and a
@@ -115,9 +119,6 @@ export const OPS_NOTES_HEAD = "Not part of the UX · notes to Mike";
 const sentences = (s) => s.split(/(?<=[.!?])\s+/);
 
 export function visitorProse(s) {
-  /* [L5 2026-08-09] a development-only paragraph is not prose to be trimmed —
-     the whole string goes, and it goes from the SOURCE as well as the render */
-  if (devMark(s)) return "";
   if (typeof s !== "string" || !PAPA_MARK.test(s)) return s;
   return sentences(s)
     .filter(sentence => !PAPA_MARK.test(sentence))

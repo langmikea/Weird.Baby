@@ -1,0 +1,1198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>THE RECORD — write it here</title>
+<!-- ===========================================================================
+     THE PREVIEW FRAME. [D4 2026-08-08]
+     It is an IFRAME and that is the load-bearing decision, not a convenience.
+
+     THE MUSEUM'S TYPE SCALE IS A FUNCTION OF THE VIEWPORT:
+       --face-fs: calc(clamp(1.02rem, min(1.35vw, 4.4cqh), 1.28rem) * .94)
+     Every size on a face is a ratio of that, and every measure is in `ch` of
+     it — 68ch of body, 46ch of lead, 26ch of headline. So a preview is only
+     EXACT if it is laid out at the same viewport width the museum would have.
+     A pane sharing a page with the form is at some other width, which means a
+     different font-size, a different measure and different wrapping: the three
+     things Mike named. An iframe at the full window width has the museum's own
+     `vw`, and `1.35vw` resolves to the same number inside it.
+
+     THE CHAIN BELOW WAS READ OFF THE LIVE PAGE, NOT GUESSED. It is the eleven
+     elements `Exhibit.jsx` puts between `<body>` and an entry on the flat wing,
+     with the two inline styles the component sets — the default 22/78 split on
+     `.ex-main-inner` and `--fit-area-max` on `.ex-root`. Measured on the built
+     bundle at a 1280px viewport: `.ex-right` 963.3 · `.vp-face-body` 925.3 ·
+     `.vp-flat` 870.99. **This is the one part of the preview that is a copy and
+     can therefore drift**, so it is the part the lap measures against the real
+     page rather than the part it trusts. See `README-fidelity.md`.
+
+     `preview.css` is `src/index.css` + `src/routes/exhibit/Exhibit.css`
+     (which itself imports the tokens), built from those files — not a copy.
+     The Google Fonts link is the identical one in the museum's `index.html`;
+     without it Fraunces, Syne, DM Serif Display and Courier Prime all fall
+     back and the preview would be a lie about the one thing it is for.
+     =========================================================================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;1,400&amp;family=DM+Serif+Display:ital@0;1&amp;family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&amp;family=Fredoka:wght@400;500;600&amp;family=Geist:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="_preview/preview.css">
+<style>
+  /* The only rules that are NOT the museum's, and there are four.
+     Two make the frame a page (the wing's own background comes from the
+     museum's tokens on `.ex-root`, but the iframe's html/body need it too so a
+     short entry does not sit on white). One draws the hairline between the
+     index and the opened entry, which on the real page is the fact that they
+     are never on screen at the same time — here they are, stacked, and an
+     unmarked join would read as one surface. One is the empty state. */
+  html, body { background: var(--wb-bg, #f2efe6); }
+  .wbp-rule { height: 1px; background: var(--wb-border);
+              margin: calc(var(--face-fs, 18px) * 2.6) 0; }
+  .wbp-empty { font: 13px/1.6 -apple-system, "Segoe UI", system-ui, sans-serif;
+               color: #8a8478; padding: 26px; }
+</style>
+<style>
+/* ===========================================================================
+   THE RECORD EDITOR'S OWN STYLESHEET — and the ONLY rules on this page that are
+   not the museum's. [E1 2026-08-09]
+   ---------------------------------------------------------------------------
+   MIKE: *"HE EDITS THE RECORD ITSELF, DIRECTLY — every part of it… He must feel
+   he is IN THE REAL THING as much as feasible."*
+
+   SO THE FIRST RULE OF THIS FILE IS WHAT IT MAY NOT DO: nothing here may change
+   the SIZE OR POSITION of anything the museum draws. The type ramp is
+   `clamp(1.02rem, min(1.35vw, 4.4cqh), 1.28rem)` — a function of BOTH viewport
+   axes — so a bar that took height, or a padding that narrowed the column,
+   would change the font size, the measure and the wrap, which are the three
+   things the whole arrangement exists to show him truthfully. The D-round
+   measured that failure at 0.4%: invisible, wrong, and exactly the "nearly
+   right" he ruled out.
+
+   THEREFORE:
+     · every control is `position: fixed` and floats OVER the page;
+     · every editing decoration is a `::after` that is absolutely positioned and
+       `pointer-events: none`, so it occupies no space;
+     · the only box-model property applied to a museum element is `outline`,
+       which does not participate in layout;
+     · nothing sets a font on a museum element. Ever.
+   The lap measures `--face-fs` and `.vp-flat`'s width on this page against the
+   live museum, and a difference is a defect in this file.
+   =========================================================================== */
+
+/* ── THE BAR ─────────────────────────────────────────────────────────────────
+   At the BOTTOM, because the top of a Record is its dateline and headline and
+   he is reading those constantly. Fixed, so it takes no height from the chain;
+   `body` gets the padding instead, which lengthens the document and changes
+   nothing about the column. */
+body { padding-bottom: 92px; }
+
+.wb-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 9000;
+  display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center;
+  padding: 7px 10px;
+  background: #14140f; color: #efe9d8;
+  border-top: 1px solid #6b5c33;
+  font: 12px/1.35 -apple-system, "Segoe UI", system-ui, sans-serif;
+}
+.wb-bar b { font-weight: 700; }
+.wb-bar .sp { flex: 1 1 12px; }
+
+.wb-chip {
+  font: 11px/1 ui-monospace, "Courier New", monospace;
+  letter-spacing: .04em;
+  padding: 5px 7px; border-radius: 3px; cursor: pointer;
+  background: #262218; color: #cfc7b0; border: 1px solid #4a4433;
+}
+.wb-chip:hover { background: #332d20; color: #fff3d4; }
+.wb-chip[aria-pressed="true"] { background: #b8974a; color: #14140f; border-color: #b8974a; font-weight: 700; }
+.wb-chip.new { border-style: dashed; }
+.wb-chip.edited::after { content: " *"; color: #ffcf5c; }
+.wb-chip[aria-pressed="true"].edited::after { color: #3a2f0d; }
+
+.wb-act {
+  font: 11px/1 -apple-system, "Segoe UI", system-ui, sans-serif;
+  font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  padding: 7px 11px; border-radius: 3px; cursor: pointer;
+  background: #b8974a; color: #14140f; border: 1px solid #b8974a;
+}
+.wb-act.ghost { background: transparent; color: #cfc7b0; border-color: #6b5c33; }
+.wb-act:hover { filter: brightness(1.12); }
+
+.wb-say { flex: 1 1 100%; color: #cfc7b0; }
+.wb-say.bad { color: #ff8f8f; font-weight: 700; }
+.wb-say.good { color: #9fd98a; }
+
+.wb-meta { display: flex; gap: 6px; align-items: center; }
+.wb-meta input {
+  font: 11px/1 ui-monospace, "Courier New", monospace;
+  background: #0d0d09; color: #efe9d8; border: 1px solid #4a4433;
+  border-radius: 3px; padding: 5px 6px; width: 9em;
+}
+.wb-meta input.no { width: 4em; }
+.wb-meta input.bad { border-color: #ff8f8f; color: #ff8f8f; }
+.wb-meta label { color: #9b9482; letter-spacing: .05em; text-transform: uppercase; font-size: 10px; }
+
+/* ── WHAT IS EDITABLE, AND HOW IT SAYS SO ────────────────────────────────────
+   OUTLINE ONLY. A background tint on a paragraph would change what the page
+   looks like, which is the one thing this page is for. An outline is drawn
+   outside the box and moves nothing. */
+[data-wb-field] { outline: 1px dashed rgba(120, 105, 60, .38); outline-offset: 2px; }
+[data-wb-field]:hover { outline-color: rgba(120, 105, 60, .8); }
+[data-wb-field]:focus { outline: 2px solid #b8974a; outline-offset: 2px; }
+
+/* THE PLACEHOLDER, AND IT COSTS NO LAYOUT. `position:absolute` inside a
+   `position:static` museum element resolves against the nearest positioned
+   ancestor, which is fine: it is never in flow, so nothing moves. It is the
+   only way to say "this is the index summary" ON the field, which is where
+   Doctrine 25 says it has to be. */
+[data-wb-ph]::after {
+  content: attr(data-wb-ph);
+  position: absolute; pointer-events: none;
+  font: 11px/1.4 -apple-system, "Segoe UI", system-ui, sans-serif;
+  color: #a89a72; letter-spacing: .04em;
+  opacity: .95;
+}
+
+/* ── THE LIVE COUNT, ON THE FIELD (Doctrine 22) ──────────────────────────────
+   MIKE: *"he must never again discover a limit from a report."* It follows the
+   focused field, it counts what would be SAVED, and it says where there is no
+   limit. Fixed, so it never moves the page. */
+.wb-lim {
+  position: fixed; z-index: 9100; display: none;
+  font: 11px/1.3 ui-monospace, "Courier New", monospace;
+  padding: 4px 7px; border-radius: 3px;
+  background: #14140f; color: #cfc7b0; border: 1px solid #4a4433;
+  max-width: 46ch;
+}
+.wb-lim.on { display: block; }
+.wb-lim.near { border-color: #b8974a; color: #ffd97a; }
+.wb-lim.over { border-color: #ff8f8f; color: #ff8f8f; font-weight: 700; }
+
+/* ── A NOTE TO OPS, IN CURLY BRACES (E2) ─────────────────────────────────────
+   MIKE: *"Anything inside { } is a note to Ops, not story."*
+
+   IT IS PAINTED WITH THE CUSTOM HIGHLIGHT API AND NOT WITH A `<span>`, and that
+   is the load-bearing choice on this page. A span inside a contenteditable
+   paragraph is a node the caret can fall into, that a paste can split, and that
+   changes what `innerText` returns — which would make the highlight capable of
+   damaging the text it is highlighting. `CSS.highlights` paints RANGES: the DOM
+   is untouched, the text he typed is the text that is stored, and if the
+   browser does not support it the notes simply are not tinted and everything
+   else still works. */
+::highlight(wb-brace) { background: #ffe08a; color: #6b4a00; }
+
+/* the same mark in the paste box, where there is no highlight API to use */
+.wb-out { color: #cfc7b0; }
+
+/* ── THE PASTE BOX ───────────────────────────────────────────────────────────
+   Hidden until COPY EVERYTHING is pressed. It is here for the case the
+   clipboard write cannot be verified — the text is selected and Ctrl+C works
+   (OPERATIONS §8: a clipboard write is not done until it has been read back). */
+.wb-pastewrap {
+  position: fixed; left: 0; right: 0; bottom: 0; top: 0; z-index: 9500;
+  background: rgba(10, 10, 8, .93); padding: 16px; display: none;
+  flex-direction: column; gap: 8px;
+}
+.wb-pastewrap.on { display: flex; }
+.wb-pastewrap textarea {
+  flex: 1 1 auto; width: 100%;
+  font: 12px/1.45 ui-monospace, "Courier New", monospace;
+  background: #14140f; color: #efe9d8; border: 1px solid #6b5c33;
+  border-radius: 3px; padding: 10px; resize: none;
+}
+.wb-pastewrap .row { display: flex; gap: 8px; align-items: center;
+  font: 12px/1.4 -apple-system, "Segoe UI", system-ui, sans-serif; color: #cfc7b0; }
+
+/* ── THE BANNERS ─────────────────────────────────────────────────────────────
+   Two, and they are different kinds of thing. `wb-warn` is a FAILURE — storage
+   refused, or a field this editor could not find on the page. `wb-note` is the
+   migration report: what moved out of the old form and what was left. Both are
+   fixed and both can be dismissed. */
+.wb-warn, .wb-note {
+  position: fixed; left: 10px; right: 10px; top: 10px; z-index: 9200;
+  display: none; padding: 9px 12px; border-radius: 3px;
+  font: 12px/1.5 -apple-system, "Segoe UI", system-ui, sans-serif;
+}
+.wb-warn { background: #3a0d0d; color: #ffb4b4; border: 2px solid #d21c1c; }
+.wb-note { background: #14140f; color: #dfd6bb; border: 1px solid #6b5c33; }
+.wb-warn.on, .wb-note.on { display: block; }
+.wb-warn b, .wb-note b { display: block; margin-bottom: 3px; }
+.wb-note ul { margin: 5px 0 0 16px; }
+.wb-x { float: right; cursor: pointer; border: 0; background: none;
+        color: inherit; font: 700 14px/1 sans-serif; padding: 0 2px; }
+
+</style>
+</head>
+<body>
+<!-- The wing, exactly as Exhibit.jsx builds it above an entry. -->
+<div id="root">
+  <div class="ex-root visible" data-exhibit="robots" data-flat="1" style="--fit-area-max: 430px;">
+    <div class="ex-main">
+      <div class="ex-main-inner" style="grid-template-columns: minmax(0px, 22fr) 10px minmax(0px, 78fr);">
+        <!-- THE TRACKLIST COLUMN IS PRESENT AND EMPTY, ON PURPOSE. It is a grid
+             track: without an element in the first column the browser still
+             sizes the track, but `.ex-left`'s own padding and min-width are the
+             thing that decides where column three starts. An absent left column
+             is a different `.ex-right` width, which is a different measure. -->
+        <div class="ex-left" aria-hidden="true"></div>
+        <div class="vr-dh" aria-hidden="true"></div>
+        <div class="ex-right">
+          <div class="vp-area vp-area-flat vp-area-stowed">
+            <div class="vp-inner">
+              <div class="vp-face vp-face-text">
+                <div class="vp-face-body">
+                  <div class="vp-flat" id="mount">
+                    <p class="wbp-empty">Nothing written for this day yet.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="_preview/preview.js"></script>
+
+
+<div class="wb-warn" id="wb-warn"></div>
+<div class="wb-note" id="wb-note"></div>
+<div class="wb-lim" id="wb-lim"></div>
+
+<div class="wb-bar">
+  <span id="wb-chips" style="display:flex;gap:5px;flex-wrap:wrap"></span>
+  <span class="wb-meta">
+    <label for="wb-no">no</label><input id="wb-no" class="no" inputmode="numeric">
+    <label for="wb-date">date</label><input id="wb-date" placeholder="YYYY-MM-DD">
+  </span>
+  <span class="sp"></span>
+  <button type="button" class="wb-chip" data-wb-open="line">+ index line</button>
+  <button type="button" class="wb-chip" data-wb-open="lead">+ lead</button>
+  <button type="button" class="wb-chip" data-wb-open="section">+ section</button>
+  <button type="button" class="wb-chip" data-wb-open="tomb">+ tombstone</button>
+  <button type="button" class="wb-act ghost" id="wb-save">Save to the repo</button>
+  <button type="button" class="wb-act" id="wb-copy">Copy everything</button>
+  <span class="wb-say" id="wb-say"></span>
+</div>
+
+<div class="wb-pastewrap" id="wb-paste">
+  <div class="row"><b>The whole Record, as plain text.</b>
+    It is selected — press Ctrl+C if the button could not verify the clipboard.
+    <span style="flex:1"></span>
+    <button type="button" class="wb-act ghost" id="wb-pastex">Close &#10005;</button></div>
+  <textarea id="wb-out" class="wb-out" spellcheck="false"></textarea>
+</div>
+<script id="wb-record-config" type="application/json">{"key":"wb.record.2026-08-09","worksheetKey":"wb.worksheet.2026-08-07","draftFile":"docs/dictation-20260807/record-draft.json","epoch":"2026-08-17","datePattern":"^\\d{4}-\\d{2}-\\d{2}$","budgets":{"title":{"max":62,"says":"Nothing truncates any more, so a longer headline overflows the row instead of clipping."},"line":{"max":130,"says":"Your own R3 rule: THE ENTIRE SUMMARY MUST FIT. A summary that does not fit is not a summary."}},"carry":[{"slot":"W1.D1.HEAD","no":1,"field":"title"},{"slot":"W1.D1.LINE","no":1,"field":"line"},{"slot":"W1.D1.EXEC","no":1,"field":"sections"},{"slot":"W1.D1.NOTES","no":1,"field":"sections+"},{"slot":"W1.D2.HEAD","no":2,"field":"title"},{"slot":"W1.D2.LINE","no":2,"field":"line"},{"slot":"W1.D2.EXEC","no":2,"field":"sections"},{"slot":"W1.D2.NOTES","no":2,"field":"sections+"},{"slot":"W1.D3.HEAD","no":3,"field":"title"},{"slot":"W1.D3.LINE","no":3,"field":"line"},{"slot":"W1.D3.EXEC","no":3,"field":"sections"},{"slot":"W1.D3.NOTES","no":3,"field":"sections+"},{"slot":"W1.D4.HEAD","no":4,"field":"title"},{"slot":"W1.D4.LINE","no":4,"field":"line"},{"slot":"W1.D4.EXEC","no":4,"field":"sections"},{"slot":"W1.D4.NOTES","no":4,"field":"sections+"},{"slot":"W1.D5.HEAD","no":5,"field":"title"},{"slot":"W1.D5.LINE","no":5,"field":"line"},{"slot":"W1.D5.EXEC","no":5,"field":"sections"},{"slot":"W1.D5.NOTES","no":5,"field":"sections+"},{"slot":"W2.D1.HEAD","no":6,"field":"title"},{"slot":"W2.D1.LINE","no":6,"field":"line"},{"slot":"W2.D1.EXEC","no":6,"field":"sections"},{"slot":"W2.D1.NOTES","no":6,"field":"sections+"},{"slot":"W2.D2.HEAD","no":7,"field":"title"},{"slot":"W2.D2.LINE","no":7,"field":"line"},{"slot":"W2.D2.EXEC","no":7,"field":"sections"},{"slot":"W2.D2.NOTES","no":7,"field":"sections+"},{"slot":"W2.D3.HEAD","no":8,"field":"title"},{"slot":"W2.D3.LINE","no":8,"field":"line"},{"slot":"W2.D3.EXEC","no":8,"field":"sections"},{"slot":"W2.D3.NOTES","no":8,"field":"sections+"},{"slot":"W2.D4.HEAD","no":9,"field":"title"},{"slot":"W2.D4.LINE","no":9,"field":"line"},{"slot":"W2.D4.EXEC","no":9,"field":"sections"},{"slot":"W2.D4.NOTES","no":9,"field":"sections+"},{"slot":"W2.D5.HEAD","no":10,"field":"title"},{"slot":"W2.D5.LINE","no":10,"field":"line"},{"slot":"W2.D5.EXEC","no":10,"field":"sections"},{"slot":"W2.D5.NOTES","no":10,"field":"sections+"}],"shipped":[{"no":1,"date":"2026-08-17","title":"INITIAL LAUNCH REPORT - Weird.Baby","line":"Weird.Baby launched on schedule. The email server took an onslaught of unexplained data starting Friday.","sections":[{"label":"EXECUTIVE SUMMARY","body":["Congratulations!","Weird.Baby launched to the world at 12:00 am Monday morning, on schedule and on spec; the Weird.Baby website is live, a clean hand-off was made, and Operations has the ball.","Reportable Incident - The Weird.Baby email server has been subject to an onslaught of data that would appear to be unrelated to our primary mission. Full containment  was made to prevent disruptions of service prior to turning on the Weird.Baby website. The data continues to be received."]},{"label":"DETAILED REPORT","body":["FRIDAY DAY (-3)","15:00 - Weird.Baby email server goes public (scheduled early auto start)","15:01 - Weird.Baby email server BIST - PASS","15:14 - First data packet received","15:58 - Second data packet received","16:00 - Onslaught - Incoming data =  86% vs threshold","16:10 - Server auto-shutdown, auto containment. and auto alerts","16:13 - REACT - Team is convened","23:30 - REACT - RULING - Restart with 50x resources. Stress test.","The decision to resume was determined to be low risk, reversible, and we still did not know if the data was useful. The team was more intrigued than concerned.","SATURDAY DAY(-2) and SUNDAY DAY(-1)","Most of what has been received so far consists of pages of hexadecimal numbers; presumably data that needs to be compiled and assembled into something usable.","We ran some of the data through a ML Monitor to inspect the contents. No known Opcode library produced any favorable results, but we were able to read a few snippets of ASCII, including:","Also, not \"words\", but suspiciously frequent text strings include:","MONDAY DAY(0) - Weird.Baby Go-Live!","00:00 - The Go-Live went off without a hitch.","00:02 - Data stream ended","The remainder of the day was completely uneventful","Weird.Baby uptime - 100%, no further anomalies","We decided to stand up /Robots as a page (crowdsourcing potential)"]}]},{"no":2,"date":"2026-08-18","title":"GENERAL STATUS UPDATE","line":"Weird.Baby Integrity Management Plan remains on-track without anomalies.\nEmail Server Data Assault has ceased; no net impact.","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Blockers - Nothing to Report"]},{"label":null,"body":["All process controls are in good order.  Operations is turning the crank, keeping tings moving on cadence.","The adrenalin from the launch and the weekend has finally worn off; we are all running on fumes.  No time was spent on the mystery data stream, today."]}]},{"no":3,"date":"2026-08-19","title":"DATA EXTRACTED - Weekend Robots Anomaly","line":"Weird.Baby IMP - On-track without anomalies.\nEmail Server Data Assault - Password Protected File Structure (6.28 GB)","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Data has been extracted from weekend dump including images and text. While all of it appears compelling, it is currently of no known value."]},{"label":null,"body":["Data has been extracted from weekend dump","IMAGE - Engineering Manual - Assorted pages","IMAGE - Assorted Evidence Based photos - Unknown Importance","A new Volume has been created: /Robots/MGK-VIIIp"]}]},{"no":4,"date":"2026-08-20","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace"]}]},{"no":5,"date":"2026-08-21","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Transfer complete - Future reporting to come from Operations","/Robots - The data can be assembled to produce a heavily compressed file that is  password protected."]}]},{"no":13,"title":"The one thing that wasn't packed like the rest","line":"A sealed modern bag holding a USB-C adapter, packed unlike everything else that arrived with it. The unit is now on charge.","lead":"One item in the delivery was not packed the way the rest of it was packed. It is a USB-C adapter, sealed in a modern bag, and the unit is on charge because of it.","tomb":"The unit is drawing power.","still":"/robots/reference/photos/rear_power_switch.png","stillCaption":"The back of the unit.","sections":[{"label":"The bag","body":[]},{"label":"A conversation about the battery","body":[]},{"label":"It came on, briefly","body":[]},{"label":"On charge","body":[]}]}],"seed":[{"no":1,"date":"2026-08-17","title":"INITIAL LAUNCH REPORT - Weird.Baby","line":"Weird.Baby launched on schedule. The email server took an onslaught of unexplained data starting Friday.","sections":[{"label":"EXECUTIVE SUMMARY","body":["Congratulations!","Weird.Baby launched to the world at 12:00 am Monday morning, on schedule and on spec; the Weird.Baby website is live, a clean hand-off was made, and Operations has the ball.","Reportable Incident - The Weird.Baby email server has been subject to an onslaught of data that would appear to be unrelated to our primary mission. Full containment  was made to prevent disruptions of service prior to turning on the Weird.Baby website. The data continues to be received."]},{"label":"DETAILED REPORT","body":["FRIDAY DAY (-3)","15:00 - Weird.Baby email server goes public (scheduled early auto start)","15:01 - Weird.Baby email server BIST - PASS","15:14 - First data packet received","15:58 - Second data packet received","16:00 - Onslaught - Incoming data =  86% vs threshold","16:10 - Server auto-shutdown, auto containment. and auto alerts","16:13 - REACT - Team is convened","23:30 - REACT - RULING - Restart with 50x resources. Stress test.","The decision to resume was determined to be low risk, reversible, and we still did not know if the data was useful. The team was more intrigued than concerned.","SATURDAY DAY(-2) and SUNDAY DAY(-1)","Most of what has been received so far consists of pages of hexadecimal numbers; presumably data that needs to be compiled and assembled into something usable.","We ran some of the data through a ML Monitor to inspect the contents. No known Opcode library produced any favorable results, but we were able to read a few snippets of ASCII, including:","{Robot, portal, ??, ??  (Claude - Get me some examples from the manual, etc)}","Also, not \"words\", but suspiciously frequent text strings include:","{MGK, PI,  (Claude - Get me some examples from the manual, etc)}","{RE:  (Claude - Get me some examples from the manual, etc)}","{Look for what we really do use a lot.}","{Look for sections of the documents that are \"true\", but not \"juicy\". It all has to come out at some point. Start dumping.}","MONDAY DAY(0) - Weird.Baby Go-Live!","00:00 - The Go-Live went off without a hitch.","00:02 - Data stream ended","The remainder of the day was completely uneventful","Weird.Baby uptime - 100%, no further anomalies","We decided to stand up /Robots as a page (crowdsourcing potential)"]}]},{"no":2,"date":"2026-08-18","title":"GENERAL STATUS UPDATE","line":"Weird.Baby Integrity Management Plan remains on-track without anomalies.\nEmail Server Data Assault has ceased; no net impact.","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Blockers - Nothing to Report"]},{"label":null,"body":["All process controls are in good order.  Operations is turning the crank, keeping tings moving on cadence.","The adrenalin from the launch and the weekend has finally worn off; we are all running on fumes.  No time was spent on the mystery data stream, today."]}]},{"no":3,"date":"2026-08-19","title":"DATA EXTRACTED - Weekend Robots Anomaly","line":"Weird.Baby IMP - On-track without anomalies.\nEmail Server Data Assault - Password Protected File Structure (6.28 GB)","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Data has been extracted from weekend dump including images and text. While all of it appears compelling, it is currently of no known value."]},{"label":null,"body":["Data has been extracted from weekend dump","IMAGE - Engineering Manual - Assorted pages","{IMAGE - Device marked 'MGK-VIIIp' and '(need name of device)'}","IMAGE - Assorted Evidence Based photos - Unknown Importance","{ASCII - (Give me a list of the most common words Robots expects to use, pick the juicy ones - A more compete list  and analysis to be printed below in detail section.}","A new Volume has been created: /Robots/MGK-VIIIp","{containing the files referenced above. (That is how we get the album art and set up the Manual link)}"]}]},{"no":4,"date":"2026-08-20","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace"]}]},{"no":5,"date":"2026-08-21","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Transfer complete - Future reporting to come from Operations","/Robots - The data can be assembled to produce a heavily compressed file that is  password protected."]}]},{"no":13,"title":"The one thing that wasn't packed like the rest","line":"A sealed modern bag holding a USB-C adapter, packed unlike everything else that arrived with it. The unit is now on charge.","lead":"One item in the delivery was not packed the way the rest of it was packed. It is a USB-C adapter, sealed in a modern bag, and the unit is on charge because of it.","tomb":"The unit is drawing power.","still":"/robots/reference/photos/rear_power_switch.png","stillCaption":"The back of the unit.","sections":[{"label":"The bag","body":[]},{"label":"A conversation about the battery","body":[]},{"label":"It came on, briefly","body":[]},{"label":"On charge","body":[]}]}]}</script>
+<script>window.WBSections = function sectionsFromText(text) {
+  var out = [];
+  var cur = null;
+  var lines = String(text == null ? "" : text).split(/\r?\n/);
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i].replace(/\s+$/, "");
+    if (!line.trim()) continue;
+    var t = line.trim().replace(/:$/, "");
+    var letters = t.replace(/[^A-Za-z]/g, "");
+    if (letters && t === t.toUpperCase() && t.length > 2 && t.length <= 62 && !/^\d/.test(t)) {
+      if (cur) out.push(cur);
+      cur = { label: t, body: [] };
+      continue;
+    }
+    if (!cur) cur = { label: null, body: [] };
+    cur.body.push(line.replace(/^\s+/, ""));
+  }
+  if (cur) out.push(cur);
+  return out;
+};</script>
+<script>
+/* ===========================================================================
+   THE RECORD EDITOR — the browser half. [E1/E2 2026-08-09]
+   ---------------------------------------------------------------------------
+   MIKE, retiring the two-column worksheet: *"HE EDITS THE RECORD ITSELF,
+   DIRECTLY — every part of it: headline, index line, executive summary,
+   sections, notes. NOT side by side. He must feel he is IN THE REAL THING as
+   much as feasible… it must be live, it must be the Record, and there must
+   still be a COPY BUTTON that hands the whole thing back to Ops in one click."*
+
+   ═══ HOW THE ILLUSION IS ACHIEVED, SINCE HE SAID HE DOES NOT MIND ═══════════
+   There is no editor widget on this page. `WBPreview.render` draws the museum's
+   OWN `RecordEntry` and `RecordIndexRow` — the same modules `/robots` renders,
+   against the same stylesheets — and then this file walks the resulting DOM and
+   makes the museum's own paragraphs `contenteditable`. So what he types into IS
+   the museum's `<p class="vp-rec-sect-body">`, at the museum's type size, at the
+   museum's measure, wrapping the way the museum will wrap it. Nothing is
+   mirrored, approximated or re-implemented; there is no second copy of the text
+   anywhere on the page.
+
+   ═══ THE ONE RULE THAT KEEPS THE CARET ALIVE ════════════════════════════════
+   React holds a virtual copy of what it last rendered. While he is typing, the
+   DOM has moved on and React's copy has not — so **nothing re-renders while a
+   field has focus.** The model is updated on every keystroke (so a save or a
+   copy is never stale), and the tree is redrawn on BLUR, when React's stale text
+   and the new text differ and it can safely replace the node. Redrawing on
+   `input` would set `textContent` under the caret on every character.
+
+   ═══ WHY THE FIELDS ARE FOUND BY CLASS AND NOT BY A PROP ════════════════════
+   Marking them would mean adding attributes to two SHIPPED components for the
+   benefit of an Ops tool. The classes used below are the same ones `Exhibit.css`
+   targets — they are the stable contract of that markup, and a rename breaks the
+   museum's own stylesheet loudly. What a rename could still do is make a field
+   quietly uneditable, so `audit()` checks after every render that every field
+   the model holds actually found a node, and puts a red banner on the page if
+   one did not. A silent failure here is the one failure this instrument may not
+   have: he would type into a page that looked right and lose the words.
+   =========================================================================== */
+(function () {
+  "use strict";
+
+  var CFG = JSON.parse(document.getElementById("wb-record-config").textContent);
+  var mount = document.getElementById("mount");
+
+  /* ── STORAGE ──────────────────────────────────────────────────────────────
+     Probed rather than assumed. A browser that refuses storage must SAY SO in
+     red rather than lose an hour of typing quietly — the same rule the
+     worksheet was built to (U-round). */
+  var store = null;
+  try {
+    window.localStorage.setItem("wb.probe", "1");
+    window.localStorage.removeItem("wb.probe");
+    store = window.localStorage;
+  } catch { store = null; }
+
+  var elWarn = document.getElementById("wb-warn");
+  var elNote = document.getElementById("wb-note");
+  var elSay = document.getElementById("wb-say");
+  var elChips = document.getElementById("wb-chips");
+  var elLim = document.getElementById("wb-lim");
+  var elPaste = document.getElementById("wb-paste");
+  var elOut = document.getElementById("wb-out");
+  var elNo = document.getElementById("wb-no");
+  var elDate = document.getElementById("wb-date");
+
+  function warn(html) { elWarn.innerHTML = '<button class="wb-x" type="button">&times;</button>' + html; elWarn.className = "wb-warn on"; }
+  function note(html) { elNote.innerHTML = '<button class="wb-x" type="button">&times;</button>' + html; elNote.className = "wb-note on"; }
+  function say(msg, cls) { elSay.textContent = msg; elSay.className = "wb-say" + (cls ? " " + cls : ""); }
+  document.addEventListener("click", function (ev) {
+    if (ev.target && ev.target.className === "wb-x") ev.target.parentNode.className =
+      ev.target.parentNode.className.replace(" on", "");
+  });
+
+  if (!store) {
+    warn("<b>This browser refused local storage.</b> Nothing you type here is being "
+       + "saved automatically. Press <b>Save to the repo</b> often, or COPY EVERYTHING "
+       + "and paste it to Ops before you close the tab.");
+  }
+
+  /* ── THE MODEL ────────────────────────────────────────────────────────────
+     One array of entries and nothing else. `SHIPPED` is what `robots.js` holds
+     today and is never written to: it is what a `*` beside a record means, and
+     it is what tells Ops which entries actually need landing. */
+  var SHIPPED = CFG.shipped;
+  var entries = null;
+  var cur = 0;
+
+  function clone(v) { return JSON.parse(JSON.stringify(v)); }
+
+  function load() {
+    var saved = null;
+    if (store) { try { saved = JSON.parse(store.getItem(CFG.key) || "null"); } catch { saved = null; } }
+    if (saved && saved.entries && saved.entries.length) return saved.entries;
+    return clone(CFG.seed);
+  }
+  function save() {
+    if (!store) return;
+    try { store.setItem(CFG.key, JSON.stringify({ key: CFG.key, saved: new Date().toISOString(), epoch: CFG.epoch, entries: entries })); }
+    catch {
+      store = null;
+      warn("<b>This browser has stopped accepting saved work</b> (the store is full or "
+         + "was locked mid-session). Press COPY EVERYTHING or Save to the repo NOW — "
+         + "what is on the page is still complete.");
+    }
+  }
+  var saveTimer = null;
+  function saveSoon() { if (saveTimer) clearTimeout(saveTimer); saveTimer = setTimeout(function () { save(); stat(); }, 400); }
+
+  entries = load();
+
+  /* ── THE MIGRATION (E3/E4) ────────────────────────────────────────────────
+     MIKE: *"MIGRATE what is worth keeping from the old form INTO THE RECORD —
+     but ONLY INTO BLANK RECORDS. Never overwrite anything he has already
+     written. Say what moved and what was left."*
+
+     TWO SOURCES, AND THE SECOND IS THE POINT. The generator already folded the
+     durable `answers.json` into the seed. THIS runs against the worksheet's own
+     `localStorage` key, which on a `file://` page is the same store the
+     worksheet used — so anything he typed into the old form and never exported
+     is still reachable from here, in his own browser, and travels across
+     without him doing anything. That is the only place his most recent edits
+     can be: the copies on disk are byte-identical to the last landing.
+
+     BLANK MEANS BLANK. A field with any character in it is left alone; sections
+     move only into an entry that has NO sections at all, because merging a half
+     written body with a half written box is a decision no tool should make. */
+  function isBlank(v) { return v == null || String(v).trim() === ""; }
+
+  function migrate() {
+    if (!store) return;
+    var raw = null;
+    try { raw = JSON.parse(store.getItem(CFG.worksheetKey) || "null"); } catch { raw = null; }
+    if (!raw) return;
+    var moved = [], left = [];
+    CFG.carry.forEach(function (c) {
+      var text = raw[c.slot];
+      if (isBlank(text)) return;
+      var e = byNo(c.no);
+      if (!e) { left.push(c.slot + " — there is no Record " + pad(c.no) + " to move it into"); return; }
+      if (c.field === "sections") {
+        if (e.sections && e.sections.length) { left.push(c.slot + " — Record " + pad(c.no) + " already has sections"); return; }
+        e.sections = window.WBSections(text);
+        moved.push(c.slot + " → Record " + pad(c.no) + ", " + e.sections.length + " section(s)");
+      } else if (c.field === "sections+") {
+        var add = window.WBSections(text);
+        if (!add.length) return;
+        /* appended only where the entry's body came from the same migration —
+           never on top of something he wrote here */
+        if (!e.sections || !e.sections.length) { e.sections = add; moved.push(c.slot + " → Record " + pad(c.no) + ", " + add.length + " section(s)"); return; }
+        if (!e.__migrated) { left.push(c.slot + " — Record " + pad(c.no) + " already has sections written here"); return; }
+        e.sections = e.sections.concat(add);
+        moved.push(c.slot + " → Record " + pad(c.no) + ", " + add.length + " more section(s)");
+      } else {
+        if (!isBlank(e[c.field])) { left.push(c.slot + " — Record " + pad(c.no) + " already has a " + c.field); return; }
+        e[c.field] = text;
+        moved.push(c.slot + " → Record " + pad(c.no) + " · " + c.field);
+      }
+      e.__migrated = 1;
+    });
+    entries.forEach(function (e) { delete e.__migrated; });
+    if (!moved.length && !left.length) return;
+    save();
+    note("<b>" + moved.length + " answer(s) moved out of the old worksheet into blank records"
+       + (left.length ? ", and " + left.length + " were left where they were" : "") + ".</b>"
+       + "<ul>" + moved.map(function (m) { return "<li>moved: " + esc(m) + "</li>"; }).join("")
+       + left.map(function (m) { return "<li>left: " + esc(m) + "</li>"; }).join("") + "</ul>"
+       + "Nothing you had already written here was touched — a field with any "
+       + "character in it is never overwritten.");
+  }
+
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function pad(n) { return String(n).padStart(3, "0"); }
+  function byNo(n) { for (var i = 0; i < entries.length; i++) if (entries[i].no === n) return entries[i]; return null; }
+
+  /* ── THE ENTRY AS THE MUSEUM WANTS IT ─────────────────────────────────────
+     The model carries editing conveniences the component must never see — an
+     empty string for a field he has opened but not written yet, a section with
+     nothing in it. This strips them, so the page always draws the entry the
+     museum would draw. */
+  /* `has` AND `isBlank` ARE DIFFERENT QUESTIONS AND THE DIFFERENCE IS A SINGLE
+     SPACE. `isBlank` asks *is there anything written here* and decides whether a
+     field is thrown away on blur. `has` asks *does this field EXIST* and decides
+     whether the component draws it. A slot he has just opened holds one space:
+     blank, and it must still draw, or the `+` button appears to do nothing and
+     there is nothing on the page to click into. The first cut used `isBlank` for
+     both and `+ lead` was a button that did nothing — caught by writing into
+     every field, which is exactly what E5 asks for. */
+  function has(v) { return v != null && String(v) !== ""; }
+
+  function drawable(e) {
+    var out = { no: e.no };
+    if (has(e.date)) out.date = e.date;
+    out.title = e.title == null ? "" : e.title;
+    if (has(e.line)) out.line = e.line;
+    if (has(e.lead)) out.lead = e.lead;
+    if (has(e.tomb)) out.tomb = e.tomb;
+    if (e.still) { out.still = e.still; if (e.stillCaption) out.stillCaption = e.stillCaption; }
+    out.sections = (e.sections || []).map(function (s) {
+      var o = { label: has(s.label) ? s.label : null, body: (s.body || []).slice() };
+      if (!o.body.length) o.body = [" "];
+      return o;
+    });
+    return out;
+  }
+
+  /* ── RENDER ───────────────────────────────────────────────────────────────
+     One React root, re-rendered — never a fresh `createRoot` per edit, for the
+     reason `tools/dictation/preview/entry.jsx` states: a remount fires the
+     entry's mount effect and its `scrollIntoView` would fight him for the
+     scroll position while he writes. */
+  var wiring = 0;
+
+  /* ═══ THE CARET GUARD IS A QUESTION, NOT A FLAG, AND THAT IS THE FIX ═══════
+     The first cut kept a boolean set on `focusin` and cleared on `focusout`.
+     It deadlocked the page: `focusPath()` focuses a node, a later render
+     REPLACES that node, and a removed element fires no `focusout` — so the flag
+     stayed true forever and every subsequent render was skipped in silence. The
+     symptom was three buttons that appeared to do nothing while the model
+     behind them was updating perfectly, which is the worst shape a defect can
+     take on an instrument somebody is trusting with their writing.
+     `document.activeElement` cannot get stuck, because it is the browser's
+     answer rather than ours. */
+  function inField() {
+    var a = document.activeElement;
+    return !!(a && a.getAttribute && a.getAttribute("data-wb-field") != null);
+  }
+
+  /* A STRUCTURAL EDIT MUTES THE COMMIT-ON-BLUR. Splitting a paragraph moves the
+     text out from under the node it was in, so the blur that follows would
+     write a stale string back over a model that has already moved on — and for
+     a merge it would write it into the WRONG index, since the array has been
+     spliced. It is a flag, deliberately, and it is the only one: it is set and
+     cleared inside one synchronous block, so it cannot be left standing the way
+     the focus flag was. */
+  var muted = false;
+
+  /* ═══ REACT 19 COMMITS WHEN IT IS READY, SO THE WIRING WAITS FOR IT ═════
+     `root.render()` returns before the DOM has changed. The first version of
+     this file wired immediately, found none of the thirty-two fields, and put
+     a red banner on a page that was in fact perfect — ask a zero what it can
+     see. So the wiring waits for a tick in which the entry has actually been
+     drawn, and only warns after a generous number of them.
+
+     IT IS A TIMER AND NOT `requestAnimationFrame`, AND THE 390px LAP IS WHY.
+     rAF does not fire at all in a tab that is not being painted. Measured:
+     the editor loaded in a background frame drew its entry correctly and then
+     never wired a single field — an uneditable page, with no error anywhere,
+     in exactly the situation nobody tests (open it in a second tab, come back
+     to it later). A timeout is throttled in the background; it still runs.
+     Correctness must not depend on the page being looked at. */
+  function afterPaint(fn, tries) {
+    var painted = mount.querySelector(".vp-rec-headline") || mount.querySelector(".vp-rec-sects");
+    if (painted || tries <= 0) { fn(!painted); return; }
+    window.setTimeout(function () { afterPaint(fn, tries - 1); }, 16);
+  }
+  function render(then) {
+    if (inField()) return;                     // never redraw under the caret
+    window.WBPreview.render(mount, drawable(entries[cur]), CFG.epoch);
+    var seq = ++wiring;
+    window.setTimeout(function () { afterPaint(function (neverPainted) {
+      if (seq !== wiring) return;              // a later render has overtaken this one
+      if (neverPainted) {
+        warn("<b>The museum's own components did not draw.</b> This page needs "
+           + "<code>_preview/preview.js</code> and <code>_preview/preview.css</code> beside it "
+           + "&mdash; run <code>npm run dictation</code>. <b>Nothing you have written is affected</b>: "
+           + "it is in this browser and in the file you last saved.");
+        return;
+      }
+      wire();
+      chips();
+      stat();
+      if (then) then();
+    }, 60); }, 0);
+  }
+
+  /* ── FINDING THE FIELDS ───────────────────────────────────────────────────
+     Class-based, and every hit is recorded so `audit()` can say what it did NOT
+     find. `.vp-rec-sect-doors` is excluded by name: it is the renderer's
+     orphan-door paragraph, not a paragraph of his. */
+  function fields() {
+    var f = [];
+    var idx = mount.querySelector(".vp-rec-index");
+    if (idx) {
+      push(f, idx.querySelector(".vp-fe-title"), "title", "headline");
+      push(f, idx.querySelector(".vp-rec-sum"), "line", "the whole summary in the index");
+    }
+    push(f, mount.querySelector(".vp-rec-headline"), "title", "headline");
+    push(f, mount.querySelector(".vp-rec-lead"), "lead", "lead paragraph");
+    var lis = mount.querySelectorAll(".vp-rec-sects > li");
+    for (var i = 0; i < lis.length; i++) {
+      push(f, lis[i].querySelector(".vp-rec-sect-label"), "sect." + i + ".label", "section heading");
+      var ps = lis[i].querySelectorAll(".vp-rec-sect-body");
+      var j = 0;
+      for (var k = 0; k < ps.length; k++) {
+        if (ps[k].className.indexOf("vp-rec-sect-doors") >= 0) continue;
+        push(f, ps[k], "sect." + i + ".body." + j, "paragraph");
+        j++;
+      }
+    }
+    push(f, mount.querySelector(".vp-rec-tomb"), "tomb", "tombstone — where things stand when the lights go off");
+    return f;
+  }
+  function push(list, el, path, what) { if (el) list.push({ el: el, path: path, what: what }); }
+
+  var LIVE = [];
+  function wire() {
+    LIVE = fields();
+    LIVE.forEach(function (f) {
+      f.el.setAttribute("data-wb-field", f.path);
+      f.el.setAttribute("contenteditable", supportsPlain ? "plaintext-only" : "true");
+      f.el.setAttribute("spellcheck", "true");
+      if (isBlank(get(f.path))) f.el.setAttribute("data-wb-ph", f.what);
+      else f.el.removeAttribute("data-wb-ph");
+    });
+    paintBraces();
+    audit();
+  }
+  var supportsPlain = (function () {
+    var d = document.createElement("div");
+    d.setAttribute("contenteditable", "plaintext-only");
+    return d.contentEditable === "plaintext-only";
+  })();
+
+  /* ── THE SELF-CHECK ───────────────────────────────────────────────────────
+     Every field the model HAS must have found a node. A model value with no
+     node on the page is a field he cannot edit and would not know he cannot
+     edit — the failure this instrument may not have. */
+  function audit() {
+    var e = entries[cur], missing = [];
+    var have = {}; LIVE.forEach(function (f) { have[f.path] = 1; });
+    ["title", "line", "lead", "tomb"].forEach(function (k) {
+      if (!isBlank(e[k]) && !have[k]) missing.push(k);
+    });
+    (e.sections || []).forEach(function (s, i) {
+      if (!isBlank(s.label) && !have["sect." + i + ".label"]) missing.push("section " + (i + 1) + " heading");
+      (s.body || []).forEach(function (p, j) {
+        if (!have["sect." + i + ".body." + j]) missing.push("section " + (i + 1) + ", paragraph " + (j + 1));
+      });
+    });
+    if (missing.length) {
+      warn("<b>This editor could not find " + missing.length + " field(s) on the page: "
+         + esc(missing.join(", ")) + ".</b> They are in the record and they are NOT editable "
+         + "here — do not retype them, and tell Ops: a class name in "
+         + "<code>RecordEntry.jsx</code> has moved and this page has to move with it. "
+         + "Everything else on the page is still safe to write in.");
+    }
+  }
+
+  /* ── READING AND WRITING THE MODEL BY PATH ───────────────────────────────── */
+  function get(path) {
+    var e = entries[cur], p = path.split(".");
+    if (p[0] !== "sect") return e[p[0]];
+    var s = (e.sections || [])[Number(p[1])];
+    if (!s) return null;
+    return p[2] === "label" ? s.label : (s.body || [])[Number(p[3])];
+  }
+  function set(path, v) {
+    var e = entries[cur], p = path.split(".");
+    if (p[0] !== "sect") { e[p[0]] = v; return; }
+    var s = (e.sections || [])[Number(p[1])];
+    if (!s) return;
+    if (p[2] === "label") s.label = v; else s.body[Number(p[3])] = v;
+  }
+
+  /* ═══ WHAT A NODE'S TEXT IS, AND `innerText` IS THE WRONG ANSWER ══════
+     THE FIRST CUT USED `innerText` AND IT SILENTLY UPPER-CASED HIS SECTION
+     HEADINGS. `innerText` returns what the page DISPLAYS, and
+     `.vp-rec-sect-label` is `text-transform: uppercase` — so a heading typed
+     "Detailed report" came back "DETAILED REPORT", and the index row's title
+     carries the same rule. It is invisible on the glass (the glass upper-cases
+     it either way, which is exactly why the case of his labels has always been
+     his free choice — see the note on the two labels in `robots.js`), and it
+     would have travelled into the museum's data as an edit of his words that
+     nobody made. **Caught by writing into every field and comparing**, which is
+     what E5 asked for and is the only thing that could have caught it.
+
+     `textContent` is the characters actually in the DOM, untouched by CSS. A
+     `<br>` becomes a newline explicitly rather than being lost, because
+     `textContent` alone joins two lines into one word. Runs of whitespace are
+     NOT collapsed — his two spaces in "Full containment  was made" are in the
+     data on purpose (Record 001) and this is the only place they could be
+     lost. */
+  function textOf(el) {
+    var copy = el.cloneNode(true);
+    var brs = copy.querySelectorAll("br");
+    for (var i = 0; i < brs.length; i++) {
+      brs[i].parentNode.replaceChild(document.createTextNode("\n"), brs[i]);
+    }
+    return String(copy.textContent)
+      .replace(/\u00a0/g, " ").replace(/\r/g, "").replace(/\n+$/, "");
+  }
+
+  /* ── EDITING ──────────────────────────────────────────────────────────────
+     `input` writes THROUGH to the model and repaints the brace highlight; it
+     never re-renders. `blur` re-renders, which is what makes the index row
+     catch up with the headline, an emptied section disappear, and a `+` slot he
+     did not use go away again. */
+  mount.addEventListener("input", function (ev) {
+    var el = ev.target.closest ? ev.target.closest("[data-wb-field]") : null;
+    if (!el) return;
+    set(el.getAttribute("data-wb-field"), textOf(el));
+    el.removeAttribute("data-wb-ph");
+    paintBraces();
+    limitOf(el);
+    saveSoon();
+  });
+  mount.addEventListener("focusin", function (ev) {
+    var el = ev.target.closest ? ev.target.closest("[data-wb-field]") : null;
+    if (!el) return;
+    limitOf(el);
+  });
+  /* THE REDRAW IS DEFERRED BY ONE TICK, so that moving from one paragraph
+     STRAIGHT into another does not redraw the tree out from under the caret he
+     has just placed. At `focusout` time the browser has not yet settled who has
+     focus; a tick later it has, and `inField()` answers truthfully. */
+  mount.addEventListener("focusout", function (ev) {
+    var el = ev.target.closest ? ev.target.closest("[data-wb-field]") : null;
+    if (!el) return;
+    elLim.className = "wb-lim";
+    if (muted) return;
+    set(el.getAttribute("data-wb-field"), textOf(el));
+    tidy();
+    save();
+    setTimeout(function () { if (!inField()) render(); }, 0);
+  });
+
+  /* AN EMPTY THING GOES AWAY AGAIN. He opens a lead, changes his mind, and the
+     record must not keep a blank paragraph in it — but nothing is removed while
+     he is IN it, which is why this only runs on blur. */
+  function tidy() {
+    var e = entries[cur];
+    ["line", "lead", "tomb"].forEach(function (k) { if (isBlank(e[k])) delete e[k]; });
+    (e.sections || []).forEach(function (s) {
+      s.body = (s.body || []).filter(function (p, i, a) { return !isBlank(p) || (a.length === 1 && !isBlank(s.label)); });
+    });
+    e.sections = (e.sections || []).filter(function (s) { return !isBlank(s.label) || (s.body && s.body.length); });
+  }
+
+  /* ENTER SPLITS A PARAGRAPH; BACKSPACE AT THE START MERGES IT BACK.
+     A Record body is an ARRAY of paragraphs, so a newline inside one is not a
+     paragraph break — it is a line break inside a single `<p>`, which is not
+     what the museum will draw. Splitting here means what he sees is what the
+     component will make of it. */
+  mount.addEventListener("keydown", function (ev) {
+    var el = ev.target.closest ? ev.target.closest("[data-wb-field]") : null;
+    if (!el) return;
+    var path = el.getAttribute("data-wb-field");
+    var p = path.split(".");
+    var isBody = p[0] === "sect" && p[2] === "body";
+
+    if (ev.key === "Enter") {
+      ev.preventDefault();
+      if (!isBody) { el.blur(); return; }
+      var at = caret(el);
+      var text = textOf(el);
+      var head = text.slice(0, at), tail = text.slice(at);
+      var si = Number(p[1]), bi = Number(p[3]);
+      var body = entries[cur].sections[si].body;
+      body[bi] = head;
+      body.splice(bi + 1, 0, tail);
+      muted = true; el.blur(); muted = false;
+      save();
+      render(function () { focusPath("sect." + si + ".body." + (bi + 1), 0); });
+      return;
+    }
+    if (ev.key === "Backspace" && isBody && caret(el) === 0) {
+      var si2 = Number(p[1]), bi2 = Number(p[3]);
+      if (bi2 === 0) return;
+      ev.preventDefault();
+      var b = entries[cur].sections[si2].body;
+      var join = b[bi2 - 1].length;
+      b[bi2 - 1] = b[bi2 - 1] + b[bi2];
+      b.splice(bi2, 1);
+      muted = true; el.blur(); muted = false;
+      save();
+      render(function () { focusPath("sect." + si2 + ".body." + (bi2 - 1), join); });
+    }
+  });
+
+  function caret(el) {
+    var sel = window.getSelection();
+    if (!sel || !sel.rangeCount) return 0;
+    var r = sel.getRangeAt(0).cloneRange();
+    r.selectNodeContents(el);
+    r.setEnd(sel.getRangeAt(0).endContainer, sel.getRangeAt(0).endOffset);
+    return r.toString().length;
+  }
+  function focusPath(path, offset) {
+    var el = mount.querySelector('[data-wb-field="' + path + '"]');
+    if (!el) return;
+    el.focus();
+    var node = el.firstChild;
+    var sel = window.getSelection(), r = document.createRange();
+    if (node && node.nodeType === 3) r.setStart(node, Math.min(offset, node.length));
+    else r.setStart(el, 0);
+    r.collapse(true);
+    sel.removeAllRanges(); sel.addRange(r);
+  }
+
+  /* ── THE BRACE HIGHLIGHT (E2) ─────────────────────────────────────────────
+     Ranges, not nodes — see the note in `record-edit.css`. If the browser has
+     no Custom Highlight API the notes are simply not tinted, which costs
+     nothing: the braces are still characters he can see, they still travel, and
+     the gates still refuse them. */
+  var HL = (window.CSS && window.CSS.highlights && window.Highlight) ? new window.Highlight() : null;
+  if (HL) window.CSS.highlights.set("wb-brace", HL);
+  function paintBraces() {
+    if (!HL) return;
+    HL.clear();
+    var n = 0;
+    mount.querySelectorAll("[data-wb-field]").forEach(function (el) {
+      var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+      var t;
+      while ((t = walker.nextNode())) {
+        var re = /\{[^{}]*\}/g, m;
+        while ((m = re.exec(t.data))) {
+          var r = document.createRange();
+          r.setStart(t, m.index); r.setEnd(t, m.index + m[0].length);
+          HL.add(r); n++;
+        }
+      }
+    });
+    return n;
+  }
+
+  /* ── THE LIVE COUNT (Doctrine 22) ─────────────────────────────────────────
+     ONE DECLARATION, EVERY READER: the two numbers come from
+     `reveal/record-shape.mjs` through the generator and are never retyped here.
+     It WARNS and never blocks — there is no `maxlength` anywhere on this page —
+     and it says where there is NO limit, because "no limit" is itself something
+     he has to be told. */
+  function limitOf(el) {
+    var path = el.getAttribute("data-wb-field");
+    var v = textOf(el).replace(/\s+$/, "");
+    var b = CFG.budgets[path];
+    var r = el.getBoundingClientRect();
+    elLim.style.left = Math.max(6, Math.round(r.left)) + "px";
+    elLim.style.top = Math.max(6, Math.round(r.top - 26)) + "px";
+    if (!b) {
+      elLim.className = "wb-lim on";
+      elLim.textContent = v.length + " characters · no limit on this field";
+      return;
+    }
+    var over = v.length - b.max;
+    if (over > 0) {
+      elLim.className = "wb-lim on over";
+      elLim.textContent = over + " OVER — " + v.length + " of " + b.max + ". " + b.says;
+    } else {
+      elLim.className = "wb-lim on" + (v.length > b.max - 15 ? " near" : "");
+      elLim.textContent = v.length + " / " + b.max + " characters";
+    }
+  }
+
+  /* ── THE RECORD RAIL ──────────────────────────────────────────────────────
+     Every record in the volume, by its own number, with a `*` on the ones that
+     differ from what `robots.js` ships today. */
+  function shippedOf(n) { for (var i = 0; i < SHIPPED.length; i++) if (SHIPPED[i].no === n) return SHIPPED[i]; return null; }
+  function edited(e) {
+    var s = shippedOf(e.no);
+    if (!s) return true;
+    return JSON.stringify(drawable(e)) !== JSON.stringify(drawable(s));
+  }
+  function chips() {
+    elChips.innerHTML = "";
+    entries.forEach(function (e, i) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "wb-chip" + (edited(e) ? " edited" : "");
+      b.setAttribute("aria-pressed", i === cur ? "true" : "false");
+      b.textContent = e.no == null ? "?" : pad(e.no);
+      b.title = (e.title || "(no headline yet)") + (e.date ? " · " + e.date : "");
+      b.addEventListener("click", function () { leaveField(); cur = i; render(); window.scrollTo(0, 0); });
+      elChips.appendChild(b);
+    });
+    var add = document.createElement("button");
+    add.type = "button"; add.className = "wb-chip new"; add.textContent = "+ NEW";
+    add.title = "start a record after the last one";
+    add.addEventListener("click", newRecord);
+    elChips.appendChild(add);
+    var e = entries[cur];
+    elNo.value = e.no == null ? "" : String(e.no);
+    elDate.value = e.date || "";
+    elDate.className = (!e.date || new RegExp(CFG.datePattern).test(e.date)) ? "" : "bad";
+  }
+
+  function newRecord() {
+    leaveField();
+    var max = 0;
+    entries.forEach(function (e) { if (typeof e.no === "number" && e.no < 100 && e.no > max) max = e.no; });
+    var e = { no: max + 1, date: dayFromEpoch(max + 1), title: "", sections: [{ label: "EXECUTIVE SUMMARY", body: [" "] }] };
+    /* a new record goes after the last NUMBERED one rather than at the end:
+       013 is the prototype and lives at the bottom of the array (B2). */
+    var at = entries.length;
+    for (var i = 0; i < entries.length; i++) if (typeof entries[i].no === "number" && entries[i].no > e.no) { at = i; break; }
+    entries.splice(at, 0, e);
+    cur = at; save(); render();
+  }
+  function dayFromEpoch(n) {
+    var d = new Date(CFG.epoch + "T00:00:00Z");
+    d.setUTCDate(d.getUTCDate() + (n - 1));
+    return d.toISOString().slice(0, 10);
+  }
+
+  elNo.addEventListener("change", function () {
+    leaveField();
+    var v = elNo.value.trim();
+    entries[cur].no = v === "" ? null : Number(v);
+    save(); render();
+  });
+  elDate.addEventListener("change", function () {
+    leaveField();
+    var v = elDate.value.trim();
+    if (v === "") delete entries[cur].date; else entries[cur].date = v;
+    save(); render();
+  });
+
+  /* ── THE `+` SLOTS ───────────────────────────────────────────────────────
+     A field the entry does not carry does not RENDER, so there is nothing to
+     click into — which is correct for the museum and useless for writing. These
+     open the slot with a single space, which is what an empty paragraph is; if
+     he leaves it empty, `tidy()` takes it away again on blur. */
+  /* ANY CONTROL THAT CHANGES THE MODEL LEAVES THE FIELD FIRST, AND THAT IS A
+     DEFECT FIXED RATHER THAN A TIDINESS. `render()` refuses to redraw while a
+     field has focus — it has to, or the caret dies on every keystroke — so a
+     button pressed while he is still in a paragraph would change the model and
+     draw NOTHING, which reads as a broken button. Blurring commits the field
+     down its normal path first, and the redraw then happens for real. */
+  function leaveField() {
+    var a = document.activeElement;
+    if (a && a.getAttribute && a.getAttribute("data-wb-field") && a.blur) a.blur();
+  }
+
+  function open(field) {
+    leaveField();
+    var e = entries[cur];
+    if (field === "section") {
+      e.sections = e.sections || [];
+      e.sections.push({ label: " ", body: [" "] });
+      save();
+      render(function () { focusPath("sect." + (e.sections.length - 1) + ".label", 0); });
+      return;
+    }
+    if (isBlank(e[field])) e[field] = " ";
+    save();
+    render(function () { focusPath(field, 0); });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-wb-open]"), function (b) {
+    b.addEventListener("click", function () { open(b.getAttribute("data-wb-open")); });
+  });
+
+  function stat() {
+    var n = 0, notes = 0;
+    entries.forEach(function (e) { if (edited(e)) n++; notes += braceCount(e); });
+    say(entries.length + " record(s) · " + n + " changed · " + notes + " note(s) to Ops"
+      + (store ? "" : " · NOT BEING SAVED"));
+  }
+  function braceCount(e) {
+    var n = 0;
+    strings(e).forEach(function (s) { n += (s.match(/\{[^{}]*\}/g) || []).length; });
+    return n;
+  }
+  function strings(e) {
+    var out = [];
+    ["title", "line", "lead", "tomb"].forEach(function (k) { if (!isBlank(e[k])) out.push(e[k]); });
+    (e.sections || []).forEach(function (s) {
+      if (!isBlank(s.label)) out.push(s.label);
+      (s.body || []).forEach(function (p) { if (!isBlank(p)) out.push(p); });
+    });
+    return out;
+  }
+
+  /* ═══ THE PACKAGE — WHAT THE COPY BUTTON HANDS BACK ═══════════════════════
+     MIKE: *"there must still be a COPY BUTTON that hands the whole thing back
+     to Ops in one click."*
+
+     IT IS THE WHOLE RECORD AND NOT THE CHANGES. A diff is a thing Ops has to
+     reconstruct an entry from; the whole volume in plain text is a thing Ops can
+     read and land. What the diff gives is a MARK — `*` on a record and on a
+     field that differs from what `robots.js` ships — so nothing has to be
+     guessed at about which entries need work.
+
+     THE NOTES ARE COLLECTED AT THE FOOT AS WELL AS LEFT IN PLACE, because they
+     are the part Ops has to ACT on and they would otherwise be nine screens
+     apart from each other. Left in place too: a note four screens from the
+     sentence it is about is the failure the retired red/blue scheme was trying
+     to avoid, and it is still true here. */
+  function two(n) { return (n < 10 ? "0" : "") + n; }
+  function stamp() {
+    var d = new Date();
+    return d.getFullYear() + "-" + two(d.getMonth() + 1) + "-" + two(d.getDate())
+      + " " + two(d.getHours()) + ":" + two(d.getMinutes());
+  }
+
+  function collect() {
+    var L = [], allNotes = [];
+    var changed = entries.filter(edited).length;
+    var notes = entries.reduce(function (a, e) { return a + braceCount(e); }, 0);
+    L.push("WEIRD.BABY — THE RECORD, as Mike edited it");
+    L.push("captured " + stamp() + "  ·  " + entries.length + " record(s), "
+         + changed + " changed since the last landing  ·  " + notes + " note(s) to Ops");
+    L.push("Every string below is exactly as typed. A * marks a field that differs from "
+         + "what src/data/artists/robots.js ships today.");
+    L.push("{ curly braces } are notes to Ops, never story. They are listed again at the foot.");
+    L.push("");
+
+    entries.forEach(function (e) {
+      var s = shippedOf(e.no);
+      var mark = function (k, v) {
+        var was = s ? s[k] : undefined;
+        return (JSON.stringify(v == null ? null : v) !== JSON.stringify(was == null ? null : was)) ? " *" : "";
+      };
+      L.push("=== RECORD " + (e.no == null ? "(unnumbered)" : pad(e.no))
+           + (e.date ? " · " + e.date : " · (no date)")
+           + (s ? "" : "  [NEW — not in robots.js]")
+           + (edited(e) ? "  [CHANGED]" : "  [unchanged]") + " ===");
+      L.push("HEADLINE" + mark("title", e.title) + ": " + (isBlank(e.title) ? "(empty)" : e.title));
+      var lim = CFG.budgets.line;
+      L.push("INDEX LINE" + mark("line", e.line) + " (" + (isBlank(e.line) ? 0 : e.line.length)
+           + " of " + lim.max + " characters): " + (isBlank(e.line) ? "(empty)" : e.line));
+      L.push("LEAD" + mark("lead", e.lead) + ": " + (isBlank(e.lead) ? "(empty)" : e.lead));
+      (e.sections || []).forEach(function (sec, i) {
+        L.push("");
+        L.push("  SECTION " + (i + 1) + " — " + (isBlank(sec.label) ? "(no heading)" : sec.label));
+        /* THE HEADING IS SCANNED FOR NOTES TOO. The first cut walked the four
+           top-level fields and every paragraph and MISSED THE SECTION LABELS —
+           three notes short of the count in its own header, which is how it was
+           found: the header counts every string, the list did not. */
+        if (!isBlank(sec.label)) (sec.label.match(/{[^{}]*}/g) || []).forEach(function (b2) {
+          allNotes.push({ no: e.no, where: "section " + (i + 1) + " heading", note: b2, line: sec.label });
+        });
+        (sec.body || []).forEach(function (p, j) {
+          L.push("    " + (j + 1) + ". " + p);
+          (p.match(/\{[^{}]*\}/g) || []).forEach(function (b) {
+            allNotes.push({ no: e.no, where: "section " + (i + 1) + ", paragraph " + (j + 1), note: b, line: p });
+          });
+        });
+      });
+      ["title", "line", "lead", "tomb"].forEach(function (k) {
+        if (isBlank(e[k])) return;
+        (e[k].match(/\{[^{}]*\}/g) || []).forEach(function (b) {
+          allNotes.push({ no: e.no, where: k, note: b, line: e[k] });
+        });
+      });
+      L.push("");
+      L.push("TOMBSTONE" + mark("tomb", e.tomb) + ": " + (isBlank(e.tomb) ? "(empty)" : e.tomb));
+      L.push("");
+    });
+
+    L.push("=== NOTES TO OPS (" + allNotes.length + ") ===");
+    if (!allNotes.length) L.push("(none — nothing in the volume is inside curly braces)");
+    allNotes.forEach(function (n) {
+      L.push("Record " + (n.no == null ? "?" : pad(n.no)) + " · " + n.where);
+      L.push("  " + n.note);
+      L.push("  in: " + n.line);
+    });
+    L.push("");
+    L.push("The same thing as data: " + CFG.draftFile + " (press Save to the repo).");
+    return L.join("\n");
+  }
+
+  /* ── COPYING, AND IT NEVER CLAIMS WHAT IT HAS NOT READ BACK ───────────────
+     OPERATIONS §8: `writeText` rejects with *Document is not focused* and
+     `execCommand('copy')` returns true when the command was merely ENABLED.
+     Neither says the clipboard changed. This reads it back where the browser
+     allows it, and where it does not it does not use the word "copied". */
+  function verify(text, how) {
+    if (!(navigator.clipboard && navigator.clipboard.readText)) {
+      say("Put on the clipboard " + how + " — " + text.length + " characters. NOT VERIFIED: "
+        + "this browser will not let the page read the clipboard back. The text is selected "
+        + "below; press Ctrl+C to be sure.", "bad");
+      return;
+    }
+    navigator.clipboard.readText().then(function (back) {
+      if (back === text) say("Copied and VERIFIED — " + text.length + " characters are on the clipboard.", "good");
+      else say("!! THE CLIPBOARD DID NOT TAKE IT. What is on the clipboard is not what this page "
+             + "just produced. The text is selected below — press Ctrl+C — or use Save to the repo.", "bad");
+    }, function () {
+      say("Put on the clipboard " + how + " — " + text.length + " characters. NOT VERIFIED: the "
+        + "browser refused to read it back. The text is selected below; press Ctrl+C to be sure.", "bad");
+    });
+  }
+  function copyAll() {
+    var text = collect();
+    elOut.value = text;
+    elPaste.className = "wb-pastewrap on";
+    elOut.focus(); elOut.select();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { verify(text, "by the page"); },
+                                               function () { legacy(text); });
+    } else legacy(text);
+  }
+  function legacy(text) {
+    elOut.focus(); elOut.select();
+    try { document.execCommand("copy"); } catch { /* the return value proves nothing */ }
+    verify(text, "by the fallback");
+  }
+
+  /* ── THE BRIDGE: HIS WRITING GOES TO A FILE IN THE REPO ───────────────────
+     Same mechanism the worksheet earned in the U round — `showSaveFilePicker`,
+     the handle remembered in IndexedDB so it is a dialog once and one click
+     after — pointed at `record-draft.json`. A bridge that fails must fail into
+     the old road, not into silence, so a refused picker downloads the same file
+     and says where it went. */
+  var DBN = "wb.dictation", DBS = "handles";
+  function idb() {
+    return new Promise(function (res, rej) {
+      var r = indexedDB.open(DBN, 1);
+      r.onupgradeneeded = function () { r.result.createObjectStore(DBS); };
+      r.onsuccess = function () { res(r.result); };
+      r.onerror = function () { rej(r.error); };
+    });
+  }
+  function handle(set2) {
+    return idb().then(function (db) {
+      return new Promise(function (res, rej) {
+        var tx = db.transaction(DBS, set2 ? "readwrite" : "readonly");
+        var os = tx.objectStore(DBS);
+        var q = set2 ? os.put(set2, CFG.key) : os.get(CFG.key);
+        q.onsuccess = function () { res(set2 ? set2 : q.result); };
+        q.onerror = function () { rej(q.error); };
+      });
+    });
+  }
+  function payload() {
+    return JSON.stringify({
+      what: "Mike's working copy of the Record. Written by docs/dictation-20260807/record.html, "
+          + "read by tools/dictation/emit-record-entries.mjs. Curly braces are notes to Ops. "
+          + "Ops does not hand-edit this file.",
+      key: CFG.key, saved: new Date().toISOString(), epoch: CFG.epoch,
+      entries: entries.map(drawable)
+    }, null, 1);
+  }
+  function download(text, why) {
+    var b = new Blob([text], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(b); a.download = "record-draft.json";
+    document.body.appendChild(a); a.click(); a.remove();
+    say(why + " Downloaded record-draft.json instead — move it into "
+      + "docs/dictation-20260807/ and tell Ops.", "bad");
+  }
+  function saveToRepo() {
+    var text = payload();
+    if (typeof window.showSaveFilePicker !== "function") { download(text, "This browser has no file picker."); return; }
+    handle(null).then(function (h) {
+      if (!h) return null;
+      return h.queryPermission({ mode: "readwrite" }).then(function (perm) {
+        if (perm === "granted") return h;
+        return h.requestPermission({ mode: "readwrite" }).then(function (pp) { return pp === "granted" ? h : null; });
+      });
+    }).then(function (h) {
+      if (h) return h;
+      return window.showSaveFilePicker({
+        suggestedName: "record-draft.json",
+        types: [{ description: "The Record, as Mike edited it", accept: { "application/json": [".json"] } }]
+      }).then(function (nh) { return handle(nh).then(function () { return nh; }); });
+    }).then(function (h) {
+      return h.createWritable().then(function (w) {
+        return w.write(text).then(function () { return w.close(); });
+      }).then(function () {
+        say("Saved " + entries.length + " record(s) to " + h.name + " — " + text.length
+          + " characters, at " + stamp() + ". Nothing to paste.", "good");
+      });
+    }).catch(function (e) {
+      if (e && e.name === "AbortError") { say("Save cancelled. Nothing was written."); return; }
+      download(text, "The file picker failed (" + (e && e.name) + ").");
+    });
+  }
+
+  document.getElementById("wb-copy").addEventListener("click", copyAll);
+  document.getElementById("wb-save").addEventListener("click", saveToRepo);
+  document.getElementById("wb-pastex").addEventListener("click", function () { elPaste.className = "wb-pastewrap"; });
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key === "Escape" && elPaste.className.indexOf("on") >= 0) elPaste.className = "wb-pastewrap";
+  });
+
+  /* ── START ───────────────────────────────────────────────────────────────
+     The migration runs BEFORE the first render, so what he sees on opening is
+     already everything he has ever written for this Record, wherever it was. */
+  migrate();
+  render();
+
+  /* the round-trip test drives these; they are the same functions the two
+     buttons call, so a test cannot pass against a second implementation */
+  window.WBRecordEditor = {
+    collect: collect, model: function () { return entries; },
+    open: open, go: function (i) { cur = i; render(); },
+    fields: function () { return LIVE.map(function (f) { return f.path; }); },
+  };
+})();
+
+</script>
+</body>
+</html>

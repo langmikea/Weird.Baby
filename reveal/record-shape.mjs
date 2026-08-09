@@ -228,4 +228,45 @@ export const CONSTRAINTS = [
     asked: "nothing to ask" },
 ];
 
-export default { RECORD_TITLE_MAX, RECORD_LINE_MAX, BUDGETS, FORMATS, CONSTRAINTS };
+/* ═══ [E3 2026-08-09] THE CAPITALS RULE, ONE DECLARATION, TWO RUNTIMES ═══════
+   A line on its own in CAPITALS starts a section and is its label; every
+   non-empty line under it is one paragraph. It is not a new convention — it is
+   how Mike dictated Record 001 (EXECUTIVE SUMMARY, then DETAILED REPORT) and it
+   is the rule `tools/dictation/emit-record-entries.mjs` landed those entries
+   with.
+
+   IT LIVES HERE BECAUSE IT NOW HAS TWO READERS AND ONE OF THEM IS A BROWSER.
+   The Record editor migrates his old worksheet answers into blank records, and
+   that migration happens in the page — against the store the worksheet wrote,
+   which on a `file://` page is the same store — so the rule has to run there
+   too. `tools/dictation/record-edit.mjs` emits this function's OWN SOURCE into
+   the page (`String(sectionsFromText)`) rather than a second copy of the rule.
+   Two runtimes, one definition, and the second is provably the first (Doctrine
+   17). It is written with no imports, no closures and no optional syntax for
+   exactly that reason: it has to be valid on its own in a plain script.
+
+   `letters` guards the digits case — "16:10 - Server auto-shutdown" is upper
+   case by accident of having no lower-case letters in it, and reading it as a
+   heading would eat a line of his timeline. */
+export function sectionsFromText(text) {
+  var out = [];
+  var cur = null;
+  var lines = String(text == null ? "" : text).split(/\r?\n/);
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i].replace(/\s+$/, "");
+    if (!line.trim()) continue;
+    var t = line.trim().replace(/:$/, "");
+    var letters = t.replace(/[^A-Za-z]/g, "");
+    if (letters && t === t.toUpperCase() && t.length > 2 && t.length <= 62 && !/^\d/.test(t)) {
+      if (cur) out.push(cur);
+      cur = { label: t, body: [] };
+      continue;
+    }
+    if (!cur) cur = { label: null, body: [] };
+    cur.body.push(line.replace(/^\s+/, ""));
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+
+export default { RECORD_TITLE_MAX, RECORD_LINE_MAX, BUDGETS, FORMATS, CONSTRAINTS, sectionsFromText };

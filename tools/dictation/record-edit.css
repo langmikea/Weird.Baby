@@ -1,0 +1,168 @@
+/* ===========================================================================
+   THE RECORD EDITOR'S OWN STYLESHEET — and the ONLY rules on this page that are
+   not the museum's. [E1 2026-08-09]
+   ---------------------------------------------------------------------------
+   MIKE: *"HE EDITS THE RECORD ITSELF, DIRECTLY — every part of it… He must feel
+   he is IN THE REAL THING as much as feasible."*
+
+   SO THE FIRST RULE OF THIS FILE IS WHAT IT MAY NOT DO: nothing here may change
+   the SIZE OR POSITION of anything the museum draws. The type ramp is
+   `clamp(1.02rem, min(1.35vw, 4.4cqh), 1.28rem)` — a function of BOTH viewport
+   axes — so a bar that took height, or a padding that narrowed the column,
+   would change the font size, the measure and the wrap, which are the three
+   things the whole arrangement exists to show him truthfully. The D-round
+   measured that failure at 0.4%: invisible, wrong, and exactly the "nearly
+   right" he ruled out.
+
+   THEREFORE:
+     · every control is `position: fixed` and floats OVER the page;
+     · every editing decoration is a `::after` that is absolutely positioned and
+       `pointer-events: none`, so it occupies no space;
+     · the only box-model property applied to a museum element is `outline`,
+       which does not participate in layout;
+     · nothing sets a font on a museum element. Ever.
+   The lap measures `--face-fs` and `.vp-flat`'s width on this page against the
+   live museum, and a difference is a defect in this file.
+   =========================================================================== */
+
+/* ── THE BAR ─────────────────────────────────────────────────────────────────
+   At the BOTTOM, because the top of a Record is its dateline and headline and
+   he is reading those constantly. Fixed, so it takes no height from the chain;
+   `body` gets the padding instead, which lengthens the document and changes
+   nothing about the column. */
+body { padding-bottom: 92px; }
+
+.wb-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 9000;
+  display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center;
+  padding: 7px 10px;
+  background: #14140f; color: #efe9d8;
+  border-top: 1px solid #6b5c33;
+  font: 12px/1.35 -apple-system, "Segoe UI", system-ui, sans-serif;
+}
+.wb-bar b { font-weight: 700; }
+.wb-bar .sp { flex: 1 1 12px; }
+
+.wb-chip {
+  font: 11px/1 ui-monospace, "Courier New", monospace;
+  letter-spacing: .04em;
+  padding: 5px 7px; border-radius: 3px; cursor: pointer;
+  background: #262218; color: #cfc7b0; border: 1px solid #4a4433;
+}
+.wb-chip:hover { background: #332d20; color: #fff3d4; }
+.wb-chip[aria-pressed="true"] { background: #b8974a; color: #14140f; border-color: #b8974a; font-weight: 700; }
+.wb-chip.new { border-style: dashed; }
+.wb-chip.edited::after { content: " *"; color: #ffcf5c; }
+.wb-chip[aria-pressed="true"].edited::after { color: #3a2f0d; }
+
+.wb-act {
+  font: 11px/1 -apple-system, "Segoe UI", system-ui, sans-serif;
+  font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  padding: 7px 11px; border-radius: 3px; cursor: pointer;
+  background: #b8974a; color: #14140f; border: 1px solid #b8974a;
+}
+.wb-act.ghost { background: transparent; color: #cfc7b0; border-color: #6b5c33; }
+.wb-act:hover { filter: brightness(1.12); }
+
+.wb-say { flex: 1 1 100%; color: #cfc7b0; }
+.wb-say.bad { color: #ff8f8f; font-weight: 700; }
+.wb-say.good { color: #9fd98a; }
+
+.wb-meta { display: flex; gap: 6px; align-items: center; }
+.wb-meta input {
+  font: 11px/1 ui-monospace, "Courier New", monospace;
+  background: #0d0d09; color: #efe9d8; border: 1px solid #4a4433;
+  border-radius: 3px; padding: 5px 6px; width: 9em;
+}
+.wb-meta input.no { width: 4em; }
+.wb-meta input.bad { border-color: #ff8f8f; color: #ff8f8f; }
+.wb-meta label { color: #9b9482; letter-spacing: .05em; text-transform: uppercase; font-size: 10px; }
+
+/* ── WHAT IS EDITABLE, AND HOW IT SAYS SO ────────────────────────────────────
+   OUTLINE ONLY. A background tint on a paragraph would change what the page
+   looks like, which is the one thing this page is for. An outline is drawn
+   outside the box and moves nothing. */
+[data-wb-field] { outline: 1px dashed rgba(120, 105, 60, .38); outline-offset: 2px; }
+[data-wb-field]:hover { outline-color: rgba(120, 105, 60, .8); }
+[data-wb-field]:focus { outline: 2px solid #b8974a; outline-offset: 2px; }
+
+/* THE PLACEHOLDER, AND IT COSTS NO LAYOUT. `position:absolute` inside a
+   `position:static` museum element resolves against the nearest positioned
+   ancestor, which is fine: it is never in flow, so nothing moves. It is the
+   only way to say "this is the index summary" ON the field, which is where
+   Doctrine 25 says it has to be. */
+[data-wb-ph]::after {
+  content: attr(data-wb-ph);
+  position: absolute; pointer-events: none;
+  font: 11px/1.4 -apple-system, "Segoe UI", system-ui, sans-serif;
+  color: #a89a72; letter-spacing: .04em;
+  opacity: .95;
+}
+
+/* ── THE LIVE COUNT, ON THE FIELD (Doctrine 22) ──────────────────────────────
+   MIKE: *"he must never again discover a limit from a report."* It follows the
+   focused field, it counts what would be SAVED, and it says where there is no
+   limit. Fixed, so it never moves the page. */
+.wb-lim {
+  position: fixed; z-index: 9100; display: none;
+  font: 11px/1.3 ui-monospace, "Courier New", monospace;
+  padding: 4px 7px; border-radius: 3px;
+  background: #14140f; color: #cfc7b0; border: 1px solid #4a4433;
+  max-width: 46ch;
+}
+.wb-lim.on { display: block; }
+.wb-lim.near { border-color: #b8974a; color: #ffd97a; }
+.wb-lim.over { border-color: #ff8f8f; color: #ff8f8f; font-weight: 700; }
+
+/* ── A NOTE TO OPS, IN CURLY BRACES (E2) ─────────────────────────────────────
+   MIKE: *"Anything inside { } is a note to Ops, not story."*
+
+   IT IS PAINTED WITH THE CUSTOM HIGHLIGHT API AND NOT WITH A `<span>`, and that
+   is the load-bearing choice on this page. A span inside a contenteditable
+   paragraph is a node the caret can fall into, that a paste can split, and that
+   changes what `innerText` returns — which would make the highlight capable of
+   damaging the text it is highlighting. `CSS.highlights` paints RANGES: the DOM
+   is untouched, the text he typed is the text that is stored, and if the
+   browser does not support it the notes simply are not tinted and everything
+   else still works. */
+::highlight(wb-brace) { background: #ffe08a; color: #6b4a00; }
+
+/* the same mark in the paste box, where there is no highlight API to use */
+.wb-out { color: #cfc7b0; }
+
+/* ── THE PASTE BOX ───────────────────────────────────────────────────────────
+   Hidden until COPY EVERYTHING is pressed. It is here for the case the
+   clipboard write cannot be verified — the text is selected and Ctrl+C works
+   (OPERATIONS §8: a clipboard write is not done until it has been read back). */
+.wb-pastewrap {
+  position: fixed; left: 0; right: 0; bottom: 0; top: 0; z-index: 9500;
+  background: rgba(10, 10, 8, .93); padding: 16px; display: none;
+  flex-direction: column; gap: 8px;
+}
+.wb-pastewrap.on { display: flex; }
+.wb-pastewrap textarea {
+  flex: 1 1 auto; width: 100%;
+  font: 12px/1.45 ui-monospace, "Courier New", monospace;
+  background: #14140f; color: #efe9d8; border: 1px solid #6b5c33;
+  border-radius: 3px; padding: 10px; resize: none;
+}
+.wb-pastewrap .row { display: flex; gap: 8px; align-items: center;
+  font: 12px/1.4 -apple-system, "Segoe UI", system-ui, sans-serif; color: #cfc7b0; }
+
+/* ── THE BANNERS ─────────────────────────────────────────────────────────────
+   Two, and they are different kinds of thing. `wb-warn` is a FAILURE — storage
+   refused, or a field this editor could not find on the page. `wb-note` is the
+   migration report: what moved out of the old form and what was left. Both are
+   fixed and both can be dismissed. */
+.wb-warn, .wb-note {
+  position: fixed; left: 10px; right: 10px; top: 10px; z-index: 9200;
+  display: none; padding: 9px 12px; border-radius: 3px;
+  font: 12px/1.5 -apple-system, "Segoe UI", system-ui, sans-serif;
+}
+.wb-warn { background: #3a0d0d; color: #ffb4b4; border: 2px solid #d21c1c; }
+.wb-note { background: #14140f; color: #dfd6bb; border: 1px solid #6b5c33; }
+.wb-warn.on, .wb-note.on { display: block; }
+.wb-warn b, .wb-note b { display: block; margin-bottom: 3px; }
+.wb-note ul { margin: 5px 0 0 16px; }
+.wb-x { float: right; cursor: pointer; border: 0; background: none;
+        color: inherit; font: 700 14px/1 sans-serif; padding: 0 2px; }

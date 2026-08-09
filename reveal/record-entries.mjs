@@ -320,3 +320,109 @@ export function summaries() {
       };
     });
 }
+
+/* ═══ [E1 2026-08-09] THE WHOLE OF EVERY ENTRY — AND IT IS A FOURTH READER ═══
+   MIKE retired the two-column worksheet: *"HE EDITS THE RECORD ITSELF,
+   DIRECTLY."* An editor over the real Record has to be SEEDED with the real
+   Record, which means one reader in this file finally has to see whole entries
+   — headline, summary, lead, every section label and every paragraph.
+
+   ═══ THE SPLIT IS NOT BREACHED, AND HERE IS THE TEST THAT SAYS SO ═══════════
+   The rule this file has kept since it was written is not *nothing may read the
+   words* — `prose()` reads every word in the Record. It is that **the half the
+   LEDGER builds from must see no words**, so a headline has no route into
+   `ledger.json`. `entries()` is that half and is untouched. This one FEEDS AN
+   OPS PAGE THAT IS NOT IN THE MUSEUM'S BUILD and feeds nothing else; the check
+   on any future reader is the same one — does anything the museum ships, or the
+   ledger derives, call it? Nothing does.
+
+   ═══ TWO CALLS ARE RESOLVED AND THE REST ARE REFUSED ════════════════════════
+   `date: recordDay(3)` and `still: placed("/robots/…")` are the only two
+   function calls in an entry today. `recordDay` is arithmetic on the epoch and
+   is recomputed here from `recordEpoch()`; `placed` is the placement resolver
+   and hands back the address it was given, so the argument IS the answer
+   (OPERATIONS §8: a governed picture has two addresses, and the PUBLIC one is
+   what an entry declares). Anything else returns `null` and is reported by the
+   caller rather than guessed at — an editor that quietly seeded a field with
+   the wrong value would be worse than one that admitted it could not read it. */
+export function draftEntries(src) {
+  const text = src ?? fs.readFileSync(path.join(REPO, RECORD_SOURCE), "utf8");
+  const ast = Parser.parse(text, { ecmaVersion: "latest", sourceType: "module" });
+  const epoch = recordEpoch(text);
+
+  let track = null;
+  (function visit(n) {
+    if (!n || typeof n !== "object" || track) return;
+    if (Array.isArray(n)) { n.forEach(visit); return; }
+    if (n.type === "ObjectExpression") {
+      const id = strOf(propOf(n, "id"));
+      if (id === RECORD_TRACK_ID && propOf(n, "face")) { track = n; return; }
+    }
+    for (const k of Object.keys(n)) {
+      if (k === "type" || k === "start" || k === "end" || k === "loc") continue;
+      visit(n[k]);
+    }
+  })(ast);
+  if (!track) throw new Error("reveal/record-entries.mjs: draftEntries found no Record track");
+
+  const entriesNode = propOf(propOf(track, "face"), "entries");
+  if (!entriesNode || entriesNode.type !== "ArrayExpression")
+    throw new Error("reveal/record-entries.mjs: draftEntries found no `entries` array");
+
+  const dayFrom = (n) => {
+    if (!epoch || typeof n !== "number") return null;
+    const d = new Date(epoch + "T00:00:00Z");
+    d.setUTCDate(d.getUTCDate() + (n - 1));
+    return d.toISOString().slice(0, 10);
+  };
+  const call = (node) => {
+    if (!node || node.type !== "CallExpression" || node.callee.type !== "Identifier") return undefined;
+    if (node.callee.name === "recordDay") {
+      const a = node.arguments[0];
+      return a && a.type === "Literal" ? dayFrom(a.value) : null;
+    }
+    if (node.callee.name === "placed") return strOf(node.arguments[0]);
+    return null;
+  };
+  const val = (node) => {
+    if (!node) return undefined;
+    const s = strOf(node);
+    if (s !== null) return s;
+    const c = call(node);
+    if (c !== undefined) return c;
+    if (node.type === "Literal") return node.value;
+    return null;
+  };
+
+  const unreadable = [];
+  const out = entriesNode.elements
+    .filter(el => el && el.type === "ObjectExpression")
+    .map(el => {
+      const e = {};
+      const noNode = propOf(el, "no");
+      e.no = noNode && noNode.type === "Literal" && typeof noNode.value === "number" ? noNode.value : null;
+      for (const k of ["date", "title", "line", "lead", "tomb", "still", "stillCaption"]) {
+        const node = propOf(el, k);
+        if (!node) continue;
+        const v = val(node);
+        if (v === null) unreadable.push(`Record ${e.no}: \`${k}\``);
+        else e[k] = v;
+      }
+      const secs = propOf(el, "sections");
+      e.sections = (secs && secs.type === "ArrayExpression" ? secs.elements : [])
+        .filter(s => s && s.type === "ObjectExpression")
+        .map(s => {
+          const bodyNode = propOf(s, "body");
+          const body = bodyNode && bodyNode.type === "ArrayExpression"
+            ? bodyNode.elements.map(b => {
+                const v = strOf(b);
+                if (v === null) unreadable.push(`Record ${e.no}: a section paragraph`);
+                return v === null ? "" : v;
+              })
+            : [];
+          return { label: strOf(propOf(s, "label")), body };
+        });
+      return e;
+    });
+  return { entries: out, epoch, unreadable };
+}
