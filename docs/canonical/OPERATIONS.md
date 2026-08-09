@@ -7,7 +7,42 @@ tree, the live working tree wins — always.
 
 **Read this file FIRST in every session, before STATE.md, before any handoff.**
 
-**Last verified against live tree:** 2026-08-08 (THE CULL — **two of four
+**Last verified against live tree:** 2026-08-08 (THE LIGHT TABLE — four
+instructions, all four answered. Gates: lint **11/9 = baseline** · build green ·
+provenance **PASS** · `reveal:check` **PASS** · `parity:gate` **PASS, 4 shared ·
+0 divergences** · `instory:gate` **PASS** · `assets:orphans` **0** ·
+`reveal:day` **nothing to move** · **the lap RAN at 390px and 1228px on all ten
+Ops pages**, page overflow 0, uncontained 0, leaf text overflow 0. Nothing in
+`src/` changed. **C-a IS RULED AND EXECUTED** — the 27 calibration frames,
+`cal.json` and the `_cal` folder, 28 files and 3.20 MB, with the 27 asset-table
+rows culled; **they were never in git** (`content/burps/.gitignore` covers the
+whole burp tree), so a 3.20 MB deletion leaves a clean `git status` and no object
+to restore from. **THE GLOVE QUESTION IS SHUT AND THE ANSWER REVERSES THE CULL
+ROUND’S FINDING** — the three burp MP4s ARE the glove videos, so the KEEP clause
+was satisfied all along and the footage survived as sources; the search failed
+because it looked for a filename. **THE ARTIFACT TRACKER IS A LIGHT TABLE** —
+250 tiles, a picture leading each one, a viewer that opens the real file from
+disk at full size with every column the old page carried beside it; **the
+population widened on Mike’s own sentence** (*"only what still exists"*), because
+everything the cull touched has no public address and the old 47-row set could
+not have shown a post-cull anything. **A FAILURE SAYS SO**: an unreadable file
+prints the path it tried and falls back to the thumbnail, proved on purpose.
+**DOCTRINE 25 IS THE ROUND’S RULE AND THE MEASUREMENT IS ITS ARGUMENT** — the
+first usable control sat **2014px** down the tracker, 2474 down the spec sheet,
+1524 down the worksheet and 1537 down the register at 390px; now 126 · 727 · 219
+· 398. **Almost nothing struck was WRONG — what was wrong was where it was**, so
+the rule carries a construction clause: on the field, in the footer, or on
+`reference.html`, never above the work. **Doctrine 24 was applied inside the
+instruments**: short-list row **15a was still asking him to rule on eleven
+photographs he ruled deleted on 2026-08-07**, citing a `C-a` the cull round had
+re-used for a different question. **TWO FINDINGS NOBODY ASKED FOR:** a **27px
+page-level sideways scroll on the contact sheet that read as zero uncontained**,
+because a box-based overflow check cannot see overflowing TEXT; and **24
+asset-table rows pointing at a manual that moved**, invisible to
+`assets:orphans` because it counts `missing && isJudged` and all 24 are unjudged
+(`L-a`). **Nothing was deployed.** Round log:
+`docs/MUSEUM_LIGHT_TABLE_LOG-20260808.md`.)
+Previously 2026-08-08 (THE CULL — **two of four
 instructions done completely and two not started, said first because it is the
 honest part.** Gates: lint **11/9 = baseline** · build green · provenance
 **PASS** · `reveal:check` **PASS** · `parity:gate` **PASS** · `instory:gate`
@@ -1574,6 +1609,42 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
     **AND THE PRUNE HAZARD APPLIES INSIDE ONE FILE.** Removing rows orphans the
     links that pointed at them; 67 were flattened to plain text on the day. Check
     anchors, flatten or repoint, then prune — §9's own procedure, one level down.
+
+25. **THE TOOLS ARE FOR WORKING, NOT FOR BRIEFING (Mike, 2026-08-08 —
+    STANDING).**
+
+    > *"All the stuff at the top, I never read."*
+
+    Every Ops instrument had grown an opening explanation. **The measurement is
+    the argument:** at 390px, the first control a person could use on the
+    artifact tracker was **2014px** down the page; on the spec sheet **2474**; on
+    the worksheet **1524**; on the register **1537**. Those are three to six
+    screens of prose before the tool starts.
+
+    **IT IS NOT THE SAME RULE AS THE LAW OF SUBTRACTION AND THE WORKSHEET IS THE
+    PROOF.** Doctrine 16 asks whether a line is NEEDED. Every paragraph struck
+    here was needed by somebody — the syntax of a section heading, the format of
+    a date, what a coloured band means. What was wrong was WHERE they were. So
+    the rule has a construction clause and it is the whole of the fix:
+
+      a thing worth knowing goes **ON THE FIELD**, **IN THE FOOTER**, or on
+      **`reference.html`** — and never above the work.
+
+    If it fits none of those three, **Ops raises it in conversation**. It does
+    not go on a page he has to read past. `reference.html` exists because he
+    ruled it into existence — *"if it is reference, write it as such"* — and a
+    page that explains the machine is legitimate the moment it is opt-in.
+
+    **A LEGEND IS NOT A BRIEFING, AND THE TEST IS WHETHER THE PAGE IS UNREADABLE
+    WITHOUT IT.** The arc's three bands and the egg tracker's three states carry
+    meaning printed on every row; they survive as ONE line of inline chips
+    rather than a boxed note of five paragraphs.
+
+    **AND THE PREAMBLE GROWS BACK.** `week1.html` was split into a worksheet and
+    a reference page on 2026-08-07 for exactly this complaint. **Three rounds
+    later the worksheet's masthead was seven paragraphs.** That is why this is a
+    doctrine and not a cleanup: the pressure that writes a preamble is a round
+    wanting credit for what it understood.
 
 ## 8. Known hazards (environment quirks)
 

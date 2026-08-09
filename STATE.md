@@ -201,6 +201,28 @@ lead above his EXECUTIVE SUMMARY heading — shipped, not suppressed (`I-a`). `C
 is now the whole of what is left and **the worksheet finally asks for it**, in
 one format-checked box.
 
+## THE TOOLS ARE FOR WORKING, NOT FOR BRIEFING (Mike, 2026-08-08 — STANDING)
+
+> **"All the stuff at the top, I never read."**
+
+Canonical: `docs/canonical/OPERATIONS.md` §7 Doctrine 25.
+
+**THE MEASUREMENT IS THE ARGUMENT.** At 390px the first control a person could
+use sat **2014px** down the artifact tracker, **2474** down the spec sheet,
+**1524** down the worksheet and **1537** down the register — three to six screens
+of prose before the tool starts. After: **126 · 727 · 219 · 398**.
+
+**IT IS NOT THE LAW OF SUBTRACTION AGAIN.** Doctrine 16 asks whether a line is
+NEEDED; almost everything struck here WAS needed by somebody. What was wrong was
+where it was. **The construction clause is the whole of the fix: a thing worth
+knowing goes ON THE FIELD, IN THE FOOTER, or on `reference.html` — never above
+the work.** If it fits none of those three, **Ops raises it in conversation.**
+
+**A LEGEND IS NOT A BRIEFING** — the test is whether the page is unreadable
+without it; the arc's bands survive as one line of chips, not a boxed note.
+**AND THE PREAMBLE GROWS BACK:** `week1.html` was split for this complaint on
+2026-08-07 and the worksheet's masthead was seven paragraphs three rounds later.
+
 ## ONCE IT IS RULED GONE, IT IS GONE FROM HIS VIEW (Mike, 2026-08-08 — STANDING)
 
 > **"Once he says get rid of something, HE NEVER WANTS TO SEE IT AGAIN. Anything

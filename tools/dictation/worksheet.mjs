@@ -184,19 +184,32 @@ const FIELDS = [
 
   { k: "EXEC", label: "Executive summary", rows: 5,
     ph: "the paragraph a reader gets if they read nothing else",
+    /* [L3 2026-08-08] THE CAPITALS RULE MOVED HERE OFF THE MASTHEAD. It is a
+       syntax he cannot discover from the box, so it belongs on the box — and
+       the seven paragraphs it used to sit inside were the thing he said he
+       never reads. Doctrine 25. */
     note: "No limit, and that is not an oversight — this lands in a section of "
         + "the entry, where the length of a section is a fact about the day. "
         + "Write as much as the day is worth. It is <b>not</b> what the index "
-        + "row prints; that is the one sentence above." },
+        + "row prints; that is the one sentence above. <b>A line on its own in "
+        + "CAPITALS starts a new section and becomes its heading</b>, exactly "
+        + "as you dictated Record 001 — <i>EXECUTIVE SUMMARY</i>, then "
+        + "<i>DETAILED REPORT</i>. No capitals line draws one run of paragraphs." },
 
   { k: "NOTES", label: "Detailed sections, notes, etc.", rows: 5,
     ph: "sections, order, what to include, what to cut",
-    note: "No limit. Two shapes worth knowing while you write it: your approved "
-        + "container is <b>four to seven sections</b>, each holding one thought "
-        + "under a short all-caps label — and an entry built that way cannot "
-        + "currently draw a transmission, a photograph set or a document "
-        + "alongside them (they are silently dropped), so say it in a section "
-        + "or say it is a picture." },
+    /* [L3 2026-08-08] THE `ATTACH:` LINE MOVED HERE OFF THE MASTHEAD — same
+       reason as EXEC's capitals rule. AND THE OLD SECOND HALF WAS STALE: it
+       still said a payload beside sections is "silently dropped", which A0–A6
+       fixed on 2026-08-08. A note that describes a defect somebody repaired is
+       worse than no note. */
+    note: "No limit. Your approved container is <b>four to seven sections</b>, "
+        + "each holding one thought under a short all-caps label. <b>A line "
+        + "reading <code>ATTACH: what it is</code> puts an attachment at the "
+        + "foot of the entry</b>, under the writing — a photograph, a document "
+        + "and a transmission all draw as the same row, so you can see the room "
+        + "they take. Until Ops has the file the row says <i>not here yet</i> "
+        + "and draws an outline rather than inventing a picture." },
 ];
 
 const WEEKS = [
@@ -976,48 +989,9 @@ export function buildWorksheet() {
 
 <div class="mast">
 <h1>The worksheet</h1>
-<p class="lead"><b>Left column is Ops&rsquo;. Right column is yours, and it saves as you
-type.</b> Two weeks, ten days. Start at the top and go down as far as you want &mdash;
-every level is complete on its own. When you want to send it back, press
-<b>copy everything</b> in the bar at the bottom.</p>
-<p class="lead"><b>The weekly headlines are not on this page any more.</b> They are all
-twelve together on <a href="arc.html">the twelve-week table</a> &mdash; asking for week
-one&rsquo;s headline here and again there would be one question with two answers, in two
-browser stores, neither able to see the other. This page is the ten <i>days</i>.</p>
-<p class="lead"><b>Two of the four boxes on every day have a limit, and they now count as
-you type.</b> The headline gets ${BUDGETS.title.max} characters and the index sentence
-gets ${BUDGETS.line.max}, because the index row cannot truncate &mdash; so a string too
-long for it overflows instead of clipping, and the packet is refused. <b>Nothing stops
-you typing past a limit</b>; the counter turns and tells you by how much. The other two
-boxes have no limit at all, and where there is no counter there is nothing to fit &mdash;
-that absence is deliberate, not an oversight. <a href="reference.html#entry-shape">every
-limit a Record entry has, and where each comes from &rarr;</a></p>
-<p class="lead"><b>Every day has a <i>See it on the page</i> button, and it is the real
-thing rather than an impression of it.</b> It draws your day using the museum&rsquo;s own
-components and the museum&rsquo;s own stylesheets, at this window&rsquo;s width &mdash; the
-same type, the same measure, the same wrapping, the index row and the opened entry.
-<b>You can keep writing inside it</b>: the box under the frame is the same box as the
-one on this page, so what you type there is saved here. <b>It takes the whole window
-on purpose</b> &mdash; the museum sizes its type from the width of the window, so a
-preview squeezed beside the form would be the wrong size and would wrap in the wrong
-places, and a preview that is nearly right is the one thing worse than none.</p>
-<p class="lead"><b>How your two prose boxes become sections, so the preview and the
-finished entry agree:</b> <b>a line on its own in CAPITALS starts a new section and is
-its heading</b>; everything under it is that section&rsquo;s paragraphs. It is exactly
-how you dictated Record 001 &mdash; <i>EXECUTIVE SUMMARY</i>, then <i>DETAILED
-REPORT</i>. Write no capitals line and it draws as one run of paragraphs, which is also
-honest.</p>
-<p class="lead"><b>And one more line form, for the things that are not writing.</b> A line
-reading <b><code>ATTACH: what it is</code></b> puts an attachment at the foot of the entry,
-below the writing, where they belong. Photographs, documents and transmissions all draw as
-the same row &mdash; a small preview, a name, a line of detail &mdash; so you can see exactly
-how much room they take. <b>Until Ops has the actual file the row says &ldquo;not here
-yet&rdquo; and shows an outline instead of a picture</b>, which is what the finished entry
-will show until then as well. Nothing is drawn in to fill the space.</p>
-<p class="lead">Everything that explains how any of this works &mdash; the rails, the
-transfer classes, the standing rules, the checks against the tree, the three
-trackers &mdash; is on <a href="reference.html">the reference page</a>, and none of it
-is on this one.</p>
+<p class="lead"><b>Ops on the left, you on the right, and it saves as you type.</b>
+Ten days &mdash; start at the top and go as far as you want. <b>Copy everything</b> is
+in the bar at the bottom. <a href="reference.html">How any of this works &rarr;</a></p>
 </div>
 
 <div class="warn" id="warn"><b>This browser will not let the page save.</b> Nothing you
@@ -1025,11 +999,6 @@ type here will survive a reload. Press <b>copy everything</b> and paste it somew
 safe before you close the tab.</div>
 
 <h2>Day one&rsquo;s date</h2>
-<p class="lead" style="margin-bottom:14px">One box, and it is the only thing two standing
-questions have ever waited on. <b>Every other date follows from it</b> &mdash; the week
-number on each entry, the month bands in a long index, and any door that points at
-another record are all counted from the day the Record starts, so asking ten times would
-only be nine chances for two answers to disagree.</p>
 <div class="day"><div class="hd"><span class="n">Record &middot; day one</span></div>
 <div class="bd">
 <div class="fld"><div class="fh">The calendar date</div>
@@ -1046,10 +1015,8 @@ ${pair("REC.EPOCH",
 </div></div>
 
 <h2>The map &mdash; every day, both weeks</h2>
-<p class="lead" style="margin-bottom:14px">The whole shape in ten lines. <b>You do not
-write here</b> &mdash; the right column fills itself in from the blocks below as you
-go, so this is where you check that two weeks hang together. The arrow jumps to
-the block.</p>
+<p class="lead" style="margin-bottom:14px">Fills itself in from the blocks below. The
+arrow jumps to one.</p>
 ${WEEKS.map(({ w, days, id }) => `<div class="map">
 <div class="mh">Week ${w.n} &middot; ${esc(w.headline)}</div>
 ${days.map(d => mapRow(id, w, d)).join("\n")}
@@ -1195,37 +1162,21 @@ ${c.also ? `  <p class="k" style="margin:0;font-size:12.5px">${esc(c.also)}</p>`
 
 <div class="mast">
 <h1>The twelve weeks</h1>
-<p class="lead"><b>Twelve rows. Ops&rsquo; headline on the left, yours on the right, and
-it saves as you type.</b> This is the whole arc on one screen, which is the only
-reason it is its own page &mdash; you asked to work all twelve at once.</p>
-<p class="lead"><b>Read the two marks separately, because they answer different
-questions.</b> The label at the head of the left column &mdash; <b>Ops</b>, or
-<b class="gld">your words</b> &mdash; says <i>whose sentence this is</i>. The band under
-the headline says <i>whether there is anything of yours underneath it</i>. Week one is
-Ops&rsquo; sentence with your material under it; week two is <b>your sentence, carried
-word for word</b>, and it is the only one. Everything from week four on has nothing of
-yours under it at all.</p>
-<p class="lead"><b>None of these twelve has a limit, and there are no counters on this
-page for that reason.</b> A week headline is a heading on these pages and never becomes a
-field in the museum &mdash; it is not a Record entry&rsquo;s headline, which does have a
-budget and does count as you type on the worksheet. Where a box has something to fit, it
-says so; where it says nothing, there is nothing to fit.</p>
-<p class="lead">The ten <i>days</i> of weeks one and two are on
-<a href="worksheet.html">the worksheet</a>; how any of this works is on
-<a href="reference.html">the reference page</a>.</p>
+<p class="lead"><b>Ops&rsquo; headline on the left, yours on the right, and it saves as you
+type. None of the twelve has a length limit</b> &mdash; a week headline is a heading on
+these pages and never becomes a field in the museum.
+<a href="worksheet.html">the ten days &rarr;</a> &middot;
+<a href="reference.html">how any of this works &rarr;</a></p>
 </div>
 
 <div class="warn" id="warn"><b>This browser will not let the page save.</b> Nothing you
 type here will survive a reload. Press <b>copy everything</b> and paste it somewhere
 safe before you close the tab.</div>
 
-<div class="note">
-<p><b>WHAT THE BANDS MEAN, ONCE.</b></p>
-<p><span class="tag y">${esc(BANDS.DICTATED.label)}</span> &nbsp;${esc(BANDS.DICTATED.means)}</p>
-<p><span class="tag">${esc(BANDS.SCAFFOLD.label)}</span> &nbsp;${esc(BANDS.SCAFFOLD.means)}</p>
-<p><span class="tag n">${esc(BANDS.INVENTED.label)}</span> &nbsp;${esc(BANDS.INVENTED.means)}</p>
-<p class="k" style="font-size:12.5px">${esc(ARC_ORIGIN.rule)}</p>
-</div>
+<p class="k" style="font-size:12px;margin:0 0 18px">
+<span class="tag y">${esc(BANDS.DICTATED.label)}</span> ${esc(BANDS.DICTATED.means)} &nbsp;&middot;&nbsp;
+<span class="tag">${esc(BANDS.SCAFFOLD.label)}</span> ${esc(BANDS.SCAFFOLD.means)} &nbsp;&middot;&nbsp;
+<span class="tag n">${esc(BANDS.INVENTED.label)}</span> ${esc(BANDS.INVENTED.means)}</p>
 
 ${MONTHS.map(monthBlock).join("\n")}
 
@@ -1359,13 +1310,6 @@ ${c.open ? `  <div class="mine"><span class="lbl">yours &middot; the decision</s
 <h1>Reference</h1>
 <p class="sub">Everything that explains the machine, off the worksheet and in one place</p>
 
-<div class="note">
-<p><b>THIS PAGE EXISTS BECAUSE THE LAST ONE PUT ALL OF IT IN FRONT OF THE WORK.</b>
-Nothing here is needed to write a headline. It is here for when you want to know why
-a left-hand column says what it says, or what the museum will and will not let a day
-reach for. <a href="worksheet.html">The worksheet is where the writing happens &rarr;</a></p>
-</div>
-
 <h2>The three marks, and what each one promises</h2>
 <div class="tw"><table>
 <thead><tr><th style="width:22%">mark</th><th style="width:26%">means</th><th>the promise it makes</th></tr></thead>
@@ -1392,6 +1336,9 @@ by the next round. That is why week two carries a gold seam and week one carries
 <tr><td><b>Week 2</b><div class="k">${esc(WEEK2.headline)}</div></td>
     <td>In writing, ${esc(W2_ORIGIN.writtenOn)}.</td>
     <td><b>The headline and six beats.</b> ${esc(W2_ORIGIN.rule)}</td></tr>
+<tr><td><b>All twelve</b><div class="k">the arc&rsquo;s week headlines</div></td>
+    <td>In writing, ${esc(ARC_ORIGIN.writtenOn)}.</td>
+    <td>${esc(ARC_ORIGIN.rule)} <b>${esc(ARC_ORIGIN.bandRule)}</b></td></tr>
 </tbody></table></div>
 <p class="k" style="font-size:12.5px;margin-top:10px"><b>ONE STRUCTURING DECISION WAS
 MADE AND IT IS THE ONLY ONE WORTH ARGUING WITH.</b> Six beats, five days, Friday fixed

@@ -170,10 +170,15 @@ const html = `<!doctype html>
   .bar button{font:inherit;font-size:12.5px;padding:4px 11px;cursor:pointer;
     background:transparent;border:1px solid var(--line);border-radius:2px;color:var(--ink)}
   .bar button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .bar a#jump{font-size:12.5px;color:var(--kill);text-decoration:none;border-bottom:1px solid currentColor}
   .grid{display:grid;gap:14px;padding:18px 20px 60px;
     grid-template-columns:repeat(auto-fill,minmax(${PX + 34}px,1fr))}
+  /* overflow-wrap on the group heading is load-bearing at phone width: these
+     are directory paths with no spaces in them, and at 390px the longest one
+     pushed the DOCUMENT 27px sideways. Text overflow is invisible to a check
+     that reads element boxes — the h2's own box was inside the viewport. */
   h2{grid-column:1/-1;margin:22px 0 -4px;font-size:12.5px;letter-spacing:.14em;
-     text-transform:uppercase;color:var(--dim);
+     text-transform:uppercase;color:var(--dim);overflow-wrap:anywhere;
      border-bottom:1px solid var(--line);padding-bottom:6px}
   h2 span{text-transform:none;letter-spacing:0;float:right;font-weight:400}
   .t{margin:0;background:var(--card);border:1px solid var(--line);border-radius:3px;
@@ -207,7 +212,7 @@ const html = `<!doctype html>
   .v{font-size:11.5px;color:#4b4740}
   .p{font-size:10.5px;color:var(--dim);word-break:break-all;
      user-select:all;padding-top:2px;border-top:1px dotted var(--line)}
-  #out{grid-column:1/-1;background:var(--card);border:1px solid var(--line);
+  #out{grid-column:1/-1;margin-top:22px;background:var(--card);border:1px solid var(--line);
        padding:12px;border-radius:3px}
   #out textarea{width:100%;min-height:150px;font:12px/1.4 ui-monospace,monospace;
        border:1px solid var(--line);border-radius:2px;padding:8px;background:#fffef9}
@@ -218,8 +223,7 @@ const html = `<!doctype html>
     ${kb(bytes)} on disk &middot; ${counts.shipped} on the glass &middot;
     ${counts.unref} referenced by nothing &middot; ${counts.source} never served &middot;
     ${counts.held} behind the door &middot; ${gone} point at a file that is not on disk
-    &middot; <b>${counts.ruled} carry a verdict</b>.
-    Read off <code>provenance/asset-table.json</code>; this page writes nothing.</div>
+    &middot; <b>${counts.ruled} carry a verdict</b>.</div>
   <div class="bar">
     <button data-f="all" class="on">everything</button>
     <button data-f="shipped">on the glass</button>
@@ -229,17 +233,18 @@ const html = `<!doctype html>
     <button data-f="gone">not on disk</button>
     <button data-f="killed">marked for the cull</button>
     <span style="flex:1"></span>
+    <a id="jump" href="#out" hidden>0 marked</a>
     <button id="clear">clear marks</button>
   </div>
 </header>
 <div class="grid">
-  <div id="out">
-    <b>Marked for the cull &mdash; <span id="n">0</span></b><br>
-    <span class="m">Click the &#10007; on any tile. The list below is plain text; copy it into the round’s brief. Nothing here is deleted by this page.</span>
-    <textarea id="ta" readonly placeholder="nothing marked yet"></textarea>
-  </div>
 ${groups.map(g => `  <h2>${esc(g.name)} <span>${g.tiles.length} image${g.tiles.length === 1 ? "" : "s"}</span></h2>
 ${g.tiles.map(tileHtml).join("\n")}`).join("\n")}
+  <div id="out">
+    <b>Marked for the cull &mdash; <span id="n">0</span></b>
+    <span class="m">Plain text. Nothing here is deleted by this page.</span>
+    <textarea id="ta" readonly placeholder="click the ✗ on any tile"></textarea>
+  </div>
 </div>
 <script>
   const grid = document.querySelector(".grid");
@@ -248,6 +253,8 @@ ${g.tiles.map(tileHtml).join("\n")}`).join("\n")}
   function refresh() {
     const k = [...document.querySelectorAll(".t.killed")];
     n.textContent = k.length;
+    const j = document.getElementById("jump");
+    j.hidden = !k.length; j.textContent = k.length + " marked ↓";
     ta.value = k.map(t => t.dataset.path + "   (" + t.dataset.uid + ")").join("\\n");
   }
   grid.addEventListener("click", e => {

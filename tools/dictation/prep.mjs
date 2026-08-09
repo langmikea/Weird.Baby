@@ -52,6 +52,15 @@
    orphaned, and this index lost its own briefing for the same reason the
    worksheet lost its preamble.
 
+   ═══ [L3/C4 2026-08-08] AND THE PREAMBLES CAME BACK, SO IT IS A RULE NOW ════
+   MIKE: *"All the stuff at the top, I never read."* Three rounds after the
+   worksheet was split precisely to end this, its masthead had grown to SEVEN
+   paragraphs and the spec sheet opened on five. Doctrine 25 — THE TOOLS ARE FOR
+   WORKING, NOT FOR BRIEFING — is the standing test, and it has one construction
+   rule attached: a thing worth knowing goes ON THE FIELD, IN THE FOOTER, or on
+   `reference.html`, and never above the work. If it fits none of those, Ops
+   raises it in conversation. It does not go on a page he has to read past.
+
    ═══ [B1/B2 2026-08-07] TWO RULINGS, AND ONE OF THEM VOIDED A NUMBER THIS
        FILE WAS PRINTING ═══════════════════════════════════════════════════════
    B1 — THE BOUNCY BALL LAW CAPS POINTS OF FOCUS, NOT ASSETS. This file was
@@ -81,19 +90,21 @@ import path from "node:path";
 import url from "node:url";
 import { spawnSync } from "node:child_process";
 import { UNIT, MAINFRAME, ADJACENTS, FORCED, SOURCES } from "./spec-source.mjs";
-import { TRANSFERS, CLASSES } from "../../reveal/transfers.mjs";
 import { delivered, SIGNAGE } from "../../reveal/delivery.mjs";
 import { entries as recordEntries } from "../../reveal/record-entries.mjs";
 import { GOVERNED_PREFIX, STAGE_PREFIX } from "../../reveal/placement.mjs";
 import { ORIGIN as FOCUS_ORIGIN, runways, bucketOf } from "../../reveal/focus.mjs";
 import { STAMP, esc, rich, runwayBlock, OPS_CSS, TYPED_CSS, page, BACK } from "./shell.mjs";
 import { buildWorksheet, buildReference, buildArc } from "./worksheet.mjs";
+import { thumbnails, lightTable, LIGHT_CSS } from "./lighttable.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..", "..");
 const argv = process.argv.slice(2);
 const optOf = (n, d) => { const i = argv.indexOf("--" + n); return i >= 0 ? argv[i + 1] : d; };
 const OUT = path.resolve(REPO, optOf("out", "docs/dictation-20260807"));
+/* thumbnails are cached by content hash; --fresh re-renders every one */
+const FRESH = argv.includes("--fresh");
 
 const LEDGER = JSON.parse(fs.readFileSync(path.join(REPO, "reveal/ledger.json"), "utf8"));
 const TABLE = JSON.parse(fs.readFileSync(path.join(REPO, "provenance/asset-table.json"), "utf8"));
@@ -142,53 +153,16 @@ function buildSpecsheet() {
 
   const body = `${BACK}<div class="sheet">
 <div class="box">
-<p><b>WHAT THIS IS.</b> Every piece of story-generated technical data about
-both machines, from both repositories, in one place &mdash; with its source, and
-marked for whether the fiction <i>asserts</i> it, <i>implies</i> it, or
-<i>contradicts itself</i> about it. It is authoring input for the two open rows
-that both end on the same sentence (<code>N-g</code>, <code>N-h</code>):
-<i>the unit's own particulars &mdash; what an ABEAL spec sheet for this machine
-says.</i></p>
-
-<p><b>NOTHING HERE IS INVENTED.</b> No figure, name, code, count or date appears
-for the first time on this page. Where two sources disagree, both readings are
-printed and the conflict is named by its register id. Where the structure has a
-position and nothing fills it, the row says <i>nothing on file</i> rather than
-guessing. That is deliberate and it is the whole of Doctrine 12: a gap stated is
-material; a gap filled quietly is a fabrication.</p>
-
-<p><b>THE MANUAL'S OWN SECTION STRUCTURE IS NOT THE GROUPING, AND HERE IS WHY.</b>
-It was the candidate and it does not serve. The structure issue is twelve
-sections and eight appendices describing a whole operating and maintenance
-manual, and <i>ten of the twelve are procedures</i> &mdash; installation,
-starting, operating, maintenance, troubleshooting, service. A one-sheet is not
-an abridged manual; it is the specification, which in that structure is Section
-II and pieces of VII and XII. Grouping a one-sheet by the manual's twelve would
-put nine near-empty headings on a page whose only virtue is that it is one page.
-<b>What is used instead is the period specification's own grouping</b> &mdash;
-the shape Table 2-1 and Table 2-2 already have &mdash; and <i>every heading
-carries its manual position</i>, so an authored row lands where the structure
-says it goes. The manual's structure is the destination; it is not the
-arrangement.</p>
-
-<p><b>THE RED FLAG IS THE MOST IMPORTANT MARK ON THE PAGE.</b> Doctrine 18:
-<i>Technical Specifications means the IN-STORY specs, never the real ones.</i>
-Register <code>N-i</code> found that the in-story manual's own SPECIFICATIONS
-section cites the real Arduino firmware for six rows &mdash; and that in one of
-them (<i>how many lamps</i>) the firmware <i>overrules</i> the manual. Every such
-row below is flagged <span class="fw">REAL-BUILD SOURCE</span>.
-<b>${fwRows} rows carry it.</b> A 1965 spec sheet may carry a display size; it
-may not carry an I&sup2;C address, and this document is one authoring pass
-upstream of the face that would print one.</p>
-
-<p><b>THE REGISTER.</b> Set as Mike ruled the manual: <i>made on a typewriter by
-engineering &mdash; not typeset, not laid out, not designed.</i> Elite pitch, a
-78-column measure, ragged right, sideheads in capitals and underscored, no bold
-(a typewriter has none; emphasis is overstrike), rules typed as hyphens.</p>
-
-<p class="src">Counts: ${counts.ASSERTED} asserted &middot;
-${counts.IMPLIED} implied &middot; <b>${counts.CONTRADICTED} contradicted</b> &middot;
-${counts.ABSENT} absent.</p>
+<p>Every piece of story-generated technical data about both machines, from both
+repositories, with its source &mdash; marked for whether the fiction <i>asserts</i> it,
+<i>implies</i> it, or <i>contradicts itself</i> about it. Nothing on this page appears
+for the first time here; where the structure has a position and nothing fills it, the
+row reads <i>nothing on file</i>.</p>
+<p class="src">${counts.ASSERTED} asserted &middot; ${counts.IMPLIED} implied &middot;
+<b>${counts.CONTRADICTED} contradicted</b> &middot; ${counts.ABSENT} absent &middot;
+<span class="fw">REAL-BUILD SOURCE</span> = the in-story manual cites the real Arduino
+firmware for this row, and a 1965 spec sheet may not carry an I&sup2;C address
+(<b>${fwRows} rows</b>, register <code>N-i</code>).</p>
 </div>
 
 ${specBlock(UNIT)}
@@ -220,7 +194,19 @@ ${Object.entries(SOURCES).map(([k, v]) =>
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   K3 — THE ARTIFACT TRACKER
+   K3 — THE ARTIFACT TRACKER, WHICH IS A LIGHT TABLE NOW [L2/C3 2026-08-08]
+
+   MIKE: *"Without a preview, and a means to see it in a viewer — not very
+   useful."* The grid, the tiles and the viewer are `./lighttable.mjs`; what
+   stays here is the JOIN — reach, governance and the ledger — because that is
+   the part this file has always owned.
+
+   THE POPULATION WIDENED AND IT WAS HIS INSTRUCTION THAT WIDENED IT. *"Build
+   it over the POST-CULL set so it shows only what still exists."* Everything
+   the cull touched is in the robots repo and has no public address, so the old
+   page's 47 addressable rows could not have shown a post-cull anything. It is
+   every row whose file is on disk now, and the three `missing: true` rows are
+   the only ones out.
    ═══════════════════════════════════════════════════════════════════════════ */
 const DELIVERED = new Set(delivered());
 const SIGNAGE_REFS = new Set(Object.keys(SIGNAGE).map(k => GOVERNED_PREFIX + k));
@@ -252,48 +238,43 @@ function reachOf(e) {
   return { k: "YES — ONE ENTRY", c: "g", w: "Behind the stage door and waiting. Writing an entry whose assets name this file is the whole of what puts it on the wall — no code." };
 }
 
-function buildArtifacts() {
-  const rows = TABLE.entries.map(e => {
+async function buildArtifacts() {
+  const joinedUids = new Set(LEDGER.rows.flatMap(r => r.assets || []));
+
+  const all = TABLE.entries.map(e => {
     const pub = publicRef(e.ref);
-    const reach = reachOf(e);
     return {
-      uid: e.uid, path: e.path, pub, held: e.path.startsWith("public/held/"),
-      what: e.what, quality: e.quality, verdict: e.verdict, arc: e.revealArc,
-      role: e.role, usedBy: e.usedBy || [], kind: e.kind, missing: !!e.missing,
-      dims: e.w && e.h ? `${e.w}×${e.h}` : "", bytes: e.bytes, reach,
-      governed: isGoverned(pub),
+      uid: e.uid, repo: e.repo, path: e.path, sha256: e.sha256,
+      kind: e.kind, format: e.format, bytes: e.bytes, w: e.w, h: e.h,
+      pub, held: e.path.startsWith("public/held/"), missing: !!e.missing,
+      what: e.what, quality: e.quality, qualityNote: e.qualityNote,
+      verdict: e.verdict, revealArc: e.revealArc, role: e.role,
+      usedBy: e.usedBy || [], ledgered: joinedUids.has(e.uid),
+      governed: isGoverned(pub), reach: reachOf(e),
       /* [B1 2026-08-07] Mike's bouncy ball bucket — read, never derived */
       bucket: bucketOf(e),
     };
   });
 
-  const addressed = rows.filter(r => r.pub);
-  const gone = addressed.filter(r => r.missing);
-  const governed = addressed.filter(r => r.governed);
-  const waiting = governed.filter(r => r.reach.k === "YES — ONE ENTRY");
-  const joinedUids = new Set(LEDGER.rows.flatMap(r => r.assets || []));
-  /* [B1 2026-08-07] the two runways, over the set this page is about: the files
-     an entry can reach for today. Not the whole table — a runway computed over
-     source files and working copies would be a number about the disk. */
+  /* HIS OWN WORDING IS THE FILTER: "so it shows only what still exists". */
+  const onDisk = all.filter(r => !r.missing);
+  const addressed = all.filter(r => r.pub && !r.missing);
+  const waiting = addressed.filter(r => r.governed && r.reach.k === "YES — ONE ENTRY");
   const runwayOfWaiting = runways(waiting);
 
-  const tr = r => `<tr data-g="${r.governed ? "gov" : "out"}" data-r="${esc(r.reach.k)}" data-q="${esc(r.quality || "unjudged")}" data-m="${r.missing ? "1" : "0"}" data-b="${esc(r.bucket || "unassigned")}"
-   data-t="${esc([r.path, r.what, r.quality, r.reach.k, r.bucket || "unassigned", r.usedBy.join(" ")].join(" ").toLowerCase())}">
-  <td><code>${esc(r.pub || r.path)}</code>${r.held ? ' <span class="tag g">held</span>' : ""}${r.missing ? ' <span class="tag n">no file</span>' : ""}
-      ${joinedUids.has(r.uid) ? ' <span class="tag b">ledgered</span>' : ""}
-      <div class="k" style="font-size:11px;margin-top:3px">${esc(r.dims)}${r.bytes ? ` · ${Math.round(r.bytes / 1024)} KB` : ""} · <code>${esc(r.uid)}</code></div></td>
-  <td>${esc(r.what || "")}${r.what ? "" : '<i class="k">nobody has written what this is</i>'}</td>
-  <td><span class="tag ${r.quality === "usable" ? "y" : r.quality === "wrong" || r.quality === "placeholder" ? "n" : ""}">${esc(r.quality || "unjudged")}</span>
-      <div class="k" style="font-size:11px;margin-top:4px">verdict: ${r.verdict ? esc(r.verdict) : "<i>not inspected</i>"}</div>
-      <div class="k" style="font-size:11px">arc: ${r.arc ? esc(r.arc) : "<i>unset</i>"}</div>
-      <div class="k" style="font-size:11px">bucket: ${r.bucket ? `<b>${esc(r.bucket)}</b>` : "<i>unassigned</i>"}</div></td>
-  <td><span class="tag ${r.reach.c}">${esc(r.reach.k)}</span>
-      <div class="k" style="font-size:11.5px;margin-top:4px">${esc(r.reach.w)}</div></td>
-  <td class="k" style="font-size:11px">${r.usedBy.length ? r.usedBy.map(u => `<code>${esc(u)}</code>`).join("<br>") : "<i>nothing</i>"}</td>
-</tr>`;
+  /* the machines lead, then everything in path order. A light table is SCANNED,
+     so the order has to be one a person can hold — and the subject of the
+     Record is the two machines. */
+  const machine = r => r.governed || r.repo === "robots";
+  onDisk.sort((a, b) =>
+    (machine(b) - machine(a)) || a.repo.localeCompare(b.repo) || a.path.localeCompare(b.path));
 
-  /* the ledger half — the transfer class, arc and dependencies live here and
-     nowhere else, so they get their own table rather than a faked column. */
+  const { thumbs, hits, made, failed } =
+    await thumbnails(onDisk, { fresh: FRESH, log: s => console.log(s) });
+
+  /* THE LEDGER HALF. Transfer class, arc and dependencies are properties of a
+     revealable THING and not of a file, so they stay a table and are not faked
+     into the grid above. It is second and it is quiet. */
   const revealable = LEDGER.rows.filter(r => r.cls !== "egg" && r.state !== "RETIRED");
   const lrow = r => `<tr data-s="${esc(r.state)}" data-c="${esc(r.transfer || "EXEMPT")}"
    data-t="${esc([r.id, r.name, r.where, (r.deps || []).join(" ")].join(" ").toLowerCase())}">
@@ -309,83 +290,16 @@ function buildArtifacts() {
 
   const body = `<div class="wrap">
 ${BACK}
-<h1>The artifact tracker</h1>
-<p class="sub">${TABLE.entries.length} files &middot; ${LEDGER.rows.length} revealable things &middot; what is available, what is held, what is spent</p>
+<h1>The light table</h1>
 
-<div class="note">
-<p><b>THE ONE QUESTION THIS PAGE ANSWERS:</b> can you reach for this in a Record
-entry today? For a picture of the machines the answer is almost always
-<i>yes, and it takes one entry and no code</i> &mdash; <b>${waiting.length} governed
-pictures are sitting behind the stage door right now</b>, and naming a file in an
-entry's assets is the entire mechanism that puts it on a wall.</p>
+${lightTable(onDisk, thumbs)}
 
-<p><b>ONE FILE HAS EVER BEEN DELIVERED.</b> <code>rear_power_switch.png</code>, by
-Record 013 &mdash; <b>the prototype entry</b>, which you ruled on
-${esc(FOCUS_ORIGIN.correctedOn)} is not day one and is not in the volume's sequence.
-It is kept precisely because it is the only thing exercising this machinery: strike
-it and the delivered set is empty, the pull-back rule has no positive case anywhere
-in the museum, and this column has nothing to be right about. Everything else the
-museum owns of these machines has never been brought into the story by anybody.</p>
-
-<p class="ops"><b>AND ${gone.length} ROWS HAVE NO FILE, WHICH IS A DIFFERENT THING
-FROM AN ERROR.</b> The asset table keeps a row after its file goes so that a
-verdict Mike gave survives a rename &mdash; and two of these three are the
-<i>public-side twins</i> of pictures that moved behind the stage door, so the same
-photograph is in this table twice, once at each of its two addresses. They are
-drawn <span class="tag n">no file</span> and excluded from every reach count,
-because telling you three more pictures were an entry away would have been the
-two-addresses hazard doing its trick on a brand-new instrument.</p>
-
-<p class="ops"><b>THE JOIN IS NINE ROWS DEEP AND THAT IS NOT A DEFECT.</b>
-<code>provenance/asset-table.json</code> is the authority on FILES;
-<code>reveal/ledger.json</code> is the authority on REVEALABLE THINGS; the ledger's
-own header says the two meet at <code>assets</code> and neither restates the other.
-Nine ledger rows carry an asset uid, so nine files are marked
-<span class="tag b">ledgered</span> below. <b>Transfer class, reveal arc and
-dependencies are properties of a revealable thing, not of a file</b> &mdash; so
-they are in the second table rather than faked into the first. A tracker that
-quietly implied a full join would be lying about its own coverage.</p>
-
-<p class="ops"><b>[B1] AND THIS PAGE NO LONGER COUNTS PICTURES AGAINST THE BOUNCY
-BALL LAW, BECAUSE THAT IS NOT WHAT THE LAW COUNTS.</b> You corrected it on
-${esc(FOCUS_ORIGIN.correctedOn)}: it caps <b>points of focus</b>, not assets, and it
-does not mean the museum may not show more pictures. Ten manual pages arriving is
-ONE point of focus. So every row below carries a <b>bucket</b> &mdash;
-<b>precious</b> or <b>dump</b> &mdash; and it is <b>yours</b>, unset, sitting beside
-<code>verdict</code> in the asset table. Ops will not guess it.</p>
-</div>
-
-<h2>The two runways</h2>
+<h2>The two runways &middot; the ${waiting.length} pictures an entry can reach for today</h2>
 ${runwayBlock(runwayOfWaiting, "the " + waiting.length + " pictures an entry can reach for today")}
 
-<h2>Every addressable file &middot; ${addressed.length} rows</h2>
-<div class="bar">
-  <input id="q1" placeholder="filter — path, description, quality, use&hellip;">
-  <button data-f1="all" aria-pressed="true">all</button>
-  <button data-f1="gov">the machines</button>
-  <button data-f1="wait">waiting on an entry</button>
-  <button data-f1="done">delivered</button>
-  <button data-f1="weak">weak / wrong</button>
-  <button data-f1="gone">no file</button>
-  <button data-f1="precious">precious</button>
-  <button data-f1="dump">dump</button>
-  <button data-f1="nobucket">no bucket yet</button>
-  <span class="count" id="c1"></span>
-</div>
-<div class="tw"><table id="t1"><thead><tr><th>file</th><th>what it shows</th><th>judgement</th><th>reach today</th><th>used by</th></tr></thead>
-<tbody>${addressed.map(tr).join("\n")}</tbody></table></div>
-
 <h2>Revealable things &middot; transfer class, arc and dependencies &middot; ${revealable.length} rows</h2>
-<div class="note" style="margin-bottom:14px">
-<p>The transfer classes are how a thing GOT here, never how it is shown.
-<b>Only ${CLASSES.filter(c => TRANSFERS[c].week === 0).length} of the four have
-arrived by week one</b> &mdash;
-${CLASSES.map(c => `<b>${c}</b> (${TRANSFERS[c].week === 0 ? "week 0, in hand" : "not yet"})`).join(" &middot; ")}
-&mdash; so a week-one entry that reaches for a PACKAGE or TRANSMISSION row is
-reaching for something the story has not received. Eggs are on their own page.</p>
-</div>
 <div class="bar">
-  <input id="q2" placeholder="filter — id, name, where, dependency&hellip;">
+  <input id="q2" placeholder="filter &mdash; id, name, where, dependency&hellip;">
   <button data-f2="all" aria-pressed="true">all</button>
   <button data-f2="held">held</button>
   <button data-f2="week0">arrived (week 0)</button>
@@ -396,53 +310,41 @@ reaching for something the story has not received. Eggs are on their own page.</
 <div class="tw"><table id="t2"><thead><tr><th>id</th><th>what</th><th>state</th><th>transfer</th><th>waits on</th></tr></thead>
 <tbody>${revealable.map(lrow).join("\n")}</tbody></table></div>
 
-<footer>Built by <code>node tools/dictation/prep.mjs</code> from
+<footer>${onDisk.length} files on disk &middot; ${addressed.length} with a public address &middot;
+${all.length - onDisk.length} rows whose file is gone are not drawn.
+Thumbnails are inlined; clicking one opens the file itself from disk.
+Built by <code>node tools/dictation/prep.mjs</code> from
 <code>provenance/asset-table.json</code>, <code>reveal/ledger.json</code>,
-<code>reveal/delivery.mjs</code> and <code>reveal/transfers.mjs</code>. It writes
-nothing back. <code>verdict</code> is Mike's field and Ops never sets it.</footer>
+<code>reveal/delivery.mjs</code> and <code>reveal/transfers.mjs</code>; it writes nothing back,
+and <code>verdict</code> and <code>bucket</code> are yours. Why a row says what it says:
+<a href="reference.html">reference</a>.</footer>
 </div>
 <script>
 (function(){
- function wire(tid,qid,cid,attr,tests){
-  var t=document.getElementById(tid),q=document.getElementById(qid),c=document.getElementById(cid);
-  var btns=[].slice.call(document.querySelectorAll('[data-'+attr+']'));
-  var mode='all';
-  function apply(){
-   var s=q.value.trim().toLowerCase(),n=0;
-   [].forEach.call(t.tBodies[0].rows,function(r){
-    var ok=tests[mode](r)&&(!s||r.getAttribute('data-t').indexOf(s)>=0);
-    r.className=ok?'':'hide'; if(ok)n++;
-   });
-   c.textContent=n+' shown';
-  }
-  btns.forEach(function(b){b.addEventListener('click',function(){
-   mode=b.getAttribute('data-'+attr);
-   btns.forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});
-   apply();});});
-  q.addEventListener('input',apply); apply();
- }
- wire('t1','q1','c1','f1',{
-  all:function(){return true;},
-  gov:function(r){return r.getAttribute('data-g')==='gov';},
-  wait:function(r){return r.getAttribute('data-r').indexOf('YES')===0;},
-  done:function(r){return r.getAttribute('data-r').indexOf('ALREADY')===0;},
-  weak:function(r){var q=r.getAttribute('data-q');return q==='weak'||q==='wrong'||q==='placeholder'||q==='unjudged';},
-  gone:function(r){return r.getAttribute('data-m')==='1';},
-  precious:function(r){return r.getAttribute('data-b')==='precious';},
-  dump:function(r){return r.getAttribute('data-b')==='dump';},
-  nobucket:function(r){return r.getAttribute('data-b')==='unassigned';}
- });
- wire('t2','q2','c2','f2',{
-  all:function(){return true;},
+ var t=document.getElementById('t2'),q=document.getElementById('q2'),c=document.getElementById('c2');
+ var btns=[].slice.call(document.querySelectorAll('[data-f2]')),mode='all';
+ var tests={all:function(){return true;},
   held:function(r){return r.getAttribute('data-s')==='HELD';},
-  week0:function(r){var c=r.getAttribute('data-c');return c==='BLAST'||c==='UNLOCK';},
-  later:function(r){var c=r.getAttribute('data-c');return c==='PACKAGE'||c==='TRANSMISSION';},
-  deps:function(r){return r.cells[4].textContent.indexOf('nothing')<0;}
- });
+  week0:function(r){var x=r.getAttribute('data-c');return x==='BLAST'||x==='UNLOCK';},
+  later:function(r){var x=r.getAttribute('data-c');return x==='PACKAGE'||x==='TRANSMISSION';},
+  deps:function(r){return r.cells[4].textContent.indexOf('nothing')<0;}};
+ function apply(){var s=q.value.trim().toLowerCase(),n=0;
+  [].forEach.call(t.tBodies[0].rows,function(r){
+   var ok=tests[mode](r)&&(!s||r.getAttribute('data-t').indexOf(s)>=0);
+   r.className=ok?'':'hide'; if(ok)n++;});
+  c.textContent=n+' shown';}
+ btns.forEach(function(b){b.addEventListener('click',function(){mode=b.getAttribute('data-f2');
+  btns.forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});apply();});});
+ q.addEventListener('input',apply);apply();
 })();
 </script>`;
-  return { html: page({ title: `THE ARTIFACT TRACKER — ${STAMP}`, css: OPS_CSS, body }),
-    waiting: waiting.length, addressed: addressed.length, runways: runwayOfWaiting };
+
+  console.log(`  thumbnails: ${made} rendered, ${hits} from cache, ${failed} unreadable`);
+  return {
+    html: page({ title: `THE LIGHT TABLE — ${STAMP}`, css: OPS_CSS + LIGHT_CSS, body }),
+    waiting: waiting.length, addressed: addressed.length, shown: onDisk.length,
+    thumbed: made + hits, unreadable: failed, runways: runwayOfWaiting,
+  };
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -511,25 +413,10 @@ ${BACK}
 <h1>The egg tracker</h1>
 <p class="sub">${eggs.length} rows in the ledger &middot; ${planted.length} planted &middot; ${spent.length} spent &middot; ${waiting.length} waiting &middot; and ${OFF_LEDGER.length} that are not in the table at all</p>
 
-<div class="note">
-<p><b>PLANTED</b> means built, held, and nobody told &mdash; it exists in the tree
-today and finding it is the visitor's job. <b>SPENT</b> means it is on the glass;
-whoever finds it, finds it, and nothing there is recoverable. <b>WAITING</b>
-means an idea with a row and no build, ledgered so it is not a thing somebody
-remembers hearing once.</p>
-
-<p><b>${onlyHere.length} EGGS HAVE NO WRITTEN FORM ANYWHERE BUT THEIR LEDGER
-ROW.</b> The <code>note</code> field IS the egg &mdash; it is printed on no page,
-in either repository, by Mike's own instruction that the reason must not be
-explained on the glass. Explaining one on a face would spend it in the same
-commit that planted it.</p>
-
-<p class="ask"><b>AND NOTHING IN THIS MUSEUM REPORTS AN EGG BEING TRIPPED.</b>
-So <i>planted</i> is a statement about the tree and never about a visitor. The
-poke is the standing gate on every future egg by your own ruling &mdash;
-<i>do not bother with a next-level egg until this one at least catches on</i>
-&mdash; and that condition is met by your word, not by a number.</p>
-</div>
+<p class="k" style="font-size:12px;margin:0 0 18px">
+<span class="tag g">PLANTED</span> built, held, nobody told &nbsp;&middot;&nbsp;
+<span class="tag y">SPENT</span> on the glass &nbsp;&middot;&nbsp;
+<span class="tag">WAITING</span> an idea with a row and no build</p>
 
 <div class="bar">
   <input id="q" placeholder="filter — name, mechanism, dependency, note&hellip;">
@@ -552,10 +439,13 @@ answer</b>, so each carries it.</p></div>
 ${OFF_LEDGER.map(off).join("\n")}
 </div>
 
-<footer>Built from <code>reveal/ledger.json</code> (class <code>egg</code>) plus
-the three rows above, which are read out of <code>docs/OPEN_ACTIONS.md</code> and
-the robots repo's props ledger. Same population as <code>npm run reveal:eggs</code>.
-Nothing here is written back.</footer>
+<footer>${onlyHere.length} of these eggs have no written form anywhere but their
+ledger row &mdash; the <code>note</code> field IS the egg, and printing it on a face
+would spend it in the commit that planted it. Nothing in the museum reports an egg being
+tripped, so <i>planted</i> is a statement about the tree and never about a visitor.
+Built from <code>reveal/ledger.json</code> (class <code>egg</code>) plus the three rows
+above, read out of <code>docs/OPEN_ACTIONS.md</code> and the robots repo's props ledger.
+Same population as <code>npm run reveal:eggs</code>; nothing here is written back.</footer>
 </div>
 <script>
 (function(){
@@ -588,14 +478,6 @@ function buildIndex(a, e) {
   const body = `<div class="wrap">
 <h1>The dictation prep</h1>
 <p class="sub">Weird.Baby Museum &middot; ${STAMP} &middot; Ops&#8209;to&#8209;Mike, and not part of the museum</p>
-
-<div class="note">
-<p><b>You are about to dictate the Record. Start with the twelve weeks, then the
-ten days.</b> Everything else here answers a question you may not have yet.
-<b>Nothing on any of these pages was invented</b> &mdash; every figure, file, egg
-and conflict is carried from one of the two repositories with its source named,
-and every gap is printed as a gap.</p>
-</div>
 
 <div class="cards" style="grid-template-columns:1fr;margin-bottom:14px">
 <div class="card" style="border-color:#6b5426">
@@ -727,7 +609,7 @@ const PREVIEW_OUT = path.join(OUT, "_preview");
   }
 }
 
-const art = buildArtifacts();
+const art = await buildArtifacts();
 const egg = buildEggs();
 const files = [
   ["specsheet.html", buildSpecsheet()],

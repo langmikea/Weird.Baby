@@ -72,9 +72,9 @@ const INSTRUMENTS = [
     file: "dictation-20260807/arc.html",
     what: "The whole arc, week by week. Two marks per row — whose sentence it is, and whether there is anything of yours under it.",
     rebuild: "npm run dictation" },
-  { name: "The artifact tracker",
+  { name: "The light table",
     file: "dictation-20260807/artifacts.html",
-    what: "Every governed picture and where it stands. Filters for precious / dump / no bucket yet.",
+    what: "Every file the museum still has, as a thumbnail. Click one and it opens full size with everything known about it beside it.",
     rebuild: "npm run dictation" },
   { name: "The egg tracker",
     file: "dictation-20260807/eggs.html",
@@ -90,7 +90,7 @@ const INSTRUMENTS = [
     rebuild: "npm run dictation" },
   { name: "The contact sheet",
     file: "CONTACT_SHEET.html",
-    what: "Every media file in the museum on one page, at thumbnail size.",
+    what: "Every image in both repos, grouped by folder, with a ✗ on each tile for marking a cull.",
     rebuild: "npm run contact-sheet" },
   { name: "The open-actions register",
     file: "OPEN_ACTIONS.html",
@@ -349,10 +349,10 @@ if (fs.existsSync(oaMd)) {
   const src = stamp(fs.statSync(oaMd).mtime);
   const body = `<div class="wrap">
 <p class="sub"><a href="OPS_DESK.html">&larr; the Ops desk</a></p>
-<div class="note"><p><b>This is a rendering of <code>docs/OPEN_ACTIONS.md</code>, not the register itself.</b>
-The markdown is the source and it was last written <b>${esc(src)}</b>. Rebuild this page with <code>npm run desk</code>.</p></div>
 ${renderMarkdown(md)}
-<p class="foot">Rendered by <code>tools/ops-desk.mjs</code>. Ops instrument &mdash; not part of the museum, and never at a live address.</p>
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/OPEN_ACTIONS.md</code>,
+which is the source and was last written <b>${esc(src)}</b>. Rebuild with <code>npm run desk</code>.
+Ops instrument &mdash; not part of the museum, and never at a live address.</p>
 </div>`;
   fs.writeFileSync(path.join(DOCS, "OPEN_ACTIONS.html"),
     page({ title: "OPEN ACTIONS — the standing register", css: DOC_CSS, body, favi: "📋" }));
@@ -387,16 +387,8 @@ const body = `<div class="wrap">
 <h1>Weird.Baby &mdash; the Ops desk</h1>
 <p class="sub">Every instrument, one page. Generated ${esc(stamp(new Date()))} by <code>tools/ops-desk.mjs</code>.</p>
 
-<div class="note">
-<p><b>Everything here is Ops&rsquo; housekeeping, and none of it is the museum.</b>
-These pages live under <code>docs/</code> on your machine and have no address on
-the web &mdash; a page whose subject is the making of the museum cannot stand at a
-live one.</p>
-<p><b>Each card carries its own age.</b> A launcher cannot make a tool current;
-only the generator behind that tool can. If a page looks out of date, the command
-that rebuilds it is on the card.</p>
-<p><b>Rebuild everything:</b> <code>npm run dictation &amp;&amp; npm run contact-sheet &amp;&amp; npm run desk</code></p>
-</div>
+<p class="sub" style="margin-bottom:20px">Rebuild everything:
+<code>npm run dictation &amp;&amp; npm run contact-sheet &amp;&amp; npm run desk</code></p>
 
 <h2>The instruments</h2>
 <div class="cards">

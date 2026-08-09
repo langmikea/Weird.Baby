@@ -53,7 +53,25 @@ first. A search of both trees finds **no file whose name contains "glove" and no
 was kept or killed on that clause because there was nothing to apply it to; if
 the glove material exists it is somewhere neither repo can see.
 
+> **[ANSWERED 2026-08-08, MIKE — THE QUESTION IS CLOSED AND MUST NOT BE
+> REOPENED.]** The three burp `.MP4`s **are** the glove videos. The search above
+> was looking for a filename and the material was in front of it under a
+> different one, so **the KEEP clause was satisfied all along**: the glove
+> footage survived this cull, as sources, and was never at risk. The eleven
+> stills that died were frames pulled *out of* it. Nothing further is owed on
+> this and no future round is to go looking again.
+> `content/burps/processed/IMG_9766.MP4` · `IMG_9767.MP4` · `IMG_9768.MP4`.
+
 ## §3 — WHAT WAS NOT DELETED, AND IS LISTED FOR HIM
+
+> **[RULED 2026-08-08, MIKE — DELETED. THIS SECTION IS HISTORY.]** *"C-a IS
+> RULED: DELETE the 27 calibration frames in `_cal/`, plus `cal.json` and the
+> folder."* Done the same day: **28 files, 3.20 MB**, and the 27 asset-table rows
+> culled with `npm run assets:cull`. The folder is gone. **They were untracked —
+> `content/burps/.gitignore` excludes the whole tree — so there is no git object
+> to restore them from**, which is the one fact this record is kept for.
+> Register row `C-a` is closed and has left `docs/OPEN_ACTIONS.md` under
+> Doctrine 24. The paragraphs below are what the question WAS.
 
 **The 27 calibration frames** — `content/burps/derived/_cal/IMG_97xx__s0…s8.jpg`,
 nine per video.

@@ -1589,3 +1589,112 @@ load-bearing in it is NOT here — it is the two-stages paragraph at the head of
   driver** - it raises a tab-modal permission prompt that froze the renderer and
   timed out CDP. **Nothing in `src/` changed.** **Surfacing unmoved at 20
   spendable - the FOURTH packet running.**
+
+---
+
+### 2026-08-07 -> THE NIGHT DESK (S1-S4) - sealed
+- **S2 ASKED FOR TEXT THAT IS NOT IN ANY TREE THIS SESSION CAN REACH, AND SAYING
+  SO IS HALF THE DELIVERABLE.** The instruction named an executive summary and a
+  detailed report *"as he wrote them"* and carried only a parenthetical of the
+  timeline; the prose is in neither repository nor anywhere under
+  `C:\AI\Projects`. **RECORD 001 IS BUILT AND IT IS EXACTLY WHAT WAS SUPPLIED** -
+  the headline `Weird.Baby Initial Launch Report` (31 chars, inside the 62-char
+  budget) and eight timeline beats set as a register, in one `Timeline` section,
+  **with no `line`, no `lead`, no `tomb` and no `date`.** Nine strings, declared
+  **MIKE** against the round log's §0, which quotes the kickoff in full. Gates:
+  lint **11/9 = baseline** - build green - provenance **PASS** - `reveal:check`
+  **PASS** - `parity:gate` **PASS** - `instory:gate` **PASS** -
+  `assets:orphans` **0** - `reveal:day` **nothing to move** - **the lap RAN at
+  390px**, `/robots` and both new Ops pages, zero page-level sideways scroll and
+  zero console errors. Log: `docs/MUSEUM_NIGHT_DESK_LOG-20260807.md`.
+- **THE SECOND ENTRY TURNED ON THREE CONTROLS THAT HAVE NEVER DRAWN, AND ONLY THE
+  LAP COULD HAVE SEEN IT.** `RecordJump`'s NEWEST / OLDEST / UNREAD bar, the
+  `‹ NEWER / OLDER ›` walk and the `2 of 2` count are all gated on
+  `list.length > 1` and have rendered nothing since M5. **`transfers.mjs` refused
+  the entry until it was placed** - a fall-through fails the build, which is the
+  table working - and it is **BLAST beside `record.013`**, on the plainest reading
+  in the file: the entry's own subject is the day the server went public, which
+  IS week 0. **An exemption was not available and that is the model too:** an
+  exempt row may not be REVEALED, and this entry is on the glass.
+- **ONE FINDING NOBODY ASKED FOR AND IT IS A SILENT DROP.** A Record entry that
+  declares `sections` goes to `RecordEntry.jsx`, **which renders no `wire`, no
+  `plates` and no `docs` and reports nothing** - the same shape as the first
+  three `deliveryFaults()` checks, which all walked FILES. Register **`S-c`**,
+  **not fixed on purpose**: where a payload sits against four-to-seven authored
+  sections is a layout ruling and it is Mike's. It did not bite - the timeline is
+  a section body.
+- **S1's DESK REFUSES TO LINK PAST A MISSING FILE, AND ITS OWN LAP CAUGHT ITSELF
+  MEASURING A 404.** Eight instruments, one page, one `.lnk`, verified by an
+  actual double-click. **Measured at 390px: page overflow 0, nothing past the
+  edge, all 23 register tables inside their own `overflow-x:auto` boxes** - and
+  the first run of that measurement returned a clean zero **because the throwaway
+  static server's path guard compared a forward-slash root against a `path.join`
+  backslash path and 404'd everything.** Two renderer bugs went with it: a
+  non-lazy bold pattern cannot cross a nested italic, and **a blank line between
+  two pipe rows is not the end of a table** - THE SHORT LIST has one, and nine
+  rows became paragraphs full of pipe characters.
+- **AND §8's NUL-BYTE HAZARD FIRED ON A FILE WRITTEN THIS ROUND, THROUGH THE
+  WRITE TOOL RATHER THAN A PATCH SCRIPT.** Four literal NULs landed in
+  `tools/ops-desk.mjs` where template-literal spaces were written; the tell was
+  `sed | od -c` after an `Edit` failed to match a line that read correctly.
+  Stripped, and the file now builds its one placeholder pair from `\uE000` /
+  `\uE001` escapes with the reason written above it. **Nothing was deployed** -
+  S3's seal is one command and it is Mike's.
+
+### 2026-08-07 -> THE REVEAL MECHANISM + THE 12-WEEK TABLE (R1-R3 + T1) - sealed
+- **R1 ASKED FOR A MECHANISM THAT ALREADY EXISTED, AND SAYING SO IS THE ANSWER.**
+  *"An asset appears ONLY AFTER the story has called for it"* is H2's pull-back
+  rule word for word - `delivered()`, `publicPlacements()`, `placeRule()` and
+  `deliveryFaults()` have enforced it since 2026-08-06 - so the ninety days need
+  **no new rule, no new stage and no schedule.** They need the LAUNCH stage,
+  which exists, and one step a day, which did not. Mechanism **(b), the Record's
+  own `assets` array as the manifest**, costs Mike **zero actions** beyond the
+  entry he was going to dictate; **(a) was rejected on DUPLICATION rather than on
+  the clock** - a dated manifest is a second source of truth about what is
+  public, and this repository has paid for that shape four times. The step is
+  **`npm run reveal:day`**. Gates: lint **11/9 = baseline** - build green -
+  provenance **PASS** - `reveal:check` **PASS** - `parity:gate` **PASS** -
+  `instory:gate` **PASS** - `assets:orphans` **0** - **the lap RAN, seven pages,
+  390px and 1228px**, zero sideways scroll, zero console errors. Log:
+  `docs/MUSEUM_REVEAL_MECHANISM_LOG-20260807.md`.
+- **THE FOURTH DELIVERY CHECK WAS WRITTEN FOR DAY 40 AND HAS ZERO INSTANCES
+  TODAY.** Checks 1-3 all walk FILES, so **an entry naming a governed picture
+  that is at NEITHER address was invisible to every gate in `reveal/`** - the
+  entry publishes, the wall shows nothing, and nothing errors. Check 4 walks the
+  ENTRY, was proved by moving the one delivered picture aside, and `--place` was
+  proved in **both directions on real files** with `git status` clean after each,
+  plus a REFUSAL when the same file is at both addresses. `--since <ref>` parses
+  the Record out of a git blob (`parseRecord`), which is why `record-entries.mjs`
+  split its parse from its read; **the file's own words/numbers split is
+  untouched.**
+- **T1's TABLE CARRIES TWO AXES BECAUSE ONE COULD NOT HOLD THE INSTRUCTION.**
+  Mike asked to mark weeks 1-3 as deriving from his dictation and 4-12 as Ops
+  scaffolding - which is a claim about **what is under a headline**, not about
+  **whose sentence it is**, and the standing rail scheme can only say the second.
+  Both are printed and the page says they differ: **week 1 is blue AND
+  DICTATED.** **Week 2 stays gold** (its `headlineVerbatim` is a round old and the
+  string matches character for character) because demoting it would be the
+  inverse error the rails exist to prevent; **week 3 is the one Ops cannot settle
+  - R-c, one word.** Six checks, one open: **weeks 6 and 7 both name a FOURTH
+  box, which answers which of the five package weeks goes empty** - a question
+  `transfers.mjs` says is not in the arc (**R-d**). And **12 weeks x 2-3 = 24-36
+  genuine reveals in the whole arc**, which is a CEILING times a PERIOD and is
+  *not* the voided arithmetic.
+- **TWO FINDINGS NOBODY ASKED FOR, AND ONE WAS A LIVE DATA-LOSS PATH.** The
+  worksheet asked for weeks one and two's headlines that the new page also asks
+  for - **one question, two stores, neither able to see the other** - and
+  removing the two slots exposed that `save()` **would have silently deleted
+  whatever had been typed into them** (`values()` only sees textareas that still
+  exist). Fixed, both halves proved in the browser. The other was **the lap**: the
+  first cut put the word OPS at the head of the one column that on week 2 holds
+  Mike's own sentence, and **only a screenshot could see it.** **Nothing in `src/`
+  changed. Surfacing unmoved at 20 spendable - the FIFTH packet running**, and the
+  clipboard under a genuine user click is still unmeasured, unchanged.
+- **AND THIS FILE'S OWN ~600-LINE RULE IS NOW BLOWN BY THE STANDING SECTIONS
+  RATHER THAN BY THE LOG, WHICH IS A DIFFERENT PROBLEM AND IS NAMED NOT FIXED.**
+  Two more round entries were archived this round and the file is still ~720: the
+  log is ~145 lines and the rest is ~575, of which **five `N STANDING RULES ADDED`
+  headings carry twelve rules that every one also has an `OPERATIONS.md` §5 row
+  for.** K1 collapsed a forty-line pointer chain on exactly that argument.
+  Consolidating twelve standing rules is a real edit with a real chance of losing
+  a load-bearing pointer, and it is not this round's to make on the way past.

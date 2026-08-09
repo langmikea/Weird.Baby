@@ -728,11 +728,90 @@ Record 001's approved sentence is **filed RESTATED, not MIKE** — approval is n
 authorship — and **must never be re-marked**: a paraphrase in his class is
 indistinguishable from his words a week later.
 
+## ONE STANDING RULE ADDED 2026-08-08 (THE LIGHT TABLE)
+
+**THE TOOLS ARE FOR WORKING, NOT FOR BRIEFING** - *"All the stuff at the top, I
+never read."* `OPERATIONS.md` §7 **Doctrine 25**, mirrored in `STATE.md`.
+**THE MEASUREMENT IS THE ARGUMENT AND IT IS NOT CLOSE:** at 390px the first
+control a person could use sat **2014px** down the artifact tracker, **2474** the
+spec sheet, **1524** the worksheet, **1537** the register - three to six screens
+of prose before the tool started. Now **126 / 727 / 219 / 398**.
+**IT IS NOT THE LAW OF SUBTRACTION AGAIN**, and the worksheet is the proof:
+Doctrine 16 asks whether a line is NEEDED and almost everything struck here WAS
+needed by somebody - the CAPITALS section rule, the `ATTACH:` line, the date
+format, what a band means. **What was wrong was WHERE they were**, so the rule
+carries a construction clause: **on the field, in the footer, or on
+`reference.html` - never above the work**; and if it fits none of those three,
+**Ops raises it in conversation.** **A LEGEND IS NOT A BRIEFING** - the test is
+whether the page is unreadable without it. **AND IT GROWS BACK:** `week1.html`
+was split for this exact complaint on 2026-08-07 and the worksheet's masthead was
+seven paragraphs three rounds later. **Before adding any line above a control,
+read Doctrine 25.**
+
 ## Recent session log
 
 Maintained here. Newest first.
 
-### 2026-08-08 -> THE CULL (C1-C2; C3-C4 NOT STARTED) - sealed
+### 2026-08-08 -> THE LIGHT TABLE (L1-L4) - sealed
+- **C-a IS EXECUTED AND THE ONE FACT WORTH KEEPING IS THAT THEY WERE NEVER IN
+  GIT.** 27 calibration frames + `cal.json` + the `_cal` folder, **28 files,
+  3.20 MB**, and the 27 asset-table rows culled (277 -> 250 on disk).
+  `content/burps/.gitignore` covers the whole burp tree, so `git ls-files` on
+  that directory returns one `.gitkeep` and **a 3.20 MB deletion leaves a clean
+  `git status` with no object to restore from.** Before deleting, the reference
+  scan was redone: `cal.json` and nothing else.
+- **THE GLOVE QUESTION IS SHUT AND THE ANSWER REVERSES THE CULL ROUND.** Mike:
+  the burp MP4s ARE the glove videos. The search looked for a FILENAME
+  (`*glove*`, `*.MOV`) and the footage was in front of it as
+  `content/burps/processed/IMG_976[678].MP4`. **The KEEP clause was satisfied all
+  along**; the eleven stills that died were frames pulled out of it. Written into
+  the cull log so nobody reopens it - **and the three MP4s now play in the light
+  table's viewer.**
+- **THE ARTIFACT TRACKER IS A LIGHT TABLE** - `tools/dictation/lighttable.mjs`.
+  250 tiles, the picture leading; a click opens the **real file from disk at full
+  size** with every column the old five carried beside it. `<-` `->` walk the
+  FILTERED set, `Esc` closes. **The population widened on Mike's own sentence** -
+  *"build it over the POST-CULL set so it shows only what still exists"* - because
+  everything the cull touched has no public address and the old 47-row addressable
+  set could not have shown a post-cull anything. **A FAILURE SAYS SO**: an
+  unreadable file prints the path it tried and falls back to the 240px thumbnail,
+  proved by pointing a row at nothing. Thumbnails cached by `sha256 + px`
+  (gitignored, `--fresh`), so the second run rendered zero. Gates: lint **11/9 =
+  baseline** - build green - provenance **PASS** - `reveal:check` **PASS** -
+  `parity:gate` **PASS** - `instory:gate` **PASS** - `assets:orphans` **0** -
+  `reveal:day` **nothing to move** - **the lap RAN at 390px and 1228px on all TEN
+  Ops pages**, page overflow 0, uncontained 0, leaf text overflow 0. Log:
+  `docs/MUSEUM_LIGHT_TABLE_LOG-20260808.md`.
+- **`the machines` IS A UNION AND HAD TO BE.** `governed` needs a `/robots/...`
+  public address and the robots repo holds 143 pictures of the same two machines
+  with none - a chip showing seventeen of them would answer a question about the
+  RULE while he asks one about the OBJECTS. It reads 161. Same principle put a
+  glyph and a player on 69 audio rows and 3 video rows rather than
+  *"no thumbnail - mp4"*, which is true and reads as broken.
+- **DOCTRINE 24 INSIDE THE INSTRUMENTS FOUND A QUESTION BEING ASKED AFTER THE
+  ANSWER.** Short-list row **15a was still asking him to rule on the eleven held
+  photographs** he ruled deleted on 2026-08-07, on the one page he is told is the
+  one place he looks - **and it cited a `C-a` the cull round had re-used for a
+  different question.** The register lost 49 more lines (386 -> 337): 15a, the
+  ruled `C-a`, 2,031 characters of Ops accounting at the foot of the short list
+  and 1,284 at the head of the file. **A copy of the eleven survives outside both
+  repos and is named rather than deleted** (`L-b`) - Ops removes what he would
+  meet again, and does not destroy the last copy of eleven real photographs on a
+  doctrine inference.
+- **TWO FINDINGS NOBODY ASKED FOR.** (1) The contact sheet scrolled **27px
+  sideways at 390px while the overflow probe read 0 uncontained** - both correct:
+  the offender is a directory-path `<h2>` whose BOX is inside the viewport and
+  whose TEXT is not. **A box-based check cannot see text overflow**; an
+  `el.scrollWidth > el.clientWidth` pass found it in one run and one line fixed
+  it. Same shape as the round that measured a 404 and reported a clean zero -
+  **ask a zero what it can see.** (2) **24 asset-table rows point at a manual
+  that moved** to `manual/structure/pages/` (61 pages, no sha256 in common), and
+  `assets:orphans` reports 0 because it counts `missing && isJudged` and all 24
+  are unjudged - **the tripwire is structurally blind to 24 of the 27 rows in the
+  state it exists to report.** Not culled on the way past; `L-a`.
+- **SURFACING UNMOVED AT 20 SPENDABLE - THE ELEVENTH PACKET RUNNING.**
+
+### 2026-08-08 -> THE CULL (C1-C2; C3-C4 DONE 2026-08-08, see above) - sealed
 - **TWO OF FOUR DONE COMPLETELY AND TWO NOT STARTED, AND THE CHOICE WAS NOT
   CLOSE: A CULL IS IRREVERSIBLE AND A TRACKER IS NOT.** Half a light table -
   thumbnails with no viewer, or a viewer over a page that still opens with three
@@ -740,8 +819,10 @@ Maintained here. Newest first.
   doctrine that says *cut it*.
 - **ELEVEN VIDEO-DERIVED STILLS DELETED** from the robots repo (six burp frames,
   five 2021 plates, 725 KB). `MAGIC8-2021-P01-the-eye.jpg` KEPT - an egg row
-  references it. **The glove videos are in NEITHER repository** - no `.MOV`
-  anywhere, nothing named for them; the KEEP clause had nothing to apply to.
+  references it. **[CORRECTED 2026-08-08, MIKE] THE BURP MP4s *ARE* THE GLOVE
+  VIDEOS** - the cull round searched for a filename and the footage was in front
+  of it under another one, so **the KEEP clause was satisfied all along** and the
+  glove material survived as sources. The question is shut; do not reopen it.
 - **THE FINDING: `usedBy` IS EMPTY ON ALL 139 ROBOTS-REPO ROWS**, including the
   61 manual pages that are in use and that `reveal:check` counts every packet.
   **A cull keyed on the asset table - the obvious mechanical reading of "no
@@ -960,112 +1041,23 @@ Maintained here. Newest first.
   landed dictated content and took nothing off the back shelf. Said plainly
   because the packet is the only clock this repository has.
 
-### 2026-08-07 -> THE NIGHT DESK (S1-S4) - sealed
-- **S2 ASKED FOR TEXT THAT IS NOT IN ANY TREE THIS SESSION CAN REACH, AND SAYING
-  SO IS HALF THE DELIVERABLE.** The instruction named an executive summary and a
-  detailed report *"as he wrote them"* and carried only a parenthetical of the
-  timeline; the prose is in neither repository nor anywhere under
-  `C:\AI\Projects`. **RECORD 001 IS BUILT AND IT IS EXACTLY WHAT WAS SUPPLIED** -
-  the headline `Weird.Baby Initial Launch Report` (31 chars, inside the 62-char
-  budget) and eight timeline beats set as a register, in one `Timeline` section,
-  **with no `line`, no `lead`, no `tomb` and no `date`.** Nine strings, declared
-  **MIKE** against the round log's §0, which quotes the kickoff in full. Gates:
-  lint **11/9 = baseline** - build green - provenance **PASS** - `reveal:check`
-  **PASS** - `parity:gate` **PASS** - `instory:gate` **PASS** -
-  `assets:orphans` **0** - `reveal:day` **nothing to move** - **the lap RAN at
-  390px**, `/robots` and both new Ops pages, zero page-level sideways scroll and
-  zero console errors. Log: `docs/MUSEUM_NIGHT_DESK_LOG-20260807.md`.
-- **THE SECOND ENTRY TURNED ON THREE CONTROLS THAT HAVE NEVER DRAWN, AND ONLY THE
-  LAP COULD HAVE SEEN IT.** `RecordJump`'s NEWEST / OLDEST / UNREAD bar, the
-  `‹ NEWER / OLDER ›` walk and the `2 of 2` count are all gated on
-  `list.length > 1` and have rendered nothing since M5. **`transfers.mjs` refused
-  the entry until it was placed** - a fall-through fails the build, which is the
-  table working - and it is **BLAST beside `record.013`**, on the plainest reading
-  in the file: the entry's own subject is the day the server went public, which
-  IS week 0. **An exemption was not available and that is the model too:** an
-  exempt row may not be REVEALED, and this entry is on the glass.
-- **ONE FINDING NOBODY ASKED FOR AND IT IS A SILENT DROP.** A Record entry that
-  declares `sections` goes to `RecordEntry.jsx`, **which renders no `wire`, no
-  `plates` and no `docs` and reports nothing** - the same shape as the first
-  three `deliveryFaults()` checks, which all walked FILES. Register **`S-c`**,
-  **not fixed on purpose**: where a payload sits against four-to-seven authored
-  sections is a layout ruling and it is Mike's. It did not bite - the timeline is
-  a section body.
-- **S1's DESK REFUSES TO LINK PAST A MISSING FILE, AND ITS OWN LAP CAUGHT ITSELF
-  MEASURING A 404.** Eight instruments, one page, one `.lnk`, verified by an
-  actual double-click. **Measured at 390px: page overflow 0, nothing past the
-  edge, all 23 register tables inside their own `overflow-x:auto` boxes** - and
-  the first run of that measurement returned a clean zero **because the throwaway
-  static server's path guard compared a forward-slash root against a `path.join`
-  backslash path and 404'd everything.** Two renderer bugs went with it: a
-  non-lazy bold pattern cannot cross a nested italic, and **a blank line between
-  two pipe rows is not the end of a table** - THE SHORT LIST has one, and nine
-  rows became paragraphs full of pipe characters.
-- **AND §8's NUL-BYTE HAZARD FIRED ON A FILE WRITTEN THIS ROUND, THROUGH THE
-  WRITE TOOL RATHER THAN A PATCH SCRIPT.** Four literal NULs landed in
-  `tools/ops-desk.mjs` where template-literal spaces were written; the tell was
-  `sed | od -c` after an `Edit` failed to match a line that read correctly.
-  Stripped, and the file now builds its one placeholder pair from `\uE000` /
-  `\uE001` escapes with the reason written above it. **Nothing was deployed** -
-  S3's seal is one command and it is Mike's.
+### 2026-08-07 -> THE NIGHT DESK (S1-S4) - archived
+Moved verbatim to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md` under this file's
+own ~600-line rule. **What is still load-bearing in it is NOT in the archive:**
+the desk is `npm run desk` and `OPERATIONS.md` §5's THE OPS DESK row; Record 001
+is the RECORD 001 standing section above; and **`S-c` closed at A0-A6** while
+`S-a` closed as Doctrine 21. Its two rules that still bite are *a launcher must
+not draw a link to a file that is not on disk* and *check `document.title` and a
+node count before believing an overflow reading of zero* - the second fired again
+this round on the contact sheet.
 
-### 2026-08-07 -> THE REVEAL MECHANISM + THE 12-WEEK TABLE (R1-R3 + T1) - sealed
-- **R1 ASKED FOR A MECHANISM THAT ALREADY EXISTED, AND SAYING SO IS THE ANSWER.**
-  *"An asset appears ONLY AFTER the story has called for it"* is H2's pull-back
-  rule word for word - `delivered()`, `publicPlacements()`, `placeRule()` and
-  `deliveryFaults()` have enforced it since 2026-08-06 - so the ninety days need
-  **no new rule, no new stage and no schedule.** They need the LAUNCH stage,
-  which exists, and one step a day, which did not. Mechanism **(b), the Record's
-  own `assets` array as the manifest**, costs Mike **zero actions** beyond the
-  entry he was going to dictate; **(a) was rejected on DUPLICATION rather than on
-  the clock** - a dated manifest is a second source of truth about what is
-  public, and this repository has paid for that shape four times. The step is
-  **`npm run reveal:day`**. Gates: lint **11/9 = baseline** - build green -
-  provenance **PASS** - `reveal:check` **PASS** - `parity:gate` **PASS** -
-  `instory:gate` **PASS** - `assets:orphans` **0** - **the lap RAN, seven pages,
-  390px and 1228px**, zero sideways scroll, zero console errors. Log:
-  `docs/MUSEUM_REVEAL_MECHANISM_LOG-20260807.md`.
-- **THE FOURTH DELIVERY CHECK WAS WRITTEN FOR DAY 40 AND HAS ZERO INSTANCES
-  TODAY.** Checks 1-3 all walk FILES, so **an entry naming a governed picture
-  that is at NEITHER address was invisible to every gate in `reveal/`** - the
-  entry publishes, the wall shows nothing, and nothing errors. Check 4 walks the
-  ENTRY, was proved by moving the one delivered picture aside, and `--place` was
-  proved in **both directions on real files** with `git status` clean after each,
-  plus a REFUSAL when the same file is at both addresses. `--since <ref>` parses
-  the Record out of a git blob (`parseRecord`), which is why `record-entries.mjs`
-  split its parse from its read; **the file's own words/numbers split is
-  untouched.**
-- **T1's TABLE CARRIES TWO AXES BECAUSE ONE COULD NOT HOLD THE INSTRUCTION.**
-  Mike asked to mark weeks 1-3 as deriving from his dictation and 4-12 as Ops
-  scaffolding - which is a claim about **what is under a headline**, not about
-  **whose sentence it is**, and the standing rail scheme can only say the second.
-  Both are printed and the page says they differ: **week 1 is blue AND
-  DICTATED.** **Week 2 stays gold** (its `headlineVerbatim` is a round old and the
-  string matches character for character) because demoting it would be the
-  inverse error the rails exist to prevent; **week 3 is the one Ops cannot settle
-  - R-c, one word.** Six checks, one open: **weeks 6 and 7 both name a FOURTH
-  box, which answers which of the five package weeks goes empty** - a question
-  `transfers.mjs` says is not in the arc (**R-d**). And **12 weeks x 2-3 = 24-36
-  genuine reveals in the whole arc**, which is a CEILING times a PERIOD and is
-  *not* the voided arithmetic.
-- **TWO FINDINGS NOBODY ASKED FOR, AND ONE WAS A LIVE DATA-LOSS PATH.** The
-  worksheet asked for weeks one and two's headlines that the new page also asks
-  for - **one question, two stores, neither able to see the other** - and
-  removing the two slots exposed that `save()` **would have silently deleted
-  whatever had been typed into them** (`values()` only sees textareas that still
-  exist). Fixed, both halves proved in the browser. The other was **the lap**: the
-  first cut put the word OPS at the head of the one column that on week 2 holds
-  Mike's own sentence, and **only a screenshot could see it.** **Nothing in `src/`
-  changed. Surfacing unmoved at 20 spendable - the FIFTH packet running**, and the
-  clipboard under a genuine user click is still unmeasured, unchanged.
-- **AND THIS FILE'S OWN ~600-LINE RULE IS NOW BLOWN BY THE STANDING SECTIONS
-  RATHER THAN BY THE LOG, WHICH IS A DIFFERENT PROBLEM AND IS NAMED NOT FIXED.**
-  Two more round entries were archived this round and the file is still ~720: the
-  log is ~145 lines and the rest is ~575, of which **five `N STANDING RULES ADDED`
-  headings carry twelve rules that every one also has an `OPERATIONS.md` §5 row
-  for.** K1 collapsed a forty-line pointer chain on exactly that argument.
-  Consolidating twelve standing rules is a real edit with a real chance of losing
-  a load-bearing pointer, and it is not this round's to make on the way past.
+### 2026-08-07 -> THE REVEAL MECHANISM + THE 12-WEEK TABLE (R1-R3 + T1) - archived
+Moved verbatim to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md` under this file's
+own ~600-line rule. **What is still load-bearing in it is NOT in the archive:**
+the daily step is `npm run reveal:day` and `OPERATIONS.md` §5's THE DAY'S STEP
+row; the three grades of secret are `docs/HIDDEN_LINKS_SCOPING-20260807.md`; the
+twelve-week table's two axes are `reveal/arc-twelve.mjs`; and its open registers
+are **R-a**, **R-b**, **R-c** and **R-d** in `docs/OPEN_ACTIONS.md`.
 
 ### 2026-08-07 -> THE WORKSHEET (W1-W8) - archived
 Moved verbatim to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md` under this file's

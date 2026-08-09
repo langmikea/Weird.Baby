@@ -16,10 +16,15 @@
   .bar button{font:inherit;font-size:12.5px;padding:4px 11px;cursor:pointer;
     background:transparent;border:1px solid var(--line);border-radius:2px;color:var(--ink)}
   .bar button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .bar a#jump{font-size:12.5px;color:var(--kill);text-decoration:none;border-bottom:1px solid currentColor}
   .grid{display:grid;gap:14px;padding:18px 20px 60px;
     grid-template-columns:repeat(auto-fill,minmax(234px,1fr))}
+  /* overflow-wrap on the group heading is load-bearing at phone width: these
+     are directory paths with no spaces in them, and at 390px the longest one
+     pushed the DOCUMENT 27px sideways. Text overflow is invisible to a check
+     that reads element boxes — the h2's own box was inside the viewport. */
   h2{grid-column:1/-1;margin:22px 0 -4px;font-size:12.5px;letter-spacing:.14em;
-     text-transform:uppercase;color:var(--dim);
+     text-transform:uppercase;color:var(--dim);overflow-wrap:anywhere;
      border-bottom:1px solid var(--line);padding-bottom:6px}
   h2 span{text-transform:none;letter-spacing:0;float:right;font-weight:400}
   .t{margin:0;background:var(--card);border:1px solid var(--line);border-radius:3px;
@@ -53,19 +58,18 @@
   .v{font-size:11.5px;color:#4b4740}
   .p{font-size:10.5px;color:var(--dim);word-break:break-all;
      user-select:all;padding-top:2px;border-top:1px dotted var(--line)}
-  #out{grid-column:1/-1;background:var(--card);border:1px solid var(--line);
+  #out{grid-column:1/-1;margin-top:22px;background:var(--card);border:1px solid var(--line);
        padding:12px;border-radius:3px}
   #out textarea{width:100%;min-height:150px;font:12px/1.4 ui-monospace,monospace;
        border:1px solid var(--line);border-radius:2px;padding:8px;background:#fffef9}
 </style>
 <header>
   <h1>Weird.Baby &mdash; contact sheet</h1>
-  <div class="sub">232 images across both repositories &middot;
-    81.0 MB on disk &middot; 41 on the glass &middot;
-    0 referenced by nothing &middot; 191 never served &middot;
+  <div class="sub">205 images across both repositories &middot;
+    78.0 MB on disk &middot; 41 on the glass &middot;
+    0 referenced by nothing &middot; 164 never served &middot;
     16 behind the door &middot; 27 point at a file that is not on disk
-    &middot; <b>0 carry a verdict</b>.
-    Read off <code>provenance/asset-table.json</code>; this page writes nothing.</div>
+    &middot; <b>0 carry a verdict</b>.</div>
   <div class="bar">
     <button data-f="all" class="on">everything</button>
     <button data-f="shipped">on the glass</button>
@@ -75,15 +79,11 @@
     <button data-f="gone">not on disk</button>
     <button data-f="killed">marked for the cull</button>
     <span style="flex:1"></span>
+    <a id="jump" href="#out" hidden>0 marked</a>
     <button id="clear">clear marks</button>
   </div>
 </header>
 <div class="grid">
-  <div id="out">
-    <b>Marked for the cull &mdash; <span id="n">0</span></b><br>
-    <span class="m">Click the &#10007; on any tile. The list below is plain text; copy it into the round’s brief. Nothing here is deleted by this page.</span>
-    <textarea id="ta" readonly placeholder="nothing marked yet"></textarea>
-  </div>
   <h2>museum/docs/cleanup-round-20260803 <span>8 images</span></h2>
 <figure class="t" data-uid="A-d54042b16c" data-path="museum:docs/cleanup-round-20260803/C1-about-the-songs-cards-gone.jpg"
    data-role="source" data-held="0" data-gone="0"
@@ -1667,412 +1667,6 @@
     <span class="p">museum:src/assets/vite.svg</span>
   </figcaption>
 </figure>
-  <h2>robots/content/burps/derived/_cal <span>27 images</span></h2>
-<figure class="t" data-uid="A-22ef22d704" data-path="robots:content/burps/derived/_cal/IMG_9766__s0.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,UklGRsAEAABXRUJQVlA4ILQEAAAQIACdASrIAHEAPrFSpE0nJKOipVHqwOAWCWcG+Ia8KA/nYnu6KIj8y73QBC5EaGKpM6Qly1y5uPfDs/23qb5Dj0hck79bxePcPD+0EIXvXGusgEU5xpg0L67dUo92OJTawLHRlQRNjL+Hy9T6d8Dmc6O8d541jNpXFB4w7FeggzyN8Q0+rStrVrM8i6Ty1+iLY+y11W+lGX7/AMqTysNuqd41JRw0nKje13b/Kn1ebe5GuHoEEY5Y6bRSQo+y5tSWrHRzjnuoj7lljyCjVhLwj/ZFBpRL7pLyKDjtLivCvj1kCW5E3jhXH7D2UXlgoW/dG60MPI9czj/LpsdUjtyvKZ1Kaw4PDp4AAP7xb26a1nuwxl6fdAXv3uWikV7o5/K5Noz9U4aXit+AdNsK0o0m2i1OO/kfFVzGeWnap6I2wb6p8Ep/scMR3ONPzDvRLi2FlsGjufZ7yHPVvHeYENYifYNqajjSz2rnLhSg+u4GpOofDQ6QIHVBDcGiyaPs9JARuJJuUsy/EhOr1MvgIQA9pSJyo7tyOTxZbOhKSpNm/8DhVMriv5YGI/8/w/+TM/drgh/hrclRBx6wBNir2dmpHc6bifduQE1eaAVfs5qeu7kOBJjhbhgwMCV/RdJrOiuDw1+kXHWy2+H7imJYEc0Uhx/WQaLGdyst6WmQ1LiB3kSf9+9LDjDTJYR9fwtpDWsc9GmMgHmgvP5j/1Xog0piuXDLCm6OVFSQRuvAiLXiJ4PBShxyGPr0So71X0xEUKVLj+Mb7ZKRjgZ7ty1tJ2HzCNOSeQN6+lvCC0kVHZKmoqg3wz3bs+Cp9GeBdxlXOO7T86woXKsL98J11FJnSMgh8C/1fYzC6pbsAxFqCVnAV169PREopJIr8VOhKzfx5fFKXti03hNL3t2dGe/TgyZIl/iBktLjken8i/rIHDqTJ/e+XgNgQ0Oz4EEj/ukbOxA8OrsrQpAtEqc1HfjtWeZrT7bR7x2DzbR1FpuIlai6yCPzaXtq9hzuNkXZzB12+qG6LAX8M6qQ415s6st1k2AbOCPDleYGlZZOwja/P+tapiSpInP1vdri99aH6qYLZnKAYEwkHNEDiiHIV5raBBPyErWZkxmzwuz/deov9K++ERxPIIwgs4S8DtoczqOXyoZ3sRcJUB/YKoQEpRipXkaMJnN2ZEScFXpB3cxF8yDrqmlPckfR3YUouqz1vYbWIMn9eDF5fWRAyqXP+ru1eNPM7nm6WVufV6nUXw67YZLVCeWyrWSmWKd8l4cG03/mS+oTE7nUHqWEXRbiUPgA3rdy3i2jPenzUT2i8v2SKBZ6d6BiwXwZvPt8qQP9B3hEoahIFqZdP1FBDhh9P741fFjDbVZAL+BI+lnvTadno70hbn1aNbxG4YJbXkkEuX2qfruGavPfAPMlEhjna0hxllKNvt0Nf8rYQGhxmDSYvyi84B0jJnN0/wgOxjJARe415B3H3wDqo1sFqDulWpJAeK5CecS48eWbRBIpK4LX3FjW7K0fZT51Ytmcb91xzUTMVrwkbho7ZJg4DIlabK1hTs14N3Qs/gVXyNEi0hjvw1qQHiiRtev0I7oxzK46Czx3JxdIAAAA" alt=""></div>
-  <figcaption>
-    <b>IMG_9766__s0.jpg</b>
-    <code>A-22ef22d704</code>
-    <span class="m">1280&times;720 &middot; 107 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9766__s0.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-6ae9a8c624" data-path="robots:content/burps/derived/_cal/IMG_9766__s1.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,UklGRuYEAABXRUJQVlA4INoEAADwHwCdASrIAHEAPrFUpE4nJKOsIfK7AYAWCWcA0FpRsWHubyHRNt9zIqRk07sz8vOXtfZT2c1f28+6AbnNb7oAHjLsaJKXTPqQRb2B+L65MBtTYK+azA+9nrNxHiSsY8OnaYFtwk9tT/R+T/2u48FxuGlgIjzjefzIjzaJJSiis727tsYoyP0JW0gAjlN720npERuSMbqgWAmodf49lKAqQ3i28iGSXu358cI/5hOyfr02fR2kFMkcb0c63Utj2M6Jc536OFho9P0PM9WacFGXNdJ27b6BsTsw3yKlGJx3+cvY6kM0MVF3KiGxqXet7KTaUu+WkpTpxQ/5MolBnA5TBjDELGCd9kAA/vFv4hpdMhMSxg/eTV/gf1xc2RFH61ytWkYlMcysBywzSO1R+/0K/p5A6BVTwDIF+N+FOy9h/6Gp6WHEzrZiQsrswyBQR7FRJ2d0PaoxZtxoVpWqgIsAUNql+bt81vCcIngXeSV/nrhCsuWEqHLXNHvDA+DSJV/3WlVktDTBGfF1wTX6iCY2+uwQAKtkVGUyYM3Ykc0gt2ErVl1eORM0dciJLMI3/Vl9//XTwvr0dd0dmpaNnF9Fy4X76Lhx+R5rgBTzXaHBPsqYhAU07MO7qx6jEfFDZimWKEHaAB51lisjaj4mtvC3Kmp/xVRretNzJWf2zKMgftlbD686K3ExFLkOssucdZwDa2umS1xMC14OX0mUKK9vd8HFP13yf/vLUucTkiDurPip3ZsNasIlpeUsHb1nAD1c3evQ+zFJe2CNhByivuJBShxyPwRtto+RTM0XfnyRf5ZhRbA8LaNRUhWOFykisQTtNRl1u+dRUI8jvKlkoBxDaWvCP0/a4WS09jCCI3evq4wLvNoEyapwzN5tth/Tu1IBnlZHuJOyHOgWutNuWsT0aj1lKzmrKwXCi2chOKdgi1bmFff9PIYUlkNgxBZovNkAOpkpFDjSyrLpZgUsM2EIPFBainOXi+EJcIyvgaUaxnxo8c+TVG0s6l/1SvJ31WLW/nOKG7BLLQXeAoGTYN6ukQCTSQmSb72kJfqqTpvflZqnXiGo+uU3otQvrlGFpdJ0ZcY6ChV+zPiqIfX0RWc49WYK3KlqZUYKBRy9idJQXW0hUjz9wjBO7GU80YtszMTVg2+Fo8r9GrfIIfvw64Nk4c7HPpepPHqo68iB6m3kOPTf9TEz2p56rfLQLZFQY4aRgIpviDvXkzgmjYwTClJJSavxYoQCDwdKYod4+UPoV6u0uyvhxW3pq+IrTGdlhivBu1sj2zMU+qdvzltGBwIF/kFjsLg8PaywXb4dznFfhFFMwhCVsdwqZS+rshij36LTvufqem2nSo7Z5Q3KtuofsEuWmLuDvGEszhuTg0cXkeKhjoPxilDEVNYdRhOmeafW0KbphNYhPNbgno1RGM21farOki8eh+yHjmnCnIzDRxcG6gDl1t2sWAAXT/7rbOO4USh2G0CMA+cCqpCvoWVPED7LLNtX5/FIRAnK/9X4Bzqspg7Z22+FnsXdzCBaDIQLEhPDPUlYGMOwomNbydSsydRJ88Hp7aDS7LwySTrdZLxyfXemzlcoK3HMZmiTr+oRUxjScq2orMHLQZC8X4M5QFEWEcdmP3KAMyO2ZjMWXsQfLCZmx5AsQAA=" alt=""></div>
-  <figcaption>
-    <b>IMG_9766__s1.jpg</b>
-    <code>A-6ae9a8c624</code>
-    <span class="m">1280&times;720 &middot; 105 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9766__s1.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-855e5cb4c4" data-path="robots:content/burps/derived/_cal/IMG_9766__s2.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9766__s2.jpg</b>
-    <code>A-855e5cb4c4</code>
-    <span class="m">1280&times;720 &middot; 119 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9766__s2.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-f21e3dd506" data-path="robots:content/burps/derived/_cal/IMG_9766__s3.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9766__s3.jpg</b>
-    <code>A-f21e3dd506</code>
-    <span class="m">1280&times;720 &middot; 121 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9766__s3.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-b84903a60e" data-path="robots:content/burps/derived/_cal/IMG_9766__s4.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9766__s4.jpg</b>
-    <code>A-b84903a60e</code>
-    <span class="m">1280&times;720 &middot; 116 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9766__s4.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-6ef1276859" data-path="robots:content/burps/derived/_cal/IMG_9766__s5.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9766__s5.jpg</b>
-    <code>A-6ef1276859</code>
-    <span class="m">1280&times;720 &middot; 108 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9766__s5.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-8c2f1c2390" data-path="robots:content/burps/derived/_cal/IMG_9766__s6.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9766__s6.jpg</b>
-    <code>A-8c2f1c2390</code>
-    <span class="m">1280&times;720 &middot; 111 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9766__s6.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-1dacc9d71d" data-path="robots:content/burps/derived/_cal/IMG_9766__s7.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9766__s7.jpg</b>
-    <code>A-1dacc9d71d</code>
-    <span class="m">1280&times;720 &middot; 99 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9766__s7.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-59b2abe031" data-path="robots:content/burps/derived/_cal/IMG_9766__s8.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9766__s8.jpg</b>
-    <code>A-59b2abe031</code>
-    <span class="m">1280&times;720 &middot; 136 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9766__s8.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-a204b4120b" data-path="robots:content/burps/derived/_cal/IMG_9767__s0.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9767__s0.jpg</b>
-    <code>A-a204b4120b</code>
-    <span class="m">1280&times;720 &middot; 98 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9767__s0.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-b25e79af71" data-path="robots:content/burps/derived/_cal/IMG_9767__s1.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9767__s1.jpg</b>
-    <code>A-b25e79af71</code>
-    <span class="m">1280&times;720 &middot; 132 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9767__s1.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-383e7a77e4" data-path="robots:content/burps/derived/_cal/IMG_9767__s2.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9767__s2.jpg</b>
-    <code>A-383e7a77e4</code>
-    <span class="m">1280&times;720 &middot; 108 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9767__s2.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-60f5f02b7b" data-path="robots:content/burps/derived/_cal/IMG_9767__s3.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9767__s3.jpg</b>
-    <code>A-60f5f02b7b</code>
-    <span class="m">1280&times;720 &middot; 117 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9767__s3.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-50d31ac314" data-path="robots:content/burps/derived/_cal/IMG_9767__s4.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9767__s4.jpg</b>
-    <code>A-50d31ac314</code>
-    <span class="m">1280&times;720 &middot; 122 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9767__s4.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-2274b88a5f" data-path="robots:content/burps/derived/_cal/IMG_9767__s5.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9767__s5.jpg</b>
-    <code>A-2274b88a5f</code>
-    <span class="m">1280&times;720 &middot; 109 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9767__s5.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-8fb3c1aaf5" data-path="robots:content/burps/derived/_cal/IMG_9767__s6.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,UklGRs4HAABXRUJQVlA4IMIHAAAQLQCdASrIAHEAPrFOoU4nI6KpI3F8eSAWCWUAzuTbF1D/uXTF4sbncf/BZqrDfUITyvhZU54TxWwe151efRJe3KvV9jiJUrgfzoFf2+WDPZ+Z5weT0nSBGye8nftJXl3lOKgD1+VJqAnDrMWgVs4FJQa+qHfmgbauyq65fHcB7UA5l3FaSDNIk5qxgrEGOQADWWAmujE3HQS7X8sANVELZE++N0V/5LC/byyHHQlVkJCcnN5390Xt+jrx8M+hhMTB9GUG0/VcpJP+/jwztPxWdw2tCPQ0UuBwFzSFYmXz/chuBJ2J4Xb1QjURgl+IKKj57+96TsB4COtErukcuCeafLndd5Q/H7Te8bbr8NTlbGGo7YZu7ZRZJMIiKKVA6pDwiFGOxdLqPLM50SazYBzuRmhhEDf0yEAQwaUZM3igjwDtrXwvvVRXQxp0UnTdjrJeJPUwAAQrMomAuqqZFtB+tMjLIPcckbQYtbPUZzKcE4AA/vEVGO4cjx4FsrwFLdG7aRIZJ64EA79wS5erUh7637eVAgro/+5v/IzLCniFU/q6Fst5IN6UBHi5TlAH4oH88sf+th+5Q82Gtu5Bl7VLYSuFrWEfsfFOp1Eo13nwGV+yiFavGxGXJNXGocJk80BgDsy2q5do2m44i/KNTlyeYyhldvlpG0fzMfroefWUHRyeQOEznG2hTEi7A99l7ZOaIbn7DHKiV+WlqFzLPB0N2eNv+yMVD6UNFK4sdnkQ1ejwVWZn4OTlUZ/iIJsbcrsQqnCifHpKhM49sBkFFVMvU2aJdAX2K78SZkF0BvTQX4YchkpPuo0lcs880GziVw2wjR0k5eujsJxVUp3wVjJGvKcKafRVY1udyLv2A/G/iQwpImCFGUUGO20TCgNuGsUKyLNkYsrh+Z/t4ZCBu83cVvGhSfhTg7hVRsQtdDn8txTXLtQmKpmlLy8XQWZaKdDol+kt5dOEhriTJ/Mvl3IZ8aSv91pzyQ/r0kTWHUSll2mXmXJLqK4rDm3dET3CuTcsZiv6+H3CePpHkvmZTVycOA1fkTqOtaW0ydmp4SW7bnu5dZokDbsMRi3PjdviK+jHcI9uQzjHbMIDOSaYM6Fvrj9Xm5t0zEcNXO2s0SPNo0a0UU7pumPi6oKmuTQyO8cYXKSNfYvLhQPy/2VhN37voMjfx/ce9L6ektevoVwyK71eSF71kN1+8kK0SH2G5CSNcpkV0WQA4tv3zp0wpx2tZ7SpizLz27LisvpZpR2OsSNv52Wf8dK62y4DC1UDeFj9dFbemQkJEwxFnkEeTIB/pvQLZT7A7a0mAnaV7Od3SXwu/4H4DqiPPap7zEJwDSmdqzwLLXPsPzKvKef7sHi1UQjknnzKjxWk+BL6D6HwRA+K1MrSIP/HGjgvhC7BzdNnXUwLVgVP+4AR1SW3/OIyUpQLrC52gz/JJO/Qv7emXFqAsYj7arGXIJ4vDUw6TtPpmAdsHg+BpGR5SKVecADXj6bg/quasuOC/hGdGZ7PdI80Ap0S0gFQb4pV3XpXxakGMG70XEv3VfU4J8NSg8yz1hdiFloPxisBQZsfsIV/ULZ9mObE0XraZvdItH+wELAGLQnQJbRchIlaMPUU+RVM+Yj8C8Av186fvUQo99x7KRYJM81vOWraREBpLoQAc6gRhPpbL5088EFv9VtolnlHvOzrQrDqY4jGIY0f3Es0wVX2VD2qZrt741s0lFXhbmdjkQU2ccRA0AnDNNUub0JumWbL3mblSQTQLpyjPv9oRR7HXbtwfzAfQY3qlHRsZqhIASI8kSiMt801xurFidRKbzOs5YTHZzKMwGVX0aDnbyMXDTYxYGT/HDuTTpAVz1wxc13FiqOycZfV8vcL+KzLfPa4cABWk3uQXNfK2qeSYtsYcq+6fV6177LwV1WGwKAObpx5fHB2vv745pXa3bipl7DGHIx7n22okuN+TM/aMR2nW3hWMSWlM28Z3ixmjpows5kS0uBcOK47X7RAx9OU7CcIy6hYtvIJBppCLWI2P0nKKKcNpjHGa90QblkFL2ZGJG2TJv6LTky2sJ0qSVHSfFtotcVd+e20w0qOeaK0cGgA0N1cm3AnWT2dT1VUKzqDhnL+enzis0yrTVMFSKR7m/eG9z0PYXx75vEjiXUnYc/VDJO2pQdpJmph4yEFDuC1nzJVrjGxZZHnbMDvHaLd+1M1ouI5iE8Po90IEgWGjhbe6w+FyATo1z9HywecI4J9qa9nCwfh7OajInd9MqlTNlwlq1x6Xnn9zLsEmiAUUPbuHZId99yjSxMRGsCzIN/5/x+UjtxJP6sdKoietLM5KjBma5d1FlxcQc4n+bERo7scYZIF9YWvrFbOQQFnUwd1+RF7AZ8vOr41WLfvWy0R4pZVz78/xj6JMDzBMUwe/hn2TnzQ/7bqZBsnwKQ59mBKi3DNWOUrg723zP7jHYNTySPRJbM/llll+Dw+RuzV2PcJ3eQE+v5kHgeI/CikuxAPZyn2RAX4Wj0QRlULrFU/NmVqx317eAzunZfVRXfovrYnicdHwnl1UdXdSVpxulEeNJdiU/wMatT1UBMB/VKDAsHZRZRnW8GgYrE6gahhSWXBzLIGkf1EtJj0Nyev4Y9BwjSKL0qoQExXhf37xtxR9AA=" alt=""></div>
-  <figcaption>
-    <b>IMG_9767__s6.jpg</b>
-    <code>A-8fb3c1aaf5</code>
-    <span class="m">1280&times;720 &middot; 114 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9767__s6.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-95f1b36738" data-path="robots:content/burps/derived/_cal/IMG_9767__s7.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9767__s7.jpg</b>
-    <code>A-95f1b36738</code>
-    <span class="m">1280&times;720 &middot; 114 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9767__s7.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-c1c6b61bb8" data-path="robots:content/burps/derived/_cal/IMG_9767__s8.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9767__s8.jpg</b>
-    <code>A-c1c6b61bb8</code>
-    <span class="m">1280&times;720 &middot; 116 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9767__s8.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-b09727a209" data-path="robots:content/burps/derived/_cal/IMG_9768__s0.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9768__s0.jpg</b>
-    <code>A-b09727a209</code>
-    <span class="m">1280&times;720 &middot; 111 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9768__s0.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-8f0bc85962" data-path="robots:content/burps/derived/_cal/IMG_9768__s1.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,UklGRowFAABXRUJQVlA4IIAFAAAwIQCdASrIAHEAPrFQok4nJCOmJBFLKOAWCWUG+BwnTS5i9LRkgu1WZxDuZOi1PxBEzTSamPNoGoDHQhBKRr0XuuzoXjBZTDqD4XyiZMk/X6SjZEC/qIHvtE7fHw3LQBcwddWL5TzS906HmcZqnc/9NitoGoMPkG5oM4+L8u8pRTO5yQJbFyjwy4wocwUVYIp1L1Bgn9hGhPmuAzyzJU7Sn1n+1lMgkrkd6opUMhfYwTcDJCVlco4+mLMrnlGi+YtoWsuAc/J1PPK+RXMCURWEvSqwViTjhLJaG7l/IrNKhwAV1f1Bop9qSQH+hHLyBbDtBAycovVKMXz+HjNYYQ1PtQhAKdKqCoD2y5Neeg1g7tVoAP55F6RDra/l2kJF6SKy7RMDPt086+KgzspeQkPhMhtvtYmAMYmjbrmg/SqE9MXyh1Bgb0LwHQLTGHppqlBCs+KNAtCip+grQpoF9ukaDpGj/qcbVY0l/l1rvNc3zwncPzj8535/ggenKGPR9RHeoKilKyg+q30gpm0tA4PNipQtYC8p6mBCZQEGKxNKBsBzwsEqUYfR5ucQOueO8nH/uVTJL3+LotSXfiL6T/RQHnSbAKEPVCjVPKrX/tFy5IQxVe2mV5xQBFbH6BL6yGR+dzeqetz/1BGUYxHQn9GtS3zIWb/lLpWSJOhc4af9BqOs5cFAd77AbkuNvAAc1M/NttSoCK+3Ty8Tcf9RiWjuittWw3ALEue0UCSIioi6DsBXR7BPAPWQPihATpWcJyYv7XSLLDivdaXFkc56qqdNcm1K58yz7LO/W/ThrYQHSC2mLbDTaKHNR68iwvqoYDLR3vLsPH7nVS6pFmCdKeb/zNrYXcLWAKz4aBTajq3C18A+qg2JfFvqksXsnCkKF74PjRCl6auv/p2v2oBNOx9esbOa4iYIhRSiUYgGEW3zEMg7oGV5zKZ1EEI9CNeDj6nuAGZNd0qY4kX01zhGFZ2c3gRm6zq5BdRiZyY3pOO5tImC6tDwtdW3rmPdzFr93UBmpBNNonin05FH3gDfoX5LwSY1AY3kou/cjVR1Qeoy8vcmLwx78hKWJ0iTpqRXEjZ7dYcU0WcQ8+RY6nhe16O4ElCznWZHnYg1iT8L6gCYD64WFTHtfRjcipHhSM/0NP9k1srOoeCaogpsg4i0oM/mogBPmz4CTtQiZavRDWKGyaouINQrN4k+t7NT+DNThp4C4BHFYhbYpCHfbhtHc0LPgQ1ylgHB4ihk+6/Jqq+gl/i1YQ1SwFj6Pp2L0VtPrU2VeM1YeczYeVKbueTbl0+/4rQMgSQB4bVqtMHvFMVkIatXMRk6e0/Pe3Bpw1UFpv1YD5mr+p7TCKGRLsKVd2sDt2OXjDoTQD6mEDy0Yz7UqHcjxxES5KR43M795ItLh8dTAXYOnWbWLOjC39J3lR0sEuic9eS0pHWFEd8RBoJQ1T/B9umeOkE3Xigc4aktfSCKeSJYXA+nnJWqafaNNmrvtS0qKtp6CXlA8V6Jy3b4y0g/7fTJnauyAZGxOXOkfk/5vec8ruEmwxKv9NrrePs4QnRxjqB0YPKUyBdxcvPQ8a71HbbQMQnAlRTZyYWXIalUQFmc3kGiEvTASZwCG+5t61Z1u39F4Fi2cfVOnSGbG9VQvqEJT5G+P230f/X4hMEHGLfkldKuF6H/bRQ567qA6Js/CX1wmu/btFY7QoTuSqTXuo6AyP045pdQX5cr4byY8jOOfpQl3vgRaAUYAEdWD+OxgI23SDks6lZwDJwH6HIa5Q/FPfE3NKVu59OkuJ6Yjw8Ei7jBQxTwy+d97YwiZlbDk3spvHE2IyMBdjR9j3w3DSAYjaf4nK8HQ2x+ki1mYGE+BvngwzSySArbAAAA" alt=""></div>
-  <figcaption>
-    <b>IMG_9768__s1.jpg</b>
-    <code>A-8f0bc85962</code>
-    <span class="m">1280&times;720 &middot; 116 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9768__s1.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-c5aed80353" data-path="robots:content/burps/derived/_cal/IMG_9768__s2.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9768__s2.jpg</b>
-    <code>A-c5aed80353</code>
-    <span class="m">1280&times;720 &middot; 111 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9768__s2.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-09ed563006" data-path="robots:content/burps/derived/_cal/IMG_9768__s3.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9768__s3.jpg</b>
-    <code>A-09ed563006</code>
-    <span class="m">1280&times;720 &middot; 117 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9768__s3.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-f8ee1b6805" data-path="robots:content/burps/derived/_cal/IMG_9768__s4.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,UklGRqwHAABXRUJQVlA4IKAHAADwKwCdASrIAHEAPrFMoU0nI7UuJtDMeqAWCWUIkCYyCjnBDiW9o/M8P4e6eOeO7/47gel4NftdYPqIV+OJ7Zq8V5pPgMd2Dw5bLSyEaOje6hE6geAQproeK3CQzdQqJahLOYEfLd7h5ThAZ4kIz6ezHE+CP/pDuMjqVmjjoX6nA2cghWUZ5Spl09oo/4tqY9w+nL5O3SoLLFzIJgw3wg8TNfa1hMfpsdcCl1gQbV0vt71qbyCZ5o0TpR2f4S5swEOodRBNR6AEg2NSvPqYhvuA/3cMES/ohrJA+HZrQH71dLDaEDDpMAGoyCm0LETLAHeno2m0GnN6IupMK3V7Geh5aIEZ3DQExIa64sYHkvVSpT8shT+phAxgJFpn94d3X0RWe/rXieLPEsu3VoiXf12wh8mESFEqsULi1ZQRSrbHyYAB9mz0baEDit358FRgBTOUl7DSLHANscQRby8vNm0Jf84gGr/UPigA/ryYsoGs1m1tyn3fh6Dt6npL6ZNERg/hv7GZPnBog56rkkKgEkUQhlUgc5/t0LjZB6yxOx54n55GAVWhs0mjWUQJ8xuwvSWl4RzDl/RotRA8KE9M7lYf5sQ//MZlvIlQM1Tmf5E7Ko0aYmza3fKRVktwVyJVsDlblCu8BgjgsOrdH8VkTZCk/WQ7FjNvVZRQwQ/37+7uPPBKJt5OOHaZ3z4KQJ0tW4ZQ2oiJxYS+kP3nKzBli0B+mthA8rJ8xQCFFzWtj1JaSjhSUMuXVHHNotlvVl3Kv3fNn1OnGyFR+HEdavoCzqNgLpBzKDr7yD1AUsAwqPzJJZ5jAraDTsBT33x1azqeRfatUPMM4hLlQfL0Ub85Jhgp/A5GGnBTNAE1NxbBGHSIqFzstuKsA7YUJ/PdNTHKIe8x5Hh9wnJMv74+KWbYMVIei3C2LJ3C91aLA8F5YdZ4Pc0mDNYykgKowBVZ7iwUygyz6twyrN3vK+vvc4S4xsO8FGhpN+Y0zAUj7sxBdFJmaIMSWfik9ZITAhg/MFm4LyHN+ctcdOV6SV20sLT/z/8L6nNzfFCNpnKke1wecXKp4/8eOAW0Sn6jL1/Leb2L0XAWiRc4TuqIV2ouC7ZdSpVMtk3A3GdN7lySRk4Ojw5QZewz4AnQUUSkTq2BDQxyP/1P0QelQM4glQs7W2N3hZBr55bnvFeudqOqoZNgyWa+RYOqNkuusEMWQplT/ZHX3BmE1veeaTHsfQ/wILfI6NqiFAQqgb5EiJvsSc4nBfOm5YY2HZL+nOtF9rvEi+KBEWROml4qe3dSwk8qrtCxF8rkDMaVjB8AsONBB4kIJFK7+iVyZIGb656rY7vKe+50URGFPYclFS6dxeUXTERKhAkJVWYLRVFfkQPWnFEM3w+NwbqEUHxaw1A2AVQ1+ih/zH58W9oS9q3T2aVzMqKGmddLrg3OBcqWEvrBabpQS3Z7V5bzS9EfLWmtPKf+11uXhFv+Pea3fSgF0dFnmTaIXxUzq7Q2S/ofbLDc7B+jx+TUNjG/NvZfadmNh4YVL4M7q/ygRWRQIJRPeaNe3ebb+KGl3La5dAma0CsJEh1DijGY3t/TLMKIpcobL4gDmbbzpm5t527YVls3Vvxf0/CeKoN7zNuqzyT/hOJ5DjSg95ilurV+nYEmjCOQkatxi4EIBw2iM7WzEoVP3/BKHbPrnVtzzy77G2NRT9oEzHMN2AB8+AMcQHZa5lqUTtQAQmM/hi6p1pxbKJq1kP/bAmtXBV8iIaiospB0UvKUpW7WfUTpnpJktY5LmnjLuRgd5nxl1+1/xz+T/eWm4C+J0xdMJQIQjLcxliMIMZ/wLfNJpYqe9mKaprhNY6QY/YCPgiLQEOtSajfJ+pkRMOTSGrHP1j621aP5eBi3v01VQ50F4ZLwh5F/x/gdNW1CYP7+1RfeCsoyUtwgoOhfE7u4FD1Axd7itqN3LmwOP99J797dEHSWQDLfZup2n5KDbYvL+HvggojmWh27yyQDrQQc41Yk3RP88C+7kOrZyHHxmJEA9M831doyesOExYNc9D/aKGExe4AWr+yKstwvQCSi20EYtF+txbBLiJeTow0jOcGL35FIhQ883AbvYZ1iEXqObedkM56xhKBzoUkT8b0U57zPXIN+fwZf8GIilbb4OHwm1kRnEsJU3dF3Wsa48I0Qhjc3TnwZm4F4V522d+MAUhjpFeoxt8Yfd4At9aEyUlpvOsNbpncRYpeR1gZ5kLcZhWWVyckOA+P9SM0y921l2smoh6wyP8OEcqp78dxUONfBuVBEQQIpIfibTzfqjMPUpxBzFTcuK72xWqo2idSzTn5Bx2Ez1Ay0NtA5y8lylPxovfOStHPSsjtouv75MM3psfvu1Y44TgBMvVB2ASkVq0fuNABMfk1ZIYWx4p8AbhfafM4AZqzcwGgMehOb9VLozqjWWWiS1xOQCbWAugTXwOY2yJ9dCJ/ux+Vg67LPbJAyy1HJ/OLBoc5lbN8lHcA/5ELTz2zSp9QySOhR9bbpC/tbBE+GTVl4t4WkgAbsaBqqd9sgDIw36E/8IwyiIo/JHqiGfjiTRQmZdIjcDhXBF3fRbaFLuyKRAJmHfXNrJJqJIEaAAA==" alt=""></div>
-  <figcaption>
-    <b>IMG_9768__s4.jpg</b>
-    <code>A-f8ee1b6805</code>
-    <span class="m">1280&times;720 &middot; 119 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9768__s4.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-494546314a" data-path="robots:content/burps/derived/_cal/IMG_9768__s5.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9768__s5.jpg</b>
-    <code>A-494546314a</code>
-    <span class="m">1280&times;720 &middot; 105 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9768__s5.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-7cc5f046ce" data-path="robots:content/burps/derived/_cal/IMG_9768__s6.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9768__s6.jpg</b>
-    <code>A-7cc5f046ce</code>
-    <span class="m">1280&times;720 &middot; 140 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9768__s6.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-85aea42d78" data-path="robots:content/burps/derived/_cal/IMG_9768__s7.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9768__s7.jpg</b>
-    <code>A-85aea42d78</code>
-    <span class="m">1280&times;720 &middot; 127 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9768__s7.jpg</span>
-  </figcaption>
-</figure>
-<figure class="t" data-uid="A-dd78d189f5" data-path="robots:content/burps/derived/_cal/IMG_9768__s8.jpg"
-   data-role="source" data-held="0" data-gone="0"
-   data-verdict="">
-  <button class="mark" title="mark for the cull">&#10007;</button>
-  <div class="ph"><img loading="lazy" src="data:image/webp;base64,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" alt=""></div>
-  <figcaption>
-    <b>IMG_9768__s8.jpg</b>
-    <code>A-dd78d189f5</code>
-    <span class="m">1280&times;720 &middot; 123 KB &middot; jpg</span>
-    <span class="f"><i class="b b-src">source, never served</i></span>
-    <span class="u"><span class="dim">used by nothing in this repo</span></span>
-    <span class="v">verdict: <b>&mdash; not ruled</b></span>
-    <span class="p">robots:content/burps/derived/_cal/IMG_9768__s8.jpg</span>
-  </figcaption>
-</figure>
   <h2>robots/docs/assets_twin <span>2 images</span></h2>
 <figure class="t" data-uid="A-ab866061f4" data-path="robots:docs/assets_twin/mgk65_reveal_treatments-20260715.png"
    data-role="source" data-held="0" data-gone="0"
@@ -3594,6 +3188,11 @@
     <span class="p">robots:robots/mgk-viiip/manual/structure/tuning/compare-page-60.png</span>
   </figcaption>
 </figure>
+  <div id="out">
+    <b>Marked for the cull &mdash; <span id="n">0</span></b>
+    <span class="m">Plain text. Nothing here is deleted by this page.</span>
+    <textarea id="ta" readonly placeholder="click the ✗ on any tile"></textarea>
+  </div>
 </div>
 <script>
   const grid = document.querySelector(".grid");
@@ -3602,6 +3201,8 @@
   function refresh() {
     const k = [...document.querySelectorAll(".t.killed")];
     n.textContent = k.length;
+    const j = document.getElementById("jump");
+    j.hidden = !k.length; j.textContent = k.length + " marked ↓";
     ta.value = k.map(t => t.dataset.path + "   (" + t.dataset.uid + ")").join("\n");
   }
   grid.addEventListener("click", e => {

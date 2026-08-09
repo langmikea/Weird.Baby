@@ -1,45 +1,11 @@
 # OPEN ACTIONS — the standing register
 
-**Built 2026-08-04 (v49/A1) on Mike's instruction: *"the round's spine — Mike has
-no way to see what is already reported."* It is the ONE place he looks.**
-
-Every open item across **both repos** — defects, backlog, ledgered ideas,
-`[PAPA]` gaps, flagged judgment calls — harvested from `STATE.md` in the museum
-and the robots repo, every round log, every audit doc and every ledger.
-
-> ## THE MAINTENANCE RULE (doctrine, recorded 2026-08-04)
->
-> **Every future round updates this file in the same commit it seals.** A round
-> that closes an item flips its status here; a round that exposes one adds a row
-> here. A finding that lives only in a round log is a finding nobody will read
-> again — that is the failure this register exists to end. Round logs stay the
-> narrative; **this is the ledger.**
->
-> Canonical statement: `docs/canonical/OPERATIONS.md` §7, Doctrine 14.
-
-**Status** — `OPEN` (nobody has started) · `IN PROGRESS` · `RULED-AWAITING-BUILD`
-(decided, not built) · `DONE`.
-**Owner** — `Mike` (his call, or his camera) · `Ops` (scoping, verification,
-docs) · `Code` (a build).
-
-**What this register is not:** it is not a priority order and it does not say
-what to do next. Everything below is open; the sequencing is Mike's.
-
----
+Everything open, across both repos. It is not a priority order; the sequencing is
+yours. Ops' own history of what has closed is not here — see the note at the foot.
 
 ## 0. THE SHORT LIST — what is waiting on Mike, and exactly what he must supply
 
 Pulled out of the tables below, not duplicated by them.
-
-**[D8 2026-08-06] EVERY ROW NOW CARRIES WHAT HE HAS TO HAND OVER**, in one line,
-because "waiting on Mike" was a status and not an instruction — a reader could see
-that a row was his without seeing what closing it costs him. Most are one word;
-several are one photograph; two are somebody else's consent and are not his to
-give alone.
-
-**NOTHING ON THIS LIST IS PENDING ON OPS.** Everything mechanical, unambiguous and
-already ruled has been landed. Three items were looked at and deliberately not
-built, each named with its reason at the foot of this section.
 
 | # | The question | What he must supply | Row |
 |---|---|---|---|
@@ -54,7 +20,6 @@ built, each named with its reason at the foot of this section.
 | 12 | **The Portal's drum has six engraved feeds and five will not arm.** | Which feed arms first, and what is on it. Each is a boolean and a feed. | [M33](#m33) |
 | 13 | **Twelve games run in the twin and none runs on the machine.** | A ruling on whether the firmware ever gets a GAMES handler. Nothing promises it today. | [M34](#m34) |
 | 14 | **Is there a fifth reveal class, and is it `SEALED`?** | One word — yes and call it SEALED, or no. A `no` is equally usable: it means HELD covers both rows. | [M35](#m35) |
-| 15a | **Eleven held photographs are waiting for one word, and you can now see them in one click.** | Keep or delete — one word per photograph or one for the lot; and better, which of them should come out from behind the door. **`C:\AI\Projects\_review\HELD-PHOTOGRAPHS-20260806\index.html`** | C-a · C-c |
 | 15b | **Both machines' Technical Specifications faces lost their real-build register and nothing replaced it.** | The units' own particulars — what an ABEAL spec sheet for these engines says. It is drafted in the robots repo; porting it is authoring, which is yours. | [N-g](#n-g) · [N-h](#n-h) |
 | 15c | **The in-story manual's specification section is sourced from the real Arduino firmware, and in one row the firmware overrules the manual.** | One ruling: which source wins when the manual and the firmware disagree about a 1965 machine. | [N-i](#n-i) |
 | 15d | **`/hr`'s player bar has no room for the track name on a phone.** | A phone layout call for the bar and the variant chips. It is a design pass, not a fix. | [N-j](#n-j) |
@@ -67,6 +32,7 @@ built, each named with its reason at the foot of this section.
 | 15l | **Week 3's headline may be your sentence and is printed as Ops'.** Weeks 1 and 2 carry different rails, so &ldquo;weeks 1&ndash;3 derive from your dictation&rdquo; does not say which week 3 is. | One word: is *&ldquo;IT IS BEAUTIFUL AND IT DOES NOTHING&rdquo;* yours, or Ops&rsquo;? | [R-c](#r-c) |
 | 15m | **Your twelve headlines answer a question the transfer model left open** &mdash; which of the five package weeks carries no Friday. Weeks 6 and 7 both name a FOURTH box. | Confirm the reading (arrivals on weeks 3&ndash;6, week 7 empty) or name a different one. Four package rows get a week either way. | [R-d](#r-d) |
 | 15n | **The hidden-links half is scoped and unbuilt, and three of its calls are yours.** | Whether an AES zip's install cost is acceptable or it becomes a browser page; whether a community unlock records a name (it changes the booth's privacy answer); and authorising rate limiting before the first typed code. | [R-b](#r-b) |
+| 15x | **A copy of the eleven photographs you ruled deleted still exists outside both repos.** Nothing you open links to it any more. | One word: delete the folder, or leave it as the last copy. | [L-b](#l-b) |
 | 15u | **The launch date is pending the launch, and one line moves if it slips.** 2026-08-17 is in the tree on your own qualification. A slip to any day that is not a Monday is a deliberate **build failure**, because ten day headlines are written for named weekdays. | **One word** on the day it is certain, or the new date. | [D-a](#d-a) |
 | 15x | **The last 0.05 of leading is in hand.** The body is at 1.40 and the readable floor at a 68-character measure is 1.35 &mdash; it is above the floor, not on it. | **One word after living with it:** take it (worth ~3.5% of the body height) or leave it. | [A-b](#a-b) |
 | 15q | **Two small calls on your own text in Record 001.** One typo you did not name is on the glass as written: `16:10 - Server auto-shutdown, auto containment. and auto alerts`. And the double space you DID name is in the data but **not on the glass** — measured, `=  86%` and `= 86%` draw at the same 385.16px, because HTML collapses whitespace runs. | **One word on the typo** (keep, or the corrected line) and **one on the space** (leave it collapsed, or accept `white-space: pre-wrap` on every record body). `was made made` is kept and needs nothing. | [S-e](#s-e) |
@@ -112,41 +78,12 @@ built, each named with its reason at the foot of this section.
 | 65 | **MGK-NIAC's Technical Specifications face now has no picture** — the third in this wing, deliberately. | A ruling, or nothing. Three is a pattern rather than three exceptions. | [M88](#m88) |
 | 66 | **The builder's own power-draw line has no home** — a real quotation, and a spec sheet has no row for one. | Whether it comes back, and on which face. | [M87](#m87) |
 
-**WHAT OPS LOOKED AT AND DELIBERATELY DID NOT BUILD [D8]**, because "already
-ruled" is a test and these three fail it:
-
-- **C34** click-to-load embeds — it is Ops' recommendation, and
-  M37 asks him for a letter. Building B while A and C are on the table is
-  Ops answering the question it put to him.
-- **[C36](#c36)** `/wal`'s title bar at 390px — the row offers three ways out
-  (shorten, wrap, drop the brand) and picking one is a design call.
-- **C17** the four pre-existing lint errors — its own row says each needs semantic
-  review rather than a mechanical fix.
-
-**[S4 2026-08-07, THE NIGHT DESK] THE ROUND WAS TOLD TO WORK EVERYTHING MECHANICAL
-AND UNAMBIGUOUS, AND THE HONEST ANSWER IS THAT D8 HAD ALREADY CLEARED IT.** Every
-`Code`-owned row still standing was read against that test. What moved is four
-rows that Record 001 made newly true — [C1](#c1) (still unrun, and now for a
-second reason: neither entry has a date), C8 (its blocker is one field on
-an entry that exists rather than a missing entry), [C10](#c10) (three dead
-controls started drawing) and [C38](#c38) (the second entry landed and carries no
-evidence, so the one-row cut is still right). Those are corrections to the
-register, not builds.
-
-**One more was looked at and deliberately not built, and it wants its reason on
-the record:** [C6](#c6), the `[[n]]` door-marker check. It is genuinely mechanical
-and it would be **a fourth mechanism in this tree with no data to exercise it** —
-[C7](#c7) says every door was anchored to material v47 deleted, and [C29](#c29)
-already records that shape as the register's own complaint. Writing a gate whose
-first instance does not exist is what the Law of Subtraction refuses. It comes
-with the first entry that declares a door.
-
-**[v54/F8] Rows 17–20 arrived in one round, and that is what it looks like when
-the operator answers a room's questions himself:** the gaps stop being things Ops
-noticed and start being things he named. None of them blocks anything — every one
-is held honestly on the page today.
-
 ---
+
+**Status** — `OPEN` (nobody has started) · `IN PROGRESS` · `RULED-AWAITING-BUILD`
+(decided, not built) · `DONE`.
+**Owner** — `Mike` (his call, or his camera) · `Ops` (scoping, verification,
+docs) · `Code` (a build).
 
 ## 1. RULINGS AND CALLS — Mike's
 
@@ -295,9 +232,10 @@ is held honestly on the page today.
 | &nbsp; | **RECORD 001 IS DICTATED &mdash; TWO OF THIS ROW&rsquo;S THREE PARTS LANDED AND THE THIRD DOES NOT FIT.** *What landed 2026-08-08:* his executive summary (three paragraphs) and his detailed report (`FRIDAY DAY (-3)`, eight beats, a closing sentence) are in the entry **whole and unedited**, thirteen strings in two sections carrying his own headings. *What did not:* **the index row&rsquo;s `line`.** His executive summary is **477 characters**; `RECORD_LINE_MAX` is **130**, and that number is his own R3 rule &mdash; *&ldquo;THE ENTIRE SUMMARY MUST FIT&rdquo;* &mdash; made into a gate. **Re-measured on the built bundle at 390px this round: 013&rsquo;s row 157px, 001&rsquo;s row 84px, unchanged.** *Why Ops still did not write one:* only `Congratulations!` (16 chars) of his three paragraphs fits, and it summarises nothing; his closing sentence fits at 120 but is the report&rsquo;s last line, not its summary. **Choosing which of his sentences becomes the summary is an edit**, which the instruction forbids and which is the exact failure this row was raised to prevent. *Missing, and it is smaller than it was:* **one sentence, &le;130 characters.** `lead` and `tomb` are absent for their own reasons (a lead renders one paragraph and his summary is three; he wrote no closing line). | S2 &middot; THE NIGHT DESK | OPEN | Mike | 2026-08-07 |
 | <a id="s-e"></a>**S-e** | **TWO SMALL CALLS ON YOUR OWN TEXT IN RECORD 001, NEITHER OF WHICH OPS WOULD MAKE FOR YOU.** *Known:* the dictation carried three things that read as slips. You named two of them &mdash; `a clean hand-off was made made`, and the double space in `Incoming data =  86%` &mdash; and instructed both kept, so both are kept and neither is a question. **The third you did not name: `16:10 - Server auto-shutdown, auto containment. and auto alerts`**, a full stop mid-clause followed by a lower-case *and*. It is on the glass exactly as written. *And the double space has a rendering half you may not have intended:* it is in the data and **not on the glass**. Measured on the built bundle &mdash; `=  86%` and `= 86%` both draw at **385.16px**, because HTML collapses whitespace runs; under `white-space: pre` the line is 388.67px. Making it visible costs either `white-space: pre-wrap` on **every** record body, or an `&amp;nbsp;` standing in for your character. *Missing:* **one word on the third typo** (keep, or the corrected line), and **one word on the second space** (leave it collapsed, or spend one of the two costs above). *Why neither was decided here:* the first is your text and the second is a layout change to every entry in the Record. | RECORD 001 &middot; 2026-08-08 | OPEN | Mike | 2026-08-08 |
 | <a id="d-a"></a>**D-a** | **THE LAUNCH DATE IS PENDING THE LAUNCH, AND ONE LINE MOVES IF IT SLIPS.** *Known:* Record 001 is dated **2026-08-17** on your own qualification &mdash; *pending launch happening that day.* It is a single constant, `RECORD_EPOCH` in `src/data/artists/robots.js`, read by the entry&rsquo;s `date`, the face&rsquo;s `recordEpoch` and (through `recordEpoch()`) by every day of the worksheet&rsquo;s outline, so **a slip is that one line and nothing else** &mdash; proved rather than assumed, and the two-literal failure it prevents prints *&ldquo;Week 2&rdquo;* on day one with no error. *Missing:* **one word on the day it is certain, or a new date if it moves.** *Why it has a row at all:* the outline&rsquo;s ten day headlines are written for named weekdays and the generator now **refuses to build** if the derived weekday disagrees &mdash; so a slip to any day that is not a Monday is a build failure, deliberately, rather than a Friday quietly becoming a Wednesday. | D1 &middot; 2026-08-08 | OPEN | Mike | 2026-08-08 |
-| <a id="c-a"></a>**C-a** | **TWENTY-SEVEN CALIBRATION FRAMES SURVIVED THE CULL ON A TECHNICALITY, AND IT IS ONE WORD.** *Known:* `content/burps/derived/_cal/` holds nine stills per burp video, twenty-seven in all, provably pulled from video. They are referenced by exactly one thing &mdash; **their own sidecar manifest, `cal.json`, which nothing in either repository reads.** So on one reading they are referenced and stay; on the other the reference is a list OF them and they go. *Missing:* **one word.** Origin is certain and only the USAGE is a judgement, which is why your own rule (*if a file&rsquo;s origin cannot be determined mechanically, do not delete it*) stopped Ops here. *What goes if you say so:* the twenty-seven frames, `cal.json` and the `_cal` folder &mdash; nine frames each of the same three seconds. | C1 &middot; 2026-08-08 | OPEN | Mike | 2026-08-08 |
 | <a id="a-b"></a>**A-b** | **THE LAST 0.05 OF LEADING IS IN HAND, AND THE FLOOR IS STATED RATHER THAN REACHED.** *Known:* the body is at **1.40** and the readable floor for Arial at 15.4px on a **68-character** measure is **1.35** &mdash; and the reason is the MEASURE, not the face: the eye returns along the leading, and the longer the line the more of it that return needs. The same 1.30 that is comfortable at 45 characters loses the return at 68. *Missing:* **one word after living with it** &mdash; take the last 0.05 (worth about 3.5% of the body&rsquo;s height, and it puts the Record ON the floor rather than above it), or leave it. **A third option exists and is yours, not Ops&rsquo;:** narrowing the 68ch measure would buy tighter leading honestly, but 68ch is R4&rsquo;s measured decision from the 65&ndash;75 reading band and trading it for leading would be swapping a measured number for an unmeasured one. | T3 &middot; 2026-08-08 | OPEN | Mike | 2026-08-08 |
-| **C6** | **The `[[n]]` door-marker syntax is unpoliced.** A marker with no matching door renders nothing and drops the door at the end — the right failure, and it wants a build-time check. | v45/R5 #7 | OPEN | Code | 2026-08-04 |
+| <a id="l-a"></a>**L-a** | **TWENTY-FOUR ASSET-TABLE ROWS POINT AT A MANUAL THAT MOVED, AND THE ORPHAN TRIPWIRE CANNOT SEE THEM.** *Known:* `robots/mgk-viiip/manual/pages/page-01…24.png` are flagged `missing: true`; the manual is at `manual/structure/pages/` and has **61 pages**, sharing a sha256 with none of the 24 — it was regenerated as well as moved. **`npm run assets:orphans` reports 0 and is correct by its own definition:** it counts `missing && isJudged`, and all six judged fields on all 24 rows are null, so the instrument whose job is to notice a row whose file is gone is blind to 24 of the 27 rows in that state. *Missing:* nothing from you. `npm run assets:cull <the 24 paths>` is the whole of it. *Why Ops did not do it on the way past:* a 24-row deletion from the asset table on the same day as a 27-row cull should be a deliberate act rather than a ride-along, and the orphan check's blind spot is the part worth keeping. Nothing draws them today — the light table excludes them by your own *"only what still exists"*. | L2 · THE LIGHT TABLE · 2026-08-08 | OPEN | Ops | 2026-08-08 |
+| <a id="l-b"></a>**L-b** | **A COPY OF THE ELEVEN DELETED PHOTOGRAPHS SURVIVES OUTSIDE BOTH REPOSITORIES.** *Known:* you ruled the eleven held photographs deleted on 2026-08-07 and all eleven left both repos the same day. The review folder Ops built for you to rule from — `C:\AI\Projects\_review\HELD-PHOTOGRAPHS-20260806\photographs\` — still holds all eleven. It is no longer linked from anything you open; the short-list row that pointed at it has gone. *Missing:* **one word** — delete it, or leave it as the last copy. *Why Ops removed the link and not the folder:* Doctrine 24 says *not archived where it resurfaces*, and C1's safety clause says a real photograph this museum owns is not deleted on Ops' word. Removing what you would meet again satisfies the first without breaking the second. | L4 · THE LIGHT TABLE · 2026-08-08 | OPEN | Mike | 2026-08-08 |
+| **C6** | **The `[[n]]` door-marker syntax is unpoliced.** A marker with no matching door renders nothing and drops the door at the end — the right failure, and it wants a build-time check. **Deliberately not built:** it would be a fourth mechanism in this tree with no data to exercise it ([C7](#c7) — every door was anchored to material v47 deleted; [C29](#c29) records the shape). It comes with the first entry that declares a door. | v45/R5 #7 | OPEN | Code | 2026-08-04 |
 | <a id="c7"></a>**C7** | **The v45 inline-door container is exercised nowhere.** All four doors were anchored to material v47 deleted. Correct machinery, no data. | v47 exposure #3 | OPEN | Code | 2026-08-04 |
 | **C9** | **The `/robots` contents column is 76% blank paper** since the photo strip came off. Reported, unfilled by ruling. | v47 exposure #6 | OPEN | Code | 2026-08-04 |
 | **C10** | **The Record's closed face has no visual hook** — a heading and one row of type. A live conflict with the standing Visual Hook Law, resolved in favour of Mike's H1 ruling. **[S2 2026-08-07] IT IS TWO ROWS OF TYPE NOW AND THAT IS NOT AN IMPROVEMENT, IT IS THE SAME ROW TWICE.** Record 001 carries no `still`, so the closed face gained a second typographic row and no picture. **What DID change is that three controls started drawing for the first time** — `RecordJump`'s NEWEST / OLDEST / UNREAD bar, the ‹ NEWER / OLDER › walk and the `2 of 2` count, all gated on `list.length > 1` and dead since M5. Verified on the built bundle at 390px. That is furniture rather than a hook, and this row stands. | v47 exposure #2 | OPEN | Code | 2026-08-04 |
@@ -385,3 +323,18 @@ Harvested, in this order:
 `STATE.md`, and sweeping them would fill this register with items nobody can
 tell the status of — which is the opposite of what it is for. If something is
 missing from this file, add the row; do not add the archive.
+
+---
+
+## Ops' own notes on this file
+
+**THE MAINTENANCE RULE (Doctrine 14).** Every round updates this file in the
+commit it seals: a round that closes an item moves its row out; a round that
+exposes one adds a row. Round logs are the narrative; this is the ledger.
+
+**CLOSED ROWS LEAVE (Doctrine 24).** They are in `docs/OPEN_ACTIONS_CLOSED.md`,
+which is Ops' history, is one grep away, and is deliberately not on the Ops desk.
+
+**Built 2026-08-04 (v49/A1)** on Mike's instruction: *"the round's spine — Mike
+has no way to see what is already reported."* Harvested from `STATE.md` in both
+repos, every round log, every audit doc and every ledger.

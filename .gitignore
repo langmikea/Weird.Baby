@@ -45,3 +45,6 @@ public/_lap.html
 
 # provenance --emit scratch
 provenance/_undeclared.json
+
+# thumbnail cache for the light table (content-hashed, regenerable)
+tools/dictation/.thumb-cache.json

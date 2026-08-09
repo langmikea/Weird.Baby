@@ -83,25 +83,10 @@ footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:v
 <h1>The egg tracker</h1>
 <p class="sub">15 rows in the ledger &middot; 7 planted &middot; 3 spent &middot; 5 waiting &middot; and 3 that are not in the table at all</p>
 
-<div class="note">
-<p><b>PLANTED</b> means built, held, and nobody told &mdash; it exists in the tree
-today and finding it is the visitor's job. <b>SPENT</b> means it is on the glass;
-whoever finds it, finds it, and nothing there is recoverable. <b>WAITING</b>
-means an idea with a row and no build, ledgered so it is not a thing somebody
-remembers hearing once.</p>
-
-<p><b>4 EGGS HAVE NO WRITTEN FORM ANYWHERE BUT THEIR LEDGER
-ROW.</b> The <code>note</code> field IS the egg &mdash; it is printed on no page,
-in either repository, by Mike's own instruction that the reason must not be
-explained on the glass. Explaining one on a face would spend it in the same
-commit that planted it.</p>
-
-<p class="ask"><b>AND NOTHING IN THIS MUSEUM REPORTS AN EGG BEING TRIPPED.</b>
-So <i>planted</i> is a statement about the tree and never about a visitor. The
-poke is the standing gate on every future egg by your own ruling &mdash;
-<i>do not bother with a next-level egg until this one at least catches on</i>
-&mdash; and that condition is met by your word, not by a number.</p>
-</div>
+<p class="k" style="font-size:12px;margin:0 0 18px">
+<span class="tag g">PLANTED</span> built, held, nobody told &nbsp;&middot;&nbsp;
+<span class="tag y">SPENT</span> on the glass &nbsp;&middot;&nbsp;
+<span class="tag">WAITING</span> an idea with a row and no build</p>
 
 <div class="bar">
   <input id="q" placeholder="filter — name, mechanism, dependency, note&hellip;">
@@ -341,10 +326,13 @@ answer</b>, so each carries it.</p></div>
 </div>
 </div>
 
-<footer>Built from <code>reveal/ledger.json</code> (class <code>egg</code>) plus
-the three rows above, which are read out of <code>docs/OPEN_ACTIONS.md</code> and
-the robots repo's props ledger. Same population as <code>npm run reveal:eggs</code>.
-Nothing here is written back.</footer>
+<footer>4 of these eggs have no written form anywhere but their
+ledger row &mdash; the <code>note</code> field IS the egg, and printing it on a face
+would spend it in the commit that planted it. Nothing in the museum reports an egg being
+tripped, so <i>planted</i> is a statement about the tree and never about a visitor.
+Built from <code>reveal/ledger.json</code> (class <code>egg</code>) plus the three rows
+above, read out of <code>docs/OPEN_ACTIONS.md</code> and the robots repo's props ledger.
+Same population as <code>npm run reveal:eggs</code>; nothing here is written back.</footer>
 </div>
 <script>
 (function(){
