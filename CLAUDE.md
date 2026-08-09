@@ -627,6 +627,21 @@ so `line` is still empty and 001's row is still 84px against 013's 157px (`S-b`)
 collapses it, and making it visible costs `white-space: pre-wrap` on every record
 body (`S-e`). Full rules: `OPERATIONS.md` §5's RECORD 001 row.
 
+## ONE STANDING RULE ADDED 2026-08-08 (THE CULL)
+
+**ONCE IT IS RULED GONE, IT IS GONE FROM HIS VIEW** - *"once he says get rid of
+something, HE NEVER WANTS TO SEE IT AGAIN - not archived where it resurfaces, not
+listed in a tracker, not carried in a register as a closed row he has to scroll
+past."* `OPERATIONS.md` §7 **Doctrine 24**, mirrored in `STATE.md`.
+**IT BINDS THE TRACKERS AND REGISTERS, NOT ONLY THE FILES, AND IT OVERRIDES
+DOCTRINE 14's "flip the status":** a closed row now LEAVES. `OPEN_ACTIONS.md`
+went **801 -> 386 lines** on the day. Ops' history is
+`docs/OPEN_ACTIONS_CLOSED.md` and is **not on the Ops desk** - the test is not
+*is it archived*, it is *will he meet it again*. **A deleted thing is named ONCE,
+in the log of the round that killed it, and nowhere else.** And removing rows
+orphans links: 67 were flattened to plain text - §9's prune procedure applies
+inside one file.
+
 ## ONE STANDING RULE ADDED 2026-08-08 (ATTACHMENTS + THE EMAIL-LIKE REGISTER)
 
 **THE RECORD IS EMAIL-LIKE, NOT AN EMAIL PROGRAM** - *"no From, no To, no Subject
@@ -716,6 +731,31 @@ indistinguishable from his words a week later.
 ## Recent session log
 
 Maintained here. Newest first.
+
+### 2026-08-08 -> THE CULL (C1-C2; C3-C4 NOT STARTED) - sealed
+- **TWO OF FOUR DONE COMPLETELY AND TWO NOT STARTED, AND THE CHOICE WAS NOT
+  CLOSE: A CULL IS IRREVERSIBLE AND A TRACKER IS NOT.** Half a light table -
+  thumbnails with no viewer, or a viewer over a page that still opens with three
+  paragraphs - is worse than none. C3/C4 inherit a cull that is finished and a
+  doctrine that says *cut it*.
+- **ELEVEN VIDEO-DERIVED STILLS DELETED** from the robots repo (six burp frames,
+  five 2021 plates, 725 KB). `MAGIC8-2021-P01-the-eye.jpg` KEPT - an egg row
+  references it. **The glove videos are in NEITHER repository** - no `.MOV`
+  anywhere, nothing named for them; the KEEP clause had nothing to apply to.
+- **THE FINDING: `usedBy` IS EMPTY ON ALL 139 ROBOTS-REPO ROWS**, including the
+  61 manual pages that are in use and that `reveal:check` counts every packet.
+  **A cull keyed on the asset table - the obvious mechanical reading of "no
+  asset-table row references it" - would have deleted the manual.** The scan was
+  done from SOURCE across both repos (691 files) instead. **Never cull off
+  `usedBy`.**
+- **27 CALIBRATION FRAMES WERE NOT DELETED AND ARE LISTED FOR HIM** (`C-a`).
+  Origin certain; referenced only by their own sidecar manifest, which nothing
+  reads. Certain origin, JUDGED usage - C1's own safety clause.
+- **DOCTRINE 24 WAS APPLIED THE SAME DAY IT WAS RECORDED.** `OPEN_ACTIONS.md`
+  801 -> 386 lines; 59 closed rows, 14 struck short-list rows and 8 whole
+  `CLOSED IN <round>` sections moved to `docs/OPEN_ACTIONS_CLOSED.md`, which is
+  **not on the desk**. 67 dead intra-file links flattened rather than left
+  dangling.
 
 ### 2026-08-08 -> TIGHTEN THE RECORD (T1-T5) - sealed
 - **THE LEADING WAS THE SMALLEST OF THE FOUR COSTS HE NAMED, AND HE NAMED THAT

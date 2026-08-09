@@ -201,6 +201,25 @@ lead above his EXECUTIVE SUMMARY heading — shipped, not suppressed (`I-a`). `C
 is now the whole of what is left and **the worksheet finally asks for it**, in
 one format-checked box.
 
+## ONCE IT IS RULED GONE, IT IS GONE FROM HIS VIEW (Mike, 2026-08-08 — STANDING)
+
+> **"Once he says get rid of something, HE NEVER WANTS TO SEE IT AGAIN. Anything
+> ruled crap or irrelevant is removed from his view for good — not archived where
+> it resurfaces, not listed in a tracker, not carried in a register as a closed
+> row he has to scroll past."**
+
+Canonical: `docs/canonical/OPERATIONS.md` §7 Doctrine 24.
+
+**IT BINDS THE TRACKERS AND REGISTERS, NOT ONLY THE FILES.** Doctrine 14 said a
+closed row gets its status flipped; **a closed row now LEAVES.** Applied
+2026-08-08: `OPEN_ACTIONS.md` **801 → 386 lines** — 59 closed rows, 14 struck
+short-list rows and eight whole `CLOSED IN <round>` sections out. Ops' history is
+`docs/OPEN_ACTIONS_CLOSED.md` and is **not on the Ops desk**; the test is not *is
+it archived*, it is *will he meet it again*.
+
+**A deleted thing is named once, in the log of the round that killed it, and
+nowhere else** — not in a tracker, not in a `PLATES.md`, not as a struck row.
+
 ## THE RECORD IS EMAIL-LIKE, NOT AN EMAIL PROGRAM (Mike, 2026-08-08 — STANDING)
 
 > **"Do NOT build mail chrome — no From, no To, no Subject line, no reply

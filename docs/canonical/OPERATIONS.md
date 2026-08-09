@@ -7,7 +7,29 @@ tree, the live working tree wins — always.
 
 **Read this file FIRST in every session, before STATE.md, before any handoff.**
 
-**Last verified against live tree:** 2026-08-08 (TIGHTEN THE RECORD — five
+**Last verified against live tree:** 2026-08-08 (THE CULL — **two of four
+instructions done completely and two not started, said first because it is the
+honest part.** Gates: lint **11/9 = baseline** · build green · provenance
+**PASS** · `reveal:check` **PASS** · `parity:gate` **PASS** · `instory:gate`
+**PASS** · `assets:orphans` **0** · `reveal:day` **nothing to move**.
+**ELEVEN VIDEO-DERIVED STILLS ARE DELETED** from the robots repo — six burp
+frames and five 2021 plates, 725 KB — on Mike's mechanical rule, with `P01`
+kept because an egg row references it. **THE FINDING IS WHAT THE RULE WOULD HAVE
+DONE IF READ THE OBVIOUS WAY:** `usedBy` is **empty on all 139 robots-repo rows**
+including the 61 manual pages, so a cull keyed on the asset table **would have
+deleted the manual.** The scan was done from SOURCE across both repos (691 files)
+instead. **27 calibration frames were NOT deleted and are listed for him** —
+referenced only by their own sidecar manifest, which nothing reads; certain
+origin, judged usage, so C1's safety clause applies (`C-a`). **THE GLOVE VIDEOS
+ARE IN NEITHER REPOSITORY** — no `.MOV` anywhere and no file named for them.
+**DOCTRINE 24 IS RECORDED AND WAS APPLIED THE SAME DAY:** `OPEN_ACTIONS.md` went
+**801 → 386 lines**, 59 closed rows and 8 whole closed-round sections out of his
+view into `docs/OPEN_ACTIONS_CLOSED.md`, which is **not on the Ops desk**; 67
+dead intra-file links flattened rather than left dangling. **C3 (the light table)
+and C4 (the preamble audit) are NOT STARTED** — a cull is irreversible and a
+tracker is not, and half a light table is worse than none. Round log:
+`docs/MUSEUM_CULL_LOG-20260808.md`.)
+Previously 2026-08-08 (TIGHTEN THE RECORD — five
 instructions, all answered, and **the largest finding is that the leading was
 the smallest of the four costs he named.** Gates: lint **11/9 = baseline** ·
 build green · provenance **PASS** · `reveal:check` **PASS** · `parity:gate`
@@ -1521,6 +1543,37 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
     `docs/MUSEUM_ATTACHMENTS_LOG-20260808.md` and
     `docs/MUSEUM_TIGHTEN_LOG-20260808.md`.
 
+
+24. **ONCE IT IS RULED GONE, IT IS GONE FROM HIS VIEW (Mike, 2026-08-08 —
+    STANDING, every surface Ops builds).**
+
+    > **"Once he says get rid of something, HE NEVER WANTS TO SEE IT AGAIN.
+    > Anything ruled crap or irrelevant is removed from his view for good — not
+    > archived where it resurfaces, not listed in a tracker, not carried in a
+    > register as a closed row he has to scroll past."**
+
+    **IT BINDS THE TRACKERS AND REGISTERS, NOT ONLY THE FILES**, and that is the
+    half a session will forget. Doctrine 14 said a round that closes an item
+    flips its status in `OPEN_ACTIONS.md`. **That is now wrong**: a closed row
+    LEAVES. The register carries only what is open, because it is the one page he
+    was told is the one place he looks, and on 2026-08-08 **more than half of it
+    was finished business** — 59 closed rows, 14 struck short-list rows and eight
+    whole `CLOSED IN <round>` sections.
+
+    **OPS' HISTORY STILL EXISTS AND IS NOT HIS VIEW.**
+    `docs/OPEN_ACTIONS_CLOSED.md` answers *did we already rule on this* and is
+    **deliberately absent from the Ops desk**. The test is not *is it archived*,
+    it is *will he meet it again*. A link to it from any page he opens breaks the
+    rule.
+
+    **A DELETED THING IS NAMED ONCE AND NEVER AGAIN.** The round that kills
+    something names it in its own log, because a report he asked for is not a
+    surface he browses. Nothing else keeps the list: not a tracker, not a
+    `PLATES.md`, not a struck row, not a "formerly" note.
+
+    **AND THE PRUNE HAZARD APPLIES INSIDE ONE FILE.** Removing rows orphans the
+    links that pointed at them; 67 were flattened to plain text on the day. Check
+    anchors, flatten or repoint, then prune — §9's own procedure, one level down.
 
 ## 8. Known hazards (environment quirks)
 
