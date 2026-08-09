@@ -7,7 +7,34 @@ tree, the live working tree wins — always.
 
 **Read this file FIRST in every session, before STATE.md, before any handoff.**
 
-**Last verified against live tree:** 2026-08-08 (ATTACHMENTS + THE EMAIL-LIKE
+**Last verified against live tree:** 2026-08-08 (TIGHTEN THE RECORD — five
+instructions, all answered, and **the largest finding is that the leading was
+the smallest of the four costs he named.** Gates: lint **11/9 = baseline** ·
+build green · provenance **PASS** · `reveal:check` **PASS** · `parity:gate`
+**PASS, 4 shared · 0 divergences** · `instory:gate` **PASS** ·
+`assets:orphans` **0** · `reveal:day` **nothing to move** · **the lap RAN at
+390px and 1228px** on five routes, page overflow 0, uncontained past the edge 0,
+console errors 0. **THE RECORD HAS ITS OWN RHYTHM LADDER NOW** — R1's
+`--rh-*` paces every flat face, so tightening it would retune four wings to
+answer a complaint about one; `--rec-hug/-para/-block/-sect` (0.30/0.40/0.55/
+**1.15**, against the house's 2.6 for a section) are Record-only and inert
+elsewhere. **THE FOUR COSTS HE NAMED, IN HIS ORDER:** dateline rule → headline
+26.07 → **18.22px**, headline → first heading 40.03 → **17.70px**, paragraph to
+paragraph 8.46 → **6.16px**, above/below a section heading 40.02 → **17.70** and
+10.70 → **6.54px**. **LEADING 1.45 → 1.40, AND THE FLOOR IS 1.35 BECAUSE OF THE
+MEASURE RATHER THAN THE FACE** — the eye returns along the leading and a
+68-character line needs more of it than a 45-character one; the last 0.05 is in
+hand (`A-b`). **RESULT, PAIRED IN ONE PAGE LOAD:** the opened entry **−15.0% at
+1228px and −12.4% at 390px**, the dateline-to-first-word distance **−27%** at
+both, and **characters per line UNCHANGED at 70.8 / 40.4** — 68ch is 68
+characters whatever the leading. **THE A/B METHOD IS THE OTHER FINDING:** the old
+rules were injected as a stylesheet into the same page and removed again, because
+run-to-run wrap noise had already produced a before-figure wrong by a whole line
+(126.73 against 110.68 for one build). **`A-a` CLOSES BOTH WAYS** — the typewriter
+stays on the dateline, the stamp and the mark rail, because the Record's register
+governs the writer's words and the machine's own marks are a different voice.
+**Nothing was deployed.** Round log: `docs/MUSEUM_TIGHTEN_LOG-20260808.md`.)
+Previously 2026-08-08 (ATTACHMENTS + THE EMAIL-LIKE
 REGISTER — seven instructions, all answered, and **the first one is a boundary
 that governed two decisions the rest of the brief would have pushed the other
 way.** Gates: lint **11/9 = baseline** · build green · provenance **PASS** ·
@@ -1468,10 +1495,31 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
     left alone. When in doubt, change less; the boundary says everything else
     stays what it is. The two open calls are `A-a`.
 
+    **AND THE PLAINNESS IS SPACING AS WELL AS TYPE [T2 2026-08-08].** *"Tighten
+    the line spacing further, and cut the WASTED WHITE SPACE GENERALLY — not just
+    leading."* The Record has **its own rhythm ladder**, four steps, Record-only:
+    `--rec-hug` .30 (a heading and the thing it labels) · `--rec-para` .40 · 
+    `--rec-block` .55 · `--rec-sect` **1.15** (the house's is 2.6). R1's `--rh-*`
+    is untouched and still paces every other flat block — tightening it would
+    retune /wal and /foundation to answer a complaint about the Record.
+    **AIR GOES ABOVE A HEADING, NEVER BELOW**, and a heading hugs its own text
+    nearly four times closer than it sits from the section above it; that ratio is
+    what lets a tight document still scan by its headings.
+    **THE LEADING FLOOR IS 1.35 AND IT IS SET BY THE MEASURE, NOT THE FACE** —
+    the eye returns along the leading and a 68-character line needs more of it
+    than a 45-character one. The body sits at **1.40**, above the floor rather
+    than on it (`A-b`). **A round that narrows the measure may spend some of
+    that; a round that tightens leading without narrowing the measure may not.**
+    **AND THE TYPEWRITER STAYS ON THE MACHINE'S OWN MARKS** — the dateline, the
+    register stamp and the index mark rail keep Courier Prime, ruled 2026-08-08:
+    *"those are the machine's own marks, not the writer's words."* The register
+    governs the WRITER'S WORDS.
+
     Mechanism: `--wb-plain`; the `.vp-rec-*` block and the `.vp-rec-index` block
     in `Exhibit.css`; `RecordAttachments.jsx` + `attachmentsOf()`;
-    `DRAWN_ENTRY_FIELDS` in `tools/reveal-ledger.mjs`. Round log:
-    `docs/MUSEUM_ATTACHMENTS_LOG-20260808.md`.
+    `DRAWN_ENTRY_FIELDS` in `tools/reveal-ledger.mjs`. Round logs:
+    `docs/MUSEUM_ATTACHMENTS_LOG-20260808.md` and
+    `docs/MUSEUM_TIGHTEN_LOG-20260808.md`.
 
 
 ## 8. Known hazards (environment quirks)

@@ -646,6 +646,18 @@ foot, one shape for all three kinds, with the payload's own words INSIDE the row
 (R4).** And **"nothing drops silently ever again" is a GATE** - `reveal:check`
 refuses any entry field nothing renders (`DRAWN_ENTRY_FIELDS`).
 
+**[T2/T3 2026-08-08] THE PLAINNESS IS SPACING TOO, AND THE RECORD HAS ITS OWN
+RHYTHM LADDER.** `--rec-hug` .30 - `--rec-para` .40 - `--rec-block` .55 -
+`--rec-sect` **1.15** (the house's `--rh-sect` is **2.6**). **They are
+Record-only for A4's reason:** R1's `--rh-*` paces every flat face, so tightening
+it retunes /wal and /foundation to answer a complaint about the Record. **AIR
+GOES ABOVE A HEADING, NEVER BELOW.** **THE LEADING FLOOR IS 1.35 AND THE MEASURE
+SETS IT, NOT THE FACE** - the eye returns along the leading and a 68-character
+line needs more of it than a 45-character one; the body sits at **1.40**, above
+the floor. **A round that narrows the 68ch measure may spend some of that; a
+round that only tightens leading may not.** **And the typewriter stays** on the
+dateline, the stamp and the mark rail: the register governs the WRITER'S WORDS.
+
 ## TWO STANDING RULES ADDED 2026-08-08 (THE DATE + THE LIVE PREVIEW)
 
 **THE STORY PLAYS OUT IN REAL TIME, ON REAL DATES** — *"an entry's date is the
@@ -704,6 +716,33 @@ indistinguishable from his words a week later.
 ## Recent session log
 
 Maintained here. Newest first.
+
+### 2026-08-08 -> TIGHTEN THE RECORD (T1-T5) - sealed
+- **THE LEADING WAS THE SMALLEST OF THE FOUR COSTS HE NAMED, AND HE NAMED THAT
+  POSSIBILITY HIMSELF.** 1.45 -> 1.40 is **-3.4%**; the two section gaps are
+  **-56%**. The Record got its own rhythm ladder (`--rec-hug/-para/-block/-sect`
+  = .30/.40/.55/**1.15** against the house's 2.6), Record-only because R1's
+  `--rh-*` paces every flat face. **His four, in his order:** dateline rule ->
+  headline 26.07 -> **18.22**; headline -> first heading 40.03 -> **17.70**;
+  paragraph to paragraph 8.46 -> **6.16**; above/below a heading 40.02 ->
+  **17.70** and 10.70 -> **6.54**. Gates: lint **11/9 = baseline** - build green
+  - provenance **PASS** - `reveal:check` **PASS** - `parity:gate` **PASS** -
+  `instory:gate` **PASS** - `assets:orphans` **0** - `reveal:day` **nothing to
+  move** - **the lap RAN at 390px and 1228px**, five routes, 0 overflow, 0
+  errors. Log: `docs/MUSEUM_TIGHTEN_LOG-20260808.md`.
+- **THE RESULT, PAIRED IN ONE PAGE LOAD:** opened entry **-15.0% at 1228px** and
+  **-12.4% at 390px**; **dateline to the first word of the report -27%** at both;
+  lines per screen 40 -> 41; **characters per line UNCHANGED at 70.8 / 40.4.**
+  Cumulative over two rounds the entry is **720 -> 579px**.
+- **THE A/B METHOD IS THE OTHER FINDING AND IT IS REUSABLE.** The old rules were
+  injected as a `<style>` into the same page, snapshotted, removed, snapshotted -
+  because run-to-run wrap noise had already produced a before-figure **wrong by a
+  whole line** (126.73 against 110.68 for one build). **Two page loads are not an
+  A/B; one page load with the rules toggled is.**
+- **T1 CLOSED A-a BOTH WAYS.** The typewriter stays on the machine's own marks;
+  the leading went further. The residual 0.05 is `A-b`, with the floor stated
+  (1.35) and the reason recorded: **the measure sets the floor, not the face.**
+- **SURFACING UNMOVED AT 20 SPENDABLE - THE TENTH PACKET RUNNING.**
 
 ### 2026-08-08 -> ATTACHMENTS + THE EMAIL-LIKE REGISTER (A0-A6) - sealed
 - **THE BOUNDARY WAS THE INSTRUCTION THAT DID THE MOST WORK, AND IT WORKED BY

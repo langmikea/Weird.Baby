@@ -231,12 +231,22 @@ name, a line of detail, and the payload's own words printed *inside* the row. A
 glyph is not a failure state. **And "nothing drops silently ever again" is a
 gate**: `reveal:check` refuses any entry field nothing renders.
 
-**MEASURED:** +11.1% lines per screen at 1228px and 390px, the opened entry
-−6.8% / −10.3%, index rows −4.9% / −16.6%, and **characters per line unchanged
-at 70.8** — R4's 68ch survives because `ch` is relative to the face. The leading
-went 1.62 → 1.45 and that is the one thing that moved against readability; it is
-one number and it is open (`A-a`), along with Courier Prime surviving on the
-dateline, the stamp and the mark rail.
+**AND THE PLAINNESS IS SPACING TOO [T2 2026-08-08].** The Record has **its own
+rhythm ladder** — `--rec-hug` .30 · `--rec-para` .40 · `--rec-block` .55 ·
+`--rec-sect` **1.15** (the house's is 2.6) — Record-only, because R1's `--rh-*`
+paces every flat face and tightening it would retune four wings for one.
+**Air goes above a heading, never below.** **The leading floor is 1.35 and it is
+set by the MEASURE, not the face:** the eye returns along the leading and a
+68-character line needs more of it than a 45-character one. The body is at
+**1.40**, above the floor (`A-b`). **The typewriter stays on the machine's own
+marks** — dateline, stamp, mark rail — because the register governs the writer's
+words (`A-a`, closed).
+
+**MEASURED, CUMULATIVE OVER THE TWO ROUNDS:** the opened entry **720 → 579px at
+1228px** and **969 → 770px at 390px**; the dateline-to-first-word distance
+**−27%**; lines of body per screen 36 → 41; and **characters per line unchanged
+at 70.8 / 40.4 throughout** — 68ch is 68 characters whatever the face or the
+leading.
 
 ## THE STORY PLAYS OUT IN REAL TIME, ON REAL DATES (Mike, 2026-08-08 — STANDING)
 

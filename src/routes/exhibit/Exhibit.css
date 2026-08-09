@@ -1522,10 +1522,39 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    there today and nothing changes today — and inheriting is the right answer
    when it does: one component, one register. If the Foundation is ever meant to
    read as a different kind of log, that is a ruling and not a defect. */
+/* ═══ [T2/T3 2026-08-08] THE RECORD'S OWN RHYTHM LADDER ════════════════════
+   MIKE, having put the Record beside a chat interface reading the same kind of
+   text: *"TIGHTEN THE LINE SPACING FURTHER, and cut the WASTED WHITE SPACE
+   GENERALLY — not just leading."* He named four costs in order: the gap between
+   the dateline rule and the headline, the gap between the headline and the first
+   heading, the paragraph spacing inside the body, and the space above and below
+   every section heading.
+
+   IT IS A SECOND LADDER AND NOT A CHANGE TO THE FIRST, AND THAT IS A4's LESSON
+   APPLIED AGAIN. R1's `--rh-tight/-block/-sect/-end` are declared on `.vp-face`
+   and paced EVERY flat face — /wal, /foundation and the rest. Tightening them
+   would retune four wings to answer a complaint about one. These four are
+   Record-only: nothing outside a `.vp-rec-*` rule reads them, so they are inert
+   everywhere else.
+
+   THE RATIOS ARE THE POINT, exactly as R1 said of the house ladder. 0.30 : 0.40
+   : 0.55 : 1.15 keeps four distinct distances a reader can see AS a relationship
+   — a heading hugs its own text three times closer than it sits from the section
+   above it — while the largest of them is 1.15× the type instead of 2.6×.
+
+   HUG IS DELIBERATELY THE SMALLEST. A heading belongs to what is UNDER it; the
+   air goes above it, never below. That is the one rule that makes a tight
+   document still scan by its headings. */
+.vp-face{
+  --rec-hug:calc(var(--face-fs) * .30);    /* a heading and the thing it labels */
+  --rec-para:calc(var(--face-fs) * .40);   /* one paragraph to the next */
+  --rec-block:calc(var(--face-fs) * .55);  /* between kin — the lead, a row */
+  --rec-sect:calc(var(--face-fs) * 1.15)}  /* A NEW SECTION BEGINS */
+
 .vp-rec-index .vp-fe-title{font-family:var(--wb-plain);font-weight:700;
   letter-spacing:.04em}
 .vp-rec-index .vp-fe-line{font-family:var(--wb-plain);
-  line-height:1.45;letter-spacing:0;max-width:68ch}
+  line-height:1.4;letter-spacing:0;max-width:68ch}
 /* AND NO PADDING RULE HERE, WHICH IS A CORRECTION THE MEASUREMENT MADE. The
    first cut of this block set `.vp-rec-index .vp-fe{padding:7px 0}` reaching for
    density, and it did the opposite: `.vp-rec-row{padding:0}` already zeroes the
@@ -1547,11 +1576,11 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    supplies no gap at all. */
 .vp-rec-line{margin-top:0}
 .vp-rec-wire,.vp-rec-plates,.vp-rec-docs{margin-top:12px}
-.vp-rec-end{margin-top:14px}
-.vp-rec-nav{margin-top:14px}
+.vp-rec-end{margin-top:10px}
+.vp-rec-nav{margin-top:10px}
 .vp-rec-head{display:flex;gap:14px;align-items:baseline;width:100%;text-align:left;
   background:none;border:0;border-bottom:1px solid var(--wb-border);
-  padding:0 0 10px;cursor:pointer;color:inherit;font:inherit}
+  padding:0 0 6px;cursor:pointer;color:inherit;font:inherit}
 .vp-rec-head:hover .vp-rec-title,.vp-rec-head:focus-visible .vp-rec-title{
   text-decoration:underline;text-underline-offset:3px}
 .vp-rec-head:focus-visible{outline:none}
@@ -3824,7 +3853,7 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
 .vp-rec-lead{margin:0;padding-left:14px;
   border-left:2px solid var(--wb-gold-lo);
   font-family:var(--wb-plain);
-  font-size:var(--fs-body);line-height:1.5;letter-spacing:0;
+  font-size:var(--fs-body);line-height:1.42;letter-spacing:0;
   color:var(--wb-gold);max-width:60ch}
 
 /* ---- THE SECTIONS.
@@ -3837,8 +3866,8 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    out, and a label at full ink in Syne with 2.6× above it does not need a
    line underneath saying the same thing a third time. */
 .vp-rec-sects{list-style:none;margin:0;padding:0}
-.vp-rec-sect + .vp-rec-sect{margin-top:var(--rh-sect)}
-.vp-rec-sect-label{margin:0 0 var(--rh-tight);
+.vp-rec-sect + .vp-rec-sect{margin-top:var(--rec-sect)}
+.vp-rec-sect-label{margin:0 0 var(--rec-hug);
   font-family:var(--wb-plain);font-weight:700;
   font-size:var(--fs-small);letter-spacing:.06em;text-transform:uppercase;
   color:var(--wb-gold)}
@@ -3854,9 +3883,9 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    return; every newspaper sets in columns for exactly this reason. What the
    leftover carries instead is written at the head of the index rules. */
 .vp-rec-sect-body{margin:0;font-family:var(--wb-plain);
-  font-size:var(--fs-body);line-height:1.45;letter-spacing:0;
+  font-size:var(--fs-body);line-height:1.4;letter-spacing:0;
   color:var(--wb-gold-lo);max-width:68ch}
-.vp-rec-sect-body + .vp-rec-sect-body{margin-top:var(--rh-tight)}
+.vp-rec-sect-body + .vp-rec-sect-body{margin-top:var(--rec-para)}
 .vp-rec-sect-doors{display:flex;flex-wrap:wrap;gap:10px 16px}
 
 /* ---- THE DOORS.
@@ -3905,7 +3934,7 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    step quieter than the body, and set apart by air rather than by a rule
    because the endmark below it is already drawing one. */
 .vp-rec-tomb{margin:0;font-family:var(--wb-plain);
-  font-size:var(--fs-body);line-height:1.45;
+  font-size:var(--fs-body);line-height:1.4;
   color:var(--wb-gold-mute);max-width:68ch}
 
 /* ═══ [A1/A2 2026-08-08] THE ATTACHMENTS ════════════════════════════════════
@@ -3924,13 +3953,13 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    are the one part of an entry that is not the writing, and *below the line* is
    Mike's own phrase for where they go. */
 .vp-rec-att{margin:0}
-.vp-flat > .vp-rec-att{margin-top:var(--rh-sect);clear:both}
-.vp-rec-att-head{margin:0 0 var(--rh-tight);padding-top:var(--rh-tight);
+.vp-flat > .vp-rec-att{margin-top:var(--rec-sect);clear:both}
+.vp-rec-att-head{margin:0 0 var(--rec-hug);padding-top:var(--rec-hug);
   border-top:1px solid var(--wb-border);
   font-family:var(--wb-plain);font-weight:700;font-size:var(--fs-small);
   letter-spacing:.06em;text-transform:uppercase;color:var(--wb-gold-mute)}
 .vp-rec-att-list{list-style:none;margin:0;padding:0;display:flex;
-  flex-direction:column;gap:var(--rh-block)}
+  flex-direction:column;gap:var(--rec-block)}
 .vp-rec-att-item{display:flex;gap:14px;align-items:flex-start}
 
 /* THE PREVIEW ICON — the one modern convenience, kept small on purpose. */
@@ -3950,11 +3979,11 @@ button.vp-rec-att-thumb:hover,button.vp-rec-att-thumb:focus-visible{
 .vp-rec-att-meta{font-size:var(--fs-micro);letter-spacing:.06em;
   text-transform:uppercase;color:var(--wb-gold-mute)}
 /* the payload's own words, in the row and never behind it (R4) */
-.vp-rec-att-lines{list-style:none;margin:var(--rh-tight) 0 0;padding:0;
-  font-size:var(--fs-small);line-height:1.5;color:var(--wb-gold-lo);
+.vp-rec-att-lines{list-style:none;margin:var(--rec-hug) 0 0;padding:0;
+  font-size:var(--fs-small);line-height:1.45;color:var(--wb-gold-lo);
   font-variant-numeric:tabular-nums;max-width:68ch}
-.vp-rec-att-extract,.vp-rec-att-note{margin:var(--rh-tight) 0 0;
-  font-size:var(--fs-body);line-height:1.45;color:var(--wb-gold-lo);
+.vp-rec-att-extract,.vp-rec-att-note{margin:var(--rec-hug) 0 0;
+  font-size:var(--fs-body);line-height:1.4;color:var(--wb-gold-lo);
   max-width:68ch}
 .vp-rec-att-note{font-size:var(--fs-small);color:var(--wb-gold-mute)}
 
@@ -3983,16 +4012,19 @@ button.vp-rec-att-thumb:hover,button.vp-rec-att-thumb:focus-visible{
   font-size:var(--fs-lead);line-height:1.2;letter-spacing:-.004em;
   color:var(--wb-gold)}
 .vp-rec-pop-line{margin:0;font-family:var(--wb-plain);
-  font-size:var(--fs-body);line-height:1.45;color:var(--wb-gold-lo)}
+  font-size:var(--fs-body);line-height:1.4;color:var(--wb-gold-lo)}
 .vp-rec-pop-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
 
 /* ---- THE FLAT DOCUMENT'S RHYTHM LADDER, joined rather than re-invented.
    These are the same four steps R1 derived from `--face-fs`; the entry's
    parts simply declare which step each of them is. */
-.vp-flat > .vp-rec-headline{margin-top:var(--rh-tight)}
-.vp-flat > .vp-rec-lead{margin-top:var(--rh-block)}
+/* [T2 2026-08-08] the Record's parts declare the RECORD's ladder. They are
+   still siblings in `.vp-flat` and every other block on a flat face still takes
+   R1's own steps — this is four selectors, not a new container. */
+.vp-flat > .vp-rec-headline{margin-top:var(--rec-hug)}
+.vp-flat > .vp-rec-lead{margin-top:var(--rec-block)}
 .vp-flat > .vp-rec-sects,
-.vp-flat > .vp-rec-tomb{margin-top:var(--rh-sect)}
+.vp-flat > .vp-rec-tomb{margin-top:var(--rec-sect)}
 .vp-flat > .vp-rec-sects,
 .vp-flat > .vp-rec-tomb,
 .vp-flat > .vp-rec-end{clear:both}
