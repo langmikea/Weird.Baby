@@ -7,7 +7,41 @@ tree, the live working tree wins — always.
 
 **Read this file FIRST in every session, before STATE.md, before any handoff.**
 
-**Last verified against live tree:** 2026-08-09 (CLEANUP — four instructions,
+**Last verified against live tree:** 2026-08-09 (THE WORKSHEET EXPORT — five
+instructions, all five done, and **the diagnosis did not land where the brief
+pointed.** Gates: lint **11/9 = baseline** · build green · provenance **PASS** ·
+`reveal:check` **PASS** · `parity:gate` **PASS** · `instory:gate` **PASS** ·
+`assets:orphans` **0 judged, 0 unjudged** · `reveal:day` **nothing to move** ·
+**the lap RAN at 390px and 1228px on all ten Ops pages**, 20 measurements, every
+one clean. **THE EXTRACTOR WAS WRITTEN BEFORE ANYTHING WAS DIAGNOSED** —
+`tools/dictation/RESCUE.md`, a console snippet that takes EVERY key in the store
+without filtering, because a rescue that only takes what the rescuer expects to
+find is not one. **ALL FOUR CANDIDATES IN THE BRIEF ARE FALSE OF THE BUILD ON
+DISK, MEASURED:** 41 slots declared and 41 rendered, one key, and a timestamp
+taken at the press (`captured 2026-08-09 10:00` on a full run). **THE ONE LINK
+NOBODY HAD EVER MEASURED WAS THE CLIPBOARD** — `writeText` rejects with *Document
+is not focused*, and the fallback then reported success on
+`document.execCommand("copy")`'s return value, **which says the command was
+ENABLED and not that the clipboard changed.** Three identical pastes days apart,
+frozen at 2026-08-07 17:04, is exactly what an unverified write produces. **It is
+stated as the cause the evidence supports and not as a certainty**; what is
+certain is that the tool claimed a success it never checked, and that is now
+impossible. **TWO MECHANISMS SO IT CANNOT RECUR:** `assertSlotsMatchPage()`
+reads the generated HTML back and REFUSES to write a page whose textareas and
+whose `SLOTS` array differ (proved by breaking it), and the collector walks
+**file → store → live boxes**, printing a retired slot rather than dropping it.
+**THE COPY BUTTON READS THE CLIPBOARD BACK** and never says *Copied* on an
+unverified write. **THE BRIDGE IS BUILT** — a `Save to the repo` button writing
+`docs/dictation-20260807/answers.json` through `showSaveFilePicker`, the handle
+remembered in IndexedDB so it is one click after the first, falling back to a
+download that says where it went (proved). **AND THE SECOND DEFECT WAS THE OTHER
+DIRECTION:** a rebuild does NOT destroy his content (42 answers survived one,
+measured) — the risk was that his words lived in ONE browser, so the generator
+now bakes the answers file into the page and a wiped store still opens on all of
+them. **Mike's own `file://` storage was never touched by this round**; every
+test ran on a different origin. **Nothing was deployed.** Round log:
+`docs/MUSEUM_WORKSHEET_EXPORT_LOG-20260809.md`.)
+Previously 2026-08-09 (CLEANUP — four instructions,
 all four done, and **nothing in the round is waiting on Mike.** Gates: lint
 **11/9 = baseline** · build green · provenance **PASS** · `reveal:check` **PASS**
 · `parity:gate` **PASS, 4 shared · 0 divergences** · `instory:gate` **PASS** ·
@@ -1743,6 +1777,8 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 - **A BUILD THAT BUILDS HALF THE APPLICATION LOOKS LIKE A BUILD (V1, 2026-08-06).** This project has TWO vite environments — the client and the Cloudflare worker — and `@cloudflare/vite-plugin` registers the second as a multi-environment builder that **only the CLI drives**. Vite's node `build()` API builds the client, prints a full chunk table and returns happily, leaving `dist/weird_baby/index.js` from whatever built it last. `tools/stage-build.mjs`'s first cut did exactly that: the client came out in the LAUNCH state and the worker kept the previous DEVELOPMENT stage, so both stage doors stood open on a launched museum and **the only symptom on the wire was one word in `/api/held`.** Caught by checking the wire rather than the console, which is also how H1's `run_worker_first` outage was caught. **Anything that needs to rebuild this app spawns `vite build`; never call `build()`.** Verify with `grep -o '"launch"\|"development"' dist/weird_baby/index.js` after any staged build.
 - **A GOVERNED PICTURE HAS TWO ADDRESSES, AND ANYTHING THAT MATCHES ON ONE OF THEM IS WRONG (C1, 2026-08-06).** V1 made the pull-back a launch-state rule: a picture of the machines is DECLARED at its public address (`/robots/…`) and its FILE may be parked behind the stage door (`public/held/robots/…`), with `reveal/placement.mjs` mapping one to the other. **Four instruments broke on that in one round** — `usedBy` in `tools/asset-table.mjs` (which would have named twenty-six photographs as unreferenced on the round that restored them, on the one instrument whose output is a DELETION LIST), the disk check and the M99 drift guard in `provenance/assets-declare.mjs`, and `seenAssets` in `tools/provenance-sweep.mjs`. All four import `STAGE_PREFIX` now. **Any new tool that reasons about an image path must resolve the twin**, and the tell is a report that names held material as missing, orphaned or undeclared. **[K-a 2026-08-07] AND IT HAS A QUIETER FORM THAT RESOLVING THE TWIN DOES NOT CATCH: THE TABLE HOLDS BOTH ADDRESSES AS TWO ROWS.** When a picture moved behind the door its public-side row stayed, flagged `missing:true` — so `provenance/asset-table.json` carries the same photograph twice, once live at `/held/robots/…` and once dead at `/robots/…`. `npm run assets:orphans` reports **0** and is right: it counts `missing && isJudged`, and a dead twin inherits no judgement. **A new instrument that filters on `ref` alone therefore over-counts what is available** — the dictation tracker's first cut said eighteen governed pictures were one Record entry away when the true number is sixteen. **The rule for any tool that counts files: skip `missing:true` FIRST, before resolving the twin**, and say in the output that you did.
 - **`wrangler dev` holds `dist/weird_baby/.wrangler` open**, so `npm run build` fails with `EPERM … dist\weird_baby\.wrangler` while it is running. Stop the dev server (and any leftover `workerd` processes) before rebuilding. It also **caches its asset manifest at startup**, so a file added or removed under `dist/client` mid-run is not seen until it restarts — which is what makes an honest break-it-on-purpose test need a restart to be real.
+- **A CLIPBOARD WRITE IS NOT DONE UNTIL IT HAS BEEN READ BACK (U2, 2026-08-09).** `navigator.clipboard.writeText` REJECTS with *"Document is not focused"* whenever the page does not have focus at the moment of the call, and `document.execCommand("copy")` returns **true when the command was merely ENABLED** — neither says the clipboard changed. A tool that prints *"Copied — N characters"* off either one can be wrong for days without a symptom, because the reader keeps pasting the last write that DID land: identical text, identical timestamp, no error anywhere. **Read it back with `clipboard.readText()` and compare, or do not use the word "copied".** Better still, do not put a person's only copy of their work through the clipboard at all — `showSaveFilePicker` writes a real file and the handle survives in IndexedDB, which is what `tools/dictation/worksheet.mjs` does now.
+- **A GENERATED PAGE AND THE LIST ITS SCRIPT WALKS MUST BE PROVED THE SAME SET, NOT ASSUMED (U3, 2026-08-09).** Both come off one generator, so they agree — until a round retires a field from one of them. `assertSlotsMatchPage()` in `tools/dictation/worksheet.mjs` reads the emitted HTML back and refuses the build on any difference in either direction. **The same shape applies to any generator whose output carries a script that enumerates its own fields.**
 - **THE PROVENANCE SWEEP'S "UNREACHABLE" BUCKET IS NOT A DEAD-CODE LIST, AND A CLEANUP ROUND COULD DELETE A LIVE WING FROM IT (M84, 2026-08-06 — moved here from the register 2026-08-09 because it is a note, not an action).** `provenance:gate` follows STATIC imports from `src/main.jsx`. H1 made `/hr` a DYNAMIC import, so nine Hunter Root files sit in the sweep's *"unreachable from `src/main.jsx`"* bucket carrying **485 strings** — and only 154 of those are genuinely dead (`hr_facts.js` 124 and `hr_journal_prompts.js` 30, which are M5). **The other 331 are the live exhibit.** Every one is still DECLARED and the gate is PASS. Read the bucket as *"the walk could not reach it"*, never as *"nothing uses it"*.
 - `export-artifacts.mjs` prints a harmless `UV_HANDLE_CLOSING` assertion
   AFTER finishing — ignore.

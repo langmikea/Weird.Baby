@@ -769,6 +769,63 @@ read Doctrine 25.**
 
 Maintained here. Newest first.
 
+### 2026-08-09 -> THE WORKSHEET EXPORT (U1-U5) - sealed
+- **THE EXTRACTOR WAS WRITTEN BEFORE ANYTHING WAS DIAGNOSED** -
+  `tools/dictation/RESCUE.md`, a console snippet that takes EVERY key in the
+  browser store without filtering, prints a per-key character count and downloads
+  it. It writes nothing and judges nothing: **a rescue that only takes what the
+  rescuer expects to find is not a rescue.** Read back by
+  `npm run dictation:import`.
+- **ALL FOUR CANDIDATES IN THE BRIEF ARE FALSE OF THE BUILD ON DISK, AND THAT IS
+  MEASURED RATHER THAN ARGUED.** 41 slots declared, 41 textareas rendered, same
+  set both directions; ONE key (`STAMP` is the hardcoded constant `"2026-08-07"`,
+  never a generation date, so no rebuild has ever moved it); and the timestamp is
+  `new Date()` inside `collect()` - a full run printed `captured 2026-08-09
+  10:00`, the real minute. **The page exports 41 of 41 correctly.**
+- **THE ONE LINK NOBODY HAD EVER MEASURED WAS THE CLIPBOARD, AND THE W-ROUND HAD
+  ALREADY FLAGGED IT AS UNMEASURED.** `navigator.clipboard.writeText` rejects
+  with **"Document is not focused"**, and the fallback then printed *"Copied -
+  4,293 characters"* on the strength of `document.execCommand("copy")`, **whose
+  return value says the command was ENABLED and not that the clipboard changed.**
+  Three identical pastes days apart, frozen at 2026-08-07 17:04, is exactly and
+  only what an unverified write produces - the last copy that DID land, re-pasted.
+  **Said as the cause the evidence supports, not as a certainty**; what is
+  certain and enough to act on is that the tool claimed a success it never
+  checked. His rescue file settles the rest.
+- **TWO MECHANISMS SO IT CANNOT RECUR.** `assertSlotsMatchPage()` reads the
+  generated HTML back and **refuses to write a page** whose textareas and whose
+  `SLOTS` array are not the same set - missing, extra and duplicated - proved by
+  removing one slot from the export list and watching the build name it. And the
+  collector walks **file -> store -> live boxes**, weakest first, so an answer to
+  a slot a later round retires still travels and is printed as `A RETIRED SLOT`
+  instead of vanishing. Proof: 41 boxes + 1 injected retired answer -> **42
+  exported blocks, timestamp at the press.**
+- **THE COPY BUTTON READS THE CLIPBOARD BACK** and has three sentences, not one:
+  VERIFIED, *the clipboard did not take it*, or *not verified - press Ctrl+C*.
+  **It never says "Copied" on a write it did not check**, and the text is
+  selected before the attempt so Ctrl+C works either way.
+- **THE BRIDGE IS BUILT AND ITS FAILURE PATH IS THE ONE THAT WAS PROVED.** `Save
+  to the repo` writes `docs/dictation-20260807/answers.json` via
+  `showSaveFilePicker`, handle remembered in IndexedDB - a dialog once, one click
+  after. A synthetic click has no transient activation, so the picker refused
+  with `SecurityError` and the page **downloaded the same file and said where it
+  went**; that file went through the importer at 42 answers, key intact. **A
+  bridge that fails must fail into the old road, not into silence.**
+- **THE SECOND DEFECT WAS THE OTHER DIRECTION: NOT THE REBUILD, THE BROWSER.** A
+  rebuild does NOT destroy his content - 42 answers survived one, measured, and
+  the key has always been constant. The risk was that his words lived in exactly
+  one browser. The generator bakes the answers file into the page now, so a
+  **wiped store** still opens on all of them, says which file they came from, and
+  exports 42 of 42. It never overwrites the store, it always says when it filled
+  a box, and the generator only READS that file.
+- **HIS OWN `file://` STORAGE WAS NEVER TOUCHED** - every test ran against
+  `http://127.0.0.1:8899`, a different origin. Gates: lint **11/9 = baseline** -
+  build green - provenance **PASS** - `reveal:check` **PASS** - `parity:gate`
+  **PASS** - `instory:gate` **PASS** - `assets:orphans` **0/0** - `reveal:day`
+  **nothing to move** - **the lap RAN at 390px and 1228px on all ten Ops pages**,
+  20 measurements, every one clean. Log:
+  `docs/MUSEUM_WORKSHEET_EXPORT_LOG-20260809.md`.
+
 ### 2026-08-09 -> CLEANUP (D1-D4) - sealed
 - **NOTHING IN THIS ROUND IS WAITING ON MIKE**, which is the first report written
   under its own new doctrine. Gates: lint **11/9 = baseline** - build green -

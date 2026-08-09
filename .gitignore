@@ -48,3 +48,7 @@ provenance/_undeclared.json
 
 # thumbnail cache for the light table (content-hashed, regenerable)
 tools/dictation/.thumb-cache.json
+
+# the worksheet answers file IS committed (it is the durable copy of Mike's
+# writing); its dated backups are not.
+docs/dictation-20260807/answers.*.bak.json
