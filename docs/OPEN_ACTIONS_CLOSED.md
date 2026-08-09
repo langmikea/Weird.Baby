@@ -434,3 +434,18 @@ catch what he says.
 ---
 
 | <a id="m36"></a>**M36** | ~~THE MGK-NIAC TRACK IS CALLED "THE NAME".~~ **CLOSED P2 BY DELETION** — you struck the track in total, so the collision it resolved no longer exists and neither does the judgement. Original text: **THE MGK-NIAC TRACK IS CALLED "THE NAME" AND THAT ONE STRING IS A JUDGEMENT, NOT A SUBSTITUTION.** Renaming the album to MGK-NIAC collided with its own first track, which was already called MGK-NIAC — the band, the tracklist's first row and the face's heading would all have read the same words at once. The track took its own `id`, its own subtitle and its own subject: THE NAME. Everything else in the Q3 sweep was a straight substitution; this was the round's one call on a visible label, and it is one edit back. | v52/Q3 | OPEN | Mike | 2026-08-05 |
+
+---
+
+## CLOSED 2026-08-09 — CLEANUP (D1–D4)
+
+| the row | what closed it |
+|---|---|
+| **L-b** | **Mike ruled DELETE and it is done.** `C:\AI\Projects\_review\HELD-PHOTOGRAPHS-20260806\` removed whole — the eleven photographs, the viewer page and the empty `_review/` parent. A find across `C:\AI\Projects\` for all eleven filenames returns nothing. |
+| **L-a** · **K-a** | **One defect, two rows, both closed by the same fix.** `assets:orphans` counted `missing && isJudged`; it now counts `missing` and GRADES the result judged / unjudged. On the unchanged table it went from reporting **0** to reporting **27** — not the 24 L-a predicted and not the 3 K-a predicted, because **no missing row in this table has ever carried a judgement**, so the check had never reported anything in its life. All 27 were then culled: 24 manual pages at a path the document left, 2 public-side twins of pictures behind the stage door, and `faq-cover.png`, which nothing in `src/` references. The table is 250 rows and every one points at a file on disk. |
+| **M99** | **Done, and extended.** The refusal H2 built into `assets-declare.mjs --write` is the `--check` this row asked for, and the drift-repair half was answered by C1 (this file is the source). §8 named a second unguarded declarer and this round guarded it: `reveal/ledger-declare.mjs --write` now diffs `ledger.json`'s row ids against its own and refuses, proved by injecting a hand-added row. Drift measured zero before and after. |
+| **M84** | **Not closed by a fix — moved to where it will be read.** It carried *"nothing to decide; this is a note so nobody acts on a wrong reading."* A note is not an open action, and the round it is written for is a cleanup round that starts by reading `OPERATIONS.md`. It is §8's own hazard list now. |
+| **C39 (orig)** | **Already fixed; verified rather than assumed.** `tools/asset-table.mjs` at HEAD contains **zero** NUL bytes — `mintUid` uses the escape `\0` and the rename matcher `\u0000` — and `grep` reads the file as text. The row had outlived its defect. |
+| 15x | ~~A copy of the eleven photographs you ruled deleted still exists outside both repos.~~ **CLOSED — deleted.** |
+| 8 | ~~One wall says its nine plates are "before power" and one of them is captioned as the firmware running.~~ **CLOSED — the row it pointed at (M25) closed at N4 BY SUBTRACTION**, when Mike struck both walls' tombstones and left no sentence for the lit plate to contradict. The short-list line went on asking for months after the question had no subject. |
+| 63 | ~~The two Technical Specifications faces are now in two different forms.~~ **CLOSED — M92 was resolved at N2 in a third direction**: both faces lost their real-build register rather than one conforming to the other. What each face now needs is [N-g](#n-g) and [N-h](#n-h), which short-list row **15b** already asks for; this line was the closed question and a duplicate at once. |

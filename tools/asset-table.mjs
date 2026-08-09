@@ -60,7 +60,8 @@
                                             declare a rename the hash cannot
                                             see; carries the judgement, then
                                             behaves exactly like --scan
-     node tools/asset-table.mjs --orphans    judged rows whose file is gone
+     node tools/asset-table.mjs --orphans    every row whose file is gone,
+                                            graded judged / unjudged (D2)
      node tools/asset-table.mjs --unverdicted   list what still needs Mike
      node tools/asset-table.mjs --checklist [--room <slug>]
                                             an inspection checklist, per A6
@@ -307,6 +308,31 @@ function mintUid(id, hash, taken) {
 const JUDGED = ["what", "quality", "qualityNote", "verdict", "revealArc", "bucket"];
 const isJudged = e => JUDGED.some(k => e && e[k] != null);
 
+/* [D2 2026-08-09] AN ORPHAN IS A ROW WHOSE FILE IS GONE. THAT IS THE WHOLE
+   DEFINITION, AND IT USED TO CARRY A SECOND CLAUSE THAT HID MOST OF THEM.
+
+   `--orphans` counted `missing && isJudged` — and on 2026-08-08 that meant it
+   reported ZERO while the table held TWENTY-SEVEN rows whose file had left the
+   disk. Twenty-four were one document: the MGK-VIIIp manual, which moved from
+   `manual/pages/` to `manual/structure/pages/` and was re-rendered on the way,
+   so neither the path nor the hash could follow it. Every one was unjudged — so
+   the one instrument whose job is to notice a row whose file is gone was
+   structurally blind to 24 of the 27 rows in exactly that state.
+
+   THE SECOND CLAUSE WAS NOT WRONG, IT WAS THE WRONG QUESTION. `isJudged` asks
+   what would be LOST if the row were dropped, which is the right test for how
+   LOUD to be and is the whole of C32. It is not a test for whether the row is an
+   orphan. So it survives as a GRADE rather than as a filter:
+
+     JUDGED    an inspection is at stake. `--rename` moves it; `--cull` throws it
+               away and only a person may say so. C32, unchanged.
+     UNJUDGED  nothing is at stake. Dead bookkeeping, and `--cull` is the fix.
+
+   Both are orphans, both are reported, and the summary prints the two counts
+   separately so a round's standing `assets:orphans` line keeps meaning what it
+   meant. A tripwire that can only see the loud half is not a tripwire. */
+const isOrphan = e => !!e.missing;
+
 function scan(renames = []) {
   const prior = load();
   const priorRows = prior.entries || [];
@@ -476,7 +502,7 @@ function scan(renames = []) {
   for (const [id, e] of priorById) {
     if (live.has(id) || claimed.has(e.id)) continue;
     entries.push({ ...e, missing: true });
-    if (isJudged(e)) orphaned.push(e);
+    orphaned.push(e);   /* [D2] every one, graded at report time */
   }
   entries.sort((a, b) => a.id.localeCompare(b.id));
 
@@ -491,12 +517,21 @@ function scan(renames = []) {
     carried.forEach(([a, b]) => console.log(`    ${a}\n      -> ${b}`));
   }
   if (orphaned.length) {
-    console.log(`\n  !! JUDGED ROWS WHOSE FILE IS GONE (${orphaned.length}) — C32.`);
-    console.log("     The row and its judgement are KEPT with missing:true. If one of these");
-    console.log("     is a rename the content hash could not see (the file was re-rendered as");
-    console.log("     well as moved), declare it:  npm run assets:rename -- <old> <new>");
-    orphaned.forEach(e => console.log(
-      `       ${e.uid || "(no uid)"}  ${e.path}\n         verdict=${e.verdict ?? "null"} quality=${e.quality ?? "null"} arc=${e.revealArc ?? "null"}`));
+    const jd = orphaned.filter(isJudged), pl = orphaned.filter(e => !isJudged(e));
+    console.log(`\n  !! ROWS WHOSE FILE IS GONE (${orphaned.length}) — ${jd.length} judged, ${pl.length} unjudged.`);
+    console.log("     Every one is KEPT with missing:true. If one is a rename the content hash");
+    console.log("     could not see (re-rendered as well as moved), declare it:");
+    console.log("       npm run assets:rename -- <old> <new>");
+    if (jd.length) {
+      console.log(`\n     JUDGED (${jd.length}) — an inspection is at stake. C32.`);
+      jd.forEach(e => console.log(
+        `       ${e.uid || "(no uid)"}  ${e.path}\n         verdict=${e.verdict ?? "null"} quality=${e.quality ?? "null"} arc=${e.revealArc ?? "null"}`));
+    }
+    if (pl.length) {
+      console.log(`\n     UNJUDGED (${pl.length}) — nothing is at stake; dead bookkeeping.`);
+      console.log("     Drop them with:  npm run assets:cull -- <path> [more…]");
+      pl.forEach(e => console.log(`       ${e.uid || "(no uid)"}  ${e.path}`));
+    }
   }
   /* [N8] HEADER WINS OVER THE FILE'S OWN HEADER, and that is a fix rather than
      a preference. `{...prior, entries}` meant the underscore keys were whatever
@@ -681,10 +716,20 @@ if (argv.includes("--gate")) {
   console.log(`culled ${dropped.length} row(s):\n  ` + dropped.join("\n  "));
   if (unknown.length) console.error("not found in the table: " + unknown.join(", "));
 } else if (argv.includes("--orphans")) {
-  const e = load().entries.filter(x => x.missing && isJudged(x));
-  console.log(`${e.length} judged rows whose file is no longer on disk:`);
-  e.forEach(x => console.log(
-    `  ${x.uid || "(no uid)"}  ${x.path}\n    ${x.what || "(unwritten)"}\n    verdict=${x.verdict ?? "null"} quality=${x.quality ?? "null"} arc=${x.revealArc ?? "null"}`));
+  const all = load().entries.filter(isOrphan);
+  const jd = all.filter(isJudged), pl = all.filter(x => !isJudged(x));
+  console.log(`${all.length} rows whose file is no longer on disk — ${jd.length} judged, ${pl.length} unjudged.`);
+  if (jd.length) {
+    console.log(`\nJUDGED (${jd.length}) — an inspection is at stake. Move it with --rename, or`);
+    console.log("throw it away with --cull, which only a person may decide.");
+    jd.forEach(x => console.log(
+      `  ${x.uid || "(no uid)"}  ${x.path}\n    ${x.what || "(unwritten)"}\n    verdict=${x.verdict ?? "null"} quality=${x.quality ?? "null"} arc=${x.revealArc ?? "null"}`));
+  }
+  if (pl.length) {
+    console.log(`\nUNJUDGED (${pl.length}) — nothing is at stake. Dead bookkeeping; drop with --cull.`);
+    pl.forEach(x => console.log(`  ${x.uid || "(no uid)"}  ${x.path}`));
+  }
+  if (!all.length) console.log("Every row in the table points at a file that is on disk.");
 } else if (argv.includes("--scan")) {
   const t = scan();
   writeTable(t);

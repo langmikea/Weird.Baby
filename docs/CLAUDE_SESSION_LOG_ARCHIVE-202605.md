@@ -1698,3 +1698,50 @@ load-bearing in it is NOT here — it is the two-stages paragraph at the head of
   for.** K1 collapsed a forty-line pointer chain on exactly that argument.
   Consolidating twelve standing rules is a real edit with a real chance of losing
   a load-bearing pointer, and it is not this round's to make on the way past.
+
+---
+
+### 2026-08-08 -> RECORD 001: MIKE'S WORDS - sealed
+- **THE WHOLE ROUND IS THIRTEEN STRINGS AND NOT ONE OF THEM IS OPS'.** His
+  executive summary (three paragraphs) and his detailed report (`FRIDAY DAY
+  (-3)`, eight beats, a closing sentence) are in `src/data/artists/robots.js` as
+  two sections under **his own headings**, and the landing was **proved rather
+  than asserted**: the block was sliced out of the file, evaluated and compared
+  element by element against a literal copy of the dictation — **13 strings
+  byte-identical**, including both spaces in `=  86%` and both words in `was made
+  made`. Concatenation across a 78-column wrap is exactly the construction that
+  loses a space at a join, which is why it was a machine check and not an eye.
+  Gates: lint **11/9 = baseline** · build green · provenance **PASS** ·
+  `reveal:check` **PASS** · `parity:gate` **PASS** · `instory:gate` **PASS** ·
+  `assets:orphans` **0** · `reveal:day` **nothing to move** · **the lap RAN at
+  390px**, four routes, 0 page overflow, 0 console errors. Log:
+  `docs/MUSEUM_RECORD_001_LOG-20260808.md`.
+- **S2's EIGHT BEATS WERE DELETED, NOT KEPT BESIDE HIS, AND THAT IS THE HALF OF
+  "VERBATIM" NOBODY ASKS FOR.** `15:00 · SERVER PUBLIC` and its seven siblings
+  were Ops' register voice over a parenthetical summary; two accounts of one
+  afternoon on one page is a reconciliation problem handed to the reader. Nine
+  register rows went with them (eight beats + the Ops label `Timeline`), **pruned
+  in the corrected order** — copy the register, check the stale set for inbound
+  `RESTATED` references (**0**), prune, re-gate. Fifteen new rows added, all
+  MIKE, all citing the log's §0.
+- **THE INDEX ROW IS STILL 84px AND THAT IS A MEASURED REFUSAL.** He asked what
+  the entry looks like "now that it carries a summary": **the ENTRY carries it,
+  the ROW cannot.** 477 characters against `RECORD_LINE_MAX` = 130 — his own
+  *"THE ENTIRE SUMMARY MUST FIT"* rule made into a gate. Only
+  `Congratulations!` (16) fits and it summarises nothing; his closing sentence
+  fits at 120 and is the report's last line. **Picking is editing**, so nothing
+  was picked. S-b is narrowed from *"the summary, the lead and the sections"* to
+  **one sentence, ≤130 characters**.
+- **AND THE LAP WAS ABOUT TO RUN AT 386px WHILE EVERY REPORT OF IT SAID 390.**
+  The harness sized its iframe at 405 on the arithmetic that a scrollbar is 15px;
+  this Chrome's is **19**. Nothing was ever false — it always PRINTED the true
+  `clientWidth`, which is how it was caught, **by reading the number instead of
+  assuming it**. `window.__lap.fit()` now adjusts the frame until the viewport IS
+  the target and returns the real number if it cannot get there. **A gate whose
+  one job is to measure at a width must establish the width.** Re-run: 390 on all
+  four routes. Also recorded: **the Doctrine 19 anchor test does not apply to a
+  Record row** — opening one REPLACES the index rather than disclosing under
+  them, so the 8 "moved above" are the index itself and nothing outside it moved.
+- **SURFACING UNMOVED AT 20 SPENDABLE — THE SIXTH PACKET RUNNING.** This packet
+  landed dictated content and took nothing off the back shelf. Said plainly
+  because the packet is the only clock this repository has.

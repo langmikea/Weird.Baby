@@ -728,6 +728,23 @@ Record 001's approved sentence is **filed RESTATED, not MIKE** — approval is n
 authorship — and **must never be re-marked**: a paraphrase in his class is
 indistinguishable from his words a week later.
 
+## ONE STANDING RULE ADDED 2026-08-09 (CLEANUP)
+
+**LEAD WITH WHAT HE MUST DO OR DECIDE** - `OPERATIONS.md` §7 **Doctrine 26**,
+mirrored in `STATE.md`. Every report to Mike opens with what is waiting on him;
+everything else is omitted unless it changes something for him. **THE TEST IS NOT
+*is it true* AND NOT *is it interesting* - IT IS *does this change what he does
+next?*** Craftsmanship notes, measurements, before-and-after numbers and internal
+findings go in the round log, where a future session reads them; **he is not a
+future session.** **AN EMPTY ASK IS A COMPLETE REPORT** - *"Nothing here needs
+you. Mirror and deploy: `npm run deploy`."* Padding it makes him read a page to
+discover it is empty, which is Doctrine 25's cost charged to a message instead of
+a page. **A GATE TABLE IS NOT A DECISION:** one line at the end, or nothing.
+**It is Doctrine 25 for prose and carries the same construction clause** - what
+is worth keeping goes in the round log, in `OPEN_ACTIONS.md` if he needs it
+later, or in `OPERATIONS.md`/`STATE.md` if it binds future work; never in the
+opening paragraphs as evidence of effort.
+
 ## ONE STANDING RULE ADDED 2026-08-08 (THE LIGHT TABLE)
 
 **THE TOOLS ARE FOR WORKING, NOT FOR BRIEFING** - *"All the stuff at the top, I
@@ -751,6 +768,65 @@ read Doctrine 25.**
 ## Recent session log
 
 Maintained here. Newest first.
+
+### 2026-08-09 -> CLEANUP (D1-D4) - sealed
+- **NOTHING IN THIS ROUND IS WAITING ON MIKE**, which is the first report written
+  under its own new doctrine. Gates: lint **11/9 = baseline** - build green -
+  provenance **PASS** - `reveal:check` **PASS** - `parity:gate` **PASS** -
+  `instory:gate` **PASS** - `assets:orphans` **0 judged, 0 unjudged** -
+  `reveal:day` **nothing to move** - **the lap RAN at 390px and 1228px on all ten
+  Ops pages**, 20 measurements, every one clean. Nothing in `src/` changed. Log:
+  `docs/MUSEUM_CLEANUP_LOG-20260809.md`.
+- **THE LAST COPY OF THE ELEVEN PHOTOGRAPHS IS DELETED.** `C:\AI\Projects\_review\`
+  removed whole - eleven files, the viewer page built to rule from, and the empty
+  parent. Confirmed three ways: the directory is gone, a `find` for all eleven
+  filenames across `C:\AI\Projects` returns nothing, and the only files still
+  holding the string are round logs and the closed register. `L-b` closes.
+- **THE ORPHAN CHECK HAD NEVER REPORTED A ROW IN ITS LIFE, AND THAT IS SHARPER
+  THAN EITHER ROW THAT RAISED IT.** `--orphans` counted `missing && isJudged` -
+  and **no missing row in this table has ever carried a judgement**, so its
+  population was empty by construction and a reading of **0** was
+  indistinguishable from a clean table. `isJudged` asks *what would be LOST*,
+  which is the right test for **how loud to be** (C32) and not a test for whether
+  a row is an orphan; it is a **GRADE** now, not a filter. On the unchanged table
+  the check went **0 -> 27**. `L-a` predicted 24 and `K-a` predicted 3: **two
+  rows for one defect, neither aware of the other.**
+- **ALL 27 CULLED AFTER INSPECTION, NOT IN A BATCH.** 24 manual pages at a path
+  the document left - it was **re-rendered as well as moved**, so no sha256
+  matches and `--rename` could never have seen it; 2 public-side twins of
+  pictures behind the stage door (§8's two-addresses hazard, an address dropped
+  rather than a photograph); and `faq-cover.png`, whose row said `role: shipped`
+  and named a `usedBy` - **both stale**, and `src/` references it nowhere. Table
+  **277 -> 250, every row on disk.**
+- **THE REGISTER LOST SIX ROWS AND THREE SHORT-LIST LINES AND HAD SEVEN REPAIRED
+  IN PLACE, AND THE SHORT LIST IS THE FINDING.** Two of the three lines were
+  **still asking questions that had answers** - row 8 pointed at M25 (closed at
+  N4 by subtraction; the sentence it named no longer exists) and row 63 at M92
+  (resolved at N2 in a third direction, and already covered by 15b). With 15a
+  last round that is **four instances in two rounds of one failure: a row closes
+  and leaves, and the SHORT LIST line that pulled it out stays behind.** The
+  short list is derived from the tables by hand and nothing derives it.
+- **SEVEN `(orig)` ROWS HAD NO PARENT LEFT** - the suffix marks original text
+  kept beside a superseding row, and for M4, M29, M30, M45, M47, C31 and T-A the
+  superseding row had closed and left, so a live open row was wearing a history
+  label. Renamed to plain ids, inbound links checked first (**none**). Two rows
+  that are linked to carried no anchor (C30, P2). **Dead intra-file links 0.**
+- **M99 CLOSES AND THE SECOND DECLARER IS GUARDED.** `reveal/ledger-declare.mjs
+  --write` regenerated `ledger.json` whole from its own array with nothing
+  between it and a hand-added row - M99's shape, named in §8 and left there. It
+  diffs row ids and **refuses** now, same words and same shape as
+  `assets-declare.mjs`. **Drift measured ZERO before the guard was written**,
+  which is the argument for writing it then: a guard added while the drift is
+  zero cannot be wrong about what to keep, and one added after 45 rows must first
+  decide which file is the source - which is what H-b cost. Proved by injecting
+  `zz.guard.probe` and restoring byte-identically.
+- **M84 WAS NOT CLOSED BY A FIX, IT WAS MOVED.** It carried *"nothing to decide;
+  this is a note so nobody acts on a wrong reading"* - **a note is not an open
+  action**, and the round it warns (a cleanup round reading the unreachable
+  bucket as a dead-code list) starts by reading `OPERATIONS.md`. It is a §8
+  hazard row now. **C39 (orig) closed on verification**: the NUL bytes have been
+  gone for rounds; HEAD holds zero and `grep` reads the file as text.
+- **SURFACING UNMOVED AT 20 SPENDABLE - THE TWELFTH PACKET RUNNING.**
 
 ### 2026-08-08 -> THE LIGHT TABLE (L1-L4) - sealed
 - **C-a IS EXECUTED AND THE ONE FACT WORTH KEEPING IS THAT THEY WERE NEVER IN
@@ -996,50 +1072,15 @@ Maintained here. Newest first.
   back shelf. Said plainly because the packet is the only clock this repository
   has.
 
-### 2026-08-08 -> RECORD 001: MIKE'S WORDS - sealed
-- **THE WHOLE ROUND IS THIRTEEN STRINGS AND NOT ONE OF THEM IS OPS'.** His
-  executive summary (three paragraphs) and his detailed report (`FRIDAY DAY
-  (-3)`, eight beats, a closing sentence) are in `src/data/artists/robots.js` as
-  two sections under **his own headings**, and the landing was **proved rather
-  than asserted**: the block was sliced out of the file, evaluated and compared
-  element by element against a literal copy of the dictation — **13 strings
-  byte-identical**, including both spaces in `=  86%` and both words in `was made
-  made`. Concatenation across a 78-column wrap is exactly the construction that
-  loses a space at a join, which is why it was a machine check and not an eye.
-  Gates: lint **11/9 = baseline** · build green · provenance **PASS** ·
-  `reveal:check` **PASS** · `parity:gate` **PASS** · `instory:gate` **PASS** ·
-  `assets:orphans` **0** · `reveal:day` **nothing to move** · **the lap RAN at
-  390px**, four routes, 0 page overflow, 0 console errors. Log:
-  `docs/MUSEUM_RECORD_001_LOG-20260808.md`.
-- **S2's EIGHT BEATS WERE DELETED, NOT KEPT BESIDE HIS, AND THAT IS THE HALF OF
-  "VERBATIM" NOBODY ASKS FOR.** `15:00 · SERVER PUBLIC` and its seven siblings
-  were Ops' register voice over a parenthetical summary; two accounts of one
-  afternoon on one page is a reconciliation problem handed to the reader. Nine
-  register rows went with them (eight beats + the Ops label `Timeline`), **pruned
-  in the corrected order** — copy the register, check the stale set for inbound
-  `RESTATED` references (**0**), prune, re-gate. Fifteen new rows added, all
-  MIKE, all citing the log's §0.
-- **THE INDEX ROW IS STILL 84px AND THAT IS A MEASURED REFUSAL.** He asked what
-  the entry looks like "now that it carries a summary": **the ENTRY carries it,
-  the ROW cannot.** 477 characters against `RECORD_LINE_MAX` = 130 — his own
-  *"THE ENTIRE SUMMARY MUST FIT"* rule made into a gate. Only
-  `Congratulations!` (16) fits and it summarises nothing; his closing sentence
-  fits at 120 and is the report's last line. **Picking is editing**, so nothing
-  was picked. S-b is narrowed from *"the summary, the lead and the sections"* to
-  **one sentence, ≤130 characters**.
-- **AND THE LAP WAS ABOUT TO RUN AT 386px WHILE EVERY REPORT OF IT SAID 390.**
-  The harness sized its iframe at 405 on the arithmetic that a scrollbar is 15px;
-  this Chrome's is **19**. Nothing was ever false — it always PRINTED the true
-  `clientWidth`, which is how it was caught, **by reading the number instead of
-  assuming it**. `window.__lap.fit()` now adjusts the frame until the viewport IS
-  the target and returns the real number if it cannot get there. **A gate whose
-  one job is to measure at a width must establish the width.** Re-run: 390 on all
-  four routes. Also recorded: **the Doctrine 19 anchor test does not apply to a
-  Record row** — opening one REPLACES the index rather than disclosing under
-  them, so the 8 "moved above" are the index itself and nothing outside it moved.
-- **SURFACING UNMOVED AT 20 SPENDABLE — THE SIXTH PACKET RUNNING.** This packet
-  landed dictated content and took nothing off the back shelf. Said plainly
-  because the packet is the only clock this repository has.
+### 2026-08-08 -> RECORD 001: MIKE'S WORDS - archived
+Moved verbatim to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md` under this file's
+own ~600-line rule. **What is still load-bearing in it is NOT in the archive:**
+Record 001's thirteen verbatim strings and the three costs of a verbatim landing
+are the RECORD 001 standing section above and `OPERATIONS.md` §7 Doctrine 21;
+**his typos ship on purpose** and a round that tidies one has broken the
+instruction. Its lap finding still bites: **a gate whose one job is to measure at
+a width must establish the width** - `window.__lap.fit()` adjusts until the
+viewport IS the target and returns the real number if it cannot get there.
 
 ### 2026-08-07 -> THE NIGHT DESK (S1-S4) - archived
 Moved verbatim to `docs/CLAUDE_SESSION_LOG_ARCHIVE-202605.md` under this file's

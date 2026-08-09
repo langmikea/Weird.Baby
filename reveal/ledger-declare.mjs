@@ -917,9 +917,47 @@ const out = {
   rows: ROWS,
 };
 
+/* ═══ [D4 2026-08-09] THE SECOND UNGUARDED DECLARER, AND IT IS THE SHAPE §8
+   NAMED AND LEFT ═══════════════════════════════════════════════════════════
+   M99 was `provenance/assets-declare.mjs` drifting from the file it writes: a
+   generator regenerates its output WHOLE from an array in its own source, so a
+   row added to the JSON by hand is a row the next `--write` deletes without a
+   word. It was five rows when A3 found it and FORTY-FIVE by the time H2 built
+   the refusal into the writer.
+
+   OPERATIONS §8 recorded, in the same breath, that "the same shape still applies
+   to any other `*-declare.mjs` in `provenance/` and to `reveal/ledger-declare.mjs`,
+   neither of which has a guard." This is that guard, and it is the same guard —
+   deliberately the same shape, so the two cannot drift in their own turn.
+
+   THE DRIFT IS ZERO TODAY AND THAT IS THE ARGUMENT FOR ADDING IT NOW, NOT
+   AGAINST. A guard written while the drift is zero cannot be wrong about what to
+   keep; one written after 45 rows have accumulated has to decide which file is
+   the source first, which is what H-b cost. Measured before this was written: a
+   `--write` reproduced `ledger.json` byte for byte.
+
+   IT MATCHES ON `id` because that is this table's name for a row, the thing
+   every other file joins to, and the only field a hand edit cannot help but
+   carry. */
 if (process.argv.includes("--write")) {
-  fs.writeFileSync(path.join(REPO, "reveal", "ledger.json"),
-    JSON.stringify(out, null, 1) + "\n");
+  const at = path.join(REPO, "reveal", "ledger.json");
+  if (fs.existsSync(at)) {
+    const live = JSON.parse(fs.readFileSync(at, "utf8")).rows || [];
+    const declared = new Set(ROWS.map(r => r.id));
+    const lost = live.map(r => r.id).filter(id => !declared.has(id));
+    if (lost.length) {
+      console.error(
+        "\nREFUSED — writing would delete " + lost.length + " row(s) that exist in" +
+        "\nreveal/ledger.json and are NOT declared in this file. That is M99's shape," +
+        "\nand it is what this guard exists for: the declarer has drifted from the file" +
+        "\nit writes, so a --write is a silent deletion rather than a regeneration.\n\n" +
+        lost.map(id => "  " + id).join("\n") +
+        "\n\nEither declare them here, or decide ledger.json is the source and retire" +
+        "\nthis generator. Do not delete the guard.");
+      process.exit(1);
+    }
+  }
+  fs.writeFileSync(at, JSON.stringify(out, null, 1) + "\n");
   console.log("wrote reveal/ledger.json");
 }
 const by = f => ROWS.reduce((m, r) => (m[r[f] ?? "—"] = (m[r[f] ?? "—"] || 0) + 1, m), {});

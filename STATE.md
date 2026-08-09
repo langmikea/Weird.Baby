@@ -201,6 +201,24 @@ lead above his EXECUTIVE SUMMARY heading — shipped, not suppressed (`I-a`). `C
 is now the whole of what is left and **the worksheet finally asks for it**, in
 one format-checked box.
 
+## LEAD WITH WHAT HE MUST DO OR DECIDE (Mike, 2026-08-09 — STANDING)
+
+> **"Lead with what he must do or decide. Everything else is omitted unless it
+> changes something for him. If a round has nothing in it for him, say so plainly
+> and give him the commands."**
+
+Canonical: `docs/canonical/OPERATIONS.md` §7 Doctrine 26.
+
+**THE TEST IS NOT *is it true* AND NOT *is it interesting* — it is *does this
+change what he does next?*** Craftsmanship notes, measurements, before-and-after
+numbers and internal findings belong in the round log; a future session reads
+them there, and he is not a future session.
+
+**AN EMPTY ASK IS A COMPLETE REPORT.** *"Nothing here needs you. Mirror and
+deploy: `npm run deploy`."* Padding it makes him read a page to discover it is
+empty — Doctrine 25's cost, charged to a message instead of a page. **A gate
+table is not a decision:** one line at the end, or nothing.
+
 ## THE TOOLS ARE FOR WORKING, NOT FOR BRIEFING (Mike, 2026-08-08 — STANDING)
 
 > **"All the stuff at the top, I never read."**

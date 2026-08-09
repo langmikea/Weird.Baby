@@ -7,7 +7,47 @@ tree, the live working tree wins — always.
 
 **Read this file FIRST in every session, before STATE.md, before any handoff.**
 
-**Last verified against live tree:** 2026-08-08 (THE LIGHT TABLE — four
+**Last verified against live tree:** 2026-08-09 (CLEANUP — four instructions,
+all four done, and **nothing in the round is waiting on Mike.** Gates: lint
+**11/9 = baseline** · build green · provenance **PASS** · `reveal:check` **PASS**
+· `parity:gate` **PASS, 4 shared · 0 divergences** · `instory:gate` **PASS** ·
+`assets:orphans` **0 judged, 0 unjudged** · `reveal:day` **nothing to move** ·
+**the lap RAN at 390px and 1228px on all ten Ops pages** — 20 measurements, page
+overflow 0, uncontained 0, leaf text overflow 0, broken images 0, console errors
+0. Nothing in `src/` changed. **THE LAST COPY OF THE ELEVEN PHOTOGRAPHS IS
+DELETED** — `C:\AI\Projects\_review\` removed whole, and a find across
+`C:\AI\Projects` for all eleven filenames returns nothing (`L-b`). **THE ORPHAN
+CHECK HAS NEVER REPORTED A ROW IN ITS LIFE, AND THAT IS SHARPER THAN EITHER ROW
+THAT RAISED IT** — `--orphans` counted `missing && isJudged`; **no missing row in
+this table has ever carried a judgement**, so its population was empty by
+construction and a reading of 0 was indistinguishable from a clean table. It
+counts `missing` now and GRADES the result: **JUDGED** (an inspection is at
+stake — C32, unchanged) and **UNJUDGED** (dead bookkeeping). On the unchanged
+table it went from **0** to **27**; `L-a` predicted 24 and `K-a` predicted 3, and
+neither knew about the other. All 27 culled after inspection — 24 manual pages at
+a path the re-rendered document left, 2 public-side twins behind the stage door,
+and `faq-cover.png`, whose `role: shipped` and `usedBy` were **stale** and which
+`src/` references nowhere. Table 277 → **250, every row on disk**. **DOCTRINE 26
+IS THE ROUND'S RULE:** *lead with what he must do or decide* — the test is not
+*is it true* and not *is it interesting*, it is *does this change what he does
+next?* Measurements and craftsmanship go in the log; **an empty ask is a complete
+report.** It is Doctrine 25 for prose and carries the same construction clause.
+**THE REGISTER LOST SIX ROWS AND THREE SHORT-LIST LINES AND HAD SEVEN REPAIRED IN
+PLACE** — and **two of the three short-list lines were still asking questions
+that had answers** (8 → M25, closed at N4 by subtraction; 63 → M92, resolved at
+N2 in a third direction), which with 15a is **four instances in two rounds of the
+same failure: a row closes and leaves, and the short-list line that pulled it out
+stays behind.** Seven `(orig)` rows had no parent left and were renamed to their
+plain ids; two rows that are linked to carried no anchor. **Dead intra-file links
+0.** **M99 CLOSES AND THE SECOND DECLARER IS GUARDED** —
+`reveal/ledger-declare.mjs --write` now diffs `ledger.json`'s row ids against its
+own and refuses, the same shape as `assets-declare.mjs`; **drift measured zero
+before it was written**, which is the argument for adding it then rather than
+after 45 rows, and it was **proved by injecting a hand-added row.** **M84 was not
+closed by a fix but MOVED** — it carried *"nothing to decide"*, and a note is not
+an open action; it is a §8 hazard now, where the round it warns will read it.
+**Nothing was deployed.** Round log: `docs/MUSEUM_CLEANUP_LOG-20260809.md`.)
+Previously 2026-08-08 (THE LIGHT TABLE — four
 instructions, all four answered. Gates: lint **11/9 = baseline** · build green ·
 provenance **PASS** · `reveal:check` **PASS** · `parity:gate` **PASS, 4 shared ·
 0 divergences** · `instory:gate` **PASS** · `assets:orphans` **0** ·
@@ -1646,6 +1686,34 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
     doctrine and not a cleanup: the pressure that writes a preamble is a round
     wanting credit for what it understood.
 
+26. **LEAD WITH WHAT HE MUST DO OR DECIDE (Mike, 2026-08-09 — STANDING).**
+
+    Every report to Mike opens with **what is waiting on him**: the decisions,
+    the one-word rulings, the commands he has to run. Nothing else appears
+    unless it changes something for him.
+
+    **THE TEST IS NOT *is it true* AND IT IS NOT *is it interesting*. It is
+    *does this change what he does next?*** Craftsmanship notes, measurements,
+    before-and-after numbers, methodology, the finding a round is proudest of —
+    all of it belongs in the round log. The log is where a future session reads
+    it. He is not a future session.
+
+    **IF A ROUND HAS NOTHING FOR HIM, SAY SO PLAINLY AND GIVE HIM THE COMMANDS.**
+    *"Nothing here needs you. Mirror and deploy: `npm run deploy`."* is a
+    complete report. Padding it with what the round achieved converts an empty
+    ask into a page he has to read to discover it is empty — which is the same
+    cost Doctrine 25 measured on the instruments, charged to a message instead of
+    a page.
+
+    **IT IS DOCTRINE 25 FOR PROSE, AND THE SAME CONSTRUCTION CLAUSE APPLIES.**
+    A thing worth keeping goes in **the round log**, in **`OPEN_ACTIONS.md`** if
+    it needs him later, or in **`OPERATIONS.md`/`STATE.md`** if it binds future
+    work. Never in the opening paragraphs of a report as evidence of effort.
+
+    **AND A GATE TABLE IS NOT A DECISION.** Gate results are proof that the work
+    is safe to accept, not a thing he acts on: one line at the end, or nothing if
+    they all passed and he has been told they always run.
+
 ## 8. Known hazards (environment quirks)
 
 - **Cowork FUSE/sync truncation.** The sandbox has truncated files on
@@ -1675,6 +1743,7 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 - **A BUILD THAT BUILDS HALF THE APPLICATION LOOKS LIKE A BUILD (V1, 2026-08-06).** This project has TWO vite environments — the client and the Cloudflare worker — and `@cloudflare/vite-plugin` registers the second as a multi-environment builder that **only the CLI drives**. Vite's node `build()` API builds the client, prints a full chunk table and returns happily, leaving `dist/weird_baby/index.js` from whatever built it last. `tools/stage-build.mjs`'s first cut did exactly that: the client came out in the LAUNCH state and the worker kept the previous DEVELOPMENT stage, so both stage doors stood open on a launched museum and **the only symptom on the wire was one word in `/api/held`.** Caught by checking the wire rather than the console, which is also how H1's `run_worker_first` outage was caught. **Anything that needs to rebuild this app spawns `vite build`; never call `build()`.** Verify with `grep -o '"launch"\|"development"' dist/weird_baby/index.js` after any staged build.
 - **A GOVERNED PICTURE HAS TWO ADDRESSES, AND ANYTHING THAT MATCHES ON ONE OF THEM IS WRONG (C1, 2026-08-06).** V1 made the pull-back a launch-state rule: a picture of the machines is DECLARED at its public address (`/robots/…`) and its FILE may be parked behind the stage door (`public/held/robots/…`), with `reveal/placement.mjs` mapping one to the other. **Four instruments broke on that in one round** — `usedBy` in `tools/asset-table.mjs` (which would have named twenty-six photographs as unreferenced on the round that restored them, on the one instrument whose output is a DELETION LIST), the disk check and the M99 drift guard in `provenance/assets-declare.mjs`, and `seenAssets` in `tools/provenance-sweep.mjs`. All four import `STAGE_PREFIX` now. **Any new tool that reasons about an image path must resolve the twin**, and the tell is a report that names held material as missing, orphaned or undeclared. **[K-a 2026-08-07] AND IT HAS A QUIETER FORM THAT RESOLVING THE TWIN DOES NOT CATCH: THE TABLE HOLDS BOTH ADDRESSES AS TWO ROWS.** When a picture moved behind the door its public-side row stayed, flagged `missing:true` — so `provenance/asset-table.json` carries the same photograph twice, once live at `/held/robots/…` and once dead at `/robots/…`. `npm run assets:orphans` reports **0** and is right: it counts `missing && isJudged`, and a dead twin inherits no judgement. **A new instrument that filters on `ref` alone therefore over-counts what is available** — the dictation tracker's first cut said eighteen governed pictures were one Record entry away when the true number is sixteen. **The rule for any tool that counts files: skip `missing:true` FIRST, before resolving the twin**, and say in the output that you did.
 - **`wrangler dev` holds `dist/weird_baby/.wrangler` open**, so `npm run build` fails with `EPERM … dist\weird_baby\.wrangler` while it is running. Stop the dev server (and any leftover `workerd` processes) before rebuilding. It also **caches its asset manifest at startup**, so a file added or removed under `dist/client` mid-run is not seen until it restarts — which is what makes an honest break-it-on-purpose test need a restart to be real.
+- **THE PROVENANCE SWEEP'S "UNREACHABLE" BUCKET IS NOT A DEAD-CODE LIST, AND A CLEANUP ROUND COULD DELETE A LIVE WING FROM IT (M84, 2026-08-06 — moved here from the register 2026-08-09 because it is a note, not an action).** `provenance:gate` follows STATIC imports from `src/main.jsx`. H1 made `/hr` a DYNAMIC import, so nine Hunter Root files sit in the sweep's *"unreachable from `src/main.jsx`"* bucket carrying **485 strings** — and only 154 of those are genuinely dead (`hr_facts.js` 124 and `hr_journal_prompts.js` 30, which are M5). **The other 331 are the live exhibit.** Every one is still DECLARED and the gate is PASS. Read the bucket as *"the walk could not reach it"*, never as *"nothing uses it"*.
 - `export-artifacts.mjs` prints a harmless `UV_HANDLE_CLOSING` assertion
   AFTER finishing — ignore.
 - Drive root contains loose stale code copies from past sessions — stale
