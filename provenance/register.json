@@ -15343,97 +15343,89 @@
    "p": "OPS_NOTES_HEAD",
    "c": "HOUSE"
   },
-  "ee6a672f79829ca1": {
-   "f": "src/data/artists/robots.js",
-   "l": 420,
-   "t": "Weird.Baby Initial Launch Report",
-   "p": "spine[].tracks[].face.entries[].title",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_NIGHT_DESK_LOG-20260807.md §0 — Mike's day-one launch report, relayed verbatim through the 2026-08-07 night kickoff and quoted there in full"
-  },
   "02f5b0f10c7709b6": {
    "f": "src/lib/record-model.js",
    "l": 213,
    "t": "Transmission",
    "c": "HOUSE",
-   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "dc73d39aa40bf25b": {
    "f": "src/lib/record-model.js",
    "l": 214,
    "t": " line",
    "c": "HOUSE",
-   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "308fa1373b5f5c58": {
    "f": "src/lib/record-model.js",
    "l": 214,
    "t": " lines",
    "c": "HOUSE",
-   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "64d85164875214e2": {
    "f": "src/lib/record-model.js",
    "l": 227,
    "t": "Photograph",
    "c": "HOUSE",
-   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "6afd1cce5ab7fd11": {
    "f": "src/lib/record-model.js",
    "l": 246,
    "t": " page",
    "c": "HOUSE",
-   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "d051c9b628feba03": {
    "f": "src/lib/record-model.js",
    "l": 246,
    "t": " pages",
    "c": "HOUSE",
-   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "786b9600ab925363": {
    "f": "src/lib/record-model.js",
    "l": 250,
    "t": "not here yet",
    "c": "HOUSE",
-   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "fb4677aa02ec54c6": {
    "f": "src/lib/record-model.js",
    "l": 253,
    "t": "Document",
    "c": "HOUSE",
-   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "01874a587ca649f5": {
    "f": "src/lib/record-model.js",
    "l": 254,
-   "t": " \u00b7 ",
+   "t": " · ",
    "c": "HOUSE",
-   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "ff18204046c6d4cb": {
    "f": "src/routes/exhibit/RecordAttachments.jsx",
    "l": 113,
    "t": "Attachments",
    "c": "HOUSE",
-   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "403911bc0720dc0f": {
    "f": "src/routes/exhibit/RecordAttachments.jsx",
    "l": 119,
    "t": "open {} in the reader",
    "c": "HOUSE",
-   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "8d73a659b2467ce1": {
    "f": "src/routes/exhibit/RecordAttachments.jsx",
    "l": 131,
-   "t": " \u00b7 {}",
+   "t": " · {}",
    "c": "HOUSE",
-   "n": "HOUSE \u2014 the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row \u2014 the name, the source, the date, the page count, the lines, the extract \u2014 comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md \u00a70."
+   "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
   "b724eda0bf113741": {
    "f": "src/data/artists/robots.js",
@@ -15450,7 +15442,10 @@
    "t": "Weird.Baby launched on schedule. The email server took an onslaught of unexplained data starting Friday.",
    "p": "spine[].tracks[].face.entries[].line",
    "c": "RESTATED",
-   "r": ["f6a32ef902e54edf", "21eff46d69225dde"],
+   "r": [
+    "ae3aace1147934a7",
+    "d8f2be776c8594d3"
+   ],
    "n": "OPS-DRAFTED, MIKE-APPROVED, AND FILED AS RESTATED RATHER THAN MIKE ON PURPOSE. It is the index row's summary for Record 001 and it is the only string in that entry that is not his: he approved this exact sentence on 2026-08-08 (docs/MUSEUM_INDEX_LINE_LOG-20260808.md §0), and approving a sentence is not writing one. It adds no specific — 'launched on schedule', 'the email server', 'an onslaught', 'Friday' are all in the two MIKE rows named in `r`, which are his own paragraphs two fields below it. Marking it MIKE would make an Ops paraphrase indistinguishable from his words a week later, which is the exact failure the three-mark rule exists to prevent."
   },
   "b7d268f83c5b7ea7": {
@@ -15465,22 +15460,6 @@
    "f": "src/data/artists/robots.js",
    "l": 455,
    "t": "Congratulations!",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
-  },
-  "f6a32ef902e54edf": {
-   "f": "src/data/artists/robots.js",
-   "l": 456,
-   "t": "Weird.Baby launched to the world at 12:00 am Monday morning, on schedule and on spec; the Weird.Baby website is live, a clean hand-off was made made, and Operations has the ball.",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
-  },
-  "21eff46d69225dde": {
-   "f": "src/data/artists/robots.js",
-   "l": 460,
-   "t": "Reportable Incident - The Weird.Baby email server has been subject to an onslaught of data that would appear to be unrelated to our primary mission. Full containment was made to prevent disruptions of service prior to turning on the Weird.Baby website. Data continues to be received.",
    "p": "spine[].tracks[].face.entries[].sections[].body",
    "c": "MIKE",
    "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
@@ -15565,13 +15544,304 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
   },
-  "d4919cadd7c44bd5": {
+  "84d193dfce7cde78": {
    "f": "src/data/artists/robots.js",
-   "l": 488,
-   "t": "The decision to resume was determined to be low risk, reversible, and we still did not know exactly what the data meant.",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "l": 537,
+   "t": "INITIAL LAUNCH REPORT - Weird.Baby",
    "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "ae3aace1147934a7": {
+   "f": "src/data/artists/robots.js",
+   "l": 550,
+   "t": "Weird.Baby launched to the world at 12:00 am Monday morning, on schedule and on spec; the Weird.Baby website is live, a clean hand-off was made, and Operations has the ball.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "d8f2be776c8594d3": {
+   "f": "src/data/artists/robots.js",
+   "l": 554,
+   "t": "Reportable Incident - The Weird.Baby email server has been subject to an onslaught of data that would appear to be unrelated to our primary mission. Full containment  was made to prevent disruptions of service prior to turning on the Weird.Baby website. The data continues to be received.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "c85251ed5f249bf4": {
+   "f": "src/data/artists/robots.js",
+   "l": 575,
+   "t": "The decision to resume was determined to be low risk, reversible, and we still did not know if the data was useful. The team was more intrigued than concerned.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "395fe577c3ce0f77": {
+   "f": "src/data/artists/robots.js",
+   "l": 578,
+   "t": "SATURDAY DAY(-2) and SUNDAY DAY(-1)",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "bdd61d97d6e84318": {
+   "f": "src/data/artists/robots.js",
+   "l": 579,
+   "t": "Most of what has been received so far consists of pages of hexadecimal numbers; presumably data that needs to be compiled and assembled into something usable.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "fb8568dc18ad4dce": {
+   "f": "src/data/artists/robots.js",
+   "l": 583,
+   "t": "We ran some of the data through a ML Monitor to inspect the contents. No known Opcode library produced any favorable results, but we were able to read a few snippets of ASCII, including:",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "eac794011caf50b8": {
+   "f": "src/data/artists/robots.js",
+   "l": 587,
+   "t": "[MIKE-NOTE] Robot, portal, ??, ??  (Claude - Get me some examples from the manual, etc)",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "d00b153e24a10628": {
+   "f": "src/data/artists/robots.js",
+   "l": 603,
+   "t": "[OPS] The manual is 61 pages of structure; every position reads [ TEXT REQUIRED ]. There are no examples yet. Ops is writing it; Mike reviews and edits.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — Ops' three answers, supplied in Mike's own round instruction of 2026-08-09 and carried word for word. They are Ops' knowledge in his relay; they render only in DEVELOPMENT and are stripped from a launch bundle by wb-ops-notes and wb-dev-mark-guard."
+  },
+  "7a9356d413a858db": {
+   "f": "src/data/artists/robots.js",
+   "l": 593,
+   "t": "Also, not \"words\", but suspiciously frequent text strings include:",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "545c0b2e932c0f3a": {
+   "f": "src/data/artists/robots.js",
+   "l": 595,
+   "t": "[MIKE-NOTE] MGK, PI,  (Claude - Get me some examples from the manual, etc)",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "c3746286129d02d2": {
+   "f": "src/data/artists/robots.js",
+   "l": 674,
+   "t": "[OPS] From the firmware and the twin's own screens: PORTAL, FEED, LATCH, ARM, BOOT, POST, BIST, SEG, CHECKSUM, ACK, SYN, AUX LINK, MEM TEST, VIDEO, NOMINAL, LISTENING, ERROR, READY, STANDBY, SANDBOX.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — Ops' three answers, supplied in Mike's own round instruction of 2026-08-09 and carried word for word. They are Ops' knowledge in his relay; they render only in DEVELOPMENT and are stripped from a launch bundle by wb-ops-notes and wb-dev-mark-guard."
+  },
+  "8859e4feb9f796fb": {
+   "f": "src/data/artists/robots.js",
+   "l": 601,
+   "t": "[MIKE-NOTE] RE:  (Claude - Get me some examples from the manual, etc)",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "ee2a0c1e51210d39": {
+   "f": "src/data/artists/robots.js",
+   "l": 607,
+   "t": "[MIKE-NOTE] Look for what we really do use a lot.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "2279599e73d3d6bb": {
+   "f": "src/data/artists/robots.js",
+   "l": 608,
+   "t": "[MIKE-NOTE] Look for sections of the documents that are \"true\", but not \"juicy\". It all has to come out at some point. Start dumping.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "49383ea438788b5f": {
+   "f": "src/data/artists/robots.js",
+   "l": 611,
+   "t": "MONDAY DAY(0) - Weird.Baby Go-Live!",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "8ee82756b69066e2": {
+   "f": "src/data/artists/robots.js",
+   "l": 612,
+   "t": "00:00 - The Go-Live went off without a hitch.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "d0c9816f92727426": {
+   "f": "src/data/artists/robots.js",
+   "l": 613,
+   "t": "00:02 - Data stream ended",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "2e20d40e226a5e2a": {
+   "f": "src/data/artists/robots.js",
+   "l": 614,
+   "t": "The remainder of the day was completely uneventful",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "5e6a22d9104e1520": {
+   "f": "src/data/artists/robots.js",
+   "l": 615,
+   "t": "Weird.Baby uptime - 100%, no further anomalies",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "dde2dd0c592b9154": {
+   "f": "src/data/artists/robots.js",
+   "l": 616,
+   "t": "We decided to stand up /Robots as a page (crowdsourcing potential)",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "581ea56dca47db32": {
+   "f": "src/data/artists/robots.js",
+   "l": 622,
+   "t": "GENERAL STATUS UPDATE",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "ff146c022329574c": {
+   "f": "src/data/artists/robots.js",
+   "l": 623,
+   "t": "Weird.Baby Integrity Management Plan remains on-track without anomalies.\nEmail Server Data Assault has ceased; no net impact.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "ea6c717806dc187d": {
+   "f": "src/data/artists/robots.js",
+   "l": 698,
+   "t": "Weird.Baby uptime: 100%, no anomalies",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "e59d09a92d9ebee0": {
+   "f": "src/data/artists/robots.js",
+   "l": 699,
+   "t": "Operations Cadence : Favorable, On Pace",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "c91737466800b78b": {
+   "f": "src/data/artists/robots.js",
+   "l": 631,
+   "t": "Blockers - Nothing to Report",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "b942acdcc90729ed": {
+   "f": "src/data/artists/robots.js",
+   "l": 635,
+   "t": "All process controls are in good order.  Operations is turning the crank, keeping tings moving on cadence.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "b267b79d26d89bf3": {
+   "f": "src/data/artists/robots.js",
+   "l": 637,
+   "t": "The adrenalin from the launch and the weekend has finally worn off; we are all running on fumes.  No time was spent on the mystery data stream, today.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "19fc19e4c5c15cd2": {
+   "f": "src/data/artists/robots.js",
+   "l": 644,
+   "t": "DATA EXTRACTED - Weekend Robots Anomaly",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "ebc250dd374ed73f": {
+   "f": "src/data/artists/robots.js",
+   "l": 645,
+   "t": "Weird.Baby IMP - On-track without anomalies.\nEmail Server Data Assault - Password Protected File Structure (6.28 GB)",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "8004450de1102a0d": {
+   "f": "src/data/artists/robots.js",
+   "l": 653,
+   "t": "Data has been extracted from weekend dump including images and text. While all of it appears compelling, it is currently of no known value.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "f939c4d2a2b42cd0": {
+   "f": "src/data/artists/robots.js",
+   "l": 659,
+   "t": "Data has been extracted from weekend dump",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "6453f2eb4e980015": {
+   "f": "src/data/artists/robots.js",
+   "l": 660,
+   "t": "IMAGE - Engineering Manual - Assorted pages",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "e3f7ed7ea185796e": {
+   "f": "src/data/artists/robots.js",
+   "l": 661,
+   "t": "[MIKE-NOTE] IMAGE - Device marked 'MGK-VIIIp' and '(need name of device)'",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "117aa1e9738e29be": {
+   "f": "src/data/artists/robots.js",
+   "l": 663,
+   "t": "[OPS] The first four devices HAVE NO NAMES YET. What exists: the personas (CEO, Informer, Gambler, Everyman) and unit numbers (-02, -07, -09). Whether the personas ARE the four units, or the units carry their own names, is unruled and is Mike's call.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — Ops' three answers, supplied in Mike's own round instruction of 2026-08-09 and carried word for word. They are Ops' knowledge in his relay; they render only in DEVELOPMENT and are stripped from a launch bundle by wb-ops-notes and wb-dev-mark-guard."
+  },
+  "8e604439dd5d5ddf": {
+   "f": "src/data/artists/robots.js",
+   "l": 668,
+   "t": "IMAGE - Assorted Evidence Based photos - Unknown Importance",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "fa4f7c1d3c8f25d9": {
+   "f": "src/data/artists/robots.js",
+   "l": 670,
+   "t": "[MIKE-NOTE] ASCII - (Give me a list of the most common words Robots expects to use, pick the juicy ones - A more compete list  and analysis to be printed below in detail section.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "9065c862ef58b67c": {
+   "f": "src/data/artists/robots.js",
+   "l": 678,
+   "t": "A new Volume has been created: /Robots/MGK-VIIIp",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "db63616cfb8d76ea": {
+   "f": "src/data/artists/robots.js",
+   "l": 679,
+   "t": "[MIKE-NOTE] containing the files referenced above. (That is how we get the album art and set up the Manual link)",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "58ff05f91c54457e": {
+   "f": "src/data/artists/robots.js",
+   "l": 700,
+   "t": "Transfer complete - Future reporting to come from Operations",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "2cf76aea1935dc2c": {
+   "f": "src/data/artists/robots.js",
+   "l": 702,
+   "t": "/Robots - The data can be assembled to produce a heavily compressed file that is  password protected.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "4cd53eca06958fd2": {
+   "f": "src/routes/exhibit/RecordEntry.jsx",
+   "l": 223,
+   "t": "OPS",
+   "c": "HOUSE"
+  },
+  "1877bc5a85dcac72": {
+   "f": "src/routes/exhibit/RecordEntry.jsx",
+   "l": 223,
+   "t": "NOTE TO MIKE",
+   "c": "HOUSE"
   }
  }
 }

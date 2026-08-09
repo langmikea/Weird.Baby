@@ -7,7 +7,50 @@ tree, the live working tree wins — always.
 
 **Read this file FIRST in every session, before STATE.md, before any handoff.**
 
-**Last verified against live tree:** 2026-08-09 (THE WORKSHEET EXPORT — five
+**Last verified against live tree:** 2026-08-09 (THE RECORD LANDING + THE ALBUM
+ART — seven instructions, all seven done. Gates: lint **11/9 = baseline** · build
+green · **launch build green** · provenance **PASS** · `reveal:check` **PASS** ·
+`parity:gate` **PASS** · `instory:gate` **PASS** · `assets:orphans` **0/0** ·
+`reveal:day` **nothing to move** · **the lap RAN at 390px and 1228px** on five
+routes, page overflow 0, broken images 0, console errors 0 · `lap:clean` done.
+**RECORDS 001–005 ARE ON THE WALL**, dated from `recordDay(n)` off the one epoch,
+and **013 is untouched**. **THE ENTRIES ARE GENERATED RATHER THAN RETYPED** —
+`tools/dictation/emit-record-entries.mjs` cuts the rescued boxes by the
+worksheet's own capitals rule and `--verify` strips the paragraphing back out and
+compares: *every box round-trips, his characters unchanged.* There is no
+transcription step for a character to go missing in. **001's BODY IS HIS LONGER
+DRAFT** — it gains SATURDAY/SUNDAY and MONDAY DAY(0), and *"was made made"* is
+*"was made"* in it, so **the doubled word was his and so is the correction.**
+**HIS NOTES SHIP IN RED AND OPS' ANSWERS IN BLUE, INLINE, ON HIS RULING** —
+`[MIKE-NOTE]` and `[OPS]` are whole-paragraph marks that never print, 5 red and 3
+blue measured on the built bundle. **`[PAPA]` COULD NOT DO THIS AND THAT IS WHY
+THERE ARE TWO SCHEMES:** a `[PAPA]` sentence is LIFTED OUT beneath the page; these
+must stay where he wrote them, because a question and its answer four screens
+apart is not an answer. **THE ENTRIES THEREFORE READ DIFFERENTLY IN THE TWO
+STAGES — his instruction, not a defect** — and N3's identical-copy principle has
+its first declared exception. **THREE MECHANISMS KEEP THEM OUT OF A LAUNCH
+BUNDLE and the third cannot be reasoned wrong:** the renderer drops them, the AST
+pass empties the literal, and **`wb-dev-mark-guard` reads the launch build's own
+output and fails on a hit — proved by removing the strip and watching it name 13.**
+Measured on the real launch bundle: zero literal markers, zero of his note text,
+his story text intact. **TWO ENTRIES LANDED AND DREW NOTHING AT ALL, AND ONLY THE
+LAP SAW IT:** `scrubFace`'s entry filter knew `line` and `lines` and **not
+`sections`**, so 004 and 005 — no headline by his ruling, body entirely sections —
+were filtered out and never drew an index row while every gate passed. S-c's shape
+one floor down. **THE ALBUM ART IS MEASURED, NOT EYEBALLED:** Georgia 157 / track
+17 identified by pixel IoU **0.945** against his own `NEW Robots.png`, Courier New
+for the sub-line, and **the circle is closed with its own ink** — the three arcs
+rotated about the fitted centre, 16,608 pixels painted in with six degrees of
+overlap so the tapers are buried. No photograph. **The one collision is named
+rather than absorbed:** MGK-VIIIp's descender clears his measured rule by **5px**
+(`L-d`). **THE PRUNE HAZARD FIRED EXACTLY AS §9 DESCRIBES** — replacing 001's body
+staled four rows and pruning them broke the approved index line's RESTATED chain,
+repointed onto the same two paragraphs in the draft that replaced them. **And the
+register nearly lost its own shape:** rows live under `.entries` and a first pass
+wrote 43 at the top level — caught by the gate, then verified 43 added, **0 lost,
+0 changed**. **Nothing was deployed.** Round log:
+`docs/MUSEUM_RECORD_LANDING_LOG-20260809.md`.)
+Previously 2026-08-09 (THE WORKSHEET EXPORT — five
 instructions, all five done, and **the diagnosis did not land where the brief
 pointed.** Gates: lint **11/9 = baseline** · build green · provenance **PASS** ·
 `reveal:check` **PASS** · `parity:gate` **PASS** · `instory:gate` **PASS** ·

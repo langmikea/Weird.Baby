@@ -203,11 +203,26 @@ function scrubFace(face) {
          declared one. An entry that declared a line or a set of lines and kept
          none of them is dropped whole, which is what "held" has to mean if it
          is to mean anything. */
+      /* ═══ [L1 2026-08-09] `sections` COUNTS AS A BODY, AND IT DID NOT ═══════
+         THIS FILTER DROPPED TWO WHOLE ENTRIES IN SILENCE and only the lap saw
+         it. Records 004 and 005 are Mike's two status days: no headline (he
+         wrote none, and "do not fill a gap"), no `line`, no `lines` — their
+         entire body is `sections`. The test above knows the two older body
+         fields and not the newer one, so both entries evaluated to "no title
+         and no body", were filtered out, and **never drew an index row at all.**
+         The data was right, the ledger had rows for them, every gate passed, and
+         the museum showed four entries where six exist.
+         IT IS S-c's SHAPE ONE FLOOR DOWN — a renderer that does not know about a
+         field it was not told about — and the answer is the same one: teach it
+         the field, and keep the "declared a body and lost all of it" rule, which
+         is what makes a held entry disappear rather than print a blank row. */
       .filter((en, i) => {
         const raw = face.entries[i];
+        const hasSections = (s) => Array.isArray(s) && s.some(x => (x.body || []).some(kept));
         const declaredBody = kept(raw.line)
-          || (Array.isArray(raw.lines) && raw.lines.some(kept));
-        const keptBody = kept(en.line) || (en.lines?.length > 0);
+          || (Array.isArray(raw.lines) && raw.lines.some(kept))
+          || hasSections(raw.sections);
+        const keptBody = kept(en.line) || (en.lines?.length > 0) || hasSections(en.sections);
         if (declaredBody && !keptBody) return false;
         return kept(en.title) || keptBody;
       });

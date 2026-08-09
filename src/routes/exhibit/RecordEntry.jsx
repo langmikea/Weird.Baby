@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { entryStamp, entryDateline } from "../../lib/record-model.js";
+import { devMark, devBody } from "../../lib/visitor-prose.js";
+import { launched } from "../../lib/placement.js";
 import RecordAttachments from "./RecordAttachments.jsx";
 
 /* ===========================================================================
@@ -184,11 +186,28 @@ function Door({ door, onFire }) {
    touch (the compiler's immutability rule caught it, correctly). */
 const MARK = /\[\[(\d+)\]\]/;
 
+/* ═══ [L2/L5 2026-08-09] MIKE'S NOTES IN RED, OPS' ANSWERS BESIDE THEM ═══════
+   MIKE: "his bracketed notes and ?? placeholders go WITH them... where he asked
+   Ops a question in the text, OPS' ANSWER GOES INLINE beside it, in a distinct
+   colour from his own note, so he can read question and answer together."
+
+   IT IS THE OPPOSITE ARRANGEMENT TO `[PAPA]` AND THAT IS DELIBERATE. A `[PAPA]`
+   sentence is lifted OUT of the copy into a block beneath the page. These stay
+   exactly where he wrote them, because a question and its answer four screens
+   apart is not an answer. See the two marks' own note in `visitor-prose.js`.
+
+   THE MARK NEVER PRINTS — `devBody` takes it off — so the characters drawn are
+   the characters he typed. AT LAUNCH THE PARAGRAPH DOES NOT RENDER AT ALL, and
+   two further mechanisms make sure it is not merely unrendered: the source
+   literal is emptied by `wb-ops-notes`, and the launch build greps its own
+   chunks and fails if a mark survives. */
 function SectionBody({ body, doors, onFire }) {
-  const paras = Array.isArray(body) ? body : [body];
+  const paras = (Array.isArray(body) ? body : [body])
+    .filter(t => !(launched() && devMark(t)));
   const used = new Set();
   const out = paras.map((text, pi) => {
-    const bits = String(text).split(new RegExp(MARK.source, "g")).map((piece, k) => {
+    const kind = devMark(text);
+    const bits = String(devBody(text)).split(new RegExp(MARK.source, "g")).map((piece, k) => {
       if (k % 2 === 0) return piece;
       const di = Number(piece) - 1;
       const door = doors && doors[di];
@@ -196,6 +215,16 @@ function SectionBody({ body, doors, onFire }) {
       used.add(di);
       return <Door key={"d" + pi + "-" + k} door={door} onFire={onFire} />;
     });
+    if (kind) {
+      return (
+        <p key={pi} data-not-ux="1"
+           className={"vp-rec-sect-body wb-dev-note wb-dev-"
+                      + (kind === "OPS" ? "ops" : "mike")}>
+          <span className="wb-dev-tag">{kind === "OPS" ? "OPS" : "NOTE TO MIKE"}</span>
+          {bits}
+        </p>
+      );
+    }
     return <p key={pi} className="vp-rec-sect-body">{bits}</p>;
   });
   const orphans = (doors || []).filter((_, i) => !used.has(i));

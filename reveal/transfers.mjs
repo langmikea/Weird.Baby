@@ -199,7 +199,22 @@ const BLAST = [
      row may not be REVEALED (see `validate()`), and this entry is on the glass.
      The choice was a class or nothing, and nothing fails the build — which is
      exactly the fall-through the table was built to refuse. */
-  "doc.manual", "doc.record", "record.001", "record.013", "doc.firmware", "doc.charter",
+  /* [L1 2026-08-09] `record.002`..`record.005` JOIN THEM ON THE SAME READING,
+     AND FOR ONE OF THEM IT IS MORE THAN INHERITANCE. These are the four days
+     that follow launch week: 002 is the day after ("Weird.Baby uptime: 100%"),
+     003 is the day the weekend dump is extracted, 004 and 005 are the two
+     status days that close the week. Their subject is the same week-0 event
+     the Record surface itself carries, and BLAST is week 0.
+     003 IS THE ONE WORTH READING TWICE. Its own text creates
+     `/Robots/MGK-VIIIp` out of the extracted dump — material that ARRIVED in
+     the onslaught that began on the Friday before launch, which is the same
+     week-0 arrival. The dump is not a PACKAGE (nothing was delivered) and not a
+     TRANSMISSION in the model's sense (that window opens later); it is the
+     BLAST, still being read.
+     THEY COULD NOT HAVE BEEN EXEMPTED, for `record.001`'s reason one line
+     down: an exempt row may not be REVEALED and all four are on the glass. */
+  "doc.manual", "doc.record", "record.001", "record.002", "record.003",
+  "record.004", "record.005", "record.013", "doc.firmware", "doc.charter",
 
   /* ── [R6/R4 2026-08-05] THE TWO EGGS PLANTED THIS ROUND. `egg.channels` is
         BLAST because the numbering is engraved on a drum that has been on the

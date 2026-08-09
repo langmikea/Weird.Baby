@@ -71,6 +71,40 @@
 
 export const PAPA_MARK = /\[PAPA\]/;
 
+/* ═══ [L2/L5 2026-08-09] THE TWO INLINE MARKS, AND WHY THEY ARE NOT `[PAPA]` ══
+   MIKE: "where he asked Ops a question in the text, OPS' ANSWER GOES INLINE
+   beside it, in a distinct colour from his own note, so he can read question and
+   answer together. His notes in red; Ops' answers in a second colour, clearly
+   not his voice. Both are development-only and neither may ever reach a
+   visitor."
+
+   `[PAPA]` CANNOT DO THIS AND THAT IS THE WHOLE REASON THERE ARE TWO SCHEMES.
+   A `[PAPA]` sentence is LIFTED OUT of the copy and printed in a block beneath
+   the surface (N3), because a note that is never inside the copy cannot be
+   mistaken for copy. These must stay exactly where he wrote them — his question
+   and Ops' answer, next to each other, in the middle of his own report — which
+   is the opposite arrangement and needs its own mark.
+
+   THEY ARE WHOLE-PARAGRAPH MARKS, NOT SENTENCE MARKS. A Record body is an array
+   of paragraphs; a marked paragraph is entirely a note or entirely an answer, so
+   there is no half-sentence question about what to cut. At LAUNCH the paragraph
+   does not render and the literal does not exist:
+     1. `RecordEntry.jsx` drops a marked paragraph when `launched()`.
+     2. `wb-ops-notes` in vite.config.js replaces the literal with "" at launch.
+     3. the launch build then greps its own chunks and FAILS if a mark survives.
+   Three mechanisms because parts 1 and 2 are the pair this house has shipped
+   past four times, and part 3 is the one that cannot be reasoned wrong. */
+export const DEV_MARK = /^\[(MIKE-NOTE|OPS)\]\s?/;
+
+/** "MIKE-NOTE" | "OPS" | null — what kind of development-only mark this is */
+export const devMark = (s) => {
+  const m = typeof s === "string" ? DEV_MARK.exec(s) : null;
+  return m ? m[1] : null;
+};
+
+/** the paragraph without its mark. Byte-identical to what Mike typed. */
+export const devBody = (s) => typeof s === "string" ? s.replace(DEV_MARK, "") : s;
+
 /** the block's own label, declared ONCE because two rooms print it (Doctrine
  *  17) — and a plain literal, because `provenance:gate` sweeps literals and a
  *  passage assembled by interpolation falls off the boundary in silence. */
@@ -81,6 +115,9 @@ export const OPS_NOTES_HEAD = "Not part of the UX · notes to Mike";
 const sentences = (s) => s.split(/(?<=[.!?])\s+/);
 
 export function visitorProse(s) {
+  /* [L5 2026-08-09] a development-only paragraph is not prose to be trimmed —
+     the whole string goes, and it goes from the SOURCE as well as the render */
+  if (devMark(s)) return "";
   if (typeof s !== "string" || !PAPA_MARK.test(s)) return s;
   return sentences(s)
     .filter(sentence => !PAPA_MARK.test(sentence))

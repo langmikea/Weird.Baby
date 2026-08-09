@@ -534,7 +534,19 @@ function recordBudgetFaults() {
         + `holds ${RECORD_LINE_MAX} on two lines — shorten it. `
         + `A summary that does not fit is not a summary (Mike, R3).`);
     }
-    if (typeof e.title !== "string" || !e.title.trim()) {
+    /* [L1 2026-08-09] TWO ENTRIES ARE HEADLINE-LESS BY MIKE'S OWN INSTRUCTION,
+       AND THEY ARE EXEMPTED BY NAME RATHER THAN BY A LOOSENED RULE.
+       "Days 4 and 5 have only executive summaries - land what exists... do not
+       fill a gap." He wrote no headline for either, and inventing one is the
+       edit the whole verbatim discipline refuses. The rule stands for every
+       other entry — a blanket allowance here would turn R3's "every index row
+       gets one" into a suggestion, and the next headline-less entry would land
+       in silence. These two are listed, so a THIRD one still fails.
+       WHAT IT COSTS, STATED: both draw an index row with no headline until he
+       writes one. That is visible on the glass rather than hidden, which is the
+       point of landing them. Register row `L-c`. */
+    const HEADLINE_EXEMPT = new Set([4, 5]);
+    if ((typeof e.title !== "string" || !e.title.trim()) && !HEADLINE_EXEMPT.has(e.no)) {
       out.push(`${who}: no headline. Every index row gets one.`);
     }
   }

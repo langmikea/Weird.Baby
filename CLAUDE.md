@@ -769,6 +769,66 @@ read Doctrine 25.**
 
 Maintained here. Newest first.
 
+### 2026-08-09 -> THE RECORD LANDING + THE ALBUM ART (L1-L7) - sealed
+- **RECORDS 001-005 ARE ON THE WALL**, dated by `recordDay(n)` off the one epoch;
+  **013 untouched.** Gates: lint **11/9 = baseline** - build green - **launch
+  build green** - provenance **PASS** - `reveal:check` **PASS** - `parity:gate`
+  **PASS** - `instory:gate` **PASS** - `assets:orphans` **0/0** - `reveal:day`
+  **nothing to move** - **the lap RAN at 390px and 1228px** on five routes, page
+  overflow 0, broken images 0, console errors 0 - `lap:clean` done. Log:
+  `docs/MUSEUM_RECORD_LANDING_LOG-20260809.md`.
+- **THE ENTRIES ARE GENERATED, NOT RETYPED, AND THAT IS THE METHOD WORTH
+  KEEPING.** `tools/dictation/emit-record-entries.mjs` cuts his rescued boxes
+  into sections by the worksheet's own capitals rule and emits the JS; `--verify`
+  strips the paragraphing and the markers back out and compares to the rescued
+  string - **every box round-trips, his characters unchanged.** Record 001's
+  landing PROVED verbatim after the fact; this removes the transcription step a
+  character could go missing in.
+- **001's BODY IS HIS LONGER DRAFT AND ONE DETAIL IS WORTH THE ROUND.** It gains
+  SATURDAY/SUNDAY and MONDAY DAY(0), and where the 08-08 dictation read
+  *"a clean hand-off was made made"* this draft reads *"was made"* - **the
+  doubled word was his and so is the correction.** Two spaces preserved in
+  `Full containment  was made` and `=  86%`.
+- **HIS NOTES IN RED, OPS' ANSWERS IN BLUE, INLINE - AND `[PAPA]` COULD NOT DO
+  IT.** A `[PAPA]` sentence is LIFTED OUT of the copy into a block beneath the
+  page (N3); these must stay **exactly where he wrote them**, because a question
+  and its answer four screens apart is not an answer. So `[MIKE-NOTE]` and
+  `[OPS]` are **whole-paragraph** marks that never print - 5 red and 3 blue
+  measured on the built bundle at 390px. **Blue is not decoration:** Ops'
+  sentence must never be read next year as something Mike wrote. **The entries
+  therefore READ DIFFERENTLY IN THE TWO STAGES - his instruction, not a defect -
+  and N3's identical-copy principle has its first declared exception.**
+- **THREE MECHANISMS, AND THE THIRD CANNOT BE REASONED WRONG.** The renderer
+  drops a marked paragraph at launch; `wb-ops-notes` empties the literal in the
+  SOURCE; and **`wb-dev-mark-guard` reads the launch build's own output and fails
+  on a hit.** Proved by removing the strip - the launch build refused and named
+  **13**. On the real launch bundle: **zero literal markers, zero of his note
+  text, his story text intact**; the one residue is `DEV_MARK` itself, which
+  cannot remove itself.
+- **TWO ENTRIES LANDED AND DREW NOTHING AT ALL, AND ONLY THE LAP SAW IT.**
+  `scrubFace`'s entry filter kept an entry with a title, a `line` or `lines` -
+  **it did not know about `sections`.** Records 004 and 005 have no headline (he
+  wrote none) and no `line`, so both read as *no title and no body*, were
+  filtered out, and **never drew an index row** while the data was right, the
+  ledger had rows and every gate passed. Six expected in the index, four counted.
+  **S-c's shape one floor down.**
+- **THE ALBUM ART IS MEASURED, NOT EYEBALLED.** Georgia 157 / track 17 identified
+  by pixel **IoU 0.945** against his own `NEW Robots.png` (Georgia Pro .928,
+  Times .712, Bodoni .492), Courier New for the sub-line. **The circle is closed
+  with its own ink** - the three arcs rotated about the fitted centre (599.8,
+  517.9, r 321.7), **16,608 pixels painted in** with six degrees of overlap so
+  the hand-drawn tapers are buried rather than butted. No photograph. The two
+  source files were in `OneDrive\Desktop - Laptop\ART\` under different names,
+  not Downloads.
+- **THE PRUNE HAZARD FIRED EXACTLY AS §9 DESCRIBES**, and the register nearly
+  lost its own shape. Replacing 001's body staled four rows; pruning them broke
+  the approved index line's RESTATED chain, repointed onto the same two
+  paragraphs in the draft that replaced them. Separately, **the rows live under
+  `.entries` and a first pass wrote 43 at the top level** - invisible to a reader,
+  fatal to the gate, caught by the gate, then verified **43 added, 0 lost, 0
+  pre-existing rows changed.**
+- **SURFACING UNMOVED AT 20 SPENDABLE - THE FOURTEENTH PACKET RUNNING.**
+
 ### 2026-08-09 -> THE WORKSHEET EXPORT (U1-U5) - sealed
 - **THE EXTRACTOR WAS WRITTEN BEFORE ANYTHING WAS DIAGNOSED** -
   `tools/dictation/RESCUE.md`, a console snippet that takes EVERY key in the

@@ -348,6 +348,20 @@ import { faqFace } from "../faq-face.js";
    which is a **Friday**. Nothing was adjusted to make that true. */
 const RECORD_EPOCH = "2026-08-17";
 
+/* [L4 2026-08-09] EVERY OTHER ENTRY'S DATE IS COUNTED FROM IT, NOT TYPED.
+   Mike: "DATES from the epoch: D1 = 2026-08-17 Monday, D2 = 08-18, D3 = 08-19,
+   D4 = 08-20, D5 = 08-21." Five literals would be five things a slip has to
+   find; this is the same one-field rule the epoch's own note states, extended
+   to the entries that follow it. Day 1 IS the epoch, so `recordDay(1)` and
+   `RECORD_EPOCH` are the same string by construction rather than by agreement.
+   UTC arithmetic deliberately: a local-midnight Date rolls the day backwards in
+   any timezone west of Greenwich, which is how a dateline reads Sunday. */
+function recordDay(n) {
+  const d = new Date(RECORD_EPOCH + "T00:00:00Z");
+  d.setUTCDate(d.getUTCDate() + (n - 1));
+  return d.toISOString().slice(0, 10);
+}
+
 /* [S10] the WBR tracks, declared once and referenced by both covers. */
 const WBR_TRACKS = [
       /* ═══ [P2 2026-08-05] THE RECORD SITS ABOVE THE FAQ ═════════════════
@@ -519,53 +533,174 @@ const WBR_TRACKS = [
                is identical whichever case sits here — which makes his the free
                choice and therefore the right one. */
             { no: 1,
-              /* [D1 2026-08-08] DAY ONE, AND THE SAME CONSTANT THE FACE'S
-                 `recordEpoch` USES. See its note at the head of this file:
-                 the story runs on real dates, and a slip is one line. */
-              date: RECORD_EPOCH,
-              title: "Weird.Baby Initial Launch Report",
-              /* OPS' SENTENCE, MIKE'S APPROVAL. See the block above. */
+              date: recordDay(1),
+              title: "INITIAL LAUNCH REPORT - Weird.Baby",
+              /* OPS' SENTENCE, MIKE'S APPROVAL — CARRIED, NOT REWRITTEN. His
+                 worksheet holds no LINE for day one, so the index row keeps the
+                 sentence he approved on 2026-08-08. It is still RESTATED, still
+                 resolves to the two paragraphs of his it restates, and must not
+                 be re-marked MIKE. It still describes the longer body: the
+                 launch, and the onslaught that started on Friday. */
               line: "Weird.Baby launched on schedule. The email server took " +
                     "an onslaught of unexplained data starting Friday.",
               sections: [
                 { label: "EXECUTIVE SUMMARY",
                   body: [
                     "Congratulations!",
-                    "Weird.Baby launched to the world at 12:00 am Monday " +
-                    "morning, on schedule and on spec; the Weird.Baby website " +
-                    "is live, a clean hand-off was made made, and Operations " +
-                    "has the ball.",
-                    "Reportable Incident - The Weird.Baby email server has " +
-                    "been subject to an onslaught of data that would appear " +
-                    "to be unrelated to our primary mission. Full containment " +
-                    "was made to prevent disruptions of service prior to " +
-                    "turning on the Weird.Baby website. Data continues to be " +
-                    "received.",
+                    "Weird.Baby launched to the world at 12:00 am Monday "
+                    + "morning, on schedule and on spec; the Weird.Baby "
+                    + "website is live, a clean hand-off was made, and "
+                    + "Operations has the ball.",
+                    "Reportable Incident - The Weird.Baby email server has "
+                    + "been subject to an onslaught of data that would appear "
+                    + "to be unrelated to our primary mission. Full "
+                    + "containment  was made to prevent disruptions of "
+                    + "service prior to turning on the Weird.Baby website. "
+                    + "The data continues to be received.",
                   ] },
-                /* HIS SECOND HEADING CARRIES A THIRD LEVEL — "FRIDAY DAY (-3)"
-                   sits under DETAILED REPORT and above the beats — and this
-                   container has exactly two levels (a label and a body). So the
-                   day heading is the section's FIRST PARAGRAPH: his words at
-                   their own position, one level of hierarchy flattened, nothing
-                   added and nothing dropped. It is the one structural decision
-                   in this entry and it is named rather than assumed. */
                 { label: "DETAILED REPORT",
                   body: [
                     "FRIDAY DAY (-3)",
-                    "15:00 - Weird.Baby email server goes public (scheduled " +
-                    "early auto start)",
+                    "15:00 - Weird.Baby email server goes public (scheduled "
+                    + "early auto start)",
                     "15:01 - Weird.Baby email server BIST - PASS",
                     "15:14 - First data packet received",
                     "15:58 - Second data packet received",
                     "16:00 - Onslaught - Incoming data =  86% vs threshold",
-                    "16:10 - Server auto-shutdown, auto containment. and auto " +
-                    "alerts",
+                    "16:10 - Server auto-shutdown, auto containment. and "
+                    + "auto alerts",
                     "16:13 - REACT - Team is convened",
-                    "23:30 - REACT - RULING - Restart with 50x resources. " +
-                    "Stress test.",
-                    "The decision to resume was determined to be low risk, " +
-                    "reversible, and we still did not know exactly what the " +
-                    "data meant.",
+                    "23:30 - REACT - RULING - Restart with 50x resources. "
+                    + "Stress test.",
+                    "The decision to resume was determined to be low risk, "
+                    + "reversible, and we still did not know if the data was "
+                    + "useful. The team was more intrigued than concerned.",
+                    "SATURDAY DAY(-2) and SUNDAY DAY(-1)",
+                    "Most of what has been received so far consists of "
+                    + "pages of hexadecimal numbers; presumably data that "
+                    + "needs to be compiled and assembled into something "
+                    + "usable.",
+                    "We ran some of the data through a ML Monitor to "
+                    + "inspect the contents. No known Opcode library produced "
+                    + "any favorable results, but we were able to read a few "
+                    + "snippets of ASCII, including:",
+                    "[MIKE-NOTE] Robot, portal, ??, ??  (Claude - Get me "
+                    + "some examples from the manual, etc)",
+                    "[OPS] The manual is 61 pages of structure; every "
+                    + "position reads [ TEXT REQUIRED ]. There are no "
+                    + "examples yet. Ops is writing it; Mike reviews and "
+                    + "edits.",
+                    "Also, not \"words\", but suspiciously frequent text "
+                    + "strings include:",
+                    "[MIKE-NOTE] MGK, PI,  (Claude - Get me some examples "
+                    + "from the manual, etc)",
+                    "[OPS] From the firmware and the twin's own screens: "
+                    + "PORTAL, FEED, LATCH, ARM, BOOT, POST, BIST, SEG, "
+                    + "CHECKSUM, ACK, SYN, AUX LINK, MEM TEST, VIDEO, "
+                    + "NOMINAL, LISTENING, ERROR, READY, STANDBY, SANDBOX.",
+                    "[MIKE-NOTE] RE:  (Claude - Get me some examples from "
+                    + "the manual, etc)",
+                    "[OPS] The manual is 61 pages of structure; every "
+                    + "position reads [ TEXT REQUIRED ]. There are no "
+                    + "examples yet. Ops is writing it; Mike reviews and "
+                    + "edits.",
+                    "[MIKE-NOTE] Look for what we really do use a lot.",
+                    "[MIKE-NOTE] Look for sections of the documents that "
+                    + "are \"true\", but not \"juicy\". It all has to come out at "
+                    + "some point. Start dumping.",
+                    "MONDAY DAY(0) - Weird.Baby Go-Live!",
+                    "00:00 - The Go-Live went off without a hitch.",
+                    "00:02 - Data stream ended",
+                    "The remainder of the day was completely uneventful",
+                    "Weird.Baby uptime - 100%, no further anomalies",
+                    "We decided to stand up /Robots as a page "
+                    + "(crowdsourcing potential)",
+                  ] },
+              ] },
+            { no: 2,
+              date: recordDay(2),
+              title: "GENERAL STATUS UPDATE",
+              line: "Weird.Baby Integrity Management Plan remains on-track "
+                    + "without anomalies.\nEmail Server Data Assault has "
+                    + "ceased; no net impact.",
+              sections: [
+                { label: "EXECUTIVE SUMMARY",
+                  body: [
+                    "Weird.Baby uptime: 100%, no anomalies",
+                    "Operations Cadence : Favorable, On Pace",
+                    "Blockers - Nothing to Report",
+                  ] },
+                { label: null,
+                  body: [
+                    "All process controls are in good order.  Operations is "
+                    + "turning the crank, keeping tings moving on cadence.",
+                    "The adrenalin from the launch and the weekend has "
+                    + "finally worn off; we are all running on fumes.  No "
+                    + "time was spent on the mystery data stream, today.",
+                  ] },
+              ] },
+            { no: 3,
+              date: recordDay(3),
+              title: "DATA EXTRACTED - Weekend Robots Anomaly",
+              line: "Weird.Baby IMP - On-track without anomalies.\nEmail "
+                    + "Server Data Assault - Password Protected File "
+                    + "Structure (6.28 GB)",
+              sections: [
+                { label: "EXECUTIVE SUMMARY",
+                  body: [
+                    "Weird.Baby uptime: 100%, no anomalies",
+                    "Operations Cadence : Favorable, On Pace",
+                    "Data has been extracted from weekend dump including "
+                    + "images and text. While all of it appears compelling, "
+                    + "it is currently of no known value.",
+                  ] },
+                { label: null,
+                  body: [
+                    "Data has been extracted from weekend dump",
+                    "IMAGE - Engineering Manual - Assorted pages",
+                    "[MIKE-NOTE] IMAGE - Device marked 'MGK-VIIIp' and "
+                    + "'(need name of device)'",
+                    "[OPS] The first four devices HAVE NO NAMES YET. What "
+                    + "exists: the personas (CEO, Informer, Gambler, "
+                    + "Everyman) and unit numbers (-02, -07, -09). Whether "
+                    + "the personas ARE the four units, or the units carry "
+                    + "their own names, is unruled and is Mike's call.",
+                    "IMAGE - Assorted Evidence Based photos - Unknown "
+                    + "Importance",
+                    "[MIKE-NOTE] ASCII - (Give me a list of the most common "
+                    + "words Robots expects to use, pick the juicy ones - A "
+                    + "more compete list  and analysis to be printed below in "
+                    + "detail section.",
+                    "[OPS] From the firmware and the twin's own screens: "
+                    + "PORTAL, FEED, LATCH, ARM, BOOT, POST, BIST, SEG, "
+                    + "CHECKSUM, ACK, SYN, AUX LINK, MEM TEST, VIDEO, "
+                    + "NOMINAL, LISTENING, ERROR, READY, STANDBY, SANDBOX.",
+                    "A new Volume has been created: /Robots/MGK-VIIIp",
+                    "[MIKE-NOTE] containing the files referenced above. "
+                    + "(That is how we get the album art and set up the "
+                    + "Manual link)",
+                  ] },
+              ] },
+            { no: 4,
+              date: recordDay(4),
+              sections: [
+                { label: "EXECUTIVE SUMMARY",
+                  body: [
+                    "Weird.Baby uptime: 100%, no anomalies",
+                    "Operations Cadence : Favorable, On Pace",
+                  ] },
+              ] },
+            { no: 5,
+              date: recordDay(5),
+              sections: [
+                { label: "EXECUTIVE SUMMARY",
+                  body: [
+                    "Weird.Baby uptime: 100%, no anomalies",
+                    "Operations Cadence : Favorable, On Pace",
+                    "Transfer complete - Future reporting to come from "
+                    + "Operations",
+                    "/Robots - The data can be assembled to produce a "
+                    + "heavily compressed file that is  password protected.",
                   ] },
               ] },
             /* ==== [HR 2026-08-04] RECORD 013, STRIPPED TO WHAT IS KNOWN =====

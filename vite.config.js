@@ -4,7 +4,7 @@ import { cloudflare } from "@cloudflare/vite-plugin";
 import * as acorn from "acorn";
 import jsxPlugin from "acorn-jsx";
 import { stripVaultAudio } from "./src/data/exhibits/vault-audio.js";
-import { visitorProse, PAPA_MARK } from "./src/lib/visitor-prose.js";
+import { visitorProse, PAPA_MARK, DEV_MARK } from "./src/lib/visitor-prose.js";
 import { publicLedger } from "./reveal/public-view.mjs";
 import { readStage } from "./reveal/stage.mjs";
 import { publicPlacements } from "./reveal/delivery.mjs";
@@ -146,7 +146,9 @@ const opsNotesStrip = {
     if (STAGE !== "launch") return null;
     const f = String(id).replace(/\\/g, "/");
     if (!/\/src\//.test(f) || !/\.(js|jsx)$/.test(f)) return null;
-    if (!PAPA_MARK.test(code)) return null;
+    /* [L5 2026-08-09] the dev marks join the same pass, for the same reason:
+       a runtime filter stops the RENDER and still ships the MATERIAL. */
+    if (!PAPA_MARK.test(code) && !/\[(MIKE-NOTE|OPS)\]/.test(code)) return null;
 
     let ast;
     try {
@@ -176,7 +178,7 @@ const opsNotesStrip = {
       if (Array.isArray(n)) { n.forEach(walk); return; }
       if (!n.type) return;
       const s = fold(n);
-      if (s !== null && PAPA_MARK.test(s)) {
+      if (s !== null && (PAPA_MARK.test(s) || DEV_MARK.test(s))) {
         edits.push({ start: n.start, end: n.end, text: JSON.stringify(visitorProse(s)) });
         return;                       // do not descend into a node being replaced
       }
@@ -300,6 +302,50 @@ const heldChunkGuard = {
   },
 };
 
+/* ═══ [L5 2026-08-09] THE DEV MARKS DO NOT SURVIVE A LAUNCH BUILD, AND THIS IS
+       THE MECHANISM THAT CANNOT BE REASONED WRONG ══════════════════════════
+   MIKE: "THE COLOURED MARKERS MUST BE UNMISSABLE and must never survive to
+   launch - development-only, and the launch gate fails if any of it can reach a
+   visitor."
+
+   There are already two mechanisms — `RecordEntry.jsx` does not render a marked
+   paragraph at launch, and `wb-ops-notes` empties the literal in the source.
+   BOTH ARE THINGS SOMEBODY WROTE, and this house has shipped past that exact
+   pair four times: a runtime filter that stopped the render and shipped the
+   material (R5's 153 vault URLs, H1's ledger, V1's twenty-six addresses, N3's
+   35 markers). So the launch build READS ITS OWN OUTPUT and fails on a hit.
+
+   IT IS NOT A SEPARATE GATE ON PURPOSE. A gate somebody has to remember to run
+   is a gate that does not run; this is inside the one command that produces the
+   thing being checked, so a launch bundle carrying a marker cannot come into
+   existence. In DEVELOPMENT it does nothing — the marks are the point there. */
+/* a real newline, built rather than escaped: this file has been broken twice by
+   a patch script writing a two-character escape as one character (OPERATIONS §8) */
+const NL = String.fromCharCode(10);
+const devMarkGuard = {
+  name: "wb-dev-mark-guard",
+  generateBundle(_opts, bundle) {
+    if (STAGE !== "launch") return;
+    const hits = [];
+    for (const [fileName, out] of Object.entries(bundle)) {
+      const text = out.type === "chunk" ? out.code
+        : typeof out.source === "string" ? out.source : null;
+      if (text === null) continue;
+      for (const m of text.matchAll(/\[(MIKE-NOTE|OPS)\]/g)) {
+        hits.push(`${fileName}  ${m[0]}  …${text.slice(Math.max(0, m.index - 40), m.index + 60).replace(/\s+/g, " ")}…`);
+      }
+    }
+    if (hits.length) {
+      this.error(
+        "DEVELOPMENT MARKERS IN A LAUNCH BUNDLE — " + hits.length + " hit(s). "
+        + "These are Mike's notes to Ops and Ops' answers to him; neither may "
+        + "reach a visitor. Read the [L2/L5] headers in src/lib/visitor-prose.js "
+        + "and src/routes/exhibit/RecordEntry.jsx." + NL + "  " + hits.join(NL + "  ")
+      );
+    }
+  },
+};
+
 export default defineConfig({
   define: {
     __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
@@ -315,7 +361,7 @@ export default defineConfig({
       publicPaths: [...publicPlacements()].sort(),
     }),
   },
-  plugins: [hrVaultAudio, revealPublic, wbPlacement, opsNotesStrip, heldChunkGuard, react(), cloudflare()],
+  plugins: [hrVaultAudio, revealPublic, wbPlacement, opsNotesStrip, heldChunkGuard, devMarkGuard, react(), cloudflare()],
   build: {
     rollupOptions: {
       output: {
