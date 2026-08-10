@@ -86,6 +86,38 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 ART = os.path.join(REPO, "public", "robots", "art")
 
+# ═══ [2026-08-10] THE FOUR WING COVERS ARE HAND-AUTHORED. THIS TOOL IS FENCED.
+#
+# MIKE'S RULING, 2026-08-10: "all four wing covers are now hand-authored.
+# make_unit_covers.py is retired for these paths."
+#
+# THE TOOL IS NOT DELETED, ON THE SAME RULING. Everything below it — the
+# geometry lifted from make_robots_cover.py, the silhouette cut, the spill, the
+# per-cover tracking solve — is the record of how the series was built and is
+# the only written form of it. What is retired is its AUTHORITY over these four
+# files, not its account of them.
+#
+# IT REFUSES RATHER THAN SKIPS, AND THAT IS THE WHOLE POINT OF THE FENCE. A skip
+# prints a line nobody reads and exits 0, so a run looks like it worked and the
+# hand-authored art is still on disk by luck. A raise stops the run and names
+# the ruling, so the next person to reach for this tool finds out WHY before
+# they find out THAT.
+#
+# `wbr-cover-logo.png` is in the list and is not in UNITS — it is
+# make_robots_cover.py's output. It is fenced here anyway because the ruling
+# names four covers, and a fence that only lists what a tool happens to write
+# today stops being a fence the first time somebody adds a row to UNITS.
+HAND_AUTHORED = frozenset({
+    "portal-cover.png",
+    "mgk-viiip-cover.png",
+    "mgk-niac-cover.png",
+    "wbr-cover-logo.png",
+})
+
+
+class HandAuthoredCover(RuntimeError):
+    """This tool may not write a cover Mike authored by hand."""
+
 # ---- constants lifted verbatim from make_robots_cover.py --------------------
 S = 1200                      # square master; the deck reads it small
 PAPER = (217, 213, 202)       # --wb-bg
@@ -185,17 +217,25 @@ UNITS = [
     # the cut takes the object and leaves the shadow, and the bright ABEAL plate
     # comes back as a filled hole rather than as a threshold exception.
     ("MGK-VIIIp", "reference/photos/front_full.png", "mgk-viiip-cover.png", 70),
-    # [P2 2026-08-05] THE PORTAL IS AN ALBUM NOW AND ALBUMS HAVE COVERS.
-    # It is not a unit, so Template A does not govern it — but it is a door into
-    # a unit, and a cover built by any other hand would be the one album in the
-    # wing that did not share the theme.
-    # THE BADGE IS THE APERTURE ITSELF — the round glass on the front of the
-    # portable, carrying the machine's own opening beat. `art/viiip.png` is the
-    # composite this wing already shows as the ninth plate of the portable's
-    # Image Archive: the framebuffer sampled at the labelled beat "the mark
-    # lands" and placed into the front-view photograph at the measured portal
-    # aperture. Cropped to the glass, it is a lit round door with the machine's
-    # own words in it, inside the cover's own ring. Nothing about it is new.
+    # ═══ [2026-08-10] THE PORTAL COVER IS HAND-AUTHORED AND THIS RULE IS DEAD.
+    # MIKE'S RULING: the four wing covers were made by Mikey, UX has passed
+    # them, and this tool is retired for those paths. THE COVER IS NOT DERIVED
+    # FROM `art/viiip.png` AND NOTHING IS DERIVED FROM ANYTHING — each of the
+    # four is its own picture, and THEY MAY DIFFER FROM ONE ANOTHER. That is
+    # the substantive change, not a bookkeeping one: everything in this file
+    # below the fence exists to stop the four drifting apart, because "one
+    # theme" was a claim about shared geometry. A hand may now do what it likes
+    # with any one of them, and no constant here has a vote.
+    # THE PASSAGE THIS REPLACES CLAIMED THE BADGE WAS A CROP OF `art/viiip.png`
+    # at (570, 365, 1030, 825) — the aperture with the machine's opening beat
+    # in it. That was true of the generated cover and is false of Mikey's. The
+    # same claim was on the Portal's provenance row and in `portal.js`, and all
+    # three were struck together; the crop box is kept, commented, on the rule
+    # below, because a retired recipe is worth more written down than deleted.
+    # THE TWO REJECTED PLATES BELOW ARE KEPT AND ARE STILL WORTH READING: they
+    # record two live defects in the plate set (M2's mirrored photograph, M7's
+    # compositing asset), which is a finding about the ARCHIVE and does not
+    # expire with the recipe that found it.
     # TWO OTHER PLATES WERE RENDERED FOR THIS SLOT AND BOTH WERE REJECTED, which
     # is worth writing down because both look right in a file listing:
     #   · `front_screen.png`, the front glass lit — the firmware actually
@@ -208,7 +248,10 @@ UNITS = [
     #     COMPOSITING ASSET, a bezel around a knocked-out white rectangle, which
     #     is exactly what OPEN_ACTIONS M7 says about it. In a disc it reads as a
     #     white square on black.
-    ("PORTAL", "art/viiip.png", "portal-cover.png", (570, 365, 1030, 825)),
+    # [2026-08-10] COMMENTED OUT, NOT DELETED — the recipe is the record of how
+    # the generated Portal cover was made, and the fence above would refuse it
+    # anyway. Restoring this line does not restore the tool's authority.
+    # ("PORTAL", "art/viiip.png", "portal-cover.png", (570, 365, 1030, 825)),
 ]
 
 
@@ -314,6 +357,21 @@ def set_tracked(d, text, f, y, fill, measure):
 
 
 def build(model, src_rel, out_name, focal):
+    # The fence, before a single pixel is rendered — see HAND_AUTHORED above.
+    if out_name in HAND_AUTHORED:
+        raise HandAuthoredCover(
+            "REFUSED: %s is hand-authored and this tool may not write it.\n"
+            "  Mike's ruling, 2026-08-10: \"all four wing covers are now "
+            "hand-authored.\n"
+            "  make_unit_covers.py is retired for these paths.\"\n"
+            "  Fenced: %s\n"
+            "  Nothing was written. If a cover genuinely needs re-generating, "
+            "that is a\n"
+            "  ruling to get first, not a line to delete."
+            # ASCII separator deliberately: this message is read in a Windows
+            # console at cp1252, where a middot prints as `?`.
+            % (out_name, ", ".join(sorted(HAND_AUTHORED))))
+
     canvas = Image.new("RGB", (S, S), PAPER)
     d = ImageDraw.Draw(canvas)
 

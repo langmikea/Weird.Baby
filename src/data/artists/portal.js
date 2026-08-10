@@ -48,13 +48,18 @@
    index `Robots.jsx` splices it back in at, so the album Mike put second is
    second the moment the door is open, and the public deck simply closes up.
 
-   THE COVER IS THE WING'S OWN TEMPLATE, third of four, and its badge is THE
-   APERTURE ITSELF: the round glass on the front of the portable carrying the
-   machine's own opening beat, cropped out of `art/viiip.png` — the composite
-   this wing showed as the ninth plate of the portable's Image Archive. A lit
-   round door with the machine's words in it, sitting inside the cover's own
-   ring. Built by `tools/make_unit_covers.py`, so it cannot drift from the
-   other three.
+   [2026-08-10] THE COVER IS HAND-AUTHORED. Mike's ruling: the four wing covers
+   were made by Mikey, UX has passed them, and `tools/make_unit_covers.py` is
+   retired for those paths — it raises rather than writes. The cover carries the
+   album's name and the strapline, and that is the whole of what is declared
+   about it (`provenance/assets-declare.mjs`).
+   THE THREE THINGS THIS PARAGRAPH USED TO SAY ARE ALL FALSE NOW, and they are
+   named rather than quietly replaced: that the badge was the aperture cropped
+   out of `art/viiip.png`; that the cover was built by that tool; and that it
+   therefore "cannot drift from the other three". THE FOUR MAY NOW DIFFER FROM
+   ONE ANOTHER — a hand authored each one, and the shared-geometry guarantee
+   went with the generator. That is the ruling, not a regression.
+   `art/viiip.png` is untouched and still on disk; nothing is derived from it.
    TWO BADGES WERE BUILT FOR THIS SLOT BEFORE IT AND BOTH WERE REJECTED, which
    is recorded because both read as obvious choices from a file listing. The
    front glass lit (`front_screen.png`) is the plate M2 says is MIRRORED —
@@ -93,7 +98,7 @@ export const PORTAL_ALBUM = {
   tags: ["portal", "twin", "firmware", "interactive", "mgk", "viiip"],
   art: "/held/robots/art/portal-cover.png",
   accent: null,
-  viewerPoster: "/held/robots/art/viiip.png",
+  viewerPoster: "/held/robots/art/viiip-v2.png",
   viewerPosterCaption:
     "MGK-VIIIp — the glass carrying the machine's own opening beat.",
   tracks: [

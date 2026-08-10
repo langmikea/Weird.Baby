@@ -260,7 +260,12 @@ FACE("viiip.firmware", "TECHNICAL SPECIFICATIONS (MGK-VIIIp) — the machine's o
 R("portal.album", "THE PORTAL — the album: the door, the feed controller, and the questions about it.",
   "surface", "src/data/artists/portal.js", "LIVE", null, "HELD",
   { deps: ["Mike's ruling on when the Portal opens"],
-    assets: ["/held/robots/art/portal-cover.png", "/held/robots/art/viiip.png"],
+    /* [2026-08-10] THE POSTER MOVED TO `viiip-v2.png` AND THIS ROW MOVED WITH
+       IT. `portal.js`'s `viewerPoster` is the only reason this row ever named
+       the plate; when the call site was versioned the row went one round saying
+       the album's asset was a file the album no longer draws. The cover stays —
+       it is Mikey's hand-authored sleeve and this album is what draws it. */
+    assets: ["/held/robots/art/portal-cover.png", "/held/robots/art/viiip-v2.png"],
     note: "Held from launch. The album is a dynamic import Robots.jsx asks for only behind the password on /admin; the deck closes up to four albums without it, and the splice index is PORTAL_AT so the position Mike gave it survives the hold." });
 R("portal.door", "THE PORTAL — the first track, and the way in.",
   "surface", "src/data/artists/portal.js", "LIVE", null, "HELD",
