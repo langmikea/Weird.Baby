@@ -50,12 +50,12 @@ import { launched } from "../lib/placement.js";
 /* [D1 2026-08-06] TWO OF THIS ROOM'S ANSWERS ARE THE HOUSE'S, NOT THE BOOTH'S.
    "Who keeps this place?" was retyped onto /wb's ABOUT THE ARTIST register at
    P9, so one sentence about the keeper existed in two rooms with no link
-   between the copies. Both now read `KEEPER`. `CONTACT` is declared beside it
-   for the same reason — see src/data/house-copy.js. */
-import { KEEPER, CONTACT, AFFILIATION, USE_RIGHTS } from "../data/house-copy.js";
+   between the copies. Both now read `KEEPER`.
+   [D 2026-08-11] `CONTACT` was the third and is gone with the address. */
+import { KEEPER, AFFILIATION, USE_RIGHTS } from "../data/house-copy.js";
 /* [F1 2026-08-06] the two fixed ends of the FAQ format, which this room is the
    original of and which four wing FAQs now print too — see faq-face.js. */
-import { FAQ_HEAD, SIGN_OFF, ADDRESS } from "../data/faq-face.js";
+import { FAQ_HEAD } from "../data/faq-face.js";
 
 /* ─── THE QUESTIONS ─────────────────────────────────────────────────────────
    Ordered the way a stranger meets the building: what is this, what does it
@@ -297,21 +297,10 @@ const FAQ = [
        "you come back, there will be more than there was. [PAPA] — how often " +
        "new work lands, and whether that is a promise, is Papa's to say.",
   },
-  {
-    /* [D2 2026-08-06] MIKE'S OWN WORDING, RULED, AND THE TWO SENTENCES BEHIND
-       IT ARE STRUCK. "It is read by the person who keeps the place" restated
-       the keeper answer four rows up — the page explaining what the page
-       already said, which is the shape B5 struck twice on this same list. And
-       "Corrections are especially welcome — if we have got something wrong
-       about a record, a date, or a person, we would rather know" was the museum
-       advertising its own diligence, which is the subject Doctrine 11 keeps off
-       the glass and which the WAL poster's foot was struck for one round ago.
-       He asked for plain and no ceremony; the answer is now one line and the
-       address is the whole of it. Declared in house-copy.js, not here — see
-       the import at the head of this file. */
-    q: "How do I reach you?",
-    a: CONTACT,
-  },
+  /* [D 2026-08-11] "How do I reach you?" IS DELETED. Its answer was
+     `CONTACT`, whose only payload was the address Mike has struck
+     sitewide; with the address gone there is no answer left to give,
+     and the booth publishes no contact route now. */
 ];
 
 /* ═══ [M23a 2026-08-04] THE HOOK IS THE TITLE. BOTH OBJECTS ARE DELETED ═════
@@ -425,11 +414,9 @@ export default function InfoBooth() {
 
         <div className="sheet-rule" />
 
-        {/* [F1 2026-08-06] and the sign-off, for the same reason. */}
-        <p className="sheet-contact">
-          {SIGN_OFF}{" "}
-          <a href={"mailto:" + ADDRESS}>{ADDRESS}</a>
-        </p>
+        {/* [D 2026-08-11] THE SIGN-OFF IS DELETED, sitewide, on Mike's ruling —
+            no replacement. The rule above it is kept: it closes the question
+            list, which it did before the sign-off was ever added. */}
         {/* One quiet way back, in the prose, for a visitor who has read to the
             bottom and does not want to travel back up to the bar. Not a second
             exit competing with the first — a sentence. */}

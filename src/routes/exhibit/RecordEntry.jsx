@@ -289,11 +289,25 @@ export default function RecordEntry({
   useEffect(() => {
     const el = headRef.current;
     if (!el || typeof window === "undefined") return;
-    const top = el.getBoundingClientRect().top;
-    if (top >= 0 && top < window.innerHeight * 0.5) return;
     const still = window.matchMedia
       && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    el.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "start" });
+    /* REDUCED MOTION GETS THE POSITION AND NOT THE JOURNEY, and it must be
+       `instant` rather than `auto`: the document sets `scroll-behavior: smooth`
+       in CSS, so `auto` would honour that and glide anyway. */
+    if (still) { el.scrollIntoView({ behavior: "instant", block: "start" }); return; }
+    /* THE BEAT BETWEEN THE TWO MOVEMENTS. The effect already runs after React
+       has committed the expanded record, so the layout is settled by the time
+       we are here; this pause is not waiting for the DOM, it is the pause that
+       makes the expansion and the glide read as two deliberate acts instead of
+       one lurch. 140ms — long enough to see the record has opened, short enough
+       that nobody is waiting for it.
+       A TIMER RATHER THAN `requestAnimationFrame`, deliberately: rAF does not
+       fire in a tab that is not being painted, and a record opened in a
+       background tab would then sit un-glided with no error anywhere. */
+    const t = setTimeout(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 140);
+    return () => clearTimeout(t);
   }, []);
 
   const dateline = entryDateline(entry, epoch);

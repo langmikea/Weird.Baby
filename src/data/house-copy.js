@@ -56,15 +56,22 @@ export const KEEPER =
   "pays to be managed, and only zero-invoice services are accepted. " +
   "That's the deal, and it never changes.";
 
-/* HOW TO REACH THE PLACE.
-   [D2 2026-08-06] MIKE'S OWN WORDING, ruled and replacing the booth's previous
-   three-sentence answer. What went with it: "It is read by the person who keeps
-   the place" (the keeper answer four rows above already says who that is) and
-   "Corrections are especially welcome — if we have got something wrong about a
-   record, a date, or a person, we would rather know" — struck on his
-   instruction, no follow-on sentences. */
-export const CONTACT =
-  "Write to the guy running the place: papa@weird.baby.";
+/* ═══ [D 2026-08-11] THE ADDRESS IS STRUCK SITEWIDE, AND `CONTACT` WITH IT ═══
+   MIKE'S RULING: the sign-off line and the house address are struck
+   everywhere they appear, no replacement. The literals are not repeated in
+   these notes either, so a grep for the struck address finds nothing.
+
+   `CONTACT` HELD THE ADDRESS AS ITS ONLY PAYLOAD — one sentence that pointed
+   at it and said nothing else — so there was no version of it left once the
+   address went. It is deleted rather than trimmed: what remains after cutting
+   the address out is a sentence with its object removed, and an answer that
+   no longer answers is worse than an absent one.
+   WHAT WENT WITH IT, NAMED HERE BECAUSE IT IS THE COST: the FAQ row "How do I
+   get in touch?" is gone from `/robots` and from `/wal`, which were its only
+   two callers. THE MUSEUM NOW PUBLISHES NO WAY TO REACH IT. That is the
+   ruling's direct consequence and not a side effect of how it was carried out.
+   `KEEPER` above is untouched and still says who runs the place; it has never
+   carried an address. */
 
 /* WHAT THE HOUSE IS TO THE ARTISTS IT SHOWS.
    [F2 2026-08-06] Written for the booth and now printed in `/wal`'s own FAQ as
@@ -92,15 +99,13 @@ export const USE_RIGHTS =
   "doubt, write; the address is at the bottom of this page. [PAPA] — a " +
   "plain licence for the museum's own images is Papa's to set.";
 
-/* THE SIGN-OFF THAT CLOSES AN FAQ.
-   [F1 2026-08-06] MIKE, ruling the FAQ format for the third time: "the booth's
-   shape is a short credo block, the word Questions, the question list, A
-   SIGN-OFF LINE WITH THE ADDRESS, and the exit. Nothing else." The booth typed
-   these two words inline; every wing FAQ now closes the same way, so they are
-   declared here with the passages they belong beside.
-   TWO LITERALS RATHER THAN ONE ASSEMBLED FROM THE OTHER, deliberately — see
-   this file's own boundary note above. A passage built by interpolation falls
-   off the provenance sweep silently, which is a worse defect than the address
-   appearing in two sentences that both have to say it. */
-export const SIGN_OFF = "Thank you for coming.";
-export const ADDRESS = "papa@weird.baby";
+/* ═══ [D 2026-08-11] THE SIGN-OFF IS DELETED. MIKE'S RULING, NO REPLACEMENT ══
+   `SIGN_OFF` and `ADDRESS` stood here and closed every FAQ in the building — the booth's and each wing's —
+   through `faq-face.js`, which re-exported them to `Exhibit.jsx` and
+   `InfoBooth.jsx`. Both constants are gone, both re-exports with them, and the
+   paragraph that printed them is removed from both renderers.
+   THE F1 RULING THIS REVERSES IS NAMED RATHER THAN QUIETLY DROPPED: on
+   2026-08-06 Mike set the FAQ's shape as "a credo block, the word Questions,
+   the question list, A SIGN-OFF LINE WITH THE ADDRESS, and the exit." Today's
+   ruling strikes the fourth of those five. An FAQ now closes on its last
+   question and its exit. */

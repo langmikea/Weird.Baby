@@ -71,7 +71,7 @@ import { worthAListenFacts } from "./worth-a-listen-facts.js";
 /* [F2 2026-08-06] the wing's FAQ — the house's own format and the house's own
    standing passages. See src/data/faq-face.js and src/data/house-copy.js. */
 import { faqFace } from "../faq-face.js";
-import { CONTACT, AFFILIATION, USE_RIGHTS } from "../house-copy.js";
+import { AFFILIATION, USE_RIGHTS } from "../house-copy.js";
 
 /* ---- the per-artist source of truth ----------------------------------------
    `songs`   : [{ title, slug, ytId, note, card }]
@@ -1884,8 +1884,8 @@ const HOUSE_ALBUM = {
           line: "The pictures are the artists' own public imagery, logged " +
                 "file by file with where it came from, and they come down the " +
                 "day any of them asks." },
-        { title: "How do I get in touch?",
-          line: CONTACT },
+        /* [D 2026-08-11] "How do I get in touch?" IS DELETED — its answer was
+           `CONTACT`, and the address it carried is struck sitewide. */
       ]),
     },
   ],

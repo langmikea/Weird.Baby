@@ -16,7 +16,7 @@ import RecordIndexRow from "./RecordIndexRow.jsx";
 import { AccountCard, RegisterTable, LedgerSheet } from "./FoundationObjects.jsx";
 import { stateOfRow as fndState } from "../../lib/foundation-state.js";
 /* [F1 2026-08-06] the FAQ format's two fixed ends — see src/data/faq-face.js */
-import { FAQ_HEAD, SIGN_OFF, ADDRESS } from "../../data/faq-face.js";
+import { FAQ_HEAD } from "../../data/faq-face.js";
 import {
   entryStamp, groupByPeriod, shouldBand, docState,
 } from "../../lib/record-model.js";
@@ -2154,10 +2154,14 @@ function FaceFlow({ flat, children, deps, footer }) {
    contradiction of F6's marked door with no anchor: F6's rule is that a door
    with no address supplied is not made into an `<a>`. Here the address IS the
    sentence. */
-function FaqEntries({ entries, state }) {
+function FaqEntries({ entries, state, head = true }) {
   return (
     <div className="vp-faq" data-stage-split="row">
-      <h2 className="vp-faq-head" data-stage-split="row">{FAQ_HEAD}</h2>
+      {/* [F1 2026-08-11] the heading is a face flag now — robots prints no
+          "Questions"; the booth and the other three wings still do. */}
+      {head && (
+        <h2 className="vp-faq-head" data-stage-split="row">{FAQ_HEAD}</h2>
+      )}
       {entries.map((en, i) => (
         <details className="vp-faq-q" key={en.title || i}>
           <summary>{en.title}</summary>
@@ -2176,10 +2180,8 @@ function FaqEntries({ entries, state }) {
           </div>
         </details>
       ))}
-      <p className="vp-faq-signoff" data-stage-split="row">
-        {SIGN_OFF}{" "}
-        <a href={"mailto:" + ADDRESS}>{ADDRESS}</a>
-      </p>
+      {/* [D 2026-08-11] THE SIGN-OFF LINE IS DELETED, sitewide, on Mike's
+          ruling — no replacement. The FAQ closes on its last question. */}
     </div>
   );
 }
@@ -4570,7 +4572,8 @@ export default function Exhibit({ artist, open = null }) {
                              and for why an accordion is not the hidden
                              information M1 forbids. */
                           if (isFaq) return (
-                            <FaqEntries entries={list} state={fndState} />
+                            <FaqEntries entries={list} state={fndState}
+                                        head={face.faqHead !== false} />
                           );
                           if (!isLog) return (
                             <ol className="vp-face-entries" data-stage-split="row">

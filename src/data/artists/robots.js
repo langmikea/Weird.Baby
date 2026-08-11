@@ -162,7 +162,6 @@ import RobotsExhibitFlow from "../../routes/robots/RobotsExhibitFlow.jsx";
    word (P3) and rewriting one under cover of a refactor is the thing D1
    forbids. He has now said it: both rooms carry his own D2 wording, and no
    follow-on sentences. One import, exactly as M66 predicted. */
-import { CONTACT } from "../house-copy.js";
 /* [V1 2026-08-06] EVERY GOVERNED PICTURE IN THIS FILE GOES THROUGH `placed()`.
    The addresses below are the PUBLIC ones — the address each picture will have
    the day the Record delivers it — and the resolver computes the stage door's
@@ -905,6 +904,8 @@ const WBR_TRACKS = [
            of the four is said better by an object the visitor can already reach.
            The face is built by `faqFace()` now — see src/data/faq-face.js for
            why the fields are absent rather than merely unset. */
+        /* [F1 2026-08-11] no "Questions" heading on this face — Mike's
+           ruling. The flag is declared in src/data/faq-face.js. */
         face: faqFace("WEIRD.BABY ROBOTS", [
           /* ==== [P3 2026-08-05] THE QUESTIONS ARE MIKE'S ==================
              MIKE: "THE ROBOTS FAQ — replace with the FAQ template and Mike's
@@ -925,34 +926,21 @@ const WBR_TRACKS = [
             { title: "Where do I start?",
               line: "Finish the FAQ, then follow The Record.",
               note: "" },
-            /* [P3] THE SLOT IS HELD AND NOTHING IS WRITTEN IN IT. Mike: "Mike
-               will vibe this; the only seed is 'Purveyors of the Weird.Baby'.
-               Backlog it, do not write it."
-               BOTH FIELDS CARRY THE MARKER, AND THAT IS A MECHANISM RATHER THAN
-               A FLOURISH. `scrubFace` keeps an entry whose TITLE survives even
-               when its line does not (Exhibit.jsx :116) — so marking the answer
-               alone would print this question with nothing under it, which is a
-               question whose published answer is that the answer has not been
-               written, which is the exact row this wing deleted at CS. Marked in
-               both, the entry renders NOTHING and the slot stays in the data,
-               where Mike's list of what he owes actually lives. Same path
-               /foundation's billionaires answer takes to the same end. M57. */
-            { title: "[PAPA] What is Weird.Baby Robots?",
-              line: "[PAPA] Mike will vibe this; the only seed is " +
-                    "“Purveyors of the Weird.Baby”.",
-              note: "" },
-            /* [P3] HIS FIRST SENTENCE SHIPS; HIS SECOND IS A DESCRIBED SLOT.
-               "Leave the slot, describe it, write nothing" — so the marker sits
-               INSIDE the sentence that names what is missing, and the scrubber
-               takes the whole clause. A visitor reads the hardware answer and
-               stops. What goes in the slot is preserved for Mike and printed
-               nowhere. */
+            /* [F5 2026-08-11] THE HELD "What is Weird.Baby Robots?" SLOT IS
+               DELETED. Mike: kill. It was a question with both fields marked
+               [PAPA] so it rendered nothing to a visitor and carried his seed
+               ("Purveyors of the Weird.Baby") in the data as a note to himself.
+               The slot, the seed and the note all go; the backlog entry it was
+               standing in for is his to keep elsewhere if he still wants it. */
+            /* [F5 2026-08-11] THE [PAPA] SECOND CLAUSE IS DELETED. Mike: kill.
+               It described a slot rather than filling one — "historical
+               accounts, technical specifications, people involved" wanting
+               "the house's usefully-useless humour" — and never reached a
+               visitor. His first sentence is untouched and is now the whole
+               answer. */
             { title: "Is this stuff real?",
               line: "The hardware is — you can hold it at least, and it is " +
-                    "heavier than you expect. [PAPA] Everything else — " +
-                    "historical accounts, technical specifications, people " +
-                    "involved — wants words that SOUND favourable and are not: " +
-                    "the house's usefully-useless humour.",
+                    "heavier than you expect.",
               note: "" },
             { title: "Does it work?",
               line: "See “Is this stuff real?”",
@@ -967,22 +955,35 @@ const WBR_TRACKS = [
                names a Weird.Baby account on any platform, so the sentence is
                his instruction and the address is his to supply. It is not
                invented here and it is not quietly dropped either — M60. */
+            /* [F2 2026-08-11] THE TRACKING CLAUSE IS DELETED, no replacement.
+               Mike's ruling. What went: "those platforms track you, this site
+               does not, and following one out of here is leaving the building."
+               The answer keeps both of its instructions and says nothing about
+               what the platforms do. */
             { title: "Can I buy one?",
               line: "Monitor the website for availability. Follow us on social " +
-                    "media — those platforms track you, this site does not, and " +
-                    "following one out of here is leaving the building.",
+                    "media.",
               note: "" },
+            /* [F3 2026-08-11] MIKE'S OWN ANSWER, REPLACING THE PORTAL ONE.
+               His words exactly. It uses `lines` rather than `line` because
+               `FaqEntries` already prints an array as separate paragraphs —
+               which is what a two-beat answer needs, and it costs no new CSS
+               and no newline handling.
+               ON "THREE LINES AS WRITTEN": his packet wraps at ~62 characters
+               throughout, and his second line is 55 — so the break before
+               "right now." is his editor's wrap and not a third beat. Set as
+               two paragraphs. If he meant a hard break mid-sentence, this is
+               the one line to change and it is one array element. */
             { title: "Can I try one?",
-              line: "We need to construct a dynamic virtual interface to the " +
-                    "MGK System Portal before we can even consider it — but " +
-                    "when we do, the answer is yes: available online, free to " +
-                    "all to partake.",
+              lines: ["Yes.",
+                      "Well, not now, but soon. Hopefully. That's all I can " +
+                      "say right now."],
               note: "" },
-            /* [R1 2026-08-06] the house's own passage, imported — see the head
-               of this file. The bare address that stood here is gone. */
-            { title: "How do I get in touch?",
-              line: CONTACT,
-              note: "" },
+            /* [D 2026-08-11] "How do I get in touch?" IS DELETED. Its answer
+               was `CONTACT`, whose only payload was the address Mike has now
+               struck sitewide, and a question with no answer left is not a
+               row. The wing publishes no contact route now — named here so
+               the absence reads as a ruling rather than an omission. */
           /* ═══ [R7 2026-08-06] THE HOUSE FAQ TAKES THE BOOTH'S FORMAT ════════
              MIKE: "the Information Booth IS an FAQ under a better name and
              keeps that name for UX value. Sub-exhibits carry their own FAQs — a
@@ -998,7 +999,7 @@ const WBR_TRACKS = [
              with nothing under it. An accordion makes that MORE important, not
              less — a question that opens onto silence is worse than one printed
              above silence. */
-        ]),
+        ], { head: false }),
       },
 ];
 

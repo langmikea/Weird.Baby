@@ -2,7 +2,7 @@
    the rail on Mike's ruling. It is NOT unused: `RecordEntry.jsx` (twice) and
    `Exhibit.jsx`'s non-log entry lists still call it, so nothing was deleted
    from `record-model.js`. */
-import { evidenceOf } from "../../lib/record-model.js";
+import { evidenceOf, entryWeekday } from "../../lib/record-model.js";
 
 /* ===========================================================================
    [D4 2026-08-08] ONE ROW OF THE RECORD'S INDEX, LIFTED OUT OF `Exhibit.jsx`
@@ -63,11 +63,30 @@ export default function RecordIndexRow({ entry, unread, onOpen }) {
             four callers, and `entryDateline` still prints `Week 1 · Monday ·
             Record 001` at the head of the opened record — which is where a
             reader who wants the day is already looking. */}
+        {/* ═══ [C1 2026-08-11] THE WEEKDAY IS BACK, AND ONLY THE WEEKDAY ═════
+            MIKE'S RULING. Matching the deck to the headline's size (B3) took
+            height out of the row, and this is what the room is spent on.
+            IT IS NOT THE DATE COMING BACK. `17 AUG 26` was struck on
+            2026-08-10 for a measured reason — 71.97px of Courier Prime against
+            a 44px rail, so it wrapped to three lines on every dated row — and
+            it stays struck. `MON` is three characters against the four the
+            rail already carries for `0001`, so it costs the rail nothing.
+            THE FULL NAME IS CUT TO THREE HERE RATHER THAN IN THE MODEL:
+            `entryWeekday` returns `Monday` and four callers rely on that,
+            `entryDateline` among them — it prints `Week 1 · Monday · Record
+            001` at the head of the opened record and must keep the whole word.
+            The rail is the only surface that wants an abbreviation, so the
+            rail is where the abbreviating happens. */}
         <span className="vp-rec-mark" aria-hidden="true">
           {typeof en.no === "number" && (
             <b className="vp-rec-mark-no">
               {String(en.no).padStart(3, "0")}
             </b>
+          )}
+          {entryWeekday(en) && (
+            <i className="vp-rec-mark-day">
+              {entryWeekday(en).slice(0, 3).toUpperCase()}
+            </i>
           )}
         </span>
         <span className="vp-fe-body">

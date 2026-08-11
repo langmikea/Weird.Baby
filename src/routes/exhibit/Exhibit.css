@@ -1034,11 +1034,41 @@ body:has(.pb) .ex-root{padding-bottom:88px}
   /* where the pinned furniture ends: the fixed `.wb-bar`'s clearance plus the
      band. Every offset that has to clear both is derived from this one. */
   --ex-band-bottom:calc(52px + var(--ex-banner-h))}
-.ex-album-banner{display:grid;grid-template-columns:1fr auto 1fr;
-  align-items:baseline;gap:24px;padding:4px 32px 3px;
-  border-top:1px solid var(--wb-border);
-  position:sticky;top:52px;z-index:80;
-  background:var(--wb-bg);border-bottom:1px solid var(--wb-border)}
+/* ═══ [E 2026-08-11] THE WING TITLE TRAVELS THROUGH THE BAR'S CENTRE ════════
+   MIKE'S RULING: when "Weird.Baby Robots" scrolls up it slides OVER "ROBOTS"
+   in the centre of the bar, and must never obscure "Weird.Baby" on the left or
+   "GIFT SHOP" on the right.
+
+   WHAT IT DID BEFORE: `top: 52px` parked the whole band in a row of its own
+   directly beneath the fixed bar, and `z-index: 80` put it UNDER the bar's 90 —
+   so it could not reach the bar even in principle. It never overlapped
+   anything; it just took a second row of height forever.
+
+   THREE THINGS MAKE IT TRAVEL, AND THE THIRD IS THE ONE THAT KEEPS THE FLANKS.
+   (1) `top: 0` so it comes to rest on the bar rather than under it.
+   (2) `z-index: 95`, above the bar's 90, so the title is what you see.
+   (3) THE BAND STOPS PAINTING AND THE TITLE STARTS. A full-width background at
+       `top: 0` would cover the whole bar, flanks included — so the background
+       and both rules move OFF the band and onto `.ex-album-banner-title`,
+       which paints a plate exactly as wide as itself and no wider.
+
+   AND THE FLANKS ARE RESERVED BY CONSTRUCTION RATHER THAN BY ARITHMETIC. The
+   side tracks were `1fr`, which may shrink to zero when nothing is in them —
+   and the band's side tracks ARE empty, so a long title could have run the full
+   width and straight over both corners. They are `minmax(var(--ex-flank),1fr)`
+   now: the centre column can never grow into the reserved band, whatever the
+   title says, at any width. FURNITURE HOLDS STILL — the bar does not move or
+   resize; the title travels past it. */
+.ex-root{--ex-flank:132px}
+@media (max-width:699px){ .ex-root{--ex-flank:104px} }
+.ex-album-banner{display:grid;
+  grid-template-columns:minmax(var(--ex-flank),1fr) auto minmax(var(--ex-flank),1fr);
+  align-items:center;gap:12px;padding:0 32px;min-height:52px;
+  position:sticky;top:0;z-index:95;
+  background:transparent;pointer-events:none}
+/* the plate is the title's own, so nothing paints over the corners */
+.ex-album-banner-title{background:var(--wb-bg);padding:3px 14px;
+  border-radius:2px;pointer-events:auto}
 .ex-album-banner-title{grid-column:2;justify-self:center;text-align:center;
   font-family:'Syne',sans-serif;font-weight:700;font-size:var(--ex-banner-type);letter-spacing:.1em;text-transform:uppercase;color:var(--wb-gold);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .ex-album-banner-aux{grid-column:3;justify-self:end;min-height:1px}
@@ -1488,14 +1518,24 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    Times New Roman — which is the exact defect the rail's own width was just
    fixed for. `auto` takes the rail's width from the rail, where it is measured
    in the glyphs the rail actually sets. */
+/* ═══ [B1/B2 2026-08-11] THE DECK SITS UNDER THE HEADLINE, NOT UNDER THE RAIL.
+   MIKE'S RULING, and it reverses the 2026-08-10 one deliberately: the deck was
+   moved to full width to win back 60px of a 390px screen, and that was a PHONE
+   argument. Under the desktop-leads ruling it loses — a deck that starts at the
+   rail hangs off the left of the headline it belongs to, and on a wide screen
+   there is no width to win. It is `grid-column: 2` now, so it starts exactly
+   where the headline starts and the rail indents both.
+   THE ROW GAP GOES 3px -> 1px with it. The deck is the headline's second line,
+   not a second object under it, and at the same type size (B3) the leading
+   already does the separating. */
 .vp-rec-open{display:grid;grid-template-columns:auto 1fr;
-  gap:3px 16px;width:100%;text-align:left;background:none;
+  gap:1px 16px;width:100%;text-align:left;background:none;
   border:0;border-top:1px solid var(--wb-border);padding:12px 2px;cursor:pointer;
   color:inherit;font:inherit;transition:background .15s;
   /* one headline line + two summary lines + the padding above and below */
   min-height:calc(1.25em + 2 * 1.5 * var(--fs-small) + 24px);
   align-items:start}
-.vp-rec-open > .vp-rec-sum{grid-column:1 / -1}
+.vp-rec-open > .vp-rec-sum{grid-column:2}
 /* [A1 2026-08-06] ON PAPER A SURFACE IS RAISED BY GOING DARKER. The wash was
    `rgba(232,228,216,.05)` — light added at low alpha, which is a visible lift
    on charcoal and white-on-white on print stock, i.e. no affordance at all. */
@@ -1539,6 +1579,19 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 .vp-rec-mark-no{font-family:'Courier Prime','Courier New',monospace;
   font-weight:700;font-size:var(--fs-lead);line-height:1.05;
   letter-spacing:.02em;color:var(--wb-gold-lo);font-variant-numeric:tabular-nums}
+/* [C 2026-08-11] THE WEEKDAY, UNDER THE NUMBER. Three monospace characters at
+   `--fs-micro` against a rail already sized for four at `--fs-lead`, so it
+   cannot be what widens the rail — the constraint Mike set. `nowrap` is belt
+   and braces: `MON` has nowhere to break, but a rail that ever did break is
+   the defect the date was struck for and this says so out loud.
+   [C3] IT DROPS UNDER 700px. On a phone the rail's job is the number and the
+   headline needs every pixel to its right; the weekday is the first thing
+   worth losing, and the opened record still prints the whole word in its
+   dateline for anyone who wants it. */
+.vp-rec-mark-day{font-family:'Courier Prime','Courier New',monospace;
+  font-style:normal;font-size:var(--fs-micro);line-height:1.05;
+  letter-spacing:.06em;color:var(--wb-gold-mute);white-space:nowrap}
+@media (max-width:699px){ .vp-rec-mark-day{display:none} }
 /* [2026-08-10] `.vp-rec-mark-day` IS DELETED, not left dormant — the date is
    out of the index rail on Mike's ruling and `RecordIndexRow.jsx` no longer
    emits the element. The date itself is untouched in the data and still prints
@@ -1582,8 +1635,22 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    `--fs-body` (the base `.vp-fe-line`, NOT `--fs-small`), `--wb-dim` (same),
    `--wb-plain` at 1.4 leading and zero tracking (the `.vp-rec-index` override),
    `68ch` (that override widens the base's 56ch), and `.72` opacity with
-   `pre-line` (`.vp-rec-sum`). Every one of those is restated here. */
-.vp-rec-deck{font-family:var(--wb-plain);font-size:var(--fs-body);
+   `pre-line` (`.vp-rec-sum`). Every one of those is restated here.
+
+   [B3 2026-08-11] SIZE AND WEIGHT MOVED WITH THE INDEX'S, and they have to:
+   the ruling this rule exists to keep is that the deck does not change between
+   the two views, so a change to one is a change to both or the rule is broken
+   in the same edit that honours it. `--fs-small`, weight 400. */
+/* [B 2026-08-11] THE DECK IS DELIBERATELY *NOT* RESERVED, and that is a
+   judgement rather than an omission. Reserving it would only change the two
+   entries that have no deck — 004 and 005 — which are also the two with no
+   headline, and they are already the subject of an open ruling from the
+   previous packet. Adding two blank lines to a row that is already blank makes
+   that ruling's case louder without answering it, and it was not asked for.
+   The entries Mike named (001 -> 002 -> 003) all carry a two-line deck, so the
+   headline reserve above is the whole of what that walk needed. */
+.vp-rec-deck{font-family:var(--wb-plain);font-size:var(--fs-small);
+  font-weight:400;
   line-height:1.4;letter-spacing:0;max-width:68ch;color:var(--wb-dim);
   opacity:.72;white-space:pre-line;margin:var(--rec-hug) 0 0}
 
@@ -1638,7 +1705,16 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 
 .vp-rec-index .vp-fe-title{font-family:var(--wb-plain);font-weight:700;
   letter-spacing:.04em}
+/* [B3 2026-08-11] THE DECK MATCHES THE HEADLINE'S SIZE AND DIFFERS BY WEIGHT.
+   MIKE'S RULING. It was the wrong way round and had been since the deck was
+   built: the headline takes `--fs-small` (13.04px at 390) from `.vp-fe-title`
+   and the deck took `--fs-body` (15.34px) from `.vp-fe-line`, so the SUMMARY
+   was set larger than the TITLE it summarises. Both are `--fs-small` now.
+   THE CONTRAST MOVES TO WEIGHT, which is the firmer instrument anyway: the
+   headline is already 700, and the deck is pinned to 400 rather than left to
+   inherit, so nothing upstream can quietly make them the same. */
 .vp-rec-index .vp-fe-line{font-family:var(--wb-plain);
+  font-size:var(--fs-small);font-weight:400;
   line-height:1.4;letter-spacing:0;max-width:68ch}
 /* AND NO PADDING RULE HERE, WHICH IS A CORRECTION THE MEASUREMENT MADE. The
    first cut of this block set `.vp-rec-index .vp-fe{padding:7px 0}` reaching for
@@ -1791,16 +1867,28 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    inside `prefers-reduced-motion: no-preference`, so reduced motion is the
    ABSENCE of these rules rather than an override of them — there is no state
    in which a half-applied animation can leave an element at opacity 0. */
-@media (prefers-reduced-motion:no-preference){
-  .vp-rec-headline,.vp-rec-lead,.vp-rec-sects,.vp-rec-still{
-    animation:vp-rec-arrive .34s cubic-bezier(.22,.9,.3,1) both}
-  .vp-rec-lead{animation-delay:.05s}
-  .vp-rec-sects{animation-delay:.10s}
-}
-@keyframes vp-rec-arrive{
-  from{opacity:0;transform:translateY(6px)}
-  to{opacity:1;transform:none}
-}
+/* ═══ [A1 2026-08-11] THE ARRIVAL ANIMATION IS DELETED, ON MIKE'S RULING ═════
+   "The content in front of me must stay static TO THE PIXEL — no shift of
+   position, no change in brightness, no transition on the content itself."
+
+   WHAT WAS HERE: `vp-rec-arrive`, a .34s rise-and-fade on the headline, the
+   lead, the sections and the still, staggered .05s apart. It did BOTH of the
+   things the ruling forbids — `opacity: 0 -> 1` is a change in brightness and
+   `translateY(6px) -> none` is a shift of position — to four blocks of the
+   record at once, every time one was opened or walked to.
+
+   IT IS DELETED RATHER THAN REDUCED. A shorter or fainter version is the same
+   thing quieter, and the ruling is not about the amount. The motion the house
+   keeps is the GLIDE, which moves the PAGE and not the words on it: the record
+   expands with nothing shifting, and only then does the whole of it travel to
+   the top. One movement, and it belongs to the viewport rather than to the
+   type. The order and the beat are in `RecordEntry.jsx`'s mount effect.
+
+   NOTHING REPLACES THE `prefers-reduced-motion` GUARD THAT WRAPPED IT, because
+   there is no longer anything here to guard: with no animation declared there
+   is no state in which a half-applied one can strand an element at opacity 0,
+   which was the reason the guard was written as an absence in the first place.
+   The glide honours the same preference in the effect, where it now lives. */
 
 /* ================= [P2 2026-08-02] THE CONTROL ROOM =======================
    Period instrument register: panel steel, engraved-plate legends, the house
@@ -3964,8 +4052,31 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    top step (R5b added it, P7's rule for adding one) — a record entry's
    headline is the largest thing on its page and should be, because the
    fifteen-second read is the headings and this is the first of them. */
+/* ═══ [B 2026-08-11] FURNITURE HOLDS STILL: THE HEADLINE IS TWO LINES TALL ══
+   MIKE'S RULING: walking 001 -> 002 -> 003, the headline, the dateline and the
+   section labels sit in the same place at the same size every time; only the
+   Detailed Report's content may change shape.
+
+   MEASURED AT 1280 BEFORE THE FIX: the dateline (486.9) and the headline
+   (512.8) were ALREADY invariant across all six entries, and so was the
+   headline's size. The FIRST SECTION LABEL was not — 598.1 on 001 and 002,
+   621.2 on 003. The whole of that 23.1px is one line of headline: 003's
+   "DATA EXTRACTED - Weekend Robots Anomaly" wraps to two lines where 001's and
+   002's fit on one, and everything below it moved down by exactly one
+   line-height.
+
+   SO THE BOX IS RESERVED RATHER THAN THE TEXT CONSTRAINED. `min-height` of two
+   lines means a one-line headline and a two-line headline occupy the same
+   space, and the sections below start at the same y either way. It is
+   `min-height` and not `height`: a headline that ever needs a third line grows
+   rather than being clipped, and that entry — and only that entry — would sit
+   one line lower. Nothing is truncated to hold a grid still.
+   THE COST, STATED: 001 and 002 carry one blank line under their headline.
+   That is what the ruling buys, and at 34ch the two-line case is the common
+   one rather than the exception. */
 .vp-rec-headline{margin:0;font-family:var(--wb-plain);
   font-weight:700;font-size:var(--fs-head);line-height:1.2;
+  min-height:2.4em;
   letter-spacing:-.006em;color:var(--wb-gold);max-width:34ch}
 
 /* ---- THE HOOK. A photograph the museum already owns, and a door into the
