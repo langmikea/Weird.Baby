@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
    stamp, and `Exhibit.jsx`'s short head still draws one too.
    `entryWeekday` arrives for the rail — the same call `RecordIndexRow` makes,
    cut to three characters the same way and for the same reason. */
-import { entryStamp, entryWeekday } from "../../lib/record-model.js";
+import { entryStamp, entryWeekday, evidenceOf } from "../../lib/record-model.js";
 import RecordAttachments from "./RecordAttachments.jsx";
 import RecordNav from "./RecordNav.jsx";
 
@@ -236,7 +236,12 @@ export default function RecordEntry({
   /* [J1 2026-08-11] `epoch` is no longer destructured. It fed `entryDateline`
      and nothing else here; the call sites still pass it and that is harmless —
      what would not be harmless is a name bound to nothing. */
-  entry, list, open, openLink, onOpen, onClose, twinEvent, read,
+  /* [K1 2026-08-11] `land` — did the reader arrive here from the INDEX?
+     True only for an index row's click; false for every transport mark and
+     every cursor key. See the effect below and `landOpen`/`walkTo` in
+     `Exhibit.jsx`. Defaults false so a caller that has not been taught the
+     distinction gets the STILL behaviour rather than the jumping one. */
+  entry, list, open, openLink, onOpen, onClose, twinEvent, read, land = false,
 }) {
   /* the one piece of state on this surface, and it is a door's overlay:
      { mode:"record", i } | { mode:"held", kind, label, note } */
@@ -293,11 +298,41 @@ export default function RecordEntry({
      `scroll-margin-top` is the platform's own way to say "stop short", and it
      travels with the element rather than with an assumption about the page.
 
-     WHAT IS UNCHANGED: it still only moves the page when it has to (the guard
-     below), it still drops `smooth` under `prefers-reduced-motion`, and it is
-     still a mount effect because the component is remounted on every walk. */
+     WHAT IS UNCHANGED: it still drops `smooth` under `prefers-reduced-motion`,
+     and it is still a mount effect because the component is remounted on every
+     walk. */
+  /* ═══ [K1 2026-08-11] IT NO LONGER FIRES ON A WALK, WHICH IS THE WHOLE FIX ══
+     MIKE: "When I go to next the screen jumps. It jumps EVERY TIME I change
+     records."
+
+     THE STILLNESS RULE IS ABOUT WALKING AND NOT ONLY ABOUT OPENING, and the
+     reason a walk needs no scroll at all is a fact this round's predecessor
+     established: THE HEAD IS INVARIANT ACROSS ENTRIES. `.vp-rec-openhead` is
+     the index row's own box, at the index row's own position, with the same
+     reserved height for every entry — so stepping 001 -> 002 the reader's eye
+     is already exactly where the next headline appears. Scrolling to a place
+     the page is already at is the jump.
+
+     WHY IT WAS FIRING AT ALL. This is a MOUNT effect and the component is
+     remounted on every change of `open`, so a walk and an open reach it by the
+     identical path and it could not tell them apart. It still cannot — and it
+     no longer has to, because the caller says so: `land` is true only when an
+     index row was clicked (`landOpen` in `Exhibit.jsx`) and false for every
+     transport mark and every cursor key (`walkTo`).
+
+     THE OPEN KEEPS ITS LANDING, unchanged and for its own reason: the reader
+     may have clicked a row far down a list of sixty, and the record they asked
+     for must come to them. One movement, still smooth, still stopping short by
+     `scroll-margin-top`.
+
+     THE OLD "only moves the page when it has to" GUARD IS NOT WHAT THIS
+     REPLACES — that guard was a visibility test and had already been removed
+     from the code while its note stayed behind. This is a different question
+     answered in a different place: not *is the head on screen* but *did the
+     reader arrive here from the index*. */
   const headRef = useRef(null);
   useEffect(() => {
+    if (!land) return;
     const el = headRef.current;
     if (!el || typeof window === "undefined") return;
     const still = window.matchMedia
@@ -319,7 +354,10 @@ export default function RecordEntry({
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 140);
     return () => clearTimeout(t);
-  }, []);
+    /* `land` is fixed for this mount — the component is remounted per entry —
+       so this is a mount effect either way; naming it in the deps is what makes
+       that true by construction rather than by the caller's habit. */
+  }, [land]);
 
   const sections = entry.sections || [];
 
@@ -440,6 +478,28 @@ export default function RecordEntry({
         <span className="vp-fe-body">
           <span className="vp-fe-titlerow">
             <h3 className="vp-fe-title vp-rec-headline">{entry.title}</h3>
+            {/* ═══ [K1 2026-08-11] THE PAYLOAD COUNTS CARRY ═════════════════
+                MIKE: "Payload badges CARRY. No exception to the
+                index-block-carries-unchanged rule."
+                The fourth pass reported these as the one thing in the index row
+                that did not survive the open, and offered the argument that the
+                opened record lists its attachments at the foot so a count at
+                the head would say it twice. He ruled the other way, and the
+                ruling is the stronger one: the rule is that the block carries
+                UNCHANGED, and a rule with one Ops-chosen exception in it is not
+                a rule a future round can rely on.
+                SAME CALL, SAME CLASS, SAME PLACE IN THE ROW as
+                `RecordIndexRow` — `evidenceOf(entry)` on `.vp-fe-load`, inside
+                `.vp-fe-titlerow`, after the title. Nothing draws today: no
+                entry in this volume declares `wire`, `plates` or `docs`, so
+                `evidenceOf` returns empty for all six and the glass is
+                byte-identical. It draws the day one does, in both views, which
+                is the whole of what he ruled. */}
+            {evidenceOf(entry).map(ev => (
+              <span key={ev.kind} className="vp-fe-load">
+                {ev.kind}<i>{ev.count}</i>
+              </span>
+            ))}
           </span>
         </span>
         {/* THE DECK. Same field, same class, same face as the index — see the

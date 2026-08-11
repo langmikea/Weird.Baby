@@ -2666,6 +2666,14 @@ export default function Exhibit({ artist, open = null }) {
      Mike killed both. A record now opens on its own, fills the frame, and
      closes by the same control that opened it. null = the index is showing. */
   const [openEntry, setOpenEntry] = useState(null);
+  /* [K1 2026-08-11] WAS THE RECORD NOW OPEN ARRIVED AT FROM THE INDEX?
+     A ref rather than state, deliberately: nothing renders from it, and it must
+     be readable by the very render that `setOpenEntry` schedules. It is set
+     synchronously by `landOpen` / `walkTo` immediately before that call, so the
+     render which mounts the new `RecordEntry` reads the value its own caller
+     just wrote. Made state, it would be a second update in the same handler
+     saying the same thing. */
+  const landRef = useRef(false);
   /* [P4 2026-08-05] WHAT THIS VISITOR HAS ALREADY READ — the register the
      UNREAD button reads and the index marks its rows from. Keyed on the wing,
      lives in the visitor's own browser, never transmitted; the reasoning for it
@@ -3973,10 +3981,18 @@ export default function Exhibit({ artist, open = null }) {
                                   record open there is nothing to walk and the
                                   group draws nothing — the slot holds the row's
                                   height on its own. */}
+                              {/* [K1 2026-08-11] AND THIS ONE IS A WALK TOO.
+                                  It set the state inline — the only caller that
+                                  did — which is exactly how it would have been
+                                  missed when the landing was made conditional.
+                                  It marks `landRef` false through the same
+                                  reference every other walk uses rather than
+                                  through a second copy of the rule. */}
                               {openEntry !== null && (face.entries || [])[openEntry] && (
                                 <RecordNav list={face.entries} open={openEntry}
                                            read={readRecords}
                                            onOpen={(i) => {
+                                             landRef.current = false;
                                              setOpenEntry(i);
                                              const e = (face.entries || [])[i];
                                              if (e) setReadRecords(r => markRead(recordReadKey, e, r));
@@ -4672,14 +4688,48 @@ export default function Exhibit({ artist, open = null }) {
                             </ol>
                           );
                           const open = openEntry !== null && list[openEntry] ? openEntry : null;
-                          /* [P4 2026-08-05] OPENING A RECORD IS WHAT MARKS IT
-                              READ, and it is done here rather than in an effect
-                              because here is where the list is in scope and the
-                              moment is known. Every path into a record goes
-                              through `openAt` — the index row, the jump bar, the
-                              cursor keys and the in-record walk — which is the
-                              only way a register like this stays true. */
-                          const openAt = (i) => {
+                          /* [P4 2026-08-05] ARRIVING AT A RECORD IS WHAT MARKS
+                              IT READ, and it is done here rather than in an
+                              effect because here is where the list is in scope
+                              and the moment is known. Every path into a record
+                              goes through `landOpen` or `walkTo` — the index
+                              row, the transport at both ends and the cursor keys
+                              — which is the only way a register like this stays
+                              true. [K1 2026-08-11] It was one function until the
+                              landing became conditional; both halves still mark,
+                              because both are arrivals. */
+                          /* ═══ [K1 2026-08-11] AN OPEN AND A WALK ARE TWO
+                              DIFFERENT MOVEMENTS AND THE CALLER IS WHAT KNOWS
+                              WHICH ══════════════════════════════════════════
+                              MIKE: "When I go to next the screen jumps. It
+                              jumps EVERY TIME I change records… The head sits
+                              in the same place for every entry, so there is no
+                              reason to scroll."
+                              He is right and the cause was that NOTHING COULD
+                              TELL THE TWO APART. `RecordEntry` is remounted on
+                              every change of `open` (`key={"rec-" + open}`), so
+                              its landing scroll was a MOUNT effect — and a
+                              mount cannot see whether it arrived from the index
+                              or from the record before it.
+                              THE DISTINCTION IS MADE HERE, WHERE IT IS KNOWN,
+                              AND IT IS A DIFFERENT FUNCTION RATHER THAN A FLAG
+                              ON ONE. `landOpen` is reachable from exactly one
+                              place — an index row — and `walkTo` from every
+                              other: the five transport marks at both ends, and
+                              the cursor keys. A future caller has to choose one
+                              of two named verbs, and the names say which
+                              movement it is; a boolean argument would have been
+                              a thing to get wrong silently.
+                              BOTH STILL MARK THE RECORD READ. That is P4's rule
+                              and it is about arriving at an entry, which both of
+                              these do. */
+                          const landOpen = (i) => {
+                            landRef.current = true;
+                            setOpenEntry(i);
+                            if (list[i]) setReadRecords(r => markRead(recordReadKey, list[i], r));
+                          };
+                          const walkTo = (i) => {
+                            landRef.current = false;
                             setOpenEntry(i);
                             if (list[i]) setReadRecords(r => markRead(recordReadKey, list[i], r));
                           };
@@ -4688,8 +4738,11 @@ export default function Exhibit({ artist, open = null }) {
                               it is the Record's keyboard (Escape / ← → / Home /
                               End). See the note on the component. */
                           const jump = (
+                            /* THE CURSOR KEYS ARE A WALK. Left/right/Home/End
+                               only ever move BETWEEN records, and Escape closes
+                               — none of them is an arrival from the index. */
                             <RecordJump key="jump" list={list} open={open}
-                                        onOpen={openAt} onClose={closeRec} />
+                                        onOpen={walkTo} onClose={closeRec} />
                           );
                           /* [L6 2026-08-02] THE INDEX IS BANDED WHEN IT IS LONG
                               ENOUGH TO NEED IT — binge prep, D-BINGE.
@@ -4739,7 +4792,7 @@ export default function Exhibit({ artist, open = null }) {
                                   key={row.index}
                                   entry={row.entry}
                                   unread={list.length > 1 && isUnread(row.entry, readRecords)}
-                                  onOpen={() => openAt(row.index)} />
+                                  onOpen={() => landOpen(row.index)} />
                               ))}
                             </ol>
                             </>
@@ -4781,7 +4834,8 @@ export default function Exhibit({ artist, open = null }) {
                               entry={en} list={list} open={open}
                               epoch={face.recordEpoch}
                               openLink={openLink}
-                              onOpen={openAt}
+                              onOpen={walkTo}
+                              land={landRef.current}
                               onClose={closeRec}
                               read={readRecords}
                               twinEvent={face.twinEvent} />
@@ -4925,7 +4979,7 @@ export default function Exhibit({ artist, open = null }) {
                               <nav key="nav" className="vp-rec-nav">
                                 <span className="vp-rec-count">{open + 1} of {list.length}</span>
                                 <RecordNav list={list} open={open} read={readRecords}
-                                           onOpen={openAt} onIndex={closeRec} place="foot" />
+                                           onOpen={walkTo} onIndex={closeRec} place="foot" />
                               </nav>) : null,
                             ].filter(Boolean)
                           );
