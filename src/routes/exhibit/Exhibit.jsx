@@ -20,7 +20,11 @@ import {
   entryStamp, groupByPeriod, shouldBand, docState,
 } from "../../lib/record-model.js";
 import {
-  readKeyFor, readSet, markRead, firstUnread, isUnread,
+  /* [J1 2026-08-11] `firstUnread` left this list with the jump bar's UNREAD
+     button. It is not unused in the building — `RecordNav.jsx` imports it
+     directly for the transport's newspaper mark, which is now the only control
+     that asks the register where this visitor stopped. */
+  readKeyFor, readSet, markRead, isUnread,
 } from "../../lib/record-read.js";
 import "./Exhibit.css";
 
@@ -2525,7 +2529,7 @@ function ArchiveWall({ face, openLink }) {
    volume holds, and a key that does nothing costs no attention.
    The mechanism is built, and it is not visible today. That is the honest state
    of a navigation for sixty entries built while there is one. */
-function RecordJump({ list, open, read, onOpen, onClose }) {
+function RecordJump({ list, open, onOpen, onClose }) {
   useEffect(() => {
     function onKey(e) {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -2542,38 +2546,22 @@ function RecordJump({ list, open, read, onOpen, onClose }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [list.length, open, onOpen, onClose]);
 
-  if (list.length < 2) return null;
+  /* ═══ [J1 2026-08-11] THE BAR IS GONE AND THE KEYBOARD IS WHAT IS LEFT ══════
+     MIKE: "DELETE OLDEST, NEWEST and UNREAD — the text jump buttons. KEEP
+     INDEX." All three are struck, and INDEX did not stay here: it moved to the
+     FRONT of the five transport marks (`RecordNav`), which now render at the
+     top RIGHT beside the face heading and at the bottom right of the record.
+     One group, one set, two places — so a second row of controls saying some of
+     the same things is exactly what the ruling removes.
 
-  const unread = firstUnread(list, read);
-  return (
-    <nav className="vp-rec-jump" aria-label="Move through the record">
-      {/* ═══ [2026-08-11] THE TARGETS SWAPPED WITH THE ORDER, AND SO DID THE
-          READING ORDER OF THE TWO BUTTONS. The list is oldest-first now, so
-          index 0 IS the oldest and `length - 1` IS the newest — the two
-          `onOpen` arguments below are the exact opposite of what they were.
-          OLDEST is printed first because that is now the head of the volume,
-          and the bar reads left to right the way the index does. */}
-      <button type="button" className="vp-rec-jumpbtn"
-              disabled={open === 0}
-              onClick={() => onOpen(0)}>OLDEST</button>
-      <button type="button" className="vp-rec-jumpbtn"
-              disabled={open === list.length - 1}
-              onClick={() => onOpen(list.length - 1)}>NEWEST</button>
-      {/* THE ONE CONTROL THAT KNOWS SOMETHING THE PAGE DOES NOT: where this
-          visitor stopped. Disabled — rather than hidden — once everything has
-          been read, because a control that vanishes when you finish is a
-          control you cannot learn the meaning of. */}
-      <button type="button" className="vp-rec-jumpbtn vp-rec-jumpbtn--unread"
-              disabled={unread === null || unread === open}
-              title={unread === null ? "every record has been read"
-                                     : "the oldest record you have not opened"}
-              onClick={() => unread !== null && onOpen(unread)}>UNREAD</button>
-      {open !== null && (
-        <button type="button" className="vp-rec-jumpbtn vp-rec-jumpbtn--index"
-                onClick={onClose}>INDEX</button>
-      )}
-    </nav>
-  );
+     THIS COMPONENT STILL EXISTS AND IS STILL MOUNTED, because the effect above
+     is the Record's whole keyboard: Escape closes, ← and → walk, Home and End
+     jump to the ends of the volume. That is not furniture and had no other
+     home. It renders nothing.
+     IT IS NOT RENAMED. `RecordJump` is what three call sites, the round logs
+     and `OPERATIONS.md` call it; a rename would be a diff across all of them
+     that tells a future reader nothing the note it is standing in does not. */
+  return null;
 }
 
 function openedAt(SPINE, open) {
@@ -3953,6 +3941,51 @@ export default function Exhibit({ artist, open = null }) {
                               once worked. It is ledgered A+++++++ and lives in
                               git at d43b9db, one revert away, which is a
                               better home than an unused branch in this file. */}
+                          {/* ═══ [J1 2026-08-11] THE RECORD'S CONTROLS SIT ON
+                              THE HEADING'S LINE ══════════════════════════════
+                              MIKE: "KEEP INDEX. Move it up to sit level with
+                              'The Record'." The whole group went up with it, so
+                              the Record has ONE row of controls at the top
+                              rather than a jump bar and a transport row.
+                              IT IS RENDERED HERE, INSIDE THE FACE HEAD, because
+                              "level with the heading" is a fact about a ROW and
+                              a sibling below the head can only ever be told to
+                              pretend. The head is already a grid that opens a
+                              second `auto` column when a plate arrives (F1);
+                              this is that mechanism, asked for by a different
+                              child.
+                              THE SLOT IS DRAWN ON EVERY LOG FACE, OPEN OR NOT,
+                              AND THAT IS THE OVERLAY GUARANTEE. `RecordNav`
+                              returns null on the index (there is no record to
+                              walk), so if the slot came and went the head would
+                              change height on open and every row beneath it
+                              would step down — which is precisely the movement
+                              F3's pair is taken to prove absent. It holds its
+                              own height instead and the index lands on the same
+                              pixel in both views. Same argument as
+                              `.vp-rec-headline`'s reserved two lines. */}
+                          {face.entriesMode === "log" && (
+                            <div className="vp-rec-topctl">
+                              {/* THE SAME GUARD THE ENTRY BRANCH USES: `open`
+                                  is one piece of state for the whole exhibit,
+                                  so an index that no longer names a row in THIS
+                                  face's list is closed, not clamped. With no
+                                  record open there is nothing to walk and the
+                                  group draws nothing — the slot holds the row's
+                                  height on its own. */}
+                              {openEntry !== null && (face.entries || [])[openEntry] && (
+                                <RecordNav list={face.entries} open={openEntry}
+                                           read={readRecords}
+                                           onOpen={(i) => {
+                                             setOpenEntry(i);
+                                             const e = (face.entries || [])[i];
+                                             if (e) setReadRecords(r => markRead(recordReadKey, e, r));
+                                           }}
+                                           onIndex={() => setOpenEntry(null)}
+                                           place="top" />
+                              )}
+                            </div>
+                          )}
                           {face.still && (
                             <figure className="vp-face-plate">
                               {/* [H1 2026-08-06] THE DOOR BRANCH IS GONE WITH
@@ -4651,9 +4684,11 @@ export default function Exhibit({ artist, open = null }) {
                             if (list[i]) setReadRecords(r => markRead(recordReadKey, list[i], r));
                           };
                           const closeRec = () => setOpenEntry(null);
+                          /* [J1 2026-08-11] RENDERS NOTHING AND IS STILL HERE:
+                              it is the Record's keyboard (Escape / ← → / Home /
+                              End). See the note on the component. */
                           const jump = (
                             <RecordJump key="jump" list={list} open={open}
-                                        read={readRecords}
                                         onOpen={openAt} onClose={closeRec} />
                           );
                           /* [L6 2026-08-02] THE INDEX IS BANDED WHEN IT IS LONG
@@ -4888,9 +4923,9 @@ export default function Exhibit({ artist, open = null }) {
                                  it says where you are, which no mark does. */
                               list.length > 1 ? (
                               <nav key="nav" className="vp-rec-nav">
-                                <RecordNav list={list} open={open} read={readRecords}
-                                           onOpen={openAt} place="foot" />
                                 <span className="vp-rec-count">{open + 1} of {list.length}</span>
+                                <RecordNav list={list} open={open} read={readRecords}
+                                           onOpen={openAt} onIndex={closeRec} place="foot" />
                               </nav>) : null,
                             ].filter(Boolean)
                           );

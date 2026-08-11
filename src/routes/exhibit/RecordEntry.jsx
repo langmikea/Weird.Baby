@@ -1,5 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { entryStamp, entryDateline } from "../../lib/record-model.js";
+/* [J1 2026-08-11] `entryDateline` is no longer imported: the dateline it built
+   was deleted from the head on Mike's ruling, and it now has NO CALLER ANYWHERE
+   — dead code, left in `record-model.js` and reported rather than deleted.
+   `entryStamp` STAYS, and the lint caught the reason: the head was not its only
+   caller here. The newspaper door's peek card still prints a target record's
+   stamp, and `Exhibit.jsx`'s short head still draws one too.
+   `entryWeekday` arrives for the rail — the same call `RecordIndexRow` makes,
+   cut to three characters the same way and for the same reason. */
+import { entryStamp, entryWeekday } from "../../lib/record-model.js";
 import RecordAttachments from "./RecordAttachments.jsx";
 import RecordNav from "./RecordNav.jsx";
 
@@ -225,7 +233,10 @@ export default function RecordEntry({
      which records this visitor has opened. It is the same Set the index marks
      its rows from, threaded down rather than re-read from `localStorage` here:
      one reader of the register per surface, and the entry is not one of them. */
-  entry, list, open, epoch, openLink, onOpen, onClose, twinEvent, read,
+  /* [J1 2026-08-11] `epoch` is no longer destructured. It fed `entryDateline`
+     and nothing else here; the call sites still pass it and that is harmless —
+     what would not be harmless is a name bound to nothing. */
+  entry, list, open, openLink, onOpen, onClose, twinEvent, read,
 }) {
   /* the one piece of state on this surface, and it is a door's overlay:
      { mode:"record", i } | { mode:"held", kind, label, note } */
@@ -310,7 +321,6 @@ export default function RecordEntry({
     return () => clearTimeout(t);
   }, []);
 
-  const dateline = entryDateline(entry, epoch);
   const sections = entry.sections || [];
 
   /* ---- WHAT A DOOR DOES -------------------------------------------------
@@ -365,30 +375,103 @@ export default function RecordEntry({
           same order, same icons — Mike's ruling is that the set does not change
           between the two positions, so there is one component and it is passed
           a side rather than a different list of controls. */}
-      <RecordNav list={list} open={open} read={read}
-                 onOpen={onOpen} place="top" />
+      {/* ═══ [J1 2026-08-11] THE TRANSPORT MOVED UP TO THE FACE HEADING ══════
+          It was rendered here, as the first thing inside the record. Mike put
+          it level with "The Record", so it is rendered by `Exhibit.jsx` beside
+          the heading now and this component draws only the FOOT group. Nothing
+          about the group changed in the move — same component, same five marks,
+          same order, now with INDEX at the front at both ends. */}
 
-      {/* THE HEAD IS THE CONTROL, unchanged from M5: the thing that opened
-          this record closes it, and there is no second shut button. What is
-          new is what it carries — a stamp and the dateline.
-          [R5 2026-08-06] THE CLASS BADGE WAS THE THIRD THING IT CARRIED AND IT
-          IS STRUCK, with its twins on the index and on the short head. Mike:
-          "I see no richness in it." It could not be made to serve — the word
-          opened nothing and there is no object list behind it — and one badge
-          in three places is one ruling in three places. */}
-      <button key="head" ref={headRef} className="vp-rec-head vp-rec-head--long"
-              onClick={onClose} title="close this record">
-        {entryStamp(entry) && <span className="vp-fe-stamp">{entryStamp(entry)}</span>}
-        <span className="vp-rec-dateline">
-          {dateline.map((p, i) => (
-            <span key={i} className="vp-rec-dateline-part">{p}</span>
-          ))}
+      {/* ═══ [J1 2026-08-11] THE DATELINE IS DELETED, WITH NO REPLACEMENT ════
+          MIKE: "17 AUG 26 WEEK 1 · MONDAY · RECORD 001 — delete entirely, no
+          replacement. Redundant once the block carries: the weekday is in the
+          rail, the number is in the rail, and the full date was removed from
+          the index deliberately."
+          THE STAMP WENT WITH IT because the stamp WAS the `17 AUG 26` half of
+          that line — one line on the glass, one ruling. `entryStamp` is
+          untouched in `record-model.js` and still drawn by the short head in
+          `Exhibit.jsx`; `entryDateline` now has NO CALLER ANYWHERE and is dead
+          code, reported rather than deleted on Mike's instruction.
+          AND THE HEAD IS STILL THE CONTROL. `.vp-rec-head` carried `onClose`
+          and there is still no second shut button — the head block below is the
+          same control, and INDEX in both transport groups is the same door. */}
+
+
+      {/* ═══ [J1 2026-08-11] THE INDEX BLOCK, WHOLE, IN PLACE ════════════════
+          MIKE: "Everything in the index row carries into the opened record, IN
+          PLACE, WITHOUT CHANGE: the number, the weekday, the headline, the
+          deck. All four, same position, same size, same weight."
+
+          SO IT IS THE INDEX ROW'S OWN MARKUP AND THE INDEX ROW'S OWN CLASSES,
+          NOT A SECOND THING TUNED TO LOOK LIKE IT. `.vp-rec-mark` /
+          `-mark-no` / `-mark-day`, `.vp-fe-body` / `-titlerow` / `-title`,
+          `.vp-fe-line vp-rec-sum` — the same six classes `RecordIndexRow`
+          prints, inside a container that takes `.vp-rec-open`'s grid, so the
+          two views' geometry agrees BY CONSTRUCTION rather than by two sets of
+          numbers somebody has to keep equal. That is the same argument
+          `--rec-textcol` was introduced on and it is the reason this is markup
+          rather than a stylesheet full of matching values.
+
+          WHAT THIS SOLVES BESIDES THE ASK: with the rail occupied, the headline
+          and the deck stop reading as indented. The 71.5px they sit in was
+          always the rail's column; until today the opened record left it empty
+          and the page had two left edges.
+
+          THE TWO OLD CLASSES ARE STILL ON THE TWO NODES, and that is not
+          sentiment. `tools/dictation/record-edit.client.js` finds Mike's
+          writing fields BY CLASS — `.vp-rec-headline` is how the editor knows
+          which node is the headline — so dropping the class would have
+          red-bannered the surface he writes Records on, silently, in launch
+          week. The classes now carry no geometry of their own; they are
+          handles. */}
+      <div key="head" ref={headRef} className="vp-rec-openhead">
+        <span className="vp-rec-mark" aria-hidden="true">
+          {typeof entry.no === "number" && (
+            <b className="vp-rec-mark-no">
+              {String(entry.no).padStart(3, "0")}
+            </b>
+          )}
+          {entryWeekday(entry) && (
+            <i className="vp-rec-mark-day">
+              {entryWeekday(entry).slice(0, 3).toUpperCase()}
+            </i>
+          )}
         </span>
-      </button>
+        <span className="vp-fe-body">
+          <span className="vp-fe-titlerow">
+            <h3 className="vp-fe-title vp-rec-headline">{entry.title}</h3>
+          </span>
+        </span>
+        {/* THE DECK. Same field, same class, same face as the index — see the
+            note above. An entry with both `lead` and `line` still prints both,
+            in that order, and they are not two of anything: the deck is the
+            index sentence and the lead is the opening paragraph. */}
+        {entry.line && (
+          <p className="vp-fe-line vp-rec-sum vp-rec-deck">{entry.line}</p>
+        )}
+      </div>
 
       {/* THE VISUAL HOOK (Mike's standing law), and it is a photograph we
           already own rather than a picture invented for the slot. Clicking it
-          opens the wing's reader, so the hook is also a door. */}
+          opens the wing's reader, so the hook is also a door.
+
+          ═══ [J1 2026-08-11] IT SITS BELOW THE HEAD NOW, NOT BESIDE IT ════════
+          IT MOVED BECAUSE OF MIKE'S OWN RULING, not to dodge a layout bug. A2
+          asks that the index row's four parts land on the SAME PIXELS in both
+          views; the head is a full-width row in the index, so a head squeezed
+          into the space left by a floated picture would be a narrower row with
+          a differently-wrapped deck — the one entry with a plate would be the
+          one entry that failed the overlay.
+          AND IT WAS ALSO DRAWING A HOLE. The head is a grid, a grid establishes
+          its own formatting context, and a formatting context does not sit
+          beside a float — so on 013 the whole head DROPPED BELOW the plate and
+          left ~250px of empty paper to its left. Measured, not predicted: the
+          picture is the only thing on this surface that could do it, and 013 is
+          the only entry carrying one.
+          NOTHING ABOUT THE PLATE ITSELF CHANGED. It still floats right and the
+          lead and the sections still set beside it — which is what the note
+          above has always described. What it no longer sets beside is a head
+          that is now the index's row. */}
       {entry.still && (
         <figure key="still" className="vp-rec-still">
           <button type="button" className="vp-rec-still-go"
@@ -403,35 +486,6 @@ export default function RecordEntry({
             <figcaption className="vp-rec-still-cap">{entry.stillCaption}</figcaption>
           )}
         </figure>
-      )}
-
-      <h3 key="headline" className="vp-rec-headline">{entry.title}</h3>
-
-      {/* ═══ [2026-08-11] THE DECK IS BACK, AND IT IS THE INDEX'S DECK ════════
-          MIKE'S RULING: the opened record shows the SAME subtext as the index,
-          in the SAME FONT — no change between the two views.
-
-          THIS IS NOT THE FALLBACK D2 STRUCK, AND THE DIFFERENCE IS THE WHOLE
-          REASON IT CAN COME BACK. D2 removed `lead || entry.line`, which set
-          `line` IN THE LEAD'S OWN BLOCKQUOTE WEIGHT when an entry had no lead —
-          so Record 001 printed an Ops-drafted summary in display type directly
-          above Mike's own EXECUTIVE SUMMARY heading. Two summaries of one
-          report, stacked, the smaller one first and dressed as the larger.
-          What is here is a DECK: `.vp-rec-deck` takes the index row's face,
-          size, weight, colour and `pre-line` wrapping (`Exhibit.css`), so it
-          reads as the same object a reader met on the index one click ago.
-
-          AN ENTRY WITH BOTH `lead` AND `line` NOW PRINTS BOTH, in that order,
-          and they are not two of anything: the deck is the index sentence and
-          the lead is the opening paragraph. Record 013 is the case — it has
-          carried both fields since it was written, and until today only the
-          lead drew.
-
-          THE PEEK BELOW STILL READS `lead || line` and is untouched: a
-          newspaper door pops another record's HEAD, which is an index row in a
-          card, and one line is all a card holds. */}
-      {entry.line && (
-        <p key="deck" className="vp-rec-deck">{entry.line}</p>
       )}
 
       {/* THE LEAD. Blockquote weight because it is the one paragraph that has
@@ -504,18 +558,23 @@ export default function RecordEntry({
           reads "1 of 1" — three objects saying the same nothing. The cursor keys
           (RecordJump, Exhibit.jsx) are the same walk and are not gated, because a
           key that does nothing costs no attention and Escape still closes. */}
-      {/* ═══ [2026-08-11] FIVE MARKS, BOTTOM-LEFT, AND THE TEXT WALK IS GONE.
+      {/* ═══ [2026-08-11] FIVE MARKS, AND THE TEXT WALK IS GONE.
           `‹ NEWER` and `OLDER ›` are deleted rather than re-labelled. They were
           two controls where the ruling asks for five, and their words were the
           part of the order flip most likely to end up lying — the labels had to
           be re-read the moment the volume changed direction, which is exactly
           what has just happened to them. The count stays: it says WHERE YOU
-          ARE, which no mark does. */}
+          ARE, which no mark does.
+          ═══ [J1 2026-08-11] BOTTOM-RIGHT NOW, AND WITH INDEX AT ITS FRONT.
+          Mike's ruling is that the group is the SAME SET in both places and
+          that both are right-aligned, so the count swaps to the left of the row
+          and the marks take the right edge — the top group's exact geometry,
+          which is what "same set in two places" has to mean to be checkable. */}
       {list.length > 1 && (
       <nav key="nav" className="vp-rec-nav">
-        <RecordNav list={list} open={open} read={read}
-                   onOpen={walk} place="foot" />
         <span className="vp-rec-count">{open + 1} of {list.length}</span>
+        <RecordNav list={list} open={open} read={read}
+                   onOpen={walk} onIndex={onClose} place="foot" />
       </nav>)}
 
       {/* ==== THE DOOR'S OWN OVERLAY ======================================

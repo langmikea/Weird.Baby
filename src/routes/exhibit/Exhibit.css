@@ -382,8 +382,12 @@ body:has(.vp-face) .vp-area::before{display:none}
 .vp-flat > .vp-reel,
 .vp-flat > .vp-face-lines,
 .vp-flat > .vp-face-entries,
-.vp-flat > .vp-rec-jump,
+/* [J1 2026-08-11] `.vp-rec-jump` left this list because it left the DOM - the
+   bar is deleted and `RecordJump` renders nothing. `.vp-rec-openhead` joins it:
+   an opened record's head opens a section exactly as the index does, which is
+   what makes the two views take the same step under the heading. */
 .vp-flat > .vp-rec-index,
+.vp-flat > .vp-rec-openhead,
 .vp-flat > .vp-rec-body,
 .vp-flat > .vp-spread-head,
 /* [N2] a stowed spread is a section in its own right — its heading is inside
@@ -1528,14 +1532,58 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    THE ROW GAP GOES 3px -> 1px with it. The deck is the headline's second line,
    not a second object under it, and at the same type size (B3) the leading
    already does the separating. */
-.vp-rec-open{display:grid;grid-template-columns:auto 1fr;
+/* ═══ [J1 2026-08-11] AND THE OPENED RECORD'S HEAD IS THE SAME BOX ═══════════
+   Mike's ruling is that the index row carries into the opened record IN PLACE
+   and WITHOUT CHANGE — number, weekday, headline, deck, same position, same
+   size, same weight. So `.vp-rec-openhead` is not a second box tuned to match
+   this one; it is THIS RULE, with this grid, this gap, this padding and this
+   top rule, and `RecordEntry` prints the same six classes inside it that
+   `RecordIndexRow` prints inside here.
+   WRITTEN AS ONE SELECTOR LIST RATHER THAN COPIED, which is the whole point: a
+   value changed for the index cannot fail to reach the opened head, because
+   there is only one place it is written. Two lists of matching numbers is what
+   `--rec-textcol` was introduced to end.
+   WHAT THE HEAD DOES NOT TAKE is `min-height` — the index reserves three lines
+   so a column of rows is a regular ruled register, and there is only ever one
+   head. It is a `div` rather than a `button`, so `cursor` and `transition` are
+   inert on it and cost nothing to carry. */
+.vp-rec-open,
+.vp-rec-openhead{display:grid;grid-template-columns:auto 1fr;
   gap:1px 16px;width:100%;text-align:left;background:none;
   border:0;border-top:1px solid var(--wb-border);padding:12px 2px;cursor:pointer;
   color:inherit;font:inherit;transition:background .15s;
-  /* one headline line + two summary lines + the padding above and below */
-  min-height:calc(1.25em + 2 * 1.5 * var(--fs-small) + 24px);
   align-items:start}
-.vp-rec-open > .vp-rec-sum{grid-column:2}
+/* one headline line + two summary lines + the padding above and below */
+/* [J1 2026-08-11] AND THE OPENED HEAD RESERVES IT TOO, which is B's furniture
+   ruling arriving at its new address. B reserved two headline lines on
+   `.vp-rec-headline` so that walking 001 -> 002 -> 003 could not step the
+   sections up and down as a headline wrapped or did not. That rule is gone with
+   the element's own geometry; this is the same guarantee in the index's own
+   terms, and it is strictly better - reserving the WHOLE row means the head is
+   the same height as the row it came from, so the pair Mike overlays cannot
+   move even by the deck's second line. */
+.vp-rec-open,
+.vp-rec-openhead{min-height:calc(1.25em + 2 * 1.5 * var(--fs-small) + 24px)}
+/* ═══ [J1 2026-08-11] WHERE THE WALK LANDS, AND IT MOVED WITH THE HEAD ══════
+   MIKE: "the record head sits just below the transport row with clean air above
+   it."
+   `RecordEntry` aims the page at this element with `scrollIntoView({block:
+   "start"})`, which means PIXEL ZERO — and pixel zero is behind the fixed
+   museum bar. C1 carried a 96px stop line on `.vp-rec-head` for exactly this
+   reason; that element is deleted, so the stop line moves here with the scroll
+   target, and it is re-derived rather than carried over because what stands
+   above the head is no longer what it was. It is now, top to bottom:
+     45px  the fixed `.wb-bar`, measured
+     25px  clean air under it — Mike's words, and the only judged number here
+     34px  the control row, read off `.vp-rec-nav-btn`'s own height
+     --rh-block  the step the head takes under the face heading
+   STATED AS A SUM RATHER THAN A TOTAL so a future round can see which part it
+   is changing, and `--rh-block` is left as a token so the landing follows the
+   type ramp instead of drifting away from it at another width. */
+.vp-rec-openhead{scroll-margin-top:calc(45px + 25px + 34px + var(--rh-block))}
+.vp-rec-openhead{cursor:default}
+.vp-rec-open > .vp-rec-sum,
+.vp-rec-openhead > .vp-rec-sum{grid-column:2}
 /* [A1 2026-08-06] ON PAPER A SURFACE IS RAISED BY GOING DARKER. The wash was
    `rgba(232,228,216,.05)` — light added at low alpha, which is a visible lift
    on charcoal and white-on-white on print stock, i.e. no affordance at all. */
@@ -1649,10 +1697,18 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    that ruling's case louder without answering it, and it was not asked for.
    The entries Mike named (001 -> 002 -> 003) all carry a two-line deck, so the
    headline reserve above is the whole of what that walk needed. */
-.vp-rec-deck{font-family:var(--wb-plain);font-size:var(--fs-small);
-  font-weight:400;
-  line-height:1.4;letter-spacing:0;max-width:68ch;color:var(--wb-dim);
-  opacity:.72;white-space:pre-line;margin:var(--rec-hug) 0 0}
+/* [J1 2026-08-11] AND THE VALUES ARE GONE, WHICH IS THE POINT OF THE ROUND.
+   Every declaration that stood here restated one of the index's - deliberately,
+   with a note saying a change to one must be a change to both "or the rule is
+   broken in the same edit that honours it". Mike's ruling made that structural
+   instead: the opened deck now carries `.vp-fe-line vp-rec-sum` and sits in
+   `.vp-rec-openhead`, so it IS the index's deck and reads the index's one
+   declaration. `.vp-rec-deck` survives as a HANDLE and nothing else - it is how
+   `tools/dictation/record-edit.client.js` finds this node, and how a future
+   rule could address the opened deck alone. It sets nothing.
+   THE `margin-top` HAD TO GO WITH THEM: the index's deck has none (the grid's
+   1px row gap does that job), so an extra `--rec-hug` here was the one value
+   that would have moved the deck between the two views. */
 
 /* ═══ [A3/A4 2026-08-08] THE INDEX ROW TAKES THE RECORD'S REGISTER, AND THE
    SCOPING IS THE WHOLE OF A4's ANSWER ══════════════════════════════════════
@@ -1742,8 +1798,13 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    defect M4 fixed for MGK-VIIIp. Reset here rather than on `.vp-fe-title`,
    which the FAQ and Worth A Listen lists also use and which is not this
    ruling's business. */
-.vp-rec-index .vp-fe-title{font-family:var(--wb-plain);font-weight:700;
-  text-transform:none;letter-spacing:.04em}
+/* [J1 2026-08-11] `.vp-rec-openhead` joins every one of these, and joins them
+   as a SELECTOR rather than as a copy. The opened record's headline and deck
+   are the index's headline and deck by Mike's ruling, so they must be unable to
+   drift from them — which they can only be if there is one declaration. */
+.vp-rec-index .vp-fe-title,
+.vp-rec-openhead .vp-fe-title{font-family:var(--wb-plain);font-weight:700;
+  text-transform:none;letter-spacing:.04em;margin:0;line-height:normal}
 /* [B3 2026-08-11] THE DECK MATCHES THE HEADLINE'S SIZE AND DIFFERS BY WEIGHT.
    MIKE'S RULING. It was the wrong way round and had been since the deck was
    built: the headline takes `--fs-small` (13.04px at 390) from `.vp-fe-title`
@@ -1752,7 +1813,8 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    THE CONTRAST MOVES TO WEIGHT, which is the firmer instrument anyway: the
    headline is already 700, and the deck is pinned to 400 rather than left to
    inherit, so nothing upstream can quietly make them the same. */
-.vp-rec-index .vp-fe-line{font-family:var(--wb-plain);
+.vp-rec-index .vp-fe-line,
+.vp-rec-openhead .vp-fe-line{font-family:var(--wb-plain);
   font-size:var(--fs-small);font-weight:400;
   line-height:1.4;letter-spacing:0;max-width:68ch}
 /* AND NO PADDING RULE HERE, WHICH IS A CORRECTION THE MEASUREMENT MADE. The
@@ -1774,7 +1836,9 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    they are two boxes. At 390px neither is binding — the row is 343.69px and
    68ch is 580px — so this changes nothing on a phone and everything on a desk.*/
 .vp-rec-open > .vp-fe-body,
-.vp-rec-open > .vp-rec-sum{max-width:68ch}
+.vp-rec-open > .vp-rec-sum,
+.vp-rec-openhead > .vp-fe-body,
+.vp-rec-openhead > .vp-rec-sum{max-width:68ch}
 
 /* [L6 2026-08-02] `.vp-rec` AND `.vp-rec-body` ARE RETIRED — an opened record
    is a RUN of blocks so the stage can page it (see Exhibit.jsx). The 14px and
@@ -1850,7 +1914,27 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 .vp-rec-jumpbtn:disabled{opacity:.32;cursor:default}
 /* INDEX is the way OUT of a record and sits apart from the three that move you
    within it. */
-.vp-rec-jumpbtn--index{margin-left:auto}
+/* [J1 2026-08-11] IT IS AT THE FRONT OF THE TRANSPORT GROUP NOW, so the rule
+   that pushed it to the far end of the old jump bar is gone. What it keeps is
+   the jump bar's FACE - the mono, the tracking, the hairline box - because that
+   is what INDEX has always looked like and the ruling moved it rather than
+   redrew it. It sits a little off the marks so a word and five icons read as
+   one row rather than a collision. */
+.vp-rec-jumpbtn--index{margin-right:6px}
+
+/* === [J1 2026-08-11] THE RECORD'S CONTROLS, ON THE HEADING'S LINE ===========
+   MIKE: "KEEP INDEX. Move it up to sit level with 'The Record'."
+   THE SLOT IS ALWAYS DRAWN AND ALWAYS 34px TALL. `RecordNav` draws nothing when
+   no record is open, and a slot that collapsed with it would change the head's
+   height on open - which would step the whole index down by that difference and
+   break the one thing E3's pair is taken to prove. 34px is the transport
+   button's own height, read off `.vp-rec-nav-btn` rather than guessed.
+   `align-items:center` on the head puts the row on the heading's optical line
+   rather than at the top of a taller box. */
+.vp-face-head:has(.vp-rec-topctl){grid-template-columns:1fr auto;
+  align-items:center}
+.vp-rec-topctl{display:flex;justify-content:flex-end;align-items:center;
+  min-height:34px}
 
 /* ═══ [2026-08-11] THE FIVE MARKS, AND THEY ARE ONE ROW IN TWO PLACES ═══════
    Same set, same order, same size at the top of a record and at its foot; only
@@ -1862,8 +1946,14 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    surface do not read as two different systems: dim gold at rest, full gold on
    hover and focus, .32 opacity and no pointer when there is nowhere to go. */
 .vp-rec-nav5{display:flex;align-items:center;gap:2px}
-.vp-rec-nav5--top{justify-content:flex-end;margin-bottom:var(--rec-block)}
-.vp-rec-nav5--foot{justify-content:flex-start}
+/* [J1 2026-08-11] BOTH ENDS ARE RIGHT-ALIGNED - Mike's C4. The foot group was
+   `flex-start`, which was the one thing that made "the same group in two
+   places" untrue on the glass. The top group lost its bottom margin in the same
+   ruling: it lives inside `.vp-face-head` now and the head's own grid gap is
+   what stands under it, so a margin here would have been a second gap nobody
+   asked for. */
+.vp-rec-nav5--top,
+.vp-rec-nav5--foot{justify-content:flex-end}
 .vp-rec-nav-btn{display:inline-flex;align-items:center;
   justify-content:center;width:34px;height:34px;padding:0;
   background:none;border:0;border-radius:3px;cursor:pointer;
@@ -1885,7 +1975,12 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    begins and the index IS a section. What closes up is the gap under it — the
    same shape as `.vp-spread-head + .vp-collage`, where a heading and the thing
    it heads are one object. */
-.vp-flat > .vp-rec-jump + .vp-rec-index{margin-top:var(--rh-tight)}
+/* [J1 2026-08-11] THE RULE THAT CLOSED THE GAP UNDER THE JUMP BAR IS DELETED
+   WITH THE BAR. Nothing renders `.vp-rec-jump` any more, so this selector could
+   never match; it is struck rather than left as a comment about a bar, because
+   a dead selector is indistinguishable from a live one to everyone but the
+   person who grepped for it. The controls it used to space are in the face head
+   now and take the head's own grid. */
 
 /* AN UNREAD RECORD IS MARKED ON ITS OWN ROW. A rule down the left edge rather
    than a dot: the index is a register of ruled rows and a dot would be the one
@@ -3890,7 +3985,8 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    headline is the row's own subject and a clipped headline is the same defect
    as a clipped summary, one line up. It wraps and the budget keeps it to one
    line — see the RECORD BUDGETS block at the head of the index rules. */
-.vp-rec-index .vp-fe-titlerow .vp-fe-title{overflow:visible;text-overflow:clip}
+.vp-rec-index .vp-fe-titlerow .vp-fe-title,
+.vp-rec-openhead .vp-fe-titlerow .vp-fe-title{overflow:visible;text-overflow:clip}
 /* the wire block is the register's own look, indented as a quotation of the
    machine rather than as the museum's own voice. */
 .vp-rec-wire{margin-top:10px;border-top:1px solid var(--wb-border)}
@@ -4076,16 +4172,13 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    container that arrives with its own typeface is a second design.
    =========================================================================== */
 
-/* ---- THE DATELINE. A register line, sitting where the head's title used to,
-   with a middot between its parts drawn by CSS so the data never carries
-   punctuation it would have to get right sixty times. */
-.vp-rec-head--long{align-items:baseline;flex-wrap:wrap;gap:10px 14px}
-.vp-rec-dateline{display:flex;flex-wrap:wrap;align-items:baseline;
-  font-family:'Courier Prime','Courier New',monospace;
-  font-size:var(--fs-micro);letter-spacing:.22em;text-transform:uppercase;
-  color:var(--wb-gold-mute)}
-.vp-rec-dateline-part + .vp-rec-dateline-part::before{
-  content:"\00b7";margin:0 .7em;color:var(--wb-border-hi)}
+/* [J1 2026-08-11] THE DATELINE'S FURNITURE IS DELETED WITH THE DATELINE.
+   `.vp-rec-head--long`, `.vp-rec-dateline` and the CSS middot between its parts
+   drew "17 AUG 26  WEEK 1 . MONDAY . RECORD 001", which Mike struck entirely
+   and without replacement: the weekday and the number are in the rail, and the
+   date came out of the index deliberately on 2026-08-10. Nothing renders any of
+   these three selectors. `.vp-rec-head` itself STAYS - the short (non-sections)
+   entry head in `Exhibit.jsx` still uses it and still carries a stamp. */
 
 /* ---- THE HEADLINE. The day's one thing. `--fs-display` is the ramp's own
    top step (R5b added it, P7's rule for adding one) — a record entry's
@@ -4113,10 +4206,17 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    THE COST, STATED: 001 and 002 carry one blank line under their headline.
    That is what the ruling buys, and at 34ch the two-line case is the common
    one rather than the exception. */
-.vp-rec-headline{margin:0;font-family:var(--wb-plain);
-  font-weight:700;font-size:var(--fs-head);line-height:1.2;
-  min-height:2.4em;
-  letter-spacing:-.006em;color:var(--wb-gold);max-width:34ch}
+/* === [J1 2026-08-11] AND ALL OF IT IS GONE, ON MIKE'S RULING ===============
+   "the number, the weekday, the headline, the deck. All four, same position,
+   same size, same weight." The headline carried `--fs-head` against the index's
+   `--fs-small` - 22.91px against 16.36px, measured at 1706 - so it was the one
+   of the four that could not survive an overlay. It is `.vp-fe-title` inside
+   `.vp-rec-openhead` now and takes the index's declaration.
+   THE TWO-LINE RESERVE IS NOT LOST. B set it here so the sections could not
+   step as a headline wrapped; the head's `min-height` above reserves the whole
+   row instead, which holds the same furniture still and holds the deck still
+   too. `.vp-rec-headline` remains as a HANDLE - `record-edit.client.js` finds
+   Mike's headline field by this class - and sets nothing. */
 
 /* ---- THE HOOK. A photograph the museum already owns, and a door into the
    reader. It floats on a wide frame so the dateline, headline and lead set
@@ -4331,9 +4431,14 @@ button.vp-rec-att-thumb:hover,button.vp-rec-att-thumb:focus-visible{
    column. The dateline and the sections have no counterpart in the index and
    cannot "move" against anything, so they are left where they are — this is
    scoped to what F3 can actually be laid over. */
-.vp-flat > .vp-rec-headline{margin-top:var(--rec-hug);
-  margin-left:var(--rec-textcol)}
-.vp-flat > .vp-rec-deck{margin-left:var(--rec-textcol)}
+/* [J1 2026-08-11] THE TWO INDENTS ARE GONE BECAUSE THE RAIL IS REAL NOW.
+   A1's rule pushed the headline and the deck into the index's text column with
+   a margin, so that they LINED UP with an index they were no longer part of -
+   the column was there and the rail beside it was empty, which is the two left
+   edges Mike named. They sit in `.vp-rec-openhead`'s second grid column now,
+   put there by the same `auto` first column the index row uses, and the first
+   column has the number and the weekday in it. `--rec-textcol` is still what
+   makes them agree; it is simply no longer applied by hand. */
 .vp-flat > .vp-rec-lead{margin-top:var(--rec-block)}
 .vp-flat > .vp-rec-sects,
 .vp-flat > .vp-rec-tomb{margin-top:var(--rec-sect)}
@@ -4346,7 +4451,6 @@ button.vp-rec-att-thumb:hover,button.vp-rec-att-thumb:focus-visible{
    one threshold rather than two that nearly agree. */
 @media (max-width:820px){
   .vp-rec-still{float:none;width:100%;margin:0 0 var(--rh-block)}
-  .vp-rec-headline{max-width:none}
 }
 @media (max-width:720px){
   .vp-rec-pop{padding:16px;align-items:flex-end}

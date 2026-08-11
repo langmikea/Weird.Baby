@@ -12984,18 +12984,6 @@
    "t": "Move through the record",
    "c": "HOUSE"
   },
-  "38146242d8a3e20a": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 2000,
-   "t": "NEWEST",
-   "c": "HOUSE"
-  },
-  "053ea19b9e7e2bca": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 2003,
-   "t": "OLDEST",
-   "c": "HOUSE"
-  },
   "296197e85b3d0a4f": {
    "f": "src/routes/exhibit/Exhibit.jsx",
    "l": 2010,
@@ -13006,18 +12994,6 @@
    "f": "src/routes/exhibit/Exhibit.jsx",
    "l": 2011,
    "t": "the oldest record you have not opened",
-   "c": "HOUSE"
-  },
-  "411c41231fda763f": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 2012,
-   "t": "UNREAD",
-   "c": "HOUSE"
-  },
-  "c715260971964697": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 2015,
-   "t": "INDEX",
    "c": "HOUSE"
   },
   "03b8aa0f50eaf8c2": {
@@ -15793,6 +15769,12 @@
    "t": "The artists' work is the artists' — their music, their pictures, their words — and every door on their pages goes to them rather than to us. What is ours is the photographs of our own objects, taken here and printed here, and we are glad to be asked for those. [PAPA] — a plain licence for the museum's own images is Papa's to set.",
    "c": "MIKE",
    "s": "Mike's passage with the stale address clause struck, ruled 2026-08-11 (E)"
+  },
+  "b201966fd3d72091": {
+   "f": "src/routes/exhibit/RecordNav.jsx",
+   "l": 125,
+   "t": "INDEX",
+   "c": "HOUSE"
   }
  }
 }

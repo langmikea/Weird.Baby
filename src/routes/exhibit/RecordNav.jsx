@@ -97,14 +97,33 @@ function Step({ kind, disabled, name, onClick }) {
 }
 
 /* `place` is "top" or "foot" and only sets which way the row is pushed — the
-   set, the order and the marks are identical, which is the ruling. */
-export default function RecordNav({ list, open, read, onOpen, place = "top" }) {
+   set, the order and the marks are identical, which is the ruling.
+
+   ═══ [J1 2026-08-11] INDEX JOINS THE FRONT, AND THE FIVE MARKS DO NOT MOVE ══
+   MIKE: "One control group, SAME SET, in TWO PLACES: top right and bottom
+   right. INDEX joins the FRONT of the existing group; the five transport marks
+   keep their current order, unchanged. Do not reorder the marks. INDEX is the
+   only addition."
+   So it is one prop and one element, ahead of the row that was already here —
+   `onIndex` is passed at both call sites or at neither, which is what makes
+   "same set in two places" a property of the component rather than a thing two
+   call sites have to keep agreeing about.
+   IT STAYS A WORD WHILE THE OTHER FIVE STAY MARKS. The five move you WITHIN the
+   record and read as one instrument; INDEX leaves it. That distinction was
+   already drawn when INDEX sat apart in the jump bar (`--index` was pushed to
+   its own end of the row), and it survives the move — what changed is which
+   group it is docked to, not what it is. */
+export default function RecordNav({ list, open, read, onOpen, onIndex, place = "top" }) {
   if (!Array.isArray(list) || list.length < 2) return null;
   const last = list.length - 1;
   const unread = firstUnread(list, read || new Set());
   return (
     <nav className={"vp-rec-nav5 vp-rec-nav5--" + place}
          aria-label="Move through the record">
+      {onIndex && (
+        <button type="button" className="vp-rec-jumpbtn vp-rec-jumpbtn--index"
+                onClick={onIndex}>INDEX</button>
+      )}
       <Step kind="oldest" disabled={open === 0}
             name={NAMES.oldest} onClick={() => onOpen(0)} />
       <Step kind="prev" disabled={open === 0}
