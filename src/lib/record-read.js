@@ -18,9 +18,11 @@
 //
 // ─── WHAT A RECORD IS KEYED BY ───────────────────────────────────────────────
 // The entry's own NUMBER where it has one, its DATE where it has not, and its
-// title as the last resort. Never the index: the Record reads newest-first, so
-// an index is a position in a list that reorders itself the day an entry is
-// inserted — the same reasoning RecordEntry's newspaper door is built on.
+// title as the last resort. Never the index: an index is a position in a list
+// that reorders itself the day an entry is inserted — the same reasoning
+// RecordEntry's newspaper door is built on. That held when the Record read
+// newest-first and it still holds now that it reads oldest-first, which is the
+// point of keying on something the order cannot touch.
 
 const PREFIX = "wb-read-";
 
@@ -60,17 +62,22 @@ export function markRead(key, en, current) {
 
 /** The index of the FIRST UNREAD record, in reading order.
  *
- *  `list` arrives NEWEST-FIRST, because that is how a Record presents itself.
- *  Reading order is the other way round — the front desk's own first answer is
- *  "finish the FAQ, then follow The Record", and you follow a record forwards.
- *  So the first unread is the OLDEST one not yet opened, which is the HIGHEST
- *  index. It is where a visitor catching up left off, not the newest thing they
- *  have not seen.
+ *  ═══ [2026-08-11] THE LIST NOW ARRIVES OLDEST-FIRST, AND THIS WALKS FORWARD.
+ *  MIKE'S RULING: the Record reads like a book released a chapter a week, so
+ *  chapter one is first. This function's ANSWER has not changed — it has always
+ *  returned the OLDEST record not yet opened, because that is where a visitor
+ *  catching up left off, not the newest thing they have not seen. What changed
+ *  is where that entry sits: it was the HIGHEST index under a newest-first
+ *  list and it is the LOWEST index now.
+ *
+ *  This loop and `Exhibit.jsx`'s `list` are one decision in two files. If the
+ *  order is ever flipped again, both have to move, and so do `RecordNav.jsx`'s
+ *  arrows and `RecordJump`'s two jump targets.
  *
  *  Null when every record has been read — the caller disables the control
  *  rather than sending the visitor somewhere arbitrary. */
 export function firstUnread(list, read) {
-  for (let i = list.length - 1; i >= 0; i--) {
+  for (let i = 0; i < list.length; i++) {
     const id = entryKey(list[i]);
     if (id && !read.has(id)) return i;
   }

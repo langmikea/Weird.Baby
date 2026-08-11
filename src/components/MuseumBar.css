@@ -64,8 +64,18 @@
 /* only where the name actually does something */
 .wb-bar-room--live { cursor: pointer; }
 
+/* [F1 2026-08-11] THE TOP-RIGHT SLOT WEARS THE WORDMARK FACE, SITEWIDE.
+   MIKE'S RULING. It was 'Syne' — the ROOM face, which is what the centre slot
+   sets — so the bar's two ends were in two different families and only the
+   left one was the brand's. Both ends are the wordmark now and the room name
+   between them stays Syne, which is the distinction the bar is making: the
+   ends are Weird.Baby, the middle is where you are.
+   ONE DECLARATION REACHES EVERY PAGE THAT HAS A BAR, because <MuseumBar/> is
+   the only thing that draws this slot — /robots, /wb, /hr, /foundation and
+   /wal through Exhibit.jsx, plus /booth and /shop. The Lobby has no bar and
+   is untouched. */
 .wb-bar-exit {
-  font-family: 'Syne', sans-serif;
+  font-family: var(--wb-brand, 'Fredoka', sans-serif);
   font-weight: 800;
   font-size: 0.7rem;
   letter-spacing: 0.25em;

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { entryStamp, entryDateline } from "../../lib/record-model.js";
 import RecordAttachments from "./RecordAttachments.jsx";
+import RecordNav from "./RecordNav.jsx";
 
 /* ===========================================================================
    [RC 2026-08-04] THE RECORD ENTRY — MIKE'S APPROVED CONTAINER, BUILT ONCE.
@@ -220,7 +221,11 @@ function SectionBody({ body, doors, onFire }) {
 
 /* ======================================================================== */
 export default function RecordEntry({
-  entry, list, open, epoch, openLink, onOpen, onClose, twinEvent,
+  /* [2026-08-11] `read` arrives so the transport's UNREAD mark can be told
+     which records this visitor has opened. It is the same Set the index marks
+     its rows from, threaded down rather than re-read from `localStorage` here:
+     one reader of the register per surface, and the entry is not one of them. */
+  entry, list, open, epoch, openLink, onOpen, onClose, twinEvent, read,
 }) {
   /* the one piece of state on this surface, and it is a door's overlay:
      { mode:"record", i } | { mode:"held", kind, label, note } */
@@ -253,6 +258,33 @@ export default function RecordEntry({
      index — nothing scrolls, because a page that jumps when it did not need to
      is the opposite of graceful. `smooth` is dropped under
      `prefers-reduced-motion`, where the same instruction still has to work. */
+  /* ═══ [2026-08-11] AND IT NO LONGER THROWS THE HEADING AWAY ════════════════
+     MIKE: pressing a control walked the record and took the control he had just
+     pressed — and the face heading above it — off the top of the screen.
+
+     THE CAUSE WAS `block: "start"`. It puts the record's head at pixel zero of
+     the viewport, and EVERYTHING THAT RENDERS ABOVE THE RECORD IS THEREFORE
+     ABOVE THE VIEWPORT: the jump bar, the face heading, the new transport row.
+     The effect was doing exactly what it said; what it said was too strong.
+
+     THE FIX IS A STOP LINE ON THE TARGET, AND IT IS `scroll-margin-top`.
+     `.vp-rec-head` carries one in `Exhibit.css`, so `block: "start"` now aims
+     at a line that many pixels ABOVE the head — enough for the transport row
+     and the heading it sits under to stay on screen.
+
+     WHY NOT ARITHMETIC HERE. The obvious version reads the head's position and
+     calls `window.scrollTo` with the margin subtracted. It was written that way
+     first and it was wrong: it assumes the WINDOW is the scroller, and this
+     surface is not guaranteed to be — the exhibit is a scroll-snap document and
+     was measured, in the 390px rig, refusing `window.scrollTo` and
+     `documentElement.scrollTop` alike. `scrollIntoView` finds whatever the
+     scrolling ancestor actually is, which is the whole reason to keep it;
+     `scroll-margin-top` is the platform's own way to say "stop short", and it
+     travels with the element rather than with an assumption about the page.
+
+     WHAT IS UNCHANGED: it still only moves the page when it has to (the guard
+     below), it still drops `smooth` under `prefers-reduced-motion`, and it is
+     still a mount effect because the component is remounted on every walk. */
   const headRef = useRef(null);
   useEffect(() => {
     const el = headRef.current;
@@ -315,6 +347,13 @@ export default function RecordEntry({
 
   return (
     <>
+      {/* [2026-08-11] THE TRANSPORT, TOP-RIGHT. Same five marks as the foot,
+          same order, same icons — Mike's ruling is that the set does not change
+          between the two positions, so there is one component and it is passed
+          a side rather than a different list of controls. */}
+      <RecordNav list={list} open={open} read={read}
+                 onOpen={onOpen} place="top" />
+
       {/* THE HEAD IS THE CONTROL, unchanged from M5: the thing that opened
           this record closes it, and there is no second shut button. What is
           new is what it carries — a stamp and the dateline.
@@ -353,6 +392,33 @@ export default function RecordEntry({
       )}
 
       <h3 key="headline" className="vp-rec-headline">{entry.title}</h3>
+
+      {/* ═══ [2026-08-11] THE DECK IS BACK, AND IT IS THE INDEX'S DECK ════════
+          MIKE'S RULING: the opened record shows the SAME subtext as the index,
+          in the SAME FONT — no change between the two views.
+
+          THIS IS NOT THE FALLBACK D2 STRUCK, AND THE DIFFERENCE IS THE WHOLE
+          REASON IT CAN COME BACK. D2 removed `lead || entry.line`, which set
+          `line` IN THE LEAD'S OWN BLOCKQUOTE WEIGHT when an entry had no lead —
+          so Record 001 printed an Ops-drafted summary in display type directly
+          above Mike's own EXECUTIVE SUMMARY heading. Two summaries of one
+          report, stacked, the smaller one first and dressed as the larger.
+          What is here is a DECK: `.vp-rec-deck` takes the index row's face,
+          size, weight, colour and `pre-line` wrapping (`Exhibit.css`), so it
+          reads as the same object a reader met on the index one click ago.
+
+          AN ENTRY WITH BOTH `lead` AND `line` NOW PRINTS BOTH, in that order,
+          and they are not two of anything: the deck is the index sentence and
+          the lead is the opening paragraph. Record 013 is the case — it has
+          carried both fields since it was written, and until today only the
+          lead drew.
+
+          THE PEEK BELOW STILL READS `lead || line` and is untouched: a
+          newspaper door pops another record's HEAD, which is an index row in a
+          card, and one line is all a card holds. */}
+      {entry.line && (
+        <p key="deck" className="vp-rec-deck">{entry.line}</p>
+      )}
 
       {/* THE LEAD. Blockquote weight because it is the one paragraph that has
           to survive being read alone — in the index, in a share, or by a
@@ -424,13 +490,18 @@ export default function RecordEntry({
           reads "1 of 1" — three objects saying the same nothing. The cursor keys
           (RecordJump, Exhibit.jsx) are the same walk and are not gated, because a
           key that does nothing costs no attention and Escape still closes. */}
+      {/* ═══ [2026-08-11] FIVE MARKS, BOTTOM-LEFT, AND THE TEXT WALK IS GONE.
+          `‹ NEWER` and `OLDER ›` are deleted rather than re-labelled. They were
+          two controls where the ruling asks for five, and their words were the
+          part of the order flip most likely to end up lying — the labels had to
+          be re-read the moment the volume changed direction, which is exactly
+          what has just happened to them. The count stays: it says WHERE YOU
+          ARE, which no mark does. */}
       {list.length > 1 && (
       <nav key="nav" className="vp-rec-nav">
-        <button className="vp-rec-step" disabled={open === 0}
-                onClick={() => walk(open - 1)}>&lsaquo; NEWER</button>
+        <RecordNav list={list} open={open} read={read}
+                   onOpen={walk} place="foot" />
         <span className="vp-rec-count">{open + 1} of {list.length}</span>
-        <button className="vp-rec-step" disabled={open === list.length - 1}
-                onClick={() => walk(open + 1)}>OLDER &rsaquo;</button>
       </nav>)}
 
       {/* ==== THE DOOR'S OWN OVERLAY ======================================

@@ -189,7 +189,13 @@
      change a computed value. Proven on glass anyway - see STATE,
      THE BREEZY SESSION. */
   /* Brand wordmark face — rounded, akin to the logo's bubble lettering.
-     Trial scope: the nav wordmark only (2026-06-07). */
+     [F2 2026-08-11] SCOPE: BOTH ENDS OF THE MUSEUM BAR, on every page that
+     carries one. The line here read "trial scope: the nav wordmark only
+     (2026-06-07)" and that trial is over — Mike ruled the top-right slot wears
+     this face sitewide, so `.wb-bar-brand` and `.wb-bar-exit` both read it
+     (`MuseumBar.css`). The room name between them is deliberately NOT in it:
+     the ends are the brand, the middle is the room. Nothing outside the bar
+     reads this token. */
   --wb-brand: 'Fredoka', 'Baloo 2', 'Quicksand', system-ui, sans-serif;
 
   /* ---- [L3 2026-08-02] THE PAPER RAMP, HELD FOR THE SCOPES THAT MUST ESCAPE

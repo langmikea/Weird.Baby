@@ -15769,6 +15769,54 @@
    "t": "We decided to stand up /Robots as a page to track our progress for a few days. It is weird if nothing else. Maybe try to get a little crowdsourcing going on dealing with this, going forward.",
    "c": "MIKE",
    "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "6f7b27b613a63062": {
+   "f": "src/routes/exhibit/RecordNav.jsx",
+   "l": 68,
+   "t": "the first record",
+   "c": "HOUSE"
+  },
+  "9f204022d43f3887": {
+   "f": "src/routes/exhibit/RecordNav.jsx",
+   "l": 69,
+   "t": "the record before this one",
+   "c": "HOUSE"
+  },
+  "95888bafa9bfca52": {
+   "f": "src/routes/exhibit/RecordNav.jsx",
+   "l": 70,
+   "t": "the record after this one",
+   "c": "HOUSE"
+  },
+  "bbef5408a5583593": {
+   "f": "src/routes/exhibit/RecordNav.jsx",
+   "l": 71,
+   "t": "the oldest record you have not opened",
+   "c": "HOUSE"
+  },
+  "58ff29364a5fe4bf": {
+   "f": "src/routes/exhibit/RecordNav.jsx",
+   "l": 72,
+   "t": "the newest record",
+   "c": "HOUSE"
+  },
+  "33317f02444d18a3": {
+   "f": "src/routes/exhibit/RecordNav.jsx",
+   "l": 75,
+   "t": "every record has been read",
+   "c": "HOUSE"
+  },
+  "dc46f8f4ff7e5df6": {
+   "f": "src/routes/exhibit/RecordNav.jsx",
+   "l": 101,
+   "t": "top",
+   "c": "HOUSE"
+  },
+  "e381fb4dd3a0f105": {
+   "f": "src/routes/exhibit/RecordNav.jsx",
+   "l": 107,
+   "t": "Move through the record",
+   "c": "HOUSE"
   }
  }
 }

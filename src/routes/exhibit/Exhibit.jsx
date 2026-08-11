@@ -5,6 +5,7 @@ import { launched } from "../../lib/placement.js";
 import { useArrival } from "../../lib/use-arrival.js";
 import MuseumBar from "../../components/MuseumBar.jsx";
 import RecordEntry from "./RecordEntry.jsx";
+import RecordNav from "./RecordNav.jsx";
 import RecordIndexRow from "./RecordIndexRow.jsx";
 /* [D7 2026-08-06] M62, OPTION A. The Foundation is a `face` wing now, and
    three of its objects have no equivalent in the face model — the $0.00
@@ -2491,8 +2492,17 @@ function ArchiveWall({ face, openLink }) {
    buttons alone are the reach.
 
      ← / →      the record before / the record after
-     Home/End   the newest / the oldest
+     Home/End   the oldest / the newest
      Escape     back to the index
+
+   [2026-08-11] THE KEYS DID NOT MOVE AND THAT LINE DID. `Home` is `onOpen(0)`
+   and `End` is `onOpen(list.length - 1)` exactly as before; what changed is
+   which record sits at each end, because the volume reads oldest-first now. So
+   Home reaches the FIRST record and End the LATEST — which is what those two
+   keys mean everywhere else — and ← / → still walk back and forward through
+   the volume in reading order. The code is untouched; only this line was
+   wrong, and a comment that describes the opposite of the behaviour is the
+   kind of thing the next session builds on.
 
    AND THE ARROWS ARE ALREADY TAKEN, which is the one thing that made this more
    than a listener: `Exhibit.jsx`'s coverflow moves ALBUMS on ← and →. It now
@@ -2533,12 +2543,18 @@ function RecordJump({ list, open, read, onOpen, onClose }) {
   const unread = firstUnread(list, read);
   return (
     <nav className="vp-rec-jump" aria-label="Move through the record">
+      {/* ═══ [2026-08-11] THE TARGETS SWAPPED WITH THE ORDER, AND SO DID THE
+          READING ORDER OF THE TWO BUTTONS. The list is oldest-first now, so
+          index 0 IS the oldest and `length - 1` IS the newest — the two
+          `onOpen` arguments below are the exact opposite of what they were.
+          OLDEST is printed first because that is now the head of the volume,
+          and the bar reads left to right the way the index does. */}
       <button type="button" className="vp-rec-jumpbtn"
               disabled={open === 0}
-              onClick={() => onOpen(0)}>NEWEST</button>
+              onClick={() => onOpen(0)}>OLDEST</button>
       <button type="button" className="vp-rec-jumpbtn"
               disabled={open === list.length - 1}
-              onClick={() => onOpen(list.length - 1)}>OLDEST</button>
+              onClick={() => onOpen(list.length - 1)}>NEWEST</button>
       {/* THE ONE CONTROL THAT KNOWS SOMETHING THE PAGE DOES NOT: where this
           visitor stopped. Disabled — rather than hidden — once everything has
           been read, because a control that vanishes when you finish is a
@@ -4531,9 +4547,24 @@ export default function Exhibit({ artist, open = null }) {
                         {Array.isArray(face.entries) && face.entries.length > 0 && (() => {
                           const isLog = face.entriesMode === "log";
                           const isFaq = face.entriesMode === "faq";
-                          /* reversal happens HERE, not in the data: the entries
-                             stay in the order they happened. */
-                          const list = isLog ? [...face.entries].reverse() : face.entries;
+                          /* ═══ [2026-08-11] THE RECORD READS OLDEST TO NEWEST.
+                             MIKE'S RULING: "like a book released a chapter a
+                             week: chapter one first." This line used to reverse
+                             the log — `[...face.entries].reverse()` — so that a
+                             visitor met the newest entry at the top. It does
+                             not any more, and NOTHING ELSE IN THE DATA MOVED:
+                             the entries were always authored in the order they
+                             happened, which is why the flip is the deletion of
+                             a `.reverse()` rather than an edit to `robots.js`.
+                             FIVE THINGS INVERTED WITH IT and are corrected in
+                             the same packet: `RecordJump`'s two jump targets
+                             below, `firstUnread` in `record-read.js` (it walks
+                             forward now), the entry's transport arrows
+                             (`RecordNav.jsx`), the Home/End keys, and the
+                             non-sections walk further down this file.
+                             `groupByPeriod` needed NOTHING — it bands in the
+                             order it is handed and never reorders. */
+                          const list = face.entries;
                           /* [R7 2026-08-06] A THIRD MODE, AND IT IS THE BOOTH'S.
                              See `FaqEntries` above the component for the ruling
                              and for why an accordion is not the hidden
@@ -4713,6 +4744,7 @@ export default function Exhibit({ artist, open = null }) {
                               openLink={openLink}
                               onOpen={openAt}
                               onClose={closeRec}
+                              read={readRecords}
                               twinEvent={face.twinEvent} />
                             </>
                           );
@@ -4839,14 +4871,22 @@ export default function Exhibit({ artist, open = null }) {
                                  TO WALK. On a one-record volume both halves have
                                  been rendering permanently disabled since M5,
                                  which is two dead controls and a count that
-                                 reads "1 of 1". */
+                                 reads "1 of 1".
+                                 ═══ [2026-08-11] AND IT IS THE SAME FIVE MARKS
+                                 THE LONG ENTRY WEARS. This is the foot of an
+                                 opened record too — the path an entry takes when
+                                 it declares no `sections` — so it takes the same
+                                 transport rather than a second, differently
+                                 worded walk. That also retires the last pair of
+                                 `‹ NEWER / OLDER ›` labels in the building: they
+                                 pointed the wrong way the moment the order
+                                 flipped, and a triangle cannot. The count stays;
+                                 it says where you are, which no mark does. */
                               list.length > 1 ? (
                               <nav key="nav" className="vp-rec-nav">
-                                <button className="vp-rec-step" disabled={open === 0}
-                                        onClick={() => openAt(open - 1)}>‹ NEWER</button>
+                                <RecordNav list={list} open={open} read={readRecords}
+                                           onOpen={openAt} place="foot" />
                                 <span className="vp-rec-count">{open + 1} of {list.length}</span>
-                                <button className="vp-rec-step" disabled={open === list.length - 1}
-                                        onClick={() => openAt(open + 1)}>OLDER ›</button>
                               </nav>) : null,
                             ].filter(Boolean)
                           );

@@ -1501,7 +1501,16 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    on charcoal and white-on-white on print stock, i.e. no affordance at all. */
 .vp-rec-open:hover,.vp-rec-open:focus-visible{
   background:color-mix(in srgb, var(--wb-gold) 7%, transparent);outline:none}
-.vp-rec-index .vp-rec-row:last-child .vp-rec-open{border-bottom:1px solid var(--wb-border)}
+/* ═══ [2026-08-11] THE LAST ROW'S BOTTOM RULE IS GONE, NOT MOVED ════════════
+   There were TWO rules for this selector — a `1px` here and a `0` further down
+   under [STAGE] — and the second won, so the first had been dead for as long
+   as both existed. The [STAGE] one is the one with a reason behind it: with the
+   stage splitting a list across pages every row carries its own container, and
+   a bottom rule on the last row of each would draw a SECOND line between every
+   pair. Top-only is seamless whether the list is whole or paged.
+   So the index closes on its top rules alone. The dead declaration is deleted
+   rather than left as a comment; the reasoning that survived it lives at the
+   [STAGE] rule, where the behaviour is. */
 
 /* ---- [R1] THE MARK. A fixed column at the far left, so every row's headline
    starts on one vertical however much or little the mark holds. The number is
@@ -1555,6 +1564,28 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    the text readable; the no-wrap guarantee is an AUTHORING budget, measured at
    46 characters a line at 390px, and it is kept by the person writing. */
 .vp-rec-sum{opacity:.72;white-space:pre-line}
+
+/* ═══ [2026-08-11] THE DECK, IN THE OPENED RECORD ═══════════════════════════
+   MIKE'S RULING: the opened record shows the same subtext as the index, in the
+   SAME FONT — no change between views. So this takes the index deck's face,
+   size, weight, colour, leading and `pre-line` wrapping, and it takes them by
+   restating the same values rather than by sharing a class: `.vp-rec-sum` is
+   scoped inside `.vp-rec-index` for A4's reason (the index row is built from
+   the SHARED `.vp-fe-*` classes, and restyling those bare retypes the FAQ,
+   Worth A Listen and every other entry list), and the opened record is not in
+   that scope. Two declarations, one appearance, and the scoping stays honest.
+   `pre-line` is what makes an authored \n a line break — the deck is budgeted
+   at two lines and the author decides where the first one ends.
+
+   THE FOUR VALUES ARE READ OFF THE INDEX ROW RATHER THAN GUESSED AT. The row
+   renders `.vp-fe-line.vp-rec-sum` inside `.vp-rec-index`, which resolves to:
+   `--fs-body` (the base `.vp-fe-line`, NOT `--fs-small`), `--wb-dim` (same),
+   `--wb-plain` at 1.4 leading and zero tracking (the `.vp-rec-index` override),
+   `68ch` (that override widens the base's 56ch), and `.72` opacity with
+   `pre-line` (`.vp-rec-sum`). Every one of those is restated here. */
+.vp-rec-deck{font-family:var(--wb-plain);font-size:var(--fs-body);
+  line-height:1.4;letter-spacing:0;max-width:68ch;color:var(--wb-dim);
+  opacity:.72;white-space:pre-line;margin:var(--rec-hug) 0 0}
 
 /* ═══ [A3/A4 2026-08-08] THE INDEX ROW TAKES THE RECORD'S REGISTER, AND THE
    SCOPING IS THE WHOLE OF A4's ANSWER ══════════════════════════════════════
@@ -1639,7 +1670,17 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 .vp-rec-wire,.vp-rec-plates,.vp-rec-docs{margin-top:12px}
 .vp-rec-end{margin-top:10px}
 .vp-rec-nav{margin-top:10px}
-.vp-rec-head{display:flex;gap:14px;align-items:baseline;width:100%;text-align:left;
+/* [C1 2026-08-11] THE STOP LINE FOR THE WALK'S SCROLL. `RecordEntry` aims the
+   page at this element with `scrollIntoView({block:"start"})` on every walk,
+   and `block: "start"` means pixel zero — which put the control Mike had just
+   pressed, and the face heading above it, off the top of the screen. This is
+   how far short of the head the scroll now stops: the transport row (34px) and
+   the heading's own step, with air. It lives here rather than as arithmetic in
+   the effect because `scrollIntoView` resolves whatever the scrolling ancestor
+   is, and a hand-rolled `window.scrollTo` does not — measured in the 390px rig,
+   where this document refuses both `window.scrollTo` and `scrollTop`. */
+.vp-rec-head{scroll-margin-top:96px;
+  display:flex;gap:14px;align-items:baseline;width:100%;text-align:left;
   background:none;border:0;border-bottom:1px solid var(--wb-border);
   padding:0 0 6px;cursor:pointer;color:inherit;font:inherit}
 .vp-rec-head:hover .vp-rec-title,.vp-rec-head:focus-visible .vp-rec-title{
@@ -1695,6 +1736,41 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 /* INDEX is the way OUT of a record and sits apart from the three that move you
    within it. */
 .vp-rec-jumpbtn--index{margin-left:auto}
+
+/* ═══ [2026-08-11] THE FIVE MARKS, AND THEY ARE ONE ROW IN TWO PLACES ═══════
+   Same set, same order, same size at the top of a record and at its foot; only
+   the justification differs, because Mike put one at the top-RIGHT and one at
+   the bottom-LEFT. The button is a 34px target — a hair over the 32px minimum
+   for a thumb — with the mark set at 20px inside it, which is the same optical
+   size as the door icons the entry already carries.
+   COLOUR FOLLOWS THE JUMP BAR EXACTLY, so the two kinds of control on this
+   surface do not read as two different systems: dim gold at rest, full gold on
+   hover and focus, .32 opacity and no pointer when there is nowhere to go. */
+.vp-rec-nav5{display:flex;align-items:center;gap:2px}
+.vp-rec-nav5--top{justify-content:flex-end;margin-bottom:var(--rec-block)}
+.vp-rec-nav5--foot{justify-content:flex-start}
+.vp-rec-nav-btn{display:inline-flex;align-items:center;
+  justify-content:center;width:34px;height:34px;padding:0;
+  background:none;border:0;border-radius:3px;cursor:pointer;
+  color:var(--wb-gold-lo);transition:color .15s,background .15s}
+.vp-rec-nav-btn:hover:not(:disabled),
+.vp-rec-nav-btn:focus-visible:not(:disabled){
+  color:var(--wb-gold);background:color-mix(in srgb,var(--wb-gold) 9%,transparent);
+  outline:none}
+.vp-rec-nav-btn:disabled{opacity:.32;cursor:default}
+.vp-rec-nav-ico{width:20px;height:20px;display:block}
+
+/* [E1 2026-08-11] THE JUMP BAR IS PART OF THE INDEX, NOT A SECTION OF ITS OWN.
+   It was a direct child of `.vp-flat` and so took `--rh-sect` (2.6x the face
+   size, about 40px) ABOVE it and gave the index another 40px BELOW it — eighty
+   pixels of air around one line of small buttons, while the rows it belongs to
+   are flush with a hairline between them. It reads as its own section, which
+   it is not: it is the index's controls.
+   THE SECTION STEP STAYS ABOVE THE BAR, because the bar is where the index
+   begins and the index IS a section. What closes up is the gap under it — the
+   same shape as `.vp-spread-head + .vp-collage`, where a heading and the thing
+   it heads are one object. */
+.vp-flat > .vp-rec-jump + .vp-rec-index{margin-top:var(--rh-tight)}
 
 /* AN UNREAD RECORD IS MARKED ON ITS OWN ROW. A rule down the left edge rather
    than a dot: the index is a register of ruled rows and a dot would be the one
