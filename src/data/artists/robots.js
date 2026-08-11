@@ -535,87 +535,97 @@ const WBR_TRACKS = [
             { no: 1,
               date: recordDay(1),
               title: "INITIAL LAUNCH REPORT - Weird.Baby",
-              /* OPS' SENTENCE, MIKE'S APPROVAL — CARRIED, NOT REWRITTEN. His
-                 worksheet holds no LINE for day one, so the index row keeps the
-                 sentence he approved on 2026-08-08. It is still RESTATED, still
-                 resolves to the two paragraphs of his it restates, and must not
-                 be re-marked MIKE. It still describes the longer body: the
-                 launch, and the onslaught that started on Friday. */
-              line: "Weird.Baby launched on schedule. The email server took " +
-                    "an onslaught of unexplained data starting Friday.",
+              /* ═══ [2026-08-10] THE DECK IS HIS, AND THE OPS SENTENCE IS GONE
+                 RATHER THAN CARRIED ═══════════════════════════════════════════
+                 This field held a sentence OPS drafted and Mike approved on
+                 2026-08-08, filed RESTATED because approval is not authorship.
+                 He has now dictated the deck himself, so the drafted sentence is
+                 DELETED and its RESTATED row is pruned — a restatement of two
+                 paragraphs that no longer exist resolves to nothing, and keeping
+                 it beside his own words would be two decks for one entry.
+                 THE CLASS MOVES WITH THE WORDS: MIKE, not RESTATED, and it
+                 carries no `r` because it restates nothing — it is the thing
+                 itself.
+                 TWO LINES, AND THE `\n` IS LOAD-BEARING. Mike's ruling: the deck
+                 is always two lines and never wraps. `white-space: pre-line` on
+                 `.vp-rec-sum` makes the break real; before 2026-08-10 this
+                 character collapsed to a space and the deck ran as one
+                 paragraph. Measured at 390px against a 339.69px column: line one
+                 26 characters / 177.90px, line two 46 / 329.11px. The budget is
+                 46 characters and line two is exactly on it, with 10.58px of
+                 slack — an em dash is 5px wider than a hyphen, so swapping the
+                 punctuation is not free. */
+              line: "Weird.Baby website is live\n" +
+                    "Alert — Incoming Email Server Load (contained)",
+              /* [2026-08-10] HIS DICTATION, TYPOS CORRECTED ON HIS OWN
+                 INSTRUCTION — which is the one difference from the 2026-08-08
+                 landing, where three things that looked like errors were kept
+                 because he ruled them his. This text supersedes that one whole.
+                 FIVE SECTIONS. The three ADDENDUM blocks are sections in their
+                 own right rather than paragraphs inside DETAILED REPORT, because
+                 each carries its own heading in his text and `label` is the
+                 field a heading goes in. No field is invented: `label` + `body`
+                 is the shape the model already had.
+                 THE `o ` BULLETS ARE HIS CHARACTERS AND ARE KEPT. There is no
+                 list markup in a Record body and inventing one would be a new
+                 field; each bullet is its own paragraph, carrying his marker.
+                 FOUR PASSAGES ARRIVED WRAPPED MID-SENTENCE in the dictation and
+                 are joined here into one string each — the two prose paragraphs
+                 closing ADDENDUM 01, the last of ADDENDUM 02, and the last of
+                 ADDENDUM 03. Split at the wrap they would print as separate
+                 paragraphs beginning lower-case. Named here so the join is a
+                 decision on the record rather than an invisible tidy. */
               sections: [
                 { label: "EXECUTIVE SUMMARY",
                   body: [
-                    "Congratulations!",
-                    "Weird.Baby launched to the world at 12:00 am Monday "
-                    + "morning, on schedule and on spec; the Weird.Baby "
-                    + "website is live, a clean hand-off was made, and "
-                    + "Operations has the ball.",
-                    "Reportable Incident - The Weird.Baby email server has "
-                    + "been subject to an onslaught of data that would appear "
-                    + "to be unrelated to our primary mission. Full "
-                    + "containment  was made to prevent disruptions of "
-                    + "service prior to turning on the Weird.Baby website. "
-                    + "The data continues to be received.",
+                    "Weird.Baby launched on schedule. No deviations; "
+                    + "f(Ump) = 100%",
+                    "Handoff is on track (T-6); Operations has "
+                    + "hands-on-the-ball.",
                   ] },
                 { label: "DETAILED REPORT",
                   body: [
-                    "FRIDAY DAY (-3)",
-                    "15:00 - Weird.Baby email server goes public (scheduled "
-                    + "early auto start)",
-                    "15:01 - Weird.Baby email server BIST - PASS",
+                    "ALARM - Incoming Email Server Load 1000x",
+                    "o Operations remains unaffected.",
+                    "o Not single sourced, so not as simple as "
+                    + "\"turn it off.\"",
+                    "o Data transmissions went silent shortly after WB launch.",
+                  ] },
+                { label: "ADDENDUM 01 - Event Log - Friday Launch(-2)",
+                  body: [
+                    "15:00 - Weird.Baby email server Scheduled Early Auto Start",
+                    "15:01 - Weird.Baby System BIST - No deviations; "
+                    + "f(Ump) = 100%",
                     "15:14 - First data packet received",
                     "15:58 - Second data packet received",
-                    "16:00 - Onslaught - Incoming data =  86% vs threshold",
-                    "16:10 - Server auto-shutdown, auto containment. and "
-                    + "auto alerts",
+                    "16:00 - Incoming data crosses 86% vs threshold",
+                    "16:10 - Server auto-shutdown, auto-containment, and "
+                    + "auto-alerts",
                     "16:13 - REACT - Team is convened",
-                    "23:30 - REACT - RULING - Restart with 50x resources. "
-                    + "Stress test.",
+                    "23:30 - REACT RULING - Restart with 5000x resources.",
                     "The decision to resume was determined to be low risk, "
-                    + "reversible, and we still did not know if the data was "
-                    + "useful. The team was more intrigued than concerned.",
-                    "SATURDAY DAY(-2) and SUNDAY DAY(-1)",
-                    "Most of what has been received so far consists of "
-                    + "pages of hexadecimal numbers; presumably data that "
-                    + "needs to be compiled and assembled into something "
-                    + "usable.",
-                    "We ran some of the data through a ML Monitor to "
-                    + "inspect the contents. No known Opcode library produced "
-                    + "any favorable results, but we were able to read a few "
-                    + "snippets of ASCII, including:",
-                    "Also, not \"words\", but suspiciously frequent text "
-                    + "strings include:",
-                    /* [E2 2026-08-09] FIVE OF HIS PARAGRAPHS AND THREE OF OPS'
-                       ANSWERS STOOD BETWEEN THESE TWO LINES AND THE ONE BELOW,
-                       AND THEY ARE OUT OF THE MUSEUM'S DATA ALTOGETHER.
-                       MIKE: notes to Ops live in curly braces, in his working
-                       copy, and "the red/blue inline answers in the published
-                       entry are retired; that was Ops answering in the wrong
-                       place."
-                       HIS FIVE MOVED WHOLE AND VERBATIM — not cut at a
-                       parenthesis, not split into a story half and a note half,
-                       not reworded — into `record-draft.json`, in the exact
-                       position he wrote them, each wrapped in the braces the new
-                       scheme uses. `tools/dictation/record-edit.mjs` carries
-                       them and he meets them again on the page he now writes on.
-                       WHAT IT COSTS IS SAID RATHER THAN HIDDEN: two of his own
-                       sentences above now end in a colon with nothing after
-                       them. That is the true state of this report — the examples
-                       he asked for do not exist yet — and inventing three lines
-                       to close a colon is the exact act Doctrine 12 refuses.
-                       OPS' THREE ANSWERS ARE NOT CARRIED ANYWHERE ON THE GLASS.
-                       They are quoted once in the round log that removed them,
-                       and the one of them that is genuinely his to rule on (what
-                       the first four devices are called) is a row in
-                       `docs/OPEN_ACTIONS.md`, not a paragraph in his report. */
-                    "MONDAY DAY(0) - Weird.Baby Go-Live!",
-                    "00:00 - The Go-Live went off without a hitch.",
-                    "00:02 - Data stream ended",
-                    "The remainder of the day was completely uneventful",
-                    "Weird.Baby uptime - 100%, no further anomalies",
-                    "We decided to stand up /Robots as a page "
-                    + "(crowdsourcing potential)",
+                    + "reversible, and a real world stress test.",
+                    "The engineering team was more intrigued than concerned, "
+                    + "and not involved in the determination.",
+                  ] },
+                { label: "ADDENDUM 02 - Weekend Summary",
+                  body: [
+                    "Staff onsite to support Weird.Baby launch - Nothing to "
+                    + "report.",
+                    "The time was put to use reviewing the incoming data.",
+                    "Pages of hexadecimal numbers; presumably needs to be "
+                    + "compiled and assembled into something usable.",
+                  ] },
+                { label: "ADDENDUM 03 - Event Log - Monday Day(1)",
+                  body: [
+                    "00:00 - WB Go-Live went off without a hitch.",
+                    "00:02 - Incoming data stream ended",
+                    "The remainder of the day was completely uneventful.",
+                    "Weird.Baby uptime - 100%, no further anomalies.",
+                    "We decided to stand up /Robots as a page to track our "
+                    + "progress for a few days. It is weird if nothing else. "
+                    + "Maybe try to get a little crowdsourcing going on "
+                    + "dealing with this, going forward.",
                   ] },
               ] },
             { no: 2,

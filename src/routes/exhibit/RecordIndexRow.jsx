@@ -1,4 +1,8 @@
-import { entryStamp, evidenceOf } from "../../lib/record-model.js";
+/* [2026-08-10] `entryStamp` is no longer imported here — the date came out of
+   the rail on Mike's ruling. It is NOT unused: `RecordEntry.jsx` (twice) and
+   `Exhibit.jsx`'s non-log entry lists still call it, so nothing was deleted
+   from `record-model.js`. */
+import { evidenceOf } from "../../lib/record-model.js";
 
 /* ===========================================================================
    [D4 2026-08-08] ONE ROW OF THE RECORD'S INDEX, LIFTED OUT OF `Exhibit.jsx`
@@ -46,21 +50,24 @@ export default function RecordIndexRow({ entry, unread, onOpen }) {
             way an index position does; and the entry's own dateline already
             prints `Record 013` inside, so the rail and the record agree by
             construction.
-            THE DATE IS NOT DROPPED — it sits under the number the moment an
-            entry carries one, derived by `entryStamp` exactly as before. An
-            entry with both shows both; an entry with neither shows an empty rail
-            that still holds the column, so the rows stay aligned either way.
-            [D1 2026-08-08] AND RECORD 001 IS THE FIRST ENTRY TO SHOW BOTH: the
-            rail was written for a day that had not been supplied, and the day
-            has been supplied. */}
+
+            ═══ [2026-08-10] THE DATE IS OUT OF THE RAIL. MIKE'S RULING. ══════
+            The rail holds the number and nothing else. The paragraph that stood
+            here said the date "sits under the number the moment an entry carries
+            one" — it did, and at 390px it did not fit: `17 AUG 26` needs 71.97px
+            of Courier Prime against a 44px rail, so it WRAPPED TO THREE LINES on
+            every dated row and made the rail 39px tall. That was live on the
+            glass and nothing reported it, because a wrap is not an overflow.
+            THE DATE IS NOT LOST AND NOTHING ABOUT THE DATA MOVED. `date` is
+            untouched on every entry, `entryStamp` is untouched and still has
+            four callers, and `entryDateline` still prints `Week 1 · Monday ·
+            Record 001` at the head of the opened record — which is where a
+            reader who wants the day is already looking. */}
         <span className="vp-rec-mark" aria-hidden="true">
           {typeof en.no === "number" && (
             <b className="vp-rec-mark-no">
               {String(en.no).padStart(3, "0")}
             </b>
-          )}
-          {entryStamp(en) && (
-            <i className="vp-rec-mark-day">{entryStamp(en)}</i>
           )}
         </span>
         <span className="vp-fe-body">
@@ -92,14 +99,27 @@ export default function RecordIndexRow({ entry, unread, onOpen }) {
               </span>
             ))}
           </span>
-          {/* [R3 2026-08-06] THE SUMMARY, WHOLE. `vp-rec-peek` was a one-line
-              clamp with an ellipsis — the "half-sentence teaser" Mike struck.
-              The class is gone rather than widened: a two-line clamp is the same
-              failure with a longer fuse. The row is a fixed height and the
-              summary is budgeted to fit it (gate: RECORD BUDGETS in
-              reveal/record-shape.mjs), so nothing here can truncate. */}
-          {en.line && <span className="vp-fe-line vp-rec-sum">{en.line}</span>}
         </span>
+        {/* [R3 2026-08-06] THE SUMMARY, WHOLE. `vp-rec-peek` was a one-line
+            clamp with an ellipsis — the "half-sentence teaser" Mike struck.
+            The class is gone rather than widened: a two-line clamp is the same
+            failure with a longer fuse. The row is a fixed height and the
+            summary is budgeted to fit it (gate: RECORD BUDGETS in
+            reveal/record-shape.mjs), so nothing here can truncate.
+
+            ═══ [2026-08-10] THE DECK IS FULL WIDTH AND IT IS A GRID SIBLING NOW.
+            MIKE'S RULING: the deck runs the whole row beneath the rail, and the
+            rail indents the HEADLINE only. It was inside `.vp-fe-body`, in the
+            second column, so it started where the headline starts and gave up
+            60px of a 390px screen to a rail it did not need — 38 characters a
+            line against 46 out here, measured.
+            IT LEFT `.vp-fe-body` RATHER THAN THE BODY BEING DISSOLVED, which is
+            the smaller change: `.vp-fe-body` is a SHARED class (`Exhibit.jsx`'s
+            other entry lists use it) and it still wraps the headline row and
+            still carries its 68ch cap. Only the deck moved out.
+            The row is `display: grid` with two columns; this span sets
+            `grid-column: 1 / -1` and drops to the second row. */}
+        {en.line && <span className="vp-fe-line vp-rec-sum">{en.line}</span>}
       </button>
     </li>
   );

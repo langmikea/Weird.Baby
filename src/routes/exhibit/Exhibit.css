@@ -1471,12 +1471,31 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
             headlines a column. Filling it was the one wrong answer. */
 .vp-rec-index{list-style:none;margin:0;padding:0}
 .vp-rec-row{padding:0;break-inside:avoid}
-.vp-rec-open{display:flex;gap:16px;width:100%;text-align:left;background:none;
+/* ═══ [2026-08-10] THE ROW IS A GRID, AND THE DECK SPANS BOTH COLUMNS ═══════
+   MIKE'S RULING: the deck runs FULL WIDTH beneath the rail; the rail indents
+   the headline only. As a flex row the deck sat in the second column and lost
+   the rail's 44px plus the 16px gap to furniture it did not need — measured at
+   390px, 279.69px of deck against 339.69px available, which is 38 characters a
+   line against 46.
+   TWO COLUMNS, TWO ROWS: the mark takes 1/1, `.vp-fe-body` (the headline row)
+   takes 2/1, and `.vp-rec-sum` takes the whole of row 2.
+   THE GAP IS SPLIT because it used to be two different numbers doing two
+   different jobs: 16px stood between the rail and the headline (flex `gap`),
+   and 3px stood between the headline and the deck (`.vp-fe-body`'s own column
+   gap, which the deck has now left). `gap: 3px 16px` keeps both exactly.
+   THE FIRST COLUMN IS `auto`, NOT A LENGTH, AND THAT IS THE POINT. A `ch`
+   length written here would resolve against THIS element's font — the inherited
+   Times New Roman — which is the exact defect the rail's own width was just
+   fixed for. `auto` takes the rail's width from the rail, where it is measured
+   in the glyphs the rail actually sets. */
+.vp-rec-open{display:grid;grid-template-columns:auto 1fr;
+  gap:3px 16px;width:100%;text-align:left;background:none;
   border:0;border-top:1px solid var(--wb-border);padding:12px 2px;cursor:pointer;
   color:inherit;font:inherit;transition:background .15s;
   /* one headline line + two summary lines + the padding above and below */
   min-height:calc(1.25em + 2 * 1.5 * var(--fs-small) + 24px);
-  align-items:flex-start}
+  align-items:start}
+.vp-rec-open > .vp-rec-sum{grid-column:1 / -1}
 /* [A1 2026-08-06] ON PAPER A SURFACE IS RAISED BY GOING DARKER. The wash was
    `rgba(232,228,216,.05)` — light added at low alpha, which is a visible lift
    on charcoal and white-on-white on print stock, i.e. no affordance at all. */
@@ -1487,20 +1506,55 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 /* ---- [R1] THE MARK. A fixed column at the far left, so every row's headline
    starts on one vertical however much or little the mark holds. The number is
    the object; the date, when there is one, is its subordinate. */
-.vp-rec-mark{flex:0 0 auto;width:5.5ch;display:flex;flex-direction:column;
+/* ═══ [2026-08-10] THE RAIL IS SIZED IN ITS OWN FONT, WHICH IT WAS NOT ══════
+   It was `width: 5.5ch`, and `ch` resolves against the element's OWN computed
+   font — which on this element was the inherited UA default, `16px "Times New
+   Roman"`. Nothing in the rail is Times New Roman: the number is Courier Prime
+   at `--fs-lead`. So the column was 5.5 Times zeroes wide (44px) by accident,
+   and it neither tracked the number's size nor stated a width anybody had
+   chosen.
+   THE FIX IS TO GIVE THE RAIL THE NUMBER'S OWN FONT and keep `ch`, so the
+   column is measured in the glyphs it actually holds and follows `--fs-lead`
+   up the ramp instead of standing still at 44px while the number grows.
+   `--rec-rail` is declared here and consumed by the row's grid.
+   4.25ch HOLDS FOUR DIGITS. Courier's advance is .6em, so 4ch is four figures
+   exactly and the .25 covers the .02em letter-spacing plus the sub-pixel. Four
+   because the volume runs to 001..NNN and a fourth digit must not reflow the
+   column the day it arrives — the rail's whole job is that every headline
+   starts on one vertical. Three digits sit left-aligned with the slack to the
+   right, which is where the gap already was. */
+.vp-rec-mark{font-family:'Courier Prime','Courier New',monospace;
+  font-size:var(--fs-lead);letter-spacing:.02em;
+  width:4.25ch;display:flex;flex-direction:column;
   gap:2px;padding-top:1px}
 .vp-rec-mark-no{font-family:'Courier Prime','Courier New',monospace;
   font-weight:700;font-size:var(--fs-lead);line-height:1.05;
   letter-spacing:.02em;color:var(--wb-gold-lo);font-variant-numeric:tabular-nums}
-.vp-rec-mark-day{font-family:'Courier Prime','Courier New',monospace;
-  font-style:normal;font-size:var(--fs-micro);letter-spacing:.1em;
-  text-transform:uppercase;color:var(--wb-gold-mute)}
+/* [2026-08-10] `.vp-rec-mark-day` IS DELETED, not left dormant — the date is
+   out of the index rail on Mike's ruling and `RecordIndexRow.jsx` no longer
+   emits the element. The date itself is untouched in the data and still prints
+   in the opened record's dateline. */
 .vp-rec-open:hover .vp-rec-mark-no,
 .vp-rec-open:focus-visible .vp-rec-mark-no{color:var(--wb-gold)}
 
 /* ---- [R3] THE SUMMARY. Two lines, whole, no clamp. `-webkit-line-clamp:1`
    stood here and cut every entry mid-clause; the fit is the data's job now. */
-.vp-rec-sum{opacity:.72}
+/* ═══ [2026-08-10] AN AUTHORED `\n` IS A REAL BREAK NOW ════════════════════
+   MIKE'S RULING: the deck is ALWAYS two lines and must NEVER wrap. It could not
+   be two lines before this property: entries 002 and 003 have carried a `\n` in
+   `line` since they landed, the character reached the DOM, and `white-space:
+   normal` collapsed it to a space — so an authored two-line deck rendered as
+   one paragraph wrapping to four lines, and nothing reported it.
+   `pre-line` AND NOT `pre-wrap`, deliberately: `pre-line` honours the newline
+   and still COLLAPSES runs of spaces and strips leading indentation, which is
+   what a string assembled from concatenated source literals needs. `pre-wrap`
+   would additionally make every incidental double space visible on the glass —
+   including the ones already in Record 001's body (`=  86%`), which is Mike's
+   own open question `S-e` and not a thing this rule may decide.
+   IT DOES NOT STOP A LONG LINE WRAPPING. Nothing in CSS can do that and keep
+   the text readable; the no-wrap guarantee is an AUTHORING budget, measured at
+   46 characters a line at 390px, and it is kept by the person writing. */
+.vp-rec-sum{opacity:.72;white-space:pre-line}
 
 /* ═══ [A3/A4 2026-08-08] THE INDEX ROW TAKES THE RECORD'S REGISTER, AND THE
    SCOPING IS THE WHOLE OF A4's ANSWER ══════════════════════════════════════
@@ -1567,7 +1621,14 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    the right is deliberate. 68ch is the same measure the entry body takes, so a
    reader meets one column width in the index and the same one inside the
    record. The RAIL is outside the cap — it is furniture, not reading. */
-.vp-rec-open > .vp-fe-body{max-width:68ch}
+/* [2026-08-10] AND THE CAP FOLLOWS THE DECK OUT. The deck left `.vp-fe-body`
+   for the grid's second row, so the body's cap no longer reaches it; without
+   this the deck would run the full width of a desktop window while the headline
+   above it stopped at 68ch. Same measure, same reason, now stated twice because
+   they are two boxes. At 390px neither is binding — the row is 343.69px and
+   68ch is 580px — so this changes nothing on a phone and everything on a desk.*/
+.vp-rec-open > .vp-fe-body,
+.vp-rec-open > .vp-rec-sum{max-width:68ch}
 
 /* [L6 2026-08-02] `.vp-rec` AND `.vp-rec-body` ARE RETIRED — an opened record
    is a RUN of blocks so the stage can page it (see Exhibit.jsx). The 14px and
