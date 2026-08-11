@@ -55,7 +55,6 @@ import { launched } from "../lib/placement.js";
 import { KEEPER, AFFILIATION, USE_RIGHTS } from "../data/house-copy.js";
 /* [F1 2026-08-06] the two fixed ends of the FAQ format, which this room is the
    original of and which four wing FAQs now print too — see faq-face.js. */
-import { FAQ_HEAD } from "../data/faq-face.js";
 
 /* ─── THE QUESTIONS ─────────────────────────────────────────────────────────
    Ordered the way a stranger meets the building: what is this, what does it
@@ -403,7 +402,8 @@ export default function InfoBooth() {
             `src/data/faq-face.js` and this room reads it — Doctrine 17 applied
             the moment a passage stopped belonging to one room. */}
         <div className="sheet-faq">
-          <h2 className="sheet-faq-head">{FAQ_HEAD}</h2>
+          {/* [D 2026-08-11] the "Questions" heading is struck here too —
+              Mike's ruling covers all five faces, the booth included. */}
           {faq.map(({ q, a }) => (
             <details key={q} className="sheet-q">
               <summary>{q}</summary>

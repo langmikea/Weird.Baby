@@ -1574,7 +1574,7 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    right, which is where the gap already was. */
 .vp-rec-mark{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-lead);letter-spacing:.02em;
-  width:4.25ch;display:flex;flex-direction:column;
+  width:var(--rec-rail);display:flex;flex-direction:column;
   gap:2px;padding-top:1px}
 .vp-rec-mark-no{font-family:'Courier Prime','Courier New',monospace;
   font-weight:700;font-size:var(--fs-lead);line-height:1.05;
@@ -1698,13 +1698,52 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    air goes above it, never below. That is the one rule that makes a tight
    document still scan by its headings. */
 .vp-face{
-  --rec-hug:calc(var(--face-fs) * .30);    /* a heading and the thing it labels */
-  --rec-para:calc(var(--face-fs) * .40);   /* one paragraph to the next */
+/* ═══ [B 2026-08-11] TIGHTENED, AGAINST MIKE'S ONE APPROVED SPACING ════════
+   His reference is the deck's own two lines — "Weird.Baby website is live /
+   Alert — Incoming Email Server Load (contained)" — and the ruling is that
+   everything below it was too airy. Those two lines have NO gap between
+   them beyond their leading, so that is what a run of body lines gets.
+   `--rec-para` GOES TO ZERO, which is the whole of B2: the fifteen timestamps
+   in ADDENDUM 01 are authored as fifteen paragraphs, and at .40 they read as
+   fifteen separate things. At 0 they stack on their own leading and read as
+   ONE LIST, which is what they are. Nothing inside a paragraph changed —
+   size and leading are untouched, per B4.
+   THE HIERARCHY SURVIVES BECAUSE THE OTHER TWO DID NOT GO TO ZERO WITH IT
+   (B3): 0 between lines, .22 under a label, .90 above a new section. Air
+   still goes ABOVE a heading and never below — `--rec-hug` is the small one
+   deliberately, and `--rec-sect` stays four times the label gap. */
+  --rec-hug:calc(var(--face-fs) * .22);    /* a heading and the thing it labels */
+  --rec-para:0;                            /* body lines stack as ONE LIST */
   --rec-block:calc(var(--face-fs) * .55);  /* between kin — the lead, a row */
-  --rec-sect:calc(var(--face-fs) * 1.15)}  /* A NEW SECTION BEGINS */
+  --rec-sect:calc(var(--face-fs) * .90);   /* A NEW SECTION BEGINS */
+  --rec-indent:calc(var(--face-fs) * 1.15); /* body under its section label */
+  /* ═══ [A1 2026-08-11] THE TEXT COLUMN, DECLARED ONCE FOR BOTH VIEWS ═════
+     MIKE: the deck is the one element ruled to hold still and it moves
+     furthest — indented under the headline in the index, flush left in the
+     opened record. Measured at 1280 before the fix: index deck x=703,
+     record deck x=640. A 63px jump on the element that must not jump.
+     THE RAIL IS THE OFFSET, so the rail is what both sides now read. It was
+     `width: 4.25ch` on `.vp-rec-mark`, resolved in Courier Prime — a number
+     the opened record had no way to reach, which is why the two drifted in
+     the first place. `--rec-rail` states it once in the face's own units
+     (Courier advances at .6em, so 4.25 characters is 2.55em of `--fs-lead`)
+     and the rail itself now reads it too, so neither side can move without
+     the other. `--rec-textcol` adds the row's 16px column gap and its 2px
+     padding — the full distance from the face's left edge to the index's
+     text column. */
+  --rec-rail:calc(var(--fs-lead) * 2.55);
+  --rec-textcol:calc(var(--rec-rail) + 18px)}
 
+/* [A3 2026-08-11] THE UPPERCASING IS OFF, AND THE DATA WINS. The index set
+   "INITIAL LAUNCH REPORT - WEIRD.BABY" while the opened record set
+   "- Weird.Baby": one string, two casings, and the difference was a
+   `text-transform` inherited from the SHARED `.vp-fe-title`. Styling was
+   overruling the data about what a thing is CALLED, which is the same
+   defect M4 fixed for MGK-VIIIp. Reset here rather than on `.vp-fe-title`,
+   which the FAQ and Worth A Listen lists also use and which is not this
+   ruling's business. */
 .vp-rec-index .vp-fe-title{font-family:var(--wb-plain);font-weight:700;
-  letter-spacing:.04em}
+  text-transform:none;letter-spacing:.04em}
 /* [B3 2026-08-11] THE DECK MATCHES THE HEADLINE'S SIZE AND DIFFERS BY WEIGHT.
    MIKE'S RULING. It was the wrong way round and had been since the deck was
    built: the headline takes `--fs-small` (13.04px at 390) from `.vp-fe-title`
@@ -4130,8 +4169,26 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    the width of a desktop pane is 130–150 characters and the eye loses the
    return; every newspaper sets in columns for exactly this reason. What the
    leftover carries instead is written at the head of the index rules. */
+/* ═══ [C 2026-08-11] THE BODY SITS UNDER ITS LABEL, NOT BESIDE IT ══════════
+   MIKE: body content shared the label's left edge, so nothing showed what
+   belonged to what. One step in — `--rec-indent`, 1.15 x the face size,
+   about 19px at 1280 — which is a shade under one line-height. That is the
+   smallest step the eye reads as a level rather than as a mistake, and the
+   largest one that does not start eating the measure.
+   IT IS DECLARED ONCE AND APPLIES TO EVERY SECTION ALIKE (C2): EXECUTIVE
+   SUMMARY, DETAILED REPORT and every ADDENDUM take the same step, because
+   they are the same kind of thing and a per-section indent would be a
+   hierarchy the data does not have.
+   THE "o" BULLETS DO NOT DOUBLE-INDENT (C3). They are literal characters
+   inside these paragraphs, not a list the CSS knows about, so they ride this
+   one indent and their own "o " prefix is the second level. Nothing is
+   added for them — adding a nested rule is exactly how the stagger Mike
+   warned about would appear.
+   THE MEASURE IS 68ch AND STAYS 68ch: the indent is padding, so it moves the
+   text's left edge without widening the block past its cap. */
 .vp-rec-sect-body{margin:0;font-family:var(--wb-plain);
   font-size:var(--fs-body);line-height:1.4;letter-spacing:0;
+  padding-left:var(--rec-indent);
   color:var(--wb-gold-lo);max-width:68ch}
 .vp-rec-sect-body + .vp-rec-sect-body{margin-top:var(--rec-para)}
 .vp-rec-sect-doors{display:flex;flex-wrap:wrap;gap:10px 16px}
@@ -4269,7 +4326,14 @@ button.vp-rec-att-thumb:hover,button.vp-rec-att-thumb:focus-visible{
 /* [T2 2026-08-08] the Record's parts declare the RECORD's ladder. They are
    still siblings in `.vp-flat` and every other block on a flat face still takes
    R1's own steps — this is four selectors, not a new container. */
-.vp-flat > .vp-rec-headline{margin-top:var(--rec-hug)}
+/* [A1 2026-08-11] THE HEADLINE AND THE DECK ARE THE ONLY TWO ELEMENTS THAT
+   EXIST IN BOTH VIEWS, so they are the two that take the index's text
+   column. The dateline and the sections have no counterpart in the index and
+   cannot "move" against anything, so they are left where they are — this is
+   scoped to what F3 can actually be laid over. */
+.vp-flat > .vp-rec-headline{margin-top:var(--rec-hug);
+  margin-left:var(--rec-textcol)}
+.vp-flat > .vp-rec-deck{margin-left:var(--rec-textcol)}
 .vp-flat > .vp-rec-lead{margin-top:var(--rec-block)}
 .vp-flat > .vp-rec-sects,
 .vp-flat > .vp-rec-tomb{margin-top:var(--rec-sect)}

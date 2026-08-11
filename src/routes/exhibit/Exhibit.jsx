@@ -16,7 +16,6 @@ import RecordIndexRow from "./RecordIndexRow.jsx";
 import { AccountCard, RegisterTable, LedgerSheet } from "./FoundationObjects.jsx";
 import { stateOfRow as fndState } from "../../lib/foundation-state.js";
 /* [F1 2026-08-06] the FAQ format's two fixed ends — see src/data/faq-face.js */
-import { FAQ_HEAD } from "../../data/faq-face.js";
 import {
   entryStamp, groupByPeriod, shouldBand, docState,
 } from "../../lib/record-model.js";
@@ -2154,14 +2153,17 @@ function FaceFlow({ flat, children, deps, footer }) {
    contradiction of F6's marked door with no anchor: F6's rule is that a door
    with no address supplied is not made into an `<a>`. Here the address IS the
    sentence. */
-function FaqEntries({ entries, state, head = true }) {
+function FaqEntries({ entries, state }) {
   return (
     <div className="vp-faq" data-stage-split="row">
-      {/* [F1 2026-08-11] the heading is a face flag now — robots prints no
-          "Questions"; the booth and the other three wings still do. */}
-      {head && (
-        <h2 className="vp-faq-head" data-stage-split="row">{FAQ_HEAD}</h2>
-      )}
+      {/* ═══ [D 2026-08-11] "Questions" IS GONE FROM ALL FIVE FAQs ════════
+          MIKE'S RULING, superseding the per-face flag one packet old: the
+          heading comes off robots, the booth AND the other three wings. The
+          under-scoping was Ops' — he asked for it removed and it was read as
+          robots-only because his section was headed that way.
+          THE FLAG IS DELETED RATHER THAN PINNED FALSE. `faqHead` had one
+          position left, and a switch nobody can throw is furniture. A
+          question list opens on its first question. */}
       {entries.map((en, i) => (
         <details className="vp-faq-q" key={en.title || i}>
           <summary>{en.title}</summary>
@@ -4572,8 +4574,7 @@ export default function Exhibit({ artist, open = null }) {
                              and for why an accordion is not the hidden
                              information M1 forbids. */
                           if (isFaq) return (
-                            <FaqEntries entries={list} state={fndState}
-                                        head={face.faqHead !== false} />
+                            <FaqEntries entries={list} state={fndState} />
                           );
                           if (!isLog) return (
                             <ol className="vp-face-entries" data-stage-split="row">

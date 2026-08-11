@@ -15174,12 +15174,6 @@
    "c": "MIKE",
    "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
   },
-  "84aa2a9ad70c710b": {
-   "f": "src/data/faq-face.js",
-   "l": 58,
-   "t": "Questions",
-   "c": "HOUSE"
-  },
   "ef31a8bb3ca682ef": {
    "f": "src/data/faq-face.js",
    "l": 69,
@@ -15196,12 +15190,6 @@
    "f": "src/data/house-copy.js",
    "l": 79,
    "t": "No. The artists in Other Music Worth a Listen are not partners, clients, or signings — they are people whose records we think you should hear. Every door on their page leads to their own site, their own store, their own channel, because the exhibit is a pointer and not a home. [PAPA] — the formal statement of that relationship, if one is ever needed, is Papa's to write.",
-   "c": "HOUSE"
-  },
-  "bb88ceb3cb84910e": {
-   "f": "src/data/house-copy.js",
-   "l": 88,
-   "t": "The artists' work is the artists' — their music, their pictures, their words — and every door on their pages goes to them rather than to us. What is ours is the photographs of our own objects, taken here and printed here, and we are glad to be asked for those. When in doubt, write; the address is at the bottom of this page. [PAPA] — a plain licence for the museum's own images is Papa's to set.",
    "c": "HOUSE"
   },
   "669717c4f42b1730": {
@@ -15798,6 +15786,13 @@
    "t": "Well, not now, but soon. Hopefully. That's all I can say right now.",
    "c": "MIKE",
    "s": "Mike's own wording, ruled 2026-08-11 (F3), quoted verbatim in the packet"
+  },
+  "e3e2a2ebc2ded0db": {
+   "f": "src/data/house-copy.js",
+   "l": 107,
+   "t": "The artists' work is the artists' — their music, their pictures, their words — and every door on their pages goes to them rather than to us. What is ours is the photographs of our own objects, taken here and printed here, and we are glad to be asked for those. [PAPA] — a plain licence for the museum's own images is Papa's to set.",
+   "c": "MIKE",
+   "s": "Mike's passage with the stale address clause struck, ruled 2026-08-11 (E)"
   }
  }
 }

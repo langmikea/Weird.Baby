@@ -90,13 +90,24 @@ export const AFFILIATION =
   "not a home. [PAPA] — the formal statement of that relationship, if " +
   "one is ever needed, is Papa's to write.";
 
-/* WHOSE THE MATERIAL IS, AND WHAT MAY BE DONE WITH IT. Same reasoning. */
+/* WHOSE THE MATERIAL IS, AND WHAT MAY BE DONE WITH IT. Same reasoning.
+   ═══ [E 2026-08-11] THE CLAUSE IS STRUCK, NOT REWRITTEN ════════════════════
+   It read "When in doubt, write; the address is at the bottom of this page."
+   The address was deleted sitewide one packet ago, so the sentence pointed at
+   a thing that is not there — a live line on the glass that was simply untrue.
+   STRUCK RATHER THAN REPAIRED, and that is the smaller change of the two.
+   Repairing it means inventing somewhere else to write to, and there is
+   nowhere: the ruling that removed the address removed every contact route in
+   the building and said "no replacement". A sentence inviting a letter with no
+   address to send it to is worse than no sentence.
+   WHAT SURVIVES IS THE PART THAT WAS ALWAYS THE POINT — whose the material is,
+   and that the house is glad to be asked about its own photographs. The
+   [PAPA] marker is untouched: the licence is still Papa's to set. */
 export const USE_RIGHTS =
   "The artists' work is the artists' — their music, their pictures, " +
   "their words — and every door on their pages goes to them rather than " +
   "to us. What is ours is the photographs of our own objects, taken here " +
-  "and printed here, and we are glad to be asked for those. When in " +
-  "doubt, write; the address is at the bottom of this page. [PAPA] — a " +
+  "and printed here, and we are glad to be asked for those. [PAPA] — a " +
   "plain licence for the museum's own images is Papa's to set.";
 
 /* ═══ [D 2026-08-11] THE SIGN-OFF IS DELETED. MIKE'S RULING, NO REPLACEMENT ══

@@ -30,7 +30,7 @@
 //   ───────────────────────────────  ─────────────────────────────────────────
 //   MuseumBar (brand / room / exit)  the exhibit's own bar and its exit
 //   the credo block                  the face head — `FAQ` over the wing's name
-//   the word "Questions"             `FAQ_HEAD`, printed by `FaqEntries`
+//   [D 2026-08-11] the "Questions" heading is STRUCK from all five faces.
 //   the question list                the same accordion, element for element
 //   [D 2026-08-11] the sign-off line is STRUCK, sitewide, on Mike's ruling.
 //   An FAQ closes on its last question now.
@@ -52,35 +52,23 @@
 // names. `subtitle` is the wing, which is the only thing that legitimately
 // differs between them.
 
-/* The booth's own word for the list, printed above it in every wing. */
-export const FAQ_HEAD = "Questions";
-
 /**
  * @param subtitle  the wing, in the house's own caps — e.g. "WEIRD.BABY ROBOTS"
  * @param entries   [{ title, line | lines, note?, link? }]
- * @param opts      { head: false } to print no "Questions" heading
  */
-/* ═══ [F1 2026-08-11] THE HEADING IS OPTIONAL NOW, AND ONLY ROBOTS DROPS IT ═══
-   MIKE'S RULING, given under a section headed THE ROBOTS FAQ: remove the
-   heading "Questions". It is one shared word printed by `FaqEntries` on five
-   surfaces — the booth and four wings — so removing it at the source would
-   have reached all five, and the ruling names one.
-   SO IT IS A FACE FLAG RATHER THAN A DELETION. `faqHead` defaults to TRUE,
-   which is every existing caller unchanged and byte-identical; robots passes
-   `{ head: false }`. The flag lives on the face because the face is what the
-   renderer already reads, and it goes through this factory because this file
-   is what stops a face declaring fields nobody prints.
-   THE OTHER FOUR STILL PRINT IT. That is the ruling's stated scope and not an
-   oversight — R7's "conform every wing FAQ to the booth's format" is now true
-   of four faces out of five, which is a divergence worth Mike's word before it
-   is either spread or reversed. */
-export function faqFace(subtitle, entries, opts) {
+/* ═══ [D 2026-08-11] THE HEADING IS GONE FROM ALL FIVE, AND SO IS THE FLAG ═══
+   MIKE'S RULING: strip "Questions" from every FAQ face, not robots only — the
+   under-scoping one packet ago was Ops'. `faqHead` lasted a single round and
+   had one position left, so it is deleted rather than pinned false: a switch
+   nobody can throw is furniture. `FAQ_HEAD` is retired with it, so the word
+   itself no longer exists in the source. The factory is back to the shape it
+   had before the flag. */
+export function faqFace(subtitle, entries) {
   return {
     kind: "text",
     title: "FAQ",
     subtitle,
     entries,
     entriesMode: "faq",
-    faqHead: !(opts && opts.head === false),
   };
 }

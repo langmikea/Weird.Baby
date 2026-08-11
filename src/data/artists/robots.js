@@ -904,8 +904,6 @@ const WBR_TRACKS = [
            of the four is said better by an object the visitor can already reach.
            The face is built by `faqFace()` now — see src/data/faq-face.js for
            why the fields are absent rather than merely unset. */
-        /* [F1 2026-08-11] no "Questions" heading on this face — Mike's
-           ruling. The flag is declared in src/data/faq-face.js. */
         face: faqFace("WEIRD.BABY ROBOTS", [
           /* ==== [P3 2026-08-05] THE QUESTIONS ARE MIKE'S ==================
              MIKE: "THE ROBOTS FAQ — replace with the FAQ template and Mike's
@@ -999,7 +997,7 @@ const WBR_TRACKS = [
              with nothing under it. An accordion makes that MORE important, not
              less — a question that opens onto silence is worse than one printed
              above silence. */
-        ], { head: false }),
+        ]),
       },
 ];
 
