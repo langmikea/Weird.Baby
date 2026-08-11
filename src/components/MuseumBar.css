@@ -11,6 +11,44 @@
  * 1px rule — and the paddings above are why this rule is not free to grow.
  */
 
+/* ═══ [L1 2026-08-11] THE BAR'S HEIGHT IS A TOKEN NOW ══════════════════════
+   MIKE: a heading was being sliced in half by this bar. Whatever the capture
+   turns out to be (see the round report), one thing was certainly wrong: the
+   bar's height existed as a NUMBER IN FOUR PLACES and in none of them was it
+   the bar's own. `.ex-root` pads 54px for it, `.gift-shop` 5.5rem,
+   `.booth-root` 96px, and the Record's landing carried a hand-typed `45px`
+   that was already 0.33px short of the measured 45.33 and would go stale the
+   next time this rule moved.
+   MEASURED, not derived: 45.33px at 1280 (14 + 16.44 brand + 14 + 0.89 rule)
+   and 41.33px at 390 (12 + 16.44 + 12 + 0.89). The token is ROUNDED UP to
+   46/42 so that anything clearing it clears it whole — a stop line half a
+   pixel short of a fixed bar is the defect, and rounding down is how you get
+   one.
+   IT IS ON :root RATHER THAN ON .wb-bar because the things that must clear the
+   bar are not inside it. */
+:root { --wb-bar-h: 46px; }
+@media (max-width: 720px) { :root { --wb-bar-h: 42px; } }
+
+/* ═══ [L1 2026-08-11] NOTHING LANDS UNDER THE BAR — Mike's A3 ══════════════
+   `scroll-padding-top` on the scroll container is the platform's own way to
+   say "the top of this viewport is occupied". Every `scrollIntoView` and every
+   snap point on every page that has a bar now stops below it with air, without
+   each target carrying its own copy of the bar's height — which is exactly the
+   arithmetic that had gone stale on the Record's landing.
+   IT IS IN THIS FILE BECAUSE THE BAR IS. `MuseumBar.jsx` imports this
+   stylesheet, so the clearance arrives wherever the bar does and nowhere else:
+   /robots, /wal, /wb, /hr and /foundation through `Exhibit`, plus /booth and
+   /shop, which have the same fixed bar and do NOT load the exhibit's
+   stylesheet. The Lobby has no bar and is untouched. That is A5's answer by
+   construction rather than by five edits.
+   IT ALSO REACHES THE SNAP POINTS. `/robots` has no snap-aligned children
+   today (measured: zero), but `/hr`'s sections declare `scroll-snap-align` and
+   would otherwise snap flush to pixel zero — under the bar. One declaration
+   covers both mechanisms because they read the same property.
+   25px OF AIR is the one judged number here: a heading resting exactly on the
+   bar's edge reads as sheared even when it is whole. */
+html { scroll-padding-top: calc(var(--wb-bar-h) + 25px); }
+
 .wb-bar {
   display: flex;
   align-items: center;

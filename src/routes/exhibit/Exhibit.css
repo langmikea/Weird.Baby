@@ -20,6 +20,13 @@
 @font-face{font-family:'Oswald';font-style:normal;font-weight:600;font-display:swap;src:url('../../assets/fonts/oswald-600.woff2') format('woff2');}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--wb-bg);color:var(--wb-gold);min-height:100vh;overflow-x:clip}
+/* [L1 2026-08-11] THE BAR'S CLEARANCE IS NOT DECLARED HERE, DELIBERATELY. It
+   was, for one iteration, and it was in the wrong file: this stylesheet only
+   reaches wings that render `Exhibit`, and `/booth` and `/shop` carry the same
+   fixed bar without it. `scroll-padding-top` lives beside the bar itself in
+   `MuseumBar.css`, which is imported by `MuseumBar.jsx` and therefore loads
+   exactly where the bar does. The snap rule below is the exhibit's own and
+   stays; it reads the same padding. */
 html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 
 /* ---- E2 2026-07-30: THE TRACK FACE + THE VIEWER POSTER --------------------
@@ -1580,10 +1587,73 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    STATED AS A SUM RATHER THAN A TOTAL so a future round can see which part it
    is changing, and `--rh-block` is left as a token so the landing follows the
    type ramp instead of drifting away from it at another width. */
-.vp-rec-openhead{scroll-margin-top:calc(45px + 25px + 34px + var(--rh-block))}
+/* ═══ [L1 2026-08-11] THE BAR CAME OUT OF THIS SUM, AND IT HAD TO ═════════
+   It used to read `45px + 25px + 34px + --rh-block` — a hand-typed copy of the
+   bar's height plus air plus the furniture above the head. The bar and the air
+   now live in `scroll-padding-top` on the document, where they belong (they
+   are true of every target on every face, not of this one element).
+   THE TWO PROPERTIES ADD, WHICH IS THE TRAP AND IT WAS MEASURED: with the sum
+   left whole here, the browser stacked the container's 71px padding on top of
+   this element's 121.3px margin and landed the head at 192.37px instead of
+   ~121 — seventy-one pixels of wasted screen, and a landing further down the
+   page than before the fix. What is left here is ONLY what must stay visible
+   ABOVE the head and is peculiar to this element: the face heading's row (34px,
+   read off `.vp-rec-nav-btn`) and the step beneath it. */
+.vp-rec-openhead{scroll-margin-top:calc(34px + var(--rh-block))}
 .vp-rec-openhead{cursor:default}
+/* ═══ [L1 2026-08-11] EVERY RECORD IS TALL ENOUGH TO HOLD ITS LANDING ═══════
+   MIKE: "Pad out every record or use a more elegant way to make every record
+   long enough to fit where I want it."
+   THE ARITHMETIC, AND IT IS EXACT RATHER THAN GENEROUS. To hold the head at
+   the stop line the page must be able to scroll by `headDocY - stop`, i.e.
+       docHeight - viewport >= headDocY - stop
+   The head sits `faceHead (34px) + --rh-block` below the top of `.vp-flat`, so
+   giving `.vp-flat` a floor of
+       100vh - bar - 25px
+   satisfies that identically — the `34px` and the `--rh-block` cancel against
+   the same two terms inside the stop line, and what is left is the air above
+   the face head. It reserves EXACTLY what the landing needs and not one pixel
+   more, which is why 001 (already tall) gains nothing at all.
+   WHY A FLOOR ON THE PAGE RATHER THAN PADDING ON THE RECORD: `min-height` draws
+   nothing. There is no spacer element, no `&nbsp;`, nothing in the DOM a reader
+   or a screen reader can meet, and nothing for a future round to mistake for
+   content. On a record that is already long enough the declaration has no
+   effect whatsoever.
+   THE FOOT OF A SHORT RECORD is its endmark and its transport, followed by
+   blank paper to the bottom of the reserve — the same thing a short page in a
+   bound volume looks like. The transport does NOT float to the bottom: it stays
+   with the text it belongs to, because it is the end of the READING and not the
+   end of the sheet.
+   `:has()` scopes it to a face with a record open — the index keeps its own
+   natural height. */
+.vp-flat:has(> .vp-rec-openhead){min-height:calc(100vh - var(--wb-bar-h) - 25px)}
 .vp-rec-open > .vp-rec-sum,
 .vp-rec-openhead > .vp-rec-sum{grid-column:2}
+/* ═══ [L1 2026-08-11] THE RAIL SPANS BOTH ROWS, AND THAT IS THE GAP ═════════
+   MIKE: "Still left gap for second headline; remove it."
+   IT WAS NOT A `min-height` AND THAT IS WHY THE LAST ROUND MISSED IT. The
+   reserve on this box is one headline line and two DECK lines; the second
+   headline line was never reserved by it. What left the gap was the GRID: the
+   rail is two stacked lines (`001` over `MON`, 38.6px) and the headline is one
+   (16px), and they shared row 1 — so row 1 was sized by the RAIL and the deck
+   started a full headline-line below the title it belongs to. Measured at
+   1706px before this: title bottom 442.39, deck top 464.31 — 21.9px of nothing,
+   almost exactly one line of headline, which is what it looked like.
+   `grid-row: 1 / -1` takes the rail out of the row sizing: rows 1 and 2 are now
+   the title's height and the deck's height, and the rail spans them both from
+   the same top. Nothing moves horizontally, the deck stays in column 2, and
+   the rail's own two lines are unchanged.
+   IT IS ON THE SHARED SELECTOR, so the index row and the opened head close the
+   gap in the same edit and cannot disagree — B2's requirement, and the reason
+   this is one declaration rather than two.
+   `span 2` AND NOT `1 / -1`, WHICH IS THE ONE TRAP HERE AND IT WAS MEASURED
+   RATHER THAN REASONED: this grid declares COLUMNS only, so its rows are
+   implicit, and `-1` names the last line of the EXPLICIT grid — which is line
+   1. `grid-row: 1 / -1` therefore collapsed to a single row and changed
+   nothing; `gridTemplateRows` still read `33.9097px 38.7083px`, row one still
+   the rail's height. `span 2` names the rows that actually exist. */
+.vp-rec-open > .vp-rec-mark,
+.vp-rec-openhead > .vp-rec-mark{grid-row:1 / span 2}
 /* [A1 2026-08-06] ON PAPER A SURFACE IS RAISED BY GOING DARKER. The wash was
    `rgba(232,228,216,.05)` — light added at low alpha, which is a visible lift
    on charcoal and white-on-white on print stock, i.e. no affordance at all. */
@@ -1858,7 +1928,12 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
    the effect because `scrollIntoView` resolves whatever the scrolling ancestor
    is, and a hand-rolled `window.scrollTo` does not — measured in the 390px rig,
    where this document refuses both `window.scrollTo` and `scrollTop`. */
-.vp-rec-head{scroll-margin-top:96px;
+/* [L1 2026-08-11] THE SHORT HEAD TAKES THE SAME STOP LINE AS THE LONG ONE.
+   96px was hand-set against a stack that no longer exists (a jump bar and a
+   transport row); the two heads sit under the same face head now and there is
+   no reason for two numbers. The bar's own clearance is the document's
+   `scroll-padding-top` for this one too — see the note above. */
+.vp-rec-head{scroll-margin-top:calc(34px + var(--rh-block));
   display:flex;gap:14px;align-items:baseline;width:100%;text-align:left;
   background:none;border:0;border-bottom:1px solid var(--wb-border);
   padding:0 0 6px;cursor:pointer;color:inherit;font:inherit}
