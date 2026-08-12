@@ -99,20 +99,48 @@ body { padding-bottom: 92px; }
   opacity: .95;
 }
 
-/* ── THE LIVE COUNT, ON THE FIELD (Doctrine 22) ──────────────────────────────
-   MIKE: *"he must never again discover a limit from a report."* It follows the
-   focused field, it counts what would be SAVED, and it says where there is no
-   limit. Fixed, so it never moves the page. */
-.wb-lim {
-  position: fixed; z-index: 9100; display: none;
-  font: 11px/1.3 ui-monospace, "Courier New", monospace;
-  padding: 4px 7px; border-radius: 3px;
-  background: #14140f; color: #cfc7b0; border: 1px solid #4a4433;
-  max-width: 46ch;
+/* ── TOO LONG, SAID ON THE LINE (Doctrine 22, second cut) ────────────────────
+   MIKE: *"I do not need a number. Just make it obvious if I try to enter too
+   many."*
+
+   THE READOUT IS DELETED — `.wb-lim` and every rule it had. It printed four
+   numbers, and on the built page it floated OVER the headline it was counting.
+   What stands in its place is not a smaller readout; it is no readout.
+
+   PAST THE BUDGET THE LINE GOES TO REVERSE TYPE, AND THE TWO COLOURS ARE THE
+   FACE'S OWN. `--wb-gold` is the museum's ink (#211f1c) and `--wb-bg` its paper
+   (#d9d5ca) — the same two values the Record is already set in, swapped. So
+   nothing new enters the page's palette, nothing is red, nothing is bold, and
+   the tail of the headline simply stops being part of the line. That is the
+   proof-reader's mark for *this does not belong*, which is what he asked for and
+   is a picture rather than a sentence.
+   THE `var()` FALLBACKS ARE NOT DECORATION. Custom-property inheritance into a
+   highlight pseudo is a young corner of the platform; if it resolves, these are
+   the tokens, and if it does not, these are the tokens' values. Either way the
+   mark is the ink and the paper, and it cannot silently come out transparent.
+
+   IT IS A RANGE AND NOT A NODE, for the brace highlight's exact reason (see
+   below): a `<span>` inside a contenteditable is a thing the caret falls into
+   and a paste splits, which would let the mark damage the text it marks. */
+::highlight(wb-over) {
+  background-color: var(--wb-gold, #211f1c);
+  color: var(--wb-bg, #d9d5ca);
 }
-.wb-lim.on { display: block; }
-.wb-lim.near { border-color: #b8974a; color: #ffd97a; }
-.wb-lim.over { border-color: #ff8f8f; color: #ff8f8f; font-weight: 700; }
+
+/* AND THE FIELD SAYS IT TOO, WHICH IS WHAT MAKES THE SIGNAL SURVIVE A BROWSER
+   WITHOUT `CSS.highlights`. The editable outline is already this page's whole
+   vocabulary for the state of a field — dashed for editable, solid gold for
+   focused — so over-long is the same outline in the museum's ink. One signal,
+   two expressions of it, no new object on the page and no layout: an outline is
+   drawn outside the box and moves nothing (see the top of this file).
+   IT WINS OVER `:focus` DELIBERATELY. He is looking at the field he is typing
+   in; that is the field the mark is about. */
+[data-wb-field][data-wb-over],
+[data-wb-field][data-wb-over]:hover,
+[data-wb-field][data-wb-over]:focus {
+  outline: 2px solid var(--wb-gold, #211f1c);
+  outline-offset: 2px;
+}
 
 /* ── A NOTE TO OPS, IN CURLY BRACES (E2) ─────────────────────────────────────
    MIKE: *"Anything inside { } is a note to Ops, not story."*

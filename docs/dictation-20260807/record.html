@@ -152,20 +152,48 @@ body { padding-bottom: 92px; }
   opacity: .95;
 }
 
-/* ── THE LIVE COUNT, ON THE FIELD (Doctrine 22) ──────────────────────────────
-   MIKE: *"he must never again discover a limit from a report."* It follows the
-   focused field, it counts what would be SAVED, and it says where there is no
-   limit. Fixed, so it never moves the page. */
-.wb-lim {
-  position: fixed; z-index: 9100; display: none;
-  font: 11px/1.3 ui-monospace, "Courier New", monospace;
-  padding: 4px 7px; border-radius: 3px;
-  background: #14140f; color: #cfc7b0; border: 1px solid #4a4433;
-  max-width: 46ch;
+/* ── TOO LONG, SAID ON THE LINE (Doctrine 22, second cut) ────────────────────
+   MIKE: *"I do not need a number. Just make it obvious if I try to enter too
+   many."*
+
+   THE READOUT IS DELETED — `.wb-lim` and every rule it had. It printed four
+   numbers, and on the built page it floated OVER the headline it was counting.
+   What stands in its place is not a smaller readout; it is no readout.
+
+   PAST THE BUDGET THE LINE GOES TO REVERSE TYPE, AND THE TWO COLOURS ARE THE
+   FACE'S OWN. `--wb-gold` is the museum's ink (#211f1c) and `--wb-bg` its paper
+   (#d9d5ca) — the same two values the Record is already set in, swapped. So
+   nothing new enters the page's palette, nothing is red, nothing is bold, and
+   the tail of the headline simply stops being part of the line. That is the
+   proof-reader's mark for *this does not belong*, which is what he asked for and
+   is a picture rather than a sentence.
+   THE `var()` FALLBACKS ARE NOT DECORATION. Custom-property inheritance into a
+   highlight pseudo is a young corner of the platform; if it resolves, these are
+   the tokens, and if it does not, these are the tokens' values. Either way the
+   mark is the ink and the paper, and it cannot silently come out transparent.
+
+   IT IS A RANGE AND NOT A NODE, for the brace highlight's exact reason (see
+   below): a `<span>` inside a contenteditable is a thing the caret falls into
+   and a paste splits, which would let the mark damage the text it marks. */
+::highlight(wb-over) {
+  background-color: var(--wb-gold, #211f1c);
+  color: var(--wb-bg, #d9d5ca);
 }
-.wb-lim.on { display: block; }
-.wb-lim.near { border-color: #b8974a; color: #ffd97a; }
-.wb-lim.over { border-color: #ff8f8f; color: #ff8f8f; font-weight: 700; }
+
+/* AND THE FIELD SAYS IT TOO, WHICH IS WHAT MAKES THE SIGNAL SURVIVE A BROWSER
+   WITHOUT `CSS.highlights`. The editable outline is already this page's whole
+   vocabulary for the state of a field — dashed for editable, solid gold for
+   focused — so over-long is the same outline in the museum's ink. One signal,
+   two expressions of it, no new object on the page and no layout: an outline is
+   drawn outside the box and moves nothing (see the top of this file).
+   IT WINS OVER `:focus` DELIBERATELY. He is looking at the field he is typing
+   in; that is the field the mark is about. */
+[data-wb-field][data-wb-over],
+[data-wb-field][data-wb-over]:hover,
+[data-wb-field][data-wb-over]:focus {
+  outline: 2px solid var(--wb-gold, #211f1c);
+  outline-offset: 2px;
+}
 
 /* ── A NOTE TO OPS, IN CURLY BRACES (E2) ─────────────────────────────────────
    MIKE: *"Anything inside { } is a note to Ops, not story."*
@@ -257,7 +285,6 @@ body { padding-bottom: 92px; }
 
 <div class="wb-warn" id="wb-warn"></div>
 <div class="wb-note" id="wb-note"></div>
-<div class="wb-lim" id="wb-lim"></div>
 
 <div class="wb-bar">
   <span id="wb-chips" style="display:flex;gap:5px;flex-wrap:wrap"></span>
@@ -282,7 +309,7 @@ body { padding-bottom: 92px; }
     <button type="button" class="wb-act ghost" id="wb-pastex">Close &#10005;</button></div>
   <textarea id="wb-out" class="wb-out" spellcheck="false"></textarea>
 </div>
-<script id="wb-record-config" type="application/json">{"key":"wb.record.2026-08-09","worksheetKey":"wb.worksheet.2026-08-07","draftFile":"docs/dictation-20260807/record-draft.json","epoch":"2026-08-17","datePattern":"^\\d{4}-\\d{2}-\\d{2}$","budgets":{"title":{"max":62,"says":"Nothing truncates any more, so a longer headline overflows the row instead of clipping.","measured":[{"viewport":1280,"chars":64},{"viewport":768,"chars":58},{"viewport":390,"chars":36}]},"line":{"max":130,"says":"Your own R3 rule: THE ENTIRE SUMMARY MUST FIT. A summary that does not fit is not a summary."}},"carry":[{"slot":"W1.D1.HEAD","no":1,"field":"title"},{"slot":"W1.D1.LINE","no":1,"field":"line"},{"slot":"W1.D1.EXEC","no":1,"field":"sections"},{"slot":"W1.D1.NOTES","no":1,"field":"sections+"},{"slot":"W1.D2.HEAD","no":2,"field":"title"},{"slot":"W1.D2.LINE","no":2,"field":"line"},{"slot":"W1.D2.EXEC","no":2,"field":"sections"},{"slot":"W1.D2.NOTES","no":2,"field":"sections+"},{"slot":"W1.D3.HEAD","no":3,"field":"title"},{"slot":"W1.D3.LINE","no":3,"field":"line"},{"slot":"W1.D3.EXEC","no":3,"field":"sections"},{"slot":"W1.D3.NOTES","no":3,"field":"sections+"},{"slot":"W1.D4.HEAD","no":4,"field":"title"},{"slot":"W1.D4.LINE","no":4,"field":"line"},{"slot":"W1.D4.EXEC","no":4,"field":"sections"},{"slot":"W1.D4.NOTES","no":4,"field":"sections+"},{"slot":"W1.D5.HEAD","no":5,"field":"title"},{"slot":"W1.D5.LINE","no":5,"field":"line"},{"slot":"W1.D5.EXEC","no":5,"field":"sections"},{"slot":"W1.D5.NOTES","no":5,"field":"sections+"},{"slot":"W2.D1.HEAD","no":6,"field":"title"},{"slot":"W2.D1.LINE","no":6,"field":"line"},{"slot":"W2.D1.EXEC","no":6,"field":"sections"},{"slot":"W2.D1.NOTES","no":6,"field":"sections+"},{"slot":"W2.D2.HEAD","no":7,"field":"title"},{"slot":"W2.D2.LINE","no":7,"field":"line"},{"slot":"W2.D2.EXEC","no":7,"field":"sections"},{"slot":"W2.D2.NOTES","no":7,"field":"sections+"},{"slot":"W2.D3.HEAD","no":8,"field":"title"},{"slot":"W2.D3.LINE","no":8,"field":"line"},{"slot":"W2.D3.EXEC","no":8,"field":"sections"},{"slot":"W2.D3.NOTES","no":8,"field":"sections+"},{"slot":"W2.D4.HEAD","no":9,"field":"title"},{"slot":"W2.D4.LINE","no":9,"field":"line"},{"slot":"W2.D4.EXEC","no":9,"field":"sections"},{"slot":"W2.D4.NOTES","no":9,"field":"sections+"},{"slot":"W2.D5.HEAD","no":10,"field":"title"},{"slot":"W2.D5.LINE","no":10,"field":"line"},{"slot":"W2.D5.EXEC","no":10,"field":"sections"},{"slot":"W2.D5.NOTES","no":10,"field":"sections+"}],"shipped":[{"no":1,"date":"2026-08-17","title":"INITIAL LAUNCH REPORT - Weird.Baby","line":"Weird.Baby website is live\nAlert — Incoming Email Server Load (contained)","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby launched on schedule. No deviations; f(Ump) = 100%","Handoff is on track (T-6); Operations has hands-on-the-ball."]},{"label":"DETAILED REPORT","body":["ALARM - Incoming Email Server Load 1000x","o Operations remains unaffected.","o Not single sourced, so not as simple as \"turn it off.\"","o Data transmissions went silent shortly after WB launch."]},{"label":"ADDENDUM 01 - Event Log - Friday Launch(-2)","body":["15:00 - Weird.Baby email server Scheduled Early Auto Start","15:01 - Weird.Baby System BIST - No deviations; f(Ump) = 100%","15:14 - First data packet received","15:58 - Second data packet received","16:00 - Incoming data crosses 86% vs threshold","16:10 - Server auto-shutdown, auto-containment, and auto-alerts","16:13 - REACT - Team is convened","23:30 - REACT RULING - Restart with 5000x resources.","The decision to resume was determined to be low risk, reversible, and a real world stress test.","The engineering team was more intrigued than concerned, and not involved in the determination."]},{"label":"ADDENDUM 02 - Weekend Summary","body":["Staff onsite to support Weird.Baby launch - Nothing to report.","The time was put to use reviewing the incoming data.","Pages of hexadecimal numbers; presumably needs to be compiled and assembled into something usable."]},{"label":"ADDENDUM 03 - Event Log - Monday Day(1)","body":["00:00 - WB Go-Live went off without a hitch.","00:02 - Incoming data stream ended","The remainder of the day was completely uneventful.","Weird.Baby uptime - 100%, no further anomalies.","We decided to stand up /Robots as a page to track our progress for a few days. It is weird if nothing else. Maybe try to get a little crowdsourcing going on dealing with this, going forward."]}]},{"no":2,"date":"2026-08-18","title":"GENERAL STATUS UPDATE","line":"Weird.Baby Integrity Management Plan remains on-track without anomalies.\nEmail Server Data Assault has ceased; no net impact.","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Blockers - Nothing to Report"]},{"label":null,"body":["All process controls are in good order.  Operations is turning the crank, keeping tings moving on cadence.","The adrenalin from the launch and the weekend has finally worn off; we are all running on fumes.  No time was spent on the mystery data stream, today."]}]},{"no":3,"date":"2026-08-19","title":"DATA EXTRACTED - Weekend Robots Anomaly","line":"Weird.Baby IMP - On-track without anomalies.\nEmail Server Data Assault - Password Protected File Structure (6.28 GB)","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Data has been extracted from weekend dump including images and text. While all of it appears compelling, it is currently of no known value."]},{"label":null,"body":["Data has been extracted from weekend dump","IMAGE - Engineering Manual - Assorted pages","IMAGE - Assorted Evidence Based photos - Unknown Importance","A new Volume has been created: /Robots/MGK-VIIIp"]}]},{"no":4,"date":"2026-08-20","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace"]}]},{"no":5,"date":"2026-08-21","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Transfer complete - Future reporting to come from Operations","/Robots - The data can be assembled to produce a heavily compressed file that is  password protected."]}]},{"no":13,"title":"The one thing that wasn't packed like the rest","line":"A sealed modern bag holding a USB-C adapter, packed unlike everything else that arrived with it. The unit is now on charge.","lead":"One item in the delivery was not packed the way the rest of it was packed. It is a USB-C adapter, sealed in a modern bag, and the unit is on charge because of it.","tomb":"The unit is drawing power.","still":"/robots/reference/photos/rear_power_switch.png","stillCaption":"The back of the unit.","sections":[{"label":"The bag","body":[]},{"label":"A conversation about the battery","body":[]},{"label":"It came on, briefly","body":[]},{"label":"On charge","body":[]}]}],"seed":[{"no":1,"date":"2026-08-17","title":"INITIAL LAUNCH REPORT - Weird.Baby","line":"Weird.Baby website is live\nAlert — Incoming Email Server Load (contained)","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby launched on schedule. No deviations; f(Ump) = 100%","Handoff is on track (T-6); Operations has hands-on-the-ball."]},{"label":"DETAILED REPORT","body":["ALARM - Incoming Email Server Load 1000x","o Operations remains unaffected.","o Not single sourced, so not as simple as \"turn it off.\"","o Data transmissions went silent shortly after WB launch."]},{"label":"ADDENDUM 01 - Event Log - Friday Launch(-2)","body":["15:00 - Weird.Baby email server Scheduled Early Auto Start","15:01 - Weird.Baby System BIST - No deviations; f(Ump) = 100%","15:14 - First data packet received","15:58 - Second data packet received","16:00 - Incoming data crosses 86% vs threshold","16:10 - Server auto-shutdown, auto-containment, and auto-alerts","16:13 - REACT - Team is convened","23:30 - REACT RULING - Restart with 5000x resources.","The decision to resume was determined to be low risk, reversible, and a real world stress test.","The engineering team was more intrigued than concerned, and not involved in the determination."]},{"label":"ADDENDUM 02 - Weekend Summary","body":["Staff onsite to support Weird.Baby launch - Nothing to report.","The time was put to use reviewing the incoming data.","Pages of hexadecimal numbers; presumably needs to be compiled and assembled into something usable."]},{"label":"ADDENDUM 03 - Event Log - Monday Day(1)","body":["00:00 - WB Go-Live went off without a hitch.","00:02 - Incoming data stream ended","The remainder of the day was completely uneventful.","Weird.Baby uptime - 100%, no further anomalies.","We decided to stand up /Robots as a page to track our progress for a few days. It is weird if nothing else. Maybe try to get a little crowdsourcing going on dealing with this, going forward.","{Robot, portal, ??, ??  (Claude - Get me some examples from the manual, etc)}","{MGK, PI,  (Claude - Get me some examples from the manual, etc)}","{RE:  (Claude - Get me some examples from the manual, etc)}","{Look for what we really do use a lot.}","{Look for sections of the documents that are \"true\", but not \"juicy\". It all has to come out at some point. Start dumping.}"]}]},{"no":2,"date":"2026-08-18","title":"GENERAL STATUS UPDATE","line":"Weird.Baby Integrity Management Plan remains on-track without anomalies.\nEmail Server Data Assault has ceased; no net impact.","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Blockers - Nothing to Report"]},{"label":null,"body":["All process controls are in good order.  Operations is turning the crank, keeping tings moving on cadence.","The adrenalin from the launch and the weekend has finally worn off; we are all running on fumes.  No time was spent on the mystery data stream, today."]}]},{"no":3,"date":"2026-08-19","title":"DATA EXTRACTED - Weekend Robots Anomaly","line":"Weird.Baby IMP - On-track without anomalies.\nEmail Server Data Assault - Password Protected File Structure (6.28 GB)","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Data has been extracted from weekend dump including images and text. While all of it appears compelling, it is currently of no known value."]},{"label":null,"body":["Data has been extracted from weekend dump","IMAGE - Engineering Manual - Assorted pages","{IMAGE - Device marked 'MGK-VIIIp' and '(need name of device)'}","IMAGE - Assorted Evidence Based photos - Unknown Importance","{ASCII - (Give me a list of the most common words Robots expects to use, pick the juicy ones - A more compete list  and analysis to be printed below in detail section.}","A new Volume has been created: /Robots/MGK-VIIIp","{containing the files referenced above. (That is how we get the album art and set up the Manual link)}"]}]},{"no":4,"date":"2026-08-20","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace"]}]},{"no":5,"date":"2026-08-21","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Transfer complete - Future reporting to come from Operations","/Robots - The data can be assembled to produce a heavily compressed file that is  password protected."]}]},{"no":13,"title":"The one thing that wasn't packed like the rest","line":"A sealed modern bag holding a USB-C adapter, packed unlike everything else that arrived with it. The unit is now on charge.","lead":"One item in the delivery was not packed the way the rest of it was packed. It is a USB-C adapter, sealed in a modern bag, and the unit is on charge because of it.","tomb":"The unit is drawing power.","still":"/robots/reference/photos/rear_power_switch.png","stillCaption":"The back of the unit.","sections":[{"label":"The bag","body":[]},{"label":"A conversation about the battery","body":[]},{"label":"It came on, briefly","body":[]},{"label":"On charge","body":[]}]}]}</script>
+<script id="wb-record-config" type="application/json">{"key":"wb.record.2026-08-09","worksheetKey":"wb.worksheet.2026-08-07","draftFile":"docs/dictation-20260807/record-draft.json","epoch":"2026-08-17","datePattern":"^\\d{4}-\\d{2}-\\d{2}$","budgets":{"title":{"max":62,"measured":[{"viewport":1280,"chars":64},{"viewport":768,"chars":58},{"viewport":390,"chars":36}]},"line":{"max":130}},"carry":[{"slot":"W1.D1.HEAD","no":1,"field":"title"},{"slot":"W1.D1.LINE","no":1,"field":"line"},{"slot":"W1.D1.EXEC","no":1,"field":"sections"},{"slot":"W1.D1.NOTES","no":1,"field":"sections+"},{"slot":"W1.D2.HEAD","no":2,"field":"title"},{"slot":"W1.D2.LINE","no":2,"field":"line"},{"slot":"W1.D2.EXEC","no":2,"field":"sections"},{"slot":"W1.D2.NOTES","no":2,"field":"sections+"},{"slot":"W1.D3.HEAD","no":3,"field":"title"},{"slot":"W1.D3.LINE","no":3,"field":"line"},{"slot":"W1.D3.EXEC","no":3,"field":"sections"},{"slot":"W1.D3.NOTES","no":3,"field":"sections+"},{"slot":"W1.D4.HEAD","no":4,"field":"title"},{"slot":"W1.D4.LINE","no":4,"field":"line"},{"slot":"W1.D4.EXEC","no":4,"field":"sections"},{"slot":"W1.D4.NOTES","no":4,"field":"sections+"},{"slot":"W1.D5.HEAD","no":5,"field":"title"},{"slot":"W1.D5.LINE","no":5,"field":"line"},{"slot":"W1.D5.EXEC","no":5,"field":"sections"},{"slot":"W1.D5.NOTES","no":5,"field":"sections+"},{"slot":"W2.D1.HEAD","no":6,"field":"title"},{"slot":"W2.D1.LINE","no":6,"field":"line"},{"slot":"W2.D1.EXEC","no":6,"field":"sections"},{"slot":"W2.D1.NOTES","no":6,"field":"sections+"},{"slot":"W2.D2.HEAD","no":7,"field":"title"},{"slot":"W2.D2.LINE","no":7,"field":"line"},{"slot":"W2.D2.EXEC","no":7,"field":"sections"},{"slot":"W2.D2.NOTES","no":7,"field":"sections+"},{"slot":"W2.D3.HEAD","no":8,"field":"title"},{"slot":"W2.D3.LINE","no":8,"field":"line"},{"slot":"W2.D3.EXEC","no":8,"field":"sections"},{"slot":"W2.D3.NOTES","no":8,"field":"sections+"},{"slot":"W2.D4.HEAD","no":9,"field":"title"},{"slot":"W2.D4.LINE","no":9,"field":"line"},{"slot":"W2.D4.EXEC","no":9,"field":"sections"},{"slot":"W2.D4.NOTES","no":9,"field":"sections+"},{"slot":"W2.D5.HEAD","no":10,"field":"title"},{"slot":"W2.D5.LINE","no":10,"field":"line"},{"slot":"W2.D5.EXEC","no":10,"field":"sections"},{"slot":"W2.D5.NOTES","no":10,"field":"sections+"}],"shipped":[{"no":1,"date":"2026-08-17","title":"INITIAL LAUNCH REPORT - Weird.Baby","line":"Weird.Baby website is live\nAlert — Incoming Email Server Load (contained)","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby launched on schedule. No deviations; f(Ump) = 100%","Handoff is on track (T-6); Operations has hands-on-the-ball."]},{"label":"DETAILED REPORT","body":["ALARM - Incoming Email Server Load 1000x","o Operations remains unaffected.","o Not single sourced, so not as simple as \"turn it off.\"","o Data transmissions went silent shortly after WB launch."]},{"label":"ADDENDUM 01 - Event Log - Friday Launch(-2)","body":["15:00 - Weird.Baby email server Scheduled Early Auto Start","15:01 - Weird.Baby System BIST - No deviations; f(Ump) = 100%","15:14 - First data packet received","15:58 - Second data packet received","16:00 - Incoming data crosses 86% vs threshold","16:10 - Server auto-shutdown, auto-containment, and auto-alerts","16:13 - REACT - Team is convened","23:30 - REACT RULING - Restart with 5000x resources.","The decision to resume was determined to be low risk, reversible, and a real world stress test.","The engineering team was more intrigued than concerned, and not involved in the determination."]},{"label":"ADDENDUM 02 - Weekend Summary","body":["Staff onsite to support Weird.Baby launch - Nothing to report.","The time was put to use reviewing the incoming data.","Pages of hexadecimal numbers; presumably needs to be compiled and assembled into something usable."]},{"label":"ADDENDUM 03 - Event Log - Monday Day(1)","body":["00:00 - WB Go-Live went off without a hitch.","00:02 - Incoming data stream ended","The remainder of the day was completely uneventful.","Weird.Baby uptime - 100%, no further anomalies.","We decided to stand up /Robots as a page to track our progress for a few days. It is weird if nothing else. Maybe try to get a little crowdsourcing going on dealing with this, going forward."]}]},{"no":2,"date":"2026-08-18","title":"GENERAL STATUS UPDATE","line":"Weird.Baby Integrity Management Plan remains on-track without anomalies.\nEmail Server Data Assault has ceased; no net impact.","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Blockers - Nothing to Report"]},{"label":null,"body":["All process controls are in good order.  Operations is turning the crank, keeping tings moving on cadence.","The adrenalin from the launch and the weekend has finally worn off; we are all running on fumes.  No time was spent on the mystery data stream, today."]}]},{"no":3,"date":"2026-08-19","title":"DATA EXTRACTED - Weekend Robots Anomaly","line":"Weird.Baby IMP - On-track without anomalies.\nEmail Server Data Assault - Password Protected File Structure (6.28 GB)","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Data has been extracted from weekend dump including images and text. While all of it appears compelling, it is currently of no known value."]},{"label":null,"body":["Data has been extracted from weekend dump","IMAGE - Engineering Manual - Assorted pages","IMAGE - Assorted Evidence Based photos - Unknown Importance","A new Volume has been created: /Robots/MGK-VIIIp"]}]},{"no":4,"date":"2026-08-20","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace"]}]},{"no":5,"date":"2026-08-21","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Transfer complete - Future reporting to come from Operations","/Robots - The data can be assembled to produce a heavily compressed file that is  password protected."]}]},{"no":13,"title":"The one thing that wasn't packed like the rest","line":"A sealed modern bag holding a USB-C adapter, packed unlike everything else that arrived with it. The unit is now on charge.","lead":"One item in the delivery was not packed the way the rest of it was packed. It is a USB-C adapter, sealed in a modern bag, and the unit is on charge because of it.","tomb":"The unit is drawing power.","still":"/robots/reference/photos/rear_power_switch.png","stillCaption":"The back of the unit.","sections":[{"label":"The bag","body":[]},{"label":"A conversation about the battery","body":[]},{"label":"It came on, briefly","body":[]},{"label":"On charge","body":[]}]}],"seed":[{"no":1,"date":"2026-08-17","title":"INITIAL LAUNCH REPORT - Weird.Baby","line":"Weird.Baby website is live\nAlert — Incoming Email Server Load (contained)","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby launched on schedule. No deviations; f(Ump) = 100%","Handoff is on track (T-6); Operations has hands-on-the-ball."]},{"label":"DETAILED REPORT","body":["ALARM - Incoming Email Server Load 1000x","o Operations remains unaffected.","o Not single sourced, so not as simple as \"turn it off.\"","o Data transmissions went silent shortly after WB launch."]},{"label":"ADDENDUM 01 - Event Log - Friday Launch(-2)","body":["15:00 - Weird.Baby email server Scheduled Early Auto Start","15:01 - Weird.Baby System BIST - No deviations; f(Ump) = 100%","15:14 - First data packet received","15:58 - Second data packet received","16:00 - Incoming data crosses 86% vs threshold","16:10 - Server auto-shutdown, auto-containment, and auto-alerts","16:13 - REACT - Team is convened","23:30 - REACT RULING - Restart with 5000x resources.","The decision to resume was determined to be low risk, reversible, and a real world stress test.","The engineering team was more intrigued than concerned, and not involved in the determination."]},{"label":"ADDENDUM 02 - Weekend Summary","body":["Staff onsite to support Weird.Baby launch - Nothing to report.","The time was put to use reviewing the incoming data.","Pages of hexadecimal numbers; presumably needs to be compiled and assembled into something usable."]},{"label":"ADDENDUM 03 - Event Log - Monday Day(1)","body":["00:00 - WB Go-Live went off without a hitch.","00:02 - Incoming data stream ended","The remainder of the day was completely uneventful.","Weird.Baby uptime - 100%, no further anomalies.","We decided to stand up /Robots as a page to track our progress for a few days. It is weird if nothing else. Maybe try to get a little crowdsourcing going on dealing with this, going forward.","{Robot, portal, ??, ??  (Claude - Get me some examples from the manual, etc)}","{MGK, PI,  (Claude - Get me some examples from the manual, etc)}","{RE:  (Claude - Get me some examples from the manual, etc)}","{Look for what we really do use a lot.}","{Look for sections of the documents that are \"true\", but not \"juicy\". It all has to come out at some point. Start dumping.}"]}]},{"no":2,"date":"2026-08-18","title":"GENERAL STATUS UPDATE","line":"Weird.Baby Integrity Management Plan remains on-track without anomalies.\nEmail Server Data Assault has ceased; no net impact.","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Blockers - Nothing to Report"]},{"label":null,"body":["All process controls are in good order.  Operations is turning the crank, keeping tings moving on cadence.","The adrenalin from the launch and the weekend has finally worn off; we are all running on fumes.  No time was spent on the mystery data stream, today."]}]},{"no":3,"date":"2026-08-19","title":"DATA EXTRACTED - Weekend Robots Anomaly","line":"Weird.Baby IMP - On-track without anomalies.\nEmail Server Data Assault - Password Protected File Structure (6.28 GB)","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Data has been extracted from weekend dump including images and text. While all of it appears compelling, it is currently of no known value."]},{"label":null,"body":["Data has been extracted from weekend dump","IMAGE - Engineering Manual - Assorted pages","{IMAGE - Device marked 'MGK-VIIIp' and '(need name of device)'}","IMAGE - Assorted Evidence Based photos - Unknown Importance","{ASCII - (Give me a list of the most common words Robots expects to use, pick the juicy ones - A more compete list  and analysis to be printed below in detail section.}","A new Volume has been created: /Robots/MGK-VIIIp","{containing the files referenced above. (That is how we get the album art and set up the Manual link)}"]}]},{"no":4,"date":"2026-08-20","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace"]}]},{"no":5,"date":"2026-08-21","sections":[{"label":"EXECUTIVE SUMMARY","body":["Weird.Baby uptime: 100%, no anomalies","Operations Cadence : Favorable, On Pace","Transfer complete - Future reporting to come from Operations","/Robots - The data can be assembled to produce a heavily compressed file that is  password protected."]}]},{"no":13,"title":"The one thing that wasn't packed like the rest","line":"A sealed modern bag holding a USB-C adapter, packed unlike everything else that arrived with it. The unit is now on charge.","lead":"One item in the delivery was not packed the way the rest of it was packed. It is a USB-C adapter, sealed in a modern bag, and the unit is on charge because of it.","tomb":"The unit is drawing power.","still":"/robots/reference/photos/rear_power_switch.png","stillCaption":"The back of the unit.","sections":[{"label":"The bag","body":[]},{"label":"A conversation about the battery","body":[]},{"label":"It came on, briefly","body":[]},{"label":"On charge","body":[]}]}]}</script>
 <script>window.WBSections = function sectionsFromText(text) {
   var out = [];
   var cur = null;
@@ -362,7 +389,6 @@ body { padding-bottom: 92px; }
   var elNote = document.getElementById("wb-note");
   var elSay = document.getElementById("wb-say");
   var elChips = document.getElementById("wb-chips");
-  var elLim = document.getElementById("wb-lim");
   var elPaste = document.getElementById("wb-paste");
   var elOut = document.getElementById("wb-out");
   var elNo = document.getElementById("wb-no");
@@ -558,9 +584,25 @@ body { padding-bottom: 92px; }
     if (painted || tries <= 0) { fn(!painted); return; }
     window.setTimeout(function () { afterPaint(fn, tries - 1); }, 16);
   }
+  /* ═══ [2026-08-11] ONE VIEW, AND IT IS THE ONE HE EDITS ════════════════════
+     MIKE: *"Index content repeated — Remove extra view."*
+
+     THE INDEX ROW IS THE ONE THAT GOES, AND THE CHOICE IS FORCED RATHER THAN
+     PREFERRED. Since J1 the opened record's head IS the index row: `RecordEntry`
+     prints the same six classes inside `.vp-rec-openhead` that `RecordIndexRow`
+     prints inside `.vp-rec-index`, and `Exhibit.css` gives the two ONE selector
+     list — same grid, same gap, same padding, same type, same weight. So he
+     loses no view. The other direction was not available at any price: the head
+     is markup INSIDE a shipped component, and hiding it would have meant forking
+     `RecordEntry.jsx` for an Ops tool, which is the one thing this page exists
+     not to do.
+     WHAT CHANGES BESIDES THE COUNT: the deck is now the editable node for
+     `line` (`fields()` below). It was the index row's `.vp-rec-sum` before, and
+     the summary would otherwise have been on the page and uneditable — which
+     `audit()` would have caught, in red, which is not the same as being right. */
   function render(then) {
     if (inField()) return;                     // never redraw under the caret
-    window.WBPreview.render(mount, drawable(entries[cur]), CFG.epoch);
+    window.WBPreview.render(mount, drawable(entries[cur]), CFG.epoch, { index: false });
     var seq = ++wiring;
     window.setTimeout(function () { afterPaint(function (neverPainted) {
       if (seq !== wiring) return;              // a later render has overtaken this one
@@ -582,14 +624,18 @@ body { padding-bottom: 92px; }
      Class-based, and every hit is recorded so `audit()` can say what it did NOT
      find. `.vp-rec-sect-doors` is excluded by name: it is the renderer's
      orphan-door paragraph, not a paragraph of his. */
+  /* [2026-08-11] THE INDEX ROW IS NO LONGER DRAWN, so the two nodes it
+     contributed are gone and each field has exactly ONE node again. `line` moves
+     to `.vp-rec-deck`, which is the opened head's own deck and is the SAME
+     STRING in the same place at the same size — both classes exist for this
+     purpose and `Exhibit.css` says so at both of them ("`.vp-rec-headline`
+     remains as a HANDLE"; "`.vp-rec-deck` survives as a HANDLE and nothing
+     else"). */
   function fields() {
     var f = [];
-    var idx = mount.querySelector(".vp-rec-index");
-    if (idx) {
-      push(f, idx.querySelector(".vp-fe-title"), "title", "headline");
-      push(f, idx.querySelector(".vp-rec-sum"), "line", "the whole summary in the index");
-    }
     push(f, mount.querySelector(".vp-rec-headline"), "title", "headline");
+    push(f, mount.querySelector(".vp-rec-deck"), "line",
+         "the one-sentence summary — it is what the index row shows");
     push(f, mount.querySelector(".vp-rec-lead"), "lead", "lead paragraph");
     var lis = mount.querySelectorAll(".vp-rec-sects > li");
     for (var i = 0; i < lis.length; i++) {
@@ -618,6 +664,7 @@ body { padding-bottom: 92px; }
       else f.el.removeAttribute("data-wb-ph");
     });
     paintBraces();
+    paintOver();
     audit();
   }
   var supportsPlain = (function () {
@@ -706,13 +753,8 @@ body { padding-bottom: 92px; }
     set(el.getAttribute("data-wb-field"), textOf(el));
     el.removeAttribute("data-wb-ph");
     paintBraces();
-    limitOf(el);
+    paintOver();
     saveSoon();
-  });
-  mount.addEventListener("focusin", function (ev) {
-    var el = ev.target.closest ? ev.target.closest("[data-wb-field]") : null;
-    if (!el) return;
-    limitOf(el);
   });
   /* THE REDRAW IS DEFERRED BY ONE TICK, so that moving from one paragraph
      STRAIGHT into another does not redraw the tree out from under the caret he
@@ -721,7 +763,6 @@ body { padding-bottom: 92px; }
   mount.addEventListener("focusout", function (ev) {
     var el = ev.target.closest ? ev.target.closest("[data-wb-field]") : null;
     if (!el) return;
-    elLim.className = "wb-lim";
     if (muted) return;
     set(el.getAttribute("data-wb-field"), textOf(el));
     tidy();
@@ -828,55 +869,88 @@ body { padding-bottom: 92px; }
     return n;
   }
 
-  /* ── THE LIVE COUNT (Doctrine 22) ─────────────────────────────────────────
-     ONE DECLARATION, EVERY READER: the two numbers come from
-     `reveal/record-shape.mjs` through the generator and are never retyped here.
-     It WARNS and never blocks — there is no `maxlength` anywhere on this page —
-     and it says where there is NO limit, because "no limit" is itself something
-     he has to be told. */
-  function limitOf(el) {
-    var path = el.getAttribute("data-wb-field");
-    var v = textOf(el).replace(/\s+$/, "");
+  /* ── TOO LONG, SAID ON THE LINE ITSELF ────────────────────────────────────
+     MIKE: *"I do not need a number. Just make it obvious if I try to enter too
+     many."*
+
+     WHAT WAS HERE, AND WHY EVERY PART OF IT WENT. A black box floated above the
+     focused field reading `45 characters — wraps at 390px · fits: 64 at 1280, 58
+     at 768, 36 at 390 ✗ · gate refuses over 62`. Four numbers, three of them
+     about screens he is not writing on, and — measured on the built page — the
+     box OVERLAPPED THE HEADLINE IT WAS COUNTING, so the readout obscured the
+     line it described. It is deleted whole: the box, the red type, the count,
+     the three viewport figures and the gate number.
+
+     WHAT REPLACES IT IS THE CHARACTERS THEMSELVES. Past the budget the line goes
+     to REVERSE TYPE — the museum's own ink as ground, the museum's own paper as
+     letters, `::highlight(wb-over)` in `record-edit.css`. There is no number, no
+     word and nothing to hover: the tail of his headline turns into a black bar
+     and stops looking like the rest of the line. It is the proof-reader's mark
+     for *this does not belong*, in the two colours the face already has, so
+     nothing new is introduced and nothing shouts.
+
+     THE MECHANISM IS THE BRACE HIGHLIGHT'S, FOR THE BRACE HIGHLIGHT'S REASON.
+     `CSS.highlights` paints RANGES; a `<span>` inside a contenteditable is a
+     node the caret can fall into and a paste can split, which would make the
+     mark capable of damaging the text it marks. Where the API is missing the
+     field's own outline still goes solid (`[data-wb-over]`), so the signal
+     degrades to a quieter form of itself rather than to nothing.
+
+     IT WARNS AND NEVER BLOCKS. No `maxlength`, no truncation, no refusal — he
+     decides, which is what he has always decided.
+
+     ═══ WHERE THE NUMBER COMES FROM, AND THERE IS ONLY ONE ══════════════════
+     `reveal/record-shape.mjs`, through the generator, never retyped here. Two
+     budgets bind a headline and they are not the same kind of thing: the GATE
+     refuses the packet over `BUDGETS.title.max`, and the MEASURED no-wrap budget
+     is how many characters fit on one line at a given width. `overAt` takes the
+     stricter of the gate's number and the WIDEST measured width — the widest
+     because Mike writes at a desktop and ruled that desktop leads, the stricter
+     because both of them are ways of being too long and a mark that fires at the
+     looser one would let the tighter one through in silence.
+     A FIELD WITH NO BUDGET IS NEVER MARKED, and that is now the whole statement
+     that it has no limit. The old readout said so in words on every field, every
+     time; a field that never marks says it once and forever. */
+  var HL_OVER = (window.CSS && window.CSS.highlights && window.Highlight) ? new window.Highlight() : null;
+  if (HL_OVER) window.CSS.highlights.set("wb-over", HL_OVER);
+
+  function overAt(path) {
     var b = CFG.budgets[path];
-    var r = el.getBoundingClientRect();
-    elLim.style.left = Math.max(6, Math.round(r.left)) + "px";
-    elLim.style.top = Math.max(6, Math.round(r.top - 26)) + "px";
-    if (!b) {
-      elLim.className = "wb-lim on";
-      elLim.textContent = v.length + " characters · no limit on this field";
-      return;
-    }
-    /* === [N1 2026-08-11] THE MEASURED BUDGET, AND WHICH SCREEN IT BELONGS TO
-       The gate's `RECORD_TITLE_MAX` is one number; a headline's real no-wrap
-       budget is a different number at every width, because the type ramp reads
-       the viewport. Both are shown, the measured ones first, because the
-       measured ones are what he can SEE go wrong. Read from
-       `reveal/record-shape.mjs` through `CFG` — no copy lives here.
-       IT STILL NEVER BLOCKS AND NEVER TRUNCATES: this is a readout. */
+    if (!b) return 0;
+    var n = b.max;
     if (b.measured && b.measured.length) {
-      var widest = b.measured[0].chars;
-      var wraps = b.measured.filter(function (m) { return v.length > m.chars; });
-      var parts = b.measured.map(function (m) {
-        return m.chars + " at " + m.viewport + (v.length > m.chars ? " ✗" : "");
-      });
-      elLim.className = "wb-lim on" + (wraps.length ? " over" : (v.length > widest - 8 ? " near" : ""));
-      elLim.textContent = v.length + " characters — wraps at "
-        + wraps.map(function (m) { return m.viewport + "px"; }).join(" and ")
-        + (wraps.length ? "" : "no width")
-        + "  ·  fits: " + parts.join(", ")
-        + "  ·  gate refuses over " + b.max;
-      if (!wraps.length) elLim.textContent = v.length + " characters — fits every width  ·  "
-        + parts.join(", ") + "  ·  gate refuses over " + b.max;
-      return;
+      var wide = b.measured[0];
+      for (var i = 1; i < b.measured.length; i++) {
+        if (b.measured[i].viewport > wide.viewport) wide = b.measured[i];
+      }
+      if (wide.chars < n) n = wide.chars;
     }
-    var over = v.length - b.max;
-    if (over > 0) {
-      elLim.className = "wb-lim on over";
-      elLim.textContent = over + " OVER — " + v.length + " of " + b.max + ". " + b.says;
-    } else {
-      elLim.className = "wb-lim on" + (v.length > b.max - 15 ? " near" : "");
-      elLim.textContent = v.length + " / " + b.max + " characters";
-    }
+    return n;
+  }
+
+  /* TRAILING WHITESPACE DOES NOT COUNT TOWARDS TOO LONG — a space he has not
+     typed a word after yet must not flip the line — but it is not stripped from
+     the model either, which is `tidy()`'s business and not this function's. */
+  function paintOver() {
+    if (HL_OVER) HL_OVER.clear();
+    Array.prototype.forEach.call(mount.querySelectorAll("[data-wb-field]"), function (el) {
+      var n = overAt(el.getAttribute("data-wb-field"));
+      if (n && textOf(el).replace(/\s+$/, "").length > n) el.setAttribute("data-wb-over", "");
+      else { el.removeAttribute("data-wb-over"); return; }
+      if (!HL_OVER) return;
+      var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+      var seen = 0, t;
+      while ((t = walker.nextNode())) {
+        if (seen + t.data.length > n) {
+          var r = document.createRange();
+          r.setStart(t, n - seen);
+          r.setEnd(el, el.childNodes.length);
+          HL_OVER.add(r);
+          return;
+        }
+        seen += t.data.length;
+      }
+    });
   }
 
   /* ── THE RECORD RAIL ──────────────────────────────────────────────────────

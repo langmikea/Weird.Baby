@@ -45,14 +45,38 @@ const noop = () => {};
 /* THE INDEX AND THE ENTRY ARE BOTH DRAWN, because he writes into both and the
    two answers have different jobs. The headline goes in both; the one-sentence
    summary appears ONLY in the index (D2), and the whole point of showing the
-   index is that this is the one place it is ever seen. */
-function Preview({ entry, epoch }) {
+   index is that this is the one place it is ever seen.
+
+   ═══ [2026-08-11] AND THE INDEX HALF IS OPTIONAL NOW ════════════════════════
+   MIKE, of the editor: *"Index content repeated — Remove extra view."*
+
+   THAT IS A FACT ABOUT THE PAGE RATHER THAN ABOUT THIS COMPONENT. On the live
+   site the row and the opened head are two views a reader moves BETWEEN, and
+   the paragraph above is still true of a PREVIEW, which is a thing you look at.
+   On the EDITOR both are on screen at once, and since J1 the opened head prints
+   *the index row's own six classes inside `.vp-rec-openhead`* — the same
+   number, weekday, headline and deck, at the same position, size and weight, off
+   one shared declaration in `Exhibit.css`. So the row is not a second view
+   there; it is the same four things twice, and only one copy could be typed in.
+
+   IT IS A FLAG HERE AND NOT A SECOND COMPONENT, WHICH IS THE WHOLE CARE OF IT.
+   `RecordIndexRow` and `RecordEntry` are the museum's shipped modules and are
+   untouched; this file is the preview HARNESS, and all the flag does is choose
+   which of the two real components it mounts. Nothing third is drawn, and the
+   surface Mike writes on is still the museum's own code drawing his entry.
+   The default is ON, so `frame.html` — which calls `render` with three
+   arguments — is byte-identical to what it drew yesterday. */
+function Preview({ entry, epoch, index = true }) {
   return (
     <>
-      <ol className="vp-face-entries vp-rec-index" data-stage-split="row">
-        <RecordIndexRow entry={entry} unread={false} onOpen={noop} />
-      </ol>
-      <div className="wbp-rule" aria-hidden="true" />
+      {index && (
+        <>
+          <ol className="vp-face-entries vp-rec-index" data-stage-split="row">
+            <RecordIndexRow entry={entry} unread={false} onOpen={noop} />
+          </ol>
+          <div className="wbp-rule" aria-hidden="true" />
+        </>
+      )}
       <RecordEntry
         entry={entry}
         list={[entry]}
@@ -73,9 +97,13 @@ let root = null;
    character, and its `scrollIntoView` would fight the reader for the scroll
    position while he types. Re-rendering the same root is also what the live
    site does between walks. */
-export function render(el, entry, epoch) {
+/* `opts.index === false` drops the index row. Anything else — including no
+   fourth argument at all — keeps it, so an existing caller cannot lose a view
+   by not having been taught about the option. */
+export function render(el, entry, epoch, opts) {
   if (!root) root = createRoot(el);
-  root.render(<Preview entry={entry} epoch={epoch} />);
+  root.render(<Preview entry={entry} epoch={epoch}
+                       index={!opts || opts.index !== false} />);
 }
 
 window.WBPreview = { render };

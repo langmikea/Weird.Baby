@@ -56,7 +56,6 @@
   var elNote = document.getElementById("wb-note");
   var elSay = document.getElementById("wb-say");
   var elChips = document.getElementById("wb-chips");
-  var elLim = document.getElementById("wb-lim");
   var elPaste = document.getElementById("wb-paste");
   var elOut = document.getElementById("wb-out");
   var elNo = document.getElementById("wb-no");
@@ -252,9 +251,25 @@
     if (painted || tries <= 0) { fn(!painted); return; }
     window.setTimeout(function () { afterPaint(fn, tries - 1); }, 16);
   }
+  /* ═══ [2026-08-11] ONE VIEW, AND IT IS THE ONE HE EDITS ════════════════════
+     MIKE: *"Index content repeated — Remove extra view."*
+
+     THE INDEX ROW IS THE ONE THAT GOES, AND THE CHOICE IS FORCED RATHER THAN
+     PREFERRED. Since J1 the opened record's head IS the index row: `RecordEntry`
+     prints the same six classes inside `.vp-rec-openhead` that `RecordIndexRow`
+     prints inside `.vp-rec-index`, and `Exhibit.css` gives the two ONE selector
+     list — same grid, same gap, same padding, same type, same weight. So he
+     loses no view. The other direction was not available at any price: the head
+     is markup INSIDE a shipped component, and hiding it would have meant forking
+     `RecordEntry.jsx` for an Ops tool, which is the one thing this page exists
+     not to do.
+     WHAT CHANGES BESIDES THE COUNT: the deck is now the editable node for
+     `line` (`fields()` below). It was the index row's `.vp-rec-sum` before, and
+     the summary would otherwise have been on the page and uneditable — which
+     `audit()` would have caught, in red, which is not the same as being right. */
   function render(then) {
     if (inField()) return;                     // never redraw under the caret
-    window.WBPreview.render(mount, drawable(entries[cur]), CFG.epoch);
+    window.WBPreview.render(mount, drawable(entries[cur]), CFG.epoch, { index: false });
     var seq = ++wiring;
     window.setTimeout(function () { afterPaint(function (neverPainted) {
       if (seq !== wiring) return;              // a later render has overtaken this one
@@ -276,14 +291,18 @@
      Class-based, and every hit is recorded so `audit()` can say what it did NOT
      find. `.vp-rec-sect-doors` is excluded by name: it is the renderer's
      orphan-door paragraph, not a paragraph of his. */
+  /* [2026-08-11] THE INDEX ROW IS NO LONGER DRAWN, so the two nodes it
+     contributed are gone and each field has exactly ONE node again. `line` moves
+     to `.vp-rec-deck`, which is the opened head's own deck and is the SAME
+     STRING in the same place at the same size — both classes exist for this
+     purpose and `Exhibit.css` says so at both of them ("`.vp-rec-headline`
+     remains as a HANDLE"; "`.vp-rec-deck` survives as a HANDLE and nothing
+     else"). */
   function fields() {
     var f = [];
-    var idx = mount.querySelector(".vp-rec-index");
-    if (idx) {
-      push(f, idx.querySelector(".vp-fe-title"), "title", "headline");
-      push(f, idx.querySelector(".vp-rec-sum"), "line", "the whole summary in the index");
-    }
     push(f, mount.querySelector(".vp-rec-headline"), "title", "headline");
+    push(f, mount.querySelector(".vp-rec-deck"), "line",
+         "the one-sentence summary — it is what the index row shows");
     push(f, mount.querySelector(".vp-rec-lead"), "lead", "lead paragraph");
     var lis = mount.querySelectorAll(".vp-rec-sects > li");
     for (var i = 0; i < lis.length; i++) {
@@ -312,6 +331,7 @@
       else f.el.removeAttribute("data-wb-ph");
     });
     paintBraces();
+    paintOver();
     audit();
   }
   var supportsPlain = (function () {
@@ -400,13 +420,8 @@
     set(el.getAttribute("data-wb-field"), textOf(el));
     el.removeAttribute("data-wb-ph");
     paintBraces();
-    limitOf(el);
+    paintOver();
     saveSoon();
-  });
-  mount.addEventListener("focusin", function (ev) {
-    var el = ev.target.closest ? ev.target.closest("[data-wb-field]") : null;
-    if (!el) return;
-    limitOf(el);
   });
   /* THE REDRAW IS DEFERRED BY ONE TICK, so that moving from one paragraph
      STRAIGHT into another does not redraw the tree out from under the caret he
@@ -415,7 +430,6 @@
   mount.addEventListener("focusout", function (ev) {
     var el = ev.target.closest ? ev.target.closest("[data-wb-field]") : null;
     if (!el) return;
-    elLim.className = "wb-lim";
     if (muted) return;
     set(el.getAttribute("data-wb-field"), textOf(el));
     tidy();
@@ -522,55 +536,88 @@
     return n;
   }
 
-  /* ── THE LIVE COUNT (Doctrine 22) ─────────────────────────────────────────
-     ONE DECLARATION, EVERY READER: the two numbers come from
-     `reveal/record-shape.mjs` through the generator and are never retyped here.
-     It WARNS and never blocks — there is no `maxlength` anywhere on this page —
-     and it says where there is NO limit, because "no limit" is itself something
-     he has to be told. */
-  function limitOf(el) {
-    var path = el.getAttribute("data-wb-field");
-    var v = textOf(el).replace(/\s+$/, "");
+  /* ── TOO LONG, SAID ON THE LINE ITSELF ────────────────────────────────────
+     MIKE: *"I do not need a number. Just make it obvious if I try to enter too
+     many."*
+
+     WHAT WAS HERE, AND WHY EVERY PART OF IT WENT. A black box floated above the
+     focused field reading `45 characters — wraps at 390px · fits: 64 at 1280, 58
+     at 768, 36 at 390 ✗ · gate refuses over 62`. Four numbers, three of them
+     about screens he is not writing on, and — measured on the built page — the
+     box OVERLAPPED THE HEADLINE IT WAS COUNTING, so the readout obscured the
+     line it described. It is deleted whole: the box, the red type, the count,
+     the three viewport figures and the gate number.
+
+     WHAT REPLACES IT IS THE CHARACTERS THEMSELVES. Past the budget the line goes
+     to REVERSE TYPE — the museum's own ink as ground, the museum's own paper as
+     letters, `::highlight(wb-over)` in `record-edit.css`. There is no number, no
+     word and nothing to hover: the tail of his headline turns into a black bar
+     and stops looking like the rest of the line. It is the proof-reader's mark
+     for *this does not belong*, in the two colours the face already has, so
+     nothing new is introduced and nothing shouts.
+
+     THE MECHANISM IS THE BRACE HIGHLIGHT'S, FOR THE BRACE HIGHLIGHT'S REASON.
+     `CSS.highlights` paints RANGES; a `<span>` inside a contenteditable is a
+     node the caret can fall into and a paste can split, which would make the
+     mark capable of damaging the text it marks. Where the API is missing the
+     field's own outline still goes solid (`[data-wb-over]`), so the signal
+     degrades to a quieter form of itself rather than to nothing.
+
+     IT WARNS AND NEVER BLOCKS. No `maxlength`, no truncation, no refusal — he
+     decides, which is what he has always decided.
+
+     ═══ WHERE THE NUMBER COMES FROM, AND THERE IS ONLY ONE ══════════════════
+     `reveal/record-shape.mjs`, through the generator, never retyped here. Two
+     budgets bind a headline and they are not the same kind of thing: the GATE
+     refuses the packet over `BUDGETS.title.max`, and the MEASURED no-wrap budget
+     is how many characters fit on one line at a given width. `overAt` takes the
+     stricter of the gate's number and the WIDEST measured width — the widest
+     because Mike writes at a desktop and ruled that desktop leads, the stricter
+     because both of them are ways of being too long and a mark that fires at the
+     looser one would let the tighter one through in silence.
+     A FIELD WITH NO BUDGET IS NEVER MARKED, and that is now the whole statement
+     that it has no limit. The old readout said so in words on every field, every
+     time; a field that never marks says it once and forever. */
+  var HL_OVER = (window.CSS && window.CSS.highlights && window.Highlight) ? new window.Highlight() : null;
+  if (HL_OVER) window.CSS.highlights.set("wb-over", HL_OVER);
+
+  function overAt(path) {
     var b = CFG.budgets[path];
-    var r = el.getBoundingClientRect();
-    elLim.style.left = Math.max(6, Math.round(r.left)) + "px";
-    elLim.style.top = Math.max(6, Math.round(r.top - 26)) + "px";
-    if (!b) {
-      elLim.className = "wb-lim on";
-      elLim.textContent = v.length + " characters · no limit on this field";
-      return;
-    }
-    /* === [N1 2026-08-11] THE MEASURED BUDGET, AND WHICH SCREEN IT BELONGS TO
-       The gate's `RECORD_TITLE_MAX` is one number; a headline's real no-wrap
-       budget is a different number at every width, because the type ramp reads
-       the viewport. Both are shown, the measured ones first, because the
-       measured ones are what he can SEE go wrong. Read from
-       `reveal/record-shape.mjs` through `CFG` — no copy lives here.
-       IT STILL NEVER BLOCKS AND NEVER TRUNCATES: this is a readout. */
+    if (!b) return 0;
+    var n = b.max;
     if (b.measured && b.measured.length) {
-      var widest = b.measured[0].chars;
-      var wraps = b.measured.filter(function (m) { return v.length > m.chars; });
-      var parts = b.measured.map(function (m) {
-        return m.chars + " at " + m.viewport + (v.length > m.chars ? " ✗" : "");
-      });
-      elLim.className = "wb-lim on" + (wraps.length ? " over" : (v.length > widest - 8 ? " near" : ""));
-      elLim.textContent = v.length + " characters — wraps at "
-        + wraps.map(function (m) { return m.viewport + "px"; }).join(" and ")
-        + (wraps.length ? "" : "no width")
-        + "  ·  fits: " + parts.join(", ")
-        + "  ·  gate refuses over " + b.max;
-      if (!wraps.length) elLim.textContent = v.length + " characters — fits every width  ·  "
-        + parts.join(", ") + "  ·  gate refuses over " + b.max;
-      return;
+      var wide = b.measured[0];
+      for (var i = 1; i < b.measured.length; i++) {
+        if (b.measured[i].viewport > wide.viewport) wide = b.measured[i];
+      }
+      if (wide.chars < n) n = wide.chars;
     }
-    var over = v.length - b.max;
-    if (over > 0) {
-      elLim.className = "wb-lim on over";
-      elLim.textContent = over + " OVER — " + v.length + " of " + b.max + ". " + b.says;
-    } else {
-      elLim.className = "wb-lim on" + (v.length > b.max - 15 ? " near" : "");
-      elLim.textContent = v.length + " / " + b.max + " characters";
-    }
+    return n;
+  }
+
+  /* TRAILING WHITESPACE DOES NOT COUNT TOWARDS TOO LONG — a space he has not
+     typed a word after yet must not flip the line — but it is not stripped from
+     the model either, which is `tidy()`'s business and not this function's. */
+  function paintOver() {
+    if (HL_OVER) HL_OVER.clear();
+    Array.prototype.forEach.call(mount.querySelectorAll("[data-wb-field]"), function (el) {
+      var n = overAt(el.getAttribute("data-wb-field"));
+      if (n && textOf(el).replace(/\s+$/, "").length > n) el.setAttribute("data-wb-over", "");
+      else { el.removeAttribute("data-wb-over"); return; }
+      if (!HL_OVER) return;
+      var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+      var seen = 0, t;
+      while ((t = walker.nextNode())) {
+        if (seen + t.data.length > n) {
+          var r = document.createRange();
+          r.setStart(t, n - seen);
+          r.setEnd(el, el.childNodes.length);
+          HL_OVER.add(r);
+          return;
+        }
+        seen += t.data.length;
+      }
+    });
   }
 
   /* ── THE RECORD RAIL ──────────────────────────────────────────────────────

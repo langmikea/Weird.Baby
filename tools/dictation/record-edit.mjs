@@ -205,7 +205,6 @@ function mustCut(html, open, close, what) {
 const BAR = `
 <div class="wb-warn" id="wb-warn"></div>
 <div class="wb-note" id="wb-note"></div>
-<div class="wb-lim" id="wb-lim"></div>
 
 <div class="wb-bar">
   <span id="wb-chips" style="display:flex;gap:5px;flex-wrap:wrap"></span>
@@ -261,10 +260,14 @@ function build() {
     datePattern: FORMATS.date.pattern,
     budgets: {
       /* [N1 2026-08-11] the gate's number AND the measured ones, both read
-         from `reveal/record-shape.mjs` — no second copy lives in the page. */
-      title: { max: BUDGETS.title.max, says: BUDGETS.title.why,
-               measured: TITLE_BUDGET_MEASURED },
-      line: { max: BUDGETS.line.max, says: BUDGETS.line.why },
+         from `reveal/record-shape.mjs` — no second copy lives in the page.
+         [2026-08-11] `says` is gone with the readout that printed it: the
+         counter is deleted on Mike's ruling and nothing on the page says a
+         limit in words any more. The NUMBERS stay, because the mark on the
+         line has to fire somewhere and this is still the only declaration of
+         where. */
+      title: { max: BUDGETS.title.max, measured: TITLE_BUDGET_MEASURED },
+      line: { max: BUDGETS.line.max },
     },
     carry: carryMap(),
     shipped,
