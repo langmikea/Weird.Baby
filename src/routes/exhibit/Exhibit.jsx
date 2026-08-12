@@ -1,7 +1,10 @@
 import React, { Fragment, useState, useEffect, useRef, useCallback, useLayoutEffect, useMemo } from "react";
 import { makeFactCycler, splitFact } from "../../lib/fact-select.js";
-import { visitorProse, kept, opsNotesOf, OPS_NOTES_HEAD } from "../../lib/visitor-prose.js";
-import { launched } from "../../lib/placement.js";
+import { visitorProse, kept } from "../../lib/visitor-prose.js";
+/* [2026-08-11] `launched` IS NO LONGER IMPORTED. Its only caller here was the
+   red notes block’s stage gate, which is deleted; the STAGE still governs
+   this file through `placed()` on the data side and through `wb-ops-notes`
+   in vite.config.js, neither of which is imported at this seam. */
 import { useArrival } from "../../lib/use-arrival.js";
 import MuseumBar from "../../components/MuseumBar.jsx";
 import RecordEntry from "./RecordEntry.jsx";
@@ -118,28 +121,23 @@ function typeColor(t) { return TYPE_META[t]?.color ?? "#888"; }
    could not see. `scrubFace` stays here: it knows which fields a FACE has, and
    that is genuinely the exhibit's business. */
 
-/* ═══ [N3 2026-08-06] AND THE OTHER HALF OF THE SEAM: THE NOTES COME BACK, FOR
-       MIKE, IN RED ═════════════════════════════════════════════════════════
-   MIKE: "NOTES TO MIKE RENDER IN RED (or an equally unmistakable treatment)
-   meaning NOT PART OF THE UX, EVER … so a note can never be mistaken for
-   content. Verify none of them can reach a visitor in the LAUNCH stage."
+/* ═══ [2026-08-11] THE RED NOTES BLOCK IS DELETED, AND SO ARE THE NOTES ══════
+   MIKE: **"EVERYWHERE: Delete the comment boxes (red). Get rid of all of the
+   red notes — all are stale and not useful."**
 
-   `withOpsNotes` LIFTS them rather than leaving them in the prose, and the
-   scrub above is not touched by one character. That is the point: the body copy
-   is identical in both stages, so the page Mike reads IS the page that ships,
-   and the notes sit beneath it in a block the museum's design language has no
-   other use for. A note that is never inside the copy cannot be read as copy —
-   which is a stronger guarantee than red ink inside a paragraph.
+   WHAT WENT WITH IT: `withOpsNotes` and its two call sites, the `.wb-ops-notes`
+   block at the render seam, the same block in `InfoBooth.jsx`, the four rules
+   in `src/index.css`, `OPS_NOTES_HEAD` / `opsSentences` / `opsNotesOf` in
+   `visitor-prose.js`, and the thirty-two `[PAPA]` sentences the boxes existed
+   to show. Deleted rather than switched off (Doctrine 16, Doctrine 24): a
+   mechanism kept beside a ruling it has lost is a mechanism a future round
+   turns back on.
 
-   THE WALK READS THE RAW FACE, NOT THE SCRUBBED ONE, and it walks rather than
-   consulting the field list above — see the header of `opsNotesOf`. A field
-   somebody forgets to add to line 128 is invisible to the scrub AND to the
-   note, and the second failure is the one that would go unnoticed. */
-function withOpsNotes(out, raw) {
-  if (!out || launched()) return out;
-  const notes = opsNotesOf(raw);
-  return notes.length ? { ...out, opsNotes: notes } : out;
-}
+   `visitorProse` IS UNTOUCHED AND STAYS, and that is not sentiment. Its job was
+   never the box — it is the rule that keeps an operator marker off the glass,
+   P5's site-wide ruling, and `[PAPA]` markers remain in COMMENTS throughout the
+   data. The day one is written into a string again, the scrub is what stops a
+   visitor reading it. What is gone is the half that printed them back. */
 
 function scrubFace(face) {
   if (!face) return face;
@@ -3471,8 +3469,8 @@ export default function Exhibit({ artist, open = null }) {
      stopped for every wing at once. */
   const rawSelFace = activeTrack !== null ? (album.tracks[activeTrack]?.face ?? null) : null;
   const rawFallbackFace = rawSelFace ?? album.tracks.find(t => t.face)?.face ?? null;
-  const selFace = useMemo(() => withOpsNotes(scrubFace(rawSelFace), rawSelFace), [rawSelFace]);
-  const fallbackFace = useMemo(() => withOpsNotes(scrubFace(rawFallbackFace), rawFallbackFace), [rawFallbackFace]);
+  const selFace = useMemo(() => scrubFace(rawSelFace), [rawSelFace]);
+  const fallbackFace = useMemo(() => scrubFace(rawFallbackFace), [rawFallbackFace]);
   const flatFaces = artist.faceFlow === "flat";
   /* [F7a 2026-08-02] a flat album with NOTHING TO CUE (no playable song, so
      no poster to land on — the house album) falls back to its first face,
@@ -5127,25 +5125,18 @@ export default function Exhibit({ artist, open = null }) {
                             was carrying nothing. "Nothing extra unless it
                             carries more than its own weight" applies to the
                             renderer as much as to the page. */}
-                        {face.papa && (
-                          <div className="vp-face-papa">{face.papa}</div>
-                        )}
-                        {/* [N3 2026-08-06] NOT PART OF THE UX. Present only in
-                            the DEVELOPMENT stage; `withOpsNotes` returns the
-                            face untouched at launch, and `wb-ops-notes` deletes
-                            the sentences from the source before the launch
-                            bundle is written, so there are two independent
-                            reasons this cannot reach a visitor. */}
-                        {face.opsNotes && (
-                          <div className="wb-ops-notes" data-not-ux="1">
-                            <div className="wb-ops-notes-head">
-                              {OPS_NOTES_HEAD}
-                            </div>
-                            {face.opsNotes.map((n, i) => (
-                              <p className="wb-ops-note" key={i}>{n}</p>
-                            ))}
-                          </div>
-                        )}
+                        {/* ═══ [2026-08-11] THE RED NOTES BLOCK IS DELETED ═══
+                            MIKE: "Delete the comment boxes (red)." The block
+                            that drew `face.opsNotes` is gone, with the lift
+                            that filled it and the notes themselves.
+                            `face.papa` WENT WITH IT AND WAS NOT COLLATERAL. It
+                            drew the SAME thing in grey — every `papa` field in
+                            the museum held one `[PAPA]` sentence and nothing
+                            else, so the ruling emptied all three of them; a
+                            renderer for a field no face declares any more is
+                            what Doctrine 16 is about. Three faces carried one:
+                            the mainframe's wall, the portable's wall and the
+                            Portal's panel. */}
                         {/* [S5 2026-07-30] THE STANDALONE LAUNCH LINK IS GONE.
                             It usurped the rack: a door beside four doors, all
                             leading to the same room in different states. The

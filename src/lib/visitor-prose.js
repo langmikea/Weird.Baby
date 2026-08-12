@@ -35,39 +35,28 @@
 // The early return means a string without a marker is never even split, so the
 // sentence splitter can never damage ordinary copy ("Vol. 1", "Dr King").
 
-// ═══ [N3 2026-08-06] AND THE MARKERS ARE VISIBLE TO MIKE AGAIN, IN RED ═══════
+// ═══ [2026-08-11] THE RED BLOCK IS GONE, AND THE SCRUB IS WHAT REMAINS ══════
 //
-// MIKE: **"NOTES TO MIKE RENDER IN RED (or an equally unmistakable treatment)
-// meaning NOT PART OF THE UX, EVER. Apply it to [PAPA] slots and every other
-// Ops-to-Mike marker that can appear on a rendered surface, so a note can never
-// be mistaken for content. Verify none of them can reach a visitor in the LAUNCH
-// stage."**
+// MIKE: **"EVERYWHERE: Delete the comment boxes (red). Get rid of all of the
+// red notes — all are stale and not useful."**
 //
-// THIS DOES NOT REVERSE P5 AND THE SHAPE IS V1's. P5's sentence — *they must
-// never be visible to visitors* — is untouched and is now enforced twice rather
-// than once. What was wrong is the same thing that was wrong with the pull-back
-// rule: the scrub had only ONE state, so the only way to obey it was for Mike to
-// be unable to see his own list either. **Mike cannot direct what he cannot
-// see.**
+// N3's arrangement — the notes lifted out of the prose and printed beneath the
+// surface in scarlet, so Mike could direct what he could otherwise not see — is
+// DELETED WHOLE: `OPS_NOTES_HEAD`, `opsSentences` and `opsNotesOf` from this
+// file, the block from both render seams, the four rules from `src/index.css`,
+// and the thirty-two marked sentences the block existed to show.
 //
-// `visitorProse` IS UNCHANGED, DELIBERATELY, AND THAT IS THE LOAD-BEARING PART.
-// The body copy is identical in both stages, so what Mike reads on the glass is
-// exactly what ships. The notes do not go back INTO the prose — they are lifted
-// OUT of it and printed beneath the surface in a block that cannot be mistaken
-// for the museum's voice, which is a stronger guarantee than red ink inside a
-// paragraph: a note that is never in the copy cannot be read as copy.
+// WHAT SURVIVES IS P5's RULE, WHICH WAS NEVER THE SAME THING. `visitorProse`
+// keeps an operator marker off the glass; the red block put it back for one
+// reader. The first is a site-wide law about visitors and is untouched. The
+// second answered a question — *what still needs Papa's words* — that Mike has
+// now answered by saying it is stale.
 //
-// THREE PARTS, AND THE THIRD IS THE ONE THIS HOUSE KEEPS PAYING FOR:
-//   1. `opsSentences` / `opsNotesOf` — the lift. Pure, importless.
-//   2. the render seams (Exhibit.jsx, InfoBooth.jsx) gate them on the STAGE.
-//   3. `wb-ops-notes` in vite.config.js deletes them from the SOURCE at LAUNCH.
-// Part 3 exists because parts 1 and 2 are a runtime filter, and a runtime filter
-// stops the RENDER while still shipping the MATERIAL — R5 shipped 153 vault mp3
-// URLs that way, H1 shipped the whole reveal ledger, V1 shipped the address of
-// twenty-six withheld photographs. Measured on the built bundle: **35 `[PAPA]`
-// markers in the JS chunks**, among them the Foundation's four unpublished
-// ledger figures. After the strip the launch bundle carries **one**, and it is
-// `PAPA_MARK` on the line below — the rule that removes them.
+// IT IS NOT DEAD CODE AND THAT IS WHY IT STAYS. `[PAPA]` remains in COMMENTS
+// throughout the data (34 blocks, measured), and a comment is one edit from
+// being a string. The day a marker is written into copy again, this is what
+// stops a visitor reading it — and `wb-ops-notes` in `vite.config.js` is the
+// second, source-level half of the same guarantee.
 
 export const PAPA_MARK = /\[PAPA\]/;
 
@@ -109,11 +98,6 @@ export const OPS_BRACE = /\{[^{}]*\}/;
 export const opsBraces = (s) =>
   typeof s === "string" ? (s.match(/\{[^{}]*\}/g) || []) : [];
 
-/** the block's own label, declared ONCE because two rooms print it (Doctrine
- *  17) — and a plain literal, because `provenance:gate` sweeps literals and a
- *  passage assembled by interpolation falls off the boundary in silence. */
-export const OPS_NOTES_HEAD = "Not part of the UX · notes to Mike";
-
 /** the sentence splitter, in ONE place, because two copies of it would be two
  *  answers to "which half of this string is Mike's" */
 const sentences = (s) => s.split(/(?<=[.!?])\s+/);
@@ -125,27 +109,6 @@ export function visitorProse(s) {
     .join(" ")
     .trim()
     .replace(/[\s;:,—–-]+$/, "");
-}
-
-/** the exact complement of `visitorProse` — the sentences it takes out */
-export function opsSentences(s) {
-  if (typeof s !== "string" || !PAPA_MARK.test(s)) return [];
-  return sentences(s).filter(sentence => PAPA_MARK.test(sentence))
-    .map(t => t.trim()).filter(Boolean);
-}
-
-/** every operator note anywhere inside a value, in document order, deduped.
- *
- *  A DEEP WALK RATHER THAN A FIELD LIST, and that is not laziness. `scrubFace`
- *  scrubs a NAMED set of fields, which is a list somebody has to remember to
- *  extend — the exact failure P5 was fixing when a marker written into the
- *  booth's copy printed on the page through a door P5 could not see. A walk
- *  cannot miss a field because a field was not on it. */
-export function opsNotesOf(value, out = [], seen = new Set()) {
-  if (typeof value === "string") { for (const n of opsSentences(value)) if (!seen.has(n)) { seen.add(n); out.push(n); } return out; }
-  if (Array.isArray(value)) { for (const v of value) opsNotesOf(v, out, seen); return out; }
-  if (value && typeof value === "object") { for (const v of Object.values(value)) opsNotesOf(v, out, seen); return out; }
-  return out;
 }
 
 export const kept = v => typeof v === "string" ? v.trim().length > 0 : !!v;

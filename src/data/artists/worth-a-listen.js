@@ -1029,8 +1029,7 @@ const ARTISTS = [
       { title: "Doin' Me", slug: "doin_me", ytId: "7rWDzLUOreo",
         note: "Mike wrote this as “I'm Doin' Me”. The record appears " +
               "to be “Doin' Me” (2017), made with Rick Rubin and " +
-              "widely heard from a Canon advert sync. Title flagged, not " +
-              "corrected in silence — [PAPA] confirms.",
+              "widely heard from a Canon advert sync.",
         card: {
           tombstone: [
             { k: "Maker", v: "Mikey Mike" },
@@ -1456,9 +1455,12 @@ function aboutArtistTrack(a) {
       trail: doorsFor(a),
       lines: a.siteNote ? ["NOTE     " + a.siteNote] : undefined,
       footer: "WORTH A LISTEN · " + a.name,
-      /* PROVENANCE ON THE PAGE, not just in a comment a developer reads. */
-      papa: (a.aboutNote ? a.aboutNote + "  " : "") +
-            "[PAPA] — the card copy and the two answers.",
+      /* [2026-08-11] THE `papa` FIELD IS DELETED WITH THE RED NOTES. It
+         printed an artist's `aboutNote` and then one marked sentence; the
+         marker is struck by Mike's ruling and the renderer for the field went
+         with it, so the provenance it carried moves nowhere and is not lost —
+         `aboutNote` is unread by anything now and is reported rather than
+         deleted, because it is sourcing rather than a note. */
     },
   };
 }
@@ -1692,21 +1694,18 @@ const HOUSE_ALBUM = {
               why: "Twenty years of touring, twelve records and every one of " +
                    "them independent, and an Artist of the Year award she tied " +
                    "for in 2026. She writes protest songs you can dance to.",
-              pick: "[PAPA] — one sentence on why Mike picked this artist.",
               hue: "#f79ac4" },
             { id: "jesse-welles",
               what: "Songwriter · Arkansas",
               why: "A song about this week, written this week, posted most " +
                    "weeks — usually a man, a guitar and a field. Four Grammy " +
                    "nominations at the 68th for doing exactly that.",
-              pick: "[PAPA] — one sentence on why Mike picked this artist.",
               hue: "#9ccf7a" },
             { id: "mikey-mike",
               what: "Songwriter and producer · Los Angeles",
               why: "A debut single produced by Rick Rubin that reached most " +
                    "people through a Canon advert. You have almost certainly " +
                    "heard him without ever learning his name.",
-              pick: "[PAPA] — one sentence on why Mike picked this artist.",
               hue: "#e8b45c" },
             /* [CS 2026-08-04] his billing on the poster advertised the SITE
                ("his catalogue taught this museum's machinery every pattern the
@@ -1781,7 +1780,6 @@ const HOUSE_ALBUM = {
                    "Half of Crooked Home is about his brother Nick, who was " +
                    "gone at twenty-seven, and he says “’94” is the heart of it " +
                    "all.",
-              pick: "[PAPA] — one sentence on why Mike picked this artist.",
               hue: "#d8c9a0" },
           ]),
           /* [W1c 2026-08-05] THE FOOT IS STRUCK, on Mike's ruling. "Press a
@@ -1830,8 +1828,6 @@ const HOUSE_ALBUM = {
            `papa` string is not a comment. Write the whole note inside ONE
            marked sentence, or expect the rest on the glass. This field is now
            one sentence and it carries the marker. */
-        papa: "[PAPA] — the promotional copy, the running order and the four " +
-              "house accents.",
       },
     },
     {

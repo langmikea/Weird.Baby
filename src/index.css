@@ -38,48 +38,21 @@ html, body { width: 100%; min-height: 100%; margin: 0; padding: 0; }
    13px nobody can see beats an intermittent 13px that moves the furniture. */
 html { scrollbar-gutter: stable; }
 
-/* ═══ [N3 2026-08-06] NOTES TO MIKE — NOT PART OF THE UX, EVER ══════════════
-   MIKE: "NOTES TO MIKE RENDER IN RED (or an equally unmistakable treatment)
-   meaning NOT PART OF THE UX, EVER … so a note can never be mistaken for
-   content."
+/* ═══ [2026-08-11] THE RED NOTES BLOCK'S FOUR RULES ARE DELETED ══════════
+   MIKE: "EVERYWHERE: Delete the comment boxes (red). Get rid of all of the red
+   notes — all are stale and not useful."
 
-   IT LIVES IN THE GLOBAL SHEET AND NOT IN A ROUTE'S, AND THAT IS THE SAME
-   RULING M3 MADE ABOUT THE SCRUBBER ITSELF: a treatment scoped to the file that
-   first needed it is a treatment the next room does not get. Two rooms print
-   this block today and any room may tomorrow.
+   `.wb-ops-notes`, `.wb-ops-notes-head`, `.wb-ops-note` and its `:last-child`
+   stood here in scarlet Courier on a dashed border, with `data-not-ux="1"` as
+   the machine-readable half. All four are DELETED rather than left dormant, and
+   for the reason the block below already gives about the pair it replaced: a
+   stylesheet keeping a treatment nothing renders is the museum carrying a
+   ruling it has already lost (Doctrine 16, Doctrine 24). The renderers went in
+   the same edit — see `scrubFace` in `Exhibit.jsx`.
 
-   IT USES NO `--wb-*` OR `--hr-*` TOKEN, ON PURPOSE. Every colour, face and
-   rule in this block is a literal, because a note that is styled out of the
-   museum's own palette is a note that will one day LOOK like the museum. The
-   design tokens are the museum's voice; this thing is not the museum speaking.
-   That is also why it does not obey the paper/dark grounds: it is the same
-   scarlet on both, and it is meant to be the loudest object on the page.
-
-   `data-not-ux="1"` IS THE MACHINE-READABLE HALF. A lap, a screenshot diff or a
-   future gate can ask the DOM whether any of these are present without knowing
-   what class name this round happened to choose — and at LAUNCH the honest
-   answer must be zero. */
-.wb-ops-notes {
-  margin: 28px 0 8px;
-  padding: 10px 12px 12px;
-  border: 2px dashed #d21c1c;
-  background: rgba(210, 28, 28, .07);
-  color: #d21c1c;
-  font-family: 'Courier Prime', 'Courier New', monospace;
-  font-size: 12px;
-  line-height: 1.5;
-  text-align: left;
-}
-.wb-ops-notes-head {
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  font-size: 10px;
-  margin-bottom: 6px;
-  color: #d21c1c;
-}
-.wb-ops-note { margin: 0 0 6px; color: #d21c1c; }
-.wb-ops-note:last-child { margin-bottom: 0; }
+   NOTHING ELSE USED `data-not-ux`, which was checked rather than assumed: the
+   lap's overflow reading counts those nodes and now counts zero, which is what
+   it should have counted at launch anyway. */
 
 /* [E2 2026-08-09] THE RED/BLUE INLINE PAIR IS RETIRED AND ITS FOUR RULES ARE
    DELETED RATHER THAN LEFT DORMANT. Mike struck the arrangement — *"that was

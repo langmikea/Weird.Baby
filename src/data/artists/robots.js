@@ -1183,13 +1183,6 @@ const spine = [
             "images of this machine and the Record has not brought any of " +
             "them into the story yet.",
           footer: "MGK-NIAC · IMAGE ARCHIVE",
-          /* [D3a 2026-08-06] ONE MARKED SENTENCE. A `papa` field is not a
-             comment — an earlier edit split this note in two and put the marker
-             in only the first half, and the wall printed the second. */
-          papa: "[PAPA] — the cabinet is shown whole now and the robot is " +
-                "not, how much further that goes and when, and that the " +
-                "uncropped originals are all on file and any of them can be " +
-                "published from this file alone.",
         },
       },
       {
@@ -1467,8 +1460,6 @@ const spine = [
               note: "" },
           ],
           entriesMode: "list",
-          papa: "[PAPA] — the artifact slot is Mike's to name, and the unit's " +
-                "own particulars: what an ABEAL spec sheet for this machine says.",
           footer: "MGK-VIIIp · TECHNICAL SPECIFICATIONS",
         },
       },
@@ -1535,78 +1526,95 @@ const spine = [
              evenly — "As they arrived" comes back with one tile of three and the
              coarse grouping with one of nine, which is the honest answer and is
              what `placedTiles` filtering per tile buys. */
+          /* ═══ [2026-08-11] NINE SLOT LABELS ARE OUT OF THE DATE POSITION ═══
+             MIKE: they "are not dates at all — they are slot labels reading
+             FRONT, SCREEN, BEZEL, TOP, BASE, REAR, COVER, printed where a date
+             goes."
+
+             HE IS DESCRIBING A FIELD MISUSE RATHER THAN A WRONG VALUE. A tile's
+             `date` prints in `.vp-collage-date` — Courier Prime, letter-spaced,
+             above the caption — which is the museum's own register for a
+             provenance stamp. `FRONT` set in that face does not read as a
+             label; it reads as a date the reader cannot parse.
+
+             THE FIELD IS DELETED RATHER THAN CORRECTED, AND NOTHING IS LOST:
+             every one of the nine already said the same thing in words directly
+             underneath it — `FRONT` over "The front, whole", `SCREEN` over "The
+             front glass, lit", `BEZEL` over "The bezel around the glass". The
+             caption strip is conditional on there being something to print
+             (A7), so the line simply does not draw. If a real capture date is
+             ever known for these, `date` is where it goes.
+             THE MAINFRAME'S WALL IS UNTOUCHED: its five tiles carry MAR 2021,
+             which IS a date. Whether it is the right one on a wing whose story
+             begins in 2026 is a question about the story, and it is Mike's. */
           presets: placedPresets([
             { id: "arrived", label: "As they arrived", tiles: [
               { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
                 href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
-                label: "The pair, front and top, as received", date: "FAMILY SHOT" },
+                label: "The pair, front and top, as received" },
               { img: "/robots/reference/photos/front_full.png",
                 href: "/robots/reference/photos/front_full.png",
-                label: "The front, whole", date: "FRONT" },
+                label: "The front, whole" },
               { img: "/robots/reference/photos/rear_power_switch.png",
                 href: "/robots/reference/photos/rear_power_switch.png",
-                label: "The power switch, round the back", date: "REAR" },
+                label: "The power switch, round the back" },
             ] },
             { id: "glass", label: "The glass", tiles: [
               { img: "/robots/reference/photos/front_screen.png",
                 href: "/robots/reference/photos/front_screen.png",
-                label: "The front glass, lit", date: "SCREEN" },
+                label: "The front glass, lit" },
               { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
                 href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
-                label: "The bezel around the glass", date: "BEZEL" },
+                label: "The bezel around the glass" },
               { img: "/robots/art/viiip-v2.png",
                 href: "/robots/art/viiip-v2.png",
-                label: "The cover image — the glass carries the BIOS beat",
-                date: "COVER" },
+                label: "The cover image — the glass carries the BIOS beat" },
             ] },
             { id: "stand", label: "Above and below", tiles: [
               { img: "/robots/reference/photos/top_monitor.png",
                 href: "/robots/reference/photos/top_monitor.png",
-                label: "The top monitor", date: "TOP" },
+                label: "The top monitor" },
               { img: "/robots/reference/photos/monitor_base.png",
                 href: "/robots/reference/photos/monitor_base.png",
-                label: "The base it stands on", date: "BASE" },
+                label: "The base it stands on" },
               { img: "/robots/reference/photos/unit_new_base.png",
                 href: "/robots/reference/photos/unit_new_base.png",
-                label: "The unit on its new base", date: "BASE, NEW" },
+                label: "The unit on its new base" },
             ] },
             { id: "all", label: "Every photograph", tiles: [
               { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
                 href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
-                label: "The pair, front and top, as received", date: "FAMILY SHOT" },
+                label: "The pair, front and top, as received" },
               { img: "/robots/reference/photos/front_full.png",
                 href: "/robots/reference/photos/front_full.png",
-                label: "The front, whole", date: "FRONT" },
+                label: "The front, whole" },
               { img: "/robots/reference/photos/front_screen.png",
                 href: "/robots/reference/photos/front_screen.png",
-                label: "The front glass, lit", date: "SCREEN" },
+                label: "The front glass, lit" },
               { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
                 href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
-                label: "The bezel around the glass", date: "BEZEL" },
+                label: "The bezel around the glass" },
               { img: "/robots/reference/photos/top_monitor.png",
                 href: "/robots/reference/photos/top_monitor.png",
-                label: "The top monitor", date: "TOP" },
+                label: "The top monitor" },
               { img: "/robots/reference/photos/monitor_base.png",
                 href: "/robots/reference/photos/monitor_base.png",
-                label: "The base it stands on", date: "BASE" },
+                label: "The base it stands on" },
               { img: "/robots/reference/photos/unit_new_base.png",
                 href: "/robots/reference/photos/unit_new_base.png",
-                label: "The unit on its new base", date: "BASE, NEW" },
+                label: "The unit on its new base" },
               { img: "/robots/reference/photos/rear_power_switch.png",
                 href: "/robots/reference/photos/rear_power_switch.png",
-                label: "The power switch, round the back", date: "REAR" },
+                label: "The power switch, round the back" },
               { img: "/robots/art/viiip-v2.png",
                 href: "/robots/art/viiip-v2.png",
-                label: "The cover image — the glass carries the BIOS beat",
-                date: "COVER" },
+                label: "The cover image — the glass carries the BIOS beat" },
             ] },
           ]),
           archiveEmpty:
             "No photograph of the portable is on the wall. One picture of " +
             "this machine is on the Record, with the entry that brought it in.",
           footer: "MGK-VIIIp · IMAGE ARCHIVE",
-          papa: "[PAPA] — the caption wording, and whether any photograph earns " +
-                "a face of its own.",
         },
       },
       {

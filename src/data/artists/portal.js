@@ -368,11 +368,10 @@ export const PORTAL_ALBUM = {
             frameTitle: TWIN.title,
           },
         },
-        /* [PAPA] every engraved word on this panel is a plain-words draft:
-           the plate, the switch legends, the held reasons. The instrument
-           layout is the deliverable; the legends are Mike's. */
-        papa: "[PAPA] — the engraved legends: plate wording, switch " +
-              "names, and what the panel says when it refuses to arm.",
+        /* [2026-08-11] THE `papa` FIELD IS DELETED WITH THE RED NOTES. It
+           held one marked sentence — the engraved legends being Mike's to
+           write — and nothing else, so the ruling emptied it. The renderer
+           that drew a `papa` field went with it (Exhibit.jsx). */
       },
     },
     {

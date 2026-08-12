@@ -45,8 +45,11 @@ import "./InfoBooth.css";
 import { useRoom } from "../lib/use-room.js";
 import { useArrival } from "../lib/use-arrival.js";
 import MuseumBar from "../components/MuseumBar.jsx";
-import { visitorProse, kept, opsNotesOf, OPS_NOTES_HEAD } from "../lib/visitor-prose.js";
-import { launched } from "../lib/placement.js";
+import { visitorProse, kept } from "../lib/visitor-prose.js";
+/* [2026-08-11] `launched` IS NO LONGER IMPORTED. Its only caller here was the
+   red notes block’s stage gate, which is deleted; the STAGE still governs
+   this file through `placed()` on the data side and through `wb-ops-notes`
+   in vite.config.js, neither of which is imported at this seam. */
 /* [D1 2026-08-06] TWO OF THIS ROOM'S ANSWERS ARE THE HOUSE'S, NOT THE BOOTH'S.
    "Who keeps this place?" was retyped onto /wb's ABOUT THE ARTIST register at
    P9, so one sentence about the keeper existed in two rooms with no link
@@ -261,9 +264,7 @@ const FAQ = [
     a: "Somebody in this house loves it, and then the work starts: finding " +
        "it, checking it, photographing it, and writing down where it came " +
        "from. Nothing is exhibited because it is popular and nothing is " +
-       "exhibited because it paid to be. [PAPA] — whether the museum ever " +
-       "takes submissions, and on what terms, is Papa's call and is not " +
-       "settled.",
+       "exhibited because it paid to be.",
   },
   {
     /* [F2 2026-08-06] DECLARED IN house-copy.js — `/wal`'s own FAQ asks the
@@ -293,8 +294,7 @@ const FAQ = [
     q: "Is it finished?",
     a: "No, and it is not meant to be. A museum that stops accessioning is a " +
        "storage unit. Rooms open, cards get written, and things arrive; if " +
-       "you come back, there will be more than there was. [PAPA] — how often " +
-       "new work lands, and whether that is a promise, is Papa's to say.",
+       "you come back, there will be more than there was.",
   },
   /* [D 2026-08-11] "How do I reach you?" IS DELETED. Its answer was
      `CONTACT`, whose only payload was the address Mike has struck
@@ -345,19 +345,6 @@ export default function InfoBooth() {
   const faq = FAQ
     .map(({ q, a }) => ({ q: visitorProse(q), a: visitorProse(a) }))
     .filter(({ q, a }) => kept(q) && kept(a));
-
-  /* [N3 2026-08-06] THE NOTES COME BACK FOR MIKE, IN RED, AND THE FILTER ABOVE
-     IS NOT RELAXED TO DO IT. The scrub and the `kept` filter are untouched, so
-     the FAQ a visitor would read is character-for-character the FAQ Mike reads
-     — and the notes are lifted into one block at the foot of the room instead
-     of back into the answers.
-
-     THE WALK IS OVER `FAQ`, NOT OVER `faq`, WHICH IS THE WHOLE VALUE OF DOING
-     IT THIS WAY. A question whose answer is ENTIRELY a marker disappears from
-     the room by design, and it is exactly the one Mike most needs to be told
-     about; reading the scrubbed list would have shown him every note except
-     the ones that cost a whole question. */
-  const opsNotes = launched() ? [] : opsNotesOf(FAQ);
 
   return (
     <div className="sheet-root">
@@ -423,16 +410,10 @@ export default function InfoBooth() {
         <p className="sheet-back">
           <Link to="/">Back to the lobby</Link>
         </p>
-        {/* [N3 2026-08-06] NOT PART OF THE UX — development stage only, and
-            deleted from the source by `wb-ops-notes` before a launch bundle is
-            written. Below the exit deliberately: it is not the last thing the
-            room says, it is a sheet of paper left on top of it. */}
-        {opsNotes.length > 0 && (
-          <div className="wb-ops-notes" data-not-ux="1">
-            <div className="wb-ops-notes-head">{OPS_NOTES_HEAD}</div>
-            {opsNotes.map((n, i) => <p className="wb-ops-note" key={i}>{n}</p>)}
-          </div>
-        )}
+        {/* [2026-08-11] THE RED NOTES BLOCK IS DELETED — Mike's ruling. It
+            stood here, below the exit. The lift that filled it, the four
+            `[PAPA]` sentences it showed and the stylesheet rules all went in
+            the same edit; see the note at `scrubFace` in Exhibit.jsx. */}
       </div>
     </div>
   );

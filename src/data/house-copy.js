@@ -87,8 +87,7 @@ export const AFFILIATION =
   "clients, or signings — they are people whose records we think you " +
   "should hear. Every door on their page leads to their own site, their " +
   "own store, their own channel, because the exhibit is a pointer and " +
-  "not a home. [PAPA] — the formal statement of that relationship, if " +
-  "one is ever needed, is Papa's to write.";
+  "not a home.";
 
 /* WHOSE THE MATERIAL IS, AND WHAT MAY BE DONE WITH IT. Same reasoning.
    ═══ [E 2026-08-11] THE CLAUSE IS STRUCK, NOT REWRITTEN ════════════════════
@@ -107,8 +106,7 @@ export const USE_RIGHTS =
   "The artists' work is the artists' — their music, their pictures, " +
   "their words — and every door on their pages goes to them rather than " +
   "to us. What is ours is the photographs of our own objects, taken here " +
-  "and printed here, and we are glad to be asked for those. [PAPA] — a " +
-  "plain licence for the museum's own images is Papa's to set.";
+  "and printed here, and we are glad to be asked for those.";
 
 /* ═══ [D 2026-08-11] THE SIGN-OFF IS DELETED. MIKE'S RULING, NO REPLACEMENT ══
    `SIGN_OFF` and `ADDRESS` stood here and closed every FAQ in the building — the booth's and each wing's —

@@ -217,7 +217,7 @@
    "c": "RESTATED",
    "r": [
     "b65d04f94f792c09",
-    "40bf733f0f6cdfb8"
+    "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
    ]
   },
   "843672429b842776": {
@@ -228,7 +228,7 @@
    "c": "RESTATED",
    "r": [
     "b65d04f94f792c09",
-    "40bf733f0f6cdfb8"
+    "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
    ]
   },
   "7a2d917ba705ef5f": {
@@ -6699,7 +6699,7 @@
     "181b7b8f2fc8eba2",
     "aaaae49769c9dc56",
     "f3059bd0c69cb66e",
-    "e989753523c355e6",
+    "742acb488a6f919b",
     "54e0f90b05dc8dbf",
     "13d55d4628291d5c"
    ]
@@ -6717,14 +6717,6 @@
    "l": 880,
    "t": "7rWDzLUOreo",
    "p": "ARTISTS[].songs[].ytId",
-   "c": "VERIFIED",
-   "s": "the song's own `note:` — the video's oEmbed title and author channel, checked before the id was written"
-  },
-  "e989753523c355e6": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 881,
-   "t": "Mike wrote this as “I'm Doin' Me”. The record appears to be “Doin' Me” (2017), made with Rick Rubin and widely heard from a Canon advert sync. Title flagged, not corrected in silence — [PAPA] confirms.",
-   "p": "ARTISTS[].songs[].note",
    "c": "VERIFIED",
    "s": "the song's own `note:` — the video's oEmbed title and author channel, checked before the id was written"
   },
@@ -6912,7 +6904,7 @@
     "181b7b8f2fc8eba2",
     "aaaae49769c9dc56",
     "f3059bd0c69cb66e",
-    "e989753523c355e6",
+    "742acb488a6f919b",
     "54e0f90b05dc8dbf",
     "13d55d4628291d5c"
    ]
@@ -6927,7 +6919,7 @@
     "181b7b8f2fc8eba2",
     "aaaae49769c9dc56",
     "f3059bd0c69cb66e",
-    "e989753523c355e6",
+    "742acb488a6f919b",
     "54e0f90b05dc8dbf",
     "13d55d4628291d5c"
    ]
@@ -7173,7 +7165,7 @@
     "181b7b8f2fc8eba2",
     "aaaae49769c9dc56",
     "f3059bd0c69cb66e",
-    "e989753523c355e6",
+    "742acb488a6f919b",
     "54e0f90b05dc8dbf",
     "13d55d4628291d5c"
    ]
@@ -7195,7 +7187,7 @@
     "181b7b8f2fc8eba2",
     "aaaae49769c9dc56",
     "f3059bd0c69cb66e",
-    "e989753523c355e6",
+    "742acb488a6f919b",
     "54e0f90b05dc8dbf",
     "13d55d4628291d5c"
    ]
@@ -7337,7 +7329,7 @@
     "181b7b8f2fc8eba2",
     "aaaae49769c9dc56",
     "f3059bd0c69cb66e",
-    "e989753523c355e6",
+    "742acb488a6f919b",
     "54e0f90b05dc8dbf",
     "13d55d4628291d5c"
    ]
@@ -7376,7 +7368,7 @@
     "181b7b8f2fc8eba2",
     "aaaae49769c9dc56",
     "f3059bd0c69cb66e",
-    "e989753523c355e6",
+    "742acb488a6f919b",
     "54e0f90b05dc8dbf",
     "13d55d4628291d5c"
    ]
@@ -7415,7 +7407,7 @@
     "181b7b8f2fc8eba2",
     "aaaae49769c9dc56",
     "f3059bd0c69cb66e",
-    "e989753523c355e6",
+    "742acb488a6f919b",
     "54e0f90b05dc8dbf",
     "13d55d4628291d5c"
    ]
@@ -7705,21 +7697,6 @@
    "t": "NOTE     {}",
    "p": "aboutArtistTrack{}.face.lines[]",
    "c": "HOUSE"
-  },
-  "10d62c6c5d73a2e9": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1315,
-   "t": "{}  ",
-   "p": "aboutArtistTrack{}.face.papa",
-   "c": "HOUSE"
-  },
-  "e065817ad3531493": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1316,
-   "t": "[PAPA] — the card copy and the two answers.",
-   "p": "aboutArtistTrack{}.face.papa",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
   },
   "14d4549817ec05b2": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -8357,12 +8334,6 @@
    "t": "▾",
    "c": "HOUSE"
   },
-  "9cab5232413fadb4": {
-   "f": "src/routes/exhibit/Exhibit.css",
-   "l": 3039,
-   "t": "\\00b7",
-   "c": "HOUSE"
-  },
   "d1f5717e265b1d3b": {
    "f": "src/routes/exhibit/Exhibit.jsx",
    "l": 27,
@@ -8813,20 +8784,6 @@
    "p": "Exhibit{}.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<FaceFlow>.<p>.<span>",
    "c": "HOUSE"
   },
-  "4478407c367e1fe9": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 3637,
-   "t": "‹ NEWER",
-   "p": "Exhibit{}.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<FaceFlow>[].<nav>.<button>",
-   "c": "HOUSE"
-  },
-  "9c0136529766a1d2": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 3640,
-   "t": "OLDER ›",
-   "p": "Exhibit{}.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<div>.<FaceFlow>[].<nav>.<button>",
-   "c": "HOUSE"
-  },
   "856a70c5b95d0cc5": {
    "f": "src/routes/exhibit/Exhibit.jsx",
    "l": 3717,
@@ -8897,13 +8854,6 @@
    "p": "RecordEntry{}.fire{}.setPop().note",
    "c": "HOUSE"
   },
-  "62ff81bd88b20934": {
-   "f": "src/routes/exhibit/RecordEntry.jsx",
-   "l": 289,
-   "t": "close this record",
-   "p": "RecordEntry{}.<button>.@title",
-   "c": "HOUSE"
-  },
   "f990ee71d9aca052": {
    "f": "src/routes/exhibit/RecordEntry.jsx",
    "l": 305,
@@ -8911,25 +8861,11 @@
    "p": "RecordEntry{}.<figure>.<button>.@title",
    "c": "HOUSE"
   },
-  "57a27e71d1d0019e": {
-   "f": "src/routes/exhibit/RecordEntry.jsx",
-   "l": 349,
-   "t": "‹ NEWER",
-   "p": "RecordEntry{}.<nav>.<button>",
-   "c": "HOUSE"
-  },
   "928089db64431f8a": {
    "f": "src/routes/exhibit/RecordEntry.jsx",
    "l": 350,
    "t": "of",
    "p": "RecordEntry{}.<nav>.<span>",
-   "c": "HOUSE"
-  },
-  "4169263ed71a8f7c": {
-   "f": "src/routes/exhibit/RecordEntry.jsx",
-   "l": 352,
-   "t": "OLDER ›",
-   "p": "RecordEntry{}.<nav>.<button>",
    "c": "HOUSE"
   },
   "3a092336ef47a3a3": {
@@ -11674,16 +11610,6 @@
    "p": "FAQ[].q",
    "c": "HOUSE"
   },
-  "23cfe8108e19adb1": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 99,
-   "t": "Somebody in this house loves it, and then the work starts: finding it, checking it, photographing it, and writing down where it came from. Nothing is exhibited because it is popular and nothing is exhibited because it paid to be. [PAPA] — whether the museum ever takes submissions, and on what terms, is Papa's call and is not settled.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
   "78491de4e0afbf0f": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 107,
@@ -11702,23 +11628,6 @@
    "f": "src/routes/InfoBooth.jsx",
    "l": 141,
    "t": "Is it finished?",
-   "p": "FAQ[].q",
-   "c": "HOUSE"
-  },
-  "e4aadeb23e007dde": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 142,
-   "t": "No, and it is not meant to be. A museum that stops accessioning is a storage unit. Rooms open, cards get written, and things arrive; if you come back, there will be more than there was. [PAPA] — how often new work lands, and whether that is a promise, is Papa's to say.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
-  "c6f48f68c22826e7": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 148,
-   "t": "How do I reach you?",
    "p": "FAQ[].q",
    "c": "HOUSE"
   },
@@ -12687,13 +12596,6 @@
    "c": "MIKE",
    "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
   },
-  "f2e7cad2ac93625a": {
-   "f": "src/data/artists/robots.js",
-   "l": 429,
-   "t": "How do I get in touch?",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
-  },
   "af7b060da919a68b": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 507,
@@ -12860,30 +12762,6 @@
    "f": "src/lib/record-read.js",
    "l": 34,
    "t": "t{}",
-   "c": "HOUSE"
-  },
-  "4bacccd062cd1f21": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 1997,
-   "t": "Move through the record",
-   "c": "HOUSE"
-  },
-  "296197e85b3d0a4f": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 2010,
-   "t": "every record has been read",
-   "c": "HOUSE"
-  },
-  "c9b7582c10026b28": {
-   "f": "src/routes/exhibit/Exhibit.jsx",
-   "l": 2011,
-   "t": "the oldest record you have not opened",
-   "c": "HOUSE"
-  },
-  "03b8aa0f50eaf8c2": {
-   "f": "src/routes/exhibit/RecordEntry.jsx",
-   "l": 254,
-   "t": "auto",
    "c": "HOUSE"
   },
   "2f48ee1c4a8ea708": {
@@ -13224,14 +13102,6 @@
    "c": "MIKE",
    "s": "Mike's E1 dictation of the contributions model, quoted verbatim in the file header (Foundation.jsx) and recorded in STATE.md; the carried-cost sentence is Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
   },
-  "408a4c6037b4282d": {
-   "f": "src/data/artists/foundation.js",
-   "l": 479,
-   "t": "[PAPA] — the amounts on the four unpublished lines, and whether each is published at all. [PAPA] — the two named lines Mike supplied are held until the people named have agreed to be named.",
-   "p": "INVOICE.papa",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render. The consent gate on the two named lines is Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
-  },
   "69417501bacfa3be": {
    "f": "src/data/artists/foundation.js",
    "l": 491,
@@ -13246,16 +13116,6 @@
    "t": "Is this a foundation?",
    "p": "FAQ[].q",
    "c": "HOUSE"
-  },
-  "7525c35b541933d4": {
-   "f": "src/data/artists/foundation.js",
-   "l": 551,
-   "t": "Not the kind with a building and an endowment. There is no fund here, no account, and nothing set aside — that is not modesty, it is the arrangement: money does not stop at Weird.Baby, so there is never a balance for it to stop in. What the word means here is the set of rules the whole place is built on, written down and kept. [PAPA] — whether Weird.Baby is ever formally incorporated, and as what,…",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
   },
   "d9939addb9a81d9c": {
    "f": "src/data/artists/foundation.js",
@@ -13281,32 +13141,12 @@
    "p": "FAQ[].q",
    "c": "HOUSE"
   },
-  "65b46b5bb510e423": {
-   "f": "src/data/artists/foundation.js",
-   "l": 584,
-   "t": "Take all you need, not grab all you can. Keeping it was never what any of this was for, and the museum already has what it needs — so what passes through Weird.Baby's hands goes to humanity: all of it, always, without pause and without pay. It is not a donation drive with a target. It is the direction everything moves. [PAPA] — the part about the keeper and his own household already having enough is Papa's own and is still to come.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
   "02718c9521945a98": {
    "f": "src/data/artists/foundation.js",
    "l": 610,
    "t": "Where does it actually go?",
    "p": "FAQ[].q",
    "c": "HOUSE"
-  },
-  "6f3fc41e6d30f81f": {
-   "f": "src/data/artists/foundation.js",
-   "l": 611,
-   "t": "To established charitable organisations, and to people caught doing conspicuous good. The ledger on this page carries every channel it moves through, with the state of each one printed beside it; the outgoing half of that ledger is not built. [PAPA] — the named organisations, the named people, and whether either list is ever published, are Papa's to state.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
   },
   "3520654c14bd8fff": {
    "f": "src/data/artists/foundation.js",
@@ -13338,16 +13178,6 @@
    "p": "FAQ[].q",
    "c": "HOUSE"
   },
-  "a056c4798b0b7e69": {
-   "f": "src/data/artists/foundation.js",
-   "l": 643,
-   "t": "Every cost has a name, a number and a sponsor on the record — the domain, the giveaway guitar, the stickers. Each one has a meter, and when a cost is covered its meter reads full, its door says we're good, thanks, and it closes. No overfilling. No pooling. Not even a generous dollar gets held. Today the sponsor on every line is Papa himself, and the ledger above is the whole of it. [PAPA] — the live costs, their numbers and their sponsors are Papa's to publish when the meters go up.",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ],
-   "p": "FAQ[].a"
-  },
   "c9adef38c78e1724": {
    "f": "src/data/artists/foundation.js",
    "l": 679,
@@ -13365,16 +13195,6 @@
    "r": [
     "59e3e210ae26e461"
    ]
-  },
-  "8cbecab7667c6c06": {
-   "f": "src/data/artists/foundation.js",
-   "l": 681,
-   "t": "Not to run the place, and that is the load-bearing part. Help with a cost arrives as the thing itself: pay the registrar directly, buy the actual guitar and ship it, pay the store to send the stickers. If your help would arrive as money in Weird.Baby's hands to spend, it is not help we can take, and we will gladly show you the door that is. The proof is structural rather than promised: there is no account to fill and there never has been one. Giving is the other direction entirely — a gift made in Weird.Baby's name is not the museum's money, it is somebody else's money passing through on the way to someone who needs it. That door is on the register above and it is not built yet. [PAPA] — the address that door points at.",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ],
-   "p": "FAQ[].a"
   },
   "497dcb7c060f79fe": {
    "f": "src/data/artists/foundation.js",
@@ -13394,47 +13214,12 @@
     "ac760db1c833c06e"
    ]
   },
-  "ed09fa6c984935f1": {
-   "f": "src/data/artists/foundation.js",
-   "l": 712,
-   "t": "Not through this page yet. The plan is plain: a public list of exactly what the museum needs — supplies, and hours of work — so that a supporter can buy the thing or book the hour and have it arrive here directly, with no money ever passing through us. We would list only what we need, which is the rule that keeps a list like that from turning into a wish. None of it exists today, so the honest answer is to write to the address at the bottom of this page and say what you have. [PAPA] — the address that door points at.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
   "f53a95e10b78964f": {
    "f": "src/data/artists/foundation.js",
    "l": 722,
    "t": "There is a gift shop, though.",
    "p": "FAQ[].q",
    "c": "HOUSE"
-  },
-  "ed4e51d8287d3f15": {
-   "f": "src/data/artists/foundation.js",
-   "l": 723,
-   "t": "There is, and it is the only place in the building where anything is bought or sold. Nearly all of it is doors to the artists' own stores, so that if a room made you want a record the money reaches the person who made it and not us — we take nothing that is not ours, and the artists keep every penny of theirs. The museum's own shelf is small and honest: a sticker, at the moment. [PAPA] — what the …",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
-  "ec3c255e80795a78": {
-   "f": "src/data/artists/foundation.js",
-   "l": 755,
-   "t": "What do you think about billionaires?",
-   "p": "FAQ[].q",
-   "c": "HOUSE"
-  },
-  "fc4abe907759881a": {
-   "f": "src/data/artists/foundation.js",
-   "l": 756,
-   "t": "[PAPA] — his raw material, held for his voice: the Illionaires. [PAPA] — being remembered for the size of the pile is a strange thing to spend a life earning. [PAPA] — we would rather make more pie than fight over the last piece.",
-   "p": "FAQ[].a",
-   "c": "MIKE",
-   "s": "the charter's three Papa quotes, including the Illionaires line (docs/canonical/THE_CHARTER.md); held for his voice under Mike's F1-F6 supply of the Foundation's answers, 2026-08-05 — his phrasing, quoted at its site in src/routes/Foundation.jsx and recorded in docs/MUSEUM_FOUNDATION_COPY_LOG-20260805.md"
   },
   "f16dbaec9a8636ec": {
    "f": "src/data/artists/foundation.js",
@@ -13764,18 +13549,6 @@
     "src/data/artists/worth-a-listen.js"
    ]
   },
-  "350ebf1f6698c1e4": {
-   "f": "src/data/artists/robots.js",
-   "t": "[PAPA] — the cabinet is shown whole now and the robot is not, how much further that goes and when, and that the uncropped originals are all on file and any of them can be published from this file alone.",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
-  "d6048fd65ff9f1c7": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "t": "[PAPA] — the promotional copy, the running order and the four house accents.",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
   "f8a1e8d62e314b16": {
    "f": "src/data/artists/foundation.js",
    "t": "The Foundation",
@@ -14077,13 +13850,6 @@
    "t": "MGK-VIIIp · IMAGE ARCHIVE",
    "c": "HOUSE"
   },
-  "81dccc9efecfec89": {
-   "f": "src/data/artists/robots.js",
-   "l": 1747,
-   "t": "[PAPA] — the caption wording, and whether any photograph earns a face of its own.",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
   "4657532a4679e6b7": {
    "f": "src/data/artists/robots.js",
    "l": 1798,
@@ -14300,71 +14066,6 @@
    "t": "About the artist",
    "c": "HOUSE"
   },
-  "4c70dbebc6ee62f0": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 122,
-   "t": "Where he is from",
-   "c": "HOUSE"
-  },
-  "058b18ab5649e29c": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 123,
-   "t": "[PAPA] — where Weird.Baby is from.",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
-  "077b6afd0f5334ad": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 124,
-   "t": "What he sounds like",
-   "c": "HOUSE"
-  },
-  "b5d7f74de81c4ba7": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 125,
-   "t": "[PAPA] — what the recordings sound like, in his words.",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
-  "ab3044028bbe7ebb": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 126,
-   "t": "In his own words",
-   "c": "HOUSE"
-  },
-  "fab0514601c4b404": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 127,
-   "t": "[PAPA] — one thing he has said about the music.",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
-  "5a3fdc10e676cedf": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 128,
-   "t": "Start with",
-   "c": "HOUSE"
-  },
-  "dfadf27446e62119": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 129,
-   "t": "[PAPA] — one track to play first, and why that one.",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
-  "450a2c166daca343": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 136,
-   "t": "What he is doing now",
-   "c": "HOUSE"
-  },
-  "dbf0a456870274ef": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 137,
-   "t": "[PAPA] — what he is working on.",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
-  },
   "c8505d0ae2e47530": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 1384,
@@ -14377,13 +14078,6 @@
    "t": "What are they up to?",
    "c": "MIKE",
    "s": "Mike, THE COMBINED BRIEF C1 (2026-08-06) — \"'What they are up to' becomes 'WHAT ARE THEY UP TO?'\""
-  },
-  "c2ddfc9929473e4a": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1777,
-   "t": "[PAPA] — one sentence on why Mike picked this artist.",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
   },
   "35f90f3e2122f779": {
    "f": "src/routes/exhibit/Exhibit.jsx",
@@ -14441,7 +14135,7 @@
    "f": "src/data/artists/portal.js",
    "l": 324,
    "t": "This feed is not available.",
-   "r": "9fc9ae5a62f96e60"
+   "r": "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
   },
   "b020879ac0a5f4bd": {
    "c": "HOUSE",
@@ -14496,7 +14190,7 @@
    "f": "src/data/artists/portal.js",
    "l": 334,
    "t": "Maintenance is running. The machine will not be hurried.",
-   "r": "9fc9ae5a62f96e60"
+   "r": "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
   },
   "fe2adc695a854444": {
    "c": "HOUSE",
@@ -14521,7 +14215,7 @@
    "f": "src/data/artists/portal.js",
    "l": 339,
    "t": "The unit is not at its prompt.",
-   "r": "9fc9ae5a62f96e60"
+   "r": "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
   },
   "f55d6f652d17c9ea": {
    "c": "HOUSE",
@@ -14552,7 +14246,7 @@
    "f": "src/data/artists/portal.js",
    "l": 347,
    "t": "no seeded feed on file — the lamps read the seed, and there is nothing to read",
-   "r": "9fc9ae5a62f96e60"
+   "r": "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
   },
   "d9d733d809dde841": {
    "c": "HOUSE",
@@ -14571,13 +14265,6 @@
    "f": "src/data/artists/portal.js",
    "l": 354,
    "t": "NOT ARMED"
-  },
-  "9fc9ae5a62f96e60": {
-   "c": "MIKE",
-   "f": "src/data/artists/portal.js",
-   "l": 363,
-   "t": "[PAPA] — the engraved legends: plate wording, switch names, and what the panel says when it refuses to arm.",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render"
   },
   "9f7f76cfdf724634": {
    "c": "RESTATED",
@@ -14724,7 +14411,7 @@
    "t": "Everything the unit knows how to do is in here — not a description of the machine's behaviour but the behaviour itself, in the form the machine reads it.",
    "r": [
     "b65d04f94f792c09",
-    "40bf733f0f6cdfb8"
+    "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
    ]
   },
   "2f702058b1bfeeb3": {
@@ -14849,14 +14536,6 @@
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
-  "40559651162956cd": {
-   "f": "src/data/artists/robots.js",
-   "l": 791,
-   "t": "FAMILY SHOT",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
   "2dc5d44b5984ecea": {
    "f": "src/data/artists/robots.js",
    "l": 794,
@@ -14865,27 +14544,11 @@
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
-  "d6a0a1937375c3b5": {
-   "f": "src/data/artists/robots.js",
-   "l": 794,
-   "t": "FRONT",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
   "b2a5d959014467a6": {
    "f": "src/data/artists/robots.js",
    "l": 812,
    "t": "The power switch, round the back",
    "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "fd63bc1ae1d364db": {
-   "f": "src/data/artists/robots.js",
-   "l": 812,
-   "t": "REAR",
-   "p": "spine[].tracks[].face.collage[].date",
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
@@ -14903,27 +14566,11 @@
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
-  "de48ba46a6682386": {
-   "f": "src/data/artists/robots.js",
-   "l": 797,
-   "t": "SCREEN",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
   "08d22aa1d90dd42e": {
    "f": "src/data/artists/robots.js",
    "l": 800,
    "t": "The bezel around the glass",
    "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "4333c6dc703c9ac4": {
-   "f": "src/data/artists/robots.js",
-   "l": 800,
-   "t": "BEZEL",
-   "p": "spine[].tracks[].face.collage[].date",
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
@@ -14933,14 +14580,6 @@
    "t": "The cover image — the glass carries the BIOS beat",
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the photograph shows"
-  },
-  "d5b8ba90d7a64c01": {
-   "f": "src/data/artists/robots.js",
-   "l": 816,
-   "t": "COVER",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
   "22406e10b63b50f1": {
    "f": "src/data/artists/robots.js",
@@ -14956,14 +14595,6 @@
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
-  "0b2fff14a6726c57": {
-   "f": "src/data/artists/robots.js",
-   "l": 803,
-   "t": "TOP",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
   "aab2ee9eb94c32d3": {
    "f": "src/data/artists/robots.js",
    "l": 806,
@@ -14972,27 +14603,11 @@
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
-  "208d25e81a64a25f": {
-   "f": "src/data/artists/robots.js",
-   "l": 806,
-   "t": "BASE",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
   "b2390afe30723854": {
    "f": "src/data/artists/robots.js",
    "l": 809,
    "t": "The unit on its new base",
    "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "2f73148fe1d82ab3": {
-   "f": "src/data/artists/robots.js",
-   "l": 809,
-   "t": "BASE, NEW",
-   "p": "spine[].tracks[].face.collage[].date",
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
@@ -15027,13 +14642,6 @@
    "c": "RESTATED",
    "r": "docs/WAL_PHOTO_PROVENANCE-20260802.md"
   },
-  "ea61f0727b47d2e5": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1887,
-   "t": "How do I get in touch?",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
-  },
   "ef31a8bb3ca682ef": {
    "f": "src/data/faq-face.js",
    "l": 69,
@@ -15044,12 +14652,6 @@
    "f": "src/data/faq-face.js",
    "l": 72,
    "t": "faq",
-   "c": "HOUSE"
-  },
-  "e40d7465956ef528": {
-   "f": "src/data/house-copy.js",
-   "l": 79,
-   "t": "No. The artists in Other Music Worth a Listen are not partners, clients, or signings — they are people whose records we think you should hear. Every door on their page leads to their own site, their own store, their own channel, because the exhibit is a pointer and not a home. [PAPA] — the formal statement of that relationship, if one is ever needed, is Papa's to write.",
    "c": "HOUSE"
   },
   "669717c4f42b1730": {
@@ -15122,21 +14724,6 @@
    "p": "spine[].tracks[].face.lines[]",
    "c": "VERIFIED",
    "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares five rules. [N2 2026-08-06] THE ROW LOST ITS SECOND HALF AND KEPT ITS SOURCE, and the distinction is Doctrine 18's: 'in the header, above the first include' is a fact about a FILE and cannot stand on a 1965 machine's spec sheet; that five rules are declared is a fact about the MACHINE'S BEHAVIOUR, which the firmware happens to be the way to verify. External to this repo; the sweep cannot re-check it."
-  },
-  "40bf733f0f6cdfb8": {
-   "f": "src/data/artists/robots.js",
-   "l": 1543,
-   "t": "[PAPA] — the artifact slot is Mike's to name, and the unit's own particulars: what an ABEAL spec sheet for this machine says.",
-   "p": "spine[].tracks[].face.papa",
-   "c": "MIKE",
-   "s": "a [PAPA] marker — Mike's own to-do list, kept in the data on purpose; src/lib/visitor-prose.js scrubs it before render. [N2/N3 2026-08-06] carried from the ON FILE entry this round struck, because the marker names a POSITION that outlived the sentence it was attached to, with the second clause added for the specification Doctrine 18 leaves this face without."
-  },
-  "b003064c38fb63ab": {
-   "f": "src/lib/visitor-prose.js",
-   "l": 77,
-   "t": "Not part of the UX · notes to Mike",
-   "p": "OPS_NOTES_HEAD",
-   "c": "HOUSE"
   },
   "02f5b0f10c7709b6": {
    "f": "src/lib/record-model.js",
@@ -15303,13 +14890,6 @@
    "t": "Well, not now, but soon. Hopefully. That's all I can say right now.",
    "c": "MIKE",
    "s": "Mike's own wording, ruled 2026-08-11 (F3), quoted verbatim in the packet"
-  },
-  "e3e2a2ebc2ded0db": {
-   "f": "src/data/house-copy.js",
-   "l": 107,
-   "t": "The artists' work is the artists' — their music, their pictures, their words — and every door on their pages goes to them rather than to us. What is ours is the photographs of our own objects, taken here and printed here, and we are glad to be asked for those. [PAPA] — a plain licence for the museum's own images is Papa's to set.",
-   "c": "MIKE",
-   "s": "Mike's passage with the stale address clause struck, ruled 2026-08-11 (E)"
   },
   "b201966fd3d72091": {
    "f": "src/routes/exhibit/RecordNav.jsx",
@@ -15775,6 +15355,117 @@
    "r": [
     "6e22f302cba44ce9"
    ]
+  },
+  "2f9697edce0d9288": {
+   "f": "src/data/artists/foundation.js",
+   "l": 557,
+   "t": "Not the kind with a building and an endowment. There is no fund here, no account, and nothing set aside — that is not modesty, it is the arrangement: money does not stop at Weird.Baby, so there is never a balance for it to stop in. What the word means here is the set of rules the whole place is built on, written down and kept.",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ],
+   "p": "FAQ[].a"
+  },
+  "e7a9b8bcf87706dc": {
+   "f": "src/data/artists/foundation.js",
+   "l": 590,
+   "t": "Take all you need, not grab all you can. Keeping it was never what any of this was for, and the museum already has what it needs — so what passes through Weird.Baby's hands goes to humanity: all of it, always, without pause and without pay. It is not a donation drive with a target. It is the direction everything moves.",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ],
+   "p": "FAQ[].a"
+  },
+  "b099d985d0592248": {
+   "f": "src/data/artists/foundation.js",
+   "l": 616,
+   "t": "To established charitable organisations, and to people caught doing conspicuous good. The ledger on this page carries every channel it moves through, with the state of each one printed beside it; the outgoing half of that ledger is not built.",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ],
+   "p": "FAQ[].a"
+  },
+  "e48e078272bbac5a": {
+   "f": "src/data/artists/foundation.js",
+   "l": 648,
+   "t": "Every cost has a name, a number and a sponsor on the record — the domain, the giveaway guitar, the stickers. Each one has a meter, and when a cost is covered its meter reads full, its door says we're good, thanks, and it closes. No overfilling. No pooling. Not even a generous dollar gets held. Today the sponsor on every line is Papa himself, and the ledger above is the whole of it.",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ],
+   "p": "FAQ[].a"
+  },
+  "ccb6402f10765fa2": {
+   "f": "src/data/artists/foundation.js",
+   "l": 685,
+   "t": "Not to run the place, and that is the load-bearing part. Help with a cost arrives as the thing itself: pay the registrar directly, buy the actual guitar and ship it, pay the store to send the stickers. If your help would arrive as money in Weird.Baby's hands to spend, it is not help we can take, and we will gladly show you the door that is. The proof is structural rather than promised: there is no account to fill and there never has been one. Giving is the other direction entirely — a gift made in Weird.Baby's name is not the museum's money, it is somebody else's money passing through on the way to someone who needs it. That door is on the register above and it is not built yet.",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ],
+   "p": "FAQ[].a"
+  },
+  "37a0269e19721795": {
+   "f": "src/data/artists/foundation.js",
+   "l": 717,
+   "t": "Not through this page yet. The plan is plain: a public list of exactly what the museum needs — supplies, and hours of work — so that a supporter can buy the thing or book the hour and have it arrive here directly, with no money ever passing through us. We would list only what we need, which is the rule that keeps a list like that from turning into a wish. None of it exists today, so the honest answer is to write to the address at the bottom of this page and say what you have.",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ],
+   "p": "FAQ[].a"
+  },
+  "012417e7d044fad9": {
+   "f": "src/data/artists/foundation.js",
+   "l": 737,
+   "t": "There is, and it is the only place in the building where anything is bought or sold. Nearly all of it is doors to the artists' own stores, so that if a room made you want a record the money reaches the person who made it and not us — we take nothing that is not ours, and the artists keep every penny of theirs. The museum's own shelf is small and honest: a sticker, at the moment.",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ],
+   "p": "FAQ[].a"
+  },
+  "742acb488a6f919b": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1030,
+   "t": "Mike wrote this as “I'm Doin' Me”. The record appears to be “Doin' Me” (2017), made with Rick Rubin and widely heard from a Canon advert sync.",
+   "c": "VERIFIED",
+   "s": "the song's own `note:` — the video's oEmbed title and author channel, checked before the id was written",
+   "p": "ARTISTS[].songs[].note"
+  },
+  "5ef57785921a05eb": {
+   "f": "src/data/house-copy.js",
+   "l": 86,
+   "t": "No. The artists in Other Music Worth a Listen are not partners, clients, or signings — they are people whose records we think you should hear. Every door on their page leads to their own site, their own store, their own channel, because the exhibit is a pointer and not a home.",
+   "c": "HOUSE"
+  },
+  "57a2510f91b3a574": {
+   "f": "src/data/house-copy.js",
+   "l": 106,
+   "t": "The artists' work is the artists' — their music, their pictures, their words — and every door on their pages goes to them rather than to us. What is ours is the photographs of our own objects, taken here and printed here, and we are glad to be asked for those.",
+   "c": "MIKE",
+   "s": "Mike's passage with the stale address clause struck, ruled 2026-08-11 (E)"
+  },
+  "873f4f28377b1c08": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 264,
+   "t": "Somebody in this house loves it, and then the work starts: finding it, checking it, photographing it, and writing down where it came from. Nothing is exhibited because it is popular and nothing is exhibited because it paid to be.",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ],
+   "p": "FAQ[].a"
+  },
+  "6b7d86aefe8dc7a8": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 295,
+   "t": "No, and it is not meant to be. A museum that stops accessioning is a storage unit. Rooms open, cards get written, and things arrive; if you come back, there will be more than there was.",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ],
+   "p": "FAQ[].a"
   }
  }
 }

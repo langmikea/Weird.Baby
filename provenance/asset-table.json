@@ -1919,10 +1919,10 @@
    "repo": "museum",
    "path": "public/held/robots/reference/photos/front_screen.png",
    "ref": "/held/robots/reference/photos/front_screen.png",
-   "sha256": "a0800856de098168f1eb0f5d12d2cc3343019c9df640b61e0cc27cf175fe9727",
+   "sha256": "3a6cb1b0f338374eb0c9983517ca400178ad6ffe9537a5f6659738d22af9db2a",
    "kind": "image",
    "format": "png",
-   "bytes": 1476381,
+   "bytes": 1297574,
    "container": "png",
    "w": 2048,
    "h": 1536,
@@ -1933,8 +1933,8 @@
     "src/data/artists/robots.js"
    ],
    "what": "The unit's front glass, lit, captioned 'The front glass, lit'.",
-   "quality": "wrong",
-   "qualityNote": "MIRROR-REVERSED, AND IT IS THE WHOLE PHOTOGRAPH RATHER THAN THE SCREEN. The glass reads '-(A)BEAL MGK-VIIIp )- / Please Select: / MGK-VIIIp' right-to-left, and so does the lettering behind it lower in the frame — so the fix is a horizontal flip of the file, not a re-shoot. This is the ONE plate that shows the machine saying something and it shows it backwards. Standing finding R2; the whole-image diagnosis is new this round.",
+   "quality": "ok",
+   "qualityNote": "FIXED 2026-08-11 on Mike's ruling. The file was ROTATED 180 DEGREES, not mirror-reversed: a horizontal flip was applied first and left the glass still unreadable (the glyphs came back vertically inverted), so the correction is a 180-degree rotation. It now reads '-(A)BEAL MGK-VIIIp )- / Please Select: / MGK-VIIIp' left to right, and the engraved plate lettering at the top of the frame reads the right way up. sha256 a0800856de -> 3a6cb1b0f3. Standing finding R2 closes.",
    "verdict": null,
    "revealArc": "online",
    "bucket": null

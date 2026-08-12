@@ -118,23 +118,22 @@ const spine = [
           blurb:
             "The house's own music. What this room holds of the artist is the " +
             "recordings; what it holds of the person is his name.",
+          /* ═══ [2026-08-11] FIVE ROWS ARE DELETED WITH THE RED NOTES ══════
+             Mike's ruling. "Where he is from", "What he sounds like", "In his
+             own words", "Start with" and "What he is doing now" each held ONE
+             `[PAPA]` sentence and no other text, so striking the notes emptied
+             them entirely.
+             NOTHING CHANGES ON THE GLASS AND THAT IS MEASURED RATHER THAN
+             HOPED: `scrubFace` already filtered this list on
+             `kept(label) && kept(body)`, so a row whose whole body was a marker
+             has never drawn — in either stage. What is deleted is data nobody
+             could see, which is what makes it a deletion rather than an edit to
+             the room. The one row that could be filled from what this
+             repository actually knows is the one that stays. */
           profile: [
-            { label: "Where he is from",
-              body: "[PAPA] — where Weird.Baby is from." },
-            { label: "What he sounds like",
-              body: "[PAPA] — what the recordings sound like, in his words." },
-            { label: "In his own words",
-              body: "[PAPA] — one thing he has said about the music." },
-            { label: "Start with",
-              body: "[PAPA] — one track to play first, and why that one." },
-            /* the one category this artist can fill today, and the only claim
-               on the old card that was about him and checkable: the six files
-               in public/audio/wb/ and the release they belong to. */
             { label: "What the museum holds",
               body: "Six recordings, made in June 2026, and one release: The " +
                     "Making of BoWB V1. They play in this room." },
-            { label: "What he is doing now",
-              body: "[PAPA] — what he is working on." },
           ],
           footer: "WEIRD.BABY · ABOUT THE ARTIST",
         },

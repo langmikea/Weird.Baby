@@ -484,10 +484,6 @@ const INVOICE = {
      people's names, which is a higher bar and not the museum's to clear alone.
      The names are in the round log's question list, not here, so that nothing
      in `src/` carries them until he says. */
-  papa:
-    "[PAPA] — the amounts on the four unpublished lines, and whether each is " +
-    "published at all. [PAPA] — the two named lines Mike supplied are held " +
-    "until the people named have agreed to be named.",
 };
 
 /* MIKE, verbatim, and he called it the room's heart. It is set under the
@@ -562,9 +558,7 @@ const FAQ = [
        "no account, and nothing set aside — that is not modesty, it is the " +
        "arrangement: money does not stop at Weird.Baby, so there is never a " +
        "balance for it to stop in. What the word means here is the set of " +
-       "rules the whole place is built on, written down and kept. [PAPA] — " +
-       "whether Weird.Baby is ever formally incorporated, and as what, is " +
-       "Papa's call and is not settled.",
+       "rules the whole place is built on, written down and kept.",
   },
   {
     q: "Why do this at all?",
@@ -597,9 +591,7 @@ const FAQ = [
        "any of this was for, and the museum already has what it needs — so " +
        "what passes through Weird.Baby's hands goes to humanity: all of it, " +
        "always, without pause and without pay. It is not a donation drive " +
-       "with a target. It is the direction everything moves. [PAPA] — the " +
-       "part about the keeper and his own household already having enough is " +
-       "Papa's own and is still to come.",
+       "with a target. It is the direction everything moves.",
   },
   {
     /* [F1 2026-08-05] MIKE ANSWERED THIS ONE WITH A POINTER RATHER THAN COPY —
@@ -624,9 +616,7 @@ const FAQ = [
     a: "To established charitable organisations, and to people caught doing " +
        "conspicuous good. The ledger on this page carries every channel it " +
        "moves through, with the state of each one printed beside it; the " +
-       "outgoing half of that ledger is not built. [PAPA] — the named " +
-       "organisations, the named people, and whether either list is ever " +
-       "published, are Papa's to state.",
+       "outgoing half of that ledger is not built.",
   },
   {
     /* [F4 2026-08-05] MIKE'S, AS WRITTEN, AND IT LANDS WHOLE. His line replaces
@@ -660,9 +650,7 @@ const FAQ = [
        "when a cost is covered its meter reads full, its door says we're " +
        "good, thanks, and it closes. No overfilling. No pooling. Not even a " +
        "generous dollar gets held. Today the sponsor on every line is Papa " +
-       "himself, and the ledger above is the whole of it. [PAPA] — the live " +
-       "costs, their numbers and their sponsors are Papa's to publish when " +
-       "the meters go up.",
+       "himself, and the ledger above is the whole of it.",
   },
   /* [F2 2026-08-05] "So who is actually paying for all this?" WAS HERE AND MIKE
      DROPPED IT. The reasoning it shipped with — that the posture is worth
@@ -708,7 +696,7 @@ const FAQ = [
           the word ledger has just moved to the document below it. A pointer that
           survives a rename by luck is a pointer that will be wrong next time. */
        "someone who needs it. That door is on the register above and it is not " +
-       "built yet. [PAPA] — the address that door points at.",
+       "built yet.",
   },
   {
     /* [E1 2026-08-03] the registry, as the question a willing supporter would
@@ -732,8 +720,16 @@ const FAQ = [
        "have it arrive here directly, with no money ever passing through us. " +
        "We would list only what we need, which is the rule that keeps a list " +
        "like that from turning into a wish. None of it exists today, so the " +
+       /* [2026-08-11] THE `[PAPA]` TAIL IS STRUCK WITH THE RED NOTES — it
+          asked which address this door would point at. THE SENTENCE ABOVE IT
+          IS LEFT STANDING AND IS REPORTED RATHER THAN CUT: it sends a reader
+          to "the address at the bottom of this page", and the address was
+          deleted sitewide on 2026-08-11. It is untrue today. Cutting it is a
+          content decision — the same one USE_RIGHTS got, where the whole
+          clause was struck — and it is Mike's, not Ops'. Named in the round
+          log's B6. */
        "honest answer is to write to the address at the bottom of this page " +
-       "and say what you have. [PAPA] — the address that door points at.",
+       "and say what you have.",
   },
   {
     q: "There is a gift shop, though.",
@@ -743,40 +739,18 @@ const FAQ = [
        "so that if a room made you want a record the money reaches the person " +
        "who made it and not us — we take nothing that is not ours, and the " +
        "artists keep every penny of theirs. The museum's own shelf is small " +
-       "and honest: a sticker, at the moment. [PAPA] — what the house does " +
-       "with anything its own shelf earns is Papa's to state.",
+       "and honest: a sticker, at the moment.",
   },
-  {
-    /* [F3 2026-08-05] MIKE READ THIS ANSWER AND RULED ON IT IN THREE PARTS: the
-       raw ideas are GOOD, the VOICE is wrong, and the PLACEMENT is wrong.
-       SO THE ANSWER STOPS PUBLISHING AND THE MATERIAL STAYS. Every sentence
-       below carries the marker, which means `visitorProse` returns an empty
-       string and the `kept` filter drops the whole question off the page. Not
-       one word of it reaches a visitor in Ops voice, which is what "the voice
-       is wrong" has to mean if it means anything — an answer he has told us
-       does not sound like him is not improved by being softened, it is taken
-       down until he writes it.
-       THE THREE IDEAS ARE PRESERVED VERBATIM because they are the part he kept:
-       the ILLIONAIRES coinage, the size-of-the-pile line, and more pie rather
-       than the last piece. They sit here as his raw material, which is exactly
-       what a [PAPA] marker is for — the data keeps the list of what still needs
-       his words, and the visitor never sees one.
-       WHAT WAS DELIBERATELY NOT DONE: the fourth sentence, "Why keep grabbing
-       for more?", is gone rather than marked. It is the one line in the answer
-       with no idea of his under it — a rhetorical question Ops added to close
-       the paragraph — and carrying it forward as raw material would put an Ops
-       sentence into the pile he is being asked to write from.
-       AND THE PLACEMENT IS STILL OPEN. He questioned whether this belongs in
-       this room at all, and nothing was moved: choosing the room would be Ops
-       answering the question he asked. It is a row in OPEN_ACTIONS, not a
-       decision made here. */
-    q: "What do you think about billionaires?",
-    on: "foundation",
-    a: "[PAPA] — his raw material, held for his voice: the Illionaires. " +
-       "[PAPA] — being remembered for the size of the pile is a strange thing " +
-       "to spend a life earning. [PAPA] — we would rather make more pie than " +
-       "fight over the last piece.",
-  },
+  /* ═══ [2026-08-11] "WHAT DO YOU THINK ABOUT BILLIONAIRES?" IS DELETED ═════
+     Every sentence of its answer was a `[PAPA]` marker holding raw material for
+     Mike's voice — the Illionaires, the size of the pile, more pie rather than
+     the last piece — so `visitorProse` returned an empty string and the `kept`
+     filter has always dropped the whole question off the page. **Nothing was on
+     the glass to lose, in either stage.** With the red notes struck the material
+     had nowhere left to be read, and a question in the data that no reader and
+     no writer can see is not being kept, it is being stored. His three ideas are
+     printed in the round log that removed them, which is where a deleted thing
+     is named exactly once (Doctrine 24). */
   /* [F2 2026-08-05] "Who pays you?" WAS HERE AND MIKE DELETED IT, and this
      deletion has a cost that is named rather than absorbed.
      WHAT GOES WITH IT: the only enumeration in the building of the charter's
