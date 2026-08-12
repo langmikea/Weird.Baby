@@ -720,16 +720,26 @@ const FAQ = [
        "have it arrive here directly, with no money ever passing through us. " +
        "We would list only what we need, which is the rule that keeps a list " +
        "like that from turning into a wish. None of it exists today, so the " +
-       /* [2026-08-11] THE `[PAPA]` TAIL IS STRUCK WITH THE RED NOTES — it
-          asked which address this door would point at. THE SENTENCE ABOVE IT
-          IS LEFT STANDING AND IS REPORTED RATHER THAN CUT: it sends a reader
-          to "the address at the bottom of this page", and the address was
-          deleted sitewide on 2026-08-11. It is untrue today. Cutting it is a
-          content decision — the same one USE_RIGHTS got, where the whole
-          clause was struck — and it is Mike's, not Ops'. Named in the round
-          log's B6. */
-       "honest answer is to write to the address at the bottom of this page " +
-       "and say what you have.",
+       /* ═══ [2026-08-11] THE DEAD CLAUSE IS REPLACED BY MIKE'S OWN SENTENCE ══
+          It read "write to the address at the bottom of this page", and the
+          address was struck sitewide that morning — a live line sending a
+          reader to a thing that is not on any page. Reported one packet ago as
+          B6 and ruled on:
+
+              "Write to the guy currently running the place: papa@weird.baby"
+
+          **"CURRENTLY" IS LOAD-BEARING AND IS NOT AN ACCIDENT OF PHRASING.**
+          Mike's note with the ruling: the role is temporary by design and the
+          word carries that. A round that tightens this to "the guy running the
+          place" has deleted the only part of the sentence that is about the
+          arrangement rather than about the person.
+
+          HIS SENTENCE IS WHOLE AND STANDS LAST. The clause it replaces was
+          mid-sentence, so folding it in would have put two colons in one
+          breath; the museum's own half ends where it ended and his begins. The
+          only words lost are the dead clause and the "and" that joined it. */
+       "honest answer is to say what you have. Write to the guy currently " +
+       "running the place: papa@weird.baby",
   },
   {
     q: "There is a gift shop, though.",

@@ -1453,14 +1453,39 @@ function aboutArtistTrack(a) {
       /* [F1] the doors out close the card — site, listen, store, channel —
          after the visitor has met the person the doors belong to. */
       trail: doorsFor(a),
-      lines: a.siteNote ? ["NOTE     " + a.siteNote] : undefined,
+      /* ═══ [2026-08-11] THE SOURCES COME BACK, INTO THE REGISTER ═════════════
+         WHAT HAPPENED: the red-notes ruling deleted the `papa` field, and that
+         field was ALSO what printed each artist's `aboutNote` — the sources
+         line. Striking Ops' notes was the ruling; taking the sourcing off /wal
+         was not, and /wal is the one page whose credibility rests on it. Four
+         lines stopped rendering and the data never moved.
+
+         WHY THE `lines` REGISTER AND NOT A NEW BLOCK. It already exists, it
+         already carries a `NOTE` row on one artist, and it is the wing's own
+         form for a flat statement of fact: Courier Prime at `--fs-small` in
+         `--wb-gold-lo`, with a 9ch hanging indent so `KEY      value` keeps its
+         column when it wraps (P23). A new element would have been a second
+         thing doing this one's job, and a louder one — which is the fault Mike
+         struck a sentence for once already: the museum advertising its own
+         diligence. **A register line is the museum SHOWING its work; a
+         paragraph about how carefully we checked is the museum TALKING about
+         it.** The difference is the whole of why this goes here.
+
+         IT SITS BELOW THE DOORS, LAST BEFORE THE FOOTER. A visitor who wants
+         the artist gets the artist and leaves by a door; a visitor who wants to
+         know how the museum knows reads one more line. That is the order the
+         card was already built in.
+
+         `SOURCES` IS PADDED TO NINE CHARACTERS like `NOTE`, because the indent
+         is 9ch and the column is the device. An artist with neither renders
+         neither — `lines` is undefined and the block is not drawn empty. */
+      lines: (a.siteNote || a.aboutNote)
+        ? [
+            ...(a.siteNote ? ["NOTE     " + a.siteNote] : []),
+            ...(a.aboutNote ? ["SOURCES  " + a.aboutNote] : []),
+          ]
+        : undefined,
       footer: "WORTH A LISTEN · " + a.name,
-      /* [2026-08-11] THE `papa` FIELD IS DELETED WITH THE RED NOTES. It
-         printed an artist's `aboutNote` and then one marked sentence; the
-         marker is struck by Mike's ruling and the renderer for the field went
-         with it, so the provenance it carried moves nowhere and is not lost —
-         `aboutNote` is unread by anything now and is reported rather than
-         deleted, because it is sourcing rather than a note. */
     },
   };
 }

@@ -37,11 +37,13 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
 /* [walk-five] the float, slightly bigger per Mike */
 @keyframes float { 0%, 100% { transform: translateY(0px) rotate(-0.7deg); } 50% { transform: translateY(-14px) rotate(0.7deg); } }
 /* [F7c] the subtitle: what this place IS, in museum signage — steady
-   (no blink; it is a fact, not an ellipsis), one step up from the
-   tagline in weight and presence. */
+   (no blink; it is a fact, not an ellipsis).
+   [2026-08-11] It used to say "one step up from the TAGLINE in weight and
+   presence", and there is no tagline any more — Mike struck it as the second
+   not-open-yet claim on the lobby. `.wb-tagline` and the `blink` keyframes it
+   was the only user of are deleted with it. The subtitle now stands alone
+   under the wordmark, which is what it was always the senior of. */
 .wb-subtitle { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.3em; text-transform: uppercase; color: #2b2924; margin-top: 22px; position: relative; z-index: 1; }
-.wb-tagline { font-family: 'Courier Prime', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--wb-gold-lo); margin-top: 12px; position: relative; z-index: 1; animation: blink 3s step-end infinite; }
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
 /* DIRECTORY (Stage 3, WB_ARTIST_LOBBY_BOOTH-20260706): four listings
    replace the single explore button. Museum signage — type only,
@@ -86,6 +88,21 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
 .wb-right { display: flex; flex-direction: column; justify-content: center; padding: 48px 52px; overflow: hidden; position: relative; }
 .wb-note { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1rem, 1.35vw, 1.25rem); line-height: 1.75; color: #2b2924; margin-bottom: 10px; }
 .wb-note em { color: #2b2924; font-style: italic; }
+/* [2026-08-11] THE ONE WORD THAT IS A DOOR. Mike ruled the lobby's promise
+   opens the Record itself — "one word, one link", no banner and no button. It
+   inherits the note's face, size and colour and takes ONLY an underline, so the
+   sentence still reads as a sentence; anything louder would be the object his
+   L1 ruling struck, wearing a different coat. The underline is thin and offset
+   4px because DM Serif Display's descenders collide with a default one.
+   THE HOVER MOVES THE UNDERLINE, NOT THE TEXT, AND THAT IS MEASURED. The first
+   draft hovered `color: var(--wb-gold)` — and on this page `--wb-gold` computes
+   to #211f1c against body text at #2b2924, a ten-unit shift nobody can see. The
+   token is named for the pre-graphite palette and no longer says what it paints;
+   read the value, not the name. So the rest state uses --wb-gold-lo (#57544d, a
+   mid grey that sits clearly under the type) and the hover takes it to --wb-gold
+   (near-black, full strength). The word itself never changes colour. */
+.wb-note-link { color: inherit; text-decoration: underline; text-decoration-color: var(--wb-gold-lo); text-decoration-thickness: 1px; text-underline-offset: 4px; transition: text-decoration-color 0.25s ease, text-decoration-thickness 0.25s ease; }
+.wb-note-link:hover, .wb-note-link:focus-visible { text-decoration-color: var(--wb-gold); text-decoration-thickness: 2px; }
 .wb-whisper { font-family: 'Courier Prime', monospace; font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: #837f75; margin-bottom: 26px; }
 .wb-rule { width: 36px; height: 1px; background: var(--wb-gold); margin-bottom: 22px; opacity: 0.5; }
 

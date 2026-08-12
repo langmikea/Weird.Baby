@@ -69,11 +69,20 @@ const INSTRUMENTS = [
      it, the desk included. The file it pointed at is deleted by
      `tools/dictation/prep.mjs`, and this desk refuses to draw a link to a file
      that is not on disk, so leaving the card would have printed a red one. */
-  { name: "The Record",
+  /* [2026-08-11] MOTHBALLED, AND THE CARD LOSES ITS LEAD RATHER THAN ITS ROW.
+     Mike ruled the editor mothballed for week one — he writes the Record in a
+     spreadsheet and pastes it in. Doctrine 24 does NOT apply: he did not rule
+     it gone, he ruled it not-the-road-for-now, and a mothballed instrument that
+     vanishes from the desk is one nobody can find when it is wanted again.
+     WHAT CHANGES IS WHAT THE CARD CLAIMS. `lead: true` put it at the top as the
+     thing to open first; a page that is not the recommended path must not be
+     the first thing on the launcher. The `what` says the state, so the desk and
+     the page itself say the same thing — the page carries the same note in its
+     own banner (tools/dictation/record-edit.mjs). */
+  { name: "The Record — MOTHBALLED",
     file: "dictation-20260807/record.html",
-    what: "Write it in the Record itself — the museum's own page, your words in place, every part editable where it sits. { curly braces } are notes to Ops. One button hands the whole volume back.",
-    rebuild: "npm run dictation",
-    lead: true },
+    what: "NOT THE ROAD FOR WEEK ONE. Mike writes the Record in a spreadsheet now — RECORD_days-2-to-6.xlsx, one tab per day — and it is pasted into the tree from there. This page still works and nothing has been deleted; it is simply not where the writing happens.",
+    rebuild: "npm run dictation" },
   { name: "The twelve-week table",
     file: "dictation-20260807/arc.html",
     what: "The whole arc, week by week. Two marks per row — whose sentence it is, and whether there is anything of yours under it.",

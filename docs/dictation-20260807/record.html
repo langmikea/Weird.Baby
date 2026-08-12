@@ -18,7 +18,17 @@
      `vw`, and `1.35vw` resolves to the same number inside it.
 
      THE CHAIN BELOW WAS READ OFF THE LIVE PAGE, NOT GUESSED. It is the eleven
-     elements `Exhibit.jsx` puts between `<body>` and an entry on the flat wing,
+     elements `Exhibit.jsx` puts between `<body>
+<div class="wb-mothball">
+  <strong>THIS PAGE IS MOTHBALLED.</strong>
+  Mike ruled on 2026-08-11 that the Record is written in a spreadsheet for week one —
+  <code>C:\AI\_night-20260811\RECORD_days-2-to-6.xlsx</code>, one tab per day — and pasted
+  into the tree from there. Nothing here is broken and nothing has been deleted: this page
+  still reads the Record, still edits it, and still saves. It is simply not the road any more.
+  <br><br>
+  If you are reading this because someone told you to run <code>npm run record</code>, they were
+  working from an old note. Use the spreadsheet.
+</div>` and an entry on the flat wing,
      with the two inline styles the component sets — the default 22/78 split on
      `.ex-main-inner` and `--fit-area-max` on `.ex-root`. Measured on the built
      bundle at a 1280px viewport: `.ex-right` 963.3 · `.vp-face-body` 925.3 ·
@@ -248,6 +258,12 @@ body { padding-bottom: 92px; }
 .wb-x { float: right; cursor: pointer; border: 0; background: none;
         color: inherit; font: 700 14px/1 sans-serif; padding: 0 2px; }
 
+/* the mothball banner — see the generator's ruling note */
+.wb-mothball{background:#fff4d6;border:2px solid #b8860b;color:#4a3800;
+  font:14px/1.6 Arial,Helvetica,sans-serif;padding:14px 18px;margin:0 0 18px;
+  border-radius:2px}
+.wb-mothball code{font:12px/1.5 "Courier New",monospace;background:#fffaf0;
+  padding:1px 5px;border:1px solid #d9c48a;word-break:break-all}
 </style>
 </head>
 <body>

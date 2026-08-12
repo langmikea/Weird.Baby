@@ -12126,13 +12126,6 @@
    "p": "WbHome{}.<div>.<div>.<img>.@alt",
    "c": "HOUSE"
   },
-  "45092d15b97ebb3b": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 90,
-   "t": "something is being built here",
-   "p": "WbHome{}.<div>.<div>.<div>",
-   "c": "HOUSE"
-  },
   "866f12ef77491e70": {
    "f": "src/routes/WbHome.jsx",
    "l": 91,
@@ -12189,62 +12182,6 @@
    "p": "WbHome{}.<div>.<div>.<nav>.<button>.<span>",
    "c": "HOUSE"
   },
-  "28d7f5892cda545a": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 163,
-   "t": "We're not open yet.",
-   "p": "WbHome{}.<div>.<div>.<p>",
-   "c": "MIKE",
-   "s": "the Lobby's founding-visitor copy, Mike's own, on the page since the first build"
-  },
-  "d82ed19bcf8e9a46": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 164,
-   "t": "But you found us —",
-   "p": "WbHome{}.<div>.<div>.<p>",
-   "c": "MIKE",
-   "s": "the Lobby's founding-visitor copy, Mike's own, on the page since the first build"
-  },
-  "d685a3cb18fb5698": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 165,
-   "t": "which means",
-   "p": "WbHome{}.<div>.<div>.<p>",
-   "c": "MIKE",
-   "s": "the Lobby's founding-visitor copy, Mike's own, on the page since the first build"
-  },
-  "fca829fba508b852": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 166,
-   "t": "something.",
-   "p": "WbHome{}.<div>.<div>.<p>.<em>",
-   "c": "MIKE",
-   "s": "the Lobby's founding-visitor copy, Mike's own, on the page since the first build"
-  },
-  "9fe00087218775e8": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 166,
-   "t": "The people who sign the guest book now",
-   "p": "WbHome{}.<div>.<div>.<p>",
-   "c": "MIKE",
-   "s": "the Lobby's founding-visitor copy, Mike's own, on the page since the first build"
-  },
-  "effa88b3279bf7a8": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 167,
-   "t": "will be remembered differently",
-   "p": "WbHome{}.<div>.<div>.<p>",
-   "c": "MIKE",
-   "s": "the Lobby's founding-visitor copy, Mike's own, on the page since the first build"
-  },
-  "03fdcc0c291795c6": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 168,
-   "t": "than the ones who come later.",
-   "p": "WbHome{}.<div>.<div>.<p>",
-   "c": "MIKE",
-   "s": "the Lobby's founding-visitor copy, Mike's own, on the page since the first build"
-  },
   "54e159683e9d1de7": {
    "f": "src/routes/WbHome.jsx",
    "l": 175,
@@ -12285,13 +12222,6 @@
    "l": 209,
    "t": "Sign",
    "p": "WbHome{}.<div>.<div>.<div>.<div>.<button>",
-   "c": "HOUSE"
-  },
-  "864481e24e85ae49": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 214,
-   "t": "You're in the book. Welcome, Founding Visitor.",
-   "p": "WbHome{}.<div>.<div>.<div>",
    "c": "HOUSE"
   },
   "70f23fd968d5ec26": {
@@ -15406,16 +15336,6 @@
    ],
    "p": "FAQ[].a"
   },
-  "37a0269e19721795": {
-   "f": "src/data/artists/foundation.js",
-   "l": 717,
-   "t": "Not through this page yet. The plan is plain: a public list of exactly what the museum needs — supplies, and hours of work — so that a supporter can buy the thing or book the hour and have it arrive here directly, with no money ever passing through us. We would list only what we need, which is the rule that keeps a list like that from turning into a wish. None of it exists today, so the honest answer is to write to the address at the bottom of this page and say what you have.",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ],
-   "p": "FAQ[].a"
-  },
   "012417e7d044fad9": {
    "f": "src/data/artists/foundation.js",
    "l": 737,
@@ -15466,6 +15386,58 @@
     "docs/canonical/THE_CHARTER.md"
    ],
    "p": "FAQ[].a"
+  },
+  "a8419013f075094f": {
+   "f": "src/data/artists/foundation.js",
+   "l": 717,
+   "t": "Not through this page yet. The plan is plain: a public list of exactly what the museum needs — supplies, and hours of work — so that a supporter can buy the thing or book the hour and have it arrive here directly, with no money ever passing through us. We would list only what we need, which is the rule that keeps a list like that from turning into a wish. None of it exists today, so the honest answer is to say what you have. Write to the guy currently running the place: papa@weird.baby",
+   "c": "RESTATED",
+   "r": [
+    "docs/canonical/THE_CHARTER.md"
+   ],
+   "p": "FAQ[].a"
+  },
+  "0ce62d09487dcf8d": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1485,
+   "t": "SOURCES  {}",
+   "p": "aboutArtistTrack{}.face.lines[]",
+   "c": "HOUSE"
+  },
+  "25240bd18488271a": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 771,
+   "t": "The museum is open.",
+   "c": "MIKE",
+   "s": "Mike's ruling, 2026-08-11, his two sentences verbatim: “The museum is open. A new Record every day for ninety days.” docs/MUSEUM_LOBBY_OPENS_LOG-20260811.md"
+  },
+  "17396c23f50d367b": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 784,
+   "t": "A new",
+   "c": "MIKE",
+   "s": "Mike's ruling, 2026-08-11, his two sentences verbatim: “The museum is open. A new Record every day for ninety days.” His second sentence is now three rows and not one because the word Record inside it is a link to /robots/record (his ruling, 2026-08-11: “the cheapest honest fix… one word, one link”), and the sweep reads each JSX text node separately. The sentence on the glass is unchanged to the character. docs/MUSEUM_LOBBY_OPENS_LOG-20260811.md"
+  },
+  "6e3d8f0ca8c2accf": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 785,
+   "t": "Record",
+   "c": "MIKE",
+   "s": "Mike's ruling, 2026-08-11 — the linked word in his second lobby sentence. See the sibling rows 17396c23f50d367b and 988f2e7a168572f6; the three together are “A new Record every day for ninety days.” docs/MUSEUM_LOBBY_OPENS_LOG-20260811.md"
+  },
+  "988f2e7a168572f6": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 785,
+   "t": "every day for ninety days.",
+   "c": "MIKE",
+   "s": "Mike's ruling, 2026-08-11 — the tail of his second lobby sentence. See the sibling rows 17396c23f50d367b and 6e3d8f0ca8c2accf. docs/MUSEUM_LOBBY_OPENS_LOG-20260811.md"
+  },
+  "da8fee1584ddb819": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 845,
+   "t": "You're in the book.",
+   "c": "HOUSE",
+   "s": "the guest book's confirmation, on the page since the first build. The clause that followed it — “Welcome, Founding Visitor.” — was struck 2026-08-11 on Mike's ruling as the last not-open-yet framing on the lobby; nothing replaced it. docs/MUSEUM_LOBBY_OPENS_LOG-20260811.md"
   }
  }
 }

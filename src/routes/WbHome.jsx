@@ -12,7 +12,7 @@
 // verified, not assumed — but it is also bundling luck rather than a declared
 // dependency, which is R5's point and R5's job (see the round log).
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./WbHome.css";
 import { useRoom } from "../lib/use-room.js";
 import { useArrival } from "../lib/use-arrival.js";
@@ -624,7 +624,13 @@ export default function WbHome() {
         <div className="wb-left">
           <img src="/WeirdBaby_PhotoID.png" alt="Weird.Baby" className="wb-logo" />
           <div className="wb-subtitle">{SUBTITLE}</div>
-          <div className="wb-tagline">something is being built here</div>
+          {/* [2026-08-11] THE TAGLINE IS GONE. MIKE'S RULING, and it was the
+              second not-open-yet claim on the screen: a blinking
+              "SOMETHING IS BEING BUILT HERE" under the wordmark, about 200px
+              from the new note's "The museum is open." A room cannot be open
+              on the right and under construction on the left. Named once here
+              and in docs/MUSEUM_LOBBY_OPENS_LOG-20260811.md; `.wb-tagline` and
+              its `blink` keyframes went with it — they had no other user. */}
           <nav className="wb-directory" aria-label="Museum directory">
             <div className="wb-dir-label">Directory</div>
             {/* Hunter Root delisted 2026-07-07 (Mike's direction); /hr live
@@ -747,16 +753,37 @@ export default function WbHome() {
         </div>
 
         <div className="wb-right">
+          {/* ═══ [2026-08-11] THE LOBBY OPENS, AND THE NOTE IS THE PROMISE ═══
+              MIKE'S RULING, his two sentences: *"The museum is open. A new
+              Record every day for ninety days."*
+
+              WHAT WENT, VERBATIM, because a deleted line is named once and the
+              round log is where: *"We're not open yet. / But you found us — /
+              which means something. / The people who sign the guest book now /
+              will be remembered differently / than the ones who come later."*
+
+              IT IS NOT A REWORDING, IT IS A DIFFERENT PROMISE. The old note
+              paid the visitor for arriving early and had nothing to offer them
+              for coming back; a museum that is open owes them a reason to
+              return instead, and the ninety days is that reason. The guest book
+              beneath is untouched — it was never the thing that made the room
+              worth arriving at.
+
+              [2026-08-11, RULED] THE SENTENCE IS THE DOOR. A3/A4 reported that
+              nothing on this board pointed at the Record and that the cheapest
+              honest fix was one word, not a new object. Mike ruled exactly
+              that: *"the cheapest honest fix. No banner, no button, no board
+              row reversed. One word, one link."*
+              IT DOES NOT REVERSE L1. L1 struck a DIRECTORY ROW under Weird.Baby
+              Robots ("it is clutter here") and the directory is untouched — six
+              rooms, same six. What changed is that a promise which already
+              names a thing now opens it. The link is styled as prose, not as a
+              call to action, for the same reason: a button here would be the
+              object L1 refused wearing a different coat. */}
           <p className="wb-note">
-            We're not open yet.<br />
-            But you found us —<br />
-            which means <em>something.</em><br /><br />
-            The people who sign the guest book now<br />
-            will be remembered differently<br />
-            than the ones who come later.
+            The museum is open.<br />
+            A new <Link className="wb-note-link" to="/robots/record">Record</Link> every day for ninety days.
           </p>
-          {/* [walk-five] "You are early. That is noted." killed — redundant
-              with the note above (the book already says what early means). */}
           <div className="wb-rule" />
           <div className="wb-book-head">
             {/* [P3] the id is the moving book's accessible name — it is
@@ -801,7 +828,21 @@ export default function WbHome() {
               </div>
             </>
           ) : (
-            <div className="wb-confirmed">You're in the book. Welcome, Founding Visitor.</div>
+            /* [2026-08-11] "Welcome, Founding Visitor." IS STRUCK, and it is
+                the third and last not-open-yet claim on this page. It paid a
+                visitor for arriving BEFORE the doors opened; the doors are
+                open, so it is now either untrue or it makes every visitor for
+                ninety days a founder, which is the same as making none of them
+                one. Named once, here and in the round log.
+                WHAT REPLACED IT IS NOTHING, and that is the decision rather
+                than an omission. "You're in the book." is the whole of what
+                just happened and is the whole of what a confirmation owes.
+                The obvious alternative — a second sentence giving them a
+                reason to come back — is a NEW sentence for a lobby whose two
+                sentences are Mike's own, and the reason to come back is
+                already 200px above it with a door in it now. Ops does not
+                invent his voice to fill a gap subtraction opened. */
+            <div className="wb-confirmed">You're in the book.</div>
           )}
 
           {/* [M23b] one book — see the note above `SCROLL_MIN`. */}
