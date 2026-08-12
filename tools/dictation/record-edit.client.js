@@ -540,6 +540,29 @@
       elLim.textContent = v.length + " characters · no limit on this field";
       return;
     }
+    /* === [N1 2026-08-11] THE MEASURED BUDGET, AND WHICH SCREEN IT BELONGS TO
+       The gate's `RECORD_TITLE_MAX` is one number; a headline's real no-wrap
+       budget is a different number at every width, because the type ramp reads
+       the viewport. Both are shown, the measured ones first, because the
+       measured ones are what he can SEE go wrong. Read from
+       `reveal/record-shape.mjs` through `CFG` — no copy lives here.
+       IT STILL NEVER BLOCKS AND NEVER TRUNCATES: this is a readout. */
+    if (b.measured && b.measured.length) {
+      var widest = b.measured[0].chars;
+      var wraps = b.measured.filter(function (m) { return v.length > m.chars; });
+      var parts = b.measured.map(function (m) {
+        return m.chars + " at " + m.viewport + (v.length > m.chars ? " ✗" : "");
+      });
+      elLim.className = "wb-lim on" + (wraps.length ? " over" : (v.length > widest - 8 ? " near" : ""));
+      elLim.textContent = v.length + " characters — wraps at "
+        + wraps.map(function (m) { return m.viewport + "px"; }).join(" and ")
+        + (wraps.length ? "" : "no width")
+        + "  ·  fits: " + parts.join(", ")
+        + "  ·  gate refuses over " + b.max;
+      if (!wraps.length) elLim.textContent = v.length + " characters — fits every width  ·  "
+        + parts.join(", ") + "  ·  gate refuses over " + b.max;
+      return;
+    }
     var over = v.length - b.max;
     if (over > 0) {
       elLim.className = "wb-lim on over";
@@ -834,12 +857,50 @@
     var a = document.createElement("a");
     a.href = URL.createObjectURL(b); a.download = "record-draft.json";
     document.body.appendChild(a); a.click(); a.remove();
-    say(why + " Downloaded record-draft.json instead — move it into "
-      + "docs/dictation-20260807/ and tell Ops.", "bad");
+    say(why + " Downloaded record-draft.json to your Downloads folder instead — it must be "
+      + "moved into docs/dictation-20260807/ before `npm run record:land` can see it. "
+      + "To stop having to: run `npm run record:serve` and use the URL it prints.", "bad");
   }
+  /* === [N1 2026-08-11] THE SERVER IS TRIED FIRST, AND IT IS WHY SAVE STOPPED
+     GOING TO Downloads =====================================================
+     MIKE PRESSED SAVE AND THE FILE LANDED IN Downloads; he moved it across by
+     hand. THE CAUSE: `showSaveFilePicker` is gated on a SECURE CONTEXT and
+     `file://` is not one, so the check below was true every time he opened the
+     page by double-clicking it, and the download fallback fired exactly as
+     designed. The fallback was right; the road it falls back to is wrong.
+     SO THERE IS A ROAD ABOVE IT NOW. Served by `npm run record:serve`, this
+     page POSTs the draft to a 127.0.0.1-only endpoint that writes the one path
+     the lander reads. No dialog, no folder to choose, no permission to
+     re-grant after a restart, and nothing to move.
+     IT IS TRIED ONLY WHEN THE PAGE IS SERVED OVER http, because on `file://`
+     there is no server to POST to; opening the .html directly still works and
+     still falls through to the picker and then to the download, so the old way
+     is not taken away from him. */
+  function saveViaServer(text) {
+    if (!/^https?:$/.test(location.protocol)) return Promise.resolve(false);
+    return fetch("/save", { method: "POST", headers: { "content-type": "application/json" }, body: text })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        if (!j || !j.ok) return false;
+        say("Saved " + j.records + " record(s) to " + j.path + " — " + j.bytes
+          + " characters, at " + stamp() + ". It is in the repo; nothing to move.", "good");
+        return true;
+      })
+      .catch(function () { return false; });
+  }
+
   function saveToRepo() {
     var text = payload();
-    if (typeof window.showSaveFilePicker !== "function") { download(text, "This browser has no file picker."); return; }
+    saveViaServer(text).then(function (done) { if (!done) saveByPicker(text); });
+  }
+
+  function saveByPicker(text) {
+    if (typeof window.showSaveFilePicker !== "function") {
+      download(text, "This page is open as a file, so the browser gives it no file picker "
+        + "and no way to write into the repo. (`npm run record:serve` and open the URL it "
+        + "prints — then Save writes straight to docs/dictation-20260807/.)");
+      return;
+    }
     handle(null).then(function (h) {
       if (!h) return null;
       return h.queryPermission({ mode: "readwrite" }).then(function (perm) {

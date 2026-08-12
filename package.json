@@ -42,7 +42,8 @@
     "instory:all": "node tools/instory-specs.mjs --all",
     "lap": "node tools/lap.mjs",
     "lap:clean": "node tools/lap.mjs --clean",
-    "surfacing": "node tools/surfacing.mjs"
+    "surfacing": "node tools/surfacing.mjs",
+    "record:serve": "node tools/dictation/record-serve.mjs"
   },
   "dependencies": {
     "react": "^19.2.4",

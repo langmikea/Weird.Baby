@@ -94,13 +94,29 @@ if (notes.length && !argv.includes("--with-notes") && !argv.includes("--verify")
 const q = (s) => JSON.stringify(s);
 const wrap = (s, indent) => {
   /* one literal per paragraph, broken across lines only where a space allows,
-     so the file stays readable and the string stays exact */
+     so the file stays readable and the string stays exact.
+
+     === [N1 2026-08-11] IT SPLITS ON TOKENS, AND HIS SPACING SURVIVES ========
+     `--verify` caught this the first time the writer ran against one of Mike's
+     real drafts: `1 of 71 MISMATCHED`. Five leading spaces were gone and two
+     trailing had collapsed to one, on the paragraph beginning "Not single
+     sourced". THE CAUSE WAS `s.split(" ")` REJOINED WITH SINGLE SPACES: any run
+     of more than one space collapsed, and a leading or trailing run vanished
+     entirely, because `cur ? cur + " " + w : w` cannot begin with an empty
+     token. On a surface whose whole rule is that his characters are unchanged
+     — the round that landed Record 001 kept `was made made` and `=  86%` on
+     purpose — that is the writer editing him, silently, in the one direction
+     nobody would think to check.
+     Matching `\s+|\S+` keeps whitespace as tokens of its own, so the
+     concatenation of the parts IS the original string byte for byte, and a
+     break may fall inside a run of spaces without changing it. */
   const max = 74 - indent;
   if (s.length <= max) return q(s);
   const parts = []; let cur = "";
-  for (const w of s.split(" ")) {
-    if (cur && (cur + " " + w).length > max) { parts.push(cur + " "); cur = w; }
-    else cur = cur ? cur + " " + w : w;
+  /* [N1 2026-08-11] TOKENS, NOT `split(" ")` — see the note above the loop. */
+  for (const t of s.match(/\s+|\S+/g) || []) {
+    if (cur && (cur + t).length > max) { parts.push(cur); cur = t; }
+    else cur += t;
   }
   if (cur) parts.push(cur);
   return parts.map(q).join("\n" + " ".repeat(indent) + "+ ");
@@ -234,6 +250,45 @@ const wants = entries.map(e => e.no);
 const lost = had.filter(n => !wants.includes(n));
 if (lost.length) die(`the draft does not carry record(s) ${lost.join(", ")}, which are in ${REL}. `
   + `A draft is meant to hold the whole volume; a short one means something upstream dropped them.`);
+
+/* ═══ GUARD 6 — [N1 2026-08-11] IT MAY NOT EAT THE REASONING ═══════════════
+   THE FIRST TIME `--write` WAS EVER RUN AGAINST A REAL DRAFT THIS IS WHAT IT
+   WAS ABOUT TO DO: the entries body in `robots-record.js` is 23,143 characters
+   and 15,054 of them — SIXTY-FIVE PER CENT — are comment blocks carried out of
+   `robots.js` byte for byte when the file was split, precisely because "that
+   file carries standing reasoning in its comments and none of it may be lost".
+   The emitter builds entries from Mike's draft, and a draft has no comments in
+   it, so a write would have replaced 23,143 characters with 8,359 and taken
+   every one of those eight blocks with it — silently, and passing every other
+   guard, because the STRINGS all round-trip perfectly.
+   THE GUARD IS A COMPARISON, NOT A HEURISTIC: comment characters before, comment
+   characters after. It refuses on ANY loss and names what would go. It is not
+   clever about which blocks matter, because a rule that decided that would be
+   the thing making the mistake.
+   WHAT IT COSTS, STATED: `--write` cannot land a Record into a file that
+   carries per-entry commentary until the emitter learns to carry those blocks
+   through. That is the follow-on this guard exists to force rather than to
+   hide. */
+const commentChars = (s) => (s.match(/\/\*[\s\S]*?\*\//g) || []).reduce((a, b) => a + b.length, 0);
+{
+  const oldBody = before.slice(before.indexOf(OPEN) + OPEN.length, before.lastIndexOf(CLOSE));
+  const had = commentChars(oldBody), gets = commentChars(BODY);
+  if (gets < had) {
+    const blocks = (oldBody.match(/\/\*[\s\S]*?\*\//g) || []).map(b =>
+      (b.split("\n").map(l => l.trim()).find(Boolean) || "").slice(0, 78));
+    console.error(`record:land --write REFUSED — it would delete ${had - gets} characters of`);
+    console.error(`comment from ${REL} (${had} there now, ${gets} in what this would write).`);
+    console.error("");
+    console.error("Those blocks are the standing reasoning that moved with the entries when the");
+    console.error("Record was split out of robots.js. A draft carries none of them, so writing");
+    console.error("from a draft removes every one:");
+    for (const b of blocks) console.error(`    ${b}`);
+    console.error("");
+    console.error("Nothing was written. The emitter has to carry these blocks through before");
+    console.error("--write can land a Record into a commented file.");
+    process.exit(1);
+  }
+}
 
 /* guard 4 — it must parse, and by the museum's own reader */
 let parsed;

@@ -75,6 +75,26 @@
 export const RECORD_TITLE_MAX = 62;
 export const RECORD_LINE_MAX = 130;
 
+/* === [N1 2026-08-11] THE MEASURED NO-WRAP BUDGET, WHICH IS NOT THE GATE'S ===
+   `RECORD_TITLE_MAX` above is what `reveal:check` refuses a packet over. It is
+   ONE number, and a headline does not have one budget — it has a different one
+   at every width, because the museum's type ramp reads the viewport. Measured
+   on the built page in the Record's real face (Arial 700, its own tracking),
+   index and opened record identical at all three:
+       1280px  64 characters      768px  58      390px  36
+   SO THE GATE IS RIGHT AT ONE WIDTH AND WRONG AT TWO. 62 is two tighter than a
+   desktop line and twenty-six LOOSER than a phone line: a headline can pass the
+   gate and still wrap on a phone, which is what 003 (39 characters) and 013
+   (46) do today.
+   IT IS DECLARED HERE, WITH THE GATE'S NUMBER, so the editor shows him the real
+   figure without a second copy of it living in a page. Nothing enforces these —
+   Mike has ruled against truncation and against blocking — they are shown. */
+export const TITLE_BUDGET_MEASURED = [
+  { viewport: 1280, chars: 64 },
+  { viewport: 768, chars: 58 },
+  { viewport: 390, chars: 36 },
+];
+
 export const BUDGETS = {
   title: {
     field: "title",

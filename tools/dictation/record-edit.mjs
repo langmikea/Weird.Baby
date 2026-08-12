@@ -69,7 +69,8 @@ import path from "node:path";
 import url from "node:url";
 import { spawnSync } from "node:child_process";
 import { draftEntries } from "../../reveal/record-entries.mjs";
-import { BUDGETS, FORMATS, sectionsFromText } from "../../reveal/record-shape.mjs";
+import { BUDGETS, FORMATS, sectionsFromText,
+         TITLE_BUDGET_MEASURED } from "../../reveal/record-shape.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..", "..");
@@ -259,7 +260,10 @@ function build() {
     epoch,
     datePattern: FORMATS.date.pattern,
     budgets: {
-      title: { max: BUDGETS.title.max, says: BUDGETS.title.why },
+      /* [N1 2026-08-11] the gate's number AND the measured ones, both read
+         from `reveal/record-shape.mjs` — no second copy lives in the page. */
+      title: { max: BUDGETS.title.max, says: BUDGETS.title.why,
+               measured: TITLE_BUDGET_MEASURED },
       line: { max: BUDGETS.line.max, says: BUDGETS.line.why },
     },
     carry: carryMap(),
