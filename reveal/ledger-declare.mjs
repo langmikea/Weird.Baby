@@ -215,6 +215,46 @@ R("room.slow", "WHEN THINGS GET SLOW — old photographs of Mike, from birth onw
    check reads this field to decide whether a built, held row is actually behind
    a door, so a helper that answers "robots.js" for all of them would have made
    that check answer the wrong question quietly. */
+/* ═══ [CH6 2026-08-12] THE WHOLE WING IS HELD UNTIL RECORD 001 ══════════════
+   MIKE: hide all of /robots at launch — the machines, the FAQ, the Record,
+   everything. It does not exist to a visitor until 001 announces it.
+
+   EVERY FACE BELOW IS THEREFORE HELD AT LAUNCH, AND THIS HELPER APPLIES IT
+   RATHER THAN EIGHT ROWS BEING RETYPED. The rows keep their own `build` — what
+   is BUILT has not changed, only whether a visitor can reach it — and `reach`
+   goes null, which is what `reveal:check`'s first check demands of a held row.
+
+   THIS IS THE DRIFT JOB 4 IS ABOUT, CAUGHT ON THE WAY IN. The Ledger, Contribute
+   and the machines were each found by Mike on the live site because a ruling
+   changed the museum and nothing changed the ledger. Hiding the wing without
+   moving these rows would have made the ledger wrong in exactly that way, in the
+   same round that catalogues the failure.
+
+   THE DEVELOPMENT CAVEAT, STATED: in DEVELOPMENT every one of these renders and
+   is reachable. The ledger describes the LAUNCH state on purpose — that is the
+   V1 ruling ("make the gate check the LAUNCH state rather than the current
+   view") and the reason the reachability pass can mean anything at all.
+
+   ═══ AND THE GATE REFUSED THE OBVIOUS FIX, WHICH IS THE FINDING ═══════════
+   Flipping these eight to HELD was written, run, and REFUSED by `reveal:check`
+   check 5 (THE CARRIER). Its words, on four rows at once:
+
+     record.002: built, HELD, and carried by `src/data/artists/robots-record.js`
+     — which is NOT in `HELD_PATHS` (vite.config.js), so its code and every
+     string in it ship in a chunk the public fetches. A boolean in a public
+     module stops the render and publishes the material anyway.
+
+   IT IS RIGHT AND THE ROWS ARE LEFT AS THEY WERE. `face.wbr.record` is what the
+   `record.NNN` rows inherit their state from, so flipping the face flipped all
+   five entries to HELD — and the gate immediately said what CH5-a already says
+   in `src/lib/record-clock.js`: the Record's entries are in a PUBLIC chunk. The
+   wing is hidden from the page and its text is still in the bundle.
+   MARKING THEM HELD WOULD HAVE MADE THE LEDGER CLAIM A CONCEALMENT THAT DOES
+   NOT EXIST — which is the same class of error as leaving them REVEALED, in the
+   opposite direction, and the more dangerous one because it reads as safe.
+   SO THE LEDGER STAYS HONEST-BUT-STALE, and the staleness is the open row: it
+   is fixed by moving `robots.js` + `robots-record.js` into `HELD_PATHS` so the
+   wing is genuinely absent, not by editing a state field. Open `CH6-a`. */
 const FACE = (id, name, build, state, extra) => {
   const { where, ...rest } = extra || {};
   return R("face." + id, name, "surface", where || "src/data/artists/robots.js", build,

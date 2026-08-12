@@ -47,6 +47,7 @@ export default defineConfig([
         // `__WB_TODAY__` into every HTML response. Both are real at runtime and
         // invisible to eslint, which is exactly what this block is for.
         __WB_RECORD_ASSETS__: 'readonly',
+        __WB_RECORD_FIRST_DAY__: 'readonly',
         HTMLRewriter: 'readonly',
       },
       parserOptions: {

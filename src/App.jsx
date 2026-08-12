@@ -12,6 +12,8 @@ import WbAdmin    from "./routes/WbAdmin.jsx";
    directory without the cookie the admin page's password mints.
    Read src/routes/HeldWing.jsx before changing either line. */
 import HeldWing   from "./routes/HeldWing.jsx";
+/* [CH6 2026-08-12] has the Robots wing arrived? — src/lib/wing-open.js */
+import { ROBOTS_OPEN } from "./lib/wing-open.js";
 const HrSpine   = lazy(() => import("./routes/hr/HrSpine.jsx"));
 const HrArchive = lazy(() => import("./routes/hr/HrArchive.jsx"));
 import WbSpine    from "./routes/wb/WbSpine.jsx";
@@ -130,7 +132,24 @@ export default function App() {
             One retired word survives on purpose. It is just a different one. */}
         <Route path="/money" element={<Navigate to="/foundation" replace />} />
         <Route path="/shop" element={<GiftShop />} />
-        <Route path="/robots" element={<Robots />} />
+        {/* ═══ [CH6 2026-08-12] THE WING IS SHUT UNTIL RECORD 001 ═══════════
+            MIKE: hide all of /robots at launch — the machines, the FAQ, the
+            Record, everything. It does not exist to a visitor until 001
+            announces it. `ROBOTS_OPEN` is derived from the Record having an
+            entry rather than from a date (see src/lib/wing-open.js).
+            IT RENDERS THE LOBBY, WHICH IS `/hr`'s BEHAVIOUR AND E2's RULING.
+            Not a 404 and not a redirect: a 404 tells a visitor there is a room
+            here that they are being kept out of, and a redirect rewrites the
+            address bar to tell them they were wrong to type it. The Lobby says
+            nothing at all, which is what "does not exist to a visitor" means.
+            It is also exactly what every unmatched address in this museum
+            already does, so the shut wing and a typo land in the same place.
+            THE FLAG IS NOT `heldOpen()` AND `HeldWing` IS NOT REUSED. That
+            component reads /hr's PERMISSION flag; this is a STORY hold on a
+            different wing for a different reason, and §8's rule is that a new
+            reason gets its own door rather than a seat at an existing one. The
+            shape is borrowed; the switch is its own. */}
+        <Route path="/robots" element={ROBOTS_OPEN ? <Robots /> : <WbHome />} />
         {/* [R1 2026-08-05] THE RECORD GETS AN ADDRESS, because it got a line on
             the lobby directory. MIKE: the Record applies to ALL things robots,
             not just the VIIIp — so it moved off the MGK-VIIIp album onto the
@@ -141,7 +160,9 @@ export default function App() {
             selected rather than a second page holding a copy of it. A directory
             line that dropped a visitor on /robots and left them to find the
             Record would be a control that does not do what its label says. */}
-        <Route path="/robots/record" element={<Robots open="record" />} />
+        {/* [CH6] shut with the wing it lives in — see /robots above. */}
+        <Route path="/robots/record"
+               element={ROBOTS_OPEN ? <Robots open="record" /> : <WbHome />} />
         <Route path="/wal" element={<Wal />} />
         <Route path="/p/:id" element={<PresetLanding />} />
         {/* ==== [E2 2026-08-03] THE CATCH-ALL. MIKE'S RULING ================

@@ -420,6 +420,19 @@ export default defineConfig({
        this is `{}` and the worker's branch is unexercised. Reported, not hidden. */
     __WB_RECORD_ASSETS__: JSON.stringify(
       assetSchedule(recordEntries(), (e) => (e.no == null ? null : recordDay(e.no)))),
+    /* [CH6 2026-08-12] THE DAY THE WING ARRIVES, DERIVED AND NOT TYPED.
+       The worker needs it for one job only: the share cards name the MGK robots,
+       and that sentence is false on a site whose Robots wing does not exist yet
+       (1e). It rewrites them while the wing is shut.
+       IT IS THE EARLIEST RECORD ENTRY'S OWN DAY — the same derivation
+       `src/lib/wing-open.js` uses at the glass, so the two cannot disagree, and
+       there is still no second date literal beside `RECORD_EPOCH`. `null` when
+       the Record is empty, which reads as "never opened" and holds the cards. */
+    __WB_RECORD_FIRST_DAY__: JSON.stringify(
+      recordEntries()
+        .map((e) => (e.no == null ? null : recordDay(e.no)))
+        .filter(Boolean)
+        .sort()[0] ?? null),
   },
   plugins: [hrVaultAudio, revealPublic, wbPlacement, opsNotesStrip, heldChunkGuard, opsBraceGuard, react(), cloudflare()],
   build: {

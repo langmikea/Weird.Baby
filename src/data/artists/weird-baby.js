@@ -175,6 +175,46 @@ const spine = [
     art: "/images/wb/vol1-cover.png",
     accent: null,
     tracks: [
+      /* ═══ [CH6 2026-08-12] WHAT THESE RECORDINGS ARE ═══════════════════════
+         MIKE: the tracks are tagged "audio" and he wants them marked as early
+         unrefined versions that went in as his original copyright submissions.
+         **NOT A LEGAL CLAIM — provenance, not assertion**, and the sentence is
+         his own, used verbatim.
+
+         WHY IT IS A FACE AND NOT THE TRACKS' `label`. Every one of the six
+         carries `label: REC_LABEL` ("Recording — 2026-06"), and that string
+         renders in `.tl-rend` — a **96px wide, 0.66rem, uppercase** button in
+         the tracklist row (Exhibit.css:1175). A twenty-word sentence in that
+         button does not read as provenance, it wrecks the row, and 3c's
+         instruction was that it must not crowd the tracklist. `REC_LABEL` is
+         untouched.
+
+         AND IT IS ONE STATEMENT, NOT SIX. It is true of the whole first pass
+         equally; six copies of one sentence down a tracklist would be the
+         museum repeating itself once per row.
+
+         IT IS THE ALBUM'S OWN FACE, in the shape this wing already uses for the
+         artist card one album up — `kind: "text"` with a `profile` register.
+         The album had no face before, so this adds one menu row and takes
+         nothing away. It is on `vol1`, which is the album that SURVIVES at
+         launch: the `about` album is hidden (CH5), so a provenance line parked
+         there would have been invisible on the day it matters. */
+      {
+        id: "about-record",
+        title: "About this record",
+        videos: [],
+        face: {
+          kind: "text",
+          title: "About this record",
+          subtitle: "THE MAKING OF BoWB V1",
+          profile: [
+            { label: "What these recordings are",
+              body: "The first pass. Rough, unrefined — and the version that " +
+                    "went in as the original copyright submission." },
+          ],
+          footer: "WEIRD.BABY · THE MAKING OF BoWB V1",
+        },
+      },
       {
         id: "coconuts",
         title: "Coconuts",

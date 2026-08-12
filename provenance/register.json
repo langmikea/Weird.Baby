@@ -15332,6 +15332,92 @@
    "l": 385,
    "t": "; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age={}",
    "c": "HOUSE"
+  },
+  "2d8fab65a2167d40": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 208,
+   "t": "About this record",
+   "c": "HOUSE"
+  },
+  "c3beefe8c9386c7e": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 209,
+   "t": "THE MAKING OF BoWB V1",
+   "c": "HOUSE"
+  },
+  "c80d00566071df66": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 211,
+   "t": "What these recordings are",
+   "c": "HOUSE"
+  },
+  "9e37c74675f672b3": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 212,
+   "t": "The first pass. Rough, unrefined — and the version that went in as the original copyright submission.",
+   "c": "MIKE",
+   "s": "Mike's own wording, supplied verbatim in the 2026-08-12 packet: the BoWB Vol 1 recordings are the first pass and the original copyright submission. Provenance, explicitly not a legal claim."
+  },
+  "eb13a57980f6dfaf": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 215,
+   "t": "WEIRD.BABY · THE MAKING OF BoWB V1",
+   "c": "HOUSE"
+  },
+  "28d7f5892cda545a": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 815,
+   "t": "We're not open yet.",
+   "c": "MIKE",
+   "s": "the Lobby's founding-visitor copy, Mike's own, on the page"
+  },
+  "d82ed19bcf8e9a46": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 816,
+   "t": "But you found us —",
+   "c": "MIKE",
+   "s": "the Lobby's founding-visitor copy, Mike's own, on the page"
+  },
+  "d685a3cb18fb5698": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 817,
+   "t": "which means",
+   "c": "MIKE",
+   "s": "the Lobby's founding-visitor copy, Mike's own, on the page"
+  },
+  "fca829fba508b852": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 818,
+   "t": "something.",
+   "c": "MIKE",
+   "s": "the Lobby's founding-visitor copy, Mike's own, on the page"
+  },
+  "9fe00087218775e8": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 818,
+   "t": "The people who sign the guest book now",
+   "c": "MIKE",
+   "s": "the Lobby's founding-visitor copy, Mike's own, on the page"
+  },
+  "effa88b3279bf7a8": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 819,
+   "t": "will be remembered differently",
+   "c": "MIKE",
+   "s": "the Lobby's founding-visitor copy, Mike's own, on the page"
+  },
+  "03fdcc0c291795c6": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 820,
+   "t": "than the ones who come later.",
+   "c": "MIKE",
+   "s": "the Lobby's founding-visitor copy, Mike's own, on the page"
+  },
+  "eb9e93e5aa17b0eb": {
+   "f": "src/worker.js",
+   "l": 159,
+   "t": "A museum of weird things worth keeping. No ads, no affiliate links, no cut of anything you buy from an artist.",
+   "c": "HOUSE"
   }
  }
 }

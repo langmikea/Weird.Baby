@@ -16,6 +16,8 @@ import { useNavigate, Link } from "react-router-dom";
 import "./WbHome.css";
 import { useRoom } from "../lib/use-room.js";
 import { useArrival } from "../lib/use-arrival.js";
+/* [CH6 2026-08-12] has the Robots wing arrived? — src/lib/wing-open.js */
+import { ROBOTS_OPEN } from "../lib/wing-open.js";
 
 /* [M-ID 2026-08-03] MIKE HAS ANSWERED, AND THE ANSWER RETIRES THE QUESTION.
    F7c rendered four candidates behind `/?subtitle=2..4` and said "MIKE PICKS —
@@ -659,9 +661,17 @@ export default function WbHome() {
                 note below); only the words changed. */}
             {/* Robots live link — §D2 ruling 2026-07-23 (coming-soon retires).
                 STAGED: reaches the public site only when Mike deploys (D7). */}
-            <button className="wb-dir-entry" onClick={() => navigate("/robots")}>
-              <span>Weird.Baby Robots</span><span className="wb-dir-arrow">→</span>
-            </button>
+            {/* [CH6 2026-08-12] THE ROW GOES WITH THE WING. Until Record 001
+                announces it, `/robots` renders this Lobby — so a directory line
+                pointing at it would be a control that appears to do something
+                and returns the visitor to the page they are standing on. That
+                is the dead control Doctrine 11's corollary forbids, and it is
+                worse than absence because it looks like a room. */}
+            {ROBOTS_OPEN && (
+              <button className="wb-dir-entry" onClick={() => navigate("/robots")}>
+                <span>Weird.Baby Robots</span><span className="wb-dir-arrow">→</span>
+              </button>
+            )}
             {/* [L1 2026-08-06] THE RECORD IS OFF THE BOARD. MIKE: it is clutter
                 here; visitors find it in Robots.
                 WHAT THE ROW WAS, so nobody rebuilds it by accident. R1 gave it
@@ -780,10 +790,37 @@ export default function WbHome() {
               names a thing now opens it. The link is styled as prose, not as a
               call to action, for the same reason: a button here would be the
               object L1 refused wearing a different coat. */}
-          <p className="wb-note">
-            The museum is open.<br />
-            A new <Link className="wb-note-link" to="/robots/record">Record</Link> every day for ninety days.
-          </p>
+          {/* ═══ [CH6 2026-08-12] THE SWAP IS ITSELF A SCRIPTED EVENT ════════
+              MIKE: the lobby reverts to the early-visitor wording until 001,
+              then becomes "The museum is open. A new Record every day for
+              ninety days." Both halves are his; only which one is on the glass
+              moves, and it moves with the wing rather than on a date of its own
+              (`ROBOTS_OPEN`, src/lib/wing-open.js).
+              THE EARLY WORDING IS RESTORED VERBATIM FROM `1e45ae2^`, not
+              retyped from the round log's summary of it — the log recorded that
+              the sentence was replaced and quoted only its first line, and a
+              paraphrase of Mike's own words back onto his own lobby is the
+              failure the verbatim rule exists to stop.
+              AND THE OPEN WORDING'S LINK IS THE REASON THIS IS CONDITIONAL AT
+              ALL: it points at `/robots/record`, which renders the Lobby until
+              001. Announcing a daily Record and linking to the page the visitor
+              is already on would be the museum contradicting itself twice in
+              one sentence. */}
+          {ROBOTS_OPEN ? (
+            <p className="wb-note">
+              The museum is open.<br />
+              A new <Link className="wb-note-link" to="/robots/record">Record</Link> every day for ninety days.
+            </p>
+          ) : (
+            <p className="wb-note">
+              We&apos;re not open yet.<br />
+              But you found us —<br />
+              which means <em>something.</em><br /><br />
+              The people who sign the guest book now<br />
+              will be remembered differently<br />
+              than the ones who come later.
+            </p>
+          )}
           <div className="wb-rule" />
           <div className="wb-book-head">
             {/* [P3] the id is the moving book's accessible name — it is
