@@ -232,12 +232,32 @@ const BAR = `
 
 function build() {
   const frame = fs.readFileSync(FRAME, "utf8");
-  const { entries: shipped, epoch, unreadable } = draftEntries();
-  if (unreadable.length) {
-    console.log(`  !! ${unreadable.length} field(s) in the Record could not be read and are NOT`);
-    console.log(`     in the editor's seed: ${unreadable.join(", ")}`);
-  }
+  /* ═══ [2026-08-11] IT REFUSES NOW, AND A PRINTED WARNING IS WHY ════════════
+     MIKE: *"THE REAL LESSON: this was silent."*
+
+     WHAT STOOD HERE PRINTED TWO LINES AND CARRIED ON. That was already the
+     wrong shape and it was not what failed — what failed is that the reader
+     never knew it had lost anything, so the list was empty and the two lines
+     never printed. Both halves are fixed: `draftEntries` now tells the
+     difference between a field that is ABSENT and a field whose shape it does
+     not understand (see `paragraphsOf`), and this refuses to write a page on
+     the second.
+
+     REFUSING IS THE POINT AND THE COST IS ACCEPTED. A writing surface missing
+     part of a record is worse than no writing surface at all, because he cannot
+     see what is not there — he would type around the gap and save over it. An
+     error names the record and the field and takes ten seconds to read; a
+     silent gap took a screenshot and a round to find. */
+  const { entries: shipped, epoch, unreadable, shapes } = draftEntries();
+  if (unreadable.length) throw new Error(
+    `record-edit.mjs: REFUSING TO WRITE THE EDITOR. ${unreadable.length} field(s) in the `
+    + `Record are in a shape the reader does not understand, so they would be MISSING from `
+    + `the page Mike writes on — and missing is the one thing he cannot see:\n`
+    + unreadable.map(u => "    · " + u).join("\n")
+    + `\n\n  The page on disk is untouched. Fix the shape, or teach `
+    + `reveal/record-entries.mjs to read it — do not open the old page and write into it.`);
   const { seed, report } = seedOf(shipped);
+  report.shapes = shapes;
 
   /* the two <link>s and the <script src> in the frame point at siblings; this
      page sits one directory up from the bundle */
@@ -355,6 +375,13 @@ export function buildRecordEditor({ quiet = false } = {}) {
   if (!quiet) {
     console.log(`  wrote  ${path.relative(REPO, out)}  ${html.length.toLocaleString()} bytes`);
     console.log(`         ${seed.length} record(s), day one ${epoch}`);
+    /* A1: SAY WHICH SHAPE EACH BODY WAS FOUND IN. Nobody could ask this
+       question before, which is why 013 lost four paragraphs in silence. */
+    const byShape = {};
+    for (const s of report.shapes) byShape[s.shape] = (byShape[s.shape] || 0) + 1;
+    const paras = report.shapes.reduce((a, s) => a + s.paragraphs, 0);
+    console.log(`         ${report.shapes.length} section(s) read, ${paras} paragraph(s) — `
+      + Object.keys(byShape).sort().map(k => `${byShape[k]} written as a ${k}`).join(", "));
     for (const c of report.carried) console.log(`         carried  ${c}`);
     for (const m of report.misplaced) console.log(`      !! ${m}`);
   }

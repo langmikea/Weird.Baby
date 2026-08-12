@@ -17,7 +17,8 @@ import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
 import { validate, manualPageRow, PROD, manualPages, manualSourceState, MANUAL_SRC_DIR } from "../reveal/schema.mjs";
-import { entryFields as recordFields } from "../reveal/record-entries.mjs";
+import { entryFields as recordFields,
+         recordShapeFaults } from "../reveal/record-entries.mjs";
 import { entries as recordEntries, prose as recordProse,
          summaries as recordSummaries } from "../reveal/record-entries.mjs";
 import { transferFaults, ASSIGN, EXEMPT, TRANSFERS, CLASSES } from "../reveal/transfers.mjs";
@@ -635,6 +636,17 @@ function check() {
     ...recordParityFaults(),
     ...recordBudgetFaults(),
     ...recordFieldFaults(),
+    /* ═══ [2026-08-11] THE OTHER HALF OF "NOTHING DROPS SILENTLY" ════════════
+       `recordFieldFaults` above asks *does a renderer draw this field*. This
+       asks *can the reader Mike's editor is seeded from actually READ it* —
+       and the two are not the same question, which is what Record 013 proved:
+       the museum drew its four paragraphs and the reader saw an empty list,
+       because the body was written as a string and the reader only understood
+       a list. Nothing was wrong on the glass and nothing was wrong in the data.
+       IT IS SCOPED TO SHAPES AND NOT TO CONTENT. A fault here means a field
+       exists in the Record that some reader would silently turn into nothing.
+       See `paragraphsOf` in reveal/record-entries.mjs. */
+    ...recordShapeFaults(),
     ...vesselFaults(),
     ...transferGuardFaults(),
   ];
@@ -656,7 +668,14 @@ function check() {
   console.log("  every asset uid resolves in the asset table");
   console.log(`  the ${ROWS.filter(r => /^record\.\d+$/.test(r.id)).length} Record row(s) match the Record's own entries exactly`);
   console.log("  no row holds the Record's words — the ledger is not a second copy of it");
-  console.log(`  every Record headline fits ${RECORD_TITLE_MAX} characters and every summary ${RECORD_LINE_MAX} — the index cannot truncate, so it must not overflow`);
+  /* [2026-08-11] THE COUNT IS PRINTED, AND THE REASON IS THAT THIS LINE LIED.
+     `summaries()` had been left behind by the entries split and returned an
+     empty array, so this check iterated nothing and printed its sentence
+     anyway — a pass on zero rows is indistinguishable from a pass on six. The
+     number is the cheapest possible guard against the same thing happening the
+     next time a reader is repointed. */
+  console.log(`  all ${recordSummaries().length} Record headlines fit ${RECORD_TITLE_MAX} characters and every summary ${RECORD_LINE_MAX} — the index cannot truncate, so it must not overflow`);
+  console.log("  every field a Record entry declares can be READ by the editor's own parser — no shape turns into nothing");
   /* [H1/H2 2026-08-06] A PASS THAT DOES NOT SAY WHAT IT PROVED IS A PASS
      NOBODY RE-READS. The two rules added this round are both about the tree
      rather than the table, so they are the two a future session is most likely

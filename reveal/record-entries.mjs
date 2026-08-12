@@ -66,6 +66,22 @@ export const RECORD_TRACK_ID = "record";
    photograph joins the asset table without this file being edited. */
 const ASSET_LIKE = /^\/[\w\-./]+\.\w{2,5}$/;
 
+/* ═══ [2026-08-11] WHAT THE EDITOR CAN CARRY, DECLARED ═══════════════════════
+   The mirror of `DRAWN_ENTRY_FIELDS` (tools/reveal-ledger.mjs). That set asks
+   *does anything render this field*; this one asks *can the surface Mike writes
+   on hold it and hand it back*. A field must be in both, and the two lists are
+   deliberately NOT merged: a field can be legitimately drawn and not writable
+   (`no` is assigned by Ops), and the day one is added the two questions have to
+   be answered separately or one of them gets answered by accident.
+   `doors` is the section key to expect. It is wired by Ops from what the notes
+   describe, is not in this set, and would therefore be reported the first time
+   a section carried one — which is the behaviour asked for, not an oversight. */
+const READ_ENTRY_FIELDS = new Set([
+  "no", "date", "title", "line", "lead", "tomb", "still", "stillCaption",
+  "sections",
+]);
+const READ_SECTION_FIELDS = new Set(["label", "body"]);
+
 /* ---- tiny AST helpers ----------------------------------------------------
    `strOf` folds the string concatenation this codebase writes everywhere —
    "a long sentence " + "continued on the next line" — into one value. A reader
@@ -82,6 +98,67 @@ function strOf(node) {
     return l !== null && r !== null ? l + r : null;
   }
   return null;
+}
+
+/* ═══ [2026-08-11] A SECTION BODY, IN EITHER SHAPE, AND IT SAYS WHICH ═════════
+   MIKE: the editor showed Record 013 as four headings with nothing under them,
+   and said nothing. FOUR PARAGRAPHS, ON THE SURFACE HE WRITES ON, GONE.
+
+   THE CAUSE WAS ONE BRANCH AND IT WAS NOT A TYPO. `draftEntries` read a body
+   only when the AST node was an `ArrayExpression` and fell to `[]` for anything
+   else — and 013's four bodies are written as plain concatenated strings, which
+   is a shape the RENDERER has always accepted (`SectionBody`: `Array.isArray(
+   body) ? body : [body]`). So the museum drew four paragraphs, the reader saw
+   none, and the two disagreed in silence for as long as 013 has existed.
+
+   THE ASYMMETRY IS THE WHOLE LESSON. A renderer that accepts two shapes and a
+   reader that accepts one is a data-loss machine with no error in it: whatever
+   the reader cannot see, the writer cannot preserve. So this function is the
+   ONE place a body's shape is decided, it accepts exactly what the renderer
+   accepts, and — this is the part that matters — **it never returns emptiness
+   for a shape it did not understand.** A body it cannot read is a FAULT with a
+   name on it, not a zero.
+
+   `shape` IS RETURNED RATHER THAN SWALLOWED because "which shape did you find"
+   is a question somebody had to be able to ask; nobody could, which is why it
+   took a screenshot to find this. `npm run record` prints it now. */
+function paragraphsOf(node) {
+  if (!node) return { shape: "absent", body: [], fault: null };
+  if (node.type === "ArrayExpression") {
+    const body = [];
+    for (let i = 0; i < node.elements.length; i++) {
+      const v = strOf(node.elements[i]);
+      if (v === null) return { shape: "list", body,
+        fault: `is a list whose paragraph ${i + 1} is a `
+             + `${node.elements[i] ? node.elements[i].type : "hole"} this reader cannot fold `
+             + `into a string` };
+      body.push(v);
+    }
+    return { shape: "list", body, fault: null };
+  }
+  const one = strOf(node);
+  if (one !== null) return { shape: "string", body: [one], fault: null };
+  return { shape: node.type, body: [],
+    fault: `is a ${node.type}, which is neither a list of paragraphs nor a `
+         + `string this reader can fold. It would have been dropped` };
+}
+
+/* A SECTION LABEL HAS THREE LEGAL SHAPES AND `null` IS ONE OF THEM. An
+   unlabelled run of paragraphs is a real thing the Record carries — 002 and 003
+   each declare `label: null`, and `sectionsFromText` mints exactly that for a
+   box that opens without a heading — so an explicit null is an ANSWER and not a
+   shape this reader failed at. It is written out rather than folded into
+   `strOf` because `strOf` is shared with the prose walk, where a null literal
+   genuinely is nothing. The first cut of this check flagged both records; the
+   check was wrong and the data was right. */
+function labelOf(node) {
+  if (!node) return { label: null, fault: null };
+  if (node.type === "Literal" && node.value === null) return { label: null, fault: null };
+  const s = strOf(node);
+  if (s !== null) return { label: s, fault: null };
+  return { label: null,
+    fault: `is a ${node.type}, which is neither a string this reader can fold `
+         + `nor an explicit \`null\`. It would have been dropped` };
 }
 
 function propOf(obj, name) {
@@ -336,26 +413,40 @@ export function recordEpoch(src) {
    route into `ledger.json`. This reader sees two fields and builds NOTHING; it
    exists so a check can police a rule, which is exactly what `prose()` above is
    for. A third reader that FEEDS something would be the breach. */
+/* ═══ [2026-08-11] AND THIS READER HAD BEEN LEFT BEHIND BY THE SPLIT ═════════
+   FOUND BY THE SAME SWEEP, AND IT IS THE MORE EXPENSIVE OF THE TWO. This
+   function carried its OWN copy of the pre-split walk — find the track whose
+   `id` is "record" and read `face.entries` — and when the six entries moved out
+   into `robots-record.js` as a top-level `RECORD_ENTRIES` array, the other
+   three walks were repointed at `entriesArrayOf` and this one was not. There is
+   no track and no face in that file, so it returned **an empty array**.
+
+   WHAT WAS DOWNSTREAM OF THAT EMPTY ARRAY: `recordBudgetFaults()` in
+   `tools/reveal-ledger.mjs` — the gate that refuses a headline over 62
+   characters, refuses a summary over 130, and refuses an entry with no headline
+   at all. It iterates this list. **It had been checking nothing**, and
+   `reveal:check` had been printing *"every Record headline fits 62 characters
+   and every summary 130"* on the strength of it. Measured before the fix: 0
+   rows returned, 6 entries in the Record.
+
+   A CHECK THAT PASSES VACUOUSLY IS WORSE THAN NO CHECK, because the line it
+   prints is read as proof. It is the same failure as the body bug wearing a
+   different hat: a reader that met a shape it did not know and returned
+   emptiness instead of saying so.
+
+   IT USES `entriesArrayOf` NOW — the one walk, which accepts both shapes, so a
+   caller reading an old ref still resolves. That is the fourth and last reader
+   in this file to be pointed at it; there are now none carrying their own. */
 export function summaries() {
   const file = path.join(REPO, RECORD_SOURCE);
   const src = fs.readFileSync(file, "utf8");
   const ast = Parser.parse(src, { ecmaVersion: "latest", sourceType: "module" });
-  let track = null;
-  (function visit(n) {
-    if (!n || typeof n !== "object" || track) return;
-    if (Array.isArray(n)) { n.forEach(visit); return; }
-    if (n.type === "ObjectExpression") {
-      const id = strOf(propOf(n, "id"));
-      if (id === RECORD_TRACK_ID && propOf(n, "face")) { track = n; return; }
-    }
-    for (const k of Object.keys(n)) {
-      if (k === "type" || k === "start" || k === "end" || k === "loc") continue;
-      visit(n[k]);
-    }
-  })(ast);
-  if (!track) return [];
-  const entriesNode = propOf(propOf(track, "face"), "entries");
-  if (!entriesNode || entriesNode.type !== "ArrayExpression") return [];
+  const entriesNode = entriesArrayOf(ast);
+  if (!entriesNode) throw new Error(
+    "reveal/record-entries.mjs: summaries() found no entries array. It used to "
+    + "return [] here, and an empty list silently disarmed the index-row budget "
+    + "gate for as long as it was wrong. A reader that cannot find the Record "
+    + "must say so, not agree with everything.");
   return entriesNode.elements
     .filter(el => el && el.type === "ObjectExpression")
     .map(el => {
@@ -418,11 +509,27 @@ export function draftEntries(src) {
     d.setUTCDate(d.getUTCDate() + (n - 1));
     return d.toISOString().slice(0, 10);
   };
+  /* ═══ [2026-08-11] "NO EPOCH" IS NOT "UNREADABLE SHAPE", AND CONFLATING THEM
+     COST THIS ROUND A FALSE ALARM ═══════════════════════════════════════════
+     `date: recordDay(3)` resolves against the epoch. When the epoch cannot be
+     found, `dayFrom` returns null, `val` returned null, and the field was filed
+     as a shape this reader does not understand — which is not true: the shape is
+     perfectly well understood and the CONSTANT is missing.
+     IT WAS FOUND BY BREAKING THE NEW CHECK ON PURPOSE. Handing `draftEntries` a
+     source (which the proof harness must, to test a shape it will not commit)
+     means `recordEpoch` is handed the entries file, where the epoch has not
+     lived since the split — so five `date` fields reported as unreadable on an
+     unbroken Record and would have buried a real fault in noise. A gate whose
+     false positives look exactly like its true positives is a gate nobody
+     reads. They are two lists now. */
+  const NO_EPOCH = Symbol("no epoch");
   const call = (node) => {
     if (!node || node.type !== "CallExpression" || node.callee.type !== "Identifier") return undefined;
     if (node.callee.name === "recordDay") {
       const a = node.arguments[0];
-      return a && a.type === "Literal" ? dayFrom(a.value) : null;
+      if (!a || a.type !== "Literal") return null;
+      const d = dayFrom(a.value);
+      return d === null ? NO_EPOCH : d;
     }
     if (node.callee.name === "placed") return strOf(node.arguments[0]);
     return null;
@@ -438,34 +545,120 @@ export function draftEntries(src) {
   };
 
   const unreadable = [];
+  const epochless = [];
+  const shapes = [];
   const out = entriesNode.elements
-    .filter(el => el && el.type === "ObjectExpression")
-    .map(el => {
+    .map((el, i) => {
+      /* AN ENTRY THAT IS NOT AN OBJECT WAS SILENTLY SKIPPED BY A `.filter`
+         HERE. A spread, a conditional, a constant — any of them and that
+         entry simply was not in the editor, with no line printed anywhere.
+         Same class as the body bug, one level up. */
+      if (!el || el.type !== "ObjectExpression") {
+        unreadable.push(`entry ${i + 1} in the array is a ${el ? el.type : "hole"}, `
+          + `not an object. Nothing can read it and nothing was going to say so`);
+        return null;
+      }
       const e = {};
       const noNode = propOf(el, "no");
       e.no = noNode && noNode.type === "Literal" && typeof noNode.value === "number" ? noNode.value : null;
+      /* EVERY KEY THE ENTRY DECLARES MUST BE ONE THIS READER CAN CARRY. It is
+         the mirror of `DRAWN_ENTRY_FIELDS` in `tools/reveal-ledger.mjs`, which
+         asks *does anything RENDER this field* — and the two questions are not
+         the same one. `wire`, `plates`, `docs` and `note` are all drawn by the
+         museum and none of them is read below, so an entry declaring one would
+         render on the glass and vanish from the editor: Mike would open a
+         record that was missing something, with nothing said. Today no entry
+         declares one, which is exactly when a guard is worth adding — it costs
+         nothing and it cannot be wrong about what to keep. */
+      for (const p of el.properties) {
+        if (p.type !== "Property" || p.computed) {
+          unreadable.push(`Record ${e.no}: a ${p.type} in the entry object, which this reader cannot name`);
+          continue;
+        }
+        const k = p.key.name || p.key.value;
+        if (!READ_ENTRY_FIELDS.has(k))
+          unreadable.push(`Record ${e.no}: declares \`${k}\`, and the editor cannot carry it — `
+            + `it would be missing from the page Mike writes on and gone from anything he saved. `
+            + `Teach draftEntries to read it, or add it to READ_ENTRY_FIELDS with the ruling`);
+      }
       for (const k of ["date", "title", "line", "lead", "tomb", "still", "stillCaption"]) {
         const node = propOf(el, k);
         if (!node) continue;
         const v = val(node);
-        if (v === null) unreadable.push(`Record ${e.no}: \`${k}\``);
-        else e[k] = v;
+        if (v === NO_EPOCH) {
+          epochless.push(`Record ${e.no}: \`${k}\` is recordDay(n) and no RECORD_EPOCH could `
+            + `be resolved, so the entry has no date. The constant lives in `
+            + `src/data/artists/record-epoch.js`);
+        } else if (v === null) {
+          unreadable.push(`Record ${e.no}: \`${k}\` is a ${node.type} this reader cannot read. `
+            + `It would have been dropped`);
+        } else e[k] = v;
       }
       const secs = propOf(el, "sections");
-      e.sections = (secs && secs.type === "ArrayExpression" ? secs.elements : [])
-        .filter(s => s && s.type === "ObjectExpression")
-        .map(s => {
+      if (secs && secs.type !== "ArrayExpression") {
+        unreadable.push(`Record ${e.no}: \`sections\` is a ${secs.type}, not a list`);
+        e.sections = [];
+        return e;
+      }
+      e.sections = (secs ? secs.elements : [])
+        .map((s, i) => {
+          if (!s || s.type !== "ObjectExpression") {
+            unreadable.push(`Record ${e.no}: section ${i + 1} is a ${s ? s.type : "hole"}, not an object`);
+            return null;
+          }
+          for (const p of s.properties) {
+            const k = p.type === "Property" && !p.computed ? (p.key.name || p.key.value) : null;
+            if (k === null || !READ_SECTION_FIELDS.has(k))
+              unreadable.push(`Record ${e.no}: section ${i + 1} declares \`${k ?? p.type}\`, `
+                + `and the editor cannot carry it. \`doors\` is the one to expect — it is `
+                + `wired by Ops and would be lost the first time he saved`);
+          }
+          const lab = labelOf(propOf(s, "label"));
+          if (lab.fault)
+            unreadable.push(`Record ${e.no}: section ${i + 1} \`label\` ${lab.fault}`);
           const bodyNode = propOf(s, "body");
-          const body = bodyNode && bodyNode.type === "ArrayExpression"
-            ? bodyNode.elements.map(b => {
-                const v = strOf(b);
-                if (v === null) unreadable.push(`Record ${e.no}: a section paragraph`);
-                return v === null ? "" : v;
-              })
-            : [];
-          return { label: strOf(propOf(s, "label")), body };
-        });
+          const read = paragraphsOf(bodyNode);
+          if (read.fault)
+            unreadable.push(`Record ${e.no}: section ${i + 1} \`body\` ${read.fault}`);
+          shapes.push({ no: e.no, section: i + 1, shape: read.shape,
+                        paragraphs: read.body.length });
+          return { label: lab.label, body: read.body };
+        })
+        .filter(Boolean);
       return e;
-    });
-  return { entries: out, epoch, unreadable };
+    })
+    .filter(Boolean);
+  return { entries: out, epoch, unreadable, epochless, shapes };
+}
+
+/* ═══ [2026-08-11] THE CHECK THAT REFUSES RATHER THAN DROPS ══════════════════
+   MIKE, on the 013 defect: *"THE REAL LESSON: this was silent."*
+
+   IT IS A GATE AND NOT A CONSOLE LINE, and the difference is the whole point.
+   `draftEntries` has always collected an `unreadable` list; `record-edit.mjs`
+   has always printed it. Both were working on the day 013 lost four paragraphs,
+   because the reader did not KNOW it had failed — a shape it did not understand
+   became an empty array, which is a legal answer, so nothing was ever added to
+   the list. The list was honest and empty.
+
+   So the fix is not a louder printer. It is that **every reader below now
+   distinguishes "this field is absent" from "this field is a shape I do not
+   understand"**, and the second one is a fault with a record number and a field
+   name on it. This function hands that list to the two things that can refuse:
+   `npm run reveal:check`, which fails the packet, and `npm run record`, which
+   declines to write a writing surface it cannot seed truthfully.
+
+   IT IS DELIBERATELY THE SAME WALK Mike's editor is seeded from. A check that
+   parsed the Record its own way could pass while the editor still lost a
+   paragraph — two readers, two answers, and the gate guarding the wrong one. */
+export function recordShapeFaults(src) {
+  const d = draftEntries(src);
+  /* THE EPOCH LIST JOINS THE FAULTS ONLY WHEN THE READER OPENED THE REPO
+     ITSELF. A caller handing in a source is reading some other text — an old
+     ref, a proof harness — and the epoch is not in that text by construction
+     since the split; faulting there would report the reader's own arrangement
+     as a defect in the Record. With no `src` this is the live tree, and a
+     Record whose dates cannot resolve is a real fault: five entries would draw
+     with no dateline, no week and no month band, and nothing else says so. */
+  return src === undefined ? [...d.unreadable, ...d.epochless] : d.unreadable;
 }

@@ -49,10 +49,52 @@
    bar's edge reads as sheared even when it is whole. */
 html { scroll-padding-top: calc(var(--wb-bar-h) + 25px); }
 
+/* ═══ [2026-08-11] THE FLANKS ARE RESERVED, AT EVERY WIDTH ═══════════════════
+   MIKE'S CAPTURE OF /foundation: "THE FOUNDATION" running into the right-hand
+   slot. It was doing exactly what it was told to.
+
+   WHAT IT WAS TOLD. Above 720px the room name was `position: absolute; left:
+   50%` — out of flow, so it took no space, so **nothing reserved anything**.
+   The brand and the exit were laid out as if the centre did not exist and the
+   centre was drawn as if they did not: an absolutely positioned element cannot
+   push, it can only run underneath. That is not a wide-name problem with a
+   short-name workaround; it is a mechanism with no collision term in it at all,
+   and every room was one longer name away from the same picture. The comment
+   below this one has said so since the merge — for PHONE widths, where the same
+   arithmetic was fixed with a flex row. The desktop half kept the absolute
+   centring and kept the defect.
+
+   TWO MECHANISMS FOR ONE BAR IS ALSO WHY IT SURVIVED. The 720px branch was
+   measured to zero overlap and the rule above it was never re-measured, so the
+   bar had a fixed half and a broken half and read as fixed.
+
+   SO THERE IS ONE MECHANISM NOW, AND IT IS THE ROBOTS BAND'S. `.ex-album-banner`
+   solved this exact problem — a centred title that must never obscure either
+   corner — with `minmax(<flank>, 1fr)` on the side tracks, and the note there
+   states the rule this depends on: **a grid track's `1fr` is `minmax(auto,
+   1fr)`, and `auto` refuses to go below its item's min-content width.** The
+   band had to name a length because its side tracks are EMPTY; these two hold
+   the wordmark and the exit, so the reservation is those items' own width and
+   is written as `min-content` rather than as a number somebody has to maintain.
+   `minmax(min-content, 1fr)` is therefore belt and braces: it says the thing
+   `1fr` already means, so that a future `min-width: 0` on either flank — which
+   is exactly what broke the band's first draft — cannot quietly re-open this.
+
+   WHAT THE CENTRE GIVES UP, AND IT IS THE RIGHT TRADE. The name is centred on
+   the BAR while there is room and shifts off the page's axis only once a flank
+   has hit its content width — at which point the alternative was printing over
+   that flank. Past that it ellipsises, which is legible and says there is more.
+
+   THE 720px BRANCH KEEPS ONLY WHAT IS ABOUT SIZE. Its `position: static`, its
+   `flex`, its `min-width` and its ellipsis are unconditional now; what is left
+   below is padding, tracking and type size, which is what that breakpoint was
+   ever about. */
 .wb-bar {
-  display: flex;
+  display: grid;
+  grid-template-columns:
+    minmax(min-content, 1fr) auto minmax(min-content, 1fr);
   align-items: center;
-  justify-content: space-between;
+  gap: 0 16px;
   padding: 14px 32px;
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -71,11 +113,22 @@ html { scroll-padding-top: calc(var(--wb-bar-h) + 25px); }
   text-decoration: none;
   transition: opacity 0.2s;
   white-space: nowrap;
-  flex: 0 0 auto;
+  /* [2026-08-11] `grid-column` REPLACES `flex: 0 0 auto`, AND IT IS DOING THE
+     SAME JOB: the slot is named rather than inferred from source order, so a
+     hidden exit (`display: none`, the one-shop ruling) cannot let the room
+     drift out of the middle track. NO `min-width: 0` HERE OR ON THE EXIT — that
+     is the declaration that would tell the track it may be zero wide and hand
+     the collision straight back. */
+  grid-column: 1;
+  justify-self: start;
 }
 
-/* The room's name, centred on the BAR rather than between its neighbours —
-   absolutely positioned so an exit of any length cannot shove it off centre. */
+/* The room's name, centred on the BAR rather than between its neighbours. */
+/* [2026-08-11] IT IS THE MIDDLE GRID TRACK NOW, NOT AN ABSOLUTE BOX. See the
+   long note on `.wb-bar`. `overflow: hidden` is also what makes this track's
+   automatic minimum size ZERO, which is what lets it ellipsise instead of
+   forcing the bar wider than the viewport — the flanks keep their content
+   width, the centre gives. */
 /* [P6 2026-08-05] AND THE PAGE NAME GOES SLIGHTLY BIGGER. Mike gave this in the
    same breath as bringing the face title down, and they are one instruction:
    the identity of the room was being out-shouted by the heading of one panel
@@ -95,9 +148,14 @@ html { scroll-padding-top: calc(var(--wb-bar-h) + 25px); }
   text-transform: uppercase;
   color: var(--wb-gold);
   margin: 0;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  grid-column: 2;
+  justify-self: center;
+  min-width: 0;
+  max-width: 100%;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 /* only where the name actually does something */
 .wb-bar-room--live { cursor: pointer; }
@@ -122,7 +180,8 @@ html { scroll-padding-top: calc(var(--wb-bar-h) + 25px); }
   text-decoration: none;
   transition: opacity 0.2s;
   white-space: nowrap;
-  flex: 0 0 auto;
+  grid-column: 3;
+  justify-self: end;
 }
 
 .wb-bar-brand:hover,
@@ -156,20 +215,15 @@ html { scroll-padding-top: calc(var(--wb-bar-h) + 25px); }
    Overlap stays 0 at every width. That is the mechanic working — a name that
    trails off is legible and says there is more; a name printed over the exit is
    neither. */
+/* [2026-08-11] WHAT IS LEFT HERE IS ONLY WHAT IS ABOUT SIZE. The geometry —
+   static flow, the shrinking centre, the ellipsis — is unconditional now and
+   lives on the rules above, because the collision it prevents was never a
+   phone-only collision; it was simply only ever measured on a phone. */
 @media (max-width: 720px) {
-  .wb-bar { padding: 12px 16px; }
+  .wb-bar { padding: 12px 16px; gap: 0 10px; }
   .wb-bar-brand { letter-spacing: 0.04em; }
   .wb-bar-exit { letter-spacing: 0.14em; }
   .wb-bar-room {
-    position: static;
-    transform: none;
-    flex: 1 1 auto;
-    min-width: 0;
-    text-align: center;
-    padding: 0 4px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     font-size: 0.8rem;
     letter-spacing: 0.06em;
   }
