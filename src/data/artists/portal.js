@@ -323,8 +323,26 @@ export const PORTAL_ALBUM = {
                  COLD START is a boot from cold, FIRST RUN is the unit's first
                  one. Each is the period term for the state its id names, and
                  each fits the drum face at one line. */
-              { id: "idling-updated", ch: 4, label: "STANDBY", arms: false,
-                why: "This feed is not available." },
+              /* ═══ [CH4 2026-08-12] CHANNEL 4 HOLDS THE CLOSE-UP ════════════
+                 MIKE: channel 4 is a close-up of the MGK-VIIIp; channel 3 is
+                 the VIIIp's screen. Channel 3 is `standard` and already opens
+                 the twin, so only this position moved.
+                 THE `id` IS DELIBERATELY UNCHANGED. It is what the latch puts
+                 in the event as `preset` and what a twin URL carries, and P5
+                 above records that when these legends were recut NO id moved.
+                 Repurposing in place keeps `preset=idling-updated` resolving;
+                 renumbering the drum would have moved five engraved levers to
+                 add one.
+                 WHAT IT COST: STANDBY is off the drum. It was an engraved
+                 position that did not arm and held nothing, and the position
+                 now holds a photograph — the first one on this instrument.
+                 `DETAIL` IS OPS' WORD AND IS ON THE REGISTER (`CH-a`). The
+                 engraved legends are Mike's to write (see the `papa` note
+                 below); this is the period term for a close view and it fits
+                 the drum face at one line, but he has not said it. */
+              { id: "idling-updated", ch: 4, label: "DETAIL", arms: true,
+                src: "/held/robots/reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png",
+                frameTitle: "MGK-VIIIp — the close-up" },
               { id: "boot-playback", ch: 5, label: "COLD START", arms: false,
                 why: "This feed is not available." },
               { id: "off-first-boot", ch: 6, label: "FIRST RUN", arms: false,

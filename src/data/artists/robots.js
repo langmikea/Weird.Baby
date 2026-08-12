@@ -167,7 +167,7 @@ import RobotsExhibitFlow from "../../routes/robots/RobotsExhibitFlow.jsx";
    the day the Record delivers it — and the resolver computes the stage door's
    prefix when the museum is still being built. Read src/lib/placement.js before
    changing a path here, and reveal/stage.mjs for what the two stages are. */
-import { placed, placedPresets } from "../../lib/placement.js";
+import { placed, placedPresets, placedTiles } from "../../lib/placement.js";
 /* [F1 2026-08-06] all three FAQ faces in this wing are built by one function —
    see src/data/faq-face.js for why they cannot carry a blurb or a footer. */
 import { faqFace } from "../faq-face.js";
@@ -889,15 +889,24 @@ const spine = [
     art: placed("/robots/art/mgk-niac-cover.png"),
     accent: null,
     /* [R4] THE POSTER WAS THE CHEST — torso, both shoulders, the top of two
-       limbs. That is the robot, so it is gone from here. The poster is the
-       meltdown: the whole interior of the cabinet flooded red, which is the one
+       limbs. That is the robot, so it is gone from here. The poster is the one
        plate in the set that reads as A MACHINE DOING SOMETHING without showing
-       an operator doing it. It is also the fourth tile of the archive below,
-       named here rather than left unremarked, the way the VIIIp album names
-       the family shot's double duty. */
-    viewerPoster: placed("/robots/reference/mgk-viii/core_meltdown.jpg"),
+       an operator doing it. It is also a tile of the archive below, named here
+       rather than left unremarked, the way the VIIIp album names the family
+       shot's double duty.
+       [CH4 2026-08-12] AND IT IS `output_row.jpg` NOW, BECAUSE THE MELTDOWN IS
+       DELETED. Mike ruled `core_meltdown.jpg` gone with three other mainframe
+       plates; `placed()` would have handed this album a live address for a file
+       that is not there, which is a broken poster rather than a missing one.
+       OUTPUT_ROW IS THE ONLY MAINFRAME PHOTOGRAPH LEFT, so the choice was it or
+       nothing, and R4's sentence above still describes it — the bar bank
+       mid-pattern is the machine doing something with no operator in frame.
+       THE CAPTION IS RESTATED FROM THE TILE'S OWN LABEL and not written fresh:
+       the wall has called this picture "the red bar bank at the base,
+       mid-pattern" since it was hung. Register `CH-c`. */
+    viewerPoster: placed("/robots/reference/mgk-viii/output_row.jpg"),
     viewerPosterCaption:
-      "MGK-NIAC, the interior in trouble.",
+      "MGK-NIAC, the output row mid-pattern.",
     tracks: [
       /* ═══ [P2 2026-08-05] THE NAME IS DELETED IN TOTAL ══════════════════
          MIKE'S INSTRUCTION, IN THOSE WORDS, and it is a deletion rather than a
@@ -1128,55 +1137,29 @@ const spine = [
              and `archiveEmpty` below prints exactly the sentence it printed for
              the whole of H2. The empty state is not deleted; it is the OTHER
              stage, and it is one word away. */
-          presets: placedPresets([
-            { id: "whole", label: "The whole cabinet", tiles: [
-              { img: "/robots/reference/mgk-viii/cabinet_whole.jpg",
-                href: "/robots/reference/mgk-viii/cabinet_whole.jpg",
-                label: "The cabinet, whole — lit core, bar bank, both feet",
-                date: "MAR 2021" },
-            ] },
-            { id: "bars", label: "Through the bars", tiles: [
-              { img: "/robots/reference/mgk-viii/core_helical.jpg",
-                href: "/robots/reference/mgk-viii/core_helical.jpg",
-                label: "The core, through the cage bars — warm flanks either side",
-                date: "MAR 2021" },
-              { img: "/robots/reference/mgk-viii/column_lit.jpg",
-                href: "/robots/reference/mgk-viii/column_lit.jpg",
-                label: "A lit column behind the bars, and the cabinet's edge",
-                date: "MAR 2021" },
-            ] },
-            { id: "running", label: "Running, and in trouble", tiles: [
-              { img: "/robots/reference/mgk-viii/output_row.jpg",
-                href: "/robots/reference/mgk-viii/output_row.jpg",
-                label: "The output row — the red bar bank at the base, mid-pattern",
-                date: "MAR 2021" },
-              { img: "/robots/reference/mgk-viii/core_meltdown.jpg",
-                href: "/robots/reference/mgk-viii/core_meltdown.jpg",
-                label: "The whole interior in red-orange, the core glowing like an element",
-                date: "MAR 2021" },
-            ] },
-            { id: "all", label: "Every photograph", tiles: [
-              { img: "/robots/reference/mgk-viii/cabinet_whole.jpg",
-                href: "/robots/reference/mgk-viii/cabinet_whole.jpg",
-                label: "The cabinet, whole — lit core, bar bank, both feet",
-                date: "MAR 2021" },
-              { img: "/robots/reference/mgk-viii/core_helical.jpg",
-                href: "/robots/reference/mgk-viii/core_helical.jpg",
-                label: "The core, through the cage bars — warm flanks either side",
-                date: "MAR 2021" },
-              { img: "/robots/reference/mgk-viii/column_lit.jpg",
-                href: "/robots/reference/mgk-viii/column_lit.jpg",
-                label: "A lit column behind the bars, and the cabinet's edge",
-                date: "MAR 2021" },
-              { img: "/robots/reference/mgk-viii/output_row.jpg",
-                href: "/robots/reference/mgk-viii/output_row.jpg",
-                label: "The output row — the red bar bank at the base, mid-pattern",
-                date: "MAR 2021" },
-              { img: "/robots/reference/mgk-viii/core_meltdown.jpg",
-                href: "/robots/reference/mgk-viii/core_meltdown.jpg",
-                label: "The whole interior in red-orange, the core glowing like an element",
-                date: "MAR 2021" },
-            ] },
+          /* ═══ [CH4 2026-08-12] FOUR GROUPINGS BECAME ONE PICTURE ═══════════
+             MIKE DELETED FOUR OF THIS WALL'S FIVE PLATES — cabinet_whole,
+             core_helical, column_lit and core_meltdown. `output_row.jpg` is
+             the whole of the mainframe's photography now.
+             IT IS `collage` AND NOT `presets`, AND THAT IS THE BUG THIS ROUND
+             NEARLY SHIPPED. `placedPresets()` drops an emptied grouping by
+             itself, so the deletions would have left "Running, and in trouble"
+             and "Every photograph" — TWO buttons over the SAME single tile,
+             which is a choice that isn't one. Cutting it to a lone preset is
+             worse and silently: `ArchiveWall` only takes the preset path at
+             `length > 1`, and one preset falls through to `archiveSpreads()`,
+             which reads `spreads`/`collage` and has never read `presets` — so
+             the wall would have found nothing, printed `archiveEmpty`, and told
+             a reader NO PHOTOGRAPH IS ON THE WALL while holding one.
+             SO THE SHAPE FOLLOWS THE HOLDINGS. One picture is a collage of one:
+             it draws, it draws no filter strip, and if this last plate ever
+             goes `placedTiles` empties the array and `archiveEmpty` prints —
+             which is then TRUE. The groupings come back with the pictures. */
+          collage: placedTiles([
+            { img: "/robots/reference/mgk-viii/output_row.jpg",
+              href: "/robots/reference/mgk-viii/output_row.jpg",
+              label: "The output row — the red bar bank at the base, mid-pattern",
+              date: "MAR 2021" },
           ]),
           archiveEmpty:
             "No photograph of the mainframe is on the wall. The museum holds " +
@@ -1239,9 +1222,12 @@ const spine = [
            The second of the two rows parity requires, and unlike Documentation
            it did NOT need the stub-law exception: every answer below was already
            asserted in this file about these machines.
-           THE STILL IS `column_lit.jpg`, which the deletion of THE NAME freed.
-           It is still a tile on the wall above — the same double duty the bezel
-           does on the portable.
+           [CH4 2026-08-12] THE TWO SENTENCES HERE ABOUT `column_lit.jpg` ARE
+           STRUCK: Mike deleted that plate, and they said it was "still a tile
+           on the wall above", which stopped being true the moment he did. This
+           face has carried no still since F1 below, so nothing renders either
+           way — but a comment that names a deleted file as present is exactly
+           the rot K1 found twice in this album already.
            [R7/N10 2026-08-06] IT IS AN ACCORDION NOW AND IT SITS AT THE BOTTOM
            OF THE MENU. Both are Mike's, and the format is the Information
            Booth's, which he ruled is the established one. The "Q" stamps went
@@ -1253,9 +1239,10 @@ const spine = [
         tags: ["faq", "questions", "niac", "mainframe"],
         /* [F1 2026-08-06] BUILT BY `faqFace()`. The still that used to sit here
            (`column_lit.jpg`) and the "MGK-NIAC · FAQ" footer are both struck —
-           the booth's shape has neither, and the plate is still a tile on this
-           album's own Image Archive, which is where it was already doing its
-           second job. */
+           the booth's shape has neither.
+           [CH4 2026-08-12] the clause that followed said the plate was "still a
+           tile on this album's own Image Archive". It is not: Mike deleted the
+           file, and that wall is one photograph now. */
         face: faqFace("MGK-NIAC", [
           { title: "Does it still work?",
             line: "Yes. Both units power on and run their own firmware.",
@@ -1548,16 +1535,21 @@ const spine = [
              which IS a date. Whether it is the right one on a wing whose story
              begins in 2026 is a question about the story, and it is Mike's. */
           presets: placedPresets([
+            /* [CH4 2026-08-12] FOUR TILES CAME OFF THIS WALL. `front_full.png`,
+               `monitor_base.png` and `unit_new_base.png` are Mike's deletions;
+               `rear_power_switch.png` went with Record 013, which was the entry
+               that delivered it. Nine photographs became five.
+               THE GROUPINGS SURVIVE HERE AND DID NOT ON THE MAINFRAME, and the
+               difference is only arithmetic: "The glass" is untouched at three
+               and "Every photograph" still holds five, so the strip is still a
+               choice. "As they arrived" and "Above and below" are down to one
+               tile each and are KEPT — a grouping of one is still a true
+               statement about the holdings, and `placedTiles` will drop either
+               of them by itself the day its last picture goes. */
             { id: "arrived", label: "As they arrived", tiles: [
               { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
                 href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
                 label: "The pair, front and top, as received" },
-              { img: "/robots/reference/photos/front_full.png",
-                href: "/robots/reference/photos/front_full.png",
-                label: "The front, whole" },
-              { img: "/robots/reference/photos/rear_power_switch.png",
-                href: "/robots/reference/photos/rear_power_switch.png",
-                label: "The power switch, round the back" },
             ] },
             { id: "glass", label: "The glass", tiles: [
               { img: "/robots/reference/photos/front_screen.png",
@@ -1574,20 +1566,11 @@ const spine = [
               { img: "/robots/reference/photos/top_monitor.png",
                 href: "/robots/reference/photos/top_monitor.png",
                 label: "The top monitor" },
-              { img: "/robots/reference/photos/monitor_base.png",
-                href: "/robots/reference/photos/monitor_base.png",
-                label: "The base it stands on" },
-              { img: "/robots/reference/photos/unit_new_base.png",
-                href: "/robots/reference/photos/unit_new_base.png",
-                label: "The unit on its new base" },
             ] },
             { id: "all", label: "Every photograph", tiles: [
               { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
                 href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
                 label: "The pair, front and top, as received" },
-              { img: "/robots/reference/photos/front_full.png",
-                href: "/robots/reference/photos/front_full.png",
-                label: "The front, whole" },
               { img: "/robots/reference/photos/front_screen.png",
                 href: "/robots/reference/photos/front_screen.png",
                 label: "The front glass, lit" },
@@ -1597,15 +1580,6 @@ const spine = [
               { img: "/robots/reference/photos/top_monitor.png",
                 href: "/robots/reference/photos/top_monitor.png",
                 label: "The top monitor" },
-              { img: "/robots/reference/photos/monitor_base.png",
-                href: "/robots/reference/photos/monitor_base.png",
-                label: "The base it stands on" },
-              { img: "/robots/reference/photos/unit_new_base.png",
-                href: "/robots/reference/photos/unit_new_base.png",
-                label: "The unit on its new base" },
-              { img: "/robots/reference/photos/rear_power_switch.png",
-                href: "/robots/reference/photos/rear_power_switch.png",
-                label: "The power switch, round the back" },
               { img: "/robots/art/viiip-v2.png",
                 href: "/robots/art/viiip-v2.png",
                 label: "The cover image — the glass carries the BIOS beat" },

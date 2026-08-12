@@ -114,9 +114,13 @@ const A = [
      disk, out of `asset-table.json` and out of `assets.json`. THE PRECEDENT
      THEY SET IS REVERSED WITH THEM — *"a real photograph the museum owns is
      not deleted on Ops' word"* stands exactly as written; this is not Ops'
-     word. `column_lit.jpg` survives because it is a MAINFRAME plate and is on
-     the Image Archive wall. */
-  ["/robots/reference/mgk-viii/column_lit.jpg", "VERIFIED", PHOTO, false, ""],
+     word.
+     [CH4 2026-08-12] AND THE SENTENCE THAT FOLLOWED IS SPENT: it said
+     `column_lit.jpg` survives because it is a mainframe plate on the Image
+     Archive wall. Mike has now struck that file too, with `cabinet_whole.jpg`,
+     `core_helical.jpg` and `core_meltdown.jpg` — four of the mainframe's five
+     plates in one ruling. `output_row.jpg` is the survivor and the wall is one
+     picture. Same precedent, same reading: not Ops' word. */
   /* [C4 2026-08-10] THIS ROW IS THE OTHER END OF A CLAIM THAT IS NOW FALSE, AND
      ONLY THE CLAIM IS STRUCK. The Portal cover's row used to say its badge was a
      crop of this file; Mikey hand-authored the four covers on 2026-08-10 and
@@ -143,8 +147,21 @@ const A = [
     "a newer front-view photograph of the same object as art/viiip.png, placed 2026-08-10 and used going forward. Its lettering is pending Mike's read; the text field below is not a claim about what it says.",
     true, "Not yet read. The unit's own faceplate and glass are expected to carry lettering, as they do in art/viiip.png, but nobody has confirmed the wording in these bytes.",
     "pending Mike's read - placed 2026-08-10, lettering unconfirmed"],
-  ["/robots/reference/photos/front_full.png", "VERIFIED", PHOTO, true,
-    "Faceplate MGK-VIIIp · The Informer · ABEAL; the glass reads ABEAL MGK-VIIIp / LOADING SUCCESS."],
+  /* [CH4 2026-08-12] `front_full.png`, `monitor_base.png`, `unit_new_base.png`
+     and `rear_power_switch.png` are deleted — the first three on Mike's ruling,
+     the fourth with Record 013, the entry that delivered it. Their `textInImage`
+     readings went with them; all three carried the same faceplate lettering,
+     which `front_screen.png` and `top_monitor.png` still carry and still
+     declare, so nothing unread has been lost.
+     THE NEW ROW BELOW IS CHANNEL 4 and it is declared at its PUBLIC address like
+     every other governed picture (C1), even though `portal.js` names the held
+     one — the file is under `public/held/`, the existsSync check tries both, and
+     `portal-cover.png` has been declared exactly this way since P2. */
+  ["/robots/reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png", "MIKE",
+    "supplied by Mike 2026-08-12 as the Portal's channel 4, with a companion RED MARKERS layout file kept as a spec in the robots repo. A COMPOSITE rather than a single exposure: the machine's own monitor bezel, cut out on alpha, with three panels set into the glass.",
+    true,
+    "NOT READ, AND IT CARRIES LETTERING. Embossed text is legible in the lower-left panel — 'MADE IN' and 'U.S.A. BY' curving around a circular badge — and there is further reversed/mirrored embossing in the upper-right panel that has not been resolved. THE LOWER-RIGHT PANEL IS BLANK GREY and the marker file shows a slot there, so this composite has an UNFILLED REGION. FOR MIKE: confirm what the panels are, and whether the blank one is finished.",
+    "NOT INSPECTED — Ops has looked at the pixels and reports what is visible; nobody has confirmed what the object in the panels is."],
   ["/robots/reference/photos/front_screen.png", "VERIFIED", PHOTO, true,
     "THE GLASS IS MIRROR-REVERSED IN THIS FILE. It reads right-to-left: '-(A)BEAL MGK-VIIIp )-' / "
     + "'Please Select:' / 'MGK-VIIIp'. Confirmed at full resolution, not an artefact of the contact "
@@ -154,11 +171,6 @@ const A = [
   ["/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png", "VERIFIED", PHOTO, false, ""],
   ["/robots/reference/photos/top_monitor.png", "VERIFIED", PHOTO, true,
     "Cyan screen text on the top monitor, including 'Waiting for User Input'. The machine's own output."],
-  ["/robots/reference/photos/monitor_base.png", "VERIFIED", PHOTO, true,
-    "Faceplate MGK-VIIIp · The Informer · ABEAL."],
-  ["/robots/reference/photos/unit_new_base.png", "VERIFIED", PHOTO, true,
-    "Faceplate MGK-VIIIp · The Informer · ABEAL."],
-  ["/robots/reference/photos/rear_power_switch.png", "VERIFIED", PHOTO, false, ""],
   /* [R4 2026-08-05] THE THREE MAINFRAME PLATES, carried across from the robots
      repo's own culled 2021 set (`robots/mgk-viii/plates/2021-03-19/`, Mike's
      cull of 2026-08-03) so the MGK-NIAC album can show the machine it is named
@@ -166,9 +178,7 @@ const A = [
      plate on that album — the house's own camera, the house's own bench — and
      the crops are the robots repo's, taken under its OBFUSCATION_LAW: cut at
      the cage bars on four sides, no full silhouette, the room cropped out. */
-  ["/robots/reference/mgk-viii/core_helical.jpg", "VERIFIED", PHOTO, false, ""],
   ["/robots/reference/mgk-viii/output_row.jpg", "VERIFIED", PHOTO, false, ""],
-  ["/robots/reference/mgk-viii/core_meltdown.jpg", "VERIFIED", PHOTO, false, ""],
   /* [K1 2026-08-07] AND THE MANUAL'S TITLE PAGE GOES WITH THEM, on the same
      ruling and with one difference worth writing down: THIS ONE COSTS NOTHING.
      `structure-issue-p1.png` was byte-identical to
@@ -216,12 +226,10 @@ const A = [
   ["/images/wal/carsie-blanton-poster.png", "VERIFIED", WAL, true,
     "CARSIE BLANTON — the artist's own poster lettering."],
   ["/images/wal/hunter-root-cover.jpg", "VERIFIED", WAL, false, ""],
-  ["/images/wal/hunter-root-plate.jpg", "VERIFIED",
-    "cropped from MediaVault MV-HR-20260405-037, the museum's own vault; the crop is logged in STATE.md v41/C4",
-    true,
-    "The subject's shirt reads CHET VINCENT AND THE MUSIC INDUSTRY across the chest — ANOTHER BAND'S "
-    + "NAME, prominent and legible, on the portrait this wing uses to introduce Hunter Root. Nothing "
-    + "on the page mentions it. FOR MIKE: keep, crop tighter, or replace."],
+  /* [CH4 2026-08-12] `hunter-root-plate.jpg` IS DELETED AND ITS OPEN QUESTION
+     CLOSES BY SUBTRACTION. The row asked Mike to keep, crop tighter or replace a
+     portrait whose shirt carried ANOTHER BAND'S NAME across the chest; he took
+     the fourth option. His card carries no plate now. */
   ["/images/wal/jesse-welles-cover.jpg", "VERIFIED", WAL, false, ""],
   ["/images/wal/jesse-welles-plate.webp", "VERIFIED", WAL, false, ""],
   ["/images/wal/mikey-mike-cover.jpg", "VERIFIED", WAL, false, ""],
@@ -241,9 +249,10 @@ const A = [
     "the house's own artwork - hand-authored by Mikey, 2026-08-10. Not generated; make_unit_covers.py is fenced from this path.",
     true,
     "PORTAL - WEIRD.BABY ROBOTS", MIKEY_SEEN],
-  ["/robots/reference/mgk-viii/cabinet_whole.jpg", "VERIFIED",
-    "the museum's own photograph of its own unit, cut from IMG_1526.MOV (the 2021 build video in the CSR archive, SHA-256 20069C47...D97FED) at 00:58.0, cropped to the cabinet's own bounding box 108,142 -> 966,1580 of the rotated 1080x1920 frame. A re-encode, so the source file's GPS tag does not travel.",
-    false, ""],
+  /* [CH4 2026-08-12] `cabinet_whole.jpg` is deleted on Mike's ruling. Its
+     derivation — the 2021 build video, the frame time, the crop box — is kept in
+     this comment rather than in a row, because it is the only place that
+     recipe was ever written down and the picture may be cut again. */
 ];
 
 /* [2026-08-10] A SIXTH SLOT: A PER-ROW `inspected`, BECAUSE ONE DATE NO LONGER
@@ -324,16 +333,44 @@ if (process.argv.includes("--write")) {
     const pub = (r) => r.startsWith(STAGE_PREFIX + "/") ? r.slice(STAGE_PREFIX.length) : r;
     const lost = Object.values(live).map((e) => e.ref)
       .filter((r) => !declared.has(r) && !declared.has(pub(r)));
-    if (lost.length) {
+
+    /* ═══ [CH4 2026-08-12] `--drop-deleted`, AND IT CANNOT DROP A LIVE ROW ════
+       THE GUARD HAD NO WAY THROUGH, AND A ROUND THAT DELETES PICTURES NEEDS ONE.
+       Mike struck nine photographs; their nine declarations must go with them,
+       and this guard read that as the drift it was built to refuse. The two
+       cases are genuinely different and the difference is CHECKABLE: drift is a
+       declaration whose FILE IS STILL THERE, and a deletion is a declaration
+       whose file is not — at either address, because a picture has two (§8).
+       SO THE FLAG IS NOT A `--force`. It permits dropping exactly those refs
+       with nothing on disk behind them, and it re-refuses on any row that still
+       has a file, naming it. Passing it after a genuine drift changes nothing,
+       which is the property that makes it safe to leave in the tool.
+       IT PRINTS WHAT IT DROPPED. A deletion nobody is shown is the silence the
+       guard exists to prevent, and the flag would otherwise reintroduce it. */
+    const onDisk = (r) => fs.existsSync(path.join(REPO, "public" + pub(r)))
+      || fs.existsSync(path.join(REPO, "public" + STAGE_PREFIX + pub(r)));
+    const dropping = process.argv.includes("--drop-deleted");
+    const stillThere = dropping ? lost.filter(onDisk) : lost;
+
+    if (stillThere.length) {
       console.error(
-        "\nREFUSED — writing would delete " + lost.length + " declaration(s) that exist" + 
-        "\nin provenance/assets.json and are NOT in this file's array. That is M99, and" + 
-        "\nit is what this guard exists for: the declarer has drifted from the file it" + 
+        "\nREFUSED — writing would delete " + stillThere.length + " declaration(s) that exist" +
+        "\nin provenance/assets.json and are NOT in this file's array. That is M99, and" +
+        "\nit is what this guard exists for: the declarer has drifted from the file it" +
         "\nwrites, so a --write is a silent deletion rather than a regeneration.\n\n" +
-        lost.map((r) => "  " + r).join("\n") +
-        "\n\nEither add them to A above, or decide assets.json is the source and retire" + 
-        "\nthis generator. See OPEN_ACTIONS H-b.");
+        stillThere.map((r) => "  " + r).join("\n") +
+        (dropping
+          ? "\n\n--drop-deleted was passed and did NOT cover these: every one still has a" +
+            "\nfile on disk, so dropping it would lose a declaration for a live picture."
+          : "\n\nEither add them to A above, or decide assets.json is the source and retire" +
+            "\nthis generator. See OPEN_ACTIONS H-b. If the pictures were DELETED, the" +
+            "\nflag for that is --drop-deleted, which drops only refs with no file.") +
+        "");
       process.exit(1);
+    }
+    if (dropping && lost.length) {
+      console.log("--drop-deleted — " + lost.length + " declaration(s) dropped, no file on disk:");
+      for (const r of lost) console.log("  " + r);
     }
   }
   fs.writeFileSync(at, JSON.stringify(out, null, 1) + "\n");

@@ -41,14 +41,6 @@
    "text": "MGK-VIIIp - WEIRD.BABY ROBOTS",
    "inspected": "2026-08-10 - art by Mikey; lettering read off the files at full resolution and confirmed against Mike's ruling"
   },
-  "a8eb6f9b543bd6d2": {
-   "ref": "/robots/reference/mgk-viii/column_lit.jpg",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
-   "textInImage": false,
-   "text": "",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
   "babf08d5391a6805": {
    "ref": "/robots/art/viiip.png",
    "c": "VERIFIED",
@@ -65,13 +57,13 @@
    "text": "Not yet read. The unit's own faceplate and glass are expected to carry lettering, as they do in art/viiip.png, but nobody has confirmed the wording in these bytes.",
    "inspected": "pending Mike's read - placed 2026-08-10, lettering unconfirmed"
   },
-  "fa9be2e52f108e76": {
-   "ref": "/robots/reference/photos/front_full.png",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
+  "85b8441bc1f818a1": {
+   "ref": "/robots/reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png",
+   "c": "MIKE",
+   "s": "supplied by Mike 2026-08-12 as the Portal's channel 4, with a companion RED MARKERS layout file kept as a spec in the robots repo. A COMPOSITE rather than a single exposure: the machine's own monitor bezel, cut out on alpha, with three panels set into the glass.",
    "textInImage": true,
-   "text": "Faceplate MGK-VIIIp · The Informer · ABEAL; the glass reads ABEAL MGK-VIIIp / LOADING SUCCESS.",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
+   "text": "NOT READ, AND IT CARRIES LETTERING. Embossed text is legible in the lower-left panel — 'MADE IN' and 'U.S.A. BY' curving around a circular badge — and there is further reversed/mirrored embossing in the upper-right panel that has not been resolved. THE LOWER-RIGHT PANEL IS BLANK GREY and the marker file shows a slot there, so this composite has an UNFILLED REGION. FOR MIKE: confirm what the panels are, and whether the blank one is finished.",
+   "inspected": "NOT INSPECTED — Ops has looked at the pixels and reports what is visible; nobody has confirmed what the object in the panels is."
   },
   "b10283c29f5fb515": {
    "ref": "/robots/reference/photos/front_screen.png",
@@ -97,48 +89,8 @@
    "text": "Cyan screen text on the top monitor, including 'Waiting for User Input'. The machine's own output.",
    "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
   },
-  "65d8d5671f02061f": {
-   "ref": "/robots/reference/photos/monitor_base.png",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
-   "textInImage": true,
-   "text": "Faceplate MGK-VIIIp · The Informer · ABEAL.",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
-  "61835cf5316ab278": {
-   "ref": "/robots/reference/photos/unit_new_base.png",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
-   "textInImage": true,
-   "text": "Faceplate MGK-VIIIp · The Informer · ABEAL.",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
-  "ed3dfd4aeda5e5bc": {
-   "ref": "/robots/reference/photos/rear_power_switch.png",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
-   "textInImage": false,
-   "text": "",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
-  "60b433b17fa548b2": {
-   "ref": "/robots/reference/mgk-viii/core_helical.jpg",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
-   "textInImage": false,
-   "text": "",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
   "f7c9c35eadc6d599": {
    "ref": "/robots/reference/mgk-viii/output_row.jpg",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
-   "textInImage": false,
-   "text": "",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
-  "411de443a522e90a": {
-   "ref": "/robots/reference/mgk-viii/core_meltdown.jpg",
    "c": "VERIFIED",
    "s": "the museum's own photographs of its own unit, held in public/robots/reference/",
    "textInImage": false,
@@ -225,14 +177,6 @@
    "text": "",
    "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
   },
-  "91910b9203abaa53": {
-   "ref": "/images/wal/hunter-root-plate.jpg",
-   "c": "VERIFIED",
-   "s": "cropped from MediaVault MV-HR-20260405-037, the museum's own vault; the crop is logged in STATE.md v41/C4",
-   "textInImage": true,
-   "text": "The subject's shirt reads CHET VINCENT AND THE MUSIC INDUSTRY across the chest — ANOTHER BAND'S NAME, prominent and legible, on the portrait this wing uses to introduce Hunter Root. Nothing on the page mentions it. FOR MIKE: keep, crop tighter, or replace.",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
-  },
   "0a43fa9fda35eb6c": {
    "ref": "/images/wal/jesse-welles-cover.jpg",
    "c": "VERIFIED",
@@ -264,14 +208,6 @@
    "textInImage": true,
    "text": "PORTAL - WEIRD.BABY ROBOTS",
    "inspected": "2026-08-10 - art by Mikey; lettering read off the files at full resolution and confirmed against Mike's ruling"
-  },
-  "7b5f79cef7f944e3": {
-   "ref": "/robots/reference/mgk-viii/cabinet_whole.jpg",
-   "c": "VERIFIED",
-   "s": "the museum's own photograph of its own unit, cut from IMG_1526.MOV (the 2021 build video in the CSR archive, SHA-256 20069C47...D97FED) at 00:58.0, cropped to the cabinet's own bounding box 108,142 -> 966,1580 of the rotated 1080x1920 frame. A re-encode, so the source file's GPS tag does not travel.",
-   "textInImage": false,
-   "text": "",
-   "inspected": "2026-08-04 — contact sheet at 420px/tile; front_screen.png also at full-resolution crop"
   }
  }
 }

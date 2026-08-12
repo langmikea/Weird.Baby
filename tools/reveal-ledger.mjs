@@ -425,7 +425,14 @@ function vesselFaults() {
     let row;
     try {
       row = flat(manualPageRow(7, {
-        prod, calledBy: ["record.013"],
+        /* [CH4 2026-08-12] WAS `record.013`, WHICH IS DELETED. `manualPageRow`
+           validates `calledBy` against real `record.NNN` rows, so this specimen
+           stopped building the moment the entry went — the self-test would have
+           failed on its own scaffolding rather than on the vessel. `record.001`
+           is the volume's first surviving entry and is as arbitrary a choice as
+           013 was: the specimen is thrown away, and all this field has to be is
+           an entry that exists. */
+        prod, calledBy: ["record.001"],
         assets: prod === "placed" ? ["/robots/manual/working-copy-p1.png"] : [],
       }));
     } catch (err) {

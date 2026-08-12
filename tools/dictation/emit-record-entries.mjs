@@ -238,7 +238,28 @@ const CLOSE = "\n];\n";
 if (!before.includes(OPEN)) die(`${REL} has no \`${OPEN.trim()}\` line — this tool does not know where the array starts.`);
 if (!before.endsWith(CLOSE)) die(`${REL} does not end in \`];\` — this tool does not know where the array ends.`);
 
-const preamble = before.slice(0, before.indexOf(OPEN) + OPEN.length);
+let preamble = before.slice(0, before.indexOf(OPEN) + OPEN.length);
+
+/* ═══ GUARD 7 — [CH4 2026-08-12] THE `placed` IMPORT COMES BACK BY ITSELF ═══
+   `--write` replaces the ARRAY and keeps the preamble, which is what makes it
+   safe to run against a commented file. That same split is why it can emit a
+   call to an identifier the file no longer imports: Record 013 was the only
+   entry that ever delivered a picture, it was deleted, and `placed` went with
+   it because `no-unused-vars` fails on an import nothing uses.
+   THE FAILURE IT PREVENTS IS THE SILENT KIND. `placed(...)` with no import
+   PARSES — every guard below passes, `parseRecord` reads the path straight out
+   of the call node, the gates stay green — and the museum throws
+   `placed is not defined` on first render of the wing. So the check is on the
+   text this tool is about to write, not on what a reader might notice. */
+if (/\bplaced\(/.test(BODY) && !/^import \{ placed \}/m.test(preamble)) {
+  const anchor = 'import { recordDay } from "./record-epoch.js";';
+  if (!preamble.includes(anchor))
+    die(`${REL} needs the \`placed\` import restored (an entry delivers a picture) and this `
+      + `tool cannot find the \`recordDay\` import to put it beside. Add it by hand.`);
+  preamble = preamble.replace(anchor, 'import { placed } from "../../lib/placement.js";\n' + anchor);
+  console.log("record:land — an entry delivers a picture, so the `placed` import was restored.");
+}
+
 const after = preamble + BODY + CLOSE;
 
 /* guard 3 — nothing may vanish */

@@ -1806,29 +1806,6 @@
    "transferWeek": 0
   },
   {
-   "id": "record.013",
-   "name": "Record 013 — one entry in The Record.",
-   "cls": "document",
-   "where": "src/data/artists/robots-record.js face.entries",
-   "build": "PARTIAL",
-   "reach": "inside THE RECORD, on /robots",
-   "state": "REVEALED",
-   "when": null,
-   "deps": [
-    "M18 — twenty-seven open questions on this entry"
-   ],
-   "arc": null,
-   "shown": false,
-   "assets": [
-    "A-c5bccbede9"
-   ],
-   "prod": null,
-   "calledBy": [],
-   "note": "THE PROTOTYPE. Mike, 2026-08-07: chosen because it was interesting enough to find the Record's structure, and it did — it is NOT day one, needs no re-dating and no defending, and the real Record starts at 001 when he dictates it. It is therefore NOT in the volume's sequence, and every Ops instrument that reasons about the story says so; nothing on the glass does, because that line's subject would be the making of the museum (Doctrine 11). Kept rather than retired on his own criterion — it is the only thing exercising RecordEntry.jsx, the index budgets, the per-entry derivation and the pull-back rule's single delivered picture. Stripped at v47 to the four facts he supplied; every gap that exposed is a question in M18 rather than a sentence in the data. Its NUMBER is the one open piece — B-b.",
-   "transfer": "BLAST",
-   "transferWeek": 0
-  },
-  {
    "id": "doc.record.evidence",
    "name": "The Record's evidence, photographed. `.vp-fe-plate` is built and empty.",
    "cls": "document",
@@ -2754,9 +2731,7 @@
    "deps": [],
    "arc": null,
    "shown": false,
-   "assets": [
-    "A-c21bb8cd4d"
-   ],
+   "assets": [],
    "prod": null,
    "calledBy": [],
    "note": "M3: the portrait is a phone selfie in a vehicle wearing another band's name.",

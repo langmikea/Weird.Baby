@@ -4727,21 +4727,6 @@
    "c": "VERIFIED",
    "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
   },
-  "73f5a124f0702265": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 393,
-   "t": "On the road, September 2024 — from the museum's own vault.",
-   "p": "ARTISTS[].plateCaption",
-   "c": "RESTATED",
-   "r": [
-    "d4b948d21a10192d",
-    "dada16cec63c1904",
-    "ed97b5fb16e82928",
-    "437a049f5cee126e",
-    "7ac07af7c5e1a3dd",
-    "526491c8466fc092"
-   ]
-  },
   "dada16cec63c1904": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 395,
@@ -14073,12 +14058,6 @@
    "l": 288,
    "t": "STANDARD"
   },
-  "10af0363550025bc": {
-   "c": "HOUSE",
-   "f": "src/data/artists/portal.js",
-   "l": 315,
-   "t": "STANDBY"
-  },
   "49b882d7399b6cf8": {
    "c": "HOUSE",
    "f": "src/data/artists/portal.js",
@@ -14362,26 +14341,6 @@
    "t": "THE PORTAL",
    "c": "HOUSE"
   },
-  "f9199b6488f01197": {
-   "f": "src/data/artists/robots.js",
-   "l": 995,
-   "t": "MGK-NIAC, the interior in trouble.",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "36888a8ee597f787": {
-   "f": "src/data/artists/robots.js",
-   "l": 1332,
-   "t": "The whole cabinet",
-   "c": "HOUSE"
-  },
-  "40832085bb42b22b": {
-   "f": "src/data/artists/robots.js",
-   "l": 1111,
-   "t": "The cabinet, whole — lit core, bar bank, both feet",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
   "d0920baff2e34f7a": {
    "f": "src/data/artists/robots.js",
    "l": 575,
@@ -14390,43 +14349,10 @@
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
-  "55fd6f2cf27a1146": {
-   "f": "src/data/artists/robots.js",
-   "l": 1338,
-   "t": "Through the bars",
-   "c": "HOUSE"
-  },
-  "32bf09faf4c59c03": {
-   "f": "src/data/artists/robots.js",
-   "l": 957,
-   "t": "The core, through the cage bars — warm flanks either side",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "d8ece201939574b4": {
-   "f": "src/data/artists/robots.js",
-   "l": 961,
-   "t": "A lit column behind the bars, and the cabinet's edge",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "d76bfa03017d7fc0": {
-   "f": "src/data/artists/robots.js",
-   "l": 1348,
-   "t": "Running, and in trouble",
-   "c": "HOUSE"
-  },
   "6774c265e5e92b42": {
    "f": "src/data/artists/robots.js",
    "l": 965,
    "t": "The output row — the red bar bank at the base, mid-pattern",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "b269e2da1c67c140": {
-   "f": "src/data/artists/robots.js",
-   "l": 969,
-   "t": "The whole interior in red-orange, the core glowing like an element",
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
@@ -14462,22 +14388,6 @@
    "f": "src/data/artists/robots.js",
    "l": 791,
    "t": "The pair, front and top, as received",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "2dc5d44b5984ecea": {
-   "f": "src/data/artists/robots.js",
-   "l": 794,
-   "t": "The front, whole",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "b2a5d959014467a6": {
-   "f": "src/data/artists/robots.js",
-   "l": 812,
-   "t": "The power switch, round the back",
    "p": "spine[].tracks[].face.collage[].label",
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
@@ -14521,22 +14431,6 @@
    "f": "src/data/artists/robots.js",
    "l": 803,
    "t": "The top monitor",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "aab2ee9eb94c32d3": {
-   "f": "src/data/artists/robots.js",
-   "l": 806,
-   "t": "The base it stands on",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "b2390afe30723854": {
-   "f": "src/data/artists/robots.js",
-   "l": 809,
-   "t": "The unit on its new base",
    "p": "spine[].tracks[].face.collage[].label",
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
@@ -15170,122 +15064,6 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
   },
-  "175ddf614e4d05a3": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 347,
-   "t": "The one thing that wasn't packed like the rest",
-   "p": "spine[].tracks[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "6e22f302cba44ce9"
-   ]
-  },
-  "6e22f302cba44ce9": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 354,
-   "t": "The back of the unit.",
-   "p": "spine[].tracks[].face.entries[].stillCaption",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "e80cc06628731201": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 369,
-   "t": "A sealed modern bag holding a USB-C adapter, packed unlike everything else that arrived with it. The unit is now on charge.",
-   "p": "spine[].tracks[].face.entries[].line",
-   "c": "RESTATED",
-   "r": [
-    "6e22f302cba44ce9"
-   ]
-  },
-  "0696ba5f531c5751": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 372,
-   "t": "One item in the delivery was not packed the way the rest of it was packed. It is a USB-C adapter, sealed in a modern bag, and the unit is on charge because of it.",
-   "p": "spine[].tracks[].face.entries[].lead",
-   "c": "RESTATED",
-   "r": [
-    "6e22f302cba44ce9"
-   ]
-  },
-  "fc826d1bf3875962": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 376,
-   "t": "The bag",
-   "p": "spine[].tracks[].face.entries[].sections[].label",
-   "c": "HOUSE"
-  },
-  "e8413d93c91825cc": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 378,
-   "t": "A sealed bag, modern, holding one USB-C adapter. It was packed differently from everything else that arrived with it.",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
-   "c": "RESTATED",
-   "r": [
-    "6e22f302cba44ce9"
-   ]
-  },
-  "3dcb610f21f29b94": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 381,
-   "t": "A conversation about the battery",
-   "p": "spine[].tracks[].face.entries[].sections[].label",
-   "c": "HOUSE"
-  },
-  "5d7145ca7fb8aae5": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 383,
-   "t": "The cell was discussed before anything was connected: whether it is deep-discharged rather than dead, and whether to hack it. It was not hacked. The unit is charging from the adapter that came in the bag.",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
-   "c": "RESTATED",
-   "r": [
-    "6e22f302cba44ce9"
-   ]
-  },
-  "a088a3e993eb2855": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 387,
-   "t": "It came on, briefly",
-   "p": "spine[].tracks[].face.entries[].sections[].label",
-   "c": "HOUSE"
-  },
-  "51a4b85d8e5583e7": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 389,
-   "t": "The unit powered on for a short time before the adapter was used.",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
-   "c": "RESTATED",
-   "r": [
-    "6e22f302cba44ce9"
-   ]
-  },
-  "b6e27dba1b2c47cd": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 391,
-   "t": "On charge",
-   "p": "spine[].tracks[].face.entries[].sections[].label",
-   "c": "HOUSE"
-  },
-  "3b7c1c87be4bc1e8": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 392,
-   "t": "The charge is slow.",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
-   "c": "RESTATED",
-   "r": [
-    "6e22f302cba44ce9"
-   ]
-  },
-  "6cc83d6103e909b7": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 394,
-   "t": "The unit is drawing power.",
-   "p": "spine[].tracks[].face.entries[].tomb",
-   "c": "RESTATED",
-   "r": [
-    "6e22f302cba44ce9"
-   ]
-  },
   "2f9697edce0d9288": {
    "f": "src/data/artists/foundation.js",
    "l": 557,
@@ -15438,6 +15216,32 @@
    "t": "You're in the book.",
    "c": "HOUSE",
    "s": "the guest book's confirmation, on the page since the first build. The clause that followed it — “Welcome, Founding Visitor.” — was struck 2026-08-11 on Mike's ruling as the last not-open-yet framing on the lobby; nothing replaced it. docs/MUSEUM_LOBBY_OPENS_LOG-20260811.md"
+  },
+  "59114c4e1b0e66e5": {
+   "f": "src/data/artists/portal.js",
+   "l": 343,
+   "t": "DETAIL",
+   "p": "spine[].tracks[].face.panel.drum.positions[].label",
+   "c": "HOUSE",
+   "s": ""
+  },
+  "a4b64a20bfeacbe1": {
+   "f": "src/data/artists/portal.js",
+   "l": 345,
+   "t": "MGK-VIIIp — the close-up",
+   "p": "spine[].tracks[].face.panel.drum.positions[].frameTitle",
+   "c": "HOUSE",
+   "s": ""
+  },
+  "153e97209c0b86f9": {
+   "f": "src/data/artists/robots.js",
+   "l": 909,
+   "t": "MGK-NIAC, the output row mid-pattern.",
+   "p": "spine[].viewerPosterCaption",
+   "c": "RESTATED",
+   "r": [
+    "6774c265e5e92b42"
+   ]
   }
  }
 }

@@ -397,9 +397,22 @@ const ARTISTS = [
        docs/WAL_PHOTO_PROVENANCE-20260802.md with the other five.
        AND THE COVERFLOW GETS ITS FILE BACK TO ITSELF: `art` and `plate` are no
        longer the same image, so pressing the record and then reading his card
-       are two different pictures, which is what the duplication cost. */
-    plate: "/images/wal/hunter-root-plate.jpg",
-    plateCaption: "On the road, September 2024 — from the museum's own vault.",
+       are two different pictures, which is what the duplication cost.
+
+       ═══ [CH4 2026-08-12] THE PLATE IS DELETED AND THE CARD OPENS ON PROSE ═══
+       MIKE RULED `hunter-root-plate.jpg` GONE. It is the selfie-in-a-vehicle he
+       has an open row about, and the ruling settles that row by subtraction.
+       EVERYTHING ABOVE IS KEPT AS THE RECORD OF HOW IT WAS CHOSEN — the vault
+       was really searched, the other two candidates really were rejected for the
+       reasons given, and deleting that reasoning would leave the next round to
+       repeat the search and arrive back at a picture Mike has struck.
+       WHAT THIS COSTS, PLAINLY: F1's VISUAL HOOK LAW is unsatisfied on this card
+       again. `still: a.plate || undefined` (the template, below) simply draws no
+       picture, so nothing hangs and nothing breaks — his card now opens on the
+       heading and then prose, which is the exact condition F1 was written to
+       fix. It is one string the day a portrait he approves exists.
+       THE HOUSE ARTIST IS NOW THE ONLY ONE OF THE FOUR WITH NO PLATE. Carsie,
+       Jesse and Mikey Mike all still carry theirs. Register `CH-b`. */
     songs: [
       { title: "’94", slug: "94", ytId: "vPW49GU38Ng",
         note: "Official music video. Museum catalogue MV-20260523-001, " +

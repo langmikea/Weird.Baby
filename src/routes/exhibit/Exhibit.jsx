@@ -1572,10 +1572,24 @@ function InstrumentPanel({ decl }) {
                      public file. A held thing's address may not live there, so
                      the panel that IS held carries it and the engine still
                      learns nothing about what opens. */
+                  /* [CH4 2026-08-12] A POSITION MAY CARRY ITS OWN SOURCE. The
+                     latch had ONE address for every position, so the drum chose
+                     only whether the panel armed, never what opened — and the
+                     row above ("it opens the feed the drum has been rolled to")
+                     was true of the intent and not of the code. Channel 4 holds
+                     a close-up rather than the twin, which is the first time the
+                     difference has been visible.
+                     THE FALLBACK IS THE LATCH'S OWN, so every position that
+                     declares nothing behaves exactly as before; this is one `||`
+                     per field and no position outside channel 4 changes. The
+                     held address still rides the event and the engine still
+                     learns nothing about what opens. */
                   const L = D.latch || {};
                   window.dispatchEvent(new CustomEvent(
                     L.event || "wb-robots-open-twin",
-                    { detail: { preset: drum.id, src: L.src, frameTitle: L.frameTitle } }
+                    { detail: { preset: drum.id,
+                                src: drum.src || L.src,
+                                frameTitle: drum.frameTitle || L.frameTitle } }
                   ));
                 }}>
           <span className="ip-latch-face">{(D.latch && D.latch.label) || "LATCH"}</span>

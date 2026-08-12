@@ -455,7 +455,7 @@ R("doc.manual.plates", "The Manual's microfiche plates — the photographed page
    and a page row written before an entry calls for it would be Ops deciding
    which page the story reaches for. When one is called for, it is one line:
 
-       MANUAL_PAGE(7, { prod: "needed", calledBy: ["record.013"] })
+       MANUAL_PAGE(7, { prod: "needed", calledBy: ["record.001"] })
 
    THE VESSEL IS PROVED WITHOUT SHIPPING A ROW. `npm run reveal:check` builds a
    specimen at each of the four stages, runs it through the same validator this
@@ -500,44 +500,23 @@ R("doc.record", "The Record — the volume: the weekly journal of the reverse-di
    REACH AND STATE ARE INHERITED FROM THE FACE, not hard-coded: an entry is
    reachable exactly when the surface holding it is. Hold the face and every
    entry goes held with it, in one place. */
-const RECORD_ENTRY = {
-  /* 013 is PARTIAL rather than LIVE and the reason is on the record: it renders
-     completely and it is knowingly incomplete — `docs/RECORD_013_QUESTIONS`
-     lists twenty-seven gaps in it. `build` is what is TRUE TODAY, and what is
-     true today is that this entry is missing content its own question list
-     names. No `arc`: nothing attests one, and M28's discipline is that an
-     unset arc is the honest state rather than a blank to fill. */
-  /* [B2 2026-08-07] 013 IS THE PROTOTYPE, AND THIS ROW IS WHERE THAT IS
-     RECORDED — not on the glass. MIKE: "it was chosen because it was
-     interesting enough to find the structure, and it did. It is NOT day one and
-     needs no re-dating or defending. THE REAL RECORD STARTS AT 001."
-     HE GAVE TWO WAYS TO CLEAR IT OUT OF THE WAY — retire it, or leave it
-     clearly marked as the prototype it was — and ONE CRITERION: whichever keeps
-     the Record honest AND THE MACHINERY EXERCISED. The criterion picks the
-     second, and the arithmetic is not close. Retiring it empties the volume, and
-     an empty volume exercises nothing: RecordEntry.jsx never mounts, the index
-     budgets (RECORD_TITLE_MAX / RECORD_LINE_MAX) police no string, the per-entry
-     `record.NNN` derivation loops over nothing, and `delivered()` returns the
-     empty set — which pulls `rear_power_switch.png` back behind the stage door
-     and leaves the pull-back rule with no positive case anywhere in the museum.
-     Every one of those is a mechanism that would rot silently until 001 lands.
-     AND THE MARK GOES HERE BECAUSE DOCTRINE 11 SAYS IT CANNOT GO ON THE GLASS.
-     "This entry was a prototype" is a line whose subject is the making of the
-     museum. The entry's own text asserts nothing false — it is four facts Mike
-     supplied about a real object, with a real photograph of it — so the glass
-     needs no correction, only the instruments that reason about the story do.
-     THE ONE THING NOT SETTLED IS THE NUMBER. Under Mike's own ruling the volume
-     numbers from 001, which makes 013 a number in a sequence that has not
-     started. It is left ALONE, deliberately: he said the entry needs no
-     re-dating or defending, `no` is the field this whole table is keyed on, and
-     changing it is his word rather than Ops' inference. It is OPEN_ACTIONS B-b
-     and it is one word. */
-  13: {
-    build: "PARTIAL",
-    deps: ["M18 — twenty-seven open questions on this entry"],
-    note: "THE PROTOTYPE. Mike, 2026-08-07: chosen because it was interesting enough to find the Record's structure, and it did — it is NOT day one, needs no re-dating and no defending, and the real Record starts at 001 when he dictates it. It is therefore NOT in the volume's sequence, and every Ops instrument that reasons about the story says so; nothing on the glass does, because that line's subject would be the making of the museum (Doctrine 11). Kept rather than retired on his own criterion — it is the only thing exercising RecordEntry.jsx, the index budgets, the per-entry derivation and the pull-back rule's single delivered picture. Stripped at v47 to the four facts he supplied; every gap that exposed is a question in M18 rather than a sentence in the data. Its NUMBER is the one open piece — B-b.",
-  },
-};
+/* ═══ [CH4 2026-08-12] 013's EXTRAS BLOCK IS DELETED WITH THE ENTRY ═════════
+   MIKE: "013 is ALL CRAP PLACEHOLDER TRASH." Gone, not rewritten — so B2's
+   choice between retiring it and marking it as the prototype is settled a third
+   way and this block has nothing left to describe. `record.013` leaves the
+   ledger by itself, because the rows below are DERIVED from `recordEntries()`
+   and the entry is no longer there to derive one from.
+   THE ARITHMETIC B2 USED TO KEEP IT WAS RIGHT AND IS NOW SPENT, WHICH IS THE
+   ONE THING WORTH CARRYING FORWARD. It argued that retiring 013 would leave
+   `RecordEntry.jsx`, the index budgets and the per-entry derivation exercised by
+   nothing — and Records 001-005 landed since, so all three are still exercised
+   and that half of the cost never came due. The half that DID come due is the
+   pull-back rule: 013 was the only entry that ever named a picture, so
+   `delivered()` is the empty set and the rule now has no positive case anywhere
+   in the museum. That is stated in this round's log and is not repaired here,
+   because repairing it means an entry delivering a picture, which is Mike's to
+   write and not Ops' to invent. */
+const RECORD_ENTRY = {};
 {
   /* [R1 2026-08-05] the Record's face moved albums and this id moved with it */
   const face = ROWS.find(r => r.id === "face.wbr.record");
@@ -797,7 +776,9 @@ R("sound.electrical-short", "WB_electrical-short v1/v2 — the house's own recor
 /* ═════════ 11. THE MUSIC WING ════════════════════════════════════════════ */
 for (const [slug, name, plate] of [
   ["carsie-blanton", "Carsie Blanton", "/images/wal/carsie-blanton-poster.png"],
-  ["hunter-root", "Hunter Root", "/images/wal/hunter-root-plate.jpg"],
+  /* [CH4 2026-08-12] the house artist's plate is `null` because Mike deleted
+     `hunter-root-plate.jpg`. Same shape Mikey Mike has carried all along. */
+  ["hunter-root", "Hunter Root", null],
   ["jesse-welles", "Jesse Welles", "/images/wal/jesse-welles-plate.webp"],
   ["mikey-mike", "Mikey Mike", null],
 ]) {
@@ -950,16 +931,48 @@ if (process.argv.includes("--write")) {
     const live = JSON.parse(fs.readFileSync(at, "utf8")).rows || [];
     const declared = new Set(ROWS.map(r => r.id));
     const lost = live.map(r => r.id).filter(id => !declared.has(id));
-    if (lost.length) {
+
+    /* ═══ [CH4 2026-08-12] `--drop-deleted`, THE SAME SHAPE THE ASSET DECLARER
+       GOT AND FOR THE SAME REASON ═══════════════════════════════════════════
+       Mike deleted Record 013. `record.NNN` rows are DERIVED from the Record's
+       own entries, so the row left by itself — correctly — and this guard read
+       that as drift and refused the regeneration.
+       THE DIFFERENCE IS CHECKABLE HERE TOO, and the check is the derivation
+       itself: a `record.NNN` row is legitimately gone exactly when the Record no
+       longer holds entry NNN. Anything else in `lost` — a surface, a document, a
+       sound, an egg — is real drift and still refuses, because nothing derives
+       those and a missing one means the declarer changed under the file.
+       SO THIS IS NOT A `--force` EITHER. It cannot drop a row whose entry is
+       still in the Record, and it cannot drop a row that is not a record row at
+       all. It prints what it dropped, for the reason the sibling does. */
+    const RECORD_ROW = /^record\.(\d{3})$/;
+    const liveEntryNos = new Set(recordEntries().map(e => String(e.no).padStart(3, "0")));
+    const droppable = (id) => {
+      const m = RECORD_ROW.exec(id);
+      return !!m && !liveEntryNos.has(m[1]);
+    };
+    const dropping = process.argv.includes("--drop-deleted");
+    const stillDrift = dropping ? lost.filter(id => !droppable(id)) : lost;
+
+    if (stillDrift.length) {
       console.error(
-        "\nREFUSED — writing would delete " + lost.length + " row(s) that exist in" +
+        "\nREFUSED — writing would delete " + stillDrift.length + " row(s) that exist in" +
         "\nreveal/ledger.json and are NOT declared in this file. That is M99's shape," +
         "\nand it is what this guard exists for: the declarer has drifted from the file" +
         "\nit writes, so a --write is a silent deletion rather than a regeneration.\n\n" +
-        lost.map(id => "  " + id).join("\n") +
-        "\n\nEither declare them here, or decide ledger.json is the source and retire" +
-        "\nthis generator. Do not delete the guard.");
+        stillDrift.map(id => "  " + id).join("\n") +
+        (dropping
+          ? "\n\n--drop-deleted was passed and does NOT cover these. It drops only" +
+            "\n`record.NNN` rows whose entry is gone from the Record; every id above is" +
+            "\neither still derivable or is not a record row at all."
+          : "\n\nEither declare them here, or decide ledger.json is the source and retire" +
+            "\nthis generator. Do not delete the guard. If a RECORD ENTRY was deleted," +
+            "\nthe flag for that is --drop-deleted."));
       process.exit(1);
+    }
+    if (dropping && lost.length) {
+      console.log("--drop-deleted — " + lost.length + " row(s) dropped, entry gone from the Record:");
+      for (const id of lost) console.log("  " + id);
     }
   }
   fs.writeFileSync(at, JSON.stringify(out, null, 1) + "\n");

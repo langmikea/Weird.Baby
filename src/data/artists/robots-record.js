@@ -21,7 +21,14 @@
    proved that way.
    =========================================================================== */
 
-import { placed } from "../../lib/placement.js";
+/* [CH4 2026-08-12] THE `placed` IMPORT IS GONE WITH RECORD 013. It existed for
+   exactly one line — 013's `still: placed("/robots/…/rear_power_switch.png")` —
+   and 013 is deleted, so the import is unused and `no-unused-vars` fails on it.
+   IT COMES BACK THE DAY AN ENTRY DELIVERS A PICTURE AGAIN, and it comes back by
+   itself: `emit-record-entries.mjs` restores this line whenever it emits a
+   `placed(` call, because the lander splices only between `RECORD_ENTRIES = [`
+   and the closing bracket and would otherwise leave a call to an undefined
+   identifier in a file that parses clean. */
 import { recordDay } from "./record-epoch.js";
 
 export const RECORD_ENTRIES = [
@@ -295,101 +302,4 @@ export const RECORD_ENTRIES = [
                     + "heavily compressed file that is  password protected.",
                   ] },
               ] },
-            /* ==== [HR 2026-08-04] RECORD 013, STRIPPED TO WHAT IS KNOWN =====
-               MIKE'S RULING: "the entry is still full of invented specifics
-               (the heat-crimped pouch taped to carton two, the hinged cover,
-               the port location, the charge start time, the indicator
-               movement, the 'companion unit' line, the number of cartons, the
-               dates). Mike supplied the SHAPE of that day — a modern sealed
-               bag holding a USB-C adapter, packed differently from everything
-               else; a conversation about deep-discharge and why they didn't
-               hack it; a brief power-on before the adapter; a slow charge.
-               NOTHING ELSE IS KNOWN."
-               Four facts are all this entry may say, so it says them and it
-               stops. Every gap the strip exposed is a QUESTION FOR MIKE and
-               lives in `docs/RECORD_013_QUESTIONS-20260804.md` — not here, and
-               not filled in with something plausible.
-               WHAT WENT, BY NAME: THE DATE, so the entry carries no `date`, no
-               `stamp` and no weekday and `entryDateline` prints `Record 013`
-               alone — which is exactly what record-model.js was built to do
-               with an undated entry. THE SECTION "What it plugs into",
-               entirely: every sentence in it was a measurement, a location or
-               a fitting nobody has supplied. THE SECTION "Also today,
-               briefly", entirely: the "companion unit" was its only content.
-               ALL FOUR DOORS — the newspaper door pointed at an entry this
-               round deleted, the archive door lived inside a section that is
-               gone, the film door described footage nobody has cut, and the
-               portal door was keyed to the day the entry no longer has.
-               THE PLATE STAYS AND ITS CAPTION SHRINKS to what this same file
-               is already captioned as on the plate wall ("The power switch,
-               round the back"). It is a real photograph of the object the
-               entry is about; it is not evidence of the bag, and the caption
-               no longer implies that it is. */
-            /* [R5 2026-08-06] `evidence: "object"` IS STRUCK, AND THE FIELD
-               WITH IT ON THIS ENTRY. MIKE, on the badge it printed: "I see no
-               richness in it. If it is decoration it GOES. If it can genuinely
-               serve the UX — opening the object, or popping the object list
-               beside it — propose that; otherwise strike it."
-               IT COULD NOT BE MADE TO SERVE, AND THE REASON IS STRUCTURAL. The
-               badge printed a WORD with nothing behind it: B9's model has no
-               permitted list of classes and no registry of objects, so there is
-               no object to open and no list to pop — an "object list" would
-               have to be invented to give the control something to do, which is
-               Doctrine 12 with a button on it. The thing that DOES tell a
-               reader what a week brought is `evidenceOf` — the counted
-               wire/plates/docs badges — and it is a different mechanism, still
-               rendered, absent here because this entry carries no payloads.
-               THE MODEL KEEPS THE FIELD (record-model.js) and nothing renders
-               it. It is Mike's own B9 vocabulary and it comes back the day it
-               points at something — a filter over a long Record is the obvious
-               day, and that is the same mechanism as N9's archive presets. */
-            { no: 13,
-              title: "The one thing that wasn't packed like the rest",
-              /* THE ONE DELIVERED PICTURE IN THE WING, on the entry that
-                 delivers it. It goes through `placed()` like every other — the
-                 resolver hands a delivered path straight back, in BOTH stages,
-                 and a governed picture that skips the resolver is the hole the
-                 resolver exists to close. */
-              still: placed("/robots/reference/photos/rear_power_switch.png"),
-              stillCaption: "The back of the unit.",
-              /* [R3 2026-08-06] `line` IS THE EXECUTIVE SUMMARY, AND IT IS
-                 BUDGETED. MIKE: the index level serves the HEADLINE and what an
-                 engineering organisation would call the EXECUTIVE SUMMARY —
-                 every row gets both, all rows the same height, and THE ENTIRE
-                 SUMMARY MUST FIT.
-                 SO THERE IS NO TRUNCATION ANYWHERE IN THE INDEX ANY MORE and
-                 the fit is guaranteed at the DATA end instead: `title` and
-                 `line` on a Record entry carry hard character budgets
-                 (`tools/reveal-ledger.mjs`, RECORD BUDGETS) and a row that
-                 exceeds one FAILS THE GATE. That is what makes "the failure
-                 disappears by construction" a mechanism rather than a promise —
-                 the old `-webkit-line-clamp:1` cut this very sentence at "packed
-                 unlike everything else that arrived with…", which is the half
-                 sentence he is describing. */
-              line: "A sealed modern bag holding a USB-C adapter, packed " +
-                    "unlike everything else that arrived with it. The unit is " +
-                    "now on charge.",
-              lead: "One item in the delivery was not packed the way the rest " +
-                    "of it was packed. It is a USB-C adapter, sealed in a " +
-                    "modern bag, and the unit is on charge because of it.",
-              sections: [
-                { label: "The bag",
-                  body:
-                    "A sealed bag, modern, holding one USB-C adapter. It was " +
-                    "packed differently from everything else that arrived " +
-                    "with it." },
-                { label: "A conversation about the battery",
-                  body:
-                    "The cell was discussed before anything was connected: " +
-                    "whether it is deep-discharged rather than dead, and " +
-                    "whether to hack it. It was not hacked. The unit is " +
-                    "charging from the adapter that came in the bag." },
-                { label: "It came on, briefly",
-                  body:
-                    "The unit powered on for a short time before the adapter " +
-                    "was used." },
-                { label: "On charge",
-                  body: "The charge is slow." },
-              ],
-              tomb: "The unit is drawing power." },
 ];

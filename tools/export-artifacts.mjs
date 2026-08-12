@@ -250,6 +250,12 @@ function printHelp() {
     "  --output-dir <path>  per-exhibit output directory (default src/data/exhibits)",
     "  --dry-run            compute and report; do not write any files",
     "  --verbose            print SQL, row counts, per-artifact details",
+    "  --restores-deleted-lyrics",
+    "                       REQUIRED. MediaVault still holds three released",
+    "                       records that were deleted from the repo by hand on",
+    "                       2026-08-11 (song lyrics, vault rule 5). Any run of",
+    "                       this tool puts them back. Run without the flag to",
+    "                       see which three.",
     "  --help               show this message",
     "",
   ].join("\n"));
@@ -262,10 +268,15 @@ function parseArgs(argv) {
     dryRun: false,
     verbose: false,
     help: false,
+    restoresDeletedLyrics: false,
   };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--help" || a === "-h") { opts.help = true; }
+    /* [CH4 2026-08-12] see MV_HAND_DELETED. `--dry-run` is NOT an escape: it
+       reports what it WOULD write, and what it would write is the lyrics back,
+       so it must clear the same gate. */
+    else if (a === "--restores-deleted-lyrics") { opts.restoresDeletedLyrics = true; }
     else if (a === "--dry-run") { opts.dryRun = true; }
     else if (a === "--verbose") { opts.verbose = true; }
     else if (a === "--mv-base") {
@@ -681,9 +692,54 @@ function buildVocabularyPayload(rows, { sourceUrl, exportedAt }) {
 }
 
 // ─── main ──────────────────────────────────────────────────────────────────
+/* ═══ [CH4 2026-08-12] THE HAND-DELETED RECORDS, AND WHY THIS TOOL REFUSES ═══
+   On 2026-08-11 three strings were deleted from the two files this tool writes,
+   because they are SONG LYRICS and the vault's own rule 5 is "NO LYRICS, EVER —
+   not ours to reprint." One of them was public on /wal.
+   THEY WERE DELETED FROM THE REPO AND NOT FROM MEDIAVAULT, and MV is where this
+   tool reads. All three are still `status = released` there, so a plain run
+   regenerates both files WITH THE LYRICS BACK IN — silently, passing every gate
+   in this repo, because a regenerated file is not a suspicious file.
+   THAT IS WHY THIS IS A REFUSAL AND NOT A WARNING. The failure mode is a
+   correct-looking export on a normal release day; a printed caution scrolls past
+   and a green run is indistinguishable from a safe one. The flag has to be typed.
+   THE DURABLE FIX IS IN MEDIAVAULT AND IS NOT OPS' TO MAKE — unrelease or
+   archive the two artifacts, clear the description on the third. Mike's ruling
+   this round was "prune the habit, keep the box": the box is untouched.
+   WHEN MV IS FIXED, DELETE THIS BLOCK — do not leave it standing and dismissed
+   with the flag, which is how a guard becomes noise. */
+const MV_HAND_DELETED = [
+  ["MV-HR-20260707-056", "fact",     "hunter_root.facts.json", "the '94 verse, four lines"],
+  ["MV-HR-20260405-012", "artifact", "hunter_root.json",       "title AND description are the same lyric"],
+  ["MV-HR-20260405-013", "artifact", "hunter_root.json",       "description only; the entry itself is a real tribute post and stays"],
+];
+
+function refuseUnlessAcknowledged(opts) {
+  if (opts.restoresDeletedLyrics) return;
+  const w = process.stderr;
+  w.write("\nexport-artifacts REFUSED.\n\n");
+  w.write("MediaVault still holds released records that were deleted from the repo by\n");
+  w.write("hand — running this restores them.\n\n");
+  for (const [id, kind, file, what] of MV_HAND_DELETED) {
+    w.write(`  ${id}  (${kind} -> ${file})\n      ${what}\n`);
+  }
+  w.write("\nAll three are song lyrics, struck on 2026-08-11 under the vault's rule 5\n");
+  w.write("(\"NO LYRICS, EVER - not ours to reprint\"). One of them was public on /wal.\n\n");
+  w.write("The real fix is in MediaVault, not here:\n");
+  w.write("  - unrelease or archive  MV-HR-20260707-056  and  MV-HR-20260405-012\n");
+  w.write("  - clear the description on             MV-HR-20260405-013\n\n");
+  w.write("To run anyway, knowing the export puts all three back in the repo:\n\n");
+  w.write("      npm run export-artifacts -- --restores-deleted-lyrics\n\n");
+  w.write("Nothing was written. MediaVault was not contacted.\n\n");
+  process.exit(1);
+}
+
 async function main() {
   const opts = parseArgs(process.argv.slice(2));
   if (opts.help) { printHelp(); return 0; }
+
+  /* before anything, including the network round-trip */
+  refuseUnlessAcknowledged(opts);
 
   // Load committed bootstrap list before contacting MV — if the config
   // is broken, fail early with a clear message instead of after a network

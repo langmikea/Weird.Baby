@@ -213,8 +213,15 @@ const BLAST = [
      BLAST, still being read.
      THEY COULD NOT HAVE BEEN EXEMPTED, for `record.001`'s reason one line
      down: an exempt row may not be REVEALED and all four are on the glass. */
+  /* [CH4 2026-08-12] `record.013` IS OFF THIS LIST BECAUSE THE ENTRY IS GONE.
+     Mike deleted the prototype outright — not retired, not re-dated. A class
+     row for an entry that no longer exists is a transfer scheduled for nothing,
+     and `validate()` cannot catch it because the list is a list of STRINGS and
+     has never had to resolve them. The S2 note above still reads correctly: it
+     cited 013 as the sibling 001 inherited its class from, and that inheritance
+     was real when it was made. */
   "doc.manual", "doc.record", "record.001", "record.002", "record.003",
-  "record.004", "record.005", "record.013", "doc.firmware", "doc.charter",
+  "record.004", "record.005", "doc.firmware", "doc.charter",
 
   /* ── [R6/R4 2026-08-05] THE TWO EGGS PLANTED THIS ROUND. `egg.channels` is
         BLAST because the numbering is engraved on a drum that has been on the

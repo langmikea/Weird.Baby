@@ -163,20 +163,42 @@ Use `--dry-run` to see what would be exported without writing. Use `--verbose` t
 
 ### Release flow
 
-To publish newly-released MV artifacts to weird.baby, run these in order:
+**[CH4 2026-08-12] `npm run export-artifacts` IS OUT OF THE RELEASE FLOW AND THE
+FLOW IS NOW ONE STEP: `npm run deploy`.**
 
-1. **In MV**: flip artifact status to `released` via inbox triage.
-2. **In museum repo**: `npm run export-artifacts` — regenerates `src/data/exhibits/hunter_root.json` from MV's current released set. (MV must be running; see Deep Dive export above.)
-3. **In museum repo**: commit the refreshed snapshot:
-   ```bash
-   git add src/data/exhibits/hunter_root.json src/data/vocabulary.json
-   git commit -m "data: regen hunter_root.json"
-   ```
-4. **In museum repo**: `npm run deploy` — builds and ships to weird.baby.
+The old flow put the export at step 2 of every publish and called it "the
+most-missed step". It is now the most DANGEROUS step, and the reason is on the
+record: on 2026-08-11 three song lyrics were deleted from
+`hunter_root.facts.json` and `hunter_root.json` by hand under the vault's rule 5
+(*"NO LYRICS, EVER — not ours to reprint"*), and one of them had been public on
+`/wal`. **They were deleted from the repo and not from MediaVault, where all
+three are still `status = released`.** A routine export puts all three back,
+silently, passing every gate — because a regenerated file is not a suspicious
+file. A step listed as routine gets run routinely; that is the whole defect.
 
-**Step 2 is the most-missed step.** `npm run deploy` runs `vite build && wrangler deploy`; it does NOT regenerate the JSON from MV. Skipping step 2 ships a stale snapshot — visitors see yesterday's released set, not today's. The "released video didn't show up" symptom of 2026-05-25 was exactly this: 36 newly-released YT artifacts got triaged into MV but `export-artifacts` was skipped, so the SPA bundle still carried the prior export's 19-artifact JSON.
+**The tool now refuses.** A plain run prints the three record ids and exits 1
+without contacting MV. Running it is a deliberate act that needs a typed flag:
 
-Long-term: HR acquisition tooling (T8, audit §6.4) will auto-emit `exhibit:hunter_root` at capture time, removing the manual exhibit-tag step. The 4-step release flow above stays the same.
+```bash
+npm run export-artifacts -- --restores-deleted-lyrics
+```
+
+**Do not type that flag to get past it.** The fix is in MediaVault — unrelease
+or archive `MV-HR-20260707-056` and `MV-HR-20260405-012`, clear the description
+on `MV-HR-20260405-013` — and when that is done the guard block at the top of
+`tools/export-artifacts.mjs` is deleted, not left standing and dismissed.
+
+**To publish today:**
+
+1. **In museum repo**: `npm run deploy` — builds and ships to weird.baby.
+
+The exhibit JSON is a committed snapshot and ships as it stands. It has not been
+regenerated since **2026-07-07**, MediaVault has had no write since the same day,
+and nothing has missed it. If MV material genuinely needs to reach the site,
+that is a deliberate export + review + commit, not a step in a deploy.
+
+Long-term: HR acquisition tooling (T8, audit §6.4) will auto-emit
+`exhibit:hunter_root` at capture time. That does not change the above.
 
 ### Cross-platform native dependencies
 
@@ -306,7 +328,7 @@ Fresh Cowork sessions start with no mounts. Audit-on-entry must call `mcp__cowor
 
 ### 6. The release flow (cross-reference)
 
-The 4-step release flow lives in `### Release flow` above (the one that ships MV's released artifacts to weird.baby). Step 2 (`npm run export-artifacts`) is the most-missed step; the `EXHIBIT_BACKFILL_DEPLOY` session traced the "released video didn't show up" symptom directly to skipping it. Re-read that section before any release-related work.
+The release flow lives in `### Release flow` above. **[CH4 2026-08-12] It is ONE step now (`npm run deploy`) and `npm run export-artifacts` is no longer in it** — the tool refuses without a typed flag because MediaVault still holds three hand-deleted lyric records and a routine export restores them. The old "step 2 is the most-missed step" reading is reversed and the reasoning is in that section; read it before any release-related work.
 
 ### 7. Audit-on-entry kickoff premises can be stale
 
