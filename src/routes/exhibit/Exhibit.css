@@ -27,7 +27,59 @@ html,body{background:var(--wb-bg);color:var(--wb-gold);min-height:100vh;overflow
    `MuseumBar.css`, which is imported by `MuseumBar.jsx` and therefore loads
    exactly where the bar does. The snap rule below is the exhibit's own and
    stays; it reads the same padding. */
-html{scroll-snap-type:y proximity;scroll-behavior:smooth}
+/* ═══ [CH7 2026-08-12] THE DOCUMENT IS NO LONGER A SNAP CONTAINER ═══════════
+   MIKE MEASURED THE SCROLL BUG AND ASKED FOR THE CAUSE, NOT THE PAGE. Two of
+   the things his probe printed are answered here.
+
+   1. `scrollSnapType` READ "y" AND THE STYLESHEET SAID "y proximity" — NOTHING
+      IS OVERRIDING IT AND THE BROWSER IS NOT DROPPING IT. `proximity` is the
+      INITIAL strictness in the `scroll-snap-type` grammar, so Chrome omits it
+      from the computed value exactly as it omits any initial component. `y` and
+      `y proximity` are the same declaration. That line of his probe is a
+      red herring and is recorded here so nobody chases it again.
+
+   2. AND THE DECLARATION IS DELETED, BECAUSE IT HAS NEVER SNAPPED ANYTHING.
+      Measured this round on the launch build, every public route, at four
+      viewport widths: **zero elements with `scroll-snap-align`**. MuseumBar.css
+      already said so in 2026-08-06 ("measured: zero") and it is still true. So
+      this made the DOCUMENT a scroll-snap container with no snap targets — an
+      inert mechanism that still asks the compositor to re-evaluate a snap
+      position after every layout change, on every page, forever.
+      IT IS REMOVED RATHER THAN KEPT "in case": the wing whose sections declared
+      `scroll-snap-align` is `/hr`, which is password-held and carries its own
+      rule in `HrExhibitFlow.css`. If a public wall ever wants snapping it
+      declares it beside the targets, which is where it can be checked.
+
+   `scroll-behavior:smooth` STAYS. It is what makes the transport controls and
+   the record walk read as motion rather than as a jump, and nothing in the
+   measurement implicates it. */
+html{scroll-behavior:smooth}
+
+/* ═══ [CH7] SCROLL ANCHORING IS OFF ON THE DOCUMENT ═════════════════════════
+   THE ONE FINDING THAT FITS EVERY PART OF MIKE'S REPORT. His page sat at
+   `scrollY 31.111` with `max 31` — pinned at the BOTTOM of a 31px range, unable
+   to come back up. Chrome's scroll anchoring (`overflow-anchor`, computed
+   `auto` on both `html` and `body` — measured) exists to hold the visible
+   content still when something above it changes size, and it does that by
+   MOVING THE SCROLL POSITION and resisting a return.
+   THE LATE CHANGE IS REAL AND IT IS ON EXACTLY THE PAGES HE NAMED: `/foundation`
+   builds a YouTube player IFRAME after mount even though it has no videos
+   (Exhibit.jsx:505 — the other half of tonight's packet), and the web fonts swap
+   in after first paint. On a long page a shift like that is a few per cent of
+   travel; on a page with 31px of travel it is the whole thing, which is why two
+   per-page fixes failed and why it only shows on short pages.
+   WHAT IT COSTS, STATED RATHER THAN DISCOVERED: scroll anchoring is a real
+   feature and turning it off means a late-loading image ABOVE the viewport can
+   shift content under the reader on a long page. This museum lazy-loads its
+   wall images, so that trade is not free. It is made deliberately: a page that
+   cannot reach its own top is a worse failure than a page that occasionally
+   shifts, and the museum's images sit in fixed-size tiles.
+   AND IT IS NOT VERIFIED AGAINST THE SYMPTOM. It could not be — an iframe's
+   viewport rounds to whole pixels, so the fractional-zoom condition cannot be
+   reproduced in the lap rig, and browser zoom cannot be set from the driver.
+   This is the best-fitting cause, changed at the cause; the proof is Mike at
+   90% on the page that was stuck. */
+html{overflow-anchor:none}
 
 /* ---- E2 2026-07-30: THE TRACK FACE + THE VIEWER POSTER --------------------
    What the video panel shows when a track has no footage. Print-stock, house
