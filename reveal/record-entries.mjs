@@ -42,9 +42,22 @@ const Parser = acorn.Parser.extend(jsxPlugin());
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
 
-/* The Record lives on a track in the robots wing's spine. If it ever moves,
-   this constant moves with it and the check below says so loudly. */
-export const RECORD_SOURCE = "src/data/artists/robots.js";
+/* ═══ [M1 2026-08-11] THE RECORD MOVED OUT OF THE SPINE, AND THIS MOVED WITH
+   IT — the sentence below said it would ══════════════════════════════════════
+   The six entries are their own module now so that `record:land --write` can
+   rewrite the whole file; see the note at the head of `robots-record.js`. That
+   makes them a TOP-LEVEL array rather than a property four levels inside an
+   album, which is a strictly easier thing to parse — but the old shape has to
+   keep working, and not for tidiness: `reveal/day.mjs --since <ref>` reads the
+   Record AS IT WAS at a git ref, and every ref before today has the entries
+   inside `robots.js`. `entriesArrayOf` below accepts either, so a delta
+   against last week still resolves. */
+export const RECORD_SOURCE = "src/data/artists/robots-record.js";
+/* where the entries lived before the split — read at old refs only */
+export const RECORD_SOURCE_LEGACY = "src/data/artists/robots.js";
+export const RECORD_ENTRIES_EXPORT = "RECORD_ENTRIES";
+/* the epoch is its own module — see `record-epoch.js` */
+export const RECORD_EPOCH_SOURCE = "src/data/artists/record-epoch.js";
 export const RECORD_TRACK_ID = "record";
 
 /* A path-shaped string: leading slash, a real extension. The Record's `still`
@@ -104,8 +117,27 @@ let CACHE = null;
    removes none. The file's own split is untouched: this still returns numbers
    and asset paths, and the caller that can see words is still the one that
    forbids them. */
-export function parseRecord(src) {
-  const ast = Parser.parse(src, { ecmaVersion: "latest", sourceType: "module" });
+/* ── THE ENTRIES ARRAY, IN EITHER SHAPE ────────────────────────────────────
+   POST-SPLIT: `export const RECORD_ENTRIES = [ … ]` at the top level of
+   `robots-record.js`. PRE-SPLIT: `face.entries` on the track whose `id` is
+   "record", four levels inside `robots.js`. Both are tried, new shape first,
+   and a source carrying neither throws with both names in the message — the
+   failure a reader that has been left behind should produce.
+   THE OLD WALK IS KEPT VERBATIM rather than deleted, because it is what reads
+   every commit before today and `reveal/day.mjs --since` depends on it. */
+export function entriesArrayOf(ast) {
+  let found = null;
+  (function visit(n) {
+    if (!n || typeof n !== "object" || found) return;
+    if (Array.isArray(n)) { n.forEach(visit); return; }
+    if (n.type === "VariableDeclarator" && n.id && n.id.name === RECORD_ENTRIES_EXPORT
+        && n.init && n.init.type === "ArrayExpression") { found = n.init; return; }
+    for (const k of Object.keys(n)) {
+      if (k === "type" || k === "start" || k === "end" || k === "loc") continue;
+      visit(n[k]);
+    }
+  })(ast);
+  if (found) return found;
 
   /* Find the track object whose `id` is "record" AND which carries a `face`.
      Both conditions, because "record" is also a tag value on that same track
@@ -123,16 +155,20 @@ export function parseRecord(src) {
       visit(n[k]);
     }
   })(ast);
+  const el = track ? propOf(propOf(track, "face"), "entries") : null;
+  if (el && el.type === "ArrayExpression") return el;
+  return null;
+}
 
-  if (!track)
+export function parseRecord(src) {
+  const ast = Parser.parse(src, { ecmaVersion: "latest", sourceType: "module" });
+
+  const entriesNode = entriesArrayOf(ast);
+  if (!entriesNode)
     throw new Error(
-      `reveal/record-entries.mjs: no track with id "${RECORD_TRACK_ID}" and a face in ` +
-      `${RECORD_SOURCE}. The Record has moved; this reader must move with it.`);
-
-  const face = propOf(track, "face");
-  const entriesNode = propOf(face, "entries");
-  if (!entriesNode || entriesNode.type !== "ArrayExpression")
-    throw new Error(`reveal/record-entries.mjs: the Record face has no \`entries\` array.`);
+      `reveal/record-entries.mjs: no \`${RECORD_ENTRIES_EXPORT}\` array and no track ` +
+      `with id "${RECORD_TRACK_ID}" carrying a \`face.entries\` array. The Record has ` +
+      `moved; this reader must move with it.`);
 
   const entries = [];
   const prose = [];
@@ -191,20 +227,10 @@ function read2() {
   if (KEYCACHE) return KEYCACHE;
   const src = fs.readFileSync(path.join(REPO, RECORD_SOURCE), "utf8");
   const ast = Parser.parse(src, { ecmaVersion: "latest", sourceType: "module" });
-  let track = null;
-  (function visit(n) {
-    if (!n || typeof n !== "object" || track) return;
-    if (Array.isArray(n)) { n.forEach(visit); return; }
-    if (n.type === "ObjectExpression") {
-      const id = strOf(propOf(n, "id"));
-      if (id === RECORD_TRACK_ID && propOf(n, "face")) { track = n; return; }
-    }
-    for (const k of Object.keys(n)) {
-      if (k === "type" || k === "start" || k === "end" || k === "loc") continue;
-      visit(n[k]);
-    }
-  })(ast);
-  const el = track ? propOf(propOf(track, "face"), "entries") : null;
+  /* [M1 2026-08-11] the same dual-shape finder `parseRecord` uses — this walk
+     was its twin, copied, and the split made keeping two of them a way to fix
+     one and not the other. */
+  const el = entriesArrayOf(ast);
   KEYCACHE = (!el || el.type !== "ArrayExpression" ? [] : el.elements)
     .filter(x => x && x.type === "ObjectExpression")
     .map(x => {
@@ -238,12 +264,25 @@ function read2() {
    says so if it is not there. `null` is a real answer — the Record carried no
    epoch at all until 2026-08-08 — and callers must handle it. */
 export function recordEpoch(src) {
-  const text = src ?? fs.readFileSync(path.join(REPO, RECORD_SOURCE), "utf8");
+  /* [M1 2026-08-11] IT READS `record-epoch.js` NOW, AND THAT IS WHERE THE
+     CONSTANT WENT. The split moved `RECORD_EPOCH` out of the entries' file into
+     its own module (two readers, belongs to neither), and this function kept
+     reading the entries' file — so `npm run record` printed "day one null" and
+     the editor could not resolve five `date:` fields. Caught by running it.
+     A CALLER MAY STILL HAND IN A SOURCE, and one that does is reading an old
+     ref where the constant lived elsewhere; that path is unchanged. */
+  const text = src ?? fs.readFileSync(path.join(REPO, RECORD_EPOCH_SOURCE), "utf8");
   const ast = Parser.parse(text, { ecmaVersion: "latest", sourceType: "module" });
 
   /* module-level `const NAME = "…"` declarations, by name */
   const consts = new Map();
-  for (const node of ast.body) {
+  for (const top of ast.body) {
+    /* [M1 2026-08-11] `export const` IS NOT A VariableDeclaration — it is an
+       ExportNamedDeclaration wrapping one, so this loop walked straight past
+       `export const RECORD_EPOCH` in its new module and the epoch read null.
+       Unwrapped here rather than special-cased at the call site. */
+    const node = top.type === "ExportNamedDeclaration" && top.declaration
+      ? top.declaration : top;
     if (node.type !== "VariableDeclaration") continue;
     for (const d of node.declarations) {
       if (d.id.type !== "Identifier") continue;
@@ -252,7 +291,16 @@ export function recordEpoch(src) {
     }
   }
 
-  let found = null;
+  /* [M1 2026-08-11] THE BARE CONSTANT IS ACCEPTED FIRST, and this is what the
+     split actually broke. This function was written to find the FACE PROPERTY
+     `recordEpoch: RECORD_EPOCH` — which is still in `robots.js` — and after the
+     move it was pointed at `record-epoch.js`, where there is no face and no
+     property, only `export const RECORD_EPOCH = "…"`. It returned null and the
+     editor printed "day one null" with five unresolved `date:` fields.
+     Both shapes are read now: the declaration if the source has one, the face
+     property otherwise. A source carrying neither still returns null, which is
+     the honest answer and is what the caller is written to expect. */
+  let found = consts.get("RECORD_EPOCH") ?? null;
   (function visit(n) {
     if (!n || typeof n !== "object" || found) return;
     if (Array.isArray(n)) { n.forEach(visit); return; }
@@ -348,25 +396,20 @@ export function summaries() {
 export function draftEntries(src) {
   const text = src ?? fs.readFileSync(path.join(REPO, RECORD_SOURCE), "utf8");
   const ast = Parser.parse(text, { ecmaVersion: "latest", sourceType: "module" });
-  const epoch = recordEpoch(text);
+  /* [M1 2026-08-11] `src` AND NOT `text`: `text` is the ENTRIES file, and the
+     epoch is no longer in it. Passing `src` through means a caller reading an
+     old ref still gets that ref's epoch, and the ordinary case (no src) lets
+     `recordEpoch` read its own module. */
+  const epoch = recordEpoch(src);
 
-  let track = null;
-  (function visit(n) {
-    if (!n || typeof n !== "object" || track) return;
-    if (Array.isArray(n)) { n.forEach(visit); return; }
-    if (n.type === "ObjectExpression") {
-      const id = strOf(propOf(n, "id"));
-      if (id === RECORD_TRACK_ID && propOf(n, "face")) { track = n; return; }
-    }
-    for (const k of Object.keys(n)) {
-      if (k === "type" || k === "start" || k === "end" || k === "loc") continue;
-      visit(n[k]);
-    }
-  })(ast);
-  if (!track) throw new Error("reveal/record-entries.mjs: draftEntries found no Record track");
-
-  const entriesNode = propOf(propOf(track, "face"), "entries");
-  if (!entriesNode || entriesNode.type !== "ArrayExpression")
+  /* [M1 2026-08-11] THE THIRD COPY OF THE WALK, AND THE ONE THAT PROVED THE
+     POINT. `parseRecord` and `read2` each carried their own; this one carried a
+     third, and after the split the first two were repointed and this was not —
+     `npm run record` failed with "draftEntries found no Record track", which is
+     the right failure and the wrong number of places to fix. All three read
+     `entriesArrayOf` now. */
+  const entriesNode = entriesArrayOf(ast);
+  if (!entriesNode)
     throw new Error("reveal/record-entries.mjs: draftEntries found no `entries` array");
 
   const dayFrom = (n) => {

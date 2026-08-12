@@ -165,4 +165,100 @@ for (const e of entries) {
   if (e.tomb) out.push(`              tomb: ${wrap(e.tomb, 20)},`);
   out.push(`            },`);
 }
-console.log(out.join("\n"));
+const BODY = out.join("\n");
+
+/* ═══ [M1 2026-08-11] --write: THE STEP MIKE WAS DOING BY HAND ══════════════
+   Until today this file printed and stopped, and step four of eight was Mike
+   pasting the result into `src/data/artists/robots.js` — a 2,207-line module
+   holding four albums, eleven faces and the wing's standing reasoning. The
+   entries are their own module now (`src/data/artists/robots-record.js`,
+   nothing in it but the array) precisely so that a tool may rewrite the whole
+   file without being able to damage anything else.
+
+   THE DEFAULT IS STILL THE DRY RUN. No `--write`, no write: it prints exactly
+   what it printed before, byte for byte, so the old habit still works and the
+   proof step (`--verify`) is unchanged.
+
+   THE GUARDS ARE THE SAME SHAPE `assets-declare.mjs` AND `ledger-declare.mjs`
+   ALREADY USE, and every one of them REFUSES rather than half-writing:
+     1. --no is a preview filter, and writing a filtered set would delete the
+        records it filtered out. Refused outright.
+     2. THE PREAMBLE IS FOUND, NOT ASSUMED. The file is split on its own
+        `export const RECORD_ENTRIES = [` line; if that line is not there, or
+        the file does not end in the closing bracket, nothing is written.
+     3. NO RECORD MAY VANISH. Every `no` currently in the file must be present
+        in the draft. Additions are the normal case and are named; a
+        disappearance is refused, because the draft is meant to carry the whole
+        volume and a short draft means something upstream lost it.
+     4. IT MUST PARSE, and it is parsed by THE MUSEUM'S OWN READER
+        (`reveal/record-entries.mjs`) rather than by a second parser written
+        here — if `parseRecord` cannot see the entries, neither can the gates,
+        and a file that only this tool understands is worse than no file.
+     5. THE ROUND TRIP IS BYTE-VERIFIED. Every string in the draft must come
+        back out of the written file, folded `+` chains and all. Any mismatch
+        and the ORIGINAL FILE IS RESTORED — the write is staged in memory and
+        only committed to disk after the parse, then re-read and compared, and
+        rolled back if the comparison fails.
+   =========================================================================== */
+if (!argv.includes("--write")) {
+  console.log(BODY);
+  process.exit(0);
+}
+
+const TARGET = path.join(REPO, "src", "data", "artists", "robots-record.js");
+const REL = path.relative(REPO, TARGET);
+const die = (why) => {
+  console.error(`record:land --write REFUSED — ${why}`);
+  console.error(`Nothing was written. ${REL} is unchanged.`);
+  process.exit(1);
+};
+
+if (only != null) die("`--no` is a preview filter; writing a filtered set would delete every record it filtered out.");
+if (!fs.existsSync(TARGET)) die(`${REL} does not exist.`);
+
+const before = fs.readFileSync(TARGET, "utf8");
+const OPEN = "export const RECORD_ENTRIES = [\n";
+const CLOSE = "\n];\n";
+if (!before.includes(OPEN)) die(`${REL} has no \`${OPEN.trim()}\` line — this tool does not know where the array starts.`);
+if (!before.endsWith(CLOSE)) die(`${REL} does not end in \`];\` — this tool does not know where the array ends.`);
+
+const preamble = before.slice(0, before.indexOf(OPEN) + OPEN.length);
+const after = preamble + BODY + CLOSE;
+
+/* guard 3 — nothing may vanish */
+const { parseRecord } = await import(url.pathToFileURL(path.join(REPO, "reveal", "record-entries.mjs")).href);
+let had;
+try { had = parseRecord(before).entries.map(e => e.no).filter(n => n != null); }
+catch (e) { die(`the CURRENT ${REL} does not parse (${e.message}). Fix it by hand first.`); }
+const wants = entries.map(e => e.no);
+const lost = had.filter(n => !wants.includes(n));
+if (lost.length) die(`the draft does not carry record(s) ${lost.join(", ")}, which are in ${REL}. `
+  + `A draft is meant to hold the whole volume; a short one means something upstream dropped them.`);
+
+/* guard 4 — it must parse, and by the museum's own reader */
+let parsed;
+try { parsed = parseRecord(after); }
+catch (e) { die(`the file this would write does not parse: ${e.message}`); }
+if (parsed.entries.length !== entries.length)
+  die(`the file this would write parses as ${parsed.entries.length} entries, not ${entries.length}.`);
+
+/* guard 5 — every string comes back, or the original goes back */
+fs.writeFileSync(TARGET, after);
+try {
+  const back = parseRecord(fs.readFileSync(TARGET, "utf8"));
+  const seen = new Set(back.prose);
+  const missing = [];
+  for (const e of entries) for (const [where, s] of strings(e)) if (!seen.has(s)) missing.push(`Record ${e.no} ${where}`);
+  if (missing.length) throw new Error(`${missing.length} string(s) did not survive: ${missing.slice(0, 3).join("; ")}`);
+} catch (e) {
+  fs.writeFileSync(TARGET, before);
+  die(`${e.message}\
+  THE ORIGINAL FILE HAS BEEN PUT BACK.`);
+}
+
+const added = wants.filter(n => !had.includes(n));
+console.log(`wrote ${REL}`);
+console.log(`  ${entries.length} record(s): ${wants.map(n => String(n).padStart(3, "0")).join(" ")}`);
+if (added.length) console.log(`  new: ${added.map(n => String(n).padStart(3, "0")).join(" ")}`);
+console.log(`  ${before.length} -> ${after.length} bytes`);
+console.log(`  every string round-tripped through ${path.relative(REPO, path.join(REPO, "reveal", "record-entries.mjs"))}`);

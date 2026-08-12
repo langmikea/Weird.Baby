@@ -67,6 +67,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
+import { spawnSync } from "node:child_process";
 import { draftEntries } from "../../reveal/record-entries.mjs";
 import { BUDGETS, FORMATS, sectionsFromText } from "../../reveal/record-shape.mjs";
 
@@ -301,7 +302,45 @@ ${rule}
 }
 
 /* ═══ RUN ═══════════════════════════════════════════════════════════════════ */
+/* ═══ [M1 2026-08-11] THE BUNDLE IS REBUILT EVERY TIME, AND THAT IS THE FIX ══
+   MIKE: the writing surface "no longer matches the page he just spent a day
+   designing". It did not, and the reason was mechanical rather than a design
+   drift: this page embeds `_preview/preview.js` + `preview.css`, a BUILT copy
+   of the museum's own components, and only `npm run dictation` ever rebuilt
+   them. `npm run record` wrote a fresh page around a stale bundle — measured
+   on 2026-08-11: the bundle carried the fourth round's `vp-rec-openhead` and
+   neither the fifth round's walk fix nor the sixth's rail span, so it was
+   still showing him the gap he had already had removed.
+   IT IS THE SAME SPAWNED BUILD `prep.mjs` RUNS, not a second recipe —
+   OPERATIONS §8: anything that needs to build spawns `vite build`, never
+   `build()`. And it FAILS THE GENERATOR if it fails, for prep.mjs's own stated
+   reason: a writing surface that cannot draw the real components must not ship
+   looking like one that can.
+   THE FRAME IS COPIED BACK AFTERWARDS because vite's `emptyOutDir` clears the
+   folder on every run and `frame.html` is a committed static file, not a build
+   product. Same two lines, same order, as `prep.mjs`. */
+function rebuildPreviewBundle({ quiet = false } = {}) {
+  const cfg = path.join(HERE, "preview", "vite.config.mjs");
+  const bin = path.join(REPO, "node_modules", "vite", "bin", "vite.js");
+  const t0 = Date.now();
+  const r = spawnSync(process.execPath, [bin, "build", "-c", cfg], { cwd: REPO, encoding: "utf8" });
+  if (r.error || r.status !== 0) {
+    console.error(r.stdout || ""); console.error(r.stderr || "");
+    throw new Error("record-edit.mjs: the live preview bundle failed to build "
+      + `(${r.error ? r.error.message : "vite exit " + r.status}). No page is written, `
+      + "because a writing surface that cannot draw the real components must not ship "
+      + "looking like one that can.");
+  }
+  const outDir = path.join(OUT_DIR, "_preview");
+  fs.copyFileSync(path.join(HERE, "preview", "frame.html"), path.join(outDir, "frame.html"));
+  for (const n of ["preview.js", "preview.css", "frame.html"]) {
+    if (!fs.existsSync(path.join(outDir, n))) throw new Error(`the preview bundle is missing ${n}`);
+  }
+  if (!quiet) console.log(`  rebuilt the preview bundle (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
+}
+
 export function buildRecordEditor({ quiet = false } = {}) {
+  rebuildPreviewBundle({ quiet });
   const { html, shipped, seed, report, epoch } = build();
   fs.mkdirSync(OUT_DIR, { recursive: true });
   const out = path.join(OUT_DIR, "record.html");

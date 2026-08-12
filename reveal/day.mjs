@@ -119,7 +119,8 @@ import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
 import { execFileSync } from "node:child_process";
-import { entries as recordEntries, parseRecord, RECORD_SOURCE } from "./record-entries.mjs";
+import { entries as recordEntries, parseRecord, RECORD_SOURCE,
+         RECORD_SOURCE_LEGACY } from "./record-entries.mjs";
 import { delivered, publicPlacements, deliveryFaults, SIGNAGE } from "./delivery.mjs";
 import { GOVERNED_PREFIX, STAGE_PREFIX } from "./placement.mjs";
 import { readStage, LAUNCH } from "./stage.mjs";
@@ -215,12 +216,25 @@ function place(rows) {
 /* ── the delta ──────────────────────────────────────────────────────────── */
 /** What today's Record publishes that `ref`'s did not, and the converse. */
 function deltaSince(ref) {
+  /* [M1 2026-08-11] TWO PATHS, AND THE SECOND IS NOT A FALLBACK FOR A BUG.
+     The entries moved to their own module today. Every ref before that has them
+     inside `robots.js`, so a delta against last week must ask for the file that
+     existed THEN — and `git show` fails outright on a path that did not exist at
+     that ref rather than returning nothing. `parseRecord` reads either shape
+     (see `entriesArrayOf`), so once the text is in hand the rest is unchanged.
+     The error names BOTH paths, because "not found" here means the Record was
+     at neither address and that is the useful thing to print. */
   let old;
-  try {
-    old = execFileSync("git", ["show", `${ref}:${RECORD_SOURCE}`],
-      { cwd: REPO, encoding: "utf8", maxBuffer: 32 * 1024 * 1024 });
-  } catch {
-    return { error: `git could not read ${RECORD_SOURCE} at \`${ref}\`.` };
+  const tried = [];
+  for (const p of [RECORD_SOURCE, RECORD_SOURCE_LEGACY]) {
+    try {
+      old = execFileSync("git", ["show", `${ref}:${p}`],
+        { cwd: REPO, encoding: "utf8", maxBuffer: 32 * 1024 * 1024 });
+      break;
+    } catch { tried.push(p); }
+  }
+  if (old === undefined) {
+    return { error: `git could not read the Record at \`${ref}\` — tried ${tried.join(" and ")}.` };
   }
   const before = new Set();
   for (const e of parseRecord(old).entries) for (const a of (e.assets || [])) before.add(a);

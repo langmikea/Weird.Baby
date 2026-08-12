@@ -202,122 +202,6 @@
    "p": "spine[].tracks[].face.entriesMode",
    "c": "HOUSE"
   },
-  "087c2b7d72cae40b": {
-   "f": "src/data/artists/robots.js",
-   "l": 891,
-   "t": "The one thing that wasn't packed like the rest",
-   "p": "spine[].tracks[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "dd510c70d0c4960e"
-   ]
-  },
-  "dd510c70d0c4960e": {
-   "f": "src/data/artists/robots.js",
-   "l": 894,
-   "t": "The back of the unit.",
-   "p": "spine[].tracks[].face.entries[].stillCaption",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "6010dec0b7b925c4": {
-   "f": "src/data/artists/robots.js",
-   "l": 895,
-   "t": "A sealed modern bag holding a USB-C adapter, packed unlike everything else that arrived with it. The unit is now on charge.",
-   "p": "spine[].tracks[].face.entries[].line",
-   "c": "RESTATED",
-   "r": [
-    "dd510c70d0c4960e"
-   ]
-  },
-  "fcd58bb86800522a": {
-   "f": "src/data/artists/robots.js",
-   "l": 898,
-   "t": "One item in the delivery was not packed the way the rest of it was packed. It is a USB-C adapter, sealed in a modern bag, and the unit is on charge because of it.",
-   "p": "spine[].tracks[].face.entries[].lead",
-   "c": "RESTATED",
-   "r": [
-    "dd510c70d0c4960e"
-   ]
-  },
-  "eeaf9bc9c0abcee8": {
-   "f": "src/data/artists/robots.js",
-   "l": 902,
-   "t": "The bag",
-   "p": "spine[].tracks[].face.entries[].sections[].label",
-   "c": "HOUSE"
-  },
-  "fb25f11566a74be8": {
-   "f": "src/data/artists/robots.js",
-   "l": 904,
-   "t": "A sealed bag, modern, holding one USB-C adapter. It was packed differently from everything else that arrived with it.",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
-   "c": "RESTATED",
-   "r": [
-    "dd510c70d0c4960e"
-   ]
-  },
-  "76f63ec846620a33": {
-   "f": "src/data/artists/robots.js",
-   "l": 907,
-   "t": "A conversation about the battery",
-   "p": "spine[].tracks[].face.entries[].sections[].label",
-   "c": "HOUSE"
-  },
-  "146fee785a063089": {
-   "f": "src/data/artists/robots.js",
-   "l": 909,
-   "t": "The cell was discussed before anything was connected: whether it is deep-discharged rather than dead, and whether to hack it. It was not hacked. The unit is charging from the adapter that came in the bag.",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
-   "c": "RESTATED",
-   "r": [
-    "dd510c70d0c4960e"
-   ]
-  },
-  "4b1b0480609ec4f4": {
-   "f": "src/data/artists/robots.js",
-   "l": 913,
-   "t": "It came on, briefly",
-   "p": "spine[].tracks[].face.entries[].sections[].label",
-   "c": "HOUSE"
-  },
-  "60f37009c80153da": {
-   "f": "src/data/artists/robots.js",
-   "l": 915,
-   "t": "The unit powered on for a short time before the adapter was used.",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
-   "c": "RESTATED",
-   "r": [
-    "dd510c70d0c4960e"
-   ]
-  },
-  "d3e01a723af35637": {
-   "f": "src/data/artists/robots.js",
-   "l": 917,
-   "t": "On charge",
-   "p": "spine[].tracks[].face.entries[].sections[].label",
-   "c": "HOUSE"
-  },
-  "dbccd3391eb79458": {
-   "f": "src/data/artists/robots.js",
-   "l": 918,
-   "t": "The charge is slow.",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
-   "c": "RESTATED",
-   "r": [
-    "dd510c70d0c4960e"
-   ]
-  },
-  "29d27670ef365d85": {
-   "f": "src/data/artists/robots.js",
-   "l": 920,
-   "t": "The unit is drawing power.",
-   "p": "spine[].tracks[].face.entries[].tomb",
-   "c": "RESTATED",
-   "r": [
-    "dd510c70d0c4960e"
-   ]
-  },
   "c488fc8e8b5df22f": {
    "f": "src/data/artists/robots.js",
    "l": 1091,
@@ -15338,349 +15222,6 @@
    "c": "HOUSE",
    "n": "HOUSE — the attachment list's own chrome. [A1/A2 2026-08-08] These are the words the component prints ABOUT a payload rather than any content of one: the block's label, the kind of thing each row is, the separator between the facts on a row, the singular/plural tail on a count, the reader's tooltip, and the empty state a document wears when its page has not been photographed. Every specific on a row — the name, the source, the date, the page count, the lines, the extract — comes from the entry's own data and is declared where that data lives. Source: docs/MUSEUM_ATTACHMENTS_LOG-20260808.md §0."
   },
-  "b724eda0bf113741": {
-   "f": "src/data/artists/robots.js",
-   "l": 349,
-   "t": "2026-08-17",
-   "p": "RECORD_EPOCH — Record 001's `date` and the face's `recordEpoch`",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DATE_PREVIEW_LOG-20260808.md §0 — Mike, 2026-08-08: \"RECORD 001 IS DATED 2026-08-17 (pending launch happening that day)\", with the standing rule above it that an entry's date is the actual calendar day it is published, not a fictional offset",
-   "n": "IT IS THE DATE ITSELF AND NOT A STRING ON THE GLASS. Nothing prints these ten characters: the register stamp derives `17 AUG 26` and the dateline derives `Week 1 · Monday`, both by arithmetic in src/lib/record-model.js. It is declared MIKE because it is his fact, and it is the one field a launch slip moves."
-  },
-  "b7d268f83c5b7ea7": {
-   "f": "src/data/artists/robots.js",
-   "l": 453,
-   "t": "EXECUTIVE SUMMARY",
-   "p": "spine[].tracks[].face.entries[].sections[].label",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
-  },
-  "e035f2d3befd7a0b": {
-   "f": "src/data/artists/robots.js",
-   "l": 474,
-   "t": "DETAILED REPORT",
-   "p": "spine[].tracks[].face.entries[].sections[].label",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
-  },
-  "8c8e371dfd57cda8": {
-   "f": "src/data/artists/robots.js",
-   "l": 480,
-   "t": "15:14 - First data packet received",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
-  },
-  "18e78245369dc649": {
-   "f": "src/data/artists/robots.js",
-   "l": 481,
-   "t": "15:58 - Second data packet received",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
-  },
-  "2fdc64457aa72ad8": {
-   "f": "src/data/artists/robots.js",
-   "l": 485,
-   "t": "16:13 - REACT - Team is convened",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
-  },
-  "84d193dfce7cde78": {
-   "f": "src/data/artists/robots.js",
-   "l": 537,
-   "t": "INITIAL LAUNCH REPORT - Weird.Baby",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "581ea56dca47db32": {
-   "f": "src/data/artists/robots.js",
-   "l": 622,
-   "t": "GENERAL STATUS UPDATE",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "ff146c022329574c": {
-   "f": "src/data/artists/robots.js",
-   "l": 623,
-   "t": "Weird.Baby Integrity Management Plan remains on-track without anomalies.\nEmail Server Data Assault has ceased; no net impact.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "ea6c717806dc187d": {
-   "f": "src/data/artists/robots.js",
-   "l": 698,
-   "t": "Weird.Baby uptime: 100%, no anomalies",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "e59d09a92d9ebee0": {
-   "f": "src/data/artists/robots.js",
-   "l": 699,
-   "t": "Operations Cadence : Favorable, On Pace",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "c91737466800b78b": {
-   "f": "src/data/artists/robots.js",
-   "l": 631,
-   "t": "Blockers - Nothing to Report",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "b942acdcc90729ed": {
-   "f": "src/data/artists/robots.js",
-   "l": 635,
-   "t": "All process controls are in good order.  Operations is turning the crank, keeping tings moving on cadence.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "b267b79d26d89bf3": {
-   "f": "src/data/artists/robots.js",
-   "l": 637,
-   "t": "The adrenalin from the launch and the weekend has finally worn off; we are all running on fumes.  No time was spent on the mystery data stream, today.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "19fc19e4c5c15cd2": {
-   "f": "src/data/artists/robots.js",
-   "l": 644,
-   "t": "DATA EXTRACTED - Weekend Robots Anomaly",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "ebc250dd374ed73f": {
-   "f": "src/data/artists/robots.js",
-   "l": 645,
-   "t": "Weird.Baby IMP - On-track without anomalies.\nEmail Server Data Assault - Password Protected File Structure (6.28 GB)",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "8004450de1102a0d": {
-   "f": "src/data/artists/robots.js",
-   "l": 653,
-   "t": "Data has been extracted from weekend dump including images and text. While all of it appears compelling, it is currently of no known value.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "f939c4d2a2b42cd0": {
-   "f": "src/data/artists/robots.js",
-   "l": 659,
-   "t": "Data has been extracted from weekend dump",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "6453f2eb4e980015": {
-   "f": "src/data/artists/robots.js",
-   "l": 660,
-   "t": "IMAGE - Engineering Manual - Assorted pages",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "8e604439dd5d5ddf": {
-   "f": "src/data/artists/robots.js",
-   "l": 668,
-   "t": "IMAGE - Assorted Evidence Based photos - Unknown Importance",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "9065c862ef58b67c": {
-   "f": "src/data/artists/robots.js",
-   "l": 678,
-   "t": "A new Volume has been created: /Robots/MGK-VIIIp",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "58ff05f91c54457e": {
-   "f": "src/data/artists/robots.js",
-   "l": 700,
-   "t": "Transfer complete - Future reporting to come from Operations",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "2cf76aea1935dc2c": {
-   "f": "src/data/artists/robots.js",
-   "l": 702,
-   "t": "/Robots - The data can be assembled to produce a heavily compressed file that is  password protected.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "9473d5d0d54c2f04": {
-   "f": "src/data/artists/robots.js",
-   "l": 558,
-   "t": "Weird.Baby website is live\nAlert — Incoming Email Server Load (contained)",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "a728752e0afa9090": {
-   "f": "src/data/artists/robots.js",
-   "l": 581,
-   "t": "Weird.Baby launched on schedule. No deviations; f(Ump) = 100%",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "ba93137fecc201aa": {
-   "f": "src/data/artists/robots.js",
-   "l": 583,
-   "t": "Handoff is on track (T-6); Operations has hands-on-the-ball.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "19c218be54905d25": {
-   "f": "src/data/artists/robots.js",
-   "l": 588,
-   "t": "ALARM - Incoming Email Server Load 1000x",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "b4582f60e606192e": {
-   "f": "src/data/artists/robots.js",
-   "l": 589,
-   "t": "o Operations remains unaffected.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "2371720cd85071c6": {
-   "f": "src/data/artists/robots.js",
-   "l": 590,
-   "t": "o Not single sourced, so not as simple as \"turn it off.\"",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "51fc9d81f28258e6": {
-   "f": "src/data/artists/robots.js",
-   "l": 592,
-   "t": "o Data transmissions went silent shortly after WB launch.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "8ff716c389e2c157": {
-   "f": "src/data/artists/robots.js",
-   "l": 594,
-   "t": "ADDENDUM 01 - Event Log - Friday Launch(-2)",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "fd56ebf48fa80889": {
-   "f": "src/data/artists/robots.js",
-   "l": 596,
-   "t": "15:00 - Weird.Baby email server Scheduled Early Auto Start",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "5ce26915b42c8071": {
-   "f": "src/data/artists/robots.js",
-   "l": 597,
-   "t": "15:01 - Weird.Baby System BIST - No deviations; f(Ump) = 100%",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "1c332dd357cf54cf": {
-   "f": "src/data/artists/robots.js",
-   "l": 601,
-   "t": "16:00 - Incoming data crosses 86% vs threshold",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "1f751cf0b135fa69": {
-   "f": "src/data/artists/robots.js",
-   "l": 602,
-   "t": "16:10 - Server auto-shutdown, auto-containment, and auto-alerts",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "f439c42f0110bc92": {
-   "f": "src/data/artists/robots.js",
-   "l": 605,
-   "t": "23:30 - REACT RULING - Restart with 5000x resources.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "6ac7a219b73a93fa": {
-   "f": "src/data/artists/robots.js",
-   "l": 606,
-   "t": "The decision to resume was determined to be low risk, reversible, and a real world stress test.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "d76dc60bcb1edd35": {
-   "f": "src/data/artists/robots.js",
-   "l": 608,
-   "t": "The engineering team was more intrigued than concerned, and not involved in the determination.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "929fa50da44ce130": {
-   "f": "src/data/artists/robots.js",
-   "l": 611,
-   "t": "ADDENDUM 02 - Weekend Summary",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "715a73ec5065eb71": {
-   "f": "src/data/artists/robots.js",
-   "l": 613,
-   "t": "Staff onsite to support Weird.Baby launch - Nothing to report.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "4f65cf340fb804e6": {
-   "f": "src/data/artists/robots.js",
-   "l": 615,
-   "t": "The time was put to use reviewing the incoming data.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "4bbbc8d3d357d422": {
-   "f": "src/data/artists/robots.js",
-   "l": 616,
-   "t": "Pages of hexadecimal numbers; presumably needs to be compiled and assembled into something usable.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "fddd22a57789d405": {
-   "f": "src/data/artists/robots.js",
-   "l": 619,
-   "t": "ADDENDUM 03 - Event Log - Monday Day(1)",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "efba810043e176b6": {
-   "f": "src/data/artists/robots.js",
-   "l": 621,
-   "t": "00:00 - WB Go-Live went off without a hitch.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "7bf9c4682d91288e": {
-   "f": "src/data/artists/robots.js",
-   "l": 622,
-   "t": "00:02 - Incoming data stream ended",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "d9fce70b5c1232cb": {
-   "f": "src/data/artists/robots.js",
-   "l": 623,
-   "t": "The remainder of the day was completely uneventful.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "f73cbadeb61dc3b4": {
-   "f": "src/data/artists/robots.js",
-   "l": 624,
-   "t": "Weird.Baby uptime - 100%, no further anomalies.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "16418168b0de2c96": {
-   "f": "src/data/artists/robots.js",
-   "l": 625,
-   "t": "We decided to stand up /Robots as a page to track our progress for a few days. It is weird if nothing else. Maybe try to get a little crowdsourcing going on dealing with this, going forward.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
   "6f7b27b613a63062": {
    "f": "src/routes/exhibit/RecordNav.jsx",
    "l": 68,
@@ -15775,6 +15316,465 @@
    "l": 125,
    "t": "INDEX",
    "c": "HOUSE"
+  },
+  "70c2e7724abf2808": {
+   "f": "src/data/artists/record-epoch.js",
+   "l": 49,
+   "t": "2026-08-17",
+   "p": "RECORD_EPOCH — Record 001's `date` and the face's `recordEpoch`",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DATE_PREVIEW_LOG-20260808.md §0 — Mike, 2026-08-08: \"RECORD 001 IS DATED 2026-08-17 (pending launch happening that day)\", with the standing rule above it that an entry's date is the actual calendar day it is published, not a fictional offset",
+   "n": "IT IS THE DATE ITSELF AND NOT A STRING ON THE GLASS. Nothing prints these ten characters: the register stamp derives `17 AUG 26` and the dateline derives `Week 1 · Monday`, both by arithmetic in src/lib/record-model.js. It is declared MIKE because it is his fact, and it is the one field a launch slip moves."
+  },
+  "007e47ba2bde8ee6": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 131,
+   "t": "INITIAL LAUNCH REPORT - Weird.Baby",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "bfa2f5a6154e26d9": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 152,
+   "t": "Weird.Baby website is live\nAlert — Incoming Email Server Load (contained)",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "21e0467885e5b524": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 288,
+   "t": "EXECUTIVE SUMMARY",
+   "p": "spine[].tracks[].face.entries[].sections[].label",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
+  },
+  "2ae22841cbd51b93": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 175,
+   "t": "Weird.Baby launched on schedule. No deviations; f(Ump) = 100%",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "2e0634240d70b185": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 177,
+   "t": "Handoff is on track (T-6); Operations has hands-on-the-ball.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "e4d0a6f2bfadefb0": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 180,
+   "t": "DETAILED REPORT",
+   "p": "spine[].tracks[].face.entries[].sections[].label",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
+  },
+  "ef3a7839c118c5d6": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 182,
+   "t": "ALARM - Incoming Email Server Load 1000x",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "991f5ad6f5c3db68": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 183,
+   "t": "o Operations remains unaffected.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "3a464ddc9f1a69c8": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 184,
+   "t": "o Not single sourced, so not as simple as \"turn it off.\"",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "91a8cbfb0eae7c7d": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 186,
+   "t": "o Data transmissions went silent shortly after WB launch.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "59cafb56ddd0d82d": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 188,
+   "t": "ADDENDUM 01 - Event Log - Friday Launch(-2)",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "044af1214c09790f": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 190,
+   "t": "15:00 - Weird.Baby email server Scheduled Early Auto Start",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "14314c5dfc3b85ef": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 191,
+   "t": "15:01 - Weird.Baby System BIST - No deviations; f(Ump) = 100%",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "88276ced4a63f671": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 193,
+   "t": "15:14 - First data packet received",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
+  },
+  "c15f4584d8978632": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 194,
+   "t": "15:58 - Second data packet received",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
+  },
+  "05e0f5c7eee6370b": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 195,
+   "t": "16:00 - Incoming data crosses 86% vs threshold",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "985238f291f35f23": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 196,
+   "t": "16:10 - Server auto-shutdown, auto-containment, and auto-alerts",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "d3cc3615411dca6e": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 198,
+   "t": "16:13 - REACT - Team is convened",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
+  },
+  "06a1db599c5979b6": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 199,
+   "t": "23:30 - REACT RULING - Restart with 5000x resources.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "7710a8a0a8eda094": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 200,
+   "t": "The decision to resume was determined to be low risk, reversible, and a real world stress test.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "1429118eaa5db2d2": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 202,
+   "t": "The engineering team was more intrigued than concerned, and not involved in the determination.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "fa5be351128c1eff": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 205,
+   "t": "ADDENDUM 02 - Weekend Summary",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "592d0b53d6ee3f0f": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 207,
+   "t": "Staff onsite to support Weird.Baby launch - Nothing to report.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "3ae37892bff3ab83": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 209,
+   "t": "The time was put to use reviewing the incoming data.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "83ec7a79d51c2c7b": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 210,
+   "t": "Pages of hexadecimal numbers; presumably needs to be compiled and assembled into something usable.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "8a8fa208c2d66073": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 213,
+   "t": "ADDENDUM 03 - Event Log - Monday Day(1)",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "6215139ec771ac35": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 215,
+   "t": "00:00 - WB Go-Live went off without a hitch.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "90e6457aa8ce7c7a": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 216,
+   "t": "00:02 - Incoming data stream ended",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "c1b32aabd41c030b": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 217,
+   "t": "The remainder of the day was completely uneventful.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "d503e1e16772ce93": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 218,
+   "t": "Weird.Baby uptime - 100%, no further anomalies.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "db8af2a07a356f8c": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 219,
+   "t": "We decided to stand up /Robots as a page to track our progress for a few days. It is weird if nothing else. Maybe try to get a little crowdsourcing going on dealing with this, going forward.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
+  },
+  "1b5504e112211393": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 227,
+   "t": "GENERAL STATUS UPDATE",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "6e6c4adec685657d": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 228,
+   "t": "Weird.Baby Integrity Management Plan remains on-track without anomalies.\nEmail Server Data Assault has ceased; no net impact.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "8745f9535628ce9f": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 290,
+   "t": "Weird.Baby uptime: 100%, no anomalies",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "bd96a0a5d0764796": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 291,
+   "t": "Operations Cadence : Favorable, On Pace",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "3004e0b95f6b8682": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 236,
+   "t": "Blockers - Nothing to Report",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "b7689aa7e36abf8c": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 240,
+   "t": "All process controls are in good order.  Operations is turning the crank, keeping tings moving on cadence.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "8e3cffb7abb6b407": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 242,
+   "t": "The adrenalin from the launch and the weekend has finally worn off; we are all running on fumes.  No time was spent on the mystery data stream, today.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "75de414a1927c711": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 249,
+   "t": "DATA EXTRACTED - Weekend Robots Anomaly",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "c53bbc98180db364": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 250,
+   "t": "Weird.Baby IMP - On-track without anomalies.\nEmail Server Data Assault - Password Protected File Structure (6.28 GB)",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "74bbdae80d960fb7": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 258,
+   "t": "Data has been extracted from weekend dump including images and text. While all of it appears compelling, it is currently of no known value.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "055692ed7bde00dc": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 264,
+   "t": "Data has been extracted from weekend dump",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "cd09ca2ecfc3e0d5": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 265,
+   "t": "IMAGE - Engineering Manual - Assorted pages",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "9f7f20e1612af31a": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 266,
+   "t": "IMAGE - Assorted Evidence Based photos - Unknown Importance",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "9829022d2615b90d": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 268,
+   "t": "A new Volume has been created: /Robots/MGK-VIIIp",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "435310423bcbfb05": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 292,
+   "t": "Transfer complete - Future reporting to come from Operations",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "6f29670330e21980": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 294,
+   "t": "/Robots - The data can be assembled to produce a heavily compressed file that is  password protected.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
+  },
+  "175ddf614e4d05a3": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 347,
+   "t": "The one thing that wasn't packed like the rest",
+   "p": "spine[].tracks[].face.entries[].title",
+   "c": "RESTATED",
+   "r": [
+    "6e22f302cba44ce9"
+   ]
+  },
+  "6e22f302cba44ce9": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 354,
+   "t": "The back of the unit.",
+   "p": "spine[].tracks[].face.entries[].stillCaption",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "e80cc06628731201": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 369,
+   "t": "A sealed modern bag holding a USB-C adapter, packed unlike everything else that arrived with it. The unit is now on charge.",
+   "p": "spine[].tracks[].face.entries[].line",
+   "c": "RESTATED",
+   "r": [
+    "6e22f302cba44ce9"
+   ]
+  },
+  "0696ba5f531c5751": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 372,
+   "t": "One item in the delivery was not packed the way the rest of it was packed. It is a USB-C adapter, sealed in a modern bag, and the unit is on charge because of it.",
+   "p": "spine[].tracks[].face.entries[].lead",
+   "c": "RESTATED",
+   "r": [
+    "6e22f302cba44ce9"
+   ]
+  },
+  "fc826d1bf3875962": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 376,
+   "t": "The bag",
+   "p": "spine[].tracks[].face.entries[].sections[].label",
+   "c": "HOUSE"
+  },
+  "e8413d93c91825cc": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 378,
+   "t": "A sealed bag, modern, holding one USB-C adapter. It was packed differently from everything else that arrived with it.",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "RESTATED",
+   "r": [
+    "6e22f302cba44ce9"
+   ]
+  },
+  "3dcb610f21f29b94": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 381,
+   "t": "A conversation about the battery",
+   "p": "spine[].tracks[].face.entries[].sections[].label",
+   "c": "HOUSE"
+  },
+  "5d7145ca7fb8aae5": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 383,
+   "t": "The cell was discussed before anything was connected: whether it is deep-discharged rather than dead, and whether to hack it. It was not hacked. The unit is charging from the adapter that came in the bag.",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "RESTATED",
+   "r": [
+    "6e22f302cba44ce9"
+   ]
+  },
+  "a088a3e993eb2855": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 387,
+   "t": "It came on, briefly",
+   "p": "spine[].tracks[].face.entries[].sections[].label",
+   "c": "HOUSE"
+  },
+  "51a4b85d8e5583e7": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 389,
+   "t": "The unit powered on for a short time before the adapter was used.",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "RESTATED",
+   "r": [
+    "6e22f302cba44ce9"
+   ]
+  },
+  "b6e27dba1b2c47cd": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 391,
+   "t": "On charge",
+   "p": "spine[].tracks[].face.entries[].sections[].label",
+   "c": "HOUSE"
+  },
+  "3b7c1c87be4bc1e8": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 392,
+   "t": "The charge is slow.",
+   "p": "spine[].tracks[].face.entries[].sections[].body",
+   "c": "RESTATED",
+   "r": [
+    "6e22f302cba44ce9"
+   ]
+  },
+  "6cc83d6103e909b7": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 394,
+   "t": "The unit is drawing power.",
+   "p": "spine[].tracks[].face.entries[].tomb",
+   "c": "RESTATED",
+   "r": [
+    "6e22f302cba44ce9"
+   ]
   }
  }
 }
