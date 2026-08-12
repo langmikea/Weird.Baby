@@ -9,6 +9,9 @@ import { publicLedger } from "./reveal/public-view.mjs";
 import { readStage } from "./reveal/stage.mjs";
 import { publicPlacements } from "./reveal/delivery.mjs";
 import { placeRule } from "./reveal/placement.mjs";
+import { assetSchedule } from "./reveal/record-clock.mjs";
+import { entries as recordEntries } from "./reveal/record-entries.mjs";
+import { recordDay } from "./src/data/artists/record-epoch.js";
 
 /* [V1 2026-08-06] THE STAGE, READ ONCE PER BUILD. `reveal/stage.mjs` is the
    declaration and its header is the ruling; an unknown value throws there
@@ -405,6 +408,18 @@ export default defineConfig({
       stage: STAGE,
       publicPaths: [...publicPlacements()].sort(),
     }),
+    /* [CH5 2026-08-12 · A3] THE DATE→FILE SCHEDULE, BAKED FOR THE WORKER.
+       `{ "/robots/x.png": "2026-08-19" }` — the day each governed file becomes
+       publishable, derived from the Record's own `assets` arrays and each
+       entry's own date. The worker refuses a path whose day has not come.
+       IT IS THE POSITIVE HALF ONLY, like `publicPlacements` above and for the
+       same reason: it names files and the day they open, never the set of what
+       is being withheld. It reaches the WORKER, not the browser — the client
+       never sees it and has no use for it.
+       EMPTY TODAY. `delivered()` is the empty set since Record 013 went, so
+       this is `{}` and the worker's branch is unexercised. Reported, not hidden. */
+    __WB_RECORD_ASSETS__: JSON.stringify(
+      assetSchedule(recordEntries(), (e) => (e.no == null ? null : recordDay(e.no)))),
   },
   plugins: [hrVaultAudio, revealPublic, wbPlacement, opsNotesStrip, heldChunkGuard, opsBraceGuard, react(), cloudflare()],
   build: {

@@ -199,12 +199,26 @@ export function reachabilityFaults(rows) {
         `doors: src/worker.js does not refuse "${p}". That file is THE LOCK — ` +
         "without the prefix in `HELD_DIRS` the directory is served to anybody.");
     }
-    if (!wrangler.includes(`"${p}*"`)) {
+    /* [CH5 2026-08-12] A CATCH-ALL COUNTS, AND ONLY A CATCH-ALL.
+       The Record's clock is a request-time rule, so documents and `/robots/…`
+       pictures had to reach the worker too — and `@cloudflare/vite-plugin`
+       REFUSES A BUILD that lists both `/*` and any prefix it covers ("rule '/*'
+       makes it redundant"). The enumeration and the catch-all cannot coexist,
+       so this check has to be able to read the catch-all.
+       IT IS DELIBERATELY THE ONLY SUBSTITUTE ACCEPTED. `"/*"` is the one rule
+       that provably routes every path here to the worker; anything narrower
+       still has to name itself, because a rule like `/held*` covering `/held/`
+       by accident is exactly the reasoning this gate exists to refuse. The
+       check is stricter than before in the case that matters: the worker's own
+       refusal list is still tested line by line, one line up. */
+    const catchAll = /"\/\*"/.test(wrangler);
+    if (!catchAll && !wrangler.includes(`"${p}*"`)) {
       faults.push(
-        `doors: wrangler.jsonc \`run_worker_first\` does not list "${p}*". Workers ` +
-        "Assets serves a matching file BEFORE invoking the worker, so without " +
-        "this rule the lock is never asked and the material is public — with no " +
-        "error anywhere. This is the failure that took the API down in test.");
+        `doors: wrangler.jsonc \`run_worker_first\` does not list "${p}*" and has ` +
+        "no `\"/*\"` catch-all either. Workers Assets serves a matching file " +
+        "BEFORE invoking the worker, so without one of those the lock is never " +
+        "asked and the material is public — with no error anywhere. This is the " +
+        "failure that took the API down in test.");
     }
   }
 

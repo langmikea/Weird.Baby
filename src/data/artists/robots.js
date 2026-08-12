@@ -320,6 +320,7 @@ import { faqFace } from "../faq-face.js";
    entries can read it too without importing this file back. */
 import { RECORD_EPOCH } from "./record-epoch.js";
 import { RECORD_ENTRIES } from "./robots-record.js";
+import { recordEntriesForToday } from "../../lib/record-clock.js";
 
 /* [S10] the WBR tracks, declared once and referenced by both covers. */
 const WBR_TRACKS = [
@@ -389,7 +390,33 @@ const WBR_TRACKS = [
              the standing Visual Hook Law, and it is Mike's ruling that wins —
              a hook built out of an invented caption is the thing this round
              exists to remove. The entry's own plate survives inside it. */
-          entries: RECORD_ENTRIES,
+          /* ═══ [CH5 2026-08-12] THE RECORD DOES NOT SHOW THE FUTURE ═════════
+             MIKE, from the start: Record n goes out on Day n. Nothing enforced
+             it, and at midnight Sunday a visitor saw 001–005 — including two
+             days that had not happened.
+             THE DATE IS THE WORKER'S, NOT THE BROWSER'S. `src/worker.js`
+             injects `__WB_TODAY__` on every HTML response; `record-clock.js`
+             reads it before this module's first line runs, so there is no
+             round trip and no loading state. In DEVELOPMENT, and for Mike's
+             admin code, every entry is shown.
+             READ `src/lib/record-clock.js` BEFORE TRUSTING THIS: the entries
+             are still compiled into the bundle, so this governs what the page
+             DRAWS and is not concealment. Open row `CH5-a`. */
+          entries: recordEntriesForToday(RECORD_ENTRIES),
+          /* [CH5 2026-08-12] AND AN EMPTY RECORD SAYS SO. Measured on the
+             launch build rather than predicted: with today five days before
+             `RECORD_EPOCH`, the index drew ZERO rows and the face was a heading
+             over blank paper — no message, because this face was the one shelf
+             in the museum that never declared an empty state.
+             IT IS THE SAME MECHANISM THE OTHER THREE USE (`archiveEmpty`,
+             `docsEmpty`, `logEmpty` — Exhibit.jsx renders this when `entries`
+             is empty), and the same reasoning H2 wrote for the walls: a shelf
+             that vanishes when it empties tells a visitor the room has one
+             fewer thing in it, rather than that this thing is waiting.
+             IT NAMES NO DATE. "The Record opens on the 17th" would be a promise
+             about the future on the one surface whose whole point is that it
+             only ever shows what has already happened. */
+          logEmpty: "Nothing has been entered in the Record yet.",
           /* [HR 2026-08-04] THE FOOTER GOES WITH THE COUNTS IT WAS MADE OF.
              It read "Eleven of 436 records." The 436 came from the SOURCE line
              of the register block Mike ruled invented, and the eleven counted

@@ -1,4 +1,6 @@
 // src/data/artists/weird-baby.js
+/* [CH5] `launched()` — the stage, from the one file in `src/` that knows it */
+import { launched } from "../../lib/placement.js";
 // Hand-authored spine + config for the Weird.Baby house exhibit (/wb).
 // Mirrors hunterRoot minus MediaVault: no foundation export — the six Vol 1
 // recordings are repo-local assets (public/audio/wb/). MV ingestion of Vol 1
@@ -53,6 +55,25 @@ const REC_LABEL = "Recording — 2026-06";
    container at a live address is what the NO-COMING-SOON credo kills, and the
    renderer is generic already, so building it on the day there is something to
    put in it costs a data block and no code. */
+/* ═══ [CH5 2026-08-12] ABOUT THE ARTIST IS HIDDEN AT LAUNCH ═════════════════
+   MIKE RULED IT HIDDEN and nothing hid it. Same mechanism as the Foundation's
+   Ledger and Contribute — `launched()`, the museum's one stage switch — so
+   there is one concept here and not a second.
+
+   IT IS THE ALBUM AND NOT THE TRACK, because the `about` album holds exactly
+   one track and hiding the track would leave a titled album with nothing in it
+   — a door with an empty room behind it, which is worse than no door.
+
+   THIS IS `/wb` — HIS OWN MUSIC — AND NOT `/wal`. Checked rather than assumed:
+   this module is imported only by `src/routes/wb/WbSpine.jsx`. Worth A Listen's
+   artist cards are built by `aboutArtistTrack()` in `worth-a-listen.js` with
+   ids of the form `<artist>-about-artist`, they are a different mechanism in a
+   different file, and NOTHING HERE TOUCHES THEM.
+
+   Same limit as the others: hidden from the page, strings still in the chunk.
+   Open row `CH5-b`. */
+const HIDDEN_AT_LAUNCH = new Set(["about"]);
+
 const spine = [
   {
     id: "about",
@@ -227,7 +248,9 @@ const spine = [
 export const weirdBaby = {
   id: "wb",
   name: "Weird.Baby",
-  spine,
+  /* [CH5] filtered here, not at the declaration, so the album stays written and
+     readable in source — the hold is a stage decision, not a deletion. */
+  spine: launched() ? spine.filter(a => !HIDDEN_AT_LAUNCH.has(a.id)) : spine,
   facts: [], // PUV stays empty for v0 (fact model is MV-side, deferred)
   defaultActiveIndex: 0,
   splitKey: "wb-wb-split",

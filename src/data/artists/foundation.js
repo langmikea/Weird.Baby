@@ -330,6 +330,8 @@
    what a visitor reads has changed. */
 /* [F1 2026-08-06] the house's FAQ factory — see src/data/faq-face.js. */
 import { faqFace } from "../faq-face.js";
+/* [CH5] `launched()` — the stage, from the one file in `src/` that knows it */
+import { launched } from "../../lib/placement.js";
 
 export const ACCOUNT = {
   head: "Weird.Baby — the account",
@@ -898,6 +900,28 @@ const faqTrack = (id, where) => ({
   face: faqFace("THE WEIRD.BABY FOUNDATION", faqFor(where)),
 });
 
+/* ═══ [CH5 2026-08-12] TWO OF THESE ALBUMS ARE HIDDEN AT LAUNCH ═════════════
+   MIKE RULED THE LEDGER AND CONTRIBUTE HIDDEN AT LAUNCH, and nothing was
+   hiding them. They are albums on a public spine in a public module: no chunk
+   boundary, no worker branch, no `placed()` — they simply rendered, and no gate
+   could object because nothing had ever been told they should not.
+
+   THE MECHANISM IS THE STAGE, WHICH IS THE ONE THIS MUSEUM ALREADY HAS. Not a
+   new concept: `launched()` is the same switch `placed()` reads for a governed
+   picture and the same word the worker reads for the stage door. In DEVELOPMENT
+   both albums render exactly as they do today — Mike cannot direct what he
+   cannot see — and at LAUNCH the spine is built without them.
+
+   WHAT THIS DOES NOT DO, AND IT IS THE SAME LIMIT THE RECORD'S CLOCK CARRIES:
+   the album's STRINGS are still compiled into this chunk. A visitor who opens
+   devtools can read them. The Portal is genuinely absent at launch because it
+   lives in its own module behind a chunk boundary the worker refuses; these two
+   are inside `foundation.js`, which the Lobby imports, so the same trick is not
+   available without extracting them into a held module of their own.
+   THAT IS THE HONEST DESCRIPTION: hidden from the page, present in the bundle.
+   Open row `CH5-b`, and it is the same follow-on as `CH5-a`. */
+const HIDDEN_AT_LAUNCH = new Set(["ledger", "contribute"]);
+
 const spine = [
   {
     id: "foundation",
@@ -1010,7 +1034,10 @@ export const foundation = {
   name: "The Foundation",
   exhibitSlug: "foundation",
   eraAlias: {},
-  spine,
+  /* [CH5] see HIDDEN_AT_LAUNCH above. The array is filtered here rather than
+     at its declaration so the albums stay written, ordered and readable in
+     source — the hold is a stage decision, not a deletion. */
+  spine: launched() ? spine.filter(a => !HIDDEN_AT_LAUNCH.has(a.id)) : spine,
   facts: [],
   defaultActiveIndex: 0,
   splitKey: "wb-fnd-split",

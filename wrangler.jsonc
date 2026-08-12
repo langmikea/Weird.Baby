@@ -43,10 +43,32 @@
     // are read back by `reveal:check`'s reachability pass, which faults if any
     // of them goes — see the [V1] header in src/worker.js for why the two holds
     // must never share a list.
+    //
+    // [CH5 2026-08-12] AND `/robots/*` AND `/*` JOIN THEM, BECAUSE THE RECORD'S
+    // CLOCK IS A REQUEST-TIME RULE AND A REQUEST THAT NEVER REACHES THE WORKER
+    // HAS NO CLOCK ON IT.
+    // Two things broke silently on the first build and both had one cause. The
+    // worker injects `__WB_TODAY__` into every HTML response, and it refuses a
+    // governed file whose Record day has not come (A3) — and NEITHER FIRED,
+    // because documents and `/robots/…` pictures were served straight off the
+    // asset layer and the worker was never asked. The endpoint answered
+    // perfectly the whole time, which is what made it look like it worked.
+    // `/*` IS SAFE HERE AND IS NOT A PERFORMANCE DECISION TAKEN LIGHTLY: the
+    // worker's last line is `env.ASSETS.fetch(request)`, so every asset is
+    // still served by the asset layer — the worker adds one hop and touches
+    // nothing whose `Content-Type` is not `text/html`.
+    // IT IS `/*` ALONE AND THE FOUR PREFIXES ARE NOT LISTED BESIDE IT, WHICH IS
+    // FORCED RATHER THAN CHOSEN. `@cloudflare/vite-plugin` validates this list
+    // and REFUSES THE BUILD on a redundant rule — it named all six and said
+    // "rule '/*' makes it redundant". So the choice is `/*` or the enumeration,
+    // and it cannot be both.
+    // `reveal:check`'s doors pass was taught this, narrowly: a prefix counts as
+    // wired if it is listed OR if a rule that provably covers everything is.
+    // The check did not get weaker — `/*` routes strictly more to the worker
+    // than the five entries it replaces, and `src/worker.js` remains the only
+    // thing that decides what a shut directory does.
     "run_worker_first": [
-      "/api/*",
-      "/assets/locked/*", "/locked/*",
-      "/assets/held/*", "/held/*"
+      "/*"
     ]
   },
   "compatibility_flags": [

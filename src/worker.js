@@ -70,6 +70,8 @@
    literal in the built worker rather than a runtime lookup — there is no
    environment variable on the deployed Worker that can move it, and the only
    way to change stage is to build again. */
+import { todayInRecordTz, assetWithheld, RECORD_TZ } from "../reveal/record-clock.mjs";
+
 const HELD_COOKIE = "wb_held";
 export const LOCKED_DIRS = ["/assets/locked/", "/locked/"];
 export const STAGE_DIRS = ["/assets/held/", "/held/"];
@@ -79,6 +81,26 @@ const HELD_MAX_AGE = 60 * 60 * 24 * 30;
    not-configured state; the copy is deleted and the page prints what the
    worker sends, because the worker is the only thing that knows. */
 const NO_KEY_NOTE = "No key is set on this deployment. Run: npx wrangler secret put HR_KEY";
+
+/* ═══ [CH5 2026-08-12] THE RECORD'S CLOCK — A THIRD DOOR, FOR A THIRD REASON ══
+   MIKE: Record n goes out on Day n; the site reads the clock at REQUEST time and
+   serves the Records up to today; a short admin code shows him everything.
+
+   IT IS A THIRD DOOR AND IT MUST STAY ONE. `/assets/locked/` is PERMISSION and
+   `/assets/held/` is STAGE, and §8 is explicit that a new reason gets a new door
+   rather than a seat at an existing one. "Let Mike preview unpublished Record
+   days" is neither of those reasons: folding it into `wb_held` would mean the
+   one code that shows him next Friday's entry also unlocks Hunter Root's wing,
+   which is the exact silent widening the two-door arrangement exists to stop.
+   So: its own secret (`RECORD_KEY`), its own cookie (`wb_record`), its own note.
+
+   THE SECRET IS NOT GUESSABLE AND IS NOT ON THE GLASS. It is a wrangler secret
+   with no default — the same fail-closed shape as `HR_KEY` — so an unconfigured
+   deployment previews nothing rather than everything, and nothing in `src/`
+   renders it, names it, or hints that the door is there. */
+const RECORD_COOKIE = "wb_record";
+const NO_RECORD_KEY_NOTE =
+  "No record key is set on this deployment. Run: npx wrangler secret put RECORD_KEY";
 
 async function sha256Hex(s) {
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
@@ -106,9 +128,45 @@ async function heldOpen(request, env) {
   return got === await heldToken(env.HR_KEY);
 }
 
+const recordToken = (key) => sha256Hex("wb-record-v1:" + key);
+
+/** true when this request carries Mike's Record-preview code */
+async function previewOpen(request, env) {
+  if (!env.RECORD_KEY) return false;
+  const got = readCookie(request, RECORD_COOKIE);
+  if (!got) return false;
+  return got === await recordToken(env.RECORD_KEY);
+}
+
+/* ── THE INJECTION ──────────────────────────────────────────────────────────
+   The page needs the SERVER's date before its first line runs, or the Record
+   would draw with the browser's clock and then correct itself — a flash of the
+   future is still showing the future.
+   SO IT IS A `<script>` IN THE HEAD, WRITTEN BY HTMLRewriter, and not an API the
+   page fetches: a fetch is a round trip, a loading state, and a window in which
+   the wrong thing is on the glass. The bundle is unchanged by this — it reads
+   two globals that the document happens to define.
+   IT ONLY EVER TOUCHES HTML. Assets stream through untouched. */
+function injectClock(response, today, previewing) {
+  const type = response.headers.get("Content-Type") || "";
+  if (!type.includes("text/html")) return response;
+  const payload =
+    `window.__WB_TODAY__=${JSON.stringify(today)};` +
+    `window.__WB_RECORD_ALL__=${previewing ? "true" : "false"};`;
+  return new HTMLRewriter()
+    .on("head", {
+      element(el) { el.prepend(`<script>${payload}</script>`, { html: true }); },
+    })
+    .transform(response);
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    /* [CH5] the museum's own day, computed once per request. Everything below
+       that reasons about the Record reads this and never `new Date()` again. */
+    const recordToday = todayInRecordTz();
 
     // CORS headers
     const cors = {
@@ -140,6 +198,22 @@ export default {
         return new Response("Not found", { status: 404 });
       }
       return env.ASSETS.fetch(request);
+    }
+
+    /* ═══ [CH5 2026-08-12 · A3] A FUTURE RECORD'S FILES ARE REFUSED TOO ══════
+       An entry that names a photograph publishes it on the entry's own day —
+       but the FILE ships with the deploy, days early, and was fetchable by
+       anyone who guessed the path. Same clock, same rule.
+       IT SITS AFTER THE TWO DOORS ON PURPOSE. A path that is both governed and
+       behind a shut directory has already been answered above; this branch only
+       ever sees paths a visitor is otherwise allowed to have.
+       THE SCHEDULE IS BAKED AT BUILD TIME (`__WB_RECORD_ASSETS__`, vite.config)
+       from the Record's own `assets` arrays. It is EMPTY today — Record 013 was
+       the only entry that ever named a picture and it was deleted — so this
+       branch is built and unexercised, which is stated rather than discovered. */
+    if (assetWithheld(__WB_RECORD_ASSETS__, url.pathname, recordToday)
+        && !await previewOpen(request, env)) {
+      return new Response("Not found", { status: 404 });
     }
 
     /* POST /api/held {key} — the admin page's door. */
@@ -290,9 +364,42 @@ export default {
       }
     }
 
+    /* ═══ [CH5 · A4] THE RECORD PREVIEW DOOR ════════════════════════════════
+       POST /api/record {key}  — hand in the code, get the cookie.
+       GET  /api/record        — what day is it, and am I previewing?
+       The GET is the diagnostic `/api/held` already set the pattern for: the
+       one thing that knows is the worker, so the worker is what says it. It
+       reveals the DATE and whether this browser is previewing — never the key,
+       and never the list of what is still withheld. */
+    if (url.pathname === "/api/record" && request.method === "POST") {
+      const json = (body, status, extra) => new Response(JSON.stringify(body), {
+        status, headers: { ...cors, "Content-Type": "application/json", ...(extra || {}) },
+      });
+      if (!env.RECORD_KEY) return json({ error: NO_RECORD_KEY_NOTE }, 503);
+      let supplied = null;
+      try { supplied = (await request.json()).key; } catch { /* falls through */ }
+      if (!supplied || await sha256Hex(supplied) !== await sha256Hex(env.RECORD_KEY)) {
+        return json({ error: "No." }, 403);
+      }
+      const cookie = `${RECORD_COOKIE}=${await recordToken(env.RECORD_KEY)}`
+        + `; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${HELD_MAX_AGE}`;
+      return json({ ok: true, today: recordToday }, 200, { "Set-Cookie": cookie });
+    }
+    if (url.pathname === "/api/record" && request.method === "GET") {
+      return new Response(JSON.stringify({
+        today: recordToday,
+        tz: RECORD_TZ,
+        previewing: await previewOpen(request, env),
+        configured: !!env.RECORD_KEY,
+        note: env.RECORD_KEY ? null : NO_RECORD_KEY_NOTE,
+      }), { headers: { ...cors, "Content-Type": "application/json" } });
+    }
+
     if (url.pathname.startsWith("/api/")) {
       return new Response("Not found", { status: 404 });
     }
-    return env.ASSETS.fetch(request);
+    /* [CH5] every HTML response leaves with the museum's day written into it */
+    return injectClock(
+      await env.ASSETS.fetch(request), recordToday, await previewOpen(request, env));
   }
 };

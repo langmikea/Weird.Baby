@@ -15242,6 +15242,96 @@
    "r": [
     "6774c265e5e92b42"
    ]
+  },
+  "027bb7106b406961": {
+   "f": "src/data/artists/robots.js",
+   "l": 419,
+   "t": "Nothing has been entered in the Record yet.",
+   "c": "HOUSE"
+  },
+  "d8fa7b18a74cab6f": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 75,
+   "t": "about",
+   "c": "HOUSE"
+  },
+  "73386ca0b3d6ee51": {
+   "f": "src/lib/record-clock.js",
+   "l": 66,
+   "t": "en-CA",
+   "c": "HOUSE"
+  },
+  "2092c9f8050091dd": {
+   "f": "src/lib/record-clock.js",
+   "l": 67,
+   "t": "2-digit",
+   "c": "HOUSE"
+  },
+  "2a50e6d70d1e2521": {
+   "f": "src/worker.js",
+   "l": 101,
+   "t": "wb_record",
+   "c": "HOUSE"
+  },
+  "c272ed99e23a36ad": {
+   "f": "src/worker.js",
+   "l": 103,
+   "t": "No record key is set on this deployment. Run: npx wrangler secret put RECORD_KEY",
+   "c": "HOUSE"
+  },
+  "97f5d7dea2c1eed3": {
+   "f": "src/worker.js",
+   "l": 131,
+   "t": "wb-record-v1:{}",
+   "c": "HOUSE"
+  },
+  "a278f9c73baba5f9": {
+   "f": "src/worker.js",
+   "l": 154,
+   "t": "window.__WB_TODAY__={};",
+   "c": "HOUSE"
+  },
+  "965fd73c65d3f819": {
+   "f": "src/worker.js",
+   "l": 155,
+   "t": "window.__WB_RECORD_ALL__={};",
+   "c": "HOUSE"
+  },
+  "6016417180cc6630": {
+   "f": "src/worker.js",
+   "l": 155,
+   "t": "true",
+   "c": "HOUSE"
+  },
+  "3d846cb53af2d462": {
+   "f": "src/worker.js",
+   "l": 155,
+   "t": "false",
+   "c": "HOUSE"
+  },
+  "578728a5a29b2b87": {
+   "f": "src/worker.js",
+   "l": 158,
+   "t": "<script>{}</script>",
+   "c": "HOUSE"
+  },
+  "efaba9dba0c67cb0": {
+   "f": "src/worker.js",
+   "l": 382,
+   "t": "No.",
+   "c": "HOUSE"
+  },
+  "d9a172b6e0bb5a17": {
+   "f": "src/worker.js",
+   "l": 384,
+   "t": "{}={}",
+   "c": "HOUSE"
+  },
+  "b13832d1d3b80a8f": {
+   "f": "src/worker.js",
+   "l": 385,
+   "t": "; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age={}",
+   "c": "HOUSE"
   }
  }
 }

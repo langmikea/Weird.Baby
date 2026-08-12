@@ -41,6 +41,13 @@ export default defineConfig([
         __BUILD_TIME__: 'readonly', // injected by vite.config.js define{}
         __WB_STAGE__: 'readonly',      // [V1] the stage — see reveal/stage.mjs
         __WB_PLACEMENT__: 'readonly',  // [V1] stage + the public placement set
+        // [CH5 2026-08-12] the Record's clock. `__WB_RECORD_ASSETS__` is the
+        // date→file schedule vite bakes into the worker (A3); `HTMLRewriter` is
+        // the Cloudflare Workers runtime global the worker uses to write
+        // `__WB_TODAY__` into every HTML response. Both are real at runtime and
+        // invisible to eslint, which is exactly what this block is for.
+        __WB_RECORD_ASSETS__: 'readonly',
+        HTMLRewriter: 'readonly',
       },
       parserOptions: {
         ecmaVersion: 'latest',
