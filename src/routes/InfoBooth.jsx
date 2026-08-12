@@ -246,11 +246,10 @@ const FAQ = [
        "the lot on the spot. Three things do leave the building, and you " +
        "should know which. The typefaces are served by Google, so your " +
        "browser asks Google for them and Google sees it was asked. The rooms " +
-       "with music in them load YouTube's player when the room loads, before " +
-       "you press anything. And one exhibit carries posts embedded from " +
-       "Facebook, which arrive as they scroll into view — later than the " +
-       "player, and still nothing you pressed. Google, YouTube and Facebook " +
-       "each know you turned up, and they are the whole of the outside. There " +
+       "with video in them load YouTube's player when the room loads, before " +
+       "you press anything — the rooms with only our own recordings in them " +
+       "do not, and play from this site. Google and YouTube know you turned " +
+       "up, and they are the whole of the outside. There " +
        "is no analytics, no advertising and no tracking pixel anywhere in " +
        "this site, and if that ever stops being true, this answer changes " +
        "first.",

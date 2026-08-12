@@ -491,18 +491,36 @@ function FactScroller({ facts, albumTag, songSlug, eraSlugs, exhibit, accent }) 
 }
 
 // ─── YOUTUBE PLAYER HOOK ──────────────────────────────────────────────────────
-function useYTPlayer({ containerRef, onEnded }) {
+function useYTPlayer({ containerRef, onEnded, hasVideo }) {
   const playerRef  = useRef(null);
   const readyRef   = useRef(false);
   const pendingRef = useRef(null);
   const onEndedRef = useRef(onEnded);
   useEffect(() => { onEndedRef.current = onEnded; });
 
-  // Eagerly construct the player on mount (fixes mobile first-click playback).
-  // Builds with no videoId + autoplay:0 so nothing plays on load. The guard in
-  // initPlayer (playerRef.current) keeps this from colliding with loadVideo's
-  // legacy build path; onReady's pendingRef replay still honors an early click.
-  useEffect(() => { ensureApi(() => initPlayer()); }, []);
+  /* ═══ [CH8 2026-08-12] NO VIDEO IN THE WING, NO PLAYER ═════════════════════
+     MIKE'S RULING. The eager build below was unconditional, so EVERY wing that
+     renders this component built a YouTube player — including `/foundation` and
+     `/wb`, which have `videos: []` on every track. A player with no videoId is
+     still a real `youtube.com/embed/` IFRAME, and YouTube's own script inside it
+     calls `googleads.g.doubleclick.net/pagead/id`. That is how a museum whose
+     Information Booth says it carries no advertising came to call Google's
+     ad-identity endpoint from a page about a charitable foundation.
+
+     `hasVideo` IS COMPUTED FROM THE SPINE, NOT PASSED BY HAND, so a wing cannot
+     acquire a video and forget to turn its player on: the day a track gets a
+     `ytId`, the player returns by itself.
+
+     WHAT IS LOST, AND WHY IT DOES NOT MATTER HERE: the comment below records
+     that the eager build fixes mobile first-click playback. That fix is kept
+     wherever there is anything to play — the condition is "this wing has a
+     video", not "the visitor pressed something" — and on a wing with no video
+     there is no first click to lose. */
+  useEffect(() => {
+    if (!hasVideo) return;
+    ensureApi(() => initPlayer());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasVideo]);
 
   function initPlayer() {
     if (!containerRef.current || playerRef.current) return;
@@ -2950,9 +2968,16 @@ export default function Exhibit({ artist, open = null }) {
   }, [activeDisplay]);
 
   const ytDivRef = useRef(null);
+  /* [CH8 2026-08-12] does this wing hold a single YouTube video? Derived from
+     the spine so no wing has to remember to declare it — see useYTPlayer. */
+  const wingHasVideo = useMemo(
+    () => (SPINE || []).some(al => (al.tracks || []).some(
+      t => (t.videos || []).some(v => v && v.ytId))),
+    [SPINE]);
   const yt = useYTPlayer({
     containerRef: ytDivRef,
     onEnded: useCallback(() => advanceQueue(), []),
+    hasVideo: wingHasVideo,
   });
   const audio = useAudioPlayer({
     onEnded: useCallback(() => advanceQueue(), []),

@@ -202,8 +202,19 @@ const A = [
   // than kept beside its replacement.
   ["/images/wb/about-cover.png", "MIKE", HOUSE_SLEEVE, true,
     "the WB mark over ABOUT THE / ARTIST / WEIRD.BABY MUSIC — the house's own name and the album's own."],
-  ["/images/wb/vol1-cover.png", "MIKE", HOUSE_SLEEVE, true,
-    "the WB mark over THE MAKING / OF BOWB V1 / WEIRD.BABY MUSIC — the record's own title."],
+  /* [CH8 2026-08-12] REPLACED BY MIKE'S OWN ALT MASTER, and the row changes with
+     the picture rather than being left describing the old one. It is no longer
+     the house sleeve template: it is a FULL-BLEED VINYL — a record filling the
+     frame edge to edge with no white margin, the WB baby in the label well.
+     Source: `BOWB.Vol1/LOGO/WeirdBaby_ALBUM COVER (MASTER)_ALT.png`, 4506×4506,
+     resampled to the 1200×1200 the other sleeves ship at.
+     THE TEXT READING IS OPS' AND IS MARKED SO. Mike has not read this file for
+     the register; what is below is what Ops can see in the pixels, and the
+     `verdict` on the table row is his. */
+  ["/images/wb/vol1-cover.png", "MIKE",
+    "Mike's own artwork — the ALT master he supplied 2026-08-12, resampled from 4506×4506 to the house's 1200×1200. Not the generated sleeve template; this one is a photograph-style full-bleed.",
+    true,
+    "NOT READ BY MIKE. Ops can see three runs of lettering: 'The Best of' in red at the top, 'Weird.Baby' in the house outline face across the label well, and 'Vol. 1' in red at the foot."],
   ["/images/foundation/foundation-cover.png", "MIKE", HOUSE_SLEEVE, true,
     "the WB mark over THE / FOUNDATION / THE WEIRD.BABY FOUNDATION — the album's own name."],
   ["/images/wal/worth-a-listen-cover.png", "MIKE", HOUSE_SLEEVE, true,

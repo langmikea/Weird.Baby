@@ -2465,15 +2465,15 @@
    "repo": "museum",
    "path": "public/images/wb/vol1-cover.png",
    "ref": "/images/wb/vol1-cover.png",
-   "sha256": "2c030d2d021ceabc868ca7f815dbb473edf49ff697f5885c4ae164aebbe24cc3",
+   "sha256": "8bb0043770eab7a210b3ec6fa634bc15178aef24aaa1303760c604079b440917",
    "kind": "image",
    "format": "png",
-   "bytes": 214002,
+   "bytes": 1375277,
    "container": "png",
    "w": 1200,
    "h": 1200,
    "depth": 8,
-   "colorType": 2,
+   "colorType": 6,
    "role": "shipped",
    "usedBy": [
     "src/data/artists/weird-baby.js"
