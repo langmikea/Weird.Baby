@@ -15418,6 +15418,24 @@
    "t": "No — and the better half of the answer is that the machine remembers you and we don't. Cookies first, because they are what people mean: a cookie goes back to the server with every request your browser makes, which is the part that makes it a tracking device. This site sets none. Not one, not even ours. Settings are a different mechanism entirely — they sit in your own browser and are read where they sit, so both of these are true at once: nothing follows you back to us, and the panel you dragged wider is still wider when you come back to the room. Most of them last the visit and go when the tab closes. Two outlast it, and they are the two that would be useless otherwise: the presets you saved yourself, and which records of ours you have already opened. What reaches us is two things. The lobby and the exhibit rooms each write one line when they load — which page, the site you came from if there was one, and the time — and none of those three columns is you. Sign the guest book and we keep exactly what you typed, on the page you typed it into. The MGK keeps far more than we do, and it keeps it on your side of the glass: run it in the robot wing and it will remember your name, your birth date, how far into its install you got, its own condition and your best score — none of which it can send anywhere, because it has no way to reach us at all. It will also show you. Preferences ▸ User is the machine's register of everything it holds about you, page by page, and the last page wipes the lot on the spot. Three things do leave the building, and you should know which. The typefaces are served by Google, so your browser asks Google for them and Google sees it was asked. The rooms with video in them load YouTube's player when the room loads, before you press anything — the rooms with only our own recordings in them do not, and play from this site. Google and YouTube know you turned up, and they are the whole of the outside. There is no analytics, no advertising and no tracking pixel anywhere in this site, and if that ever stops being true, this answer changes first.",
    "c": "VERIFIED",
    "s": "re-read clause by clause AND MEASURED IN A BROWSER (B2, 2026-08-05); the storage clause re-verified by grep at P5, 2026-08-05; the outbound clause RE-MEASURED on the LAUNCH build at CH8, 2026-08-12 — every public route fetches Google Fonts; www.youtube.com is fetched by /wal ALONE (the only launch route holding a YouTube video) and by no other; Facebook is fetched by NOTHING at launch, its embed being in HrExhibitFlow.jsx behind the /hr password. Cookies: no Set-Cookie on a plain visit to / or /foundation, measured."
+  },
+  "7352ea325d531b18": {
+   "f": "src/lib/use-arrival.js",
+   "l": 66,
+   "t": "instant",
+   "c": "HOUSE"
+  },
+  "1fa9dd6c3d86cbea": {
+   "f": "src/routes/exhibit/Exhibit.jsx",
+   "l": 3170,
+   "t": "instant",
+   "c": "HOUSE"
+  },
+  "d1df805dcef5ae60": {
+   "f": "src/routes/shop/GiftShop.jsx",
+   "l": 250,
+   "t": "instant",
+   "c": "HOUSE"
   }
  }
 }

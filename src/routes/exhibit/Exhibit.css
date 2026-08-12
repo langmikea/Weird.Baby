@@ -50,10 +50,33 @@ html,body{background:var(--wb-bg);color:var(--wb-gold);min-height:100vh;overflow
       rule in `HrExhibitFlow.css`. If a public wall ever wants snapping it
       declares it beside the targets, which is where it can be checked.
 
-   `scroll-behavior:smooth` STAYS. It is what makes the transport controls and
-   the record walk read as motion rather than as a jump, and nothing in the
-   measurement implicates it. */
-html{scroll-behavior:smooth}
+   ═══ [CH9 2026-08-12] AND `scroll-behavior:smooth` IS GONE, WHICH IS THE
+       WHOLE ANSWER ══════════════════════════════════════════════════════════
+   THE SENTENCE ABOVE SAID IT STAYED AND THAT "nothing in the measurement
+   implicates it." IT WAS THE CAUSE. Mike's probe on the stuck page:
+
+     scrollTo(0,0) →  afterImmediate 31.1111
+                      afterTwoFrames 29.7778
+                      afterHalfSecond 0
+
+   The page reaches its top. It takes HALF A SECOND to get there, easing 31px,
+   because this line made every scripted scroll an animation. Four theories
+   ahead of it were wrong — fractional pixels, zoom, scroll anchoring, snap —
+   and the probe eliminated the last two on the same line (`snap "none"`,
+   `anchor "none"`, `snapTargets: 0`, visual viewport `scale 1, offset 0`).
+
+   INSTANT IS THE RIGHT DEFAULT FOR A WHEEL, A KEYBOARD, A LINK AND A RESTORE.
+   A default that animates is a default that makes the museum feel slow on
+   every page and unusable on a short one.
+
+   SMOOTH SURVIVES ONLY WHERE IT IS DELIBERATE, AND IT OPTS IN AT THE CALL SITE:
+     · `RecordEntry.jsx` — the Record's landing glide, Mike's own ruling
+       ("as if the waiter was seamlessly addressing my every need")
+     · `Exhibit.jsx` — the stacked flat-wing face change
+   Both honour `prefers-reduced-motion`. Nothing else in `src/` may add a
+   document-level scroll behaviour; a deliberate scroll says so where it is
+   written, where a reader can see it. */
+
 
 /* ═══ [CH7] SCROLL ANCHORING IS OFF ON THE DOCUMENT ═════════════════════════
    THE ONE FINDING THAT FITS EVERY PART OF MIKE'S REPORT. His page sat at

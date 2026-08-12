@@ -3157,7 +3157,17 @@ export default function Exhibit({ artist, open = null }) {
           const area = document.querySelector(".vp-area");
           if (!area) return;
           const y = area.getBoundingClientRect().top + window.scrollY - 118;
-          window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+          /* [CH9 2026-08-12] THIS IS ONE OF THE TWO DELIBERATE GLIDES IN THE
+             MUSEUM and it now says so itself: the document no longer declares
+             `scroll-behavior: smooth`, so `smooth` here is a choice rather than
+             an inheritance. It also honours reduced motion, which it did not
+             before — the Record's glide already did, and a reader who has asked
+             the system for less movement should not get it from one surface and
+             not the other. */
+          const still = window.matchMedia
+            && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          window.scrollTo({ top: Math.max(0, y),
+                            behavior: still ? "instant" : "smooth" });
         }, 120);
       }
       return;

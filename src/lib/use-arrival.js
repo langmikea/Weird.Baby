@@ -55,7 +55,16 @@ const SEEN_PREFIX = "wb-arrived:";
 
 function toTop() {
   /* every candidate scroll port — see the note above */
-  try { window.scrollTo(0, 0); } catch { /* jsdom / very old */ }
+  /* [CH9 2026-08-12] `behavior: "instant"` IS EXPLICIT AND STAYS EXPLICIT.
+     Arriving in a room is a RESTORE, not a journey — there is nothing to watch
+     travel past. It used to inherit `scroll-behavior: smooth` from the document
+     and therefore EASED, which is half a second of a new room sliding before it
+     settles. That declaration is deleted (Exhibit.css), so this would be instant
+     by default now; it says so anyway, because the next person to add a
+     document-level behaviour must not silently turn every arrival into an
+     animation again. */
+  try { window.scrollTo({ top: 0, left: 0, behavior: "instant" }); }
+  catch { try { window.scrollTo(0, 0); } catch { /* jsdom / very old */ } }
   const el = document.scrollingElement;
   if (el) el.scrollTop = 0;
   if (document.body) document.body.scrollTop = 0;

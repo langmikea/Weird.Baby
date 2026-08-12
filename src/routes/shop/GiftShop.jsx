@@ -245,7 +245,10 @@ export default function GiftShop() {
   useEffect(() => {
     const prev = typeof history !== "undefined" && history.scrollRestoration;
     try { if (prev) history.scrollRestoration = "manual"; } catch { /* unsupported */ }
-    window.scrollTo(0, 0);
+    /* [CH9 2026-08-12] instant, said out loud — this is a restore, and it used
+       to inherit the document's `scroll-behavior: smooth` and ease. */
+    try { window.scrollTo({ top: 0, left: 0, behavior: "instant" }); }
+    catch { window.scrollTo(0, 0); }
     return () => { try { if (prev) history.scrollRestoration = prev; } catch { /* unsupported */ } };
   }, [fromId, ownerId]);
 

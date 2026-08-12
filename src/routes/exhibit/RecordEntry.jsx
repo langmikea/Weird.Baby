@@ -337,9 +337,15 @@ export default function RecordEntry({
     if (!el || typeof window === "undefined") return;
     const still = window.matchMedia
       && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    /* REDUCED MOTION GETS THE POSITION AND NOT THE JOURNEY, and it must be
-       `instant` rather than `auto`: the document sets `scroll-behavior: smooth`
-       in CSS, so `auto` would honour that and glide anyway. */
+    /* REDUCED MOTION GETS THE POSITION AND NOT THE JOURNEY, and it is `instant`
+       rather than `auto` even though `auto` would now do the same thing.
+       [CH9 2026-08-12] THE REASON THIS ORIGINALLY GAVE IS GONE AND THE LINE
+       STAYS. It said `auto` would glide anyway because the document declared
+       `scroll-behavior: smooth` — that declaration was the cause of the scroll
+       bug and is deleted (Exhibit.css). `instant` is kept because it states the
+       intent at the call site instead of depending on the absence of a rule
+       somewhere else, which is exactly the dependency that just cost four
+       wrong theories. */
     if (still) { el.scrollIntoView({ behavior: "instant", block: "start" }); return; }
     /* THE BEAT BETWEEN THE TWO MOVEMENTS. The effect already runs after React
        has committed the expanded record, so the layout is settled by the time
