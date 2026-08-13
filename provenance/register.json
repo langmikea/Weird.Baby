@@ -14399,14 +14399,6 @@
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
-  "08d22aa1d90dd42e": {
-   "f": "src/data/artists/robots.js",
-   "l": 800,
-   "t": "The bezel around the glass",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
   "dc59da5a83aa5f88": {
    "f": "src/data/artists/robots.js",
    "l": 1742,

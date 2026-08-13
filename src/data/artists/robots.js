@@ -1567,12 +1567,21 @@ const spine = [
                `rear_power_switch.png` went with Record 013, which was the entry
                that delivered it. Nine photographs became five.
                THE GROUPINGS SURVIVE HERE AND DID NOT ON THE MAINFRAME, and the
-               difference is only arithmetic: "The glass" is untouched at three
-               and "Every photograph" still holds five, so the strip is still a
-               choice. "As they arrived" and "Above and below" are down to one
+               difference is only arithmetic: the strip is still a choice.
+               "As they arrived" and "Above and below" are down to one
                tile each and are KEPT — a grouping of one is still a true
                statement about the holdings, and `placedTiles` will drop either
-               of them by itself the day its last picture goes. */
+               of them by itself the day its last picture goes.
+               [J5 2026-08-13] A FIFTH TILE CAME OFF, AND THE ARITHMETIC IN THIS
+               COMMENT WENT WITH IT. It used to read *"'The glass' is untouched
+               at three and 'Every photograph' still holds five"* — both numbers
+               are now wrong, because Mike ruled `MGK-TWIN_MONITOR_SCREEN_BEZEL.png`
+               DISCARDED: it is the Portal CRT's bezel, used in CONSTRUCTING the
+               original portal, not UX as a standalone, and he makes the overlays
+               himself. "The glass" is two and "Every photograph" is four. The
+               counts are deleted rather than re-stated, because a hand-kept
+               tally in a comment is a thing that goes stale every time a tile
+               moves — which is exactly what happened here. */
             { id: "arrived", label: "As they arrived", tiles: [
               { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
                 href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREENS_FAMILY_SHOT.png",
@@ -1582,9 +1591,6 @@ const spine = [
               { img: "/robots/reference/photos/front_screen.png",
                 href: "/robots/reference/photos/front_screen.png",
                 label: "The front glass, lit" },
-              { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
-                href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
-                label: "The bezel around the glass" },
               { img: "/robots/art/viiip-v2.png",
                 href: "/robots/art/viiip-v2.png",
                 label: "The cover image — the glass carries the BIOS beat" },
@@ -1601,9 +1607,6 @@ const spine = [
               { img: "/robots/reference/photos/front_screen.png",
                 href: "/robots/reference/photos/front_screen.png",
                 label: "The front glass, lit" },
-              { img: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
-                href: "/robots/reference/photos/MGK-TWIN_MONITOR_SCREEN_BEZEL.png",
-                label: "The bezel around the glass" },
               { img: "/robots/reference/photos/top_monitor.png",
                 href: "/robots/reference/photos/top_monitor.png",
                 label: "The top monitor" },

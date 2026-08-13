@@ -79,6 +79,23 @@ const INSTRUMENTS = [
      the first thing on the launcher. The `what` says the state, so the desk and
      the page itself say the same thing — the page carries the same note in its
      own banner (tools/dictation/record-edit.mjs). */
+  /* [J4 2026-08-12] THE LEAD CARD, AND IT IS THE LEAD FOR ONE WEEK ONLY.
+     Mike writes the whole first week of Records on SATURDAY and assigns
+     artifacts to each day while he does it, so for that sitting this is the
+     page to open first and the Record editor is not (it is mothballed — see
+     below). WHEN WEEK ONE IS WRITTEN THIS LOSES `lead`, exactly as the Record
+     card did: a page that is not the recommended path must not be the first
+     thing on the launcher.
+     IT IS ON THE DESK IN THE SAME ROUND IT WAS BUILT, deliberately. Job 1
+     found ~62 stranded one-shot runners in `tools/` and one generated view
+     (`CONTACT_SHEET.html`) whose command is named in no governing document —
+     a tool nobody is told to run is how a tool strands, and the cheapest
+     moment to prevent that is before it has ever been forgotten. */
+  { name: "Week one — the artifacts",
+    file: "dictation-20260807/assign.html",
+    what: "Two catalogues against the five days of week one: the PICTURES the wing could show, and the STORY EVENTS a day can announce — the wing opening, a held room being revealed. Click a day, then click things; click again to take one back off. The magnifier opens a manual page big enough to read the type. What is ready sorts first; what needs work is dimmed below and says why.",
+    rebuild: "npm run assign",
+    lead: true },
   { name: "The Record — MOTHBALLED",
     file: "dictation-20260807/record.html",
     what: "NOT THE ROAD FOR WEEK ONE. Mike writes the Record in a spreadsheet now — RECORD_days-2-to-6.xlsx, one tab per day — and it is pasted into the tree from there. This page still works and nothing has been deleted; it is simply not where the writing happens.",
