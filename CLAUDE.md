@@ -128,6 +128,17 @@ These are the cumulative result of the May-2026 UX iterations. Reading the JSX w
 
 ## Workflow
 
+**[2026-08-13] EVERYTHING IN THIS SECTION DESCRIBES A WAY OF WORKING THAT WAS
+RETIRED, AND IT IS FENCED RATHER THAN DELETED BECAUSE NOBODY HAS RULED ON THE
+BRANCH-AND-PR HALF.** Read `## THE ENVIRONMENT` below first. What is true
+today: **Mike commits from PowerShell on `main`. No sandbox, no branches, no
+PRs, and Code never commits, never pushes and never deploys.** The
+cowork/PR/squash-merge flow below has not been used since at least 11 August.
+The Conventions that survive it are the commit-message and out-of-scope habits,
+which are about writing and not about git.
+
+<details><summary>The retired flow, kept until someone rules on it</summary>
+
 Mike develops on Windows; you usually run inside a Cowork Linux sandbox. The split:
 
 - **You make edits + commits in the cowork sandbox.** Files write to disk via the FUSE mount → Mike's actual repo.
@@ -136,6 +147,8 @@ Mike develops on Windows; you usually run inside a Cowork Linux sandbox. The spl
 - **Mike runs the local cleanup** (checkout main, pull, branch -d).
 
 Mike pre-approves the entire flow when he says "push" — drive end-to-end without re-asking for each click.
+
+</details>
 
 ### Conventions
 
@@ -148,7 +161,7 @@ Mike pre-approves the entire flow when he says "push" — drive end-to-end witho
 ### Pre-flight before commit
 
 1. Verify file integrity: `wc -c <file>` matches expected, `tail -3 <file>` shows the proper end.
-2. `npm run lint` — should be at the baseline (**9 errors / 8 warnings**, all pre-existing on main, all in routing files Mike has flagged for separate semantic review). **[CH8 2026-08-12] IT WAS 11 / 9 AND IT IS NOW 9 / 8, AND THE DROP IS REAL RATHER THAN SUPPRESSED.** Making the YouTube player conditional (`useYTPlayer`'s `hasVideo` guard) removed the *unguarded* eager `useEffect` that raised both `Cannot access variable before it is declared` errors in `Exhibit.jsx`; they went with the code that caused them. Nothing was disabled and no rule was turned off. **The number is updated here in the same round that moved it** — for the reason the note below already gives, which had to be learned once in the other direction. **[A1 2026-08-04] This line said 4 / 6 and had been wrong since at least v40** — every round log from v40 onward records 11 / 9 and this file was never brought along. An orientation doc that publishes the wrong tripwire number disables the tripwire: a session that trusts it reads eleven pre-existing errors as seven new ones and starts hunting for a regression that is not there. The lint-debt table below still lists the four errors it was written for; the other seven live in `HrExhibitFlow.jsx` and `RobotsExhibitFlow.jsx`. `eslint.config.js` ignores non-source trees (`_cowork/`, `dist`/`dist.pre_*`, `.phase1_retired_files/`) and `*.pre-*`/`*.old_v*`/`*.bak_*` backups, so the count reflects `src/` only — a higher number means you've introduced an error. (Sandbox caveat: a cowork-sandbox `eslint .` may show **5 err / 5 warn** — a phantom parse error in `HrExhibitFlow.jsx` from the FUSE truncation quirk. On Windows the file is intact and the count is 4/6.)
+2. `npm run lint` — should be at the baseline (**9 errors / 8 warnings**, all pre-existing on main, all in routing files Mike has flagged for separate semantic review). **[CH8 2026-08-12] IT WAS 11 / 9 AND IT IS NOW 9 / 8, AND THE DROP IS REAL RATHER THAN SUPPRESSED.** Making the YouTube player conditional (`useYTPlayer`'s `hasVideo` guard) removed the *unguarded* eager `useEffect` that raised both `Cannot access variable before it is declared` errors in `Exhibit.jsx`; they went with the code that caused them. Nothing was disabled and no rule was turned off. **The number is updated here in the same round that moved it** — for the reason the note below already gives, which had to be learned once in the other direction. **[A1 2026-08-04] This line said 4 / 6 and had been wrong since at least v40** — every round log from v40 onward records 11 / 9 and this file was never brought along. An orientation doc that publishes the wrong tripwire number disables the tripwire: a session that trusts it reads eleven pre-existing errors as seven new ones and starts hunting for a regression that is not there. The lint-debt table below lists four of the nine; the per-file breakdown is in that section, **measured 2026-08-13**. `eslint.config.js` ignores non-source trees (`_cowork/`, `dist`/`dist.pre_*`, `.phase1_retired_files/`) and `*.pre-*`/`*.old_v*`/`*.bak_*` backups, so the count reflects `src/` only — a higher number means you've introduced an error. **[2026-08-13] TWO STALE NUMBERS CAME OUT OF THIS PARAGRAPH AND BOTH WERE IN THE SENTENCE THAT WARNS ABOUT STALE NUMBERS.** It said the other errors "live in `HrExhibitFlow.jsx` and `RobotsExhibitFlow.jsx`" — measured, five of the nine are in `Exhibit.jsx` — and it closed with a sandbox caveat ending *"on Windows the file is intact and the count is 4/6"*, which contradicted the 9/8 at the head of the same paragraph. The caveat described a sandbox nobody runs in and is deleted with it.
 3. `npm run build` — must pass. Vite + rolldown + Cloudflare plugin.
 
 ## Local tooling
@@ -202,203 +215,120 @@ Long-term: HR acquisition tooling (T8, audit §6.4) will auto-emit
 
 ### Cross-platform native dependencies
 
-Any npm package with a native compiled component (currently `better-sqlite3`) requires `prebuild-install` in `devDependencies` so the operator's machine can fetch pre-built binaries on install without needing Visual Studio Build Tools. The cowork sandbox builds for Linux; Mike's Windows machine needs its own platform-specific binary. If a "not a valid Win32 application" error appears at runtime on Windows, `npm rebuild <package-name>` is the local fix on the operator's side.
+Any npm package with a native compiled component (currently `better-sqlite3`) requires `prebuild-install` in `devDependencies` so the operator's machine can fetch pre-built binaries on install without needing Visual Studio Build Tools. If a "not a valid Win32 application" error appears at runtime on Windows, `npm rebuild <package-name>` is the local fix. (This paragraph used to explain that the cowork sandbox built for Linux while Mike's machine needed a Windows binary; there is one machine now, and it is the Windows one.)
+
+## THE ENVIRONMENT — WINDOWS HOST, AND THIS SECTION USED TO SAY OTHERWISE
+
+**[2026-08-13] READ THIS BEFORE YOU TRUST ANY WORKAROUND IN THIS FILE.**
+
+Code runs **on Mike's Windows host**, in Claude Code, with the Bash and
+PowerShell tools and the ordinary Read/Write/Edit tools. There is no FUSE
+mount, no virtiofs, no Linux sandbox, and no `mcp__cowork__*` tool.
+
+**Two hundred lines here described a machine nobody is on**, and they were
+not merely stale — several of them would cause harm if followed. They said
+the `Edit` tool truncates files past 16 KB (it does not); that files must be
+rewritten through a Python `rm + write` pattern instead of being edited (a
+slower, riskier way to do what Edit does correctly); that `.git/HEAD`,
+`.git/config` and `.git/index` arrive corrupted and must be hand-rebuilt
+(they do not); that `git status` lies about mass deletions (it does not);
+that `npm run build` cannot run and needs a rolldown symlink (it runs); and
+that commits must be handed to the operator because the sandbox cannot stage
+safely. **A session that believed them would spend its first hour deciding
+whether its own tools work.** One did.
+
+**THE ONE RULE IN THERE THAT IS STILL TRUE AND STILL MATTERS IS THE COMMIT
+RULE, FOR A DIFFERENT REASON:** Code does not commit, push or deploy. Not
+because staging is unsafe — because Mike owns everything host-side and runs
+every command himself. Code edits, verifies, and reports.
+
+**Nothing true was lost.** Three of those fourteen numbered rules were never
+about the sandbox at all, and they are kept below, whole. Everything else went
+with the machine it described; it is named once, in
+`C:\AI\_night-20260812\JOB3-DOCS-CORRECTED.md`, and nowhere else.
+
+### 1. Kickoff premises go stale — map every anchor before you design
+
+Kickoff briefs reference file paths, function names and "existing X" claims
+from a session start that may be hours or days old. T3 (2026-05-25) hit four
+wrong anchors in one kickoff: a server change said to be "in mediavault.html"
+was in `core/imgserver.py`; `hr_dimensions.js` was misremembered by one
+directory; a heuristic flagged for retirement had been retired weeks earlier;
+the export tool was named in the wrong repo.
+
+**Hard rule**: map every anchor in a packet — file path, function name,
+"existing X" claim — to the actual codebase BEFORE drafting anything. Surface
+mismatches when you find them, not at patch time. **The packet is a planning
+artifact; the codebase is ground truth.**
+
+**[2026-08-13] AND IT APPLIES TO CONTENT, NOT ONLY TO PATHS** — a packet that
+assumes its own material is already in the tree is making the same claim about
+a different kind of anchor. It is §7 Rule 7's own extension and it has cost a
+round: an instruction asked for a launch report *verbatim* that existed nowhere
+on disk.
+
+### 2. `export-artifacts` can SHRINK the released set
+
+`npm run export-artifacts` writes MediaVault's *current* released set. If
+release-status flips have shrunk it since the previous export (unrelease,
+retire, status correction), the new JSON has fewer artifacts than the committed
+one. T3 captured a 54 → 45 drop with no upstream change in scope.
+
+Re-derive the before-count from the `hunter_root.json` **on disk** — never
+from a count carried forward, which goes stale across sessions.
+
+**Hard rule**: capture before/after artifact counts on every run. If after is
+less than before, surface it before committing — the shrink may be intended
+cleanup or an accidental unrelease, and the diff summary does not show which.
+**A legitimate down-regen still gets an explicit acknowledgement; silence is
+the bug, not the shrink.**
+
+(See `### Release flow` above: the tool REFUSES to run at all today, because
+MediaVault still holds three hand-deleted lyric records.)
+
+### 3. THE RUN REPORT GOES TO DISK FIRST — OPERATIONS §13
+
+Every session writes its report to a known path **before** it reports in chat
+and before any commit. The chat is the delivery; **the file is the record.**
+
+**Why it is a hard rule and not a habit:** the window that ran six packets on
+11–13 August answered five of them in prose only. Those findings existed
+nowhere but a chat that then closed. A packet that says "report" still means a
+file.
+
+**Hard rule**: write the report to disk first, then print it. Reports go to
+`C:\AI\_night-<yyyymmdd>\` whether or not the packet says "write". If the
+session produces a commit, the report lands before the commit text is handed
+over.
 
-## Cowork sandbox quirks (READ THIS)
-
-The FUSE mount has multiple defects that cost real time. Work around them:
-
-1. **`Edit` tool truncates files.** When you call Edit on an existing file, the FUSE mount preserves the original byte count and pads/truncates. If your edit makes the file longer, content from the end gets clipped. **Mitigation**: always `tail -3` and `wc -c` after an Edit. For non-trivial edits, use a Python `rm + write` pattern via `mcp__workspace__bash`:
-   ```python
-   with open(path, 'rb') as f: data = f.read()
-   data = data.replace(old, new, 1)
-   os.remove(path)
-   with open(path, 'wb') as f: f.write(data)
-   ```
-
-   Related manifestation: bash views of files in the FUSE mount may show truncated content even when the `Read` tool sees full content for the same path — the host-side (Windows) file is usually intact, the bash view is the unreliable one. When pre-flighting (`wc -c`, `tail -3`) the file looks wrong via bash, cross-check via the `Read` tool before assuming the file on disk is broken. Verified at PR #14 (Phase 3 session, 2026-05-10): `CLAUDE.md` read fine via Read but bash `tail -3` cut off mid-word; on-disk content was intact. When this hits, don't read-modify-write via Python — construct fresh content from the Read-tool view and write-only via the rm+write pattern.
-
-2. **CRLF line endings.** Files on Windows disk are CRLF; the FUSE mount preserves them. `sed` and Python regex matching needs to handle both LF and CRLF. Pattern:
-   ```python
-   if old_b in data: data = data.replace(old_b, new_b)
-   elif old_b.replace(b'\n', b'\r\n') in data: data = data.replace(...)
-   ```
-
-3. **`rm` requires explicit permission**. First call `mcp__cowork__allow_cowork_file_delete(path)` once per session — Mike approves a directory and then deletes work for the rest of the session. Without it, `rm`, `git stash`, `git checkout -b` (any op that creates and removes lock files) fail with "Operation not permitted". Scope the request narrowly the first time. Asking for delete permission on a whole project tree (e.g. `MediaVault/`) will be rejected; asking for the specific subdirectory the work needs (e.g. `MediaVault/.git/`) will be approved. State explicitly in the request that no user files will be touched. Re-requesting after a rejection wastes a round trip.
-
-4. **Slashed branch names fail** (see above). The sandbox can't `mkdir` under `.git/refs/heads/`.
-
-5. **Build needs a manual symlink.** The rolldown native binary is nested wrong for Linux. The lookup path is `node_modules/rolldown/dist/rolldown-binding.linux-x64-gnu.node` (one directory level deeper than `node_modules/rolldown/`):
-   ```bash
-   ln -sf ../../@rolldown/binding-linux-x64-gnu/rolldown-binding.linux-x64-gnu.node \
-     node_modules/rolldown/dist/rolldown-binding.linux-x64-gnu.node
-   ```
-   Run this before `npm run build` if you're getting `Cannot find module '../rolldown-binding.linux-x64-gnu.node'`. The symlink is gitignored and harmless on Mike's Windows side. Verified at PR #14 (Phase 3 session, 2026-05-10) — earlier path documentation was off by one directory level. The exact target path may rotate (the `.binding-linux-x64-gnu-<hash>` suffix is content-addressed and changes when rolldown updates); locate first with `find node_modules -name 'rolldown-binding*linux*' -not -type l` and symlink to the heaviest non-symlink hit. Verified again 2026-05-25 (T3 session).
-
-6. **Sandbox `git status` can desync after heavy activity.** If you see "No commits yet" or every file as "new", the sandbox view is broken — Mike's actual git state on disk is fine. Verify by asking Mike to run `git status` in PowerShell, or by using the `Read` tool (which reads the Windows path directly, separate from the FUSE git view).
-
-7. **CRLF false positives in `git status`.** On a freshly-mounted repo, `git status` may show every routing-file CSS/JSX as `M` due to CRLF round-tripping through FUSE. Verify with `git diff --ignore-cr-at-eol --stat`; if empty, it's noise — proceed with explicit `git add` paths to keep the noise out of your commit.
-
-8. **FUSE mangles git's internal files — multiple symptoms across multiple triggers.** Originally discovered 2026-05-08 during MediaVault `git init`; further manifestations surfaced at PR #14 (2026-05-10) during normal session work. The common root cause is the same as quirk #1 (FUSE byte-preservation / truncation), but applied to git's atomic `.lock`-rename writes rather than the Edit tool. The trigger is not only `git init` — it can fire on session mount and on any git operation that rewrites internal files atomically (`git stash`, branch ops, etc.).
-
-   Known manifestations:
-   - **`.git/config` written as null bytes** (54 bytes of `\x00`) from bash's view on a fresh `git init`, while the host-side filesystem shows partial valid content. Fix: rewrite `.git/config` via the rm+write Python pattern from quirk #1.
-   - **`.git/objects/` missing entirely** after `git init`. Without it, `git status` reports "not a git repository." Subdirectories `info/` and `pack/` are also missing. Fix: `mkdir -p .git/objects/info .git/objects/pack`.
-   - **`.git/HEAD` arriving with trailing null bytes on session mount** (e.g. 34 bytes instead of 21, with `\x00` padding after `ref: refs/heads/main\n`). Symptom: `git rev-parse HEAD` errors with "Failed to resolve HEAD as a valid ref" / "ambiguous argument 'HEAD'"; `git status` may also error. Fix: rm+write Python pattern with a clean `ref: refs/heads/main\n` (21 bytes).
-   - **`.git/index` corrupted by `git stash` (or other atomic-rewrite ops)**. Symptom: "bad signature 0x00000000" or "index file corrupt". Fix: `rm .git/index && git read-tree HEAD` to rebuild the index from the committed tree. No working-tree changes are lost — `git read-tree HEAD` only rewrites the staging area.
-
-   Symptoms appear immediately: `git status` errors; `cat` of the file returns nulls; `git rev-parse HEAD` fails; `xxd .git/HEAD | head` shows trailing `00`s.
-
-   Workaround (general pattern):
-   ```bash
-   # Write the broken file via the rm+write Python pattern (bash-side won't trust the host write).
-   # Use the same Python rm+write block from quirk #1.
-
-   # If `.git/objects/` is missing, create it manually:
-   mkdir -p .git/objects/info .git/objects/pack
-
-   # If `.git/index` is corrupt, rebuild it from HEAD:
-   rm .git/index
-   git read-tree HEAD
-
-   # Verify:
-   git status      # should now report a clean repo
-   git rev-parse HEAD
-   git fsck --full # should be silent / no errors
-   ```
-
-   Additional constraint: the host-side `Edit` and `Write` tools refuse `.git/` paths ("resolves to a protected location"). All `.git/` writes must go through bash via FUSE — which is the layer that breaks. The rm+write Python pattern is the only reliable path.
-
-
-## Cowork environment quirks (operational hygiene)
-
-The section above ("Cowork sandbox quirks") catalogues the underlying bugs. This section is the operational protocol that accumulated across the Phase C → tagging audit arc (May 2026). Hard rules; follow them before re-discovering each lesson.
-
-### 1. The 16 KB tail-truncation rule (M1 §7.3)
-
-When the `Edit` or `Write` tool produces a file larger than ~16 KB *post-edit*, the tail silently truncates. Pre-edit size doesn't matter; post-edit size does. Refines quirk #1 with the concrete boundary.
-
-**Detection**: `wc -l` + `tail -3` after every edit on a file near the boundary; compare actual line count to expected delta.
-
-**Recovery**: pull intact version from `git HEAD`, reassemble in `/tmp/`, `shutil.copy2` back to the live path, SHA-verify and re-grep anchors.
-
-**Hard rule**: files at or past the boundary use anchor-based Python patches via heredoc, never direct `Edit`/`Write` tool calls. Confirmed sites past the boundary: `mediavault.html`, `yt_archive_capture.py`, `CHANGELOG.md`, all audit briefs, all multi-section run reports.
-
-### 2. Virtiofs phantom-deletions in `git status`
-
-When sandboxed bash runs `git status` against a mounted Windows repo, it frequently reports mass deletions (`D path1 path2 ...`) and `bad signature 0x00000000` errors. These are virtiofs-side view artifacts. The real files exist on disk; host git is fine. Specialised manifestation of quirk #6 (sandbox `git status` desync) + quirk #8 (FUSE-mangled git internals).
-
-**Detection**: `ls` the "deleted" paths from sandbox — they exist. `git log` and `git show <hash>:<path>` work correctly. Host PowerShell `git status` is clean.
-
-**Hard rule**: **Git commits run on host PowerShell only — for any virtiofs-mounted repo.** Sandbox can write the working tree; sandbox cannot safely stage or commit, because `.git/index.lock` writes succeed but `rm -f .git/index.lock` fails with "Operation not permitted" on virtiofs. Originally surfaced in HR; confirmed Museum and MV exhibit the same constraint (release-flow arc, 2026-05-28).
-
-**Recovery prelude** for any host-side HR commit (always-safe, idempotent):
-
-```powershell
-if (Test-Path .git\index.lock) { Remove-Item .git\index.lock }
-git reset --mixed HEAD
-# then proceed with git add / git commit as usual
-```
-
-Recovers any HR index corruption that bled through from sandbox activity. Cheap; include in every host-paste block by default.
-
-**First-sighting note**: rule and first confirmed sighting coincided. During the same hygiene-commit session (`af8e761`) that banked this rule, sandbox `git status --short` flagged `hunter_root.json` as a 1,929-line phantom delete while host `git status --short` returned clean.
-
-### 3. Virtiofs COMMIT failure on SQLite writes (M1 §7.2 expanded)
-
-SQLite `COMMIT` against a DB on a virtiofs-mounted path fails with "disk I/O error" / "database is locked" / silent corruption. Pattern is universal — any DB write that needs to COMMIT must run against a copy on the sandbox's native filesystem.
-
-Working pattern (v0.5.6, v0.5.7, v0.5.8 sessions):
-
-1. `shutil.copy2(live_db, '/tmp/<unique>.sqlite')`.
-2. Open the `/tmp/` copy; do all writes; COMMIT there.
-3. Independent re-verify on the `/tmp/` copy.
-4. `shutil.copy2('/tmp/<unique>.sqlite', live_db)` — **not** `os.replace`, which fails cross-device on virtiofs mounts.
-5. Final verify on the host DB from a fresh connection.
-
-Step 4 is the trap: `os.replace` looks idiomatic for atomic rename, but virtiofs is a different device than `/tmp` and the rename errors out. `shutil.copy2` is the safe variant.
-
-### 4. Cowork delete permission is per-session
-
-`mcp__cowork__allow_cowork_file_delete` for `C:\AI` does NOT persist across sessions. Budget one re-grant call at GATE 2 time per session, or earlier if file deletion is needed mid-session (e.g. `.git/index.lock` cleanup). Refines quirk #3 with the "per-session" constraint.
-
-### 5. Folder mounts are per-session too
-
-Fresh Cowork sessions start with no mounts. Audit-on-entry must call `mcp__cowork__request_cowork_directory` for each repo the session needs (typically Museum + MV + HR) before any other work. The request is reliable and idempotent.
-
-### 6. The release flow (cross-reference)
-
-The release flow lives in `### Release flow` above. **[CH4 2026-08-12] It is ONE step now (`npm run deploy`) and `npm run export-artifacts` is no longer in it** — the tool refuses without a typed flag because MediaVault still holds three hand-deleted lyric records and a routine export restores them. The old "step 2 is the most-missed step" reading is reversed and the reasoning is in that section; read it before any release-related work.
-
-### 7. Audit-on-entry kickoff premises can be stale
-
-Kickoff briefs reference file paths, function names, and existing-code states from the operator's memory of a session start that may be hours or days old. T3 (2026-05-25) hit four wrong anchors in one kickoff: server change "in mediavault.html" was actually in `core/imgserver.py`; `hr_dimensions.js` placement was misremembered by one directory; a heuristic flagged for retirement was already retired weeks earlier; the export tool location was named in the wrong repo.
-
-**Hard rule**: map every kickoff anchor (file path, function name, "existing X" claim) to the actual codebase BEFORE drafting the design. Surface mismatches at GATE 3, not at patch time. The kickoff is a planning artifact; the codebase is ground truth.
-
-### 8. Sandbox FUSE cache doesn't auto-invalidate on host writes
-
-When the operator runs a host-side write mid-session (an export script, `npm install`, a Python script invoked from PowerShell), the sandbox's view of the rewritten files remains the pre-write stale version. Symptoms: sandbox `stat` shows old mtime, `wc -c` shows old size, `cat` returns old content, `git status` doesn't list the files. The Read tool (host-direct) shows fresh content. `drop_caches` requires root and is not available. No reliable sandbox-side invalidation exists.
-
-**Hard rule**: when a host-side write occurs mid-session, assume the sandbox view is stale until cross-checked via the Read tool. If staging or commit comes next, hand off to host PowerShell (per §2). Generalises sandbox-quirk #6 beyond `git status` desync to any file content. Surfaced T3 (2026-05-25) on the museum-side JSON regen.
-
-### 9. Build smoke is workerd-blocked in sandbox
-
-`npm run build` cannot run in the cowork sandbox: rolldown and workerd both have Windows-installed binaries that don't work on Linux. Rolldown is fixable via the symlink in sandbox-quirk #5. Workerd would require `npm install @cloudflare/workerd-linux-64` which mutates node_modules too invasively for a verification check.
-
-**Substitute smoke pattern for museum-side JS changes**:
-
-1. `node --check <file>` — syntax.
-2. `npx eslint <file>` — isolated lint.
-3. Full-repo `npm run lint` baseline-diff — zero new errors.
-4. If the change is a function/comparator, write an inline Node `--input-type=module` unit test with mocked dependencies.
-
-Build itself runs on the operator's Windows side. Applied T3 (2026-05-25); all four steps cleared.
-
-### 10. hunter_root.json regen can shrink the released set
-
-`npm run export-artifacts` writes the *current* MV released set. If MV release-status flips have shrunk the set since the previous export (unrelease, retire, status correction), the new JSON will have fewer artifacts than the committed version. T3 session captured a 54 → 45 drop with no upstream change in scope. Two clarifications: re-derive the before-count from the prior `hunter_root.json` on disk — never trust a carried-forward count, which goes stale across sessions. And a legitimate down-regen (intended cleanup, retag, unrelease) still warrants an explicit acknowledgement at surfacing time; silence is the bug, not the shrink itself.
-
-**Hard rule**: capture before/after artifact counts on every `export-artifacts` run. If after-count is less than before-count, surface to operator before committing — the shrink may be intended (cleanup) or a regression (accidental unrelease), and it isn't visible from the diff summary alone.
-
-### 11. Sandbox cannot reach MV HTTP server
-
-`npm run export-artifacts` hits `fetch('http://127.0.0.1:51822/db')` to read MV's released set. From the cowork bash sandbox, `127.0.0.1` is sandbox-local — not the Windows host. `host.docker.internal` DNS-fails; the default gateway (172.16.10.1:51822) times out. No working sandbox→host route to MV's HTTP server exists.
-
-**Hard rule**: any flow that calls MV's HTTP server runs on host PowerShell, with MV launched first via `C:\AI\Platform\MediaVault\launch_mediavault.bat`. `export-artifacts` is the canonical case. Sandbox handles verification, build, and deploy; sandbox does NOT run `export-artifacts`. Surfaced release-flow run, 2026-05-28.
-
-### 12. Virtiofs maps NTFS-illegal characters to PUA glyphs
-
-Linux-created filenames containing NTFS-illegal characters (`: \ * ? " < > |`) appear on the Windows side with those characters mapped to U+F0xx private-use-area glyphs. PowerShell then parses the displayed glyph back as the original illegal character and tries to resolve it as a path component (e.g., `'.\C:\AI\...'` becomes a drive-letter attempt and fails).
-
-**Hard rule**: address such files by substring wildcard, never literal name.
-
-```powershell
-Get-ChildItem -Force | Where-Object { $_.Name -like '*substr*' } | Remove-Item -Recurse -Force
-```
-
-First sighting (release-flow run, 2026-05-28): a stray `C:\AI\Platform\MediaVault/`-named directory in the museum repo — a leaked path-string-as-folder from an earlier session. Resolved via the wildcard pattern above.
-
-### 13. Run reports land on disk before the session's final commit
-
-Every cowork session writes its run report to a known path on disk BEFORE that session's final commit (if any). The path goes into the next session's kickoff `§LOCKED_CONTEXT` so the report is recoverable.
-
-**Why**: backfilling after commit means the commit's accompanying artifact is missing from the moment it lands. The hygiene-commit session (`af8e761`) backfilled successfully; the release-flow session's report apparently never landed in a locatable place at all — which forced this deferred-banking close-out session to exist. The very gap this rule addresses is the gap that created it.
-
-**Hard rule**: for any cowork session that produces a commit, write the run report to disk first, name it into the operator's kickoff, then hand the commit text to the operator. Sessions that don't commit still write a report and name it into the carryforward.
-
-### 14. Commit integrity (mount truncation guard)
-
-Commit integrity (mount truncation guard, learned 2026-06-02): the Cowork repo mount can return a STALE cached file size while serving correct content on read. git's stat optimization then either skips the file or hashes a TRUNCATED blob capped at the stale size — silently dropping the bottom of the file into the commit. On commit 0cf9604 this nearly committed a STATE.md with its bottom third chopped off. Therefore, before ANY Cowork commit: for every staged file, compare the committed blob byte-count (git cat-file -s :<path>) against the host file's true size (host-side Get-Item Length, not the mount's stat). If they differ, do NOT commit — rebuild the file from git objects (original body from HEAD + the intended edit) and re-verify until sizes match. This applies to ALL files, not just large ones — a 49-line file was the one that got hit.
 
 ## Things that are explicitly off-limits
 
 - **`src/styles/museum-tokens.css`** — design tokens. Off-limits for population/data work; only touch with explicit UX direction.
 - **Routing files** during data tasks — `Exhibit.jsx`, `HrExhibitFlow.jsx`, etc. are routing components. Population/data tasks should not modify them. UX tasks can.
 
-## Pre-existing lint debt (4 errors)
+## Pre-existing lint debt — the baseline is 9 errors / 8 warnings
 
-These have been on `main` since before May 2026 and are deliberately untouched. Each needs semantic review, not a mechanical fix:
+**[2026-08-13] THIS HEADING SAID "(4 errors)" AND THE TABLE BELOW LISTS FOUR,
+WHICH IS THE TRIPWIRE-DISABLING FAILURE THIS FILE'S OWN A1 NOTE WARNS ABOUT** —
+a session that reads the heading as the baseline sees five phantom regressions
+and goes hunting. **The baseline is 9 errors / 8 warnings**, confirmed by
+running `npm run lint` on a clean tree on 2026-08-13, and it agrees with the
+number in `### Pre-flight before commit` above. Measured per file on the same
+run, so a future session can tell a regression from the debt:
+
+| file | err | warn |
+|---|---:|---:|
+| `Exhibit.jsx` | 5 | 5 |
+| `HrExhibitFlow.jsx` | 2 | 2 |
+| `RobotsExhibitFlow.jsx` | 1 | 1 |
+| `WbAdmin.jsx` | 1 | 0 |
+| **total** | **9** | **8** |
+
+The table below writes up four of those nine. It is not the whole baseline and
+never was.
+
+These four have been on `main` since before May 2026 and are deliberately untouched. Each needs semantic review, not a mechanical fix:
 
 | Location | Rule | Notes |
 |---|---|---|
@@ -521,7 +451,8 @@ MAY NOT SHOW MORE PICTURES.** Two buckets: **PRECIOUS** — genuine reveals, two
 three **a week**, the ceiling is on these — and **DUMP** — everything else, **no
 ceiling**, because ten manual pages arriving is ONE point of focus. The law and
 both runways are **`reveal/focus.mjs`**; the judged field is **`bucket`** on
-`provenance/asset-table.json`, **Mike's, null on all 315 rows, and Ops does not
+`provenance/asset-table.json`, **Mike's, null on all 385 rows (re-measured
+2026-08-13; this said 315), and Ops does not
 derive it**. **PRECIOUS divides into weeks; DUMP divides into nothing** — the old
 tracker divided PHOTOGRAPHS by a ceiling on ATTENTION and printed *"16 pictures =
 6–8 days"*, which is **VOID** and kept with its cause in `focus.mjs` `VOIDED`.
@@ -1085,6 +1016,8 @@ read §5 first and the archive second.
 ## Conventions for updating this file
 
 - Add new "Recent session log" entries at the top, dated and PR-linked.
-- Update "Cowork sandbox quirks" when you hit something new.
+- Update "THE ENVIRONMENT" when you hit something new about the machine or the
+  tools. **Check first that what bit you is real on this host** — the section it
+  replaced was two hundred lines of workarounds for a sandbox nobody has run in.
 - If you add a new piece of design vocabulary (a constant, a CSS variable, a behavior pattern), add it here so the next session doesn't reverse-engineer it.
 - Don't let this file grow past ~600 lines. If it does, archive older session log entries to `docs/`.

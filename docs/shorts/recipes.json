@@ -1,0 +1,121 @@
+{
+ "_": "THE SHORTS BENCH — Mike's recipes. Written by docs/shorts/shorts.html (the Save button). Read by any compile step. Positions are fractions of the asset, never pixels; see tools/shorts-recipe.mjs for the format.",
+ "version": 1,
+ "saved": "2026-08-13T17:02:22.728Z",
+ "recipes": [
+  {
+   "version": 1,
+   "name": "the manual opens",
+   "fps": 30,
+   "shape": "9:16",
+   "audio": null,
+   "blocks": [
+    {
+     "seconds": 3,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.22,
+      "scale": 1.15,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.55,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "id": "bmsrrmnun",
+     "asset": {
+      "uid": "A-be5c1ebdab",
+      "label": "Page 56",
+      "path": "public/held/robots/manual/page-56.png",
+      "repo": "museum",
+      "sha256": "64b97a0e526a8966e74b5c7883a372cde9be50fd6c90f3b4dbdd40ff9f6feb6a",
+      "w": 2040,
+      "h": 2640
+     }
+    },
+    {
+     "seconds": 2.2,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.18,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "id": "bmsrrmnuv",
+     "asset": {
+      "uid": "A-4b804e7aed",
+      "label": "MGK-NIAC plate 3 of 4, and the still on TECHNICAL SPECIFICATIONS",
+      "path": "public/held/robots/reference/mgk-viii/output_row.jpg",
+      "repo": "museum",
+      "sha256": "bc3f7a3a24124c1e133ad85e30828ccf29039b7f4f1fb47f3e911ceaffa5609d",
+      "w": 690,
+      "h": 240
+     }
+    },
+    {
+     "seconds": 1.6,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.12,
+      "rot": 0
+     },
+     "in": {
+      "type": "flash",
+      "seconds": 0.3
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "id": "bmsrrmnv5",
+     "asset": {
+      "uid": "A-ae718e7ac8",
+      "label": "The MGK-VIIIp album cover",
+      "path": "public/held/robots/art/mgk-viiip-cover.png",
+      "repo": "museum",
+      "sha256": "61e1cb867904e175a2afc7ae4c4fba906548e0316a285ff9ac072d6ec6b63024",
+      "w": 1200,
+      "h": 1200
+     }
+    }
+   ]
+  }
+ ]
+}

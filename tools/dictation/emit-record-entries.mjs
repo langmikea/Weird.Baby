@@ -34,6 +34,9 @@
 import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
+/* guard 8 asks git two questions: when the Record last moved, and whether a
+   record number has ever been in it. Both are facts only the history holds. */
+import { execFileSync } from "node:child_process";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..", "..");
@@ -215,6 +218,13 @@ const BODY = out.join("\n");
         and the ORIGINAL FILE IS RESTORED — the write is staged in memory and
         only committed to disk after the parse, then re-read and compared, and
         rolled back if the comparison fails.
+     6. IT MAY NOT EAT THE REASONING — comment characters before vs after.
+     7. THE `placed` IMPORT COMES BACK BY ITSELF when an entry delivers a
+        picture.
+     8. A DRAFT OLDER THAN THE RECORD MAY NOT LAND, and a draft may not
+        RESURRECT a record the Record has retired. Guards 1-7 all happen to
+        catch a stale draft for reasons of their own; 8 is the one aimed at it.
+        Each of 6, 7 and 8 is written up in full where it stands, below.
    =========================================================================== */
 if (!argv.includes("--write")) {
   console.log(BODY);
@@ -263,7 +273,7 @@ if (/\bplaced\(/.test(BODY) && !/^import \{ placed \}/m.test(preamble)) {
 const after = preamble + BODY + CLOSE;
 
 /* guard 3 — nothing may vanish */
-const { parseRecord } = await import(url.pathToFileURL(path.join(REPO, "reveal", "record-entries.mjs")).href);
+const { parseRecord, draftEntries } = await import(url.pathToFileURL(path.join(REPO, "reveal", "record-entries.mjs")).href);
 let had;
 try { had = parseRecord(before).entries.map(e => e.no).filter(n => n != null); }
 catch (e) { die(`the CURRENT ${REL} does not parse (${e.message}). Fix it by hand first.`); }
@@ -271,6 +281,222 @@ const wants = entries.map(e => e.no);
 const lost = had.filter(n => !wants.includes(n));
 if (lost.length) die(`the draft does not carry record(s) ${lost.join(", ")}, which are in ${REL}. `
   + `A draft is meant to hold the whole volume; a short one means something upstream dropped them.`);
+
+/* ═══ GUARD 8 — [2026-08-13] A DRAFT OLDER THAN THE RECORD MAY NOT LAND ═════
+   MIKE'S DRAFT ON 2026-08-11 HELD SIX RECORDS AND THE TREE HELD FIVE, AND ITS
+   Record 001 held TWO sections where the tree holds five. Landing it would have
+   resurrected 013 — deleted on 2026-08-12 — and cut 001 back to the superseded
+   2026-08-08 dictation, replacing his corrected text with the text it corrected.
+
+   IT WAS REFUSED, AND THAT IS THE PROBLEM THIS GUARD EXISTS FOR. Two other
+   guards happened to catch it: the note check above (the draft still carries
+   eight curly braces) and guard 6 (a draft carries no comments). Neither knows
+   anything about staleness. Answer either one — take the braces out, teach the
+   emitter to carry comments — and the SAME draft lands and the damage is done,
+   silently, past every remaining guard, because every string in it round-trips
+   perfectly. **A protection that fires for an unrelated reason is not a
+   protection; it is a coincidence with a good record so far.**
+
+   ═══ WHY THE TEST IS THE CLOCK AND NOT THE CONTENT ═════════════════════════
+   The obvious guard — refuse when the draft disagrees with the tree — REFUSES
+   EVERY REAL LANDING, because a landing is a draft that disagrees with the tree.
+   That is what an edit IS. There is no structural difference between "Mike
+   rewrote this paragraph" and "this paragraph is last week's": both are a string
+   in the draft that is not the string in the tree.
+
+   What separates them is WHICH IS NEWER, and that is knowable. The editor seeds
+   itself from the tree (`draftEntries()` in `tools/dictation/record-edit.mjs`),
+   so a draft is a trustworthy superset of the Record IF AND ONLY IF it was saved
+   AFTER the Record last moved. Saved after: every difference is his. Saved
+   before: every difference is a reversion wearing an edit's clothes.
+
+   So the clock decides whether to refuse, and the DIFF says which records and
+   how — and the diff is printed either way, because a landing that is about to
+   change five paragraphs should say so even when it is allowed to.
+
+   THE TREE'S TIMESTAMP IS THE LATER OF ITS LAST COMMIT AND ITS FILE MTIME. An
+   uncommitted edit is still a move; a committed one whose file was touched
+   afterwards by a checkout is still that commit. Taking the later of the two
+   cannot understate when the Record last changed, and understating it is the
+   only direction that fails open.
+
+   IT DEGRADES BY REFUSING, NEVER BY ASSUMING. No `saved` field, no readable
+   mtime, git absent — each says which fact it could not establish and stops.
+   =========================================================================== */
+const RECORD_SOURCE_LEGACY = "src/data/artists/robots.js";
+
+function gitLines(args) {
+  try {
+    return execFileSync("git", args, { cwd: REPO, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] })
+      .split("\n").map(s => s.trim()).filter(Boolean);
+  } catch { return null; }
+}
+
+/* WHEN THE RECORD LAST MOVED — the later of its last commit and its mtime. */
+function treeMovedAt() {
+  const why = [];
+  let mtime = null;
+  try { mtime = fs.statSync(TARGET).mtime; why.push(`file mtime ${mtime.toISOString()}`); }
+  catch { /* reported below */ }
+  const log = gitLines(["log", "-1", "--format=%cI", "--", REL.split(path.sep).join("/")]);
+  let commit = null;
+  if (log && log[0]) { commit = new Date(log[0]); why.push(`last commit ${commit.toISOString()}`); }
+  if (!mtime && !commit) return { at: null, why: ["neither a file mtime nor a git log could be read"] };
+  const at = !mtime ? commit : !commit ? mtime : (commit > mtime ? commit : mtime);
+  return { at, why };
+}
+
+/* WAS THIS RECORD NUMBER EVER IN THE RECORD? The one question that separates a
+   NEW record from a RESURRECTED one, and the only honest answer to it is the
+   file's own history. A number the Record has never carried is Mike writing the
+   next entry; a number it carried and no longer carries was DELETED, and a draft
+   is not allowed to undo that — Doctrine 24, and 013 is the case in hand.
+   BOTH HOMES ARE SEARCHED: the entries lived inside `robots.js` before the
+   2026-08-11 split, so a check that only read the new file would call every
+   pre-split record "never seen" and wave it straight back in. */
+function everCarried(no) {
+  const files = [REL.split(path.sep).join("/"), RECORD_SOURCE_LEGACY];
+  const seen = new Set();
+  let consulted = false;
+  for (const f of files) {
+    const shas = gitLines(["log", "--format=%H", "--", f]);
+    if (shas === null) continue;
+    consulted = true;
+    for (const sha of shas) {
+      let blob;
+      try {
+        blob = execFileSync("git", ["show", `${sha}:${f}`],
+          { cwd: REPO, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+      } catch { continue; }
+      /* `no: 13,` and not `no: 13` — the comma is what stops 13 matching 130 */
+      if (new RegExp(`\\bno:\\s*${no}\\s*,`).test(blob)) { seen.add(no); break; }
+    }
+    if (seen.has(no)) break;
+  }
+  return consulted ? seen.has(no) : null;   // null = git could not be consulted
+}
+
+/* ── the diff, so a refusal can say which records and how ─────────────────── */
+function differences(d, t) {
+  const out = [];
+  const S = (v) => JSON.stringify(v ?? null);
+  for (const k of ["date", "title", "line", "lead", "tomb", "still", "stillCaption"]) {
+    const dv = d[k] ?? "", tv = t[k] ?? "";
+    if (dv !== tv) out.push(`\`${k}\`  tree ${S(tv || null)}  ->  draft ${S(dv || null)}`);
+  }
+  const ds = d.sections || [], ts = t.sections || [];
+  if (ds.length !== ts.length)
+    out.push(`sections: the Record has ${ts.length}, this draft has ${ds.length}`);
+  for (let i = 0; i < Math.max(ds.length, ts.length); i++) {
+    const a = ds[i], b = ts[i];
+    if (!b) { out.push(`section ${i + 1} ${S(a.label)} is new in the draft`); continue; }
+    if (!a) { out.push(`section ${i + 1} ${S(b.label)} (${(b.body || []).length} paragraph(s)) is in the Record and NOT in the draft`); continue; }
+    if (a.label !== b.label) out.push(`section ${i + 1} heading: tree ${S(b.label)} -> draft ${S(a.label)}`);
+    const ab = a.body || [], bb = b.body || [];
+    if (ab.length !== bb.length)
+      out.push(`section ${i + 1} ${S(b.label)}: the Record has ${bb.length} paragraph(s), this draft has ${ab.length}`);
+    for (let j = 0; j < Math.max(ab.length, bb.length); j++) {
+      if (ab[j] !== bb[j])
+        out.push(`section ${i + 1}, paragraph ${j + 1}:\n        tree  ${S(bb[j])}\n        draft ${S(ab[j])}`);
+    }
+  }
+  return out;
+}
+
+{
+  let tree;
+  try { tree = draftEntries(); }
+  catch (e) { die(`the Record could not be read for comparison (${e.message}).`); }
+  const T = new Map(tree.entries.map(e => [e.no, e]));
+
+  /* (a) RESURRECTION — a record in the draft that the Record has retired */
+  const unknown = [], raised = [];
+  for (const e of entries) {
+    if (T.has(e.no)) continue;
+    const ever = everCarried(e.no);
+    if (ever === null) unknown.push(e.no);
+    else if (ever) raised.push(e.no);
+  }
+  if (unknown.length) die(
+    `record(s) ${unknown.join(", ")} are in the draft and not in the Record, and git could not be `
+    + `consulted to tell a NEW record from a DELETED one. This tool will not guess which: a new `
+    + `record and a resurrected one are the same shape.`);
+  if (raised.length) {
+    console.error(`record:land --write REFUSED — the draft would RESURRECT record(s) `
+      + `${raised.map(n => String(n).padStart(3, "0")).join(", ")}.`);
+    console.error("");
+    console.error(`Each of those numbers has been in ${REL} before and is not in it now, which`);
+    console.error("means it was deleted on purpose. A working copy saved before the deletion still");
+    console.error("holds it, and landing that copy undoes the deletion silently — every string in");
+    console.error("it round-trips, so no other guard would say a word.");
+    console.error("");
+    console.error("Take the record out of the draft, or if it is genuinely coming back, put it back");
+    console.error(`in ${REL} by hand first so the decision is a commit and not a side effect.`);
+    console.error(`Nothing was written. ${REL} is unchanged.`);
+    process.exit(1);
+  }
+
+  /* (b) STALENESS — is this draft newer than the Record it was seeded from? */
+  const savedRaw = draft.saved;
+  if (!savedRaw) die(
+    "this draft carries no `saved` timestamp, so there is no way to tell whether it is newer "
+    + "than the Record it was seeded from. The editor writes one; a draft without it was not "
+    + "written by the editor.");
+  const saved = new Date(savedRaw);
+  if (Number.isNaN(saved.getTime())) die(`this draft's \`saved\` field (${savedRaw}) is not a date.`);
+  const moved = treeMovedAt();
+  if (!moved.at) die(`when ${REL} last changed could not be established — ${moved.why.join("; ")}.`);
+
+  /* the diff is computed either way: an allowed landing that is about to change
+     five paragraphs should still say which five */
+  const changed = [];
+  for (const e of entries) {
+    const t = T.get(e.no);
+    if (!t) { changed.push({ no: e.no, lines: ["a new record"] }); continue; }
+    const lines = differences(e, t);
+    if (lines.length) changed.push({ no: e.no, lines });
+  }
+
+  if (saved < moved.at) {
+    console.error(`record:land --write REFUSED — this draft is OLDER than the Record it would overwrite.`);
+    console.error("");
+    console.error(`    draft saved     ${saved.toISOString()}`);
+    console.error(`    Record moved    ${moved.at.toISOString()}   (${moved.why.join("; ")})`);
+    console.error("");
+    console.error("The editor seeds itself from the Record, so a draft is only a superset of it if");
+    console.error("it was saved AFTER the Record last changed. This one was saved before, so its");
+    console.error("differences are not edits — they are the Record as it was, about to be written");
+    console.error("back over the Record as it is.");
+    if (changed.length) {
+      console.error("");
+      console.error(`WHICH RECORDS, AND HOW — ${changed.length} record(s) would change:`);
+      for (const c of changed) {
+        console.error(`\n  Record ${String(c.no).padStart(3, "0")} — ${c.lines.length} difference(s)`);
+        for (const l of c.lines.slice(0, 12)) console.error(`      ${l}`);
+        if (c.lines.length > 12) console.error(`      … and ${c.lines.length - 12} more`);
+      }
+    } else {
+      console.error("");
+      console.error("No record differs, so landing it would change nothing — but it is still older");
+      console.error("than the Record and this tool will not write from a copy it cannot vouch for.");
+    }
+    console.error("");
+    console.error("Open the editor (`npm run record`), which reseeds from the Record as it stands");
+    console.error("today, and save again. Nothing was written.");
+    process.exit(1);
+  }
+
+  if (changed.length) {
+    console.log(`record:land — this draft is newer than the Record `
+      + `(saved ${saved.toISOString()}, Record moved ${moved.at.toISOString()}), `
+      + `so the changes below are edits. ${changed.length} record(s) change:`);
+    for (const c of changed) {
+      console.log(`  Record ${String(c.no).padStart(3, "0")} — ${c.lines.length} difference(s)`);
+      for (const l of c.lines.slice(0, 6)) console.log(`      ${l}`);
+      if (c.lines.length > 6) console.log(`      … and ${c.lines.length - 6} more`);
+    }
+  }
+}
 
 /* ═══ GUARD 6 — [N1 2026-08-11] IT MAY NOT EAT THE REASONING ═══════════════
    THE FIRST TIME `--write` WAS EVER RUN AGAINST A REAL DRAFT THIS IS WHAT IT
