@@ -15428,6 +15428,20 @@
    "l": 250,
    "t": "instant",
    "c": "HOUSE"
+  },
+  "867f777ffde1719f": {
+   "c": "HOUSE",
+   "f": "src/components/ApprovalMark.jsx",
+   "l": 36,
+   "t": "/",
+   "s": "the Lobby route, matched so the mark can find the page it is standing on. Ops furniture, DEVELOPMENT ONLY."
+  },
+  "75d6d53b3dac745b": {
+   "c": "HOUSE",
+   "f": "src/components/ApprovalMark.jsx",
+   "l": 45,
+   "t": "Approved by Mike on {} — development only",
+   "s": "Ops. The approval mark's tooltip. It is DEVELOPMENT ONLY and cannot reach a visitor: __WB_APPROVALS__ is the literal null at LAUNCH and the component folds away — proved against a real launch build by npm run approval:proof. Declared rather than excluded because the sweep cannot know a string is unreachable, and a hole cut in the gate for one file is a hole."
   }
  }
 }

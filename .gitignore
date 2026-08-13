@@ -52,3 +52,9 @@ tools/dictation/.thumb-cache.json
 # the worksheet answers file IS committed (it is the durable copy of Mike's
 # writing); its dated backups are not.
 docs/dictation-20260807/answers.*.bak.json
+
+# RENDER OUTPUT. A recipe is the durable artifact; the MP4 it compiles to is
+# not — it is regenerable from the recipe by one command, it is megabytes, and
+# it is a file Mike uploads to a platform rather than anything the museum
+# serves. The recipes themselves ARE committed.
+docs/shorts/out/

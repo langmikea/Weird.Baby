@@ -42,6 +42,16 @@ export const RULED_OUT = {
   "MGK-TWIN_MONITOR_SCREEN_BEZEL.png":
     "Mike, 2026-08-13: the Portal CRT's bezel, used in constructing the " +
     "original portal. Not UX standalone; he makes the overlays himself.",
+  /* [2026-08-13] TWO MORE, SAME CATEGORY, HIS RULING TONIGHT. They surfaced on
+     the shorts bench as selectable ingredients — a red-boxes-on-black tile and
+     a red-dots-on-black tile sitting in "Photographs of the machines", which is
+     where a photograph of a machine is supposed to be. */
+  "MGK-TWIN_MONITOR_CLOSE_UP_MARKERS.png":
+    "Mike, 2026-08-13: red boxes on black — construction markup, not a " +
+    "photograph. Same category as the bezel.",
+  "monitor_base_markers.png":
+    "Mike, 2026-08-13: red boxes on black — construction markup, not a " +
+    "photograph. Same category as the bezel.",
 };
 
 /* ═══ THE LABEL ════════════════════════════════════════════════════════════ */

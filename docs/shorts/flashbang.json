@@ -1,0 +1,63 @@
+{
+ "_": "THE FLASHBANG — Mike's approved numbers, in the recipe format. lead-in 600ms, pop 10ms to full white, hold 350ms blind, dissolve 3000ms on curve 6.0 slow-then-fast, waver 0.5 gentle and decaying, revealing the logo. Total 3.96s. The phases are additive: 0.600 + 0.010 + 0.350 + 3.000. See tools/shorts-recipe.mjs for what a flashbang is.",
+ "version": 1,
+ "saved": "2026-08-13",
+ "recipes": [
+  {
+   "version": 1,
+   "name": "flashbang",
+   "fps": 30,
+   "shape": "9:16",
+   "audio": null,
+   "blocks": [
+    {
+     "id": "fb-lead",
+     "_": "THE SCREEN YOU'RE ON, HELD. A flashbang is a TRANSITION template, so in a real teaser this block is whatever the viewer was already looking at. FOR THE PROOF IT MUST BE DARK, and that is a measurement decision rather than a taste one: the first render used manual page 56, whose mean luma is 251 — within 4 of full white — so the lead-in, the pop and the blind hold were indistinguishable and the curve could not be read off the file at all. This photograph measures 78. 78 -> 255 -> 216 is a curve you can see.",
+     "seconds": 0.6,
+     "fit": "cover",
+     "ease": "linear",
+     "from": { "x": 0.5, "y": 0.5, "scale": 1, "rot": 0 },
+     "to":   { "x": 0.5, "y": 0.5, "scale": 1, "rot": 0 },
+     "in":   { "type": "cut", "seconds": 0 },
+     "out":  { "type": "cut", "seconds": 0 },
+     "asset": {
+      "uid": "A-127ca4b489",
+      "label": "MGK twin monitor, close up",
+      "path": "public/held/robots/reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png",
+      "repo": "museum",
+      "sha256": "d5d718285389cf8c44e2dd9dc2b3670902b1709e287f28b7e0fd138dd7d88d21",
+      "w": 3000,
+      "h": 2400
+     }
+    },
+    {
+     "id": "fb-reveal",
+     "_": "THE REVEAL. seconds = pop + hold + dissolve = 0.010 + 0.350 + 3.000 = 3.360, and the flashbang owns all of it. fit IS 'contain' AND THAT WAS FOUND BY LOOKING: the mark is 2048x2048 and the frame is 1080x1920, so 'cover' crops a third off each side and the last frame of the reveal read 'eird.Bab' — the W and the y gone. Every luma number was correct while the picture was wrong. A square logo in a 9:16 frame is letterboxed, always.",
+     "seconds": 3.36,
+     "fit": "contain",
+     "ease": "linear",
+     "from": { "x": 0.5, "y": 0.5, "scale": 1, "rot": 0 },
+     "to":   { "x": 0.5, "y": 0.5, "scale": 1, "rot": 0 },
+     "in": {
+      "type": "flashbang",
+      "pop": 0.01,
+      "hold": 0.35,
+      "dissolve": 3,
+      "curve": 6,
+      "waver": 0.5
+     },
+     "out": { "type": "cut", "seconds": 0 },
+     "asset": {
+      "uid": "A-e951825925",
+      "label": "The Weird.Baby mark",
+      "path": "public/WeirdBaby_PhotoID.png",
+      "repo": "museum",
+      "sha256": "3c0e418dab865c211992a88ecfdf41ddf082ab7f2f013a332d83bb1be2332685",
+      "w": 2048,
+      "h": 2048
+     }
+    }
+   ]
+  }
+ ]
+}

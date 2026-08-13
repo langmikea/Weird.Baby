@@ -45,7 +45,15 @@
     "surfacing": "node tools/surfacing.mjs",
     "record:serve": "node tools/dictation/record-serve.mjs",
     "assign": "node tools/dictation/assign.mjs",
-    "shorts": "node tools/shorts.mjs"
+    "shorts": "node tools/shorts.mjs",
+    "approve": "node tools/approve.mjs",
+    "approve:check": "node tools/approve.mjs --check",
+    "approval:proof": "node tools/approval-proof.mjs",
+    "docs:numbers": "node tools/numbers-gate.mjs",
+    "docs:numbers:gate": "node tools/numbers-gate.mjs --gate",
+    "shorts:render": "node tools/shorts-compile.mjs",
+    "shorts:flashbang": "node tools/shorts-compile.mjs --recipe docs/shorts/flashbang.json --frames --verify",
+    "shorts:verify": "node tools/shorts-verify.mjs"
   },
   "dependencies": {
     "react": "^19.2.4",

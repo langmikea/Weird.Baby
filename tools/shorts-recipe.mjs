@@ -58,7 +58,60 @@ export const TRANSITIONS = [
   { key: "cut",   label: "cut" },
   { key: "fade",  label: "fade" },
   { key: "flash", label: "flash" },
+  { key: "flashbang", label: "flashbang (pop · hold · dissolve)" },
 ];
+
+/* ═══ [2026-08-13] THE FLASHBANG, AND IT IS AN EXTENSION — SAY SO ═══════════
+   Mike approved a set of numbers by eye: lead-in 600 ms, pop 10 ms to full
+   white, hold 350 ms blind, dissolve 3000 ms on curve 6.0 slow-then-fast,
+   waver 0.5 gentle and decaying, revealing the logo. Total 3.96 s.
+
+   **THE FORMAT AS IT STOOD COULD NOT HOLD THOSE NUMBERS.** `flash` ramps a
+   white cover linearly across `seconds` and has no pop, no hold, no curve and
+   no waver. Rendering the approved beat therefore needed the format to grow,
+   and it grows HERE rather than inside the compiler — one declaration, every
+   reader (Doctrine 22), so the bench, the compiler and any future tool cannot
+   disagree about what a flashbang is.
+
+   THE PHASES ARE SEQUENTIAL AND ADDITIVE, which is what makes the total come
+   out at Mike's own 3.96 s: lead-in (the previous block's `seconds`) + pop +
+   hold + dissolve. The block carrying the flashbang has
+   `seconds = pop + hold + dissolve`, and the transition owns all of it.
+
+   `curve` IS THE EXPONENT ON THE REVEAL and 6.0 is slow-then-fast: the white
+   cover's alpha is `1 - u^curve`, so at the halfway point of a curve-6
+   dissolve the frame is still 98% white and almost all of the reveal happens
+   in the last third. `curve: 1` would be a plain linear fade.
+
+   `waver` IS AN AMPLITUDE AND ONLY AN AMPLITUDE — 0..1, where Mike's 0.5 means
+   "gentle". **A frequency and a decay law are NOT in his numbers**, so they are
+   Ops' and are declared here as constants rather than buried: three cycles
+   across the dissolve, amplitude `waver * WAVER_PEAK`, decaying as `(1-u)^2`.
+   If he wants it faster or slower those two constants are the dial. */
+export const WAVER_CYCLES = 3;      /* oscillations across the dissolve */
+export const WAVER_PEAK = 0.06;     /* alpha swing at waver = 1.0 */
+
+export const FLASHBANG_DEFAULT = {
+  type: "flashbang",
+  pop: 0.010,        /* seconds, to full white */
+  hold: 0.350,       /* seconds, blind */
+  dissolve: 3.000,   /* seconds, white -> the frame beneath */
+  curve: 6.0,        /* exponent; >1 is slow-then-fast */
+  waver: 0.5,        /* 0..1 amplitude */
+};
+
+/** the frames a flashbang occupies, and what its white cover's alpha is at any
+ *  one of them. THE ONE PLACE THIS CURVE IS DEFINED. */
+export function flashbangAlpha(fb, tInBlock) {
+  const pop = fb.pop ?? 0, hold = fb.hold ?? 0, dis = fb.dissolve ?? 0;
+  if (tInBlock < pop) return pop > 0 ? tInBlock / pop : 1;       /* rising to white */
+  if (tInBlock < pop + hold) return 1;                            /* blind */
+  const u = dis > 0 ? Math.min(1, (tInBlock - pop - hold) / dis) : 1;
+  const base = 1 - Math.pow(u, fb.curve ?? 1);
+  const w = (fb.waver ?? 0) * WAVER_PEAK
+    * Math.sin(2 * Math.PI * WAVER_CYCLES * u) * Math.pow(1 - u, 2);
+  return Math.max(0, Math.min(1, base + w));
+}
 
 export const FIT = [
   { key: "cover",   label: "fill the frame (crops)" },

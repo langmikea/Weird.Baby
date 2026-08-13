@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, lazy } from "react";
+import ApprovalMark from "./components/ApprovalMark.jsx";
 import WbHome     from "./routes/WbHome.jsx";
 import WbAdmin    from "./routes/WbAdmin.jsx";
 /* [H1 2026-08-06] HUNTER ROOT'S WING IS HELD. Mike: he does not want /hr
@@ -66,6 +67,13 @@ export default function App() {
   return (
     <BrowserRouter>
       <KeyWatcher />
+      {/* [2026-08-13] MIKE'S APPROVAL MARK — the house mark in the corner of a
+          page he has personally signed off, DEVELOPMENT ONLY. It compiles to
+          nothing at launch: `__WB_APPROVALS__` is the literal `null` there and
+          the component's first line folds. It sits outside <Routes> because it
+          belongs to the window rather than to any one page, and it reads the
+          address itself. See reveal/approval.mjs. */}
+      <ApprovalMark />
       <Routes>
         <Route path="/" element={<WbHome />} />
         <Route path="/admin" element={<WbAdmin />} />

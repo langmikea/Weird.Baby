@@ -14,6 +14,7 @@ import { placeRule } from "./reveal/placement.mjs";
 import { assetSchedule } from "./reveal/record-clock.mjs";
 import { entries as recordEntries } from "./reveal/record-entries.mjs";
 import { recordDay } from "./src/data/artists/record-epoch.js";
+import { state as approvalState } from "./reveal/approval.mjs";
 
 /* [V1 2026-08-06] THE STAGE, READ ONCE PER BUILD. `reveal/stage.mjs` is the
    declaration and its header is the ruling; an unknown value throws there
@@ -511,6 +512,24 @@ export default defineConfig({
         .map((e) => (e.no == null ? null : recordDay(e.no)))
         .filter(Boolean)
         .sort()[0] ?? null),
+    /* ═══ [2026-08-13] MIKE'S SIGNATURES, AND THE REASON THIS IS A `define` ═══
+       The approval mark draws the house mark on a page he has personally
+       approved. It must NEVER render at launch, and the strongest version of
+       "never" available is a constant the bundler can fold: at LAUNCH this is
+       the literal `null`, so `ApprovalMark`'s first line becomes
+       `if (!null) return null;` and rollup takes the component, its styles and
+       this whole map out of the bundle. **There is no runtime flag to forget.**
+       Proved against a real launch build by `npm run approval:proof`.
+       IT CARRIES ONLY ROUTE → DATE. Not the fingerprints, not the file lists —
+       the browser has no use for them and a map of what the museum is made of
+       is not something to ship even in development. `state()` recomputes the
+       fingerprints at BUILD time, so a page whose signature has dropped is
+       simply absent from this object. */
+    __WB_APPROVALS__: JSON.stringify(
+      STAGE === "launch" ? null
+        : Object.fromEntries(approvalState()
+            .filter((p) => p.status === "approved")
+            .map((p) => [p.route, p.signed.at]))),
   },
   plugins: [hrVaultAudio, revealPublic, wbPlacement, opsNotesStrip, heldOutOfLaunch, heldChunkGuard, opsBraceGuard, react(), cloudflare()],
   build: {
