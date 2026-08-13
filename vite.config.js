@@ -1,4 +1,6 @@
 import { defineConfig } from 'vite'
+import nodeFs from "node:fs";
+import nodePath from "node:path";
 import react from '@vitejs/plugin-react'
 import { cloudflare } from "@cloudflare/vite-plugin";
 import * as acorn from "acorn";
@@ -285,6 +287,82 @@ const shutDir = (chunk) => {
   return null;
 };
 
+/* ═══ [J6 2026-08-13] THE STAGE HOLD DOES NOT SHIP AT LAUNCH ════════════════
+   MIKE'S CALL: *"Hold held material out of the launch bundle. It is refused by
+   the worker anyway, so nothing is lost."*
+
+   THE NUMBERS THAT MADE IT WORTH DOING. `public/held/` was 12 files and about
+   15 MB. The manual, the build recordings and the rest took it to 144 files and
+   191 MB, so every `deploy:launch` uploaded 218 MB of which 191 MB was material
+   the worker refuses on sight. A visitor never sees a byte of it either way;
+   the cost is entirely at deploy.
+
+   WHY THIS CANNOT BREAK A REVEAL, WHICH IS THE ONLY QUESTION THAT MATTERED.
+   The reveal mechanism does not READ from `public/held/` at request time — it
+   MOVES the file out of it beforehand. `reveal/day.mjs --place` calls
+   `fs.renameSync(held, public)` on the day a Record entry delivers an asset, so
+   by the time vite runs, a delivered picture is at `public/robots/…` and is
+   bundled by the ordinary path. Only things NO entry has delivered are still
+   under `held/`, and those are exactly what the worker refuses. Dropping them
+   removes an upload, not a route.
+
+   IT IS LAUNCH ONLY. In DEVELOPMENT the held tree is how Mike sees anything at
+   all (`reveal/stage.mjs`: he cannot direct what he cannot see), so this does
+   nothing unless the stage says launch.
+
+   IT DELETES FROM THE BUNDLE, NOT FROM THE REPO. `generateBundle` never touches
+   disk; the files stay exactly where `--place` will look for them tomorrow. */
+let heldOutDir = null, heldRoot = null;
+const heldOutOfLaunch = {
+  name: "wb-held-out-of-launch",
+  apply: "build",
+  /* THE PATHS ARE KEPT IN MODULE SCOPE AND NOT ON `this`, AND THAT WAS A REAL
+     BUG FOR ONE BUILD. Rollup binds `this` in a hook to the PLUGIN CONTEXT, not
+     to the plugin object, so `this._out` set in configResolved read `undefined`
+     in closeBundle — the hook ran, took the early return, and reported nothing.
+     The launch build still shipped 144 files and it looked like the filter had
+     simply decided there was nothing to do. */
+  configResolved(c) {
+    heldOutDir = c.build && c.build.outDir;
+    heldRoot = c.root;
+  },
+  /* IT MUST BE closeBundle AND NOT generateBundle, AND THE FIRST CUT GOT THAT
+     WRONG TOO. `public/` is copied by vite's publicDir step, which never goes
+     through rollup, so the held files are not in the `bundle` object at all and
+     deleting them from it removed nothing. They exist only once vite has
+     written the output directory, and closeBundle is the hook that waits. */
+  closeBundle() {
+    if (STAGE !== "launch" || !heldOutDir) return;
+    const dir = nodePath.resolve(heldRoot || process.cwd(), heldOutDir, "held");
+
+    /* THE GUARD, BECAUSE THIS CALL DELETES A DIRECTORY. The only thing it may
+       ever remove is the held tree INSIDE THE BUILD OUTPUT. If a future config
+       change pointed outDir at the project root, the naive version of this
+       would delete `public/held` — 191 MB of the museum's own material, holding
+       the only copy of the 240 dpi manual. So it refuses any path that is not
+       under a `dist` directory, and any path containing `public`. */
+    const p = dir.split("\\").join("/") + "/";
+    if (!p.includes("/dist/") || p.includes("/public/")) {
+      console.log(`  REFUSED to remove ${p} — not inside a dist output directory`);
+      return;
+    }
+    if (!nodeFs.existsSync(dir)) return;
+    let n = 0, bytes = 0;
+    const walk = (d) => {
+      for (const e of nodeFs.readdirSync(d, { withFileTypes: true })) {
+        const q = nodePath.join(d, e.name);
+        if (e.isDirectory()) walk(q); else { bytes += nodeFs.statSync(q).size; n++; }
+      }
+    };
+    walk(dir);
+    nodeFs.rmSync(dir, { recursive: true, force: true });
+    console.log(`  held out of the launch bundle: ${n} files, `
+      + `${(bytes / 1048576).toFixed(1)} MB. The worker refuses them in this stage, `
+      + `and reveal:day --place renames a delivered file out of held/ before the `
+      + `build, so nothing a Record delivers is affected.`);
+  },
+};
+
 const heldChunkGuard = {
   name: "held-chunk-guard",
   generateBundle(_opts, bundle) {
@@ -434,7 +512,7 @@ export default defineConfig({
         .filter(Boolean)
         .sort()[0] ?? null),
   },
-  plugins: [hrVaultAudio, revealPublic, wbPlacement, opsNotesStrip, heldChunkGuard, opsBraceGuard, react(), cloudflare()],
+  plugins: [hrVaultAudio, revealPublic, wbPlacement, opsNotesStrip, heldOutOfLaunch, heldChunkGuard, opsBraceGuard, react(), cloudflare()],
   build: {
     rollupOptions: {
       output: {
