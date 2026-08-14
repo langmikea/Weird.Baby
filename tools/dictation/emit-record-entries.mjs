@@ -37,13 +37,25 @@ import url from "node:url";
 /* guard 8 asks git two questions: when the Record last moved, and whether a
    record number has ever been in it. Both are facts only the history holds. */
 import { execFileSync } from "node:child_process";
+/* [2026-08-13] the emitter reads the CURRENT file's comments so it can carry
+   them through; acorn is already this repo's parser everywhere else. */
+import * as acorn from "acorn";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..", "..");
-const DRAFT = path.join(REPO, "docs", "dictation-20260807", "record-draft.json");
 
 const argv = process.argv.slice(2);
 const only = (() => { const i = argv.indexOf("--no"); return i >= 0 ? Number(argv[i + 1]) : null; })();
+/* [2026-08-13] `--draft <path>` — a working copy that is not the default one.
+   It exists for the two things that must run against a draft that is not
+   Mike's: the round-trip proof, which derives a draft FROM the tree and
+   expects the file back byte for byte, and the Saturday rehearsal. The
+   default is unchanged and is still his file. */
+const DRAFT = (() => {
+  const i = argv.indexOf("--draft");
+  return i >= 0 ? path.resolve(argv[i + 1])
+    : path.join(REPO, "docs", "dictation-20260807", "record-draft.json");
+})();
 
 if (!fs.existsSync(DRAFT)) {
   console.error(`No working copy at ${path.relative(REPO, DRAFT)}.`);
@@ -161,8 +173,11 @@ if (argv.includes("--verify")) {
 }
 
 /* ── EMIT ────────────────────────────────────────────────────────────────── */
-const out = [];
-for (const e of entries) {
+/* [2026-08-13] ONE ENTRY AT A TIME, so that `--write` can choose per entry
+   between generating it and carrying the original source through untouched.
+   What it generates is unchanged. */
+function generate(e) {
+  const out = [];
   out.push(`            { no: ${e.no},`);
   /* the date is emitted as `recordDay(n)` and never as a literal — D1's
      one-field rule: if the launch slips, ONE line moves and everything follows */
@@ -183,8 +198,11 @@ for (const e of entries) {
   /* the tombstone closes the entry on the page, so it closes the object here */
   if (e.tomb) out.push(`              tomb: ${wrap(e.tomb, 20)},`);
   out.push(`            },`);
+  return out.join("\n");
 }
-const BODY = out.join("\n");
+
+/* the dry run still prints every entry generated, byte for byte as before */
+const BODY = entries.map(generate).join("\n");
 
 /* ═══ [M1 2026-08-11] --write: THE STEP MIKE WAS DOING BY HAND ══════════════
    Until today this file printed and stopped, and step four of eight was Mike
@@ -250,6 +268,164 @@ if (!before.endsWith(CLOSE)) die(`${REL} does not end in \`];\` — this tool do
 
 let preamble = before.slice(0, before.indexOf(OPEN) + OPEN.length);
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   [2026-08-13] THE ENTRIES CARRY THEIR OWN REASONING THROUGH.
+
+   MIKE WRITES FIVE RECORDS ON SATURDAY, and until today landing them was a
+   hand splice: this file's entries body is 16,488 characters of which 10,124
+   — SIXTY-ONE PER CENT — are comment blocks carrying standing reasoning, and
+   a draft carries none. Guard 6 compared comment characters and correctly
+   refused every write. **The guard was right; the emitter was the thing to
+   fix.**
+
+   ═══ WHY THIS IS NOT A COMMENT-REATTACHER ═════════════════════════════════
+   The obvious design binds each comment to the thing it explains and re-emits
+   it there. Measuring the file before designing showed why that is the wrong
+   one, for a reason only a diff reveals:
+
+   **THE EMITTER CANNOT REPRODUCE A HUMAN'S LINE BREAKS.** `wrap()` folds a
+   long string into a `+` chain at 74 columns; the breaks in this file were
+   made by a person moving text out of `robots.js` by hand. Measured on the
+   real file, every string round-trips to the same VALUE and almost none to
+   the same SOURCE — the file's `"…No deviations; "` + `"f(Ump) = 100%"`
+   against the emitter's `"…No deviations; f(Ump)"` + `" = 100%"`. A
+   reattacher would carry every comment perfectly and still rewrite every line
+   around them, so the diff of a NO-OP landing would be the whole file and
+   nobody could review it.
+
+   **SO AN ENTRY THAT HAS NOT CHANGED IS NOT REGENERATED AT ALL.** Its
+   original source is spliced through byte for byte — comments, line breaks,
+   spacing and all — and only an entry whose text actually differs is
+   generated afresh. Saturday is five NEW records appended to five untouched
+   ones, so this carries 100% of the existing reasoning by construction and
+   generates only what Mike wrote that morning.
+
+   ═══ WHAT A COMMENT IS BOUND TO ═══════════════════════════════════════════
+   To THE ENTRY IT SITS IN OR IMMEDIATELY PRECEDES, and it travels with that
+   entry's source. Four shapes exist in the file and one rule covers them all:
+
+     · BEFORE AN ENTRY — between the array's `[` and the first entry, or
+       between two entries. The 6,898-character Record 001 block is this.
+       Bound to the entry that FOLLOWS it, because that is what it is about;
+       the entry's source span is extended backwards to take it in.
+     · INSIDE AN ENTRY, before a property — the two blocks in Record 001
+       before `line` and before `sections`. Inside the span already.
+     · NESTED INSIDE A SECTION'S BODY ARRAY — the block in Record 003 after
+       the last paragraph of its second section. Inside the span already.
+     · AFTER THE LAST ENTRY, before the closing `]`. Bound to no entry;
+       carried verbatim as a tail.
+
+   ═══ WHAT HAPPENS TO A COMMENT WHOSE ENTRY IS DELETED ═════════════════════
+   **NOTHING SILENT.** A draft that drops an entry is refused by guard 3
+   before this runs. If an entry survives but its text CHANGED it must be
+   regenerated, and a generated entry has no source to splice a comment into
+   — so a changed entry that carries comments is REFUSED BY NAME rather than
+   written without them, naming the record, the character count and the first
+   line of each block. Landing a change to a commented entry stays a
+   deliberate hand edit. Landing NEW records beside commented ones is now
+   automatic, which is what Saturday needs.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* every entry's source span, extended back over the comments that precede it */
+function spansOf(src) {
+  const bodyStart = src.indexOf(OPEN) + OPEN.length;
+  const bodyEnd = src.lastIndexOf(CLOSE);
+
+  const comments = [];
+  let ast;
+  try {
+    ast = acorn.parse(src, {
+      ecmaVersion: "latest", sourceType: "module",
+      onComment: (block, text, start, end) => comments.push({ start, end }),
+    });
+  } catch (e) { die(`the CURRENT ${REL} does not parse (${e.message}). Fix it by hand first.`); }
+
+  let arr = null;
+  (function visit(n) {
+    if (!n || typeof n !== "object" || arr) return;
+    if (Array.isArray(n)) { n.forEach(visit); return; }
+    if (n.type === "VariableDeclarator" && n.id && n.id.name === "RECORD_ENTRIES") { arr = n.init; return; }
+    for (const k of Object.keys(n)) { if (k !== "type" && k !== "start" && k !== "end") visit(n[k]); }
+  })(ast);
+  if (!arr) die(`${REL} has no RECORD_ENTRIES array this reader can find.`);
+
+  const spans = [];
+  let cursor = bodyStart;
+  for (const el of arr.elements) {
+    if (!el || el.type !== "ObjectExpression") continue;
+    const noProp = el.properties.find(p => (p.key.name || p.key.value) === "no");
+    const no = noProp && noProp.value.type === "Literal" ? noProp.value.value : null;
+    /* everything between the previous entry and this one — whitespace and any
+       comment blocks — belongs to THIS entry and is taken into its span */
+    const start = cursor;
+    let end = el.end;
+    if (src[end] === ",") end += 1;
+    if (src[end] === "\n") end += 1;
+    spans.push({ no, start, end, text: src.slice(start, end) });
+    cursor = end;
+  }
+  const tail = src.slice(cursor, bodyEnd);
+  const inBody = comments.filter(c => c.start >= bodyStart && c.end <= bodyEnd);
+  return { spans, tail, comments: inBody.map(c => src.slice(c.start, c.end)) };
+}
+
+const original = spansOf(before);
+const byNo = new Map(original.spans.filter(x => x.no != null).map(x => [x.no, x]));
+
+/* IS THIS DRAFT ENTRY THE SAME TEXT AS THE ONE IN THE TREE? The comparison
+   uses THE MUSEUM'S OWN READER rather than a second parse written here:
+   `draftEntries` is what seeds the editor Mike writes on, so "unchanged"
+   means the same to this tool as it does to that surface. */
+const READER = await import(url.pathToFileURL(path.join(REPO, "reveal", "record-entries.mjs")).href);
+const { parseRecord, draftEntries } = READER;
+
+const treeStrings = (() => {
+  const m = new Map();
+  try {
+    for (const e of draftEntries(before).entries)
+      m.set(e.no, strings(e).map(pair => pair[0] + "\u0001" + pair[1]).join("\u0002"));
+  } catch { /* an unreadable tree makes every entry CHANGED, which regenerates
+              and therefore refuses on comments — the safe direction */ }
+  return m;
+})();
+
+const keyOfEntry = (e) => strings(e).map(pair => pair[0] + "\u0001" + pair[1]).join("\u0002");
+const sameAsTree = (e) => treeStrings.get(e.no) === keyOfEntry(e);
+
+/* ── the body, entry by entry ─────────────────────────────────────────── */
+const carried = [], regenerated = [], addedNew = [], blocked = [];
+const pieces = [];
+for (const e of entries) {
+  const span = byNo.get(e.no);
+  if (span && sameAsTree(e)) { pieces.push(span.text); carried.push(e.no); continue; }
+  if (span) {
+    const blocks = span.text.match(/\/\*[\s\S]*?\*\//g) || [];
+    if (blocks.length) { blocked.push({ no: e.no, blocks }); continue; }
+    regenerated.push(e.no);
+  } else addedNew.push(e.no);
+  pieces.push(generate(e) + "\n");
+}
+
+if (blocked.length) {
+  console.error("record:land --write REFUSED — an entry whose text CHANGED carries");
+  console.error("comment blocks, and a generated entry has nowhere to put them.");
+  console.error("");
+  for (const b of blocked) {
+    const chars = b.blocks.reduce((a, x) => a + x.length, 0);
+    console.error(`  Record ${String(b.no).padStart(3, "0")} — ${b.blocks.length} block(s), ${chars} characters:`);
+    for (const x of b.blocks)
+      console.error("      " + (x.split("\n").map(l => l.trim()).find(Boolean) || "").slice(0, 74));
+  }
+  console.error("");
+  console.error("Edit that entry by hand, or move its reasoning above the entry so a later");
+  console.error("landing carries it. NEW records beside commented ones land fine; it is only");
+  console.error("a CHANGE to a commented entry that stops here.");
+  console.error(`Nothing was written. ${REL} is unchanged.`);
+  process.exit(1);
+}
+
+const BODY_OUT = pieces.join("").replace(/\n$/, "") + original.tail;
+
 /* ═══ GUARD 7 — [CH4 2026-08-12] THE `placed` IMPORT COMES BACK BY ITSELF ═══
    `--write` replaces the ARRAY and keeps the preamble, which is what makes it
    safe to run against a commented file. That same split is why it can emit a
@@ -261,7 +437,7 @@ let preamble = before.slice(0, before.indexOf(OPEN) + OPEN.length);
    of the call node, the gates stay green — and the museum throws
    `placed is not defined` on first render of the wing. So the check is on the
    text this tool is about to write, not on what a reader might notice. */
-if (/\bplaced\(/.test(BODY) && !/^import \{ placed \}/m.test(preamble)) {
+if (/\bplaced\(/.test(BODY_OUT) && !/^import \{ placed \}/m.test(preamble)) {
   const anchor = 'import { recordDay } from "./record-epoch.js";';
   if (!preamble.includes(anchor))
     die(`${REL} needs the \`placed\` import restored (an entry delivers a picture) and this `
@@ -270,10 +446,10 @@ if (/\bplaced\(/.test(BODY) && !/^import \{ placed \}/m.test(preamble)) {
   console.log("record:land — an entry delivers a picture, so the `placed` import was restored.");
 }
 
-const after = preamble + BODY + CLOSE;
+const after = preamble + BODY_OUT + CLOSE;
 
-/* guard 3 — nothing may vanish */
-const { parseRecord, draftEntries } = await import(url.pathToFileURL(path.join(REPO, "reveal", "record-entries.mjs")).href);
+/* guard 3 — nothing may vanish. `parseRecord` came from the reader imported
+   above, beside the comparison that needs it. */
 let had;
 try { had = parseRecord(before).entries.map(e => e.no).filter(n => n != null); }
 catch (e) { die(`the CURRENT ${REL} does not parse (${e.message}). Fix it by hand first.`); }
@@ -519,7 +695,7 @@ function differences(d, t) {
 const commentChars = (s) => (s.match(/\/\*[\s\S]*?\*\//g) || []).reduce((a, b) => a + b.length, 0);
 {
   const oldBody = before.slice(before.indexOf(OPEN) + OPEN.length, before.lastIndexOf(CLOSE));
-  const had = commentChars(oldBody), gets = commentChars(BODY);
+  const had = commentChars(oldBody), gets = commentChars(BODY_OUT);
   if (gets < had) {
     const blocks = (oldBody.match(/\/\*[\s\S]*?\*\//g) || []).map(b =>
       (b.split("\n").map(l => l.trim()).find(Boolean) || "").slice(0, 78));
@@ -560,6 +736,10 @@ try {
 
 const added = wants.filter(n => !had.includes(n));
 console.log(`wrote ${REL}`);
+console.log(`  carried through untouched: ${carried.length ? carried.map(n => String(n).padStart(3, "0")).join(" ") : "(none)"}`);
+if (regenerated.length) console.log(`  regenerated: ${regenerated.map(n => String(n).padStart(3, "0")).join(" ")}`);
+if (addedNew.length) console.log(`  new: ${addedNew.map(n => String(n).padStart(3, "0")).join(" ")}`);
+console.log(`  comment characters: ${commentChars(before.slice(before.indexOf(OPEN) + OPEN.length, before.lastIndexOf(CLOSE)))} before, ${commentChars(BODY_OUT)} after`);
 console.log(`  ${entries.length} record(s): ${wants.map(n => String(n).padStart(3, "0")).join(" ")}`);
 if (added.length) console.log(`  new: ${added.map(n => String(n).padStart(3, "0")).join(" ")}`);
 console.log(`  ${before.length} -> ${after.length} bytes`);

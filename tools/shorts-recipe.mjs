@@ -118,6 +118,34 @@ export const FIT = [
   { key: "contain", label: "fit inside (letterbox)" },
 ];
 
+/* ═══ [2026-08-13] THE PAD COLOUR COMES FROM THE INGREDIENT ═════════════════
+   MIKE: *"The letterbox is black. The recipe says white dissolving to a white
+   logo card."*
+
+   Fixing the crop in the last packet introduced padding, and the padding took a
+   hardcoded black — so a flashbang that dissolves out of full white revealed
+   the mark sitting on a black card, with two black bars. **The colour was a
+   default, and a default is the thing that was wrong.**
+
+   `pad` is now a property of the BLOCK, and `"auto"` means *ask the
+   ingredient*:
+
+     · If the source's outer ring is mostly OPAQUE, auto is that ring's own
+       average colour — a photograph letterboxes into its own edge and the bars
+       stop announcing themselves.
+     · If the outer ring is mostly TRANSPARENT — which is what a logo on a
+       clear background is — there is nothing to ask, so auto takes THE COLOUR
+       THE BLOCK IS ARRIVING OUT OF: white for a `flash` or `flashbang`, black
+       otherwise. A white dissolve then resolves onto a white card and the
+       letterbox is invisible because there is nothing to see.
+
+   It also sets what a TRANSPARENT PIXEL becomes, not only the bars, which is
+   the half that makes it a white logo *card* rather than a white-framed black
+   one. */
+export const PAD_AUTO = "auto";
+export const PAD_RING = 0.02;      /* the outer 2% sampled for `auto` */
+export const PAD_TRANSPARENT_AT = 0.5;  /* above this, the ring counts as clear */
+
 /* THE DEFAULTS ARE A GENTLE PUSH-IN, and that is a judgement worth stating:
    Mike's note was "the ingredient settings all need tweaked", so a new block
    should already be a move he can watch rather than a still he has to animate.
@@ -142,6 +170,60 @@ export const DEFAULT_BLOCK = {
 };
 
 export const DEFAULT_FPS = 30;
+
+/* ═══ [2026-08-13] THE PACE RAMP ════════════════════════════════════════════
+   MIKE: *"the pace should start out slow and increase faster, faster, faster,
+   faster until the flashbang, and then it slows down because the Weird.Baby
+   logo comes in."*
+
+   That is the shape of a teaser and the bench had one fixed cut rate. `pace`
+   sets every block's duration from its POSITION rather than from a number
+   typed per block, so a roll can be lengthened or shortened by changing two
+   figures instead of twelve.
+
+     from     the first cut's length, in seconds
+     to       the last cut before the flashbang
+     curve    the exponent; >1 is "slow at first, then faster and faster"
+     release  every block AFTER the flashbang
+
+   THE CURVE IS A POWER RAMP ON POSITION and 2.0 is the default:
+
+       d(i) = from + (to - from) * (i / (n - 1)) ^ curve
+
+   At curve 1 the shortening is linear — each cut a fixed amount quicker, which
+   reads as steady rather than accelerating. At curve 2 the early cuts hold near
+   `from` and the collapse happens late, which is the "faster, faster, FASTER"
+   he described. Above about 3 the first two thirds stop moving at all and the
+   ramp becomes a cliff.
+
+   IT NEVER TOUCHES A BLOCK THAT CARRIES A FLASHBANG. That block's length is
+   pop + hold + dissolve and is Mike's approved number; the ramp runs up TO it
+   and `release` picks up after it. A recipe with no `pace` is unchanged — every
+   block keeps the `seconds` written on it. */
+export const DEFAULT_PACE = {
+  from: 1.40,
+  to: 0.28,
+  curve: 2.0,
+  release: 1.20,
+};
+
+/** every block's duration under a pace ramp. Returns a NEW array of seconds;
+ *  blocks carrying a flashbang, and every block after one, are left alone
+ *  except that post-flashbang blocks take `release`. */
+export function paceDurations(blocks, pace) {
+  if (!pace) return blocks.map(b => b.seconds || 0);
+  const p = { ...DEFAULT_PACE, ...pace };
+  const bangAt = blocks.findIndex(b => (b.in || {}).type === "flashbang");
+  const rampEnd = bangAt < 0 ? blocks.length : bangAt;   /* exclusive */
+  const n = rampEnd;
+  return blocks.map((b, i) => {
+    if (bangAt >= 0 && i === bangAt) return b.seconds || 0;   /* his number */
+    if (bangAt >= 0 && i > bangAt) return p.release;
+    if (n <= 1) return p.from;
+    const u = i / (n - 1);
+    return p.from + (p.to - p.from) * Math.pow(u, p.curve);
+  });
+}
 
 export function emptyRecipe(name = "untitled") {
   return {

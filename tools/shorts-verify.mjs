@@ -18,6 +18,10 @@ import url from "node:url";
 import { execFileSync } from "node:child_process";
 import sharp from "sharp";
 import { flashbangAlpha } from "./shorts-recipe.mjs";
+/* THE SAME PAD RULE THE COMPILER USES. The first version of this file
+   flattened onto black while the compiler had started padding white, and
+   reported +159.76 luma on a file that was correct. */
+import { padColourOf } from "./shorts-pad.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
@@ -91,22 +95,25 @@ const rec709 = (buf) => {
     s += 0.2126 * buf[i] + 0.7152 * buf[i + 1] + 0.0722 * buf[i + 2];
   return s / (buf.length / 3);
 };
-const lumaOfFile = async (file, w, h, fit) => {
+const lumaOfFile = async (file, w, h, fit, pad) => {
   const { data } = await sharp(file)
+    .flatten({ background: pad })
     .resize(w, h, { fit: fit === "contain" ? "contain" : "cover", position: "centre",
-      background: { r: 0, g: 0, b: 0 }, kernel: "lanczos3" })
-    .flatten({ background: "#000000" }).toColourspace("srgb")
+      background: pad, kernel: "lanczos3" })
+    .toColourspace("srgb")
     .raw().toBuffer({ resolveWithObject: true });
   return rec709(data);
 };
 
 const TABLE = JSON.parse(fs.readFileSync(path.join(REPO, "provenance/asset-table.json"), "utf8")).entries;
-async function plateLuma(asset, fit) {
+async function plateLuma(asset, fit, block) {
   const row = TABLE.find(r => r.uid === asset.uid);
-  return lumaOfFile(path.join(REPO, row.path), v.width, v.height, fit);
+  const file = path.join(REPO, row.path);
+  const pad = await padColourOf(file, block);
+  return lumaOfFile(file, v.width, v.height, fit, pad);
 }
-const leadLuma = await plateLuma(blocks[0].asset, blocks[0].fit);
-const revealLuma = await plateLuma(blocks[1].asset, blocks[1].fit);
+const leadLuma = await plateLuma(blocks[0].asset, blocks[0].fit, blocks[0]);
+const revealLuma = await plateLuma(blocks[1].asset, blocks[1].fit, blocks[1]);
 
 /* ── decode the frames we care about, out of the MP4 ──────────────────────── */
 const tmp = path.join(REPO, "docs/shorts/out/.verify-frames");

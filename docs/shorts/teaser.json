@@ -1,0 +1,1371 @@
+{
+ "_": "TEASERS — built by _make-teaser.mjs to exercise the pace ramp and push/pull.",
+ "version": 1,
+ "saved": "2026-08-13",
+ "recipes": [
+  {
+   "version": 1,
+   "name": "teaser-15s",
+   "fps": 30,
+   "shape": "9:16",
+   "audio": null,
+   "pace": {
+    "from": 1.4,
+    "to": 0.28,
+    "curve": 2,
+    "release": 1.2
+   },
+   "blocks": [
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-127ca4b489",
+      "label": "MGK twin monitor, close up",
+      "path": "public/held/robots/reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png",
+      "repo": "museum",
+      "w": 3000,
+      "h": 2400,
+      "sha256": "d5d718285389cf8c44e2dd9dc2b3670902b1709e287f28b7e0fd138dd7d88d21"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-a0c82628ef",
+      "label": "Page 1",
+      "path": "public/held/robots/manual/page-01.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "af4abdef08329549696153a0815482f75643077044744d6402e61f43620938ba"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-a6c7d3b062",
+      "label": "The top viewfinder",
+      "path": "public/held/robots/reference/photos/top_monitor.png",
+      "repo": "museum",
+      "w": 2048,
+      "h": 1536,
+      "sha256": "350d035a76680eae56ca8e103f65709a8b9113168550c45435dfab65ce4f164b"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-4c128fb16e",
+      "label": "Page 12",
+      "path": "public/held/robots/manual/page-12.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "8ddd52091e42f3991be47e835c9f8c01a69d0a14c849122f12a5d08a8e0e7a2f"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-25b039c702",
+      "label": "Page 38",
+      "path": "public/held/robots/manual/page-38.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "57972eb299cf214ed2293422771f3a2c73f549fa95439475b6bbec6a5f8cdebb"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-ae718e7ac8",
+      "label": "The MGK-VIIIp album cover",
+      "path": "public/held/robots/art/mgk-viiip-cover.png",
+      "repo": "museum",
+      "w": 1200,
+      "h": 1200,
+      "sha256": "61e1cb867904e175a2afc7ae4c4fba906548e0316a285ff9ac072d6ec6b63024"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-7457f5786f",
+      "label": "Page 44",
+      "path": "public/held/robots/manual/page-44.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "e5bad9fe47aa4ccd13ba92bdc009a0a2ac4ea59b210406df0145835a49dff797"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-be5c1ebdab",
+      "label": "Page 56",
+      "path": "public/held/robots/manual/page-56.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "64b97a0e526a8966e74b5c7883a372cde9be50fd6c90f3b4dbdd40ff9f6feb6a"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-127ca4b489",
+      "label": "MGK twin monitor, close up",
+      "path": "public/held/robots/reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png",
+      "repo": "museum",
+      "w": 3000,
+      "h": 2400,
+      "sha256": "d5d718285389cf8c44e2dd9dc2b3670902b1709e287f28b7e0fd138dd7d88d21"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-a0c82628ef",
+      "label": "Page 1",
+      "path": "public/held/robots/manual/page-01.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "af4abdef08329549696153a0815482f75643077044744d6402e61f43620938ba"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-a6c7d3b062",
+      "label": "The top viewfinder",
+      "path": "public/held/robots/reference/photos/top_monitor.png",
+      "repo": "museum",
+      "w": 2048,
+      "h": 1536,
+      "sha256": "350d035a76680eae56ca8e103f65709a8b9113168550c45435dfab65ce4f164b"
+     }
+    },
+    {
+     "seconds": 3.36,
+     "fit": "contain",
+     "ease": "linear",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1,
+      "rot": 0
+     },
+     "in": {
+      "type": "flashbang",
+      "pop": 0.01,
+      "hold": 0.35,
+      "dissolve": 3,
+      "curve": 6,
+      "waver": 0.5
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-e951825925",
+      "label": "The Weird.Baby mark",
+      "path": "public/WeirdBaby_PhotoID.png",
+      "repo": "museum",
+      "w": 2048,
+      "h": 2048,
+      "sha256": "3c0e418dab865c211992a88ecfdf41ddf082ab7f2f013a332d83bb1be2332685"
+     }
+    }
+   ]
+  },
+  {
+   "version": 1,
+   "name": "teaser-30s",
+   "fps": 30,
+   "shape": "9:16",
+   "audio": null,
+   "pace": {
+    "from": 1.4,
+    "to": 0.28,
+    "curve": 2,
+    "release": 1.2
+   },
+   "blocks": [
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-127ca4b489",
+      "label": "MGK twin monitor, close up",
+      "path": "public/held/robots/reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png",
+      "repo": "museum",
+      "w": 3000,
+      "h": 2400,
+      "sha256": "d5d718285389cf8c44e2dd9dc2b3670902b1709e287f28b7e0fd138dd7d88d21"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-a0c82628ef",
+      "label": "Page 1",
+      "path": "public/held/robots/manual/page-01.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "af4abdef08329549696153a0815482f75643077044744d6402e61f43620938ba"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-a6c7d3b062",
+      "label": "The top viewfinder",
+      "path": "public/held/robots/reference/photos/top_monitor.png",
+      "repo": "museum",
+      "w": 2048,
+      "h": 1536,
+      "sha256": "350d035a76680eae56ca8e103f65709a8b9113168550c45435dfab65ce4f164b"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-4c128fb16e",
+      "label": "Page 12",
+      "path": "public/held/robots/manual/page-12.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "8ddd52091e42f3991be47e835c9f8c01a69d0a14c849122f12a5d08a8e0e7a2f"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-25b039c702",
+      "label": "Page 38",
+      "path": "public/held/robots/manual/page-38.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "57972eb299cf214ed2293422771f3a2c73f549fa95439475b6bbec6a5f8cdebb"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-ae718e7ac8",
+      "label": "The MGK-VIIIp album cover",
+      "path": "public/held/robots/art/mgk-viiip-cover.png",
+      "repo": "museum",
+      "w": 1200,
+      "h": 1200,
+      "sha256": "61e1cb867904e175a2afc7ae4c4fba906548e0316a285ff9ac072d6ec6b63024"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-7457f5786f",
+      "label": "Page 44",
+      "path": "public/held/robots/manual/page-44.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "e5bad9fe47aa4ccd13ba92bdc009a0a2ac4ea59b210406df0145835a49dff797"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-be5c1ebdab",
+      "label": "Page 56",
+      "path": "public/held/robots/manual/page-56.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "64b97a0e526a8966e74b5c7883a372cde9be50fd6c90f3b4dbdd40ff9f6feb6a"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-127ca4b489",
+      "label": "MGK twin monitor, close up",
+      "path": "public/held/robots/reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png",
+      "repo": "museum",
+      "w": 3000,
+      "h": 2400,
+      "sha256": "d5d718285389cf8c44e2dd9dc2b3670902b1709e287f28b7e0fd138dd7d88d21"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-a0c82628ef",
+      "label": "Page 1",
+      "path": "public/held/robots/manual/page-01.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "af4abdef08329549696153a0815482f75643077044744d6402e61f43620938ba"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-a6c7d3b062",
+      "label": "The top viewfinder",
+      "path": "public/held/robots/reference/photos/top_monitor.png",
+      "repo": "museum",
+      "w": 2048,
+      "h": 1536,
+      "sha256": "350d035a76680eae56ca8e103f65709a8b9113168550c45435dfab65ce4f164b"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-4c128fb16e",
+      "label": "Page 12",
+      "path": "public/held/robots/manual/page-12.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "8ddd52091e42f3991be47e835c9f8c01a69d0a14c849122f12a5d08a8e0e7a2f"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-25b039c702",
+      "label": "Page 38",
+      "path": "public/held/robots/manual/page-38.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "57972eb299cf214ed2293422771f3a2c73f549fa95439475b6bbec6a5f8cdebb"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-ae718e7ac8",
+      "label": "The MGK-VIIIp album cover",
+      "path": "public/held/robots/art/mgk-viiip-cover.png",
+      "repo": "museum",
+      "w": 1200,
+      "h": 1200,
+      "sha256": "61e1cb867904e175a2afc7ae4c4fba906548e0316a285ff9ac072d6ec6b63024"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-7457f5786f",
+      "label": "Page 44",
+      "path": "public/held/robots/manual/page-44.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "e5bad9fe47aa4ccd13ba92bdc009a0a2ac4ea59b210406df0145835a49dff797"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-be5c1ebdab",
+      "label": "Page 56",
+      "path": "public/held/robots/manual/page-56.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "64b97a0e526a8966e74b5c7883a372cde9be50fd6c90f3b4dbdd40ff9f6feb6a"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-127ca4b489",
+      "label": "MGK twin monitor, close up",
+      "path": "public/held/robots/reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png",
+      "repo": "museum",
+      "w": 3000,
+      "h": 2400,
+      "sha256": "d5d718285389cf8c44e2dd9dc2b3670902b1709e287f28b7e0fd138dd7d88d21"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-a0c82628ef",
+      "label": "Page 1",
+      "path": "public/held/robots/manual/page-01.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "af4abdef08329549696153a0815482f75643077044744d6402e61f43620938ba"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-a6c7d3b062",
+      "label": "The top viewfinder",
+      "path": "public/held/robots/reference/photos/top_monitor.png",
+      "repo": "museum",
+      "w": 2048,
+      "h": 1536,
+      "sha256": "350d035a76680eae56ca8e103f65709a8b9113168550c45435dfab65ce4f164b"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-4c128fb16e",
+      "label": "Page 12",
+      "path": "public/held/robots/manual/page-12.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "8ddd52091e42f3991be47e835c9f8c01a69d0a14c849122f12a5d08a8e0e7a2f"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-25b039c702",
+      "label": "Page 38",
+      "path": "public/held/robots/manual/page-38.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "57972eb299cf214ed2293422771f3a2c73f549fa95439475b6bbec6a5f8cdebb"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-ae718e7ac8",
+      "label": "The MGK-VIIIp album cover",
+      "path": "public/held/robots/art/mgk-viiip-cover.png",
+      "repo": "museum",
+      "w": 1200,
+      "h": 1200,
+      "sha256": "61e1cb867904e175a2afc7ae4c4fba906548e0316a285ff9ac072d6ec6b63024"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-7457f5786f",
+      "label": "Page 44",
+      "path": "public/held/robots/manual/page-44.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "e5bad9fe47aa4ccd13ba92bdc009a0a2ac4ea59b210406df0145835a49dff797"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-be5c1ebdab",
+      "label": "Page 56",
+      "path": "public/held/robots/manual/page-56.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "64b97a0e526a8966e74b5c7883a372cde9be50fd6c90f3b4dbdd40ff9f6feb6a"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "inOutCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.45,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.55,
+      "scale": 1.35,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-127ca4b489",
+      "label": "MGK twin monitor, close up",
+      "path": "public/held/robots/reference/photos/MGK-TWIN_MONITOR_CLOSE_UP.png",
+      "repo": "museum",
+      "w": 3000,
+      "h": 2400,
+      "sha256": "d5d718285389cf8c44e2dd9dc2b3670902b1709e287f28b7e0fd138dd7d88d21"
+     }
+    },
+    {
+     "seconds": 1,
+     "fit": "cover",
+     "ease": "outCubic",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.4,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1.02,
+      "rot": 0
+     },
+     "in": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-a0c82628ef",
+      "label": "Page 1",
+      "path": "public/held/robots/manual/page-01.png",
+      "repo": "museum",
+      "w": 2040,
+      "h": 2640,
+      "sha256": "af4abdef08329549696153a0815482f75643077044744d6402e61f43620938ba"
+     }
+    },
+    {
+     "seconds": 3.36,
+     "fit": "contain",
+     "ease": "linear",
+     "from": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1,
+      "rot": 0
+     },
+     "to": {
+      "x": 0.5,
+      "y": 0.5,
+      "scale": 1,
+      "rot": 0
+     },
+     "in": {
+      "type": "flashbang",
+      "pop": 0.01,
+      "hold": 0.35,
+      "dissolve": 3,
+      "curve": 6,
+      "waver": 0.5
+     },
+     "out": {
+      "type": "cut",
+      "seconds": 0
+     },
+     "asset": {
+      "uid": "A-e951825925",
+      "label": "The Weird.Baby mark",
+      "path": "public/WeirdBaby_PhotoID.png",
+      "repo": "museum",
+      "w": 2048,
+      "h": 2048,
+      "sha256": "3c0e418dab865c211992a88ecfdf41ddf082ab7f2f013a332d83bb1be2332685"
+     }
+    }
+   ]
+  }
+ ]
+}

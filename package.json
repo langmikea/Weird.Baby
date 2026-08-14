@@ -53,7 +53,9 @@
     "docs:numbers:gate": "node tools/numbers-gate.mjs --gate",
     "shorts:render": "node tools/shorts-compile.mjs",
     "shorts:flashbang": "node tools/shorts-compile.mjs --recipe docs/shorts/flashbang.json --frames --verify",
-    "shorts:verify": "node tools/shorts-verify.mjs"
+    "shorts:verify": "node tools/shorts-verify.mjs",
+    "record:proof": "node tools/dictation/record-land-proof.mjs",
+    "record:declare": "node tools/dictation/declare-record-strings.mjs"
   },
   "dependencies": {
     "react": "^19.2.4",

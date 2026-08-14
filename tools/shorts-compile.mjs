@@ -46,7 +46,10 @@ import url from "node:url";
 import crypto from "node:crypto";
 import { spawn, execFileSync } from "node:child_process";
 import sharp from "sharp";
-import { SHAPES, flashbangAlpha } from "./shorts-recipe.mjs";
+import { SHAPES, flashbangAlpha, paceDurations } from "./shorts-recipe.mjs";
+/* the pad rule is its own module so the compiler and the verifier cannot
+   answer the question differently — see tools/shorts-pad.mjs */
+import { padColourOf } from "./shorts-pad.mjs";
 
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
@@ -80,41 +83,37 @@ const TABLE = JSON.parse(fs.readFileSync(
   path.join(REPO, "provenance", "asset-table.json"), "utf8")).entries;
 const ROOT = { museum: REPO, robots: path.resolve(REPO, "..", "weird-baby-robots") };
 
-async function plateFor(asset, block) {
-  if (!asset) return Buffer.alloc(W * H * 3, 0);          /* black */
+/* A SOURCE, DECODED ONCE. Push and pull crops a different rectangle every
+   frame, so the image is decoded to raw at native size once and every frame
+   is an extract-and-resize of that buffer — never a re-decode of the file. */
+async function sourceFor(asset, block) {
+  if (!asset) return { blank: true, pad: "#000000" };
   const row = TABLE.find(r => r.uid === asset.uid);
   if (!row) throw new Error(`asset ${asset.uid} (${asset.path}) is not in the asset table`);
   const file = path.join(ROOT[row.repo] || REPO, row.path);
   if (!fs.existsSync(file)) throw new Error(`asset file missing on disk: ${row.path}`);
-  /* THE SHA IS CHECKED, because the recipe carries it precisely so a compiler
-     can prove it has the bytes the recipe was designed against. */
   const got = crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");
   if (asset.sha256 && got !== asset.sha256)
     console.log(`  ! ${row.path} has changed since the recipe was written`
       + `\n      recipe ${asset.sha256.slice(0, 16)}…  disk ${got.slice(0, 16)}…`);
 
-  const fit = (block && block.fit) === "contain" ? "contain" : "cover";
-  /* `flatten` AND NOT `removeAlpha`, DELIBERATELY. The house mark is a
-     2048×2048 PNG with a real alpha channel. `removeAlpha()` happens to give
-     the same pixels here — measured, 158.36 against flatten's 158.11 — but it
-     DROPS the channel rather than compositing it, so what a transparent pixel
-     becomes is whatever was underneath in the file. `flatten` states the
-     answer: transparent goes to black. The difference is invisible today and
-     would not be on a logo exported with white behind it. */
-  const img = sharp(file).resize(W, H, {
-    fit, position: "centre",
-    background: { r: 0, g: 0, b: 0 },
-    kernel: "lanczos3",
-  }).flatten({ background: "#000000" }).toColourspace("srgb");
-  const { data } = await img.raw().toBuffer({ resolveWithObject: true });
-  return data;
+  const pad = await padColourOf(file, block);
+  /* flattened onto the PAD, so a transparent pixel and a bar are the same
+     colour — which is what makes it a white logo CARD and not a white frame */
+  const { data, info } = await sharp(file)
+    .flatten({ background: pad }).toColourspace("srgb")
+    .raw().toBuffer({ resolveWithObject: true });
+  return { blank: false, raw: data, w: info.width, h: info.height, pad };
 }
 
 /* ── the timeline ─────────────────────────────────────────────────────────── */
 const blocks = recipe.blocks || [];
 if (!blocks.length) { console.error("this recipe has no blocks"); process.exit(1); }
 
-const seconds = blocks.reduce((a, b) => a + (b.seconds || 0), 0);
+/* [2026-08-13] THE PACE RAMP. Durations come from position when the recipe
+   carries a `pace`; without one every block keeps its own `seconds`. */
+const DURATIONS = paceDurations(blocks, recipe.pace);
+const seconds = DURATIONS.reduce((a, n) => a + n, 0);
 const FRAMES = Math.round(seconds * FPS);
 
 /* ── the white-cover alpha at a given frame ───────────────────────────────── */
@@ -131,10 +130,89 @@ function coverColour(block) {
   return (t === "flash" || t === "flashbang") ? 255 : 0;
 }
 
+/* ═══ [2026-08-13] PUSH AND PULL ═══════════════════════════════════════════
+   `from` and `to` have been in the recipe since it was declared and the
+   compiler ignored them: it composed ONE plate per block and held it. So the
+   bench previewed a move that the MP4 did not contain — the single largest
+   gap between this and a teaser, and a gap that was declared rather than
+   missing.
+
+   THE NAMED EASES ARE THE BENCH'S OWN, character for character, because two
+   implementations of "ease in-out" is two different videos. */
+const EASE = {
+  linear: t => t,
+  inCubic: t => t * t * t,
+  outCubic: t => 1 - Math.pow(1 - t, 3),
+  inOutCubic: t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2),
+  inOutQuad: t => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2),
+};
+
+/* the source rectangle for one frame — the same arithmetic the bench draws
+   with, so a recipe framed on the glass compiles to what was framed. */
+function cropAt(block, src, u) {
+  const e = (EASE[block.ease] || EASE.linear)(u);
+  const lerp = (p, q) => p + (q - p) * e;
+  const f = block.from || { x: 0.5, y: 0.5, scale: 1 };
+  const t2 = block.to || f;
+  const cx = lerp(f.x ?? 0.5, t2.x ?? 0.5);
+  const cy = lerp(f.y ?? 0.5, t2.y ?? 0.5);
+  const sc = Math.max(0.01, lerp(f.scale ?? 1, t2.scale ?? 1));
+  const ar = W / H;
+  const iw = src.w, ih = src.h;
+  let baseW, baseH;
+  if (block.fit === "contain") {
+    /* contain: the WHOLE image is in frame; scale shrinks the box it sits in,
+       so the crop is the whole picture and the resize does the work */
+    baseW = iw; baseH = ih;
+  } else if (iw / ih > ar) { baseH = ih; baseW = ih * ar; }
+  else { baseW = iw; baseH = iw / ar; }
+  let sw = baseW / sc, sh = baseH / sc;
+  /* QUANTISED TO WHOLE PIXELS. `extract` takes integers, and rounding at the
+     last moment is what keeps two runs byte-identical (B2.4). */
+  sw = Math.max(2, Math.min(iw, Math.round(sw)));
+  sh = Math.max(2, Math.min(ih, Math.round(sh)));
+  let sx = Math.round(cx * iw - sw / 2);
+  let sy = Math.round(cy * ih - sh / 2);
+  sx = Math.max(0, Math.min(iw - sw, sx));
+  sy = Math.max(0, Math.min(ih - sh, sy));
+  return { left: sx, top: sy, width: sw, height: sh };
+}
+
+/* is this block a still? A still is composed once and reused, which is what
+   keeps a 4-second flashbang at 20 ms a frame instead of 60. */
+const isStill = (b) => {
+  const f = b.from || {}, t2 = b.to || {};
+  return (f.x ?? 0.5) === (t2.x ?? 0.5) && (f.y ?? 0.5) === (t2.y ?? 0.5)
+    && (f.scale ?? 1) === (t2.scale ?? 1) && (f.rot ?? 0) === (t2.rot ?? 0);
+};
+
+/* ONE FRAME'S PLATE at progress u — the crop, resized into the frame, padded
+   with the ingredient's own colour. */
+async function composeFrame(block, src, u) {
+  if (src.blank) return Buffer.alloc(W * H * 3, 0);
+  const rect = cropAt(block, src, u);
+  const pipe = sharp(src.raw, { raw: { width: src.w, height: src.h, channels: 3 } })
+    .extract(rect)
+    .resize(W, H, {
+      fit: block.fit === "contain" ? "contain" : "cover",
+      position: "centre",
+      background: src.pad,
+      kernel: "lanczos3",
+    });
+  const { data } = await pipe.raw().toBuffer({ resolveWithObject: true });
+  return data;
+}
+
 /* ── render ───────────────────────────────────────────────────────────────── */
 async function render(outFile, { sample = [] } = {}) {
-  const plates = [];
-  for (const b of blocks) plates.push(await plateFor(b.asset, b));
+  const sources = [];
+  for (const b of blocks) sources.push(await sourceFor(b.asset, b));
+  /* a still block gets ONE composed plate; a moving block gets none and is
+     composed per frame */
+  const stills = [];
+  for (let i = 0; i < blocks.length; i++) {
+    stills.push(isStill(blocks[i]) ? await composeFrame(blocks[i], sources[i], 0) : null);
+  }
 
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
   const ff = spawn("ffmpeg", [
@@ -167,11 +245,14 @@ async function render(outFile, { sample = [] } = {}) {
     /* which block, and how far into it */
     let acc = 0, bi = blocks.length - 1, tIn = 0;
     for (let i = 0; i < blocks.length; i++) {
-      const n = blocks[i].seconds || 0;
+      const n = DURATIONS[i] || 0;
       if (t < acc + n || i === blocks.length - 1) { bi = i; tIn = t - acc; break; }
       acc += n;
     }
-    const block = blocks[bi], plate = plates[bi];
+    const block = blocks[bi], src = sources[bi];
+    const dur = DURATIONS[bi] || 0;
+    const u = dur > 0 ? Math.min(1, tIn / dur) : 0;
+    const plate = stills[bi] || await composeFrame(block, src, u);
     /* QUANTISED so two runs cannot differ in a last bit (B2.4) */
     const a = Math.round(alphaAt(block, tIn) * 1000) / 1000;
     const c = coverColour(block);
@@ -190,7 +271,7 @@ async function render(outFile, { sample = [] } = {}) {
 /* ── which frames matter (C1) ─────────────────────────────────────────────── */
 function momentsOf() {
   const fb = (blocks.find(b => (b.in || {}).type === "flashbang") || {}).in;
-  const lead = blocks[0].seconds || 0;
+  const lead = DURATIONS[0] || 0;
   const at = (s) => Math.min(FRAMES - 1, Math.round(s * FPS));
   if (!fb) return [0, Math.floor(FRAMES / 2), FRAMES - 1];
   const d0 = lead + fb.pop + fb.hold;
@@ -226,6 +307,8 @@ console.log(`RENDERED  ${path.relative(REPO, outFile)}`);
 console.log(`  recipe        ${recipe.name}   (${blocks.length} block(s))`);
 console.log(`  shape         ${shape.key}  ${W}x${H} @ ${FPS}fps`);
 console.log(`  declared      ${seconds.toFixed(3)} s`);
+if (recipe.pace) console.log(`  pace          ${DURATIONS.map(d => d.toFixed(2)).join("  ")}`);
+console.log(`  moving blocks ${blocks.filter(b => !isStill(b)).length} of ${blocks.length}`);
 console.log(`  frames        ${FRAMES}   -> ${(FRAMES / FPS).toFixed(4)} s of video`);
 console.log(`  size          ${(bytes / 1024).toFixed(0)} KB`);
 console.log(`  sha256        ${sha}`);
