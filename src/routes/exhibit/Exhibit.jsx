@@ -2878,14 +2878,16 @@ export default function Exhibit({ artist, open = null }) {
     const main = mainRef.current, inner = bodyRef.current;
     const rootEl = main ? main.closest(".ex-root") : null;
     if (!main || !inner || !rootEl) return;
-    /* a session-restored area cap must be re-applied on every mount — it
-       lives in a CSS variable, which does not survive a reload on its own. */
-    let storedCap = null, stored = null;
-    try {
-      storedCap = sessionStorage.getItem(artist.cfKey + "-cap");
-      stored = sessionStorage.getItem(artist.cfKey);
-    } catch { /* private mode */ }
-    if (storedCap) rootEl.style.setProperty("--fit-area-max", storedCap + "px");
+    /* [W 2026-08-14] THE STORED AREA CAP IS GONE WITH `--fit-area-max`. It was
+       re-applied here on every mount because a CSS variable does not survive a
+       reload; nothing reads it now, so re-applying it would be restoring a
+       number that governs nothing. The `<cfKey>-cap` session key is written by
+       nobody after this round — see the note at `.vp-area-flat` in Exhibit.css
+       for why the cap ended, and note that an old key left in a visitor's
+       session is inert rather than wrong: no rule looks it up. */
+    let stored = null;
+    try { stored = sessionStorage.getItem(artist.cfKey); }
+    catch { /* private mode */ }
     if (stored) return;         /* this session already chose its sizes */
 
     /* ── [D1/D2] THE TRACKLIST'S OWN WIDTH ────────────────────────────────
@@ -2963,11 +2965,18 @@ export default function Exhibit({ artist, open = null }) {
        no cap at all, so the first song opened a plain 16:9 frame at the full
        column width and pushed the scroller off the bottom of the window —
        exactly the failure M0c measured, arriving by a different door. */
-    const cap = Math.max(160, Math.round(avail - ch - fsH));
-    if (areaNatural > cap) {
-      rootEl.style.setProperty("--fit-area-max", cap + "px");
-      try { sessionStorage.setItem(artist.cfKey + "-cap", cap); } catch { /* private mode */ }
-    }
+    /* ── [W 2026-08-14] THE CAP IS DELETED, AND THE PARAGRAPH ABOVE IS ITS
+       EPITAPH RATHER THAN A LIVE INSTRUCTION ────────────────────────────────
+       D3 is describing the moment the fault Mike found this morning was built:
+       "the first song opened a plain 16:9 frame at the full column width" is
+       the CORRECT behaviour, and D3 capped it to keep everything on one screen.
+       Mike has now ruled the other way twice over — the picture takes the
+       column, and a room taller than the window is a room you scroll. So the
+       cap is gone, both its writes with it, and `avail` and `fsH` are still
+       read above because the CAROUSEL lever genuinely needs them.
+       `areaNatural` is a better number than it ever was: with the width driving,
+       `(columnWidth) * 9/16` is exactly the picture's height rather than a
+       guess at it, so the lever it feeds is more honest than before. */
     if (Math.round(ch) !== Math.round(cfH)) setCfH(Math.round(ch));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -3599,6 +3608,23 @@ export default function Exhibit({ artist, open = null }) {
      WINGS WITHOUT A CAP ARE UNAFFECTED — `.vp-area-flat` with no
      `--fit-area-max` is already plain 16:9, so width already carried height
      there and this block never runs for them. */
+  /* ═══ [W 2026-08-14] V2a FOUND THIS EXACT FAULT AND PATCHED THE LEVER RATHER
+         THAN THE BOX, AND THAT IS THE FINDING WORTH KEEPING ═════════════════
+     Read the note above again with this morning's packet beside it. V2a
+     measured, on 2026-08-03, "drag the split 200px wider and the slot grows to
+     1430.9 while the picture stays 638.6 x 359.2 TO THE PIXEL" — which is the
+     splitter-does-nothing symptom Mike reported eleven days later, in the same
+     words, having found it himself.
+     WHAT V2a DID WAS MAKE THE CAP FOLLOW THE HAND: recompute `--fit-area-max`
+     on every pointer move so the frame answered THIS lever. It worked, and it
+     left the picture height-driven everywhere the hand had not been — on
+     arrival, on a window resize, on an album change — which is where the
+     right-hand block and the un-scrollable page lived until today.
+     THE CAP IS GONE, SO THE PATCH GOES WITH IT. Width drives, height follows,
+     and this handler does the one thing its name says: it sets the split. The
+     "aspect preserved" half of Mike's V2a ruling is not lost — it is now true of
+     every path into the box rather than of the one that went through this
+     function. */
   function makeSplitDrag(e, containerRef) {
     e.preventDefault();
     e.currentTarget.setPointerCapture(e.pointerId);
@@ -3607,23 +3633,12 @@ export default function Exhibit({ artist, open = null }) {
        that is exactly the wrong thing to do to a column somebody has just set
        by hand — see the note at `measureSplit`. */
     splitDraggedRef.current = true;
-    const rootEl = mainRef.current ? mainRef.current.closest(".ex-root") : null;
-    const hasCap = !!rootEl && !Number.isNaN(parseFloat(
-      getComputedStyle(rootEl).getPropertyValue("--fit-area-max")));
     function onMove(ev) {
       const rect = containerRef.current.getBoundingClientRect();
       let pct = Math.round(((ev.clientX - rect.left) / rect.width) * 100);
       if (Math.abs(pct - 50) < 3) pct = 50;
       pct = Math.max(SPLIT_MIN, Math.min(SPLIT_MAX, pct));
       setSplit(pct);
-      if (!hasCap) return;
-      /* the viewer column is what the grid leaves after the left column and
-         the 10px handle — the same arithmetic F3 uses to size the frame. */
-      const areaW = (rect.width - 10) * (100 - pct) / 100;
-      const cap = Math.ceil(areaW * 9 / 16) + 1;
-      rootEl.style.setProperty("--fit-area-max", cap + "px");
-      try { sessionStorage.setItem(artist.cfKey + "-cap", cap); }
-      catch { /* private mode */ }
     }
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerup", () => window.removeEventListener("pointermove", onMove), { once: true });
@@ -3654,12 +3669,13 @@ export default function Exhibit({ artist, open = null }) {
        set a cap at all, which is the thing this block actually depends on. A
        room the fit did not have to cap has no cap to trade against, and the
        block is inert for it exactly as before. */
-    const rootEl = mainRef.current ? mainRef.current.closest(".ex-root") : null;
-    const startCap = rootEl
-      ? parseFloat(getComputedStyle(rootEl).getPropertyValue("--fit-area-max"))
-      : NaN;
-    const tradeCap = !!rootEl && !Number.isNaN(startCap);
-
+    /* [W 2026-08-14] AND THE TRADE IS GONE WITH THE CAP. P1's complaint —
+       "the carousel could grow and shrink while the viewer beneath it stayed
+       frozen" — is answered at the box now rather than by this handler paying
+       for it: the viewer's height is its own width's, the carousel's height is
+       the carousel's, and the two no longer have to agree about a third number.
+       What the visitor sees when they drag this handle is the rack growing and
+       the page getting longer, which is the honest answer and needs no trade. */
     function onMove(ev) {
       let h = startH + (ev.clientY - startY);
       /* [D3] snap to the DEFAULT, which moved. The literal 300 here was the old
@@ -3668,12 +3684,6 @@ export default function Exhibit({ artist, open = null }) {
       if (Math.abs(h - CF_DEF) < 12) h = CF_DEF;
       const next = Math.max(CF_MIN, Math.min(CF_MAX, Math.round(h)));
       setCfH(next);
-      if (tradeCap) {
-        const cap = Math.max(160, Math.round(startCap + (startH - next)));
-        rootEl.style.setProperty("--fit-area-max", cap + "px");
-        try { sessionStorage.setItem(artist.cfKey + "-cap", cap); }
-        catch { /* private mode */ }
-      }
     }
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerup", () => window.removeEventListener("pointermove", onMove), { once: true });

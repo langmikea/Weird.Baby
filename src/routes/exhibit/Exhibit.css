@@ -3561,25 +3561,56 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    35px over) and shows NO seam on a face, because a stowed face is `height:auto`
    and grows — which is the state Mike was comparing against.
 
-   THE FIX IS THE FLEX, AND IT IS THE SAME ARITHMETIC THE CAP WAS APPROXIMATING.
-   The cap is `avail - carousel - scroller-reserve`; `flex:1 1 auto` in this
-   column IS that subtraction, done by the layout engine, on every frame,
-   without a stored copy. The picture does not lose its proportions: `.vp-inner`
-   below is 16:9 off its own height, so it simply fills the taller slot.
-   The scroller is `flex:0 0 auto` and keeps its reserved room.
-   `--fit-area-max` is still written by the fit — it is what the carousel lever
-   is decided against — and is no longer read by anything that draws. */
-.ex-root[data-flat="1"] .vp-area-flat:not(.vp-area-stowed){flex:1 1 auto;
-  min-height:0}
-/* AND THE ONE-COLUMN FRAME GETS ITS RATIO BOX BACK, for the reason the
-   `:not([data-flat])` rule at the 720px break already gives: stacked, the row
-   this box lives in is sized by its content, so `flex:1 1 auto` divides a
-   nothing and the picture collapses to zero. Above the break the row is the
-   flex leftover and there is real space to take. */
-@media (max-width:720px){
-  .ex-root[data-flat="1"] .vp-area-flat:not(.vp-area-stowed){
-    aspect-ratio:16/9;flex:0 0 auto}
-}
+   ═══ [W 2026-08-14] AND THE FIX WAS HALF A FIX. THE OTHER AXIS ═════════════
+   MIKE, THE MORNING AFTER: **"the right-hand block, `/wb` not scrolling, and
+   the splitter doing nothing are one fault in the shared exhibit component —
+   the panel takes its width once at mount while the column recomputes. Same
+   shape as yesterday's height fix, other axis."**
+
+   HE IS RIGHT AND IT IS ONE FAULT. A1 made the SLOT take its height from the
+   column; the PICTURE inside it still took its width from its own height
+   (`height:100%; width:auto; aspect-ratio:16/9`), so the column's width reached
+   the picture only as a clip and never as a size. Every one of his three
+   symptoms falls out of that single line, and all three were measured on /wb
+   with a song selected at 1706px before anything was changed:
+
+     · THE RIGHT-HAND BLOCK — column 1198 wide, picture 751 wide.
+       **446px of bare cream down the right.**
+     · THE SPLITTER DOING NOTHING — dragging it moved the column
+       1198 -> 1081 -> 882 and the picture stayed **751x423 at every step**,
+       changing only at 682 when `max-width:100%` finally clipped it. The
+       lever moved the room and did not move the thing in it.
+     · `/wb` NOT SCROLLING — `scrollHeight` 810 against a viewport of 810, at
+       every one of those widths. A picture whose height is capped by the
+       column it sits in can never make the room taller than the window, so
+       there is never anything to scroll.
+
+   SO THE WIDTH IS THE DRIVER NOW AND THE HEIGHT FOLLOWS IT. The picture takes
+   the column's full width and resolves its own height at 16:9; the slot takes
+   the picture's height; the row takes the slot's. The splitter narrows the
+   column and the picture narrows AND shortens with it, which is what a lever
+   answering means. The page scrolls when the room is taller than the window,
+   which is what a room being bigger than a screen means.
+
+   THIS REVERSES A1's `flex:1 1 auto`, AND THE REVERSAL IS THE POINT RATHER
+   THAN A RETREAT. A1 had the slot fill the column's height because nothing else
+   was going to; with the width driving, the slot's height is the picture's and
+   filling would stretch a box round a picture that is not that shape. The seam
+   A1 measured cannot come back — there is no second number left to disagree
+   with the first.
+
+   `--fit-area-max` IS DELETED, NOT LEFT WRITTEN-AND-UNREAD. A1 left it being
+   written "in case", which is how a cap that governs nothing survives to be
+   restored by a session that finds it and assumes it matters. All four write
+   sites in Exhibit.jsx and both `sessionStorage` keys go with it.
+
+   D1's "THE SLACK ON THE RIGHT IS DELIBERATE" IS SUPERSEDED BY THE INSTRUCTION
+   ABOVE. That note (2026-08-06) justified air down the outer edge as what makes
+   a column a column; Mike has now named that air as the defect, by its symptom
+   and twice. The left-justification it also argued for is moot — a picture the
+   full width of its column has no edge to justify against. */
+.ex-root[data-flat="1"] .vp-area-flat:not(.vp-area-stowed){flex:0 0 auto;
+  height:auto}
 /* `container-type:size` on .vp-inner is right for the staged wings (it feeds
    the cqh type scale) and FATAL in static flow: size containment ignores the
    children, so an auto-height inner would collapse to zero. The flat wing
@@ -3622,9 +3653,26 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    THE SLACK ON THE RIGHT IS DELIBERATE, and it is the same ruling R4 settled on
    the Record's index a round ago — air down the outer edge is what makes a
    column a column. */
+/* ═══ [W 2026-08-14] THE TWO NOTES ABOVE DESCRIBE A BOX THAT NO LONGER EXISTS,
+       AND THEY ARE KEPT BECAUSE THEIR REASONING IS WHY ══════════════════════
+   Both turn on one premise, stated in M0b's own words: "the picture's own width
+   is fixed by its height (16:9), so the only question is where the slack goes."
+   THAT PREMISE IS THE DEFECT MIKE NAMED. There is no slack now — the picture is
+   the column's width — so M0b's centring and D1's left-justification are both
+   answering a question nobody is asked any more.
+   IT IS IN FLOW, NOT ABSOLUTE, and that is the load-bearing half: an absolutely
+   positioned inner gives its parent no height, so the slot could only ever be
+   sized from the outside, which is the whole family of bugs this ends. In flow,
+   `width:100%` + `aspect-ratio:16/9` resolves the height, the slot takes it, the
+   grid row takes the slot's, and the page scrolls when the room is taller than
+   the window.
+   `inset:auto` UNDOES THE BASE RULE'S `inset:0` EXPLICITLY — a relative box
+   with `inset:0` still shifts, and it would shift by the parent's height, which
+   is now its own. The children (`.vp-thumb`, the player) stay absolute and fill
+   this box, because it is still `position` other than static. */
 .ex-root[data-flat="1"] .vp-area-flat:not(.vp-area-stowed) .vp-inner{
-  left:0;right:auto;transform:none;
-  height:100%;width:auto;aspect-ratio:16/9;max-width:100%}
+  position:relative;inset:auto;transform:none;
+  width:100%;height:auto;aspect-ratio:16/9;max-width:100%}
 /* the face joins the page flow at full length — and it is RELATIVE, not
    static, because the iframe behind it is absolutely positioned and would
    otherwise paint on top; a positioned face with a z-index and the opaque
