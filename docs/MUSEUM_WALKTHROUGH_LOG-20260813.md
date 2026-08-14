@@ -424,3 +424,25 @@ stray backtick is noted and not chased.
 4. **His five FAQ headings are in capitals** beside eleven sentence-case
    questions. Left as written. See §4.
 5. **Album A has six rows after the move, not the seven he wrote.** See §2.
+
+---
+
+## WHAT WAS LOOKED AT, AND WHAT WAS NOT
+
+**The Inspection Law, answered honestly rather than claimed.** Chrome was
+driven for the first half of this packet and the extension **disconnected
+partway through**; it did not come back across three attempts, so the second
+half was verified without it. Stated per item:
+
+| item | how it was verified |
+|---|---|
+| **A** the panel | **SEEN AND MEASURED** — the seam reproduced at 103px / 74%, and the fix measured at two window heights on `/wb`, `/wal` and `/foundation`. GAP 0 at both. |
+| **D** the wordmark and the FAQ | **SEEN** — `brandHref` and `exitHref` both `/`, the five new questions in order after the existing four, the closing block printed in the open. |
+| **E** the header links | **MEASURED** — five rooms at 390px, two at 1280px, overlap 0 and clipped characters 0. |
+| **B** `/wb` | **NOT SEEN.** Source, both builds green, and every new string confirmed present in the launch bundle with `making of` absent from it. The two-album carousel, the banner transport and the click rule have not been looked at on the glass. |
+| **C** the guest book | **NOT SEEN AFTER THE CHANGE.** The jag was measured on the live lobby BEFORE it; the numbering and the reserved column have not been looked at. |
+| **F** the emitter | **RUN** — his reproduce, and the guard's break test, both against his real workbook (read-only; a shifted and an emptied copy were made in the scratchpad, never in `_night-20260811`). |
+| **G** the desk | **RUN** — 10 instruments, 10 on disk, the workbook's `file://` link present in the output. |
+
+**B and C want a lap before Sunday.** They are the two items on his own
+re-walk list.
