@@ -1,0 +1,1403 @@
+/* ─── HR EXHIBIT FLOW — static styles ────────────────────────────────────────
+   Phase 1.5b. Static styles for the inline-section deck. Parameterized
+   builders (per-pill, per-tab, deck height, etc.) stay inline as JS objects
+   in HrExhibitFlow.jsx (S.*). Anything that doesn't take props lives here.
+
+   Naming: .hr-* prefix for HR-specific classes. .wb-scroll, .pillscroll,
+   .searchbar, .animated, .knob-wrap, .card-fade-in, .tab-hoverable,
+   .preset-row-btn — these are reused from the prototype's global styles
+   and kept on those names.
+
+   Phase 4b: --hr-* tokens are no longer defined locally. They resolve from
+   :root in src/styles/museum-tokens.css (imported below), which holds the
+   canonical museum palette + typography aligned to the carousel.
+   ──────────────────────────────────────────────────────────────────────── */
+@import './../../styles/museum-tokens.css';
+/* Stage 3 typography swap: deck adopts v28_3's font pairing (Fraunces +
+   Geist) by Mike's call. Scoped to .hr-section only — the museum-wide
+   tokens in museum-tokens.css stay on DM Serif Display + Syne, so the
+   carousel / track list / video player at the top half of the HR page
+   are unaffected. The deck section overrides --hr-serif and --hr-sans
+   below, which ripples through every descendant rule that consumes
+   those tokens (pill labels, page title, eyebrow, panel head, etc.). */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@400;500;600;700&display=swap');
+
+/* ── Section root ──────────────────────────────────────────────────────── */
+.hr-section {
+  /* Deck-scoped typography override (Stage 3, v28_3 match). These shadow
+     the :root values defined in museum-tokens.css for the duration of
+     the .hr-section subtree only. Outside the deck, --hr-serif and
+     --hr-sans resolve to the museum-wide values. */
+  --hr-serif: 'Fraunces', Georgia, serif;
+  --hr-sans:  'Geist', system-ui, -apple-system, sans-serif;
+
+  position: relative;
+  min-height: calc(100vh - 64px);
+  scroll-snap-align: center;
+  background: var(--hr-ink);
+  color: var(--hr-dim);
+  font-family: var(--hr-sans);
+  font-size: 14px;
+  line-height: 1.55;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Deck host ─────────────────────────────────────────────────────────── */
+/* Sized so the deck can sit at its bottom via sticky positioning. Inside
+   this host we place an absolutely-positioned panel (the grid pane) and a
+   sticky-bottom deck. The panel scrolls; the deck is always reachable. */
+.hr-section-deck-host {
+  position: relative;
+  flex: 1;
+  min-height: calc(100vh - 64px);
+  overflow: hidden;
+}
+
+/* ── Panel (artifact grid pane above the deck) ─────────────────────────── */
+.hr-panel-scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  padding: 1.25rem 1.5rem;
+}
+
+/* ── Page header ───────────────────────────────────────────────────────── */
+.hr-page-header {
+  padding-bottom: 0.85rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--hr-border);
+}
+.hr-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  font-weight: 500;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.hr-page-title {
+  font-family: var(--hr-serif);
+  font-weight: 400;
+  font-size: 26px;
+  color: var(--hr-gold);
+  font-style: italic;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.hr-page-sub {
+  font-size: 13px;
+  color: var(--hr-dim);
+  margin-top: 6px;
+  max-width: 820px;
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+/* ── Panel head (artifacts · count) ────────────────────────────────────── */
+.hr-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--hr-border);
+  margin-bottom: 1.25rem;
+}
+.hr-panel-head-label {
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.hr-panel-head-muted {
+  color: var(--hr-gold-mute);
+  font-style: italic;
+  font-size: 11px;
+  text-transform: none;
+  letter-spacing: 0.04em;
+  font-weight: 400;
+  font-family: var(--hr-serif);
+}
+.hr-panel-count {
+  color: var(--hr-gold-hi);
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.hr-panel-count-big { color: var(--hr-gold-hi); font-weight: 700; }
+.hr-panel-count-total { color: var(--hr-gold-lo); font-weight: 400; }
+
+/* ── Artifact grid ─────────────────────────────────────────────────────── */
+.hr-artifact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 280px));
+  justify-content: start;
+  grid-auto-rows: auto;
+  gap: 14px;
+  grid-auto-flow: dense;
+}
+.hr-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative; /* Phase 1.5c: anchor for badge / link-arrow overlays */
+}
+
+/* ── Phase C: per-media-type aspect ratios ──────────────────────────────
+   Operator-locked rule (2026-05-22): each media type has its own card
+   shape, locked across viewport rescales. JS controls column-span only;
+   the card's height comes from aspect-ratio * computed width.
+
+   - Audio: portrait, matching square album art + footer below.
+   - Photo: portrait default (future refinement may key on source aspect).
+   - Link/video: visual area is 16:9 (the standard for video); footer
+     adds its natural height below, so the card overall is slightly
+     taller than 16:9 but the video portion is the standard shape.       */
+/* The aspect-ratio rules apply to the VIS element (image area), not the
+   card itself. Card = vis + footer (natural height); putting aspect-ratio
+   on the card would compound with the footer height and over-tall the
+   whole tile. flex: none on the vis prevents flex-grow from defeating
+   the locked aspect when grid cells happen to be taller than vis * ratio. */
+.hr-card-audio .hr-card-video-vis { aspect-ratio: 1 / 1;  flex: none; }
+.hr-card-photo .hr-card-video-vis { aspect-ratio: 4 / 5;  flex: none; }
+.hr-card-link  .hr-card-video-vis { aspect-ratio: 16 / 9; flex: none; }
+
+/* ── Phase 1.5c — clickable cards (cards with externalUrl) ─────────────── */
+/* Renders as <a> in the JSX. Subtle border-color brighten on hover plus a
+   small ↗ chevron in the corner. Non-link cards render exactly as before. */
+.hr-card-link {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.hr-card-link:hover {
+  border-color: var(--hr-gold-lo) !important;
+  box-shadow: inset 0 0 0 1px var(--hr-gold-lo);
+}
+.hr-card-link-arrow {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--hr-gold-lo);
+  pointer-events: none;
+  transition: color 0.15s;
+  z-index: 2;
+}
+.hr-card-link:hover .hr-card-link-arrow {
+  color: var(--hr-gold-hi);
+}
+
+/* ── FB social-plugin embed cards (2026-05-31; post.php + postMessage auto-height + letterbox fallback) ──────
+   plugins/video.php (watch/reel) + plugins/post.php (posts) iframe embeds.
+   No app token, no FB JS SDK. See FbEmbedCard / fbEmbedFor in
+   HrExhibitFlow.jsx. FB embeds render on a white surface; that is inherent
+   to FB's chrome, not a deck token.
+
+   Sizing model — why this isn't just width/height:100%. A raw FB plugin lays
+   its content out at a FIXED pixel width (the &width= param, locked at 500 in
+   fbPluginSrc) and computes its own height. The iframe ELEMENT, though, is the
+   grid column: ~278px at 1-col (reel/post), ~572px at 2-col (video), fully
+   fluid on mobile. So a width:100% iframe only shows a 278/572-px window onto
+   500px-wide FB content — horizontal clip at 1-col (≈222px lost), white margin
+   + bottom letterbox at 2-col. With no FB JS SDK there's no fluid-width mode
+   and the cross-origin frame exposes no size to read.
+
+   Fix: lay the iframe out at FB's exact native size (500 × a per-kind height
+   that equals 500 × the tile's inverse aspect) and uniformly scale it to fill
+   the tile. --fb-w is the tile's live pixel width (set by useElementWidth on
+   the vis in FbEmbedCard); scale = --fb-w / 500 maps the 500px FB canvas onto
+   the tile width exactly — no horizontal clip at any column span or viewport,
+   and the per-kind iframe height makes the scaled frame fill the aspect box
+   with no letterbox. The aspect-ratio on the vis still defines the tile's
+   masonry shape, mirroring the gallery/album 4/5 tiles.
+
+   Per-card override (2026-05-31): the per-kind aspect-ratio + frame-height rules
+   below are FALLBACKS. When the export carries an embed's intrinsic dimensions,
+   FbEmbedCard (fbEmbedDims) sets the vis aspect-ratio and the frame height inline
+   — computed as box aspect = w/h and frame height = 500 × h/w — which wins over
+   these classes. That is the front-end half of per-video FB sizing (the proper
+   fix for mixed-orientation FB videos, where one fixed per-kind box must either
+   crop portrait clips or letterbox landscape ones). Until MV/export emits those
+   fields, the per-kind boxes apply unchanged — no behavior change today. */
+/* 2026-05-31: ALL FB artifacts now embed via plugins/post.php (video/reel/post).
+   post.php posts its real content height to the parent; FbEmbedCard listens and
+   sets the frame + box height inline (box height = scaled frame height), so the
+   frame is post-sized when measured and letterboxed-to-fit (never cropped) on
+   the generous per-kind fallback. The aspect-ratio + per-kind frame-height rules
+   below are a pre-measurement hint only and are overridden by those inline
+   heights. */
+.hr-card-fbembed .hr-card-video-vis {
+  flex: none;
+  padding: 0;
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+}
+.hr-card-fbembed[data-fbkind="video"] .hr-card-video-vis { aspect-ratio: 16 / 9; }
+.hr-card-fbembed[data-fbkind="reel"]  .hr-card-video-vis { aspect-ratio: 9 / 16; }
+.hr-card-fbembed[data-fbkind="post"]  .hr-card-video-vis { aspect-ratio: 4 / 5; }
+.hr-fbembed-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 500px;
+  border: 0;
+  display: block;
+  transform-origin: top left;
+  transform: scale(calc(var(--fb-w, 280) / 500));
+}
+/* Pre-scale heights = 500 × the tile's inverse aspect, so frame × scale fills
+   the vis box: video 500×9/16, reel 500×16/9, post 500×5/4. */
+.hr-card-fbembed[data-fbkind="video"] .hr-fbembed-frame { height: 281px; }
+.hr-card-fbembed[data-fbkind="reel"]  .hr-fbembed-frame { height: 889px; }
+.hr-card-fbembed[data-fbkind="post"]  .hr-fbembed-frame { height: 625px; }
+.hr-card-fb-open {
+  display: inline-block;
+  margin-top: 6px;
+  font-family: var(--hr-sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--hr-gold-lo);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.hr-card-fb-open:hover { color: var(--hr-gold-hi); }
+
+/* ── Phase 1.5c — voice cards (curatorial commentary; HR_EXIT_FLOW) ────── */
+/* Warmer background and a small "curator's note" badge in the top-right
+   corner, anchored in the GOLD accent. Distinguishable at a glance from
+   the colder evidence cards. */
+.hr-card-voice {
+  background: rgba(50, 38, 14, 0.55) !important;
+  border-color: var(--hr-gold-mute) !important;
+}
+.hr-card-voice-badge {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-family: var(--hr-sans);
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--hr-gold);
+  background: rgba(14, 11, 6, 0.7);
+  padding: 2px 6px;
+  border: 1px solid var(--hr-gold-lo);
+  pointer-events: none;
+  line-height: 1.2;
+  z-index: 2;
+}
+
+/* ── Card visuals ──────────────────────────────────────────────────────── */
+.hr-card-foot {
+  padding: 8px 11px 10px;
+}
+.hr-card-foot-dashed {
+  padding: 8px 11px 10px;
+  border-top: 1px dashed var(--hr-border-hi);
+}
+.hr-card-title {
+  font-family: var(--hr-serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--hr-gold);
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+.hr-card-title-sm {
+  font-size: 12.5px;
+}
+.hr-card-meta {
+  font-size: 9.5px;
+  color: var(--hr-gold-lo);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.hr-card-credit {
+  font-size: 10.5px;
+  color: var(--hr-gold-hi);
+  font-style: italic;
+  margin-top: 3px;
+}
+.hr-card-credit strong { font-weight: 500; color: var(--hr-gold-hi); font-style: normal; }
+
+/* content_kind variant block (2026-05-30) — media-variant taxonomy badge
+   (official/live/lyrics/cover) per DATA_ARCHITECTURE_SPEC_v2.1-target.md §3.5.
+   Its own block in the card foot; rendered only when the artifact carries a
+   spec-valid content_kind (see ContentKindBadge in HrExhibitFlow.jsx), so cards
+   without one are unaffected. Token-only (canonical single-gold), square edges
+   to match the deck's pill/tab language. */
+.hr-content-kind {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 7px;
+  font-family: var(--hr-sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--hr-gold);
+  background: var(--hr-ink-soft);
+  border: 1px solid var(--hr-gold-lo);
+  border-radius: 0;
+}
+
+/* PhotoCard */
+.hr-card-photo-vis {
+  flex: 1;
+  background: linear-gradient(135deg, #2d2513 0%, #1a140a 60%, #0e0b06 100%);
+  border-bottom: 1px solid var(--hr-border);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hr-card-photo-frame {
+  position: absolute;
+  inset: 12px;
+  border: 1px solid var(--hr-gold-mute);
+  opacity: 0.4;
+}
+.hr-card-photo-label {
+  color: var(--hr-gold-mute);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ArtCard */
+.hr-card-art-vis {
+  flex: 1;
+  background:
+    radial-gradient(circle at 30% 40%, #3a2e14 0%, transparent 40%),
+    radial-gradient(circle at 70% 60%, #4a3818 0%, transparent 45%),
+    #1a140a;
+  border-bottom: 1px solid var(--hr-border);
+  position: relative;
+}
+.hr-card-art-circle {
+  position: absolute;
+  left: 20%; top: 30%;
+  width: 60%; height: 40%;
+  border: 1px solid var(--hr-gold-mute);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+/* VideoCard */
+.hr-card-video-vis {
+  flex: 1;
+  background: linear-gradient(180deg, #1a140a 0%, #2d2513 100%);
+  border-bottom: 1px solid var(--hr-border);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hr-card-video-live {
+  position: absolute;
+  top: 6px; left: 6px;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+  color: var(--hr-gold-hi);
+  text-transform: uppercase;
+  background: rgba(14, 11, 6, 0.8);
+  padding: 2px 6px;
+  border: 1px solid var(--hr-gold-lo);
+}
+.hr-card-video-play {
+  width: 32px; height: 32px;
+  border: 1px solid var(--hr-gold-lo);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hr-card-video-play-tri {
+  width: 0; height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 9px solid var(--hr-gold);
+  margin-left: 2px;
+}
+.hr-card-video-dur {
+  position: absolute;
+  bottom: 6px; right: 6px;
+  font-size: 10px;
+  color: var(--hr-gold-hi);
+  background: rgba(14, 11, 6, 0.8);
+  padding: 1px 5px;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* PressCard */
+.hr-card-press {
+  padding: 12px 14px 14px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.hr-card-press-source {
+  font-size: 9.5px;
+  letter-spacing: 0.26em;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.hr-card-press-pull {
+  font-family: var(--hr-serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--hr-gold);
+  line-height: 1.38;
+  margin-bottom: 8px;
+  flex: 1;
+}
+.hr-card-press-quote { color: var(--hr-gold-lo); }
+.hr-card-press-sub {
+  font-size: 10px;
+  color: var(--hr-gold-lo);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* EssayCard */
+.hr-card-essay {
+  padding: 14px 16px 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hr-card-essay-kind {
+  font-size: 9.5px;
+  letter-spacing: 0.26em;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.hr-card-essay-title {
+  font-family: var(--hr-serif);
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--hr-gold);
+  line-height: 1.2;
+  margin: 2px 0 4px;
+}
+.hr-card-essay-lede {
+  font-size: 12px;
+  color: var(--hr-dim);
+  line-height: 1.55;
+  flex: 1;
+}
+
+/* SessionCard */
+.hr-card-session-vis {
+  flex: 1;
+  background:
+    linear-gradient(120deg, rgba(200, 160, 80, 0.08) 0%, transparent 50%),
+    var(--hr-ink-soft);
+  border-bottom: 1px solid var(--hr-border);
+  position: relative;
+}
+.hr-card-session-rect {
+  position: absolute;
+  left: 15%; right: 15%;
+  top: 25%; bottom: 25%;
+  border: 1px solid var(--hr-border-hi);
+  opacity: 0.5;
+}
+
+/* ── Deck container ─────────────────────────────────────────────────────
+   Bottom offset is conditional on whether the player bar (.pb in
+   Exhibit.css) is in the DOM. PlayerBar returns null when no video is
+   playing, so .pb is absent and the deck docks at viewport bottom.
+   When a video plays, .pb is rendered and the :has() rule lifts the
+   deck by the player bar's height (60px) so the tabs sit above it. */
+.hr-deck { bottom: 0; transition: bottom 0.18s ease; }
+body:has(.pb) .hr-deck { bottom: 60px; }
+
+/* ── Tab strip ─────────────────────────────────────────────────────────── */
+.hr-tab-strip {
+  position: absolute;
+  top: 0; left: 12px; right: 12px;
+  height: 30px;
+  display: flex;
+  align-items: flex-end;
+  pointer-events: auto;
+  z-index: 12;
+  user-select: none;
+}
+.hr-strip-clear-btn {
+  margin-left: 12px;
+  align-self: center;
+  background: transparent;
+  border: 1px solid var(--hr-gold-lo);
+  color: var(--hr-gold);
+  font-family: var(--hr-sans);
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  height: 24px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.hr-strip-clear-btn:hover {
+  border-color: var(--hr-gold);
+  color: var(--hr-gold-hi);
+}
+
+/* tab-hoverable applies to inactive tab divs */
+.tab-hoverable:hover { border-color: var(--hr-gold) !important; color: var(--hr-gold-hi) !important; }
+
+/* ── Deck body (the panel that opens upward) ───────────────────────────── */
+.hr-deck-body {
+  position: absolute;
+  top: 30px; left: 0; right: 0; bottom: 0;
+  background: var(--hr-ink);
+  border-top: 1px solid var(--hr-gold-lo);
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Scroll wrapper / content body ─────────────────────────────────────── */
+.hr-scroll-fade-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+.hr-content-body {
+  flex: 1;
+  overflow: auto;
+  padding: 16px 1.25rem 1.25rem;
+}
+
+/* ── Group columns / pills ─────────────────────────────────────────────── */
+.hr-groups-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 28px;
+  align-items: flex-start;
+}
+.hr-group-column {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.hr-group-column-label {
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  font-weight: 600;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--hr-border);
+  white-space: nowrap;
+}
+.hr-pill-label {
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Deep Tracks search ────────────────────────────────────────────────── */
+.hr-deep-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.hr-search-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+.hr-search-input-holder { width: 100%; }
+.hr-corral {
+  min-height: 40px;
+  border: 1px solid var(--hr-border);
+  border-top: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+.hr-corral-empty {
+  font-size: 11px;
+  color: var(--hr-gold-mute);
+  font-style: italic;
+  padding: 0 4px;
+}
+
+/* searchbar input style — global so the prototype's searchbar matches */
+input.searchbar {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--hr-border);
+  color: var(--hr-gold);
+  font-family: var(--hr-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 8px 12px;
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+input.searchbar:focus { border-color: var(--hr-gold-lo); }
+input.searchbar::placeholder { color: var(--hr-gold-mute); font-style: italic; }
+
+/* ── Presets ───────────────────────────────────────────────────────────── */
+.hr-presets-section-label {
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  font-weight: 600;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--hr-border);
+  margin-bottom: 12px;
+}
+.hr-presets-top-row {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+.hr-presets-slots-col {
+  flex: 1 1 420px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.hr-presets-player-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--hr-border);
+  min-width: 180px;
+}
+.hr-presets-player-label {
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.hr-preset-slot-label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--hr-gold);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.preset-row-btn:hover {
+  color: var(--hr-gold-hi);
+  border-color: var(--hr-gold-lo);
+}
+.hr-factory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 1.25rem;
+}
+.hr-preset-label {
+  font-family: var(--hr-serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--hr-gold);
+  line-height: 1.2;
+}
+.hr-preset-desc {
+  font-size: 11px;
+  color: var(--hr-gold-lo);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+/* ── Animation hooks ───────────────────────────────────────────────────── */
+.animated {
+  transition: height 180ms cubic-bezier(0.3, 0.7, 0.2, 1),
+              bottom 180ms cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+.animated.quick {
+  transition: height 120ms ease-out, bottom 120ms ease-out;
+}
+.animated.resizing {
+  transition: none;
+}
+
+@keyframes cardFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.card-fade-in { animation: cardFadeIn 250ms ease-out; }
+
+/* ── Scrollbar styling ─────────────────────────────────────────────────── */
+.wb-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(138, 120, 70, 0.35) transparent;
+}
+.wb-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+.wb-scroll::-webkit-scrollbar-track { background: transparent; }
+.wb-scroll::-webkit-scrollbar-thumb {
+  background: rgba(138, 120, 70, 0.35);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.wb-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(184, 151, 74, 0.55);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+.wb-scroll::-webkit-scrollbar-corner { background: transparent; }
+
+.pillscroll::-webkit-scrollbar { width: 6px; height: 6px; }
+.pillscroll::-webkit-scrollbar-track { background: transparent; }
+.pillscroll::-webkit-scrollbar-thumb { background: var(--hr-border-hi); border-radius: 0; }
+.pillscroll { scrollbar-width: thin; scrollbar-color: var(--hr-border-hi) transparent; }
+
+/* ── Journal — adapted from quarantined HrExhibitFlow.jsx ───────────────── */
+/* Layout fits inside hr-content-body (the deck body's flex content). */
+.hr-journal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.hr-jnl-prompt {
+  font-family: var(--hr-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--hr-gold);
+  line-height: 1.6;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+.hr-jnl-compose {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.hr-jnl-handle {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: var(--hr-gold-hi);
+  background: #080808;
+  border: 1px solid var(--hr-border);
+  padding: 5px 10px;
+  border-radius: 2px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.hr-jnl-handle:focus { border-color: var(--hr-border-hi); }
+.hr-jnl-handle::placeholder { color: var(--hr-gold-mute); }
+.hr-jnl-text {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.82rem;
+  color: var(--hr-dim);
+  background: #080808;
+  border: 1px solid var(--hr-border);
+  padding: 10px 12px;
+  border-radius: 2px;
+  outline: none;
+  resize: vertical;
+  height: 96px;
+  line-height: 1.6;
+  transition: border-color 0.15s;
+}
+.hr-jnl-text:focus { border-color: var(--hr-border-hi); }
+.hr-jnl-text::placeholder { color: var(--hr-gold-mute); }
+.hr-jnl-submit {
+  align-self: flex-end;
+  background: none;
+  border: 1px solid var(--hr-border-hi);
+  color: var(--hr-gold-lo);
+  font-family: var(--hr-sans);
+  font-weight: 600;
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.hr-jnl-submit:hover {
+  color: var(--hr-gold-hi);
+  border-color: var(--hr-gold);
+}
+.hr-jnl-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+.hr-jnl-entry {
+  background: #080808;
+  border: 1px solid var(--hr-border);
+  border-radius: 2px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.hr-jnl-entry-new { border-color: #0F6E56; }
+.hr-jnl-entry-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.62rem;
+  color: var(--hr-gold-lo);
+  letter-spacing: 0.08em;
+}
+.hr-jnl-entry-who { color: var(--hr-gold-hi); }
+.hr-jnl-entry-ctx { color: var(--hr-gold-lo); font-style: italic; }
+.hr-jnl-entry-when { margin-left: auto; color: var(--hr-gold-mute); }
+.hr-jnl-entry-body {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: var(--hr-dim);
+  line-height: 1.5;
+}
+.hr-jnl-entry-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.hr-jnl-vote {
+  background: none;
+  border: none;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.65rem;
+  color: var(--hr-gold-mute);
+  cursor: pointer;
+  padding: 2px 4px;
+  transition: color 0.15s;
+}
+.hr-jnl-vote:hover { color: var(--hr-dim); }
+.hr-jnl-vote-on { color: var(--hr-gold-hi); }
+.hr-jnl-undo {
+  background: none;
+  border: 1px solid #0F6E56;
+  color: #0F6E56;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  padding: 3px 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  align-self: flex-start;
+  transition: opacity 0.15s;
+}
+.hr-jnl-undo:hover { opacity: 0.7; }
+.hr-jnl-delete {
+  background: none;
+  border: none;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.6rem;
+  color: var(--hr-border-hi);
+  cursor: pointer;
+  margin-left: auto;
+  transition: color 0.15s;
+}
+.hr-jnl-delete:hover { color: #993C1D; }
+.hr-jnl-feed-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding-top: 2px;
+}
+.hr-jnl-btn {
+  background: #0e0e0e;
+  border: 1px solid var(--hr-border);
+  color: var(--hr-gold-lo);
+  cursor: pointer;
+  font-size: 0.9rem;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  transition: color 0.15s, border-color 0.15s;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+}
+.hr-jnl-btn:hover { color: var(--hr-gold); border-color: var(--hr-gold); }
+.hr-jnl-counter {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.65rem;
+  color: var(--hr-gold-lo);
+  letter-spacing: 0.12em;
+  min-width: 36px;
+  text-align: center;
+}
+
+/* ── KALEIDOSCOPE — MOTHBALLED for v1; component classes preserved ─────── */
+/* MOTHBALLED for v1 per STATE.md; no element ever gets these classes. */
+.hr-kal-wrap {
+  padding: 0.75rem 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.hr-kal-console {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 48px;
+  align-items: center;
+  padding: 12px 24px;
+  max-width: 900px;
+  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.hr-kal-knob-row {
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+  align-items: flex-start;
+}
+.hr-kal-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 68px;
+}
+.hr-kal-block-label {
+  font-size: 10px;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 8px;
+  text-align: center;
+  font-weight: 500;
+}
+.knob-wrap { position: relative; }
+.knob-wrap:hover .hr-kal-knob-readout,
+.knob-wrap.dragging .hr-kal-knob-readout {
+  opacity: 1 !important;
+  transition: opacity 60ms ease !important;
+}
+.hr-kal-knob {
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #2a2110, #14100a);
+  border: 2px solid var(--hr-border-hi);
+  position: relative;
+  cursor: grab;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.4);
+}
+.hr-kal-knob-indicator {
+  position: absolute;
+  left: 50%; top: 4px;
+  width: 2px; height: 18px;
+  background: var(--hr-gold-hi);
+  transform-origin: 50% 25px;
+  pointer-events: none;
+}
+.hr-kal-knob-readout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--hr-gold-hi);
+  font-variant-numeric: tabular-nums;
+  background: rgba(14, 11, 6, 0.92);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 450ms ease;
+  font-weight: 500;
+}
+.hr-kal-switch {
+  width: 44px; height: 24px;
+  background: #120e07;
+  border: 1px solid var(--hr-border);
+  border-radius: 12px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.hr-kal-switch.on {
+  background: var(--hr-ink-soft);
+  border-color: var(--hr-gold-lo);
+}
+.hr-kal-switch-knob {
+  position: absolute;
+  left: 2px; top: 1px;
+  width: 20px; height: 20px;
+  background: var(--hr-gold-mute);
+  border-radius: 50%;
+  transition: all 0.15s;
+}
+.hr-kal-switch-knob.on {
+  left: 22px;
+  background: var(--hr-gold-hi);
+}
+.hr-vu-cluster {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+}
+.hr-vu-outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hr-vu-column {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 2px;
+  padding: 4px 4px;
+  background: #0a0805;
+  border: 1px solid var(--hr-border);
+  border-radius: 3px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.7);
+  position: relative;
+}
+.hr-vu-seg {
+  width: 40px;
+  height: 7px;
+  border-radius: 1px;
+  background: #1f1a0e;
+  transition: background 70ms ease, box-shadow 70ms ease;
+}
+.hr-vu-readout-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 90px;
+}
+.hr-vu-readout-number {
+  font-family: var(--hr-serif);
+  font-style: italic;
+  font-size: 28px;
+  color: var(--hr-gold-hi);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  font-weight: 500;
+}
+.hr-vu-readout-number span {
+  font-size: 16px;
+  color: var(--hr-gold-lo);
+}
+.hr-vu-readout-label {
+  font-size: 9.5px;
+  color: var(--hr-gold-lo);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* ── Mobile fallback inline pills (hidden on desktop) ──────────────────── */
+.hr-mobile-pills {
+  display: none;
+}
+
+/* ── Mobile (O11) ──────────────────────────────────────────────────────── */
+/* Below 720px, hide the deck entirely and render the pill columns inline
+   above the artifact grid as a simple stack. No tab strip, no resize. */
+@media (max-width: 720px) {
+  .hr-section-deck-host { overflow: visible; min-height: auto; }
+  .hr-panel-scroll {
+    position: static;
+    inset: auto;
+    overflow-y: visible;
+    padding: 1rem 0.75rem;
+  }
+  .hr-tab-strip,
+  .hr-deck-body {
+    display: none;
+  }
+  /* Hide the absolute deck chrome entirely. */
+  .hr-section .animated {
+    transition: none;
+  }
+  .hr-section .hr-section-deck-host > .animated:not(:first-child) {
+    display: none;
+  }
+  /* Show the inline pill stack at the top of the section. */
+  .hr-mobile-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 12px 12px 4px;
+    border-bottom: 1px solid var(--hr-border);
+  }
+  .hr-artifact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* ── Phase 3 — gallery container card + lightbox overlay ─────────────────────
+   A card_kind:gallery container renders as a clickable tile (cover thumbnail +
+   stacked-frames count badge) that opens a full-viewport lightbox. Tokens match
+   the deck's INK/GOLD/BORDER language; overlay sits at z-index 1000, above the
+   player bar (.pb, z-index 100) and all deck chrome (<= 14). */
+.hr-card-gallery {
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.hr-card-gallery:hover {
+  border-color: var(--hr-gold-lo) !important;
+  box-shadow: inset 0 0 0 1px var(--hr-gold-lo);
+}
+.hr-card-gallery .hr-card-video-vis { aspect-ratio: 4 / 5; flex: none; }
+.hr-gallery-card-ph {
+  color: var(--hr-gold-lo);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.hr-gallery-card-badge {
+  position: absolute;
+  top: 6px; right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--hr-gold-hi);
+  background: rgba(14, 11, 6, 0.8);
+  border: 1px solid var(--hr-gold-lo);
+  padding: 2px 5px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* lightbox overlay */
+.hr-gallery-ov {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(5, 5, 5, 0.94);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  font-family: 'Geist', system-ui, -apple-system, sans-serif;
+}
+.hr-gallery-ov-close {
+  position: absolute;
+  top: 14px; right: 18px;
+  background: transparent;
+  border: none;
+  color: var(--hr-gold);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.12s;
+}
+.hr-gallery-ov-close:hover { color: var(--hr-gold-hi); }
+.hr-gallery-ov-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: min(1100px, 92vw);
+}
+.hr-gallery-ov-figure {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hr-gallery-ov-img {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border: 1px solid var(--hr-border);
+  background: #050505;
+}
+.hr-gallery-ov-ph {
+  width: min(70vw, 560px);
+  height: min(56vh, 560px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #15110a 0%, #0a0a0a 65%);
+  border: 1px solid var(--hr-gold-lo);
+  color: var(--hr-gold-lo);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+.hr-gallery-ov-nav {
+  flex: none;
+  width: 44px; height: 64px;
+  background: rgba(14, 11, 6, 0.7);
+  border: 1px solid var(--hr-gold-lo);
+  color: var(--hr-gold);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+.hr-gallery-ov-nav:hover {
+  background: var(--hr-ink-soft);
+  border-color: var(--hr-gold-hi);
+}
+.hr-gallery-ov-cap { text-align: center; max-width: min(900px, 90vw); }
+.hr-gallery-ov-cap-title { color: var(--hr-gold-hi); font-size: 14px; }
+.hr-gallery-ov-cap-meta {
+  color: var(--hr-gold-mute);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  margin-top: 4px;
+}
+.hr-gallery-ov-strip {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  max-width: 92vw;
+  padding: 6px 2px;
+}
+.hr-gallery-ov-thumb {
+  flex: none;
+  width: 54px; height: 54px;
+  background-size: cover;
+  background-position: center;
+  background-color: #15110a;
+  border: 1px solid var(--hr-border);
+  cursor: pointer;
+  color: var(--hr-gold-mute);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+  transition: opacity 0.12s, border-color 0.12s;
+}
+.hr-gallery-ov-thumb:hover { opacity: 0.9; }
+.hr-gallery-ov-thumb.is-active { opacity: 1; border-color: var(--hr-gold); }
+
+/* ── Broken/missing-preview placeholder (defensive rendering, 2026-05-30) ──
+   Shared muted tile for an image whose src is null/empty or fails to load.
+   Matches the deck's dark/gold language (mirrors .hr-gallery-ov-ph). The
+   'card' variant fills .hr-card-video-vis (position: relative); 'large' sizes
+   the lightbox stage itself; 'thumb' is a compact glyph for the strip. */
+.hr-media-ph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  padding: 14px;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #15110a 0%, #0a0a0a 65%);
+  color: var(--hr-gold-lo);
+}
+.hr-media-ph-card {
+  position: absolute;
+  inset: 0;
+}
+.hr-media-ph-large {
+  width: min(70vw, 560px);
+  height: min(56vh, 560px);
+  gap: 12px;
+  border: 1px solid var(--hr-gold-lo);
+}
+.hr-media-ph-title {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  color: var(--hr-gold-hi);
+  max-width: 92%;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.hr-media-ph-large .hr-media-ph-title { font-size: 13px; }
+.hr-media-ph-note {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--hr-gold-mute);
+}
+.hr-media-ph-large .hr-media-ph-note { font-size: 10px; }
+.hr-media-ph-thumb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  line-height: 1;
+  color: var(--hr-gold-mute);
+}
+.hr-media-ph-thumb em {
+  font-style: normal;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Album container (RWTH parity, 2026-05-30) ──────────────────────────────
+   Deck tile badge mirrors the gallery badge; the overlay is a cover + ordered
+   tracklist in the deck's INK/GOLD/BORDER language. */
+.hr-album-card-badge {
+  position: absolute;
+  top: 6px; right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--hr-gold-hi);
+  background: rgba(14, 11, 6, 0.8);
+  border: 1px solid var(--hr-gold-lo);
+  pad
