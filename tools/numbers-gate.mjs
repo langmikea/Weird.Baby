@@ -65,6 +65,11 @@ const DOCS = [
   { file: "docs/canonical/OPERATIONS.md",
     historyFrom: null,
     note: "no round log in this file — read whole" },
+  { file: "docs/OPEN_ACTIONS.md",
+    historyFrom: null,
+    note: "every row is live by Doctrine 24 — a closed row leaves the file. "
+        + "Counts inside a row's question are REPORTED, NEVER CORRECTED: "
+        + "editing them edits the sentence Mike is being asked to rule on." },
   { file: "STATE.md",
     skipWhole: "a round log almost end to end. Its fourteen `11 err / 9 warn` "
              + "readings are what the gates said on the day each round sealed, "
