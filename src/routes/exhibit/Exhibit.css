@@ -1276,7 +1276,18 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    `.vp-ao-art` — see the note there. `object-fit` is inherited from the
    `.vp-thumb img` rule above (cover), so it is re-stated here as contain: a
    square cover shown whole. */
-.vp-thumb img.vp-thumb-album{height:min(88%,340px);width:auto;max-width:88%;aspect-ratio:1;object-fit:contain;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:2px;box-shadow:0 12px 48px rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.08)}
+/* [B 2026-08-13] THE THIN LIGHT LINE IS DELETED, AND IT IS A1's ARC ENDING ONE
+   RULE LATER THAN A1 DID. MIKE: "Remove the thin light line around the album
+   art, or darken it to hide." It was `border:1px solid rgba(255,255,255,.08)`
+   — an eight-percent WHITE hairline, which is a highlight on a charcoal stage
+   and a grubby edge on the house's cream. A1 (2026-08-06) deleted that stage
+   and says in its own note that "four rules survived their own premise"; this
+   was a fifth. Removed rather than darkened, of the two he offered, because a
+   line tuned to be invisible is a line somebody re-tunes later.
+   THE SHADOW IS LEFT ALONE. It is not what he asked about, and it is doing a
+   different job — lifting a square cover off the ground — where the border was
+   doing none. */
+.vp-thumb img.vp-thumb-album{height:min(88%,340px);width:auto;max-width:88%;aspect-ratio:1;object-fit:contain;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:2px;box-shadow:0 12px 48px rgba(0,0,0,.7)}
 .vp-thumb-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
 .vp-empty-state{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--wb-gold-mute)}
 

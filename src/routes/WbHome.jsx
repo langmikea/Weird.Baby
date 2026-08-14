@@ -12,7 +12,10 @@
 // verified, not assumed — but it is also bundling luck rather than a declared
 // dependency, which is R5's point and R5's job (see the round log).
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
+/* [C 2026-08-13] `Link` goes with the Record door in the open wording — the
+   lobby's only <Link> was inside that sentence. Removed rather than left
+   imported: an unused import is a lint error in this repo's baseline. */
+import { useNavigate } from "react-router-dom";
 import "./WbHome.css";
 import { useRoom } from "../lib/use-room.js";
 import { useArrival } from "../lib/use-arrival.js";
@@ -255,9 +258,26 @@ function formatDate(iso) {
    it holds, and `--gb-row` is read live off the stylesheet by both the CSS cap
    and the drag, so the narrow-width row can be a different height without a
    second author of the number. */
-function GuestRow({ e }) {
+/* ═══ [C 2026-08-13] THE SIGNATURES ARE NUMBERED ═════════════════════════════
+   MIKE: "Number the entries in the scroller. Mini egg."
+
+   IT IS THE POSITION IN THE BOOK, NOT THE DATABASE ID. The live book runs
+   1, 2, 5, 6, 7, 8 — two rows were removed at some point — so printing `id`
+   would number six signatures up to eight and invite the question of who 3 and
+   4 were. The book holds six signatures and the sixth person to sign is 6.
+   THE LIST ARRIVES NEWEST FIRST (the worker orders by `signed_at` descending),
+   so the number counts UP the page: `total - i`. Papa Weird.Baby signed first
+   and is 1, at the bottom, which is where a guest book's first name is.
+
+   IT IS A MINI EGG AND IS BUILT LIKE ONE — a number, in the date's own quiet
+   monospace, in its own column so it cannot move the name. Nothing announces
+   it, nothing counts to a hundred here, and the row is otherwise the row it
+   already was. What happens at 31 and at 100 is Mike's, and is deliberately
+   not built. */
+function GuestRow({ e, n }) {
   return (
     <div className="wb-entry">
+      <span className="wb-entry-num">{n}</span>
       <span className="wb-entry-name">{e.name}</span>
       <span className="wb-entry-note">{e.note}</span>
       <span className="wb-entry-date">{formatDate(e.signed_at)}</span>
@@ -338,11 +358,48 @@ function useRowHeight(deps) {
     const measure = () => {
       const el = ref.current;
       if (!live || !el) return;
+      /* ═══ [C 2026-08-13] THE NAME'S COLUMN IS RESERVED, AND IT IS READ OFF
+             THE BOOK — THE SAME MECHANISM, ONE COLUMN OVER ══════════════════
+         MIKE: "Comments stacked straight, not jagged. Reserve column width for
+         the name."
+
+         WHY THEY WERE JAGGED: every `.wb-entry` is its OWN grid, so column 1 is
+         `auto` against ONE name. Measured on the live lobby at 1706px, the
+         notes began at six different x positions —
+             Mo 944 · Tommy 972 · James E 980 · Sammy B 986 ·
+             Papa Weird.Baby 1037 · Larry Leibensperger 1054
+         — a 110px stagger down a six-row book.
+
+         THE NAME COLUMN IS NOW ONE NUMBER FOR THE WHOLE BOOK: the widest name
+         in it, measured. That is G1's own answer to the row height (read the
+         number off the book rather than hand-set one) applied to the axis it
+         did not cover, and it survives the type ramp and the next long name for
+         the same reason.
+
+         RELEASED AND READ IN THE SAME BREATH AS THE HEIGHT, because they are
+         one layout: releasing the width changes the note column, which changes
+         how a note wraps, which changes the tallest row. Measuring them in two
+         passes would measure the height against a width that is about to move.
+
+         SUBGRID WOULD ALSO DO THIS AND IS NOT USED: `.wb-entries` is not the
+         rows' grid parent in the stepped scroller (the loop wraps them), so a
+         subgrid here would work in the plain list and quietly stop working in
+         the one Mike is looking at. */
+      el.style.setProperty("--gb-row", "auto");
+      el.style.setProperty("--gb-name", "auto");
+      let widest = 0;
+      for (const nm of el.querySelectorAll(".wb-entry-name")) {
+        widest = Math.max(widest, nm.getBoundingClientRect().width);
+      }
+      /* a reading of zero hands the column back to `auto` — the measurement
+         failing must cost alignment, never a name. Same direction as the
+         height's fallback below. */
+      if (widest > 0) el.style.setProperty("--gb-name", Math.ceil(widest) + "px");
+      else el.style.removeProperty("--gb-name");
       /* RELEASE — `--gb-row: auto` makes `.wb-entry`'s `height` auto, so each
          row reports what it actually needs. The cap's `calc()` goes invalid and
          `max-height` falls back to none for the same instant, which is why this
          is a LAYOUT effect: nothing between release and reading is painted. */
-      el.style.setProperty("--gb-row", "auto");
       let tallest = 0;
       for (const r of el.querySelectorAll(".wb-entry")) {
         tallest = Math.max(tallest, r.getBoundingClientRect().height);
@@ -380,7 +437,7 @@ function GuestBookPlain({ entries }) {
   const ref = useRowHeight([entries]);
   return (
     <div className="wb-entries" ref={ref}>
-      {entries.map((e, i) => <GuestRow e={e} key={i} />)}
+      {entries.map((e, i) => <GuestRow e={e} n={entries.length - i} key={i} />)}
     </div>
   );
 }
@@ -568,7 +625,10 @@ function GuestBook({ entries }) {
         {Array.from({ length: copies }, (_, c) => (
           <div className="wb-scroll-half" key={c}
             aria-hidden={c > 0 ? "true" : undefined}>
-            {entries.map((e, i) => <GuestRow e={e} key={i} />)}
+            {/* [C 2026-08-13] every copy carries the SAME numbers, because a
+                copy is the same six signatures going past again — a loop that
+                counted 7, 8, 9 on the second pass would be inventing people. */}
+            {entries.map((e, i) => <GuestRow e={e} n={entries.length - i} key={i} />)}
           </div>
         ))}
       </div>
@@ -806,10 +866,37 @@ export default function WbHome() {
               001. Announcing a daily Record and linking to the page the visitor
               is already on would be the museum contradicting itself twice in
               one sentence. */}
+          {/* ═══ [C 2026-08-13] THE OPEN WORDING IS MIKE'S NEW SENTENCE ═══════
+              MIKE: "NOW copy: approved, no change. LAUNCH copy swaps Sunday
+              night: 'Welcome. The first 100 people who sign the guest book will
+              be remembered differently than the ones who come later.'"
+              The not-open-yet half below is untouched to the character, which is
+              what "approved, no change" means.
+
+              WHAT LEAVES WITH THE OLD SENTENCE, NAMED ONCE: "The museum is
+              open. A new Record every day for ninety days.", and the `/robots/
+              record` link inside it — the only prose door to the Record on this
+              board. CH6's note says that link is why the wording was made
+              conditional at all. It is no longer why: the wording is still
+              conditional because Mike wrote two different sentences for the two
+              sides of Sunday night, which is a better reason than a broken
+              link was.
+              `wb-note-link` is now used by nothing on this page. It is left in
+              the stylesheet rather than swept, because the room is re-walked
+              Sunday and a class deleted in the same hour as the sentence that
+              used it is two changes to unpick if he wants the door back.
+
+              THE THRESHOLD IS UNCHANGED. `ROBOTS_OPEN` is the wing's own switch
+              (src/lib/wing-open.js), derived from the Record and read by the
+              worker at request time, and Sunday night is when it turns. Nothing
+              here counts to 100 — "the first 100" is a promise in his copy, and
+              what happens AT 100 is his own TBD, deliberately not built. */}
           {ROBOTS_OPEN ? (
             <p className="wb-note">
-              The museum is open.<br />
-              A new <Link className="wb-note-link" to="/robots/record">Record</Link> every day for ninety days.
+              Welcome.<br /><br />
+              The first 100 people who sign the guest book<br />
+              will be remembered differently<br />
+              than the ones who come later.
             </p>
           ) : (
             <p className="wb-note">

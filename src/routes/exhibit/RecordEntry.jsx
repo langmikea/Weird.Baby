@@ -365,7 +365,27 @@ export default function RecordEntry({
        that true by construction rather than by the caller's habit. */
   }, [land]);
 
-  const sections = entry.sections || [];
+  /* ═══ [F 2026-08-13] A BALD HEADING NEVER REACHES THE PAGE ═════════════════
+     MIKE'S RULING: "a section whose body is empty after notes are removed is
+     dropped entirely, label included."
+
+     IT IS ENFORCED IN THREE PLACES AND THIS IS THE LAST ONE, WHICH IS THE ONE
+     THAT CANNOT BE ROUTED AROUND. `workbook_to_draft.py` drops the slot when it
+     reads it, `emit-record-entries.mjs` drops it when it writes the tree, and
+     this drops it when it DRAWS — so a section that arrives by any other road
+     (a hand edit, an old draft landed, a future importer nobody has written)
+     still cannot print a heading with nothing under it.
+
+     WHY THE SHAPE EXISTS AT ALL: his notes to Ops are curly braces inside the
+     body, so a section whose only paragraph is a note becomes label-with-no-body
+     the moment the note is acted on and removed. The heading he wrote for it has
+     no reason to be deleted at the same time and no reason to be looked at
+     again.
+     A PARAGRAPH OF WHITESPACE IS NOT A BODY, which is why this tests for a
+     non-empty string rather than for length: an empty cell round-trips through
+     three tools and can arrive as `[""]`. */
+  const sections = (entry.sections || [])
+    .filter(s => (s.body || []).some(p => typeof p === "string" && p.trim() !== ""));
 
   /* ---- WHAT A DOOR DOES -------------------------------------------------
      `held` FIRST AND DELIBERATELY: a door whose target does not exist says so

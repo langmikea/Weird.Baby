@@ -1013,6 +1013,10 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
                and it wins). No behaviour is added here; a class that was already
                on the element does the work the inline style was doing. */
             onClick={() => selectable && !skipped && onSelect(ti)}
+            /* [B 2026-08-13] the second gesture in Mike's rule. The first click
+               of a double has already armed the row, so this only ever falls on
+               an armed one and its whole job is to say "and play it". */
+            onDoubleClick={() => selectable && !skipped && onSelect(ti, true)}
           >
             <span className="tl-num">
               {playing
@@ -3125,7 +3129,9 @@ export default function Exhibit({ artist, open = null }) {
   }, [stopPlayback]);
 
   // ── Track selection ───────────────────────────────────────────────────────
-  function handleTrackSelect(albumIdx, ti) {
+  /* `play` — [B 2026-08-13] the double-click's override; see the ruling at the
+     gate below. Every existing caller omits it and therefore arms first. */
+  function handleTrackSelect(albumIdx, ti, play = false) {
     const track  = SPINE[albumIdx].tracks[ti];
     const selSet = (albumSelectedVis[albumIdx] ?? {})[ti] ?? new Set([0]);
     const vis    = getOrderedVis(track, selSet);
@@ -3208,9 +3214,33 @@ export default function Exhibit({ artist, open = null }) {
        is `.tl-playing`. M-c already made those two different facts — see
        Exhibit.css, where this round separates their left rules so the two are
        legible at a glance now that they are routinely on different rows. */
-    const somethingPlaying = playingTrack !== null;
-    const alreadySelected  = albumActiveTrack[albumIdx] === ti;
-    if (somethingPlaying && !alreadySelected) {
+    /* ═══ [B 2026-08-13] AND THE GATE IS NOW UNCONDITIONAL — MIKE'S OWN V3,
+           GENERALISED BY HIM ════════════════════════════════════════════════
+       MIKE, THIS ROUND: **"first click on an unfocused track focuses only,
+       never plays. Play on a click while the track already has focus, and on
+       double-click."**
+
+       WHAT MOVED IS ONE CONDITION. V3 (2026-08-03, quoted above and also his)
+       armed-then-fired only WHILE SOMETHING WAS PLAYING; from silence, one
+       click played. `somethingPlaying` is gone, so the rule now reads the way
+       he just said it: focus, then play. The `alreadySelected` half is V3's
+       word for word.
+       WHY THE OLD CONDITION WAS THE WEAK HALF: it made the FIRST song of a
+       visit behave unlike every song after it. A visitor learning "one click
+       shows me the row" learned it on song two and had already been surprised
+       by song one.
+       DOUBLE-CLICK IS THE ESCAPE HATCH THE GATE NEEDS. Arm-then-fire costs a
+       press, and a visitor who knows what they want should not pay it; the
+       first click of a double still arms, so the two gestures compose rather
+       than compete.
+       IT IS ENGINE-WIDE, NOT /wb-ONLY, and that is a decision rather than an
+       oversight: V3 is one rule with one implementation, and a museum where a
+       row behaves differently in two wings has no rule at all. /wal, /hr,
+       /robots and /foundation move with it — flagged for Mike, since only the
+       Lobby, /wb and the Foundation are on Sunday's walk. The change can only
+       ever cost a press; it can never start something he did not ask for. */
+    const alreadySelected = albumActiveTrack[albumIdx] === ti;
+    if (!alreadySelected && !play) {
       setAlbumActiveTrack(prev => ({ ...prev, [albumIdx]: ti }));
       setOpenEntry(null);         /* [M5] a newly armed track opens on its index */
       return;
@@ -3803,7 +3833,7 @@ export default function Exhibit({ artist, open = null }) {
                 playingTrackIdx={playingAlbum === activeDisplay ? playingTrack : null}
                 activeTrack={activeTrack ?? entryTrack}
                 selectedVis={selVis}
-                onSelect={ti => handleTrackSelect(activeDisplay, ti)}
+                onSelect={(ti, play) => handleTrackSelect(activeDisplay, ti, play)}
                 onTagClick={(ti, vi) => handleTagClick(activeDisplay, ti, vi)}
               />
               {/* [HR 2026-08-04] THE CONTENTS PLATE IS REMOVED, NOT GATED.

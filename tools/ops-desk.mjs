@@ -91,42 +91,75 @@ const INSTRUMENTS = [
      (`CONTACT_SHEET.html`) whose command is named in no governing document —
      a tool nobody is told to run is how a tool strands, and the cheapest
      moment to prevent that is before it has ever been forgotten. */
+  /* ═══ [G 2026-08-13] PRUNED, AND THE PRUNE IS OF WORDS AND FURNITURE RATHER
+         THAN OF INSTRUMENTS ════════════════════════════════════════════════
+     MIKE: "Prune it. Add the Excel workbook to it."
+
+     WHAT WAS CUT: the card copy, hard. The lead card's `what` ran 66 words and
+     explained how to click a day, what the magnifier does and how the sort
+     works — Doctrine 25 exactly, a briefing above the work, on a page whose
+     whole job is to get him INTO the work. A card's job is to let him pick the
+     right door; everything past that belongs on the page behind it. The masthead
+     and the footer went the same way (see the body at the foot of this file).
+
+     WHAT WAS NOT CUT, AND WHY IT IS HIS CALL RATHER THAN OPS': any instrument.
+     Doctrine 24 says a thing he rules gone leaves his view for good, so removing
+     a card is one-way and must be his word, not Ops' reading of "prune it". Two
+     are the obvious candidates and neither is Ops' to take:
+       · The Record editor — its own card says NOT THE ROAD, and the 2026-08-11
+         note above argues the opposite of deleting it: "a mothballed instrument
+         that vanishes from the desk is one nobody can find when it is wanted
+         again." That was a decision, made once, in writing.
+       · The spec sheet and the egg tracker — neither is week-one work.
+     Raised in the round log; one word each removes any of them. */
   { name: "Week one — the artifacts",
     file: "dictation-20260807/assign.html",
-    what: "Two catalogues against the five days of week one: the PICTURES the wing could show, and the STORY EVENTS a day can announce — the wing opening, a held room being revealed. Click a day, then click things; click again to take one back off. The magnifier opens a manual page big enough to read the type. What is ready sorts first; what needs work is dimmed below and says why.",
+    what: "The pictures and the story events, against the five days. Click a day, then click things.",
     rebuild: "npm run assign",
+    lead: true },
+  /* [G 2026-08-13] MIKE: "Add the Excel workbook to it." It is the FIRST link
+     in Saturday's chain and it was the only part of that chain with no door on
+     this desk — he had to know a path to open the thing he writes in.
+     IT LIVES OUTSIDE `docs/`, which is why `abs` exists. The desk's standing
+     rule is that it never draws a link to a file that is not on disk, so an
+     outside file gets stat'd at its own absolute path and linked as `file://`;
+     a card is red and unlinked if the workbook has been moved or renamed. */
+  { name: "The workbook — where you write",
+    abs: "C:/AI/_night-20260811/RECORD_days-2-to-6.xlsx",
+    what: "Days 2 to 6, one tab each. Type in the white cells. Braces are notes to Ops.",
+    rebuild: "read it back with npm run record:workbook -- <path>",
     lead: true },
   { name: "The Record — MOTHBALLED",
     file: "dictation-20260807/record.html",
-    what: "NOT THE ROAD FOR WEEK ONE. Mike writes the Record in a spreadsheet now — RECORD_days-2-to-6.xlsx, one tab per day — and it is pasted into the tree from there. This page still works and nothing has been deleted; it is simply not where the writing happens.",
+    what: "Not the road for week one. Still works; the writing happens in the workbook.",
     rebuild: "npm run dictation" },
   { name: "The twelve-week table",
     file: "dictation-20260807/arc.html",
-    what: "The whole arc, week by week. Two marks per row — whose sentence it is, and whether there is anything of yours under it.",
+    what: "The whole arc, week by week, and whose sentence each line is.",
     rebuild: "npm run dictation" },
   { name: "The light table",
     file: "dictation-20260807/artifacts.html",
-    what: "Every file the museum still has, as a thumbnail. Click one and it opens full size with everything known about it beside it.",
+    what: "Every file the museum still has, as a thumbnail. Click one to open it full size.",
     rebuild: "npm run dictation" },
   { name: "The egg tracker",
     file: "dictation-20260807/eggs.html",
-    what: "Every egg in the ledger — what it is, whether it is built, and whether anybody can trip it.",
+    what: "Every egg — what it is, whether it is built, whether anybody can trip it.",
     rebuild: "npm run dictation" },
   { name: "The spec sheet",
     file: "dictation-20260807/specsheet.html",
-    what: "163 rows of the period specification, with the contradicted ones printed both ways.",
+    what: "The period specification, with the contradicted rows printed both ways.",
     rebuild: "npm run dictation" },
   { name: "The reference page",
     file: "dictation-20260807/reference.html",
-    what: "Everything that explains the machine — the rails, the transfer classes, the collisions. Read it when you want it, not to get started.",
+    what: "What explains the machine. Read it when you want it, not to get started.",
     rebuild: "npm run dictation" },
   { name: "The contact sheet",
     file: "CONTACT_SHEET.html",
-    what: "Every image in both repos, grouped by folder, with a ✗ on each tile for marking a cull.",
+    what: "Every image in both repos, with a ✗ on each tile for marking a cull.",
     rebuild: "npm run contact-sheet" },
   { name: "The open-actions register",
     file: "OPEN_ACTIONS.html",
-    what: "Every open item across both repos, one place. THE SHORT LIST at the top is what is waiting on you and exactly what each costs.",
+    what: "Everything open, one place. THE SHORT LIST at the top is what is waiting on you.",
     rebuild: "npm run desk",
     source: "OPEN_ACTIONS.md" },
 ];
@@ -391,47 +424,61 @@ Ops instrument &mdash; not part of the museum, and never at a live address.</p>
   oaWrote = true;
 }
 
+/* [G 2026-08-13] AN INSTRUMENT IS EITHER `file` (under docs/) OR `abs` (a real
+   path anywhere on the machine — the workbook). Both are stat'd, because the
+   desk's one rule is that it never links to a file that is not there. */
+const absOf = it => (it.abs ? path.normalize(it.abs) : path.join(DOCS, it.file));
+const hrefOf = it => (it.abs
+  ? "file:///" + it.abs.replace(/\\/g, "/").replace(/^\/+/, "")
+  : it.file);
+const labelOf = it => (it.abs ? it.abs : `docs/${it.file}`);
+
 const cards = INSTRUMENTS.map(it => {
-  const abs = path.join(DOCS, it.file);
+  const abs = absOf(it);
   const there = fs.existsSync(abs);
   const cls = "card" + (it.lead ? " lead" : "") + (there ? "" : " gone");
   const head = there
-    ? `<h3><a href="${esc(it.file)}">${esc(it.name)}</a></h3>`
+    ? `<h3><a href="${esc(hrefOf(it))}">${esc(it.name)}</a></h3>`
     : `<h3>${esc(it.name)}</h3>`;
   const meta = there
     ? (() => {
         const st = fs.statSync(abs);
         return `<div class="meta"><b>${esc(age(st.mtime.getTime()))}</b> &middot; ${esc(stamp(st.mtime))}<br>`
-          + `<code>docs/${esc(it.file)}</code><br>`
+          + `<code>${esc(labelOf(it))}</code><br>`
           + (it.rebuild ? `refresh with <code>${esc(it.rebuild)}</code>` : "authored by hand")
           + (it.source ? ` &middot; source <code>docs/${esc(it.source)}</code>` : "")
           + `</div>`;
       })()
-    : `<div class="meta"><span class="tag n">not on disk</span><br><code>docs/${esc(it.file)}</code><br>`
+    : `<div class="meta"><span class="tag n">not on disk</span><br><code>${esc(labelOf(it))}</code><br>`
       + (it.rebuild ? `run <code>${esc(it.rebuild)}</code> to build it` : "this file is authored and is missing")
       + `</div>`;
   return `<div class="${cls}">${head}<p>${esc(it.what)}</p>${meta}</div>`;
 }).join("\n");
 
-const missing = INSTRUMENTS.filter(it => !fs.existsSync(path.join(DOCS, it.file)));
+const missing = INSTRUMENTS.filter(it => !fs.existsSync(absOf(it)));
 
+/* [G 2026-08-13] THE MASTHEAD AND THE FOOTER ARE PRUNED — Doctrine 25, on the
+   launcher itself. What was above the first card:
+     · "Every instrument, one page. Generated <date> by tools/ops-desk.mjs." —
+       the second half is the watch and not the time (Doctrine 11), and every
+       card already prints its own age, which is the point that note itself
+       makes ("current is a property of the generator behind each page, never of
+       the launcher").
+     · a rebuild-everything command line.
+     · <h2>The instruments</h2>, on a page titled "the Ops desk", above a grid
+       of instruments.
+   What was in the footer: how to re-create the desktop shortcut with a
+   PowerShell one-liner, and a sentence about what this generator writes. Both
+   are about the making of the desk.
+   THE ONE LINE KEPT IS THE ONE THAT IS FOR HIM: how to refresh the page he is
+   looking at. */
 const body = `<div class="wrap">
 <h1>Weird.Baby &mdash; the Ops desk</h1>
-<p class="sub">Every instrument, one page. Generated ${esc(stamp(new Date()))} by <code>tools/ops-desk.mjs</code>.</p>
-
-<p class="sub" style="margin-bottom:20px">Rebuild everything:
-<code>npm run dictation &amp;&amp; npm run contact-sheet &amp;&amp; npm run desk</code></p>
-
-<h2>The instruments</h2>
 <div class="cards">
 ${cards}
 </div>
 
-<p class="foot">
-Desktop shortcut: <code>Weird.Baby Ops</code> &rarr; <code>docs/OPS_DESK.html</code>.
-Re-create it any time with <code>powershell -ExecutionPolicy Bypass -File tools\\ops-desk-shortcut.ps1</code>.<br>
-This page is regenerated by <code>npm run desk</code>. It reads and never writes anything but itself and <code>docs/OPEN_ACTIONS.html</code>.
-</p>
+<p class="foot">Refresh this page: <code>npm run desk</code></p>
 </div>`;
 
 fs.writeFileSync(path.join(DOCS, "OPS_DESK.html"),

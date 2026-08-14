@@ -62,11 +62,31 @@ SECTION_ROWS = [(9, 10), (12, 13), (15, 16), (18, 19), (21, 22), (24, 25)]
 
 # what column A must say on each row we read. The check that stops a shifted
 # workbook from landing the wrong cell into the wrong field.
+#
+# [F 2026-08-13] AND IT NOW COVERS THE TWELVE SECTION ROWS, WHICH WERE THE
+# UNGUARDED FIFTEEN-SIXTEENTHS OF THE SHEET.
+# THE HOLE, STATED EXACTLY: the guard read rows 4, 5 and 6 only. Everything a
+# section is made of lives at rows 9-25, so a workbook whose shape moved BELOW
+# row 8 — one inserted row above THE SECTIONS, a slot added, a day's tab rebuilt
+# by hand — passed the guard and then read every label and every paragraph one
+# row out. Section 1's label becomes section 1's text, section 2's text becomes
+# section 3's label, and NOTHING SAYS SO: the draft is well-formed, the emitter
+# is happy, the round-trip proof compares the mangled draft against itself and
+# reports his characters unchanged. It is the quietest possible failure on the
+# one file he types into, and it was three lines from being impossible.
+# EACH ROW IS CHECKED FOR SEVERAL SUBSTRINGS RATHER THAN ONE WHOLE STRING,
+# because column A reads "Section 3 — LABEL" with an EM DASH: matching the
+# literal would make this guard fail the day somebody retypes the sheet with a
+# hyphen, which is a guard that cries wolf and then gets deleted. "Section 3"
+# and "LABEL" together cannot land on the wrong row.
 EXPECT = {
-    ROW_HEADLINE: "THE HEADLINE",
-    ROW_DECK_1: "THE DECK",
-    ROW_DECK_2: "THE DECK",
+    ROW_HEADLINE: ["THE HEADLINE"],
+    ROW_DECK_1: ["THE DECK"],
+    ROW_DECK_2: ["THE DECK"],
 }
+for _i, (_label_row, _text_row) in enumerate(SECTION_ROWS, start=1):
+    EXPECT[_label_row] = [f"Section {_i}", "LABEL"]
+    EXPECT[_text_row] = [f"Section {_i}", "TEXT"]
 
 TITLE_MAX = 62
 LINE_MAX = 130
@@ -87,12 +107,14 @@ def paragraphs(text):
 
 def read_sheet(ws, name):
     faults = []
-    for row, want in EXPECT.items():
+    for row, wants in sorted(EXPECT.items()):
         got = cell(ws, row, 1)
-        if want not in got:
+        missing = [w for w in wants if w not in got]
+        if missing:
             faults.append(
                 f"row {row} of '{name}' says {got!r}, expected something containing "
-                f"{want!r}. The workbook's shape has moved; this reader will not guess.")
+                f"{', '.join(repr(w) for w in missing)}. "
+                f"The workbook's shape has moved; this reader will not guess.")
     if faults:
         return None, faults
 
@@ -110,7 +132,21 @@ def read_sheet(ws, name):
     for label_row, text_row in SECTION_ROWS:
         label = cell(ws, label_row).strip()
         body = paragraphs(cell(ws, text_row))
-        if not label and not body:
+        # [F 2026-08-13] MIKE'S RULING: "a section whose body is empty after
+        # notes are removed is dropped entirely, label included. A bald heading
+        # never reaches the page."
+        # THE TEST IS THE BODY ALONE. This line used to read `if not label and
+        # not body`, so a slot with a LABEL and an empty TEXT cell survived and
+        # landed a heading with nothing under it. That is not a hypothetical
+        # shape: his notes to Ops live in curly braces, so a section whose only
+        # paragraph was a note becomes exactly this the moment the note is acted
+        # on and deleted — the heading he wrote for it stays behind, in a
+        # workbook cell he has no reason to look at again.
+        # A LABEL WITH NO BODY IS DROPPED SILENTLY AND ON PURPOSE. It is not a
+        # fault: he is allowed to leave a heading in a slot he did not fill,
+        # and refusing the workbook over it would stop Saturday for a cell that
+        # means "not this one".
+        if not body:
             continue
         sections.append({"label": label or None, "body": body})
 

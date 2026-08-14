@@ -188,7 +188,14 @@ function generate(e) {
   if (e.still) out.push(`              still: placed(${q(e.still)}),`);
   if (e.stillCaption) out.push(`              stillCaption: ${wrap(e.stillCaption, 20)},`);
   out.push(`              sections: [`);
-  for (const s of e.sections || []) {
+  /* [F 2026-08-13] MIKE: "a section whose body is empty after notes are removed
+     is dropped entirely, label included." The second of the three places this
+     is enforced — the reader drops it, this refuses to WRITE it into the tree,
+     and `RecordEntry.jsx` refuses to draw one that arrives any other way. A
+     paragraph of whitespace is not a body; an empty cell can round-trip through
+     three tools and arrive as `[""]`. */
+  for (const s of (e.sections || [])
+         .filter(s => (s.body || []).some(p => typeof p === "string" && p.trim() !== ""))) {
     out.push(`                { ${s.label ? `label: ${q(s.label)},` : "label: null,"}`);
     out.push(`                  body: [`);
     for (const p of s.body || []) out.push(`                    ${wrap(p, 20)},`);

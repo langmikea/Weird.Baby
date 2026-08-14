@@ -30,7 +30,13 @@ import { launched } from "../../lib/placement.js";
    of two copies was the real one — and `KEEPER` still stands in house-copy.js
    with /booth reading it. */
 
-const REC_LABEL = "Recording — 2026-06";
+/* [B 2026-08-13] MIKE: "Track chip `RECORDING — 2026-06` -> `first pass`,
+   matching the approved blurb." The chip and the record's own description now
+   say the same thing in the same words — the blurb on `About this record`
+   opens "The first pass." — where before the chip said WHEN the file was made
+   and the blurb said WHAT it is, which is two facts and one of them is on the
+   sleeve already. `.tl-rend` uppercases, so the row reads FIRST PASS. */
+const REC_LABEL = "first pass";
 
 /* ═══ [P9 2026-08-05] ABOUT THE ARTIST, FIRST IN THE WING ════════════════════
    MIKE: "WEIRD.BABY MUSIC: add an ABOUT THE ARTIST album, FIRST in the wing.
@@ -72,7 +78,24 @@ const REC_LABEL = "Recording — 2026-06";
 
    Same limit as the others: hidden from the page, strings still in the chunk.
    Open row `CH5-b`. */
-const HIDDEN_AT_LAUNCH = new Set(["about"]);
+/* ═══ [B 2026-08-13] AND IT IS UN-HIDDEN, ON MIKE'S OWN LATER RULING ═════════
+   HIS WORDS, THIS ROUND: **"This is a restructure. The page currently holds one
+   album; it holds two… Carousel: two covers now, so `<` `>` go live."** The
+   page "currently holds one album" is the LAUNCH view — CH5 above is the
+   mechanism that made it so, twelve days ago and also his — so the ruling that
+   the wing shows two covers is the ruling that this hold comes off.
+
+   IT IS QUOTED WITH ITS DATE BECAUSE IT WAS HIS. CH5 (2026-08-12) reads "MIKE
+   RULED IT HIDDEN and nothing hid it", and the reason it gives is that the
+   album held exactly one track — "a door with an empty room behind it". That
+   reason no longer holds: the album has a second track this round and a third
+   named for it, which is what changed rather than anybody's mind.
+
+   THE SET IS EMPTIED, NOT DELETED. `launched()` and the filter below stay
+   exactly as CH5 built them, so re-holding an album on this wing is one id in
+   these brackets and no code. `CH5-b` (strings still in the chunk) closes with
+   the hold that raised it. */
+const HIDDEN_AT_LAUNCH = new Set([]);
 
 const spine = [
   {
@@ -85,6 +108,14 @@ const spine = [
        the only album in the museum with no sleeve at all — so it now carries one
        built by `tools/make_house_covers.py` on that template: same square, same
        paper, same border, same Georgia setting, same rule, same strapline. */
+    /* [B 2026-08-13] MIKE ASKED FOR "gray WB album art from the Robots repo —
+       copy it here and bank it. Never write the Robots repo." IT IS ALREADY
+       HERE AND ALREADY BANKED — this file, built on the robots template by
+       `tools/make_house_covers.py` at A3 (2026-08-06) and committed to
+       `public/images/wb/`. Checked rather than assumed before doing it twice:
+       the robots repository holds no album art at all — no cover PNG, no album
+       directory, no logo file — so this sleeve is the only gray WB album art
+       in either tree, and copying would have meant copying it over itself. */
     art: "/images/wb/about-cover.png",
     accent: null,
     tracks: [
@@ -93,7 +124,9 @@ const spine = [
         /* [C1 2026-08-06] sentence case, with every other category row in the
            museum — see the note at /wal's `upToTrack`. The FACE title (all
            caps) and the album's own name are untouched. */
-        title: "About the artist",
+        /* [B 2026-08-13] "Its tracks are the sections: About, FAQ." The row is
+           `About` now — the album's own name already says whose. */
+        title: "About",
         videos: [],
         /* ═══ [W1 2026-08-06] BURNED DOWN AND REBUILT AS CATEGORIES ══════════
            MIKE: "ABOUT THE ARTIST - the current viewer content is useless. BURN
@@ -152,18 +185,74 @@ const spine = [
              the room. The one row that could be filled from what this
              repository actually knows is the one that stays. */
           profile: [
+            /* [B 2026-08-13] the release's name follows the album's — see the
+               retitle below. "The Making of BoWB V1" was the last of four
+               places that phrase appeared and it is gone from all four. */
             { label: "What the museum holds",
               body: "Six recordings, made in June 2026, and one release: The " +
-                    "Making of BoWB V1. They play in this room." },
+                    "Best of Weird.Baby Vol. 1. They play in this room." },
           ],
           footer: "WEIRD.BABY · ABOUT THE ARTIST",
         },
       },
+      /* ═══ [B 2026-08-13] `About this record`, MOVED HERE FROM Vol. 1 ════════
+         MIKE: "`01 About this record` leaves this album entirely — it becomes a
+         track on Album B." Carried across unchanged except for the release's
+         name, which moved with the album. CH6's paragraph on `vol1` explains why
+         this face exists and why the sentence is a face rather than a track
+         chip; that reasoning is unchanged by which album it sits on.
+         IT SITS ABOVE THE FAQ AND NOT BELOW IT, because every FAQ in this
+         building is the last row of its album — /wal, /foundation and /robots
+         all close on one. */
+      {
+        id: "about-record",
+        title: "About this record",
+        videos: [],
+        face: {
+          kind: "text",
+          title: "About this record",
+          subtitle: "THE BEST OF WEIRD.BABY VOL. 1",
+          profile: [
+            { label: "What these recordings are",
+              body: "The first pass. Rough, unrefined — and the version that " +
+                    "went in as the original copyright submission." },
+          ],
+          footer: "WEIRD.BABY · THE BEST OF WEIRD.BABY VOL. 1",
+        },
+      },
+      /* ═══ [B 2026-08-13] THE FAQ ROW IS NOT BUILT, AND THAT IS THE HOUSE'S
+             OWN RULE RATHER THAN A GAP IN THE WORK ════════════════════════════
+         MIKE: "Its tracks are the sections: About, FAQ. Photos and more later."
+         The template is `faqFace()` in src/data/faq-face.js and it is one data
+         block away — /wal and /foundation both drive it from a plain array of
+         questions, and this album would too.
+         WHAT IS MISSING IS THE QUESTIONS. Nobody has told Ops what this wing's
+         FAQ says, and the museum's own answer to that is fifteen lines up this
+         file: an empty container at a live address is what the NO-COMING-SOON
+         credo kills, and Doctrine 12 forbids the alternative — a plausible
+         question-and-answer about this artist would read true and be invented.
+         The house's own FAQ is at /booth and is NOT reused here: W1 removed the
+         keeper's answer from this very card for being an answer about the HOUSE
+         printed under an ARTIST's name, and a booth FAQ copied onto /wb is that
+         same mistake with more rows.
+         So the row lands the day there are questions, and it costs a data block
+         and no code. Raised for Mike in the round log. */
     ],
   },
   {
     id: "vol1",
-    title: "The Making of BoWB V1", // display title per Mike 2026-07-06 (registration title: Best of Weird.Baby — Vol 1)
+    /* [B 2026-08-13] MIKE: "Page title `THE MAKING OF BOWB V1` -> `The Best of
+       Weird.Baby Vol. 1`. No 'making of' anywhere on the site."
+       IT IS HIS 2026-07-06 DISPLAY TITLE BEING RULED OUT BY HIM, and the line
+       it replaces said so: "display title per Mike 2026-07-06 (registration
+       title: Best of Weird.Baby — Vol 1)". The display name and the
+       registration name were two names for one record and the registration one
+       has won. Swept sitewide rather than here: the phrase appeared four times,
+       all four in this file — this title, the artist card's holdings line, and
+       the moved track's subtitle and footer. `grep -ri "making of"` over `src/`
+       now returns only the three comments that record the change, and not one
+       of them is a string. */
+    title: "The Best of Weird.Baby Vol. 1",
     year: 2026,
     /* [A3 2026-08-06] THE COMPOSED COVER IS REPLACED, AND IT IS THE ONE THIS
        INSTRUCTION IS MOST ABOUT. W2: "the wing's albums are LESS CONSISTENT in
@@ -198,23 +287,18 @@ const spine = [
          The album had no face before, so this adds one menu row and takes
          nothing away. It is on `vol1`, which is the album that SURVIVES at
          launch: the `about` album is hidden (CH5), so a provenance line parked
-         there would have been invisible on the day it matters. */
-      {
-        id: "about-record",
-        title: "About this record",
-        videos: [],
-        face: {
-          kind: "text",
-          title: "About this record",
-          subtitle: "THE MAKING OF BoWB V1",
-          profile: [
-            { label: "What these recordings are",
-              body: "The first pass. Rough, unrefined — and the version that " +
-                    "went in as the original copyright submission." },
-          ],
-          footer: "WEIRD.BABY · THE MAKING OF BoWB V1",
-        },
-      },
+         there would have been invisible on the day it matters.
+
+         ═══ [B 2026-08-13] AND IT HAS MOVED, WHICH REVERSES THE LAST SENTENCE
+         OF THAT PARAGRAPH RATHER THAN CONTRADICTING IT ═══════════════════════
+         MIKE: **"`01 About this record` leaves this album entirely — it becomes
+         a track on Album B."** The track is now the second row of `About the
+         Artist`, above; the reason it was parked here — that the other album was
+         hidden at launch — went with the hold, in the same instruction.
+         WHAT WENT WITH IT: this album's ONLY face. `The Best of Weird.Baby
+         Vol. 1` is six songs and nothing else now, which is what an album of
+         recordings is, and the chip on every one of them says `first pass` in
+         the blurb's own words. */
       {
         id: "coconuts",
         title: "Coconuts",
@@ -314,5 +398,28 @@ export const weirdBaby = {
      THE MUSEUM NOW HAS NO PAGER ANYWHERE. `.stg-*` and the Stage component are
      mounted by nothing in any wing. */
   faceFlow: "flat",
+  /* ═══ [B 2026-08-13] THE BLACK BAR IS GONE AND THE CONTROLS GO UP TOP ══════
+     MIKE: **"Small controls above the viewer, WAL-style. Delete the black
+     player bar."**
+
+     IT IS ONE LINE BECAUSE THE MECHANISM WAS ALREADY BUILT AND ALREADY WAL'S.
+     `transport: "banner"` (M-e, 2026-08-02) stows the transport into
+     `.ex-album-banner` — the half-empty artist-name bar directly above the
+     viewer — and the same flag stands the fixed `.pb` down, because rendering
+     both would be two transports disagreeing about one player. WAL has run on
+     it since the day it was written; that note names /wb as one of the three
+     wings that "declare nothing and are untouched", and this is /wb declaring.
+
+     `playerBar: false` IS **NOT** WHAT THIS WANTS, and the difference matters:
+     that flag is /robots' and /foundation's answer — a wing with nothing to
+     play gets NO transport at all. This wing has six songs. Deleting the bar
+     without moving the controls would leave the room unable to pause itself.
+
+     THE AUDIO PATH IS ALREADY WIRED. The banner's callbacks are handed
+     `isAudioSrc ? audio.* : yt.*`, the same fork the fixed bar used, so a wing
+     of mp3s drives it exactly as WAL's YouTube does.
+     WHAT IS NOT IN THE BANNER: skip back / skip forward. That is WAL's shape,
+     which is what he asked for by name — stop, play/pause, volume. */
+  transport: "banner",
   // exhibitFlow omitted — see header note
 };

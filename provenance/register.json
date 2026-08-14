@@ -15442,6 +15442,160 @@
    "l": 45,
    "t": "Approved by Mike on {} — development only",
    "s": "Ops. The approval mark's tooltip. It is DEVELOPMENT ONLY and cannot reach a visitor: __WB_APPROVALS__ is the literal null at LAUNCH and the component folds away — proved against a real launch build by npm run approval:proof. Declared rather than excluded because the sweep cannot know a string is unreachable, and a hole cut in the gate for one file is a hole."
+  },
+  "38759bbfb38262dc": {
+   "f": "src/data/artists/foundation.js",
+   "l": 826,
+   "t": "YOUR DONATIONS",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
+  },
+  "48fc0089f37ec472": {
+   "f": "src/data/artists/foundation.js",
+   "l": 828,
+   "t": "100% of every donation goes directly to Coalition for the Homeless.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
+  },
+  "8da4d160ba8b1b88": {
+   "f": "src/data/artists/foundation.js",
+   "l": 831,
+   "t": "MERCH PROFITS / MUSIC ROYALTIES",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
+  },
+  "680ed449b8277620": {
+   "f": "src/data/artists/foundation.js",
+   "l": 833,
+   "t": "100% of Weird.Baby profits and royalties goes directly to Coalition for the Homeless.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
+  },
+  "c8ea7ea8c422b4c2": {
+   "f": "src/data/artists/foundation.js",
+   "l": 837,
+   "t": "WHO PAYS FOR ALL THE STUFF?!?!",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
+  },
+  "d014f63a7416737b": {
+   "f": "src/data/artists/foundation.js",
+   "l": 839,
+   "t": "Mike and Mo Lang pay all the bills (Internet, robot parts, pens and pencils, etc.)",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
+  },
+  "dbedd3842617f601": {
+   "f": "src/data/artists/foundation.js",
+   "l": 843,
+   "t": "FOR HOW LONG?",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
+  },
+  "f1a4a36fb9978a15": {
+   "f": "src/data/artists/foundation.js",
+   "l": 845,
+   "t": "We intend to keep it that way forever; time will tell.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
+  },
+  "366f1cbe83be08da": {
+   "f": "src/data/artists/foundation.js",
+   "l": 848,
+   "t": "CAN PEOPLE CONTRIBUTE IN WAYS OTHER THAN CASH?",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
+  },
+  "7f76a2b7d3175718": {
+   "f": "src/data/artists/foundation.js",
+   "l": 850,
+   "t": "Yes. We will speak up when we have a need to fill.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
+  },
+  "c11379d18fccffc3": {
+   "f": "src/data/artists/foundation.js",
+   "l": 859,
+   "t": "Weird.Baby is dedicated to preventing the soul-sucker that is Homelessness.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
+  },
+  "3461c669c5dfbb29": {
+   "f": "src/data/artists/foundation.js",
+   "l": 860,
+   "t": "What's your purpose in life? Wanna pitch in?",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
+  },
+  "dfc7692466a0e5f7": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 39,
+   "t": "first pass",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; section B names this string."
+  },
+  "a759a59de4c8d168": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 129,
+   "t": "About",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; section B names this string."
+  },
+  "4f39fa506d08dd8e": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 192,
+   "t": "Six recordings, made in June 2026, and one release: The Best of Weird.Baby Vol. 1. They play in this room.",
+   "c": "DERIVED",
+   "s": "counted off the /wb spine in the same file — one release, six tracks, each carrying a June 2026 recording. The release's name follows the album's retitle; see docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §2."
+  },
+  "baea2076e11256b4": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 214,
+   "t": "THE BEST OF WEIRD.BABY VOL. 1",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; section B names this string."
+  },
+  "2bb233e5759e41f2": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 220,
+   "t": "WEIRD.BABY · THE BEST OF WEIRD.BABY VOL. 1",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; section B names this string."
+  },
+  "16258a25c0fff31f": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 255,
+   "t": "The Best of Weird.Baby Vol. 1",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; section B names this string."
+  },
+  "1b830f0b9a68f1d5": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 423,
+   "t": "banner",
+   "c": "HOUSE",
+   "s": "not copy — the value of `transport` on the /wb exhibit config, the flag that stows the player into the album banner (Exhibit.jsx, `artist.transport === \"banner\"`). Nothing renders it."
+  },
+  "49ceec4dac35457f": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 397,
+   "t": "{}px",
+   "c": "HOUSE",
+   "s": "not copy — a CSS length template written into a custom property by the guest book's measurement effect. Nothing renders it."
+  },
+  "fdf5ccab2c91803e": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 895,
+   "t": "Welcome.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full: \"LAUNCH copy swaps Sunday night: 'Welcome. The first 100 people who sign the guest book will be remembered differently than the ones who come later.'\""
+  },
+  "c4e4f58bde492092": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 896,
+   "t": "The first 100 people who sign the guest book",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full: \"LAUNCH copy swaps Sunday night: 'Welcome. The first 100 people who sign the guest book will be remembered differently than the ones who come later.'\""
   }
  }
 }

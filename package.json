@@ -54,6 +54,7 @@
     "shorts:render": "node tools/shorts-compile.mjs",
     "shorts:flashbang": "node tools/shorts-compile.mjs --recipe docs/shorts/flashbang.json --frames --verify",
     "shorts:verify": "node tools/shorts-verify.mjs",
+    "record:workbook": "python tools/dictation/workbook_to_draft.py",
     "record:proof": "node tools/dictation/record-land-proof.mjs",
     "record:declare": "node tools/dictation/declare-record-strings.mjs",
     "covers:foundation": "python tools/make_foundation_covers.py",
