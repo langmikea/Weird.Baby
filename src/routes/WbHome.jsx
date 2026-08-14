@@ -277,7 +277,17 @@ function formatDate(iso) {
 function GuestRow({ e, n }) {
   return (
     <div className="wb-entry">
-      <span className="wb-entry-num">{n}</span>
+      {/* [W 2026-08-14] "Guest book numbers to two digits, slid left into the
+          whitespace." Two digits is `01`, not `1` — a column of 1,2,3 beside
+          01,02,03 is the same column with a ragged left edge, and the book is
+          going to run past nine within the week. Padded here rather than in
+          CSS because it is the STRING that is two digits; the sliding-left half
+          is the row's own left padding, in WbHome.css. Past 99 this prints
+          three characters and the column is 2ch, so the hundredth signature
+          borrows one character of the 12px gap beside it — measured, invisible,
+          and the alternative is a third column of air on every row for two
+          years. */}
+      <span className="wb-entry-num">{String(n).padStart(2, "0")}</span>
       <span className="wb-entry-name">{e.name}</span>
       <span className="wb-entry-note">{e.note}</span>
       <span className="wb-entry-date">{formatDate(e.signed_at)}</span>
@@ -385,8 +395,31 @@ function useRowHeight(deps) {
          rows' grid parent in the stepped scroller (the loop wraps them), so a
          subgrid here would work in the plain list and quietly stop working in
          the one Mike is looking at. */
+      /* ═══ [W 2026-08-14] AND THE NUMBER IT READS IS `min-content`, WHICH IS
+             MIKE'S SOLUTION AND IS BETTER THAN THE ONE IT REPLACES ══════════
+         MIKE: "name column sized to the longest contiguous run of letters, not
+         the longest full name, then wrap. Mike's solution, and it makes
+         wrapping automatic."
+
+         C's version released the column to `auto` and read the widest WHOLE
+         name — `Larry Leibensperger`, 131px — and spent all of it on every row
+         of a book whose other five names are half that. His rule spends only
+         what cannot be avoided: the column is as wide as the longest
+         UNBREAKABLE piece, and anything longer wraps.
+
+         `min-content` IS THAT RULE, COMPUTED BY THE THING THAT ACTUALLY BREAKS
+         LINES. Releasing the column to `min-content` and reading a name back
+         gives the width of its longest unbreakable run, because that is what
+         min-content means. Tokenising the string here with a regex would be a
+         second opinion about where text may break — and it would be wrong about
+         `Weird.Baby`, hyphens, and every non-Latin script the book will
+         eventually meet.
+         IT ONLY WORKS BECAUSE THE NAME MAY WRAP. `.wb-entry-name` loses
+         `white-space:nowrap` in the stylesheet in the same change; with nowrap
+         still on, min-content is the whole name again and this reads exactly
+         what `auto` read. The two halves are one change. */
       el.style.setProperty("--gb-row", "auto");
-      el.style.setProperty("--gb-name", "auto");
+      el.style.setProperty("--gb-name", "min-content");
       let widest = 0;
       for (const nm of el.querySelectorAll(".wb-entry-name")) {
         widest = Math.max(widest, nm.getBoundingClientRect().width);

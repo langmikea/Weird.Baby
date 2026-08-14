@@ -1030,10 +1030,27 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
                 the type text is, so the popup anchors there — not the title.
                 It ALWAYS drops, even with one option — a type that sometimes
                 does nothing is disorienting (Mike). */}
+            {/* ═══ [M 2026-08-14] AND THE ARROW IS HIDDEN ON A SINGLE-VERSION
+                    ROW, WHICH REVERSES THE SENTENCE ABOVE — HIS RULING, BOTH
+                    TIMES ═══════════════════════════════════════════════════
+                MIKE: "the `▾` after track names: hidden unless a track has more
+                than one version. Keep the mechanism."
+                THE 2026-07-06 READING WAS THAT A CONTROL WHICH SOMETIMES
+                DISAPPEARS IS DISORIENTING. What that argument missed is the
+                other half of the same complaint: an arrow that never
+                disappears promises a choice on every row, and on /wb every one
+                of the six songs has exactly one version, so the promise is
+                false six times a page.
+                "KEEP THE MECHANISM" IS DOING WORK. The `<select>` stays in the
+                DOM on every row — this is one attribute and one CSS rule, so a
+                track that gains a second version gets its arrow back with no
+                code change and nothing to remember. What is hidden is the
+                affordance, not the machine. */}
             {hasVids ? (
               <span className="tl-selwrap">
                 <b className="tl-tt">{track.title}</b>
-                <span className="tl-typewrap" onClick={e => e.stopPropagation()}>
+                <span className="tl-typewrap" onClick={e => e.stopPropagation()}
+                      data-single={track.videos.length < 2 ? "1" : undefined}>
                   <select className="tl-typesel" value={[...selSet][0] ?? 0}
                     onClick={e => e.stopPropagation()}
                     onChange={e => { e.stopPropagation(); onTagClick(ti, Number(e.target.value)); }}>
@@ -2210,11 +2227,33 @@ function FaqEntries({ entries, closing, state }) {
             {en.lines?.map((para, pi) => <p key={pi}>{para}</p>)}
             {/* the marked door with no address — F6's shape, unchanged: a name
                 and a state, and deliberately no <a> to a URL nobody supplied. */}
-            {en.link && (
-              <span className="vp-fe-link" data-state={state(en.link)}>
-                <span className="vp-fe-link-text">{en.link.text}</span>
-                <span className="vp-fe-link-state">{state(en.link)}</span>
-              </span>
+            {/* ═══ [M 2026-08-14] A DOOR MAY NOW CARRY AN ADDRESS, AND F6's
+                    RULE IS BEING HONOURED RATHER THAN BROKEN ════════════════
+                F6's rule reads: "a door with no address supplied is not made
+                into an `<a>`." It is a rule about the ABSENT case and it has
+                never had a positive case to answer, because until this round no
+                door in this building had a real address. Mike supplied one:
+                "Foundation — outbound link to coalitionforthehomeless.org/
+                donate."
+                A DOOR WITH AN ADDRESS TAKES NO STATE STAMP. `state()` resolves
+                through the reveal ledger and prints NOT BUILT for anything that
+                is not a LIVE row, so a real anchor routed through it would sit
+                under the words NOT BUILT while working perfectly. Having an
+                address IS the state.
+                IT LEAVES IN A NEW TAB WITH `noopener noreferrer`, which is
+                WalExhibitFlow's own reasoning applied one floor down: "the
+                exhibit is a pointer at someone else's home, and it should not
+                replace itself with theirs, nor hand them a referrer for the
+                privilege." */}
+            {en.link && (en.link.href
+              ? <a className="vp-fe-link vp-fe-link-out" href={en.link.href}
+                   target="_blank" rel="noopener noreferrer">
+                  <span className="vp-fe-link-text">{en.link.text}</span>
+                </a>
+              : <span className="vp-fe-link" data-state={state(en.link)}>
+                  <span className="vp-fe-link-text">{en.link.text}</span>
+                  <span className="vp-fe-link-state">{state(en.link)}</span>
+                </span>
             )}
             {en.note && <p className="vp-faq-note">{en.note}</p>}
           </div>

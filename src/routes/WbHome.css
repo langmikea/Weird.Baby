@@ -255,8 +255,12 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
    WbHome.jsx for why a per-row `auto` staggered the notes across 110px and why
    this is not subgrid. It falls back to `auto`, which is exactly the old
    behaviour, so a book that fails to measure looks like it always did. */
-.wb-entry { display: grid; column-gap: 12px; height: var(--gb-row); padding: 5px 12px 0; border-bottom: 1px solid var(--wb-ink-soft); scroll-snap-align: start; animation: rise 0.4s ease;
-  grid-template-columns: 3ch var(--gb-name, auto) minmax(0, 1fr) auto; grid-template-rows: auto auto; align-items: start; }
+/* [W 2026-08-14] "slid left into the whitespace": the row's LEFT padding drops
+   12px -> 4px so the numbers sit against the card's own edge, and the 8px comes
+   back to the note rather than to a margin. The number's track is 2ch now
+   because the string is padded to two digits — see `GuestRow`. */
+.wb-entry { display: grid; column-gap: 12px; height: var(--gb-row); padding: 5px 12px 0 4px; border-bottom: 1px solid var(--wb-ink-soft); scroll-snap-align: start; animation: rise 0.4s ease;
+  grid-template-columns: 2ch var(--gb-name, auto) minmax(0, 1fr) auto; grid-template-rows: auto auto; align-items: start; }
 .wb-entry:last-child { border-bottom: 0; }
 .wb-entry:hover { background: #f2efe6; }
 /* THE NUMBER. A fixed `3ch` right-aligned rather than a measured column: it
@@ -264,13 +268,49 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
    larger problem than this rule. Set in the date's monospace and its mute, so
    it reads as the room's own bookkeeping and not as part of anybody's name. */
 .wb-entry-num { grid-column: 1; grid-row: 1; font-family: 'Courier Prime', monospace; font-size: 0.62rem; color: var(--wb-gold-mute); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.wb-entry-name { grid-column: 2; grid-row: 1; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.02em; color: var(--wb-gold); white-space: nowrap; }
+/* [W 2026-08-14] `white-space: nowrap` IS GONE, AND IT IS THE OTHER HALF OF THE
+   `min-content` MEASUREMENT in WbHome.jsx. Mike's rule is that the column is
+   the longest unbreakable RUN and longer names wrap; nowrap makes every name
+   one unbreakable run, so the two cannot both be true. With it off, `Larry
+   Leibensperger` takes two lines in a column sized for `Leibensperger` and the
+   row-height measurement grows the rows to match, which is the "automatic" in
+   his own description of it. */
+.wb-entry-name { grid-column: 2; grid-row: 1; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.02em; color: var(--wb-gold); overflow-wrap: break-word; }
 /* NO `text-overflow`, NO `nowrap`, AND THAT IS THE MECHANISM RATHER THAN AN
    OMISSION — see the note at `GuestRow`. The render cannot clip, so a note that
    is somehow too long OVERFLOWS visibly instead of lying about its own length,
    and `NOTE_MAX` is what stops one existing. */
 .wb-entry-note { grid-column: 3; grid-row: 1 / span 2; font-family: 'Courier Prime', monospace; font-style: italic; font-size: 0.72rem; line-height: 1.35; color: #6f6b62; min-width: 0; overflow-wrap: anywhere; }
 .wb-entry-date { grid-column: 4; grid-row: 1; font-family: 'Courier Prime', monospace; font-size: 0.62rem; color: var(--wb-gold-mute); white-space: nowrap; }
+
+/* ═══ [W 2026-08-14] THE DATE COLLAPSES BEFORE THE NOTE ══════════════════════
+   MIKE: "on resize, the date collapses before the note. The note is the
+   content."
+
+   WHY IT WAS THE OTHER WAY ROUND. The note's track is `minmax(0, 1fr)` and the
+   date's is `auto` with `white-space:nowrap`, so as the column narrows the date
+   keeps every pixel it has and the note pays for all of it. Measured on the
+   lobby, note width and how many Courier characters fit on a line:
+
+       1400px  402px  ~58 chars        860px  132px  ~19 chars
+       1100px  252px  ~36 chars        800px  102px  ~14 chars
+        950px  177px  ~25 chars
+
+   A fourteen-character measure is not a note, it is a column of syllables, and
+   the date beside it was costing ~77px including its gap the whole way down.
+
+   THE BAND IS 681-1000px AND BOTH ENDS ARE REASONED. Below 681 the frame is
+   already stacked and the note has the whole width to itself, so the date costs
+   it nothing and comes back. Above 1000 the note still clears ~28 characters
+   with the date present, which is a line. Inside the band the date goes and the
+   note takes its 77px — at 950px that is 25 characters becoming 36.
+   IT IS `display:none` RATHER THAN A NARROWER DATE: there is no shorter honest
+   date, and a truncated one would be the lying-render this file's own notes
+   spend three paragraphs refusing. */
+@media (max-width: 1000px) and (min-width: 681px) {
+  .wb-entry { grid-template-columns: 2ch var(--gb-name, auto) minmax(0, 1fr); }
+  .wb-entry-date { display: none; }
+}
 
 /* ── [M23b 2026-08-04] THE GUEST BOOK, STEPPED ──────────────────────────────
    The JSX note above `SCROLL_MIN` carries the ruling and the arithmetic; this

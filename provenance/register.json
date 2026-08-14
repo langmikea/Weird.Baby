@@ -15596,6 +15596,55 @@
    "t": "The first 100 people who sign the guest book",
    "c": "MIKE",
    "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full: \"LAUNCH copy swaps Sunday night: 'Welcome. The first 100 people who sign the guest book will be remembered differently than the ones who come later.'\""
+  },
+  "4a51afdabc3b22ba": {
+   "f": "src/data/artists/foundation.js",
+   "l": 847,
+   "t": "Give to Coalition for the Homeless",
+   "c": "HOUSE",
+   "s": "the door's own name, written by Ops in the house register's voice. The ADDRESS is Mike's: \"Foundation — outbound link to coalitionforthehomeless.org/donate\", docs/MUSEUM_FRIDAY_LOG-20260814.md §0 — his Friday-morning packet, quoted in full."
+  },
+  "6370f2b104291b97": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 253,
+   "t": "FAQ",
+   "c": "HOUSE",
+   "s": "the standard FAQ row label, the same literal every wing's FAQ track carries. Mike named the row: \"track 2 -> FAQ\", docs/MUSEUM_FRIDAY_LOG-20260814.md §0 — his Friday-morning packet, quoted in full."
+  },
+  "ff825ce35a00597e": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 256,
+   "t": "Who is Weird.Baby?",
+   "c": "MIKE",
+   "s": "his seed question, verbatim: \"FAQ from the standard template, seeded with Who is Weird.Baby? and How to contact?\", docs/MUSEUM_FRIDAY_LOG-20260814.md §0 — his Friday-morning packet, quoted in full."
+  },
+  "f4b5ab84484cd5fe": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 263,
+   "t": "How to contact?",
+   "c": "MIKE",
+   "s": "his seed question, verbatim — same instruction as above. docs/MUSEUM_FRIDAY_LOG-20260814.md §0 — his Friday-morning packet, quoted in full."
+  },
+  "5262794659ebe743": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1941,
+   "t": "hunter-root",
+   "c": "HOUSE",
+   "s": "not copy — an artist id in the carousel-order list on /wal, matched against ARTISTS[].id. Nothing renders it."
+  },
+  "bdc5d5e86816bd94": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 422,
+   "t": "min-content",
+   "c": "HOUSE",
+   "s": "not copy — a CSS grid track keyword written into a custom property by the guest book measurement effect. Nothing renders it."
+  },
+  "61789ee4752a314e": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 264,
+   "t": "[PAPA] the house address was struck sitewide on 2026-08-11 by your own ruling with no replacement, so this answer needs an address from you before it can say anything.",
+   "c": "HOUSE",
+   "s": "not visitor copy — an Ops note to Mike, marked [PAPA], which visitorProse() drops before render; the entry that carries it therefore draws nothing in either stage. DECLARED RATHER THAN EXEMPTED ON PURPOSE: a [PAPA] string can still leak, and did this round when written as two sentences — the sweep must keep seeing it. It is the answer to How to contact?, open row W-b in docs/OPEN_ACTIONS.md, and it leaves the file the day Mike supplies an address."
   }
  }
 }

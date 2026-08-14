@@ -823,8 +823,29 @@ const FAQ = [
      Foundation album's third track and the split between the two FAQ tracks is
      `faqFor(where)`. */
   {
+    /* ═══ [M 2026-08-14] THE DOOR, AND IT IS THE FIRST REAL ONE IN THIS ROOM ══
+       MIKE: "Foundation — outbound link to coalitionforthehomeless.org/donate."
+
+       IT GOES ON THIS ANSWER AND NOT ON `Can I donate?`, WHICH IS THE ONE THAT
+       LOOKS LIKE ITS HOME. That question is about giving to WEIRD.BABY and its
+       answer is a refusal — "if your help would arrive as money in Weird.Baby's
+       hands to spend, it is not help we can take, and we will gladly show you
+       the door that is." This IS that door, and it belongs on the sentence that
+       says where the money goes rather than on the sentence that says where it
+       does not.
+       IT DOES NOT CONTRADICT THE ROOM. Nothing here collects anything: the
+       address is the Coalition's own, the visitor gives to them directly, and
+       Weird.Baby is not in the transaction at any point. That is the room's
+       whole doctrine drawn as a link rather than asserted as a sentence.
+       THE ADDRESS IS HIS, TYPED AS HE TYPED IT. It resolves — checked
+       2026-08-14, it redirects to `coalitionforthehomeless.givingpage.org/
+       donate`, titled "Coalition for the Homeless Donation Page" — and the
+       redirect target is deliberately NOT used: their vanity address is the
+       durable one and the hop is theirs to change. */
     q: "YOUR DONATIONS",
     on: "foundation",
+    link: { text: "Give to Coalition for the Homeless",
+            href: "https://coalitionforthehomeless.org/donate" },
     a: "100% of every donation goes directly to Coalition for the Homeless.",
   },
   {

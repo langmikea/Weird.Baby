@@ -1,6 +1,11 @@
 // src/data/artists/weird-baby.js
 /* [CH5] `launched()` — the stage, from the one file in `src/` that knows it */
 import { launched } from "../../lib/placement.js";
+/* [M 2026-08-14] the house's FAQ factory and the house's own standing answer to
+   who runs the place — see the FAQ track below for why this wing reads KEEPER
+   and why W1's objection to it does not reach an FAQ. */
+import { faqFace } from "../faq-face.js";
+import { KEEPER } from "../house-copy.js";
 // Hand-authored spine + config for the Weird.Baby house exhibit (/wb).
 // Mirrors hunterRoot minus MediaVault: no foundation export — the six Vol 1
 // recordings are repo-local assets (public/audio/wb/). MV ingestion of Vol 1
@@ -126,7 +131,12 @@ const spine = [
            caps) and the album's own name are untouched. */
         /* [B 2026-08-13] "Its tracks are the sections: About, FAQ." The row is
            `About` now — the album's own name already says whose. */
-        title: "About",
+        /* [M 2026-08-14] AND IT IS `About the Artist`, WHICH IS HIS CORRECTION
+           OF YESTERDAY'S READING: "About the Artist: track 1 -> `About the
+           Artist`, track 2 -> `FAQ`." The album's name and its first row now
+           say the same thing, which is the shape /wal's own template has —
+           "About the Artists" is the first row of the WORTH A LISTEN album. */
+        title: "About the Artist",
         videos: [],
         /* ═══ [W1 2026-08-06] BURNED DOWN AND REBUILT AS CATEGORIES ══════════
            MIKE: "ABOUT THE ARTIST - the current viewer content is useless. BURN
@@ -165,6 +175,19 @@ const spine = [
            sounds like, and a plausible paragraph about a musician nobody has
            described is invention however well it fits. The slots are in the data
            where he can fill them one at a time. */
+        /* ═══ [M 2026-08-14] THIS COPY IS A PLACEHOLDER AND IS TRACKED AS ONE ═
+           MIKE: "Track 1 copy as supplied, placeholder — Mike replaces before
+           launch, track it." The blurb and the register row below are Ops'
+           sentences, written when nobody had described this artist; they are
+           kept exactly as supplied and they are HIS to replace.
+           IT CARRIES NO `[PAPA]` MARKER, DELIBERATELY. A marked paragraph is
+           REMOVED from the page in both stages (`scrubFace`), and this copy has
+           to keep drawing until he replaces it — a placeholder that erases the
+           card is not a placeholder, it is a hole. The tracking is a row in
+           `docs/OPEN_ACTIONS.md`, which is where a thing waiting on him lives.
+           HIS SECOND SENTENCE FROM YESTERDAY IS THE BRIEF FOR THE REPLACEMENT
+           and is repeated here so it is beside the words it governs: "Voice is
+           Mike's own. Papa Weird.Baby is him, not a persona." */
         face: {
           kind: "text",
           title: "About the artist",
@@ -195,6 +218,54 @@ const spine = [
           footer: "WEIRD.BABY · ABOUT THE ARTIST",
         },
       },
+      /* ═══ [M 2026-08-14] THE FAQ ROW, FROM THE STANDARD TEMPLATE ════════════
+         MIKE: "FAQ from the standard template, seeded with Who is Weird.Baby?
+         and How to contact?"
+
+         THE TEMPLATE IS `faqFace()` — the same factory /wal, /foundation,
+         /robots and the booth all draw through, so this wing gains no shape of
+         its own. That is what "the standard template" has meant since F1 made
+         the format a mechanism rather than a convention.
+
+         "WHO IS WEIRD.BABY?" IS ANSWERED WITH `KEEPER`, THE HOUSE'S OWN
+         STANDING SENTENCE, and W1's objection to it does not reach here. W1
+         (2026-08-06) struck KEEPER from the ARTIST CARD one row up, on the
+         ground that it is "an answer about the HOUSE printed under an ARTIST's
+         name". A question that ASKS who Weird.Baby is has that answer as its
+         subject rather than as a stray; and Mike's own instruction yesterday —
+         "Papa Weird.Baby is him, not a persona" — is the ruling that the house
+         and the artist are one person here. Imported, never retyped
+         (Doctrine 17): editing house-copy.js edits the booth and this together.
+
+         "HOW TO CONTACT?" IS A `[PAPA]` AND THEREFORE DOES NOT DRAW, AND THE
+         REASON IS A COLLISION WITH HIS OWN RULING WORTH NAMING. On 2026-08-11
+         Mike struck the house address sitewide, with no replacement;
+         `house-copy.js` records the consequence in its own words — "THE MUSEUM
+         NOW PUBLISHES NO WAY TO REACH IT. That is the ruling's direct
+         consequence and not a side effect." So the only honest answer to this
+         question needs an address that a ruling of his removed and that this
+         packet does not supply. `scrubFace` drops an entry that declared a body
+         and kept none of it, so the question does not appear at all in either
+         stage — empty and honest — and lands the moment he gives an address.
+         Row in `docs/OPEN_ACTIONS.md`. */
+      {
+        id: "wb-faq",
+        title: "FAQ",
+        videos: [],
+        face: faqFace("WEIRD.BABY", [
+          { title: "Who is Weird.Baby?", lines: [KEEPER] },
+          /* ONE SENTENCE, AND THAT IS LOAD-BEARING RATHER THAN STYLE.
+             `visitorProse` splits a string into SENTENCES and drops only the
+             ones carrying the mark — so a two-sentence note leaves its second
+             sentence on the glass. Written as two, this printed "This answer
+             needs an address from you before it can say anything." to visitors,
+             caught by looking at the page rather than by any gate. */
+          { title: "How to contact?",
+            lines: ["[PAPA] the house address was struck sitewide on 2026-08-11 "
+                  + "by your own ruling with no replacement, so this answer "
+                  + "needs an address from you before it can say anything."] },
+        ]),
+      },
       /* ═══ [B 2026-08-13] `About this record`, MOVED HERE FROM Vol. 1 ════════
          MIKE: "`01 About this record` leaves this album entirely — it becomes a
          track on Album B." Carried across unchanged except for the release's
@@ -203,7 +274,15 @@ const spine = [
          chip; that reasoning is unchanged by which album it sits on.
          IT SITS ABOVE THE FAQ AND NOT BELOW IT, because every FAQ in this
          building is the last row of its album — /wal, /foundation and /robots
-         all close on one. */
+         all close on one.
+         ═══ [M 2026-08-14] AND IT IS NOW BELOW IT, AND IT IS KEPT ═════════════
+         Mike named this album's tracks this morning as "track 1 -> About the
+         Artist, track 2 -> FAQ" and did not mention this row. He moved it onto
+         this album YESTERDAY, in writing, so it is kept at position 3 rather
+         than read out of existence by a sentence that was naming two positions:
+         his instruction is satisfied exactly — About the Artist is 1, FAQ is 2 —
+         and nothing he placed has been deleted on an inference.
+         Raised in the round log; one word removes it. */
       {
         id: "about-record",
         title: "About this record",
@@ -376,7 +455,17 @@ export const weirdBaby = {
      readable in source — the hold is a stage decision, not a deletion. */
   spine: launched() ? spine.filter(a => !HIDDEN_AT_LAUNCH.has(a.id)) : spine,
   facts: [], // PUV stays empty for v0 (fact model is MV-side, deferred)
-  defaultActiveIndex: 0,
+  /* ═══ [M 2026-08-14] THE WING OPENS ON THE MUSIC ═══════════════════════════
+     MIKE: "/wb — opens on The Best of Weird.Baby Vol. 1, not About the Artist."
+
+     IT IS THE LANDING AND NOT THE ORDER, and the two were deliberately kept
+     apart. P9 (2026-08-05) is also his: "add an ABOUT THE ARTIST album, FIRST
+     in the wing." Both hold — About the Artist is still the first cover in the
+     rack, and the room opens on the second one — so the rack still reads the
+     way he ordered it and the visitor still lands on the record.
+     REORDERING THE SPINE WOULD HAVE SATISFIED THIS INSTRUCTION AND BROKEN THAT
+     ONE, silently, with no note anywhere saying a ruling had been reversed. */
+  defaultActiveIndex: 1,
   splitKey: "wb-wb-split",
   cfKey: "wb-wb-cfh",
   visitPath: "/wb",

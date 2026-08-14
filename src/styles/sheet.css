@@ -142,10 +142,19 @@
    Each beat is its own line by structure, not by a <br />: `display:block` on
    the spans, on a measure short enough that a beat cannot wrap into the next
    one at any width this card can reach. */
+/* [M 2026-08-14] DRESSED DOWN. MIKE: "Title stays, dressed down — less bold,
+   less large, sitting with the rest of the museum." Two dials and no more:
+   weight 600 -> 500, and the ramp's ceiling and floor both come down
+   (1.5–2.05rem -> 1.15–1.5rem). At 1.5rem it now sits just above the bar's own
+   room name (1.2rem, Syne 700) instead of nearly twice it, which is what
+   "sitting with the rest of the museum" asks for.
+   THE FACE IS NOT CHANGED. This is still the only thing on the page in the
+   brand face, by the note above's own account; that is a third dial and he
+   named two. Raised in the round log rather than taken. */
 .sheet-credo {
   font-family: 'Fredoka', sans-serif;
-  font-weight: 600;
-  font-size: clamp(1.5rem, 3vw, 2.05rem);
+  font-weight: 500;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
   line-height: 1.35;
   letter-spacing: -0.005em;
   color: var(--wb-gold);

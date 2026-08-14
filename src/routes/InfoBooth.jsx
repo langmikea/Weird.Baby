@@ -371,12 +371,23 @@ export default function InfoBooth() {
           <span>The Weird.Baby Museum is free.</span>
           <span>Equally free. <em>Always.</em></span>
         </h1>
-        <div className="sheet-words">
-          <p>No tickets, no tiers, no ads.</p>
-          <p>The museum owns nothing and takes nothing.</p>
-        </div>
+        {/* ═══ [M 2026-08-14] THE TWO LINES UNDER THE CREDO ARE STRUCK, AND
+                THE RULE UNDER THEM WITH THEM ═══════════════════════════════
+            MIKE: "Delete 'The museum owns nothing and takes nothing.' Delete
+            the no-ads line and the separator. Title stays, dressed down."
+            NAMED ONCE, HERE, WHICH IS WHERE A DELETED THING IS NAMED
+            (Doctrine 24): the block was `<p>No tickets, no tiers, no ads.</p>`
+            and `<p>The museum owns nothing and takes nothing.</p>`, followed by
+            a 52px gold rule.
+            NOTHING TRUE IS LOST FROM THE BUILDING. Both statements are answered
+            at length by questions on this same page — the no-advertising claim
+            by the question about embeds and tracking, and the owns-nothing claim
+            by the Foundation's whole wing — so what goes is a summary printed
+            above the thing it summarises, which is Doctrine 25's own shape.
+            `.sheet-words` and `.sheet-rule` STAY IN sheet.css: the second rule
+            below is still drawn, and the shared sheet is not this room's to
+            prune. */}
 
-        <div className="sheet-rule" />
 
         {/* THE FAQ IS THE PAGE. Every question visible; the answer opens under
             the question that asked it. Native <details>, so it works with a

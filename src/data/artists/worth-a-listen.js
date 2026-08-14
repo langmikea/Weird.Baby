@@ -1925,7 +1925,26 @@ const HOUSE_ALBUM = {
   ],
 };
 
-const spine = [HOUSE_ALBUM, ...ARTISTS.map(a => ({
+/* ═══ [M 2026-08-14] HUNTER ROOT GOES LAST ═══════════════════════════════════
+   MIKE: "WAL — Hunter Root moves to the end of the carousel."
+
+   IT IS DONE HERE AND NOT BY MOVING THE ARTIST IN `ARTISTS`. That array is
+   ~900 lines of authored content per artist; cutting one out of the middle and
+   pasting it at the end is a diff nobody can read, over data where a dropped
+   brace is a silent content loss. The rack's ORDER is a presentation decision
+   and this is where the rack is built, so the decision is declared in one line
+   at the place it takes effect.
+   THE HOUSE ALBUM IS UNMOVED and stays first — it is the wing's own card, not
+   an artist, and he named one artist.
+   `.filter(Boolean)` IS NOT DEFENSIVE PADDING: it is what makes a typo in this
+   list cost an ordering rather than an `undefined` album in the carousel. */
+const CAROUSEL_LAST = ["hunter-root"];
+const RACK = [
+  ...ARTISTS.filter(a => !CAROUSEL_LAST.includes(a.id)),
+  ...CAROUSEL_LAST.map(id => ARTISTS.find(a => a.id === id)).filter(Boolean),
+];
+
+const spine = [HOUSE_ALBUM, ...RACK.map(a => ({
   id: a.id,
   title: a.name,
   /* the fact vault's ALBUM tier. In this wing an album IS an artist, so

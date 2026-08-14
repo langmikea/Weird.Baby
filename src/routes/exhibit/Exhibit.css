@@ -1237,6 +1237,12 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .tl-track:hover .tl-tt{color:var(--wb-gold-hi)}
 .tl-typewrap{position:relative;display:inline-flex;align-items:baseline;flex-shrink:0}
 .tl-typewrap::after{content:"▾";position:absolute;right:2px;top:50%;transform:translateY(-52%);font-size:.55rem;color:var(--wb-gold-mute);pointer-events:none}
+/* [M 2026-08-14] ONE VERSION, NO ARROW — see the ruling at `.tl-typewrap` in
+   Exhibit.jsx. The `<select>` is still there; what goes is the promise of a
+   choice that does not exist, and the cursor goes with it, because a caret is
+   half of that promise and a pointer is the other half. */
+.tl-typewrap[data-single]::after{content:none}
+.tl-typewrap[data-single] .tl-typesel{cursor:default;padding-right:0}
 /* 9px invisible vertical padding (negative margin cancels layout impact):
    near-misses above/below the type hit the dropdown, not the play row. */
 .tl-typesel{font-family:'Courier Prime',monospace;font-size:.68rem;letter-spacing:.04em;color:var(--wb-gold-mute);background:transparent;border:none;appearance:none;-webkit-appearance:none;cursor:pointer;padding:9px 14px 9px 0;margin:-9px 0;max-width:220px;overflow:hidden;text-overflow:ellipsis}
@@ -4779,4 +4785,18 @@ button.vp-rec-att-thumb:hover,button.vp-rec-att-thumb:focus-visible{
 /* a door that is not open reads at the quiet step, so the pair does not shout
    from inside an answer that is already making the point in sentences. */
 .vp-fe-link[data-state="NOT BUILT"] .vp-fe-link-text { color: var(--wb-gold-mute); }
+
+/* [M 2026-08-14] A DOOR WITH AN ADDRESS. It is an `<a>` rather than a `<span>`
+   and carries no state stamp — having an address IS the state, see the note in
+   Exhibit.jsx. It reads at the LIVE step and is underlined on the hover and on
+   the focus ring, because the one thing it must say that a marked door must not
+   is: this one goes somewhere. */
+.vp-fe-link-out {
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  width: fit-content;
+  transition: border-color 0.15s;
+}
+.vp-fe-link-out .vp-fe-link-text { color: var(--wb-gold); }
+.vp-fe-link-out:hover, .vp-fe-link-out:focus-visible { border-bottom-color: var(--wb-gold); }
 
