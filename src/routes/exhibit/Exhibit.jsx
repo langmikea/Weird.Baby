@@ -2187,7 +2187,7 @@ function FaceFlow({ flat, children, deps, footer }) {
    contradiction of F6's marked door with no anchor: F6's rule is that a door
    with no address supplied is not made into an `<a>`. Here the address IS the
    sentence. */
-function FaqEntries({ entries, state }) {
+function FaqEntries({ entries, closing, state }) {
   return (
     <div className="vp-faq" data-stage-split="row">
       {/* ═══ [D 2026-08-11] "Questions" IS GONE FROM ALL FIVE FAQs ════════
@@ -2218,6 +2218,17 @@ function FaqEntries({ entries, state }) {
       ))}
       {/* [D 2026-08-11] THE SIGN-OFF LINE IS DELETED, sitewide, on Mike's
           ruling — no replacement. The FAQ closes on its last question. */}
+      {/* [D 2026-08-13] UNLESS THE WING'S OWN COPY DOES NOT. See the long note
+          in src/data/faq-face.js for why this is not the struck sign-off
+          returning: that was the wing's name set as furniture under five faces;
+          this is Mike's closing paragraphs, in his words, on one. IT IS NOT IN A
+          `<details>` — a statement nobody asked a question about must not need a
+          click to appear (M1). */}
+      {closing?.length > 0 && (
+        <div className="vp-faq-closing">
+          {closing.map((para, i) => <p key={i}>{para}</p>)}
+        </div>
+      )}
     </div>
   );
 }
@@ -3719,8 +3730,17 @@ export default function Exhibit({ artist, open = null }) {
             no way out (F1), and those two facts have one answer only if the
             wing gets to say where its door goes. Wings declaring no `exit` are
             byte-identical. */}
+        {/* [D 2026-08-13] AND THE WORDMARK SLOT IS PER-WING CONFIG TOO, FOR THE
+            SAME REASON AND BY THE SAME MECHANISM. MIKE: "top-left `Weird.Baby`
+            wordmark currently exits to the gift shop. It must exit to the
+            lobby." MuseumBar.jsx's own header flagged this as the one thing the
+            three merged bars disagreed about and did NOT unify — the exhibit's
+            wordmark went to the shop, the shop's and the booth's went to the
+            lobby — and left it for Mike. This is his answer, applied where he
+            gave it. `brandTo` defaults to `shopHref`, so every wing that does
+            not declare one is byte-identical. */}
         <MuseumBar
-          brandTo={shopHref}
+          brandTo={artist.brandTo || shopHref}
           room={artist.name}
           onRoomClick={() => window.scrollTo({ top: 0, behavior: "auto" })}
           exitTo={artist.exit ? artist.exit.to : shopHref}
@@ -4670,7 +4690,8 @@ export default function Exhibit({ artist, open = null }) {
                              and for why an accordion is not the hidden
                              information M1 forbids. */
                           if (isFaq) return (
-                            <FaqEntries entries={list} state={fndState} />
+                            <FaqEntries entries={list} closing={face.faqClosing}
+                                        state={fndState} />
                           );
                           if (!isLog) return (
                             <ol className="vp-face-entries" data-stage-split="row">

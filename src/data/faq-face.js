@@ -55,7 +55,31 @@
 /**
  * @param subtitle  the wing, in the house's own caps — e.g. "WEIRD.BABY ROBOTS"
  * @param entries   [{ title, line | lines, note?, link? }]
+ * @param closing   optional [paragraph] printed under the last question
  */
+/* ═══ [D 2026-08-13] `closing` — AND THIS IS THE EDIT THE NOTE ABOVE ASKED FOR
+   ═══════════════════════════════════════════════════════════════════════════
+   The header says a wing "cannot sign off in its own words", and that stands:
+   what D 2026-08-11 struck was the wing's NAME and the word FAQ set as a
+   footer — Ops' furniture, printed under five faces, saying nothing a reader
+   came for. This is not that. Mike's Foundation copy ends on two sentences that
+   are neither a question nor an answer to one:
+
+       "Weird.Baby is dedicated to preventing the soul-sucker that is
+        Homelessness."
+       "What's your purpose in life? Wanna pitch in?"
+
+   THE ALTERNATIVES WERE WORSE AND ARE NAMED RATHER THAN GLOSSED. Appending them
+   to the last answer files a statement about the whole room under "CAN PEOPLE
+   CONTRIBUTE IN WAYS OTHER THAN CASH?". Giving them a question of their own
+   invents a heading Mike did not write. Dropping them edits his instruction.
+   So the shape follows the content: a closing block, in the flow, never behind
+   a disclosure.
+
+   IT IS STILL NOT A FREE SLOT. `closing` takes PARAGRAPHS and nothing else — no
+   title, no link, no address — and the friction the header describes is intact:
+   the next wing that wants one has to come here and read this. Exactly one
+   caller passes it today. */
 /* ═══ [D 2026-08-11] THE HEADING IS GONE FROM ALL FIVE, AND SO IS THE FLAG ═══
    MIKE'S RULING: strip "Questions" from every FAQ face, not robots only — the
    under-scoping one packet ago was Ops'. `faqHead` lasted a single round and
@@ -63,12 +87,15 @@
    nobody can throw is furniture. `FAQ_HEAD` is retired with it, so the word
    itself no longer exists in the source. The factory is back to the shape it
    had before the flag. */
-export function faqFace(subtitle, entries) {
+export function faqFace(subtitle, entries, closing) {
   return {
     kind: "text",
     title: "FAQ",
     subtitle,
     entries,
     entriesMode: "faq",
+    /* absent rather than empty on every wing that passes nothing, so a face
+       that has no closing block carries no field to reason about. */
+    ...(closing && closing.length ? { faqClosing: closing } : {}),
   };
 }

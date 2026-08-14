@@ -797,6 +797,67 @@ const FAQ = [
        "rebrand or sell. It ends, and the name is retired. What survives is " +
        "the idea; somebody else may begin again, under their own name.",
   },
+  /* ═══ [D 2026-08-13] MIKE'S OWN FIVE, ADDED TO 03 FAQ — VERBATIM ═══════════
+     HIS INSTRUCTION: "ADD to section 03 FAQ — existing content stays. Mike
+     polishes later." The block arrived as five headed answers and two closing
+     lines, and it is carried across CHARACTER FOR CHARACTER with one correction
+     he made himself in the same breath (`dedictated` -> `dedicated`).
+
+     THREE THINGS A LATER ROUND MUST NOT TIDY.
+     (1) THE HEADINGS ARE HIS CAPITALS AND HIS PUNCTUATION. `WHO PAYS FOR ALL
+         THE STUFF?!?!` sits beside eleven sentence-case questions and looks
+         like it. That is a QUESTION FOR HIM, raised in the round log, not a
+         licence to restyle his line — his own instruction says he polishes.
+         `.vp-faq-q > summary` sets no `text-transform`, so what is typed here
+         is exactly what draws.
+     (2) THE WRAPPING IN HIS SOURCE IS NOT A PARAGRAPH BREAK. Three of the five
+         answers were typed across two lines; each is one sentence and is one
+         string here. Splitting them on the newline would have invented five
+         paragraphs he did not write.
+     (3) `Coalition for the Homeless` IS NAMED TWICE ON PURPOSE — once for
+         donations and once for profits and royalties. They are two channels and
+         he wrote the destination out for each; collapsing them into one answer
+         would be the edit Doctrine 17 forbids in the other direction.
+
+     THEY GO ON `foundation` AND NOT ON `ledger`, because `03 FAQ` is the
+     Foundation album's third track and the split between the two FAQ tracks is
+     `faqFor(where)`. */
+  {
+    q: "YOUR DONATIONS",
+    on: "foundation",
+    a: "100% of every donation goes directly to Coalition for the Homeless.",
+  },
+  {
+    q: "MERCH PROFITS / MUSIC ROYALTIES",
+    on: "foundation",
+    a: "100% of Weird.Baby profits and royalties goes directly to Coalition " +
+       "for the Homeless.",
+  },
+  {
+    q: "WHO PAYS FOR ALL THE STUFF?!?!",
+    on: "foundation",
+    a: "Mike and Mo Lang pay all the bills (Internet, robot parts, pens and " +
+       "pencils, etc.)",
+  },
+  {
+    q: "FOR HOW LONG?",
+    on: "foundation",
+    a: "We intend to keep it that way forever; time will tell.",
+  },
+  {
+    q: "CAN PEOPLE CONTRIBUTE IN WAYS OTHER THAN CASH?",
+    on: "foundation",
+    a: "Yes. We will speak up when we have a need to fill.",
+  },
+];
+
+/* [D 2026-08-13] THE TWO LINES HIS BLOCK CLOSES ON — see the long note in
+   src/data/faq-face.js for why they are a closing block and not a sixth
+   question or a tail on the fifth answer. They are printed in the open, under
+   the last question, on the Foundation album's FAQ only. */
+const FAQ_CLOSING_FOUNDATION = [
+  "Weird.Baby is dedicated to preventing the soul-sucker that is Homelessness.",
+  "What's your purpose in life? Wanna pitch in?",
 ];
 
 /* ═══ [F4 2026-08-06] THE SPINE — MIKE'S THREE ALBUMS ════════════════════════
@@ -893,11 +954,11 @@ const faqFor = where => FAQ
    two tracks changes: `faqFor` still splits the questions between the albums
    and `lines`/`link` still carry F1's two-beat answers and F6's marked doors.
    See src/data/faq-face.js. */
-const faqTrack = (id, where) => ({
+const faqTrack = (id, where, closing) => ({
   id,
   title: "FAQ",
   videos: [],
-  face: faqFace("THE WEIRD.BABY FOUNDATION", faqFor(where)),
+  face: faqFace("THE WEIRD.BABY FOUNDATION", faqFor(where), closing),
 });
 
 /* ═══ [CH5 2026-08-12] TWO OF THESE ALBUMS ARE HIDDEN AT LAUNCH ═════════════
@@ -962,7 +1023,7 @@ const spine = [
             "where we are going next.",
         },
       },
-      faqTrack("questions-foundation", "foundation"),
+      faqTrack("questions-foundation", "foundation", FAQ_CLOSING_FOUNDATION),
     ],
   },
   {
@@ -1066,6 +1127,14 @@ export const foundation = {
      are, so the wing declares where its way out goes instead of the component
      knowing about rooms. */
   exit: { to: "/", label: "Lobby" },
+  /* [D 2026-08-13] AND THE WORDMARK GOES TO THE LOBBY TOO. MIKE: "top-left
+     `Weird.Baby` wordmark currently exits to the gift shop. It must exit to the
+     lobby. Top-right `LOBBY` is already correct." Same argument as `exit` above
+     one slot to the left: this room's whole subject is that money does not stop
+     here, and the wordmark was the last commercial door left in its title bar —
+     `shopEntryHidden` closed the visible one and the brand kept a hidden one
+     open. Per-wing config, defaulting to the shop, so no other wing moves. */
+  brandTo: "/",
   /* [D7] AND NO PLAYER BAR, FOR THE SAME REASON /robots DECLARES NONE. This wing
      holds no music and no video — every track on it is a face — so a fixed 68px
      transport at the foot of the room is five controls for something that never

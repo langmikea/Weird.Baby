@@ -106,7 +106,13 @@ html { scroll-padding-top: calc(var(--wb-bar-h) + 25px); }
 .wb-bar-brand {
   font-family: var(--wb-brand, 'Fredoka', sans-serif);
   font-weight: 600;
-  font-size: 0.85rem;
+  /* [E 2026-08-13] MIKE: "increase the font size of the top-left and top-right
+     header links — currently too small on every page." 0.85rem -> 1rem
+     (13.6px -> 16px). The room name in the middle track is untouched at 1.2rem,
+     so the bar's hierarchy is unchanged: the ends are still smaller than where
+     you are. Both ends move together because they are one instruction and one
+     slot pair — see the note on `.wb-bar-exit`. */
+  font-size: 1rem;
   letter-spacing: 0.06em;
   text-transform: none;
   color: var(--wb-gold);
@@ -173,7 +179,13 @@ html { scroll-padding-top: calc(var(--wb-bar-h) + 25px); }
 .wb-bar-exit {
   font-family: var(--wb-brand, 'Fredoka', sans-serif);
   font-weight: 800;
-  font-size: 0.7rem;
+  /* [E 2026-08-13] 0.7rem -> 0.82rem (11.2px -> 13.1px), the same instruction
+     as the brand's. THIS END IS THE ONE THE 2026-08-11 NOTE BELOW MEASURED
+     AGAINST — the /hr 390px collision — so it was re-measured after the change
+     rather than assumed: the geometry is a grid with min-content flanks and an
+     ellipsising centre, so a wider end now squeezes the room's name instead of
+     printing over it. Overlap 0 at 390px on every room. */
+  font-size: 0.82rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--wb-gold);

@@ -3524,11 +3524,51 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    yields its height to the face's own flow while the iframe underneath stays
    mounted and audible (W1: the stow is visual-only). */
 .ex-root[data-flat="1"] .vp-area{position:relative;flex:0 0 auto;min-height:0;height:auto}
-/* [F3] the fit may CAP the frame's height (--fit-area-max); the player
-   letterboxes inside it, and on the dark stage the bars vanish into the
-   ground. Without a cap the frame is plain 16:9. */
-.ex-root[data-flat="1"] .vp-area-flat:not(.vp-area-stowed){aspect-ratio:16/9;
-  max-height:var(--fit-area-max,none)}
+/* ═══ [A1 2026-08-13] THE SLOT TAKES ITS HEIGHT FROM ITS COLUMN, NOT FROM A
+       NUMBER MEASURED AT MOUNT ═════════════════════════════════════════════
+   MIKE: "the viewer panel sizes to its content at mount instead of to its
+   container… a visible seam where the grey panel ends and cream resumes,
+   roughly three-quarters down the column… fix the measurement, not the
+   symptoms."
+
+   WHAT THIS RULE USED TO BE, AND WHAT IT COST. `aspect-ratio:16/9` plus
+   `max-height:var(--fit-area-max)`, with the area at `flex:0 0 auto` from the
+   rule above. `--fit-area-max` is a PIXEL COUNT written once by the fit effect
+   in Exhibit.jsx from `window.innerHeight` at mount and cached in
+   sessionStorage. The column around it (`.ex-right`) is sized by the grid row,
+   which is the flex leftover — a different number, computed continuously.
+   Two numbers for one box is one number too many, and the gap between them is
+   painted: `.ex-right` carries the house cream, so whatever the slot does not
+   occupy shows as bare ground with a hard edge across it.
+
+   MEASURED ON `/wb`, ALBUM 2, ONE SONG SELECTED, 1690x810:
+       .ex-right  400px   .vp-area  297px   ->  103px of bare cream
+   297/400 = 74% — "roughly three-quarters down the column", exactly. It does
+   not settle, because nothing recomputes the cap: it is the same at +350ms and
+   at +2s, and it moves only when the window height changes, which is the third
+   symptom. `/wal` shows the same shape smaller (424 vs 321 + a 56px scroller,
+   35px over) and shows NO seam on a face, because a stowed face is `height:auto`
+   and grows — which is the state Mike was comparing against.
+
+   THE FIX IS THE FLEX, AND IT IS THE SAME ARITHMETIC THE CAP WAS APPROXIMATING.
+   The cap is `avail - carousel - scroller-reserve`; `flex:1 1 auto` in this
+   column IS that subtraction, done by the layout engine, on every frame,
+   without a stored copy. The picture does not lose its proportions: `.vp-inner`
+   below is 16:9 off its own height, so it simply fills the taller slot.
+   The scroller is `flex:0 0 auto` and keeps its reserved room.
+   `--fit-area-max` is still written by the fit — it is what the carousel lever
+   is decided against — and is no longer read by anything that draws. */
+.ex-root[data-flat="1"] .vp-area-flat:not(.vp-area-stowed){flex:1 1 auto;
+  min-height:0}
+/* AND THE ONE-COLUMN FRAME GETS ITS RATIO BOX BACK, for the reason the
+   `:not([data-flat])` rule at the 720px break already gives: stacked, the row
+   this box lives in is sized by its content, so `flex:1 1 auto` divides a
+   nothing and the picture collapses to zero. Above the break the row is the
+   flex leftover and there is real space to take. */
+@media (max-width:720px){
+  .ex-root[data-flat="1"] .vp-area-flat:not(.vp-area-stowed){
+    aspect-ratio:16/9;flex:0 0 auto}
+}
 /* `container-type:size` on .vp-inner is right for the staged wings (it feeds
    the cqh type scale) and FATAL in static flow: size containment ignores the
    children, so an auto-height inner would collapse to zero. The flat wing
@@ -4286,6 +4326,17 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
 .vp-faq-a p + p{margin-top:var(--rh-tight)}
 .vp-faq-note{color:var(--wb-gold-mute)}
 .vp-faq-a .vp-fe-link{margin-top:8px}
+/* [D 2026-08-13] THE CLOSING BLOCK — the wing's own last words under the last
+   question. It reads as an answer rather than as a caption, so it takes the
+   answer's own type and measure verbatim; what separates it from the list is
+   AIR ABOVE (the Record's own rule) and the list's closing rule, which
+   `.vp-faq-q:last-of-type` already draws. No border of its own — a second rule
+   12px under the first is a box, and this is a paragraph. */
+.vp-faq-closing{margin:26px 0 0;padding:0 2px}
+.vp-faq-closing p{margin:0;font-family:var(--wb-read);font-optical-sizing:auto;
+  font-size:var(--fs-body);line-height:1.62;letter-spacing:.005em;
+  color:var(--wb-gold-lo);max-width:68ch;hyphens:auto;text-wrap:pretty}
+.vp-faq-closing p + p{margin-top:var(--rh-tight)}
 /* words taken OUT of a document are a quotation of the document, so they are
    set as one: the museum's serif, a rule at the left, and no quote marks
    (the rule is the quote mark). */
