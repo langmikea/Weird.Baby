@@ -1072,7 +1072,7 @@ The HR exhibit page is **two stacked components**. Mount chain:
 | Exhibit data export | `src/data/exhibits/hunter_root.json` via `npm run export-artifacts` |
 | Spine adapter (stable ids) | `src/data/artists/hunter-root-spine.js` |
 | Taxonomy v1 canon (June 9) | `docs/taxonomy/` — TAXONOMY_v1, NORMALIZATION_MAP, COVERAGE_PROOF, RETAG_PLAN |
-| Retag tooling | `tools/retag_v1.ps1`, `tools/coverage_check.py` |
+| Retag tooling | `tools/coverage_check.py` |
 
 **[v53 2026-08-05] THE THIRD PARTIES THIS SITE TOUCHES, MEASURED RATHER THAN
 GREPPED.** Read off `performance.getEntriesByType('resource')` in every room

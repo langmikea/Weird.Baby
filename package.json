@@ -55,7 +55,15 @@
     "shorts:flashbang": "node tools/shorts-compile.mjs --recipe docs/shorts/flashbang.json --frames --verify",
     "shorts:verify": "node tools/shorts-verify.mjs",
     "record:proof": "node tools/dictation/record-land-proof.mjs",
-    "record:declare": "node tools/dictation/declare-record-strings.mjs"
+    "record:declare": "node tools/dictation/declare-record-strings.mjs",
+    "covers:foundation": "python tools/make_foundation_covers.py",
+    "covers:house": "python tools/make_house_covers.py",
+    "covers:robots": "python tools/make_robots_cover.py",
+    "covers:template": "python tools/make_template_covers.py",
+    "covers:unit": "python tools/make_unit_covers.py",
+    "vocab:registry:rebuild": "python tools/build-vocabulary-registry.py",
+    "yt:ingest": "node tools/yt-ingest.mjs",
+    "assets:r2:sync": "node tools/sync-assets-to-r2.mjs"
   },
   "dependencies": {
     "react": "^19.2.4",
