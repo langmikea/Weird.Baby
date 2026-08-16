@@ -31,7 +31,27 @@
    identifier in a file that parses clean. */
 import { recordDay } from "./record-epoch.js";
 
-export const RECORD_ENTRIES = [
+/* ═══ RECORD 001's PROVENANCE — MOVED OUT OF THE ARRAY [2026-08-16] ══════════
+   These three blocks stood INSIDE Record 001. `record:land --write` regenerates
+   an entry from a draft and refuses to touch one carrying comments, because a
+   generated entry has nowhere to put them — its own words: *"move its reasoning
+   above the entry so a later landing carries it."* That is what this is. The
+   preamble is preserved by every landing; the array is not.
+
+   NOT ONE CHARACTER OF THEM IS EDITED. They are moved verbatim, in order.
+
+   WHAT THEY DOCUMENT, SAID ONCE SO NOTHING BELOW READS AS CURRENT WHEN IT IS
+   NOT: they describe the 2026-08-08 landing of Record 001 and its 2026-08-10
+   revision — the deck, the typos kept on his instruction, the labels in his
+   capitals, the absent `lead`/`tomb`, and the Doctrine 11 ruling. **On
+   2026-08-16 the entry's TEXT was replaced from his own week-1 workbook**
+   (`C:\AI\_week01\WEEK01_records-001-to-005.xlsx`), so any sentence below
+   that quotes a specific line of the old body is describing text that is no
+   longer there. The RULINGS in them all still stand — the date rule, the
+   verbatim rule, Doctrine 21, the no-invented-tomb rule — which is why they are
+   kept rather than pruned.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
             /* ==== [S2 2026-08-07 · REBUILT 2026-08-08] RECORD 001 ===========
                B2 ruled the volume: "013 was a PROTOTYPE ... It is NOT day one
                and needs no re-dating or defending. THE REAL RECORD STARTS AT
@@ -56,19 +76,51 @@ export const RECORD_ENTRIES = [
                both would put two accounts of one afternoon on one page and
                invite a reader to reconcile them.
 
-               VERBATIM MEANS VERBATIM, AND THREE THINGS IN IT LOOK LIKE ERRORS
-               AND ARE KEPT. They are named here so no later round "tidies" one:
-                 · "a clean hand-off was made made" — his doubled word, kept on
-                   his explicit instruction.
-                 · "Incoming data =  86% vs threshold" — TWO spaces after the
-                   equals sign, his, kept in the data. HTML collapses runs of
-                   whitespace, so the glass shows one; that is the renderer, not
-                   an edit, and it is reported rather than papered over.
-                 · "auto containment. and auto alerts" — a full stop mid-clause
-                   followed by a lower-case "and". His. Flagged to him, not
-                   fixed.
+               ═══ [2026-08-16c] ALL THREE OF THE FAMOUS TYPOS ARE GONE FROM
+                   THIS FILE, AND THIS COMMENT WAS STILL SAYING THEY WERE KEPT
+                   ═════════════════════════════════════════════════════════
+               THIS PARAGRAPH SENT SOMEBODY LOOKING FOR A STRING THAT IS NOT
+               HERE, which is the whole reason it is being corrected rather than
+               deleted. It named three things carried verbatim out of the
+               2026-08-08 dictation and instructed later rounds not to tidy
+               them. **Mike's V3 workbook rewrote the two sections they lived
+               in, and the 2026-08-16 landing replaced the text wholesale.**
+               Measured on the shipping strings of this file, with comments
+               stripped and the concatenation folded:
+
+                 · "a clean hand-off was made made"      — NOT PRESENT. The
+                   sentence it sat in does not exist; the EXECUTIVE SUMMARY is
+                   now two `>` lines ending "Handoff is on track (T-6);".
+                 · "Incoming data =  86% vs threshold"   — NOT PRESENT. The
+                   16:00 line now reads "Instantaneous - RX sustained FULL LOAD
+                   - Packet Rejects = n!". The double space went with it.
+                 · "auto containment. and auto alerts"   — NOT PRESENT. The
+                   16:10 line now reads "auto-shutdown, auto-containment, and
+                   auto-alerts", hyphenated and punctuated.
+
+               **THEY ARE NOT LOST AND THEY ARE NOT ON THE GLASS.** The 08-08
+               dictation is `docs/dictation-20260807/answers.json` (`W1.D1.EXEC`
+               and `W1.D1.NOTES`) and its rescue dump beside it; the round that
+               landed them is `docs/MUSEUM_RECORD_001_LOG-20260808.md`. Those
+               files are the RECORD OF WHAT HE SAID and must not be edited to
+               match this one — the same rule `docs:numbers` applies to a round
+               log.
+
+               **THE VERBATIM RULE ITSELF IS UNTOUCHED.** It is not weakened by
+               its three examples expiring: every string below is still his,
+               still landed by `record:land`, still round-tripped field by
+               field. What expired is this list, and a list of examples that has
+               outlived its examples is worse than no list — it is a tripwire
+               pointing at empty ground.
+
+               ONE MECHANICAL TYPO WAS CORRECTED HERE ON HIS RULING, 2026-08-16:
+               "coincedent" -> "coincident" in the DETAILED REPORT. Fixed at
+               source in `NEW_RECORD_MAKER_V3.xlsx` (REC 1.1, B16) and re-landed,
+               not hand-edited into this file. **His voice was not touched:**
+               the dangling semicolon in "Handoff is on track (T-6);" is his and
+               he ruled it stays.
                Nothing else was touched: not the hyphens standing in for dashes,
-               not "50x", not the order, not the paragraphing.
+               not "5Kx", not the order, not the paragraphing.
 
                THE `line` LANDED ON 2026-08-08 AND IT IS THE ONE STRING IN THIS
                ENTRY THAT IS NOT HIS. Everything else here is verbatim; this is
@@ -133,9 +185,7 @@ export const RECORD_ENTRIES = [
                `.vp-rec-sect-label` is `text-transform:uppercase`, so the glass
                is identical whichever case sits here — which makes his the free
                choice and therefore the right one. */
-            { no: 1,
-              date: recordDay(1),
-              title: "INITIAL LAUNCH REPORT - Weird.Baby",
+
               /* ═══ [2026-08-10] THE DECK IS HIS, AND THE OPS SENTENCE IS GONE
                  RATHER THAN CARRIED ═══════════════════════════════════════════
                  This field held a sentence OPS drafted and Mike approved on
@@ -156,8 +206,7 @@ export const RECORD_ENTRIES = [
                  46 characters and line two is exactly on it, with 10.58px of
                  slack — an em dash is 5px wider than a hyphen, so swapping the
                  punctuation is not free. */
-              line: "Weird.Baby website is live\n" +
-                    "Alert — Incoming Email Server Load (contained)",
+
               /* [2026-08-10] HIS DICTATION, TYPOS CORRECTED ON HIS OWN
                  INSTRUCTION — which is the one difference from the 2026-08-08
                  landing, where three things that looked like errors were kept
@@ -176,130 +225,231 @@ export const RECORD_ENTRIES = [
                  ADDENDUM 03. Split at the wrap they would print as separate
                  paragraphs beginning lower-case. Named here so the join is a
                  decision on the record rather than an invisible tidy. */
-              sections: [
-                { label: "EXECUTIVE SUMMARY",
-                  body: [
-                    "Weird.Baby launched on schedule. No deviations; "
-                    + "f(Ump) = 100%",
-                    "Handoff is on track (T-6); Operations has "
-                    + "hands-on-the-ball.",
-                  ] },
-                { label: "DETAILED REPORT",
-                  body: [
-                    "ALARM - Incoming Email Server Load 1000x",
-                    "o Operations remains unaffected.",
-                    "o Not single sourced, so not as simple as "
-                    + "\"turn it off.\"",
-                    "o Data transmissions went silent shortly after WB launch.",
-                  ] },
-                { label: "ADDENDUM 01 - Event Log - Friday Launch(-2)",
-                  body: [
-                    "15:00 - Weird.Baby email server Scheduled Early Auto Start",
-                    "15:01 - Weird.Baby System BIST - No deviations; "
-                    + "f(Ump) = 100%",
-                    "15:14 - First data packet received",
-                    "15:58 - Second data packet received",
-                    "16:00 - Incoming data crosses 86% vs threshold",
-                    "16:10 - Server auto-shutdown, auto-containment, and "
-                    + "auto-alerts",
-                    "16:13 - REACT - Team is convened",
-                    "23:30 - REACT RULING - Restart with 5000x resources.",
-                    "The decision to resume was determined to be low risk, "
-                    + "reversible, and a real world stress test.",
-                    "The engineering team was more intrigued than concerned, "
-                    + "and not involved in the determination.",
-                  ] },
-                { label: "ADDENDUM 02 - Weekend Summary",
-                  body: [
-                    "Staff onsite to support Weird.Baby launch - Nothing to "
-                    + "report.",
-                    "The time was put to use reviewing the incoming data.",
-                    "Pages of hexadecimal numbers; presumably needs to be "
-                    + "compiled and assembled into something usable.",
-                  ] },
-                { label: "ADDENDUM 03 - Event Log - Monday Day(1)",
-                  body: [
-                    "00:00 - WB Go-Live went off without a hitch.",
-                    "00:02 - Incoming data stream ended",
-                    "The remainder of the day was completely uneventful.",
-                    "Weird.Baby uptime - 100%, no further anomalies.",
-                    "We decided to stand up /Robots as a page to track our "
-                    + "progress for a few days. It is weird if nothing else. "
-                    + "Maybe try to get a little crowdsourcing going on "
-                    + "dealing with this, going forward.",
-                  ] },
-              ] },
-            { no: 2,
-              date: recordDay(2),
-              title: "GENERAL STATUS UPDATE",
-              line: "Weird.Baby Integrity Management Plan remains on-track "
-                    + "without anomalies.\nEmail Server Data Assault has "
-                    + "ceased; no net impact.",
-              sections: [
-                { label: "EXECUTIVE SUMMARY",
-                  body: [
-                    "Weird.Baby uptime: 100%, no anomalies",
-                    "Operations Cadence : Favorable, On Pace",
-                    "Blockers - Nothing to Report",
-                  ] },
-                { label: null,
-                  body: [
-                    "All process controls are in good order.  Operations is "
-                    + "turning the crank, keeping tings moving on cadence.",
-                    "The adrenalin from the launch and the weekend has "
-                    + "finally worn off; we are all running on fumes.  No "
-                    + "time was spent on the mystery data stream, today.",
-                  ] },
-              ] },
-            { no: 3,
-              date: recordDay(3),
-              title: "DATA EXTRACTED - Weekend Robots Anomaly",
-              line: "Weird.Baby IMP - On-track without anomalies.\nEmail "
-                    + "Server Data Assault - Password Protected File "
-                    + "Structure (6.28 GB)",
-              sections: [
-                { label: "EXECUTIVE SUMMARY",
-                  body: [
-                    "Weird.Baby uptime: 100%, no anomalies",
-                    "Operations Cadence : Favorable, On Pace",
-                    "Data has been extracted from weekend dump including "
-                    + "images and text. While all of it appears compelling, "
-                    + "it is currently of no known value.",
-                  ] },
-                { label: null,
-                  body: [
-                    "Data has been extracted from weekend dump",
-                    "IMAGE - Engineering Manual - Assorted pages",
-                    "IMAGE - Assorted Evidence Based photos - Unknown "
-                    + "Importance",
-                    "A new Volume has been created: /Robots/MGK-VIIIp",
+
+/* ═══ RECORD 003's PROVENANCE — MOVED OUT OF THE ARRAY [2026-08-16] ══════════
+   Moved for the same reason Record 001's three blocks were, and by the same
+   rule: `record:land --write` will not regenerate an entry that carries
+   comments, and the preamble is the part of this file a landing preserves.
+   Not one character of it is edited.
+   WHAT IT DOCUMENTS: the 2026-08-09 round that lifted his notes out of Record
+   003's DETAILED REPORT. **On 2026-08-16 the entry's TEXT was replaced from
+   NEW_RECORD_MAKER_V3.xlsx**, so the section it describes is not the section
+   that is there now. The RULING it records — his notes move whole and verbatim
+   into his working copy, in braces — still stands, which is why it is kept. */
+
                     /* [E2 2026-08-09] THREE OF HIS NOTES AND TWO OF OPS'
                        ANSWERS CAME OUT OF THIS SECTION — same ruling and same
                        treatment as Record 001's DETAILED REPORT above; read the
                        note there for the whole of it. His three moved whole and
                        verbatim into his working copy, in place, in braces. */
+
+export const RECORD_ENTRIES = [
+            { no: 1,
+              date: recordDay(1),
+              title: "INITIAL LAUNCH - Weird.Baby Website",
+              line: "> Weird.Baby website went live\n> Alert - Incoming "
+                    + "Server Load  (contained)",
+              sections: [
+                { label: "EXECUTIVE SUMMARY",
+                  body: [
+                    "  > Weird.Baby launched on schedule. No deviations; "
+                    + "f(Ump) = 100%\n  > Operations has hands-on-the-ball. "
+                    + "Handoff is on track (T-6);",
                   ] },
-              ] },
+                { label: "DETAILED REPORT",
+                  body: [
+                    "  > ALARM - Incoming Server Load >1000x nominal\n  > "
+                    + "Operations remains unaffected.\n  > Multi-source swarm "
+                    + "payloads precludes IP/Domain blocking\n  ? RX ended "
+                    + "abruptly and coincident with Weird.Baby launch",
+                  ] },
+                { label: "ADDENDUM 01 - Event Log - Friday (Launch - 2)",
+                  body: [
+                    "    15:00 - Weird.Baby Incoming Server - Scheduled "
+                    + "Early Auto Start (Retired)\n    15:01 - Weird.Baby "
+                    + "System BIST - No deviations; f(Ump) = 100%\n    15:04 -"
+                    + " First data packet received\n    15:58 - Second data "
+                    + "packet received\n    16:00 - Instantaneous - RX "
+                    + "sustained FULL LOAD - Packet Rejects = n!\n    16:10 - "
+                    + "Server auto-shutdown, auto-containment, and "
+                    + "auto-alerts\n    16:13 - REACT - Team is convened\n    "
+                    + "23:30 - REACT RULING - Restart with 5Kx Incoming "
+                    + "Server Resources",
+                    "    > The decision to resume was determined to be low "
+                    + "risk, reversible, and a real-world stress test.\n    > "
+                    + "The engineering team was more intrigued than "
+                    + "concerned, and not involved in the determination.",
+                  ] },
+                { label: "ADDENDUM 02 - Weekend Summary",
+                  body: [
+                    "    > Staff onsite to support Weird.Baby launch - "
+                    + "Nothing to report.\n    > The time was put to use "
+                    + "reviewing the incoming data.\n    > Pages of "
+                    + "hexadecimal numbers; presumably to be compiled into "
+                    + "something of use.",
+                  ] },
+                { label: "ADDENDUM 03 - Event Log - Monday (Launch)",
+                  body: [
+                    "    > 00:00 - WB Go-Live went off without a hitch."
+                    + "\n    > 00:02 - Incoming data stream ends\n    > The "
+                    + "remainder of the day was completely uneventful.\n    > "
+                    + "Weird.Baby uptime - 100%, no further anomalies.\n    > "
+                    + "ADDED PAGE - W.B/Robots added (to track what happened,"
+                    + " just for a few days)\n       HASH: 982056&363 = "
+                    + "$^6/Tx=0............................. >> Complete!",
+                  ] },
+              ],
+            },
+            { no: 2,
+              date: recordDay(2),
+              title: "GENERAL STATUS UPDATE",
+              line: "> Weird.Baby Integrity Management Plan remains "
+                    + "on-track without anomalies.\n> Incoming Server Data "
+                    + "Assault has ceased; no impact.",
+              sections: [
+                { label: "EXECUTIVE SUMMARY",
+                  body: [
+                    "  > Weird.Baby uptime: 100%, no anomalies - f(Ump) = "
+                    + "100%\n  > Blockers - Nothing to Report",
+                  ] },
+                { label: "DETAILED REPORT",
+                  body: [
+                    "  > METRIC SUMMARY - Nothing to report. All processes "
+                    + "6+ sigma.\n  > Incoming Data = ZIP file (31.4 GB) "
+                    + "Password Protected\n  > Partial extraction attempted "
+                    + "against the stream still in flight.\n  < A ZIP index is"
+                    + " written last. No catalog is available until receipt "
+                    + "completes.\n  > Each file is preceded by its own "
+                    + "header. Names arrive ahead of contents.\n  ? 1,046 "
+                    + "names recovered before the stream closed. Not one of "
+                    + "them opens.",
+                  ] },
+                { label: "ADDENDUM 01 - Partial Manifest (names only, no contents)",
+                  body: [
+                    "    MGK-VIIIp/MANUAL/00-FRONTMATTER.tif\n    "
+                    + "MGK-VIIIp/MANUAL/07-POWER-SYSTEM.tif\n    "
+                    + "MGK-VIIIp/MANUAL/11-VID-LINK.tif\n    "
+                    + "MGK-VIIIp/MANUAL/31-PARITY-BIAS.tif\n    PERSONNEL/CEO/"
+                    + "\n    PERSONNEL/INFORMER/\n    PERSONNEL/EVERYDAY/\n    "
+                    + "PERSONNEL/GAMBLER/\n    PORTAL/CH3-STANDARD/\n    "
+                    + "PORTAL/CH4-DETAIL/\n    _tmp/"
+                    + "                              < password bit not set",
+                    "  ! The last entry is the only one we can open. It is "
+                    + "being reviewed.",
+                  ] },
+              ],
+            },
+            { no: 3,
+              date: recordDay(3),
+              title: "GENERAL STATUS UPDATE",
+              line: "> Weird.Baby Website - All Systems Favorable\n> Robots "
+                    + "- Nothing to Report",
+              sections: [
+                { label: "EXECUTIVE SUMMARY",
+                  body: [
+                    "  > Weird.Baby uptime: 100%, no anomalies - f(Ump) = "
+                    + "100%\n  > Blockers - Nothing to Report",
+                  ] },
+                { label: "DETAILED REPORT",
+                  body: [
+                    "  > Ops transition moving to Early-Pull (Confidence >>"
+                    + " 6.28 sigma)\n  > One tmp folder unprotected - Contents"
+                    + " attached\n  > Extraction staging, left behind. Eleven "
+                    + "manual plates and four personnel folders.\n  ? The "
+                    + "manual is not written for the unit. It is written for "
+                    + "the person keeping it.",
+                  ] },
+                { label: "ADDENDUM 01 - Manual Plates Recovered",
+                  body: [
+                    "    PLATE 07 - POWER SYSTEM\n      \"Do not service "
+                    + "under load. The keeper is answerable for the state of "
+                    + "the cell.\"\n    PLATE 11 - VID-LINK\n      \"The link is "
+                    + "bi-directional by design. Assume the far end is "
+                    + "attended.\"\n    PLATE 31 - PARITY BIAS\n      \"Four "
+                    + "settings. The unit will not speak until all four agree"
+                    + " with the far end.\"",
+                  ] },
+                { label: "ADDENDUM 02 - Personnel Folders (empty, names only)",
+                  body: [
+                    "    THE CEO         - one page, redacted to the "
+                    + "letterhead\n    THE INFORMER    - photographs only, no "
+                    + "text\n    THE EVERYDAY    - not yet opened\n    THE "
+                    + "GAMBLER     - not yet opened",
+                    "  ? Four people are described in a manual for a "
+                    + "machine. No explanation is offered.",
+                  ] },
+              ],
+            },
             { no: 4,
               date: recordDay(4),
+              title: "GENERAL STATUS UPDATE",
+              line: "> Weird.Baby Website - All Systems Favorable\n> /Robots"
+                    + " data analysis",
               sections: [
                 { label: "EXECUTIVE SUMMARY",
                   body: [
-                    "Weird.Baby uptime: 100%, no anomalies",
-                    "Operations Cadence : Favorable, On Pace",
+                    "  > Weird.Baby uptime: 100%, no anomalies - f(Ump) = "
+                    + "100%\n  > Blockers - Nothing to Report",
                   ] },
-              ] },
+                { label: "DETAILED REPORT",
+                  body: [
+                    "  > Portal may be the \"answer\" this whole mystery.\n  >"
+                    + " It appears to be an unattended remote access "
+                    + "terminal.\n  > Excerpts from the Manual earlier in the "
+                    + "week indicate a bi-directional CNC Vid-Link\n  > "
+                    + "Probably not useful to us. (Probably not meant for "
+                    + "us...)",
+                  ] },
+                { label: "ADDENDUM 01 - Bench Description",
+                  body: [
+                    "    Console is a single welded steel desk. No maker "
+                    + "plate, no model number.\n    Display is a vidicon-tube "
+                    + "monitor, long-persistence phosphor, green.\n    "
+                    + "Readouts are cold-cathode numeric tubes. Eight digits,"
+                    + " four lit.\n    Input is a light pen on a coiled cord, "
+                    + "seated in a cradle at the right.\n    There is an "
+                    + "ashtray cast into the desk and it has been used.\n    A"
+                    + " paper-tape reader is fitted and empty. The take-up "
+                    + "reel is full.\n    Four toggle switches sit under a "
+                    + "hinged guard, unlabelled.",
+                    "  ! Nothing here postdates 1969. Everything here "
+                    + "works.",
+                  ] },
+              ],
+              docs: [
+                { title: "View of the portal screen" },
+                { title: "Manual ref to Portal" },
+              ],
+            },
             { no: 5,
               date: recordDay(5),
+              title: "GENERAL STATUS UPDATE",
+              line: "> ZIP Extraction - Outer Layers Complete / Stopped\n> "
+                    + "Portal Data Link - Connection Achieved",
               sections: [
                 { label: "EXECUTIVE SUMMARY",
                   body: [
-                    "Weird.Baby uptime: 100%, no anomalies",
-                    "Operations Cadence : Favorable, On Pace",
-                    "Transfer complete - Future reporting to come from "
-                    + "Operations",
-                    "/Robots - The data can be assembled to produce a "
-                    + "heavily compressed file that is  password protected.",
+                    "  > ZIP - We have reached the capability limit of "
+                    + "brute force.\n  > Portal appears to function. Intended "
+                    + "purpose unknown.",
                   ] },
-              ] },
+                { label: "DETAILED REPORT",
+                  body: [
+                    "  > Portal is accessible via the Robots Exhibit.\n  > "
+                    + "The launch controls are intuitive looking, but the "
+                    + "system fails to boot.\n  > Error: Communications Parity"
+                    + " Bias Setting Mismatch\n  > Four toggles. Sixteen "
+                    + "combinations. One of them is correct.\n  < The Manual "
+                    + "names the settings and declines to name the values.",
+                  ] },
+                { label: "ADDENDUM 01 - The Four Settings, as printed",
+                  body: [
+                    "    1  PARITY    ODD / EVEN\n    2  DUPLEX    HALF / "
+                    + "FULL\n    3  WORD      7 BIT / 8 BIT\n    4  STOP      1"
+                    + " / 2",
+                    "  ? A period operator would have known this without "
+                    + "being told.\n  ! We are not period operators.",
+                  ] },
+              ],
+            },
 ];

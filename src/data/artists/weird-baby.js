@@ -190,32 +190,117 @@ const spine = [
            HIS SECOND SENTENCE FROM YESTERDAY IS THE BRIEF FOR THE REPLACEMENT
            and is repeated here so it is beside the words it governs: "Voice is
            Mike's own. Papa Weird.Baby is him, not a persona." */
+        /* ═══════════════════════════════════════════════════════════════════
+           [2026-08-16] W-a CLOSES. THIS CARD IS MIKE'S OWN WORDS NOW.
+           ═══════════════════════════════════════════════════════════════════
+           His text, supplied 2026-08-16 and carried VERBATIM. What it replaces
+           was Ops' prose, written when nobody had described this artist and
+           tracked as a placeholder since 2026-08-14 on his own instruction
+           ("Track 1 copy as supplied, placeholder — Mike replaces before
+           launch, track it"). NAMED ONCE, HERE (Doctrine 24): the blurb read
+           "The house's own music. What this room holds of the artist is the
+           recordings; what it holds of the person is his name.", and the one
+           register row was "What the museum holds — Six recordings, made in
+           June 2026, and one release: The Best of Weird.Baby Vol. 1. They play
+           in this room." Both were Ops', both are his to replace, and he has.
+
+           ═══ THREE THINGS WERE FLAGGED TO HIM AND HE FIXED ALL THREE ═══════
+           His copy arrived with `Steven's Inst Tech`, `P!NK when to my High
+           School` and `Managmeent`, and his own instruction was **"FLAG TO
+           MIKE, do not correct… His voice, his call."** They were flagged and
+           left as typed; **on 2026-08-16 he ruled all three** and they now read:
+
+             · "Stevens Institute of Technology"   (was "Steven's Inst Tech")
+             · "P!NK went to my High School"       (was "when")
+             · "Eng Management"                    (was "Managmeent")
+
+           **NOTHING ELSE IN THIS COPY CHANGED — his instruction, and it is the
+           part a later round must not soften.** The loop is what matters here
+           and it is the reason the flag rule works: Ops does not correct, Ops
+           reports, and he rules. The same rule still binds Record 001's `was
+           made made` and `=  86%`, which he has NOT ruled on — do not read this
+           round as permission to tidy those.
+
+           ═══ WHY IT IS THREE FIELDS AND NOT ONE BLOCK ══════════════════════
+           His text has three shapes and the face already has an instrument for
+           each, so nothing new was built and nothing was flattened:
+             · the opening paragraph      -> `blurb`, the face's lead
+             · the four biography lines   -> `lines`, the mono REGISTER, which
+               is what a stack of short keyed facts is on every other face in
+               the building
+             · the two headed blocks      -> `profile` cards, whose label is set
+               in the house's mono caps. His headings are carried with his own
+               punctuation, colon and all: "ACHIEVEMENTS:" has one and "CURRENT
+               PROJECTS" does not.
+           HIS WRAPPING IS NOT A PARAGRAPH BREAK. The four achievements arrived
+           wrapped across two or three lines each; each is ONE paragraph and is
+           one string. Splitting on the newline would have invented paragraphs
+           he did not write — the same reading the Foundation's FAQ took on
+           2026-08-13, applied again rather than re-decided.
+           THE BLANK LINE BETWEEN THE ACHIEVEMENTS IS HIS AND IT DRAWS, on
+           `white-space: pre-line` (Exhibit.css) — the house's one answer to
+           what a newline the writer typed means, which the booth's answers, the
+           Record's deck and the Record's section bodies already run on.
+
+           A CARD WITH NO LABEL WOULD HAVE VANISHED, AND THAT IS WHY THE
+           BIOGRAPHY IS `lines`. `scrubFace` filters profile cards on
+           `kept(label) && kept(body)`, and `kept(null)` is false — so a card
+           carrying his four bio lines under no heading would have been dropped
+           in silence. Inventing a heading for them was the other way out and it
+           is Ops writing on the one card whose whole point is that it is his.
+           ═══════════════════════════════════════════════════════════════════ */
         face: {
           kind: "text",
           title: "About the artist",
           subtitle: "WEIRD.BABY",
+          /* THE OPENING PARAGRAPH AND THE FOUR BIOGRAPHY LINES ARE ONE FIELD,
+             AND THAT IS A MEASUREMENT RATHER THAN A PREFERENCE. The first cut
+             put the biography in `lines`, the face's mono REGISTER, which is
+             the right instrument for a stack of short keyed facts — and the
+             renderer draws `.vp-face-lines` roughly 350 lines BELOW `.vp-prof`,
+             so his four bio lines landed UNDER the achievements instead of
+             above them. Measured on the page: the face read blurb ->
+             ACHIEVEMENTS -> CURRENT PROJECTS -> Born 7/3 63.
+             HIS ORDER IS PART OF HIS TEXT. Moving the register up the renderer
+             would reorder every face in the museum that declares both to fix
+             one that does; inventing a heading so the biography could be a
+             `profile` card would be Ops writing on the one card whose whole
+             point is that it is not. So the biography sits in the lead, where
+             he put it, carried by the blank line he typed.
+             THE COST IS STATED: the bio lines take the lead's weight and
+             measure rather than the register's mono column. Flagged for him. */
           blurb:
-            "The house's own music. What this room holds of the artist is the " +
-            "recordings; what it holds of the person is his name.",
-          /* ═══ [2026-08-11] FIVE ROWS ARE DELETED WITH THE RED NOTES ══════
-             Mike's ruling. "Where he is from", "What he sounds like", "In his
-             own words", "Start with" and "What he is doing now" each held ONE
-             `[PAPA]` sentence and no other text, so striking the notes emptied
-             them entirely.
-             NOTHING CHANGES ON THE GLASS AND THAT IS MEASURED RATHER THAN
-             HOPED: `scrubFace` already filtered this list on
-             `kept(label) && kept(body)`, so a row whose whole body was a marker
-             has never drawn — in either stage. What is deleted is data nobody
-             could see, which is what makes it a deletion rather than an edit to
-             the room. The one row that could be filled from what this
-             repository actually knows is the one that stays. */
+            "Papa Weird.Baby (aka Mike Lang) is an Indie Melodic-Talker who "
+            + "relies on sloppy-guitar and mournful lyrics to decry the plight "
+            + "of the homeless. And some funny stuff, too. And Robots!"
+            + "\n\n"
+            + "Born 7/3 63" + "\n"
+            + "CB West Doylestown, PA" + "\n"
+            + "Stevens Institute of Technology - Hoboken NJ - '85 Mech Eng" + "\n"
+            + "NJIT Newark, NJ - '00 Eng Management",
           profile: [
-            /* [B 2026-08-13] the release's name follows the album's — see the
-               retitle below. "The Making of BoWB V1" was the last of four
-               places that phrase appeared and it is gone from all four. */
-            { label: "What the museum holds",
-              body: "Six recordings, made in June 2026, and one release: The " +
-                    "Best of Weird.Baby Vol. 1. They play in this room." },
+            { label: "ACHIEVEMENTS:",
+              body:
+                "P!NK went to my High School - Central Bucks High School West. "
+                + "Rumor has it she had my old locker. At least that's the "
+                + "rumor I'm spreading."
+                + "\n\n"
+                + "Steven Tyler \"handed me\" his personal harmonica, onstage, "
+                + "Las Vegas NV Feb 2020. Then he tried to get me into the mic "
+                + "during the show. (Not pretty. I panicked.)"
+                + "\n\n"
+                + "Rod Stewart kicks soccer balls out to the crowd, I caught "
+                + "one! Mine has Rod's name written on it; must be his personal "
+                + "ball. I hope that is OK."
+                + "\n\n"
+                + "Hunter Root and I hung out behind the bar he was playing "
+                + "that night. Burned some time together. (Two at once?!? "
+                + "Sorry, I panicked.)" },
+            { label: "CURRENT PROJECTS",
+              body:
+                "Learning to play acoustic guitar and sing in order to record "
+                + "the songs I just wrote so I can release the album I "
+                + "announced. And Robots." },
           ],
           footer: "WEIRD.BABY · ABOUT THE ARTIST",
         },

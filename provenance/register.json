@@ -14617,20 +14617,6 @@
    "s": "docs/MUSEUM_DATE_PREVIEW_LOG-20260808.md §0 — Mike, 2026-08-08: \"RECORD 001 IS DATED 2026-08-17 (pending launch happening that day)\", with the standing rule above it that an entry's date is the actual calendar day it is published, not a fictional offset",
    "n": "IT IS THE DATE ITSELF AND NOT A STRING ON THE GLASS. Nothing prints these ten characters: the register stamp derives `17 AUG 26` and the dateline derives `Week 1 · Monday`, both by arithmetic in src/lib/record-model.js. It is declared MIKE because it is his fact, and it is the one field a launch slip moves."
   },
-  "007e47ba2bde8ee6": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 131,
-   "t": "INITIAL LAUNCH REPORT - Weird.Baby",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "bfa2f5a6154e26d9": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 152,
-   "t": "Weird.Baby website is live\nAlert — Incoming Email Server Load (contained)",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
   "21e0467885e5b524": {
    "f": "src/data/artists/robots-record.js",
    "l": 288,
@@ -14638,20 +14624,6 @@
    "p": "spine[].tracks[].face.entries[].sections[].label",
    "c": "MIKE",
    "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
-  },
-  "2ae22841cbd51b93": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 175,
-   "t": "Weird.Baby launched on schedule. No deviations; f(Ump) = 100%",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "2e0634240d70b185": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 177,
-   "t": "Handoff is on track (T-6); Operations has hands-on-the-ball.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
   },
   "e4d0a6f2bfadefb0": {
    "f": "src/data/artists/robots-record.js",
@@ -14661,114 +14633,6 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
   },
-  "ef3a7839c118c5d6": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 182,
-   "t": "ALARM - Incoming Email Server Load 1000x",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "991f5ad6f5c3db68": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 183,
-   "t": "o Operations remains unaffected.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "3a464ddc9f1a69c8": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 184,
-   "t": "o Not single sourced, so not as simple as \"turn it off.\"",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "91a8cbfb0eae7c7d": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 186,
-   "t": "o Data transmissions went silent shortly after WB launch.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "59cafb56ddd0d82d": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 188,
-   "t": "ADDENDUM 01 - Event Log - Friday Launch(-2)",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "044af1214c09790f": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 190,
-   "t": "15:00 - Weird.Baby email server Scheduled Early Auto Start",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "14314c5dfc3b85ef": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 191,
-   "t": "15:01 - Weird.Baby System BIST - No deviations; f(Ump) = 100%",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "88276ced4a63f671": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 193,
-   "t": "15:14 - First data packet received",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
-  },
-  "c15f4584d8978632": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 194,
-   "t": "15:58 - Second data packet received",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
-  },
-  "05e0f5c7eee6370b": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 195,
-   "t": "16:00 - Incoming data crosses 86% vs threshold",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "985238f291f35f23": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 196,
-   "t": "16:10 - Server auto-shutdown, auto-containment, and auto-alerts",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "d3cc3615411dca6e": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 198,
-   "t": "16:13 - REACT - Team is convened",
-   "p": "spine[].tracks[].face.entries[].sections[].body",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_001_LOG-20260808.md §0 — Mike's launch report, dictated 2026-08-08 and quoted there in full, unedited"
-  },
-  "06a1db599c5979b6": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 199,
-   "t": "23:30 - REACT RULING - Restart with 5000x resources.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "7710a8a0a8eda094": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 200,
-   "t": "The decision to resume was determined to be low risk, reversible, and a real world stress test.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "1429118eaa5db2d2": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 202,
-   "t": "The engineering team was more intrigued than concerned, and not involved in the determination.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
   "fa5be351128c1eff": {
    "f": "src/data/artists/robots-record.js",
    "l": 205,
@@ -14776,178 +14640,10 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
   },
-  "592d0b53d6ee3f0f": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 207,
-   "t": "Staff onsite to support Weird.Baby launch - Nothing to report.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "3ae37892bff3ab83": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 209,
-   "t": "The time was put to use reviewing the incoming data.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "83ec7a79d51c2c7b": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 210,
-   "t": "Pages of hexadecimal numbers; presumably needs to be compiled and assembled into something usable.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "8a8fa208c2d66073": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 213,
-   "t": "ADDENDUM 03 - Event Log - Monday Day(1)",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "6215139ec771ac35": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 215,
-   "t": "00:00 - WB Go-Live went off without a hitch.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "90e6457aa8ce7c7a": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 216,
-   "t": "00:02 - Incoming data stream ended",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "c1b32aabd41c030b": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 217,
-   "t": "The remainder of the day was completely uneventful.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "d503e1e16772ce93": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 218,
-   "t": "Weird.Baby uptime - 100%, no further anomalies.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
-  "db8af2a07a356f8c": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 219,
-   "t": "We decided to stand up /Robots as a page to track our progress for a few days. It is weird if nothing else. Maybe try to get a little crowdsourcing going on dealing with this, going forward.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_DECK_LOG-20260810.md §0 — Mike's dictation of Record 001, 2026-08-10, given in the round instruction and quoted there in full. It supersedes the 2026-08-08 landing whole: same report, his own corrections applied on his instruction (\"his dictation, typos corrected\")."
-  },
   "1b5504e112211393": {
    "f": "src/data/artists/robots-record.js",
    "l": 227,
    "t": "GENERAL STATUS UPDATE",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "6e6c4adec685657d": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 228,
-   "t": "Weird.Baby Integrity Management Plan remains on-track without anomalies.\nEmail Server Data Assault has ceased; no net impact.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "8745f9535628ce9f": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 290,
-   "t": "Weird.Baby uptime: 100%, no anomalies",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "bd96a0a5d0764796": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 291,
-   "t": "Operations Cadence : Favorable, On Pace",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "3004e0b95f6b8682": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 236,
-   "t": "Blockers - Nothing to Report",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "b7689aa7e36abf8c": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 240,
-   "t": "All process controls are in good order.  Operations is turning the crank, keeping tings moving on cadence.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "8e3cffb7abb6b407": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 242,
-   "t": "The adrenalin from the launch and the weekend has finally worn off; we are all running on fumes.  No time was spent on the mystery data stream, today.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "75de414a1927c711": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 249,
-   "t": "DATA EXTRACTED - Weekend Robots Anomaly",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "c53bbc98180db364": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 250,
-   "t": "Weird.Baby IMP - On-track without anomalies.\nEmail Server Data Assault - Password Protected File Structure (6.28 GB)",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "74bbdae80d960fb7": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 258,
-   "t": "Data has been extracted from weekend dump including images and text. While all of it appears compelling, it is currently of no known value.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "055692ed7bde00dc": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 264,
-   "t": "Data has been extracted from weekend dump",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "cd09ca2ecfc3e0d5": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 265,
-   "t": "IMAGE - Engineering Manual - Assorted pages",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "9f7f20e1612af31a": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 266,
-   "t": "IMAGE - Assorted Evidence Based photos - Unknown Importance",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "9829022d2615b90d": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 268,
-   "t": "A new Volume has been created: /Robots/MGK-VIIIp",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "435310423bcbfb05": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 292,
-   "t": "Transfer complete - Future reporting to come from Operations",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
-  },
-  "6f29670330e21980": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 294,
-   "t": "/Robots - The data can be assembled to produce a heavily compressed file that is  password protected.",
    "c": "MIKE",
    "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
   },
@@ -15605,6 +15301,615 @@
    "l": 180,
    "t": "window.__WB_NOW__={};",
    "c": "HOUSE"
+  },
+  "4077944ef2f5b33e": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 217,
+   "t": "INITIAL LAUNCH - Weird.Baby Website",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "ff0b1e52c298927e": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 218,
+   "t": "> Weird.Baby website went live\n> Alert - Incoming Server Load  (contained)",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "fb706629b508508a": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 223,
+   "t": "  > Weird.Baby launched on schedule. No deviations; f(Ump) = 100%\n  > Operations has hands-on-the-ball. Handoff is on track (T-6);",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "4fea1d50ac5b08e7": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 229,
+   "t": "  > ALARM - Incoming Server Load >1000x nominal\n  > Operations remains unaffected.\n  > Multi-source swarm payloads precludes IP/Domain blocking\n  ? RX ended abruptly and coincedent with Weird.Baby launch",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "f61e57d6a103dfc4": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 234,
+   "t": "ADDENDUM 01 - Event Log - Friday (Launch - 2)",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "034fab96a51e8d88": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 236,
+   "t": "    15:00 - Weird.Baby Incoming Server - Scheduled Early Auto Start (Retired)\n    15:01 - Weird.Baby System BIST - No deviations; f(Ump) = 100%\n    15:04 - First data packet received\n    15:58 - Second data packet received\n    16:00 - Instantaneous - RX sustained FULL LOAD - Packet Rejects = n!\n    16:10 - Server auto-shutdown, auto-containment, and auto-alerts\n    16:13 - REACT - Team is convened\n    23:30 - REACT RULING - Restart with 5Kx Incoming Server Resources",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "4257d759c9cba607": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 246,
+   "t": "    > The decision to resume was determined to be low risk, reversible, and a real-world stress test.\n    > The engineering team was more intrigued than concerned, and not involved in the determination.",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "215ace66b0f0d274": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 253,
+   "t": "    > Staff onsite to support Weird.Baby launch - Nothing to report.\n    > The time was put to use reviewing the incoming data.\n    > Pages of hexadecimal numbers; presumably to be compiled into something of use.",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "38defa91305dac61": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 259,
+   "t": "ADDENDUM 03 - Event Log - Monday (Launch)",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "d08f374d09919204": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 261,
+   "t": "    > 00:00 - WB Go-Live went off without a hitch.\n    > 00:02 - Incoming data stream ends\n    > The remainder of the day was completely uneventful.\n    > Weird.Baby uptime - 100%, no further anomalies.\n    > ADDED PAGE - W.B/Robots added (to track what happened, just for a few days)\n       HASH: 982056&363 = $^6/Tx=0............................. >> Complete!",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "b864c8fa36f6e938": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 434,
+   "t": "ATTACHMENTS",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "d363fa8a5cf91958": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 278,
+   "t": "> Weird.Baby Integrity Management Plan remains on-track without anomalies.\n> Incoming Server Data Assault has ceased; no impact.",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "b4676ae4cb93c08f": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 371,
+   "t": "  > Weird.Baby uptime: 100%, no anomalies - f(Ump) = 100%\n  > Blockers - Nothing to Report",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "6ff1b1a0322bab8a": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 289,
+   "t": "  > METRIC SUMMARY - Nothing to report. All processes 6+ sigma.\n  > Incoming Data = ZIP file (31.4 GB) Password Protected\n  > Partial extraction attempted against the stream still in flight.\n  < A ZIP index is written last. No catalog is available until receipt completes.\n  > Each file is preceded by its own header. Names arrive ahead of contents.\n  ? 1,046 names recovered before the stream closed. Not one of them opens.",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "839013e7e95ba196": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 299,
+   "t": "ADDENDUM 01 - Partial Manifest (names only, no contents)",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "b905a6c931dd37f0": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 301,
+   "t": "    MGK-VIIIp/MANUAL/00-FRONTMATTER.tif\n    MGK-VIIIp/MANUAL/07-POWER-SYSTEM.tif\n    MGK-VIIIp/MANUAL/11-VID-LINK.tif\n    MGK-VIIIp/MANUAL/31-PARITY-BIAS.tif\n    PERSONNEL/CEO/\n    PERSONNEL/INFORMER/\n    PERSONNEL/EVERYDAY/\n    PERSONNEL/GAMBLER/\n    PORTAL/CH3-STANDARD/\n    PORTAL/CH4-DETAIL/\n    _tmp/                              < password bit not set",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "2986f237e930ef45": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 309,
+   "t": "  ! The last entry is the only one we can open. It is being reviewed.",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "e5b9f6141943ad2d": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 436,
+   "t": "  > n/a",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "3dc371d3c78e1538": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 321,
+   "t": "> Weird.Baby Website - All Systems Favorable\n> Robots - Nothing to Report",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "7a20beafee05641b": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 331,
+   "t": "  > Ops transition moving to Early-Pull (Confidence >> 6.28 sigma)\n  > One tmp folder unprotected - Contents attached\n  > Extraction staging, left behind. Eleven manual plates and four personnel folders.\n  ? The manual is not written for the unit. It is written for the person keeping it.",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "c292551ab9637b84": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 338,
+   "t": "ADDENDUM 01 - Manual Plates Recovered",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "10d7240c85410765": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 340,
+   "t": "    PLATE 07 - POWER SYSTEM\n      \"Do not service under load. The keeper is answerable for the state of the cell.\"\n    PLATE 11 - VID-LINK\n      \"The link is bi-directional by design. Assume the far end is attended.\"\n    PLATE 31 - PARITY BIAS\n      \"Four settings. The unit will not speak until all four agree with the far end.\"",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "b92ba684d4b5501e": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 348,
+   "t": "ADDENDUM 02 - Personnel Folders (empty, names only)",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "e676b8c7e14f70d0": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 350,
+   "t": "    THE CEO         - one page, redacted to the letterhead\n    THE INFORMER    - photographs only, no text\n    THE EVERYDAY    - not yet opened\n    THE GAMBLER     - not yet opened",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "023142ff21b3c19c": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 354,
+   "t": "  ? Four people are described in a manual for a machine. No explanation is offered.",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "d4bb58a42d7c9bb4": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 366,
+   "t": "> Weird.Baby Website - All Systems Favorable\n> /Robots data analysis",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "5075100b8491f4ae": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 376,
+   "t": "  > Portal may be the \"answer\" this whole mystery.\n  > It appears to be an unattended remote access terminal.\n  > Excerpts from the Manual earlier in the week indicate a bi-directional CNC Vid-Link\n  > Probably not useful to us. (Probably not meant for us...)",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "6fd539cad916958f": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 383,
+   "t": "ADDENDUM 01 - Bench Description",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "c244f94c4fe30f87": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 385,
+   "t": "    Console is a single welded steel desk. No maker plate, no model number.\n    Display is a vidicon-tube monitor, long-persistence phosphor, green.\n    Readouts are cold-cathode numeric tubes. Eight digits, four lit.\n    Input is a light pen on a coiled cord, seated in a cradle at the right.\n    There is an ashtray cast into the desk and it has been used.\n    A paper-tape reader is fitted and empty. The take-up reel is full.\n    Four toggle switches sit under a hinged guard, unlabelled.",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "993aec2fceb022ac": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 395,
+   "t": "  ! Nothing here postdates 1969. Everything here works.",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "17206e492e02ddda": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 400,
+   "t": "View of the portal screen\nManual ref to Portal\nOPAs, photos,  - Mike to select and prepare",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "58b7aa34b96a7317": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 408,
+   "t": "> ZIP Extraction - Outer Layers Complete / Stopped\n> Portal Data Link - Connection Achieved",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "4f9da402e677af74": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 413,
+   "t": "  > ZIP - We have reached the capability limit of brute force.\n  > Portal appears to function. Intended purpose unknown.",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "3cf22de052a2f166": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 419,
+   "t": "  > Portal is accessible via the Robots Exhibit.\n  > The launch controls are intuitive looking, but the system fails to boot.\n  > Error: Communications Parity Bias Setting Mismatch\n  > Four toggles. Sixteen combinations. One of them is correct.\n  < The Manual names the settings and declines to name the values.",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "46e4b6cf645d1a20": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 426,
+   "t": "ADDENDUM 01 - The Four Settings, as printed",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "ef161d5130e01fc3": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 428,
+   "t": "    1  PARITY    ODD / EVEN\n    2  DUPLEX    HALF / FULL\n    3  WORD      7 BIT / 8 BIT\n    4  STOP      1 / 2",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "3b95d5943a925d7a": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 431,
+   "t": "  ? A period operator would have known this without being told.\n  ! We are not period operators.",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
+  },
+  "47aa3aaa0545f16e": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 388,
+   "t": "View of the portal screen",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx, ATTACHMENTS section of REC 1.4, landed on 2026-08-16 via workbook_to_draft.py -> record:land --write. His lines, carried verbatim as the titles of the entry's `docs` attachment rows rather than as a text section: only where they live changed. Round-tripped by --verify, 54 of 54 strings, 0 mismatches."
+  },
+  "a1b36384f7a28723": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 389,
+   "t": "Manual ref to Portal",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx, ATTACHMENTS section of REC 1.4, landed on 2026-08-16 via workbook_to_draft.py -> record:land --write. His lines, carried verbatim as the titles of the entry's `docs` attachment rows rather than as a text section: only where they live changed. Round-tripped by --verify, 54 of 54 strings, 0 mismatches."
+  },
+  "7b04ea098d27d1f2": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 390,
+   "t": "OPAs, photos,  - Mike to select and prepare",
+   "c": "MIKE",
+   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx, ATTACHMENTS section of REC 1.4, landed on 2026-08-16 via workbook_to_draft.py -> record:land --write. His lines, carried verbatim as the titles of the entry's `docs` attachment rows rather than as a text section: only where they live changed. Round-tripped by --verify, 54 of 54 strings, 0 mismatches."
+  },
+  "fdd17baaf3b2561d": {
+   "f": "src/data/artists/foundation.js",
+   "l": 587,
+   "t": "What is this all about?",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "0e766c636dbfa0dc": {
+   "f": "src/data/artists/foundation.js",
+   "l": 590,
+   "t": "Read 'The Short Story'",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "9660c19d4a9f6ae0": {
+   "f": "src/data/artists/foundation.js",
+   "l": 591,
+   "t": "Interested? Read 'The Long Story' and follow the blog.",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "27785230ed648e52": {
+   "f": "src/data/artists/foundation.js",
+   "l": 598,
+   "t": "Not the kind with a building and an endowment.",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "fc252ba7dc4f2197": {
+   "f": "src/data/artists/foundation.js",
+   "l": 599,
+   "t": "There is no fund here, no account, and nothing set aside.",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "5da4b3a3074f3526": {
+   "f": "src/data/artists/foundation.js",
+   "l": 600,
+   "t": "What the word means here is the set of rules the place is built on, written down and kept.",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "128e47e406019c31": {
+   "f": "src/data/artists/foundation.js",
+   "l": 605,
+   "t": "Where do our donations go?",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "b6ff32743619af5c": {
+   "f": "src/data/artists/foundation.js",
+   "l": 610,
+   "t": "Where do the Music and Merch proceeds go?",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "ac181ba45179873b": {
+   "f": "src/data/artists/foundation.js",
+   "l": 615,
+   "t": "100% of the Artists' profits and royalties are handled by them, on their sites.",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "7e475d9183f140e8": {
+   "f": "src/data/artists/foundation.js",
+   "l": 620,
+   "t": "Who pays to keep the lights on?",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "2c9debe6573e3750": {
+   "f": "src/data/artists/foundation.js",
+   "l": 623,
+   "t": "Mike and Mo pay all the bills (Internet, robot parts, pens and pencils, etc.)",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "88ccd56b346adf88": {
+   "f": "src/data/artists/foundation.js",
+   "l": 625,
+   "t": "We intend to keep it that until it is time to pass it on; time will tell.",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "08d31ffe2bed5ed7": {
+   "f": "src/data/artists/foundation.js",
+   "l": 630,
+   "t": "Why are you giving away your money?",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "a3e73cc0e9eab223": {
+   "f": "src/data/artists/foundation.js",
+   "l": 633,
+   "t": "We are not giving it away.",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "108073457b05e4eb": {
+   "f": "src/data/artists/foundation.js",
+   "l": 634,
+   "t": "We have what we need; we choose not to keep grabbing more for ourselves.",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "bd349c82ecc790f9": {
+   "f": "src/data/artists/foundation.js",
+   "l": 639,
+   "t": "Can I contribute something other than money?",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "05ad540bf0590b28": {
+   "f": "src/data/artists/foundation.js",
+   "l": 643,
+   "t": "And Coalition for the Homeless could use your help right now.",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "71c99e3d9569724f": {
+   "f": "src/data/artists/foundation.js",
+   "l": 653,
+   "t": "I'll pass it on. There is no committee, no board, and no team.",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "c5e70d3886462faa": {
+   "f": "src/data/artists/foundation.js",
+   "l": 654,
+   "t": "And if humanity stops believing in what this is for, Weird.Baby does not pivot, rebrand or sell. It ends, and the name is retired. What survives is the idea; somebody else may begin again, under their own name.",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
+  },
+  "98e5c0f18a107618": {
+   "f": "src/data/artists/foundation.js",
+   "l": 1040,
+   "t": "The Short Story",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3b, \"ADD tracks 1, 2, 3: 'The Short Story', 'The Long Story', 'The Blog'.\" — the track names as he named them. The tracks themselves are unwritten by his instruction: \"Do NOT write these yourself; they are Mike's voice.\""
+  },
+  "ee00914e280645c1": {
+   "f": "src/data/artists/foundation.js",
+   "l": 1049,
+   "t": "[PAPA] this track is yours to write — the FAQ already points a reader at it, and nothing in the repo was close enough to seed it (the search is in the round report).",
+   "c": "HOUSE",
+   "s": "OPS, not Mike, and NOT VISITOR-FACING BY CONSTRUCTION. A `[PAPA]` marker is the operator's note about what still needs his words; `visitorProse` drops the sentence carrying it at the render seam in EVERY stage, and `wb-ops-notes` (vite.config.js) empties the literal from the SOURCE at launch. Written on his 2026-08-16 instruction that the three story tracks are his to write. Measured on the page: the face draws title and subtitle and nothing else."
+  },
+  "47555bb4710287b5": {
+   "f": "src/data/artists/foundation.js",
+   "l": 1060,
+   "t": "The Long Story",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3b, \"ADD tracks 1, 2, 3: 'The Short Story', 'The Long Story', 'The Blog'.\" — the track names as he named them. The tracks themselves are unwritten by his instruction: \"Do NOT write these yourself; they are Mike's voice.\""
+  },
+  "102edf7a4d9e8486": {
+   "f": "src/data/artists/foundation.js",
+   "l": 1063,
+   "t": "[PAPA] yours to write, and the nearest thing already written is C:/AI/VISION.md, which is about the museum rather than about the giving (see the round report before reusing it).",
+   "c": "HOUSE",
+   "s": "OPS, not Mike, and NOT VISITOR-FACING BY CONSTRUCTION. A `[PAPA]` marker is the operator's note about what still needs his words; `visitorProse` drops the sentence carrying it at the render seam in EVERY stage, and `wb-ops-notes` (vite.config.js) empties the literal from the SOURCE at launch. Written on his 2026-08-16 instruction that the three story tracks are his to write. Measured on the page: the face draws title and subtitle and nothing else."
+  },
+  "324d8e5b5b961da2": {
+   "f": "src/data/artists/foundation.js",
+   "l": 1074,
+   "t": "The Blog",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3b, \"ADD tracks 1, 2, 3: 'The Short Story', 'The Long Story', 'The Blog'.\" — the track names as he named them. The tracks themselves are unwritten by his instruction: \"Do NOT write these yourself; they are Mike's voice.\""
+  },
+  "d8659aebba9f6fe1": {
+   "f": "src/data/artists/foundation.js",
+   "l": 1077,
+   "t": "[PAPA] yours, and the FAQ already tells a reader to follow it, so this one needs either your first post or a ruling that the blog lives somewhere else.",
+   "c": "HOUSE",
+   "s": "OPS, not Mike, and NOT VISITOR-FACING BY CONSTRUCTION. A `[PAPA]` marker is the operator's note about what still needs his words; `visitorProse` drops the sentence carrying it at the render seam in EVERY stage, and `wb-ops-notes` (vite.config.js) empties the literal from the SOURCE at launch. Written on his 2026-08-16 instruction that the three story tracks are his to write. Measured on the page: the face draws title and subtitle and nothing else."
+  },
+  "f9688ea29a679f4f": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 267,
+   "t": "Papa Weird.Baby (aka Mike Lang) is an Indie Melodic-Talker who relies on sloppy-guitar and mournful lyrics to decry the plight of the homeless. And some funny stuff, too. And Robots!\n\nBorn 7/3 63\nCB West Doylestown, PA\nSteven's Inst Tech - Hoboken NJ - '85 Mech Eng\nNJIT Newark, NJ - '00 Eng Managmeent",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 4, ABOUT THE ARTIST on /wb — his text, supplied whole and carried VERBATIM. This closes register row W-a. His instruction includes an explicit do-not-correct list: \"Steven's Inst Tech\" is Stevens Institute of Technology, \"P!NK when to my High School\" reads as \"went\", and \"Managmeent\" — \"FLAG TO MIKE, do not correct… His voice, his call.\" They are flagged in the round report and left as typed."
+  },
+  "2e295e4c32a49e6e": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 276,
+   "t": "ACHIEVEMENTS:",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 4, ABOUT THE ARTIST on /wb — his text, supplied whole and carried VERBATIM. This closes register row W-a. His instruction includes an explicit do-not-correct list: \"Steven's Inst Tech\" is Stevens Institute of Technology, \"P!NK when to my High School\" reads as \"went\", and \"Managmeent\" — \"FLAG TO MIKE, do not correct… His voice, his call.\" They are flagged in the round report and left as typed."
+  },
+  "a76c0ba31f29ac08": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 278,
+   "t": "P!NK when to my High School - Central Bucks High School West. Rumor has it she had my old locker. At least that's the rumor I'm spreading.\n\nSteven Tyler \"handed me\" his personal harmonica, onstage, Las Vegas NV Feb 2020. Then he tried to get me into the mic during the show. (Not pretty. I panicked.)\n\nRod Stewart kicks soccer balls out to the crowd, I caught one! Mine has Rod's name written on it; must be his personal ball. I hope that is OK.\n\nHunter Root and I hung out behind the bar he was playing that night. Burned some time together. (Two at once?!? Sorry, I panicked.)",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 4, ABOUT THE ARTIST on /wb — his text, supplied whole and carried VERBATIM. This closes register row W-a. His instruction includes an explicit do-not-correct list: \"Steven's Inst Tech\" is Stevens Institute of Technology, \"P!NK when to my High School\" reads as \"went\", and \"Managmeent\" — \"FLAG TO MIKE, do not correct… His voice, his call.\" They are flagged in the round report and left as typed."
+  },
+  "6408aa7233a370a8": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 293,
+   "t": "CURRENT PROJECTS",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 4, ABOUT THE ARTIST on /wb — his text, supplied whole and carried VERBATIM. This closes register row W-a. His instruction includes an explicit do-not-correct list: \"Steven's Inst Tech\" is Stevens Institute of Technology, \"P!NK when to my High School\" reads as \"went\", and \"Managmeent\" — \"FLAG TO MIKE, do not correct… His voice, his call.\" They are flagged in the round report and left as typed."
+  },
+  "d961d106a18e6466": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 295,
+   "t": "Learning to play acoustic guitar and sing in order to record the songs I just wrote so I can release the album I announced. And Robots.",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 4, ABOUT THE ARTIST on /wb — his text, supplied whole and carried VERBATIM. This closes register row W-a. His instruction includes an explicit do-not-correct list: \"Steven's Inst Tech\" is Stevens Institute of Technology, \"P!NK when to my High School\" reads as \"went\", and \"Managmeent\" — \"FLAG TO MIKE, do not correct… His voice, his call.\" They are flagged in the round report and left as typed."
+  },
+  "704bc93c8a7a954a": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 139,
+   "t": "A museum, of sorts.\nA place to freely share my stuff with others.",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
+  },
+  "cf5d39e2d2375e6c": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 159,
+   "t": "No — Weird.Baby uses no logins, no cookies.\nNOTE: We do not speak for Social Media or Artist site policies.",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
+  },
+  "acd2ab60cd20e6c0": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 176,
+   "t": "How do things get in the museum?",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
+  },
+  "c871ba5ebca91785": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 177,
+   "t": "It gets discovered organically and fits the suit.\nPRO-TIP: Just go out and do some good. We're watching.",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
+  },
+  "16d8a812b83ccc41": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 194,
+   "t": "No — a museum that stops accessioning is a storage unit.\nIf you come back, there will be more to see.",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
+  },
+  "0aeeb4759fe63488": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 330,
+   "t": "Return to the lobby",
+   "c": "MIKE",
+   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
+  },
+  "43df6c209a7c7ae5": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 273,
+   "t": "Papa Weird.Baby (aka Mike Lang) is an Indie Melodic-Talker who relies on sloppy-guitar and mournful lyrics to decry the plight of the homeless. And some funny stuff, too. And Robots!\n\nBorn 7/3 63\nCB West Doylestown, PA\nStevens Institute of Technology - Hoboken NJ - '85 Mech Eng\nNJIT Newark, NJ - '00 Eng Management",
+   "c": "MIKE",
+   "s": "Mike's follow-up instruction of 2026-08-16 (item 4), quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §5. His ABOUT THE ARTIST copy of the same day, with the three items Ops flagged and did not correct now ruled by him: \"Steven's Inst Tech\" -> \"Stevens Institute of Technology\", \"P!NK when to my\" -> \"P!NK went to my\", \"Eng Managmeent\" -> \"Eng Management\". His instruction: \"Nothing else in that copy changes.\" Nothing else did."
+  },
+  "3b0694b30a3d0102": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 284,
+   "t": "P!NK went to my High School - Central Bucks High School West. Rumor has it she had my old locker. At least that's the rumor I'm spreading.\n\nSteven Tyler \"handed me\" his personal harmonica, onstage, Las Vegas NV Feb 2020. Then he tried to get me into the mic during the show. (Not pretty. I panicked.)\n\nRod Stewart kicks soccer balls out to the crowd, I caught one! Mine has Rod's name written on it; must be his personal ball. I hope that is OK.\n\nHunter Root and I hung out behind the bar he was playing that night. Burned some time together. (Two at once?!? Sorry, I panicked.)",
+   "c": "MIKE",
+   "s": "Mike's follow-up instruction of 2026-08-16 (item 4), quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §5. His ABOUT THE ARTIST copy of the same day, with the three items Ops flagged and did not correct now ruled by him: \"Steven's Inst Tech\" -> \"Stevens Institute of Technology\", \"P!NK when to my\" -> \"P!NK went to my\", \"Eng Managmeent\" -> \"Eng Management\". His instruction: \"Nothing else in that copy changes.\" Nothing else did."
+  },
+  "3f36ed91c109f223": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 201,
+   "t": "No — Those exhibited on Weird.Baby are not partners, clients, or signings.\nThey are people we feel are Worth a Listen.",
+   "c": "MIKE",
+   "s": "Mike's follow-up instruction of 2026-08-16 (item 1), quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §5: \"FIX TWO FAKE LINE BREAKS on /booth — Ops' error, not Mike's. Ops wrapped these lines inside a code block when writing the packet and you carried them verbatim, correctly. They are not Mike's line breaks.\" His words are unchanged; one authored break is removed from each answer, rejoining a sentence that a code block had wrapped on the way in. Swept both rooms on the mid-sentence test: the booth carried 11 authored breaks, exactly these two failed it, and /foundation carried none."
+  },
+  "62c339abacaf2acd": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 206,
+   "t": "No — never.\nEvery door in the gift shop leads to the Artists' own sites and stores.",
+   "c": "MIKE",
+   "s": "Mike's follow-up instruction of 2026-08-16 (item 1), quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §5: \"FIX TWO FAKE LINE BREAKS on /booth — Ops' error, not Mike's. Ops wrapped these lines inside a code block when writing the packet and you carried them verbatim, correctly. They are not Mike's line breaks.\" His words are unchanged; one authored break is removed from each answer, rejoining a sentence that a code block had wrapped on the way in. Swept both rooms on the mid-sentence test: the booth carried 11 authored breaks, exactly these two failed it, and /foundation carried none."
+  },
+  "bd078d321b06a7d3": {
+   "f": "src/data/artists/foundation.js",
+   "l": 647,
+   "t": "Where's the donate button?",
+   "c": "MIKE",
+   "s": "Mike's launch-round instruction of 2026-08-16, quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §6: \"THE DONATE PASSAGE — RULED IN. New FAQ entry on /foundation. This is the ONLY place on the site that links to giving. Mike's words, lightly shaped by Ops; he will edit later.\" The four lines and the question are carried exactly as he supplied them, one sentence per element; \"donate here\" is the anchor text inside his own last line (inlineDoor, Exhibit.jsx) and points at https://www.coalitionforthehomeless.org/donate/, the address he gave. He has said he will edit this copy later."
+  },
+  "912994c4f0457119": {
+   "f": "src/data/artists/foundation.js",
+   "l": 650,
+   "t": "We are not asking you for money.",
+   "c": "MIKE",
+   "s": "Mike's launch-round instruction of 2026-08-16, quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §6: \"THE DONATE PASSAGE — RULED IN. New FAQ entry on /foundation. This is the ONLY place on the site that links to giving. Mike's words, lightly shaped by Ops; he will edit later.\" The four lines and the question are carried exactly as he supplied them, one sentence per element; \"donate here\" is the anchor text inside his own last line (inlineDoor, Exhibit.jsx) and points at https://www.coalitionforthehomeless.org/donate/, the address he gave. He has said he will edit this copy later."
+  },
+  "2938b87d68c4d6f0": {
+   "f": "src/data/artists/foundation.js",
+   "l": 651,
+   "t": "We make money by making something worth having, and all of it goes to Coalition for the Homeless.",
+   "c": "MIKE",
+   "s": "Mike's launch-round instruction of 2026-08-16, quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §6: \"THE DONATE PASSAGE — RULED IN. New FAQ entry on /foundation. This is the ONLY place on the site that links to giving. Mike's words, lightly shaped by Ops; he will edit later.\" The four lines and the question are carried exactly as he supplied them, one sentence per element; \"donate here\" is the anchor text inside his own last line (inlineDoor, Exhibit.jsx) and points at https://www.coalitionforthehomeless.org/donate/, the address he gave. He has said he will edit this copy later."
+  },
+  "5668d17056539725": {
+   "f": "src/data/artists/foundation.js",
+   "l": 653,
+   "t": "Merch is a good way to support an artist. Sometimes you want to give and you don't want the t-shirt.",
+   "c": "MIKE",
+   "s": "Mike's launch-round instruction of 2026-08-16, quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §6: \"THE DONATE PASSAGE — RULED IN. New FAQ entry on /foundation. This is the ONLY place on the site that links to giving. Mike's words, lightly shaped by Ops; he will edit later.\" The four lines and the question are carried exactly as he supplied them, one sentence per element; \"donate here\" is the anchor text inside his own last line (inlineDoor, Exhibit.jsx) and points at https://www.coalitionforthehomeless.org/donate/, the address he gave. He has said he will edit this copy later."
+  },
+  "07a2b96d8f7577ce": {
+   "f": "src/data/artists/foundation.js",
+   "l": 655,
+   "t": "For you: donate here.",
+   "c": "MIKE",
+   "s": "Mike's launch-round instruction of 2026-08-16, quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §6: \"THE DONATE PASSAGE — RULED IN. New FAQ entry on /foundation. This is the ONLY place on the site that links to giving. Mike's words, lightly shaped by Ops; he will edit later.\" The four lines and the question are carried exactly as he supplied them, one sentence per element; \"donate here\" is the anchor text inside his own last line (inlineDoor, Exhibit.jsx) and points at https://www.coalitionforthehomeless.org/donate/, the address he gave. He has said he will edit this copy later."
+  },
+  "8fcd65f98c01719a": {
+   "f": "src/data/artists/foundation.js",
+   "l": 657,
+   "t": "donate here",
+   "c": "MIKE",
+   "s": "Mike's launch-round instruction of 2026-08-16, quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §6: \"THE DONATE PASSAGE — RULED IN. New FAQ entry on /foundation. This is the ONLY place on the site that links to giving. Mike's words, lightly shaped by Ops; he will edit later.\" The four lines and the question are carried exactly as he supplied them, one sentence per element; \"donate here\" is the anchor text inside his own last line (inlineDoor, Exhibit.jsx) and points at https://www.coalitionforthehomeless.org/donate/, the address he gave. He has said he will edit this copy later."
+  },
+  "b24eca4de20274d9": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 261,
+   "t": "  > ALARM - Incoming Server Load >1000x nominal\n  > Operations remains unaffected.\n  > Multi-source swarm payloads precludes IP/Domain blocking\n  ? RX ended abruptly and coincident with Weird.Baby launch",
+   "c": "MIKE",
+   "s": "Mike's own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (REC 1.1, DETAILED REPORT), landed via workbook_to_draft.py -> record:land --write. Round-tripped 53 of 53 strings, 0 mismatches. ONE MECHANICAL CORRECTION ON HIS RULING OF 2026-08-16: \"coincedent\" -> \"coincident\", fixed at source in the workbook cell (B16) and re-landed rather than hand-edited into the tree. His voice is untouched — he ruled the dangling semicolon in \"Handoff is on track (T-6);\" stays."
   }
  }
 }

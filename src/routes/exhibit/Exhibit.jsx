@@ -139,6 +139,76 @@ function typeColor(t) { return TYPE_META[t]?.color ?? "#888"; }
    data. The day one is written into a string again, the scrub is what stops a
    visitor reading it. What is gone is the half that printed them back. */
 
+/* ═══ [2026-08-16] THE GLIDE, AND WHY IT USED TO GO NOWHERE ═════════════════
+   MIKE, on /foundation: **"FAQ SCROLLING TO TOP — broken. Fix."**
+
+   F6's rule is unchanged and is right: on a phone the columns stack, the face
+   sits BELOW the tracklist, and a tap that changes a region the visitor cannot
+   see reads as nothing happening. What was wrong was the MECHANISM, and it was
+   wrong in a way that is invisible on a desktop, which is why it survived.
+
+   WHAT IT DID: waited a flat 120ms, measured `.vp-area`, and fired ONE
+   `window.scrollTo` at the target. It never checked whether it arrived.
+
+   WHY THAT FAILS, MEASURED AT 403x660 ON /foundation:
+     · The browser CLAMPS a scroll to the document's current maximum. Selecting
+       a SHORT face (the three story tracks, each currently empty) fires
+       `scrollTo(361)` at a document that is exactly as tall as the viewport —
+       maximum scroll ZERO — so the call succeeds, moves nothing, and the tap
+       does nothing at all. Instrumented: `scrollTo({top:360.9})` against
+       `docH: 660, innerH: 660`.
+     · 120ms IS A GUESS ABOUT SOMEBODY ELSE'S LAYOUT. The FAQ grows the document
+       from 660 to 1156 as it renders; a target measured or applied before that
+       growth is clamped by the height the page HAD.
+
+   WHAT IT DOES NOW: it re-measures and re-applies until the face is actually in
+   view, up to a short budget, and stops the moment it lands. That fixes the
+   clamp case (the page grows, the next attempt reaches the target) without
+   pretending to know how long any face takes to lay out.
+
+   IT IS `setTimeout` AND NOT `requestAnimationFrame`, DELIBERATELY, and the
+   house has paid for this once already (§8): rAF does not fire in a tab that is
+   not being painted, so correctness behind it silently does nothing. A glide is
+   correctness here — it is the whole of what the tap does.
+
+   THE LAST ATTEMPT IS `instant`. If the smooth one did not land, easing again
+   is the same bet twice; arriving is what was asked for.
+   Reduced motion is honoured exactly as CH9 left it. */
+const GLIDE_TRIES = 6;      /* ~0.6s of budget, then it stops trying */
+const GLIDE_STEP = 100;     /* ms between attempts */
+const GLIDE_OFFSET = 118;   /* clears the fixed nav and the sticky console */
+
+function glideToFace(tries = GLIDE_TRIES, wasAt = null) {
+  const at = window.scrollY;
+  const last = tries <= 1;
+  /* THE NEXT ATTEMPT IS SCHEDULED BEFORE ANY OF THE WORK, AND THAT ORDER IS THE
+     FIX'S OWN BUG, FOUND BY INSTRUMENTING IT. The first version bailed out with
+     a bare `return` when `.vp-area` was momentarily absent — which it is, for a
+     frame, while React swaps the face — and a bail-out took THE WHOLE REMAINING
+     BUDGET with it. Measured: three attempts fired and the chain died before it
+     ever reached the instant one. A retry that can be killed by the very
+     re-render it is waiting for is not a retry. */
+  if (!last) setTimeout(() => glideToFace(tries - 1, at), GLIDE_STEP);
+  const area = document.querySelector(".vp-area");
+  if (!area) return;
+  const still = window.matchMedia
+    && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const top = area.getBoundingClientRect().top + at - GLIDE_OFFSET;
+  const max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  const want = Math.max(0, Math.min(top, max));
+  /* ARRIVED IS A SUCCESS, NOT A REASON TO SCROLL AGAIN. 2px of slack because a
+     smooth scroll settles on a subpixel. */
+  if (Math.abs(at - want) <= 2) return;
+  /* A SMOOTH SCROLL ALREADY UNDER WAY MUST BE LEFT ALONE. If the page moved
+     since the last look, the animation is running and re-issuing the same call
+     restarts its easing every tick — a retry that turns the glide into a crawl.
+     Watch, do not push. */
+  const moving = wasAt !== null && Math.abs(at - wasAt) > 1;
+  if (!moving) {
+    window.scrollTo({ top: want, behavior: (still || last) ? "instant" : "smooth" });
+  }
+}
+
 function scrubFace(face) {
   if (!face) return face;
   const out = { ...face };
@@ -2267,6 +2337,48 @@ function FaceFlow({ flat, children, deps, footer }) {
    contradiction of F6's marked door with no anchor: F6's rule is that a door
    with no address supplied is not made into an `<a>`. Here the address IS the
    sentence. */
+/* ═══ [2026-08-16c] ONE LINK, INSIDE ONE SENTENCE, ON ONE ANSWER ════════════
+   MIKE, ruling the donate passage in: **"'donate here' is the link… The link
+   lives inside this answer and nowhere else — no footer, no tile, no page
+   ending."** And, in the same breath: **"DO NOT introduce a general
+   external-link affordance. This is one link in one answer, not a new
+   pattern."**
+
+   BOTH HALVES ARE INSTRUCTIONS AND THE SECOND ONE SHAPES THE CODE. What is
+   built here is deliberately the SMALLEST thing that draws his sentence: an
+   entry may declare `inline: { mark, href }`, and the first paragraph
+   containing `mark` gets that substring — and only that substring — turned into
+   an anchor. There is no link component, no `<ExternalLink>`, no `rel`/`target`
+   policy object, no icon, no affordance any other surface can adopt by
+   accident. A second caller would have to come here and read this.
+
+   IT IS NOT `link`, WHICH ALREADY EXISTS AND IS THE WRONG SHAPE. `en.link`
+   draws a door BELOW the answer — the block F6 designed for a named destination
+   with a state stamp. Mike's copy puts the words *in* the sentence ("For you:
+   donate here."), and using the block would have printed "donate here" twice:
+   once as his prose and once as furniture under it.
+
+   THE SPLIT IS ON THE FIRST OCCURRENCE ONLY, and the pieces are plain strings,
+   so nothing here interprets his text as markup. A mark that appears twice
+   links once — the earlier one — which is the conservative answer and is stated
+   rather than discovered.
+
+   IT LEAVES IN A NEW TAB WITH `noopener noreferrer`, which is WalExhibitFlow's
+   own reasoning and not a new policy: the museum is a pointer at someone else's
+   home, and it should not replace itself with theirs nor hand them a referrer
+   for the privilege. */
+function inlineDoor(para, inline) {
+  if (!inline || !inline.mark || !inline.href) return para;
+  const at = para.indexOf(inline.mark);
+  if (at < 0) return para;
+  return [
+    para.slice(0, at),
+    <a key="door" className="vp-faq-inline-link" href={inline.href}
+       target="_blank" rel="noopener noreferrer">{inline.mark}</a>,
+    para.slice(at + inline.mark.length),
+  ];
+}
+
 function FaqEntries({ entries, closing, state }) {
   return (
     <div className="vp-faq" data-stage-split="row">
@@ -2283,7 +2395,18 @@ function FaqEntries({ entries, closing, state }) {
           <summary>{en.title}</summary>
           <div className="vp-faq-a">
             {en.line && <p>{en.line}</p>}
-            {en.lines?.map((para, pi) => <p key={pi}>{para}</p>)}
+            {en.lines?.map((para, pi) => <p key={pi}>{inlineDoor(para, en.inline)}</p>)}
+            {/* THE DOOR THAT COULD NOT BE FOUND STILL DRAWS. If `inline` was
+                declared and its mark matched no paragraph — a reworded answer,
+                a stray space — the anchor would vanish with nothing said, and
+                "nothing drops silently ever again" is the house rule that
+                covers exactly this. It falls back to a plain trailing link
+                rather than disappearing. Unreachable while the copy and the
+                mark agree, which is checkable by reading them. */}
+            {en.inline && !(en.lines || []).some(p => p.includes(en.inline.mark)) && (
+              <p><a className="vp-faq-inline-link" href={en.inline.href}
+                    target="_blank" rel="noopener noreferrer">{en.inline.mark}</a></p>
+            )}
             {/* the marked door with no address — F6's shape, unchanged: a name
                 and a state, and deliberately no <a> to a URL nobody supplied. */}
             {/* ═══ [M 2026-08-14] A DOOR MAY NOW CARRY AN ADDRESS, AND F6's
@@ -3288,25 +3411,7 @@ export default function Exhibit({ artist, open = null }) {
          on one screen) are untouched; this fires only where the stack
          exists (the flat wing at stacked widths). */
       if (artist.faceFlow === "flat" && window.innerWidth <= 720) {
-        /* a timeout, not a rAF: the scroll must land AFTER React has swapped
-           the face in, or it measures the old layout and goes nowhere. The
-           offset clears the fixed nav and the sticky console. */
-        setTimeout(() => {
-          const area = document.querySelector(".vp-area");
-          if (!area) return;
-          const y = area.getBoundingClientRect().top + window.scrollY - 118;
-          /* [CH9 2026-08-12] THIS IS ONE OF THE TWO DELIBERATE GLIDES IN THE
-             MUSEUM and it now says so itself: the document no longer declares
-             `scroll-behavior: smooth`, so `smooth` here is a choice rather than
-             an inheritance. It also honours reduced motion, which it did not
-             before — the Record's glide already did, and a reader who has asked
-             the system for less movement should not get it from one surface and
-             not the other. */
-          const still = window.matchMedia
-            && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-          window.scrollTo({ top: Math.max(0, y),
-                            behavior: still ? "instant" : "smooth" });
-        }, 120);
+        glideToFace();
       }
       return;
     }

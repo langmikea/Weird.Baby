@@ -80,6 +80,15 @@ function strings(e) {
     if (s.label) out.push([`section ${i + 1} heading`, s.label]);
     (s.body || []).forEach((p, j) => out.push([`section ${i + 1}, paragraph ${j + 1}`, p]));
   });
+  /* [2026-08-16] THE ATTACHMENT TITLES ARE HIS STRINGS TOO. His workbook's
+     ATTACHMENTS section lands as `docs` rather than as a text section
+     (workbook_to_draft.py), so its lines left `strings()` — and `--verify`
+     would have gone on reporting ALL STRINGS ROUND-TRIP while proving nothing
+     about them. A proof that stops covering a field the moment that field moves
+     is the failure it exists to catch. */
+  (e.docs || []).forEach((d, i) => {
+    if (d && d.title) out.push([`attachment ${i + 1}`, d.title]);
+  });
   return out;
 }
 
@@ -202,6 +211,19 @@ function generate(e) {
     out.push(`                  ] },`);
   }
   out.push(`              ],`);
+  /* [2026-08-16] THE ATTACHMENTS, AFTER THE WRITING — the object mirrors the
+     page, where `RecordAttachments` mounts below the sections and above the
+     tombstone. Only `title` is emitted because only `title` is what he wrote;
+     `source`, `date`, `scan` and `plates` are facts about a photograph that
+     exists, and a reader that filled them in would be inventing provenance.
+     A doc with a title and no image is a DESIGNED state — the row prints
+     "not here yet" — not a gap to be papered over. */
+  const docs = (e.docs || []).filter(d => d && typeof d.title === "string" && d.title.trim() !== "");
+  if (docs.length) {
+    out.push(`              docs: [`);
+    for (const d of docs) out.push(`                { title: ${wrap(d.title, 18)} },`);
+    out.push(`              ],`);
+  }
   /* the tombstone closes the entry on the page, so it closes the object here */
   if (e.tomb) out.push(`              tomb: ${wrap(e.tomb, 20)},`);
   out.push(`            },`);
@@ -582,6 +604,16 @@ function differences(d, t) {
       if (ab[j] !== bb[j])
         out.push(`section ${i + 1}, paragraph ${j + 1}:\n        tree  ${S(bb[j])}\n        draft ${S(ab[j])}`);
     }
+  }
+  /* [2026-08-16] and the attachments, for the same reason `strings()` gained
+     them: a field the diff does not walk can change a landing without the
+     refusal that names what changed. */
+  const dd = (d.docs || []).map(x => x && x.title), td = (t.docs || []).map(x => x && x.title);
+  if (dd.length !== td.length)
+    out.push(`attachments: the Record has ${td.length}, this draft has ${dd.length}`);
+  for (let i = 0; i < Math.max(dd.length, td.length); i++) {
+    if (dd[i] !== td[i])
+      out.push(`attachment ${i + 1}:\n        tree  ${S(td[i] ?? null)}\n        draft ${S(dd[i] ?? null)}`);
   }
   return out;
 }

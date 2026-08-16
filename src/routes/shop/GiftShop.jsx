@@ -416,19 +416,23 @@ export default function GiftShop() {
 
       {/* ═══ [2026-08-15] THE FRIENDS ══════════════════════════════════════════
           MIKE: "New quarter-size tile type for friends… Friend tiles always
-          show, and sit at the bottom of whatever content is already defined."
+          show, and sit last in whatever content is already defined."
+          [2026-08-16] "LAST" IS HIS WORD AND IT REPLACES "at the bottom" — the
+          same behaviour, said the way he says it. The rule is quoted in three
+          places (here, `wb_roster.js`, and the round log) and a rule carried in
+          his words in two of them and Ops' in the third is exactly the drift
+          Doctrine 17 exists to stop.
 
           ALWAYS SHOWN MEANS NO CONDITION ON THE ENTRY. There is no `?from`
           test, no pool, no billing branch — the only guard is that the list is
           non-empty, which is the same guard the tile grid carries. A friend is
           not a party to the billing law and nothing here asks it to be.
 
-          "THE BOTTOM OF WHATEVER CONTENT IS ALREADY DEFINED" IS TAKEN
-          LITERALLY: this section renders after the tile grid, so it is below
-          the guests AND below the house tile on a guest's page, where the house
-          is last. On a Weird.Baby page the house is at the top and the friends
-          are still at the bottom. One position, both cases, nothing to keep in
-          step.
+          "LAST IN WHATEVER CONTENT IS ALREADY DEFINED" IS TAKEN LITERALLY:
+          this section renders after the tile grid, so it is below the guests
+          AND below the house tile on a guest's page, where the house is last.
+          On a Weird.Baby page the house is at the top and the friends are still
+          last. One position, both cases, nothing to keep in step.
 
           IT IS A SECOND SECTION AND THAT DOES NOT BREAK S1. S1's "one grid" was
           an argument about tiles OF THE SAME SIZE — two containers holding
@@ -444,6 +448,20 @@ export default function GiftShop() {
                  href={f.url}
                  target="_blank"
                  rel="noopener noreferrer">
+                {/* [2026-08-16] THE PREVIEW WELL — Mike: "Coalition tile needs
+                    a preview image." It draws ONLY when there is a picture, and
+                    that is the whole care here. The artist tiles fall back to a
+                    plate with the name set in the serif; doing that on a tile
+                    whose only other content IS the name would print the name
+                    twice and call it a picture. An empty well is not a
+                    placeholder either — it is a grey box the room has to
+                    explain. So: a picture or nothing, and `wbFriends` carries
+                    the `image` field so supplying one is a file and a path. */}
+                {f.image && (
+                  <span className="friend-tile__thumb">
+                    <img src={f.image} alt="" loading="lazy" />
+                  </span>
+                )}
                 <span className="friend-tile__name">{f.name}</span>
                 {/* the same sentence every outbound tile in this room carries,
                     so a friend's door is not quieter about leaving than a

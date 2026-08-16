@@ -42,6 +42,20 @@
 .gift-shop__section {
   margin: 3.5rem 0;
 }
+/* ═══ [2026-08-16] LESS AIR AT THE TOP OF THE ROOM ══════════════════════════
+   MIKE: "reduce white space at the top of the page."
+   MEASURED BEFORE AND AFTER, because there were two paddings stacked and only
+   one of them was doing a job. `.gift-shop`'s 5.5rem top padding clears the
+   fixed bar (52px measured) and is LEFT ALONE — it is load-bearing and its own
+   comment says so. On top of it the first section added another 3.5rem, so the
+   first tile sat at 144px with 92px of nothing under a 52px bar.
+   THE FIRST SECTION'S TOP MARGIN IS THE ONE THAT WAS SPENDING NOTHING. A
+   margin between sections is a separator; above the first one it separates a
+   section from a bar that is already clear of it. First tile 144px -> 88px,
+   which is 36px of air under the bar. */
+.gift-shop__section:first-of-type {
+  margin-top: 0;
+}
 
 /* ─── FEATURED ARTIST ──────────────────────────────────────────────── */
 .featured-artist {
@@ -458,6 +472,27 @@
 .friend-tile:focus-visible{
   border-color:var(--wb-gold);
   transform:translateY(-2px);
+}
+/* [2026-08-16] THE PREVIEW WELL. Same material as the artist tile's — the ink
+   ground, the hairline, `object-fit: cover` — at the friend tile's scale. It is
+   a BAND and not a square: a quarter tile is 212 x 149 and a square well would
+   take 149 of the 149 and leave the name nowhere to sit. 76px leaves the name
+   and its note their line and a half.
+   NOT RENDERED WITHOUT A PICTURE (GiftShop.jsx), so this rule has no live
+   caller today and that is stated rather than discovered later. */
+.friend-tile__thumb{
+  display:block;
+  height:76px;
+  overflow:hidden;
+  background:var(--wb-ink);
+  border:1px solid var(--wb-border);
+  margin-bottom:.15rem;
+}
+.friend-tile__thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 .friend-tile__name{
   font-size:.95rem;

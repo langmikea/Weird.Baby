@@ -79,8 +79,16 @@ const ASSET_LIKE = /^\/[\w\-./]+\.\w{2,5}$/;
 const READ_ENTRY_FIELDS = new Set([
   "no", "date", "title", "line", "lead", "tomb", "still", "stillCaption",
   "sections",
+  /* [2026-08-16] `docs` — the attachments. It is here because his workbook's
+     ATTACHMENTS section now lands as this field rather than as a text section,
+     so it is a thing he writes and the surface he writes on has to hand it
+     back. Titles only, which is all the workbook path can produce; a `docs`
+     row that gains a `source`, a `date` or a `scan` is Ops wiring an artifact
+     and is reported by `READ_DOC_FIELDS` below rather than dropped. */
+  "docs",
 ]);
 const READ_SECTION_FIELDS = new Set(["label", "body"]);
+const READ_DOC_FIELDS = new Set(["title"]);
 
 /* ---- tiny AST helpers ----------------------------------------------------
    `strOf` folds the string concatenation this codebase writes everywhere —
@@ -625,6 +633,34 @@ export function draftEntries(src) {
           return { label: lab.label, body: read.body };
         })
         .filter(Boolean);
+      /* [2026-08-16] THE ATTACHMENTS, READ THE SAME WAY AND FOR THE SAME
+         REASON. An entry declaring `docs` used to render on the glass and
+         vanish from the editor — the exact silence the comment above this
+         reader's field guard was written about, and the field it named first. */
+      const docsNode = propOf(el, "docs");
+      if (docsNode && docsNode.type !== "ArrayExpression") {
+        unreadable.push(`Record ${e.no}: \`docs\` is a ${docsNode.type}, not a list`);
+      } else if (docsNode) {
+        e.docs = docsNode.elements.map((d, i) => {
+          if (!d || d.type !== "ObjectExpression") {
+            unreadable.push(`Record ${e.no}: attachment ${i + 1} is a ${d ? d.type : "hole"}, not an object`);
+            return null;
+          }
+          for (const p of d.properties) {
+            const k = p.type === "Property" && !p.computed ? (p.key.name || p.key.value) : null;
+            if (k === null || !READ_DOC_FIELDS.has(k))
+              unreadable.push(`Record ${e.no}: attachment ${i + 1} declares \`${k ?? p.type}\`, `
+                + `and the editor cannot carry it — it would be lost the first time he saved. `
+                + `Teach draftEntries to read it, or add it to READ_DOC_FIELDS with the ruling`);
+          }
+          const t = val(propOf(d, "title"));
+          if (t === null) {
+            unreadable.push(`Record ${e.no}: attachment ${i + 1} has no \`title\` this reader can read`);
+            return null;
+          }
+          return { title: t };
+        }).filter(Boolean);
+      }
       return e;
     })
     .filter(Boolean);

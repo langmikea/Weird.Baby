@@ -848,6 +848,36 @@ R("shop.domain", "shop.weird.baby — the custom domain.", "commerce", "—", "N
   { deps: ["Big Cartel Platinum — C20"] });
 R("shop.mikes", "Mike's own gift shop.", "commerce", "—", "NOT_BUILT", null, "HELD",
   { deps: ["Mike bringing source — C18"] });
+/* [2026-08-16b] THE FRIEND TILE — HELD, AND IT HAD NO ROW AT ALL UNTIL TODAY.
+   The quarter-size friend tile shipped on 2026-08-15 carrying Coalition for the
+   Homeless, and nothing in this ledger knew it existed — so it could not have
+   been reported as live, and it could not have been reported as held either.
+   Mike hid it on 2026-08-16 ("looks like shit": a name and a door in a box, no
+   picture, beside four tiles that are all picture). `wbFriends` is now an empty
+   array and `GiftShop.jsx` draws no section; the ENTRY is kept whole and
+   addressed in `wb_roster.js` as `wbFriendsHeld`, and the tile type, its grid,
+   its preview well and the "last in whatever content is already defined" rule
+   are all untouched. It comes back when there is a picture — S-g. */
+/* [2026-08-16c] THE ONE OUTBOUND DOOR IN THE BUILDING, DECLARED. Mike ruled the
+   donate passage in: *"This is the ONLY place on the site that links to
+   giving."* A single external anchor, inside one sentence of one FAQ answer —
+   no footer, no tile, no page ending. It is in the ledger for the same reason
+   `shop.friends` is: **a door that nothing records is a door nobody can
+   report.** The 2026-08-14 door it replaces never had a row, which is how it
+   could be struck and re-cut twice in one day with the table saying nothing.
+   REVEALED with a reach, because it is on the glass and a visitor can use it. */
+R("door.coalition", "The donate door — the only outbound link to giving in the museum.",
+  "commerce", "src/data/artists/foundation.js FAQ \"Where's the donate button?\"",
+  "LIVE", "inside the Foundation's FAQ answer", "REVEALED",
+  { note: "Inline in Mike's own sentence (`inlineDoor`, Exhibit.jsx), not a link "
+        + "affordance — he ruled against building one. Resolves S-i." });
+R("shop.friends", "The friend tile — Coalition for the Homeless in the gift shop.",
+  "commerce", "src/data/wb_roster.js wbFriends", "NOT_BUILT", null, "HELD",
+  { deps: ["a preview image for the tile — Mike, S-g"], shown: true,
+    note: "Built and hidden, not unbuilt: the tile type, the quarter-size grid, "
+        + "the preview well and the ordering rule all exist and are exercised by "
+        + "nothing while the list is empty. Reveal is one entry moved back into "
+        + "`wbFriends` plus an image path." });
 
 /* ═════════ 13. RETIRED — struck, and named so nobody rebuilds them ════════ */
 const RET = (id, name, when) =>

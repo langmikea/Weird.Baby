@@ -133,7 +133,11 @@
   width: 100%;
   background: var(--wb-ink-card);
   border: 1px solid var(--wb-border);
-  padding: 64px 64px 52px;
+  /* [2026-08-16] 64px -> 34px on top only. See the credo's own note: the air
+     above the opening line is spent below it instead. The sides and the foot
+     are untouched — the measure is set in `ch` and moving the side padding
+     would move every line on the page to answer a complaint about one. */
+  padding: 34px 64px 52px;
   position: relative;
   box-shadow: 0 1px 2px rgba(33, 31, 28, 0.12), 0 6px 18px rgba(33, 31, 28, 0.08);
 }
@@ -151,6 +155,19 @@
    THE FACE IS NOT CHANGED. This is still the only thing on the page in the
    brand face, by the note above's own account; that is a third dial and he
    named two. Raised in the round log rather than taken. */
+/* ═══ [2026-08-16] THE OPENING LINES: TIGHTER ABOVE, LOOSER BELOW ═══════════
+   MIKE, on the credo: "less white space ABOVE, more BELOW — remove the
+   underline."
+   IT IS ONE ASYMMETRY AND NOT TWO DIALS TURNED THE SAME WAY. Air above a
+   heading pushes it down the page; air below it separates it from what it
+   introduces. The card was giving the credo 64px of both, so the opening line
+   sat low and then ran straight into the first question. The 64px above is
+   spent DOWN to 34 (`.sheet-card`, below) and the space it freed is spent
+   BELOW, as the credo's own bottom margin. Nothing else on the page moves.
+   THIS IS THE HOUSE'S OWN RULE ARRIVING ON A SECOND SURFACE — the Record's
+   "AIR GOES ABOVE A HEADING, NEVER BELOW" is the same instrument pointed the
+   other way, because there the heading sits INSIDE a running document and here
+   it is the page's first object with nothing above it to be separated from. */
 .sheet-credo {
   font-family: 'Fredoka', sans-serif;
   font-weight: 500;
@@ -167,13 +184,19 @@
      clears the Foundation's longest ("Gives everything away." at 22) with
      room to spare — which is what a shared measure has to do. */
   max-width: 32ch;
-  margin: 0 auto;
+  margin: 0 auto 52px;
   text-wrap: balance;
 }
 .sheet-credo span { display: block; }
+/* [2026-08-16] THE UNDERLINE IS GONE — Mike's ruling, no replacement. NAMED
+   ONCE HERE (Doctrine 24): it was `border-bottom: 3px solid var(--wb-gold)` on
+   the `em` around "Always."
+   THE `em` RULE STAYS AND IS NOT EMPTY. `font-style: normal` is what stops the
+   browser italicising the word, and the emphasis is now carried by the markup
+   for a screen reader and by nothing for an eye — which is the plainness the
+   rest of the room is set in. */
 .sheet-credo em {
   font-style: normal;
-  border-bottom: 3px solid var(--wb-gold);
 }
 
 .sheet-words {
@@ -218,10 +241,31 @@
 }
 .sheet-q:last-of-type { border-bottom: 1px solid var(--wb-border); }
 
-/* THE QUESTION. A heading, in the structural face, at reading size — not the
-   micro-caps these rooms use for their buttons. `list-style:none` plus the
-   WebKit marker reset because the default triangle is the browser's furniture
-   and these rooms supply their own. */
+/* ═══ [2026-08-16] ONE FACE, TWO WEIGHTS, TWO SIZES ═════════════════════════
+   MIKE: "The font uses the font type instead of boldness, size, etc. Not
+   pleasingly." — and the diagnosis is exact. This list was set in TWO
+   TYPEFACES: Syne 600 for the question and DM Serif Display for the answer, at
+   the SAME 1.02rem. So the only thing separating a question from its answer was
+   that they were different fonts; the hierarchy was carried entirely by a
+   change of voice, which is the one signal a reader has to stop and decode.
+
+   SO THE WHOLE LIST IS ONE FACE NOW — Geist, self-hosted since 15 August — and
+   the hierarchy is the two dials a reader does not have to decode: WEIGHT
+   (600 / 400) and SIZE (1.06rem / 0.95rem). A question reads as a question
+   because it is bigger and heavier than the thing under it, which is how every
+   printed document in the world has done it.
+
+   GEIST IS A VARIABLE FONT AND THE WEIGHTS ARE REAL. `fonts.css` declares 400,
+   500, 600 and 700 against ONE file (the 22-file dedupe of 15 August), which
+   looks like four aliases for the same face and is not: the `font-weight`
+   descriptor on an `@font-face` sets the `wght` axis of a variable font, so 600
+   draws at 600. MEASURED ON THE BUILT PAGE rather than assumed, because if it
+   were wrong the question and the answer would render at identical weight and
+   THIS EXACT COMPLAINT would be back with the fix's name on it.
+
+   THE FALLBACK STACK IS THE HOUSE'S. If Geist has not arrived, `system-ui`
+   carries both weights and both sizes and the hierarchy survives — which is the
+   argument for putting the signal in weight and size rather than in a face. */
 .sheet-q summary {
   cursor: pointer;
   list-style: none;
@@ -229,10 +273,10 @@
   justify-content: space-between;
   align-items: baseline;
   gap: 20px;
-  padding: 17px 2px;
-  font-family: 'Syne', sans-serif;
+  padding: 17px 2px 9px;
+  font-family: 'Geist', system-ui, -apple-system, sans-serif;
   font-weight: 600;
-  font-size: 1.02rem;
+  font-size: 1.06rem;
   line-height: 1.4;
   letter-spacing: 0.005em;
   color: var(--wb-gold);
@@ -263,17 +307,35 @@
 }
 .sheet-q[open] summary { color: var(--wb-gold-hi); }
 
-/* THE ANSWER. Reading matter, so it is set as reading matter: the serif, flush
-   left, on a 62ch measure, with hyphenation so a narrow window softens the rag
-   instead of tearing a hole in it. */
+/* THE ANSWER. Same face as the question, one weight and one size below it —
+   see the note above the question for why the serif went.
+   ═══ [2026-08-16] IT MOVES UP AND IT INDENTS ═══════════════════════════════
+   MIKE: "Answers move UP toward their question, and INDENT."
+   UP is 8px off the question's bottom padding (17/17 -> 17/9) and nothing more.
+   A negative margin here was the first reach and it is the wrong instrument:
+   it pulls the answer over the summary's own click target, so the row a
+   visitor presses stops being the row they see. The gap is CLOSED where the
+   gap is, which is the question's padding.
+   INDENT is 26px of left padding, and it is the reason the pair reads as a
+   pair: the answer starts inside the question's left edge, so the question is
+   the only thing on the page at the column's margin and every answer hangs off
+   one. The 62ch measure is UNTOUCHED — the indent takes the line's start, not
+   its length, and shortening the measure to pay for the indent would re-wrap
+   every answer in the room, which is the one thing his no-wrapping ruling
+   forbids.
+   HYPHENATION IS GONE with the same reasoning. `hyphens: auto` breaks a word
+   across two lines, which is a WRAP with a dash in it; a page whose author has
+   ruled that his lines are not to be wrapped must not be quietly breaking his
+   words either. Nothing on the page hyphenates today, measured — so this
+   removes a mechanism rather than a result. */
 .sheet-faq-a {
-  font-family: 'DM Serif Display', Georgia, serif;
-  font-size: 1.02rem;
+  font-family: 'Geist', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: 0.95rem;
   line-height: 1.62;
   color: var(--wb-dim);
   max-width: 62ch;
-  padding: 2px 2px 20px;
-  hyphens: auto;
+  padding: 0 2px 22px 26px;
   text-wrap: pretty;
 }
 

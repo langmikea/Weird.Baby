@@ -675,3 +675,364 @@ payload HOUSE) · `reveal:check` **PASS** · `parity` **PASS** · `instory` **PA
 · `docs:numbers` **PASS**. Dev build restored as the working state.
 
 **Nothing deployed. Nothing pushed.**
+
+---
+
+# §18 — MIKE'S WEEK-1 WRITING LANDED (2026-08-16)
+
+Source: `C:\AI\_week01\WEEK01_records-001-to-005.xlsx`. Backup of the file
+replaced: `C:\AI\_week01\_backup_robots-record_before-land-20260816.js`
+(sha256 `c95f6e34…`). Register backed up beside it.
+
+**RESULT: 001, 002, 004, 005 regenerated · 003 carried through untouched · 5
+records · every string round-tripped.** Verified independently field by field
+against his workbook: **32 fields across 5 records, 0 mismatches.**
+
+## 18.1 — TWO GUARDS REFUSED FIRST, AND BOTH REFUSALS WERE RIGHT
+
+**GUARD: COMMENTS INSIDE A CHANGED ENTRY.** Record 001 carried **three comment
+blocks, 9,751 characters**, and `record:land --write` refuses to regenerate an
+entry that does — *"a generated entry has nowhere to put them."*
+
+Its own remedy was taken: **move the reasoning above the entry.** `--write`
+splices only between `RECORD_ENTRIES = [` and its closing bracket and preserves
+the preamble, so the preamble is where reasoning survives a landing. All three
+blocks were moved **verbatim, in order, not one character edited**, under one
+dated header that says what they document and — plainly — that the entry's TEXT
+was replaced on 2026-08-16, so any sentence quoting a specific old line is
+describing text that is no longer there. **The rulings in them all still stand**
+(the date rule, the verbatim rule, Doctrine 21, no invented tomb), which is why
+they are kept rather than pruned. Measured: comment characters **12,042 →
+13,375**, so nothing was lost.
+
+**GUARD: THE DRAFT IS OLDER THAN THE RECORD.** Second refusal — the draft was
+stamped 13:36:38 and the file 13:38:04, because **moving the comments had just
+touched the file**. A false positive created by my own edit, not a stale draft:
+the content comes from the workbook, not the editor. Fixed by regenerating the
+draft (same bytes, new stamp) rather than by bypassing anything.
+
+## 18.2 — WHAT IS ON THE PAGE NOW
+
+```
+001  INITIAL LAUNCH REPORT - Weird.Baby   deck yes   5 sections
+002  GENERAL STATUS UPDATE                deck yes   2 sections
+003  DATA EXTRACTED - Weekend Robots…     deck yes   2 sections  (untouched)
+004  (no headline)                        no deck    1 section
+005  (no headline)                        no deck    1 section
+```
+
+**BALD HEADINGS: ZERO.** Every section carries a body. Records 002 and 003 each
+have a second section with **no label** — his own deletion of those headings —
+and `RecordEntry.jsx:618` renders `{s.label && …}`, so nothing draws. Not a
+defect.
+
+**ADDENDUM 01 IS NOW THE REAL TEST OF `white-space: pre-line`.** It landed as
+**2 paragraphs carrying 10 lines** (8 timestamps + 2 prose), where the old tree
+held the same content as **24 separate `<p>` elements**. Without `pre-line`
+those ten lines would collapse into two run-ons. The declaration is present in
+the CSS being served:
+`.vp-rec-sect-body{…white-space:pre-line;…}`.
+
+## 18.3 — THE INSPECTION: SEEN, ON THE GLASS
+
+The Chrome extension dropped immediately after the rebuild and this section
+first recorded that the visual pass had NOT been done. Mike restarted Chrome and
+it was done. Recorded this way round rather than rewritten silently, because a
+log that quietly upgrades "not seen" to "seen" is the one thing that would make
+the Inspection Law's answers untrustworthy.
+
+**ALL FIVE OPENED, MEASURED:**
+
+| | headline | deck in open entry | sections | empty bodies |
+|---|---|---|---:|---:|
+| 001 | INITIAL LAUNCH REPORT | 1 | 5 | 0 |
+| 002 | GENERAL STATUS UPDATE | 1 | 1 drawn (+1 unlabelled) | 0 |
+| 003 | DATA EXTRACTED… | 1 | 1 drawn (+1 unlabelled) | 0 |
+| 004 | (none, his) | 0 | 1 | 0 |
+| 005 | (none, his) | 0 | 1 | 0 |
+
+**ADDENDUM 01 DRAWS AS TEN LINES.** Measured per LOGICAL line, not by counting
+line boxes: each newline-delimited segment begins a fresh line box at the
+block's left edge, tops **790 · 817 · 844 · 871 · 898 · 925 · 952 · 979 · 1006 ·
+1060**, all distinct, `white-space: pre-line` computed on the element. The two
+prose sentences wrap, which is `pre-line` honouring the newline and still
+wrapping a long line — correct, not a fault.
+
+**NO BALD HEADINGS ON THE PAGE.** Zero empty bodies across all five. 002's and
+003's second sections carry no label and draw no heading, which is his deletion
+working.
+
+**THE DECK DRAWS TWICE, IN THE TWO VIEWS.** Three of the five index rows carry a
+deck (001–003; 004 and 005 have none, his), and the opened entry draws it once
+more at the top. 004 and 005 open with no deck, as they should.
+
+**NOTHING READS WRONG.** The one thing worth his eye is not a defect: 004 and
+005 are a single EXECUTIVE SUMMARY each with no headline and no deck, so their
+index rows are two short marks — `004 THU`, `005 FRI` — against three full rows
+above them. That is his writing as it stands, not a rendering fault.
+
+Gates: lint **9 / 8 = baseline** · build green · provenance **PASS** (11 MIKE
+rows added, 29 stale pruned) · `reveal:check` **PASS** · `parity` **PASS** ·
+`instory` **PASS** · `docs:numbers` **PASS**.
+
+**Nothing pushed. Nothing deployed.**
+
+---
+
+# §19 — THE READER LEARNS MIKE'S HAND-BUILT SHEET SHAPE (2026-08-16)
+
+Source of truth: `NEW_RECORD_MAKER_V3.xlsx`, **23,681 bytes, 2026-08-16
+00:33:01, sha256 `2D59586B…`** — both stamps verified against his before a byte
+was read. It was NOT at the agreed hand-off path (`C:\AI\_week01\`); Ops stopped
+and asked, and he ruled the Desktop copy in. Backup of the reader:
+`C:\AI\_week01\_backup_workbook_to_draft_before-v3.py`. **Nothing was landed.**
+
+## 19.1 — THREE THINGS THE BRIEF SAID THAT THE FILE DOES NOT
+
+Every rule was verified against the workbook rather than taken from the
+description, and three did not survive that:
+
+1. **"a blank gap ends a section" — FALSE, AND IT WAS THE DANGEROUS ONE.** REC
+   1.1's ADDENDUM 01 runs rows 19–26, blanks at 27, then continues 28–29 before
+   the next label at 31. Reading a blank as a section end would have ORPHANED
+   every one of those tails — four of them across the five sheets. **A blank is
+   a PARAGRAPH break; only a bold label ends a section.** That rule reproduces
+   the structure already in the tree exactly (001's ADDENDUM 01 = 8 lines + 2
+   lines = 2 paragraphs).
+2. **Row 2's label is not one literal.** REC 1.1 says `HEADLINE - Do not include
+   in Record`; the other four say `HEADLINE`. The guard matches the SUBSTRING —
+   matching the whole string would have refused four correct sheets.
+3. **The `=` marker does not appear.** Measured across all five: **50 `>`, 5
+   `?`, 3 `!`, 2 `<`, zero `=`.** All five are supported anyway — "not used
+   today" is not "not his".
+
+## 19.2 — WHAT IT DOES
+
+`REC W.D` → `(W-1)*5 + D`, weekdays only. Header fixed at rows 1–6 (title,
+HEADLINE label, **week-plan beat — never ships**, headline, deck 1, deck 2);
+body walked from row 7, bold column-B cell opens a section, blanks break
+paragraphs. The `{NOT PART OF THE REPORT…}` block and everything below it is cut
+**positionally, not by braces** — REC 1.5 has an unbraced line inside that block
+(*"Release the Portal Album."*) that a brace-based cut would have carried into
+the entry.
+
+**BOTH SHAPES LIVE, AND NEITHER IS A FALLBACK FOR THE OTHER.** `Record\s+\d+`
+and `REC W.D` cannot both match a tab, so a sheet is read by exactly one reader
+or by none. **Regression proved: the old workbook's output is byte-identical to
+yesterday's draft.**
+
+## 19.3 — COLUMN C NEVER SHIPS, AND HERE IS HOW THAT WAS CONFIRMED
+
+**In the code:** the REC path has exactly one cell accessor, `_col_b`, which
+hard-codes `column=2`; the only other reader is `_bold_b`, also column 2. There
+is no expression in `read_rec_sheet` that can name column 3. Column A is not
+read either.
+
+**On the data:** the workbook holds **13 non-empty column-C strings** (including
+*"I was hired in 1998, fired in…"*). **Zero of them appear in the emitted
+draft.** The dropped block was checked the same way — `EGGPLANT`, `NOTES TO
+CLAUDE`, `Ops wrote`, `Ops proposes`, `Release the Portal Album`: **all absent.**
+So are all five week-plan beats.
+
+## 19.4 — THE GUARDS, PROVED BY BREAKING THEM
+
+The old `EXPECT` guard covered three rows. This one covers four independent
+faults, each tested on a scratch copy — **his file was never modified**:
+
+| break | result |
+|---|---|
+| header shifted down one row | **REFUSED** — *row 2 … expected the HEADLINE label* |
+| tab renamed `REC 1.1` → `REC 2.3` | **REFUSED** — *the tab is Record 008, the sheet says RECORD 1.1* |
+| row 1 re-dated to 2026-09-14 | **REFUSED** — *Record 001 falls on 2026-08-17; this reader will not choose* |
+| headline row emptied, beat left | **REFUSED** — *refusing rather than landing the beat* |
+| **control — his file untouched** | **accepted** |
+
+Each fired for its own reason, not all on the first. The date check is the one
+the old guard had no equivalent of.
+
+## 19.5 — WHAT THE FIVE RECORDS READ AS
+
+```
+001  INITIAL LAUNCH - Weird.Baby Website   deck ✓   6 sections,  7 paragraphs
+002  GENERAL STATUS UPDATE                 deck ✓   4 sections,  5 paragraphs
+003  GENERAL STATUS UPDATE                 deck ✓   5 sections,  6 paragraphs
+004  GENERAL STATUS UPDATE                 deck ✓   4 sections,  5 paragraphs
+005  GENERAL STATUS UPDATE                 deck ✓   4 sections,  5 paragraphs
+```
+
+**REFUSALS AND WARNINGS, BOTH REAL AND BOTH HIS TO RULE ON:**
+
+- **Record 002's deck is 132 characters against a 130 limit.** The reader warns;
+  it does not truncate.
+- **Record 003 will not land: two braces in its ATTACHMENTS** — *{manual pages
+  referencing The CEO and The Informer}* and *{raw data examples. Mix in eggs}*.
+  The brace guard names both and refuses, exactly as before. That is the
+  mechanism working, not a fault in the sheet.
+
+**NOTHING WAS LANDED.** The tree still holds the writing landed this morning
+from the old workbook. Lint **9 / 8 = baseline**.
+
+**Nothing pushed. Nothing deployed.**
+
+---
+
+# §20 — TWO EDITS TO HIS WORKBOOK (2026-08-16)
+
+`NEW_RECORD_MAKER_V3.xlsx`, edited in place. Backup:
+`C:\AI\_week01\_backup_NEW_RECORD_MAKER_V3_before-edit-20260816.xlsx`
+(sha256 `2D59586B…`, the identity verified before the edit).
+
+**(a) REC 1.3 ATTACHMENTS** — both braced lines moved from column B to column C
+on their own rows, **verbatim including their leading spaces**; column B body
+set to `  > n/a`, matching REC 1.2 and 1.5.
+**(b) REC 1.2 deck line 2** — *"no net impact."* → *"no impact."*, taking the
+deck from **132 to 128** against the 130 limit.
+
+**970 CELLS COMPARED AGAINST THE BACKUP; 5 CHANGED; ALL FIVE INTENDED.** The
+workbook's five formulas survive (they pull each sheet's `B4` headline into the
+plan, and `B4` was not touched). openpyxl drops cached formula values, so those
+five recalculate when Excel next opens the file — the same known cost as the 314
+removal, and it is invisible to the reader, which reads column B.
+
+**AFTER: ALL FIVE READ CLEAN, NO WARNINGS, NO REFUSALS.**
+
+```
+001  INITIAL LAUNCH - Weird.Baby Website   6 sections,  7 paragraphs
+002  GENERAL STATUS UPDATE                 4 sections,  5 paragraphs
+003  GENERAL STATUS UPDATE                 5 sections,  6 paragraphs
+004  GENERAL STATUS UPDATE                 4 sections,  5 paragraphs
+005  GENERAL STATUS UPDATE                 4 sections,  5 paragraphs
+```
+
+003's ATTACHMENTS body is now `['  > n/a']`; the emitter runs to **exit 0, 5
+records, zero braces in the entry text**. The two notes are in column C, which
+the reader cannot read. **Nothing was landed.**
+
+# §21 — THE ATTACHMENT MECHANISM, SCOPED (NOT BUILT)
+
+## 21.1 — THE CORRECTION IS BIGGER THAN THE BRIEF THOUGHT
+
+The earlier Ops call was *"nothing in the site declares attachments today."*
+That is true of the DATA and **false of the CODE**. The mechanism is built,
+mounted and rendering:
+
+- `src/routes/exhibit/RecordAttachments.jsx` — the renderer, A1/A2 2026-08-08.
+- `attachmentsOf()` in `src/lib/record-model.js` — flattens three field kinds
+  into one list.
+- `RecordEntry.jsx:633` — **already mounts it** at the foot of every opened
+  entry, after the writing, per Mike's own ruling.
+
+**SO THE ANSWER TO "WHAT DOES IT TAKE FOR A RECORD TO CARRY ATTACHMENTS" IS: A
+FIELD ON THE ENTRY, AND NO CODE AT ALL.** Three kinds already exist —
+`wire` (a transmission: lines of text, no image), `plates` (photographs:
+`{img, label, date}`), `docs` (documents: `{title, source, date, pages, scan,
+plates, extract, note}`).
+
+## 21.2 — A LINK IS NOT CHEAPER. IT IS NOT SUPPORTED AT ALL.
+
+Mike's *"even if it is a link"* assumes a link is the lesser build. **It is the
+larger one.** `RecordAttachments.jsx` contains no `<a>`, no `href` and no `url`
+— a row either opens a picture in the wing's own reader or is inert. Adding an
+external link means a new affordance on a surface whose governing ruling is
+*"no envelope furniture of any kind"*, and it would be the first outbound door
+in the Record.
+
+**The cheap path is a `docs` entry with no image.** That is already a supported
+and DESIGNED state: no `scan` and no `plates` gives a glyph, the row prints
+`not here yet`, and `docState`'s empty-and-honest discipline covers it. A plate
+that has not been photographed yet can be listed on Wednesday and gain its image
+later **with no change to the entry's shape**.
+
+## 21.3 — MEDIAVAULT IDS: NOTHING CONNECTS THEM TODAY
+
+`MV-YYYYMMDD-NNN` appears nowhere in `record-model.js`, `RecordAttachments.jsx`
+or `robots-record.js`. The Record's chain speaks **paths, not ids**:
+`ASSET_LIKE = /^\/[\w\-./]+\.\w{2,5}$/` in `reveal/record-entries.mjs` treats any
+rooted file-path string anywhere in an entry as one of that entry's assets —
+deliberately generic, *"so an entry that carries a second photograph joins the
+asset table without this file being edited."*
+
+**So an MV id would need a resolver: id → path, run at export or at land.** That
+is the one genuinely new part, and it is not needed for Wednesday: the export
+already writes files to paths, and a path is what every downstream instrument
+already understands. **Recommend paths on Wednesday and an id resolver only if
+he wants the Record to name artifacts the way MV names them.**
+
+## 21.4 — held/ AND THE LAUNCH BUNDLE ALREADY HANDLE THIS
+
+This is the part that needs no design, and the stage build says so in its own
+output: *"reveal:day --place renames a delivered file out of held/ before the
+build, so nothing a Record delivers is affected."*
+
+The chain, all of it existing: an entry names `/robots/…/plate-07.png` →
+`record-entries.mjs` picks it up as that entry's asset → `reveal:day --place`
+moves the file out of `public/held/` on that entry's day → `delivery.mjs` fails
+the build **in both directions** (an undelivered file at a public address, and a
+delivered file still behind the door). The 144 held files are held **because no
+entry delivers them**; the moment one does, that file is placed.
+
+## 21.5 — THE SMALLEST THING THAT WORKS BY WEDNESDAY
+
+**Zero code. One field, three lines of data, two existing commands.**
+
+1. Add `docs: [...]` to Record 003's entry, one object per plate — `title`,
+   `source`, `date`, and `scan` where a photograph exists.
+2. Put any image under `public/held/robots/…`; add its `provenance/assets.json`
+   row and run `npm run assets:scan` (the standing rule for any new media file).
+3. `npm run reveal:day -- --place` on the 19th; standing gates; deploy.
+
+**Plates with no photograph yet need step 2 at all** — they list, they say *not
+here yet*, and they gain an image whenever one exists. That is the version that
+cannot slip: it depends on nothing that does not already work.
+
+**What Ops should NOT do without his word:** add an external-link affordance
+(21.2), or build an MV id resolver (21.3). Neither is needed for Wednesday and
+the first is a boundary question, not a build.
+
+**Nothing built. Nothing pushed. Nothing deployed.**
+
+---
+
+# §21 — WEEK 1 LANDED FROM V3, AND THE HANDOFF (2026-08-16)
+
+**TWO RULINGS RECORDED, NEITHER BUILT:** no external link affordance on the
+Record (it would be the first outbound door, against the no-envelope-furniture
+ruling — use a `docs` entry with no image), and no MediaVault id resolver
+(paths for now).
+
+**LANDED.** Source `NEW_RECORD_MAKER_V3.xlsx`. All five regenerated, none
+carried through. **Round-trip: 56 fields across 5 records, 0 mismatches.**
+Backup `C:\AI\_week01\_backup_robots-record_before-v3-land.js`.
+
+**THE COMMENT GUARD FIRED AGAIN, ON RECORD 003 THIS TIME.** 003 was the entry
+carried through untouched this morning, so its `[E2 2026-08-09]` block survived
+— and the moment its text changed, the guard stopped the landing exactly as
+designed. Same remedy as 001's three blocks: moved into the preamble verbatim,
+under a dated header saying the entry's text was replaced and the block
+describes the section that used to be there. **The guard has now caught two
+different entries on two different days; it is doing real work, not ceremony.**
+
+**THE INDEX HAS NO BARE ROWS.** Measured on the built page: five rows, **all
+five carrying a headline AND a deck**, zero bare, and **every row exactly
+94px**. R3's rule that all index rows are the same height is satisfied — the
+84px/157px pair that `S-b` tracked for three rounds is gone, because 004 and 005
+now have headlines and decks of their own.
+
+004 and 005 open with four sections each, one deck each, and **no empty bodies**.
+
+**ONE THING RAISED FOR HIM RATHER THAN DECIDED.** His workbook carries an
+**ATTACHMENTS section** — a bold label in column B — which lands as an ordinary
+text section reading `> n/a`. That is not the attachment MECHANISM. When
+Wednesday's `docs` field is added to 003, the entry will draw **both** his text
+section headed ATTACHMENTS and the real Attachments block beneath the writing.
+The likely answer is that his section becomes the `docs` field rather than
+sitting beside it — **his call, and it is in the handoff.**
+
+**HANDOFF WRITTEN:** `docs/HANDOFF_next_session.md` — HEAD, what is unpushed,
+the attachment findings, the two rulings, and Wednesday's `docs` requirement.
+
+Gates: lint **9 / 8 = baseline** · build green · provenance **PASS** (37 MIKE
+rows added, 25 stale pruned) · `reveal:check` **PASS** · `parity` **PASS** ·
+`instory` **PASS** · `docs:numbers` **PASS**.
+
+**Nothing pushed. Nothing deployed.**

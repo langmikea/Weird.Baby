@@ -91,6 +91,75 @@ for _i, (_label_row, _text_row) in enumerate(SECTION_ROWS, start=1):
 TITLE_MAX = 62
 LINE_MAX = 130
 
+# ═══════════════════════════════════════════════════════════════════════════
+# THE ATTACHMENTS SECTION IS A FIELD, NOT A SECTION [2026-08-16]
+# ═══════════════════════════════════════════════════════════════════════════
+# Mike's workbook carries ATTACHMENTS as a bold label in column B, so by the
+# ordinary rules it lands as a text section: a heading reading ATTACHMENTS with
+# "> n/a" under it. **The museum already has a real attachments mechanism** —
+# `attachmentsOf()` in `src/lib/record-model.js`, drawn by
+# `RecordAttachments.jsx`, mounted at the foot of every opened entry by
+# `RecordEntry.jsx`. An entry that carried both would draw TWO lists of the same
+# thing, one of which renders and one of which is prose that goes stale the
+# moment the other changes.
+#
+# SO THE SECTION POPULATES THE FIELD. His words stay his and only where they
+# live changes: each line he wrote under the label becomes one `docs` row's
+# title, and the renderer's own "not here yet" state covers a plate that has not
+# been photographed. Nothing here invents a source, a date or a scan.
+#
+# "n/a" MEANS NO ATTACHMENTS, NOT A SECTION SAYING "n/a". It is his way of
+# writing that the slot is empty, the same as leaving it blank — so a line that
+# reduces to n/a (or none, or nil) is a MARKER and is dropped, and an ATTACHMENTS
+# section left with nothing after that emits no field at all. That is the only
+# place in this reader where a line of his does not travel, and it is deliberate:
+# the alternative is a document row on the glass whose title is the word "n/a".
+#
+# THE MARKER PREFIXES COME OFF HERE AND ONLY HERE. `> ` at the head of a body
+# paragraph is his and is carried verbatim into a section; at the head of an
+# ATTACHMENTS line it is a bullet in front of a filename, and a document row
+# titled "> View of the portal screen" would be the marker rendered as content.
+# The rest of the line is untouched — no case change, no trimming inside, no
+# punctuation removed.
+#
+# IT IS DONE IN THE READER AND NOT BY EDITING HIS WORKBOOK, on instruction.
+ATTACHMENT_LABELS = {"ATTACHMENTS", "ATTACHMENT"}
+ATTACHMENT_NONE = {"na", "none", "nil"}
+MARKERS = "><=?!"
+
+
+def _is_attachment_label(label):
+    if not label:
+        return False
+    return "".join(c for c in label.upper() if c.isalpha()) in ATTACHMENT_LABELS
+
+
+def attachment_titles(body):
+    """The lines of an ATTACHMENTS section, as document titles. Returns [] when
+    the section says there are none."""
+    out = []
+    for para in body:
+        for raw in para.split("\n"):
+            line = raw.strip().lstrip(MARKERS).strip()
+            if not line:
+                continue
+            if "".join(c for c in line.lower() if c.isalnum()) in ATTACHMENT_NONE:
+                continue                      # his marker for "the slot is empty"
+            out.append(line)
+    return out
+
+
+def split_attachments(sections):
+    """(sections without the ATTACHMENTS section, docs) — docs is None when
+    there is no such section or it says n/a, so the entry gains no field."""
+    kept, titles = [], []
+    for s in sections:
+        if _is_attachment_label(s.get("label")):
+            titles.extend(attachment_titles(s.get("body") or []))
+            continue
+        kept.append(s)
+    return kept, ([{"title": t} for t in titles] or None)
+
 
 def cell(ws, row, col=2):
     v = ws.cell(row=row, column=col).value
@@ -156,14 +225,208 @@ def read_sheet(ws, name):
     if len(line) > LINE_MAX:
         warn.append(f"Record {no:03d}: the deck is {len(line)} characters, over {LINE_MAX}")
 
+    sections, docs = split_attachments(sections)
+
     entry = {"no": no}
     if title:
         entry["title"] = title
     if line:
         entry["line"] = line
     entry["sections"] = sections
+    if docs:
+        entry["docs"] = docs
     return entry, warn
 
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# THE HAND-BUILT SHAPE — "REC W.D" [2026-08-16]
+# ═══════════════════════════════════════════════════════════════════════════
+# Mike now writes in a workbook HE built, not the one this tool generated, and
+# it is a different animal: variable-length sections, no fixed rows below the
+# header, and tab names the old selector rejects outright.
+#
+# SOURCE OF TRUTH: NEW_RECORD_MAKER_V3.xlsx, read cell by cell. Every rule
+# below was verified against that file, not taken from a description — three
+# of the things Ops was told turned out not to be true of it, and they are
+# named where they bite.
+#
+# ─── THE SHEET NAME CARRIES THE RECORD NUMBER ──────────────────────────────
+# "REC W.D" -> (W-1)*5 + D. Weekdays only, five to a week. REC 1.1 = 001,
+# REC 2.1 = 006. The old selector is `Record\s+\d+`, which every REC tab
+# fails, so the two shapes cannot be confused for one another by accident —
+# that is what makes supporting both safe rather than clever.
+#
+# ─── THE HEADER IS FIXED AND IS THE ONLY PART THAT IS ──────────────────────
+#     row 1   RECORD W.D  ·  <Weekday> <YYYY-MM-DD>      (bold)
+#     row 2   HEADLINE                                    (bold, the label)
+#     row 3   the WEEK-PLAN BEAT — NOT the headline, NOT included
+#     row 4   the headline                                (bold)
+#     row 5   deck line 1
+#     row 6   deck line 2
+#
+# ROW 3 IS THE TRAP THIS GUARD EXISTS FOR. It sits between the label and the
+# headline and reads like a headline; landing it would put the week-plan beat
+# on the glass in place of Mike's title. It is dropped by position, and the
+# position is checked rather than assumed.
+#
+# ─── SECTIONS ARE FOUND, NOT COUNTED ───────────────────────────────────────
+# From row 7 down: a BOLD cell in column B opens a section; the non-bold rows
+# under it are its body. **A BLANK ROW IS A PARAGRAPH BREAK, NOT A SECTION
+# BREAK** — Ops was told a section ends at "the next label or a blank gap",
+# and that is false of the file: REC 1.1's ADDENDUM 01 runs rows 19-26, blanks
+# at 27, then continues 28-29 before the next label at 31. Reading a blank as
+# the end would have orphaned every one of those tails. A section ends at the
+# next bold label and nowhere else.
+#
+# ─── WHAT IS NOT CONTENT ───────────────────────────────────────────────────
+# `{NOT PART OF THE REPORT - NOTES TO CLAUDE}` and everything BELOW it, and a
+# trailing `END`. The cut is POSITIONAL and must stay positional: REC 1.5 has
+# an unbraced line ("Release the Portal Album.") inside that block, so a
+# brace-based cut would have carried it into the entry.
+#
+# ─── COLUMN A AND COLUMN C ─────────────────────────────────────────────────
+# Column A is empty on every REC sheet and is never read. **COLUMN C IS MIKE'S
+# PRIVATE NOTES AND IS NEVER READ BY THIS FUNCTION** — see `_col_b` below,
+# which is the only cell accessor the REC path uses and which hard-codes
+# column 2. There is no code path from a REC sheet's column C into an entry.
+#
+# ─── MARKER PREFIXES ───────────────────────────────────────────────────────
+# `>` `=` `<` `?` `!` at the head of a line are his, are undefined, and are
+# carried VERBATIM. Nothing here strips, interprets or counts them. (Measured
+# in V3: 50 `>`, 5 `?`, 3 `!`, 2 `<`, and no `=` yet — the set is supported in
+# full anyway, because "not used today" is not "not his".)
+REC_TAB = re.compile(r"^\s*REC\s+(\d+)\.(\d+)\s*$", re.I)
+DAYS_PER_WEEK = 5
+REC_ROW_TITLE, REC_ROW_LABEL, REC_ROW_BEAT = 1, 2, 3
+REC_ROW_HEADLINE, REC_ROW_DECK1, REC_ROW_DECK2 = 4, 5, 6
+REC_FIRST_BODY_ROW = 7
+DROP_FROM = "NOT PART OF THE REPORT"
+END_LABEL = "END"
+
+
+def _col_b(ws, row):
+    """The ONLY cell accessor on the REC path. Column 2, always — this is what
+    makes 'column C never reaches an entry' a property of the code rather than
+    a promise about it."""
+    v = ws.cell(row=row, column=2).value
+    return "" if v is None else str(v)
+
+
+def _bold_b(ws, row):
+    f = ws.cell(row=row, column=2).font
+    return bool(f and f.bold)
+
+
+def rec_number(name):
+    m = REC_TAB.match(name)
+    if not m:
+        return None
+    week, day = int(m.group(1)), int(m.group(2))
+    if not (1 <= day <= DAYS_PER_WEEK):
+        return None
+    return (week - 1) * DAYS_PER_WEEK + day
+
+
+def read_rec_sheet(ws, name, epoch=None):
+    """Mike's hand-built shape. Returns (entry, messages) like read_sheet."""
+    no = rec_number(name)
+    if no is None:
+        return None, [f"sheet '{name}' is not a REC W.D tab"]
+
+    faults = []
+    # GUARD 1 — the header block, checked by SUBSTRING not by literal.
+    # REC 1.1 says "HEADLINE - Do not include in Record" and the other four say
+    # "HEADLINE"; matching the whole string would refuse four correct sheets.
+    if "HEADLINE" not in _col_b(ws, REC_ROW_LABEL).upper():
+        faults.append(
+            f"row {REC_ROW_LABEL} of '{name}' says {_col_b(ws, REC_ROW_LABEL)!r}, "
+            f"expected the HEADLINE label. The header has moved; this reader will not guess.")
+    # GUARD 2 — row 1 must name the same record the tab does. Catches a tab
+    # renamed without its contents, and a sheet copied and not re-pointed.
+    t = _col_b(ws, REC_ROW_TITLE)
+    m = re.search(r"RECORD\s+(\d+)\.(\d+)", t, re.I)
+    if not m:
+        faults.append(f"row {REC_ROW_TITLE} of '{name}' says {t!r}, expected it to name RECORD W.D.")
+    elif (int(m.group(1)) - 1) * DAYS_PER_WEEK + int(m.group(2)) != no:
+        faults.append(
+            f"'{name}' and its own row {REC_ROW_TITLE} disagree: the tab is Record {no:03d}, "
+            f"the sheet says {t.strip()!r}.")
+    # GUARD 3 — the date in row 1 must be the day this record falls on. This is
+    # the check the old EXPECT guard had no equivalent of, and it is the one
+    # that catches a sheet written for the wrong day.
+    if epoch:
+        want = day_of(no, epoch)
+        got = re.search(r"(\d{4}-\d{2}-\d{2})", t)
+        if want and got and got.group(1) != want:
+            faults.append(
+                f"'{name}' is dated {got.group(1)} in row {REC_ROW_TITLE}, but Record {no:03d} "
+                f"falls on {want}. One of the two is wrong; this reader will not choose.")
+    # GUARD 4 — the headline row must not be empty while the beat row is full,
+    # which is what a sheet looks like when somebody has typed the title one
+    # row too high.
+    if not _col_b(ws, REC_ROW_HEADLINE).strip() and _col_b(ws, REC_ROW_BEAT).strip():
+        faults.append(
+            f"'{name}': row {REC_ROW_HEADLINE} (the headline) is empty while row {REC_ROW_BEAT} "
+            f"(the week-plan beat, which never ships) has text. Refusing rather than landing the beat.")
+    if faults:
+        return None, faults
+
+    title = _col_b(ws, REC_ROW_HEADLINE).strip()
+    d1 = _col_b(ws, REC_ROW_DECK1).strip()
+    d2 = _col_b(ws, REC_ROW_DECK2).strip()
+    line = "\n".join([x for x in (d1, d2) if x])
+
+    # ── walk the body ──────────────────────────────────────────────────────
+    sections, cur, para = [], None, []
+
+    def close_para():
+        if para:
+            cur["body"].append("\n".join(para))
+            para.clear()
+
+    def close_section():
+        close_para()
+        if cur and cur["body"]:
+            sections.append({"label": cur["label"], "body": list(cur["body"])})
+
+    for r in range(REC_FIRST_BODY_ROW, ws.max_row + 1):
+        raw = _col_b(ws, r)
+        text = raw.strip()
+        bold = _bold_b(ws, r)
+        if bold and DROP_FROM in text.upper():
+            break                                   # positional cut, see header
+        if bold and text.upper().strip("{} ") == END_LABEL:
+            break
+        if bold and text:
+            close_section()
+            cur = {"label": text, "body": []}
+            continue
+        if not text:
+            close_para()                            # blank = paragraph break
+            continue
+        if cur is None:
+            continue                                # stray text above any label
+        para.append(raw.rstrip())                   # markers carried verbatim
+    close_section()
+
+    warn = []
+    if len(title) > TITLE_MAX:
+        warn.append(f"Record {no:03d}: the headline is {len(title)} characters, over {TITLE_MAX}")
+    if len(line) > LINE_MAX:
+        warn.append(f"Record {no:03d}: the deck is {len(line)} characters, over {LINE_MAX}")
+
+    sections, docs = split_attachments(sections)
+
+    entry = {"no": no}
+    if title:
+        entry["title"] = title
+    if line:
+        entry["line"] = line
+    entry["sections"] = sections
+    if docs:
+        entry["docs"] = docs
+    return entry, warn
 
 def record_epoch():
     """The one constant, read rather than re-declared."""
@@ -243,7 +506,25 @@ def main():
     epoch = record_epoch()
     entries, warnings, faults = [], [], []
 
+    # ═══ [2026-08-16] TWO SHAPES, SELECTED BY NAME, NEVER GUESSED ══════════
+    # `Record\s+\d+` is the GENERATED workbook's tab ("Day 1 - Record 001");
+    # `REC W.D` is Mike's hand-built one. The two patterns cannot both match a
+    # tab, so a sheet is read by exactly one reader or by none — which is what
+    # lets both shapes live in this tool without either becoming a fallback for
+    # the other. A tab matching neither is skipped exactly as before (READ ME
+    # FIRST, 12-week plan).
     for name in wb.sheetnames:
+        if rec_number(name) is not None:
+            entry, msgs = read_rec_sheet(wb[name], name, epoch)
+            if entry is None:
+                faults.extend(msgs)
+                continue
+            warnings.extend(msgs)
+            d = day_of(entry["no"], epoch)
+            if d:
+                entry["date"] = d
+            entries.append(entry)
+            continue
         if not re.search(r"Record\s+\d+", name):
             continue
         entry, msgs = read_sheet(wb[name], name)
@@ -303,9 +584,11 @@ def main():
               + " ".join(f"{n:03d}" for n in sorted(carried_from_tree)))
     for e in entries:
         n = sum(len(s["body"]) for s in e["sections"])
+        d = e.get("docs") or []
         print(f"    {e['no']:03d}  {len(e['sections'])} section(s), {n} paragraph(s)"
               f"   {'headline' if e.get('title') else 'NO HEADLINE'}"
-              f"   {'deck' if e.get('line') else 'no deck'}")
+              f"   {'deck' if e.get('line') else 'no deck'}"
+              f"   {f'{len(d)} attachment(s)' if d else 'no attachments'}")
     print(f"  day one {epoch}" if epoch else "  !! no RECORD_EPOCH found")
     if warnings:
         print("  WARNINGS (the workbook counted these for him too):")

@@ -544,56 +544,169 @@ const POSTURE =
    own, and flattening it into one paragraph would be editing his line breaks —
    the exact thing the instruction forbids. A string still works everywhere
    else, so no existing answer changed shape. */
+/* ═══════════════════════════════════════════════════════════════════════════
+   [2026-08-16] MIKE'S FULL REPLACEMENT OF THE FOUNDATION FAQ
+   ═══════════════════════════════════════════════════════════════════════════
+   HIS INSTRUCTION: "FAQ — follow the /booth standard exactly. Full
+   replacement." Eight questions, his words, in his order.
+
+   IT IS A REPLACEMENT AND NOT AN EDIT, which is why the whole `on: "foundation"`
+   set below is his and nothing of the old set survives inside it. Four of his
+   eight are rewrites of answers that were already here in other words — the
+   two Coalition destinations, the who-pays question and the ending — and three
+   of those had been HIS OWN, typed in capitals on 13 August. Sentence case and
+   full questions now; the substance is his in both passes.
+
+   ═══ WHAT HE STRUCK, NAMED ONCE, WHICH IS WHERE A DELETED THING IS NAMED ════
+   (1) "Why do this at all?" — the answer was *"To make the world demonstrably
+       better, and it starts with music…"*. His new first question, "What is
+       this all about?", answers the same reader by pointing at the story rather
+       than summarising it, which is what the three new tracks are for.
+   (2) "Why give all the money away?" is superseded by "Why are you giving away
+       your money?" — a different answer, not a re-title: the old one carried
+       Motto #3 and an F1 marker for the Mike-and-Mo half that was still to
+       come. **That marker's content has arrived**, in his own words, as the
+       who-pays answer. Register row M40 is answered by this round.
+   (3) THE OUTBOUND DOOR IS STRUCK. `link: { text: "Give to Coalition for the
+       Homeless", href: "…/donate" }` was the first and only real outbound
+       anchor in this wing (M, 2026-08-14). He listed its exact text under KILL,
+       and Phase 4 of the same instruction points the gift shop's Coalition tile
+       at `coalitionforthehomeless.org` — so the door MOVES rather than closing.
+       Raised for him in the round report rather than resolved here.
+
+   ═══ HIS LINE BREAKS ARE SENTENCES, NOT PARAGRAPHS ══════════════════════════
+   Same reading D took on 13 August and for the same reason: several of these
+   answers were typed across two or three lines, and each line is a whole
+   sentence. They are carried as `lines` — one string per sentence — so the
+   breaks he typed draw and nothing is invented between them. The ONE place he
+   left a blank line ("What happens when you stop?") is the one place there are
+   two beats, and it is the only answer here whose paragraphs are paragraphs.
+   ═══════════════════════════════════════════════════════════════════════════ */
 const FAQ = [
   {
-    /* [R2 2026-08-03] RESTORED, WORD FOR WORD. v41/C3 replaced this with "Is
-       this a charity?" and an answer that denied a registration, a charity
-       number and a tax treatment in one breath. Mike reverted it: the denials
-       were work he had asked not to take on, answered in the register of a
-       disclaimer rather than of a museum, and the question they answered is not
-       the one this room is here for. THE ROOM IS THE ANSWER TO THE WORD ON ITS
-       OWN DOOR, and it gives that answer first — which is also why this is Q1
-       and not Q7. Do not "improve" it into legal vocabulary again. */
+    q: "What is this all about?",
+    on: "foundation",
+    lines: [
+      "Read 'The Short Story'",
+      "Interested? Read 'The Long Story' and follow the blog.",
+    ],
+  },
+  {
     q: "Is this a foundation?",
     on: "foundation",
-    a: "Not the kind with a building and an endowment. There is no fund here, " +
-       "no account, and nothing set aside — that is not modesty, it is the " +
-       "arrangement: money does not stop at Weird.Baby, so there is never a " +
-       "balance for it to stop in. What the word means here is the set of " +
-       "rules the whole place is built on, written down and kept.",
+    lines: [
+      "Not the kind with a building and an endowment.",
+      "There is no fund here, no account, and nothing set aside.",
+      "What the word means here is the set of rules the place is built on, "
+      + "written down and kept.",
+    ],
   },
   {
-    q: "Why do this at all?",
+    q: "Where do our donations go?",
     on: "foundation",
-    a: "To make the world demonstrably better, and it starts with music: the " +
-       "artists who deserve depth, and the people who love them. Everything " +
-       "else — the rooms, the cards, the rules on this page — exists to " +
-       "protect that one sentence. Methods will be rewritten a thousand " +
-       "times. What they are done for was written once.",
+    a: "100% of every donation goes directly to Coalition for the Homeless.",
   },
   {
-    /* [F1 2026-08-05] MIKE: this answer CARRIES MOTTO #3, and the content about
-       him and Mo already having enough is STILL TO COME.
-       SO THE MOTTO LEADS. It was the third sentence of a paragraph and it is
-       the sentence he named, which means it was buried by a lead-in that only
-       existed to arrive at it. Nothing else in the approved answer was
-       contradicted, so nothing else was touched.
-       THE MOTTO IS CARRIED AS TEXT AND NOT AS A NUMBER. He calls it Motto #3;
-       this museum has never published a numbered list of mottos, so printing
-       "motto number three" would name an apparatus a visitor has never seen —
-       an internal designation on the glass, which is Doctrine 11's own example
-       of a line that fails. The words ship; the index does not.
-       AND THE SLOT IS LEFT MARKED. He flagged the Mike-and-Mo half as still to
-       come, so it is a marker and not a paraphrase: the honest gap costs the
-       answer nothing a reader would miss, and a plausible stand-in would have
-       been invention on the one page whose subject is honesty about money. */
-    q: "Why give all the money away?",
+    /* ═══════════════════════════════════════════════════════════════════════
+       [2026-08-16c] THE DONATE PASSAGE — RULED IN, AND IT REOPENS THE ONE DOOR
+       ═══════════════════════════════════════════════════════════════════════
+       MIKE: **"THE DONATE PASSAGE — RULED IN. This is the ONLY place on the
+       site that links to giving. Mike's words, lightly shaped by Ops; he will
+       edit later."**
+
+       IT RESOLVES `S-i`, AND THE ROW WAS RIGHT TO BE OPEN. On 2026-08-16 he
+       struck the FAQ's outbound anchor by naming its link text under KILL, and
+       Phase 4 pointed the gift shop's Coalition tile at their site — then he
+       hid that tile, and for a few hours **the building named a destination and
+       published no route to it.** Ops raised that as the consequence of two
+       rulings meeting; this is his answer, and it is a better one than either
+       of the doors it replaces: **the link is inside the sentence that explains
+       why it is not everywhere else.**
+
+       WHERE IT SITS IS OPS' JUDGEMENT AND IS FLAGGED AS ONE. He supplied the
+       copy and not the position. It goes directly under "Where do our donations
+       go?" because the two questions are one thought — that answer says where
+       the money lands, this one says how a reader can send some there without
+       buying a t-shirt. Moving it is one object.
+
+       THE LINK IS `inline`, NOT `link`, AND THAT IS NOT A PREFERENCE. `link`
+       draws a door BELOW the answer; his copy puts the words inside the
+       sentence, so the block form would have printed "donate here" twice —
+       once as his prose and once as furniture under it. `inlineDoor` in
+       Exhibit.jsx turns exactly that substring into an anchor and nothing else.
+       **HIS INSTRUCTION IN THE SAME BREATH: "DO NOT introduce a general
+       external-link affordance. This is one link in one answer, not a new
+       pattern."** This is the only `inline` in the building. Read the note
+       above `inlineDoor` before adding a second.
+
+       AND THE MARK MUST STAY INSIDE THE LINE. `inline.mark` is matched against
+       the paragraph text; reword the last line and the anchor stops matching.
+       It does not vanish if that happens — it falls back to a trailing link —
+       but the sentence stops reading the way he wrote it, so the two are edited
+       together or not at all. */
+    q: "Where's the donate button?",
     on: "foundation",
-    a: "Take all you need, not grab all you can. Keeping it was never what " +
-       "any of this was for, and the museum already has what it needs — so " +
-       "what passes through Weird.Baby's hands goes to humanity: all of it, " +
-       "always, without pause and without pay. It is not a donation drive " +
-       "with a target. It is the direction everything moves.",
+    lines: [
+      "We are not asking you for money.",
+      "We make money by making something worth having, and all of it goes to "
+      + "Coalition for the Homeless.",
+      "Merch is a good way to support an artist. Sometimes you want to give "
+      + "and you don't want the t-shirt.",
+      "For you: donate here.",
+    ],
+    inline: { mark: "donate here",
+              href: "https://www.coalitionforthehomeless.org/donate/" },
+  },
+  {
+    q: "Where do the Music and Merch proceeds go?",
+    on: "foundation",
+    lines: [
+      "100% of Weird.Baby profits and royalties goes directly to Coalition "
+      + "for the Homeless.",
+      "100% of the Artists' profits and royalties are handled by them, on "
+      + "their sites.",
+    ],
+  },
+  {
+    q: "Who pays to keep the lights on?",
+    on: "foundation",
+    lines: [
+      "Mike and Mo pay all the bills (Internet, robot parts, pens and "
+      + "pencils, etc.)",
+      "We intend to keep it that until it is time to pass it on; time will "
+      + "tell.",
+    ],
+  },
+  {
+    q: "Why are you giving away your money?",
+    on: "foundation",
+    lines: [
+      "We are not giving it away.",
+      "We have what we need; we choose not to keep grabbing more for "
+      + "ourselves.",
+    ],
+  },
+  {
+    q: "Can I contribute something other than money?",
+    on: "foundation",
+    lines: [
+      "Yes. We will speak up when we have a need to fill.",
+      "And Coalition for the Homeless could use your help right now.",
+    ],
+  },
+  {
+    /* the one answer of the eight with a real paragraph break in it — see the
+       header. Two beats: what happens to the place, and what happens to the
+       idea. */
+    q: "What happens when you stop?",
+    on: "foundation",
+    lines: [
+      "I'll pass it on. There is no committee, no board, and no team.",
+      "And if humanity stops believing in what this is for, Weird.Baby does "
+      + "not pivot, rebrand or sell. It ends, and the name is retired. What "
+      + "survives is the idea; somebody else may begin again, under their own "
+      + "name.",
+    ],
   },
   {
     /* [F1 2026-08-05] MIKE ANSWERED THIS ONE WITH A POINTER RATHER THAN COPY —
@@ -787,89 +900,6 @@ const FAQ = [
        "materially benefits from any of it, and that is checkable from the " +
        "outside: there is nothing to click that pays us.",
   },
-  {
-    q: "What happens when you stop?",
-    on: "foundation",
-    a: "One person takes it on — chosen, not elected; willing, not paid — on " +
-       "exactly these terms: own nothing, take nothing, keep the place, pass " +
-       "it on. There is no committee, no board and no team. And if humanity " +
-       "stops believing in what this is for, Weird.Baby does not pivot, " +
-       "rebrand or sell. It ends, and the name is retired. What survives is " +
-       "the idea; somebody else may begin again, under their own name.",
-  },
-  /* ═══ [D 2026-08-13] MIKE'S OWN FIVE, ADDED TO 03 FAQ — VERBATIM ═══════════
-     HIS INSTRUCTION: "ADD to section 03 FAQ — existing content stays. Mike
-     polishes later." The block arrived as five headed answers and two closing
-     lines, and it is carried across CHARACTER FOR CHARACTER with one correction
-     he made himself in the same breath (`dedictated` -> `dedicated`).
-
-     THREE THINGS A LATER ROUND MUST NOT TIDY.
-     (1) THE HEADINGS ARE HIS CAPITALS AND HIS PUNCTUATION. `WHO PAYS FOR ALL
-         THE STUFF?!?!` sits beside eleven sentence-case questions and looks
-         like it. That is a QUESTION FOR HIM, raised in the round log, not a
-         licence to restyle his line — his own instruction says he polishes.
-         `.vp-faq-q > summary` sets no `text-transform`, so what is typed here
-         is exactly what draws.
-     (2) THE WRAPPING IN HIS SOURCE IS NOT A PARAGRAPH BREAK. Three of the five
-         answers were typed across two lines; each is one sentence and is one
-         string here. Splitting them on the newline would have invented five
-         paragraphs he did not write.
-     (3) `Coalition for the Homeless` IS NAMED TWICE ON PURPOSE — once for
-         donations and once for profits and royalties. They are two channels and
-         he wrote the destination out for each; collapsing them into one answer
-         would be the edit Doctrine 17 forbids in the other direction.
-
-     THEY GO ON `foundation` AND NOT ON `ledger`, because `03 FAQ` is the
-     Foundation album's third track and the split between the two FAQ tracks is
-     `faqFor(where)`. */
-  {
-    /* ═══ [M 2026-08-14] THE DOOR, AND IT IS THE FIRST REAL ONE IN THIS ROOM ══
-       MIKE: "Foundation — outbound link to coalitionforthehomeless.org/donate."
-
-       IT GOES ON THIS ANSWER AND NOT ON `Can I donate?`, WHICH IS THE ONE THAT
-       LOOKS LIKE ITS HOME. That question is about giving to WEIRD.BABY and its
-       answer is a refusal — "if your help would arrive as money in Weird.Baby's
-       hands to spend, it is not help we can take, and we will gladly show you
-       the door that is." This IS that door, and it belongs on the sentence that
-       says where the money goes rather than on the sentence that says where it
-       does not.
-       IT DOES NOT CONTRADICT THE ROOM. Nothing here collects anything: the
-       address is the Coalition's own, the visitor gives to them directly, and
-       Weird.Baby is not in the transaction at any point. That is the room's
-       whole doctrine drawn as a link rather than asserted as a sentence.
-       THE ADDRESS IS HIS, TYPED AS HE TYPED IT. It resolves — checked
-       2026-08-14, it redirects to `coalitionforthehomeless.givingpage.org/
-       donate`, titled "Coalition for the Homeless Donation Page" — and the
-       redirect target is deliberately NOT used: their vanity address is the
-       durable one and the hop is theirs to change. */
-    q: "YOUR DONATIONS",
-    on: "foundation",
-    link: { text: "Give to Coalition for the Homeless",
-            href: "https://coalitionforthehomeless.org/donate" },
-    a: "100% of every donation goes directly to Coalition for the Homeless.",
-  },
-  {
-    q: "MERCH PROFITS / MUSIC ROYALTIES",
-    on: "foundation",
-    a: "100% of Weird.Baby profits and royalties goes directly to Coalition " +
-       "for the Homeless.",
-  },
-  {
-    q: "WHO PAYS FOR ALL THE STUFF?!?!",
-    on: "foundation",
-    a: "Mike and Mo Lang pay all the bills (Internet, robot parts, pens and " +
-       "pencils, etc.)",
-  },
-  {
-    q: "FOR HOW LONG?",
-    on: "foundation",
-    a: "We intend to keep it that way forever; time will tell.",
-  },
-  {
-    q: "CAN PEOPLE CONTRIBUTE IN WAYS OTHER THAN CASH?",
-    on: "foundation",
-    a: "Yes. We will speak up when we have a need to fill.",
-  },
 ];
 
 /* [D 2026-08-13] THE TWO LINES HIS BLOCK CLOSES ON — see the long note in
@@ -953,12 +983,26 @@ const NOT_BUILT_YET =
   "There is no way to do this through the museum yet. When there is, it will " +
   "appear on the register in The Ledger, and not one day before.";
 
+/* [2026-08-16] `lines` IS READ DIRECTLY NOW, AND `a` STILL WORKS. Mike's
+   replacement set writes multi-sentence answers as `lines: [...]` — one string
+   per sentence he typed — while the ledger's answers are still single `a`
+   strings. Destructuring only `a` would have DROPPED every one of his `lines`
+   arrays and printed `[undefined]`, silently, on the eight questions this
+   round exists for. An answer declares one or the other; declaring both is a
+   fault this filters into `lines` winning, because `lines` is the more
+   specific of the two. */
 const faqFor = where => FAQ
   .filter(f => f.on === where)
-  .map(({ q, a, link }) => ({
+  .map(({ q, a, lines, link, inline }) => ({
     title: q,
-    lines: Array.isArray(a) ? a : [a],
+    lines: Array.isArray(lines) ? lines : (Array.isArray(a) ? a : [a]),
     link,
+    /* [2026-08-16c] `inline` — the donate door, and the ONLY entry in the
+       building that carries one. See `inlineDoor` in Exhibit.jsx: it is a
+       substring of one of his own sentences, not a link affordance. Carried
+       here for the same reason `lines` had to be: a field the mapper does not
+       destructure is a field that vanishes silently. */
+    inline,
   }));
 
 /* [R7 2026-08-06] THE ACCORDION, ON BOTH FAQ TRACKS. Mike ruled it for every
@@ -1012,36 +1056,84 @@ const spine = [
     art: "/images/foundation/foundation-cover.png",
     accent: null,
     tracks: [
+      /* ═════════════════════════════════════════════════════════════════════
+         [2026-08-16] TRACKS 1 AND 2 ARE DELETED. THREE NEW ONES REPLACE THEM.
+         ═════════════════════════════════════════════════════════════════════
+         MIKE, on the two that were here: **"Needs total rethink. Kill it."**
+         In their place: **The Short Story · The Long Story · The Blog.**
+
+         NAMED ONCE, HERE, WHICH IS WHERE A DELETED THING IS NAMED (Doctrine 24).
+           · `executive-summary` — "Executive summary", carrying the charter's
+             credo ("Built from gifts. Gives everything away. Nothing is bought,
+             nothing is kept, and money never stops here.") and the `ACCOUNT`
+             card. **`ACCOUNT` NOW HAS NO READER** and is deliberately kept in
+             this file: it is the room's own $0.00 register, it is declared
+             beside the ledger it belongs to, and the three new tracks are
+             unwritten — deciding it is dead before he has written them would be
+             Ops choosing what his story needs.
+           · `happening-now` — "Happening now!", an empty log with a `logEmpty`
+             sentence. It published nothing and had published nothing.
+
+         ═══ THE THREE ARE EMPTY AND HONEST, AND THAT IS THE INSTRUCTION ═══════
+         **"Do NOT write these yourself; they are Mike's voice."** So each face
+         carries a `[PAPA]` blurb and nothing else. `scrubFace` deletes a blurb
+         that is entirely a marker, so in DEVELOPMENT he meets a red note on the
+         page he has to write, and at LAUNCH `wb-ops-notes` empties the literal
+         in the SOURCE and the face draws nothing at all.
+         IT IS NOT `NOT_BUILT_YET`, WHICH IS THE NEAREST THING IN THIS FILE AND
+         IS THE WRONG SENTENCE. That constant states MECHANISM state — "there is
+         no way to do this through the museum yet" — which Doctrine 11 names as
+         the permitted case. A track with no writing in it has a working
+         mechanism and no words, and *"nobody has written this yet"* is a line
+         whose SUBJECT is the making of the museum. Doctrine 11 refuses it at
+         any live address, so it is said to him and not to a visitor.
+         ═════════════════════════════════════════════════════════════════════ */
       {
-        id: "executive-summary",
-        title: "Executive summary",
+        id: "short-story",
+        title: "The Short Story",
         videos: [],
         face: {
           kind: "text",
-          title: "Executive summary",
+          title: "The Short Story",
           subtitle: "THE WEIRD.BABY FOUNDATION",
-          /* THE CREDO — the charter's own opening sentence and its two short
-             ones, carried off the sheet's `.sheet-credo` / `.sheet-words`. */
-          blurb: "Built from gifts. Gives everything away. Nothing is bought, " +
-                 "nothing is kept, and money never stops here.",
-          account: ACCOUNT,
+          /* ═══ ONE SENTENCE, AND IT IS LOAD-BEARING RATHER THAN STYLE ═══
+             `visitorProse` cuts by SENTENCE and drops only the sentence
+             carrying the mark, so a two-sentence note leaves its second
+             sentence ON THE GLASS. This blurb was written as two and the tail
+             published as visitor copy — caught by looking at the page, by no
+             gate. Same defect `/wb`'s FAQ records at its own `How to contact?`.
+             No full stop before the end. */
+          blurb: "[PAPA] this track is yours to write — the FAQ already points "
+               + "a reader at it, and nothing in the repo was close enough to "
+               + "seed it (the search is in the round report).",
         },
       },
       {
-        id: "happening-now",
-        /* his exclamation mark, his words. */
-        title: "Happening now!",
+        id: "long-story",
+        title: "The Long Story",
         videos: [],
         face: {
           kind: "text",
-          title: "Happening now!",
+          title: "The Long Story",
           subtitle: "THE WEIRD.BABY FOUNDATION",
-          entriesMode: "log",
-          entries: [],
-          logEmpty:
-            "Nothing has been published here yet. When it is, each update " +
-            "will say where we said we were going, where we got to, and " +
-            "where we are going next.",
+          /* one sentence — see the note on The Short Story above. */
+          blurb: "[PAPA] yours to write, and the nearest thing already written "
+               + "is C:/AI/VISION.md, which is about the museum rather than "
+               + "about the giving (see the round report before reusing it).",
+        },
+      },
+      {
+        id: "the-blog",
+        title: "The Blog",
+        videos: [],
+        face: {
+          kind: "text",
+          title: "The Blog",
+          subtitle: "THE WEIRD.BABY FOUNDATION",
+          /* one sentence — see the note on The Short Story above. */
+          blurb: "[PAPA] yours, and the FAQ already tells a reader to follow "
+               + "it, so this one needs either your first post or a ruling "
+               + "that the blog lives somewhere else.",
         },
       },
       faqTrack("questions-foundation", "foundation", FAQ_CLOSING_FOUNDATION),

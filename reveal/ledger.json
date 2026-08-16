@@ -2905,6 +2905,46 @@
    "transferWeek": null
   },
   {
+   "id": "door.coalition",
+   "name": "The donate door — the only outbound link to giving in the museum.",
+   "cls": "commerce",
+   "where": "src/data/artists/foundation.js FAQ \"Where's the donate button?\"",
+   "build": "LIVE",
+   "reach": "inside the Foundation's FAQ answer",
+   "state": "REVEALED",
+   "when": null,
+   "deps": [],
+   "arc": null,
+   "shown": false,
+   "assets": [],
+   "prod": null,
+   "calledBy": [],
+   "note": "Inline in Mike's own sentence (`inlineDoor`, Exhibit.jsx), not a link affordance — he ruled against building one. Resolves S-i.",
+   "transfer": "BLAST",
+   "transferWeek": 0
+  },
+  {
+   "id": "shop.friends",
+   "name": "The friend tile — Coalition for the Homeless in the gift shop.",
+   "cls": "commerce",
+   "where": "src/data/wb_roster.js wbFriends",
+   "build": "NOT_BUILT",
+   "reach": null,
+   "state": "HELD",
+   "when": null,
+   "deps": [
+    "a preview image for the tile — Mike, S-g"
+   ],
+   "arc": null,
+   "shown": true,
+   "assets": [],
+   "prod": null,
+   "calledBy": [],
+   "note": "Built and hidden, not unbuilt: the tile type, the quarter-size grid, the preview well and the ordering rule all exist and are exercised by nothing while the list is empty. Reveal is one entry moved back into `wbFriends` plus an image path.",
+   "transfer": null,
+   "transferWeek": null
+  },
+  {
    "id": "retired.hr.home",
    "name": "/hr/home — a stock interior photo with four room names painted into the JPEG.",
    "cls": "surface",

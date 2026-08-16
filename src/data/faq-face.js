@@ -54,7 +54,14 @@
 
 /**
  * @param subtitle  the wing, in the house's own caps — e.g. "WEIRD.BABY ROBOTS"
- * @param entries   [{ title, line | lines, note?, link? }]
+ * @param entries   [{ title, line | lines, note?, link?, inline? }]
+ *                  `inline: { mark, href }` — [2026-08-16c] ONE ANSWER IN THE
+ *                  BUILDING CARRIES ONE, and it is listed here only so it is
+ *                  not "discovered" as a free slot. It turns a substring of the
+ *                  writer's own sentence into an anchor; it is NOT a link
+ *                  affordance and Mike ruled against building one ("This is one
+ *                  link in one answer, not a new pattern"). Read the note above
+ *                  `inlineDoor` in Exhibit.jsx before a second caller exists.
  * @param closing   optional [paragraph] printed under the last question
  */
 /* ═══ [D 2026-08-13] `closing` — AND THIS IS THE EDIT THE NOTE ABOVE ASKED FOR

@@ -395,9 +395,16 @@ body:has(.vp-face) .vp-area::before{display:none}
    title is the HEAD (1.32x). Rank is legible from size again, which is the
    half of Mike's note that is not about the typeface. The rule on the left is
    what makes it read as a quotation now that it is no longer a serif. */
+/* [2026-08-16] `pre-line` — the fourth surface to take the house's one answer
+   to what a newline the writer typed means (`.vp-rec-sum`, `.vp-rec-sect-body`,
+   `.sheet-faq-a`). Mike's ABOUT THE ARTIST lead is his opening paragraph, a
+   blank line, and four biography lines; without this every one of those breaks
+   renders as a space and the four run together into the paragraph above them.
+   Runs of spaces still collapse and a long line still wraps, so every existing
+   single-paragraph blurb in the museum is byte-identical on the glass. */
 .vp-face-blurb{font-family:'Syne',sans-serif;font-weight:600;
   font-size:var(--fs-lead);line-height:1.4;color:var(--wb-dim);
-  letter-spacing:.005em;max-width:44ch;
+  letter-spacing:.005em;max-width:44ch;white-space:pre-line;
   border-left:2px solid var(--wb-gold-lo);padding-left:14px}
 /* [L5 2026-08-02] THE LEAD KEEPS ITS AIR ON THE FLAT WING.
    Splitting the lead out of the head (see Exhibit.jsx) moved it from inside
@@ -3321,9 +3328,18 @@ button.vp-bill-act:hover,button.vp-bill-act:focus-visible{
 .vp-prof-label{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-micro);letter-spacing:.16em;text-transform:uppercase;
   color:var(--wb-gold-mute)}
+/* [2026-08-16] `pre-line` — A CARD MAY NOW HOLD MORE THAN ONE PARAGRAPH.
+   Mike's ABOUT THE ARTIST copy puts four achievements under one heading with a
+   blank line between them, and without this every one of those breaks renders
+   as a space and his four become one block. IT IS THE HOUSE'S ONE ANSWER to
+   what a newline the writer typed means — `.vp-rec-sum`, `.vp-rec-sect-body`
+   and the booth's `.sheet-faq-a` all run on it, and this is the fourth
+   surface, not a new idea. `pre-line` still collapses runs of spaces and still
+   wraps a long line: it honours the newline and changes nothing else, so every
+   existing single-paragraph card is byte-identical on the glass. */
 .vp-prof-body{margin:0;font-family:var(--wb-read);font-optical-sizing:auto;
   font-size:var(--fs-small);line-height:1.5;letter-spacing:.005em;
-  color:var(--wb-gold)}
+  color:var(--wb-gold);white-space:pre-line}
 
 /* the SIDEBOXES: boxed asides. They are what makes it read as a magazine page
    rather than as a document - a ruled box beside running text is the oldest
@@ -4368,10 +4384,27 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
 .vp-faq-signoff a:hover,.vp-faq-signoff a:focus-visible{border-bottom-color:var(--wb-gold)}
 .vp-faq-q{border-top:1px solid var(--wb-border)}
 .vp-faq-q:last-of-type{border-bottom:1px solid var(--wb-border)}
+/* ═══ [2026-08-16] THE BOOTH IS THE STANDARD TEMPLATE, AND THIS IS IT ═══════
+   MIKE: "This page is elegant and clean. This needs to be THE standard template
+   for FAQs, and likely for many other things." — and "the font uses the font
+   type instead of boldness, size, etc. Not pleasingly."
+   THE COMPLAINT WAS MADE ABOUT /booth AND IT IS TRUE OF ALL FIVE FACES, which
+   is the whole reason `faq-face.js` exists: the wings and the booth were ruled
+   into one format three times and the format was never a mechanism. So the
+   question/answer treatment is the same here as in `sheet.css` — ONE FACE
+   (Geist), the hierarchy in WEIGHT and SIZE, the answer pulled up toward its
+   question and indented under it.
+   THE RAMP IS STILL THIS SURFACE'S OWN. `--fs-lead` / `--fs-body` are read
+   rather than replaced with the sheet's fixed rem values: a face sits in a pane
+   the visitor can resize and a sheet does not, which is the trade the block
+   above this one already records. What is shared is the RELATIONSHIP between
+   the two — heavier and larger over lighter and smaller — not a pair of
+   numbers, because a number copied across two ramps is a number that is wrong
+   on one of them. */
 .vp-faq-q > summary{cursor:pointer;list-style:none;
   display:flex;justify-content:space-between;align-items:baseline;gap:20px;
-  padding:15px 2px;
-  font-family:'Syne',sans-serif;font-weight:600;
+  padding:15px 2px 8px;
+  font-family:'Geist',system-ui,-apple-system,sans-serif;font-weight:600;
   font-size:var(--fs-lead);line-height:1.4;letter-spacing:.005em;
   color:var(--wb-gold);transition:color .15s}
 .vp-faq-q > summary::-webkit-details-marker{display:none}
@@ -4384,11 +4417,38 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
   flex-shrink:0;transition:transform .18s ease,color .15s}
 .vp-faq-q[open] > summary::after{transform:rotate(45deg);color:var(--wb-gold)}
 .vp-faq-q[open] > summary{color:var(--wb-gold-hi)}
-.vp-faq-a{padding:0 2px 18px}
-.vp-faq-a p{margin:0;font-family:var(--wb-read);font-optical-sizing:auto;
-  font-size:var(--fs-body);line-height:1.62;letter-spacing:.005em;
-  color:var(--wb-gold-lo);max-width:68ch;hyphens:auto;text-wrap:pretty}
+/* the answer, indented under its question — see the note on the summary above.
+   `hyphens:auto` is dropped for the reason `sheet.css` gives at length: a
+   hyphenated break is a wrap with a dash in it, and this list is now written
+   under a no-wrapping ruling. */
+.vp-faq-a{padding:0 2px 18px 24px}
+.vp-faq-a p{margin:0;font-family:'Geist',system-ui,-apple-system,sans-serif;
+  font-weight:400;
+  font-size:calc(var(--fs-body) * .96);line-height:1.62;letter-spacing:.005em;
+  color:var(--wb-gold-lo);max-width:68ch;text-wrap:pretty}
 .vp-faq-a p + p{margin-top:var(--rh-tight)}
+/* [2026-08-16c] THE DONATE DOOR, AND IT IS ONE CLASS ON ONE ANCHOR.
+   Mike: "DO NOT introduce a general external-link affordance." So this is NOT
+   `.vp-faq-a a` — a bare descendant selector would dress every link any wing's
+   FAQ ever grows, which is the affordance he refused. It is a named class that
+   one anchor in the building carries.
+   IT READS AS A LINK AND NOTHING MORE: the answer's own face, weight and size,
+   the house gold, and an underline offset far enough to clear the descenders.
+   No icon, no arrow, no "opens in a new tab" tail — the booth standard is that
+   a question list is quiet, and a mark beside a word in a sentence is the
+   loudest thing on a page whose subject is that nobody is being asked for
+   anything. */
+.vp-faq-inline-link{
+  color:var(--wb-gold);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+  text-decoration-color:var(--wb-gold-lo);
+  transition:text-decoration-color .2s,color .15s}
+.vp-faq-inline-link:hover,
+.vp-faq-inline-link:focus-visible{
+  color:var(--wb-gold-hi);
+  text-decoration-color:var(--wb-gold)}
 .vp-faq-note{color:var(--wb-gold-mute)}
 .vp-faq-a .vp-fe-link{margin-top:8px}
 /* [D 2026-08-13] THE CLOSING BLOCK — the wing's own last words under the last
@@ -4397,10 +4457,18 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    AIR ABOVE (the Record's own rule) and the list's closing rule, which
    `.vp-faq-q:last-of-type` already draws. No border of its own — a second rule
    12px under the first is a box, and this is a paragraph. */
-.vp-faq-closing{margin:26px 0 0;padding:0 2px}
-.vp-faq-closing p{margin:0;font-family:var(--wb-read);font-optical-sizing:auto;
-  font-size:var(--fs-body);line-height:1.62;letter-spacing:.005em;
-  color:var(--wb-gold-lo);max-width:68ch;hyphens:auto;text-wrap:pretty}
+/* [2026-08-16] CENTRED, ON MIKE'S RULING: "CENTRE, at the foot." The measure
+   is centred with it (`margin-inline:auto`) — a centred paragraph inside a
+   left-aligned 68ch box would sit centred within the box and off-centre on the
+   page, which is the failure that looks like a bug rather than a choice. It
+   takes the answers' new face for the same reason it took their old one: it
+   reads as a last answer, not as a caption. NO INDENT — it hangs off no
+   question. */
+.vp-faq-closing{margin:26px 0 0;padding:0 2px;text-align:center}
+.vp-faq-closing p{margin:0 auto;font-family:'Geist',system-ui,-apple-system,sans-serif;
+  font-weight:400;
+  font-size:calc(var(--fs-body) * .96);line-height:1.62;letter-spacing:.005em;
+  color:var(--wb-gold-lo);max-width:68ch;text-wrap:pretty}
 .vp-faq-closing p + p{margin-top:var(--rh-tight)}
 /* words taken OUT of a document are a quotation of the document, so they are
    set as one: the museum's serif, a rule at the left, and no quote marks

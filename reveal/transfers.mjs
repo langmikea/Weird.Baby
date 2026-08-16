@@ -261,6 +261,17 @@ const BLAST = [
         unplaceable half of the same problem is in EXEMPT. */
   "wal.carsie-blanton", "wal.hunter-root", "wal.jesse-welles", "wal.mikey-mike",
   "wal.banners", "shop.sticker", "channel.shop", "channel.music",
+  /* [2026-08-16c] `door.coalition` — the donate door, and the gate is what
+     put it here. It was first written into the NOT-MGK-MATERIAL exemption
+     beside its three shop siblings, and check (b) refused it in one line:
+     **"REVEALED and exempted — exemption covers what is NOT shown; a
+     visitor can reach this."** Exactly right. The door is on the glass at
+     launch, so it takes BLAST on the class's own definition (everything
+     the site already shows arrived in it) — the same reading that puts
+     `channel.shop` and `channel.music` on this line and leaves the unbuilt
+     channels exempt. The exemption is for what the fiction does not
+     describe, never for what is simply live. */
+  "door.coalition",
 ];
 
 const PACKAGE = [
@@ -367,6 +378,12 @@ export const EXEMPT = new Map([
           fiction over material it was never about. */
   ...["wal.artifacts", "shop.shirts", "shop.domain", "shop.mikes",
       "channel.qr", "channel.supplies", "channel.services",
+      /* [2026-08-16b] `shop.friends` — the gift shop's friend tile, held until
+         it has a picture. A door to a charity in the house's own shop is the
+         plainest case this clause exists for: nothing arrives from a machine
+         line's paperwork, the house arranges it. Its three shop siblings above
+         are exempt on the same sentence. */
+      "shop.friends",
       /* [P4 2026-08-05] The poke lives on the house's OWN MARK, on the front
          page, and has nothing to do with a machine line's paperwork. Nothing
          arrives; somebody draws a blink. It is HELD and not shown, so check (b)

@@ -111,10 +111,33 @@ const FAQ = [
      WORDS. That is Doctrine 17's exact failure mode, arrived at legitimately:
      his instruction is authoritative for this page and only this page. It is
      raised in the round log for him rather than resolved here. */
+  /* ═══ [2026-08-16] MIKE'S SECOND PASS, AND THE ROOM IS NOW THE HOUSE'S
+         STANDARD TEMPLATE ══════════════════════════════════════════════════
+     MIKE: "This page is elegant and clean. This needs to be THE standard
+     template for FAQs, and likely for many other things."
+
+     WHAT HE CHANGED, EXACTLY, and nothing else was touched: the "favorite" in
+     the first answer, the tracking NOTE's wording, the ordering (contact moves
+     LAST), the accession question and its answer, the last line of "Is The
+     Museum finished?", and the way out. Two questions were struck. His
+     affiliation and 'take a cut' answers and the job-pays-nothing sentence are
+     KEPT ON HIS INSTRUCTION and are not re-read here.
+
+     ═══ HARD RULING: NO WRAPPING ═════════════════════════════════════════════
+     MIKE: "If my lines are too long, do not wrap them please. I will reword
+     them instead." So an answer line that does not fit the column is REPORTED
+     TO HIM WITH ITS CHARACTER COUNT and left alone — it is never re-wrapped
+     here, and the type is never shrunk to make it fit. That is the opposite of
+     what a typographer reaches for and it is the ruling: the line is his and
+     the rewording is his.
+     THE MECHANISM THAT MAKES IT CHECKABLE is `white-space: pre-line` on
+     `.sheet-faq-a` (InfoBooth.css) — his newlines draw, so "does this line
+     wrap" is a question with an answer, measured on the glass rather than
+     estimated from a character count. */
   {
     q: "What is this place?",
     a: "A museum, of sorts.\n" +
-       "A place to freely share my favorite stuff with others.",
+       "A place to freely share my stuff with others.",
   },
   {
     q: "Is it really free?",
@@ -129,24 +152,20 @@ const FAQ = [
        log, which was taken before this shipped and is the reason the absolute
        is gone. */
     q: "Are you tracking me?",
+    /* [2026-08-16] the NOTE is his new wording. It broadens from "the artists'
+       sites" to Social Media AND Artist sites, and it names POLICIES rather
+       than sites, which is the more honest claim: what the house cannot speak
+       for is what those places DO, not that they exist. */
     a: "No — Weird.Baby uses no logins, no cookies.\n" +
-       "NOTE: We do not speak for the artists' sites, nor other\n" +
-       "social media sites.",
+       "NOTE: We do not speak for Social Media or Artist site policies.",
   },
-  {
-    q: "So, how does the site always know it is me?",
-    a: "Your computer / phone saves your information for you.\n" +
-       "We never touch it.",
-  },
-  {
-    /* [2026-08-15] THE ADDRESS RETURNS, HERE AND NOWHERE ELSE. His ruling
-       supersedes the 2026-08-11 strike that removed it sitewide. "Papa@Weird.
-       Baby appears HERE and nowhere else. Not footers, not page endings.
-       Purpose-placed." A future round that reaches for a contact line in a
-       footer is reversing an instruction, not filling a gap. */
-    q: "How do I contact Weird.Baby?",
-    a: "Papa@Weird.Baby",
-  },
+  /* [2026-08-16] "So, how does the site always know it is me?" IS DELETED —
+     Mike's ruling, no replacement. NAMED ONCE HERE, WHICH IS WHERE A DELETED
+     THING IS NAMED (Doctrine 24). Its answer was "Your computer / phone saves
+     your information for you. / We never touch it." Nothing true leaves the
+     building: the question above it already states that the house uses no
+     logins and no cookies, which is the same fact asked from the visitor's
+     side. */
   {
     q: "Who keeps this place?",
     a: "One person — The current Papa Weird.Baby.\n" +
@@ -154,27 +173,56 @@ const FAQ = [
        "That's the deal, and it never changes.",
   },
   {
-    q: "How does something get in The Museum?",
-    a: "It strikes the Papa Weird.Baby's fancy.\n" +
-       "Nothing is exhibited because it is popular or because it\n" +
-       "paid to be.",
+    q: "How do things get in the museum?",
+    a: "It gets discovered organically and fits the suit.\n" +
+       "PRO-TIP: Just go out and do some good. We're watching.",
   },
+  /* ═══ [2026-08-16b] TWO FAKE LINE BREAKS, REJOINED. THEY WERE OPS' AND NOT
+         HIS, AND THE DIFFERENCE IS THE WHOLE POINT ══════════════════════════
+     MIKE: *"Ops wrapped these lines inside a code block when writing the packet
+     and you carried them verbatim, correctly. They are not Mike's line
+     breaks."*
+     THE ORIGINAL DEFECT WAS DOWNSTREAM OF A CORRECT RULE. `.sheet-faq-a` draws
+     `\n` as a real break, and this file's own standing instruction is that his
+     newlines are his and are never re-wrapped. Applied to a line that had been
+     wrapped by a code block on the way in, that rule PUBLISHED THE WRAPPING —
+     "…are not partners, clients," ended a line, and "or signings." began one.
+     THE TEST THAT SEPARATES THE TWO, and it is checkable rather than tasteful:
+     **does the line end mid-sentence?** A break after a full stop is a decision;
+     a break after a comma, or before a line that opens lower-case and completes
+     the clause above it, is a wrap. Swept both rooms on that test — the booth
+     carried 11 authored breaks and exactly these two failed it; `/foundation`
+     carries none at all, because its answers are `lines` arrays landed one
+     sentence per element (2026-08-16a).
+     NOTHING ELSE IN EITHER ANSWER CHANGED. Same words, same order, one fewer
+     break each. */
   {
     q: "Are you affiliated with the artists you show?",
-    a: "No — Those exhibited on Weird.Baby are not partners, clients,\n" +
-       "or signings.\n" +
+    a: "No — Those exhibited on Weird.Baby are not partners, clients, or signings.\n" +
        "They are people we feel are Worth a Listen.",
   },
   {
     q: "Does Weird.Baby 'take a cut' of the Artists' proceeds?",
     a: "No — never.\n" +
-       "Every door in the gift shop leads to the Artists' own sites\n" +
-       "and stores.",
+       "Every door in the gift shop leads to the Artists' own sites and stores.",
   },
   {
     q: "Is The Museum finished?",
     a: "No — a museum that stops accessioning is a storage unit.\n" +
-       "If you come back, there will be more than there was.",
+       "If you come back, there will be more to see.",
+  },
+  {
+    /* [2026-08-15] THE ADDRESS RETURNS, HERE AND NOWHERE ELSE. His ruling
+       supersedes the 2026-08-11 strike that removed it sitewide. "Papa@Weird.
+       Baby appears HERE and nowhere else. Not footers, not page endings.
+       Purpose-placed." A future round that reaches for a contact line in a
+       footer is reversing an instruction, not filling a gap.
+       [2026-08-16] AND IT IS THE LAST QUESTION NOW — his ruling: "MOVE 'How do
+       I contact Weird.Baby? / Papa@Weird.Baby' to LAST, above the return line."
+       The address is the last thing the list says before the way out, which is
+       where a reader who has read to the bottom is looking. */
+    q: "How do I contact Weird.Baby?",
+    a: "Papa@Weird.Baby",
   },
 ];
 
@@ -295,7 +343,8 @@ export default function InfoBooth() {
             bottom and does not want to travel back up to the bar. Not a second
             exit competing with the first — a sentence. */}
         <p className="sheet-back">
-          <Link to="/">Back to the lobby</Link>
+          {/* [2026-08-16] "Return to the lobby" — Mike's wording. */}
+          <Link to="/">Return to the lobby</Link>
         </p>
         {/* [2026-08-11] THE RED NOTES BLOCK IS DELETED — Mike's ruling. It
             stood here, below the exit. The lift that filled it, the four
