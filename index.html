@@ -7,27 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weird.Baby</title>
 
-    <!-- [R4 2026-08-02] EVERY FONT THE MUSEUM USES, REQUESTED ONCE, HERE.
-         B7/R4 found six Google-font @imports across five stylesheets - six
-         render-blocking requests and six lists that had already drifted from
-         each other (Syne was asked for at 400;600;800 in three rooms and
-         400;600;700;800 in two, so a 700 weight rendered synthetic-bold on
-         whichever route loaded the shorter list first).
-         The union first went into museum-tokens.css, which is the file the
-         type tokens live in and looked like the right home. It is not: that
-         file is imported by three stylesheets, so the built CSS carried three
-         identical @import lines. Browsers dedupe the fetch, but three
-         declarations of one fact is the shape this round is here to remove.
-         A <link> in the head is ALSO the faster mechanism, and by a real
-         margin: an @import is only discovered after the CSS that contains it
-         has been fetched and parsed, while a <link> is found by the preload
-         scanner in the first pass over the markup. Preconnect on both Google
-         hosts because the stylesheet and the font files are on different
-         origins.
-         Alphabetical family order is required by the css2 API. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;1,400&amp;family=DM+Serif+Display:ital@0;1&amp;family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&amp;family=Fredoka:wght@400;500;600&amp;family=Geist:wght@400;500;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" />
+    <!-- [2026-08-15] THE FONTS ARE SELF-HOSTED AND THIS BLOCK IS WHAT THEY
+         REPLACE. MIKE: "self-host them. All of them, no requests to
+         fonts.googleapis.com or fonts.gstatic.com at runtime… the alternative
+         is writing an outbound clause, and CLAUDE.md records that clause has
+         been wrong twice. Removing the request removes the need to describe
+         it."
+         WHAT WAS HERE, NAMED RATHER THAN DELETED IN SILENCE: two `preconnect`
+         hints and one render-blocking `<link>` to the css2 API listing six
+         families. R4 put it here in 2026-08-02 to replace six drifting
+         @imports across five stylesheets, and that reasoning was right about
+         DUPLICATION and is preserved — the families are still declared exactly
+         once, now in `src/styles/fonts.css`.
+         R4'S OTHER ARGUMENT IS THE ONE THIS REVERSES, AND ON PURPOSE. It chose
+         a `<link>` over an `@import` because the preload scanner finds a link
+         in the first pass. That is still true and it no longer decides
+         anything: the trade was a faster FIRST PAINT against a request to
+         Google on every page of the museum, and Mike has ruled which side of
+         that trade the building takes. The faces are now bytes in our own
+         bundle, which the scanner finds in the same pass and which cost no
+         third party anything.
+         THE ALPHABETICAL-ORDER NOTE WENT WITH THE URL: it was a constraint of
+         the css2 API, and there is no css2 URL any more. -->
     <!-- [R1 2026-08-02] BROKEN, mechanical cure applied. This said "Currently
          exhibiting Hunter Root" - a wing that is now REFERENCE-HELD and
          unlisted. It is the description every share, preview and search

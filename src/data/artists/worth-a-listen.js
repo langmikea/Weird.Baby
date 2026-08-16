@@ -1633,6 +1633,35 @@ function billActs(copy) {
    than borrowed"), and it is still that — a better one. */
 const HOUSE_COVER = "/images/wal/worth-a-listen-cover.png";
 
+/* ═══ [M 2026-08-14] HUNTER ROOT GOES LAST ═══════════════════════════════════
+   MIKE: "WAL — Hunter Root moves to the end of the carousel."
+
+   IT IS DONE HERE AND NOT BY MOVING THE ARTIST IN `ARTISTS`. That array is
+   ~900 lines of authored content per artist; cutting one out of the middle and
+   pasting it at the end is a diff nobody can read, over data where a dropped
+   brace is a silent content loss. The rack's ORDER is a presentation decision
+   and this is where the rack is built, so the decision is declared in one line
+   at the place it takes effect.
+   THE HOUSE ALBUM IS UNMOVED and stays first — it is the wing's own card, not
+   an artist, and he named one artist.
+   `.filter(Boolean)` IS NOT DEFENSIVE PADDING: it is what makes a typo in this
+   list cost an ordering rather than an `undefined` album in the carousel.
+
+   ═══ [2026-08-15] AND IT MOVED UP THE FILE, WHICH IS THE WHOLE POINT ════════
+   It used to sit below `HOUSE_ALBUM`. The house album's tracklist is now the
+   wing's DIRECTORY and its artist rows are built from `RACK`, so the rack has
+   to exist before the album that lists it. Moving the declaration is what
+   keeps ONE order in the building: the carousel and the directory read the
+   same array, in the same order, and Hunter Root is last in both because
+   `CAROUSEL_LAST` says so once. A directory with its own hand-typed order
+   would be a second copy that agrees today and drifts the first time this
+   list changes. Nothing about the rule itself changed — only where it sits. */
+const CAROUSEL_LAST = ["hunter-root"];
+const RACK = [
+  ...ARTISTS.filter(a => !CAROUSEL_LAST.includes(a.id)),
+  ...CAROUSEL_LAST.map(id => ARTISTS.find(a => a.id === id)).filter(Boolean),
+];
+
 const HOUSE_ALBUM = {
   id: "worth-a-listen",
   title: "Worth A Listen",
@@ -1661,6 +1690,44 @@ const HOUSE_ALBUM = {
      poster and a ticket come in, and the reverse of the order a museum's
      instinct puts them in. */
   tracks: [
+    /* ═══ [2026-08-15] THE DIRECTORY'S OWN TITLE ═══════════════════════════════
+       MIKE: "render it as the DIRECTORY'S OWN TITLE standing over the six rows.
+       Not a page, not a door, no content behind it. PROVISIONAL: Mike may make
+       it a page later, and a title becomes a door with one edit. Do not invent
+       prose for it."
+       IT USES THE `header` ROW THAT ALREADY EXISTS (W10, 2026-08-02) rather than
+       a new kind. A header row is declared data, draws as a section label, and
+       is inert by construction — no click, no number, no hover, no face. That
+       is his ruling exactly, and it means this costs no code: `TrackList`
+       returns `<li className="tl-header">` and stops.
+       THE PROVISIONAL PART IS LITERALLY ONE EDIT, which is why the header row is
+       the right shape and a disabled page would not be: give this object a
+       `face` and it becomes a page, or a `jumpTo` and it becomes a door. Nothing
+       else about it would change and nothing else in the wing would notice.
+       NO PROSE IS INVENTED. It carries its own name and nothing else — there is
+       no blurb, no subtitle and no empty container behind it, which is what the
+       NO-COMING-SOON credo requires of a thing that is not built yet. */
+    {
+      id: "wal-dir-title",
+      header: true,
+      title: "Worth A Listen",
+      /* `videos: []` IS REQUIRED AND IT IS NOT BOILERPLATE — this row is the
+         FIRST header row the museum has ever declared. W10 built the mechanism
+         in 2026-08-02 and nothing used it since, so its one guard (`TrackList`
+         returns early on `track.header`) had never been tested against the rest
+         of `Exhibit.jsx`, which iterates `album.tracks` in four other places and
+         reads `.videos` without a header check. The nearest is
+         `album.tracks.find(t => t.videos.length > 0)`, which runs on EVERY
+         render — so the row without this field took the whole wing down with
+         "Cannot read properties of undefined (reading 'length')", a white page
+         and one console exception.
+         A TRACK WITH NO VIDEOS IS `videos: []` EVERYWHERE IN THIS FILE; a track
+         with `undefined` videos is malformed. This declares the contract every
+         consumer already assumes rather than asking five loops to tolerate a
+         shape nothing else produces. Found by loading the page, not by the
+         gates: lint and both builds were green with the wing crashing. */
+      videos: [],
+    },
     {
       id: "wal-house-place",
       unnumbered: true,   /* the room's own pages are not songs */
@@ -1690,12 +1757,17 @@ const HOUSE_ALBUM = {
          they are, why they are here, and the house accent — is authored, and
          every claim in it is already carried, sourced, on that artist's own
          card. NOT ONE NEW FACT ABOUT ANY OF THEM ENTERS THE BUILDING HERE. */
-      title: "About the Artists",
+      /* [2026-08-15] "About the Artists" -> "Meet the Artists", his wording in
+         the directory he specified. The page is unchanged: it is still the
+         bill, still the four tiles, still built from `ARTISTS` by `billActs`.
+         Only the row's name and the face's title move, and they move together
+         because a row and the page it opens must not have two names. */
+      title: "Meet the Artists",
       tags: ["wal", "house", "about"],
       videos: [],
       face: {
         kind: "text",
-        title: "About the Artists",
+        title: "Meet the Artists",
         subtitle: "WORTH A LISTEN",
         /* [V1 2026-08-06] THE BLURB IS STRUCK, on Mike's ruling. "Four of them.
            Two songs each, all playable. Every one of them is somebody's
@@ -1868,6 +1940,36 @@ const HOUSE_ALBUM = {
            one sentence and it carries the marker. */
       },
     },
+    /* ═══ [2026-08-15] THE ARTIST ROWS — THE DIRECTORY'S DOORS ════════════════
+       MIKE: the tracklist "becomes a wing directory, not one artist's tracks",
+       with a row per artist that "jumps to her album".
+       BUILT FROM `RACK`, NOT TYPED. The order is the carousel's own — Carsie,
+       Jesse, Mikey Mike, then Hunter Root last, because `CAROUSEL_LAST` says so
+       one screen up. Typing these four here would be a second declaration of an
+       order that already exists, and the two would agree until the day they did
+       not. That is the drift the one-rule instruction is about, in this wing.
+       `jumpTo` IS THE ALBUM ID, AND IN THIS WING THE ALBUM ID IS THE ARTIST ID
+       — the spine below maps `a.id` straight onto the album's `id` — so there
+       is no lookup table to keep in step and no index to go stale.
+       NO `face` AND NO `videos`: the row is a door, not a page. It is
+       `unnumbered` because it is not a song, and `kind` says in the row what it
+       does rather than making a visitor click to find out (M-d's rule). */
+    ...RACK.map(a => ({
+      /* `provenance:gate` folds a built string to `wal-dir-{}` and reports it,
+         the same as this file's three other derived ids (`{}-song-{}`,
+         `{}-about-artist`, `{}-up-to`). All three carry a HOUSE row, so this
+         one does too — a key is not a visitor-facing string, and the register
+         is where that judgement is recorded rather than argued in a comment.
+         Written as a concatenation to match them; a template literal folds
+         identically, so the shape is for consistency and not for the gate. */
+      id: "wal-dir-" + a.id,
+      unnumbered: true,
+      title: a.name,
+      tags: ["wal", "house", "directory"],
+      videos: [],
+      jumpTo: a.id,
+      kind: "album",
+    })),
     {
       /* ═══ [F2 2026-08-06] "THE DEAL" IS BURNED, AND AN FAQ STANDS HERE ══════
          MIKE: **"WAL: BURN AND DISCARD 'The Deal' — junk. ADD A FAQ, in the
@@ -1925,24 +2027,6 @@ const HOUSE_ALBUM = {
   ],
 };
 
-/* ═══ [M 2026-08-14] HUNTER ROOT GOES LAST ═══════════════════════════════════
-   MIKE: "WAL — Hunter Root moves to the end of the carousel."
-
-   IT IS DONE HERE AND NOT BY MOVING THE ARTIST IN `ARTISTS`. That array is
-   ~900 lines of authored content per artist; cutting one out of the middle and
-   pasting it at the end is a diff nobody can read, over data where a dropped
-   brace is a silent content loss. The rack's ORDER is a presentation decision
-   and this is where the rack is built, so the decision is declared in one line
-   at the place it takes effect.
-   THE HOUSE ALBUM IS UNMOVED and stays first — it is the wing's own card, not
-   an artist, and he named one artist.
-   `.filter(Boolean)` IS NOT DEFENSIVE PADDING: it is what makes a typo in this
-   list cost an ordering rather than an `undefined` album in the carousel. */
-const CAROUSEL_LAST = ["hunter-root"];
-const RACK = [
-  ...ARTISTS.filter(a => !CAROUSEL_LAST.includes(a.id)),
-  ...CAROUSEL_LAST.map(id => ARTISTS.find(a => a.id === id)).filter(Boolean),
-];
 
 const spine = [HOUSE_ALBUM, ...RACK.map(a => ({
   id: a.id,

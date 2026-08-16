@@ -62,6 +62,51 @@ export function todayInRecordTz(now = new Date()) {
   return FMT.format(now);
 }
 
+/* ═══ [2026-08-16] THE INSTANT A CALENDAR DAY BEGINS, IN THE RECORD'S ZONE ═══
+   MIKE RULED THE COUNTDOWN'S TARGET: "Monday 17 August 2026, 00:00
+   America/New_York. The museum's own clock, matching the doors." He reversed an
+   earlier local-to-the-visitor ruling once the clock report showed the Records
+   are NY-locked server-side — a Tokyo visitor would have watched the counter
+   reach zero thirteen hours before the doors opened and found the museum shut.
+
+   IT TAKES A DAY STRING AND RETURNS A MOMENT, WHICH IS THE ONE CONVERSION THIS
+   SYSTEM HAS DELIBERATELY AVOIDED EVERYWHERE ELSE. Every other date here stays
+   an ISO day string and is compared as a string, on this file's own stated
+   reasoning: *"parsing them back into moments to compare them is how a timezone
+   bug gets in."* A countdown is the one thing that genuinely needs the moment,
+   because it counts seconds — so the conversion happens HERE, once, beside the
+   zone it depends on, rather than in a component that would have to name the
+   zone a second time.
+
+   NO NEW DATE LITERAL. It is called with `RECORD_EPOCH`, so a launch slip still
+   moves one field and the countdown follows it.
+
+   THE TWO-PASS OFFSET IS NOT SUPERSTITION. `Date.parse(day + "T00:00:00Z")` is
+   midnight UTC, not midnight in the zone; subtracting the zone's offset AT THAT
+   INSTANT gives a first approximation, and re-reading the offset at the
+   approximation catches the case where the two fall on opposite sides of a DST
+   transition. For 2026-08-17 the zone is stable at -04:00 and one pass would
+   do; the second pass is what stops this being wrong on the one day a year it
+   would matter, and it costs nothing. */
+function zoneOffsetMs(instant, tz) {
+  const p = Object.fromEntries(
+    new Intl.DateTimeFormat("en-US", {
+      timeZone: tz, hour12: false,
+      year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", second: "2-digit",
+    }).formatToParts(instant).map(x => [x.type, x.value]));
+  const asIfUtc = Date.UTC(+p.year, +p.month - 1, +p.day,
+                           +p.hour % 24, +p.minute, +p.second);
+  return asIfUtc - instant.getTime();
+}
+
+/** epoch-ms of 00:00 on `day` (YYYY-MM-DD) in the Record's own zone */
+export function dayStartInRecordTz(day, tz = RECORD_TZ) {
+  const utcMidnight = Date.parse(day + "T00:00:00Z");
+  const first = utcMidnight - zoneOffsetMs(new Date(utcMidnight), tz);
+  return utcMidnight - zoneOffsetMs(new Date(first), tz);
+}
+
 /* ── VISIBILITY ─────────────────────────────────────────────────────────────
    AN UNDATED ENTRY IS VISIBLE, and that is a decision rather than an oversight.
    `record-model.js` has always supported an entry with no `date` (013 carried

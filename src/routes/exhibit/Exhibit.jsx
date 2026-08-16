@@ -522,10 +522,27 @@ function useYTPlayer({ containerRef, onEnded, hasVideo }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasVideo]);
 
+  /* ═══ [2026-08-15] THE EMBED IS `youtube-nocookie.com` ══════════════════════
+     MIKE: "switch to youtube-nocookie.com in Exhibit.jsx… Risk abatement begins
+     with risk elimination: do not caveat a third-party cookie you can simply
+     not set."
+     `host` IS THE WHOLE MECHANISM. The IFrame API builds its own iframe, so the
+     origin cannot be set on an element we write — it is a player option, and it
+     is the ONLY supported way to move the embed. Measured before this: playing
+     a song on /wal created one iframe on `www.youtube.com`.
+     IT MAKES THE MUSEUM AGREE WITH ITSELF. `HrExhibitFlow.jsx`'s lightbox has
+     used the nocookie host since 2026-05-31, so this was one building serving
+     two different embed origins depending which room you were in.
+     WHAT IT DOES AND DOES NOT DO, STATED SO NOBODY OVERSELLS IT LATER: the
+     nocookie host does not set its cookies until playback begins, which is why
+     it is the stricter of the two available hosts and why it is the right
+     default. It is NOT a claim that nothing is set once a visitor presses play.
+     The booth's answer does not make that claim either. */
   function initPlayer() {
     if (!containerRef.current || playerRef.current) return;
     playerRef.current = new window.YT.Player(containerRef.current, {
       width: "100%", height: "100%",
+      host: "https://www.youtube-nocookie.com",
       playerVars: { autoplay: 0, controls: 1, modestbranding: 1, rel: 0, iv_load_policy: 3, playsinline: 1 },
       events: {
         onReady() {
@@ -542,11 +559,31 @@ function useYTPlayer({ containerRef, onEnded, hasVideo }) {
     });
   }
 
+  /* ═══ [2026-08-15] THE API SCRIPT STAYS ON `www.youtube.com`, AND IT IS
+         MEASURED RATHER THAN CHOSEN ══════════════════════════════════════════
+     The first cut of this ruling moved the script to the nocookie host as well.
+     **`https://www.youtube-nocookie.com/iframe_api` RETURNS 503** — that host
+     serves embeds, not the API — so `window.YT` never arrived, no player was
+     ever built, and every video in the museum silently did nothing. Caught on
+     the wire; the page threw no error, because a `<script>` that 503s is not an
+     exception, it is just a script that never runs.
+     SO THE SPLIT IS: the API comes from `www.youtube.com` (the only host that
+     serves it) and the PLAYER it builds is pointed at the nocookie host by the
+     `host` option above. **The embed a visitor loads is nocookie; loading the
+     API costs one request to `www.youtube.com` on the first play of a visit.**
+     That residual is real, it is stated in the round log, and it is not
+     something this code can remove — the API is Google's and there is no other
+     origin for it. What it is NOT is the thing the ruling was about: the embed
+     that hosts the video, and its cookies, moved.
+     THE DEDUPE GUARD MATCHES `/iframe_api` AND NOT THE HOST. It read
+     `src*="youtube.com/iframe_api"`, which is host-coupled; matching the path
+     alone means a future change of origin cannot silently stop the guard
+     matching and append a second copy of the API on every call. */
   function ensureApi(cb) {
     if (window.YT?.Player) { cb(); return; }
     const prev = window.onYouTubeIframeAPIReady;
     window.onYouTubeIframeAPIReady = () => { prev?.(); cb(); };
-    if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+    if (!document.querySelector('script[src*="/iframe_api"]')) {
       const s = document.createElement("script");
       s.src = "https://www.youtube.com/iframe_api";
       document.head.appendChild(s);
@@ -922,7 +959,20 @@ function Coverflow({ spine, active, cfH, onSelect, onSelectClick }) {
 }
 
 // ─── TRACKLIST ────────────────────────────────────────────────────────────────
-function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect, onTagClick }) {
+/* ═══ [2026-08-15] A ROW MAY BE A DOOR TO ANOTHER ALBUM ══════════════════════
+   MIKE: WAL's tracklist "becomes a wing directory, not one artist's tracks" —
+   the artist rows "jump to her album".
+   IT IS DATA (`track.jumpTo`, an album id) FOR THE REASON EVERY OTHER ROW KIND
+   HERE IS: a wing that declares none renders none, so /hr, /wb, /robots and
+   /foundation are byte-identical. It joins `header`, `sub`, `unnumbered` and
+   `kind` as a declared row property rather than a wing-specific branch.
+   IT RESOLVES BY ID AND NOT BY INDEX. An index would be a second copy of the
+   carousel's order, and the carousel's order is already computed in one place
+   (`RACK`, which puts Hunter Root last). A jump row that named a position would
+   go silently wrong the next time that order changed — which is exactly the
+   drift the one-rule instruction is about. An id that resolves to nothing is
+   inert rather than a crash, and says so in the console once. */
+function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect, onTagClick, onJump }) {
   function getSelSet(ti) { return selectedVis[ti] ?? new Set([0]); }
   function isSkipped(ti) {
     if (!album.tracks[ti].videos.length) return false;
@@ -962,7 +1012,8 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
            the first fix looked like it had not built. A row with a face has
            somewhere to go, so it may be clicked; a row with neither videos nor
            a face is still inert, exactly as before. */
-        const selectable = hasVids || !!track.face;
+        const jumps = !!track.jumpTo && !!onJump;
+        const selectable = hasVids || !!track.face || jumps;
         const isActive = activeTrack === ti;
         const playing  = playingTrackIdx === ti;
         const skipped  = isSkipped(ti);
@@ -1012,11 +1063,19 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
                properly: armed (quiet), armed-on-a-phone, running (`!important`,
                and it wins). No behaviour is added here; a class that was already
                on the element does the work the inline style was doing. */
-            onClick={() => selectable && !skipped && onSelect(ti)}
+            /* [2026-08-15] A DOOR ROW GOES ON THE FIRST CLICK AND IS NOT ARMED.
+               V3's arm-then-fire exists so a click never starts a SOUND the
+               visitor did not ask for. A jump starts nothing — it moves the
+               carousel, which is what the row says it does — so making it take
+               two clicks would be the arming rule applied to the one case its
+               reason does not cover. */
+            onClick={() => { if (!selectable || skipped) return;
+                             if (jumps) onJump(track.jumpTo); else onSelect(ti); }}
             /* [B 2026-08-13] the second gesture in Mike's rule. The first click
                of a double has already armed the row, so this only ever falls on
                an armed one and its whole job is to say "and play it". */
-            onDoubleClick={() => selectable && !skipped && onSelect(ti, true)}
+            onDoubleClick={() => { if (!selectable || skipped || jumps) return;
+                                   onSelect(ti, true); }}
           >
             <span className="tl-num">
               {playing
@@ -3119,6 +3178,20 @@ export default function Exhibit({ artist, open = null }) {
     debounceRef.current = setTimeout(() => setActiveDisplay(i), clicked ? 0 : 600);
   }
 
+  /* [2026-08-15] A DIRECTORY ROW'S JUMP. Resolves an album ID against the
+     spine and hands the index to the same `selectAlbum` the carousel uses, so
+     a jump and a click on a cover are the same event downstream — one path for
+     "the active album changed", not two. `clicked = true` skips the 600ms
+     settle the carousel uses for a drag, because this WAS a click. */
+  function handleAlbumJump(albumId) {
+    const i = SPINE.findIndex(a => a.id === albumId);
+    if (i < 0) {
+      console.warn(`[exhibit] a directory row names album "${albumId}", which this wing does not contain`);
+      return;
+    }
+    selectAlbum(i, true);
+  }
+
   // Arrow keys
   useEffect(() => {
     function onKey(e) {
@@ -3884,6 +3957,7 @@ export default function Exhibit({ artist, open = null }) {
                 selectedVis={selVis}
                 onSelect={(ti, play) => handleTrackSelect(activeDisplay, ti, play)}
                 onTagClick={(ti, vi) => handleTagClick(activeDisplay, ti, vi)}
+                onJump={handleAlbumJump}
               />
               {/* [HR 2026-08-04] THE CONTENTS PLATE IS REMOVED, NOT GATED.
                   MIKE: "remove the photo strip at the bottom of tracklists — it

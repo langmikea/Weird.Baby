@@ -1,3 +1,12 @@
+/* [2026-08-15] THE SELF-HOSTED FONTS, DECLARED ONCE, FIRST.
+   `@import` must be the first rule in a stylesheet, so it leads this file.
+   `index.css` is imported by `main.jsx` and by nothing else, which is what
+   keeps the faces declared exactly once — the defect R4 removed from
+   index.html in 2026-08-02 was six @imports across five stylesheets, and this
+   must not grow back into that. A room that wants a new weight adds it to
+   `fonts.css`, never a second @import of its own. */
+@import './styles/fonts.css';
+
 /* Reset — all styling is inline in the component */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { margin: 0; }

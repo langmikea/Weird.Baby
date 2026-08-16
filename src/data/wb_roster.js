@@ -47,6 +47,40 @@ export const wbRoster = [
   },
 ];
 
+/* ═══ [2026-08-15] THE FRIENDS ═══════════════════════════════════════════════
+   MIKE: a "new quarter-size tile type for friends. Coalition for the Homeless
+   is the first… Friend tiles always show, and sit at the bottom of whatever
+   content is already defined."
+
+   THEY ARE NOT ROSTER ENTRIES AND MUST NOT JOIN `wbRoster`. The roster is the
+   set the BILLING LAW ranks — who leads, who is shown, in what order. A friend
+   is none of those things: it is never billed, never ordered against an artist,
+   and never absent. Putting one in the roster would hand it to three clauses
+   that have no answer for it, and the first symptom would be a charity taking
+   top billing in a shop on somebody's exit.
+
+   THE ADDRESS IS THE ONE ALREADY IN THE BUILDING. `foundation.js` carries this
+   exact URL, typed as Mike typed it and checked 2026-08-14 (it redirects to
+   their giving page; the vanity address is the durable one and the hop is
+   theirs to change). It is REPEATED here rather than imported, and that is a
+   considered call rather than an oversight: Doctrine 17 hoists a PASSAGE the
+   house says in two rooms, and this is not a passage — it is a destination.
+   The Foundation's row is an ANSWER about where donations go; this is a door in
+   a shop. Hoisting them together would file two different statements under one
+   key and make an edit to either silently move the other.
+
+   NOTHING IS SAID ABOUT THEM THAT WE HAVE NOT BEEN TOLD. No tagline, no
+   mission line, no "our chosen charity" — the tile is a name and a door.
+   Doctrine 12: a sentence describing a real organisation, written here, would
+   read true and be invented, and this one belongs to somebody else. */
+export const wbFriends = [
+  {
+    id: "coalition-for-the-homeless",
+    name: "Coalition for the Homeless",
+    url: "https://coalitionforthehomeless.org/donate",
+  },
+];
+
 // Helper: find an artist by id, or return null.
 export function getArtistById(id) {
   if (!id) return null;

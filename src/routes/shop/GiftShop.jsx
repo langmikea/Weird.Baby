@@ -62,7 +62,7 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import MuseumBar from "../../components/MuseumBar.jsx";
-import { wbRoster } from "../../data/wb_roster";
+import { wbRoster, wbFriends } from "../../data/wb_roster";
 import { worthAListenArtists } from "../../data/artists/worth-a-listen.js";
 import "./GiftShop.css";
 
@@ -120,21 +120,59 @@ function billing(fromWing, ownerId) {
 
   const direct = !fromWing;
   const houseOwns = HOUSE_WINGS.includes(fromWing);
-  /* CLAUSE THREE. The house is on the page only when the exhibit was its own —
-     or when there was no exhibit, which is its own front door. */
-  const pool = (houseOwns || direct)
-    ? [...walEntries, ...houseEntries]
-    : walEntries;
+
+  /* ═══ [2026-08-15] CLAUSE THREE IS SUPERSEDED — THE HOUSE ALWAYS SHOWS ══════
+     MIKE: "Weird.Baby's own tile is separate and always displays, always full
+     size: LAST on any non-Weird.Baby page, TOP on Weird.Baby pages."
+
+     WHAT CLAUSE THREE SAID, AND WHY IT IS NAMED RATHER THAN QUIETLY EDITED:
+     "the house is on the page only when the exhibit was its own — or when there
+     was no exhibit." That is the rule this line replaces, and the change is his
+     ruling, not a refactor. The old reasoning was that Weird.Baby must not
+     appear on a guest's exit at all; the new one is that it appears, at the
+     bottom, where it cannot be mistaken for billing.
+
+     SO THE HOUSE LEAVES THE POOL ENTIRELY. It is no longer a candidate for top
+     billing, no longer sorted against the guests, and no longer absent — it is
+     a separate tile with a fixed end of the page. Leaving it in the pool and
+     special-casing it afterwards would mean the billing law and the placement
+     rule both had an opinion about the same tile, and the day they disagreed
+     the page would show two Weird.Baby tiles or none. */
+  const pool = walEntries;
+
+  /* ═══ THE ONE RULE, AND IT IS ONE VALUE ═════════════════════════════════════
+     "Derive both orderings from ONE rule, not two — two rules will drift."
+
+     THE RULE: **the house takes the position its own ownership gives it — the
+     top of its own room, the close of somebody else's.**
+
+     `houseFirst` is that rule, as a single boolean, and it is the ONLY thing
+     that decides where the house tile goes. There is no second condition
+     anywhere for the "last" case: last is simply what not-first means, and the
+     render below places one tile from this one value. The two orderings cannot
+     drift apart because there is only one of them.
+
+     It is the same test the pool used to run (`houseOwns || direct`), which is
+     the point — the question "is this the house's own room?" was already
+     answered once in this function, and this reuses that answer rather than
+     asking it a second way. */
+  const houseFirst = houseOwns || direct;
+  const house = houseEntries.find((h) => h.id === "wb") || null;
 
   /* CLAUSE ONE. The owner is the album's artist where the wing said so
-     (`&owner=`), the wing itself where the wing IS an artist (`?from=hr`), the
-     house where the house owns the wing — and [B1] the house again where no
-     exhibit was exited at all, because an unowned front door is still the
-     house's front door. */
-  const ownerKey = ownerId || (fromWing === "hr" ? "hunter-root"
-                             : houseOwns ? "wb"
-                             : direct ? "wb"
-                             : null);
+     (`&owner=`), the wing itself where the wing IS an artist (`?from=hr`).
+     [2026-08-15] THE TWO `"wb"` BRANCHES ARE GONE WITH CLAUSE THREE. They named
+     the house as top-billed on its own wings and on a direct arrival; the house
+     is not billable any more — it has a fixed placement of its own — so those
+     branches resolved against a pool that no longer contains it and evaluated
+     to null by accident. A branch that reaches the right answer for the wrong
+     reason is worse than no branch: the next reader repairs the "bug" and puts
+     Weird.Baby back into the billing it was deliberately taken out of.
+     B1's reasoning is not lost, it MOVED: "an unowned front door is still the
+     house's front door" is now `houseFirst`, which puts the house at the TOP of
+     a direct arrival — the same conclusion, expressed as placement rather than
+     as billing. */
+  const ownerKey = ownerId || (fromWing === "hr" ? "hunter-root" : null);
   /* [J3 2026-08-02] MIKE'S RULING — THE SET IS THE FALLBACK.
      B7 listed the one case the law leaves unbilled: a WAL exit that resolves no
      individual owner (`?from=wal` with no `&owner=`, or an `&owner=` that names
@@ -145,12 +183,16 @@ function billing(fromWing, ownerId) {
      sized as a set. A WAL exit with no resolvable individual owner shows the
      WAL four with no W.B. The set IS the fallback."
      So the empty top slot is not an omission here, it is the answer: nobody is
-     promoted out of the set, the four render at one size in the grid below, and
-     the house stays off the page exactly as Clause 3 requires. It is written as
-     a NAMED branch rather than left to fall out of `ownerKey === null`, because
-     a behaviour nobody declared is a behaviour the next change will delete —
-     and deleting this one would put W.B on a WAL page, which is the original
-     defect Mike reported. */
+     promoted out of the set and the four render at one size in the grid below.
+     It is written as a NAMED branch rather than left to fall out of
+     `ownerKey === null`, because a behaviour nobody declared is a behaviour the
+     next change will delete.
+     [2026-08-15] THE CLAUSE-3 HALF OF THIS NOTE IS SUPERSEDED. It used to close
+     "and the house stays off the page exactly as Clause 3 requires… deleting
+     this one would put W.B on a WAL page, which is the original defect Mike
+     reported." The house is now ON a WAL page by his ruling — LAST, below the
+     set, in its own placement. What this branch still protects is the thing J3
+     was actually about: nobody is PROMOTED out of the set. That is untouched. */
   const resolved = ownerKey ? pool.find((e) => e.id === ownerKey) || null : null;
   const walSetFallback = !resolved && fromWing === "wal";
   const top = walSetFallback ? null : resolved;
@@ -166,13 +208,15 @@ function billing(fromWing, ownerId) {
      ruled what these four are: "they are a set and are sized as a set." A set
      has one honest order and it is the alphabet.
      THE DATE RULE SURVIVES WHERE IT MEANS SOMETHING — for house entries, whose
-     dates are the museum's own history and are ours to order by. That branch
-     is UNREACHABLE TODAY and the arithmetic says why: the house is in the pool
-     only when `houseOwns || direct`, and in exactly those cases `ownerKey`
-     resolves to "wb", so the house is `top` and is filtered out of `rest`. So
-     `rest` is the WAL set, always, on every entry the law allows. It is
-     written as two branches anyway, because the day a second house entry
-     exists it will land here and silently take the alphabet's order otherwise. */
+     dates are the museum's own history and are ours to order by.
+     [2026-08-15] AND IT IS NOW UNREACHABLE FOR A SIMPLER REASON THAN BEFORE.
+     The old note explained a two-step: the house was in the pool only when
+     `houseOwns || direct`, and in exactly those cases it was `top` and filtered
+     out of `rest`. There is no such dance now — **the house is not in the pool
+     at all**, so `rest` is the WAL set on every entry, by construction rather
+     than by coincidence. The branch is kept for its original reason: the day a
+     second house-side entry exists it lands here, and without it that entry
+     would silently take the guests' alphabet instead of its own dates. */
   const walIds = new Set(walEntries.map((e) => e.id));
   const rest = pool
     .filter((e) => !top || e.id !== top.id)
@@ -184,7 +228,7 @@ function billing(fromWing, ownerId) {
            : a.name.localeCompare(b.name);            /* the house keeps its dates */
     });
 
-  return { top, rest, walSetFallback };
+  return { top, rest, walSetFallback, house, houseFirst };
 }
 
 /* [S1 2026-08-05] ONE TILE, ONE SIZE. The `half` prop is gone — see the block
@@ -228,12 +272,27 @@ export default function GiftShop() {
      already in the wild still lands where it used to. */
   const ownerId = searchParams.get("owner") || searchParams.get("top");
 
-  const { top, rest, walSetFallback } = useMemo(() => billing(fromId, ownerId), [fromId, ownerId]);
+  const { top, rest, walSetFallback, house, houseFirst } =
+    useMemo(() => billing(fromId, ownerId), [fromId, ownerId]);
 
   /* [S1] The billed entry leads the grid; everyone else follows in the order
      `billing()` sorted them. The law decides the SEQUENCE, the stylesheet
-     decides the size, and neither is allowed to do the other's job. */
-  const all = useMemo(() => (top ? [top, ...rest] : rest), [top, rest]);
+     decides the size, and neither is allowed to do the other's job.
+     ═══ [2026-08-15] AND THE HOUSE IS PLACED BY THE ONE RULE ══════════════════
+     `houseFirst` is the whole of it — see the block in `billing()`. This is the
+     single expression that produces BOTH orderings he named ("LAST on any
+     non-Weird.Baby page, TOP on Weird.Baby pages"), and there is deliberately
+     no second condition for the "last" case anywhere in this file: last is what
+     not-first means. Two rules would drift; one ternary cannot.
+     IT STAYS IN THE SAME GRID, which is S1 and D4 still standing — one section,
+     one grid, every full-size tile the same size. "Separate" is about the
+     BILLING LAW, which no longer ranks the house at all, not about drawing it
+     in a container of its own. */
+  const all = useMemo(() => {
+    const guests = top ? [top, ...rest] : rest;
+    if (!house) return guests;
+    return houseFirst ? [house, ...guests] : [...guests, house];
+  }, [top, rest, house, houseFirst]);
 
   /* [B1] THE VIEW RESETS BEFORE EVERY ENTRY — on arrival and on any change of
      who is billed. `scrollRestoration:"manual"` is the half that browsers do
@@ -350,6 +409,47 @@ export default function GiftShop() {
                     </div>
                   </div>
                 )
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ═══ [2026-08-15] THE FRIENDS ══════════════════════════════════════════
+          MIKE: "New quarter-size tile type for friends… Friend tiles always
+          show, and sit at the bottom of whatever content is already defined."
+
+          ALWAYS SHOWN MEANS NO CONDITION ON THE ENTRY. There is no `?from`
+          test, no pool, no billing branch — the only guard is that the list is
+          non-empty, which is the same guard the tile grid carries. A friend is
+          not a party to the billing law and nothing here asks it to be.
+
+          "THE BOTTOM OF WHATEVER CONTENT IS ALREADY DEFINED" IS TAKEN
+          LITERALLY: this section renders after the tile grid, so it is below
+          the guests AND below the house tile on a guest's page, where the house
+          is last. On a Weird.Baby page the house is at the top and the friends
+          are still at the bottom. One position, both cases, nothing to keep in
+          step.
+
+          IT IS A SECOND SECTION AND THAT DOES NOT BREAK S1. S1's "one grid" was
+          an argument about tiles OF THE SAME SIZE — two containers holding
+          identical tiles "would draw a line across the room that means
+          nothing". These are a DIFFERENT SIZE by instruction, so the line means
+          something: it is where the shop stops selling and starts pointing. */}
+      {wbFriends.length > 0 && (
+        <section className="gift-shop__section gift-shop__friends">
+          <div className="gift-shop__friends-grid">
+            {wbFriends.map((f) => (
+              <a key={f.id}
+                 className="friend-tile"
+                 href={f.url}
+                 target="_blank"
+                 rel="noopener noreferrer">
+                <span className="friend-tile__name">{f.name}</span>
+                {/* the same sentence every outbound tile in this room carries,
+                    so a friend's door is not quieter about leaving than a
+                    store's. */}
+                <span className="friend-tile__note">opens in a new tab</span>
+              </a>
             ))}
           </div>
         </section>

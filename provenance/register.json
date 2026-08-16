@@ -288,22 +288,6 @@
    "p": "robotsExhibit.faceFlow",
    "c": "HOUSE"
   },
-  "b4e2dd152f0b6819": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 23,
-   "t": "Recording — 2026-06",
-   "p": "REC_LABEL",
-   "c": "MIKE",
-   "s": "the house's own recordings, titled by their maker"
-  },
-  "b4ad6edcddc1d4a9": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 28,
-   "t": "The Making of BoWB V1",
-   "p": "spine[].title",
-   "c": "MIKE",
-   "s": "the house's own recordings, titled by their maker"
-  },
   "2418d7c12f7acdff": {
    "f": "src/data/artists/weird-baby.js",
    "l": 35,
@@ -11588,31 +11572,10 @@
    "p": "FAQ[].q",
    "c": "HOUSE"
   },
-  "3196dd14bcaf6b67": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 98,
-   "t": "How does something get in here?",
-   "p": "FAQ[].q",
-   "c": "HOUSE"
-  },
   "78491de4e0afbf0f": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 107,
    "t": "Are you affiliated with the artists you show?",
-   "p": "FAQ[].q",
-   "c": "HOUSE"
-  },
-  "7c90cd4d63942400": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 132,
-   "t": "Can I use what is here?",
-   "p": "FAQ[].q",
-   "c": "HOUSE"
-  },
-  "fc32375a7da41729": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 141,
-   "t": "Is it finished?",
    "p": "FAQ[].q",
    "c": "HOUSE"
   },
@@ -11649,26 +11612,6 @@
    "t": "Always.",
    "p": "InfoBooth{}.<div>.<div>.<h1>.<span>.<em>",
    "c": "HOUSE"
-  },
-  "03c866a5288b034c": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 231,
-   "t": "No tickets, no tiers, no ads.",
-   "p": "InfoBooth{}.<div>.<div>.<div>.<p>",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
-  "30a30c92efae16be": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 232,
-   "t": "The museum owns nothing and takes nothing.",
-   "p": "InfoBooth{}.<div>.<div>.<div>.<p>",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
   },
   "62de9c5083a4916f": {
    "f": "src/routes/InfoBooth.jsx",
@@ -11814,13 +11757,6 @@
    "f": "src/routes/shop/GiftShop.jsx",
    "l": 101,
    "t": "hunter-root",
-   "p": "billing{}.ownerKey",
-   "c": "HOUSE"
-  },
-  "6f9d1e3881c0896a": {
-   "f": "src/routes/shop/GiftShop.jsx",
-   "l": 103,
-   "t": "wb",
    "p": "billing{}.ownerKey",
    "c": "HOUSE"
   },
@@ -12478,26 +12414,6 @@
    "c": "HOUSE",
    "s": "[R2 2026-08-05] NOT A VISITOR-FACING STRING. It is a reveal-ledger row id, or one of the ledger enum values src/lib/reveal.js compares against — a KEY passed to a lookup, never rendered. The sweep is default-deny and cannot tell an identifier from a label, which is the correct bias; it is declared rather than excluded, because adding an exclusion rule to absorb it would widen the boundary for everything."
   },
-  "55deca5e20ae7578": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 85,
-   "t": "A museum. It keeps things worth keeping — records, photographs, machines, the paper that came with them — writes cards for them, and puts them where anybody can walk up and look. Some of it belongs to people we admire and is here because somebody in this house loves it. Some of it is ours.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
-  "90832457f4759489": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 99,
-   "t": "Yes — and there is no account to make, nothing to unlock, and nothing behind a wall. Sign the guest book if you feel like it; nothing anywhere on the site asks you for anything else. That is not an introductory offer. It is the arrangement.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
   "9506f2c8e635a2b6": {
    "f": "src/data/artists/robots.js",
    "l": 320,
@@ -12614,13 +12530,6 @@
    "l": 90,
    "t": "What the museum holds",
    "c": "HOUSE"
-  },
-  "d655b06a64577512": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 91,
-   "t": "Six recordings, made in June 2026, and one release: The Making of BoWB V1. They play in this room.",
-   "c": "DERIVED",
-   "s": "counted off the /wb spine in the same file — one release, six tracks, each carrying a June 2026 recording."
   },
   "f6e60cf26ade15e8": {
    "f": "src/data/artists/weird-baby.js",
@@ -14281,13 +14190,6 @@
    "t": "No photograph of the portable is on the wall. One picture of this machine is on the Record, with the entry that brought it in.",
    "s": "provenance/asset-table.json plus reveal/record-entries.mjs — Record 013 names /robots/reference/photos/rear_power_switch.png and nothing else; the other seven plates of the portable are at public/held/robots/reference/photos/."
   },
-  "36affcedd23e71be": {
-   "c": "MIKE",
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1654,
-   "t": "About the Artists",
-   "s": "THE PORTAL HOLD + THE PULL-BACK, H6: \"'ABOUT OUR CURRENT ARTISTS' becomes 'About the Artists'.\""
-  },
   "e51e83951a9cd9bd": {
    "c": "HOUSE",
    "f": "src/routes/exhibit/Exhibit.jsx",
@@ -15130,26 +15032,6 @@
    "c": "MIKE",
    "s": "Mike's passage with the stale address clause struck, ruled 2026-08-11 (E)"
   },
-  "873f4f28377b1c08": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 264,
-   "t": "Somebody in this house loves it, and then the work starts: finding it, checking it, photographing it, and writing down where it came from. Nothing is exhibited because it is popular and nothing is exhibited because it paid to be.",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ],
-   "p": "FAQ[].a"
-  },
-  "6b7d86aefe8dc7a8": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 295,
-   "t": "No, and it is not meant to be. A museum that stops accessioning is a storage unit. Rooms open, cards get written, and things arrive; if you come back, there will be more than there was.",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ],
-   "p": "FAQ[].a"
-  },
   "a8419013f075094f": {
    "f": "src/data/artists/foundation.js",
    "l": 717,
@@ -15166,34 +15048,6 @@
    "t": "SOURCES  {}",
    "p": "aboutArtistTrack{}.face.lines[]",
    "c": "HOUSE"
-  },
-  "25240bd18488271a": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 771,
-   "t": "The museum is open.",
-   "c": "MIKE",
-   "s": "Mike's ruling, 2026-08-11, his two sentences verbatim: “The museum is open. A new Record every day for ninety days.” docs/MUSEUM_LOBBY_OPENS_LOG-20260811.md"
-  },
-  "17396c23f50d367b": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 784,
-   "t": "A new",
-   "c": "MIKE",
-   "s": "Mike's ruling, 2026-08-11, his two sentences verbatim: “The museum is open. A new Record every day for ninety days.” His second sentence is now three rows and not one because the word Record inside it is a link to /robots/record (his ruling, 2026-08-11: “the cheapest honest fix… one word, one link”), and the sweep reads each JSX text node separately. The sentence on the glass is unchanged to the character. docs/MUSEUM_LOBBY_OPENS_LOG-20260811.md"
-  },
-  "6e3d8f0ca8c2accf": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 785,
-   "t": "Record",
-   "c": "MIKE",
-   "s": "Mike's ruling, 2026-08-11 — the linked word in his second lobby sentence. See the sibling rows 17396c23f50d367b and 988f2e7a168572f6; the three together are “A new Record every day for ninety days.” docs/MUSEUM_LOBBY_OPENS_LOG-20260811.md"
-  },
-  "988f2e7a168572f6": {
-   "f": "src/routes/WbHome.jsx",
-   "l": 785,
-   "t": "every day for ninety days.",
-   "c": "MIKE",
-   "s": "Mike's ruling, 2026-08-11 — the tail of his second lobby sentence. See the sibling rows 17396c23f50d367b and 6e3d8f0ca8c2accf. docs/MUSEUM_LOBBY_OPENS_LOG-20260811.md"
   },
   "da8fee1584ddb819": {
    "f": "src/routes/WbHome.jsx",
@@ -15232,12 +15086,6 @@
    "f": "src/data/artists/robots.js",
    "l": 419,
    "t": "Nothing has been entered in the Record yet.",
-   "c": "HOUSE"
-  },
-  "d8fa7b18a74cab6f": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 75,
-   "t": "about",
    "c": "HOUSE"
   },
   "73386ca0b3d6ee51": {
@@ -15318,37 +15166,6 @@
    "t": "; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age={}",
    "c": "HOUSE"
   },
-  "2d8fab65a2167d40": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 208,
-   "t": "About this record",
-   "c": "HOUSE"
-  },
-  "c3beefe8c9386c7e": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 209,
-   "t": "THE MAKING OF BoWB V1",
-   "c": "HOUSE"
-  },
-  "c80d00566071df66": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 211,
-   "t": "What these recordings are",
-   "c": "HOUSE"
-  },
-  "9e37c74675f672b3": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 212,
-   "t": "The first pass. Rough, unrefined — and the version that went in as the original copyright submission.",
-   "c": "MIKE",
-   "s": "Mike's own wording, supplied verbatim in the 2026-08-12 packet: the BoWB Vol 1 recordings are the first pass and the original copyright submission. Provenance, explicitly not a legal claim."
-  },
-  "eb13a57980f6dfaf": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 215,
-   "t": "WEIRD.BABY · THE MAKING OF BoWB V1",
-   "c": "HOUSE"
-  },
   "28d7f5892cda545a": {
    "f": "src/routes/WbHome.jsx",
    "l": 815,
@@ -15403,13 +15220,6 @@
    "l": 159,
    "t": "A museum of weird things worth keeping. No ads, no affiliate links, no cut of anything you buy from an artist.",
    "c": "HOUSE"
-  },
-  "21ee7c97ddb6180a": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 224,
-   "t": "No — and the better half of the answer is that the machine remembers you and we don't. Cookies first, because they are what people mean: a cookie goes back to the server with every request your browser makes, which is the part that makes it a tracking device. This site sets none. Not one, not even ours. Settings are a different mechanism entirely — they sit in your own browser and are read where they sit, so both of these are true at once: nothing follows you back to us, and the panel you dragged wider is still wider when you come back to the room. Most of them last the visit and go when the tab closes. Two outlast it, and they are the two that would be useless otherwise: the presets you saved yourself, and which records of ours you have already opened. What reaches us is two things. The lobby and the exhibit rooms each write one line when they load — which page, the site you came from if there was one, and the time — and none of those three columns is you. Sign the guest book and we keep exactly what you typed, on the page you typed it into. The MGK keeps far more than we do, and it keeps it on your side of the glass: run it in the robot wing and it will remember your name, your birth date, how far into its install you got, its own condition and your best score — none of which it can send anywhere, because it has no way to reach us at all. It will also show you. Preferences ▸ User is the machine's register of everything it holds about you, page by page, and the last page wipes the lot on the spot. Three things do leave the building, and you should know which. The typefaces are served by Google, so your browser asks Google for them and Google sees it was asked. The rooms with video in them load YouTube's player when the room loads, before you press anything — the rooms with only our own recordings in them do not, and play from this site. Google and YouTube know you turned up, and they are the whole of the outside. There is no analytics, no advertising and no tracking pixel anywhere in this site, and if that ever stops being true, this answer changes first.",
-   "c": "VERIFIED",
-   "s": "re-read clause by clause AND MEASURED IN A BROWSER (B2, 2026-08-05); the storage clause re-verified by grep at P5, 2026-08-05; the outbound clause RE-MEASURED on the LAUNCH build at CH8, 2026-08-12 — every public route fetches Google Fonts; www.youtube.com is fetched by /wal ALONE (the only launch route holding a YouTube video) and by no other; Facebook is fetched by NOTHING at launch, its embed being in HrExhibitFlow.jsx behind the /hr password. Cookies: no Set-Cookie on a plain visit to / or /foundation, measured."
   },
   "7352ea325d531b18": {
    "f": "src/lib/use-arrival.js",
@@ -15534,33 +15344,12 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; section B names this string."
   },
-  "a759a59de4c8d168": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 129,
-   "t": "About",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; section B names this string."
-  },
   "4f39fa506d08dd8e": {
    "f": "src/data/artists/weird-baby.js",
    "l": 192,
    "t": "Six recordings, made in June 2026, and one release: The Best of Weird.Baby Vol. 1. They play in this room.",
    "c": "DERIVED",
    "s": "counted off the /wb spine in the same file — one release, six tracks, each carrying a June 2026 recording. The release's name follows the album's retitle; see docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §2."
-  },
-  "baea2076e11256b4": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 214,
-   "t": "THE BEST OF WEIRD.BABY VOL. 1",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; section B names this string."
-  },
-  "2bb233e5759e41f2": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 220,
-   "t": "WEIRD.BABY · THE BEST OF WEIRD.BABY VOL. 1",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; section B names this string."
   },
   "16258a25c0fff31f": {
    "f": "src/data/artists/weird-baby.js",
@@ -15645,6 +15434,177 @@
    "t": "[PAPA] the house address was struck sitewide on 2026-08-11 by your own ruling with no replacement, so this answer needs an address from you before it can say anything.",
    "c": "HOUSE",
    "s": "not visitor copy — an Ops note to Mike, marked [PAPA], which visitorProse() drops before render; the entry that carries it therefore draws nothing in either stage. DECLARED RATHER THAN EXEMPTED ON PURPOSE: a [PAPA] string can still leak, and did this round when written as two sentences — the sweep must keep seeing it. It is the answer to How to contact?, open row W-b in docs/OPEN_ACTIONS.md, and it leaves the file the day Mike supplies an address."
+  },
+  "6be5cddbf87b303e": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1732,
+   "t": "Meet the Artists",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0 — his site-changes instruction of 2026-08-15, quoted in full. Section 2 names this row: \"Meet the Artists (shows the four big tiles)\"."
+  },
+  "2d73a37349baa2c2": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1927,
+   "t": "wal-dir-{}",
+   "c": "HOUSE"
+  },
+  "7089861adb925680": {
+   "f": "src/data/wb_roster.js",
+   "l": 79,
+   "t": "Coalition for the Homeless",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0 — his site-changes instruction of 2026-08-15, quoted in full. Section 3: \"Coalition for the Homeless is the first, linking to coalitionforthehomeless.org/donate.\" The organisation's own name, as he wrote it; the same name is already carried on /foundation from his 2026-08-13 packet."
+  },
+  "bf32ab405ec28dd8": {
+   "f": "src/routes/shop/GiftShop.jsx",
+   "l": 451,
+   "t": "opens in a new tab",
+   "c": "HOUSE"
+  },
+  "fdbfd9fa0d01d9d3": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 116,
+   "t": "A museum, of sorts.\nA place to freely share my favorite stuff with others.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+  },
+  "3312271c8c1443ed": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 121,
+   "t": "Yes — no accounts or logins. Nothing behind a wall.\nThat's not an introductory offer. It's the arrangement.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+  },
+  "d5150ddd25925134": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 132,
+   "t": "No — Weird.Baby uses no logins, no cookies.\nNOTE: We do not speak for the artists' sites, nor other\nsocial media sites.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+  },
+  "12b682d0d40802a9": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 137,
+   "t": "So, how does the site always know it is me?",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+  },
+  "4c9e07b7a8306740": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 138,
+   "t": "Your computer / phone saves your information for you.\nWe never touch it.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+  },
+  "eabac282019ee93e": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 147,
+   "t": "How do I contact Weird.Baby?",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+  },
+  "68357870f9123a91": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 148,
+   "t": "Papa@Weird.Baby",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+  },
+  "1d71c48c8aeab64c": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 152,
+   "t": "One person — The current Papa Weird.Baby.\nThe job pays nothing.\nThat's the deal, and it never changes.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+  },
+  "b274af4e021417d3": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 157,
+   "t": "How does something get in The Museum?",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+  },
+  "cafb0f319924515a": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 158,
+   "t": "It strikes the Papa Weird.Baby's fancy.\nNothing is exhibited because it is popular or because it\npaid to be.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+  },
+  "3d5d9d3937bd009e": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 164,
+   "t": "No — Those exhibited on Weird.Baby are not partners, clients,\nor signings.\nThey are people we feel are Worth a Listen.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+  },
+  "0e43604839fb3d41": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 169,
+   "t": "Does Weird.Baby 'take a cut' of the Artists' proceeds?",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+  },
+  "d50819a752537e0d": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 170,
+   "t": "No — never.\nEvery door in the gift shop leads to the Artists' own sites\nand stores.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+  },
+  "1076bd919e94c1c5": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 175,
+   "t": "Is The Museum finished?",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+  },
+  "fd7bde979c7464e8": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 176,
+   "t": "No — a museum that stops accessioning is a storage unit.\nIf you come back, there will be more than there was.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
+  },
+  "0a1dd5ed2ecfb837": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 113,
+   "t": "Time until the museum opens",
+   "c": "HOUSE"
+  },
+  "8b63659938319791": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 115,
+   "t": "days",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §15 — his countdown instruction of 2026-08-16, quoted in full: \"Days / hours / minutes / seconds, live.\""
+  },
+  "b65dd2e7b9ee146c": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 116,
+   "t": "hours",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §15 — his countdown instruction of 2026-08-16, quoted in full: \"Days / hours / minutes / seconds, live.\""
+  },
+  "6b923108ebb2941b": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 117,
+   "t": "minutes",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §15 — his countdown instruction of 2026-08-16, quoted in full: \"Days / hours / minutes / seconds, live.\""
+  },
+  "9d403b8498e1c552": {
+   "f": "src/routes/WbHome.jsx",
+   "l": 118,
+   "t": "seconds",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §15 — his countdown instruction of 2026-08-16, quoted in full: \"Days / hours / minutes / seconds, live.\""
+  },
+  "f84628f25d25d956": {
+   "f": "src/worker.js",
+   "l": 180,
+   "t": "window.__WB_NOW__={};",
+   "c": "HOUSE"
   }
  }
 }

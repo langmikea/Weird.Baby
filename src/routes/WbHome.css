@@ -427,3 +427,50 @@ html[data-room="lobby"], html[data-room="lobby"] body { height: 100%; overflow: 
   .wb-right { padding: 36px 28px 60px; }
   .wb-directory { margin-top: 32px; }
 }
+
+/* ═══ [2026-08-16] THE COUNTDOWN TO THE DOORS ════════════════════════════════
+   MIKE: "Big and obvious. This is the thing a visitor should see first."
+   "Desktop leads, phone may wrap."
+
+   THE NUMBERS ARE THE OBJECT AND THE LABELS GET OUT OF THE WAY. `Syne` at
+   700 is the lobby's own display face; the labels are the same small mono
+   caption the directory and the guest book already use (`.wb-whisper`'s
+   register), so the block is built from furniture this page owns rather than
+   from a new look.
+
+   IT WRAPS BY CONSTRUCTION, NOT BY BREAKPOINT. `flex-wrap` on the row with a
+   `min-width` on each cell means four cells sit in a line while there is room
+   and fall to 2 + 2 when there is not — no media query, and nothing to re-tune
+   the day the type ramp moves. Desktop leads because the cells are sized from
+   the viewport (`clamp`), so the row is at its largest where there is width.
+
+   `tabular-nums` IS LOAD-BEARING: without it the seconds column changes width
+   every tick and the whole row jitters once a second. */
+.wb-countdown { margin: 0 0 26px; }
+.wb-cd-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(14px, 2.4vw, 30px);
+  align-items: baseline;
+}
+.wb-cd-cell { min-width: 62px; }
+.wb-cd-n {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 6.2vw, 4.2rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: #2b2924;
+}
+.wb-cd-l {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.63rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #837f75;
+  margin-top: 6px;
+}
+/* the dev-clock marker carries no ink and no space — it exists so Ops can see
+   in the DOM that no server instant was injected. */
+.wb-cd-dev { display: none; }

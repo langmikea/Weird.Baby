@@ -124,9 +124,19 @@ const INSTRUMENTS = [
      rule is that it never draws a link to a file that is not on disk, so an
      outside file gets stat'd at its own absolute path and linked as `file://`;
      a card is red and unlinked if the workbook has been moved or renamed. */
+  /* [2026-08-15] REPOINTED TO WEEK 01, AND THE OLD SHEET IS LEFT WHERE IT IS.
+     The card pointed at `_night-20260811/RECORD_days-2-to-6.xlsx`, which starts
+     at Record 002 — it has no tab for 001 at all, because 001 had already
+     landed when it was generated. Week one is Records 001 to 005, so the sheet
+     he writes in has to hold all five. The old workbook is NOT deleted and NOT
+     modified; it simply stops being the door on this desk. */
   { name: "The workbook — where you write",
-    abs: "C:/AI/_night-20260811/RECORD_days-2-to-6.xlsx",
-    what: "Days 2 to 6, one tab each. Type in the white cells. Braces are notes to Ops.",
+    abs: "C:/AI/_week01/WEEK01_records-001-to-005.xlsx",
+    /* [2026-08-15] THE 314 RULE IS DEAD — his ruling, "too much squeeze for the
+       juice" — and this line carried it, so it goes with it rather than being
+       softened. 314 as Film A's packet rate is a SEPARATE use and is untouched;
+       what died is the requirement that every Record carry one. */
+    what: "Records 001 to 005, one tab each. Type in the white cells.",
     rebuild: "read it back with npm run record:workbook -- <path>",
     lead: true },
   { name: "The Record — MOTHBALLED",
@@ -367,6 +377,21 @@ code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;w
 .tag.n{border-color:#6a3a30;color:var(--redfg)}
 .foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
 .foot code{color:var(--dim)}
+/* [2026-08-15] THE PATH BLOCK — an instrument the browser must NOT be asked to
+   open. See the abs branch in the card renderer for why there is no link.
+   (No backticks in this comment: it lives inside a template literal.) */
+.pathbox{margin:2px 0 9px;border:1px solid var(--line);border-radius:3px;background:#141317}
+.pathbox .p{display:block;padding:8px 9px;font-family:ui-monospace,Consolas,monospace;
+ font-size:12px;color:#cddae8;word-break:break-all;user-select:all;cursor:text}
+.pathbox .r{display:flex;gap:8px;align-items:center;padding:0 9px 8px}
+.pathbox button{font:inherit;font-size:11.5px;background:#23222a;color:var(--fg);
+ border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer}
+.pathbox button:hover{border-color:var(--gold);color:var(--gold)}
+.pathbox .say{font-size:11.5px;color:var(--dim2)}
+.pathbox .say.ok{color:var(--grn)}
+.pathbox .say.no{color:var(--redfg)}
+.howto{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.55}
+.howto b{color:var(--gold);font-weight:600}
 @media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
 `;
 
@@ -433,18 +458,51 @@ const hrefOf = it => (it.abs
   : it.file);
 const labelOf = it => (it.abs ? it.abs : `docs/${it.file}`);
 
+/* [2026-08-15] AN `abs` INSTRUMENT IS NOT LINKED, AND THAT IS THE FIX RATHER
+   THAN A LIMITATION BEING ACCEPTED QUIETLY.
+   THE FAULT: the workbook card was `<a href="file:///C:/AI/…xlsx">`. A browser
+   cannot hand a spreadsheet to Excel — for anything it cannot render itself it
+   DOWNLOADS A COPY into Downloads, and Chrome does this for `file://` too. So
+   the card did not open his workbook; it manufactured a new one, every click.
+   Mike ended up with several, and the one he types into is then not the one
+   `record:workbook` reads. **A tool that silently forks the file a person is
+   working in is worse than no tool**, and it fails silently — a download looks
+   like a success.
+   WHY IT IS NOT FIXED BY A BETTER LINK: there is no browser mechanism that
+   launches an external application from a page, by design, and there should
+   not be. `file://`, a `.lnk`, a custom scheme — the first downloads, the
+   second is still a file to download, the third needs a registry handler
+   installed on the machine and is a worse thing to own than this sentence.
+   SO THE CARD STOPS PRETENDING. It shows the real path as selectable text with
+   a copy control, and says in plain words where to open it. The docs/ cards
+   are untouched: those are HTML, the browser renders them in place, and a link
+   is the right answer for them. The split is exactly `abs` vs `file`, which is
+   the distinction the desk already had. */
 const cards = INSTRUMENTS.map(it => {
   const abs = absOf(it);
   const there = fs.existsSync(abs);
   const cls = "card" + (it.lead ? " lead" : "") + (there ? "" : " gone");
-  const head = there
+  const head = there && !it.abs
     ? `<h3><a href="${esc(hrefOf(it))}">${esc(it.name)}</a></h3>`
     : `<h3>${esc(it.name)}</h3>`;
+  const openBlock = (there && it.abs)
+    ? `<p class="howto">Open it from <b>File Explorer</b> &mdash; this page cannot open it in place, and a
+link would hand you a <b>copy in Downloads</b>. Copy the path below and paste it into Explorer's address
+bar (or <b>Win+R</b>). <b>Do not edit a copy:</b> the copy is not the file Ops reads back.</p>
+<div class="pathbox"><code class="p" data-path>${esc(abs)}</code>
+<div class="r"><button type="button" data-copy>Copy the path</button><span class="say" data-say></span></div></div>`
+    : "";
   const meta = there
     ? (() => {
         const st = fs.statSync(abs);
+        /* [2026-08-15] AN `abs` CARD DOES NOT REPRINT ITS PATH HERE. The path
+           block above already carries it, in the normalised backslash form he
+           pastes into Explorer; this line printed `it.abs` raw, so the card
+           showed the same path twice in two different spellings. Two spellings
+           of one path is worse than one — the question "which of these is the
+           real one" is exactly what this card exists to stop him asking. */
         return `<div class="meta"><b>${esc(age(st.mtime.getTime()))}</b> &middot; ${esc(stamp(st.mtime))}<br>`
-          + `<code>${esc(labelOf(it))}</code><br>`
+          + (it.abs ? "" : `<code>${esc(labelOf(it))}</code><br>`)
           + (it.rebuild ? `refresh with <code>${esc(it.rebuild)}</code>` : "authored by hand")
           + (it.source ? ` &middot; source <code>docs/${esc(it.source)}</code>` : "")
           + `</div>`;
@@ -452,7 +510,7 @@ const cards = INSTRUMENTS.map(it => {
     : `<div class="meta"><span class="tag n">not on disk</span><br><code>${esc(labelOf(it))}</code><br>`
       + (it.rebuild ? `run <code>${esc(it.rebuild)}</code> to build it` : "this file is authored and is missing")
       + `</div>`;
-  return `<div class="${cls}">${head}<p>${esc(it.what)}</p>${meta}</div>`;
+  return `<div class="${cls}">${head}<p>${esc(it.what)}</p>${openBlock}${meta}</div>`;
 }).join("\n");
 
 const missing = INSTRUMENTS.filter(it => !fs.existsSync(absOf(it)));
@@ -479,7 +537,46 @@ ${cards}
 </div>
 
 <p class="foot">Refresh this page: <code>npm run desk</code></p>
-</div>`;
+</div>
+<script>
+/* [2026-08-15] THE COPY CONTROL READS THE CLIPBOARD BACK BEFORE IT SAYS A WORD.
+   §8's hazard, paid for once already on the worksheet: writeText REJECTS with
+   "Document is not focused" and execCommand("copy") returns true when the
+   command was merely ENABLED — neither says the clipboard changed. A button
+   that prints "Copied" off either one can be wrong for days with no symptom.
+   So: write, read back, compare. If the read is refused we say we could not
+   check rather than claiming success. The path is SELECTED first either way,
+   so Ctrl+C works when the button cannot. */
+(function () {
+  for (const box of document.querySelectorAll(".pathbox")) {
+    const node = box.querySelector("[data-path]");
+    const btn = box.querySelector("[data-copy]");
+    const say = box.querySelector("[data-say]");
+    if (!node || !btn || !say) continue;
+    const tell = (msg, cls) => { say.textContent = msg; say.className = "say" + (cls ? " " + cls : ""); };
+    btn.addEventListener("click", async () => {
+      const text = node.textContent;
+      const sel = window.getSelection();
+      const rng = document.createRange();
+      rng.selectNodeContents(node);
+      sel.removeAllRanges(); sel.addRange(rng);
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (e) {
+        tell("the clipboard did not take it — press Ctrl+C, it is selected", "no");
+        return;
+      }
+      try {
+        const back = await navigator.clipboard.readText();
+        if (back === text) tell("copied — verified", "ok");
+        else tell("the clipboard holds something else — press Ctrl+C", "no");
+      } catch (e) {
+        tell("written, but not verified — press Ctrl+C to be sure", "");
+      }
+    });
+  }
+})();
+</script>`;
 
 fs.writeFileSync(path.join(DOCS, "OPS_DESK.html"),
   page({ title: "Weird.Baby — the Ops desk", css: CSS, body, favi: "🗂" }));

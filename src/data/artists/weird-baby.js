@@ -36,11 +36,13 @@ import { KEEPER } from "../house-copy.js";
    with /booth reading it. */
 
 /* [B 2026-08-13] MIKE: "Track chip `RECORDING — 2026-06` -> `first pass`,
-   matching the approved blurb." The chip and the record's own description now
-   say the same thing in the same words — the blurb on `About this record`
-   opens "The first pass." — where before the chip said WHEN the file was made
-   and the blurb said WHAT it is, which is two facts and one of them is on the
-   sleeve already. `.tl-rend` uppercases, so the row reads FIRST PASS. */
+   matching the approved blurb." Where before the chip said WHEN the file was
+   made, it now says WHAT the recording is, which is the fact the sleeve does
+   not already carry. `.tl-rend` uppercases, so the row reads FIRST PASS.
+   [2026-08-15] The blurb it was matched to — the `About this record` face —
+   is deleted on Mike's word, so this chip is the only place the phrase now
+   appears. The chip is HIS approved wording and stands on its own; it was not
+   derived from the blurb, both came from the same sentence of his. */
 const REC_LABEL = "first pass";
 
 /* ═══ [P9 2026-08-05] ABOUT THE ARTIST, FIRST IN THE WING ════════════════════
@@ -266,39 +268,18 @@ const spine = [
                   + "needs an address from you before it can say anything."] },
         ]),
       },
-      /* ═══ [B 2026-08-13] `About this record`, MOVED HERE FROM Vol. 1 ════════
-         MIKE: "`01 About this record` leaves this album entirely — it becomes a
-         track on Album B." Carried across unchanged except for the release's
-         name, which moved with the album. CH6's paragraph on `vol1` explains why
-         this face exists and why the sentence is a face rather than a track
-         chip; that reasoning is unchanged by which album it sits on.
-         IT SITS ABOVE THE FAQ AND NOT BELOW IT, because every FAQ in this
-         building is the last row of its album — /wal, /foundation and /robots
-         all close on one.
-         ═══ [M 2026-08-14] AND IT IS NOW BELOW IT, AND IT IS KEPT ═════════════
-         Mike named this album's tracks this morning as "track 1 -> About the
-         Artist, track 2 -> FAQ" and did not mention this row. He moved it onto
-         this album YESTERDAY, in writing, so it is kept at position 3 rather
-         than read out of existence by a sentence that was naming two positions:
-         his instruction is satisfied exactly — About the Artist is 1, FAQ is 2 —
-         and nothing he placed has been deleted on an inference.
-         Raised in the round log; one word removes it. */
-      {
-        id: "about-record",
-        title: "About this record",
-        videos: [],
-        face: {
-          kind: "text",
-          title: "About this record",
-          subtitle: "THE BEST OF WEIRD.BABY VOL. 1",
-          profile: [
-            { label: "What these recordings are",
-              body: "The first pass. Rough, unrefined — and the version that " +
-                    "went in as the original copyright submission." },
-          ],
-          footer: "WEIRD.BABY · THE BEST OF WEIRD.BABY VOL. 1",
-        },
-      },
+      /* ═══ [2026-08-15] `About this record` IS DELETED, AND THE WORD CAME ═════
+         M (2026-08-14) kept this row at position 3 rather than read it out of
+         existence by inference, and said so: "Raised in the round log; one word
+         removes it." Mike gave the word — its job is done. The album is the two
+         rows he named: About the Artist is 1, FAQ is 2.
+         WHAT WENT WITH IT: the last face on this wing carrying the release's
+         name, and its one profile line. Nothing else on the album moved — the
+         two surviving rows are untouched, and `vol1` below is unaffected, having
+         given this row up on 2026-08-13 and gained nothing back.
+         Five register rows went stale with it and were pruned in the same
+         commit; none of them anchored a RESTATED chain (checked before the
+         prune, per §9's procedure). */
       /* ═══ [B 2026-08-13] THE FAQ ROW IS NOT BUILT, AND THAT IS THE HOUSE'S
              OWN RULE RATHER THAN A GAP IN THE WORK ════════════════════════════
          MIKE: "Its tracks are the sections: About, FAQ. Photos and more later."
@@ -371,9 +352,10 @@ const spine = [
          ═══ [B 2026-08-13] AND IT HAS MOVED, WHICH REVERSES THE LAST SENTENCE
          OF THAT PARAGRAPH RATHER THAN CONTRADICTING IT ═══════════════════════
          MIKE: **"`01 About this record` leaves this album entirely — it becomes
-         a track on Album B."** The track is now the second row of `About the
-         Artist`, above; the reason it was parked here — that the other album was
-         hidden at launch — went with the hold, in the same instruction.
+         a track on Album B."** The reason it was parked here — that the other
+         album was hidden at launch — went with the hold, in the same
+         instruction. **[2026-08-15] AND IT IS NOT ON ALBUM B EITHER: Mike ruled
+         the row deleted outright. Nothing anywhere holds this face now.**
          WHAT WENT WITH IT: this album's ONLY face. `The Best of Weird.Baby
          Vol. 1` is six songs and nothing else now, which is what an album of
          recordings is, and the chip on every one of them says `first pass` in

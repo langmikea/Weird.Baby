@@ -21,6 +21,112 @@ import { useRoom } from "../lib/use-room.js";
 import { useArrival } from "../lib/use-arrival.js";
 /* [CH6 2026-08-12] has the Robots wing arrived? — src/lib/wing-open.js */
 import { ROBOTS_OPEN } from "../lib/wing-open.js";
+/* [2026-08-16] the countdown's clock — the server's instant, and the moment the
+   doors open, both from the museum's own declarations. */
+import { museumNow, SERVER_NOW } from "../lib/record-clock.js";
+import { dayStartInRecordTz } from "../../reveal/record-clock.mjs";
+import { RECORD_EPOCH } from "../data/artists/record-epoch.js";
+
+/* ═══ [2026-08-16] THE COUNTDOWN TO THE DOORS ═══════════════════════════════
+   MIKE: "a visible countdown to the opening of Weird.Baby… Big and obvious.
+   This is the thing a visitor should see first. It carries the 'you found
+   something' feeling that the current copy states in words."
+
+   THE TARGET IS DERIVED, NOT TYPED: `RECORD_EPOCH` (2026-08-17) resolved to an
+   instant in `RECORD_TZ` (America/New_York) = 2026-08-17T04:00:00Z. His ruling,
+   after reversing an earlier local-to-the-visitor reading: *"The museum's own
+   clock, matching the doors."* A launch slip still moves one field.
+
+   THE TICK IS THE SERVER'S CLOCK, NOT THE VISITOR'S. `museumNow()` counts from
+   the instant the worker injected, advanced by `performance.now()` — a
+   MONOTONIC elapsed-milliseconds counter, which is why changing the device
+   clock does not move this counter.
+
+   AT ZERO IT REMOVES ITSELF — his ruling. `null` is returned, the component
+   unmounts, and the copy beneath stands with nothing stale on the glass and no
+   new copy needed. It does this LIVE, in a tab left open across midnight: the
+   interval is still running and the render that crosses zero is the render that
+   returns null.
+
+   ONE SECOND, NOT ONE FRAME. `setInterval` at 1000ms is what a
+   seconds-resolution readout needs; `requestAnimationFrame` would tick 60x for
+   one visible change and, per §8's hazard, does not fire at all in a background
+   tab — which is exactly the tab this has to be correct in. */
+const DOORS_OPEN_AT = dayStartInRecordTz(RECORD_EPOCH);
+
+function remainingAt(ms) {
+  const left = DOORS_OPEN_AT - ms;
+  if (left <= 0) return null;
+  const s = Math.floor(left / 1000);
+  return {
+    days: Math.floor(s / 86400),
+    hours: Math.floor((s % 86400) / 3600),
+    minutes: Math.floor((s % 3600) / 60),
+    seconds: s % 60,
+  };
+}
+
+function Countdown() {
+  const [left, setLeft] = useState(() => remainingAt(museumNow()));
+
+  useEffect(() => {
+    if (!left) return undefined;              /* already open — never arm */
+    const tick = () => setLeft(remainingAt(museumNow()));
+    const id = setInterval(tick, 1000);
+    /* [2026-08-16] A HIDDEN TAB'S INTERVAL IS THROTTLED, SO THE FIRST THING A
+       RETURNING VISITOR SEES MUST BE RECOMPUTED RATHER THAN WAITED FOR.
+       MEASURED, NOT ASSUMED: with the tab backgrounded, a 2000ms probe fired at
+       95, 97, 99, 101, 103, 105 and then jumped to 121 — Chrome had cut it to
+       roughly once a minute. The countdown's own interval is throttled the same
+       way, so a tab left open and come back to could show a reading up to a
+       minute stale before the next tick corrected it.
+       THE COUNTER ITSELF WAS NEVER WRONG — it recomputes from
+       `museumNow()` every tick rather than decrementing, so a throttled tick
+       skips values instead of drifting, and the crossing to zero still happened
+       on time in a hidden tab (verified). What this fixes is the WINDOW between
+       a visitor looking and the next throttled tick arriving.
+       `visibilitychange` fires the moment the tab is shown, so the recompute
+       lands before the first paint the visitor sees. */
+    const onShow = () => { if (!document.hidden) tick(); };
+    document.addEventListener("visibilitychange", onShow);
+    return () => {
+      clearInterval(id);
+      document.removeEventListener("visibilitychange", onShow);
+    };
+  }, [left === null]);                        // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (!left) return null;                     /* AT ZERO IT REMOVES ITSELF */
+
+  const cell = (n, label) => (
+    <div className="wb-cd-cell" key={label}>
+      <div className="wb-cd-n">{String(n).padStart(2, "0")}</div>
+      <div className="wb-cd-l">{label}</div>
+    </div>
+  );
+
+  return (
+    /* `aria-live="off"` DELIBERATELY: a screen reader announcing a changing
+       number once a second is unusable. The countdown is decorative-adjacent —
+       the sentence beneath it carries the same fact in words, which is the
+       accessible reading of this block and was already on the page. */
+    <div className="wb-countdown" role="timer" aria-live="off"
+         aria-label="Time until the museum opens">
+      <div className="wb-cd-row">
+        {cell(left.days, "days")}
+        {cell(left.hours, "hours")}
+        {cell(left.minutes, "minutes")}
+        {cell(left.seconds, "seconds")}
+      </div>
+      {SERVER_NOW === null && (
+        /* Nothing injected a server instant — `npm run dev`, or a worker that
+           did not run. The counter falls back to the device clock and says so
+           to Ops rather than pretending; there is no visitor-facing string
+           here, and this branch cannot render in a served page. */
+        <div className="wb-cd-dev" data-dev-clock="1" />
+      )}
+    </div>
+  );
+}
 
 /* [M-ID 2026-08-03] MIKE HAS ANSWERED, AND THE ANSWER RETIRES THE QUESTION.
    F7c rendered four candidates behind `/?subtitle=2..4` and said "MIKE PICKS —
@@ -924,6 +1030,15 @@ export default function WbHome() {
               worker at request time, and Sunday night is when it turns. Nothing
               here counts to 100 — "the first 100" is a promise in his copy, and
               what happens AT 100 is his own TBD, deliberately not built. */}
+          {/* [2026-08-16] THE COUNTDOWN SITS ABOVE THE NOTE, and it is rendered
+              unconditionally rather than inside the `ROBOTS_OPEN` branch. That
+              is the point: `ROBOTS_OPEN` is a module-load const, so in a tab
+              left open across midnight it still reads false — and the countdown
+              must remove itself on the museum's clock, not on that const. The
+              component decides for itself and returns null once the doors are
+              open, so an already-open museum renders exactly what it rendered
+              before this existed. */}
+          <Countdown />
           {ROBOTS_OPEN ? (
             <p className="wb-note">
               Welcome.<br /><br />

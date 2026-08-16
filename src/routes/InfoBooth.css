@@ -51,3 +51,62 @@ html[data-room="booth"], html[data-room="booth"] body {
    ticket in the codebase and puts it back.
    THE FILE HEADER ABOVE STILL NAMES THE TICKET as one of two things that are
    genuinely this room's. It is now one thing: the ground. */
+
+/* ═══ [2026-08-15] THE TITLE COMES DOWN A STEP ═══════════════════════════════
+   MIKE: "The FAQ title stays but comes down a step — less bold, less large,
+   sitting with the rest of the museum rather than shouting."
+
+   IT IS SCOPED TO THIS ROOM AND NOT EDITED IN `sheet.css`, WHICH IS THE WHOLE
+   CARE HERE. `.sheet-credo` lives in `src/styles/sheet.css`, the furniture BOTH
+   this room and /foundation import.
+   MEASURED, NOT ASSUMED: /booth is the only route DRAWING a credo today —
+   /foundation stopped when D7 made it an exhibit wing, and it imports the sheet
+   for the rest of the `.sheet-*` furniture. So retuning the base rule would not
+   move anything on the glass this afternoon, and it is still the wrong edit:
+   the class is shared, the next room to draw one inherits whatever it says, and
+   a rule tuned for one surface is a rule nobody can read the scope of later.
+   That is A4's lesson on the Record, applied before it costs anything rather
+   than after. The step-down lives under `html[data-room="booth"]`, this room's
+   own ground selector, already declared above.
+
+   THREE DIALS, AND ONLY THE THREE HE NAMED. Less large: the clamp comes down
+   one step at both ends and in the middle (1.15/2vw/1.5 -> 1.02/1.6vw/1.24rem),
+   which lands it just above `.sheet-words` rather than a full step over it.
+   Less bold: 500 -> 400, the same weight the body of this page is set in.
+   Not shouting: the gold goes to `--wb-gold-lo`, the ink the rest of the room's
+   prose already uses, so the title sits IN the page instead of over it.
+
+   THE FACE IS UNTOUCHED AND THAT IS DELIBERATE. It is still Fredoka — the
+   brand face — because he asked for a step down, not for a different voice, and
+   the walkthrough's open note that this is the last brand-face object on the
+   page is a separate question with his name on it. Nothing here answers it.
+   The measure, the centring and the underline on `em` are untouched: 32ch was
+   measured against the longest beat and a narrower type does not need it moved. */
+html[data-room="booth"] .sheet-credo {
+  font-weight: 400;
+  font-size: clamp(1.02rem, 1.6vw, 1.24rem);
+  color: var(--wb-gold-lo);
+}
+
+/* ═══ [2026-08-15] HIS LINE BREAKS DRAW ══════════════════════════════════════
+   Mike's FAQ rewrite is written with line breaks inside the answers — "NOTE:"
+   begins a line, "Papa@Weird.Baby" stands alone, and several answers are two or
+   three short lines rather than one wrapped paragraph. Without this the default
+   `normal` renders each `\n` as a space and every one of those decisions is
+   silently undone.
+
+   IT IS THE SAME MECHANISM, FOR THE THIRD SURFACE. `.vp-rec-sum` (the Record's
+   deck) has carried `pre-line` since the deck was ruled two lines that never
+   wrap, and `.vp-rec-sect-body` took it this morning for exactly this reason.
+   The house now has ONE answer to "what does a newline the writer typed mean",
+   and it is the same answer everywhere.
+
+   SCOPED TO THIS ROOM, NOT ADDED TO `sheet.css`. `.sheet-faq-a` is shared
+   furniture — `Foundation.css` reasons about it by name in two places — and the
+   wing FAQs draw through `FaqEntries` and different classes entirely. Only this
+   room's answers are authored with hard breaks, so only this room declares it.
+   `pre-line` still collapses runs of spaces and still wraps a long line: it
+   honours the newline and changes nothing else. */
+html[data-room="booth"] .sheet-faq-a {
+  white-space: pre-line;
+}

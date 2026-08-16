@@ -74,6 +74,39 @@ const browserToday = () => {
 /** the day this page is being read on, as the museum reckons it */
 export const TODAY = SERVER_TODAY || browserToday();
 
+/* ═══ [2026-08-16] THE MUSEUM'S CLOCK TO THE SECOND ═════════════════════════
+   The lobby countdown needs an instant; `TODAY` above is a DAY. `__WB_NOW__` is
+   the server's `Date.now()` at the moment it rendered this page, injected in
+   the same `<script>` as the date.
+
+   THE BROWSER MEASURES ONLY *ELAPSED* TIME, WHICH IS NOT THE SAME AS TRUSTING
+   IT WITH THE TIME. The origin is the server's; `performance.now()` is a
+   MONOTONIC counter of milliseconds since this document started, so it cannot
+   be moved by the visitor changing their clock, by a timezone change, or by an
+   NTP correction mid-visit. `Date.now()` would have all three problems and is
+   deliberately not used for the tick.
+
+   THE FALLBACK IS `Date.now()` AND IT IS THE HONEST ONE. If nothing injected an
+   instant — a worker that did not run, or `npm run dev` with no worker at all —
+   the alternative to the visitor's clock is no countdown, and a lobby whose
+   headline object is missing is a worse failure than one that could be spoofed.
+   `SERVER_NOW === null` is exposed so a caller can tell the two apart. */
+const MONO_ORIGIN =
+  typeof performance !== "undefined" && typeof performance.now === "function"
+    ? performance.now() : null;
+
+/** the server's instant at render, or null when nothing injected one */
+export const SERVER_NOW =
+  typeof G.__WB_NOW__ === "number" && Number.isFinite(G.__WB_NOW__)
+    ? G.__WB_NOW__
+    : null;
+
+/** epoch-ms as the museum reckons it, right now */
+export function museumNow() {
+  if (SERVER_NOW === null || MONO_ORIGIN === null) return Date.now();
+  return SERVER_NOW + (performance.now() - MONO_ORIGIN);
+}
+
 /** true while every entry is shown regardless of its date */
 export const showingAll = () => PREVIEWING_ALL || STAGE !== "launch";
 

@@ -39,23 +39,81 @@ code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;w
 .tag.n{border-color:#6a3a30;color:var(--redfg)}
 .foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
 .foot code{color:var(--dim)}
+/* [2026-08-15] THE PATH BLOCK — an instrument the browser must NOT be asked to
+   open. See the abs branch in the card renderer for why there is no link.
+   (No backticks in this comment: it lives inside a template literal.) */
+.pathbox{margin:2px 0 9px;border:1px solid var(--line);border-radius:3px;background:#141317}
+.pathbox .p{display:block;padding:8px 9px;font-family:ui-monospace,Consolas,monospace;
+ font-size:12px;color:#cddae8;word-break:break-all;user-select:all;cursor:text}
+.pathbox .r{display:flex;gap:8px;align-items:center;padding:0 9px 8px}
+.pathbox button{font:inherit;font-size:11.5px;background:#23222a;color:var(--fg);
+ border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer}
+.pathbox button:hover{border-color:var(--gold);color:var(--gold)}
+.pathbox .say{font-size:11.5px;color:var(--dim2)}
+.pathbox .say.ok{color:var(--grn)}
+.pathbox .say.no{color:var(--redfg)}
+.howto{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.55}
+.howto b{color:var(--gold);font-weight:600}
 @media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
 </style></head><body>
 <div class="wrap">
 <h1>Weird.Baby &mdash; the Ops desk</h1>
 <div class="cards">
-<div class="card lead"><h3><a href="dictation-20260807/assign.html">Week one — the artifacts</a></h3><p>The pictures and the story events, against the five days. Click a day, then click things.</p><div class="meta"><b>8 hours ago</b> &middot; 2026-08-13 18:20 UTC<br><code>docs/dictation-20260807/assign.html</code><br>refresh with <code>npm run assign</code></div></div>
-<div class="card lead"><h3><a href="file:///C:/AI/_night-20260811/RECORD_days-2-to-6.xlsx">The workbook — where you write</a></h3><p>Days 2 to 6, one tab each. Type in the white cells. Braces are notes to Ops.</p><div class="meta"><b>2 days ago</b> &middot; 2026-08-12 05:25 UTC<br><code>C:/AI/_night-20260811/RECORD_days-2-to-6.xlsx</code><br>refresh with <code>read it back with npm run record:workbook -- &lt;path&gt;</code></div></div>
-<div class="card"><h3><a href="dictation-20260807/record.html">The Record — MOTHBALLED</a></h3><p>Not the road for week one. Still works; the writing happens in the workbook.</p><div class="meta"><b>2 days ago</b> &middot; 2026-08-12 05:26 UTC<br><code>docs/dictation-20260807/record.html</code><br>refresh with <code>npm run dictation</code></div></div>
-<div class="card"><h3><a href="dictation-20260807/arc.html">The twelve-week table</a></h3><p>The whole arc, week by week, and whose sentence each line is.</p><div class="meta"><b>4 days ago</b> &middot; 2026-08-09 18:10 UTC<br><code>docs/dictation-20260807/arc.html</code><br>refresh with <code>npm run dictation</code></div></div>
-<div class="card"><h3><a href="dictation-20260807/artifacts.html">The light table</a></h3><p>Every file the museum still has, as a thumbnail. Click one to open it full size.</p><div class="meta"><b>4 days ago</b> &middot; 2026-08-09 18:10 UTC<br><code>docs/dictation-20260807/artifacts.html</code><br>refresh with <code>npm run dictation</code></div></div>
-<div class="card"><h3><a href="dictation-20260807/eggs.html">The egg tracker</a></h3><p>Every egg — what it is, whether it is built, whether anybody can trip it.</p><div class="meta"><b>4 days ago</b> &middot; 2026-08-09 18:10 UTC<br><code>docs/dictation-20260807/eggs.html</code><br>refresh with <code>npm run dictation</code></div></div>
-<div class="card"><h3><a href="dictation-20260807/specsheet.html">The spec sheet</a></h3><p>The period specification, with the contradicted rows printed both ways.</p><div class="meta"><b>4 days ago</b> &middot; 2026-08-09 18:10 UTC<br><code>docs/dictation-20260807/specsheet.html</code><br>refresh with <code>npm run dictation</code></div></div>
-<div class="card"><h3><a href="dictation-20260807/reference.html">The reference page</a></h3><p>What explains the machine. Read it when you want it, not to get started.</p><div class="meta"><b>4 days ago</b> &middot; 2026-08-09 18:10 UTC<br><code>docs/dictation-20260807/reference.html</code><br>refresh with <code>npm run dictation</code></div></div>
-<div class="card"><h3><a href="CONTACT_SHEET.html">The contact sheet</a></h3><p>Every image in both repos, with a ✗ on each tile for marking a cull.</p><div class="meta"><b>5 days ago</b> &middot; 2026-08-09 13:20 UTC<br><code>docs/CONTACT_SHEET.html</code><br>refresh with <code>npm run contact-sheet</code></div></div>
-<div class="card"><h3><a href="OPEN_ACTIONS.html">The open-actions register</a></h3><p>Everything open, one place. THE SHORT LIST at the top is what is waiting on you.</p><div class="meta"><b>just now</b> &middot; 2026-08-14 02:25 UTC<br><code>docs/OPEN_ACTIONS.html</code><br>refresh with <code>npm run desk</code> &middot; source <code>docs/OPEN_ACTIONS.md</code></div></div>
+<div class="card lead"><h3><a href="dictation-20260807/assign.html">Week one — the artifacts</a></h3><p>The pictures and the story events, against the five days. Click a day, then click things.</p><div class="meta"><b>2 days ago</b> &middot; 2026-08-13 18:20 UTC<br><code>docs/dictation-20260807/assign.html</code><br>refresh with <code>npm run assign</code></div></div>
+<div class="card lead"><h3>The workbook — where you write</h3><p>Records 001 to 005, one tab each. Type in the white cells.</p><p class="howto">Open it from <b>File Explorer</b> &mdash; this page cannot open it in place, and a
+link would hand you a <b>copy in Downloads</b>. Copy the path below and paste it into Explorer's address
+bar (or <b>Win+R</b>). <b>Do not edit a copy:</b> the copy is not the file Ops reads back.</p>
+<div class="pathbox"><code class="p" data-path>C:\AI\_week01\WEEK01_records-001-to-005.xlsx</code>
+<div class="r"><button type="button" data-copy>Copy the path</button><span class="say" data-say></span></div></div><div class="meta"><b>10 hours ago</b> &middot; 2026-08-15 18:40 UTC<br>refresh with <code>read it back with npm run record:workbook -- &lt;path&gt;</code></div></div>
+<div class="card"><h3><a href="dictation-20260807/record.html">The Record — MOTHBALLED</a></h3><p>Not the road for week one. Still works; the writing happens in the workbook.</p><div class="meta"><b>4 days ago</b> &middot; 2026-08-12 05:26 UTC<br><code>docs/dictation-20260807/record.html</code><br>refresh with <code>npm run dictation</code></div></div>
+<div class="card"><h3><a href="dictation-20260807/arc.html">The twelve-week table</a></h3><p>The whole arc, week by week, and whose sentence each line is.</p><div class="meta"><b>6 days ago</b> &middot; 2026-08-09 18:10 UTC<br><code>docs/dictation-20260807/arc.html</code><br>refresh with <code>npm run dictation</code></div></div>
+<div class="card"><h3><a href="dictation-20260807/artifacts.html">The light table</a></h3><p>Every file the museum still has, as a thumbnail. Click one to open it full size.</p><div class="meta"><b>6 days ago</b> &middot; 2026-08-09 18:10 UTC<br><code>docs/dictation-20260807/artifacts.html</code><br>refresh with <code>npm run dictation</code></div></div>
+<div class="card"><h3><a href="dictation-20260807/eggs.html">The egg tracker</a></h3><p>Every egg — what it is, whether it is built, whether anybody can trip it.</p><div class="meta"><b>6 days ago</b> &middot; 2026-08-09 18:10 UTC<br><code>docs/dictation-20260807/eggs.html</code><br>refresh with <code>npm run dictation</code></div></div>
+<div class="card"><h3><a href="dictation-20260807/specsheet.html">The spec sheet</a></h3><p>The period specification, with the contradicted rows printed both ways.</p><div class="meta"><b>6 days ago</b> &middot; 2026-08-09 18:10 UTC<br><code>docs/dictation-20260807/specsheet.html</code><br>refresh with <code>npm run dictation</code></div></div>
+<div class="card"><h3><a href="dictation-20260807/reference.html">The reference page</a></h3><p>What explains the machine. Read it when you want it, not to get started.</p><div class="meta"><b>6 days ago</b> &middot; 2026-08-09 18:10 UTC<br><code>docs/dictation-20260807/reference.html</code><br>refresh with <code>npm run dictation</code></div></div>
+<div class="card"><h3><a href="CONTACT_SHEET.html">The contact sheet</a></h3><p>Every image in both repos, with a ✗ on each tile for marking a cull.</p><div class="meta"><b>7 days ago</b> &middot; 2026-08-09 13:20 UTC<br><code>docs/CONTACT_SHEET.html</code><br>refresh with <code>npm run contact-sheet</code></div></div>
+<div class="card"><h3><a href="OPEN_ACTIONS.html">The open-actions register</a></h3><p>Everything open, one place. THE SHORT LIST at the top is what is waiting on you.</p><div class="meta"><b>just now</b> &middot; 2026-08-16 04:17 UTC<br><code>docs/OPEN_ACTIONS.html</code><br>refresh with <code>npm run desk</code> &middot; source <code>docs/OPEN_ACTIONS.md</code></div></div>
 </div>
 
 <p class="foot">Refresh this page: <code>npm run desk</code></p>
 </div>
+<script>
+/* [2026-08-15] THE COPY CONTROL READS THE CLIPBOARD BACK BEFORE IT SAYS A WORD.
+   §8's hazard, paid for once already on the worksheet: writeText REJECTS with
+   "Document is not focused" and execCommand("copy") returns true when the
+   command was merely ENABLED — neither says the clipboard changed. A button
+   that prints "Copied" off either one can be wrong for days with no symptom.
+   So: write, read back, compare. If the read is refused we say we could not
+   check rather than claiming success. The path is SELECTED first either way,
+   so Ctrl+C works when the button cannot. */
+(function () {
+  for (const box of document.querySelectorAll(".pathbox")) {
+    const node = box.querySelector("[data-path]");
+    const btn = box.querySelector("[data-copy]");
+    const say = box.querySelector("[data-say]");
+    if (!node || !btn || !say) continue;
+    const tell = (msg, cls) => { say.textContent = msg; say.className = "say" + (cls ? " " + cls : ""); };
+    btn.addEventListener("click", async () => {
+      const text = node.textContent;
+      const sel = window.getSelection();
+      const rng = document.createRange();
+      rng.selectNodeContents(node);
+      sel.removeAllRanges(); sel.addRange(rng);
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (e) {
+        tell("the clipboard did not take it — press Ctrl+C, it is selected", "no");
+        return;
+      }
+      try {
+        const back = await navigator.clipboard.readText();
+        if (back === text) tell("copied — verified", "ok");
+        else tell("the clipboard holds something else — press Ctrl+C", "no");
+      } catch (e) {
+        tell("written, but not verified — press Ctrl+C to be sure", "");
+      }
+    });
+  }
+})();
+</script>
 </body></html>

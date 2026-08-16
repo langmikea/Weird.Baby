@@ -4552,9 +4552,28 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
    warned about would appear.
    THE MEASURE IS 68ch AND STAYS 68ch: the indent is padding, so it moves the
    text's left edge without widening the block past its cap. */
+/* ═══ [2026-08-15] A SINGLE NEWLINE INSIDE A PARAGRAPH IS A LINE BREAK ══════
+   MIKE'S RULING: the line breaks he types inside one cell must draw as line
+   breaks; blank lines continue to make separate paragraphs.
+   THE MECHANISM IS THE DECK'S, NOT A NEW ONE. `.vp-rec-sum` has carried
+   `white-space: pre-line` since the deck was ruled two lines that never wrap;
+   this is the same declaration on the body, so the Record has ONE rule about
+   what a newline means instead of two answers depending on which field you are
+   in. `pre-line` collapses runs of spaces and still wraps long lines — it
+   honours the newline and nothing else, which is the whole of what was asked.
+   WHAT IT FIXES, MEASURED: his ADDENDUM 01 event log is ten timestamped lines
+   in one paragraph. Without this they printed as one run-on line, because the
+   default `normal` renders a newline as a space. Nothing about his text
+   changed to fix it — the text was always right and the stylesheet was
+   answering a question nobody had asked it.
+   IT DOES NOT TOUCH PARAGRAPH SPLITTING, which happens upstream in
+   `workbook_to_draft.py` on a BLANK line and produces separate `<p>` elements
+   that `.vp-rec-sect-body + .vp-rec-sect-body` already spaces with
+   `--rec-para`. An entry with no newline inside any paragraph — 003, 004, 005
+   — renders byte-identically to before. */
 .vp-rec-sect-body{margin:0;font-family:var(--wb-plain);
   font-size:var(--fs-body);line-height:1.4;letter-spacing:0;
-  padding-left:var(--rec-indent);
+  padding-left:var(--rec-indent);white-space:pre-line;
   color:var(--wb-gold-lo);max-width:68ch}
 .vp-rec-sect-body + .vp-rec-sect-body{margin-top:var(--rec-para)}
 .vp-rec-sect-doors{display:flex;flex-wrap:wrap;gap:10px 16px}

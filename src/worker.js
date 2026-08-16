@@ -162,8 +162,22 @@ const CARD_WHILE_SHUT =
 function injectClock(response, today, previewing, wingOpen) {
   const type = response.headers.get("Content-Type") || "";
   if (!type.includes("text/html")) return response;
+  /* [2026-08-16] `__WB_NOW__` IS THE SERVER'S INSTANT, AND IT IS ONE FIELD IN
+     THE INJECTION THAT WAS ALREADY HAPPENING. The lobby countdown needs seconds
+     and `__WB_TODAY__` is a DAY — `todayInRecordTz` formats the time of day away
+     — so the clock the museum already trusts could not answer the question.
+     THE ALTERNATIVE WAS `new Date()` IN THE BROWSER, WHICH IS THE SECOND CLOCK
+     `src/lib/record-clock.js` EXISTS TO REFUSE, in its own words: *"a browser
+     clock belongs to the visitor: it can be wrong by accident or on purpose."*
+     A countdown driven by the visitor's clock would disagree with the Record on
+     the same page — and would be trivially spoofable into showing the doors
+     open early.
+     IT IS THE SAME MECHANISM CARRYING ONE MORE VALUE, not a second mechanism:
+     same function, same response, same `<script>`, computed on the same request
+     as the date beside it. */
   const payload =
     `window.__WB_TODAY__=${JSON.stringify(today)};` +
+    `window.__WB_NOW__=${Date.now()};` +
     `window.__WB_RECORD_ALL__=${previewing ? "true" : "false"};`;
   let r = new HTMLRewriter()
     .on("head", {

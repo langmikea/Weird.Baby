@@ -55,7 +55,6 @@ import { visitorProse, kept } from "../lib/visitor-prose.js";
    P9, so one sentence about the keeper existed in two rooms with no link
    between the copies. Both now read `KEEPER`.
    [D 2026-08-11] `CONTACT` was the third and is gone with the address. */
-import { KEEPER, AFFILIATION, USE_RIGHTS } from "../data/house-copy.js";
 /* [F1 2026-08-06] the two fixed ends of the FAQ format, which this room is the
    original of and which four wing FAQs now print too — see faq-face.js. */
 
@@ -87,218 +86,96 @@ import { KEEPER, AFFILIATION, USE_RIGHTS } from "../data/house-copy.js";
    honest shape of the shop is a set of links to the artists' OWN stores. The
    shop question below asks what the shop IS, which is the answerable half. */
 const FAQ = [
+  /* ═══ [2026-08-15] MIKE'S REWRITE — HIS TEN QUESTIONS, VERBATIM ════════════
+     MIKE: "The museum FAQ. Mike's text, verbatim. Do not edit, smooth or
+     reorder. Replace what is there."
+     Quoted in full in docs/MUSEUM_SITE_CHANGES_LOG-20260815.md, which is the
+     source every MIKE row this round cites.
+
+     THE LINE BREAKS ARE HIS AND THEY DRAW. `
+` inside an answer is a real
+     line break — `.sheet-faq-a` carries `white-space: pre-line`, the same
+     mechanism the Record's section body took this morning and the deck has had
+     since it was ruled two lines. His "NOTE:" and his lone "Papa@Weird.Baby"
+     sit on their own lines because that is where he put them.
+
+     THREE HOUSE PASSAGES ARE NO LONGER READ BY THIS ROOM AND THAT IS A
+     CONSEQUENCE WORTH KNOWING. `KEEPER`, `AFFILIATION` and `USE_RIGHTS` were
+     imported here and hoisted into house-copy.js precisely so the booth and the
+     wing FAQs could not drift. His rewrite gives two of those questions NEW
+     wording and drops the third question ("Can I use what is here?") entirely.
+     The passages are NOT edited, because they are still printed elsewhere —
+     `AFFILIATION` and `USE_RIGHTS` on /wal, `KEEPER` on /wb — and changing them
+     to match would silently rewrite two rooms he did not mention.
+     SO THE BOOTH AND /wal NOW ANSWER THE AFFILIATION QUESTION IN DIFFERENT
+     WORDS. That is Doctrine 17's exact failure mode, arrived at legitimately:
+     his instruction is authoritative for this page and only this page. It is
+     raised in the round log for him rather than resolved here. */
   {
-    /* [B5 2026-08-05] THE TWO SENTENCES SWAPPED PLACES AND NOTHING ELSE
-       CHANGED. It used to say "Some of it is ours" first. Mike's sweep: lead
-       with the artist, not the house. The room built the other way round —
-       Other Music Worth a Listen — is the larger half of what is here and it
-       was reading second in the museum's own first answer. */
     q: "What is this place?",
-    a: "A museum. It keeps things worth keeping — records, photographs, " +
-       "machines, the paper that came with them — writes cards for them, and " +
-       "puts them where anybody can walk up and look. Some of it belongs to " +
-       "people we admire and is here because somebody in this house loves " +
-       "it. Some of it is ours.",
+    a: "A museum, of sorts.\n" +
+       "A place to freely share my favorite stuff with others.",
   },
   {
-    /* [B5 2026-08-05] IT OPENED BY RESTATING THE CREDO 400px ABOVE IT. "No
-       ticket, no tier, no ads" is the placard's "No tickets, no tiers, no
-       ads", set again in smaller type — the page explaining what the page
-       already says. What survives is the part the credo does NOT carry: that
-       there is no account, that nothing is walled, and that this is a standing
-       arrangement rather than an offer. */
     q: "Is it really free?",
-    a: "Yes — and there is no account to make, nothing to unlock, and " +
-       "nothing behind a wall. Sign the guest book if you feel like it; " +
-       "nothing anywhere on the site asks you for anything else. That is not " +
-       "an introductory offer. It is the arrangement.",
+    a: "Yes — no accounts or logins. Nothing behind a wall.\n" +
+       "That's not an introductory offer. It's the arrangement.",
   },
-  /* ==== [N5 2026-08-04 · B2 2026-08-05] "ARE YOU TRACKING ME?" =============
-     MIKE (N5): "answered honestly — no login, what cookies do, what we keep
-     (nothing), written against worker.js not against goodwill."
-     THE OLD QUESTION WAS REPLACED RATHER THAN JOINED, because it asked the same
-     thing less sharply ("Do I have to sign in? Are you watching me?") and two
-     near-identical questions on one list is worse than one good one.
-
-     ═══ [B2 2026-08-05] IT WAS TRUE AND IT WAS UNDERSELLING THE TRUTH ════════
-     MIKE: "cookies and stored settings are different things — a cookie is SENT
-     TO THE SERVER on every request, which is what makes it tracking;
-     localStorage never leaves the browser unless code ships it, and ours
-     doesn't. Both are true at once: this site sets no cookies AND settings
-     persist between sessions. Say the stronger, truer thing: THE MACHINE
-     REMEMBERS YOU AND WE DON'T."
-
-     N5's answer folded that into eleven words — "a panel width, whether you
-     have already walked through a room this visit" — and filed it under things
-     to reassure the visitor about. It is the most interesting fact on the page:
-     the MGK in the robot wing holds a visitor's NAME and BIRTH DATE, and it
-     holds them somewhere we cannot reach. Reading that as small print made the
-     answer weaker than the architecture it was describing.
-
-     ═══ AND CHECKING IT AGAINST THE CODE FOUND THE ANSWER WRONG. AGAIN. ══════
-     N5 found the previous answer's "that is the whole of it" false, because
-     `index.html` ships a Google Fonts `<link>`. N5's own replacement then said
-     Google was "the only outside party this site touches", and MEASURED IN A
-     BROWSER that is false TWICE OVER. Read off
-     `performance.getEntriesByType('resource')` on every room, each after a
-     nine-second settle, with nothing clicked:
-
-       `/`, `/booth`, `/shop`, `/foundation`, `/hr/archive`
-                                    Google Fonts, and nothing else.
-       `/robots`, `/wal`, `/wb`     + `www.youtube.com` ×3.
-       `/hr`                        + `www.youtube.com` ×3
-                                    + `www.facebook.com` ×16, in 17 iframes.
-
-     YouTube arrives because `Exhibit.jsx:333` injects `iframe_api` and the
-     player mounts an embed with it — ON LOAD, not on play. Facebook arrives
-     because the Hunter Root artifact grid renders `hr-card-fbembed` cards
-     through `HrExhibitFlow.jsx:2110`'s `facebook.com/plugins/` URL, and the
-     wing has seventeen of them.
-
-     ═══ [R6 2026-08-06] M37 IS RULED — OPTION A, DISCLOSE — AND THE FOURTH
-     MEASUREMENT CORRECTED THE THIRD CLAUSE. ══════════════════════════════════
-     MIKE: "the FAQ states plainly that YouTube (and any other embed host) is
-     contacted when those pages load. Disclosed, not deferred, not
-     click-to-load." So this answer IS the remedy, which makes its accuracy the
-     whole of the remedy — and re-measuring it on the built bundle this round
-     found the Facebook half slightly wrong AGAIN, in the museum's own favour.
-     `/hr` ON ARRIVAL, nine seconds, nothing clicked, nothing scrolled:
-     Google Fonts, `www.youtube.com` ×3, and FACEBOOK ZERO. The sixteen plugin
-     frames carry `loading="lazy"` (HrExhibitFlow.jsx:2240) and the cards sit
-     below the fold, so they arrive when a visitor SCROLLS the room — which is
-     still nothing they pressed, but it is not "the same way" as the player and
-     this answer said it was. Scrolled to the bottom: `www.facebook.com` ×16, 17
-     iframes, exactly as v53 recorded. v53's own reading was taken with the deck
-     already open, which is why it read as arrival.
-     THE CLAUSE NOW SAYS WHEN. It is a weaker-sounding sentence and a truer one,
-     and the direction of the error is the reason it is worth a note: three of
-     the four versions of this clause have understated what leaves the building.
-     THAT IS THE THIRD OUTBOUND CLAUSE THIS ONE ANSWER HAS HAD, AND THE FIRST
-     TWO WERE BOTH WRONG, and all three were written by people who meant them.
-     The reason is mechanical and worth stating once: a grep of `src/` finds
-     the STRING, and every one of these strings was findable. Only loading the
-     page finds the REQUEST. Nothing in the source says "unprompted, on
-     arrival" — that sentence exists only in the network panel.
-
-     EVERY CLAUSE IS FALSIFIABLE BY READING ONE FILE OR RUNNING ONE PROBE:
-       · no login — `src/worker.js` has no auth of any kind, on any route.
-       · no cookies — no `Set-Cookie` anywhere in the worker, no
-         `document.cookie` anywhere in `src/`, and none in
-         `public/robots/twin.html` either. The site sets none at all.
-       · what is written — `POST /api/visits` inserts `(page, referrer,
-         visited_at)` and nothing else, fired from exactly two components: the
-         lobby (`WbHome.jsx:278`) and the exhibit shell (`Exhibit.jsx:2163`).
-         `/booth` itself writes nothing.
-       · the guest book — `POST /api/guestbook` inserts name, note, a fixed
-         badge string and a timestamp. Exactly what was typed.
-       · the machine's record — the twin persists SEVEN localStorage keys
-         (`wbr_user`, `wbr_health`, `wbr_parcel`, `wbr_santa`, `wbr_son_best`,
-         `wbr_bs`, `wbr_boot_level`) and THREE sessionStorage keys, listed in
-         `Rec_Keys_Local` / `Rec_Keys_Session`. It is same-origin with the
-         museum, so those keys sit in weird.baby's own storage — CONFIRMED in
-         the browser, where `wbr_boot_level`, `wbr_health`, `wbr_parcel` and
-         `wbr_son_best` read back off the museum's origin. The twin contains
-         ZERO `fetch` and ZERO `XMLHttpRequest`: it has no way to send them.
-       · the register — `Preferences ▸ User ▸ GO>` in the twin's own menu
-         (`MENU_TABLE_SRC`), five pages of what is held, and a shake on the
-         last one purges every key named above.
-       · the museum's own settings — **[P5 2026-08-05] AND THIS CLAUSE WAS
-         REWRITTEN BECAUSE THE CODE UNDER IT MOVED, WHICH IS THE RULE THIS
-         ANSWER LIVES BY.** Mike's site-wide ruling makes every VIEW setting
-         last the session and no longer: panel splits (`wb-*-split`), carousel
-         and viewer heights (`wb-*-cfh`, `wb-*-body`), /hr's deck width
-         (`wb-hr-deck-width`) and the per-room arrival flags (`wb-arrived:*`)
-         are ALL `sessionStorage` now. Two things are deliberately still
-         `localStorage` and the answer names both rather than rounding down:
-         `wb-hr-presets`, the slots a visitor saved themselves, and
-         `wb-read-<wing>`, which records of ours they have opened — the register
-         behind the Record's UNREAD button (src/lib/record-read.js). Read where
-         they sit; never transmitted. Verified by grep: `localStorage` appears
-         in `src/` at exactly those two call sites.
-     THE SCOPE OF THE CLAIM IS STILL DELIBERATELY "WHAT THIS SITE RECORDS", not
-     "what any machine between you and it can see". The second is not knowable
-     from this repository, and a privacy answer that overreaches by one clause
-     is the same defect as one that hides a clause. */
   {
+    /* [2026-08-15] "no cookies" IS DELIBERATELY NOT "no cookies, no nothing".
+       MIKE STRUCK THE ABSOLUTE ON 15 AUG: risk abatement begins with risk
+       elimination. DO NOT RESTORE IT. A claim that nothing at all is stored is
+       one the building cannot keep — see the storage measurement in the round
+       log, which was taken before this shipped and is the reason the absolute
+       is gone. */
     q: "Are you tracking me?",
-    a: "No — and the better half of the answer is that the machine remembers " +
-       "you and we don't. Cookies first, because they are what people mean: a " +
-       "cookie goes back to the server with every request your browser makes, " +
-       "which is the part that makes it a tracking device. This site sets " +
-       "none. Not one, not even ours. Settings are a different mechanism " +
-       "entirely — they sit in your own browser and are read where they sit, " +
-       "so both of these are true at once: nothing follows you back to us, and " +
-       "the panel you dragged wider is still wider when you come back to the " +
-       "room. Most of them last the visit and go when the tab closes. Two " +
-       "outlast it, and they are the two that would be useless otherwise: the " +
-       "presets you saved yourself, and which records of ours you have already " +
-       "opened. What reaches us is two things. The lobby and the exhibit " +
-       "rooms each write one line when they load — which page, the site you " +
-       "came from if there was one, and the time — and none of those three " +
-       "columns is you. Sign the guest book and we keep exactly what you " +
-       "typed, on the page you typed it into. The MGK keeps far more than we " +
-       "do, and it keeps it on your side of the glass: run it in the robot " +
-       "wing and it will remember your name, your birth date, how far into " +
-       "its install you got, its own condition and your best score — none of " +
-       "which it can send anywhere, because it has no way to reach us at all. " +
-       "It will also show you. Preferences ▸ User is the machine's register of " +
-       "everything it holds about you, page by page, and the last page wipes " +
-       "the lot on the spot. Three things do leave the building, and you " +
-       "should know which. The typefaces are served by Google, so your " +
-       "browser asks Google for them and Google sees it was asked. The rooms " +
-       "with video in them load YouTube's player when the room loads, before " +
-       "you press anything — the rooms with only our own recordings in them " +
-       "do not, and play from this site. Google and YouTube know you turned " +
-       "up, and they are the whole of the outside. There " +
-       "is no analytics, no advertising and no tracking pixel anywhere in " +
-       "this site, and if that ever stops being true, this answer changes " +
-       "first.",
+    a: "No — Weird.Baby uses no logins, no cookies.\n" +
+       "NOTE: We do not speak for the artists' sites, nor other\n" +
+       "social media sites.",
+  },
+  {
+    q: "So, how does the site always know it is me?",
+    a: "Your computer / phone saves your information for you.\n" +
+       "We never touch it.",
+  },
+  {
+    /* [2026-08-15] THE ADDRESS RETURNS, HERE AND NOWHERE ELSE. His ruling
+       supersedes the 2026-08-11 strike that removed it sitewide. "Papa@Weird.
+       Baby appears HERE and nowhere else. Not footers, not page endings.
+       Purpose-placed." A future round that reaches for a contact line in a
+       footer is reversing an instruction, not filling a gap. */
+    q: "How do I contact Weird.Baby?",
+    a: "Papa@Weird.Baby",
   },
   {
     q: "Who keeps this place?",
-    a: KEEPER,
+    a: "One person — The current Papa Weird.Baby.\n" +
+       "The job pays nothing.\n" +
+       "That's the deal, and it never changes.",
   },
   {
-    q: "How does something get in here?",
-    a: "Somebody in this house loves it, and then the work starts: finding " +
-       "it, checking it, photographing it, and writing down where it came " +
-       "from. Nothing is exhibited because it is popular and nothing is " +
-       "exhibited because it paid to be.",
+    q: "How does something get in The Museum?",
+    a: "It strikes the Papa Weird.Baby's fancy.\n" +
+       "Nothing is exhibited because it is popular or because it\n" +
+       "paid to be.",
   },
   {
-    /* [F2 2026-08-06] DECLARED IN house-copy.js — `/wal`'s own FAQ asks the
-       same question in the room it is actually asked in. */
     q: "Are you affiliated with the artists you show?",
-    a: AFFILIATION,
-  },
-  /* [B3 2026-08-05] "What are the rooms?" and "There is a gift shop. What is
-     it?" WERE HERE AND ARE DELETED. See the head of this list for the ruling.
-     They are named in the round log and in docs/OPEN_ACTIONS.md rather than
-     removed in silence, which is what the Law of Subtraction requires. */
-  {
-    /* [B4 2026-08-05] IT LED WITH OURS. MIKE: "it currently leads with what is
-       OURS, which reads possessive and awkward — lead with THEIRS IS THEIRS,
-       then fold ours in behind, simply and gladly."
-       The old first clause also had to defend itself in the same breath
-       ("ours is not all inclusive"), which is the shape an answer takes when
-       it opens on the wrong subject. Opening on the artists lets the museum's
-       half be one short sentence instead of a qualification. */
-    q: "Can I use what is here?",
-    /* [F2 2026-08-06] DECLARED IN house-copy.js — see the note two questions
-       up. Its "the address is at the bottom of this page" is true in both
-       rooms: F1 put the booth's own sign-off under every wing FAQ. */
-    a: USE_RIGHTS,
+    a: "No — Those exhibited on Weird.Baby are not partners, clients,\n" +
+       "or signings.\n" +
+       "They are people we feel are Worth a Listen.",
   },
   {
-    q: "Is it finished?",
-    a: "No, and it is not meant to be. A museum that stops accessioning is a " +
-       "storage unit. Rooms open, cards get written, and things arrive; if " +
-       "you come back, there will be more than there was.",
+    q: "Does Weird.Baby 'take a cut' of the Artists' proceeds?",
+    a: "No — never.\n" +
+       "Every door in the gift shop leads to the Artists' own sites\n" +
+       "and stores.",
   },
-  /* [D 2026-08-11] "How do I reach you?" IS DELETED. Its answer was
-     `CONTACT`, whose only payload was the address Mike has struck
-     sitewide; with the address gone there is no answer left to give,
-     and the booth publishes no contact route now. */
+  {
+    q: "Is The Museum finished?",
+    a: "No — a museum that stops accessioning is a storage unit.\n" +
+       "If you come back, there will be more than there was.",
+  },
 ];
 
 /* ═══ [M23a 2026-08-04] THE HOOK IS THE TITLE. BOTH OBJECTS ARE DELETED ═════

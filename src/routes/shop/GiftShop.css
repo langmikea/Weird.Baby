@@ -410,6 +410,67 @@
   justify-self:center;
   width:calc((100% - (var(--gs-cols) - 1) * var(--gs-gap)) / var(--gs-cols));
 }
+/* ═══ [2026-08-15] THE FRIEND TILE — A QUARTER OF A FULL ONE ═════════════════
+   MIKE: "New quarter-size tile type for friends."
+
+   THE COLUMN COUNT IS DERIVED FROM `--gs-cols`, NOT TYPED AGAIN. Twice the
+   columns is half the width, and half of a full tile's width with a
+   proportionally shorter box is the quarter. Restating "4" here would be a
+   second declaration of the shop's breakpoint: the day `--gs-cols` moves, a
+   hard-coded 4 would go on saying 4 and the two grids would disagree at the one
+   width nobody re-measures. `calc(var(--gs-cols) * 2)` cannot.
+
+   IT IS DELIBERATELY NOT A `.featured-artist`. A shop tile is a picture, a name
+   and a store; a friend tile is a name and a door, and inheriting the artist
+   tile's two-column image layout would leave an empty image well on every one
+   of them. Same border, same ground, same hover — a smaller object of the same
+   material, which is what "a quarter-size tile TYPE" asks for. */
+.gift-shop__friends-grid{
+  --gs-gap:22px;
+  --gs-cols:1;
+  display:grid;
+  gap:var(--gs-gap);
+  grid-template-columns:repeat(calc(var(--gs-cols) * 2),minmax(0,1fr));
+}
+@media (min-width:910px){ .gift-shop__friends-grid{--gs-cols:2} }
+
+.friend-tile{
+  display:flex;
+  flex-direction:column;
+  gap:.4rem;
+  justify-content:center;
+  /* QUARTER-SIZE IS HALF THE WIDTH BY HALF THE HEIGHT, AND BOTH HALVES ARE
+     MEASURED RATHER THAN GUESSED. A full tile is 445 x 298 at the operator's
+     width; doubling the columns already gives 212 wide (half, less its share of
+     the 22px gap), and 149 is half of 298. A first cut used 96px and drew a
+     tile at ~15% of a full one's area — half the width but under a third of the
+     height, which reads as a footnote rather than as a quarter tile. Caught by
+     measuring both boxes on the built page, not by looking at it. */
+  min-height:149px;
+  text-decoration:none;
+  color:inherit;
+  border:1px solid var(--wb-border);
+  background:var(--wb-ink-card);
+  padding:.9rem 1rem;
+  transition:border-color .2s, transform .2s;
+}
+.friend-tile:hover,
+.friend-tile:focus-visible{
+  border-color:var(--wb-gold);
+  transform:translateY(-2px);
+}
+.friend-tile__name{
+  font-size:.95rem;
+  line-height:1.25;
+}
+.friend-tile__note{
+  font-family:'Courier Prime','Courier New',monospace;
+  font-size:.58rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  opacity:.7;
+}
+
 .featured-artist--dead{cursor:default;opacity:.72}
 .featured-artist--dead:hover{transform:none;box-shadow:none}
 .featured-artist__note{font-family:'Courier Prime','Courier New',monospace;
