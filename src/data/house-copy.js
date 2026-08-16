@@ -82,31 +82,42 @@ export const KEEPER =
    R7's rule is what puts it in two places at once — *"a visitor must never have
    to run back to the lobby"* — and D1's rule is what stops that costing a
    divergence. */
-export const AFFILIATION =
-  "No. The artists in Other Music Worth a Listen are not partners, " +
-  "clients, or signings — they are people whose records we think you " +
-  "should hear. Every door on their page leads to their own site, their " +
-  "own store, their own channel, because the exhibit is a pointer and " +
-  "not a home.";
+/* ═══ [2026-08-17] IT IS THE BOOTH'S ANSWER NOW, AND `F-a` CLOSES WITH IT ═══
+   MIKE, walking the live site: **"'Are you affiliated with the artists you
+   show?' — replace the answer with the booth's, exactly. Two lines. Do not
+   break either one."**
 
-/* WHOSE THE MATERIAL IS, AND WHAT MAY BE DONE WITH IT. Same reasoning.
-   ═══ [E 2026-08-11] THE CLAUSE IS STRUCK, NOT REWRITTEN ════════════════════
-   It read "When in doubt, write; the address is at the bottom of this page."
-   The address was deleted sitewide one packet ago, so the sentence pointed at
-   a thing that is not there — a live line on the glass that was simply untrue.
-   STRUCK RATHER THAN REPAIRED, and that is the smaller change of the two.
-   Repairing it means inventing somewhere else to write to, and there is
-   nowhere: the ruling that removed the address removed every contact route in
-   the building and said "no replacement". A sentence inviting a letter with no
-   address to send it to is worse than no sentence.
-   WHAT SURVIVES IS THE PART THAT WAS ALWAYS THE POINT — whose the material is,
-   and that the house is glad to be asked about its own photographs. The
-   [PAPA] marker is untouched: the licence is still Papa's to set. */
-export const USE_RIGHTS =
-  "The artists' work is the artists' — their music, their pictures, " +
-  "their words — and every door on their pages goes to them rather than " +
-  "to us. What is ours is the photographs of our own objects, taken here " +
-  "and printed here, and we are glad to be asked for those.";
+   THIS IS THE RECONCILIATION `F-a` HAS BEEN WAITING FOR SINCE 15 AUGUST. His
+   booth rewrite that day gave this question new words and Ops was told to leave
+   /wal alone, so the house answered one question in two wordings — Doctrine
+   17's exact failure mode, reached legitimately. He has now ruled which one
+   wins, and the passage is hoisted rather than retyped so it cannot fork again:
+   **the booth reads this constant too.**
+   WHAT IT REPLACED, NAMED ONCE (Doctrine 24): "No. The artists in Other Music
+   Worth a Listen are not partners, clients, or signings — they are people
+   whose records we think you should hear. Every door on their page leads to
+   their own site, their own store, their own channel, because the exhibit is a
+   pointer and not a home."
+   THE NEWLINE IS LOAD-BEARING AND IS THE ONLY ONE. His instruction is "two
+   lines, do not break either one", and both surfaces now draw a typed newline
+   as a line: `.sheet-faq-a` has since 15 August, `.vp-faq-a p` since today. */
+export const AFFILIATION =
+  "No — Those exhibited on Weird.Baby are not partners, clients, or signings." +
+  "\n" +
+  "They are people we feel are Worth a Listen.";
+
+/* ═══ [2026-08-17] `USE_RIGHTS` IS DELETED — ITS QUESTION IS STRUCK ═══════
+   MIKE: **"KILL 'Can I use what is here?' entirely, question and answer."**
+   /wal was its only consumer, so the constant went with the question rather
+   than sitting here with none. NAMED ONCE, WHICH IS WHERE A DELETED THING IS
+   NAMED: "The artists' work is the artists' — their music, their pictures,
+   their words — and every door on their pages goes to them rather than to us.
+   What is ours is the photographs of our own objects, taken here and printed
+   here, and we are glad to be asked for those."
+   IT CARRIED AN OPEN `[PAPA]` ON THE LICENCE, and that question leaves the
+   building with it: nothing now states what may be done with the museum's own
+   photographs. That is a REDUCTION IN WHAT THE HOUSE SAYS, not a tidy-up, and
+   it is his call — flagged in the round log rather than absorbed. */
 
 /* ═══ [D 2026-08-11] THE SIGN-OFF IS DELETED. MIKE'S RULING, NO REPLACEMENT ══
    `SIGN_OFF` and `ADDRESS` stood here and closed every FAQ in the building — the booth's and each wing's —

@@ -46,6 +46,9 @@ import { useRoom } from "../lib/use-room.js";
 import { useArrival } from "../lib/use-arrival.js";
 import MuseumBar from "../components/MuseumBar.jsx";
 import { visitorProse, kept } from "../lib/visitor-prose.js";
+/* [2026-08-17] see the affiliation answer below — hoisted on his ruling that
+   /wal takes the booth's wording exactly. */
+import { AFFILIATION } from "../data/house-copy.js";
 /* [2026-08-11] `launched` IS NO LONGER IMPORTED. Its only caller here was the
    red notes block’s stage gate, which is deleted; the STAGE still governs
    this file through `placed()` on the data side and through `wb-ops-notes`
@@ -197,9 +200,15 @@ const FAQ = [
      NOTHING ELSE IN EITHER ANSWER CHANGED. Same words, same order, one fewer
      break each. */
   {
+    /* [2026-08-17] THE ANSWER IS HOISTED AND THIS ROOM NOW READS IT RATHER
+       THAN HOLDING IT. Mike ruled that /wal takes the booth's wording exactly,
+       which makes it a passage the house says in TWO rooms — Doctrine 17's own
+       trigger. `AFFILIATION` in `house-copy.js` IS these words now; editing it
+       edits both rooms, which is the point. `F-a` closes.
+       NOT ONE CHARACTER CHANGES ON THIS PAGE. The constant carries his line
+       break and `.sheet-faq-a` draws it exactly as the literal did. */
     q: "Are you affiliated with the artists you show?",
-    a: "No — Those exhibited on Weird.Baby are not partners, clients, or signings.\n" +
-       "They are people we feel are Worth a Listen.",
+    a: AFFILIATION,
   },
   {
     q: "Does Weird.Baby 'take a cut' of the Artists' proceeds?",

@@ -4054,30 +4054,6 @@
    "c": "VERIFIED",
    "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
   },
-  "4bbc18e5a78e16c6": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 278,
-   "t": "delightfully surprising",
-   "p": "ARTISTS[].decks[].cards[].text",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "b18b0c56efcd8d02": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 279,
-   "t": "March 2019",
-   "p": "ARTISTS[].decks[].cards[].when",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "d9f1d03130c61fa5": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 280,
-   "t": "on Buck Up",
-   "p": "ARTISTS[].decks[].cards[].eyebrow",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
   "f6087b03535675ab": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 282,
@@ -5007,65 +4983,6 @@
    "c": "VERIFIED",
    "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
   },
-  "c743264111cf4a33": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 499,
-   "t": "In his own store",
-   "p": "ARTISTS[].card.sideboxes[].title",
-   "c": "RESTATED",
-   "r": [
-    "d7c18c209d58f7b8",
-    "2eb647922e2b4cbc"
-   ]
-  },
-  "2eb647922e2b4cbc": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 500,
-   "t": "Crooked Home — vinyl, special vinyl, CD, bundle",
-   "p": "ARTISTS[].card.sideboxes[].lines[]",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "8c572e8580785987": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 501,
-   "t": "Arkansas — vinyl LP",
-   "p": "ARTISTS[].card.sideboxes[].lines[]",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "b35b56657092e7d4": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 502,
-   "t": "Chase The Dragon — 7-inch",
-   "p": "ARTISTS[].card.sideboxes[].lines[]",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "1f814bfb8a7678a1": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 503,
-   "t": "Back in 94' — tee",
-   "p": "ARTISTS[].card.sideboxes[].lines[]",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "91e30cb4c1a57450": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 504,
-   "t": "Hat",
-   "p": "ARTISTS[].card.sideboxes[].lines[]",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "f035f59bd0e56796": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 505,
-   "t": "Read off his own store, 2026.",
-   "p": "ARTISTS[].card.sideboxes[].note",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
   "7acffc8ce200a788": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 531,
@@ -5156,76 +5073,12 @@
    "p": "ARTISTS[].decks[].title",
    "c": "HOUSE"
   },
-  "34a63e79dc2036df": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 560,
-   "t": "Hunter's vocals channel a pre-needle Cobain with Morrison appreciation.",
-   "p": "ARTISTS[].decks[].cards[].text",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "684de5c6854ea0d8": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 562,
-   "t": "Harrison Giza",
-   "p": "ARTISTS[].decks[].cards[].who",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "53a180eed9bcdc49": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 562,
-   "t": "Blue Harvest Beat",
-   "p": "ARTISTS[].decks[].cards[].where",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "a0db48bb8d0fed73": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 563,
-   "t": "From the museum's own vault",
-   "p": "ARTISTS[].decks[].cards[].eyebrow",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
   "8fce0e3af50d5ddb": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 565,
    "t": "What Hunter said",
    "p": "ARTISTS[].decks[].title",
    "c": "HOUSE"
-  },
-  "6d877b86467a76a2": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 566,
-   "t": "almost the album title. It's the heart of it all.",
-   "p": "ARTISTS[].decks[].cards[].text",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "c469bb6b5c32a06f": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 567,
-   "t": "the museum's own vault",
-   "p": "ARTISTS[].decks[].cards[].where",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "31d587517500dfc2": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 567,
-   "t": "on “’94”",
-   "p": "ARTISTS[].decks[].cards[].when",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "16c5f73a0ae1b0dc": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 568,
-   "t": "On the song this room opens with",
-   "p": "ARTISTS[].decks[].cards[].eyebrow",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
   },
   "bb750dae80e06df7": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -5288,45 +5141,6 @@
    "l": 579,
    "t": "Off a Mark Twain line",
    "p": "ARTISTS[].decks[].cards[].eyebrow",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "e03ca53ac0aebf58": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 587,
-   "t": "On the road",
-   "p": "ARTISTS[].decks[].cards[].title",
-   "c": "RESTATED",
-   "r": [
-    "d4b948d21a10192d",
-    "dada16cec63c1904",
-    "ed97b5fb16e82928",
-    "437a049f5cee126e",
-    "7ac07af7c5e1a3dd",
-    "526491c8466fc092"
-   ]
-  },
-  "0a3dd90ec99f9696": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 588,
-   "t": "He was out through July 2026 and said so himself, on his own channel, the week it started.",
-   "p": "ARTISTS[].decks[].cards[].text",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "d6f8cbe0f17464ad": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 590,
-   "t": "hunterroot.com/tour",
-   "p": "ARTISTS[].decks[].cards[].who",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "7332f9cb4e0cfff4": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 590,
-   "t": "his own tour page",
-   "p": "ARTISTS[].decks[].cards[].where",
    "c": "VERIFIED",
    "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
   },
@@ -6229,22 +6043,6 @@
    "p": "ARTISTS[].decks[].title",
    "c": "HOUSE"
   },
-  "91582dce3dfcb5c8": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 820,
-   "t": "through the end of this year (2025) all profits from downloads on bandcamp will be donated to No Kid Hungry and Arkansas Food Bank",
-   "p": "ARTISTS[].decks[].cards[].text",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "836b0c37fc0d2760": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 824,
-   "t": "Where the money went",
-   "p": "ARTISTS[].decks[].cards[].eyebrow",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
   "dafb519b1dfe547d": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 827,
@@ -6275,14 +6073,6 @@
     "af7087d961ac981a",
     "e51d44dd2ac934bf"
    ]
-  },
-  "05211974d61b0fad": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 835,
-   "t": "For a whole year the profit from every Bandcamp download went to two food charities instead of to him. It is on his own store page, in his own lower case.",
-   "p": "ARTISTS[].decks[].cards[].text",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
   },
   "7b4d1a4a183c1bb1": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -7161,59 +6951,11 @@
     "13d55d4628291d5c"
    ]
   },
-  "1d3f0b35ad35eb3a": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1048,
-   "t": "pleasingly minimal",
-   "p": "ARTISTS[].decks[].cards[].text",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "1285a5cb3bf29b16": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1049,
-   "t": "on Rick Rubin's production",
-   "p": "ARTISTS[].decks[].cards[].where",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
   "e5076ed6683edb9a": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 1088,
    "t": "June 2017",
    "p": "ARTISTS[].decks[].cards[].where",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "e25ea96636dc9d6f": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1050,
-   "t": "on “Doin' Me”",
-   "p": "ARTISTS[].decks[].cards[].eyebrow",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "a32aead5255911ff": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1052,
-   "t": "relatively unknown",
-   "p": "ARTISTS[].decks[].cards[].text",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "7749a0ca79e00daf": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1053,
-   "t": "while signed to Universal",
-   "p": "ARTISTS[].decks[].cards[].where",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "d2cd03246a229b05": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1054,
-   "t": "on the years before the advert",
-   "p": "ARTISTS[].decks[].cards[].eyebrow",
    "c": "VERIFIED",
    "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
   },
@@ -7223,38 +6965,6 @@
    "t": "What Mikey said",
    "p": "ARTISTS[].decks[].title",
    "c": "HOUSE"
-  },
-  "3264200e5319afcd": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1060,
-   "t": "I knew I had to be a part of it.",
-   "p": "ARTISTS[].decks[].cards[].text",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "1e2e2945d16baeae": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1061,
-   "t": "a 2020 interview",
-   "p": "ARTISTS[].decks[].cards[].where",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "72e2b8f16adb1b65": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1061,
-   "t": "on watching his uncles play",
-   "p": "ARTISTS[].decks[].cards[].when",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "325b4014bd5bb2aa": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1062,
-   "t": "On starting",
-   "p": "ARTISTS[].decks[].cards[].eyebrow",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
   },
   "ccec9fb7a4a3534a": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -7284,45 +6994,6 @@
    "f": "src/data/artists/worth-a-listen.js",
    "l": 1067,
    "t": "On Rick Rubin",
-   "p": "ARTISTS[].decks[].cards[].eyebrow",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "422cc21cf1397504": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1071,
-   "t": "Little Lisa",
-   "p": "ARTISTS[].decks[].cards[].title",
-   "c": "RESTATED",
-   "r": [
-    "181b7b8f2fc8eba2",
-    "aaaae49769c9dc56",
-    "f3059bd0c69cb66e",
-    "742acb488a6f919b",
-    "54e0f90b05dc8dbf",
-    "13d55d4628291d5c"
-   ]
-  },
-  "8a41265815302a2d": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1072,
-   "t": "His elderly Vietnamese neighbour, whom he calls his adopted grandmother. She has a song named after her from 2020, and a feature credit on one from 2023.",
-   "p": "ARTISTS[].decks[].cards[].text",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "713aae43f13f0f2d": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1075,
-   "t": "Apple Music and Deezer",
-   "p": "ARTISTS[].decks[].cards[].who",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "20168166e3bfb4d6": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1076,
-   "t": "A neighbour, twice on the record",
    "p": "ARTISTS[].decks[].cards[].eyebrow",
    "c": "VERIFIED",
    "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
@@ -7673,24 +7344,6 @@
    "t": "{}-up-to",
    "p": "upToTrack{}.id",
    "c": "HOUSE"
-  },
-  "89a199cd79ac727d": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1349,
-   "t": "They play constantly. This is where it is real.",
-   "p": "upToTrack{}.face.trail[].scent",
-   "c": "RESTATED",
-   "r": [
-    "d9e23e948ce64f95"
-   ]
-  },
-  "d9e23e948ce64f95": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1352,
-   "t": "Their own channel feed, read 2 August 2026",
-   "p": "upToTrack{}.face.tombstone[].v",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
   },
   "36ca57fa628c1986": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -11613,13 +11266,6 @@
    "p": "InfoBooth{}.<div>.<div>.<h1>.<span>.<em>",
    "c": "HOUSE"
   },
-  "62de9c5083a4916f": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 261,
-   "t": "Back to the lobby",
-   "p": "InfoBooth{}.<div>.<div>.<p>.<Link>",
-   "c": "HOUSE"
-  },
   "568472da643a85d1": {
    "f": "src/routes/robots/RobotsExhibitFlow.jsx",
    "l": 193,
@@ -12519,18 +12165,6 @@
    "t": "WEIRD.BABY",
    "c": "HOUSE"
   },
-  "0d260582ccd3fdd6": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 65,
-   "t": "The house's own music. What this room holds of the artist is the recordings; what it holds of the person is his name.",
-   "c": "HOUSE"
-  },
-  "357c58e834cfb90f": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 90,
-   "t": "What the museum holds",
-   "c": "HOUSE"
-  },
   "f6e60cf26ade15e8": {
    "f": "src/data/artists/weird-baby.js",
    "l": 96,
@@ -12941,30 +12575,6 @@
    "p": "FAQ[].q",
    "c": "HOUSE"
   },
-  "d9939addb9a81d9c": {
-   "f": "src/data/artists/foundation.js",
-   "l": 560,
-   "t": "Why do this at all?",
-   "p": "FAQ[].q",
-   "c": "HOUSE"
-  },
-  "d7575c04830efab4": {
-   "f": "src/data/artists/foundation.js",
-   "l": 561,
-   "t": "To make the world demonstrably better, and it starts with music: the artists who deserve depth, and the people who love them. Everything else — the rooms, the cards, the rules on this page — exists to protect that one sentence. Methods will be rewritten a thousand times. What they are done for was written once.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
-  "9d163de75c6ca060": {
-   "f": "src/data/artists/foundation.js",
-   "l": 583,
-   "t": "Why give all the money away?",
-   "p": "FAQ[].q",
-   "c": "HOUSE"
-  },
   "02718c9521945a98": {
    "f": "src/data/artists/foundation.js",
    "l": 610,
@@ -13068,16 +12678,6 @@
    "t": "What happens when you stop?",
    "p": "FAQ[].q",
    "c": "HOUSE"
-  },
-  "d8fe1ff3df555d74": {
-   "f": "src/data/artists/foundation.js",
-   "l": 786,
-   "t": "One person takes it on — chosen, not elected; willing, not paid — on exactly these terms: own nothing, take nothing, keep the place, pass it on. There is no committee, no board and no team. And if humanity stops believing in what this is for, Weird.Baby does not pivot, rebrand or sell. It ends, and the name is retired. What survives is the idea; somebody else may begin again, under their own name.",
-   "p": "FAQ[].a",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
   },
   "e68fcf83264cedd5": {
    "f": "src/data/artists/foundation.js",
@@ -13323,14 +12923,6 @@
    "f": "src/data/artists/foundation.js",
    "t": "flat",
    "c": "HOUSE"
-  },
-  "c78dfa28b6fb08ab": {
-   "f": "src/data/artists/foundation.js",
-   "t": "Built from gifts. Gives everything away. Nothing is bought, nothing is kept, and money never stops here.",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
   },
   "d9d96db736a71c4a": {
    "f": "src/routes/hr/HrArchive.jsx",
@@ -13783,33 +13375,6 @@
    "l": 882,
    "t": "There is no way to do this through the museum yet. When there is, it will appear on the register in The Ledger, and not one day before.",
    "c": "HOUSE"
-  },
-  "77b0c5b0be05bded": {
-   "f": "src/data/artists/foundation.js",
-   "l": 924,
-   "t": "Executive summary",
-   "c": "MIKE",
-   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
-  },
-  "02f074a65ea084ca": {
-   "f": "src/data/artists/foundation.js",
-   "l": 940,
-   "t": "Happening now!",
-   "c": "MIKE",
-   "s": "Mike, THE COMBINED BRIEF F4 (2026-08-06) — the three albums and their tracks, named by him: THE FOUNDATION / Executive Summary · Happening Now! · FAQ; THE LEDGER / Money in, out · Where, why, etc. · FAQ; CONTRIBUTE / Just help a little · Financial help · Operational help"
-  },
-  "fe9bb66b050df66c": {
-   "f": "src/data/artists/foundation.js",
-   "l": 946,
-   "t": "log",
-   "c": "HOUSE"
-  },
-  "dfedac8d5f1f93f6": {
-   "f": "src/data/artists/foundation.js",
-   "l": 949,
-   "t": "Nothing has been published here yet. When it is, each update will say where we said we were going, where we got to, and where we are going next.",
-   "c": "MIKE",
-   "s": "Mike, THE COMBINED BRIEF F5 (2026-08-06) — \"regular updates saying where we said we were going, where we got to, and where we are going\""
   },
   "748132c4d75ddb7f": {
    "f": "src/data/artists/foundation.js",
@@ -14334,25 +13899,6 @@
    "t": "Are you affiliated with the artists you show?",
    "c": "HOUSE"
   },
-  "c637bd90392038b4": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1881,
-   "t": "Can I use what is here?",
-   "c": "HOUSE"
-  },
-  "96ac0296f5d1ef89": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1883,
-   "t": "Whose pictures are these?",
-   "c": "HOUSE"
-  },
-  "cbbbeb79d415c2fa": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1884,
-   "t": "The pictures are the artists' own public imagery, logged file by file with where it came from, and they come down the day any of them asks.",
-   "c": "RESTATED",
-   "r": "docs/WAL_PHOTO_PROVENANCE-20260802.md"
-  },
   "ef31a8bb3ca682ef": {
    "f": "src/data/faq-face.js",
    "l": 69,
@@ -14647,26 +14193,6 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_RECORD_LANDING_LOG-20260809.md §0 — his own worksheet, rescued from the browser on 2026-08-09 (docs/dictation-20260807/wb-rescue-2026-08-09.json) and landed verbatim; the round log quotes every box in full."
   },
-  "2f9697edce0d9288": {
-   "f": "src/data/artists/foundation.js",
-   "l": 557,
-   "t": "Not the kind with a building and an endowment. There is no fund here, no account, and nothing set aside — that is not modesty, it is the arrangement: money does not stop at Weird.Baby, so there is never a balance for it to stop in. What the word means here is the set of rules the whole place is built on, written down and kept.",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ],
-   "p": "FAQ[].a"
-  },
-  "e7a9b8bcf87706dc": {
-   "f": "src/data/artists/foundation.js",
-   "l": 590,
-   "t": "Take all you need, not grab all you can. Keeping it was never what any of this was for, and the museum already has what it needs — so what passes through Weird.Baby's hands goes to humanity: all of it, always, without pause and without pay. It is not a donation drive with a target. It is the direction everything moves.",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ],
-   "p": "FAQ[].a"
-  },
   "b099d985d0592248": {
    "f": "src/data/artists/foundation.js",
    "l": 616,
@@ -14715,19 +14241,6 @@
    "s": "the song's own `note:` — the video's oEmbed title and author channel, checked before the id was written",
    "p": "ARTISTS[].songs[].note"
   },
-  "5ef57785921a05eb": {
-   "f": "src/data/house-copy.js",
-   "l": 86,
-   "t": "No. The artists in Other Music Worth a Listen are not partners, clients, or signings — they are people whose records we think you should hear. Every door on their page leads to their own site, their own store, their own channel, because the exhibit is a pointer and not a home.",
-   "c": "HOUSE"
-  },
-  "57a2510f91b3a574": {
-   "f": "src/data/house-copy.js",
-   "l": 106,
-   "t": "The artists' work is the artists' — their music, their pictures, their words — and every door on their pages goes to them rather than to us. What is ours is the photographs of our own objects, taken here and printed here, and we are glad to be asked for those.",
-   "c": "MIKE",
-   "s": "Mike's passage with the stale address clause struck, ruled 2026-08-11 (E)"
-  },
   "a8419013f075094f": {
    "f": "src/data/artists/foundation.js",
    "l": 717,
@@ -14737,13 +14250,6 @@
     "docs/canonical/THE_CHARTER.md"
    ],
    "p": "FAQ[].a"
-  },
-  "0ce62d09487dcf8d": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1485,
-   "t": "SOURCES  {}",
-   "p": "aboutArtistTrack{}.face.lines[]",
-   "c": "HOUSE"
   },
   "da8fee1584ddb819": {
    "f": "src/routes/WbHome.jsx",
@@ -14949,13 +14455,6 @@
    "t": "Approved by Mike on {} — development only",
    "s": "Ops. The approval mark's tooltip. It is DEVELOPMENT ONLY and cannot reach a visitor: __WB_APPROVALS__ is the literal null at LAUNCH and the component folds away — proved against a real launch build by npm run approval:proof. Declared rather than excluded because the sweep cannot know a string is unreachable, and a hole cut in the gate for one file is a hole."
   },
-  "38759bbfb38262dc": {
-   "f": "src/data/artists/foundation.js",
-   "l": 826,
-   "t": "YOUR DONATIONS",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
-  },
   "48fc0089f37ec472": {
    "f": "src/data/artists/foundation.js",
    "l": 828,
@@ -14963,52 +14462,10 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
   },
-  "8da4d160ba8b1b88": {
-   "f": "src/data/artists/foundation.js",
-   "l": 831,
-   "t": "MERCH PROFITS / MUSIC ROYALTIES",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
-  },
   "680ed449b8277620": {
    "f": "src/data/artists/foundation.js",
    "l": 833,
    "t": "100% of Weird.Baby profits and royalties goes directly to Coalition for the Homeless.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
-  },
-  "c8ea7ea8c422b4c2": {
-   "f": "src/data/artists/foundation.js",
-   "l": 837,
-   "t": "WHO PAYS FOR ALL THE STUFF?!?!",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
-  },
-  "d014f63a7416737b": {
-   "f": "src/data/artists/foundation.js",
-   "l": 839,
-   "t": "Mike and Mo Lang pay all the bills (Internet, robot parts, pens and pencils, etc.)",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
-  },
-  "dbedd3842617f601": {
-   "f": "src/data/artists/foundation.js",
-   "l": 843,
-   "t": "FOR HOW LONG?",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
-  },
-  "f1a4a36fb9978a15": {
-   "f": "src/data/artists/foundation.js",
-   "l": 845,
-   "t": "We intend to keep it that way forever; time will tell.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
-  },
-  "366f1cbe83be08da": {
-   "f": "src/data/artists/foundation.js",
-   "l": 848,
-   "t": "CAN PEOPLE CONTRIBUTE IN WAYS OTHER THAN CASH?",
    "c": "MIKE",
    "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
   },
@@ -15039,13 +14496,6 @@
    "t": "first pass",
    "c": "MIKE",
    "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; section B names this string."
-  },
-  "4f39fa506d08dd8e": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 192,
-   "t": "Six recordings, made in June 2026, and one release: The Best of Weird.Baby Vol. 1. They play in this room.",
-   "c": "DERIVED",
-   "s": "counted off the /wb spine in the same file — one release, six tracks, each carrying a June 2026 recording. The release's name follows the album's retitle; see docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §2."
   },
   "16258a25c0fff31f": {
    "f": "src/data/artists/weird-baby.js",
@@ -15081,13 +14531,6 @@
    "t": "The first 100 people who sign the guest book",
    "c": "MIKE",
    "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full: \"LAUNCH copy swaps Sunday night: 'Welcome. The first 100 people who sign the guest book will be remembered differently than the ones who come later.'\""
-  },
-  "4a51afdabc3b22ba": {
-   "f": "src/data/artists/foundation.js",
-   "l": 847,
-   "t": "Give to Coalition for the Homeless",
-   "c": "HOUSE",
-   "s": "the door's own name, written by Ops in the house register's voice. The ADDRESS is Mike's: \"Foundation — outbound link to coalitionforthehomeless.org/donate\", docs/MUSEUM_FRIDAY_LOG-20260814.md §0 — his Friday-morning packet, quoted in full."
   },
   "6370f2b104291b97": {
    "f": "src/data/artists/weird-baby.js",
@@ -15157,38 +14600,10 @@
    "t": "opens in a new tab",
    "c": "HOUSE"
   },
-  "fdbfd9fa0d01d9d3": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 116,
-   "t": "A museum, of sorts.\nA place to freely share my favorite stuff with others.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
-  },
   "3312271c8c1443ed": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 121,
    "t": "Yes — no accounts or logins. Nothing behind a wall.\nThat's not an introductory offer. It's the arrangement.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
-  },
-  "d5150ddd25925134": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 132,
-   "t": "No — Weird.Baby uses no logins, no cookies.\nNOTE: We do not speak for the artists' sites, nor other\nsocial media sites.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
-  },
-  "12b682d0d40802a9": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 137,
-   "t": "So, how does the site always know it is me?",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
-  },
-  "4c9e07b7a8306740": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 138,
-   "t": "Your computer / phone saves your information for you.\nWe never touch it.",
    "c": "MIKE",
    "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
   },
@@ -15213,27 +14628,6 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
   },
-  "b274af4e021417d3": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 157,
-   "t": "How does something get in The Museum?",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
-  },
-  "cafb0f319924515a": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 158,
-   "t": "It strikes the Papa Weird.Baby's fancy.\nNothing is exhibited because it is popular or because it\npaid to be.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
-  },
-  "3d5d9d3937bd009e": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 164,
-   "t": "No — Those exhibited on Weird.Baby are not partners, clients,\nor signings.\nThey are people we feel are Worth a Listen.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
-  },
   "0e43604839fb3d41": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 169,
@@ -15241,24 +14635,10 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
   },
-  "d50819a752537e0d": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 170,
-   "t": "No — never.\nEvery door in the gift shop leads to the Artists' own sites\nand stores.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
-  },
   "1076bd919e94c1c5": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 175,
    "t": "Is The Museum finished?",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
-  },
-  "fd7bde979c7464e8": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 176,
-   "t": "No — a museum that stops accessioning is a storage unit.\nIf you come back, there will be more than there was.",
    "c": "MIKE",
    "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
   },
@@ -15323,13 +14703,6 @@
    "c": "MIKE",
    "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
   },
-  "4fea1d50ac5b08e7": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 229,
-   "t": "  > ALARM - Incoming Server Load >1000x nominal\n  > Operations remains unaffected.\n  > Multi-source swarm payloads precludes IP/Domain blocking\n  ? RX ended abruptly and coincedent with Weird.Baby launch",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
   "f61e57d6a103dfc4": {
    "f": "src/data/artists/robots-record.js",
    "l": 234,
@@ -15372,13 +14745,6 @@
    "c": "MIKE",
    "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
   },
-  "b864c8fa36f6e938": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 434,
-   "t": "ATTACHMENTS",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
   "d363fa8a5cf91958": {
    "f": "src/data/artists/robots-record.js",
    "l": 278,
@@ -15418,13 +14784,6 @@
    "f": "src/data/artists/robots-record.js",
    "l": 309,
    "t": "  ! The last entry is the only one we can open. It is being reviewed.",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
-  "e5b9f6141943ad2d": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 436,
-   "t": "  > n/a",
    "c": "MIKE",
    "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
   },
@@ -15512,13 +14871,6 @@
    "c": "MIKE",
    "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
   },
-  "17206e492e02ddda": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 400,
-   "t": "View of the portal screen\nManual ref to Portal\nOPAs, photos,  - Mike to select and prepare",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
   "58b7aa34b96a7317": {
    "f": "src/data/artists/robots-record.js",
    "l": 408,
@@ -15575,13 +14927,6 @@
    "c": "MIKE",
    "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx, ATTACHMENTS section of REC 1.4, landed on 2026-08-16 via workbook_to_draft.py -> record:land --write. His lines, carried verbatim as the titles of the entry's `docs` attachment rows rather than as a text section: only where they live changed. Round-tripped by --verify, 54 of 54 strings, 0 mismatches."
   },
-  "7b04ea098d27d1f2": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 390,
-   "t": "OPAs, photos,  - Mike to select and prepare",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx, ATTACHMENTS section of REC 1.4, landed on 2026-08-16 via workbook_to_draft.py -> record:land --write. His lines, carried verbatim as the titles of the entry's `docs` attachment rows rather than as a text section: only where they live changed. Round-tripped by --verify, 54 of 54 strings, 0 mismatches."
-  },
   "fdd17baaf3b2561d": {
    "f": "src/data/artists/foundation.js",
    "l": 587,
@@ -15593,13 +14938,6 @@
    "f": "src/data/artists/foundation.js",
    "l": 590,
    "t": "Read 'The Short Story'",
-   "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
-  },
-  "9660c19d4a9f6ae0": {
-   "f": "src/data/artists/foundation.js",
-   "l": 591,
-   "t": "Interested? Read 'The Long Story' and follow the blog.",
    "c": "MIKE",
    "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
   },
@@ -15673,45 +15011,10 @@
    "c": "MIKE",
    "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
   },
-  "a3e73cc0e9eab223": {
-   "f": "src/data/artists/foundation.js",
-   "l": 633,
-   "t": "We are not giving it away.",
-   "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
-  },
-  "108073457b05e4eb": {
-   "f": "src/data/artists/foundation.js",
-   "l": 634,
-   "t": "We have what we need; we choose not to keep grabbing more for ourselves.",
-   "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
-  },
   "bd349c82ecc790f9": {
    "f": "src/data/artists/foundation.js",
    "l": 639,
    "t": "Can I contribute something other than money?",
-   "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
-  },
-  "05ad540bf0590b28": {
-   "f": "src/data/artists/foundation.js",
-   "l": 643,
-   "t": "And Coalition for the Homeless could use your help right now.",
-   "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
-  },
-  "71c99e3d9569724f": {
-   "f": "src/data/artists/foundation.js",
-   "l": 653,
-   "t": "I'll pass it on. There is no committee, no board, and no team.",
-   "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
-  },
-  "c5e70d3886462faa": {
-   "f": "src/data/artists/foundation.js",
-   "l": 654,
-   "t": "And if humanity stops believing in what this is for, Weird.Baby does not pivot, rebrand or sell. It ends, and the name is retired. What survives is the idea; somebody else may begin again, under their own name.",
    "c": "MIKE",
    "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
   },
@@ -15757,38 +15060,10 @@
    "c": "HOUSE",
    "s": "OPS, not Mike, and NOT VISITOR-FACING BY CONSTRUCTION. A `[PAPA]` marker is the operator's note about what still needs his words; `visitorProse` drops the sentence carrying it at the render seam in EVERY stage, and `wb-ops-notes` (vite.config.js) empties the literal from the SOURCE at launch. Written on his 2026-08-16 instruction that the three story tracks are his to write. Measured on the page: the face draws title and subtitle and nothing else."
   },
-  "f9688ea29a679f4f": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 267,
-   "t": "Papa Weird.Baby (aka Mike Lang) is an Indie Melodic-Talker who relies on sloppy-guitar and mournful lyrics to decry the plight of the homeless. And some funny stuff, too. And Robots!\n\nBorn 7/3 63\nCB West Doylestown, PA\nSteven's Inst Tech - Hoboken NJ - '85 Mech Eng\nNJIT Newark, NJ - '00 Eng Managmeent",
-   "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 4, ABOUT THE ARTIST on /wb — his text, supplied whole and carried VERBATIM. This closes register row W-a. His instruction includes an explicit do-not-correct list: \"Steven's Inst Tech\" is Stevens Institute of Technology, \"P!NK when to my High School\" reads as \"went\", and \"Managmeent\" — \"FLAG TO MIKE, do not correct… His voice, his call.\" They are flagged in the round report and left as typed."
-  },
-  "2e295e4c32a49e6e": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 276,
-   "t": "ACHIEVEMENTS:",
-   "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 4, ABOUT THE ARTIST on /wb — his text, supplied whole and carried VERBATIM. This closes register row W-a. His instruction includes an explicit do-not-correct list: \"Steven's Inst Tech\" is Stevens Institute of Technology, \"P!NK when to my High School\" reads as \"went\", and \"Managmeent\" — \"FLAG TO MIKE, do not correct… His voice, his call.\" They are flagged in the round report and left as typed."
-  },
-  "a76c0ba31f29ac08": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 278,
-   "t": "P!NK when to my High School - Central Bucks High School West. Rumor has it she had my old locker. At least that's the rumor I'm spreading.\n\nSteven Tyler \"handed me\" his personal harmonica, onstage, Las Vegas NV Feb 2020. Then he tried to get me into the mic during the show. (Not pretty. I panicked.)\n\nRod Stewart kicks soccer balls out to the crowd, I caught one! Mine has Rod's name written on it; must be his personal ball. I hope that is OK.\n\nHunter Root and I hung out behind the bar he was playing that night. Burned some time together. (Two at once?!? Sorry, I panicked.)",
-   "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 4, ABOUT THE ARTIST on /wb — his text, supplied whole and carried VERBATIM. This closes register row W-a. His instruction includes an explicit do-not-correct list: \"Steven's Inst Tech\" is Stevens Institute of Technology, \"P!NK when to my High School\" reads as \"went\", and \"Managmeent\" — \"FLAG TO MIKE, do not correct… His voice, his call.\" They are flagged in the round report and left as typed."
-  },
   "6408aa7233a370a8": {
    "f": "src/data/artists/weird-baby.js",
    "l": 293,
    "t": "CURRENT PROJECTS",
-   "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 4, ABOUT THE ARTIST on /wb — his text, supplied whole and carried VERBATIM. This closes register row W-a. His instruction includes an explicit do-not-correct list: \"Steven's Inst Tech\" is Stevens Institute of Technology, \"P!NK when to my High School\" reads as \"went\", and \"Managmeent\" — \"FLAG TO MIKE, do not correct… His voice, his call.\" They are flagged in the round report and left as typed."
-  },
-  "d961d106a18e6466": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 295,
-   "t": "Learning to play acoustic guitar and sing in order to record the songs I just wrote so I can release the album I announced. And Robots.",
    "c": "MIKE",
    "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 4, ABOUT THE ARTIST on /wb — his text, supplied whole and carried VERBATIM. This closes register row W-a. His instruction includes an explicit do-not-correct list: \"Steven's Inst Tech\" is Stevens Institute of Technology, \"P!NK when to my High School\" reads as \"went\", and \"Managmeent\" — \"FLAG TO MIKE, do not correct… His voice, his call.\" They are flagged in the round report and left as typed."
   },
@@ -15834,27 +15109,6 @@
    "c": "MIKE",
    "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
   },
-  "43df6c209a7c7ae5": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 273,
-   "t": "Papa Weird.Baby (aka Mike Lang) is an Indie Melodic-Talker who relies on sloppy-guitar and mournful lyrics to decry the plight of the homeless. And some funny stuff, too. And Robots!\n\nBorn 7/3 63\nCB West Doylestown, PA\nStevens Institute of Technology - Hoboken NJ - '85 Mech Eng\nNJIT Newark, NJ - '00 Eng Management",
-   "c": "MIKE",
-   "s": "Mike's follow-up instruction of 2026-08-16 (item 4), quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §5. His ABOUT THE ARTIST copy of the same day, with the three items Ops flagged and did not correct now ruled by him: \"Steven's Inst Tech\" -> \"Stevens Institute of Technology\", \"P!NK when to my\" -> \"P!NK went to my\", \"Eng Managmeent\" -> \"Eng Management\". His instruction: \"Nothing else in that copy changes.\" Nothing else did."
-  },
-  "3b0694b30a3d0102": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 284,
-   "t": "P!NK went to my High School - Central Bucks High School West. Rumor has it she had my old locker. At least that's the rumor I'm spreading.\n\nSteven Tyler \"handed me\" his personal harmonica, onstage, Las Vegas NV Feb 2020. Then he tried to get me into the mic during the show. (Not pretty. I panicked.)\n\nRod Stewart kicks soccer balls out to the crowd, I caught one! Mine has Rod's name written on it; must be his personal ball. I hope that is OK.\n\nHunter Root and I hung out behind the bar he was playing that night. Burned some time together. (Two at once?!? Sorry, I panicked.)",
-   "c": "MIKE",
-   "s": "Mike's follow-up instruction of 2026-08-16 (item 4), quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §5. His ABOUT THE ARTIST copy of the same day, with the three items Ops flagged and did not correct now ruled by him: \"Steven's Inst Tech\" -> \"Stevens Institute of Technology\", \"P!NK when to my\" -> \"P!NK went to my\", \"Eng Managmeent\" -> \"Eng Management\". His instruction: \"Nothing else in that copy changes.\" Nothing else did."
-  },
-  "3f36ed91c109f223": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 201,
-   "t": "No — Those exhibited on Weird.Baby are not partners, clients, or signings.\nThey are people we feel are Worth a Listen.",
-   "c": "MIKE",
-   "s": "Mike's follow-up instruction of 2026-08-16 (item 1), quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §5: \"FIX TWO FAKE LINE BREAKS on /booth — Ops' error, not Mike's. Ops wrapped these lines inside a code block when writing the packet and you carried them verbatim, correctly. They are not Mike's line breaks.\" His words are unchanged; one authored break is removed from each answer, rejoining a sentence that a code block had wrapped on the way in. Swept both rooms on the mid-sentence test: the booth carried 11 authored breaks, exactly these two failed it, and /foundation carried none."
-  },
   "62c339abacaf2acd": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 206,
@@ -15862,54 +15116,194 @@
    "c": "MIKE",
    "s": "Mike's follow-up instruction of 2026-08-16 (item 1), quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §5: \"FIX TWO FAKE LINE BREAKS on /booth — Ops' error, not Mike's. Ops wrapped these lines inside a code block when writing the packet and you carried them verbatim, correctly. They are not Mike's line breaks.\" His words are unchanged; one authored break is removed from each answer, rejoining a sentence that a code block had wrapped on the way in. Swept both rooms on the mid-sentence test: the booth carried 11 authored breaks, exactly these two failed it, and /foundation carried none."
   },
-  "bd078d321b06a7d3": {
-   "f": "src/data/artists/foundation.js",
-   "l": 647,
-   "t": "Where's the donate button?",
-   "c": "MIKE",
-   "s": "Mike's launch-round instruction of 2026-08-16, quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §6: \"THE DONATE PASSAGE — RULED IN. New FAQ entry on /foundation. This is the ONLY place on the site that links to giving. Mike's words, lightly shaped by Ops; he will edit later.\" The four lines and the question are carried exactly as he supplied them, one sentence per element; \"donate here\" is the anchor text inside his own last line (inlineDoor, Exhibit.jsx) and points at https://www.coalitionforthehomeless.org/donate/, the address he gave. He has said he will edit this copy later."
-  },
-  "912994c4f0457119": {
-   "f": "src/data/artists/foundation.js",
-   "l": 650,
-   "t": "We are not asking you for money.",
-   "c": "MIKE",
-   "s": "Mike's launch-round instruction of 2026-08-16, quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §6: \"THE DONATE PASSAGE — RULED IN. New FAQ entry on /foundation. This is the ONLY place on the site that links to giving. Mike's words, lightly shaped by Ops; he will edit later.\" The four lines and the question are carried exactly as he supplied them, one sentence per element; \"donate here\" is the anchor text inside his own last line (inlineDoor, Exhibit.jsx) and points at https://www.coalitionforthehomeless.org/donate/, the address he gave. He has said he will edit this copy later."
-  },
-  "2938b87d68c4d6f0": {
-   "f": "src/data/artists/foundation.js",
-   "l": 651,
-   "t": "We make money by making something worth having, and all of it goes to Coalition for the Homeless.",
-   "c": "MIKE",
-   "s": "Mike's launch-round instruction of 2026-08-16, quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §6: \"THE DONATE PASSAGE — RULED IN. New FAQ entry on /foundation. This is the ONLY place on the site that links to giving. Mike's words, lightly shaped by Ops; he will edit later.\" The four lines and the question are carried exactly as he supplied them, one sentence per element; \"donate here\" is the anchor text inside his own last line (inlineDoor, Exhibit.jsx) and points at https://www.coalitionforthehomeless.org/donate/, the address he gave. He has said he will edit this copy later."
-  },
-  "5668d17056539725": {
-   "f": "src/data/artists/foundation.js",
-   "l": 653,
-   "t": "Merch is a good way to support an artist. Sometimes you want to give and you don't want the t-shirt.",
-   "c": "MIKE",
-   "s": "Mike's launch-round instruction of 2026-08-16, quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §6: \"THE DONATE PASSAGE — RULED IN. New FAQ entry on /foundation. This is the ONLY place on the site that links to giving. Mike's words, lightly shaped by Ops; he will edit later.\" The four lines and the question are carried exactly as he supplied them, one sentence per element; \"donate here\" is the anchor text inside his own last line (inlineDoor, Exhibit.jsx) and points at https://www.coalitionforthehomeless.org/donate/, the address he gave. He has said he will edit this copy later."
-  },
-  "07a2b96d8f7577ce": {
-   "f": "src/data/artists/foundation.js",
-   "l": 655,
-   "t": "For you: donate here.",
-   "c": "MIKE",
-   "s": "Mike's launch-round instruction of 2026-08-16, quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §6: \"THE DONATE PASSAGE — RULED IN. New FAQ entry on /foundation. This is the ONLY place on the site that links to giving. Mike's words, lightly shaped by Ops; he will edit later.\" The four lines and the question are carried exactly as he supplied them, one sentence per element; \"donate here\" is the anchor text inside his own last line (inlineDoor, Exhibit.jsx) and points at https://www.coalitionforthehomeless.org/donate/, the address he gave. He has said he will edit this copy later."
-  },
-  "8fcd65f98c01719a": {
-   "f": "src/data/artists/foundation.js",
-   "l": 657,
-   "t": "donate here",
-   "c": "MIKE",
-   "s": "Mike's launch-round instruction of 2026-08-16, quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §6: \"THE DONATE PASSAGE — RULED IN. New FAQ entry on /foundation. This is the ONLY place on the site that links to giving. Mike's words, lightly shaped by Ops; he will edit later.\" The four lines and the question are carried exactly as he supplied them, one sentence per element; \"donate here\" is the anchor text inside his own last line (inlineDoor, Exhibit.jsx) and points at https://www.coalitionforthehomeless.org/donate/, the address he gave. He has said he will edit this copy later."
-  },
   "b24eca4de20274d9": {
    "f": "src/data/artists/robots-record.js",
    "l": 261,
    "t": "  > ALARM - Incoming Server Load >1000x nominal\n  > Operations remains unaffected.\n  > Multi-source swarm payloads precludes IP/Domain blocking\n  ? RX ended abruptly and coincident with Weird.Baby launch",
    "c": "MIKE",
    "s": "Mike's own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (REC 1.1, DETAILED REPORT), landed via workbook_to_draft.py -> record:land --write. Round-tripped 53 of 53 strings, 0 mismatches. ONE MECHANICAL CORRECTION ON HIS RULING OF 2026-08-16: \"coincedent\" -> \"coincident\", fixed at source in the workbook cell (B16) and re-landed rather than hand-edited into the tree. His voice is untouched — he ruled the dangling semicolon in \"Handoff is on track (T-6);\" stays."
+  },
+  "9b39680a13b7dcf5": {
+   "f": "src/data/artists/foundation.js",
+   "l": 593,
+   "t": "If you want to know more, read 'The Long Story'.",
+   "c": "MIKE",
+   "s": "Mike's live-site walkthrough of 2026-08-17, area 1 (/foundation FAQ), quoted in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md. His replacement lines, carried exactly as supplied."
+  },
+  "121a9816bbb921b4": {
+   "f": "src/data/artists/foundation.js",
+   "l": 666,
+   "t": "We are not giving anything away. We are keeping what we have.",
+   "c": "MIKE",
+   "s": "Mike's live-site walkthrough of 2026-08-17, area 1 (/foundation FAQ), quoted in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md. His replacement lines, carried exactly as supplied."
+  },
+  "24a72571d0683aef": {
+   "f": "src/data/artists/foundation.js",
+   "l": 1051,
+   "t": "the-blog",
+   "c": "HOUSE",
+   "s": "NOT VISITOR COPY — an identifier. `the-blog` is the track id in `HELD_TRACKS` (src/data/artists/foundation.js), the unconditional hold Mike ruled on 2026-08-17 (\"HIDE all references to The Blog for now, including track 03\"). The sweep sees every string literal in the module; this one names a track rather than saying anything to a reader, and the track it names does not render in either stage."
+  },
+  "4e5bfee9d80860da": {
+   "f": "src/data/artists/foundation.js",
+   "l": 694,
+   "t": "I'll pass it on. There is no committee, no board, and no team.\n\nAnd if humanity stops believing in what this is for, Weird.Baby does not pivot, rebrand or sell. It ends, and the name is retired. What survives is the idea; somebody else may begin again, under their own name.",
+   "c": "MIKE",
+   "s": "Mike's words, supplied 2026-08-16 and unchanged. The only edit on 2026-08-17 is that his blank line between the two beats is restored as a real paragraph break after the uniform inter-line air was killed — a line break and a paragraph break are different objects (Ops ruling of 2026-08-17, his to override). Not one character of the text moved."
+  },
+  "6fbec371a5d78402": {
+   "f": "src/data/house-copy.js",
+   "l": 105,
+   "t": "No — Those exhibited on Weird.Baby are not partners, clients, or signings.\nThey are people we feel are Worth a Listen.",
+   "c": "MIKE",
+   "s": "Mike's booth FAQ rewrite of 2026-08-15, rejoined into two lines on 2026-08-16 after Ops found it had been wrapped by a code block on the way in. On 2026-08-17 he ruled /wal takes this answer exactly (\"Two lines. Do not break either one\"), so the passage is HOISTED into house-copy.js and read by both rooms rather than typed twice — Doctrine 17. It replaces the older AFFILIATION text, which is named once in this file's comment. Closes register row F-a."
+  },
+  "a19e7095fa874dd6": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 282,
+   "t": "Her Bandcamp",
+   "c": "HOUSE",
+   "s": "HOUSE label on a door control. Mike's walkthrough of 2026-08-17: \"'Sixteen releases sit on his own Bandcamp.' — add the link to his Bandcamp.\" The label names the destination for a screen reader and a tooltip; the visible mark is the block's own two-letter badge (BC), which is the house's own device rather than the platform's trademark. The URL is not new — it is the artist's own Bandcamp root, already carried on the records above it."
+  },
+  "d5da9cd8ff80fbb8": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 993,
+   "t": "His Bandcamp",
+   "c": "HOUSE",
+   "s": "HOUSE label on a door control. Mike's walkthrough of 2026-08-17: \"'Sixteen releases sit on his own Bandcamp.' — add the link to his Bandcamp.\" The label names the destination for a screen reader and a tooltip; the visible mark is the block's own two-letter badge (BC), which is the house's own device rather than the platform's trademark. The URL is not new — it is the artist's own Bandcamp root, already carried on the records above it."
+  },
+  "06aaca828e946455": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 122,
+   "t": "wb-faq",
+   "c": "HOUSE",
+   "s": "NOT VISITOR COPY — an identifier. `wb-faq` is the track id in `HELD_TRACKS` (src/data/artists/weird-baby.js), the unconditional hold Mike ruled on 2026-08-17 (\"HIDE the FAQ track. It is empty and Mike has no time for it\"). The track it names does not render in either stage."
+  },
+  "06f7bc0b6daba032": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 328,
+   "t": "Papa Weird.Baby (aka Mike Lang) is an Indie Melodic-Talker who relies on sloppy-guitar and mournful lyrics to decry the plight of the homeless. And some funny stuff, too. And Robots!",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
+  },
+  "e2aa8598c96bd106": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 332,
+   "t": "Born",
+   "c": "HOUSE",
+   "s": "HOUSE label on a fact grid, proposed by Ops on his instruction of 2026-08-17: \"Propose the label set from his facts; do not invent facts.\" The VALUE beside it is his line, unedited; the label is Ops' word for it. `Studied` appears twice because he listed two institutions and no degree level for either — inventing Undergrad/Postgrad would assert a fact about his education he did not state."
+  },
+  "ac7f338a03a3a5e4": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 332,
+   "t": "7/3 63",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
+  },
+  "fa0ea997d84831aa": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 333,
+   "t": "School",
+   "c": "HOUSE",
+   "s": "HOUSE label on a fact grid, proposed by Ops on his instruction of 2026-08-17: \"Propose the label set from his facts; do not invent facts.\" The VALUE beside it is his line, unedited; the label is Ops' word for it. `Studied` appears twice because he listed two institutions and no degree level for either — inventing Undergrad/Postgrad would assert a fact about his education he did not state."
+  },
+  "ebea009536a5a014": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 333,
+   "t": "CB West Doylestown, PA",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
+  },
+  "dd1c56d90cd2ac48": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 335,
+   "t": "Studied",
+   "c": "HOUSE",
+   "s": "HOUSE label on a fact grid, proposed by Ops on his instruction of 2026-08-17: \"Propose the label set from his facts; do not invent facts.\" The VALUE beside it is his line, unedited; the label is Ops' word for it. `Studied` appears twice because he listed two institutions and no degree level for either — inventing Undergrad/Postgrad would assert a fact about his education he did not state."
+  },
+  "0476baf5dc06311a": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 334,
+   "t": "Stevens Institute of Technology - Hoboken NJ - '85 Mech Eng",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
+  },
+  "980b091d2db152f6": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 335,
+   "t": "NJIT Newark, NJ - '00 Eng Management",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
+  },
+  "abf95336f68f0292": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 338,
+   "t": "P!NK",
+   "c": "HOUSE",
+   "s": "HOUSE label on a tile. Mike's instruction of 2026-08-17 named the four tiles: \"Four tiles: P!NK, Steven Tyler, Rod Stewart, Hunter Root.\" The labels are the names he named; the bodies are his own sentences."
+  },
+  "1cadbbfeaa99744f": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 340,
+   "t": "P!NK went to Papa Weird.Baby's High School - Central Bucks High School West. Rumor has it she had his old locker. At least that's the rumor he's spreading.",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
+  },
+  "6cfa4cf94c2bcba2": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 343,
+   "t": "Steven Tyler",
+   "c": "HOUSE",
+   "s": "HOUSE label on a tile. Mike's instruction of 2026-08-17 named the four tiles: \"Four tiles: P!NK, Steven Tyler, Rod Stewart, Hunter Root.\" The labels are the names he named; the bodies are his own sentences."
+  },
+  "67e543b2cc8d2e94": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 345,
+   "t": "Steven Tyler \"handed him\" his personal harmonica, onstage, Las Vegas NV Feb 2020. Then he tried to get him into the mic during the show. (Not pretty. He panicked.)",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
+  },
+  "b502f0c13f2ac9cf": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 348,
+   "t": "Rod Stewart",
+   "c": "HOUSE",
+   "s": "HOUSE label on a tile. Mike's instruction of 2026-08-17 named the four tiles: \"Four tiles: P!NK, Steven Tyler, Rod Stewart, Hunter Root.\" The labels are the names he named; the bodies are his own sentences."
+  },
+  "ce6bc7eb79d5457a": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 350,
+   "t": "Rod Stewart kicks soccer balls out to the crowd, he caught one! His has Rod's name written on it; must be his personal ball. He hopes that is OK.",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
+  },
+  "459ffb6cc8d1a4cc": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 353,
+   "t": "Hunter Root",
+   "c": "HOUSE",
+   "s": "HOUSE label on a tile. Mike's instruction of 2026-08-17 named the four tiles: \"Four tiles: P!NK, Steven Tyler, Rod Stewart, Hunter Root.\" The labels are the names he named; the bodies are his own sentences."
+  },
+  "39e220f2536644d8": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 360,
+   "t": "Learning to play acoustic guitar and sing in order to record the songs he just wrote so he can release the album he announced. And Robots.",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
+  },
+  "92e386cea2387a46": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1048,
+   "t": "Through the end of 2025 he sent all Bandcamp download profits to No Kid Hungry and the Arkansas Food Bank instead of to himself. He said so on his own store page, in his own lower case.",
+   "c": "VERIFIED",
+   "s": "jessewelles.bandcamp.com — his own store page, read 2026, where he wrote it himself in his own lower case. The card's door opens that page. OPS' WORDS, HIS FACT: Mike ruled on 2026-08-17 that the 24-word direct quote must not ship under any framing and preferred a paraphrase with no quote marks; his own suggested wording is used for the first sentence. The two charities — No Kid Hungry and the Arkansas Food Bank — are named here because the deleted quote had been the only place naming them."
+  },
+  "c7cc7250a0921852": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 359,
+   "t": "Hunter Root and Papa Weird.Baby hung out behind the bar he was playing that night. Burned some time together. (Two at once?!? He panicked.)",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, rewritten to third person on his ruling of 2026-08-17 (pronouns only). ONE FURTHER EDIT, an Ops ruling of 2026-08-17 that he may override: his \"Sorry, I panicked\" became \"He panicked.\" rather than \"Sorry, he panicked.\" — the \"Sorry\" was him addressing the reader and in third person it is an orphan with no speaker. It now matches the Steven Tyler tile exactly, which makes the repetition the joke it already was."
   }
  }
 }

@@ -71,7 +71,7 @@ import { worthAListenFacts } from "./worth-a-listen-facts.js";
 /* [F2 2026-08-06] the wing's FAQ — the house's own format and the house's own
    standing passages. See src/data/faq-face.js and src/data/house-copy.js. */
 import { faqFace } from "../faq-face.js";
-import { AFFILIATION, USE_RIGHTS } from "../house-copy.js";
+import { AFFILIATION } from "../house-copy.js";
 
 /* ---- the per-artist source of truth ----------------------------------------
    `songs`   : [{ title, slug, ytId, note, card }]
@@ -273,8 +273,14 @@ const ARTISTS = [
           links: [{ name: "Bandcamp", mark: "BC",
                     url: "https://carsieblanton.bandcamp.com/album/after-the-revolution" }] },
       ],
+      /* [2026-08-17] the same sentence with the same gap - see Hunter Root's
+         note below. His instruction named his card; this is the identical
+         construct on the identical field, and its URL is likewise already on
+         every record above it. Flagged to him rather than done silently. */
       note: "Sixteen releases sit on her own Bandcamp. Body of Work came out " +
             "one song a month across 2022 and 2023.",
+      noteLink: { name: "Her Bandcamp", mark: "BC",
+                  url: "https://carsieblanton.bandcamp.com/" },
     },
     /* [P17/P18/P19] THE THREE DECKS. Every URL below was opened and read this
        round; nothing is quoted that was not seen at its own source. */
@@ -284,10 +290,18 @@ const ARTISTS = [
           who: "Ken Tucker", where: "NPR, Fresh Air", when: "April 2021",
           eyebrow: "on Love & Rage",
           url: "https://www.npr.org/2021/04/26/990845574/carsie-blantons-open-hearted-protest-album-is-equal-parts-love-rage" },
-        { text: "delightfully surprising",
-          who: "Ken Tucker", where: "NPR, Fresh Air", when: "March 2019",
-          eyebrow: "on Buck Up",
-          url: "https://www.npr.org/2019/03/21/705424265/carsie-blanton-is-delightfully-surprising-on-buck-up" },
+        /* [2026-08-17] THE SECOND KEN TUCKER QUOTE IS CUT. ONE QUOTE PER
+           SOURCE IS THE LIMIT, and this card was quoting one writer at one
+           publication twice - "one of those hard-headed, open-hearted
+           protesters" (April 2021, kept) and "delightfully surprising"
+           (March 2019, this one). MIKE CHOSE WHICH TO KEEP ON WHAT IT SAYS
+           RATHER THAN ON ITS DATE: the survivor says something about her; two
+           words of praise say almost nothing and were the ones costing the
+           limit. Named once (Doctrine 24), with its source:
+           npr.org/2019/03/21/705424265 - "Carsie Blanton Is Delightfully
+           Surprising On Buck Up", on Buck Up.
+           THIS IS A COPYRIGHT LIMIT AND NOT TASTE. Ops reported it and did not
+           choose; he chose. */
         { text: "an open-hearted protest album",
           who: "Shore Fire Media", where: "the release note itself", when: "2021",
           eyebrow: "on Love & Rage",
@@ -610,15 +624,17 @@ const ARTISTS = [
          exist as OBJECTS. The "lately, in his own words" list graduated into
          the decks below, where each line is a card with the upload behind
          it. */
-      sideboxes: [
-        { title: "In his own store",
-          lines: ["Crooked Home — vinyl, special vinyl, CD, bundle",
-                  "Arkansas — vinyl LP",
-                  "Chase The Dragon — 7-inch",
-                  "Back in 94' — tee",
-                  "Hat"],
-          note: "Read off his own store, 2026." },
-      ],
+      /* [2026-08-17] THE SECOND STORE LIST IS DELETED - MIKE: "The store list
+         appears twice. Choose one and delete the other. Choose a lane and drive
+         it." THE LANE IS `records` ABOVE, which is the one a visitor came for:
+         it has the years, the reason each record matters, and a door per
+         record. This box repeated three of the same four titles as a flat list
+         and carried the sourcing tail he struck by name ("Read off his own
+         store, 2026.").
+         TWO THINGS GO WITH IT AND ARE NAMED RATHER THAN LOST: "Back in 94' —
+         tee" and "Hat". They are merch and not records, so the surviving lane
+         has nowhere for them; if he wants them, they are a shop concern rather
+         than a discography one. Flagged in the round report. */
     },
     /* ===== [R6 2026-08-03] THE RECORD BOARD, WITH NOTHING ON IT ============
        AND THE HOUSE ARTIST IS THE ONE WHO MUST GET THIS RIGHT. He is ours; he
@@ -698,23 +714,40 @@ const ARTISTS = [
          card's "holds itself". With the card's claim struck there is nothing
          left for it to correct, and what remains is the fact a visitor came for:
          where the rest of the records are. Carsie's note opens the same way. */
+      /* [2026-08-17] THE NOTE GETS THE DOOR IT PROMISES - MIKE named Hunter
+         Root's. The URL is not new and was not looked up: it is the same
+         `hunterrootmusic.bandcamp.com` already on three of the four records
+         above, taken to its catalogue root. See `noteLink` in Exhibit.jsx. */
       note: "Sixteen releases sit on his own Bandcamp.",
+      noteLink: { name: "His Bandcamp", mark: "BC",
+                  url: "https://hunterrootmusic.bandcamp.com/" },
     },
     decks: [
-      { title: "Said about him", kind: "quote", cards: [
-        /* from the museum's OWN vault (MV-HR-20260707-016). No URL: the
-           source is a 2014 print-era piece we hold rather than a live page,
-           and inventing a link to stand in for it would be worse than
-           saying where it actually came from. */
-        { text: "Hunter's vocals channel a pre-needle Cobain with Morrison " +
-                "appreciation.",
-          who: "Harrison Giza", where: "Blue Harvest Beat", when: "2014",
-          eyebrow: "From the museum's own vault" },
-      ] },
+      /* [2026-08-17] THE "Said about him" DECK IS DELETED WHOLE. Its one card
+         read: "From the museum's own vault / 'Hunter's vocals channel a
+         pre-needle Cobain with Morrison appreciation.' / Harrison Giza / Blue
+         Harvest Beat · 2014". Named once (Doctrine 24); the deck goes with the
+         card rather than drawing a heading over nothing.
+         MIKE'S RULE, AND IT IS THE ONE WORTH CARRYING FORWARD: **a quote a
+         visitor cannot go and check is decoration.** "From the museum's own
+         vault" is the house citing itself, which is not a citation. A named
+         publication with a live link is a reader following a trail; a tail with
+         nothing behind it is furniture wearing a trail's clothes.
+         THE OLD COMMENT HERE ARGUED THE OPPOSITE AND IS WORTH RECORDING: it
+         said inventing a link to stand in for a print-era piece "would be worse
+         than saying where it actually came from". That is still true — the
+         answer is not to fake a link, it is that an uncheckable quote does not
+         go on the wall at all. The source is real and is in the vault
+         (MV-HR-20260707-016) for the day it can be pointed at. */
+      /* [2026-08-17] THE "’94" PULL-QUOTE IS STRUCK - MIKE, walking the live
+         site. It read, on the glass: "On the song this room opens with /
+         'almost the album title. It's the heart of it all.' / Hunter Root / the
+         museum's own vault · on “’94”". Named once here (Doctrine 24).
+         WHAT IS LEFT IN THIS DECK IS NOT THE SAME OBJECT and that is why it
+         stays: the two remaining cards each carry a `watch:` and a real URL, so
+         they are DOORS to his own recordings with a caption, not decoration
+         with a sourcing tail. He named the text-only one. */
       { title: "What Hunter said", kind: "quote", cards: [
-        { text: "almost the album title. It's the heart of it all.",
-          who: "Hunter Root", where: "the museum's own vault", when: "on “’94”",
-          eyebrow: "On the song this room opens with" },
         { watch: "yez2aoLYVnw",
           text: "“I Tried”, recorded live in the studio — guitar and vocals, " +
                 "nothing else, three weeks before the release.",
@@ -732,14 +765,16 @@ const ARTISTS = [
          a card on a musician's wall whose whole subject was this website's
          renderers, sourced to "The museum's own record". The deck runs with the
          one card that is about him. */
-      { title: "Also", kind: "note", cards: [
-        { title: "On the road",
-          text: "He was out through July 2026 and said so himself, on his " +
-                "own channel, the week it started.",
-          who: "hunterroot.com/tour", where: "his own tour page",
-          eyebrow: "2026",
-          url: "https://www.hunterroot.com/hunterroottour" },
-      ] },
+      /* [2026-08-17] THE "Also" DECK IS DELETED - MIKE: "This makes no sense.
+         It is just words." He is right, and the reason is worth keeping: the
+         card's four fields CONCATENATE on the glass into one run - eyebrow,
+         text, who, where - so it drew as "2026He was out through July 2026 and
+         said so himself, on his own channel, the week it started.
+         hunterroot.com/tour his own tour page". **The data was well-formed and
+         the rendering was nonsense**, which is why no gate saw it and a person
+         reading the page did. Named once (Doctrine 24); the deck had one card.
+         HIS TOUR PAGE IS NOT LOST: it is a door on "What are they up to?", the
+         same address, where a door belongs. */
     ],
     /* [R4 2026-08-06] "he is our artist and this is our record of him" is
        struck. A sources line is provenance and ships (Doctrine 11); a
@@ -963,6 +998,8 @@ const ARTISTS = [
           links: [{ name: "Bandcamp", mark: "BC",
                     url: "https://jessewelles.bandcamp.com/album/devils-den" }] },
       ],
+      noteLink: { name: "His Bandcamp", mark: "BC",
+                  url: "https://jessewelles.bandcamp.com/" },
       note: "Seven sit on his own Bandcamp. Eight more exist as Jeh Sea Wells, " +
             "between 2012 and 2018, and the Under the Powerlines records are " +
             "dated by the months they cover.",
@@ -978,13 +1015,23 @@ const ARTISTS = [
           eyebrow: "on Middle",
           url: "https://glidemagazine.com/310137/rising-folk-artist-jesse-welles-mostly-shuns-topical-songs-for-the-abstract-on-middle-album-review/" },
       ] },
+      /* [2026-08-17] THE 24-WORD QUOTE IS DELETED RATHER THAN TRIMMED, AND
+         THE REASON IS THAT ITS PARAPHRASE WAS ALREADY ON THE PAGE. Mike ruled
+         it must not ship over fifteen words under any framing and preferred a
+         paraphrase with no quote marks. **The "Also" deck below already
+         carried exactly that** - "He gave the downloads away", the same fact in
+         Ops' words with the same door - so cutting the quote and keeping the
+         paraphrase is one card rather than two saying one thing.
+         WHAT THE PARAPHRASE GAINED, because the quote was the only place they
+         were named: **No Kid Hungry and the Arkansas Food Bank.** The old card
+         said "two food charities". Mike's own suggested wording is used.
+         HIS WORDS ARE NOT LOST TO A READER - the door on that card opens his
+         store page, where he wrote them, in his own lower case. His own words
+         on his own store are his to publish and not ours to reprint at length.
+         Named once (Doctrine 24): "through the end of this year (2025) all
+         profits from downloads on bandcamp will be donated to No Kid Hungry and
+         Arkansas Food Bank". */
       { title: "What Jesse said", kind: "quote", cards: [
-        { text: "through the end of this year (2025) all profits from " +
-                "downloads on bandcamp will be donated to No Kid Hungry and " +
-                "Arkansas Food Bank",
-          who: "Jesse Welles", where: "his own Bandcamp", when: "read 2026",
-          eyebrow: "Where the money went",
-          url: "https://jessewelles.bandcamp.com" },
         { watch: "s9FBnLxcqqw",
           text: "There's A Hole — written about that week, posted that week, " +
                 "two hundred thousand views in nine days.",
@@ -993,10 +1040,15 @@ const ARTISTS = [
           url: "https://www.youtube.com/watch?v=s9FBnLxcqqw" },
       ] },
       { title: "Also", kind: "note", cards: [
+        /* [2026-08-17] the two charities are NAMED here now - the quote that
+           named them is deleted above, and a fact that loses its specifics in
+           the move is a worse fact. Mike's own wording for the first
+           sentence. */
         { title: "He gave the downloads away",
-          text: "For a whole year the profit from every Bandcamp download " +
-                "went to two food charities instead of to him. It is on his " +
-                "own store page, in his own lower case.",
+          text: "Through the end of 2025 he sent all Bandcamp download " +
+                "profits to No Kid Hungry and the Arkansas Food Bank instead " +
+                "of to himself. He said so on his own store page, in his own " +
+                "lower case.",
           who: "jessewelles.bandcamp.com", where: "read 2026",
           eyebrow: "2025",
           url: "https://jessewelles.bandcamp.com" },
@@ -1247,22 +1299,22 @@ const ARTISTS = [
             "his, and it is the door at the foot of this card.",
     },
     decks: [
-      { title: "Said about him", kind: "quote", cards: [
-        { text: "pleasingly minimal",
-          who: "Faded Glamour", where: "on Rick Rubin's production", when: "June 2017",
-          eyebrow: "on “Doin' Me”",
-          url: "https://www.fadedglamour.co.uk/2017/06/listen-mikey-mike-doin-me-canon-advert-song.html" },
-        { text: "relatively unknown",
-          who: "Faded Glamour", where: "while signed to Universal", when: "June 2017",
-          eyebrow: "on the years before the advert",
-          url: "https://www.fadedglamour.co.uk/2017/06/listen-mikey-mike-doin-me-canon-advert-song.html" },
-      ] },
+      /* [2026-08-17] THE WHOLE "Said about him" DECK IS DELETED - MIKE named
+         the block entire. It drew as: "on “Doin' Me” / 'pleasingly minimal' /
+         Faded Glamour / on Rick Rubin's production · June 2017" and "on the
+         years before the advert / 'relatively unknown' / Faded Glamour / while
+         signed to Universal · June 2017". Named once (Doctrine 24).
+         TWO-WORD QUOTES ARE THE PUREST CASE OF WHAT HE IS STRIKING: the tail is
+         four times the length of the quote, so the card is mostly apparatus.
+         THE FACTS ARE NOT LOST. The Rick Rubin production and the Universal
+         years are in his `aboutNote` and in the prose of his own card. */
+      /* [2026-08-17] THE FIRST CARD IS DELETED — same rule. It read: "On
+         starting / 'I knew I had to be a part of it.' / Mikey Mike / a 2020
+         interview · on watching his uncles play", with no link, because the
+         source is a print interview. The video card below it survives: it has a
+         `watch` and a real URL, so it is a door to him saying it in his own
+         voice. */
       { title: "What Mikey said", kind: "quote", cards: [
-        /* no live page: the source is a 2020 Titusville interview held in
-           print. Attributed, unlinked, and honest about which. */
-        { text: "I knew I had to be a part of it.",
-          who: "Mikey Mike", where: "a 2020 interview", when: "on watching his uncles play",
-          eyebrow: "On starting" },
         { watch: "WsXUv-ri9fk",
           text: "Something Rick Rubin told him that he says he will never " +
                 "forget — told in his own voice, on his own channel.",
@@ -1271,12 +1323,14 @@ const ARTISTS = [
           url: "https://www.youtube.com/watch?v=WsXUv-ri9fk" },
       ] },
       { title: "Also", kind: "note", cards: [
-        { title: "Little Lisa",
-          text: "His elderly Vietnamese neighbour, whom he calls his adopted " +
-                "grandmother. She has a song named after her from 2020, and a " +
-                "feature credit on one from 2023.",
-          who: "Apple Music and Deezer", where: "read 2026",
-          eyebrow: "A neighbour, twice on the record" },
+        /* [2026-08-17] "Little Lisa" IS DELETED — its tail read "Apple Music
+           and Deezer / read 2026" with nothing behind it, which is the "read on
+           <date>" construct Mike named. Its text is preserved here because it
+           is a fact about a real person and somebody may want it back: "His
+           elderly Vietnamese neighbour, whom he calls his adopted grandmother.
+           She has a song named after her from 2020, and a feature credit on one
+           from 2023." The two remaining cards in this deck each carry a live
+           link. */
         { title: "Life on Earth",
           text: "He has said the whole catalogue is ONE album, released in " +
                 "volumes across his life and finished only when he is. Two " +
@@ -1492,12 +1546,24 @@ function aboutArtistTrack(a) {
          `SOURCES` IS PADDED TO NINE CHARACTERS like `NOTE`, because the indent
          is 9ch and the column is the device. An artist with neither renders
          neither — `lines` is undefined and the block is not drawn empty. */
-      lines: (a.siteNote || a.aboutNote)
-        ? [
-            ...(a.siteNote ? ["NOTE     " + a.siteNote] : []),
-            ...(a.aboutNote ? ["SOURCES  " + a.aboutNote] : []),
-          ]
-        : undefined,
+      /* [2026-08-17] THE `SOURCES` ROW IS STRUCK FROM EVERY ARTIST - MIKE
+         named the construct and named Hunter Root's instance. It printed the
+         whole of `aboutNote` as one long Courier line at the foot of each
+         artist's card.
+         **THIS IS A REDUCTION AND NOT A CLEANUP, AND IT REVERSES A 2026-08-11
+         RULING** whose own note says /wal "is the one page whose credibility
+         rests on it". That reasoning was not wrong; he has weighed it against
+         what the line actually reads like on the glass and ruled the other way.
+         Recorded as a reduction in `docs/OPEN_ACTIONS.md`, the same as the
+         `USE_RIGHTS` strike, so a later round knows the house went quieter on
+         purpose rather than by accident.
+         `aboutNote` IS KEPT IN THE DATA. It is the provenance record for every
+         fact on these cards and it is what a future round would have to rebuild
+         from scratch; what is struck is the PRINTING of it. `NOTE` stays -
+         Mikey Mike's is a live warning that a domain bearing his name serves
+         injected spam, which is a fact a visitor needs rather than a citation
+         about how we know things. */
+      lines: a.siteNote ? ["NOTE     " + a.siteNote] : undefined,
       footer: "WORTH A LISTEN · " + a.name,
     },
   };
@@ -1539,9 +1605,16 @@ function upToTrack(a) {
         label: f.t,
         date: f.d,
       })),
+      /* [2026-08-17] THE SCENT IS STRUCK - MIKE: "HR does NOT tour
+         constantly!" It read "They play constantly. This is where it is real."
+         and it was printed under EVERY artist's tour door, which is how one
+         sentence became false about somebody: it was written as a flourish
+         about touring bands in general and then attached to each of them in
+         particular. Named once (Doctrine 24). THE DOOR STAYS - it is the
+         artist's own tour page, and this wing's posture is that every door
+         leads out. */
       trail: a.tickets
-        ? [{ label: a.tickets.label, url: a.tickets.url,
-             scent: "They play constantly. This is where it is real." }]
+        ? [{ label: a.tickets.label, url: a.tickets.url }]
         : undefined,
       /* [C2 2026-08-06] REDUCED TO THE WALL. Mike: "REDUCE THE PAGE TO THE
          TILES."
@@ -1559,9 +1632,16 @@ function upToTrack(a) {
          answered in the round log: every tile in every wall on every artist page
          in this wing is a YouTube thumbnail opening a YouTube watch page. There
          are no others. */
-      tombstone: [
-        { k: "Source", v: "Their own channel feed, read 2 August 2026" },
-      ],
+      /* [2026-08-17] THE `Source` ROW IS STRUCK - Mike named it: "Source -
+         Their own channel feed, read 2 August 2026". It is the same "read on
+         <date>" tail as the others, on every artist's upload wall.
+         THE C2 NOTE ABOVE ARGUED IT WAS PROVENANCE AND THEREFORE PASSED
+         DOCTRINE 11, AND THAT ARGUMENT STILL HOLDS - it is not being struck
+         for being wrong. It is being struck because he has read four of these
+         tails across four artists in one walk and ruled the accumulation
+         noise. **What is lost is real and is named:** an undated wall of
+         thumbnails no longer says it is a snapshot, so a visitor cannot tell
+         it is not live. Recorded as a reduction. */
       footer: "WORTH A LISTEN · " + a.name,
     },
   };
@@ -2012,14 +2092,22 @@ const HOUSE_ALBUM = {
       tags: ["wal", "house", "faq", "questions", "artists", "rights"],
       videos: [],
       face: faqFace("WORTH A LISTEN", [
+        /* ═══ [2026-08-17] TWO OF THE THREE ARE STRUCK — HIS WALKTHROUGH ════
+           MIKE: **"KILL 'Can I use what is here?' entirely, question and
+           answer. KILL 'Whose pictures are these?' entirely."**
+           NAMED ONCE, HERE. The second read: "The pictures are the artists' own
+           public imagery, logged file by file with where it came from, and they
+           come down the day any of them asks." **That sentence was the one
+           surviving piece of the struck rights face** — an UNDERTAKING to four
+           real people rather than a description of the room, carried into a
+           question in 2026-08-11 and flagged then as a judgement one line could
+           reverse. He has reversed it. The undertaking is not withdrawn as a
+           practice; what goes is the house stating it unprompted.
+           `USE_RIGHTS` went with its question (house-copy.js); `AFFILIATION`
+           survives and is now the booth's own wording — his ruling, and it
+           closes `F-a`. */
         { title: "Are you affiliated with the artists you show?",
           line: AFFILIATION },
-        { title: "Can I use what is here?",
-          line: USE_RIGHTS },
-        { title: "Whose pictures are these?",
-          line: "The pictures are the artists' own public imagery, logged " +
-                "file by file with where it came from, and they come down the " +
-                "day any of them asks." },
         /* [D 2026-08-11] "How do I get in touch?" IS DELETED — its answer was
            `CONTACT`, and the address it carried is struck sitewide. */
       ]),

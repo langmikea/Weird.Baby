@@ -866,11 +866,30 @@ R("shop.mikes", "Mike's own gift shop.", "commerce", "—", "NOT_BUILT", null, "
    report.** The 2026-08-14 door it replaces never had a row, which is how it
    could be struck and re-cut twice in one day with the table saying nothing.
    REVEALED with a reach, because it is on the glass and a visitor can use it. */
+/* [2026-08-17] AND IT IS HELD AGAIN, ONE DAY LATER, ON HIS RULING. He struck the
+   answer that carried it — "Needs more work than I can afford today" — with the
+   consequence stated to him in the same instruction, so this is a CHOICE and not
+   the accident S-i reported. The row stays rather than being deleted, which is
+   the point of having declared it: **the museum currently publishes no route to
+   giving, and the table says so out loud.** LIVE + no reach + HELD is the shape
+   THE GATE CORRECTED THE FIRST ATTEMPT AND WAS RIGHT. It was written LIVE +
+   HELD, carried by `src/data/artists/foundation.js`, and `reachability.mjs`
+   refused it: a built-and-held row in a PUBLIC module ships its strings anyway,
+   because a boolean stops the render and not the bundle. **That rule does not
+   describe this case and the fix is to stop claiming LIVE.** The answer is
+   DELETED from the module, not gated — nothing of it is in any chunk — so what
+   is not built is the DOOR. What survives is a renderer with no caller, and a
+   renderer is a container rather than a door. NOT_BUILT is the honest word and
+   is exactly what the rule exempts: "a NOT_BUILT thing is unreachable because
+   there is nothing to reach." */
 R("door.coalition", "The donate door — the only outbound link to giving in the museum.",
-  "commerce", "src/data/artists/foundation.js FAQ \"Where's the donate button?\"",
-  "LIVE", "inside the Foundation's FAQ answer", "REVEALED",
-  { note: "Inline in Mike's own sentence (`inlineDoor`, Exhibit.jsx), not a link "
-        + "affordance — he ruled against building one. Resolves S-i." });
+  "commerce", "—", "NOT_BUILT", null, "HELD",
+  { deps: ["the donate answer, which Mike struck on 2026-08-17 pending more work"],
+    shown: true,
+    note: "Inline in Mike's own sentence (`inlineDoor`, Exhibit.jsx), not a link "
+        + "affordance — he ruled against building one. `inlineDoor`, "
+        + "`.vp-faq-inline-link` and the `inline` field are kept and have zero "
+        + "callers while this is held." });
 R("shop.friends", "The friend tile — Coalition for the Homeless in the gift shop.",
   "commerce", "src/data/wb_roster.js wbFriends", "NOT_BUILT", null, "HELD",
   { deps: ["a preview image for the tile — Mike, S-g"], shown: true,

@@ -584,11 +584,13 @@ const POSTURE =
    ═══════════════════════════════════════════════════════════════════════════ */
 const FAQ = [
   {
+    /* [2026-08-17] the second line is his replacement, and the blog reference
+       goes with it — see THE BLOG IS HELD at the spine below. */
     q: "What is this all about?",
     on: "foundation",
     lines: [
       "Read 'The Short Story'",
-      "Interested? Read 'The Long Story' and follow the blog.",
+      "If you want to know more, read 'The Long Story'.",
     ],
   },
   {
@@ -606,57 +608,31 @@ const FAQ = [
     on: "foundation",
     a: "100% of every donation goes directly to Coalition for the Homeless.",
   },
-  {
-    /* ═══════════════════════════════════════════════════════════════════════
-       [2026-08-16c] THE DONATE PASSAGE — RULED IN, AND IT REOPENS THE ONE DOOR
-       ═══════════════════════════════════════════════════════════════════════
-       MIKE: **"THE DONATE PASSAGE — RULED IN. This is the ONLY place on the
-       site that links to giving. Mike's words, lightly shaped by Ops; he will
-       edit later."**
+  /* === [2026-08-17] "Where's the donate button?" IS DELETED, ONE DAY OLD ===
+     MIKE, walking the live site: **"KILL the whole question and answer. Needs
+     more work than I can afford today."**
+     NAMED ONCE, HERE, WHICH IS WHERE A DELETED THING IS NAMED (Doctrine 24).
+     It read: "We are not asking you for money." / "We make money by making
+     something worth having, and all of it goes to Coalition for the Homeless."
+     / "Merch is a good way to support an artist. Sometimes you want to give and
+     you don't want the t-shirt." / "For you: donate here." - with "donate here"
+     an inline anchor to coalitionforthehomeless.org/donate/.
 
-       IT RESOLVES `S-i`, AND THE ROW WAS RIGHT TO BE OPEN. On 2026-08-16 he
-       struck the FAQ's outbound anchor by naming its link text under KILL, and
-       Phase 4 pointed the gift shop's Coalition tile at their site — then he
-       hid that tile, and for a few hours **the building named a destination and
-       published no route to it.** Ops raised that as the consequence of two
-       rulings meeting; this is his answer, and it is a better one than either
-       of the doors it replaces: **the link is inside the sentence that explains
-       why it is not everywhere else.**
+     **THIS REMOVES THE SITE'S ONLY LINK TO COALITION FOR THE SECOND TIME IN A
+     DAY, AND HE RULED IT DELIBERATE.** It is not the accident `S-i` reported:
+     that was two rulings meeting and nobody choosing. This is a choice, made
+     with the consequence stated to him in the instruction that made it. The
+     ledger carries it - `door.coalition` is HELD, not deleted - so the building
+     can report its own state honestly: **the museum currently publishes no
+     route to giving.**
 
-       WHERE IT SITS IS OPS' JUDGEMENT AND IS FLAGGED AS ONE. He supplied the
-       copy and not the position. It goes directly under "Where do our donations
-       go?" because the two questions are one thought — that answer says where
-       the money lands, this one says how a reader can send some there without
-       buying a t-shirt. Moving it is one object.
-
-       THE LINK IS `inline`, NOT `link`, AND THAT IS NOT A PREFERENCE. `link`
-       draws a door BELOW the answer; his copy puts the words inside the
-       sentence, so the block form would have printed "donate here" twice —
-       once as his prose and once as furniture under it. `inlineDoor` in
-       Exhibit.jsx turns exactly that substring into an anchor and nothing else.
-       **HIS INSTRUCTION IN THE SAME BREATH: "DO NOT introduce a general
-       external-link affordance. This is one link in one answer, not a new
-       pattern."** This is the only `inline` in the building. Read the note
-       above `inlineDoor` before adding a second.
-
-       AND THE MARK MUST STAY INSIDE THE LINE. `inline.mark` is matched against
-       the paragraph text; reword the last line and the anchor stops matching.
-       It does not vanish if that happens — it falls back to a trailing link —
-       but the sentence stops reading the way he wrote it, so the two are edited
-       together or not at all. */
-    q: "Where's the donate button?",
-    on: "foundation",
-    lines: [
-      "We are not asking you for money.",
-      "We make money by making something worth having, and all of it goes to "
-      + "Coalition for the Homeless.",
-      "Merch is a good way to support an artist. Sometimes you want to give "
-      + "and you don't want the t-shirt.",
-      "For you: donate here.",
-    ],
-    inline: { mark: "donate here",
-              href: "https://www.coalitionforthehomeless.org/donate/" },
-  },
+     `inlineDoor` (Exhibit.jsx), `.vp-faq-inline-link` (Exhibit.css) and the
+     `inline` field on `faqFor`/`faqFace` ARE KEPT AND NOW HAVE ZERO CALLERS.
+     That is stated rather than left to be discovered: they were built for this
+     one answer, they are a day of reasoning about what a link in a sentence may
+     and may not become, and he has said the answer needs more work rather than
+     that it is wrong. Do not read their presence as evidence anything uses
+     them. */
   {
     q: "Where do the Music and Merch proceeds go?",
     on: "foundation",
@@ -678,20 +654,26 @@ const FAQ = [
     ],
   },
   {
+    /* [2026-08-17] HIS EXACT WORDS, REPLACING THE TWO-LINE ANSWER OF THE DAY
+       BEFORE. What went, named once: "We are not giving it away." / "We have
+       what we need; we choose not to keep grabbing more for ourselves."
+       IT IS ONE LINE AND NOT TWO. He wrote it as one sentence-pair on a single
+       line, and the booth standard is that a line break is something the writer
+       typed. He typed none, so there is none. */
     q: "Why are you giving away your money?",
     on: "foundation",
     lines: [
-      "We are not giving it away.",
-      "We have what we need; we choose not to keep grabbing more for "
-      + "ourselves.",
+      "We are not giving anything away. We are keeping what we have.",
     ],
   },
   {
+    /* [2026-08-17] the second line is DELETED - MIKE: "Too soon, not planned."
+       Named once: "And Coalition for the Homeless could use your help right
+       now." The first line is his and stands. */
     q: "Can I contribute something other than money?",
     on: "foundation",
     lines: [
       "Yes. We will speak up when we have a need to fill.",
-      "And Coalition for the Homeless could use your help right now.",
     ],
   },
   {
@@ -700,9 +682,18 @@ const FAQ = [
        idea. */
     q: "What happens when you stop?",
     on: "foundation",
+    /* [2026-08-17] THE BLANK LINE IS RESTORED, AND IT IS THE ONE IN THE
+       BUILDING. Mike's complaint was uniform air between EVERY line, and that
+       is gone; this is the single deliberate PARAGRAPH break, and a line break
+       and a paragraph break are not the same object. The second beat is a
+       separate thought and the heaviest sentence on the page.
+       IT IS ONE ELEMENT WITH A BLANK LINE IN IT, not two elements with a gap
+       between them, which is the booth's own mechanism (`white-space:
+       pre-line`) rather than a second one: what he typed is what draws. */
     lines: [
-      "I'll pass it on. There is no committee, no board, and no team.",
-      "And if humanity stops believing in what this is for, Weird.Baby does "
+      "I'll pass it on. There is no committee, no board, and no team."
+      + "\n\n"
+      + "And if humanity stops believing in what this is for, Weird.Baby does "
       + "not pivot, rebrand or sell. It ends, and the name is retired. What "
       + "survives is the idea; somebody else may begin again, under their own "
       + "name.",
@@ -1048,6 +1039,26 @@ const faqTrack = (id, where, closing) => ({
    Open row `CH5-b`, and it is the same follow-on as `CH5-a`. */
 const HIDDEN_AT_LAUNCH = new Set(["ledger", "contribute"]);
 
+/* ═══ [2026-08-17] THE BLOG IS HELD, IN BOTH STAGES ═════════════════════════
+   MIKE, walking the live site: **"HIDE all references to The Blog for now,
+   including track 03. Tracks 01 and 02 (Short Story, Long Story) stay."**
+
+   IT IS NOT `HIDDEN_AT_LAUNCH` AND THAT IS THE WHOLE CARE HERE. That set is a
+   STAGE hold — `launched()` — so a member of it renders in DEVELOPMENT and
+   vanishes at launch. He said *for now*, which is neither stage: the blog is
+   held from him as well, because a track he can see is a track he has to keep
+   deciding about. So the filter below is unconditional and the track is gone
+   from every build.
+
+   THE TRACK OBJECT IS KEPT, WHOLE, WHERE IT WAS. Deleting it would make its
+   return a piece of authorship; holding it makes the return one id out of this
+   set. Same reading `wbFriendsHeld` took in the gift shop the day before.
+
+   THE OTHER REFERENCE WENT WITH IT: the FAQ's first answer used to end "…and
+   follow the blog", and his replacement line for it is in the entry above.
+   Grep for "blog" before adding another. */
+const HELD_TRACKS = new Set(["the-blog"]);
+
 const spine = [
   {
     id: "foundation",
@@ -1211,7 +1222,11 @@ export const foundation = {
   /* [CH5] see HIDDEN_AT_LAUNCH above. The array is filtered here rather than
      at its declaration so the albums stay written, ordered and readable in
      source — the hold is a stage decision, not a deletion. */
-  spine: launched() ? spine.filter(a => !HIDDEN_AT_LAUNCH.has(a.id)) : spine,
+  /* [2026-08-17] the TRACK hold runs in both stages and is applied first; the
+     ALBUM hold is the stage's. Two different questions, two different filters
+     — see HELD_TRACKS above for why they must not be merged. */
+  spine: (launched() ? spine.filter(a => !HIDDEN_AT_LAUNCH.has(a.id)) : spine)
+    .map(a => ({ ...a, tracks: a.tracks.filter(t => !HELD_TRACKS.has(t.id)) })),
   facts: [],
   defaultActiveIndex: 0,
   splitKey: "wb-fnd-split",

@@ -4429,37 +4429,6 @@ export default function Exhibit({ artist, open = null }) {
                             value per act (`hue`) is a DESIGN choice and is
                             declared as one in the data; it is not a fact about
                             anybody. */}
-                        {/* ══ [W1 2026-08-06] THE PROFILE — A FEW RICH ITEMS
-                            ═══════════════════════════════════════════════════
-                            MIKE: "SMALL, CONSISTENT, FLEXIBLE CATEGORIES that
-                            can be filled for ANY artist — interesting,
-                            user-engaging, aesthetically present. A FEW RICH
-                            ITEMS BEAT LISTS."
-                            SO IT IS NOT A LIST, AND THAT IS THE ONE THING THE
-                            markup has to get right. `entries`/`lines` — what
-                            this face used to be — are ROWS, and rows are read in
-                            order at one weight, which is exactly the register he
-                            called useless. Cards are read in any order, at a
-                            glance, and a card that is not there leaves no gap in
-                            a sequence. Which is what makes the whole set safe to
-                            declare and mostly leave marked: a wall of six
-                            categories with one filled is a wall with one card on
-                            it, not a list with five holes.
-                            THE SET IS DATA AND THE RENDERER KNOWS NO CATEGORY
-                            NAMES, so a wing declaring different slots renders
-                            without a code change — which is "can be filled for
-                            ANY artist" as a mechanism rather than as an
-                            intention. */}
-                        {Array.isArray(face.profile) && face.profile.length > 0 && (
-                          <div className="vp-prof" data-stage-split="row">
-                            {face.profile.map((c, i) => (
-                              <div className="vp-prof-card" key={i}>
-                                <div className="vp-prof-label">{c.label}</div>
-                                <p className="vp-prof-body">{c.body}</p>
-                              </div>
-                            ))}
-                          </div>
-                        )}
                         {face.bill && Array.isArray(face.bill.acts) && (
                           <div className="vp-bill" data-stage-split="row">
                             {face.bill.standard && (
@@ -4579,6 +4548,54 @@ export default function Exhibit({ artist, open = null }) {
                               </div>
                             ))}
                           </dl>
+                        )}
+                        {/* ═══ [2026-08-17] THE PROFILE MOVES BELOW THE REGISTER
+                            ════════════════════════════════════════════════════
+                            Mike asked for /wb's biography to become a FACT
+                            GRID, which is `tombstone` — and the register drew
+                            BELOW the cards, so his biography landed under his
+                            achievements. Measured on the page: blurb →
+                            `.vp-prof` → `.vp-tomb`. **This is the same defect
+                            the 2026-08-16 round hit with `lines` and worked
+                            around by putting the biography in the lead.** The
+                            workaround is gone; the order is fixed instead.
+                            IT IS THE PROFILE THAT MOVED, NOT THE REGISTER, AND
+                            THAT IS WHY THIS IS SAFE. `tombstone` is declared by
+                            every artist in /wal and by the robots wing;
+                            `profile` is declared by EXACTLY ONE FACE in the
+                            museum (weird-baby.js, measured). Moving the block
+                            with one caller cannot reorder anything else, and
+                            moving the block with many could. */}
+                        {/* ══ [W1 2026-08-06] THE PROFILE — A FEW RICH ITEMS
+                            ═══════════════════════════════════════════════════
+                            MIKE: "SMALL, CONSISTENT, FLEXIBLE CATEGORIES that
+                            can be filled for ANY artist — interesting,
+                            user-engaging, aesthetically present. A FEW RICH
+                            ITEMS BEAT LISTS."
+                            SO IT IS NOT A LIST, AND THAT IS THE ONE THING THE
+                            markup has to get right. `entries`/`lines` — what
+                            this face used to be — are ROWS, and rows are read in
+                            order at one weight, which is exactly the register he
+                            called useless. Cards are read in any order, at a
+                            glance, and a card that is not there leaves no gap in
+                            a sequence. Which is what makes the whole set safe to
+                            declare and mostly leave marked: a wall of six
+                            categories with one filled is a wall with one card on
+                            it, not a list with five holes.
+                            THE SET IS DATA AND THE RENDERER KNOWS NO CATEGORY
+                            NAMES, so a wing declaring different slots renders
+                            without a code change — which is "can be filled for
+                            ANY artist" as a mechanism rather than as an
+                            intention. */}
+                        {Array.isArray(face.profile) && face.profile.length > 0 && (
+                          <div className="vp-prof" data-stage-split="row">
+                            {face.profile.map((c, i) => (
+                              <div className="vp-prof-card" key={i}>
+                                <div className="vp-prof-label">{c.label}</div>
+                                <p className="vp-prof-body">{c.body}</p>
+                              </div>
+                            ))}
+                          </div>
                         )}
                         {/* ==== [R6 2026-08-03] THE RECORD BOARD ==============
                             MIKE: "chart history and comparable metrics are VERY
@@ -4704,8 +4721,34 @@ export default function Exhibit({ artist, open = null }) {
                                 </li>
                               ))}
                             </ul>
+                            {/* ═══ [2026-08-17] THE NOTE MAY CARRY A DOOR ════
+                                MIKE: **"'Sixteen releases sit on his own
+                                Bandcamp.' — add the link to his Bandcamp."**
+                                The note names a destination and the block's own
+                                rule is that a record is an OBJECT and the one
+                                thing a visitor wants is to go and hear it. A
+                                sentence that names where the rest of the
+                                catalogue is, and does not go there, is the one
+                                shape this block was built not to have.
+                                IT IS THE BLOCK'S OWN DOOR, NOT A NEW ONE. Same
+                                `vp-record-door` button, same two-letter mark,
+                                same `openLink` — the vocabulary already on
+                                every row above it. Nothing new is introduced
+                                and no other surface can adopt anything.
+                                ABSENT UNLESS DECLARED, so an artist whose note
+                                names no destination draws no button. */}
                             {face.records.note && (
-                              <p className="vp-records-note">{face.records.note}</p>
+                              <p className="vp-records-note">
+                                {face.records.note}
+                                {face.records.noteLink && (
+                                  <button className="vp-record-door vp-records-note-door"
+                                    title={face.records.noteLink.name}
+                                    aria-label={face.records.noteLink.name}
+                                    onClick={() => openLink(face.records.noteLink.url)}>
+                                    {face.records.noteLink.mark}
+                                  </button>
+                                )}
+                              </p>
                             )}
                           </div>
                         )}

@@ -1160,8 +1160,34 @@ body:has(.pb) .ex-root{padding-bottom:88px}
   position:sticky;top:0;z-index:95;
   background:transparent;pointer-events:none}
 /* the plate is the title's own, so nothing paints over the corners */
+/* ═══ [2026-08-17] THE PLATE IS PAINT, AND `pointer-events:auto` WAS EATING
+       THE SCROLL-TO-TOP CONTROL ═════════════════════════════════════════════
+   MIKE, on /wb Vol. 1: **"Scroll to top does not work UNLESS the viewer is
+   enlarged to fill the page."**
+
+   MEASURED, NOT GUESSED. `elementsFromPoint` at the centre of `.wb-bar-room`
+   — the room name, which IS the scroll-to-top control (`onRoomClick`) —
+   returns, at three scroll positions on this page:
+       y=0    -> wb-bar-room          (works)
+       y=150  -> wb-bar-room          (works)
+       y=282  -> ex-album-banner-title (DEAD; the room name is second in the
+                                        stack, underneath it)
+   The band travels to `top:0` at `z-index:95` by design (E 2026-08-11, "the
+   wing title travels through the bar's centre"), and at rest its plate lands
+   exactly on the room name. **The travel is the feature; swallowing the click
+   was not.** And it explains his "unless enlarged" exactly: a taller viewer
+   makes a longer page, so the band spends most of its scroll un-pinned and the
+   control answers; a short page is pinned almost immediately and it never does.
+
+   ONE PROPERTY, BECAUSE THE DEFECT IS ONE PROPERTY — the same shape as P1's
+   apron four hundred lines down, and for the same reason. **This div has no
+   click handler.** It is `<div className="ex-album-banner-title">{album.title}
+   </div>` and nothing else; `pointer-events:auto` was here only to undo the
+   band's blanket `none`, and undoing it was never needed for a plate that
+   does nothing. With `none` the click falls through to the control beneath,
+   which is the bar — the only thing this plate is ever over. */
 .ex-album-banner-title{background:var(--wb-bg);padding:3px 14px;
-  border-radius:2px;pointer-events:auto}
+  border-radius:2px;pointer-events:none}
 .ex-album-banner-title{grid-column:2;justify-self:center;text-align:center;
   font-family:'Syne',sans-serif;font-weight:700;font-size:var(--ex-banner-type);letter-spacing:.1em;text-transform:uppercase;color:var(--wb-gold);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .ex-album-banner-aux{grid-column:3;justify-self:end;min-height:1px}
@@ -2790,6 +2816,32 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 /* [A2 2026-08-04] `flex:1` is inert now the band is a grid — the aux's width is
    its own track. `justify-content:flex-end` stays: the transport still packs to
    the band's right edge, it is simply the right-hand TRACK's edge now. */
+/* ═══ [2026-08-17] THE TRANSPORT KEEPS OFF THE BAR'S RIGHT CORNER ═══════════
+   MIKE, second defect on the same page: **"When the viewer IS enlarged, the
+   music controls overlap 'GIFT SHOP' in the header."**
+
+   IT IS THE SAME ROOT AS THE SCROLL-TO-TOP DEFECT ABOVE — the band travels to
+   `top:0` and comes to rest ON the bar — and it is a gap in the flank rule
+   rather than a new problem. `--ex-flank` reserves the two corners so a long
+   TITLE can never run over the brand or the exit; the transport then went into
+   grid column 3, **which IS the right flank**, so the one thing the reservation
+   was protecting the corner from was placed inside it.
+
+   MEASURED at 1690px with a track playing, page scrolled to its foot:
+       .bt   x 1391-1650, y 14-38
+       exit  x 1563-1658, y 18-34      -> 87px of overlap, both axes.
+
+   THE FIX IS THE BAND'S OWN VOCABULARY: pad the right edge by the flank the
+   corner already declares, so the aux track ENDS where the reserved corner
+   BEGINS instead of running into it. Content edge 1682 -> 1518, and the exit
+   starts at 1563.
+   SCOPED TO `.ex-banner-console`, WHICH IS THE HONEST SCOPE — the class is on
+   the band only when `bannerTransport` is truthy, so a band with nothing in its
+   right track keeps its 32px and nothing moves on any page that is not playing.
+   NOT `top:52px` ON THE BAND, which was the other candidate and is the bigger
+   change: it would stop the title travelling at all and reverse a ruling of his
+   from 11 August to fix a collision he described in the corner. */
+.ex-banner-console{padding-right:var(--ex-flank)}
 .ex-banner-console .ex-album-banner-aux{display:flex;
   align-items:center;justify-content:flex-end;gap:10px}
 
@@ -3009,6 +3061,11 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
   color:var(--wb-ink);border-color:var(--wb-gold);transform:translateY(-1px);outline:none}
 .vp-records-note{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-micro);line-height:1.5;color:var(--wb-gold-lo);margin:2px 0 0}
+/* [2026-08-17] the note's own door. It inherits `.vp-record-door` whole — same
+   badge, same hover, same size — and only needs to sit ON the note's line
+   rather than in a row's door column: inline, with a space's worth of air
+   before it and its baseline nudged to the Courier line it follows. */
+.vp-records-note-door{display:inline-flex;vertical-align:-2px;margin-left:8px}
 
 /* ===========================================================================
    [R6 2026-08-03] THE RECORD BOARD — what a third party wrote down.
@@ -4425,8 +4482,43 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
 .vp-faq-a p{margin:0;font-family:'Geist',system-ui,-apple-system,sans-serif;
   font-weight:400;
   font-size:calc(var(--fs-body) * .96);line-height:1.62;letter-spacing:.005em;
-  color:var(--wb-gold-lo);max-width:68ch;text-wrap:pretty}
-.vp-faq-a p + p{margin-top:var(--rh-tight)}
+  color:var(--wb-gold-lo);max-width:68ch;text-wrap:pretty;
+  /* [2026-08-17] `pre-line` — AND IT IS WHAT MAKES A WING FAQ MECHANICALLY THE
+     BOOTH. With the paragraph gap taken to zero, a writer had no way left to
+     mark a real PARAGRAPH break as distinct from a line break. `.sheet-faq-a`
+     has solved that since 15 August: a newline he typed is a line, a blank line
+     he typed is a paragraph. Same declaration, same kind of surface, so both
+     rooms now answer "what does a newline mean" identically.
+     IT CHANGES NOTHING THAT EXISTS. Measured before adding it: ZERO answer
+     strings in `worth-a-listen.js`, `robots.js`, `weird-baby.js` or
+     `foundation.js` contain a newline. It draws only where one is put on
+     purpose, which today is exactly one answer. */
+  white-space:pre-line}
+/* ═══ [2026-08-17] THE ANSWER'S LINES SIT ON THE LEADING, LIKE THE BOOTH'S ═══
+   MIKE, walking the live site: **"KILL the double spacing between answer lines.
+   All answers. /booth is the standard; foundation should read the same way.
+   Info Booth layout is much cleaner than Foundation."**
+
+   DIFFED, AND THE DIFFERENCE WAS ONE DECLARATION. Both surfaces set the same
+   face, weight, size and 1.62 leading. The booth draws an answer as ONE
+   paragraph whose internal newlines are real breaks (`white-space: pre-line`);
+   a wing FAQ draws one `<p>` PER LINE and then added `--rh-tight` between them
+   — a paragraph gap on top of the leading. Same words, one extra step of air
+   per line, and that is the whole of what he was looking at.
+   ZERO, NOT SMALLER. Halving it would leave a rhythm the booth does not have,
+   which is a third spacing in a building that is meant to have one.
+
+   IT IS GLOBAL BECAUSE THE RULING IS. The booth was ruled THE standard for FAQs
+   on 2026-08-16, and `/wal` is conformed to it in the same walkthrough — so
+   /robots, /wal, /wb and /foundation all take it rather than one room getting a
+   private exception.
+   THE ONE COST, STATED: an answer written as two real BEATS loses the gap that
+   separated them — "What happens when you stop?" is the only one in the
+   building, and its two beats now sit as consecutive lines. That is what "all
+   answers" asks for; it is flagged to him rather than carved out.
+   `.vp-faq-closing` KEEPS ITS GAP: it is not an answer, it is the wing's last
+   words under the list. */
+.vp-faq-a p + p{margin-top:0}
 /* [2026-08-16c] THE DONATE DOOR, AND IT IS ONE CLASS ON ONE ANCHOR.
    Mike: "DO NOT introduce a general external-link affordance." So this is NOT
    `.vp-faq-a a` — a bare descendant selector would dress every link any wing's

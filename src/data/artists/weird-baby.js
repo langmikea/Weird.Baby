@@ -104,6 +104,27 @@ const REC_LABEL = "first pass";
    the hold that raised it. */
 const HIDDEN_AT_LAUNCH = new Set([]);
 
+/* ═══ [2026-08-17] THE FAQ TRACK IS HELD, IN BOTH STAGES ══════════════
+   MIKE, walking the live site: **"HIDE the FAQ track. It is empty and Mike has
+   no time for it."** He is describing a real state rather than a preference:
+   the face declares TWO questions and draws ONE. `How to contact?` carries a
+   `[PAPA]` answer, so `scrubFace` drops it in every stage — the consequence of
+   his own 2026-08-11 ruling that struck the house address with no replacement
+   (`W-b`). A one-question FAQ under its own album row is a menu item promising
+   a room.
+   UNCONDITIONAL, NOT `HIDDEN_AT_LAUNCH`. That set is the STAGE hold; he said
+   hide it, not hide it from visitors — the same reading The Blog got on
+   /foundation the same day, and the same mechanism, so the two wings do not
+   grow two ways of holding a track.
+   THE TRACK IS KEPT WHOLE, AND `W-b` IS CLOSED RATHER THAN WAITING.
+   [2026-08-17, his ruling] **The address ruling was never the blocker.**
+   `Papa@Weird.Baby` has been purpose-placed in the booth FAQ since 15 August,
+   superseding the 11 August sitewide strike — so `How to contact?` can be
+   answered here whenever he wants this track back. What is missing is not a
+   ruling, it is that the second question is empty. **Do not un-hide the track
+   on the strength of the address existing.** */
+const HELD_TRACKS = new Set(["wb-faq"]);
+
 const spine = [
   {
     id: "about",
@@ -249,57 +270,105 @@ const spine = [
            in silence. Inventing a heading for them was the other way out and it
            is Ops writing on the one card whose whole point is that it is his.
            ═══════════════════════════════════════════════════════════════════ */
+        /* ═══ [2026-08-17] THE CARD IS REBUILT ON HIS WALKTHROUGH ═════════
+           Three rulings, and the words are still his:
+             1. the biography moves out of the prose into a FACT GRID, the
+                two-column label/value pattern the other artists use;
+             2. first person becomes third — "my High School" -> "Papa
+                Weird.Baby's High School" — **pronouns only, voice untouched**;
+             3. each achievement gets its own tile: P!NK, Steven Tyler, Rod
+                Stewart, Hunter Root.
+
+           THE FACT GRID IS `tombstone`, WHICH IS THE PATTERN HE POINTED AT.
+           His reference was Mikey Mike's card (From / Based / Known for / Also
+           / Publishing / Albums / Filed under), and that is `tombstone` — the
+           same `{k, v}` list every artist in /wal carries. Nothing new is built.
+           **THE LABELS ARE OPS’ AND THE VALUES ARE HIS, TO THE CHARACTER.** He
+           asked for the label set to be proposed from his facts and for no fact
+           to be invented, so every `v` below is a line he wrote, unedited, and
+           every `k` is a word Ops chose to name it. `School` and `Studied` are
+           the two calls worth arguing with; his four lines are a birth date, a
+           school with its town, and two universities with a year and a subject
+           each. **`Studied` appears TWICE on purpose** — he listed two
+           institutions and no degree level for either, and inventing
+           "Undergrad"/"Postgrad" would be Ops asserting a fact about his
+           education that he did not state.
+
+           THE BIOGRAPHY LEAVES THE BLURB, WHICH UNDOES A COMPROMISE THIS FILE
+           RECORDED ON 2026-08-16. It was in the lead only because `lines` — the
+           mono register — draws ~350 lines BELOW `profile` in the renderer, so
+           the register would have put his biography under his achievements. The
+           GRID HAD EXACTLY THE SAME PROBLEM, AND THIS TIME IT WAS FIXED IN THE
+           RENDERER RATHER THAN WORKED AROUND AGAIN. Measured on the built page
+           after the first attempt: blurb → `.vp-prof` → `.vp-tomb`, so his
+           biography landed under his achievements, precisely as `lines` had.
+           **The ORDER moved instead of the content**: `profile` now draws below
+           `tombstone` (Exhibit.jsx). That is safe for one measured reason —
+           `profile` is declared by EXACTLY ONE FACE in the museum, this one,
+           while `tombstone` is on every /wal artist and on the robots wing. The
+           block with one caller is the one that can be moved. His order
+           survives and the 08-16 compromise is gone.
+           **THIS PARAGRAPH ORIGINALLY CLAIMED `tombstone` DREW ABOVE `profile`
+           AND THAT WAS WRONG.** It was an assumption written as a fact, and the
+           page contradicted it inside a minute. Kept as a correction rather
+           than silently rewritten, because the same assumption is what cost the
+           previous round its workaround.
+
+           THIRD PERSON: EIGHT PRONOUN SUBSTITUTIONS AND NOTHING ELSE. Each one
+           is listed in the round report. Two of them make a sentence read
+           differently and are flagged there rather than smoothed — Ops was told
+           not to alter voice beyond the pronoun, and both would need a word he
+           did not write to fix.
+
+           FOUR TILES, LABELLED WITH THE FOUR NAMES HE NAMED. **The word
+           ACHIEVEMENTS no longer appears on the card**: `profile` has no group
+           heading, and four tiles cannot sit under one label without inventing
+           a container. Flagged for him. */
         face: {
           kind: "text",
           title: "About the artist",
           subtitle: "WEIRD.BABY",
-          /* THE OPENING PARAGRAPH AND THE FOUR BIOGRAPHY LINES ARE ONE FIELD,
-             AND THAT IS A MEASUREMENT RATHER THAN A PREFERENCE. The first cut
-             put the biography in `lines`, the face's mono REGISTER, which is
-             the right instrument for a stack of short keyed facts — and the
-             renderer draws `.vp-face-lines` roughly 350 lines BELOW `.vp-prof`,
-             so his four bio lines landed UNDER the achievements instead of
-             above them. Measured on the page: the face read blurb ->
-             ACHIEVEMENTS -> CURRENT PROJECTS -> Born 7/3 63.
-             HIS ORDER IS PART OF HIS TEXT. Moving the register up the renderer
-             would reorder every face in the museum that declares both to fix
-             one that does; inventing a heading so the biography could be a
-             `profile` card would be Ops writing on the one card whose whole
-             point is that it is not. So the biography sits in the lead, where
-             he put it, carried by the blank line he typed.
-             THE COST IS STATED: the bio lines take the lead's weight and
-             measure rather than the register's mono column. Flagged for him. */
           blurb:
             "Papa Weird.Baby (aka Mike Lang) is an Indie Melodic-Talker who "
             + "relies on sloppy-guitar and mournful lyrics to decry the plight "
-            + "of the homeless. And some funny stuff, too. And Robots!"
-            + "\n\n"
-            + "Born 7/3 63" + "\n"
-            + "CB West Doylestown, PA" + "\n"
-            + "Stevens Institute of Technology - Hoboken NJ - '85 Mech Eng" + "\n"
-            + "NJIT Newark, NJ - '00 Eng Management",
+            + "of the homeless. And some funny stuff, too. And Robots!",
+          tombstone: [
+            { k: "Born", v: "7/3 63" },
+            { k: "School", v: "CB West Doylestown, PA" },
+            { k: "Studied", v: "Stevens Institute of Technology - Hoboken NJ - '85 Mech Eng" },
+            { k: "Studied", v: "NJIT Newark, NJ - '00 Eng Management" },
+          ],
           profile: [
-            { label: "ACHIEVEMENTS:",
+            { label: "P!NK",
               body:
-                "P!NK went to my High School - Central Bucks High School West. "
-                + "Rumor has it she had my old locker. At least that's the "
-                + "rumor I'm spreading."
-                + "\n\n"
-                + "Steven Tyler \"handed me\" his personal harmonica, onstage, "
-                + "Las Vegas NV Feb 2020. Then he tried to get me into the mic "
-                + "during the show. (Not pretty. I panicked.)"
-                + "\n\n"
-                + "Rod Stewart kicks soccer balls out to the crowd, I caught "
-                + "one! Mine has Rod's name written on it; must be his personal "
-                + "ball. I hope that is OK."
-                + "\n\n"
-                + "Hunter Root and I hung out behind the bar he was playing "
-                + "that night. Burned some time together. (Two at once?!? "
-                + "Sorry, I panicked.)" },
+                "P!NK went to Papa Weird.Baby's High School - Central Bucks "
+                + "High School West. Rumor has it she had his old locker. At "
+                + "least that's the rumor he's spreading." },
+            { label: "Steven Tyler",
+              body:
+                "Steven Tyler \"handed him\" his personal harmonica, onstage, "
+                + "Las Vegas NV Feb 2020. Then he tried to get him into the "
+                + "mic during the show. (Not pretty. He panicked.)" },
+            { label: "Rod Stewart",
+              body:
+                "Rod Stewart kicks soccer balls out to the crowd, he caught "
+                + "one! His has Rod's name written on it; must be his "
+                + "personal ball. He hopes that is OK." },
+            { label: "Hunter Root",
+              body:
+                "Hunter Root and Papa Weird.Baby hung out behind the bar he "
+                + "was playing that night. Burned some time together. (Two at "
+                /* [2026-08-17] "Sorry," is CUT. His original read "Sorry, I
+                   panicked" - the "Sorry" was him addressing the reader, and in
+                   third person it is an orphan with no speaker. "He panicked."
+                   now matches the Steven Tyler tile exactly, which turns the
+                   repetition into the joke it already was. Ops ruling; his to
+                   override. */
+                + "once?!? He panicked.)" },
             { label: "CURRENT PROJECTS",
               body:
                 "Learning to play acoustic guitar and sing in order to record "
-                + "the songs I just wrote so I can release the album I "
+                + "the songs he just wrote so he can release the album he "
                 + "announced. And Robots." },
           ],
           footer: "WEIRD.BABY · ABOUT THE ARTIST",
@@ -520,7 +589,10 @@ export const weirdBaby = {
   name: "Weird.Baby",
   /* [CH5] filtered here, not at the declaration, so the album stays written and
      readable in source — the hold is a stage decision, not a deletion. */
-  spine: launched() ? spine.filter(a => !HIDDEN_AT_LAUNCH.has(a.id)) : spine,
+  /* [2026-08-17] the TRACK hold runs in both stages and is applied first; the
+     ALBUM hold is the stage's. See HELD_TRACKS above. */
+  spine: (launched() ? spine.filter(a => !HIDDEN_AT_LAUNCH.has(a.id)) : spine)
+    .map(a => ({ ...a, tracks: a.tracks.filter(t => !HELD_TRACKS.has(t.id)) })),
   facts: [], // PUV stays empty for v0 (fact model is MV-side, deferred)
   /* ═══ [M 2026-08-14] THE WING OPENS ON THE MUSIC ═══════════════════════════
      MIKE: "/wb — opens on The Best of Weird.Baby Vol. 1, not About the Artist."
