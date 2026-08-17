@@ -2935,6 +2935,27 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 }
 .ex-banner-console .ex-album-banner-aux{display:flex;
   align-items:center;justify-content:flex-end;gap:10px}
+/* ═══ [2026-08-16] THE TRANSPORT GETS ITS HIT AREA BACK, AND ONLY IT ════════
+   MIKE, measured on the live site with a track playing: **Stop, Pause and the
+   volume slider all returned `ex-root visible` from `elementsFromPoint` — never
+   the button.** The controls themselves were fine; invoked from code, Pause set
+   `paused=true` and flipped its own label, a second press resumed, Stop tore
+   the bar down. **Only the hit-testing was dead.**
+
+   THE CAUSE IS ONE PROPERTY AND IT IS OURS. `.ex-album-banner` carries a
+   blanket `pointer-events:none` so the band cannot swallow the page beneath it.
+   The ONE `auto` inside that band was on the title plate — and the plate was
+   the thing eating scroll-to-top, so removing it was correct. **Nothing granted
+   the transport, which lives in the same band, a hit area of its own.** The
+   chain read `none` all the way from `.bt` to the band.
+
+   IT IS GRANTED TO `.bt` AND NOT TO THE BAND, WHICH IS THE WHOLE POINT — a
+   grant on `.ex-album-banner` or on the aux track puts the plate defect
+   straight back, because everything under it inherits. `.bt` is the transport's
+   own box, it is rendered only while something is playing (BannerTransport
+   returns null otherwise), and it is scoped to `.ex-banner-console` so a wing
+   with no transport is untouched. The plate keeps its `none`. */
+.ex-banner-console .bt{pointer-events:auto}
 
 .bt{display:flex;align-items:center;gap:8px;min-width:0}
 .bt-now{display:flex;align-items:center;gap:7px;min-width:0;margin-right:4px}

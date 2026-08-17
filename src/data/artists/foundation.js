@@ -603,11 +603,19 @@ const FAQ = [
       + "written down and kept.",
     ],
   },
-  {
-    q: "Where do our donations go?",
-    on: "foundation",
-    a: "100% of every donation goes directly to Coalition for the Homeless.",
-  },
+  /* === [2026-08-16b] "Where do our donations go?" IS DELETED — MIKE: "KILL
+         entirely." ==================================================
+     NAMED ONCE, HERE, WHICH IS WHERE A DELETED THING IS NAMED (Doctrine 24).
+     It read: "100% of every donation goes directly to Coalition for the
+     Homeless."
+     **IT WAS THE LAST ANSWER ON THE PAGE ABOUT DONATIONS THE HOUSE RECEIVES,
+     AND THAT FOLLOWS RATHER THAN CONTRADICTS THE DAY BEFORE.** "Where's the
+     donate button?" was struck on 2026-08-17 with the consequence stated —
+     **the museum publishes no route to giving** — so a question answering where
+     a donation goes was answering about a thing a visitor cannot do here. What
+     survives is the question below it, which is about the house's OWN proceeds
+     and is a fact about the house rather than a request. `door.coalition` stays
+     `NOT_BUILT / HELD` in the ledger, unchanged. */
   /* === [2026-08-17] "Where's the donate button?" IS DELETED, ONE DAY OLD ===
      MIKE, walking the live site: **"KILL the whole question and answer. Needs
      more work than I can afford today."**
@@ -662,15 +670,26 @@ const FAQ = [
        typed. He typed none, so there is none. */
     q: "Why are you giving away your money?",
     on: "foundation",
+    /* [2026-08-16b] HIS NEXT PASS, REPLACING YESTERDAY'S ONE-LINER. Named once:
+       "We are not giving anything away. We are keeping what we have."
+       **IT SAYS A DIFFERENT THING AND THAT IS THE POINT.** Yesterday's line
+       ended on what the house keeps; this one says WHY — "we have what we need,
+       plus a cushion" — which answers the question that was asked. Still ONE
+       line: he typed no break, so there is none. */
     lines: [
-      "We are not giving anything away. We are keeping what we have.",
+      "We are not giving away anything. We have what we need, plus a cushion; "
+      + "so we don't need to keep more for ourselves at this point.",
     ],
   },
   {
     /* [2026-08-17] the second line is DELETED - MIKE: "Too soon, not planned."
        Named once: "And Coalition for the Homeless could use your help right
        now." The first line is his and stands. */
-    q: "Can I contribute something other than money?",
+    /* [2026-08-16b] RETITLED, ANSWER UNTOUCHED — "Can I contribute something
+       other than money?" -> "Can I donate something besides money?". His
+       wording. The answer is not re-declared in provenance because it did not
+       change; only the question's row moves. */
+    q: "Can I donate something besides money?",
     on: "foundation",
     lines: [
       "Yes. We will speak up when we have a need to fill.",

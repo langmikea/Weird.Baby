@@ -341,6 +341,168 @@ extra line at 1280px or 390px.
 
 ---
 
+## JOB 4 — THE TRANSPORT WAS UNREACHABLE, AND IT IS THE THIRD TIME TODAY
+
+### THE CAUSE IS OURS AND IT IS ONE PROPERTY
+
+`.ex-album-banner` carries a blanket `pointer-events:none` so the travelling
+band cannot swallow the page beneath it. **The one `auto` inside that band was
+on the title plate** — and the plate was the thing eating scroll-to-top, so
+removing it was correct. **Nothing granted the transport, which lives in the
+same band, a hit area of its own.** Measured on the live site with a track
+playing, the chain read `none` from `.bt` all the way up, and
+`elementsFromPoint` at every control's centre returned `ex-root visible`.
+
+**The controls themselves were never broken.** Invoked from code, the toggle set
+`paused=true` and flipped its own label, a second press resumed, Stop tore the
+bar down. Only the hit-testing was dead.
+
+### THE GRANT IS ON `.bt` AND NOWHERE ELSE
+
+`.ex-banner-console .bt{pointer-events:auto}`. **Not the band and not the aux
+track** — everything under either inherits, and the plate defect would come
+straight back. `.bt` is the transport's own box, it exists only while something
+is playing (`BannerTransport` returns null otherwise), and it is scoped to the
+console class so a wing with no transport is untouched.
+
+### PROVED THE WAY THE PLATE WAS PROVED — EVERY CONTROL, ITS FULL BOX
+
+35 points per control (7 × 5 across the bounding box), on the built bundle:
+
+| route | control | box | points reaching the control | reaching anything else |
+|---|---|---|---:|---|
+| /wb | Stop | 24×24 | **35 / 35** | 0 |
+| /wb | Play/Pause | 24×24 | 23 / 35 | 12 → `.bt` |
+| /wb | Volume | 74×16 | **35 / 35** | 0 |
+| /wal | Stop | 24×24 | **35 / 35** | 0 |
+| /wal | Play/Pause | 24×24 | 23 / 35 | 12 → `.bt` |
+| /wal | Volume | 74×16 | **35 / 35** | 0 |
+
+**THE TWELVE ARE GEOMETRY, NOT A DEFECT, AND THEY ARE REPORTED RATHER THAN
+ROUNDED AWAY.** Stop is `border-radius:3px` and fills its box; play/pause is
+`border-radius:50%`, so the corners of its *bounding box* fall outside the drawn
+circle. Every point inside the drawn control reaches it, and the twelve that do
+not land on **`.bt` — the transport's own group, inside the grant** — not on the
+page beneath. Nothing falls through.
+
+The chain, measured after: `.bt` **auto** · aux `none` · band `none` · **plate
+`none`**.
+
+### AND THE PLATE FIX STILL HOLDS WITH THE TRANSPORT LIVE
+
+/wal, 1280×420, track playing, page at its foot: plate **238 = 238** room,
+centres **0** apart, **0 of 21** points on the plate dead, and a click on the
+plate's left edge took the page **552 → 0**.
+
+Functional, through the hit test: a click at the toggle's centre landed **inside
+the control** and set `paused: true`; a click on Stop landed inside the control
+and the transport left the DOM.
+
+### WHY VISIBLE IS NOT CLICKABLE — THE THIRD TIME TODAY
+
+**Three controls today rendered perfectly and could not be used:** the title
+plate (visible, `pointer-events:auto`, no handler — it ATE the click beneath),
+the one-option select (visible, 16% of the row, opened a one-item menu instead
+of playing), and the transport (visible, wired, `pointer-events:none` all the
+way up — the click reached the page behind it).
+
+**PAINT AND HIT-TESTING ARE TWO INDEPENDENT PASSES, AND NOTHING IN A SCREENSHOT
+SHOWS THE SECOND ONE.** An element is drawn from its box, its background and its
+z-index; it is HIT from `pointer-events`, from the boxes stacked over it, and
+from whether anything above stops propagation. A control can be perfectly
+painted and perfectly wired and still be unreachable, and it looks correct in
+every screenshot, every DOM dump and every `getComputedStyle` on the element
+itself — because the fault is usually in an ANCESTOR or in a SIBLING that lands
+on top.
+
+**THE PROBE THAT CATCHES IT IS `document.elementFromPoint` / `elementsFromPoint`
+ACROSS THE CONTROL'S WHOLE BOX** — never at one point, and never on the element
+you are asking about:
+
+```
+for every control:
+  for a grid of points across its bounding box:
+    hit = elementFromPoint(x, y)
+    PASS only if hit === control || control.contains(hit)
+report: points reaching the control · points reaching anything else · what
+```
+
+Three properties make it worth the trouble. It asks the BROWSER, so it accounts
+for the whole stack rather than for the one rule you thought of. It walks the
+box, so it finds a control that is live at its centre and dead at its edge — the
+title plate's 57px dead strip, which a centre-point probe reported as working.
+And it names what it DID hit, which is the diagnosis: `ex-root` means nothing
+above is taking the click, `.bt` means something inside the control is, and a
+sibling's class name is the swallower.
+
+**A GREEN GATE, A SCREENSHOT AND A PASSING UNIT TEST ALL MISS THIS.** The live
+page is the truth, and for a control the live page has to be *probed*, not
+looked at.
+
+---
+
+## THE COPY — HIS WORDS, VERIFIED ON THE PAGE
+
+### /booth — three answers
+
+| question | change |
+|---|---|
+| Are you tracking me? | gains `hosts no ads`; the NOTE becomes `Artists' policies` rather than `Artist site policies` — a policy belongs to the artist, not the site |
+| Who keeps this place? | three lines become **two**; `The job pays nothing.` and `That's the deal, and it never changes.` join. **A JOIN, not a rewording** — same words, same order, one fewer break, and it was his break to remove |
+| Does Weird.Baby 'take a cut'…? | `gift shop` → **`Gift Shop`**; it is the room's NAME here, as the bar's own exit reads it |
+
+### /foundation — one killed, one rewritten, one retitled
+
+**`Where do our donations go?` is DELETED**, question and answer, and named once
+in the source (Doctrine 24): *"100% of every donation goes directly to Coalition
+for the Homeless."* **It follows the day before rather than contradicting it** —
+`Where's the donate button?` was struck on 17 August with the consequence stated
+(*the museum publishes no route to giving*), so an answer about where a donation
+goes was answering about a thing a visitor cannot do here. What survives is the
+question about the house's OWN proceeds, which is a fact rather than a request.
+`door.coalition` stays `NOT_BUILT / HELD`.
+
+**`Why are you giving away your money?`** — his next pass, replacing yesterday's
+one-liner (named once: *"We are not giving anything away. We are keeping what we
+have."*). **It answers a different question and that is the point:** yesterday's
+line ended on what the house keeps, this one says WHY. Still one line — he typed
+no break.
+
+**Retitled:** `Can I contribute something other than money?` →
+**`Can I donate something besides money?`**, answer untouched.
+
+**Measured on the page: 7 questions where there were 8**, the killed pair absent
+from `textContent`, the new answer present character for character, and
+`Yes. We will speak up when we have a need to fill.` unchanged.
+
+### /wb — one word, his ruling
+
+`is earning to play` → **`is learning to play`**. Raised as a flag, carried as
+typed for one round, ruled by him. **That is the loop working**, and it is why
+the flag rule exists: Ops reports, he rules. `Q-c`'s first item closes; the
+`Born | Born July 3, 1963` flag and Macungie PA stay open.
+
+### PROVENANCE
+
+**6 rows added, 8 pruned.** Inbound chain references into the pruned set were
+checked first and were **zero** (§9's prune hazard). The retitled question's
+ANSWER is not re-declared, because it did not change — only the question's row
+moved.
+
+---
+
+## RECORDED, NOT BUILT
+
+| what | row |
+|---|---|
+| Build the manual from the program itself, with screenshots and composites — *"You can make SO MUCH of this!!!"* | `Q-d` |
+| The light table: clutter out, audio does not belong in it, the manual collapsible, the manual thumbnails too faint to read the form | `Q-e` |
+| The Foundation's Short Story and Long Story — **he writes them Tuesday** | `S-f`, updated with the day |
+
+Nothing was scoped, scaffolded or half-built for any of the three.
+
+---
+
 ## GATES
 
 | gate | result |

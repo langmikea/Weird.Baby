@@ -159,8 +159,13 @@ const FAQ = [
        sites" to Social Media AND Artist sites, and it names POLICIES rather
        than sites, which is the more honest claim: what the house cannot speak
        for is what those places DO, not that they exist. */
-    a: "No — Weird.Baby uses no logins, no cookies.\n" +
-       "NOTE: We do not speak for Social Media or Artist site policies.",
+    /* [2026-08-16b] HIS NEXT PASS, VERBATIM. Two changes and both are his:
+       the first line gains `hosts no ads`, and the NOTE names `Artists'
+       policies` rather than `Artist site policies` — a policy belongs to the
+       artist, not to the site, which is the same broadening the note above
+       describes taken one step further. */
+    a: "No — Weird.Baby uses no logins, no cookies, hosts no ads.\n" +
+       "NOTE: We do not speak for Social Media or Artists' policies.",
   },
   /* [2026-08-16] "So, how does the site always know it is me?" IS DELETED —
      Mike's ruling, no replacement. NAMED ONCE HERE, WHICH IS WHERE A DELETED
@@ -171,9 +176,15 @@ const FAQ = [
      side. */
   {
     q: "Who keeps this place?",
+    /* [2026-08-16b] THREE LINES BECOME TWO — his ruling, and it is a JOIN, not
+       a rewording: "The job pays nothing." and "That's the deal, and it never
+       changes." are now one line. Same words, same order, one fewer break. It
+       is his break to remove, exactly as the two rejoined above were his to
+       keep — see the "does the line end mid-sentence?" test in the note there;
+       this one ended on a full stop, so it was a decision and only he could
+       reverse it. */
     a: "One person — The current Papa Weird.Baby.\n" +
-       "The job pays nothing.\n" +
-       "That's the deal, and it never changes.",
+       "The job pays nothing. That's the deal, and it never changes.",
   },
   {
     q: "How do things get in the museum?",
@@ -212,8 +223,11 @@ const FAQ = [
   },
   {
     q: "Does Weird.Baby 'take a cut' of the Artists' proceeds?",
+    /* [2026-08-16b] `gift shop` -> `Gift Shop`, his capitalisation. It is the
+       room's NAME here — the bar's own exit reads GIFT SHOP — rather than a
+       kind of shop, and the line already capitalises `Artists'`. */
     a: "No — never.\n" +
-       "Every door in the gift shop leads to the Artists' own sites and stores.",
+       "Every door in the Gift Shop leads to the Artists' own sites and stores.",
   },
   {
     q: "Is The Museum finished?",

@@ -14455,13 +14455,6 @@
    "t": "Approved by Mike on {} — development only",
    "s": "Ops. The approval mark's tooltip. It is DEVELOPMENT ONLY and cannot reach a visitor: __WB_APPROVALS__ is the literal null at LAUNCH and the component folds away — proved against a real launch build by npm run approval:proof. Declared rather than excluded because the sweep cannot know a string is unreachable, and a hole cut in the gate for one file is a hole."
   },
-  "48fc0089f37ec472": {
-   "f": "src/data/artists/foundation.js",
-   "l": 828,
-   "t": "100% of every donation goes directly to Coalition for the Homeless.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
-  },
   "680ed449b8277620": {
    "f": "src/data/artists/foundation.js",
    "l": 833,
@@ -14618,13 +14611,6 @@
    "f": "src/routes/InfoBooth.jsx",
    "l": 148,
    "t": "Papa@Weird.Baby",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
-  },
-  "1d71c48c8aeab64c": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 152,
-   "t": "One person — The current Papa Weird.Baby.\nThe job pays nothing.\nThat's the deal, and it never changes.",
    "c": "MIKE",
    "s": "docs/MUSEUM_SITE_CHANGES_LOG-20260815.md §0b — his FAQ rewrite of 2026-08-15, quoted in full and landed verbatim: \"Do not edit, smooth or reorder.\""
   },
@@ -14962,13 +14948,6 @@
    "c": "MIKE",
    "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
   },
-  "128e47e406019c31": {
-   "f": "src/data/artists/foundation.js",
-   "l": 605,
-   "t": "Where do our donations go?",
-   "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
-  },
   "b6ff32743619af5c": {
    "f": "src/data/artists/foundation.js",
    "l": 610,
@@ -15008,13 +14987,6 @@
    "f": "src/data/artists/foundation.js",
    "l": 630,
    "t": "Why are you giving away your money?",
-   "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
-  },
-  "bd349c82ecc790f9": {
-   "f": "src/data/artists/foundation.js",
-   "l": 639,
-   "t": "Can I contribute something other than money?",
    "c": "MIKE",
    "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 3c, \"FAQ — follow the /booth standard exactly. Full replacement.\" — his eight questions and their answers, verbatim and in his order. Each of his typed lines is one sentence and is carried as one string; the single blank line he left (What happens when you stop?) is the only paragraph break in the set."
   },
@@ -15074,13 +15046,6 @@
    "c": "MIKE",
    "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
   },
-  "cf5d39e2d2375e6c": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 159,
-   "t": "No — Weird.Baby uses no logins, no cookies.\nNOTE: We do not speak for Social Media or Artist site policies.",
-   "c": "MIKE",
-   "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
-  },
   "acd2ab60cd20e6c0": {
    "f": "src/routes/InfoBooth.jsx",
    "l": 176,
@@ -15109,13 +15074,6 @@
    "c": "MIKE",
    "s": "Mike's four-phase instruction of 2026-08-16 (the remote-control packet), quoted in full in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md. Phase 2, the booth's COPY list — his CHANGE/DELETE/MOVE/KEEP lines, carried exactly as written. No edit, no smoothing, no re-wrapping: his ruling in the same instruction is that a line too long for the column is REPORTED to him with its character count and reworded by him, never wrapped here. The newlines inside an answer are his and draw (`white-space: pre-line`)."
   },
-  "62c339abacaf2acd": {
-   "f": "src/routes/InfoBooth.jsx",
-   "l": 206,
-   "t": "No — never.\nEvery door in the gift shop leads to the Artists' own sites and stores.",
-   "c": "MIKE",
-   "s": "Mike's follow-up instruction of 2026-08-16 (item 1), quoted in docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md §5: \"FIX TWO FAKE LINE BREAKS on /booth — Ops' error, not Mike's. Ops wrapped these lines inside a code block when writing the packet and you carried them verbatim, correctly. They are not Mike's line breaks.\" His words are unchanged; one authored break is removed from each answer, rejoining a sentence that a code block had wrapped on the way in. Swept both rooms on the mid-sentence test: the booth carried 11 authored breaks, exactly these two failed it, and /foundation carried none."
-  },
   "b24eca4de20274d9": {
    "f": "src/data/artists/robots-record.js",
    "l": 261,
@@ -15127,13 +15085,6 @@
    "f": "src/data/artists/foundation.js",
    "l": 593,
    "t": "If you want to know more, read 'The Long Story'.",
-   "c": "MIKE",
-   "s": "Mike's live-site walkthrough of 2026-08-17, area 1 (/foundation FAQ), quoted in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md. His replacement lines, carried exactly as supplied."
-  },
-  "121a9816bbb921b4": {
-   "f": "src/data/artists/foundation.js",
-   "l": 666,
-   "t": "We are not giving anything away. We are keeping what we have.",
    "c": "MIKE",
    "s": "Mike's live-site walkthrough of 2026-08-17, area 1 (/foundation FAQ), quoted in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md. His replacement lines, carried exactly as supplied."
   },
@@ -15291,19 +15242,54 @@
    "c": "MIKE",
    "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
   },
-  "dbe340ed13026b92": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 401,
-   "t": "Papa Weird.Baby is earning to play acoustic guitar and sing, in order to record the songs he just wrote, so he can release the album he announced. And Robots.",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
-  },
   "c7be035c49164b1d": {
    "f": "src/data/artists/weird-baby.js",
    "l": 379,
    "t": "Papa Weird.Baby (aka Mike Lang) is an Indie Melodic‑Talker who relies on sloppy-guitar and mournful lyrics to decry the plight of the homeless. And some funny stuff, too. And Robots!",
    "c": "MIKE",
    "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md. [2026-08-16] ONE CHARACTER CHANGED AND NO WORD DID: the hyphen in 'Melodic-Talker' is U+2011 NON-BREAKING HYPHEN, on his instruction not to break the word across lines. It draws identically; the string is otherwise his to the character."
+  },
+  "592217424d938627": {
+   "f": "src/data/artists/foundation.js",
+   "l": 680,
+   "t": "We are not giving away anything. We have what we need, plus a cushion; so we don't need to keep more for ourselves at this point.",
+   "c": "MIKE",
+   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
+  },
+  "dce829d110bc6bf2": {
+   "f": "src/data/artists/foundation.js",
+   "l": 692,
+   "t": "Can I donate something besides money?",
+   "c": "MIKE",
+   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
+  },
+  "3ba82e0508bf3834": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 420,
+   "t": "Papa Weird.Baby is learning to play acoustic guitar and sing, in order to record the songs he just wrote, so he can release the album he announced. And Robots.",
+   "c": "MIKE",
+   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
+  },
+  "f37f4b57ac732af0": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 167,
+   "t": "No — Weird.Baby uses no logins, no cookies, hosts no ads.\nNOTE: We do not speak for Social Media or Artists' policies.",
+   "c": "MIKE",
+   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
+  },
+  "cbb39dab28624612": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 186,
+   "t": "One person — The current Papa Weird.Baby.\nThe job pays nothing. That's the deal, and it never changes.",
+   "c": "MIKE",
+   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
+  },
+  "1a664e0ceb318c11": {
+   "f": "src/routes/InfoBooth.jsx",
+   "l": 229,
+   "t": "No — never.\nEvery door in the Gift Shop leads to the Artists' own sites and stores.",
+   "c": "MIKE",
+   "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
   }
  }
 }

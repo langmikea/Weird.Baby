@@ -414,9 +414,10 @@ const spine = [
                 + "panicked.)" },
             { label: "CURRENT PROJECTS",
               body:
-                /* [2026-08-16] FLAGGED, NOT CORRECTED, on his own instruction:
-                   "is earning" reads as "learning". Carried as typed. */
-                "Papa Weird.Baby is earning to play acoustic guitar and sing, "
+                /* [2026-08-16] `is earning` -> `is learning`, HIS RULING on the
+                   flag. It was raised and carried as typed for one round, which
+                   is the loop working: Ops reports, he rules. */
+                "Papa Weird.Baby is learning to play acoustic guitar and sing, "
                 + "in order to record the songs he just wrote, so he can "
                 + "release the album he announced. And Robots." },
           ],
