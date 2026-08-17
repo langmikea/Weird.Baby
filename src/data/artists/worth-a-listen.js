@@ -932,15 +932,28 @@ const ARTISTS = [
          card about a charting artist; it is one of the two or three things a
          fan came to the page for, and it was in a box beside a warning about
          SEO domains. It has a block of its own now and it is not in both. */
-      sideboxes: [
-        { title: "Two links that are not his",
-          lines: ["jessewelles.org", "jessewellestour.com"],
-          /* [CS 2026-08-04] the third sentence — "Named here so nobody 'fixes'
-             his link to a worse one" — was a note to the next maintainer,
-             printed in the box. The warning itself is for the visitor and
-             stays. */
-          note: "Both rank high. Both are ticket-resale and SEO pages, and neither is his." },
-      ],
+      /* ═══ [2026-08-17b] THE "Two links that are not his" SIDEBOX IS DELETED ══
+         MIKE: **"KILL only this. Leave the rest of his links block exactly as
+         it stands."** Named once (Doctrine 24): it drew as "TWO LINKS THAT ARE
+         NOT HIS / jessewelles.org / jessewellestour.com" with the note "Both
+         rank high. Both are ticket-resale and SEO pages, and neither is his."
+         THE REST OF HIS BLOCK IS UNTOUCHED, WHICH IS THE HALF OF THE
+         INSTRUCTION THAT IS EASY TO OVERRUN: `site`, `shop`, `shopExit`,
+         `listen`, `tickets`, `channel` and every `scent` beside them are
+         exactly as they stood, and so is the record board below.
+         THE TRAP IS STILL RECORDED WHERE THE NEXT PASS WILL MEET IT — the
+         `VERIFIED 2026-08-02` comment above `site` names both domains and says
+         why the link must not be "fixed" to one of them. What Mike struck is
+         the printing of the warning to a visitor, not the warning to Ops. The
+         same reading as the `siteNote` kill on Mikey Mike, in the same
+         instruction.
+         `sideboxes` GOES WITH ITS LAST MEMBER rather than being left empty —
+         see the note on Mikey Mike's card below for why an empty array is
+         worse than an absent field. ONE SIDEBOX SURVIVES IN THIS WING — Carsie
+         Blanton's, at the head of this file — so the renderer, `.vp-box` and
+         the class are all still exercised; this is not a dead mechanism to
+         report. Measured, not assumed: `sideboxes:` is declared once in
+         `src/data/` after this round. */
     },
     /* ===== [R6 2026-08-03] THE RECORD BOARD ================================
        HE IS THE ONE ARTIST IN THE WING WITH REAL CHART HISTORY, and it was
@@ -1157,7 +1170,12 @@ const ARTISTS = [
        weakened by the other; the card now shows the two surfaces it has always
        been able to prove.
        R-A'S REFUSAL OF findmikeymike.com IS UNTOUCHED. Different address, and
-       `siteNote` below still says so. ***** */
+       the R-a block below still says so.
+       [2026-08-17b] THIS SENTENCE USED TO POINT AT `siteNote`, WHICH NO LONGER
+       EXISTS — Mike struck the printed note. It points at the R-a comment block
+       instead, which is the record that survived. A pointer that outlives its
+       target is a tripwire aimed at empty ground, and this file has been
+       corrected for that once already. ***** */
     site: "https://weekendatmikeys.com/",
     siteLabel: "weekendatmikeys.com",
     siteFn: "Homepage",
@@ -1179,8 +1197,22 @@ const ARTISTS = [
        So the door stays shut, for a reason that has nothing to do with
        identity, and the reason is written down so that a future pass does not
        "close the gap" by adding it. ***** */
-    siteNote: "He does own findmikeymike.com, and it is currently serving " +
-              "injected spam — so it is named in the ledger and linked nowhere.",
+    /* ═══ [2026-08-17b] `siteNote` IS DELETED — AND THE LEDGER ABOVE IS NOT ═══
+       MIKE: kill the visitor-facing block. **"findmikeymike.com STAYS in the
+       ledger, linked nowhere. Only the visitor-facing block goes."**
+       WHAT WENT, NAMED ONCE (Doctrine 24): "He does own findmikeymike.com, and
+       it is currently serving injected spam — so it is named in the ledger and
+       linked nowhere." It drew on the About-the-artist face as a `vp-face-lines`
+       row reading "NOTE     He does own findmikeymike.com…" — built at the
+       bottom of this file by `lines: a.siteNote ? ["NOTE     " + a.siteNote]`.
+       THE LEDGER IS THE `[R-a 2026-08-02]` BLOCK DIRECTLY ABOVE THIS LINE, and
+       it is untouched: the domain is his, it is serving an injected link farm,
+       it is linked from nowhere, and the reason a future pass must not "close
+       the gap" is still written down where that pass will read it. What Mike
+       struck is the PRINTING of the record, not the record.
+       `siteNote` NOW HAS NO DECLARER IN THE MUSEUM. The builder line survives
+       and is listed in the handoff as a mechanism exercised by nothing, so it
+       is neither mistaken for live copy nor deleted as dead code. */
     shop: null,
     /* ***** [S2 2026-08-05] HE HAS A CLEAN DOMAIN NOW, AND IT IS NOT THE ONE
        R-a REFUSED. Mike supplied weekendatmikeys.com. READ IT AS A DIFFERENT
@@ -1236,12 +1268,24 @@ const ARTISTS = [
       /* [R6] the sell-out moved to the record board; what is left in the box is
          the WEEK — a route and a song played before it existed, which is a
          story about a man on the road and not a metric. */
-      sideboxes: [
-        { title: "September 2019",
-          lines: ["Germany, then Sweden, then London",
-                  "The Waiting Room, on the 20th",
-                  "He played “Amazon Prime” before it was released"] },
-      ],
+      /* ═══ [2026-08-17b] THE "September 2019" SIDEBOX IS DELETED — MIKE named
+             the block entire ══════════════════════════════════════════════════
+         Named once (Doctrine 24), which is where a deleted thing is named: it
+         drew as "SEPTEMBER 2019 / Germany, then Sweden, then London / The
+         Waiting Room, on the 20th / He played “Amazon Prime” before it was
+         released".
+         HIS KILL COVERED THE `NOTE` LINE UNDER IT TOO — see `siteNote` above,
+         which is struck in the same instruction. The two objects sat one under
+         the other on this face and he named them as one block.
+         THE FACTS ARE NOT LOST AND ARE NOT SILENTLY MOVED EITHER: the London
+         sell-out is on the record board below, and the European run is in the
+         "Cooler" card's own label. Nothing was carried across to soften the
+         cut; those two were already there.
+         `sideboxes` GOES WITH ITS LAST MEMBER rather than being left as an
+         empty array. `scrubFace` filters on `Array.isArray(face.sideboxes)`, so
+         an empty array is a field the renderer still reasons about and nothing
+         draws — the shape M84 warns against. He has one fewer card, not one
+         more empty container. */
     },
     /* ===== [R6 2026-08-03] THE RECORD BOARD ================================
        MIKE NAMED THIS ONE AS THE MODEL: "notable syncs (Mikey Mike's Canon

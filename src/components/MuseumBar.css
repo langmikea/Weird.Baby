@@ -146,10 +146,36 @@ html { scroll-padding-top: calc(var(--wb-bar-h) + 25px); }
    overlap 0 at every width — was done at that size. Raising the desktop step
    cannot reach it, and raising the phone step would invalidate a measurement
    without re-taking it. */
+/* ═══ [2026-08-17b] MORE PROMINENT, AND IT IS STILL ONE DECLARATION ══════════
+   MIKE, on the Gift Shop: **"make the page title more prominent, across the
+   board (every wing's title, one change)."** 1.2rem -> 1.45rem (19.2px ->
+   23.2px, +21%).
+
+   THE PARENTHETICAL IS THE WHOLE REASON THIS EDIT IS ONE LINE. P6's note above
+   already establishes what makes that possible: this H1 is the artist name on
+   an artist wing and the page name everywhere else, and <MuseumBar/> is the
+   only thing that draws it — /robots, /wb, /hr, /foundation and /wal through
+   Exhibit.jsx, plus /booth and /shop. The shop's own rule
+   (`GiftShop.css`, `.gift-shop .wb-bar-room`) sets FAMILY and WEIGHT only, so
+   the shop takes this size with everyone else and keeps its Fredoka test.
+
+   THE ≤720px BRANCH IS AGAIN DELIBERATELY NOT TOUCHED, for P6's reason and not
+   from caution: it sets its own 0.8rem, and the overlap arithmetic recorded
+   against it was measured at that size. "Across the board" in his instruction
+   is EVERY WING — the parenthetical says so — and not every breakpoint. The
+   phone step was re-measured after this change rather than assumed.
+
+   AND THE BAND'S PLATE FOLLOWS BY CONSTRUCTION, WHICH IS WHY THIS IS SAFE TO
+   MOVE. `--wb-title-w` (Exhibit.jsx) is the larger of the room name's own text
+   and the plate's text plus padding, measured with a Range over the GLYPHS, and
+   both boxes take it as `min-width` — so a bigger room name simply raises the
+   number both of them read and they stay equal-width and concentric. Nothing
+   about the plate needed editing. Re-measured on the built bundle after this
+   change on /wal, /wb and /robots: see the round log. */
 .wb-bar-room {
   font-family: 'Syne', sans-serif;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.45rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--wb-gold);

@@ -15,6 +15,7 @@ owner and no question attached, which is exactly what a register row is not for.
 | 1 | **Record 003 artwork — Wednesday 19 August.** Two manual plates and a redacted CEO letterhead. **The mechanism is built and this is zero code.** It is Mike's artwork, and it is **the only hard external deadline on this page.** | no row · the four devices' names are [E-a](OPEN_ACTIONS.md#e-a) |
 | 2 | **Records 2.1–2.5.** Mike's writing. | no row |
 | 3 | **/robots and /robots/record** — Mike checks before **5pm Monday**. | no row |
+| 3a | **The opened Record's layout — one word: a, b, or a+b.** Both of his options are built as real CSS and photographed against Record 001; nothing is in `src/` until he rules. **Open `docs/record-layout-variants/compare.html`.** | [Q-g](OPEN_ACTIONS.md#q-g) |
 
 ## TUESDAY — committed
 
@@ -96,8 +97,8 @@ new.
 
 ## WHAT THIS PAGE IS NOT
 
-**It is not the register.** `OPEN_ACTIONS.md` carries **137 rows**, of which
-**132 are OPEN and 114 are owned by Mike** — most of them one-word rulings,
+**It is not the register.** `OPEN_ACTIONS.md` carries **138 rows**, of which
+**133 are OPEN and 115 are owned by Mike** — most of them one-word rulings,
 records and notes rather than work with a date. **This page ranks the WORK.** A
 row that is not named here has not been closed, dropped or demoted; it is
 waiting in the register, where it has always been.

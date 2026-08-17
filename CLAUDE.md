@@ -763,6 +763,48 @@ read Doctrine 25.**
 
 Maintained here. Newest first.
 
+### 2026-08-17 -> COPY + THE RECORD LAYOUT (two batches) - Batch 1 sealed, Batch 2 waiting
+- **WAITING ON MIKE: open `docs/record-layout-variants/compare.html` and say a,
+  b or a+b.** Then `npm run deploy` for Batch 1. Gates: lint **9/8 = baseline** -
+  build green - **launch build green** - provenance **PASS** (14 pruned, 11
+  added, **0 surviving rows changed, 0 chains broken**) - `reveal:check` **PASS**
+  - `parity:gate` **PASS** - `instory:gate` **PASS** - `docs:numbers` **PASS** -
+  `reveal:day` **nothing to move** - `assets:orphans` **13 / unchanged (M9)**.
+  Log: `docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md`.
+- **NINE COPY CHANGES, HIS WORDS, AND THE THREE FACT-GRID CORRECTIONS WERE
+  RULED RATHER THAN FLAGGED.** /robots FAQ, the /wb blurb, the /wb fact grid
+  (five rows, `Founder` new), the Steven Tyler tile plus **a second tile under
+  the same label** (his ruling), `AFFILIATION`'s third line (**one edit, booth
+  and /wal both**), the /foundation donate answer, and two visitor-facing kills
+  on /wal.
+- **THE `NOTE` LINE MIKE ASKED TO KILL WAS A FIELD WITH NO GREP-VISIBLE
+  CONSUMER.** `siteNote` is printed 380 lines away by
+  `lines: a.siteNote ? ["NOTE     " + a.siteNote] : undefined`, and it was found
+  by **loading the page and asking the DOM which element held the string** - a
+  grep for a field name says nothing about whether it reaches a visitor. **The
+  ledger stayed**: the `[R-a]` comment recording why findmikeymike.com is
+  unlinked is untouched, and the sentence above it that pointed at `siteNote`
+  was repointed rather than left aiming at a deleted field.
+- **THE PAGE TITLE IS 1.2rem -> 1.45rem SITEWIDE AND THE BAND SURVIVED IT** -
+  0 uncovered, **0 dead of 21 over the control**, centres 0, on /wal /wb
+  /robots; 0 bar overlap at 1280 and 390 on six rooms. **AND THE STRICTER
+  READING IMPROVED**: over-PLATE dead went **14 of 21 at 1.2rem -> 7 at
+  1.45rem**, A/B'd by injecting the old rule into the same page.
+- **THE PROBE WAS WRONG TWICE BEFORE IT WAS RIGHT.** `hit.contains(control)`
+  makes every point pass, so a plate 192px from its control read 0 dead; and the
+  plate's box and the control's box answer different questions. **The test is
+  `hit === control || control.contains(hit)` across the CONTROL's whole box.**
+  Separately, `resize_window` does nothing on this host, so every measurement
+  was taken in a same-origin iframe sized until `clientWidth` IS the target.
+- **BOTH RECORD-LAYOUT VARIANTS ARE BUILT AS REAL CSS AND PHOTOGRAPHED, AND
+  NEITHER IS IN `src/`.** His complaint is arithmetically exact - the report
+  starts **71.5px left of the headline**, which is `--rec-textcol` exactly, so
+  variant **b** is one declaration reading a token the source already has.
+  **The combination was broken in a way only a measurement could catch:** a
+  custom property is resolved on the element that DECLARES it, so redefining
+  `--rec-rail` below `.vp-face` left the indent at the old rail's width and
+  reintroduced his own complaint, 40px smaller.
+
 ### 2026-08-09 -> THE RECORD EDITOR (E1-E5) - sealed
 - **WAITING ON MIKE: open `docs/dictation-20260807/record.html`.** His eight
   notes from Records 001 and 003 are in it, in braces, where he wrote them. Two

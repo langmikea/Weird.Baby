@@ -5682,29 +5682,6 @@
     "fb797f2b758ffaa7"
    ]
   },
-  "32c1731b19db8e13": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 739,
-   "t": "Two links that are not his",
-   "p": "ARTISTS[].card.sideboxes[].title",
-   "c": "RESTATED",
-   "r": [
-    "f86704ce094e14aa",
-    "5f10630b36f9385c",
-    "ccebf1eb56cb597b",
-    "ceaaddf3fe37d8af",
-    "f1d49031a6835f3a",
-    "fb797f2b758ffaa7"
-   ]
-  },
-  "f6e718439cdb39ac": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 745,
-   "t": "Both rank high. Both are ticket-resale and SEO pages, and neither is his.",
-   "p": "ARTISTS[].card.sideboxes[].note",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
   "fbc72c534ad01c70": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 767,
@@ -6563,21 +6540,6 @@
    "p": "doorsFor{}.fn",
    "c": "HOUSE"
   },
-  "55d4cfbf72a6d2ef": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 947,
-   "t": "He does own findmikeymike.com, and it is currently serving injected spam — so it is named in the ledger and linked nowhere.",
-   "p": "ARTISTS[].siteNote",
-   "c": "RESTATED",
-   "r": [
-    "181b7b8f2fc8eba2",
-    "aaaae49769c9dc56",
-    "f3059bd0c69cb66e",
-    "742acb488a6f919b",
-    "54e0f90b05dc8dbf",
-    "13d55d4628291d5c"
-   ]
-  },
   "f2998fc4a73769ef": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 950,
@@ -6699,45 +6661,6 @@
     "976ef78ec5b0811c",
     "4cac9fd8a0981c7a"
    ]
-  },
-  "69debf9b3427e9a4": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 985,
-   "t": "September 2019",
-   "p": "ARTISTS[].card.sideboxes[].title",
-   "c": "RESTATED",
-   "r": [
-    "53d78dcbb3f29dd2",
-    "44dfcac442f23961",
-    "a8489db8d087a989",
-    "dfd3bbabe0e839f7",
-    "976ef78ec5b0811c",
-    "4cac9fd8a0981c7a"
-   ]
-  },
-  "e78fb25f6204f3c1": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 986,
-   "t": "Germany, then Sweden, then London",
-   "p": "ARTISTS[].card.sideboxes[].lines[]",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "e47105b76a8358f3": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 987,
-   "t": "The Waiting Room, on the 20th",
-   "p": "ARTISTS[].card.sideboxes[].lines[]",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "4d7973e3568c0dcf": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 988,
-   "t": "He played “Amazon Prime” before it was released",
-   "p": "ARTISTS[].card.sideboxes[].lines[]",
-   "c": "VERIFIED",
-   "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
   },
   "81e845ece2828306": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -14063,13 +13986,6 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
   },
-  "7f76a2b7d3175718": {
-   "f": "src/data/artists/foundation.js",
-   "l": 850,
-   "t": "Yes. We will speak up when we have a need to fill.",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_WALKTHROUGH_LOG-20260813.md §0 — his walkthrough packet of 2026-08-13, quoted in full; the block under D · Foundation is his, carried across character for character with the one correction he made himself in the same breath (\"dedictated\" -> \"dedicated\")."
-  },
   "c11379d18fccffc3": {
    "f": "src/data/artists/foundation.js",
    "l": 859,
@@ -14703,13 +14619,6 @@
    "c": "MIKE",
    "s": "Mike's words, supplied 2026-08-16 and unchanged. The only edit on 2026-08-17 is that his blank line between the two beats is restored as a real paragraph break after the uniform inter-line air was killed — a line break and a paragraph break are different objects (Ops ruling of 2026-08-17, his to override). Not one character of the text moved."
   },
-  "6fbec371a5d78402": {
-   "f": "src/data/house-copy.js",
-   "l": 105,
-   "t": "No — Those exhibited on Weird.Baby are not partners, clients, or signings.\nThey are people we feel are Worth a Listen.",
-   "c": "MIKE",
-   "s": "Mike's booth FAQ rewrite of 2026-08-15, rejoined into two lines on 2026-08-16 after Ops found it had been wrapped by a code block on the way in. On 2026-08-17 he ruled /wal takes this answer exactly (\"Two lines. Do not break either one\"), so the passage is HOISTED into house-copy.js and read by both rooms rather than typed twice — Doctrine 17. It replaces the older AFFILIATION text, which is named once in this file's comment. Closes register row F-a."
-  },
   "a19e7095fa874dd6": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 282,
@@ -14801,31 +14710,10 @@
    "c": "MIKE",
    "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
   },
-  "f3802e2d2169bcc8": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 370,
-   "t": "Stevens Institute of Technology - Hoboken NJ - 1985 Mech Eng",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
-  },
-  "13ea9fede92a3042": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 371,
-   "t": "NJIT Newark, NJ - 2000 Eng Management",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
-  },
   "b6e049c30d67dfec": {
    "f": "src/data/artists/weird-baby.js",
    "l": 376,
    "t": "P!NK went to Papa Weird.Baby's High School - Central Bucks High School West. Rumor has it she had his old locker (at least that's the rumor Papa Weird.Baby is spreading).",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
-  },
-  "ca7d450f7db70c53": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 381,
-   "t": "Steven Tyler gave his harmonica to Papa Weird.Baby from the stage in Las Vegas, NV Feb 2020. Then Steven tried to get Papa Weird.Baby to say something into the mic during the show. (It was not pretty. Papa Weird.Baby panicked.)",
    "c": "MIKE",
    "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
   },
@@ -14842,13 +14730,6 @@
    "t": "Hunter Root and Papa Weird.Baby hung out behind the bar Hunter was playing that night. Burned some time out back with the band. (Why two at once? Because Papa Weird.Baby panicked.)",
    "c": "MIKE",
    "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
-  },
-  "c7be035c49164b1d": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 379,
-   "t": "Papa Weird.Baby (aka Mike Lang) is an Indie Melodic‑Talker who relies on sloppy-guitar and mournful lyrics to decry the plight of the homeless. And some funny stuff, too. And Robots!",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md. [2026-08-16] ONE CHARACTER CHANGED AND NO WORD DID: the hyphen in 'Melodic-Talker' is U+2011 NON-BREAKING HYPHEN, on his instruction not to break the word across lines. It draws identically; the string is otherwise his to the character."
   },
   "592217424d938627": {
    "f": "src/data/artists/foundation.js",
@@ -15278,13 +15159,6 @@
    "c": "RESTATED",
    "r": "10648bfbff65354d"
   },
-  "88d76961970e453e": {
-   "f": "src/data/artists/robots.js",
-   "l": 942,
-   "t": "The hardware is — you can hold it at least, and it is heavier than you expect.",
-   "c": "MIKE",
-   "s": "Mike's sentence with a struck clause removed, ruled 2026-08-11 (F2/F5)"
-  },
   "697785b65bf2c564": {
    "f": "src/data/artists/robots.js",
    "l": 1323,
@@ -15306,6 +15180,83 @@
    "t": "Well, not now, but soon. Hopefully. That's all I can say right now.",
    "c": "MIKE",
    "s": "Mike's own wording, ruled 2026-08-11 (F3), quoted verbatim in the packet"
+  },
+  "5971ead55fe1b50d": {
+   "f": "src/data/artists/foundation.js",
+   "l": 705,
+   "t": "Yes, and very soon.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" The donate answer, line 1 of 2."
+  },
+  "2a9d71206833d187": {
+   "f": "src/data/artists/foundation.js",
+   "l": 706,
+   "t": "We will speak up when we have a specific need to fill.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" The donate answer, line 2 of 2. It replaces \"Yes. We will speak up when we have a need to fill.\" and narrows the promise to a SPECIFIC need."
+  },
+  "1cd5304e9907e854": {
+   "f": "src/data/artists/robots.js",
+   "l": 570,
+   "t": "The hardware is; I mean you can hold it at least.\nAnd it's heavier than you might expect.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" The /robots FAQ answer to \"Is this stuff real?\", replacing \"The hardware is — you can hold it at least, and it is heavier than you expect.\" The newline is his line break, typed."
+  },
+  "9f916464658edff9": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 386,
+   "t": "Papa Weird.Baby (aka Mike Lang) is an Indie Melodic‑Talker who relies on Sloppy-Guitar and Mournful Lyrics to decry the plight of the masses. And some funny stuff, too. And Robots!",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" The ABOUT THE ARTIST blurb. Three changes against the 08-16 text, all his: Sloppy-Guitar and Mournful Lyrics take capitals, and \"the plight of the homeless\" becomes \"the plight of the masses\". The hyphen in Melodic‑Talker is U+2011 and is untouched."
+  },
+  "6dcbc1ccdba39d7e": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 416,
+   "t": "Stevens Institute of Technology - Hoboken, NJ - 1985 BSME",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" Fact-grid VALUE. Replaces \"Stevens Institute of Technology - Hoboken NJ - 1985 Mech Eng\": he added the comma and named the degree. Ruled, not flagged."
+  },
+  "c5fd6683c33245ad": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 417,
+   "t": "New Jersey Institute of Technology - Newark, NJ - 2000 MS Eng Mgmt",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" Fact-grid VALUE. Replaces \"NJIT Newark, NJ - 2000 Eng Management\": he spelled the institution out and named the degree. Ruled, not flagged."
+  },
+  "898e4b7365688821": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 418,
+   "t": "Founder",
+   "c": "HOUSE",
+   "s": "HOUSE label on the fact grid, the same rule the other four labels carry: every value in the grid is his line, every label is Ops' word for it, on his own instruction to propose the label set from his facts and invent none of them. The VALUE beside this label is his to the character. See docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md."
+  },
+  "15a16f3484a37e49": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 418,
+   "t": "Weird.Baby /Foundation /Robots /Music - August 16, 2026",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" Fact-grid VALUE, a NEW row: the four wings and the date are his, unedited."
+  },
+  "a3c262e6b4e08b53": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 444,
+   "t": "Steven Tyler gave his harmonica to Papa Weird.Baby from the stage in Las Vegas, NV January 2020. Then Steven tried to get Papa Weird.Baby to say something into the mic during the show. (Papa Weird.Baby panicked. Wicked awkward!!!)",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" The first Steven Tyler tile, replacing the 08-16 text: the date is January 2020 and the parenthetical is his — \"(Papa Weird.Baby panicked. Wicked awkward!!!)\"."
+  },
+  "8317d6c0d5c26940": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 450,
+   "t": "Spring of 2020: Mike journaled that when Steven Tyler comes to honk out 'Amazing Grace' with Mike on his front porch, it signifies the Weird.Baby Foundation is making a difference.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" The SECOND Steven Tyler tile, new this round. He ruled the repeated label fine, so it is a tile of its own rather than a merge with the first."
+  },
+  "0bbcec92db55976d": {
+   "f": "src/data/house-copy.js",
+   "l": 115,
+   "t": "No — Those exhibited on Weird.Baby are not partners, clients, or signings.\nThey are people we feel are Worth a Listen.\nWe show their public content, and we direct Gift Shop traffic directly to their site.",
+   "c": "MIKE",
+   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" AFFILIATION gains a third line — \"We show their public content, and we direct Gift Shop traffic directly to their site.\" It is hoisted in house-copy.js, so the booth's sheet and /wal's FAQ both draw it and cannot fork."
   }
  }
 }

@@ -101,10 +101,22 @@ export const KEEPER =
    THE NEWLINE IS LOAD-BEARING AND IS THE ONLY ONE. His instruction is "two
    lines, do not break either one", and both surfaces now draw a typed newline
    as a line: `.sheet-faq-a` has since 15 August, `.vp-faq-a p` since today. */
+/* ═══ [2026-08-17b] A THIRD LINE, HIS WORDS ══════════════════════════════════
+   MIKE: the answer gains "We show their public content, and we direct Gift Shop
+   traffic directly to their site."
+   THE HOIST IS DOING ITS JOB — this is ONE edit and both surfaces move: the
+   booth's sheet (`InfoBooth.jsx`) and /wal's FAQ (`worth-a-listen.js`) import
+   this constant, so the two wordings cannot fork again. That is the whole
+   reason `F-a` was closed by hoisting rather than by retyping.
+   THE NEWLINES ARE LOAD-BEARING AND THERE ARE TWO NOW. His instruction from
+   08-17 was "two lines, do not break either one"; this is the third, typed the
+   same way, drawn the same way by `.sheet-faq-a` and `.vp-faq-a p`. */
 export const AFFILIATION =
   "No — Those exhibited on Weird.Baby are not partners, clients, or signings." +
   "\n" +
-  "They are people we feel are Worth a Listen.";
+  "They are people we feel are Worth a Listen." +
+  "\n" +
+  "We show their public content, and we direct Gift Shop traffic directly to their site.";
 
 /* ═══ [2026-08-17] `USE_RIGHTS` IS DELETED — ITS QUESTION IS STRUCK ═══════
    MIKE: **"KILL 'Can I use what is here?' entirely, question and answer."**

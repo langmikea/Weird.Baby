@@ -559,9 +559,17 @@ const WBR_TRACKS = [
                "the house's usefully-useless humour" — and never reached a
                visitor. His first sentence is untouched and is now the whole
                answer. */
+            /* [2026-08-17] HIS REWRITE, VERBATIM. What it replaces, named once
+               (Doctrine 24): "The hardware is — you can hold it at least, and
+               it is heavier than you expect."
+               IT IS TWO LINES NOW AND THE NEWLINE IS TYPED. He wrote it on two
+               lines and the booth standard is that a line break is something
+               the writer typed — the same reading `AFFILIATION` runs on, and
+               the same one renderer (`.vp-faq-a p`) draws. */
             { title: "Is this stuff real?",
-              line: "The hardware is — you can hold it at least, and it is " +
-                    "heavier than you expect.",
+              line: "The hardware is; I mean you can hold it at least." +
+                    "\n" +
+                    "And it's heavier than you might expect.",
               note: "" },
             { title: "Does it work?",
               line: "See “Is this stuff real?”",

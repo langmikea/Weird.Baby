@@ -1,14 +1,56 @@
 # HANDOFF — for the next Code session
 
-Written 2026-08-17 at the close of MIKE'S LIVE-SITE WALKTHROUGH.
+Rewritten 2026-08-17 at the close of COPY + THE RECORD LAYOUT. Everything below
+§0b is from MIKE'S LIVE-SITE WALKTHROUGH earlier the same day and still stands.
 Session-scoped context only; process and standing facts live in
 `docs/canonical/OPERATIONS.md` and `CLAUDE.md`, not here.
 
-**Read the round log first: `docs/MUSEUM_WALKTHROUGH_LOG-20260817.md`.** Its
-first six sections are written specifically for you and are the things a round
-that skips them gets wrong. The previous day's log,
-`docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md`, is still current for everything it
-describes.
+**Read `docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md` first, then
+`docs/MUSEUM_WALKTHROUGH_LOG-20260817.md`.** The walkthrough log's first six
+sections are still the things a round that skips them gets wrong. The previous
+day's log, `docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md`, is still current for
+everything it describes.
+
+---
+
+## 0b — THE COPY ROUND, 2026-08-17 (LATER THE SAME DAY)
+
+**BATCH 1 IS DONE AND UNCOMMITTED. IT NEEDS A DEPLOY.** Nine copy changes across
+`robots.js`, `weird-baby.js`, `house-copy.js`, `foundation.js`,
+`worth-a-listen.js` and `MuseumBar.css`, plus 14 pruned / 11 added register rows.
+All gates green, every changed page loaded on the built bundle. The tree is
+listed in §7 below.
+
+**BATCH 2 IS WAITING ON ONE WORD FROM MIKE and is not in `src/`.** Two Record
+layout variants, built as real CSS and photographed against Record 001:
+`docs/record-layout-variants/compare.html`. Register row `Q-g`, short-list
+`16m`. When he rules, the chosen block in `variants.css` moves into
+`Exhibit.css` beside the rules it overrides **and that directory is deleted**.
+
+**FOUR THINGS FROM THAT ROUND THAT WILL BITE THE NEXT ONE:**
+
+1. **`resize_window` DOES NOTHING ON THIS HOST.** `innerHeight` stayed 810
+   whatever was asked for, so a sticky band can never be scrolled to its pinned
+   position by shrinking the window. Measure inside a **same-origin iframe on
+   the museum's own origin**, sized until `documentElement.clientWidth` IS the
+   target — the same correction `tools/lap/harness.html` makes, for the same
+   reason, and it needs nothing copied into `public/`.
+2. **THE HIT PROBE HAS TWO WAYS TO LIE AND BOTH WERE HIT.** `hit.contains(control)`
+   makes every point pass (any ancestor contains the control), and sampling the
+   PLATE's box answers a different question from sampling the CONTROL's box. The
+   test is `hit === control || control.contains(hit)`, across the **control's**
+   whole box, and nothing else.
+3. **A CUSTOM PROPERTY IS RESOLVED ON THE ELEMENT THAT DECLARES IT.**
+   `--rec-textcol` is `calc(var(--rec-rail) + 18px)` on `.vp-face`, so
+   redefining `--rec-rail` further down the tree does not change it. This cost
+   one wrong render and is written up in the variants file.
+4. **THE EXTENSION REFUSES `file://`.** To look at a page under `docs/`, copy it
+   into `dist/client/` (gitignored, wiped by the next build), restart wrangler,
+   and **delete the copy afterwards** — `lap:clean`'s habit applied to a
+   different folder.
+
+**AND ONE MECHANISM JOINS §3's LIST:** `siteNote` in `worth-a-listen.js` has no
+declarer left — Mike struck the one that existed. Its builder line survives.
 
 ---
 
@@ -102,6 +144,7 @@ code:
 | `door.coalition` | `reveal/ledger-declare.mjs` | `NOT_BUILT / HELD`. **The museum currently publishes no route to giving**, deliberately, and the ledger says so out loud. |
 | `wbFriendsHeld` | `wb_roster.js` | the Coalition gift-shop tile, held 08-16. Tree-shaken out of the bundle entirely. |
 | `records.noteLink` | `Exhibit.jsx` | the Bandcamp door — three callers, all in `worth-a-listen.js`. Not dead; listed so it is not mistaken for a general link affordance. |
+| `siteNote` → `lines: ["NOTE     " + …]` | `worth-a-listen.js` | Mikey Mike was its only declarer and Mike struck it on 2026-08-17 (*"Only the visitor-facing block goes"*). **Zero declarers.** The `[R-a]` ledger comment above it — why findmikeymike.com stays unlinked — is the record that survived and is untouched. |
 
 ---
 
@@ -159,7 +202,16 @@ _backup_weird-baby_before-W-a-20260816.js
 
 ## 7 — THE WORKING TREE, AS THIS ROUND LEFT IT
 
-**THE TREE IS CLEAN.** All of it is in `1b92276`. What that commit contains,
+**[2026-08-17, THE COPY ROUND] THE TREE IS NOT CLEAN AND THAT IS BATCH 1
+WAITING FOR A DEPLOY.** Modified: `provenance/register.json` ·
+`src/components/MuseumBar.css` · `src/data/artists/foundation.js` ·
+`src/data/artists/robots.js` · `src/data/artists/weird-baby.js` ·
+`src/data/artists/worth-a-listen.js` · `src/data/house-copy.js`. Untracked:
+`docs/record-layout-variants/` (Batch 2, not shipped) and this round's log,
+handoff and register edits. **Run `git status --short` — the paragraph below
+about `1b92276` describes the walkthrough commit, not the tree.**
+
+**AT THE WALKTHROUGH'S CLOSE THE TREE WAS CLEAN.** All of it is in `1b92276`. What that commit contains,
 recorded because the diff is the shape of the round rather than a file list:
 
 ```

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Record layout — pick one</title>
+<style>
+  :root{ --ink:#2b2a26; --mute:#6f6b62; --line:#c9c4b7; --paper:#e5e1d6; --card:#f6f4ee; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--paper);color:var(--ink);
+       font:16px/1.5 'Geist',system-ui,-apple-system,'Segoe UI',Arial,sans-serif}
+  main{padding:18px clamp(12px,2vw,28px) 60px;max-width:1500px;margin:0 auto}
+
+  h1{font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 4px;font-weight:700}
+  .sub{margin:0 0 6px;color:var(--mute);font-size:.88rem}
+  .hint{margin:0 0 20px;font-size:.88rem}
+
+  /* ── the four details, stacked, so the eye runs DOWN one vertical ───────── */
+  .stack{display:grid;gap:14px}
+  .shot{background:var(--card);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+  .head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+        padding:9px 12px;border-bottom:1px solid var(--line)}
+  .tag{font-family:'Courier New',monospace;font-weight:700;font-size:1.2rem;letter-spacing:.04em;
+       min-width:3.2em}
+  .name{font-size:.86rem;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
+  .said{font-size:.9rem}
+  .said em{font-style:normal;color:var(--mute)}
+  .shot img{display:block;width:100%;height:auto}
+  /* the details are capped so all four fit in about a screen and a half — they
+     share a left origin, so the eye can run one vertical down the page */
+  .stack .shot img{max-width:840px}
+  .num{margin:0;padding:8px 12px;border-top:1px solid var(--line);
+       font-family:'Courier New',monospace;font-size:.78rem;color:var(--mute)}
+  .num b{color:var(--ink);font-weight:700}
+
+  h2{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;margin:34px 0 10px}
+
+  /* ── the whole panel, for the shape of the page rather than the corner ──── */
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(430px,1fr));align-items:start}
+  .grid .shot img{border-top:0}
+
+  .foot{margin:10px 0 0;max-width:76ch;font-size:.9rem;color:var(--mute)}
+  .foot p{margin:0 0 9px}
+  .foot b{color:var(--ink)}
+  code{font-family:'Courier New',monospace;font-size:.85em;color:var(--ink)}
+</style>
+</head>
+<body>
+<main>
+
+  <h1>Record layout — pick one</h1>
+  <p class="sub">/robots/record · Record 001 · 1706px · the built bundle, the real entry</p>
+  <p class="hint">The thing to look at is one vertical: where <b>EXECUTIVE SUMMARY</b> starts against where <b>INITIAL LAUNCH</b> starts.</p>
+
+  <div class="stack">
+
+    <div class="shot">
+      <div class="head"><span class="tag">·</span><span class="name">As it is now</span>
+        <span class="said"><em>The report starts left of the headline.</em></span></div>
+      <img src="detail-current.png" alt="Now: EXECUTIVE SUMMARY starts left of INITIAL LAUNCH.">
+      <p class="num">headline <b>902.8</b> · report <b>831.3</b> · out by <b>71.5</b></p>
+    </div>
+
+    <div class="shot">
+      <div class="head"><span class="tag">a</span><span class="name">Grow the block</span>
+        <span class="said">“grow the nnn/DAY block to fill its space, establishing a clear top-left corner so the report reads as integrated”</span></div>
+      <img src="detail-a.png" alt="Variant a: a larger 001 / MON block; the report does not move.">
+      <p class="num">headline <b>942.9</b> · report <b>831.3</b> · out by <b>111.6</b> · the number goes <b>1.75×</b></p>
+    </div>
+
+    <div class="shot">
+      <div class="head"><span class="tag">b</span><span class="name">Indent the report</span>
+        <span class="said">“indent the report so it reads as subtext under the headline”</span></div>
+      <img src="detail-b.png" alt="Variant b: the report starts on the headline's vertical.">
+      <p class="num">headline <b>902.8</b> · report <b>902.8</b> · out by <b>0</b> · the mark does not move</p>
+    </div>
+
+    <div class="shot">
+      <div class="head"><span class="tag">a+b</span><span class="name">Both</span>
+        <span class="said"><em>The big corner, and the report on the headline’s vertical.</em></span></div>
+      <img src="detail-ab.png" alt="Variants a and b together.">
+      <p class="num">headline <b>942.9</b> · report <b>942.9</b> · out by <b>0</b></p>
+    </div>
+
+  </div>
+
+  <h2>The same four, whole page</h2>
+
+  <div class="grid">
+    <div class="shot">
+      <div class="head"><span class="tag">·</span><span class="name">As it is now</span></div>
+      <img src="record-current.png" alt="Now, whole panel.">
+    </div>
+    <div class="shot">
+      <div class="head"><span class="tag">a</span><span class="name">Grow the block</span></div>
+      <img src="record-a.png" alt="Variant a, whole panel.">
+    </div>
+    <div class="shot">
+      <div class="head"><span class="tag">b</span><span class="name">Indent the report</span></div>
+      <img src="record-b.png" alt="Variant b, whole panel.">
+    </div>
+    <div class="shot">
+      <div class="head"><span class="tag">a+b</span><span class="name">Both</span></div>
+      <img src="record-ab.png" alt="Variants a and b together, whole panel.">
+    </div>
+  </div>
+
+  <h2>What each one actually changes</h2>
+  <div class="foot">
+    <p><b>a</b> — the <code>001 / MON</code> block only. The number goes to 1.75× and the rail widens with it, so the corner is filled and the headline sits beside a block instead of beside a mark. Nothing else moves, so the report still starts left of the headline — <b>further left than it does now</b>. The claim is that it reads as the block’s column rather than as a hang.</p>
+    <p><b>b</b> — the report only. It starts on the headline’s vertical, a distance the source already has a name for (<code>--rec-textcol</code>), so nothing new is measured and nothing can drift. The mark is untouched.</p>
+    <p><b>a+b</b> — both, with the indent following the wider rail rather than the old one.</p>
+  </div>
+
+  <h2>The one cost worth knowing before you pick</h2>
+  <div class="foot">
+    <p><b>a</b> breaks a rule from 11 August: the index row and the opened head are meant to be the same object — same number, same size, same weight — so that opening an entry never shifts anything. <b>a</b> makes the opened number bigger than the index number. That is a fine thing to decide; it is just a decision rather than a side effect.</p>
+    <p><b>b</b> costs the report about 72px of width. Nothing rewraps at this width. On a phone it would, and that needs answering separately.</p>
+  </div>
+
+  <h2>Nothing here is shipped</h2>
+  <div class="foot">
+    <p>Both are written as real CSS in <code>variants.css</code> beside this page and applied to the live page to take these pictures. The museum is unchanged. Say <b>a</b>, <b>b</b>, <b>a+b</b> — or “bigger”/“smaller” on a’s number — and it goes in.</p>
+  </div>
+
+</main>
+</body>
+</html>

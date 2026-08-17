@@ -1,0 +1,147 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   RECORD LAYOUT — TWO VARIANTS, BUILT FOR MIKE TO RULE ON. NOT SHIPPED.
+   2026-08-17
+
+   HIS COMPLAINT, on /robots/record: a Record "displays awkwardly... a kinda-
+   out-dented format" — the nnn/DAY block sits left of the body, so the sections
+   below hang out to the LEFT of the headline instead of reading as its subtext.
+
+   MEASURED FIRST, at 1706px on the built bundle, Record 001 open:
+       .vp-flat / .vp-rec-openhead / .vp-rec-sects   left edge  831.3
+       .vp-rec-mark (the rail)                       left edge  833.3   w 53.5
+       .vp-rec-headline / .vp-rec-deck               left edge  902.8
+   So the report starts 71.5px to the LEFT of the headline it belongs to. That
+   is 2px of the head's padding + the 53.5px rail + the grid's 16px column gap,
+   which is `--rec-textcol` exactly (--rec-rail + 18px). His reading of the page
+   is arithmetically correct and the number already has a name in the source.
+
+   THIS FILE IS NOT IN `src/` AND IS NOT LOADED BY THE MUSEUM. It is injected at
+   runtime to take the comparison screenshots. When Mike rules, the chosen block
+   moves into `src/routes/exhibit/Exhibit.css` beside the rules it overrides and
+   this directory is deleted.
+
+   Scope: an attribute on <html>, `data-rec-layout="a" | "b" | "ab"`.
+   Nothing here is scoped to a route, because the injection is.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+
+/* ───────────────────────────────────────────────────────────────────────────
+   VARIANT A — GROW THE nnn/DAY BLOCK TO FILL ITS SPACE.
+
+   Mike: "grow the nnn/DAY block to fill its space, establishing a clear
+   top-left corner so the report reads as integrated."
+
+   THE REPORT DOES NOT MOVE. What changes is that the left column stops being a
+   small mark floating in an empty corner and becomes a block that OWNS that
+   column — so the sections beneath it read as sitting under the block rather
+   than hanging off the headline. The composition is an L: a masthead number at
+   the top left, the headline and deck beside it, the report below, all three
+   sharing one left edge.
+
+   THE OPENED HEAD ONLY, AND THAT IS THE COST TO STATE. J1's ruling (2026-08-11)
+   is that the index row carries into the opened record IN PLACE and WITHOUT
+   CHANGE — same number, same weekday, same position, same size, same weight —
+   and it is enforced by `.vp-rec-open, .vp-rec-openhead` being one selector
+   list. This variant deliberately breaks that for the mark, and only for the
+   mark: the headline and deck are untouched, so the pair Mike overlays still
+   agrees on everything except the size of the number. If he takes A, that is a
+   ruling on J1 and should be written down as one.
+
+   THE RAIL WIDTH FOLLOWS THE NUMBER BY CONSTRUCTION. `--rec-rail` is
+   `2.55 * --fs-lead` (Courier advances at .6em, so 4.25 characters), so raising
+   the mark's own step raises the column with it and four digits still fit the
+   day the volume reaches 1000. Nothing here hard-codes a pixel.
+   ─────────────────────────────────────────────────────────────────────────── */
+/* ONE NUMBER, DECLARED ONCE. Everything A does to the corner — the number's
+   step, the rail's width, and (in the combination) the report's indent — is
+   this scale times what shipped. It is the knob Mike turns if A is right in
+   kind and wrong in degree. */
+[data-rec-layout="a"],
+[data-rec-layout="ab"] { --rec-mark-scale: 1.75; }
+
+[data-rec-layout="a"] .vp-rec-openhead,
+[data-rec-layout="ab"] .vp-rec-openhead {
+  /* the head's own copy of the token — the index keeps the shipped one */
+  --rec-rail: calc(var(--fs-lead) * var(--rec-mark-scale) * 2.55);
+}
+[data-rec-layout="a"] .vp-rec-openhead > .vp-rec-mark,
+[data-rec-layout="ab"] .vp-rec-openhead > .vp-rec-mark {
+  align-self: stretch;          /* fill the head's height, not just its top */
+  justify-content: flex-start;
+  gap: 6px;
+  padding-top: 0;
+}
+[data-rec-layout="a"] .vp-rec-openhead .vp-rec-mark-no,
+[data-rec-layout="ab"] .vp-rec-openhead .vp-rec-mark-no {
+  font-size: calc(var(--fs-lead) * var(--rec-mark-scale));
+  line-height: .92;
+  color: var(--wb-gold);        /* the corner is the anchor; give it the ink */
+}
+[data-rec-layout="a"] .vp-rec-openhead .vp-rec-mark-day,
+[data-rec-layout="ab"] .vp-rec-openhead .vp-rec-mark-day {
+  font-size: var(--fs-small);
+  letter-spacing: .18em;
+  line-height: 1.05;
+}
+
+
+/* ───────────────────────────────────────────────────────────────────────────
+   VARIANT B — INDENT THE REPORT SO IT READS AS SUBTEXT UNDER THE HEADLINE.
+
+   Mike: "indent the report so it reads as subtext under the headline."
+
+   ONE DECLARATION, AND THE DISTANCE ALREADY HAS A NAME. `--rec-textcol` is
+   declared on the face as "the full distance from the face's left edge to the
+   index's text column" (A1, 2026-08-11) — the rail plus the row's 16px column
+   gap plus its 2px padding. It is exactly the offset the headline sits at, so
+   the report lands on the headline's vertical by reading the same token the
+   headline's own grid reads. No new arithmetic, and nothing to keep in step.
+
+   WHY NOT `ch`, WHICH IS THE TRAP THIS FILE'S OWN HISTORY NAMES TWICE: the rail
+   was once `width: 4.25ch` and resolved against the inherited Times New Roman
+   rather than the Courier it is set in. `--rec-textcol` is in `em` of
+   `--fs-lead`, so it is correct on any element whatever that element's face.
+
+   IT INDENTS THE WHOLE REPORT AND NOT ONLY THE SECTIONS — the lead paragraph,
+   the sections, the attachments, the tombstone, the note and the endmark are
+   one body of writing, and indenting some of them would trade Mike's complaint
+   for a worse version of it. THE FOOT TRANSPORT IS LEFT ALONE: it is furniture
+   rather than writing, it is right-aligned, and J1 pinned it to the top
+   group's geometry.
+
+   THE COST TO STATE: the report loses `--rec-textcol` of measure — about 72px
+   at 1706px. `.vp-rec-sect-body` is capped at 68ch and is nowhere near that
+   cap on a desktop, so no line rewraps at this width; on a phone it would, and
+   the ≤699px branch is where that would have to be answered if he takes B.
+   ─────────────────────────────────────────────────────────────────────────── */
+[data-rec-layout="b"] .vp-rec-openhead ~ .vp-rec-lead,
+[data-rec-layout="b"] .vp-rec-openhead ~ .vp-rec-sects,
+[data-rec-layout="b"] .vp-rec-openhead ~ .vp-rec-att,
+[data-rec-layout="b"] .vp-rec-openhead ~ .vp-rec-tomb,
+[data-rec-layout="b"] .vp-rec-openhead ~ .vp-fe-note,
+[data-rec-layout="b"] .vp-rec-openhead ~ .vp-rec-end,
+[data-rec-layout="ab"] .vp-rec-openhead ~ .vp-rec-lead,
+[data-rec-layout="ab"] .vp-rec-openhead ~ .vp-rec-sects,
+[data-rec-layout="ab"] .vp-rec-openhead ~ .vp-rec-att,
+[data-rec-layout="ab"] .vp-rec-openhead ~ .vp-rec-tomb,
+[data-rec-layout="ab"] .vp-rec-openhead ~ .vp-fe-note,
+[data-rec-layout="ab"] .vp-rec-openhead ~ .vp-rec-end {
+  padding-left: var(--rec-textcol);
+}
+
+/* ═══ IN THE COMBINATION, B MUST BE TOLD A's WIDTH — AND THE FIRST CUT WAS
+       WRONG IN A WAY THE MEASUREMENT CAUGHT AND READING WOULD NOT HAVE ═══════
+   B's indent is `--rec-textcol`, which is declared as `calc(var(--rec-rail) +
+   18px)` on `.vp-face`. A CUSTOM PROPERTY IS RESOLVED ON THE ELEMENT THAT
+   DECLARES IT and inherits down as a resolved value — so redefining
+   `--rec-rail` further down the tree does NOT retroactively change
+   `--rec-textcol`. The first cut of this file did exactly that, on
+   `.vp-flat`, and the combination rendered with A's 93.6px rail and B's
+   71.5px indent: the report landed 40px SHORT of the headline it was supposed
+   to align with, which is Mike's own complaint reintroduced by the fix for it.
+   Measured — headline 942.9, sections 902.8 — not read.
+   SO THE COMBINATION OVERRIDES THE DERIVED TOKEN ITSELF, on the same element
+   the shipped one is declared on, from the same one scale. */
+[data-rec-layout="ab"] .vp-face {
+  --rec-textcol: calc(var(--fs-lead) * var(--rec-mark-scale) * 2.55 + 18px);
+}

@@ -375,18 +375,47 @@ const spine = [
              returns NOTHING. Search for `Melodic` alone. The same trap applies
              to anything that ever matches this string — a provenance row, a
              numbers gate, a copy audit. */
+          /* [2026-08-17b] HIS REWRITE OF THE BLURB, VERBATIM. Three changes, all
+             his: `sloppy-guitar` -> `Sloppy-Guitar`, `mournful lyrics` ->
+             `Mournful Lyrics`, and `the plight of the homeless` -> `the plight
+             of the masses`. The capitals are his and are not a typo to tidy —
+             they set the two things against `Indie Melodic‑Talker`, which has
+             carried capitals since he wrote it.
+             THE U+2011 IS UNTOUCHED — see the note above. */
           blurb:
             "Papa Weird.Baby (aka Mike Lang) is an Indie Melodic‑Talker who "
-            + "relies on sloppy-guitar and mournful lyrics to decry the plight "
-            + "of the homeless. And some funny stuff, too. And Robots!",
+            + "relies on Sloppy-Guitar and Mournful Lyrics to decry the plight "
+            + "of the masses. And some funny stuff, too. And Robots!",
+          /* ═══ [2026-08-17b] THE WHOLE GRID IS REPLACED, AND THREE OF THE FIVE
+                 ROWS ARE CORRECTIONS HE RULED RATHER THAN FLAGS HE ANSWERED ══
+             MIKE supplied all five rows. What changed against the 08-16 grid,
+             named once (Doctrine 24):
+               · `Hoboken NJ` -> `Hoboken, NJ` — the comma the other three rows
+                 already had;
+               · `1985 Mech Eng` -> `1985 BSME` and `2000 Eng Management` ->
+                 `2000 MS Eng Mgmt` — the degrees named as degrees;
+               · `NJIT Newark, NJ` -> `New Jersey Institute of Technology -
+                 Newark, NJ` — the institution spelled out, which is what
+                 Stevens' row already did.
+             THESE ARE RULED. They arrived as corrections, not as questions, and
+             the standing loop (Ops reports, he rules) is closed on all three.
+             `Studied` STILL APPEARS TWICE and for the same reason it always
+             has: two institutions, and inventing "Undergrad"/"Postgrad" would
+             be Ops asserting a fact about his education. The degree letters he
+             has now supplied do not change that — BSME and MS Eng Mgmt are in
+             the VALUES, which are his.
+             `Founder` IS A NEW ROW AND A NEW FACT. The label is Ops' like every
+             other `k` on this card; the value is his to the character, the four
+             wings and the date included.
+             STILL FLAGGED, STILL NOT CORRECTED: `Born | Born July 3, 1963`
+             repeats its label, so the grid prints the word twice. It is his
+             value as supplied and it is his to rule on — backlog row `Q-c`. */
           tombstone: [
-            /* [2026-08-16] FLAGGED, NOT CORRECTED: the value repeats the label,
-               so this row prints "BORN  Born July 3, 1963". His two columns as
-               supplied. */
             { k: "Born", v: "Born July 3, 1963" },
             { k: "High School", v: "CB West - Doylestown, PA - Class of 1981" },
-            { k: "Studied", v: "Stevens Institute of Technology - Hoboken NJ - 1985 Mech Eng" },
-            { k: "Studied", v: "NJIT Newark, NJ - 2000 Eng Management" },
+            { k: "Studied", v: "Stevens Institute of Technology - Hoboken, NJ - 1985 BSME" },
+            { k: "Studied", v: "New Jersey Institute of Technology - Newark, NJ - 2000 MS Eng Mgmt" },
+            { k: "Founder", v: "Weird.Baby /Foundation /Robots /Music - August 16, 2026" },
           ],
           profile: [
             { label: "P!NK",
@@ -394,12 +423,33 @@ const spine = [
                 "P!NK went to Papa Weird.Baby's High School - Central Bucks "
                 + "High School West. Rumor has it she had his old locker (at "
                 + "least that's the rumor Papa Weird.Baby is spreading)." },
+            /* ═══ [2026-08-17b] HIS REWRITE, AND A SECOND TILE UNDER THE SAME
+                   LABEL ══════════════════════════════════════════════════════
+               The first tile is replaced word for word. What went, named once:
+               "…from the stage in Las Vegas, NV Feb 2020… (It was not pretty.
+               Papa Weird.Baby panicked.)" — the date is `January 2020` now and
+               the parenthetical is his three new words.
+               THE REPEATED LABEL IS RULED, NOT OVERLOOKED. Two tiles both say
+               STEVEN TYLER, which no other pair on this card does; Mike ruled
+               it fine, so no container, no "(2)", and no merged tile. They are
+               two separate things that happened — a harmonica, and a journal
+               entry about a porch — and merging them would be Ops writing one
+               achievement out of two of his.
+               `profile` FILTERS ON `kept(label) && kept(body)`, so a tile with
+               a duplicate label is no different to the renderer from any other;
+               the React key is the index, which is already how this array is
+               drawn. Nothing about the repeat needs a mechanism. */
             { label: "Steven Tyler",
               body:
                 "Steven Tyler gave his harmonica to Papa Weird.Baby from the "
-                + "stage in Las Vegas, NV Feb 2020. Then Steven tried to get "
-                + "Papa Weird.Baby to say something into the mic during the "
-                + "show. (It was not pretty. Papa Weird.Baby panicked.)" },
+                + "stage in Las Vegas, NV January 2020. Then Steven tried to "
+                + "get Papa Weird.Baby to say something into the mic during the "
+                + "show. (Papa Weird.Baby panicked. Wicked awkward!!!)" },
+            { label: "Steven Tyler",
+              body:
+                "Spring of 2020: Mike journaled that when Steven Tyler comes to "
+                + "honk out 'Amazing Grace' with Mike on his front porch, it "
+                + "signifies the Weird.Baby Foundation is making a difference." },
             { label: "Rod Stewart",
               body:
                 "Rod Stewart kicks soccer balls into the crowd each show. Papa "

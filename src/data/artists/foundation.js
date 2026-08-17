@@ -691,8 +691,19 @@ const FAQ = [
        change; only the question's row moves. */
     q: "Can I donate something besides money?",
     on: "foundation",
+    /* [2026-08-17b] HIS REWRITE, VERBATIM, REPLACING THE ONE-LINER. Named once
+       (Doctrine 24): "Yes. We will speak up when we have a need to fill."
+       IT IS TWO LINES NOW AND NOT ONE, which is the change worth reading: the
+       old answer put the timing and the promise in one breath. `Yes, and very
+       soon.` is an answer to the question on its own line, and the need is
+       `specific` now — a narrower promise than the one it replaces.
+       TWO ARRAY ELEMENTS ARE TWO LINES AND NOT TWO PARAGRAPHS.
+       `.vp-faq-a p + p` is `margin-top:0`, so consecutive elements draw exactly
+       as a typed newline does; a real paragraph break is a blank line INSIDE an
+       element, which is what "What happens when you stop?" carries. */
     lines: [
-      "Yes. We will speak up when we have a need to fill.",
+      "Yes, and very soon.",
+      "We will speak up when we have a specific need to fill.",
     ],
   },
   {
