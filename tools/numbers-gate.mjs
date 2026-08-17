@@ -70,6 +70,16 @@ const DOCS = [
     note: "every row is live by Doctrine 24 — a closed row leaves the file. "
         + "Counts inside a row's question are REPORTED, NEVER CORRECTED: "
         + "editing them edits the sentence Mike is being asked to rule on." },
+  /* [2026-08-16] THE RANKED BACKLOG PUBLISHES THREE COUNTS ABOUT THE REGISTER,
+     AND A COUNT NOTHING CHECKS IS THE TRIPWIRE-DISABLING FAILURE THIS FILE
+     EXISTS FOR. `BACKLOG.md`'s closing section says how many rows the register
+     holds, how many are OPEN and how many are Mike's — to make the point that
+     the page ranks the WORK and does not replace the register. Every one of the
+     three goes stale the next time a row closes, which under Doctrine 24 is
+     routine now. */
+  { file: "docs/BACKLOG.md",
+    historyFrom: null,
+    note: "a ranking, not a log — read whole" },
   { file: "STATE.md",
     skipWhole: "a round log almost end to end. Its fourteen `11 err / 9 warn` "
              + "readings are what the gates said on the day each round sealed, "
@@ -102,6 +112,19 @@ measure.ledgerRows = () => {
   return (l.rows || l.entries || l).length;
 };
 measure.registerRows = () => Object.keys(J("provenance/register.json").entries).length;
+/* the OPEN-ACTIONS register, not the provenance register — three counts off one
+   read, because the backlog publishes all three in one sentence. A row is a line
+   opening `| <a id=`; its status and owner are the 4th- and 3rd-from-last cells,
+   which is the shape every row in that file has carried since it was built. */
+measure.openActions = () => {
+  const rows = R("docs/OPEN_ACTIONS.md").split("\n").filter(l => l.startsWith("| <a id="));
+  const cell = (l, n) => { const c = l.split("|").map(x => x.trim()); return c[c.length - n]; };
+  return {
+    rows: rows.length,
+    open: rows.filter(l => cell(l, 4) === "OPEN").length,
+    mike: rows.filter(l => cell(l, 3) === "Mike").length,
+  };
+};
 measure.manualPages = () => fs.readdirSync(path.join(REPO, "public/held/robots/manual"))
   .filter(f => /^page-\d+\.png$/.test(f)).length;
 measure.recordEntries = async () => {
@@ -167,6 +190,18 @@ const CHECKS = [
     near: /manual is/i,
     what: "the manual's page count",
     measured: async () => [measure.manualPages()] },
+
+  { id: "open-actions-rows",
+    find: /carries\s*\*{0,2}(\d+)\s*rows\*{0,2}/gi,
+    near: /OPEN_ACTIONS\.md/i,
+    what: "the open-actions register's row count",
+    measured: async () => [measure.openActions().rows] },
+
+  { id: "open-actions-open-and-mike",
+    find: /\*{0,2}(\d+)\s*are OPEN[^.]{0,20}?(\d+)\s*are owned by Mike/gi,
+    near: /are OPEN/i,
+    what: "how many register rows are OPEN and how many are Mike's",
+    measured: async () => { const o = measure.openActions(); return [o.open, o.mike]; } },
 ];
 
 /* ═══ A CORRECTION NOTE IS NOT A CLAIM ═════════════════════════════════════

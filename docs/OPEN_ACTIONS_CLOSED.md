@@ -464,3 +464,31 @@ catch what he says.
 | **S-o** | CLOSED 2026-08-17 &mdash; he ruled both copyright limits and both are applied. **One quote per source:** Ken Tucker was quoted twice on Carsie's card; *"delightfully surprising"* (March 2019) is cut and *"one of those hard-headed, open-hearted protesters"* (April 2021) kept, chosen on what it says rather than on its date. **Under fifteen words:** the 24-word Jesse Welles quote is deleted rather than trimmed, because its paraphrase was already on the same page in the "Also" deck with the same door; that card now names No Kid Hungry and the Arkansas Food Bank, which the quote had been the only place to name them. Re-measured: **no source quoted twice, zero text quotes at or over fifteen words.** |
 
 | **W-b** | CLOSED 2026-08-17 &mdash; **it had been ruled since 15 August and the row did not know.** `Papa@Weird.Baby` is purpose-placed in the booth FAQ, superseding the 2026-08-11 sitewide strike, so `How to contact?` on /wb can be answered whenever that track is wanted back. **The ruling was never the blocker; the empty second question was.** The FAQ track itself is HELD on his 2026-08-17 walkthrough ("It is empty and Mike has no time for it") &mdash; `HELD_TRACKS` in `weird-baby.js`, unconditional, track kept whole. **Do not un-hide it on the strength of the address existing.** |
+
+## CLOSED 2026-08-16 — THE BACKLOG RECONCILIATION
+
+Mike ranked the whole backlog and named what is dead. Doctrine 24: a closed row
+leaves his view, is named once here, and does not come back.
+
+**FOUR OF THE SEVEN HAD NO ROW IN THE REGISTER AT ALL.** They are recorded here
+anyway, because the point of naming a dead thing once is that nobody opens it
+again — and an item with no row is exactly the one a later round re-raises as if
+it were new.
+
+| the item | had a row? | what closed it |
+|---|---|---|
+| **the approve tool** | no | **A STAMP WITH NO CONSUMER.** `npm run approve` writes a signature into `provenance/approvals.json` and **nothing reads it back** — a fingerprint that stops matching stops matching in silence, and Mike would have to go and look to find out. **THE APPROVAL LAW IS NOT CLOSED AND IS NOT WEAKENED:** the signature, the fingerprint and the rule that a changed page stops being approved all stand, and `approvals.json` is untouched. What is closed is the TOOL as a backlog item. **It returns when it feeds the quality box** — the thing that will surface a dropped signature without him going to look. A stamp nobody reads is not a check; it is a note. |
+| **the deploy card** | no | **SUPERSEDED.** It is a panel of the quality box, not a row of its own. Closing it is a statement about where it lives, not about whether it happens. |
+| **the nine-variant short** | no | **A NOTE IN THE DRAWER, NOT A ROW.** It is a thing that could be made, not a thing that is waiting on anybody. `M46` — *how often should a SHORT come out?* — is a DIFFERENT question (a cadence and an owner) and **stays open**; it was not folded in and was not closed by proximity. |
+| **M33** | yes | **FOLDED INTO [PZ-a](OPEN_ACTIONS.md#pz-a).** The five unarmed drum positions and the puzzle are one question: each position is a boolean and a feed, and what decides which arms and in what order IS the mechanism PZ-a is waiting on. Two rows asking one question is how one of them goes stale. |
+| **the FEED ch-4 contradiction** | no | **FOLDED INTO [PZ-a](OPEN_ACTIONS.md#pz-a)**, same reason, and recorded here because it never had a row to fold. |
+| **S-i** | already closed | **CONFIRMED, NOT RE-CLOSED.** It closed on 2026-08-16 with the donate passage and is in this file above. Mike's read of it was right; the register was already correct. |
+| **S-l** | yes | **NOT A DEFECT.** The double space in Record 001's deck is **in the data and not on the glass** — the deck carries `white-space: pre-line`, which collapses runs of spaces, so it has never drawn and cannot draw. It was raised as a sweep finding and it should never have been a question for him. |
+| **the 314 rule** | no remnants | **DEAD SINCE 15 AUGUST AND VERIFIED GONE.** Searched the register for surviving remnants: none. The one line that carried it was struck on the day (his words, *"too much squeeze for the juice"*), and 314 as Film A's packet rate is a SEPARATE use that was never part of this and is untouched. |
+
+**One row was DEFERRED rather than closed and is still in the register:**
+[**Q-f**](OPEN_ACTIONS.md#q-f), SEO, with the trigger *revisit at roughly 30
+Records.* **Ops had dismissed the whole of SEO and was too broad**: the robots
+fiction will not rank and chasing it is wasted, but *"Papa Weird.Baby"*,
+*"Weird.Baby Foundation"* and the album should own their own names, so a person
+who HEARS the name and types it lands here. That half is cheap and permanent.

@@ -503,6 +503,96 @@ Nothing was scoped, scaffolded or half-built for any of the three.
 
 ---
 
+## JOB 5 — THE PRUNED BACKLOG, ON THE DESK
+
+**MIKE: "File the pruned backlog on the Ops Desk… Mike looks at the desk for
+everything, so it belongs there."**
+
+### `npm run desk` → `docs/BACKLOG.html`, THE FIRST CARD
+
+His ranking is the spine, in his tiers and his words: **NOW · TUESDAY · NEXT ·
+THEN · PARKED · IN PASSING**, then the SEO deferral and the closures. It leads
+the desk rather than following the register, for Doctrine 26's reason: the
+register answers *what is outstanding*, this answers *what is next*, and the
+second is the question he opens the desk with.
+
+**IT IS A SECOND MARKDOWN THROUGH THE SAME RENDERER — no second machine.**
+`BACKLOG.md` is the source; the register is untouched as the full record.
+
+### SEVEN CLOSED, AND FOUR OF THEM HAD NO ROW AT ALL
+
+| item | had a row? | closed because |
+|---|---|---|
+| the approve tool | **no** | a stamp with no consumer — `npm run approve` writes a signature and nothing reads it back. **The Approval Law is not touched**; the TOOL returns when it feeds the quality box |
+| the deploy card | **no** | superseded — a panel of the quality box, not a row |
+| the nine-variant short | **no** | a note in the drawer, not a row. **M46 (shorts cadence) is a different question and stays open** — it was not folded in by proximity |
+| **M33** | yes | folded into `PZ-a` — each drum position is a boolean and a feed, and what decides which arms IS the mechanism PZ-a waits on |
+| the FEED ch-4 contradiction | **no** | folded into `PZ-a`, same reason |
+| **S-i** | already closed | confirmed, not re-closed. His read was right and the register was already correct |
+| **S-l** | yes | **not a defect** — the double space is in the data and cannot draw; `white-space: pre-line` collapses runs of spaces |
+| the 314 rule | **no remnants** | searched the register: none. Film A's packet rate is a separate use and is untouched |
+
+**THE FOUR WITH NO ROW ARE WRITTEN UP ANYWAY**, in `OPEN_ACTIONS_CLOSED.md`.
+**An item with no row is precisely the one a later round re-raises as if it were
+new** — naming a dead thing once is what stops it coming back, and that only
+works if the naming happens whether or not there was ever a row to delete.
+
+Register: **139 rows → 137**, plus the two SHORT LIST lines that pointed at the
+two closed rows. **Dead intra-file links: 0** — checked, because §9 records that
+a closed row leaves its SHORT LIST line behind, four times in two rounds.
+
+### SEO IS DEFERRED WITH A TRIGGER, AND OPS WAS WRONG ABOUT HALF OF IT
+
+Row **`Q-f`**. His split: **the robots fiction will not rank and chasing it is
+wasted** — nobody searches for a machine that does not exist — **but *"Papa
+Weird.Baby"*, *"Weird.Baby Foundation"* and the album should own their own
+names**, so a person who HEARS the name and types it lands here. That half is
+cheap and permanent. **Ops had dismissed the whole of SEO; that was too broad
+and the row says so.** Trigger: **revisit at roughly 30 Records** — the point at
+which there is enough written surface for a name to resolve TO something.
+
+### TWO GUARDS, BECAUSE TWO FILES THAT POINT AT EACH OTHER DRIFT
+
+**(1) EVERY REGISTER LINK ON THE BACKLOG IS CHECKED ON EVERY BUILD.** The desk's
+own rule — *never draw a link to something that is not there* — one level down.
+A backlog pointing at a row somebody closed reads as *still open* to the one
+person who cannot check, which is exactly what this reconciliation was cleaning
+up, and Doctrine 24 makes closures routine. **Proved by breaking it:** pointing
+one link at `#zz-probe` named it on the console and red-flagged the page; put
+back, `every register link on the backlog resolves to a live row`.
+
+**(2) THE THREE COUNTS IT PUBLISHES ARE NOW A TRIPWIRE.** The closing section
+says the register holds **137 rows, 132 OPEN, 114 owned by Mike** — the sentence
+that makes the point that this page ranks the WORK and does not replace the
+register. All three go stale the next time a row closes. `npm run docs:numbers`
+measures them off `OPEN_ACTIONS.md` now: **10 published claims in 4 documents**,
+up from 8 in 3. **Proved by breaking it:** `137` → `999` failed the gate with
+the file, the line number and both numbers.
+
+### AND THE `.md` LINK TRAP CAUGHT ITSELF
+
+`BACKLOG.md` links to `OPEN_ACTIONS.md#id`, which is right for anyone reading
+the markdown — and wrong in the rendering, where a browser handed a `.md` either
+downloads it or draws 760 lines of pipe characters. **This file's own header
+already says that**, about itself, which is how it was caught. The source keeps
+its honest link; the rendering repoints at the rendering. Measured after: **zero
+`.md` links in `BACKLOG.html`, 21 register links, and the anchor each one names
+exists in `OPEN_ACTIONS.html`.**
+
+**`OPEN_ACTIONS_CLOSED.md` IS DELIBERATELY NOT LINKED AND NOT ON THE DESK** —
+Doctrine 24: the test is not whether a dead thing is archived, it is whether he
+meets it again. The backlog names the seven closures in plain text and says
+where the reasons are written, without putting them one click from his desk.
+
+### WHAT THIS PAGE DOES NOT DO
+
+**It does not replace the register and says so on itself.** 137 rows are still
+there; his ranking names 21 of them. **A row not named in the ranking has not
+been closed, dropped or demoted** — stated on the page, because a ranked list
+that looks complete is how the other 116 quietly stop existing.
+
+---
+
 ## GATES
 
 | gate | result |
@@ -514,7 +604,8 @@ Nothing was scoped, scaffolded or half-built for any of the three.
 | `npm run reveal:check` | **PASS** |
 | `npm run parity:gate` | **PASS** — 4 shared · 0 divergences |
 | `npm run instory:gate` | **PASS** — 0 findings |
-| `npm run docs:numbers:gate` | **PASS** |
+| `npm run docs:numbers:gate` | **PASS** &mdash; **10 claims in 4 documents**, up from 8 in 3 |
 | `npm run reveal:day` | nothing to move |
+| `npm run desk` | **12 instruments, 12 on disk** &middot; every backlog link resolves |
 
 **Nothing was committed, pushed or deployed. No dev server is left listening.**
