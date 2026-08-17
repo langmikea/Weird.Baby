@@ -1175,6 +1175,14 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
                 track that gains a second version gets its arrow back with no
                 code change and nothing to remember. What is hidden is the
                 affordance, not the machine. */}
+            {/* ═══ [2026-08-16] AND THE HIT AREA GOES TOO — MIKE, AGAIN ═══════
+                **"That ruling hid the arrow and left the hit area; hiding the
+                visible part is not hiding the control."** Measured on the
+                deployed site: 70px of a 430px row still opened a ONE-OPTION
+                menu instead of playing. `data-single` now drives `display:none`
+                rather than an arrow suppressor — same attribute, same "keep the
+                mechanism", nothing new in this file. The rule and the
+                measurement are at `.tl-typewrap[data-single]` in Exhibit.css. */}
             {hasVids ? (
               <span className="tl-selwrap">
                 <b className="tl-tt">{track.title}</b>
@@ -1188,6 +1196,39 @@ function TrackList({ album, playingTrackIdx, activeTrack, selectedVis, onSelect,
                     ))}
                   </select>
                 </span>
+                {/* ═══ [2026-08-16] THE TYPE IS THE ROW'S, NOT THE CONTROL'S ══
+                    MIKE: **"Restore FIRST PASS on the rows. It was lost as a
+                    side effect, not ruled away… Print the type on the row
+                    independently of the select, so the label does not depend on
+                    a control that may be hidden."**
+
+                    WHAT HAPPENED. The `<option>` text WAS the label — a
+                    rendition name and a variant picker were one element — so
+                    hiding the picker on a single-version row took the name with
+                    it, and /wb's six rows lost `FIRST PASS`, which is his own
+                    2026-08-13 ruling (`RECORDING — 2026-06` -> `first pass`, to
+                    match the approved blurb).
+
+                    A LABEL AND A CONTROL ARE TWO THINGS AND NOW THEY ARE TWO
+                    ELEMENTS. The static span draws exactly when the select does
+                    not, off the same `videos.length` test and the same
+                    `tidyDesc()` string, so the row reads identically either way
+                    and neither can be hidden without the other appearing.
+                    IT IS OUTSIDE `.tl-typewrap` ON PURPOSE: that wrapper stops
+                    propagation so the picker does not play the track, and a
+                    LABEL has no reason to eat a click. This span is part of the
+                    row's hit area, which is the whole of what the previous
+                    round was fixing. */}
+                {/* AND AN EMPTY TYPE DRAWS NOTHING AT ALL, WHICH IS A
+                    MEASUREMENT AND NOT A TIDY-UP. `tidyDesc()` strips the
+                    track's own title off the front of the label, so a rendition
+                    named after its song returns "" — every /wal song row. An
+                    empty span is invisible but it still takes the flex gap
+                    (measured: the /wal tracklist went 296.0 -> 296.9px), and an
+                    empty element is a thing a later round has to explain. */}
+                {track.videos.length < 2 && tidyDesc(track.title, track.videos[0]) && (
+                  <span className="tl-type">{tidyDesc(track.title, track.videos[0])}</span>
+                )}
               </span>
             ) : (
               <span className="tl-title">{track.title}</span>

@@ -15179,40 +15179,12 @@
    "c": "HOUSE",
    "s": "NOT VISITOR COPY — an identifier. `wb-faq` is the track id in `HELD_TRACKS` (src/data/artists/weird-baby.js), the unconditional hold Mike ruled on 2026-08-17 (\"HIDE the FAQ track. It is empty and Mike has no time for it\"). The track it names does not render in either stage."
   },
-  "06f7bc0b6daba032": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 328,
-   "t": "Papa Weird.Baby (aka Mike Lang) is an Indie Melodic-Talker who relies on sloppy-guitar and mournful lyrics to decry the plight of the homeless. And some funny stuff, too. And Robots!",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
-  },
   "e2aa8598c96bd106": {
    "f": "src/data/artists/weird-baby.js",
    "l": 332,
    "t": "Born",
    "c": "HOUSE",
    "s": "HOUSE label on a fact grid, proposed by Ops on his instruction of 2026-08-17: \"Propose the label set from his facts; do not invent facts.\" The VALUE beside it is his line, unedited; the label is Ops' word for it. `Studied` appears twice because he listed two institutions and no degree level for either — inventing Undergrad/Postgrad would assert a fact about his education he did not state."
-  },
-  "ac7f338a03a3a5e4": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 332,
-   "t": "7/3 63",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
-  },
-  "fa0ea997d84831aa": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 333,
-   "t": "School",
-   "c": "HOUSE",
-   "s": "HOUSE label on a fact grid, proposed by Ops on his instruction of 2026-08-17: \"Propose the label set from his facts; do not invent facts.\" The VALUE beside it is his line, unedited; the label is Ops' word for it. `Studied` appears twice because he listed two institutions and no degree level for either — inventing Undergrad/Postgrad would assert a fact about his education he did not state."
-  },
-  "ebea009536a5a014": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 333,
-   "t": "CB West Doylestown, PA",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
   },
   "dd1c56d90cd2ac48": {
    "f": "src/data/artists/weird-baby.js",
@@ -15221,33 +15193,12 @@
    "c": "HOUSE",
    "s": "HOUSE label on a fact grid, proposed by Ops on his instruction of 2026-08-17: \"Propose the label set from his facts; do not invent facts.\" The VALUE beside it is his line, unedited; the label is Ops' word for it. `Studied` appears twice because he listed two institutions and no degree level for either — inventing Undergrad/Postgrad would assert a fact about his education he did not state."
   },
-  "0476baf5dc06311a": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 334,
-   "t": "Stevens Institute of Technology - Hoboken NJ - '85 Mech Eng",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
-  },
-  "980b091d2db152f6": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 335,
-   "t": "NJIT Newark, NJ - '00 Eng Management",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
-  },
   "abf95336f68f0292": {
    "f": "src/data/artists/weird-baby.js",
    "l": 338,
    "t": "P!NK",
    "c": "HOUSE",
    "s": "HOUSE label on a tile. Mike's instruction of 2026-08-17 named the four tiles: \"Four tiles: P!NK, Steven Tyler, Rod Stewart, Hunter Root.\" The labels are the names he named; the bodies are his own sentences."
-  },
-  "1cadbbfeaa99744f": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 340,
-   "t": "P!NK went to Papa Weird.Baby's High School - Central Bucks High School West. Rumor has it she had his old locker. At least that's the rumor he's spreading.",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
   },
   "6cfa4cf94c2bcba2": {
    "f": "src/data/artists/weird-baby.js",
@@ -15256,26 +15207,12 @@
    "c": "HOUSE",
    "s": "HOUSE label on a tile. Mike's instruction of 2026-08-17 named the four tiles: \"Four tiles: P!NK, Steven Tyler, Rod Stewart, Hunter Root.\" The labels are the names he named; the bodies are his own sentences."
   },
-  "67e543b2cc8d2e94": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 345,
-   "t": "Steven Tyler \"handed him\" his personal harmonica, onstage, Las Vegas NV Feb 2020. Then he tried to get him into the mic during the show. (Not pretty. He panicked.)",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
-  },
   "b502f0c13f2ac9cf": {
    "f": "src/data/artists/weird-baby.js",
    "l": 348,
    "t": "Rod Stewart",
    "c": "HOUSE",
    "s": "HOUSE label on a tile. Mike's instruction of 2026-08-17 named the four tiles: \"Four tiles: P!NK, Steven Tyler, Rod Stewart, Hunter Root.\" The labels are the names he named; the bodies are his own sentences."
-  },
-  "ce6bc7eb79d5457a": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 350,
-   "t": "Rod Stewart kicks soccer balls out to the crowd, he caught one! His has Rod's name written on it; must be his personal ball. He hopes that is OK.",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
   },
   "459ffb6cc8d1a4cc": {
    "f": "src/data/artists/weird-baby.js",
@@ -15284,13 +15221,6 @@
    "c": "HOUSE",
    "s": "HOUSE label on a tile. Mike's instruction of 2026-08-17 named the four tiles: \"Four tiles: P!NK, Steven Tyler, Rod Stewart, Hunter Root.\" The labels are the names he named; the bodies are his own sentences."
   },
-  "39e220f2536644d8": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 360,
-   "t": "Learning to play acoustic guitar and sing in order to record the songs he just wrote so he can release the album he announced. And Robots.",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md."
-  },
   "92e386cea2387a46": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 1048,
@@ -15298,12 +15228,82 @@
    "c": "VERIFIED",
    "s": "jessewelles.bandcamp.com — his own store page, read 2026, where he wrote it himself in his own lower case. The card's door opens that page. OPS' WORDS, HIS FACT: Mike ruled on 2026-08-17 that the 24-word direct quote must not ship under any framing and preferred a paraphrase with no quote marks; his own suggested wording is used for the first sentence. The two charities — No Kid Hungry and the Arkansas Food Bank — are named here because the deleted quote had been the only place naming them."
   },
-  "c7cc7250a0921852": {
+  "6b02911c55c70f9d": {
    "f": "src/data/artists/weird-baby.js",
-   "l": 359,
-   "t": "Hunter Root and Papa Weird.Baby hung out behind the bar he was playing that night. Burned some time together. (Two at once?!? He panicked.)",
+   "l": 368,
+   "t": "Born July 3, 1963",
    "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, rewritten to third person on his ruling of 2026-08-17 (pronouns only). ONE FURTHER EDIT, an Ops ruling of 2026-08-17 that he may override: his \"Sorry, I panicked\" became \"He panicked.\" rather than \"Sorry, he panicked.\" — the \"Sorry\" was him addressing the reader and in third person it is an orphan with no speaker. It now matches the Steven Tyler tile exactly, which makes the repetition the joke it already was."
+   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
+  },
+  "bcb5b064e44fe361": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 369,
+   "t": "High School",
+   "c": "HOUSE",
+   "s": "HOUSE label on the fact grid. Every value in the grid is his line; every label is Ops' word for it, on his own instruction to propose the label set from his facts. 'High School' replaces 'School' because his value now names the school."
+  },
+  "b9b66f12cdb9b11a": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 369,
+   "t": "CB West - Doylestown, PA - Class of 1981",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
+  },
+  "f3802e2d2169bcc8": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 370,
+   "t": "Stevens Institute of Technology - Hoboken NJ - 1985 Mech Eng",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
+  },
+  "13ea9fede92a3042": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 371,
+   "t": "NJIT Newark, NJ - 2000 Eng Management",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
+  },
+  "b6e049c30d67dfec": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 376,
+   "t": "P!NK went to Papa Weird.Baby's High School - Central Bucks High School West. Rumor has it she had his old locker (at least that's the rumor Papa Weird.Baby is spreading).",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
+  },
+  "ca7d450f7db70c53": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 381,
+   "t": "Steven Tyler gave his harmonica to Papa Weird.Baby from the stage in Las Vegas, NV Feb 2020. Then Steven tried to get Papa Weird.Baby to say something into the mic during the show. (It was not pretty. Papa Weird.Baby panicked.)",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
+  },
+  "0261c665bec94e9b": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 387,
+   "t": "Rod Stewart kicks soccer balls into the crowd each show. Papa Weird.Baby caught one with Rod's name written on it; must be his personal ball. Papa Weird.Baby will return it if he meets up with Rod someday.",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
+  },
+  "117332d0d4e50b39": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 393,
+   "t": "Hunter Root and Papa Weird.Baby hung out behind the bar Hunter was playing that night. Burned some time out back with the band. (Why two at once? Because Papa Weird.Baby panicked.)",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
+  },
+  "dbe340ed13026b92": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 401,
+   "t": "Papa Weird.Baby is earning to play acoustic guitar and sing, in order to record the songs he just wrote, so he can release the album he announced. And Robots.",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
+  },
+  "c7be035c49164b1d": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 379,
+   "t": "Papa Weird.Baby (aka Mike Lang) is an Indie Melodic‑Talker who relies on sloppy-guitar and mournful lyrics to decry the plight of the homeless. And some funny stuff, too. And Robots!",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST copy of 2026-08-16, carried verbatim, with the three corrections he ruled the same day and the third-person rewrite he ruled on 2026-08-17 (\"Change first person to third... do not alter voice beyond the pronoun\"). Eight pronoun substitutions and nothing else; each is listed in docs/MUSEUM_WALKTHROUGH_LOG-20260817.md. [2026-08-16] ONE CHARACTER CHANGED AND NO WORD DID: the hyphen in 'Melodic-Talker' is U+2011 NON-BREAKING HYPHEN, on his instruction not to break the word across lines. It draws identically; the string is otherwise his to the character."
   }
  }
 }

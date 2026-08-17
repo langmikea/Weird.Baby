@@ -1285,15 +1285,51 @@ body:has(.pb) .ex-root{padding-bottom:88px}
 .tl-track:hover .tl-tt{color:var(--wb-gold-hi)}
 .tl-typewrap{position:relative;display:inline-flex;align-items:baseline;flex-shrink:0}
 .tl-typewrap::after{content:"▾";position:absolute;right:2px;top:50%;transform:translateY(-52%);font-size:.55rem;color:var(--wb-gold-mute);pointer-events:none}
-/* [M 2026-08-14] ONE VERSION, NO ARROW — see the ruling at `.tl-typewrap` in
-   Exhibit.jsx. The `<select>` is still there; what goes is the promise of a
-   choice that does not exist, and the cursor goes with it, because a caret is
-   half of that promise and a pointer is the other half. */
-.tl-typewrap[data-single]::after{content:none}
-.tl-typewrap[data-single] .tl-typesel{cursor:default;padding-right:0}
+/* ═══ [2026-08-16] ONE VERSION, NO CONTROL AT ALL — MIKE'S RULING ═══════════
+   **"When a track has exactly one version, `.tl-typesel` must not occupy the
+   row at all — no width, no hit area. Keep the mechanism for tracks with more
+   than one version, same as the 14 Aug ruling on the chevron. That ruling hid
+   the arrow and left the hit area; hiding the visible part is not hiding the
+   control."**
+
+   WHAT THE 14 AUG RULES DID AND WHY THEY WERE NOT ENOUGH. They removed the
+   `▾` and the pointer cursor and left everything else: measured on the
+   deployed site, /wb row 01, the `<select>` was **70px wide at x 154.8-224.8
+   inside a 430px row — 16% of it — visible, `pointer-events:auto`, holding
+   exactly ONE option.** A click aimed at the middle of the row opened a
+   one-item menu instead of playing the track. **An affordance was hidden from
+   the eye and left under the finger**, which is the same shape as the title
+   plate that was eating scroll-to-top: what you see and what you hit are two
+   different things.
+
+   `display:none` IS THE WHOLE RULE, AND IT IS THE ONE PROPERTY THAT SATISFIES
+   BOTH HALVES: it takes the box out of layout (no width, and the flex gap
+   collapses with it) and out of hit-testing (no hit area), while the `<select>`
+   and its `onChange` STAY IN THE COMPONENT. A track that gains a second
+   rendition drops `data-single` and the control returns with no code change —
+   "keep the mechanism", unchanged from 14 August.
+
+   THE TWO RULES THIS REPLACES ARE DELETED RATHER THAN LEFT STANDING: an arrow
+   suppressor and a cursor override that can no longer fire are exactly the
+   dead declarations the next reader has to prove harmless.
+
+   WHAT IS LOST IS NAMED: the select PRINTED THE RENDITION LABEL, so /wb's six
+   rows no longer say `FIRST PASS`. The label was the control's own text; it
+   goes with the control. `track.kind` is the row's other name-plate and is
+   untouched. */
+.tl-typewrap[data-single]{display:none}
+/* ═══ [2026-08-16] ONE DECLARATION FOR THE TYPE, TWO READERS ════════════════
+   The rendition name is drawn by the `<select>` when a track has more than one
+   version and by a static `<span class="tl-type">` when it has exactly one (see
+   the ruling in Exhibit.jsx). **They must be the same words in the same face**,
+   so the type's LOOK is declared once here for both, and only the select's own
+   control properties are added below it. A second copy of this ramp is how the
+   two readers drift into two labels. */
+.tl-typesel,.tl-type{font-family:'Courier Prime',monospace;font-size:.68rem;letter-spacing:.04em;color:var(--wb-gold-mute);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tl-type{flex-shrink:0}
 /* 9px invisible vertical padding (negative margin cancels layout impact):
    near-misses above/below the type hit the dropdown, not the play row. */
-.tl-typesel{font-family:'Courier Prime',monospace;font-size:.68rem;letter-spacing:.04em;color:var(--wb-gold-mute);background:transparent;border:none;appearance:none;-webkit-appearance:none;cursor:pointer;padding:9px 14px 9px 0;margin:-9px 0;max-width:220px;overflow:hidden;text-overflow:ellipsis}
+.tl-typesel{background:transparent;border:none;appearance:none;-webkit-appearance:none;cursor:pointer;padding:9px 14px 9px 0;margin:-9px 0}
 
 /* TAG GRID */
 /* 2026-06-07 Mike: variant buttons bolder + larger for legibility. */

@@ -1,0 +1,358 @@
+# THE PLAYER — 2026-08-16 (launch eve, second packet)
+
+HEAD `b479069` at open. **Mike has committed and deployed the previous round:**
+the live site now serves `tokens-AwoJSPWH.js` and `index-C1q1yc2z.js`, the exact
+chunk hashes this tree builds.
+
+---
+
+## JOB 1 — THE ENGINE WAS ALWAYS THERE, AND SO WAS THE WIRING
+
+### THE ANSWER FIRST: NEVER REMOVED, NEVER MISSING. NO GIT ARCHAEOLOGY REQUIRED.
+
+`src/routes/exhibit/Exhibit.jsx`:
+
+```
+714   function useAudioPlayer({ onEnded })      the hook — `new Audio()`, preload
+                                               "auto", ended → advanceQueue
+3227  const audio = useAudioPlayer({ … })       called, once, unconditionally
+3529  else if (v?.audioUrl) { yt.pause();       the play effect's audio branch
+        audio.loadAudio(v.audioUrl); }
+4144  onTogglePlay={isAudioSrc ? audio.…}       the banner transport
+5749  onTogglePlay={isAudioSrc ? audio.…}       the player bar
+```
+
+Full surface: `loadAudio · pause · togglePlay · toggleMute · setVolume ·
+getState`, and an unmount teardown. **It is not a stub and it is not orphaned.**
+
+### FOUR PROBE FAILURES — NOT SITE DEFECTS, AND THEY ARE THE USEFUL PART
+
+**MIKE'S RULING ON HOW THESE ARE FILED: "Ops was wrong about the player and the
+four false negatives are the useful part. Record all four in the log as probe
+failures, not as site defects."**
+
+Nothing below describes anything wrong with the museum. Each row is a way of
+LOOKING that returned a confident wrong answer, and each will do it again on the
+next investigation that reaches for it. **They are §8 hazards now**, in
+`docs/canonical/OPERATIONS.md`, so the next round meets them before it repeats
+them.
+
+| # | the probe | what it returned | why it was wrong |
+|---|---|---|---|
+| 1 | grep over `index-C1q1yc2z.js` | `new Audio` absent | **the wrong chunk** — that file is the DATA; `Exhibit.jsx` is in `tokens-AwoJSPWH.js` |
+| 2 | search for `new Audio(` | no match | **a minified no-arg constructor has no parentheses** — it ships as `new Audio` |
+| 3 | `document.querySelectorAll("audio")` | 0 elements | **cannot see a detached element** — `new Audio()` is never appended, and returns 0 whether the player exists or not |
+| 4 | `performance.getEntriesByType("resource")` | no mp3 | **media loads do not reliably enter the Resource Timing buffer** — the element was loading at the time |
+
+**AND A FIFTH THAT COST THIS ROUND MORE THAN THE OTHER FOUR:** `document.hidden
+=== true`. A hidden tab defers media loading forever, stops synthetic pixel
+clicks landing, and kills `requestAnimationFrame` (§8 already carries that
+last one). Check it before believing any playback, click or animation reading.
+
+Each in full, with the evidence:
+
+**(1) THE WRONG CHUNK WAS SEARCHED.** The site ships FOUR javascript files.
+`index-C1q1yc2z.js` holds the DATA; `Exhibit.jsx` and everything it contains is
+in **`tokens-AwoJSPWH.js`**. Measured over the built bundle:
+
+```
+index-C1q1yc2z.js    new Audio: 0    audioUrl: 1   (the /wb track data)
+tokens-AwoJSPWH.js   new Audio: 1    audioUrl: 1   (the hook)
+```
+
+**(2) `new Audio(` WOULD HAVE MISSED IT EVEN IN THE RIGHT CHUNK.** A no-argument
+constructor minifies to `new Audio` with no parentheses. The literal bytes on
+disk are `let e=new Audio;e.preload=\`auto\``. **A grep with a trailing paren
+cannot find a minified no-arg constructor** — the pattern to search is
+`new Audio` or `preload`.
+
+**(3) `document.querySelectorAll("audio")` CAN NEVER SEE THIS PLAYER.**
+`new Audio()` creates a **detached** element that is never appended to the
+document. It is playing and it is not in the DOM. *"No `<audio>` element is ever
+created on any page"* is what that query returns whether the player exists or
+not — the query cannot answer the question it was asked.
+
+**(4) AND MEDIA LOADS DO NOT SHOW UP IN `performance.getEntriesByType("resource")`
+HERE.** With the element loading and `networkState = 2`, the mp3 is absent from
+the Resource Timing buffer. **"No network request" measured this way is not
+evidence of no network request.**
+
+### WHAT IT ACTUALLY DOES, MEASURED ON THE DEPLOYED SITE
+
+`window.Audio` wrapped to record every construction, then the museum's own
+click path exercised on /wb, track 01, the row already focused:
+
+```
+Audio instances constructed          1
+src        https://weird.baby/audio/wb/06_coconuts_2026-06-17.mp3
+paused     false          ← play() was accepted, not rejected
+error      null
+networkState  2 (NETWORK_LOADING)
+row         tl-track tl-active tl-playing
+transport   .bt rendered
+```
+
+**The engine runs, builds the element, points it at the right file and starts
+loading.** The mp3 itself is a real MP3 — `ID3\x03` header, 2,928,534 bytes,
+`206`, `audio/mpeg`, and this browser answers `canPlayType("audio/mpeg") →
+"probably"`.
+
+### WHAT I COULD NOT CONFIRM, AND WHY IT IS THE ENVIRONMENT AND NOT THE SITE
+
+The element sits at `readyState 0` and never buffers. **`document.hidden ===
+true`** on every tab I can open — this Chrome window is not visible to me — and
+Chrome defers media loading in hidden tabs.
+
+**PROVED WITH A CONTROL RATHER THAN ASSERTED.** A bare `<audio>` element that I
+created by hand in the same tab, pointed at the same URL, with no museum code
+involved at all:
+
+```
+control      readyState 0 · networkState 2 · buffered none · error null
+museum       readyState 0 · networkState 2 · buffered none · error null
+```
+
+**Identical.** The stall belongs to the hidden tab. The same hidden-tab state is
+why synthetic pixel clicks stopped registering mid-session and why
+`requestAnimationFrame` never fires — §8 already carries that hazard row.
+
+**SO THE ONE THING NOT PROVED IS AUDIBLE SOUND, AND IT NEEDS A VISIBLE WINDOW.**
+
+### NOTHING WAS BUILT, BECAUSE NOTHING IS MISSING
+
+Mike's click rule is already implemented and is already his own words, twice
+over: `handleTrackSelect`'s `alreadySelected` gate (2026-08-13, generalising
+V3) plus `onDoubleClick` on the row. Verified live: **one click on an unfocused
+row only focuses it; a second click plays; a double-click plays.**
+
+**EVERY WING THAT DECLARES `audioUrl`** is `/wb` (six tracks,
+`public/audio/wb/`) and `/hr` (vault renditions in `hunter_root.json`, behind the
+password). One engine serves both; nothing is per-wing.
+
+### THE ONE-OPTION SELECT — FOUND WHILE LOOKING, THEN RULED AND FIXED
+
+**MEASURED ON THE DEPLOYED SITE**, /wb row 01: `.tl-typesel` spanned
+**x 154.8–224.8 in a 430px row — 16% of it** — visible, `pointer-events:auto`,
+holding exactly **one** option. A click there opened a one-item menu instead of
+playing the track.
+
+**MIKE: "Hide it. Ruled. When a track has exactly one version, `.tl-typesel`
+must not occupy the row at all — no width, no hit area. Keep the mechanism for
+tracks with more than one version, same as the 14 Aug ruling on the chevron.
+That ruling hid the arrow and left the hit area; hiding the visible part is not
+hiding the control."**
+
+**IT IS ONE PROPERTY ON AN ATTRIBUTE THAT ALREADY EXISTED.**
+`.tl-typewrap[data-single]{display:none}` replaces 14 August's arrow suppressor
+and cursor override, both of which are **deleted rather than left standing** —
+they can no longer fire, and a dead declaration is one the next reader has to
+prove harmless. `display:none` is the single property that satisfies both halves
+of the ruling: out of layout (no width, and the flex gap collapses with it) and
+out of hit-testing (no hit area). The `<select>` and its `onChange` stay in the
+component, so "keep the mechanism" is unchanged.
+
+**VERIFIED BY PROBING THE FULL WIDTH OF EVERY ROW**, 41 points per row, /wb on
+the built bundle:
+
+```
+every row   .tl-typewrap  display:none   ·   select box 0 x 0   ·   still in the DOM
+41 of 41 points on all six rows reach  tl-track / tl-num / tl-tt / tl-selwrap
+0 points reach tl-typesel or tl-typewrap
+```
+
+And **at x = 199 — the exact coordinate that used to open the one-item menu** —
+two clicks now produce an `Audio` element on `06_coconuts_2026-06-17.mp3` with
+the row `tl-playing` and the transport rendered.
+
+**THE MECHANISM IS PROVED INTACT BY BREAKING IT ON PURPOSE.** Removing
+`data-single` from one row live: `display` goes `none -> flex`, the box returns
+at **83.8px**, the `▾` renders again, and the point hits `.tl-typesel`. Putting
+the attribute back returns it to `none`. **A track that gains a second rendition
+gets its control back with no code change.**
+
+**/wal PROBED TOO** — 0 points reach the select on any of its four rows, and the
+band/plate fix from the previous packet still measures 238 = 238, 0 offset,
+0 dead.
+
+**TWO CONSEQUENCES, NAMED RATHER THAN DISCOVERED LATER.**
+1. **The rendition label goes with the control.** The `<select>` was what
+   printed `FIRST PASS`, so /wb's six rows no longer carry it. It is not lost
+   from the page: the transport prints the rendition type beside the title while
+   a track plays (`Coconuts  AUDIO`), and `track.kind` — the row's other
+   name-plate — is untouched.
+2. **The tracklist got narrower**, because its default width is measured off the
+   widest row on arrival: /wb rows **430.3px -> 365.1px**, /wal **296px**. The
+   viewer gains what the list gives up.
+
+**NO CUSTOMER-FACING TRACK HAS MORE THAN ONE RENDITION TODAY** — measured across
+`/wal` and `/wb` — so the control is hidden everywhere a visitor can currently
+reach. `/hr`, behind the password, is where the multi-version case lives.
+
+---
+
+## JOB 2 — ABOUT THE ARTIST ON /wb
+
+His rewrite had been briefed and never sent, so the old copy was live. It is
+replaced, and **Ops changed no word of it.**
+
+### WHAT WENT
+
+Named once, here (Doctrine 24), and nowhere else: the grid read `Born 7/3 63`
+and `School CB West Doylestown, PA` with `'85` and `'00` on the two Studied
+rows; the tiles read *"At least that's the rumor he's spreading."*, *"Steven
+Tyler \"handed him\" his personal harmonica"*, *"He hopes that is OK."*, *"(Two
+at once?!? He panicked.)"* and *"Learning to play acoustic guitar…"*.
+
+**THE 2026-08-17 PRONOUN PASS WENT WITH THE SENTENCES IT ACTED ON, AND SO DID
+ITS NOTE.** Eight substitutions and a cut `"Sorry,"` were recorded in the source
+against strings that no longer exist. **A note that outlives its examples is a
+tripwire pointing at empty ground** — the same defect this file's own preamble
+was corrected for on 17 August. His new copy is third person as he wrote it.
+
+### TWO FLAGS, CARRIED AS TYPED
+
+Ops reports, he rules — the standing loop on this card:
+
+1. **`is earning to play`** reads as `learning`. His own instruction named it.
+2. **`Born  |  Born July 3, 1963`** — the value repeats the label, so the grid
+   prints the word twice. His two columns as supplied.
+
+`Class of 1981` and the four-digit years are new material; `School` becomes
+`High School` because his own value now names the school. The labels are still
+Ops', the values still his to the character, and `Studied` still appears twice
+for 17 August's reason: two institutions, no degree level stated for either.
+
+### `Melodic-Talker` — MEASURED BROKEN, THEN FIXED WITH ONE CHARACTER
+
+**His instruction is about a result, so the result was measured first.** At
+1280px a Range over the word returned **two client rects at different `top`
+values** — `Melodic-` on one line, `Talker` on the next. A browser treats
+U+002D as a break opportunity and **no CSS property turns that off for one word
+inside a paragraph**: `white-space:nowrap` needs an element, and this field
+renders as plain text with no markup.
+
+So it is **one character — U+2011 NON-BREAKING HYPHEN**, the code point that
+exists for exactly this and draws identically. After, at both widths:
+
+```
+1280px   one rect, 132.9px wide, unbroken   ·  blurb 4 lines
+ 390px   one rect, 127.0px wide, unbroken   ·  blurb 6 lines
+```
+
+**AND IT BREAKS `grep`, WHICH IS RECORDED AT THE STRING AND HERE.** Searching
+this repository for `Melodic-Talker` with an ordinary hyphen now returns
+**nothing**. Search for `Melodic`.
+
+### MACUNGIE PA — PROPOSED, NOT ADDED, WITH THE NUMBERS
+
+He suggested it "to use the space". **The space is real:** at 1280px the name
+line uses **396.5px of 525.7 — 129.2px of slack.**
+
+Measured with `(aka Mike Lang, Macungie PA)` spliced in live:
+
+| width | lines before | lines after | name-line slack after | `Melodic‑Talker` |
+|---|---:|---:|---:|---|
+| 1280px | 4 | **4** | 52.5px | whole |
+| 390px | 6 | **6** | 40.5px | whole |
+
+**It costs no extra line at either width.** It is not in the data — his call.
+Register row `Q-c`.
+
+### PROVENANCE
+
+Ten strings replaced and one blurb string changed by a character: **11 rows
+added to `register.json`, 11 stale rows pruned.** Nine of the eleven are `MIKE`;
+`High School` is a `HOUSE` label, like every other label in the grid. **Inbound
+chain references into the pruned set were checked before pruning and were
+zero** — the §9 prune hazard, which cost a round in August when a `RESTATED`
+chain repointed onto the wrong paragraph.
+
+
+---
+
+## JOB 3 — `FIRST PASS` IS BACK ON THE ROWS, AND IT NO LONGER DEPENDS ON A CONTROL
+
+**MIKE: "Restore FIRST PASS on the rows. It was lost as a side effect, not ruled
+away... Print the type on the row independently of the select, so the label does
+not depend on a control that may be hidden."**
+
+### THE CAUSE, STATED PLAINLY
+
+**The `<option>` text WAS the label.** A rendition NAME and a variant PICKER
+were one element, so hiding the picker on a single-version row took the name
+with it. What went was his own 2026-08-13 ruling — `RECORDING - 2026-06` ->
+`first pass`, set to match the approved blurb — and Ops removed it as a side
+effect of a different fix without noticing it was content.
+
+### A LABEL AND A CONTROL ARE TWO THINGS AND NOW THEY ARE TWO ELEMENTS
+
+A static `<span class="tl-type">` draws exactly when the select does not, off
+the same `videos.length` test and the same `tidyDesc()` string — so the row
+reads identically either way and **neither can be hidden without the other
+appearing.** The look is ONE declaration for both readers
+(`.tl-typesel,.tl-type{...}` in Exhibit.css); only the select's own control
+properties are added under it. A second copy of that ramp is how two readers
+drift into two labels.
+
+**THE SPAN SITS OUTSIDE `.tl-typewrap` ON PURPOSE.** That wrapper stops
+propagation so the picker cannot play the track; a LABEL has no reason to eat a
+click, so this one is part of the row's hit area — which is the whole of what
+the previous fix was for.
+
+### VERIFIED ON THE BUILT BUNDLE
+
+```
+/wb, all six rows      label "FIRST PASS" - 69.6px - 0 of 41 points reach the select
+click on the LABEL     row 3 -> Audio element on 01_weird_baby_blues_2026-06-17.mp3,
+                       tl-playing on row 3, transport up
+invariant, every row   exactly ONE of (visible select, static label) is present
+/wal, all four rows    no span at all, 0 of 31 points reach the select
+```
+
+### THE WIDTH, MEASURED — AND IT DOES NOT ALL COME BACK, WHICH IS RIGHT
+
+`localStorage` was empty for both wings, so these are the fresh measured
+defaults and not a stored split:
+
+| /wb row | width |
+|---|---:|
+| deployed, with the one-option select | **430.3px** |
+| select hidden, label gone with it | 365.1px |
+| **label restored** | **415.1px** (tracklist 415.9px) |
+
+**The 15.2px it does not get back is the SELECT'S OWN control padding** —
+`padding: 9px 14px 9px 0`, the invisible near-miss hit area that existed so a
+click just above or below the type would open the dropdown instead of playing.
+A label does not want it. **The row is back to its type-bearing width; what is
+gone is the part that was a control.**
+
+### AND AN EMPTY TYPE NOW DRAWS NOTHING AT ALL
+
+`tidyDesc()` strips a track's own title off the front of its label, so a
+rendition named after its song returns `""` — which is every /wal song row. The
+first cut rendered an empty span: invisible, but it still took the flex gap
+(**/wal 296.0 -> 296.9px**) and left an empty element for a later round to
+explain. It is guarded on the string now: **/wal has no span and no gap.**
+
+### MACUNGIE PA IS NOT ADDED
+
+His ruling: he sees it first. The measurement stands in `Q-c` — it costs no
+extra line at 1280px or 390px.
+
+---
+
+## GATES
+
+| gate | result |
+|---|---|
+| `npm run lint` | **9 errors / 8 warnings = baseline** |
+| `npm run build` | green |
+| `npm run build:launch` | green — 144 files, 190.0 MB held out |
+| `npm run provenance:gate` | **PASS** — 0 undeclared, 0 stale |
+| `npm run reveal:check` | **PASS** |
+| `npm run parity:gate` | **PASS** — 4 shared · 0 divergences |
+| `npm run instory:gate` | **PASS** — 0 findings |
+| `npm run docs:numbers:gate` | **PASS** |
+| `npm run reveal:day` | nothing to move |
+
+**Nothing was committed, pushed or deployed. No dev server is left listening.**

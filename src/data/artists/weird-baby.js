@@ -314,62 +314,111 @@ const spine = [
            than silently rewritten, because the same assumption is what cost the
            previous round its workaround.
 
-           THIRD PERSON: EIGHT PRONOUN SUBSTITUTIONS AND NOTHING ELSE. Each one
-           is listed in the round report. Two of them make a sentence read
-           differently and are flagged there rather than smoothed — Ops was told
-           not to alter voice beyond the pronoun, and both would need a word he
-           did not write to fix.
-
            FOUR TILES, LABELLED WITH THE FOUR NAMES HE NAMED. **The word
            ACHIEVEMENTS no longer appears on the card**: `profile` has no group
            heading, and four tiles cannot sit under one label without inventing
            a container. Flagged for him. */
+        /* ═══ [2026-08-16] AND HIS REWRITE LANDS. THE STRUCTURE ABOVE IS
+               UNCHANGED; EVERY STRING BELOW IS REPLACED ════════════════════
+           **His rewrite had been briefed and never sent, so the old copy was
+           live.** What it replaces was HIS OWN earlier text plus Ops' pronoun
+           work on it, and it is named once here (Doctrine 24) and nowhere else:
+           the grid read `Born 7/3 63` · `School CB West Doylestown, PA` and the
+           two `Studied` rows carried `'85` and `'00`; the tiles read *"Rumor
+           has it she had his old locker. At least that's the rumor he's
+           spreading."*, *"Steven Tyler \"handed him\" his personal harmonica"*,
+           *"He hopes that is OK."*, *"(Two at once?!? He panicked.)"* and
+           *"Learning to play acoustic guitar…"*.
+
+           **THE 2026-08-17 PRONOUN PASS IS GONE WITH THE SENTENCES IT ACTED ON,
+           AND SO IS ITS NOTE.** Eight substitutions and a cut `"Sorry,"` were
+           recorded above; every one of them was on a string that no longer
+           exists. **A note that outlives its examples is a tripwire pointing at
+           empty ground** — the same defect this file's own preamble was
+           corrected for on 2026-08-17. His new copy is third person as he wrote
+           it, start to finish. **Ops changed no word of it.**
+
+           TWO THINGS ARE FLAGGED AND NOT CORRECTED, which is the standing loop
+           on this card — Ops reports, he rules:
+             1. **`is earning to play`** reads as `learning`. His instruction
+                names this one explicitly. Carried as typed.
+             2. **`Born  |  Born July 3, 1963`** — the value repeats the label,
+                so the grid prints the word twice. His two columns as supplied;
+                Ops will not drop a word to tidy a row.
+
+           `Class of 1981` IS NEW MATERIAL AND SO ARE THE FOUR-DIGIT YEARS. The
+           grid is longer than it was and that is his copy, not a layout change.
+           **The labels are still Ops' and the values are still his to the
+           character**, and `Studied` still appears twice for the reason the
+           2026-08-17 note gives: he named two institutions and no degree level
+           for either. `School` becomes `High School` because his own value now
+           says which school it is. */
         face: {
           kind: "text",
           title: "About the artist",
           subtitle: "WEIRD.BABY",
+          /* ═══ [2026-08-16] THE HYPHEN IN `Melodic‑Talker` IS U+2011 AND THAT
+                 IS THE WHOLE OF THE FIX — MIKE: "Do not break Melodic-Talker
+                 across lines." ════════════════════════════════════════════
+             MEASURED FIRST, because the instruction is about a result and the
+             result had to be shown to be wrong: at 1280px a Range over the word
+             returned TWO client rects at different `top` values — `Melodic-` on
+             one line and `Talker` on the next. A browser treats U+002D as a
+             break opportunity, and no CSS property turns that off for one word
+             inside a paragraph; `white-space:nowrap` needs an element, and this
+             field renders as plain text with no markup.
+             SO IT IS ONE CHARACTER: U+2011 NON-BREAKING HYPHEN, which is the
+             code point that exists for exactly this and draws identically. The
+             word on the glass is unchanged.
+             **AND IT BREAKS `grep`, WHICH IS WHY THIS NOTE IS LOUD.** Searching
+             this repository for `Melodic-Talker` with an ordinary hyphen now
+             returns NOTHING. Search for `Melodic` alone. The same trap applies
+             to anything that ever matches this string — a provenance row, a
+             numbers gate, a copy audit. */
           blurb:
-            "Papa Weird.Baby (aka Mike Lang) is an Indie Melodic-Talker who "
+            "Papa Weird.Baby (aka Mike Lang) is an Indie Melodic‑Talker who "
             + "relies on sloppy-guitar and mournful lyrics to decry the plight "
             + "of the homeless. And some funny stuff, too. And Robots!",
           tombstone: [
-            { k: "Born", v: "7/3 63" },
-            { k: "School", v: "CB West Doylestown, PA" },
-            { k: "Studied", v: "Stevens Institute of Technology - Hoboken NJ - '85 Mech Eng" },
-            { k: "Studied", v: "NJIT Newark, NJ - '00 Eng Management" },
+            /* [2026-08-16] FLAGGED, NOT CORRECTED: the value repeats the label,
+               so this row prints "BORN  Born July 3, 1963". His two columns as
+               supplied. */
+            { k: "Born", v: "Born July 3, 1963" },
+            { k: "High School", v: "CB West - Doylestown, PA - Class of 1981" },
+            { k: "Studied", v: "Stevens Institute of Technology - Hoboken NJ - 1985 Mech Eng" },
+            { k: "Studied", v: "NJIT Newark, NJ - 2000 Eng Management" },
           ],
           profile: [
             { label: "P!NK",
               body:
                 "P!NK went to Papa Weird.Baby's High School - Central Bucks "
-                + "High School West. Rumor has it she had his old locker. At "
-                + "least that's the rumor he's spreading." },
+                + "High School West. Rumor has it she had his old locker (at "
+                + "least that's the rumor Papa Weird.Baby is spreading)." },
             { label: "Steven Tyler",
               body:
-                "Steven Tyler \"handed him\" his personal harmonica, onstage, "
-                + "Las Vegas NV Feb 2020. Then he tried to get him into the "
-                + "mic during the show. (Not pretty. He panicked.)" },
+                "Steven Tyler gave his harmonica to Papa Weird.Baby from the "
+                + "stage in Las Vegas, NV Feb 2020. Then Steven tried to get "
+                + "Papa Weird.Baby to say something into the mic during the "
+                + "show. (It was not pretty. Papa Weird.Baby panicked.)" },
             { label: "Rod Stewart",
               body:
-                "Rod Stewart kicks soccer balls out to the crowd, he caught "
-                + "one! His has Rod's name written on it; must be his "
-                + "personal ball. He hopes that is OK." },
+                "Rod Stewart kicks soccer balls into the crowd each show. Papa "
+                + "Weird.Baby caught one with Rod's name written on it; must be "
+                + "his personal ball. Papa Weird.Baby will return it if he "
+                + "meets up with Rod someday." },
             { label: "Hunter Root",
               body:
-                "Hunter Root and Papa Weird.Baby hung out behind the bar he "
-                + "was playing that night. Burned some time together. (Two at "
-                /* [2026-08-17] "Sorry," is CUT. His original read "Sorry, I
-                   panicked" - the "Sorry" was him addressing the reader, and in
-                   third person it is an orphan with no speaker. "He panicked."
-                   now matches the Steven Tyler tile exactly, which turns the
-                   repetition into the joke it already was. Ops ruling; his to
-                   override. */
-                + "once?!? He panicked.)" },
+                "Hunter Root and Papa Weird.Baby hung out behind the bar "
+                + "Hunter was playing that night. Burned some time out back "
+                + "with the band. (Why two at once? Because Papa Weird.Baby "
+                + "panicked.)" },
             { label: "CURRENT PROJECTS",
               body:
-                "Learning to play acoustic guitar and sing in order to record "
-                + "the songs he just wrote so he can release the album he "
-                + "announced. And Robots." },
+                /* [2026-08-16] FLAGGED, NOT CORRECTED, on his own instruction:
+                   "is earning" reads as "learning". Carried as typed. */
+                "Papa Weird.Baby is earning to play acoustic guitar and sing, "
+                + "in order to record the songs he just wrote, so he can "
+                + "release the album he announced. And Robots." },
           ],
           footer: "WEIRD.BABY · ABOUT THE ARTIST",
         },
