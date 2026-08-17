@@ -100,6 +100,33 @@ const SKIP_DIR = [
 ];
 const SKIP_DIR_PREFIX = ["dist.pre_", "backup_", "_MIRROR"];
 
+/* ═══ [2026-08-17] SKIP BY PATH, FOR TREES THAT ARE GITIGNORED ══════════════
+   A row in this table is committed. A file under a gitignored tree is NOT — it
+   exists on the operator's disk and nowhere else. So a row for one is BORN AN
+   ORPHAN: correct on this machine the minute it is written, and dangling on
+   every clone, every CI checkout and every machine that has not run that tool.
+   That is the M9 defect class (13 orphan rows open today) manufactured on
+   purpose, and the round that finds them cannot tell them from a real move.
+
+   FOUND BY A SCAN THAT DID IT. Adding four photographs took the table 385 ->
+   409: four photographs, eight comparison pictures — and twelve files under
+   `docs/shorts/out/`, which `.gitignore:60` excludes whole. Nobody asked for
+   those twelve and nothing would have reported them.
+
+   BY PATH AND NOT BY NAME, WHICH IS THE WHOLE REASON THIS LIST IS SEPARATE
+   FROM `SKIP_DIR`. That list matches a DIRECTORY NAME anywhere in the tree, and
+   the directory here is called `out` — skipping every `out/` in the repository
+   to exclude one would hide whatever a future round parks in another.
+
+   IT IS NOT A `.gitignore` READER AND DELIBERATELY SO. Parsing that file would
+   silently change what this table covers every time somebody edits it, and the
+   population of this table is a judged thing (the light-table round widened it
+   on Mike's own sentence, "only what still exists"). Named entries, with the
+   reason beside each, stay reviewable. */
+const SKIP_PATH = [
+  "docs/shorts/out",   // .gitignore:60 — rendered shorts, regenerable, never committed
+];
+
 function kindOf(ext) {
   if (IMAGE.has(ext)) return "image";
   if (VIDEO.has(ext)) return "video";
@@ -115,6 +142,9 @@ function walk(dir, root, out) {
     if (e.isDirectory()) {
       if (SKIP_DIR.includes(e.name)) continue;
       if (SKIP_DIR_PREFIX.some(pre => e.name.startsWith(pre))) continue;
+      /* the path as this table writes it — forward slashes, relative to root */
+      const rel = path.relative(root, p).split(path.sep).join("/");
+      if (SKIP_PATH.includes(rel)) continue;
       walk(p, root, out);
     } else if (e.isFile()) {
       const ext = path.extname(e.name).toLowerCase();

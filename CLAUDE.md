@@ -451,7 +451,7 @@ MAY NOT SHOW MORE PICTURES.** Two buckets: **PRECIOUS** — genuine reveals, two
 three **a week**, the ceiling is on these — and **DUMP** — everything else, **no
 ceiling**, because ten manual pages arriving is ONE point of focus. The law and
 both runways are **`reveal/focus.mjs`**; the judged field is **`bucket`** on
-`provenance/asset-table.json`, **Mike's, null on all 385 rows (re-measured
+`provenance/asset-table.json`, **Mike's, null on all 397 rows (re-measured
 2026-08-13; this said 315), and Ops does not
 derive it**. **PRECIOUS divides into weeks; DUMP divides into nothing** — the old
 tracker divided PHOTOGRAPHS by a ceiling on ATTENTION and printed *"16 pictures =
@@ -762,6 +762,49 @@ read Doctrine 25.**
 ## Recent session log
 
 Maintained here. Newest first.
+
+### 2026-08-17 -> THE RULING, THE TWO OPEN ITEMS, THE PHOTOGRAPHS (second packet) - sealed
+- **NOTHING IS WAITING ON MIKE. Mirror and deploy: `npm run deploy`.** Gates:
+  lint **9/8 = baseline** - build green - **launch build green** - provenance
+  **PASS** - `reveal:check` **PASS** - `parity:gate` **PASS** - `instory:gate`
+  **PASS** - `docs:numbers` **PASS** - `reveal:day` **nothing to move** -
+  `assets:orphans` **13, unchanged (M9)**. `assets:gate` exits 1 and always has
+  (0 of 39 have his verdict; M22). Log appended to
+  `docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md`.
+- **VARIANT b SHIPPED - ONE DECLARATION READING A TOKEN THAT ALREADY EXISTED.**
+  `--rec-textcol` is the distance the headline's own grid puts it at, so the
+  report lands on the headline's vertical and the two cannot drift. **Out by 0
+  at 1280, 390 and 1920.** A/B'd by injecting the old state: **desktop costs
+  NOTHING** (68ch binds before the container; height identical to 939.9px), and
+  **390px costs 60.6px of measure and +9.4% of page height.** `a` and `a+b`
+  **deleted rather than left dormant**; the directory is kept as the record.
+- **THE SPAM NOTE HAD THREE STATEMENTS AND THE THIRD WAS DORMANT.** Mike's
+  ruling is the part that binds: **a string one restored render away from the
+  glass is a string on the glass with a delay.** `aboutNote`'s last sentence was
+  also in the WRONG FIELD - a citations line carrying a note about a decision.
+  **Proved absent from the built bundle**; the `[R-a]` ledger comment stays.
+- **`Born | Born July 3, 1963` -> `July 3, 1963`, ON AN OPS RULING HE CAN
+  REVERT.** Filed MIKE with the one-word edit named, so it cannot read next year
+  as something he wrote. **76 tombstone rows swept museum-wide, 0 other
+  stutters - and the probe was proved against the pre-fix row first**, because a
+  zero is exactly what a broken check returns.
+- **FOUR OF HIS PHOTOGRAPHS ARE ON THE ABOUT-THE-ARTIST TILES**, in
+  `public/images/wb/`, filed **MIKE** in `assets.json` on the robots reference
+  photographs' own sentence. **The `c` field was already the line between the
+  house's pictures and the artists'** - no new class was invented. `profile`
+  cards take an optional `img` now, the `.vp-fe-plate` mechanism on the other
+  card shape.
+- **TWO OF MY OWN DEFECTS, BOTH CAUGHT BY A MEASUREMENT.** A first
+  `aspect-ratio:4/3` would have **cropped 44% off the two portrait objects** -
+  the ratio was chosen before the files were measured, and `assets:scan` printed
+  what they actually are. And `loading="lazy"` left all four unloaded at 1.8px
+  tall in an unpainted frame: **same family as the rAF hazard**, now a §8 row.
+- **AND A THIRD THAT WAS NOT MINE: `assets:scan` SWEPT IN TWELVE GITIGNORED
+  FILES.** A row is committed and the file is not, so **the row is born an
+  orphan** - the M9 class manufactured on purpose. `SKIP_PATH` (by path, not by
+  name; deliberately not a `.gitignore` reader) plus a restore-and-re-scan,
+  because **`--scan` merges and does not replace.** 385 -> **397**, exactly the
+  twelve intended files.
 
 ### 2026-08-17 -> COPY + THE RECORD LAYOUT (two batches) - Batch 1 sealed, Batch 2 waiting
 - **WAITING ON MIKE: open `docs/record-layout-variants/compare.html` and say a,

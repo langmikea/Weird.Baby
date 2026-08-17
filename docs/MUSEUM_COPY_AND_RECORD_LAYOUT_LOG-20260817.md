@@ -254,3 +254,278 @@ other label on that grid already carries).
 - **`tickets` on Jesse Welles** (`Tour & tickets`) is in the data and did not
   render on the card this round. Untouched by this round and not investigated —
   named so a later round does not read its absence as this round's doing.
+
+---
+
+# SECOND PACKET, SAME DAY — THE RULING, THE TWO OPEN ITEMS, AND THE PHOTOGRAPHS
+
+Three jobs. **All three done. Nothing is waiting on Mike except a deploy.**
+
+---
+
+## 6 — JOB 1: VARIANT b IS SHIPPED
+
+Mike ruled **b** — *"indent the report so it reads as subtext under the
+headline."* One declaration in `Exhibit.css`, immediately after
+`.vp-rec-openhead > .vp-rec-sum{grid-column:2}`:
+
+```css
+.vp-rec-openhead ~ .vp-rec-lead,
+.vp-rec-openhead ~ .vp-rec-sects,
+.vp-rec-openhead ~ .vp-rec-att,
+.vp-rec-openhead ~ .vp-rec-tomb,
+.vp-rec-openhead ~ .vp-fe-note,
+.vp-rec-openhead ~ .vp-rec-end{padding-left:var(--rec-textcol)}
+```
+
+**Measured on the built bundle, Record 001 and Record 004** (the one with
+attachments), headline vs section label vs section body:
+
+| width | headline | section label | section body | out by | overflow |
+|---|---:|---:|---:|---:|---:|
+| 1280 | 403.4 | 403.4 | 403.4 | **0** | 0 |
+| 390 | 83.6 | 83.6 | 83.6 | **0** | 0 |
+| 1920 (the operator's) | 550.2 | 550.2 | 550.2 | **0** | 0 |
+
+004's attachments head lands on 550.2 with them.
+
+**WHAT IT COSTS, A/B'd IN THE SAME FRAME** by switching the rule off with an
+injected stylesheet and back on again — the method the TIGHTEN round established
+after run-to-run wrap noise produced a before-figure wrong by a whole line:
+
+- **Desktop: nothing at all.** Body width 728px either way — the 68ch cap binds
+  before the container does — and the report's height is identical to the tenth
+  of a pixel (939.9).
+- **390px: −60.6px of measure** (343.7 → 283.1, −17.6%) and **+107.4px of page
+  height** (+9.4%). Nothing rewrapped, no overflow. Named rather than absorbed:
+  a Record read on a phone is now about a tenth longer.
+
+**THE SPECIFICITY WAS CHECKED, NOT ASSUMED.** `.vp-rec-sects{padding:0}` further
+down the file is a shorthand that includes `padding-left`; these selectors are
+0,2,0 against its 0,1,0, so they win regardless of source order and moving
+either does not silently undo this.
+
+**THE HEAD IS UNTOUCHED**, so J1's ruling that the index row carries into the
+opened record without change survives — that is the property variant **a** would
+have cost, and it is why it is worth saying that b was the cheaper ruling as
+well as the chosen one.
+
+**a AND a+b ARE DELETED FROM `variants.css`, NOT LEFT DORMANT.** A stylesheet in
+`docs/` that still renders a rejected layout is one injection away from being
+mistaken for the shipped one. What they were — and the custom-property finding
+the combination produced — is written down once in that file, and
+`compare.html` now says **ruled: b** at its head and keeps the eight pictures as
+the record of the comparison.
+
+---
+
+## 7 — JOB 2a: THE SPAM NOTE, AND THE THIRD STATEMENT
+
+Mike: *"findmikeymike.com STAYS in the ledger, linked nowhere and described
+nowhere a visitor reads."*
+
+| where | what went |
+|---|---|
+| `worth-a-listen-facts.js` | the whole scroller fact — "He does own the domain findmikeymike.com. / It is not linked here, and the reason is in the ledger." |
+| `worth-a-listen.js`, the records block | the clause "and the domain he does own is currently serving injected spam, so this museum will not send you there" |
+| `worth-a-listen.js`, `aboutNote` | **the third statement** — "His own domain is deliberately not linked — see the ledger." |
+
+**ONE CLAUSE REMOVED FROM THE RECORDS NOTE AND NOT A WORD ADDED.** It closes on
+the Bandcamp where it used to run on. P16's empty-shelf argument — *"a shelf with
+a label on it is the honest object; a shelf that is simply absent reads as an
+oversight"* — never depended on naming the address, so the honest-empty statement
+survives intact. **The house is quieter, not less honest.**
+
+**THE THIRD ONE WAS DORMANT AND MIKE RULED THAT IS NOT AN EXEMPTION.**
+`aboutNote` stopped printing on 2026-08-17 when the `SOURCES` row was struck, so
+the sentence reached nobody — and his ruling is that a sentence one restored row
+away from the glass is a sentence on the glass with a delay. **It was also in
+the wrong field on its own terms:** `aboutNote` is a citations line and this was
+a note about a decision. Its other content is unchanged to the character.
+
+**AND THE SWEEP WAS THE POINT, NOT THE TWO EDITS.** Grepping the source for
+`spam | link farm | putarslot | vipwin | indo7poker | pedetogel | will not send
+you | not linked here | unlinked | compromised | domain` across `src/` and
+`index.html` returned nineteen hits; **sixteen are source comments** (the `[R-a]`
+ledger block, `GiftShop.jsx`, `Exhibit.jsx`), **one is Hunter Root's own TikTok
+caption** ("I'm gonna spam y'all with my single release"), and the three above
+were the visitor-reachable ones.
+
+**PROVED ON THE BUILT BUNDLE:** `findmikeymike.com` and `injected spam` appear
+**nowhere in `dist/client/assets/`**. `@findmikeymike` — his verified YouTube
+channel, a different object — is untouched and still on the card.
+
+**A COMMENT THAT HAD BECOME A TRIPWIRE WAS CORRECTED IN PLACE.** The note above
+the `lines:` builder still argued *"`NOTE` stays — Mikey Mike's is a live warning
+that a domain bearing his name serves injected spam, which is a fact a visitor
+needs."* That is now the opposite of his ruling, and a later round reading it
+would have put the warning back. It says what happened instead.
+
+---
+
+## 8 — JOB 2b: THE `Born` STUTTER, AND IT IS THE ONLY ONE
+
+`BORN | Born July 3, 1963` → **`BORN | July 3, 1963`**. An **Ops ruling**, not
+his: it was raised twice and carried as typed twice on the standing rule that
+Ops does not drop a word from a value he supplied. **He can revert it with one
+word** and the original is named once in the source, so reverting costs a paste
+rather than a memory. Filed **MIKE** in the register with the one-word Ops edit
+stated explicitly, so it cannot read next year as something he wrote.
+
+**THE OTHER FOUR WERE CHECKED AND ARE CLEAN** — no value opens with its own
+label. Widened past the four because the defect is a class rather than a row:
+**76 tombstone rows across the whole museum, 0 hits.**
+
+**AND THE PROBE WAS PROVED RATHER THAN TRUSTED**, because a zero is exactly the
+reading a broken check gives. Fed the pre-fix `Born | Born July 3, 1963` and a
+synthetic `Founder | Founder of Weird.Baby`: it flags both and passes the four
+real rows.
+
+---
+
+## 9 — JOB 3: THE FOUR PHOTOGRAPHS
+
+**Verified before reading, as instructed** — all four match their stated size and
+mtime to the byte and the minute. **Copied, never moved**; the operator's
+originals are untouched and were re-listed afterwards to prove it.
+
+```
+CBW.jpg     345,355 B  16:09:42  ->  public/images/wb/cb-west-1981-antler.jpg
+Hunter.jpg  362,408 B  16:04:26  ->  public/images/wb/hunter-root-signed-setlist.jpg
+Rod.jpg     219,433 B  16:02:57  ->  public/images/wb/rod-stewart-signed-ball.jpg
+Steven.jpg  367,856 B  16:07:23  ->  public/images/wb/steven-tyler-setlist-harmonica.jpg
+```
+
+**THE NAMES DESCRIBE THE OBJECT, NOT THE PERSON.** The yearbook is
+`cb-west-1981-antler.jpg` rather than anything carrying P!NK's name, because the
+object on that tile is the SCHOOL — Mike's own framing — and a filename saying
+otherwise would be a claim the picture does not make.
+
+**AND THE OBJECT CORROBORATED HIS OWN CORRECTION.** The framed sheet reads
+`VEGAS #5 - NIGHT 2 - V16 - 1/31`, which is the January his 2026-08-17 rewrite
+changed `Feb 2020` to. (Its ninth line reads `PINK` because that is an Aerosmith
+song. Declared in the asset row so nobody later reads it as a link to the P!NK
+tile.)
+
+### The three questions, answered before anything was placed
+
+**1. The tiles did not support a picture.** `profile` rendered `label` + `body`
+and nothing else. The smallest way is three lines and **it does touch the shared
+exhibit component** — there is no route-local renderer. But **the precedent is
+in the same file for the same complaint**: `.vp-fe-plate`, added with the note
+*"every surface needs something visually compelling besides written words…
+OPTIONAL, SO NOTHING ELSE MOVES."* Same field name, same gate, same reasoning.
+**The blast radius is one card, measured:** `profile` is declared by exactly one
+face in the museum, and a lap of /wal, /robots, /foundation and /booth after the
+change counted **0 profile cards, 0 plates, 0 console errors, 0 overflow**.
+
+**2. `public/images/wb/`, not behind a door.** `/held/` is the STAGE hold and it
+is scoped to `GOVERNED_PREFIX` = `/robots/` — the machines' pictures the Record
+delivers one at a time. These are memorabilia on a live public card; `held/`
+would render them for Mike and delete them at launch. `/locked/` is the
+permission hold for /hr and is wrong twice over.
+
+**3. There IS an existing pattern and these are not the first — the `c` field
+already draws the line.** `/images/wal/*` (the artists' covers) are **VERIFIED**,
+against a citation, because they are theirs; `/robots/reference/photos/*` and the
+house artwork are **MIKE**, on the sentence *"the museum's own photographs of its
+own unit"*. These four are MIKE on that same sentence. What is new is only the
+context — the first museum-owned photographs of objects on an artist card. **No
+new class was needed and none was invented.**
+
+**WHAT DECLARING ONE COST:** four `assets.json` rows with `textInImage: true` and
+the lettering transcribed — two setlists, three signatures, a yearbook cover —
+because that field exists for the 2026-08-04 failure where marker lettering
+painted into a JPEG was the largest placeholder in the building. Assets on the
+boundary: **0 undeclared, text-bearing 18 → 22.**
+
+### TWO DEFECTS FOUND BY MEASUREMENT, BOTH MINE
+
+**(a) THE FIRST FRAME WAS `aspect-ratio: 4/3` AND IT WOULD HAVE DESTROYED TWO OF
+THE FOUR.** The ratio was chosen before the files were measured. Then
+`assets:scan` printed what they are:
+
+```
+cb-west-1981-antler         1144 x 1536   0.74  portrait
+hunter-root-signed-setlist  1391 x 1847   0.75  portrait
+rod-stewart-signed-ball     1169 x 1187   0.98  square
+steven-tyler-setlist-...    1872 x 1278   1.46  landscape
+```
+
+A 4/3 landscape box over a 3/4 portrait crops away about 44% of its height — on
+the Hunter setlist that is most of the songs and all three signatures. **The
+photograph would have been of the object and the page would have shown a strip
+of it.** Caught by a tool printing a number nobody asked it for.
+
+**The rule is `height:auto` now and each picture keeps its own shape**, which the
+block's own doctrine already argued for: *"NO MIN-HEIGHT, DELIBERATELY… padding
+them to a common box would make the short one look unfinished."* Cropping four
+objects to a common frame is that instinct one floor down, and it costs more — a
+card's height is only layout; a photograph's crop is the object. **Measured after:
+every drawn ratio matches its natural ratio to three decimals at both widths.**
+
+**(b) `loading="lazy"` LEFT ALL FOUR UNLOADED AND COLLAPSED THE CARDS TO 1.8px.**
+Three reasons it is gone, in order of weight: a profile card only exists when the
+visitor is on it, so lazy cannot mean *only if needed*, only *later than needed*;
+without a reserved box the card jumps 1.8px → 484.8px when the image lands; and
+**it did not load at all under a probe** — the same family as the §8
+`requestAnimationFrame` hazard, a browser deferring work in a frame it is not
+painting. Correctness that depends on the frame being looked at is what that rule
+forbids. Cost: four photographs, 1.26 MB, on a card the visitor has just opened.
+
+### AND A THIRD DEFECT THAT WAS NOT MINE AND WOULD HAVE SHIPPED SILENTLY
+
+**`assets:scan` SWEPT IN TWELVE GITIGNORED FILES.** Adding four photographs took
+the table 385 → **409**: four photographs, eight comparison pictures, and twelve
+files under `docs/shorts/out/`, which `.gitignore:60` excludes whole.
+
+**A ROW IS COMMITTED; A GITIGNORED FILE IS NOT. So the row is BORN AN ORPHAN** —
+correct on this machine the minute it is written, dangling on every clone and
+every CI checkout. That is the M9 defect class (13 orphan rows open today)
+manufactured on purpose, and the round that later finds them cannot tell them
+from a real move.
+
+The scanner has a `SKIP_PATH` list now, **by path and not by name** — the
+directory is called `out` and skipping every `out/` in the repository to exclude
+one would hide whatever a future round parks in another. **It is deliberately not
+a `.gitignore` reader:** parsing that file would silently change this table's
+population every time somebody edits it, and the population is a judged thing.
+
+**AND THE FIX ALONE WAS NOT ENOUGH, WHICH IS THE PART WORTH KEEPING.** `--scan`
+MERGES; it does not replace. With the skip in place the twelve rows written by
+the first scan simply became *rows whose file is gone* (13 → 25) and stayed.
+`asset-table.json` was restored from HEAD and re-scanned — **385 → 397, exactly
+the four photographs and the eight comparison pictures, 0 removed, orphans back
+to 13.**
+
+---
+
+## 10 — GATES, ON THE FINAL TREE
+
+lint **9 / 8 = baseline** · build green · **launch build green** ·
+`provenance:gate` **PASS** · `reveal:check` **PASS** · `parity:gate` **PASS** ·
+`instory:gate` **PASS** · `docs:numbers` **PASS** · `reveal:day` **nothing to
+move** · `assets:orphans` **13, 8 judged / 5 unjudged — unchanged (M9)**.
+
+**`assets:gate` EXITS 1 AND THAT IS PRE-EXISTING.** It is the RECORD APPROVAL
+gate: **0 of 39 presented assets have Mike's verdict**, including every favicon,
+every /wal cover and the whole of the /wb audio. It is not in the packet gate
+list for the reason `facts:gate` is not (Q-b): a gate that always fails is read
+as noise and then skipped. My four join the 35 already waiting — register row
+**M22**.
+
+**THE REGISTER, ACROSS THIS PACKET:** 5 rows pruned, 3 added, **0 surviving rows
+changed, 0 chains broken.** Anchors were checked before every prune and the
+prune was run against a copy, per §9's four-step procedure. The shortened records
+note carries the same six-key RESTATED chain as the row it replaced — checked,
+because a RESTATED row's `r` must resolve and it is the only thing in the whole
+boundary that notices a deletion.
+
+**AND ONE FALSE PASS WORTH RECORDING.** A PowerShell loop running the gates and
+reading `$LASTEXITCODE` reported `docs:numbers exit 0` while a direct run failed
+on three stale row counts. **The loop was the thing at fault, not the gate** —
+and it is the second measurement error in two packets, both caught by the result
+being surprising. The published counts (`385` in `CLAUDE.md` and twice in
+`OPERATIONS.md`) are now **397**.
+
+**Nothing was pushed and nothing was deployed.**

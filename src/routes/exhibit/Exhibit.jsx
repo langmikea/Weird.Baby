@@ -4734,10 +4734,65 @@ export default function Exhibit({ artist, open = null }) {
                             without a code change — which is "can be filled for
                             ANY artist" as a mechanism rather than as an
                             intention. */}
+                        {/* ═══ [2026-08-17] A PROFILE CARD MAY CARRY A PICTURE,
+                            AND IT IS THE SAME THREE LINES `.vp-fe-plate` ALREADY
+                            IS ═══════════════════════════════════════════════
+                            MIKE supplied four photographs of objects he owns —
+                            a framed Vegas setlist with the harmonica below it,
+                            a signed ball, a signed setlist, a 1981 yearbook —
+                            one for each of four tiles that had only words.
+                            THE ARGUMENT IS ALREADY WRITTEN IN THIS FILE, at
+                            `.vp-fe-plate` some four hundred lines down: "every
+                            surface needs something visually compelling besides
+                            written words… OPTIONAL, SO NOTHING ELSE MOVES."
+                            This is that mechanism on the other card shape, not
+                            a second idea — same optional field name (`img`),
+                            same gate, same reasoning.
+                            NOTHING ELSE IN THE MUSEUM CAN MOVE, AND THAT IS
+                            MEASURED RATHER THAN HOPED: `profile` is declared by
+                            EXACTLY ONE FACE in the building (weird-baby.js), so
+                            the blast radius of this block is one card — and a
+                            tile that declares no `img` renders the markup it
+                            rendered before, byte for byte.
+                            `alt=""` IS DELIBERATE AND IS NOT AN OVERSIGHT. The
+                            picture sits directly above the label and the body
+                            that say what it is; an alt string would be Ops
+                            writing a caption, and captions on these are Mike's.
+                            The image is decorative TO THE TEXT — the text is
+                            the accessible content and it is right there. */}
                         {Array.isArray(face.profile) && face.profile.length > 0 && (
                           <div className="vp-prof" data-stage-split="row">
                             {face.profile.map((c, i) => (
                               <div className="vp-prof-card" key={i}>
+                                {/* NO `loading="lazy"` HERE, AND `.vp-fe-plate`
+                                    HAS ONE — the difference is real and was
+                                    measured rather than reasoned.
+                                    (1) A PROFILE CARD ONLY EXISTS WHEN THE
+                                    VISITOR IS ON IT. This block renders when
+                                    the About-the-artist face is open, so
+                                    "lazy" cannot mean "only if needed" — it can
+                                    only mean "later than needed".
+                                    (2) WITHOUT A RESERVED BOX IT COLLAPSES THE
+                                    CARD UNTIL IT LANDS. `.vp-fe-plate` declares
+                                    an `aspect-ratio` and holds its space; this
+                                    plate deliberately has none (it keeps each
+                                    photograph's own shape — see the CSS), so an
+                                    undelivered lazy image draws 1.8px tall and
+                                    the card jumps when it arrives. Measured at
+                                    1423px: 1.8px before, 484.8px after.
+                                    (3) AND IT DID NOT LOAD AT ALL under a probe
+                                    — same family as the §8 `requestAnimationFrame`
+                                    hazard: a browser defers work in a frame it
+                                    is not painting, and a lazy image is exactly
+                                    that kind of deferred work. Correctness that
+                                    depends on the frame being looked at is the
+                                    thing that rule exists to forbid.
+                                    The cost is four photographs, 1.26 MB, on a
+                                    card the visitor has just chosen to open. */}
+                                {c.img && (
+                                  <img className="vp-prof-plate" src={c.img} alt=""
+                                       decoding="async" />
+                                )}
                                 <div className="vp-prof-label">{c.label}</div>
                                 <p className="vp-prof-body">{c.body}</p>
                               </div>

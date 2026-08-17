@@ -429,8 +429,19 @@ const mikey = [
             "Confirmed from the upload itself."], { source: ["feed"], topic: ["records"], song: ["cooler"] }),
   fact(MM, ["His official channel is @findmikeymike.",
             "It resolves to channel UC5l5VrZuAg3CfJ9ASQdlQmg — confirmed 2 August 2026."], { source: ["feed"], topic: ["places"] }),
-  fact(MM, ["He does own the domain findmikeymike.com.",
-            "It is not linked here, and the reason is in the ledger."], { source: ["own"], topic: ["traps"] }),
+  /* [2026-08-17b] THE DOMAIN FACT IS DELETED — MIKE, extending his kill of the
+     visitor-facing block on the artist card: **"findmikeymike.com STAYS in the
+     ledger, linked nowhere and described nowhere a visitor reads."** The
+     scroller is a visitor surface, so this row is one of the places the same
+     content survived in different words.
+     NAMED ONCE (Doctrine 24): "He does own the domain findmikeymike.com. / It
+     is not linked here, and the reason is in the ledger."
+     THE RECORD OF WHY THE DOOR IS SHUT IS UNTOUCHED and is where it has always
+     belonged — the `[R-a 2026-08-02]` comment block in `worth-a-listen.js`,
+     which a visitor cannot read and a maintainer cannot miss.
+     THE ROW BELOW IS NOT THE SAME FACT and stays: it is about several acts
+     sharing his name, which is why the door is chosen carefully rather than
+     why one address is refused. */
   fact(MM, ["Several unrelated acts share the name Mikey Mike.",
             "Picking the wrong one is worse than leaving the door shut."], { source: ["own"], topic: ["traps"] }),
   fact(MM, ["Apple Music files him under Alternative.",

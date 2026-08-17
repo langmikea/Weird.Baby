@@ -2276,22 +2276,6 @@
    "c": "VERIFIED",
    "s": "each fact's own `source:` tag — wiki | bc | yt | press | vault; legend at worth-a-listen-facts.js:50-58"
   },
-  "a3e3b023821d4801": {
-   "f": "src/data/artists/worth-a-listen-facts.js",
-   "l": 432,
-   "t": "He does own the domain findmikeymike.com.",
-   "p": "mikey[].fact()[]",
-   "c": "VERIFIED",
-   "s": "each fact's own `source:` tag — wiki | bc | yt | press | vault; legend at worth-a-listen-facts.js:50-58"
-  },
-  "0a5122793d244fdc": {
-   "f": "src/data/artists/worth-a-listen-facts.js",
-   "l": 433,
-   "t": "It is not linked here, and the reason is in the ledger.",
-   "p": "mikey[].fact()[]",
-   "c": "VERIFIED",
-   "s": "each fact's own `source:` tag — wiki | bc | yt | press | vault; legend at worth-a-listen-facts.js:50-58"
-  },
   "93b3dbb6583133eb": {
    "f": "src/data/artists/worth-a-listen-facts.js",
    "l": 434,
@@ -6769,21 +6753,6 @@
    "p": "ARTISTS[].records.title",
    "c": "HOUSE"
   },
-  "1d12dff94b199bbc": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1040,
-   "t": "No catalogue page and no store could be verified as his this round — his Bandcamp does not exist, and the domain he does own is currently serving injected spam, so this museum will not send you there. His own channel is the one surface confirmed to be his, and it is the door at the foot of this card.",
-   "p": "ARTISTS[].records.note",
-   "c": "RESTATED",
-   "r": [
-    "181b7b8f2fc8eba2",
-    "aaaae49769c9dc56",
-    "f3059bd0c69cb66e",
-    "742acb488a6f919b",
-    "54e0f90b05dc8dbf",
-    "13d55d4628291d5c"
-   ]
-  },
   "e5076ed6683edb9a": {
    "f": "src/data/artists/worth-a-listen.js",
    "l": 1088,
@@ -6900,14 +6869,6 @@
    "p": "ARTISTS[].decks[].cards[].eyebrow",
    "c": "VERIFIED",
    "s": "the card's own `Verified` / `Source` / `Accession` tombstone row; artist-level provenance in the artist's own `aboutNote` Sources line, printed on the same card"
-  },
-  "d555a25129d970c1": {
-   "f": "src/data/artists/worth-a-listen.js",
-   "l": 1093,
-   "t": "Sources: Faded Glamour's 2017 piece on “Doin' Me” (the Canon sync, the Rick Rubin involvement, the Rihanna and Universal credits); Apple Music and Deezer for the discography and the Salisbury origin; a 2020 Titusville interview for the 2019 European run. His own domain is deliberately not linked — see the ledger.",
-   "p": "ARTISTS[].aboutNote",
-   "c": "VERIFIED",
-   "s": "the artist's own `aboutNote` Sources line, printed on the same card"
   },
   "8670fd688b39184f": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -14689,13 +14650,6 @@
    "c": "VERIFIED",
    "s": "jessewelles.bandcamp.com — his own store page, read 2026, where he wrote it himself in his own lower case. The card's door opens that page. OPS' WORDS, HIS FACT: Mike ruled on 2026-08-17 that the 24-word direct quote must not ship under any framing and preferred a paraphrase with no quote marks; his own suggested wording is used for the first sentence. The two charities — No Kid Hungry and the Arkansas Food Bank — are named here because the deleted quote had been the only place naming them."
   },
-  "6b02911c55c70f9d": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 368,
-   "t": "Born July 3, 1963",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
-  },
   "bcb5b064e44fe361": {
    "f": "src/data/artists/weird-baby.js",
    "l": 369,
@@ -15257,6 +15211,34 @@
    "t": "No — Those exhibited on Weird.Baby are not partners, clients, or signings.\nThey are people we feel are Worth a Listen.\nWe show their public content, and we direct Gift Shop traffic directly to their site.",
    "c": "MIKE",
    "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" AFFILIATION gains a third line — \"We show their public content, and we direct Gift Shop traffic directly to their site.\" It is hoisted in house-copy.js, so the booth's sheet and /wal's FAQ both draw it and cannot fork."
+  },
+  "a82f8150ef157102": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 427,
+   "t": "July 3, 1963",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST fact grid, supplied 2026-08-16 and refreshed 2026-08-17; the DATE is his to the character. ONE WORD WAS REMOVED BY OPS AND IT IS NAMED HERE RATHER THAN ABSORBED: the value he supplied was \"Born July 3, 1963\" against a label that already reads BORN, so the grid printed the word twice. It was raised to him twice and carried as typed both times; it is cut on an OPS RULING (see docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md), and Mike can revert it with one word. Nothing else in the value changed — same month, day, year and punctuation. Register row Q-c keeps the question open."
+  },
+  "27b7bdefc73ad241": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1353,
+   "t": "No catalogue page and no store could be verified as his this round — his Bandcamp does not exist. His own channel is the one surface confirmed to be his, and it is the door at the foot of this card.",
+   "c": "RESTATED",
+   "r": [
+    "181b7b8f2fc8eba2",
+    "aaaae49769c9dc56",
+    "f3059bd0c69cb66e",
+    "742acb488a6f919b",
+    "54e0f90b05dc8dbf",
+    "13d55d4628291d5c"
+   ]
+  },
+  "bc51c6b92c1f9bdd": {
+   "f": "src/data/artists/worth-a-listen.js",
+   "l": 1425,
+   "t": "Sources: Faded Glamour's 2017 piece on “Doin' Me” (the Canon sync, the Rick Rubin involvement, the Rihanna and Universal credits); Apple Music and Deezer for the discography and the Salisbury origin; a 2020 Titusville interview for the 2019 European run.",
+   "c": "VERIFIED",
+   "s": "the artist's own `aboutNote` Sources line, printed on the same card. [2026-08-17] ITS LAST SENTENCE WAS CUT ON MIKE'S RULING - 'His own domain is deliberately not linked - see the ledger.' The museum does not name that address anywhere a visitor can read, and DORMANT IS NOT GONE: the SOURCES row that printed this field was struck on 2026-08-17 and could return. The three citations are unchanged to the character; the provenance for why that door is shut is the [R-a 2026-08-02] comment block above `site`, which is untouched. See docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md."
   }
  }
 }

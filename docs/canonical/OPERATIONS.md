@@ -495,9 +495,9 @@ review walked past it. **THE ASYMMETRY IS THE MECHANISM:** PRECIOUS has a ceilin
 weeks; **DUMP has none, so it divides into nothing**, and `runways()` in
 `reveal/focus.mjs` is structurally unable to print one for it, because a
 symmetrical table would re-commit the original error in the other bucket.
-**`bucket` is the sixth JUDGED field on the asset table, null on all 385 rows
-(re-measured 2026-08-13; the line said 315 — the table has grown, and the point
-of it has not: still not one derived value on it), and
+**`bucket` is the sixth JUDGED field on the asset table, null on all 397 rows
+(re-measured 2026-08-17; the line said 315, then 385 — the table has grown, and
+the point of it has not: still not one derived value on it), and
 OPS DOES NOT DERIVE IT** — a heuristic calling every machine photograph precious
 would make every tracker read as ANSWERED while nothing had been answered, which
 is the void figure's own defect with better manners. So the 16 pictures behind the
@@ -1573,8 +1573,8 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
     **AND THE BUCKET IS MIKE'S, UNSET, AND OPS DOES NOT DERIVE IT.** `bucket`
     (`precious` | `dump` | `null`) is the sixth JUDGED field on
     `provenance/asset-table.json`, beside `verdict` and `revealArc`, carried
-    across a scan and never written by a scan. It is null on all 385 rows
-(re-measured 2026-08-13; the line said 315), so
+    across a scan and never written by a scan. It is null on all 397 rows
+(re-measured 2026-08-17; the line said 315, then 385), so
     every runway today is a **bound** rather than a number and says so. A
     heuristic — *a machine photograph is precious, a manual page is dump* —
     would make every tracker read as answered while nothing had been answered,
@@ -1833,6 +1833,34 @@ Mirrors STATE.md → Working Doctrine; this copy is canonical for process.
 
 ## 8. Known hazards (environment quirks)
 
+- **[2026-08-17] `assets:scan` WALKS DISK, AND DISK INCLUDES GITIGNORED TREES.
+  A ROW IS COMMITTED; THE FILE MAY NOT BE, AND THEN THE ROW IS BORN AN ORPHAN.**
+  Adding four photographs took the table 385 → 409: the four, eight comparison
+  pictures, and **twelve files under `docs/shorts/out/`**, which `.gitignore:60`
+  excludes whole. Correct on this machine the minute it is written; dangling on
+  every clone and every CI checkout — the M9 defect class manufactured on
+  purpose, and a later round cannot tell such a row from a real move.
+  There is a **`SKIP_PATH`** list in `tools/asset-table.mjs` now, **by path and
+  not by name** (the directory is called `out`; skipping every `out/` would hide
+  whatever a future round parks in another), and **deliberately not a
+  `.gitignore` reader** — parsing that file would silently change this table's
+  population every time somebody edits it, and the population is a judged thing.
+  **AND THE SKIP ALONE DOES NOT UNDO A BAD SCAN: `--scan` MERGES, IT DOES NOT
+  REPLACE.** With the fix in place the twelve already-written rows simply became
+  *rows whose file is gone* (13 → 25) and stayed. **Restore `asset-table.json`
+  from HEAD and re-scan** — that is the only way back, and it is safe precisely
+  because nothing else writes that file.
+- **[2026-08-17] A LAZY IMAGE DOES NOT LOAD IN A FRAME THE BROWSER IS NOT
+  PAINTING — the same family as the `requestAnimationFrame` row below.** Four
+  `loading="lazy"` plates in a same-origin measuring iframe stayed at
+  `naturalWidth 0` with a correct `src` through a full scroll of the document,
+  and drew 1.8px tall. **Two consequences, and the second is the one that
+  reaches a visitor:** a probe will report a picture "broken" that is fine on the
+  top-level page (two coverflow covers did exactly this), and a lazy image with
+  no reserved box collapses its container until it lands. Measure images on the
+  top-level page, or force `loading="eager"` in the probe before believing a
+  zero — and do not put `loading="lazy"` on a picture that only exists once the
+  visitor is already looking at it.
 - **Cowork FUSE/sync truncation.** The sandbox has truncated files on
   disk mid-write (three files once recovered from HEAD). NEVER let a
   Cowork session do read-modify-write on large files; big-file edits are

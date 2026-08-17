@@ -407,18 +407,59 @@ const spine = [
              `Founder` IS A NEW ROW AND A NEW FACT. The label is Ops' like every
              other `k` on this card; the value is his to the character, the four
              wings and the date included.
-             STILL FLAGGED, STILL NOT CORRECTED: `Born | Born July 3, 1963`
-             repeats its label, so the grid prints the word twice. It is his
-             value as supplied and it is his to rule on — backlog row `Q-c`. */
+             ═══ [2026-08-17b] THE `Born` STUTTER IS FIXED, AND THIS IS AN OPS
+                 RULING RATHER THAN HIS ═══════════════════════════════════════
+             The value was `Born July 3, 1963` against a label that already says
+             BORN, so the grid printed the word twice: `BORN   Born July 3,
+             1963`. It is now `July 3, 1963`.
+             **IT WAS RAISED TWICE AND CARRIED AS TYPED BOTH TIMES**, on the
+             standing rule that Ops does not drop a word from a value he
+             supplied. It is being changed now on an OPS RULING, which is a
+             different thing from him ruling it: **Mike can revert it with one
+             word** and the original is here, named once (Doctrine 24), so
+             reverting costs a paste rather than a memory.
+             **NOTHING BUT THE DUPLICATE WORD WENT.** The date is his to the
+             character — same month, same day, same year, same punctuation. The
+             row is the only one of the five that stuttered; the other four were
+             checked and are reported rather than touched (see the round log).
+             `Q-c` keeps the row for his word. */
           tombstone: [
-            { k: "Born", v: "Born July 3, 1963" },
+            { k: "Born", v: "July 3, 1963" },
             { k: "High School", v: "CB West - Doylestown, PA - Class of 1981" },
             { k: "Studied", v: "Stevens Institute of Technology - Hoboken, NJ - 1985 BSME" },
             { k: "Studied", v: "New Jersey Institute of Technology - Newark, NJ - 2000 MS Eng Mgmt" },
             { k: "Founder", v: "Weird.Baby /Foundation /Robots /Music - August 16, 2026" },
           ],
+          /* ═══ [2026-08-17] FOUR OF THE SIX TILES GAIN A PHOTOGRAPH ═════════
+             MIKE supplied four pictures of objects he owns, taken by him, one
+             per existing tile. **THEY ARE THE MUSEUM'S OWN AND THAT IS THE
+             DISTINCTION WORTH KEEPING** — unlike the artists' covers on /wal,
+             which are theirs and are filed VERIFIED against a citation, these
+             are filed MIKE in `provenance/assets.json` on the same sentence the
+             robots reference photographs use: the house's own photographs of
+             its own things.
+             THEY LIVE IN `public/images/wb/`, NOT BEHIND A DOOR. `/held/` is
+             the STAGE hold and it is scoped to `GOVERNED_PREFIX` — `/robots/`,
+             the machines' pictures the Record delivers one at a time. These are
+             memorabilia on a live public card; putting them in `held/` would
+             render them for Mike and delete them at launch, which is the
+             opposite of the intent. `/locked/` is the permission hold for /hr
+             and is wrong twice over.
+             THE NAMES ARE OPS' AND DESCRIBE THE OBJECT, NOT THE PERSON. The
+             yearbook is `cb-west-1981-antler.jpg` rather than anything with
+             P!NK's name in it, because the object on that tile is the SCHOOL —
+             Mike's own framing — and a filename that said otherwise would be a
+             claim the picture does not make.
+             NO CAPTIONS. Mike writes those. The tiles carry his existing words
+             unchanged; the pictures are added and not one character of body
+             copy moved. And **no gift shop for any of them** — ruled.
+             THE TWO TILES WITHOUT A PICTURE ARE NOT WAITING FOR ONE: the second
+             Steven Tyler tile is a journal entry about a porch and CURRENT
+             PROJECTS is a plan, and neither is an object anybody owns. The
+             renderer's `img` is optional precisely so a card can be text. */
           profile: [
             { label: "P!NK",
+              img: "/images/wb/cb-west-1981-antler.jpg",
               body:
                 "P!NK went to Papa Weird.Baby's High School - Central Bucks "
                 + "High School West. Rumor has it she had his old locker (at "
@@ -439,7 +480,13 @@ const spine = [
                a duplicate label is no different to the renderer from any other;
                the React key is the index, which is already how this array is
                drawn. Nothing about the repeat needs a mechanism. */
+            /* THE PICTURE GOES ON THE FIRST TILE, WHICH IS THE ONE WITH AN
+               OBJECT IN IT, AND IT CORROBORATES HIS OWN CORRECTION: the framed
+               sheet reads `VEGAS #5 - NIGHT 2 - V16 - 1/31`, which is the
+               January his 2026-08-17 rewrite changed `Feb 2020` to. The
+               harmonica sits below the frame in the same shot. */
             { label: "Steven Tyler",
+              img: "/images/wb/steven-tyler-setlist-harmonica.jpg",
               body:
                 "Steven Tyler gave his harmonica to Papa Weird.Baby from the "
                 + "stage in Las Vegas, NV January 2020. Then Steven tried to "
@@ -451,12 +498,14 @@ const spine = [
                 + "honk out 'Amazing Grace' with Mike on his front porch, it "
                 + "signifies the Weird.Baby Foundation is making a difference." },
             { label: "Rod Stewart",
+              img: "/images/wb/rod-stewart-signed-ball.jpg",
               body:
                 "Rod Stewart kicks soccer balls into the crowd each show. Papa "
                 + "Weird.Baby caught one with Rod's name written on it; must be "
                 + "his personal ball. Papa Weird.Baby will return it if he "
                 + "meets up with Rod someday." },
             { label: "Hunter Root",
+              img: "/images/wb/hunter-root-signed-setlist.jpg",
               body:
                 "Hunter Root and Papa Weird.Baby hung out behind the bar "
                 + "Hunter was playing that night. Burned some time out back "

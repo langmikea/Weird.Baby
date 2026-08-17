@@ -1805,6 +1805,55 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
 .vp-flat:has(> .vp-rec-openhead){min-height:calc(100vh - var(--wb-bar-h) - 25px)}
 .vp-rec-open > .vp-rec-sum,
 .vp-rec-openhead > .vp-rec-sum{grid-column:2}
+/* ═══ [2026-08-17] THE REPORT IS SUBTEXT UNDER THE HEADLINE — MIKE'S RULING ══
+   MIKE, on /robots/record: a Record **"displays awkwardly... a kinda-out-dented
+   format"** — the nnn/DAY block sits left of the body, so the sections below
+   hang out to the LEFT of the headline instead of reading as its subtext. He
+   was given two variants rendered against Record 001 and **ruled b: "indent the
+   report so it reads as subtext under the headline."**
+
+   HIS READING WAS ARITHMETICALLY EXACT. Measured at 1706px on the built bundle
+   with 001 open, before this rule:
+       .vp-flat / .vp-rec-openhead / .vp-rec-sects   left  831.3
+       .vp-rec-mark (the rail)                       left  833.3   w 53.5
+       .vp-rec-headline / .vp-rec-deck               left  902.8
+   The report started **71.5px left of the headline** — 2px of the head's
+   padding + the 53.5px rail + the grid's 16px column gap.
+
+   AND THAT DISTANCE ALREADY HAD A NAME, WHICH IS WHY THIS IS ONE DECLARATION.
+   `--rec-textcol` is declared on `.vp-face` as "the full distance from the
+   face's left edge to the index's text column" (A1, 2026-08-11) — exactly the
+   offset the headline's own grid puts it at. The report lands on the headline's
+   vertical by reading the same token the headline reads, so the two cannot
+   drift: a future change to the rail moves both, and there is no second number
+   to keep in step. **NOT `ch`**, which is the trap this file's history names
+   twice — `--rec-textcol` is in `em` of `--fs-lead`, so it is correct on these
+   elements whatever face they are set in.
+
+   IT INDENTS THE WHOLE BODY OF WRITING AND NOT ONLY THE SECTIONS — the lead,
+   the sections, the attachments, the tombstone, the note and the endmark.
+   Indenting some of them would trade his complaint for a worse version of it.
+   **THE FOOT TRANSPORT IS LEFT ALONE ON PURPOSE:** it is furniture rather than
+   writing, it is right-aligned, and J1 pinned its geometry to the top group's.
+   The head itself is untouched — the mark, the headline and the deck are
+   exactly where they were, so J1's "the index row carries into the opened
+   record without change" survives this ruling intact. That is the property
+   variant **a** would have cost, and it is the reason to say so here.
+
+   THE SPECIFICITY IS NOT AN ACCIDENT AND WAS CHECKED: `.vp-rec-sects` further
+   down this file sets `padding:0`, a shorthand that includes `padding-left`.
+   These selectors are 0,2,0 against its 0,1,0, so they win regardless of source
+   order — the rule does not depend on sitting after it, and moving either does
+   not silently undo this.
+
+   WHAT IT COSTS, MEASURED RATHER THAN ASSERTED: the report loses
+   `--rec-textcol` of measure. See the round log for both widths. */
+.vp-rec-openhead ~ .vp-rec-lead,
+.vp-rec-openhead ~ .vp-rec-sects,
+.vp-rec-openhead ~ .vp-rec-att,
+.vp-rec-openhead ~ .vp-rec-tomb,
+.vp-rec-openhead ~ .vp-fe-note,
+.vp-rec-openhead ~ .vp-rec-end{padding-left:var(--rec-textcol)}
 /* ═══ [L1 2026-08-11] THE RAIL SPANS BOTH ROWS, AND THAT IS THE GAP ═════════
    MIKE: "Still left gap for second headline; remove it."
    IT WAS NOT A `min-height` AND THAT IS WHY THE LAST ROUND MISSED IT. The
@@ -3499,6 +3548,45 @@ button.vp-bill-act:hover,button.vp-bill-act:focus-visible{
   border:1px solid var(--wb-border);
   border-left:3px solid var(--wb-gold-lo);
   padding:12px 14px 13px;break-inside:avoid}
+/* ═══ [2026-08-17] THE PICTURE ON A PROFILE CARD ════════════════════════════
+   Four of Mike's own photographs of objects he owns, one per tile. It is the
+   `.vp-fe-plate` mechanism on the other card shape — optional, so a tile that
+   declares no `img` is byte-identical to what it drew before.
+   NO NEW LAYOUT. `.vp-prof-card` is already `display:flex; flex-direction:
+   column; gap:6px`, so the picture is simply the first child of a stack that
+   existed; it takes the card's own gap and needs no margin of its own.
+   NO `aspect-ratio`, AND THE FIRST CUT HAD ONE. It was written as `4/3` with
+   `object-fit:cover` on the reasoning that a row of cards wants its labels on
+   one line — and then the asset scan printed what these four actually are:
+
+       cb-west-1981-antler          1144 x 1536   0.74  portrait
+       hunter-root-signed-setlist   1391 x 1847   0.75  portrait
+       rod-stewart-signed-ball      1169 x 1187   0.98  square
+       steven-tyler-setlist-...     1872 x 1278   1.46  landscape
+
+   A 4/3 landscape box over a 3/4 portrait crops away about 44% of its height.
+   On the Hunter setlist that is most of the songs and all three signatures —
+   **the photograph would have been of the object and the page would have shown
+   a strip of it.** The ratio was chosen before the files were measured, which
+   is the failure this repository names most often, caught here by a tool
+   printing a number nobody asked it for.
+
+   SO EACH PICTURE KEEPS ITS OWN SHAPE, AND THE BLOCK'S OWN DOCTRINE ALREADY
+   SAID IT WOULD. The note above `.vp-prof` reads: "NO MIN-HEIGHT, DELIBERATELY.
+   A one-sentence category and a three-sentence one are different heights and
+   the grid lets them be; padding them to a common box would make the short one
+   look unfinished." Cropping four objects to a common frame is that same
+   instinct one floor down, and it costs more here: a card's height is only
+   layout, but a photograph's crop is the object.
+   THE BORDER AND THE GROUND ARE THE PLATE'S, NOT THE CARD'S. `--wb-ink-card`
+   behind it means a photograph with a pale ground (all four are shot against a
+   white wall) still reads as a mounted object rather than as a hole in the
+   card, and the hairline is the same one `.vp-fe-plate` uses. No shadow: these
+   are inside a bordered card already, and a second lift would make a box in a
+   box. */
+.vp-prof-plate{display:block;width:100%;height:auto;
+  background:var(--wb-ink-card);
+  border:1px solid var(--wb-border)}
 .vp-prof-label{font-family:'Courier Prime','Courier New',monospace;
   font-size:var(--fs-micro);letter-spacing:.16em;text-transform:uppercase;
   color:var(--wb-gold-mute)}

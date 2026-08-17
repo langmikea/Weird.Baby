@@ -15,19 +15,33 @@ everything it describes.
 
 ## 0b — THE COPY ROUND, 2026-08-17 (LATER THE SAME DAY)
 
-**BATCH 1 IS DONE AND UNCOMMITTED. IT NEEDS A DEPLOY.** Nine copy changes across
-`robots.js`, `weird-baby.js`, `house-copy.js`, `foundation.js`,
+**BATCH 1 IS DONE AND MIKE COMMITTED IT MID-SESSION AS `0ee5d40`.** Nine copy
+changes across `robots.js`, `weird-baby.js`, `house-copy.js`, `foundation.js`,
 `worth-a-listen.js` and `MuseumBar.css`, plus 14 pruned / 11 added register rows.
-All gates green, every changed page loaded on the built bundle. The tree is
-listed in §7 below.
+All gates green, every changed page loaded on the built bundle.
 
-**BATCH 2 IS WAITING ON ONE WORD FROM MIKE and is not in `src/`.** Two Record
-layout variants, built as real CSS and photographed against Record 001:
-`docs/record-layout-variants/compare.html`. Register row `Q-g`, short-list
-`16m`. When he rules, the chosen block in `variants.css` moves into
-`Exhibit.css` beside the rules it overrides **and that directory is deleted**.
+**THIS IS THE THIRD TIME IN TWO DAYS THAT A HANDOFF SENTENCE ABOUT THE TREE WENT
+FALSE WHILE IT WAS BEING WRITTEN** — it said "uncommitted", and it was true when
+typed. §1's own warning is the standing answer and it is not a joke: **run
+`git log --oneline -3` and `git status --short` before trusting any line here.**
 
-**FOUR THINGS FROM THAT ROUND THAT WILL BITE THE NEXT ONE:**
+**BATCH 2 IS RULED AND SHIPPED — MIKE CHOSE `b`.** The report is indented onto
+the headline's vertical by one declaration in `Exhibit.css` reading
+`--rec-textcol`, the token the headline's own grid already reads, so the two
+cannot drift. Out by **0** at 1280, 390 and 1920. `a` and `a+b` are **deleted**
+from `variants.css`; `docs/record-layout-variants/` is **kept as the record of
+the comparison** and nothing in it is loaded by the museum. Row `Q-g` closed and
+left the register (Doctrine 24); its reasoning is in `OPEN_ACTIONS_CLOSED.md`.
+
+**A SECOND PACKET RAN THE SAME DAY AND EVERYTHING IN IT IS ALSO UNCOMMITTED** —
+the spam note's two remaining statements plus **a third the sweep found**
+(`aboutNote`'s last sentence, dormant, struck on his ruling that *dormant is not
+gone*); the `Born` label stutter cut on an **Ops** ruling he can revert with one
+word; and **four of his own photographs placed on the About-the-Artist tiles**,
+the first museum-owned object photographs on an artist card. §0c below is what
+that packet leaves for you.
+
+**FOUR THINGS FROM THE FIRST ROUND THAT WILL BITE THE NEXT ONE:**
 
 1. **`resize_window` DOES NOTHING ON THIS HOST.** `innerHeight` stayed 810
    whatever was asked for, so a sticky band can never be scrolled to its pinned
@@ -51,6 +65,41 @@ layout variants, built as real CSS and photographed against Record 001:
 
 **AND ONE MECHANISM JOINS §3's LIST:** `siteNote` in `worth-a-listen.js` has no
 declarer left — Mike struck the one that existed. Its builder line survives.
+
+---
+
+## 0c — THE SECOND PACKET, 2026-08-17 (SAME DAY)
+
+**THREE THINGS IT LEAVES BEHIND, IN THE ORDER THEY WILL MATTER.**
+
+1. **THE FOUR PHOTOGRAPHS ARE THE FIRST MUSEUM-OWNED OBJECT PICTURES ON AN
+   ARTIST CARD, AND THE PATTERN THAT CARRIES THEM ALREADY EXISTED.** The `c`
+   field in `provenance/assets.json` is the line between the house's and the
+   artists': `/images/wal/*` are **VERIFIED** against a citation because they
+   are theirs; these four and the robots reference photographs are **MIKE**, on
+   the sentence *"the museum's own photographs of its own …"*. **No new class
+   was invented and none is needed for the next one.** They live in
+   `public/images/wb/` — not `held/`, which is the STAGE hold and is scoped to
+   `GOVERNED_PREFIX` = `/robots/`.
+2. **`profile` CARDS TAKE AN OPTIONAL `img` NOW** (`Exhibit.jsx` +
+   `.vp-prof-plate` in `Exhibit.css`) — the `.vp-fe-plate` mechanism on the
+   other card shape, same field name, same gate. **`profile` is declared by
+   exactly one face in the museum**, so the blast radius is one card; a lap of
+   /wal, /robots, /foundation and /booth counted 0 plates and 0 console errors.
+   **The plate has NO `aspect-ratio` and that is deliberate** — read the CSS
+   note before adding one; a 4/3 frame was tried first and would have cropped
+   44% off the two portrait objects.
+3. **THE SPAM NOTE IS GONE FROM ALL THREE PLACES AND ONE OF THEM WAS DORMANT.**
+   Mike's ruling — *dormant is not gone* — is the part to carry: a string that
+   is one restored render away from the glass is a string on the glass with a
+   delay. `findmikeymike.com` and `injected spam` are **absent from the built
+   bundle**; the `[R-a]` ledger comment saying why the door is shut is untouched
+   and is where that record belongs.
+
+**AND `assets:gate` EXITS 1 — IT ALWAYS HAS.** 0 of 39 presented assets carry
+Mike's verdict, favicons and /wal covers included. It is not in the packet gate
+list, for the reason `facts:gate` is not (Q-b). The four photographs join the 35
+already waiting: register row **M22**.
 
 ---
 
@@ -202,14 +251,23 @@ _backup_weird-baby_before-W-a-20260816.js
 
 ## 7 — THE WORKING TREE, AS THIS ROUND LEFT IT
 
-**[2026-08-17, THE COPY ROUND] THE TREE IS NOT CLEAN AND THAT IS BATCH 1
-WAITING FOR A DEPLOY.** Modified: `provenance/register.json` ·
-`src/components/MuseumBar.css` · `src/data/artists/foundation.js` ·
-`src/data/artists/robots.js` · `src/data/artists/weird-baby.js` ·
-`src/data/artists/worth-a-listen.js` · `src/data/house-copy.js`. Untracked:
-`docs/record-layout-variants/` (Batch 2, not shipped) and this round's log,
-handoff and register edits. **Run `git status --short` — the paragraph below
-about `1b92276` describes the walkthrough commit, not the tree.**
+**[2026-08-17] `0ee5d40` CARRIES PACKET ONE. PACKET TWO IS UNCOMMITTED AND IS
+WHAT NEEDS A DEPLOY.** Outstanding when this was written:
+
+```
+ M src/routes/exhibit/Exhibit.jsx        the optional img on a profile card
+ M src/routes/exhibit/Exhibit.css        variant b + .vp-prof-plate
+ M src/data/artists/weird-baby.js        4 img fields, the Born row
+ M src/data/artists/worth-a-listen.js    the records note, aboutNote, 2 comments
+ M src/data/artists/worth-a-listen-facts.js   the domain fact deleted
+ M tools/asset-table.mjs                 SKIP_PATH
+ M provenance/{register,assets,asset-table}.json
+ M docs/… (log, handoff, OPEN_ACTIONS, OPEN_ACTIONS_CLOSED, BACKLOG, OPERATIONS)
+?? public/images/wb/ × 4 photographs
+```
+
+**Run `git status --short` — the paragraph below about `1b92276` describes the
+walkthrough commit, and the line above describes a minute that has passed.**
 
 **AT THE WALKTHROUGH'S CLOSE THE TREE WAS CLEAN.** All of it is in `1b92276`. What that commit contains,
 recorded because the diff is the shape of the round rather than a file list:

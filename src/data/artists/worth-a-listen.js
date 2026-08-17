@@ -1334,13 +1334,26 @@ const ARTISTS = [
        inventing a streaming link nobody verified. An empty shelf with a
        label on it is the honest object; a shelf that is simply absent reads
        as an oversight. */
+    /* [2026-08-17b] THE SPAM CLAUSE IS CUT OUT OF THIS NOTE — MIKE, extending
+       his kill of the visitor-facing block above: **"findmikeymike.com STAYS in
+       the ledger, linked nowhere and described nowhere a visitor reads."**
+       NAMED ONCE (Doctrine 24), the clause that went: "and the domain he does
+       own is currently serving injected spam, so this museum will not send you
+       there."
+       THE EMPTY SHELF SURVIVES, WHICH IS THE POINT OF THE BLOCK. P16's argument
+       above is that a shelf with a label on it is the honest object and a shelf
+       that is simply absent reads as an oversight — and that argument never
+       depended on naming the address. The note still says no catalogue and no
+       store could be verified, and still sends the reader to the one surface
+       that could. **The house is quieter, not less honest.**
+       ONE CLAUSE REMOVED AND NOT A WORD ADDED. The sentence closes on the
+       Bandcamp where it used to run on. */
     records: {
       title: "The records",
       note: "No catalogue page and no store could be verified as his this " +
-            "round — his Bandcamp does not exist, and the domain he does own " +
-            "is currently serving injected spam, so this museum will not send " +
-            "you there. His own channel is the one surface confirmed to be " +
-            "his, and it is the door at the foot of this card.",
+            "round — his Bandcamp does not exist. His own channel is the one " +
+            "surface confirmed to be his, and it is the door at the foot of " +
+            "this card.",
     },
     decks: [
       /* [2026-08-17] THE WHOLE "Said about him" DECK IS DELETED - MIKE named
@@ -1391,7 +1404,25 @@ const ARTISTS = [
           url: "https://www.fadedglamour.co.uk/2017/06/listen-mikey-mike-doin-me-canon-advert-song.html" },
       ] },
     ],
-    aboutNote: "Sources: Faded Glamour's 2017 piece on “Doin' Me” (the Canon sync, the Rick Rubin involvement, the Rihanna and Universal credits); Apple Music and Deezer for the discography and the Salisbury origin; a 2020 Titusville interview for the 2019 European run. His own domain is deliberately not linked — see the ledger.",
+    /* ═══ [2026-08-17b] THE LAST SENTENCE IS CUT — "DORMANT IS NOT GONE" ══════
+       It read: "His own domain is deliberately not linked — see the ledger."
+       Named once (Doctrine 24).
+       MIKE'S RULING: the museum does not name that address anywhere a visitor
+       can read. **AND THE FIELD BEING DORMANT IS NOT AN EXEMPTION** — the
+       `SOURCES` row that printed `aboutNote` was struck on 2026-08-17 and could
+       return; a sentence that is one restored row away from the glass is a
+       sentence on the glass with a delay. That is the whole of the ruling and
+       it is worth reading before anything else here is called "not visitor
+       facing".
+       IT WAS ALSO IN THE WRONG FIELD ON ITS OWN TERMS. `aboutNote` is a SOURCES
+       line — where a fact came from — and this sentence is not a source, it is
+       a note about a DECISION. The provenance for why that door is shut is the
+       `[R-a 2026-08-02]` comment block above `site`, which a visitor cannot
+       read and a maintainer cannot miss, and which is untouched.
+       EVERYTHING ELSE IN THE FIELD IS UNCHANGED to the character — the three
+       citations that make this card's facts checkable are what the field is
+       for and they stay. */
+    aboutNote: "Sources: Faded Glamour's 2017 piece on “Doin' Me” (the Canon sync, the Rick Rubin involvement, the Rihanna and Universal credits); Apple Music and Deezer for the discography and the Salisbury origin; a 2020 Titusville interview for the 2019 European run.",
     feed: [
       { d: "2026-06-09", t: "We Might Kill Each Other (official video)", v: "1,155", id: "mt1ko1y0AhU" },
       { d: "2026-06-03", t: "A project with my buddy — more MM coming", v: "563", id: "t4V1Ddpguqg" },
@@ -1603,10 +1634,18 @@ function aboutArtistTrack(a) {
          purpose rather than by accident.
          `aboutNote` IS KEPT IN THE DATA. It is the provenance record for every
          fact on these cards and it is what a future round would have to rebuild
-         from scratch; what is struck is the PRINTING of it. `NOTE` stays -
-         Mikey Mike's is a live warning that a domain bearing his name serves
-         injected spam, which is a fact a visitor needs rather than a citation
-         about how we know things. */
+         from scratch; what is struck is the PRINTING of it.
+         [2026-08-17b] THIS PARAGRAPH USED TO END "`NOTE` stays - Mikey Mike's
+         is a live warning that a domain bearing his name serves injected spam,
+         which is a fact a visitor needs rather than a citation about how we
+         know things." **MIKE HAS SINCE RULED THE OPPOSITE** - the domain is
+         *"described nowhere a visitor reads"* - so `siteNote` is deleted and
+         there is no `NOTE` row anywhere in this wing. The builder below is kept
+         and has no declarer; it is listed in the handoff so it is neither
+         mistaken for live copy nor deleted as dead code. The sentence is
+         corrected rather than quietly rewritten, because it was an argument
+         FOR a thing that is now gone and a later round reading it would put
+         the warning back. */
       lines: a.siteNote ? ["NOTE     " + a.siteNote] : undefined,
       footer: "WORTH A LISTEN · " + a.name,
     },
