@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LOOSE THREADS — canon not yet said</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧵</text></svg>">
+<style>
+:root{color-scheme:dark;--bg:#16151a;--fg:#e8e6e1;--dim:#9b978e;--dim2:#7d7970;
+ --gold:#d9b66a;--line:#302d28;--line2:#262429;--panel:#1d1c21;--red:#c0392b;
+ --redfg:#f0c9c4;--blu:#8fa8c4;--grn:#7fa86a}
+*{box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{margin:0;padding:26px 22px 90px;background:var(--bg);color:var(--fg);
+ font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto}
+a{color:var(--blu)}
+h1{font-size:22px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 4px;color:var(--gold)}
+.sub{color:var(--dim);font-size:13px;margin:0 0 4px}
+.note{border:1px solid #3a3630;background:var(--panel);padding:14px 16px;margin:20px 0 26px;border-radius:3px}
+.note p{margin:0 0 9px;font-size:13.5px}.note p:last-child{margin:0}
+.note b{color:var(--gold)}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;
+ margin:32px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:15px 16px;
+ display:flex;flex-direction:column}
+.card.lead{border-color:#7a5a20}
+.card.gone{border-color:#6a3a30}
+.card h3{margin:0 0 6px;font-size:16px;line-height:1.25}
+.card h3 a{text-decoration:none;color:var(--gold)}
+.card h3 a:hover{text-decoration:underline}
+.card.gone h3{color:var(--redfg)}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--fg)}
+.card .meta{margin:auto 0 0;font-size:11.5px;color:var(--dim2);line-height:1.6}
+.card .meta b{color:var(--dim);font-weight:600}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;color:#b9c9dc;word-break:break-word}
+.tag{display:inline-block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ border:1px solid var(--line);color:var(--dim);padding:1px 6px;border-radius:2px;white-space:nowrap}
+.tag.g{border-color:#7a5a20;color:var(--gold)}
+.tag.n{border-color:#6a3a30;color:var(--redfg)}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--dim2)}
+.foot code{color:var(--dim)}
+/* [2026-08-15] THE PATH BLOCK — an instrument the browser must NOT be asked to
+   open. See the abs branch in the card renderer for why there is no link.
+   (No backticks in this comment: it lives inside a template literal.) */
+.pathbox{margin:2px 0 9px;border:1px solid var(--line);border-radius:3px;background:#141317}
+.pathbox .p{display:block;padding:8px 9px;font-family:ui-monospace,Consolas,monospace;
+ font-size:12px;color:#cddae8;word-break:break-all;user-select:all;cursor:text}
+.pathbox .r{display:flex;gap:8px;align-items:center;padding:0 9px 8px}
+.pathbox button{font:inherit;font-size:11.5px;background:#23222a;color:var(--fg);
+ border:1px solid var(--line);border-radius:3px;padding:3px 9px;cursor:pointer}
+.pathbox button:hover{border-color:var(--gold);color:var(--gold)}
+.pathbox .say{font-size:11.5px;color:var(--dim2)}
+.pathbox .say.ok{color:var(--grn)}
+.pathbox .say.no{color:var(--redfg)}
+.howto{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.55}
+.howto b{color:var(--gold);font-weight:600}
+@media (max-width:700px){body{padding:20px 14px 70px}.cards{grid-template-columns:1fr}}
+
+.wrap{max-width:900px}
+h1{font-size:20px;margin-bottom:14px}
+h2{font-size:14px;letter-spacing:.1em;color:var(--gold);text-transform:none;margin:34px 0 10px}
+h3{font-size:13px;letter-spacing:.06em;color:var(--fg);margin:24px 0 8px}
+p{margin:0 0 12px;max-width:68ch}
+li{margin:0 0 7px;font-size:14px}
+ul,ol{margin:0 0 14px;padding-left:22px;max-width:68ch}
+blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:2px 0 2px 14px;color:var(--dim)}
+blockquote p{margin:0 0 8px}
+blockquote h2,blockquote h3{margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 18px}
+.tw table{min-width:640px;border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);
+ font-weight:600;border-bottom:1px solid var(--line);padding:7px 10px 7px 0;vertical-align:bottom}
+td{border-bottom:1px solid var(--line2);padding:9px 10px 9px 0;vertical-align:top}
+s{color:var(--dim2)}
+</style></head><body>
+<div class="wrap">
+<p class="sub"><a href="OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="OPEN_ACTIONS.html">the full register</a></p>
+
+<h1 id="loose-threads-canon-that-has-not-been-said-yet">LOOSE THREADS — canon that has not been said yet</h1>
+<p>Things that are <b>true in the story</b> and have not appeared in a Record. They live here so they get woven in rather than lost.</p>
+<h2 id="the-rules">THE RULES</h2>
+<ul><li><b>A thread is canon the moment it is written down</b>, whether or not a Record has said it yet. It is not a draft and it is not a maybe.</li><li><b>Ops never rewrites a thread.</b> Mike's words go in as typed — the same rule the Record's own dictation runs on.</li><li><b>When a Record uses a thread, mark it WOVEN and name the Record.</b> It stays on this page: a used thread is still canon, and a later Record must not contradict it.</li><li><b>A LOOSE thread is not a task.</b> Nobody has to use it. Nothing counts them, nothing is late, and a thread that is never woven has not failed.</li></ul>
+<hr>
+<h2 id="the-threads">THE THREADS</h2>
+<div class="tw"><table><thead><tr><th>id</th><th>the thread — Mike's words, verbatim</th><th>noted</th><th>status</th><th>woven into</th></tr></thead><tbody><tr><td><b>THREAD-001</b></td><td>The guys worked the whole weekend and knocked off just after midnight after the server clicked over and the incoming server got quiet.</td><td>2026-08-17</td><td><b>LOOSE</b></td><td>—</td></tr><tr><td><b>THREAD-002</b></td><td>THE WEEKEND THAT WASN'T SUPPOSED TO HAPPEN</td><td>2026-08-07</td><td><b>LOOSE</b></td><td>—</td></tr></tbody></table></div>
+<hr>
+<h2 id="where-thread-002-came-from">WHERE THREAD-002 CAME FROM</h2>
+<p>It is <b>week one's own headline, in Mike's words</b>, written on 2026-08-07 into the twelve-week arc (<code>ARC.W1</code>) and into the worksheet as <code>W1.SUM</code>. Week one has since been written — <b>Records 001 to 005</b> — and <b>the headline landed in none of them</b>: measured against <code>reveal/record-entries.mjs</code>, no entry contains the phrase. It is on <code>arc.html</code> and <code>reference.html</code>, which are Ops instruments, and nowhere a visitor can read.</p>
+<p>It is here rather than closed because <b>the week it names is already on the glass</b>. Everything else in the twelve-week arc is a plan for a week that has not happened; this is a sentence about a week that has.</p>
+<h2 id="what-the-search-found-and-what-it-did-not">WHAT THE SEARCH FOUND, AND WHAT IT DID NOT</h2>
+<p>Searched for canon-but-unpublished material: every round log in <code>docs/</code>, the handoffs, the dictation instruments and their rescued browser stores, the magnet pile, <code>answers.json</code>, and <code>robots-record.js</code>.</p>
+<p><b>Two threads, and only two.</b> The rest of what a search turns up is not canon:</p>
+<ul><li><b>The logs are almost entirely PROCESS.</b> Every <code>MIKE: &quot;...&quot;</code> quote in them is a ruling about the museum — hide this, capitalise that, the lines are too long. A ruling is not a fact in the story.</li><li><b>The magnet pile holds no text at all</b> — two tiles, both position-and-id only.</li><li><b>Eleven of the thirteen answered worksheet slots are already in Records 001 to 005 character for character</b>, which is what the 2026-08-09 measurement found and what makes the twelfth worth noticing.</li><li><b>The other eleven weeks of the arc are plans</b>, not canon: they describe weeks that have not happened.</li></ul>
+<p><b>Nothing was inferred and nothing was reworded.</b> A sentence that had to be interpreted to become a thread is not a thread.</p>
+<p>Rebuild this page with <code>npm run desk</code>.</p>
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/THREADS.md</code>,
+last written <b>2026-08-17 04:31 UTC</b>. Every register link on this page is checked against
+<code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
+</div>
+</body></html>

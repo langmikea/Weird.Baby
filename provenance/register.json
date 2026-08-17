@@ -116,37 +116,6 @@
    "p": "hunterRoot.shopExitParam",
    "c": "HOUSE"
   },
-  "302b78c511b1c595": {
-   "f": "src/data/artists/robots.js",
-   "l": 1134,
-   "t": "WHY",
-   "p": "spine[].tracks[].face.entries[].stamp",
-   "c": "HOUSE"
-  },
-  "3e75859b7d114f3f": {
-   "f": "src/data/artists/robots.js",
-   "l": 1283,
-   "t": "FAQ",
-   "p": "spine[].tracks[].face.title",
-   "c": "RESTATED",
-   "r": "10648bfbff65354d"
-  },
-  "77e2ff02a0d15e7d": {
-   "f": "src/data/artists/robots.js",
-   "l": 1304,
-   "t": "Does it still work?",
-   "p": "spine[].tracks[].face.entries[].title",
-   "c": "RESTATED",
-   "r": "10648bfbff65354d"
-  },
-  "697785b65bf2c564": {
-   "f": "src/data/artists/robots.js",
-   "l": 1323,
-   "t": "Can I buy one?",
-   "p": "spine[].tracks[].face.entries[].title",
-   "c": "RESTATED",
-   "r": "10648bfbff65354d"
-  },
   "3d8a11ce895f705f": {
    "f": "src/data/artists/robots.js",
    "l": 379,
@@ -165,35 +134,13 @@
    "c": "VERIFIED",
    "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
-  "371cf0216dd6a40c": {
-   "f": "src/data/artists/robots.js",
-   "l": 466,
-   "t": "MGK-NIAC",
-   "p": "spine[].tracks[].face.title",
-   "c": "VERIFIED",
-   "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
-  },
-  "b059d69645ac40bf": {
-   "f": "src/data/artists/robots.js",
-   "l": 1328,
-   "t": "list",
-   "p": "spine[].tracks[].face.entriesMode",
-   "c": "HOUSE"
-  },
-  "23fd272433b3427e": {
-   "f": "src/data/artists/robots.js",
-   "l": 773,
-   "t": "MGK-VIIIp",
-   "p": "spine[].tracks[].face.subtitle",
-   "c": "HOUSE"
-  },
   "13ef6b3bd5b13101": {
    "f": "src/data/artists/robots.js",
    "l": 825,
    "t": "The Record",
    "p": "spine[].tracks[].title",
    "c": "RESTATED",
-   "r": "23fd272433b3427e"
+   "r": "8cdb4fca77866b42"
   },
   "5470eb87a7f130f6": {
    "f": "src/data/artists/robots.js",
@@ -201,43 +148,6 @@
    "t": "log",
    "p": "spine[].tracks[].face.entriesMode",
    "c": "HOUSE"
-  },
-  "c488fc8e8b5df22f": {
-   "f": "src/data/artists/robots.js",
-   "l": 1091,
-   "t": "THE MACHINE'S OWN MIND, ON FILE",
-   "p": "spine[].tracks[].face.subtitle",
-   "c": "HOUSE"
-  },
-  "0da6fab1f7facbd4": {
-   "f": "src/data/artists/robots.js",
-   "l": 1134,
-   "t": "Why it sits with the founding documents",
-   "p": "spine[].tracks[].face.entries[].title",
-   "c": "RESTATED",
-   "r": [
-    "b65d04f94f792c09",
-    "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
-   ]
-  },
-  "843672429b842776": {
-   "f": "src/data/artists/robots.js",
-   "l": 1135,
-   "t": "The Record says what was found. The Manual says what it was sold as. The firmware is the only one of the three that cannot be wrong about the machine, because it is the machine.",
-   "p": "spine[].tracks[].face.entries[].line",
-   "c": "RESTATED",
-   "r": [
-    "b65d04f94f792c09",
-    "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
-   ]
-  },
-  "7a2d917ba705ef5f": {
-   "f": "src/data/artists/robots.js",
-   "l": 1324,
-   "t": "No. The shop carries what the shop carries; the machines are not stock.",
-   "p": "spine[].tracks[].face.entries[].line",
-   "c": "RESTATED",
-   "r": "10648bfbff65354d"
   },
   "360512d3a8c35a47": {
    "f": "src/data/artists/robots.js",
@@ -11976,26 +11886,6 @@
    "c": "HOUSE",
    "n": "The word \"Record\" is the museum's own label for its log; the number is interpolated from `spreads[].no`. NOT ONE SPREAD DECLARES A NUMBER TODAY, so this string is not on the glass anywhere — it is declared because the boundary asks about every string it can reach, not only the ones currently rendering."
   },
-  "effe4e52865bec59": {
-   "f": "src/data/artists/robots.js",
-   "l": 1066,
-   "t": "Image Archive",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, N1, 2026-08-04: \"The Plates becomes IMAGE ARCHIVE (Mike ruled; retire The Morgue). Robots wing: The Firmware becomes TECHNICAL SPECIFICATIONS; The Parts is REMOVED. Directory loses The: Weird.Baby Robots, Weird.Baby Music, Weird.Baby Foundation.\" This closes register row M6: A3 printed both candidate names so the choice could be made by looking, and it was."
-  },
-  "45ccbd1ce53edf83": {
-   "f": "src/data/artists/robots.js",
-   "l": 1395,
-   "t": "Technical Specifications",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, N1, 2026-08-04: \"The Plates becomes IMAGE ARCHIVE (Mike ruled; retire The Morgue). Robots wing: The Firmware becomes TECHNICAL SPECIFICATIONS; The Parts is REMOVED. Directory loses The: Weird.Baby Robots, Weird.Baby Music, Weird.Baby Foundation.\" Applied to BOTH faces carrying the retired name — see the note on the MGK-VIII face for why one would have been worse."
-  },
-  "5acaad7a32127b64": {
-   "f": "src/data/artists/robots.js",
-   "l": 1451,
-   "t": "MGK-VIIIp · TECHNICAL SPECIFICATIONS",
-   "c": "HOUSE"
-  },
   "9a372787948aba1c": {
    "f": "src/routes/exhibit/Exhibit.css",
    "l": 2861,
@@ -12039,12 +11929,6 @@
    "t": "Weird.Baby Foundation",
    "c": "MIKE",
    "s": "Mike's remote-control brief, N1, 2026-08-04: \"The Plates becomes IMAGE ARCHIVE (Mike ruled; retire The Morgue). Robots wing: The Firmware becomes TECHNICAL SPECIFICATIONS; The Parts is REMOVED. Directory loses The: Weird.Baby Robots, Weird.Baby Music, Weird.Baby Foundation.\" Only the DIRECTORY line changed; the room's own name, title bar and heading are untouched."
-  },
-  "af191d8957b16fec": {
-   "f": "src/data/artists/robots.js",
-   "l": 1054,
-   "t": "MGK-NIAC · TECHNICAL SPECIFICATIONS",
-   "c": "HOUSE"
   },
   "fed990836fb40a2f": {
    "f": "src/lib/reveal.js",
@@ -12145,13 +12029,6 @@
    "t": "Can I try one?",
    "c": "MIKE",
    "s": "Mike's remote-control brief, P3, 2026-08-05: \"THE ROBOTS FAQ — replace with the FAQ template and Mike's content, verbatim where given.\" Every answer on that face is his, word for word, including the two he wrote as instructions rather than as copy."
-  },
-  "97d6b5c147f11ff6": {
-   "f": "src/data/artists/robots.js",
-   "l": 1327,
-   "t": "Yes. Both units power on and run their own firmware.",
-   "c": "RESTATED",
-   "r": "10648bfbff65354d"
   },
   "d75737a3390e9530": {
    "f": "src/data/artists/weird-baby.js",
@@ -13159,133 +13036,6 @@
    "p": "held-wing",
    "c": "HOUSE"
   },
-  "2ecbfb8d2eab38ee": {
-   "f": "src/data/artists/robots.js",
-   "l": 1231,
-   "t": "MATRIX   8 × 16 — seven rows visible, the eighth wired, driven and behind something",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
-  },
-  "08b03bf5d1743f37": {
-   "f": "src/data/artists/robots.js",
-   "l": 1232,
-   "t": "BAR      1 × 64, addressed as a single chain",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
-  },
-  "a3b96c748ea09536": {
-   "f": "src/data/artists/robots.js",
-   "l": 1233,
-   "t": "OUTPUTS  2 matrix chains · 2 bar chains · 3 servos",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
-  },
-  "1583ab09a3585143": {
-   "f": "src/data/artists/robots.js",
-   "l": 1236,
-   "t": "RULE 1   a numerical envelope",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
-  },
-  "a84f16ec0dc78f1d": {
-   "f": "src/data/artists/robots.js",
-   "l": 1237,
-   "t": "RULE 2   a ceiling of eight core states",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
-  },
-  "65d75fc056ce0b5e": {
-   "f": "src/data/artists/robots.js",
-   "l": 1238,
-   "t": "RULE 3   mutual exclusion",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
-  },
-  "3f9a4ae28332666f": {
-   "f": "src/data/artists/robots.js",
-   "l": 1239,
-   "t": "RULE 4   a reveal no faster than twelve seconds",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
-  },
-  "88a0056e001237b6": {
-   "f": "src/data/artists/robots.js",
-   "l": 1240,
-   "t": "RULE 5   no adaptive learning — the machine is forbidden, in writing, from getting to know you",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
-  },
-  "da57fd2d12be5b93": {
-   "f": "src/data/artists/robots.js",
-   "l": 1675,
-   "t": "photograph",
-   "c": "HOUSE"
-  },
-  "63765a62da749ff0": {
-   "f": "src/data/artists/robots.js",
-   "l": 1675,
-   "t": "photographs",
-   "c": "HOUSE"
-  },
-  "c78a66fbc51fdd58": {
-   "f": "src/data/artists/robots.js",
-   "l": 1381,
-   "t": "MGK-NIAC · IMAGE ARCHIVE",
-   "c": "HOUSE"
-  },
-  "a10d92fb998684be": {
-   "f": "src/data/artists/robots.js",
-   "l": 1790,
-   "t": "Documentation",
-   "c": "MIKE",
-   "s": "Mike's remote-control brief, N3, 2026-08-06: \"'THE MANUAL' BECOMES 'DOCUMENTATION' — a viewer free to display any document. The manual appears inside it as a SELECTABLE ENTITY that opens on the screen when clicked.\""
-  },
-  "e80c30add5a34c42": {
-   "f": "src/data/artists/robots.js",
-   "l": 1433,
-   "t": "No document for the mainframe is held here. The portable arrived with a manual — ABEAL 8P-OMI-1, incomplete, assembled out of copies caught at different stages — and nothing of the kind has reached this museum for the cabinet.",
-   "c": "VERIFIED",
-   "s": "the portable's own manual, ABEAL 8P-OMI-1, held by this museum and not published — see the wing FAQ's answer on the originals. The mainframe's absence is a holdings fact about this collection."
-  },
-  "d97f0f637e1324f7": {
-   "f": "src/data/artists/robots.js",
-   "l": 1437,
-   "t": "MGK-NIAC · DOCUMENTATION",
-   "c": "HOUSE"
-  },
-  "9299df4969fad477": {
-   "f": "src/data/artists/robots.js",
-   "l": 1746,
-   "t": "MGK-VIIIp · IMAGE ARCHIVE",
-   "c": "HOUSE"
-  },
-  "4657532a4679e6b7": {
-   "f": "src/data/artists/robots.js",
-   "l": 1798,
-   "t": "The owner's manual",
-   "c": "VERIFIED",
-   "s": "the portable's own manual, ABEAL 8P-OMI-1, held by this museum and not published — see the wing FAQ's answer on the originals. The mainframe's absence is a holdings fact about this collection."
-  },
-  "86679bfb2f6be9fb": {
-   "f": "src/data/artists/robots.js",
-   "l": 1799,
-   "t": "ABEAL 8P-OMI-1",
-   "c": "VERIFIED",
-   "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
-  },
-  "99b0178d349066f5": {
-   "f": "src/data/artists/robots.js",
-   "l": 1800,
-   "t": "Held. Incomplete, assembled out of copies caught at different stages. No page images on file — when they are made they are photographs of the printed sheet, edges and margins included.",
-   "c": "VERIFIED",
-   "s": "the portable's own manual, ABEAL 8P-OMI-1, held by this museum and not published — see the wing FAQ's answer on the originals. The mainframe's absence is a holdings fact about this collection."
-  },
-  "31e8335ba2f92718": {
-   "f": "src/data/artists/robots.js",
-   "l": 1809,
-   "t": "MGK-VIIIp · DOCUMENTATION",
-   "c": "HOUSE"
-  },
   "cce8dc18a4eacda1": {
    "f": "src/routes/exhibit/Exhibit.jsx",
    "l": 105,
@@ -13478,7 +13228,7 @@
    "f": "src/data/artists/portal.js",
    "l": 85,
    "t": "The Portal",
-   "r": "23fd272433b3427e"
+   "r": "8cdb4fca77866b42"
   },
   "4e522d0189713c4e": {
    "c": "VERIFIED",
@@ -13741,20 +13491,6 @@
    "t": "DATE",
    "s": "THE PORTAL HOLD + THE PULL-BACK, H3a: \"stamped-in-place fields (MODEL NO., SER. NO., DATE) with values struck into a lighter recess.\""
   },
-  "95ad2a528296d073": {
-   "c": "VERIFIED",
-   "f": "src/data/artists/robots.js",
-   "l": 1130,
-   "t": "No photograph of the mainframe is on the wall. The museum holds images of this machine and the Record has not brought any of them into the story yet.",
-   "s": "provenance/asset-table.json — fifteen photographs of the mainframe are on disk at public/held/robots/reference/mgk-viii/, and reveal/record-entries.mjs returns one delivered asset for the whole Record and it is not one of them."
-  },
-  "2f270536b32d6b8e": {
-   "c": "VERIFIED",
-   "f": "src/data/artists/robots.js",
-   "l": 1441,
-   "t": "No photograph of the portable is on the wall. One picture of this machine is on the Record, with the entry that brought it in.",
-   "s": "provenance/asset-table.json plus reveal/record-entries.mjs — Record 013 names /robots/reference/photos/rear_power_switch.png and nothing else; the other seven plates of the portable are at public/held/robots/reference/photos/."
-  },
   "e51e83951a9cd9bd": {
    "c": "HOUSE",
    "f": "src/routes/exhibit/Exhibit.jsx",
@@ -13773,16 +13509,6 @@
    "l": 51,
    "t": "/held/"
   },
-  "745b654d1a76bbba": {
-   "c": "RESTATED",
-   "f": "src/data/artists/robots.js",
-   "l": 1358,
-   "t": "Everything the unit knows how to do is in here — not a description of the machine's behaviour but the behaviour itself, in the form the machine reads it.",
-   "r": [
-    "b65d04f94f792c09",
-    "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
-   ]
-  },
   "2f702058b1bfeeb3": {
    "c": "HOUSE",
    "f": "src/routes/WbAdmin.jsx",
@@ -13800,92 +13526,6 @@
    "l": 388,
    "t": "THE PORTAL",
    "c": "HOUSE"
-  },
-  "d0920baff2e34f7a": {
-   "f": "src/data/artists/robots.js",
-   "l": 575,
-   "t": "MAR 2021",
-   "p": "spine[].tracks[].face.collage[].date",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "6774c265e5e92b42": {
-   "f": "src/data/artists/robots.js",
-   "l": 965,
-   "t": "The output row — the red bar bank at the base, mid-pattern",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "d1dc930e902ca1a1": {
-   "f": "src/data/artists/robots.js",
-   "l": 1715,
-   "t": "Every photograph",
-   "c": "HOUSE"
-  },
-  "511539bd34abed18": {
-   "f": "src/data/artists/robots.js",
-   "l": 743,
-   "t": "MGK-VIIIp −02 “The Informer”, front and top, as received.",
-   "p": "spine[].viewerPosterCaption",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "b65d04f94f792c09": {
-   "f": "src/data/artists/robots.js",
-   "l": 1111,
-   "t": "The front glass, lit — the firmware, running.",
-   "p": "spine[].tracks[].face.stillCaption",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "5975d59bb7dd36cb": {
-   "f": "src/data/artists/robots.js",
-   "l": 1681,
-   "t": "As they arrived",
-   "c": "HOUSE"
-  },
-  "4cd3bc51dcab8a81": {
-   "f": "src/data/artists/robots.js",
-   "l": 791,
-   "t": "The pair, front and top, as received",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "b11589004f95a045": {
-   "f": "src/data/artists/robots.js",
-   "l": 1692,
-   "t": "The glass",
-   "c": "HOUSE"
-  },
-  "c640a473cd18da85": {
-   "f": "src/data/artists/robots.js",
-   "l": 797,
-   "t": "The front glass, lit",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
-  },
-  "dc59da5a83aa5f88": {
-   "f": "src/data/artists/robots.js",
-   "l": 1742,
-   "t": "The cover image — the glass carries the BIOS beat",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the photograph shows"
-  },
-  "22406e10b63b50f1": {
-   "f": "src/data/artists/robots.js",
-   "l": 1704,
-   "t": "Above and below",
-   "c": "HOUSE"
-  },
-  "4df914f5042d7d50": {
-   "f": "src/data/artists/robots.js",
-   "l": 803,
-   "t": "The top monitor",
-   "p": "spine[].tracks[].face.collage[].label",
-   "c": "VERIFIED",
-   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
   },
   "812b9d8e13b49864": {
    "f": "src/data/artists/worth-a-listen.js",
@@ -13973,14 +13613,6 @@
    "l": 74,
    "t": "/locked/",
    "c": "HOUSE"
-  },
-  "232f12eb7c15b07f": {
-   "f": "src/data/artists/robots.js",
-   "l": 1100,
-   "t": "DECLARED five rules",
-   "p": "spine[].tracks[].face.lines[]",
-   "c": "VERIFIED",
-   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares five rules. [N2 2026-08-06] THE ROW LOST ITS SECOND HALF AND KEPT ITS SOURCE, and the distinction is Doctrine 18's: 'in the header, above the first include' is a fact about a FILE and cannot stand on a 1965 machine's spec sheet; that five rules are declared is a fact about the MACHINE'S BEHAVIOUR, which the firmware happens to be the way to verify. External to this repo; the sweep cannot re-check it."
   },
   "02f5b0f10c7709b6": {
    "f": "src/lib/record-model.js",
@@ -14120,31 +13752,10 @@
    "t": "instant",
    "c": "HOUSE"
   },
-  "88d76961970e453e": {
-   "f": "src/data/artists/robots.js",
-   "l": 942,
-   "t": "The hardware is — you can hold it at least, and it is heavier than you expect.",
-   "c": "MIKE",
-   "s": "Mike's sentence with a struck clause removed, ruled 2026-08-11 (F2/F5)"
-  },
-  "eba6a6213e4b7c58": {
-   "f": "src/data/artists/robots.js",
-   "l": 964,
-   "t": "Monitor the website for availability. Follow us on social media.",
-   "c": "MIKE",
-   "s": "Mike's sentence with a struck clause removed, ruled 2026-08-11 (F2/F5)"
-  },
   "dd10177f3a5a6a82": {
    "f": "src/data/artists/robots.js",
    "l": 978,
    "t": "Yes.",
-   "c": "MIKE",
-   "s": "Mike's own wording, ruled 2026-08-11 (F3), quoted verbatim in the packet"
-  },
-  "c91fef07c5faf29a": {
-   "f": "src/data/artists/robots.js",
-   "l": 979,
-   "t": "Well, not now, but soon. Hopefully. That's all I can say right now.",
    "c": "MIKE",
    "s": "Mike's own wording, ruled 2026-08-11 (F3), quoted verbatim in the packet"
   },
@@ -14273,16 +13884,6 @@
    "p": "spine[].tracks[].face.panel.drum.positions[].frameTitle",
    "c": "HOUSE",
    "s": ""
-  },
-  "153e97209c0b86f9": {
-   "f": "src/data/artists/robots.js",
-   "l": 909,
-   "t": "MGK-NIAC, the output row mid-pattern.",
-   "p": "spine[].viewerPosterCaption",
-   "c": "RESTATED",
-   "r": [
-    "6774c265e5e92b42"
-   ]
   },
   "027bb7106b406961": {
    "f": "src/data/artists/robots.js",
@@ -15290,6 +14891,421 @@
    "t": "No — never.\nEvery door in the Gift Shop leads to the Artists' own sites and stores.",
    "c": "MIKE",
    "s": "Mike's copy edits of 2026-08-16 (the transport packet, items 2-4), quoted in full in docs/MUSEUM_PLAYER_AUDIT_LOG-20260816.md and landed verbatim."
+  },
+  "59e01e0b8dacecf6": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1091,
+   "t": "THE MACHINE'S OWN MIND, ON FILE",
+   "p": "spine[].tracks[].face.subtitle",
+   "c": "HOUSE"
+  },
+  "af48a215b27c4da4": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1134,
+   "t": "Why it sits with the founding documents",
+   "p": "spine[].tracks[].face.entries[].title",
+   "c": "RESTATED",
+   "r": [
+    "e4b28e2c21cb0a6d",
+    "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
+   ]
+  },
+  "38b16caf61c45b97": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1135,
+   "t": "The Record says what was found. The Manual says what it was sold as. The firmware is the only one of the three that cannot be wrong about the machine, because it is the machine.",
+   "p": "spine[].tracks[].face.entries[].line",
+   "c": "RESTATED",
+   "r": [
+    "e4b28e2c21cb0a6d",
+    "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
+   ]
+  },
+  "e0e37b9530db051b": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1324,
+   "t": "No. The shop carries what the shop carries; the machines are not stock.",
+   "p": "spine[].tracks[].face.entries[].line",
+   "c": "RESTATED",
+   "r": "10648bfbff65354d"
+  },
+  "47ea8f4de69ffcd5": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1451,
+   "t": "MGK-VIIIp · TECHNICAL SPECIFICATIONS",
+   "c": "HOUSE"
+  },
+  "205ab343e55a1b31": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1054,
+   "t": "MGK-NIAC · TECHNICAL SPECIFICATIONS",
+   "c": "HOUSE"
+  },
+  "f70a766ef7678800": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1327,
+   "t": "Yes. Both units power on and run their own firmware.",
+   "c": "RESTATED",
+   "r": "10648bfbff65354d"
+  },
+  "7bc63affb14c8803": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1231,
+   "t": "MATRIX   8 × 16 — seven rows visible, the eighth wired, driven and behind something",
+   "c": "VERIFIED",
+   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
+  },
+  "7fb8c87e1e2619dc": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1232,
+   "t": "BAR      1 × 64, addressed as a single chain",
+   "c": "VERIFIED",
+   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
+  },
+  "b4715a24a998b123": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1233,
+   "t": "OUTPUTS  2 matrix chains · 2 bar chains · 3 servos",
+   "c": "VERIFIED",
+   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
+  },
+  "b6049fbd8146fa40": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1236,
+   "t": "RULE 1   a numerical envelope",
+   "c": "VERIFIED",
+   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
+  },
+  "8c9fd8adc358cb52": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1237,
+   "t": "RULE 2   a ceiling of eight core states",
+   "c": "VERIFIED",
+   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
+  },
+  "5b2f40324a74208b": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1238,
+   "t": "RULE 3   mutual exclusion",
+   "c": "VERIFIED",
+   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
+  },
+  "b5409c3485d9c44f": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1239,
+   "t": "RULE 4   a reveal no faster than twelve seconds",
+   "c": "VERIFIED",
+   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
+  },
+  "f9f3ccee945f6ada": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1240,
+   "t": "RULE 5   no adaptive learning — the machine is forbidden, in writing, from getting to know you",
+   "c": "VERIFIED",
+   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares the five rules above the first include, and the bench sketches carry the matrix, bar-chain and brightness notes. External to this repo; the sweep cannot re-check it. Every figure on this sheet was already on the face it replaces; N2 changed the FORM and not one fact."
+  },
+  "b0470d9ddc24f594": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1381,
+   "t": "MGK-NIAC · IMAGE ARCHIVE",
+   "c": "HOUSE"
+  },
+  "933105f7a6af1c62": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1433,
+   "t": "No document for the mainframe is held here. The portable arrived with a manual — ABEAL 8P-OMI-1, incomplete, assembled out of copies caught at different stages — and nothing of the kind has reached this museum for the cabinet.",
+   "c": "VERIFIED",
+   "s": "the portable's own manual, ABEAL 8P-OMI-1, held by this museum and not published — see the wing FAQ's answer on the originals. The mainframe's absence is a holdings fact about this collection."
+  },
+  "a594bc3ef1a02548": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1437,
+   "t": "MGK-NIAC · DOCUMENTATION",
+   "c": "HOUSE"
+  },
+  "af132aa49015376f": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1746,
+   "t": "MGK-VIIIp · IMAGE ARCHIVE",
+   "c": "HOUSE"
+  },
+  "95ae4d234892b033": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1798,
+   "t": "The owner's manual",
+   "c": "VERIFIED",
+   "s": "the portable's own manual, ABEAL 8P-OMI-1, held by this museum and not published — see the wing FAQ's answer on the originals. The mainframe's absence is a holdings fact about this collection."
+  },
+  "b811394c16fc1a37": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1799,
+   "t": "ABEAL 8P-OMI-1",
+   "c": "VERIFIED",
+   "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
+  },
+  "b105b3acc59bb37b": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1800,
+   "t": "Held. Incomplete, assembled out of copies caught at different stages. No page images on file — when they are made they are photographs of the printed sheet, edges and margins included.",
+   "c": "VERIFIED",
+   "s": "the portable's own manual, ABEAL 8P-OMI-1, held by this museum and not published — see the wing FAQ's answer on the originals. The mainframe's absence is a holdings fact about this collection."
+  },
+  "6883c9d3017ce875": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1809,
+   "t": "MGK-VIIIp · DOCUMENTATION",
+   "c": "HOUSE"
+  },
+  "b9d8586544d9ee44": {
+   "c": "VERIFIED",
+   "f": "src/data/artists/robots-units.js",
+   "l": 1130,
+   "t": "No photograph of the mainframe is on the wall. The museum holds images of this machine and the Record has not brought any of them into the story yet.",
+   "s": "provenance/asset-table.json — fifteen photographs of the mainframe are on disk at public/held/robots/reference/mgk-viii/, and reveal/record-entries.mjs returns one delivered asset for the whole Record and it is not one of them."
+  },
+  "5963a0465228093f": {
+   "c": "VERIFIED",
+   "f": "src/data/artists/robots-units.js",
+   "l": 1441,
+   "t": "No photograph of the portable is on the wall. One picture of this machine is on the Record, with the entry that brought it in.",
+   "s": "provenance/asset-table.json plus reveal/record-entries.mjs — Record 013 names /robots/reference/photos/rear_power_switch.png and nothing else; the other seven plates of the portable are at public/held/robots/reference/photos/."
+  },
+  "ad922856504528a7": {
+   "c": "RESTATED",
+   "f": "src/data/artists/robots-units.js",
+   "l": 1358,
+   "t": "Everything the unit knows how to do is in here — not a description of the machine's behaviour but the behaviour itself, in the form the machine reads it.",
+   "r": [
+    "e4b28e2c21cb0a6d",
+    "docs/MUSEUM_RED_NOTES_LOG-20260811.md"
+   ]
+  },
+  "ae10e2462df4cc40": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 575,
+   "t": "MAR 2021",
+   "p": "spine[].tracks[].face.collage[].date",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "cb4f57b5592f62f9": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 965,
+   "t": "The output row — the red bar bank at the base, mid-pattern",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "152f2eb310e45d2a": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1715,
+   "t": "Every photograph",
+   "c": "HOUSE"
+  },
+  "a177a11bfa3cb92b": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 743,
+   "t": "MGK-VIIIp −02 “The Informer”, front and top, as received.",
+   "p": "spine[].viewerPosterCaption",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "e4b28e2c21cb0a6d": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1111,
+   "t": "The front glass, lit — the firmware, running.",
+   "p": "spine[].tracks[].face.stillCaption",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "c55b62ec2d857b2e": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1681,
+   "t": "As they arrived",
+   "c": "HOUSE"
+  },
+  "fb94002844ebb33e": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 791,
+   "t": "The pair, front and top, as received",
+   "p": "spine[].tracks[].face.collage[].label",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "62b581a129dabcd2": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1692,
+   "t": "The glass",
+   "c": "HOUSE"
+  },
+  "f2e5555515d364c0": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 797,
+   "t": "The front glass, lit",
+   "p": "spine[].tracks[].face.collage[].label",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "e0c0d4e1372c0bd8": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1742,
+   "t": "The cover image — the glass carries the BIOS beat",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the photograph shows"
+  },
+  "d6effdf05e7be8f0": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1704,
+   "t": "Above and below",
+   "c": "HOUSE"
+  },
+  "bd91e68526164d6a": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 803,
+   "t": "The top monitor",
+   "p": "spine[].tracks[].face.collage[].label",
+   "c": "VERIFIED",
+   "s": "the museum's own photographs of the unit, held in public/robots/reference/ — captions state what the plate shows"
+  },
+  "bd3773b1e7627cd2": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1100,
+   "t": "DECLARED five rules",
+   "p": "spine[].tracks[].face.lines[]",
+   "c": "VERIFIED",
+   "s": "the unit's own `.ino` trees, read off the files — the flagship's header declares five rules. [N2 2026-08-06] THE ROW LOST ITS SECOND HALF AND KEPT ITS SOURCE, and the distinction is Doctrine 18's: 'in the header, above the first include' is a fact about a FILE and cannot stand on a 1965 machine's spec sheet; that five rules are declared is a fact about the MACHINE'S BEHAVIOUR, which the firmware happens to be the way to verify. External to this repo; the sweep cannot re-check it."
+  },
+  "a1ca492710eba0f3": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 909,
+   "t": "MGK-NIAC, the output row mid-pattern.",
+   "p": "spine[].viewerPosterCaption",
+   "c": "RESTATED",
+   "r": [
+    "cb4f57b5592f62f9"
+   ]
+  },
+  "d5175ab11d2f544f": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 578,
+   "t": "MGK-NIAC",
+   "p": "spine[].tracks[].face.title",
+   "c": "VERIFIED",
+   "s": "the robots repo's own record — C:\\AI\\Projects\\weird-baby-robots (THE_RECORD.md, SPEC_INVENTORY, WBR_WORDS_DRAFT). External to this repo; the sweep cannot re-check it."
+  },
+  "8cc1a0189ca8856e": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 712,
+   "t": "Technical Specifications",
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, N1, 2026-08-04: \"The Plates becomes IMAGE ARCHIVE (Mike ruled; retire The Morgue). Robots wing: The Firmware becomes TECHNICAL SPECIFICATIONS; The Parts is REMOVED. Directory loses The: Weird.Baby Robots, Weird.Baby Music, Weird.Baby Foundation.\" Applied to BOTH faces carrying the retired name — see the note on the MGK-VIII face for why one would have been worse."
+  },
+  "bd7f5d8bd5317cd5": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 826,
+   "t": "Image Archive",
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, N1, 2026-08-04: \"The Plates becomes IMAGE ARCHIVE (Mike ruled; retire The Morgue). Robots wing: The Firmware becomes TECHNICAL SPECIFICATIONS; The Parts is REMOVED. Directory loses The: Weird.Baby Robots, Weird.Baby Music, Weird.Baby Foundation.\" This closes register row M6: A3 printed both candidate names so the choice could be made by looking, and it was."
+  },
+  "0725ffee19ce60e3": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 828,
+   "t": "photograph",
+   "c": "HOUSE"
+  },
+  "9b757122c640fe6d": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 828,
+   "t": "photographs",
+   "c": "HOUSE"
+  },
+  "482303a32b43212d": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 973,
+   "t": "Documentation",
+   "c": "MIKE",
+   "s": "Mike's remote-control brief, N3, 2026-08-06: \"'THE MANUAL' BECOMES 'DOCUMENTATION' — a viewer free to display any document. The manual appears inside it as a SELECTABLE ENTITY that opens on the screen when clicked.\""
+  },
+  "21239d59fd6ed74f": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1009,
+   "t": "FAQ",
+   "p": "spine[].tracks[].face.title",
+   "c": "RESTATED",
+   "r": "10648bfbff65354d"
+  },
+  "0c17e707f9db0f62": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1025,
+   "t": "Does it still work?",
+   "p": "spine[].tracks[].face.entries[].title",
+   "c": "RESTATED",
+   "r": "10648bfbff65354d"
+  },
+  "22d064b717faacda": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1034,
+   "t": "Can I buy one?",
+   "p": "spine[].tracks[].face.entries[].title",
+   "c": "RESTATED",
+   "r": "10648bfbff65354d"
+  },
+  "cc1e0a221d72774e": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 1018,
+   "t": "MGK-VIIIp",
+   "p": "spine[].tracks[].face.subtitle",
+   "c": "HOUSE"
+  },
+  "7a7c2c1d57e20af2": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 775,
+   "t": "WHY",
+   "p": "spine[].tracks[].face.entries[].stamp",
+   "c": "HOUSE"
+  },
+  "9f70f04463658b79": {
+   "f": "src/data/artists/robots-units.js",
+   "l": 781,
+   "t": "list",
+   "p": "spine[].tracks[].face.entriesMode",
+   "c": "HOUSE"
+  },
+  "3e75859b7d114f3f": {
+   "f": "src/data/artists/robots.js",
+   "l": 1283,
+   "t": "FAQ",
+   "p": "spine[].tracks[].face.title",
+   "c": "RESTATED",
+   "r": "10648bfbff65354d"
+  },
+  "88d76961970e453e": {
+   "f": "src/data/artists/robots.js",
+   "l": 942,
+   "t": "The hardware is — you can hold it at least, and it is heavier than you expect.",
+   "c": "MIKE",
+   "s": "Mike's sentence with a struck clause removed, ruled 2026-08-11 (F2/F5)"
+  },
+  "697785b65bf2c564": {
+   "f": "src/data/artists/robots.js",
+   "l": 1323,
+   "t": "Can I buy one?",
+   "p": "spine[].tracks[].face.entries[].title",
+   "c": "RESTATED",
+   "r": "10648bfbff65354d"
+  },
+  "eba6a6213e4b7c58": {
+   "f": "src/data/artists/robots.js",
+   "l": 964,
+   "t": "Monitor the website for availability. Follow us on social media.",
+   "c": "MIKE",
+   "s": "Mike's sentence with a struck clause removed, ruled 2026-08-11 (F2/F5)"
+  },
+  "c91fef07c5faf29a": {
+   "f": "src/data/artists/robots.js",
+   "l": 979,
+   "t": "Well, not now, but soon. Hopefully. That's all I can say right now.",
+   "c": "MIKE",
+   "s": "Mike's own wording, ruled 2026-08-11 (F3), quoted verbatim in the packet"
   }
  }
 }

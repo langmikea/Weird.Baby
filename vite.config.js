@@ -254,6 +254,19 @@ const LOCKED_PATHS = [
 ];
 const HELD_PATHS = [
   "/src/data/artists/portal.js",
+  /* [2026-08-17] THE TWO MACHINES. Mike ruled MGK-NIAC and MGK-VIIIp down the
+     night Record 001 opened the wing and both came through the door with it.
+     THE FIRST CUT WAS A FILTER IN `robots.js` AND THE LEDGER REFUSED IT — nine
+     rows at once, all saying the same thing: a public module stops the render
+     and ships every string anyway. The albums are in their own file now, parked
+     here, exactly as the Portal is. Full argument at the head of
+     `robots-units.js`.
+     IT DIFFERS FROM THE PORTAL IN ONE WAY AND IT IS DELIBERATE: nothing imports
+     this one. The Portal is spliced back in for Mike at `/admin` because he
+     asked to keep developing it; these are **held from Mike too**, his words, so
+     there is no door. Parked here anyway, so that the day one is wired back for
+     development it is already behind the right one. */
+  "/src/data/artists/robots-units.js",
 ];
 /* THE COMPANIONS ARE NAMED RATHER THAN INFERRED — the museum's own generic
    machinery that nothing but a shut wing happens to import today. They ride

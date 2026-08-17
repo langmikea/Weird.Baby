@@ -150,6 +150,18 @@ const BLAST = [
   "face.niac.name", "face.niac.plates", "face.niac.firmware",
   "face.viiip.plates", "face.viiip.manual",
   "face.viiip.firmware", "face.viiip.portal", "face.viiip.faq",
+  /* [2026-08-17] THE TWO MACHINES THEMSELVES, WHICH THIS TABLE HAD NO ROW FOR.
+        Mike ruled both units down the night the wing opened, and the ledger
+        gained an `album.*` row for each — his rule, *"a hiding ruling is not
+        done until a ledger row moves."* The rows are new; the ARRIVAL is not,
+        and it is not a new judgement either: **the ten faces above are already
+        BLAST, and they are faces OF these two machines.** Filing the machines
+        anywhere else would say the units arrived by one route and their own
+        plates, names and specifications by another.
+        BEING HELD DOES NOT CHANGE THE CLASS — `route.hr` and `route.admin` are
+        HELD and BLAST four lines up, for the reason stated there: they arrived,
+        they are simply not listed. That is this class's second half working. */
+  "album.niac", "album.viiip",
 
   /* ── The Portal, and the tension Mike named. THE PORTAL ARRIVED IN THE BLAST
         AND COULD NOT BE DRIVEN YET — the panel is on the glass from day one,

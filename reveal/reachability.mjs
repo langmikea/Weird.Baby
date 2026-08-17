@@ -251,17 +251,47 @@ export function reachabilityFaults(rows) {
 
     /* ---- 2. A LEAK OUTWARD ---------------------------------------------
        A held module that points at a public file is the hold half-done: the
-       album is behind the door and its cover is on the street. */
+       album is behind the door and its cover is on the street.
+
+       ═══ [2026-08-17] AND IT MATCHED ON THE WRONG ONE OF A PICTURE'S TWO
+           ADDRESSES — THE FIFTH INSTRUMENT TO DO IT ══════════════════════
+       §8's hazard row says it in advance: **a governed picture has two
+       addresses, and anything that matches on one of them is wrong.** The DATA
+       declares the PUBLIC address (`/robots/…`) and nothing else — that is the
+       pull-back's design, and `src/lib/placement.js` computes the held prefix
+       from it. Four instruments broke on that in one round in August and were
+       given `STAGE_PREFIX`; this check is the fifth, and it broke the first
+       time a held module carried governed pictures.
+
+       MEASURED WHEN IT FIRED: the two machines' albums moved into
+       `robots-units.js`, and this rule reported **seven photographs "served at
+       a public address"** — `mgk-niac-cover.png`, `viiip-v2.png`,
+       `output_row.jpg`, `front_screen.png`, `top_monitor.png` and two more.
+       **Not one of them exists at a public address.** All seven are under
+       `public/held/robots/…` and have been since the pull-back; what the rule
+       had found was the STRING, which is the only address the data is allowed
+       to name.
+
+       SO THE TEST IS THE DISK AND NOT THE SPELLING. A governed reference is a
+       leak when a file actually sits at its public address, and is the
+       pull-back working when the file sits behind the door instead. An
+       UNGOVERNED reference is judged exactly as before — the house's own
+       sleeves and the lobby's photo ID are not addressed twice and a held
+       module naming one is still the fault this rule was written for. */
     const PUBLIC_ASSET = /"(\/[\w][\w./-]*\.(png|jpg|jpeg|webp|gif|svg|mp3|mp4|html|pdf))"/gi;
+    const onDisk = rel => fs.existsSync(path.join(REPO, "public", rel.replace(/^\//, "")));
     for (const f of files) {
       if (!isHeldModule(f, prefixes)) continue;
       for (const [, ref] of stripComments(R(f)).matchAll(PUBLIC_ASSET)) {
-        if (!HELD_PREFIXES.some(p => ref.startsWith(p))) {
-          faults.push(
-            `${f}: a HELD module points at \`${ref}\`, which is served at a public ` +
-            "address. Move the file under `public/held/` — the door is already built " +
-            "and the material is what it is for.");
-        }
+        if (HELD_PREFIXES.some(p => ref.startsWith(p))) continue;
+        const governed = ref.startsWith(GOVERNED_PREFIX);
+        if (governed && !onDisk(ref) && onDisk(STAGE_PREFIX + ref)) continue;
+        faults.push(
+          `${f}: a HELD module points at \`${ref}\`, which is served at a public ` +
+          "address. Move the file under `public/held/` — the door is already built " +
+          "and the material is what it is for." +
+          (governed ? " (Governed, and there IS a file at that public address —" +
+                      " so this is the twin resolved and still a leak.)" : ""));
       }
     }
 

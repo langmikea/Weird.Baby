@@ -77,7 +77,16 @@ import jsxPlugin from "acorn-jsx";
 const Parser = acorn.Parser.extend(jsxPlugin());
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, "..");
-const SOURCE = "src/data/artists/robots.js";
+/* [2026-08-17] THE TWO MACHINES MOVED FILE AND THIS TOOL FOLLOWED THEM. Mike
+   ruled both units down the night the wing opened; their albums are behind the
+   stage door in `robots-units.js` now (the whole argument is at that file's
+   head). This parser reads the two albums by id, so it went from four menu
+   items to a crash the moment they left `robots.js`.
+   IT STILL RUNS, AND THAT IS DELIBERATE. Parity is a statement about what the
+   museum SAYS about its two machines, and it is worth keeping true while they
+   are held: the day either comes back, the check has been running the whole
+   time rather than being switched on again by somebody who has to remember. */
+const SOURCE = "src/data/artists/robots-units.js";
 
 /* The two machines, by album id. `mgk-viii` is the MGK-NIAC's key and not its
    name — the album was renamed at Q3 and the id deliberately was not, because

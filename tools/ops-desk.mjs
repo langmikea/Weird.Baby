@@ -186,6 +186,16 @@ const INSTRUMENTS = [
     file: "SCROLLER_FACTS.html",
     what: "Every fact the pop-up scroller can serve, every artist. Quote or paraphrase, word count, source.",
     rebuild: "npm run facts" },
+  /* [2026-08-17] LOOSE THREADS. MIKE: "Mike has canon that is true in the story
+     but not yet in any Record… he wants these captured so they get woven in
+     rather than lost." It sits beside the backlog because it answers the other
+     half of the same question — the backlog is what is NEXT, this is what is
+     TRUE and unsaid — and neither is the register. */
+  { name: "Loose threads",
+    file: "THREADS.html",
+    what: "Canon that is true in the story and has not been said in a Record yet. Mike's words, verbatim.",
+    rebuild: "npm run desk",
+    source: "THREADS.md" },
   { name: "The open-actions register",
     file: "OPEN_ACTIONS.html",
     what: "Everything open, one place. THE SHORT LIST at the top is what is waiting on you.",
@@ -468,55 +478,64 @@ Ops instrument &mdash; not part of the museum, and never at a live address.</p>
   oaWrote = true;
 }
 
-/* ═══ [2026-08-16] THE RANKED BACKLOG, AND IT IS CHECKED AGAINST THE REGISTER
-       RATHER THAN TRUSTED ══════════════════════════════════════════════════
-   MIKE: "File the pruned backlog on the Ops Desk… Mike looks at the desk for
-   everything, so it belongs there."
+/* ═══ [2026-08-16 / 2026-08-17] THE SIDE PAGES, AND THEY ARE CHECKED AGAINST
+       THE REGISTER RATHER THAN TRUSTED ═══════════════════════════════════
+   MIKE, of the backlog: "File the pruned backlog on the Ops Desk… Mike looks at
+   the desk for everything, so it belongs there." Of the threads: **"same
+   renderer as BACKLOG — no new machine."**
 
-   IT IS A SECOND MARKDOWN THROUGH THE SAME RENDERER — no second machine. The
-   register stays the full record; `BACKLOG.md` is the ORDER, and it names
-   register rows by anchor.
+   SO THERE IS ONE LOOP AND NOT TWO BLOCKS. The backlog arrived alone and had a
+   render block of its own; the threads page would have been a second copy of
+   it, and two copies is where the third one quietly gains a feature the others
+   do not. The register keeps its own block above — it is the source these pages
+   point AT, not one of them.
 
    TWO FILES THAT POINT AT EACH OTHER DRIFT, SO THE POINTERS ARE VERIFIED. Every
-   `OPEN_ACTIONS.md#id` the backlog names is checked against the anchors that
+   `OPEN_ACTIONS.md#id` a side page names is checked against the anchors that
    actually exist in the register, and a miss is REPORTED BY NAME on the console
-   and marked on the page. It is the same rule as the desk's own — **never draw
-   a link to something that is not there** — one level down: a backlog pointing
-   at a row somebody closed reads as *still open* to the one person who cannot
-   check, which is exactly the failure this reconciliation was cleaning up.
-   Doctrine 24 makes closures routine now, so this will fire. */
-const blMd = path.join(DOCS, "BACKLOG.md");
-let blWrote = false, blBroken = [];
-if (fs.existsSync(blMd)) {
-  const md = fs.readFileSync(blMd, "utf8");
-  const src = stamp(fs.statSync(blMd).mtime);
+   and marked on the page. Same rule as the desk's own — never draw a link to
+   something that is not there — one level down: a page pointing at a row
+   somebody closed reads as *still open* to the one person who cannot check.
+   Doctrine 24 makes closures routine, so this will fire.
+
+   AND THE LINKS ARE REPOINTED AT THE RENDERING, which is this file's own trap
+   one level down. The markdown links to `OPEN_ACTIONS.md#id`, which is right
+   for anybody reading the markdown; left alone in the HTML it hands the browser
+   a `.md`, and this file's header already says what a browser does with that.
+   The source keeps its honest link; the rendering points at the rendering. */
+const SIDE_PAGES = [
+  { md: "BACKLOG.md", html: "BACKLOG.html", title: "THE BACKLOG — ranked", favi: "🥇" },
+  { md: "THREADS.md", html: "THREADS.html", title: "LOOSE THREADS — canon not yet said", favi: "🧵" },
+];
+const sideWrote = [];
+const sideBroken = [];
+for (const pg of SIDE_PAGES) {
+  const srcPath = path.join(DOCS, pg.md);
+  if (!fs.existsSync(srcPath)) continue;
+  const md = fs.readFileSync(srcPath, "utf8");
+  const when = stamp(fs.statSync(srcPath).mtime);
   const known = new Set(
     (fs.existsSync(oaMd) ? fs.readFileSync(oaMd, "utf8") : "")
       .match(/<a id="([a-z0-9-]+)"><\/a>/g)?.map(m => m.slice(7, -6)) || []);
-  blBroken = [...new Set(
+  const broken = [...new Set(
     (md.match(/OPEN_ACTIONS\.md#([a-z0-9-]+)/g) || [])
       .map(m => m.split("#")[1]).filter(id => !known.has(id)))];
-  const warn = blBroken.length
-    ? `<p class="foot" style="color:#9c2b1e"><b>${blBroken.length} link(s) point at register rows that no longer exist:</b>
-       ${blBroken.map(esc).join(", ")}. Either the row closed and this page did not follow, or the id is a typo.</p>`
+  if (broken.length) sideBroken.push({ page: pg.md, ids: broken });
+  const warn = broken.length
+    ? `<p class="foot" style="color:#9c2b1e"><b>${broken.length} link(s) point at register rows that no longer exist:</b>
+       ${broken.map(esc).join(", ")}. Either the row closed and this page did not follow, or the id is a typo.</p>`
     : "";
-  /* AND THE LINKS ARE REPOINTED AT THE RENDERING, WHICH IS THIS FILE'S OWN
-     TRAP ONE LEVEL DOWN. `BACKLOG.md` links to `OPEN_ACTIONS.md#id`, which is
-     right for anybody reading the markdown. Left alone in the HTML it hands the
-     browser a `.md`, and this file's header already says what a browser does
-     with that: **downloads it, or draws 760 lines of pipe characters.** The
-     source keeps its honest link; the rendering points at the rendering. */
   const body = `<div class="wrap">
 <p class="sub"><a href="OPS_DESK.html">&larr; the Ops desk</a> &middot; <a href="OPEN_ACTIONS.html">the full register</a></p>
 ${warn}
 ${renderMarkdown(md).replace(/href="OPEN_ACTIONS\.md(#|")/g, 'href="OPEN_ACTIONS.html$1')}
-<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/BACKLOG.md</code>,
-last written <b>${esc(src)}</b>. Every register link on this page is checked against
+<p class="foot">Rendered by <code>tools/ops-desk.mjs</code> from <code>docs/${esc(pg.md)}</code>,
+last written <b>${esc(when)}</b>. Every register link on this page is checked against
 <code>docs/OPEN_ACTIONS.md</code> on each build. Rebuild with <code>npm run desk</code>.</p>
 </div>`;
-  fs.writeFileSync(path.join(DOCS, "BACKLOG.html"),
-    page({ title: "THE BACKLOG — ranked", css: DOC_CSS, body, favi: "🥇" }));
-  blWrote = true;
+  fs.writeFileSync(path.join(DOCS, pg.html),
+    page({ title: pg.title, css: DOC_CSS, body, favi: pg.favi }));
+  sideWrote.push(pg.html);
 }
 
 /* [G 2026-08-13] AN INSTRUMENT IS EITHER `file` (under docs/) OR `abs` (a real
@@ -653,13 +672,17 @@ fs.writeFileSync(path.join(DOCS, "OPS_DESK.html"),
 
 console.log(`wrote docs/OPS_DESK.html — ${INSTRUMENTS.length} instruments, ${INSTRUMENTS.length - missing.length} on disk`);
 if (oaWrote) console.log("wrote docs/OPEN_ACTIONS.html — rendered from docs/OPEN_ACTIONS.md");
-if (blWrote) {
-  console.log("wrote docs/BACKLOG.html — rendered from docs/BACKLOG.md");
-  if (blBroken.length) {
-    console.log(`\n${blBroken.length} backlog link(s) point at register rows that do not exist:`);
-    for (const id of blBroken) console.log(`  OPEN_ACTIONS.md#${id}`);
+for (const html of sideWrote) {
+  console.log(`wrote docs/${html} — rendered from docs/${html.replace(".html", ".md")}`);
+}
+if (sideWrote.length) {
+  if (sideBroken.length) {
+    for (const b of sideBroken) {
+      console.log(`\n${b.ids.length} link(s) in ${b.page} point at register rows that do not exist:`);
+      for (const id of b.ids) console.log(`  OPEN_ACTIONS.md#${id}`);
+    }
   } else {
-    console.log("  every register link on the backlog resolves to a live row");
+    console.log("  every register link on the side pages resolves to a live row");
   }
 }
 if (missing.length) {

@@ -270,20 +270,60 @@ FACE("wbr.faq", "FAQ — the robots wing's whole front desk: what this is, the m
 FACE("wbr.record", "THE RECORD — the journal of the reverse-discovery, and it is about all things robots.", "PARTIAL", "REVEALED",
   { deps: ["M18 — twenty-seven open questions on entry 013"],
     note: "[B2 2026-08-07] M19 IS ANSWERED AND OFF THIS ROW'S DEPS. Mike ruled that THE REAL RECORD STARTS AT 001 when he dictates it, which settles what a record number means: the numbers are THIS VOLUME'S OWN and they begin at 001, not the 436-record numbering that was deleted at v47. The volume therefore holds ZERO entries of its own sequence today — the one entry on the glass is the PROTOTYPE (record.013 below) and is not in it. THE FACE STAYS PARTIAL AND REVEALED for exactly that reason: it renders, it is reachable, and the sequence it is a container for has not started. [R1] MOVED HERE FROM THE MGK-VIIIp ALBUM on Mike's ruling that it applies to all things robots, not just the VIIIp — and this row was `face.viiip.record` until then. It is the ONE id this table has ever renamed; nothing outside reveal/ reads it, and leaving it on a wing it no longer sits in would have been the ledger keeping a filing decision the museum reversed. Reachable at its own address, /robots/record, because the lobby directory now carries a line for it indented under Weird.Baby Robots. Holds exactly ONE entry; the container's pagination (C1), doors (C7) and epoch (C8) are built and unexercised." });
-FACE("niac.name", "THE NAME — built as MGK-NIAC, sold as MGK-VIII.", "LIVE", "REVEALED",
-  { arc: "understood",
+/* ═══ [2026-08-17] BOTH MACHINES ARE HELD, AND THESE TWO ROWS ARE THE HALF OF
+       THE RULING THAT WAS MISSING ═══════════════════════════════════════════
+   **MIKE: "A HIDING RULING IS NOT DONE UNTIL A LEDGER ROW MOVES. Declare a row
+   for each. Neither had one, which is how this happened."**
+
+   HE IS DESCRIBING THE DEFECT EXACTLY. This table had seven faces for the two
+   machines and **no row for either machine** — nothing said what an MGK-NIAC or
+   an MGK-VIIIp WAS in reveal terms, so nothing could say it was held. The
+   albums were invisible only because `ROBOTS_OPEN` shut the wing, and when
+   Record 001 posted at 00:00 the wing opened and both walked through with it.
+   **A hold that depends on another thing's hold is not a hold, and a hold no
+   row carries is not a ruling.**
+
+   THE SEVEN FACES MOVE WITH THEM, from REVEALED to HELD. They were `reach: "a
+   track on /robots"` and that sentence is now false — there is no track to be a
+   track of. A row that describes a reachability the museum no longer offers is
+   the exact fault §2 of `reachability.mjs` was built to catch, read the other
+   way round.
+
+   WHAT THESE ROWS ADMIT, AND IT IS WHY THEY SAY `shown: true`: the album
+   objects are still in `src/data/artists/robots.js`, a PUBLIC module, so **the
+   filter stops the render and every string still ships in the chunk.** The
+   Portal is held properly — its own module, behind the stage door — and that is
+   the durable fix here too. It is a bigger job than the one that was urgent. */
+R("album.niac", "MGK-NIAC — the mainframe, built as NIAC and sold as MGK-VIII.",
+  "surface", "src/data/artists/robots-units.js", "LIVE", null, "HELD",
+  { shown: true,
+    deps: ["Mike's word — he ruled it down on 2026-08-17, the night the wing opened"],
+    note: "Held unconditionally by `HELD_ALBUMS` in robots.js — not `HIDDEN_AT_LAUNCH`, "
+        + "which is the STAGE hold and would have made it visible the moment the stage "
+        + "moved. Held from Mike too. Returns by taking one id out of one set. "
+        + "LIMITATION, NAMED: a filter in a public module publishes the strings anyway." });
+R("album.viiip", "MGK-VIIIp (1965) — the unit, its manual, its plates and its specifications.",
+  "surface", "src/data/artists/robots-units.js", "LIVE", null, "HELD",
+  { shown: true,
+    deps: ["Mike's word — he ruled it down on 2026-08-17, the night the wing opened"],
+    note: "Same mechanism and same limitation as `album.niac`. The Portal is NOT part of "
+        + "this hold and is not disturbed: its album is in portal.js behind the stage "
+        + "door, and `PORTAL_AT` still lands it second because the splice clamps to the "
+        + "spine's length." });
+FACE("niac.name", "THE NAME — built as MGK-NIAC, sold as MGK-VIII.", "LIVE", "HELD",
+  { where: "src/data/artists/robots-units.js", arc: "understood",
     note: "[H2 2026-08-06] PULLED BACK — no Record entry delivers this picture, so the face no longer shows one and the file is behind the door under public/held/. [Q3] The album took the first name on 2026-08-05; this face is where the two names are reconciled. [R4] Its still was the robot's head at the lens and is now the cabinet's lit column — the mainframe is the subject." });
-FACE("niac.plates", "IMAGE ARCHIVE (MGK-NIAC) — four details of a cabinet never shown whole.", "LIVE", "REVEALED",
-  { note: "[H2 2026-08-06] THE WALL IS EMPTY AND THE WALL IS STILL BUILT. Four plates came off it under THE PULL-BACK RULE and the face carries `archiveEmpty` instead — the groupings, the unit noun and the reader are untouched, and a Record entry that delivers a plate puts it back with no code. [R4] EIGHT PLATES TO FOUR. Six were the robot and one was a bench shot with its feet in it; all seven are off the wall and none is deleted from disk (M9). Three came the other way out of the robots repo's own culled 2021 set — the core, the output row, the meltdown. It also lost the February 2013 spread and with it the museum's ONLY stowed shelf, so N2's <details> mechanism is now exercised nowhere — C29." });
-FACE("niac.firmware", "TECHNICAL SPECIFICATIONS (MGK-NIAC) — what the machine is running.", "LIVE", "REVEALED",
-  { note: "[H2 2026-08-06] PULLED BACK — no Record entry delivers this picture, so the face no longer shows one and the file is behind the door under public/held/. [R4] Its still was a breadboard on a bench and is now the cabinet's own bar bank, which is both the mainframe and the literal subject of the face's 1 × 64 entry. [K1 2026-08-07] The breadboard plate `matrix_lit.jpg` was orphaned by that swap and carried as M9 for three rounds; Mike killed it with the other ten and M9's robot half closes with them." });
-FACE("viiip.plates", "IMAGE ARCHIVE (MGK-VIIIp) — nine plates, as received.", "LIVE", "REVEALED",
-  { note: "[H2 2026-08-06] THE WALL IS EMPTY AND THE WALL IS STILL BUILT — nine plates off under THE PULL-BACK RULE, `archiveEmpty` in their place. M7 and M25 are both moot while nothing is on the wall and both come back with the plates. One of the nine, the power switch round the back, IS delivered by Record 013 and is on that entry." });
-FACE("viiip.manual", "THE MANUAL — the 1965 operating and maintenance manual.", "PARTIAL", "REVEALED",
-  { deps: ["doc.manual.plates"],
+FACE("niac.plates", "IMAGE ARCHIVE (MGK-NIAC) — four details of a cabinet never shown whole.", "LIVE", "HELD",
+  { where: "src/data/artists/robots-units.js", note: "[H2 2026-08-06] THE WALL IS EMPTY AND THE WALL IS STILL BUILT. Four plates came off it under THE PULL-BACK RULE and the face carries `archiveEmpty` instead — the groupings, the unit noun and the reader are untouched, and a Record entry that delivers a plate puts it back with no code. [R4] EIGHT PLATES TO FOUR. Six were the robot and one was a bench shot with its feet in it; all seven are off the wall and none is deleted from disk (M9). Three came the other way out of the robots repo's own culled 2021 set — the core, the output row, the meltdown. It also lost the February 2013 spread and with it the museum's ONLY stowed shelf, so N2's <details> mechanism is now exercised nowhere — C29." });
+FACE("niac.firmware", "TECHNICAL SPECIFICATIONS (MGK-NIAC) — what the machine is running.", "LIVE", "HELD",
+  { where: "src/data/artists/robots-units.js", note: "[H2 2026-08-06] PULLED BACK — no Record entry delivers this picture, so the face no longer shows one and the file is behind the door under public/held/. [R4] Its still was a breadboard on a bench and is now the cabinet's own bar bank, which is both the mainframe and the literal subject of the face's 1 × 64 entry. [K1 2026-08-07] The breadboard plate `matrix_lit.jpg` was orphaned by that swap and carried as M9 for three rounds; Mike killed it with the other ten and M9's robot half closes with them." });
+FACE("viiip.plates", "IMAGE ARCHIVE (MGK-VIIIp) — nine plates, as received.", "LIVE", "HELD",
+  { where: "src/data/artists/robots-units.js", note: "[H2 2026-08-06] THE WALL IS EMPTY AND THE WALL IS STILL BUILT — nine plates off under THE PULL-BACK RULE, `archiveEmpty` in their place. M7 and M25 are both moot while nothing is on the wall and both come back with the plates. One of the nine, the power switch round the back, IS delivered by Record 013 and is on that entry." });
+FACE("viiip.manual", "THE MANUAL — the 1965 operating and maintenance manual.", "PARTIAL", "HELD",
+  { where: "src/data/artists/robots-units.js", deps: ["doc.manual.plates"],
     note: "[P2] THE FACE HAS NO PICTURE, BY RULING. Its one image was a render of a page reading TEXT NOT SUPPLIED, and Mike ruled that the museum admitting it had not written the manual does not get to wear a fiction as cover: either a plate shows a page actually written, or there is no plate. M45 and M4 both close here — M4 by there being no plate left to be a render. `plates: []` is unchanged and still waits on B8's photographs (P2 in the art register)." });
-FACE("viiip.firmware", "TECHNICAL SPECIFICATIONS (MGK-VIIIp) — the machine's own mind, on file.", "LIVE", "REVEALED",
-  { arc: "online",
+FACE("viiip.firmware", "TECHNICAL SPECIFICATIONS (MGK-VIIIp) — the machine's own mind, on file.", "LIVE", "HELD",
+  { where: "src/data/artists/robots-units.js", arc: "online",
     note: "[H2 2026-08-06] PULLED BACK — no Record entry delivers this picture, so the face no longer shows one and the file is behind the door under public/held/. M2: that plate is mirror-reversed, and the whole photograph is flipped." });
 /* ═══ [H1 2026-08-06] THE PORTAL IS HELD FROM LAUNCH ════════════════════════
    MIKE: "THE PORTAL IS HELD FROM LAUNCH but development continues... a held
@@ -314,7 +354,8 @@ R("portal.door", "THE PORTAL — the first track, and the way in.",
 FACE("viiip.portal", "THE PORTAL — the feed-control panel: drum, two bat switches, a rotary dial, a latch.", "LIVE", "HELD",
   { where: "src/data/artists/portal.js",
     note: "The panel is the immersion's first step; the latch opens the twin. [H1 2026-08-06] HELD — it left robots.js with the album." });
-FACE("viiip.faq", "FAQ — questions about the machine.", "LIVE", "REVEALED");
+FACE("viiip.faq", "FAQ — questions about the machine.", "LIVE", "HELD",
+  { where: "src/data/artists/robots-units.js", note: "[2026-08-17] HELD WITH ITS ALBUM. Mike ruled both machines down the night the wing opened; the album is filtered out of `robotsExhibit.spine` unconditionally (`HELD_ALBUMS` in robots.js), so this face has no track to be a track of. **The strings still ship in the chunk** — a filter in a public module stops the render, not the bundle — which is the limitation named on the album row and the reason this row is HELD rather than REVEALED." });
 
 /* ═════════ 3. THE PORTAL'S OWN CONTROLS — availability that already varies ═
    [R6 2026-08-05] THE DRUM IS NUMBERED NOW. Mike's instruction: MGK-NIAC takes
