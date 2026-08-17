@@ -3725,6 +3725,112 @@ export default function Exhibit({ artist, open = null }) {
      the render below asks a question rather than restating a condition. */
   const bannerTransport = artist.transport === "banner";
 
+  /* ═══ [2026-08-16] THE TRAVELLING PLATE AND THE ROOM NAME ARE ONE WIDTH ════
+     MIKE, twice in two days on two wings: the band lands on the fixed bar and
+     does not cover its title, and scroll-to-top is dead on a short screen.
+
+     **THE RECURRENCE IS THE DEFECT, AND ITS SHAPE IS THIS:** the thing a
+     visitor SEES pinned in the header (the album plate) and the thing that is
+     CLICKABLE there (the room name, which is `onRoomClick`) are two different
+     elements whose boxes are related by nothing but coincidence. The 08-17 fix
+     — `pointer-events:none` on the plate, so the click falls through — is
+     correct and is kept; it only works while the plate is inside the control.
+     One asymmetric padding on one wing broke that (see the long note in
+     Exhibit.css), and any future change to either box breaks it again. On /wal
+     TODAY, with the padding corrected, Carsie Blanton's plate is still 277.5px
+     against a 224.1px room name: 26.7px of visibly-pinned title over dead bar
+     at each end. **Coincidence is what has to go.**
+
+     SO THE TWO BOXES ARE MADE EQUAL, WHICH SATISFIES BOTH COMPLAINTS AT ONCE:
+     equal and concentric means the plate covers the room name completely
+     (nothing of the longer title peeks out at ANY two lengths), and every pixel
+     of the plate is over the control (so the click can never land on dead bar).
+     Neither property depends on which of the two strings is longer.
+
+     ONE NUMBER DOES IT: `--wb-title-w`, the larger of the room name's own text
+     and the plate's text plus the plate's padding. Both elements take it as a
+     `min-width`, so each is exactly that wide and neither is ever clipped by
+     the other's length.
+
+     MEASURED WITH A RANGE OVER THE TEXT, NOT WITH `offsetWidth`, AND THAT IS
+     LOAD-BEARING: an element's box is what this effect SETS, so measuring the
+     box would feed its own output back in. A Range measures the glyphs.
+
+     THE CAP IS THE BAR'S OWN ARITHMETIC. The width is clamped to what is left
+     after the two flanks take the wider of the wordmark and the exit — the same
+     reservation `.wb-bar` and `.ex-album-banner` already make — so the side
+     tracks stay EQUAL and the pair stays centred on the viewport rather than
+     between two unequal neighbours. Clamped again by the band's own centre
+     allowance, so a long name can never reach a corner.
+
+     IT DOES NOTHING WHERE THE PLATE IS NOT OVER THE ROOM NAME. Below 720px the
+     console wing lays the band out in two columns with the title hard left
+     (A2's ruling, 2026-08-04); the test is that layout's own declaration,
+     `justify-self`, rather than a width guess. With no plate — a flat face is
+     open — the variable goes to zero and the bar is exactly what it was. */
+  useEffect(() => {
+    const root = document.querySelector(".ex-root");
+    if (!root || typeof ResizeObserver === "undefined") return;
+
+    const textWidth = el => {
+      const r = document.createRange();
+      r.selectNodeContents(el);
+      return r.getBoundingClientRect().width;
+    };
+    const num = v => { const n = parseFloat(v); return Number.isFinite(n) ? n : 0; };
+
+    let last = null;
+    const measure = () => {
+      const bar   = root.querySelector(".wb-bar");
+      const room  = root.querySelector(".wb-bar-room");
+      const plate = root.querySelector(".ex-album-banner-title");
+      const band  = root.querySelector(".ex-album-banner");
+      let px = 0;
+
+      if (bar && room && plate && band &&
+          getComputedStyle(plate).justifySelf !== "start") {
+        const pcs = getComputedStyle(plate);
+        const want = Math.max(
+          textWidth(room),
+          textWidth(plate) + num(pcs.paddingLeft) + num(pcs.paddingRight),
+        );
+
+        const brand = root.querySelector(".wb-bar-brand");
+        const exit  = root.querySelector(".wb-bar-exit");
+        const flank = Math.max(
+          brand ? brand.getBoundingClientRect().width : 0,
+          exit && exit.offsetParent !== null ? exit.getBoundingClientRect().width : 0,
+        );
+        const bcs = getComputedStyle(bar);
+        const barCap = bar.clientWidth - num(bcs.paddingLeft) - num(bcs.paddingRight)
+          - num(bcs.columnGap) * 2 - flank * 2;
+
+        const dcs = getComputedStyle(band);
+        const bandFlank = num(getComputedStyle(root).getPropertyValue("--ex-flank")) || 132;
+        const bandCap = band.clientWidth - num(dcs.paddingLeft) - num(dcs.paddingRight)
+          - num(dcs.columnGap) * 2 - bandFlank * 2;
+
+        px = Math.max(0, Math.min(Math.ceil(want), Math.floor(barCap), Math.floor(bandCap)));
+      }
+
+      const next = `${px}px`;
+      if (next !== last) { last = next; root.style.setProperty("--wb-title-w", next); }
+    };
+
+    measure();
+    /* the BAR is observed and the room name is NOT: the room's width is this
+       effect's own output, and observing it would be the loop. */
+    const bar = root.querySelector(".wb-bar");
+    const ro = new ResizeObserver(measure);
+    if (bar) ro.observe(bar);
+    let live = true;
+    /* a webfont swap moves both strings and fires no resize on the bar */
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => { if (live) measure(); }).catch(() => {});
+    }
+    return () => { live = false; ro.disconnect(); };
+  }, [album.title, artist.name, bannerTransport]);
+
   /* [P11 2026-08-02] THE EXIT NAMES THE EXHIBIT'S OWNER.
      Mike's GIFT SHOP BILLING LAW turns on one question the shop could not
      previously answer: WHOSE exhibit did this visitor just leave? `?from=` has

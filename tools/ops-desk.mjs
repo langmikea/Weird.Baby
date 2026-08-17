@@ -167,6 +167,14 @@ const INSTRUMENTS = [
     file: "CONTACT_SHEET.html",
     what: "Every image in both repos, with a ✗ on each tile for marking a cull.",
     rebuild: "npm run contact-sheet" },
+  /* [2026-08-16] MIKE: "That is where I always look for whatever I need, so
+     treat it like that please." A list he has to remember a path to is a list
+     he does not read. It is HTML, so the desk can link it straight — the
+     download trap below only bites on files a browser cannot render. */
+  { name: "The scroller facts",
+    file: "SCROLLER_FACTS.html",
+    what: "Every fact the pop-up scroller can serve, every artist. Quote or paraphrase, word count, source.",
+    rebuild: "npm run facts" },
   { name: "The open-actions register",
     file: "OPEN_ACTIONS.html",
     what: "Everything open, one place. THE SHORT LIST at the top is what is waiting on you.",

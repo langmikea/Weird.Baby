@@ -1188,6 +1188,21 @@ body:has(.pb) .ex-root{padding-bottom:88px}
    which is the bar — the only thing this plate is ever over. */
 .ex-album-banner-title{background:var(--wb-bg);padding:3px 14px;
   border-radius:2px;pointer-events:none}
+/* ═══ [2026-08-16] ONE WIDTH FOR THE PLATE AND THE ROOM NAME ═══════════════
+   `--wb-title-w` is set on `.ex-root` by the effect in Exhibit.jsx (read its
+   note; it is the whole argument). Both boxes take it as a floor, so they are
+   the same width and concentric: the plate covers the room name completely at
+   any two lengths, and every pixel of the plate is over `onRoomClick`.
+   BOTH RULES LIVE HERE RATHER THAN IN MuseumBar.css BECAUSE THE BAND IS WHY
+   THEY EXIST. `.wb-bar-room` on /booth and /shop is outside `.ex-root` and
+   never sees this; inside it, the variable's 0px default means an exhibit with
+   no plate drawn (a flat face is open) is the bar exactly as it was.
+   `min-width` beats `max-width:100%` in CSS, which is why the effect caps the
+   number against the bar's and the band's own flank arithmetic rather than
+   leaving it to the cascade. */
+.ex-root{--wb-title-w:0px}
+.ex-root .wb-bar-room{min-width:var(--wb-title-w)}
+.ex-album-banner-title{min-width:var(--wb-title-w)}
 .ex-album-banner-title{grid-column:2;justify-self:center;text-align:center;
   font-family:'Syne',sans-serif;font-weight:700;font-size:var(--ex-banner-type);letter-spacing:.1em;text-transform:uppercase;color:var(--wb-gold);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .ex-album-banner-aux{grid-column:3;justify-self:end;min-height:1px}
@@ -2831,17 +2846,57 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
        .bt   x 1391-1650, y 14-38
        exit  x 1563-1658, y 18-34      -> 87px of overlap, both axes.
 
-   THE FIX IS THE BAND'S OWN VOCABULARY: pad the right edge by the flank the
-   corner already declares, so the aux track ENDS where the reserved corner
-   BEGINS instead of running into it. Content edge 1682 -> 1518, and the exit
-   starts at 1563.
+   THE FIX IS THE BAND'S OWN VOCABULARY: hold the aux off the right edge by the
+   flank the corner already declares, so the aux track ENDS where the reserved
+   corner BEGINS instead of running into it. Content edge 1682 -> 1518, and the
+   exit starts at 1563.
    SCOPED TO `.ex-banner-console`, WHICH IS THE HONEST SCOPE — the class is on
    the band only when `bannerTransport` is truthy, so a band with nothing in its
    right track keeps its 32px and nothing moves on any page that is not playing.
    NOT `top:52px` ON THE BAND, which was the other candidate and is the bigger
    change: it would stop the title travelling at all and reverse a ruling of his
    from 11 August to fix a collision he described in the corner. */
-.ex-banner-console{padding-right:var(--ex-flank)}
+/* ═══ [2026-08-16] AND IT WAS `padding-right` ON THE BAND, WHICH KNOCKED THE
+       TRAVELLING TITLE 50px OFF THE BAR'S CENTRE ═══════════════════════════
+   MIKE, the next day: **the header reads "HUNTER ROOT  ˙EN"** — the tail of
+   WORTH A LISTEN showing past the end of the shorter title — and, separately,
+   **scroll-to-top dead again, this time on /wal.**
+
+   ONE CAUSE, AND IT IS THIS DECLARATION. `padding-right` made the band's
+   content box ASYMMETRIC (`0 132px 0 32px`), and the centre grid column is
+   centred in the CONTENT box. The bar's room name is centred on the VIEWPORT.
+   MEASURED on the deployed site, 1280px, /wal, Hunter Root, page at its foot:
+       plate  x 463-700   centre 582
+       room   x 520-744   centre 632      -> 50px apart, which is (132-32)/2
+   44px of the room name's tail is therefore uncovered — his "˙EN" exactly —
+   and the plate's leftmost 57px (463-520) is over `.wb-bar` and NOT over the
+   room name, so `elementFromPoint` there returns the bar and a click on the
+   visible "HU" of HUNTER ROOT does nothing at all.
+
+   **THAT IS ALSO THE ANSWER TO WHY THE 08-17 SCROLL-TO-TOP FIX DID NOT COVER
+   THIS PAGE.** It did reach /wal — `pointer-events:none` is on the plate in the
+   deployed CSS, measured. What did not reach /wal is the ASSUMPTION that fix
+   rests on: that the plate is only ever over the control. /wb has no transport,
+   so no `.ex-banner-console`, so symmetric padding, so concentric. The sibling
+   fix in the SAME ROUND broke that assumption on the one wing that has a
+   transport, and its verification probed the ROOM NAME'S OWN CENTRE — which
+   still worked — rather than the plate's edges.
+
+   THE OFFSET MOVES ONTO THE AUX, WHICH IS THE THING THAT HAD TO MOVE. The aux
+   is `justify-self:end` in the right-hand track, so a right margin on IT pulls
+   the transport in by exactly the flank while the band's own box stays
+   symmetric — the corner is still reserved, and the centre column is still on
+   the viewport's axis.
+
+   AND IT IS ABOVE 720px ONLY, WHICH IS MEASURED RATHER THAN CAUTIOUS. Below
+   that the console band is TWO columns with the title hard left (A2's phone
+   ruling), so there is no centre to protect — and swapping the band's padding
+   for a margin there costs the title 6.1px of its column: measured at 390px,
+   HUNTER ROOT went 183.4px -> 177.3px and started to ellipsise. The phone keeps
+   the padding exactly as it shipped; the fix applies where the defect is. */
+@media (min-width:721px){
+  .ex-banner-console .ex-album-banner-aux{margin-right:var(--ex-flank)}
+}
 .ex-banner-console .ex-album-banner-aux{display:flex;
   align-items:center;justify-content:flex-end;gap:10px}
 
@@ -2887,6 +2942,11 @@ body:has(.pb) .ex-root:not([data-flat]):not([data-stage]) .fs-wrap{
   .ex-banner-console .ex-album-banner-title{grid-column:1;justify-self:start;
     text-align:left}
   .ex-banner-console .ex-album-banner-aux{grid-column:2}
+  /* [2026-08-16] the phone keeps the 08-17 corner reservation AS PADDING, which
+     is what it shipped with and what the 390px measurements above were taken
+     against. The band-vs-aux swap two thousand lines up is for the centred
+     three-column layout only; see its note for the 6.1px this costs here. */
+  .ex-banner-console{padding-right:var(--ex-flank)}
 }
 
 /* [F5 2026-08-02] the vault ?-button and the fact popup (.ex-vaultbtn, .fp*)

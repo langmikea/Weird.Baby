@@ -22,6 +22,8 @@
     "assets:orphans": "node tools/asset-table.mjs --orphans",
     "assets:cull": "node tools/asset-table.mjs --cull",
     "contact-sheet": "node tools/contact-sheet.mjs",
+    "facts": "node tools/scroller-facts.mjs",
+    "facts:gate": "node tools/scroller-facts.mjs --gate",
     "dictation": "node tools/dictation/prep.mjs",
     "dictation:import": "node tools/dictation/rescue-import.mjs",
     "record": "node tools/dictation/record-edit.mjs",

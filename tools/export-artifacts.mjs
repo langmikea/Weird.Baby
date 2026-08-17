@@ -251,11 +251,12 @@ function printHelp() {
     "  --dry-run            compute and report; do not write any files",
     "  --verbose            print SQL, row counts, per-artifact details",
     "  --restores-deleted-lyrics",
-    "                       REQUIRED. MediaVault still holds three released",
-    "                       records that were deleted from the repo by hand on",
-    "                       2026-08-11 (song lyrics, vault rule 5). Any run of",
-    "                       this tool puts them back. Run without the flag to",
-    "                       see which three.",
+    "                       REQUIRED. MediaVault still holds five released",
+    "                       records the repo has by hand: three lyric strings",
+    "                       deleted 2026-08-11 (vault rule 5) and two verbatim",
+    "                       press quotes reworded 2026-08-16 (the copyright",
+    "                       limits). Any run of this tool puts all five back.",
+    "                       Run without the flag to see which five.",
     "  --help               show this message",
     "",
   ].join("\n"));
@@ -692,6 +693,18 @@ function buildVocabularyPayload(rows, { sourceUrl, exportedAt }) {
 }
 
 // ─── main ──────────────────────────────────────────────────────────────────
+/* ═══ [2026-08-16] AND TWO MORE ROWS, FOR A SECOND REASON ═══════════════════
+   MV-HR-20260707-014 and -015 were REWORDED in the repo, not deleted: two
+   verbatim Blue Harvest Beat quotes at 21 and 33 words, live on /wal's scroller,
+   against the museum's two copyright limits (every quote under fifteen words;
+   one quote per source). They are paraphrases now, in the house's voice, with
+   the attribution kept.
+   THE ROW BELOW IS THE SAME MECHANISM FOR A DIFFERENT VERB. An export reads MV,
+   where both are still `status = released` with their original text, so a plain
+   run puts the two quotes back on the glass exactly as a plain run would put the
+   lyrics back. A guard that only knows about DELETIONS would have let a
+   REWORDING through, and the visitor-facing outcome is identical.
+   ─────────────────────────────────────────────────────────────────────────── */
 /* ═══ [CH4 2026-08-12] THE HAND-DELETED RECORDS, AND WHY THIS TOOL REFUSES ═══
    On 2026-08-11 three strings were deleted from the two files this tool writes,
    because they are SONG LYRICS and the vault's own rule 5 is "NO LYRICS, EVER —
@@ -712,6 +725,8 @@ const MV_HAND_DELETED = [
   ["MV-HR-20260707-056", "fact",     "hunter_root.facts.json", "the '94 verse, four lines"],
   ["MV-HR-20260405-012", "artifact", "hunter_root.json",       "title AND description are the same lyric"],
   ["MV-HR-20260405-013", "artifact", "hunter_root.json",       "description only; the entry itself is a real tribute post and stays"],
+  ["MV-HR-20260707-014", "fact",     "hunter_root.facts.json", "REWORDED, not deleted: a 21-word verbatim Blue Harvest Beat quote, now a paraphrase"],
+  ["MV-HR-20260707-015", "fact",     "hunter_root.facts.json", "REWORDED, not deleted: a 33-word verbatim Blue Harvest Beat quote, now a paraphrase"],
 ];
 
 function refuseUnlessAcknowledged(opts) {
@@ -723,12 +738,15 @@ function refuseUnlessAcknowledged(opts) {
   for (const [id, kind, file, what] of MV_HAND_DELETED) {
     w.write(`  ${id}  (${kind} -> ${file})\n      ${what}\n`);
   }
-  w.write("\nAll three are song lyrics, struck on 2026-08-11 under the vault's rule 5\n");
-  w.write("(\"NO LYRICS, EVER - not ours to reprint\"). One of them was public on /wal.\n\n");
+  w.write("\nThe first three are song lyrics, struck on 2026-08-11 under the vault's rule 5\n");
+  w.write("(\"NO LYRICS, EVER - not ours to reprint\"). One of them was public on /wal.\n");
+  w.write("The last two are verbatim press quotes reworded on 2026-08-16 under the two\n");
+  w.write("copyright limits (under fifteen words; one quote per source). Both were live.\n\n");
   w.write("The real fix is in MediaVault, not here:\n");
   w.write("  - unrelease or archive  MV-HR-20260707-056  and  MV-HR-20260405-012\n");
-  w.write("  - clear the description on             MV-HR-20260405-013\n\n");
-  w.write("To run anyway, knowing the export puts all three back in the repo:\n\n");
+  w.write("  - clear the description on             MV-HR-20260405-013\n");
+  w.write("  - carry the repo's paraphrase back into  MV-HR-20260707-014  and  -015\n\n");
+  w.write("To run anyway, knowing the export puts all five back in the repo:\n\n");
   w.write("      npm run export-artifacts -- --restores-deleted-lyrics\n\n");
   w.write("Nothing was written. MediaVault was not contacted.\n\n");
   process.exit(1);

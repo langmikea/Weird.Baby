@@ -1,5 +1,19 @@
 {
  "version": 1,
- "approvals": {},
+ "approvals": {
+  "/": {
+   "fp": "5a78f374fe5b16ef",
+   "parts": {
+    "words": "02bb41e3834eeadc",
+    "nWords": 109,
+    "look": "899d965dc1166cc5",
+    "nLook": 5,
+    "pictures": "7bb6461b063c3164",
+    "nPictures": 1
+   },
+   "at": "2026-08-16",
+   "by": "Mike"
+  }
+ },
  "_": "MIKE'S SIGNATURES. One row per page he has personally approved, holding the fingerprint of what that page showed at the moment he signed. If the page changes, its fingerprint changes and the signature stops matching — it is not revoked, it stops applying. Ops must never add or edit a row here; `npm run approve` writes it and only Mike runs it. See reveal/approval.mjs."
 }
