@@ -5,7 +5,7 @@ Rewritten 2026-08-17 at the close of COPY + THE RECORD LAYOUT. Everything below
 Session-scoped context only; process and standing facts live in
 `docs/canonical/OPERATIONS.md` and `CLAUDE.md`, not here.
 
-**READ `docs/MUSEUM_RULINGS-20260817.md` BEFORE YOU RE-OPEN ANYTHING.** Eight of
+**READ `docs/MUSEUM_RULINGS-20260817.md` BEFORE YOU RE-OPEN ANYTHING.** Nine of
 Mike's decisions of this day in one place:
 
 1. **The Record layout is variant `b`** — a and a+b rejected after a rendered
@@ -23,6 +23,12 @@ Mike's decisions of this day in one place:
 6. **The link-preview copy**, now on all three description tags.
 7. **`/share-card.png` is the share image and the file is not to be altered** —
    a flag against its lettering is recorded and is Mike's to redraw.
+9. **DOCTRINE, 18 Aug: "We do not hold back what we say we have. We hold back
+   what we don't have yet."** A Record names only what it can produce. It is the
+   inverse of H2's pull-back rule and the two now meet: **the Record may
+   withhold, and the Record may not promise.** It struck Record 002's `_tmp/`
+   manifest line, the closing line that pointed at it, and three DETAILED REPORT
+   lines including an invented count.
 8. **Records post at 17:00 America/New_York, not 00:00** — Record N becomes
    visible at 5pm on day N, from 002 onward. 001 posted at midnight Monday and
    that stays; its own text ("12:00 am Monday morning") is canon; /robots opened

@@ -13741,18 +13741,6 @@
    "t": "Nothing has been entered in the Record yet.",
    "c": "HOUSE"
   },
-  "73386ca0b3d6ee51": {
-   "f": "src/lib/record-clock.js",
-   "l": 66,
-   "t": "en-CA",
-   "c": "HOUSE"
-  },
-  "2092c9f8050091dd": {
-   "f": "src/lib/record-clock.js",
-   "l": 67,
-   "t": "2-digit",
-   "c": "HOUSE"
-  },
   "2a50e6d70d1e2521": {
    "f": "src/worker.js",
    "l": 101,
@@ -14189,31 +14177,10 @@
    "c": "MIKE",
    "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
   },
-  "6ff1b1a0322bab8a": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 289,
-   "t": "  > METRIC SUMMARY - Nothing to report. All processes 6+ sigma.\n  > Incoming Data = ZIP file (31.4 GB) Password Protected\n  > Partial extraction attempted against the stream still in flight.\n  < A ZIP index is written last. No catalog is available until receipt completes.\n  > Each file is preceded by its own header. Names arrive ahead of contents.\n  ? 1,046 names recovered before the stream closed. Not one of them opens.",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
   "839013e7e95ba196": {
    "f": "src/data/artists/robots-record.js",
    "l": 299,
    "t": "ADDENDUM 01 - Partial Manifest (names only, no contents)",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
-  "b905a6c931dd37f0": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 301,
-   "t": "    MGK-VIIIp/MANUAL/00-FRONTMATTER.tif\n    MGK-VIIIp/MANUAL/07-POWER-SYSTEM.tif\n    MGK-VIIIp/MANUAL/11-VID-LINK.tif\n    MGK-VIIIp/MANUAL/31-PARITY-BIAS.tif\n    PERSONNEL/CEO/\n    PERSONNEL/INFORMER/\n    PERSONNEL/EVERYDAY/\n    PERSONNEL/GAMBLER/\n    PORTAL/CH3-STANDARD/\n    PORTAL/CH4-DETAIL/\n    _tmp/                              < password bit not set",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
-  "2986f237e930ef45": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 309,
-   "t": "  ! The last entry is the only one we can open. It is being reviewed.",
    "c": "MIKE",
    "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
   },
@@ -15247,6 +15214,20 @@
    "t": "Signed setlist, Abbey Bar, 10 October 2025.\nHunter Root and Papa Weird.Baby hung out behind the bar Hunter was playing that night. Burned some time out back with the band. (Why two at once? Because Papa Weird.Baby panicked.)",
    "c": "MIKE",
    "s": "Mike's ABOUT THE ARTIST copy, carried verbatim, plus HIS OWN CAPTION for the photograph above it, ruled 2026-08-17 and typed as the first line of the tile. THE CAPTION IS FOLDED INTO THE BODY BECAUSE THE CARD HAS NO CAPTION SLOT and Mike ruled that four short lines do not justify a fifth field on a component five wings share; `.vp-prof-body` is `white-space: pre-line`, so a typed newline draws as a line and no code changed. THE `NAME —` PREFIX IS STRIPPED, ON HIS SECOND RULING THE SAME DAY: the tile's own `label` is set in caps directly above the body and already says the name, so the prefix was a duplicate — the P!NK card printed the name three times. Ops carried the prefixes as typed for one round and flagged them rather than dropping a word from a value he supplied; he ruled; they went. `(same century as P!NK)` IS KEPT and is not a duplicate — his ruling names it: that mention is the joke, not the label. Not one character of the pre-existing body copy moved at any point. See docs/MUSEUM_RULINGS-20260817.md."
+  },
+  "c195f91e1e88daed": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 335,
+   "t": "  > METRIC SUMMARY -All processes 6+ sigma.\n  > Incoming Data: ZIP file (31.4 GB) Password Protected\n  > Manifest extraction attempted against the stream still in flight - Appendix 01",
+   "c": "MIKE",
+   "s": "Mike's rewrite of Record 002's DETAILED REPORT, ruled 2026-08-18 and carried verbatim - three lines replacing six. His characters as typed, including 'SUMMARY -All' with no space after the dash and the colon in 'Incoming Data:' where the previous line had an equals. FLAGGED AND NOT CORRECTED: this body ends '- Appendix 01' while the section heading below it reads 'ADDENDUM 01'. Both are his and both are carried. See docs/MUSEUM_RULINGS-20260817.md."
+  },
+  "6f141a33edb62fed": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 343,
+   "t": "    MGK-VIIIp/MANUAL/00-FRONTMATTER.tif\n    MGK-VIIIp/MANUAL/07-POWER-SYSTEM.tif\n    MGK-VIIIp/MANUAL/11-VID-LINK.tif\n    MGK-VIIIp/MANUAL/31-PARITY-BIAS.tif\n    PERSONNEL/CEO/\n    PERSONNEL/INFORMER/\n    PERSONNEL/EVERYDAY/\n    PERSONNEL/GAMBLER/\n    PORTAL/CH3-STANDARD/\n    PORTAL/CH4-DETAIL/",
+   "c": "MIKE",
+   "s": "Record 002's partial manifest, Mike's, with the '_tmp/' line struck on his ruling of 2026-08-18: 'We do not hold back what we say we have. We hold back what we don't have yet.' The _tmp/ line promised something the museum cannot show; a Record names only what it can produce. The other ten entries are unchanged and in the same order. The closing line that pointed at it went with it - it named 'the last entry', which was _tmp/, so it could not survive it. See docs/MUSEUM_RULINGS-20260817.md."
   }
  }
 }

@@ -941,3 +941,105 @@ lint **9 / 8 = baseline** · build green · **launch build green** ·
 changed, so the register is untouched.
 
 **Nothing was pushed and nothing was deployed.**
+
+
+---
+
+# SEVENTH PACKET, 2026-08-18 — RECORD 002's EDITS
+
+**Landed with hours to spare before 17:00.** Backup at
+`C:/AI/_week01/_backup_robots-record_before-002-edit-20260818.js`.
+
+## 26 — THE ENTRY WAS EDITED DIRECTLY, NOT THROUGH THE WORKBOOK, AND WHY
+
+The workbook path is real and was checked first: `record:workbook`
+(`workbook_to_draft.py`) reads **a workbook Mike wrote**, emits a draft JSON, and
+`record:land` turns that into the entry.
+
+**IT IS THE WRONG PATH FOR THIS.** These edits did not arrive as a workbook
+revision; they arrived as text. Landing them that way would mean **Ops writing
+Mike's words into Mike's own authoring file** and then regenerating — and the
+lander rebuilds an entry's sections from the draft, which puts the title, the
+deck and the EXECUTIVE SUMMARY (all explicitly untouched) through a round trip
+they did not need. Direct edit touches only what he named.
+
+## 27 — WHAT CHANGED
+
+**DETAILED REPORT — whole body replaced, three lines for six:**
+
+```
+  > METRIC SUMMARY -All processes 6+ sigma.
+  > Incoming Data: ZIP file (31.4 GB) Password Protected
+  > Manifest extraction attempted against the stream still in flight - Appendix 01
+```
+
+His characters as typed: `SUMMARY -All` with no space after the dash, and a
+colon in `Incoming Data:` where the old line had an equals.
+
+**CUT and not moved anywhere else**, on his instruction: the ZIP-index line, the
+per-file-header line, and the recovered-names line — *"1,046 names recovered
+before the stream closed. Not one of them opens."* **The invented number is
+named here, once, and is deliberately NOT in the source comment**: a figure for
+something the museum cannot produce, left in the file, is a fact a later round
+could reinstate believing it was data. Doctrine 24 puts a deleted thing in the
+round log.
+
+**MANIFEST — the `_tmp/` line removed entire**, including its marginal note. Ten
+entries remain, unchanged, same order. **The closing line went with it** —
+*"! The last entry is the only one we can open. It is being reviewed."* — because
+it named "the last entry", which WAS `_tmp/`.
+
+**ADDENDUM 01's heading is untouched**, as instructed. So are the title, the deck
+and the EXECUTIVE SUMMARY.
+
+## 28 — VERIFIED ON THE BUILT LAUNCH BUNDLE, AND ON THE GLASS
+
+**Struck strings, grepped in `dist/client/assets/*.js` after `npm run
+build:launch` — every one ABSENT:**
+
+```
+_tmp                                        ABSENT
+1,046                                       ABSENT
+password bit not set                        ABSENT
+A ZIP index is written last                 ABSENT
+Each file is preceded by its own header     ABSENT
+The last entry is the only one we can open  ABSENT
+Nothing to report. All processes            ABSENT
+```
+
+**New lines, same bundle — every one present**, along with the untouched deck and
+EXECUTIVE SUMMARY.
+
+**AND RENDERED.** 002 does not draw on the launch bundle until 17:00 today, so it
+was read in DEVELOPMENT (where `showingAll()` is true) with 002 open. The three
+sections came back exactly as above; the manifest body splits to **10 lines**;
+`_tmp`, `1,046`, `bit not set` and the closing line are all **false** against
+`document.body.textContent`; page overflow **0**.
+
+## 29 — TWO INSTRUMENT NOTES
+
+**A HAND-ROLLED STALENESS CHECK OVER-REPORTED 24 ROWS AGAINST THE SWEEP'S 5.**
+Its concatenation-folding regex cannot see a string split across more than two
+source lines, so most of `robots-record.js` looked stale. **The 0-inbound result
+still stands**, because the over-broad list is a superset of the true stale set —
+stated rather than re-run. The prune itself went through `--prune` against a
+copy, per §9. **Fourth instrument error in four packets, and the fourth caught
+the same way: the number did not make sense.**
+
+**AND THE BROWSER SCREENSHOT TIMED OUT TWICE**, so this packet's evidence is the
+DOM read rather than a picture. For an instruction about exact strings that is
+the stronger evidence anyway — a screenshot cannot tell you whether a space is
+missing after a dash.
+
+## 30 — GATES
+
+lint **9 / 8 = baseline** · build green · **launch build green** ·
+`provenance:gate` **PASS** (5 rows pruned, 2 added, 0 surviving rows changed,
+0 chains broken) · `reveal:check` **PASS** · `parity:gate` **PASS** ·
+`instory:gate` **PASS** · `docs:numbers` **PASS**.
+
+**Two of the five pruned rows were not this edit's** — `"en-CA"` and `"2-digit"`
+went stale when last night's clock change removed the duplicate formatter from
+`src/lib/record-clock.js`. They are still declared where they still live.
+
+**Nothing was pushed and nothing was deployed.**

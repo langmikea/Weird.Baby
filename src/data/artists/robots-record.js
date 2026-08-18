@@ -314,15 +314,29 @@ export const RECORD_ENTRIES = [
                   ] },
                 { label: "DETAILED REPORT",
                   body: [
-                    "  > METRIC SUMMARY - Nothing to report. All processes "
-                    + "6+ sigma.\n  > Incoming Data = ZIP file (31.4 GB) "
-                    + "Password Protected\n  > Partial extraction attempted "
-                    + "against the stream still in flight.\n  < A ZIP index is"
-                    + " written last. No catalog is available until receipt "
-                    + "completes.\n  > Each file is preceded by its own "
-                    + "header. Names arrive ahead of contents.\n  ? 1,046 "
-                    + "names recovered before the stream closed. Not one of "
-                    + "them opens.",
+                    /* [2026-08-18] HIS REWRITE, VERBATIM. The whole body is
+                       replaced; three lines where there were six.
+                       WHAT WENT, NAMED ONCE (Doctrine 24) AND NOT MOVED
+                       ANYWHERE ELSE, which is his instruction: the ZIP-index
+                       line ("A ZIP index is written last. No catalog is
+                       available until receipt completes."), the per-file-header
+                       line ("Each file is preceded by its own header. Names
+                       arrive ahead of contents."), and the recovered-names line.
+                       **THE INVENTED NUMBER GOES WITH THEM AND IS NOT REPEATED
+                       HERE** - it counted something the museum cannot produce, so
+                       leaving the figure in the source is leaving a fact a later
+                       round could reinstate believing it was data. It is written
+                       down once, in the round log, which is where Doctrine 24 puts
+                       a deleted thing. His ruling: we do not hold back what we say
+                       we have; we hold back what we do not have yet.
+                       HIS CHARACTERS ARE CARRIED AS TYPED, including
+                       "SUMMARY -All" with no space after the dash and the colon
+                       in "Incoming Data:" where the old line had an equals. */
+                    "  > METRIC SUMMARY -All processes 6+ sigma.\n"
+                    + "  > Incoming Data: ZIP file (31.4 GB) Password "
+                    + "Protected\n"
+                    + "  > Manifest extraction attempted against the stream "
+                    + "still in flight - Appendix 01",
                   ] },
                 { label: "ADDENDUM 01 - Partial Manifest (names only, no contents)",
                   body: [
@@ -332,10 +346,23 @@ export const RECORD_ENTRIES = [
                     + "MGK-VIIIp/MANUAL/31-PARITY-BIAS.tif\n    PERSONNEL/CEO/"
                     + "\n    PERSONNEL/INFORMER/\n    PERSONNEL/EVERYDAY/\n    "
                     + "PERSONNEL/GAMBLER/\n    PORTAL/CH3-STANDARD/\n    "
-                    + "PORTAL/CH4-DETAIL/\n    _tmp/"
-                    + "                              < password bit not set",
-                    "  ! The last entry is the only one we can open. It is "
-                    + "being reviewed.",
+                    + "PORTAL/CH4-DETAIL/",
+                    /* [2026-08-18] THE `_tmp/` LINE AND THE CLOSING LINE ARE
+                       BOTH STRUCK, AND THEY ARE ONE RULING RATHER THAN TWO.
+                       Named once (Doctrine 24): "    _tmp/
+                       < password bit not set" and "  ! The last entry is the
+                       only one we can open. It is being reviewed."
+                       MIKE: **"We do not hold back what we say we have. We hold
+                       back what we do not have yet."** The `_tmp/` line promised
+                       something the museum cannot show, and the closing line was
+                       the promise restated - it pointed at "the last entry",
+                       which was `_tmp/`, so it could not survive it. **A Record
+                       names only what it can produce.**
+                       THE OTHER TEN ENTRIES ARE UNCHANGED AND IN THE SAME
+                       ORDER, and the manifest is now one element rather than
+                       two. Record 003 still opens on the tmp folder in its own
+                       words ("One tmp folder unprotected - Contents attached"),
+                       which is the day the museum HAS the thing - untouched. */
                   ] },
               ],
             },

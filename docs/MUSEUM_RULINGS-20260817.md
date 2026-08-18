@@ -1,7 +1,8 @@
 # RULINGS — 2026-08-17
 
 **Mike's decisions of this day, in one place, so a later round does not re-open
-one of them as if it were an open question.** Eight of them.
+one of them as if it were an open question.** Nine of them - the last is dated 18 August
+and is DOCTRINE rather than a decision about one page.
 
 This file is a RECORD, not a tracker. Nothing here is waiting on anybody; every
 row is settled. Where a ruling has an open remainder, the remainder is named and
@@ -268,6 +269,44 @@ the wing; both were proved by probing the function at ten instants.
 that is not fussiness: on 8 March 2026 a flat subtraction posts the Record an
 hour late, because the day is 23 hours long. Tested on both 2026 transition
 days.
+
+---
+
+## 9 - WE DO NOT HOLD BACK WHAT WE SAY WE HAVE (2026-08-18)
+
+> **"We do not hold back what we say we have. We hold back what we don't have
+> yet."**
+
+**DOCTRINE, not a note about one line.** The `_tmp/` entry in Record 002's
+manifest promised something the museum cannot show - it sat in a list of names
+with a marginal note saying its contents were readable, and there was nothing
+behind it. **A Record names only what it can produce.**
+
+**IT IS THE INVERSE OF THE PULL-BACK RULE AND THE TWO NOW MEET.** H2's rule
+governs a thing the museum HAS and is not showing yet: the picture exists, it is
+behind the stage door, and the Record's own entry is what publishes it. This
+governs a thing the museum does NOT have: it may not be named as though it did.
+Between them: **the Record may withhold, and the Record may not promise.**
+
+**WHAT IT STRUCK, IN ONE PASS:**
+
+- the `_tmp/` manifest line and its marginal note;
+- the closing line that pointed at it - *"The last entry is the only one we can
+  open. It is being reviewed."* It named "the last entry", which WAS `_tmp/`, so
+  it could not survive it;
+- from the DETAILED REPORT, the ZIP-index line, the per-file-header line, and
+  the recovered-names line. **The invented count went with them** - it was a
+  number for something the museum cannot produce, which is the doctrine's exact
+  case, and it is written down once in the round log rather than left in the
+  source where a later round could reinstate it believing it was data.
+
+**RECORD 003 IS UNTOUCHED AND IS THE REASON THE DOCTRINE IS NOT A CONTRADICTION.**
+It opens on *"One tmp folder unprotected - Contents attached"* - the day the
+museum HAS the thing. Naming it then is not a promise; it is a delivery.
+
+**FLAGGED AND NOT CORRECTED:** Record 002's DETAILED REPORT now ends
+"- Appendix 01" while the section heading below it reads "ADDENDUM 01". Both are
+Mike's, both carried as typed.
 
 ---
 
