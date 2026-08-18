@@ -529,3 +529,289 @@ being surprising. The published counts (`385` in `CLAUDE.md` and twice in
 `OPERATIONS.md`) are now **397**.
 
 **Nothing was pushed and nothing was deployed.**
+
+---
+
+# THIRD PACKET, SAME DAY — THE SHARE CARD
+
+## 11 — WHAT THE PREVIEW RESOLVED TO, MEASURED ON THE LIVE HOST
+
+`curl https://weird.baby/` — not the source tree, not the built bundle:
+
+```
+<title>Weird.Baby</title>
+<meta name="description"        content="Weird.Baby Museum. Exhibiting the MGK robots and Worth A Listen." />
+<meta property="og:type"        content="website" />
+<meta property="og:site_name"   content="Weird.Baby" />
+<meta property="og:title"       content="Weird.Baby Museum" />
+<meta property="og:description" content="A museum of weird things worth keeping. The MGK robots, and music worth a listen. No ads, no affiliate links, no cut of anything you buy from an artist." />
+<meta property="og:image"       content="/share-card.png" />
+<meta property="og:image:alt"   content="Weird.Baby" />
+<meta name="twitter:card"       content="summary_large_image" />
+<meta name="twitter:title"      content="Weird.Baby Museum" />
+<meta name="twitter:description" content="A museum of weird things worth keeping. No ads, no affiliate links, no cut of anything you buy from an artist." />
+<meta name="twitter:image"      content="/share-card.png" />
+```
+
+**ABSENT:** `og:url`, `og:image:width`, `og:image:height`, `og:image:type`,
+`twitter:image:alt`, and any `rel="canonical"` — grepped for and counted **0**.
+
+**THE DEFECT IS THE URL FORM AND THE FILE WAS NEVER MISSING.**
+`og:image` was root-relative. **The Open Graph protocol requires an absolute
+URL**; Facebook, iMessage and Slack drop a relative one rather than resolving it
+against the page. Meanwhile `https://weird.baby/share-card.png` answers **HTTP
+200, 28,159 bytes, image/png, 1200×630**. A link with no picture, caused by the
+two characters that were not there.
+
+**THE TWO DESCRIPTIONS HAD ALREADY FORKED**, which is the other thing the
+measurement showed: `og:description` and `twitter:description` were two
+different lengths of the same C4 sentence. One string serves both now.
+
+## 12 — THE IMAGE OPTIONS, WITH REAL DIMENSIONS
+
+Enumerated from **`dist/client` after `npm run build:launch`** — the launch
+bundle itself, so presence here IS proof a file is not among the 144 held out.
+
+| candidate | real size | bytes | ratio | fit for a 1.91:1 card |
+|---|---|---:|---:|---|
+| **`/share-card.png`** | **1200 × 630** | 28,159 | **1.905** | **exact. Nothing cropped.** |
+| `/robots/art/wbr-cover-logo.png` | 1200 × 1200 | 364,390 | 1.0 | square — a 1.91:1 window centre-crops it; the top of the head and the PURVEYORS line go |
+| `/WeirdBaby_PhotoID.png` | 2048 × 2048 | 739,420 | 1.0 | same crop problem, and 739 KB |
+| `/images/wb/vol1-cover.png` | 1200 × 1200 | 1,375,277 | 1.0 | album art, square, 1.3 MB |
+| `/images/wal/carsie-blanton-poster.png` | 1200 × 630 | 163,107 | 1.905 | right shape, **wrong owner** — an artist's image standing for the house |
+
+**RECOMMENDATION: `/share-card.png`.** It is purpose-built for this, it is
+already the tag's target, it is the one candidate at Facebook's exact preferred
+size, and choosing it means no new graphic and no crop. **Mike rules.**
+
+**THE ONE THING HE SHOULD KNOW BEFORE HE RULES:** that card's baked lettering
+reads *WEIRD.BABY / MUSEUM / PURVEYORS OF THE WEIRD / NO ADS · NO AFFILIATE
+LINKS · NO CUT* — the OLD description. The picture and the new text now say
+different things. **Neither is false and nothing needs redrawing**; it is simply
+two sentences where there used to be one, and it is his call whether that
+matters.
+
+**THE ROBOTS LOGO IS A REAL OPTION AND ITS COST IS THE CROP, NOT THE TASTE.** It
+is a 1200×1200 square; every platform that lays out a wide card will take a
+1.91:1 slice from the middle of it. It is also the ROBOTS wing's cover rather
+than the house's, so as the site-level card it says *this is a robots site*.
+
+## 13 — WHAT SHIPPED WITHOUT A RULING, AND WHY THAT IS NOT A CHOICE
+
+The copy (ruled) and **the URL form** (a defect). Both image tags are absolute
+now, and three tags were added:
+
+- **`og:url`** — the canonical address a share resolves to. Without it a scraper
+  keys its cached card on whatever URL it was handed (a tracking suffix, a
+  trailing-slash difference), so the same site can cache twice under two
+  identities and only one of them ever gets fixed.
+- **`og:image:width` / `:height` / `:type`** — these let a platform lay the card
+  out BEFORE it has fetched the image. **They are measured from the file in the
+  launch bundle and the register row says so**, because a platform TRUSTS them:
+  a wrong width here is worse than no width. They must be re-measured if the
+  image is ever replaced.
+
+**`name="description"` IS LEFT ALONE AND FLAGGED.** It is the search-result
+description, a different surface from the share card, and Mike ruled the card.
+It still reads *"Weird.Baby Museum. Exhibiting the MGK robots and Worth A
+Listen."* Harmonising it is a one-line change on his word.
+
+**VERIFIED IN BOTH BUNDLES**, because a launch build is a different artifact:
+all fifteen tags present in `dist/client/index.html` after `npm run build` AND
+after `npm run build:launch`, and `share-card.png` is in the launch bundle at
+1200×630. The dev build was restored afterwards.
+
+**AND ONE MEASUREMENT ERROR, CAUGHT BY BEING SURPRISING.** The first enumeration
+reported `/images/wal/jesse-welles-plate.webp` as **"1 B UNREADABLE"** — alarming
+for a file that ships on /wal. It is 357,466 bytes in both the tree and the
+bundle. **The probe was wrong twice over:** `System.Drawing` cannot read WebP, and
+the `catch` block printed `$_.Length` where PowerShell had rebound `$_` to the
+error record. Third instrument error in three packets, and the third caught the
+same way — the number did not make sense.
+
+## 14 — GATES
+
+lint **9 / 8 = baseline** · build green · **launch build green** ·
+`provenance:gate` **PASS** (3 rows pruned, 6 added, 0 surviving rows changed, 0
+chains broken) · `instory:gate` **PASS** · `docs:numbers` **PASS**.
+
+**Nothing was pushed and nothing was deployed.**
+
+
+---
+
+# FOURTH PACKET, SAME DAY — THE CARD RULED, THE SEARCH TAG, THE FOUR CAPTIONS
+
+## 15 — `/share-card.png` IS RULED, AND THE IMAGE IS NOT TOUCHED
+
+Exact 1200x630, no crop, already the tag's target. **Nothing in the file
+changed and nothing in the tag changed** — the ruling confirms what the fixed
+tag already pointed at.
+
+**THE FLAG IS RECORDED AND NOT FIXED**, on Mike's instruction: the card's own
+lettering reads *NO ADS - NO AFFILIATE LINKS - NO CUT*, which is the old
+description. **The new copy invites; the picture argues.** He owns the artwork
+and will redraw it. Ops does not touch the file.
+
+## 16 — THE SEARCH TAG JOINS THE SHARE TAG
+
+`name="description"` now carries the same sentence as `og:description` and
+`twitter:description`, character for character.
+
+**THE REGISTER PROVED THE PROPERTY RATHER THAN ASSERTING IT.** The provenance
+key is `keyOf(file, text)`, so when the third tag became the same string it
+collapsed into the SAME ROW as the other two — the sweep reported the search
+tag as neither undeclared nor stale, because there was nothing new to declare.
+**One row now stands for all three tags, and if it ever splits back into two,
+the strings have drifted.** The row says so.
+
+**TWO OF OPS' OWN COMMENTS WENT FALSE AND WERE CORRECTED IN PLACE.** The `[R1
+2026-08-02]` block described a string that no longer exists and was folded into
+the new note rather than left as a tripwire; and the note written an hour
+earlier still read *"the `name="description"` tag above still carries the R1
+wording… left alone and reported."* **That was true for about an hour.** Both
+say what happened instead.
+
+**AND IT IS THE SECOND TIME THIS TAG HAS GONE STALE BY NAMING EXHIBITS** — R1
+replaced a line advertising Hunter Root, a wing that is no longer listed. The
+new sentence describes the museum's SHAPE rather than its contents, so a wing
+opening or closing cannot falsify it a third time.
+
+## 17 — THE FOUR CAPTIONS, AND THE REPORT THAT CAME FIRST
+
+**REPORTED BEFORE ANYTHING WAS TOUCHED, WHICH THE INSTRUCTION ASKED FOR: the
+profile card has nowhere for a caption to go.** It draws exactly three things —
+the optional `img`, the `label`, and the `body` (`Exhibit.jsx`). There is no
+caption field and no unused slot.
+
+**SO EACH CAPTION IS THE FIRST LINE OF ITS OWN TILE'S BODY**, and no field was
+added to the shared component. It needed no code at all: `.vp-prof-body` has
+been `white-space: pre-line` since 2026-08-16, for Mike's four-achievement copy
+— the house's one answer to what a newline the writer typed means, shared with
+the booth's answers, the Record's deck and its section bodies. **The fifth
+surface, not a new idea.**
+
+**FIRST RATHER THAN LAST IS THE ONE JUDGED CALL.** The picture is the card's
+first element, so the line nearest it reads as its caption; the same words at
+the foot would read as a postscript to the prose.
+
+**NOT ONE CHARACTER OF THE EXISTING BODY COPY MOVED.**
+
+### THE PREFIX DUPLICATES THE LABEL, AND IT IS CARRIED AS TYPED
+
+All four captions open with the artist's name and a dash, and the tile's own
+`label` — which CSS sets in caps directly above the body — already says it.
+Measured on the built bundle:
+
+```
+P!NK                                                   <- .vp-prof-label
+P!NK - 1981 C.B. West Antler Yearbook. (same century as P!NK)
+P!NK went to Papa Weird.Baby's High School ...
+```
+
+**The P!NK card now prints the name three times.** Flagged, not stripped — the
+same loop the `Born` row ran twice, and the same standing rule: Ops does not
+drop a word from a value he supplied. **One word removes all four prefixes.**
+
+### AND THE EDIT ITSELF FOUND A HAZARD IN THE TOOLING
+
+The first pass wrote the captions with a REAL newline inside four string
+literals instead of the two-character escape, and `npm run lint` caught it as
+**`Parsing error: Unterminated string constant`** — 10 errors against a baseline
+of 9. **The cause was the shell, not the script:** this Bash tool's quoted
+heredoc (`<<'EOF'`) is documented to pass its body literally and **does not** —
+it collapses a doubled backslash, so Python received a real newline escape where
+the source said a literal one. The second repair attempt died the same way, on
+the same line, before the pattern was obvious.
+
+**THE CURE IS TO NEVER TYPE A BACKSLASH IN A HEREDOC:** `chr(92)` for a
+backslash, `chr(10)` for a newline. The third attempt used those, verified the
+result by re-reading the file from disk in the same process, and lint returned
+to **9 / 8**. **A generator that cannot round-trip its own escape characters
+will corrupt any string it writes**, and this one had already written four.
+
+## 18 — GATES AND WHAT WAS VERIFIED ON THE BUILT BUNDLE
+
+lint **9 / 8 = baseline** (after the repair) · build green ·
+`provenance:gate` **PASS** (5 rows pruned, 4 added, 0 surviving rows changed,
+0 chains broken) · `docs:numbers` **PASS**.
+
+Served from `wrangler dev` on the built bundle:
+
+- **all three description tags identical**, read back off the served HTML;
+- **all four captions present as the first line of their tile**, verbatim, on
+  the four cards that have a picture;
+- the second Steven Tyler tile (a journal entry, no object) and CURRENT PROJECTS
+  correctly have **no caption and no picture**;
+- page overflow **0**.
+
+**Nothing was pushed and nothing was deployed.**
+
+
+---
+
+# FIFTH PACKET, SAME DAY — THE PREFIX STRIPPED
+
+## 19 — HIS SECOND RULING ON THE SAME FOUR LINES, AND THE LOOP CLOSING
+
+The captions arrived opening with the artist's name and an em dash. Ops carried
+them AS TYPED for one round and flagged the duplication rather than dropping a
+word from a value he supplied. **He ruled. All four prefixes are gone.**
+
+| tile | as it ships now |
+|---|---|
+| P!NK | 1981 C.B. West Antler Yearbook. (same century as P!NK) |
+| Steven Tyler | Aerosmith setlist, Las Vegas, 31 January 2020, with the harmonica. |
+| Rod Stewart | Will return ball for Dixie Toot Live. |
+| Hunter Root | Signed setlist, Abbey Bar, 10 October 2025. |
+
+**`(same century as P!NK)` IS KEPT AND THAT DISTINCTION IS HIS, NOT OPS'** —
+*that mention is the joke, not the label.* Two mentions of the same name on one
+card, one of them a duplicate and one of them the point. A mechanical strip of
+every occurrence would have taken the joke with the label, which is the whole
+argument for flagging rather than tidying.
+
+**THE LOOP HAS NOW RUN TO COMPLETION THREE TIMES IN TWO DAYS** — `is earning` ->
+`is learning`, the `Born` row, and these four. It works for the same reason each
+time: **the flag is raised where he can see the consequence on the glass, rather
+than argued in advance.**
+
+**NOTHING ELSE CHANGED.** Not one character of the pre-existing body copy, not
+the pictures, not the `img` mechanism, not the CSS.
+
+## 20 — VERIFIED, AND THE HAZARD FROM THE LAST PACKET DID NOT RECUR
+
+The edit used `chr(8212)` for the em dash and never typed a backslash, per the
+§8 row the previous packet earned, and **verified the result by re-reading the
+file from disk in the same process before trusting it.** Lint stayed at
+**9 / 8** on the first attempt this time.
+
+Read off the built bundle at 1920px, `/wb` → About the artist:
+
+```
+P!NK          1981 C.B. West Antler Yearbook. (same century as P!NK)
+STEVEN TYLER  Aerosmith setlist, Las Vegas, 31 January 2020, with the harmonica.
+ROD STEWART   Will return ball for Dixie Toot Live.
+HUNTER ROOT   Signed setlist, Abbey Bar, 10 October 2025.
+```
+
+Each caption is the first line of its tile, the label above it no longer repeats,
+broken images **0**, page overflow **0**. The two tiles with no object — the
+second Steven Tyler and CURRENT PROJECTS — are untouched and still carry neither
+a picture nor a caption.
+
+**AND ONE OPS COMMENT WENT FALSE AND WAS CORRECTED IN PLACE.** The note above the
+`profile` array still read *"THE `NAME —` PREFIX IS HIS AND IS CARRIED AS TYPED…
+One word and the prefixes go."* One word came. It now records what happened and
+why `(same century as P!NK)` survived. **Two other "carried as typed" phrases in
+the same file were checked and left** — they describe the `Born` row and
+`is earning`, and both are still true of what they describe.
+
+## 21 — GATES
+
+lint **9 / 8 = baseline** · build green · **launch build green** ·
+`provenance:gate` **PASS** (4 rows pruned, 4 added, 0 surviving rows changed,
+0 chains broken) · `reveal:check` **PASS** · `parity:gate` **PASS** ·
+`instory:gate` **PASS** · `docs:numbers` **PASS**.
+
+**Nothing was pushed and nothing was deployed.**

@@ -11703,13 +11703,6 @@
    "c": "MIKE",
    "s": "docs/canonical/THE_CHARTER.md — the house's soul document, Papa's own"
   },
-  "6cc74cba9080940b": {
-   "f": "index.html",
-   "l": 36,
-   "t": "Weird.Baby Museum. Exhibiting the MGK robots and Worth A Listen.",
-   "c": "MIKE",
-   "s": "docs/canonical/THE_CHARTER.md — the house's soul document, Papa's own"
-  },
   "b7371461f25c968b": {
    "f": "index.html",
    "l": 49,
@@ -11726,37 +11719,10 @@
    "c": "MIKE",
    "s": "docs/canonical/THE_CHARTER.md — the house's soul document, Papa's own"
   },
-  "d73c3f66ad970c93": {
-   "f": "index.html",
-   "l": 52,
-   "t": "A museum of weird things worth keeping. The MGK robots, and music worth a listen. No ads, no affiliate links, no cut of anything you buy from an artist.",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
-  "aab311bfc1220037": {
-   "f": "index.html",
-   "l": 58,
-   "t": "/share-card.png",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
   "6f1fa20b6fe9cf3d": {
    "f": "index.html",
    "l": 55,
    "t": "summary_large_image",
-   "c": "RESTATED",
-   "r": [
-    "docs/canonical/THE_CHARTER.md"
-   ]
-  },
-  "eaff49e7e52a39fd": {
-   "f": "index.html",
-   "l": 57,
-   "t": "A museum of weird things worth keeping. No ads, no affiliate links, no cut of anything you buy from an artist.",
    "c": "RESTATED",
    "r": [
     "docs/canonical/THE_CHARTER.md"
@@ -14664,27 +14630,6 @@
    "c": "MIKE",
    "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
   },
-  "b6e049c30d67dfec": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 376,
-   "t": "P!NK went to Papa Weird.Baby's High School - Central Bucks High School West. Rumor has it she had his old locker (at least that's the rumor Papa Weird.Baby is spreading).",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
-  },
-  "0261c665bec94e9b": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 387,
-   "t": "Rod Stewart kicks soccer balls into the crowd each show. Papa Weird.Baby caught one with Rod's name written on it; must be his personal ball. Papa Weird.Baby will return it if he meets up with Rod someday.",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
-  },
-  "117332d0d4e50b39": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 393,
-   "t": "Hunter Root and Papa Weird.Baby hung out behind the bar Hunter was playing that night. Burned some time out back with the band. (Why two at once? Because Papa Weird.Baby panicked.)",
-   "c": "MIKE",
-   "s": "Mike's ABOUT THE ARTIST rewrite, supplied 2026-08-16 and carried verbatim. Two readings were flagged to him and deliberately NOT corrected: 'is earning to play' (reads as 'learning', named in his own instruction) and the Born row, whose value repeats its label."
-  },
   "592217424d938627": {
    "f": "src/data/artists/foundation.js",
    "l": 680,
@@ -15191,13 +15136,6 @@
    "c": "MIKE",
    "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" Fact-grid VALUE, a NEW row: the four wings and the date are his, unedited."
   },
-  "a3c262e6b4e08b53": {
-   "f": "src/data/artists/weird-baby.js",
-   "l": 444,
-   "t": "Steven Tyler gave his harmonica to Papa Weird.Baby from the stage in Las Vegas, NV January 2020. Then Steven tried to get Papa Weird.Baby to say something into the mic during the show. (Papa Weird.Baby panicked. Wicked awkward!!!)",
-   "c": "MIKE",
-   "s": "docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md — his copy instruction of 2026-08-17, quoted in the log in full and carried verbatim: \"Mike's words, verbatim, no smoothing.\" The first Steven Tyler tile, replacing the 08-16 text: the date is January 2020 and the parenthetical is his — \"(Papa Weird.Baby panicked. Wicked awkward!!!)\"."
-  },
   "8317d6c0d5c26940": {
    "f": "src/data/artists/weird-baby.js",
    "l": 450,
@@ -15239,6 +15177,76 @@
    "t": "Sources: Faded Glamour's 2017 piece on “Doin' Me” (the Canon sync, the Rick Rubin involvement, the Rihanna and Universal credits); Apple Music and Deezer for the discography and the Salisbury origin; a 2020 Titusville interview for the 2019 European run.",
    "c": "VERIFIED",
    "s": "the artist's own `aboutNote` Sources line, printed on the same card. [2026-08-17] ITS LAST SENTENCE WAS CUT ON MIKE'S RULING - 'His own domain is deliberately not linked - see the ledger.' The museum does not name that address anywhere a visitor can read, and DORMANT IS NOT GONE: the SOURCES row that printed this field was struck on 2026-08-17 and could return. The three citations are unchanged to the character; the provenance for why that door is shut is the [R-a 2026-08-02] comment block above `site`, which is untouched. See docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md."
+  },
+  "1d244590a7709d82": {
+   "f": "index.html",
+   "l": 91,
+   "t": "https://weird.baby/",
+   "c": "HOUSE",
+   "s": "the site's own canonical address. Protocol plumbing rather than copy: without it a scraper keys its cached card on whatever URL it was handed, so the same site can cache twice under two identities."
+  },
+  "02314869de7295ce": {
+   "f": "index.html",
+   "l": 101,
+   "t": "A free museum of weird things worth keeping. Robots arriving one day at a time, music worth a listen, and a guest book that remembers who got here early.",
+   "c": "MIKE",
+   "s": "Mike's link-preview copy, ruled 2026-08-17 and carried verbatim. ONE ROW COVERS THREE TAGS, and that is the register telling the truth about the source rather than a shortcut: the key is file+text, so `og:description`, `twitter:description` AND `name=\"description\"` collapse to this single row BECAUSE they are the same string. They were three different sentences this morning - the og/twitter pair had already forked to two lengths of the C4 wording, and the search tag carried R1's. If this row ever splits back into two, the strings have drifted. Named once, what it replaced: \"A museum of weird things worth keeping. The MGK robots, and music worth a listen. No ads, no affiliate links, no cut of anything you buy from an artist.\" and \"Weird.Baby Museum. Exhibiting the MGK robots and Worth A Listen.\" See docs/MUSEUM_RULINGS-20260817.md."
+  },
+  "a8757c414daaa907": {
+   "f": "index.html",
+   "l": 102,
+   "t": "https://weird.baby/share-card.png",
+   "c": "HOUSE",
+   "s": "the absolute address of the house's own share card (`/share-card.png`, declared in provenance/assets.json). IT IS ABSOLUTE BECAUSE THE OPEN GRAPH PROTOCOL REQUIRES IT — measured on the live host 2026-08-17, the tag served a root-relative `/share-card.png` and the platforms dropped it rather than resolving it, which is why a shared link had no picture. The file was never missing."
+  },
+  "24abe3fbb1dd18bf": {
+   "f": "index.html",
+   "l": 95,
+   "t": "1200",
+   "c": "HOUSE",
+   "s": "og:image:width. MEASURED FROM THE FILE IN THE LAUNCH BUNDLE on 2026-08-17, not declared: dist/client/share-card.png after `npm run build:launch` is 1200x630, 28,159 bytes, PNG. A platform TRUSTS these three tags and lays the card out before it fetches the image, so a wrong number here is worse than no number. RE-MEASURE IF THE IMAGE IS EVER REPLACED. See docs/MUSEUM_RULINGS-20260817.md."
+  },
+  "b457d37dfe91e317": {
+   "f": "index.html",
+   "l": 96,
+   "t": "630",
+   "c": "HOUSE",
+   "s": "og:image:height. MEASURED FROM THE FILE IN THE LAUNCH BUNDLE on 2026-08-17, not declared: dist/client/share-card.png after `npm run build:launch` is 1200x630, 28,159 bytes, PNG. A platform TRUSTS these three tags and lays the card out before it fetches the image, so a wrong number here is worse than no number. RE-MEASURE IF THE IMAGE IS EVER REPLACED. See docs/MUSEUM_RULINGS-20260817.md."
+  },
+  "2d77dccca6763ec5": {
+   "f": "index.html",
+   "l": 97,
+   "t": "image/png",
+   "c": "HOUSE",
+   "s": "og:image:type. MEASURED FROM THE FILE IN THE LAUNCH BUNDLE on 2026-08-17, not declared: dist/client/share-card.png after `npm run build:launch` is 1200x630, 28,159 bytes, PNG. A platform TRUSTS these three tags and lays the card out before it fetches the image, so a wrong number here is worse than no number. RE-MEASURE IF THE IMAGE IS EVER REPLACED. See docs/MUSEUM_RULINGS-20260817.md."
+  },
+  "da21fffdf76477cc": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 493,
+   "t": "1981 C.B. West Antler Yearbook. (same century as P!NK)\nP!NK went to Papa Weird.Baby's High School - Central Bucks High School West. Rumor has it she had his old locker (at least that's the rumor Papa Weird.Baby is spreading).",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST copy, carried verbatim, plus HIS OWN CAPTION for the photograph above it, ruled 2026-08-17 and typed as the first line of the tile. THE CAPTION IS FOLDED INTO THE BODY BECAUSE THE CARD HAS NO CAPTION SLOT and Mike ruled that four short lines do not justify a fifth field on a component five wings share; `.vp-prof-body` is `white-space: pre-line`, so a typed newline draws as a line and no code changed. THE `NAME —` PREFIX IS STRIPPED, ON HIS SECOND RULING THE SAME DAY: the tile's own `label` is set in caps directly above the body and already says the name, so the prefix was a duplicate — the P!NK card printed the name three times. Ops carried the prefixes as typed for one round and flagged them rather than dropping a word from a value he supplied; he ruled; they went. `(same century as P!NK)` IS KEPT and is not a duplicate — his ruling names it: that mention is the joke, not the label. Not one character of the pre-existing body copy moved at any point. See docs/MUSEUM_RULINGS-20260817.md."
+  },
+  "1802e0609bf29367": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 521,
+   "t": "Aerosmith setlist, Las Vegas, 31 January 2020, with the harmonica.\nSteven Tyler gave his harmonica to Papa Weird.Baby from the stage in Las Vegas, NV January 2020. Then Steven tried to get Papa Weird.Baby to say something into the mic during the show. (Papa Weird.Baby panicked. Wicked awkward!!!)",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST copy, carried verbatim, plus HIS OWN CAPTION for the photograph above it, ruled 2026-08-17 and typed as the first line of the tile. THE CAPTION IS FOLDED INTO THE BODY BECAUSE THE CARD HAS NO CAPTION SLOT and Mike ruled that four short lines do not justify a fifth field on a component five wings share; `.vp-prof-body` is `white-space: pre-line`, so a typed newline draws as a line and no code changed. THE `NAME —` PREFIX IS STRIPPED, ON HIS SECOND RULING THE SAME DAY: the tile's own `label` is set in caps directly above the body and already says the name, so the prefix was a duplicate — the P!NK card printed the name three times. Ops carried the prefixes as typed for one round and flagged them rather than dropping a word from a value he supplied; he ruled; they went. `(same century as P!NK)` IS KEPT and is not a duplicate — his ruling names it: that mention is the joke, not the label. Not one character of the pre-existing body copy moved at any point. See docs/MUSEUM_RULINGS-20260817.md."
+  },
+  "ae8db3d66d529132": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 535,
+   "t": "Will return ball for Dixie Toot Live.\nRod Stewart kicks soccer balls into the crowd each show. Papa Weird.Baby caught one with Rod's name written on it; must be his personal ball. Papa Weird.Baby will return it if he meets up with Rod someday.",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST copy, carried verbatim, plus HIS OWN CAPTION for the photograph above it, ruled 2026-08-17 and typed as the first line of the tile. THE CAPTION IS FOLDED INTO THE BODY BECAUSE THE CARD HAS NO CAPTION SLOT and Mike ruled that four short lines do not justify a fifth field on a component five wings share; `.vp-prof-body` is `white-space: pre-line`, so a typed newline draws as a line and no code changed. THE `NAME —` PREFIX IS STRIPPED, ON HIS SECOND RULING THE SAME DAY: the tile's own `label` is set in caps directly above the body and already says the name, so the prefix was a duplicate — the P!NK card printed the name three times. Ops carried the prefixes as typed for one round and flagged them rather than dropping a word from a value he supplied; he ruled; they went. `(same century as P!NK)` IS KEPT and is not a duplicate — his ruling names it: that mention is the joke, not the label. Not one character of the pre-existing body copy moved at any point. See docs/MUSEUM_RULINGS-20260817.md."
+  },
+  "2e70d943884262d5": {
+   "f": "src/data/artists/weird-baby.js",
+   "l": 543,
+   "t": "Signed setlist, Abbey Bar, 10 October 2025.\nHunter Root and Papa Weird.Baby hung out behind the bar Hunter was playing that night. Burned some time out back with the band. (Why two at once? Because Papa Weird.Baby panicked.)",
+   "c": "MIKE",
+   "s": "Mike's ABOUT THE ARTIST copy, carried verbatim, plus HIS OWN CAPTION for the photograph above it, ruled 2026-08-17 and typed as the first line of the tile. THE CAPTION IS FOLDED INTO THE BODY BECAUSE THE CARD HAS NO CAPTION SLOT and Mike ruled that four short lines do not justify a fifth field on a component five wings share; `.vp-prof-body` is `white-space: pre-line`, so a typed newline draws as a line and no code changed. THE `NAME —` PREFIX IS STRIPPED, ON HIS SECOND RULING THE SAME DAY: the tile's own `label` is set in caps directly above the body and already says the name, so the prefix was a duplicate — the P!NK card printed the name three times. Ops carried the prefixes as typed for one round and flagged them rather than dropping a word from a value he supplied; he ruled; they went. `(same century as P!NK)` IS KEPT and is not a duplicate — his ruling names it: that mention is the joke, not the label. Not one character of the pre-existing body copy moved at any point. See docs/MUSEUM_RULINGS-20260817.md."
   }
  }
 }

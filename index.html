@@ -29,12 +29,24 @@
          third party anything.
          THE ALPHABETICAL-ORDER NOTE WENT WITH THE URL: it was a constraint of
          the css2 API, and there is no css2 URL any more. -->
-    <!-- [R1 2026-08-02] BROKEN, mechanical cure applied. This said "Currently
-         exhibiting Hunter Root" - a wing that is now REFERENCE-HELD and
-         unlisted. It is the description every share, preview and search
-         result shows, so the site was advertising the one exhibit it does
-         not list. Named the two wings that are actually on. -->
-    <meta name="description" content="Weird.Baby Museum. Exhibiting the MGK robots and Worth A Listen." />
+    <!-- ═══ [2026-08-17] ONE SENTENCE ON BOTH SURFACES — MIKE'S RULING ══════
+         The search-result description and the share card were saying different
+         things about the same museum. **Doctrine 17's exact failure mode**: a
+         standing statement of what this place IS, stated twice, is two
+         statements that will disagree — and these already had.
+         Named once (Doctrine 24), what this replaces: "Weird.Baby Museum.
+         Exhibiting the MGK robots and Worth A Listen." (R1, 2026-08-02, which
+         itself replaced a line advertising a wing that is no longer listed —
+         the second time this tag has gone stale by naming exhibits.)
+         AND THE NEW SENTENCE IS DURABLE IN A WAY BOTH OF THOSE WERE NOT: it
+         describes the museum's SHAPE rather than its current contents, so a
+         wing opening or closing cannot falsify it.
+         IT IS THE SAME STRING AS `og:description` AND `twitter:description`
+         BELOW, character for character. There is no build step that could
+         hoist it to a constant in a static shell, so the thing that keeps them
+         together is this note and the register rows they share. If one is ever
+         edited, edit all three. -->
+    <meta name="description" content="A free museum of weird things worth keeping. Robots arriving one day at a time, music worth a listen, and a guest book that remembers who got here early." />
 
     <!-- [C4 2026-08-02] SHARE TAGS - the handshake before the email.
          An artist who is sent a link sees THIS before they see the site, and
@@ -47,16 +59,62 @@
          cannot vary by route. Doing it properly needs per-route rendering at
          the edge. What ships is one honest site-level card instead of twelve
          wrong ones. -->
+    <!-- ═══ [2026-08-17] THE CARD HAD NO PICTURE, AND THE REASON WAS THE URL
+             FORM RATHER THAN A MISSING FILE ══════════════════════════════════
+         MEASURED ON THE LIVE HOST, not read here: `curl https://weird.baby/`
+         served `og:image` as `/share-card.png` — a ROOT-RELATIVE path. **The
+         Open Graph protocol requires an absolute URL**, and Facebook, iMessage
+         and Slack all drop a relative one rather than resolving it against the
+         page. The file was never missing: `https://weird.baby/share-card.png`
+         answers 200 with a 1200x630 PNG, and it is in the launch bundle.
+         **A link with no picture, caused by the two characters that were not
+         there.** Both image tags are absolute now.
+
+         THREE TAGS ADDED, AND EACH EARNS ITS LINE.
+         `og:url` — the canonical address a share resolves to. Without it a
+         scraper keys the card on whatever URL it was handed (a tracking suffix,
+         a trailing slash difference), so the same site can cache twice under
+         two identities and only one of them gets fixed.
+         `og:image:width` / `og:image:height` / `og:image:type` — these let a
+         platform lay the card out BEFORE it has fetched the image. They are
+         also the honest answer to the crop question: 1200x630 is 1.91:1, which
+         is what Facebook lays out for, so nothing of this card is cut.
+         **THE NUMBERS ARE MEASURED FROM THE FILE IN THE LAUNCH BUNDLE** and
+         must be re-measured if the image is ever replaced — a wrong width here
+         is worse than none, because the platform trusts it.
+
+         THE COPY IS MIKE'S, RULED 2026-08-17, and it replaces the C4 wording.
+         Named once (Doctrine 24): "A museum of weird things worth keeping. The
+         MGK robots, and music worth a listen. No ads, no affiliate links, no
+         cut of anything you buy from an artist." (twitter's was a shorter cut
+         of the same.) **ONE STRING NOW SERVES BOTH**, so the two cannot fork —
+         which they already had, at two different lengths.
+
+         AND THE THIRD STRING IS NO LONGER A THIRD STRING. This note used to
+         end "the `name="description"` tag above still carries the R1 wording…
+         left alone and reported" — that was true for about an hour. Mike ruled
+         the search surface onto the same sentence, so all three now match
+         character for character. **Edit one and you must edit all three;**
+         a static shell has no constant to hoist them into.
+
+         PER-ROUTE TITLES ARE STILL NOT HERE — C4's note below the fold stands.
+         This is one shell serving twelve routes; one honest site-level card
+         beats twelve wrong ones. -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Weird.Baby" />
+    <meta property="og:url" content="https://weird.baby/" />
     <meta property="og:title" content="Weird.Baby Museum" />
-    <meta property="og:description" content="A museum of weird things worth keeping. The MGK robots, and music worth a listen. No ads, no affiliate links, no cut of anything you buy from an artist." />
-    <meta property="og:image" content="/share-card.png" />
-    <meta property="og:image:alt" content="Weird.Baby" />
+    <meta property="og:description" content="A free museum of weird things worth keeping. Robots arriving one day at a time, music worth a listen, and a guest book that remembers who got here early." />
+    <meta property="og:image" content="https://weird.baby/share-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="Weird.Baby Museum" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Weird.Baby Museum" />
-    <meta name="twitter:description" content="A museum of weird things worth keeping. No ads, no affiliate links, no cut of anything you buy from an artist." />
-    <meta name="twitter:image" content="/share-card.png" />
+    <meta name="twitter:description" content="A free museum of weird things worth keeping. Robots arriving one day at a time, music worth a listen, and a guest book that remembers who got here early." />
+    <meta name="twitter:image" content="https://weird.baby/share-card.png" />
+    <meta name="twitter:image:alt" content="Weird.Baby Museum" />
   </head>
   <body>
     <div id="root"></div>

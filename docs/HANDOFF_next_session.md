@@ -5,7 +5,33 @@ Rewritten 2026-08-17 at the close of COPY + THE RECORD LAYOUT. Everything below
 Session-scoped context only; process and standing facts live in
 `docs/canonical/OPERATIONS.md` and `CLAUDE.md`, not here.
 
-**Read `docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md` first, then
+**READ `docs/MUSEUM_RULINGS-20260817.md` BEFORE YOU RE-OPEN ANYTHING.** Seven of
+Mike's decisions of this day in one place:
+
+1. **The Record layout is variant `b`** — a and a+b rejected after a rendered
+   comparison, and deleted rather than left dormant.
+2. **Hashtags are NO on museum pages.** They belong in social posts. It is a
+   ruling about a SURFACE, not about hashtags.
+3. **SEO deferred to ~30 Records, and the split is the point** — the robots
+   fiction will not rank and chasing it is wasted; but *Papa Weird.Baby*, *the
+   Weird.Baby Foundation* and *the album* should own their own names.
+4. **The spam note struck in all three places** (and a fourth that was dormant —
+   *dormant is not gone*), with `findmikeymike.com` kept in the ledger comment
+   only.
+5. **The four artifact photographs are museum-owned, class `MIKE`** — no gift
+   shop, and no Ops-written captions.
+6. **The link-preview copy**, now on all three description tags.
+7. **`/share-card.png` is the share image and the file is not to be altered** —
+   a flag against its lettering is recorded and is Mike's to redraw.
+
+**HIS CAPTIONS ARRIVED AND ARE ON THE TILES** (his words, verbatim), which is
+the one thing in that list that moved after it was written: rule 5 says Ops
+writes none, and these are his.
+
+A ruling is not an open action, so none of them is in the register; where one
+left a remainder, the remainder is linked from that file.
+
+**Then `docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md`, then
 `docs/MUSEUM_WALKTHROUGH_LOG-20260817.md`.** The walkthrough log's first six
 sections are still the things a round that skips them gets wrong. The previous
 day's log, `docs/MUSEUM_REMOTE_CONTROL_LOG-20260816.md`, is still current for
@@ -100,6 +126,38 @@ declarer left — Mike struck the one that existed. Its builder line survives.
 Mike's verdict, favicons and /wal covers included. It is not in the packet gate
 list, for the reason `facts:gate` is not (Q-b). The four photographs join the 35
 already waiting: register row **M22**.
+
+---
+
+## 0d — THE SHARE CARD, 2026-08-17
+
+**THE LINK HAD NO PICTURE AND THE FILE WAS NEVER MISSING.** Measured on the LIVE
+host, not read from source: `og:image` was served as **`/share-card.png`** — a
+root-relative path. **Open Graph requires an absolute URL**, and Facebook,
+iMessage and Slack drop a relative one rather than resolving it. Two characters.
+
+Fixed in `index.html`: both image tags absolute, plus **`og:url`** (without it a
+scraper keys its cache on whatever URL it was handed, so one site can cache twice
+under two identities) and **`og:image:width` / `:height` / `:type`**, measured
+from the file in the launch bundle so a platform can lay the card out before it
+fetches the image.
+
+**THE IMAGE IS RULED: `/share-card.png`, and the file is not to be altered.**
+1200×630 exactly, 28 KB, **verified present in `dist/client` after
+`npm run build:launch`**, so it is not one of the 144 held files. The options and
+their real dimensions are in the round log.
+**A FLAG IS RECORDED AGAINST IT AND IS NOT OPS' TO FIX:** the card's own
+lettering reads *NO ADS · NO AFFILIATE LINKS · NO CUT*, the OLD description —
+**the new copy invites and the picture argues.** Mike owns the artwork and will
+redraw it. **Do not alter the image.**
+**AND ALL THREE DESCRIPTION TAGS ARE ONE STRING NOW** — `og:`, `twitter:` and
+the search-result `name="description"`, on his ruling. They share ONE register
+row, because the provenance key is file+text; if that row ever splits into two,
+the strings have drifted.
+
+**FACEBOOK CACHES PREVIEWS HARD.** Mike is not posting for two days, so this
+wants to be right before the first fetch. If it is ever wrong after a share, the
+Sharing Debugger's *Scrape Again* is the only way to clear it.
 
 ---
 
@@ -251,23 +309,23 @@ _backup_weird-baby_before-W-a-20260816.js
 
 ## 7 — THE WORKING TREE, AS THIS ROUND LEFT IT
 
-**[2026-08-17] `0ee5d40` CARRIES PACKET ONE. PACKET TWO IS UNCOMMITTED AND IS
-WHAT NEEDS A DEPLOY.** Outstanding when this was written:
+**[2026-08-17] MIKE COMMITTED TWICE MID-SESSION. `0ee5d40` carries packet one
+(the copy round); `7371d43` carries packet two (Record layout b, the spam note,
+the Born stutter, the four photographs). Packet three — the share card — was
+uncommitted when this line was typed:**
 
 ```
- M src/routes/exhibit/Exhibit.jsx        the optional img on a profile card
- M src/routes/exhibit/Exhibit.css        variant b + .vp-prof-plate
- M src/data/artists/weird-baby.js        4 img fields, the Born row
- M src/data/artists/worth-a-listen.js    the records note, aboutNote, 2 comments
- M src/data/artists/worth-a-listen-facts.js   the domain fact deleted
- M tools/asset-table.mjs                 SKIP_PATH
- M provenance/{register,assets,asset-table}.json
- M docs/… (log, handoff, OPEN_ACTIONS, OPEN_ACTIONS_CLOSED, BACKLOG, OPERATIONS)
-?? public/images/wb/ × 4 photographs
+ M index.html                    the og:/twitter: block, absolute URLs, og:url, dimensions
+ M provenance/register.json      3 pruned, 6 added
+ M docs/HANDOFF_next_session.md  this file
+ M docs/MUSEUM_COPY_AND_RECORD_LAYOUT_LOG-20260817.md
+?? docs/MUSEUM_RULINGS-20260817.md
 ```
 
-**Run `git status --short` — the paragraph below about `1b92276` describes the
-walkthrough commit, and the line above describes a minute that has passed.**
+**THAT IS THREE HANDOFF SENTENCES ABOUT THE TREE IN ONE DAY THAT WENT FALSE
+WHILE THEY WERE BEING WRITTEN.** §1's rule is the only reliable one: **run
+`git log --oneline -3` and `git status --short` and believe those.** The
+paragraph below about `1b92276` describes the walkthrough commit, not the tree.
 
 **AT THE WALKTHROUGH'S CLOSE THE TREE WAS CLEAN.** All of it is in `1b92276`. What that commit contains,
 recorded because the diff is the shape of the round rather than a file list:

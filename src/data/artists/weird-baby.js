@@ -458,10 +458,40 @@ const spine = [
              PROJECTS is a plan, and neither is an object anybody owns. The
              renderer's `img` is optional precisely so a card can be text. */
           profile: [
+            /* ═══ [2026-08-17] THE FOUR CAPTIONS, HIS WORDS, FOLDED INTO THE
+                   TILE TEXT — THERE IS NOWHERE ELSE FOR THEM TO GO ═══════════
+               A profile card draws exactly three things: the optional `img`,
+               the `label`, and the `body`. **There is no caption slot**, and
+               Mike's instruction was explicit that four short lines do not
+               justify a fifth field on a component five wings share. So each
+               caption is the FIRST LINE of its own tile's body, typed with a
+               newline after it.
+               IT NEEDS NO CODE AT ALL. `.vp-prof-body` has been
+               `white-space: pre-line` since 2026-08-16, for his four-achievement
+               copy — the house's one answer to what a newline the writer typed
+               means, shared with the booth's answers, the Record's deck and its
+               section bodies. **The fifth surface, not a new idea.**
+               FIRST RATHER THAN LAST, WHICH IS THE ONE JUDGED CHOICE: the
+               picture is the card's first element, so the line nearest it reads
+               as the caption of it. The same words at the foot would read as a
+               postscript to the prose.
+               **THE `NAME —` PREFIX IS STRIPPED, ON HIS RULING, AND THE LOOP
+               THAT PRODUCED IT IS THE POINT.** Each caption arrived opening with
+               the artist's name and an em dash — and the tile's own `label`,
+               which CSS sets in caps directly above the body, already says it.
+               The P!NK card printed the name three times. Ops carried the
+               prefixes AS TYPED for one round and flagged them rather than
+               dropping a word from a value he supplied; he ruled; they are gone.
+               **Same loop as the `Born` row, and it works because the flag is
+               raised where he can see the consequence, not argued in advance.**
+               `(same century as P!NK)` IS KEPT AND IS NOT A DUPLICATE — his
+               ruling names it: that mention is the joke, not the label.
+               NOT ONE CHARACTER OF THE EXISTING BODY COPY MOVED. */
             { label: "P!NK",
               img: "/images/wb/cb-west-1981-antler.jpg",
               body:
-                "P!NK went to Papa Weird.Baby's High School - Central Bucks "
+                "1981 C.B. West Antler Yearbook. (same century as P!NK)\n"
+                + "P!NK went to Papa Weird.Baby's High School - Central Bucks "
                 + "High School West. Rumor has it she had his old locker (at "
                 + "least that's the rumor Papa Weird.Baby is spreading)." },
             /* ═══ [2026-08-17b] HIS REWRITE, AND A SECOND TILE UNDER THE SAME
@@ -488,7 +518,9 @@ const spine = [
             { label: "Steven Tyler",
               img: "/images/wb/steven-tyler-setlist-harmonica.jpg",
               body:
-                "Steven Tyler gave his harmonica to Papa Weird.Baby from the "
+                "Aerosmith setlist, Las Vegas, 31 January 2020, "
+                + "with the harmonica.\n"
+                + "Steven Tyler gave his harmonica to Papa Weird.Baby from the "
                 + "stage in Las Vegas, NV January 2020. Then Steven tried to "
                 + "get Papa Weird.Baby to say something into the mic during the "
                 + "show. (Papa Weird.Baby panicked. Wicked awkward!!!)" },
@@ -500,14 +532,16 @@ const spine = [
             { label: "Rod Stewart",
               img: "/images/wb/rod-stewart-signed-ball.jpg",
               body:
-                "Rod Stewart kicks soccer balls into the crowd each show. Papa "
+                "Will return ball for Dixie Toot Live.\n"
+                + "Rod Stewart kicks soccer balls into the crowd each show. Papa "
                 + "Weird.Baby caught one with Rod's name written on it; must be "
                 + "his personal ball. Papa Weird.Baby will return it if he "
                 + "meets up with Rod someday." },
             { label: "Hunter Root",
               img: "/images/wb/hunter-root-signed-setlist.jpg",
               body:
-                "Hunter Root and Papa Weird.Baby hung out behind the bar "
+                "Signed setlist, Abbey Bar, 10 October 2025.\n"
+                + "Hunter Root and Papa Weird.Baby hung out behind the bar "
                 + "Hunter was playing that night. Burned some time out back "
                 + "with the band. (Why two at once? Because Papa Weird.Baby "
                 + "panicked.)" },
