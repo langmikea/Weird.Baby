@@ -48,18 +48,80 @@ export const RECORD_TZ = "America/New_York";
 /** the cookie the admin door sets — its own name, for its own reason (§8) */
 export const PREVIEW_COOKIE = "wb_record";
 
+/* ===========================================================================
+   [2026-08-17] THE RECORD DAY TURNS OVER AT 17:00, NOT AT MIDNIGHT
+   ===========================================================================
+   MIKE'S RULING: **Records post at 17:00 America/New_York on their day.**
+   Record N becomes visible at 5pm on day N. Only the HOUR changes; `RECORD_TZ`
+   is untouched and the ruling above it still governs WHERE the clock is.
+
+   WHAT THIS IS NOT: it is not a change to any date in the data. Every entry
+   still carries the calendar day it belongs to and every comparison below is
+   still a string comparison between ISO day strings. What moved is the instant
+   at which THIS FUNCTION starts returning the new day — so the whole system
+   downstream (the page filter, the asset withholding, `/api/record`) follows
+   without any of them learning about an hour.
+
+   ═══ WHY THE WALL CLOCK AND NOT A 17-HOUR SUBTRACTION ══════════════════════
+   The obvious implementation is `FMT.format(now - 17h)`, and it is wrong twice
+   a year. Absolute-time arithmetic does not survive a DST transition: on the
+   March day that is 23 hours long, backing up 17 real hours from 17:00 EDT
+   lands at 23:00 the previous day rather than 00:00 the same one, and the
+   Record would appear at 18:00 instead of 17:00.
+   SO THE RULE IS READ OFF THE WALL CLOCK, WHICH IS WHERE MIKE STATED IT: ask
+   the zone what date AND hour it is, and if the hour is before 17:00, the
+   Record's day is still yesterday. That is exactly "5pm local" on every day of
+   the year, including both transition days, because the zone does the work.
+
+   THE ONE CONVERSION IS CALENDAR ARITHMETIC AND IS ZONE-FREE. Rolling the date
+   back a day uses `Date.UTC` on the already-extracted Y/M/D as a bare counter —
+   no timezone is involved in it, so it cannot reintroduce the bug this file's
+   own header warns about ("parsing them back into moments to compare them is
+   how a timezone bug gets in"). The moment was already resolved by `Intl`;
+   this only walks the calendar.
+
+   `hour12: false` CAN YIELD "24" FOR MIDNIGHT in some ICU builds, which is why
+   `% 24` is here — the same guard `zoneOffsetMs` below already carries, for the
+   same reason.
+   =========================================================================== */
+
+/** the hour, on the Record's own wall clock, at which day N becomes visible */
+export const RECORD_HOUR = 17;
+
 /* `en-CA` formats as YYYY-MM-DD, which is the shape `recordDay()` emits and the
    shape an entry's `date` is written in, so the comparison below is a string
    comparison and needs no Date at all. Deliberate: every date in this system is
    an ISO day string, and parsing them back into moments to compare them is how
-   a timezone bug gets in. */
+   a timezone bug gets in. The HOUR is read from the same formatter so there is
+   one zone lookup and no chance of the two disagreeing. */
 const FMT = new Intl.DateTimeFormat("en-CA", {
   timeZone: RECORD_TZ, year: "numeric", month: "2-digit", day: "2-digit",
+  hour: "2-digit", hour12: false,
 });
 
-/** the calendar day it is *in the Record's own timezone*, as `YYYY-MM-DD` */
+/** the Record day it is *in the Record's own timezone*, as `YYYY-MM-DD` —
+    still yesterday until RECORD_HOUR on the museum's wall clock */
 export function todayInRecordTz(now = new Date()) {
-  return FMT.format(now);
+  const p = Object.fromEntries(
+    FMT.formatToParts(now).map((x) => [x.type, x.value]));
+  const y = +p.year, m = +p.month, d = +p.day;
+  if (+p.hour % 24 >= RECORD_HOUR) {
+    return p.year + "-" + p.month + "-" + p.day;
+  }
+  /* before the hour: the Record's day is still the previous calendar day */
+  return new Date(Date.UTC(y, m - 1, d) - 86400000).toISOString().slice(0, 10);
+}
+
+/** epoch-ms of the instant `day`'s Record becomes visible: RECORD_HOUR on that
+    calendar day, in the Record's own zone. Built from `dayStartInRecordTz`
+    below so there is one zone conversion in this file and not two. */
+export function recordVisibleAt(day, tz = RECORD_TZ) {
+  const start = dayStartInRecordTz(day, tz);
+  /* re-read the offset AT the target hour, so a day whose DST transition falls
+     between 00:00 and 17:00 still resolves to 17:00 on the wall clock */
+  const naive = start + RECORD_HOUR * 3600000;
+  return naive + (zoneOffsetMs(new Date(start), tz)
+                  - zoneOffsetMs(new Date(naive), tz));
 }
 
 /* ═══ [2026-08-16] THE INSTANT A CALENDAR DAY BEGINS, IN THE RECORD'S ZONE ═══

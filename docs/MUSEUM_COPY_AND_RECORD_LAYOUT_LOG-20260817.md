@@ -815,3 +815,129 @@ lint **9 / 8 = baseline** · build green · **launch build green** ·
 `instory:gate` **PASS** · `docs:numbers` **PASS**.
 
 **Nothing was pushed and nothing was deployed.**
+
+
+---
+
+# SIXTH PACKET, SAME DAY — THE 17:00 BOUNDARY
+
+**URGENT, and the urgency was real:** deployed after 17:00 Monday this is safe;
+deployed before it, it would have blanked the wing. See §24.
+
+## 22 — WHAT CHANGED, AND WHAT DELIBERATELY DID NOT
+
+`todayInRecordTz()` in `reveal/record-clock.mjs` returns the previous calendar
+day until `RECORD_HOUR` (17) on the museum's own wall clock. **That is the whole
+change.** `RECORD_TZ` is untouched, no date in the data moved, and every
+comparison downstream is still a string comparison between ISO day strings — the
+page filter, `assetWithheld`, `wingOpenOn` and `/api/record` all follow without
+any of them learning about an hour.
+
+**`dayStartInRecordTz` WAS LEFT ALONE ON PURPOSE.** It has exactly one caller —
+`WbHome.jsx`'s `DOORS_OPEN_AT`, the lobby countdown to the doors opening at 00:00
+Monday. **That happened, and Record 001's own text calls it "12:00 am Monday
+morning".** Moving it would have retconned a countdown to an event in the past
+and contradicted canon. A new `recordVisibleAt(day)` was added beside it for the
+17:00 instant, so the two questions have two functions instead of one function
+with a changed meaning.
+
+**AND THE SECOND COPY OF THE DAY COMPUTATION IS GONE.** `src/lib/record-clock.js`
+built its own `Intl.DateTimeFormat` in `RECORD_TZ` for the no-worker fallback.
+Harmless at midnight; **a seventeen-hour bug the moment the boundary moved** — the
+worker would have held Record N until 17:00 while a page that lost the injection
+drew it from 00:00. It calls the shared function now. **The failure would have
+appeared only on the path that is already degraded**, which is the worst possible
+place for a second source of truth.
+
+## 23 — THE BOUNDARY IS WALL-CLOCK, AND THE DST ARGUMENT IS TESTED
+
+The obvious implementation is `format(now - 17h)`. It is wrong twice a year:
+absolute-time arithmetic does not survive a DST transition. Tested on both 2026
+transition days:
+
+```
+2026-03-08   visible at 17:00:00 EDT = 2026-03-08T21:00:00Z
+             a flat -17h shift would have said 2026-03-07  -> AN HOUR LATE
+2026-11-01   visible at 17:00:00 EST = 2026-11-01T22:00:00Z
+             a flat -17h shift agrees on this one
+```
+
+So the rule is read off the wall clock, which is where Mike stated it: ask the
+zone for the date AND the hour, and if the hour is before 17:00 the Record's day
+is still yesterday. The only conversion is calendar arithmetic on already-
+extracted Y/M/D via `Date.UTC` — **no zone is involved in it**, so it cannot
+reintroduce the bug this file's own header warns about.
+
+## 24 — VERIFICATION, AND HOW
+
+**(1) WHEN RECORD 002 BECOMES VISIBLE.** Probed by calling the real module at
+four instants either side of the boundary:
+
+```
+Tue Aug 18 2026 16:58:00 EDT  ->  today = 2026-08-17   002 hidden
+Tue Aug 18 2026 16:59:59 EDT  ->  today = 2026-08-17   002 hidden
+Tue Aug 18 2026 17:00:00 EDT  ->  today = 2026-08-18   002 VISIBLE
+Tue Aug 18 2026 17:01:00 EDT  ->  today = 2026-08-18   002 VISIBLE
+```
+
+**Record 002 becomes visible at 2026-08-18 17:00:00 EDT = 2026-08-18T21:00:00Z.**
+
+**(2) RECORD 001 IS VISIBLE RIGHT NOW.** Read off the LIVE WORKER serving the
+LAUNCH bundle, not from source: `/api/record` returns
+`{"today":"2026-08-17","tz":"America/New_York"}`, and `/robots/record` in the
+browser draws **exactly one index row — `001 MON INITIAL LAUNCH`**.
+
+**AND THE WINDOW THAT MADE THIS URGENT IS MEASURED RATHER THAN ASSERTED.**
+Probed at ten instants: between 00:00 and 17:00 on Monday the new rule sets today
+to **2026-08-16**, which is before 001's own date AND before
+`__WB_RECORD_FIRST_DAY__` (`2026-08-17`, baked from the earliest entry) — so
+**001 would have vanished and `wingOpenOn()` would have read the /robots wing as
+not yet open.** From 17:00 Monday onward `today >= 2026-08-17` for good. It is
+21:16 Monday. **Deploying now is safe; the same change this morning would have
+shut the wing.**
+
+**(3) RECORD 002 CONTENT IN THE BUILT LAUNCH BUNDLE — AND THE HONEST ANSWER IS
+NOT "UNREACHABLE".**
+
+- **The render is withheld:** 002 draws nothing, proved on the launch bundle in a
+  browser (one row, and `Incoming Server Data Assault has ceased` is **not** in
+  `document.body.textContent`).
+- **The bytes are present:** that same string IS in
+  `dist/client/assets/index-DE7vGOC1.js`. **This is the documented, accepted
+  limit `CH5-a`**, and `src/lib/record-clock.js` states it in its own words —
+  *"the honest description of this mechanism is 'the Record does not show you the
+  future', never 'the future is not there'."* **Tonight's ruling neither improves
+  nor worsens it**; it only moves when the render flips. A visitor with devtools
+  could read 002 before 17:00 tomorrow, exactly as they could before 00:00
+  tomorrow yesterday.
+- **The asset half has no such hole and is not exercised here:** the worker 404s
+  a file a future entry names, and **Record 002 declares no `assets` array**, so
+  there is nothing for it to withhold.
+
+**(4) THE BOUNDARY IS COMPUTED PER REQUEST, NOT BAKED.** Three ways:
+
+- **source:** `const recordToday = todayInRecordTz();` sits inside
+  `async fetch(request, env)`;
+- **the built worker:** `todayInRecordTz()` is the only call in the first 700
+  characters of `fetch()`, and the injection is the template
+  `__WB_TODAY__=${JSON.stringify(today)}` rather than a literal;
+- **empirically:** two requests three seconds apart returned
+  `__WB_NOW__=1787015939319` and `1787015942412` — **a 3,093 ms difference, so
+  the clock is read on each request.**
+
+The one hard-coded `2026-08-17` in the worker is `__WB_RECORD_FIRST_DAY__`, the
+wing-open gate, derived at build from the earliest entry's own day. It is not
+"today" and it is not affected.
+
+**KNOWN AND NOT CHASED, per the instruction:** a tab left open across the
+boundary needs a reload, because `TODAY` is a module-load const. Accepted for
+the midnight boundary; no worse at 5pm.
+
+## 25 — GATES
+
+lint **9 / 8 = baseline** · build green · **launch build green** ·
+`provenance:gate` **PASS** · `reveal:check` **PASS** · `parity:gate` **PASS** ·
+`instory:gate` **PASS** · `docs:numbers` **PASS**. No visitor-facing string
+changed, so the register is untouched.
+
+**Nothing was pushed and nothing was deployed.**

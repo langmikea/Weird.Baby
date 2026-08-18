@@ -1,7 +1,7 @@
 # RULINGS — 2026-08-17
 
 **Mike's decisions of this day, in one place, so a later round does not re-open
-one of them as if it were an open question.**
+one of them as if it were an open question.** Eight of them.
 
 This file is a RECORD, not a tracker. Nothing here is waiting on anybody; every
 row is settled. Where a ruling has an open remainder, the remainder is named and
@@ -230,6 +230,44 @@ the joke, not the label.* The two look alike and only one of them is a duplicate
 to completion - `is earning` -> `is learning`, the `Born` row, and now these four.
 It works because the flag is raised where he can SEE the consequence on the
 glass, rather than argued in advance.
+
+---
+
+## 8 - RECORDS POST AT 17:00, NOT AT MIDNIGHT
+
+> **Records post at 17:00 America/New_York on their day. Record N becomes
+> visible at 5pm on day N.**
+
+**ONLY THE HOUR CHANGED.** `RECORD_TZ` is untouched and still
+`America/New_York`; the ruling above it about WHERE the clock is still governs.
+No date in the data moved, and every comparison in the system is still a string
+comparison between ISO day strings - what moved is the instant at which
+`todayInRecordTz()` starts returning the new day, so the page filter, the asset
+withholding, the wing-open gate and `/api/record` all follow without any of them
+learning about an hour.
+
+**WHAT IT GOVERNS AND WHAT IT DOES NOT:**
+
+- **002 onward.** Record 002 becomes visible **Tuesday 18 August 2026 at
+  17:00:00 EDT = 2026-08-18T21:00:00Z**.
+- **Record 001 already posted at 00:00 Monday. That happened and stays.** Not
+  backdated, not hidden.
+- **Record 001's own text says the site went live "at 12:00 am Monday
+  morning". That is canon and is untouched.**
+- **/robots opened at 00:00 Monday and stays open.**
+
+**THE ONE THING THAT MADE THIS URGENT, MEASURED:** the new rule makes "today"
+the previous calendar day between 00:00 and 17:00. Applied on Monday MORNING it
+would have set today to 2026-08-16 - which is before Record 001's own date and
+before `__WB_RECORD_FIRST_DAY__` - so **Record 001 would have vanished and the
+/robots wing would have read as not yet open.** That window closed at 17:00
+Monday. Deploying after it is safe and deploying before it would have blanked
+the wing; both were proved by probing the function at ten instants.
+
+**THE BOUNDARY IS READ OFF THE WALL CLOCK, NOT BY SUBTRACTING 17 HOURS**, and
+that is not fussiness: on 8 March 2026 a flat subtraction posts the Record an
+hour late, because the day is 23 hours long. Tested on both 2026 transition
+days.
 
 ---
 

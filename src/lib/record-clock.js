@@ -28,7 +28,7 @@
 // The asset half (A3) has no such hole: `src/worker.js` refuses the FILE a future
 // entry names, and a file the worker refuses is not in the page at all.
 
-import { RECORD_TZ, visibleEntries } from "../../reveal/record-clock.mjs";
+import { RECORD_TZ, RECORD_HOUR, todayInRecordTz, visibleEntries } from "../../reveal/record-clock.mjs";
 import { STAGE } from "./placement.js";
 
 /* Read once, at module load, from what the worker injected. `globalThis` rather
@@ -61,13 +61,27 @@ export const PREVIEWING_ALL = G.__WB_RECORD_ALL__ === true;
                        Record is blank because one header went missing. Showing
                        up to today by a clock a visitor could lie about is a
                        smaller failure than showing nothing to everybody. */
+/* [2026-08-17] IT CALLS THE SHARED FUNCTION NOW RATHER THAN REBUILDING THE
+   FORMATTER, AND THAT IS THE 17:00 RULING ARRIVING FOR FREE. This fallback used
+   to construct its OWN `Intl.DateTimeFormat` in `RECORD_TZ` — a second copy of
+   the day computation, which was harmless while the boundary was midnight and
+   would have been a seventeen-hour bug the moment it was not: the worker would
+   have held Record N until 17:00 while a page that lost the injection drew it
+   from 00:00. **The failure would have shown up only on the path that is
+   already broken**, which is the worst place for a second source of truth.
+   `RECORD_TZ` is still imported because the catch below still names it in prose,
+   and `RECORD_HOUR` because the catch has to approximate it. */
 const browserToday = () => {
   try {
-    return new Intl.DateTimeFormat("en-CA", {
-      timeZone: RECORD_TZ, year: "numeric", month: "2-digit", day: "2-digit",
-    }).format(new Date());
+    return todayInRecordTz(new Date());
   } catch {
-    return new Date().toISOString().slice(0, 10);
+    /* Intl itself is unavailable — no zone support at all, so this cannot be
+       right, only close. Shifting UTC by RECORD_HOUR approximates "5pm in New
+       York" to within the zone offset; it is a last resort under a last resort
+       (no worker AND no Intl) and is written down rather than left to look
+       deliberate. */
+    return new Date(Date.now() - RECORD_HOUR * 3600000)
+      .toISOString().slice(0, 10);
   }
 };
 

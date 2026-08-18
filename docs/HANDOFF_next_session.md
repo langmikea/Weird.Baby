@@ -5,7 +5,7 @@ Rewritten 2026-08-17 at the close of COPY + THE RECORD LAYOUT. Everything below
 Session-scoped context only; process and standing facts live in
 `docs/canonical/OPERATIONS.md` and `CLAUDE.md`, not here.
 
-**READ `docs/MUSEUM_RULINGS-20260817.md` BEFORE YOU RE-OPEN ANYTHING.** Seven of
+**READ `docs/MUSEUM_RULINGS-20260817.md` BEFORE YOU RE-OPEN ANYTHING.** Eight of
 Mike's decisions of this day in one place:
 
 1. **The Record layout is variant `b`** — a and a+b rejected after a rendered
@@ -23,6 +23,10 @@ Mike's decisions of this day in one place:
 6. **The link-preview copy**, now on all three description tags.
 7. **`/share-card.png` is the share image and the file is not to be altered** —
    a flag against its lettering is recorded and is Mike's to redraw.
+8. **Records post at 17:00 America/New_York, not 00:00** — Record N becomes
+   visible at 5pm on day N, from 002 onward. 001 posted at midnight Monday and
+   that stays; its own text ("12:00 am Monday morning") is canon; /robots opened
+   at 00:00 Monday and stays open.
 
 **HIS CAPTIONS ARRIVED AND ARE ON THE TILES** (his words, verbatim), which is
 the one thing in that list that moved after it was written: rule 5 says Ops
@@ -126,6 +130,40 @@ declarer left — Mike struck the one that existed. Its builder line survives.
 Mike's verdict, favicons and /wal covers included. It is not in the packet gate
 list, for the reason `facts:gate` is not (Q-b). The four photographs join the 35
 already waiting: register row **M22**.
+
+---
+
+## 0e — THE RECORD CLOCK MOVED TO 17:00, 2026-08-17
+
+**`todayInRecordTz()` returns the previous calendar day until 17:00 on the
+museum's wall clock.** That one function is the whole change; the page filter,
+`assetWithheld`, `wingOpenOn` and `/api/record` all follow. `RECORD_TZ` is
+untouched.
+
+**THREE THINGS TO KNOW BEFORE YOU TOUCH THAT FILE:**
+
+1. **`dayStartInRecordTz` IS NOT THE RECORD BOUNDARY AND MUST NOT BE MOVED.**
+   Its one caller is the lobby countdown to the doors opening at **00:00** Monday
+   — an event that happened, and that Record 001's own text calls *"12:00 am
+   Monday morning"*. `recordVisibleAt(day)` is the new function for the 17:00
+   instant. Two questions, two functions.
+2. **THE BOUNDARY IS WALL-CLOCK, NOT `now - 17h`.** A flat subtraction posts an
+   hour late on 8 March 2026, because that day is 23 hours long. Tested on both
+   2026 transition days; the argument is in the round log.
+3. **THE `src/lib/record-clock.js` FALLBACK NOW CALLS THE SHARED FUNCTION.** It
+   used to build its own formatter — harmless at midnight, a seventeen-hour bug
+   the moment the boundary moved, and it would have shown up only on the path
+   that is already degraded. Do not re-introduce a second day computation.
+
+**THE URGENCY WAS REAL AND IS WORTH UNDERSTANDING.** Between 00:00 and 17:00 the
+rule sets today to the previous day. Applied on Monday MORNING that is
+2026-08-16 — before Record 001's date and before `__WB_RECORD_FIRST_DAY__` — so
+**001 would have vanished and /robots would have read as not yet open.** From
+17:00 Monday onward it is safe for good.
+
+**AND THE `CH5-a` LIMIT IS UNCHANGED:** future entries are still bytes in the
+client bundle. The render is withheld; the text is readable in devtools. This
+ruling only moves when the render flips.
 
 ---
 
