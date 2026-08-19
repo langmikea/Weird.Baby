@@ -5024,7 +5024,7 @@ body:has(.pb) .ex-root[data-flat="1"] .ex-left{
 button.vp-rec-att-thumb{cursor:pointer;transition:border-color .16s}
 button.vp-rec-att-thumb:hover,button.vp-rec-att-thumb:focus-visible{
   border-color:var(--wb-gold-lo);outline:none}
-.vp-rec-att-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.vp-rec-att-thumb img{width:100%;height:100%;object-fit:contain;display:block}
 .vp-rec-att-glyph{width:1.5em;height:1.5em;color:var(--wb-gold-mute)}
 
 .vp-rec-att-body{display:flex;flex-direction:column;gap:2px;min-width:0;
