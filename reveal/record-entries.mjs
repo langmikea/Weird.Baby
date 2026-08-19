@@ -88,7 +88,16 @@ const READ_ENTRY_FIELDS = new Set([
   "docs",
 ]);
 const READ_SECTION_FIELDS = new Set(["label", "body"]);
-const READ_DOC_FIELDS = new Set(["title"]);
+/* [2026-08-19] AN ATTACHMENT IS WIRED NOW, AND THE READER CARRIES THE WIRING.
+   Record 003 delivers three scans, so a `docs` row grew `source`, `pages` and
+   `plates` - and the check below was right that the editor would have eaten
+   them. Widening this set ALONE would have silenced a true warning while
+   `draftEntries` still returned `{ title }`; the reader carries them through
+   untouched instead, which is the U-round rule (a generator may remove a
+   field, never the answer that was in it). Titles are still the only thing
+   the workbook path can PRODUCE - these travel, they are not authored there. */
+const READ_DOC_FIELDS = new Set(
+  ["title", "source", "date", "pages", "scan", "extract", "note", "plates"]);
 
 /* ---- tiny AST helpers ----------------------------------------------------
    `strOf` folds the string concatenation this codebase writes everywhere —
@@ -658,7 +667,26 @@ export function draftEntries(src) {
             unreadable.push(`Record ${e.no}: attachment ${i + 1} has no \`title\` this reader can read`);
             return null;
           }
-          return { title: t };
+          const doc = { title: t };
+          /* carried through, not authored here - see READ_DOC_FIELDS above */
+          for (const k of ["source", "date", "scan", "extract", "note"]) {
+            const v = val(propOf(d, k));
+            if (v !== null) doc[k] = v;
+          }
+          const pagesNode = propOf(d, "pages");
+          if (pagesNode && pagesNode.type === "Literal" && typeof pagesNode.value === "number")
+            doc.pages = pagesNode.value;
+          const platesNode = propOf(d, "plates");
+          if (platesNode && platesNode.type === "ArrayExpression") {
+            doc.plates = platesNode.elements.map(pl => {
+              if (!pl || pl.type !== "ObjectExpression") return null;
+              const img = val(propOf(pl, "img"));
+              if (img === null) return null;
+              const lab = val(propOf(pl, "label"));
+              return lab === null ? { img } : { img, label: lab };
+            }).filter(Boolean);
+          }
+          return doc;
         }).filter(Boolean);
       }
       return e;

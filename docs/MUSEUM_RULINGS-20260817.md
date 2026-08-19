@@ -1,8 +1,8 @@
 # RULINGS — 2026-08-17
 
 **Mike's decisions of this day, in one place, so a later round does not re-open
-one of them as if it were an open question.** Nine of them - the last is dated 18 August
-and is DOCTRINE rather than a decision about one page.
+one of them as if it were an open question.** Fourteen of them - rulings 9 to 14 are dated 18 and 19 August, and four of
+those are DOCTRINE rather than decisions about one page.
 
 This file is a RECORD, not a tracker. Nothing here is waiting on anybody; every
 row is settled. Where a ruling has an open remainder, the remainder is named and
@@ -304,15 +304,128 @@ Between them: **the Record may withhold, and the Record may not promise.**
 It opens on *"One tmp folder unprotected - Contents attached"* - the day the
 museum HAS the thing. Naming it then is not a promise; it is a delivery.
 
+**[2026-08-19] THAT LINE IS GONE, AND THE PARAGRAPH ABOVE IS KEPT AS WRITTEN.**
+Once the `_tmp/` line left Record 002, 003's opening line referred back to
+something 002
+never said, so Mike ruled it replaced: *"Outer layer opened - three manual pages
+recovered, contents attached"*. The reasoning above is untouched because it is
+still the reasoning - the day the museum HAS the thing is the day it is named.
+
 **FLAGGED AND NOT CORRECTED:** Record 002's DETAILED REPORT now ends
 "- Appendix 01" while the section heading below it reads "ADDENDUM 01". Both are
 Mike's, both carried as typed.
 
 ---
 
+## 10 - WHAT'S SAID MATCHES WHAT'S SHOWN (2026-08-19)
+
+> **"What's said matches what's shown."**
+
+**DOCTRINE.** Ops makes it true and asks Mike for what is missing, in accordance
+with the UX and the story. **Ops does not hedge the Record's wording to cover a
+gap.** A sentence that says eleven while three are on the glass is not fixed by
+softening the sentence; it is fixed by showing eleven or by saying three.
+
+**IT IS THE THIRD SIDE OF A TRIANGLE THE OTHER TWO ALREADY DREW.** Ruling 9 says
+the Record may not promise what the museum does not have. H2's pull-back rule
+says the museum may hold back what it has. This one closes it: **what the Record
+does say must match what is on the wall, on the day it says it.**
+
+**APPLIED THE SAME HOUR:** Record 003's DETAILED REPORT read *"Eleven manual
+pages and four personnel folders"* against three attachments. **ELEVEN became
+THREE.** If a later Record shows more, it says so then - and that is the whole
+of the rule: the number follows the wall, not the other way round.
+
+---
+
+## 11 - THE SCAN NUMBERS ARE NOT PAGE NUMBERS (2026-08-19)
+
+**T-A IS RESOLVED, AND THE ANSWER IS THAT THE QUESTION HAD A THIRD ANSWER.** The
+register asked which number is the object - the 24-page manual on the glass or
+the 61-page structure issue in the build. **Neither.** `07`, `11` and `31` are
+**frame numbers from whoever filmed the manual.** They match nothing in the
+document and they are not meant to.
+
+**NO RENUMBERING ANYWHERE.** The document keeps its own page numbering, the
+ledger keys its rows by the manual's page index, and the two never meet. The
+delivered files are named `scan-NN`, so **no public address asserts a page of
+the manual** - which is the practical half of the ruling and the reason the
+names are what they are.
+
+**THE VOCABULARY WENT WITH IT:** *manual pages*, never *plates*. `PLATE 07`
+became `SCAN 07` in Record 003, and the museum's remaining uses of the word
+were swept: two house strings and one of Mike's own Record 004 lines use it for
+a PHOTOGRAPHIC plate and a MAKER'S plate, which is a different word, and they
+stand.
+
+---
+
+## 12 - AN ATTACHMENT IS THE PAGES THAT WERE FILMED TOGETHER (2026-08-19)
+
+> **"We show the things that need to be shown. Each page is a page, and if we
+> need to include a couple more pages, fine. Those pages were in the outer
+> layer for a reason. As we peel the onion that is the ZIP file, the story
+> unfolds - plan and write for that."**
+
+**RULED AGAINST A NARROWER OPS PROPOSAL, and the reframe is the content.** Ops
+had asked whether a scan should be "one page plus its overflow". It is not.
+**An attachment is the set of pages that were filmed together because they
+belong together** - so a page is never cropped out of a set to tidy it, and
+never padded in to make one even.
+
+**WHAT IT MEANT IN PRACTICE:** the three scans Record 003 names are **four
+manual pages**, delivered as five files. **One page is in two scans** - the leaf
+that closes the video link also opens the power supply, so it was filmed into
+both sets and carries both names.
+
+**AND THE ZIP IS THE ARRIVAL, WHICH MOVED A TRANSFER CLASS.** The pages come out
+of the outer layer as it is peeled, so `doc.manual.page.*` is **UNLOCK**, not
+PACKAGE - in hand from week 0, opened later. The old class carried the premise
+that *"a photographed page is a photograph of paper somebody is holding"*, which
+is true of a manual nobody has and false of the one that arrived.
+
+---
+
+## 13 - THE PRODUCTION ARC ANSWERS *DOES THE MUSEUM HAVE IT* (2026-08-19)
+
+**OPS' RULING, MADE UNDER MIKE'S INSTRUCTION TO DECIDE WHAT IT CAN DECIDE.** The
+manual-page arc is `needed - printed - photographed - placed`, and it was
+designed for paper. These pages are generated: nothing is printed and nothing is
+photographed.
+
+**THE STAGES ARE ANSWERS TO A QUESTION, NOT EVENTS IN A PIPELINE.** For a page
+printed and photographed the four stages are four different answers. For a
+generated page there are only two - the generator has not run, or it has and the
+page is in the reader. `printed` and `photographed` describe a pipeline this
+object does not have, so **they are skipped rather than faked**, and every row
+says so in its own note.
+
+**AND EVERY EARLIER STAGE WOULD BE FALSE ON THE GLASS:** a page attached to a
+published entry is not NOT_BUILT and not HELD. `placed` is the only stage that
+is true of it on the day.
+
+**ONE INACCURACY IN THE VESSEL SURFACED ON ITS FIRST USE AND IS FIXED:**
+`manualPageRow` hard-coded a placed page's `where` as `face.plates`, the only
+delivery anyone had imagined. These are Record attachments, and it says so now.
+
+---
+
+## 14 - THE MUSEUM PUBLISHES A DERIVATIVE, THE ROBOTS REPO KEEPS THE MASTER (2026-08-19)
+
+**OPS' RULING, APPROVED.** The 300-dpi PNG masters stay in the robots repo. What
+the museum publishes is **1700x2200 WebP q82**.
+
+**IT IS A MEASUREMENT, NOT A PREFERENCE.** The attachment thumbnail is 3.4em -
+about 52px square - and the same file serves the thumbnail and the reader, so
+the source masters would have cost a visitor **9.02 MB to paint five squares**.
+The derivative costs **0.42 MB**, and legibility was checked at 1:1 rather than
+assumed: the type is crisp and the strike variation and copier dirt survive.
+
+---
+
 ## HOW THIS FILE IS MEANT TO BE USED
 
-**Read it before re-opening any of the six.** Each ruling here cost a round to
+**Read it before re-opening any of them.** Each ruling here cost a round to
 reach, several of them cost more than one, and the failure this file exists to
 prevent is the one `OPEN_ACTIONS.md` already records four instances of: a
 question that has an answer being asked again because the answer was only ever

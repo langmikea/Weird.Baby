@@ -1708,7 +1708,7 @@
    "assets": [],
    "prod": null,
    "calledBy": [],
-   "note": "The live source is the STRUCTURE ISSUE — structure and arrangement only, text not supplied — at robots/mgk-viiip/manual/structure/pages, 61 pages as this was built. The count is derived, never declared.",
+   "note": "The live source is the STRUCTURE ISSUE — structure and arrangement only, text not supplied — at robots/mgk-viiip/manual/structure/pages, 63 pages as this was built. The count is derived, never declared.",
    "transfer": "BLAST",
    "transferWeek": 0
   },
@@ -1732,6 +1732,99 @@
    "note": "[R3] DOC CONTROL is struck, so The Manual's own face is now the only place they are named — the promise is unchanged in force and narrower in reach. THE SET-LEVEL PROMISE LIVES HERE and nowhere else — the individual page rows below are not `shown`, because the museum makes one promise about plates and it is this one.",
    "transfer": "PACKAGE",
    "transferWeek": null
+  },
+  {
+   "id": "doc.manual.page.32",
+   "name": "The Manual, page 32.",
+   "cls": "document",
+   "where": "src/data/artists/robots-record.js — an attachment on the Record entry that calls for it",
+   "build": "LIVE",
+   "reach": "a frame in THE MANUAL's reader, on /robots",
+   "state": "REVEALED",
+   "when": null,
+   "deps": [],
+   "arc": null,
+   "shown": false,
+   "assets": [
+    "A-a02b77e1b3"
+   ],
+   "prod": "placed",
+   "calledBy": [
+    "record.003"
+   ],
+   "note": "Generated, never printed and never photographed — this page has no paper stage at all, and `printed`/`photographed` describe a pipeline this object does not have. `placed` is the only stage that is true of it on the day.",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
+  },
+  {
+   "id": "doc.manual.page.33",
+   "name": "The Manual, page 33.",
+   "cls": "document",
+   "where": "src/data/artists/robots-record.js — an attachment on the Record entry that calls for it",
+   "build": "LIVE",
+   "reach": "a frame in THE MANUAL's reader, on /robots",
+   "state": "REVEALED",
+   "when": null,
+   "deps": [],
+   "arc": null,
+   "shown": false,
+   "assets": [
+    "A-4bf51d5e61",
+    "A-2719ecaec2"
+   ],
+   "prod": "placed",
+   "calledBy": [
+    "record.003"
+   ],
+   "note": "Generated, never printed and never photographed — this page has no paper stage at all, and `printed`/`photographed` describe a pipeline this object does not have. `placed` is the only stage that is true of it on the day.",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
+  },
+  {
+   "id": "doc.manual.page.34",
+   "name": "The Manual, page 34.",
+   "cls": "document",
+   "where": "src/data/artists/robots-record.js — an attachment on the Record entry that calls for it",
+   "build": "LIVE",
+   "reach": "a frame in THE MANUAL's reader, on /robots",
+   "state": "REVEALED",
+   "when": null,
+   "deps": [],
+   "arc": null,
+   "shown": false,
+   "assets": [
+    "A-ee6eed3e71"
+   ],
+   "prod": "placed",
+   "calledBy": [
+    "record.003"
+   ],
+   "note": "Generated, never printed and never photographed — this page has no paper stage at all, and `printed`/`photographed` describe a pipeline this object does not have. `placed` is the only stage that is true of it on the day.",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
+  },
+  {
+   "id": "doc.manual.page.47",
+   "name": "The Manual, page 47.",
+   "cls": "document",
+   "where": "src/data/artists/robots-record.js — an attachment on the Record entry that calls for it",
+   "build": "LIVE",
+   "reach": "a frame in THE MANUAL's reader, on /robots",
+   "state": "REVEALED",
+   "when": null,
+   "deps": [],
+   "arc": null,
+   "shown": false,
+   "assets": [
+    "A-b5894162ce"
+   ],
+   "prod": "placed",
+   "calledBy": [
+    "record.003"
+   ],
+   "note": "Generated, never printed and never photographed — this page has no paper stage at all, and `printed`/`photographed` describe a pipeline this object does not have. `placed` is the only stage that is true of it on the day.",
+   "transfer": "UNLOCK",
+   "transferWeek": 0
   },
   {
    "id": "doc.record",
@@ -1802,7 +1895,13 @@
    "deps": [],
    "arc": null,
    "shown": false,
-   "assets": [],
+   "assets": [
+    "A-4bf51d5e61",
+    "A-ee6eed3e71",
+    "A-a02b77e1b3",
+    "A-2719ecaec2",
+    "A-b5894162ce"
+   ],
    "prod": null,
    "calledBy": [],
    "note": "",

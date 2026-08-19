@@ -161,7 +161,8 @@ export function manualPageRow(page, {
     name: `The Manual, page ${nn}.`,
     cls: "document",
     where: prod === "placed"
-      ? "src/data/artists/robots.js face.plates"
+      ? "src/data/artists/robots-record.js — an attachment on the Record "
+        + "entry that calls for it"
       : `the physical world — printed from weird-baby-robots/${src}`,
     build: BUILD_FOR_PROD[prod],
     reach: prod === "placed" ? "a frame in THE MANUAL's reader, on /robots" : null,

@@ -451,8 +451,8 @@ MAY NOT SHOW MORE PICTURES.** Two buckets: **PRECIOUS** — genuine reveals, two
 three **a week**, the ceiling is on these — and **DUMP** — everything else, **no
 ceiling**, because ten manual pages arriving is ONE point of focus. The law and
 both runways are **`reveal/focus.mjs`**; the judged field is **`bucket`** on
-`provenance/asset-table.json`, **Mike's, null on all 397 rows (re-measured
-2026-08-13; this said 315), and Ops does not
+`provenance/asset-table.json`, **Mike's, null on all 404 rows (re-measured
+2026-08-19; this said 397, and 315 before that), and Ops does not
 derive it**. **PRECIOUS divides into weeks; DUMP divides into nothing** — the old
 tracker divided PHOTOGRAPHS by a ceiling on ATTENTION and printed *"16 pictures =
 6–8 days"*, which is **VOID** and kept with its cause in `focus.mjs` `VOIDED`.

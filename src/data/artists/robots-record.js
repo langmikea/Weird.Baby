@@ -380,19 +380,20 @@ export const RECORD_ENTRIES = [
                 { label: "DETAILED REPORT",
                   body: [
                     "  > Ops transition moving to Early-Pull (Confidence >>"
-                    + " 6.28 sigma)\n  > One tmp folder unprotected - Contents"
-                    + " attached\n  > Extraction staging, left behind. Eleven "
-                    + "manual plates and four personnel folders.\n  ? The "
+                    + " 6.28 sigma)\n  > Outer layer opened - three manual"
+                    + " pages recovered, contents attached\n  > Extraction"
+                    + " staging, left behind. Three manual pages and four"
+                    + " personnel folders.\n  ? The "
                     + "manual is not written for the unit. It is written for "
                     + "the person keeping it.",
                   ] },
-                { label: "ADDENDUM 01 - Manual Plates Recovered",
+                { label: "ADDENDUM 01 - Manual Pages Recovered",
                   body: [
-                    "    PLATE 07 - POWER SYSTEM\n      \"Do not service "
+                    "    SCAN 07 - POWER SYSTEM\n      \"Do not service "
                     + "under load. The keeper is answerable for the state of "
-                    + "the cell.\"\n    PLATE 11 - VID-LINK\n      \"The link is "
+                    + "the cell.\"\n    SCAN 11 - VID-LINK\n      \"The link is "
                     + "bi-directional by design. Assume the far end is "
-                    + "attended.\"\n    PLATE 31 - PARITY BIAS\n      \"Four "
+                    + "attended.\"\n    SCAN 31 - PARITY BIAS\n      \"Four "
                     + "settings. The unit will not speak until all four agree"
                     + " with the far end.\"",
                   ] },
@@ -404,6 +405,48 @@ export const RECORD_ENTRIES = [
                     + "GAMBLER     - not yet opened",
                     "  ? Four people are described in a manual for a "
                     + "machine. No explanation is offered.",
+                  ] },
+              ],
+              /* [2026-08-19] THE THREE SCANS. Mike's ruling on what an
+                 attachment IS: "We show the things that need to be shown. Each
+                 page is a page, and if we need to include a couple more pages,
+                 fine. Those pages were in the outer layer for a reason." So a
+                 scan carries the pages that were filmed together because they
+                 belong together, in reading order, and no page is cropped out
+                 to tidy a set or padded in to even one.
+                 THE NUMBERS 07/11/31 ARE SCAN NUMBERS, NOT PAGE NUMBERS (T-A,
+                 ruled 2026-08-19): they are frame numbers from whoever filmed
+                 the manual, they match nothing in the document, and they are
+                 not meant to. That is why the public names are scan-NN, and
+                 why no address here asserts a page of the manual.
+                 ONE PAGE IS IN TWO SCANS. The manual page that closes the
+                 video link also opens the power supply, so it was filmed into
+                 both sets and is delivered under both names. */
+              docs: [
+                { title: "Scan 07 - Power supply and distribution",
+                  source: "ABEAL 8P-OMI-1",
+                  pages: 2,
+                  plates: [
+                    { img: "/robots/manual/scan-07-a.webp",
+                      label: "Power supply and distribution, first page" },
+                    { img: "/robots/manual/scan-07-b.webp",
+                      label: "Power supply and distribution, second page" },
+                  ] },
+                { title: "Scan 11 - The video link",
+                  source: "ABEAL 8P-OMI-1",
+                  pages: 2,
+                  plates: [
+                    { img: "/robots/manual/scan-11-a.webp",
+                      label: "The video link, first page" },
+                    { img: "/robots/manual/scan-11-b.webp",
+                      label: "The video link, second page" },
+                  ] },
+                { title: "Scan 31 - Bias settings",
+                  source: "ABEAL 8P-OMI-1",
+                  pages: 1,
+                  plates: [
+                    { img: "/robots/manual/scan-31-a.webp",
+                      label: "Bias settings, the four communications settings" },
                   ] },
               ],
             },

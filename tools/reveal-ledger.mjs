@@ -21,7 +21,7 @@ import { entryFields as recordFields,
          recordShapeFaults } from "../reveal/record-entries.mjs";
 import { entries as recordEntries, prose as recordProse,
          summaries as recordSummaries } from "../reveal/record-entries.mjs";
-import { transferFaults, ASSIGN, EXEMPT, TRANSFERS, CLASSES } from "../reveal/transfers.mjs";
+import { transferFaults, transferOf, ASSIGN, EXEMPT, TRANSFERS, CLASSES } from "../reveal/transfers.mjs";
 import { HELD_PREFIXES } from "../reveal/reachability.mjs";
 /* [I2 2026-08-08] The two index-row budgets, declared once so the gate and the
    page Mike writes on read the same number. See RECORD BUDGETS below. */
@@ -394,20 +394,21 @@ function vesselFaults() {
       `vessel: ${MANUAL_SRC_DIR} exists and holds no page-NN.png at all. The path is\n` +
       "    right and the document is empty, which no ledger row can be written against.");
 
-  /* [G1 2026-08-05] `fault` IS PART OF THE EXPECTATION NOW, AND THAT IS THE
-     TRANSFER RULE REACHING THE VESSEL RATHER THAN A DEFECT IN IT. A manual page
-     is PACKAGE (transfers.mjs PATTERNS), PACKAGE has no named arrival week until
-     T-B is answered, and check (b) says a row with no named arrival may not be
-     REVEALED. So a PLACED page — one that is a frame in the reader — cannot
-     validate today, and the honest test is to require exactly that one fault
-     rather than to exempt the specimen from the rule. The day Mike names the
-     four Fridays this expectation flips to null and the vessel is unchanged. */
+  /* [G1 2026-08-05] `fault` IS PART OF THE EXPECTATION, AND THAT IS THE TRANSFER
+     RULE REACHING THE VESSEL RATHER THAN A DEFECT IN IT.
+     [2026-08-19] IT HAS FLIPPED TO null, AND NOT FOR THE REASON G1 EXPECTED.
+     G1 said this would flip the day Mike named the four Fridays. It flipped
+     earlier, because the CLASS moved: Mike ruled the manual pages come out of
+     the ZIP as it is peeled, so `doc.manual.page.*` is UNLOCK — in hand from
+     week 0, opened later — and an unlock HAS a named arrival week. PACKAGE is
+     still weekless and T-B is still open; no package row may still be REVEALED,
+     and the two checks below prove that on rows that really are PACKAGE. The
+     vessel itself is unchanged, exactly as G1 said it would be. */
   const EXPECT = {
     needed: { build: "NOT_BUILT", state: "HELD", reachable: false, fault: null },
     printed: { build: "NOT_BUILT", state: "HELD", reachable: false, fault: null },
     photographed: { build: "PARTIAL", state: "HELD", reachable: false, fault: null },
-    placed: { build: "LIVE", state: "REVEALED", reachable: true,
-      fault: "has no named arrival week" },
+    placed: { build: "LIVE", state: "REVEALED", reachable: true, fault: null },
   };
   if (PROD.join(",") !== Object.keys(EXPECT).join(","))
     faults.push(`vessel: the production stages are ${PROD.join(" · ")}, and this test covers ${Object.keys(EXPECT).join(" · ")}.`);
@@ -535,8 +536,14 @@ function transferGuardFaults() {
   if (!transferFaults([]).some(f => f.includes("is exempted and is not a ledger row")))
     faults.push("transfers: an exemption naming a row that does not exist did not fault.");
 
-  /* and the live table really is exhaustive: no row falls through */
-  const unplaced = ROWS.filter(r => !ASSIGN.has(r.id) && !EXEMPT.has(r.id));
+  /* and the live table really is exhaustive: no row falls through.
+     [2026-08-19] IT ASKS `transferOf` NOW, NOT THE TWO HAND-WRITTEN MAPS. This
+     check has been reading ASSIGN and EXEMPT only, so it could not see the
+     PATTERN layer at all — a latent defect that fired the first day a
+     pattern-assigned row existed (`doc.manual.page.*`, four of them), reporting
+     four correctly-classed rows as falling through. `transferOf` IS the
+     question this check is asking: ASSIGN, then PATTERNS, then null. */
+  const unplaced = ROWS.filter(r => !transferOf(r.id) && !EXEMPT.has(r.id));
   if (unplaced.length)
     faults.push(`transfers: ${unplaced.length} row(s) fall through the table — ${unplaced.map(r => r.id).join(", ")}`);
 

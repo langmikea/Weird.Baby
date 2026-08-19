@@ -548,7 +548,38 @@ const MANUAL_PAGE = (page, opts) => {
   const { id, name, cls, where, build, reach, state, extra } = manualPageRow(page, opts);
   R(id, name, cls, where, build, reach, state, extra);
 };
-/* (no calls — see above) */
+const NOTE_GENERATED =
+  "Generated, never printed and never photographed — this page has no paper stage at all, and `printed`/`photographed` describe a pipeline this object does not have. `placed` is the only stage that is true of it on the day.";
+/* ═══ [2026-08-19] THE VESSEL'S FIRST FOUR CALLS ════════════════════════════
+   Record 003 reaches for the manual, so the pages it reaches for get rows.
+
+   THE PRODUCTION ARC MEETS A PAGE THAT WAS NEVER ON PAPER, AND THE RULING IS
+   THAT `prod` ANSWERS *DOES THE MUSEUM HAVE IT* — not *what happened to the
+   paper*. For a page printed and photographed the four stages are four
+   different answers. For a generated page there are only two: the generator
+   has not run, or it has and the page is in the reader. `printed` ("paper
+   exists; the museum holds no image") and `photographed` ("an image exists and
+   is on nobody's wall") both describe a pipeline this object does not have, so
+   they are skipped rather than faked, and every row says so in its own note.
+   Any earlier stage would also be FALSE ON THE GLASS: a page attached to a
+   published entry is not NOT_BUILT and not HELD.
+
+   THE ROW IS KEYED BY THE MANUAL'S PAGE INDEX. The scan numbers 07/11/31 in
+   the Record are frame numbers from whoever filmed it (T-A, ruled 2026-08-19)
+   and match nothing in the document — they are the delivered FILE names, never
+   a row id, and the two numberings must not be conflated.
+
+   ONE PAGE, TWO SCANS. Page 33 closes the video link and opens the power
+   supply, so it was filmed into both sets and carries both delivered names. */
+MANUAL_PAGE(32, { prod: "placed", calledBy: ["record.003"],
+  assets: ["/robots/manual/scan-11-a.webp"], note: NOTE_GENERATED });
+MANUAL_PAGE(33, { prod: "placed", calledBy: ["record.003"],
+  assets: ["/robots/manual/scan-07-a.webp", "/robots/manual/scan-11-b.webp"],
+  note: NOTE_GENERATED });
+MANUAL_PAGE(34, { prod: "placed", calledBy: ["record.003"],
+  assets: ["/robots/manual/scan-07-b.webp"], note: NOTE_GENERATED });
+MANUAL_PAGE(47, { prod: "placed", calledBy: ["record.003"],
+  assets: ["/robots/manual/scan-31-a.webp"], note: NOTE_GENERATED });
 /* [R1 2026-08-05] THIS ROW IS NOW THE VOLUME, AND ONLY THE VOLUME. The entries
    have their own rows below it. The split is not tidiness: M18's twenty-seven
    questions are questions about ENTRY 013 and travel with it, while M19 — what

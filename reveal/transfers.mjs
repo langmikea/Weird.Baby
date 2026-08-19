@@ -448,8 +448,24 @@ export const EXEMPT = new Map([
    which transfer a week's material rode in on is a judgement per entry, and a
    pattern would erase exactly that judgement.                                */
 const PATTERNS = [
-  { re: /^doc\.manual\.page\.\d+$/, cls: "PACKAGE",
-    why: "a photographed page is a photograph of paper somebody is holding — MANUAL_SPANS_CLASSES" },
+  /* [2026-08-19] PACKAGE → UNLOCK, AND THE OLD REASON IS WHY IT HAD TO MOVE.
+     It read "a photographed page is a photograph of paper somebody is
+     holding", which was true of the manual anybody imagined and is false of
+     the one that arrived: Mike ruled the pages come out of the ZIP as the
+     outer layer is peeled, and Record 003 is the day the first three come
+     out. A ZIP that landed in the launch stream and could not be opened is
+     an UNLOCK by that class's own words — "in hand from week 0, could not be
+     opened" — and an unlock's ARRIVAL is week 0 while its REVEAL week stays
+     open, which is exactly the shape of a page delivered in week 1.
+     IT ALSO UNBLOCKS A REAL GATE RATHER THAN DODGING ONE: PACKAGE carries no
+     arrival week (T-B is unanswered), so no PACKAGE row may ever be
+     REVEALED, and four true rows were refused for an arrival that never
+     happened. THE MANUAL STILL SPANS CLASSES — the volume is BLAST — and a
+     future page that genuinely IS a photograph of paper gets a hand-written
+     ASSIGN, at which point the [G1] guard will fault on the overlap and this
+     pattern gets narrowed. That fault is the design working. */
+  { re: /^doc\.manual\.page\.\d+$/, cls: "UNLOCK",
+    why: "the pages come out of the ZIP as it is peeled — in hand from week 0, opened later" },
 ];
 
 /* ═══ APPLYING IT ═══════════════════════════════════════════════════════════ */

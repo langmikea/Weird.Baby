@@ -14191,27 +14191,6 @@
    "c": "MIKE",
    "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
   },
-  "7a20beafee05641b": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 331,
-   "t": "  > Ops transition moving to Early-Pull (Confidence >> 6.28 sigma)\n  > One tmp folder unprotected - Contents attached\n  > Extraction staging, left behind. Eleven manual plates and four personnel folders.\n  ? The manual is not written for the unit. It is written for the person keeping it.",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
-  "c292551ab9637b84": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 338,
-   "t": "ADDENDUM 01 - Manual Plates Recovered",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
-  "10d7240c85410765": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 340,
-   "t": "    PLATE 07 - POWER SYSTEM\n      \"Do not service under load. The keeper is answerable for the state of the cell.\"\n    PLATE 11 - VID-LINK\n      \"The link is bi-directional by design. Assume the far end is attended.\"\n    PLATE 31 - PARITY BIAS\n      \"Four settings. The unit will not speak until all four agree with the far end.\"",
-   "c": "MIKE",
-   "s": "his own hand-built week-1 workbook, NEW_RECORD_MAKER_V3.xlsx (sha256 2D59586B..., verified before reading), landed verbatim on 2026-08-16 via workbook_to_draft.py -> record:land --write. Round-tripped field by field against the workbook: 56 fields, 0 mismatches. No edit, no smoothing, no re-splitting of his paragraphs; his marker prefixes (> ? ! <) are carried as written."
-  },
   "b92ba684d4b5501e": {
    "f": "src/data/artists/robots-record.js",
    "l": 348,
@@ -15228,6 +15207,90 @@
    "t": "    MGK-VIIIp/MANUAL/00-FRONTMATTER.tif\n    MGK-VIIIp/MANUAL/07-POWER-SYSTEM.tif\n    MGK-VIIIp/MANUAL/11-VID-LINK.tif\n    MGK-VIIIp/MANUAL/31-PARITY-BIAS.tif\n    PERSONNEL/CEO/\n    PERSONNEL/INFORMER/\n    PERSONNEL/EVERYDAY/\n    PERSONNEL/GAMBLER/\n    PORTAL/CH3-STANDARD/\n    PORTAL/CH4-DETAIL/",
    "c": "MIKE",
    "s": "Record 002's partial manifest, Mike's, with the '_tmp/' line struck on his ruling of 2026-08-18: 'We do not hold back what we say we have. We hold back what we don't have yet.' The _tmp/ line promised something the museum cannot show; a Record names only what it can produce. The other ten entries are unchanged and in the same order. The closing line that pointed at it went with it - it named 'the last entry', which was _tmp/, so it could not survive it. See docs/MUSEUM_RULINGS-20260817.md."
+  },
+  "b678715fa6283948": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 382,
+   "t": "  > Ops transition moving to Early-Pull (Confidence >> 6.28 sigma)\n  > Outer layer opened - three manual pages recovered, contents attached\n  > Extraction staging, left behind. Three manual pages and four personnel folders.\n  ? The manual is not written for the unit. It is written for the person keeping it.",
+   "c": "MIKE",
+   "s": "Mike's Record prose. 2026-08-19: his ruled line (\"Outer layer opened - three manual pages recovered, contents attached\"), his ruled vocabulary (manual pages, never plates; PLATE nn -> SCAN nn), and ELEVEN -> THREE under his 'what's said matches what's shown' doctrine. Ops applied the rulings; the wording is his."
+  },
+  "2c835498b5f3a254": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 390,
+   "t": "ADDENDUM 01 - Manual Pages Recovered",
+   "c": "MIKE",
+   "s": "Mike's Record prose. 2026-08-19: his ruled line (\"Outer layer opened - three manual pages recovered, contents attached\"), his ruled vocabulary (manual pages, never plates; PLATE nn -> SCAN nn), and ELEVEN -> THREE under his 'what's said matches what's shown' doctrine. Ops applied the rulings; the wording is his."
+  },
+  "24bacf305899d14f": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 392,
+   "t": "    SCAN 07 - POWER SYSTEM\n      \"Do not service under load. The keeper is answerable for the state of the cell.\"\n    SCAN 11 - VID-LINK\n      \"The link is bi-directional by design. Assume the far end is attended.\"\n    SCAN 31 - PARITY BIAS\n      \"Four settings. The unit will not speak until all four agree with the far end.\"",
+   "c": "MIKE",
+   "s": "Mike's Record prose. 2026-08-19: his ruled line (\"Outer layer opened - three manual pages recovered, contents attached\"), his ruled vocabulary (manual pages, never plates; PLATE nn -> SCAN nn), and ELEVEN -> THREE under his 'what's said matches what's shown' doctrine. Ops applied the rulings; the wording is his."
+  },
+  "2334a9d65ba4d57b": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 426,
+   "t": "Scan 07 - Power supply and distribution",
+   "c": "HOUSE",
+   "s": "Ops' own words - the attachment's title and the page labels in the reader. Named rather than quoted: no sentence of the manual or of the Record is reused here."
+  },
+  "204771dae783cd1f": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 445,
+   "t": "ABEAL 8P-OMI-1",
+   "c": "VERIFIED",
+   "s": "the manual's own document number, printed on every page of the object (weird-baby-robots robots/mgk-viiip/manual/structure)"
+  },
+  "da866fceb963c85a": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 431,
+   "t": "Power supply and distribution, first page",
+   "c": "HOUSE",
+   "s": "Ops' own words - the attachment's title and the page labels in the reader. Named rather than quoted: no sentence of the manual or of the Record is reused here."
+  },
+  "60b479d184e86590": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 433,
+   "t": "Power supply and distribution, second page",
+   "c": "HOUSE",
+   "s": "Ops' own words - the attachment's title and the page labels in the reader. Named rather than quoted: no sentence of the manual or of the Record is reused here."
+  },
+  "a018acada8ceba53": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 435,
+   "t": "Scan 11 - The video link",
+   "c": "HOUSE",
+   "s": "Ops' own words - the attachment's title and the page labels in the reader. Named rather than quoted: no sentence of the manual or of the Record is reused here."
+  },
+  "a0531276daa7312b": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 440,
+   "t": "The video link, first page",
+   "c": "HOUSE",
+   "s": "Ops' own words - the attachment's title and the page labels in the reader. Named rather than quoted: no sentence of the manual or of the Record is reused here."
+  },
+  "08a321eea2729307": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 442,
+   "t": "The video link, second page",
+   "c": "HOUSE",
+   "s": "Ops' own words - the attachment's title and the page labels in the reader. Named rather than quoted: no sentence of the manual or of the Record is reused here."
+  },
+  "c73a75cb2ef3dcd7": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 444,
+   "t": "Scan 31 - Bias settings",
+   "c": "HOUSE",
+   "s": "Ops' own words - the attachment's title and the page labels in the reader. Named rather than quoted: no sentence of the manual or of the Record is reused here."
+  },
+  "2d668bb1e72b7a7a": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 449,
+   "t": "Bias settings, the four communications settings",
+   "c": "HOUSE",
+   "s": "Ops' own words - the attachment's title and the page labels in the reader. Named rather than quoted: no sentence of the manual or of the Record is reused here."
   }
  }
 }
