@@ -15208,27 +15208,6 @@
    "c": "MIKE",
    "s": "Record 002's partial manifest, Mike's, with the '_tmp/' line struck on his ruling of 2026-08-18: 'We do not hold back what we say we have. We hold back what we don't have yet.' The _tmp/ line promised something the museum cannot show; a Record names only what it can produce. The other ten entries are unchanged and in the same order. The closing line that pointed at it went with it - it named 'the last entry', which was _tmp/, so it could not survive it. See docs/MUSEUM_RULINGS-20260817.md."
   },
-  "b678715fa6283948": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 382,
-   "t": "  > Ops transition moving to Early-Pull (Confidence >> 6.28 sigma)\n  > Outer layer opened - three manual pages recovered, contents attached\n  > Extraction staging, left behind. Three manual pages and four personnel folders.\n  ? The manual is not written for the unit. It is written for the person keeping it.",
-   "c": "MIKE",
-   "s": "Mike's Record prose. 2026-08-19: his ruled line (\"Outer layer opened - three manual pages recovered, contents attached\"), his ruled vocabulary (manual pages, never plates; PLATE nn -> SCAN nn), and ELEVEN -> THREE under his 'what's said matches what's shown' doctrine. Ops applied the rulings; the wording is his."
-  },
-  "2c835498b5f3a254": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 390,
-   "t": "ADDENDUM 01 - Manual Pages Recovered",
-   "c": "MIKE",
-   "s": "Mike's Record prose. 2026-08-19: his ruled line (\"Outer layer opened - three manual pages recovered, contents attached\"), his ruled vocabulary (manual pages, never plates; PLATE nn -> SCAN nn), and ELEVEN -> THREE under his 'what's said matches what's shown' doctrine. Ops applied the rulings; the wording is his."
-  },
-  "24bacf305899d14f": {
-   "f": "src/data/artists/robots-record.js",
-   "l": 392,
-   "t": "    SCAN 07 - POWER SYSTEM\n      \"Do not service under load. The keeper is answerable for the state of the cell.\"\n    SCAN 11 - VID-LINK\n      \"The link is bi-directional by design. Assume the far end is attended.\"\n    SCAN 31 - PARITY BIAS\n      \"Four settings. The unit will not speak until all four agree with the far end.\"",
-   "c": "MIKE",
-   "s": "Mike's Record prose. 2026-08-19: his ruled line (\"Outer layer opened - three manual pages recovered, contents attached\"), his ruled vocabulary (manual pages, never plates; PLATE nn -> SCAN nn), and ELEVEN -> THREE under his 'what's said matches what's shown' doctrine. Ops applied the rulings; the wording is his."
-  },
   "2334a9d65ba4d57b": {
    "f": "src/data/artists/robots-record.js",
    "l": 426,
@@ -15291,6 +15270,20 @@
    "t": "Bias settings, the four communications settings",
    "c": "HOUSE",
    "s": "Ops' own words - the attachment's title and the page labels in the reader. Named rather than quoted: no sentence of the manual or of the Record is reused here."
+  },
+  "561065498eca9618": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 371,
+   "t": "DATA RECOVERY - LEVEL 1 - SUCCESS!",
+   "c": "MIKE",
+   "s": "Mike's Record prose, dictated 2026-08-19: the headline \"DATA RECOVERY - LEVEL 1 - SUCCESS!\" and the rewritten DETAILED REPORT, both carried as ruled. Ops outdented his block by two so the `> ` lines sit where every other entry's do; no word, mark or relative indent moved."
+  },
+  "657c17ef45a986b2": {
+   "f": "src/data/artists/robots-record.js",
+   "l": 382,
+   "t": "  > Ops now wants an Early-Pull-Off with Confidence >> 6.28 sigma\n  > Data Deluge ZIP File - The outer layer was not password protected\n       Manual Pages Recovered\n         SCAN 07 - POWER SYSTEM\n         SCAN 11 - VID-LINK\n         SCAN 31 - PARITY BIAS",
+   "c": "MIKE",
+   "s": "Mike's Record prose, dictated 2026-08-19: the headline \"DATA RECOVERY - LEVEL 1 - SUCCESS!\" and the rewritten DETAILED REPORT, both carried as ruled. Ops outdented his block by two so the `> ` lines sit where every other entry's do; no word, mark or relative indent moved."
   }
  }
 }

@@ -368,7 +368,7 @@ export const RECORD_ENTRIES = [
             },
             { no: 3,
               date: recordDay(3),
-              title: "GENERAL STATUS UPDATE",
+              title: "DATA RECOVERY - LEVEL 1 - SUCCESS!",
               line: "> Weird.Baby Website - All Systems Favorable\n> Robots "
                     + "- Nothing to Report",
               sections: [
@@ -379,23 +379,11 @@ export const RECORD_ENTRIES = [
                   ] },
                 { label: "DETAILED REPORT",
                   body: [
-                    "  > Ops transition moving to Early-Pull (Confidence >>"
-                    + " 6.28 sigma)\n  > Outer layer opened - three manual"
-                    + " pages recovered, contents attached\n  > Extraction"
-                    + " staging, left behind. Three manual pages and four"
-                    + " personnel folders.\n  ? The "
-                    + "manual is not written for the unit. It is written for "
-                    + "the person keeping it.",
-                  ] },
-                { label: "ADDENDUM 01 - Manual Pages Recovered",
-                  body: [
-                    "    SCAN 07 - POWER SYSTEM\n      \"Do not service "
-                    + "under load. The keeper is answerable for the state of "
-                    + "the cell.\"\n    SCAN 11 - VID-LINK\n      \"The link is "
-                    + "bi-directional by design. Assume the far end is "
-                    + "attended.\"\n    SCAN 31 - PARITY BIAS\n      \"Four "
-                    + "settings. The unit will not speak until all four agree"
-                    + " with the far end.\"",
+                    "  > Ops now wants an Early-Pull-Off with Confidence "
+                    + ">> 6.28 sigma\n  > Data Deluge ZIP File - The outer "
+                    + "layer was not password protected\n       Manual Pages "
+                    + "Recovered\n         SCAN 07 - POWER SYSTEM\n         "
+                    + "SCAN 11 - VID-LINK\n         SCAN 31 - PARITY BIAS",
                   ] },
                 { label: "ADDENDUM 02 - Personnel Folders (empty, names only)",
                   body: [

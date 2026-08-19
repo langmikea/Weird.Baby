@@ -163,12 +163,23 @@ export function shouldBand(list, minEntries = 14) {
    difference between a register you can binge and a list you must exhaust.
    Returns [] for an entry with no payloads, so a plain paragraph entry renders
    exactly as it did before. */
+/* [2026-08-19] `docs` PRINTS AS "ATTACHMENTS", AND THE REST OF THIS COMMENT IS
+   THE REASON THE BUG EXISTED AT ALL. `kind` is BOTH the field name and the word
+   on the glass — `.vp-fe-load` upper-cases it and prints it — so every entry in
+   this list is a raw field name that a reader meets. Record 003 is the first
+   entry that ever made the badge draw, and the first word it drew was `DOCS`,
+   which is what the field is called and not what the thing is.
+   ONLY THIS ONE IS RULED. `wire` and `plates` still print WIRE and PLATES and
+   are NOT changed here — they are Mike's to word, and nothing has drawn them
+   yet. The structural fix is to separate the field name from the printed label
+   so a rename cannot reach a reader again; it is offered rather than taken,
+   because it touches both renderers and neither of those words is ruled. */
 export function evidenceOf(entry) {
   const out = [];
   const n = (v) => (Array.isArray(v) ? v.length : 0);
   if (n(entry && entry.wire))   out.push({ kind: "wire",   count: n(entry.wire) });
   if (n(entry && entry.plates)) out.push({ kind: "plates", count: n(entry.plates) });
-  if (n(entry && entry.docs))   out.push({ kind: "docs",   count: n(entry.docs) });
+  if (n(entry && entry.docs))   out.push({ kind: "attachments", count: n(entry.docs) });
   return out;
 }
 
