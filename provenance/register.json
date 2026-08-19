@@ -15284,6 +15284,139 @@
    "t": "  > Ops now wants an Early-Pull-Off with Confidence >> 6.28 sigma\n  > Data Deluge ZIP File - The outer layer was not password protected\n       Manual Pages Recovered\n         SCAN 07 - POWER SYSTEM\n         SCAN 11 - VID-LINK\n         SCAN 31 - PARITY BIAS",
    "c": "MIKE",
    "s": "Mike's Record prose, dictated 2026-08-19: the headline \"DATA RECOVERY - LEVEL 1 - SUCCESS!\" and the rewritten DETAILED REPORT, both carried as ruled. Ops outdented his block by two so the `> ` lines sit where every other entry's do; no word, mark or relative indent moved."
+  },
+  "4fe9d780f597f775": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 246,
+   "t": "Could not close",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "c2067df2b5c38c94": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 255,
+   "t": "The Record",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "808effbcfcd0bf0a": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 256,
+   "t": "The Record posts one entry on its own day, at 5pm New York time. Until then the museum\n        does not draw that entry, and the server refuses the files it names — a photograph\n        or a manual page ships with the deploy days early and is not fetchable until the entry\n        that delivers it is up.",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "3b69b5a9391ea1d1": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 262,
+   "t": "This door shows you all of them, in this browser only: every entry whatever its date,\n        and every file those entries name. It is how you read tomorrow’s entry with its\n        attachments before anybody else can. Nothing about what the public sees changes, and it\n        does not touch the held rooms above — those are held for reasons that are not the\n        clock, and no key here opens one.",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "421786a9677d472e": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 271,
+   "t": "Museum day",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "02137ea6cdcd8ea1": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 279,
+   "t": "Every Record, and its files",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "a04c0f2d0c4c5433": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 279,
+   "t": "Only what has posted",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "8140ab99cc261bd0": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 287,
+   "t": "Close the Record door",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "22c3e7217d961df6": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 293,
+   "t": "Open until {}",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "94262b99fabc801a": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 297,
+   "t": "Open. The cookie lasts {} days from the moment it was opened; this page cannot read how much of that is left.",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "5b2e20b467c5360f": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 299,
+   "t": "Open.",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "48ec2656b717463e": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 306,
+   "t": "There is no Record key on this deployment yet, so this door cannot be opened. Set one\n          and it works from then on: run",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "5eb2da2ff397ceb8": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 308,
+   "t": "npx wrangler secret put RECORD_KEY",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "56ae938064b303c2": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 308,
+   "t": "and enter\n          any long, random string — it is a password to unpublished work, so it wants to be\n          unguessable rather than memorable. For a local preview the same value goes in a",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "8e0b8ceaebce7592": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 311,
+   "t": "file at the repo root as",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "b8272ccc58e08c73": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 311,
+   "t": "RECORD_KEY=…",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "67d340701eed8427": {
+   "f": "src/routes/WbAdmin.jsx",
+   "l": 320,
+   "t": "Record key",
+   "c": "HOUSE",
+   "s": "Ops' own words on /admin, the one room written for the operator rather than a visitor. It describes the Record's own clock and the door that shows past it; no sentence of the Record or of any exhibit is reused."
+  },
+  "5b44a97252cd2380": {
+   "f": "src/worker.js",
+   "l": 427,
+   "t": "{}=",
+   "c": "HOUSE",
+   "s": "cookie-attribute fragments in src/worker.js - protocol, not prose. Nothing renders them; they are the Set-Cookie header that closes the Record door."
+  },
+  "945cea3d80a3f653": {
+   "f": "src/worker.js",
+   "l": 428,
+   "t": "; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0",
+   "c": "HOUSE",
+   "s": "cookie-attribute fragments in src/worker.js - protocol, not prose. Nothing renders them; they are the Set-Cookie header that closes the Record door."
   }
  }
 }

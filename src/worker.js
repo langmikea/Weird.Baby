@@ -416,15 +416,31 @@ export default {
       const json = (body, status, extra) => new Response(JSON.stringify(body), {
         status, headers: { ...cors, "Content-Type": "application/json", ...(extra || {}) },
       });
+      let body = {};
+      try { body = (await request.json()) || {}; } catch { /* falls through */ }
+      /* CLOSING NEEDS NO KEY, AND THAT IS DELIBERATE. Giving up a privilege you
+         hold is not a privileged act; requiring the key to close would mean a
+         browser could be left previewing by somebody who had mislaid it. It is
+         also why this branch is tested BEFORE the not-configured refusal: a
+         deployment whose key has since been removed must still be closable. */
+      if (body.close === true) {
+        const cleared = `${RECORD_COOKIE}=`
+          + `; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`;
+        return json({ ok: true, open: false, today: recordToday }, 200,
+                    { "Set-Cookie": cleared });
+      }
       if (!env.RECORD_KEY) return json({ error: NO_RECORD_KEY_NOTE }, 503);
-      let supplied = null;
-      try { supplied = (await request.json()).key; } catch { /* falls through */ }
+      const supplied = body.key;
       if (!supplied || await sha256Hex(supplied) !== await sha256Hex(env.RECORD_KEY)) {
         return json({ error: "No." }, 403);
       }
       const cookie = `${RECORD_COOKIE}=${await recordToken(env.RECORD_KEY)}`
         + `; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${HELD_MAX_AGE}`;
-      return json({ ok: true, today: recordToday }, 200, { "Set-Cookie": cookie });
+      /* the instant this cookie dies. Knowable HERE and nowhere else: it is
+         HttpOnly, so no later request can read its age back out. */
+      return json({ ok: true, open: true, today: recordToday,
+                    expires: Date.now() + HELD_MAX_AGE * 1000 },
+                  200, { "Set-Cookie": cookie });
     }
     if (url.pathname === "/api/record" && request.method === "GET") {
       return new Response(JSON.stringify({
@@ -433,6 +449,10 @@ export default {
         previewing: await previewOpen(request, env),
         configured: !!env.RECORD_KEY,
         note: env.RECORD_KEY ? null : NO_RECORD_KEY_NOTE,
+        /* the LIFETIME, not the deadline. The cookie is HttpOnly and carries no
+           age a later request can read, so on any page load after the one that
+           minted it this is the whole of what is honestly knowable. */
+        maxAgeDays: Math.round(HELD_MAX_AGE / 86400),
       }), { headers: { ...cors, "Content-Type": "application/json" } });
     }
 

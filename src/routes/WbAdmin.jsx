@@ -157,6 +157,180 @@ function HeldDoor() {
   );
 }
 
+/* ═══ [2026-08-19] THE RECORD DOOR ══════════════════════════════════
+   MIKE'S RULING: an admin button. He clicks it and sees every Record with its
+   attachments serving; he clicks it again and he does not.
+
+   THE DOOR ALREADY WORKED AND NOTHING ON THE GLASS OPENED IT. `RECORD_KEY`,
+   the `wb_record` cookie and `/api/record` have existed since CH5; what did not
+   exist was a control, so the only way through was a fetch pasted into a
+   console — a flow he has rejected. This component is the missing half and
+   nothing else: no new door, no new secret, no new rule.
+
+   IT IS A SECOND INSTANCE OF `HeldDoor` ABOVE, deliberately — same fetch shape,
+   same three states, same classes, no stylesheet change. Two doors that do the
+   same kind of thing should not look like two kinds of thing.
+
+   THE ONE PLACE IT DIVERGES, AND IT HAD TO. `/hr`'s door closes by clearing a
+   sessionStorage flag, because there the flag is what makes the router ask for
+   the chunks. HERE THE COOKIE IS THE MECHANISM — the worker reads it on every
+   request — so closing has to reach the server, and it posts.
+
+   WHAT IT DOES NOT TOUCH, because Mike ruled it: the stage, `HR_KEY`, and every
+   held thing. NIAC, MGK-VIIIp, The Blog and the /wb FAQ are held for reasons
+   that are not the clock, and no date and no cookie reveals them. This door
+   moves the Record and what follows from the Record, and nothing else. */
+function RecordDoor() {
+  const navigate = useNavigate();
+  const [state, setState] = useState({
+    open: false, configured: true, note: null, checked: false,
+    today: null, maxAgeDays: null,
+  });
+  const [key, setKey] = useState("");
+  const [msg, setMsg] = useState(null);
+  const [busy, setBusy] = useState(false);
+  /* the exact deadline, known only on the request that minted the cookie — it
+     is HttpOnly, so nothing can read its age back. Null on a later page load,
+     where `maxAgeDays` is the honest answer instead. */
+  const [expires, setExpires] = useState(null);
+
+  useEffect(() => {
+    let gone = false;
+    fetch("/api/record")
+      .then(r => r.json())
+      .then(d => {
+        if (gone) return;
+        setState({
+          open: !!d.previewing, configured: !!d.configured, note: d.note || null,
+          checked: true, today: d.today || null, maxAgeDays: d.maxAgeDays ?? null,
+        });
+      })
+      .catch(() => { if (!gone) setState(s => ({ ...s, checked: true })); });
+    return () => { gone = true; };
+  }, []);
+
+  function submit(e) {
+    e.preventDefault();
+    setBusy(true);
+    setMsg(null);
+    fetch("/api/record", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ key }),
+    })
+      .then(r => r.json().then(d => ({ ok: r.ok, d })))
+      .then(({ ok, d }) => {
+        setBusy(false);
+        /* the worker words every refusal, and the difference between a wrong
+           key and no key set on the deployment is a difference this page must
+           keep — the same rule the held door states above. */
+        if (!ok) { setMsg(d?.error || "Could not open"); return; }
+        setKey("");
+        setExpires(d?.expires ?? null);
+        setState(s => ({ ...s, open: true, today: d?.today || s.today }));
+      })
+      .catch(err => { setBusy(false); setMsg(err.message); });
+  }
+
+  function close() {
+    setBusy(true);
+    setMsg(null);
+    fetch("/api/record", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ close: true }),
+    })
+      .then(r => r.json().then(d => ({ ok: r.ok, d })))
+      .then(({ ok, d }) => {
+        setBusy(false);
+        if (!ok) { setMsg(d?.error || "Could not close"); return; }
+        setExpires(null);
+        setState(s => ({ ...s, open: false }));
+      })
+      .catch(err => { setBusy(false); setMsg(err.message); });
+  }
+
+  return (
+    <div className="adm-section adm-held">
+      <div className="adm-section-title">The Record</div>
+      <p className="adm-held-note">
+        The Record posts one entry on its own day, at 5pm New York time. Until then the museum
+        does not draw that entry, and the server refuses the files it names &mdash; a photograph
+        or a manual page ships with the deploy days early and is not fetchable until the entry
+        that delivers it is up.
+      </p>
+      <p className="adm-held-note">
+        This door shows you all of them, in this browser only: every entry whatever its date,
+        and every file those entries name. It is how you read tomorrow&rsquo;s entry with its
+        attachments before anybody else can. Nothing about what the public sees changes, and it
+        does not touch the held rooms above &mdash; those are held for reasons that are not the
+        clock, and no key here opens one.
+      </p>
+      {state.checked && state.today && (
+        <p className="adm-held-stage">
+          <span className="adm-held-stage-k">Museum day</span>
+          <span className="adm-held-stage-v">{state.today}</span>
+        </p>
+      )}
+      {state.checked && (
+        <p className="adm-held-stage">
+          <span className="adm-held-stage-k">Showing</span>
+          <span className="adm-held-stage-v">
+            {state.open ? "Every Record, and its files" : "Only what has posted"}
+          </span>
+        </p>
+      )}
+      {state.open ? (
+        <>
+          <div className="adm-held-row">
+            <button className="adm-jump" onClick={() => navigate("/robots")}>/robots</button>
+            <button className="adm-held-close" onClick={close} disabled={busy}>
+              Close the Record door
+            </button>
+          </div>
+          <p className="adm-held-note">
+            {expires
+              ? "Open until " + new Date(expires).toLocaleString("en-US", {
+                  month: "short", day: "numeric", year: "numeric",
+                  hour: "2-digit", minute: "2-digit" })
+              : state.maxAgeDays
+                ? "Open. The cookie lasts " + state.maxAgeDays
+                  + " days from the moment it was opened; this page cannot read how much of that is left."
+                : "Open."}
+          </p>
+        </>
+      ) : state.checked && !state.configured ? (
+        /* NOT A FAILURE AND NOT "configured: false". The door is built and no
+           key has been set on this deployment, so there is nothing to type
+           against — and the one thing that fixes it is a command he runs. */
+        <p className="adm-held-note">
+          There is no Record key on this deployment yet, so this door cannot be opened. Set one
+          and it works from then on: run <code>npx wrangler secret put RECORD_KEY</code> and enter
+          any long, random string — it is a password to unpublished work, so it wants to be
+          unguessable rather than memorable. For a local preview the same value goes in a
+          <code>.dev.vars</code> file at the repo root as <code>RECORD_KEY=&hellip;</code>.
+        </p>
+      ) : (
+        <form className="adm-held-row" onSubmit={submit}>
+          <input
+            className="adm-held-key"
+            type="password"
+            value={key}
+            autoComplete="off"
+            placeholder="Record key"
+            onChange={e => setKey(e.target.value)}
+          />
+          <button className="adm-jump" type="submit" disabled={busy || !key}>Open</button>
+        </form>
+      )}
+      {msg && <div className="adm-held-msg">{msg}</div>}
+      {state.checked && state.configured && state.note && (
+        <div className="adm-held-msg">{state.note}</div>
+      )}
+    </div>
+  );
+}
+
 export default function WbAdmin() {
   /* [R5] this room owns the page ground while it is mounted — see
      src/lib/use-room.js and the header of this route's stylesheet. */
@@ -234,6 +408,8 @@ export default function WbAdmin() {
         </div>
 
         <HeldDoor />
+
+        <RecordDoor />
 
         {loading && <div className="adm-loading">Loading...</div>}
         {error && <div className="adm-loading">Error: {error}</div>}

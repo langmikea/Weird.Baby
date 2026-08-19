@@ -1,7 +1,7 @@
 # RULINGS — 2026-08-17
 
 **Mike's decisions of this day, in one place, so a later round does not re-open
-one of them as if it were an open question.** Fourteen of them - rulings 9 to 14 are dated 18 and 19 August, and four of
+one of them as if it were an open question.** Seventeen of them - rulings 9 to 17 are dated 18 and 19 August, and six of
 those are DOCTRINE rather than decisions about one page.
 
 This file is a RECORD, not a tracker. Nothing here is waiting on anybody; every
@@ -420,6 +420,81 @@ about 52px square - and the same file serves the thumbnail and the reader, so
 the source masters would have cost a visitor **9.02 MB to paint five squares**.
 The derivative costs **0.42 MB**, and legibility was checked at 1:1 rather than
 assumed: the type is crisp and the strike variation and copier dirt survive.
+
+---
+
+## 15 - A CLOCK OVERRIDE IS NOT AN AS-OF QUERY (2026-08-19)
+
+**DOCTRINE, and it is the real output of the clock investigation.** The museum's
+data carries **no `valid-from` and no `superseded-at`** - the complete set of
+fields an entry may hold is enforced by two gates and contains no version field
+at all, the reveal ledger's `when` is null on all 174 rows by Doctrine 12, and
+D1 holds only visits and the guest book. **So a date parameter shows TODAY'S
+TEXT under an older date.**
+
+**NEVER LABEL IT AS SEEING THE PAST.** *"The museum as of 19 August"* is a claim
+this data cannot keep: the text under that date changes every time an entry is
+rewritten, silently and with nothing recording that it moved.
+
+**THE EVIDENCE IS NOT HYPOTHETICAL AND IT IS SEVEN HOURS WIDE.** Record 002's
+DETAILED REPORT was rewritten in `97ab783` at **09:51 on 18 August** - the
+ZIP-index line, the per-file-header line and the "1,046 names recovered" line all
+struck. Record 002 **published at 17:00 that same day.** A post-publication edit
+was missed by luck, not by design, and nothing in the system would have noticed
+or recorded it.
+
+**WHAT IS STILL TRUE AND STILL USEFUL:** for Mike and Ops, "what publishes
+tomorrow" is a question about TODAY'S data, so an override answers it honestly
+for them. The dishonesty only appears the moment a visitor is told they are
+looking at the past.
+
+---
+
+## 16 - THE HONEST ANSWER TO "WALK THE MUSEUM AS IT STOOD" IS IMMUTABLE DEPLOYS (2026-08-19)
+
+**RECORDED, COSTED PROPERLY LATER, NOT BUILT NOW.** Cloudflare's versioned
+deploys give every upload its own permanent preview URL. **A past deploy is
+genuinely past** - bundle and data together, the thing a date parameter over
+live data can never be - and it needs **no data-layer rewrite**. This repo is on
+wrangler 4.81.1, well past the feature, and versions are **already accumulating
+on every deploy**.
+
+**ITS REAL LIMITS, NAMED SO NOBODY DISCOVERS THEM LATER:**
+- only as far back as versions are retained;
+- granularity is **deploys, not days** - two deploys on one day are two points,
+  and a day with no deploy is not a point at all;
+- **the robots repo's manual pages are not versioned with it**, so a past museum
+  deploy still reaches for whatever those files are today.
+
+The alternative - bitemporal data, valid time against transaction time, the
+SQL:2011 `AS OF SYSTEM TIME` shape - is the *correct* answer to the visitor
+feature and is a data-layer rewrite. It is written down here so that it is
+chosen, if it ever is, rather than drifted into.
+
+---
+
+## 17 - `__WB_NOW__` IS A SECOND SEAM (2026-08-19)
+
+**THE MUSEUM HAS TWO REQUEST-TIME CLOCKS, NOT ONE, AND BOTH ARE IN
+`src/worker.js`.**
+
+- `worker.js:210` - `todayInRecordTz()` -> `recordToday`. **The day.** Everything
+  about the Record hangs off this one call, and every consumer already takes the
+  day as an argument, so the clock is a parameter already.
+- `worker.js:180` - `window.__WB_NOW__=${Date.now()}` inside `injectClock`.
+  **The instant**, for the lobby countdown, written inline and derived from
+  nothing.
+
+**ANY FUTURE DATE OVERRIDE MUST SET BOTH.** Move the day and leave the instant
+and **the lobby countdown will contradict the Record on the same page** - the
+counter running against the real clock while the entries run against the
+supplied one. It is the only thing in the system that can visibly lie under a
+date parameter, and it will not announce itself.
+
+**ALSO WORTH HAVING:** `reveal:day` reads no clock at all - it reasons purely
+from the Record's own `assets` arrays - and `browserToday()`/`museumNow()` fall
+back to the visitor's clock ONLY when no worker injected anything, which is
+every `npm run dev` and no deployment.
 
 ---
 
